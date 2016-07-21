@@ -1,62 +1,78 @@
-/* eslint-disable no-param-reassign */
-import { START_JOB, STOP_JOB, REMOVE_JOB } from '../actions/changes';
+import {
+  SELECTED_FILE_CHANGE,
+  TOGGLE_ALL_CHANGED_FILES
+} from '../actions/changes';
+
+import { modelReducer, formReducer, modeled } from 'react-redux-form';
+import { combineReducers } from 'redux'
+
+import {assignAll} from '../helpers/reducerUtils.js'
 
 const initialState = {
-  autoIncrementId: 1,
-  jobs: [],
-};
+  model: {
+    files: [
+      {
+        name: 'asfasfasfasf1',
+        selected: true
+      },
+      {
+        name: 'asfasfasfasf2',
+        selected: true
+      },
+      {
+        name: 'asfasfasfasf3',
+        selected: false
+      },
+      {
+        name: 'asfasfasfasf4',
+        selected: false
+      },
+      {
+        name: 'asfasfasfasf5',
+        selected: false
+      },
+      {
+        name: 'asfasfasfasf6',
+        selected: true
+      },
+      {
+        name: 'asfasfasfasf7',
+        selected: true
+      },
+      {
+        name: 'asfasfasfasf8',
+        selected: true
+      },
+      {
+        name: 'asfasfasfasf9',
+        selected: false
+      },
+    ],
+    toggleAll: false,
+    selectedFile: {}
+  }
+}
 
-export default function job(state = initialState, action) {
-  switch (action.type) {
-    case START_JOB: {
-      const jobs = state.jobs.map(jobData => {
-        if (jobData.status === 'running') {
-          jobData.status = 'stopped';
-          jobData.endAt = action.payload.time;
-        }
-        return jobData;
-      });
 
-      return {
-        ...state,
-        jobs: [
-          ...jobs,
-          {
-            id: state.autoIncrementId,
-            projectName: action.payload.projectName,
-            startAt: action.payload.time,
-            status: 'running',
-          },
-        ],
-        autoIncrementId: state.autoIncrementId + 1,
-      };
+const CommitChanges = (state, action) => {
+
+    switch (action.type) {
+        case SELECTED_FILE_CHANGE:
+          return {...state,
+            selectedFile: action.payload
+          }
+        case TOGGLE_ALL_CHANGED_FILES:
+          return {...state,
+            files: assignAll(state.files, 'selected', action.payload.value)
+          }
+        default:
+          return state;
     }
+}
 
-    case STOP_JOB: {
-      const jobs = state.jobs.map(jobData => {
-        if (jobData.id === action.payload.id) {
-          jobData.status = 'stopped';
-          jobData.endAt = action.payload.time;
-        }
-        return jobData;
-      });
-
-      return {
-        ...state,
-        jobs,
-      };
-    }
-
-    case REMOVE_JOB: {
-      const jobs = state.jobs.filter(({ id }) => id !== action.payload.id);
-
-      return {
-        ...state,
-        jobs,
-      };
-    }
-
-    default:
-      return state;
+export default function (state = initialState, action) {
+  return {
+    model: modeled(CommitChanges, 'CommitChanges.model')(state.model, action),
+    form : formReducer('CommitChanges.form')(state.form, action)
   }
 }

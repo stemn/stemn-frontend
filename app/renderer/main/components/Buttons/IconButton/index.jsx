@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Styles
-import styles from './IconButton.scss';
+import styles from './IconButton.css';
 
 export default (props) => {
   // Template

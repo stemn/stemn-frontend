@@ -1,0 +1,22 @@
+.timeline{
+  padding: 60px 30px;
+  background: #2a2a2a;
+  color: white;
+}
+.line{
+  display: block;
+  height: 4px;
+  width: 100%;
+  background: black;
+  position: relative;
+}
+.dot{
+  border-radius: 50%;
+  position: absolute;
+  display: block;
+  height: 15px;
+  width: 15px;
+  margin-top: -6px;
+  background: #9b9b9b;
+  border: 2px solid #2a2a2a;
+}

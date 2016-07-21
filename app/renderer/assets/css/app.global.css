@@ -5,6 +5,7 @@
 @import './fonts/roboto.global.css';
 @import './fonts/material-icons.global.css';
 @import './layout/layout.global.css';
+@import './context-menu.css';
 
 html {
   font-family: 'Roboto', 'Helvetica', sans-serif;
@@ -12,8 +13,4 @@ html {
 
 body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
-}
-
-.mdl-layout__drawer .avatar {
-  margin-bottom: 16px;
 }

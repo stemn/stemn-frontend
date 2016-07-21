@@ -2,6 +2,7 @@ import { ipcRenderer } from 'electron';
 
 const forwardToMain = store => next => action => { // eslint-disable-line no-unused-vars
   if (
+    action &&
     action.type.substr(0, 2) !== '@@' &&
     action.type.substr(0, 10) !== 'redux-form' && (
       !action.meta ||

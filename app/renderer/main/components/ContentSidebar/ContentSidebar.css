@@ -1,0 +1,5 @@
+.contentSidebar{
+  width: 30vw;
+  max-width: 500px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}

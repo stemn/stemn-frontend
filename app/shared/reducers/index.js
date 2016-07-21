@@ -7,6 +7,7 @@ import project from './project';
 import github from './github';
 import settings from './settings';
 import header from './header';
+import changes from './changes';
 
 export default function getRootReducer(scope = 'main') {
   let reducers = {
@@ -16,6 +17,7 @@ export default function getRootReducer(scope = 'main') {
     github,
     settings,
     header,
+    changes,
   };
 
   if (scope === 'renderer') {

@@ -1,34 +1,46 @@
-import React, { PropTypes } from 'react';
-import moment from 'moment';
+import React, { Component } from 'react';
 
-function Jobs({ startJob, stopJob, removeJob, job, selectedFile }) {
+import ContentSidebar from '../ContentSidebar';
+import Timeline       from '../Timeline/Timeline';
+import CommitChanges  from '../CommitChanges';
+import CommitBox from '../CommitBox/CommitBox'
+
+
+// Styles
+import classNames from 'classnames';
+
+export default (props) => {
+  const styles = {
+      padding: '30px'
+  }
   return (
     <div className="layout-column flex rel-box">
-      
+      <Timeline />
       <div className="layout-row flex">
         <div className="layout-column">
-
+          <ContentSidebar>
+            <CommitChanges changes={props.changes} actToggleAll={props.actToggleAll} selectedFileChange={props.selectedFileChange}/>
+            <CommitBox changes={props.changes}/>
+          </ContentSidebar>
         </div>
         <div className="layout-column">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, rem doloribus accusantium omnis eius sequi! Expedita hic sit quia facilis culpa ad quasi, unde voluptatibus, praesentium perspiciatis deserunt. Iure, molestias.
+          <h1>{props.changes.model.selectedFile.name}</h1>
         </div>
       </div>
     </div>
   );
 }
-//          <h1>{selectedFile.name}</h1>
 
-//<Timeline />
 
+
+//      <Timeline />
+//      <div className="layout-row flex">
+//        <div className="layout-column">
 //          <ContentSidebar>
 //            <CommitChanges/>
 //          </ContentSidebar>
-
-Jobs.propTypes = {
-  startJob: PropTypes.func.isRequired,
-  stopJob: PropTypes.func.isRequired,
-  removeJob: PropTypes.func.isRequired,
-  job: PropTypes.object.isRequired,
-};
-
-export default Jobs;
+//        </div>
+//        <div className="layout-column">
+//          <h1>{props.selectedFile.name}</h1>
+//        </div>
+//      </div>

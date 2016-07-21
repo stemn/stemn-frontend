@@ -3,7 +3,7 @@ import { app, ipcMain, dialog } from 'electron';
 import pify from 'pify';
 import jsonStorage from 'electron-json-storage';
 import createMainWindow from './createMainWindow';
-import createMenuBarWindow from './createMenuBarWindow';
+import { createMenuBar, showMenuWindow } from './createMenuBarWindow';
 import configureStore from '../shared/store/configureStore';
 import tray from './tray';
 import osxAutoUpdater from './tasks/osxAutoUpdater';
@@ -48,7 +48,8 @@ async function start() {
   });
 
   appIcon.on('click', (event, trayBounds) => {
-    createMenuBarWindow({ trayBounds });
+    createMenuBar({ trayBounds });
+    showMenuWindow();
   });
 
   // init

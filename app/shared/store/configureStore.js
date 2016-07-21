@@ -23,8 +23,8 @@ export default function configureStore(initialState, scope = 'main') {
     promise,
   ];
 
-  if (!process.env.NODE_ENV) {
-    // middleware.push(logger);
+  if (process.env.NODE_ENV == 'development') {
+     middleware.push(logger);
   }
 
   if (scope === 'renderer') {
@@ -42,7 +42,6 @@ export default function configureStore(initialState, scope = 'main') {
       forwardToRenderer,
     ];
   }
-
   const enhanced = [
     applyMiddleware(...middleware),
   ];

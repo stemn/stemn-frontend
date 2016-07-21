@@ -1,33 +1,27 @@
-export const START_JOB = 'START_JOB';
-export const STOP_JOB = 'STOP_JOB';
-export const REMOVE_JOB = 'REMOVE_JOB';
+export const SELECTED_FILE_CHANGE = 'CHANGES/SELECTED_FILE_CHANGE'
+export const TOGGLE_ALL_CHANGED_FILES = 'CHANGES/TOGGLE_ALL_CHANGED_FILES'
 
 
-export function startJob(projectName = null, time = new Date()) {
+import { actions } from 'react-redux-form';
+
+export function selectedFileChange(file) {
   return {
-    type: START_JOB,
-    payload: {
-      projectName,
-      time,
-    },
-  };
+      type: SELECTED_FILE_CHANGE,
+      payload: file
+  }
 }
 
-export function stopJob(id, time = new Date()) {
-  return {
-    type: STOP_JOB,
-    payload: {
-      id,
-      time,
-    },
-  };
-}
+export function actToggleAll(model, value) {
+//  return (dispatch) => {
+//    dispatch(actions.change(model, value));
+//    return {
+//        type: TOGGLE_ALL_CHANGED_FILES,
+//        payload: {model, value}
+//    }
+//  };
 
-export function removeJob(id) {
   return {
-    type: REMOVE_JOB,
-    payload: {
-      id,
-    },
-  };
+      type: TOGGLE_ALL_CHANGED_FILES,
+      payload: {model, value}
+  }
 }

@@ -1,0 +1,25 @@
+.input {
+  padding: 5px;
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.input:focus {
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.textarea {
+  padding: 5px;
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  resize: none;
+  min-height: 80px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.textarea:focus {
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
