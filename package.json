@@ -1,0 +1,126 @@
+{
+  "name": "Timesheets",
+  "productName": "Timesheets",
+  "version": "0.0.1",
+  "description": "A timesheet keeping app based on electron",
+  "main": "dist/main/index.js",
+  "scripts": {
+    "test": "cross-env NODE_ENV=test mocha --compilers js:babel-register --recursive --require ./test/setup.js test/**/*.spec.js",
+    "test-watch": "npm test -- --watch",
+    "test-e2e": "cross-env NODE_ENV=test mocha --compilers js:babel-register --require ./test/setup.js --require co-mocha ./test/e2e.js",
+    "lint": "eslint app test *.js",
+    "hot-server": "node -r babel-register server.js",
+    "build-main": "cross-env NODE_ENV=production node -r babel-register ./node_modules/webpack/bin/webpack --config webpack.config.electron.js --progress --profile --colors && cp app/package.json dist/",
+    "build-renderer": "cross-env NODE_ENV=production node -r babel-register ./node_modules/webpack/bin/webpack --config webpack.config.production.js --progress --profile --colors && cp -R app/renderer/assets dist/renderer",
+    "build": "npm run build-main && npm run build-renderer",
+    "start": "cross-env NODE_ENV=production electron ./",
+    "start-hot": "cross-env HOT=1 NODE_ENV=development electron -r babel-register -r babel-polyfill ./app/main/index",
+    "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
+    "webfont:roboto": "webfont-dl \"https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en\" -o app/renderer/assets/css/fonts/roboto.global.css --woff1=data --svg=omit --ttf=omit --eot=omit",
+    "webfont:material-icons": "webfont-dl \"https://fonts.googleapis.com/icon?family=Material+Icons\" -o app/renderer/assets/css/fonts/material-icons.global.css --woff1=data --svg=omit --ttf=omit --eot=omit",
+    "postinstall": "cd app/ && npm install",
+    "pack": "npm run build && ./node_modules/.bin/build",
+    "dist": "npm run build && ./node_modules/.bin/build",
+    "release": "npm run build && ./node_modules/.bin/build"
+  },
+  "bin": {
+    "electron": "./node_modules/.bin/electron"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/hardchor/timesheets.git"
+  },
+  "author": "Burkhard Reffeling",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hardchor/timesheets/issues"
+  },
+  "keywords": [
+    "timesheet",
+    "time",
+    "tracking",
+    "electron"
+  ],
+  "homepage": "https://github.com/hardchor/timesheets#readme",
+  "dependencies": {
+    "asar": "^0.11.0",
+    "babel-core": "^6.7.6",
+    "babel-eslint": "^6.0.2",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-add-module-exports": "^0.1.2",
+    "babel-plugin-webpack-loaders": "^0.4.0",
+    "babel-polyfill": "^6.7.4",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-register": "^6.7.2",
+    "chai": "^3.5.0",
+    "chromedriver": "^2.21.2",
+    "co-mocha": "^1.1.2",
+    "concurrently": "^2.0.0",
+    "cross-env": "^1.0.7",
+    "css-loader": "^0.23.1",
+    "del": "^2.2.0",
+    "electron-builder": "^4.1.0",
+    "electron-prebuilt": "^1.0.2",
+    "electron-rebuild": "^1.1.3",
+    "eslint": "^2.9.0",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.8.0",
+    "eslint-plugin-jsx-a11y": "^1.2.0",
+    "eslint-plugin-react": "^5.1.1",
+    "express": "^4.13.4",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "fbjs-scripts": "^0.6.0",
+    "jsdom": "^8.4.0",
+    "json-loader": "^0.5.4",
+    "minimist": "^1.2.0",
+    "mocha": "^2.4.5",
+    "node-libs-browser": "^1.0.0",
+    "react": "^15.2.1",
+    "react-addons-test-utils": "^15.0.1",
+    "selenium-webdriver": "^2.53.1",
+    "sinon": "^1.17.3",
+    "source-map-support": "^0.4.0",
+    "style-loader": "^0.13.1",
+    "webfont-dl": "^0.1.2",
+    "webpack": "^1.13.0",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-hot-middleware": "^2.10.0"
+  },
+  "devEngines": {
+    "node": "4.x || 5.x || 6.x",
+    "npm": "2.x || 3.x"
+  },
+  "contributors": [
+    "Jack Wilkinson (https://github.com/guacjack)"
+  ],
+  "build": {
+    "app-bundle-id": "hardchor.timesheets",
+    "app-category-type": "public.app-category.productivity",
+    "productName": "Timesheets",
+    "compression": "normal",
+    "asar": true,
+    "osx": {
+      "contents": [
+        {
+          "x": 448,
+          "y": 344,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 192,
+          "y": 344,
+          "type": "file",
+          "path": "Timesheets.app"
+        }
+      ]
+    }
+  },
+  "directories": {
+    "app": "./dist/",
+    "output": "./release/"
+  }
+}

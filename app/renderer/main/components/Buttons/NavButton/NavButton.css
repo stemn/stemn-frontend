@@ -1,0 +1,26 @@
+.navButton{
+  border: 1px solid rgb(212, 212, 212);
+  margin-left: -1px;
+  padding: 7px 10px;
+  min-width: 85px;
+  text-align: center;
+
+
+  background: transparent;
+/*
+  &:focus{
+    outline: none;
+  }
+  &:hover{
+    background: rgba(0, 0, 0, 0.03);
+  }
+  &.active{
+    background: rgb(42, 42, 42);
+    color: white;
+    border: 1px solid rgb(42, 42, 42);
+    &:hover{
+      background: rgb(42, 42, 42);
+    }
+  }
+*/
+}
