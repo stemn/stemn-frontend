@@ -1,0 +1,30 @@
+[data-title]:hover:after {
+  content: attr(data-title);
+  padding: 8px;
+  color: #333;
+  position: absolute;
+  top: 100%;
+  z-index: 20;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+  background: white;
+
+  -webkit-animation: fadein 1.5s; /* Safari, Chrome and Opera > 12.1 */
+          animation: fadein 1.5s;
+}
+
+
+@keyframes fadein {
+    0%  { opacity: 0; }
+    80% { opacity: 0; }
+    100%{ opacity: 1; }
+}
+
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    0%  { opacity: 0; }
+    80% { opacity: 0; }
+    100%{ opacity: 1; }
+}

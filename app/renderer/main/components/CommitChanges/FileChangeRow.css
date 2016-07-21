@@ -1,6 +1,5 @@
 .fileChangeRow {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  display: block;
   cursor: default;
 }
 .checkbox {
@@ -13,6 +12,6 @@
   background: rgba(0, 0, 0, 0.03);
 }
 .active {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.7) !important;
   color: white;
 }

@@ -1,14 +1,14 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import App from '../components/App';
-import * as JobActions from '../../../shared/actions/job';
+import * as ChangesActions from '../../../shared/actions/changes';
 
-function mapStateToProps({ job, system, settings, header }) {
-  return { job, system, settings, header };
+function mapStateToProps({ system, settings, header }) {
+  return { system, settings, header };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(JobActions, dispatch);
+  return bindActionCreators(ChangesActions, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Header as MdlHeader, HeaderRow, Textfield } from 'react-mdl';
 import classnames from 'classnames';
 import styles from './header.css';
 import { Link, IndexLink } from 'react-router';

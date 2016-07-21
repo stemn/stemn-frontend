@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { Snackbar, Spinner, Icon } from 'react-mdl';
 import { isEqual } from 'lodash';
 import styles from './autoUpdater.css';
 
@@ -19,51 +18,51 @@ class AutoUpdater extends Component {
 
     return (
       <div>
-        <Snackbar active={system.checkingForUpdate} onTimeout={noop} timeout={10000}>
+        <div active={system.checkingForUpdate} onTimeout={noop} timeout={10000}>
           <div className={styles.snackbarIconContainer}>
-            <Spinner />
-            <span className={styles.snackbarIconText}>
+            <div />
+            <div className={styles.snackbarIconText}>
               Checking for updates...
-            </span>
+            </div>
           </div>
-        </Snackbar>
+        </div>
 
-        <Snackbar active={system.updateAvailable} onTimeout={noop} timeout={10000}>
+        <div active={system.updateAvailable} onTimeout={noop} timeout={10000}>
           <div className={styles.snackbarIconContainer}>
-            <Spinner />
+            <div />
             <span className={styles.snackbarIconText}>
               There's an update available. Downloading...
             </span>
           </div>
-        </Snackbar>
+        </div>
 
-        <Snackbar active={system.updateDownloaded} onTimeout={noop} timeout={50000}>
+        <div active={system.updateDownloaded} onTimeout={noop} timeout={50000}>
           <div className={styles.snackbarIconContainer}>
-            <Icon name="new_releases" />
+            <div name="new_releases" />
             <span className={styles.snackbarIconText}>
               Update <strong>{system.release.releaseName}</strong> downloaded.
               Restart to apply.
             </span>
           </div>
-        </Snackbar>
+        </div>
 
-        <Snackbar active={!!system.updateError} onTimeout={noop} timeout={10000}>
+        <div active={!!system.updateError} onTimeout={noop} timeout={10000}>
           <div className={styles.snackbarIconContainer}>
-            <Icon name="sentiment_very_dissatisfied" />
+            <div name="sentiment_very_dissatisfied" />
             <span className={styles.snackbarIconText}>
               An error occurred downloading updates
             </span>
           </div>
-        </Snackbar>
+        </div>
 
-        <Snackbar active={system.updateNotAvailable} onTimeout={noop} timeout={2000}>
+        <div active={system.updateNotAvailable} onTimeout={noop} timeout={2000}>
           <div className={styles.snackbarIconContainer}>
-            <Icon name="sentiment_very_satisfied" />
+            <div name="sentiment_very_satisfied" />
             <span className={styles.snackbarIconText}>
               Timesheets is up-to-date
             </span>
           </div>
-        </Snackbar>
+        </div>
       </div>
     );
   }

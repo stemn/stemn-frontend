@@ -1,16 +1,15 @@
-@import '~react-mdl/extra/material.css';
 @import '~react-select/dist/react-select.css';
 @import '~react-virtualized/styles.css';
 @import '~react-virtualized-select/styles.css';
-@import './fonts/roboto.global.css';
-@import './fonts/material-icons.global.css';
-@import './layout/layout.global.css';
+@import "~normalize.css/normalize.css";
+
+@import './layout/layout.css';
+
+@import "./page.css";
+@import "./links.css";
+@import "./useful.css";
+@import "./paddings-and-margins.css";
+@import "./widths-and-heights.css";
+@import "./animations.css";
+@import "./tooltip.css";
 @import './context-menu.css';
-
-html {
-  font-family: 'Roboto', 'Helvetica', sans-serif;
-}
-
-body {
-  font-family: 'Roboto', 'Helvetica', sans-serif;
-}

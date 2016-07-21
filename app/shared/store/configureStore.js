@@ -8,7 +8,6 @@ import { routerMiddleware } from 'react-router-redux';
 import getRootReducer from '../reducers';
 import forwardToMain from './middleware/forwardToMain';
 import forwardToRenderer from './middleware/forwardToRenderer';
-import triggerAlias from './middleware/triggerAlias';
 import DevTools from '../../renderer/main/components/DevTools';
 
 export default function configureStore(initialState, scope = 'main') {
@@ -37,7 +36,6 @@ export default function configureStore(initialState, scope = 'main') {
 
   if (scope === 'main') {
     middleware = [
-      triggerAlias,
       ...middleware,
       forwardToRenderer,
     ];
