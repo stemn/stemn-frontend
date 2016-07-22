@@ -2,9 +2,13 @@
 /* eslint-disable no-unused-vars */
 import assert from 'assert';
 import { aliases as authAliases } from '../../actions/auth';
+import { aliases as sidebarAliases } from '../../actions/sidebar';
+import { aliases as loginAliases } from '../../actions/login';
 
 const aliases = {
   ...authAliases,
+  ...sidebarAliases,
+  ...loginAliases,
 };
 
 const triggerAlias = store => next => action => {
@@ -12,13 +16,11 @@ const triggerAlias = store => next => action => {
   // TODO: store.dispatch() instead to not skip any middleware
   if (action.type === 'ALIASED') {
     assert(action.meta && action.meta.trigger, 'No trigger defined');
-    assert(aliases[action.meta.trigger], 'Trigger alias' +action.meta.trigger + 'not found');
-    const args = action.payload || [];
+    assert(aliases[action.meta.trigger], 'Trigger alias ' +action.meta.trigger + ' not found');
 
     // trigger alias
-    action = aliases[action.meta.trigger](...args);
+    return store.dispatch(aliases[action.meta.trigger](action.payload))
   }
-
   return next(action);
 };
 

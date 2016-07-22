@@ -4,15 +4,16 @@ import styles from './header.css';
 import { Link, IndexLink } from 'react-router';
 
 import NavButton from '../Buttons/NavButton';
+import {MdMenu} from 'react-icons/lib/md';
 
 
 
-function Header({header}) {
+function Header({header, auth, sidebarActions}) {
   const UserAvatarStyles = {
     width: '30px',
     height: '30px'
   }
-//  const UserAvatar = props.Auth.user._id ? <a><img style={UserAvatarStyles} src={'https://stemn.com' + props.Auth.user.picture + '?size=thumb&crop=true'} /></a> : '';
+  const UserAvatar = auth.user._id ? <a><img style={UserAvatarStyles} src={'https://stemn.com' + auth.user.picture + '?size=thumb&crop=true'} /></a> : '';
 
   const NavButtons = header.navMenu.map((item, idx)=>{
 //    const isActive = props.routing.locationBeforeTransitions.pathname == item.path;
@@ -38,9 +39,11 @@ function Header({header}) {
 
   return (
     <div className={styles.toolbar + ' layout-row layout-align-start-center rel-box'}>
+     <a onClick={()=>{sidebarActions.toggleSidebar();}}><MdMenu size="25"/></a>
       <div className="flex layout-row layout-align-center">
         <div className="layout-row">{NavButtons}</div>
       </div>
+      {UserAvatar}
     </div>
   )
 }
@@ -48,5 +51,3 @@ function Header({header}) {
 export default Header;
 
 
-//      <a onClick={()=>{props.toggleSidebar();}}><MdMenu size="25"/></a>
-//      {UserAvatar}

@@ -4,7 +4,7 @@ import process from 'process';
 import Positioner from 'electron-positioner';
 
 const menuBarHtml = path.join(__dirname, '../renderer/assets/html/menubar.html');
-const WINDOW_WIDTH = 500;
+const WINDOW_WIDTH = 300;
 const WINDOW_HEIGHT = 450;
 const HORIZ_PADDING = 15;
 const VERT_PADDING = 30;
@@ -23,6 +23,7 @@ export const createMenuBar = () => {
     frame: false,
     alwaysOnTop: true,
     resizable: false,
+    skipTaskbar: true
   });
 
   if (process.env.NODE_ENV === 'development') {

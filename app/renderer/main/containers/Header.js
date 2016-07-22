@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 import * as SidebarActions from '../../../shared/actions/sidebar';
 
-function mapStateToProps({ header }) {
-  return { header };
+function mapStateToProps({ header, auth }) {
+  return { header, auth };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(SidebarActions, dispatch);
+  return {
+    sidebarActions: bindActionCreators(SidebarActions, dispatch),
+  };
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -24,7 +24,7 @@ export default (store) => {
   const getUserData = (nextState, replace, callback) => {
     if (!store.getState().auth.user._id) {
       store.dispatch(AuthActions.loadUserData());
-      callback();
+      setTimeout(callback,1000);
 //      store.dispatch(AuthActions.loadUserData()).then(()=>{
 //        callback()
 //      }).catch(()=>{
@@ -38,16 +38,16 @@ export default (store) => {
   };
 
   const requireAuth = (nextState, replace, callback) => {
-//    if (!store.getState().auth.user._id) {
-//      replace('/login');
-//    }
+    if (!store.getState().auth.user._id) {
+      replace('/login');
+    }
     callback();
   };
 
   const requireNonAuth = (nextState, replace, callback) => {
-//    if (store.getState().auth.user._id) {
-//      replace('/');
-//    }
+    if (store.getState().auth.user._id) {
+      replace('/');
+    }
     callback();
   };
 
@@ -80,22 +80,3 @@ export default (store) => {
 //        <Route path="/error" component={ErrorPage} />
 //      </Route>
 //  );
-
-
-
-
-
-//<Route path="*" component={ErrorPage} status={404} />
-
-
-//import React from 'react';
-//import { Route, IndexRoute } from 'react-router';
-//import App from './containers/App';
-//import ChangesPage from './containers/ChangesPage';
-//
-//export default (
-//  <Route path="/" component={App}>
-//    <IndexRoute component={ChangesPage} />
-//  </Route>
-//);
-

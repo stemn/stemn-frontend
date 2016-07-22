@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import electron from 'electron';
 
 // Components
-//import { TitleBar }   from 'react-desktop/windows';
+import { TitleBar }   from 'react-desktop/windows';
 import Sidebar        from '../../containers/Sidebar';
 import Header         from '../../containers/Header';
 
@@ -48,6 +48,17 @@ export default class App extends Component {
           <Sidebar />
         </div>
         <div className="layout-column flex">
+          <TitleBar
+            title=" "
+            controls
+            isMaximized={!this.state.isMaximized}
+            theme={this.props.theme}
+            background={this.props.color}
+            onCloseClick={this.close}
+            onMinimizeClick={this.minimize}
+            onMaximizeClick={this.toggleMaximize}
+            onRestoreDownClick={this.toggleMaximize}
+          />
           <Header />
           <div className="layout-column flex">
             {this.props.children}
@@ -57,16 +68,3 @@ export default class App extends Component {
     );
   }
 }
-
-//          <Header header={this.props.header} />
-//          <TitleBar
-//            title=" "
-//            controls
-//            isMaximized={!this.state.isMaximized}
-//            theme={this.props.theme}
-//            background={this.props.color}
-//            onCloseClick={this.close}
-//            onMinimizeClick={this.minimize}
-//            onMaximizeClick={this.toggleMaximize}
-//            onRestoreDownClick={this.toggleMaximize}
-//          />

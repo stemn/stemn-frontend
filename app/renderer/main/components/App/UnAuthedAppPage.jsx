@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import electron from 'electron';
 
 // Components
-//import { TitleBar }   from 'react-desktop/windows';
+import { TitleBar }   from 'react-desktop/windows';
 
 export default class App extends Component {
   static propTypes = {
@@ -38,26 +38,22 @@ export default class App extends Component {
     }
   }
 
-
   render() {
     return (
       <div className="layout-column flex">
-        <div className="layout-column flex">
-          {this.props.children}
-        </div>
+        <TitleBar
+          title=" "
+          controls
+          isMaximized={!this.state.isMaximized}
+          theme={this.props.theme}
+          background={this.props.color}
+          onCloseClick={this.close}
+          onMinimizeClick={this.minimize}
+          onMaximizeClick={this.toggleMaximize}
+          onRestoreDownClick={this.toggleMaximize}
+        />
+        {this.props.children}
       </div>
     );
   }
 }
-
-//        <TitleBar
-//          title=" "
-//          controls
-//          isMaximized={!this.state.isMaximized}
-//          theme={this.props.theme}
-//          background={this.props.color}
-//          onCloseClick={this.close}
-//          onMinimizeClick={this.minimize}
-//          onMaximizeClick={this.toggleMaximize}
-//          onRestoreDownClick={this.toggleMaximize}
-//        />

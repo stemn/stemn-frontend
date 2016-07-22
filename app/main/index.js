@@ -7,7 +7,7 @@ import { createMenuBar, showMenuWindow } from './createMenuBarWindow';
 import configureStore from '../shared/store/configureStore';
 import tray from './tray';
 import osxAutoUpdater from './tasks/osxAutoUpdater';
-import reminder from './tasks/reminder';
+//import reminder from './tasks/reminder';
 
 // we have to do this to ease remote-loading of the initial state :(
 global.state = {};
@@ -64,7 +64,7 @@ async function start() {
     }
   }, 5000);
 
-  reminder(store);
+//  reminder(store);
 }
 
 

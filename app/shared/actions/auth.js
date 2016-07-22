@@ -8,26 +8,22 @@ export function loadUserData() {
       type:'ALIASED',
       payload: {},
       meta: {
-        trigger: 'AUTH/LOAD_USER_DATA_ALIAS',
+        trigger: 'AUTH/LOAD_USER_DATA',
       },
   }
 }
 
-export function loadUserDataAlias() {
+aliases['AUTH/LOAD_USER_DATA'] = function loadUserDataAlias(args) {
   return {
-      type:'AUTH/LOAD_USER_DATA_ALIAS',
+      type:'AUTH/LOAD_USER_DATA',
       payload: http({
           url: 'https://stemn.com/api/v1/me',
           method: 'GET',
       })
   }
-}
-
-aliases['AUTH/LOAD_USER_DATA_ALIAS'] = loadUserDataAlias;
-
+};
 
 export function setAuthToken(token) {
-  localStorage.setItem('token', token);
   return {
       type:'AUTH/SET_AUTH_TOKEN',
       payload: token
@@ -35,7 +31,6 @@ export function setAuthToken(token) {
 }
 
 export function removeAuthToken() {
-  localStorage.removeItem('token');
   return {
       type:'AUTH/REMOVE_AUTH_TOKEN',
   }
