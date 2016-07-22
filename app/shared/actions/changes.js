@@ -12,16 +12,16 @@ export function selectedFileChange(file) {
 }
 
 export function actToggleAll(model, value) {
-//  return (dispatch) => {
-//    dispatch(actions.change(model, value));
-//    return {
-//        type: TOGGLE_ALL_CHANGED_FILES,
-//        payload: {model, value}
-//    }
-//  };
+  return (dispatch) => {
+    dispatch(actions.change(model, value));
+    return {
+        type: TOGGLE_ALL_CHANGED_FILES,
+        payload: {model, value}
+    }
+  };
 
-  return {
-      type: TOGGLE_ALL_CHANGED_FILES,
-      payload: {model, value}
-  }
+//  return {
+//      type: TOGGLE_ALL_CHANGED_FILES,
+//      payload: {model, value}
+//  }
 }

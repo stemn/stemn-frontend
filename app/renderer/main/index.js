@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { Router, hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import configureStore from '../../shared/store/configureStore';
-import routes from './routes';
+import getRoutes from './routes';
 
 const initialState = remote.getGlobal('state');
 
@@ -19,7 +19,9 @@ ipcRenderer.on('redux-action', (event, payload) => {
 
 render(
   <Provider store={store}>
-    <Router history={history} routes={routes} />
+    <Router history={history}>
+      {getRoutes(store)}
+    </Router>
   </Provider>,
   document.getElementById('root')
 );

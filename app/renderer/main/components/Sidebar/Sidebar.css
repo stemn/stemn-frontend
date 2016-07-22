@@ -1,0 +1,47 @@
+.sidebar{
+  display: inline-block;
+  width: 0px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s ease all;
+
+}
+.sidebar.open{
+  width: 230px;
+}
+
+.sidebarToolbar{
+  margin-top: 31px;
+  height: 52px;
+  padding: 10px;
+}
+
+.title{
+  padding: 5px 15px;
+  font-size: 13px;
+  opacity: 0.8
+}
+
+.sidebarButton{
+  display: block;
+  width: 100%;
+  background: none;
+  outline: none;
+
+  padding: 10px 15px;
+  font-size: 12px;
+
+}
+.sidebarButton:hover{
+  background: rgba(0, 0, 0, 0.05);
+}
+.sidebarButton.active{
+  background: black;
+}
+.sidebarButton .text{
+  padding-left: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -10,9 +10,11 @@ import CommitBox from '../CommitBox/CommitBox'
 import classNames from 'classnames';
 
 export default (props) => {
-  const styles = {
-      padding: '30px'
+  const CommitBoxStyles = {
+    borderTop: '1px solid rgba(0, 0, 0, 0.1)',
+    background: 'rgba(0, 0, 0, 0.03)'
   }
+
   return (
     <div className="layout-column flex rel-box">
       <Timeline />
@@ -20,7 +22,9 @@ export default (props) => {
         <div className="layout-column">
           <ContentSidebar>
             <CommitChanges changes={props.changes} actToggleAll={props.actToggleAll} selectedFileChange={props.selectedFileChange}/>
-            <CommitBox changes={props.changes}/>
+            <div style={CommitBoxStyles}>
+              <CommitBox changes={props.changes}/>
+            </div>
           </ContentSidebar>
         </div>
         <div className="layout-column">
@@ -30,17 +34,3 @@ export default (props) => {
     </div>
   );
 }
-
-
-
-//      <Timeline />
-//      <div className="layout-row flex">
-//        <div className="layout-column">
-//          <ContentSidebar>
-//            <CommitChanges/>
-//          </ContentSidebar>
-//        </div>
-//        <div className="layout-column">
-//          <h1>{props.selectedFile.name}</h1>
-//        </div>
-//      </div>

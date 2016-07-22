@@ -72,7 +72,7 @@ const CommitChanges = (state, action) => {
 
 export default function (state = initialState, action) {
   return {
-    model: modeled(CommitChanges, 'CommitChanges.model')(state.model, action),
-    form : formReducer('CommitChanges.form')(state.form, action)
+    model: modeled(CommitChanges, 'changes.model')(state.model, action),
+    form : formReducer('changes.form')(state.form, action)
   }
 }
