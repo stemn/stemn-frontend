@@ -26,6 +26,8 @@ export default function createWindow({ uri = '/' } = {}) {
     show: false,
     width: 1024,
     height: 728,
+    minWidth: 1000,
+    minHeight: 800,
     frame: false
   });
 
