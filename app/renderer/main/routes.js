@@ -10,7 +10,7 @@ import UnAuthedAppPage  from './components/App/UnAuthedAppPage';
 import ChangesPage from './containers/ChangesPage';
 import LoginPage from './containers/LoginPage';
 //import ErrorPage from './containers/ErrorPage/ErrorPage.container.js';
-//import FeedPage from './containers/FeedPage/FeedPage.container.js';
+import FeedPage from './containers/FeedPage';
 
 // Actions
 const AuthActions = require('../../shared/actions/auth');
@@ -55,6 +55,7 @@ export default (store) => {
     <Route component={RootAppPage} onEnter={getUserData}>
       <Route component={AuthedAppPage} onEnter={requireAuth}>
         <Route path="/" component={ChangesPage}/>
+        <Route path="/feed" component={FeedPage}/>
       </Route>
       <Route component={UnAuthedAppPage}>
         <Route onEnter={requireNonAuth}>
