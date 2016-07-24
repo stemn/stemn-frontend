@@ -6,71 +6,71 @@ import createMainWindow from './createMainWindow';
 import { createMenuBar, showMenuWindow } from './createMenuBarWindow';
 import configureStore from '../shared/store/configureStore';
 import tray from './tray';
-import osxAutoUpdater from './tasks/osxAutoUpdater';
-//import reminder from './tasks/reminder';
+import autoUpdater from './tasks/autoUpdater';
+import squirrelStartup from 'electron-squirrel-startup';
+  //import reminder from './tasks/reminder';
 
-// we have to do this to ease remote-loading of the initial state :(
-global.state = {};
+console.log(squirrelStartup);
+// Init squirel setup hooks
+if(!squirrelStartup){
+  // we have to do this to ease remote-loading of the initial state :(
+  global.state = {};
 
-const storage = pify(jsonStorage);
+  const storage = pify(jsonStorage);
 
-if (process.env.NODE_ENV === 'development') {
-  require('electron-debug')(); // eslint-disable-line global-require
-}
+  if (process.env.NODE_ENV === 'development') {
+    require('electron-debug')(); // eslint-disable-line global-require
+  }
 
 
-async function start() {
-  // set-up menu bar
-  const appIcon = tray();
+  async function start() {
+    // set-up menu bar
+    const appIcon = tray();
 
-  global.state = await storage.get('state');
-  const store = configureStore(global.state, 'main');
+    global.state = await storage.get('state');
+    const store = configureStore(global.state, 'main');
 
-  store.subscribe(async () => {
-    global.state = store.getState();
-    // persist store changes
-    // TODO: should this be blocking / wait? _.throttle?
-    await storage.set('state', global.state);
-  });
+    store.subscribe(async () => {
+      global.state = store.getState();
+      // persist store changes
+      // TODO: should this be blocking / wait? _.throttle?
+      await storage.set('state', global.state);
+    });
 
-  ipcMain.on('redux-action', (event, payload) => {
-    store.dispatch(payload);
-  });
+    ipcMain.on('redux-action', (event, payload) => {
+      store.dispatch(payload);
+    });
 
-  app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') app.quit();
-  });
+    app.on('window-all-closed', () => {
+      if (process.platform !== 'darwin') app.quit();
+    });
 
-  app.on('activate', () => {
-    // On OS X it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
+    app.on('activate', () => {
+      // On OS X it's common to re-create a window in the app when the
+      // dock icon is clicked and there are no other windows open.
+      createMainWindow();
+    });
+
+    appIcon.on('click', (event, trayBounds) => {
+      createMenuBar({ trayBounds });
+      showMenuWindow();
+    });
+
+    // init
     createMainWindow();
+
+    // auto-updating
+    setTimeout(() => {
+      autoUpdater(store);
+    }, 5000);
+  }
+
+
+  app.on('ready', () => {
+    start()
+    .catch((err) => {
+      dialog.showErrorBox('There\'s been an error', err.message);
+    });
   });
-
-  appIcon.on('click', (event, trayBounds) => {
-    createMenuBar({ trayBounds });
-    showMenuWindow();
-  });
-
-  // init
-  createMainWindow();
-
-  // auto-updating
-  setTimeout(() => {
-    if (process.env.NODE_ENV === 'production') {
-      if (os.platform() === 'darwin') {
-        osxAutoUpdater(store);
-      }
-    }
-  }, 5000);
-
-//  reminder(store);
 }
 
-
-app.on('ready', () => {
-  start()
-  .catch((err) => {
-    dialog.showErrorBox('There\'s been an error', err.message);
-  });
-});

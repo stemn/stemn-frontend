@@ -18,7 +18,8 @@
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
     "webfont:roboto": "webfont-dl \"https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en\" -o app/renderer/assets/css/fonts/roboto.global.css --woff1=data --svg=omit --ttf=omit --eot=omit",
     "webfont:material-icons": "webfont-dl \"https://fonts.googleapis.com/icon?family=Material+Icons\" -o app/renderer/assets/css/fonts/material-icons.global.css --woff1=data --svg=omit --ttf=omit --eot=omit",
-    "postinstall": "cd app/ && npm install"
+    "postinstall": "cd app/ && npm install",
+    "compile": "node scripts/build.js"
   },
   "bin": {
     "electron": "./node_modules/.bin/electron"

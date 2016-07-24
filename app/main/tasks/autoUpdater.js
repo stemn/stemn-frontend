@@ -12,7 +12,7 @@ import {
 
 const UPDATE_SERVER_HOST = 'timesheets-app.herokuapp.com';
 
-export default function osxAutoUpdater(store) {
+export default function (store) {
   if (process.env.NODE_ENV !== 'production') {
     return;
   }

@@ -1,27 +1,13 @@
-# Timesheets App
-
-[![Github All Releases](https://img.shields.io/github/downloads/hardchor/timesheets/total.svg?maxAge=86400)](https://burgiblog.com/timesheets/)
-[![Stories in Ready](https://badge.waffle.io/hardchor/timesheets.png?label=ready&title=Ready)](https://waffle.io/hardchor/timesheets)
-[![Badges](https://img.shields.io/badge/badges-3-orange.svg?style=flat&maxAge=86400)](https://burgiblog.com/timesheets/)
-
-## Install
-
-Download the latest release from [here](https://github.com/hardchor/timesheets/releases).
-
 ## Development
 
 ### Install
 
 First, clone the repo via git:
 
-```bash
-git clone https://github.com/hardchor/timesheets.git
-```
-
 And then install dependencies.
 
 ```bash
-$ cd timesheets && npm install
+$ npm install
 ```
 
 
@@ -58,8 +44,6 @@ After you've bumped the version number in `app/package.json`, run:
 ```bash
 GH_TOKEN=... CSC_NAME=... npm run release
 ```
-
-Then, head over to https://github.com/hardchor/timesheets/releases and publish.
 
 ---
 
