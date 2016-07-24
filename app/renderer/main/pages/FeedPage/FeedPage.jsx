@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Popover   from 'react-popover';
+import Popover   from '../../../assets/other/react-popup';
 
 import ContentSidebar   from '../../components/ContentSidebar';
 import Timeline         from '../../components/Timeline/Timeline';
 import SidebarTimeline  from '../../containers/SidebarTimeline';
+import Changes  from '../../containers/ChangesPage';
 
-
-const popupContent = (<SidebarTimeline />);
+const popupContent = (<Changes />);
 
 const Main = React.createClass({
   getInitialState () {
