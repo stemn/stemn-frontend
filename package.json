@@ -1,8 +1,8 @@
 {
-  "name": "Timesheets",
-  "productName": "Timesheets",
+  "name": "STEMN",
+  "productName": "STEMN",
   "version": "0.0.1",
-  "description": "A timesheet keeping app based on electron",
+  "description": "Painless Engineering Versioning",
   "main": "dist/main/index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha --compilers js:babel-register --recursive --require ./test/setup.js test/**/*.spec.js",
@@ -18,30 +18,28 @@
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
     "webfont:roboto": "webfont-dl \"https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en\" -o app/renderer/assets/css/fonts/roboto.global.css --woff1=data --svg=omit --ttf=omit --eot=omit",
     "webfont:material-icons": "webfont-dl \"https://fonts.googleapis.com/icon?family=Material+Icons\" -o app/renderer/assets/css/fonts/material-icons.global.css --woff1=data --svg=omit --ttf=omit --eot=omit",
-    "postinstall": "cd app/ && npm install",
-    "pack": "npm run build && ./node_modules/.bin/build",
-    "dist": "npm run build && ./node_modules/.bin/build",
-    "release": "npm run build && ./node_modules/.bin/build"
+    "postinstall": "cd app/ && npm install"
   },
   "bin": {
     "electron": "./node_modules/.bin/electron"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/hardchor/timesheets.git"
+  "author": {
+    "name": "STEMN Pty Ltd",
+    "email": "desktop@stemn.com"
   },
-  "author": "Burkhard Reffeling",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/hardchor/timesheets/issues"
-  },
   "keywords": [
-    "timesheet",
-    "time",
+    "project management",
     "tracking",
-    "electron"
+    "versioning",
+    "engineering",
+    "science"
   ],
-  "homepage": "https://github.com/hardchor/timesheets#readme",
+  "homepage": "https://stemn.com",
+  "bugs" :{
+    "url" : "https://stemn.com",
+    "email" : "bugs@stemn.com"
+  },
   "dependencies": {
     "asar": "^0.11.0",
     "babel-core": "^6.7.6",
@@ -95,14 +93,19 @@
     "npm": "2.x || 3.x"
   },
   "contributors": [
-    "Jack Wilkinson (https://github.com/guacjack)"
+    "David Revay <david@stemn.com>",
+    "Jackson Delahunt <jackson@stemn.com>"
   ],
   "build": {
-    "app-bundle-id": "hardchor.timesheets",
+    "appId": "stemn.stemn",
+    "app-bundle-id": "stemn.stemn",
     "app-category-type": "public.app-category.productivity",
-    "productName": "Timesheets",
+    "productName": "STEMN",
     "compression": "normal",
     "asar": true,
+    "win": {
+      "iconUrl": "https://stemn.com/uploads/85c7df7e-312b-4ed9-b12f-11d6d001a220.png"
+    },
     "osx": {
       "contents": [
         {
