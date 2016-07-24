@@ -1,0 +1,13 @@
+.Popover-body {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 15px 30px;
+  background: white;
+  box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.4);
+}
+
+.Popover-tipShape {
+  fill: white;
+  stroke-width: 1;
+  stroke: #cacaca;
+}

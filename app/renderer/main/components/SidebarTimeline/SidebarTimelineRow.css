@@ -1,0 +1,17 @@
+.timelineRow{
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: default;
+}
+.text{
+  padding-left: 10px;
+}
+.inner{
+  padding: 8px;
+}
+.button{
+  padding: 8px;
+}
+.timelineRow.active{
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+}

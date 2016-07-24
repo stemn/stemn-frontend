@@ -1,8 +1,37 @@
 import React, { Component } from 'react';
+import Popover   from 'react-popover';
 
 import ContentSidebar   from '../../components/ContentSidebar';
 import Timeline         from '../../components/Timeline/Timeline';
-//import SidebarTimeline  from 'app/modules/files/SidebarTimeline/SidebarTimeline.container.js';
+import SidebarTimeline  from '../../containers/SidebarTimeline';
+
+
+const popupContent = (<SidebarTimeline />);
+
+const Main = React.createClass({
+  getInitialState () {
+    return {
+      isOpen: false,
+    }
+  },
+  toggle () {
+    this.setState({ isOpen: !this.state.isOpen })
+  },
+  render () {
+    const { isOpen, } = this.state
+    return (
+      <Popover isOpen={isOpen} body={popupContent} preferPlace = 'below'>
+        <div
+          className={ classNames('target', { isOpen }) }
+          onClick={this.toggle}>
+          here
+        </div>
+      </Popover>
+    )
+  },
+})
+
+
 
 // Styles
 import classNames from 'classnames';
@@ -17,15 +46,13 @@ export default (props) => {
       <div className="layout-row flex">
         <div className="layout-column">
           <ContentSidebar className="flex">
-
+            <SidebarTimeline />
           </ContentSidebar>
         </div>
         <div className="layout-column">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod sint fugiat excepturi, quis corrupti ad, numquam aspernatur nostrum ipsam adipisci incidunt dolorem tempora hic magnam neque iste nihil necessitatibus, sapiente.
+          <Main></Main>
         </div>
       </div>
     </div>
   );
 }
-
-//SidebarTimeline
