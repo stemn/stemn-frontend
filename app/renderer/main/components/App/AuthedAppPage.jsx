@@ -59,7 +59,7 @@ export default class App extends Component {
             onMaximizeClick={this.toggleMaximize}
             onRestoreDownClick={this.toggleMaximize}
           />
-          <Header />
+          <Header location={this.props.location} />
           <div className="layout-column flex">
             {this.props.children}
           </div>

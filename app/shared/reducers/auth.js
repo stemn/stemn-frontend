@@ -56,6 +56,10 @@ export default function (state = initialState, action) {
           return {...state,
             fetching: false,
           }
+        case 'AUTH/CLEAR_USER_DATA':
+          return {...state,
+            user: {},
+          }
         default:
             return state;
     }

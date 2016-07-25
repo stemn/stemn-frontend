@@ -27,6 +27,8 @@ if(!squirrelStartup){
     // set-up menu bar
     const appIcon = tray();
 
+    await storage.remove('state'); // Clear all storage in dev:
+
     global.state = await storage.get('state');
     const store = configureStore(global.state, 'main');
 
@@ -34,6 +36,8 @@ if(!squirrelStartup){
       global.state = store.getState();
       // persist store changes
       // TODO: should this be blocking / wait? _.throttle?
+
+      console.log(global.state);
       await storage.set('state', global.state);
     });
 

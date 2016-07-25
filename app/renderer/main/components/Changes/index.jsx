@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import ContentSidebar from '../ContentSidebar';
-import Timeline       from '../Timeline/Timeline';
+import Timeline       from '../../containers/Timeline';
 import CommitChanges  from '../CommitChanges';
 import CommitBox from '../CommitBox/CommitBox'
 

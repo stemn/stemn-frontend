@@ -20,3 +20,12 @@
   background: #9b9b9b;
   border: 2px solid #2a2a2a;
 }
+
+.popup{
+  padding: 8px;
+}
+.popupImage{
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
+}
