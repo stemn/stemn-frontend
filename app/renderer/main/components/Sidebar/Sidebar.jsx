@@ -29,7 +29,7 @@ const ProjectWithContext = ContextMenuLayer('multi', (props) => (props.item))(Pr
 
 export default class extends React.Component{
   componentDidMount() {
-    this.props.getProjects();
+    this.props.getProjects(this.props.auth.user._id);
   }
   render() {
     const sidebarStyle = classNames({

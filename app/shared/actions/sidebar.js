@@ -2,10 +2,11 @@ import http from 'axios';
 
 export const aliases = {};
 
-export function getProjects() {
+export function getProjects(userId) {
+  console.log(userId);
   return {
       type:'ALIASED',
-      payload: {},
+      payload: {_id: userId},
       meta: {
         trigger: 'FETCH_PROJECTS',
       },
@@ -21,12 +22,11 @@ aliases['FETCH_PROJECTS'] = (args) => {
       params: {
         type:'project',
         parentType:'user',
-        parentId:'547db55af7f342380174e228'
+        parentId: args._id
       },
     })
   }
 }
-
 
 export function toggleSidebar(status) {
   return {

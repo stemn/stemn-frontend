@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import Sidebar from '../components/Sidebar/Sidebar';
 import * as SidebarActions from '../../../shared/actions/sidebar';
 
-function mapStateToProps({ sidebar }) {
-  return { sidebar };
+function mapStateToProps({ sidebar, auth }) {
+  return { sidebar, auth };
 }
 
 function mapDispatchToProps(dispatch) {

@@ -5,9 +5,6 @@ import ContentSidebar   from '../../components/ContentSidebar';
 import Timeline         from '../../containers/Timeline';
 import SidebarTimeline  from '../../containers/SidebarTimeline';
 
-
-
-
 // Styles
 import classNames from 'classnames';
 

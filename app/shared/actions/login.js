@@ -1,4 +1,6 @@
 import http from 'axios';
+import { push } from 'react-router-redux'
+
 import * as AuthActions from './auth.js';
 
 export const aliases = {};
@@ -31,7 +33,8 @@ aliases['LOGIN/SEND_LOGIN'] = ({email, password}) => {
       }).then((response)=>{
         dispatch(AuthActions.setAuthToken(response.data.token))
         dispatch(AuthActions.initHttpHeaders('bearer ' + response.data.token))
-        dispatch(AuthActions.loadUserData())
+//        dispatch(AuthActions.loadUserData())
+        setTimeout(()=>{dispatch(push('/'))}, 1)
         return response
       })
     }
