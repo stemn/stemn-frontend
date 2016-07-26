@@ -5,29 +5,8 @@ import { Link, IndexLink } from 'react-router';
 
 import NavButton from '../Buttons/NavButton';
 import {MdMenu} from 'react-icons/lib/md';
-import Popover   from '../../../assets/other/react-popup';
 
 function Header({header, auth, sidebarActions, headerActions, authActions, location}) {
-  const UserAvatarStyles = {
-    width: '30px',
-    height: '30px'
-  }
-  const PopupContent = (<div className="PopoverMenu">
-    <a href="">User Settings</a>
-    <a onClick={()=>{authActions.logout()}}>Log out</a>
-  </div>)
-  const getUserAvatar = () => {
-    if (auth.user._id){
-      return (
-      <Popover isOpen={header.userPopup.isOpen} body={PopupContent} preferPlace = 'below' onOuterAction={()=>{headerActions.toggleUserMenu(false)}}>
-        <a className={ classNames('target', { 'isOpen' : header.userPopup.isOpen }) } onClick={()=>{headerActions.toggleUserMenu()}}>
-          <img style={UserAvatarStyles} src={'https://stemn.com' + auth.user.picture + '?size=thumb&crop=true'} />
-        </a>
-      </Popover>
-      )
-    }
-  }
-
   const NavButtons = header.navMenu.map((item, idx)=>{
     const isActive = location.pathname == item.path;
     const DotStyle = {
@@ -55,16 +34,10 @@ function Header({header, auth, sidebarActions, headerActions, authActions, locat
       <div className={styles.navButtons + ' flex layout-row layout-align-center'}>
         <div className='layout-row'>{NavButtons}</div>
       </div>
-      {getUserAvatar()}
     </div>
   )
 }
 
 export default Header;
-
-
-
-const popupContent = (<div>fsafassfa safsaffsaasf</div>);
-
 
 

@@ -9,6 +9,7 @@ import auth from './auth';
 import login from './login';
 import sidebar from './sidebar';
 import sidebarTimeline from './sidebarTimeline';
+import projects from './projects';
 
 export default function getRootReducer(scope = 'main') {
   let reducers = {
@@ -19,6 +20,7 @@ export default function getRootReducer(scope = 'main') {
     login,
     sidebar,
     sidebarTimeline,
+    projects,
   };
 
   if (scope === 'renderer') {

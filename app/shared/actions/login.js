@@ -33,7 +33,7 @@ aliases['LOGIN/SEND_LOGIN'] = ({email, password}) => {
       }).then((response)=>{
         dispatch(AuthActions.setAuthToken(response.data.token))
         dispatch(AuthActions.initHttpHeaders('bearer ' + response.data.token))
-//        dispatch(AuthActions.loadUserData())
+        dispatch(AuthActions.loadUserData())
         setTimeout(()=>{dispatch(push('/'))}, 1)
         return response
       })

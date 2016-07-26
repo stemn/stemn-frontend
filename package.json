@@ -37,9 +37,9 @@
     "science"
   ],
   "homepage": "https://stemn.com",
-  "bugs" :{
-    "url" : "https://stemn.com",
-    "email" : "bugs@stemn.com"
+  "bugs": {
+    "url": "https://stemn.com",
+    "email": "bugs@stemn.com"
   },
   "dependencies": {
     "asar": "^0.11.0",
@@ -78,6 +78,7 @@
     "minimist": "^1.2.0",
     "mocha": "^2.4.5",
     "node-libs-browser": "^1.0.0",
+    "node-monkey": "^1.0.0-beta.2",
     "react": "^15.2.1",
     "react-addons-test-utils": "^15.0.1",
     "selenium-webdriver": "^2.53.1",

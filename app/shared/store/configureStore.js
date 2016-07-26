@@ -30,7 +30,7 @@ export default function configureStore(initialState, scope = 'main') {
       router,
     ];
     if (process.env.NODE_ENV == 'development') {
-       middleware.unshift(logger);
+       middleware.push(logger);
     }
   }
 

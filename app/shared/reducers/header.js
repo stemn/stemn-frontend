@@ -7,9 +7,6 @@ const initialState = {
     },{
       name: 'History',
       path: '/feed'
-    },{
-      name: 'Threads!!!!!',
-      path: '/threads'
     }
   ],
   userPopup: {

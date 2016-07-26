@@ -10,6 +10,14 @@ import autoUpdater from './tasks/autoUpdater';
 import squirrelStartup from 'electron-squirrel-startup';
   //import reminder from './tasks/reminder';
 
+
+//let monkey = require('node-monkey')([options]);
+//
+//// Do this if you want to bind to the console and have all output directed to the browser
+//// Pass `true` to disable server side logging and only see output in the browser
+//monkey.attachConsole()
+
+
 console.log(squirrelStartup);
 // Init squirel setup hooks
 if(!squirrelStartup){

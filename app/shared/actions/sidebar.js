@@ -3,7 +3,6 @@ import http from 'axios';
 export const aliases = {};
 
 export function getProjects(userId) {
-  console.log(userId);
   return {
       type:'ALIASED',
       payload: {_id: userId},
