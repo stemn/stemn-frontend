@@ -10,7 +10,6 @@ import getRootReducer from '../reducers';
 import forwardToMain from './middleware/forwardToMain';
 import forwardToRenderer from './middleware/forwardToRenderer';
 import triggerAlias from './middleware/triggerAlias';
-import DevTools from '../../renderer/main/components/DevTools';
 
 export default function configureStore(initialState, scope = 'main') {
   const logger = createLogger({
@@ -47,7 +46,7 @@ export default function configureStore(initialState, scope = 'main') {
   ];
 
   if (/*! process.env.NODE_ENV && */scope === 'renderer') {
-    enhanced.push(DevTools.instrument());
+    enhanced.push(window.devToolsExtension ? window.devToolsExtension() : noop => noop);
     enhanced.push(persistState(
       window.location.href.match(
         /[?&]debug_session=([^&]+)\b/
