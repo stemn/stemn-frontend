@@ -4,8 +4,8 @@ import Sidebar from '../components/Sidebar/Sidebar';
 import * as SidebarActions from '../../../shared/actions/sidebar';
 import * as AuthActions from '../../../shared/actions/auth';
 
-function mapStateToProps({ sidebar, auth }) {
-  return { sidebar, auth };
+function mapStateToProps({ sidebar, auth }, otherProps) {
+  return { sidebar, auth, params: otherProps.params };
 }
 
 function mapDispatchToProps(dispatch) {

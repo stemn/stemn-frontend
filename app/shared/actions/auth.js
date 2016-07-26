@@ -62,8 +62,7 @@ export function logout() {
     dispatch(clearUserData());
     dispatch(removeHttpHeaders());
     dispatch(removeAuthToken());
-    dispatch(push('/login'))
-//    setTimeout(()=>{dispatch(push('/login'))}, 1)
+    setTimeout(()=>{dispatch(push('/login'))}, 1)
     dispatch({
         type:'AUTH/LOGOUT',
     })

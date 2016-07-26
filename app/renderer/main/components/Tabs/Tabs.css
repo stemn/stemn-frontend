@@ -1,3 +1,5 @@
+@value primary, border1 from "app/renderer/assets/css/themes/standard.css";
+
 .tabs {
     white-space: nowrap;
     position: relative;
@@ -10,7 +12,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);;
+    border-bottom: 1px solid border1;
 }
 .inner{
     overflow: auto;
@@ -25,7 +27,7 @@
     transition: color 0.2s ease;
 }
 .inner > a.active, .inner > a:hover {
-    color: rgba(0, 0, 0, 0.8);
+    color: primary;
 }
 .inner > a.active:after, .inner > a:hover:after {
     opacity: 1;
@@ -36,11 +38,19 @@
     bottom: 0px;
     left: 0;
     right: 0;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid primary;
     opacity: 0;
     transition: 0.2s opacity ease;
+    z-index: 1;
 }
 
+.tabsLg{
+  padding-left: 15px;
+}
+.tabsLg .inner > a{
+  font-size: 14px;
+  padding: 15px 15px;
+}
 
 /*
     // Black Bg Tabs

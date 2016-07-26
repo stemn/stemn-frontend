@@ -16,10 +16,9 @@ import userStyles from './SidebarAvatar.css';
 import {MdAdd, MdSettings, MdSearch} from 'react-icons/lib/md';
 import {GoRepo} from 'react-icons/lib/go';
 
-
 const Project = (props) => {
   return (
-    <Link className={styles.sidebarButton} key={props.item._id} to={'/project/'+props.item.stub}>
+    <Link className={classNames(styles.sidebarButton, {[styles.active] : props.isActive} )} key={props.item._id} to={`/project/${props.item.stub}/changes`}>
       <div className="layout-row layout-align-start-center">
         <GoRepo size="15"/>
         <div className={styles.text + ' flex'}>{props.item.name}</div>
@@ -29,8 +28,6 @@ const Project = (props) => {
 }
 
 const ProjectWithContext = ContextMenuLayer('multi', (props) => (props.item))(Project);
-
-
 
 export default class extends React.Component{
   componentDidMount() {
@@ -53,7 +50,7 @@ export default class extends React.Component{
         </div>
 
         <div className="scroll-box flex">
-            {this.props.sidebar.projects.map((item, idx) => <ProjectWithContext key={idx} item={item}/>)}
+            {this.props.sidebar.projects.map((item, idx) => <ProjectWithContext key={idx} item={item} isActive={item.stub == this.props.params.stub}/>)}
             <SidebarContextmenu />
         </div>
 

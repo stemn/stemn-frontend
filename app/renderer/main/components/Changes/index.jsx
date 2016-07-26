@@ -15,10 +15,10 @@ export default (props) => {
     borderTop: '1px solid rgba(0, 0, 0, 0.1)',
     background: 'rgba(0, 0, 0, 0.03)'
   }
+//      <Timeline />
 
   return (
     <div className="layout-column flex rel-box">
-      <Timeline />
       <div className="layout-row flex">
         <div className="layout-column">
           <ContentSidebar>

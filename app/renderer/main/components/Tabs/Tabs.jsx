@@ -7,9 +7,8 @@ import tabClasses from './Tabs.css';
 import classNames from 'classnames';
 
 export default (props) => {
-
   return (
-    <div className={tabClasses.tabs}>
+    <div className={classNames(tabClasses.tabs, { [tabClasses.tabsLg] : props.size == 'lg' })}>
       <div className={classNames('tabs-inner', 'flex', 'layout-row', tabClasses.inner)}>
         {props.children}
       </div>

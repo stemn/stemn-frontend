@@ -1,3 +1,5 @@
+@value primary, secondary from "app/renderer/assets/css/themes/standard.css";
+
 .sidebar{
   width: 0px;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
@@ -10,12 +12,12 @@
   width: 300px;
 }
 
-.sidebarToolbar{
-  margin-top: 31px;
-  height: 52px;
-  padding: 10px;
-}
 
+.sidebarToolbar{
+/*  margin-top: 31px;*/
+  height: 55px;
+  padding: 10px 20px;
+}
 
 .sidebarButton{
   display: block;
@@ -31,7 +33,18 @@
   background: rgba(0, 0, 0, 0.05);
 }
 .sidebarButton.active{
-  background: black;
+  background: rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+.sidebarButton.active:after{
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  bottom: 0;
+  top: 0;
+  width: 4px;
+  background: primary;
 }
 .sidebarButton .text{
   padding-left: 10px;
@@ -39,19 +52,17 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-
 .sidebarSearch{
   position: relative;
   margin: 0 20px 10px;
 }
 .sidebarSearch input{
-  padding: 10px;
+  padding: 15px;
 }
 .sidebarSearchIcon{
   position: absolute;
-  right: 5px;
-  top: 5px;
+  right: 8px;
+  top: 12px;
   bottom: 0;
   color: rgba(0, 0, 0, 0.3);
 }

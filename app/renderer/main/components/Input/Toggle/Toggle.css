@@ -1,0 +1,48 @@
+@value primary from "app/renderer/assets/css/themes/standard.css";
+
+.toggle input{
+  display: none;
+}
+.toggle input + label {
+  outline: 0;
+  display: block;
+  width: 4em;
+  height: 2em;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background: #f0f0f0;
+  border-radius: 2em;
+  padding: 2px;
+  -webkit-transition: all .4s ease;
+  transition: all .4s ease;
+}
+
+.toggle input + label:after,
+.toggle input + label:before {
+  position: relative;
+  display: block;
+  content: "";
+  width: 50%;
+  height: 100%;
+}
+
+.toggle input + label:after {
+  left: 0;
+  border-radius: 50%;
+  background: #fff;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+}
+.toggle input + label:before {
+  display: none;
+}
+.toggle input:checked + label {
+  background: primary;
+}
+.toggle input:checked + label:after {
+  left: 50%;
+}
