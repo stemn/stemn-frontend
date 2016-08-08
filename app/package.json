@@ -50,6 +50,10 @@
     "redux-form": "^6.0.0-alpha.14",
     "redux-promise": "^0.5.3",
     "redux-promise-middleware": "^3.3.2",
-    "redux-thunk": "^2.0.1"
+    "redux-thunk": "^2.0.1",
+    "css-vendor": "^0.3.1",
+    "debug": "^2.1.3",
+    "lodash.throttle": "^3.0.3",
+    "object.assign": "^4.0.1"
   }
 }
