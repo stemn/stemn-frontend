@@ -2,10 +2,13 @@ import http from 'axios';
 
 export const aliases = {};
 
-export function getProjects(userId) {
+export function getProjects(userId, nameString) {
   return {
       type:'ALIASED',
-      payload: {_id: userId},
+      payload: {
+        _id: userId,
+        search: 'Cap'
+      },
       meta: {
         trigger: 'FETCH_PROJECTS',
       },

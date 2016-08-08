@@ -47,11 +47,11 @@ export default function configureStore(initialState, scope = 'main') {
 
   if (/*! process.env.NODE_ENV && */scope === 'renderer') {
     enhanced.push(window.devToolsExtension ? window.devToolsExtension() : noop => noop);
-    enhanced.push(persistState(
-      window.location.href.match(
-        /[?&]debug_session=([^&]+)\b/
-      )
-    ));
+//    enhanced.push(persistState(
+//      window.location.href.match(
+//        /[?&]debug_session=([^&]+)\b/
+//      )
+//    ));
   }
 
   const rootReducer = getRootReducer(scope);

@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import FeedPage from '../pages/FeedPage/FeedPage';
 import * as FeedActions from '../../../shared/actions/feed';
 
-function mapStateToProps({ feed }) {
-  return { feed };
+function mapStateToProps({ sidebarTimeline }) {
+  return { feed: sidebarTimeline };
 }
 
 function mapDispatchToProps(dispatch) {

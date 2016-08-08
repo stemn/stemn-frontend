@@ -12,6 +12,7 @@ export default (props) => {
   const styles = {
       padding: '30px'
   }
+  console.log(props.feed.selected);
   return (
     <div className="layout-column flex rel-box">
       <Timeline />
@@ -22,6 +23,7 @@ export default (props) => {
           </ContentSidebar>
         </div>
         <div className="layout-column">
+          {props.feed.selected._id}
         </div>
       </div>
     </div>
