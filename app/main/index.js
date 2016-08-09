@@ -45,8 +45,8 @@ if(!squirrelStartup){
       // persist store changes
       // TODO: should this be blocking / wait? _.throttle?
 
-      console.log(global.state);
-      await storage.set('state', global.state);
+//      console.log(global.state);
+//      await storage.set('state', global.state);
     });
 
     ipcMain.on('redux-action', (event, payload) => {

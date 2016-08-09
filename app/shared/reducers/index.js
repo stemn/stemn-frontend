@@ -9,6 +9,7 @@ import auth from './auth';
 import login from './login';
 import sidebar from './sidebar';
 import sidebarTimeline from './sidebarTimeline';
+import settings from './settings';
 import projects from './projects';
 
 export default function getRootReducer(scope = 'main') {
@@ -20,6 +21,7 @@ export default function getRootReducer(scope = 'main') {
     login,
     sidebar,
     sidebarTimeline,
+    settings,
     projects,
   };
 

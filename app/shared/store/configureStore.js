@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import { persistState } from 'redux-devtools';
+//import { persistState } from 'redux-devtools';
 import thunk from 'redux-thunk';
 //import promise from 'redux-promise';
 import promise from 'redux-promise-middleware';

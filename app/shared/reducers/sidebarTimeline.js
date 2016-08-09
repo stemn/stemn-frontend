@@ -35,7 +35,7 @@ const initialState = {
       event: 'update',
       timestamp: '2016-06-23T09:26:54Z',
       data: {
-        message: 'Updated the code and model for the thingo',
+        message: 'When I made it real good and shit.',
         files:[
           {
             path: 'README.md',
@@ -61,7 +61,7 @@ const initialState = {
       event: 'update',
       timestamp: '2016-06-23T09:26:54Z',
       data: {
-        message: 'Updated the code and model for the thingo',
+        message: 'Some changes',
         files:[
           {
             path: 'README.md',
@@ -87,7 +87,7 @@ const initialState = {
       event: 'update',
       timestamp: '2016-06-23T09:26:54Z',
       data: {
-        message: 'Updated the code and model for the thingo',
+        message: 'Initial Commit',
         files:[
           {
             path: 'README.md',
@@ -112,7 +112,6 @@ const initialState = {
 export default function (state = initialState, action) {
     switch (action.type) {
         case 'SELECT_TIMELINE_ITEM':
-          console.log(action.payload);
           return {...state,
             selected: action.payload
           }
