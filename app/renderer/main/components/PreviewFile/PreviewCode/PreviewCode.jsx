@@ -1,37 +1,22 @@
 import React from 'react';
 import codemirror from 'codemirror'
-import codemirrorMode from 'codemirror/mode/meta.js'
+import 'codemirror/mode/meta.js'
+const requireCodemirrorMode = require.context("codemirror/mode/", true);
 
 export default class extends React.Component{
   componentDidMount() {
     const codemirrorEl = document.getElementById("codemirror");
-    console.log(codemirrorMode);
-    const editor = codemirror(codemirrorEl, {
-      value: `
-// require('codemirror/addon/hint/show-hint');
-// require('codemirror/addon/hint/xml-hint');
-// require('codemirror/addon/hint/html-hint');
-
-require('codemirror/mode/xml/xml');
-require('codemirror/mode/javascript/javascript');
-require('codemirror/mode/css/css');
-require('codemirror/mode/htmlmixed/htmlmixed');
-
-var CodeMirror = require('codemirror/lib/codemirror');
-
-var editor = CodeMirror.fromTextArea(textareaElement, {
-  mode: 'text/html',
-  lineWrapping: true,
-  extraKeys: {
-    'Ctrl-Space': 'autocomplete'
-  },
-  lineNumbers: true,
-  theme: 'monokai'
-});`,
-    lineNumbers: true,
-      readOnly: true
-
+    const editorInstance = codemirror(codemirrorEl, {
+      value: this.props.model,
+      lineNumbers: true,
+      readOnly: true,
     });
+
+    // Get Mode
+    const mode = codemirror.findModeByExtension(this.props.fileType).mode;
+    const modePath = `./${mode}/${mode}.js`
+    requireCodemirrorMode(modePath);
+    editorInstance.setOption("mode", mode);
   }
   render() {
     return <div id="codemirror"></div>

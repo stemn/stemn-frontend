@@ -6,6 +6,9 @@ export default {
       test: /\.jsx?$/,
       loaders: ['babel-loader'],
       exclude: /node_modules/,
+//      include: function(absPath){
+//        return (/renderer/.test(absPath) || /main/.test(absPath) || /shared/.test(absPath) || /codemirror/.test(absPath));
+//      },
     }, {
       test: /\.json$/,
       loader: 'json-loader',

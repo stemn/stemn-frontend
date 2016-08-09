@@ -4,7 +4,7 @@ import Popover   from '../../../assets/other/react-popup';
 import ContentSidebar   from '../../components/ContentSidebar';
 import Timeline         from '../../containers/Timeline';
 import SidebarTimeline  from '../../containers/SidebarTimeline';
-import PreviewFile  from '../../components/PreviewFile/PreviewFile';
+import PreviewFile      from '../../containers/PreviewFile';
 
 // Styles
 import classNames from 'classnames';
@@ -53,7 +53,7 @@ export default class FeedPage extends React.Component{
           </div>
           <div className="layout-column flex">
             {getDetailSection()}
-            <PreviewFile />
+            <PreviewFile projectStub="stemn" path="readme.md"/>
           </div>
         </div>
       </div>
