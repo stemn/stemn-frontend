@@ -24,6 +24,12 @@ const initialState = {
             rev: '5b5e602372e6e',
             fileType: 'md',
             size: 12599
+          },{
+            path: 'demo files/pcb models/Demo 4/hexapod.brd',
+            parentProject : 'stemn',
+            rev: '5b5e602372e6e',
+            fileType: 'brd',
+            size: 12599
           },
          ]
       }

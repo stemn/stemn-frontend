@@ -20,7 +20,7 @@ export default (props) => {
       <div className={styles.inner + ' flex layout-row layout-align-start-center'} onClick={props.clickFn}>
         <img src={'https://stemn.com' + props.item.actor.picture + '?size=thumb&crop=true'} />
         <div className={styles.text + ' flex'}>
-          <b>{props.item.data.message}</b>
+          <b>{props.item.data.summary}</b>
           <div>{timeFromNow} by {props.item.actor.name}</div>
         </div>
       </div>

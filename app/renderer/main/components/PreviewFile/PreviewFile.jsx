@@ -1,6 +1,7 @@
 import React from 'react';
 
 import PreviewCode from './PreviewCode/PreviewCode'
+import PreviewPcb from './PreviewPcb/PreviewPcb'
 // Styles
 import classNames from 'classnames';
 
@@ -18,7 +19,12 @@ export default class extends React.Component{
   render() {
     const getPreview = () => {
       if(this.props.file.data && this.props.file.meta){
-        return <PreviewCode model={this.props.file.data} fileType={this.props.file.meta.fileType} />
+        if(this.props.file.meta.fileType == 'md'){
+          return <PreviewCode model={this.props.file.data} fileType={this.props.file.meta.fileType} />
+        }
+        else{
+          return <PreviewPcb model={this.props.file.data} fileType={this.props.file.meta.fileType} />
+        }
       }
     }
     return (
