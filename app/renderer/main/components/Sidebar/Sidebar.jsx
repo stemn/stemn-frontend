@@ -41,7 +41,17 @@ export default class extends React.Component{
     return (
       <div className={sidebarStyle}>
         <div className={styles.sidebarToolbar + ' layout-row layout-align-start-center'}>
-          <a onClick={()=>{}}><MdAdd size="25"/></a>
+
+          <PopoverMenu preferPlace="below">
+            <div>
+              <MdAdd size="25"/>
+            </div>
+            <div className="PopoverMenu">
+              <a href="">Create New Project</a>
+              <a href="">Create New Thread</a>
+            </div>
+          </PopoverMenu>
+
           <div className="flex"></div>
         </div>
         <div className={styles.sidebarSearch}>
@@ -76,6 +86,3 @@ export default class extends React.Component{
     );
   }
 };
-//            <img style={UserAvatarStyles} src={'https://stemn.com' + auth.user.picture + '?size=thumb&crop=true'} />
-
-//        <LoadingOverlay hide={!this.props.sidebar.fetching}></LoadingOverlay>

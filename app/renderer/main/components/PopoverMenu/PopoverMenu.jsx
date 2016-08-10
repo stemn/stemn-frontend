@@ -16,7 +16,7 @@ export default React.createClass({
         isOpen={this.state.isOpen}
         body={this.props.children[1]}
         onOuterAction={()=>this.toggle(false)}
-        preferPlace = 'above'>
+        preferPlace = {this.props.preferPlace || 'above'}>
         <div
           className="flex"
           onClick={()=>this.toggle(null)}>

@@ -55,19 +55,18 @@ const initialState = {
 
 
 const CommitChanges = (state, action) => {
-
-    switch (action.type) {
-        case SELECTED_FILE_CHANGE:
-          return {...state,
-            selectedFile: action.payload
-          }
-        case TOGGLE_ALL_CHANGED_FILES:
-          return {...state,
-            files: assignAll(state.files, 'selected', action.payload.value)
-          }
-        default:
-          return state;
-    }
+  switch (action.type) {
+    case SELECTED_FILE_CHANGE:
+      return {...state,
+        selectedFile: action.payload
+      }
+    case TOGGLE_ALL_CHANGED_FILES:
+      return {...state,
+        files: assignAll(state.files, 'selected', action.payload.value)
+      }
+    default:
+      return state;
+  }
 }
 
 export default function (state = initialState, action) {

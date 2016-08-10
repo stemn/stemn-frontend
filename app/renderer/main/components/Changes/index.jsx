@@ -4,6 +4,8 @@ import ContentSidebar from '../ContentSidebar';
 import Timeline       from '../../containers/Timeline';
 import CommitChanges  from '../CommitChanges';
 import CommitBox      from 'app/renderer/main/components/CommitBox/CommitBox.jsx'
+import PreviewFile    from 'app/renderer/main/containers/PreviewFile';
+
 //import CommitBox from '../CommitBox/CommitBox'
 
 
@@ -29,7 +31,8 @@ export default (props) => {
           </ContentSidebar>
         </div>
         <div className="layout-column">
-          <h1>{props.changes.model.selectedFile.name}</h1>
+          {/*<h1>{props.changes.model.selectedFile.name}</h1>*/}
+          <PreviewFile projectStub="stemn" path="README.md" />
         </div>
       </div>
     </div>

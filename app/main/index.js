@@ -1,7 +1,7 @@
 import os from 'os';
 import { app, ipcMain, dialog } from 'electron';
-import pify from 'pify';
-import jsonStorage from 'electron-json-storage';
+//import pify from 'pify';
+//import jsonStorage from 'electron-json-storage';
 import createMainWindow from './createMainWindow';
 import { createMenuBar, showMenuWindow } from './createMenuBarWindow';
 import configureStore from '../shared/store/configureStore';
@@ -24,7 +24,7 @@ if(!squirrelStartup){
   // we have to do this to ease remote-loading of the initial state :(
   global.state = {};
 
-  const storage = pify(jsonStorage);
+//  const storage = pify(jsonStorage);
 
   if (process.env.NODE_ENV === 'development') {
     require('electron-debug')(); // eslint-disable-line global-require
@@ -35,9 +35,9 @@ if(!squirrelStartup){
     // set-up menu bar
     const appIcon = tray();
 
-    await storage.remove('state'); // Clear all storage in dev:
+//    await storage.remove('state'); // Clear all storage in dev:
+//    global.state = await storage.get('state');
 
-    global.state = await storage.get('state');
     const store = configureStore(global.state, 'main');
 
     store.subscribe(async () => {

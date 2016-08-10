@@ -5,12 +5,11 @@ import ContentSidebar   from '../../components/ContentSidebar';
 import Timeline         from '../../containers/Timeline';
 import SidebarTimeline  from '../../containers/SidebarTimeline';
 import PreviewFile      from '../../containers/PreviewFile';
+import TogglePanel      from 'app/renderer/main/components/Panels/TogglePanel/TogglePanel.jsx';
 
 // Styles
 import classNames from 'classnames';
-
-import {MdChevronRight} from 'react-icons/lib/md';
-
+import feedPageStyles from './FeedPage.css';
 
 export default class FeedPage extends React.Component{
 
@@ -22,9 +21,18 @@ export default class FeedPage extends React.Component{
     const getDetailSection = () => {
       if(this.props.feed.selected.data){
         return (
-          <div>
-            <h3>{this.props.feed.selected.data.message}</h3>
-            <div>{getFilesSection()}</div>
+          <div className="layout-column flex">
+            <div className={feedPageStyles.commitInfo}>
+              <h3>{this.props.feed.selected.data.summary}</h3>
+              <div className={feedPageStyles.description}>{this.props.feed.selected.data.description}</div>
+              <div className="layout-row layout-align-start-center">
+                <img src={'https://stemn.com' + this.props.feed.selected.actor.picture + '?size=thumb&crop=true'} className={feedPageStyles.avatar}/>
+                <div>{this.props.feed.selected.actor.name}</div>
+              </div>
+            </div>
+            <div className="flex scroll-box">
+              {getFilesSection()}
+            </div>
           </div>
         )
       }
@@ -33,11 +41,15 @@ export default class FeedPage extends React.Component{
     const getFilesSection = () => {
       if(this.props.feed.selected.data.files){
         return this.props.feed.selected.data.files.map((file)=>
-          <div className='layout-row layout-align-start-center'>
-            <MdChevronRight size='22'></MdChevronRight>
-            <div className='flex'>{file.path}</div>
-            <div>{file.size}</div>
-          </div>
+          <TogglePanel>
+            <div className="layout-row flex layout-align-start-center">
+              <div className="flex">{file.path}</div>
+              <div>{file.size}</div>
+            </div>
+            <div>
+              <PreviewFile projectStub={file.parentProject} path={file.path} />
+            </div>
+          </TogglePanel>
         )
       }
     }
@@ -53,7 +65,6 @@ export default class FeedPage extends React.Component{
           </div>
           <div className="layout-column flex">
             {getDetailSection()}
-            <PreviewFile projectStub="stemn" path="readme.md"/>
           </div>
         </div>
       </div>

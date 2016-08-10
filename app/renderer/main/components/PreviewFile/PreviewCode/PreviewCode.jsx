@@ -5,11 +5,14 @@ const requireCodemirrorMode = require.context("codemirror/mode/", true);
 
 export default class extends React.Component{
   componentDidMount() {
-    const codemirrorEl = document.getElementById("codemirror");
+    const codemirrorEl = this.refs.codemirror;
     const editorInstance = codemirror(codemirrorEl, {
       value: this.props.model,
-      lineNumbers: true,
+      indentWithTabs: true,
       readOnly: true,
+      dragDrop: false,
+      lineWrapping: true,
+      lineNumbers: true,
     });
 
     // Get Mode
@@ -19,6 +22,6 @@ export default class extends React.Component{
     editorInstance.setOption("mode", mode);
   }
   render() {
-    return <div id="codemirror"></div>
+    return <div ref="codemirror"></div>
   }
 };

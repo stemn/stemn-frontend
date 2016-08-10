@@ -1,5 +1,7 @@
+@value primary, bg1, border1 from "app/renderer/assets/css/themes/standard.css";
+
 .timelineRow{
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid border1;
   cursor: default;
 }
 .text{
@@ -12,6 +14,9 @@
   padding: 8px;
 }
 .timelineRow.active{
-  background: rgba(0, 0, 0, 0.7);
+  background: primary !important;
   color: white;
+}
+.timelineRow:hover{
+  background: bg1;
 }

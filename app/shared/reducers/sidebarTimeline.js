@@ -9,7 +9,8 @@ const initialState = {
       event: 'update',
       timestamp: '2016-06-23T09:26:54Z',
       data: {
-        message: 'Updated the code and model for the thingo',
+        summary: 'Updated the code and model for the thingo',
+        description: 'Added a number of different files and fiddles with some shit. Closed task 10, 11 12 and more. That is nice!',
         files:[
           {
             path: 'README.md',
@@ -18,11 +19,11 @@ const initialState = {
             fileType: 'md',
             size: 2823
           },{
-            path: 'README.md',
+            path: 'Demo%20Files/README.md',
             parentProject : 'stemn',
             rev: '5b5e602372e6e',
             fileType: 'md',
-            size: 2823
+            size: 12599
           },
          ]
       }
@@ -35,7 +36,8 @@ const initialState = {
       event: 'update',
       timestamp: '2016-06-23T09:26:54Z',
       data: {
-        message: 'When I made it real good and shit.',
+        summary: 'When I made it real good and shit.',
+        description: 'Added a number of different files and fiddles with some shit. Closed task 10, 11 12 and more. That is nice!',
         files:[
           {
             path: 'README.md',
@@ -61,7 +63,8 @@ const initialState = {
       event: 'update',
       timestamp: '2016-06-23T09:26:54Z',
       data: {
-        message: 'Some changes',
+        summary: 'Some changes',
+        description: 'Added a number of different files and fiddles with some shit. Closed task 10, 11 12 and more. That is nice!',
         files:[
           {
             path: 'README.md',
@@ -87,7 +90,8 @@ const initialState = {
       event: 'update',
       timestamp: '2016-06-23T09:26:54Z',
       data: {
-        message: 'Initial Commit',
+        summary: 'Initial Commit',
+        description: 'Added a number of different files and fiddles with some shit. Closed task 10, 11 12 and more. That is nice!',
         files:[
           {
             path: 'README.md',

@@ -1,12 +1,12 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 //import { persistState } from 'redux-devtools';
 import thunk from 'redux-thunk';
-//import promise from 'redux-promise';
 import promise from 'redux-promise-middleware';
 import createLogger from 'redux-logger';
 import { hashHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
 import getRootReducer from '../reducers';
+
 import forwardToMain from './middleware/forwardToMain';
 import forwardToRenderer from './middleware/forwardToRenderer';
 import triggerAlias from './middleware/triggerAlias';
@@ -65,5 +65,4 @@ export default function configureStore(initialState, scope = 'main') {
   }
 
   return store;
-
 }
