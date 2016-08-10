@@ -1,14 +1,13 @@
 import React from 'react';
-import codemirror from 'codemirror'
-import 'codemirror/mode/meta.js'
-const requireCodemirrorMode = require.context("codemirror/mode/", true);
+
+import 'app/renderer/assets/other/gerber/index.js';
 
 export default class extends React.Component{
   componentDidMount() {
-    console.log(this.props.model);
+//    console.log(this.props.model);
   }
   render() {
-    return <div ref="codemirror">
+    return <div ref="main">
       here
     </div>
   }
