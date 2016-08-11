@@ -1,3 +1,7 @@
+import ViewEERenderer from './viewee-generic.js'
+import webGerberConstants from '../constants/webGerberConstants.js';
+
+
 (function (root, factory) {
     if (typeof define === "function" && define.amd) {
         define(function () {
@@ -9,6 +13,7 @@
         root.ViewEECanvasRenderer = factory();
     }
 }(this, function () {
+
 
     // ---------------
     // --- DRAWING ---
@@ -39,7 +44,7 @@
             board = this.board;
 
         //	ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        ctx.fillStyle = window.webGerberConstants.colors.board;
+        ctx.fillStyle = webGerberConstants.colors.board;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.transform(
             board.scale * board.baseScale * board.ratio,
@@ -49,7 +54,7 @@
             0,
             0
         );
-        ctx.fillStyle = window.webGerberConstants.colors.board;
+        ctx.fillStyle = webGerberConstants.colors.board;
         ctx.fillRect(1, 1, 1, 1);
     }
 
@@ -470,7 +475,7 @@
 
     CanvasRenderer.prototype._dimCanvas = function (alpha, ctx) {
         ctx.save();
-        ctx.fillStyle = window.webGerberConstants.colors.board;
+        ctx.fillStyle = webGerberConstants.colors.board;
         ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         ctx.restore();
     };

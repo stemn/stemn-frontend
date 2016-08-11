@@ -1,13 +1,21 @@
-window.webGerberConstants = {
-    colors: {
-        board      : '#103410',
-        boardDark  : '#0a1f0a',
-        boardLight : '#133b13',
+import webGerberConstants from './constants/webGerberConstants.js';
+import ViewEEPCB from './viewee.js';
+import ParseGerber from './parse/gerber.js';
+import THR51 from './thr51.min.js';
+import ObjectControls from './ObjectControls.js';
+
+(function (root, factory) {
+    if (typeof define === "function" && define.amd) {
+        define(function () {
+            return factory();
+        });
+    } else if (typeof module === "object" && module.exports) {
+        module.exports = factory();
+    } else {
+        root.webGerber = factory();
     }
-}
-
-
-window.webGerber = function(){
+}(this, function () {
+  return () => {
 
     var wG = {};
 
@@ -69,12 +77,12 @@ window.webGerber = function(){
     function parse(layer){
         var parser;
         if(wG.utils.isPcb(layer.name)){
-            parser = new window.ViewEEPCB();
+            parser = new ViewEEPCB();
             wG.parser = parser;
             return parser.findParser(layer.data);
         }
         else{
-            parser = new window.ParseGerber();
+            parser = new ParseGerber();
             return parser.parse(layer.data, layer.name);
         }
     }
@@ -207,13 +215,14 @@ window.webGerber = function(){
         wG.boardControls.eye    = wG.camera.position.clone().subSelf(wG.board.position);
 
         // Window resize handler.
-        $(window).resize(function() {
-            wG.center();
-            wG.boardControls.screen.width = window.innerWidth;
-            wG.boardControls.screen.height = window.innerHeight;
-            wG.boardControls.radius = (window.innerWidth + window.innerHeight) / 4;
-        }).resize();
-
+        const resizeEvent = () => {
+          wG.center();
+          wG.boardControls.screen.width = window.innerWidth;
+          wG.boardControls.screen.height = window.innerHeight;
+          wG.boardControls.radius = (window.innerWidth + window.innerHeight) / 4;
+        }
+        window.addEventListener('resize', resizeEvent);
+        setTimeout(resizeEvent, 1);
 
         // Add element to DOM
         domParent.appendChild(wG.renderer.domElement);
@@ -362,7 +371,7 @@ window.webGerber = function(){
     function clearBoard(canvas) {
         var ctx = canvas.getContext('2d');
         ctx.globalCompositeOperation = 'source-over';
-        ctx.fillStyle = window.webGerberConstants.colors.board;
+        ctx.fillStyle = webGerberConstants.colors.board;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
 
@@ -388,4 +397,6 @@ window.webGerber = function(){
     }
 
     return wG
-}
+    }
+}))
+

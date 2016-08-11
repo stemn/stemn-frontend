@@ -726,11 +726,11 @@
 	}
 
 
-	if (typeof process !== "undefined") {
-		var ex = new EagleXMLParser ();
-		var fs = require ("fs");
-		ex.parse (fs.readFileSync (process.argv[2]));
-	}
+//	if (typeof process !== "undefined") {
+//		var ex = new EagleXMLParser ();
+//		var fs = require ("fs");
+//		ex.parse (fs.readFileSync (process.argv[2]));
+//	}
 
 	return EagleXMLParser;
 

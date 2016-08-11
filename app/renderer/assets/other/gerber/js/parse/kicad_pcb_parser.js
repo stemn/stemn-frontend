@@ -11,6 +11,7 @@
 }(this, function () {
 
 function KicadNewParser (board) {
+    board = board || {};
 	this.context = [];
 	this.chunk = ""; // TODO: use a node compatible Buffers
 
@@ -775,11 +776,11 @@ KicadNewParser.prototype.cmdDone = function () {
 }
 
 
-if (typeof process !== "undefined") {
-	var kp = new KicadNewParser ();
-	var fs = require ("fs");
-	kp.parse (fs.readFileSync (process.argv[2]));
-}
+//if (typeof process !== "undefined") {
+//	var kp = new KicadNewParser ();
+//	var fs = require ("fs");
+//	kp.parse (fs.readFileSync (process.argv[2]));
+//}
 
 return KicadNewParser;
 

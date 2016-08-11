@@ -1,6 +1,18 @@
-(function () {
-    window.ViewEEPCB = ViewEE;
+import EagleXMLParser from './parse/eagle.js';
+import KicadNewParser from './parse/kicad_pcb_parser.js';
+import ViewEECanvasRenderer from './render/viewee-canvas.js';
 
+(function (root, factory) {
+    if (typeof define === "function" && define.amd) {
+        define(function () {
+            return factory();
+        });
+    } else if (typeof module === "object" && module.exports) {
+        module.exports = factory();
+    } else {
+        root.ViewEE = factory();
+    }
+}(this, function () {
     function ViewEE() {
         this.visibleLayers = {};
         this.visibleLayers[ViewEE.LayerId.BOTTOM_COPPER] = true;
@@ -255,11 +267,7 @@
     }
 
     function initRenderer() {
-        if ('svg' in this && !this.renderer) {
-            this.renderer = new ViewEESVGRenderer(this);
-        } else if ('canvas' in this && !this.renderer) {
-            this.renderer = new ViewEECanvasRenderer(this);
-        }
+        this.renderer = new ViewEECanvasRenderer(this);
     }
 
     // ---------------
@@ -268,21 +276,21 @@
 
     ViewEE.parsers = [];
 
-    if ("EagleXMLParser" in window) {
-        ViewEE.parsers.push(window.EagleXMLParser);
+    if (EagleXMLParser) {
+        ViewEE.parsers.push(EagleXMLParser);
     }
 
-    if ("KicadNewParser" in window) {
-        ViewEE.parsers.push(window.KicadNewParser);
+    if (KicadNewParser) {
+        ViewEE.parsers.push(KicadNewParser);
     }
 
-    if ("AltiumParser" in window) {
-        ViewEE.parsers.push(window.AltiumParser);
-    }
-
-    if ("GEDAParser" in window) {
-        ViewEE.parsers.push(window.GEDAParser);
-    }
+//    if ("AltiumParser" in window) {
+//        ViewEE.parsers.push(window.AltiumParser);
+//    }
+//
+//    if ("GEDAParser" in window) {
+//        ViewEE.parsers.push(window.GEDAParser);
+//    }
 
     ViewEE.prototype.findParser = function (text) {
         var board = {};
@@ -321,13 +329,13 @@
         this.scaleToFit();
         this.draw();
 
-//        var ctx = canvas.getContext('2d');
-//
-//        ctx.globalCompositeOperation = 'xor';
-//        ctx.beginPath();
-//        ctx.fillStyle = 'black'
-//        ctx.rect(100,100,100,100);
-//        ctx.fill();
+    //        var ctx = canvas.getContext('2d');
+    //
+    //        ctx.globalCompositeOperation = 'xor';
+    //        ctx.beginPath();
+    //        ctx.fillStyle = 'black'
+    //        ctx.rect(100,100,100,100);
+    //        ctx.fill();
 
     }
 
@@ -338,11 +346,11 @@
 
     ViewEE.prototype.calcBBox = function (wires) {
         var bbox = [
-		ViewEE.LARGE_NUMBER,
-		ViewEE.LARGE_NUMBER,
-		-ViewEE.LARGE_NUMBER,
-		-ViewEE.LARGE_NUMBER
-	];
+        ViewEE.LARGE_NUMBER,
+        ViewEE.LARGE_NUMBER,
+        -ViewEE.LARGE_NUMBER,
+        -ViewEE.LARGE_NUMBER
+    ];
         wires.forEach(function (wireDict) {
             if (wireDict.x1 < bbox[0]) {
                 bbox[0] = wireDict.x1;
@@ -375,8 +383,6 @@
 
         return bbox;
     }
-
-
 
     function layerColor (colorIdx) {
         var rgb = this.colorPalette[colorIdx];
@@ -422,11 +428,11 @@
             rad = degrees * Math.PI / 180.0,
             flipSign = flipped ? -1 : 1,
             matrix = [
-			flipSign * Math.cos(rad),
-			flipSign * -Math.sin(rad),
-			Math.sin(rad),
-			Math.cos(rad)
-		];
+            flipSign * Math.cos(rad),
+            flipSign * -Math.sin(rad),
+            Math.sin(rad),
+            Math.cos(rad)
+        ];
         return matrix;
     }
 
@@ -539,4 +545,11 @@
         }
         return [minX, minY, maxX, maxY];
     }
-})()
+
+    return ViewEE;
+}));
+
+
+
+
+

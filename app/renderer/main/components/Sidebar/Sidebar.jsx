@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router';
 import { ContextMenu, MenuItem, ContextMenuLayer } from "react-contextmenu";
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
+import { Field } from 'react-redux-form';
+import _ from 'lodash';
 
 
 // Components
@@ -31,13 +33,16 @@ const ProjectWithContext = ContextMenuLayer('multi', (props) => (props.item))(Pr
 
 export default class extends React.Component{
   componentDidMount() {
-    this.props.sidebarActions.getProjects(this.props.auth.user._id);
+    this.props.sidebarActions.getProjects({
+        userId: this.props.auth.user._id,
+      });
   }
   render() {
-    const sidebarStyle = classNames('layout-column', 'flex' ,'rel-box', {
-      [styles.open]: this.props.sidebar.show,
-      [styles.sidebar]: true,
-    });
+    const sidebarStyle = classNames('layout-column', 'flex' ,'rel-box', styles.sidebar, {[styles.open]: this.props.sidebar.show});
+
+    const nameRegex = new RegExp(this.props.sidebar.searchString, 'i');
+    const filteredProjects = this.props.sidebar.projects.filter((project) => nameRegex.test(project.name));
+
     return (
       <div className={sidebarStyle}>
         <div className={styles.sidebarToolbar + ' layout-row layout-align-start-center'}>
@@ -55,12 +60,14 @@ export default class extends React.Component{
           <div className="flex"></div>
         </div>
         <div className={styles.sidebarSearch}>
-          <input className="dr-input" type="text" placeholder="Search all projects"/>
+          <Field model="sidebar.searchString">
+            <input className="dr-input" type="text" placeholder="Search all projects"/>
+          </Field>
           <MdSearch className={styles.sidebarSearchIcon} size="25"/>
         </div>
 
         <div className="scroll-box flex">
-            {this.props.sidebar.projects.map((item, idx) => <ProjectWithContext key={idx} item={item} isActive={item.stub == this.props.params.stub}/>)}
+            {filteredProjects.map((item, idx) => <ProjectWithContext key={idx} item={item} isActive={item.stub == this.props.params.stub}/>)}
             <SidebarContextmenu />
         </div>
 
