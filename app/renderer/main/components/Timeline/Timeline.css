@@ -22,12 +22,14 @@
   margin-top: -6px;
   background: rgb(153, 153, 153);
   border: 2px solid #f8f8f8;
+  transition: 0.1s ease all;
 }
 .dot.active{
   background: primary;
   height: 20px;
   width: 20px;
   margin-top: -8px;
+  margin-left: -2px;
 }
 
 .popup{
