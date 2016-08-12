@@ -5,10 +5,11 @@ import * as SidebarActions from '../../../shared/actions/sidebar';
 import * as HeaderActions from '../../../shared/actions/header';
 import * as AuthActions from '../../../shared/actions/auth';
 
-function mapStateToProps({ header, auth }, ownProps) {
+function mapStateToProps({ header, auth, sidebar }, ownProps) {
   return {
     header,
     auth,
+    sidebar,
     location:  ownProps.location
   };
 }

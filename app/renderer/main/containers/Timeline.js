@@ -4,7 +4,7 @@ import Timeline from '../components/Timeline/Timeline';
 import * as SidebarTimelineActions from '../../../shared/actions/sidebarTimeline';
 
 function mapStateToProps({ sidebarTimeline }) {
-  return { sidebarTimeline };
+  return { feed: sidebarTimeline };
 }
 
 function mapDispatchToProps(dispatch) {

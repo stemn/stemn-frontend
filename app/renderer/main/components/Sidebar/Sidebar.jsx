@@ -15,7 +15,7 @@ import classNames from 'classnames';
 import styles from './Sidebar.css';
 import userStyles from './SidebarAvatar.css';
 
-import {MdAdd, MdSettings, MdSearch} from 'react-icons/lib/md';
+import {MdAdd, MdSettings, MdSearch, MdMenu} from 'react-icons/lib/md';
 import {GoRepo} from 'react-icons/lib/go';
 
 const Project = (props) => {
@@ -58,6 +58,8 @@ export default class extends React.Component{
           </PopoverMenu>
 
           <div className="flex"></div>
+           <a onClick={()=>{this.props.sidebarActions.toggleSidebar();}}><MdMenu size="25"/></a>
+
         </div>
         <div className={styles.sidebarSearch}>
           <Field model="sidebar.searchString">

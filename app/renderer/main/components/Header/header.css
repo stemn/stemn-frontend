@@ -1,22 +1,8 @@
-.header :global .mdl-layout__drawer-button {
-  color: rgba(0, 0, 0, 0.54);
-}
-
-.textfield {
-  padding: 0px;
-  margin-top: 41px;
-}
-
-.textfield :global .mdl-textfield__expandable-holder {
-  bottom: 19px;
-}
-
-
 .toolbar{
   padding: 10px;
   height: 52px;
 }
 
-.navButtons{
-
+.inner{
+  padding: 0 15px;
 }

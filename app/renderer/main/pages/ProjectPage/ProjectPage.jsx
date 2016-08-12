@@ -3,6 +3,8 @@ import { Link } from 'react-router';
 
 // Components
 import Tabs from 'app/renderer/main/components/Tabs/Tabs'
+import TabsStyles from 'app/renderer/main/components/Tabs/Tabs.css'
+import Header from 'app/renderer/main/containers/Header'
 
 // Styles
 import classNames from 'classnames';
@@ -21,12 +23,14 @@ export default class extends React.Component{
     const baseLink = `project/${this.props.project ? this.props.project.stub : ''}`
     return (
       <div className="layout-column flex rel-box">
-        <h1 className={pageStyles.title}>{this.props.project ? this.props.project.name : ''}</h1>
+        <Header>
+          <h1 className={pageStyles.title}>{this.props.project ? this.props.project.name : ''}</h1>
+        </Header>
         <Tabs size="lg">
-          <Link to={baseLink+'/changes'}>Changes</Link>
-          <Link to={baseLink+'/feed'}>Feed</Link>
-          <Link to={baseLink+'/feed'}>Tasks</Link>
-          <Link to={baseLink+'/settings'}>Settings</Link>
+          <Link activeClassName={TabsStyles.active} to={baseLink+'/changes'}>Changes</Link>
+          <Link activeClassName={TabsStyles.active} to={baseLink+'/feed'}>Feed</Link>
+          <Link activeClassName={TabsStyles.active} to={baseLink+'/tasks'}>Tasks</Link>
+          <Link activeClassName={TabsStyles.active} to={baseLink+'/settings'}>Settings</Link>
         </Tabs>
         {this.props.children}
       </div>

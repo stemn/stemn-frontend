@@ -7,7 +7,7 @@ const initialState = {
         picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg'
       },
       event: 'update',
-      timestamp: '2016-06-23T09:26:54Z',
+      timestamp: '2016-08-23T09:26:54Z',
       data: {
         summary: 'Updated the code and model for the thingo',
         description: 'Added a number of different files and fiddles with some shit. Closed task 10, 11 12 and more. That is nice!',
@@ -40,7 +40,7 @@ const initialState = {
         picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg'
       },
       event: 'update',
-      timestamp: '2016-06-23T09:26:54Z',
+      timestamp: '2016-07-23T09:26:54Z',
       data: {
         summary: 'When I made it real good and shit.',
         description: 'Added a number of different files and fiddles with some shit. Closed task 10, 11 12 and more. That is nice!',
@@ -67,7 +67,7 @@ const initialState = {
         picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg'
       },
       event: 'update',
-      timestamp: '2016-06-23T09:26:54Z',
+      timestamp: '2016-07-22T09:26:54Z',
       data: {
         summary: 'Some changes',
         description: 'Added a number of different files and fiddles with some shit. Closed task 10, 11 12 and more. That is nice!',

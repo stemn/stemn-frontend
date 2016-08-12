@@ -11,7 +11,7 @@ export default (props) => {
   )
   return (
     <div className="layout-column flex">
-      <FileChangeTitleRow text="Recent Changes" />
+      <FileChangeTitleRow text="Recent Events" />
       <div className="flex">
         {timeline}
       </div>

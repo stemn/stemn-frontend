@@ -1,24 +1,33 @@
+@value primary, border1 from "app/renderer/assets/css/themes/standard.css";
+
 .timeline{
   padding: 60px 30px;
-  background: #2a2a2a;
+  background: #f8f8f8;
   color: white;
+  border-bottom: 1px solid border1;
 }
 .line{
   display: block;
   height: 4px;
   width: 100%;
-  background: black;
+  background: rgb(153, 153, 153);
   position: relative;
 }
 .dot{
   border-radius: 50%;
   position: absolute;
   display: block;
-  height: 15px;
-  width: 15px;
+  height: 16px;
+  width: 16px;
   margin-top: -6px;
-  background: #9b9b9b;
-  border: 2px solid #2a2a2a;
+  background: rgb(153, 153, 153);
+  border: 2px solid #f8f8f8;
+}
+.dot.active{
+  background: primary;
+  height: 20px;
+  width: 20px;
+  margin-top: -8px;
 }
 
 .popup{

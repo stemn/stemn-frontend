@@ -1,6 +1,8 @@
 import React from 'react';
+import moment from 'moment';
 import Popover from '../../../assets/other/react-popup';
 
+import * as stringConcat from 'app/shared/helpers/stringConcat';
 
 // Styles
 import styles from './Timeline.css';
@@ -8,12 +10,14 @@ import classNames from 'classnames';
 
 
 const PopupContent = (item) =>{
+  const timeFromNow = moment(item.timestamp).fromNow();
+
   return (
     <div className={styles.popup + ' layout-row layout-align-start-center'}>
       <img className={styles.popupImage} src={'https://stemn.com' + item.actor.picture + '?size=thumb&crop=true'} />
       <div className="flex">
-        <div>Initial Commit</div>
-        <div>20 hours ago by {item.actor.name}</div>
+        <b>{stringConcat.end(item.data.summary, 30)}</b>
+        <div>{timeFromNow} by {item.actor.name}</div>
       </div>
     </div>
     )
@@ -60,14 +64,24 @@ export default React.createClass({
   render() {
     const leftStyle = ['0%', '25%', '50%', '98%', '100%'].map((item)=>{return {left: item}});
 
+
+    const latestDate = moment(this.props.feed.timeline[0].timestamp).valueOf();
+    const earlyDate  = moment(this.props.feed.timeline[this.props.feed.timeline.length-1].timestamp).valueOf();
+    const range      = latestDate - earlyDate;
+    console.log(range);
+
+    this.props.feed.timeline.map((item)=>{
+
+    })
+
     return (
       <div className={styles.timeline +' layout-row'}>
         <div className={styles.line}>
-          <div className={styles.dot} style={leftStyle[0]}><PopupTrigger item={this.props.sidebarTimeline.timeline[0]} /></div>
-          <div className={styles.dot} style={leftStyle[1]}><PopupTrigger item={this.props.sidebarTimeline.timeline[0]} /></div>
-          <div className={styles.dot} style={leftStyle[2]}><PopupTrigger item={this.props.sidebarTimeline.timeline[0]} /></div>
-          <div className={styles.dot} style={leftStyle[3]}><PopupTrigger item={this.props.sidebarTimeline.timeline[0]} /></div>
-          <div className={styles.dot} style={leftStyle[4]}><PopupTrigger item={this.props.sidebarTimeline.timeline[0]} /></div>
+          <div className={styles.dot} style={leftStyle[0]}><PopupTrigger item={this.props.feed.timeline[0]} /></div>
+          <div className={styles.dot} style={leftStyle[1]}><PopupTrigger item={this.props.feed.timeline[0]} /></div>
+          <div className={styles.dot} style={leftStyle[2]}><PopupTrigger item={this.props.feed.timeline[0]} /></div>
+          <div className={classNames(styles.dot, styles.active)} style={leftStyle[3]}><PopupTrigger item={this.props.feed.timeline[0]} /></div>
+          <div className={styles.dot} style={leftStyle[4]}><PopupTrigger item={this.props.feed.timeline[0]} /></div>
         </div>
       </div>
     );

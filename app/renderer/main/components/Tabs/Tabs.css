@@ -29,9 +29,14 @@
 .inner > a.active, .inner > a:hover {
     color: primary;
 }
+.inner > a.active:after{
+    opacity: 1;
+}
+/*
 .inner > a.active:after, .inner > a:hover:after {
     opacity: 1;
 }
+*/
 .inner > a:after {
     content: '';
     position: absolute;

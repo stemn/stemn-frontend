@@ -16,7 +16,7 @@ export default class App extends Component {
           <Sidebar params={this.props.params}/>
         </div>
         <div className="layout-column flex rel-box">
-          <WindowsTitleBar theme="light"/>
+          <WindowsTitleBar theme="dark"/>
           <div className="layout-column flex">
             {this.props.children}
           </div>

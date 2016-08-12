@@ -1,11 +1,6 @@
 @value secondary, border1 from "app/renderer/assets/css/themes/standard.css";
 .title{
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
-  padding: 15px;
-  height: 55px;
   margin: 0;
-  border-bottom: 1px solid border1;
-  background: secondary;
-  color: white;
 }
