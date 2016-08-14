@@ -5,6 +5,7 @@ import promise from 'bluebird'
 import previewCadUtils from './previewCadUtils.js';
 
 import AutodeskViewer from './AutodeskViewer/AutodeskViewer';
+import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 import styles from './PreviewCad.css';
 
@@ -60,7 +61,7 @@ export default React.createClass({
   },
   render() {
     if(this.state.status == 'success'){
-      return <AutodeskViewer urn={this.state.urn} token={this.state.token} />
+      return <div className={styles.container}><AutodeskViewer urn={this.state.urn} token={this.state.token} /></div>
     }
     else if(this.state.status == 'failed'){
       return <div>Failed</div>
@@ -69,7 +70,7 @@ export default React.createClass({
       return <div>Disabled</div>
     }
     else {
-      return <div>Loading</div>
+      return <div className={styles.container}><LoadingOverlay /></div>
     }
   }
 })

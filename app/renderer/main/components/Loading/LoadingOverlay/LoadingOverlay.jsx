@@ -11,8 +11,8 @@ export default class extends Component {
     static defaultProps = {
         color: '#2f2f2f'
     }
-
     render() {
+      const width = 50;
       if(this.props.hide) {
         return null
       }
@@ -20,7 +20,12 @@ export default class extends Component {
         return (
           <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionAppearTimeout={500} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
             <div className={styles.loadingOverlay}>
-                <div className={styles.loader}>
+                <div className={styles.loaderContainer}>
+                  <div className={styles.loader}>
+                    <svg className={styles.circular} viewBox={`${width/2} ${width/2} ${width} ${width}`}>
+                      <circle className={styles.path} cx={width} cy={width} r={width/2 - 5} fill="none" stroke-width="2" stroke-miterlimit="10"/>
+                    </svg>
+                  </div>
                 </div>
             </div>
           </ReactCSSTransitionGroup>
@@ -29,5 +34,3 @@ export default class extends Component {
       }
     }
 }
-
-//                    <ProgressCircle color={this.props.color} size={100} />
