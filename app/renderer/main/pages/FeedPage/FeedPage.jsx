@@ -6,6 +6,7 @@ import Timeline         from '../../containers/Timeline';
 import SidebarTimeline  from '../../containers/SidebarTimeline';
 import PreviewFile      from '../../containers/PreviewFile';
 import TogglePanel      from 'app/renderer/main/components/Panels/TogglePanel/TogglePanel.jsx';
+import CompareFiles      from 'app/renderer/main/components/CompareFiles/CompareFiles';
 
 // Styles
 import classNames from 'classnames';
@@ -47,7 +48,10 @@ export default class FeedPage extends React.Component{
               <div>{file.size}</div>
             </div>
             <div>
-              <PreviewFile projectStub={file.parentProject} path={file.path} />
+              <CompareFiles>
+                <PreviewFile projectStub={file.parentProject} path={file.path} />
+                <PreviewFile projectStub={file.parentProject} path={file.path} />
+              </CompareFiles>
             </div>
           </TogglePanel>
         )

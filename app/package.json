@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "axios": "^0.13.1",
+    "bluebird": "^3.4.1",
     "classnames": "^2.2.5",
     "codemirror": "^5.17.0",
     "css-modules-require-hook": "^4.0.0",

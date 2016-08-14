@@ -6,6 +6,8 @@ import SelectList from 'app/renderer/main/components/Input/SelectList/SelectList
 
 // Styles
 import classNames from 'classnames';
+import tabsStyles from 'app/renderer/main/components/Tabs/Tabs.css'
+
 
 const PageStyles = {
   padding: '40px'
@@ -16,7 +18,7 @@ export default class SettingsPage extends React.Component{
     return (
       <div className="layout-column flex rel-box" style={PageStyles}>
         <Tabs>
-          <a className="active">Application Settings</a>
+          <a className={tabsStyles.active}>Application Settings</a>
           <a>Account Settings</a>
         </Tabs>
         <div className="layout-row flex">

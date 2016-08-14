@@ -30,6 +30,24 @@ const initialState = {
             rev: '5b5e602372e6e',
             fileType: 'brd',
             size: 12599
+          },{
+            path: 'demo files/Documents/Demo.pdf',
+            parentProject : 'stemn',
+            rev: '5b5e602372e6e',
+            fileType: 'pdf',
+            size: 123
+          },{
+            path: 'demo files/Images/Demo.bmp',
+            parentProject : 'stemn',
+            rev: '5b40602372e6e',
+            fileType: 'bmp',
+            size: 123
+          },{
+            path: 'demo files/CAD Models/Demo.dwf',
+            parentProject : 'stemn',
+            rev: '5b40602372e6e',
+            fileType: 'dwf',
+            size: 123
           },
          ]
       }
