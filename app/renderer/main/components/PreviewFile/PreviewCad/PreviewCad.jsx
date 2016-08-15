@@ -57,6 +57,11 @@ export default React.createClass({
       else if(this.state.status == 'failed'){
         clearInterval(this.checkStatusInterval)
       }
+    }).catch((error)=>{
+      this.setState({
+        status: 'failed'
+      })
+      clearInterval(this.checkStatusInterval)
     })
   },
   render() {

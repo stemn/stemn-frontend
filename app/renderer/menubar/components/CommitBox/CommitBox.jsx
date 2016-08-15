@@ -10,7 +10,6 @@ import {MdDone} from 'react-icons/lib/md';
 
 export default class Commit extends React.Component {
 
-
   commitFiles() {
     if(this.name.value && this.description.value){
       this.props.commitFiles([], {
@@ -23,17 +22,21 @@ export default class Commit extends React.Component {
   }
 
   render() {
+//    ref={node => {this.description = node;}}
+    const getTextArea = () => {
+        return (
+          <Field model="changes.model.commitDescription">
+            <textarea className={styles.textarea} placeholder="Detailed Description" ></textarea>
+          </Field>
+        )
+    }
     return (
       <div className="p-15">
         <Field model="changes.model.commitSummary">
-          <input className={styles.input} type="text" placeholder="Summary"/>
+          <input className={styles.input} type="text" placeholder="Commit Summary" />
         </Field>
-        <Field model="changes.model.commitDescription">
-          <textarea className={styles.textarea} placeholder="Detailed Description"></textarea>
-        </Field>
-
         <div className="layout-row layout-align-center">
-          <IconButton onClick={()=>{this.CommitFiles()}}><MdDone size="22"/>Add Commit Message</IconButton>
+          <IconButton onClick={()=>this.CommitFiles()}><MdDone size="22"/>Add Commit Message</IconButton>
         </div>
       </div>
     );

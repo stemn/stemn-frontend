@@ -1,0 +1,38 @@
+.overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+}
+.sidebar{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  width: 250px;
+  background: white;
+}
+
+.animateOverlay{
+  transition: 0.3s ease opacity;
+  opacity: 0;
+}
+.animateOverlayShow{
+  opacity: 1;
+}
+
+.animateSidebar{
+  transition: 0.3s ease all;
+  transform: translateX(-100%);
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  width: 250px;
+  background: white;
+}
+.animateSidebarShow{
+  transform: translateX(0px);
+}

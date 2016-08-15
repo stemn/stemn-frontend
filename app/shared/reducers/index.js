@@ -12,6 +12,7 @@ import sidebarTimeline from './sidebarTimeline';
 import settings from './settings';
 import projects from './projects';
 import files from './files';
+import menubarLayout from './menubarLayout';
 
 export default function getRootReducer(scope = 'main') {
   let reducers = {
@@ -25,6 +26,7 @@ export default function getRootReducer(scope = 'main') {
     settings,
     projects,
     files,
+    menubarLayout,
   };
 
   if (scope === 'renderer') {

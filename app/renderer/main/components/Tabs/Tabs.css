@@ -26,10 +26,10 @@
     margin-right: 25px;
     transition: color 0.2s ease;
 }
-.inner > a.active, .inner > a:hover {
+.inner > a:global(.active), .inner > a:hover {
     color: primary;
 }
-.inner > a.active:after{
+.inner > a:global(.active):after{
     opacity: 1;
 }
 /*

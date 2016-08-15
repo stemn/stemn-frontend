@@ -1,0 +1,19 @@
+@value primary, bg1, border1 from "app/renderer/assets/css/themes/standard.css";
+
+.fileChangeRow {
+  border-bottom: 1px solid border1;
+  cursor: default;
+}
+.checkbox {
+  padding: 8px;
+}
+.text {
+  padding: 8px;
+}
+.fileChangeRow:hover {
+  background: bg1;
+}
+.active {
+  background: primary !important;
+  color: white;
+}

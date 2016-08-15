@@ -3,8 +3,7 @@ import {
   TOGGLE_ALL_CHANGED_FILES
 } from '../actions/changes';
 
-import { modelReducer, formReducer, modeled } from 'react-redux-form';
-import { combineReducers } from 'redux'
+import { formReducer, modeled } from 'react-redux-form';
 
 import {assignAll} from '../helpers/reducerUtils.js'
 
@@ -49,7 +48,10 @@ const initialState = {
       },
     ],
     toggleAll: false,
-    selectedFile: {}
+    selectedFile: {},
+
+    commitSummary: '',
+    commitDescription: ''
   }
 }
 

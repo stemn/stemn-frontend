@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
-import CommitChanges from '../../../main/components/CommitChanges'
-import CommitBox from '../../../main/components/CommitBox/CommitBox'
+import CommitChanges from 'app/renderer/menubar/components/CommitChanges'
+import CommitBox from 'app/renderer/menubar/components/CommitBox/CommitBox'
+import Toolbar from 'app/renderer/menubar/containers/Toolbar'
+import Sidebar from 'app/renderer/menubar/containers/Sidebar'
 
 const commitBoxStyles = {
   borderTop: '1px solid rgba(0, 0, 0, 0.1)',
@@ -9,10 +11,12 @@ const commitBoxStyles = {
 function Home(props) {
   return (
     <div className="layout-column flex">
-      <CommitChanges changes={props.changes} actToggleAll={props.actToggleAll} selectedFileChange={props.selectedFileChange}/>
+      <Toolbar>Project Spartan Spear</Toolbar>
+      <CommitChanges changes={props.changes} actToggleAll={props.actToggleAll}/>
       <div style={commitBoxStyles}>
         <CommitBox changes={props.changes}/>
       </div>
+      <Sidebar />
     </div>
   );
 }

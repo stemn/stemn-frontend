@@ -1,0 +1,13 @@
+@value primary, border1 from "app/renderer/assets/css/themes/standard.css";
+
+.toolbar{
+/*  height: 30px;*/
+/*  border-bottom: 1px solid border1;*/
+  padding: 10px;
+  background: primary;
+  color: white;
+}
+.text{
+  font-size: 14px;
+  padding: 0 10px;
+}
