@@ -7,6 +7,7 @@ import Sidebar from 'app/renderer/menubar/containers/Sidebar'
 const commitBoxStyles = {
   borderTop: '1px solid rgba(0, 0, 0, 0.1)',
   background: 'rgba(0, 0, 0, 0.03)',
+  marginTop: '-1px'
 }
 function Home(props) {
   return (

@@ -2,7 +2,7 @@ import os from 'os';
 import { app, ipcMain, dialog } from 'electron';
 //import pify from 'pify';
 //import jsonStorage from 'electron-json-storage';
-import createMainWindow from './createMainWindow';
+import { createMainWindow, showMainWindow } from './createMainWindow';
 import { createMenuBar, showMenuWindow } from './createMenuBarWindow';
 import configureStore from '../shared/store/configureStore';
 import tray from './tray';
@@ -51,6 +51,12 @@ if(!squirrelStartup){
 
     ipcMain.on('redux-action', (event, payload) => {
       store.dispatch(payload);
+    });
+
+    ipcMain.on('electron-action', (event, payload) => {
+      if(payload.type == 'WINDOW_MAIN_OPEN'){
+        showMainWindow();
+      }
     });
 
     app.on('window-all-closed', () => {

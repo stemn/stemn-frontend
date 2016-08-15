@@ -3,7 +3,6 @@ import { Link } from 'react-router';
 
 // Components
 import Tabs from 'app/renderer/main/components/Tabs/Tabs'
-import TabsStyles from 'app/renderer/main/components/Tabs/Tabs.css'
 import Header from 'app/renderer/main/containers/Header'
 
 // Styles
@@ -27,10 +26,10 @@ export default class extends React.Component{
           <h1 className={pageStyles.title}>{this.props.project ? this.props.project.name : ''}</h1>
         </Header>
         <Tabs size="lg">
-          <Link activeClassName={TabsStyles.active} to={baseLink+'/changes'}>Changes</Link>
-          <Link activeClassName={TabsStyles.active} to={baseLink+'/feed'}>Feed</Link>
-          <Link activeClassName={TabsStyles.active} to={baseLink+'/tasks'}>Tasks</Link>
-          <Link activeClassName={TabsStyles.active} to={baseLink+'/settings'}>Settings</Link>
+          <Link activeClassName="active" to={baseLink+'/changes'}>Changes</Link>
+          <Link activeClassName="active" to={baseLink+'/feed'}>Feed</Link>
+          <Link activeClassName="active" to={baseLink+'/tasks'}>Tasks</Link>
+          <Link activeClassName="active" to={baseLink+'/settings'}>Settings</Link>
         </Tabs>
         {this.props.children}
       </div>

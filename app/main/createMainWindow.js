@@ -5,16 +5,16 @@ const mainHtml = path.join(__dirname, '../renderer/assets/html/main.html');
 
 let browserWindow = null;
 
-function showWindow() {
-//  browserWindow.maximize();
+export const showMainWindow = () => {
+  //  browserWindow.maximize();
   browserWindow.show();
   browserWindow.focus();
 }
 
-export default function createWindow({ uri = '/' } = {}) {
+export const createMainWindow =  function createWindow({ uri = '/' } = {}) {
   if (browserWindow !== null) {
     if (!browserWindow.webContents.isLoading()) {
-      showWindow();
+      showMainWindow();
     }
     return browserWindow;
   }
@@ -45,7 +45,7 @@ export default function createWindow({ uri = '/' } = {}) {
   });
 
   browserWindow.webContents.on('did-finish-load', () => {
-    showWindow();
+    showMainWindow();
   });
   browserWindow.webContents.on('will-navigate', handleRedirect);
   browserWindow.webContents.on('new-window', handleRedirect);
@@ -69,3 +69,4 @@ export default function createWindow({ uri = '/' } = {}) {
 
   return browserWindow;
 }
+

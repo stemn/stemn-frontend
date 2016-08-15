@@ -1,4 +1,5 @@
 import React from 'react';
+import * as ElectronWindowActions from 'app/shared/electronActions/window.js';
 
 // Styles
 import classNames from 'classnames';
@@ -10,11 +11,11 @@ export default class extends React.Component{
   render() {
     return (
       <div className={classNames(toolbarStyles.toolbar, 'layout-row layout-align-start-center')}>
-        <MdMenu size="20" onClick={()=>this.props.MenubarLayoutActions.toggleSidebar(true)}/>
+        <MdMenu size="22" onClick={()=>this.props.MenubarLayoutActions.toggleSidebar(true)}/>
         <div className={classNames(toolbarStyles.text, 'flex')}>
           {this.props.children}
         </div>
-        <MdOpenInNew size="20"/>
+        <MdOpenInNew onClick={()=>ElectronWindowActions.windowMainOpen()} size="22"/>
       </div>
     );
   }

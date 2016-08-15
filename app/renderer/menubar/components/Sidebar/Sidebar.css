@@ -6,14 +6,6 @@
   bottom: 0;
   background: rgba(0, 0, 0, 0.3);
 }
-.sidebar{
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  top: 0;
-  width: 250px;
-  background: white;
-}
 
 .animateOverlay{
   transition: 0.3s ease opacity;
@@ -23,16 +15,17 @@
   opacity: 1;
 }
 
-.animateSidebar{
-  transition: 0.3s ease all;
-  transform: translateX(-100%);
+.sidebar{
   position: absolute;
   left: 0;
   bottom: 0;
   top: 0;
   width: 250px;
   background: white;
+
+  transition: 0.3s ease all;
+  transform: translateX(-100%);
 }
-.animateSidebarShow{
-  transform: translateX(0px);
+.sidebarShow{
+  transform: translateX(0);
 }

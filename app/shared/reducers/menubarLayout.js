@@ -1,5 +1,5 @@
 const initialState = {
-  showSidebar: true // shows the sidebar
+  showSidebar: false // shows the sidebar
 }
 
 export default (state = initialState, action) => {

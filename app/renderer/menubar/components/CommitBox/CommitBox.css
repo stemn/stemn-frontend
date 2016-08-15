@@ -1,8 +1,7 @@
 .input {
-  padding: 5px;
+  padding: 10px;
   display: block;
   width: 100%;
-  margin-bottom: 15px;
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
 .input:focus {
@@ -10,8 +9,18 @@
   border: 1px solid rgba(0, 0, 0, 0.4);
 }
 
+.container{
+  overflow: hidden;
+  height: 0;
+  transition: height 0.3s ease;
+}
+.containerShow{
+  height: 142px;
+}
+
 .textarea {
-  padding: 5px;
+  margin-top: 15px;
+  padding: 10px;
   display: block;
   width: 100%;
   margin-bottom: 10px;
@@ -23,3 +32,4 @@
   outline: none;
   border: 1px solid rgba(0, 0, 0, 0.4);
 }
+

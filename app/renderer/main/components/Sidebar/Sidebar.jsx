@@ -7,8 +7,8 @@ import _ from 'lodash';
 
 
 // Components
-//import LoadingOverlay from '../Loading/LoadingOverlay/LoadingOverlay';
 import SidebarContextmenu from './SidebarContextmenu';
+import SidebarProjectButton from 'app/renderer/main/components/Sidebar/SidebarProjectButton.jsx'
 
 // Styles
 import classNames from 'classnames';
@@ -16,20 +16,8 @@ import styles from './Sidebar.css';
 import userStyles from './SidebarAvatar.css';
 
 import {MdAdd, MdSettings, MdSearch, MdMenu} from 'react-icons/lib/md';
-import {GoRepo} from 'react-icons/lib/go';
 
-const Project = (props) => {
-  return (
-    <Link className={classNames(styles.sidebarButton, {[styles.active] : props.isActive} )} key={props.item._id} to={`/project/${props.item.stub}/changes`}>
-      <div className="layout-row layout-align-start-center">
-        <GoRepo size="15"/>
-        <div className={styles.text + ' flex'}>{props.item.name}</div>
-      </div>
-    </Link>
-  )
-}
-
-const ProjectWithContext = ContextMenuLayer('multi', (props) => (props.item))(Project);
+const ProjectWithContext = ContextMenuLayer('multi', (props) => (props.item))(SidebarProjectButton);
 
 export default class extends React.Component{
   componentDidMount() {

@@ -1,6 +1,9 @@
 import path from 'path';
 import { Tray, Menu } from 'electron';
 
+import { showMainWindow } from './createMainWindow';
+
+
 const trayIcon = path.join(__dirname, '../renderer/assets/images/logo.png');
 let appIcon = null;
 
@@ -9,6 +12,9 @@ export default function create() {
   const contextMenu = Menu.buildFromTemplate([
     {
       label: 'Open Main Window',
+      click: function () {
+        showMainWindow()
+      }
     }, {
       type: 'separator'
     }, {

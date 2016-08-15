@@ -1,0 +1,33 @@
+.sidebarButton{
+  display: block;
+  width: 100%;
+  background: none;
+  outline: none;
+
+  padding: 15px 20px;
+  font-size: 12px;
+
+}
+.sidebarButton:hover{
+  background: rgba(0, 0, 0, 0.05);
+}
+.sidebarButton.active{
+  background: rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+.sidebarButton.active:after{
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  bottom: 0;
+  top: 0;
+  width: 4px;
+  background: primary;
+}
+.sidebarButton .text{
+  padding-left: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
