@@ -1,0 +1,5 @@
+@value border1 from "app/renderer/assets/css/themes/standard.css";
+
+.panelRight{
+  border-left: 1px solid border1;
+}

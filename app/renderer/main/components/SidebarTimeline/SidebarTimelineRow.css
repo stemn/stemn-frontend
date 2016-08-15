@@ -1,0 +1,33 @@
+@value primary, secondary, bg1, border1 from "app/renderer/assets/css/themes/standard.css";
+
+.timelineRow{
+  border-bottom: 1px solid border1;
+  cursor: default;
+}
+.text{
+  padding-left: 10px;
+}
+.inner{
+  padding: 8px;
+}
+.button{
+  padding: 4px 2px 4px 8px;
+  margin-right: 10px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
+  color: white;
+}
+.button svg{
+  transition: 0.1s ease all;
+}
+.buttonActive svg{
+  transform: rotate(90deg);
+}
+
+.timelineRow.active{
+  background: primary !important;
+  color: white;
+}
+.timelineRow:hover{
+  background: bg1;
+}

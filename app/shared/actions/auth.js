@@ -1,4 +1,5 @@
 import http from 'axios';
+import { push } from 'react-router-redux'
 import {ipcRenderer} from 'electron';
 
 export const aliases = {};
@@ -47,5 +48,23 @@ export function removeHttpHeaders() {
   delete http.defaults.headers.common['Authorization'];
   return {
       type:'AUTH/REMOVE_HTTP_HEADER',
+  }
+}
+
+export function clearUserData() {
+  return {
+      type:'AUTH/CLEAR_USER_DATA',
+  }
+}
+
+export function logout() {
+  return (dispatch) => {
+    dispatch(clearUserData());
+    dispatch(removeHttpHeaders());
+    dispatch(removeAuthToken());
+    setTimeout(()=>{dispatch(push('/login'))}, 1)
+    dispatch({
+        type:'AUTH/LOGOUT',
+    })
   }
 }

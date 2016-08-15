@@ -6,7 +6,7 @@ const mainHtml = path.join(__dirname, '../renderer/assets/html/main.html');
 let browserWindow = null;
 
 function showWindow() {
-  browserWindow.maximize();
+//  browserWindow.maximize();
   browserWindow.show();
   browserWindow.focus();
 }

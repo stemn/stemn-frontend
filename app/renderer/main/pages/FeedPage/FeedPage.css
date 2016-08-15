@@ -1,0 +1,17 @@
+@value border1 from "app/renderer/assets/css/themes/standard.css";
+
+.commitInfo{
+  padding: 10px 20px;
+  border-bottom: 1px solid border1;
+}
+
+.description{
+  margin-bottom: 15px;
+}
+
+.avatar{
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 50%;
+}

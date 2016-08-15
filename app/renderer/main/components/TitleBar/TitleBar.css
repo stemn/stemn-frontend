@@ -1,0 +1,44 @@
+.button{
+  width: 46px;
+  height: 32px;
+  line-height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  fill: rgba(0, 0, 0, 0.4);
+  transition: 0.2s ease all;
+}
+.button:hover{
+  background: rgba(0, 0, 0, 0.05);
+  fill: black;
+}
+
+.button svg{
+  width: 10px;
+  height: 10px;
+}
+.bar{
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  left: 45px;
+  height: 32px;
+}
+.dragger{
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+  cursor: default;
+}
+
+.light .button{
+  fill: rgba(255, 255, 255, 0.6);
+}
+.light .button:hover{
+  fill: rgba(255, 255, 255, 1);
+}
+
+.buttonClose:hover{
+  background: rgb(232,17,35);
+  fill: white;
+}

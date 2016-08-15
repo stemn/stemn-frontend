@@ -7,20 +7,18 @@
 
 
   background: transparent;
-/*
-  &:focus{
-    outline: none;
-  }
-  &:hover{
-    background: rgba(0, 0, 0, 0.03);
-  }
-  &.active{
-    background: rgb(42, 42, 42);
-    color: white;
-    border: 1px solid rgb(42, 42, 42);
-    &:hover{
-      background: rgb(42, 42, 42);
-    }
-  }
-*/
+}
+.navButton:focus{
+  outline: none;
+}
+.navButton:hover{
+  background: rgba(0, 0, 0, 0.03);
+}
+.navButton.active{
+  background: rgb(42, 42, 42);
+  color: white;
+  border: 1px solid rgb(42, 42, 42);
+}
+.navButton.active:hover{
+  background: rgb(42, 42, 42);
 }

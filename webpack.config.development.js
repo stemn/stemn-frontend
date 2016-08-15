@@ -65,4 +65,5 @@ const config = {
   target: 'electron-renderer',
 };
 
+
 export default config;

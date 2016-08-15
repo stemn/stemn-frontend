@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 
 import ContentSidebar from '../ContentSidebar';
-import Timeline       from '../Timeline/Timeline';
+import Timeline       from '../../containers/Timeline';
 import CommitChanges  from '../CommitChanges';
-import CommitBox from '../CommitBox/CommitBox'
+import CommitBox      from 'app/renderer/main/components/CommitBox/CommitBox.jsx'
+import PreviewFile    from 'app/renderer/main/containers/PreviewFile';
+
+//import CommitBox from '../CommitBox/CommitBox'
 
 
 // Styles
@@ -14,10 +17,10 @@ export default (props) => {
     borderTop: '1px solid rgba(0, 0, 0, 0.1)',
     background: 'rgba(0, 0, 0, 0.03)'
   }
+//      <Timeline />
 
   return (
     <div className="layout-column flex rel-box">
-      <Timeline />
       <div className="layout-row flex">
         <div className="layout-column">
           <ContentSidebar>
@@ -28,7 +31,8 @@ export default (props) => {
           </ContentSidebar>
         </div>
         <div className="layout-column">
-          <h1>{props.changes.model.selectedFile.name}</h1>
+          {/*<h1>{props.changes.model.selectedFile.name}</h1>*/}
+          <PreviewFile projectStub="stemn" path="README.md" />
         </div>
       </div>
     </div>

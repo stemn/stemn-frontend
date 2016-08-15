@@ -11,6 +11,9 @@ import ChangesPage from './containers/ChangesPage';
 import LoginPage from './containers/LoginPage';
 //import ErrorPage from './containers/ErrorPage/ErrorPage.container.js';
 import FeedPage from './containers/FeedPage';
+import SettingsPage from './pages/SettingsPage/SettingsPage.container.js';
+import ProjectPage from './pages/ProjectPage/ProjectPage.container.js';
+import ProjectSettingsPage from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage';
 
 // Actions
 const AuthActions = require('../../shared/actions/auth');
@@ -38,24 +41,30 @@ export default (store) => {
   };
 
   const requireAuth = (nextState, replace, callback) => {
-    if (!store.getState().auth.user._id) {
-      replace('/login');
-    }
+//    if (!store.getState().auth.user._id) {
+//      replace('/login');
+//    }
     callback();
   };
 
   const requireNonAuth = (nextState, replace, callback) => {
-    if (store.getState().auth.user._id) {
-      replace('/');
-    }
+//    if (store.getState().auth.user._id) {
+//      replace('/');
+//    }
     callback();
   };
 
   return (
     <Route component={RootAppPage} onEnter={getUserData}>
       <Route component={AuthedAppPage} onEnter={requireAuth}>
+        <Route path="/project/:stub" component={ProjectPage}>
+          <Route path="/project/:stub/changes" component={ChangesPage}/>
+          <Route path="/project/:stub/feed" component={FeedPage}/>
+          <Route path="/project/:stub/settings" component={ProjectSettingsPage}/>
+        </Route>
         <Route path="/" component={ChangesPage}/>
         <Route path="/feed" component={FeedPage}/>
+        <Route path="/settings" component={SettingsPage}/>
       </Route>
       <Route component={UnAuthedAppPage}>
         <Route onEnter={requireNonAuth}>

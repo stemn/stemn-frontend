@@ -8,6 +8,10 @@ import changes from './changes';
 import auth from './auth';
 import login from './login';
 import sidebar from './sidebar';
+import sidebarTimeline from './sidebarTimeline';
+import settings from './settings';
+import projects from './projects';
+import files from './files';
 
 export default function getRootReducer(scope = 'main') {
   let reducers = {
@@ -17,6 +21,10 @@ export default function getRootReducer(scope = 'main') {
     auth,
     login,
     sidebar,
+    sidebarTimeline,
+    settings,
+    projects,
+    files,
   };
 
   if (scope === 'renderer') {

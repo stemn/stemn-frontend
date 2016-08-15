@@ -1,16 +1,15 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import { persistState } from 'redux-devtools';
+//import { persistState } from 'redux-devtools';
 import thunk from 'redux-thunk';
-//import promise from 'redux-promise';
 import promise from 'redux-promise-middleware';
 import createLogger from 'redux-logger';
 import { hashHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
 import getRootReducer from '../reducers';
+
 import forwardToMain from './middleware/forwardToMain';
 import forwardToRenderer from './middleware/forwardToRenderer';
 import triggerAlias from './middleware/triggerAlias';
-import DevTools from '../../renderer/main/components/DevTools';
 
 export default function configureStore(initialState, scope = 'main') {
   const logger = createLogger({
@@ -47,12 +46,12 @@ export default function configureStore(initialState, scope = 'main') {
   ];
 
   if (/*! process.env.NODE_ENV && */scope === 'renderer') {
-    enhanced.push(DevTools.instrument());
-    enhanced.push(persistState(
-      window.location.href.match(
-        /[?&]debug_session=([^&]+)\b/
-      )
-    ));
+    enhanced.push(window.devToolsExtension ? window.devToolsExtension() : noop => noop);
+//    enhanced.push(persistState(
+//      window.location.href.match(
+//        /[?&]debug_session=([^&]+)\b/
+//      )
+//    ));
   }
 
   const rootReducer = getRootReducer(scope);
@@ -66,5 +65,4 @@ export default function configureStore(initialState, scope = 'main') {
   }
 
   return store;
-
 }

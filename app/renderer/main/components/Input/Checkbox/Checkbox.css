@@ -44,5 +44,5 @@
   opacity: 1;
 }
 .checkbox:hover label:after {
-  opacity: 0.2;
+  opacity: 0;
 }

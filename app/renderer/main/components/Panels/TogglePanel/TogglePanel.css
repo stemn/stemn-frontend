@@ -1,0 +1,17 @@
+@value border1 from "app/renderer/assets/css/themes/standard.css";
+
+.titleBar{
+  padding: 10px;
+  border-bottom: 1px solid border1;
+  cursor: default;
+}
+.toggleIcon{
+  margin-right: 10px;
+  transition: 0.1s ease all;
+}
+.toggleIconActive{
+  transform: rotate(90deg);
+}
+.content{
+  border-bottom: 1px solid border1;
+}

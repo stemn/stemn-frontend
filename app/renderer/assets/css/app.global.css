@@ -14,3 +14,6 @@
 @import "./tooltip.css";
 @import './context-menu.css';
 @import './scroll.css';
+@import './popup.css';
+@import './input.css';
+@import './other/codemirror.css';

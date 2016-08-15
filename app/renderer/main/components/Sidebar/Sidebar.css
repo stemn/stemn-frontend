@@ -1,26 +1,22 @@
+@value primary, secondary from "app/renderer/assets/css/themes/standard.css";
+
 .sidebar{
-  display: inline-block;
   width: 0px;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
   transition: 0.3s ease all;
-
+  background: rgba(0, 0, 0, 0.03);
 }
 .sidebar.open{
-  width: 230px;
+  width: 300px;
 }
+
 
 .sidebarToolbar{
-  margin-top: 31px;
-  height: 52px;
-  padding: 10px;
-}
-
-.title{
-  padding: 5px 15px;
-  font-size: 13px;
-  opacity: 0.8
+/*  margin-top: 31px;*/
+  height: 55px;
+  padding: 10px 20px;
 }
 
 .sidebarButton{
@@ -29,7 +25,7 @@
   background: none;
   outline: none;
 
-  padding: 10px 15px;
+  padding: 15px 20px;
   font-size: 12px;
 
 }
@@ -37,11 +33,36 @@
   background: rgba(0, 0, 0, 0.05);
 }
 .sidebarButton.active{
-  background: black;
+  background: rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+.sidebarButton.active:after{
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  bottom: 0;
+  top: 0;
+  width: 4px;
+  background: primary;
 }
 .sidebarButton .text{
   padding-left: 10px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.sidebarSearch{
+  position: relative;
+  margin: 0 20px 10px;
+}
+.sidebarSearch input{
+  padding: 14px;
+}
+.sidebarSearchIcon{
+  position: absolute;
+  right: 8px;
+  top: 10px;
+  bottom: 0;
+  color: rgba(0, 0, 0, 0.3);
 }
