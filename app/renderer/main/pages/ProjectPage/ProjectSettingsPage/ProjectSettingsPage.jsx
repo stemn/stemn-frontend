@@ -4,6 +4,7 @@ import React from 'react';
 import Tabs from 'app/renderer/main/components/Tabs/Tabs'
 import Toggle from 'app/renderer/main/components/Input/Toggle/Toggle'
 import UserSearch from 'app/renderer/main/modules/UserSearch/UserSearch.container.js'
+import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx'
 
 // Styles
 import classNames from 'classnames';
@@ -22,7 +23,7 @@ export default class extends React.Component{
   render() {
     const team = this.props.project.team.map((item)=>
       <div className="layout-row layout-align-start-center">
-        <div>Picture</div>
+        <UserAvatar picture={item.picture} size="50px"/>
         <div className="flex">
           <div>{item.name}</div>
           <div>Owner: Can do everything</div>
