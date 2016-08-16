@@ -7,5 +7,6 @@ import HomePage from './containers/HomePage';
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={HomePage} />
+    <Route path="/project/:stub/changes" component={HomePage} />
   </Route>
 );

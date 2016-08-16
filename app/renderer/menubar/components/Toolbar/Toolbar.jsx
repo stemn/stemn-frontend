@@ -5,7 +5,7 @@ import * as ElectronWindowActions from 'app/shared/electronActions/window.js';
 import classNames from 'classnames';
 import toolbarStyles from './Toolbar.css'
 
-import {MdMenu, MdOpenInNew} from 'react-icons/lib/md';
+import {MdMenu, MdOpenInNew, MdNotificationsNone} from 'react-icons/lib/md';
 
 export default class extends React.Component{
   render() {
@@ -15,6 +15,7 @@ export default class extends React.Component{
         <div className={classNames(toolbarStyles.text, 'flex')}>
           {this.props.children}
         </div>
+        <MdNotificationsNone onClick={()=>ElectronWindowActions.windowMainOpen()} size="22" style={{marginRight: '10px'}}/>
         <MdOpenInNew onClick={()=>ElectronWindowActions.windowMainOpen()} size="22"/>
       </div>
     );

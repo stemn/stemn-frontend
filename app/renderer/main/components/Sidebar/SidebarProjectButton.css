@@ -1,8 +1,11 @@
+@value primary, secondary from "app/renderer/assets/css/themes/standard.css";
+
 .sidebarButton{
   display: block;
   width: 100%;
   background: none;
   outline: none;
+  position: relative;
 
   padding: 15px 20px;
   font-size: 12px;
@@ -11,11 +14,11 @@
 .sidebarButton:hover{
   background: rgba(0, 0, 0, 0.05);
 }
-.sidebarButton.active{
+.sidebarButton:global(.active){
   background: rgba(0, 0, 0, 0.05);
   position: relative;
 }
-.sidebarButton.active:after{
+.sidebarButton:global(.active):after{
   content: '';
   position: absolute;
   bottom: 0px;

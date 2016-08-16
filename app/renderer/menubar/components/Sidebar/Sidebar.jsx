@@ -21,7 +21,7 @@ export default class extends React.Component{
         <div className={classNames(styles.sidebar, 'layout-column', {[styles.sidebarShow] : this.props.menubarLayout.showSidebar})}>
           <div className="flex scroll-box">
             {this.props.sidebar.projects.map((item)=>
-               <SidebarProjectButton item={item}/>
+               <SidebarProjectButton item={item} to={`/project/${item.stub}/changes`} clickFn={()=>this.props.MenubarLayoutActions.toggleSidebar(false)}/>
             )}
           </div>
         </div>

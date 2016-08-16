@@ -9,7 +9,9 @@ import getRootReducer from '../reducers';
 
 import forwardToMain from './middleware/forwardToMain';
 import forwardToRenderer from './middleware/forwardToRenderer';
+import forwardToRendererWindow from './middleware/forwardToRendererWindow';
 import triggerAlias from './middleware/triggerAlias';
+import routerFix from './middleware/routerFix';
 
 export default function configureStore(initialState, scope = 'main') {
   const logger = createLogger({
@@ -25,7 +27,9 @@ export default function configureStore(initialState, scope = 'main') {
     middleware = [
       promise(),
       thunk,
+      routerFix,
       forwardToMain,
+      forwardToRendererWindow,
       router,
     ];
     if (process.env.NODE_ENV == 'development') {

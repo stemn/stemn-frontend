@@ -57,7 +57,7 @@ export default class extends React.Component{
         </div>
 
         <div className="scroll-box flex">
-            {filteredProjects.map((item, idx) => <ProjectWithContext key={idx} item={item} isActive={item.stub == this.props.params.stub}/>)}
+            {filteredProjects.map((item, idx) => <ProjectWithContext key={idx} item={item} isActive={item.stub == this.props.params.stub} to={`/project/${item.stub}/changes`}/>)}
             <SidebarContextmenu />
         </div>
 

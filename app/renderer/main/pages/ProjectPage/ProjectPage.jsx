@@ -11,11 +11,13 @@ import pageStyles from './ProjectPage.css'
 
 export default class extends React.Component{
   componentWillMount() {
-    this.props.ProjectsActions.getProject({stub: this.props.params.stub})
+    this.props.ProjectsActions.getProject({stub: this.props.params.stub});
+    this.props.ProjectActions.setActiveProject({stub: this.props.params.stub});
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.params.stub !== this.props.params.stub) {
-      this.props.ProjectsActions.getProject({stub: nextProps.params.stub})
+      this.props.ProjectsActions.getProject({stub: nextProps.params.stub});
+      this.props.ProjectActions.setActiveProject({stub: nextProps.params.stub});
     }
   }
   render() {

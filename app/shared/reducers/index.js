@@ -10,6 +10,7 @@ import login from './login';
 import sidebar from './sidebar';
 import sidebarTimeline from './sidebarTimeline';
 import settings from './settings';
+import project from './project';
 import projects from './projects';
 import files from './files';
 import menubarLayout from './menubarLayout';
@@ -24,6 +25,7 @@ export default function getRootReducer(scope = 'main') {
     sidebar,
     sidebarTimeline,
     settings,
+    project,
     projects,
     files,
     menubarLayout,
