@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 // Components
 import Tabs from 'app/renderer/main/components/Tabs/Tabs'
 import Toggle from 'app/renderer/main/components/Input/Toggle/Toggle'
+import UserSearch from 'app/renderer/main/modules/UserSearch/UserSearch.container.js'
 
 // Styles
 import classNames from 'classnames';
@@ -31,9 +32,9 @@ export default class extends React.Component{
     return (
       <div className="layout-column flex rel-box" style={PageStyles}>
         {team}
+        <UserSearch ProjectSettingsActions={this.props.ProjectSettingsActions} />
         <br />
         <br />
-        <Toggle />
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quasi, dicta. Aliquam excepturi obcaecati saepe corporis placeat, maiores quo dicta ipsum accusamus voluptatem dolor, sint, quis, quibusdam consequatur quod culpa.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quasi, dicta. Aliquam excepturi obcaecati saepe corporis placeat, maiores quo dicta ipsum accusamus voluptatem dolor, sint, quis, quibusdam consequatur quod culpa.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quasi, dicta. Aliquam excepturi obcaecati saepe corporis placeat, maiores quo dicta ipsum accusamus voluptatem dolor, sint, quis, quibusdam consequatur quod culpa.</p>
@@ -42,3 +43,5 @@ export default class extends React.Component{
     );
   }
 };
+
+//        <Toggle />

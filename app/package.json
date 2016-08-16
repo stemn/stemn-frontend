@@ -41,6 +41,7 @@
     "react-addons-css-transition-group": "^15.2.1",
     "react-addons-shallow-compare": "^15.1.0",
     "react-addons-update": "^15.3.0",
+    "react-autosuggest": "^5.0.2",
     "react-contextmenu": "^1.6.2",
     "react-desktop": "^0.2.5",
     "react-dom": "^15.0.1",

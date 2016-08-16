@@ -1,0 +1,53 @@
+
+@value primary, border1, bg1 from "app/renderer/assets/css/themes/standard.css";
+
+:global(.react-autosuggest__container) {
+  position: relative;
+}
+
+:global(.react-autosuggest__input) {
+  width: 240px;
+  height: 40px;
+  padding: 10px;
+  border: 1px solid border1;
+}
+
+:global(.react-autosuggest__input:focus) {
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+:global(.react-autosuggest__container--open .react-autosuggest__input) {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+:global(.react-autosuggest__suggestions-container) {
+  display: none;
+}
+
+:global(.react-autosuggest__container--open .react-autosuggest__suggestions-container) {
+  display: block;
+  position: absolute;
+  top: 39px;
+  width: 240px;
+  border: 1px solid rgba(0, 0, 0, 0.4);;
+  background-color: #fff;
+  z-index: 2;
+}
+
+:global(.react-autosuggest__suggestions-list) {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+:global(.react-autosuggest__suggestion) {
+  cursor: pointer;
+  padding: 10px;
+}
+
+:global(.react-autosuggest__suggestion--focused) {
+  background-color: primary;
+  color: white;
+}

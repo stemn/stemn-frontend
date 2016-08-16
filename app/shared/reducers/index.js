@@ -11,9 +11,12 @@ import sidebar from './sidebar';
 import sidebarTimeline from './sidebarTimeline';
 import settings from './settings';
 import project from './project';
+import projectSettings from './projectSettings';
 import projects from './projects';
 import files from './files';
 import menubarLayout from './menubarLayout';
+
+import userSearch from '../../renderer/main/modules/UserSearch/UserSearch.reducer.js';
 
 export default function getRootReducer(scope = 'main') {
   let reducers = {
@@ -26,9 +29,11 @@ export default function getRootReducer(scope = 'main') {
     sidebarTimeline,
     settings,
     project,
+    projectSettings,
     projects,
     files,
     menubarLayout,
+    userSearch,
   };
 
   if (scope === 'renderer') {
