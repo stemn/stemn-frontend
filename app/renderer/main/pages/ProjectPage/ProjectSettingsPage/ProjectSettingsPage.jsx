@@ -20,6 +20,9 @@ export default class extends React.Component{
   componentWillReceiveProps(nextProps) {
 
   }
+  selectFn(selection){
+    console.log(selection);
+  }
   render() {
     const team = this.props.project.team.map((item)=>
       <div className="layout-row layout-align-start-center">
@@ -33,7 +36,7 @@ export default class extends React.Component{
     return (
       <div className="layout-column flex rel-box" style={PageStyles}>
         {team}
-        <UserSearch ProjectSettingsActions={this.props.ProjectSettingsActions} />
+        <UserSearch select={this.selectFn} />
         <br />
         <br />
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quasi, dicta. Aliquam excepturi obcaecati saepe corporis placeat, maiores quo dicta ipsum accusamus voluptatem dolor, sint, quis, quibusdam consequatur quod culpa.</p>

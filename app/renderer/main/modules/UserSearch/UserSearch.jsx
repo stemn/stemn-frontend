@@ -16,7 +16,9 @@ export default React.createClass({
   },
 
   onSuggestionsUpdateRequested({ value }) {
-    this.props.UserSearchActions.loadSuggestions(value);
+    if(value.length > 0){
+      this.props.UserSearchActions.loadSuggestions(value);
+    }
   },
 
   getSuggestionValue(suggestion) {
@@ -24,37 +26,34 @@ export default React.createClass({
   },
 
   renderSuggestion(suggestion, {query}) {
-//    return (
-//      <div className="layout-row layout-align-start-center">
-//        <UserAvatar picture={suggestion.picture}/>
-//        <div style={{marginLeft: '15px'}} className="flex">{suggestion.name}</div>
-//      </div>
-//    );
-  const suggestionText = suggestion.name;
-  const matches = AutosuggestHighlight.match(suggestionText, query);
-  const parts = AutosuggestHighlight.parse(suggestionText, matches);
+    const suggestionText = suggestion.name;
+    const matches = AutosuggestHighlight.match(suggestionText, query);
+    const parts = AutosuggestHighlight.parse(suggestionText, matches);
 
-  return (
-    <div className="layout-row layout-align-start-center">
-      <UserAvatar picture={suggestion.picture}/>
-      <div style={{marginLeft: '10px'}} className="flex">
-      {
-        parts.map((part, index) => {
-          const className = part.highlight ? 'highlight' : null;
-          return (
-            <span className={className} key={index}>{part.text}</span>
-          );
-        })
-      }
+    return (
+      <div className="layout-row layout-align-start-center">
+        <UserAvatar picture={suggestion.picture}/>
+        <div style={{marginLeft: '10px'}} className="flex">
+        {
+          parts.map((part, index) => {
+            const className = part.highlight ? 'highlight' : null;
+            return (
+              <span className={className} key={index}>{part.text}</span>
+            );
+          })
+        }
+        </div>
       </div>
-    </div>
 
-  );
-
+    );
   },
 
   onSuggestionSelected(event, { suggestion, suggestionValue, sectionIndex, method }){
-    this.props.UserSearchActions.selectSuggestion(suggestion)
+    if(this.props.select){
+      this.props.UserSearchActions.clearSuggestions();
+      this.props.UserSearchActions.updateInputValue('')
+      this.props.select(suggestion);
+    }
   },
 
   render() {

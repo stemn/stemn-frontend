@@ -6,7 +6,6 @@ import {
 const initialState = {
   value: '',
   suggestions: [],
-  model: '',
   isLoading: false
 };
 
@@ -35,11 +34,6 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         suggestions: action.payload.data,
         isLoading: false
-      };
-    case 'USER_SEARCH/SELECT_SUGGESTION':
-      console.log(action.payload.value);
-      return {
-        ...state
       };
 
     default:
