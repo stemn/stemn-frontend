@@ -13,7 +13,7 @@ import LoginPage from './containers/LoginPage';
 import FeedPage from './containers/FeedPage';
 import SettingsPage from './pages/SettingsPage/SettingsPage.container.js';
 import ProjectPage from './pages/ProjectPage/ProjectPage.container.js';
-import ProjectSettingsPage from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage';
+import ProjectSettingsPage from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.container.js';
 
 // Actions
 const AuthActions = require('../../shared/actions/auth');

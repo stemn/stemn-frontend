@@ -6,8 +6,6 @@ import Toggle from 'app/renderer/main/components/Input/Toggle/Toggle'
 
 // Styles
 import classNames from 'classnames';
-//import pageStyles from './ProjectPage.css'
-import tabsStyles from 'app/renderer/main/components/Tabs/Tabs.css'
 
 
 const PageStyles = {
@@ -16,17 +14,23 @@ const PageStyles = {
 
 export default class extends React.Component{
   componentWillMount() {
-//    this.props.ProjectsActions.getProject({stub: this.props.params.stub})
   }
   componentWillReceiveProps(nextProps) {
-//    if (nextProps.params.stub !== this.props.params.stub) {
-//      this.props.ProjectsActions.getProject({stub: nextProps.params.stub})
-//    }
+
   }
   render() {
+    const team = this.props.project.team.map((item)=>
+      <div className="layout-row layout-align-start-center">
+        <div>Picture</div>
+        <div className="flex">
+          <div>{item.name}</div>
+          <div>Owner: Can do everything</div>
+        </div>
+      </div>
+    )
     return (
       <div className="layout-column flex rel-box" style={PageStyles}>
-        
+        {team}
         <br />
         <br />
         <Toggle />
@@ -38,8 +42,3 @@ export default class extends React.Component{
     );
   }
 };
-
-//        <Tabs>
-//          <a className={tabsStyles.active}>General Settings</a>
-//          <a>Team Settings</a>
-//        </Tabs>
