@@ -10,6 +10,12 @@ export function selectedFileChange(file) {
       payload: file
   }
 }
+export function commitDescriptionChange({value}) {
+  return {
+      type: 'CHANGES/COMMIT_DESCRIPTION_CHANGE',
+      payload: {value}
+  }
+}
 
 export function actToggleAll(model, value) {
   return (dispatch) => {

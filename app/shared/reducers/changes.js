@@ -66,6 +66,10 @@ const CommitChanges = (state, action) => {
       return {...state,
         files: assignAll(state.files, 'selected', action.payload.value)
       }
+    case 'CHANGES/COMMIT_DESCRIPTION_CHANGE':
+      return {...state,
+        commitDescription: action.payload.value
+      }
     default:
       return state;
   }

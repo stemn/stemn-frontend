@@ -24,9 +24,9 @@ export default (props) => {
       <div className="layout-row flex">
         <div className="layout-column">
           <ContentSidebar>
-            <CommitChanges changes={props.changes} actToggleAll={props.actToggleAll} selectedFileChange={props.selectedFileChange}/>
+            <CommitChanges changes={props.changes} actToggleAll={props.changesActions.actToggleAll} selectedFileChange={props.changesActions.selectedFileChange}/>
             <div style={CommitBoxStyles}>
-              <CommitBox changes={props.changes}/>
+              <CommitBox changes={props.changes} changesActions={props.changesActions}/>
             </div>
           </ContentSidebar>
         </div>
