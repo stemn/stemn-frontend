@@ -30,6 +30,8 @@ export default class extends React.Component{
 
     const nameRegex = new RegExp(this.props.sidebar.searchString, 'i');
     const filteredProjects = this.props.sidebar.projects.filter((project) => nameRegex.test(project.name));
+    const routeState = {meta : {scope: ['main', 'menubar']}}
+
 
     return (
       <div className={sidebarStyle}>
@@ -46,7 +48,7 @@ export default class extends React.Component{
           </PopoverMenu>
 
           <div className="flex"></div>
-           <a onClick={()=>{this.props.sidebarActions.toggleSidebar();}}><MdMenu size="25"/></a>
+          <a onClick={()=>{this.props.sidebarActions.toggleSidebar();}}><MdMenu size="25"/></a>
 
         </div>
         <div className={styles.sidebarSearch}>
@@ -57,7 +59,7 @@ export default class extends React.Component{
         </div>
 
         <div className="scroll-box flex">
-            {filteredProjects.map((item, idx) => <ProjectWithContext key={idx} item={item} isActive={item.stub == this.props.params.stub} to={`/project/${item.stub}/changes`}/>)}
+            {filteredProjects.map((item, idx) => <ProjectWithContext key={idx} item={item} isActive={item.stub == this.props.params.stub} to={{pathname: `/project/${item.stub}/changes`, state: routeState}}/>)}
             <SidebarContextmenu />
         </div>
 
