@@ -9,11 +9,6 @@ import {MdDone} from 'react-icons/lib/md';
 import { MentionsInput, Mention } from 'react-mentions'
 
 export default React.createClass({
-  commitFiles() {
-
-//    this.props.changesActions.commit()
-  },
-
   handleChange(event, newValue, newPlainTextValue, mention){
     this.props.changesActions.commitDescriptionChange({value: newValue})
   },
@@ -32,6 +27,7 @@ export default React.createClass({
         }
       ]
     }
+    console.log(this.props);
     return (
       <div className="p-15">
         <Field model="changes.model.commitSummary">
@@ -50,7 +46,7 @@ export default React.createClass({
         </MentionsInput>
 
         <div className="layout-row layout-align-center">
-          <IconButton onClick={()=>{this.CommitFiles()}}><MdDone size="22"/>Add Commit Message</IconButton>
+          <IconButton onClick={()=>this.props.CommitFn()}><MdDone size="22"/>Add Commit Message</IconButton>
         </div>
       </div>
     );

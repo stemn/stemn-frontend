@@ -17,6 +17,16 @@ export default (props) => {
     borderTop: '1px solid rgba(0, 0, 0, 0.1)',
     background: 'rgba(0, 0, 0, 0.03)'
   }
+
+  const commitFn = () => {
+    console.log(props.model.files);
+    this.props.changesActions.commit({
+      projectId: props.project._id,
+      revisions: ['revisions'],
+      summary: props.changes.model.commitSummary,
+      description: props.changes.model.commitDescription
+    })
+  }
 //      <Timeline />
 
   return (
@@ -26,7 +36,7 @@ export default (props) => {
           <ContentSidebar>
             <CommitChanges changes={props.changes} actToggleAll={props.changesActions.actToggleAll} selectedFileChange={props.changesActions.selectedFileChange}/>
             <div style={CommitBoxStyles}>
-              <CommitBox changes={props.changes} changesActions={props.changesActions}/>
+              <CommitBox changes={props.changes} changesActions={props.changesActions} commitFn={commitFn}/>
             </div>
           </ContentSidebar>
         </div>

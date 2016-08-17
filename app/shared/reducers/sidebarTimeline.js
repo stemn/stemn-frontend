@@ -1,3 +1,5 @@
+var u = require('updeep');
+
 const initialState = {
   timeline: [
     {
@@ -140,9 +142,16 @@ const initialState = {
 export default function (state = initialState, action) {
     switch (action.type) {
         case 'SELECT_TIMELINE_ITEM':
-          return {...state,
-            selected: action.payload
-          }
+          return u({
+            [action.payload.config.meta.stub] : { selected : action.payload}
+          }, state)
+        case 'TIMELINE/FETCH_TIMELINE_FULFILLED':
+          return u({
+            [action.payload.config.meta.stub] : {
+              data : action.payload.data,
+              selected: {},
+            }
+          }, state)
         default:
             return state;
     }

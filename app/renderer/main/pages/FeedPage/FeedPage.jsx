@@ -60,11 +60,10 @@ export default class FeedPage extends React.Component{
 
     return (
       <div className="layout-column flex rel-box">
-        <Timeline />
         <div className="layout-row flex">
           <div className="layout-column">
             <ContentSidebar className="flex">
-              <SidebarTimeline />
+              <SidebarTimeline project={this.props.project}/>
             </ContentSidebar>
           </div>
           <div className="layout-column flex">
@@ -75,3 +74,4 @@ export default class FeedPage extends React.Component{
     );
   }
 }
+//        <Timeline project={this.props.project}/>

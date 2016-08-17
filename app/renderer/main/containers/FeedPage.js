@@ -7,6 +7,13 @@ function mapStateToProps({ sidebarTimeline }) {
   return { feed: sidebarTimeline };
 }
 
+function mapStateToProps({sidebarTimeline, projects}, {params}) {
+  return {
+    feed: sidebarTimeline,
+    project: projects[params.stub]
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(FeedActions, dispatch);
 }

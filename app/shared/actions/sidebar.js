@@ -18,13 +18,16 @@ aliases['FETCH_PROJECTS'] = (args) => {
   return {
     type:'FETCH_PROJECTS',
     payload: http({
-      url: 'https://stemn.com/api/v1/search',
+      url: 'http://localhost:3000/api/v1/search',
       method: 'GET',
       params: {
         type:'project',
-        parentType:'user',
-        parentId: args._id,
-        size: 50
+//        parentType:'user',
+//        parentId: args._id,
+        size: 50,
+        match: 'regex',
+        key: 'name',
+        value: 'Jackson'
       },
     })
   }

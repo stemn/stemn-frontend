@@ -6,7 +6,7 @@ export function getProject({stub}) {
     type: GET_PROJECT,
     payload: http({
       method: 'GET',
-      url: `https://stemn.com/api/v1/projects/${stub}`
+      url: `http://localhost:3000/api/v1/projects/${stub}`
     })
   };
 }

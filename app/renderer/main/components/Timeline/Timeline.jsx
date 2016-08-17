@@ -65,14 +65,14 @@ export default React.createClass({
     const leftStyle = ['0%', '25%', '50%', '98%', '100%'].map((item)=>{return {left: item}});
 
 
-    const latestDate = moment(this.props.feed.timeline[0].timestamp).valueOf();
-    const earlyDate  = moment(this.props.feed.timeline[this.props.feed.timeline.length-1].timestamp).valueOf();
+    const latestDate = moment(this.props.timeline.data[0].timestamp).valueOf();
+    const earlyDate  = moment(this.props.timeline.data[this.props.timeline.data.length-1].timestamp).valueOf();
     const range      = latestDate - earlyDate;
 
-    const Items = this.props.feed.timeline.map((item)=> {
+    const Items = this.props.timeline.data.map((item)=> {
       const percentage = 100 - ((latestDate - moment(item.timestamp).valueOf())/range * 100);
       const posStyle = {left: percentage+'%'};
-      return <a key={item._id} className={classNames(styles.dot, {[styles.active]: this.props.feed.selected._id == item._id})} style={posStyle} onClick={()=>this.props.selectTimelineItem(item)}><PopupTrigger item={item} /></a>
+      return <a key={item._id} className={classNames(styles.dot, {[styles.active]: this.props.timeline.selected._id == item._id})} style={posStyle} onClick={()=>this.props.TimelineActions.selectTimelineItem(item)}><PopupTrigger item={item} /></a>
     });
 
     return (
