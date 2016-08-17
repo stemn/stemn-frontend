@@ -69,4 +69,3 @@ export const createMainWindow =  function createWindow({ uri = '/' } = {}) {
 
   return browserWindow;
 }
-

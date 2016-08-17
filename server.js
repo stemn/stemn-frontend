@@ -7,6 +7,8 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 
 import config from './webpack.config.development';
 
+import stemn from '../stemn/server/app/app';
+
 const app = express();
 const compiler = webpack(config);
 const PORT = 3000;
@@ -20,9 +22,10 @@ app.use(webpackDevMiddleware(compiler, {
 
 app.use(webpackHotMiddleware(compiler));
 
+app.use(stemn);
+
 app.listen(PORT, 'localhost', err => {
   if (err) {
-    console.error(err);
     return;
   }
 

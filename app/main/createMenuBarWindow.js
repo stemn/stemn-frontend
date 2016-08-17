@@ -45,9 +45,9 @@ export const createMenuBar = () => {
     browserWindow = null;
   });
 
-//  browserWindow.on('blur', () => {
-//    browserWindow.hide();
-//  });
+ browserWindow.on('blur', () => {
+   browserWindow.hide();
+ });
 
   return browserWindow;
 }

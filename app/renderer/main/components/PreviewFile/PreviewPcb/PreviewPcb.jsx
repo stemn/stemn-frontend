@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import previewPcbService from './previewPcbService.js';
+import previewPcbService from './PreviewPcbService.js';
 import styles from './PreviewPcb.css';
 
 export default class extends React.Component{
@@ -66,4 +66,3 @@ function errorMessages(layers){
       }
   });
 }
-
