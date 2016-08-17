@@ -6,6 +6,8 @@ import Toggle from 'app/renderer/main/components/Input/Toggle/Toggle'
 import UserSearch from 'app/renderer/main/modules/UserSearch/UserSearch.container.js'
 import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx'
 
+import ProjectPermissionsRadio from 'app/renderer/main/components/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx'
+
 // Styles
 import classNames from 'classnames';
 
@@ -35,15 +37,15 @@ export default class extends React.Component{
     )
     return (
       <div className="layout-column flex rel-box" style={PageStyles}>
+        <h3>Team Members</h3>
         {team}
+        <br />
+        <br />
         <UserSearch select={this.selectFn} />
         <br />
-        <br />
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quasi, dicta. Aliquam excepturi obcaecati saepe corporis placeat, maiores quo dicta ipsum accusamus voluptatem dolor, sint, quis, quibusdam consequatur quod culpa.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quasi, dicta. Aliquam excepturi obcaecati saepe corporis placeat, maiores quo dicta ipsum accusamus voluptatem dolor, sint, quis, quibusdam consequatur quod culpa.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quasi, dicta. Aliquam excepturi obcaecati saepe corporis placeat, maiores quo dicta ipsum accusamus voluptatem dolor, sint, quis, quibusdam consequatur quod culpa.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quasi, dicta. Aliquam excepturi obcaecati saepe corporis placeat, maiores quo dicta ipsum accusamus voluptatem dolor, sint, quis, quibusdam consequatur quod culpa.</p>
-      </div>
+        <h3>Project Permissions</h3>
+        <ProjectPermissionsRadio style={{width: '300px'}} model={this.props.projectSettings} />
+     </div>
     );
   }
 };

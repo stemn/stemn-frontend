@@ -1,0 +1,38 @@
+@value primary, secondary, border1 from "app/renderer/assets/css/themes/standard.css";
+
+.radio{
+  padding: 5px 0;
+}
+.radio input {
+  display: none;
+}
+.radio input + span {
+  background-color: #fefefe;
+  border: 1px solid;
+  border-color: border1;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 7px;
+  padding: 7px;
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+.radio input:checked + span {
+  color: primary;
+}
+.radio input:checked + span:after {
+  background: primary;
+  border-radius: 50%;
+  content: " ";
+  height: 12px;
+  left: 3px;
+  position: absolute;
+  top: 3px;
+  width: 12px;
+}
+.radio label:hover input + span {
+  border-color: primary;
+}
+
+/*http://codepen.io/ed1nh0/pen/GLxmz?editors=1100*/
