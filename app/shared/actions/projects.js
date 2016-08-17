@@ -10,3 +10,13 @@ export function getProject({stub}) {
     })
   };
 }
+
+export function addTeamMember({stub, user}) {
+  return {
+    type: 'PROJECTS/ADD_TEAM_MEMBER',
+    payload: {
+      stub,
+      user
+    }
+  };
+}

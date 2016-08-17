@@ -3,6 +3,9 @@
   font-size: 15px;
   font-weight: 300;
 }
+.text-bold{
+  font-weight: bold;
+}
 .text-description-1{
   color: rgba(0,0,0,0.4);
 }

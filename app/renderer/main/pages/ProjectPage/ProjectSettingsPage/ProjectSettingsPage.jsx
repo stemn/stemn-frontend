@@ -4,7 +4,7 @@ import React from 'react';
 import Tabs from 'app/renderer/main/components/Tabs/Tabs'
 import Toggle from 'app/renderer/main/components/Input/Toggle/Toggle'
 import UserSearch from 'app/renderer/main/modules/UserSearch/UserSearch.container.js'
-import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx'
+import TeamMember from 'app/renderer/main/components/Project/TeamMember/TeamMember.jsx'
 
 import ProjectPermissionsRadio from 'app/renderer/main/components/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx'
 
@@ -16,38 +16,31 @@ const PageStyles = {
   padding: '20px 40px'
 }
 
-export default class extends React.Component{
-  componentWillMount() {
-  }
-  componentWillReceiveProps(nextProps) {
-
-  }
+export default React.createClass({
   selectFn(selection){
-    console.log(selection);
-  }
+    if(!this.props.project.team.find((item)=>item._id == selection._id)){
+      this.props.ProjectsActions.addTeamMember({
+        stub: this.props.project.stub,
+        user: selection
+      })
+    }
+  },
   render() {
-    const team = this.props.project.team.map((item)=>
-      <div className="layout-row layout-align-start-center">
-        <UserAvatar picture={item.picture} size="50px"/>
-        <div className="flex">
-          <div>{item.name}</div>
-          <div>Owner: Can do everything</div>
-        </div>
-      </div>
-    )
     return (
-      <div className="layout-column flex rel-box" style={PageStyles}>
+      <div className="layout-row flex" style={PageStyles}>
+        <div className="flex-50">
         <h3>Team Members</h3>
-        {team}
+        {this.props.project.team.map((item)=><div style={{marginBottom: '15px'}}><TeamMember item={item}/></div>)}
         <br />
         <br />
         <UserSearch select={this.selectFn} />
         <br />
-        <h3>Project Permissions</h3>
-        <ProjectPermissionsRadio style={{width: '300px'}} model={this.props.projectSettings} />
+          <h3>Project Permissions</h3>
+          <ProjectPermissionsRadio model={this.props.projectSettings} />
+        </div>
      </div>
     );
   }
-};
+});
 
 //        <Toggle />
