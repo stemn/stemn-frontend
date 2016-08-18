@@ -14,10 +14,10 @@ const PopupContent = (item) =>{
 
   return (
     <div className={styles.popup + ' layout-row layout-align-start-center'}>
-      <img className={styles.popupImage} src={'https://stemn.com' + item.actor.picture + '?size=thumb&crop=true'} />
+      <img className={styles.popupImage} src={'https://stemn.com' + item.user.picture + '?size=thumb&crop=true'} />
       <div className="flex">
         <b>{stringConcat.end(item.data.summary, 30)}</b>
-        <div>{timeFromNow} by {item.actor.name}</div>
+        <div>{timeFromNow} by {item.user.name}</div>
       </div>
     </div>
     )
@@ -72,7 +72,7 @@ export default React.createClass({
     const Items = this.props.timeline.data.map((item)=> {
       const percentage = 100 - ((latestDate - moment(item.timestamp).valueOf())/range * 100);
       const posStyle = {left: percentage+'%'};
-      return <a key={item._id} className={classNames(styles.dot, {[styles.active]: this.props.timeline.selected._id == item._id})} style={posStyle} onClick={()=>this.props.TimelineActions.selectTimelineItem(item)}><PopupTrigger item={item} /></a>
+      return <a key={item._id} className={classNames(styles.dot, {[styles.active]: this.props.timeline.selected._id == item._id})} style={posStyle} onClick={()=>this.props.TimelineActions.selectTimelineItem({projectId: this.props.project._id, selected: item})}><PopupTrigger item={item} /></a>
     });
 
     return (

@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import Changes from '../components/Changes';
 import * as ChangesActions from '../../../shared/actions/changes';
 
+//import wrapActions from 'app/shared/helpers/wrapActions.js'
+
 function mapStateToProps({changes, projects}, {params}) {
   const project = projects[params.stub];
   return {
@@ -16,5 +18,13 @@ function mapDispatchToProps(dispatch) {
     changesActions: bindActionCreators(ChangesActions, dispatch)
   }
 }
+
+//function mergeProps(stateProps, dispatchProps, ownProps){
+//  const wrappedDispatchProps = wrapActions(dispatchProps.changesActions, {projectId: stateProps.project._id});
+//  console.log(wrapActions);
+//
+//  console.log(wrappedDispatchProps);
+//  return Object.assign({}, ownProps, stateProps, wrappedDispatchProps)
+//}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Changes);

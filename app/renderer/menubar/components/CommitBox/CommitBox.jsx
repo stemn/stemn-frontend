@@ -25,11 +25,11 @@ export default class Commit extends React.Component {
   render() {
     return (
       <div className="p-15">
-        <Field model="changes.model.commitSummary">
+        <Field model="changes.model.summary">
           <input className={styles.input} type="text" placeholder="Commit Summary" />
         </Field>
-        <div className={classNames(styles.container, {[styles.containerShow]: this.props.changes.model.commitSummary.length > 0})}>
-          <Field model="changes.model.commitDescription">
+        <div className={classNames(styles.container, {[styles.containerShow]: this.props.changes.model.summary.length > 0})}>
+          <Field model="changes.model.description">
             <textarea className={styles.textarea} placeholder="Detailed Description" ></textarea>
           </Field>
           <div className="layout-row layout-align-center">

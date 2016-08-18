@@ -25,34 +25,40 @@ export default class FeedPage extends React.Component{
   }
 
   render(){
-    console.log(this.props);
     const styles = {
         padding: '30px'
     }
 
     const getDetailSection = () => {
       if(this.props.timeline.selected.data){
-        return (
-          <div className="layout-column flex">
-            <div className={feedPageStyles.commitInfo}>
-              <h3>{this.props.timeline.selected.data.summary}</h3>
-              <div className={feedPageStyles.description}>{this.props.timeline.selected.data.description}</div>
-              <div className="layout-row layout-align-start-center">
-                <img src={'https://stemn.com' + this.props.timeline.selected.actor.picture + '?size=thumb&crop=true'} className={feedPageStyles.avatar}/>
-                <div>{this.props.timeline.selected.actor.name}</div>
+        if(this.props.timeline.selected.event == 'commit'){
+          return (
+            <div className="layout-column flex">
+              <div className={feedPageStyles.commitInfo}>
+                <h3>{this.props.timeline.selected.data.summary}</h3>
+                <div className={feedPageStyles.description}>{this.props.timeline.selected.data.description}</div>
+                <div className="layout-row layout-align-start-center">
+                  <img src={'https://stemn.com' + this.props.timeline.selected.user.picture + '?size=thumb&crop=true'} className={feedPageStyles.avatar}/>
+                  <div>{this.props.timeline.selected.user.name}</div>
+                </div>
+              </div>
+              <div className="flex scroll-box">
+                {getFilesSection()}
               </div>
             </div>
-            <div className="flex scroll-box">
-              {getFilesSection()}
-            </div>
-          </div>
-        )
+          )
+        }
+        else{
+          return(
+            <div>{this.props.timeline.selected._id}</div>
+          )
+        }
       }
     }
 
     const getFilesSection = () => {
-      if(this.props.timeline.selected.data.files){
-        return this.props.timeline.selected.data.files.map((file)=>
+      if(this.props.timeline.selected.data.items){
+        return this.props.timeline.selected.data.items.map((file)=>
           <TogglePanel>
             <div className="layout-row flex layout-align-start-center">
               <div className="flex">{file.path}</div>

@@ -10,7 +10,7 @@ import { MentionsInput, Mention } from 'react-mentions'
 
 export default React.createClass({
   handleChange(event, newValue, newPlainTextValue, mention){
-    this.props.changesActions.commitDescriptionChange({value: newValue})
+    this.props.changesActions.descriptionChange({projectId: this.props.project._id, value: newValue})
   },
   transformDisplay: function(id, display) {
     return "@" + display
@@ -29,14 +29,14 @@ export default React.createClass({
     }
     return (
       <div className="p-15">
-        <Field model="changes.model.commitSummary">
+        <Field model={`changes.${this.props.project._id}.summary`}>
           <input className={styles.input} type="text" placeholder="Summary"/>
         </Field>
 
         <MentionsInput
           className={styles.mentionsBox}
           placeholder="Detailed Description"
-          value={this.props.changes.model.commitDescription}
+          value={this.props.changes.description}
           displayTransform={this.transformDisplay}
           onChange={this.handleChange}>
           <Mention

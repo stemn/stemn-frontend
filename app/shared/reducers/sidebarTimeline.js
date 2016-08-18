@@ -143,7 +143,7 @@ export default function (state = initialState, action) {
     switch (action.type) {
         case 'SELECT_TIMELINE_ITEM':
           return u({
-            [action.payload.config.meta.stub] : { selected : action.payload}
+            [action.payload.projectId] : { selected : action.payload.selected}
           }, state)
         case 'TIMELINE/FETCH_TIMELINE_FULFILLED':
           return u({

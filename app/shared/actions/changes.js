@@ -2,44 +2,49 @@ import { actions } from 'react-redux-form';
 import http from 'axios';
 
 export const SELECTED_FILE_CHANGE = 'CHANGES/SELECTED_FILE_CHANGE'
-export const TOGGLE_ALL_CHANGED_FILES = 'CHANGES/TOGGLE_ALL_CHANGED_FILES'
+export const TOGGLE_ALL_CHANGED_FILES = ''
 
 
 
-export function selectedFileChange(file) {
+export function selectedFileChange({projectId, selected}) {
   return {
       type: SELECTED_FILE_CHANGE,
-      payload: file
+      payload: {
+        projectId,
+        selected
+      }
   }
 }
-export function commitDescriptionChange({value}) {
+export function descriptionChange({projectId, value}) {
   return {
-      type: 'CHANGES/COMMIT_DESCRIPTION_CHANGE',
-      payload: {value}
+    type: 'CHANGES/COMMIT_DESCRIPTION_CHANGE',
+    payload: {projectId, value}
   }
 }
 
-export function actToggleAll(model, value) {
+
+export function actToggleAll({projectId, model, value}) {
   return (dispatch) => {
     dispatch(actions.change(model, value));
     return {
-        type: TOGGLE_ALL_CHANGED_FILES,
-        payload: {model, value}
+        type: 'CHANGES/TOGGLE_ALL_CHANGED_FILES',
+        payload: {projectId, model, value}
     }
   };
 }
 
-export function fetchChanges({stub}) {
+
+export function fetchChanges({projectId}) {
   return {
       type:'CHANGES/FETCH_CHANGES',
       payload: http({
         method: 'GET',
-        url: `http://localhost:3000/api/v1/sync/timeline/${stub}`,
+        url: `http://localhost:3000/api/v1/sync/timeline/${projectId}`,
         params: {
           type: 'revisions'
         },
         meta: {
-          stub
+          projectId
         }
       })
   }

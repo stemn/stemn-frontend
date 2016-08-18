@@ -1,9 +1,12 @@
 import http from 'axios';
 
-export function selectTimelineItem(item) {
+export function selectTimelineItem({projectId, selected}) {
   return {
       type:'SELECT_TIMELINE_ITEM',
-      payload: item
+      payload: {
+        projectId,
+        selected
+      }
   }
 }
 

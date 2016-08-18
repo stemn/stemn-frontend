@@ -1,92 +1,49 @@
-import u from 'updeep';
 
 import {
-  SELECTED_FILE_CHANGE,
-  TOGGLE_ALL_CHANGED_FILES
+  SELECTED_FILE_CHANGE
 } from '../actions/changes';
 
+import u from 'updeep';
 import { formReducer, modeled } from 'react-redux-form';
-
 import {assignAll} from '../helpers/reducerUtils.js'
 
 const initialState = {
-//  model: {
-//    files: [
-//      {
-//        name: 'asfasfasfasf1',
-//        selected: true
-//      },
-//      {
-//        name: 'asfasfasfasf2',
-//        selected: true
-//      },
-//      {
-//        name: 'asfasfasfasf3',
-//        selected: false
-//      },
-//      {
-//        name: 'asfasfasfasf4',
-//        selected: false
-//      },
-//      {
-//        name: 'asfasfasfasf5',
-//        selected: false
-//      },
-//      {
-//        name: 'asfasfasfasf6',
-//        selected: true
-//      },
-//      {
-//        name: 'asfasfasfasf7',
-//        selected: true
-//      },
-//      {
-//        name: 'asfasfasfasf8',
-//        selected: true
-//      },
-//      {
-//        name: 'asfasfasfasf9',
-//        selected: false
-//      },
-//    ],
-//    toggleAll: false,
-//    selectedFile: {},
-//
-//    commitSummary: '',
-//    commitDescription: ''
-//  }
+
 }
 
-
-export default (state = initialState, action) => {
+const mainReducer = (state, action) => {
   switch (action.type) {
     case SELECTED_FILE_CHANGE:
-      return {...state,
-        selectedFile: action.payload
-      }
-    case TOGGLE_ALL_CHANGED_FILES:
-      return {...state,
-        files: assignAll(state.files, 'selected', action.payload.value)
-      }
+      return u({
+        [action.payload.projectId] : {
+          selected: action.payload.selected,
+        }
+      }, state)
+    case 'CHANGES/TOGGLE_ALL_CHANGED_FILES':
+      const assignAll = (field) => field.map((item) => u({selected: action.payload.value }, item))
+      return u({
+        [action.payload.projectId] : {
+          data : assignAll
+        }
+      }, state)
     case 'CHANGES/FETCH_CHANGES_FULFILLED':
       return u({
-        [action.payload.config.meta.stub] : {
+        [action.payload.config.meta.projectId] : {
           data : action.payload.data,
           selected: {},
         }
       }, state)
     case 'CHANGES/COMMIT_DESCRIPTION_CHANGE':
-      return {...state,
-        commitDescription: action.payload.value
-      }
+      return u({
+        [action.payload.projectId] : {
+          description : action.payload.value
+        }
+      }, state)
     default:
       return state;
   }
 }
-//
-//export default function (state = initialState, action) {
-//  return {
-//    model: modeled(CommitChanges, 'changes.model')(state.model, action),
-//    form : formReducer('changes.form')(state.form, action)
-//  }
-//}
+
+export default function (state = initialState, action) {
+  return modeled(mainReducer, 'changes')(state, action)
+}
