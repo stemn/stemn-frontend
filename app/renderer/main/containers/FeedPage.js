@@ -1,21 +1,24 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import FeedPage from '../pages/FeedPage/FeedPage';
-import * as FeedActions from '../../../shared/actions/feed';
+import * as SidebarTimelineActions from '../../../shared/actions/sidebarTimeline';
 
 function mapStateToProps({ sidebarTimeline }) {
   return { feed: sidebarTimeline };
 }
 
 function mapStateToProps({sidebarTimeline, projects}, {params}) {
+  const project = projects[params.stub];
   return {
-    feed: sidebarTimeline,
-    project: projects[params.stub]
+    timeline: sidebarTimeline[project._id],
+    project: project
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(FeedActions, dispatch);
+  return {
+    TimelineActions: bindActionCreators(SidebarTimelineActions, dispatch)
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FeedPage);

@@ -29,6 +29,21 @@ export function actToggleAll(model, value) {
   };
 }
 
+export function fetchChanges({stub}) {
+  return {
+      type:'CHANGES/FETCH_CHANGES',
+      payload: http({
+        method: 'GET',
+        url: `http://localhost:3000/api/v1/sync/timeline/${stub}`,
+        params: {
+          type: 'revisions'
+        },
+        meta: {
+          stub
+        }
+      })
+  }
+}
 
 export function commit({projectId, revisions, summary, description}) {
   return {

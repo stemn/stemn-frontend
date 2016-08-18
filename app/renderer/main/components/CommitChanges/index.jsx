@@ -18,12 +18,13 @@ export default (props) => {
   return (
     <div className="layout-column flex">
       <div className="layout-column flex">
-        <FileChangeTitleRow text={props.changes.model.files.length + ' file changes'} model="changes.model.toggleAll" value={props.changes.model.toggleAll} changeAction={props.actToggleAll}/>
+        <FileChangeTitleRow text={props.changes.data.length + ' file changes'} model="changes.toggleAll" value={props.changes.toggleAll} changeAction={props.actToggleAll}/>
         <div className="scroll-box flex">
-          {props.changes.model.files.map((file, idx)=><FileChangeRowContext key={idx} text={file.name} clickFn={()=>{props.selectedFileChange({name: file.name})}} isActive={file.name == props.changes.model.selectedFile.name} model={'changes.model.files['+idx+'].selected'} value={file.selected}/>)}
+          {props.changes.data.map((file, idx)=><FileChangeRowContext key={idx} text={file.data.name} clickFn={()=>{props.selectedFileChange({name: file.name})}} isActive={file.name == props.changes.selected.name} model={'changes.data['+idx+'].selected'} value={file.selected}/>)}
         </div>
       </div>
       <FileContextmenu identifier={contextIdentifier}/>
     </div>
   )
 }
+

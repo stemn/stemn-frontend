@@ -27,7 +27,6 @@ export default React.createClass({
         }
       ]
     }
-    console.log(this.props);
     return (
       <div className="p-15">
         <Field model="changes.model.commitSummary">
@@ -46,7 +45,7 @@ export default React.createClass({
         </MentionsInput>
 
         <div className="layout-row layout-align-center">
-          <IconButton onClick={()=>this.props.CommitFn()}><MdDone size="22"/>Add Commit Message</IconButton>
+          <IconButton onClick={()=>this.props.commitFn()}><MdDone size="22"/>Add Commit Message</IconButton>
         </div>
       </div>
     );

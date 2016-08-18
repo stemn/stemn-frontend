@@ -62,7 +62,7 @@ export default (store) => {
           <Route path="/project/:stub/feed" component={FeedPage}/>
           <Route path="/project/:stub/settings" component={ProjectSettingsPage}/>
         </Route>
-        <Route path="/" component={ChangesPage}/>
+        <Route path="/" component={ProjectPage}/>
         <Route path="/feed" component={FeedPage}/>
         <Route path="/settings" component={SettingsPage}/>
       </Route>

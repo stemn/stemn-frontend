@@ -3,8 +3,12 @@ import { connect } from 'react-redux';
 import Changes from '../components/Changes';
 import * as ChangesActions from '../../../shared/actions/changes';
 
-function mapStateToProps({ changes }) {
-  return { changes };
+function mapStateToProps({changes, projects}, {params}) {
+  const project = projects[params.stub];
+  return {
+    project: project,
+    changes: changes[project._id],
+  };
 }
 
 function mapDispatchToProps(dispatch) {

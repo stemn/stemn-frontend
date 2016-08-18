@@ -12,39 +12,56 @@ import PreviewFile    from 'app/renderer/main/containers/PreviewFile';
 // Styles
 import classNames from 'classnames';
 
-export default (props) => {
-  const CommitBoxStyles = {
+
+export default React.createClass({
+
+  componentWillMount() {
+    if(this.props.project){
+      this.props.changesActions.fetchChanges({stub: this.props.project._id})
+    }
+  },
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.project._id !== this.props.project._id) {
+      this.props.changesActions.fetchChanges({stub: nextProps.project._id})
+    }
+  },
+
+  CommitBoxStyles: {
     borderTop: '1px solid rgba(0, 0, 0, 0.1)',
     background: 'rgba(0, 0, 0, 0.03)'
-  }
+  },
 
-  const commitFn = () => {
-    console.log(props.model.files);
+  commitFn(){
     this.props.changesActions.commit({
-      projectId: props.project._id,
+      projectId: this.props.project._id,
       revisions: ['revisions'],
-      summary: props.changes.model.commitSummary,
-      description: props.changes.model.commitDescription
+      summary: this.props.changes.model.commitSummary,
+      description: this.props.changes.model.commitDescription
     })
-  }
-//      <Timeline />
+  },
 
-  return (
-    <div className="layout-column flex rel-box">
-      <div className="layout-row flex">
-        <div className="layout-column">
-          <ContentSidebar>
-            <CommitChanges changes={props.changes} actToggleAll={props.changesActions.actToggleAll} selectedFileChange={props.changesActions.selectedFileChange}/>
-            <div style={CommitBoxStyles}>
-              <CommitBox changes={props.changes} changesActions={props.changesActions} commitFn={commitFn}/>
-            </div>
-          </ContentSidebar>
-        </div>
-        <div className="layout-column">
-          {/*<h1>{props.changes.model.selectedFile.name}</h1>*/}
-          <PreviewFile projectStub="stemn" path="README.md" />
+  render() {
+    const props = this.props;
+    return (
+      <div className="layout-column flex rel-box">
+        <div className="layout-row flex">
+          <div className="layout-column">
+            <ContentSidebar>
+              {props.changes && props.changes.data ? <CommitChanges changes={props.changes} actToggleAll={props.changesActions.actToggleAll} selectedFileChange={props.changesActions.selectedFileChange}/> : ''}
+            </ContentSidebar>
+          </div>
+
         </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
+})
+//
+//              <div style={this.CommitBoxStyles}>
+//                <CommitBox changes={props.changes} changesActions={props.changesActions} commitFn={()=>this.commitFn()}/>
+//              </div>
+
+//          <div className="layout-column">
+//            <PreviewFile projectStub="stemn" path="README.md" />
+//          </div>
