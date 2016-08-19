@@ -16,11 +16,12 @@ export function loadUserData() {
 
 aliases['AUTH/LOAD_USER_DATA'] = function loadUserDataAlias(args) {
   return {
-      type:'AUTH/LOAD_USER_DATA',
-      payload: http({
-          url: 'https://stemn.com/api/v1/me',
-          method: 'GET',
-      })
+    type:'AUTH/LOAD_USER_DATA',
+    http: true,
+    payload: {
+      url: 'https://stemn.com/api/v1/me',
+      method: 'GET',
+    }
   }
 };
 

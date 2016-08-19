@@ -1,5 +1,3 @@
-import http from 'axios';
-
 export const aliases = {};
 
 //export function getProjects({userId}) {
@@ -33,10 +31,13 @@ export const aliases = {};
 //  }
 //}
 
+const test2 = 'test2';
+
 export function getProjects({userId}) {
   return {
     type:'FETCH_PROJECTS',
-    payload: http({
+    http: true,
+    payload: {
       url: 'http://localhost:3000/api/v1/search',
       method: 'GET',
       params: {
@@ -48,7 +49,13 @@ export function getProjects({userId}) {
         key: 'name',
         value: 'Jackson'
       },
-    })
+    },
+    then: ()=>{
+      const test1 = 'test1'
+      console.log(test1);
+      console.log(test2);
+    },
+    asffsasfa: 'asffsaafsfs'
   }
 }
 

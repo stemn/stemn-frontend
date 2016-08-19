@@ -1,5 +1,4 @@
 import { actions } from 'react-redux-form';
-import http from 'axios';
 
 export const SELECTED_FILE_CHANGE = 'CHANGES/SELECTED_FILE_CHANGE'
 export const TOGGLE_ALL_CHANGED_FILES = ''
@@ -36,24 +35,26 @@ export function actToggleAll({projectId, model, value}) {
 
 export function fetchChanges({projectId}) {
   return {
-      type:'CHANGES/FETCH_CHANGES',
-      payload: http({
-        method: 'GET',
-        url: `http://localhost:3000/api/v1/sync/timeline/${projectId}`,
-        params: {
-          type: 'revisions'
-        },
-        meta: {
-          projectId
-        }
-      })
+    type:'CHANGES/FETCH_CHANGES',
+    http: true,
+    payload: {
+      method: 'GET',
+      url: `http://localhost:3000/api/v1/sync/timeline/${projectId}`,
+      params: {
+        type: 'revisions'
+      },
+      meta: {
+        projectId
+      }
+    }
   }
 }
 
 export function commit({projectId, revisions, summary, description}) {
   return {
     type: 'CHANGES/COMMIT',
-    payload: http({
+    http: true,
+    payload: {
       method: 'POST',
       url: `http://localhost:3000/api/v1/sync/commit/${projectId}`,
       data: {
@@ -61,6 +62,6 @@ export function commit({projectId, revisions, summary, description}) {
         summary,
         description,
       }
-    })
+    }
   };
 }

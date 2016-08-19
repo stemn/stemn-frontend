@@ -10,8 +10,9 @@ import getRootReducer from '../reducers';
 import forwardToMain from './middleware/forwardToMain';
 import forwardToRenderer from './middleware/forwardToRenderer';
 import forwardToRendererWindow from './middleware/forwardToRendererWindow';
-import triggerAlias from './middleware/triggerAlias';
+//import triggerAlias from './middleware/triggerAlias';
 import routerFix from './middleware/routerFix';
+import transformHttp from './middleware/transformHttp';
 
 export default function configureStore(initialState, scope = 'main') {
   const logger = createLogger({
@@ -25,8 +26,8 @@ export default function configureStore(initialState, scope = 'main') {
 
   if (scope === 'renderer') {
     middleware = [
-      promise(),
       thunk,
+      promise(),
       routerFix,
       forwardToMain,
       forwardToRendererWindow,
@@ -39,9 +40,10 @@ export default function configureStore(initialState, scope = 'main') {
 
   if (scope === 'main') {
     middleware = [
-      promise(),
       thunk,
-      triggerAlias,
+      transformHttp,
+      promise(),
+//      triggerAlias,
       forwardToRenderer,
     ];
   }

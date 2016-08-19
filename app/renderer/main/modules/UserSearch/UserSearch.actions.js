@@ -1,11 +1,11 @@
-import http from 'axios';
 export const UPDATE_INPUT_VALUE = 'UPDATE_INPUT_VALUE';
 export const CLEAR_SUGGESTIONS = 'CLEAR_SUGGESTIONS';
 
 export function loadSuggestions(value) {
   return {
     type:'FETCH_SUGGESTIONS',
-    payload: http({
+    http: true,
+    payload: {
       url: 'https://stemn.com/api/v1/search',
       method: 'GET',
       params: {
@@ -15,7 +15,7 @@ export function loadSuggestions(value) {
         size: 20,
         match: 'regex'
       },
-    })
+    }
   }
 }
 
