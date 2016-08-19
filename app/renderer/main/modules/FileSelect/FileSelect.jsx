@@ -10,11 +10,10 @@ import React from 'react';
 
 // Styles
 import classNames from 'classnames';
-import classes from './FileSelect.css'
+//import classes from './FileList.css'
 
 // Sub Components
-import FileBreadCrumbs from './components/FileBreadCrumbs';
-import FileRow from './components/FileRow';
+import FileList from 'app/renderer/main/modules/FileList/FileList';
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -22,43 +21,65 @@ import FileRow from './components/FileRow';
 /////////////////////////////////////////////////////////////////////////////
 
 export const Component = React.createClass({
+
   componentWillMount() {
-    this.props.FileSelectActions.fetchFiles({
-      projectId: this.props.projectId,
-      path: this.props.path
-    });
+    if(!this.props.fileSelect){
+      this.props.FileSelectActions.init({
+        storeKey: this.props.storeKey,
+        path: this.props.path
+      })
+    }
   },
-  singleClick({file}){
-    console.log('single', file);
+
+  componentWillReceiveProps(nextProps) {
+    if(!nextProps.fileSelect){
+      this.props.FileSelectActions.init({
+        storeKey: nextProps.storeKey,
+        path: nextProps.path
+      })
+    }
   },
-  doubleClick({file}){
-    console.log('double', file);
+
+  singleClickFn({file}){
+    if(file.type == 'file' || this.props.options.allowFolder && file.type == 'folder'){
+      this.props.FileSelectActions.select({
+        storeKey: this.props.storeKey,
+        file: file
+      })
+    }
+    else{
+      this.props.FileSelectActions.changePath({
+        storeKey: this.props.storeKey,
+        path: file.path
+      })
+    }
   },
-  crumbClickFn({item}){
-    console.log({item});
+  doubleClickFn({file}){
+    if(file.type == 'folder'){
+      this.props.FileSelectActions.changePath({
+        storeKey: this.props.storeKey,
+        path: file.path
+      })
+    }
+    else{
+      this.props.FileSelectActions.select({
+        storeKey: this.props.storeKey,
+        file: file
+      })
+    }
+  },
+  crumbClickFn({file}){
+    this.props.FileSelectActions.changePath({
+      storeKey: this.props.storeKey,
+      file: file
+    })
   },
   render() {
-    console.log(this.props);
-    const {files} = this.props;
-    const crumbs = [
-      {
-        text: 'HOME',
-      },{
-        text: 'STEMN',
-      },{
-        text: 'FOLDER',
-      }
-    ]
+    const {projectId, path, fileSelect, options} = this.props;
 
     return (
       <div>
-        <div className={classes.breadcrumbs}>
-          <FileBreadCrumbs crumbs={crumbs} clickFn={this.crumbClickFn}/>
-        </div>
-        {files.data.length > 0
-          ? files.data.map((file)=><FileRow file={file} singleClick={this.singleClick} doubleClick={this.doubleClick} isActive={false}/>)
-          : <div>Loading</div>
-        }
+        <FileList projectId={projectId} path={fileSelect.path} singleClickFn={this.singleClickFn} doubleClickFn={this.doubleClickFn} crumbClickFn={this.crumbClickFn} selected={fileSelect.selected} options={options}/>
       </div>
     );
   }
@@ -69,11 +90,13 @@ export const Component = React.createClass({
 ///////////////////////////////// CONTAINER /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({fileSelect}, {projectId, path}) {
+function mapStateToProps({fileSelect}, {projectId, path, storeKey, options}) {
   return {
-    files: fileSelect[`${projectId}/${path}`],
+    fileSelect: fileSelect[storeKey],
     projectId,
-    path
+    storeKey,
+    path,
+    options
   };
 }
 

@@ -17,7 +17,8 @@ import files from './files';
 import menubarLayout from './menubarLayout';
 
 import userSearch from '../../renderer/main/modules/UserSearch/UserSearch.reducer.js';
-import fileSelect from '../../renderer/main/modules/FileSelect/FileSelect.reducer.js';
+import fileList from '../../renderer/main/modules/FileList/FileList.reducer.js';
+import fileSelect from '../../renderer/main/modules/fileSelect/fileSelect.reducer.js';
 
 export default function getRootReducer(scope = 'main') {
   let reducers = {
@@ -35,6 +36,7 @@ export default function getRootReducer(scope = 'main') {
     files,
     menubarLayout,
     userSearch,
+    fileList,
     fileSelect
   };
 

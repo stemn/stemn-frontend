@@ -45,7 +45,7 @@ export const Component = React.createClass({
     return (
       <div className="layout-row flex" style={PageStyles}>
         <div className="flex-50">
-          <FileSelect projectId={project._id} path=""/>
+          <FileSelect projectId={project._id} path="" storeKey="ProjectSettingsPage" options={{allowFolder: true, foldersOnly: true}} />
           <br />
           <br />
           <br />

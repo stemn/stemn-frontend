@@ -10,18 +10,18 @@ export default React.createClass({
 
     return (
       <div>
-       {crumbs.map((item, idx)=>{
+       {crumbs.map((file, idx)=>{
           if(idx < crumbs.length -1){
             return (
               <span>
-                <a onClick={()=>clickFn({item})}>{item.text}</a>
+                <a onClick={()=>clickFn({file})}>{file.text}</a>
                 <span> / </span>
               </span>
             )
           }
           else{
             return(
-              <span>{item.text}</span>
+              <span>{file.text}</span>
             )
           }
         })}

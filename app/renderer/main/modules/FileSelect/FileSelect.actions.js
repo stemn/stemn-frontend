@@ -1,15 +1,45 @@
-import http from 'axios';
-
-
-export function fetchFiles({projectId, path}) {
+export function init({storeKey, path}) {
   return {
-    type: 'FILE_SELECT/FETCH_FILES',
-    payload: http({
-      method: 'GET',
-      url: `http://localhost:3000/api/v1/sync/listFolder/${projectId}/${path}`
-    }),
+    type: 'FILE_SELECT/INIT',
+    payload: {
+      path
+    },
     meta: {
-     key: `${projectId}/${path}`
+      storeKey
+    }
+  };
+}
+
+export function select({storeKey, file}) {
+  return {
+    type: 'FILE_SELECT/SELECT',
+    payload: {
+      file
+    },
+    meta: {
+      storeKey
+    }
+  };
+}
+
+export function deselect({storeKey}) {
+  return {
+    type: 'FILE_SELECT/DESELECT',
+    payload: {},
+    meta: {
+      storeKey
+    }
+  };
+}
+
+export function changePath({storeKey, path}) {
+  return {
+    type: 'FILE_SELECT/CHANGE_PATH',
+    payload: {
+      path
+    },
+    meta: {
+      storeKey
     }
   };
 }
