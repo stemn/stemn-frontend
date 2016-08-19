@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import styles from './Sidebar.css'
 
 import AnimateShow from 'app/renderer/shared/AnimateShow/AnimateShow.jsx'
-import SidebarProjectButton from 'app/renderer/main/components/Sidebar/SidebarProjectButton.jsx'
+import SidebarProjectButton from 'app/renderer/main/modules/Sidebar/SidebarProjectButton.jsx'
 
 import {MdClose} from 'react-icons/lib/md';
 

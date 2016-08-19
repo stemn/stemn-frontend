@@ -1,10 +1,11 @@
-var u = require('updeep');
+import { modeled } from 'react-redux-form';
+import u from 'updeep';
 
 const initialState = {
 
 }
 
-export default function (state = initialState, action) {
+function reducer(state, action) {
   switch (action.type) {
     case 'PROJECTS/GET_PROJECT_FULFILLED' :
       return {...state,
@@ -20,4 +21,8 @@ export default function (state = initialState, action) {
     default:
         return state;
   }
+}
+
+export default function (state = initialState, action) {
+  return modeled(reducer, 'projects')(state, action)
 }

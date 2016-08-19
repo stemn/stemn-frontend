@@ -30,12 +30,13 @@ $ npm run dev
 
 ### Package and Release
 
-To package the app for local testing, run:
+To build the app for windows run
 
 ```bash
 npm run build
-npm run pack
+node scripts/build.js
 ```
+
 
 ### Release
 

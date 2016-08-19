@@ -1,8 +1,10 @@
+@value border1 from "app/renderer/assets/css/themes/standard.css";
+
 .dr-input {
   padding: 5px;
   display: block;
   width: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid border1;
 }
 .dr-input:focus {
   outline: none;

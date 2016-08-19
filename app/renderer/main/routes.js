@@ -10,10 +10,11 @@ import UnAuthedAppPage  from './components/App/UnAuthedAppPage';
 import ChangesPage from './containers/ChangesPage';
 import LoginPage from './containers/LoginPage';
 //import ErrorPage from './containers/ErrorPage/ErrorPage.container.js';
-import FeedPage from './containers/FeedPage';
 import SettingsPage from './pages/SettingsPage/SettingsPage.container.js';
+import HomePage from './pages/HomePage/HomePage.jsx';
 import ProjectPage from './pages/ProjectPage/ProjectPage.container.js';
-import ProjectSettingsPage from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.container.js';
+import ProjectSettingsPage from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.jsx';
+import ProjectFeedPage from './pages/ProjectFeedPage/ProjectFeedPage.jsx';
 
 // Actions
 const AuthActions = require('../../shared/actions/auth');
@@ -59,11 +60,10 @@ export default (store) => {
       <Route component={AuthedAppPage} onEnter={requireAuth}>
         <Route path="/project/:stub" component={ProjectPage}>
           <Route path="/project/:stub/changes" component={ChangesPage}/>
-          <Route path="/project/:stub/feed" component={FeedPage}/>
+          <Route path="/project/:stub/feed" component={ProjectFeedPage}/>
           <Route path="/project/:stub/settings" component={ProjectSettingsPage}/>
         </Route>
-        <Route path="/" component={ProjectPage}/>
-        <Route path="/feed" component={FeedPage}/>
+        <Route path="/" component={HomePage}/>
         <Route path="/settings" component={SettingsPage}/>
       </Route>
       <Route component={UnAuthedAppPage}>

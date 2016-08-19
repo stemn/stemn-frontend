@@ -9,12 +9,13 @@ import classNames from 'classnames';
 
 export default class extends React.Component{
   render(){
+    const {model} = this.props
     return (
       <div>
-        <RadioAlt model='projectSettings.permissions' value='public'>
+        <RadioAlt model={model} value='public'>
           Public Project (recommended)
         </RadioAlt>
-        <RadioAlt model='projectSettings.permissions' value='private'>
+        <RadioAlt model={model} value='private'>
           Private Project
         </RadioAlt>
       </div>

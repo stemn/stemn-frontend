@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 // Components
 import Tabs from 'app/renderer/main/components/Tabs/Tabs'
-import Header from 'app/renderer/main/containers/Header'
+import Header from 'app/renderer/main/modules/Header/Header.jsx'
 
 // Styles
 import classNames from 'classnames';

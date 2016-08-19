@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 
 // Components
-import WindowsTitleBar       from 'app/renderer/main/components/TitleBar/TitleBar';
-import Sidebar        from '../../containers/Sidebar';
-import Header         from '../../containers/Header';
+import WindowsTitleBar from 'app/renderer/main/components/TitleBar/TitleBar';
+import Sidebar         from 'app/renderer/main/modules/Sidebar/Sidebar.jsx';
+import Header          from 'app/renderer/main/modules/Header/Header.jsx'
 
 export default class App extends Component {
   static propTypes = {

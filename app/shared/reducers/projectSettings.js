@@ -1,8 +1,6 @@
-
 import { modeled } from 'react-redux-form';
 
 const initialState = {
-  permissions: 'public'
 };
 
 function reducer(state, action) {

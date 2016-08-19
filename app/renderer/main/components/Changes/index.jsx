@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import ContentSidebar from '../ContentSidebar';
-import Timeline       from '../../containers/Timeline';
+import Timeline       from 'app/renderer/main/modules/Timeline/Timeline.jsx';
 import CommitChanges  from '../CommitChanges';
 import CommitBox      from 'app/renderer/main/components/CommitBox/CommitBox.jsx'
 import PreviewFile    from 'app/renderer/main/containers/PreviewFile';
