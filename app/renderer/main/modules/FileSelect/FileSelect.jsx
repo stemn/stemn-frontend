@@ -85,7 +85,10 @@ export const Component = React.createClass({
         <FileList projectId={projectId} path={fileSelect.path} singleClickFn={this.singleClickFn} doubleClickFn={this.doubleClickFn} crumbClickFn={this.crumbClickFn} selected={fileSelect.selected} options={options}/>
         <div className="layout-row layout-align-start-center" style={{padding: '10px'}}>
           <div className="flex"></div>
-          <Button>
+          <Button style={{marginRight: '10px'}}>
+            Cancel
+          </Button>
+          <Button className="primary">
             Select File
           </Button>
         </div>

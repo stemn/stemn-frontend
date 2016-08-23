@@ -1,10 +1,9 @@
-@value primary, primary-2, grey-3 from "app/renderer/assets/css/themes/standard.css";
+@value primary, primary-2, grey-3, bg1 from "app/renderer/assets/css/themes/standard.css";
 
 .button {
   border: none;
   outline: none;
-  background: primary;
-  color: white;
+  background: none;
   padding: 10px;
 
   transition: all 0.2s ease;
@@ -15,5 +14,13 @@
 }
 
 .button:hover{
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.button:global(.primary){
+  background: primary;
+  color: white;
+}
+.button:global(.primary):hover{
   background: primary-2;
 }
