@@ -1,5 +1,10 @@
 @value primary: rgb(68, 154, 211);
+@value primary-2: rgb(64, 129, 173);
 @value secondary: rgba(0, 0, 0, 0.7);
 
 @value border1: rgba(0, 0, 0, 0.1);
 @value bg1: rgba(0, 0, 0, 0.03);
+
+@value grey-1: rgba(0, 0, 0, 0.1);
+@value grey-2: rgba(0, 0, 0, 0.3);
+@value grey-3: rgba(0, 0, 0, 0.5);

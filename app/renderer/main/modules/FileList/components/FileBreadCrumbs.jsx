@@ -2,14 +2,14 @@ import React from 'react';
 
 // Styles
 import classNames from 'classnames';
-//import classes from './FileSelect.css'
+import classes from './FileBreadCrumbs.css'
 
 export default React.createClass({
   render() {
     const {crumbs, clickFn} = this.props;
 
     return (
-      <div>
+      <div className={classes.crumbs}>
        {crumbs.map((file, idx)=>{
           if(idx < crumbs.length -1){
             return (

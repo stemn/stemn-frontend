@@ -1,4 +1,4 @@
-@value primary, border1 from "app/renderer/assets/css/themes/standard.css";
+@value primary, border1, grey-3 from "app/renderer/assets/css/themes/standard.css";
 
 .tabs {
     white-space: nowrap;
@@ -20,7 +20,7 @@
 }
 .inner > a {
     min-height: 37px;
-    color: rgba(0, 0, 0, 0.5);
+    color: grey-3;
     position: relative;
     padding: 10px 0;
     margin-right: 25px;

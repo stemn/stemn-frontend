@@ -15,6 +15,7 @@ import classes from './FileList.css'
 // Sub Components
 import FileBreadCrumbs from './components/FileBreadCrumbs';
 import FileRow from './components/FileRow';
+import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -57,10 +58,12 @@ export const Component = React.createClass({
         <div className={classes.breadcrumbs}>
           <FileBreadCrumbs crumbs={crumbs} clickFn={crumbClickFn}/>
         </div>
+        <div className="rel-box" style={{minHeight: '200px'}}>
         {filesFiltered && filesFiltered.length > 0
           ? filesFiltered.map((file)=><FileRow file={file} singleClick={singleClickFn} doubleClick={doubleClickFn} isActive={selected && selected.fileId == file.fileId}/>)
-          : <div>Loading</div>
+          : <LoadingOverlay />
         }
+        </div>
       </div>
     );
   }
