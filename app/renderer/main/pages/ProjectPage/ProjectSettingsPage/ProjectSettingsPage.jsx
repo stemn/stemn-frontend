@@ -32,7 +32,7 @@ export const Component = React.createClass({
   selectFn(selection){
     if(!this.props.project.team.find((item)=>item._id == selection._id)){
       this.props.ProjectsActions.addTeamMember({
-        stub: this.props.project.stub,
+        projectId: this.props.project._id,
         user: selection
       })
     }

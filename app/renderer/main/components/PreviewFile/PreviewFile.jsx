@@ -13,17 +13,18 @@ import classNames from 'classnames';
 export default class extends React.Component{
   componentWillMount() {
     this.props.filesActions.getFile({
-      projectStub: this.props.projectStub,
-      path: this.props.path
+      projectId: this.props.projectId,
+      fileId: this.props.fileId
     })
     this.props.filesActions.getMeta({
-      projectStub: this.props.projectStub,
-      path: this.props.path
+      projectId: this.props.projectId,
+      fileId: this.props.fileId
     })
   }
   render() {
+    console.log(this.props.file);
     const getPreview = () => {
-      if(this.props.file.meta){
+      if(this.props.file && this.props.file.meta){
         const viewerType = getViewerType(this.props.file.meta.fileType);
         if(viewerType == 'gerber' || viewerType == 'pcb'){
           return <PreviewPcb model={this.props.file.data} fileType={this.props.file.meta.fileType} />

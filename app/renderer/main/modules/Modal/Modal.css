@@ -1,3 +1,5 @@
+@value border1 from "app/renderer/assets/css/themes/standard.css";
+
 .modal {
   transform-origin: bottom center;
   animation: fade-in-pulse-08 .3s forwards cubic-bezier(.8, .02, .45, .91);
@@ -11,6 +13,12 @@
   outline: none;
   background: rgb(255, 255, 255);
   box-shadow: 0 0 0 1px rgba(0,0,0,0.1),0 2px 15px rgba(0,0,0,0.1);
+}
+.modal :global(.modal-title){
+  padding: 15px;
+  border-bottom: 1px solid border1;
+  font-weight: 300;
+  font-size: 14px;
 }
 
 @keyframes fade-in-pulse-08 {

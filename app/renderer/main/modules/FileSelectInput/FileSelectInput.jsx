@@ -18,7 +18,10 @@ export default React.createClass({
             <SimpleIconButton>
               <MdFolder size="22" />
             </SimpleIconButton>
-            <FileSelect projectId={this.props.project._id} path="" storeKey="ProjectSettingsPage" options={{allowFolder: true, foldersOnly: true}} />
+            <div>
+              <div className="modal-title">Select File</div>
+              <FileSelect projectId={this.props.project._id} path="" storeKey="ProjectSettingsPage" options={{allowFolder: true, foldersOnly: true}} />
+            </div>
           </Modal>
         </div>
     );

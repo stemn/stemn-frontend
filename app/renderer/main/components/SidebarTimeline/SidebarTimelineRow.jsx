@@ -31,10 +31,10 @@ export default React.createClass({
         <div>
           <div className={classNames('layout-row', 'layout-align-start-center', styles.timelineRow, {[styles.active]: this.props.isActive})}>
             <div className={styles.inner + ' flex layout-row layout-align-start-center'} onClick={this.props.clickFn}>
-              <img src={'https://stemn.com' + this.props.item.user.picture + '?size=thumb&crop=true'} />
+              <img style={{width: '40px', height: '40px'}} src={'https://stemn.com' + this.props.item.user.picture + '?size=thumb&crop=true'} />
               <div className={styles.text + ' flex'}>
                 <b>{this.props.item.data.summary}</b>
-                <div>{timeFromNow} by {this.props.item.user.name}</div>
+                <div style={{marginTop: '5px'}}>{timeFromNow} by {this.props.item.user.name}</div>
               </div>
             </div>
             <div className={classNames(styles.button, 'layout-row', 'layout-align-start-center', {[styles.buttonActive]: this.state.isOpen})} onClick={()=>this.toggle(null)}>
@@ -50,10 +50,10 @@ export default React.createClass({
       return (
         <div className={classNames('layout-row', 'layout-align-start-center', styles.timelineRow, {[styles.active]: this.props.isActive})}>
           <div className={styles.inner + ' flex layout-row layout-align-start-center'} onClick={this.props.clickFn}>
-            <img src={'https://stemn.com' + this.props.item.user.picture + '?size=thumb&crop=true'} />
+            <img style={{width: '40px', height: '40px'}} src={this.props.item.user.picture} />
             <div className={styles.text + ' flex'}>
               <b>{this.props.item.data.name}</b>
-              <div>{timeFromNow} by {this.props.item.user.name}</div>
+              <div style={{marginTop: '5px'}}>{timeFromNow} by {this.props.item.user.name}</div>
             </div>
           </div>
         </div>

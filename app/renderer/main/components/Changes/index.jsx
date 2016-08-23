@@ -17,13 +17,17 @@ export default React.createClass({
 
   componentWillMount() {
     if(this.props.project){
-      this.props.changesActions.fetchChanges({projectId: this.props.project._id})
+      this.props.changesActions.fetchChanges({
+        projectId: this.props.project._id
+      })
     }
   },
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.project._id !== this.props.project._id) {
-      this.props.changesActions.fetchChanges({projectId: nextProps.project._id})
+    if (this.props.project && nextProps.project && nextProps.project._id !== this.props.project._id) {
+      this.props.changesActions.fetchChanges({
+        projectId: nextProps.project._id
+      })
     }
   },
 
@@ -51,25 +55,33 @@ export default React.createClass({
 
   render() {
     const props = this.props;
-    return (
-      <div className="layout-column flex rel-box">
-        <div className="layout-row flex">
-          <div className="layout-column">
-            <ContentSidebar>
-              {props.changes && props.changes.data ? <CommitChanges changes={props.changes} project={props.project} actToggleAll={this.toggleAll} selectedFileChange={props.changesActions.selectedFileChange}/> : ''}
+    if(props.changes){
+      return (
+        <div className="layout-column flex rel-box">
+          <div className="layout-row flex">
+            <div className="layout-column">
+              <ContentSidebar>
+                {props.changes && props.changes.data ? <CommitChanges changes={props.changes} project={props.project} actToggleAll={this.toggleAll} selectedFileChange={props.changesActions.selectedFileChange}/> : ''}
 
-              <div style={this.CommitBoxStyles}>
-                <CommitBox changes={props.changes} changesActions={props.changesActions} commitFn={()=>this.commitFn()} project={this.props.project}/>
-              </div>
-            </ContentSidebar>
-          </div>
-          <div className="layout-column">
-            <PreviewFile projectStub="stemn" path="README.md" />
-          </div>
+                <div style={this.CommitBoxStyles}>
+                  <CommitBox changes={props.changes} changesActions={props.changesActions} commitFn={()=>this.commitFn()} project={this.props.project}/>
+                </div>
+              </ContentSidebar>
+            </div>
+            <div className="layout-column">
+              {props.changes.selected && props.changes.selected.data
+                ? <PreviewFile projectId={props.changes.selected.data.project._id} fileId={props.changes.selected.data._id} />
+                : <div className="layout-column layout-align-center-center">Select a change</div>
+              }
+            </div>
 
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+    else{
+      return null
+    }
   }
 });
 
