@@ -1,0 +1,31 @@
+.modal {
+  transform-origin: bottom center;
+  animation: fade-in-pulse-08 .3s forwards cubic-bezier(.8, .02, .45, .91);
+
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  position: absolute;
+  overflow: auto;
+  outline: none;
+  background: rgb(255, 255, 255);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.1),0 2px 15px rgba(0,0,0,0.1);
+}
+
+@keyframes fade-in-pulse-08 {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(.8);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  100%,
+  70% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/*translate(-50%, -50%)*/

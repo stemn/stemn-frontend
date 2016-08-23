@@ -19,6 +19,7 @@ import menubarLayout from './menubarLayout';
 import userSearch from '../../renderer/main/modules/UserSearch/UserSearch.reducer.js';
 import fileList from '../../renderer/main/modules/FileList/FileList.reducer.js';
 import fileSelect from '../../renderer/main/modules/fileSelect/fileSelect.reducer.js';
+import modals from '../../renderer/main/modules/modal/modal.reducer.js';
 
 export default function getRootReducer(scope = 'main') {
   let reducers = {
@@ -37,7 +38,8 @@ export default function getRootReducer(scope = 'main') {
     menubarLayout,
     userSearch,
     fileList,
-    fileSelect
+    fileSelect,
+    modals
   };
 
   if (scope === 'renderer') {

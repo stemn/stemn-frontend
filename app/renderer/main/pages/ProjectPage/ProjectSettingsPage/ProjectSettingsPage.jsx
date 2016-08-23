@@ -21,7 +21,8 @@ import UserSearch from 'app/renderer/main/modules/UserSearch/UserSearch.containe
 import TeamMember from 'app/renderer/main/components/Project/TeamMember/TeamMember.jsx'
 import ProjectPermissionsRadio from 'app/renderer/main/components/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx'
 import ProjectLinkRemote from 'app/renderer/main/components/Project/ProjectLinkRemote/ProjectLinkRemote.jsx'
-import FileSelect from 'app/renderer/main/modules/FileSelect/FileSelect.jsx'
+import FileSelectInput from 'app/renderer/main/modules/FileSelectInput/FileSelectInput.jsx'
+
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -45,22 +46,10 @@ export const Component = React.createClass({
     return (
       <div className="layout-row flex" style={PageStyles}>
         <div className="flex-50">
-          <FileSelect projectId={project._id} path="" storeKey="ProjectSettingsPage" options={{allowFolder: true, foldersOnly: true}} />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-
           <ProjectLinkRemote model={`${entityModel}.remote`} />
+          <br />
+          <FileSelectInput project={project} />
+
           <br />
           <br />
           <br />

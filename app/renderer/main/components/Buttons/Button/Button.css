@@ -1,0 +1,19 @@
+@value primary, primary-2, grey-3 from "app/renderer/assets/css/themes/standard.css";
+
+.button {
+  border: none;
+  outline: none;
+  background: primary;
+  color: white;
+  padding: 10px;
+
+  transition: all 0.2s ease;
+}
+
+.button:focus{
+  outline: none;
+}
+
+.button:hover{
+  background: primary-2;
+}

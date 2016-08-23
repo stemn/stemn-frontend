@@ -14,6 +14,9 @@ import classNames from 'classnames';
 
 // Sub Components
 import FileList from 'app/renderer/main/modules/FileList/FileList';
+import Button from 'app/renderer/main/components/Buttons/Button/Button';
+import {MdDone} from 'react-icons/lib/md';
+
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -80,6 +83,12 @@ export const Component = React.createClass({
     return (
       <div>
         <FileList projectId={projectId} path={fileSelect.path} singleClickFn={this.singleClickFn} doubleClickFn={this.doubleClickFn} crumbClickFn={this.crumbClickFn} selected={fileSelect.selected} options={options}/>
+        <div className="layout-row layout-align-start-center" style={{padding: '10px'}}>
+          <div className="flex"></div>
+          <Button>
+            Select File
+          </Button>
+        </div>
       </div>
     );
   }

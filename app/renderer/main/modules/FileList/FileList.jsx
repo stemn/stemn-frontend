@@ -58,7 +58,7 @@ export const Component = React.createClass({
         <div className={classes.breadcrumbs}>
           <FileBreadCrumbs crumbs={crumbs} clickFn={crumbClickFn}/>
         </div>
-        <div className="rel-box" style={{minHeight: '200px'}}>
+        <div className="rel-box" style={{minHeight: '180px'}}>
         {filesFiltered && filesFiltered.length > 0
           ? filesFiltered.map((file)=><FileRow file={file} singleClick={singleClickFn} doubleClick={doubleClickFn} isActive={selected && selected.fileId == file.fileId}/>)
           : <LoadingOverlay />
