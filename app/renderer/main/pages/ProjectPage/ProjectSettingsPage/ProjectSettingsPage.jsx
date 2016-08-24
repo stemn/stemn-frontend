@@ -46,7 +46,7 @@ export const Component = React.createClass({
     return (
       <div className="layout-row flex" style={PageStyles}>
         <div className="flex-50">
-          <ProjectLinkRemote model={`${entityModel}.remote`} />
+          <ProjectLinkRemote model={`${entityModel}.remote`} value={project.remote} />
           <br />
           <FileSelectInput project={project} />
 

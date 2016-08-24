@@ -23,7 +23,7 @@ export default class extends React.Component{
           <div className="flex scroll-box">
 
             {this.props.sidebar.projects.map((item)=>
-               <SidebarProjectButton item={item} to={{pathname: `/project/${item.stub}/changes`, state: routeState}} clickFn={()=>this.props.MenubarLayoutActions.toggleSidebar(false)}/>
+               <SidebarProjectButton item={item} to={{pathname: `/project/${item._id}/changes`, state: routeState}} clickFn={()=>this.props.MenubarLayoutActions.toggleSidebar(false)}/>
             )}
           </div>
         </div>

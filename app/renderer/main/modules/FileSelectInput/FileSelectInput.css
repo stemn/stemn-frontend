@@ -3,6 +3,9 @@
 .fileSelectInput{
   border: 1px solid border1;
 }
+.fileSelectInput:hover{
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
 .text{
   padding: 5px;
 }

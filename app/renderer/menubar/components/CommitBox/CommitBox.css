@@ -1,3 +1,12 @@
+.container{
+  overflow: hidden;
+  height: 0;
+  transition: height 0.3s ease;
+}
+.containerShow{
+  height: 142px;
+}
+
 .input {
   padding: 10px;
   display: block;
@@ -9,27 +18,29 @@
   border: 1px solid rgba(0, 0, 0, 0.4);
 }
 
-.container{
-  overflow: hidden;
-  height: 0;
-  transition: height 0.3s ease;
-}
-.containerShow{
-  height: 142px;
-}
-
-.textarea {
-  margin-top: 15px;
-  padding: 10px;
-  display: block;
+.mentionsBox{
+  background: white;
   width: 100%;
   margin-bottom: 10px;
-  resize: none;
+  margin-top: 15px;
   min-height: 80px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
 }
-.textarea:focus {
+.mentionsBox > div > div{
+  padding: 10px;
+}
+.mentionsBox textarea{
+  padding: 10px;
+  resize: none;
+}
+
+.mentionsBox textarea:focus {
   outline: none;
   border: 1px solid rgba(0, 0, 0, 0.4);
 }
 
+.mentionsBox ul{
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.1),0 2px 15px rgba(0,0,0,0.1);
+}
+.mentionsBox li{
+  padding: 8px;
+}

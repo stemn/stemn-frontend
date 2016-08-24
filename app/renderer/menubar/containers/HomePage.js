@@ -4,10 +4,11 @@ import Home from '../components/Home';
 import * as ChangeActions from 'app/shared/actions/changes';
 import * as ProjectsActions from 'app/shared/actions/projects';
 
-function mapStateToProps({ changes, projects }, otherProps) {
+function mapStateToProps({changes, projects}, {params}) {
+  const project = projects[params.stub];
   return {
-    changes: changes,
-    project: projects[otherProps.params.stub]
+    project: project,
+    changes: changes[params.stub],
   };
 }
 

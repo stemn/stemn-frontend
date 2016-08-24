@@ -44,7 +44,7 @@ export const Component = React.createClass({
     }
 
     const getDetailSection = () => {
-      if(this.props.timeline.selected.data){
+      if(this.props.timeline && this.props.timeline.selected && this.props.timeline.selected.data){
         if(this.props.timeline.selected.event == 'commit'){
           return (
             <div className="layout-column flex">
