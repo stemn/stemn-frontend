@@ -1,29 +1,59 @@
 import http from 'axios';
 import { push } from 'react-router-redux'
-import {ipcRenderer} from 'electron';
+
+import * as auth from 'app/main/modules/auth/auth.js';
 
 export const aliases = {};
 
 export function loadUserData() {
   return {
-      type:'ALIASED',
-      payload: {},
-      meta: {
-        trigger: 'AUTH/LOAD_USER_DATA',
-      },
+    type:'AUTH/LOAD_USER_DATA',
+    payload: http({
+      url: 'https://stemn.com/api/v1/me',
+      method: 'GET',
+    }),
   }
 }
 
-aliases['AUTH/LOAD_USER_DATA'] = function loadUserDataAlias(args) {
-  return {
-    type:'AUTH/LOAD_USER_DATA',
-    http: true,
-    payload: {
-      url: 'https://stemn.com/api/v1/me',
-      method: 'GET',
-    }
+export function authenticate(provider) {
+  return (dispatch) => {
+    dispatch({
+      type:'AUTH/AUTHENTICATE',
+      payload: auth.authenticate({
+        provider
+      }).then((response)=>{
+        dispatch(setAuthToken(response.data.token))
+        dispatch(initHttpHeaders('bearer ' + response.data.token))
+        dispatch(loadUserData())
+        setTimeout(()=>{dispatch(push('/'))}, 1)
+        return response
+      })
+    })
   }
-};
+}
+
+export function login({email, password}) {
+  return (dispatch) => {
+    dispatch({
+      type:'AUTH/LOGIN',
+      payload: http({
+        url: 'https://stemn.com/api/v1/auth/login',
+        method: 'POST',
+        data: {
+          email: email,
+          password: password
+        }
+      }).then((response)=>{
+        dispatch(setAuthToken(response.data.token))
+        dispatch(initHttpHeaders('bearer ' + response.data.token))
+        dispatch(loadUserData())
+        setTimeout(()=>{dispatch(push('/'))}, 1)
+        return response
+      })
+    })
+  }
+}
+
 
 export function setAuthToken(token) {
   return {

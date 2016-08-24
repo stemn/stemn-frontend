@@ -6,7 +6,6 @@ import system from './system';
 import header from './header';
 import changes from './changes';
 import auth from './auth';
-import login from './login';
 import sidebar from './sidebar';
 import sidebarTimeline from './sidebarTimeline';
 import settings from './settings';
@@ -27,7 +26,6 @@ export default function getRootReducer(scope = 'main') {
     header,
     changes,
     auth,
-    login,
     sidebar,
     sidebarTimeline,
     settings,

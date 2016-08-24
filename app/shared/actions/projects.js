@@ -20,3 +20,13 @@ export function addTeamMember({projectId, user}) {
     }
   };
 }
+
+export function linkRemote({projectId, remoteType}) {
+  return {
+    type: 'PROJECTS/LINK_REMOTE',
+    payload: {
+      projectId,
+      remoteType
+    }
+  };
+}

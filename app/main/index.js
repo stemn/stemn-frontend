@@ -4,6 +4,9 @@ import { app, ipcMain, dialog } from 'electron';
 //import jsonStorage from 'electron-json-storage';
 import { createMainWindow, showMainWindow } from './createMainWindow';
 import { createMenuBar, showMenuWindow } from './createMenuBarWindow';
+
+//import { authInit, authReducer } from './modules/auth/auth.js';
+
 import configureStore from '../shared/store/configureStore';
 import tray from './tray';
 import autoUpdater from './tasks/autoUpdater';
@@ -53,10 +56,11 @@ if(!squirrelStartup){
       store.dispatch(payload);
     });
 
-    ipcMain.on('electron-action', (event, payload) => {
-      if(payload.type == 'WINDOW_MAIN_OPEN'){
+    ipcMain.on('electron-action', (event, action) => {
+      if(action.type == 'WINDOW_MAIN_OPEN'){
         showMainWindow();
       }
+//      authReducer(action, store);
     });
 
     app.on('window-all-closed', () => {
@@ -67,6 +71,7 @@ if(!squirrelStartup){
       // On OS X it's common to re-create a window in the app when the
       // dock icon is clicked and there are no other windows open.
       createMainWindow();
+
     });
 
     appIcon.on('click', (event, trayBounds) => {

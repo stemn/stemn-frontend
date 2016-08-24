@@ -8,7 +8,7 @@ import AuthedAppPage    from './components/App/AuthedAppPage';
 import UnAuthedAppPage  from './components/App/UnAuthedAppPage';
 
 import ChangesPage from './containers/ChangesPage';
-import LoginPage from './containers/LoginPage';
+import LoginPage from './pages/LoginPage/LoginPage.jsx';
 //import ErrorPage from './containers/ErrorPage/ErrorPage.container.js';
 import SettingsPage from './pages/SettingsPage/SettingsPage.container.js';
 import HomePage from './pages/HomePage/HomePage.jsx';
@@ -28,7 +28,7 @@ export default (store) => {
   const getUserData = (nextState, replace, callback) => {
     if (!store.getState().auth.user._id) {
       store.dispatch(AuthActions.loadUserData());
-      setTimeout(callback,1000);
+      setTimeout(callback, 1000);
 //      store.dispatch(AuthActions.loadUserData()).then(()=>{
 //        callback()
 //      }).catch(()=>{
