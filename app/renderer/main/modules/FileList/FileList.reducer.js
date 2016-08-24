@@ -15,7 +15,8 @@ export default function reducer(state = initialState, action = {}) {
     case 'FILE_LIST/FETCH_FILES_FULFILLED':
       return u({
         [action.meta.key] : {
-          data : action.payload.data.files,
+          entries : action.payload.data.entries,
+          parents : action.payload.data.parents,
           loading: false
         }
       }, state)

@@ -265,7 +265,7 @@
 
 :global(.Select-menu-outer) {
   background-color: #fff;
-  border: 1px solid border1;
+  border: 1px solid rgba(0, 0, 0, 0.4);
   box-sizing: border-box;
   margin-top: -1px;
   max-height: 200px;

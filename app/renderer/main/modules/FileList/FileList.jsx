@@ -41,28 +41,24 @@ export const Component = React.createClass({
 
   render() {
     const {files, singleClickFn, doubleClickFn, crumbClickFn, selected, options} = this.props;
-    const crumbs = [
-      {
-        text: 'HOME',
-      },{
-        text: 'STEMN',
-      },{
-        text: 'FOLDER',
-      }
-    ]
 
-    const filesFiltered = options.foldersOnly && files.data && files.data.length > 0 ? files.data.filter((file)=>file.type == 'folder') : files.data;
+    const displayResults = () => {
+      const filesFiltered = options.foldersOnly && files.data && files.data.length > 0 ? files.data.filter((file)=>file.type == 'folder') : files.data;
+      if(filesFiltered && filesFiltered.length > 0){
+        return filesFiltered.map((file)=><FileRow file={file} singleClick={singleClickFn} doubleClick={doubleClickFn} isActive={selected && selected.fileId == file.fileId}/>)
+      }
+      else{
+        return <div style={{padding: '15px'}}>No results</div>
+      }
+    }
 
     return (
       <div>
         <div className={classes.breadcrumbs}>
-          <FileBreadCrumbs crumbs={crumbs} clickFn={crumbClickFn}/>
+          <FileBreadCrumbs parents={files && files.parents ? files.parents : ''} clickFn={crumbClickFn}/>
         </div>
         <div className="rel-box" style={{minHeight: '180px'}}>
-        {filesFiltered && filesFiltered.length > 0
-          ? filesFiltered.map((file)=><FileRow file={file} singleClick={singleClickFn} doubleClick={doubleClickFn} isActive={selected && selected.fileId == file.fileId}/>)
-          : <LoadingOverlay />
-        }
+        {files && !files.loading ? displayResults() : <LoadingOverlay />}
         </div>
       </div>
     );

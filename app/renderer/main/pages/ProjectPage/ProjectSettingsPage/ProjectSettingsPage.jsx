@@ -46,28 +46,18 @@ export const Component = React.createClass({
     return (
       <div className="layout-row flex" style={PageStyles}>
         <div className="flex-50">
+          <h3>File Store Settings</h3>
           <ProjectLinkRemote model={`${entityModel}.remote`} value={project.remote} />
           <br />
           <FileSelectInput project={project} />
-
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
           <br />
           <br />
           <h3>Team Members</h3>
           {project.team.map((item)=><div style={{marginBottom: '15px'}}><TeamMember item={item}/></div>)}
-          <br />
           <UserSearch select={this.selectFn} />
           <br />
+          <br />
+          <h3>General Settings</h3>
           <Field model={`${entityModel}.name`}>
             <input className="dr-input" type="text" placeholder="Project Name"/>
           </Field>
