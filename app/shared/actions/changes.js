@@ -3,8 +3,6 @@ import { actions } from 'react-redux-form';
 export const SELECTED_FILE_CHANGE = 'CHANGES/SELECTED_FILE_CHANGE'
 export const TOGGLE_ALL_CHANGED_FILES = ''
 
-
-
 export function selectedFileChange({projectId, selected}) {
   return {
       type: SELECTED_FILE_CHANGE,
@@ -41,7 +39,7 @@ export function fetchChanges({projectId}) {
       method: 'GET',
       url: `http://localhost:3000/api/v1/sync/timeline/${projectId}`,
       params: {
-        type: 'revisions'
+        type: 'changes'
       },
       meta: {
         projectId

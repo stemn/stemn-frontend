@@ -1,3 +1,5 @@
+import http from 'axios';
+
 export const GET_PROJECT = 'PROJECTS/GET_PROJECT';
 
 export function getProject({projectId}) {
@@ -21,12 +23,41 @@ export function addTeamMember({projectId, user}) {
   };
 }
 
-export function linkRemote({projectId, remoteType}) {
+export function changeUserPermissions({projectId, userId, role}) {
   return {
-    type: 'PROJECTS/LINK_REMOTE',
+    type: 'PROJECTS/CHANGE_USER_PERMISSIONS',
     payload: {
       projectId,
-      remoteType
+      userId,
+      role
+    }
+  };
+}
+
+export function removeTeamMember({projectId, userId}) {
+  return {
+    type: 'PROJECTS/REMOVE_TEAM_MEMBER',
+    payload: {
+      projectId,
+      userId,
+    }
+  };
+}
+
+export function linkRemote({projectId, provider, path_display, path, id}) {
+  return {
+    type: 'PROJECTS/LINK_REMOTE',
+    payload: http({
+      method: 'PUT',
+      url: `http://localhost:3000/api/v1/remote/link/${projectId}/${provider}`,
+      params: {
+        path_display : path_display,
+        path         : path,
+        id           : id
+      }
+    }),
+    meta: {
+      cacheKey: projectId
     }
   };
 }

@@ -11,14 +11,15 @@ export default React.createClass({
     this.setState({ isOpen: toState === null ? !this.state.isOpen : toState })
   },
   render() {
+    const popoverBody = (<div onClick={()=>this.toggle(false)}>{this.props.children[1]}</div>)
     return (
       <Popover
         isOpen={this.state.isOpen}
-        body={this.props.children[1]}
+        body={popoverBody}
         onOuterAction={()=>this.toggle(false)}
         preferPlace = {this.props.preferPlace || 'above'}>
         <div
-          className="flex"
+          className={this.props.className}
           onClick={()=>this.toggle(null)}>
           {this.props.children[0]}
         </div>

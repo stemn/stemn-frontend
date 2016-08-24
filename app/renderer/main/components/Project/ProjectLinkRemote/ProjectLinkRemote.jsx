@@ -5,9 +5,6 @@ import Select from 'react-select';
 import 'app/renderer/assets/css/select.css';
 import { actions } from 'react-redux-form';
 
-
-//import RadioAlt from 'app/renderer/main/components/Input/RadioAlt/RadioAlt.jsx'
-
 // Styles
 import classNames from 'classnames';
 
@@ -24,6 +21,8 @@ const Component = React.createClass({
       { value: 'none', label: 'None' }
     ];
 
+    console.log(this.props);
+
     return (
       <div>
         <Select
@@ -31,7 +30,7 @@ const Component = React.createClass({
           value={value}
           options={options}
           onChange={this.onChangeFn}
-          clearable="false"
+          clearable={false}
         />
       </div>
     );
@@ -40,14 +39,3 @@ const Component = React.createClass({
 
 
 export default connect()(Component);
-
-
-//        <RadioAlt model={model} value='dropbox'>
-//          Connect Dropbox
-//        </RadioAlt>
-//        <RadioAlt model={model} value='drive'>
-//          Connect Drive
-//        </RadioAlt>
-//        <RadioAlt model={model} value='none'>
-//          None
-//        </RadioAlt>

@@ -78,7 +78,7 @@ export const Component = React.createClass({
 
         <div>
           <div className="layout-row layout-align-start-center">
-            <PopoverMenu>
+            <PopoverMenu className="flex">
                 <div className={userStyles.userWrapper + ' flex layout-row layout-align-start-center'}>
                   <img className={userStyles.userAvatar} src={'https://stemn.com' + this.props.auth.user.picture + '?size=thumb&crop=true'} />
                   <div className="flex">

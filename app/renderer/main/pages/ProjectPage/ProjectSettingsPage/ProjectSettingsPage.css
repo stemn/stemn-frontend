@@ -1,0 +1,26 @@
+@value border1, bg1 from "app/renderer/assets/css/themes/standard.css";
+
+.container{
+  padding: 20px;
+  background: bg1;
+}
+.panel{
+  padding: 20px;
+  background: white;
+  border: 1px solid border1;
+  margin-bottom: 15px;
+}
+.panel h3{
+  margin-top: 0px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.4);
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+}
+.panel p{
+  font-size: 13px;
+  color: #939393;
+  margin-bottom: 15px;
+  line-height: 1.3em;
+}
