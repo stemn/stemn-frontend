@@ -14,6 +14,7 @@ import projectSettings from './projectSettings';
 import projects from './projects';
 import files from './files';
 import menubarLayout from './menubarLayout';
+import {reducer as toastrReducer} from 'react-redux-toastr'
 
 import userSearch from '../../renderer/main/modules/UserSearch/UserSearch.reducer.js';
 import fileList from '../../renderer/main/modules/FileList/FileList.reducer.js';
@@ -37,7 +38,8 @@ export default function getRootReducer(scope = 'main') {
     userSearch,
     fileList,
     fileSelect,
-    modals
+    modals,
+    toastr: toastrReducer
   };
 
   if (scope === 'renderer') {

@@ -1,7 +1,8 @@
 import { ipcRenderer } from 'electron';
 
 const forwardToMain = store => next => action => { // eslint-disable-line no-unused-vars
-  if(action.type.substr(0, 2) !== '@@' && (
+  if(action.type.substr(0, 2)  !== '@@' &&
+     action.type.substr(0, 12) !== '@ReduxToastr' && (
       !action.meta       ||
       !action.meta.scope ||
       action.meta.scope !== 'local'

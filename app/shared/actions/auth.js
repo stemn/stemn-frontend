@@ -3,8 +3,6 @@ import { push } from 'react-router-redux'
 
 import * as auth from 'app/main/modules/auth/auth.js';
 
-export const aliases = {};
-
 export function loadUserData() {
   return {
     type:'AUTH/LOAD_USER_DATA',

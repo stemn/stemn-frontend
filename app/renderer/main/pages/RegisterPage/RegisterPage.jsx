@@ -19,6 +19,7 @@ import Button from 'app/renderer/main/components/Buttons/Button/Button.jsx';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton';
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
+
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
@@ -35,7 +36,6 @@ export const Component = React.createClass({
         <div className="layout-column layout-align-center-center flex" style={{background: 'rgba(0, 0, 0, 0.05)'}}>
           <div className={classes.container + ' layout-row'}>
             <div className={classes.imageSection + ' flex-60'}>
-
             </div>
             <div className={classes.textSection + ' flex-40'}>
               <div className="text-title-3">Register</div>

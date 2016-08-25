@@ -1,0 +1,327 @@
+/*
+[data-icon]:before {
+  font-family: redux-toastr!important;
+  content: attr(data-icon);
+  font-style: normal!important;
+  font-weight: 400!important;
+  font-variant: normal!important;
+  text-transform: none!important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale
+}
+
+[class*=" icon-"]:before,
+[class^=icon-]:before {
+  font-family: redux-toastr!important;
+  font-style: normal!important;
+  font-weight: 400!important;
+  font-variant: normal!important;
+  text-transform: none!important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale
+}
+*/
+
+/*
+.icon-close-round:before {
+  content: "\62"
+}
+
+.icon-information-circle:before {
+  content: "\63"
+}
+
+.icon-check-1:before {
+  content: "\64"
+}
+
+.icon-exclamation-triangle:before {
+  content: "\65"
+}
+
+.icon-exclamation-alert:before {
+  content: "\69"
+}
+*/
+
+.animated {
+  transform-origin: bottom center;
+}
+
+.animated.bounceIn {
+  animation: fade-in-pulse-in .3s forwards ease;
+}
+
+.animated.bounceOut {
+  animation: fade-in-pulse-out .3s forwards ease;
+}
+
+
+@keyframes fade-in-pulse-in {
+  0% {
+    opacity: 0;
+    transform: scale(.8);
+  }
+  50% {
+    opacity: 1;
+  }
+  100%,
+  70% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-in-pulse-out {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
+
+
+.confirm-holder {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  display: none
+}
+
+.confirm-holder.active {
+  display: block
+}
+
+.confirm-holder .shadow {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(50, 58, 68, .8)
+}
+
+.confirm-holder .confirm {
+  width: 320px;
+  background-color: #fff;
+  position: absolute;
+  z-index: 9;
+  top: 20%;
+  left: 50%;
+  margin-left: -160px;
+  box-shadow: 3px 3px 20px #333;
+  overflow: hidden
+}
+
+.confirm-holder .confirm .message {
+  width: 90%;
+  padding: 5%;
+  min-height: 50px;
+  font-size: 1em;
+  background-color: #fff;
+  text-align: center;
+  clear: both
+}
+
+.confirm-holder .confirm button {
+  width: 50%;
+  height: 50px;
+  text-transform: capitalize;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+  float: left;
+  border-top: 1px solid #f0f0f0;
+  font-size: 14px;
+  overflow: hidden
+}
+
+.confirm-holder .confirm button p {
+  position: relative;
+  z-index: 1;
+  line-height: 100%;
+  padding: 0;
+  margin: 0;
+  color: #555
+}
+
+.confirm-holder .confirm button:before {
+  content: '';
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: -20px;
+  background-color: #999;
+  border-radius: 50%;
+  z-index: 0;
+  opacity: .2;
+  transform: scale(0)
+}
+
+.confirm-holder .confirm button.active:before {
+  transition: transform .25s ease-in-out;
+  transform: scale(2)
+}
+
+.confirm-holder .confirm button:focus {
+  outline: 0
+}
+
+.confirm-holder .confirm button:hover {
+  cursor: pointer;
+  background-color: #f5f5f5
+}
+
+body.toastr-confirm-active {
+  overflow: hidden
+}
+
+.redux-toastr {
+  width: 310px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  position: fixed;
+  z-index: 99999999
+}
+
+.redux-toastr *,
+.redux-toastr:after,
+.redux-toastr:before {
+  box-sizing: border-box
+}
+
+.redux-toastr.top-left,
+.redux-toastr.top-right {
+  top: 15px
+}
+
+.redux-toastr.bottom-left,
+.redux-toastr.bottom-right {
+  bottom: 15px
+}
+
+.redux-toastr.top-left {
+  left: 15px
+}
+
+.redux-toastr.top-right {
+  right: 15px
+}
+
+.redux-toastr.bottom-left {
+  left: 15px
+}
+
+.redux-toastr.bottom-right {
+  right: 15px
+}
+
+.redux-toastr .toastr {
+  background-color: #fcfcfc;
+  width: 100%;
+  min-height: 40px;
+  margin-bottom: 10px;
+  position: relative;
+  color: #333;
+  opacity: .94;
+  box-shadow: 2px 2px 10px #ccc
+}
+
+
+.redux-toastr .toastr:hover {
+  cursor: pointer;
+  opacity: 1
+}
+
+.redux-toastr .toastr .message-holder {
+  width: 100%;
+  position: relative;
+  font-size: 1em;
+  text-align: left
+}
+
+.redux-toastr .toastr .message-holder .title {
+  font-size: 13px;
+  line-height: 1.4em;
+}
+
+.redux-toastr .toastr.error,
+.redux-toastr .toastr.info,
+.redux-toastr .toastr.success,
+.redux-toastr .toastr.warning {
+  color: #fff;
+  padding: 15px
+}
+
+.redux-toastr .toastr.info {
+  background-color: #58abc3
+}
+
+.redux-toastr .toastr.success {
+  background-color: #60bb71
+}
+
+.redux-toastr .toastr.warning {
+  background-color: #f7a336
+}
+
+.redux-toastr .toastr.error {
+  background-color: rgb(244,67,54);
+}
+
+.redux-toastr .toastr.message {
+  opacity: 1;
+  border: 1px solid #dbdbdb
+}
+
+.redux-toastr .toastr.message .message-holder {
+  width: 100%;
+  margin-left: 0
+}
+
+.redux-toastr .toastr.message .message-holder .title {
+  width: 90%;
+  height: 50px;
+  text-align: center;
+  font-size: 1.2em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  line-height: 50px;
+  padding: 0 20px
+}
+
+.redux-toastr .toastr.message .message-holder .message {
+  width: 100%;
+  max-height: 400px;
+  overflow: hidden;
+  overflow-y: auto;
+  border-top: 1px solid #f1f1f1;
+  border-bottom: 1px solid #f1f1f1;
+  background-color: #fff;
+  padding: 15px;
+  font-size: 1.1em;
+  margin-bottom: 20px
+}
+
+.redux-toastr .toastr.message .message-holder .message img {
+  display: block;
+  margin: 10px auto;
+  max-width: 100%
+}

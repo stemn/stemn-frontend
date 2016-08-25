@@ -13,6 +13,7 @@ import forwardToRendererWindow from './middleware/forwardToRendererWindow';
 //import triggerAlias from './middleware/triggerAlias';
 import routerFix from './middleware/routerFix';
 import transformHttp from './middleware/transformHttp';
+import errorToast from './middleware/errorToast';
 
 export default function configureStore(initialState, scope = 'main') {
   const logger = createLogger({
@@ -32,6 +33,7 @@ export default function configureStore(initialState, scope = 'main') {
       forwardToMain,
       forwardToRendererWindow,
       router,
+      errorToast,
     ];
     if (process.env.NODE_ENV == 'development') {
        middleware.push(logger);
@@ -43,6 +45,7 @@ export default function configureStore(initialState, scope = 'main') {
       thunk,
       transformHttp,
       promise(),
+
 //      triggerAlias,
       forwardToRenderer,
     ];

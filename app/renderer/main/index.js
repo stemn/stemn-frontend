@@ -8,6 +8,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import configureStore from '../../shared/store/configureStore';
 import invokeGetters from 'app/shared/helpers/invokeGetters.js'
 import getRoutes from './routes';
+import ReduxToastr from 'react-redux-toastr'
 
 const initialState = remote.getGlobal('state');
 const cloneState = invokeGetters(initialState);
@@ -21,9 +22,15 @@ ipcRenderer.on('redux-action', (event, payload) => {
 
 render(
   <Provider store={store}>
-    <Router history={history}>
-      {getRoutes(store)}
-    </Router>
+    <div>
+      <Router history={history}>
+        {getRoutes(store)}
+      </Router>
+      <ReduxToastr
+        timeOut={4000}
+        newestOnTop={true}
+        position="bottom-center"/>
+    </div>
   </Provider>,
   document.getElementById('root')
 );
