@@ -1,4 +1,4 @@
-@value primary, primary-2, grey-3, bg1 from "app/renderer/assets/css/themes/standard.css";
+@value primary, primary-2, grey-3, bg1, linkedin, linkedin-dark, facebook, facebook-dark from "app/renderer/assets/css/themes/standard.css";
 
 .button {
   border: none;
@@ -23,4 +23,20 @@
 }
 .button:global(.primary):hover{
   background: primary-2;
+}
+
+.button:global(.linkedin){
+  background: linkedin;
+  color: white;
+}
+.button:global(.linkedin):hover{
+  background: linkedin-dark;
+}
+
+.button:global(.facebook){
+  background: facebook;
+  color: white;
+}
+.button:global(.facebook):hover{
+  background: facebook-dark;
 }

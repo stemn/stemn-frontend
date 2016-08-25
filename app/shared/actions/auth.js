@@ -40,8 +40,32 @@ export function login({email, password}) {
         url: 'https://stemn.com/api/v1/auth/login',
         method: 'POST',
         data: {
-          email: email,
-          password: password
+          email,
+          password
+        }
+      }).then((response)=>{
+        dispatch(setAuthToken(response.data.token))
+        dispatch(initHttpHeaders('bearer ' + response.data.token))
+        dispatch(loadUserData())
+        setTimeout(()=>{dispatch(push('/'))}, 1)
+        return response
+      })
+    })
+  }
+}
+
+export function register({email, password, firstname, lastname}) {
+  return (dispatch) => {
+    dispatch({
+      type:'AUTH/REGISTER',
+      payload: http({
+        url: 'http://localhost:3000/api/v1/auth/register',
+        method: 'POST',
+        data: {
+          email,
+          password,
+          firstname,
+          lastname
         }
       }).then((response)=>{
         dispatch(setAuthToken(response.data.token))

@@ -3,18 +3,19 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
 
-import RootAppPage      from './components/App/RootAppPage';
-import AuthedAppPage    from './components/App/AuthedAppPage';
-import UnAuthedAppPage  from './components/App/UnAuthedAppPage';
+import RootAppPage          from './components/App/RootAppPage';
+import AuthedAppPage        from './components/App/AuthedAppPage';
+import UnAuthedAppPage      from './components/App/UnAuthedAppPage';
 
-import ChangesPage from './containers/ChangesPage';
-import LoginPage from './pages/LoginPage/LoginPage.jsx';
+import ProjectChangesPage   from './pages/ProjectChangesPage/ProjectChangesPage.jsx';
+import LoginPage            from './pages/LoginPage/LoginPage.jsx';
+import RegisterPage         from './pages/RegisterPage/RegisterPage.jsx';
 //import ErrorPage from './containers/ErrorPage/ErrorPage.container.js';
-import SettingsPage from './pages/SettingsPage/SettingsPage.container.js';
-import HomePage from './pages/HomePage/HomePage.jsx';
-import ProjectPage from './pages/ProjectPage/ProjectPage.container.js';
-import ProjectSettingsPage from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.jsx';
-import ProjectFeedPage from './pages/ProjectFeedPage/ProjectFeedPage.jsx';
+import SettingsPage         from './pages/SettingsPage/SettingsPage.container.js';
+import HomePage             from './pages/HomePage/HomePage.jsx';
+import ProjectPage          from './pages/ProjectPage/ProjectPage.container.js';
+import ProjectSettingsPage  from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.jsx';
+import ProjectFeedPage      from './pages/ProjectFeedPage/ProjectFeedPage.jsx';
 
 // Actions
 const AuthActions = require('../../shared/actions/auth');
@@ -59,7 +60,7 @@ export default (store) => {
     <Route component={RootAppPage} onEnter={getUserData}>
       <Route component={AuthedAppPage} onEnter={requireAuth}>
         <Route path="/project/:stub" component={ProjectPage}>
-          <Route path="/project/:stub/changes" component={ChangesPage}/>
+          <Route path="/project/:stub/changes" component={ProjectChangesPage}/>
           <Route path="/project/:stub/feed" component={ProjectFeedPage}/>
           <Route path="/project/:stub/settings" component={ProjectSettingsPage}/>
         </Route>
@@ -69,6 +70,7 @@ export default (store) => {
       <Route component={UnAuthedAppPage}>
         <Route onEnter={requireNonAuth}>
           <Route path="/login" component={LoginPage} />
+          <Route path="/register" component={RegisterPage} />
         </Route>
       </Route>
     </Route>

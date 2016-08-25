@@ -10,7 +10,7 @@ import React from 'react';
 
 // Styles
 import classNames from 'classnames';
-import classes from './LoginPage.css'
+import classes from '../LoginPage/LoginPage.css'
 
 // Sub Components
 import {Form , Field } from 'react-redux-form';
@@ -18,9 +18,6 @@ import { Link } from 'react-router';
 import Button from 'app/renderer/main/components/Buttons/Button/Button.jsx';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton';
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import Tabs from 'app/renderer/main/components/Tabs/Tabs'
-
-
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -41,13 +38,20 @@ export const Component = React.createClass({
 
             </div>
             <div className={classes.textSection + ' flex-40'}>
-              <div className="text-title-3">Sign In</div>
+              <div className="text-title-3">Register</div>
                <div className={classes.form}>
                  <br />
+                 <div className="layout-row">
+                   <Field model="auth.login.firstname">
+                     <input className={classes.input} style={{marginRight: '5px'}} type="text" placeholder="First name"/>
+                   </Field>
+                    <Field model="auth.login.lastname">
+                     <input className={classes.input} style={{marginLeft: '5px'}} type="text" placeholder="Last Name"/>
+                   </Field>
+                 </div>
                  <Field model="auth.login.email">
                    <input className={classes.input} type="text" placeholder="Email"/>
                  </Field>
-
                  <Field model="auth.login.password">
                    <input className={classes.input} type="password" placeholder="Password"/>
                  </Field>
@@ -56,10 +60,12 @@ export const Component = React.createClass({
                      <Button style={{marginLeft: '5px'}}
                      className="primary flex"
                      type="submit"
-                     onClick={()=>AuthActions.login({
+                     onClick={()=>AuthActions.register({
                          email: auth.login.email,
-                         password: auth.login.password
-                       })}>Sign In</Button>
+                         password: auth.login.password,
+                         firstname: auth.login.firstname,
+                         lastname: auth.login.lastname
+                       })}>Register</Button>
                      </div>
                  </div>
                  <br />
@@ -78,7 +84,7 @@ export const Component = React.createClass({
                 </div>
               </div>
               <div className="layout-row">
-                <div>Dont have an account? <Link to="/register" className="link-primary">Register</Link></div>
+                <div>Already have an account? <Link to="/login" className="link-primary">Login</Link></div>
               </div>
             </div>
           </div>
@@ -87,18 +93,6 @@ export const Component = React.createClass({
     }
   }
 });
-
-//                <div><Link to="/forgot-password">Recover Password</Link></div>
-
-
-//              <Tabs>
-//                 <a className="active">Sign in</a>
-//                 <a>Register</a>
-//              </Tabs>
-
-//              <Link to="/register" className="flex">
-//                    <Button style={{marginRight: '5px'}} className="flex" type="button">Register</Button>
-//                  </Link>
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////

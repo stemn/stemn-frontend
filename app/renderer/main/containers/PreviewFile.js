@@ -5,9 +5,9 @@ import * as filesActions from 'app/shared/actions/files';
 
 //console.log(filesActions);
 
-function mapStateToProps(params, otherProps) {
+function mapStateToProps({files}, otherProps) {
   return {
-    file: params.files[otherProps.projectStub+'/'+otherProps.path]
+//    file: files[otherProps.projectStub+'/'+otherProps.path]
   };
 }
 

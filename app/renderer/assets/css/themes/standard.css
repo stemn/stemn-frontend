@@ -8,3 +8,10 @@
 @value grey-1: rgba(0, 0, 0, 0.1);
 @value grey-2: rgba(0, 0, 0, 0.3);
 @value grey-3: rgba(0, 0, 0, 0.5);
+
+
+/*External*/
+@value linkedin: #1884bc;
+@value linkedin-dark: #166f9d;
+@value facebook: #3b5998;
+@value facebook-dark: #2d4579;

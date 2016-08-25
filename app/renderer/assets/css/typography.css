@@ -25,3 +25,11 @@
 .text-description-1{
   color: rgba(0,0,0,0.4);
 }
+
+
+.link-primary{
+  color: rgb(68, 154, 211);
+}
+.link-primary:hover{
+  color: rgb(64, 129, 173)
+}

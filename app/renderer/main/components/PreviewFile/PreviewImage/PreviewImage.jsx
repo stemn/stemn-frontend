@@ -2,12 +2,15 @@ import React from 'react';
 import styles from './PreviewImage.css';
 
 export default class extends React.Component{
-  componentDidMount() {
-  }
   render() {
+    const {file, project} = this.props;
+
+    const fileUrl = `http://localhost:3000/api/v1/sync/download/${project._id}/${file.fileId}`;
+
+    console.log(fileUrl);
     return (
       <div className={styles.container + ' layout-column layout-align-center-center'}>
-          <img src="https://stemn.com/api/v1/sync/download/stemn/demo files/Images/Demo.bmp?revision=5b40602372e6e" className={styles.image} />
+          <img src={fileUrl} className={styles.image} />
       </div>
     )
   }

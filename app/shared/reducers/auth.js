@@ -8,6 +8,8 @@ const initialState = {
   login: {
     email: 'founders@stemn.com',
     password: 'People123',
+    firstname: '',
+    lastname: '',
   }
 }
 
@@ -54,15 +56,28 @@ const mainReducer = (state, action) => {
         authLoading: false
       }
 
-    case 'AUTH/SEND_LOGIN_PENDING':
+    case 'AUTH/LOGIN_PENDING':
       return {...state,
         authLoading: true
       }
-    case 'AUTH/SEND_LOGIN_FULFILLED':
+    case 'AUTH/LOGIN_FULFILLED':
       return {...state,
         authLoading: false,
       }
-    case 'AUTH/SEND_LOGIN_REJECTED':
+    case 'AUTH/LOGIN_REJECTED':
+      return {...state,
+        authLoading: false,
+      }
+
+    case 'AUTH/REGISTER_PENDING':
+      return {...state,
+        authLoading: true
+      }
+    case 'AUTH/REGISTER_FULFILLED':
+      return {...state,
+        authLoading: false,
+      }
+    case 'AUTH/REGISTER_REJECTED':
       return {...state,
         authLoading: false,
       }

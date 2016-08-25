@@ -6,7 +6,6 @@ import SelectList from 'app/renderer/main/components/Input/SelectList/SelectList
 import Header from 'app/renderer/main/modules/Header/Header.jsx'
 
 // Styles
-import classNames from 'classnames';
 import tabsStyles from 'app/renderer/main/components/Tabs/Tabs.css'
 
 
@@ -18,7 +17,7 @@ export default class SettingsPage extends React.Component{
         <Header>Account Settings</Header>
         <div className="layout-column flex rel-box" style={{padding: '5px 25px'}}>
           <Tabs>
-            <a className={tabsStyles.active}>Application Settings</a>
+            <a className="active">Application Settings</a>
             <a>Account Settings</a>
           </Tabs>
           <div className="layout-row flex">
