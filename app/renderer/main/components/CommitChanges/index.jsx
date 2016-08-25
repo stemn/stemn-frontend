@@ -19,14 +19,18 @@ export default (props) => {
     <div className="layout-column flex">
       <div className="layout-column flex">
         <FileChangeTitleRow text={props.changes.data.length + ' file changes'} model={`changes.${props.project._id}.toggleAll`} value={props.changes.toggleAll} changeAction={props.actToggleAll}/>
-        <div className="scroll-box flex">
-          {props.changes.data.map((item, idx)=><FileChangeRowContext key={item._id}
-          text={item.data.name}
-          clickFn={()=>{props.selectedFileChange({projectId: props.project._id, selected: item})}}
-          isActive={item._id == props.changes.selected._id}
-          model={`changes.${props.project._id}.data.${idx}.selected`}
-          value={item.selected}/>)}
-        </div>
+        {
+          props.changes.data.length > 0
+          ? <div className="scroll-box flex">
+            {props.changes.data.map((item, idx)=><FileChangeRowContext key={item._id}
+              text={item.data.name}
+              clickFn={()=>{props.selectedFileChange({projectId: props.project._id, selected: item})}}
+              isActive={item._id == props.changes.selected._id}
+              model={`changes.${props.project._id}.data.${idx}.selected`}
+              value={item.selected}/>)}
+          </div>
+          : <div className="layout-column layout-align-center-center text-title-4 flex">No Changes</div>
+        }
       </div>
       <FileContextmenu identifier={contextIdentifier}/>
     </div>

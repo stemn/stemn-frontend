@@ -13,16 +13,6 @@
 :global(.Select) {
   position: relative;
 }
-
-:global(.Select,
-.Select div,
-.Select input,
-.Select span) {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
 :global(.Select.is-disabled > .Select-control) {
   background-color: #f9f9f9;
 }
@@ -85,8 +75,7 @@
 }
 */
 
-:global(.Select-placeholder,
-.Select--single > .Select-control .Select-value) {
+:global(.Select-placeholder), :global(.Select--single > .Select-control .Select-value) {
   bottom: 0;
   color: #aaa;
   left: 0;
@@ -102,32 +91,31 @@
   white-space: nowrap;
 }
 
-:global(.has-value.Select--single > .Select-control .Select-value .Select-value-label,
-.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label) {
+:global(.has-value.Select--single > .Select-control .Select-value .Select-value-label),
+:global(.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label) {
   color: #333;
 }
 
-:global(.has-value.Select--single > .Select-control .Select-value a.Select-value-label,
-.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label) {
+:global(.has-value.Select--single > .Select-control .Select-value a.Select-value-label),
+:global(.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label) {
   cursor: pointer;
   text-decoration: none;
 }
 
-/*
-:global(.has-value.Select--single > .Select-control .Select-value a.Select-value-label:hover,
-.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label:hover,
-.has-value.Select--single > .Select-control .Select-value a.Select-value-label:focus,
-.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label:focus) {
+:global(.has-value.Select--single > .Select-control .Select-value a.Select-value-label:hover),
+:global(.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label:hover),
+:global(.has-value.Select--single > .Select-control .Select-value a.Select-value-label:focus),
+:global(.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label:focus) {
   color: #007eff;
   outline: none;
   text-decoration: underline;
 }
-*/
 
 :global(.Select-input) {
-  height: 34px;
+  height: 20px;
   padding-left: 10px;
   padding-right: 10px;
+  padding-top: 10px;
   vertical-align: middle;
 }
 
@@ -227,8 +215,8 @@
   width: 0;
 }
 
-:global(.is-open .Select-arrow,
-.Select-arrow-zone:hover > .Select-arrow) {
+:global(.is-open .Select-arrow),
+:global(.Select-arrow-zone:hover > .Select-arrow) {
   border-top-color: #666;
 }
 
@@ -312,7 +300,6 @@
   padding: 8px 10px;
 }
 
-/*
 :global(.Select--multi .Select-input) {
   vertical-align: middle;
   margin-left: 10px;
@@ -327,8 +314,8 @@
   background-color: #ebf5ff;
 }
 
-:global(.Select--multi .Select-value-icon,
-.Select--multi .Select-value-label) {
+:global(.Select--multi .Select-value-icon),
+:global(.Select--multi .Select-value-label) {
   display: inline-block;
   vertical-align: middle;
 }
@@ -358,8 +345,8 @@
   border-right: 1px solid #c2e0ff;
 }
 
-:global(.Select--multi .Select-value-icon:hover,
-.Select--multi .Select-value-icon:focus) {
+:global(.Select--multi .Select-value-icon:hover),
+:global(.Select--multi .Select-value-icon:focus) {
   background-color: #d8eafd;
 }
 
@@ -378,12 +365,12 @@
   border-right: 1px solid #e3e3e3;
 }
 
-:global(.Select--multi.is-disabled .Select-value-icon:hover,
-.Select--multi.is-disabled .Select-value-icon:focus,
-.Select--multi.is-disabled .Select-value-icon:active) {
+:global(.Select--multi.is-disabled .Select-value-icon:hover),
+:global(.Select--multi.is-disabled .Select-value-icon:focus),
+:global(.Select--multi.is-disabled .Select-value-icon:active) {
   background-color: #fcfcfc;
 }
-*/
+
 
 /*
 :global(@keyframes Select-animation-spin {
@@ -391,7 +378,9 @@
     transform: rotate(1turn);
   }
 })
+*/
 
+/*
 :global(@-webkit-keyframes Select-animation-spin {
   to {
     -webkit-transform: rotate(1turn);

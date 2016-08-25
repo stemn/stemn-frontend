@@ -60,7 +60,7 @@ export const Component = React.createClass({
 
     return (
       <div className={classes.container+' layout-row layout-align-center flex'}>
-        <div className="flex-50">
+        <div style={{maxWidth: '600px'}}>
           <div className={classes.panel}>
             <h3>File Store Settings</h3>
             <p>Connect your Dropbox or Drive to sync all files and changes. Only one Google Drive or one Dropbox can be connected to a project.</p>

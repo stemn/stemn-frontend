@@ -61,7 +61,9 @@ export default React.createClass({
           <div className="layout-row flex">
             <div className="layout-column">
               <ContentSidebar>
-                {props.changes && props.changes.data ? <CommitChanges changes={props.changes} project={props.project} actToggleAll={this.toggleAll} selectedFileChange={props.changesActions.selectedFileChange}/> : ''}
+                {props.changes && props.changes.data
+                  ? <CommitChanges changes={props.changes} project={props.project} actToggleAll={this.toggleAll} selectedFileChange={props.changesActions.selectedFileChange}/>
+                  : ''}
 
                 <div style={this.CommitBoxStyles}>
                   <CommitBox changes={props.changes} changesActions={props.changesActions} commitFn={()=>this.commitFn()} project={this.props.project}/>
