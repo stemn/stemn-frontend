@@ -13,6 +13,7 @@ import project from './project';
 import projectSettings from './projectSettings';
 import projects from './projects';
 import files from './files';
+import users from './users';
 import menubarLayout from './menubarLayout';
 import {reducer as toastrReducer} from 'react-redux-toastr'
 
@@ -39,6 +40,7 @@ export default function getRootReducer(scope = 'main') {
     fileList,
     fileSelect,
     modals,
+    users,
     toastr: toastrReducer
   };
 

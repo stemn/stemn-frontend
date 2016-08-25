@@ -1,7 +1,8 @@
 @value border1 from "app/renderer/assets/css/themes/standard.css";
 
 .dr-input {
-  padding: 5px;
+  height: 36px;
+  padding: 10px;
   display: block;
   width: 100%;
   border: 1px solid border1;

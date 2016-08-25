@@ -11,7 +11,7 @@ import ProjectChangesPage   from './pages/ProjectChangesPage/ProjectChangesPage.
 import LoginPage            from './pages/LoginPage/LoginPage.jsx';
 import RegisterPage         from './pages/RegisterPage/RegisterPage.jsx';
 //import ErrorPage from './containers/ErrorPage/ErrorPage.container.js';
-import SettingsPage         from './pages/SettingsPage/SettingsPage.container.js';
+import SettingsPage         from './pages/SettingsPage/SettingsPage.jsx';
 import HomePage             from './pages/HomePage/HomePage.jsx';
 import ProjectPage          from './pages/ProjectPage/ProjectPage.container.js';
 import ProjectSettingsPage  from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.jsx';
