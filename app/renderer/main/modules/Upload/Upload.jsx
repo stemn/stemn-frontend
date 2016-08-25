@@ -44,7 +44,7 @@ export const Component = React.createClass({
     const imgStyle = {
       maxWidth: '100px',
       maxHeight: '100px',
-      marginRight: '10px'
+      marginRight: '20px'
     }
     const {upload, style, className} = this.props;
     return (
@@ -54,13 +54,16 @@ export const Component = React.createClass({
          style={this.dropStyle}
          activeStyle={this.dropActiveStyle}
          disableClick={true}>
-          <div className="layout-row layout-align-start-center">
+          <div className="layout-row layout-align-start-start">
             {upload && upload.files && upload.files.length > 0
               ?
               <div className="layout-row layout-align-start-center">{upload.files.map((file, index) => <img key={index} style={imgStyle} src={file.preview} /> )}</div>
               : null
             }
-            <Button onClick={this.onOpenClick}>Upload Picture</Button>
+            <div>
+              <Button className="secondary" onClick={this.onOpenClick}>Upload Picture</Button>
+              <p>You can also drag and drop a picture from your computer.</p>
+            </div>
           </div>
         </Dropzone>
       </div>
