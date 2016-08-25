@@ -12,6 +12,11 @@
   border: 1px solid border1;
 }
 
+:global(.react-autosuggest__input:hover) {
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
 :global(.react-autosuggest__input:focus) {
   outline: none;
   border: 1px solid rgba(0, 0, 0, 0.4);

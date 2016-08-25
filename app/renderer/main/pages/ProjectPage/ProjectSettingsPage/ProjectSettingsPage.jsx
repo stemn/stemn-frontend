@@ -52,6 +52,15 @@ export const Component = React.createClass({
       projectId: this.props.project._id,
     })
   },
+  linkRemote(){
+    this.props.ProjectsActions.linkRemote({
+      projectId: this.props.project._id,
+      provider: 'drive',
+      path_display: '',
+      path: '',
+      id: ''
+    })
+  },
   render() {
     const { entityModel, project, ProjectsActions } = this.props;
     const PageStyles = {
@@ -66,10 +75,14 @@ export const Component = React.createClass({
             <p>Connect your Dropbox or Drive to sync all files and changes. Only one Google Drive or one Dropbox can be connected to a project.</p>
             <ProjectLinkRemote model={`${entityModel}.remote`} value={project.remote}/>
             <br />
-            <FileSelectInput project={project} />
+            { project.remote == 'dropbox' || project.remote == 'drive'
+            ? <div>
+                <FileSelectInput project={project} />
+              </div>
+            : ''}
             <br />
             <div className="layout-row layout-align-end">
-              <Button className="primary">Update File Store</Button>
+              <Button className="primary" onClick={()=>this.linkRemote()}>Update File Store</Button>
             </div>
           </div>
           <div className={classes.panel}>
