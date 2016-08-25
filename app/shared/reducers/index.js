@@ -21,6 +21,7 @@ import userSearch from '../../renderer/main/modules/UserSearch/UserSearch.reduce
 import fileList from '../../renderer/main/modules/FileList/FileList.reducer.js';
 import fileSelect from '../../renderer/main/modules/fileSelect/fileSelect.reducer.js';
 import modals from '../../renderer/main/modules/modal/modal.reducer.js';
+import upload from '../../renderer/main/modules/upload/upload.reducer.js';
 
 export default function getRootReducer(scope = 'main') {
   let reducers = {
@@ -41,6 +42,7 @@ export default function getRootReducer(scope = 'main') {
     fileSelect,
     modals,
     users,
+    upload,
     toastr: toastrReducer
   };
 

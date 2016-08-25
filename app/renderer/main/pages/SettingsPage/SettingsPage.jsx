@@ -20,6 +20,7 @@ import Tabs from 'app/renderer/main/components/Tabs/Tabs'
 import Toggle from 'app/renderer/main/components/Input/Toggle/Toggle'
 import SelectList from 'app/renderer/main/components/Input/SelectList/SelectList'
 import Header from 'app/renderer/main/modules/Header/Header.jsx'
+import Upload from 'app/renderer/main/modules/Upload/Upload.jsx'
 import Button from 'app/renderer/main/components/Buttons/Button/Button.jsx'
 
 
@@ -51,6 +52,9 @@ export const Component = React.createClass({
             <div className={classes.panel}>
               <h3>Name and blurb</h3>
               <p>Set your name, blurb and picture.</p>
+              <Upload uploadId="UserSettingsAvatar"></Upload>
+              <br />
+
               <div className="layout-row">
                 <Field model={`${entityModel}.profile.firstname`}>
                   <input className="dr-input" type="text" placeholder="First Name" style={{marginRight: '7px'}}/>
