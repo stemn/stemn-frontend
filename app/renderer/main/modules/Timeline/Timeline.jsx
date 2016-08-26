@@ -72,26 +72,60 @@ export const Component = React.createClass({
   getInitialState () {
     return {
       isOpen: false,
+      page: 0
     }
   },
   toggle (toState) {
     this.setState({ isOpen: toState === null ? !this.state.isOpen : toState })
   },
   scroll (direction){
-    console.log(direction);
+    if(direction == 'left'){
+      this.setState({
+        page : this.state.page + 1
+      })
+    }
+    else if (direction == 'right' && this.state.page > 0){
+      this.setState({
+        page : this.state.page - 1
+      })
+    }
   },
   render() {
-    const numberToShow = '10';
+    const numberToShow = 15;
 
+    const moreLeft  = this.state.page < this.props.timeline.data.length / numberToShow - 1;
+    const moreRight = this.state.page > 0;
+
+
+    const Items = this.props.timeline.data.map((item, index)=> {
+      const percentage = 100 - (index) * (100 / numberToShow);
+      const posStyle = {left: percentage+'%'};
+      return (
+        <a key={item._id}
+          className={classNames(styles.dot, {[styles.active]: this.props.timeline.selected._id == item._id})}
+          style={posStyle}
+          onClick={()=>this.props.TimelineActions.selectTimelineItem({projectId: this.props.project._id, selected: item})}>
+          <PopupTrigger item={item} />
+        </a>
+      )
+    });
 
     return (
       <div className={styles.timeline +' layout-row'}>
-        <div className={styles.line}>
-          <MoreButton onClick={()=>this.scroll('left')} side="left"/>
-          <MoreButton onClick={()=>this.scroll('right')} side="right"/>
-          <MoreDots side="left" />
-          <MoreDots side="right" />
-          {/*Items*/}
+        <div className="rel-box flex">
+          <div className={styles.line}>
+            {moreLeft  ? <MoreButton onClick={()=>this.scroll('left')} side="left"/> : ''}
+            {moreRight ? <MoreButton onClick={()=>this.scroll('right')} side="right"/> : ''}
+            {moreLeft  ? <MoreDots side="left" /> : ''}
+            {moreRight ? <MoreDots side="right" /> : ''}
+          </div>
+          <div className={styles.dotsOverflow}>
+            <div className={styles.dotsPosContainer}>
+              <div className={styles.dots} style={{transform: `translateX(${this.state.page*100}%)`}}>
+                {Items}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
