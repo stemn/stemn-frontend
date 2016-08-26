@@ -7,7 +7,7 @@ export function loadUserData() {
   return {
     type:'AUTH/LOAD_USER_DATA',
     payload: http({
-      url: 'https://stemn.com/api/v1/me',
+      url: 'http://localhost:3000/api/v1/me',
       method: 'GET',
     }),
   }
@@ -30,12 +30,22 @@ export function authenticate(provider) {
   }
 }
 
+export function unlink(provider) {
+  return {
+    type:'AUTH/UNLINK',
+    payload: http({
+      url: `http://localhost:3000/api/v1/auth/unlink/${provider}`,
+      method: 'POST',
+    })
+  }
+}
+
 export function login({email, password}) {
   return (dispatch) => {
     dispatch({
       type:'AUTH/LOGIN',
       payload: http({
-        url: 'https://stemn.com/api/v1/auth/login',
+        url: 'http://localhost:3000/api/v1/auth/login',
         method: 'POST',
         data: {
           email,

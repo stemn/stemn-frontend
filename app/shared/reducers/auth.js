@@ -1,4 +1,5 @@
 import { modelReducer, formReducer, modeled } from 'react-redux-form';
+import u from 'updeep';
 
 const initialState = {
   authLoading: false,
@@ -55,6 +56,11 @@ const mainReducer = (state, action) => {
       return {...state,
         authLoading: false
       }
+
+    case 'AUTH/UNLINK_FULFILLED':
+      return u({
+        user: { accounts: action.payload.data}
+      }, state)
 
     case 'AUTH/LOGIN_PENDING':
       return {...state,

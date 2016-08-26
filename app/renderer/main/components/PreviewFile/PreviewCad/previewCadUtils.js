@@ -14,7 +14,7 @@ export default library
 function render({projectStub, path, revision}){
   return http({
     method: 'GET',
-    url: 'https://stemn.com/api/v1/sync/render/' + projectStub + '/' + path,
+    url: 'http://localhost:3000/api/v1/sync/render/' + projectStub + '/' + path,
     params: {
       revision: revision
     }
@@ -24,7 +24,7 @@ function render({projectStub, path, revision}){
 function authenticate(){
   return http({
     method: 'POST',
-    url: 'https://stemn.com/api/v1/auth/autodesk',
+    url: 'http://localhost:3000/api/v1/auth/autodesk',
   }).then(function(response){
     library.accessToken = response.data.token;
     return response

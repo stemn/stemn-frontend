@@ -91,7 +91,7 @@ export const Component = React.createClass({
                 <a onClick={()=>{this.props.authActions.logout()}}>Sign out</a>
               </div>
             </PopoverMenu>
-            <Link className={userStyles.userSettings + ' layout-column layout-align-center-center'} to="/settings"><MdSettings size="25"/></Link>
+            <Link className={userStyles.userSettings + ' layout-column layout-align-center-center'} to="/settings/application"><MdSettings size="25"/></Link>
           </div>
         </div>
       </div>

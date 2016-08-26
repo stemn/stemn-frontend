@@ -8,7 +8,7 @@ export function getFile({projectId, fileId}) {
     http: true,
     payload: {
       method: 'GET',
-      url: `https://stemn.com/api/v1/sync/download/${projectId}/${fileId}`
+      url: `http://localhost:3000/api/v1/sync/download/${projectId}/${fileId}`
     },
     meta: {
       cacheKey: `${projectId}/${fileId}`
@@ -22,7 +22,7 @@ export function getMeta({projectId, fileId}) {
     http: true,
     payload: {
       method: 'GET',
-      url: `https://stemn.com/api/v1/sync/metadata/${projectId}/${fileId}`
+      url: `http://localhost:3000/api/v1/sync/metadata/${projectId}/${fileId}`
     },
     meta: {
       cacheKey: `${projectId}/${fileId}`
