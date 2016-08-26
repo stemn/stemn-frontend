@@ -91,6 +91,7 @@ export const Component = React.createClass({
 
     return (
       <div className="layout-column flex rel-box">
+        <Timeline project={this.props.project} />
         <div className="layout-row flex">
           <div className="layout-column">
             <ContentSidebar className="flex">

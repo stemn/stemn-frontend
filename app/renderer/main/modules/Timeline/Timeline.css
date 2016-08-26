@@ -6,6 +6,7 @@
   color: white;
   border-bottom: 1px solid border1;
 }
+
 .line{
   display: block;
   height: 4px;
@@ -30,6 +31,7 @@
   width: 20px;
   margin-top: -8px;
   margin-left: -2px;
+  z-index: 1;
 }
 
 .popup{
