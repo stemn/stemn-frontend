@@ -13,60 +13,19 @@ import classNames from 'classnames';
 import styles from './Timeline.css';
 
 // Sub Components
-import moment from 'moment';
-import Popover from 'app/renderer/assets/other/react-popup';
-import * as stringConcat from 'app/shared/helpers/stringConcat';
 import MoreDots from './MoreDots/MoreDots.jsx';
 import MoreButton from './MoreButton/MoreButton.jsx';
+import TimelineInner from './TimelineInner/TimelineInner.jsx';
 
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-const PopupContent = (item) =>{
-  const timeFromNow = moment(item.timestamp).fromNow();
 
-  return (
-    <div className={styles.popup + ' layout-row layout-align-start-center'}>
-      <img className={styles.popupImage} src={'https://stemn.com' + item.user.picture + '?size=thumb&crop=true'} />
-      <div className="flex">
-        {/*<b>{stringConcat.end(item.data.summary, 30)}</b> */}
-        <div>{timeFromNow} by {item.user.name}</div>
-      </div>
 
-    </div>
-    )
-}
 
-const PopupTrigger = React.createClass({
-  getInitialState () {
-    return {
-      isOpen: false,
-    }
-  },
-  toggle (toState) {
-    this.setState({ isOpen: toState === null ? !this.state.isOpen : toState })
-  },
-  render() {
-    const PopupTriggerStyles = {
-      width: '100%',
-      height: '100%'
-    }
-    return (
-      <Popover
-        isOpen={this.state.isOpen}
-        body={PopupContent(this.props.item)}
-        preferPlace = 'below'>
-        <div
-          onMouseOver={()=>this.toggle(true)}
-          onMouseOut={()=>this.toggle(false)}
-          style={PopupTriggerStyles}>
-        </div>
-      </Popover>
-    );
-  }
-})
+
 
 export const Component = React.createClass({
   getInitialState () {
@@ -96,20 +55,6 @@ export const Component = React.createClass({
     const moreLeft  = this.state.page < this.props.timeline.data.length / numberToShow - 1;
     const moreRight = this.state.page > 0;
 
-
-    const Items = this.props.timeline.data.map((item, index)=> {
-      const percentage = 100 - (index) * (100 / numberToShow);
-      const posStyle = {left: percentage+'%'};
-      return (
-        <a key={item._id}
-          className={classNames(styles.dot, {[styles.active]: this.props.timeline.selected._id == item._id})}
-          style={posStyle}
-          onClick={()=>this.props.TimelineActions.selectTimelineItem({projectId: this.props.project._id, selected: item})}>
-          <PopupTrigger item={item} />
-        </a>
-      )
-    });
-
     return (
       <div className={styles.timeline +' layout-row'}>
         <div className="rel-box flex">
@@ -121,9 +66,12 @@ export const Component = React.createClass({
           </div>
           <div className={styles.dotsOverflow}>
             <div className={styles.dotsPosContainer}>
-              <div className={styles.dots} style={{transform: `translateX(${this.state.page*100}%)`}}>
-                {Items}
-              </div>
+              <TimelineInner
+              timeline={this.props.timeline}
+              numberToShow={numberToShow}
+              TimelineActions={this.props.TimelineActions}
+              page={this.state.page}
+              project={this.props.project}></TimelineInner>
             </div>
           </div>
         </div>

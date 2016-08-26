@@ -1,0 +1,36 @@
+@value primary, border1 from "app/renderer/assets/css/themes/standard.css";
+
+.dots{
+  transition: 0.6s cubic-bezier(0.69, 0.01, 0.17, 0.99) transform;
+  height: 100%;
+  width: 100%;
+}
+
+.dot{
+  border-radius: 50%;
+  position: absolute;
+  display: block;
+  height: 16px;
+  width: 16px;
+  background: rgb(153, 153, 153);
+  border: 2px solid #f8f8f8;
+  transition: 0.1s ease all;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.dot.active{
+  background: primary;
+  height: 20px;
+  width: 20px;
+  margin-left: -2px;
+  z-index: 1;
+}
+
+.popup{
+  padding: 8px;
+}
+.popupImage{
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
+}
