@@ -24,18 +24,34 @@ import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/
 
 export const Component = React.createClass({
   componentWillMount() {
-    this.props.FileListActions.fetchFiles({
-      projectId: this.props.projectId,
-      path: this.props.path,
-    });
+    if(this.props.options.explore == 'drive' || this.props.options.explore == 'dropbox'){
+      this.props.FileListActions.exploreFolder({
+        provider: this.props.options.explore,
+        folderId: this.props.path,
+      });
+    }
+    else{
+      this.props.FileListActions.fetchFiles({
+        projectId: this.props.projectId,
+        path: this.props.path,
+      });
+    }
   },
 
   componentWillReceiveProps(nextProps) {
     if(this.props.path != nextProps.path || this.props.projectId != nextProps.projectId){
-      this.props.FileListActions.fetchFiles({
-        projectId: nextProps.projectId,
-        path: nextProps.path,
-      });
+      if(nextProps.options.explore == 'drive' || nextProps.options.explore == 'dropbox'){
+        this.props.FileListActions.exploreFolder({
+          provider: nextProps.options.explore,
+          folderId: nextProps.path,
+        });
+      }
+      else{
+        this.props.FileListActions.fetchFiles({
+          projectId: nextProps.projectId,
+          path: nextProps.path,
+        });
+      }
     }
   },
 
@@ -43,7 +59,7 @@ export const Component = React.createClass({
     const {files, singleClickFn, doubleClickFn, crumbClickFn, selected, options} = this.props;
 
     const displayResults = () => {
-      const filesFiltered = options.foldersOnly && files.data && files.data.length > 0 ? files.data.filter((file)=>file.type == 'folder') : files.data;
+      const filesFiltered = options.foldersOnly && files.entries && files.entries.length > 0 ? files.entries.filter((file)=>file.type == 'folder') : files.data;
       if(filesFiltered && filesFiltered.length > 0){
         return filesFiltered.map((file)=><FileRow file={file} singleClick={singleClickFn} doubleClick={doubleClickFn} isActive={selected && selected.fileId == file.fileId}/>)
       }
@@ -55,7 +71,7 @@ export const Component = React.createClass({
     return (
       <div>
         <div className={classes.breadcrumbs}>
-          <FileBreadCrumbs parents={files && files.parents ? files.parents : ''} clickFn={crumbClickFn}/>
+          <FileBreadCrumbs meta={files && files.folder ? files.folder : ''} clickFn={crumbClickFn}/>
         </div>
         <div className="rel-box" style={{minHeight: '180px'}}>
         {files && !files.loading ? displayResults() : <LoadingOverlay />}
@@ -71,8 +87,9 @@ export const Component = React.createClass({
 /////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps({fileList}, {projectId, path, singleClickFn, doubleClickFn, crumbClickFn, options}) {
+
   return {
-    files: fileList[`${projectId}/${path}`],
+    files: options.explore == 'drive' || options.explore == 'dropbox' ? fileList[`${options.explore}-${path}`] : fileList[`${projectId}-${path}`],
     projectId,
     path,
     singleClickFn,

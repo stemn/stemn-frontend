@@ -22,7 +22,7 @@ export function authenticate(provider) {
       }).then((response)=>{
         dispatch(setAuthToken(response.data.token))
         dispatch(initHttpHeaders('bearer ' + response.data.token))
-        dispatch(loadUserData())
+        setTimeout(()=>{dispatch(loadUserData())}, 1)
         setTimeout(()=>{dispatch(push('/'))}, 1)
         return response
       })
@@ -54,7 +54,7 @@ export function login({email, password}) {
       }).then((response)=>{
         dispatch(setAuthToken(response.data.token))
         dispatch(initHttpHeaders('bearer ' + response.data.token))
-        dispatch(loadUserData())
+        setTimeout(()=>{dispatch(loadUserData())}, 1)
         setTimeout(()=>{dispatch(push('/'))}, 1)
         return response
       })
@@ -101,14 +101,14 @@ export function removeAuthToken() {
 }
 
 export function initHttpHeaders(fullToken) {
-  http.defaults.headers.common['Authorization'] = fullToken;
+
   return {
-      type:'AUTH/INIT_HTTP_HEADER',
+    type:'AUTH/INIT_HTTP_HEADER',
+    payload: {fullToken : fullToken}
   }
 }
 
 export function removeHttpHeaders() {
-  delete http.defaults.headers.common['Authorization'];
   return {
       type:'AUTH/REMOVE_HTTP_HEADER',
   }

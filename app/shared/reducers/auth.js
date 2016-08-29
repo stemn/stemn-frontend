@@ -1,9 +1,12 @@
 import { modelReducer, formReducer, modeled } from 'react-redux-form';
 import u from 'updeep';
+import http from 'axios';
+
 
 const initialState = {
   authLoading: false,
   userLoading: false,
+  authToken: null,
 
   user: {},
   login: {
@@ -33,16 +36,21 @@ const mainReducer = (state, action) => {
 
     case 'AUTH/SET_AUTH_TOKEN':
       return {...state,
-        user: {...state.user,
-          token: action.payload
-        }
+        authToken: action.payload
       }
     case 'AUTH/REMOVE_AUTH_TOKEN':
       return {...state,
-        user: {...state.user,
-          token: null
-        }
+        authToken: null
       }
+
+    case 'AUTH/INIT_HTTP_HEADER':
+      http.defaults.headers.common['Authorization'] = action.payload.fullToken;
+      return {...state
+    }
+    case 'AUTH/REMOVE_HTTP_HEADER':
+      delete http.defaults.headers.common['Authorization'];
+      return {...state
+    }
 
     case 'AUTH/AUTHENTICATE_PENDING':
       return {...state,

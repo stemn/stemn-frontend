@@ -2,34 +2,36 @@ import React from 'react';
 
 // Styles
 import classNames from 'classnames';
-import classes from './FileBreadCrumbs.css'
+import classes from './FileBreadCrumbs.css';
+
+import { middle as middleConcat } from 'app/shared/helpers/stringConcat';
+
 
 export default React.createClass({
   render() {
-    const {parents, clickFn} = this.props;
+    const {meta, clickFn} = this.props;
 
     console.log(this.props);
 
     const displayCrumbs = () => {
-      if(parents && parents.length > 1){
-        return parents.map((parent, idx)=>{
-          if(idx < parents.length -1){
-            return (
-              <span>
-                <a onClick={()=>clickFn({parent})}>{parent.text}</a>
-                <span> / </span>
-              </span>
-            )
-          }
-          else{
-            return(
-              <span>{parent.text}</span>
-            )
-          }
+      if(meta.parents && meta.parents.length > 0){
+        let crumbs = meta.parents.map((parent, idx)=>{
+          return (
+            <span>
+              <a onClick={()=>clickFn({file: parent})}>{middleConcat(parent.name, 30, 0.8)}</a>
+              <span> / </span>
+            </span>
+          )
         })
+
+        crumbs.push(<span>{middleConcat(meta.name, 30, 0.8)}</span>)
+        return crumbs
+      }
+      else if (meta.name){
+        return <span>{middleConcat(meta.name, 30, 0.8)}</span>
       }
       else{
-        return <span>Home</span>
+        return <span>. . .</span>
       }
     }
 

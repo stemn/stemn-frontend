@@ -10,7 +10,12 @@ import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconBut
 export default React.createClass({
   render() {
 //    const {projectId, path, fileSelect, options} = this.props;
-
+    console.log(this.props);
+    const options = {
+      allowFolder: true,
+      foldersOnly: true,
+      explore: 'drive'
+    };
     return (
       <Modal modalId="FileSelect1">
         <div className={classes.fileSelectInput + ' layout-row layout-align-start-center'}>
@@ -21,7 +26,7 @@ export default React.createClass({
         </div>
         <div>
           <div className="modal-title">Select File</div>
-          <FileSelect projectId={this.props.project._id} path="" storeKey="ProjectSettingsPage" options={{allowFolder: true, foldersOnly: true}} />
+          <FileSelect projectId={this.props.project._id} path="" storeKey="ProjectSettingsPage" options={options} />
         </div>
       </Modal>
     );

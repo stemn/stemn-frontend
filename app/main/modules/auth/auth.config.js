@@ -19,7 +19,7 @@ export const oauthCreds = {
   },
   linkedin: {
     url                   : 'https://www.linkedin.com/oauth/v2/authorization',
-    postUrl               : 'http://localhost:3000/api/v1/auth/google',
+    postUrl               : 'http://localhost:3000/api/v1/auth/linkedin',
     params                : {
       response_type       : 'code',
       redirect_uri        : 'https://stemn.com/auth/linkedin',

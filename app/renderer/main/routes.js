@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
+import http from 'axios';
 
 
 import RootAppPage              from './components/App/RootAppPage';
@@ -24,44 +25,53 @@ import ProjectFeedPage          from './pages/ProjectFeedPage/ProjectFeedPage.js
 // Actions
 const AuthActions = require('../../shared/actions/auth');
 
-export default (store) => {
-  // Init Token
-  const authToken = localStorage.getItem('token');
-  // Init Http Headers
-  store.dispatch(AuthActions.initHttpHeaders('bearer ' + authToken));
 
-  const getUserData = (nextState, replace, callback) => {
-    if (!store.getState().auth.user._id) {
-      store.dispatch(AuthActions.loadUserData());
-      setTimeout(callback, 1000);
-//      store.dispatch(AuthActions.loadUserData()).then(()=>{
-//        callback()
-//      }).catch(()=>{
-//        store.dispatch(AuthActions.removeHttpHeaders())
-//        callback()
-//      });
-    }
-    else{
-      callback();
-    }
+export default (store) => {
+
+  const init = (nextState, replace, callback) => {
+//    if(store.getState().auth.authToken){
+//      store.dispatch(AuthActions.initHttpHeaders('bearer '+ store.getState().auth.authToken));
+//    }else{
+//      replace('/login');
+//    }
+//    callback();
+
+//    if (!store.getState().auth.user._id) {
+//      console.log(store.getState().auth);
+//      store.dispatch(AuthActions.loadUserData());
+//      setTimeout(callback, 1000);
+////      store.dispatch(AuthActions.loadUserData()).then(()=>{
+////        callback()
+////      }).catch(()=>{
+////        store.dispatch(AuthActions.removeHttpHeaders())
+////        callback()
+////      });
+//    }
+//    else{
+//      store.dispatch(AuthActions.initHttpHeaders('bearer '+ store.getState().auth.authToken));
+//      callback();
+//    }
   };
 
   const requireAuth = (nextState, replace, callback) => {
-//    if (!store.getState().auth.user._id) {
-//      replace('/login');
-//    }
+    if (!store.getState().auth.authToken) {
+      replace('/login');
+    }
+    else{
+      store.dispatch(AuthActions.initHttpHeaders('bearer '+ store.getState().auth.authToken));
+    }
     callback();
   };
 
   const requireNonAuth = (nextState, replace, callback) => {
-//    if (store.getState().auth.user._id) {
-//      replace('/');
-//    }
+    if (store.getState().auth.authToken) {
+      replace('/');
+    }
     callback();
   };
 
   return (
-    <Route                                           component={RootAppPage}     onEnter={getUserData}>
+    <Route                                           component={RootAppPage} >
       <Route                                         component={AuthedAppPage}   onEnter={requireAuth}>
         <Route   path="/project/:stub"               component={ProjectPage}>
           <Route path="/project/:stub/changes"       component={ProjectChangesPage}/>

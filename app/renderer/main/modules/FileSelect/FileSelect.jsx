@@ -53,7 +53,7 @@ export const Component = React.createClass({
     else{
       this.props.FileSelectActions.changePath({
         storeKey: this.props.storeKey,
-        path: file.path
+        path: file.fileId
       })
     }
   },
@@ -61,7 +61,7 @@ export const Component = React.createClass({
     if(file.type == 'folder'){
       this.props.FileSelectActions.changePath({
         storeKey: this.props.storeKey,
-        path: file.path
+        path: file.fileId
       })
     }
     else{
@@ -74,21 +74,27 @@ export const Component = React.createClass({
   crumbClickFn({file}){
     this.props.FileSelectActions.changePath({
       storeKey: this.props.storeKey,
-      file: file
+      path: file.fileId
     })
+  },
+
+  select(){
+    console.log('select', this.props.fileSelect.selected);
+  },
+  cancel(){
+    console.log('cancel');
   },
   render() {
     const {projectId, path, fileSelect, options} = this.props;
-
     return (
       <div>
         <FileList projectId={projectId} path={fileSelect.path} singleClickFn={this.singleClickFn} doubleClickFn={this.doubleClickFn} crumbClickFn={this.crumbClickFn} selected={fileSelect.selected} options={options}/>
         <div className="layout-row layout-align-start-center" style={{padding: '10px'}}>
           <div className="flex"></div>
-          <Button style={{marginRight: '10px'}}>
+          <Button style={{marginRight: '10px'}} onClick={this.cancel}>
             Cancel
           </Button>
-          <Button className="primary">
+          <Button className="primary" onClick={this.select}>
             Select File
           </Button>
         </div>

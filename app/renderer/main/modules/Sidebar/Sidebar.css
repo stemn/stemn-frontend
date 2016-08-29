@@ -25,6 +25,7 @@
 }
 .sidebarSearch input{
   padding: 14px;
+  height: auto;
 }
 .sidebarSearchIcon{
   position: absolute;

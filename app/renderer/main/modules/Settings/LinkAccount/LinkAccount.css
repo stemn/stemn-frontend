@@ -1,5 +1,5 @@
-@value bg1 from "app/renderer/assets/css/themes/standard.css";
+@value primary from "app/renderer/assets/css/themes/standard.css";
 
 .hover:hover{
-  background: bg1;
+  color: primary;
 }
