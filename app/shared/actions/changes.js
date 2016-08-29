@@ -22,7 +22,7 @@ export function descriptionChange({projectId, value}) {
 
 export function actToggleAll({projectId, model, value}) {
   return (dispatch) => {
-    dispatch(actions.change(model, value));
+//    dispatch(actions.change(model, value));
     return {
         type: 'CHANGES/TOGGLE_ALL_CHANGED_FILES',
         payload: {projectId, model, value}
@@ -32,18 +32,32 @@ export function actToggleAll({projectId, model, value}) {
 
 
 export function fetchChanges({projectId}) {
+  return (dispatch) => {
+    dispatch(pullChanges({projectId}))
+    dispatch({
+      type:'CHANGES/FETCH_CHANGES',
+      http: true,
+      payload: {
+        method: 'GET',
+        url: `http://localhost:3000/api/v1/sync/timeline/${projectId}`,
+        params: {
+          type: 'changes'
+        },
+        meta: {
+          projectId
+        }
+      }
+    })
+  }
+}
+
+export function pullChanges({projectId}) {
   return {
-    type:'CHANGES/FETCH_CHANGES',
+    type:'CHANGES/PULL_REMOTE_CHANGES',
     http: true,
     payload: {
       method: 'GET',
-      url: `http://localhost:3000/api/v1/sync/timeline/${projectId}`,
-      params: {
-        type: 'changes'
-      },
-      meta: {
-        projectId
-      }
+      url: `http://localhost:3000/api/v1/sync/pullRemoteChanges/${projectId}`,
     }
   }
 }

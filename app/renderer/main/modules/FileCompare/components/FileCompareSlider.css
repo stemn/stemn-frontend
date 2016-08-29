@@ -1,0 +1,18 @@
+.slider{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin-left: -5px;
+  width: 10px;
+  z-index: 5;
+
+  opacity: 0.1;
+  transition: opacity 0.2s ease;
+  background: rgba(255, 255, 0, 0.3);
+}
+.slider:hover{
+  opacity: 1;
+}
+.active{
+  opacity: 1;
+}

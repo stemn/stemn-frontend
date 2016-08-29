@@ -1,0 +1,8 @@
+@value border1 from "app/renderer/assets/css/themes/standard.css";
+
+.preview1{
+
+}
+.preview2{
+  border-left: 1px solid border1;
+}

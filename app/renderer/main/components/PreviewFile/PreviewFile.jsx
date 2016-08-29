@@ -6,24 +6,24 @@ import PreviewPdf   from './PreviewPdf/PreviewPdf'
 import PreviewImage from './PreviewImage/PreviewImage'
 import PreviewCad   from './PreviewCad/PreviewCad'
 
+import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+
+
 import {getViewerType} from './previewFileUtils'
 // Styles
 import classNames from 'classnames';
 
 export default class extends React.Component{
-//  componentWillMount() {
-//    this.props.filesActions.getFile({
-//      projectId: this.props.projectId,
-//      fileId: this.props.fileId
-//    })
-//    this.props.filesActions.getMeta({
-//      projectId: this.props.projectId,
-//      fileId: this.props.fileId
-//    })
-//  }
+  componentWillMount() {
+    this.props.filesActions.getFile({
+      projectId: this.props.project._id,
+      fileId: this.props.file.fileId,
+      revisionId: this.props.file.revisionId
+    })
+  }
   render() {
     console.log(this.props);
-    const {file, project} = this.props;
+    const {file, fileData, project} = this.props;
 
     const getPreview = () => {
       const viewerType = getViewerType(file.extension);
@@ -32,7 +32,7 @@ export default class extends React.Component{
         return <PreviewPcb model={this.props.file.data} fileType={this.props.file.meta.fileType} />
       }
       else if(viewerType == 'code'){
-        return <PreviewCode model={this.props.file.data} fileType={this.props.file.meta.fileType} />
+        return fileData ? <PreviewCode project={project} file={file} fileData={fileData}/> : <LoadingOverlay />
       }
       else if(viewerType == 'autodesk'){
         return <PreviewCad fileMeta={this.props.file.meta} />
@@ -51,7 +51,7 @@ export default class extends React.Component{
       }
     }
     return (
-      <div>
+      <div className="layout-column flex rel-box">
         {getPreview()}
       </div>
     );
