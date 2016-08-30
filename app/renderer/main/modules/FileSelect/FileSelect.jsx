@@ -95,7 +95,7 @@ export const Component = React.createClass({
             Cancel
           </Button>
           <Button className="primary" onClick={this.select}>
-            Select File
+            Select Folder
           </Button>
         </div>
       </div>

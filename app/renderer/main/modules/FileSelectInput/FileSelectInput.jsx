@@ -25,7 +25,7 @@ export default React.createClass({
             </SimpleIconButton>
         </div>
         <div>
-          <div className="modal-title">Select File</div>
+          <div className="modal-title">Select Folder</div>
           <FileSelect projectId={this.props.project._id} path="" storeKey="ProjectSettingsPage" options={options} />
         </div>
       </Modal>

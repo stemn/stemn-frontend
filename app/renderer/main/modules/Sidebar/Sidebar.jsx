@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 // Container Actions
 import * as SidebarActions from 'app/shared/actions/sidebar';
 import * as AuthActions from 'app/shared/actions/auth';
+import * as ProjectsActions from 'app/shared/actions/projects';
 
 // Component Core
 import React from 'react';
@@ -39,6 +40,7 @@ export const Component = React.createClass({
   },
 
   render() {
+    const { ProjectsActions } = this.props;
     const sidebarStyle = classNames('layout-column', 'flex' ,'rel-box', styles.sidebar, {[styles.open]: this.props.sidebar.show});
 
     const nameRegex = new RegExp(this.props.sidebar.searchString, 'i');
@@ -55,7 +57,7 @@ export const Component = React.createClass({
               <MdAdd size="25"/>
             </div>
             <div className="PopoverMenu">
-              <a href="">Create New Project</a>
+              <a onClick={()=>ProjectsActions.createProject()}>Create New Project</a>
               <a href="">Create New Thread</a>
             </div>
           </PopoverMenu>
@@ -111,7 +113,8 @@ function mapStateToProps({ sidebar, auth }, otherProps) {
 function mapDispatchToProps(dispatch) {
   return {
     authActions: bindActionCreators(AuthActions, dispatch),
-    sidebarActions: bindActionCreators(SidebarActions, dispatch)
+    sidebarActions: bindActionCreators(SidebarActions, dispatch),
+    ProjectsActions: bindActionCreators(ProjectsActions, dispatch)
   }
 }
 

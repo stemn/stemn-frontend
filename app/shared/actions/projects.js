@@ -1,4 +1,5 @@
 import http from 'axios';
+import { push } from 'react-router-redux'
 
 export const GET_PROJECT = 'PROJECTS/GET_PROJECT';
 
@@ -11,6 +12,48 @@ export function getProject({projectId}) {
       url: `http://localhost:3000/api/v1/projects/${projectId}`
     }
   };
+}
+
+export function createProject() {
+  return (dispatch)=>{
+    dispatch({
+      type: 'PROJECTS/CREATE_PROJECT',
+      payload: http({
+        method: 'POST',
+        url: `http://localhost:3000/api/v1/projects`,
+        data: {}
+      }).then((response)=>{
+        dispatch(push(`/project/${response.data._id}/settings`))
+      }).catch((response)=>{
+
+      })
+    });
+  }
+}
+
+export function deleteProject({projectId}) {
+  return (dispatch)=>{
+    dispatch({
+      type: 'PROJECTS/CREATE_PROJECT',
+      payload: http({
+        method: 'DELETE',
+        url: `http://localhost:3000/api/v1/projects/${projectId}`,
+      }).then((response)=>{
+        dispatch(push(`/`))
+      })
+    });
+  }
+}
+
+export function saveProject({project}) {
+  return {
+    type: 'PROJECTS/SAVE_PROJECT',
+    payload: http({
+      method: 'PUT',
+      url: `http://localhost:3000/api/v1/projects/${projectId}`,
+      data: project
+    })
+  }
 }
 
 export function addTeamMember({projectId, user}) {
