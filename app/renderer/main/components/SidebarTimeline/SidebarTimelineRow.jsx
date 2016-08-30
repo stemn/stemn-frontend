@@ -23,7 +23,7 @@ export default React.createClass({
       const getChildRows = () => {
         if(this.state.isOpen){
           return this.props.item.data.items.map((file)=>{
-            return <div key={file._id} className={classNames(styles.timelineRow, styles.inner, {[styles.active]: this.props.isActive})} onClick={this.props.clickFn}>{file.data.name}</div>
+            return <div key={file._id} className={classNames(styles.timelineRow, styles.inner, {[styles.active]: this.props.isActive})} onClick={this.props.clickFn}>{file.data.path}</div>
           })
         }
       }
@@ -52,7 +52,7 @@ export default React.createClass({
           <div className={styles.inner + ' flex layout-row layout-align-start-center'} onClick={this.props.clickFn}>
             <img style={{width: '40px', height: '40px'}} src={this.props.item.user.picture} />
             <div className={styles.text + ' flex'}>
-              <b>{this.props.item.data.name}</b>
+              <b>{this.props.item.data.path}</b>
               <div style={{marginTop: '5px'}}>{timeFromNow} by {this.props.item.user.name}</div>
             </div>
           </div>

@@ -1,8 +1,43 @@
 @value border1 from "app/renderer/assets/css/themes/standard.css";
 
-.preview1{
 
+.header{
+  border-bottom: 1px solid border1;
+  padding: 12px 8px;
+  height: 42px;
 }
-.preview2{
+
+.rangeSlider{
+  border-top: 1px solid border1;
+  padding: 5px
+}
+
+.sideBySide .preview2{
   border-left: 1px solid border1;
 }
+
+.aboveAndBelow .preview2{
+  border-top: 1px solid border1;
+}
+
+.onion .preview2{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.slider .preview2{
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 50%;
+  overflow: hidden;
+}
+
+.single .preview1{
+  display: none;
+}
+

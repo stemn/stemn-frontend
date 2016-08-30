@@ -22,12 +22,10 @@ export default class extends React.Component{
     })
   }
   render() {
-    console.log(this.props);
     const {file, fileData, project} = this.props;
 
     const getPreview = () => {
       const viewerType = getViewerType(file.extension);
-      console.log(viewerType);
       if(viewerType == 'gerber' || viewerType == 'pcb'){
         return <PreviewPcb model={this.props.file.data} fileType={this.props.file.meta.fileType} />
       }

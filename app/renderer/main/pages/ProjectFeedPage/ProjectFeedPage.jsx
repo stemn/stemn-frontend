@@ -16,7 +16,7 @@ import feedPageStyles from './ProjectFeedPage.css';
 import Popover           from 'app/renderer/assets/other/react-popup';
 import Timeline          from 'app/renderer/main/modules/Timeline/Timeline.jsx';
 import SidebarTimeline   from 'app/renderer/main/containers/SidebarTimeline';
-import PreviewFile       from 'app/renderer/main/containers/PreviewFile';
+import FileCompare      from 'app/renderer/main/modules/FileCompare/FileCompare.jsx';
 import ContentSidebar    from 'app/renderer/main/components/ContentSidebar';
 import TogglePanel       from 'app/renderer/main/components/Panels/TogglePanel/TogglePanel.jsx';
 import CompareFiles      from 'app/renderer/main/components/CompareFiles/CompareFiles';
@@ -64,7 +64,7 @@ export const Component = React.createClass({
         }
         else{
           return(
-            <div>{this.props.timeline.selected._id}</div>
+            <FileCompare project={this.props.project} file={this.props.timeline.selected.data} />
           )
         }
       }
@@ -79,10 +79,7 @@ export const Component = React.createClass({
               <div>{file.size}</div>
             </div>
             <div>
-              <CompareFiles>
-                <PreviewFile projectStub={file.parentProject} path={file.path} />
-                <PreviewFile projectStub={file.parentProject} path={file.path} />
-              </CompareFiles>
+              <FileCompare project={this.props.project} file={file} />
             </div>
           </TogglePanel>
         )

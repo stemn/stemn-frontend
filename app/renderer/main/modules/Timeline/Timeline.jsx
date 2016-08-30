@@ -52,8 +52,9 @@ export const Component = React.createClass({
   render() {
     const numberToShow = 15;
 
-    const moreLeft  = this.state.page < this.props.timeline.data.length / numberToShow - 1;
+    const moreLeft  = this.props.timeline && this.props.timeline.data ? this.state.page < this.props.timeline.data.length / numberToShow - 1 : false;
     const moreRight = this.state.page > 0;
+
 
     return (
       <div className={styles.timeline +' layout-row'}>
@@ -81,15 +82,6 @@ export const Component = React.createClass({
 });
 
 
-//    const latestDate = moment(this.props.timeline.data[0].timestamp).valueOf();
-//    const earlyDate  = moment(this.props.timeline.data[this.props.timeline.data.length-1].timestamp).valueOf();
-//    const range      = latestDate - earlyDate;
-//
-//    const Items = this.props.timeline.data.map((item)=> {
-//      const percentage = 100 - ((latestDate - moment(item.timestamp).valueOf())/range * 100);
-//      const posStyle = {left: percentage+'%'};
-//      return <a key={item._id} className={classNames(styles.dot, {[styles.active]: this.props.timeline.selected._id == item._id})} style={posStyle} onClick={()=>this.props.TimelineActions.selectTimelineItem({projectId: this.props.project._id, selected: item})}><PopupTrigger item={item} /></a>
-//    });
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////

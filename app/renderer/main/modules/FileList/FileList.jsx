@@ -73,7 +73,7 @@ export const Component = React.createClass({
         <div className={classes.breadcrumbs}>
           <FileBreadCrumbs meta={files && files.folder ? files.folder : ''} clickFn={crumbClickFn}/>
         </div>
-        <div className="rel-box" style={{minHeight: '180px'}}>
+        <div className="rel-box" style={{height: '300px', overflowY: 'auto'}}>
         {files && !files.loading ? displayResults() : <LoadingOverlay />}
         </div>
       </div>
