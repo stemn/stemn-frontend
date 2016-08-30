@@ -15,7 +15,8 @@ import classNames from 'classnames';
 import classes from './ProjectSettingsPage.css'
 
 // Sub Components
-import { Field } from 'react-redux-form';
+import { Field, actions } from 'react-redux-form';
+
 import Tabs from 'app/renderer/main/components/Tabs/Tabs'
 import Toggle from 'app/renderer/main/components/Input/Toggle/Toggle'
 import UserSearch from 'app/renderer/main/modules/UserSearch/UserSearch.container.js'
@@ -62,7 +63,7 @@ export const Component = React.createClass({
     })
   },
   render() {
-    const { entityModel, project, ProjectsActions } = this.props;
+    const { entityModel, project, ProjectsActions, dispatch } = this.props;
     const PageStyles = {
       padding: '20px 40px'
     }
@@ -83,6 +84,7 @@ export const Component = React.createClass({
             </Field>
             <br />
             <div className="layout-row layout-align-end">
+              <Button className="primary" onClick={()=>dispatch(actions.reset(entityModel))}>Cancel</Button>
               <Button className="primary" onClick={()=>this.linkRemote()}>Update Project</Button>
             </div>
           </div>
@@ -154,6 +156,7 @@ function mapStateToProps({projects, projectSettings}, otherProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    dispatch,
     ProjectActions: bindActionCreators(ProjectActions, dispatch),
     ProjectsActions: bindActionCreators(ProjectsActions, dispatch),
     ProjectSettingsActions: bindActionCreators(ProjectSettingsActions, dispatch),

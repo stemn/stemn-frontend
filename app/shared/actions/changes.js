@@ -22,7 +22,7 @@ export function descriptionChange({projectId, value}) {
 
 export function actToggleAll({projectId, model, value}) {
   return (dispatch) => {
-//    dispatch(actions.change(model, value));
+    dispatch(actions.change(model, value));
     return {
         type: 'CHANGES/TOGGLE_ALL_CHANGED_FILES',
         payload: {projectId, model, value}

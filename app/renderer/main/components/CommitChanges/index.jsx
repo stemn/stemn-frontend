@@ -23,7 +23,7 @@ export default (props) => {
           props.changes.data.length > 0
           ? <div className="scroll-box flex">
             {props.changes.data.map((item, idx)=><FileChangeRowContext key={item._id}
-              text={item.data.name}
+              text={item.data.path}
               clickFn={()=>{props.selectedFileChange({projectId: props.project._id, selected: item})}}
               isActive={item._id == props.changes.selected._id}
               model={`changes.${props.project._id}.data.${idx}.selected`}
