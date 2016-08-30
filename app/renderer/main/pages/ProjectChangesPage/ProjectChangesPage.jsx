@@ -17,6 +17,7 @@ import Timeline       from 'app/renderer/main/modules/Timeline/Timeline.jsx';
 import CommitChanges  from 'app/renderer/main/components//CommitChanges';
 import CommitBox      from 'app/renderer/main/components/CommitBox/CommitBox.jsx'
 import FileCompare    from 'app/renderer/main/modules/FileCompare/FileCompare.jsx';
+import PreviewFile    from 'app/renderer/main/containers/PreviewFile.js';
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -80,9 +81,11 @@ export const Component = React.createClass({
             </div>
             <div className="layout-column flex">
               {props.changes.selected && props.changes.selected.data
-                ? <FileCompare
-                  project={this.props.project}
-                  file={props.changes.selected.data} />
+                ?
+                <FileCompare file={props.changes.selected.data}>
+                  <PreviewFile project={props.project} file={props.changes.selected.data} />
+                  <PreviewFile project={props.project} file={props.changes.selected.data} />
+                </FileCompare>
                 : <div className="layout-column layout-align-center-center">Select a change</div>
               }
             </div>

@@ -13,18 +13,19 @@
   stroke: rgba(0, 0, 0, 0.12);
 }
 .Popover{
+  z-index: 5;
   transform: translateY(0px) !important;
 }
 
 .PopoverMenu{
-    min-width: 160px;
-    font-size: 12px;
-    color: #373a3c;
-    text-align: left;
-    background-color: #fff;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-    outline: none;
+  min-width: 160px;
+  font-size: 12px;
+  color: #373a3c;
+  text-align: left;
+  background-color: #fff;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  outline: none;
 }
 .PopoverMenu > a{
     display: block;

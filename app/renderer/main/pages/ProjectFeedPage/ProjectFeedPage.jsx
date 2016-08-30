@@ -20,6 +20,7 @@ import FileCompare      from 'app/renderer/main/modules/FileCompare/FileCompare.
 import ContentSidebar    from 'app/renderer/main/components/ContentSidebar';
 import TogglePanel       from 'app/renderer/main/components/Panels/TogglePanel/TogglePanel.jsx';
 import CompareFiles      from 'app/renderer/main/components/CompareFiles/CompareFiles';
+import PreviewFile    from 'app/renderer/main/containers/PreviewFile.js';
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -64,7 +65,10 @@ export const Component = React.createClass({
         }
         else{
           return(
-            <FileCompare project={this.props.project} file={this.props.timeline.selected.data} />
+            <FileCompare project={this.props.project} file={this.props.timeline.selected.data}>
+              <PreviewFile project={this.props.project} file={this.props.timeline.selected.data}/>
+              <PreviewFile project={this.props.project} file={this.props.timeline.selected.data}/>
+            </FileCompare>
           )
         }
       }
@@ -79,7 +83,10 @@ export const Component = React.createClass({
               <div>{file.size}</div>
             </div>
             <div>
-              <FileCompare project={this.props.project} file={file} />
+              <FileCompare project={this.props.project} file={file}>
+                <PreviewFile project={this.props.project} file={file}/>
+                <PreviewFile project={this.props.project} file={file}/>
+              </FileCompare>
             </div>
           </TogglePanel>
         )

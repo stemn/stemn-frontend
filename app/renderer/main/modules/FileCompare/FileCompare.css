@@ -1,4 +1,4 @@
-@value border1 from "app/renderer/assets/css/themes/standard.css";
+@value primary, border1 from "app/renderer/assets/css/themes/standard.css";
 
 
 .header{
@@ -35,6 +35,7 @@
   bottom: 0;
   width: 50%;
   overflow: hidden;
+  border-right: 1px dotted primary;
 }
 
 .single .preview1{

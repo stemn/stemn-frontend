@@ -14,13 +14,17 @@ import {getViewerType} from './previewFileUtils'
 import classNames from 'classnames';
 
 export default class extends React.Component{
-  componentWillMount() {
-    this.props.filesActions.getFile({
-      projectId: this.props.project._id,
-      fileId: this.props.file.fileId,
-      revisionId: this.props.file.revisionId
-    })
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.file && nextProps.project){
+      nextProps.filesActions.getFile({
+        projectId: nextProps.project._id,
+        fileId: nextProps.file.fileId,
+        revisionId: nextProps.file.revisionId
+      })
+    }
   }
+
+
   render() {
     const {file, fileData, project} = this.props;
 

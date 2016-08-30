@@ -9,7 +9,7 @@ export default class extends Component {
       return (
         <div className={styles.loader}>
           <svg className={styles.circular} viewBox={`${width/2} ${width/2} ${width} ${width}`}>
-            <circle className={styles.path} cx={width} cy={width} r={width/2 - 5} fill="none" stroke-width="2" stroke-miterlimit="10"/>
+            <circle className={styles.path} cx={width} cy={width} r={width/2 - 5} fill="none" strokeWidth="2" strokeMiterlimit="10"/>
           </svg>
         </div>
       )

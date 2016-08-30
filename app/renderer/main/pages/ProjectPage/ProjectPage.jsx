@@ -29,8 +29,7 @@ export default class extends React.Component{
         </Header>
         <Tabs size="lg">
           <Link activeClassName="active" to={baseLink+'/changes'}>Changes</Link>
-          <Link activeClassName="active" to={baseLink+'/feed'}>Feed</Link>
-          <Link activeClassName="active" to={baseLink+'/tasks'}>Tasks</Link>
+          <Link activeClassName="active" to={baseLink+'/feed'}>Timeline</Link>
           <Link activeClassName="active" to={baseLink+'/settings'}>Settings</Link>
         </Tabs>
         {this.props.children}
@@ -38,3 +37,5 @@ export default class extends React.Component{
     );
   }
 };
+
+//          <Link activeClassName="active" to={baseLink+'/tasks'}>Tasks</Link>

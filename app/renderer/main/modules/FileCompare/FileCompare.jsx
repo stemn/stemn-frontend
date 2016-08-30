@@ -27,7 +27,7 @@ export const Component = React.createClass({
   getInitialState () {
     return {
       position: 50,
-      compareMode: 'sideBySide'
+      compareMode: 'single'
     };
   },
   sliderChange (position){
@@ -45,7 +45,6 @@ export const Component = React.createClass({
   },
   render() {
     const {project, file} = this.props;
-
 
     const compareModeClasses = {
       sideBySide    : 'layout-row',
@@ -67,6 +66,9 @@ export const Component = React.createClass({
       single        : {}
     }
 
+
+    const overylayStyles = this.state.compareMode == 'slider' && this.refs.container ?
+          {width: this.refs.container.offsetWidth + 'px'} : {};
 
     const compareModeInfo = [
       {
@@ -104,16 +106,15 @@ export const Component = React.createClass({
             </div>
           </PopoverMenu>
         </div>
-        <div className={classNames('flex', 'rel-box', compareModeClasses[this.state.compareMode], classes[this.state.compareMode])} ref="container">
+        <div className={classNames('flex', 'rel-box', 'scroll-box', compareModeClasses[this.state.compareMode], classes[this.state.compareMode])} ref="container">
           <div className={classes.preview1 + ' flex layout-column'}>
-            <PreviewFile project={project} file={file} />
+            {this.state.compareMode != 'single' ? this.props.children[0] : ''}
           </div>
-          {this.state.compareMode == 'slider'
-            ? <FileCompareSlider container={this.refs.container} changeFn={this.sliderChange} position={this.state.position}/>
-            : ''
-          }
+          {this.state.compareMode == 'slider' ? <FileCompareSlider container={this.refs.container} changeFn={this.sliderChange} position={this.state.position}/> : ''}
           <div className={classes.preview2 + ' flex layout-column'} style={preview2Style[this.state.compareMode]}>
-            <PreviewFile project={project} file={file} />
+            <div className="layout-column flex" style={overylayStyles}>
+              {this.props.children[1]}
+            </div>
           </div>
         </div>
         {this.state.compareMode == 'onion'

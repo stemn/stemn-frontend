@@ -22,11 +22,6 @@ import TimelineInner from './TimelineInner/TimelineInner.jsx';
 ///////////////////////////////// COMPONENT /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
-
 export const Component = React.createClass({
   getInitialState () {
     return {
@@ -67,12 +62,13 @@ export const Component = React.createClass({
           </div>
           <div className={styles.dotsOverflow}>
             <div className={styles.dotsPosContainer}>
-              <TimelineInner
-              timeline={this.props.timeline}
-              numberToShow={numberToShow}
-              TimelineActions={this.props.TimelineActions}
-              page={this.state.page}
-              project={this.props.project}></TimelineInner>
+              {this.props.timeline && this.props.timeline.data ?
+                <TimelineInner
+                  timeline={this.props.timeline}
+                  numberToShow={numberToShow}
+                  TimelineActions={this.props.TimelineActions}
+                  page={this.state.page}
+                  project={this.props.project} /> : '' }
             </div>
           </div>
         </div>
