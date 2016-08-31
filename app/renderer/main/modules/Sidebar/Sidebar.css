@@ -9,7 +9,7 @@
   background: rgba(0, 0, 0, 0.03);
 }
 .sidebar.open{
-  width: 300px;
+  width: 100%;
 }
 
 

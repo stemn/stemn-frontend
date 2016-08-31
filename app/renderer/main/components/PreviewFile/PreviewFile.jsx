@@ -16,11 +16,15 @@ import classNames from 'classnames';
 export default class extends React.Component{
   componentWillReceiveProps(nextProps) {
     if(nextProps.file && nextProps.project){
-      nextProps.filesActions.getFile({
-        projectId: nextProps.project._id,
-        fileId: nextProps.file.fileId,
-        revisionId: nextProps.file.revisionId
-      })
+      const viewerType = getViewerType(nextProps.file.extension);
+
+      if(viewerType != 'image'){
+        nextProps.filesActions.getFile({
+          projectId: nextProps.project._id,
+          fileId: nextProps.file.fileId,
+          revisionId: nextProps.file.revisionId
+        })
+      }
     }
   }
 

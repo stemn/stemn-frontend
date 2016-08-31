@@ -16,11 +16,13 @@ import feedPageStyles from './ProjectFeedPage.css';
 import Popover           from 'app/renderer/assets/other/react-popup';
 import Timeline          from 'app/renderer/main/modules/Timeline/Timeline.jsx';
 import SidebarTimeline   from 'app/renderer/main/containers/SidebarTimeline';
-import FileCompare      from 'app/renderer/main/modules/FileCompare/FileCompare.jsx';
+import FileCompare       from 'app/renderer/main/modules/FileCompare/FileCompare.jsx';
 import ContentSidebar    from 'app/renderer/main/components/ContentSidebar';
 import TogglePanel       from 'app/renderer/main/components/Panels/TogglePanel/TogglePanel.jsx';
 import CompareFiles      from 'app/renderer/main/components/CompareFiles/CompareFiles';
-import PreviewFile    from 'app/renderer/main/containers/PreviewFile.js';
+import PreviewFile       from 'app/renderer/main/containers/PreviewFile.js';
+import DragResize        from 'app/renderer/main/modules/DragResize/DragResize.jsx';
+
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -82,10 +84,12 @@ export const Component = React.createClass({
               <div className="flex">{file.data.path}</div>
               <div>{file.data.size}</div>
             </div>
-            <FileCompare file={file}>
-              <PreviewFile project={this.props.project} file={file.data}/>
-              <PreviewFile project={this.props.project} file={file.data}/>
-            </FileCompare>
+            <DragResize side="bottom" height="500" heightRange={[200, 1000]} className="layout-column flex">
+              <FileCompare file={file}>
+                <PreviewFile project={this.props.project} file={file.data}/>
+                <PreviewFile project={this.props.project} file={file.data}/>
+              </FileCompare>
+            </DragResize>
           </TogglePanel>
         )
       }

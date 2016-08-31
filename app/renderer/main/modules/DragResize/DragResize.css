@@ -1,0 +1,8 @@
+.dragger{
+  position: absolute;
+  z-index: 4;
+}
+
+.box{
+  position: relative;
+}

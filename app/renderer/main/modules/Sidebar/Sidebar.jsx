@@ -16,6 +16,7 @@ import styles from './Sidebar.css';
 import userStyles from './SidebarAvatar.css';
 
 // Sub Components
+import DragResize      from 'app/renderer/main/modules/DragResize/DragResize.jsx';
 import { Link } from 'react-router';
 import { ContextMenu, MenuItem, ContextMenuLayer } from "react-contextmenu";
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
@@ -58,54 +59,56 @@ export const Component = React.createClass({
 
 
     return (
-      <div className={sidebarStyle}>
-        <div className={styles.sidebarToolbar + ' layout-row layout-align-start-center'}>
+      <DragResize side="right" width="300" widthRange={[0, 500]} className="layout-column flex">
+        <div className={sidebarStyle}>
+          <div className={styles.sidebarToolbar + ' layout-row layout-align-start-center'}>
 
-          <PopoverMenu preferPlace="below">
-            <div>
-              <MdAdd size="25"/>
-            </div>
-            <div className="PopoverMenu">
-              <a onClick={()=>ProjectsActions.createProject()}>Create New Project</a>
-              <a href="">Create New Thread</a>
-            </div>
-          </PopoverMenu>
-
-          <div className="flex"></div>
-          <a onClick={()=>{this.props.sidebarActions.toggleSidebar();}}><MdMenu size="25"/></a>
-
-        </div>
-        <div className={styles.sidebarSearch}>
-          <Field model="sidebar.searchString">
-            <input className="dr-input" type="text" placeholder="Search all projects"/>
-          </Field>
-          <MdSearch className={styles.sidebarSearchIcon} size="25"/>
-        </div>
-
-        <div className="scroll-box flex">
-            {filteredProjects.map((item, idx) => <ProjectWithContext key={idx} item={item} isActive={item._id == this.props.params.stub} to={{pathname: `/project/${item._id}/changes`, state: routeState}}/>)}
-            <SidebarContextmenu />
-        </div>
-
-        <div>
-          <div className="layout-row layout-align-start-center">
-            <PopoverMenu className="flex">
-                <div className={userStyles.userWrapper + ' flex layout-row layout-align-start-center'}>
-                  <img className={userStyles.userAvatar} src={'https://stemn.com' + this.props.auth.user.picture + '?size=thumb&crop=true'} />
-                  <div className="flex">
-                    {this.props.auth.user.name}
-                  </div>
-                </div>
+            <PopoverMenu preferPlace="below">
+              <div>
+                <MdAdd size="25"/>
+              </div>
               <div className="PopoverMenu">
-                <a href="">Account Settings</a>
-                <a href="">Team Settings</a>
-                <a onClick={()=>{this.props.authActions.logout()}}>Sign out</a>
+                <a onClick={()=>ProjectsActions.createProject()}>Create New Project</a>
+                <a href="">Create New Thread</a>
               </div>
             </PopoverMenu>
-            <Link className={userStyles.userSettings + ' layout-column layout-align-center-center'} to="/settings/application"><MdSettings size="25"/></Link>
+
+            <div className="flex"></div>
+            <a onClick={()=>{this.props.sidebarActions.toggleSidebar();}}><MdMenu size="25"/></a>
+
+          </div>
+          <div className={styles.sidebarSearch}>
+            <Field model="sidebar.searchString">
+              <input className="dr-input" type="text" placeholder="Search all projects"/>
+            </Field>
+            <MdSearch className={styles.sidebarSearchIcon} size="25"/>
+          </div>
+
+          <div className="scroll-box flex">
+              {filteredProjects.map((item, idx) => <ProjectWithContext key={idx} item={item} isActive={item._id == this.props.params.stub} to={{pathname: `/project/${item._id}/changes`, state: routeState}}/>)}
+              <SidebarContextmenu />
+          </div>
+
+          <div>
+            <div className="layout-row layout-align-start-center">
+              <PopoverMenu className="flex">
+                  <div className={userStyles.userWrapper + ' flex layout-row layout-align-start-center'}>
+                    <img className={userStyles.userAvatar} src={'https://stemn.com' + this.props.auth.user.picture + '?size=thumb&crop=true'} />
+                    <div className="flex">
+                      {this.props.auth.user.name}
+                    </div>
+                  </div>
+                <div className="PopoverMenu">
+                  <a href="">Account Settings</a>
+                  <a href="">Team Settings</a>
+                  <a onClick={()=>{this.props.authActions.logout()}}>Sign out</a>
+                </div>
+              </PopoverMenu>
+              <Link className={userStyles.userSettings + ' layout-column layout-align-center-center'} to="/settings/application"><MdSettings size="25"/></Link>
+            </div>
           </div>
         </div>
-      </div>
+      </DragResize>
     );
   }
 });

@@ -65,6 +65,7 @@ export const Component = React.createClass({
   render() {
     const { changes, project, ChangesActions } = this.props;
 
+    console.log(changes.selected);
     if(changes){
       return (
         <div className="layout-column flex rel-box">
