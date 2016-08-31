@@ -18,6 +18,10 @@ import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 import {MdMoreHoriz} from 'react-icons/lib/md';
 
+import {getCompareModes} from './FileCompare.utils.js';
+import {getViewerType} from 'app/renderer/main/components/PreviewFile/previewFileUtils.js';
+
+
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -44,7 +48,9 @@ export const Component = React.createClass({
     console.log('fileInfo');
   },
   render() {
-    const {project, file} = this.props;
+    const {project, file1, file2} = this.props;
+    const previewType1 = getViewerType(file1.extension, project.remote.provider);
+    const previewType2 = getViewerType(file2.extension, project.remote.provider);
 
     const compareModeClasses = {
       sideBySide    : 'layout-row',
@@ -66,39 +72,21 @@ export const Component = React.createClass({
       single        : {}
     }
 
-
     const overylayStyles = this.state.compareMode == 'slider' && this.refs.container ?
           {width: this.refs.container.offsetWidth + 'px'} : {};
 
-    const compareModeInfo = [
-      {
-        value: 'sideBySide',
-        text: 'Side By Side',
-      }, {
-        value: 'aboveAndBelow',
-        text: 'Above and Below',
-      }, {
-        value: 'onion',
-        text: 'Onion Skin',
-      }, {
-        value: 'slider',
-        text: 'Slider',
-      }, {
-        value: 'single',
-        text: 'None',
-      }
-    ]
+    console.log(this.props.children);
 
     return (
       <div className="layout-column flex">
         <div className={classes.header + ' layout-row layout-align-start-center'}>
-          <div className="flex">{file.path}</div>
+          <div className="flex">{file1.path}</div>
           <PopoverMenu preferPlace="below">
             <SimpleIconButton>
               <MdMoreHoriz size="20px"/>
             </SimpleIconButton>
             <div className="PopoverMenu">
-              {compareModeInfo.map((item)=><a className={classNames({'active': this.state.compareMode == item.value})} onClick={()=>this.setCompareMode(item.value)}>Compare: {item.text}</a>)}
+              {getCompareModes(previewType1, previewType2).map((item)=><a className={classNames({'active': this.state.compareMode == item.value})} onClick={()=>this.setCompareMode(item.value)}>Compare: {item.text}</a>)}
               <div className="divider"></div>
               <a onClick={this.displayFileInfo}>Discard Changes</a>
               <a onClick={this.displayFileInfo}>Open in explorer</a>

@@ -8,6 +8,8 @@ import * as ChangesActions from 'app/shared/actions/changes.js';
 // Component Core
 import React from 'react';
 
+import u from 'updeep';
+
 // Styles
 import classNames from 'classnames';
 
@@ -65,7 +67,7 @@ export const Component = React.createClass({
   render() {
     const { changes, project, ChangesActions } = this.props;
 
-    console.log(changes.selected);
+    const filePrevious = changes && changes.selected.data && changes.selected.data.previousRevisionId ? u( {data: {revisionId : changes.selected.data.previousRevisionId}}, changes.selected) : null;
     if(changes){
       return (
         <div className="layout-column flex rel-box">
@@ -84,8 +86,8 @@ export const Component = React.createClass({
             <div className="layout-column flex">
               {changes.selected && changes.selected.data
                 ?
-                <FileCompare file={changes.selected.data}>
-                  <PreviewFile project={project} file={changes.selected.data} />
+                <FileCompare project={project} file1={changes.selected.data} file2={filePrevious.data}>
+                  {filePrevious ? <PreviewFile project={project} file={filePrevious.data} /> : ''}
                   <PreviewFile project={project} file={changes.selected.data} />
                 </FileCompare>
                 : <div className="layout-column layout-align-center-center">Select a change</div>
