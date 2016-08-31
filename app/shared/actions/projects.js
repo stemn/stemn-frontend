@@ -34,7 +34,7 @@ export function createProject() {
 export function deleteProject({projectId}) {
   return (dispatch)=>{
     dispatch({
-      type: 'PROJECTS/CREATE_PROJECT',
+      type: 'PROJECTS/DELETE_PROJECT',
       payload: http({
         method: 'DELETE',
         url: `http://localhost:3000/api/v1/projects/${projectId}`,

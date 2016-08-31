@@ -74,9 +74,9 @@ export default (store) => {
     <Route                                           component={RootAppPage} >
       <Route                                         component={AuthedAppPage}   onEnter={requireAuth}>
         <Route   path="/project/:stub"               component={ProjectPage}>
-          <Route path="/project/:stub/changes"       component={ProjectChangesPage}/>
-          <Route path="/project/:stub/feed"          component={ProjectFeedPage}/>
-          <Route path="/project/:stub/settings"      component={ProjectSettingsPage}/>
+          <Route path="changes"       component={ProjectChangesPage}/>
+          <Route path="feed"          component={ProjectFeedPage}/>
+          <Route path="settings"      component={ProjectSettingsPage}/>
         </Route>
         <Route   path="/"                            component={HomePage}/>
         <Route   path="/settings"                    component={SettingsPage}>

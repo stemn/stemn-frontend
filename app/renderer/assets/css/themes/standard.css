@@ -1,7 +1,13 @@
 @value primary: rgb(68, 154, 211);
 @value primary-2: rgb(64, 129, 173);
+
 @value secondary: rgba(0, 0, 0, 0.7);
 @value secondary-2: rgba(0, 0, 0, 0.8);
+
+@value warn: rgb(244,67,54);
+@value warn-2: rgb(219, 59, 47);
+
+
 
 @value border1: rgba(0, 0, 0, 0.1);
 @value bg1: rgba(0, 0, 0, 0.03);

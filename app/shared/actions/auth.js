@@ -13,6 +13,25 @@ export function loadUserData() {
   }
 }
 
+export function getProjects({userId}) {
+  return {
+    type:'AUTH/FETCH_PROJECTS',
+    http: true,
+    payload: {
+      url: 'http://localhost:3000/api/v1/search',
+      method: 'GET',
+      params: {
+        type:'project',
+        parentType:'user',
+        parentId: userId,
+        size: 50,
+        published: 'both'
+      },
+    },
+  }
+}
+
+
 export function authenticate(provider) {
   return (dispatch) => {
     dispatch({
@@ -85,7 +104,6 @@ export function register({email, password, firstname, lastname}) {
     })
   }
 }
-
 
 export function setAuthToken(token) {
   return {

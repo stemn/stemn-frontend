@@ -123,6 +123,12 @@ export const Component = React.createClass({
             <ProjectPermissionsRadio model={`${entityModel}.permissions.projectType`} />
           </div>
 
+          <div className={classes.panel}>
+            <h3>Delete Project</h3>
+            <p>Once you delete a project, there is no going back. Please be certain.</p>
+            <Button className="warn" onClick={()=>ProjectsActions.deleteProject({projectId: project._id})}>Delete Project</Button>
+          </div>
+
         </div>
      </div>
     );

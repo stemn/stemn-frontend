@@ -63,28 +63,29 @@ export const Component = React.createClass({
   },
 
   render() {
-    const props = this.props;
-    if(props.changes){
+    const { changes, project, ChangesActions } = this.props;
+
+    if(changes){
       return (
         <div className="layout-column flex rel-box">
           <div className="layout-row flex">
             <div className="layout-column">
               <ContentSidebar>
-                {props.changes && props.changes.data
-                  ? <CommitChanges changes={props.changes} project={props.project} actToggleAll={this.toggleAll} selectedFileChange={props.ChangesActions.selectedFileChange}/>
+                {changes && changes.data
+                  ? <CommitChanges changes={changes} project={project} actToggleAll={this.toggleAll} selectedFileChange={ChangesActions.selectedFileChange}/>
                   : ''}
 
                 <div style={this.CommitBoxStyles}>
-                  <CommitBox changes={props.changes} changesActions={props.ChangesActions} commitFn={()=>this.commitFn()} project={this.props.project}/>
+                  <CommitBox changes={changes} changesActions={ChangesActions} commitFn={()=>this.commitFn()} project={project}/>
                 </div>
               </ContentSidebar>
             </div>
             <div className="layout-column flex">
-              {props.changes.selected && props.changes.selected.data
+              {changes.selected && changes.selected.data
                 ?
-                <FileCompare file={props.changes.selected.data}>
-                  <PreviewFile project={props.project} file={props.changes.selected.data} />
-                  <PreviewFile project={props.project} file={props.changes.selected.data} />
+                <FileCompare file={changes.selected.data}>
+                  <PreviewFile project={project} file={changes.selected.data} />
+                  <PreviewFile project={project} file={changes.selected.data} />
                 </FileCompare>
                 : <div className="layout-column layout-align-center-center">Select a change</div>
               }

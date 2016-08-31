@@ -65,7 +65,7 @@ export const Component = React.createClass({
         }
         else{
           return(
-            <FileCompare project={this.props.project} file={this.props.timeline.selected.data}>
+            <FileCompare file={this.props.timeline.selected.data}>
               <PreviewFile project={this.props.project} file={this.props.timeline.selected.data}/>
               <PreviewFile project={this.props.project} file={this.props.timeline.selected.data}/>
             </FileCompare>
@@ -79,15 +79,13 @@ export const Component = React.createClass({
         return this.props.timeline.selected.data.items.map((file)=>
           <TogglePanel>
             <div className="layout-row flex layout-align-start-center">
-              <div className="flex">{file.path}</div>
-              <div>{file.size}</div>
+              <div className="flex">{file.data.path}</div>
+              <div>{file.data.size}</div>
             </div>
-            <div>
-              <FileCompare project={this.props.project} file={file}>
-                <PreviewFile project={this.props.project} file={file}/>
-                <PreviewFile project={this.props.project} file={file}/>
-              </FileCompare>
-            </div>
+            <FileCompare file={file}>
+              <PreviewFile project={this.props.project} file={file.data}/>
+              <PreviewFile project={this.props.project} file={file.data}/>
+            </FileCompare>
           </TogglePanel>
         )
       }

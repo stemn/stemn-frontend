@@ -33,18 +33,27 @@ const ProjectWithContext = ContextMenuLayer('multi', (props) => (props.item))(Si
 
 export const Component = React.createClass({
 
-  componentDidMount() {
-    this.props.sidebarActions.getProjects({
-        userId: this.props.auth.user._id,
+//  componentDidMount() {
+//    this.props.authActions.getProjects({
+//      userId: this.props.auth.user._id,
+//    });
+//  },
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.auth.user._id && !nextProps.auth.projects.loading && !nextProps.auth.projects.data){
+      nextProps.authActions.getProjects({
+        userId: nextProps.auth.user._id,
       });
+    }
   },
+
 
   render() {
     const { ProjectsActions } = this.props;
     const sidebarStyle = classNames('layout-column', 'flex' ,'rel-box', styles.sidebar, {[styles.open]: this.props.sidebar.show});
 
     const nameRegex = new RegExp(this.props.sidebar.searchString, 'i');
-    const filteredProjects = this.props.sidebar.projects.filter((project) => nameRegex.test(project.name));
+    const filteredProjects = this.props.auth.projects.data ? this.props.auth.projects.data.filter((project) => nameRegex.test(project.name)) : [];
     const routeState = {meta : {scope: ['main', 'menubar']}}
 
 
@@ -106,8 +115,12 @@ export const Component = React.createClass({
 ///////////////////////////////// CONTAINER /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({ sidebar, auth }, otherProps) {
-  return { sidebar, auth, params: otherProps.params };
+function mapStateToProps({ sidebar, auth }, {params}) {
+  return {
+    sidebar,
+    auth,
+    params
+  };
 }
 
 function mapDispatchToProps(dispatch) {
