@@ -59,6 +59,7 @@ export default (store) => {
     }
     else{
       store.dispatch(AuthActions.initHttpHeaders('bearer '+ store.getState().auth.authToken));
+      setTimeout(()=>store.dispatch(AuthActions.loadUserData()), 1)
     }
     callback();
   };

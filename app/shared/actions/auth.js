@@ -4,30 +4,34 @@ import { push } from 'react-router-redux'
 import * as auth from 'app/main/modules/auth/auth.js';
 
 export function loadUserData() {
-  return {
-    type:'AUTH/LOAD_USER_DATA',
-    payload: http({
-      url: 'http://localhost:3000/api/v1/me',
-      method: 'GET',
-    }),
+  return (dispatch) => {
+    dispatch({
+      type:'AUTH/LOAD_USER_DATA',
+      payload: http({
+        url: 'http://localhost:3000/api/v1/me',
+        method: 'GET',
+      }).then((response)=>{
+        dispatch(getProjects({userId: response.data._id}))
+        return response
+      }),
+    })
   }
 }
 
 export function getProjects({userId}) {
   return {
     type:'AUTH/FETCH_PROJECTS',
-    http: true,
-    payload: {
+    payload: http({
       url: 'http://localhost:3000/api/v1/search',
       method: 'GET',
       params: {
         type:'project',
         parentType:'user',
         parentId: userId,
-        size: 50,
+        size: 100,
         published: 'both'
       },
-    },
+    }),
   }
 }
 
@@ -41,7 +45,6 @@ export function authenticate(provider) {
       }).then((response)=>{
         dispatch(setAuthToken(response.data.token))
         dispatch(initHttpHeaders('bearer ' + response.data.token))
-        setTimeout(()=>{dispatch(loadUserData())}, 1)
         setTimeout(()=>{dispatch(push('/'))}, 1)
         return response
       })
@@ -73,7 +76,6 @@ export function login({email, password}) {
       }).then((response)=>{
         dispatch(setAuthToken(response.data.token))
         dispatch(initHttpHeaders('bearer ' + response.data.token))
-        setTimeout(()=>{dispatch(loadUserData())}, 1)
         setTimeout(()=>{dispatch(push('/'))}, 1)
         return response
       })
@@ -97,7 +99,6 @@ export function register({email, password, firstname, lastname}) {
       }).then((response)=>{
         dispatch(setAuthToken(response.data.token))
         dispatch(initHttpHeaders('bearer ' + response.data.token))
-        dispatch(loadUserData())
         setTimeout(()=>{dispatch(push('/'))}, 1)
         return response
       })
