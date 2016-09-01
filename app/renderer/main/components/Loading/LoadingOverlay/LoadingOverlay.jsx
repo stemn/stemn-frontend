@@ -19,6 +19,7 @@ export default class extends Component {
             <div className={styles.loadingOverlay}>
                 <div className={styles.loaderContainer}>
                   <LoadingSpinner />
+                  {this.props.children ? <div className={styles.text}>{this.props.children}</div> : ''}
                 </div>
             </div>
           </ReactCSSTransitionGroup>

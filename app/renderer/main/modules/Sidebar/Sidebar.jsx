@@ -94,7 +94,7 @@ export const Component = React.createClass({
               <PopoverMenu className="flex">
                   <div className={userStyles.userWrapper + ' flex layout-row layout-align-start-center'}>
                     <img className={userStyles.userAvatar} src={'https://stemn.com' + this.props.auth.user.picture + '?size=thumb&crop=true'} />
-                    <div className="flex">
+                    <div className="flex text-ellipsis">
                       {this.props.auth.user.name}
                     </div>
                   </div>

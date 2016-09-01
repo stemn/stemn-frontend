@@ -13,6 +13,7 @@ import classNames from 'classnames';
 import feedPageStyles from './ProjectFeedPage.css';
 
 // Sub Components
+import u                 from 'updeep';
 import Popover           from 'app/renderer/assets/other/react-popup';
 import Timeline          from 'app/renderer/main/modules/Timeline/Timeline.jsx';
 import SidebarTimeline   from 'app/renderer/main/containers/SidebarTimeline';
@@ -42,9 +43,9 @@ export const Component = React.createClass({
   },
 
   render(){
-    const styles = {
-        padding: '30px'
-    }
+    const { timeline, project } = this.props;
+    const filePrevious = timeline && timeline.selected.data && timeline.selected.data.previousRevisionId ? u( {data: {revisionId : timeline.selected.data.previousRevisionId}}, timeline.selected) : null;
+
 
     const getDetailSection = () => {
       if(this.props.timeline && this.props.timeline.selected && this.props.timeline.selected.data){
@@ -67,9 +68,9 @@ export const Component = React.createClass({
         }
         else{
           return(
-            <FileCompare file={this.props.timeline.selected.data}>
-              <PreviewFile project={this.props.project} file={this.props.timeline.selected.data}/>
-              <PreviewFile project={this.props.project} file={this.props.timeline.selected.data}/>
+            <FileCompare project={project} file1={timeline.selected.data} file2={filePrevious ? filePrevious.data : null}>
+              {filePrevious ? <PreviewFile project={project} file={filePrevious.data} /> : ''}
+              <PreviewFile project={project} file={timeline.selected.data} />
             </FileCompare>
           )
         }
@@ -82,21 +83,25 @@ export const Component = React.createClass({
     }
 
     const getFilesSection = () => {
+
       if(this.props.timeline.selected.data.items){
-        return this.props.timeline.selected.data.items.map((file)=>
-          <TogglePanel>
-            <div className="layout-row flex layout-align-start-center">
-              <div className="flex">{file.data.path}</div>
-              <div>{file.data.size}</div>
-            </div>
-            <DragResize side="bottom" height="500" heightRange={[200, 1000]} className="layout-column flex">
-              <FileCompare file={file}>
-                <PreviewFile project={this.props.project} file={file.data}/>
-                <PreviewFile project={this.props.project} file={file.data}/>
-              </FileCompare>
-            </DragResize>
-          </TogglePanel>
-        )
+        return this.props.timeline.selected.data.items.map((file)=>{
+          const filePrevious = file.data.previousRevisionId ? u( {data: {revisionId : file.data.previousRevisionId}}, file) : null;
+          return (
+            <TogglePanel>
+              <div className="layout-row flex layout-align-start-center">
+                <div className="flex">{file.data.path}</div>
+                <div>{file.data.size}</div>
+              </div>
+              <DragResize side="bottom" height="500" heightRange={[200, 1000]} className="layout-column flex">
+                <FileCompare project={project} file1={file.data} file2={filePrevious ? filePrevious.data : null}>
+                  {filePrevious ? <PreviewFile project={project} file={filePrevious.data} /> : ''}
+                  <PreviewFile project={project} file={file.data} />
+                </FileCompare>
+              </DragResize>
+            </TogglePanel>
+          )
+        })
       }
     }
 

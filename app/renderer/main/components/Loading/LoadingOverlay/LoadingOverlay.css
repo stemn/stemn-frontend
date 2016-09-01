@@ -13,3 +13,9 @@
     top: 50%;
     transform: translate(-50%, -50%);
 }
+.text{
+  font-size: 15px;
+  font-weight: 300;
+  text-align: center;
+  margin-top: 15px;
+}

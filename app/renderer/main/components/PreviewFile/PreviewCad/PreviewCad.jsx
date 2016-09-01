@@ -25,9 +25,9 @@ export default React.createClass({
     if(previewCadUtils.isWebGlSupported()){
       promise.all([
         previewCadUtils.render({
-          projectStub : this.props.fileMeta.parentProject,
-          path        : this.props.fileMeta.path,
-          revision    : this.props.fileMeta.rev,
+          projectId  : this.props.file.project._id,
+          fileId     : this.props.file.fileId,
+          revisionId : this.props.file.revisionId,
         }),
         previewCadUtils.authenticate()
       ]).then((response)=>{
@@ -69,13 +69,13 @@ export default React.createClass({
       return <div className={styles.container}><AutodeskViewer urn={this.state.urn} token={this.state.token} /></div>
     }
     else if(this.state.status == 'failed'){
-      return <div>Failed</div>
+      return <div className="layout-column layout-align-center-center flex"><div className="text-center text-title-4">Failed</div></div>
     }    
     else if(this.state.status == 'disabled'){
-      return <div>Disabled</div>
+      return <div className="layout-column layout-align-center-center flex"><div className="text-center text-title-4">Disabled</div></div>
     }
     else {
-      return <div className={styles.container}><LoadingOverlay /></div>
+      return <div className="rel-box flex"><LoadingOverlay>Processing File...</LoadingOverlay></div>
     }
   }
 })
