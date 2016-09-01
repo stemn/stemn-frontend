@@ -86,11 +86,11 @@ export const Component = React.createClass({
             <div className="layout-column flex">
               {changes.selected && changes.selected.data
                 ?
-                <FileCompare project={project} file1={changes.selected.data} file2={filePrevious.data}>
+                <FileCompare project={project} file1={changes.selected.data} file2={filePrevious ? filePrevious.data : null}>
                   {filePrevious ? <PreviewFile project={project} file={filePrevious.data} /> : ''}
                   <PreviewFile project={project} file={changes.selected.data} />
                 </FileCompare>
-                : <div className="layout-column layout-align-center-center">Select a change</div>
+                : <div className="layout-column layout-align-center-center flex text-title-4 text-center">No file change selected.</div>
               }
             </div>
 

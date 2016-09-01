@@ -79,7 +79,7 @@ export const Component = React.createClass({
           </div>
           <div className={styles.sidebarSearch}>
             <Field model="sidebar.searchString">
-              <input className="dr-input" type="text" placeholder="Search all projects"/>
+              <input className="dr-input text-ellipsis" type="text" placeholder="Search all projects"/>
             </Field>
             <MdSearch className={styles.sidebarSearchIcon} size="25"/>
           </div>

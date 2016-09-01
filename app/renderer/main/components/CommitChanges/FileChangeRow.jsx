@@ -22,7 +22,7 @@ export default (props) => {
       <div className={styles.checkbox}>
         <Checkbox model={props.model} value={props.value}/>
       </div>
-      <div className={styles.text + ' flex'} onClick={props.clickFn}>{props.text}</div>
+      <div className={styles.text + ' flex text-ellipsis'} onClick={props.clickFn}>{props.text}</div>
     </div>
   )
 }

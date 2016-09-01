@@ -50,7 +50,7 @@ export const Component = React.createClass({
   render() {
     const {project, file1, file2} = this.props;
     const previewType1 = getViewerType(file1.extension, project.remote.provider);
-    const previewType2 = getViewerType(file2.extension, project.remote.provider);
+    const previewType2 = file2 ? getViewerType(file2.extension, project.remote.provider) : null;
 
     const compareModeClasses = {
       sideBySide    : 'layout-row',

@@ -74,6 +74,11 @@ export const Component = React.createClass({
           )
         }
       }
+      else{
+        return (
+          <div className="layout-column layout-align-center-center flex text-title-4 text-center">No event selected.</div>
+        )
+      }
     }
 
     const getFilesSection = () => {

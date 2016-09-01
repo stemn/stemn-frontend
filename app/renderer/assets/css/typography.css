@@ -25,11 +25,19 @@
 .text-description-1{
   color: rgba(0,0,0,0.4);
 }
-
+.text-center{
+  text-align: center;
+}
 
 .link-primary{
   color: rgb(68, 154, 211);
 }
 .link-primary:hover{
   color: rgb(64, 129, 173)
+}
+
+.text-ellipsis{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis
 }
