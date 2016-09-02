@@ -29,23 +29,31 @@ const mainReducer = (state, action) => {
       }, state)
 
 
-    case 'TASKS/GET_TASKS_PENDING':
+//    case 'TASKS/GET_TASKS_PENDING':
+//      return u({
+//        [action.meta.cacheKey] : {
+//          loading : true
+//        }
+//      }, state)
+//    case 'TASKS/GET_TASKS_FULFILLED':
+//      return u({
+//        [action.meta.cacheKey] : {
+//          data: action.payload.data,
+//          loading : false
+//        }
+//      }, state)
+//    case 'TASKS/GET_TASKS_REJECTED':
+//      return u({
+//        [action.meta.cacheKey] : {
+//          loading : false
+//        }
+//      }, state)
+
+    case 'TASKS/GET_TASKS':
       return u({
         [action.meta.cacheKey] : {
-          loading : true
-        }
-      }, state)
-    case 'TASKS/GET_TASKS_FULFILLED':
-      return u({
-        [action.meta.cacheKey] : {
-          data: action.payload.data,
-          loading : false
-        }
-      }, state)
-    case 'TASKS/GET_TASKS_REJECTED':
-      return u({
-        [action.meta.cacheKey] : {
-          loading : false
+          items : action.payload.response.data.items,
+          groups : action.payload.response.data.groups,
         }
       }, state)
 
