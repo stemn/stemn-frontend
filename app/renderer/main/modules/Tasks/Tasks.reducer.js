@@ -76,9 +76,30 @@ const mainReducer = (state, action) => {
           deleteTaskLoading: false,
         }
       }, state)
+
+    case 'TASKS/NEW_GROUP':
+      return u({
+        [action.meta.cacheKey] : {
+          groups: (groups)=>addItem(groups, action.payload.group),
+          newGroupString: ''
+        }
+      }, state)
+
+    case 'TASKS/DELETE_GROUP':
+      return u({
+        [action.meta.cacheKey] : {
+          deleteTaskLoading: false,
+        }
+      }, state)
+
     default:
       return state;
   }
+}
+
+
+function addItem (keyItems, item) {
+  return [].concat(keyItems, [item])
 }
 
 export default function (state = initialState, action) {

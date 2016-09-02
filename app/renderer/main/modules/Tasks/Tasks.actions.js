@@ -148,3 +148,31 @@ export function deleteTask({projectId, taskId}) {
     }
   }
 }
+
+export function newGroup({projectId, group}) {
+  return (dispatch)=>{
+    if(group.length > 1){
+      dispatch({
+        type: 'TASKS/NEW_GROUP',
+        payload: {
+          group
+        },
+        meta: {
+          cacheKey: projectId
+        }
+      })
+    }
+  }
+}
+
+export function deleteGroup({projectId, group}) {
+  return {
+    type: 'TASKS/DELETE_GROUP',
+    payload: {
+      group
+    },
+    meta: {
+      cacheKey: projectId
+    }
+  }
+}

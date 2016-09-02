@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Field } from 'react-redux-form';
 
 import {groupTasks} from '../Tasks.utils.js';
 import TaskGridItem from '../TaskGridItem/TaskGridItem.jsx';
@@ -9,13 +10,14 @@ import classes from './TaskGrid.css';
 
 export default React.createClass({
   render() {
-    const { tasks, groups } = this.props;
-    const groupedTasks = groupTasks(groups, tasks);
+    const { tasks, project, TasksActions } = this.props;
+    const entityModel = `tasks.${project._id}`;
+    const groupedTasks = groupTasks(tasks.groups, tasks.items);
 
     return (
       <div className={classes.container + ' layout-row flex'}>
         <div className={classes.row + ' layout-row flex'}>
-          {groups.map((group)=>{
+          {tasks.groups.map((group)=>{
             return (
               <div className={classes.column}>
                 <h3>{group}</h3>
@@ -26,7 +28,13 @@ export default React.createClass({
           })}
           <div className={classes.column}>
             <h3>&nbsp;</h3>
-            <input className={classes.newItem} type="text" placeholder="New Section"/>
+            <Field model={`${entityModel}.newGroupString`}>
+              <input className={classes.newItem} type="text" placeholder="New Section"/>
+            </Field>
+            <button onClick={()=>TasksActions.newGroup({
+              projectId: project._id,
+              group: tasks.newGroupString
+            })}>Submit</button>
           </div>
         </div>
       </div>
