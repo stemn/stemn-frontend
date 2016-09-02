@@ -13,7 +13,7 @@ export default (props) => {
   return (
     <div className={styles.fileChangeTitleRow + ' layout-row'}>
       {checkbox}
-      <span className={styles.text + ' flex'}>{props.text}</span>
+      <span className={styles.text + ' flex text-ellipsis'}>{props.text}</span>
     </div>
   )
 }

@@ -14,6 +14,7 @@ import feedPageStyles from './ProjectFeedPage.css';
 
 // Sub Components
 import u                 from 'updeep';
+import { Link }          from 'react-router';
 import Popover           from 'app/renderer/assets/other/react-popup';
 import Timeline          from 'app/renderer/main/modules/Timeline/Timeline.jsx';
 import SidebarTimeline   from 'app/renderer/main/containers/SidebarTimeline';
@@ -33,11 +34,13 @@ import DragResize        from 'app/renderer/main/modules/DragResize/DragResize.j
 export const Component = React.createClass({
 
   componentWillMount() {
-    this.props.TimelineActions.fetchTimeline({stub: this.props.project._id})
+    if(this.props.project && this.props.project.remote.connected){
+      this.props.TimelineActions.fetchTimeline({stub: this.props.project._id})
+    }
   },
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.project._id !== this.props.project._id) {
+    if (nextProps.project._id !== this.props.project._id && nextProps.project.remote.connected) {
       this.props.TimelineActions.fetchTimeline({stub: nextProps.project._id})
     }
   },
@@ -45,6 +48,7 @@ export const Component = React.createClass({
   render(){
     const { timeline, project } = this.props;
     const filePrevious = timeline && timeline.selected.data && timeline.selected.data.previousRevisionId ? u( {data: {revisionId : timeline.selected.data.previousRevisionId}}, timeline.selected) : null;
+    const baseLink = `project/${project ? project._id : ''}`
 
 
     const getDetailSection = () => {
@@ -105,21 +109,31 @@ export const Component = React.createClass({
       }
     }
 
-    return (
-      <div className="layout-column flex rel-box">
-        <Timeline project={this.props.project} />
-        <div className="layout-row flex">
-          <div className="layout-column">
-            <ContentSidebar className="flex">
-              <SidebarTimeline project={this.props.project}/>
-            </ContentSidebar>
-          </div>
-          <div className="layout-column flex">
-            {getDetailSection()}
+    if(project.remote.connected){
+      return (
+        <div className="layout-column flex rel-box">
+          <Timeline project={this.props.project} />
+          <div className="layout-row flex">
+            <div className="layout-column">
+              <ContentSidebar className="flex">
+                <SidebarTimeline project={this.props.project}/>
+              </ContentSidebar>
+            </div>
+            <div className="layout-column flex">
+              {getDetailSection()}
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
+    else{
+      return (
+        <div className="layout-column layout-align-center-center flex">
+          <div className="text-title-4 text-center">Project not connected to Drive or Dropbox</div>
+          <div className="text-title-4 text-center link-primary" style={{marginTop: '10px'}}><Link to={baseLink+'/settings'}>Add File Store</Link></div>
+        </div>
+      )
+    }
   }
 })
 

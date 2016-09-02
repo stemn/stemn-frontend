@@ -32,7 +32,7 @@ export default React.createClass({
           <div className={classNames('layout-row', 'layout-align-start-center', styles.timelineRow, {[styles.active]: this.props.isActive})}>
             <div className={styles.inner + ' flex layout-row layout-align-start-center'} onClick={this.props.clickFn}>
               <img style={{width: '40px', height: '40px'}} src={'https://stemn.com' + this.props.item.user.picture + '?size=thumb&crop=true'} />
-              <div className={styles.text + ' flex'}>
+              <div className={styles.text + ' flex text-ellipsis'}>
                 <b>{this.props.item.data.summary}</b>
                 <div style={{marginTop: '5px'}}>{timeFromNow} by {this.props.item.user.name}</div>
               </div>
@@ -51,7 +51,7 @@ export default React.createClass({
         <div className={classNames('layout-row', 'layout-align-start-center', styles.timelineRow, {[styles.active]: this.props.isActive})}>
           <div className={styles.inner + ' flex layout-row layout-align-start-center'} onClick={this.props.clickFn}>
             <img style={{width: '40px', height: '40px'}} src={'https://stemn.com' + this.props.item.user.picture + '?size=thumb&crop=true'} />
-            <div className={styles.text + ' flex'}>
+            <div className={styles.text + ' flex text-ellipsis'}>
               <b>{this.props.item.data.path}</b>
               <div style={{marginTop: '5px'}}>{timeFromNow} by {this.props.item.user.name}</div>
             </div>
