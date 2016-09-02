@@ -12,7 +12,7 @@ export default React.createClass({
   render() {
     const { item } = this.props;
     return (
-      <div className={classNames(classes.card, 'layout-row flex')}>
+      <div id={item._id} className={classNames(classes.card, 'layout-row flex')}>
         <Checkbox />
         <div className={classes.text + ' flex'}>{item.title}</div>
         <UserAvatar picture={item.users[0].picture} size="25px"/>

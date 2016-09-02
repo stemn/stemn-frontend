@@ -1,4 +1,5 @@
 import u from 'updeep';
+import { clone } from 'lodash';
 import { modeled } from 'react-redux-form';
 
 const initialState = {
@@ -9,22 +10,32 @@ const mainReducer = (state, action) => {
   switch (action.type) {
 
 
-    case 'TASKS/NEW_TASK_PENDING':
+//    case 'TASKS/NEW_TASK_PENDING':
+//      return u({
+//        [action.meta.cacheKey] : {
+//          newTaskLoading: true,
+//        }
+//      }, state)
+//    case 'TASKS/NEW_TASK_FULFILLED':
+//      return u({
+//        [action.meta.cacheKey] : {
+//          newTaskLoading: false,
+//        }
+//      }, state)
+//    case 'TASKS/NEW_TASK_REJECTED':
+//      return u({
+//        [action.meta.cacheKey] : {
+//          newTaskLoading: false,
+//        }
+//      }, state)
+
+    case 'TASKS/NEW_TASK':
       return u({
         [action.meta.cacheKey] : {
-          newTaskLoading: true,
-        }
-      }, state)
-    case 'TASKS/NEW_TASK_FULFILLED':
-      return u({
-        [action.meta.cacheKey] : {
-          newTaskLoading: false,
-        }
-      }, state)
-    case 'TASKS/NEW_TASK_REJECTED':
-      return u({
-        [action.meta.cacheKey] : {
-          newTaskLoading: false,
+          items: (items)=>addItem(items, action.payload.task),
+          newTaskString: {
+            [action.payload.task.group] : ''
+          }
         }
       }, state)
 
@@ -92,11 +103,35 @@ const mainReducer = (state, action) => {
         }
       }, state)
 
+
+    case 'TASKS/MOVE_TASK':
+      const move = (items) =>{
+        const fromIndex = items.findIndex((item)=>item._id == action.payload.taskId);
+        const toIndex = items.findIndex((item)=>item._id == action.payload.beforeId);
+        const itemsClone = clone(items);
+        const movedItems = moveItem(itemsClone, fromIndex, toIndex);
+        return  [
+          ...movedItems.slice(0, toIndex),
+          u({group: action.payload.group}, movedItems[index]),
+          ...movedItems.slice(toIndex + 1)
+        ]
+      }
+      return u({
+        [action.meta.cacheKey] : {
+          items: move,
+        }
+      }, state)
+
     default:
       return state;
   }
 }
 
+
+function moveItem (array, fromIndex, toIndex) {
+  array.splice(toIndex, 0, array.splice(fromIndex, 1)[0] );
+  return array;
+}
 
 function addItem (keyItems, item) {
   return [].concat(keyItems, [item])

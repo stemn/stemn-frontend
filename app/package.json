@@ -65,6 +65,7 @@
     "redux-promise": "^0.5.3",
     "redux-promise-middleware": "^3.3.2",
     "redux-thunk": "^2.0.1",
+    "sortablejs": "^1.4.2",
     "updeep": "^0.16.1"
   }
 }
