@@ -1,27 +1,36 @@
 import React from 'react';
-import _ from 'lodash';
+import { clone, forEachRight, find } from 'lodash';
 import previewPcbService from './PreviewPcbService.js';
-import styles from './PreviewPcb.css';
+import classes from './PreviewPcb.css';
 
 export default class extends React.Component{
-  componentDidMount() {
-    init({
-      element : this.refs.canvas,
-      file   : {
-        name: 'hexapod.brd',
-        data: this.props.model
-      }
-    });
-
+  componentWillReceiveProps(nextProps) {
+    if(!nextProps.fileData){
+      nextProps.downloadFn({
+        projectId : nextProps.fileMeta.project._id,
+        fileId : nextProps.fileMeta.fileId,
+        revisionId : nextProps.fileMeta.revisionId
+      })
+    }
+    else if(nextProps.fileData && nextProps.fileMeta){
+      init({
+        element : this.refs.canvas,
+        file   : {
+          name: nextProps.fileMeta.name,
+          data: nextProps.fileData.data
+        }
+      });
+    }
   }
+
   render() {
-    return <div ref="canvas" className={styles.canvas}></div>
+    return <div ref="canvas" className={classes.canvas + ' layout-column flex'}></div>
   }
 };
 
 function init({element, file}){
   const previewerInstance = previewPcbService.register();
-  const layers = _.map([file], previewerInstance.parse);
+  const layers = [file].map(previewerInstance.parse);
 
   console.log(layers);
   errorMessages(layers);
@@ -31,7 +40,7 @@ function init({element, file}){
       // Push on the back layer if it is a pcb/brd file
       if(!layers[0].isGerber){
           layers[0].side = 2;
-          var backLayer = _.clone(layers[0], true);
+          var backLayer = clone(layers[0], true);
           backLayer.boardFlipped = true;
           backLayer.side = 1;
           layers.push(backLayer);
@@ -39,7 +48,7 @@ function init({element, file}){
 
       previewerInstance.init(layers, element, previewPcbService.activeInstances);
       // Flip the board if we only have bottom layers
-      if(!_.find(layers, 'side', 2)){
+      if(!find(layers, 'side', 2)){
           flip(true);
       }
   }
@@ -55,7 +64,7 @@ function flip(){
 
 function errorMessages(layers){
   // Pop Error messages and remove bad layers
-  _.forEachRight(layers, function(layer, index){
+  forEachRight(layers, function(layer, index){
       if(layer.error){
         toast(layer.error);
         layers.splice(index, 1);

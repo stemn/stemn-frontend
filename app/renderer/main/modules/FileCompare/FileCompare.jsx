@@ -75,12 +75,10 @@ export const Component = React.createClass({
     const overylayStyles = this.state.compareMode == 'slider' && this.refs.container ?
           {width: this.refs.container.offsetWidth + 'px'} : {};
 
-    console.log(this.props.children);
-
     return (
       <div className="layout-column flex">
         <div className={classes.header + ' layout-row layout-align-start-center'}>
-          <div className="flex">{file1.path}</div>
+          <div className="flex text-ellipsis">{file1.path}</div>
           <PopoverMenu preferPlace="below">
             <SimpleIconButton>
               <MdMoreHoriz size="20px"/>

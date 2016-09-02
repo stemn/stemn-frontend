@@ -30,9 +30,10 @@ export default class extends React.Component{
         <Tabs size="lg">
           <Link activeClassName="active" to={baseLink+'/changes'}>Changes</Link>
           <Link activeClassName="active" to={baseLink+'/feed'}>Timeline</Link>
+          <Link activeClassName="active" to={baseLink+'/tasks'}>Tasks</Link>
           <Link activeClassName="active" to={baseLink+'/settings'}>Settings</Link>
         </Tabs>
-        {this.props.children}
+        <div className="layout-column flex rel-box">{this.props.children}</div>
       </div>
     );
   }

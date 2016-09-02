@@ -11,12 +11,12 @@ export default library
 
 ////////////////////////////////////////////
 
-function render({projectStub, path, revision}){
+function render({projectId, fileId, revisionId}){
   return http({
     method: 'GET',
-    url: 'http://localhost:3000/api/v1/sync/render/' + projectStub + '/' + path,
+    url: 'http://localhost:3000/api/v1/remote/render/' + projectId + '/' + fileId,
     params: {
-      revision: revision
+      revisionId: revisionId
     }
   })
 }
@@ -32,10 +32,14 @@ function authenticate(){
 }
 
 function getViewStatus(urn64){
-    return http({
-        method: 'GET',
-        url: 'https://developer.api.autodesk.com/viewingservice/v1/'+urn64+'/status',
-    })
+  console.log(library.accessToken);
+  return http({
+    method: 'GET',
+    url: 'https://developer.api.autodesk.com/viewingservice/v1/'+urn64+'/status',
+    headers: {
+      Authorization: 'Bearer ' + library.accessToken
+    }
+  })
 }
 
 function isWebGlSupported(return_context) {

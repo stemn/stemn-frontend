@@ -14,12 +14,15 @@ import u from 'updeep';
 import classNames from 'classnames';
 
 // Sub Components
+import { Link }       from 'react-router';
 import ContentSidebar from 'app/renderer/main/components//ContentSidebar';
 import Timeline       from 'app/renderer/main/modules/Timeline/Timeline.jsx';
 import CommitChanges  from 'app/renderer/main/components//CommitChanges';
 import CommitBox      from 'app/renderer/main/components/CommitBox/CommitBox.jsx'
 import FileCompare    from 'app/renderer/main/modules/FileCompare/FileCompare.jsx';
 import PreviewFile    from 'app/renderer/main/containers/PreviewFile.js';
+import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -27,7 +30,7 @@ import PreviewFile    from 'app/renderer/main/containers/PreviewFile.js';
 
 export const Component = React.createClass({
   componentWillMount() {
-    if(this.props.project){
+    if(this.props.project && this.props.project.remote.connected){
       this.props.ChangesActions.fetchChanges({
         projectId: this.props.project._id
       })
@@ -35,7 +38,7 @@ export const Component = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.project && nextProps.project && nextProps.project._id !== this.props.project._id) {
+    if (this.props.project && nextProps.project && nextProps.project._id !== this.props.project._id && nextProps.project.remote.connected) {
       this.props.ChangesActions.fetchChanges({
         projectId: nextProps.project._id
       })
@@ -66,9 +69,13 @@ export const Component = React.createClass({
 
   render() {
     const { changes, project, ChangesActions } = this.props;
+    const baseLink = `project/${this.props.project ? this.props.project._id : ''}`;
 
-    const filePrevious = changes && changes.selected.data && changes.selected.data.previousRevisionId ? u( {data: {revisionId : changes.selected.data.previousRevisionId}}, changes.selected) : null;
-    if(changes){
+    if(!project || !changes){
+      return <LoadingOverlay />
+    }
+    if(project.remote.connected){
+      const filePrevious = changes.selected.data && changes.selected.data.previousRevisionId ? u( {data: {revisionId : changes.selected.data.previousRevisionId}}, changes.selected) : null;
       return (
         <div className="layout-column flex rel-box">
           <div className="layout-row flex">
@@ -99,7 +106,12 @@ export const Component = React.createClass({
       );
     }
     else{
-      return null
+      return (
+        <div className="layout-column layout-align-center-center flex">
+          <div className="text-title-4 text-center">Project not connected to Drive or Dropbox</div>
+          <div className="text-title-4 text-center link-primary" style={{marginTop: '10px'}}><Link to={baseLink+'/settings'}>Add File Store</Link></div>
+        </div>
+      )
     }
   }
 });
