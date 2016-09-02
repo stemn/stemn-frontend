@@ -1,0 +1,23 @@
+@value primary, border1, bg1 from "app/renderer/assets/css/themes/standard.css";
+
+.taskListItem{
+  height: 45px;
+  line-height: 45px;
+  background: none;
+  transition: 0.2s ease background;
+  padding-left: 10px;
+}
+.taskListItem:hover{
+  background: bg1;
+}
+.taskListItem > div{
+  padding: 0px 10px;
+}
+
+.user{
+  color: rgba(0, 0, 0, 0.6);
+  width: 140px;
+}
+.date{
+  width: 100px;
+}

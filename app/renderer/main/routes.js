@@ -21,6 +21,7 @@ import HomePage                 from './pages/HomePage/HomePage.jsx';
 import ProjectPage              from './pages/ProjectPage/ProjectPage.container.js';
 import ProjectSettingsPage      from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.jsx';
 import ProjectFeedPage          from './pages/ProjectFeedPage/ProjectFeedPage.jsx';
+import ProjectTaskPage          from './pages/ProjectTaskPage/ProjectTaskPage.jsx';
 
 // Actions
 const AuthActions = require('../../shared/actions/auth');
@@ -77,6 +78,7 @@ export default (store) => {
         <Route   path="/project/:stub"               component={ProjectPage}>
           <Route path="changes"       component={ProjectChangesPage}/>
           <Route path="feed"          component={ProjectFeedPage}/>
+          <Route path="tasks"         component={ProjectTaskPage}/>
           <Route path="settings"      component={ProjectSettingsPage}/>
         </Route>
         <Route   path="/"                            component={HomePage}/>
