@@ -12,7 +12,7 @@ import React from 'react';
 
 // Styles
 import classNames from 'classnames';
-import styles from './header.css';
+import styles from './Header.css';
 
 // Sub Components
 import {MdMenu} from 'react-icons/lib/md';

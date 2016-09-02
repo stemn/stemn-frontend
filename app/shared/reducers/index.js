@@ -19,9 +19,9 @@ import {reducer as toastrReducer} from 'react-redux-toastr'
 
 import userSearch from '../../renderer/main/modules/UserSearch/UserSearch.reducer.js';
 import fileList from '../../renderer/main/modules/FileList/FileList.reducer.js';
-import fileSelect from '../../renderer/main/modules/fileSelect/fileSelect.reducer.js';
-import modals from '../../renderer/main/modules/modal/modal.reducer.js';
-import upload from '../../renderer/main/modules/upload/upload.reducer.js';
+import fileSelect from '../../renderer/main/modules/FileSelect/FileSelect.reducer.js';
+import modals from '../../renderer/main/modules/Modal/Modal.reducer.js';
+import upload from '../../renderer/main/modules/Upload/Upload.reducer.js';
 
 export default function getRootReducer(scope = 'main') {
   let reducers = {
