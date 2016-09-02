@@ -32,7 +32,7 @@ export default class extends React.Component{
           <Link activeClassName="active" to={baseLink+'/feed'}>Timeline</Link>
           <Link activeClassName="active" to={baseLink+'/settings'}>Settings</Link>
         </Tabs>
-        {this.props.children}
+        <div className="layout-column flex rel-box">{this.props.children}</div>
       </div>
     );
   }

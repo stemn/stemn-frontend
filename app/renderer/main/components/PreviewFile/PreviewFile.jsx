@@ -14,7 +14,7 @@ import {getViewerType} from './previewFileUtils'
 // Styles
 import classNames from 'classnames';
 
-export default class extends React.Component{
+export default React.createClass({
   componentWillReceiveProps(nextProps) {
     if(nextProps.file && nextProps.project){
       const viewerType = getViewerType(nextProps.file.extension);
@@ -27,15 +27,11 @@ export default class extends React.Component{
         })
       }
     }
-  }
+  },
 
-  downloadFn() {
-    this.props.filesActions.getFile({
-      projectId: this.props.project._id,
-      fileId: this.props.file.fileId,
-      revisionId: this.props.file.revisionId
-    })
-  }
+  downloadFn({projectId, fileId, revisionId}) {
+    this.props.filesActions.getFile({projectId, fileId, revisionId})
+  },
 
   render() {
     const {file, fileData, project} = this.props;
@@ -43,7 +39,7 @@ export default class extends React.Component{
     const getPreview = () => {
       const viewerType = getViewerType(file.extension);
       if(viewerType == 'gerber' || viewerType == 'pcb'){
-        return <PreviewPcb model={this.props.file.data} fileType={this.props.file.meta.fileType} />
+        return <PreviewPcb fileMeta={file} fileData={fileData} downloadFn={this.downloadFn} />
       }
       else if(viewerType == 'code'){
         return fileData ? <PreviewCode project={project} file={file} fileData={fileData}/> : <LoadingOverlay />
@@ -70,4 +66,4 @@ export default class extends React.Component{
       </div>
     );
   }
-};
+});

@@ -69,42 +69,41 @@ export const Component = React.createClass({
 
   render() {
     const { changes, project, ChangesActions } = this.props;
-    const baseLink = `project/${this.props.project ? this.props.project._id : ''}`
+    const baseLink = `project/${this.props.project ? this.props.project._id : ''}`;
+
+    if(!project || !changes){
+      return <LoadingOverlay />
+    }
     if(project.remote.connected){
-      if(changes){
-        const filePrevious = changes.selected.data && changes.selected.data.previousRevisionId ? u( {data: {revisionId : changes.selected.data.previousRevisionId}}, changes.selected) : null;
-        return (
-          <div className="layout-column flex rel-box">
-            <div className="layout-row flex">
-              <div className="layout-column">
-                <ContentSidebar>
-                  {changes && changes.data
-                    ? <CommitChanges changes={changes} project={project} actToggleAll={this.toggleAll} selectedFileChange={ChangesActions.selectedFileChange}/>
-                    : ''}
+      const filePrevious = changes.selected.data && changes.selected.data.previousRevisionId ? u( {data: {revisionId : changes.selected.data.previousRevisionId}}, changes.selected) : null;
+      return (
+        <div className="layout-column flex rel-box">
+          <div className="layout-row flex">
+            <div className="layout-column">
+              <ContentSidebar>
+                {changes && changes.data
+                  ? <CommitChanges changes={changes} project={project} actToggleAll={this.toggleAll} selectedFileChange={ChangesActions.selectedFileChange}/>
+                  : ''}
 
-                  <div style={this.CommitBoxStyles}>
-                    <CommitBox changes={changes} changesActions={ChangesActions} commitFn={()=>this.commitFn()} project={project}/>
-                  </div>
-                </ContentSidebar>
-              </div>
-              <div className="layout-column flex">
-                {changes.selected && changes.selected.data
-                  ?
-                  <FileCompare project={project} file1={changes.selected.data} file2={filePrevious ? filePrevious.data : null}>
-                    {filePrevious ? <PreviewFile project={project} file={filePrevious.data} /> : ''}
-                    <PreviewFile project={project} file={changes.selected.data} />
-                  </FileCompare>
-                  : <div className="layout-column layout-align-center-center flex text-title-4 text-center">No file change selected.</div>
-                }
-              </div>
-
+                <div style={this.CommitBoxStyles}>
+                  <CommitBox changes={changes} changesActions={ChangesActions} commitFn={()=>this.commitFn()} project={project}/>
+                </div>
+              </ContentSidebar>
             </div>
+            <div className="layout-column flex">
+              {changes.selected && changes.selected.data
+                ?
+                <FileCompare project={project} file1={changes.selected.data} file2={filePrevious ? filePrevious.data : null}>
+                  {filePrevious ? <PreviewFile project={project} file={filePrevious.data} /> : ''}
+                  <PreviewFile project={project} file={changes.selected.data} />
+                </FileCompare>
+                : <div className="layout-column layout-align-center-center flex text-title-4 text-center">No file change selected.</div>
+              }
+            </div>
+
           </div>
-        );
-      }
-      else{
-        return <LoadingOverlay />
-      }
+        </div>
+      );
     }
     else{
       return (

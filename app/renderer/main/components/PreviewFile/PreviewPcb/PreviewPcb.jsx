@@ -1,21 +1,30 @@
 import React from 'react';
 import _ from 'lodash';
 import previewPcbService from './PreviewPcbService.js';
-import styles from './PreviewPcb.css';
+import classes from './PreviewPcb.css';
 
 export default class extends React.Component{
-  componentDidMount() {
-    init({
-      element : this.refs.canvas,
-      file   : {
-        name: 'hexapod.brd',
-        data: this.props.model
-      }
-    });
-
+  componentWillReceiveProps(nextProps) {
+    if(!nextProps.fileData){
+      nextProps.downloadFn({
+        projectId : nextProps.fileMeta.project._id,
+        fileId : nextProps.fileMeta.fileId,
+        revisionId : nextProps.fileMeta.revisionId
+      })
+    }
+    else if(nextProps.fileData && nextProps.fileMeta){
+      init({
+        element : this.refs.canvas,
+        file   : {
+          name: nextProps.fileMeta.name,
+          data: nextProps.fileData.data
+        }
+      });
+    }
   }
+
   render() {
-    return <div ref="canvas" className={styles.canvas}></div>
+    return <div ref="canvas" className={classes.canvas + ' layout-column flex'}></div>
   }
 };
 
