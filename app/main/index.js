@@ -12,6 +12,9 @@ import configureStore from '../shared/store/configureStore';
 import tray from './tray';
 import autoUpdater from './tasks/autoUpdater';
 import squirrelStartup from 'electron-squirrel-startup';
+
+//import websocketEvents from './modules/websocket/lib/index.js'
+
   //import reminder from './tasks/reminder';
 
 
@@ -50,6 +53,13 @@ if(!squirrelStartup){
       token : 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1NDk4ZTI1OGE3ZmJiZmNjMTJjM2ZhMTUiLCJpYXQiOjE0NzAzNTkzMjkuMDI5LCJleHAiOjE0NzU1NDMzMjkuMDI5fQ.mwhOEtyhzc7Cqg4r9JLKTxgwzr-YnDYdLKW_CNOGeuA'
     });
 
+    websocket.on('data', (action) => {
+//      const reduxAction = websocketEvents(action);
+//      if(reduxAction){
+//        store.dispatch(reduxAction)
+//      };
+    });
+
     websocket.write({
       action : 'echo',
       payload : {
@@ -69,8 +79,8 @@ if(!squirrelStartup){
 //      await storage.set('state', global.state);
     });
 
-    ipcMain.on('redux-action', (event, payload) => {
-      store.dispatch(payload);
+    ipcMain.on('redux-action', (event, action) => {
+      store.dispatch(action);
     });
 
     ipcMain.on('electron-action', (event, action) => {
