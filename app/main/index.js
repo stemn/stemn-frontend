@@ -13,7 +13,7 @@ import tray from './tray';
 import autoUpdater from './tasks/autoUpdater';
 import squirrelStartup from 'electron-squirrel-startup';
 
-//import websocketEvents from './modules/websocket/lib/index.js'
+import mapWebsocketToRedux from './modules/websocket/mapWebsocketToRedux'
 
   //import reminder from './tasks/reminder';
 
@@ -54,10 +54,10 @@ if(!squirrelStartup){
     });
 
     websocket.on('data', (action) => {
-//      const reduxAction = websocketEvents(action);
-//      if(reduxAction){
-//        store.dispatch(reduxAction)
-//      };
+    //  const reduxAction = mapWebsocketToRedux(action);
+    //  if(reduxAction){
+    //    store.dispatch(reduxAction)
+    //  };
     });
 
     websocket.write({
