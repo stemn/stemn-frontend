@@ -1,5 +1,5 @@
 import u from 'updeep';
-import { clone } from 'lodash';
+import { cloneDeep } from 'lodash';
 import { modeled } from 'react-redux-form';
 import { groupTasks } from './Tasks.utils.js';
 
@@ -69,29 +69,29 @@ const mainReducer = (state, action) => {
       }, state)
 
 
-    case 'TASKS/DELETE_TASK_PENDING':
-      return u({
-        [action.meta.cacheKey] : {
-          deleteTaskLoading: true,
-        }
-      }, state)
-    case 'TASKS/DELETE_TASK_FULFILLED':
-      return u({
-        [action.meta.cacheKey] : {
-          deleteTaskLoading: false,
-        }
-      }, state)
-    case 'TASKS/DELETE_TASK_REJECTED':
-      return u({
-        [action.meta.cacheKey] : {
-          deleteTaskLoading: false,
-        }
-      }, state)
+//    case 'TASKS/DELETE_TASK_PENDING':
+//      return u({
+//        [action.meta.cacheKey] : {
+//          deleteTaskLoading: true,
+//        }
+//      }, state)
+//    case 'TASKS/DELETE_TASK_FULFILLED':
+//      return u({
+//        [action.meta.cacheKey] : {
+//          deleteTaskLoading: false,
+//        }
+//      }, state)
+//    case 'TASKS/DELETE_TASK_REJECTED':
+//      return u({
+//        [action.meta.cacheKey] : {
+//          deleteTaskLoading: false,
+//        }
+//      }, state)
 
     case 'TASKS/NEW_GROUP':
       return u({
         [action.meta.cacheKey] : {
-          groups: (groups)=>addItem(groups, action.payload.group),
+          items: (groups)=>addItem(groups, action.payload.group),
           newGroupString: ''
         }
       }, state)
@@ -105,19 +105,16 @@ const mainReducer = (state, action) => {
 
 
     case 'TASKS/MOVE_TASK':
-
       const moveTask = (items) =>{
         const { lastX, lastY, nextX, nextY } = action.payload;
-        const clone = [...items];
+        const cloneItems = cloneDeep(items);
         if (lastX === nextX) {
-          clone[lastX].cards.splice(nextY, 0, clone[lastX].cards.splice(lastY, 1)[0]);
+          cloneItems[lastX].cards.splice(nextY, 0, cloneItems[lastX].cards.splice(lastY, 1)[0]);
         } else {
-          // move element to new place
-          clone[nextX].cards.splice(nextY, 0, clone[lastX].cards[lastY]);
-          // delete element from old place
-          clone[lastX].cards.splice(lastY, 1);
+          cloneItems[nextX].cards.splice(nextY, 0, cloneItems[lastX].cards[lastY]);  // move element to new place
+          cloneItems[lastX].cards.splice(lastY, 1); // delete element from old place
         }
-        return clone;
+        return cloneItems;
       }
       return u({
         [action.meta.cacheKey] : {
@@ -129,23 +126,16 @@ const mainReducer = (state, action) => {
 
       const moveGroup = (items) =>{
         const { lastX, nextX } = action.payload;
-        const clone = [...items];
-        const t = clone.splice(lastX, 1)[0];
-        clone.splice(nextX, 0, t);
-        return clone;
+        const cloneItems = cloneDeep(items);
+        const t = cloneItems.splice(lastX, 1)[0];
+        cloneItems.splice(nextX, 0, t);
+        return cloneItems;
       }
       return u({
         [action.meta.cacheKey] : {
           items: moveGroup,
         }
       }, state)
-
-//    case 'TASKS/TOGGLE_DRAGGING':
-//      return u({
-//        [action.meta.cacheKey] : {
-//          isDragging: action.payload.isDragging,
-//        }
-//      }, state)
 
     default:
       return state;

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { DropTarget } from 'react-dnd';
 import { findDOMNode } from 'react-dom';
 
-import Card from './DraggableCard';
+import Card from '../Card/DraggableCard.jsx';
 import classes from './Cards.css';
 
 
@@ -120,7 +120,7 @@ export default class Cards extends Component {
   }
 
   render() {
-    const { connectDropTarget, x, cards, isOver, canDrop } = this.props;
+    const { tasks, TasksActions, project, entityModel, connectDropTarget, x, cards, isOver, canDrop } = this.props;
     const { placeholderIndex } = this.state;
 
     let toPlaceFirst;
@@ -134,7 +134,8 @@ export default class Cards extends Component {
       }
       if (item !== undefined) {
         cardList.push(
-          <Card x={x} y={i}
+          <Card tasks={tasks} TasksActions={TasksActions} project={project} entityModel={entityModel}
+             x={x} y={i}
             item={item}
             key={item.id}
             stopScrolling={this.props.stopScrolling}
@@ -163,7 +164,7 @@ export default class Cards extends Component {
     }
 
     return connectDropTarget(
-      <div className={classes.deskItems}>
+      <div className={classes.cards}>
         {cardList}
       </div>
     );

@@ -46,10 +46,7 @@ export const Component = React.createClass({
     if(tasks && tasks.items){
       return (
         <div className="layout-row flex">
-          <TaskGrid project={project}
-            tasks={tasks}
-            TasksActions={TasksActions}>
-          </TaskGrid>
+          <TaskGrid project={project}></TaskGrid>
         </div>
       )
     }

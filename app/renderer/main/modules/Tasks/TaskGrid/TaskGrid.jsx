@@ -1,126 +1,155 @@
-//import React from 'react';
-//
-//import { Field } from 'react-redux-form';
-//import Sortable from 'sortablejs';
-//
-//import {groupTasks} from '../Tasks.utils.js';
-//import TaskGridItem from '../TaskGridItem/TaskGridItem.jsx';
-//
-//import classes from './TaskGrid.css';
-//
-//
-//export default React.createClass({
-//  sortableContainersDecorator (componentBackingInstance) {
-//    // check if backing instance not null
-//    if (componentBackingInstance) {
-//      let options = {
-//        handle: ".group-title", // Restricts sort start click/touch to the specified element
-//        onMove: (event) => {
-//          console.log(event);
-//          return false
-//        }
-//      };
-//      Sortable.create(componentBackingInstance, options);
-//    }
-//  },
-//
-//  sortableGroupDecorator (componentBackingInstance) {
-//    // check if backing instance not null
-//    if (componentBackingInstance) {
-//      let options = {
-//        draggable: "div", // Specifies which items inside the element should be sortable
-//        group: "shared",
-//        animation: 150,
-//        onMove: (event) => {
-////          console.log(event);
-//          this.props.TasksActions.moveTask({
-//            projectId: this.props.project._id,
-//            group: event.from.id,
-//            taskId: event.dragged.id,
-//            beforeId: event.related.id
-//          })
-//          return false
-//        }
-//      };
-//      Sortable.create(componentBackingInstance, options);
-//    }
-//  },
-//  render() {
-//    const { tasks, project, TasksActions } = this.props;
-//    const entityModel = `tasks.${project._id}`;
-//    const groupedTasks = groupTasks(tasks.groups.map((item)=>item._id), tasks.items);
-//
-//    const newGroup = (event) =>{
-//      console.log('new');
-//      event.preventDefault();
-//      TasksActions.newGroup({
-//        projectId: project._id,
-//        group: {
-//          name: tasks.newGroupString
-//        }
-//      })
-//    }
-//
-//    return (
-//      <div className={classes.container + ' layout-row flex'}>
-//        <div className={classes.row + ' layout-row flex'}>
-//          {tasks.groups.map((group, index)=>{
-//
-//            const newTask = (event)=>{
-//              event.preventDefault();
-//              TasksActions.newTask({
-//                projectId: project._id,
-//                task: {
-//                  title: tasks.newTaskString[group._id],
-//                  group: group._id
-//                }
-//              })
-//            }
-//
-//            return (
-//              <div className={classes.column}>
-//                <h3>
-//                  <Field model={`${entityModel}.groups[${index}].name`}>
-//                    <input className="input-plain" type="text" placeholder="Title"/>
-//                  </Field>
-//                </h3>
-//                <div id={group._id} ref={this.sortableGroupDecorator}>
-//                  {groupedTasks[group._id].map((item)=><TaskGridItem key={item._id} item={item} entityModel={entityModel}></TaskGridItem>)}
-//                </div>
-//                <form name="form" onSubmit={newTask}>
-//                  <Field model={`${entityModel}.newTaskString[${group._id}]`}>
-//                    <input className={classes.newItem} type="text" placeholder="New Task"/>
-//                  </Field>
-//                </form>
-//              </div>
-//            )
-//          })}
-//          <div className={classes.column}>
-//            <h3>&nbsp;</h3>
-//            <form name="form" onSubmit={newGroup}>
-//              <Field model={`${entityModel}.newGroupString`}>
-//                <input className={classes.newItem} type="text" placeholder="New Section"/>
-//              </Field>
-//
-//            </form>
-//          </div>
-//        </div>
-//      </div>
-//    )
-//  }
-//});
+import React, { Component, PropTypes } from 'react';
+import { Field } from 'react-redux-form';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
+import * as TasksActions from '../Tasks.actions.js';
 
-import React from 'react';
-import Board from '../Trello/containers/Board/Board';
+import CardsContainer from './CardsContainer/CardsContainer.jsx';
+import CustomDragLayer from './CustomDragLayer';
 
-export default React.createClass({
-  render() {
-    const { tasks, project, TasksActions } = this.props;
-    return (
-      <main>
-        <Board tasks={tasks} />
-      </main>
-    )
+import classes from './TaskGrid.css';
+
+function mapStateToProps({tasks}, {params, project}) {
+  return {
+    project: project,
+    tasks: tasks[project._id],
+    entityModel: `tasks.${project._id}`
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    TasksActions: bindActionCreators(TasksActions, dispatch)
   }
-});
+}
+
+@connect(mapStateToProps, mapDispatchToProps)
+@DragDropContext(HTML5Backend)
+export default class Board extends Component {
+  static propTypes = {
+    tasks: PropTypes.object.isRequired,
+  }
+
+  constructor(props) {
+    super(props);
+    this.moveCard = this.moveCard.bind(this);
+    this.moveList = this.moveList.bind(this);
+    this.findList = this.findList.bind(this);
+    this.scrollRight = this.scrollRight.bind(this);
+    this.scrollLeft = this.scrollLeft.bind(this);
+    this.stopScrolling = this.stopScrolling.bind(this);
+    this.startScrolling = this.startScrolling.bind(this);
+    this.state = { isScrolling: false };
+  }
+
+  startScrolling(direction) {
+    // if (!this.state.isScrolling) {
+    switch (direction) {
+      case 'toLeft':
+        this.setState({ isScrolling: true }, this.scrollLeft());
+        break;
+      case 'toRight':
+        this.setState({ isScrolling: true }, this.scrollRight());
+        break;
+      default:
+        break;
+    }
+    // }
+  }
+
+  scrollRight() {
+    function scroll() {
+      document.getElementsByTagName('main')[0].scrollLeft += 10;
+    }
+    this.scrollInterval = setInterval(scroll, 10);
+  }
+
+  scrollLeft() {
+    function scroll() {
+      document.getElementsByTagName('main')[0].scrollLeft -= 10;
+    }
+    this.scrollInterval = setInterval(scroll, 10);
+  }
+
+  stopScrolling() {
+    this.setState({ isScrolling: false }, clearInterval(this.scrollInterval));
+  }
+
+  moveCard(lastX, lastY, nextX, nextY) {
+    this.props.TasksActions.moveTask({
+      projectId: this.props.project._id,
+      lastX, lastY, nextX, nextY
+    });
+  }
+
+  moveList(listId, nextX) {
+    const { lastX } = this.findList(listId);
+    this.props.TasksActions.moveGroup({
+      projectId: this.props.project._id,
+      lastX, nextX
+    });
+  }
+
+  findList(id) {
+    const { tasks } = this.props;
+    const list = tasks.items.filter(l => l.id === id)[0];
+
+    return {
+      list,
+      lastX: tasks.items.indexOf(list)
+    };
+  }
+
+  render() {
+    const { tasks, TasksActions, project, entityModel } = this.props;
+
+    const newGroup = (event) => {
+      event.preventDefault();
+      TasksActions.newGroup({
+        projectId: project._id,
+        group: {
+          name: tasks.newGroupString
+        }
+      })
+    }
+
+    return (
+      <main className={classes.container}>
+        <CustomDragLayer />
+        <div className={classes.row + ' layout-row'}>
+          {tasks.items.map((item, i) =>
+            <CardsContainer
+              tasks={tasks}
+              TasksActions={TasksActions}
+              project={project}
+              entityModel={entityModel}
+
+              className={classes.column}
+              key={item.id}
+              id={item.id}
+              item={item}
+              moveCard={this.moveCard}
+              moveList={this.moveList}
+              startScrolling={this.startScrolling}
+              stopScrolling={this.stopScrolling}
+              isScrolling={this.state.isScrolling}
+              x={i}
+            />
+          )}
+          <div className={classes.column}>
+            <h3>&nbsp;</h3>
+            <form name="form" onSubmit={newGroup}>
+              <Field model={`${entityModel}.newGroupString`}>
+                <input className={classes.newItem} type="text" placeholder="New Section"/>
+                <button onClick={newGroup}>Submit</button>
+              </Field>
+            </form>
+          </div>
+        </div>
+      </main>
+    );
+  }
+}

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { DragLayer } from 'react-dnd';
 
-import CardDragPreview from './CardDragPreview';
+import CardDragPreview from './Card/CardDragPreview.jsx';
 
 
 const layerStyles = {

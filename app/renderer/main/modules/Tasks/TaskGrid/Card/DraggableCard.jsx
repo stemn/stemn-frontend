@@ -3,7 +3,7 @@ import { findDOMNode } from 'react-dom';
 import { DragSource } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 
-import Card from './Card';
+import Card from './Card.jsx';
 
 
 function getStyles(isDragging) {
@@ -22,7 +22,7 @@ const cardSource = {
     return { id, title, item, x, y, clientWidth, clientHeight };
   },
   endDrag(props, monitor) {
-    document.getElementById(monitor.getItem().id).style.display = 'block';
+    document.getElementById(monitor.getItem().id).style.display = 'flex';
     props.stopScrolling();
   },
   isDragging(props, monitor) {

@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { DropTarget, DragSource } from 'react-dnd';
+import { Field } from 'react-redux-form';
 
-import Cards from './Cards';
-
+import Cards from '../Cards/Cards.jsx';
 import classes from './CardsContainer.css';
 
 const listSource = {
@@ -50,6 +50,7 @@ const listTarget = {
   connectDragSource: connectDragSource.dragSource(),
   isDragging: monitor.isDragging()
 }))
+
 export default class CardsContainer extends Component {
   static propTypes = {
     connectDropTarget: PropTypes.func.isRequired,
@@ -64,14 +65,28 @@ export default class CardsContainer extends Component {
     isScrolling: PropTypes.bool
   }
 
+
   render() {
-    const { connectDropTarget, connectDragSource, item, x, moveCard, isDragging } = this.props;
+    const { tasks, TasksActions, project, entityModel, connectDropTarget, connectDragSource, item, x, moveCard, isDragging, className} = this.props;
     const opacity = isDragging ? 0.5 : 1;
 
+    const newTask = (event)=>{
+      event.preventDefault();
+      TasksActions.newTask({
+        projectId: project._id,
+        task: {
+          title: tasks.newTaskString[item.id],
+          group: item.id
+        }
+      })
+    }
+
+    console.log(this.props);
     return connectDragSource(connectDropTarget(
-      <div className={classes.group} style={{ opacity }}>
+      <div className={className} style={{ opacity }}>
         <h3>{item.name}</h3>
         <Cards
+          tasks={tasks} TasksActions={TasksActions} project={project} entityModel={entityModel}
           moveCard={moveCard}
           x={x}
           cards={item.cards}
@@ -79,6 +94,11 @@ export default class CardsContainer extends Component {
           stopScrolling={this.props.stopScrolling}
           isScrolling={this.props.isScrolling}
         />
+        <form name="form" onSubmit={newTask}>
+          <Field model={`${entityModel}.newTaskString[${item.id}]`}>
+            <input className={classes.newItem} type="text" placeholder="New Task"/>
+          </Field>
+        </form>
       </div>
     ));
   }
