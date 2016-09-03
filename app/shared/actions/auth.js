@@ -1,7 +1,6 @@
 import http from 'axios';
 import { push } from 'react-router-redux'
-
-import * as auth from 'app/main/modules/auth/auth.js';
+import * as auth from '../../main/modules/auth/auth.js';
 
 export function loadUserData() {
   return (dispatch) => {

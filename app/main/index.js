@@ -13,7 +13,7 @@ import tray from './tray';
 import autoUpdater from './tasks/autoUpdater';
 import squirrelStartup from 'electron-squirrel-startup';
 
-//import websocketEvents from './modules/websocket/lib/index.js'
+import websocketEvents from './modules/websocket/lib/index.js'
 
   //import reminder from './tasks/reminder';
 
