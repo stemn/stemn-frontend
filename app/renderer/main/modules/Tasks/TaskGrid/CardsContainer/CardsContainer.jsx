@@ -8,7 +8,7 @@ import classes from './CardsContainer.css';
 const listSource = {
   beginDrag(props) {
     return {
-      id: props.id,
+      id: props._id,
       x: props.x
     };
   },
@@ -75,8 +75,8 @@ export default class CardsContainer extends Component {
       TasksActions.newTask({
         projectId: project._id,
         task: {
-          title: tasks.newTaskString[item.id],
-          group: item.id
+          title: tasks.newTaskString[item._id],
+          group: item._id
         }
       })
     }
@@ -92,13 +92,13 @@ export default class CardsContainer extends Component {
           tasks={tasks} TasksActions={TasksActions} project={project} entityModel={entityModel}
           moveCard={moveCard}
           x={x}
-          cards={item.cards}
+          cards={item.children}
           startScrolling={this.props.startScrolling}
           stopScrolling={this.props.stopScrolling}
           isScrolling={this.props.isScrolling}
         />
         <form name="form" onSubmit={newTask}>
-          <Field model={`${entityModel}.newTaskString[${item.id}]`}>
+          <Field model={`${entityModel}.newTaskString[${item._id}]`}>
             <input className={classes.newItem} type="text" placeholder="New Task"/>
           </Field>
         </form>

@@ -86,7 +86,7 @@ const specs = {
 
     // when drag begins, we hide the card and only display cardDragPreview
     const item = monitor.getItem();
-    document.getElementById(item.id).style.display = 'none';
+    document.getElementById(item._id).style.display = 'none';
   }
 };
 
@@ -137,7 +137,7 @@ export default class Cards extends Component {
           <Card tasks={tasks} TasksActions={TasksActions} project={project} entityModel={entityModel}
              x={x} y={i}
             item={item}
-            key={item.id}
+            key={item._id}
             stopScrolling={this.props.stopScrolling}
           />
         );

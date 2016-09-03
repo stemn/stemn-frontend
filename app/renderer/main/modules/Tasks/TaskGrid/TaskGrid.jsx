@@ -95,7 +95,7 @@ export default class Board extends Component {
 
   findList(id) {
     const { tasks } = this.props;
-    const list = tasks.items.filter(l => l.id === id)[0];
+    const list = tasks.items.filter(l => l._id === id)[0];
 
     return {
       list,
@@ -116,11 +116,13 @@ export default class Board extends Component {
       })
     }
 
+    console.log(tasks);
+
     return (
       <main className={classes.container}>
         <CustomDragLayer />
         <div className={classes.row + ' layout-row'}>
-          {tasks.items.map((item, i) =>
+          {tasks.structure.map((item, i) =>
             <CardsContainer
               tasks={tasks}
               TasksActions={TasksActions}
@@ -128,8 +130,8 @@ export default class Board extends Component {
               entityModel={entityModel}
 
               className={classes.column}
-              key={item.id}
-              id={item.id}
+              key={item._id}
+              id={item._id}
               item={item}
               moveCard={this.moveCard}
               moveList={this.moveList}

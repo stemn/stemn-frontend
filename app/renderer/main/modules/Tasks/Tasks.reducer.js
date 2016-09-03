@@ -64,7 +64,9 @@ const mainReducer = (state, action) => {
     case 'TASKS/GET_TASKS':
       return u({
         [action.meta.cacheKey] : {
-          items : groupTasks(action.payload.response.data.groups, action.payload.response.data.items),
+          items : action.payload.response.data.items,
+          groups: action.payload.response.data.groups,
+          structure: action.payload.response.data.structure,
         }
       }, state)
 

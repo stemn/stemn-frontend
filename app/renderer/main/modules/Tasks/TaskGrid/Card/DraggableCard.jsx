@@ -16,10 +16,10 @@ const cardSource = {
   beginDrag(props, monitor, component) {
     // dispatch to redux store that drag is started
     const { item, x, y } = props;
-    const { id, title } = item;
+    const { _id, title } = item;
     const { clientWidth, clientHeight } = findDOMNode(component);
 
-    return { id, title, item, x, y, clientWidth, clientHeight };
+    return { _id, title, item, x, y, clientWidth, clientHeight };
   },
   endDrag(props, monitor) {
     document.getElementById(monitor.getItem().id).style.display = 'flex';
@@ -35,7 +35,7 @@ const cardSource = {
 const OPTIONS = {
   arePropsEqual: function arePropsEqual(props, otherProps) {
     let isEqual = true;
-    if (props.item.id === otherProps.item.id &&
+    if (props.item._id === otherProps.item._id &&
         props.x === otherProps.x &&
         props.y === otherProps.y
        ) {
@@ -75,7 +75,7 @@ export default class CardComponent extends Component {
 
   render() {
     const { tasks, TasksActions, project, entityModel, isDragging, connectDragSource, item, x, y } = this.props;
-
+    console.log('item', item);
     return connectDragSource(
       <div>
         <Card tasks={tasks} TasksActions={TasksActions} project={project} entityModel={entityModel}
