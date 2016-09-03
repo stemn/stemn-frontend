@@ -1,14 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import { DropTarget, DragSource } from 'react-dnd';
+import { Field } from 'react-redux-form';
 
-import Cards from './Cards';
-
+import Cards from '../Cards/Cards.jsx';
 import classes from './CardsContainer.css';
 
 const listSource = {
   beginDrag(props) {
     return {
-      id: props.id,
+      id: props._id,
       x: props.x
     };
   },
@@ -50,6 +50,7 @@ const listTarget = {
   connectDragSource: connectDragSource.dragSource(),
   isDragging: monitor.isDragging()
 }))
+
 export default class CardsContainer extends Component {
   static propTypes = {
     connectDropTarget: PropTypes.func.isRequired,
@@ -64,21 +65,43 @@ export default class CardsContainer extends Component {
     isScrolling: PropTypes.bool
   }
 
+
   render() {
-    const { connectDropTarget, connectDragSource, item, x, moveCard, isDragging } = this.props;
+    const { tasks, TasksActions, project, entityModel, connectDropTarget, connectDragSource, item, x, moveCard, isDragging, className} = this.props;
     const opacity = isDragging ? 0.5 : 1;
 
+    const newTask = (event)=>{
+      event.preventDefault();
+      TasksActions.newTask({
+        projectId: project._id,
+        task: {
+          title: tasks.newTaskString[item._id],
+          group: item._id
+        }
+      })
+    }
+
     return connectDragSource(connectDropTarget(
-      <div className={classes.group} style={{ opacity }}>
-        <h3>{item.name}</h3>
+      <div className={className} style={{ opacity }}>
+        <h3>
+          <Field model={`${entityModel}.items[${x}].name`}>
+            <input className="input-plain" type="text" placeholder="Title"/>
+          </Field>
+        </h3>
         <Cards
+          tasks={tasks} TasksActions={TasksActions} project={project} entityModel={entityModel}
           moveCard={moveCard}
           x={x}
-          cards={item.cards}
+          cards={item.children}
           startScrolling={this.props.startScrolling}
           stopScrolling={this.props.stopScrolling}
           isScrolling={this.props.isScrolling}
         />
+        <form name="form" onSubmit={newTask}>
+          <Field model={`${entityModel}.newTaskString[${item._id}]`}>
+            <input className={classes.newItem} type="text" placeholder="New Task"/>
+          </Field>
+        </form>
       </div>
     ));
   }

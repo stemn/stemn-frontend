@@ -2,8 +2,10 @@ import http from 'axios';
 import getUuid from 'app/shared/helpers/getUuid.js';
 
 export function newTask({projectId, task}) {
+  const uuid = getUuid();
   const taskDefault = {
-    _id : getUuid(),
+    _id : uuid,
+    id : uuid,
     users: [{
       name: 'David Revay',
       picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg'
@@ -36,19 +38,34 @@ export function getTasks({projectId}) {
     payload: {
       response: {
         data: {
+          structure: [
+            {
+              _id: 'G1',
+              name: 'Requirements',
+              children: [{_id: 'T1'}, {_id: 'T2'}, {_id: 'T3'}, {_id: 'T4'}]
+            },{
+              _id: 'G2',
+              name: 'Development',
+              children: [{_id: 'T5'}, {_id:'T6'}, {_id: 'T7'}]
+            },{
+              _id: 'G3',
+              name: 'Design',
+              children: [{_id: 'T8'}, {_id: 'T9'}]
+            }
+          ],
           groups: [{
-            _id: '1',
+            _id: 'G1',
             name: 'Requirements'
           },{
-            _id: '2',
+            _id: 'G2',
             name: 'Development'
           },{
-            _id: '3',
+            _id: 'G3',
             name: 'Design'
           }],
-          items: [
-            {
-              _id: '1',
+          items: {
+            T1: {
+              _id: 'T1',
               title : 'Call Joan to discuss existing requirements',
               group: '1',
               due: 1472792461569,
@@ -58,8 +75,9 @@ export function getTasks({projectId}) {
                   picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg'
                 }
               ]
-            }, {
-              _id: '2',
+            },
+            T2: {
+              _id: 'T2',
               title : 'Write new requirements based on feedback received from Sam',
               group: '1',
               due: 1472792461569,
@@ -69,8 +87,9 @@ export function getTasks({projectId}) {
                   picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg'
                 }
               ]
-            }, {
-              _id: '3',
+            },
+            T3: {
+              _id: 'T3',
               title : 'Create process flow based on user interview',
               group: '1',
               due: 1472792461569,
@@ -80,8 +99,9 @@ export function getTasks({projectId}) {
                   picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg'
                 }
               ]
-            }, {
-              _id: '4',
+            },
+            T4: {
+              _id: 'T4',
               title : 'Schedule meeting with client to go over documents from last week',
               group: '1',
               due: 1472792461569,
@@ -91,8 +111,9 @@ export function getTasks({projectId}) {
                   picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg'
                 }
               ]
-            }, {
-              _id: '5',
+            },
+            T5: {
+              _id: 'T5',
               title : 'Enable password recovery feature on the application',
               group: '2',
               due: 1472792461569,
@@ -102,8 +123,9 @@ export function getTasks({projectId}) {
                   picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg'
                 }
               ]
-            }, {
-              _id: '6',
+            },
+            T6: {
+              _id: 'T6',
               title : 'Create a build script to concatenate all javascript files for production',
               group: '2',
               due: 1472792461569,
@@ -113,8 +135,9 @@ export function getTasks({projectId}) {
                   picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg'
                 }
               ]
-            }, {
-              _id: '7',
+            },
+            T7: {
+              _id: 'T7',
               title : 'Add feature X to module Y',
               group: '2',
               due: 1472792461569,
@@ -124,8 +147,9 @@ export function getTasks({projectId}) {
                   picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg'
                 }
               ]
-            }, {
-              _id: '8',
+            },
+            T8: {
+              _id: 'T8',
               title : 'Talk to client about changing the look of the header',
               group: '3',
               due: 1472792461569,
@@ -135,8 +159,9 @@ export function getTasks({projectId}) {
                   picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg'
                 }
               ]
-            }, {
-              _id: '9',
+            },
+            T9: {
+              _id: 'T9',
               title : 'Get the new designs from Sam',
               group: '3',
               due: 1472792461569,
@@ -147,7 +172,7 @@ export function getTasks({projectId}) {
                 }
               ]
             }
-          ]
+          }
         }
       }
     },
@@ -208,8 +233,10 @@ export function moveGroup({projectId, lastX, nextX}) {
 //}
 
 export function newGroup({projectId, group}) {
+  const uuid = getUuid();
   const groupDefault = {
-    _id : getUuid(),
+    id : uuid,
+    cards: []
   }
   return (dispatch)=>{
     if(group.name.length > 1){

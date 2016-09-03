@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Card from './Cards/Card';
+import Card from './Card.jsx';
 
 const styles = {
   display: 'inline-block',
