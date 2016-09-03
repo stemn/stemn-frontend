@@ -51,7 +51,7 @@ export const Component = React.createClass({
 
   render() {
     const { ProjectsActions } = this.props;
-    const sidebarStyle = classNames('layout-column', 'flex' ,'rel-box', styles.sidebar, {[styles.open]: this.props.sidebar.show});
+    const sidebarStyle = classNames('layout-column', 'flex' ,'rel-box', styles.sidebar);
 
     const nameRegex = new RegExp(this.props.sidebar.searchString, 'i');
     const filteredProjects = this.props.auth.projects.data ? this.props.auth.projects.data.filter((project) => nameRegex.test(project.name)) : [];
@@ -59,7 +59,7 @@ export const Component = React.createClass({
 
 
     return (
-      <DragResize side="right" width="300" widthRange={[0, 500]} className="layout-column flex">
+      <DragResize side="right" width="300" widthRange={[0, 500]} animateHide={!this.props.sidebar.show} className="layout-column flex">
         <div className={sidebarStyle}>
           <div className={styles.sidebarToolbar + ' layout-row layout-align-start-center'}>
 
@@ -109,6 +109,7 @@ export const Component = React.createClass({
           </div>
         </div>
       </DragResize>
+
     );
   }
 });

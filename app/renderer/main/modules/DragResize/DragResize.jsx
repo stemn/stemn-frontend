@@ -87,10 +87,23 @@ export default React.createClass({
       return {height: parseInt(this.props.height)};
     }
   },
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.animateHide != this.props.animateHide){
+      if(nextProps.width){
+        this.setState({width: nextProps.animateHide ? '0' : nextProps.width, animate: true});
+      }
+      else{
+        this.setState({height: nextProps.animateHide ? '0' : nextProps.height, animate: true});
+      }
+      setTimeout(()=>this.setState({animate: false}), 300)
+    }
+  },
+
   drag (change) {
     const { widthRange, heightRange } = this.props;
     if(change.deltaX){
-      let width = this.state.width + change.deltaX;
+      let width = parseInt(this.state.width) + change.deltaX;
       if(widthRange){
         if(width < widthRange[0]){width = widthRange[0]}
         else if(width > widthRange[1]){width = widthRange[1]}
@@ -98,7 +111,7 @@ export default React.createClass({
       this.setState({width: width});
     }
     else if(change.deltaY){
-      let height = this.state.height + change.deltaY;
+      let height = parseInt(his.state.height) + change.deltaY;
       if(heightRange){
         if(height < heightRange[0]){height = heightRange[0]}
         else if(height > heightRange[1]){height = heightRange[1]}
@@ -109,7 +122,8 @@ export default React.createClass({
   render() {
     const style = {
       width: this.state.width + 'px',
-      height: this.state.height + 'px'
+      height: this.state.height + 'px',
+      transition: this.state.animate ? '0.3s ease all' : 'none'
     }
     return (
       <div style={style} className={classNames(classes.box, this.props.className)}>
