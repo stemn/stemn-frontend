@@ -40,6 +40,7 @@ function getItemStyles(props) {
 export default class CustomDragLayer extends Component {
   static propTypes = {
     item: PropTypes.object,
+    project: PropTypes.object,
     itemType: PropTypes.string,
     initialOffset: PropTypes.shape({
       x: PropTypes.number.isRequired,
@@ -52,28 +53,31 @@ export default class CustomDragLayer extends Component {
     isDragging: PropTypes.bool.isRequired,
   };
 
-  renderItem(type, item) {
+  renderItem(type, item, project) {
     switch (type) {
       case 'card':
         return (
-          <CardDragPreview card={item} />
+          <CardDragPreview card={item} project={project} />
         );
       default:
         return null;
     }
   }
 
+
   render() {
-    const { item, itemType, isDragging } = this.props;
+    const { item, itemType, isDragging, project } = this.props;
     if (!isDragging) {
       return null;
     }
     return (
       <div style={layerStyles}>
         <div style={getItemStyles(this.props)}>
-          {this.renderItem(itemType, item)}
+          {this.renderItem(itemType, item, project)}
         </div>
       </div>
     );
   }
 }
+
+//

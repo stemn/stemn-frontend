@@ -16,17 +16,17 @@ const cardSource = {
   beginDrag(props, monitor, component) {
     // dispatch to redux store that drag is started
     const { item, x, y } = props;
-    const { _id, title } = item;
+    const { _id } = item;
     const { clientWidth, clientHeight } = findDOMNode(component);
 
-    return { _id, title, item, x, y, clientWidth, clientHeight };
+    return { _id, item, x, y, clientWidth, clientHeight };
   },
   endDrag(props, monitor) {
-    document.getElementById(monitor.getItem().id).style.display = 'flex';
+    document.getElementById(monitor.getItem()._id).style.display = 'flex';
     props.stopScrolling();
   },
   isDragging(props, monitor) {
-    const isDragging = props.item && props.item.id === monitor.getItem().id;
+    const isDragging = props.item && props.item._id === monitor.getItem().id;
     return isDragging;
   }
 };
@@ -75,7 +75,6 @@ export default class CardComponent extends Component {
 
   render() {
     const { tasks, TasksActions, project, entityModel, isDragging, connectDragSource, item, x, y } = this.props;
-    console.log('item', item);
     return connectDragSource(
       <div>
         <Card tasks={tasks} TasksActions={TasksActions} project={project} entityModel={entityModel}

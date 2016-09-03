@@ -26,15 +26,14 @@ import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvata
 
 export const Component = React.createClass({
   render() {
-    const { style, task, x, y, entityModel } = this.props;
-    console.log(this.props);
+    const { style, task, entityModel } = this.props;
 
     return (
       <div style={style} className={classNames(classes.card, 'layout-row flex')} id={style ? task._id : null}>
         <Checkbox />
         <div className={classes.text + ' flex'}>
           <Textarea
-            model={`${entityModel}.items[${x}].cards[${y}].title`}
+            model={`${entityModel}.title`}
             value={task.title}
             className="input-plain"
             type="text"
@@ -51,10 +50,10 @@ export const Component = React.createClass({
 ///////////////////////////////// CONTAINER /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({tasks, projectSettings}, {params, item, project, entityModel}) {
+function mapStateToProps({tasks, projectSettings}, {params, item, project}) {
   return {
     task: tasks[project._id].items[item._id],
-    entityModel: entityModel
+    entityModel: `tasks[${project._id}].items[${item._id}]`
   };
 }
 

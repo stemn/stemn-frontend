@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { DropTarget } from 'react-dnd';
 import { findDOMNode } from 'react-dom';
+import classNames from 'classNames';
 
 import Card from '../Card/DraggableCard.jsx';
 import classes from './Cards.css';
@@ -10,11 +11,11 @@ function getPlaceholderIndex(y, scrollY) {
   let placeholderIndex;
 
   // t0d0: change cardHeight from const
-  const cardHeight = 161; // height of a single card(excluding marginBottom/paddingBottom)
-  const cardMargin = 10; // height of a marginBottom+paddingBottom
+  const cardHeight = 65; // height of a single card(excluding marginBottom/paddingBottom)
+  const cardMargin = 15; // height of a marginBottom+paddingBottom
 
   // t0d0: change offsetHeight from const
-  const offsetHeight = 84; // height offset from the top of the page
+  const offsetHeight = 170; // height offset from the top of the page
 
   // we start counting from the top of dragTarget
   const yPos = y - offsetHeight + scrollY;
@@ -30,7 +31,7 @@ function getPlaceholderIndex(y, scrollY) {
 
 const specs = {
   drop(props, monitor, component) {
-    document.getElementById(monitor.getItem().id).style.display = 'flex';
+    document.getElementById(monitor.getItem()._id).style.display = 'flex';
     const { placeholderIndex } = component.state;
     const lastX = monitor.getItem().x;
     const lastY = monitor.getItem().y;
@@ -59,7 +60,7 @@ const specs = {
       monitor.getClientOffset().y,
       findDOMNode(component).scrollTop
     );
-    // console.log(placeholderIndex);
+     console.log(placeholderIndex);
 
     // horizontal scroll
     if (!props.isScrolling) {
@@ -164,7 +165,7 @@ export default class Cards extends Component {
     }
 
     return connectDropTarget(
-      <div className={classes.cards}>
+      <div className={classNames(classes.cards, {[classes.empty]: cardList.length == 0})}>
         {cardList}
       </div>
     );
