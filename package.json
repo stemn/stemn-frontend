@@ -86,7 +86,6 @@
     "sinon": "^1.17.3",
     "source-map-support": "^0.4.0",
     "style-loader": "^0.13.1",
-    "uws": "^0.8.0",
     "webfont-dl": "^0.1.2",
     "webpack": "^1.13.0",
     "webpack-dev-middleware": "^1.6.1",
