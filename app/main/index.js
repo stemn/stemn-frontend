@@ -24,7 +24,6 @@ import mapWebsocketToRedux from './modules/websocket/mapWebsocketToRedux'
 //// Pass `true` to disable server side logging and only see output in the browser
 //monkey.attachConsole()
 
-
 console.log(squirrelStartup);
 // Init squirel setup hooks
 if(!squirrelStartup){
@@ -54,19 +53,16 @@ if(!squirrelStartup){
     });
 
     websocket.on('data', (action) => {
-    //  const reduxAction = mapWebsocketToRedux(action);
-    //  if(reduxAction){
-    //    store.dispatch(reduxAction)
-    //  };
+     const reduxAction = mapWebsocketToRedux(action);
+     if(reduxAction){
+       store.dispatch(reduxAction)
+     };
     });
 
     websocket.write({
-      action : 'echo',
+      type : 'CHANGES/FETCH_CHANGES',
       payload : {
-        action : 'log',
-        payload : {
-          message : 'websocket initialized!'
-        }
+        projectId : '57c77e2896f1d3a2604fc92c'
       }
     });
 

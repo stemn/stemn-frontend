@@ -1,5 +1,5 @@
-import * as ChangesActions from 'app/shared/actions/changes.js';
-import * as FilesActions from 'app/shared/actions/files.js';
+import * as ChangesActions from '../../../shared/actions/changes.js';
+import * as FilesActions from '../../../shared/actions/files.js';
 
 export default (action) => {
   switch (action.type) {
