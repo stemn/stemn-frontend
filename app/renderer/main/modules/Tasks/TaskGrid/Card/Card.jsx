@@ -15,28 +15,32 @@ const propTypes = {
   style: PropTypes.object
 };
 
-const Card = (props) => {
-  const { style, item } = props;
+const Card = React.createClass({
+  render() {
+    const { style, item, x, y, entityModel } = this.props;
+    console.log(this.props);
 
-  return (
-    <div style={style} className={classNames(classes.card, 'layout-row flex')} id={style ? item.id : null}>
-      <Checkbox />
-      <div className={classes.text + ' flex'}>{item.title}</div>
-      <UserAvatar picture={item.users[0].picture} size="25px"/>
-    </div>
-  );
-};
+    return (
+      <div style={style} className={classNames(classes.card, 'layout-row flex')} id={style ? item.id : null}>
+        <Checkbox />
+        <div className={classes.text + ' flex'}>
+          <Textarea
+            model={`${entityModel}.items[${x}].cards[${y}].title`}
+            value={item.title}
+            className="input-plain"
+            type="text"
+            placeholder="Task description" />
+        </div>
+        <UserAvatar picture={item.users[0].picture} size="25px"/>
+      </div>
+    );
+  }
+});
+
 
 Card.propTypes = propTypes;
 
 export default Card;
 
 
-//        <div className={classes.text + ' flex'}>
-//          <Textarea
 //            model={track(`${entityModel}.items[].title`, { _id: this.props.item._id })}
-//            value={item.title}
-//            className="input-plain"
-//            type="text"
-//            placeholder="Task description" />
-//        </div>

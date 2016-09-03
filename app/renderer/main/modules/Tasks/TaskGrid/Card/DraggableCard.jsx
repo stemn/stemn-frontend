@@ -74,11 +74,13 @@ export default class CardComponent extends Component {
   }
 
   render() {
-    const { isDragging, connectDragSource, item } = this.props;
+    const { tasks, TasksActions, project, entityModel, isDragging, connectDragSource, item, x, y } = this.props;
 
     return connectDragSource(
       <div>
-        <Card style={getStyles(isDragging)} item={item} />
+        <Card tasks={tasks} TasksActions={TasksActions} project={project} entityModel={entityModel}
+        x={x} y={y}
+        style={getStyles(isDragging)} item={item} />
       </div>
     );
   }

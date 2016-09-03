@@ -81,10 +81,13 @@ export default class CardsContainer extends Component {
       })
     }
 
-    console.log(this.props);
     return connectDragSource(connectDropTarget(
       <div className={className} style={{ opacity }}>
-        <h3>{item.name}</h3>
+        <h3>
+          <Field model={`${entityModel}.items[${x}].name`}>
+            <input className="input-plain" type="text" placeholder="Title"/>
+          </Field>
+        </h3>
         <Cards
           tasks={tasks} TasksActions={TasksActions} project={project} entityModel={entityModel}
           moveCard={moveCard}
