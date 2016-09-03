@@ -18,7 +18,10 @@ import { track } from 'react-redux-form';
 
 import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
 import Textarea from 'app/renderer/main/components/Input/Textarea/Textarea';
-import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx'
+import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
+import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
+import UserSelect from 'app/renderer/main/components/Users/UserSelect/UserSelect.jsx'
+
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -39,7 +42,13 @@ export const Component = React.createClass({
             type="text"
             placeholder="Task description" />
         </div>
-        <UserAvatar picture={task.users[0].picture} size="25px"/>
+          <PopoverMenu preferPlace="right" disableClickClose={true}>
+            <UserAvatar picture={task.users[0].picture} size="25px"/>
+            <div className="PopoverMenu" style={{padding: '15px'}}>
+              <UserSelect value="dropbox" />
+              <div>asfsfa asfafsfsa asffs</div>
+            </div>
+          </PopoverMenu>
       </div>
     );
   }
