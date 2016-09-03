@@ -1,6 +1,7 @@
 import u from 'updeep';
 import { clone } from 'lodash';
 import { modeled } from 'react-redux-form';
+import { groupTasks } from './Tasks.utils.js';
 
 const initialState = {
 
@@ -63,8 +64,7 @@ const mainReducer = (state, action) => {
     case 'TASKS/GET_TASKS':
       return u({
         [action.meta.cacheKey] : {
-          items : action.payload.response.data.items,
-          groups : action.payload.response.data.groups,
+          items : groupTasks(action.payload.response.data.groups, action.payload.response.data.items),
         }
       }, state)
 
@@ -105,28 +105,52 @@ const mainReducer = (state, action) => {
 
 
     case 'TASKS/MOVE_TASK':
-      const move = (items) =>{
-        const fromIndex = items.findIndex((item)=>item._id == action.payload.taskId);
-        const toIndex = items.findIndex((item)=>item._id == action.payload.beforeId);
-        const itemsClone = clone(items);
-        const movedItems = moveItem(itemsClone, fromIndex, toIndex);
-        return  [
-          ...movedItems.slice(0, toIndex),
-          u({group: action.payload.group}, movedItems[index]),
-          ...movedItems.slice(toIndex + 1)
-        ]
+
+      const moveTask = (items) =>{
+        const { lastX, lastY, nextX, nextY } = action.payload;
+        const clone = [...items];
+        if (lastX === nextX) {
+          clone[lastX].cards.splice(nextY, 0, clone[lastX].cards.splice(lastY, 1)[0]);
+        } else {
+          // move element to new place
+          clone[nextX].cards.splice(nextY, 0, clone[lastX].cards[lastY]);
+          // delete element from old place
+          clone[lastX].cards.splice(lastY, 1);
+        }
+        return clone;
       }
       return u({
         [action.meta.cacheKey] : {
-          items: move,
+          items: moveTask,
         }
       }, state)
+
+    case 'TASKS/MOVE_GROUP':
+
+      const moveGroup = (items) =>{
+        const { lastX, nextX } = action.payload;
+        const clone = [...items];
+        const t = clone.splice(lastX, 1)[0];
+        clone.splice(nextX, 0, t);
+        return clone;
+      }
+      return u({
+        [action.meta.cacheKey] : {
+          items: moveGroup,
+        }
+      }, state)
+
+//    case 'TASKS/TOGGLE_DRAGGING':
+//      return u({
+//        [action.meta.cacheKey] : {
+//          isDragging: action.payload.isDragging,
+//        }
+//      }, state)
 
     default:
       return state;
   }
 }
-
 
 function moveItem (array, fromIndex, toIndex) {
   array.splice(toIndex, 0, array.splice(fromIndex, 1)[0] );

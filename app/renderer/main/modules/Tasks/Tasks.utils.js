@@ -1,17 +1,18 @@
 export const groupTasks = (groups, tasks) => {
-  const groupedTasks = {};
-
-  groups.forEach((group)=>{
-    groupedTasks[group] = [];
+  const groupedTasks = [];
+  const groupIndex = {};
+  groups.forEach((group, index)=>{
+    groupedTasks.push({
+      id: group._id,
+      name: group.name,
+      cards: []
+    })
+    groupIndex[group._id] = index;
   })
 
   tasks.forEach((task)=>{
-    if(!groupedTasks[task.group]){
-      groupedTasks[task.group] = [task];
-    }
-    else{
-      groupedTasks[task.group].push(task);
-    }
+    task.id = task._id;
+    groupedTasks[groupIndex[task.group]].cards.push(task);
   })
 
   return groupedTasks

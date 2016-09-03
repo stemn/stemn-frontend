@@ -23,6 +23,8 @@ import fileSelect from '../../renderer/main/modules/fileSelect/fileSelect.reduce
 import modals from '../../renderer/main/modules/modal/modal.reducer.js';
 import upload from '../../renderer/main/modules/upload/upload.reducer.js';
 import tasks from '../../renderer/main/modules/Tasks/Tasks.reducer.js';
+import lists from '../../renderer/main/modules/Tasks/Trello/reducers/lists.js';
+
 
 export default function getRootReducer(scope = 'main') {
   let reducers = {
@@ -45,6 +47,7 @@ export default function getRootReducer(scope = 'main') {
     users,
     upload,
     tasks,
+    lists,
     toastr: toastrReducer
   };
 

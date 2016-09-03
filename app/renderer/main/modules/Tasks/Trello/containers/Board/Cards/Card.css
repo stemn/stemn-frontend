@@ -1,10 +1,13 @@
 @value primary, border1, bg1 from "app/renderer/assets/css/themes/standard.css";
 
+
 .card{
   padding: 15px;
   border: 1px solid border1;
   margin-bottom: 15px;
   background: white;
+  transition: 0.15s;
+  cursor: pointer;
 }
 .text{
   padding: 0px 10px;

@@ -170,11 +170,11 @@ export function deleteTask({projectId, taskId}) {
   }
 }
 
-export function moveTask({projectId, group, taskId, beforeId}) {
+export function moveTask({projectId, lastX, lastY, nextX, nextY}) {
   return {
     type: 'TASKS/MOVE_TASK',
     payload: {
-      projectId, group, taskId, beforeId
+      lastX, lastY, nextX, nextY
     },
     meta: {
       cacheKey: projectId
@@ -182,14 +182,30 @@ export function moveTask({projectId, group, taskId, beforeId}) {
   }
 }
 
-export function moveGroup({projectId, taskId}) {
+
+export function moveGroup({projectId, lastX, nextX}) {
   return {
     type: 'TASKS/MOVE_GROUP',
+    payload: {
+      lastX, nextX
+    },
     meta: {
       cacheKey: projectId
     }
   }
 }
+
+//export function toggleDragging({projectId, isDragging}) {
+//  return {
+//    type: 'TASKS/TOGGLE_DRAGGING',
+//    payload: {
+//      isDragging
+//    },
+//    meta: {
+//      cacheKey: projectId
+//    }
+//  }
+//}
 
 export function newGroup({projectId, group}) {
   const groupDefault = {
@@ -221,3 +237,5 @@ export function deleteGroup({projectId, group}) {
     }
   }
 }
+
+

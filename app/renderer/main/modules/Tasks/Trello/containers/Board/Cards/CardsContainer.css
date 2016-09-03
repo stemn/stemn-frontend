@@ -1,0 +1,10 @@
+.group, .group-placeholder{
+  display: inline-block;
+  width: 350px;
+  padding: 0px 15px;
+
+  height: 100%;
+  overflow: hidden;
+  min-height: 100px;
+  vertical-align: top;
+}

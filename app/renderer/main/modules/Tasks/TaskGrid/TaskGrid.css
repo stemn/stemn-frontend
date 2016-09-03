@@ -1,6 +1,7 @@
 .container{
   overflow-x: auto;
   padding: 30px;
+  background: rgba(0,0,0,0.01);
 }
 .row{
   margin: 0px -15px;
