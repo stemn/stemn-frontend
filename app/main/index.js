@@ -6,6 +6,7 @@ import { createMainWindow, showMainWindow } from './createMainWindow';
 import { createMenuBar, showMenuWindow } from './createMenuBarWindow';
 
 //import { authInit, authReducer } from './modules/auth/auth.js';
+import { initialise as wsInitialise, write as wsWrite } from './modules/websocket/websocket.js';
 
 import configureStore from '../shared/store/configureStore';
 import tray from './tray';
@@ -42,6 +43,22 @@ if(!squirrelStartup){
 //    global.state = await storage.get('state');
 
     const store = configureStore(global.state, 'main');
+
+    const websocket = wsInitialise({
+      host : 'http://localhost',
+      port : 8080,
+      token : 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1NDk4ZTI1OGE3ZmJiZmNjMTJjM2ZhMTUiLCJpYXQiOjE0NzAzNTkzMjkuMDI5LCJleHAiOjE0NzU1NDMzMjkuMDI5fQ.mwhOEtyhzc7Cqg4r9JLKTxgwzr-YnDYdLKW_CNOGeuA'
+    });
+
+    websocket.write({
+      action : 'echo',
+      payload : {
+        action : 'log',
+        payload : {
+          message : 'websocket initialized!'
+        }
+      }
+    });
 
     store.subscribe(async () => {
       global.state = store.getState();
@@ -96,4 +113,3 @@ if(!squirrelStartup){
     });
   });
 }
-

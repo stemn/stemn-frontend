@@ -18,7 +18,7 @@ import classes from 'app/renderer/main/pages/ProjectPage/ProjectSettingsPage/Pro
 import { Field } from 'react-redux-form';
 import Upload from 'app/renderer/main/modules/Upload/Upload.jsx'
 import Button from 'app/renderer/main/components/Buttons/Button/Button.jsx'
-import LinkAccount from 'app/renderer/main/modules/settings/LinkAccount/LinkAccount.jsx'
+import LinkAccount from 'app/renderer/main/modules/Settings/LinkAccount/LinkAccount.jsx'
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 

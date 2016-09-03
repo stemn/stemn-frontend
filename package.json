@@ -80,6 +80,7 @@
     "mocha": "^2.4.5",
     "node-libs-browser": "^1.0.0",
     "node-monkey": "^1.0.0-beta.2",
+    "primus": "^6.0.2",
     "react": "^15.2.1",
     "react-addons-test-utils": "^15.0.1",
     "selenium-webdriver": "^2.53.1",
@@ -89,7 +90,8 @@
     "webfont-dl": "^0.1.2",
     "webpack": "^1.13.0",
     "webpack-dev-middleware": "^1.6.1",
-    "webpack-hot-middleware": "^2.10.0"
+    "webpack-hot-middleware": "^2.10.0",
+    "ws": "^1.1.1"
   },
   "devEngines": {
     "node": "4.x || 5.x || 6.x",
