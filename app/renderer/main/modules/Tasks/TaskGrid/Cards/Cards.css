@@ -1,7 +1,12 @@
 .cards{
   overflow-y: auto;
-  height: 100%;
-
+}
+.empty{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 400px;
 }
 .placeholder{
   height: 60px;

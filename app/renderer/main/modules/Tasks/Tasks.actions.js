@@ -2,10 +2,8 @@ import http from 'axios';
 import getUuid from 'app/shared/helpers/getUuid.js';
 
 export function newTask({projectId, task}) {
-  const uuid = getUuid();
   const taskDefault = {
-    _id : uuid,
-    id : uuid,
+    _id : getUuid(),
     users: [{
       name: 'David Revay',
       picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg'
@@ -233,10 +231,9 @@ export function moveGroup({projectId, lastX, nextX}) {
 //}
 
 export function newGroup({projectId, group}) {
-  const uuid = getUuid();
   const groupDefault = {
-    id : uuid,
-    cards: []
+    _id : getUuid(),
+    children: []
   }
   return (dispatch)=>{
     if(group.name.length > 1){

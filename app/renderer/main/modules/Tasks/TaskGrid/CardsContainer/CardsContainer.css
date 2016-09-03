@@ -4,6 +4,8 @@
   padding: 15px;
   font-size: 13px;
   color: rgba(0, 0, 0, 0.8);
+  position: relative;
+  z-index: 1; /* So the drop container can sit ontop */
 }
 .newItem:focus{
   outline: none;

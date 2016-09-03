@@ -46,6 +46,7 @@ export default class Board extends Component {
   }
 
   startScrolling(direction) {
+    console.log('SCROLL!');
     // if (!this.state.isScrolling) {
     switch (direction) {
       case 'toLeft':
@@ -95,11 +96,11 @@ export default class Board extends Component {
 
   findList(id) {
     const { tasks } = this.props;
-    const list = tasks.items.filter(l => l._id === id)[0];
+    const list = tasks.structure.filter(l => l._id === id)[0];
 
     return {
       list,
-      lastX: tasks.items.indexOf(list)
+      lastX: tasks.structure.indexOf(list)
     };
   }
 
@@ -116,11 +117,9 @@ export default class Board extends Component {
       })
     }
 
-    console.log(tasks);
-
     return (
       <main className={classes.container}>
-        <CustomDragLayer />
+        <CustomDragLayer project={project}/>
         <div className={classes.row + ' layout-row'}>
           {tasks.structure.map((item, i) =>
             <CardsContainer
@@ -146,7 +145,6 @@ export default class Board extends Component {
             <form name="form" onSubmit={newGroup}>
               <Field model={`${entityModel}.newGroupString`}>
                 <input className={classes.newItem} type="text" placeholder="New Section"/>
-                <button onClick={newGroup}>Submit</button>
               </Field>
             </form>
           </div>

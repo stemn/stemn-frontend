@@ -31,9 +31,24 @@ const mainReducer = (state, action) => {
 //      }, state)
 
     case 'TASKS/NEW_TASK':
+
+      const addTaskToStructure = (structure) => {
+        const cloneStructure = cloneDeep(structure);
+        const groupIndex = structure.findIndex((group)=>group._id == action.payload.task.group);
+        cloneStructure[groupIndex].children.push({
+          _id: action.payload.task._id
+        })
+        return cloneStructure
+      }
+      const addTaskToItems = (items) => {
+        const cloneItems = cloneDeep(items);
+        cloneItems[action.payload.task._id] = action.payload.task;
+        return cloneItems
+      }
       return u({
         [action.meta.cacheKey] : {
-          items: (items)=>addItem(items, action.payload.task),
+          items: addTaskToItems,
+          structure: addTaskToStructure,
           newTaskString: {
             [action.payload.task.group] : ''
           }
@@ -93,7 +108,7 @@ const mainReducer = (state, action) => {
     case 'TASKS/NEW_GROUP':
       return u({
         [action.meta.cacheKey] : {
-          items: (groups)=>addItem(groups, action.payload.group),
+          structure: (groups)=>addItem(groups, action.payload.group),
           newGroupString: ''
         }
       }, state)
@@ -111,21 +126,20 @@ const mainReducer = (state, action) => {
         const { lastX, lastY, nextX, nextY } = action.payload;
         const cloneItems = cloneDeep(items);
         if (lastX === nextX) {
-          cloneItems[lastX].cards.splice(nextY, 0, cloneItems[lastX].cards.splice(lastY, 1)[0]);
+          cloneItems[lastX].children.splice(nextY, 0, cloneItems[lastX].children.splice(lastY, 1)[0]);
         } else {
-          cloneItems[nextX].cards.splice(nextY, 0, cloneItems[lastX].cards[lastY]);  // move element to new place
-          cloneItems[lastX].cards.splice(lastY, 1); // delete element from old place
+          cloneItems[nextX].children.splice(nextY, 0, cloneItems[lastX].children[lastY]);  // move element to new place
+          cloneItems[lastX].children.splice(lastY, 1); // delete element from old place
         }
         return cloneItems;
       }
       return u({
         [action.meta.cacheKey] : {
-          items: moveTask,
+          structure: moveTask,
         }
       }, state)
 
     case 'TASKS/MOVE_GROUP':
-
       const moveGroup = (items) =>{
         const { lastX, nextX } = action.payload;
         const cloneItems = cloneDeep(items);
@@ -135,7 +149,7 @@ const mainReducer = (state, action) => {
       }
       return u({
         [action.meta.cacheKey] : {
-          items: moveGroup,
+          structure: moveGroup,
         }
       }, state)
 

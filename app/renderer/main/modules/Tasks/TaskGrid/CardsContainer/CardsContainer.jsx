@@ -8,7 +8,7 @@ import classes from './CardsContainer.css';
 const listSource = {
   beginDrag(props) {
     return {
-      id: props._id,
+      _id: props._id,
       x: props.x
     };
   },
@@ -84,19 +84,21 @@ export default class CardsContainer extends Component {
     return connectDragSource(connectDropTarget(
       <div className={className} style={{ opacity }}>
         <h3>
-          <Field model={`${entityModel}.items[${x}].name`}>
+          <Field model={`${entityModel}.structure[${x}].name`}>
             <input className="input-plain" type="text" placeholder="Title"/>
           </Field>
         </h3>
-        <Cards
-          tasks={tasks} TasksActions={TasksActions} project={project} entityModel={entityModel}
-          moveCard={moveCard}
-          x={x}
-          cards={item.children}
-          startScrolling={this.props.startScrolling}
-          stopScrolling={this.props.stopScrolling}
-          isScrolling={this.props.isScrolling}
-        />
+        <div className="rel-box">
+          <Cards
+            tasks={tasks} TasksActions={TasksActions} project={project} entityModel={entityModel}
+            moveCard={moveCard}
+            x={x}
+            cards={item.children}
+            startScrolling={this.props.startScrolling}
+            stopScrolling={this.props.stopScrolling}
+            isScrolling={this.props.isScrolling}
+          />
+        </div>
         <form name="form" onSubmit={newTask}>
           <Field model={`${entityModel}.newTaskString[${item._id}]`}>
             <input className={classes.newItem} type="text" placeholder="New Task"/>

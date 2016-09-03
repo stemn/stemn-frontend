@@ -8,10 +8,13 @@ export default React.createClass({
     }
   },
   toggle (toState) {
+    console.log('close');
     this.setState({ isOpen: toState === null ? !this.state.isOpen : toState })
   },
   render() {
-    const popoverBody = (<div onClick={()=>this.toggle(false)}>{this.props.children[1]}</div>)
+    const disableClickClose = this.props.disableClickClose;
+    console.log(disableClickClose);
+    const popoverBody = (<div onClick={()=>disableClickClose ? null : this.toggle(false)}>{this.props.children[1]}</div>)
     return (
       <Popover
         isOpen={this.state.isOpen}
