@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import SidebarTimeline from '../components/SidebarTimeline/SidebarTimeline';
-import * as SidebarTimelineActions from '../../../shared/actions/sidebarTimeline';
+import * as SidebarTimelineActions from 'app/shared/actions/sidebarTimeline';
 
 function mapStateToProps({ sidebarTimeline }, {project}) {
   return {
