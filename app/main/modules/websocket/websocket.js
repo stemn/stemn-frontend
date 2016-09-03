@@ -2,7 +2,9 @@ import Primus from 'primus';
 
 const Socket = Primus.createSocket({ transformer : 'websockets' });
 
-const lib = {};
+const lib = {
+  log : (data) => console.log(data)
+};
 
 export const initialise = (config) => {
   const socket = new Socket(`${config.host}:${config.port}?authorization=${config.token}`);

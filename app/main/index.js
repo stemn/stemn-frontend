@@ -51,9 +51,12 @@ if(!squirrelStartup){
     });
 
     websocket.write({
-      action : 'log',
+      action : 'echo',
       payload : {
-        message : 'websocket initialized!'
+        action : 'log',
+        payload : {
+          message : 'websocket initialized!'
+        }
       }
     });
 
