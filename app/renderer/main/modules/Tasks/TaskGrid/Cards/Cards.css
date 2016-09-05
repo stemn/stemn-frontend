@@ -10,6 +10,7 @@
 }
 .placeholder{
   height: 60px;
-  border: 1px dotted rgba(0, 0, 0, 0.2);
+  border: 2px dashed rgba(0, 0, 0, 0.5);
+  background: white;
   margin-bottom: 15px;
 }

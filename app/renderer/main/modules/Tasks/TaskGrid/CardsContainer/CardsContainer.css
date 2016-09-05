@@ -11,3 +11,18 @@
   outline: none;
   border: 1px solid rgba(0, 0, 0, 0.4);
 }
+
+.placeholderCol{
+  position: relative;
+}
+.placeholderCol::after{
+  content: '';
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  z-index: 1;
+  border: 2px dashed rgba(0, 0, 0, 0.5);
+  background: white;
+}

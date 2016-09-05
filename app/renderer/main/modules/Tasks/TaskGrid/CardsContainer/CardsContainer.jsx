@@ -2,14 +2,18 @@ import React, { Component, PropTypes } from 'react';
 import { DropTarget, DragSource } from 'react-dnd';
 import { Field } from 'react-redux-form';
 
+import { throttle } from 'lodash';
+
 import Cards from '../Cards/Cards.jsx';
 import classes from './CardsContainer.css';
+
+import classNames from 'classNames';
 
 const listSource = {
   beginDrag(props) {
     return {
-      _id: props._id,
-      x: props.x
+      _id: props.item._id,
+      x  : props.x
     };
   },
   endDrag(props) {
@@ -17,29 +21,44 @@ const listSource = {
   }
 };
 
+
+let throttleModelUpdate = throttle((throttledFn)=>throttledFn(), 100, {
+  leading:true,
+  trailing:false
+});
+
 const listTarget = {
   canDrop() {
     return false;
   },
-  hover(props, monitor) {
-    if (!props.isScrolling) {
-      if (window.innerWidth - monitor.getClientOffset().x < 200) {
-        props.startScrolling('toRight');
-      } else if (monitor.getClientOffset().x < 200) {
-        props.startScrolling('toLeft');
-      }
-    } else {
-      if (window.innerWidth - monitor.getClientOffset().x > 200 &&
-          monitor.getClientOffset().x > 200
-      ) {
-        props.stopScrolling();
-      }
+  drop(props, monitor, component) {
+  },
+  hover(props, monitor, component) {
+//    if (!props.isScrolling) {
+//      if (window.innerWidth - monitor.getClientOffset().x < 200) {
+//        props.startScrolling('toRight');
+//      } else if (monitor.getClientOffset().x < 200) {
+//        props.startScrolling('toLeft');
+//      }
+//    } else {
+//      if (window.innerWidth - monitor.getClientOffset().x > 200 &&
+//          monitor.getClientOffset().x > 200
+//      ) {
+//        props.stopScrolling();
+//      }
+//    }
+    const activeId = monitor.getItem()._id;
+    const destinId = props.id;
+    if (activeId !== destinId) {
+      throttleModelUpdate(()=>{
+        props.moveList(activeId, props.x)
+      })
     }
-    const { id: listId } = monitor.getItem();
-    const { id: nextX } = props;
-    if (listId !== nextX) {
-      props.moveList(listId, props.x);
-    }
+//    const activeElement = document.getElementById(activeId);
+//    if(activeElement){
+//      console.log(activeElement);
+//      activeElement.style.opacity = 1;
+//    }
   }
 };
 
@@ -68,9 +87,8 @@ export default class CardsContainer extends Component {
 
   render() {
     const { tasks, TasksActions, project, entityModel, connectDropTarget, connectDragSource, item, x, moveCard, isDragging, className} = this.props;
-    const opacity = isDragging ? 0.5 : 1;
 
-    const newTask = (event)=>{
+    const newTask = (event) => {
       event.preventDefault();
       TasksActions.newTask({
         projectId: project._id,
@@ -81,8 +99,10 @@ export default class CardsContainer extends Component {
       })
     }
 
+    const colClasses = classNames(className, {[classes.placeholderCol] : isDragging})
+
     return connectDragSource(connectDropTarget(
-      <div className={className} style={{ opacity }}>
+      <div className={colClasses} id={item._id}>
         <h3>
           <Field model={`${entityModel}.structure[${x}].name`}>
             <input className="input-plain" type="text" placeholder="Title"/>
@@ -108,3 +128,4 @@ export default class CardsContainer extends Component {
     ));
   }
 }
+

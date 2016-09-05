@@ -60,7 +60,6 @@ const specs = {
       monitor.getClientOffset().y,
       findDOMNode(component).scrollTop
     );
-     console.log(placeholderIndex);
 
     // horizontal scroll
     if (!props.isScrolling) {

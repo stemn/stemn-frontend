@@ -118,9 +118,9 @@ export default class Board extends Component {
     }
 
     return (
-      <main className={classes.container}>
+      <main className={classes.container+ ' layout-column flex'}>
         <CustomDragLayer project={project}/>
-        <div className={classes.row + ' layout-row'}>
+        <div className={classes.row + ' layout-row flex'}>
           {tasks.structure.map((item, i) =>
             <CardsContainer
               tasks={tasks}
