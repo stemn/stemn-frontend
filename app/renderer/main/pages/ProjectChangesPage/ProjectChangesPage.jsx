@@ -20,7 +20,6 @@ import Timeline       from 'app/renderer/main/modules/Timeline/Timeline.jsx';
 import CommitChanges  from 'app/renderer/main/components//CommitChanges';
 import CommitBox      from 'app/renderer/main/components/CommitBox/CommitBox.jsx'
 import FileCompare    from 'app/renderer/main/modules/FileCompare/FileCompare.jsx';
-import PreviewFile    from 'app/renderer/main/containers/PreviewFile.js';
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 
@@ -97,10 +96,7 @@ export const Component = React.createClass({
             <div className="layout-column flex">
               {changes.selected && changes.selected.data
                 ?
-                <FileCompare project={project.data} file1={changes.selected.data} file2={filePrevious ? filePrevious.data : null}>
-                  {filePrevious ? <PreviewFile project={project.data} file={filePrevious.data} /> : ''}
-                  <PreviewFile project={project.data} file={changes.selected.data} />
-                </FileCompare>
+                <FileCompare project={project.data} file1={changes.selected.data} file2={filePrevious ? filePrevious.data : null}></FileCompare>
                 : <div className="layout-column layout-align-center-center flex text-title-4 text-center">No file change selected.</div>
               }
             </div>

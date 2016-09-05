@@ -12,15 +12,14 @@ import classNames from 'classnames';
 import classes from './FileCompare.css'
 
 // Sub Components
-import PreviewFile from 'app/renderer/main/containers/PreviewFile';
-import FileCompareSlider from './components/FileCompareSlider.jsx';
-import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
-import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
-import {MdMoreHoriz} from 'react-icons/lib/md';
+import PreviewFile        from 'app/renderer/main/containers/PreviewFile';
+import FileCompareSlider  from './components/FileCompareSlider.jsx';
+import PopoverMenu        from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
+import SimpleIconButton   from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 
-import {getCompareModes} from './FileCompare.utils.js';
-import {getViewerType} from 'app/renderer/main/components/PreviewFile/previewFileUtils.js';
-
+import {getCompareModes}  from './FileCompare.utils.js';
+import {MdMoreHoriz}      from 'react-icons/lib/md';
+import {getViewerType}    from 'app/renderer/main/components/PreviewFile/previewFileUtils.js';
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -75,6 +74,27 @@ export const Component = React.createClass({
     const overylayStyles = this.state.compareMode == 'slider' && this.refs.container ?
           {width: this.refs.container.offsetWidth + 'px'} : {};
 
+
+    const filePreview1 = () => {
+      return (
+        <div className={classes.preview1 + ' flex layout-column'}>
+          {file2 ? <PreviewFile project={project} file={file2} /> : ''}
+        </div>
+      )
+    }
+
+    const filePreview2 = () => {
+      if(file2){
+        return (
+          <div className={classes.preview2 + ' flex layout-column'} style={preview2Style[this.state.compareMode]}>
+            <div className="layout-column flex" style={overylayStyles}>
+              {file1 ? <PreviewFile project={project} file={file1} /> : ''}
+            </div>
+          </div>
+        )
+      }
+    }
+
     return (
       <div className="layout-column flex">
         <div className={classes.header + ' layout-row layout-align-start-center'}>
@@ -84,7 +104,7 @@ export const Component = React.createClass({
               <MdMoreHoriz size="20px"/>
             </SimpleIconButton>
             <div className="PopoverMenu">
-              {getCompareModes(previewType1, previewType2).map((item)=><a className={classNames({'active': this.state.compareMode == item.value})} onClick={()=>this.setCompareMode(item.value)}>Compare: {item.text}</a>)}
+              {getCompareModes(previewType1, previewType2).map((item)=><a key={item.value} className={classNames({'active': this.state.compareMode == item.value})} onClick={()=>this.setCompareMode(item.value)}>Compare: {item.text}</a>)}
               <div className="divider"></div>
               <a onClick={this.displayFileInfo}>Discard Changes</a>
               <a onClick={this.displayFileInfo}>Open in explorer</a>
@@ -93,15 +113,9 @@ export const Component = React.createClass({
           </PopoverMenu>
         </div>
         <div className={classNames('flex', 'rel-box', 'scroll-box', compareModeClasses[this.state.compareMode], classes[this.state.compareMode])} ref="container">
-          <div className={classes.preview1 + ' flex layout-column'}>
-            {this.state.compareMode != 'single' ? this.props.children[0] : ''}
-          </div>
+          {filePreview1()}
           {this.state.compareMode == 'slider' ? <FileCompareSlider container={this.refs.container} changeFn={this.sliderChange} position={this.state.position}/> : ''}
-          <div className={classes.preview2 + ' flex layout-column'} style={preview2Style[this.state.compareMode]}>
-            <div className="layout-column flex" style={overylayStyles}>
-              {this.props.children[1]}
-            </div>
-          </div>
+          {filePreview2()}
         </div>
         {this.state.compareMode == 'onion'
           ? <div className={classes.rangeSlider+ ' layout-row'}>

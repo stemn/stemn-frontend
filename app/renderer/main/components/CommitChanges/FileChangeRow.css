@@ -5,7 +5,8 @@
   cursor: default;
 }
 .checkbox {
-  padding: 8px;
+  color: primary;
+  padding: 6px 3px 6px 6px;
 }
 .text {
   padding: 8px;

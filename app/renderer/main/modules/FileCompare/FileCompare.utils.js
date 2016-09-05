@@ -29,12 +29,13 @@ const compareModeTable = {
     pdf      : [0,1,4],
     pcb      : [0,1,2,3,4],
     gdoc     : [0,1,4],
-    other    : [0,1,4]
+    other    : [0,1,4],
+    none     : [4]
 }
 
 export const getCompareModes = (previewerType1, previewerType2) => {
   const compareModes1 = compareModeTable[previewerType1];
   const compareModes2 = compareModeTable[previewerType2];
-  const compareModes  = compareModes2 ? intersection(compareModes1, compareModes2) : compareModes1;
+  const compareModes  = compareModes2 ? intersection(compareModes1, compareModes2) : compareModeTable.none;
   return compareModes.map((modeNum)=>compareModeInfo[modeNum])
 }

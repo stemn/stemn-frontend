@@ -6,10 +6,7 @@
   background: none;
   outline: none;
   position: relative;
-
-  padding: 15px 20px;
-  font-size: 12px;
-
+  padding: 12px;
 }
 .sidebarButton:hover{
   background: rgba(0, 0, 0, 0.05);
