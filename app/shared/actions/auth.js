@@ -37,7 +37,7 @@ export function getProjects({userId}) {
 
 export function authenticate(provider) {
   return (dispatch) => {
-    dispatch({
+    return dispatch({
       type:'AUTH/AUTHENTICATE',
       payload: auth.authenticate({
         provider

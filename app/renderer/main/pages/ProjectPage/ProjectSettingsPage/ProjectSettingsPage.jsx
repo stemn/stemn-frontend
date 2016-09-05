@@ -84,7 +84,6 @@ export const Component = React.createClass({
             </Field>
             <br />
             <div className="layout-row layout-align-end">
-              <Button className="primary" onClick={()=>dispatch(actions.reset(entityModel))}>Cancel</Button>
               <Button className="primary" onClick={()=>this.linkRemote()}>Update Project</Button>
             </div>
           </div>
@@ -92,9 +91,9 @@ export const Component = React.createClass({
           <div className={classes.panel}>
             <h3>File Store Settings</h3>
             <p>Connect your Dropbox or Drive to sync all files and changes. Only one Google Drive or one Dropbox can be connected to a project.</p>
-            <ProjectLinkRemote model={`${entityModel}.remote`} value={project.remote}/>
+            <ProjectLinkRemote model={`${entityModel}.remote.provider`} value={project.remote.provider}/>
             <br />
-            { project.remote == 'dropbox' || project.remote == 'drive'
+            { project.remote.provider == 'dropbox' || project.remote.provider == 'drive'
             ? <div>
                 <FileSelectInput project={project} />
               </div>

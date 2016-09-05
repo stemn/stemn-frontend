@@ -9,8 +9,7 @@ import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconBut
 
 export default React.createClass({
   render() {
-//    const {projectId, path, fileSelect, options} = this.props;
-    console.log(this.props);
+    const {project} = this.props;
     const options = {
       allowFolder: true,
       foldersOnly: true,
@@ -19,14 +18,14 @@ export default React.createClass({
     return (
       <Modal modalId="FileSelect1">
         <div className={classes.fileSelectInput + ' layout-row layout-align-start-center'}>
-          <div className={classes.text + ' flex'}>Dropbox/Some Folder/SomeOtherFolder/asffsaafs</div>
+          <div className={classes.text + ' flex'}><span style={{textTransform: 'capitalize'}}>{project.remote.provider}/</span>{project.remote.root.path}</div>
             <SimpleIconButton>
               <MdFolder size="22" />
             </SimpleIconButton>
         </div>
         <div>
           <div className="modal-title">Select Folder</div>
-          <FileSelect projectId={this.props.project._id} path="" storeKey="ProjectSettingsPage" options={options} />
+          <FileSelect projectId={project._id} path="" storeKey="ProjectSettingsPage" options={options} />
         </div>
       </Modal>
     );
