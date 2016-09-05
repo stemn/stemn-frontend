@@ -1,0 +1,85 @@
+@value primary, border1, bg1 from "app/renderer/assets/css/themes/standard.css";
+
+.calendar {
+  width: 100%;
+  min-width: 350px;
+}
+
+.calendarGrid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.calendarHeader {
+  height: 50px;
+  background: #333;
+  color: #fff;
+  text-align: center;
+  line-height: 50px;
+  display: flex;
+  font-size: 20px;
+  justify-content: space-between;
+}
+
+
+.calendarHeader button {
+  width: 50px;
+  font-size: 20px;
+  border: 0;
+  background: transparent;
+  color: #ddd;
+  cursor: pointer;
+}
+
+.calendarGridItem {
+  flex: 0 14.28571%;
+  text-align: center;
+  padding: 12px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  color: rgba(0, 0, 0, 0.7);
+
+}
+
+.calendarGridItem.dayHeader{
+  text-transform: uppercase;
+}
+
+.calendarGridItem:global(.prevMonth),
+.calendarGridItem:global(.nextMonth){
+  opacity: 0.3;
+}
+
+.calendarGridItem:global(.current):after{
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  z-index: -1;
+  border: 1px solid primary;
+
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+}
+
+.calendarGridItem:global(.selected){
+  color: white;
+}
+.calendarGridItem:global(.selected):after{
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: primary;
+  border-radius: 50%;
+  z-index: -1;
+
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+}

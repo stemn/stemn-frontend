@@ -18,6 +18,7 @@ import SettingsAccountPage      from './pages/SettingsPage/SettingsAccountPage/S
 import SettingsApplicationPage  from './pages/SettingsPage/SettingsApplicationPage/SettingsApplicationPage.jsx';
 
 import HomePage                 from './pages/HomePage/HomePage.jsx';
+import DashboardPage            from './pages/DashboardPage/DashboardPage.jsx';
 import ProjectPage              from './pages/ProjectPage/ProjectPage.container.js';
 import ProjectSettingsPage      from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.jsx';
 import ProjectFeedPage          from './pages/ProjectFeedPage/ProjectFeedPage.jsx';
@@ -82,6 +83,7 @@ export default (store) => {
           <Route path="settings"      component={ProjectSettingsPage}/>
         </Route>
         <Route   path="/"                            component={HomePage}/>
+        <Route   path="/dashboard"                   component={DashboardPage}/>
         <Route   path="/settings"                    component={SettingsPage}>
           <Route path="/settings/application"        component={SettingsApplicationPage}/>
           <Route path="/settings/account"            component={SettingsAccountPage}/>

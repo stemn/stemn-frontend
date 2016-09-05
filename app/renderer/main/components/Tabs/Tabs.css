@@ -1,31 +1,35 @@
 @value primary, border1, grey-3 from "app/renderer/assets/css/themes/standard.css";
 
 .tabs {
-    white-space: nowrap;
-    position: relative;
-    overflow: hidden;
-    min-height: 37px;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  min-height: 37px;
 }
 .tabs:after{
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border-bottom: 1px solid border1;
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid border1;
 }
 .inner{
-    overflow: auto;
-    position: relative;
+  overflow: auto;
+  position: relative;
 }
 .inner > a {
-    min-height: 37px;
-    color: grey-3;
-    position: relative;
-    padding: 10px 0;
-    margin-right: 25px;
-    transition: color 0.2s ease;
+  min-height: 37px;
+  color: grey-3;
+  position: relative;
+  padding: 10px 0;
+  margin-right: 25px;
+  transition: color 0.2s ease;
 }
+.inner > a:last-child {
+  margin-right: 0;
+}
+
 .inner > a:global(.active), .inner > a:hover {
     color: primary;
 }
@@ -38,15 +42,15 @@
 }
 */
 .inner > a:after {
-    content: '';
-    position: absolute;
-    bottom: 0px;
-    left: 0;
-    right: 0;
-    border-bottom: 1px solid primary;
-    opacity: 0;
-    transition: 0.2s opacity ease;
-    z-index: 1;
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid primary;
+  opacity: 0;
+  transition: 0.2s opacity ease;
+  z-index: 1;
 }
 
 .tabsLg{

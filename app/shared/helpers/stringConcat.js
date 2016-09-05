@@ -7,7 +7,7 @@ export const middle = (string, chars, ratio) => {
   ratio = ratio || 0.5;
 
   // Get all the spaces in the string
-  const indices   = getSpaces(string);
+  const indices   = getWordBreaks(string);
   const startIndex = closest( chars * ratio, indices);
   const endIndex   = closest( string.length - chars * (1-ratio), indices)
 
@@ -29,10 +29,6 @@ function closest (num, arr) {
   return curr;
 }
 
-function getSpaces (string){
-  let indices = [];
-  for(var i=0; i<string.length;i++) {
-    if (string[i] === " ") indices.push(i);
-  }
-  return indices;
+function getWordBreaks (string){
+  return string.map(letter => [' ', '/', '-'].incudes(letter))
 }

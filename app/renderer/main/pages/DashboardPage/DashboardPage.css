@@ -1,0 +1,7 @@
+@value primary, border1, bg1 from "app/renderer/assets/css/themes/standard.css";
+
+.sidebarRight{
+  padding: 30px;
+  border-left: 1px solid border1;
+  background: rgba(0, 0, 0, 0.01);
+}

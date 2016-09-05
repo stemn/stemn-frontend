@@ -29,16 +29,20 @@ import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/
 /////////////////////////////////////////////////////////////////////////////
 
 export const Component = React.createClass({
+  propTypes: {
+    project: React.PropTypes.object.isRequired,
+  },
+
   componentWillMount() {
-    if(this.props.project && this.props.project.remote.connected){
+    if(this.props.project && this.props.project.data && this.props.project.data.remote.connected){
       this.props.ChangesActions.fetchChanges({
-        projectId: this.props.project._id
+        projectId: this.props.project.data._id
       })
     }
   },
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.project && nextProps.project && nextProps.project._id !== this.props.project._id && nextProps.project.remote.connected) {
+    if (this.props.project && nextProps.project && this.props.project.data && nextProps.project.data._id !== this.props.project.data._id && nextProps.project.data.remote.connected) {
       this.props.ChangesActions.fetchChanges({
         projectId: nextProps.project._id
       })
@@ -54,13 +58,13 @@ export const Component = React.createClass({
     return this.props.ChangesActions.actToggleAll({
       model,
       value,
-      projectId: this.props.project._id
+      projectId: this.props.project.data._id
     })
   },
 
   commitFn(){
     this.props.ChangesActions.commit({
-      projectId: this.props.project._id,
+      projectId: this.props.project.data._id,
       revisions: this.props.changes.data.filter((item)=>item.selected).map((item)=>item._id),
       summary: this.props.changes.summary,
       description: this.props.changes.description
@@ -69,12 +73,12 @@ export const Component = React.createClass({
 
   render() {
     const { changes, project, ChangesActions } = this.props;
-    const baseLink = `project/${this.props.project ? this.props.project._id : ''}`;
 
-    if(!project || !changes){
+    if(!project || !changes || !project.data){
       return <LoadingOverlay />
     }
-    if(project.remote.connected){
+    if(project.data.remote.connected){
+      const baseLink = `project/${this.props.project.data._id}`;
       const filePrevious = changes.selected.data && changes.selected.data.previousRevisionId ? u( {data: {revisionId : changes.selected.data.previousRevisionId}}, changes.selected) : null;
       return (
         <div className="layout-column flex rel-box">
@@ -82,20 +86,20 @@ export const Component = React.createClass({
             <div className="layout-column">
               <ContentSidebar>
                 {changes && changes.data
-                  ? <CommitChanges changes={changes} project={project} actToggleAll={this.toggleAll} selectedFileChange={ChangesActions.selectedFileChange}/>
+                  ? <CommitChanges changes={changes} project={project.data} actToggleAll={this.toggleAll} selectedFileChange={ChangesActions.selectedFileChange}/>
                   : ''}
 
                 <div style={this.CommitBoxStyles}>
-                  <CommitBox changes={changes} changesActions={ChangesActions} commitFn={()=>this.commitFn()} project={project}/>
+                  <CommitBox changes={changes} changesActions={ChangesActions} commitFn={()=>this.commitFn()} project={project.data}/>
                 </div>
               </ContentSidebar>
             </div>
             <div className="layout-column flex">
               {changes.selected && changes.selected.data
                 ?
-                <FileCompare project={project} file1={changes.selected.data} file2={filePrevious ? filePrevious.data : null}>
-                  {filePrevious ? <PreviewFile project={project} file={filePrevious.data} /> : ''}
-                  <PreviewFile project={project} file={changes.selected.data} />
+                <FileCompare project={project.data} file1={changes.selected.data} file2={filePrevious ? filePrevious.data : null}>
+                  {filePrevious ? <PreviewFile project={project.data} file={filePrevious.data} /> : ''}
+                  <PreviewFile project={project.data} file={changes.selected.data} />
                 </FileCompare>
                 : <div className="layout-column layout-align-center-center flex text-title-4 text-center">No file change selected.</div>
               }

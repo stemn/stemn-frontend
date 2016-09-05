@@ -20,12 +20,12 @@ const DraggerComponent = React.createClass({
       this.setState({active: true, lastEventId: nextProps.dataDrag.id});
       if(nextProps.side == 'left' || nextProps.side == 'right'){
         this.props.changeFn({
-          deltaX: nextProps.dataDrag.deltaX,
+          deltaX: nextProps.side == 'right' ? nextProps.dataDrag.deltaX : - nextProps.dataDrag.deltaX,
         });
       }
       else{
         this.props.changeFn({
-          deltaY: nextProps.dataDrag.deltaY
+          deltaY: nextProps.side == 'bottom' ? nextProps.dataDrag.deltaY : - nextProps.dataDrag.deltaY
         });
       }
     }
@@ -49,7 +49,7 @@ const DraggerComponent = React.createClass({
         top: '0',
         bottom: '0',
         left: '0',
-        marginLeft: '-3px',
+        marginLeft: '-6px',
         cursor: 'col-resize'
       },
       bottom: {

@@ -21,7 +21,7 @@ export default class extends React.Component{
     }
   }
   render() {
-    const baseLink = `project/${this.props.project ? this.props.project.data._id : ''}`
+    const baseLink = `project/${this.props.project && this.props.project.data ? this.props.project.data._id : ''}`
     return (
       <div className="layout-column flex rel-box">
         <Header>

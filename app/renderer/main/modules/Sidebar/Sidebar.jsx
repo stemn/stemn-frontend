@@ -91,20 +91,22 @@ export const Component = React.createClass({
 
           <div>
             <div className="layout-row layout-align-start-center">
-              <PopoverMenu className="flex">
-                  <div className={userStyles.userWrapper + ' flex layout-row layout-align-start-center'}>
-                    <img className={userStyles.userAvatar} src={'https://stemn.com' + this.props.auth.user.picture + '?size=thumb&crop=true'} />
-                    <div className="flex text-ellipsis">
-                      {this.props.auth.user.name}
-                    </div>
+              <Link to="/dashboard" className="flex">
+                <div className={userStyles.userWrapper + ' flex layout-row layout-align-start-center'}>
+                  <img className={userStyles.userAvatar} src={'https://stemn.com' + this.props.auth.user.picture + '?size=thumb&crop=true'} />
+                  <div className="flex text-ellipsis">
+                    {this.props.auth.user.name}
                   </div>
+                </div>
+              </Link>
+              <PopoverMenu>
+                <Link className={userStyles.userSettings + ' layout-column layout-align-center-center'} to="/settings/application"><MdSettings size="25"/></Link>
                 <div className="PopoverMenu">
-                  <a href="">Account Settings</a>
-                  <a href="">Team Settings</a>
+                  <Link to="/settings/account">Account Settings</Link>
+                  <Link to="/settings/application">Application Settings</Link>
                   <a onClick={()=>{this.props.authActions.logout()}}>Sign out</a>
                 </div>
               </PopoverMenu>
-              <Link className={userStyles.userSettings + ' layout-column layout-align-center-center'} to="/settings/application"><MdSettings size="25"/></Link>
             </div>
           </div>
         </div>

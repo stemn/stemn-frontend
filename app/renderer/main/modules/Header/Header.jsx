@@ -12,7 +12,7 @@ import React from 'react';
 
 // Styles
 import classNames from 'classnames';
-import styles from './Header.css';
+import classes from './Header.css';
 
 // Sub Components
 import {MdMenu} from 'react-icons/lib/md';
@@ -24,10 +24,11 @@ import {MdMenu} from 'react-icons/lib/md';
 
 export const Component = React.createClass({
   render() {
+    const styles = this.props.absolute ? {position: 'absolute'} : {};
     return (
-      <div className={styles.toolbar + ' layout-row layout-align-start-center rel-box'}>
+      <div className={classes.toolbar + ' layout-row layout-align-start-center rel-box'} style={styles}>
         {!this.props.sidebar.show ? <a onClick={()=>{this.props.sidebarActions.toggleSidebar();}}><MdMenu size="25"/></a> : ''}
-        <div className={styles.inner + ' layout-row flex'}>{this.props.children}</div>
+        <div className={classes.inner + ' layout-row flex'}>{this.props.children}</div>
       </div>
     );
   }
