@@ -21,11 +21,11 @@ export default class extends React.Component{
     }
   }
   render() {
-    const baseLink = `project/${this.props.project ? this.props.project._id : ''}`
+    const baseLink = `project/${this.props.project ? this.props.project.data._id : ''}`
     return (
       <div className="layout-column flex rel-box">
         <Header>
-          <h1 className={pageStyles.title}>{this.props.project ? this.props.project.name : ''}</h1>
+          <h1 className={pageStyles.title}>{this.props.project.data ? this.props.project.data.name : ''}</h1>
         </Header>
         <Tabs size="lg">
           <Link activeClassName="active" to={baseLink+'/changes'}>Changes</Link>

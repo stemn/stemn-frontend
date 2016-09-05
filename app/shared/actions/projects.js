@@ -50,7 +50,7 @@ export function saveProject({project}) {
     type: 'PROJECTS/SAVE_PROJECT',
     payload: http({
       method: 'PUT',
-      url: `http://localhost:3000/api/v1/projects/${projectId}`,
+      url: `http://localhost:3000/api/v1/projects/${project._id}`,
       data: project
     })
   }

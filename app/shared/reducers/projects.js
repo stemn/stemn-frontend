@@ -9,14 +9,18 @@ function reducer(state, action) {
   switch (action.type) {
     case 'PROJECTS/GET_PROJECT_FULFILLED' :
       return {...state,
-        [action.payload.data._id] : action.payload.data
+        [action.payload.data._id] : {
+          data: action.payload.data
+        }
       }
     case 'PROJECTS/ADD_TEAM_MEMBER' :
       const modifiedUser = Object.assign({}, action.payload.user, {permissions: {role: 'admin'}})
       const addTeamMember = (team) => { return [].concat(team, [modifiedUser]); }
       return u({
         [action.payload.projectId] : {
-          team: addTeamMember
+          data : {
+            team: addTeamMember
+          }
         }
       }, state);
     case 'PROJECTS/CHANGE_USER_PERMISSIONS' :
@@ -30,7 +34,9 @@ function reducer(state, action) {
       }
       return u({
         [action.payload.projectId] : {
-          team: changePermissions
+          data: {
+            team: changePermissions
+          }
         }
       }, state);
     case 'PROJECTS/REMOVE_TEAM_MEMBER' :
@@ -43,13 +49,17 @@ function reducer(state, action) {
       }
       return u({
         [action.payload.projectId] : {
-          team: removeMember
+          data: {
+            team: removeMember
+          }
         }
       }, state);
     case 'PROJECTS/LINK_REMOTE_FULFILLED' :
       return u({
         [action.cacheKey] : {
-          remote: action.payload.data
+          data: {
+            remote: action.payload.data
+          }
         }
       }, state);
     default:

@@ -33,9 +33,9 @@ import Button from 'app/renderer/main/components/Buttons/Button/Button'
 
 export const Component = React.createClass({
   selectFn(selection){
-    if(!this.props.project.team.find((item)=>item._id == selection._id)){
+    if(!this.props.project.data.team.find((item)=>item._id == selection._id)){
       this.props.ProjectsActions.addTeamMember({
-        projectId: this.props.project._id,
+        projectId: this.props.project.data._id,
         user: selection
       })
     }
@@ -44,22 +44,27 @@ export const Component = React.createClass({
     this.props.ProjectsActions.changeUserPermissions({
       role,
       userId,
-      projectId: this.props.project._id,
+      projectId: this.props.project.data._id,
     })
   },
   removeTeamMemberFn({userId}){
     this.props.ProjectsActions.removeTeamMember({
       userId,
-      projectId: this.props.project._id,
+      projectId: this.props.project.data._id,
     })
   },
   linkRemote(){
     this.props.ProjectsActions.linkRemote({
-      projectId: this.props.project._id,
+      projectId: this.props.project.data._id,
       provider: 'drive',
       path_display: '',
       path: '',
       id: ''
+    })
+  },
+  saveProject(){
+    this.props.ProjectsActions.saveProject({
+      project: this.props.project.data
     })
   },
   render() {
@@ -75,27 +80,27 @@ export const Component = React.createClass({
            <div className={classes.panel}>
             <h3>General Settings</h3>
             <p>Add your project name and blurb.</p>
-            <Field model={`${entityModel}.name`}>
+            <Field model={`${entityModel}.data.name`}>
               <input className="dr-input" type="text" placeholder="Project Name"/>
             </Field>
             <br />
-            <Field model={`${entityModel}.summary`}>
+            <Field model={`${entityModel}.data.summary`}>
               <input className="dr-input" type="text" placeholder="Project Summary"/>
             </Field>
             <br />
             <div className="layout-row layout-align-end">
-              <Button className="primary" onClick={()=>this.linkRemote()}>Update Project</Button>
+              <Button className="primary" onClick={()=>this.saveProject()}>Update Project</Button>
             </div>
           </div>
 
           <div className={classes.panel}>
             <h3>File Store Settings</h3>
             <p>Connect your Dropbox or Drive to sync all files and changes. Only one Google Drive or one Dropbox can be connected to a project.</p>
-            <ProjectLinkRemote model={`${entityModel}.remote.provider`} value={project.remote.provider}/>
+            <ProjectLinkRemote model={`${entityModel}.data.remote.provider`} value={project.data.remote.provider}/>
             <br />
-            { project.remote.provider == 'dropbox' || project.remote.provider == 'drive'
+            { project.data.remote.provider == 'dropbox' || project.data.remote.provider == 'drive'
             ? <div>
-                <FileSelectInput project={project} />
+                <FileSelectInput project={project.data} />
               </div>
             : ''}
             <br />
@@ -109,7 +114,7 @@ export const Component = React.createClass({
             <p>Invite your collaborators. If you've connected your project with Dropbox or Drive, your team members will be invited to edit.</p>
             <UserSearch select={this.selectFn} />
             <br />
-            {project.team.map((item)=><div style={{marginBottom: '15px'}}><TeamMember item={item} changePermissionsFn={this.changePermissionsFn} removeTeamMemberFn={this.removeTeamMemberFn}/></div>)}
+            {project.data.team.map((item)=><div style={{marginBottom: '15px'}}><TeamMember item={item} changePermissionsFn={this.changePermissionsFn} removeTeamMemberFn={this.removeTeamMemberFn}/></div>)}
             <br />
             <div className="layout-row layout-align-end">
               <Button className="primary">Update team</Button>
@@ -119,13 +124,13 @@ export const Component = React.createClass({
           <div className={classes.panel}>
             <h3>Project Type</h3>
             <p>Is this a public or private project? Change your project to public to open-source your work.</p>
-            <ProjectPermissionsRadio model={`${entityModel}.permissions.projectType`} />
+            <ProjectPermissionsRadio model={`${entityModel}.data.permissions.projectType`} />
           </div>
 
           <div className={classes.panel}>
             <h3>Delete Project</h3>
             <p>Once you delete a project, there is no going back. Please be certain.</p>
-            <Button className="warn" onClick={()=>ProjectsActions.deleteProject({projectId: project._id})}>Delete Project</Button>
+            <Button className="warn" onClick={()=>ProjectsActions.deleteProject({projectId: project.data._id})}>Delete Project</Button>
           </div>
 
         </div>
