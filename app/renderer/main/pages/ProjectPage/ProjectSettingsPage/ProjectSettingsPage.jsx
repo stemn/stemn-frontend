@@ -70,10 +70,9 @@ export const Component = React.createClass({
   linkRemote(){
     this.props.ProjectsActions.linkRemote({
       projectId: this.props.project.data._id,
-      provider: 'drive',
-      path_display: '',
-      path: '',
-      id: ''
+      provider: this.props.project.formModels.fileStore.remote.provider,
+      path: this.props.project.formModels.fileStore.remote.root.path,
+      id: this.props.project.formModels.fileStore.remote.root.fileId
     })
   },
   saveProject(){
@@ -86,8 +85,6 @@ export const Component = React.createClass({
     const PageStyles = {
       padding: '20px 40px'
     }
-
-    console.log(project);
 
     return (
       <div className={classes.container+' layout-row layout-align-center flex scroll-box'}>

@@ -32,6 +32,20 @@ const customStyles = {
   }
 };
 
+
+const Parent = React.createClass({
+  doSomething: function(value) {
+    console.log('doSomething called by child with value:', value);
+  },
+
+  render: function() {
+
+
+    return <div>{childrenWithProps}</div>
+  }
+});
+
+
 export const Component = React.createClass({
   getInitialState: function() {
     return { modalIsOpen: false };
@@ -51,10 +65,19 @@ export const Component = React.createClass({
 
   render: function() {
     const isOpen = this.props.modal ? this.props.modal.isOpen : false;
+
+    // Wrap the child elements with the open and close functions
+    const childrenWithProps = React.Children.map(this.props.children,
+     (child) => React.cloneElement(child, {
+       openModal: this.openModal,
+       closeModal: this.closeModal
+     })
+    );
+
     return (
       <div>
         <div onClick={this.openModal}>
-          {this.props.children[0]}
+          {childrenWithProps[0]}
         </div>
         <Modal
           isOpen={isOpen}
@@ -62,12 +85,14 @@ export const Component = React.createClass({
           onRequestClose={this.closeModal}
           style={customStyles}
           className={classes.modal}>
-          {this.props.children[1]}
+          {childrenWithProps[1]}
         </Modal>
       </div>
     );
   }
 });
+
+
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////
@@ -86,13 +111,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);
-
-
-//          <div className="modal-title">
-//            Title
-//          </div>
-//          <div className="modal-body">
-//          </div>
-//          <div className="modal-footer">
-//            <button onClick={this.closeModal}>close</button>
-//          </div>

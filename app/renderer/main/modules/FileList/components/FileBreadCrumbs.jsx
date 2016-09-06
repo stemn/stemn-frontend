@@ -11,8 +11,6 @@ export default React.createClass({
   render() {
     const {meta, clickFn} = this.props;
 
-    console.log(this.props);
-
     const displayCrumbs = () => {
       if(meta.parents && meta.parents.length > 0){
         let crumbs = meta.parents.map((parent, idx)=>{

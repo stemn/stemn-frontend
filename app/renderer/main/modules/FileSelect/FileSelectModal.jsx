@@ -78,23 +78,27 @@ export const Component = React.createClass({
     })
   },
 
-  select(){
-    console.log('select', this.props.fileSelect.selected);
+  submit(){
+    this.props.submitFn(this.props.fileSelect.selected);
+    this.props.closeModal();
   },
   cancel(){
-    console.log('cancel');
+    this.props.closeModal();
   },
   render() {
-    const {projectId, path, fileSelect, options} = this.props;
+    const {projectId, path, fileSelect, options, closeModal} = this.props;
+
+    const activePath = fileSelect && fileSelect.path ? fileSelect.path : '';
     return (
       <div>
-        <FileList projectId={projectId} path={fileSelect.path} singleClickFn={this.singleClickFn} doubleClickFn={this.doubleClickFn} crumbClickFn={this.crumbClickFn} selected={fileSelect.selected} options={options}/>
-        <div className="layout-row layout-align-start-center" style={{padding: '10px'}}>
+        <div className="modal-title">Select Folder</div>
+        <FileList projectId={projectId} path={activePath} singleClickFn={this.singleClickFn} doubleClickFn={this.doubleClickFn} crumbClickFn={this.crumbClickFn} selected={fileSelect.selected} options={options}/>
+        <div className="modal-footer layout-row layout-align-start-center">
           <div className="flex"></div>
           <Button style={{marginRight: '10px'}} onClick={this.cancel}>
             Cancel
           </Button>
-          <Button className="primary" onClick={this.select}>
+          <Button className="primary" onClick={this.submit}>
             Select Folder
           </Button>
         </div>

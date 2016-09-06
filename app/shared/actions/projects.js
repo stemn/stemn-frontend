@@ -88,14 +88,13 @@ export function removeTeamMember({projectId, userId}) {
   };
 }
 
-export function linkRemote({projectId, provider, path_display, path, id}) {
+export function linkRemote({projectId, provider, path, id}) {
   return {
     type: 'PROJECTS/LINK_REMOTE',
     payload: http({
       method: 'PUT',
       url: `http://localhost:3000/api/v1/remote/link/${projectId}/${provider}`,
       params: {
-        path_display : path_display,
         path         : path,
         id           : id
       }

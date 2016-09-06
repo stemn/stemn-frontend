@@ -55,8 +55,9 @@ function reducer(state, action) {
         }
       }, state);
     case 'PROJECTS/LINK_REMOTE_FULFILLED' :
+      console.log(action.payload.data);
       return u({
-        [action.cacheKey] : {
+        [action.meta.cacheKey] : {
           data: {
             remote: action.payload.data
           }
