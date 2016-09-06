@@ -28,7 +28,7 @@ export const Component = React.createClass({
   componentWillMount() {
     if(this.props.project){
       this.props.TasksActions.getTasks({
-        projectId: this.props.project._id
+        projectId: this.props.project.data._id
       })
     }
   },
@@ -36,17 +36,18 @@ export const Component = React.createClass({
   componentWillReceiveProps(nextProps) {
     if (nextProps.project && nextProps.project._id !== this.props.project._id) {
       this.props.TasksActions.getTasks({
-        projectId: nextProps.project._id
+        projectId: nextProps.project.data._id
       })
     }
   },
 
   render() {
+    console.log(this.props);
     const { tasks, project, TasksActions, entityModel } = this.props;
-    if(tasks && tasks.items){
+    if(tasks && tasks.structure){
       return (
         <div className="layout-row flex">
-          <TaskGrid project={project}></TaskGrid>
+          <TaskGrid project={project.data}></TaskGrid>
         </div>
       )
     }
@@ -65,7 +66,7 @@ function mapStateToProps({tasks, projects}, {params}) {
   const project = projects[params.stub];
   return {
     project: project,
-    tasks: tasks[params.stub],
+    tasks: tasks.projects[params.stub],
     entityModel: `projects.${params.stub}`
   };
 }

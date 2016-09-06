@@ -61,8 +61,8 @@ export const Component = React.createClass({
 
 function mapStateToProps({tasks}, {params, item, project}) {
   return {
-    task: tasks[project._id].items[item._id],
-    entityModel: `tasks[${project._id}].items[${item._id}]`
+    task: tasks.data[item._id],
+    entityModel: `tasks.data[${item._id}]`
   };
 }
 

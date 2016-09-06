@@ -51,16 +51,6 @@ export function getTasks({projectId}) {
               children: [{_id: 'T8'}, {_id: 'T9'}]
             }
           ],
-          groups: [{
-            _id: 'G1',
-            name: 'Requirements'
-          },{
-            _id: 'G2',
-            name: 'Development'
-          },{
-            _id: 'G3',
-            name: 'Design'
-          }],
           items: {
             T1: {
               _id: 'T1',

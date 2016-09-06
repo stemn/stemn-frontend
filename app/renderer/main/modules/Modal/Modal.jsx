@@ -32,20 +32,6 @@ const customStyles = {
   }
 };
 
-
-const Parent = React.createClass({
-  doSomething: function(value) {
-    console.log('doSomething called by child with value:', value);
-  },
-
-  render: function() {
-
-
-    return <div>{childrenWithProps}</div>
-  }
-});
-
-
 export const Component = React.createClass({
   getInitialState: function() {
     return { modalIsOpen: false };

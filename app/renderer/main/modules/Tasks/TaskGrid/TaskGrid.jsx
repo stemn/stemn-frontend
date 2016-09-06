@@ -15,8 +15,8 @@ import classes from './TaskGrid.css';
 function mapStateToProps({tasks}, {params, project}) {
   return {
     project: project,
-    tasks: tasks[project._id],
-    entityModel: `tasks.${project._id}`
+    tasks: tasks.projects[project._id],
+    entityModel: `tasks.projects.${project._id}`
   };
 }
 

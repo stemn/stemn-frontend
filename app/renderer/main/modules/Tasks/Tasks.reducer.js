@@ -112,16 +112,20 @@ const mainReducer = (state, action) => {
 
     case 'TASKS/NEW_GROUP':
       return u({
-        [action.meta.cacheKey] : {
-          structure: (groups)=>addItem(groups, action.payload.group),
-          newGroupString: ''
+        projects: {
+          [action.meta.cacheKey] : {
+            structure: (groups)=>addItem(groups, action.payload.group),
+            newGroupString: ''
+          }
         }
       }, state)
 
     case 'TASKS/DELETE_GROUP':
       return u({
-        [action.meta.cacheKey] : {
-          deleteTaskLoading: false,
+        projects: {
+          [action.meta.cacheKey] : {
+            deleteTaskLoading: false,
+          }
         }
       }, state)
 
@@ -139,8 +143,10 @@ const mainReducer = (state, action) => {
         return cloneItems;
       }
       return u({
-        [action.meta.cacheKey] : {
-          structure: moveTask,
+        projects: {
+          [action.meta.cacheKey] : {
+            structure: moveTask,
+          }
         }
       }, state)
 
@@ -153,19 +159,16 @@ const mainReducer = (state, action) => {
         return cloneItems;
       }
       return u({
-        [action.meta.cacheKey] : {
-          structure: moveGroup,
+        projects: {
+          [action.meta.cacheKey] : {
+            structure: moveGroup,
+          }
         }
       }, state)
 
     default:
       return state;
   }
-}
-
-function moveItem (array, fromIndex, toIndex) {
-  array.splice(toIndex, 0, array.splice(fromIndex, 1)[0] );
-  return array;
 }
 
 function addItem (keyItems, item) {
