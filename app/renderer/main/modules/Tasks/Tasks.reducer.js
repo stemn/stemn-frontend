@@ -4,7 +4,8 @@ import { modeled } from 'react-redux-form';
 import { groupTasks } from './Tasks.utils.js';
 
 const initialState = {
-
+  data: {},
+  projects: {}
 }
 
 const mainReducer = (state, action) => {
@@ -46,14 +47,17 @@ const mainReducer = (state, action) => {
         return cloneItems
       }
       return u({
-        [action.meta.cacheKey] : {
-          items: addTaskToItems,
-          structure: addTaskToStructure,
-          newTaskString: {
-            [action.payload.task.group] : ''
+        data : addTaskToItems,
+        projects : {
+          [action.meta.cacheKey] : {
+            structure: addTaskToStructure,
+            newTaskString: {
+              [action.payload.task.group] : ''
+            }
           }
         }
       }, state)
+
 
 
 //    case 'TASKS/GET_TASKS_PENDING':
@@ -78,10 +82,11 @@ const mainReducer = (state, action) => {
 
     case 'TASKS/GET_TASKS':
       return u({
-        [action.meta.cacheKey] : {
-          items : action.payload.response.data.items,
-          groups: action.payload.response.data.groups,
-          structure: action.payload.response.data.structure,
+        data: action.payload.response.data.items,
+        projects: {
+          [action.meta.cacheKey] : {
+            structure: action.payload.response.data.structure,
+          }
         }
       }, state)
 

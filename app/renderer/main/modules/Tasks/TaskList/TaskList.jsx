@@ -1,20 +1,18 @@
 import React from 'react';
 
-import {groupTasks} from '../Tasks.utils.js';
-import TaskListItem from '../TaskListItem/TaskListItem.jsx';
+import TaskListItem from './TaskListItem/TaskListItem.jsx';
 
 export default React.createClass({
   render() {
-    const { tasks, groups } = this.props;
-    const groupedTasks = groupTasks(groups, tasks);
+    const { structure } = this.props;
 
     return (
       <div className="flex">
-        {groups.map((group)=>{
+        {structure.map((group)=>{
           return (
-            <div>
-              <h3>{group}</h3>
-              {groupedTasks[group].map((item)=><TaskListItem key={item._id} item={item}></TaskListItem>)}
+            <div style={{marginBottom: '20px'}}>
+              <h3 className="text-mini-caps">{group.name}</h3>
+              {group.children.map((item)=><TaskListItem key={item._id} item={item}></TaskListItem>)}
             </div>
           )
         })}

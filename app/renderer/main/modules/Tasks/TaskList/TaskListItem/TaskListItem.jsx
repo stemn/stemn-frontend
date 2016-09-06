@@ -3,16 +3,19 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as TasksActions from './Tasks.actions.js';
+import * as TasksActions from '../../Tasks.actions.js';
 
 // Component Core
 import React from 'react';
+import moment from 'moment';
 
 // Styles
 import classNames from 'classnames';
+import classes from './TaskListItem.css';
 
 // Sub Components
-import TaskList from './TaskList/TaskList.jsx';
+import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
+import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx'
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -21,30 +24,25 @@ import TaskList from './TaskList/TaskList.jsx';
 
 
 export const Component = React.createClass({
-  componentWillMount() {
-    this.props.TasksActions.getTasks({
-      projectId: 'fakeprojectidhere'
-    })
-  },
-
   render() {
-    const structure = [
-      {
-        _id: 'G1',
-        name: 'Today',
-        children: [{_id: 'T1'}, {_id: 'T2'}, {_id: 'T3'}, {_id: 'T4'}]
-      },{
-        _id: 'G2',
-        name: 'Upcoming',
-        children: [{_id: 'T5'}, {_id:'T6'}, {_id: 'T7'}]
-      },{
-        _id: 'G3',
-        name: 'Other',
-        children: [{_id: 'T8'}, {_id: 'T9'}]
-      }
-    ]
+    const { item, task } = this.props;
+
+    if(!task){
+      return <div>Task Loading</div>
+    }
+
     return (
-      <TaskList structure={structure} />
+      <div className={classNames(classes.taskListItem, 'layout-row flex layout-align-start-center')}>
+        <Checkbox />
+        <div className="flex text-ellipsis">{task.title}</div>
+        <div className={classes.user + ' layout-row layout-align-start-center text ellipsis'}>
+          <UserAvatar picture={task.users[0].picture} size="25px"/>
+          <div style={{marginLeft: '10px'}}>{task.users[0].name}</div>
+        </div>
+        <div className={classes.date + ' text ellipsis'}>
+          {moment(task.due).fromNow()}
+        </div>
+      </div>
     )
   }
 });
@@ -55,8 +53,9 @@ export const Component = React.createClass({
 /////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps({ tasks }, {item}) {
+  console.log(tasks, item);
   return {
-    tasks: tasks
+    task: tasks.data[item._id],
   };
 }
 

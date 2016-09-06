@@ -28,6 +28,7 @@
     "electron-json-storage": "^2.0.0",
     "electron-positioner": "^3.0.0",
     "electron-squirrel-startup": "^1.0.0",
+    "ini": "^1.3.4",
     "lodash": "^4.13.1",
     "lodash.throttle": "^3.0.3",
     "moment": "^2.13.0",
@@ -69,6 +70,7 @@
     "redux-promise-middleware": "^3.3.2",
     "redux-thunk": "^2.0.1",
     "sortablejs": "^1.4.2",
+    "sql.js": "^0.3.2",
     "updeep": "^0.16.1"
   }
 }

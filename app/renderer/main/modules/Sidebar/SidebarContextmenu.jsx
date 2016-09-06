@@ -1,5 +1,9 @@
-import React, { Component } from 'react';
-import { ContextMenu, MenuItem, SubMenu, connect} from "react-contextmenu";
+import React from 'react';
+import { ContextMenu, MenuItem, SubMenu, connect as contextConnect} from "react-contextmenu";
+
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as SystemActions from 'app/shared/actions/system';
 
 import { shell } from 'electron';
 import os from 'os';
@@ -19,7 +23,7 @@ const Menu = React.createClass({
       shell.openExternal(`https://stemn.com/projects/${data.stub}/settings/team`);
     },
     openExplorer(e, data) {
-      shell.showItemInFolder(os.homedir())
+      this.props.SystemActions.openFileLocation({projectId: data._id, path: ''})
     },
     render() {
       return (
@@ -37,4 +41,16 @@ const Menu = React.createClass({
     }
 });
 
-export default connect(Menu);
+const ConnectedMenu = contextConnect(Menu);
+
+function mapStateToProps() {
+  return {};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    SystemActions : bindActionCreators(SystemActions, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConnectedMenu);

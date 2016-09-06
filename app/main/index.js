@@ -15,6 +15,9 @@ import squirrelStartup from 'electron-squirrel-startup';
 
 import mapWebsocketToRedux from './modules/websocket/mapWebsocketToRedux'
 
+import { getProviderPath } from '../shared/actions/system';
+
+
   //import reminder from './tasks/reminder';
 
 
@@ -104,6 +107,8 @@ if(!squirrelStartup){
 
     // init
     createMainWindow();
+    store.dispatch(getProviderPath());
+
 
     // auto-updating
     setTimeout(() => {

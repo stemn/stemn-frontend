@@ -59,7 +59,7 @@ export const Component = React.createClass({
 ///////////////////////////////// CONTAINER /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({tasks, projectSettings}, {params, item, project}) {
+function mapStateToProps({tasks}, {params, item, project}) {
   return {
     task: tasks[project._id].items[item._id],
     entityModel: `tasks[${project._id}].items[${item._id}]`
@@ -67,13 +67,7 @@ function mapStateToProps({tasks, projectSettings}, {params, item, project}) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    ProjectActions: bindActionCreators(ProjectActions, dispatch),
-  }
+  return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);
-
-
-
-//            model={track(`${entityModel}.items[].title`, { _id: this.props.item._id })}

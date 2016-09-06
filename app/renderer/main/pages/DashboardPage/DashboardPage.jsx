@@ -1,21 +1,30 @@
+// Container Core
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+// Container Actions
+
+// Component Core
 import React from 'react';
 import { Link } from 'react-router';
 import moment from 'moment';
-
-// Components
-import Header from 'app/renderer/main/modules/Header/Header.jsx'
-import {GoRepo} from 'react-icons/lib/go';
-import DragResize      from 'app/renderer/main/modules/DragResize/DragResize.jsx';
-import Calendar      from 'app/renderer/main/modules/Calendar/Calendar.jsx';
-import Tabs from 'app/renderer/main/components/Tabs/Tabs';
-
 
 // Styles
 import classNames from 'classnames';
 import classes from './DashboardPage.css'
 
+// Sub Components
+import Header       from 'app/renderer/main/modules/Header/Header.jsx'
+import DragResize   from 'app/renderer/main/modules/DragResize/DragResize.jsx';
+import Calendar     from 'app/renderer/main/modules/Calendar/Calendar.jsx';
+import Tabs         from 'app/renderer/main/components/Tabs/Tabs';
+import Tasks        from 'app/renderer/main/modules/Tasks/Tasks.jsx'
 
-export default React.createClass({
+/////////////////////////////////////////////////////////////////////////////
+///////////////////////////////// COMPONENT /////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+export const Component = React.createClass({
   getInitialState () {
     return {
       date: moment(),
@@ -35,17 +44,19 @@ export default React.createClass({
             </div>
             <br />
             <br />
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore exercitationem officiis sequi maiores, libero nulla accusamus quos dicta? Possimus quisquam nostrum illo expedita quas voluptate, quod vero. Quaerat, quasi, quas!
+            <Tasks/>
           </div>
           <DragResize side="left" width="450" widthRange={[0, 600]} className="layout-column">
             <div className={classes.sidebarRight + ' layout-column flex'}>
-              <Calendar
-                onNextMonth={() => this.setState({ date: this.state.date.clone().add(1, 'months') }) }
-                onPrevMonth={() => this.setState({ date: this.state.date.clone().subtract(1, 'months') }) }
-                date={this.state.date}
-                onPickDate={(date) => { this.setState({date: date }) }}
-                renderDay={(day) => day.format('D')}
-              />
+              <div style={{marginTop: '15px'}}>
+                <Calendar
+                  onNextMonth={() => this.setState({ date: this.state.date.clone().add(1, 'months') }) }
+                  onPrevMonth={() => this.setState({ date: this.state.date.clone().subtract(1, 'months') }) }
+                  date={this.state.date}
+                  onPickDate={(date) => { this.setState({date: date }) }}
+                  renderDay={(day) => day.format('D')}
+                />
+              </div>
             </div>
           </DragResize>
         </div>
@@ -53,3 +64,18 @@ export default React.createClass({
     );
   }
 });
+
+/////////////////////////////////////////////////////////////////////////////
+///////////////////////////////// CONTAINER /////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+function mapStateToProps() {
+  return {};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Component);
+

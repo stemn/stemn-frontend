@@ -1,13 +1,9 @@
-/* eslint-disable no-param-reassign */
-import {
-  CHECKING_FOR_UPDATE,
-  UPDATE_AVAILABLE,
-  UPDATE_DOWNLOADED,
-  UPDATE_ERROR,
-  UPDATE_NOT_AVAILABLE,
- } from '../actions/system';
-
 const initialState = {
+  providerPath: {
+    dropbox: null,
+    drive: null,
+    onedrive: null,
+  },
   checkingForUpdate: false,
   updateAvailable: false,
   updateDownloaded: false,
@@ -18,7 +14,19 @@ const initialState = {
 
 export default function system(state = initialState, action) {
   switch (action.type) {
-    case CHECKING_FOR_UPDATE: {
+    case 'SYSTEM/GET_PROVIDER_PATH_FULFILLED': {
+      console.log(action.payload);
+      return {
+        ...state,
+        providerPath: {
+          dropbox: action.payload.dropbox,
+          drive: action.payload.drive,
+          onedrive: action.payload.onedrive,
+        }
+      };
+    }
+
+    case 'SYSTEM/CHECKING_FOR_UPDATE': {
       return {
         ...state,
         ...initialState,
@@ -26,7 +34,7 @@ export default function system(state = initialState, action) {
       };
     }
 
-    case UPDATE_AVAILABLE: {
+    case 'SYSTEM/UPDATE_AVAILABLE': {
       return {
         ...state,
         ...initialState,
@@ -34,7 +42,7 @@ export default function system(state = initialState, action) {
       };
     }
 
-    case UPDATE_DOWNLOADED: {
+    case 'SYSTEM/UPDATE_DOWNLOADED': {
       const { releaseNotes, releaseName, releaseDate, updateURL } = action.payload;
       return {
         ...state,
@@ -49,7 +57,7 @@ export default function system(state = initialState, action) {
       };
     }
 
-    case UPDATE_ERROR: {
+    case 'SYSTEM/UPDATE_ERROR': {
       return {
         ...state,
         ...initialState,
@@ -57,7 +65,7 @@ export default function system(state = initialState, action) {
       };
     }
 
-    case UPDATE_NOT_AVAILABLE: {
+    case 'SYSTEM/UPDATE_NOT_AVAILABLE': {
       return {
         ...state,
         ...initialState,

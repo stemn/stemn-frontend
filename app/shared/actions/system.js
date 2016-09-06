@@ -1,26 +1,66 @@
-export const CHECKING_FOR_UPDATE = 'CHECKING_FOR_UPDATE';
-export const UPDATE_AVAILABLE = 'UPDATE_AVAILABLE';
-export const UPDATE_DOWNLOADED = 'UPDATE_DOWNLOADED';
-export const UPDATE_ERROR = 'UPDATE_ERROR';
-export const UPDATE_NOT_AVAILABLE = 'UPDATE_NOT_AVAILABLE';
-export const SHOW_MENUBAR_WINDOW = 'SHOW_MENUBAR_WINDOW';
+import providerPathLookup from '../../main/modules/files/providerPathLookup.js';
+import Promise from 'bluebird';
+import { shell } from 'electron';
 
+
+export function getProviderPath() {
+  return {
+    type: 'SYSTEM/GET_PROVIDER_PATH',
+    payload: Promise.map(['dropbox', 'drive', 'onedrive'], providerPathLookup).then(response => {
+      return {
+        dropbox: response[0],
+        drive: response[1],
+        onedrive: response[2],
+      }
+    })
+  };
+}
+
+export function openFileLocation({path}) {
+  return (dispatch, getState) => {
+    const rootPath = getState().system.providerPath['drive'];
+    shell.showItemInFolder(rootPath)
+    dispatch({
+      type: 'SYSTEM/OPEN_FILE_LOCATION',
+      payload: {}
+    })
+//  return {
+//    type: 'SYSTEM/OPEN_FILE',
+//  };
+  }
+}
+
+export function openFile({path}) {
+  return (dispatch, getState) => {
+    const rootPath = getState().system.providerPath['drive'];
+    shell.openFile(rootPath)
+    dispatch({
+      type: 'SYSTEM/OPEN_FILE',
+      payload: {}
+    })
+//  return {
+//    type: 'SYSTEM/OPEN_FILE',
+//  };
+  }
+}
 
 export function checkingForUpdate() {
   return {
-    type: CHECKING_FOR_UPDATE,
+    type: 'SYSTEM/CHECKING_FOR_UPDATE',
+    payload: {}
   };
 }
 
 export function updateAvailable() {
   return {
-    type: UPDATE_AVAILABLE,
+    type: 'SYSTEM/UPDATE_AVAILABLE',
+    payload: {}
   };
 }
 
 export function updateDownloaded(releaseNotes, releaseName, releaseDate, updateURL) {
   return {
-    type: UPDATE_DOWNLOADED,
+    type: 'SYSTEM/UPDATE_DOWNLOADED',
     payload: {
       releaseNotes,
       releaseName,
@@ -32,7 +72,7 @@ export function updateDownloaded(releaseNotes, releaseName, releaseDate, updateU
 
 export function updateError(error) {
   return {
-    type: UPDATE_ERROR,
+    type: 'SYSTEM/UPDATE_ERROR',
     error: true,
     payload: error.message,
   };
@@ -40,13 +80,7 @@ export function updateError(error) {
 
 export function updateNotAvailable() {
   return {
-    type: UPDATE_NOT_AVAILABLE,
-  };
-}
-
-export function showMenubarWindow(path = '/') {
-  return {
-    type: SHOW_MENUBAR_WINDOW,
-    payload: path,
+    type: 'SYSTEM/UPDATE_NOT_AVAILABLE',
+    payload: {}
   };
 }
