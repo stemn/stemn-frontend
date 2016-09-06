@@ -1,11 +1,6 @@
+import i from 'icepick';
 
-import {
-  SELECTED_FILE_CHANGE
-} from '../actions/changes';
-
-import u from 'updeep';
 import { formReducer, modeled } from 'react-redux-form';
-import {assignAll} from '../helpers/reducerUtils.js'
 
 const initialState = {
 
@@ -13,36 +8,49 @@ const initialState = {
 
 const mainReducer = (state, action) => {
   switch (action.type) {
-    case SELECTED_FILE_CHANGE:
-      return u({
+    case 'CHANGES/SELECTED_FILE_CHANGE':
+      return i.merge(state, {
         [action.payload.projectId] : {
           selected: action.payload.selected,
         }
-      }, state)
+      })
     case 'CHANGES/TOGGLE_ALL_CHANGED_FILES':
-      const assignAll = (field) => field.map((item) => u({selected: action.payload.value }, item))
-      return u({
+      const allToggled = state[action.payload.projectId].data.map((item) => i.merge(item, {selected: action.payload.value }) );
+      return i.merge(state, {
         [action.payload.projectId] : {
-          data : assignAll
+          data : allToggled
         }
-      }, state)
+      })
     case 'CHANGES/FETCH_CHANGES_FULFILLED':
-      return u({
+      return i.merge(state, {
         [action.payload.config.meta.projectId] : {
           data : action.payload.data,
           selected: {},
         }
-      }, state)
+      })
     case 'CHANGES/COMMIT_DESCRIPTION_CHANGE':
-      return u({
+      return i.merge(state, {
         [action.payload.projectId] : {
           description : action.payload.value
         }
-      }, state)
+      })
+    case 'CHANGES/COMMIT_FULFILLED':
+      const idsToRemove = action.payload.data.revisions.map((item)=>item._id);
+      const remainingRevisions = state[action.meta.cacheKey].data.filter((item)=>!idsToRemove.includes(item._id));
+
+      return i.merge(state, {
+        [action.meta.cacheKey] : {
+          summary: '',
+          description : '',
+          data: remainingRevisions
+        }
+      })
     default:
       return state;
   }
 }
+
+
 
 export default function (state = initialState, action) {
   return modeled(mainReducer, 'changes')(state, action)

@@ -1,11 +1,10 @@
 import { actions } from 'react-redux-form';
-
-export const SELECTED_FILE_CHANGE = 'CHANGES/SELECTED_FILE_CHANGE'
-export const TOGGLE_ALL_CHANGED_FILES = ''
+import { toastr } from 'react-redux-toastr'
+import http from 'axios';
 
 export function selectedFileChange({projectId, selected}) {
   return {
-      type: SELECTED_FILE_CHANGE,
+      type: 'CHANGES/SELECTED_FILE_CHANGE',
       payload: {
         projectId,
         selected
@@ -63,17 +62,24 @@ export function pullChanges({projectId}) {
 }
 
 export function commit({projectId, revisions, summary, description}) {
-  return {
-    type: 'CHANGES/COMMIT',
-    http: true,
-    payload: {
-      method: 'POST',
-      url: `http://localhost:3000/api/v1/sync/commit/${projectId}`,
-      data: {
-        revisions,
-        summary,
-        description,
+  return (dispatch) => {
+    dispatch({
+      type: 'CHANGES/COMMIT',
+      payload: http({
+        method: 'POST',
+        url: `http://localhost:3000/api/v1/sync/commit/${projectId}`,
+        data: {
+          revisions,
+          summary,
+          description,
+        }
+      }).then((response)=>{
+        toastr.success(`${revisions.length} files commited.`)
+        return response
+      }),
+      meta: {
+        cacheKey: projectId
       }
-    }
-  };
+    })
+  }
 }
