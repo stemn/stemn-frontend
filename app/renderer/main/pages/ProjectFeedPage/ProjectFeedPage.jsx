@@ -21,7 +21,6 @@ import SidebarTimeline   from 'app/renderer/main/containers/SidebarTimeline';
 import FileCompare       from 'app/renderer/main/modules/FileCompare/FileCompare.jsx';
 import ContentSidebar    from 'app/renderer/main/components/ContentSidebar';
 import TogglePanel       from 'app/renderer/main/components/Panels/TogglePanel/TogglePanel.jsx';
-import CompareFiles      from 'app/renderer/main/components/CompareFiles/CompareFiles';
 import PreviewFile       from 'app/renderer/main/containers/PreviewFile.js';
 import DragResize        from 'app/renderer/main/modules/DragResize/DragResize.jsx';
 
@@ -31,24 +30,24 @@ import DragResize        from 'app/renderer/main/modules/DragResize/DragResize.j
 ///////////////////////////////// COMPONENT /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
+const onMount = (nextProps, prevProps) => {
+  if(nextProps.project && nextProps.project.data && nextProps.project.data.remote.connected){
+    if(!prevProps || nextProps.project.data._id !== prevProps.project.data._id){
+      nextProps.TimelineActions.fetchTimeline({stub: nextProps.project.data._id})
+    }
+  }
+}
+
 export const Component = React.createClass({
 
-  componentWillMount() {
-    if(this.props.project && this.props.project.remote.connected){
-      this.props.TimelineActions.fetchTimeline({stub: this.props.project._id})
-    }
-  },
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.project._id !== this.props.project._id && nextProps.project.remote.connected) {
-      this.props.TimelineActions.fetchTimeline({stub: nextProps.project._id})
-    }
-  },
+  // Mounting
+  componentWillMount() { onMount(this.props) },
+  componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
 
   render(){
     const { timeline, project } = this.props;
     const filePrevious = timeline && timeline.selected.data && timeline.selected.data.previousRevisionId ? u( {data: {revisionId : timeline.selected.data.previousRevisionId}}, timeline.selected) : null;
-    const baseLink = `project/${project ? project._id : ''}`
+    const baseLink = `project/${project && project.data ? project.data._id : ''}`
 
 
     const getDetailSection = () => {
@@ -72,10 +71,7 @@ export const Component = React.createClass({
         }
         else{
           return(
-            <FileCompare project={project} file1={timeline.selected.data} file2={filePrevious ? filePrevious.data : null}>
-              {filePrevious ? <PreviewFile project={project} file={filePrevious.data} /> : ''}
-              <PreviewFile project={project} file={timeline.selected.data} />
-            </FileCompare>
+            <FileCompare project={project.data} file1={timeline.selected.data} file2={filePrevious ? filePrevious.data : null}></FileCompare>
           )
         }
       }
@@ -98,10 +94,7 @@ export const Component = React.createClass({
                 <div>{file.data.size}</div>
               </div>
               <DragResize side="bottom" height="500" heightRange={[200, 1000]} className="layout-column flex">
-                <FileCompare project={project} file1={file.data} file2={filePrevious ? filePrevious.data : null}>
-                  {filePrevious ? <PreviewFile project={project} file={filePrevious.data} /> : ''}
-                  <PreviewFile project={project} file={file.data} />
-                </FileCompare>
+                <FileCompare project={project.data} file1={file.data} file2={filePrevious ? filePrevious.data : null}></FileCompare>
               </DragResize>
             </TogglePanel>
           )
@@ -109,14 +102,14 @@ export const Component = React.createClass({
       }
     }
 
-    if(project.remote.connected){
+    if(project.data.remote.connected){
       return (
         <div className="layout-column flex rel-box">
-          <Timeline project={this.props.project} />
+          <Timeline project={this.props.project.data} />
           <div className="layout-row flex">
             <div className="layout-column">
               <ContentSidebar className="flex">
-                <SidebarTimeline project={this.props.project}/>
+                <SidebarTimeline project={this.props.project.data}/>
               </ContentSidebar>
             </div>
             <div className="layout-column flex">
