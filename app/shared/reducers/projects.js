@@ -8,11 +8,11 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case 'PROJECTS/GET_PROJECT_FULFILLED' :
-      return {...state,
+      return u({
         [action.payload.data._id] : {
-          data: action.payload.data
+          data : action.payload.data
         }
-      }
+      }, state);
     case 'PROJECTS/ADD_TEAM_MEMBER' :
       const modifiedUser = Object.assign({}, action.payload.user, {permissions: {role: 'admin'}})
       const addTeamMember = (team) => { return [].concat(team, [modifiedUser]); }

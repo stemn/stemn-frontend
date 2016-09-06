@@ -3,6 +3,7 @@ import { push } from 'react-router-redux'
 
 export const GET_PROJECT = 'PROJECTS/GET_PROJECT';
 
+
 export function getProject({projectId}) {
   return {
     type: GET_PROJECT,

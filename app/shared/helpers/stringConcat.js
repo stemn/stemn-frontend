@@ -30,5 +30,5 @@ function closest (num, arr) {
 }
 
 function getWordBreaks (string){
-  return string.map(letter => [' ', '/', '-'].incudes(letter))
+  return string.split('').map(letter => [' ', '/', '-'].includes(letter))
 }

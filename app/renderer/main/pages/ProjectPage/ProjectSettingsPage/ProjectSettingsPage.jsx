@@ -31,7 +31,21 @@ import Button from 'app/renderer/main/components/Buttons/Button/Button'
 ///////////////////////////////// COMPONENT /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
+const onMount = (nextProps, prevProps) => {
+  if(nextProps.project && nextProps.project.data){
+    if(!prevProps || nextProps.project.data._id !== prevProps.project.data._id){
+      // Init the filestore form model
+      nextProps.dispatch(actions.load(`${nextProps.entityModel}.formModels.fileStore.remote`, nextProps.project.data.remote))
+    }
+  }
+}
+
 export const Component = React.createClass({
+
+  // Mounting
+  componentWillMount() { onMount(this.props) },
+  componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
+
   selectFn(selection){
     if(!this.props.project.data.team.find((item)=>item._id == selection._id)){
       this.props.ProjectsActions.addTeamMember({
@@ -73,6 +87,8 @@ export const Component = React.createClass({
       padding: '20px 40px'
     }
 
+    console.log(project);
+
     return (
       <div className={classes.container+' layout-row layout-align-center flex scroll-box'}>
         <div style={{maxWidth: '600px'}}>
@@ -96,11 +112,16 @@ export const Component = React.createClass({
           <div className={classes.panel}>
             <h3>File Store Settings</h3>
             <p>Connect your Dropbox or Drive to sync all files and changes. Only one Google Drive or one Dropbox can be connected to a project.</p>
-            <ProjectLinkRemote model={`${entityModel}.data.remote.provider`} value={project.data.remote.provider}/>
+            <ProjectLinkRemote model={`${entityModel}.formModels.fileStore.remote.provider`} value={project.formModels.fileStore.remote.provider}/>
             <br />
-            { project.data.remote.provider == 'dropbox' || project.data.remote.provider == 'drive'
+            { project.formModels.fileStore.remote.provider == 'dropbox' || project.formModels.fileStore.remote.provider == 'drive'
             ? <div>
-                <FileSelectInput project={project.data} />
+                <FileSelectInput
+                  projectId={project.data._id}
+                  provider={project.formModels.fileStore.remote.provider}
+                  model={`${entityModel}.formModels.fileStore.remote.root`}
+                  value={project.formModels.fileStore.remote.root}
+                />
               </div>
             : ''}
             <br />
