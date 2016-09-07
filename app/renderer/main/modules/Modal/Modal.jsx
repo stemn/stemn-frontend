@@ -51,10 +51,6 @@ export const Component = React.createClass({
     );
 
     const customStyles = {
-      overlay : {
-        backgroundColor : 'rgba(0, 0, 0, 0.5)',
-        zIndex          : 10
-      },
       content : {
         width : this.props.width || '600px',
       }
@@ -70,7 +66,8 @@ export const Component = React.createClass({
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal}
           style={customStyles}
-          className={classes.modal}>
+          className={classes.modal}
+          overlayClassName={classes.overlay+ ' layout-column layout-align-center-center'}>
           {childrenWithProps[1]}
         </Modal>
       </div>
