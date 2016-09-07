@@ -67,6 +67,12 @@ export const Component = React.createClass({
                 <UserSelect model={`${entityModel}.asignee`} value={task.asignee}/>
               </div>
             </div>
+            <div className={classes.well}>
+              <div className="text-mini-caps" style={{padding: '15px 15px 0'}}>Due Date</div>
+              <div style={{padding: '15px'}}>
+                <UserSelect model={`${entityModel}.asignee`} value={task.asignee}/>
+              </div>
+            </div>
           </div>
         </div>
       </div>

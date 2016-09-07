@@ -31,6 +31,48 @@ const onMount = (nextProps, prevProps) => {
   }
 }
 
+
+const taskEvents = [{
+  event: 'commit',
+  timestamp: 1473254921922,
+  user: {
+    name: 'David Revay',
+    picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg',
+  }
+},{
+  event: 'open',
+  timestamp: 1473254921922,
+  user: {
+    name: 'David Revay',
+    picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg',
+  }
+},{
+  event: 'closed',
+  timestamp: 1473254921922,
+  user: {
+    name: 'David Revay',
+    picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg',
+  }
+},{
+  event: 'changeLabels',
+  timestamp: 1473254921922,
+  added: ['gooba', 'tooba'],
+  user: {
+    name: 'David Revay',
+    picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg',
+  }
+},{
+  event: 'changeLabels',
+  timestamp: 1473254921922,
+  added: ['testy', 'boon'],
+  removed: ['gooba'],
+  user: {
+    name: 'David Revay',
+    picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg',
+  }
+}]
+
+
 export const Component = React.createClass({
 
   // Mounting
@@ -46,16 +88,13 @@ export const Component = React.createClass({
 
     return (
       <div>
-        <TaskTimelineWrapper>
-          <TaskTimelineItem />
-        </TaskTimelineWrapper>
-        <TaskTimelineWrapper>
-          <TaskTimelineItem />
-        </TaskTimelineWrapper>
+        {taskEvents.map((item, idx) =>
+          <TaskTimelineWrapper key={idx}>
+            <TaskTimelineItem item={item} />
+          </TaskTimelineWrapper>
+        )}
         <Comment item={{_id: '563ace2d5a5fa4ae06de50dd'}}></Comment>
-        <TaskTimelineWrapper>
-          <TaskTimelineItem />
-        </TaskTimelineWrapper>
+        <br/>
         <Comment item={{_id: '563aaea6142ffe154a28affe'}}></Comment>
         <br/>
         <Comment item={{_id: '55ed0f2c9adb9dfe12d1b7b9'}}></Comment>
@@ -63,9 +102,7 @@ export const Component = React.createClass({
         <Comment item={{_id: '5744cef1018557c35098967b'}}></Comment>
         <br/>
         <Comment item={{_id: '57486b3706ef7c0c37d0a706'}}></Comment>
-        <TaskTimelineWrapper>
-          <TaskTimelineItem />
-        </TaskTimelineWrapper>
+        <br/>
       </div>
     )
   }
