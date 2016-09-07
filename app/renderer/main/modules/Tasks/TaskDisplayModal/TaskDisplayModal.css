@@ -1,0 +1,10 @@
+@value primary, border1, bg1 from "app/renderer/assets/css/themes/standard.css";
+
+.taskDisplayModal{
+  padding: 30px;
+}
+
+.well{
+  margin-bottom: 15px;
+  border: 1px solid border1;
+}

@@ -1,0 +1,24 @@
+@value primary, border1, bg1 from "app/renderer/assets/css/themes/standard.css";
+
+.comment{
+
+}
+.commentAvatar{
+  margin-right: 10px
+}
+.commentBody{
+  border: 1px solid border1;
+}
+.commentHeader{
+  background: bg1;
+  border-bottom: 1px solid border1;
+  padding: 10px;
+}
+.commentContent{
+  padding: 10px;
+
+}
+.commentFooter{
+  padding: 10px;
+  border-top: 1px solid border1;
+}

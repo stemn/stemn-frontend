@@ -16,7 +16,7 @@ export default class extends React.Component{
           <label className="layout-row layout-align-start-center">
             <input type="checkbox" value={this.props.value} />
             <div className="layout-row layout-align-start-center flex">
-              <div className="flex">{this.props.children}</div>
+              <div className={classNames('flex', this.props.className)}>{this.props.children}</div>
               <MdDone size="16"/>
             </div>
           </label>

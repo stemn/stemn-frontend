@@ -74,7 +74,7 @@ export function commit({projectId, revisions, summary, description}) {
           description,
         }
       }).then((response)=>{
-        toastr.success(`${revisions.length} files commited.`)
+        toastr.error(`${revisions.length} files commited.`)
         return response
       }),
       meta: {

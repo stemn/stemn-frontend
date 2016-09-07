@@ -23,6 +23,7 @@ import fileSelect from '../../renderer/main/modules/FileSelect/FileSelect.reduce
 import modals from '../../renderer/main/modules/Modal/Modal.reducer.js';
 import upload from '../../renderer/main/modules/Upload/Upload.reducer.js';
 import tasks from '../../renderer/main/modules/Tasks/Tasks.reducer.js';
+import comments from '../../renderer/main/modules/Comments/Comments.reducer.js';
 
 
 export default function getRootReducer(scope = 'main') {
@@ -46,6 +47,7 @@ export default function getRootReducer(scope = 'main') {
     users,
     upload,
     tasks,
+    comments,
     toastr: toastrReducer
   };
 

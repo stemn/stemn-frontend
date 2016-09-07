@@ -222,6 +222,7 @@
 
 :global(.Select--multi .Select-multi-value-wrapper) {
   display: inline-block;
+  height: 34px;
 }
 
 :global(.Select .Select-aria-only) {
@@ -311,7 +312,9 @@
 }
 
 :global(.Select--multi .Select-value) {
-  background-color: #ebf5ff;
+  display: inline-block;
+  border: 1px solid border1;
+  margin: 6px 0 3px 6px;
 }
 
 :global(.Select--multi .Select-value-icon),
@@ -321,10 +324,9 @@
 }
 
 :global(.Select--multi .Select-value-label) {
-  border-bottom-right-radius: 2px;
-  border-top-right-radius: 2px;
   cursor: default;
   padding: 2px 5px;
+  font-size: 10px;
 }
 
 
@@ -340,18 +342,17 @@
 
 :global(.Select--multi .Select-value-icon) {
   cursor: pointer;
-  border-bottom-left-radius: 2px;
-  border-top-left-radius: 2px;
-  border-right: 1px solid #c2e0ff;
+  border-right: 1px solid border1;
+  padding: 3px;
 }
 
 :global(.Select--multi .Select-value-icon:hover),
 :global(.Select--multi .Select-value-icon:focus) {
-  background-color: #d8eafd;
+  background-color: bg1;
 }
 
 :global(.Select--multi .Select-value-icon:active) {
-  background-color: #c2e0ff;
+  background-color: bg1;
 }
 
 :global(.Select--multi.is-disabled .Select-value) {

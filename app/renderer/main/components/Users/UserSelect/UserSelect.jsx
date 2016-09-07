@@ -10,15 +10,15 @@ import classNames from 'classnames';
 
 const Component = React.createClass({
   onChangeFn(val){
-    this.props.dispatch(actions.change(this.props.model, val.value))
+    console.log(val);
+    this.props.dispatch(actions.change(this.props.model, val))
   },
   render(){
     const {model, value, dispatch} = this.props
 
     var options = [
-      { value: 'dropbox', label: 'Dropbox' },
-      { value: 'drive', label: 'Drive' },
-      { value: 'none', label: 'None' }
+      { value: 'David Revay', label: 'David Revay' },
+      { value: 'Jackson Delahunt', label: 'Jackson Delahunt' },
     ];
 
     return (
@@ -29,6 +29,7 @@ const Component = React.createClass({
           options={options}
           onChange={this.onChangeFn}
           clearable={false}
+          multi={true}
         />
       </div>
     );

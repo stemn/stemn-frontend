@@ -18,6 +18,10 @@ import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/
 import TaskList       from 'app/renderer/main/modules/Tasks/TaskList/TaskList.jsx'
 import TaskGrid       from 'app/renderer/main/modules/Tasks/TaskGrid/TaskGrid.jsx'
 
+import TaskDisplayModal from 'app/renderer/main/modules/Tasks/TaskDisplayModal/TaskDisplayModal.jsx'
+import Modal from 'app/renderer/main/modules/Modal/Modal.jsx'
+
+
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -48,6 +52,14 @@ export const Component = React.createClass({
       return (
         <div className="layout-row flex">
           <TaskGrid project={project.data}></TaskGrid>
+
+          <Modal modalId="TaskDisplay" width="900px">
+            <button>POP IT BABY</button>
+            <TaskDisplayModal
+              item={{_id: 'T4'}}
+            />
+          </Modal>
+
         </div>
       )
     }

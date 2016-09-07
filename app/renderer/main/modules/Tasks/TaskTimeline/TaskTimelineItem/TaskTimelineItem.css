@@ -1,0 +1,16 @@
+@value primary, border1, bg1 from "app/renderer/assets/css/themes/standard.css";
+
+.item{
+  border-left: 1px solid border1;
+  padding: 15px 0;
+  margin-left: 80px;
+}
+.marker{
+  width: 14px;
+  height: 14px;
+  border: 1px solid border1;
+  border-radius: 50%;
+  margin-left: -7px;
+  margin-right: 20px;
+  background: white;
+}

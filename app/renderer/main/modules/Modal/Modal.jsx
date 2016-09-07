@@ -60,6 +60,16 @@ export const Component = React.createClass({
      })
     );
 
+    const customStyles = {
+      overlay : {
+        backgroundColor : 'rgba(255, 255, 255, 0.8)',
+        zIndex          : 10
+      },
+      content : {
+        width : this.props.width || '600px',
+      }
+    };
+
     return (
       <div>
         <div onClick={this.openModal}>
