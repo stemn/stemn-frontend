@@ -49,10 +49,10 @@ export const Component = React.createClass({
     return (
       <div className={classNames(classes.taskDisplayModal)}>
         <div className="text-title-4">{task.title}</div>
-        <div style={{padding: '10px 0 20px'}}>Opened {moment(task.due).fromNow()} by <a className="link-primary">{task.users[0].name}</a></div>
+        <div className="text-grey-3" style={{padding: '10px 0 20px'}}>Opened {moment(task.due).fromNow()} <b className="text-interpunct"></b> By <a className="link-primary">{task.users[0].name}</a> <b className="text-interpunct"></b> 4 Comments</div>
         <div className="layout-row">
           <div className="flex-70" style={{paddingRight: '15px'}}>
-            <div className="scroll-box" style={{maxHeight: '500px', paddingRight: '15px'}}>
+            <div className="scroll-box" style={{maxHeight: '500px', paddingRight: '15px', borderTop: '1px solid rgba(0, 0, 0, 0.1)', borderBottom: '1px solid rgba(0, 0, 0, 0.1)'}}>
               <TaskTimeline item={item} />
             </div>
           </div>

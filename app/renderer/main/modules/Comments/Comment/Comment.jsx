@@ -44,17 +44,17 @@ export const Component = React.createClass({
     return (
       <div className={classes.comment + ' layout-row'}>
         <div className={classes.commentAvatar}>
-          <UserAvatar picture={comment.data.owner.picture} />
+          <UserAvatar picture={comment.data.owner.picture} shape="square" />
         </div>
         <div className={classes.commentBody + ' flex'}>
           <div className={classes.commentHeader}>
-            {comment.data.owner.name} · {moment(comment.data.timestamp).fromNow()}
+            {comment.data.owner.name}<span className={classes.date}> <b className="text-interpunct"></b> {moment(comment.data.timestamp).fromNow()} </span>
           </div>
           <div className={classes.commentContent}>
            {comment.data.blurb}
           </div>
           <div className={classes.commentFooter}>
-           <a className="link-primary">Delete</a> · <a className="link-primary">Edit</a>
+           <a className="link-primary">Delete</a> <b className="text-interpunct text-grey-3"></b> <a className="link-primary">Edit</a>
           </div>
         </div>
       </div>

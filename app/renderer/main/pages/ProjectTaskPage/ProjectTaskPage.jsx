@@ -53,7 +53,7 @@ export const Component = React.createClass({
         <div className="layout-row flex">
           <TaskGrid project={project.data}></TaskGrid>
 
-          <Modal modalId="TaskDisplay" width="900px">
+          <Modal modalId="TaskDisplay" width="1000px">
             <button>POP IT BABY</button>
             <TaskDisplayModal
               item={{_id: 'T4'}}

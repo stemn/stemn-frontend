@@ -1,4 +1,4 @@
-@value primary, border1, bg1 from "app/renderer/assets/css/themes/standard.css";
+@value primary, border1, bg1, grey-3 from "app/renderer/assets/css/themes/standard.css";
 
 .comment{
 
@@ -8,17 +8,25 @@
 }
 .commentBody{
   border: 1px solid border1;
+  line-height: 1.5em;
 }
 .commentHeader{
   background: bg1;
   border-bottom: 1px solid border1;
-  padding: 10px;
+  padding: 7px 10px;
 }
+.date{
+  font-size: 11px;
+  color: grey-3;
+}
+
+
 .commentContent{
   padding: 10px;
 
 }
 .commentFooter{
-  padding: 10px;
-  border-top: 1px solid border1;
+/*  border-top: 1px solid border1;*/
+  padding: 6px 10px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.3);
 }

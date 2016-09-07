@@ -15,6 +15,7 @@ import classes from './TaskTimeline.css';
 
 // Sub Components
 import Comment from 'app/renderer/main/modules/Comments/Comment/Comment.jsx';
+import TaskTimelineWrapper from './TaskTimelineWrapper/TaskTimelineWrapper.jsx';
 import TaskTimelineItem from './TaskTimelineItem/TaskTimelineItem.jsx';
 
 
@@ -45,10 +46,16 @@ export const Component = React.createClass({
 
     return (
       <div>
-        <TaskTimelineItem>Nisi est repudiandae, deleniti totam odio soluta beatae aut.</TaskTimelineItem>
-        <TaskTimelineItem>Nisi est repudiandae, deleniti totam odio soluta beatae aut.</TaskTimelineItem>
+        <TaskTimelineWrapper>
+          <TaskTimelineItem />
+        </TaskTimelineWrapper>
+        <TaskTimelineWrapper>
+          <TaskTimelineItem />
+        </TaskTimelineWrapper>
         <Comment item={{_id: '563ace2d5a5fa4ae06de50dd'}}></Comment>
-        <TaskTimelineItem>Nisi est repudiandae, deleniti totam odio soluta beatae aut.</TaskTimelineItem>
+        <TaskTimelineWrapper>
+          <TaskTimelineItem />
+        </TaskTimelineWrapper>
         <Comment item={{_id: '563aaea6142ffe154a28affe'}}></Comment>
         <br/>
         <Comment item={{_id: '55ed0f2c9adb9dfe12d1b7b9'}}></Comment>
@@ -56,7 +63,9 @@ export const Component = React.createClass({
         <Comment item={{_id: '5744cef1018557c35098967b'}}></Comment>
         <br/>
         <Comment item={{_id: '57486b3706ef7c0c37d0a706'}}></Comment>
-        <TaskTimelineItem>Nisi est repudiandae, deleniti totam odio soluta beatae aut.</TaskTimelineItem>
+        <TaskTimelineWrapper>
+          <TaskTimelineItem />
+        </TaskTimelineWrapper>
       </div>
     )
   }

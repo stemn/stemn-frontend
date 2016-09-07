@@ -6,7 +6,7 @@ export default React.createClass({
   default: '/assets/images/default/user-1.png',
   render() {
     const styles = {
-      borderRadius: '50%',
+      borderRadius: this.props.shape == 'square' ? '3px' : '50%',
       width: this.props.size || '30px',
       height: this.props.size || '30px'
     };

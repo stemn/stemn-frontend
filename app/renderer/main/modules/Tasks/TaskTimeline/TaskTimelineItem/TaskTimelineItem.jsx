@@ -5,15 +5,16 @@ import React from 'react';
 import classNames from 'classnames';
 import classes from './TaskTimelineItem.css';
 
+import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx'
 
 export default React.createClass({
   render() {
     return (
-      <div className={classes.item}>
-        <div className="layout-row layout-align-start-center">
-          <div className={classes.marker}></div>
-          <div className="layout-row layout-align-start-center">{this.props.children}</div>
+      <div className="layout-row layout-align-start-center flex">
+        <div className={classes.avatar}>
+          <UserAvatar size="25" shape="square"/>
         </div>
+        <span><b>David Revay</b>&nbsp;added the the label: [gooba]</span>
       </div>
     )
   }

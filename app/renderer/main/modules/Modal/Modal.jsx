@@ -22,16 +22,6 @@ import {MdMenu} from 'react-icons/lib/md';
 ///////////////////////////////// COMPONENT /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-const customStyles = {
-  overlay : {
-    backgroundColor : 'rgba(255, 255, 255, 0.8)',
-    zIndex          : 10
-  },
-  content : {
-    width : '600px',
-  }
-};
-
 export const Component = React.createClass({
   getInitialState: function() {
     return { modalIsOpen: false };
@@ -62,7 +52,7 @@ export const Component = React.createClass({
 
     const customStyles = {
       overlay : {
-        backgroundColor : 'rgba(255, 255, 255, 0.8)',
+        backgroundColor : 'rgba(0, 0, 0, 0.5)',
         zIndex          : 10
       },
       content : {
