@@ -9,7 +9,11 @@ export default class Calendar extends Component {
 
   static propTypes = {
     weekOffset: PropTypes.number.isRequired,
-    date: PropTypes.object.isRequired,
+    type: PropTypes.string, // 'datepicker'
+
+    selectedDate: PropTypes.object.isRequired,
+    viewDate: PropTypes.object.isRequired,
+
     renderDay: PropTypes.func,
     onNextMonth: PropTypes.func.isRequired,
     onPrevMonth: PropTypes.func.isRequired,
@@ -24,11 +28,11 @@ export default class Calendar extends Component {
 
   render() {
     const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-    const { date, weekOffset, renderDay, onNextMonth, onPrevMonth, onPickDate } = this.props;
+    const { selectedDate, viewDate, type, weekOffset, renderDay, onNextMonth, onPrevMonth, onPickDate } = this.props;
 
-    const calendarObject = createDateObjects(date, weekOffset);
+    const calendarObject = createDateObjects(viewDate, weekOffset);
     calendarObject.forEach( item => {
-      if(item.day.format("YYYY-MM-DD") == date.format("YYYY-MM-DD")){
+      if(item.day.format("YYYY-MM-DD") == selectedDate.format("YYYY-MM-DD")){
         item.classNames = item.classNames ? item.classNames + ' selected' : 'selected';
       }
       if(item.day.format("YYYY-MM-DD") == moment().format("YYYY-MM-DD")){
@@ -38,8 +42,19 @@ export default class Calendar extends Component {
 
 
     return (
-      <div className={classes.calendar}>
+      <div className={classNames(classes.calendar, {[classes.calendarDatepicker] : type == 'datepicker'})}>
 
+        {
+          type == 'datepicker'
+          ?
+          <div className={classes.calendarHeader}>
+            <button onClick={onPrevMonth}>&laquo;</button>
+            <div className={classes.calendarHeaderCurrentDate}>{viewDate.format('MMMM YYYY')}</div>
+            <button onClick={onNextMonth}>&raquo;</button>
+          </div>
+          :
+          null
+        }
         <div className={classes.calendarGrid}>
           {days.map((day) =>
             <div key={day} className={classNames(classes.calendarGridItem, classes.dayHeader)}>
@@ -61,8 +76,4 @@ export default class Calendar extends Component {
   }
 }
 
-//        <div className={classes.calendarHeader}>
-//          <button onClick={onPrevMonth}>&laquo;</button>
-//          <div className={classes.calendarHeaderCurrentDate}>{date.format('MMMM YYYY')}</div>
-//          <button onClick={onNextMonth}>&raquo;</button>
-//        </div>
+

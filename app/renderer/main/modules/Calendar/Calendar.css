@@ -12,24 +12,26 @@
 }
 
 .calendarHeader {
-  height: 50px;
-  background: #333;
-  color: #fff;
+  padding: 0 5px;
+  line-height: 29px;
+  background: bg1;
+  color: rgba(0, 0, 0, 0.6);
   text-align: center;
-  line-height: 50px;
   display: flex;
-  font-size: 20px;
+  font-size: 13px;
   justify-content: space-between;
 }
 
 
 .calendarHeader button {
-  width: 50px;
-  font-size: 20px;
+  font-size: 16px;
   border: 0;
   background: transparent;
-  color: #ddd;
+  color: rgba(0, 0, 0, 0.6);
   cursor: pointer;
+}
+.calendarHeader button:focus{
+  outline: none;
 }
 
 .calendarGridItem {
@@ -83,3 +85,9 @@
   width: 30px;
   height: 30px;
 }
+
+.calendarDatepicker{
+  border: 1px solid border1;
+  min-width: 0px;
+}
+

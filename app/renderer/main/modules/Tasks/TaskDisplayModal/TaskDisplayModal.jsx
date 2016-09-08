@@ -19,7 +19,7 @@ import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvata
 import LabelSelect from './LabelSelect/LabelSelect.jsx';
 import UserSelect from 'app/renderer/main/components/Users/UserSelect/UserSelect.jsx';
 import TaskTimeline from '../TaskTimeline/TaskTimeline.jsx';
-
+import DatePicker from 'app/renderer/main/modules/Calendar/DatePicker/DatePicker.jsx'
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -70,7 +70,7 @@ export const Component = React.createClass({
             <div className={classes.well}>
               <div className="text-mini-caps" style={{padding: '15px 15px 0'}}>Due Date</div>
               <div style={{padding: '15px'}}>
-                <UserSelect model={`${entityModel}.asignee`} value={task.asignee}/>
+                <DatePicker  model={`${entityModel}.due`} value={task.due} />
               </div>
             </div>
           </div>
