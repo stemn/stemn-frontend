@@ -39,5 +39,4 @@ class Component extends React.Component{
   }
 };
 
-isActive(pathOrLoc, indexOnly)
 export default Component
