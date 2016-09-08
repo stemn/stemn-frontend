@@ -25,6 +25,7 @@ import ProjectPermissionsRadio from 'app/renderer/main/components/Project/Projec
 import ProjectLinkRemote from 'app/renderer/main/components/Project/ProjectLinkRemote/ProjectLinkRemote.jsx'
 import FileSelectInput from 'app/renderer/main/modules/FileSelectInput/FileSelectInput.jsx'
 import Button from 'app/renderer/main/components/Buttons/Button/Button'
+import TaskLabelsEdit from 'app/renderer/main/modules/Tasks/TaskLabelsEdit/TaskLabelsEdit.jsx'
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -125,6 +126,10 @@ export const Component = React.createClass({
             <div className="layout-row layout-align-end">
               <Button className="primary" onClick={()=>this.linkRemote()}>Update File Store</Button>
             </div>
+          </div>
+          <div className={classes.panel}>
+            <h3>Task Label Settings</h3>
+            <TaskLabelsEdit model={`${entityModel}.data.labels`} value={project.data.labels} />
           </div>
 
           <div className={classes.panel}>

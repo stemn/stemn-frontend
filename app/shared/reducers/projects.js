@@ -1,5 +1,6 @@
 import { modeled } from 'react-redux-form';
 import u from 'updeep';
+import i from 'icepick';
 
 const initialState = {
 
@@ -8,11 +9,35 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case 'PROJECTS/GET_PROJECT_FULFILLED' :
-      return u({
+      const projectData = i.merge(action.payload.data, {
+        labels: [{
+            _id: 'L1',
+            name: 'Critical',
+            color: 'rgb(255, 65, 54)',
+        },{
+            _id: 'L2',
+            name: 'Low Priortiy',
+            color: 'rgb(0, 116, 217)',
+        },{
+            _id: 'L3',
+            name: 'Help Wanted',
+            color: 'rgb(57, 204, 204)',
+        },{
+            _id: 'L4',
+            name: 'Enhancement',
+            color: 'rgb(255, 133, 27)',
+        },{
+            _id: 'L5',
+            name: 'Bug',
+            color: 'rgb(141, 198, 63)',
+        }]
+      })
+
+      return i.merge(state, {
         [action.payload.data._id] : {
-          data : action.payload.data
+          data : projectData
         }
-      }, state);
+      });
     case 'PROJECTS/ADD_TEAM_MEMBER' :
       const modifiedUser = Object.assign({}, action.payload.user, {permissions: {role: 'admin'}})
       const addTeamMember = (team) => { return [].concat(team, [modifiedUser]); }
