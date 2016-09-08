@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router';
 
 // Components
@@ -9,7 +9,7 @@ import Header from 'app/renderer/main/modules/Header/Header.jsx'
 import classNames from 'classnames';
 import pageStyles from './ProjectPage.css'
 
-export default class extends React.Component{
+class Component extends React.Component{
   componentWillMount() {
     this.props.ProjectsActions.getProject({projectId: this.props.params.stub});
     this.props.ProjectActions.setActiveProject({stub: this.props.params.stub});
@@ -28,10 +28,10 @@ export default class extends React.Component{
           <h1 className={pageStyles.title}>{this.props.project.data ? this.props.project.data.name : ''}</h1>
         </Header>
         <Tabs size="lg">
-          <Link activeClassName="active" to={baseLink+'/changes'}>Changes</Link>
+          <Link activeClassName="active" to={baseLink} onlyActiveOnIndex={true}>Changes</Link>
           <Link activeClassName="active" to={baseLink+'/feed'}>Timeline</Link>
           <Link activeClassName="active" to={baseLink+'/tasks'}>Tasks</Link>
-          <Link activeClassName="active" to={baseLink+'/settings/general'}>Settings</Link>
+          <Link activeClassName="active" to={baseLink+'/settings'}>Settings</Link>
         </Tabs>
         <div className="layout-column flex rel-box">{this.props.children}</div>
       </div>
@@ -39,4 +39,5 @@ export default class extends React.Component{
   }
 };
 
-//          <Link activeClassName="active" to={baseLink+'/tasks'}>Tasks</Link>
+isActive(pathOrLoc, indexOnly)
+export default Component

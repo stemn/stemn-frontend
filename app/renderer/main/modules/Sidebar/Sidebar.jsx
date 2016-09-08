@@ -85,7 +85,7 @@ export const Component = React.createClass({
           </div>
 
           <div className="scroll-box flex">
-              {filteredProjects.map((item, idx) => <ProjectWithContext key={idx} item={item} isActive={item._id == this.props.params.stub} to={{pathname: `/project/${item._id}/changes`, state: routeState}}/>)}
+              {filteredProjects.map((item, idx) => <ProjectWithContext key={idx} item={item} isActive={item._id == this.props.params.stub} to={{pathname: `/project/${item._id}`, state: routeState}}/>)}
               <SidebarContextmenu />
           </div>
 

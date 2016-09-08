@@ -79,7 +79,7 @@ export const Component = React.createClass({
         {project.data.team.map((item)=><div style={{marginBottom: '15px'}}><TeamMember item={item} changePermissionsFn={this.changePermissionsFn} removeTeamMemberFn={this.removeTeamMemberFn}/></div>)}
         <br />
         <div className="layout-row layout-align-end">
-          <Button className="primary">Update team</Button>
+          <Button className="primary" onClick={this.saveProject}>Update team</Button>
         </div>
       </div>
     );

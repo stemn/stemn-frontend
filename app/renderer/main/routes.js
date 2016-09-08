@@ -80,13 +80,13 @@ export default (store) => {
     <Route                                           component={RootAppPage} >
       <Route                                         component={AuthedAppPage}   onEnter={requireAuth}>
         <Route   path="/project/:stub"               component={ProjectPage}>
-          <Route path="changes"       component={ProjectChangesPage}/>
-          <Route path="feed"          component={ProjectFeedPage}/>
-          <Route path="tasks"         component={ProjectTaskPage}/>
-          <Route path="settings"      component={ProjectSettingsPage}>
-            <Route path="general"     component={ProjectSettingsGeneralPage} />
-            <Route path="tasks"       component={ProjectSettingsTasksPage} />
-            <Route path="team"        component={ProjectSettingsTeamPage} />
+          <IndexRoute                                component={ProjectChangesPage} />
+          <Route path="feed"                         component={ProjectFeedPage}/>
+          <Route path="tasks"                        component={ProjectTaskPage}/>
+          <Route path="settings"                     component={ProjectSettingsPage}>
+            <IndexRoute                              component={ProjectSettingsGeneralPage} />
+            <Route path="tasks"                      component={ProjectSettingsTasksPage} />
+            <Route path="team"                       component={ProjectSettingsTeamPage} />
           </Route>
         </Route>
         <Route   path="/"                            component={HomePage}/>
@@ -105,19 +105,3 @@ export default (store) => {
     </Route>
   );
 };
-
-//  return (
-//    <Route component={RootAppPage} onEnter={getUserData}>
-//      <Route component={AuthedAppPage} onEnter={requireAuth}>
-//        <Route path="/"      component={ChangesPage}/>
-//        <Route path="/feed"  component={FeedPage} />
-//      </Route>
-//    </Route>
-//      <Route component={UnAuthedAppPage}>
-//        <Route onEnter={requireNonAuth}>
-//          <Route path="/login" component={LoginPage} />
-//        </Route>
-//
-//        <Route path="/error" component={ErrorPage} />
-//      </Route>
-//  );
