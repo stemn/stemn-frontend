@@ -10,12 +10,13 @@ import React from 'react';
 
 // Styles
 import classNames from 'classnames';
-import classes from './ProjectSettingsPage.css'
+import classes from '../ProjectSettingsPage.css'
 
 // Sub Components
 import { Field, actions } from 'react-redux-form';
 
-import NavPill from 'app/renderer/main/components/Buttons/NavPill/NavPill'
+import Button from 'app/renderer/main/components/Buttons/Button/Button'
+import TaskLabelsEdit from 'app/renderer/main/modules/Tasks/TaskLabelsEdit/TaskLabelsEdit.jsx'
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -36,31 +37,29 @@ export const Component = React.createClass({
 
   render() {
     const { entityModel, project, ProjectsActions, dispatch } = this.props;
-    const baseLink = `project/${project.data._id}`;
 
     return (
-      <div className={classes.container+' layout-row flex scroll-box'}>
-        <div style={{width: '250px', marginRight: '15px'}}>
-          <div className={classes.panel} style={{padding: '0px'}}>
-            <NavPill to={`${baseLink}/settings/general`}>General Settings</NavPill>
-            <NavPill to={`${baseLink}/settings/tasks`}>Task Settings</NavPill>
-            <NavPill to={`${baseLink}/settings/team`}>Team Settings</NavPill>
-          </div>
+      <div className={classes.panel}>
+        <h3>Task Label Settings</h3>
+        <p>Labels are used to classify tasks. If you delete a label, it will be removed from all existingt tasks.</p>
+        <TaskLabelsEdit model={`${entityModel}.data.labels`} value={project.data.labels} />
+        <br />
+        <div className="layout-row">
+          <div className="flex"></div>
+          <Button className="primary">Save Labels</Button>
         </div>
-        <div style={{width: '650px'}}>
-          {this.props.children}
-        </div>
-     </div>
+      </div>
     );
   }
 });
+
 
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({projects, projectSettings}, otherProps) {
+function mapStateToProps({projects}, otherProps) {
   return {
     project: projects[otherProps.params.stub],
     entityModel: `projects.${otherProps.params.stub}`

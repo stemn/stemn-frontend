@@ -1,0 +1,31 @@
+@value primary, border1, secondary from "app/renderer/assets/css/themes/standard.css";
+
+.button{
+  display: block;
+  width: 100%;
+  background: none;
+  outline: none;
+  position: relative;
+  padding: 12px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-bottom: 1px solid border1;
+}
+.button:last-child{
+  border-bottom: none;
+}
+.button:hover{
+  background: rgba(0, 0, 0, 0.05);
+}
+.button:global(.active):after{
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  bottom: 0;
+  top: 0;
+  width: 4px;
+  background: primary;
+}

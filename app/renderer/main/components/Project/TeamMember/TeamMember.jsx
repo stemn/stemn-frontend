@@ -56,7 +56,7 @@ export default class extends React.Component{
               <a className={classNames({'active': item.permissions.role == 'collaborator'})} onClick={()=>changePermissionsFn({userId: item._id, role: 'collaborator'})}>Set Permission: Collaborator</a>
               <a className={classNames({'active': item.permissions.role == 'viewer'})} onClick={()=>changePermissionsFn({userId: item._id, role: 'viewer'})}>Set Permission: Viewer</a>
               <div className="divider"></div>
-              <a onClick={()=>removeTeamMemberFn({userId: item._id})}>Delete User</a>
+              <a onClick={()=>removeTeamMemberFn({userId: item._id})}>Remove User</a>
               </div>
           </PopoverMenu>
           :

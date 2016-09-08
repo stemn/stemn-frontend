@@ -2,7 +2,7 @@
 
 .container{
   padding: 20px;
-  background: bg1;
+  background: rgba(0, 0, 0, 0.01);
 }
 .panel{
   padding: 20px;

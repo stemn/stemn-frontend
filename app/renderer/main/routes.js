@@ -4,25 +4,28 @@ import { Route, IndexRoute } from 'react-router';
 import http from 'axios';
 
 
-import RootAppPage              from './components/App/RootAppPage';
-import AuthedAppPage            from './components/App/AuthedAppPage';
-import UnAuthedAppPage          from './components/App/UnAuthedAppPage';
+import RootAppPage                 from './components/App/RootAppPage';
+import AuthedAppPage               from './components/App/AuthedAppPage';
+import UnAuthedAppPage             from './components/App/UnAuthedAppPage';
 
-import ProjectChangesPage       from './pages/ProjectChangesPage/ProjectChangesPage.jsx';
-import LoginPage                from './pages/LoginPage/LoginPage.jsx';
-import RegisterPage             from './pages/RegisterPage/RegisterPage.jsx';
+import ProjectChangesPage          from './pages/ProjectChangesPage/ProjectChangesPage.jsx';
+import LoginPage                   from './pages/LoginPage/LoginPage.jsx';
+import RegisterPage                from './pages/RegisterPage/RegisterPage.jsx';
 //import ErrorPage from './containers/ErrorPage/ErrorPage.container.js';
 
-import SettingsPage             from './pages/SettingsPage/SettingsPage.jsx';
-import SettingsAccountPage      from './pages/SettingsPage/SettingsAccountPage/SettingsAccountPage.jsx';
-import SettingsApplicationPage  from './pages/SettingsPage/SettingsApplicationPage/SettingsApplicationPage.jsx';
+import SettingsPage                from './pages/SettingsPage/SettingsPage.jsx';
+import SettingsAccountPage         from './pages/SettingsPage/SettingsAccountPage/SettingsAccountPage.jsx';
+import SettingsApplicationPage     from './pages/SettingsPage/SettingsApplicationPage/SettingsApplicationPage.jsx';
 
-import HomePage                 from './pages/HomePage/HomePage.jsx';
-import DashboardPage            from './pages/DashboardPage/DashboardPage.jsx';
-import ProjectPage              from './pages/ProjectPage/ProjectPage.container.js';
-import ProjectSettingsPage      from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.jsx';
-import ProjectFeedPage          from './pages/ProjectFeedPage/ProjectFeedPage.jsx';
-import ProjectTaskPage          from './pages/ProjectTaskPage/ProjectTaskPage.jsx';
+import HomePage                    from './pages/HomePage/HomePage.jsx';
+import DashboardPage               from './pages/DashboardPage/DashboardPage.jsx';
+import ProjectPage                 from './pages/ProjectPage/ProjectPage.container.js';
+import ProjectSettingsPage         from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.jsx';
+import ProjectSettingsGeneralPage  from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsGeneralPage/ProjectSettingsGeneralPage.jsx';
+import ProjectSettingsTasksPage    from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsTasksPage/ProjectSettingsTasksPage.jsx';
+import ProjectSettingsTeamPage     from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsTeamPage/ProjectSettingsTeamPage.jsx';
+import ProjectFeedPage             from './pages/ProjectFeedPage/ProjectFeedPage.jsx';
+import ProjectTaskPage             from './pages/ProjectTaskPage/ProjectTaskPage.jsx';
 
 // Actions
 const AuthActions = require('../../shared/actions/auth');
@@ -80,7 +83,11 @@ export default (store) => {
           <Route path="changes"       component={ProjectChangesPage}/>
           <Route path="feed"          component={ProjectFeedPage}/>
           <Route path="tasks"         component={ProjectTaskPage}/>
-          <Route path="settings"      component={ProjectSettingsPage}/>
+          <Route path="settings"      component={ProjectSettingsPage}>
+            <Route path="general"     component={ProjectSettingsGeneralPage} />
+            <Route path="tasks"       component={ProjectSettingsTasksPage} />
+            <Route path="team"        component={ProjectSettingsTeamPage} />
+          </Route>
         </Route>
         <Route   path="/"                            component={HomePage}/>
         <Route   path="/dashboard"                   component={DashboardPage}/>
