@@ -9,6 +9,7 @@ import configureStore from '../../shared/store/configureStore';
 import invokeGetters from 'app/shared/helpers/invokeGetters.js'
 import getRoutes from './routes';
 import ReduxToastr from 'react-redux-toastr'
+import ModalContainer from 'app/renderer/main/modules/Modal/ModalContainer.jsx'
 
 const initialState = remote.getGlobal('state');
 const cloneState = invokeGetters(initialState);
@@ -30,6 +31,7 @@ render(
         timeOut={4000}
         newestOnTop={true}
         position="bottom-center"/>
+      <ModalContainer/>
     </div>
   </Provider>,
   document.getElementById('root')

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as TasksActions from 'app/renderer/main/modules/Tasks/Tasks.actions.js';
+import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 
 // Component Core
 import React from 'react';
@@ -27,6 +28,7 @@ import Modal from 'app/renderer/main/modules/Modal/Modal.jsx'
 ///////////////////////////////// COMPONENT /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
+
 export const Component = React.createClass({
 
   componentWillMount() {
@@ -46,20 +48,13 @@ export const Component = React.createClass({
   },
 
   render() {
-    console.log(this.props);
     const { tasks, project, TasksActions, entityModel } = this.props;
     if(tasks && tasks.structure){
       return (
-        <div className="layout-row flex">
+        <div className="layout-column flex">
           <TaskGrid project={project.data}></TaskGrid>
 
-          <Modal modalId="TaskDisplay" width="1000px">
-            <button>POP IT BABY</button>
-            <TaskDisplayModal
-              item={{_id: 'T4'}}
-            />
-          </Modal>
-
+          <button onClick={()=>this.props.ModalActions.showModal({})}>Show</button>
         </div>
       )
     }
@@ -69,6 +64,12 @@ export const Component = React.createClass({
   }
 });
 
+//          <Modal modalId="TaskDisplay" width="1000px">
+//            <button>POP IT BABY</button>
+//            <TaskDisplayModal
+//              item={{_id: 'T4'}}
+//            />
+//          </Modal>
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////
@@ -87,6 +88,7 @@ function mapStateToProps({tasks, projects}, {params}) {
 function mapDispatchToProps(dispatch) {
   return {
     TasksActions: bindActionCreators(TasksActions, dispatch),
+    ModalActions: bindActionCreators(ModalActions, dispatch),
   }
 }
 

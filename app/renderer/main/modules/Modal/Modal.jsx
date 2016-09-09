@@ -13,64 +13,63 @@ import Modal from 'react-modal';
 import classNames from 'classnames';
 import classes from './Modal.css'
 
+// Modals
+import ConfirmModal from './modals/ConfirmModal.jsx';
+import ErrorModal from './modals/ErrorModal.jsx';
 
-// Sub Components
-import {MdMenu} from 'react-icons/lib/md';
-
+const modalComponents = {
+  'CONFIRM' : ConfirmModal,
+  'ERROR'   : ErrorModal,
+}
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
+
+
+
+const ModalRoot = (modal) => {
+  if (!modal.modalType) {
+    return null
+  }
+  const SpecificModal = modalComponents[modal.modalType];
+  return (
+    <SpecificModal modal={modal} />
+  )
+}
+
 export const Component = React.createClass({
-  getInitialState: function() {
-    return { modalIsOpen: false };
-  },
+  modalHide: function() {
 
-  openModal: function() {
-    this.props.ModalActions.showModal({modalId: this.props.modalId})
-  },
-
-  afterOpenModal: function() {
-
-  },
-
-  closeModal: function() {
-    this.props.ModalActions.hideModal({modalId: this.props.modalId})
   },
 
   render: function() {
-    const isOpen = this.props.modal ? this.props.modal.isOpen : false;
-
-    // Wrap the child elements with the open and close functions
-    const childrenWithProps = React.Children.map(this.props.children,
-     (child) => React.cloneElement(child, {
-       openModal: this.openModal,
-       closeModal: this.closeModal
-     })
-    );
+    const { modal, dispatch } = this.props;
+    const modalExtended = Object.assign({}, modal, {
+      modalHide: ()    => { this.props.ModalActions.hideModal({modalId: modal.modalId}) },
+      modalCancel: ()  => { if(modal.modalCancel) { dispatch(modal.modalCancel) }},
+      modalConfirm: () => { if(modal.modalConfirm){ dispatch(modal.modalConfirm) }},
+    })
 
     const customStyles = {
       content : {
-        width : this.props.width || '600px',
+        width : modalExtended.modalOptions && modalExtended.modalOptions.width ? modalExtended.modalOptions.width : '600px',
       }
     };
 
     return (
-      <div>
-        <div onClick={this.openModal}>
-          {childrenWithProps[0]}
-        </div>
-        <Modal
-          isOpen={isOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
-          style={customStyles}
-          className={classes.modal}
-          overlayClassName={classes.overlay+ ' layout-column layout-align-center-center'}>
-          {childrenWithProps[1]}
-        </Modal>
-      </div>
+      <Modal
+        isOpen={true}
+        onRequestClose={()=>{
+          modalExtended.modalCancel()
+          modalExtended.modalHide()
+        }}
+        style={customStyles}
+        className={classes.modal}
+        overlayClassName={classes.overlay+ ' layout-column layout-align-center-center'}>
+        { ModalRoot(modalExtended) }
+      </Modal>
     );
   }
 });
@@ -81,15 +80,14 @@ export const Component = React.createClass({
 ///////////////////////////////// CONTAINER /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({modals}, {modalId}) {
-  return {
-    modal: modals[modalId]
-  };
+function mapStateToProps() {
+  return {};
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     ModalActions: bindActionCreators(ModalActions, dispatch),
+    dispatch
   };
 }
 

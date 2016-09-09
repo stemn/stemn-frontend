@@ -32,8 +32,16 @@
   font-weight: 300;
   font-size: 14px;
 }
+.modal :global(.modal-body){
+  padding: 15px;
+}
 .modal :global(.modal-footer){
   border-top: 1px solid border1;
+  margin-top: -1px;
+  padding: 10px;
+}
+.modal :global(.modal-footer-no-line){
+  border-top: none;
   margin-top: -1px;
   padding: 10px;
 }
