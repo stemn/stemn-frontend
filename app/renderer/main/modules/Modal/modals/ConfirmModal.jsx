@@ -8,14 +8,14 @@ import classNames from 'classnames';
 
 const Component = React.createClass({
   render: function() {
-    const { modal } = this.props;
+    const { title, message, modalCancel, modalHide, modalConfirm } = this.props;
     return (
       <div>
-        <div className="modal-title">Are you sure?</div>
-        <div className="modal-body">Some modal body stuff</div>
+        <div className="modal-title">{title || 'Are you sure you want to do this?'}</div>
+        <div className="modal-body" style={{lineHeight: '1.4em'}}>{message || 'There will be no turning back.'}</div>
         <div className="modal-footer-no-line layout-row layout-align-end">
-          <Button style={{marginRight: '10px'}} onClick={() => {modal.modalCancel(); modal.modalHide()}}>Cancel</Button>
-          <Button className="primary" onClick={() => {modal.modalConfirm(); modal.modalHide()}}>Confirm</Button>
+          <Button style={{marginRight: '10px'}} onClick={() => {modalCancel(); modalHide()}}>Cancel</Button>
+          <Button className="warn" onClick={() => {modalConfirm(); modalHide()}}>Confirm</Button>
         </div>
       </div>
     )

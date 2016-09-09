@@ -79,14 +79,17 @@ export const Component = React.createClass({
   },
 
   submit(){
-    this.props.submitFn(this.props.fileSelect.selected);
-    this.props.closeModal();
+    // The modal confirm function is a react redux form change.
+    // We extend this action object by the value to confirm the change
+    this.props.modalConfirm({value: this.props.fileSelect.selected});
+    this.props.modalHide();
   },
   cancel(){
-    this.props.closeModal();
+    this.props.modalCancel();
+    this.props.modalHide();
   },
   render() {
-    const {projectId, path, fileSelect, options, closeModal} = this.props;
+    const {projectId, path, fileSelect, options} = this.props;
 
     const activePath = fileSelect && fileSelect.path ? fileSelect.path : '';
     return (

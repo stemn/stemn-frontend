@@ -15,11 +15,13 @@ import classes from './Modal.css'
 
 // Modals
 import ConfirmModal from './modals/ConfirmModal.jsx';
-import ErrorModal from './modals/ErrorModal.jsx';
+import ErrorModal   from './modals/ErrorModal.jsx';
+import FileSelectModal from 'app/renderer/main/modules/FileSelect/FileSelectModal.jsx'
 
 const modalComponents = {
-  'CONFIRM' : ConfirmModal,
-  'ERROR'   : ErrorModal,
+  'CONFIRM'     : ConfirmModal,
+  'ERROR'       : ErrorModal,
+  'FILE_SELECT' : FileSelectModal,
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -27,15 +29,18 @@ const modalComponents = {
 /////////////////////////////////////////////////////////////////////////////
 
 
-
-
 const ModalRoot = (modal) => {
   if (!modal.modalType) {
     return null
   }
   const SpecificModal = modalComponents[modal.modalType];
+  const extendedModalProps = Object.assign({}, modal.modalProps, {
+    modalHide: modal.modalHide,
+    modalCancel: modal.modalCancel,
+    modalConfirm: modal.modalConfirm
+  });
   return (
-    <SpecificModal modal={modal} />
+    <SpecificModal {...extendedModalProps} />
   )
 }
 
@@ -46,10 +51,13 @@ export const Component = React.createClass({
 
   render: function() {
     const { modal, dispatch } = this.props;
+
+    // This transforms the modalCancel and modalConfirm actions and adds the modalHide action
     const modalExtended = Object.assign({}, modal, {
       modalHide: ()    => { this.props.ModalActions.hideModal({modalId: modal.modalId}) },
-      modalCancel: ()  => { if(modal.modalCancel) { dispatch(modal.modalCancel) }},
-      modalConfirm: () => { if(modal.modalConfirm){ dispatch(modal.modalConfirm) }},
+      // The cancel and confirm actions can be extended before dispatching
+      modalCancel: (extendObject)  => { if(modal.modalCancel) { dispatch(Object.assign({}, modal.modalCancel, extendObject)) }},
+      modalConfirm: (extendObject) => { if(modal.modalConfirm){ dispatch(Object.assign({}, modal.modalConfirm, extendObject)) }},
     })
 
     const customStyles = {

@@ -53,8 +53,6 @@ export const Component = React.createClass({
       return (
         <div className="layout-column flex">
           <TaskGrid project={project.data}></TaskGrid>
-
-          <button onClick={()=>this.props.ModalActions.showModal({})}>Show</button>
         </div>
       )
     }

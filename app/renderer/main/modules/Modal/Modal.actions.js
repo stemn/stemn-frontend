@@ -1,39 +1,43 @@
-//export function initModal({modalId, modalProps}) {
-//  return {
-//    type: 'MODALS/INIT',
-//    payload: {
-//      modalId: modalId,
-//      modalProps: modalProps
-//    },
-//  };
-//}
-
 import getUuid from 'app/shared/helpers/getUuid.js';
 
+export function showModal({modalType, modalProps, modalOptions, modalConfirm, modalCancel}) {
+  return {
+    type: 'MODALS/SHOW_MODAL',
+    payload: {
+      modalId: getUuid(),
+      modalType: modalType,
+      modalProps: modalProps,
+      modalOptions : modalOptions,
+      /*******************************
+      options: {
+        width: '400px'
+      }
+      *******************************/
+      modalConfirm : modalConfirm,
+      modalCancel  : modalCancel
+    },
+  };
+}
 
-export function showModal({modalId}) {
+export function showConfirm({title, message, modalConfirm, modalCancel}) {
   return {
     type: 'MODALS/SHOW_MODAL',
     payload: {
       modalId: getUuid(),
       modalType: 'CONFIRM',
       modalProps: {
-
+        title,
+        message
       },
-      modalOptions: {
+      modalOptions : {
         width: '400px'
       },
-      modalConfirm: {
-        type: 'CONFIRM',
-        payload: {}
-      },
-      modalCancel: {
-        type: 'CANCEL',
-        payload: {}
-      }
+      modalConfirm : modalConfirm,
+      modalCancel  : modalCancel
     },
   };
 }
+
 
 export function hideModal({modalId}){
   return {

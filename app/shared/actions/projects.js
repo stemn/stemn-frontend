@@ -91,14 +91,15 @@ export function removeTeamMember({projectId, userId}) {
 export function linkRemote({projectId, provider, path, id}) {
   return {
     type: 'PROJECTS/LINK_REMOTE',
-    payload: http({
+    http: true,
+    payload: {
       method: 'PUT',
       url: `http://localhost:3000/api/v1/remote/link/${projectId}/${provider}`,
       params: {
         path         : path,
         id           : id
       }
-    }),
+    },
     meta: {
       cacheKey: projectId
     }

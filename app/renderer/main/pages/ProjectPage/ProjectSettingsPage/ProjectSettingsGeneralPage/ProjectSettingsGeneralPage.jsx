@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as ProjectsActions from 'app/shared/actions/projects.js';
+import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 
 // Component Core
 import React from 'react';
@@ -67,12 +68,26 @@ export const Component = React.createClass({
     })
   },
   linkRemote(){
-    this.props.ProjectsActions.linkRemote({
+    // This is not wrapped in dispach!
+    return ProjectsActions.linkRemote({
       projectId: this.props.project.data._id,
       provider: this.props.project.formModels.fileStore.remote.provider,
       path: this.props.project.formModels.fileStore.remote.root.path,
       id: this.props.project.formModels.fileStore.remote.root.fileId
     })
+  },
+  confirmLinkRemote(){
+    // If the store is connected - we confirm the change
+    if(this.props.project.data.remote.connected){
+      this.props.ModalActions.showConfirm({
+        message: 'Changing your file store settings will delete your entire commit and change history. Are you sure you want to do this? Consider creating a new project.',
+        modalConfirm: this.linkRemote()
+      })
+    }
+    // Else change straight away.
+    else{
+      this.props.dispatch(this.linkRemote())
+    }
   },
   saveProject(){
     this.props.ProjectsActions.saveProject({
@@ -115,7 +130,7 @@ export const Component = React.createClass({
          : ''}
          <br />
          <div className="layout-row layout-align-end">
-           <Button className="primary" onClick={()=>this.linkRemote()}>Update File Store</Button>
+           <Button className="primary" onClick={()=>this.confirmLinkRemote()}>Update File Store</Button>
          </div>
        </div>
 
@@ -154,7 +169,8 @@ function mapStateToProps({projects}, otherProps) {
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    ProjectsActions: bindActionCreators(ProjectsActions, dispatch),
+    ProjectsActions : bindActionCreators(ProjectsActions, dispatch),
+    ModalActions    : bindActionCreators(ModalActions, dispatch),
   }
 }
 
