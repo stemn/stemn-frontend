@@ -19,9 +19,6 @@ import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/
 import TaskList       from 'app/renderer/main/modules/Tasks/TaskList/TaskList.jsx'
 import TaskGrid       from 'app/renderer/main/modules/Tasks/TaskGrid/TaskGrid.jsx'
 
-import TaskDisplayModal from 'app/renderer/main/modules/Tasks/TaskDisplayModal/TaskDisplayModal.jsx'
-import Modal from 'app/renderer/main/modules/Modal/Modal.jsx'
-
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -61,13 +58,6 @@ export const Component = React.createClass({
     }
   }
 });
-
-//          <Modal modalId="TaskDisplay" width="1000px">
-//            <button>POP IT BABY</button>
-//            <TaskDisplayModal
-//              item={{_id: 'T4'}}
-//            />
-//          </Modal>
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////

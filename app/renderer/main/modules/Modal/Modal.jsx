@@ -16,12 +16,15 @@ import classes from './Modal.css'
 // Modals
 import ConfirmModal from './modals/ConfirmModal.jsx';
 import ErrorModal   from './modals/ErrorModal.jsx';
-import FileSelectModal from 'app/renderer/main/modules/FileSelect/FileSelectModal.jsx'
+import FileSelectModal from 'app/renderer/main/modules/FileSelect/FileSelectModal.jsx';
+import TaskDisplayModal from 'app/renderer/main/modules/Tasks/TaskDisplayModal/TaskDisplayModal.jsx'
+
 
 const modalComponents = {
   'CONFIRM'     : ConfirmModal,
   'ERROR'       : ErrorModal,
   'FILE_SELECT' : FileSelectModal,
+  'TASK'        : TaskDisplayModal
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -34,6 +37,10 @@ const ModalRoot = (modal) => {
     return null
   }
   const SpecificModal = modalComponents[modal.modalType];
+  if(!SpecificModal){
+    console.error(`${modal.modalType} Modal could not be found`);
+    return null
+  }
   const extendedModalProps = Object.assign({}, modal.modalProps, {
     modalHide: modal.modalHide,
     modalCancel: modal.modalCancel,
@@ -60,12 +67,6 @@ export const Component = React.createClass({
       modalConfirm: (extendObject) => { if(modal.modalConfirm){ dispatch(Object.assign({}, modal.modalConfirm, extendObject)) }},
     })
 
-    const customStyles = {
-      content : {
-        width : modalExtended.modalOptions && modalExtended.modalOptions.width ? modalExtended.modalOptions.width : '600px',
-      }
-    };
-
     return (
       <Modal
         isOpen={true}
@@ -73,7 +74,6 @@ export const Component = React.createClass({
           modalExtended.modalCancel()
           modalExtended.modalHide()
         }}
-        style={customStyles}
         className={classes.modal}
         overlayClassName={classes.overlay+ ' layout-column layout-align-center-center'}>
         { ModalRoot(modalExtended) }

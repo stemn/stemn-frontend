@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as ProjectActions from 'app/shared/actions/project.js';
+import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 
 // Component Core
 import React from 'react';
@@ -28,11 +29,20 @@ import UserSelect from 'app/renderer/main/components/Users/UserSelect/UserSelect
 /////////////////////////////////////////////////////////////////////////////
 
 export const Component = React.createClass({
+  showModal(){
+    console.log('here');
+    this.props.ModalActions.showModal({
+      modalType: 'TASK',
+      modalProps: {
+        item: this.props.item
+      }
+    })
+  },
   render() {
     const { style, task, entityModel } = this.props;
 
     return (
-      <div style={style} className={classNames(classes.card, 'layout-row flex')} id={style ? task._id : null}>
+      <div style={style} className={classNames(classes.card, 'layout-row flex')} id={style ? task._id : null} onClick={this.showModal}>
         <Checkbox />
         <div className={classes.text + ' flex'}>
           <Textarea
@@ -67,7 +77,9 @@ function mapStateToProps({tasks}, {params, item, project}) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {}
+  return {
+    ModalActions : bindActionCreators(ModalActions, dispatch),
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);

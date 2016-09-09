@@ -6,21 +6,13 @@
   left: 0px;
   right: 0px;
   bottom: 0px;
-  z-index: 10;
+  z-index: 100;
   background-color: rgba(0, 0, 0, 0.50);
 }
 
 .modal {
   transform-origin: bottom center;
   animation: fade-in-pulse-08 .3s forwards cubic-bezier(.8, .02, .45, .91);
-/*
-
-  top: 50%;
-  left: 50%;
-  right: auto;
-  bottom: auto;
-  position: absolute;
-*/
   overflow: auto;
   outline: none;
   background: rgb(255, 255, 255);
@@ -59,5 +51,3 @@
     transform: scale(1);
   }
 }
-
-/*translate(-50%, -50%)*/

@@ -29,9 +29,7 @@ export function showConfirm({title, message, modalConfirm, modalCancel}) {
         title,
         message
       },
-      modalOptions : {
-        width: '400px'
-      },
+      modalOptions : {},
       modalConfirm : modalConfirm,
       modalCancel  : modalCancel
     },

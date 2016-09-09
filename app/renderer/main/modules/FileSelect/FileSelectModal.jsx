@@ -93,7 +93,7 @@ export const Component = React.createClass({
 
     const activePath = fileSelect && fileSelect.path ? fileSelect.path : '';
     return (
-      <div>
+      <div style={{width: '600px'}}>
         <div className="modal-title">Select Folder</div>
         <FileList projectId={projectId} path={activePath} singleClickFn={this.singleClickFn} doubleClickFn={this.doubleClickFn} crumbClickFn={this.crumbClickFn} selected={fileSelect.selected} options={options}/>
         <div className="modal-footer layout-row layout-align-start-center">

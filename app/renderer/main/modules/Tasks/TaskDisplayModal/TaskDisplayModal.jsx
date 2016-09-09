@@ -40,7 +40,7 @@ export const Component = React.createClass({
   componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
 
   render() {
-    const { item, task, entityModel } = this.props;
+    const { item, task, entityModel, modalCancel, modalHide } = this.props;
 
     if(!task){
       return <div>Task Loading</div>
