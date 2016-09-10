@@ -10,6 +10,11 @@ import classNames from 'classnames';
 import pageStyles from './ProjectPage.css'
 
 class Component extends React.Component{
+  getChildContext() {
+    return {
+      project: this.props.project
+    }
+  }
   componentWillMount() {
     this.props.ProjectsActions.getProject({projectId: this.props.params.stub});
     this.props.ProjectActions.setActiveProject({stub: this.props.params.stub});
@@ -38,5 +43,10 @@ class Component extends React.Component{
     );
   }
 };
+
+Component.childContextTypes = {
+  project: React.PropTypes.object
+}
+
 
 export default Component

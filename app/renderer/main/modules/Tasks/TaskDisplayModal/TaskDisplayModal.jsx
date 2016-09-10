@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as TasksActions from '../Tasks.actions.js';
+import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 
 // Component Core
 import React from 'react';
 import moment from 'moment';
+import { actions } from 'react-redux-form';
 
 // Styles
 import classNames from 'classnames';
@@ -19,8 +21,7 @@ import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvata
 import LabelSelect from './LabelSelect/LabelSelect.jsx';
 import UserSelect from 'app/renderer/main/components/Users/UserSelect/UserSelect.jsx';
 import TaskTimeline from '../TaskTimeline/TaskTimeline.jsx';
-import DatePicker from 'app/renderer/main/modules/Calendar/DatePicker/DatePicker.jsx'
-
+import DatePicker from 'app/renderer/main/modules/Calendar/DatePicker/DatePicker.jsx';
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -39,8 +40,18 @@ export const Component = React.createClass({
   componentWillMount() { onMount(this.props) },
   componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
 
+  showLabelEditModal(){
+    this.props.dispatch(actions.load(`${this.props.projectModel}.formModels.TaskSettings.labels`, this.props.project.data.labels));
+    this.props.ModalActions.showModal({
+      modalType: 'TASK_LABELS',
+      modalProps: {
+        model: `${this.props.projectModel}.formModels.TaskSettings.labels`,
+      },
+    })
+  },
+
   render() {
-    const { item, task, entityModel, modalCancel, modalHide } = this.props;
+    const { item, task, project, entityModel, modalCancel, modalHide } = this.props;
 
     if(!task){
       return <div>Task Loading</div>
@@ -59,7 +70,8 @@ export const Component = React.createClass({
           <div className="flex">
             <div className={classes.well}>
               <div className="text-mini-caps" style={{padding: '15px 15px 5px'}}>Labels</div>
-              <LabelSelect model={`${entityModel}.labels`}/>
+              <button onClick={this.showLabelEditModal}>POPIT</button>
+              <LabelSelect model={`${entityModel}.labels`} value={task.labels} labelInfo={project.data.labels}/>
             </div>
             <div className={classes.well}>
               <div className="text-mini-caps" style={{padding: '15px 15px 0'}}>Asignee</div>
@@ -85,16 +97,22 @@ export const Component = React.createClass({
 ///////////////////////////////// CONTAINER /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({ tasks }, {item}) {
+function mapStateToProps({ tasks, projects }, {item}) {
+  const task = tasks.data[item._id];
+  const project = projects[task.project._id];
   return {
-    task: tasks.data[item._id],
-    entityModel: `tasks.data.${item._id}`
+    task: task,
+    project: project,
+    entityModel: `tasks.data.${item._id}`,
+    projectModel: `projects.${project.data._id}`
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     TasksActions: bindActionCreators(TasksActions, dispatch),
+    ModalActions: bindActionCreators(ModalActions, dispatch),
+    dispatch
   }
 }
 

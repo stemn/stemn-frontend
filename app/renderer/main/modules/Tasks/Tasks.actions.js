@@ -57,6 +57,10 @@ export function getTasks({projectId}) {
               title : 'Call Joan to discuss existing requirements',
               group: '1',
               due: 1472792461569,
+              project: {
+                _id: '57c3c23692b46d982beaadd6'
+              },
+              labels: ['L1', 'L2', 'L4'],
               users : [
                 {
                   name: 'David Revay',
@@ -68,7 +72,11 @@ export function getTasks({projectId}) {
               _id: 'T2',
               title : 'Write new requirements based on feedback received from Sam',
               group: '1',
+              labels: ['L2', 'L4'],
               due: 1472792461569,
+              project: {
+                _id: '57c3c23692b46d982beaadd6'
+              },
               users : [
                 {
                   name: 'David Revay',
@@ -80,7 +88,11 @@ export function getTasks({projectId}) {
               _id: 'T3',
               title : 'Create process flow based on user interview',
               group: '1',
+              labels: ['L4', 'L2'],
               due: 1472792461569,
+              project: {
+                _id: '57c3c23692b46d982beaadd6'
+              },
               users : [
                 {
                   name: 'David Revay',
@@ -93,6 +105,9 @@ export function getTasks({projectId}) {
               title : 'Schedule meeting with client to go over documents from last week',
               group: '1',
               due: 1472792461569,
+              project: {
+                _id: '57c3c23692b46d982beaadd6'
+              },
               users : [
                 {
                   name: 'David Revay',
@@ -105,6 +120,9 @@ export function getTasks({projectId}) {
               title : 'Enable password recovery feature on the application',
               group: '2',
               due: 1472792461569,
+              project: {
+                _id: '57c3c23692b46d982beaadd6'
+              },
               users : [
                 {
                   name: 'David Revay',
@@ -117,6 +135,9 @@ export function getTasks({projectId}) {
               title : 'Create a build script to concatenate all javascript files for production',
               group: '2',
               due: 1472792461569,
+              project: {
+                _id: '57c3c23692b46d982beaadd6'
+              },
               users : [
                 {
                   name: 'David Revay',
@@ -129,6 +150,9 @@ export function getTasks({projectId}) {
               title : 'Add feature X to module Y',
               group: '2',
               due: 1472792461569,
+              project: {
+                _id: '57c3c23692b46d982beaadd6'
+              },
               users : [
                 {
                   name: 'David Revay',
@@ -141,6 +165,9 @@ export function getTasks({projectId}) {
               title : 'Talk to client about changing the look of the header',
               group: '3',
               due: 1472792461569,
+              project: {
+                _id: '57c3c23692b46d982beaadd6'
+              },
               users : [
                 {
                   name: 'David Revay',
@@ -153,6 +180,9 @@ export function getTasks({projectId}) {
               title : 'Get the new designs from Sam',
               group: '3',
               due: 1472792461569,
+              project: {
+                _id: '57c3c23692b46d982beaadd6'
+              },
               users : [
                 {
                   name: 'David Revay',

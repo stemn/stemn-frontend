@@ -2,13 +2,20 @@
 
 
 .card{
-  padding: 15px;
   border: 1px solid border1;
   margin-bottom: 15px;
   background: white;
   transition: 0.15s;
   cursor: pointer;
 }
+.cardBody{
+  padding: 15px;
+}
+.cardFooter{
+  padding: 10px 15px;
+  border-top: 1px dashed border1;
+}
+
 .text{
   padding: 0px 10px;
   line-height: 1.4em;

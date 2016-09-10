@@ -36,7 +36,7 @@ export default React.createClass({
         <div style={{marginLeft: '10px'}} className="flex">
         {
           parts.map((part, index) => {
-            const className = part.highlight ? 'highlight' : null;
+            const className = part.highlight ? 'bold' : null;
             return (
               <span className={className} key={index}>{part.text}</span>
             );

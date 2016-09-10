@@ -5,6 +5,7 @@
   outline: none;
   background: none;
   padding: 10px;
+  min-width: 80px;
 
   transition: all 0.2s ease;
 }

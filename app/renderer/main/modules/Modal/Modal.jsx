@@ -18,13 +18,15 @@ import ConfirmModal from './modals/ConfirmModal.jsx';
 import ErrorModal   from './modals/ErrorModal.jsx';
 import FileSelectModal from 'app/renderer/main/modules/FileSelect/FileSelectModal.jsx';
 import TaskDisplayModal from 'app/renderer/main/modules/Tasks/TaskDisplayModal/TaskDisplayModal.jsx'
+import TaskLabelsEditModal from 'app/renderer/main/modules/Tasks/TaskLabelsEditModal/TaskLabelsEditModal.jsx'
 
 
 const modalComponents = {
   'CONFIRM'     : ConfirmModal,
   'ERROR'       : ErrorModal,
   'FILE_SELECT' : FileSelectModal,
-  'TASK'        : TaskDisplayModal
+  'TASK'        : TaskDisplayModal,
+  'TASK_LABELS' : TaskLabelsEditModal
 }
 
 /////////////////////////////////////////////////////////////////////////////

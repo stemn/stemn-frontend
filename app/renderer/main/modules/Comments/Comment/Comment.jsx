@@ -15,6 +15,7 @@ import classes from './Comment.css';
 
 // Sub Components
 import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
+import Editor from 'app/renderer/main/modules/Editor/Editor.jsx';
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -51,6 +52,7 @@ export const Component = React.createClass({
             {comment.data.owner.name}<span className={classes.date}> <b className="text-interpunct"></b> {moment(comment.data.timestamp).fromNow()} </span>
           </div>
           <div className={classes.commentContent}>
+           <Editor model={`${entityModel}.data.blurb`} value={comment.data.blurb}/>
            {comment.data.blurb}
           </div>
           <div className={classes.commentFooter}>

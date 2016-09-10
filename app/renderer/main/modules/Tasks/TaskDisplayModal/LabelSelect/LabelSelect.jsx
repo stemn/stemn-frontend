@@ -1,51 +1,34 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Field, actions } from 'react-redux-form';
 
 import CheckboxAlt from 'app/renderer/main/components/Input/CheckboxAlt/CheckboxAlt.jsx'
 import classes from './LabelSelect.css'
 
-export default class extends React.Component{
+export const Component = React.createClass({
   render(){
-    const { model } = this.props
-    const labelInfo = [{
-        value: 'question',
-        name: 'Question',
-        color: 'rgb(255, 65, 54)',
-        textColor: 'white',
-        bgColor: 'rgba(255, 65, 54, 0.1)'
-    },{
-        value: 'discussion',
-        name: 'Discussion',
-        color: 'rgb(0, 116, 217)',
-        textColor: 'white',
-        bgColor: 'rgba(0, 116, 217, 0.1)',
-    },{
-        value: 'help',
-        name: 'Help Wanted',
-        color: 'rgb(57, 204, 204)',
-        textColor: 'white',
-        bgColor:'rgba(57, 204, 204, 0.1)',
-    },{
-        value: 'blog',
-        name: 'Blog/Update',
-        color: 'rgb(255, 133, 27)',
-        textColor: 'white',
-        bgColor: 'rgba(255, 133, 27, 0.1)',
-    },{
-        value: 'bug',
-        name: 'Bug',
-        color: 'rgb(141, 198, 63)',
-        textColor: 'white',
-        bgColor: 'rgba(141, 198, 63, 0.1)',
-    }]
+    const { model, value, labelInfo, dispatch } = this.props
     return (
       <div>
-        {labelInfo.map((label) =>
-          <CheckboxAlt model={model} value={label.value} key={label.value} className="layout-row layout-align-start-center">
-            <div className={classes.swatch} style={{background: label.color}}></div>
-            {label.name}
-          </CheckboxAlt>
-        )}
+        {labelInfo.map((label) => {
+          const onChange = () => {
+            const labelIndex = value ? value.indexOf(label._id) : -1;
+            if(labelIndex != -1){
+              dispatch(actions.remove(model, labelIndex))
+            }
+            else{
+              dispatch(actions.push(model, label._id))
+            }
+          };
+          return (
+            <CheckboxAlt status={value ? value.includes(label._id) : false} value={label._id} onChange={onChange} className="layout-row layout-align-start-center">
+              <div className={classes.swatch} style={{background: label.color}}></div>
+              {label.name}
+            </CheckboxAlt>
+          )
+        })}
       </div>
     );
   }
-};
+});
+export default connect()(Component)

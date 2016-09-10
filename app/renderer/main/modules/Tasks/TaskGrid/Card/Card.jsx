@@ -23,6 +23,7 @@ import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvata
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 import UserSelect from 'app/renderer/main/components/Users/UserSelect/UserSelect.jsx'
 
+import TaskLabelDots from 'app/renderer/main/modules/Tasks/TaskLabelDots/TaskLabelDots.jsx'
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -30,7 +31,6 @@ import UserSelect from 'app/renderer/main/components/Users/UserSelect/UserSelect
 
 export const Component = React.createClass({
   showModal(){
-    console.log('here');
     this.props.ModalActions.showModal({
       modalType: 'TASK',
       modalProps: {
@@ -42,16 +42,17 @@ export const Component = React.createClass({
     const { style, task, entityModel } = this.props;
 
     return (
-      <div style={style} className={classNames(classes.card, 'layout-row flex')} id={style ? task._id : null} onClick={this.showModal}>
-        <Checkbox />
-        <div className={classes.text + ' flex'}>
-          <Textarea
-            model={`${entityModel}.title`}
-            value={task.title}
-            className="input-plain"
-            type="text"
-            placeholder="Task description" />
-        </div>
+      <div style={style} className={classNames(classes.card, 'layout-column flex')} id={style ? task._id : null} onClick={this.showModal}>
+        <div className={classes.cardBody + ' layout-row'}>
+          <Checkbox />
+          <div className={classes.text + ' flex'}>
+            <Textarea
+              model={`${entityModel}.title`}
+              value={task.title}
+              className="input-plain"
+              type="text"
+              placeholder="Task description" />
+          </div>
           <PopoverMenu preferPlace="right" disableClickClose={true}>
             <UserAvatar picture={task.users[0].picture} size="25px"/>
             <div className="PopoverMenu" style={{padding: '15px'}}>
@@ -59,19 +60,32 @@ export const Component = React.createClass({
               <div>asfsfa asfafsfsa asffs</div>
             </div>
           </PopoverMenu>
+        </div>
+        { task.labels && task.labels.length > 0 ?
+          <div className={classes.cardFooter + ' layout-row'}>
+            <TaskLabelDots labels={task.labels} labelInfo={this.context.project.data.labels} />
+          </div>
+          : null
+        }
       </div>
     );
   }
 });
+
+Component.contextTypes = {
+  project: React.PropTypes.object
+}
 
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({tasks}, {params, item, project}) {
+function mapStateToProps({tasks, projects}, {params, item}) {
+  const task = tasks.data[item._id];
   return {
-    task: tasks.data[item._id],
+    task: task,
+    project: projects[task.project._id],
     entityModel: `tasks.data[${item._id}]`
   };
 }

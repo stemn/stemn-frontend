@@ -1,0 +1,25 @@
+.editor{
+  background: white;
+  width: 100%;
+  margin-bottom: 10px;
+  min-height: 80px;
+}
+.editor > div > div{
+  padding: 5px;
+}
+.editor textarea{
+  padding: 5px;
+  resize: none;
+}
+
+.editor textarea:focus {
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.editor ul{
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.1),0 2px 15px rgba(0,0,0,0.1);
+}
+.editor li{
+  padding: 8px;
+}
