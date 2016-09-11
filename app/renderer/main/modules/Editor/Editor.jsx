@@ -18,6 +18,7 @@ import { MentionsInput, Mention } from 'react-mentions'
 import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
 import AutosuggestHighlight from 'autosuggest-highlight';
 
+import getUuid from 'app/shared/helpers/getUuid.js';
 import http from 'axios';
 
 
@@ -28,13 +29,19 @@ import http from 'axios';
 
 export const Component = React.createClass({
   handleChange(event, newValue, newPlainTextValue, mention){
-//    this.props.changesActions.descriptionChange({projectId: this.props.project._id, value: newValue})
     this.props.dispatch(actions.change(this.props.model, newValue));
   },
-  displayTransform: function(id, display) {
-    return "@" + display
+  displayTransform: function(id, display, type) {
+    const displaySplit = display.split(':');
+    const name = displaySplit[1];
+    if(type == 'user'){
+      return "@" + name
+    }
+    else{
+      return "#" + name
+    }
   },
-  renderUserSuggestion: (entry, search, highlightedDisplay, index) => {
+  userRenderSuggestion: (entry, search, highlightedDisplay, index) => {
     const matches = AutosuggestHighlight.match(entry.name, search);
     const parts   = AutosuggestHighlight.parse(entry.name, matches);
     return (
@@ -51,34 +58,49 @@ export const Component = React.createClass({
       </div>
     );
   },
+  userData(search, callback) {
+    return http({
+      url: 'http://localhost:3000/api/v1/search',
+      method: 'GET',
+      params: {
+        type:'user',
+        key: 'name',
+        value: search,
+        size: 20,
+        match: 'regex'
+      },
+    }).then( response => {
+      response.data.forEach( item => {
+        item.id = getUuid(); // Get a random mention id
+        item.display = `${item._id}:${item.name}`; // Create the display
+      });
+      callback(response.data)
+    })
+  },
   render() {
-    const data = (search, callback) => {
-      return http({
-        url: 'http://localhost:3000/api/v1/search',
-        method: 'GET',
-        params: {
-          type:'user',
-          key: 'name',
-          value: search,
-          size: 20,
-          match: 'regex'
-        },
-      }).then( response => {
-        response.data.forEach( item => { item.id = item._id; item.display = item.name}); // Add id to the object
-        callback(response.data)
-      })
-    }
+
     return (
       <MentionsInput
         className={classes.editor}
         placeholder="Detailed Description"
         value={this.props.value}
         displayTransform={this.displayTransform}
+        markup="@[__type__:__display__](__id__)" // format @[user:userId-userName](mentionId)
         onChange={this.handleChange}>
         <Mention
-        renderSuggestion={this.renderUserSuggestion}
-        data={ data }
-        style={{background: 'rgba(68, 183, 211, 0.3)'}} />
+          trigger="@"
+          type="user"
+          data={this.userData}
+          renderSuggestion={this.userRenderSuggestion}
+          style={{background: 'rgba(68, 183, 211, 0.3)'}}
+        />
+        <Mention
+          trigger="#"
+          type="task"
+          data={this.userData}
+          renderSuggestion={this.userRenderSuggestion}
+          style={{background: 'rgba(68, 183, 211, 0.3)'}}
+        />
       </MentionsInput>
     )
   }
