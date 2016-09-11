@@ -69,8 +69,10 @@ export const Component = React.createClass({
           </div>
           <div className="flex">
             <div className={classes.well}>
-              <div className="text-mini-caps" style={{padding: '15px 15px 5px'}}>Labels</div>
-              <button onClick={this.showLabelEditModal}>POPIT</button>
+              <div className="text-mini-caps layout-row layout-align-start-end" style={{padding: '15px 15px 5px'}}>
+                <div className="flex">Labels</div>
+                <a style={{fontSize: '14px'}} onClick={this.showLabelEditModal}>+</a>
+              </div>
               <LabelSelect model={`${entityModel}.labels`} value={task.labels} labelInfo={project.data.labels}/>
             </div>
             <div className={classes.well}>

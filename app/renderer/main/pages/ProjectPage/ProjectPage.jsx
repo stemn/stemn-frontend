@@ -35,7 +35,7 @@ class Component extends React.Component{
         <Tabs size="lg">
           <Link activeClassName="active" to={baseLink} onlyActiveOnIndex={true}>Changes</Link>
           <Link activeClassName="active" to={baseLink+'/feed'}>Timeline</Link>
-          <Link activeClassName="active" to={baseLink+'/tasks'}>Tasks</Link>
+          <Link activeClassName="active" to={baseLink+'/tasks'}>Workflow</Link>
           <Link activeClassName="active" to={baseLink+'/settings'}>Settings</Link>
         </Tabs>
         <div className="layout-column flex rel-box">{this.props.children}</div>
