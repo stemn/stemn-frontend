@@ -1,17 +1,19 @@
 .editor{
   background: white;
   width: 100%;
-  margin-bottom: 10px;
-  min-height: 80px;
+  margin-bottom: 0px;
 }
 .editor > div > div{
-  padding: 5px;
+  padding: 0px;
 }
 .editor textarea{
-  padding: 5px;
+  padding: 0px;
   resize: none;
 }
 
+.editor textarea {
+  border: none;
+}
 .editor textarea:focus {
   outline: none;
   border: 1px solid rgba(0, 0, 0, 0.4);

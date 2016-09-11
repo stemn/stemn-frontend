@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as CommentsActions from 'app/renderer/main/modules/Comments/Comments.actions.js';
+import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 
 // Component Core
 import React from 'react';
@@ -16,6 +17,7 @@ import classes from './Comment.css';
 // Sub Components
 import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
 import Editor from 'app/renderer/main/modules/Editor/Editor.jsx';
+import EditorDisplay from 'app/renderer/main/modules/Editor/EditorDisplay.jsx';
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -35,8 +37,13 @@ export const Component = React.createClass({
   componentWillMount() { onMount(this.props) },
   componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
 
+  confirmDelete(){
+    this.props.modalActions.showConfirm({
+      modalConfirm: CommentsActions.deleteComment({commentId: this.props.comment.data._id})
+    })
+  },
   render() {
-    const { item, comment, entityModel } = this.props;
+    const { item, comment, entityModel, commentsActions } = this.props;
 
     if(!comment){
       return <div>Comment Loading</div>
@@ -52,11 +59,30 @@ export const Component = React.createClass({
             {comment.data.owner.name}<span className={classes.date}> <b className="text-interpunct"></b> {moment(comment.data.timestamp).fromNow()} </span>
           </div>
           <div className={classes.commentContent}>
-           <Editor model={`${entityModel}.data.blurb`} value={comment.data.blurb}/>
-           {comment.data.blurb}
+          {
+            comment.editActive
+            ?
+            <Editor model={`${entityModel}.data.blurb`} value={comment.data.blurb}/>
+            :
+            <EditorDisplay value={comment.data.blurb}/>
+          }
           </div>
           <div className={classes.commentFooter}>
-           <a className="link-primary">Delete</a> <b className="text-interpunct text-grey-3"></b> <a className="link-primary">Edit</a>
+          {
+            comment.editActive
+            ?
+            <div>
+              <a className="link-primary" onClick={() => commentsActions.finishEdit({commentId: comment.data._id})}>Cancel</a>
+              &nbsp;<b className="text-interpunct text-grey-3"></b>&nbsp;
+              <a className="link-primary" onClick={() => commentsActions.saveComment({commentId: comment.data._id})}>Save</a>
+            </div>
+            :
+            <div>
+              <a className="link-primary" onClick={this.confirmDelete}>Delete</a>
+              &nbsp;<b className="text-interpunct text-grey-3"></b>&nbsp;
+              <a className="link-primary" onClick={() => commentsActions.startEdit({commentId: comment.data._id})}>Edit</a>
+            </div>
+          }
           </div>
         </div>
       </div>
@@ -78,7 +104,9 @@ function mapStateToProps({ comments }, {item}) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    CommentsActions: bindActionCreators(CommentsActions, dispatch),
+    commentsActions: bindActionCreators(CommentsActions, dispatch),
+    modalActions    : bindActionCreators(ModalActions, dispatch),
+
   }
 }
 

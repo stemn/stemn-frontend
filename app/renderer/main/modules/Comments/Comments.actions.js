@@ -411,3 +411,39 @@ export function getComments({taskId}) {
     },
   }
 }
+
+
+export function startEdit({commentId}) {
+  return {
+    type: 'COMMENTS/START_EDIT',
+    payload: {
+      commentId
+    }
+  }
+}
+export function finishEdit({commentId}) {
+  return {
+    type: 'COMMENTS/FINISH_EDIT',
+    payload: {
+      commentId
+    }
+  }
+}
+
+export function deleteComment({commentId}) {
+  return {
+    type: 'COMMENTS/DELETE',
+    payload: {
+      commentId
+    }
+  }
+}
+export function saveComment({commentId}) {
+  return {
+    type: 'COMMENTS/SAVE',
+    payload: {
+      commentId
+    }
+  }
+}
+

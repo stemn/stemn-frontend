@@ -20,6 +20,22 @@ const mainReducer = (state, action) => {
           [action.meta.taskId] : {}
         }
       })
+    case 'COMMENTS/START_EDIT':
+      return i.merge(state, {
+        data: {
+          [action.payload.commentId] : {
+            editActive: true
+          }
+        }
+      })
+    case 'COMMENTS/FINISH_EDIT':
+      return i.merge(state, {
+        data: {
+          [action.payload.commentId] : {
+            editActive: false
+          }
+        }
+      })
     default:
       return state;
   }

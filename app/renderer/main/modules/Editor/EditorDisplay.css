@@ -1,0 +1,12 @@
+@value primary, border1, bg1 from "app/renderer/assets/css/themes/standard.css";
+
+.mention{
+  color: primary;
+}
+
+.display p:first-child{
+  margin-top: 0px;
+}
+.display p:last-child{
+  margin-bottom: 0px;
+}

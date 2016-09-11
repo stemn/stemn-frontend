@@ -32,8 +32,7 @@ export const Component = React.createClass({
     this.props.dispatch(actions.change(this.props.model, newValue));
   },
   displayTransform: function(id, display, type) {
-    const displaySplit = display.split(':');
-    const name = displaySplit[1];
+    const name = display.split('[')[1].split(']')[0]; // Get the name (from between the square brackets)
     if(type == 'user'){
       return "@" + name
     }
@@ -72,7 +71,7 @@ export const Component = React.createClass({
     }).then( response => {
       response.data.forEach( item => {
         item.id = getUuid(); // Get a random mention id
-        item.display = `${item._id}:${item.name}`; // Create the display
+        item.display = `[${item.name}](${item._id}`; // Create the display
       });
       callback(response.data)
     })
@@ -85,7 +84,7 @@ export const Component = React.createClass({
         placeholder="Detailed Description"
         value={this.props.value}
         displayTransform={this.displayTransform}
-        markup="@[__type__:__display__](__id__)" // format @[user:userId-userName](mentionId)
+        markup="@__display__:__type__:__id__)" // format @[username](userName:mentionTyp:mentionId)
         onChange={this.handleChange}>
         <Mention
           trigger="@"
