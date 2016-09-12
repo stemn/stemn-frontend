@@ -21,7 +21,7 @@ export const Component = React.createClass({
             }
           };
           return (
-            <CheckboxAlt status={value ? value.includes(label._id) : false} value={label._id} onChange={onChange} className="layout-row layout-align-start-center">
+            <CheckboxAlt status={value ? value.includes(label._id) : false} value={label._id} onChange={onChange} className="layout-row layout-align-start-center" tickOnly={true}>
               <div className={classes.swatch} style={{background: label.color}}></div>
               {label.name}
             </CheckboxAlt>

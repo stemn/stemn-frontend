@@ -6,8 +6,11 @@
   background: none;
   padding: 10px;
   min-width: 80px;
-
   transition: all 0.2s ease;
+}
+
+.button:global(.sm) {
+  padding: 7px 5px;
 }
 
 .button:focus{

@@ -1,5 +1,12 @@
 @value primary, bg1 from "app/renderer/assets/css/themes/standard.css";
 
+
+.tickOnly input:checked + div {
+  background: none !important;
+  color: inherit !important;
+}
+
+
 .radio input {
   display: none;
 }
@@ -7,13 +14,13 @@
   padding: 10px;
   transition: all 0.1s ease
 }
-.radio input:checked + div {
-  background: primary !important;
-  color: white !important;
-}
 
 .radio label:hover input + div {
   background-color: bg1;
+}
+.radio label input:checked + div {
+  background: primary;
+  color: white;
 }
 
 .radio svg{
@@ -21,7 +28,7 @@
   opacity: 0;
 }
 .radio label:hover svg {
-  opacity: 1;
+  opacity: 0.2;
 }
 
 .radio input:checked + div svg{

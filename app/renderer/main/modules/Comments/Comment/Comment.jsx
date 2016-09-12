@@ -18,6 +18,9 @@ import classes from './Comment.css';
 import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
 import Editor from 'app/renderer/main/modules/Editor/Editor.jsx';
 import EditorDisplay from 'app/renderer/main/modules/Editor/EditorDisplay.jsx';
+import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
+import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import {MdMoreHoriz} from 'react-icons/lib/md';
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -52,11 +55,21 @@ export const Component = React.createClass({
     return (
       <div className={classes.comment + ' layout-row'}>
         <div className={classes.commentAvatar}>
-          <UserAvatar picture={comment.data.owner.picture} shape="square" />
+          <UserAvatar picture={comment.data.owner.picture} size="33" shape="square" />
         </div>
         <div className={classes.commentBody + ' flex'}>
-          <div className={classes.commentHeader}>
+          <div className={classes.commentHeader + ' layout-row layout-align-start-center'}>
             {comment.data.owner.name}<span className={classes.date}> <b className="text-interpunct"></b> {moment(comment.data.timestamp).fromNow()} </span>
+            <div className="flex"></div>
+            <PopoverMenu preferPlace="right">
+              <SimpleIconButton style={{padding: '0px'}}>
+                <MdMoreHoriz size="20px"/>
+              </SimpleIconButton>
+              <div className="PopoverMenu">
+                {comment.editActive ? null : <a onClick={() => commentsActions.startEdit({commentId: comment.data._id})}>Edit</a> }
+                <a  onClick={this.confirmDelete}>Delete</a>
+                </div>
+            </PopoverMenu>
           </div>
           <div className={classes.commentContent}>
           {
@@ -67,23 +80,19 @@ export const Component = React.createClass({
             <EditorDisplay value={comment.data.blurb}/>
           }
           </div>
-          <div className={classes.commentFooter}>
           {
             comment.editActive
             ?
-            <div>
-              <a className="link-primary" onClick={() => commentsActions.finishEdit({commentId: comment.data._id})}>Cancel</a>
-              &nbsp;<b className="text-interpunct text-grey-3"></b>&nbsp;
-              <a className="link-primary" onClick={() => commentsActions.saveComment({commentId: comment.data._id})}>Save</a>
+            <div className={classes.commentFooter}>
+              <div>
+                <a className="link-primary" onClick={() => commentsActions.finishEdit({commentId: comment.data._id})}>Cancel</a>
+                &nbsp;<b className="text-interpunct text-grey-3"></b>&nbsp;
+                <a className="link-primary" onClick={() => commentsActions.saveComment({commentId: comment.data._id})}>Save</a>
+              </div>
             </div>
             :
-            <div>
-              <a className="link-primary" onClick={this.confirmDelete}>Delete</a>
-              &nbsp;<b className="text-interpunct text-grey-3"></b>&nbsp;
-              <a className="link-primary" onClick={() => commentsActions.startEdit({commentId: comment.data._id})}>Edit</a>
-            </div>
+            null
           }
-          </div>
         </div>
       </div>
     )
@@ -106,7 +115,6 @@ function mapDispatchToProps(dispatch) {
   return {
     commentsActions: bindActionCreators(CommentsActions, dispatch),
     modalActions    : bindActionCreators(ModalActions, dispatch),
-
   }
 }
 

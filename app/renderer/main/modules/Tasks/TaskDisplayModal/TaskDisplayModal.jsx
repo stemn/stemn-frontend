@@ -22,6 +22,8 @@ import LabelSelect from './LabelSelect/LabelSelect.jsx';
 import UserSelect from 'app/renderer/main/components/Users/UserSelect/UserSelect.jsx';
 import TaskTimeline from '../TaskTimeline/TaskTimeline.jsx';
 import DatePicker from 'app/renderer/main/modules/Calendar/DatePicker/DatePicker.jsx';
+import Textarea from 'app/renderer/main/components/Input/Textarea/Textarea';
+import CommentNew from 'app/renderer/main/modules/Comments/Comment/CommentNew.jsx';
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -59,12 +61,26 @@ export const Component = React.createClass({
 
     return (
       <div className={classNames(classes.taskDisplayModal)}>
-        <div className="text-title-4">{task.title}</div>
+        <div className="layout-row layout-align-start-center">
+          <Checkbox />
+          <div className="text-title-4 flex" style={{marginLeft: '15px'}}>
+            <Textarea
+              model={`${entityModel}.title`}
+              value={task.title}
+              className="input-plain"
+              type="text"
+              placeholder="Task description" />
+          </div>
+        </div>
         <div className="text-grey-3" style={{padding: '10px 0 20px'}}>Opened {moment(task.due).fromNow()} <b className="text-interpunct"></b> By <a className="link-primary">{task.users[0].name}</a> <b className="text-interpunct"></b> 4 Comments</div>
+
         <div className="layout-row">
           <div className="flex-70" style={{paddingRight: '15px'}}>
             <div className="scroll-box" style={{maxHeight: '500px', paddingRight: '15px', borderTop: '1px solid rgba(0, 0, 0, 0.1)', borderBottom: '1px solid rgba(0, 0, 0, 0.1)'}}>
               <TaskTimeline item={item} />
+            </div>
+            <div style={{marginTop: '15px'}}>
+              <CommentNew />
             </div>
           </div>
           <div className="flex">

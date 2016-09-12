@@ -16,7 +16,7 @@
 }
 .editor textarea:focus {
   outline: none;
-  border: 1px solid rgba(0, 0, 0, 0.4);
+  border: none;
 }
 
 .editor ul{
