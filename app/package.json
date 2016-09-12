@@ -58,7 +58,6 @@
     "react-popover": "^0.4.4",
     "react-redux": "^4.4.5",
     "react-redux-form": "^0.14.3",
-    "react-redux-toastr": "^3.6.3",
     "react-router": "^2.2.4",
     "react-router-redux": "^4.0.2",
     "react-select": "^1.0.0-beta14",

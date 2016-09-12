@@ -8,8 +8,8 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import configureStore from '../../shared/store/configureStore';
 import invokeGetters from 'app/shared/helpers/invokeGetters.js'
 import getRoutes from './routes';
-import ReduxToastr from 'react-redux-toastr'
 import ModalContainer from 'app/renderer/main/modules/Modal/ModalContainer.jsx'
+import ToastContainer from 'app/renderer/main/modules/Toasts/Toasts.jsx'
 
 const initialState = remote.getGlobal('state');
 const cloneState = invokeGetters(initialState);
@@ -27,11 +27,8 @@ render(
       <Router history={history}>
         {getRoutes(store)}
       </Router>
-      <ReduxToastr
-        timeOut={4000}
-        newestOnTop={true}
-        position="bottom-center"/>
-      <ModalContainer/>
+      <ModalContainer />
+      <ToastContainer />
     </div>
   </Provider>,
   document.getElementById('root')

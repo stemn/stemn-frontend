@@ -1,5 +1,6 @@
 import { actions } from 'react-redux-form';
-import { toastr } from 'react-redux-toastr'
+import { show as toastShow} from 'app/renderer/main/modules/Toasts/Toasts.actions.js';
+
 import http from 'axios';
 
 export function selectedFileChange({projectId, selected}) {
@@ -74,7 +75,9 @@ export function commit({projectId, revisions, summary, description}) {
           description,
         }
       }).then((response)=>{
-        toastr.error(`${revisions.length} files commited.`)
+        dispatch(toastShow({
+          title: `${revisions.length} files commited.`,
+        }))
         return response
       }),
       meta: {
