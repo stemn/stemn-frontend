@@ -1,5 +1,5 @@
 import { actions } from 'react-redux-form';
-import { show as toastShow} from 'app/renderer/main/modules/Toasts/Toasts.actions.js';
+import { show as showToast } from '../../renderer/main/modules/Toasts/Toasts.actions.js';
 
 import http from 'axios';
 
@@ -75,9 +75,20 @@ export function commit({projectId, revisions, summary, description}) {
           description,
         }
       }).then((response)=>{
-        dispatch(toastShow({
+
+        dispatch(showToast({
           title: `${revisions.length} files commited.`,
+          actions: [{
+            text: 'Undo',
+            action: {
+              type: 'CHANGES/COMMIT_UNDO',
+              payload: {
+                commitId: response.data._id
+              }
+            }
+          }]
         }))
+
         return response
       }),
       meta: {

@@ -18,6 +18,10 @@ import mapWebsocketToRedux from './modules/websocket/mapWebsocketToRedux'
 import { getProviderPath } from '../shared/actions/system';
 
 
+//import * as Test1 from 'C:/Git/stemn-electron-2/package.json';
+//import * as Test2 from 'app/main/tray.js';
+
+
   //import reminder from './tasks/reminder';
 
 

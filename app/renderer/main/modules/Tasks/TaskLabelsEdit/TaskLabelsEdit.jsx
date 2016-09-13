@@ -8,7 +8,10 @@ import getUuid from 'app/shared/helpers/getUuid.js';
 // Styles
 import classNames from 'classnames';
 import classes from './TaskLabelsEdit.css';
+
+// Actions
 import { Field, actions } from 'react-redux-form';
+import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
@@ -17,6 +20,14 @@ import ColorSelect from './ColorSelect/ColorSelect.jsx'
 
 
 export const Component = React.createClass({
+  confirmDelete(model, index){
+    this.props.dispatch(
+      ModalActions.showPromiseConfirm({
+        modalConfirm: actions.remove(model, index),
+        message: 'Is you delete a label it will be removed from all existing tasks.'
+      })
+    )
+  },
   render() {
     const { model, value, dispatch } = this.props;
 
@@ -55,9 +66,7 @@ export const Component = React.createClass({
                 <MdMoreHoriz size="20px"/>
               </SimpleIconButton>
               <div className="PopoverMenu">
-                <a onClick={()=>{
-                   dispatch(actions.remove(model, index))
-                }}>Remove Label</a>
+                <a onClick={()=>this.confirmDelete(model, index)}>Remove Label</a>
               </div>
             </PopoverMenu>
           </div>

@@ -8,6 +8,10 @@ import * as ToastsActions from './Toasts.actions.js';
 // Component Core
 import React from 'react';
 
+// Sub components
+import {MdError, MdClose} from 'react-icons/lib/md';
+
+
 // Styles
 import classes from './Toasts.css'
 import classNames from 'classnames';
@@ -25,20 +29,46 @@ const Toast = React.createClass({
     this.startHideTimeout()
   },
   startHideTimeout(){
-    this.hideTimeout = setTimeout(()=>this.props.dispatch(ToastsActions.hide({id: this.props.toast.id})), 5000)
+    this.hideTimeout = setTimeout(this.closeToast, 5000)
+  },
+  closeToast(){
+    this.props.dispatch(ToastsActions.hide({id: this.props.toast.id}))
   },
   render() {
     const { toast, dispatch } = this.props;
 
     if(!this.hideTimeout){this.startHideTimeout()}
 
+    const getIcon = () => {
+      if(toast.type == 'error'){
+        return <MdError size="20" style={{marginRight: '5px'}} />
+      }
+      else{
+        return null
+      }
+    }
+    const getActions = () => {
+      if(toast.actions && toast.actions.length){
+        return (
+          <span>
+            {toast.actions.map((action, index) => <a key={index} onClick={()=>dispatch(action.action)} className="link-primary">&nbsp;&nbsp;{action.text}</a>)}
+          </span>
+        )
+      }
+      else{
+        return null
+      }
+    }
+
+
     return (
       <div className={classNames(classes.toast, 'layout-row', { [classes.error] : toast.type=='error' })} onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
         <div className={classes.toastInner + ' flex layout-row layout-align-start-center'}>
-          {!toast.actions || !toast.actions.length > 0 ? null :
-            toast.actions.map((action, index) => <a key={index} onClick={()=>dispatch(action.action)} className="link-primary">{action.text}&nbsp;&nbsp;</a>)
-          }
+          {getIcon()}
           {toast.title}
+          {getActions()}
+          <div className="flex"></div>
+          <a className={classes.close} onClick={this.closeToast}><MdClose size="20" /></a>
         </div>
       </div>
     )

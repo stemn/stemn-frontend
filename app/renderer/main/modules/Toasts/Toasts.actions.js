@@ -1,6 +1,7 @@
-import getUuid from 'app/shared/helpers/getUuid.js';
+import getUuid from '../../../../shared/helpers/getUuid.js';
 
 export function show({type, title, options, actions}) {
+  console.log(actions);
   return {
     type: 'TOAST/SHOW',
     payload: {

@@ -1,4 +1,4 @@
-import { show as toastShow } from 'app/renderer/main/modules/Toasts/Toasts.actions.js';
+import { show as toastShow } from '../../../renderer/main/modules/Toasts/Toasts.actions.js';
 
 /**********************************************
 This will add an error message toast when required
