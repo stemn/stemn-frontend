@@ -1,7 +1,8 @@
 @value border1 from "app/renderer/assets/css/themes/standard.css";
 
 .titleBar{
-  padding: 10px;
+  padding: 4px 10px;
+  height: 36px;
   border-bottom: 1px solid border1;
   cursor: default;
 }

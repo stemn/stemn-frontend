@@ -16,14 +16,15 @@ import files from './files';
 import users from './users';
 import menubarLayout from './menubarLayout';
 
-import userSearch from '../../renderer/main/modules/UserSearch/UserSearch.reducer.js';
-import fileList from '../../renderer/main/modules/FileList/FileList.reducer.js';
-import fileSelect from '../../renderer/main/modules/FileSelect/FileSelect.reducer.js';
-import modals from '../../renderer/main/modules/Modal/Modal.reducer.js';
-import upload from '../../renderer/main/modules/Upload/Upload.reducer.js';
-import tasks from '../../renderer/main/modules/Tasks/Tasks.reducer.js';
-import comments from '../../renderer/main/modules/Comments/Comments.reducer.js';
-import toasts from '../../renderer/main/modules/Toasts/Toasts.reducer.js';
+import userSearch   from '../../renderer/main/modules/UserSearch/UserSearch.reducer.js';
+import fileList     from '../../renderer/main/modules/FileList/FileList.reducer.js';
+import fileSelect   from '../../renderer/main/modules/FileSelect/FileSelect.reducer.js';
+import modals       from '../../renderer/main/modules/Modal/Modal.reducer.js';
+import upload       from '../../renderer/main/modules/Upload/Upload.reducer.js';
+import tasks        from '../../renderer/main/modules/Tasks/Tasks.reducer.js';
+import comments     from '../../renderer/main/modules/Comments/Comments.reducer.js';
+import toasts       from '../../renderer/main/modules/Toasts/Toasts.reducer.js';
+import fileCompare  from '../../renderer/main/modules/FileCompare/FileCompare.reducer.js';
 
 
 export default function getRootReducer(scope = 'main') {
@@ -48,7 +49,8 @@ export default function getRootReducer(scope = 'main') {
     upload,
     tasks,
     comments,
-    toasts
+    toasts,
+    fileCompare
   };
 
   if (scope === 'renderer') {

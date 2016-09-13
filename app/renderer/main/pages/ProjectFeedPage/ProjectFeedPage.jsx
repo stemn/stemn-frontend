@@ -13,16 +13,18 @@ import classNames from 'classnames';
 import feedPageStyles from './ProjectFeedPage.css';
 
 // Sub Components
-import u                 from 'updeep';
-import { Link }          from 'react-router';
-import Popover           from 'app/renderer/assets/other/react-popup';
-import Timeline          from 'app/renderer/main/modules/Timeline/Timeline.jsx';
-import SidebarTimeline   from 'app/renderer/main/containers/SidebarTimeline';
-import FileCompare       from 'app/renderer/main/modules/FileCompare/FileCompare.jsx';
-import ContentSidebar    from 'app/renderer/main/components/ContentSidebar';
-import TogglePanel       from 'app/renderer/main/components/Panels/TogglePanel/TogglePanel.jsx';
-import PreviewFile       from 'app/renderer/main/containers/PreviewFile.js';
-import DragResize        from 'app/renderer/main/modules/DragResize/DragResize.jsx';
+import u                  from 'updeep';
+import { Link }           from 'react-router';
+import Popover            from 'app/renderer/assets/other/react-popup';
+import Timeline           from 'app/renderer/main/modules/Timeline/Timeline.jsx';
+import SidebarTimeline    from 'app/renderer/main/containers/SidebarTimeline';
+import FileCompare        from 'app/renderer/main/modules/FileCompare/FileCompare.jsx';
+import FileCompareHeader  from 'app/renderer/main/modules/FileCompare/FileCompareHeader/FileCompareHeader.jsx';
+import FileCompareMenu    from 'app/renderer/main/modules/FileCompare/FileCompareMenu/FileCompareMenu.jsx';
+import ContentSidebar     from 'app/renderer/main/components/ContentSidebar';
+import TogglePanel        from 'app/renderer/main/components/Panels/TogglePanel/TogglePanel.jsx';
+import PreviewFile        from 'app/renderer/main/containers/PreviewFile.js';
+import DragResize         from 'app/renderer/main/modules/DragResize/DragResize.jsx';
 
 
 
@@ -71,7 +73,16 @@ export const Component = React.createClass({
         }
         else{
           return(
-            <FileCompare project={project.data} file1={timeline.selected.data} file2={filePrevious ? filePrevious.data : null}></FileCompare>
+            <div className="layout-column flex">
+              <FileCompareHeader
+                compareId={`feed-${project.data._id}-${timeline.selected._id}`}
+                file1={timeline.selected.data} />
+              <FileCompare
+                compareId={`feed-${project.data._id}-${timeline.selected._id}`}
+                project={project.data}
+                file1={timeline.selected.data}
+                file2={filePrevious ? filePrevious.data : null} />
+            </div>
           )
         }
       }
@@ -91,10 +102,15 @@ export const Component = React.createClass({
             <TogglePanel>
               <div className="layout-row flex layout-align-start-center">
                 <div className="flex">{file.data.path}</div>
-                <div>{file.data.size}</div>
+                <FileCompareMenu
+                  compareId={`feed-${project.data._id}-${file.data._id}`}/>
               </div>
               <DragResize side="bottom" height="500" heightRange={[200, 1000]} className="layout-column flex">
-                <FileCompare project={project.data} file1={file.data} file2={filePrevious ? filePrevious.data : null}></FileCompare>
+                <FileCompare
+                  compareId={`feed-${project.data._id}-${file.data._id}`}
+                  project={project.data}
+                  file1={file.data}
+                  file2={filePrevious ? filePrevious.data : null} />
               </DragResize>
             </TogglePanel>
           )

@@ -14,13 +14,15 @@ import u from 'updeep';
 import classNames from 'classnames';
 
 // Sub Components
-import { Link }       from 'react-router';
-import ContentSidebar from 'app/renderer/main/components//ContentSidebar';
-import Timeline       from 'app/renderer/main/modules/Timeline/Timeline.jsx';
-import CommitChanges  from 'app/renderer/main/components//CommitChanges';
-import CommitBox      from 'app/renderer/main/components/CommitBox/CommitBox.jsx'
-import FileCompare    from 'app/renderer/main/modules/FileCompare/FileCompare.jsx';
-import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import { Link }           from 'react-router';
+import ContentSidebar     from 'app/renderer/main/components//ContentSidebar';
+import Timeline           from 'app/renderer/main/modules/Timeline/Timeline.jsx';
+import CommitChanges      from 'app/renderer/main/components//CommitChanges';
+import CommitBox          from 'app/renderer/main/components/CommitBox/CommitBox.jsx'
+import FileCompare        from 'app/renderer/main/modules/FileCompare/FileCompare.jsx';
+import FileCompareHeader  from 'app/renderer/main/modules/FileCompare/FileCompareHeader/FileCompareHeader.jsx';
+import LoadingOverlay     from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -96,7 +98,16 @@ export const Component = React.createClass({
             <div className="layout-column flex">
               {changes.selected && changes.selected.data
                 ?
-                <FileCompare project={project.data} file1={changes.selected.data} file2={filePrevious ? filePrevious.data : null}></FileCompare>
+                <div className="layout-column flex">
+                  <FileCompareHeader
+                    compareId={`changes-${project.data._id}-${changes.selected._id}`}
+                    file1={changes.selected.data} />
+                  <FileCompare
+                    compareId={`changes-${project.data._id}-${changes.selected._id}`}
+                    project={project.data}
+                    file1={changes.selected.data}
+                    file2={filePrevious ? filePrevious.data : null} />
+                </div>
                 : <div className="layout-column layout-align-center-center flex text-title-4 text-center">No file change selected.</div>
               }
             </div>
