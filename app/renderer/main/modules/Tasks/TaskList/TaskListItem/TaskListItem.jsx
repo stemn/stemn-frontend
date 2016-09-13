@@ -24,8 +24,15 @@ import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvata
 
 
 export const Component = React.createClass({
+  toggleComplete(model, value){
+    this.props.TasksActions.toggleComplete({
+      taskId: this.props.task._id,
+      model,
+      value
+    })
+  },
   render() {
-    const { item, task } = this.props;
+    const { task, entityModel } = this.props;
 
     if(!task){
       return <div>Task Loading</div>
@@ -33,10 +40,16 @@ export const Component = React.createClass({
 
     return (
       <div className={classNames(classes.taskListItem, 'layout-row flex layout-align-start-center')}>
-        <Checkbox />
+        <Checkbox
+          model={`${entityModel}.complete`}
+          value={task.complete}
+          changeAction={this.toggleComplete}
+          className="text-primary" />
         <div className="flex text-ellipsis">{task.title}</div>
         <div className={classes.user + ' layout-row layout-align-start-center text ellipsis'}>
-          <UserAvatar picture={task.users[0].picture} size="25px"/>
+          <UserAvatar
+            picture={task.users[0].picture}
+            size="25px"/>
           <div style={{marginLeft: '10px'}}>{task.users[0].name}</div>
         </div>
         <div className={classes.date + ' text ellipsis'}>
@@ -53,9 +66,9 @@ export const Component = React.createClass({
 /////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps({ tasks }, {item}) {
-  console.log(tasks, item);
   return {
     task: tasks.data[item._id],
+    entityModel: `tasks.data[${item._id}]`
   };
 }
 

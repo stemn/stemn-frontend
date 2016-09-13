@@ -17,9 +17,7 @@ import classNames from 'classnames';
 // Sub Components
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import TaskList       from 'app/renderer/main/modules/Tasks/TaskList/TaskList.jsx'
-import TaskGrid       from 'app/renderer/main/modules/Tasks/TaskGrid/TaskGrid.jsx'
-
-
+import Tasks       from 'app/renderer/main/modules/Tasks/Tasks.jsx'
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -28,36 +26,34 @@ import TaskGrid       from 'app/renderer/main/modules/Tasks/TaskGrid/TaskGrid.js
 
 export const Component = React.createClass({
 
-  componentWillMount() {
-    if(this.props.project){
-      this.props.TasksActions.getTasks({
-        projectId: this.props.project.data._id
-      })
-    }
-  },
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.project && nextProps.project._id !== this.props.project._id) {
-      this.props.TasksActions.getTasks({
-        projectId: nextProps.project.data._id
-      })
-    }
-  },
+//  componentWillMount() {
+//    if(this.props.project){
+//      this.props.TasksActions.getTasks({
+//        projectId: this.props.project.data._id
+//      })
+//    }
+//  },
+//
+//  componentWillReceiveProps(nextProps) {
+//    if (nextProps.project && nextProps.project._id !== this.props.project._id) {
+//      this.props.TasksActions.getTasks({
+//        projectId: nextProps.project.data._id
+//      })
+//    }
+//  },
 
   render() {
     const { tasks, project, TasksActions, entityModel } = this.props;
-    if(tasks && tasks.structure){
-      return (
-        <div className="layout-column flex">
-          <TaskGrid project={project.data}></TaskGrid>
-        </div>
-      )
-    }
-    else{
-      return <LoadingOverlay />
-    }
+    return (
+      <div className="layout-column flex" style={{margin: '30px'}}>
+        <Tasks query={{projectId: project.data._id}} />
+      </div>
+    )
   }
 });
+
+//          <TaskGrid project={project.data}></TaskGrid>
+
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////

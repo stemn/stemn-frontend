@@ -10,9 +10,13 @@ import React from 'react';
 
 // Styles
 import classNames from 'classnames';
+import classes from './Tasks.css';
 
 // Sub Components
+import { Field } from 'react-redux-form';
 import TaskList from './TaskList/TaskList.jsx';
+import Button from 'app/renderer/main/components/Buttons/Button/Button'
+import { MdSearch } from 'react-icons/lib/md';
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -44,7 +48,21 @@ export const Component = React.createClass({
       }
     ]
     return (
-      <TaskList structure={structure} />
+      <div>
+       <div className={classes.header + ' layout-row'}>
+          <div className={classes.search}>
+            <Field model="sidebar.searchString">
+              <input className="dr-input text-ellipsis" type="text" placeholder="Search tasks"/>
+            </Field>
+            <MdSearch size="25"/>
+          </div>
+          <div className="flex"></div>
+          <Button style={{marginLeft: '10px'}} className="light">Layout</Button>
+          <Button style={{marginLeft: '10px'}} className="light">Filter</Button>
+          <Button style={{marginLeft: '10px'}} className="primary">New Task</Button>
+        </div>
+        <TaskList structure={structure} />
+      </div>
     )
   }
 });
@@ -56,7 +74,7 @@ export const Component = React.createClass({
 
 function mapStateToProps({ tasks }, {item}) {
   return {
-    tasks: tasks
+    tasks: tasks['fakeprojectidhere']
   };
 }
 

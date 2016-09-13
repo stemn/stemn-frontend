@@ -1,5 +1,7 @@
 import http from 'axios';
 import getUuid from 'app/shared/helpers/getUuid.js';
+import { actions } from 'react-redux-form';
+import { show as showToast } from 'app/renderer/main/modules/Toasts/Toasts.actions.js';
 
 export function newTask({projectId, task}) {
   const taskDefault = {
@@ -25,6 +27,7 @@ export function newTask({projectId, task}) {
     }
   }
 }
+
 
 export function getTasks({projectId}) {
   return {
@@ -249,6 +252,20 @@ export function moveGroup({projectId, lastX, nextX}) {
 //    }
 //  }
 //}
+
+
+export function toggleComplete({taskId, model, value}) {
+  return (dispatch) => {
+    dispatch(actions.change(model, value));
+    dispatch(showToast({
+      title: `Marked this task as complete.`,
+      actions: [{
+        text: 'Undo',
+        action: actions.change(model, !value)
+      }]
+    }));
+  };
+}
 
 export function newGroup({projectId, group}) {
   const groupDefault = {

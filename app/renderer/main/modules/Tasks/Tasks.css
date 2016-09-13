@@ -1,0 +1,16 @@
+.header{
+  margin-bottom: 30px;
+}
+.search{
+  width: 400px;
+  position: relative;
+}
+.search input{
+  padding-right: 40px;
+}
+.search svg{
+  position: absolute;
+  right: 5px;
+  top: 6px;
+  color: rgba(0, 0, 0, 0.3);
+}

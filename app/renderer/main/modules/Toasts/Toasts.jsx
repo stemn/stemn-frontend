@@ -51,7 +51,7 @@ const Toast = React.createClass({
       if(toast.actions && toast.actions.length){
         return (
           <span>
-            {toast.actions.map((action, index) => <a key={index} onClick={()=>dispatch(action.action)} className="link-primary">&nbsp;&nbsp;{action.text}</a>)}
+            {toast.actions.map((action, index) => <a key={index} onClick={()=>{dispatch(action.action); this.closeToast()}} className="link-primary">&nbsp;&nbsp;{action.text}</a>)}
           </span>
         )
       }
