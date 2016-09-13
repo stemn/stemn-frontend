@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as TasksActions from '../../Tasks.actions.js';
+import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 
 // Component Core
 import React from 'react';
@@ -16,6 +17,9 @@ import classes from './TaskListItem.css';
 // Sub Components
 import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
 import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx'
+import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import { MdMoreHoriz, MdOpenInNew } from 'react-icons/lib/md';
+import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -29,6 +33,15 @@ export const Component = React.createClass({
       taskId: this.props.task._id,
       model,
       value
+    })
+  },
+  showModal(){
+    console.log('show');
+    this.props.ModalActions.showModal({
+      modalType: 'TASK',
+      modalProps: {
+        item: this.props.task
+      }
     })
   },
   render() {
@@ -55,6 +68,20 @@ export const Component = React.createClass({
         <div className={classes.date + ' text ellipsis'}>
           {moment(task.due).fromNow()}
         </div>
+        <div className={classes.actions + ' text ellipsis layout-row layout-align-end-center'}>
+          <SimpleIconButton onClick={this.showModal}>
+            <MdOpenInNew size="20px"/>
+          </SimpleIconButton>
+          <PopoverMenu preferPlace="below">
+            <SimpleIconButton>
+              <MdMoreHoriz size="20px"/>
+            </SimpleIconButton>
+            <div className="PopoverMenu">
+              <a>View Task</a>
+              <a>Delete Task</a>
+            </div>
+          </PopoverMenu>
+        </div>
       </div>
     )
   }
@@ -75,6 +102,8 @@ function mapStateToProps({ tasks }, {item}) {
 function mapDispatchToProps(dispatch) {
   return {
     TasksActions: bindActionCreators(TasksActions, dispatch),
+    ModalActions : bindActionCreators(ModalActions, dispatch),
+
   }
 }
 

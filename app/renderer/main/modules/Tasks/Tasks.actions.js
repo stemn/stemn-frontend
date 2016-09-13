@@ -258,7 +258,7 @@ export function toggleComplete({taskId, model, value}) {
   return (dispatch) => {
     dispatch(actions.change(model, value));
     dispatch(showToast({
-      title: `Marked this task as complete.`,
+      title: `This task was marked ${value ? 'complete' : 'incomplete'}.`,
       actions: [{
         text: 'Undo',
         action: actions.change(model, !value)

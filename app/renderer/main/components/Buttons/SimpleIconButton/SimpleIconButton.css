@@ -5,6 +5,7 @@
   padding: 5px;
   border-radius: 50%;
   transition: 0.3s ease all;
+  line-height: 1em;
 }
 .button:focus {
   outline: none;
