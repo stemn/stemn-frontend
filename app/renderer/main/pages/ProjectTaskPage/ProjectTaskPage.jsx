@@ -46,7 +46,7 @@ export const Component = React.createClass({
     const { tasks, project, TasksActions, entityModel } = this.props;
     return (
       <div className="layout-column flex" style={{margin: '30px'}}>
-        <Tasks query={{projectId: project.data._id}} />
+        <Tasks projectId={project.data._id} />
       </div>
     )
   }

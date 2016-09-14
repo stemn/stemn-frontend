@@ -54,7 +54,7 @@ const ownerFilter = [{
 export const Component = React.createClass({
   componentWillMount() {
     this.props.TasksActions.getTasks({
-      projectId: 'fakeprojectidhere'
+      projectId: this.props.projectId
     })
   },
   getInitialState () {
@@ -134,9 +134,9 @@ export const Component = React.createClass({
 ///////////////////////////////// CONTAINER /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({ tasks }, {item}) {
+function mapStateToProps({ tasks }, {projectId}) {
   return {
-    tasks: tasks.projects['fakeprojectidhere']
+    tasks: tasks.projects[projectId]
   };
 }
 

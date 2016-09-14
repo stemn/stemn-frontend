@@ -216,42 +216,56 @@ export function deleteTask({projectId, taskId}) {
   }
 }
 
-export function moveTask({projectId, lastX, lastY, nextX, nextY}) {
-  return {
-    type: 'TASKS/MOVE_TASK',
-    payload: {
-      lastX, lastY, nextX, nextY
-    },
-    meta: {
-      cacheKey: projectId
-    }
-  }
-}
-
-
-export function moveGroup({projectId, lastX, nextX}) {
-  return {
-    type: 'TASKS/MOVE_GROUP',
-    payload: {
-      lastX, nextX
-    },
-    meta: {
-      cacheKey: projectId
-    }
-  }
-}
-
-//export function toggleDragging({projectId, isDragging}) {
+//export function moveTask({projectId, lastX, lastY, nextX, nextY}) {
 //  return {
-//    type: 'TASKS/TOGGLE_DRAGGING',
+//    type: 'TASKS/MOVE_TASK',
 //    payload: {
-//      isDragging
+//      lastX, lastY, nextX, nextY
 //    },
 //    meta: {
 //      cacheKey: projectId
 //    }
 //  }
 //}
+//
+//
+//export function moveGroup({projectId, lastX, nextX}) {
+//  return {
+//    type: 'TASKS/MOVE_GROUP',
+//    payload: {
+//      lastX, nextX
+//    },
+//    meta: {
+//      cacheKey: projectId
+//    }
+//  }
+//}
+
+
+export function moveTask({projectId, dragItem, hoverItem}) {
+  return {
+    type: 'TASKS/MOVE_TASK',
+    payload: {
+      dragItem, hoverItem
+    },
+    meta: {
+      cacheKey: projectId
+    }
+  }
+}
+
+
+export function moveGroup({projectId, dragItem, hoverItem}) {
+  return {
+    type: 'TASKS/MOVE_GROUP',
+    payload: {
+      dragItem, hoverItem
+    },
+    meta: {
+      cacheKey: projectId
+    }
+  }
+}
 
 
 export function toggleComplete({taskId, model, value}) {

@@ -1,4 +1,5 @@
 import u from 'updeep';
+import i from 'icepick';
 import { cloneDeep } from 'lodash';
 import { modeled } from 'react-redux-form';
 import { groupTasks } from './Tasks.utils.js';
@@ -130,45 +131,103 @@ const mainReducer = (state, action) => {
       }, state)
 
 
+//    case 'TASKS/MOVE_TASK':
+//      return u({
+//        projects: {
+//          [action.meta.cacheKey] : {
+//            structure: moveTask,
+//          }
+//        }
+//      }, state)
+//
+//    case 'TASKS/MOVE_GROUP':
+//      const moveGroup = (items) =>{
+//        const { lastX, nextX } = action.payload;
+//        const cloneItems = cloneDeep(items);
+//        const t = cloneItems.splice(lastX, 1)[0];
+//        cloneItems.splice(nextX, 0, t);
+//        return cloneItems;
+//      }
+//      return u({
+//        projects: {
+//          [action.meta.cacheKey] : {
+//            structure: moveGroup,
+//          }
+//        }
+//      }, state)
+
+
     case 'TASKS/MOVE_TASK':
-      const moveTask = (items) =>{
-        const { lastX, lastY, nextX, nextY } = action.payload;
-        const cloneItems = cloneDeep(items);
-        if (lastX === nextX) {
-          cloneItems[lastX].children.splice(nextY, 0, cloneItems[lastX].children.splice(lastY, 1)[0]);
-        } else {
-          cloneItems[nextX].children.splice(nextY, 0, cloneItems[lastX].children[lastY]);  // move element to new place
-          cloneItems[lastX].children.splice(lastY, 1); // delete element from old place
-        }
-        return cloneItems;
-      }
-      return u({
+      const taskFrom = getLocationIndex(state.projects[action.meta.cacheKey].structure, action.payload.dragItem.id);
+      const taskTo   = getLocationIndex(state.projects[action.meta.cacheKey].structure, action.payload.hoverItem.id);
+      const newStructure = moveTask(
+        state.projects[action.meta.cacheKey].structure,
+        taskFrom.groupIndex,
+        taskTo.groupIndex,
+        taskFrom.taskIndex,
+        taskTo.taskIndex
+      );
+      return i.merge(state, {
         projects: {
           [action.meta.cacheKey] : {
-            structure: moveTask,
+            structure: newStructure
           }
         }
-      }, state)
-
+      })
     case 'TASKS/MOVE_GROUP':
-      const moveGroup = (items) =>{
-        const { lastX, nextX } = action.payload;
-        const cloneItems = cloneDeep(items);
-        const t = cloneItems.splice(lastX, 1)[0];
-        cloneItems.splice(nextX, 0, t);
-        return cloneItems;
-      }
-      return u({
+      const groupFrom = action.payload.dragItem.index;
+      const groupTo   = action.payload.hoverItem.index;
+      const newGroupStructure = moveGroup(state.projects[action.meta.cacheKey].structure, groupFrom, groupTo);
+      return i.merge(state, {
         projects: {
           [action.meta.cacheKey] : {
-            structure: moveGroup,
+            structure: newGroupStructure
           }
         }
-      }, state)
-
+      })
+      return state
     default:
       return state;
   }
+}
+
+function getLocationIndex(groups, id){
+  // This will return the group and task index inside the structure object.
+  let groupIndex = null;
+  let taskIndex  = null;
+  groupIndex = groups.findIndex((group, groupIndex) => {
+    const foundTaskIndex = group.children.findIndex((task)=>{
+      return task._id == id;
+    })
+    // If the task index is found, we return it
+    if(foundTaskIndex != -1){
+      taskIndex = foundTaskIndex;
+      return true
+    }
+  })
+  return {
+    groupIndex,
+    taskIndex
+  }
+}
+
+function moveTask (groups, lastX, nextX, lastY, nextY) {
+  const cloneItems = cloneDeep(groups);
+  if (lastX === nextX) {
+    cloneItems[lastX].children.splice(nextY, 0, cloneItems[lastX].children.splice(lastY, 1)[0]);
+  } else {
+    cloneItems[nextX].children.splice(nextY, 0, cloneItems[lastX].children[lastY]);  // move element to new place
+    cloneItems[lastX].children.splice(lastY, 1); // delete element from old place
+  }
+  return cloneItems;
+}
+
+
+function moveGroup(groups, fromIndex, toIndex){
+  const cloneItems = cloneDeep(groups);
+  const t = cloneItems.splice(fromIndex, 1)[0];
+  cloneItems.splice(toIndex, 0, t);
+  return cloneItems;
 }
 
 function addItem (keyItems, item) {

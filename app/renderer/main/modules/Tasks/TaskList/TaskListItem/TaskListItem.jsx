@@ -20,6 +20,7 @@ import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvata
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 import { MdMoreHoriz, MdOpenInNew } from 'react-icons/lib/md';
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
+import TaskLabelDots from 'app/renderer/main/modules/Tasks/TaskLabelDots/TaskLabelDots.jsx'
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -59,6 +60,9 @@ export const Component = React.createClass({
           changeAction={this.toggleComplete}
           className="text-primary" />
         <div className="flex text-ellipsis">{task.title}</div>
+        <div className={classes.labels}>
+          <TaskLabelDots labels={task.labels} labelInfo={this.context.project.data.labels} tag="true" />
+        </div>
         <div className={classes.user + ' layout-row layout-align-start-center text ellipsis'}>
           <UserAvatar
             picture={task.users[0].picture}
@@ -87,6 +91,10 @@ export const Component = React.createClass({
   }
 });
 
+Component.contextTypes = {
+  project: React.PropTypes.object
+}
+
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////
@@ -103,7 +111,6 @@ function mapDispatchToProps(dispatch) {
   return {
     TasksActions: bindActionCreators(TasksActions, dispatch),
     ModalActions : bindActionCreators(ModalActions, dispatch),
-
   }
 }
 
