@@ -38,7 +38,7 @@ export default class Card extends Component {
 
   render() {
     const { item, isDragging, connectDragSource, connectDropTarget } = this.props;
-    const outerStyles = isDragging ? {outline: '2px dashed rgba(0, 0, 0, 0.4)'} : null;
+    const outerStyles = isDragging ? {outline: '2px dashed rgba(0, 0, 0, 0.4)'} : {transform: 'translate3d(0,0,0)'};
     const innerStyles = isDragging ? {opacity: '0'} : {opacity: '1'};
     return connectDragSource(connectDropTarget(
       <div style={outerStyles}>

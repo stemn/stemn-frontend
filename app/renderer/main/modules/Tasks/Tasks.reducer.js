@@ -159,14 +159,28 @@ const mainReducer = (state, action) => {
 
     case 'TASKS/MOVE_TASK':
       const taskFrom = getLocationIndex(state.projects[action.meta.cacheKey].structure, action.payload.dragItem.id);
-      const taskTo   = getLocationIndex(state.projects[action.meta.cacheKey].structure, action.payload.hoverItem.id);
-      const newStructure = moveTask(
-        state.projects[action.meta.cacheKey].structure,
-        taskFrom.groupIndex,
-        taskTo.groupIndex,
-        taskFrom.taskIndex,
-        taskTo.taskIndex
-      );
+      let newStructure = null;
+      if(action.payload.destinationGroup){
+        // The group is empty
+        newStructure = moveTask(
+          state.projects[action.meta.cacheKey].structure,
+          taskFrom.groupIndex,
+          getGroupIndex(state.projects[action.meta.cacheKey].structure, action.payload.destinationGroup),
+          taskFrom.taskIndex,
+          0 // Put it at the start of the group
+        );
+      }
+      else if(action.payload.hoverItem){
+        // We move the task to the hoverItem position
+        const taskTo   = getLocationIndex(state.projects[action.meta.cacheKey].structure, action.payload.hoverItem.id);
+        newStructure = moveTask(
+          state.projects[action.meta.cacheKey].structure,
+          taskFrom.groupIndex,
+          taskTo.groupIndex,
+          taskFrom.taskIndex,
+          taskTo.taskIndex
+        );
+      }
       return i.merge(state, {
         projects: {
           [action.meta.cacheKey] : {
@@ -186,10 +200,30 @@ const mainReducer = (state, action) => {
         }
       })
       return state
+    case 'TASKS/BEGIN_DRAG':
+      return i.merge(state, {
+        data: {
+          [action.payload.taskId] : {
+            isDragging: true
+          }
+        }
+      })
+    case 'TASKS/END_DRAG':
+      return i.merge(state, {
+        data: {
+          [action.payload.taskId] : {
+            isDragging: false
+          }
+        }
+      })
     default:
       return state;
   }
 }
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 
 function getLocationIndex(groups, id){
   // This will return the group and task index inside the structure object.
@@ -209,6 +243,10 @@ function getLocationIndex(groups, id){
     groupIndex,
     taskIndex
   }
+}
+
+function getGroupIndex(groups, groupId){
+  return groups.findIndex((group)=>group._id == groupId)
 }
 
 function moveTask (groups, lastX, nextX, lastY, nextY) {

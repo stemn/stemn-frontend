@@ -242,17 +242,44 @@ export function deleteTask({projectId, taskId}) {
 //}
 
 
-export function moveTask({projectId, dragItem, hoverItem}) {
+export function moveTask({projectId, dragItem, hoverItem, destinationGroup}) {
+  // To move a task you must have either hoverItem or destinationGroup
+  // destinationGroup is used if the group is empty
   return {
     type: 'TASKS/MOVE_TASK',
     payload: {
-      dragItem, hoverItem
+      dragItem, hoverItem, destinationGroup
     },
     meta: {
       cacheKey: projectId
     }
   }
 }
+
+export function beginDrag({projectId, taskId}) {
+  return {
+    type: 'TASKS/BEGIN_DRAG',
+    payload: {
+      taskId
+    },
+    meta: {
+      cacheKey: projectId
+    }
+  }
+}
+
+export function endDrag({projectId, taskId}) {
+  return {
+    type: 'TASKS/END_DRAG',
+    payload: {
+      taskId
+    },
+    meta: {
+      cacheKey: projectId
+    }
+  }
+}
+
 
 
 export function moveGroup({projectId, dragItem, hoverItem}) {

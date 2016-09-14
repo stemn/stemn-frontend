@@ -2,6 +2,7 @@ import { findDOMNode } from 'react-dom';
 
 export const hover = (props, monitor, component) => {
   const dragIndex = monitor.getItem().index;
+
   const hoverIndex = props.index;
 
   // Don't replace items with themselves
@@ -53,3 +54,16 @@ export const hover = (props, monitor, component) => {
   // to avoid expensive index searches.
   monitor.getItem().index = hoverIndex;
 }
+
+export const beginDrag = (props, monitor, component) => {
+  props.beginDrag(props.id)
+  return {
+    id: props.id,
+    index: props.index
+  };
+}
+
+export const endDrag = (props, monitor) => {
+  props.endDrag(props.id)
+}
+

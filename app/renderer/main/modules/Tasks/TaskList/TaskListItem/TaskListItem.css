@@ -39,3 +39,30 @@
   right: 0;
   opacity: 0;
 }
+
+.isDragging{
+  outline: 2px dashed rgba(0, 0, 0, 0.4);
+}
+.isDragging > div{
+  opacity: 0;
+}
+
+/* Animations */
+.enter, .appear{
+  transition: height 300ms ease;
+  height: 0px;
+  overflow: hidden;
+}
+.enterActive, .appearActive{
+  height: 45px;
+  overflow: hidden;
+}
+.leave{
+  overflow: hidden;
+  height: 45px;
+  transition: height 300ms ease;
+}
+.leaveActive{
+  overflow: hidden;
+  height: 0px;
+}

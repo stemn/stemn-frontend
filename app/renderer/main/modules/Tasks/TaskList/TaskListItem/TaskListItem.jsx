@@ -53,38 +53,40 @@ export const Component = React.createClass({
     }
 
     return (
-      <div className={classNames(classes.taskListItem, 'layout-row flex layout-align-start-center')}>
-        <Checkbox
-          model={`${entityModel}.complete`}
-          value={task.complete}
-          changeAction={this.toggleComplete}
-          className="text-primary" />
-        <div className="flex text-ellipsis">{task.title}</div>
-        <div className={classes.labels}>
-          <TaskLabelDots labels={task.labels} labelInfo={this.context.project.data.labels} tag="true" />
-        </div>
-        <div className={classes.user + ' layout-row layout-align-start-center text ellipsis'}>
-          <UserAvatar
-            picture={task.users[0].picture}
-            size="25px"/>
-          <div style={{marginLeft: '10px'}}>{task.users[0].name}</div>
-        </div>
-        <div className={classes.date + ' text ellipsis'}>
-          {moment(task.due).fromNow()}
-        </div>
-        <div className={classes.actions + ' text ellipsis layout-row layout-align-end-center'}>
-          <SimpleIconButton onClick={this.showModal}>
-            <MdOpenInNew size="20px"/>
-          </SimpleIconButton>
-          <PopoverMenu preferPlace="below">
-            <SimpleIconButton>
-              <MdMoreHoriz size="20px"/>
+      <div className={classNames({[classes.isDragging]: task.isDragging})}>
+        <div className={classNames(classes.taskListItem, 'layout-row flex layout-align-start-center')}>
+          <Checkbox
+            model={`${entityModel}.complete`}
+            value={task.complete}
+            changeAction={this.toggleComplete}
+            className="text-primary" />
+          <div className="flex text-ellipsis">{task.title}</div>
+          <div className={classes.labels}>
+            <TaskLabelDots labels={task.labels} labelInfo={this.context.project.data.labels} tag="true" />
+          </div>
+          <div className={classes.user + ' layout-row layout-align-start-center text ellipsis'}>
+            <UserAvatar
+              picture={task.users[0].picture}
+              size="25px"/>
+            <div style={{marginLeft: '10px'}}>{task.users[0].name}</div>
+          </div>
+          <div className={classes.date + ' text ellipsis'}>
+            {moment(task.due).fromNow()}
+          </div>
+          <div className={classes.actions + ' text ellipsis layout-row layout-align-end-center'}>
+            <SimpleIconButton onClick={this.showModal}>
+              <MdOpenInNew size="20px"/>
             </SimpleIconButton>
-            <div className="PopoverMenu">
-              <a>View Task</a>
-              <a>Delete Task</a>
-            </div>
-          </PopoverMenu>
+            <PopoverMenu preferPlace="below">
+              <SimpleIconButton>
+                <MdMoreHoriz size="20px"/>
+              </SimpleIconButton>
+              <div className="PopoverMenu">
+                <a>View Task</a>
+                <a>Delete Task</a>
+              </div>
+            </PopoverMenu>
+          </div>
         </div>
       </div>
     )
