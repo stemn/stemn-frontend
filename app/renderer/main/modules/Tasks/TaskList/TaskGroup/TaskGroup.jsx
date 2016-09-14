@@ -15,4 +15,4 @@ class Component extends React.Component {
   }
 }
 
-connect()(Component)
+export default connect()(Component)

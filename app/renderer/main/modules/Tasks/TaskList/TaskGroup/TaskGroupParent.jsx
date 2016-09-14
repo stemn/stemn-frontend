@@ -40,16 +40,14 @@ export default class Container extends React.Component {
     return (
       <div>
         <FlipMove enterAnimation="none" leaveAnimation="none" duration={200}>
-          {groups.map((group, i) => {
-            return (
-              <TaskGroupWrapped
-                key={group._id}
-                index={i}
-                id={group._id}
-                item={group}
-                moveGroup={this.moveGroup} />
-            );
-          })}
+          {groups.map((group, i) =>
+            <TaskGroupWrapped
+              key={group._id}
+              index={i}
+              id={group._id}
+              item={group}
+              moveGroup={this.moveGroup} />
+          )}
         </FlipMove>
       </div>
     );

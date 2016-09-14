@@ -1,6 +1,7 @@
 import React from 'react';
 
 import TaskGroupParent from './TaskGroup/TaskGroupParent.jsx';
+import TaskGroupWrapped from './TaskGroup/TaskGroupWrapped.jsx'
 
 export default React.createClass({
   render() {
