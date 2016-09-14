@@ -1,18 +1,20 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
-import TaskListItemParent from '../TaskListItem/TaskListItemParent.jsx';
-
-class Component extends React.Component {
+export default class Component extends React.Component {
   render() {
-    const { item } = this.props;
+    const { item, children, layout } = this.props;
+
+    const styles = layout == 'list' ? {
+      marginBottom: '20px'
+    } : {
+      padding: '0 15px',
+      width: '350px'
+    }
     return (
-      <div style={{marginBottom: '20px'}}>
+      <div style={styles}>
         <h3 className="text-mini-caps">{item.name}</h3>
-        <TaskListItemParent cards={item.children} groupId={item._id}/>
+        {children}
       </div>
     );
   }
 }
-
-export default connect()(Component)

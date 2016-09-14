@@ -67,28 +67,16 @@ export const Component = React.createClass({
     this.setState({ layout: layout })
   },
   render() {
-    const { tasks } = this.props;
-    const structure = [
-      {
-        _id: 'G1',
-        name: 'Today',
-        children: [{_id: 'T1'}, {_id: 'T2'}, {_id: 'T3'}, {_id: 'T4'}]
-      },{
-        _id: 'G2',
-        name: 'Upcoming',
-        children: [{_id: 'T5'}, {_id:'T6'}, {_id: 'T7'}]
-      },{
-        _id: 'G3',
-        name: 'Other',
-        children: [{_id: 'T8'}, {_id: 'T9'}]
-      }
-    ]
+    const { tasks, project } = this.props;
+
+    const pageStyle = this.state.layout == 'board' ? {background: 'rgba(0, 0, 0, 0.02)', padding: '30px'} : {background: 'white', padding: '30px'};
+
     if(!tasks || !tasks.structure){
       return null
     }
 
     return (
-      <div>
+      <div className="layout-column flex" style={pageStyle}>
        <div className={classes.header + ' layout-row layout-align-start-center'}>
           <div className={classes.search}>
             <Field model="sidebar.searchString">
@@ -119,11 +107,7 @@ export const Component = React.createClass({
           </PopoverMenu>
           <Button style={{marginLeft: '10px'}} className="primary">New Task</Button>
         </div>
-
-        {this.state.layout == 'list'
-          ? <TaskList structure={tasks.structure} />
-          : null
-        }
+        <TaskList structure={tasks.structure} project={project} layout={this.state.layout}/>
       </div>
     )
   }
@@ -134,9 +118,10 @@ export const Component = React.createClass({
 ///////////////////////////////// CONTAINER /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({ tasks }, {projectId}) {
+function mapStateToProps({ tasks, projects }, {projectId}) {
   return {
-    tasks: tasks.projects[projectId]
+    tasks: tasks.projects[projectId],
+    project: projects[projectId]
   };
 }
 

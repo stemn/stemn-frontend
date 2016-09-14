@@ -11,7 +11,7 @@ import React from 'react';
 
 // Styles
 import classNames from 'classnames';
-import classes from './Card.css';
+import classes from './TaskCard.css';
 
 // Sub Components
 import moment from 'moment';
@@ -81,7 +81,7 @@ Component.contextTypes = {
 ///////////////////////////////// CONTAINER /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({tasks, projects}, {params, item}) {
+function mapStateToProps({tasks, projects}, {item}) {
   const task = tasks.data[item._id];
   return {
     task: task,

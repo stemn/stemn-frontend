@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import TaskListItem from './TaskListItem.jsx'
 
 import { hover } from './TaskListItem.drag.config.js';
 import { DragSource, DropTarget } from 'react-dnd';
@@ -27,11 +26,10 @@ export default class Card extends Component {
   static propTypes = {
     connectDropTarget: PropTypes.func.isRequired,
   };
-
   render() {
-    const { item, connectDropTarget, groupId } = this.props;
+    const { item, connectDropTarget, groupId, style } = this.props;
     return connectDropTarget(
-      <div style={{minHeight: '20px'}}></div>
+      <div style={style}></div>
     );
   }
 }

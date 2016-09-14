@@ -1,10 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import TaskListItem from './TaskListItem.jsx'
-
 import { hover, beginDrag, endDrag } from './TaskListItem.drag.config.js';
 import { DragSource, DropTarget } from 'react-dnd';
-import { getEmptyImage } from 'react-dnd-html5-backend';
-
 const ItemTypes = {
   CARD: 'card'
 }
@@ -38,17 +34,11 @@ export default class Card extends Component {
     endDrag: PropTypes.func.isRequired
   };
 
-//  componentDidMount() {
-//    this.props.connectDragPreview(getEmptyImage(), {
-//      captureDraggingState: true
-//    });
-//  }
-
   render() {
-    const { item, isDragging, connectDragSource, connectDropTarget } = this.props;
+    const { isDragging, connectDragSource, connectDropTarget, children } = this.props;
     return connectDragSource(connectDropTarget(
       <div style={{transform: 'translate3d(0,0,0)'}}>
-        <TaskListItem item={item} draggable={true}/>
+        {children}
       </div>
     ));
   }
