@@ -46,14 +46,14 @@ export const Component = React.createClass({
     })
   },
   render() {
-    const { task, entityModel } = this.props;
+    const { task, entityModel, draggable } = this.props;
 
     if(!task){
       return <div>Task Loading</div>
     }
 
     return (
-      <div className={classNames({[classes.isDragging]: task.isDragging})}>
+      <div className={classNames({[classes.isDragging]: task.isDragging && draggable})}>
         <div className={classNames(classes.taskListItem, 'layout-row flex layout-align-start-center')}>
           <Checkbox
             model={`${entityModel}.complete`}

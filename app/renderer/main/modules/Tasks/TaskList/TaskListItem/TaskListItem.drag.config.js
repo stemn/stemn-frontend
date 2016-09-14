@@ -1,12 +1,20 @@
 import { findDOMNode } from 'react-dom';
+import { throttle } from 'lodash';
+
+let throttleModelUpdate = throttle((throttledFn)=>throttledFn(), 100, {
+  leading:true,
+  trailing:false
+});
 
 export const hover = (props, monitor, component) => {
   const dragIndex = monitor.getItem().index;
+  const dragId = monitor.getItem().id;
 
   const hoverIndex = props.index;
+  const hoverId = props.id;
 
   // Don't replace items with themselves
-  if (dragIndex === hoverIndex) {
+  if (dragId === hoverId) {
     return;
   }
 
@@ -37,16 +45,18 @@ export const hover = (props, monitor, component) => {
   }
 
   // Time to actually perform the action
-  props.moveCard({
-    dragItem: {
-      id: monitor.getItem().id,
-      index: monitor.getItem().index
-    },
-    hoverItem: {
-      id: props.id,
-      index: props.index
-    }
-  });
+   throttleModelUpdate(()=>{
+    props.moveCard({
+      dragItem: {
+        id: dragId,
+        index: dragIndex
+      },
+      hoverItem: {
+        id: hoverId,
+        index: hoverIndex
+      }
+    });
+  })
 
   // Note: we're mutating the monitor item here!
   // Generally it's better to avoid mutations,

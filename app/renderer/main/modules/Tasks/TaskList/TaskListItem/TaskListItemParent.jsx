@@ -8,6 +8,7 @@ import EmptyWrapped from './EmptyWrapped.jsx';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import FlipMove from 'react-flip-move';
 
 import classes from './TaskListItem.css';
 
@@ -71,16 +72,18 @@ export default class Container extends React.Component {
 
     return (
       <div>
-        {cards.map((card, i) =>
-          <TaskListItemWrapped
-            key={card._id}
-            index={i}
-            id={card._id}
-            item={card}
-            moveCard={this.moveCard}
-            beginDrag={this.beginDrag}
-            endDrag={this.endDrag} />
-        )}
+        <FlipMove enterAnimation="none" leaveAnimation="none" duration={200}>
+          {cards.map((card, i) =>
+            <TaskListItemWrapped
+              key={card._id}
+              index={i}
+              id={card._id}
+              item={card}
+              moveCard={this.moveCard}
+              beginDrag={this.beginDrag}
+              endDrag={this.endDrag} />
+          )}
+        </FlipMove>
         {cards.length >= 1 ? null :
           <EmptyWrapped
             moveCard={this.moveCard}

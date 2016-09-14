@@ -31,7 +31,7 @@ export default class Card extends Component {
   render() {
     const { item, connectDropTarget, groupId } = this.props;
     return connectDropTarget(
-      <div style={{minHeight: '50px'}}></div>
+      <div style={{minHeight: '20px'}}></div>
     );
   }
 }
