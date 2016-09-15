@@ -7,7 +7,7 @@ export default class Container extends React.Component {
     const { groupId, children, moveCard, layout } = this.props;
     return (
       <div>
-        <FlipMove enterAnimation="none" leaveAnimation="none" duration={200}>
+        <FlipMove enterAnimation="none" leaveAnimation="none" duration={100}>
           {children}
         </FlipMove>
         {children.length >= 1 ? null :
