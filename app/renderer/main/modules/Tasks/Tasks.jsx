@@ -69,7 +69,7 @@ export const Component = React.createClass({
   render() {
     const { tasks, project } = this.props;
 
-    const pageStyle = this.state.layout == 'board' ? {background: 'rgba(0, 0, 0, 0.02)', padding: '30px'} : {background: 'white', padding: '30px'};
+    const pageStyle = {background: 'white', padding: '30px'};
 
     if(!tasks || !tasks.structure){
       return null
@@ -107,7 +107,7 @@ export const Component = React.createClass({
           </PopoverMenu>
           <Button style={{marginLeft: '10px'}} className="primary">New Task</Button>
         </div>
-        <TaskList structure={tasks.structure} project={project} layout={this.state.layout}/>
+        <TaskList tasks={tasks} project={project} layout={this.state.layout}/>
       </div>
     )
   }
@@ -121,7 +121,7 @@ export const Component = React.createClass({
 function mapStateToProps({ tasks, projects }, {projectId}) {
   return {
     tasks: tasks.projects[projectId],
-    project: projects[projectId]
+    project: projects[projectId],
   };
 }
 

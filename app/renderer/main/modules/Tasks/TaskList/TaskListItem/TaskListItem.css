@@ -1,6 +1,10 @@
 @value primary, border1, bg1 from "app/renderer/assets/css/themes/standard.css";
 
-.taskListItem{
+.isDragging{
+  opacity: 0.5;
+}
+
+.listItem{
   height: 45px;
   line-height: 45px;
   background: none;
@@ -8,31 +12,27 @@
   padding-left: 10px;
   position: relative;
 }
-.taskListItem:hover{
+.listItem:hover{
   background: bg1;
 }
-.taskListItem > div{
+.listItem > div{
   padding: 0px 10px;
 }
-
-.user{
+.listUser{
   color: rgba(0, 0, 0, 0.6);
   width: 140px;
 }
-
-
-.taskListItem:hover .date{
+.listItem:hover .listDate{
   opacity: 0;
 }
-.date{
+.listDate{
   opacity: 1;
   width: 100px;
 }
-
-.taskListItem:hover .actions{
+.listItem:hover .listActions{
   opacity: 1;
 }
-.actions{
+.listActions{
   position: absolute;
   top: 0;
   bottom: 0;
@@ -40,26 +40,24 @@
   opacity: 0;
 }
 
-.isDragging{
-  opacity: 0.5;
-}
 
-/* Animations */
-.enter, .appear{
-  transition: height 300ms ease;
-  height: 0px;
-  overflow: hidden;
+/* Card */
+.card{
+  border: 1px solid border1;
+  margin-bottom: 15px;
+  background: white;
+  transition: 0.15s;
+  cursor: pointer;
 }
-.enterActive, .appearActive{
-  height: 45px;
-  overflow: hidden;
+.cardBody{
+  padding: 15px;
 }
-.leave{
-  overflow: hidden;
-  height: 45px;
-  transition: height 300ms ease;
+.cardFooter{
+  padding: 10px 15px;
+  border-top: 1px dashed border1;
 }
-.leaveActive{
-  overflow: hidden;
-  height: 0px;
+.cardText{
+  padding: 0px 10px;
+  line-height: 1.4em;
+  margin-top: -4px;
 }

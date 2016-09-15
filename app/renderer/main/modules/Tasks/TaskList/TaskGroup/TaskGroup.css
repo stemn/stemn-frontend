@@ -1,3 +1,6 @@
-.board-column{
-
+.header:hover .options{
+  opacity: 1;
+}
+.options{
+  opacity: 0;
 }

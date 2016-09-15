@@ -33,31 +33,17 @@ const mainReducer = (state, action) => {
 //      }, state)
 
     case 'TASKS/NEW_TASK':
-
-      const addTaskToStructure = (structure) => {
-        const cloneStructure = cloneDeep(structure);
-        const groupIndex = structure.findIndex((group)=>group._id == action.payload.task.group);
-        cloneStructure[groupIndex].children.push({
-          _id: action.payload.task._id
-        })
-        return cloneStructure
-      }
-      const addTaskToItems = (items) => {
-        const cloneItems = cloneDeep(items);
-        cloneItems[action.payload.task._id] = action.payload.task;
-        return cloneItems
-      }
-      return u({
-        data : addTaskToItems,
+      return i.merge(state, {
+        data: addTaskToData(state.data, action.payload.task),
         projects : {
           [action.meta.cacheKey] : {
-            structure: addTaskToStructure,
+            structure: addTaskToStructure(state.projects[action.meta.cacheKey].structure, action.payload.task),
             newTaskString: {
               [action.payload.task.group] : ''
             }
           }
         }
-      }, state)
+      });
 
 
 
@@ -224,6 +210,16 @@ const mainReducer = (state, action) => {
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
+
+function addTaskToStructure(structure, task) {
+  const groupIndex = structure.findIndex((group)=>group._id == task.group);
+  const newArray = i.push(structure[groupIndex].children, { _id: task._id }); // Push the task onto the child array
+  return i.assocIn(structure, [groupIndex, 'children'], newArray)
+}
+
+function addTaskToData(data, task) {
+  return i.assoc(data, task._id, task)
+}
 
 function getLocationIndex(groups, id){
   // This will return the group and task index inside the structure object.
