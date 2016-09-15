@@ -40,12 +40,14 @@
   opacity: 0;
 }
 
+/*
 .isDragging{
   outline: 2px dashed rgba(0, 0, 0, 0.4);
 }
 .isDragging > div{
   opacity: 0;
 }
+*/
 
 /* Animations */
 .enter, .appear{
