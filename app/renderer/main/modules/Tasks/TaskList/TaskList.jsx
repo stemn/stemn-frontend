@@ -15,11 +15,11 @@ import classes from './TaskList.css';
 
 export const NewItem = React.createClass({
   render() {
-    const { model, submitFn, placeholder } = this.props;
+    const { model, submitFn, placeholder, box, style } = this.props;
     return (
-      <form name="form" onSubmit={submitFn}>
+      <form style={style} name="form" onSubmit={submitFn}>
         <Field model={model}>
-          <input className={classes.newItem} type="text" placeholder={placeholder}/>
+          <input className={box ? classes.newItemBox : classes.newItem} type="text" placeholder={placeholder}/>
         </Field>
       </form>
     )
@@ -78,11 +78,11 @@ export const Component = React.createClass({
   },
 
   render() {
-    const { tasks, project, layout } = this.props;
+    const { tasks, project, layout, className } = this.props;
     const entityModel = `tasks.projects.${project.data._id}`;
 
     return (
-      <div className="layout-column flex">
+      <div className={className + ' layout-column flex'} style={layout == 'board' ? {overflowX : 'scroll'} : {overflowY : 'scroll'}}>
         <TaskGroupParent layout={layout}>
           {tasks.structure.map((group, i) =>
             <TaskGroupWrapped
@@ -112,19 +112,25 @@ export const Component = React.createClass({
                     </TaskListItemWrapped>
                   )}
                   <NewItem
+                    style={layout == 'list' ? {marginLeft: '40px'} : {}}
                     model={`${entityModel}.newTaskString.${group._id}`}
                     placeholder="New Task"
                     submitFn={(event) => this.newTask(event, group._id)}
+                    box={layout=='board'}
                   />
                 </TaskListItemParent>
               </TaskGroup>
            </TaskGroupWrapped>
           )}
-          <NewItem
-            model={`${entityModel}.newGroupString`}
-            placeholder="New Group"
-            submitFn={this.newGroup}
-          />
+          <div style={{width: '350px', padding: '0 15px'}}>
+            <h3 className="text-mini-caps flex">&nbsp;</h3>
+            <NewItem
+              model={`${entityModel}.newGroupString`}
+              placeholder="New Group"
+              submitFn={this.newGroup}
+              box={layout=='board'}
+            />
+          </div>
         </TaskGroupParent>
       </div>
     )

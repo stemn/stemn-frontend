@@ -69,14 +69,12 @@ export const Component = React.createClass({
   render() {
     const { tasks, project } = this.props;
 
-    const pageStyle = {background: 'white', padding: '30px'};
-
     if(!tasks || !tasks.structure){
       return null
     }
 
     return (
-      <div className="layout-column flex" style={pageStyle}>
+      <div className="layout-column flex">
        <div className={classes.header + ' layout-row layout-align-start-center'}>
           <div className={classes.search}>
             <Field model="sidebar.searchString">
@@ -86,7 +84,7 @@ export const Component = React.createClass({
           </div>
           <div className="flex"></div>
           <PopoverMenu preferPlace="below">
-            <Button style={{marginLeft: '10px'}} className="light">Layout</Button>
+            <Button style={{marginLeft: '10px'}} className="white">Layout</Button>
             <div className="PopoverMenu">
               {layouts.map(layout =>
                <a className={classNames({'active' : this.state.layout == layout.value})} onClick={()=>this.setLayout(layout.value)}>{layout.text}</a>
@@ -94,7 +92,7 @@ export const Component = React.createClass({
             </div>
           </PopoverMenu>
           <PopoverMenu preferPlace="below">
-            <Button style={{marginLeft: '10px'}} className="light">Filter</Button>
+            <Button style={{marginLeft: '10px'}} className="white">Filter</Button>
             <div className="PopoverMenu">
               {statusFilter.map(item =>
                <a className={classNames({'active' : this.state.layout == item.value})} onClick={()=>this.setLayout(item.value)}>{item.text}</a>
@@ -107,7 +105,7 @@ export const Component = React.createClass({
           </PopoverMenu>
           <Button style={{marginLeft: '10px'}} className="primary">New Task</Button>
         </div>
-        <TaskList tasks={tasks} project={project} layout={this.state.layout}/>
+        <TaskList className={classes.tasks} tasks={tasks} project={project} layout={this.state.layout}/>
       </div>
     )
   }

@@ -1,5 +1,9 @@
+@value bg1, border1 from "app/renderer/assets/css/themes/standard.css";
+
 .header{
-  margin-bottom: 30px;
+  padding: 30px;
+  border-bottom: 1px solid border1;
+  background: bg1;
 }
 .search{
   width: 400px;
@@ -13,4 +17,7 @@
   right: 5px;
   top: 6px;
   color: rgba(0, 0, 0, 0.3);
+}
+.tasks{
+  padding: 30px;
 }
