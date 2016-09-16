@@ -6,7 +6,6 @@
 
 .listItem{
   height: 45px;
-  line-height: 45px;
   background: none;
   transition: 0.2s ease background;
   padding-left: 10px;
@@ -57,6 +56,7 @@
   border-top: 1px dashed border1;
 }
 .cardText{
+  margin-left: 4px;
   padding: 0px 10px;
   line-height: 1.4em;
   margin-top: -4px;

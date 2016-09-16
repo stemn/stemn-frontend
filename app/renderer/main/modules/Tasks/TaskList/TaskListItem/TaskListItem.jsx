@@ -62,7 +62,8 @@ export const Component = React.createClass({
               model={`${entityModel}.complete`}
               value={task.complete}
               changeAction={this.toggleComplete}
-              className="text-primary" />
+              className="text-primary"
+              circle={true} />
             <div className="flex text-ellipsis">
               <Field model={`${entityModel}.title`}>
                 <input
@@ -107,7 +108,8 @@ export const Component = React.createClass({
               model={`${entityModel}.complete`}
               value={task.complete}
               changeAction={this.toggleComplete}
-              className="text-primary" />
+              className="text-primary"
+              circle={true} />
             <div className={classes.cardText + ' flex'}>
               <Textarea
                 model={`${entityModel}.title`}

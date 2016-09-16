@@ -1,10 +1,8 @@
 import i from 'icepick';
 
-import { formReducer, modeled } from 'react-redux-form';
+import { modeled } from 'react-redux-form';
 
-const initialState = {
-
-}
+const initialState = {}
 
 const mainReducer = (state, action) => {
   switch (action.type) {

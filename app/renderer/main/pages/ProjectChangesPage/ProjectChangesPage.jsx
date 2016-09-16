@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as ChangesActions from 'app/shared/actions/changes.js';
+import * as ChangesActions from 'app/renderer/main/modules/Changes/Changes.actions.js';
 
 // Component Core
 import React from 'react';
@@ -15,13 +15,13 @@ import classNames from 'classnames';
 
 // Sub Components
 import { Link }           from 'react-router';
-import ContentSidebar     from 'app/renderer/main/components//ContentSidebar';
+import ContentSidebar     from 'app/renderer/main/components/ContentSidebar';
+import LoadingOverlay     from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import Timeline           from 'app/renderer/main/modules/Timeline/Timeline.jsx';
-import CommitChanges      from 'app/renderer/main/components//CommitChanges';
-import CommitBox          from 'app/renderer/main/components/CommitBox/CommitBox.jsx'
+import CommitChanges      from 'app/renderer/main/modules/Changes/CommitChanges/CommitChanges.jsx';
+import CommitBox          from 'app/renderer/main/modules/Changes/CommitBox/CommitBox.jsx'
 import FileCompare        from 'app/renderer/main/modules/FileCompare/FileCompare.jsx';
 import FileCompareHeader  from 'app/renderer/main/modules/FileCompare/FileCompareHeader/FileCompareHeader.jsx';
-import LoadingOverlay     from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 
 

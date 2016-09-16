@@ -2,7 +2,7 @@ import React from 'react';
 
 // Components
 import SidebarTimelineRow from './SidebarTimelineRow'
-import FileChangeTitleRow from '../CommitChanges/FileChangeTitleRow';
+import FileChangeTitleRow from 'app/renderer/main/modules/Changes/CommitChanges/FileChangeTitleRow';
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 

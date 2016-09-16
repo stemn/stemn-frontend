@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as ChangesActions from 'app/shared/actions/changes.js';
+import * as ChangesActions from 'app/renderer/main/modules/Changes/Changes.actions.js';
 
 // Component Core
 import React from 'react';

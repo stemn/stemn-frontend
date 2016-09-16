@@ -1,0 +1,12 @@
+@value primary, border1, bg1 from "app/renderer/assets/css/themes/standard.css";
+
+.row{
+  border-bottom: 1px solid border1;
+  padding: 7px 15px;
+}
+.row:hover{
+  background: bg1;
+}
+.checkbox{
+  margin-left: 10px;
+}

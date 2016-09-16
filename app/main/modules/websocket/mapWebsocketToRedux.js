@@ -1,4 +1,4 @@
-import * as ChangesActions from '../../../shared/actions/changes.js';
+import * as ChangesActions from '../../../renderer/main/modules/changes.actions.js';
 import * as FilesActions from '../../../shared/actions/files.js';
 
 export default (action) => {

@@ -3,7 +3,6 @@ import { Field, Form } from 'react-redux-form';
 import { ContextMenu, MenuItem, ContextMenuLayer } from "react-contextmenu";
 
 // Components
-//import CommitBox from 'app/modules/files/CommitBox/CommitBox.container.js';
 import FileChangeRow from './FileChangeRow';
 import FileChangeTitleRow from './FileChangeTitleRow';
 import FileContextmenu from './FileContextmenu';

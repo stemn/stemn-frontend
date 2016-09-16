@@ -19,6 +19,7 @@ import ErrorModal   from './modals/ErrorModal.jsx';
 import FileSelectModal from 'app/renderer/main/modules/FileSelect/FileSelectModal.jsx';
 import TaskDisplayModal from 'app/renderer/main/modules/Tasks/TaskDisplayModal/TaskDisplayModal.jsx'
 import TaskLabelsEditModal from 'app/renderer/main/modules/Tasks/TaskLabelsEditModal/TaskLabelsEditModal.jsx'
+import TaskCommitModal from 'app/renderer/main/modules/Tasks/TaskCommitModal/TaskCommitModal.jsx'
 
 
 const modalComponents = {
@@ -26,7 +27,8 @@ const modalComponents = {
   'ERROR'       : ErrorModal,
   'FILE_SELECT' : FileSelectModal,
   'TASK'        : TaskDisplayModal,
-  'TASK_LABELS' : TaskLabelsEditModal
+  'TASK_LABELS' : TaskLabelsEditModal,
+  'TASK_COMMIT' : TaskCommitModal
 }
 
 /////////////////////////////////////////////////////////////////////////////

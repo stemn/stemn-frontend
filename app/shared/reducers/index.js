@@ -3,7 +3,6 @@ import { routerReducer as routing } from 'react-router-redux';
 
 import system from './system';
 import header from './header';
-import changes from './changes';
 import auth from './auth';
 import sidebar from './sidebar';
 import sidebarTimeline from './sidebarTimeline';
@@ -24,6 +23,7 @@ import tasks        from '../../renderer/main/modules/Tasks/Tasks.reducer.js';
 import comments     from '../../renderer/main/modules/Comments/Comments.reducer.js';
 import toasts       from '../../renderer/main/modules/Toasts/Toasts.reducer.js';
 import fileCompare  from '../../renderer/main/modules/FileCompare/FileCompare.reducer.js';
+import changes      from '../../renderer/main/modules/Changes/Changes.reducer.js';
 
 
 export default function getRootReducer(scope = 'main') {

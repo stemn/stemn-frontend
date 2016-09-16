@@ -74,7 +74,8 @@ export const Component = React.createClass({
             model={`${entityModel}.complete`}
             value={task.complete}
             changeAction={this.toggleComplete}
-            className="text-primary" />
+            className="text-primary"
+            circle={true} />
           <div className="text-title-4 flex" style={{marginLeft: '15px'}}>
             <Textarea
               model={`${entityModel}.title`}

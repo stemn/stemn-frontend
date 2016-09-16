@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import App from '../components/App';
-import * as ChangeActions from 'app/shared/actions/changes';
+import * as ChangeActions from 'app/renderer/main/modules/Changes/Changes.actions.js';
 
 
 function mapStateToProps({ job }) {
