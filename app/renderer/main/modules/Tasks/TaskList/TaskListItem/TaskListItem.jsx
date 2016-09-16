@@ -9,6 +9,7 @@ import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js'
 // Component Core
 import React from 'react';
 import moment from 'moment';
+import { Field } from 'react-redux-form';
 
 // Styles
 import classNames from 'classnames';
@@ -55,25 +56,32 @@ export const Component = React.createClass({
 
     if(layout == 'list'){
       return (
-        <div className={classNames({[classes.isDragging]: task.isDragging && draggable})}>
+        <div className={classNames({[classes.isDragging]: task.isDragging && draggable})} onDoubleClick={this.showModal}>
           <div className={classNames(classes.listItem, 'layout-row flex layout-align-start-center')}>
             <Checkbox
               model={`${entityModel}.complete`}
               value={task.complete}
               changeAction={this.toggleComplete}
               className="text-primary" />
-            <div className="flex text-ellipsis">{task.title}</div>
+            <div className="flex text-ellipsis">
+              <Field model={`${entityModel}.title`}>
+                <input
+                  className="input-plain"
+                  type="text"
+                  placeholder="Task description" />
+              </Field>
+            </div>
             <TaskLabelDots labels={task.labels} labelInfo={this.context.project.data.labels} tag="true" />
-            <div className={classes.listUser + ' layout-row layout-align-start-center text ellipsis'}>
+            <div className={classes.listUser + ' layout-row layout-align-start-center text-ellipsis'}>
               <UserAvatar
                 picture={task.users[0].picture}
                 size="25px"/>
               <div style={{marginLeft: '10px'}}>{task.users[0].name}</div>
             </div>
-            <div className={classes.listDate + ' text ellipsis'}>
+            <div className={classes.listDate + ' text-ellipsis'}>
               {moment(task.due).fromNow()}
             </div>
-            <div className={classes.listActions + ' text ellipsis layout-row layout-align-end-center'}>
+            <div className={classes.listActions + ' text-ellipsis layout-row layout-align-end-center'}>
               <SimpleIconButton onClick={this.showModal}>
                 <MdOpenInNew size="20px"/>
               </SimpleIconButton>
@@ -93,7 +101,7 @@ export const Component = React.createClass({
     }
     else{
       return (
-        <div className={classNames(classes.card, 'layout-column flex')} onClick={this.showModal}>
+        <div className={classNames(classes.card, 'layout-column flex')} onDoubleClick={this.showModal}>
           <div className={classes.cardBody + ' layout-row'}>
             <Checkbox
               model={`${entityModel}.complete`}

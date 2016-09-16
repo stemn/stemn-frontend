@@ -61,7 +61,7 @@ export function getTasks({projectId}) {
               group: '1',
               due: 1472792461569,
               project: {
-                _id: '57c3c23692b46d982beaadd6'
+                _id: '57c526c3e7c624f857828691'
               },
               labels: ['L1', 'L2', 'L4'],
               users : [
@@ -78,7 +78,7 @@ export function getTasks({projectId}) {
               labels: ['L2', 'L4'],
               due: 1472792461569,
               project: {
-                _id: '57c3c23692b46d982beaadd6'
+                _id: '57c526c3e7c624f857828691'
               },
               users : [
                 {
@@ -94,7 +94,7 @@ export function getTasks({projectId}) {
               labels: ['L4', 'L2'],
               due: 1472792461569,
               project: {
-                _id: '57c3c23692b46d982beaadd6'
+                _id: '57c526c3e7c624f857828691'
               },
               users : [
                 {
@@ -109,7 +109,7 @@ export function getTasks({projectId}) {
               group: '1',
               due: 1472792461569,
               project: {
-                _id: '57c3c23692b46d982beaadd6'
+                _id: '57c526c3e7c624f857828691'
               },
               users : [
                 {
@@ -124,7 +124,7 @@ export function getTasks({projectId}) {
               group: '2',
               due: 1472792461569,
               project: {
-                _id: '57c3c23692b46d982beaadd6'
+                _id: '57c526c3e7c624f857828691'
               },
               users : [
                 {
@@ -139,7 +139,7 @@ export function getTasks({projectId}) {
               group: '2',
               due: 1472792461569,
               project: {
-                _id: '57c3c23692b46d982beaadd6'
+                _id: '57c526c3e7c624f857828691'
               },
               users : [
                 {
@@ -154,7 +154,7 @@ export function getTasks({projectId}) {
               group: '2',
               due: 1472792461569,
               project: {
-                _id: '57c3c23692b46d982beaadd6'
+                _id: '57c526c3e7c624f857828691'
               },
               users : [
                 {
@@ -169,7 +169,7 @@ export function getTasks({projectId}) {
               group: '3',
               due: 1472792461569,
               project: {
-                _id: '57c3c23692b46d982beaadd6'
+                _id: '57c526c3e7c624f857828691'
               },
               users : [
                 {
@@ -184,7 +184,7 @@ export function getTasks({projectId}) {
               group: '3',
               due: 1472792461569,
               project: {
-                _id: '57c3c23692b46d982beaadd6'
+                _id: '57c526c3e7c624f857828691'
               },
               users : [
                 {
@@ -328,11 +328,11 @@ export function newGroup({projectId, group}) {
   }
 }
 
-export function deleteGroup({projectId, group}) {
+export function deleteGroup({projectId, groupId}) {
   return {
     type: 'TASKS/DELETE_GROUP',
     payload: {
-      group
+      groupId
     },
     meta: {
       cacheKey: projectId

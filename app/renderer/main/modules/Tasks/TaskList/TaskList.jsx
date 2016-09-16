@@ -76,7 +76,12 @@ export const Component = React.createClass({
       },
     })
   },
-
+  deleteGroup(groupId){
+    this.props.TasksActions.deleteGroup({
+      projectId: this.props.project.data._id,
+      groupId: groupId
+    })
+  },
   render() {
     const { tasks, project, layout, className } = this.props;
     const entityModel = `tasks.projects.${project.data._id}`;
@@ -84,25 +89,27 @@ export const Component = React.createClass({
     return (
       <div className={className + ' layout-column flex'} style={layout == 'board' ? {overflowX : 'scroll'} : {overflowY : 'scroll'}}>
         <TaskGroupParent layout={layout}>
-          {tasks.structure.map((group, i) =>
+          {tasks.structure.map((group, groupIndex) =>
             <TaskGroupWrapped
               key={group._id}
-              index={i}
+              index={groupIndex}
               id={group._id}
               item={group}
               moveGroup={this.moveGroup}
               layout={layout}>
               <TaskGroup
                item={group}
-               layout={layout}>
+               layout={layout}
+               entityModel={`${entityModel}.structure[${groupIndex}]`}
+               deleteGroup={() => this.deleteGroup(group._id)}>
                 <TaskListItemParent
                  groupId={group._id}
                  moveCard={this.moveCard}
                  layout={layout}>
-                  {group.children.map((card, i) =>
+                  {group.children.map((card, cardIndex) =>
                     <TaskListItemWrapped
                       key={card._id}
-                      index={i}
+                      index={cardIndex}
                       id={card._id}
                       item={card}
                       moveCard={this.moveCard}
@@ -122,7 +129,7 @@ export const Component = React.createClass({
               </TaskGroup>
            </TaskGroupWrapped>
           )}
-          <div style={{width: '350px', padding: '0 15px'}}>
+          <div style={{width: '350px', minWidth: '350px', padding: '0 15px'}}>
             <h3 className="text-mini-caps flex">&nbsp;</h3>
             <NewItem
               model={`${entityModel}.newGroupString`}

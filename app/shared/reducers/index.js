@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import { routerReducer as routing } from 'react-router-redux';
-import { reducer as form } from 'redux-form';
 
 import system from './system';
 import header from './header';
@@ -57,7 +56,6 @@ export default function getRootReducer(scope = 'main') {
     reducers = {
       ...reducers,
       routing,
-      form,
     };
   }
 

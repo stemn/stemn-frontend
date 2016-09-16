@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as TasksActions from '../Tasks.actions.js';
+import * as ProjectsActions from 'app/shared/actions/projects.js';
 import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 
 // Component Core
@@ -30,8 +31,9 @@ import CommentNew from 'app/renderer/main/modules/Comments/Comment/CommentNew.js
 /////////////////////////////////////////////////////////////////////////////
 
 const onMount = (nextProps, prevProps) => {
-  if(nextProps.item){
-    if(!prevProps || nextProps.item._id !== prevProps.item._id){
+  if(nextProps.task){
+    if(!prevProps || nextProps.task.project._id !== prevProps.task.project._id){
+      nextProps.ProjectsActions.getProject({projectId: nextProps.task.project._id});
     }
   }
 }
@@ -51,18 +53,28 @@ export const Component = React.createClass({
       },
     })
   },
-
+  toggleComplete(model, value){
+    this.props.TasksActions.toggleComplete({
+      taskId: this.props.task._id,
+      model,
+      value
+    })
+  },
   render() {
     const { item, task, project, entityModel, modalCancel, modalHide } = this.props;
 
-    if(!task){
+    if(!task || !project){
       return <div>Task Loading</div>
     }
 
     return (
       <div className={classNames(classes.taskDisplayModal)}>
         <div className="layout-row layout-align-start-center">
-          <Checkbox />
+          <Checkbox
+            model={`${entityModel}.complete`}
+            value={task.complete}
+            changeAction={this.toggleComplete}
+            className="text-primary" />
           <div className="text-title-4 flex" style={{marginLeft: '15px'}}>
             <Textarea
               model={`${entityModel}.title`}
@@ -122,7 +134,7 @@ function mapStateToProps({ tasks, projects }, {item}) {
     task: task,
     project: project,
     entityModel: `tasks.data.${item._id}`,
-    projectModel: `projects.${project.data._id}`
+//    projectModel: `projects.${project.data._id}`
   };
 }
 
@@ -130,6 +142,7 @@ function mapDispatchToProps(dispatch) {
   return {
     TasksActions: bindActionCreators(TasksActions, dispatch),
     ModalActions: bindActionCreators(ModalActions, dispatch),
+    ProjectsActions: bindActionCreators(ProjectsActions, dispatch),
     dispatch
   }
 }

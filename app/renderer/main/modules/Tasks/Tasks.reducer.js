@@ -108,40 +108,10 @@ const mainReducer = (state, action) => {
       }, state)
 
     case 'TASKS/DELETE_GROUP':
-      return u({
-        projects: {
-          [action.meta.cacheKey] : {
-            deleteTaskLoading: false,
-          }
-        }
-      }, state)
-
-
-//    case 'TASKS/MOVE_TASK':
-//      return u({
-//        projects: {
-//          [action.meta.cacheKey] : {
-//            structure: moveTask,
-//          }
-//        }
-//      }, state)
-//
-//    case 'TASKS/MOVE_GROUP':
-//      const moveGroup = (items) =>{
-//        const { lastX, nextX } = action.payload;
-//        const cloneItems = cloneDeep(items);
-//        const t = cloneItems.splice(lastX, 1)[0];
-//        cloneItems.splice(nextX, 0, t);
-//        return cloneItems;
-//      }
-//      return u({
-//        projects: {
-//          [action.meta.cacheKey] : {
-//            structure: moveGroup,
-//          }
-//        }
-//      }, state)
-
+      return i.updateIn(state, ['projects', action.meta.cacheKey, 'structure'], (structure) => {
+        const groupIndex = structure.findIndex((group) => group._id == action.payload.groupId); // Find the index of the group
+        return i.splice(structure, groupIndex, 1) // Delete the group from the structure array
+      })
 
     case 'TASKS/MOVE_TASK':
       const taskFrom = getLocationIndex(state.projects[action.meta.cacheKey].structure, action.payload.dragItem.id);
