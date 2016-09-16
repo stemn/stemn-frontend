@@ -1,5 +1,5 @@
 .input {
-  padding: 5px;
+  padding: 7px;
   display: block;
   width: 100%;
   margin-bottom: 15px;
@@ -10,28 +10,21 @@
   border: 1px solid rgba(0, 0, 0, 0.4);
 }
 
-.mentionsBox{
-  background: white;
-  width: 100%;
+.description{
   margin-bottom: 10px;
   min-height: 80px;
 }
-.mentionsBox > div > div{
-  padding: 5px;
-}
-.mentionsBox textarea{
-  padding: 5px;
-  resize: none;
-}
-
-.mentionsBox textarea:focus {
-  outline: none;
-  border: 1px solid rgba(0, 0, 0, 0.4);
-}
-
-.mentionsBox ul{
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.1),0 2px 15px rgba(0,0,0,0.1);
-}
-.mentionsBox li{
+.description > div > div{
   padding: 8px;
+  /* 1 extra px due to border ? */
+}
+
+.description textarea{
+  padding: 7px;
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+}
+
+.description textarea:focus {
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.4) !important;
 }

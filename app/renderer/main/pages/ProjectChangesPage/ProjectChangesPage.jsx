@@ -73,7 +73,7 @@ export const Component = React.createClass({
   },
 
   render() {
-    const { changes, project, ChangesActions } = this.props;
+    const { changes, project, ChangesActions, entityModel } = this.props;
 
     if(!project || !changes || !project.data){
       return <LoadingOverlay />
@@ -87,11 +87,20 @@ export const Component = React.createClass({
             <div className="layout-column">
               <ContentSidebar>
                 {changes && changes.data
-                  ? <CommitChanges changes={changes} project={project.data} actToggleAll={this.toggleAll} selectedFileChange={ChangesActions.selectedFileChange}/>
+                  ? <CommitChanges
+                    changes={changes}
+                    project={project.data}
+                    actToggleAll={this.toggleAll}
+                    selectedFileChange={ChangesActions.selectedFileChange}/>
                   : ''}
 
                 <div style={this.CommitBoxStyles}>
-                  <CommitBox changes={changes} changesActions={ChangesActions} commitFn={()=>this.commitFn()} project={project.data}/>
+                  <CommitBox
+                    entityModel={entityModel}
+                    changes={changes}
+                    changesActions={ChangesActions}
+                    commitFn={()=>this.commitFn()}
+                    project={project.data}/>
                 </div>
               </ContentSidebar>
             </div>
@@ -137,6 +146,7 @@ function mapStateToProps({changes, projects}, {params}) {
   return {
     project: project,
     changes: changes[params.stub],
+    entityModel: `changes.${params.stub}`
   };
 }
 

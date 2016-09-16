@@ -1,16 +1,11 @@
 .editor{
   background: white;
   width: 100%;
-  margin-bottom: 0px;
-}
-.editor > div > div{
-  padding: 0px;
+  line-height: 1.4em;
 }
 .editor textarea{
-  padding: 0px;
   resize: none;
 }
-
 .editor textarea {
   border: none;
 }

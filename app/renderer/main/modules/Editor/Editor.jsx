@@ -17,6 +17,7 @@ import classes from './Editor.css';
 import { MentionsInput, Mention } from 'react-mentions'
 import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
 import AutosuggestHighlight from 'autosuggest-highlight';
+import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
 
 import getUuid from 'app/shared/helpers/getUuid.js';
 import http from 'axios';
@@ -76,11 +77,28 @@ export const Component = React.createClass({
       callback(response.data)
     })
   },
+  taskRenderSuggestion: (entry, search, highlightedDisplay, index) => {
+    const matches = AutosuggestHighlight.match(entry.name, search);
+    const parts   = AutosuggestHighlight.parse(entry.name, matches);
+    return (
+      <div className="layout-row layout-align-start-center">
+        <Checkbox circle={true} />
+        <div style={{marginLeft: '10px', marginBottom: '2px'}} className="flex">
+        {parts.map((part, index) => {
+          const className = part.highlight ? 'text-primary' : null;
+          return (
+            <span className={className} key={index}>{part.text}</span>
+          );
+        })}
+        </div>
+      </div>
+    );
+  },
   render() {
-
+    const { className } = this.props;
     return (
       <MentionsInput
-        className={classes.editor}
+        className={classNames(classes.editor, className)}
         placeholder="Detailed Description"
         value={this.props.value}
         displayTransform={this.displayTransform}
@@ -91,14 +109,14 @@ export const Component = React.createClass({
           type="user"
           data={this.userData}
           renderSuggestion={this.userRenderSuggestion}
-          style={{background: 'rgba(68, 183, 211, 0.3)'}}
+          style={{background: 'rgba(68, 154, 211, 0.6)'}}
         />
         <Mention
           trigger="#"
           type="task"
           data={this.userData}
-          renderSuggestion={this.userRenderSuggestion}
-          style={{background: 'rgba(68, 183, 211, 0.3)'}}
+          renderSuggestion={this.taskRenderSuggestion}
+          style={{background: 'rgba(68, 211, 95, 0.3)'}}
         />
       </MentionsInput>
     )
