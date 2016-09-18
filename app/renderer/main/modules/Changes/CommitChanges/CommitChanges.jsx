@@ -30,6 +30,7 @@ export default (props) => {
           </div>
           : <div className="layout-column layout-align-center-center text-title-4 flex">No Changes</div>
         }
+
       </div>
       <FileContextmenu identifier={contextIdentifier}/>
     </div>
