@@ -3,31 +3,64 @@ import getUuid from 'app/shared/helpers/getUuid.js';
 import { actions } from 'react-redux-form';
 import { show as showToast } from 'app/renderer/main/modules/Toasts/Toasts.actions.js';
 
-export function newTask({projectId, task}) {
-  const taskDefault = {
-    _id : getUuid(),
+//export function newTask({projectId, task}) {
+//  const taskDefault = {
+//    _id : getUuid(),
+//    users: [{
+//      name: 'David Revay',
+//      picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg'
+//    }]
+//  }
+//  return {
+//    type: 'TASKS/NEW_TASK',
+//    payload: {
+//      projectId,
+//      task: Object.assign({}, taskDefault, task)
+//    },
+//    meta: {
+//      cacheKey: projectId
+//    }
+//  }
+//}
+
+export function newTask({boardId, task}) {
+  return (dispatch, getState) => {
+   const taskDefault = {
     users: [{
-      name: 'David Revay',
-      picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg'
+      _id: getState().auth.user._id,
+      name: getState().auth.user.name,
+      picture: getState().auth.user.picture
     }]
   }
-  return {
+  dispatch({
     type: 'TASKS/NEW_TASK',
-//    payload: http({
-//      method: 'PUT',
-//      url: `http://localhost:3000/api/v1/tasks/${projectId}`,
-//      data: task
-//    }),
-    payload: {
-      projectId,
-      task: Object.assign({}, taskDefault, task)
-    },
+    payload: http({
+      method: 'POST',
+      url: `http://localhost:3000/api/v1/boards/${boardId}/tasks`,
+      data: Object.assign({}, taskDefault, task)
+    }),
+    meta: {
+      cacheKey: boardId
+    }
+  })
+ }
+}
+
+export function getBoard({projectId}){
+  return {
+    type: 'TASKS/GET_BOARD',
+    payload: http({
+      method: 'GET',
+      url: `http://localhost:3000/api/v1/boards`,
+      params: {
+        project: projectId
+      }
+    }),
     meta: {
       cacheKey: projectId
     }
   }
 }
-
 
 export function getTasks({projectId}) {
   return {

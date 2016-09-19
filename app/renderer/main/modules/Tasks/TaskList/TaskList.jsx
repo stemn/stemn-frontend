@@ -57,13 +57,11 @@ export const Component = React.createClass({
   newTask(event, groupId){
     event.preventDefault();
     this.props.TasksActions.newTask({
-      projectId: this.props.project.data._id,
+      boardId: this.props.board.data._id,
       task: {
-        title: this.props.tasks.newTaskString[groupId],
+        title: this.props.board.newTaskString[groupId],
         group: groupId,
-        project: {
-          _id: this.props.project.data._id
-        }
+        board: this.props.board.data._id
       },
     })
   },
@@ -72,7 +70,7 @@ export const Component = React.createClass({
     this.props.TasksActions.newGroup({
       projectId: this.props.project.data._id,
       group: {
-        name: this.props.tasks.newGroupString
+        name: this.props.board.newGroupString
       },
     })
   },
@@ -83,13 +81,13 @@ export const Component = React.createClass({
     })
   },
   render() {
-    const { tasks, project, layout, className } = this.props;
-    const entityModel = `tasks.projects.${project.data._id}`;
+    const { board, project, layout, className } = this.props;
+    const entityModel = `tasks.boards.${board.data._id}`;
 
     return (
       <div className={className + ' layout-column flex'} style={layout == 'board' ? {overflowX : 'scroll'} : {overflowY : 'scroll'}}>
         <TaskGroupParent layout={layout}>
-          {tasks.structure.map((group, groupIndex) =>
+          {board.data.groups.map((group, groupIndex) =>
             <TaskGroupWrapped
               key={group._id}
               index={groupIndex}
@@ -100,13 +98,13 @@ export const Component = React.createClass({
               <TaskGroup
                item={group}
                layout={layout}
-               entityModel={`${entityModel}.structure[${groupIndex}]`}
+               entityModel={`${entityModel}.data.groups[${groupIndex}]`}
                deleteGroup={() => this.deleteGroup(group._id)}>
                 <TaskListItemParent
                  groupId={group._id}
                  moveCard={this.moveCard}
                  layout={layout}>
-                  {group.children.map((card, cardIndex) =>
+                  {group.tasks.map((card, cardIndex) =>
                     <TaskListItemWrapped
                       key={card._id}
                       index={cardIndex}

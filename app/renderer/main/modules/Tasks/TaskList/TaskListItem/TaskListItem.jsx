@@ -148,8 +148,8 @@ Component.contextTypes = {
 
 function mapStateToProps({ tasks }, {item}) {
   return {
-    task: tasks.data[item._id],
-    entityModel: `tasks.data[${item._id}]`
+    task: tasks.data[item],
+    entityModel: `tasks.data[${item}]`
   };
 }
 

@@ -6,7 +6,7 @@ import { groupTasks } from './Tasks.utils.js';
 
 const initialState = {
   data: {},
-  projects: {}
+  projects: {},
 }
 
 const mainReducer = (state, action) => {
@@ -19,53 +19,41 @@ const mainReducer = (state, action) => {
 //          newTaskLoading: true,
 //        }
 //      }, state)
-//    case 'TASKS/NEW_TASK_FULFILLED':
-//      return u({
-//        [action.meta.cacheKey] : {
-//          newTaskLoading: false,
-//        }
-//      }, state)
 //    case 'TASKS/NEW_TASK_REJECTED':
 //      return u({
 //        [action.meta.cacheKey] : {
 //          newTaskLoading: false,
 //        }
 //      }, state)
+    case 'TASKS/NEW_TASK_FULFILLED':
+      return i.chain(state)
+      .assocIn(['data', action.payload.data._id], action.payload.data)
+      .assocIn(['boards', action.payload.data.data, 'newTaskString', action.payload.task.group], '')
+      .updateIn(['boards', action.payload.data.data, 'data', 'groups'], (groups) => {
+        const groupIndex = groups.findIndex((group)=>group._id == action.payload.data.group);
+        const newArray = i.push(groups[groupIndex].tasks, action.payload.data._id);
+        return i.assocIn(groups, [groupIndex, 'tasks'], newArray)
+      })
+      .value();
 
-    case 'TASKS/NEW_TASK':
+    case 'TASKS/GET_BOARD_PENDING':
+      return i.assocIn(state, ['projects', action.meta.cacheKey, 'loading'], true);
+    case 'TASKS/GET_BOARD_FULFILLED':
       return i.merge(state, {
-        data: addTaskToData(state.data, action.payload.task),
-        projects : {
+        projects: {
           [action.meta.cacheKey] : {
-            structure: addTaskToStructure(state.projects[action.meta.cacheKey].structure, action.payload.task),
-            newTaskString: {
-              [action.payload.task.group] : ''
-            }
+            boards: [action.payload.data[0]._id],
+            loading : false
+          }
+        },
+        boards: {
+          [action.payload.data[0]._id] : {
+            data: action.payload.data[0]
           }
         }
-      });
-
-
-
-//    case 'TASKS/GET_TASKS_PENDING':
-//      return u({
-//        [action.meta.cacheKey] : {
-//          loading : true
-//        }
-//      }, state)
-//    case 'TASKS/GET_TASKS_FULFILLED':
-//      return u({
-//        [action.meta.cacheKey] : {
-//          data: action.payload.data,
-//          loading : false
-//        }
-//      }, state)
-//    case 'TASKS/GET_TASKS_REJECTED':
-//      return u({
-//        [action.meta.cacheKey] : {
-//          loading : false
-//        }
-//      }, state)
+      })
+    case 'TASKS/GET_BOARD_REJECTED':
+      return i.assocIn(state, ['projects', action.meta.cacheKey, 'loading'], false);
 
     case 'TASKS/GET_TASKS':
       return u({
@@ -181,10 +169,10 @@ const mainReducer = (state, action) => {
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
-function addTaskToStructure(structure, task) {
-  const groupIndex = structure.findIndex((group)=>group._id == task.group);
-  const newArray = i.push(structure[groupIndex].children, { _id: task._id }); // Push the task onto the child array
-  return i.assocIn(structure, [groupIndex, 'children'], newArray)
+function addTaskToGroups(groups, task) {
+  const groupIndex = groups.findIndex((group)=>group._id == task.group);
+  const newArray = i.push(groups[groupIndex].children, { _id: task._id }); // Push the task onto the child array
+  return i.assocIn(groups, [groupIndex, 'children'], newArray)
 }
 
 function addTaskToData(data, task) {

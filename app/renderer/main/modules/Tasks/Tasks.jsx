@@ -53,7 +53,7 @@ const ownerFilter = [{
 
 export const Component = React.createClass({
   componentWillMount() {
-    this.props.TasksActions.getTasks({
+    this.props.TasksActions.getBoard({
       projectId: this.props.projectId
     })
   },
@@ -67,9 +67,9 @@ export const Component = React.createClass({
     this.setState({ layout: layout })
   },
   render() {
-    const { tasks, project } = this.props;
+    const { tasks, board, project } = this.props;
 
-    if(!tasks || !tasks.structure){
+    if(!board || !board.data || !board.data.groups){
       return null
     }
 
@@ -105,7 +105,7 @@ export const Component = React.createClass({
           </PopoverMenu>
           <Button style={{marginLeft: '10px'}} className="primary">New Task</Button>
         </div>
-        <TaskList className={classes.tasks} tasks={tasks} project={project} layout={this.state.layout}/>
+        <TaskList className={classes.tasks} board={board} project={project} layout={this.state.layout}/>
       </div>
     )
   }
@@ -117,9 +117,12 @@ export const Component = React.createClass({
 /////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps({ tasks, projects }, {projectId}) {
+  const projectBoards = tasks.projects && tasks.projects[projectId] ? tasks.projects[projectId].boards : null;
+  const board = projectBoards ? tasks.boards[projectBoards[0]] : {};
   return {
     tasks: tasks.projects[projectId],
     project: projects[projectId],
+    board: board
   };
 }
 
