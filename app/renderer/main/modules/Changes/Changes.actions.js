@@ -12,13 +12,6 @@ export function selectedFileChange({projectId, selected}) {
       }
   }
 }
-export function descriptionChange({projectId, value}) {
-  return {
-    type: 'CHANGES/COMMIT_DESCRIPTION_CHANGE',
-    payload: {projectId, value}
-  }
-}
-
 
 export function actToggleAll({projectId, model, value}) {
   return (dispatch) => {
@@ -58,6 +51,16 @@ export function pullChanges({projectId}) {
     payload: {
       method: 'GET',
       url: `http://localhost:3000/api/v1/sync/pullRemoteChanges/${projectId}`,
+    }
+  }
+}
+
+export function mentionTasks({projectId, mentions}) {
+  return {
+    type:'CHANGES/MENTION_TASKS',
+    payload: {
+      projectId,
+      mentions
     }
   }
 }

@@ -4,11 +4,12 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
+import * as ChangesActions from '../Changes.actions.js';
 
 // Component Core
 import React from 'react';
 import moment from 'moment';
-import { Field } from 'react-redux-form';
+import { Field, actions } from 'react-redux-form';
 
 // Styles
 import classNames from 'classnames';
@@ -20,22 +21,21 @@ import Button from 'app/renderer/main/components/Buttons/Button/Button.jsx';
 import Editor from 'app/renderer/main/modules/Editor/Editor.jsx';
 
 import { MdDone } from 'react-icons/lib/md';
-import { MentionsInput, Mention } from 'react-mentions'
+import { MentionsInput, Mention } from 'react-mentions';
+
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
 export const Component = React.createClass({
-  handleChange(event, newValue, newPlainTextValue, mention){
-    this.props.changesActions.descriptionChange({projectId: this.props.project._id, value: newValue})
-  },
   showTaskCommitModal(){
     this.props.ModalActions.showModal({
       modalType: 'TASK_COMMIT',
       modalProps: {
         projectId: this.props.project._id
-      }
+      },
+      modalConfirm: ChangesActions.mentionTasks({projectId: this.props.project._id}) // mentions value is assigned inside the modal
     })
   },
   render() {

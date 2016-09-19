@@ -3,9 +3,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as TasksActions from '../Tasks.actions.js';
-import * as ProjectsActions from 'app/shared/actions/projects.js';
-import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 
 // Component Core
 import React from 'react';
@@ -14,12 +11,12 @@ import { actions } from 'react-redux-form';
 
 // Styles
 import classNames from 'classnames';
-import classes from './TaskCommitModal.css';
+import classes from './TaskMentionModal.css';
 
 // Sub Components
 import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
 import Button from 'app/renderer/main/components/Buttons/Button/Button';
-import TaskCommitRow from './TaskCommitRow/TaskCommitRow.jsx';
+import TaskRow from './TaskRow/TaskRow.jsx';
 import { MdSearch } from 'react-icons/lib/md';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -38,7 +35,21 @@ export const Component = React.createClass({
   componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
 
   submit(){
-    this.props.modalConfirm();
+    this.props.modalConfirm({
+      payload: {
+        mentions: [{
+          entityId: '57c526c3e7c624f857828695',
+          display: 'Task 1',
+          mentionType: 'task',
+          mentionId: '57c526c3e7c624f857828691'
+        },{
+          entityId: '57c526c3e7c624f857828693',
+          display: 'Task 2',
+          mentionType: 'task',
+          mentionId: '57c526c3e7c624f857828692'
+        }]
+      }
+    });
     this.props.modalHide();
   },
   cancel(){
@@ -64,7 +75,7 @@ export const Component = React.createClass({
           </div>
         </div>
         <div className="flex scroll-box">
-          {Object.keys(tasks).map((taskId) => <TaskCommitRow key={taskId} taskId={taskId}/>)}
+          {Object.keys(tasks).map((taskId) => <TaskRow key={taskId} taskId={taskId}/>)}
         </div>
         <div className="modal-footer layout-row layout-align-end">
           <Button style={{marginRight: '10px'}} onClick={this.cancel}>Cancel</Button>
@@ -84,15 +95,12 @@ export const Component = React.createClass({
 
 function mapStateToProps({tasks}, {projectId}) {
   return {
-//    tasks: tasks.projects[projectId]
     tasks: tasks.data
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    TasksActions: bindActionCreators(TasksActions, dispatch),
-    ModalActions: bindActionCreators(ModalActions, dispatch),
     dispatch
   }
 }

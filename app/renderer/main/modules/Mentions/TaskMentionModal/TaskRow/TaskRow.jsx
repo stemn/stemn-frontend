@@ -7,7 +7,7 @@ import React from 'react';
 import moment from 'moment';
 // Styles
 import classNames from 'classnames';
-import classes from './TaskCommitRow.css';
+import classes from './TaskRow.css';
 
 // Sub Components
 import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';

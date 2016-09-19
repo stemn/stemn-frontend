@@ -1,4 +1,4 @@
-import isUuid from 'app/shared/helpers/isUuid.js';
+import { validateMention } from 'app/renderer/main/modules/Mentions/Mentions.utils.js';
 
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.markdownitLinkAttributes = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict'
@@ -42,25 +42,6 @@ module.exports = markdownitLinkAttributes
 },{}]},{},[1])(1)
 });
 
-
-function validateMention(href){
-  // mention should be of the form 'entityId:entityType:mentionId'
-  // Example: '47db55af7f342380174e228:user:cb4e8fac7fe980b53da95624'
-  // Boths ids should be 24 characters.
-  const hrefSplit = href.split(':');
-  if(hrefSplit.length == 3){
-    const [entityId, mentionType, mentionId] = hrefSplit;
-    if(isUuid(entityId) && isUuid(mentionId)){
-      return true
-    }
-    else{
-      return false
-    }
-  }
-  else{
-    return false
-  }
-}
 
 function getAttribute(token, attr){
   var aIndex = token.attrIndex(attr);

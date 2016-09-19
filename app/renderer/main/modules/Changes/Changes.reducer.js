@@ -1,6 +1,7 @@
 import i from 'icepick';
 
 import { modeled } from 'react-redux-form';
+import { parseMentions, removeExistingMentions, addMentionsToText } from 'app/renderer/main/modules/Mentions/Mentions.utils.js';
 
 const initialState = {}
 
@@ -12,6 +13,11 @@ const mainReducer = (state, action) => {
           selected: action.payload.selected,
         }
       })
+    case 'CHANGES/MENTION_TASKS':
+      const existingMentions = parseMentions(state[action.payload.projectId].description);
+      const uniqueNewMentions = removeExistingMentions(action.payload.mentions, existingMentions);
+      const newText = addMentionsToText(state[action.payload.projectId].description, uniqueNewMentions);
+      return i.assocIn(state, [action.payload.projectId, 'description'], newText);
     case 'CHANGES/TOGGLE_ALL_CHANGED_FILES':
       const allToggled = state[action.payload.projectId].data.map((item) => i.merge(item, {selected: action.payload.value }) );
       return i.merge(state, {
@@ -24,12 +30,6 @@ const mainReducer = (state, action) => {
         [action.payload.config.meta.projectId] : {
           data : action.payload.data,
           selected: {},
-        }
-      })
-    case 'CHANGES/COMMIT_DESCRIPTION_CHANGE':
-      return i.merge(state, {
-        [action.payload.projectId] : {
-          description : action.payload.value
         }
       })
     case 'CHANGES/COMMIT_FULFILLED':

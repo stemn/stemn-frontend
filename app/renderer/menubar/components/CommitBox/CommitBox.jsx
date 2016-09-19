@@ -57,9 +57,6 @@ import {MdDone} from 'react-icons/lib/md';
 import { MentionsInput, Mention } from 'react-mentions'
 
 export default React.createClass({
-  handleChange(event, newValue, newPlainTextValue, mention){
-    this.props.changesActions.descriptionChange({projectId: this.props.project._id, value: newValue})
-  },
   transformDisplay: function(id, display) {
     return "@" + display
   },

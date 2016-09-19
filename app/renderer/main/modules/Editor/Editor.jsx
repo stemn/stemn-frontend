@@ -102,7 +102,7 @@ export const Component = React.createClass({
         placeholder="Detailed Description"
         value={this.props.value}
         displayTransform={this.displayTransform}
-        markup="@__display__:__type__:__id__)" // format @[username](userName:mentionTyp:mentionId)
+        markup="@__display__:__type__:__id__)" // format @[username](userName:mentionType:mentionId)
         onChange={this.handleChange}>
         <Mention
           trigger="@"

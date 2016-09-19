@@ -25,8 +25,6 @@ export function showModal({modalType, modalProps, modalOptions, modalConfirm, mo
 }
 
 export function showConfirm({title, message, modalConfirm, modalCancel}) {
-  console.log(modalConfirm);
-
   return {
     type: 'MODALS/SHOW_MODAL',
     payload: {

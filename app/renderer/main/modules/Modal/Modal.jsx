@@ -1,6 +1,7 @@
 // Container Core
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import i from 'icepick';
 
 // Container Actions
 import * as ModalActions from './Modal.actions.js';
@@ -19,7 +20,7 @@ import ErrorModal   from './modals/ErrorModal.jsx';
 import FileSelectModal from 'app/renderer/main/modules/FileSelect/FileSelectModal.jsx';
 import TaskDisplayModal from 'app/renderer/main/modules/Tasks/TaskDisplayModal/TaskDisplayModal.jsx'
 import TaskLabelsEditModal from 'app/renderer/main/modules/Tasks/TaskLabelsEditModal/TaskLabelsEditModal.jsx'
-import TaskCommitModal from 'app/renderer/main/modules/Tasks/TaskCommitModal/TaskCommitModal.jsx'
+import TaskMentionModal from 'app/renderer/main/modules/Mentions/TaskMentionModal/TaskMentionModal.jsx'
 
 
 const modalComponents = {
@@ -28,7 +29,7 @@ const modalComponents = {
   'FILE_SELECT' : FileSelectModal,
   'TASK'        : TaskDisplayModal,
   'TASK_LABELS' : TaskLabelsEditModal,
-  'TASK_COMMIT' : TaskCommitModal
+  'TASK_COMMIT' : TaskMentionModal
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -67,8 +68,8 @@ export const Component = React.createClass({
     const modalExtended = Object.assign({}, modal, {
       modalHide: ()    => { this.props.ModalActions.hideModal({modalId: modal.modalId}) },
       // The cancel and confirm actions can be extended before dispatching
-      modalCancel: (extendObject)  => { if(modal.modalCancel) { dispatch(Object.assign({}, modal.modalCancel, extendObject)) }},
-      modalConfirm: (extendObject) => { if(modal.modalConfirm){ dispatch(Object.assign({}, modal.modalConfirm, extendObject)) }},
+      modalCancel: (extendObject)  => { if(modal.modalCancel) { dispatch(i.merge(modal.modalCancel, extendObject)) }},
+      modalConfirm: (extendObject) => { if(modal.modalConfirm){ dispatch(i.merge(modal.modalConfirm, extendObject)) }},
     })
 
     return (
