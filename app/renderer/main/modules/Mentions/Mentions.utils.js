@@ -1,4 +1,4 @@
-import isUuid from 'app/shared/helpers/isUuid.js';
+import isUuid from '../../../../shared/helpers/isUuid.js';
 
 export const validateMention = (href) => {
   // mention should be of the form 'entityId:entityType:mentionId'

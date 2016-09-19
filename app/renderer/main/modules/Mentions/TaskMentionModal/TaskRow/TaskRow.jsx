@@ -11,17 +11,8 @@ import classes from './TaskRow.css';
 
 // Sub Components
 import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
-//import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx'
-//import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
-//import { MdMoreHoriz, MdOpenInNew } from 'react-icons/lib/md';
-//import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
-//import TaskLabelDots from 'app/renderer/main/modules/Tasks/TaskLabelDots/TaskLabelDots.jsx'
-//import Textarea from 'app/renderer/main/components/Input/Textarea/Textarea';
-//import UserSelect from 'app/renderer/main/components/Users/UserSelect/UserSelect.jsx';
-
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
-
 
 export const Component = React.createClass({
   render() {
@@ -32,11 +23,11 @@ export const Component = React.createClass({
     }
     return (
       <div className={classes.row + ' layout-row layout-align-start-center'}>
-        <div style={{marginRight: '10px'}}>
+        <div style={{marginRight: '10px'}} title="Mark as Complete">
           <Checkbox circle={true} />
         </div>
         <div className="flex text-ellipsis" style={{marginBottom: '2px'}}>{task.title}</div>
-        <div className={classes.checkbox}>
+        <div className={classes.checkbox} title="Related Task">
           <Checkbox />
         </div>
       </div>
@@ -53,8 +44,4 @@ function mapStateToProps({ tasks }, { taskId }) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps)(Component);

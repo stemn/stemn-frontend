@@ -1,7 +1,7 @@
 import i from 'icepick';
 
 import { modeled } from 'react-redux-form';
-import { parseMentions, removeExistingMentions, addMentionsToText } from 'app/renderer/main/modules/Mentions/Mentions.utils.js';
+import { parseMentions, removeExistingMentions, addMentionsToText } from '../Mentions/Mentions.utils.js';
 
 const initialState = {}
 

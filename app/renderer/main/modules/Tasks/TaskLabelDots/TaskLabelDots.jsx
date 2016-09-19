@@ -17,9 +17,9 @@ export default React.createClass({
           const info = labelInfo.find(label => label._id == labelId);
           return (
             <div key={labelId}
-            className={tag ? classes.tag : classes.dot}
+            className={classNames({[classes.tag] : tag}, {[classes.dot] : !tag}, {'tooltip' : !tag})}
             style={{background: info.color}}
-            dataTitle={info.name}>{tag ? <span>{info.name}</span> : null}</div>
+            alt={info.name}>{tag ? <span>{info.name}</span> : null}</div>
           )
         }) : null}
       </div>

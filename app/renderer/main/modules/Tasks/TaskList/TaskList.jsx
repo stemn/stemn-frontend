@@ -119,7 +119,7 @@ export const Component = React.createClass({
                     </TaskListItemWrapped>
                   )}
                   <NewItem
-                    style={layout == 'list' ? {marginLeft: '40px'} : {}}
+                    style={layout == 'list' ? {marginLeft: '60px'} : {}}
                     model={`${entityModel}.newTaskString.${group._id}`}
                     placeholder="New Task"
                     submitFn={(event) => this.newTask(event, group._id)}

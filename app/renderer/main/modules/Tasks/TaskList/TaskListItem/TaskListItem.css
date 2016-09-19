@@ -45,7 +45,6 @@
   border: 1px solid border1;
   margin-bottom: 15px;
   background: white;
-  transition: 0.15s;
   cursor: pointer;
 }
 .cardBody{
