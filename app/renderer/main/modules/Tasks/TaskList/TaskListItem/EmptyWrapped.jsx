@@ -15,7 +15,7 @@ const cardTarget = {
     })
   },
 
-  endDrag(props, monitor){
+  drop(props, monitor){
     props.moveCard({
       task: monitor.getItem().id,
       destinationGroup: props.groupId,

@@ -61,7 +61,7 @@ export const Component = React.createClass({
     })
   },
   render() {
-    const { item, task, project, entityModel, modalCancel, modalHide } = this.props;
+    const { taskId, task, project, entityModel, modalCancel, modalHide } = this.props;
 
     if(!task || !project){
       return <div>Task Loading</div>
@@ -90,7 +90,7 @@ export const Component = React.createClass({
         <div className="layout-row">
           <div className="flex-70" style={{paddingRight: '15px'}}>
             <div className="scroll-box" style={{maxHeight: '500px', paddingRight: '15px', borderTop: '1px solid rgba(0, 0, 0, 0.1)', borderBottom: '1px solid rgba(0, 0, 0, 0.1)'}}>
-              <TaskTimeline item={item} />
+              <TaskTimeline taskId={taskId} />
             </div>
             <div style={{marginTop: '15px'}}>
               <CommentNew />
@@ -128,14 +128,13 @@ export const Component = React.createClass({
 ///////////////////////////////// CONTAINER /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({ tasks, projects }, {item}) {
-  const task = tasks.data[item._id];
+function mapStateToProps({ tasks, projects }, {taskId}) {
+  const task = tasks.data[taskId];
   const project = projects[task.project._id];
   return {
     task: task,
     project: project,
-    entityModel: `tasks.data.${item._id}`,
-//    projectModel: `projects.${project.data._id}`
+    entityModel: `tasks.data.${taskId}`,
   };
 }
 

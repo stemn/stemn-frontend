@@ -24,9 +24,9 @@ import TaskTimelineItem from './TaskTimelineItem/TaskTimelineItem.jsx';
 /////////////////////////////////////////////////////////////////////////////
 
 const onMount = (nextProps, prevProps) => {
-  if(nextProps.item){
-    if(!prevProps || nextProps.item._id !== prevProps.item._id){
-      nextProps.CommentsActions.getComments({stub: nextProps.item._id})
+  if(nextProps.taskId){
+    if(!prevProps || nextProps.taskId !== prevProps.taskId){
+      nextProps.CommentsActions.getComments({stub: nextProps.taskId})
     }
   }
 }
@@ -80,7 +80,7 @@ export const Component = React.createClass({
   componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
 
   render() {
-    const { item, task, entityModel } = this.props;
+    const { task, entityModel } = this.props;
 
     if(!task){
       return <div>Task Loading</div>
@@ -113,10 +113,10 @@ export const Component = React.createClass({
 ///////////////////////////////// CONTAINER /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({ tasks }, {item}) {
+function mapStateToProps({ tasks }, { taskId }) {
   return {
-    task: tasks.data[item._id],
-    entityModel: `tasks.data.${item._id}`
+    task: tasks.data[taskId],
+    entityModel: `tasks.data.${taskId}`
   };
 }
 

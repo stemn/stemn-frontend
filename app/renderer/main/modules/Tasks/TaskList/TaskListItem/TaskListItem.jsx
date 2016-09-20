@@ -54,7 +54,7 @@ export const Component = React.createClass({
     this.props.ModalActions.showModal({
       modalType: 'TASK',
       modalProps: {
-        item: this.props.item
+        taskId: this.props.item
       }
     })
   },

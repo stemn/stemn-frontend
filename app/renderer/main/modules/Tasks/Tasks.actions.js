@@ -45,10 +45,14 @@ export function getBoard({projectId}){
 export function getTask({taskId}) {
   return {
     type: 'TASKS/GET_TASK',
-    payload: http({
+    httpPackage: {
+      endpoint: 'api/v1/tasks',
+      url: `http://localhost:3000/api/v1/tasks`,
       method: 'GET',
-      url: `http://localhost:3000/api/v1/tasks/${taskId}`,
-    }),
+      params: {
+        'ids[]' : taskId
+      }
+    },
     meta: {
       cacheKey: taskId
     }
