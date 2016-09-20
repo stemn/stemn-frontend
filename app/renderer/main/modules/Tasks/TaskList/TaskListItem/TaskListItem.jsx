@@ -44,6 +44,12 @@ export const Component = React.createClass({
       value
     })
   },
+  deleteTask(){
+    this.props.TasksActions.deleteTask({
+      taskId: this.props.task._id,
+      boardId: this.props.task.board,
+    })
+  },
   showModal(){
     this.props.ModalActions.showModal({
       modalType: 'TASK',
@@ -95,7 +101,7 @@ export const Component = React.createClass({
                 </SimpleIconButton>
                 <div className="PopoverMenu">
                   <a>View Task</a>
-                  <a>Delete Task</a>
+                  <a onClick={this.deleteTask}>Delete Task</a>
                 </div>
               </PopoverMenu>
             </div>
@@ -125,7 +131,6 @@ export const Component = React.createClass({
               <UserAvatar picture={task.users[0].picture} size="25px"/>
               <div className="PopoverMenu" style={{padding: '15px'}}>
                 <UserSelect value="dropbox" />
-                <div>asfsfa asfafsfsa asffs</div>
               </div>
             </PopoverMenu>
           </div>

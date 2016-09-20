@@ -63,42 +63,68 @@ export function deleteTask({boardId, taskId}) {
       url: `http://localhost:3000/api/v1/tasks/${taskId}`,
     }),
     meta: {
-      cacheKey: boardId
-    }
-  }
-}
-
-
-export function moveTask({boardId, dragItem, hoverItem, destinationGroup}) {
-  // To move a task you must have either hoverItem or destinationGroup
-  // destinationGroup is used if the group is empty
-
-  return {
-    type: 'TASKS/MOVE_TASK',
-    payload: http({
-      method: 'POST',
-      url: `http://localhost:3000/api/v1/tasks/move`,
-      data: {
-        task : dragItem.id,
-        destinationGroup,
-        destinationTask : hoverItem ? hoverItem.id : ''
-      }
-    }),
-    meta: {
-      task : dragItem.id,
-      destinationGroup,
-      destinationTask : hoverItem ? hoverItem.id : '',
+      taskId,
       boardId
     }
   }
+}
 
+
+export function moveTask({boardId, task, destinationTask, destinationGroup, save}) {
+  // To move a task you must have either hoverItem or destinationGroup
+  // destinationGroup is used if the group is empty
+  return (dispatch) => {
+    if(save){
+      dispatch({
+        type: 'TASKS/MOVE_TASK',
+        payload: http({
+          method: 'POST',
+          url: `http://localhost:3000/api/v1/tasks/move`,
+          data: {
+            task,
+            destinationGroup,
+            destinationTask
+          }
+        }),
+      })
+    }
+    else {
+      dispatch({
+        type: 'TASKS/MOVE_TASK',
+        payload: {
+          task,
+          destinationGroup,
+          destinationTask,
+          boardId
+        }
+      })
+    }
+  }
+}
+
+//export function moveTask({boardId, task, destinationTask, destinationGroup}) {
+//  // To move a task you must have either hoverItem or destinationGroup
+//  // destinationGroup is used if the group is empty
+//
 //  return {
 //    type: 'TASKS/MOVE_TASK',
-//    payload: {
-//      dragItem, hoverItem, destinationGroup, boardId
-//    },
+//    payload: http({
+//      method: 'POST',
+//      url: `http://localhost:3000/api/v1/tasks/move`,
+//      data: {
+//        task,
+//        destinationGroup,
+//        destinationTask
+//      }
+//    }),
+//    meta: {
+//      task,
+//      destinationGroup,
+//      destinationTask,
+//      boardId
+//    }
 //  }
-}
+//}
 
 export function beginDrag({boardId, taskId}) {
   return {
@@ -150,19 +176,17 @@ export function toggleComplete({taskId, model, value}) {
 }
 
 export function newGroup({boardId, group}) {
-  const groupDefault = {
-    _id : getUuid(),
-    children: []
-  }
   return (dispatch)=>{
     if(group.name.length > 1){
       dispatch({
         type: 'TASKS/NEW_GROUP',
-        payload: {
-          group: Object.assign({}, groupDefault, group)
-        },
+        payload: http({
+          method: 'POST',
+          url: `http://localhost:3000/api/v1/boards/${boardId}/groups`,
+          data: group
+        }),
         meta: {
-          cacheKey: boardId
+          boardId
         }
       })
     }
@@ -172,11 +196,13 @@ export function newGroup({boardId, group}) {
 export function deleteGroup({boardId, groupId}) {
   return {
     type: 'TASKS/DELETE_GROUP',
-    payload: {
-      groupId
-    },
+    payload: http({
+      method: 'DELETE',
+      url: `http://localhost:3000/api/v1/taskGroups/${groupId}`,
+    }),
     meta: {
-      cacheKey: boardId
+      groupId,
+      boardId
     }
   }
 }

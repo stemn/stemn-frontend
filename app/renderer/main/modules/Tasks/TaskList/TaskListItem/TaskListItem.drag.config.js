@@ -6,6 +6,8 @@ let throttleModelUpdate = throttle((throttledFn)=>throttledFn(), 100, {
   trailing:false
 });
 
+let lastDestinationId = undefined;
+
 export const hover = (props, monitor, component) => {
   const dragIndex = monitor.getItem().index;
   const dragId = monitor.getItem().id;
@@ -46,17 +48,12 @@ export const hover = (props, monitor, component) => {
 
   // Time to actually perform the action
    throttleModelUpdate(()=>{
-    props.moveCard({
-      destinationGroup: props.groupId,
-      dragItem: {
-        id: dragId,
-        index: dragIndex
-      },
-      hoverItem: {
-        id: hoverId,
-        index: hoverIndex
-      }
-    });
+     lastDestinationId = hoverId;
+     props.moveCard({
+       task: dragId,
+       destinationTask: hoverId,
+       destinationGroup: props.groupId,
+     });
   })
 
   // Note: we're mutating the monitor item here!
@@ -75,6 +72,12 @@ export const beginDrag = (props, monitor, component) => {
 }
 
 export const endDrag = (props, monitor) => {
+  props.moveCard({
+    task: props.id,
+    destinationTask: lastDestinationId,
+    destinationGroup: props.groupId,
+    save: true,
+  });
   props.endDrag(props.id)
 }
 

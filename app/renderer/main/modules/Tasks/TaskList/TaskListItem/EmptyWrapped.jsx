@@ -6,16 +6,22 @@ import { DragSource, DropTarget } from 'react-dnd';
 const ItemTypes = {
   CARD: 'card'
 }
+
 const cardTarget = {
   hover(props, monitor, component){
-    const dragItem = {
-      id: monitor.getItem().id,
-      index: monitor.getItem().index
-    };
     props.moveCard({
-      dragItem,
+      task: monitor.getItem().id,
       destinationGroup: props.groupId
     })
+  },
+
+  endDrag(props, monitor){
+    props.moveCard({
+      task: monitor.getItem().id,
+      destinationGroup: props.groupId,
+      save: true,
+    });
+    props.endDrag(props.id)
   }
 };
 

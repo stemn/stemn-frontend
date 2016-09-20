@@ -27,18 +27,19 @@ export const NewItem = React.createClass({
 });
 
 export const Component = React.createClass({
-  moveGroup({dragItem, hoverItem}) {
+  moveGroup({dragItem, hoverItem, save}) {
     this.props.TasksActions.moveGroup({
       boardId: this.props.board.data._id,
       dragItem,
-      hoverItem
+      hoverItem,
+      save
     })
   },
-  moveCard({dragItem, hoverItem, destinationGroup}) {
+  moveCard({task, destinationTask, destinationGroup}) {
     this.props.TasksActions.moveTask({
       boardId: this.props.board.data._id,
-      dragItem,
-      hoverItem,
+      task,
+      destinationTask,
       destinationGroup
     })
   },
@@ -68,7 +69,7 @@ export const Component = React.createClass({
   newGroup(event){
     event.preventDefault();
     this.props.TasksActions.newGroup({
-      projectId: this.props.project.data._id,
+      boardId: this.props.board.data._id,
       group: {
         name: this.props.board.newGroupString
       },
@@ -76,7 +77,7 @@ export const Component = React.createClass({
   },
   deleteGroup(groupId){
     this.props.TasksActions.deleteGroup({
-      projectId: this.props.project.data._id,
+      boardId: this.props.board.data._id,
       groupId: groupId
     })
   },
