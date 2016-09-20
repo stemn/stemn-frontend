@@ -11,8 +11,6 @@ const initialState = {
 
 const mainReducer = (state, action) => {
   switch (action.type) {
-
-
 //    case 'TASKS/NEW_TASK_PENDING':
 //      return u({
 //        [action.meta.cacheKey] : {
@@ -38,6 +36,8 @@ const mainReducer = (state, action) => {
 
     case 'TASKS/GET_BOARD_PENDING':
       return i.assocIn(state, ['projects', action.meta.cacheKey, 'loading'], true);
+    case 'TASKS/GET_BOARD_REJECTED':
+      return i.assocIn(state, ['projects', action.meta.cacheKey, 'loading'], false);
     case 'TASKS/GET_BOARD_FULFILLED':
       return i.merge(state, {
         projects: {
@@ -52,38 +52,16 @@ const mainReducer = (state, action) => {
           }
         }
       })
-    case 'TASKS/GET_BOARD_REJECTED':
-      return i.assocIn(state, ['projects', action.meta.cacheKey, 'loading'], false);
 
-    case 'TASKS/GET_TASKS':
-      return u({
-        data: action.payload.response.data.items,
-        projects: {
-          [action.meta.cacheKey] : {
-            structure: action.payload.response.data.structure,
-          }
-        }
-      }, state)
-
-
-//    case 'TASKS/DELETE_TASK_PENDING':
-//      return u({
-//        [action.meta.cacheKey] : {
-//          deleteTaskLoading: true,
-//        }
-//      }, state)
-//    case 'TASKS/DELETE_TASK_FULFILLED':
-//      return u({
-//        [action.meta.cacheKey] : {
-//          deleteTaskLoading: false,
-//        }
-//      }, state)
-//    case 'TASKS/DELETE_TASK_REJECTED':
-//      return u({
-//        [action.meta.cacheKey] : {
-//          deleteTaskLoading: false,
-//        }
-//      }, state)
+    case 'TASKS/GET_TASK_PENDING':
+      return i.assocIn(state, ['data', action.meta.cacheKey, 'loading'], true);
+    case 'TASKS/GET_TASK_REJECTED':
+      return i.assocIn(state, ['data', action.meta.cacheKey, 'loading'], false);
+    case 'TASKS/GET_TASK_FULFILLED':
+      return i.assocIn(state, ['data', action.meta.cacheKey], {
+        data: action.payload.data,
+        loading: false
+      })
 
     case 'TASKS/NEW_GROUP':
       return u({
@@ -101,65 +79,67 @@ const mainReducer = (state, action) => {
         return i.splice(structure, groupIndex, 1) // Delete the group from the structure array
       })
 
-    case 'TASKS/MOVE_TASK':
-      const taskFrom = getLocationIndex(state.projects[action.meta.cacheKey].structure, action.payload.dragItem.id);
-      let newStructure = null;
-      if(action.payload.destinationGroup){
-        // The group is empty
-        newStructure = moveTask(
-          state.projects[action.meta.cacheKey].structure,
-          taskFrom.groupIndex,
-          getGroupIndex(state.projects[action.meta.cacheKey].structure, action.payload.destinationGroup),
-          taskFrom.taskIndex,
-          0 // Put it at the start of the group
-        );
-      }
-      else if(action.payload.hoverItem){
-        // We move the task to the hoverItem position
-        const taskTo   = getLocationIndex(state.projects[action.meta.cacheKey].structure, action.payload.hoverItem.id);
-        newStructure = moveTask(
-          state.projects[action.meta.cacheKey].structure,
-          taskFrom.groupIndex,
-          taskTo.groupIndex,
-          taskFrom.taskIndex,
-          taskTo.taskIndex
-        );
-      }
-      return i.merge(state, {
-        projects: {
-          [action.meta.cacheKey] : {
-            structure: newStructure
-          }
+//    case 'TASKS/MOVE_TASK':
+//      return i.updateIn(state, ['boards', action.payload.boardId, 'data', 'groups'], (groups) => {
+//        const taskFrom = getLocationIndex(groups, action.payload.dragItem.id);
+//        let newStructure = null;
+//        if(action.payload.hoverItem){ // We move the task to the hoverItem position
+//          const taskTo   = getLocationIndex(groups, action.payload.hoverItem.id);
+//          newStructure = moveTask(
+//            groups,
+//            taskFrom.groupIndex,
+//            taskTo.groupIndex,
+//            taskFrom.taskIndex,
+//            taskTo.taskIndex
+//          );
+//        }
+//        else if(action.payload.destinationGroup){ // The group is empty
+//          newStructure = moveTask(
+//            groups,
+//            taskFrom.groupIndex,
+//            getGroupIndex(groups, action.payload.destinationGroup),
+//            taskFrom.taskIndex,
+//            0 // Put it at the start of the group
+//          );
+//        }
+//        return newStructure
+//      })
+
+    case 'TASKS/MOVE_TASK_PENDING':
+      return i.updateIn(state, ['boards', action.meta.boardId, 'data', 'groups'], (groups) => {
+        const taskFrom = getLocationIndex(groups, action.meta.task);
+        let newStructure = null;
+        if(action.meta.destinationTask){ // We move the task to the hoverItem position
+          const taskTo   = getLocationIndex(groups, action.meta.destinationTask);
+          newStructure = moveTask(
+            groups,
+            taskFrom.groupIndex,
+            taskTo.groupIndex,
+            taskFrom.taskIndex,
+            taskTo.taskIndex
+          );
         }
+        else if(action.meta.destinationGroup){ // The group is empty
+          newStructure = moveTask(
+            groups,
+            taskFrom.groupIndex,
+            getGroupIndex(groups, action.meta.destinationGroup),
+            taskFrom.taskIndex,
+            0 // Put it at the start of the group
+          );
+        }
+        return newStructure
       })
     case 'TASKS/MOVE_GROUP':
       const groupFrom = action.payload.dragItem.index;
       const groupTo   = action.payload.hoverItem.index;
-      const newGroupStructure = moveGroup(state.projects[action.meta.cacheKey].structure, groupFrom, groupTo);
-      return i.merge(state, {
-        projects: {
-          [action.meta.cacheKey] : {
-            structure: newGroupStructure
-          }
-        }
-      })
-      return state
+      const newGroupStructure = moveGroup(state.boards[action.payload.boardId].data.groups, groupFrom, groupTo);
+      return i.assocIn(state, ['boards', action.payload.boardId, 'data', 'groups'], newGroupStructure)
     case 'TASKS/BEGIN_DRAG':
-      return i.merge(state, {
-        data: {
-          [action.payload.taskId] : {
-            isDragging: true
-          }
-        }
-      })
+      return i.assocIn(state, ['data', action.payload.taskId, 'isDragging'], true)
     case 'TASKS/END_DRAG':
-      return i.merge(state, {
-        data: {
-          [action.payload.taskId] : {
-            isDragging: false
-          }
-        }
-      })
+      return i.assocIn(state, ['data', action.payload.taskId, 'isDragging'], false)
+
     default:
       return state;
   }
@@ -169,23 +149,14 @@ const mainReducer = (state, action) => {
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
-function addTaskToGroups(groups, task) {
-  const groupIndex = groups.findIndex((group)=>group._id == task.group);
-  const newArray = i.push(groups[groupIndex].children, { _id: task._id }); // Push the task onto the child array
-  return i.assocIn(groups, [groupIndex, 'children'], newArray)
-}
-
-function addTaskToData(data, task) {
-  return i.assoc(data, task._id, task)
-}
 
 function getLocationIndex(groups, id){
   // This will return the group and task index inside the structure object.
   let groupIndex = null;
   let taskIndex  = null;
   groupIndex = groups.findIndex((group, groupIndex) => {
-    const foundTaskIndex = group.children.findIndex((task)=>{
-      return task._id == id;
+    const foundTaskIndex = group.tasks.findIndex((taskId)=>{
+      return taskId == id;
     })
     // If the task index is found, we return it
     if(foundTaskIndex != -1){
@@ -206,10 +177,10 @@ function getGroupIndex(groups, groupId){
 function moveTask (groups, lastX, nextX, lastY, nextY) {
   const cloneItems = cloneDeep(groups);
   if (lastX === nextX) {
-    cloneItems[lastX].children.splice(nextY, 0, cloneItems[lastX].children.splice(lastY, 1)[0]);
+    cloneItems[lastX].tasks.splice(nextY, 0, cloneItems[lastX].tasks.splice(lastY, 1)[0]);
   } else {
-    cloneItems[nextX].children.splice(nextY, 0, cloneItems[lastX].children[lastY]);  // move element to new place
-    cloneItems[lastX].children.splice(lastY, 1); // delete element from old place
+    cloneItems[nextX].tasks.splice(nextY, 0, cloneItems[lastX].tasks[lastY]);  // move element to new place
+    cloneItems[lastX].tasks.splice(lastY, 1); // delete element from old place
   }
   return cloneItems;
 }

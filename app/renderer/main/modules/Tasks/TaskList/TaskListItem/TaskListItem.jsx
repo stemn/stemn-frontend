@@ -32,6 +32,11 @@ import UserSelect from 'app/renderer/main/components/Users/UserSelect/UserSelect
 
 
 export const Component = React.createClass({
+  componentWillMount() {
+    this.props.TasksActions.getTask({
+      taskId: this.props.item
+    })
+  },
   toggleComplete(model, value){
     this.props.TasksActions.toggleComplete({
       taskId: this.props.task._id,
@@ -49,11 +54,9 @@ export const Component = React.createClass({
   },
   render() {
     const { task, entityModel, draggable, layout } = this.props;
-
     if(!task){
       return <div>Task Loading</div>
     }
-
     if(layout == 'list'){
       return (
         <div className={classNames({[classes.isDragging]: task.isDragging && draggable})} onDoubleClick={this.showModal}>
@@ -147,9 +150,10 @@ Component.contextTypes = {
 /////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps({ tasks }, {item}) {
+  const task = tasks.data[item] && tasks.data[item].data ? tasks.data[item].data : null;
   return {
-    task: tasks.data[item],
-    entityModel: `tasks.data[${item}]`
+    task,
+    entityModel: `tasks.data[${item}].data`
   };
 }
 

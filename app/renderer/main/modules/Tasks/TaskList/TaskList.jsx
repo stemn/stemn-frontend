@@ -29,14 +29,14 @@ export const NewItem = React.createClass({
 export const Component = React.createClass({
   moveGroup({dragItem, hoverItem}) {
     this.props.TasksActions.moveGroup({
-      projectId: this.props.project.data._id,
+      boardId: this.props.board.data._id,
       dragItem,
       hoverItem
     })
   },
   moveCard({dragItem, hoverItem, destinationGroup}) {
     this.props.TasksActions.moveTask({
-      projectId: this.props.project.data._id,
+      boardId: this.props.board.data._id,
       dragItem,
       hoverItem,
       destinationGroup
@@ -44,13 +44,13 @@ export const Component = React.createClass({
   },
   beginDrag(taskId) {
     this.props.TasksActions.beginDrag({
-      projectId: this.props.project.data._id,
+      boardId: this.props.board.data._id,
       taskId,
     })
   },
   endDrag(taskId) {
     this.props.TasksActions.endDrag({
-      projectId: this.props.project.data._id,
+      boardId: this.props.board.data._id,
       taskId,
     })
   },
@@ -61,7 +61,7 @@ export const Component = React.createClass({
       task: {
         title: this.props.board.newTaskString[groupId],
         group: groupId,
-        board: this.props.board.data._id
+        boardId: this.props.board.data._id
       },
     })
   },
@@ -103,17 +103,19 @@ export const Component = React.createClass({
                 <TaskListItemParent
                  groupId={group._id}
                  moveCard={this.moveCard}
+                 tasks={group.tasks}
                  layout={layout}>
-                  {group.tasks.map((card, cardIndex) =>
+                  {group.tasks.map((taksId, cardIndex) =>
                     <TaskListItemWrapped
-                      key={card._id}
+                      key={taksId}
                       index={cardIndex}
-                      id={card._id}
-                      item={card}
+                      id={taksId}
+                      item={taksId}
+                      groupId={group._id}
                       moveCard={this.moveCard}
                       beginDrag={this.beginDrag}
                       endDrag={this.endDrag}>
-                      <TaskListItem item={card} draggable={true} layout={layout} />
+                      <TaskListItem item={taksId} draggable={true} layout={layout} />
                     </TaskListItemWrapped>
                   )}
                   <NewItem

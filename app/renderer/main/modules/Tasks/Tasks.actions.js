@@ -3,26 +3,6 @@ import getUuid from 'app/shared/helpers/getUuid.js';
 import { actions } from 'react-redux-form';
 import { show as showToast } from 'app/renderer/main/modules/Toasts/Toasts.actions.js';
 
-//export function newTask({projectId, task}) {
-//  const taskDefault = {
-//    _id : getUuid(),
-//    users: [{
-//      name: 'David Revay',
-//      picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg'
-//    }]
-//  }
-//  return {
-//    type: 'TASKS/NEW_TASK',
-//    payload: {
-//      projectId,
-//      task: Object.assign({}, taskDefault, task)
-//    },
-//    meta: {
-//      cacheKey: projectId
-//    }
-//  }
-//}
-
 export function newTask({boardId, task}) {
   return (dispatch, getState) => {
    const taskDefault = {
@@ -62,268 +42,96 @@ export function getBoard({projectId}){
   }
 }
 
-export function getTasks({projectId}) {
+export function getTask({taskId}) {
   return {
-    type: 'TASKS/GET_TASKS',
-//    payload: http({
-//      method: 'GET',
-//      url: `http://localhost:3000/api/v1/tasks/${projectId}`,
-//    }),
-    payload: {
-      response: {
-        data: {
-          structure: [
-            {
-              _id: 'G1',
-              name: 'Requirements',
-              children: [{_id: 'T1'}, {_id: 'T2'}, {_id: 'T3'}, {_id: 'T4'}]
-            },{
-              _id: 'G2',
-              name: 'Development',
-              children: [{_id: 'T5'}, {_id:'T6'}, {_id: 'T7'}]
-            },{
-              _id: 'G3',
-              name: 'Design',
-              children: [{_id: 'T8'}, {_id: 'T9'}]
-            }
-          ],
-          items: {
-            T1: {
-              _id: 'T1',
-              title : 'Call Joan to discuss existing requirements',
-              group: '1',
-              due: 1472792461569,
-              project: {
-                _id: '57c526c3e7c624f857828691'
-              },
-              labels: ['L1', 'L2', 'L4'],
-              users : [
-                {
-                  name: 'David Revay',
-                  picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg'
-                }
-              ]
-            },
-            T2: {
-              _id: 'T2',
-              title : 'Write new requirements based on feedback received from Sam',
-              group: '1',
-              labels: ['L2', 'L4'],
-              due: 1472792461569,
-              project: {
-                _id: '57c526c3e7c624f857828691'
-              },
-              users : [
-                {
-                  name: 'David Revay',
-                  picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg'
-                }
-              ]
-            },
-            T3: {
-              _id: 'T3',
-              title : 'Create process flow based on user interview',
-              group: '1',
-              labels: ['L4', 'L2'],
-              due: 1472792461569,
-              project: {
-                _id: '57c526c3e7c624f857828691'
-              },
-              users : [
-                {
-                  name: 'David Revay',
-                  picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg'
-                }
-              ]
-            },
-            T4: {
-              _id: 'T4',
-              title : 'Schedule meeting with client to go over documents from last week',
-              group: '1',
-              due: 1472792461569,
-              project: {
-                _id: '57c526c3e7c624f857828691'
-              },
-              users : [
-                {
-                  name: 'David Revay',
-                  picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg'
-                }
-              ]
-            },
-            T5: {
-              _id: 'T5',
-              title : 'Enable password recovery feature on the application',
-              group: '2',
-              due: 1472792461569,
-              project: {
-                _id: '57c526c3e7c624f857828691'
-              },
-              users : [
-                {
-                  name: 'David Revay',
-                  picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg'
-                }
-              ]
-            },
-            T6: {
-              _id: 'T6',
-              title : 'Create a build script to concatenate all javascript files for production',
-              group: '2',
-              due: 1472792461569,
-              project: {
-                _id: '57c526c3e7c624f857828691'
-              },
-              users : [
-                {
-                  name: 'David Revay',
-                  picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg'
-                }
-              ]
-            },
-            T7: {
-              _id: 'T7',
-              title : 'Add feature X to module Y',
-              group: '2',
-              due: 1472792461569,
-              project: {
-                _id: '57c526c3e7c624f857828691'
-              },
-              users : [
-                {
-                  name: 'David Revay',
-                  picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg'
-                }
-              ]
-            },
-            T8: {
-              _id: 'T8',
-              title : 'Talk to client about changing the look of the header',
-              group: '3',
-              due: 1472792461569,
-              project: {
-                _id: '57c526c3e7c624f857828691'
-              },
-              users : [
-                {
-                  name: 'David Revay',
-                  picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg'
-                }
-              ]
-            },
-            T9: {
-              _id: 'T9',
-              title : 'Get the new designs from Sam',
-              group: '3',
-              due: 1472792461569,
-              project: {
-                _id: '57c526c3e7c624f857828691'
-              },
-              users : [
-                {
-                  name: 'David Revay',
-                  picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg'
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
+    type: 'TASKS/GET_TASK',
+    payload: http({
+      method: 'GET',
+      url: `http://localhost:3000/api/v1/tasks/${taskId}`,
+    }),
     meta: {
-      cacheKey: projectId
+      cacheKey: taskId
     }
   }
 }
 
-export function deleteTask({projectId, taskId}) {
+export function deleteTask({boardId, taskId}) {
   return {
     type: 'TASKS/DELETE_TASK',
     payload: http({
       method: 'DELETE',
-      url: `http://localhost:3000/api/v1/tasks/${projectId}/${taskId}`,
+      url: `http://localhost:3000/api/v1/tasks/${taskId}`,
     }),
     meta: {
-      cacheKey: projectId
+      cacheKey: boardId
     }
   }
 }
 
-//export function moveTask({projectId, lastX, lastY, nextX, nextY}) {
+
+export function moveTask({boardId, dragItem, hoverItem, destinationGroup}) {
+  // To move a task you must have either hoverItem or destinationGroup
+  // destinationGroup is used if the group is empty
+
+  return {
+    type: 'TASKS/MOVE_TASK',
+    payload: http({
+      method: 'POST',
+      url: `http://localhost:3000/api/v1/tasks/move`,
+      data: {
+        task : dragItem.id,
+        destinationGroup,
+        destinationTask : hoverItem ? hoverItem.id : ''
+      }
+    }),
+    meta: {
+      task : dragItem.id,
+      destinationGroup,
+      destinationTask : hoverItem ? hoverItem.id : '',
+      boardId
+    }
+  }
+
 //  return {
 //    type: 'TASKS/MOVE_TASK',
 //    payload: {
-//      lastX, lastY, nextX, nextY
+//      dragItem, hoverItem, destinationGroup, boardId
 //    },
-//    meta: {
-//      cacheKey: projectId
-//    }
 //  }
-//}
-//
-//
-//export function moveGroup({projectId, lastX, nextX}) {
-//  return {
-//    type: 'TASKS/MOVE_GROUP',
-//    payload: {
-//      lastX, nextX
-//    },
-//    meta: {
-//      cacheKey: projectId
-//    }
-//  }
-//}
-
-
-export function moveTask({projectId, dragItem, hoverItem, destinationGroup}) {
-  // To move a task you must have either hoverItem or destinationGroup
-  // destinationGroup is used if the group is empty
-  return {
-    type: 'TASKS/MOVE_TASK',
-    payload: {
-      dragItem, hoverItem, destinationGroup
-    },
-    meta: {
-      cacheKey: projectId
-    }
-  }
 }
 
-export function beginDrag({projectId, taskId}) {
+export function beginDrag({boardId, taskId}) {
   return {
     type: 'TASKS/BEGIN_DRAG',
     payload: {
       taskId
     },
     meta: {
-      cacheKey: projectId
+      cacheKey: boardId
     }
   }
 }
 
-export function endDrag({projectId, taskId}) {
+export function endDrag({boardId, taskId}) {
   return {
     type: 'TASKS/END_DRAG',
     payload: {
       taskId
     },
     meta: {
-      cacheKey: projectId
+      cacheKey: boardId
     }
   }
 }
 
 
 
-export function moveGroup({projectId, dragItem, hoverItem}) {
+export function moveGroup({boardId, dragItem, hoverItem}) {
   return {
     type: 'TASKS/MOVE_GROUP',
     payload: {
-      dragItem, hoverItem
+      dragItem, hoverItem, boardId
     },
-    meta: {
-      cacheKey: projectId
-    }
   }
 }
 
@@ -341,7 +149,7 @@ export function toggleComplete({taskId, model, value}) {
   };
 }
 
-export function newGroup({projectId, group}) {
+export function newGroup({boardId, group}) {
   const groupDefault = {
     _id : getUuid(),
     children: []
@@ -354,21 +162,21 @@ export function newGroup({projectId, group}) {
           group: Object.assign({}, groupDefault, group)
         },
         meta: {
-          cacheKey: projectId
+          cacheKey: boardId
         }
       })
     }
   }
 }
 
-export function deleteGroup({projectId, groupId}) {
+export function deleteGroup({boardId, groupId}) {
   return {
     type: 'TASKS/DELETE_GROUP',
     payload: {
       groupId
     },
     meta: {
-      cacheKey: projectId
+      cacheKey: boardId
     }
   }
 }

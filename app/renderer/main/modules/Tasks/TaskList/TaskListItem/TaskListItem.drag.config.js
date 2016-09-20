@@ -47,6 +47,7 @@ export const hover = (props, monitor, component) => {
   // Time to actually perform the action
    throttleModelUpdate(()=>{
     props.moveCard({
+      destinationGroup: props.groupId,
       dragItem: {
         id: dragId,
         index: dragIndex
