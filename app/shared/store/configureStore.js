@@ -14,6 +14,7 @@ import forwardToRendererWindow from './middleware/forwardToRendererWindow';
 import routerFix from './middleware/routerFix';
 import httpPackage from './middleware/httpPackage';
 import transformHttp from './middleware/transformHttp';
+import throttle from './middleware/throttle';
 import errorToast from './middleware/errorToast';
 
 export default function configureStore(initialState, scope = 'main') {
@@ -44,6 +45,7 @@ export default function configureStore(initialState, scope = 'main') {
   if (scope === 'main') {
     middleware = [
       thunk,
+      throttle,
       httpPackage,
       transformHttp,
       promise(),

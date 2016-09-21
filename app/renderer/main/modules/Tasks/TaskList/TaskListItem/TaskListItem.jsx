@@ -37,12 +37,16 @@ export const Component = React.createClass({
       taskId: this.props.item
     })
   },
+  updateTask(){
+    this.props.TasksActions.updateTask({task: this.props.task.data})
+  },
   toggleComplete(model, value){
     this.props.TasksActions.toggleComplete({
       taskId: this.props.task._id,
       model,
       value
     })
+    this.updateTask();
   },
   deleteTask(){
     this.props.TasksActions.deleteTask({
@@ -60,7 +64,7 @@ export const Component = React.createClass({
   },
   render() {
     const { task, entityModel, draggable, layout } = this.props;
-    if(!task){
+    if(!task || !task.data){
       return <div>Task Loading</div>
     }
     if(layout == 'list'){
@@ -68,28 +72,30 @@ export const Component = React.createClass({
         <div className={classNames({[classes.isDragging]: task.isDragging && draggable})} onDoubleClick={this.showModal}>
           <div className={classNames(classes.listItem, 'layout-row flex layout-align-start-center')}>
             <Checkbox
-              model={`${entityModel}.complete`}
-              value={task.complete}
+              model={`${entityModel}.data.complete`}
+              value={task.data.complete}
               changeAction={this.toggleComplete}
               className="text-primary"
               circle={true} />
-            <div className="flex text-ellipsis">
-              <Field model={`${entityModel}.title`}>
+            <div className="flex text-ellipsis" style={{lineHeight: '1.4em'}}>
+              <Field model={`${entityModel}.data.name`}>
                 <input
+                  onChange={this.updateTask}
                   className="input-plain"
                   type="text"
                   placeholder="Task description" />
               </Field>
             </div>
-            <TaskLabelDots labels={task.labels} labelInfo={this.context.project.data.labels} tag="true" />
+            <TaskLabelDots labels={task.data.labels} labelInfo={this.context.project.data.labels} tag="true" />
             <div className={classes.listUser + ' layout-row layout-align-start-center text-ellipsis'}>
-              <UserAvatar
-                picture={task.users[0].picture}
-                size="25px"/>
-              <div style={{marginLeft: '10px'}}>{task.users[0].name}</div>
+              {task.data.users ? task.data.users.map( user =>
+                <UserAvatar
+                  picture={user.picture}
+                  size="25px"/>
+              ) : null}
             </div>
             <div className={classes.listDate + ' text-ellipsis'}>
-              {moment(task.due).fromNow()}
+              {moment(task.data.due).fromNow()}
             </div>
             <div className={classes.listActions + ' text-ellipsis layout-row layout-align-end-center'}>
               <SimpleIconButton onClick={this.showModal}>
@@ -114,29 +120,34 @@ export const Component = React.createClass({
         <div className={classNames(classes.card, 'layout-column flex')} onDoubleClick={this.showModal}>
           <div className={classes.cardBody + ' layout-row'}>
             <Checkbox
-              model={`${entityModel}.complete`}
-              value={task.complete}
+              model={`${entityModel}.data.complete`}
+              value={task.data.complete}
               changeAction={this.toggleComplete}
               className="text-primary"
               circle={true} />
             <div className={classes.cardText + ' flex'}>
               <Textarea
-                model={`${entityModel}.title`}
-                value={task.title}
+                onChange={this.updateTask}
+                model={`${entityModel}.data.name`}
+                value={task.data.name}
                 className="input-plain"
                 type="text"
                 placeholder="Task description" />
             </div>
             <PopoverMenu preferPlace="right" disableClickClose={true}>
-              <UserAvatar picture={task.users[0].picture} size="25px"/>
+              {task.data.users ? task.data.users.map( user =>
+                <UserAvatar
+                  picture={user.picture}
+                  size="25px"/>
+              ) : null}
               <div className="PopoverMenu" style={{padding: '15px'}}>
                 <UserSelect value="dropbox" />
               </div>
             </PopoverMenu>
           </div>
-          { task.labels && task.labels.length > 0 ?
+          { task.data.labels && task.data.labels.length > 0 ?
             <div className={classes.cardFooter + ' layout-row'}>
-              <TaskLabelDots labels={task.labels} labelInfo={this.context.project.data.labels} />
+              <TaskLabelDots labels={task.data.labels} labelInfo={this.context.project.data.labels} />
             </div>
             : null
           }
@@ -155,10 +166,10 @@ Component.contextTypes = {
 /////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps({ tasks }, {item}) {
-  const task = tasks.data[item] && tasks.data[item].data ? tasks.data[item].data : null;
+  const task = tasks.data[item] ? tasks.data[item] : null;
   return {
     task,
-    entityModel: `tasks.data[${item}].data`
+    entityModel: `tasks.data[${item}]`
   };
 }
 

@@ -35,12 +35,13 @@ export const Component = React.createClass({
       save
     })
   },
-  moveCard({task, destinationTask, destinationGroup}) {
+  moveCard({task, destinationTask, destinationGroup, save}) {
     this.props.TasksActions.moveTask({
       boardId: this.props.board.data._id,
       task,
       destinationTask,
-      destinationGroup
+      destinationGroup,
+      save
     })
   },
   beginDrag(taskId) {
@@ -60,7 +61,7 @@ export const Component = React.createClass({
     this.props.TasksActions.newTask({
       boardId: this.props.board.data._id,
       task: {
-        title: this.props.board.newTaskString[groupId],
+        name: this.props.board.newTaskString[groupId],
         group: groupId,
         boardId: this.props.board.data._id
       },

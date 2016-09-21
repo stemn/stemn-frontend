@@ -50,11 +50,30 @@ export function getTask({taskId}) {
       url: `http://localhost:3000/api/v1/tasks`,
       method: 'GET',
       params: {
-        'ids[]' : taskId
+        'ids' : taskId
       }
     },
     meta: {
       cacheKey: taskId
+    }
+  }
+}
+
+export function updateTask({task}) {
+  return {
+    type: 'TASKS/UPDATE_TASK',
+    http: true,
+    throttle: {
+      time: 2000,
+      endpoint:  `TASKS/UPDATE_TASK-${task._id}`
+    },
+    payload: {
+      method: 'PUT',
+      url: `http://localhost:3000/api/v1/tasks/${task._id}`,
+      data: task
+    },
+    meta: {
+      cacheKey: task._id
     }
   }
 }
@@ -78,6 +97,7 @@ export function moveTask({boardId, task, destinationTask, destinationGroup, save
   // To move a task you must have either hoverItem or destinationGroup
   // destinationGroup is used if the group is empty
   return (dispatch) => {
+    console.log({boardId, task, destinationTask, destinationGroup, save});
     if(save){
       dispatch({
         type: 'TASKS/MOVE_TASK',

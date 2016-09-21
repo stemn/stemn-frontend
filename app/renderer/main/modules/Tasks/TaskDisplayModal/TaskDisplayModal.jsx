@@ -32,9 +32,9 @@ import CommentNew from 'app/renderer/main/modules/Comments/Comment/CommentNew.js
 
 const onMount = (nextProps, prevProps) => {
   if(nextProps.task){
-    if(!prevProps || nextProps.task.project._id !== prevProps.task.project._id){
-      nextProps.ProjectsActions.getProject({projectId: nextProps.task.project._id});
-    }
+//    if(!prevProps || nextProps.task.project._id !== prevProps.task.project._id){
+////      nextProps.ProjectsActions.getProject({projectId: nextProps.task.project._id});
+//    }
   }
 }
 
@@ -63,7 +63,7 @@ export const Component = React.createClass({
   render() {
     const { taskId, task, project, entityModel, modalCancel, modalHide } = this.props;
 
-    if(!task || !project){
+    if(!task){
       return <div>Task Loading</div>
     }
 
@@ -78,14 +78,14 @@ export const Component = React.createClass({
             circle={true} />
           <div className="text-title-4 flex" style={{marginLeft: '15px'}}>
             <Textarea
-              model={`${entityModel}.title`}
-              value={task.title}
+              model={`${entityModel}.name`}
+              value={task.name}
               className="input-plain"
               type="text"
               placeholder="Task description" />
           </div>
         </div>
-        <div className="text-grey-3" style={{padding: '10px 0 20px'}}>Opened {moment(task.due).fromNow()} <b className="text-interpunct"></b> By <a className="link-primary">{task.users[0].name}</a> <b className="text-interpunct"></b> 4 Comments</div>
+        <div className="text-grey-3" style={{padding: '10px 0 20px'}}>Opened {moment(task.due).fromNow()} <b className="text-interpunct"></b> By <a className="link-primary">{task.owner}</a> <b className="text-interpunct"></b> 4 Comments</div>
 
         <div className="layout-row">
           <div className="flex-70" style={{paddingRight: '15px'}}>
@@ -102,7 +102,7 @@ export const Component = React.createClass({
                 <div className="flex">Labels</div>
                 <a style={{fontSize: '14px'}} onClick={this.showLabelEditModal}>+</a>
               </div>
-              <LabelSelect model={`${entityModel}.labels`} value={task.labels} labelInfo={project.data.labels}/>
+              {/*<LabelSelect model={`${entityModel}.labels`} value={task.labels} labelInfo={project.data.labels}/>*/}
             </div>
             <div className={classes.well}>
               <div className="text-mini-caps" style={{padding: '15px 15px 0'}}>Asignee</div>
@@ -130,7 +130,7 @@ export const Component = React.createClass({
 
 function mapStateToProps({ tasks, projects }, {taskId}) {
   const task = tasks.data[taskId];
-  const project = projects[task.project._id];
+  const project = projects[task.project];
   return {
     task: task,
     project: project,

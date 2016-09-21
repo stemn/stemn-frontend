@@ -72,6 +72,7 @@ export const beginDrag = (props, monitor, component) => {
 }
 
 export const endDrag = (props, monitor) => {
+  console.log('move card');
   props.moveCard({
     task: props.id,
     destinationTask: lastDestinationId,

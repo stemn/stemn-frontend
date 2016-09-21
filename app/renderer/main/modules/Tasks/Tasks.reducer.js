@@ -13,7 +13,7 @@ const mainReducer = (state, action) => {
   switch (action.type) {
     case 'TASKS/NEW_TASK_FULFILLED':
       return i.chain(state)
-      .assocIn(['data', action.payload.data._id], action.payload.data) // Add to data
+      .assocIn(['data', action.payload.data._id, 'data'], action.payload.data) // Add to data
       .assocIn(['boards', action.payload.data.board, 'newTaskString', action.payload.data.group], '') // Clear string
       .updateIn(['boards', action.payload.data.board, 'data', 'groups'], (groups) => { // Add to groups.tasks array
         const groupIndex = groups.findIndex((group)=>group._id == action.payload.data.group);
@@ -73,45 +73,21 @@ const mainReducer = (state, action) => {
       })
       .value();
 
-//    case 'TASKS/MOVE_TASK':
-//      return i.updateIn(state, ['boards', action.payload.boardId, 'data', 'groups'], (groups) => {
-//        const taskFrom = getLocationIndex(groups, action.payload.dragItem.id);
-//        let newStructure = null;
-//        if(action.payload.hoverItem){ // We move the task to the hoverItem position
-//          const taskTo   = getLocationIndex(groups, action.payload.hoverItem.id);
-//          newStructure = moveTask(
-//            groups,
-//            taskFrom.groupIndex,
-//            taskTo.groupIndex,
-//            taskFrom.taskIndex,
-//            taskTo.taskIndex
-//          );
-//        }
-//        else if(action.payload.destinationGroup){ // The group is empty
-//          newStructure = moveTask(
-//            groups,
-//            taskFrom.groupIndex,
-//            getGroupIndex(groups, action.payload.destinationGroup),
-//            taskFrom.taskIndex,
-//            0 // Put it at the start of the group
-//          );
-//        }
-//        return newStructure
-//      })
-
     case 'TASKS/MOVE_TASK':
-      return i.updateIn(state, ['boards', action.payload.boardId, 'data', 'groups'], (groups) => {
+      return i.chain(state)
+      .assocIn(['data', action.payload.task, 'data', 'board'], action.payload.destinationGroup)    // Update the group property
+      .updateIn(['boards', action.payload.boardId, 'data', 'groups'], (groups) => {                // Move the task in the groups array
         const from = getLocationIndex(groups, action.payload.task);
-        let newStructure = null;
-        if(action.payload.destinationTask){ // We move the task to the hoverItem position
-          const to = getLocationIndex(groups, action.payload.destinationTask);
-          newStructure = moveTask( groups, from.groupIndex, to.groupIndex, from.taskIndex, to.taskIndex);
-        }
-        else if(action.payload.destinationGroup){ // The group is empty
-          newStructure = moveTask( groups, from.groupIndex, getGroupIndex(groups, action.payload.destinationGroup), from.taskIndex, 0 );
-        }
-        return newStructure
+        const to = action.payload.destinationTask ? getLocationIndex(groups, action.payload.destinationTask) : {groupIndex: getGroupIndex(groups, action.payload.destinationGroup), taskIndex: 0};
+        return moveTask({
+          groups : groups,
+          lastX  : from.groupIndex,
+          nextX  : to.groupIndex,
+          lastY  : from.taskIndex,
+          nextY  : to.taskIndex
+        })
       })
+      .value();
     case 'TASKS/MOVE_TASK_FULFILLED':
       return state
 
@@ -161,7 +137,7 @@ function getGroupIndex(groups, groupId){
   return groups.findIndex((group)=>group._id == groupId)
 }
 
-function moveTask (groups, lastX, nextX, lastY, nextY) {
+function moveTask ({groups, lastX, nextX, lastY, nextY}) {
   const cloneItems = cloneDeep(groups);
   if (lastX === nextX) {
     cloneItems[lastX].tasks.splice(nextY, 0, cloneItems[lastX].tasks.splice(lastY, 1)[0]);
