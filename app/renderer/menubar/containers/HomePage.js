@@ -5,7 +5,7 @@ import * as ChangeActions from 'app/renderer/main/modules/Changes/Changes.action
 import * as ProjectsActions from 'app/shared/actions/projects';
 
 function mapStateToProps({changes, projects}, {params}) {
-  const project = projects[params.stub];
+  const project = projects.data[params.stub];
   return {
     project: project,
     changes: changes[params.stub],

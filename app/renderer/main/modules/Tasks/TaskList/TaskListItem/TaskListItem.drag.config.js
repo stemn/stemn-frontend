@@ -53,6 +53,7 @@ export const cardHover = (props, monitor, component) => {
      endDragProps.id = props.id;
      endDragProps.index = props.index;
      endDragProps.groupId = props.groupId;
+     endDragProps.after = dragIndex < hoverIndex;
 
      props.moveCard({
        task: dragId,
@@ -86,6 +87,7 @@ export const beginDrag = (props, monitor, component) => {
 }
 
 export const endDrag = (props, monitor) => {
+  console.log(endDragProps);
   if(beginDragProps.groupId != endDragProps.groupId ||
     beginDragProps.index != endDragProps.index){
     // We have done a real move, save
@@ -93,6 +95,7 @@ export const endDrag = (props, monitor) => {
       task: beginDragProps.id,
       destinationTask: endDragProps.id,
       destinationGroup: endDragProps.groupId,
+      after: endDragProps.after,
       save: true,
     });
   }

@@ -92,6 +92,25 @@ export function updateTask({task}) {
   }
 }
 
+export function updateGroup({group}) {
+  return {
+    type: 'TASKS/UPDATE_GROUP',
+    http: true,
+    throttle: {
+      time: 2000,
+      endpoint:  `TASKS/UPDATE_GROUP-${group._id}`
+    },
+    payload: {
+      method: 'PUT',
+      url: `http://localhost:3000/api/v1/groups/${group._id}`,
+      data: group
+    },
+    meta: {
+      cacheKey: group._id
+    }
+  }
+}
+
 export function deleteTask({boardId, taskId}) {
   return {
     type: 'TASKS/DELETE_TASK',
@@ -107,7 +126,7 @@ export function deleteTask({boardId, taskId}) {
 }
 
 
-export function moveTask({boardId, task, destinationTask, destinationGroup, save}) {
+export function moveTask({boardId, task, destinationTask, destinationGroup, after, save}) {
   // To move a task you must have either hoverItem or destinationGroup
   // destinationGroup is used if the group is empty
   return (dispatch) => {
@@ -121,7 +140,8 @@ export function moveTask({boardId, task, destinationTask, destinationGroup, save
             board: boardId,
             task,
             destinationGroup,
-            destinationTask
+            destinationTask,
+            after
           }
         }),
       })
@@ -166,7 +186,7 @@ export function endDrag({boardId, taskId}) {
 
 
 
-export function moveGroup({boardId, group, destinationGroup, save}) {
+export function moveGroup({boardId, group, destinationGroup, after, save}) {
   return (dispatch) => {
     if(save){
       dispatch({
@@ -178,6 +198,7 @@ export function moveGroup({boardId, group, destinationGroup, save}) {
             board: boardId,
             group,
             destinationGroup,
+            after
           }
         })
       })
@@ -229,7 +250,7 @@ export function deleteGroup({boardId, groupId}) {
     type: 'TASKS/DELETE_GROUP',
     payload: http({
       method: 'DELETE',
-      url: `http://localhost:3000/api/v1/groups/${groupId}`,
+      url: `http://localhost:3000/api/v1/boards/${boardId}/groups/${groupId}`,
     }),
     meta: {
       groupId,
