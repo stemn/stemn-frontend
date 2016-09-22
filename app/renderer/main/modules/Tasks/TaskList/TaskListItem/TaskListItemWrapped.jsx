@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { hover, beginDrag, endDrag } from './TaskListItem.drag.config.js';
+import { cardHover, cardDrop, beginDrag, endDrag } from './TaskListItem.drag.config.js';
 import { DragSource, DropTarget } from 'react-dnd';
 const ItemTypes = {
   CARD: 'card'
@@ -10,7 +10,8 @@ const cardSource = {
 };
 
 const cardTarget = {
-  hover,
+  hover: cardHover,
+  drop: cardDrop,
 };
 
 @DropTarget(ItemTypes.CARD, cardTarget, connect => ({

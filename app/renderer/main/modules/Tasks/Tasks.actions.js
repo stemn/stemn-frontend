@@ -1,7 +1,7 @@
 import http from 'axios';
 import getUuid from 'app/shared/helpers/getUuid.js';
 import { actions } from 'react-redux-form';
-import { show as showToast } from 'app/renderer/main/modules/Toasts/Toasts.actions.js';
+import { showPromise as showToast } from 'app/renderer/main/modules/Toasts/Toasts.actions.js';
 
 export function newTask({boardId, task}) {
   return (dispatch, getState) => {
@@ -97,7 +97,6 @@ export function moveTask({boardId, task, destinationTask, destinationGroup, save
   // To move a task you must have either hoverItem or destinationGroup
   // destinationGroup is used if the group is empty
   return (dispatch) => {
-    console.log({boardId, task, destinationTask, destinationGroup, save});
     if(save){
       dispatch({
         type: 'TASKS/MOVE_TASK',
@@ -105,6 +104,7 @@ export function moveTask({boardId, task, destinationTask, destinationGroup, save
           method: 'POST',
           url: `http://localhost:3000/api/v1/tasks/move`,
           data: {
+            board: boardId,
             task,
             destinationGroup,
             destinationTask
@@ -193,11 +193,12 @@ export function toggleComplete({taskId, model, value}) {
       title: `This task was marked ${value ? 'complete' : 'incomplete'}.`,
       actions: [{
         text: 'Undo',
-        action: actions.change(model, !value)
+        action: (dispatch)=>actions.change(model, !value)
       }]
     }));
   };
 }
+//        action: actions.change(model, !value)
 
 export function newGroup({boardId, group}) {
   return (dispatch)=>{

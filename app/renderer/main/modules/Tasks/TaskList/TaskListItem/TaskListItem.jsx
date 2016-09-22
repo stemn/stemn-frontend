@@ -38,7 +38,7 @@ export const Component = React.createClass({
     })
   },
   updateTask(){
-    this.props.TasksActions.updateTask({task: this.props.task.data})
+    setTimeout(()=>this.props.TasksActions.updateTask({task: this.props.task.data}), 1)
   },
   toggleComplete(model, value){
     this.props.TasksActions.toggleComplete({

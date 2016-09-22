@@ -36,6 +36,7 @@ const Toast = React.createClass({
   },
   render() {
     const { toast, dispatch } = this.props;
+    console.log(toast);
 
     if(!this.hideTimeout){this.startHideTimeout()}
 

@@ -7,6 +7,7 @@ const initialState = {
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case 'TOAST/SHOW':
+      console.log(action.payload);
       return i.merge(state, {
         stack: i.push(state.stack, action.payload)
       })
