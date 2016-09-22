@@ -3,7 +3,7 @@ import { Field, Form } from 'react-redux-form';
 
 // Styles
 import classes from './Checkbox.css';
-import classNames from 'classNames';
+import classNames from 'classnames';
 
 export default (props) => {
   const id = Math.random().toString(36).substring(7);

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 import createDateObjects from './createDateObjects';
 
-import classNames from 'classNames';
+import classNames from 'classnames';
 import classes from './Calendar.css';
 
 export default class Calendar extends Component {
