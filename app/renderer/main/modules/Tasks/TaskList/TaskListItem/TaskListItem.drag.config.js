@@ -87,8 +87,8 @@ export const beginDrag = (props, monitor, component) => {
 }
 
 export const endDrag = (props, monitor) => {
-  console.log(endDragProps);
-  if(beginDragProps.groupId != endDragProps.groupId ||
+  if(endDragProps.groupId &&
+    beginDragProps.groupId != endDragProps.groupId ||
     beginDragProps.index != endDragProps.index){
     // We have done a real move, save
     props.moveCard({
