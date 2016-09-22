@@ -5,12 +5,29 @@ import { findDOMNode } from 'react-dom';
 const ItemTypes = {
   GROUP: 'group'
 }
+
+let endDragProps = {};
+let beginDragProps = {};
+
 const cardSource = {
   beginDrag(props) {
+    beginDragProps.id = props.id;
+    beginDragProps.index = props.index;
     return {
       id: props.id,
       index: props.index
     };
+  },
+
+  endDrag(props) {
+    // If the group has moved, save it
+    if(beginDragProps.index != endDragProps.index){
+      props.moveGroup({
+        group: beginDragProps.id,
+        destinationGroup: endDragProps.id,
+        save: true
+      });
+    }
   }
 };
 
@@ -42,16 +59,15 @@ const cardTarget = {
       if (dragIndex > hoverIndex && hoverClientX > hoverMiddleX) { return } // Dragging right
     }
 
+
+    // Set the end params
+    endDragProps.id = props.id;
+    endDragProps.index = props.index;
+
     // Time to actually perform the action
     props.moveGroup({
-      dragItem: {
-        id: monitor.getItem().id,
-        index: monitor.getItem().index
-      },
-      hoverItem: {
-        id: props.id,
-        index: props.index
-      }
+      group: monitor.getItem().id,
+      destinationGroup: props.id
     });
     monitor.getItem().index = hoverIndex;
   }

@@ -92,10 +92,11 @@ const mainReducer = (state, action) => {
       return state
 
     case 'TASKS/MOVE_GROUP':
-      const groupFrom = action.payload.dragItem.index;
-      const groupTo   = action.payload.hoverItem.index;
-      const newGroupStructure = moveGroup(state.boards[action.payload.boardId].data.groups, groupFrom, groupTo);
-      return i.assocIn(state, ['boards', action.payload.boardId, 'data', 'groups'], newGroupStructure)
+      return i.updateIn(state, ['boards', action.payload.boardId, 'data', 'groups'], (groups) => {
+        const groupFrom = groups.findIndex((group) => group._id == action.payload.group);
+        const groupTo   = groups.findIndex((group) => group._id == action.payload.destinationGroup);
+        return moveGroup(groups, groupFrom, groupTo);
+      })
 
     case 'TASKS/BEGIN_DRAG':
       return i.assocIn(state, ['data', action.payload.taskId, 'isDragging'], true)

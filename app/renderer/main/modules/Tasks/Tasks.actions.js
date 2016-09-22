@@ -126,30 +126,6 @@ export function moveTask({boardId, task, destinationTask, destinationGroup, save
   }
 }
 
-//export function moveTask({boardId, task, destinationTask, destinationGroup}) {
-//  // To move a task you must have either hoverItem or destinationGroup
-//  // destinationGroup is used if the group is empty
-//
-//  return {
-//    type: 'TASKS/MOVE_TASK',
-//    payload: http({
-//      method: 'POST',
-//      url: `http://localhost:3000/api/v1/tasks/move`,
-//      data: {
-//        task,
-//        destinationGroup,
-//        destinationTask
-//      }
-//    }),
-//    meta: {
-//      task,
-//      destinationGroup,
-//      destinationTask,
-//      boardId
-//    }
-//  }
-//}
-
 export function beginDrag({boardId, taskId}) {
   return {
     type: 'TASKS/BEGIN_DRAG',
@@ -176,15 +152,32 @@ export function endDrag({boardId, taskId}) {
 
 
 
-export function moveGroup({boardId, dragItem, hoverItem}) {
-  return {
-    type: 'TASKS/MOVE_GROUP',
-    payload: {
-      dragItem, hoverItem, boardId
-    },
+export function moveGroup({boardId, group, destinationGroup, save}) {
+  return (dispatch) => {
+    if(save){
+      dispatch({
+        type: 'TASKS/MOVE_TASK',
+        payload: http({
+          method: 'POST',
+          url: `http://localhost:3000/api/v1/groups/move`,
+          data: {
+            board: boardId,
+            group,
+            destinationGroup,
+          }
+        })
+      })
+    }
+    else {
+      dispatch({
+        type: 'TASKS/MOVE_GROUP',
+        payload: {
+          group, destinationGroup, boardId
+        },
+      })
+    }
   }
 }
-
 
 export function toggleComplete({taskId, model, value}) {
   return (dispatch) => {
@@ -198,7 +191,6 @@ export function toggleComplete({taskId, model, value}) {
     }));
   };
 }
-//        action: actions.change(model, !value)
 
 export function newGroup({boardId, group}) {
   return (dispatch)=>{
@@ -231,5 +223,3 @@ export function deleteGroup({boardId, groupId}) {
     }
   }
 }
-
-

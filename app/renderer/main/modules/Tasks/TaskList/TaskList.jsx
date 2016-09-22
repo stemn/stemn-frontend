@@ -27,11 +27,11 @@ export const NewItem = React.createClass({
 });
 
 export const Component = React.createClass({
-  moveGroup({dragItem, hoverItem, save}) {
+  moveGroup({group, destinationGroup, save}) {
     this.props.TasksActions.moveGroup({
       boardId: this.props.board.data._id,
-      dragItem,
-      hoverItem,
+      group,
+      destinationGroup,
       save
     })
   },

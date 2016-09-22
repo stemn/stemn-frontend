@@ -138,7 +138,7 @@ export const Component = React.createClass({
     else{
       return (
         <div className="layout-column layout-align-center-center flex">
-          <div className="text-title-4 text-center">Project not connected to Drive or Dropbox</div>
+          <div className="text-title-4 text-center">Timeline not available. Connect this project to Drive or Dropbox</div>
           <div className="text-title-4 text-center link-primary" style={{marginTop: '10px'}}><Link to={baseLink+'/settings'}>Add File Store</Link></div>
         </div>
       )
