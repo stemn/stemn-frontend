@@ -75,11 +75,17 @@ export const Component = React.createClass({
   render() {
     const { changes, project, ChangesActions, entityModel } = this.props;
 
-    if(!project || !changes || !project.data){
+    if(!project || !project.data){
       return <LoadingOverlay />
     }
+
+    const baseLink = `project/${project.data._id}`;
+
     if(project.data.remote.connected){
-      const baseLink = `project/${this.props.project.data._id}`;
+      if(!changes){
+        return <LoadingOverlay />
+      }
+
       const filePrevious = changes.selected.data && changes.selected.data.previousRevisionId ? u( {data: {revisionId : changes.selected.data.previousRevisionId}}, changes.selected) : null;
       return (
         <div className="layout-column flex rel-box">
@@ -128,7 +134,7 @@ export const Component = React.createClass({
     else{
       return (
         <div className="layout-column layout-align-center-center flex">
-          <div className="text-title-4 text-center">Project not connected to Drive or Dropbox</div>
+          <div className="text-title-4 text-center">Changes not available. Connect this project to Drive or Dropbox</div>
           <div className="text-title-4 text-center link-primary" style={{marginTop: '10px'}}><Link to={baseLink+'/settings'}>Add File Store</Link></div>
         </div>
       )
@@ -142,7 +148,7 @@ export const Component = React.createClass({
 /////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps({changes, projects}, {params}) {
-  const project = projects[params.stub];
+  const project = projects.data[params.stub];
   return {
     project: project,
     changes: changes[params.stub],

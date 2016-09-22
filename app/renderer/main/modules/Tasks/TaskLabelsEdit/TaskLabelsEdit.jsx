@@ -31,13 +31,23 @@ export const Component = React.createClass({
   render() {
     const { model, value, dispatch } = this.props;
 
-    if(value[value.length-1].name.length >= 1){
+    // If it is empty, push on a label
+    if(value.length == 0){
       dispatch(actions.push(model, {
         _id: getUuid(),
         color: '',
         name: '',
       }))
     }
+    // Else, if the name of the last label exists, add another
+    else if(value[value.length-1].name.length >= 1){
+      dispatch(actions.push(model, {
+        _id: getUuid(),
+        color: '',
+        name: '',
+      }))
+    }
+
     return (
       <div>
         {value.map((label, index)=>

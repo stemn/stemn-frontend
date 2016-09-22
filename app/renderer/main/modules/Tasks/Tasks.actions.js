@@ -1,7 +1,7 @@
 import http from 'axios';
 import getUuid from 'app/shared/helpers/getUuid.js';
 import { actions } from 'react-redux-form';
-import { show as showToast } from 'app/renderer/main/modules/Toasts/Toasts.actions.js';
+import { showPromise as showToast } from 'app/renderer/main/modules/Toasts/Toasts.actions.js';
 
 export function newTask({boardId, task}) {
   return (dispatch, getState) => {
@@ -38,6 +38,20 @@ export function getBoard({projectId}){
     }),
     meta: {
       cacheKey: projectId
+    }
+  }
+}
+
+export function updateBoard({board}){
+  return {
+    type: 'TASKS/UPDATE_BOARD',
+    payload: http({
+      method: 'PUT',
+      url: `http://localhost:3000/api/v1/boards/${board._id}`,
+      data: board
+    }),
+    meta: {
+      cacheKey: board._id
     }
   }
 }
@@ -97,7 +111,6 @@ export function moveTask({boardId, task, destinationTask, destinationGroup, save
   // To move a task you must have either hoverItem or destinationGroup
   // destinationGroup is used if the group is empty
   return (dispatch) => {
-    console.log({boardId, task, destinationTask, destinationGroup, save});
     if(save){
       dispatch({
         type: 'TASKS/MOVE_TASK',
@@ -105,6 +118,7 @@ export function moveTask({boardId, task, destinationTask, destinationGroup, save
           method: 'POST',
           url: `http://localhost:3000/api/v1/tasks/move`,
           data: {
+            board: boardId,
             task,
             destinationGroup,
             destinationTask
@@ -125,30 +139,6 @@ export function moveTask({boardId, task, destinationTask, destinationGroup, save
     }
   }
 }
-
-//export function moveTask({boardId, task, destinationTask, destinationGroup}) {
-//  // To move a task you must have either hoverItem or destinationGroup
-//  // destinationGroup is used if the group is empty
-//
-//  return {
-//    type: 'TASKS/MOVE_TASK',
-//    payload: http({
-//      method: 'POST',
-//      url: `http://localhost:3000/api/v1/tasks/move`,
-//      data: {
-//        task,
-//        destinationGroup,
-//        destinationTask
-//      }
-//    }),
-//    meta: {
-//      task,
-//      destinationGroup,
-//      destinationTask,
-//      boardId
-//    }
-//  }
-//}
 
 export function beginDrag({boardId, taskId}) {
   return {
@@ -176,15 +166,32 @@ export function endDrag({boardId, taskId}) {
 
 
 
-export function moveGroup({boardId, dragItem, hoverItem}) {
-  return {
-    type: 'TASKS/MOVE_GROUP',
-    payload: {
-      dragItem, hoverItem, boardId
-    },
+export function moveGroup({boardId, group, destinationGroup, save}) {
+  return (dispatch) => {
+    if(save){
+      dispatch({
+        type: 'TASKS/MOVE_TASK',
+        payload: http({
+          method: 'POST',
+          url: `http://localhost:3000/api/v1/groups/move`,
+          data: {
+            board: boardId,
+            group,
+            destinationGroup,
+          }
+        })
+      })
+    }
+    else {
+      dispatch({
+        type: 'TASKS/MOVE_GROUP',
+        payload: {
+          group, destinationGroup, boardId
+        },
+      })
+    }
   }
 }
-
 
 export function toggleComplete({taskId, model, value}) {
   return (dispatch) => {
@@ -193,7 +200,7 @@ export function toggleComplete({taskId, model, value}) {
       title: `This task was marked ${value ? 'complete' : 'incomplete'}.`,
       actions: [{
         text: 'Undo',
-        action: actions.change(model, !value)
+        action: (dispatch)=>actions.change(model, !value)
       }]
     }));
   };
@@ -222,7 +229,7 @@ export function deleteGroup({boardId, groupId}) {
     type: 'TASKS/DELETE_GROUP',
     payload: http({
       method: 'DELETE',
-      url: `http://localhost:3000/api/v1/taskGroups/${groupId}`,
+      url: `http://localhost:3000/api/v1/groups/${groupId}`,
     }),
     meta: {
       groupId,
@@ -230,5 +237,3 @@ export function deleteGroup({boardId, groupId}) {
     }
   }
 }
-
-

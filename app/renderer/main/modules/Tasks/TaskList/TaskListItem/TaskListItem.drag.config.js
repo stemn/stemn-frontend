@@ -6,9 +6,10 @@ let throttleModelUpdate = throttle((throttledFn)=>throttledFn(), 100, {
   trailing:false
 });
 
-let lastDestinationId = undefined;
+let endDragProps = {};
+let beginDragProps = {};
 
-export const hover = (props, monitor, component) => {
+export const cardHover = (props, monitor, component) => {
   const dragIndex = monitor.getItem().index;
   const dragId = monitor.getItem().id;
 
@@ -48,7 +49,11 @@ export const hover = (props, monitor, component) => {
 
   // Time to actually perform the action
    throttleModelUpdate(()=>{
-     lastDestinationId = hoverId;
+
+     endDragProps.id = props.id;
+     endDragProps.index = props.index;
+     endDragProps.groupId = props.groupId;
+
      props.moveCard({
        task: dragId,
        destinationTask: hoverId,
@@ -63,22 +68,47 @@ export const hover = (props, monitor, component) => {
   monitor.getItem().index = hoverIndex;
 }
 
+export const cardDrop = (props, monitor, component) => {}
+
 export const beginDrag = (props, monitor, component) => {
-  props.beginDrag(props.id)
+  props.beginDrag(props.id);
+
+  beginDragProps.id = props.id;
+  beginDragProps.index = props.index;
+  beginDragProps.groupId = props.groupId;
+
+  endDragProps = {};
   return {
     id: props.id,
+    groupId: props.groupId,
     index: props.index
-  };
+  }
 }
 
 export const endDrag = (props, monitor) => {
-  console.log('move card');
-  props.moveCard({
-    task: props.id,
-    destinationTask: lastDestinationId,
-    destinationGroup: props.groupId,
-    save: true,
-  });
-  props.endDrag(props.id)
+  if(beginDragProps.groupId != endDragProps.groupId ||
+    beginDragProps.index != endDragProps.index){
+    // We have done a real move, save
+    props.moveCard({
+      task: beginDragProps.id,
+      destinationTask: endDragProps.id,
+      destinationGroup: endDragProps.groupId,
+      save: true,
+    });
+  }
+  props.endDrag(beginDragProps.id);
 }
 
+export const emptyHover = (props, monitor) => {
+  throttleModelUpdate(()=>{
+
+    endDragProps.id = undefined;
+    endDragProps.index = 0;
+    endDragProps.groupId = props.groupId;
+
+    props.moveCard({
+      task: monitor.getItem().id,
+      destinationGroup: props.groupId,
+    })
+  })
+}

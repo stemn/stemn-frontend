@@ -15,14 +15,14 @@ export function getProject({projectId}) {
   };
 }
 
-export function createProject() {
+export function createProject(project) {
   return (dispatch)=>{
     dispatch({
       type: 'PROJECTS/CREATE_PROJECT',
       payload: http({
         method: 'POST',
         url: `http://localhost:3000/api/v1/projects`,
-        data: {}
+        data: project
       }).then((response)=>{
         dispatch(push(`/project/${response.data._id}/settings`))
       }).catch((response)=>{

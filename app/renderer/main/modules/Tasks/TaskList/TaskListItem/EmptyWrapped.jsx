@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import { hover } from './TaskListItem.drag.config.js';
+import { emptyHover } from './TaskListItem.drag.config.js';
 import { DragSource, DropTarget } from 'react-dnd';
 
 const ItemTypes = {
@@ -8,21 +8,7 @@ const ItemTypes = {
 }
 
 const cardTarget = {
-  hover(props, monitor, component){
-    props.moveCard({
-      task: monitor.getItem().id,
-      destinationGroup: props.groupId
-    })
-  },
-
-  drop(props, monitor){
-    props.moveCard({
-      task: monitor.getItem().id,
-      destinationGroup: props.groupId,
-      save: true,
-    });
-    props.endDrag(props.id)
-  }
+  hover: emptyHover,
 };
 
 @DropTarget(ItemTypes.CARD, cardTarget, connect => ({

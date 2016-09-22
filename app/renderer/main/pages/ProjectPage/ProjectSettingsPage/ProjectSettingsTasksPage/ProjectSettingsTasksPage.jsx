@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as ProjectsActions from 'app/shared/actions/projects.js';
+import * as TasksActions    from 'app/renderer/main/modules/Tasks/Tasks.actions.js';
 
 // Component Core
 import React from 'react';
@@ -23,11 +24,15 @@ import TaskLabelsEdit from 'app/renderer/main/modules/Tasks/TaskLabelsEdit/TaskL
 /////////////////////////////////////////////////////////////////////////////
 
 const onMount = (nextProps, prevProps) => {
-  if(nextProps.project && nextProps.project.data){
-    if(!prevProps || nextProps.project.data._id !== prevProps.project.data._id){
-      // Init the TaskSettings object
-      nextProps.dispatch(actions.load(`${nextProps.entityModel}.formModels.TaskSettings.labels`, nextProps.project.data.labels))
-    }
+  if(!prevProps || nextProps.projectId !== prevProps.projectId){
+    // Get the board
+    nextProps.tasksActions.getBoard({
+      projectId: nextProps.projectId
+    })
+    // Init the TaskSettings object
+    nextProps.dispatch(
+      actions.load(`${nextProps.boardModel}.forms.labels`, nextProps.board.data.labels)
+    )
   }
 }
 
@@ -38,22 +43,29 @@ export const Component = React.createClass({
   componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
 
   submit(){
-    // Merge props back to the main project data
-    this.props.dispatch(actions.change(`${this.props.entityModel}.data.labels`, this.props.project.formModels.TaskSettings.labels));
-    // Save the project
-    this.props.ProjectsActions.saveProject({
-      project: this.props.project.data
-    })
+    // Merge props back to the main data
+    this.props.dispatch(
+      actions.change(`${this.props.boardModel}.data.labels`, this.props.board.forms.labels)
+    );
+    // Save the board
+    setTimeout(()=>{
+      this.props.tasksActions.updateBoard({
+        board: this.props.board.data
+      })
+    }, 1)
   },
 
   render() {
-    const { entityModel, project, ProjectsActions, dispatch } = this.props;
+    const { boardModel, board, ProjectsActions, dispatch } = this.props;
 
+    if(!board) {
+      return <div>Loading</div>
+    }
     return (
       <div className={classes.panel}>
         <h3>Task Label Settings</h3>
         <p>Labels are used to classify tasks. If you delete a label, it will be removed from all existing tasks.</p>
-        <TaskLabelsEdit model={`${entityModel}.formModels.TaskSettings.labels`} value={project.formModels.TaskSettings.labels} />
+        <TaskLabelsEdit model={`${boardModel}.forms.labels`} value={board.forms.labels} />
         <br />
         <div className="layout-row">
           <div className="flex"></div>
@@ -64,16 +76,17 @@ export const Component = React.createClass({
   }
 });
 
-
-
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({projects}, otherProps) {
+function mapStateToProps({tasks, projects}, {params}) {
+  const projectId = params.stub;
+  const projectBoards = tasks.projects && tasks.projects[projectId] ? tasks.projects[projectId].boards : null;
+  const board = projectBoards ? tasks.boards[projectBoards[0]] : {};
+  const boardModel = projectBoards ? `tasks.boards.${projectBoards[0]}` : '';
   return {
-    project: projects[otherProps.params.stub],
-    entityModel: `projects.${otherProps.params.stub}`
+    projectId,
+    board,
+    boardModel,
   };
 }
 
@@ -81,6 +94,7 @@ function mapDispatchToProps(dispatch) {
   return {
     dispatch,
     ProjectsActions: bindActionCreators(ProjectsActions, dispatch),
+    tasksActions: bindActionCreators(TasksActions, dispatch),
   }
 }
 
