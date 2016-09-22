@@ -5,9 +5,9 @@ import * as ProjectActions from 'app/shared/actions/project.js';
 import * as ProjectsActions from 'app/shared/actions/projects.js';
 
 
-function mapStateToProps(params, otherProps) {
+function mapStateToProps({projects}, otherProps) {
   return {
-    project: params.projects[otherProps.params.stub]
+    project: projects.data[otherProps.params.stub]
   };
 }
 

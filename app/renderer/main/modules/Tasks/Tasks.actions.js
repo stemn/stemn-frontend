@@ -42,6 +42,20 @@ export function getBoard({projectId}){
   }
 }
 
+export function updateBoard({board}){
+  return {
+    type: 'TASKS/UPDATE_BOARD',
+    payload: http({
+      method: 'PUT',
+      url: `http://localhost:3000/api/v1/boards/${board._id}`,
+      data: board
+    }),
+    meta: {
+      cacheKey: board._id
+    }
+  }
+}
+
 export function getTask({taskId}) {
   return {
     type: 'TASKS/GET_TASK',
@@ -215,7 +229,7 @@ export function deleteGroup({boardId, groupId}) {
     type: 'TASKS/DELETE_GROUP',
     payload: http({
       method: 'DELETE',
-      url: `http://localhost:3000/api/v1/taskGroups/${groupId}`,
+      url: `http://localhost:3000/api/v1/groups/${groupId}`,
     }),
     meta: {
       groupId,

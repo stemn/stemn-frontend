@@ -62,8 +62,8 @@ export const Component = React.createClass({
 
 function mapStateToProps({projects, projectSettings}, otherProps) {
   return {
-    project: projects[otherProps.params.stub],
-    entityModel: `projects.${otherProps.params.stub}`
+    project: projects.data[otherProps.params.stub],
+    entityModel: `projects.data.${otherProps.params.stub}`
   };
 }
 

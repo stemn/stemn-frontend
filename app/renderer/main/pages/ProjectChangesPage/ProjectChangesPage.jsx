@@ -148,7 +148,7 @@ export const Component = React.createClass({
 /////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps({changes, projects}, {params}) {
-  const project = projects[params.stub];
+  const project = projects.data[params.stub];
   return {
     project: project,
     changes: changes[params.stub],

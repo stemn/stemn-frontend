@@ -7,20 +7,15 @@ import { connect } from 'react-redux';
 // Component Core
 import React from 'react';
 
-import u from 'updeep';
-
 // Styles
 import classNames from 'classnames';
 
 // Sub Components
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import TaskList       from 'app/renderer/main/modules/Tasks/TaskList/TaskList.jsx'
-import Tasks       from 'app/renderer/main/modules/Tasks/Tasks.jsx'
+import Tasks          from 'app/renderer/main/modules/Tasks/Tasks.jsx'
 
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-
 
 export const Component = React.createClass({
   render() {
@@ -31,15 +26,13 @@ export const Component = React.createClass({
   }
 });
 
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps({tasks, projects}, {params}) {
-  const project = projects[params.stub];
+  const project = projects.data[params.stub];
   return {
     project: project,
-    entityModel: `projects.${params.stub}`
+    entityModel: `projects.data.${params.stub}`
   };
 }
 
