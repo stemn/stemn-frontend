@@ -15,12 +15,13 @@ import classNames from 'classnames';
 import classes from './Modal.css'
 
 // Modals
-import ConfirmModal from './modals/ConfirmModal.jsx';
-import ErrorModal   from './modals/ErrorModal.jsx';
-import FileSelectModal from 'app/renderer/main/modules/FileSelect/FileSelectModal.jsx';
-import TaskDisplayModal from 'app/renderer/main/modules/Tasks/TaskDisplayModal/TaskDisplayModal.jsx'
-import TaskLabelsEditModal from 'app/renderer/main/modules/Tasks/TaskLabelsEditModal/TaskLabelsEditModal.jsx'
-import TaskMentionModal from 'app/renderer/main/modules/Mentions/TaskMentionModal/TaskMentionModal.jsx'
+import ConfirmModal         from './modals/ConfirmModal.jsx';
+import ErrorModal           from './modals/ErrorModal.jsx';
+import FileSelectModal      from 'app/renderer/main/modules/FileSelect/FileSelectModal.jsx';
+import TaskDisplayModal     from 'app/renderer/main/modules/Tasks/TaskDisplayModal/TaskDisplayModal.jsx'
+import TaskLabelsEditModal  from 'app/renderer/main/modules/Tasks/TaskLabelsEditModal/TaskLabelsEditModal.jsx'
+import TaskMentionModal     from 'app/renderer/main/modules/Mentions/TaskMentionModal/TaskMentionModal.jsx'
+import ProjectNewModal      from 'app/renderer/main/modules/Projects/ProjectNewModal/ProjectNewModal.jsx'
 
 
 const modalComponents = {
@@ -29,13 +30,13 @@ const modalComponents = {
   'FILE_SELECT' : FileSelectModal,
   'TASK'        : TaskDisplayModal,
   'TASK_LABELS' : TaskLabelsEditModal,
-  'TASK_COMMIT' : TaskMentionModal
+  'TASK_COMMIT' : TaskMentionModal,
+  'PROJECT_NEW' : ProjectNewModal
 }
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
-
 
 const ModalRoot = (modal) => {
   if (!modal.modalType) {

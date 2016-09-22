@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import * as SidebarActions from 'app/shared/actions/sidebar';
 import * as AuthActions from 'app/shared/actions/auth';
 import * as ProjectsActions from 'app/shared/actions/projects';
+import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 
 // Component Core
 import React from 'react';
@@ -48,6 +49,9 @@ export const Component = React.createClass({
     }
   },
 
+  showProjectNewModal(){
+    this.props.modalActions.showModal({modalType: 'PROJECT_NEW',})
+  },
 
   render() {
     const { ProjectsActions } = this.props;
@@ -68,8 +72,7 @@ export const Component = React.createClass({
                 <MdAdd size="25"/>
               </div>
               <div className="PopoverMenu">
-                <a onClick={()=>ProjectsActions.createProject()}>Create New Project</a>
-                <a href="">Create New Thread</a>
+                <a onClick={this.showProjectNewModal}>Create New Project</a>
               </div>
             </PopoverMenu>
 
@@ -133,7 +136,8 @@ function mapDispatchToProps(dispatch) {
   return {
     authActions: bindActionCreators(AuthActions, dispatch),
     sidebarActions: bindActionCreators(SidebarActions, dispatch),
-    ProjectsActions: bindActionCreators(ProjectsActions, dispatch)
+    ProjectsActions: bindActionCreators(ProjectsActions, dispatch),
+    modalActions: bindActionCreators(ModalActions, dispatch)
   }
 }
 

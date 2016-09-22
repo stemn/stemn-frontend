@@ -6,6 +6,7 @@
   display: block;
   width: 100%;
   border: 1px solid border1;
+  resize: none;
 }
 .input-plain{
   width: 100%;

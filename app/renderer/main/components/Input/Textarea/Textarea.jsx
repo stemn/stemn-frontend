@@ -5,9 +5,9 @@ import Textarea from 'react-textarea-autosize';
 
 class Component extends React.Component{
   render(){
-    const { model, value, dispatch, className, placeholder } = this.props;
+    const { model, value, dispatch, className, placeholder, style } = this.props;
     return (
-      <Textarea className={className} onChange={(e) => dispatch(actions.change(model, e))} value={value} placeholder={placeholder} />
+      <Textarea style={style} className={className} onChange={(e) => dispatch(actions.change(model, e))} value={value} placeholder={placeholder} />
     );
   }
 };
