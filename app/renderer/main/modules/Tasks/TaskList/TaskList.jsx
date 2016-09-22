@@ -27,20 +27,22 @@ export const NewItem = React.createClass({
 });
 
 export const Component = React.createClass({
-  moveGroup({group, destinationGroup, save}) {
+  moveGroup({group, destinationGroup, after, save}) {
     this.props.TasksActions.moveGroup({
       boardId: this.props.board.data._id,
       group,
       destinationGroup,
+      after,
       save
     })
   },
-  moveCard({task, destinationTask, destinationGroup, save}) {
+  moveCard({task, destinationTask, destinationGroup, after, save}) {
     this.props.TasksActions.moveTask({
       boardId: this.props.board.data._id,
       task,
       destinationTask,
       destinationGroup,
+      after,
       save
     })
   },
@@ -82,6 +84,11 @@ export const Component = React.createClass({
       groupId: groupId
     })
   },
+  updateGroup(group){
+    this.props.TasksActions.updateGroup({
+      group: group
+    })
+  },
   render() {
     const { board, project, layout, className } = this.props;
     const entityModel = `tasks.boards.${board.data._id}`;
@@ -101,7 +108,8 @@ export const Component = React.createClass({
                item={group}
                layout={layout}
                entityModel={`${entityModel}.data.groups[${groupIndex}]`}
-               deleteGroup={() => this.deleteGroup(group._id)}>
+               deleteGroup={() => this.deleteGroup(group._id)}
+               updateGroup={() => this.updateGroup(group)}>
                 <TaskListItemParent
                  groupId={group._id}
                  moveCard={this.moveCard}

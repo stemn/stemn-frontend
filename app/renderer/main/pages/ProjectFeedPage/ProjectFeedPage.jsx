@@ -151,7 +151,7 @@ export const Component = React.createClass({
 /////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps({sidebarTimeline, projects}, {params}) {
-  const project = projects[params.stub];
+  const project = projects.data[params.stub];
   return {
     timeline: sidebarTimeline[project.data._id],
     project: project
