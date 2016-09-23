@@ -64,7 +64,9 @@ const cardTarget = {
     // Set the end params
     endDragProps.id = props.id;
     endDragProps.index = props.index;
-    endDragProps.after = props.groups[endDragProps.index - 1] == beginDragProps.id;
+    // If the dragged item index is less than the destination index, we set it to after
+    const dragIndexInGroup = props.groups.findIndex(groupId => groupId == beginDragProps.id);
+    endDragProps.after = dragIndexInGroup != -1 ? dragIndexInGroup < endDragProps.index : false;
 
     // Time to actually perform the action
     props.moveGroup({

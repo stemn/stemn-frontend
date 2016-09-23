@@ -53,7 +53,9 @@ export const cardHover = (props, monitor, component) => {
      endDragProps.id = props.id;
      endDragProps.index = props.index;
      endDragProps.groupId = props.groupId;
-     endDragProps.after = props.tasks[endDragProps.index - 1] == beginDragProps.id;
+     // If the dragged item index is less than the destination index, we set it to after
+     const dragIndexInGroup = props.tasks.findIndex(taskId => taskId == beginDragProps.id);
+     endDragProps.after = dragIndexInGroup != -1 ? dragIndexInGroup < endDragProps.index : false;
 
      props.moveCard({
        task: dragId,
