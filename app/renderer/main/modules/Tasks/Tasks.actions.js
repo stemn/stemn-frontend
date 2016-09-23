@@ -1,7 +1,7 @@
 import http from 'axios';
 import getUuid from 'app/shared/helpers/getUuid.js';
 import { actions } from 'react-redux-form';
-import { showPromise as showToast } from 'app/renderer/main/modules/Toasts/Toasts.actions.js';
+import { show as showToast } from 'app/renderer/main/modules/Toasts/Toasts.actions.js';
 
 export function newTask({boardId, task}) {
   return (dispatch, getState) => {
@@ -221,9 +221,20 @@ export function toggleComplete({taskId, model, value}) {
       title: `This task was marked ${value ? 'complete' : 'incomplete'}.`,
       actions: [{
         text: 'Undo',
-        action: (dispatch)=>actions.change(model, !value)
+        action: {
+          functionAlias: 'TasksActions.toggleCompleteUndo',
+          functionInputs: { taskId, model, value }
+        }
       }]
     }));
+  };
+}
+export function toggleCompleteUndo({taskId, model, value}) {
+  return (dispatch, getState) => {
+    dispatch(actions.change(model, !value));
+    setTimeout(()=>{
+      updateTask({task: getState().tasks.data[taskId].data})
+    }, 1)
   };
 }
 

@@ -50,7 +50,7 @@ export function getUserProjects({userId}) {
 
 export function confirmDeleteProject({projectId}) {
   return ModalActions.showConfirm({
-    message: 'Deleting a project it permanent. You will not be able to undo this.',
+    message: 'Deleting a project is permanent. You will not be able to undo this.',
     modalConfirm: {
       functionAlias: 'ProjectActions.deleteProject',
       functionInputs: { projectId }

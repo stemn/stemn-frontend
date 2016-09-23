@@ -2,6 +2,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { getFunction } from 'app/shared/modules/FunctionLibrary/FunctionLibrary.js'
 
 import * as ToastsActions from './Toasts.actions.js';
 
@@ -36,8 +37,6 @@ const Toast = React.createClass({
   },
   render() {
     const { toast, dispatch } = this.props;
-    console.log(toast);
-
     if(!this.hideTimeout){this.startHideTimeout()}
 
     const getIcon = () => {
@@ -48,11 +47,31 @@ const Toast = React.createClass({
         return null
       }
     }
+
+    const processAction = (action) => {
+      if(action && action.functionAlias) {
+        const functionFromAlias = getFunction(action.functionAlias);
+        if(functionFromAlias){
+          dispatch(functionFromAlias(action.functionInputs));
+        }
+      }
+      // Else, if it is a normal object, dispatch it
+      else if(action){
+        dispatch(action)
+      }
+    }
+
     const getActions = () => {
       if(toast.actions && toast.actions.length){
         return (
           <span>
-            {toast.actions.map((action, index) => <a key={index} onClick={()=>{dispatch(action.action); this.closeToast()}} className="link-primary">&nbsp;&nbsp;{action.text}</a>)}
+          {toast.actions.map((action, index) =>
+            <a key={index}
+            onClick={()=>{processAction(action.action); this.closeToast()}}
+            className="link-primary">
+            &nbsp;&nbsp;{action.text}
+            </a>
+          )}
           </span>
         )
       }

@@ -26,11 +26,15 @@ class Component extends React.Component{
     }
   }
   render() {
-    const baseLink = `project/${this.props.project && this.props.project.data ? this.props.project.data._id : ''}`
+    const { project } = this.props;
+    const baseLink = `project/${project && project.data ? project.data._id : ''}`
+
+    if(!project){return <div></div>}
+
     return (
       <div className="layout-column flex rel-box">
         <Header>
-          <h1 className={pageStyles.title}>{this.props.project.data ? this.props.project.data.name : ''}</h1>
+          <h1 className={pageStyles.title}>{project.data ? project.data.name : ''}</h1>
         </Header>
         <Tabs size="lg">
           <Link activeClassName="active" to={baseLink} onlyActiveOnIndex={true}>Changes</Link>

@@ -38,11 +38,11 @@ export const Component = React.createClass({
     })
   },
   updateTask(){
-    setTimeout(()=>this.props.TasksActions.updateTask({task: this.props.task.data}), 1)
+    setTimeout(()=>this.props.TasksActions.updateTask({task: this.props.task.data}), 1);
   },
   toggleComplete(model, value){
     this.props.TasksActions.toggleComplete({
-      taskId: this.props.task._id,
+      taskId: this.props.task.data._id,
       model,
       value
     })
@@ -50,8 +50,8 @@ export const Component = React.createClass({
   },
   deleteTask(){
     this.props.TasksActions.deleteTask({
-      taskId: this.props.task._id,
-      boardId: this.props.task.board,
+      taskId: this.props.task.data._id,
+      boardId: this.props.task.data.board,
     })
   },
   showModal(){
