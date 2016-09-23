@@ -6,6 +6,8 @@ import i from 'icepick';
 // Container Actions
 import * as ModalActions from './Modal.actions.js';
 
+import { getFunction } from 'app/shared/modules/FunctionLibrary/FunctionLibrary.js'
+
 // Component Core
 import React from 'react';
 import Modal from 'react-modal';
@@ -69,8 +71,8 @@ export const Component = React.createClass({
     const modalExtended = Object.assign({}, modal, {
       modalHide: ()    => { this.props.ModalActions.hideModal({modalId: modal.modalId}) },
       // The cancel and confirm actions can be extended before dispatching
-      modalCancel: (extendObject)  => { if(modal.modalCancel) { dispatch(i.merge(modal.modalCancel, extendObject)) }},
-      modalConfirm: (extendObject) => { if(modal.modalConfirm){ dispatch(i.merge(modal.modalConfirm, extendObject)) }},
+      modalCancel: (extendObject)  => callbackFunction(modal.modalCancel, dispatch, extendObject),
+      modalConfirm: (extendObject) => callbackFunction(modal.modalConfirm, dispatch, extendObject),
     })
 
     return (
@@ -88,7 +90,19 @@ export const Component = React.createClass({
   }
 });
 
-
+function callbackFunction(callbackObject, dispatch, extendObject){
+  // If we have a function alias:
+  if(callbackObject && callbackObject.functionAlias) {
+    const functionFromAlias = getFunction(callbackObject.functionAlias);
+    if(functionFromAlias){
+      dispatch(functionFromAlias(i.merge(callbackObject.functionInputs, extendObject)));
+    }
+  }
+  // Else, if it is a normal object, dispatch it
+  else if(callbackObject){
+    dispatch(i.merge(modal.modalCancel, extendObject))
+  }
+}
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////

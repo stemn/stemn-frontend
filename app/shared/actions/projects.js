@@ -1,12 +1,10 @@
 import http from 'axios';
 import { push } from 'react-router-redux'
-
-export const GET_PROJECT = 'PROJECTS/GET_PROJECT';
-
+import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 
 export function getProject({projectId}) {
   return {
-    type: GET_PROJECT,
+    type: 'PROJECTS/GET_PROJECT',
     http: true,
     payload: {
       method: 'GET',
@@ -48,6 +46,16 @@ export function getUserProjects({userId}) {
       },
     }),
   }
+}
+
+export function confirmDeleteProject({projectId}) {
+  return ModalActions.showConfirm({
+    message: 'Deleting a project it permanent. You will not be able to undo this.',
+    modalConfirm: {
+      functionAlias: 'ProjectActions.deleteProject',
+      functionInputs: { projectId }
+    }
+  })
 }
 
 export function deleteProject({projectId}) {
