@@ -58,7 +58,7 @@ export const Component = React.createClass({
   render() {
     const { boardModel, board, ProjectsActions, dispatch } = this.props;
 
-    if(!board) {
+    if(!board || !board.forms) {
       return <div>Loading</div>
     }
     return (

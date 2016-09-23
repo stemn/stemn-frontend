@@ -42,8 +42,8 @@ export const Component = React.createClass({
 //  },
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.auth.user._id && !nextProps.auth.projects.loading && !nextProps.auth.projects.data){
-      nextProps.authActions.getProjects({
+    if(nextProps.auth.user._id && !nextProps.projects.userProjects.loading && !nextProps.projects.userProjects.data){
+      nextProps.projectsActions.getUserProjects({
         userId: nextProps.auth.user._id,
       });
     }
@@ -54,13 +54,12 @@ export const Component = React.createClass({
   },
 
   render() {
-    const { ProjectsActions } = this.props;
+    const { projectsActions, projects } = this.props;
     const sidebarStyle = classNames('layout-column', 'flex' ,'rel-box', styles.sidebar);
 
     const nameRegex = new RegExp(this.props.sidebar.searchString, 'i');
-    const filteredProjects = this.props.auth.projects.data ? this.props.auth.projects.data.filter((project) => nameRegex.test(project.name)) : [];
+    const filteredProjects = projects.userProjects.data ? projects.userProjects.data.filter((project) => nameRegex.test(project.name)) : [];
     const routeState = {meta : {scope: ['main', 'menubar']}}
-
 
     return (
       <DragResize side="right" width="300" widthRange={[0, 500]} animateHide={!this.props.sidebar.show} className="layout-column flex">
@@ -124,11 +123,12 @@ export const Component = React.createClass({
 ///////////////////////////////// CONTAINER /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({ sidebar, auth }, {params}) {
+function mapStateToProps({ sidebar, auth, projects }, {params}) {
   return {
     sidebar,
     auth,
-    params
+    params,
+    projects,
   };
 }
 
@@ -136,7 +136,7 @@ function mapDispatchToProps(dispatch) {
   return {
     authActions: bindActionCreators(AuthActions, dispatch),
     sidebarActions: bindActionCreators(SidebarActions, dispatch),
-    ProjectsActions: bindActionCreators(ProjectsActions, dispatch),
+    projectsActions: bindActionCreators(ProjectsActions, dispatch),
     modalActions: bindActionCreators(ModalActions, dispatch)
   }
 }

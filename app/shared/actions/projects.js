@@ -32,6 +32,24 @@ export function createProject(project) {
   }
 }
 
+
+export function getUserProjects({userId}) {
+  return {
+    type:'PROJECTS/GET_USER_PROJECTS',
+    payload: http({
+      url: 'http://localhost:3000/api/v1/search',
+      method: 'GET',
+      params: {
+        type:'project',
+        parentType:'user',
+        parentId: userId,
+        size: 100,
+        published: 'both',
+      },
+    }),
+  }
+}
+
 export function deleteProject({projectId}) {
   return (dispatch)=>{
     dispatch({
@@ -41,7 +59,10 @@ export function deleteProject({projectId}) {
         url: `http://localhost:3000/api/v1/projects/${projectId}`,
       }).then((response)=>{
         dispatch(push(`/`))
-      })
+      }),
+      meta: {
+        projectId
+      }
     });
   }
 }

@@ -1,6 +1,7 @@
 import http from 'axios';
 import { push } from 'react-router-redux'
 import * as auth from '../../main/modules/auth/auth.js';
+import * as ProjectsActions from './projects.js';
 
 export function loadUserData() {
   return (dispatch) => {
@@ -10,30 +11,12 @@ export function loadUserData() {
         url: 'http://localhost:3000/api/v1/me',
         method: 'GET',
       }).then((response)=>{
-        dispatch(getProjects({userId: response.data._id}))
+        dispatch(ProjectsActions.getUserProjects({userId: response.data._id}))
         return response
       }),
     })
   }
 }
-
-export function getProjects({userId}) {
-  return {
-    type:'AUTH/FETCH_PROJECTS',
-    payload: http({
-      url: 'http://localhost:3000/api/v1/search',
-      method: 'GET',
-      params: {
-        type:'project',
-        parentType:'user',
-        parentId: userId,
-        size: 100,
-        published: 'both'
-      },
-    }),
-  }
-}
-
 
 export function authenticate(provider) {
   return (dispatch) => {

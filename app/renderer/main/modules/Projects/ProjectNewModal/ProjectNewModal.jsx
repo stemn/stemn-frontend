@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as ProjectsActions from 'app/shared/actions/projects.js';
-
+import { actions } from 'react-redux-form';
 // Component Core
 import React from 'react';
 
@@ -23,7 +23,8 @@ import Textarea from 'app/renderer/main/components/Input/Textarea/Textarea';
 
 export const Component = React.createClass({
   createProject(){
-    this.props.projectsActions.createProject();
+    this.props.projectsActions.createProject(this.props.newProject);
+    this.props.dispatch(actions.change(this.props.entityModel, {}))
     this.props.modalHide();
   },
   render() {

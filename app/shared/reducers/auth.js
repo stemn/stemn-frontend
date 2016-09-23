@@ -39,26 +39,6 @@ const mainReducer = (state, action) => {
         userLoading: false,
       }
 
-    case 'AUTH/FETCH_PROJECTS_PENDING':
-      return u({
-        projects : {
-          loading : true
-        }
-      }, state)
-    case 'AUTH/FETCH_PROJECTS_FULFILLED':
-      return u({
-        projects : {
-          loading : false,
-          data    : action.payload.data
-        }
-      }, state)
-    case 'AUTH/FETCH_PROJECTS_REJECTED':
-      return u({
-        projects : {
-          loading : false
-        }
-      }, state)
-
     case 'AUTH/SET_AUTH_TOKEN':
       return {...state,
         authToken: action.payload

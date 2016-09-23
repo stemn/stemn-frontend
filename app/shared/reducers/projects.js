@@ -3,6 +3,10 @@ import i from 'icepick';
 
 const initialState = {
   data: {},
+  userProjects: {
+    loading: false,
+    data: []
+  },
   newProject: {}
 }
 
@@ -34,6 +38,23 @@ function reducer(state, action) {
       });
     case 'PROJECTS/LINK_REMOTE_FULFILLED' :
       return i.assocIn(state, ['data', action.meta.cacheKey, 'data', 'remote'], action.payload.data);
+
+
+    case 'PROJECTS/GET_USER_PROJECTS_PENDING':
+      return i.assocIn(state, ['userProjects', 'loading'], true)
+    case 'PROJECTS/GET_USER_PROJECTS_FULFILLED':
+      return i.assocIn(state, ['userProjects'], {loading: false, data: action.payload.data})
+    case 'PROJECTS/GET_USER_PROJECTS_REJECTED':
+      return i.assocIn(state, ['userProjects', 'loading'], false)
+
+    case 'PROJECTS/DELETE_PROJECT_FULFILLED' :
+      return i.chain(state)
+      .assocIn(['data', action.meta.projectId], undefined) // Delete the project from the main store
+      .updateIn(['userProjects', 'data'], (projects) => {  // Delete it from the userProjects list
+        const projectIndex = projects.findIndex( project => project._id == action.meta.projectId);
+        return i.splice(projects, projectIndex, 1);
+      })
+      .value();
     default:
         return state;
   }
