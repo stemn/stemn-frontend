@@ -53,7 +53,7 @@ export const cardHover = (props, monitor, component) => {
      endDragProps.id = props.id;
      endDragProps.index = props.index;
      endDragProps.groupId = props.groupId;
-     endDragProps.after = dragIndex < hoverIndex;
+     endDragProps.after = props.tasks[endDragProps.index - 1] == beginDragProps.id;
 
      props.moveCard({
        task: dragId,
@@ -66,7 +66,7 @@ export const cardHover = (props, monitor, component) => {
   // Generally it's better to avoid mutations,
   // but it's good here for the sake of performance
   // to avoid expensive index searches.
-  monitor.getItem().index = hoverIndex;
+   monitor.getItem().index = hoverIndex;
 }
 
 export const cardDrop = (props, monitor, component) => {}
@@ -82,14 +82,13 @@ export const beginDrag = (props, monitor, component) => {
   return {
     id: props.id,
     groupId: props.groupId,
-    index: props.index
+    index: props.index,
+    tasks: props.tasks
   }
 }
 
 export const endDrag = (props, monitor) => {
-  if(endDragProps.groupId &&
-    beginDragProps.groupId != endDragProps.groupId ||
-    beginDragProps.index != endDragProps.index){
+  if(endDragProps.groupId && (beginDragProps.groupId != endDragProps.groupId || beginDragProps.index != endDragProps.index)){
     // We have done a real move, save
     props.moveCard({
       task: beginDragProps.id,

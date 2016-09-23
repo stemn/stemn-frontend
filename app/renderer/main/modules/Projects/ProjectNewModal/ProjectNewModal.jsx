@@ -27,11 +27,10 @@ export const Component = React.createClass({
     this.props.modalHide();
   },
   render() {
-    const entityModel = "projects.newProject";
-    const { modalCancel, modalHide } = this.props;
+    const { newProject, entityModel, modalCancel, modalHide } = this.props;
     return (
       <div style={{width: '500px'}}>
-        <div className="modal-title">Create Project</div>
+        <div className="modal-title">Create New Project</div>
         <div className="modal-body">
           <Field model={`${entityModel}.name`}>
             <input className="dr-input" type="text" placeholder="Project Name"/>
@@ -56,7 +55,8 @@ export const Component = React.createClass({
 
 function mapStateToProps({projects}) {
   return {
-    newProject: projects.newProject || {}
+    newProject: projects.newProject,
+    entityModel: 'projects.newProject',
   };
 }
 

@@ -64,7 +64,7 @@ const cardTarget = {
     // Set the end params
     endDragProps.id = props.id;
     endDragProps.index = props.index;
-    endDragProps.after = dragIndex < hoverIndex;
+    endDragProps.after = props.groups[endDragProps.index - 1] == beginDragProps.id;
 
     // Time to actually perform the action
     props.moveGroup({

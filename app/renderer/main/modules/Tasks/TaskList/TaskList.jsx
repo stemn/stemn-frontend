@@ -102,6 +102,7 @@ export const Component = React.createClass({
               index={groupIndex}
               id={group._id}
               item={group}
+              groups={board.data.groups.map((group)=>group._id)}
               moveGroup={this.moveGroup}
               layout={layout}>
               <TaskGroup
@@ -122,6 +123,7 @@ export const Component = React.createClass({
                       id={taksId}
                       item={taksId}
                       groupId={group._id}
+                      tasks={group.tasks}
                       moveCard={this.moveCard}
                       beginDrag={this.beginDrag}
                       endDrag={this.endDrag}>
