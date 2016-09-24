@@ -3,7 +3,7 @@
  * @note Edited by eddyb to provide object-centered controls instead of camera-centered.
  */
 
-import THR51 from './thr51.min.js';
+import THR51 from './three.min.js';
 
 (function (root, factory) {
 	if(typeof define === "function" && define.amd) {

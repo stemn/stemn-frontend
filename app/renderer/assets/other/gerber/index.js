@@ -1,4 +1,4 @@
-import test from './js/thr51.min.js';
+import test from './js/three.js';
 import './js/ObjectControls.js';
 import './js/webGerber.js';
 import './js/parse/gerber.js';

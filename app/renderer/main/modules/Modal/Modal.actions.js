@@ -1,5 +1,4 @@
 import getUuid from 'app/shared/helpers/getUuid.js';
-import promise from 'bluebird';
 
 export let modalPromises = {
 
@@ -40,29 +39,6 @@ export function showConfirm({title, message, modalConfirm, modalCancel}) {
     },
   };
 }
-export function showPromiseConfirm({title, message, modalConfirm, modalCancel}) {
-  const payload = new Promise();
-
-  return (dispatch)=>{
-    dispatch({
-      type: 'MODALS/SHOW_MODAL',
-      payload: payload
-    })
-    dispatch({
-      modalId: getUuid(),
-      modalType: 'CONFIRM',
-      modalProps: {
-        title,
-        message
-      },
-      modalOptions : {},
-      modalConfirm : modalConfirm,
-      modalCancel  : modalCancel
-    })
-  }
-
-}
-
 
 export function hideModal({modalId}){
   return {

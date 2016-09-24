@@ -22,7 +22,7 @@ import ColorSelect from './ColorSelect/ColorSelect.jsx'
 export const Component = React.createClass({
   confirmDelete(model, index){
     this.props.dispatch(
-      ModalActions.showPromiseConfirm({
+      ModalActions.showConfirm({
         modalConfirm: actions.remove(model, index),
         message: 'Is you delete a label it will be removed from all existing tasks.'
       })

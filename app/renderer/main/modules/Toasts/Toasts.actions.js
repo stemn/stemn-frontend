@@ -33,7 +33,6 @@
 
 
 import getUuid from '../../../../shared/helpers/getUuid.js';
-import Promise from 'bluebird';
 
 export function show({type, title, options, actions, confirm, reject}) {
   return {

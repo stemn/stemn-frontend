@@ -1,7 +1,7 @@
 import webGerberConstants from './constants/webGerberConstants.js';
 import ViewEEPCB from './viewee.js';
 import ParseGerber from './parse/gerber.js';
-import THR51 from './thr51.min.js';
+import THR51 from './three.min.js';
 import ObjectControls from './ObjectControls.js';
 
 (function (root, factory) {

@@ -59,10 +59,12 @@ const config = {
       },
     }),
     new webpack.optimize.UglifyJsPlugin({
+      sourceMap: false,
+      options: { sourceMap: false },
       compressor: {
         screw_ie8: true,
         warnings: false,
-      },
+      }
     }),
     new ExtractTextPlugin('[name]/style.css', { allChunks: true }),
   ],
