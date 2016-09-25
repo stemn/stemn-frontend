@@ -2,7 +2,6 @@ import React from 'react';
 
 // Styles
 import classNames from 'classnames';
-//import classes from './FileSelect.css'
 
 export default React.createClass({
   render() {

@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import promise from 'bluebird'
+import Promise from 'es6-promise'
 
 import previewCadUtils from './previewCadUtils.js';
 
@@ -23,7 +23,7 @@ export default React.createClass({
   },
   init(){
     if(previewCadUtils.isWebGlSupported()){
-      promise.all([
+      Promise.all([
         previewCadUtils.render({
           projectId  : this.props.file.project._id,
           fileId     : this.props.file.fileId,

@@ -23,15 +23,17 @@ export default {
 //        warnings: false,
 //      },
 //    }),
+    new webpack.IgnorePlugin(/vertx/), // Ignore vertx so ES6 promise works: https://github.com/stefanpenner/es6-promise/issues/100
+
     new webpack.BannerPlugin(
       process.env.NODE_ENV === 'development' ? 'require("source-map-support").install();' : '',
       { raw: true, entryOnly: false }
     ),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-      },
-    }),
+//    new webpack.DefinePlugin({
+//      'process.env': {
+//        NODE_ENV: JSON.stringify('production'),
+//      },
+//    }),
   ],
 
   target: 'electron-main',

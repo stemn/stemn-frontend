@@ -2,7 +2,7 @@ import { remote } from 'electron';
 import { oauthCreds } from './auth.config.js';
 import querystring from 'querystring';
 import http from 'axios';
-import Promise from 'bluebird';
+import { Promise } from 'es6-promise';
 
 // Init the Auth Window
 let window = null;

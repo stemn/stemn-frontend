@@ -9,7 +9,7 @@ import * as AuthActions from 'app/shared/actions/auth.js';
 
 // Component
 import Select from 'react-select';
-import 'app/renderer/assets/css/select.css';
+import selectCss from 'app/renderer/assets/css/select.css';
 import { actions } from 'react-redux-form';
 
 // Styles

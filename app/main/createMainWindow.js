@@ -54,7 +54,6 @@ export const createMainWindow =  function createWindow({ uri = '/' } = {}) {
     browserWindow.openDevTools();
     browserWindow.webContents.on('context-menu', (e, props) => {
       const { x, y } = props;
-
       Menu.buildFromTemplate([{
         label: 'Inspect element',
         click() {

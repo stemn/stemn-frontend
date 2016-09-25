@@ -1,7 +1,8 @@
-const Promise = require('bluebird');
+import Promise from 'es6-promise';
+
 const sql = require('sql.js');
 const path = require('path');
-const fs = Promise.promisifyAll(require('fs'));
+const fs = require('fs');
 const os = require('os');
 const ini = require('ini');
 
@@ -26,43 +27,61 @@ const dbPaths = {
 }
 
 const paths = {
-    drive : (platform) => {
+    drive : (platform, callback) => {
         const dbPath = dbPaths.drive[platform];
 
         // check the file exists on disk before opening
-        return fs.readFileAsync(dbPath).then((database) => {
-            const db = new sql.Database(database);
-            const result = db.exec(`SELECT * FROM data WHERE entry_key = 'local_sync_root_path'`);
-            db.close();
-            return result[0].values[0][2].replace('\\\\?\\', ''); // drive prefixes path with weird characters sometimes
-        }).catch((err) => err.code === 'ENOENT'
-            ? `Drive not installed locally`
-            : Promise.reject(err)
-        );
+        return fs.readFile(dbPath, (err, database) => {
+
+            const readDatabase = () => {
+                const db = new sql.Database(database);
+                const result = db.exec(`SELECT * FROM data WHERE entry_key = 'local_sync_root_path'`);
+                db.close();
+                return result[0].values[0][2].replace('\\\\?\\', ''); // drive prefixes path with weird characters sometimes
+            }
+
+            return err
+                ? callback(err.code === 'ENOENT' ? `Drive not installed locally` : err)
+                : callback(null, readDatabase());
+        });
     },
-    dropbox : (platform) => {
-        return fs.readFileAsync(dbPaths.dropbox[platform], { encoding : 'utf8' }).then((data) => {
-            const config = JSON.parse(data);
-            const account = config.personal || config.business;
-            return account.path;
-        }).catch((err) => err.code === 'ENOENT'
-            ? `Dropbox not installed locally`
-            : Promise.reject(err)
-        );
+    dropbox : (platform, callback) => {
+        return fs.readFile(dbPaths.dropbox[platform], { encoding : 'utf8' }, (err, data) => {
+
+            const readDatabase = () => {
+                const config = JSON.parse(data);
+                const account = config.personal || config.business;
+                return account.path;
+            }
+            console.log(err);
+
+            return err
+                ? callback(err.code === 'ENOENT' ? `Dropbox not installed locally` : err)
+                : callback(null, readDatabase());
+        });
     },
-    onedrive : (platform) => {
+    onedrive : (platform, callback) => {
         const dbPath = dbPaths.onedrive[platform];
         // list the drive folder contents
-        return fs.readdirAsync(dbPath).then((files) => {
+        return fs.readdir(dbPath, (err, files) => {
             // filter for matching database files
             const db = files.find((file) => /[a-f0-9]{16}.ini/.test(file));
-            return db
-                ? fs.readFileAsync(path.join(dbPath, db), { encoding : 'utf16le' }).then((data) => {
-                    const config = ini.parse(data);
-                    const path = config.library.split(' ')[7].replace(/"/g, '');
-                    return path;
+
+            const readDatabase = (callback) => {
+                return fs.readFile(path.join(dbPath, db), { encoding : 'utf16le' }, (err, data) => {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        const config = ini.parse(data);
+                        const path = config.library.split(' ')[7].replace(/"/g, '');
+                        callback(null, path);
+                    }
                 })
-                : `OneDrive not installed locally`;
+            }
+
+            return db
+                ? readDatabase(callback)
+                : callback(`OneDrive not installed locally`);
         });
     }
 }
@@ -70,7 +89,10 @@ const paths = {
 const platform = os.platform();
 
 export default (provider) => {
-  return paths[provider](platform).then((path) => {
-    return path
-  });
+    return new Promise((resolve, reject) => {
+        return paths[provider](platform, (err, result) => err
+            ? reject(err)
+            : resolve(result)
+        );
+    });
 }
