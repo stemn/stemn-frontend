@@ -1,5 +1,6 @@
 import { actions } from 'react-redux-form';
 import { show as showToast } from '../Toasts/Toasts.actions.js';
+import { showModal }         from '../Modal/Modal.actions.js';
 
 import http from 'axios';
 
@@ -55,7 +56,23 @@ export function pullChanges({projectId}) {
   }
 }
 
+export function mentionTasksModal({projectId, mentions}) {
+  return (dispatch) => {
+    dispatch(showModal({
+      modalType: 'TASK_COMMIT',
+      modalProps: {
+        projectId: projectId
+      },
+      modalConfirm: {
+        functionAlias: 'ChangesActions.mentionTasks',
+        functionInputs: { projectId }
+      }
+    }))
+  }
+}
+
 export function mentionTasks({projectId, mentions}) {
+  console.log(projectId, mentions);
   return {
     type:'CHANGES/MENTION_TASKS',
     payload: {

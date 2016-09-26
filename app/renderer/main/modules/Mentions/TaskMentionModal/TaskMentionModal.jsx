@@ -34,21 +34,19 @@ export const Component = React.createClass({
   componentWillMount() { onMount(this.props) },
   componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
   submit(){
-    this.props.modalConfirm({
-      payload: {
-        mentions: [{
-          entityId: '57c526c3e7c624f857828695',
-          display: 'Task 1',
-          mentionType: 'task',
-          mentionId: '57c526c3e7c624f857828691'
-        },{
-          entityId: '57c526c3e7c624f857828693',
-          display: 'Task 2',
-          mentionType: 'task',
-          mentionId: '57c526c3e7c624f857828692'
-        }]
-      }
-    });
+    const mentions = [{
+      entityId: '57c526c3e7c624f857828695',
+      display: 'Task 1',
+      mentionType: 'task',
+      mentionId: '57c526c3e7c624f857828691'
+    },{
+      entityId: '57c526c3e7c624f857828693',
+      display: 'Task 2',
+      mentionType: 'task',
+      mentionId: '57c526c3e7c624f857828692'
+    }];
+//    const mentions = this.props.mentions;
+    this.props.modalConfirm({mentions});
     this.props.modalHide();
   },
   cancel(){

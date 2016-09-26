@@ -14,10 +14,11 @@ const mainReducer = (state, action) => {
         }
       })
     case 'CHANGES/MENTION_TASKS':
-      const existingMentions = parseMentions(state[action.payload.projectId].description);
-      const uniqueNewMentions = removeExistingMentions(action.payload.mentions, existingMentions);
-      const newText = addMentionsToText(state[action.payload.projectId].description, uniqueNewMentions);
-      return i.assocIn(state, [action.payload.projectId, 'description'], newText);
+      return i.updateIn(state, [action.payload.projectId, 'description'], (description) => {
+        const existingMentions = parseMentions(description);
+        const uniqueNewMentions = removeExistingMentions(action.payload.mentions, existingMentions);
+        return addMentionsToText(state[action.payload.projectId].description, uniqueNewMentions);
+      });
     case 'CHANGES/TOGGLE_ALL_CHANGED_FILES':
       const allToggled = state[action.payload.projectId].data.map((item) => i.merge(item, {selected: action.payload.value }) );
       return i.merge(state, {

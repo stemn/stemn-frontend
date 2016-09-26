@@ -1,4 +1,4 @@
-import getUuid from 'app/shared/helpers/getUuid.js';
+import getUuid from '../../../../shared/helpers/getUuid.js';
 
 export let modalPromises = {
 

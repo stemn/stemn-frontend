@@ -1,9 +1,11 @@
 import * as ProjectActions from '../../actions/projects.js'
 import * as TasksActions from '../../../renderer/main/modules/Tasks/Tasks.actions.js'
+import * as ChangesActions from '../../../renderer/main/modules/Changes/Changes.actions.js'
 
 const library = {
   ProjectActions,
-  TasksActions
+  TasksActions,
+  ChangesActions
 }
 
 export const addModule = (moduleName, functions) => {

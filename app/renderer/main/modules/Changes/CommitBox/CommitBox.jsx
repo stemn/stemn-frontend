@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 import * as ChangesActions from '../Changes.actions.js';
 
 // Component Core
@@ -29,15 +28,6 @@ import { MentionsInput, Mention } from 'react-mentions';
 /////////////////////////////////////////////////////////////////////////////
 
 export const Component = React.createClass({
-  showTaskCommitModal(){
-    this.props.ModalActions.showModal({
-      modalType: 'TASK_COMMIT',
-      modalProps: {
-        projectId: this.props.project._id
-      },
-      modalConfirm: ChangesActions.mentionTasks({projectId: this.props.project._id}) // mentions value is assigned inside the modal
-    })
-  },
   render() {
     const { entityModel, changes } = this.props;
     return (
@@ -50,7 +40,7 @@ export const Component = React.createClass({
           value={changes.description}
           className={classes.description}/>
         <div className="layout-row layout-align-start-center">
-          <a className="link-primary" onClick={this.showTaskCommitModal}>
+          <a className="link-primary" onClick={()=>this.props.changesActions.mentionTasksModal({projectId: this.props.project._id})}>
             <MdDone size="16" style={{marginRight: '3px', marginBottom: '2px'}}/>
             Add related tasks
           </a>
@@ -73,7 +63,7 @@ function mapStateToProps() {
 
 function mapDispatchToProps(dispatch) {
   return {
-    ModalActions: bindActionCreators(ModalActions, dispatch),
+    changesActions: bindActionCreators(ChangesActions, dispatch),
     dispatch
   }
 }

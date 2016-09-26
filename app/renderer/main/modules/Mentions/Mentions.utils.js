@@ -57,7 +57,9 @@ export const parseMentions = (text) => {
       )
   /g);
   */
-  const mentionsRaw = text.match(/(\[((?:\[[^\]]*\]|[^\[\]])*)\]\([ \t]*()<?((?:\([^)]*\)|[^()\s])*?)>?[ \t]*((['"])(.*?)\6[ \t]*)?\))/g);
+
+  // Get the markdown links
+  const mentionsRaw = text ? text.match(/(\[((?:\[[^\]]*\]|[^\[\]])*)\]\([ \t]*()<?((?:\([^)]*\)|[^()\s])*?)>?[ \t]*((['"])(.*?)\6[ \t]*)?\))/g) : [];
   const mentions = [];
   if(mentionsRaw && mentionsRaw.length > 0){
     mentionsRaw.forEach(mention=>{
@@ -85,7 +87,7 @@ export const removeExistingMentions = (newMentions, existingMentions) => {
 }
 
 export const addMentionsToText = (text, mentions) => {
-  let textNew = text;
+  let textNew = text || '';
   if(mentions && mentions.length > 0){
     mentions.forEach(mention => {
       textNew = textNew.concat(`${textNew.length > 0 ? ' ' : ''}${getMentionString(mention)}`)
