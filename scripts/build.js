@@ -20,7 +20,7 @@ const Platform = builder.Platform
 // buildTypes.map(build);
 
   builder.build({
-    targets: Platform.WINDOWS.createTarget(),
+    targets: Platform.LINUX.createTarget(),
     devMetadata: {
       "//": "build and other properties, see https://goo.gl/5jVxoO"
     }
