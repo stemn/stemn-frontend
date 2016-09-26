@@ -7,6 +7,7 @@ import { groupTasks } from './Tasks.utils.js';
 const initialState = {
   data: {},
   projects: {},
+  events: {},
 }
 
 const mainReducer = (state, action) => {
@@ -46,6 +47,16 @@ const mainReducer = (state, action) => {
       return i.assocIn(state, ['data', action.meta.cacheKey, 'loading'], false);
     case 'TASKS/GET_TASK_FULFILLED':
       return i.assocIn(state, ['data', action.meta.cacheKey], {
+        data: action.payload.data,
+        loading: false
+      })
+
+    case 'TASKS/GET_EVENTS_PENDING':
+      return i.assocIn(state, ['events', action.meta.cacheKey, 'loading'], true);
+    case 'TASKS/GET_EVENTS_REJECTED':
+      return i.assocIn(state, ['events', action.meta.cacheKey, 'loading'], false);
+    case 'TASKS/GET_EVENTS_FULFILLED':
+      return i.assocIn(state, ['events', action.meta.cacheKey], {
         data: action.payload.data,
         loading: false
       })

@@ -45,13 +45,13 @@ export const Component = React.createClass({
   componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
 
   showLabelEditModal(){
-    this.props.dispatch(actions.load(`${this.props.projectModel}.formModels.TaskSettings.labels`, this.props.project.data.labels));
-    this.props.ModalActions.showModal({
-      modalType: 'TASK_LABELS',
-      modalProps: {
-        model: `${this.props.projectModel}.formModels.TaskSettings.labels`,
-      },
-    })
+//    this.props.dispatch(actions.load(`${this.props.projectModel}.formModels.TaskSettings.labels`, this.props.project.data.labels));
+//    this.props.ModalActions.showModal({
+//      modalType: 'TASK_LABELS',
+//      modalProps: {
+//        model: `${this.props.projectModel}.formModels.TaskSettings.labels`,
+//      },
+//    })
   },
   toggleComplete(model, value){
     this.props.TasksActions.toggleComplete({
@@ -61,7 +61,7 @@ export const Component = React.createClass({
     })
   },
   render() {
-    const { taskId, task, project, entityModel, modalCancel, modalHide } = this.props;
+    const { taskId, task, board, entityModel, modalCancel, modalHide } = this.props;
 
     if(!task){
       return <div>Task Loading</div>
@@ -71,29 +71,29 @@ export const Component = React.createClass({
       <div className={classNames(classes.taskDisplayModal)}>
         <div className="layout-row layout-align-start-center">
           <Checkbox
-            model={`${entityModel}.complete`}
-            value={task.complete}
+            model={`${entityModel}.data.complete`}
+            value={task.data.complete}
             changeAction={this.toggleComplete}
             className="text-primary"
             circle={true} />
           <div className="text-title-4 flex" style={{marginLeft: '15px'}}>
             <Textarea
-              model={`${entityModel}.name`}
-              value={task.name}
+              model={`${entityModel}.data.name`}
+              value={task.data.name}
               className="input-plain"
               type="text"
               placeholder="Task description" />
           </div>
         </div>
-        <div className="text-grey-3" style={{padding: '10px 0 20px'}}>Opened {moment(task.due).fromNow()} <b className="text-interpunct"></b> By <a className="link-primary">{task.owner}</a> <b className="text-interpunct"></b> 4 Comments</div>
+        <div className="text-grey-3" style={{padding: '10px 0 20px'}}>Opened {moment(task.data.due).fromNow()} <b className="text-interpunct"></b> By <a className="link-primary">{task.owner}</a> <b className="text-interpunct"></b> 4 Comments</div>
 
         <div className="layout-row">
           <div className="flex-70" style={{paddingRight: '15px'}}>
-            <div className="scroll-box" style={{maxHeight: '500px', paddingRight: '15px', borderTop: '1px solid rgba(0, 0, 0, 0.1)', borderBottom: '1px solid rgba(0, 0, 0, 0.1)'}}>
+            <div className="scroll-box" style={{maxHeight: '500px', paddingRight: '15px', borderTop: '1px solid rgba(0, 0, 0, 0.1)'}}>
               <TaskTimeline taskId={taskId} />
             </div>
-            <div style={{marginTop: '15px'}}>
-              <CommentNew />
+            <div style={{paddingTop: '15px'}}>
+              <CommentNew taskId={taskId} />
             </div>
           </div>
           <div className="flex">
@@ -102,7 +102,10 @@ export const Component = React.createClass({
                 <div className="flex">Labels</div>
                 <a style={{fontSize: '14px'}} onClick={this.showLabelEditModal}>+</a>
               </div>
-              {/*<LabelSelect model={`${entityModel}.labels`} value={task.labels} labelInfo={project.data.labels}/>*/}
+              <LabelSelect
+                model={`${entityModel}.labels`}
+                value={task.labels}
+                labelInfo={board.data.labels}/>
             </div>
             <div className={classes.well}>
               <div className="text-mini-caps" style={{padding: '15px 15px 0'}}>Asignee</div>
@@ -129,12 +132,14 @@ export const Component = React.createClass({
 /////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps({ tasks, projects }, {taskId}) {
-  const task = tasks.data[taskId];
-  const project = projects[task.project];
+  const task          = tasks.data[taskId];
+  const board         = task.data.board ? tasks.boards[task.data.board] : {};
+  const boardModel    = `tasks.boards.${task.data.board}`;
   return {
     task: task,
-    project: project,
     entityModel: `tasks.data.${taskId}`,
+    board,
+    boardModel
   };
 }
 

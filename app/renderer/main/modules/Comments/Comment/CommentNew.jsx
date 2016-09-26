@@ -25,8 +25,16 @@ import Button from 'app/renderer/main/components/Buttons/Button/Button'
 /////////////////////////////////////////////////////////////////////////////
 
 export const Component = React.createClass({
+  submitNewComment() {
+    this.props.commentsActions.newComment({
+      comment: {
+        task: this.props.taskId,
+        body: this.props.newComment.body
+      }
+    })
+  },
   render() {
-    const { auth, value, entityModel, commentsActions } = this.props;
+    const { auth, newComment, entityModel, commentsActions } = this.props;
 
     return (
       <div className={classes.comment + ' layout-row'}>
@@ -38,11 +46,13 @@ export const Component = React.createClass({
             New Comment
           </div>
           <div className={classes.commentContent}>
-            <Editor model={`${entityModel}.data.blurb`} value={value.blurb}/>
+            <Editor model={`${entityModel}.body`} value={newComment.body}/>
           </div>
           <div className="layout-row" style={{padding: '0 10px 10px'}}>
             <div className="flex"></div>
-            <Button className="primary sm">Comment</Button>
+            <Button className="primary sm"
+            loading={newComment.savePending}
+            onClick={this.submitNewComment}>Comment</Button>
           </div>
         </div>
       </div>
@@ -58,11 +68,11 @@ export const Component = React.createClass({
 ///////////////////////////////// CONTAINER /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({ comments, auth }, {item}) {
+function mapStateToProps({ comments, auth }, {taskId}) {
   return {
     auth,
-    entityModel: `comments`,
-    value: {}
+    entityModel: `comments.tasks.${taskId}.newComment`,
+    newComment: comments.tasks[taskId] ? comments.tasks[taskId].newComment : {},
   };
 }
 

@@ -20,10 +20,6 @@ import Sidebar            from 'app/renderer/menubar/modules/Sidebar/Sidebar.jsx
 import * as stringConcat  from 'app/shared/helpers/stringConcat';
 
 export const Component = React.createClass({
-  propTypes: {
-    project: React.PropTypes.object.isRequired,
-  },
-
   componentWillMount() {
     if(this.props.project && this.props.project.data && this.props.project.data.remote.connected){
       this.props.ChangesActions.fetchChanges({
@@ -59,6 +55,14 @@ export const Component = React.createClass({
   render() {
     const { changes, project, ChangesActions, entityModel } = this.props;
 
+    const projectNotConnected = () => {
+      return (
+        <div className="layout-column layout-align-center-center flex">
+          <div className="text-center">Changes not available. Connect this project to Drive or Dropbox</div>
+        </div>
+      )
+    }
+
     const getInnerContent = () => {
       if(project && project.data.remote.connected){
         return getChangesAndBox();
@@ -70,8 +74,8 @@ export const Component = React.createClass({
 
     const getChangesAndBox = () => {
       if(changes && changes.data){
-        const commitBoxStyles = changes.summary && changes.summary.length > 0 ? {
-          height: '300px',
+        const commitBoxStyles = (changes.summary && changes.summary.length > 0) ? {
+          height: '200px',
           borderTop: '1px solid rgba(0, 0, 0, 0.1)',
           background: 'rgba(0, 0, 0, 0.03)',
           transition: 'height 0.3s ease'
@@ -88,7 +92,7 @@ export const Component = React.createClass({
               project={project.data}
               actToggleAll={this.toggleAll}
               selectedFileChange={ChangesActions.selectedFileChange}/>
-            <div style={CommitBoxStyles}>
+            <div style={commitBoxStyles}>
               <CommitBox
                 entityModel={entityModel}
                 changes={changes}
@@ -101,11 +105,6 @@ export const Component = React.createClass({
       }
     }
 
-    const projectNotConnected = () => {
-      <div className="layout-column layout-align-center-center flex">
-        <div className="text-center">Changes not available. Connect this project to Drive or Dropbox</div>
-      </div>
-    }
 
     return (
       <div className="layout-column">

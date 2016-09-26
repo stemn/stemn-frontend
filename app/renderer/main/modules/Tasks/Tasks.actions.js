@@ -42,6 +42,19 @@ export function getBoard({projectId}){
   }
 }
 
+export function getEvents({taskId}){
+  return {
+    type: 'TASKS/GET_EVENTS',
+    payload: http({
+      method: 'GET',
+      url: `http://localhost:3000/api/v1/tasks/${taskId}/events`,
+    }),
+    meta: {
+      cacheKey: taskId
+    }
+  }
+}
+
 export function updateBoard({board}){
   return {
     type: 'TASKS/UPDATE_BOARD',

@@ -7,10 +7,12 @@ import classes from './LabelSelect.css'
 
 export const Component = React.createClass({
   render(){
-    const { model, value, labelInfo, dispatch } = this.props
+    const { model, value, labelInfo, dispatch } = this.props;
+
+    const filteredInfo = labelInfo.filter( label => label.name && label.color)
     return (
       <div>
-        {labelInfo.map((label) => {
+        {filteredInfo.map((label) => {
           const onChange = () => {
             const labelIndex = value ? value.indexOf(label._id) : -1;
             if(labelIndex != -1){
