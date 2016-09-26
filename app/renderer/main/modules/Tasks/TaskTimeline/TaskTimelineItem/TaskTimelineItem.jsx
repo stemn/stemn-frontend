@@ -46,7 +46,7 @@ export default React.createClass({
     // If it is a comment, we use the comment component to display
     if(item.event == 'comment'){
       return (
-        <div>Comment</div>
+        <Comment commentId={item.comment} style={{marginTop: '15px'}}></Comment>
       )
     }
     // Else, we add a text event

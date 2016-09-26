@@ -89,7 +89,7 @@ export const Component = React.createClass({
 
         <div className="layout-row">
           <div className="flex-70" style={{paddingRight: '15px'}}>
-            <div className="scroll-box" style={{maxHeight: '500px', paddingRight: '15px', borderTop: '1px solid rgba(0, 0, 0, 0.1)'}}>
+            <div className="scroll-box" style={{maxHeight: '500px', borderTop: '1px solid rgba(0, 0, 0, 0.1)'}}>
               <TaskTimeline taskId={taskId} />
             </div>
             <div style={{paddingTop: '15px'}}>

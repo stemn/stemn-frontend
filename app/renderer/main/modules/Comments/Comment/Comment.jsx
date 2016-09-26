@@ -28,9 +28,8 @@ import {MdMoreHoriz} from 'react-icons/lib/md';
 /////////////////////////////////////////////////////////////////////////////
 
 const onMount = (nextProps, prevProps) => {
-  if(nextProps.item){
-    if(!prevProps || nextProps.item._id !== prevProps.item._id){
-    }
+  if(!prevProps || nextProps.commentId !== prevProps.commentId){
+    nextProps.commentsActions.getComment({commentId: nextProps.commentId})
   }
 }
 
@@ -46,14 +45,14 @@ export const Component = React.createClass({
     })
   },
   render() {
-    const { item, comment, entityModel, commentsActions } = this.props;
+    const { item, comment, entityModel, commentsActions, style } = this.props;
 
     if(!comment){
       return <div>Comment Loading</div>
     }
 
     return (
-      <div className={classes.comment + ' layout-row'}>
+      <div className={classes.comment + ' layout-row'} style={style}>
         <div className={classes.commentAvatar}>
           <UserAvatar picture={comment.data.owner.picture} size="33" shape="square" />
         </div>
@@ -75,9 +74,9 @@ export const Component = React.createClass({
           {
             comment.editActive
             ?
-            <Editor model={`${entityModel}.data.blurb`} value={comment.data.blurb}/>
+            <Editor model={`${entityModel}.data.body`} value={comment.data.body}/>
             :
-            <EditorDisplay value={comment.data.blurb}/>
+            <EditorDisplay value={comment.data.body}/>
           }
           </div>
           {
@@ -87,7 +86,7 @@ export const Component = React.createClass({
               <div>
                 <a className="link-primary" onClick={() => commentsActions.finishEdit({commentId: comment.data._id})}>Cancel</a>
                 &nbsp;<b className="text-interpunct text-grey-3"></b>&nbsp;
-                <a className="link-primary" onClick={() => commentsActions.saveComment({commentId: comment.data._id})}>Save</a>
+                <a className="link-primary" onClick={() => commentsActions.updateComment({comment: comment.data})}>Save</a>
               </div>
             </div>
             :
@@ -104,16 +103,16 @@ export const Component = React.createClass({
 ///////////////////////////////// CONTAINER /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({ comments }, {item}) {
+function mapStateToProps({ comments }, {commentId}) {
   return {
-    comment: comments.data[item._id],
-    entityModel: `comments.data.${item._id}`
+    comment: comments.data[commentId],
+    entityModel: `comments.data.${commentId}`
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    commentsActions: bindActionCreators(CommentsActions, dispatch),
+    commentsActions : bindActionCreators(CommentsActions, dispatch),
     modalActions    : bindActionCreators(ModalActions, dispatch),
   }
 }
