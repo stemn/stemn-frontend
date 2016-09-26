@@ -35,14 +35,11 @@ export const Component = React.createClass({
     const { entityModel, user, auth, AuthActions } = this.props;
     return (
       <div className="layout-column flex">
-        <div className={classes.container+' layout-row layout-align-center flex scroll-box'}>
           <div style={{width: '600px'}}>
-
             <div className={classes.panel}>
               <h3>Basic Profile Info</h3>
               <Upload uploadId="UserSettingsAvatar"></Upload>
               <br />
-
               <div className="layout-row">
                 <Field model={`${entityModel}.profile.firstname`}>
                   <input className="dr-input" type="text" placeholder="First Name" style={{marginRight: '7px'}}/>
@@ -74,7 +71,6 @@ export const Component = React.createClass({
               <LinkAccount text="Google Drive" isLinked={auth.user.accounts.google.refreshToken} linkFn={()=>AuthActions.authenticate('google')} unLinkFn={()=>AuthActions.unlink('google')}/>
             </div>
           </div>
-         </div>
          {auth.authLoading ? <LoadingOverlay /> : ''}
       </div>
     );

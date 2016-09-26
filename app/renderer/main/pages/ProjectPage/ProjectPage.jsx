@@ -33,9 +33,7 @@ class Component extends React.Component{
 
     return (
       <div className="layout-column flex rel-box">
-        <Header>
-          <h1 className={pageStyles.title}>{project.data ? project.data.name : ''}</h1>
-        </Header>
+        <Header>{project.data ? project.data.name : ''}</Header>
         <Tabs size="lg">
           <Link activeClassName="active" to={baseLink} onlyActiveOnIndex={true}>Changes</Link>
           <Link activeClassName="active" to={baseLink+'/feed'}>Timeline</Link>

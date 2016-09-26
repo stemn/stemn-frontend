@@ -24,7 +24,7 @@ import {MdMenu} from 'react-icons/lib/md';
 
 export const Component = React.createClass({
   render() {
-    const styles = this.props.absolute ? {position: 'absolute'} : {};
+    const styles = this.props.absolute ? {position: 'absolute'} : this.props.style;
     return (
       <div className={classes.toolbar + ' layout-row layout-align-start-center rel-box'} style={styles}>
         {!this.props.sidebar.show ? <a onClick={()=>{this.props.sidebarActions.toggleSidebar();}}><MdMenu size="25"/></a> : ''}

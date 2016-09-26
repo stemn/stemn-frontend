@@ -32,19 +32,15 @@ export const Component = React.createClass({
   },
   render() {
     const { entityModel, user, auth, AuthActions } = this.props;
-    console.log(this.props);
     return (
       <div className="layout-column flex">
-        <div className={classes.container+' layout-row layout-align-center flex scroll-box'}>
           <div style={{width: '600px'}}>
-
             <div className={classes.panel}>
               <h3>Privacy</h3>
               <p>Help us improve by sending anonymous usage data</p>
               <Toggle model="settings.privacy" value={this.props.settings.privacy} />
             </div>
           </div>
-         </div>
       </div>
     );
 

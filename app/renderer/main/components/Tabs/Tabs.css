@@ -36,11 +36,6 @@
 .inner > a:global(.active):after{
     opacity: 1;
 }
-/*
-.inner > a.active:after, .inner > a:hover:after {
-    opacity: 1;
-}
-*/
 .inner > a:after {
   content: '';
   position: absolute;
@@ -53,12 +48,10 @@
   z-index: 1;
 }
 
-.tabsLg{
-  padding-left: 15px;
-}
 .tabsLg .inner > a{
-  font-size: 14px;
-  padding: 15px 15px;
+  font-size: 13px;
+  padding: 10px 25px 15px;
+  margin-right: 0px;
 }
 
 /*
