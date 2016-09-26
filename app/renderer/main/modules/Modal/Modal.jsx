@@ -100,7 +100,7 @@ function callbackFunction(callbackObject, dispatch, extendObject){
   }
   // Else, if it is a normal object, dispatch it
   else if(callbackObject){
-    dispatch(i.merge(modal.modalCancel, extendObject))
+    dispatch(i.merge(callbackObject, extendObject))
   }
 }
 

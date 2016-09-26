@@ -24,7 +24,7 @@ import comments     from '../../renderer/main/modules/Comments/Comments.reducer.
 import toasts       from '../../renderer/main/modules/Toasts/Toasts.reducer.js';
 import fileCompare  from '../../renderer/main/modules/FileCompare/FileCompare.reducer.js';
 import changes      from '../../renderer/main/modules/Changes/Changes.reducer.js';
-
+import mentions     from '../../renderer/main/modules/Mentions/Mentions.reducer.js';
 
 export default function getRootReducer(scope = 'main') {
   let reducers = {
@@ -49,7 +49,8 @@ export default function getRootReducer(scope = 'main') {
     tasks,
     comments,
     toasts,
-    fileCompare
+    fileCompare,
+    mentions
   };
 
   if (scope === 'renderer') {

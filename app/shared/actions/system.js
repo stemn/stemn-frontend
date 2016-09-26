@@ -1,6 +1,5 @@
 import providerPathLookup from '../../main/modules/files/providerPathLookup.js';
 import Promise from 'es6-promise';
-console.log(Promise);
 import { shell } from 'electron';
 
 
@@ -8,7 +7,6 @@ export function getProviderPath() {
   return {
     type: 'SYSTEM/GET_PROVIDER_PATH',
     payload: Promise.all(['dropbox', 'drive', 'onedrive'].map(providerPathLookup)).then(response => {
-      console.log(response);
       return {
         dropbox: response[0],
         drive: response[1],

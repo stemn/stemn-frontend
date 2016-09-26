@@ -12,6 +12,11 @@
 .button:global(.sm) {
   padding: 7px 5px;
 }
+.button:global(.xs) {
+  padding: 5px;
+  font-size: 11px;
+  min-width: 0px;
+}
 
 .button:focus{
   outline: none;

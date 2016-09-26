@@ -7,7 +7,7 @@ import classes from './Button.css';
 export default class extends React.Component{
   render() {
     return (
-      <button className={classNames(classes.button, this.props.className)} onClick={this.props.onClick} style={this.props.style}>
+      <button className={classNames(classes.button, this.props.className)} onClick={this.props.onClick} style={this.props.style} title={this.props.title}>
         {this.props.children}
       </button>
     );

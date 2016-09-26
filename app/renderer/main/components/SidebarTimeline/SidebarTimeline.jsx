@@ -18,7 +18,7 @@ export default class extends React.Component{
         }
         else{
           return (
-            <div className="layout-column layout-align-center-center flex">
+            <div className="layout-column layout-align-center-center flex" style={{height: '100%'}}>
               <div className="text-center text-title-4">No Feed items yet</div>
             </div>
           )

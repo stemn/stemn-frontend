@@ -3,10 +3,20 @@
 .row{
   border-bottom: 1px solid border1;
   padding: 7px 15px;
+  padding-right: 8px;
 }
-.row:hover{
+
+.button{
+  border: 1px solid #eaeaea;
+  margin-left: -1px;
+  color: #8d8d8d;
+}
+.button:hover{
   background: bg1;
 }
-.checkbox{
-  margin-left: 10px;
+.active{
+  background: primary !important;
+  color: white;
+  border: 1px solid primary;
+  z-index: 1;
 }
