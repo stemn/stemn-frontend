@@ -50,6 +50,13 @@ const mainReducer = (state, action) => {
         loading: false
       })
 
+    case 'TASKS/UPDATE_BOARD_PENDING':
+      return i.assocIn(state, ['boards', action.meta.cacheKey, 'savePending'], true);
+    case 'TASKS/UPDATE_BOARD_REJECTED':
+      return i.assocIn(state, ['boards', action.meta.cacheKey, 'savePending'], false);
+    case 'TASKS/UPDATE_BOARD_FULFILLED':
+      return i.assocIn(state, ['boards', action.meta.cacheKey, 'savePending'], false);
+
     case 'TASKS/NEW_GROUP_FULFILLED':
       return i.chain(state)
       // Reset the newGroupString to empty

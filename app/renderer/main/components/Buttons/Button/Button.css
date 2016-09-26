@@ -7,7 +7,20 @@
   padding: 10px;
   min-width: 80px;
   transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
+
+/*
+.overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: primary;
+}
+*/
 
 .button:global(.sm) {
   padding: 7px 5px;
@@ -45,6 +58,12 @@
 }
 .button:global(.primary):hover{
   background: primary-2;
+}
+.button:global(.primary) circle{
+  stroke: white;
+}
+.button:global(.primary) :global(.overlay){
+  background: primary;
 }
 
 .button:global(.warn){

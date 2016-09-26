@@ -71,7 +71,7 @@ export const Component = React.createClass({
               <LinkAccount text="Google Drive" isLinked={auth.user.accounts.google.refreshToken} linkFn={()=>AuthActions.authenticate('google')} unLinkFn={()=>AuthActions.unlink('google')}/>
             </div>
           </div>
-         {auth.authLoading ? <LoadingOverlay /> : ''}
+         <LoadingOverlay show={auth.authLoading}/>
       </div>
     );
   }

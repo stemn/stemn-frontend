@@ -4,6 +4,7 @@
   border-bottom: 1px solid border1;
   padding: 10px 6px;
   height: 36px;
+  min-height: 36px;
   position: relative;
   cursor: default;
 }

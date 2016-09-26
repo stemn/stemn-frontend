@@ -69,7 +69,12 @@ export const Component = React.createClass({
         <br />
         <div className="layout-row">
           <div className="flex"></div>
-          <Button className="primary" onClick={this.submit}>Save Labels</Button>
+          <Button
+            className="primary"
+            onClick={this.submit}
+            loading={board.savePending}>
+            Save Labels
+          </Button>
         </div>
       </div>
     );

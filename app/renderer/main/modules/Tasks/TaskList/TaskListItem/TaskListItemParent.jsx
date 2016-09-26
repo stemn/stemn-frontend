@@ -10,7 +10,7 @@ export default class Container extends React.Component {
         <FlipMove enterAnimation="none" leaveAnimation="none" duration={100}>
           {children}
         </FlipMove>
-        {tasks.length >= 1 ? null :
+        {tasks && tasks.length >= 1 ? null :
           <EmptyWrapped
             style={layout == 'list' ? {minHeight: '20px'} : {minHeight: '50vh'}}
             moveCard={moveCard}

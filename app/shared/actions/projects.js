@@ -82,7 +82,10 @@ export function saveProject({project}) {
       method: 'PUT',
       url: `http://localhost:3000/api/v1/projects/${project._id}`,
       data: project
-    })
+    }),
+    meta: {
+      projectId: project._id
+    }
   }
 }
 

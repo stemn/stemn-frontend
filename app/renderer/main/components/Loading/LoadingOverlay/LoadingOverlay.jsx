@@ -5,26 +5,38 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import LoadingSpinner from 'app/renderer/main/components/Loading/LoadingSpinner/LoadingSpinner';
 
 // Styles
-import styles from './LoadingOverlay.css';
+import classes from './LoadingOverlay.css';
 
 export default class extends Component {
-    render() {
-      const width = 50;
-      if(this.props.hide) {
-        return null
-      }
-      else{
-        return (
-          <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionAppearTimeout={500} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
-            <div className={styles.loadingOverlay}>
-                <div className={styles.loaderContainer}>
-                  <LoadingSpinner />
-                  {this.props.children ? <div className={styles.text}>{this.props.children}</div> : ''}
-                </div>
-            </div>
-          </ReactCSSTransitionGroup>
-        )
+  render() {
+    const { size, show, children } = this.props; // size == 'xs'
 
-      }
-    }
+    const transitionName = {
+      enter: classes.enter,
+      enterActive: classes.enterActive,
+      leave: classes.leave,
+      leaveActive: classes.leaveActive,
+      appear: classes.appear,
+      appearActive: classes.appearActive
+    };
+
+    return (
+      <ReactCSSTransitionGroup
+       transitionName={transitionName}
+        transitionAppear={true}
+        transitionAppearTimeout={300}
+        transitionEnterTimeout={300}
+        transitionLeaveTimeout={300}>
+        {show ?
+          <div className={classes.loadingOverlay + ' overlay'}>
+              <div className={classes.loaderContainer}>
+                <LoadingSpinner size={size}/>
+                {children ? <div className={classes.text}>{children}</div> : ''}
+              </div>
+          </div>
+          : ''
+        }
+      </ReactCSSTransitionGroup>
+    )
+  }
 }

@@ -116,7 +116,7 @@ export const Component = React.createClass({
                  moveCard={this.moveCard}
                  tasks={group.tasks}
                  layout={layout}>
-                  {group.tasks.map((taksId, cardIndex) =>
+                  {group.tasks ? group.tasks.map((taksId, cardIndex) =>
                     <TaskListItemWrapped
                       key={taksId}
                       index={cardIndex}
@@ -129,7 +129,7 @@ export const Component = React.createClass({
                       endDrag={this.endDrag}>
                       <TaskListItem item={taksId} draggable={true} layout={layout} />
                     </TaskListItemWrapped>
-                  )}
+                  ) : ''}
                   <NewItem
                     style={layout == 'list' ? {marginLeft: '60px'} : {}}
                     model={`${entityModel}.newTaskString.${group._id}`}

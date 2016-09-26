@@ -110,7 +110,11 @@ export const Component = React.createClass({
          </Field>
          <br />
          <div className="layout-row layout-align-end">
-           <Button className="primary" onClick={()=>this.saveProject()}>Update Project</Button>
+           <Button
+           className="primary"
+           onClick={()=>this.saveProject()}
+           loading={project.savePending}
+           >Update Project</Button>
          </div>
        </div>
        <div className={classes.panel}>
@@ -118,7 +122,7 @@ export const Component = React.createClass({
          <p>Connect your Dropbox or Drive to sync all files and changes. Only one Google Drive or one Dropbox can be connected to a project.</p>
          <ProjectLinkRemote model={`${entityModel}.formModels.fileStore.remote.provider`} value={project.formModels.fileStore.remote.provider}/>
          <br />
-         { project.formModels.fileStore.remote.provider == 'dropbox' || project.formModels.fileStore.remote.provider == 'drive'
+         { project.formModels && (project.formModels.fileStore.remote.provider == 'dropbox' || project.formModels.fileStore.remote.provider == 'drive')
          ? <div>
              <FileSelectInput
                projectId={project.data._id}
@@ -130,15 +134,15 @@ export const Component = React.createClass({
          : ''}
          <br />
          <div className="layout-row layout-align-end">
-           <Button className="primary" onClick={()=>this.confirmLinkRemote()}>Update File Store</Button>
+           <Button
+           className="primary"
+           onClick={()=>this.confirmLinkRemote()}
+           loading={project.linkPending}
+           >Update File Store</Button>
          </div>
        </div>
 
-       <div className={classes.panel}>
-         <h3>Project Type</h3>
-         <p>Is this a public or private project? Change your project to public to open-source your work.</p>
-         <ProjectPermissionsRadio model={`${entityModel}.data.permissions.projectType`} />
-       </div>
+
 
        <div className={classes.panel}>
          <h3>Delete Project</h3>
@@ -153,7 +157,11 @@ export const Component = React.createClass({
 });
 
 
-
+//       <div className={classes.panel}>
+//         <h3>Project Type</h3>
+//         <p>Is this a public or private project? Change your project to public to open-source your work.</p>
+//         <ProjectPermissionsRadio model={`${entityModel}.data.permissions.projectType`} />
+//       </div>
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////

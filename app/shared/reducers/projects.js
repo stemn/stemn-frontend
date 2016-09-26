@@ -36,8 +36,15 @@ function reducer(state, action) {
           ...team.slice(index+ 1)
         ]
       });
+    case 'PROJECTS/LINK_REMOTE_PENDING' :
+      return i.assocIn(state, ['data', action.meta.cacheKey, 'linkPending'], true);
     case 'PROJECTS/LINK_REMOTE_FULFILLED' :
-      return i.assocIn(state, ['data', action.meta.cacheKey, 'data', 'remote'], action.payload.data);
+      return i.chain(state)
+      .assocIn(['data', action.meta.cacheKey, 'linkPending'], false)
+      .assocIn(['data', action.meta.cacheKey, 'data', 'remote'], action.payload.data)
+      .value();
+    case 'PROJECTS/LINK_REMOTE_REJECTED' :
+      return i.assocIn(state, ['data', action.meta.cacheKey, 'linkPending'], false);
 
 
     case 'PROJECTS/GET_USER_PROJECTS_PENDING':
@@ -46,6 +53,13 @@ function reducer(state, action) {
       return i.assocIn(state, ['userProjects'], {loading: false, data: action.payload.data})
     case 'PROJECTS/GET_USER_PROJECTS_REJECTED':
       return i.assocIn(state, ['userProjects', 'loading'], false)
+
+    case 'PROJECTS/SAVE_PROJECT_PENDING':
+      return i.assocIn(state, ['data', action.meta.projectId, 'savePending'], true)
+    case 'PROJECTS/SAVE_PROJECT_FULFILLED':
+      return i.assocIn(state, ['data', action.meta.projectId, 'savePending'], false)
+    case 'PROJECTS/SAVE_PROJECT_REJECTED':
+      return i.assocIn(state, ['data', action.meta.projectId, 'savePending'], false)
 
     case 'PROJECTS/DELETE_PROJECT_FULFILLED' :
       return i.chain(state)
