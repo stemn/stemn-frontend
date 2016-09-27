@@ -1,7 +1,8 @@
-import http from 'axios';
-import getUuid from 'app/shared/helpers/getUuid.js';
-import { actions } from 'react-redux-form';
+import http                  from 'axios';
+import getUuid               from 'app/shared/helpers/getUuid.js';
+import { actions }           from 'react-redux-form';
 import { show as showToast } from 'app/renderer/main/modules/Toasts/Toasts.actions.js';
+import { showModal }         from 'app/renderer/main/modules/Modal/Modal.actions.js';
 
 export function newTask({boardId, task}) {
   return (dispatch, getState) => {
@@ -282,3 +283,16 @@ export function deleteGroup({boardId, groupId}) {
     }
   }
 }
+
+export function showLabelEditModal({boardId}) {
+  return (dispatch) => {
+    dispatch(showModal({
+      modalType: 'TASK_LABELS',
+      modalProps: {
+        boardId
+      },
+    }))
+  }
+}
+//`${this.props.boardModel}.formModels.TaskSettings.labels`,
+//  dispatch(actions.load(`${this.props.boardModel}.formModels.TaskSettings.labels`, this.props.board.data.labels));

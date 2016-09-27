@@ -30,7 +30,6 @@ export const Component = React.createClass({
         }
       })
     )
-//  actions.remove(model, index)
   },
 
   render() {

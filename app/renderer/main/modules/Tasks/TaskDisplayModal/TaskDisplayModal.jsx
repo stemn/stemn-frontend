@@ -45,17 +45,13 @@ export const Component = React.createClass({
   componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
 
   showLabelEditModal(){
-    this.props.dispatch(actions.load(`${this.props.boardModel}.formModels.TaskSettings.labels`, this.props.board.data.labels));
-    this.props.ModalActions.showModal({
-      modalType: 'TASK_LABELS',
-      modalProps: {
-        model: `${this.props.boardModel}.formModels.TaskSettings.labels`,
-      },
+    this.props.TasksActions.showLabelEditModal({
+      boardId: this.props.task.data.board
     })
   },
   toggleComplete(model, value){
     this.props.TasksActions.toggleComplete({
-      taskId: this.props.task._id,
+      taskId: this.props.task.data._id,
       model,
       value
     })
