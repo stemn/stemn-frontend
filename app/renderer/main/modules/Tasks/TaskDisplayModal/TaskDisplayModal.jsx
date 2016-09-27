@@ -102,11 +102,13 @@ export const Component = React.createClass({
                 <div className="flex">Labels</div>
                 <a style={{fontSize: '14px'}} onClick={this.showLabelEditModal}>+</a>
               </div>
-              <LabelSelect
-                model={`${entityModel}.data.labels`}
-                value={task.data.labels}
-                onChange={this.updateTask}
-                labelInfo={board.data.labels}/>
+              <div style={{maxHeight: '200px', overflowY: 'auto'}}>
+                <LabelSelect
+                  model={`${entityModel}.data.labels`}
+                  value={task.data.labels}
+                  onChange={this.updateTask}
+                  labelInfo={board.data.labels}/>
+              </div>
             </div>
             <div className={classes.well}>
               <div className="text-mini-caps" style={{padding: '15px 15px 0'}}>Asignee</div>

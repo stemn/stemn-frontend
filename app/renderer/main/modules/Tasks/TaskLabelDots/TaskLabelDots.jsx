@@ -15,12 +15,18 @@ export default React.createClass({
       <span>
         {labels && labelInfo ? labels.map(labelId => {
           const info = labelInfo.find(label => label._id == labelId);
-          return (
-            <span key={labelId}
-            className={classNames({[classes.tag] : tag}, {[classes.dot] : !tag}, {'tooltip' : !tag})}
-            style={{background: info.color}}
-            alt={info.name}>{tag ? <span>{info.name}</span> : null}</span>
-          )
+          if(info){
+            return (
+              <span key={labelId}
+                className={classNames({[classes.tag] : tag}, {[classes.dot] : !tag}, {'tooltip' : !tag})}
+                style={{background: info.color}}
+                alt={info.name}>{tag ? <span>{info.name}</span> : null}</span>
+            )
+          }
+          else{
+            return null // The label does not exist
+          }
+
         }) : null}
       </span>
     )
