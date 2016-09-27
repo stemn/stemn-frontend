@@ -12,17 +12,17 @@ export default React.createClass({
     const { labels, labelInfo, tag } = this.props;
 
     return (
-      <div className="layout-row layout-align-start-center">
+      <span>
         {labels && labelInfo ? labels.map(labelId => {
           const info = labelInfo.find(label => label._id == labelId);
           return (
-            <div key={labelId}
+            <span key={labelId}
             className={classNames({[classes.tag] : tag}, {[classes.dot] : !tag}, {'tooltip' : !tag})}
             style={{background: info.color}}
-            alt={info.name}>{tag ? <span>{info.name}</span> : null}</div>
+            alt={info.name}>{tag ? <span>{info.name}</span> : null}</span>
           )
         }) : null}
-      </div>
+      </span>
     )
   }
 });

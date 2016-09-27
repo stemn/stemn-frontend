@@ -1,11 +1,13 @@
 import * as ProjectActions from '../../actions/projects.js'
 import * as TasksActions from '../../../renderer/main/modules/Tasks/Tasks.actions.js'
 import * as ChangesActions from '../../../renderer/main/modules/Changes/Changes.actions.js'
+import { actions } from 'react-redux-form';
 
 const library = {
   ProjectActions,
   TasksActions,
-  ChangesActions
+  ChangesActions,
+  FormActions: actions
 }
 
 export const addModule = (moduleName, functions) => {

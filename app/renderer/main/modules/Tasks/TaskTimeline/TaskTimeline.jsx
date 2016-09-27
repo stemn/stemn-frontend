@@ -39,11 +39,11 @@ export const Component = React.createClass({
   componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
 
   render() {
-    const { events, entityModel } = this.props;
+    const { events, entityModel, board } = this.props;
     return (
       <div>
         {events && events.data ? events.data.map(item =>
-          <TaskTimelineItem key={item._id} item={item} />
+          <TaskTimelineItem key={item._id} item={item} board={board} />
         ) : ''}
       </div>
     )
@@ -55,10 +55,11 @@ export const Component = React.createClass({
 ///////////////////////////////// CONTAINER /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({ tasks }, { taskId }) {
+function mapStateToProps({ tasks }, { taskId, board }) {
   return {
     events: tasks.events[taskId],
-    entityModel: `tasks.events.${taskId}`
+    entityModel: `tasks.events.${taskId}`,
+    board
   };
 }
 

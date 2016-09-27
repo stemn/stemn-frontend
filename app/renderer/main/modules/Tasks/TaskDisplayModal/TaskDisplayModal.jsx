@@ -45,13 +45,13 @@ export const Component = React.createClass({
   componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
 
   showLabelEditModal(){
-//    this.props.dispatch(actions.load(`${this.props.projectModel}.formModels.TaskSettings.labels`, this.props.project.data.labels));
-//    this.props.ModalActions.showModal({
-//      modalType: 'TASK_LABELS',
-//      modalProps: {
-//        model: `${this.props.projectModel}.formModels.TaskSettings.labels`,
-//      },
-//    })
+    this.props.dispatch(actions.load(`${this.props.boardModel}.formModels.TaskSettings.labels`, this.props.board.data.labels));
+    this.props.ModalActions.showModal({
+      modalType: 'TASK_LABELS',
+      modalProps: {
+        model: `${this.props.boardModel}.formModels.TaskSettings.labels`,
+      },
+    })
   },
   toggleComplete(model, value){
     this.props.TasksActions.toggleComplete({
@@ -59,6 +59,10 @@ export const Component = React.createClass({
       model,
       value
     })
+    this.updateTask();
+  },
+  updateTask(){
+    setTimeout(()=>this.props.TasksActions.updateTask({task: this.props.task.data}), 1);
   },
   render() {
     const { taskId, task, board, entityModel, modalCancel, modalHide } = this.props;
@@ -90,7 +94,7 @@ export const Component = React.createClass({
         <div className="layout-row">
           <div className="flex-70" style={{paddingRight: '15px'}}>
             <div className="scroll-box" style={{maxHeight: '500px', borderTop: '1px solid rgba(0, 0, 0, 0.1)'}}>
-              <TaskTimeline taskId={taskId} />
+              <TaskTimeline taskId={taskId} board={board} />
             </div>
             <div style={{paddingTop: '15px'}}>
               <CommentNew taskId={taskId} />
@@ -103,20 +107,21 @@ export const Component = React.createClass({
                 <a style={{fontSize: '14px'}} onClick={this.showLabelEditModal}>+</a>
               </div>
               <LabelSelect
-                model={`${entityModel}.labels`}
-                value={task.labels}
+                model={`${entityModel}.data.labels`}
+                value={task.data.labels}
+                onChange={this.updateTask}
                 labelInfo={board.data.labels}/>
             </div>
             <div className={classes.well}>
               <div className="text-mini-caps" style={{padding: '15px 15px 0'}}>Asignee</div>
               <div style={{padding: '15px'}}>
-                <UserSelect model={`${entityModel}.asignee`} value={task.asignee}/>
+                <UserSelect model={`${entityModel}.data.asignee`} value={task.data.asignee}/>
               </div>
             </div>
             <div className={classes.well}>
               <div className="text-mini-caps" style={{padding: '15px 15px 0'}}>Due Date</div>
               <div style={{padding: '15px'}}>
-                <DatePicker  model={`${entityModel}.due`} value={task.due} />
+                <DatePicker  model={`${entityModel}.data.due`} value={task.data.due} />
               </div>
             </div>
           </div>

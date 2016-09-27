@@ -95,7 +95,15 @@ function callbackFunction(callbackObject, dispatch, extendObject){
   if(callbackObject && callbackObject.functionAlias) {
     const functionFromAlias = getFunction(callbackObject.functionAlias);
     if(functionFromAlias){
-      dispatch(functionFromAlias(i.merge(callbackObject.functionInputs, extendObject)));
+
+      // If it is an array, pass in the array of params
+      if(Array.isArray(callbackObject.functionInputs)){
+        dispatch(functionFromAlias(...callbackObject.functionInputs));
+      }
+      // If the inputs are an object, extend them
+      else{
+        dispatch(functionFromAlias(i.merge(callbackObject.functionInputs, extendObject)));
+      }
     }
   }
   // Else, if it is a normal object, dispatch it

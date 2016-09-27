@@ -23,11 +23,16 @@ export const Component = React.createClass({
   confirmDelete(model, index){
     this.props.dispatch(
       ModalActions.showConfirm({
-        modalConfirm: actions.remove(model, index),
-        message: 'Is you delete a label it will be removed from all existing tasks.'
+        message: 'If you delete a label it will be removed from all existing tasks.',
+        modalConfirm: {
+          functionAlias: 'FormActions.remove',
+          functionInputs: [model, index]
+        }
       })
     )
+//  actions.remove(model, index)
   },
+
   render() {
     const { model, value, dispatch } = this.props;
 
@@ -70,7 +75,6 @@ export const Component = React.createClass({
                 <input className="dr-input" type="text" placeholder="Label Name"/>
               </Field>
             </div>
-
             <PopoverMenu preferPlace="right">
               <SimpleIconButton>
                 <MdMoreHoriz size="20px"/>

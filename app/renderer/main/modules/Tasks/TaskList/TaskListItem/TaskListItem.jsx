@@ -63,7 +63,7 @@ export const Component = React.createClass({
     })
   },
   render() {
-    const { task, entityModel, draggable, layout } = this.props;
+    const { task, entityModel, draggable, layout, board } = this.props;
     if(!task || !task.data){
       return <div>Task Loading</div>
     }
@@ -86,7 +86,7 @@ export const Component = React.createClass({
                   placeholder="Task description" />
               </Field>
             </div>
-            <TaskLabelDots labels={task.data.labels} labelInfo={this.context.project.data.labels} tag="true" />
+            <TaskLabelDots labels={task.data.labels} labelInfo={board.data.labels} tag="true" />
             <div className={classes.listUser + ' layout-row layout-align-start-center text-ellipsis'}>
               {task.data.users ? task.data.users.map( user =>
                 <UserAvatar
@@ -147,7 +147,7 @@ export const Component = React.createClass({
           </div>
           { task.data.labels && task.data.labels.length > 0 ?
             <div className={classes.cardFooter + ' layout-row'}>
-              <TaskLabelDots labels={task.data.labels} labelInfo={this.context.project.data.labels} />
+              <TaskLabelDots labels={task.data.labels} labelInfo={board.data.labels} />
             </div>
             : null
           }
@@ -157,19 +157,20 @@ export const Component = React.createClass({
   }
 });
 
-Component.contextTypes = {
-  project: React.PropTypes.object
-}
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps({ tasks }, {item}) {
-  const task = tasks.data[item] ? tasks.data[item] : null;
+  const task          = tasks.data[item];
+  const board         = task && task.data && task.data.board ? tasks.boards[task.data.board] : {};
+  const boardModel    = task && task.data && task.data.board ?`tasks.boards.${task.data.board}` : '';
   return {
-    task,
-    entityModel: `tasks.data[${item}]`
+    task: task,
+    entityModel: `tasks.data.${item}`,
+    board,
+    boardModel
   };
 }
 

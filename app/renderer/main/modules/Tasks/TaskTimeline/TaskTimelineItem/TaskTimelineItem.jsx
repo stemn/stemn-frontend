@@ -9,40 +9,40 @@ import classes from './TaskTimelineItem.css';
 import UserAvatar          from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
 import Comment             from 'app/renderer/main/modules/Comments/Comment/Comment.jsx';
 import TaskTimelineWrapper from '../TaskTimelineWrapper/TaskTimelineWrapper.jsx';
-
+import TaskLabelDots       from '../../TaskLabelDots/TaskLabelDots.jsx'
 
 const eventTextMap = {
-  commit        : (item) => {return <span>referenced this task in commit <a className="link-primary">#213</a></span>},
-  closed        : (item) => {return <span>marked this as complete</span>},
-  open          : (item) => {return <span>re-opened this task</span>},
-  addAsignee    : (item) => {return <span>was assigned to this task</span>},
-  removeAsignee : (item) => {return <span>was removed from assignees</span>},
-  changeLabels  : (item) => {
+  commit        : (item, board) => {return <span>referenced this task in commit <a className="link-primary">#213</a></span>},
+  closed        : (item, board) => {return <span>marked this as complete</span>},
+  open          : (item, board) => {return <span>re-opened this task</span>},
+  addAsignee    : (item, board) => {return <span>was assigned to this task</span>},
+  removeAsignee : (item, board) => {return <span>was removed from assignees</span>},
+  changedLabels : (item, board) => {
     return (
       <span>
-      {item.added && item.added.length > 0
-        ? <span>added the&nbsp;{item.added.map((label)=><span className={classes.label}>{label}</span>)}&nbsp;{item.added.length == 1 ? 'label' : 'labels'}</span>
+      {item.addedLabels && item.addedLabels.length > 0
+        ? <span>added the&nbsp;<TaskLabelDots labels={item.addedLabels} labelInfo={board.data.labels} tag={true}/>&nbsp;{item.addedLabels.length == 1 ? 'label' : 'labels'}</span>
         : null
       }
-      {item.added && item.removed && item.added.length > 0 && item.removed.length>0
+      {item.addedLabels && item.removedLabels && item.addedLabels.length > 0 && item.removedLabels.length>0
         ? <span>&nbsp;and&nbsp;</span> : null
       }
-      {item.removed && item.removed.length > 0
-        ? <span>removed the&nbsp;{item.removed.map((label)=><span className={classes.label}>{label}</span>)}&nbsp;{item.removed.length == 1 ? 'label' : 'labels'}</span>
+      {item.removedLabels && item.removedLabels.length > 0
+        ? <span>removed the&nbsp;<TaskLabelDots labels={item.removedLabels} labelInfo={board.data.labels} tag={true}/>&nbsp;{item.removedLabels.length == 1 ? 'label' : 'labels'}</span>
         : null
       }
     </span>
   )},
 }
 
-const getTextEventData = (item) => {
-  return eventTextMap[item.event] ? eventTextMap[item.event](item) : <span>Unknown Event Type</span>
+const getTextEventData = (item, board) => {
+  return eventTextMap[item.event] ? eventTextMap[item.event](item, board) : <span>Unknown Event Type</span>
 };
 
 
 export default React.createClass({
   render() {
-    const { item } = this.props;
+    const { item, board } = this.props;
     // If it is a comment, we use the comment component to display
     if(item.event == 'comment'){
       return (
@@ -58,7 +58,7 @@ export default React.createClass({
               <UserAvatar picture={item.user.picture} size="25" shape="square"/>
             </div>
             <div>
-              <b>{item.user.name}&nbsp;</b><span className="text-grey-3">{getTextEventData(item)} - {moment(item.timestamp).fromNow()}</span>
+              <b>{item.user.name}&nbsp;</b><span className="text-grey-3">{getTextEventData(item, board)} - {moment(item.timestamp).fromNow()}</span>
             </div>
           </div>
         </TaskTimelineWrapper>

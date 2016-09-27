@@ -7,13 +7,13 @@ import classes from './LabelSelect.css'
 
 export const Component = React.createClass({
   render(){
-    const { model, value, labelInfo, dispatch } = this.props;
+    const { model, value, labelInfo, dispatch, onChange } = this.props;
 
     const filteredInfo = labelInfo.filter( label => label.name && label.color)
     return (
       <div>
         {filteredInfo.map((label) => {
-          const onChange = () => {
+          const onChangeFn = () => {
             const labelIndex = value ? value.indexOf(label._id) : -1;
             if(labelIndex != -1){
               dispatch(actions.remove(model, labelIndex))
@@ -21,9 +21,10 @@ export const Component = React.createClass({
             else{
               dispatch(actions.push(model, label._id))
             }
+            if(onChange){onChange()} // Run the onChange function if required
           };
           return (
-            <CheckboxAlt status={value ? value.includes(label._id) : false} value={label._id} onChange={onChange} className="layout-row layout-align-start-center" tickOnly={true}>
+            <CheckboxAlt status={value ? value.includes(label._id) : false} value={label._id} onChange={onChangeFn} className="layout-row layout-align-start-center" tickOnly={true}>
               <div className={classes.swatch} style={{background: label.color}}></div>
               {label.name}
             </CheckboxAlt>
