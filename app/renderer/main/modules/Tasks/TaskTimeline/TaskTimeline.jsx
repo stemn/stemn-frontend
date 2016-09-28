@@ -41,7 +41,7 @@ export const Component = React.createClass({
   render() {
     const { events, entityModel, board } = this.props;
     return (
-      <div>
+      <div style={events.data.length > 0 ? {borderBottom: '1px solid rgba(0, 0, 0, 0.1)'} : {}}>
         {events && events.data ? events.data.map(item =>
           <TaskTimelineItem key={item._id} item={item} board={board} />
         ) : ''}

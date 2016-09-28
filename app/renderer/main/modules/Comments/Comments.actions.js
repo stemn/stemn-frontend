@@ -18,7 +18,7 @@ export function getComment({commentId}) {
 
 export function newComment({comment}) {
   return (dispatch) => {
-    if(comment.body && comment.body.length > 0){
+    if(comment && comment.body && comment.body.length > 0){
       dispatch({
         type: 'COMMENTS/NEW_COMMENT',
         http: true,
@@ -62,16 +62,17 @@ export function finishEdit({commentId}) {
   }
 }
 
-export function deleteComment({commentId}) {
+export function deleteComment({comment}) {
   return {
     type: 'COMMENTS/DELETE',
     http: true,
     payload: {
-      url: `http://localhost:3000/api/v1/comments/${commentId}`,
+      url: `http://localhost:3000/api/v1/comments/${comment._id}`,
       method: 'DELETE'
     },
     meta: {
-      commentId
+      commentId: comment._id,
+      taskId: comment.task
     }
   }
 }

@@ -3,6 +3,7 @@ import i from 'icepick';
 import { cloneDeep } from 'lodash';
 import { modeled } from 'react-redux-form';
 import { groupTasks } from './Tasks.utils.js';
+import getUuid from '../../../../shared/helpers/getUuid.js';
 
 const initialState = {
   data: {},
@@ -121,6 +122,24 @@ const mainReducer = (state, action) => {
 
     case 'TASKS/END_DRAG':
       return i.assocIn(state, ['data', action.payload.taskId, 'isDragging'], false)
+
+
+
+//    // Other events to reduce
+//    case 'COMMENTS/NEW_COMMENT_FULFILLED': // Add the comment to the events array
+//      return i.updateIn(state, ['events', action.meta.taskId, 'events' , 'data'], events => {
+//        return i.push(events, {
+//          _id: getUuid(),
+//          event: 'comment',
+//          comment: action.payload.data._id
+//        })
+//      })
+//    case 'COMMENTS/DELETE_FULFILLED': // Remove the comment from the events
+//      return i.updateIn(state, ['events', action.meta.taskId, 'events', 'data'], events => {
+//        const eventIndex = events.indexOf(event => event.comment == action.meta.commentId);
+//        return eventIndex != -1 ? i.splice(events, eventIndex, 1) : events;
+//      })
+//
 
     default:
       return state;

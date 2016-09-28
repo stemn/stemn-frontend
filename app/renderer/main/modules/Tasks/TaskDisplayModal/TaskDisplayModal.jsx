@@ -85,14 +85,14 @@ export const Component = React.createClass({
               placeholder="Task description" />
           </div>
         </div>
-        <div className="text-grey-3" style={{padding: '10px 0 20px'}}>Opened {moment(task.data.due).fromNow()} <b className="text-interpunct"></b> By <a className="link-primary">{task.owner}</a> <b className="text-interpunct"></b> 4 Comments</div>
+        <div className="text-grey-3" style={{padding: '10px 0 20px'}}>Opened {moment(task.data.due).fromNow()} <b className="text-interpunct"></b> By <a className="link-primary">{task.data.owner}</a> <b className="text-interpunct"></b> {task.data.numComments} Comments</div>
 
         <div className="layout-row">
           <div className="flex-70" style={{paddingRight: '15px'}}>
-            <div className="scroll-box" style={{maxHeight: '500px', borderTop: '1px solid rgba(0, 0, 0, 0.1)'}}>
+            <div className="scroll-box" style={{maxHeight: '500px', paddingRight: '15px', borderTop: '1px solid rgba(0, 0, 0, 0.1)'}}>
               <TaskTimeline taskId={taskId} board={board} />
             </div>
-            <div style={{paddingTop: '15px'}}>
+            <div style={{paddingTop: '15px', paddingRight: '15px'}}>
               <CommentNew taskId={taskId} />
             </div>
           </div>

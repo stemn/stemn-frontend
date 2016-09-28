@@ -30,3 +30,9 @@
   padding: 6px 10px;
   border-top: 1px dashed rgba(0, 0, 0, 0.2);
 }
+.comment:first-child{
+  margin-top: 15px;
+}
+.comment + .comment{
+  margin-top: 15px;
+}

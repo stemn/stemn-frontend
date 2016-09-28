@@ -15,8 +15,8 @@ const initialState = {
 
   user: {},
   login: {
-    email: 'founders@stemn.com',
-    password: 'People123',
+    email: '',
+    password: '',
     firstname: '',
     lastname: '',
   }

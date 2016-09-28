@@ -30,6 +30,7 @@ const mainReducer = (state, action) => {
     case 'COMMENTS/NEW_COMMENT_REJECTED':
       return i.assocIn(state, ['tasks', action.meta.taskId, 'newComment', 'savePending'], false)
     case 'COMMENTS/NEW_COMMENT_FULFILLED':
+      console.log(action);
       return i.chain(state)
         .assocIn(['tasks', action.meta.taskId, 'newComment'], {}) // Reset the newComment objected
         .assocIn(['data', action.payload.data._id, 'data'], action.payload.data) // Put the comment in the store
