@@ -2,7 +2,7 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-var THREE = THREE || { REVISION: '51' };
+export default THREE || { REVISION: '51' };
 
 if ( self.console === undefined ) {
 

@@ -12,8 +12,8 @@ export default React.createClass({
     this.setState({ loading: false })
   },
   render() {
-    const {file, project} = this.props;
-    const fileUrl = `http://localhost:3000/api/v1/remote/download/${project._id}/${file.fileId}?revisionId=${file.revisionId}`;
+    const {fileMeta, project} = this.props;
+    const fileUrl = `http://localhost:3000/api/v1/remote/download/${project._id}/${fileMeta.fileId}?revisionId=${fileMeta.revisionId}`;
     return (
       <div className={styles.container + ' layout-column layout-align-center-center flex'}>
         <img src={fileUrl}

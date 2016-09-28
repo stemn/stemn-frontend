@@ -3,8 +3,18 @@ import { clone, forEachRight, find } from 'lodash';
 import previewPcbService from './PreviewPcbService.js';
 import classes from './PreviewPcb.css';
 
+export const Viewer = React.createClass({
+  render() {
+    const { data, name } = this.props;
+    if(data && name){
+      setTimeout(()=>{init({element : this.refs.canvas,file : {name: name,data: data}})}, 1)
+    }
+    return <div ref="canvas" className={classes.canvas + ' layout-column flex'}></div>
+  }
+});
+
 export default class extends React.Component{
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps, prevProps) {
     if(!nextProps.fileData){
       nextProps.downloadFn({
         projectId : nextProps.fileMeta.project._id,
@@ -12,27 +22,21 @@ export default class extends React.Component{
         revisionId : nextProps.fileMeta.revisionId
       })
     }
-    else if(nextProps.fileData && nextProps.fileMeta){
-      init({
-        element : this.refs.canvas,
-        file   : {
-          name: nextProps.fileMeta.name,
-          data: nextProps.fileData.data
-        }
-      });
-    }
   }
-
   render() {
-    return <div ref="canvas" className={classes.canvas + ' layout-column flex'}></div>
+    const { fileData, fileMeta } = this.props;
+    if(fileData && fileData.data){
+      return <Viewer data={fileData.data} name={fileMeta.name} />
+    }
+    else{
+      return <div>Pending</div>
+    }
   }
 };
 
 function init({element, file}){
   const previewerInstance = previewPcbService.register();
   const layers = [file].map(previewerInstance.parse);
-
-  console.log(layers);
   errorMessages(layers);
 
   // If we still have layers, display them

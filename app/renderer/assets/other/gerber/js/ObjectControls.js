@@ -3,7 +3,7 @@
  * @note Edited by eddyb to provide object-centered controls instead of camera-centered.
  */
 
-import THR51 from './three.min.js';
+import THR51 from './three.js';
 
 (function (root, factory) {
 	if(typeof define === "function" && define.amd) {
@@ -53,20 +53,20 @@ import THR51 from './three.min.js';
 
       // internals
 
-      var lastPosition = new THR51.Vector3();
+      var lastPosition = THR51.Vector3();
 
       var _keyPressed = false,
 
       //_eye = new THR51.Vector3(),
 
-      _rotateStart = new THR51.Vector3(),
-      _rotateEnd = new THR51.Vector3(),
+      _rotateStart = THR51.Vector3(),
+      _rotateEnd = THR51.Vector3(),
 
-      _zoomStart = new THR51.Vector2(),
-      _zoomEnd = new THR51.Vector2(),
+      _zoomStart = THR51.Vector2(),
+      _zoomEnd = THR51.Vector2(),
 
-      _panStart = new THR51.Vector2(),
-      _panEnd = new THR51.Vector2();
+      _panStart = THR51.Vector2(),
+      _panEnd = THR51.Vector2();
 
 
       // methods
@@ -80,7 +80,7 @@ import THR51 from './three.min.js';
 
       this.getMouseOnScreen = function ( clientX, clientY ) {
 
-          return new THR51.Vector2(
+          return THR51.Vector2(
               ( clientX - _this.screen.offsetLeft ) / _this.radius * 0.5,
               ( clientY - _this.screen.offsetTop ) / _this.radius * 0.5
           );
@@ -89,7 +89,7 @@ import THR51 from './three.min.js';
 
       this.getMouseProjectionOnBall = function ( clientX, clientY ) {
 
-          var mouseOnBall = new THR51.Vector3(
+          var mouseOnBall = THR51.Vector3(
               ( clientX - _this.screen.width * 0.5 - _this.screen.offsetLeft ) / _this.radius,
               ( _this.screen.height * 0.5 + _this.screen.offsetTop - clientY ) / _this.radius,
               0.0
@@ -118,7 +118,7 @@ import THR51 from './three.min.js';
       this.rotateCamera = function () {
           var angle = Math.acos( _rotateStart.dot( _rotateEnd ) / _rotateStart.length() / _rotateEnd.length() );
           if ( angle ) {
-              var axis = ( new THR51.Vector3() ).cross( _rotateStart, _rotateEnd ).normalize();
+              var axis = ( THR51.Vector3() ).cross( _rotateStart, _rotateEnd ).normalize();
               angle *= _this.rotateSpeed;
 
               if ( _this.staticMoving )
@@ -132,7 +132,7 @@ import THR51 from './three.min.js';
 
               _this.object.useQuaternion = true;
               _this.object.quaternion.clone().inverse().multiplyVector3(axis);
-              _this.object.quaternion.multiplySelf((new THR51.Quaternion).setFromAxisAngle(axis, angle));
+              _this.object.quaternion.multiplySelf((THR51.Quaternion).setFromAxisAngle(axis, angle));
 
               // Apply to all global instances
               _.forEach(globalInstances, function(instance){

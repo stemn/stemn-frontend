@@ -1,8 +1,9 @@
 import webGerberConstants from './constants/webGerberConstants.js';
 import ViewEEPCB from './viewee.js';
-import ParseGerber from './parse/gerber.js';
-import THR51 from './three.min.js';
+import initGerberParser from './parse/gerber.js';
+import THR51 from './three.js';
 import ObjectControls from './ObjectControls.js';
+
 
 (function (root, factory) {
     if (typeof define === "function" && define.amd) {
@@ -75,6 +76,7 @@ import ObjectControls from './ObjectControls.js';
     /////////////////
 
     function parse(layer){
+        console.log(layer);
         var parser;
         if(wG.utils.isPcb(layer.name)){
             parser = new ViewEEPCB();
@@ -82,7 +84,7 @@ import ObjectControls from './ObjectControls.js';
             return parser.findParser(layer.data);
         }
         else{
-            parser = new ParseGerber();
+            parser = initGerberParser();
             return parser.parse(layer.data, layer.name);
         }
     }
@@ -139,31 +141,32 @@ import ObjectControls from './ObjectControls.js';
 
         wG.boards.width  = wG.limits.maxX - wG.limits.minX;
         wG.boards.height = wG.limits.maxY - wG.limits.minY;
-
         var has3D = true;
         try {
-            wG.renderer = new THR51.WebGLRenderer({antialias: true});
+            wG.renderer = THR51.WebGLRenderer({antialias: true});
+            console.log(THR51.WebGLRenderer());
+            console.log(THR51.CanvasRenderer());
             //wG.constants.ppmm = 20;
             wG.renderer.sortObjects = false;
         } catch(e) {
             console.error('Got WebGL error, falling back to 2D canvas.');
             has3D = false;
             wG.constants.ppmm = 20;
-            wG.renderer = new THR51.CanvasRenderer({antialias: true});
+            wG.renderer = THR51.CanvasRenderer({antialias: true});
         }
 
-        wG.scene  = new THR51.Scene();
-        wG.camera = new THR51.PerspectiveCamera(40);
+        wG.scene  = THR51.Scene();
+        wG.camera = THR51.PerspectiveCamera(40);
         wG.camera.up.set(0, 0, -1);
         wG.scene.add(wG.camera);
 
         // Ambient light.
-        var ambientLight = new THR51.AmbientLight(0xcccccc);
+        var ambientLight = THR51.AmbientLight(0xcccccc);
         wG.scene.add(ambientLight);
 
         // Sun light.
         if(has3D) {
-            var sunLight = new THR51.SpotLight(0xcccccc, .3);
+            var sunLight = THR51.SpotLight(0xcccccc, .3);
             sunLight.position.set(0, 150000, 0);
             wG.scene.add(sunLight);
         }
@@ -172,8 +175,8 @@ import ObjectControls from './ObjectControls.js';
         var Material = has3D ? THR51.MeshPhongMaterial : THR51.MeshBasicMaterial;
         wG.boards.bottom.canvas = wG.boards.makeBoard(wG.boards.width, wG.boards.height);
         wG.boards.top.canvas    = wG.boards.makeBoard(wG.boards.width, wG.boards.height, true);
-        wG.boards.bottom.texture = new THR51.Texture(wG.boards.bottom.canvas);
-        wG.boards.top.texture    = new THR51.Texture(wG.boards.top.canvas);
+        wG.boards.bottom.texture = THR51.Texture(wG.boards.bottom.canvas);
+        wG.boards.top.texture    = THR51.Texture(wG.boards.top.canvas);
         wG.boards.clearBoard(wG.boards.bottom.canvas);
         wG.boards.clearBoard(wG.boards.top.canvas);
         wG.boards.bottom.texture.needsUpdate = true, wG.boards.top.texture.needsUpdate = true;
@@ -188,7 +191,7 @@ import ObjectControls from './ObjectControls.js';
         if(!has3D){
             materials[2].overdraw = true, materials[3].overdraw = true;
         }
-        wG.board = new THR51.Mesh(new THR51.CubeGeometry(wG.boards.width, wG.constants.geometry.boardThickness, wG.boards.height, has3D ? 1 : Math.ceil(wG.boards.width / 3), 1, has3D ? 1 : Math.ceil(wG.boards.height / 3), materials, {px: 0, nx: 0, pz: 0, nz: 0}), new THR51.MeshFaceMaterial());
+        wG.board = THR51.Mesh(THR51.CubeGeometry(wG.boards.width, wG.constants.geometry.boardThickness, wG.boards.height, has3D ? 1 : Math.ceil(wG.boards.width / 3), 1, has3D ? 1 : Math.ceil(wG.boards.height / 3), materials, {px: 0, nx: 0, pz: 0, nz: 0}), THR51.MeshFaceMaterial());
         wG.board.position.y = -100;
 
         if(has3D){
@@ -196,10 +199,10 @@ import ObjectControls from './ObjectControls.js';
         }
 
         // Add the sides.
-        var boardSides = new THR51.CubeGeometry(wG.boards.width, wG.constants.geometry.boardThickness, wG.boards.height, 1, 1, 1, undefined, {py: 0, ny: 0});
+        var boardSides = THR51.CubeGeometry(wG.boards.width, wG.constants.geometry.boardThickness, wG.boards.height, 1, 1, 1, undefined, {py: 0, ny: 0});
         var boardMaterial = new Material(wG.constants.materials.board);
         //boardSides.computeVertexNormals();
-        boardSides = new THR51.Mesh(boardSides, boardMaterial);
+        boardSides = THR51.Mesh(boardSides, boardMaterial);
         wG.board.add(boardSides);
 
         // Create all the holes.
@@ -245,9 +248,9 @@ import ObjectControls from './ObjectControls.js';
                 if(layer.type == wG.index.BOARD){
                     _.forEach(layer.cmds, function(cmd){
                         var r    = layer.scale*layer.shapes[cmd[1]][1]/2;
-                        var hole = new THR51.CylinderGeometry(r, r, wG.constants.geometry.boardThickness, 32, 0, true);
+                        var hole = THR51.CylinderGeometry(r, r, wG.constants.geometry.boardThickness, 32, 0, true);
                         //hole.computeVertexNormals();
-                        hole = new THR51.Mesh(hole, holeMaterial);
+                        hole = THR51.Mesh(hole, holeMaterial);
                         hole.position.x = (cmd[2]*layer.scale-wG.limits.minX)-wG.boards.width/2;
                         hole.position.z = wG.boards.height/2-(cmd[3]*layer.scale-wG.limits.minY);
                         wG.board.add(hole);
@@ -259,9 +262,9 @@ import ObjectControls from './ObjectControls.js';
             // Else this is a pcb file - we drill the plainHoles
             _.forEach(wG.layers[0].plainHoles, function(cmd){
                 var r    = cmd.drill/2;
-                var hole = new THR51.CylinderGeometry(r, r, wG.constants.geometry.boardThickness, 32, 0, true);
+                var hole = THR51.CylinderGeometry(r, r, wG.constants.geometry.boardThickness, 32, 0, true);
                 //hole.computeVertexNormals();
-                hole = new THR51.Mesh(hole, holeMaterial);
+                hole = THR51.Mesh(hole, holeMaterial);
                 hole.position.x = cmd.x - wG.boards.width/2;
                 hole.position.z = wG.boards.height/2- cmd.y;
                 wG.board.add(hole);

@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import Promise from 'es6-promise'
 
-import previewCadUtils from './previewCadUtils.js';
+import previewCadUtils from './PreviewCad.utils.js';
 
 import AutodeskViewer from './AutodeskViewer/AutodeskViewer';
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
@@ -25,9 +25,9 @@ export default React.createClass({
     if(previewCadUtils.isWebGlSupported()){
       Promise.all([
         previewCadUtils.render({
-          projectId  : this.props.file.project._id,
-          fileId     : this.props.file.fileId,
-          revisionId : this.props.file.revisionId,
+          projectId  : this.props.fileMeta.project._id,
+          fileId     : this.props.fileMeta.fileId,
+          revisionId : this.props.fileMeta.revisionId,
         }),
         previewCadUtils.authenticate()
       ]).then((response)=>{
@@ -75,7 +75,7 @@ export default React.createClass({
       return <div className="layout-column layout-align-center-center flex"><div className="text-center text-title-4">Disabled</div></div>
     }
     else {
-      return <div className="rel-box flex"><LoadingOverlay>Processing File...</LoadingOverlay></div>
+      return <div className="rel-box flex"><LoadingOverlay show={true}>Processing File...</LoadingOverlay></div>
     }
   }
 })

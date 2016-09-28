@@ -25,6 +25,8 @@ import { getViewerType }  from './PreviewFile.utils.js'
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
+
+
 export const Component = React.createClass({
   render() {
     const {file, fileData, project, filesActions} = this.props;
@@ -33,22 +35,22 @@ export const Component = React.createClass({
     const getPreview = () => {
       const viewerType = getViewerType(file.extension);
       if(viewerType == 'gerber' || viewerType == 'pcb'){
-        return <PreviewPcb fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile} />
+        return <PreviewPcb previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile} />
       }
       else if(viewerType == 'code'){
         return <PreviewCode previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile}/>
       }
       else if(viewerType == 'autodesk'){
-        return <PreviewCad file={file} />
+        return <PreviewCad previewId={previewId} fileMeta={file} />
       }
       else if(viewerType == 'google'){
         return <div>Google</div>
       }
       else if(viewerType == 'image'){
-        return <PreviewImage project={project} file={file} />
+        return <PreviewImage project={project} fileMeta={file} />
       }
       else if(viewerType == 'pdf'){
-        return <PreviewPdf model={this.props.file.data} fileType={this.props.file.meta.fileType} />
+        return <PreviewPdf previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile}/>
       }
       else{
         return <div className="layout-column layout-align-center-center flex"><MdErrorOutline size="100" /><div className="text-title-4 text-center" style={{marginTop: '20px'}}>Cannot preview this file.</div></div>
