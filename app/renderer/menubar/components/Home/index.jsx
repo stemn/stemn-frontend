@@ -17,6 +17,10 @@ import CommitChanges      from 'app/renderer/main/modules/Changes/CommitChanges/
 import CommitBox          from 'app/renderer/main/modules/Changes/CommitBox/CommitBox.jsx'
 import Toolbar            from 'app/renderer/menubar/containers/Toolbar'
 import Sidebar            from 'app/renderer/menubar/modules/Sidebar/Sidebar.jsx'
+import {MdMenu, MdOpenInNew, MdNotificationsNone} from 'react-icons/lib/md';
+import * as ElectronWindowActions from 'app/shared/electronActions/window.js';
+
+
 import * as stringConcat  from 'app/shared/helpers/stringConcat';
 
 export const Component = React.createClass({
@@ -109,9 +113,15 @@ export const Component = React.createClass({
     return (
       <div className="layout-column">
         <Toolbar>
-         {project && project.data && project.data.name
-          ? stringConcat.end(project.data.name, 28)
-          : ''}
+          <MdMenu size="22" onClick={()=>this.props.MenubarLayoutActions.toggleSidebar(true)}/>
+          <div className="flex">
+            {
+              project && project.data && project.data.name
+              ? stringConcat.end(project.data.name, 28)
+              : ''
+            }
+          </div>
+          <MdOpenInNew onClick={()=>ElectronWindowActions.windowMainOpen()} size="22"/>
         </Toolbar>
         {getInnerContent()}
         <LoadingOverlay show={project && project.loading} />

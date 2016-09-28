@@ -24,7 +24,7 @@ export const Component = React.createClass({
 
     return (
       <div className="layout-column flex">
-        <Toolbar>Login</Toolbar>
+        <Toolbar></Toolbar>
         <div className="flex layout-column layout-align-center-center text-center" style={{padding: '15px'}}>
           <img src={droid} style={{width: '220px'}}/>
           <div className="text-title-4"
