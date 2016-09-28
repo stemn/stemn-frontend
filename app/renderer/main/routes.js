@@ -33,31 +33,6 @@ const AuthActions = require('../../shared/actions/auth');
 
 export default (store) => {
 
-  const init = (nextState, replace, callback) => {
-//    if(store.getState().auth.authToken){
-//      store.dispatch(AuthActions.initHttpHeaders('bearer '+ store.getState().auth.authToken));
-//    }else{
-//      replace('/login');
-//    }
-//    callback();
-
-//    if (!store.getState().auth.user._id) {
-//      console.log(store.getState().auth);
-//      store.dispatch(AuthActions.loadUserData());
-//      setTimeout(callback, 1000);
-////      store.dispatch(AuthActions.loadUserData()).then(()=>{
-////        callback()
-////      }).catch(()=>{
-////        store.dispatch(AuthActions.removeHttpHeaders())
-////        callback()
-////      });
-//    }
-//    else{
-//      store.dispatch(AuthActions.initHttpHeaders('bearer '+ store.getState().auth.authToken));
-//      callback();
-//    }
-  };
-
   const requireAuth = (nextState, replace, callback) => {
     if (!store.getState().auth.authToken) {
       replace('/login');

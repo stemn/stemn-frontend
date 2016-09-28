@@ -1,15 +1,38 @@
 .container{
   margin: 30px;
-  width: 1000px;
+  height: 600px;
   box-shadow: 0px 10px 35px 0px rgba(0,0,0,0.23);
 }
 .imageSection{
   background: rgb(68, 154, 211);
+  width: 600px;
+  position: relative;
+  z-index: 1;
 }
 .textSection{
   background: white;
-  padding: 40px;
+  width: 400px;
+  position: relative;
+  transition: all 0.3s ease;
 }
+.textSectionInner{
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 400px;
+  padding: 40px;
+  transition: all 0.3s ease;
+}
+
+.container.hideForm .textSection{
+  width: 0px;
+}
+.container.hideForm .textSectionInner{
+  transform: translateX(-100%);
+}
+
 
 .form{
   padding: 100px 0;

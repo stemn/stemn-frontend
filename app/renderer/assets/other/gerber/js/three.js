@@ -1,8 +1,9 @@
 /**
  * @author mrdoob / http://mrdoob.com/
  */
-
-export default THREE || { REVISION: '51' };
+const THREE = {
+  REVISION: '51'
+};
 
 if ( self.console === undefined ) {
 
@@ -36230,3 +36231,5 @@ THREE.ShaderSprite = {
 	}
 
 };
+
+export default THREE

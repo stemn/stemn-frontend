@@ -15,9 +15,10 @@ export default class extends React.Component{
         <div className={classNames(toolbarStyles.text, 'flex')}>
           {this.props.children}
         </div>
-        <MdNotificationsNone onClick={()=>ElectronWindowActions.windowMainOpen()} size="22" style={{marginRight: '10px'}}/>
         <MdOpenInNew onClick={()=>ElectronWindowActions.windowMainOpen()} size="22"/>
       </div>
     );
   }
 };
+
+//        <MdNotificationsNone onClick={()=>ElectronWindowActions.windowMainOpen()} size="22" style={{marginRight: '10px'}}/>

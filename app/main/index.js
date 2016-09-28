@@ -90,7 +90,9 @@ if(!squirrelStartup){
       if(action.type == 'WINDOW_MAIN_OPEN'){
         showMainWindow();
       }
-//      authReducer(action, store);
+      else if(action.type == 'WINDOW_MENUBAR_CLOSE'){
+        console.log('Close Menubar');
+      }
     });
 
     app.on('window-all-closed', () => {

@@ -1,7 +1,7 @@
 import webGerberConstants from './constants/webGerberConstants.js';
 import ViewEEPCB from './viewee.js';
 import initGerberParser from './parse/gerber.js';
-import THR51 from './three.js';
+import THR51 from './three.min.js';
 import ObjectControls from './ObjectControls.js';
 
 
@@ -138,6 +138,8 @@ import ObjectControls from './ObjectControls.js';
             layer.enabled = true;
         });
 
+        console.log(new THR51.WebGLRenderer({antialias: true}));
+        console.log(new THR51.CanvasRenderer({antialias: true}));
 
         wG.boards.width  = wG.limits.maxX - wG.limits.minX;
         wG.boards.height = wG.limits.maxY - wG.limits.minY;

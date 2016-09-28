@@ -10,7 +10,11 @@ export default {
     }, {
       test: /\.json$/,
       loader: 'json-loader',
-    }],
+    },{
+      test: /\.(png|jpg|svg)$/,
+      loader: 'url-loader?limit=8192'
+    } // inline base64 URLs for <=8k images, direct URLs for the rest
+],
   },
   output: {
     path: path.join(__dirname, 'dist'),
