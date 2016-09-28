@@ -22,6 +22,11 @@
 }
 */
 
+.button[disabled]{
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 .button:global(.sm) {
   padding: 7px 5px;
 }

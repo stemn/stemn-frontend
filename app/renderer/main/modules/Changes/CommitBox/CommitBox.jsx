@@ -45,7 +45,11 @@ export const Component = React.createClass({
             Add related tasks
           </a>
           <div className="flex"></div>
-          <Button onClick={this.props.commitFn} className="primary">Add Commit</Button>
+          <Button
+          onClick={this.props.commitFn}
+          className="primary"
+          disabled={changes.summary.length < 1}
+          >Add Commit</Button>
         </div>
       </div>
     );

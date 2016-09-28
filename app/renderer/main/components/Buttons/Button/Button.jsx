@@ -8,12 +8,13 @@ import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/
 
 export default class extends React.Component{
   render() {
-    const { loading } = this.props
+    const { loading, disabled, title, style, onClick } = this.props
     return (
       <button className={classNames(classes.button, this.props.className)}
-       onClick={this.props.onClick}
-       style={this.props.style}
-       title={this.props.title}>
+       onClick={onClick}
+       style={style}
+       title={title}
+       disabled={disabled}>
         {this.props.children}
         <LoadingOverlay
           size="xs"
