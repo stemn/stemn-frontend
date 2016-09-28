@@ -4,7 +4,7 @@ import autodeskViewerUtils from './autodeskViewerUtils.js';
 
 
 export default class extends React.Component{
-  componentDidMount() {  
+  componentDidMount() {
     var viewerEl = this.refs.canvas;
     var oDocument = null,
         viewerInstance = null;
@@ -16,7 +16,7 @@ export default class extends React.Component{
         'accessToken': this.props.token,
         'env': 'AutodeskProduction'
     };
-    
+
 //            $scope.$on('$destroy', onDestroy);
 //            $scope.previewer.center = center;
 
@@ -27,9 +27,9 @@ export default class extends React.Component{
           viewerInstance.initialize();
           loadDocument(viewerInstance, options);
       });
-    
+
       ///////////////////////////////
-    
+
       function center(){
           if(viewerInstance){
               console.log('center');

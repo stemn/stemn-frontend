@@ -1,8 +1,5 @@
 import React from 'react';
 
-//import PreviewFile  from '../../containers/PreviewFile';
-
-
 // Styles
 import classNames from 'classnames';
 import styles from './CompareFiles.css'

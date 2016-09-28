@@ -70,7 +70,7 @@ export default React.createClass({
     }
     else if(this.state.status == 'failed'){
       return <div className="layout-column layout-align-center-center flex"><div className="text-center text-title-4">Failed</div></div>
-    }    
+    }
     else if(this.state.status == 'disabled'){
       return <div className="layout-column layout-align-center-center flex"><div className="text-center text-title-4">Disabled</div></div>
     }

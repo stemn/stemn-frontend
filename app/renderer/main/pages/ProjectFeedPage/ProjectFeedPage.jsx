@@ -23,7 +23,6 @@ import FileCompareHeader  from 'app/renderer/main/modules/FileCompare/FileCompar
 import FileCompareMenu    from 'app/renderer/main/modules/FileCompare/FileCompareMenu/FileCompareMenu.jsx';
 import ContentSidebar     from 'app/renderer/main/components/ContentSidebar';
 import TogglePanel        from 'app/renderer/main/components/Panels/TogglePanel/TogglePanel.jsx';
-import PreviewFile        from 'app/renderer/main/containers/PreviewFile.js';
 import DragResize         from 'app/renderer/main/modules/DragResize/DragResize.jsx';
 
 

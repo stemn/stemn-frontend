@@ -10,7 +10,6 @@ import settings from './settings';
 import project from './project';
 import projectSettings from './projectSettings';
 import projects from './projects';
-import files from './files';
 import users from './users';
 import menubarLayout from './menubarLayout';
 
@@ -25,6 +24,7 @@ import toasts       from '../../renderer/main/modules/Toasts/Toasts.reducer.js';
 import fileCompare  from '../../renderer/main/modules/FileCompare/FileCompare.reducer.js';
 import changes      from '../../renderer/main/modules/Changes/Changes.reducer.js';
 import mentions     from '../../renderer/main/modules/Mentions/Mentions.reducer.js';
+import files        from '../../renderer/main/modules/Files/Files.reducer.js';
 
 export default function getRootReducer(scope = 'main') {
   let reducers = {

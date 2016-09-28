@@ -1,9 +1,7 @@
-@value primary from "app/renderer/assets/css/themes/standard.css";
-
 .checkbox {
   display: inline-block;
   opacity: 0.7;
-  border-color: primary;
+  border-color: inherit;
 }
 .checkbox label {
   display: inline-block;

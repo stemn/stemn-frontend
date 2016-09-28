@@ -9,7 +9,7 @@ import classes from './LoadingOverlay.css';
 
 export default class extends Component {
   render() {
-    const { size, show, children } = this.props; // size == 'xs'
+    const { size, show, children, style } = this.props; // size == 'xs'
 
     const transitionName = {
       enter: classes.enter,
@@ -28,7 +28,7 @@ export default class extends Component {
         transitionEnterTimeout={300}
         transitionLeaveTimeout={300}>
         {show ?
-          <div className={classes.loadingOverlay + ' overlay'}>
+          <div className={classes.loadingOverlay + ' overlay'} style={style}>
               <div className={classes.loaderContainer}>
                 <LoadingSpinner size={size}/>
                 {children ? <div className={classes.text}>{children}</div> : ''}

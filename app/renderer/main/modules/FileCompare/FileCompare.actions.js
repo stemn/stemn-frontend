@@ -1,5 +1,4 @@
-
-import {getViewerType} from 'app/renderer/main/components/PreviewFile/previewFileUtils.js';
+import { getViewerType } from 'app/renderer/main/modules/Files/PreviewFile/PreviewFile.utils.js';
 
 
 export function init({compareId, mode, project, file1, file2}) {

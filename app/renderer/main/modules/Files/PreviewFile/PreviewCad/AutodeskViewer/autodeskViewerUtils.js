@@ -6,7 +6,7 @@ let oldState     = {viewport: { eye: [1]}};
 const filter       = {viewport: true};
 let syncIsActive = false;
 
-const library = {  
+const library = {
   activeInstances : [],
   register : register,
   deregister : deregister,

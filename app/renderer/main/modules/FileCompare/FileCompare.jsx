@@ -13,7 +13,7 @@ import classNames from 'classnames';
 import classes from './FileCompare.css'
 
 // Sub Components
-import PreviewFile        from 'app/renderer/main/containers/PreviewFile';
+import PreviewFile        from 'app/renderer/main/modules/Files/PreviewFile/PreviewFile.jsx';
 import FileCompareSlider  from './components/FileCompareSlider.jsx';
 import FileCompareMenu    from './FileCompareMenu/FileCompareMenu.jsx'
 

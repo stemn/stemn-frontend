@@ -6,7 +6,8 @@
 }
 .checkbox {
   color: primary;
-  padding: 6px 3px 6px 6px;
+  padding-right: 3px;
+  padding-left: 6px;
 }
 .text {
   padding: 8px;

@@ -48,7 +48,7 @@ export const Component = React.createClass({
           <Button
           onClick={this.props.commitFn}
           className="primary"
-          disabled={changes.summary.length < 1}
+          disabled={!changes.summary || changes.summary.length < 1}
           >Add Commit</Button>
         </div>
       </div>

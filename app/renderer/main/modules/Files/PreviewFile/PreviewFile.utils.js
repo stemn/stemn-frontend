@@ -1,10 +1,10 @@
-import _ from 'lodash';
+import { forEach, clone } from 'lodash';
 import codemirror from 'codemirror';
 import 'codemirror/mode/meta.js';
 
 const getCodeMirrorExts = () => {
     var codeExts = [];
-    _.forEach(codemirror.modeInfo, function (mode) {
+    forEach(codemirror.modeInfo, function (mode) {
         if (mode.ext) {
             codeExts = codeExts.concat(mode.ext);
         }
@@ -62,12 +62,12 @@ export const getViewerType = (fileType, provider) => {
     provider = provider == 'drive' ? 'drive' : 'dropbox';
 
     // Extend the fileTypes array by the provider specific info
-    var viewerFileTypesProvider = _.clone(viewerFileTypes.general);
-    _.forEach(viewerFileTypes[provider], function(values, key){
+    var viewerFileTypesProvider = clone(viewerFileTypes.general);
+    forEach(viewerFileTypes[provider], function(values, key){
         viewerFileTypesProvider[key] = viewerFileTypesProvider[key] || [];
         viewerFileTypesProvider[key] = viewerFileTypesProvider[key].concat(values);
     })
-    _.forEach(viewerFileTypesProvider, function (fileTypes, viewerType) {
+    forEach(viewerFileTypesProvider, function (fileTypes, viewerType) {
         if (fileTypes.indexOf(fileTypeLower) != -1) {
             result = viewerType;
         }
