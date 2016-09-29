@@ -76,7 +76,7 @@ const TimelineDraggable = React.createClass({
   },
 
   render() {
-    const { numberToShow, TimelineActions, timeline, project, page} = this.props;
+    const { numberToShow, TimelineActions, timeline, project, page, onSelectFn} = this.props;
 
 //    const translation = 'translateX('+this.state.currentX+'px)';
     const translation = 'translateX('+page*100+'%)';
@@ -88,7 +88,7 @@ const TimelineDraggable = React.createClass({
         <a key={item._id}
           className={classNames(classes.dot, {[classes.active]: timeline.selected._id == item._id})}
           style={posStyle}
-          onClick={()=>TimelineActions.selectTimelineItem({projectId: project._id, selected: item})}>
+          onClick={()=>onSelectFn({projectId: project._id, selected: item})}>
           <PopupTrigger item={item} />
         </a>
       )

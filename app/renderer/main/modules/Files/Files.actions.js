@@ -8,7 +8,10 @@ export function getFile({projectId, fileId, revisionId}) {
     http: true,
     payload: {
       method: 'GET',
-      url: `http://localhost:3000/api/v1/remote/download/${projectId}/${fileId}?revisionId=${revisionId}`
+      url: `http://localhost:3000/api/v1/remote/download/${projectId}/${fileId}`,
+      params: {
+        revisionId
+      }
     },
     meta: {
       cacheKey: `${projectId}-${fileId}-${revisionId}`
@@ -16,16 +19,19 @@ export function getFile({projectId, fileId, revisionId}) {
   };
 }
 
-export function getMeta({projectId, fileId, revisionId}) {
+export function getMeta({fileId, revisionId}) {
   return {
     type: GET_META,
     http: true,
     payload: {
       method: 'GET',
-      url: `http://localhost:3000/api/v1/sync/metadata/${projectId}/${fileId}`
+      url: `http://localhost:3000/api/v1/files/${fileId}`,
+      params: {
+        revisionId
+      }
     },
     meta: {
-      cacheKey: `${projectId}-${fileId}-${revisionId}`
+      cacheKey: `${fileId}-${revisionId}`
     }
   };
 }

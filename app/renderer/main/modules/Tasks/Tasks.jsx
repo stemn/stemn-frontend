@@ -59,7 +59,7 @@ export const Component = React.createClass({
   },
   getInitialState () {
     return {
-      layout: 'list',
+      layout: 'board',
     }
   },
   setLayout (layout) {

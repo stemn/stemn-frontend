@@ -10,14 +10,14 @@ export const show = () => {
   browserWindow.focus();
 }
 
-export const create =  function createWindow({ uri = '/' } = {}) {
+export const create = function createWindow({ uri = '/' } = {}) {
   browserWindow = new BrowserWindow({
     show: false,
     width: 1024,
     height: 728,
     minWidth: 1000,
     minHeight: 800,
-//    frame: false
+    frame: false
   });
   browserWindow.loadURL(`file://${mainHtml}#${uri}`);
   browserWindow.on('closed', () => {

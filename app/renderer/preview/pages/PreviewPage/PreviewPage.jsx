@@ -10,6 +10,9 @@ import React from 'react';
 // Styles
 import classNames from 'classnames';
 
+// Actions
+import * as FilesActions from 'app/renderer/main/modules/Files/Files.actions.js';
+
 // Sub Components
 import FileCompare        from 'app/renderer/main/modules/FileCompare/FileCompare.jsx';
 import FileCompareHeader  from 'app/renderer/main/modules/FileCompare/FileCompareHeader/FileCompareHeader.jsx';
@@ -17,8 +20,14 @@ import FileCompareHeader  from 'app/renderer/main/modules/FileCompare/FileCompar
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
+  componentWillMount() {
+    const { revisionId, fileId} = this.props.params;
+    if(fileId){
+      this.props.filesActions.getMeta({fileId, revisionId})
+    }
+  },
   render() {
-    const { } = this.props
+    const { fileMeta } = this.props
     const file = {
       extension : "png",
       fileId : "57c3f21fa0a6a69629f7965d",
@@ -35,15 +44,22 @@ export const Component = React.createClass({
         provider: 'drive'
       }
     }
+
     return (
       <div className="layout-column flex">
-        <FileCompareHeader
-         compareId={`preview-${project._id}-${file.fileId}`}
-         file1={file} />
-        <FileCompare
-          compareId={`preview-${project._id}-${file.fileId}`}
-          project={project}
-          file1={file}/>
+        {
+          fileMeta && fileMeta.data
+          ? <div className="layout-column flex">
+              <FileCompareHeader
+               compareId={`preview-${fileMeta.data.fileId}}`}
+               file1={fileMeta.data} />
+              <FileCompare
+                compareId={`preview-${fileMeta.data.fileId}}`}
+                project={fileMeta.data.project}
+                file1={fileMeta.data}/>
+            </div>
+          : ''
+        }
       </div>
     );
   }
@@ -52,12 +68,18 @@ export const Component = React.createClass({
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps({files}, {params}) {
+  console.log(files);
+  const cacheKey = `${params.fileId}-${params.revisionId}`
+  return {
+    fileMeta: files.fileMeta[cacheKey]
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-  return {}
+  return {
+    filesActions: bindActionCreators(FilesActions, dispatch),
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);

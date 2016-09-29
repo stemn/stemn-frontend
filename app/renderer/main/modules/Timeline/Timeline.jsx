@@ -45,6 +45,9 @@ export const Component = React.createClass({
     }
   },
   render() {
+
+    const { children } = this.props;
+
     const numberToShow = 15;
 
     const moreLeft  = this.props.timeline && this.props.timeline.data ? this.state.page < this.props.timeline.data.length / numberToShow - 1 : false;
@@ -66,7 +69,7 @@ export const Component = React.createClass({
                 <TimelineInner
                   timeline={this.props.timeline}
                   numberToShow={numberToShow}
-                  TimelineActions={this.props.TimelineActions}
+                  onSelectFn={this.props.sidebarTimelineActions}
                   page={this.state.page}
                   project={this.props.project} /> : '' }
             </div>
@@ -92,7 +95,7 @@ function mapStateToProps({ sidebarTimeline }, {project}) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    TimelineActions: bindActionCreators(SidebarTimelineActions, dispatch)
+    sidebarTimelineActions: bindActionCreators(SidebarTimelineActions, dispatch)
   }
 }
 

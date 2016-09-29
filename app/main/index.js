@@ -115,7 +115,7 @@ if(!squirrelStartup){
     createMainWindow();
     store.dispatch(getProviderPath());
 
-    createPreview();
+    createPreview({uri: '/preview/57ec666326c9751f01de62da/57c3f21fa0a6a69629f7965d'});
 
 
     // auto-updating
