@@ -4,7 +4,7 @@ import path from 'path';
 const mainHtml = path.join(__dirname, '../../renderer/assets/html/preview.html');
 
 export const create = function createWindow({ uri = '/' } = {}) {
-  const browserWindow = new BrowserWindow({
+  let browserWindow = new BrowserWindow({
     show: false,
     width: 1024,
     height: 728,

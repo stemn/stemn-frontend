@@ -46,7 +46,7 @@ export const Component = React.createClass({
   componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
 
   selectTimelineItem(item){
-    this.props.sidebarTimelineActions({
+    this.props.sidebarTimelineActions.selectTimelineItem({
       projectId: this.props.project.data._id,
       selected : item
     })
@@ -129,10 +129,11 @@ export const Component = React.createClass({
         <div className="layout-column flex rel-box">
 
           <Timeline
-            items={timeline.data}
-            selected={timeline.selected._id}
+            items={timeline && timeline.data ? timeline.data : []}
+            selected={timeline && timeline.selected ? timeline.selected._id : ''}
             onSelect={this.selectTimelineItem}
           />
+
 
           <div className="layout-row flex">
             <div className="layout-column">

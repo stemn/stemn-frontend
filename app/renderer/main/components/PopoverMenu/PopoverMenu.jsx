@@ -13,41 +13,25 @@ export default React.createClass({
   render() {
     const { preferPlace, trigger, disableClickClose, children, className } = this.props;
 
-    const contentElement = (
-      <div onClick={()=>disableClickClose ? null : this.toggle(false)}>
-        {this.props.children[1]}
-      </div>
-    )
+    const triggerProps = trigger == 'hover'
+    ? {
+      onMouseOver: () => {this.toggle(true)},
+      onMouseOut: () => {this.toggle(false)}
+    } : {
+      onClick: () => {this.toggle(null)}
+    };
 
-    const getTriggerElement = () => {
-      if(trigger == 'hover'){
-        return (
-          <div
-            className={className}
-            onMouseOver={()=>this.toggle(true)}
-            onMouseOut={()=>this.toggle(false)}>
-            {children[0]}
-          </div>
-        )
-      }
-      else{
-        return (
-          <div
-            className={className}
-            onClick={()=>this.toggle(null)}>
-            {children[0]}
-          </div>
-        )
-      }
+    const contentProps = {
+      onClick: () => {disableClickClose ? null : this.toggle(false)}
     }
 
     return (
       <Popover
         isOpen={this.state.isOpen}
-        body={contentElement}
+        body={React.cloneElement(children[1], contentProps)}
         onOuterAction={()=>this.toggle(false)}
         preferPlace = {preferPlace || 'above'}>
-        {getTriggerElement()}
+        {React.cloneElement(children[0], triggerProps)}
       </Popover>
     );
   }

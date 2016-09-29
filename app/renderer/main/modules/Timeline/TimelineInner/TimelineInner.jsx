@@ -26,24 +26,8 @@ const PopupContent = (item) =>{
 }
 
 const Component = React.createClass({
-  getInitialState () {
-    return {
-      lastPositionX: 0,
-      currentX: 0,
-    };
-  },
-
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.dataDrag.isMoving) {
-      this.setState({currentX: this.state.lastPositionX + nextProps.dataDrag.moveDeltaX,});
-    }
-    else {
-      this.setState({lastPositionX: this.state.currentX,});
-    }
-  },
-
   render() {
-    const { numberToShow, TimelineActions, selected, page, onSelectFn} = this.props;
+    const { numberToShow, items, selected, page, onSelect} = this.props;
     const translation = 'translateX(' + page * 100 + '%)';
     const Items = items.map((item, index)=> {
       const percentage = 100 - (index) * (100 / numberToShow);
@@ -53,9 +37,9 @@ const Component = React.createClass({
           className={classNames(classes.dot, {[classes.active]: selected == item._id})}
           style={posStyle}
           onClick={()=>onSelect(item)}>
-          <PopoverMenu preferPlace="bottom" trigger="hover">
+          <PopoverMenu preferPlace="below" trigger="hover">
             <div style={{width: '100%', height: '100%'}}></div>
-            {PopupContent(item)}
+            <div>{PopupContent(item)}</div>
           </PopoverMenu>
         </a>
       )
