@@ -27,7 +27,6 @@ export function actToggleAll({projectId, model, value}) {
 
 export function fetchChanges({projectId}) {
   return (dispatch) => {
-    dispatch(pullChanges({projectId}))
     dispatch({
       type:'CHANGES/FETCH_CHANGES',
       http: true,
