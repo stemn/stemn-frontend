@@ -27,7 +27,7 @@ const onMount = (nextProps, prevProps) => {
   if(!prevProps || nextProps.compareId !== prevProps.compareId){
     nextProps.fileCompareActions.init({
       compareId: nextProps.compareId,
-      project: nextProps.project,
+      provider: nextProps.file1.provider,
       file1: nextProps.file1,
       file2: nextProps.file2,
     })

@@ -3,26 +3,21 @@ import path from 'path';
 
 const mainHtml = path.join(__dirname, '../../renderer/assets/html/preview.html');
 
-let browserWindow = null;
-
-export const show = () => {
-  browserWindow.show();
-  browserWindow.focus();
-}
-
 export const create = function createWindow({ uri = '/' } = {}) {
-  browserWindow = new BrowserWindow({
+  const browserWindow = new BrowserWindow({
     show: false,
     width: 1024,
     height: 728,
     minWidth: 1000,
     minHeight: 800,
-    frame: false
+    frame: true
   });
+
   browserWindow.loadURL(`file://${mainHtml}#${uri}`);
   browserWindow.on('closed', () => {
     browserWindow = null;
   });
+
   if (process.env.NODE_ENV === 'development') {
     browserWindow.openDevTools();
     browserWindow.webContents.on('context-menu', (e, props) => {
@@ -35,8 +30,11 @@ export const create = function createWindow({ uri = '/' } = {}) {
       }]).popup(browserWindow);
     });
   }
+
   browserWindow.webContents.on('did-finish-load', () => {
-    show();
+    browserWindow.show();
+    browserWindow.focus();
   });
+
   browserWindow.setMenu(null);
 }

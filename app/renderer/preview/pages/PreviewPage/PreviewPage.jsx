@@ -16,6 +16,11 @@ import * as FilesActions from 'app/renderer/main/modules/Files/Files.actions.js'
 // Sub Components
 import FileCompare        from 'app/renderer/main/modules/FileCompare/FileCompare.jsx';
 import FileCompareHeader  from 'app/renderer/main/modules/FileCompare/FileCompareHeader/FileCompareHeader.jsx';
+import Timeline           from 'app/renderer/main/modules/Timeline/Timeline.jsx';
+import DragResize         from 'app/renderer/main/modules/DragResize/DragResize.jsx';
+import FileBreadCrumbs    from 'app/renderer/main/modules/FileList/components/FileBreadCrumbs.jsx'
+// Styles
+import classes from './PagePreview.css';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -26,50 +31,49 @@ export const Component = React.createClass({
       this.props.filesActions.getMeta({fileId, revisionId})
     }
   },
+  clickCrumb({file}){
+    console.log(file);
+  },
   render() {
-    const { fileMeta } = this.props
-    const file = {
-      extension : "png",
-      fileId : "57c3f21fa0a6a69629f7965d",
-      name : "asfafsafsfsa.png",
-      path : "asfafsafsfsa.png",
-      provider : "drive",
-      revisionId : "57c3f21f5de772742e19e80a",
-      size : "951687",
-    }
-    const project = {
-      _id : "57ec666326c9751f01de62da",
-      stub : "timeline-test",
-      remote: {
-        provider: 'drive'
-      }
-    }
-
+    const { fileMeta } = this.props;
+    console.log(fileMeta);
     return (
       <div className="layout-column flex">
-        {
-          fileMeta && fileMeta.data
-          ? <div className="layout-column flex">
-              <FileCompareHeader
-               compareId={`preview-${fileMeta.data.fileId}}`}
-               file1={fileMeta.data} />
-              <FileCompare
-                compareId={`preview-${fileMeta.data.fileId}}`}
-                project={fileMeta.data.project}
-                file1={fileMeta.data}/>
-            </div>
-          : ''
-        }
+        <div className={classes.header}>
+          <FileBreadCrumbs meta={fileMeta.data} clickFn={this.clickCrumb}/>
+        </div>
+        <div className="layout-row flex">
+          <div className="layout-column flex">
+            {
+              fileMeta && fileMeta.data
+              ? <div className="layout-column flex">
+                  <FileCompare
+                    compareId={`preview-${fileMeta.data.fileId}}`}
+                    project={fileMeta.data.project}
+                    file1={fileMeta.data}/>
+                </div>
+              : ''
+            }
+            <Timeline className={classes.timeline}/>
+          </div>
+          <DragResize side="left" width="450" widthRange={[0, 450]} className="layout-column">
+            <aside className={classes.sidebar + ' layout-column flex'}>
+              Lorem goes in here
+            </aside>
+          </DragResize>
+        </div>
       </div>
     );
   }
 });
-
+//
+//          items={timeline.data}
+//          selected={timeline.selected._id}
+//          onSelect={this.selectTimelineItem}
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
 function mapStateToProps({files}, {params}) {
-  console.log(files);
   const cacheKey = `${params.fileId}-${params.revisionId}`
   return {
     fileMeta: files.fileMeta[cacheKey]

@@ -40,13 +40,13 @@ export const Component = React.createClass({
     }
   },
   render() {
-    const { items, selected, onSelect } = this.props;
+    const { items, selected, onSelect, style, className } = this.props;
     const numberToShow = 15;
     const moreLeft  = items ? this.state.page < items.length / numberToShow - 1 : false;
     const moreRight = this.state.page > 0;
 
     return (
-      <div className={styles.timeline +' layout-row'}>
+      <div className={classNames(styles.timeline, 'layout-row', className)} style={style}>
         <div className="rel-box flex">
           <div className={styles.line}>
             {moreLeft  ? <MoreButton onClick={()=>this.scroll('left')} side="left"/> : ''}
@@ -56,13 +56,17 @@ export const Component = React.createClass({
           </div>
           <div className={styles.dotsOverflow}>
             <div className={styles.dotsPosContainer}>
-              <TimelineInner
-                numberToShow={numberToShow}
-                onSelect={onSelect}
-                page={this.state.page}
-                items={items}
-                selected={selected}>
-              </TimelineInner>
+              {items && items.length > 0
+                ?
+                <TimelineInner
+                  numberToShow={numberToShow}
+                  onSelect={onSelect}
+                  page={this.state.page}
+                  items={items}
+                  selected={selected}>
+                </TimelineInner>
+                : ''
+              }
             </div>
           </div>
         </div>
