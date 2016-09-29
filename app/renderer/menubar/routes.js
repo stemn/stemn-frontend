@@ -1,15 +1,17 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
-import App from './containers/App';
-import HomePage from './containers/HomePage';
-import LoginPage from './pages/LoginPage/LoginPage.jsx';
+import AppRootPage      from './pages/AppRootPage/AppRootPage.jsx';
+import HomePage         from './pages/HomePage/HomePage.jsx';
+import LoginPage        from './pages/LoginPage/LoginPage.jsx';
+import ProjectPage      from './pages/ProjectPage/ProjectPage.jsx';
+import AppAuthedPage    from './pages/AppAuthedPage/AppAuthedPage.jsx';
+import AppUnAuthedPage  from './pages/AppUnAuthedPage/AppUnAuthedPage.jsx';
 
 const AuthActions = require('../../shared/actions/auth');
 
 export default (store) => {
 
   const requireAuth = (nextState, replace, callback) => {
-    console.log('reqauth');
     if (!store.getState().auth.authToken) {
       replace('/login');
     }
@@ -21,7 +23,6 @@ export default (store) => {
   };
 
   const requireNonAuth = (nextState, replace, callback) => {
-    console.log('notAuth');
     if (store.getState().auth.authToken) {
       replace('/');
     }
@@ -29,13 +30,13 @@ export default (store) => {
   };
 
   return (
-    <Route path="/" component={App}>
-      <Route onEnter={requireAuth}>
-        <IndexRoute component={HomePage} />
-        <Route path="/project/:stub/changes" component={HomePage} />
+    <Route           component={AppRootPage}     path="/">
+      <Route         component={AppAuthedPage}   onEnter={requireAuth}>
+        <IndexRoute  component={HomePage} />
+        <Route       component={ProjectPage}     path="/project/:stub"/>
       </Route>
-      <Route onEnter={requireNonAuth}>
-        <Route path="/login" component={LoginPage} />
+      <Route         component={AppUnAuthedPage} onEnter={requireNonAuth}>
+        <Route       component={LoginPage}       path="/login"/>
       </Route>
     </Route>
   );

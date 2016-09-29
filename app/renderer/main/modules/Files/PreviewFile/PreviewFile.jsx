@@ -53,7 +53,7 @@ export const Component = React.createClass({
         return <PreviewPdf previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile}/>
       }
       else{
-        return <div className="layout-column layout-align-center-center flex"><MdErrorOutline size="100" /><div className="text-title-4 text-center" style={{marginTop: '20px'}}>Cannot preview this file.</div></div>
+        return <div className="layout-column layout-align-center-center flex"><MdErrorOutline size="70" /><div className="text-title-4 text-center" style={{marginTop: '20px'}}>Cannot preview this file.</div></div>
       }
     }
     return (

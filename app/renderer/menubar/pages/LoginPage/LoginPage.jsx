@@ -12,7 +12,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 // Sub Components
-import Toolbar from 'app/renderer/menubar/containers/Toolbar'
+import Toolbar from 'app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
 import droid   from 'app/renderer/assets/images/space-vectors/droid.svg';
 import Button  from 'app/renderer/main/components/Buttons/Button/Button.jsx'
 
@@ -43,15 +43,14 @@ export const Component = React.createClass({
         </div>
       </div>
     );
-
   }
 });
 
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps({ auth }) {
-  return { auth };
+function mapStateToProps() {
+  return {};
 }
 
 function mapDispatchToProps(dispatch) {

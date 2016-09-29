@@ -15,10 +15,10 @@ import classNames from 'classnames';
 import LoadingOverlay     from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import CommitChanges      from 'app/renderer/main/modules/Changes/CommitChanges/CommitChanges.jsx';
 import CommitBox          from 'app/renderer/main/modules/Changes/CommitBox/CommitBox.jsx'
-import Toolbar            from 'app/renderer/menubar/containers/Toolbar'
-import Sidebar            from 'app/renderer/menubar/modules/Sidebar/Sidebar.jsx'
-import {MdMenu, MdOpenInNew, MdNotificationsNone} from 'react-icons/lib/md';
+import Toolbar            from 'app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
+import { MdOpenInNew } from 'react-icons/lib/md';
 import * as ElectronWindowActions from 'app/shared/electronActions/window.js';
+import { Link }           from 'react-router';
 
 
 import * as stringConcat  from 'app/shared/helpers/stringConcat';
@@ -59,10 +59,19 @@ export const Component = React.createClass({
   render() {
     const { changes, project, ChangesActions, entityModel } = this.props;
 
+
+    const addStoreLink = {
+      pathname: `/project/${project.data._id}/settings`,
+      state: {meta : {scope: ['main']}}
+    }
+
     const projectNotConnected = () => {
       return (
         <div className="layout-column layout-align-center-center flex">
-          <div className="text-center">Changes not available. Connect this project to Drive or Dropbox</div>
+          <div className="text-title-5 text-center">Project not connected to a file store</div>
+          <div className="text-title-4 text-center link-primary" style={{marginTop: '10px'}}>
+            <Link to={addStoreLink}>Add File Store</Link>
+          </div>
         </div>
       )
     }
@@ -90,7 +99,7 @@ export const Component = React.createClass({
           transition: 'height 0.3s ease'
         };
         return (
-          <div className="layout-column">
+          <div className="layout-column flex">
             <CommitChanges
               changes={changes}
               project={project.data}
@@ -111,21 +120,13 @@ export const Component = React.createClass({
 
 
     return (
-      <div className="layout-column">
-        <Toolbar>
-          <MdMenu size="22" onClick={()=>this.props.MenubarLayoutActions.toggleSidebar(true)}/>
-          <div className="flex">
-            {
-              project && project.data && project.data.name
-              ? stringConcat.end(project.data.name, 28)
-              : ''
-            }
-          </div>
+      <div className="layout-column flex">
+        <Toolbar menu={true}>
+          <div className="flex">{project && project.data && project.data.name ? stringConcat.end(project.data.name, 28) : ''}</div>
           <MdOpenInNew onClick={()=>ElectronWindowActions.windowMainOpen()} size="22"/>
         </Toolbar>
         {getInnerContent()}
         <LoadingOverlay show={project && project.loading} />
-        <Sidebar />
       </div>
     )
   }
@@ -138,7 +139,7 @@ function mapStateToProps({changes, projects}, {params}) {
   return {
     project: project,
     changes: changes[params.stub],
-    entityModel: `changes.${params.stub}`
+    entityModel: `changes.${params.stub}`,
   };
 }
 

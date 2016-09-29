@@ -25,7 +25,14 @@ import { MdClose } from 'react-icons/lib/md';
 export const Component = React.createClass({
   render() {
     const { menubarLayout, projects } = this.props;
-    const routeState = {meta : {scope: ['main', 'menubar']}}
+
+    const linkProject = (item) => {
+      return {
+        pathname: `/project/${item._id}`,
+        state: {meta : {scope: ['main', 'menubar']}}
+      }
+    }
+
     return (
       <div>
         <AnimateShow show={menubarLayout.showSidebar} animation={classes.animateOverlay} animationShow={classes.animateOverlayShow}>
@@ -34,7 +41,7 @@ export const Component = React.createClass({
         <div className={classNames(classes.sidebar, 'layout-column', {[classes.sidebarShow] : menubarLayout.showSidebar})}>
           <div className="flex scroll-box">
             {projects.userProjects.data.map((item)=>
-               <SidebarProjectButton item={item} to={{pathname: `/project/${item._id}/changes`, state: routeState}} clickFn={()=>this.props.MenubarLayoutActions.toggleSidebar(false)}/>
+               <SidebarProjectButton item={item} to={linkProject(item)} clickFn={()=>this.props.MenubarLayoutActions.toggleSidebar(false)}/>
             )}
           </div>
         </div>

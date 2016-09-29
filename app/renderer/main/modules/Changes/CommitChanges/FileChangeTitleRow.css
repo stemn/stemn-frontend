@@ -1,12 +1,13 @@
 @value primary, border1 from "app/renderer/assets/css/themes/standard.css";
 
 .fileChangeTitleRow{
-  border-bottom: 1px solid border1;
+  border-bottom: 1px solid;
   padding: 10px 6px;
   height: 36px;
   min-height: 36px;
   position: relative;
   cursor: default;
+  color: border1;
 }
 .text{
   color: primary;

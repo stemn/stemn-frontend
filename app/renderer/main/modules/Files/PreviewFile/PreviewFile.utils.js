@@ -63,14 +63,15 @@ export const getViewerType = (fileType, provider) => {
 
     // Extend the fileTypes array by the provider specific info
     var viewerFileTypesProvider = clone(viewerFileTypes.general);
-    forEach(viewerFileTypes[provider], function(values, key){
-        viewerFileTypesProvider[key] = viewerFileTypesProvider[key] || [];
-        viewerFileTypesProvider[key] = viewerFileTypesProvider[key].concat(values);
+    Object.keys(viewerFileTypes[provider]).forEach( key => {
+      viewerFileTypesProvider[key] = viewerFileTypesProvider[key] || [];
+      viewerFileTypesProvider[key] = viewerFileTypesProvider[key].concat(viewerFileTypes[key]);
     })
-    forEach(viewerFileTypesProvider, function (fileTypes, viewerType) {
-        if (fileTypes.indexOf(fileTypeLower) != -1) {
-            result = viewerType;
-        }
+
+    Object.keys(viewerFileTypesProvider).forEach(viewerType => {
+      if (viewerFileTypesProvider[viewerType].indexOf(fileTypeLower) != -1) {
+        result = viewerType;
+      }
     })
-    return result || 'other'
+    return fileTypeLower ? (result || 'other') : 'code'; // If there is no esxtension, it is code.
 }
