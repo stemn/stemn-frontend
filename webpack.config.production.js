@@ -15,6 +15,10 @@ const config = {
       'babel-polyfill',
       './app/renderer/menubar/index',
     ],
+    preview: [
+      'babel-polyfill',
+      './app/renderer/preview/index',
+    ],
   },
 
   output: {

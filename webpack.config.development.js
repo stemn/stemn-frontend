@@ -20,6 +20,11 @@ const config = {
       'webpack-hot-middleware/client?path=http://localhost:3001/__webpack_hmr',
       './app/renderer/menubar/index',
     ],
+    preview: [
+      'babel-polyfill',
+      'webpack-hot-middleware/client?path=http://localhost:3001/__webpack_hmr',
+      './app/renderer/preview/index',
+    ],
   },
 
   output: {

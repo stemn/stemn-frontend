@@ -4,6 +4,7 @@ import { app, ipcMain, dialog } from 'electron';
 //import jsonStorage from 'electron-json-storage';
 import { createMainWindow, showMainWindow } from './createMainWindow';
 import { createMenuBar, showMenuWindow } from './createMenuBarWindow';
+import { create as createPreview, show as showPreview } from './windows/preview.js';
 
 //import { authInit, authReducer } from './modules/auth/auth.js';
 import { initialise as wsInitialise, write as wsWrite } from './modules/websocket/websocket.js';
@@ -103,7 +104,6 @@ if(!squirrelStartup){
       // On OS X it's common to re-create a window in the app when the
       // dock icon is clicked and there are no other windows open.
       createMainWindow();
-
     });
 
     appIcon.on('click', (event, trayBounds) => {
@@ -114,6 +114,8 @@ if(!squirrelStartup){
     // init
     createMainWindow();
     store.dispatch(getProviderPath());
+
+    createPreview();
 
 
     // auto-updating
