@@ -4,44 +4,15 @@ import React from 'react';
 import classNames from 'classnames';
 import classes from './TimelineInner.css';
 
-import clickDrag from 'react-clickdrag';
 import moment from 'moment';
 import Popover from 'app/renderer/assets/other/react-popup';
+import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
+
 import * as stringConcat from 'app/shared/helpers/stringConcat';
 
 
-const PopupTrigger = React.createClass({
-  getInitialState () {
-    return {
-      isOpen: false,
-    }
-  },
-  toggle (toState) {
-    this.setState({ isOpen: toState === null ? !this.state.isOpen : toState })
-  },
-  render() {
-    const PopupTriggerStyles = {
-      width: '100%',
-      height: '100%'
-    }
-    return (
-      <Popover
-        isOpen={this.state.isOpen}
-        body={PopupContent(this.props.item)}
-        preferPlace = 'below'>
-        <div
-          onMouseOver={()=>this.toggle(true)}
-          onMouseOut={()=>this.toggle(false)}
-          style={PopupTriggerStyles}>
-        </div>
-      </Popover>
-    );
-  }
-})
-
 const PopupContent = (item) =>{
   const timeFromNow = moment(item.timestamp).fromNow();
-
   return (
     <div className={classes.popup + ' layout-row layout-align-start-center'}>
       {/*<img className={classes.popupImage} src={'https://stemn.com' + item.user.picture + '?size=thumb&crop=true'} />*/}
@@ -51,11 +22,10 @@ const PopupContent = (item) =>{
       </div>
 
     </div>
-    )
+  )
 }
 
-
-const TimelineDraggable = React.createClass({
+const Component = React.createClass({
   getInitialState () {
     return {
       lastPositionX: 0,
@@ -64,9 +34,6 @@ const TimelineDraggable = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-//    if(nextProps.dataDrag.moveDeltaX > 10){
-//      console.log('MOVEIT');
-//    }
     if(nextProps.dataDrag.isMoving) {
       this.setState({currentX: this.state.lastPositionX + nextProps.dataDrag.moveDeltaX,});
     }
@@ -76,20 +43,20 @@ const TimelineDraggable = React.createClass({
   },
 
   render() {
-    const { numberToShow, TimelineActions, timeline, project, page, onSelectFn} = this.props;
-
-//    const translation = 'translateX('+this.state.currentX+'px)';
-    const translation = 'translateX('+page*100+'%)';
-
-    const Items = timeline.data.map((item, index)=> {
+    const { numberToShow, TimelineActions, selected, page, onSelectFn} = this.props;
+    const translation = 'translateX(' + page * 100 + '%)';
+    const Items = items.map((item, index)=> {
       const percentage = 100 - (index) * (100 / numberToShow);
       const posStyle = {left: percentage+'%'};
       return (
         <a key={item._id}
-          className={classNames(classes.dot, {[classes.active]: timeline.selected._id == item._id})}
+          className={classNames(classes.dot, {[classes.active]: selected == item._id})}
           style={posStyle}
-          onClick={()=>onSelectFn({projectId: project._id, selected: item})}>
-          <PopupTrigger item={item} />
+          onClick={()=>onSelect(item)}>
+          <PopoverMenu preferPlace="bottom" trigger="hover">
+            <div style={{width: '100%', height: '100%'}}></div>
+            {PopupContent(item)}
+          </PopoverMenu>
         </a>
       )
     });
@@ -101,7 +68,5 @@ const TimelineDraggable = React.createClass({
     )
   }
 });
-
-const Component = clickDrag(TimelineDraggable, {touch: true});
 
 export default Component

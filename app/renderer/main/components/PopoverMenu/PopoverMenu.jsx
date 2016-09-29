@@ -11,20 +11,46 @@ export default React.createClass({
     this.setState({ isOpen: toState === null ? !this.state.isOpen : toState })
   },
   render() {
-    const disableClickClose = this.props.disableClickClose;
-    const popoverBody = (<div onClick={()=>disableClickClose ? null : this.toggle(false)}>{this.props.children[1]}</div>)
+    const { preferPlace, trigger, disableClickClose, children, className } = this.props;
+
+    const contentElement = (
+      <div onClick={()=>disableClickClose ? null : this.toggle(false)}>
+        {this.props.children[1]}
+      </div>
+    )
+
+    const getTriggerElement = () => {
+      if(trigger == 'hover'){
+        return (
+          <div
+            className={className}
+            onMouseOver={()=>this.toggle(true)}
+            onMouseOut={()=>this.toggle(false)}>
+            {children[0]}
+          </div>
+        )
+      }
+      else{
+        return (
+          <div
+            className={className}
+            onClick={()=>this.toggle(null)}>
+            {children[0]}
+          </div>
+        )
+      }
+    }
+
     return (
       <Popover
         isOpen={this.state.isOpen}
-        body={popoverBody}
+        body={contentElement}
         onOuterAction={()=>this.toggle(false)}
-        preferPlace = {this.props.preferPlace || 'above'}>
-        <div
-          className={this.props.className}
-          onClick={()=>this.toggle(null)}>
-          {this.props.children[0]}
-        </div>
+        preferPlace = {preferPlace || 'above'}>
+        {getTriggerElement()}
       </Popover>
     );
   }
 })
+
+

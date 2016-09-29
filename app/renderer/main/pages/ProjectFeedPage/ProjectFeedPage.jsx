@@ -34,7 +34,7 @@ import DragResize         from 'app/renderer/main/modules/DragResize/DragResize.
 const onMount = (nextProps, prevProps) => {
   if(nextProps.project && nextProps.project.data && nextProps.project.data.remote.connected){
     if(!prevProps || nextProps.project.data._id !== prevProps.project.data._id){
-      nextProps.TimelineActions.fetchTimeline({stub: nextProps.project.data._id})
+      nextProps.sidebarTimelineActions.fetchTimeline({stub: nextProps.project.data._id})
     }
   }
 }
@@ -44,6 +44,13 @@ export const Component = React.createClass({
   // Mounting
   componentWillMount() { onMount(this.props) },
   componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
+
+  selectTimelineItem(item){
+    this.props.sidebarTimelineActions({
+      projectId: this.props.project.data._id,
+      selected : item
+    })
+  },
 
   render(){
     const { timeline, project } = this.props;
@@ -94,7 +101,7 @@ export const Component = React.createClass({
 
     const getFilesSection = () => {
 
-      if(this.props.timeline.selected.data.items){
+      if(timeline.selected.data.items){
         return this.props.timeline.selected.data.items.map((file)=>{
           const filePrevious = file.data.previousRevisionId ? u( {data: {revisionId : file.data.previousRevisionId}}, file) : null;
           return (
@@ -120,7 +127,13 @@ export const Component = React.createClass({
     if(project.data.remote.connected){
       return (
         <div className="layout-column flex rel-box">
-          <Timeline project={this.props.project.data} />
+
+          <Timeline
+            items={timeline.data}
+            selected={timeline.selected._id}
+            onSelect={this.selectTimelineItem}
+          />
+
           <div className="layout-row flex">
             <div className="layout-column">
               <ContentSidebar className="flex">
@@ -159,7 +172,7 @@ function mapStateToProps({sidebarTimeline, projects}, {params}) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    TimelineActions: bindActionCreators(SidebarTimelineActions, dispatch)
+    sidebarTimelineActions: bindActionCreators(SidebarTimelineActions, dispatch)
   }
 }
 

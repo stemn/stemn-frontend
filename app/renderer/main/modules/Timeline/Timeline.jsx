@@ -2,9 +2,6 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-// Container Actions
-import * as SidebarTimelineActions from 'app/shared/actions/sidebarTimeline';
-
 // Component Core
 import React from 'react';
 
@@ -18,9 +15,7 @@ import MoreButton from './MoreButton/MoreButton.jsx';
 import TimelineInner from './TimelineInner/TimelineInner.jsx';
 
 
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 export const Component = React.createClass({
   getInitialState () {
@@ -45,14 +40,10 @@ export const Component = React.createClass({
     }
   },
   render() {
-
-    const { children } = this.props;
-
+    const { items, selected, onSelect } = this.props;
     const numberToShow = 15;
-
-    const moreLeft  = this.props.timeline && this.props.timeline.data ? this.state.page < this.props.timeline.data.length / numberToShow - 1 : false;
+    const moreLeft  = items ? this.state.page < items.length / numberToShow - 1 : false;
     const moreRight = this.state.page > 0;
-
 
     return (
       <div className={styles.timeline +' layout-row'}>
@@ -65,13 +56,13 @@ export const Component = React.createClass({
           </div>
           <div className={styles.dotsOverflow}>
             <div className={styles.dotsPosContainer}>
-              {this.props.timeline && this.props.timeline.data ?
-                <TimelineInner
-                  timeline={this.props.timeline}
-                  numberToShow={numberToShow}
-                  onSelectFn={this.props.sidebarTimelineActions}
-                  page={this.state.page}
-                  project={this.props.project} /> : '' }
+              <TimelineInner
+                numberToShow={numberToShow}
+                onSelect={onSelect}
+                page={this.state.page}
+                items={items}
+                selected={selected}>
+              </TimelineInner>
             </div>
           </div>
         </div>
@@ -80,23 +71,14 @@ export const Component = React.createClass({
   }
 });
 
-
-
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({ sidebarTimeline }, {project}) {
-  return {
-    timeline: sidebarTimeline[project._id],
-    project
-  };
+function mapStateToProps() {
+  return {}
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    sidebarTimelineActions: bindActionCreators(SidebarTimelineActions, dispatch)
-  }
+  return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);
