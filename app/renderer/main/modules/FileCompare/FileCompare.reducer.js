@@ -12,6 +12,8 @@ export default function reducer(state = initialState, action = {}) {
           mode: 'single',
           previewType1: action.payload.previewType1,
           previewType2: action.payload.previewType2,
+          file1: action.payload.file1,
+          file2: action.payload.file2,
         }
       })
     case 'FILE_COMPARE/CHANGE_MODE':

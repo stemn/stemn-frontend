@@ -26,6 +26,8 @@ import changes      from '../../renderer/main/modules/Changes/Changes.reducer.js
 import mentions     from '../../renderer/main/modules/Mentions/Mentions.reducer.js';
 import files        from '../../renderer/main/modules/Files/Files.reducer.js';
 
+import electronWindows from '../modules/ElectronWindows/ElectronWindows.reducer.js';
+
 export default function getRootReducer(scope = 'main') {
   let reducers = {
     system,
@@ -50,8 +52,16 @@ export default function getRootReducer(scope = 'main') {
     comments,
     toasts,
     fileCompare,
-    mentions
+    mentions,
+    electronWindows
   };
+
+  if(scope === 'main') {
+    reducers = {
+      ...reducers,
+      electronWindows
+    };
+  }
 
   if (scope === 'renderer') {
     reducers = {

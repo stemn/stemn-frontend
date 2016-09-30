@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as FileCompareActions from '../FileCompare.actions.js';
+import * as ElectronWindowsActions from 'app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
 
 // Component Core
 import React from 'react';
@@ -19,10 +20,7 @@ import {getCompareModes}  from '../FileCompare.utils.js';
 import {MdMoreHoriz}      from 'react-icons/lib/md';
 
 
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-
 
 export const Component = React.createClass({
   setCompareMode(mode){
@@ -30,6 +28,19 @@ export const Component = React.createClass({
       compareId: this.props.compareId,
       mode
     })
+  },
+  popoutPreview(mode){
+    this.props.electronWindowsActions.create({
+      type: 'PREVIEW',
+      props: {
+        fileId: this.props.fileCompare.file1.fileId,
+        revisionId: this.props.fileCompare.file1.revisionId,
+      }
+    })
+
+    setTimeout(()=>{
+      this.props.electronWindowsActions.parse();
+    }, 100)
   },
   render() {
     const { fileCompare } = this.props;
@@ -46,6 +57,7 @@ export const Component = React.createClass({
           <a onClick={this.displayFileInfo}>Discard Changes</a>
           <a onClick={this.displayFileInfo}>Open in explorer</a>
           <a onClick={this.displayFileInfo}>File Info</a>
+          <a onClick={this.popoutPreview}>Preview</a>
         </div>
       </PopoverMenu>
     );
@@ -53,10 +65,7 @@ export const Component = React.createClass({
 });
 
 
-
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps({fileCompare}, {compareId}) {
   return {
@@ -67,6 +76,7 @@ function mapStateToProps({fileCompare}, {compareId}) {
 function mapDispatchToProps(dispatch) {
   return {
     fileCompareActions: bindActionCreators(FileCompareActions, dispatch),
+    electronWindowsActions: bindActionCreators(ElectronWindowsActions, dispatch),
   }
 }
 

@@ -4,7 +4,6 @@ import { app, ipcMain, dialog } from 'electron';
 //import jsonStorage from 'electron-json-storage';
 import { createMainWindow, showMainWindow } from './createMainWindow';
 import { createMenuBar, showMenuWindow } from './createMenuBarWindow';
-import { create as createPreview } from './windows/preview.js';
 
 //import { authInit, authReducer } from './modules/auth/auth.js';
 import { initialise as wsInitialise, write as wsWrite } from './modules/websocket/websocket.js';
@@ -114,9 +113,6 @@ if(!squirrelStartup){
     // init
     createMainWindow();
     store.dispatch(getProviderPath());
-
-    createPreview({uri: '/preview/57ec666326c9751f01de62da/57c3f21fa0a6a69629f7965d'});
-
 
     // auto-updating
     setTimeout(() => {

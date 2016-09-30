@@ -10,6 +10,8 @@ export function init({compareId, mode, provider, file1, file2}) {
       compareId,
       previewType1,
       previewType2,
+      file1,
+      file2
     },
   };
 }
