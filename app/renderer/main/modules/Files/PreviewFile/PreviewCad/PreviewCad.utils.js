@@ -14,7 +14,7 @@ export default library
 function render({projectId, fileId, revisionId}){
   return http({
     method: 'GET',
-    url: 'http://localhost:3000/api/v1/remote/render/' + projectId + '/' + fileId,
+    url: `https://${process.env.API_SERVER}/api/v1/remote/render/${projectId}/${fileId}`,
     params: {
       revisionId: revisionId
     }
@@ -24,7 +24,7 @@ function render({projectId, fileId, revisionId}){
 function authenticate(){
   return http({
     method: 'POST',
-    url: 'http://localhost:3000/api/v1/auth/autodesk',
+    url: `https://${process.env.API_SERVER}/api/v1/auth/autodesk`,
   }).then(function(response){
     library.accessToken = response.data.token;
     return response

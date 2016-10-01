@@ -60,7 +60,7 @@ export const Component = React.createClass({
   },
   userData(search, callback) {
     return http({
-      url: 'http://localhost:3000/api/v1/search',
+      url: `https://${process.env.API_SERVER}/api/v1/search`,
       method: 'GET',
       params: {
         type:'user',

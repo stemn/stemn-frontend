@@ -6,7 +6,7 @@ export function fetchFiles({projectId, path, options}) {
     http: true,
     payload: {
       method: 'GET',
-      url: `http://localhost:3000/api/v1/sync/listFolder/${projectId}/${path}`
+      url: `https://${process.env.API_SERVER}/api/v1/sync/listFolder/${projectId}/${path}`
     },
     meta: {
       key: `${projectId}-${path}`,
@@ -19,7 +19,7 @@ export function exploreFolder({folderId, provider}) {
     type: 'FILE_LIST/EXPLORE_FOLDER',
     payload: http({
       method: 'GET',
-      url: `http://localhost:3000/api/v1/remote/explore/${provider}/${folderId}`
+      url: `https://${process.env.API_SERVER}/api/v1/remote/explore/${provider}/${folderId}`
     }),
     meta: {
       key: `${provider}-${folderId}`,

@@ -17,7 +17,7 @@ export function newTask({boardId, task}) {
     type: 'TASKS/NEW_TASK',
     payload: http({
       method: 'POST',
-      url: `http://localhost:3000/api/v1/boards/${boardId}/tasks`,
+      url: `https://${process.env.API_SERVER}/api/v1/boards/${boardId}/tasks`,
       data: Object.assign({}, taskDefault, task)
     }),
     meta: {
@@ -32,7 +32,7 @@ export function getBoard({projectId}){
     type: 'TASKS/GET_BOARD',
     payload: http({
       method: 'GET',
-      url: `http://localhost:3000/api/v1/boards`,
+      url: `https://${process.env.API_SERVER}/api/v1/boards`,
       params: {
         project: projectId
       }
@@ -48,7 +48,7 @@ export function getEvents({taskId}){
     type: 'TASKS/GET_EVENTS',
     payload: http({
       method: 'GET',
-      url: `http://localhost:3000/api/v1/tasks/${taskId}/events`,
+      url: `https://${process.env.API_SERVER}/api/v1/tasks/${taskId}/events`,
     }),
     meta: {
       cacheKey: taskId
@@ -61,7 +61,7 @@ export function updateBoard({board}){
     type: 'TASKS/UPDATE_BOARD',
     payload: http({
       method: 'PUT',
-      url: `http://localhost:3000/api/v1/boards/${board._id}`,
+      url: `https://${process.env.API_SERVER}/api/v1/boards/${board._id}`,
       data: board
     }),
     meta: {
@@ -75,7 +75,7 @@ export function getTask({taskId}) {
     type: 'TASKS/GET_TASK',
     httpPackage: {
       endpoint: 'api/v1/tasks',
-      url: `http://localhost:3000/api/v1/tasks`,
+      url: `https://${process.env.API_SERVER}/api/v1/tasks`,
       method: 'GET',
       params: {
         'ids' : taskId
@@ -97,7 +97,7 @@ export function updateTask({task}) {
     },
     payload: {
       method: 'PUT',
-      url: `http://localhost:3000/api/v1/tasks/${task._id}`,
+      url: `https://${process.env.API_SERVER}/api/v1/tasks/${task._id}`,
       data: task
     },
     meta: {
@@ -116,7 +116,7 @@ export function updateGroup({group}) {
     },
     payload: {
       method: 'PUT',
-      url: `http://localhost:3000/api/v1/groups/${group._id}`,
+      url: `https://${process.env.API_SERVER}/api/v1/groups/${group._id}`,
       data: group
     },
     meta: {
@@ -130,7 +130,7 @@ export function deleteTask({boardId, taskId}) {
     type: 'TASKS/DELETE_TASK',
     payload: http({
       method: 'DELETE',
-      url: `http://localhost:3000/api/v1/tasks/${taskId}`,
+      url: `https://${process.env.API_SERVER}/api/v1/tasks/${taskId}`,
     }),
     meta: {
       taskId,
@@ -149,7 +149,7 @@ export function moveTask({boardId, task, destinationTask, destinationGroup, afte
         type: 'TASKS/MOVE_TASK',
         payload: http({
           method: 'POST',
-          url: `http://localhost:3000/api/v1/tasks/move`,
+          url: `https://${process.env.API_SERVER}/api/v1/tasks/move`,
           data: {
             board: boardId,
             task,
@@ -207,7 +207,7 @@ export function moveGroup({boardId, group, destinationGroup, after, save}) {
         type: 'TASKS/MOVE_TASK',
         payload: http({
           method: 'POST',
-          url: `http://localhost:3000/api/v1/groups/move`,
+          url: `https://${process.env.API_SERVER}/api/v1/groups/move`,
           data: {
             board: boardId,
             group,
@@ -259,7 +259,7 @@ export function newGroup({boardId, group}) {
         type: 'TASKS/NEW_GROUP',
         payload: http({
           method: 'POST',
-          url: `http://localhost:3000/api/v1/boards/${boardId}/groups`,
+          url: `https://${process.env.API_SERVER}/api/v1/boards/${boardId}/groups`,
           data: group
         }),
         meta: {
@@ -275,7 +275,7 @@ export function deleteGroup({boardId, groupId}) {
     type: 'TASKS/DELETE_GROUP',
     payload: http({
       method: 'DELETE',
-      url: `http://localhost:3000/api/v1/boards/${boardId}/groups/${groupId}`,
+      url: `https://${process.env.API_SERVER}/api/v1/boards/${boardId}/groups/${groupId}`,
     }),
     meta: {
       groupId,

@@ -6,7 +6,7 @@ export function loadSuggestions(value) {
     type:'FETCH_SUGGESTIONS',
     http: true,
     payload: {
-      url: 'http://localhost:3000/api/v1/search',
+      url: `https://${process.env.API_SERVER}/api/v1/search`,
       method: 'GET',
       params: {
         type:'user',

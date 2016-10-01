@@ -1,7 +1,7 @@
 export const oauthCreds = {
   facebook: {
     url                   : 'https://www.facebook.com/dialog/oauth',
-    postUrl               : 'http://localhost:3000/api/v1/auth/facebook',
+    postUrl               : `https://${process.env.API_SERVER}/api/v1/auth/facebook`,
     params                : {
       redirect_uri        : 'https://stemn.com/auth/facebook',
       client_id           : '710281375734499',
@@ -9,7 +9,7 @@ export const oauthCreds = {
   },
   google: {
     url                   : 'https://accounts.google.com/o/oauth2/v2/auth',
-    postUrl               : 'http://localhost:3000/api/v1/auth/google',
+    postUrl               : `https://${process.env.API_SERVER}/api/v1/auth/google`,
     params                : {
       redirect_uri        : 'https://stemn.com/auth/google',
       response_type       : 'token',
@@ -19,7 +19,7 @@ export const oauthCreds = {
   },
   linkedin: {
     url                   : 'https://www.linkedin.com/oauth/v2/authorization',
-    postUrl               : 'http://localhost:3000/api/v1/auth/linkedin',
+    postUrl               : `https://${process.env.API_SERVER}/api/v1/auth/linkedin`,
     params                : {
       response_type       : 'code',
       redirect_uri        : 'https://stemn.com/auth/linkedin',
@@ -29,7 +29,7 @@ export const oauthCreds = {
   },
   dropbox: {
     url                   : 'https://www.dropbox.com/oauth2/authorize',
-    postUrl               : 'http://localhost:3000/api/v1/auth/dropbox',
+    postUrl               : `https://${process.env.API_SERVER}/api/v1/auth/dropbox`,
     params                : {
       redirect_uri        : 'https://stemn.com/auth/dropbox',
       response_type       : 'token',

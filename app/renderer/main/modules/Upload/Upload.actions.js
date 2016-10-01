@@ -8,7 +8,7 @@ export function upload({cacheKey, files}) {
     type: 'UPLOAD/UPLOAD',
     payload: http({
       method: 'POST',
-      url: 'http://localhost:3000/api/v1/uploads',
+      url: `https://${process.env.API_SERVER}/api/v1/uploads`,
       data: data,
       progressUpload: function(progressEvent) {
         var percentCompleted = progressEvent.loaded / progressEvent.total;
