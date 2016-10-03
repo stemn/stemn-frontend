@@ -12,8 +12,10 @@ export function create({type, props}) {
 }
 
 export function parse() {
-  return {
-    type: 'ELECTRON_WINDOWS/PARSE',
-    payload: {}
+  return (dispatch, getState) => {
+    dispatch({
+      type: 'ELECTRON_WINDOWS/PARSE',
+      payload: getState().electronWindows.windows
+    })
   }
 }

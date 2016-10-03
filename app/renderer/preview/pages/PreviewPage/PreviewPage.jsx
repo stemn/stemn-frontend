@@ -12,6 +12,7 @@ import classNames from 'classnames';
 
 // Actions
 import * as FilesActions from 'app/renderer/main/modules/Files/Files.actions.js';
+import * as SyncTimelineActions from 'app/shared/modules/SyncTimeline/SyncTimeline.actions.js';
 
 // Sub Components
 import FileCompare        from 'app/renderer/main/modules/FileCompare/FileCompare.jsx';
@@ -24,23 +25,46 @@ import classes from './PagePreview.css';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
+const onMount = (nextProps, prevProps) => {
+  const { revisionId, fileId} = nextProps.params;
+
+  // If we do not yet have the meta, get it:
+  if(!nextProps.fileMeta.data && !nextProps.fileMeta.loading
+     && fileId){
+    nextProps.filesActions.getMeta({fileId, revisionId});
+  }
+
+  // If we don't have the timeline (and we can get it), get it:
+  if(!nextProps.syncTimeline.loading && nextProps.fileMeta && nextProps.fileMeta.data &&
+     (!prevProps || nextProps.fileMeta.data._id != prevProps.fileMeta.data._id)){
+    nextProps.syncTimelineActions.fetchTimeline({
+      projectId: nextProps.fileMeta.data.project._id,
+      fileId: nextProps.fileMeta.data._id
+    })
+  }
+}
+
+//selected={timeline && timeline.selected ? timeline.selected._id : ''}
 export const Component = React.createClass({
-  componentWillMount() {
-    const { revisionId, fileId} = this.props.params;
-    if(fileId){
-      this.props.filesActions.getMeta({fileId, revisionId})
-    }
-  },
+
+  // Mounting
+  componentWillMount() { onMount(this.props) },
+  componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
+
   clickCrumb({file}){
     console.log(file);
   },
+  clickTimeline(response){
+    console.log(response);
+  },
   render() {
-    const { fileMeta } = this.props;
-    console.log(fileMeta);
+    const { fileMeta, syncTimeline } = this.props;
+
+
     return (
       <div className="layout-column flex">
         <div className={classes.header}>
-          <FileBreadCrumbs meta={fileMeta.data} clickFn={this.clickCrumb}/>
+          {fileMeta && fileMeta.data ? <FileBreadCrumbs meta={fileMeta.data} clickFn={this.clickCrumb}/> : ''}
         </div>
         <div className="layout-row flex">
           <div className="layout-column flex">
@@ -54,7 +78,9 @@ export const Component = React.createClass({
                 </div>
               : ''
             }
-            <Timeline className={classes.timeline}/>
+            <Timeline className={classes.timeline}
+              items={syncTimeline && syncTimeline.data ? syncTimeline.data : []}
+              onSelect={this.clickTimeline} />
           </div>
           <DragResize side="left" width="450" widthRange={[0, 450]} className="layout-column">
             <aside className={classes.sidebar + ' layout-column flex'}>
@@ -66,23 +92,23 @@ export const Component = React.createClass({
     );
   }
 });
-//
-//          items={timeline.data}
-//          selected={timeline.selected._id}
-//          onSelect={this.selectTimelineItem}
+
+
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps({files}, {params}) {
+function mapStateToProps({files, syncTimeline}, {params}) {
   const cacheKey = `${params.fileId}-${params.revisionId}`
   return {
-    fileMeta: files.fileMeta[cacheKey]
+    fileMeta: files.fileMeta[cacheKey],
+    syncTimeline: syncTimeline[params.fileId]
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     filesActions: bindActionCreators(FilesActions, dispatch),
+    syncTimelineActions: bindActionCreators(SyncTimelineActions, dispatch),
   }
 }
 

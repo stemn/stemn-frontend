@@ -1,7 +1,7 @@
 import { app, BrowserWindow, Menu, shell } from 'electron';
 import path from 'path';
 
-const mainHtml = path.join(__dirname, '../../renderer/assets/html/preview.html');
+const mainHtml = path.join(__dirname, '../../../../renderer/assets/html/preview.html');
 
 export const create = function createWindow({ uri = '/' } = {}) {
   let browserWindow = new BrowserWindow({

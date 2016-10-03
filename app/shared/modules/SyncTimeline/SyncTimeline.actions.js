@@ -4,24 +4,27 @@ export function selectTimelineItem({projectId, selected}) {
     payload: {
       projectId,
       selected
+    },
+    meta: {
+      cacheKey: projectId
     }
   }
 }
 
-
-export function fetchTimeline({stub}) {
+export function fetchTimeline({projectId, fileId}) {
   return {
     type:'TIMELINE/FETCH_TIMELINE',
     http: true,
     payload: {
       method: 'GET',
-      url: `http://localhost:3000/api/v1/sync/timeline/${stub}`,
+      url: `http://localhost:3000/api/v1/sync/timeline/${projectId}`,
       params: {
-        type: 'all'
+        type: 'all',
+        file: fileId
       },
-      meta: {
-        stub
-      }
+    },
+    meta: {
+      cacheKey: fileId ? fileId : projectId
     }
   }
 }

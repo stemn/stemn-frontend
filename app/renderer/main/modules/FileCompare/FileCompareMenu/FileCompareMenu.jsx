@@ -37,7 +37,6 @@ export const Component = React.createClass({
         revisionId: this.props.fileCompare.file1.revisionId,
       }
     })
-
     setTimeout(()=>{
       this.props.electronWindowsActions.parse();
     }, 100)

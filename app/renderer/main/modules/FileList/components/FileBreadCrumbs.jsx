@@ -15,7 +15,7 @@ export default React.createClass({
       if(meta.parents && meta.parents.length > 0){
         let crumbs = meta.parents.map((parent, idx)=>{
           return (
-            <span>
+            <span key={parent._id}>
               <a onClick={()=>clickFn({file: parent})}>{middleConcat(parent.name, 30, 0.8)}</a>
               <span> / </span>
             </span>
