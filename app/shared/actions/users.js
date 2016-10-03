@@ -4,7 +4,7 @@ export function getUser({userId}) {
     http: true,
     payload: {
       method: 'GET',
-      url: `http://localhost:3000/api/v1/users/${userId}`
+      url: `https://${process.env.API_SERVER}/api/v1/users/${userId}`
     },
     meta: {
       cacheKey: userId
