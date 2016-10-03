@@ -1,7 +1,3 @@
-// Container Core
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
 // Component Core
 import React from 'react';
 
@@ -17,7 +13,7 @@ import TimelineInner from './TimelineInner/TimelineInner.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
-export const Component = React.createClass({
+export default React.createClass({
   getInitialState () {
     return {
       isOpen: false,
@@ -74,15 +70,3 @@ export const Component = React.createClass({
     );
   }
 });
-
-///////////////////////////////// CONTAINER /////////////////////////////////
-
-function mapStateToProps() {
-  return {}
-}
-
-function mapDispatchToProps(dispatch) {
-  return {}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Component);

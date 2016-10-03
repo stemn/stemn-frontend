@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as SidebarTimelineActions from 'app/shared/actions/sidebarTimeline';
+import * as SyncTimelineActions from 'app/shared/modules/SyncTimeline/SyncTimeline.actions.js';
 
 // Component Core
 import React from 'react';
@@ -13,11 +13,11 @@ import classNames from 'classnames';
 import feedPageStyles from './ProjectFeedPage.css';
 
 // Sub Components
-import u                  from 'updeep';
+import i                  from 'icepick';
 import { Link }           from 'react-router';
 import Popover            from 'app/renderer/assets/other/react-popup';
 import Timeline           from 'app/renderer/main/modules/Timeline/Timeline.jsx';
-import SidebarTimeline    from 'app/renderer/main/containers/SidebarTimeline';
+import SidebarTimeline    from 'app/shared/modules/SyncTimeline/SidebarTimeline/SidebarTimeline.jsx';
 import FileCompare        from 'app/renderer/main/modules/FileCompare/FileCompare.jsx';
 import FileCompareHeader  from 'app/renderer/main/modules/FileCompare/FileCompareHeader/FileCompareHeader.jsx';
 import FileCompareMenu    from 'app/renderer/main/modules/FileCompare/FileCompareMenu/FileCompareMenu.jsx';
@@ -26,15 +26,12 @@ import TogglePanel        from 'app/renderer/main/components/Panels/TogglePanel/
 import DragResize         from 'app/renderer/main/modules/DragResize/DragResize.jsx';
 
 
-
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 const onMount = (nextProps, prevProps) => {
   if(nextProps.project && nextProps.project.data && nextProps.project.data.remote.connected){
     if(!prevProps || nextProps.project.data._id !== prevProps.project.data._id){
-      nextProps.sidebarTimelineActions.fetchTimeline({stub: nextProps.project.data._id})
+      nextProps.syncTimelineActions.fetchTimeline({projectId: nextProps.project.data._id})
     }
   }
 }
@@ -46,7 +43,7 @@ export const Component = React.createClass({
   componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
 
   selectTimelineItem(item){
-    this.props.sidebarTimelineActions.selectTimelineItem({
+    this.props.syncTimelineActions.selectTimelineItem({
       projectId: this.props.project.data._id,
       selected : item
     })
@@ -54,9 +51,10 @@ export const Component = React.createClass({
 
   render(){
     const { timeline, project } = this.props;
-    const filePrevious = timeline && timeline.selected.data && timeline.selected.data.previousRevisionId ? u( {data: {revisionId : timeline.selected.data.previousRevisionId}}, timeline.selected) : null;
+    const filePrevious = timeline && timeline.selected && timeline.selected.data && timeline.selected.data.previousRevisionId
+    ? i.assocIn(timeline.selected, ['data', 'revisionId'], timeline.selected.data.previousRevisionId)
+    : null;
     const baseLink = `project/${project && project.data ? project.data._id : ''}`
-
 
     const getDetailSection = () => {
       if(this.props.timeline && this.props.timeline.selected && this.props.timeline.selected.data){
@@ -127,18 +125,20 @@ export const Component = React.createClass({
     if(project.data.remote.connected){
       return (
         <div className="layout-column flex rel-box">
-
           <Timeline
             items={timeline && timeline.data ? timeline.data : []}
             selected={timeline && timeline.selected ? timeline.selected._id : ''}
             onSelect={this.selectTimelineItem}
           />
-
-
           <div className="layout-row flex">
             <div className="layout-column">
               <ContentSidebar className="flex">
-                <SidebarTimeline project={this.props.project.data}/>
+                <SidebarTimeline
+                  items={timeline && timeline.data ? timeline.data : []}
+                  selected={timeline && timeline.selected ? timeline.selected._id : ''}
+                  onSelect={this.selectTimelineItem}
+                  loading={timeline ? timeline.loading : true}
+                />
               </ContentSidebar>
             </div>
             <div className="layout-column flex">
@@ -159,21 +159,20 @@ export const Component = React.createClass({
   }
 })
 
-/////////////////////////////////////////////////////////////////////////////
-///////////////////////////////// CONTAINER /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({sidebarTimeline, projects}, {params}) {
+///////////////////////////////// CONTAINER /////////////////////////////////
+
+function mapStateToProps({syncTimeline, projects}, {params}) {
   const project = projects.data[params.stub];
   return {
-    timeline: sidebarTimeline[project.data._id],
+    timeline: syncTimeline[project.data._id],
     project: project
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    sidebarTimelineActions: bindActionCreators(SidebarTimelineActions, dispatch)
+    syncTimelineActions: bindActionCreators(SyncTimelineActions, dispatch)
   }
 }
 

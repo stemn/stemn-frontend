@@ -5,7 +5,6 @@ import system from './system';
 import header from './header';
 import auth from './auth';
 import sidebar from './sidebar';
-import sidebarTimeline from './sidebarTimeline';
 import settings from './settings';
 import project from './project';
 import projectSettings from './projectSettings';
@@ -26,7 +25,8 @@ import changes      from '../../renderer/main/modules/Changes/Changes.reducer.js
 import mentions     from '../../renderer/main/modules/Mentions/Mentions.reducer.js';
 import files        from '../../renderer/main/modules/Files/Files.reducer.js';
 
-import electronWindows from '../modules/ElectronWindows/ElectronWindows.reducer.js';
+import electronWindows  from '../modules/ElectronWindows/ElectronWindows.reducer.js';
+import syncTimeline     from '../modules/SyncTimeline/SyncTimeline.reducer.js';
 
 export default function getRootReducer(scope = 'main') {
   let reducers = {
@@ -35,7 +35,7 @@ export default function getRootReducer(scope = 'main') {
     changes,
     auth,
     sidebar,
-    sidebarTimeline,
+    syncTimeline,
     settings,
     project,
     projectSettings,
@@ -59,7 +59,6 @@ export default function getRootReducer(scope = 'main') {
   if(scope === 'main') {
     reducers = {
       ...reducers,
-      electronWindows
     };
   }
 

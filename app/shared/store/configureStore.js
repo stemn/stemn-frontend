@@ -10,12 +10,12 @@ import getRootReducer from '../reducers';
 import forwardToMain from './middleware/forwardToMain';
 import forwardToRenderer from './middleware/forwardToRenderer';
 import forwardToRendererWindow from './middleware/forwardToRendererWindow';
-//import triggerAlias from './middleware/triggerAlias';
 import routerFix from './middleware/routerFix';
 import httpPackage from './middleware/httpPackage';
 import transformHttp from './middleware/transformHttp';
 import throttle from './middleware/throttle';
 import errorToast from './middleware/errorToast';
+import electronWindows from '../modules/ElectronWindows/ElectronWindows.middleware.js';
 
 export default function configureStore(initialState, scope = 'main') {
   const logger = createLogger({
@@ -49,6 +49,7 @@ export default function configureStore(initialState, scope = 'main') {
       httpPackage,
       transformHttp,
       promise(),
+      electronWindows,
 
 //      triggerAlias,
       forwardToRenderer,
