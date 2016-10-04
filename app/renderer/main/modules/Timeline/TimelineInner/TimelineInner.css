@@ -1,4 +1,4 @@
-@value primary, border1 from "app/renderer/assets/css/themes/standard.css";
+@value primary, border1, timeline-main, timeline-bg from "app/renderer/assets/css/themes/standard.css";
 
 .dots{
   transition: 0.6s cubic-bezier(0.69, 0.01, 0.17, 0.99) transform;
@@ -12,8 +12,8 @@
   display: block;
   height: 16px;
   width: 16px;
-  background: rgb(153, 153, 153);
-  border: 2px solid #f8f8f8;
+  background: timeline-main;
+  border: 2px solid timeline-bg;
   transition: 0.1s ease all;
   top: 50%;
   transform: translate(-50%, -50%);

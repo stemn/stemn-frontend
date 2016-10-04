@@ -72,7 +72,6 @@ export function mentionTasksModal({projectId, mentions}) {
 }
 
 export function mentionTasks({projectId, mentions}) {
-  console.log(projectId, mentions);
   return {
     type:'CHANGES/MENTION_TASKS',
     payload: {

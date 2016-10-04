@@ -1,11 +1,12 @@
+@value timeline-main from "app/renderer/assets/css/themes/standard.css";
 
 .moreButton{
   width: 18px;
   height: 18px;
   border-radius: 50%;
   position: absolute;
-  background: rgb(153, 153, 153);
-  margin-top: 2px;
+  background: timeline-main;
+  margin-top: 1px;
   line-height: 16px;
   text-align: center;
   z-index: 2;

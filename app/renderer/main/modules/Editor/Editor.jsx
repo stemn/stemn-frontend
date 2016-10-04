@@ -77,8 +77,11 @@ export const Component = React.createClass({
     if(type == 'user'){
       return "@" + name
     }
-    else{
-      return "#" + name
+    else if(type == 'task-related'){
+      return `#${name}`
+    }
+    else if(type == 'task-complete'){
+      return `#${name} (completed)`
     }
   },
   userRenderSuggestion: (entry, search, highlightedDisplay, index) => {
@@ -153,7 +156,14 @@ export const Component = React.createClass({
         />
         <Mention
           trigger="#"
-          type="task"
+          type="task-related"
+          data={this.userData}
+          renderSuggestion={this.taskRenderSuggestion}
+          style={{background: 'rgba(68, 211, 95, 0.3)'}}
+        />
+        <Mention
+          trigger="#"
+          type="task-complete"
           data={this.userData}
           renderSuggestion={this.taskRenderSuggestion}
           style={{background: 'rgba(68, 211, 95, 0.3)'}}

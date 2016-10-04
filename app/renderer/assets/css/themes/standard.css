@@ -7,6 +7,8 @@
 @value warn: rgb(244,67,54);
 @value warn-2: rgb(219, 59, 47);
 
+@value timeline-main: rgb(188, 188, 188);
+@value timeline-bg: #f8f8f8;
 
 
 @value border1: rgba(0, 0, 0, 0.1);

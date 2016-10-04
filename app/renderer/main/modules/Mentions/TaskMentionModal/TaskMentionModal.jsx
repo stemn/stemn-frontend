@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 import moment from 'moment';
 import { actions } from 'react-redux-form';
+import getUuid from 'app/shared/helpers/getUuid.js';
 
 // Styles
 import classNames from 'classnames';
@@ -27,25 +28,13 @@ const onMount = (nextProps, prevProps) => {
     }
   }
 }
-
 export const Component = React.createClass({
 
   // Mounting
   componentWillMount() { onMount(this.props) },
   componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
   submit(){
-    const mentions = [{
-      entityId: '57c526c3e7c624f857828695',
-      display: 'Task 1',
-      mentionType: 'task',
-      mentionId: '57c526c3e7c624f857828691'
-    },{
-      entityId: '57c526c3e7c624f857828693',
-      display: 'Task 2',
-      mentionType: 'task',
-      mentionId: '57c526c3e7c624f857828692'
-    }];
-//    const mentions = this.props.mentions;
+    const mentions = getMentionsFromObject(this.props.mentions, this.props.tasks);
     this.props.modalConfirm({mentions});
     this.props.modalHide();
   },
@@ -122,17 +111,35 @@ export const Component = React.createClass({
   }
 });
 
-
 function filterMentions(mentions, type){
   const mentionsArray = mentions ? Object.keys(mentions).map(taskId => mentions[taskId]) : [];
   // type == 'complete' || 'related'
   return mentionsArray.length > 0 ? mentionsArray.filter( mention => mention[type]) : []
 }
 
+function getMentionsFromObject(mentionsObject, tasks){
+  const mentions = [];
+  Object.keys(mentionsObject).forEach(taskId => {
+    if(mentionsObject[taskId].complete){
+      mentions.push(newMention({entityId: taskId, display: tasks[taskId].data.name, mentionType: 'task-complete'}))
+    }
+    else if(mentionsObject[taskId].related){
+      mentions.push(newMention({entityId: taskId, display: tasks[taskId].data.name, mentionType: 'task-related'}))
+    }
+  })
+  return mentions;
+}
 
-/////////////////////////////////////////////////////////////////////////////
+function newMention({entityId, display, mentionType}){
+  return {
+    entityId,
+    display,
+    mentionType,
+    mentionId: getUuid()
+  }
+}
+
 ///////////////////////////////// CONTAINER /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps({tasks, mentions}, {projectId}) {
   return {

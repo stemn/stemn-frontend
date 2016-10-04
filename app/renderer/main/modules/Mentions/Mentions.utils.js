@@ -23,6 +23,7 @@ export const getMentionString = (mention) => {
   return `@[${mention.display}](${mention.entityId}:${mention.mentionType}:${mention.mentionId})`
 }
 
+
 export const parseMentions = (text) => {
   /*
   text = text.match(/
