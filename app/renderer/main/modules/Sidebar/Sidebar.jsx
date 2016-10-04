@@ -35,12 +35,6 @@ const ProjectWithContext = ContextMenuLayer('multi', (props) => (props.item))(Si
 
 export const Component = React.createClass({
 
-//  componentDidMount() {
-//    this.props.authActions.getProjects({
-//      userId: this.props.auth.user._id,
-//    });
-//  },
-
   componentWillReceiveProps(nextProps) {
     if(nextProps.auth.user._id && !nextProps.projects.userProjects.loading && !nextProps.projects.userProjects.data){
       nextProps.projectsActions.getUserProjects({
@@ -93,22 +87,22 @@ export const Component = React.createClass({
 
           <div>
             <div className="layout-row layout-align-start-center">
-              <Link to="/dashboard" className="flex">
-                <div className={userStyles.userWrapper + ' flex layout-row layout-align-start-center'}>
-                  <img className={userStyles.userAvatar} src={'https://stemn.com' + this.props.auth.user.picture + '?size=thumb&crop=true'} />
-                  <div className="flex text-ellipsis">
-                    {this.props.auth.user.name}
-                  </div>
-                </div>
-              </Link>
               <PopoverMenu>
-                <Link className={userStyles.userSettings + ' layout-column layout-align-center-center'} to="/settings/application"><MdSettings size="25"/></Link>
+                <Link to="/settings/application" className="flex">
+                  <div className={userStyles.userWrapper + ' flex layout-row layout-align-start-center'}>
+                    <img className={userStyles.userAvatar} src={'https://stemn.com' + this.props.auth.user.picture + '?size=thumb&crop=true'} />
+                    <div className="flex text-ellipsis">
+                      {this.props.auth.user.name}
+                    </div>
+                  </div>
+                </Link>
                 <div className="PopoverMenu">
-                  <Link to="/settings/account">Account Settings</Link>
-                  <Link to="/settings/application">Application Settings</Link>
+                  <a href="#/settings/account">Account Settings</a>
+                  <a href="#/settings/application">Application Settings</a>
                   <a onClick={()=>{this.props.authActions.logout()}}>Sign out</a>
                 </div>
               </PopoverMenu>
+              <Link className={userStyles.userSettings + ' layout-column layout-align-center-center'} to="/settings/application"><MdSettings size="25"/></Link>
             </div>
           </div>
         </div>

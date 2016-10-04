@@ -101,7 +101,7 @@ export const Component = React.createClass({
 
       if(timeline.selected.data.items){
         return this.props.timeline.selected.data.items.map((file)=>{
-          const filePrevious = file.data.previousRevisionId ? u( {data: {revisionId : file.data.previousRevisionId}}, file) : null;
+          const filePrevious = file.data.previousRevisionId ? i.assocIn(file, ['data', 'revisionId'], file.data.previousRevisionId) : null;
           return (
             <TogglePanel>
               <div className="layout-row flex layout-align-start-center">
