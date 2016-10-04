@@ -51,6 +51,7 @@ if(!squirrelStartup){
 
     store.subscribe(async () => {
       global.state = store.getState();
+      console.log('update store');
       // persist store changes
       // TODO: should this be blocking / wait? _.throttle?
       await jsonStorage.set('state', global.state);

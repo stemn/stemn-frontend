@@ -23,7 +23,7 @@ ipcRenderer.on('redux-action', (event, payload) => {
 
 render(
   <Provider store={store}>
-    <div>
+    <div className="layout-column flex">
       <Router history={history}>
         {getRoutes(store)}
       </Router>

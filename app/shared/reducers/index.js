@@ -67,5 +67,12 @@ export default function getRootReducer(scope = 'main') {
     };
   }
 
-  return combineReducers({ ...reducers });
+  const appReducer = combineReducers({  ...reducers });
+
+  return (state, action) => {
+    if (action.type === 'STATE/CLEAR') {
+      state = undefined
+    }
+    return appReducer(state, action)
+  }
 }

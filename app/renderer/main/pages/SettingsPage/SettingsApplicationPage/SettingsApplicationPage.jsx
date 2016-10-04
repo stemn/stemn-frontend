@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as SystemActions from 'app/shared/actions/system';
+import * as StateActions from 'app/shared/actions/state';
+import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 
 // Component Core
 import React from 'react';
@@ -31,19 +33,20 @@ const inputStyles = {
 }
 
 export const Component = React.createClass({
+  confirmReset(){
+    this.props.modalActions.showConfirm({
+      message: 'This will clear all data and reset the application back to factory settings. This can be useful if some data has been corrupted.',
+      modalConfirm: StateActions.clearState()
+    })
+  },
   render() {
     const { system } = this.props;
     return (
       <div className="layout-column flex">
         <div style={{width: '600px'}}>
           <div className={classes.panel}>
-            <h3>Privacy</h3>
-            <p>Help us improve by sending anonymous usage data</p>
-          </div>
-          <div className={classes.panel}>
-            <h3>Cloud file store integrations</h3>
-            <p>STEMN integrates with your existing cloud providers such as Dropbox and Drive.</p>
-
+            <h3>Cloud Providers</h3>
+            <p>Set the root folder for Dropbox and Drive.</p>
             <div style={{marginBottom: '10px'}}>
               <FileSelectInputElectron
                 title="Select Root Dropbox Location"
@@ -62,12 +65,23 @@ export const Component = React.createClass({
             </div>
 
           </div>
+          <div className={classes.panel}>
+            <h3>Reset Application</h3>
+            <p>Clear all cached data and reset the application back to factory settings.</p>
+            <Button className="warn" onClick={this.confirmReset}>
+              Clear data
+            </Button>
+          </div>
         </div>
       </div>
     );
   }
 });
 
+//          <div className={classes.panel}>
+//            <h3>Privacy</h3>
+//            <p>Help us improve by sending anonymous usage data</p>
+//          </div>
 //            <Toggle model="settings.privacy" value={this.props.settings.privacy} />
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
@@ -80,7 +94,9 @@ function mapStateToProps({users, system}, {params}) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    SystemActions: bindActionCreators(SystemActions, dispatch),
+    systemActions: bindActionCreators(SystemActions, dispatch),
+    stateActions: bindActionCreators(StateActions, dispatch),
+    modalActions: bindActionCreators(ModalActions, dispatch),
   }
 }
 

@@ -2,7 +2,6 @@ import providerPathLookup from '../../main/modules/files/providerPathLookup.js';
 import Promise from 'es6-promise';
 import { shell } from 'electron';
 
-
 export function getProviderPath() {
   return {
     type: 'SYSTEM/GET_PROVIDER_PATH',

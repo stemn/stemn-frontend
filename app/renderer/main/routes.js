@@ -4,9 +4,9 @@ import { Route, IndexRoute } from 'react-router';
 import http from 'axios';
 
 
-import RootAppPage                 from './components/App/RootAppPage';
-import AuthedAppPage               from './components/App/AuthedAppPage';
-import UnAuthedAppPage             from './components/App/UnAuthedAppPage';
+import AppRootPage                 from './pages/AppRootPage/AppRootPage';
+import AppAuthedPage               from './pages/AppAuthedPage/AppAuthedPage';
+import AppUnAuthedPage             from './pages/AppUnAuthedPage/AppUnAuthedPage';
 
 import ProjectChangesPage          from './pages/ProjectChangesPage/ProjectChangesPage.jsx';
 import LoginPage                   from './pages/LoginPage/LoginPage.jsx';
@@ -52,8 +52,8 @@ export default (store) => {
   };
 
   return (
-    <Route                                           component={RootAppPage} >
-      <Route                                         component={AuthedAppPage}   onEnter={requireAuth}>
+    <Route                                           component={AppRootPage} >
+      <Route                                         component={AppAuthedPage}   onEnter={requireAuth}>
         <Route   path="/project/:stub"               component={ProjectPage}>
           <IndexRoute                                component={ProjectChangesPage} />
           <Route path="feed"                         component={ProjectFeedPage}/>
@@ -71,7 +71,7 @@ export default (store) => {
           <Route path="/settings/account"            component={SettingsAccountPage}/>
         </Route>
       </Route>
-      <Route                                         component={UnAuthedAppPage}>
+      <Route                                         component={AppUnAuthedPage}>
         <Route onEnter={requireNonAuth}>
           <Route path="/login"                       component={LoginPage} />
           <Route path="/register"                    component={RegisterPage} />
