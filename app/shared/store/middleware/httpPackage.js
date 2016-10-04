@@ -12,7 +12,7 @@ export function getTask({taskId}) {
     type: 'TASKS/GET_TASK',
     httpPackage: {
       endpoint: 'api/v1/tasks',                               The endpoint used to save it in the requests object
-      url: `https://${process.env.API_SERVER}/api/v1/tasks`,  The Api endpoint
+      url: `/api/v1/tasks`,  The Api endpoint
       method: 'GET',                                          Http method, this should probably be GET
       params: {                                               Params object. This is what is packaged together.
         'ids[]' : taskId

@@ -4,7 +4,7 @@ export function getComment({commentId}) {
     type: 'COMMENTS/GET_COMMENT',
     httpPackage: {
       endpoint: 'api/v1/comments',
-      url: `https://${process.env.API_SERVER}/api/v1/comments`,
+      url: `/api/v1/comments`,
       method: 'GET',
       params: {
         'ids' : commentId
@@ -23,7 +23,7 @@ export function newComment({comment}) {
         type: 'COMMENTS/NEW_COMMENT',
         http: true,
         payload: {
-          url: `https://${process.env.API_SERVER}/api/v1/tasks/${comment.task}/comments`,
+          url: `/api/v1/tasks/${comment.task}/comments`,
           method: 'POST',
           data: comment
         },
@@ -67,7 +67,7 @@ export function deleteComment({comment}) {
     type: 'COMMENTS/DELETE',
     http: true,
     payload: {
-      url: `https://${process.env.API_SERVER}/api/v1/comments/${comment._id}`,
+      url: `/api/v1/comments/${comment._id}`,
       method: 'DELETE'
     },
     meta: {
@@ -83,7 +83,7 @@ export function updateComment({comment}) {
     type: 'COMMENTS/UPDATE',
     http: true,
     payload: {
-      url: `https://${process.env.API_SERVER}/api/v1/comments/${comment._id}`,
+      url: `/api/v1/comments/${comment._id}`,
       method: 'PUT',
       data: comment
     },

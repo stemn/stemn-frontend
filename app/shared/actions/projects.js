@@ -8,7 +8,7 @@ export function getProject({projectId}) {
     http: true,
     payload: {
       method: 'GET',
-      url: `https://${process.env.API_SERVER}/api/v1/projects/${projectId}`
+      url: `/api/v1/projects/${projectId}`
     }
   };
 }
@@ -19,7 +19,7 @@ export function createProject(project) {
       type: 'PROJECTS/CREATE_PROJECT',
       payload: http({
         method: 'POST',
-        url: `https://${process.env.API_SERVER}/api/v1/projects`,
+        url: `/api/v1/projects`,
         data: project
       }).then((response)=>{
         dispatch(push(`/project/${response.data._id}/settings`))
@@ -35,7 +35,7 @@ export function getUserProjects({userId}) {
   return {
     type:'PROJECTS/GET_USER_PROJECTS',
     payload: http({
-      url: `https://${process.env.API_SERVER}/api/v1/search`,
+      url: `/api/v1/search`,
       method: 'GET',
       params: {
         type:'project',
@@ -64,7 +64,7 @@ export function deleteProject({projectId}) {
       type: 'PROJECTS/DELETE_PROJECT',
       payload: http({
         method: 'DELETE',
-        url: `https://${process.env.API_SERVER}/api/v1/projects/${projectId}`,
+        url: `/api/v1/projects/${projectId}`,
       }).then((response)=>{
         dispatch(push(`/`))
       }),
@@ -80,7 +80,7 @@ export function saveProject({project}) {
     type: 'PROJECTS/SAVE_PROJECT',
     payload: http({
       method: 'PUT',
-      url: `https://${process.env.API_SERVER}/api/v1/projects/${project._id}`,
+      url: `/api/v1/projects/${project._id}`,
       data: project
     }),
     meta: {
@@ -126,7 +126,7 @@ export function linkRemote({projectId, provider, path, id}) {
     http: true,
     payload: {
       method: 'PUT',
-      url: `https://${process.env.API_SERVER}/api/v1/remote/link/${projectId}/${provider}`,
+      url: `/api/v1/remote/link/${projectId}/${provider}`,
       params: {
         path         : path,
         id           : id

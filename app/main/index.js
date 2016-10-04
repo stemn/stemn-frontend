@@ -1,3 +1,4 @@
+import './init.js';
 import os from 'os';
 import { app, ipcMain, dialog } from 'electron';
 //import pify from 'pify';

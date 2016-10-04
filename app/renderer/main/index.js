@@ -1,4 +1,4 @@
-import '../shared/init';
+import '../shared/init.js';
 import { ipcRenderer, remote } from 'electron';
 import React from 'react';
 import { render } from 'react-dom';

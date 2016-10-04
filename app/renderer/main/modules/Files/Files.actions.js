@@ -8,7 +8,7 @@ export function getFile({projectId, fileId, revisionId}) {
     http: true,
     payload: {
       method: 'GET',
-      url: `https://${process.env.API_SERVER}/api/v1/remote/download/${projectId}/${fileId}`,
+      url: `/api/v1/remote/download/${projectId}/${fileId}`,
       params: {
         revisionId
       }
@@ -25,7 +25,7 @@ export function getMeta({fileId, revisionId}) {
     http: true,
     payload: {
       method: 'GET',
-      url: `https://${process.env.API_SERVER}/api/v1/files/${fileId}`,
+      url: `/api/v1/files/${fileId}`,
       params: {
         revisionId
       }

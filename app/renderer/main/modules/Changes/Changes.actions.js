@@ -33,7 +33,7 @@ export function fetchChanges({projectId}) {
       http: true,
       payload: {
         method: 'GET',
-        url: `https://${process.env.API_SERVER}/api/v1/sync/timeline/${projectId}`,
+        url: `/api/v1/sync/timeline/${projectId}`,
         params: {
           type: 'changes'
         },
@@ -51,7 +51,7 @@ export function pullChanges({projectId}) {
     http: true,
     payload: {
       method: 'GET',
-      url: `https://${process.env.API_SERVER}/api/v1/sync/pullRemoteChanges/${projectId}`,
+      url: `/api/v1/sync/pullRemoteChanges/${projectId}`,
     }
   }
 }
@@ -88,7 +88,7 @@ export function commit({projectId, revisions, summary, description}) {
       type: 'CHANGES/COMMIT',
       payload: http({
         method: 'POST',
-        url: `https://${process.env.API_SERVER}/api/v1/sync/commit/${projectId}`,
+        url: `/api/v1/sync/commit/${projectId}`,
         data: {
           revisions,
           summary,
