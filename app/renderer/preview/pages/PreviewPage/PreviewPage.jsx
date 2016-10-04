@@ -57,9 +57,16 @@ export const Component = React.createClass({
   clickTimeline(response){
     console.log(response);
   },
+  isSelected(item){
+    if(item.event == 'commit'){
+      return item.data.items.findIndex(commitItem => commitItem.data.revisionId == this.props.fileMeta.data.revisionId) != -1;
+    }
+    else{
+      return item.data.revisionId == this.props.fileMeta.data.revisionId;
+    }
+  },
   render() {
     const { fileMeta, syncTimeline } = this.props;
-
 
     return (
       <div className="layout-column flex">
@@ -80,7 +87,9 @@ export const Component = React.createClass({
             }
             <Timeline className={classes.timeline}
               items={syncTimeline && syncTimeline.data ? syncTimeline.data : []}
-              onSelect={this.clickTimeline} />
+              onSelect={this.clickTimeline}
+              isSelected={this.isSelected}
+              preferPlace="above"/>
           </div>
           <DragResize side="left" width="450" widthRange={[0, 450]} className="layout-column">
             <aside className={classes.sidebar + ' layout-column flex'}>

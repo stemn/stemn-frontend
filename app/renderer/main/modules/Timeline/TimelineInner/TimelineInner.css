@@ -29,6 +29,10 @@
 .popup{
   padding: 8px;
 }
+.popup b{
+  display: inline-block;
+  margin-bottom: 5px;
+}
 .popupImage{
   margin-right: 10px;
   width: 30px;
