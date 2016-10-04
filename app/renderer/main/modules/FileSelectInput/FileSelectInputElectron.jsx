@@ -1,10 +1,10 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { actions } from 'react-redux-form';
 
 // Container Actions
-import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
+import { actions } from 'react-redux-form';
+import { remote } from 'electron';
 
 import classes from './FileSelectInput.css'
 import { MdFolder } from 'react-icons/lib/md';
@@ -12,26 +12,22 @@ import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconBut
 
 const Component = React.createClass({
   showModal(){
-    this.props.ModalActions.showModal({
-      modalType: 'FILE_SELECT',
-      modalProps: {
-        projectId: this.props.projectId,
-        path: this.props.value.fileId,
-        storeKey: "FileSelect1",
-        options: {
-          allowFolder : true,
-          foldersOnly : true,
-          explore     : 'drive'
-        },
-      },
-      modalConfirm: actions.change(this.props.model)
+    remote.dialog.showOpenDialog(null, {
+      title: 'Select Dropbox Location',
+      defaultPath: 'E:\\Google Drive',
+      buttonLabel: 'Select Folder',
+      properties: ['openDirectory']
+    }, (files) => {
+      if(files && files[0]){
+        this.props.dispatch(actions.change(this.props.model, files[0]))
+      }
     })
   },
   render() {
-    const {provider, model, value} = this.props;
+    const {model, value} = this.props;
     return (
       <div className={classes.fileSelectInput + ' layout-row layout-align-start-center'} onClick={this.showModal}>
-        <div className={classes.text + ' flex'}><span style={{textTransform: 'capitalize'}}>{provider}/</span>{value.path}</div>
+        <div className={classes.text + ' flex'}>{value}</div>
         <SimpleIconButton>
           <MdFolder size="22" />
         </SimpleIconButton>
@@ -45,9 +41,7 @@ function mapStateToProps() {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    ModalActions: bindActionCreators(ModalActions, dispatch),
-  }
+  return { dispatch }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);

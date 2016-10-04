@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as SettingsActions from 'app/shared/actions/settings';
 import * as UsersActions from 'app/shared/actions/users';
 import * as AuthActions from 'app/shared/actions/auth';
 
@@ -81,9 +80,8 @@ export const Component = React.createClass({
 ///////////////////////////////// CONTAINER /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({settings, auth, users}, {params}) {
+function mapStateToProps({auth, users}, {params}) {
   return {
-    settings,
     auth,
     user: users[auth.user._id],
     entityModel: `users.${auth.user._id}`
@@ -92,7 +90,6 @@ function mapStateToProps({settings, auth, users}, {params}) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    SettingsActions: bindActionCreators(SettingsActions, dispatch),
     UsersActions: bindActionCreators(UsersActions, dispatch),
     AuthActions: bindActionCreators(AuthActions, dispatch),
   }
