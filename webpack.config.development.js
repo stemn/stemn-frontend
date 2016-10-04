@@ -63,6 +63,7 @@ const config = {
       __DEV__: true,
       'process.env': {
         NODE_ENV: JSON.stringify('development'),
+        API_SERVER: JSON.stringify(process.env.API_SERVER),
       },
     }),
   ],

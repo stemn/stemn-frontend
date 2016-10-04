@@ -4,6 +4,4 @@ import 'app/renderer/assets/css/app.global.css';
 import http from 'axios';
 
 moment.locale('en-gb');
-http.defaults.baseURL = 'https://localhost:3000/';
-
-console.log(process.env);
+http.defaults.baseURL = `https://${process.env.API_SERVER}/`;
