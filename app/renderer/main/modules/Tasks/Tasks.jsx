@@ -86,20 +86,32 @@ export const Component = React.createClass({
           <PopoverMenu preferPlace="below">
             <Button style={{marginLeft: '10px'}} className="white">Layout</Button>
             <div className="PopoverMenu">
-              {layouts.map(layout =>
-               <a className={classNames({'active' : this.state.layout == layout.value})} onClick={()=>this.setLayout(layout.value)}>{layout.text}</a>
+              {layouts.map((layout, index) =>
+               <a key={index}
+                 className={classNames({'active' : this.state.layout == layout.value})}
+                 onClick={()=>this.setLayout(layout.value)}>
+                 {layout.text}
+               </a>
               )}
             </div>
           </PopoverMenu>
           <PopoverMenu preferPlace="below">
             <Button style={{marginLeft: '10px'}} className="white">Filter</Button>
             <div className="PopoverMenu">
-              {statusFilter.map(item =>
-               <a className={classNames({'active' : this.state.layout == item.value})} onClick={()=>this.setLayout(item.value)}>{item.text}</a>
+              {statusFilter.map((item, index) =>
+               <a key={index}
+                 className={classNames({'active' : this.state.layout == item.value})}
+                 onClick={()=>this.setLayout(item.value)}>
+                 {item.text}
+               </a>
               )}
               <div className="divider"></div>
-              {ownerFilter.map(item =>
-               <a className={classNames({'active' : this.state.layout == item.value})} onClick={()=>this.setLayout(item.value)}>{item.text}</a>
+              {ownerFilter.map((item, index) =>
+               <a key={index}
+                 className={classNames({'active' : this.state.layout == item.value})}
+                 onClick={()=>this.setLayout(item.value)}>
+                 {item.text}
+               </a>
               )}
             </div>
           </PopoverMenu>

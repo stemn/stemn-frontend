@@ -98,7 +98,6 @@ export const Component = React.createClass({
         <TaskGroupParent layout={layout}>
           {board.data.groups.map((group, groupIndex) =>
             <TaskGroupWrapped
-              key={group._id}
               index={groupIndex}
               id={group._id}
               item={group}
@@ -116,18 +115,17 @@ export const Component = React.createClass({
                  moveCard={this.moveCard}
                  tasks={group.tasks}
                  layout={layout}>
-                  {group.tasks ? group.tasks.map((taksId, cardIndex) =>
+                  {group.tasks ? group.tasks.map((taskId, cardIndex) =>
                     <TaskListItemWrapped
-                      key={taksId}
                       index={cardIndex}
-                      id={taksId}
-                      item={taksId}
+                      id={taskId}
+                      item={taskId}
                       groupId={group._id}
                       tasks={group.tasks}
                       moveCard={this.moveCard}
                       beginDrag={this.beginDrag}
                       endDrag={this.endDrag}>
-                      <TaskListItem item={taksId} draggable={true} layout={layout} />
+                      <TaskListItem item={taskId} draggable={true} layout={layout} />
                     </TaskListItemWrapped>
                   ) : ''}
                   <NewItem

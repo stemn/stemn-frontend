@@ -26,10 +26,7 @@ import Textarea from 'app/renderer/main/components/Input/Textarea/Textarea';
 import UserSelect from 'app/renderer/main/components/Users/UserSelect/UserSelect.jsx';
 
 
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-
 
 export const Component = React.createClass({
   componentWillMount() {
@@ -41,12 +38,13 @@ export const Component = React.createClass({
     setTimeout(()=>this.props.TasksActions.updateTask({task: this.props.task.data}), 1);
   },
   toggleComplete(model, value){
-    this.props.TasksActions.toggleComplete({
-      taskId: this.props.task.data._id,
-      model,
-      value
-    })
-    this.updateTask();
+    console.log(model, value);
+//    this.props.TasksActions.toggleComplete({
+//      taskId: this.props.task.data._id,
+//      model,
+//      value
+//    })
+//    this.updateTask();
   },
   deleteTask(){
     this.props.TasksActions.deleteTask({
@@ -134,16 +132,23 @@ export const Component = React.createClass({
                 type="text"
                 placeholder="Task description" />
             </div>
-            <PopoverMenu preferPlace="right" disableClickClose={true}>
-              {task.data.users ? task.data.users.map( user =>
-                <UserAvatar
-                  picture={user.picture}
-                  size="25px"/>
-              ) : null}
-              <div className="PopoverMenu" style={{padding: '15px'}}>
-                <UserSelect value="dropbox" />
-              </div>
-            </PopoverMenu>
+
+            {task.data.users && task.data.users.length > 0 ?
+              <PopoverMenu preferPlace="right" disableClickClose={true}>
+                <div>
+                  {task.data.users.map( user =>
+                    <UserAvatar
+                      key={user._id}
+                      picture={user.picture}
+                      size="25px"/>
+                  )}
+                </div>
+                <div className="PopoverMenu" style={{padding: '15px'}}>
+                  <UserSelect value="dropbox" />
+                </div>
+              </PopoverMenu>
+              : ''
+            }
           </div>
           { task.data.labels && task.data.labels.length > 0 ?
             <div className={classes.cardFooter + ' layout-row'}>
@@ -158,9 +163,9 @@ export const Component = React.createClass({
 });
 
 
-/////////////////////////////////////////////////////////////////////////////
+
+
 ///////////////////////////////// CONTAINER /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps({ tasks }, {item}) {
   const task          = tasks.data[item];

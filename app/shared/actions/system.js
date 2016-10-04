@@ -24,9 +24,6 @@ export function openFileLocation({path}) {
       type: 'SYSTEM/OPEN_FILE_LOCATION',
       payload: {}
     })
-//  return {
-//    type: 'SYSTEM/OPEN_FILE',
-//  };
   }
 }
 
@@ -38,9 +35,6 @@ export function openFile({path}) {
       type: 'SYSTEM/OPEN_FILE',
       payload: {}
     })
-//  return {
-//    type: 'SYSTEM/OPEN_FILE',
-//  };
   }
 }
 
