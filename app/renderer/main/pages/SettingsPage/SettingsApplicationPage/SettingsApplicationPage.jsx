@@ -42,36 +42,34 @@ export const Component = React.createClass({
   render() {
     const { system } = this.props;
     return (
-      <div className="layout-column flex">
-        <div style={{width: '600px'}}>
-          <div className={classes.panel}>
-            <h3>Cloud Providers</h3>
-            <p>Set the root folder for Dropbox and Drive.</p>
-            <div style={{marginBottom: '10px'}}>
-              <FileSelectInputElectron
-                title="Select Root Dropbox Location"
-                model="system.providerPath.dropbox"
-                value={system.providerPath.dropbox}>
-                <div className="layout-column layout-align-center-center" style={inputStyles}>Dropbox</div>
-              </FileSelectInputElectron>
-            </div>
-            <div style={{marginBottom: '10px'}}>
-              <FileSelectInputElectron
-                title="Select Root Drive Location"
-                model="system.providerPath.drive"
-                value={system.providerPath.drive}>
-                <div className="layout-column layout-align-center-center" style={inputStyles}>Drive</div>
-              </FileSelectInputElectron>
-            </div>
+      <div>
+        <div className={classes.panel}>
+          <h3>Cloud Providers</h3>
+          <p>Set the root folder for Dropbox and Drive.</p>
+          <div style={{marginBottom: '10px'}}>
+            <FileSelectInputElectron
+              title="Select Root Dropbox Location"
+              model="system.providerPath.dropbox"
+              value={system.providerPath.dropbox}>
+              <div className="layout-column layout-align-center-center" style={inputStyles}>Dropbox</div>
+            </FileSelectInputElectron>
+          </div>
+          <div style={{marginBottom: '10px'}}>
+            <FileSelectInputElectron
+              title="Select Root Drive Location"
+              model="system.providerPath.drive"
+              value={system.providerPath.drive}>
+              <div className="layout-column layout-align-center-center" style={inputStyles}>Drive</div>
+            </FileSelectInputElectron>
+          </div>
 
-          </div>
-          <div className={classes.panel}>
-            <h3>Reset Application</h3>
-            <p>Clear all cached data and reset the application back to factory settings.</p>
-            <Button className="warn" onClick={this.confirmReset}>
-              Clear data
-            </Button>
-          </div>
+        </div>
+        <div className={classes.panel}>
+          <h3>Reset Application</h3>
+          <p>Clear all cached data and reset the application back to factory settings.</p>
+          <Button className="warn" onClick={this.confirmReset}>
+            Clear data
+          </Button>
         </div>
       </div>
     );
