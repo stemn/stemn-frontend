@@ -13,8 +13,8 @@ import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconBut
 const Component = React.createClass({
   showModal(){
     remote.dialog.showOpenDialog(null, {
-      title: 'Select Dropbox Location',
-      defaultPath: 'E:\\Google Drive',
+      title: this.props.title,
+      defaultPath: this.props.value,
       buttonLabel: 'Select Folder',
       properties: ['openDirectory']
     }, (files) => {
@@ -24,9 +24,10 @@ const Component = React.createClass({
     })
   },
   render() {
-    const {model, value} = this.props;
+    const {model, value, children} = this.props;
     return (
       <div className={classes.fileSelectInput + ' layout-row layout-align-start-center'} onClick={this.showModal}>
+        {children}
         <div className={classes.text + ' flex'}>{value}</div>
         <SimpleIconButton>
           <MdFolder size="22" />

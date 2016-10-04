@@ -21,6 +21,15 @@ import FileSelectInputElectron from 'app/renderer/main/modules/FileSelectInput/F
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
+const inputStyles = {
+  textTransform: 'capitalize',
+  padding: '0 10px',
+  height: '100%',
+  background: 'rgba(0, 0, 0, 0.03)',
+  borderRight: '1px solid rgb(234, 234, 234)',
+  minWidth: '80px'
+}
+
 export const Component = React.createClass({
   render() {
     const { system } = this.props;
@@ -30,19 +39,28 @@ export const Component = React.createClass({
           <div className={classes.panel}>
             <h3>Privacy</h3>
             <p>Help us improve by sending anonymous usage data</p>
-
           </div>
           <div className={classes.panel}>
             <h3>Cloud file store integrations</h3>
-            <p>STEMN integrates with your existing cloud providers such as Dropbox, Drive and OneDrive.</p>
-            {Object.keys(system.providerPath).map( key =>
-              <div key={key} style={{marginBottom: '10px'}}>
-                <FileSelectInputElectron
-                  model={`system.providerPath.${key}`}
-                  value={system.providerPath[key]}
-                />
-              </div>
-            )}
+            <p>STEMN integrates with your existing cloud providers such as Dropbox and Drive.</p>
+
+            <div style={{marginBottom: '10px'}}>
+              <FileSelectInputElectron
+                title="Select Root Dropbox Location"
+                model="system.providerPath.dropbox"
+                value={system.providerPath.dropbox}>
+                <div className="layout-column layout-align-center-center" style={inputStyles}>Dropbox</div>
+              </FileSelectInputElectron>
+            </div>
+            <div style={{marginBottom: '10px'}}>
+              <FileSelectInputElectron
+                title="Select Root Drive Location"
+                model="system.providerPath.drive"
+                value={system.providerPath.drive}>
+                <div className="layout-column layout-align-center-center" style={inputStyles}>Drive</div>
+              </FileSelectInputElectron>
+            </div>
+
           </div>
         </div>
       </div>
