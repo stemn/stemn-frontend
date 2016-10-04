@@ -29,13 +29,13 @@ const onMount = (nextProps, prevProps) => {
   const { revisionId, fileId} = nextProps.params;
 
   // If we do not yet have the meta, get it:
-  if(!nextProps.fileMeta.data && !nextProps.fileMeta.loading
+  if(!nextProps.fileMeta || !nextProps.fileMeta.data && !nextProps.fileMeta.loading
      && fileId){
     nextProps.filesActions.getMeta({fileId, revisionId});
   }
 
   // If we don't have the timeline (and we can get it), get it:
-  if(!nextProps.syncTimeline.loading && nextProps.fileMeta && nextProps.fileMeta.data &&
+  if(!nextProps.syncTimeline || !nextProps.syncTimeline.loading && nextProps.fileMeta && nextProps.fileMeta.data &&
      (!prevProps || nextProps.fileMeta.data._id != prevProps.fileMeta.data._id)){
     nextProps.syncTimelineActions.fetchTimeline({
       projectId: nextProps.fileMeta.data.project._id,
