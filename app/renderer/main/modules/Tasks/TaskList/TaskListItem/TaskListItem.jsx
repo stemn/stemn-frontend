@@ -28,12 +28,22 @@ import UserSelect from 'app/renderer/main/components/Users/UserSelect/UserSelect
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
+
+const onMount = (nextProps, prevProps) => {
+  if(!prevProps || prevProps.item != nextProps.item){
+    if(!nextProps.task || !nextProps.task.data){
+      nextProps.TasksActions.getTask({
+        taskId: nextProps.item
+      })
+    }
+  }
+}
+
 export const Component = React.createClass({
-  componentWillMount() {
-    this.props.TasksActions.getTask({
-      taskId: this.props.item
-    })
-  },
+  // Mounting
+  componentWillMount() { onMount(this.props) },
+  componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
+
   updateTask(){
     setTimeout(()=>this.props.TasksActions.updateTask({task: this.props.task.data}), 1);
   },
@@ -85,9 +95,7 @@ export const Component = React.createClass({
               </Field>
             </div>
             { task.data.labels && task.data.labels.length > 0 && board && board.data && board.data.labels ?
-              <div className={classes.cardFooter + ' layout-row'}>
-                <TaskLabelDots labels={task.data.labels} labelInfo={board.data.labels} tag={true} />
-              </div>
+              <TaskLabelDots labels={task.data.labels} labelInfo={board.data.labels} tag={true} />
               : null
             }
             <div className={classes.listUser + ' layout-row layout-align-start-center text-ellipsis'}>
@@ -127,7 +135,8 @@ export const Component = React.createClass({
               value={task.data.complete}
               changeAction={this.toggleComplete}
               className="text-primary"
-              circle={true} />
+              circle={true}
+            />
             <div className={classes.cardText + ' flex'}>
               <Textarea
                 onChange={this.updateTask}
@@ -135,7 +144,8 @@ export const Component = React.createClass({
                 value={task.data.name}
                 className="input-plain"
                 type="text"
-                placeholder="Task description" />
+                placeholder="Task description"
+              />
             </div>
 
             {task.data.users && task.data.users.length > 0 ?

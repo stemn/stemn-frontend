@@ -1,12 +1,14 @@
 // Container Core
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { actions } from 'react-redux-form';
 
 // Container Actions
 import * as TasksActions from './Tasks.actions.js';
 
 // Component Core
 import React from 'react';
+import i from 'icepick';
 
 // Styles
 import classNames from 'classnames';
@@ -34,21 +36,21 @@ const layouts = [{
 
 const statusFilter = [{
   text: 'Status: Complete',
-  value: 'complete'
+  value: 'is:complete'
 },{
   text: 'Status: Incomplete',
-  value: 'incomplete'
+  value: 'is:incomplete'
 },{
   text: 'Status: All',
-  value: 'all'
+  value: ''
 }];
 
 const ownerFilter = [{
   text: 'My Tasks',
-  value: 'myTasks'
+  value: 'author:DavidRevay'
 },{
   text: 'All Tasks',
-  value: 'allTasks'
+  value: ''
 }];
 
 export const Component = React.createClass({
@@ -58,16 +60,27 @@ export const Component = React.createClass({
     })
   },
   getInitialState () {
-    return {
-      layout: 'board',
-    }
+    return { layout: 'board' }
   },
   setLayout (layout) {
-    // layout = 'board' || 'list'
-    this.setState({ layout: layout })
+    this.setState({ layout: layout }) // layout = 'board' || 'list'
+  },
+  addFilter(filterArray, filterString) {
+    let newSearchString = this.props.board.searchString;
+    filterArray.forEach(filterObject => { newSearchString = replaceWord(newSearchString, filterObject.value, '') }); // Clear the search string
+    newSearchString = filterString ? `${newSearchString} ${filterString}` : newSearchString;                         // Add the new filterString
+    this.props.dispatch(actions.change(`${this.props.boardModel}.searchString`, newSearchString))
+  },
+
+  filterBoard(board, tasks) {
+    return i.updateIn(board, ['data', 'groups'], groups =>
+      filterGroups({groups, tasks, filterFn: (task) => {
+        return task.data.name.includes(board.searchString);
+      }})
+    )
   },
   render() {
-    const { tasks, board, project } = this.props;
+    const { tasks, board, boardModel, project } = this.props;
 
     if(!board || !board.data || !board.data.groups){
       return null
@@ -75,9 +88,9 @@ export const Component = React.createClass({
 
     return (
       <div className="layout-column flex">
-       <div className={classes.header + ' layout-row layout-align-start-center'}>
+        <div className={classes.header + ' layout-row layout-align-start-center'}>
           <div className={classes.search}>
-            <Field model="sidebar.searchString">
+            <Field model={`${boardModel}.searchString`}>
               <input className="dr-input text-ellipsis" type="text" placeholder="Search tasks"/>
             </Field>
             <MdSearch size="25"/>
@@ -100,16 +113,16 @@ export const Component = React.createClass({
             <div className="PopoverMenu">
               {statusFilter.map((item, index) =>
                <a key={index}
-                 className={classNames({'active' : this.state.layout == item.value})}
-                 onClick={()=>this.setLayout(item.value)}>
+                 className={classNames({'active' : isFilterActive(statusFilter, item.value, board.searchString)})}
+                 onClick={()=>this.addFilter(statusFilter, item.value)}>
                  {item.text}
                </a>
               )}
               <div className="divider"></div>
               {ownerFilter.map((item, index) =>
                <a key={index}
-                 className={classNames({'active' : this.state.layout == item.value})}
-                 onClick={()=>this.setLayout(item.value)}>
+                 className={classNames({'active' : isFilterActive(ownerFilter, item.value, board.searchString)})}
+                 onClick={()=>this.addFilter(ownerFilter, item.value)}>
                  {item.text}
                </a>
               )}
@@ -117,30 +130,62 @@ export const Component = React.createClass({
           </PopoverMenu>
           <Button style={{marginLeft: '10px'}} className="primary">New Task</Button>
         </div>
-        <TaskList className={classes.tasks} board={board} project={project} layout={this.state.layout}/>
+        <TaskList className={classes.tasks} board={this.filterBoard(board, tasks)} layout={this.state.layout}/>
       </div>
     )
   }
 });
 
+//function populateGroups(groups, tasks){
+//  return groups.map(group => {
+//    return i.updateIn(group, ['tasks'], taskIds => {
+//      return taskIds.map(taskId => tasks[taskId])
+//    })
+//  })
+//}
 
-/////////////////////////////////////////////////////////////////////////////
+function filterGroups({groups, tasks, filterFn}){
+  return groups.map(group => {
+    return i.updateIn(group, ['tasks'], taskIds => {
+      return taskIds.filter(taskId => filterFn(tasks[taskId]))
+    })
+  })
+}
+function isFilterActive(filterArray, filterString, searchString){
+  if(filterString == ''){
+    // If none of the other keys in this filter are active, set this one to active
+    return filterArray.findIndex(filterObject => filterObject.value != '' ? stringContainsWord(searchString, filterObject.value) : false) == -1;
+  }
+  else{
+    // Check if the search string contains the filterString
+    return stringContainsWord(searchString, filterString)
+  }
+}
+
+function stringContainsWord(fullString, word){
+  return fullString.match(new RegExp('(^|\\s+)'+word+'(\\s+|$)'));
+}
+function replaceWord(fullString, word, newWord){
+  return fullString.replace(new RegExp('(^|\\s+)'+word), newWord);
+}
+
 ///////////////////////////////// CONTAINER /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps({ tasks, projects }, {projectId}) {
   const projectBoards = tasks.projects && tasks.projects[projectId] ? tasks.projects[projectId].boards : null;
   const board = projectBoards ? tasks.boards[projectBoards[0]] : {};
   return {
-    tasks: tasks.projects[projectId],
+    tasks: tasks.data,
     project: projects[projectId],
-    board: board
+    board: board,
+    boardModel: `tasks.boards.${board.data._id}`
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     TasksActions: bindActionCreators(TasksActions, dispatch),
+    dispatch
   }
 }
 

@@ -90,7 +90,7 @@ export const Component = React.createClass({
     })
   },
   render() {
-    const { board, project, layout, className } = this.props;
+    const { board, layout, className } = this.props;
     const entityModel = `tasks.boards.${board.data._id}`;
 
     return (
