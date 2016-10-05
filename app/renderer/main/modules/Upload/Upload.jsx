@@ -21,6 +21,15 @@ import Button from 'app/renderer/main/components/Buttons/Button/Button.jsx';
 /////////////////////////////////////////////////////////////////////////////
 
 export const Component = React.createClass({
+  componentWillMount() {
+    this.props.UploadActions.init({
+      cacheKey: this.props.uploadId,
+      files: [{
+        path: this.props.value
+      }]
+    });
+  },
+
   onDrop: function (files) {
     this.props.UploadActions.upload({
       files,
@@ -46,7 +55,8 @@ export const Component = React.createClass({
       maxHeight: '100px',
       marginRight: '20px'
     }
-    const {upload, style, className} = this.props;
+    const {upload, style, className, model, value} = this.props;
+
     return (
       <div style={style} className={className}>
         <Dropzone ref="dropzone"
@@ -57,7 +67,11 @@ export const Component = React.createClass({
           <div className="layout-row layout-align-start-start">
             {upload && upload.files && upload.files.length > 0
               ?
-              <div className="layout-row layout-align-start-center">{upload.files.map((file, index) => <img key={index} style={imgStyle} src={file.preview} /> )}</div>
+              <div className="layout-row layout-align-start-center">
+                {upload.files.map((file, index) =>
+                  <img key={index} style={imgStyle} src={file.path ? `https://stemn.com${file.path}` : file.preview} />
+                )}
+              </div>
               : null
             }
             <div>

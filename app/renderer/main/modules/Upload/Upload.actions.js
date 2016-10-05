@@ -1,9 +1,24 @@
 import http from 'axios';
 
+export function init({cacheKey, files}) {
+  return {
+    type: 'UPLOAD/INIT',
+    payload: {
+      cacheKey,
+      files
+    },
+  };
+}
+
 export function upload({cacheKey, files}) {
+
+  // Create the data object
   let data = new FormData();
   files.forEach((file)=>data.append('file', file));
 
+  console.log(files);
+
+  // Submit it
   return {
     type: 'UPLOAD/UPLOAD',
     payload: http({
