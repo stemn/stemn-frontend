@@ -20,6 +20,7 @@ import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvata
 import Editor from 'app/renderer/main/modules/Editor/Editor.jsx';
 import EditorDisplay from 'app/renderer/main/modules/Editor/EditorDisplay.jsx';
 import ReactionPopup from 'app/renderer/main/modules/Reactions/ReactionPopup.jsx';
+import Reactions from 'app/renderer/main/modules/Reactions/Reactions.jsx';
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 import {MdMoreHoriz} from 'react-icons/lib/md';
@@ -89,9 +90,7 @@ export const Component = React.createClass({
             <EditorDisplay value={comment.data.body}/>
           }
           </div>
-          {
-            comment.editActive
-            ?
+          {comment.editActive ?
             <div className={classes.commentFooter}>
               <div>
                 <a className="link-primary" onClick={() => commentsActions.finishEdit({commentId: comment.data._id})}>Cancel</a>
@@ -99,9 +98,10 @@ export const Component = React.createClass({
                 <a className="link-primary" onClick={() => commentsActions.updateComment({comment: comment.data})}>Save</a>
               </div>
             </div>
-            :
-            null
-          }
+          : ''}
+          {!comment.editActive && comment.data.reactions && comment.data.reactions.length > 0 ?
+            <div><Reactions reactions={comment.data.reactions} /></div>
+          : ''}
         </div>
       </div>
     )
