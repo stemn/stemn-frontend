@@ -36,10 +36,12 @@ const layouts = [{
 
 const statusFilter = [{
   text: 'Status: Complete',
-  value: 'is:complete'
+  value: 'is:complete',
+  filterFn: (task) => task.data.complete
 },{
   text: 'Status: Incomplete',
-  value: 'is:incomplete'
+  value: 'is:incomplete',
+  filterFn: (task) => !task.data.complete
 },{
   text: 'Status: All',
   value: ''
@@ -135,14 +137,6 @@ export const Component = React.createClass({
     )
   }
 });
-
-//function populateGroups(groups, tasks){
-//  return groups.map(group => {
-//    return i.updateIn(group, ['tasks'], taskIds => {
-//      return taskIds.map(taskId => tasks[taskId])
-//    })
-//  })
-//}
 
 function filterGroups({groups, tasks, filterFn}){
   return groups.map(group => {

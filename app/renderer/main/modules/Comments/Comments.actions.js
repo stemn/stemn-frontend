@@ -17,6 +17,16 @@ export function getComment({commentId}) {
 }
 
 export function newComment({comment}) {
+  //        body        :  { type : String,   default : ''         },
+  //        task        :  { type : ObjectId, ref     : 'Task'     },
+  //        owner       :  { type : ObjectId, ref     : 'User'     },
+  //        timestamp   :  { type : Date,     default : Date.now   },
+  //        edited      :  { type : Date,                          },
+  //        reactions   : [{
+  //            _id     :  { type : ObjectId                       },
+  //            owner   :  { type : ObjectId, ref     : 'User'     },
+  //            type    :  { type : Number,   default : 0          }
+  //        }]
   return (dispatch) => {
     if(comment && comment.body && comment.body.length > 0){
       dispatch({
@@ -34,16 +44,22 @@ export function newComment({comment}) {
     }
   }
 }
-//        body        :  { type : String,   default : ''         },
-//        task        :  { type : ObjectId, ref     : 'Task'     },
-//        owner       :  { type : ObjectId, ref     : 'User'     },
-//        timestamp   :  { type : Date,     default : Date.now   },
-//        edited      :  { type : Date,                          },
-//        reactions   : [{
-//            _id     :  { type : ObjectId                       },
-//            owner   :  { type : ObjectId, ref     : 'User'     },
-//            type    :  { type : Number,   default : 0          }
-//        }]
+
+export function newReaction({commentId, reaction}) {
+  return {
+    type: 'COMMENTS/NEW_REACTION',
+    http: true,
+    payload: {
+      url: `http://localhost:3000/api/v1/comments/${commentId}/react`,
+      method: 'POST',
+      data: reaction
+    },
+
+//         owner: the accessing user
+//         comment: the comment to create the reaction on
+//         reaction: the reaction data
+  }
+}
 
 export function startEdit({commentId}) {
   return {
@@ -53,6 +69,7 @@ export function startEdit({commentId}) {
     }
   }
 }
+
 export function finishEdit({commentId}) {
   return {
     type: 'COMMENTS/FINISH_EDIT',

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 // Container Actions
 import * as CommentsActions from 'app/renderer/main/modules/Comments/Comments.actions.js';
 import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
+import { actions } from 'react-redux-form';
 
 // Component Core
 import React from 'react';
@@ -18,6 +19,7 @@ import classes from './Comment.css';
 import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
 import Editor from 'app/renderer/main/modules/Editor/Editor.jsx';
 import EditorDisplay from 'app/renderer/main/modules/Editor/EditorDisplay.jsx';
+import ReactionPopup from 'app/renderer/main/modules/Reactions/ReactionPopup.jsx';
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 import {MdMoreHoriz} from 'react-icons/lib/md';
@@ -44,6 +46,13 @@ export const Component = React.createClass({
       modalConfirm: CommentsActions.deleteComment({comment: this.props.comment.data})
     })
   },
+  submitReaction(reactionType){
+//    console.log(name);
+//    console.log(this.props.comment.data.reactions);
+    this.props.dispatch(actions.push(`${this.props.entityModel}.data.reactions`, {
+      name: reactionType
+    }))
+  },
   render() {
     const { item, comment, entityModel, commentsActions, style } = this.props;
 
@@ -60,14 +69,15 @@ export const Component = React.createClass({
           <div className={classes.commentHeader + ' layout-row layout-align-start-center'}>
             {comment.data.owner.name}<span className={classes.date}> <b className="text-interpunct"></b> {moment(comment.data.timestamp).fromNow()} </span>
             <div className="flex"></div>
+            <ReactionPopup reactions={comment.data.reactions} preferPlace="above" submitFn={this.submitReaction} />
             <PopoverMenu preferPlace="right">
-              <SimpleIconButton style={{padding: '0px'}}>
+              <SimpleIconButton style={{padding: '0 0 0 5px'}}>
                 <MdMoreHoriz size="20px"/>
               </SimpleIconButton>
               <div className="PopoverMenu">
                 {comment.editActive ? null : <a onClick={() => commentsActions.startEdit({commentId: comment.data._id})}>Edit</a> }
-                <a  onClick={this.confirmDelete}>Delete</a>
-                </div>
+                <a onClick={this.confirmDelete}>Delete</a>
+              </div>
             </PopoverMenu>
           </div>
           <div className={classes.commentContent}>
@@ -114,6 +124,7 @@ function mapDispatchToProps(dispatch) {
   return {
     commentsActions : bindActionCreators(CommentsActions, dispatch),
     modalActions    : bindActionCreators(ModalActions, dispatch),
+    dispatch
   }
 }
 
