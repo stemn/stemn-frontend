@@ -98,6 +98,7 @@ export const Component = React.createClass({
         <TaskGroupParent layout={layout}>
           {board.data.groups.map((group, groupIndex) =>
             <TaskGroupWrapped
+              key={group._id}
               index={groupIndex}
               id={group._id}
               item={group}
@@ -139,15 +140,14 @@ export const Component = React.createClass({
               </TaskGroup>
            </TaskGroupWrapped>
           )}
-          <div style={{width: '350px', minWidth: '350px', padding: '0 15px'}}>
-            <h3 className="text-mini-caps flex">&nbsp;</h3>
+          <TaskGroup simpleGroup={true}>
             <NewItem
               model={`${entityModel}.newGroupString`}
               placeholder="New Group"
               submitFn={this.newGroup}
               box={layout=='board'}
             />
-          </div>
+          </TaskGroup>
         </TaskGroupParent>
       </div>
     )

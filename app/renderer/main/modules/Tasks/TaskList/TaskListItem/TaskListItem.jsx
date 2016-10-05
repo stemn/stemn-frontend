@@ -84,7 +84,12 @@ export const Component = React.createClass({
                   placeholder="Task description" />
               </Field>
             </div>
-            <TaskLabelDots labels={task.data.labels} labelInfo={board.data.labels} tag="true" />
+            { task.data.labels && task.data.labels.length > 0 && board && board.data && board.data.labels ?
+              <div className={classes.cardFooter + ' layout-row'}>
+                <TaskLabelDots labels={task.data.labels} labelInfo={board.data.labels} tag={true} />
+              </div>
+              : null
+            }
             <div className={classes.listUser + ' layout-row layout-align-start-center text-ellipsis'}>
               {task.data.users ? task.data.users.map( user =>
                 <UserAvatar
@@ -150,7 +155,7 @@ export const Component = React.createClass({
               : ''
             }
           </div>
-          { task.data.labels && task.data.labels.length > 0 ?
+          { task.data.labels && task.data.labels.length > 0 && board && board.data && board.data.labels ?
             <div className={classes.cardFooter + ' layout-row'}>
               <TaskLabelDots labels={task.data.labels} labelInfo={board.data.labels} />
             </div>
