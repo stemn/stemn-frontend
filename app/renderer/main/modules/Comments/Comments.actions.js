@@ -44,19 +44,43 @@ export function newComment({comment}) {
   }
 }
 
-export function newReaction({commentId, reaction}) {
-  return {
-    type: 'COMMENTS/NEW_REACTION',
-    http: true,
-    payload: {
-      url: `http://localhost:3000/api/v1/comments/${commentId}/react`,
-      method: 'POST',
-      data: reaction
-    },
+export function newReaction({commentId, reactionType}) {
+  return (dispatch) => {
 
-//         owner: the accessing user
-//         comment: the comment to create the reaction on
-//         reaction: the reaction data
+    const reaction = {
+      type: reactionType
+    };
+
+    dispatch({
+      type: 'COMMENTS/NEW_REACTION',
+      http: true,
+      payload: {
+        url: `http://localhost:3000/api/v1/comments/${commentId}/reaction`,
+        method: 'POST',
+        data: reaction
+      },
+      meta: {
+        commentId,
+      }
+    })
+  }
+}
+
+export function deleteReaction({commentId, reactionType}) {
+  return (dispatch, getState) => {
+    dispatch({
+      type: 'COMMENTS/DELETE_REACTION',
+      http: true,
+      payload: {
+        url: `http://localhost:3000/api/v1/comments/${commentId}/reaction/${reactionType}`,
+        method: 'DELETE',
+      },
+      meta: {
+        commentId,
+        reactionType,
+        userId: getState().auth.user._id
+      }
+    })
   }
 }
 

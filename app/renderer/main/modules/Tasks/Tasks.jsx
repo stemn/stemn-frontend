@@ -92,7 +92,7 @@ export const Component = React.createClass({
   },
 
   filterBoard(board, tasks) {
-    const queryStringArray = board.searchString.split(' ');
+    const queryStringArray = board.searchString ? board.searchString.split(' ') : [];
     return i.updateIn(board, ['data', 'groups'], groups =>
       filterGroups({groups, tasks, filterFn: (task) => {
         return task && task.data ? queryByStrings(task, queryStringArray) : true;
@@ -129,7 +129,7 @@ export const Component = React.createClass({
             </div>
           </PopoverMenu>
           <PopoverMenu preferPlace="below">
-            <Button style={{marginLeft: '10px'}} className="white">Filter</Button>
+            <Button style={{marginLeft: '10px'}} className="primary">Filter</Button>
             <div className="PopoverMenu">
               {statusFilter.map((item, index) =>
                <a key={index}
@@ -148,7 +148,6 @@ export const Component = React.createClass({
               )}
             </div>
           </PopoverMenu>
-          <Button style={{marginLeft: '10px'}} className="primary">New Task</Button>
         </div>
         <TaskList className={classes.tasks} board={this.filterBoard(board, tasks)} layout={this.state.layout}/>
       </div>

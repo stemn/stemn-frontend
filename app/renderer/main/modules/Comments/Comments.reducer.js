@@ -52,6 +52,16 @@ const mainReducer = (state, action) => {
         savePending: false
       })
 
+    case 'COMMENTS/NEW_REACTION_FULFILLED':
+      return i.updateIn(state, ['data', action.meta.commentId, 'data', 'reactions'], reactions => i.push(reactions, action.payload.data))
+    case 'COMMENTS/DELETE_REACTION_FULFILLED':
+      return i.updateIn(state, ['data', action.meta.commentId, 'data', 'reactions'], reactions => {
+        const index = reactions.findIndex(reaction => reaction.type == action.meta.reactionType && reaction.owner._id == action.meta.userId);
+        return index == -1 ? reactions : i.splice(reactions, index, 1);
+      })
+
+
+
 
     default:
       return state;
