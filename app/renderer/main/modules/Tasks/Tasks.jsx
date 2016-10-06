@@ -9,6 +9,7 @@ import * as TasksActions from './Tasks.actions.js';
 // Component Core
 import React from 'react';
 import i from 'icepick';
+import { every } from 'lodash';
 
 // Styles
 import classNames from 'classnames';
@@ -22,9 +23,7 @@ import { MdSearch } from 'react-icons/lib/md';
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 
 
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 const layouts = [{
   text: 'Layout: List',
@@ -34,14 +33,32 @@ const layouts = [{
   value: 'board'
 }];
 
+const queryByString = (item, queryString) => {
+  if     (queryString == 'is:complete' || queryString == 'is:!complete'){
+    return item.data.complete
+  }
+  else if(queryString == 'is:incomplete'){
+    return !item.data.complete
+  }
+  // Filter by the string itself (case independent)
+  else if(queryString && queryString.length > 0){
+    return new RegExp(queryString, 'i').test(item.data.name)
+  }
+  else{
+    return true;
+  }
+}
+
+const queryByStrings = (item, queryStringArray) => {
+  return every(queryStringArray, queryString => queryByString(item, queryString))
+}
+
 const statusFilter = [{
   text: 'Status: Complete',
   value: 'is:complete',
-  filterFn: (task) => task.data.complete
 },{
   text: 'Status: Incomplete',
   value: 'is:incomplete',
-  filterFn: (task) => !task.data.complete
 },{
   text: 'Status: All',
   value: ''
@@ -75,9 +92,10 @@ export const Component = React.createClass({
   },
 
   filterBoard(board, tasks) {
+    const queryStringArray = board.searchString.split(' ');
     return i.updateIn(board, ['data', 'groups'], groups =>
       filterGroups({groups, tasks, filterFn: (task) => {
-        return task && task.data ? task.data.name.includes(board.searchString) : true;
+        return task && task.data ? queryByStrings(task, queryStringArray) : true;
       }})
     )
   },
