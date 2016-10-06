@@ -38,9 +38,11 @@ export default class Card extends Component {
   render() {
     const { isDragging, connectDragSource, connectDropTarget, children, id } = this.props;
     return connectDragSource(connectDropTarget(
-      <div style={{transform: 'translate3d(0,0,0)'}} key={id}>
+      <div key={id}>
         {children}
       </div>
     ));
   }
 }
+
+//style={{transform: 'translate3d(0,0,0)'}}

@@ -66,7 +66,7 @@ const mainReducer = (state, action) => {
       })
 
     case 'TASKS/DELETE_EVENT':
-      return i.updateIn(state, ['events', action.meta.taskId, 'data'], events => {
+      return i.updateIn(state, ['events', action.payload.taskId, 'data'], events => {
         const eventIndex = events.findIndex(event => event._id == action.payload.eventId);
         return eventIndex != -1 ? i.splice(events, eventIndex, 1) : events;
       })

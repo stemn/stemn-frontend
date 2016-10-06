@@ -89,7 +89,7 @@ export const Component = React.createClass({
 
         <div className="layout-row">
           <div className="flex-70" style={{paddingRight: '15px'}}>
-            <div className="scroll-box" style={{maxHeight: '500px', paddingRight: '15px', borderTop: '1px solid rgba(0, 0, 0, 0.1)'}}>
+            <div className="scroll-box" style={{maxHeight: '500px', paddingRight: '15px', borderTop: '1px solid rgba(0, 0, 0, 0.1)', borderBottom: '1px solid rgba(0, 0, 0, 0.1)'}}>
               <TaskTimeline taskId={taskId} board={board} />
             </div>
             <div style={{paddingTop: '15px', paddingRight: '15px'}}>
@@ -103,7 +103,7 @@ export const Component = React.createClass({
                 <a style={{fontSize: '14px'}} onClick={this.showLabelEditModal}>+</a>
               </div>
               <div style={{maxHeight: '200px', overflowY: 'auto'}}>
-                {task && task.data && task.data.labels && board && board.data && board.data.labels
+                {board && board.data && board.data.labels
                   ?
                   <LabelSelect
                     model={`${entityModel}.data.labels`}

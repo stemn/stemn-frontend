@@ -14,23 +14,76 @@ import { getProviderPath } from '../shared/actions/system';
 
 
 if(!squirrelStartup){
-  console.log('Run App');
-
-  // we have to do this to ease remote-loading of the initial state :(
-  global.state = {};
+  global.state = {}; // Ease remote-loading of initial state
 
   if (process.env.NODE_ENV === 'development') {
     require('electron-debug')(); // eslint-disable-line global-require
   }
+  app.on('ready', () => {
+    start().catch((err) => {
+      dialog.showErrorBox('Something went wrong:', err.message);
+    });
+  });
+}
 
-  async function start() {
-    console.log('Log 1');
-    // set-up menu bar
-    const appIcon = tray();
-    global.state = await jsonStorage.get('state');
-    console.log('Log 2');
+/////////////////////////////////////////////////////////////////
+
+ async function start() {
+    const appIcon = tray(); // set-up menu bar
+    global.state = await jsonStorage.get('state').catch(error => {
+      jsonStorage.clear();
+      return {};
+    });
 
     const store = configureStore(global.state, 'main');
+
+    store.subscribe(async () => {
+      global.state = store.getState();
+      await jsonStorage.set('state', global.state) // TODO: should this be blocking / wait? _.throttle?
+    });
+    ipcMain.on('redux-action', (event, action) => {
+      store.dispatch(action);
+    });
+
+    ipcMain.on('electron-action', onElectronAction);
+    app.on('window-all-closed',   onCloseAllWindows);
+    app.on('activate',            onActivate);
+    appIcon.on('click',           onClickAppIcon);
+
+    // init
+    createMainWindow();
+    store.dispatch(getProviderPath());
+
+    // auto-updating
+    setTimeout(() => {
+      autoUpdater(store);
+    }, 5000);
+  }
+
+function onActivate(){
+  // On OS X it's common to re-create a window in the app when the
+  // dock icon is clicked and there are no other windows open.
+  createMainWindow();
+}
+
+function onClickAppIcon(event, trayBounds){
+  createMenuBar({ trayBounds });
+  showMenuWindow();
+}
+
+function onCloseAllWindows(){
+  if (process.platform !== 'darwin') app.quit();
+}
+
+function onElectronAction(event, action){
+  if(action.type == 'WINDOW_MAIN_OPEN'){
+    showMainWindow();
+  }
+  else if(action.type == 'WINDOW_MENUBAR_CLOSE'){
+    console.log('Close Menubar');
+  }
+}
+
 
 //    const websocket = wsInitialise({
 //      host : 'http://localhost',
@@ -51,56 +104,3 @@ if(!squirrelStartup){
 //        projectId : '57c77e2896f1d3a2604fc92c'
 //      }
 //    });
-
-    store.subscribe(async () => {
-      global.state = store.getState();
-      // persist store changes
-      // TODO: should this be blocking / wait? _.throttle?
-      await jsonStorage.set('state', global.state);
-    });
-
-    ipcMain.on('redux-action', (event, action) => {
-      store.dispatch(action);
-    });
-
-    ipcMain.on('electron-action', (event, action) => {
-      if(action.type == 'WINDOW_MAIN_OPEN'){
-        showMainWindow();
-      }
-      else if(action.type == 'WINDOW_MENUBAR_CLOSE'){
-        console.log('Close Menubar');
-      }
-    });
-
-    app.on('window-all-closed', () => {
-      if (process.platform !== 'darwin') app.quit();
-    });
-
-    app.on('activate', () => {
-      // On OS X it's common to re-create a window in the app when the
-      // dock icon is clicked and there are no other windows open.
-      createMainWindow();
-    });
-
-    appIcon.on('click', (event, trayBounds) => {
-      createMenuBar({ trayBounds });
-      showMenuWindow();
-    });
-
-    // init
-    createMainWindow();
-    store.dispatch(getProviderPath());
-
-    // auto-updating
-    setTimeout(() => {
-      autoUpdater(store);
-    }, 5000);
-  }
-
-
-  app.on('ready', () => {
-    start().catch((err) => {
-      dialog.showErrorBox('There\'s been an error', err.message);
-    });
-  });
-}

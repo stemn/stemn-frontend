@@ -9,6 +9,7 @@ export default (props) => {
   const id = Math.random().toString(36).substring(7);
   return (
     <div
+      title={props.title}
       className={classNames(classes.checkbox, props.className, {[classes.checkboxCircle] : props.circle})}>
       <Control.checkbox
         className={props.value ? 'checked' : ''}

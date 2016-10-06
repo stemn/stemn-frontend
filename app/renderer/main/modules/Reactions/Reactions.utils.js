@@ -30,7 +30,7 @@ export const groupAndOrderReactions = (reactions, options) => {
 function groupReactions(reactions){
   const groupedReactions = {};
   reactions.forEach(reaction => {
-    if(!groupedReactions[reaction.name]){
+    if(!groupedReactions[reaction.name] || !groupedReactions[reaction.name].list){
       groupedReactions[reaction.name] = {
         list: [reaction]
       }

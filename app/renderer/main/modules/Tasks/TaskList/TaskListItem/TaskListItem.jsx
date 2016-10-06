@@ -77,9 +77,10 @@ export const Component = React.createClass({
     }
     if(layout == 'list'){
       return (
-        <div className={classNames({[classes.isDragging]: task.isDragging && draggable})} onDoubleClick={this.showModal}>
+        <div className={classNames({[classes.isDragging]: task.isDragging && draggable})}>
           <div className={classNames(classes.listItem, 'layout-row flex layout-align-start-center')}>
             <Checkbox
+              title={task.data.complete ? 'Mark as incomplete' : 'Mark as complete'}
               model={`${entityModel}.data.complete`}
               value={task.data.complete}
               changeAction={this.toggleComplete}
@@ -128,9 +129,10 @@ export const Component = React.createClass({
     }
     else{
       return (
-        <div className={classNames(classes.card, 'layout-column flex')} onDoubleClick={this.showModal}>
+        <div className={classNames(classes.card, 'layout-column flex')}>
           <div className={classes.cardBody + ' layout-row'}>
             <Checkbox
+              title={task.data.complete ? 'Mark as incomplete' : 'Mark as complete'}
               model={`${entityModel}.data.complete`}
               value={task.data.complete}
               changeAction={this.toggleComplete}
@@ -165,12 +167,17 @@ export const Component = React.createClass({
               : ''
             }
           </div>
-          { task.data.labels && task.data.labels.length > 0 && board && board.data && board.data.labels ?
             <div className={classes.cardFooter + ' layout-row'}>
-              <TaskLabelDots labels={task.data.labels} labelInfo={board.data.labels} />
+              <div className="flex layout-row layout-align-start-center">
+                { task.data.labels && task.data.labels.length > 0 && board && board.data && board.data.labels ?
+                <TaskLabelDots labels={task.data.labels} labelInfo={board.data.labels} />
+                  : null
+                }
+              </div>
+              <SimpleIconButton onClick={this.showModal}>
+                <MdOpenInNew size="20px"/>
+              </SimpleIconButton>
             </div>
-            : null
-          }
         </div>
       );
     }
