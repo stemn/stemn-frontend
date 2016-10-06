@@ -51,12 +51,7 @@ export const Component = React.createClass({
     })
   },
   submitReaction(reactionType){
-//    console.log(name);
-//    console.log(this.props.comment.data.reactions);
-//    this.props.dispatch(actions.push(`${this.props.entityModel}.data.reactions`, {
-//      name: reactionType
-//    }))
-    this.props.commentsActions.newReaction({
+    this.props.commentsActions.toggleReaction({
       commentId: this.props.commentId,
       reactionType
     })

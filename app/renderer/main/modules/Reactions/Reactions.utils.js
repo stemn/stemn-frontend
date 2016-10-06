@@ -6,19 +6,19 @@ import heart       from './emoji/one/heart.png'
 
 export const options = [{
   path: thumbs_up,
-  name: 'up'
+  type: 'up'
 },{
   path: thumbs_down,
-  name: 'down'
+  type: 'down'
 },{
   path: party,
-  name: 'party'
+  type: 'party'
 },{
   path: heart,
-  name: 'heart'
+  type: 'heart'
 },{
   path: confused,
-  name: 'confused'
+  type: 'confused'
 }]
 
 export const groupAndOrderReactions = (reactions, options) => {
@@ -30,13 +30,13 @@ export const groupAndOrderReactions = (reactions, options) => {
 function groupReactions(reactions){
   const groupedReactions = {};
   reactions.forEach(reaction => {
-    if(!groupedReactions[reaction.name] || !groupedReactions[reaction.name].list){
-      groupedReactions[reaction.name] = {
+    if(!groupedReactions[reaction.type] || !groupedReactions[reaction.type].list){
+      groupedReactions[reaction.type] = {
         list: [reaction]
       }
     }
     else{
-      groupedReactions[reaction.name] = groupedReactions[reaction.name].list.push(reaction)
+      groupedReactions[reaction.type] = groupedReactions[reaction.type].list.push(reaction)
     }
   })
   return groupedReactions
@@ -46,11 +46,11 @@ function orderReactions(groupedReactions, options){
   // Orders reactions by the options array
   const orderedReactions = [];
   options.forEach(option => {
-    if(groupedReactions[option.name] && groupedReactions[option.name].list && groupedReactions[option.name].list.length > 0){
+    if(groupedReactions[option.type] && groupedReactions[option.type].list && groupedReactions[option.type].list.length > 0){
       orderedReactions.push({
-        name: option.name,
+        type: option.type,
         path: option.path,
-        list: groupedReactions[option.name].list
+        list: groupedReactions[option.type].list
       })
     }
   })

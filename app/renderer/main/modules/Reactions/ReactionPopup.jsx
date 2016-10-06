@@ -22,9 +22,9 @@ export default React.createClass({
         </SimpleIconButton>
         <div className="PopoverMenu">
           {options.map(option => <img
-            title={option.name}
-            onClick={()=>submitFn(option.name)}
-            key={option.name}
+            title={option.type}
+            onClick={()=>submitFn(option.type)}
+            key={option.type}
             className={classes.popupIcon}
             src={option.path}
           />)}

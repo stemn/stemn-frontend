@@ -17,7 +17,7 @@ export default React.createClass({
     const groupedReactions = reactions && reactions.length > 0 ? groupAndOrderReactions(reactions, options) : [];
     return (
       <span>
-        {groupedReactions.map(reaction => <PopoverMenu key={reaction.name} preferPlace="below" trigger="hover">
+        {groupedReactions.map(reaction => <PopoverMenu key={reaction.type} preferPlace="below" trigger="hover">
           <img className={classes.icon} src={reaction.path}/>
           <div className="PopoverMenu">
           </div>

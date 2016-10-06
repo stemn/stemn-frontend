@@ -31,11 +31,11 @@ import UserSelect from 'app/renderer/main/components/Users/UserSelect/UserSelect
 
 const onMount = (nextProps, prevProps) => {
   if(!prevProps || prevProps.item != nextProps.item){
-    if(!nextProps.task || !nextProps.task.data){
+//    if(!nextProps.task || !nextProps.task.data){
       nextProps.TasksActions.getTask({
         taskId: nextProps.item
       })
-    }
+//    }
   }
 }
 
