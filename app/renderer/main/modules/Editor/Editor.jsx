@@ -77,7 +77,7 @@ export const Component = React.createClass({
     if(type == 'user'){
       return "@" + name
     }
-    else if(type == 'task-related'){
+    else if(type == 'task'){
       return `#${name}`
     }
     else if(type == 'task-complete'){
@@ -156,7 +156,7 @@ export const Component = React.createClass({
         />
         <Mention
           trigger="#"
-          type="task-related"
+          type="task"
           data={this.userData}
           renderSuggestion={this.taskRenderSuggestion}
           style={{background: 'rgba(68, 211, 95, 0.3)'}}

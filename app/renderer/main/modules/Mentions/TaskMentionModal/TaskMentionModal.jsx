@@ -124,7 +124,7 @@ function getMentionsFromObject(mentionsObject, tasks){
       mentions.push(newMention({entityId: taskId, display: tasks[taskId].data.name, mentionType: 'task-complete'}))
     }
     else if(mentionsObject[taskId].related){
-      mentions.push(newMention({entityId: taskId, display: tasks[taskId].data.name, mentionType: 'task-related'}))
+      mentions.push(newMention({entityId: taskId, display: tasks[taskId].data.name, mentionType: 'task'}))
     }
   })
   return mentions;
