@@ -35,7 +35,7 @@ export function fetchChanges({projectId}) {
         method: 'GET',
         url: `http://localhost:3000/api/v1/sync/timeline/${projectId}`,
         params: {
-          type: 'changes'
+          types: ['changes'],
         },
         meta: {
           projectId

@@ -14,6 +14,7 @@ import { getProviderPath } from '../shared/actions/system';
 
 
 if(!squirrelStartup){
+  console.log('Run App');
 
   // we have to do this to ease remote-loading of the initial state :(
   global.state = {};
@@ -23,9 +24,11 @@ if(!squirrelStartup){
   }
 
   async function start() {
+    console.log('Log 1');
     // set-up menu bar
     const appIcon = tray();
     global.state = await jsonStorage.get('state');
+    console.log('Log 2');
 
     const store = configureStore(global.state, 'main');
 

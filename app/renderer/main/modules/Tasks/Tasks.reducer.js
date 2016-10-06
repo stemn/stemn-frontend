@@ -3,7 +3,6 @@ import i from 'icepick';
 import { cloneDeep } from 'lodash';
 import { modeled } from 'react-redux-form';
 import { groupTasks } from './Tasks.utils.js';
-import getUuid from '../../../../shared/helpers/getUuid.js';
 
 const initialState = {
   data: {},
@@ -61,6 +60,17 @@ const mainReducer = (state, action) => {
         data: action.payload.data,
         loading: false
       })
+    case 'TASKS/NEW_EVENT':
+      return i.updateIn(state, ['events', action.payload.taskId, 'data'], events => {
+        return i.push(events, action.payload.event)
+      })
+
+    case 'TASKS/DELETE_EVENT':
+      return i.updateIn(state, ['events', action.meta.taskId, 'data'], events => {
+        const eventIndex = events.findIndex(event => event._id == action.payload.eventId);
+        return eventIndex != -1 ? i.splice(events, eventIndex, 1) : events;
+      })
+
 
     case 'TASKS/UPDATE_BOARD_PENDING':
       return i.assocIn(state, ['boards', action.meta.cacheKey, 'savePending'], true);
@@ -123,23 +133,6 @@ const mainReducer = (state, action) => {
     case 'TASKS/END_DRAG':
       return i.assocIn(state, ['data', action.payload.taskId, 'isDragging'], false)
 
-
-
-//    // Other events to reduce
-//    case 'COMMENTS/NEW_COMMENT_FULFILLED': // Add the comment to the events array
-//      return i.updateIn(state, ['events', action.meta.taskId, 'events' , 'data'], events => {
-//        return i.push(events, {
-//          _id: getUuid(),
-//          event: 'comment',
-//          comment: action.payload.data._id
-//        })
-//      })
-//    case 'COMMENTS/DELETE_FULFILLED': // Remove the comment from the events
-//      return i.updateIn(state, ['events', action.meta.taskId, 'events', 'data'], events => {
-//        const eventIndex = events.indexOf(event => event.comment == action.meta.commentId);
-//        return eventIndex != -1 ? i.splice(events, eventIndex, 1) : events;
-//      })
-//
 
     default:
       return state;

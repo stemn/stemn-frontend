@@ -43,6 +43,28 @@ export function getBoard({projectId}){
   }
 }
 
+export function newEvent({taskId, event}){
+  const eventObject = Object.assign({}, {
+    _id: getUuid(),
+  }, event);
+  return {
+    type: 'TASKS/NEW_EVENT',
+    payload: {
+      event: eventObject,
+      taskId
+    },
+  }
+}
+export function deleteEvent({taskId, eventId}){
+  return {
+    type: 'TASKS/DELETE_EVENT',
+    payload: {
+      taskId,
+      eventId
+    }
+  }
+}
+
 export function getEvents({taskId}){
   return {
     type: 'TASKS/GET_EVENTS',

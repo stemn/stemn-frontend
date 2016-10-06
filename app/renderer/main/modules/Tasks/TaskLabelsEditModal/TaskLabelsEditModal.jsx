@@ -24,7 +24,9 @@ import Button from 'app/renderer/main/components/Buttons/Button/Button'
 
 export const Component = React.createClass({
   componentWillMount() {
-    this.props.dispatch(actions.load(`${this.props.boardModel}.forms.labels`, this.props.board.data.labels));
+    if(this.props.board && this.props.board.data && this.props.board.data.labels){
+      this.props.dispatch(actions.load(`${this.props.boardModel}.forms.labels`, this.props.board.data.labels));
+    }
   },
   submit() {
     this.props.dispatch(actions.change(`${this.props.boardModel}.data.labels`, this.props.board.forms.labels));

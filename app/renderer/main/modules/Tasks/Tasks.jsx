@@ -77,7 +77,7 @@ export const Component = React.createClass({
   filterBoard(board, tasks) {
     return i.updateIn(board, ['data', 'groups'], groups =>
       filterGroups({groups, tasks, filterFn: (task) => {
-        return task.data.name.includes(board.searchString);
+        return task && task.data ? task.data.name.includes(board.searchString) : true;
       }})
     )
   },
@@ -157,7 +157,7 @@ function isFilterActive(filterArray, filterString, searchString){
 }
 
 function stringContainsWord(fullString, word){
-  return fullString.match(new RegExp('(^|\\s+)'+word+'(\\s+|$)'));
+  return fullString && fullString.length > 0 ? fullString.match(new RegExp('(^|\\s+)'+word+'(\\s+|$)')) : false;
 }
 function replaceWord(fullString, word, newWord){
   return fullString.replace(new RegExp('(^|\\s+)'+word), newWord);
@@ -172,7 +172,7 @@ function mapStateToProps({ tasks, projects }, {projectId}) {
     tasks: tasks.data,
     project: projects[projectId],
     board: board,
-    boardModel: `tasks.boards.${board.data._id}`
+    boardModel: board && board.data && board.data._id ? `tasks.boards.${board.data._id}` : ''
   };
 }
 

@@ -44,7 +44,10 @@ export const Component = React.createClass({
 
   confirmDelete(){
     this.props.modalActions.showConfirm({
-      modalConfirm: CommentsActions.deleteComment({comment: this.props.comment.data})
+      modalConfirm: {
+        functionAlias: 'CommentsActions.deleteComment',
+        functionInputs: {comment: this.props.comment.data}
+      }
     })
   },
   submitReaction(reactionType){
@@ -57,7 +60,7 @@ export const Component = React.createClass({
   render() {
     const { item, comment, entityModel, commentsActions, style } = this.props;
 
-    if(!comment && comment.data){
+    if(!comment || !comment.data){
       return <div>Comment Loading</div>
     }
 

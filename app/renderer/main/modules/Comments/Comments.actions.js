@@ -1,3 +1,5 @@
+import http from 'axios';
+import * as TasksActions from 'app/renderer/main/modules/Tasks/Tasks.actions.js';
 
 export function getComment({commentId}) {
   return {
@@ -17,29 +19,26 @@ export function getComment({commentId}) {
 }
 
 export function newComment({comment}) {
-  //        body        :  { type : String,   default : ''         },
-  //        task        :  { type : ObjectId, ref     : 'Task'     },
-  //        owner       :  { type : ObjectId, ref     : 'User'     },
-  //        timestamp   :  { type : Date,     default : Date.now   },
-  //        edited      :  { type : Date,                          },
-  //        reactions   : [{
-  //            _id     :  { type : ObjectId                       },
-  //            owner   :  { type : ObjectId, ref     : 'User'     },
-  //            type    :  { type : Number,   default : 0          }
-  //        }]
   return (dispatch) => {
     if(comment && comment.body && comment.body.length > 0){
       dispatch({
         type: 'COMMENTS/NEW_COMMENT',
-        http: true,
-        payload: {
+        payload: http({
           url: `http://localhost:3000/api/v1/tasks/${comment.task}/comments`,
           method: 'POST',
           data: comment
-        },
+        }),
         meta: {
           taskId: comment.task
         }
+      }).then(response => {
+        dispatch(TasksActions.newEvent({
+          taskId: comment.task,
+          event: {
+            event: 'comment',
+            comment: response.value.data._id
+          }
+        }))
       })
     }
   }
@@ -80,17 +79,27 @@ export function finishEdit({commentId}) {
 }
 
 export function deleteComment({comment}) {
-  return {
-    type: 'COMMENTS/DELETE',
-    http: true,
-    payload: {
-      url: `http://localhost:3000/api/v1/comments/${comment._id}`,
-      method: 'DELETE'
-    },
-    meta: {
-      commentId: comment._id,
-      taskId: comment.task
-    }
+  return (dispatch, getState) => {
+    dispatch({
+      type: 'COMMENTS/DELETE',
+      payload: http({
+        url: `http://localhost:3000/api/v1/comments/${comment._id}`,
+        method: 'DELETE'
+      }),
+      meta: {
+        commentId: comment._id,
+        taskId: comment.task
+      }
+    }).then(response => {
+      // Get the eventId of the comment
+      const event = getState().tasks.events[comment.task].data.find(event => event.comment == comment._id);
+      if(event){
+        dispatch(TasksActions.deleteEvent({
+          taskId: comment.task,
+          eventId: event._id
+        }))
+      }
+    })
   }
 }
 
