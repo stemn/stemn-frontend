@@ -34,7 +34,11 @@ export const Component = React.createClass({
   componentWillMount() { onMount(this.props) },
   componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
   submit(){
+    // Get the mentions
     const mentions = getMentionsFromObject(this.props.mentions, this.props.tasks);
+    // Clear props.mentions;
+    this.props.dispatch(actions.change(this.props.mentionsModel, {}))
+
     this.props.modalConfirm({mentions});
     this.props.modalHide();
   },
@@ -144,8 +148,8 @@ function newMention({entityId, display, mentionType}){
 function mapStateToProps({tasks, mentions}, {projectId}) {
   return {
     tasks: tasks.data,
-    mentionsModel: `mentions.tasks.gooba`,
-    mentions: mentions.tasks.gooba || {}
+    mentionsModel: `mentions.tasks.${projectId}`,
+    mentions: mentions.tasks[projectId] || {}
   };
 }
 
