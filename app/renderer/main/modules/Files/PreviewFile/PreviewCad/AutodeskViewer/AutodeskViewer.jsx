@@ -1,4 +1,5 @@
 import React from 'react';
+import classes from './AutodeskViewer.css';
 
 import autodeskViewerUtils from './autodeskViewerUtils.js';
 
@@ -31,10 +32,10 @@ export default class extends React.Component{
       ///////////////////////////////
 
       function center(){
-          if(viewerInstance){
-              console.log('center');
-              viewerInstance.resize()
-          }
+        if(viewerInstance){
+          console.log('center');
+          viewerInstance.resize()
+        }
       }
 
       function loadDocument(viewer, options) {
@@ -45,26 +46,26 @@ export default class extends React.Component{
       }
 
       function onLoadCallback(doc){
-          // Get all the 3D and 2D views (but keep in separate arrays so we can differentiate in the UI)
-          oViews3D = window.Autodesk.Viewing.Document.getSubItemsWithProperties(doc.getRootItem(), {
-              'type': 'geometry',
-              'role': '3d'
-          }, true);
-          oViews2D = window.Autodesk.Viewing.Document.getSubItemsWithProperties(doc.getRootItem(), {
-              'type': 'geometry',
-              'role': '2d'
-          }, true);
+        // Get all the 3D and 2D views (but keep in separate arrays so we can differentiate in the UI)
+        oViews3D = window.Autodesk.Viewing.Document.getSubItemsWithProperties(doc.getRootItem(), {
+          'type': 'geometry',
+          'role': '3d'
+        }, true);
+        oViews2D = window.Autodesk.Viewing.Document.getSubItemsWithProperties(doc.getRootItem(), {
+          'type': 'geometry',
+          'role': '2d'
+        }, true);
 
-          // Load up first a 3D view by default
-          if (oViews3D.length > 0){
-              viewerInstance.load(doc.getViewablePath(oViews3D[0]));
-          }
-          else if (oViews2D.length > 0){
-              viewerInstance.load(doc.getViewablePath(oViews2D[0]));
-          }
-          else{
-//              $mdToast.show($mdToast.simple().theme('warn').content('Error: No views found'));
-          }
+        // Load up first a 3D view by default
+        if (oViews3D.length > 0){
+          viewerInstance.load(doc.getViewablePath(oViews3D[0]));
+        }
+        else if (oViews2D.length > 0){
+          viewerInstance.load(doc.getViewablePath(oViews2D[0]));
+        }
+        else{
+          // $mdToast.show($mdToast.simple().theme('warn').content('Error: No views found'));
+        }
       }
 
       function onErrorCallback(errorMsg){
@@ -72,10 +73,10 @@ export default class extends React.Component{
       }
 
       function onDestroy(){
-          AutoDeskInstanceService.deregister(viewerInstance);
+        AutoDeskInstanceService.deregister(viewerInstance);
       }
   }
   render() {
-    return <div ref="canvas"></div>
+    return <div className={classes.preview} ref="canvas"></div>
   }
 };

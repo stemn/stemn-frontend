@@ -177,7 +177,7 @@ function stringContainsWord(fullString, word){
   return fullString && fullString.length > 0 ? fullString.match(new RegExp('(^|\\s+)'+word+'(\\s+|$)')) : false;
 }
 function replaceWord(fullString, word, newWord){
-  return fullString.replace(new RegExp('(^|\\s+)'+word), newWord);
+  return fullString && fullString.length > 0 ? fullString.replace(new RegExp('(^|\\s+)'+word), newWord) : fullString;
 }
 
 ///////////////////////////////// CONTAINER /////////////////////////////////

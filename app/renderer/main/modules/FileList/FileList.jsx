@@ -61,7 +61,7 @@ export const Component = React.createClass({
     const displayResults = () => {
       const filesFiltered = options.foldersOnly && files.entries && files.entries.length > 0 ? files.entries.filter((file)=>file.type == 'folder') : files.data;
       if(filesFiltered && filesFiltered.length > 0){
-        return filesFiltered.map((file)=><FileRow file={file} singleClick={singleClickFn} doubleClick={doubleClickFn} isActive={selected && selected.fileId == file.fileId}/>)
+        return filesFiltered.map((file)=><FileRow key={file.fileId} file={file} singleClick={singleClickFn} doubleClick={doubleClickFn} isActive={selected && selected.fileId == file.fileId}/>)
       }
       else{
         return <div style={{padding: '15px'}}>No results</div>
@@ -74,7 +74,8 @@ export const Component = React.createClass({
           <FileBreadCrumbs meta={files && files.folder ? files.folder : ''} clickFn={crumbClickFn}/>
         </div>
         <div className="rel-box" style={{height: '300px', overflowY: 'auto'}}>
-        {files && !files.loading ? displayResults() : <LoadingOverlay />}
+          {files && !files.loading ? displayResults() :  ''}
+          <LoadingOverlay show={!files || files.loading} />
         </div>
       </div>
     );

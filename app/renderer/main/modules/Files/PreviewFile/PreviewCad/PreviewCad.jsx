@@ -7,8 +7,6 @@ import previewCadUtils from './PreviewCad.utils.js';
 import AutodeskViewer from './AutodeskViewer/AutodeskViewer';
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
-import styles from './PreviewCad.css';
-
 export default React.createClass({
   getInitialState () {
     return {
@@ -48,7 +46,7 @@ export default React.createClass({
   },
   checkStatus(){
     previewCadUtils.getViewStatus(this.state.urn).then((response) =>{
-      console.log(response);
+      console.log(response.data);
       this.setState({
         status: response.data.status
       })
@@ -67,7 +65,7 @@ export default React.createClass({
   },
   render() {
     if(this.state.status == 'success'){
-      return <div className={styles.container}><AutodeskViewer urn={this.state.urn} token={this.state.token} /></div>
+      return <div><AutodeskViewer urn={this.state.urn} token={this.state.token} /></div>
     }
     else if(this.state.status == 'failed'){
       return <div className="layout-column layout-align-center-center flex"><div className="text-center text-title-4">Failed</div></div>
