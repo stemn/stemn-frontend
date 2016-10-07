@@ -46,7 +46,6 @@ export default React.createClass({
   },
   checkStatus(){
     previewCadUtils.getViewStatus(this.state.urn).then((response) =>{
-      console.log(response.data);
       this.setState({
         status: response.data.status
       })

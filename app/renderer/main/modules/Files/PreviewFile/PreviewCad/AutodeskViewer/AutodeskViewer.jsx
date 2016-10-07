@@ -4,48 +4,12 @@ import classes from './AutodeskViewer.css';
 import autodeskViewerUtils from './autodeskViewerUtils.js';
 
 
-export default class extends React.Component{
+export default React.createClass({
+  viewerInstance: null,
   componentDidMount() {
-    var viewerEl = this.refs.canvas;
-    var oDocument = null,
-        viewerInstance = null;
-    var oViewables = null,
-        oViews3D = null,
-        oViews2D = null;
-    var options = {
-        'document': this.props.urn,
-        'accessToken': this.props.token,
-        'env': 'AutodeskProduction'
-    };
 
-//            $scope.$on('$destroy', onDestroy);
-//            $scope.previewer.center = center;
-
-
-      viewerInstance = autodeskViewerUtils.register(viewerEl); // With toolbar
-
-      window.Autodesk.Viewing.Initializer(options, function () {
-          viewerInstance.initialize();
-          loadDocument(viewerInstance, options);
-      });
-
-      ///////////////////////////////
-
-      function center(){
-        if(viewerInstance){
-          console.log('center');
-          viewerInstance.resize()
-        }
-      }
-
-      function loadDocument(viewer, options) {
-          if (options.document.substring(0, 4) === 'urn:'){
-              options.document = options.document.substring(4);
-          }
-          window.Autodesk.Viewing.Document.load('urn:' + options.document, onLoadCallback, onErrorCallback);
-      }
-
-      function onLoadCallback(doc){
+    const loadDocument = (viewer, options) => {
+      const onLoadCallback = (doc) => {
         // Get all the 3D and 2D views (but keep in separate arrays so we can differentiate in the UI)
         oViews3D = window.Autodesk.Viewing.Document.getSubItemsWithProperties(doc.getRootItem(), {
           'type': 'geometry',
@@ -58,25 +22,55 @@ export default class extends React.Component{
 
         // Load up first a 3D view by default
         if (oViews3D.length > 0){
-          viewerInstance.load(doc.getViewablePath(oViews3D[0]));
+          this.viewerInstance.load(doc.getViewablePath(oViews3D[0]));
         }
         else if (oViews2D.length > 0){
-          viewerInstance.load(doc.getViewablePath(oViews2D[0]));
+          this.viewerInstance.load(doc.getViewablePath(oViews2D[0]));
         }
         else{
           // $mdToast.show($mdToast.simple().theme('warn').content('Error: No views found'));
         }
       }
-
-      function onErrorCallback(errorMsg){
-//          $mdToast.show($mdToast.simple().theme('warn').content('Error: '+errorMsg));
+      const onErrorCallback = (errorMsg) => {
+  //          $mdToast.show($mdToast.simple().theme('warn').content('Error: '+errorMsg));
       }
 
-      function onDestroy(){
-        AutoDeskInstanceService.deregister(viewerInstance);
+      if (options.document.substring(0, 4) === 'urn:'){
+        options.document = options.document.substring(4);
       }
-  }
+      window.Autodesk.Viewing.Document.load('urn:' + options.document, onLoadCallback, onErrorCallback);
+    }
+
+    const center = () => {
+      if(this.viewerInstance){
+        this.viewerInstance.resize()
+      }
+    }
+
+    var viewerEl = this.refs.canvas;
+    var oDocument = null;
+
+    var oViewables = null,
+      oViews3D = null,
+      oViews2D = null;
+
+    var options = {
+      'document': this.props.urn,
+      'accessToken': this.props.token,
+      'env': 'AutodeskProduction'
+    };
+
+    this.viewerInstance = autodeskViewerUtils.register(viewerEl); // With toolbar
+
+    window.Autodesk.Viewing.Initializer(options, () => {
+      this.viewerInstance.initialize();
+      loadDocument(this.viewerInstance, options);
+    });
+  },
+  componentWillUnmount(){
+    autodeskViewerUtils.deregister(this.viewerInstance);
+  },
   render() {
     return <div className={classes.preview} ref="canvas"></div>
   }
-};
+});

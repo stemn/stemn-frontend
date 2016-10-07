@@ -24,13 +24,15 @@ import FileCompareMenu    from './FileCompareMenu/FileCompareMenu.jsx'
 /////////////////////////////////////////////////////////////////////////////
 
 const onMount = (nextProps, prevProps) => {
-  if(!prevProps || nextProps.compareId !== prevProps.compareId){
-    nextProps.fileCompareActions.init({
-      compareId: nextProps.compareId,
-      provider: nextProps.file1.provider,
-      file1: nextProps.file1,
-      file2: nextProps.file2,
-    })
+  if(!nextProps.fileCompare){
+    if(!prevProps || nextProps.compareId !== prevProps.compareId){
+      nextProps.fileCompareActions.init({
+        compareId: nextProps.compareId,
+        provider: nextProps.file1.provider,
+        file1: nextProps.file1,
+        file2: nextProps.file2,
+      })
+    }
   }
 }
 

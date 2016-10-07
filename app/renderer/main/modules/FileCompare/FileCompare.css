@@ -19,6 +19,7 @@
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 1;
 }
 
 .slider .preview2{
@@ -29,6 +30,7 @@
   width: 50%;
   overflow: hidden;
   border-right: 1px dotted primary;
+  z-index: 1;
 }
 
 .single .preview1{
