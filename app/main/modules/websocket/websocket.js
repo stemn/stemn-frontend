@@ -10,7 +10,7 @@ const lib = {
 export const initialise = (config) => {
 
  const socket = new Socket(`${config.host}:${config.port}`);
-console.log(socket)
+
  const socketError = (err) => socket.write({
    type : 'log',
    payload : {

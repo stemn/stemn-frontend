@@ -56,22 +56,14 @@ if(!squirrelStartup){
 
    const websocket = wsInitialise({
      host : `http://${process.env.WEBSOCKET_SERVER}`,
-     port : 8080
+     port : 8000
    });
 
    websocket.on('data', (action) => {
-console.log('websocket data', action)
     const reduxAction = mapWebsocketToRedux(action);
     if(reduxAction){
       store.dispatch(reduxAction)
     };
-   });
-
-   websocket.write({
-     type : 'CHANGES/FETCH_CHANGES',
-     payload : {
-       projectId : '57c77e2896f1d3a2604fc92c'
-     }
    });
 
     store.subscribe(async () => {
