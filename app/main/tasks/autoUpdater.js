@@ -10,7 +10,7 @@ import {
   updateNotAvailable,
 } from '../../shared/actions/system';
 
-const UPDATE_SERVER_HOST = 'timesheets-app.herokuapp.com';
+const UPDATE_SERVER = 'timesheets-app.herokuapp.com';
 
 export default function (store) {
   if (process.env.NODE_ENV !== 'production') {
@@ -41,6 +41,6 @@ export default function (store) {
 
   store.dispatch(checkingForUpdate());
 
-  autoUpdater.setFeedURL(`https://${UPDATE_SERVER_HOST}/update/${os.platform()}_${os.arch()}/${version}`);
+  autoUpdater.setFeedURL(`http://${UPDATE_SERVER}/update/${os.platform()}_${os.arch()}/${version}`);
   autoUpdater.checkForUpdates();
 }

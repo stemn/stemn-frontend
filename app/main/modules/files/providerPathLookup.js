@@ -53,7 +53,6 @@ const paths = {
                 const account = config.personal || config.business;
                 return account.path;
             }
-            console.log(err);
 
             return err
                 ? callback(err.code === 'ENOENT' ? `Dropbox not installed locally` : err)

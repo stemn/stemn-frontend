@@ -54,25 +54,25 @@ if(!squirrelStartup){
 
     const store = configureStore(global.state, 'main');
 
-//    const websocket = wsInitialise({
-//      host : `https://${process.env.WEBSOCKET_SERVER}`,
-//      port : 8080,
-//      token : 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1NDk4ZTI1OGE3ZmJiZmNjMTJjM2ZhMTUiLCJpYXQiOjE0NzAzNTkzMjkuMDI5LCJleHAiOjE0NzU1NDMzMjkuMDI5fQ.mwhOEtyhzc7Cqg4r9JLKTxgwzr-YnDYdLKW_CNOGeuA'
-//    });
-//
-//    websocket.on('data', (action) => {
-//     const reduxAction = mapWebsocketToRedux(action);
-//     if(reduxAction){
-//       store.dispatch(reduxAction)
-//     };
-//    });
-//
-//    websocket.write({
-//      type : 'CHANGES/FETCH_CHANGES',
-//      payload : {
-//        projectId : '57c77e2896f1d3a2604fc92c'
-//      }
-//    });
+   const websocket = wsInitialise({
+     host : `http://${process.env.WEBSOCKET_SERVER}`,
+     port : 8080
+   });
+
+   websocket.on('data', (action) => {
+console.log('websocket data', action)
+    const reduxAction = mapWebsocketToRedux(action);
+    if(reduxAction){
+      store.dispatch(reduxAction)
+    };
+   });
+
+   websocket.write({
+     type : 'CHANGES/FETCH_CHANGES',
+     payload : {
+       projectId : '57c77e2896f1d3a2604fc92c'
+     }
+   });
 
     store.subscribe(async () => {
       global.state = store.getState();
