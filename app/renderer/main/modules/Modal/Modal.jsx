@@ -60,10 +60,6 @@ const ModalRoot = (modal) => {
 }
 
 export const Component = React.createClass({
-  modalHide: function() {
-
-  },
-
   render: function() {
     const { modal, dispatch } = this.props;
 

@@ -277,6 +277,8 @@
 :global(.Select--multi .Select-input) {
   vertical-align: middle;
   margin-left: 10px;
+  height: 34px;
+  line-height: 34px;
   padding: 0;
 }
 
@@ -288,6 +290,7 @@
   display: inline-block;
   border: 1px solid border1;
   margin: 6px 0 3px 6px;
+  line-height: 1em;
 }
 
 :global(.Select--multi .Select-value-icon),

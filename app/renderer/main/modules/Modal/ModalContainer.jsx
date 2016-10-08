@@ -8,25 +8,16 @@ import React from 'react';
 // Styles
 import Modal from './Modal.jsx'
 
-
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-
 
 export const Component = React.createClass({
   render: function() {
     const { modals } = this.props;
+    console.log(modals);
     if(modals.stack && modals.stack.length > 0){
       return (
         <div>
-          {
-            modals.stack.map((modal) => {
-              if(modal){
-                return <Modal key={modal._id} modal={modal}></Modal>
-              }
-            })
-          }
+          {modals.stack.map(modal => modal ? <Modal key={modal.modalId} modal={modal}></Modal> : '')}
         </div>
       );
     }
@@ -36,9 +27,7 @@ export const Component = React.createClass({
   }
 });
 
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps({modals}) {
   return {
