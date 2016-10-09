@@ -1,8 +1,8 @@
 import http                  from 'axios';
-import getUuid               from 'app/shared/helpers/getUuid.js';
+import getUuid               from '../../../../shared/helpers/getUuid.js';
 import { actions }           from 'react-redux-form';
-import { show as showToast } from 'app/renderer/main/modules/Toasts/Toasts.actions.js';
-import { showModal }         from 'app/renderer/main/modules/Modal/Modal.actions.js';
+import { show as showToast } from '../Toasts/Toasts.actions.js';
+import { showModal }         from '../Modal/Modal.actions.js';
 
 export function newTask({boardId, task}) {
   return (dispatch, getState) => {
