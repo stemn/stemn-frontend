@@ -59,6 +59,7 @@ export function pullChanges({projectId}) {
 }
 
 export function mentionTasksModal({projectId, mentions}) {
+  console.log('modal');
   return (dispatch) => {
     dispatch(showModal({
       modalType: 'TASK_COMMIT',

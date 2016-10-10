@@ -22,21 +22,25 @@ export default class extends Component {
 
     return (
       <ReactCSSTransitionGroup
-       transitionName={transitionName}
+        transitionName={transitionName}
         transitionAppear={true}
         transitionAppearTimeout={300}
         transitionEnterTimeout={300}
         transitionLeaveTimeout={300}>
-        {show ?
+        {
+          show ?
           <div className={classes.loadingOverlay + ' overlay'} style={style}>
-              <div className={classes.loaderContainer}>
-                <LoadingSpinner size={size}/>
-                {children ? <div className={classes.text}>{children}</div> : ''}
-              </div>
+            <div className={classes.loaderContainer}>
+              <LoadingSpinner size={size}/>
+              {children ? <div className={classes.text}>{children}</div> : null}
+            </div>
           </div>
-          : ''
+          : null
         }
       </ReactCSSTransitionGroup>
     )
   }
 }
+
+
+

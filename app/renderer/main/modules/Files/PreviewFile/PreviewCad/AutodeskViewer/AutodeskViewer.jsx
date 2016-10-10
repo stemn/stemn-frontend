@@ -1,9 +1,8 @@
 import React from 'react';
 import classes from './AutodeskViewer.css';
-
 import autodeskViewerUtils from './autodeskViewerUtils.js';
 
-
+console.log(window.Autodesk);
 export default React.createClass({
   viewerInstance: null,
   componentDidMount() {
@@ -47,7 +46,7 @@ export default React.createClass({
       }
     }
 
-    var viewerEl = this.refs.canvas;
+    var viewerEl = this.refs.cadCanvas;
     var oDocument = null;
 
     var oViewables = null,
@@ -71,6 +70,6 @@ export default React.createClass({
     autodeskViewerUtils.deregister(this.viewerInstance);
   },
   render() {
-    return <div className={classes.preview} ref="canvas"></div>
+    return <div className={classes.preview} ref="cadCanvas"></div>
   }
 });
