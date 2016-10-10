@@ -5,6 +5,7 @@ import { parseMentions }     from '../Mentions/Mentions.utils.js';
 import { updateTask }        from '../Tasks/Tasks.actions.js';
 import i                     from 'icepick';
 import http                  from 'axios';
+import { get }               from 'lodash';
 
 export function selectedFileChange({projectId, selected}) {
   return {
@@ -16,13 +17,14 @@ export function selectedFileChange({projectId, selected}) {
   }
 }
 
-export function actToggleAll({projectId, model, value}) {
-  return (dispatch) => {
-    dispatch(actions.change(model, value));
-    return {
-        type: 'CHANGES/TOGGLE_ALL_CHANGED_FILES',
-        payload: {projectId, model, value}
-    }
+export function actToggleAll({projectId, model}) {
+  return (dispatch, getState) => {
+    const value = !get(getState(), model);
+    dispatch(actions.toggle(model, value));
+    dispatch({
+      type: 'CHANGES/TOGGLE_ALL_CHANGED_FILES',
+      payload: {projectId, model, value}
+    })
   };
 }
 
