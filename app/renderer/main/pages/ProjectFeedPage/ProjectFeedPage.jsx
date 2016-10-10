@@ -137,7 +137,7 @@ export const Component = React.createClass({
                   items={timeline && timeline.data ? timeline.data : []}
                   selected={timeline && timeline.selected ? timeline.selected._id : ''}
                   onSelect={this.selectTimelineItem}
-                  loading={timeline ? timeline.loading : true}
+                  loading={timeline && timeline.data ? false : true}
                 />
               </ContentSidebar>
             </div>

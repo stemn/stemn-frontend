@@ -22,7 +22,7 @@ import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
 import Button from 'app/renderer/main/components/Buttons/Button/Button';
 import TaskRow from './TaskRow/TaskRow.jsx';
 import { MdSearch } from 'react-icons/lib/md';
-import { filterBoard } from 'app/renderer/main/modules/Tasks/Tasks.utils.js';
+import { filterBoard, getAllTasks } from 'app/renderer/main/modules/Tasks/Tasks.utils.js';
 import TasksFilterMenu from 'app/renderer/main/modules/Tasks/TasksFilterMenu/TasksFilterMenu.jsx';
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 
@@ -76,6 +76,8 @@ export const Component = React.createClass({
     }
 
     const filteredBoard = filterBoard(board, tasks, board.searchString);
+    const numTasks = getAllTasks(board.data.groups).length;
+    const numFilteredTasks = getAllTasks(filteredBoard.data.groups).length;
 
     return (
       <div className={classes.modal + ' layout-column'}>
@@ -94,18 +96,27 @@ export const Component = React.createClass({
             </PopoverMenu>
           </div>
         </div>
-        <div className="flex scroll-box">
-          {filteredBoard.data.groups.map(group => <div>
-            {group.tasks.map(taskId => <TaskRow
-              key={taskId}
-              taskId={taskId}
-              mention={mentions[taskId]}
-              toggleComplete={()=>this.toggle({type: 'complete',taskId, mention: mentions[taskId]})}
-              toggleRelated={()=>this.toggle({type: 'related',taskId, mention: mentions[taskId]})}
-            />
-            )}
-          </div>)}
-        </div>
+        {
+          numTasks == 0 || numFilteredTasks == 0 ?
+          <div className="flex layout-column layout-align-center-center text-center">
+            {numTasks == 0
+              ? <div style={{width: '100%'}}>This project has no tasks. Add some.</div>
+              : <div style={{width: '100%'}}>No results, <a className="text-primary" onClick={()=>this.props.dispatch(actions.change(`${boardModel}.searchString`, ''))}>clear search filter.</a></div>
+            }
+          </div> :
+          <div className="flex scroll-box">
+            {filteredBoard.data.groups.map(group => <div>
+              {group.tasks.map(taskId => <TaskRow
+                key={taskId}
+                taskId={taskId}
+                mention={mentions[taskId]}
+                toggleComplete={()=>this.toggle({type: 'complete',taskId, mention: mentions[taskId]})}
+                toggleRelated={()=>this.toggle({type: 'related',taskId, mention: mentions[taskId]})}
+              />
+              )}
+            </div>)}
+          </div>
+        }
         <div className="modal-footer layout-row layout-align-start-center">
           <div className="flex text-description-1"></div>
           <Button style={{marginRight: '10px'}} onClick={this.cancel}>Cancel</Button>

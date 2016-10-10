@@ -23,6 +23,12 @@ export const isFilterActive = (filterArray, filterString, searchString) =>{
   }
 };
 
+export const getAllTasks = (boardGroups) =>{
+  let tasks = [];
+  boardGroups.forEach(group => tasks = tasks.concat(group.tasks))
+  return tasks;
+};
+
 export const addFilter = ({dispatch, model, value, filterArray, filterString}) => {
   /****************************************************
   This will add the filterString to the model. It will

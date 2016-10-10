@@ -87,9 +87,9 @@ export const Component = React.createClass({
       )
     }
     return (
-      <div>
+      <div className="rel-box">
         {auth.user && user.data ? getInner() : ''}
-        <LoadingOverlay show={auth.authLoading || user.loading}/>
+        <LoadingOverlay show={auth.authLoading || !user || !user.data}/>
       </div>
     );
   }
