@@ -13,7 +13,6 @@ import Modal from './Modal.jsx'
 export const Component = React.createClass({
   render: function() {
     const { modals } = this.props;
-    console.log(modals);
     if(modals.stack && modals.stack.length > 0){
       return (
         <div>

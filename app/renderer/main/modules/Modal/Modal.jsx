@@ -54,7 +54,6 @@ const ModalRoot = (modal) => {
     modalCancel: modal.modalCancel,
     modalConfirm: modal.modalConfirm
   });
-  console.log(<SpecificModal />);
   return (
     <SpecificModal {...extendedModalProps} />
   )

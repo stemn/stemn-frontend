@@ -7,18 +7,24 @@ import { connect } from 'react-redux';
 // Component Core
 import React from 'react';
 import moment from 'moment';
-import { actions } from 'react-redux-form';
+import { actions, Field } from 'react-redux-form';
 import getUuid from 'app/shared/helpers/getUuid.js';
 
 // Styles
 import classNames from 'classnames';
 import classes from './TaskMentionModal.css';
 
+// Helpers
+import howMany from 'app/shared/helpers/strings/howMany.js';
+
 // Sub Components
 import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
 import Button from 'app/renderer/main/components/Buttons/Button/Button';
 import TaskRow from './TaskRow/TaskRow.jsx';
 import { MdSearch } from 'react-icons/lib/md';
+import { filterBoard } from 'app/renderer/main/modules/Tasks/Tasks.utils.js';
+import TasksFilterMenu from 'app/renderer/main/modules/Tasks/TasksFilterMenu/TasksFilterMenu.jsx';
+import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -63,18 +69,13 @@ export const Component = React.createClass({
   },
 
   render() {
-    const { tasks, mentions } = this.props;
-    if(!tasks){
+    const { tasks, board, mentions, boardModel } = this.props;
+
+    if(!board){
       return <div>Loading</div>
     }
 
-    const numComplete = filterMentions(mentions, 'complete').length;
-    const numRelated = filterMentions(mentions, 'related').length;
-
-    let summaryString = numComplete > 0 ? `${numComplete} completed` : '';
-    summaryString += (numComplete > 0 && numRelated > 0) ? ` and ` : '';
-    summaryString += numRelated > 0 ? `${numRelated} related` : '';
-    summaryString += (numComplete > 0 || numRelated > 0) ? ` task${(numRelated > 1 || (numRelated == 0 && numComplete > 1)) ? 's' : ''}.` : '';
+    const filteredBoard = filterBoard(board, tasks, board.searchString);
 
     return (
       <div className={classes.modal + ' layout-column'}>
@@ -82,28 +83,28 @@ export const Component = React.createClass({
           Add tasks to a commit:
         </div>
         <div className={classes.header + ' layout-row layout-align-start-center'}>
-          <div className="flex">{summaryString}</div>
+          <div className="flex">{howMany({count: filterMentions(mentions, 'complete').length, adj: 'complete'}, {count: filterMentions(mentions, 'related').length, adj: 'related'}, 'task')}</div>
           <div className={classes.search}>
-            <input className="dr-input" placeholder="Search tasks"/>
-            <MdSearch size="20"/>
+            <Field model={`${boardModel}.searchString`}>
+              <input className="dr-input" placeholder="Search tasks"/>
+            </Field>
+            <PopoverMenu preferPlace="right" trigger="hoverDelay">
+              <MdSearch size="20"/>
+              <div><TasksFilterMenu model={`${boardModel}.searchString`} value={board.searchString}/></div>
+            </PopoverMenu>
           </div>
         </div>
         <div className="flex scroll-box">
-          {Object.keys(tasks).map((taskId) => <TaskRow
-          key={taskId}
-          taskId={taskId}
-          mention={mentions[taskId]}
-          toggleComplete={()=>this.toggle({
-            type: 'complete',
-            taskId,
-            mention: mentions[taskId],
-          })}
-          toggleRelated={()=>this.toggle({
-            type: 'related',
-            taskId,
-            mention: mentions[taskId],
-          })}
-          />)}
+          {filteredBoard.data.groups.map(group => <div>
+            {group.tasks.map(taskId => <TaskRow
+              key={taskId}
+              taskId={taskId}
+              mention={mentions[taskId]}
+              toggleComplete={()=>this.toggle({type: 'complete',taskId, mention: mentions[taskId]})}
+              toggleRelated={()=>this.toggle({type: 'related',taskId, mention: mentions[taskId]})}
+            />
+            )}
+          </div>)}
         </div>
         <div className="modal-footer layout-row layout-align-start-center">
           <div className="flex text-description-1"></div>
@@ -145,11 +146,15 @@ function newMention({entityId, display, mentionType}){
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps({tasks, mentions}, {projectId}) {
+function mapStateToProps({ tasks, mentions }, {projectId}) {
+  const projectBoards = tasks.projects && tasks.projects[projectId] ? tasks.projects[projectId].boards : null;
+  const board = projectBoards ? tasks.boards[projectBoards[0]] : {};
   return {
     tasks: tasks.data,
+    board: board,
+    boardModel: board && board.data && board.data._id ? `tasks.boards.${board.data._id}` : '',
+    mentions: mentions.tasks[projectId] || {},
     mentionsModel: `mentions.tasks.${projectId}`,
-    mentions: mentions.tasks[projectId] || {}
   };
 }
 

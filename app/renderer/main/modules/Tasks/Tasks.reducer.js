@@ -2,7 +2,6 @@ import u from 'updeep';
 import i from 'icepick';
 import { cloneDeep } from 'lodash';
 import { modeled } from 'react-redux-form';
-import { groupTasks } from './Tasks.utils.js';
 
 const initialState = {
   data: {},
