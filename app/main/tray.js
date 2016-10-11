@@ -36,7 +36,6 @@ export default function create() {
   ])
   appIcon = new Tray(trayIcon);
   appIcon.setToolTip('STEMN Sync');
-  appIcon.setToolTip('Electron Demo in the tray.')
   appIcon.setContextMenu(contextMenu)
 
   return appIcon;
