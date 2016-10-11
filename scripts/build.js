@@ -1,26 +1,21 @@
+/**************************************************
+This application must be built using `npm run build`
+before this script can be used.
+**************************************************/
+
 "use strict"
+//const buildTypes = ['WINDOWS', 'LINUX', '0SX'];
+//const buildTypes = ['WINDOWS'];
+//const buildTypes = ['LINUX'];
+const buildTypes = ['OSX'];
 
 const builder = require("electron-builder")
-const Platform = builder.Platform
-//const buildTypes = ['WINDOWS', 'LINUX'];
-//const build = (platform) => {
-//  //platform = 'WINDOWS' 'LINUX' 'OSX
-//  builder.build({
-//    targets: Platform[platform].createTarget(),
-//    devMetadata: {
-//      "//": "build and other properties, see https://goo.gl/5jVxoO"
-//    }
-//  })
-//  .catch((error) => {
-//    console.error(error);
-//  })
-//}
-//
+const Platform = builder.Platform;
 
-// buildTypes.map(build);
-
+// platform = 'WINDOWS' 'LINUX' 'OSX
+const build = (platform) => {
   builder.build({
-    targets: Platform.LINUX.createTarget(),
+    targets: Platform[platform].createTarget(),
     devMetadata: {
       "//": "build and other properties, see https://goo.gl/5jVxoO"
     }
@@ -28,3 +23,6 @@ const Platform = builder.Platform
   .catch((error) => {
     console.error(error);
   })
+}
+
+ buildTypes.map(build);
