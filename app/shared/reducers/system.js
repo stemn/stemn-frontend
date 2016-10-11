@@ -21,8 +21,7 @@ function reducer(state, action) {
         ...state,
         providerPath: {
           dropbox: action.payload.dropbox,
-          drive: action.payload.drive,
-          onedrive: action.payload.onedrive,
+          drive: action.payload.drive
         }
       };
     }
@@ -82,5 +81,3 @@ function reducer(state, action) {
 export default function (state = initialState, action) {
   return modeled(reducer, 'system')(state, action)
 }
-
-

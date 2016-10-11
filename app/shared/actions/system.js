@@ -5,11 +5,10 @@ import { shell } from 'electron';
 export function getProviderPath() {
   return {
     type: 'SYSTEM/GET_PROVIDER_PATH',
-    payload: Promise.all(['dropbox', 'drive', 'onedrive'].map(providerPathLookup)).then(response => {
+    payload: Promise.all(['dropbox', 'drive'].map(providerPathLookup)).then(response => {
       return {
         dropbox: response[0],
-        drive: response[1],
-        onedrive: response[2],
+        drive: response[1]
       }
     }).catch( error => console.log(error))
   };
