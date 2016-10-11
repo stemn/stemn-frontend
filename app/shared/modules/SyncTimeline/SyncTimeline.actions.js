@@ -17,7 +17,7 @@ export function fetchTimeline({projectId, fileId}) {
     http: true,
     payload: {
       method: 'GET',
-      url: `http://localhost:3000/api/v1/sync/timeline/${projectId}`,
+      url: `/api/v1/sync/timeline/${projectId}`,
       params: {
         types: ['revisions', 'commits'],
         file: fileId

@@ -70,7 +70,7 @@ export function newReaction({commentId, reactionType}) {
       type: 'COMMENTS/NEW_REACTION',
       http: true,
       payload: {
-        url: `http://localhost:3000/api/v1/comments/${commentId}/reaction`,
+        url: `/api/v1/comments/${commentId}/reaction`,
         method: 'POST',
         data: reaction
       },
@@ -87,7 +87,7 @@ export function deleteReaction({commentId, reactionType}) {
       type: 'COMMENTS/DELETE_REACTION',
       http: true,
       payload: {
-        url: `http://localhost:3000/api/v1/comments/${commentId}/reaction/${reactionType}`,
+        url: `/api/v1/comments/${commentId}/reaction/${reactionType}`,
         method: 'DELETE',
       },
       meta: {
@@ -118,24 +118,11 @@ export function finishEdit({commentId}) {
 }
 
 export function deleteComment({comment}) {
-<<<<<<< HEAD
-  return {
-    type: 'COMMENTS/DELETE',
-    http: true,
-    payload: {
-      url: `/api/v1/comments/${comment._id}`,
-      method: 'DELETE'
-    },
-    meta: {
-      commentId: comment._id,
-      taskId: comment.task
-    }
-=======
   return (dispatch, getState) => {
     dispatch({
       type: 'COMMENTS/DELETE',
       payload: http({
-        url: `http://localhost:3000/api/v1/comments/${comment._id}`,
+        url: `/api/v1/comments/${comment._id}`,
         method: 'DELETE'
       }),
       meta: {
@@ -152,7 +139,6 @@ export function deleteComment({comment}) {
         }))
       }
     })
->>>>>>> origin/master
   }
 }
 
