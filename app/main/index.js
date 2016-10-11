@@ -5,7 +5,7 @@ import pify from 'pify';
 const jsonStorage = pify(require('electron-json-storage'))
 import { createMainWindow, showMainWindow } from './createMainWindow';
 import { createMenuBar, showMenuWindow } from './createMenuBarWindow';
-import { initialise as wsInitialise, write as wsWrite } from './modules/websocket/websocket.js';
+//import { initialise as wsInitialise, write as wsWrite } from './modules/websocket/websocket.js';
 import configureStore from '../shared/store/configureStore';
 import tray from './tray';
 import autoUpdater from './tasks/autoUpdater';
@@ -13,13 +13,11 @@ import squirrelStartup from 'electron-squirrel-startup';
 import mapWebsocketToRedux from './modules/websocket/mapWebsocketToRedux'
 import { getProviderPath } from '../shared/actions/system';
 
-
 if(!squirrelStartup){
   global.state = {}; // Ease remote-loading of initial state
 
-  if (process.env.NODE_ENV === 'development') {
-    require('electron-debug')(); // eslint-disable-line global-require
-  }
+  require('electron-debug')({enabled: true});
+
   app.on('ready', () => {
     start().catch((err) => {
       dialog.showErrorBox('Something went wrong:', err.message);

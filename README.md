@@ -38,16 +38,6 @@ node scripts/build.js
 ```
 
 
-### Release
-
-After you've bumped the version number in `app/package.json`, run:
-
-```bash
-GH_TOKEN=... CSC_NAME=... npm run release
-```
-
----
-
 ### Contributors
 
 Special thanks go to:
