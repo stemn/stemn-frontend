@@ -33,6 +33,9 @@
 .comment:first-child{
   margin-top: 15px;
 }
+.comment:last-child{
+  margin-bottom: 15px;
+}
 .comment + .comment{
   margin-top: 15px;
 }

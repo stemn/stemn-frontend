@@ -2,7 +2,6 @@ import providerPathLookup from '../../main/modules/files/providerPathLookup.js';
 import Promise from 'es6-promise';
 import { shell } from 'electron';
 
-
 export function getProviderPath() {
   return {
     type: 'SYSTEM/GET_PROVIDER_PATH',
@@ -24,9 +23,6 @@ export function openFileLocation({path}) {
       type: 'SYSTEM/OPEN_FILE_LOCATION',
       payload: {}
     })
-//  return {
-//    type: 'SYSTEM/OPEN_FILE',
-//  };
   }
 }
 
@@ -38,9 +34,6 @@ export function openFile({path}) {
       type: 'SYSTEM/OPEN_FILE',
       payload: {}
     })
-//  return {
-//    type: 'SYSTEM/OPEN_FILE',
-//  };
   }
 }
 

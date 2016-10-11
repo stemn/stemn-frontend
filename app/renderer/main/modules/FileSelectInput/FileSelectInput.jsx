@@ -7,14 +7,11 @@ import { actions } from 'react-redux-form';
 import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 
 import classes from './FileSelectInput.css'
-
-import Modal from 'app/renderer/main/modules/Modal/Modal.jsx'
-import {MdFolder} from 'react-icons/lib/md';
+import { MdFolder } from 'react-icons/lib/md';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 
 const Component = React.createClass({
   showModal(){
-    console.log('here');
     this.props.ModalActions.showModal({
       modalType: 'FILE_SELECT',
       modalProps: {
@@ -31,10 +28,12 @@ const Component = React.createClass({
     })
   },
   render() {
-    const {projectId, provider, model, value} = this.props;
+    const {provider, model, value} = this.props;
     return (
       <div className={classes.fileSelectInput + ' layout-row layout-align-start-center'} onClick={this.showModal}>
-        <div className={classes.text + ' flex'}><span style={{textTransform: 'capitalize'}}>{provider}/</span>{value.path}</div>
+        <div className={classes.text + ' flex'}>
+          {value && value.path && value.path.length > 0 ? <span><span style={{textTransform: 'capitalize'}}>{provider}/</span>{value.path}</span> : 'Select the project path'}
+        </div>
         <SimpleIconButton>
           <MdFolder size="22" />
         </SimpleIconButton>
@@ -42,9 +41,7 @@ const Component = React.createClass({
     );
   }
 });
-//        <FileSelectModal
 
-//        />
 function mapStateToProps() {
   return {};
 }

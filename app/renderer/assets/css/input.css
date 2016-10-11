@@ -8,6 +8,14 @@
   border: 1px solid border1;
   resize: none;
 }
+.dr-input:global(.active) {
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+.dr-input:focus {
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
 .input-plain{
   width: 100%;
   outline: none;
@@ -18,8 +26,4 @@
 }
 textarea.input-plain{
   overflow: hidden;
-}
-.dr-input:focus {
-  outline: none;
-  border: 1px solid rgba(0, 0, 0, 0.4);
 }

@@ -1,3 +1,5 @@
+import { modeled } from 'react-redux-form';
+
 const initialState = {
   providerPath: {
     dropbox: null,
@@ -12,10 +14,9 @@ const initialState = {
   updateNotAvailable: false,
 };
 
-export default function system(state = initialState, action) {
+function reducer(state, action) {
   switch (action.type) {
     case 'SYSTEM/GET_PROVIDER_PATH_FULFILLED': {
-      console.log(action.payload);
       return {
         ...state,
         providerPath: {
@@ -77,3 +78,9 @@ export default function system(state = initialState, action) {
       return state;
   }
 }
+
+export default function (state = initialState, action) {
+  return modeled(reducer, 'system')(state, action)
+}
+
+

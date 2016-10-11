@@ -28,7 +28,7 @@ export default class Calendar extends Component {
 
   render() {
     const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-    const { selectedDate, viewDate, type, weekOffset, renderDay, onNextMonth, onPrevMonth, onPickDate } = this.props;
+    const { className, selectedDate, viewDate, type, weekOffset, renderDay, onNextMonth, onPrevMonth, onPickDate } = this.props;
 
     const calendarObject = createDateObjects(viewDate, weekOffset);
     calendarObject.forEach( item => {
@@ -42,7 +42,7 @@ export default class Calendar extends Component {
 
 
     return (
-      <div className={classNames(classes.calendar, {[classes.calendarDatepicker] : type == 'datepicker'})}>
+      <div className={classNames(className, classes.calendar, {[classes.calendarDatepicker] : type == 'datepicker'})}>
 
         {
           type == 'datepicker'
@@ -67,7 +67,7 @@ export default class Calendar extends Component {
               className={classNames(day.classNames, classes.calendarGridItem)}
               onClick={(e) => onPickDate(day.day)}
             >
-              {renderDay(day.day)}
+              <span>{renderDay(day.day)}</span>
             </div>
           )}
         </div>

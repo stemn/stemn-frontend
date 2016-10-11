@@ -1,0 +1,14 @@
+.icon{
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+}
+.popupIcon{
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  transition: 0.1s ease all;
+}
+.popupIcon:hover{
+  transform: scale(1.3);
+}

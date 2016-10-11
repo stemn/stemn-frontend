@@ -5,7 +5,6 @@ import system from './system';
 import header from './header';
 import auth from './auth';
 import sidebar from './sidebar';
-import settings from './settings';
 import project from './project';
 import projectSettings from './projectSettings';
 import projects from './projects';
@@ -36,7 +35,6 @@ export default function getRootReducer(scope = 'main') {
     auth,
     sidebar,
     syncTimeline,
-    settings,
     project,
     projectSettings,
     projects,
@@ -69,5 +67,12 @@ export default function getRootReducer(scope = 'main') {
     };
   }
 
-  return combineReducers({ ...reducers });
+  const appReducer = combineReducers({  ...reducers });
+
+  return (state, action) => {
+    if (action.type === 'STATE/CLEAR') {
+      state = undefined
+    }
+    return appReducer(state, action)
+  }
 }

@@ -26,27 +26,35 @@ import Textarea from 'app/renderer/main/components/Input/Textarea/Textarea';
 import UserSelect from 'app/renderer/main/components/Users/UserSelect/UserSelect.jsx';
 
 
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
+
+const onMount = (nextProps, prevProps) => {
+  if(!prevProps || prevProps.item != nextProps.item){
+//    if(!nextProps.task || !nextProps.task.data){
+      nextProps.TasksActions.getTask({
+        taskId: nextProps.item
+      })
+//    }
+  }
+}
 
 export const Component = React.createClass({
-  componentWillMount() {
-    this.props.TasksActions.getTask({
-      taskId: this.props.item
-    })
-  },
+  // Mounting
+  componentWillMount() { onMount(this.props) },
+  componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
+
   updateTask(){
     setTimeout(()=>this.props.TasksActions.updateTask({task: this.props.task.data}), 1);
   },
   toggleComplete(model, value){
-    this.props.TasksActions.toggleComplete({
-      taskId: this.props.task.data._id,
-      model,
-      value
-    })
-    this.updateTask();
+    console.log(model, value);
+//    this.props.TasksActions.toggleComplete({
+//      taskId: this.props.task.data._id,
+//      model,
+//      value
+//    })
+//    this.updateTask();
   },
   deleteTask(){
     this.props.TasksActions.deleteTask({
@@ -69,9 +77,10 @@ export const Component = React.createClass({
     }
     if(layout == 'list'){
       return (
-        <div className={classNames({[classes.isDragging]: task.isDragging && draggable})} onDoubleClick={this.showModal}>
+        <div className={classNames({[classes.isDragging]: task.isDragging && draggable})}>
           <div className={classNames(classes.listItem, 'layout-row flex layout-align-start-center')}>
             <Checkbox
+              title={task.data.complete ? 'Mark as incomplete' : 'Mark as complete'}
               model={`${entityModel}.data.complete`}
               value={task.data.complete}
               changeAction={this.toggleComplete}
@@ -86,7 +95,10 @@ export const Component = React.createClass({
                   placeholder="Task description" />
               </Field>
             </div>
-            <TaskLabelDots labels={task.data.labels} labelInfo={board.data.labels} tag="true" />
+            { task.data.labels && task.data.labels.length > 0 && board && board.data && board.data.labels ?
+              <TaskLabelDots labels={task.data.labels} labelInfo={board.data.labels} tag={true} />
+              : null
+            }
             <div className={classes.listUser + ' layout-row layout-align-start-center text-ellipsis'}>
               {task.data.users ? task.data.users.map( user =>
                 <UserAvatar
@@ -117,14 +129,16 @@ export const Component = React.createClass({
     }
     else{
       return (
-        <div className={classNames(classes.card, 'layout-column flex')} onDoubleClick={this.showModal}>
+        <div className={classNames(classes.card, 'layout-column flex')}>
           <div className={classes.cardBody + ' layout-row'}>
             <Checkbox
+              title={task.data.complete ? 'Mark as incomplete' : 'Mark as complete'}
               model={`${entityModel}.data.complete`}
               value={task.data.complete}
               changeAction={this.toggleComplete}
               className="text-primary"
-              circle={true} />
+              circle={true}
+            />
             <div className={classes.cardText + ' flex'}>
               <Textarea
                 onChange={this.updateTask}
@@ -132,25 +146,38 @@ export const Component = React.createClass({
                 value={task.data.name}
                 className="input-plain"
                 type="text"
-                placeholder="Task description" />
+                placeholder="Task description"
+              />
             </div>
-            <PopoverMenu preferPlace="right" disableClickClose={true}>
-              {task.data.users ? task.data.users.map( user =>
-                <UserAvatar
-                  picture={user.picture}
-                  size="25px"/>
-              ) : null}
-              <div className="PopoverMenu" style={{padding: '15px'}}>
-                <UserSelect value="dropbox" />
-              </div>
-            </PopoverMenu>
+
+            {task.data.users && task.data.users.length > 0 ?
+              <PopoverMenu preferPlace="right" disableClickClose={true}>
+                <div>
+                  {task.data.users.map( user =>
+                    <UserAvatar
+                      key={user._id}
+                      picture={user.picture}
+                      size="25px"/>
+                  )}
+                </div>
+                <div className="PopoverMenu" style={{padding: '15px'}}>
+                  <UserSelect value="dropbox" />
+                </div>
+              </PopoverMenu>
+              : ''
+            }
           </div>
-          { task.data.labels && task.data.labels.length > 0 ?
             <div className={classes.cardFooter + ' layout-row'}>
-              <TaskLabelDots labels={task.data.labels} labelInfo={board.data.labels} />
+              <div className="flex layout-row layout-align-start-center">
+                { task.data.labels && task.data.labels.length > 0 && board && board.data && board.data.labels ?
+                <TaskLabelDots labels={task.data.labels} labelInfo={board.data.labels} />
+                  : null
+                }
+              </div>
+              <SimpleIconButton onClick={this.showModal}>
+                <MdOpenInNew size="20px"/>
+              </SimpleIconButton>
             </div>
-            : null
-          }
         </div>
       );
     }
@@ -158,9 +185,9 @@ export const Component = React.createClass({
 });
 
 
-/////////////////////////////////////////////////////////////////////////////
+
+
 ///////////////////////////////// CONTAINER /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps({ tasks }, {item}) {
   const task          = tasks.data[item];

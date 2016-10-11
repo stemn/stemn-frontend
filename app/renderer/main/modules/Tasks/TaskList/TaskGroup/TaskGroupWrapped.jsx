@@ -96,10 +96,10 @@ export default class Card extends Component {
   };
 
   render() {
-    const { item, isDragging, connectDragSource, connectDropTarget, children } = this.props;
+    const { item, isDragging, connectDragSource, connectDropTarget, children, id } = this.props;
     const outerStyles = isDragging ? {opacity: '0.5'} : {opacity: '1', transform: 'translate3d(0,0,0)'};
     return connectDragSource(connectDropTarget(
-      <div style={outerStyles}>
+      <div style={outerStyles} key={id}>
         {children}
       </div>
     ));

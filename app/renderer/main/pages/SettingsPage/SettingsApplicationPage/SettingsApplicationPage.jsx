@@ -3,9 +3,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as SettingsActions from 'app/shared/actions/settings';
-import * as UsersActions from 'app/shared/actions/users';
-import * as AuthActions from 'app/shared/actions/auth';
+import * as SystemActions from 'app/shared/actions/system';
+import * as StateActions from 'app/shared/actions/state';
+import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 
 // Component Core
 import React from 'react';
@@ -19,53 +19,82 @@ import { Field } from 'react-redux-form';
 import { Link } from 'react-router';
 import Toggle from 'app/renderer/main/components/Input/Toggle/Toggle'
 import Button from 'app/renderer/main/components/Buttons/Button/Button.jsx'
+import FileSelectInputElectron from 'app/renderer/main/modules/FileSelectInput/FileSelectInputElectron.jsx'
 
-
-
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
+
+const inputStyles = {
+  textTransform: 'capitalize',
+  padding: '0 10px',
+  height: '100%',
+  background: 'rgba(0, 0, 0, 0.03)',
+  borderRight: '1px solid rgb(234, 234, 234)',
+  minWidth: '80px'
+}
 
 export const Component = React.createClass({
-  componentWillMount() {
-    this.props.UsersActions.getUser({userId: this.props.auth.user._id});
+  confirmReset(){
+    this.props.modalActions.showConfirm({
+      message: 'This will clear all data and reset the application back to factory settings. This can be useful if some data has been corrupted.',
+      modalConfirm: StateActions.clearState()
+    })
   },
   render() {
-    const { entityModel, user, auth, AuthActions } = this.props;
+    const { system } = this.props;
     return (
-      <div className="layout-column flex">
-          <div style={{width: '600px'}}>
-            <div className={classes.panel}>
-              <h3>Privacy</h3>
-              <p>Help us improve by sending anonymous usage data</p>
-              <Toggle model="settings.privacy" value={this.props.settings.privacy} />
-            </div>
+      <div>
+        <div className={classes.panel}>
+          <h3>Cloud Providers</h3>
+          <p>Set the root folder for Dropbox and Drive.</p>
+          <div style={{marginBottom: '10px'}}>
+            <FileSelectInputElectron
+              title="Select Root Dropbox Location"
+              model="system.providerPath.dropbox"
+              value={system.providerPath.dropbox}>
+              <div className="layout-column layout-align-center-center" style={inputStyles}>Dropbox</div>
+            </FileSelectInputElectron>
           </div>
+          <div style={{marginBottom: '10px'}}>
+            <FileSelectInputElectron
+              title="Select Root Drive Location"
+              model="system.providerPath.drive"
+              value={system.providerPath.drive}>
+              <div className="layout-column layout-align-center-center" style={inputStyles}>Drive</div>
+            </FileSelectInputElectron>
+          </div>
+
+        </div>
+        <div className={classes.panel}>
+          <h3>Reset Application</h3>
+          <p>Clear all cached data and reset the application back to factory settings.</p>
+          <Button className="warn" onClick={this.confirmReset}>
+            Clear data
+          </Button>
+        </div>
       </div>
     );
-
   }
 });
 
+//          <div className={classes.panel}>
+//            <h3>Privacy</h3>
+//            <p>Help us improve by sending anonymous usage data</p>
+//          </div>
+//            <Toggle model="settings.privacy" value={this.props.settings.privacy} />
 
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({settings, auth, users}, {params}) {
+function mapStateToProps({users, system}, {params}) {
   return {
-    settings,
-    auth,
-    user: users[auth.user._id],
-    entityModel: `users.${auth.user._id}`
+    system,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    SettingsActions: bindActionCreators(SettingsActions, dispatch),
-    UsersActions: bindActionCreators(UsersActions, dispatch),
-    AuthActions: bindActionCreators(AuthActions, dispatch),
+    systemActions: bindActionCreators(SystemActions, dispatch),
+    stateActions: bindActionCreators(StateActions, dispatch),
+    modalActions: bindActionCreators(ModalActions, dispatch),
   }
 }
 

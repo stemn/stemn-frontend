@@ -14,7 +14,7 @@ import classNames from 'classnames';
 import classes from './Editor.css';
 
 // Sub Components
-import { MentionsInput, Mention } from 'react-mentions'
+import { MentionsInput, Mention } from 'app/renderer/main/modules/Mentions/MentionsInput/index.js'
 import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
 import AutosuggestHighlight from 'autosuggest-highlight';
 import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
@@ -28,17 +28,60 @@ import http from 'axios';
 ///////////////////////////////// COMPONENT /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
+//export const Component = React.createClass({
+//  getInitialState () {
+//    return {
+//      value: this.props.value,
+//    }
+//  },
+//  componentWillReceiveProps(nextProps) {
+//    if(nextProps.value != this.props.value){
+//      this.setState({ value: nextProps.value })
+//    }
+//  },
+//
+//  handleChange(event){
+//    this.props.dispatch(actions.change(this.props.model, event.target.value));
+//  },
+//  render() {
+//    const { className, model, value } = this.props;
+//
+//    return (
+//      <textarea value={this.state.value}
+//       onChange={this.handleChange}
+//       className={classNames(classes.editor, className)} />
+//    )
+//  }
+//});
+
+
+
 export const Component = React.createClass({
-  handleChange(event, newValue, newPlainTextValue, mention){
-    this.props.dispatch(actions.change(this.props.model, newValue));
+  getInitialState () {
+    return {
+      value: this.props.value,
+    }
+  },
+  componentWillReceiveProps(nextProps) {
+    // Update the internal state if it differs from the redux state
+    if(nextProps.value != this.state.value){
+      this.setState({ value: nextProps.value })
+    }
+  },
+  handleChange(event, value){
+    this.setState({value: value});
+    this.props.dispatch(actions.change(this.props.model, value));
   },
   displayTransform: function(id, display, type) {
     const name = display.split('[')[1].split(']')[0]; // Get the name (from between the square brackets)
     if(type == 'user'){
       return "@" + name
     }
-    else{
-      return "#" + name
+    else if(type == 'task'){
+      return `#${name}`
+    }
+    else if(type == 'task-complete'){
+      return `#${name} (completed)`
     }
   },
   userRenderSuggestion: (entry, search, highlightedDisplay, index) => {
@@ -100,7 +143,7 @@ export const Component = React.createClass({
       <MentionsInput
         className={classNames(classes.editor, className)}
         placeholder="Detailed Description"
-        value={this.props.value}
+        value={this.state.value}
         displayTransform={this.displayTransform}
         markup="@__display__:__type__:__id__)" // format @[username](userName:mentionType:mentionId)
         onChange={this.handleChange}>
@@ -114,6 +157,13 @@ export const Component = React.createClass({
         <Mention
           trigger="#"
           type="task"
+          data={this.userData}
+          renderSuggestion={this.taskRenderSuggestion}
+          style={{background: 'rgba(68, 211, 95, 0.3)'}}
+        />
+        <Mention
+          trigger="#"
+          type="task-complete"
           data={this.userData}
           renderSuggestion={this.taskRenderSuggestion}
           style={{background: 'rgba(68, 211, 95, 0.3)'}}

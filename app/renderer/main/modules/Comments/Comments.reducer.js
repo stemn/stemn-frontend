@@ -30,7 +30,6 @@ const mainReducer = (state, action) => {
     case 'COMMENTS/NEW_COMMENT_REJECTED':
       return i.assocIn(state, ['tasks', action.meta.taskId, 'newComment', 'savePending'], false)
     case 'COMMENTS/NEW_COMMENT_FULFILLED':
-      console.log(action);
       return i.chain(state)
         .assocIn(['tasks', action.meta.taskId, 'newComment'], {}) // Reset the newComment objected
         .assocIn(['data', action.payload.data._id, 'data'], action.payload.data) // Put the comment in the store
@@ -52,6 +51,16 @@ const mainReducer = (state, action) => {
         data: action.payload.data,
         savePending: false
       })
+
+    case 'COMMENTS/NEW_REACTION_FULFILLED':
+      return i.updateIn(state, ['data', action.meta.commentId, 'data', 'reactions'], reactions => i.push(reactions, action.payload.data))
+    case 'COMMENTS/DELETE_REACTION_FULFILLED':
+      return i.updateIn(state, ['data', action.meta.commentId, 'data', 'reactions'], reactions => {
+        const index = reactions.findIndex(reaction => reaction.type == action.meta.reactionType && reaction.owner._id == action.meta.userId);
+        return index == -1 ? reactions : i.splice(reactions, index, 1);
+      })
+
+
 
 
     default:

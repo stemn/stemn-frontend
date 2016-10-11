@@ -22,9 +22,11 @@ export const Viewer = React.createClass({
         });
         // Get Mode
         const mode = codemirror.findModeByExtension(extension).mode;
-        const modePath = `./${mode}/${mode}.js`
-        requireCodemirrorMode(modePath);
-        editorInstance.setOption("mode", mode);
+        if(mode && mode != 'null'){
+          const modePath = `./${mode}/${mode}.js`
+          requireCodemirrorMode(modePath);
+          editorInstance.setOption("mode", mode);
+        }
       }, 1)
     }
 

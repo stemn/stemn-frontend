@@ -1,5 +1,4 @@
 import http from 'axios';
-import { push } from 'react-router-redux'
 import * as auth from '../../main/modules/auth/auth.js';
 import * as ProjectsActions from './projects.js';
 
@@ -27,7 +26,6 @@ export function authenticate(provider) {
       }).then((response)=>{
         dispatch(setAuthToken(response.data.token))
         dispatch(initHttpHeaders('bearer ' + response.data.token))
-        setTimeout(()=>{dispatch(push('/'))}, 1)
         return response
       })
     })
@@ -58,7 +56,6 @@ export function login({email, password}) {
       }).then((response)=>{
         dispatch(setAuthToken(response.data.token))
         dispatch(initHttpHeaders('bearer ' + response.data.token))
-        setTimeout(()=>{dispatch(push('/'))}, 1)
         return response
       })
     })
@@ -81,7 +78,6 @@ export function register({email, password, firstname, lastname}) {
       }).then((response)=>{
         dispatch(setAuthToken(response.data.token))
         dispatch(initHttpHeaders('bearer ' + response.data.token))
-        setTimeout(()=>{dispatch(push('/'))}, 1)
         return response
       })
     })
@@ -126,7 +122,6 @@ export function logout() {
     dispatch(clearUserData());
     dispatch(removeHttpHeaders());
     dispatch(removeAuthToken());
-    setTimeout(()=>{dispatch(push('/login'))}, 1)
     dispatch({
         type:'AUTH/LOGOUT',
     })

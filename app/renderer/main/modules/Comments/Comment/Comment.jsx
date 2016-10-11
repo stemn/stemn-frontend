@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 // Container Actions
 import * as CommentsActions from 'app/renderer/main/modules/Comments/Comments.actions.js';
 import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
+import { actions } from 'react-redux-form';
 
 // Component Core
 import React from 'react';
@@ -18,6 +19,8 @@ import classes from './Comment.css';
 import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
 import Editor from 'app/renderer/main/modules/Editor/Editor.jsx';
 import EditorDisplay from 'app/renderer/main/modules/Editor/EditorDisplay.jsx';
+import ReactionPopup from 'app/renderer/main/modules/Reactions/ReactionPopup.jsx';
+import Reactions from 'app/renderer/main/modules/Reactions/Reactions.jsx';
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 import {MdMoreHoriz} from 'react-icons/lib/md';
@@ -41,13 +44,22 @@ export const Component = React.createClass({
 
   confirmDelete(){
     this.props.modalActions.showConfirm({
-      modalConfirm: CommentsActions.deleteComment({comment: this.props.comment.data})
+      modalConfirm: {
+        functionAlias: 'CommentsActions.deleteComment',
+        functionInputs: {comment: this.props.comment.data}
+      }
+    })
+  },
+  submitReaction(reactionType){
+    this.props.commentsActions.toggleReaction({
+      commentId: this.props.commentId,
+      reactionType
     })
   },
   render() {
     const { item, comment, entityModel, commentsActions, style } = this.props;
 
-    if(!comment && comment.data){
+    if(!comment || !comment.data){
       return <div>Comment Loading</div>
     }
 
@@ -60,14 +72,15 @@ export const Component = React.createClass({
           <div className={classes.commentHeader + ' layout-row layout-align-start-center'}>
             {comment.data.owner.name}<span className={classes.date}> <b className="text-interpunct"></b> {moment(comment.data.timestamp).fromNow()} </span>
             <div className="flex"></div>
+            <ReactionPopup reactions={comment.data.reactions} preferPlace="above" submitFn={this.submitReaction} />
             <PopoverMenu preferPlace="right">
-              <SimpleIconButton style={{padding: '0px'}}>
+              <SimpleIconButton style={{padding: '0 0 0 5px'}}>
                 <MdMoreHoriz size="20px"/>
               </SimpleIconButton>
               <div className="PopoverMenu">
                 {comment.editActive ? null : <a onClick={() => commentsActions.startEdit({commentId: comment.data._id})}>Edit</a> }
-                <a  onClick={this.confirmDelete}>Delete</a>
-                </div>
+                <a onClick={this.confirmDelete}>Delete</a>
+              </div>
             </PopoverMenu>
           </div>
           <div className={classes.commentContent}>
@@ -79,9 +92,7 @@ export const Component = React.createClass({
             <EditorDisplay value={comment.data.body}/>
           }
           </div>
-          {
-            comment.editActive
-            ?
+          {comment.editActive ?
             <div className={classes.commentFooter}>
               <div>
                 <a className="link-primary" onClick={() => commentsActions.finishEdit({commentId: comment.data._id})}>Cancel</a>
@@ -89,9 +100,10 @@ export const Component = React.createClass({
                 <a className="link-primary" onClick={() => commentsActions.updateComment({comment: comment.data})}>Save</a>
               </div>
             </div>
-            :
-            null
-          }
+          : ''}
+          {!comment.editActive && comment.data.reactions && comment.data.reactions.length > 0 ?
+            <div><Reactions reactions={comment.data.reactions} /></div>
+          : ''}
         </div>
       </div>
     )
@@ -114,6 +126,7 @@ function mapDispatchToProps(dispatch) {
   return {
     commentsActions : bindActionCreators(CommentsActions, dispatch),
     modalActions    : bindActionCreators(ModalActions, dispatch),
+    dispatch
   }
 }
 

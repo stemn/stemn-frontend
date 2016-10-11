@@ -1,3 +1,6 @@
+.header{
+  height: 44px;
+}
 .header:hover .options{
   opacity: 1;
 }

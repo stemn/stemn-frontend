@@ -7,23 +7,50 @@ export default React.createClass({
       isOpen: false,
     }
   },
+  toggleDelayTime: 200,
+  toggleDelayTimeout: null,
+  toggleDelay (toState){
+    clearTimeout(this.toggleDelayTimeout);
+    this.toggleDelayTimeout = setTimeout(()=>{
+      this.toggle(toState);
+    }, this.toggleDelayTime)
+  },
   toggle (toState) {
     this.setState({ isOpen: toState === null ? !this.state.isOpen : toState })
   },
   render() {
     const { preferPlace, trigger, disableClickClose, children, className } = this.props;
 
-    const triggerProps = trigger == 'hover'
-    ? {
-      onMouseOver: () => {this.toggle(true)},
-      onMouseOut: () => {this.toggle(false)}
-    } : {
-      onClick: () => {this.toggle(null)}
+    const triggerMap = {
+      hover          : {
+        onMouseEnter : () => {this.toggle(true)},
+        onMouseLeave : () => {this.toggle(false)}
+      },
+      hoverDelay     : {
+        onMouseEnter : () => {this.toggleDelay(true)},
+        onMouseLeave : () => {this.toggleDelay(false)}
+      },
+      click          : {
+        onClick      : () => {this.toggle(null)}
+      },
+//      rightClick     : {
+//        onClick      : () => {this.toggle(null)}
+//      }
     };
 
-    const contentProps = {
-      onClick: () => {disableClickClose ? null : this.toggle(false)}
+    const contentMap = {
+      hover          : {},
+      hoverDelay     : {
+        onMouseEnter : () => {this.toggleDelay(true)},
+        onMouseLeave : () => {this.toggleDelay(false)},
+      },
+      click          : {
+        onClick      : () => {disableClickClose ? null : this.toggle(false)}
+      }
     }
+
+    const triggerProps = triggerMap[trigger] || triggerMap['click']; // Default to click
+    const contentProps = contentMap[trigger] || contentMap['click']; // Default to click
 
     return (
       <Popover
@@ -36,5 +63,3 @@ export default React.createClass({
     );
   }
 })
-
-

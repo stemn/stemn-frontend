@@ -29,7 +29,7 @@ export const Component = React.createClass({
   render() {
     return (
       <div className="layout-column flex">
-          <Header
+        <Header
           style={{
               background: 'white',
               borderBottom: '1px solid rgba(0, 0, 0, 0.1)'
@@ -43,7 +43,7 @@ export const Component = React.createClass({
               <NavPill to="/settings/account">Account</NavPill>
             </div>
           </div>
-          <div className="layout-column flex">
+          <div style={{width: '650px'}}>
             {this.props.children}
           </div>
         </div>

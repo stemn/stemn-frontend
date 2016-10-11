@@ -1,16 +1,17 @@
 .button{
   background: none;
   border: none;
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(0, 0, 0, 0.2);
   padding: 5px;
   border-radius: 50%;
   transition: 0.3s ease all;
   line-height: 1em;
+  cursor: pointer;
 }
 .button:focus {
   outline: none;
 }
 .button:hover {
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 0, 0, 0.6);
 /*  background: rgba(0, 0, 0, 0.03);*/
 }

@@ -55,10 +55,9 @@ export const Component = React.createClass({
     background: 'rgba(0, 0, 0, 0.03)'
   },
 
-  toggleAll(model, value){
+  toggleAll(model){
     return this.props.ChangesActions.actToggleAll({
       model,
-      value,
       projectId: this.props.project.data._id
     })
   },

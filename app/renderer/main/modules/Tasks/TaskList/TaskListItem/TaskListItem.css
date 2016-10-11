@@ -45,14 +45,15 @@
   border: 1px solid border1;
   margin-bottom: 15px;
   background: white;
-  cursor: pointer;
+  cursor: default;
 }
 .cardBody{
   padding: 15px;
 }
 .cardFooter{
-  padding: 10px 15px;
+  padding: 1px 0px 1px 15px;
   border-top: 1px dashed border1;
+  cursor: move;
 }
 .cardText{
   margin-left: 4px;

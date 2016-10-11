@@ -20,8 +20,9 @@ export const validateMention = (href) => {
 }
 
 export const getMentionString = (mention) => {
-  return `[${mention.display}](${mention.entityId}:${mention.mentionType}:${mention.mentionId})`
+  return `@[${mention.display}](${mention.entityId}:${mention.mentionType}:${mention.mentionId})`
 }
+
 
 export const parseMentions = (text) => {
   /*

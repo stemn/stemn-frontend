@@ -1,16 +1,16 @@
-@value primary, border1 from "app/renderer/assets/css/themes/standard.css";
+@value primary, border1, timeline-main, timeline-bg from "app/renderer/assets/css/themes/standard.css";
 
 .timeline{
   padding: 60px 30px 40px;
-  background: #f8f8f8;
+  background: timeline-bg;
   color: white;
   border-bottom: 1px solid border1;
 }
 .line{
   display: block;
-  height: 4px;
+  height: 2px;
   width: 100%;
-  background: rgb(153, 153, 153);
+  background: timeline-main;
   position: relative;
 }
 
@@ -19,7 +19,7 @@
   width: 100%;
   height: 20px;
   transform: translateY(-50%);
-  margin-top: -2px;
+  margin-top: -1px;
   padding: 0px 20px;
 }
 .dotsPosContainer{

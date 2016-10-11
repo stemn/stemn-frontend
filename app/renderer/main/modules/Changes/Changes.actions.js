@@ -1,8 +1,11 @@
-import { actions } from 'react-redux-form';
+import { actions }           from 'react-redux-form';
 import { show as showToast } from '../Toasts/Toasts.actions.js';
 import { showModal }         from '../Modal/Modal.actions.js';
-
-import http from 'axios';
+import { parseMentions }     from '../Mentions/Mentions.utils.js';
+import { updateTask }        from '../Tasks/Tasks.actions.js';
+import i                     from 'icepick';
+import http                  from 'axios';
+import { get }               from 'lodash';
 
 export function selectedFileChange({projectId, selected}) {
   return {
@@ -14,13 +17,14 @@ export function selectedFileChange({projectId, selected}) {
   }
 }
 
-export function actToggleAll({projectId, model, value}) {
-  return (dispatch) => {
-    dispatch(actions.change(model, value));
-    return {
-        type: 'CHANGES/TOGGLE_ALL_CHANGED_FILES',
-        payload: {projectId, model, value}
-    }
+export function actToggleAll({projectId, model}) {
+  return (dispatch, getState) => {
+    const value = !get(getState(), model);
+    dispatch(actions.toggle(model, value));
+    dispatch({
+      type: 'CHANGES/TOGGLE_ALL_CHANGED_FILES',
+      payload: {projectId, model, value}
+    })
   };
 }
 
@@ -35,7 +39,7 @@ export function fetchChanges({projectId}) {
         method: 'GET',
         url: `/api/v1/sync/timeline/${projectId}`,
         params: {
-          type: 'changes'
+          types: ['changes'],
         },
         meta: {
           projectId
@@ -57,6 +61,7 @@ export function pullChanges({projectId}) {
 }
 
 export function mentionTasksModal({projectId, mentions}) {
+  console.log('modal');
   return (dispatch) => {
     dispatch(showModal({
       modalType: 'TASK_COMMIT',
@@ -72,7 +77,6 @@ export function mentionTasksModal({projectId, mentions}) {
 }
 
 export function mentionTasks({projectId, mentions}) {
-  console.log(projectId, mentions);
   return {
     type:'CHANGES/MENTION_TASKS',
     payload: {
@@ -83,7 +87,7 @@ export function mentionTasks({projectId, mentions}) {
 }
 
 export function commit({projectId, revisions, summary, description}) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch({
       type: 'CHANGES/COMMIT',
       payload: http({
@@ -107,6 +111,15 @@ export function commit({projectId, revisions, summary, description}) {
             }
           }]
         }))
+        // Get the mentions
+        const mentions = parseMentions(response.data.description);
+        // If mentionType: task-complete, we set the task to complete.
+        console.log(mentions);
+        mentions.forEach(mention => {
+          if(mention.mentionType == 'task-complete'){
+            dispatch(actions.change(`tasks.data.${mention.entityId}.data.complete`, true));
+          }
+        });
         return response
       }),
       meta: {

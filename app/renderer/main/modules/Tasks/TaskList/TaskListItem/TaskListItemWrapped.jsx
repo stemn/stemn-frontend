@@ -29,18 +29,20 @@ export default class Card extends Component {
     connectDragPreview: PropTypes.func.isRequired,
     index: PropTypes.number.isRequired,
     isDragging: PropTypes.bool.isRequired,
-    item: PropTypes.object.isRequired,
+    item: PropTypes.string.isRequired,
     moveCard: PropTypes.func.isRequired,
     beginDrag: PropTypes.func.isRequired,
     endDrag: PropTypes.func.isRequired
   };
 
   render() {
-    const { isDragging, connectDragSource, connectDropTarget, children } = this.props;
+    const { isDragging, connectDragSource, connectDropTarget, children, id } = this.props;
     return connectDragSource(connectDropTarget(
-      <div style={{transform: 'translate3d(0,0,0)'}}>
+      <div key={id}>
         {children}
       </div>
     ));
   }
 }
+
+//style={{transform: 'translate3d(0,0,0)'}}

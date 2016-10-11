@@ -90,7 +90,7 @@ export const Component = React.createClass({
     })
   },
   render() {
-    const { board, project, layout, className } = this.props;
+    const { board, layout, className } = this.props;
     const entityModel = `tasks.boards.${board.data._id}`;
 
     return (
@@ -116,18 +116,17 @@ export const Component = React.createClass({
                  moveCard={this.moveCard}
                  tasks={group.tasks}
                  layout={layout}>
-                  {group.tasks ? group.tasks.map((taksId, cardIndex) =>
+                  {group.tasks ? group.tasks.map((taskId, cardIndex) =>
                     <TaskListItemWrapped
-                      key={taksId}
                       index={cardIndex}
-                      id={taksId}
-                      item={taksId}
+                      id={taskId}
+                      item={taskId}
                       groupId={group._id}
                       tasks={group.tasks}
                       moveCard={this.moveCard}
                       beginDrag={this.beginDrag}
                       endDrag={this.endDrag}>
-                      <TaskListItem item={taksId} draggable={true} layout={layout} />
+                      <TaskListItem item={taskId} draggable={true} layout={layout} />
                     </TaskListItemWrapped>
                   ) : ''}
                   <NewItem
@@ -141,15 +140,14 @@ export const Component = React.createClass({
               </TaskGroup>
            </TaskGroupWrapped>
           )}
-          <div style={{width: '350px', minWidth: '350px', padding: '0 15px'}}>
-            <h3 className="text-mini-caps flex">&nbsp;</h3>
+          <TaskGroup simpleGroup={true}>
             <NewItem
               model={`${entityModel}.newGroupString`}
               placeholder="New Group"
               submitFn={this.newGroup}
               box={layout=='board'}
             />
-          </div>
+          </TaskGroup>
         </TaskGroupParent>
       </div>
     )

@@ -1,5 +1,5 @@
 // Component Core
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 // Styles
 import classNames from 'classnames';
@@ -13,7 +13,7 @@ import TimelineInner from './TimelineInner/TimelineInner.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
-export default React.createClass({
+const Component = React.createClass({
   getInitialState () {
     return {
       isOpen: false,
@@ -36,7 +36,7 @@ export default React.createClass({
     }
   },
   render() {
-    const { items, selected, onSelect, style, className } = this.props;
+    const { items, selected, isSelected, onSelect, preferPlace, style, className } = this.props;
     const numberToShow = 15;
     const moreLeft  = items ? this.state.page < items.length / numberToShow - 1 : false;
     const moreRight = this.state.page > 0;
@@ -59,7 +59,9 @@ export default React.createClass({
                   onSelect={onSelect}
                   page={this.state.page}
                   items={items}
-                  selected={selected}>
+                  selected={selected}
+                  isSelected={isSelected}
+                  preferPlace={preferPlace}>
                 </TimelineInner>
                 : ''
               }
@@ -70,3 +72,19 @@ export default React.createClass({
     );
   }
 });
+
+Component.propTypes = {
+  items: PropTypes.array.isRequired,
+
+  selected: PropTypes.string,
+  isSelected: PropTypes.function, // function of the form (item) => return true||false
+
+  onSelect: PropTypes.function,
+  preferPlace: PropTypes.string,
+
+  style: PropTypes.object,
+  className: PropTypes.string,
+};
+
+
+export default Component
