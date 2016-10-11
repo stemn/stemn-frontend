@@ -32,7 +32,10 @@ export default React.createClass({
       },
       click          : {
         onClick      : () => {this.toggle(null)}
-      }
+      },
+//      rightClick     : {
+//        onClick      : () => {this.toggle(null)}
+//      }
     };
 
     const contentMap = {

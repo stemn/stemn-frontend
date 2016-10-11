@@ -6,6 +6,9 @@ import { ContextMenu, MenuItem, ContextMenuLayer } from "react-contextmenu";
 import FileChangeRow from './FileChangeRow';
 import FileChangeTitleRow from './FileChangeTitleRow';
 import FileContextmenu from './FileContextmenu';
+import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
+import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import { MdMoreHoriz } from 'react-icons/lib/md';
 
 // Styles
 import styles from './CommitChanges.css';
@@ -17,7 +20,23 @@ export default (props) => {
   return (
     <div className="layout-column flex">
       <div className="layout-column flex">
-        <FileChangeTitleRow text={props.changes.data.length + ' file changes'} model={`changes.${props.project._id}.toggleAll`} value={props.changes.toggleAll} changeAction={props.actToggleAll}/>
+        <FileChangeTitleRow
+          text={props.changes.data.length + ' file changes'}
+          model={`changes.${props.project._id}.toggleAll`}
+          value={props.changes.toggleAll}
+          changeAction={props.actToggleAll}>
+          <PopoverMenu preferPlace="below">
+            <SimpleIconButton>
+              <MdMoreHoriz size="20px" />
+            </SimpleIconButton>
+            <div className="PopoverMenu">
+              <a>Filter: All Changes</a>
+              <a>Filter: My Changes</a>
+              <div className="divider"></div>
+              <a>Refresh</a>
+            </div>
+          </PopoverMenu>
+        </FileChangeTitleRow>
         {
           props.changes.data.length > 0
           ? <div className="scroll-box flex">
