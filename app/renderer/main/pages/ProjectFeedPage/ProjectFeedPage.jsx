@@ -24,6 +24,7 @@ import FileCompareMenu    from 'app/renderer/main/modules/FileCompare/FileCompar
 import ContentSidebar     from 'app/renderer/main/components/ContentSidebar';
 import TogglePanel        from 'app/renderer/main/components/Panels/TogglePanel/TogglePanel.jsx';
 import DragResize         from 'app/renderer/main/modules/DragResize/DragResize.jsx';
+import EditorDisplay      from 'app/renderer/main/modules/Editor/EditorDisplay.jsx';
 
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -63,7 +64,9 @@ export const Component = React.createClass({
             <div className="layout-column flex">
               <div className={feedPageStyles.commitInfo}>
                 <h3>{this.props.timeline.selected.data.summary}</h3>
-                <div className={feedPageStyles.description}>{this.props.timeline.selected.data.description}</div>
+                <div className={feedPageStyles.description}>
+                  <EditorDisplay value={this.props.timeline.selected.data.description}/>
+                </div>
                 <div className="layout-row layout-align-start-center">
                   <img src={'https://stemn.com' + this.props.timeline.selected.user.picture + '?size=thumb&crop=true'} className={feedPageStyles.avatar}/>
                   <div>{this.props.timeline.selected.user.name}</div>

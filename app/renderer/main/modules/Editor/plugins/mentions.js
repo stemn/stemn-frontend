@@ -9,26 +9,30 @@ function markdownitLinkAttributes (md, config) {
   config = config || {}
   config.mentionClass = config.mentionClass || 'mention';
 
-  var defaultRender = md.renderer.rules.link_open || this.defaultRender
+  var textRenderer = md.renderer.rules.text || this.defaultRender;
+  md.renderer.rules.text = function (tokens, idx, options, env, self) {
 
-  md.renderer.rules.link_open = function (tokens, idx, options, env, self) {
-    const token = tokens[idx];
+    const token1 = tokens[idx];
+    const token2 = tokens[idx+1];
+    const token3 = tokens[idx+2];
+    const href   = token2 ? getAttribute(token2, 'href') : '';
 
-    const currentHref = getAttribute(token, 'href')
-    if(validateMention(currentHref)){
-      const [ entityId, mentionType, mentionId ] = currentHref.split(':');
-      writeAttribute(token, 'id',  mentionId );
-      writeAttribute(token, 'class', config.mentionClass);
-      if(mentionType == 'user'){
-        writeAttribute(token, 'href', `users/${entityId}`);
-      }
-      else{
-        writeAttribute(token, 'href', `tasks/${entityId}`);
-      }
+    const isValidMention = token1.content.endsWith('@') && validateMention(href) && token3;
+
+    // If we have the '@' trigger at the end of the string
+    if(isValidMention){
+      // Remove the trigger
+      token1.content = token1.content.slice(0, -1);
+      // Create the mention link
+      const [ entityId, mentionType, mentionId ] = href.split(':');
+      writeAttribute(token2, 'id',  mentionId );
+      writeAttribute(token2, 'class', config.mentionClass);
+      const link    = mentionType == 'user' ? writeAttribute(token2, 'href', `users/${entityId}`) : writeAttribute(token2, 'href', `tasks/${entityId}`);
+      const trigger = mentionType == 'user' ? '@' : '#';
+      // Add the trigger to the inside of the anchor
+      token3.content = trigger.concat(token3.content);
     }
-
-    // pass token to default renderer.
-    return defaultRender(tokens, idx, options, env, self)
+    return textRenderer(tokens, idx, options, env, self)
   }
 }
 
