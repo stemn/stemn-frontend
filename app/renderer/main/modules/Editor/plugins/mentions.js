@@ -57,7 +57,7 @@ function markdownitLinkAttributes (md, config) {
           {trigger.concat(token3.content)}
         </TaskMentionConnected>
       )
-      tokens.splice(idx + 2, 1);
+      tokens.splice(idx + 2, 2);
     }
     return textRenderer(tokens, idx, options, env, self)
   }
@@ -74,13 +74,4 @@ export default markdownitLinkAttributes
 function getAttribute(token, attr){
   var aIndex = token.attrIndex(attr);
   return aIndex < 0 ? '' : token.attrs[aIndex][1];
-}
-
-function writeAttribute(token, attr, value){
-  var aIndex = token.attrIndex(attr);
-  if (aIndex < 0) { // attr doesn't exist, add new attribute
-    token.attrPush([attr, value])
-  } else { // attr already exists, overwrite it
-    token.attrs[aIndex][1] = value
-  }
 }

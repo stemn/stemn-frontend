@@ -71,6 +71,11 @@ export const Component = React.createClass({
                 <div className="layout-row layout-align-start-center">
                   <UserAvatar picture={this.props.timeline.selected.user.picture} size="20"/>
                   <div style={{marginLeft: '10px'}}>{this.props.timeline.selected.user.name}</div>
+                  <div className="flex">
+                  </div>
+                  <a className="link-primary">Revert</a>
+                  &nbsp;&nbsp;&nbsp;
+                  <a className="link-primary">View Online</a>
                 </div>
               </div>
               <div className="flex scroll-box">

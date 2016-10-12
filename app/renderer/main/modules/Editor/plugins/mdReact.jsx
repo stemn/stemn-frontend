@@ -1,51 +1,6 @@
-//import React from 'react';
-//
-//export default (md, options) => {
-//  md.renderTokens = function(src, env) {
-//    env = env || {};
-//    return this.renderer.renderTokens(this.parse(src, env), this.options, env);
-//  };
-//  md.renderer.renderTokens = function(tokens, options, env) {
-//    tokens.push(<h1>HERE</h1>);
-//    return md.renderer.renderTokensActual(tokens, options, env);
-//  };
-//  md.renderer.renderTokensActual = function(tokens, options, env) {
-//    const result = tokens.map((token, i, options) => {
-//      console.log(token);
-//      if(token._store){ // Is react element
-//        return token
-//      }
-//      else if (typeof this.rules[token.type] !== 'undefined')
-//        return this.rules[token.type](tokens, i, options, env, this);
-//      else if(token.type == 'inline'){
-//        return md.renderer.renderTokensActual(token.children, options, env);
-//      }
-//      else{
-//        return this.renderToken(tokens, i, options);
-//      }
-//    })
-//    console.log(result);
-//    return result
-//  };
-//};
-//
-///////////////////////////////////////////
-//
-////function renderInline(tokens, options, env, parent) {
-////  console.log(tokens);
-////  var type, rules = parent.rules;
-////  return tokens.map(function(token, i) {
-////    type = token.type;
-////    if (typeof rules[type] !== 'undefined')
-////      return rules[type](tokens, i, options, env, parent);
-////    return parent.renderToken(tokens, i, options);
-////  }, parent);
-////};
-
 var React = require('react');
-
 const separator = 'span'
-
+console.log(transform);
 export default (md, options) => {
     md.renderTokens = function(src, env) {
       env = env || {};
@@ -68,7 +23,7 @@ export default (md, options) => {
             else
               result = this.renderToken(tokens, i, options);
           }
-//          console.log('result: ', result);
+          console.log('result: ', result);
 
           function getCollector(collector, tokens, i) {
             tokens.forEach(function(result) {
@@ -102,7 +57,7 @@ export default (md, options) => {
           //console.log('last step item: ', item);
           if(item.length) {
             var html = item.join('');
-            //console.log('html: ', html);
+            console.log('html: ', html);
             return <span key={index} dangerouslySetInnerHTML={{__html: html}} />
           }
           else
