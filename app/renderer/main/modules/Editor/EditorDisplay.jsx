@@ -1,55 +1,93 @@
-// Component Core
-import React from 'react';
-import markdownIt from 'markdown-it';
-import classes from './EditorDisplay.css';
+import React                from 'react';
+import markdownIt           from 'markdown-it';
+import classes              from './EditorDisplay.css';
+import { validateMention }  from 'app/renderer/main/modules/Mentions/Mentions.utils.js';
+import htmlToReact          from 'html-to-react';
+import classNames           from 'classnames';
+import { connect }          from 'react-redux';
+import * as ModalActions    from 'app/renderer/main/modules/Modal/Modal.actions.js';
 
-import mdMentions from './plugins/mentions.js';
-import mdReact from './plugins/mdReact.jsx';
+const TaskMention = React.createClass({
+  showModal(){
+    this.props.dispatch(ModalActions.showModal({
+      modalType: 'TASK',
+      modalProps: {
+        taskId: this.props.entityId
+      }
+    }))
+  },
+  render() {
+    const { entityId, mentionId, mentionType, children} = this.props;
+    return (
+      <a id={mentionId}
+        className={classes.mention}
+        href={mentionType == 'user' ? `/users/${entityId}` : `/tasks/${entityId}`}
+        onClick={this.showModal}>
+        {children}
+      </a>
+    )
+  }
+});
+const TaskMentionConnected = connect()(TaskMention);
 
+/////////////////////////////////////////////////////////////////////////
+
+const htmlToReactParser = new htmlToReact.Parser();
 const md = markdownIt({
   html: true,
   linkify: true,
   typographer: true
-}).use(mdMentions, {
-  mentionClass: classes.mention,
-}).use(mdReact);
+});
 
-// Styles
-import classNames from 'classnames';
+const processNodeDefinitions = new htmlToReact.ProcessNodeDefinitions(React);
+const processingInstructions = [{
+  shouldProcessNode: function (node) {
+    return node.type == 'text' && node.data.endsWith('@') && validateMention(node.next.attribs.href);
+  },
+  processNode: function (node, children, index) {
+    return <span>{node.data.slice(0, -1)}</span>
+  }
+},{
+  shouldProcessNode: function (node) {
+    console.log(node);
+    return node.name == 'a' && validateMention(node.attribs.href);
+  },
+  processNode: function (node, children, index) {
+    const [ entityId, mentionType, mentionId ] = node.attribs.href.split(':');
+    const innerTextFn = {
+      user           : (display) => '@' + display,
+      task           : (display) => '#' + display + ' (related)',
+      'task-complete': (display) => '#' + display + ' (complete)'
+    }
+    const innerText = innerTextFn[mentionType] ? innerTextFn[mentionType](node.children[0].data) : node.children[0].data;
 
-
-
-// Sub Components
-//export default React.createClass({
-//  getMarkdownText() {
-//    var rawMarkup = md.render(this.props.value);
-//    return { __html: rawMarkup };
-//  },
-//  render() {
-//    const { value, onClick } = this.props;
-//    setTimeout(()=>{
-//      const anchors = this.refs.content.getElementsByTagName('a');
-//      anchors[0].innerHTML = 'asfafsasfafsfasfas';
-//      console.log(anchors[0]);
-//    }, 100)
-//    return (
-//      <div onClick={onClick}>
-//        <div ref="content" className={classes.display} dangerouslySetInnerHTML={this.getMarkdownText()} />
-//      </div>
-//    )
-//  }
-//});
+    return (
+      <TaskMentionConnected
+        key={index}
+        entityId={entityId}
+        mentionId={mentionId}
+        mentionType={mentionType}>
+        {innerText}
+      </TaskMentionConnected>
+    )
+  }
+}, {
+  shouldProcessNode: (node) => {
+    return true;
+  },
+  processNode: processNodeDefinitions.processDefaultNode
+}];
 
 export default React.createClass({
   getMarkdownText() {
-    var rawMarkup = md.render(this.props.value);
-    return { __html: rawMarkup };
+    var rawMarkup = '<div>' + md.render(this.props.value) + '</div>';
+    return htmlToReactParser.parseWithInstructions(rawMarkup, () => true, processingInstructions);
   },
   render() {
     const { value, onClick } = this.props;
     return (
       <div onClick={onClick}>
-        <div className={classes.display}>{md.renderTokens(this.props.value)}</div>
+        <div className={classes.display}>{this.getMarkdownText(value)}</div>
       </div>
     )
   }
