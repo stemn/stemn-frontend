@@ -1,9 +1,33 @@
+import React from 'react';
+import { connect } from 'react-redux';
 import { validateMention } from 'app/renderer/main/modules/Mentions/Mentions.utils.js';
 
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.markdownitLinkAttributes = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-'use strict'
+// Container Actions
+import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 
-// Adapted from https://github.com/markdown-it/markdown-it/blob/fbc6b0fed563ba7c00557ab638fd19752f8e759d/docs/architecture.md
+const TaskMention = React.createClass({
+  showModal(){
+    this.props.dispatch(ModalActions.showModal({
+      modalType: 'TASK',
+      modalProps: {
+        taskId: this.props.entityId
+      }
+    }))
+  },
+  render() {
+    const { entityId, mentionId, mentionType, children, className} = this.props;
+    return (
+      <a id={mentionId}
+        className={className}
+        href={mentionType == 'user' ? `/users/${entityId}` : `/tasks/${entityId}`}
+        onClick={this.showModal}>
+        {children}
+      </a>
+    )
+  }
+});
+const TaskMentionConnected = connect()(TaskMention);
+
 
 function markdownitLinkAttributes (md, config) {
   config = config || {}
@@ -11,12 +35,10 @@ function markdownitLinkAttributes (md, config) {
 
   var textRenderer = md.renderer.rules.text || this.defaultRender;
   md.renderer.rules.text = function (tokens, idx, options, env, self) {
-
     const token1 = tokens[idx];
     const token2 = tokens[idx+1];
     const token3 = tokens[idx+2];
-    const href   = token2 ? getAttribute(token2, 'href') : '';
-
+    const href   = token2 && token2.type == 'link_open' ? getAttribute(token2, 'href') : '';
     const isValidMention = token1.content.endsWith('@') && validateMention(href) && token3;
 
     // If we have the '@' trigger at the end of the string
@@ -25,12 +47,17 @@ function markdownitLinkAttributes (md, config) {
       token1.content = token1.content.slice(0, -1);
       // Create the mention link
       const [ entityId, mentionType, mentionId ] = href.split(':');
-      writeAttribute(token2, 'id',  mentionId );
-      writeAttribute(token2, 'class', config.mentionClass);
-      const link    = mentionType == 'user' ? writeAttribute(token2, 'href', `users/${entityId}`) : writeAttribute(token2, 'href', `tasks/${entityId}`);
       const trigger = mentionType == 'user' ? '@' : '#';
-      // Add the trigger to the inside of the anchor
-      token3.content = trigger.concat(token3.content);
+      tokens[idx + 1] = (
+        <TaskMentionConnected
+          entityId={entityId}
+          mentionId={mentionId}
+          mentionType={mentionType}
+          className={config.mentionClass}>
+          {trigger.concat(token3.content)}
+        </TaskMentionConnected>
+      )
+      tokens.splice(idx + 2, 1);
     }
     return textRenderer(tokens, idx, options, env, self)
   }
@@ -40,12 +67,9 @@ function markdownitLinkAttributes (md, config) {
 markdownitLinkAttributes.defaultRender = function (tokens, idx, options, env, self) {
   return self.renderToken(tokens, idx, options)
 }
+export default markdownitLinkAttributes
 
-module.exports = markdownitLinkAttributes
-
-},{}]},{},[1])(1)
-});
-
+/////////////////////////////////////////
 
 function getAttribute(token, attr){
   var aIndex = token.attrIndex(attr);

@@ -111,7 +111,7 @@ export default React.createClass({
       this.setState({width: width});
     }
     else if(change.deltaY){
-      let height = parseInt(his.state.height) + change.deltaY;
+      let height = parseInt(this.state.height) + change.deltaY;
       if(heightRange){
         if(height < heightRange[0]){height = heightRange[0]}
         else if(height > heightRange[1]){height = heightRange[1]}

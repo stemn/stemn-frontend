@@ -3,6 +3,7 @@ import getUuid               from '../../../../shared/helpers/getUuid.js';
 import { actions }           from 'react-redux-form';
 import { show as showToast } from '../Toasts/Toasts.actions.js';
 import { showModal }         from '../Modal/Modal.actions.js';
+import { get }               from 'lodash';
 
 export function newTask({boardId, task}) {
   return (dispatch, getState) => {
@@ -110,6 +111,7 @@ export function getTask({taskId}) {
 }
 
 export function updateTask({task}) {
+  console.log(task);
   return {
     type: 'TASKS/UPDATE_TASK',
     http: true,
@@ -250,8 +252,9 @@ export function moveGroup({boardId, group, destinationGroup, after, save}) {
   }
 }
 
-export function toggleComplete({taskId, model, value}) {
-  return (dispatch) => {
+export function toggleComplete({taskId, model}) {
+  return (dispatch, getState) => {
+    const value = !get(getState(), model);
     dispatch(actions.change(model, value));
     dispatch(showToast({
       title: `This task was marked ${value ? 'complete' : 'incomplete'}.`,

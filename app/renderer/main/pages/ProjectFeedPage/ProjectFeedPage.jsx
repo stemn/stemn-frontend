@@ -25,6 +25,7 @@ import ContentSidebar     from 'app/renderer/main/components/ContentSidebar';
 import TogglePanel        from 'app/renderer/main/components/Panels/TogglePanel/TogglePanel.jsx';
 import DragResize         from 'app/renderer/main/modules/DragResize/DragResize.jsx';
 import EditorDisplay      from 'app/renderer/main/modules/Editor/EditorDisplay.jsx';
+import UserAvatar         from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
 
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -68,8 +69,8 @@ export const Component = React.createClass({
                   <EditorDisplay value={this.props.timeline.selected.data.description}/>
                 </div>
                 <div className="layout-row layout-align-start-center">
-                  <img src={'https://stemn.com' + this.props.timeline.selected.user.picture + '?size=thumb&crop=true'} className={feedPageStyles.avatar}/>
-                  <div>{this.props.timeline.selected.user.name}</div>
+                  <UserAvatar picture={this.props.timeline.selected.user.picture} size="20"/>
+                  <div style={{marginLeft: '10px'}}>{this.props.timeline.selected.user.name}</div>
                 </div>
               </div>
               <div className="flex scroll-box">
@@ -112,7 +113,7 @@ export const Component = React.createClass({
                 <FileCompareMenu
                   compareId={`feed-${project.data._id}-${file.data._id}`}/>
               </div>
-              <DragResize side="bottom" height="500" heightRange={[200, 1000]} className="layout-column flex">
+              <DragResize side="bottom" height="500" heightRange={[0, 1000]} className="layout-column flex">
                 <FileCompare
                   compareId={`feed-${project.data._id}-${file.data._id}`}
                   project={project.data}

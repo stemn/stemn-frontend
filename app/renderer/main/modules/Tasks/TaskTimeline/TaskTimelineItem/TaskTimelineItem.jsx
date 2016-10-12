@@ -10,13 +10,21 @@ import UserAvatar          from 'app/renderer/main/components/Avatar/UserAvatar/
 import Comment             from 'app/renderer/main/modules/Comments/Comment/Comment.jsx';
 import TaskTimelineWrapper from '../TaskTimelineWrapper/TaskTimelineWrapper.jsx';
 import TaskLabelDots       from '../../TaskLabelDots/TaskLabelDots.jsx'
+// import TaskTimelinePanel   from '../TaskTimelinePanel/TaskTimelinePanel.jsx'
 
 const eventTextMap = {
-  commit        : (item, board) => {return <span>referenced this task in commit <a className="link-primary">#213</a></span>},
-  closed        : (item, board) => {return <span>marked this as complete</span>},
-  open          : (item, board) => {return <span>re-opened this task</span>},
+  uncompleted   : (item, board) => {return <span>re-opened this task</span>},
   addAsignee    : (item, board) => {return <span>was assigned to this task</span>},
   removeAsignee : (item, board) => {return <span>was removed from assignees</span>},
+  commit        : (item, board) => {return <span>referenced this task in commit <a className="link-primary">{item.commits[0].summary}</a></span>},
+  completed     : (item, board) => {
+    if(item.commits && item.commits[0]){
+      return <span>marked this as complete in commit <a className="link-primary">{item.commits[0].summary}</a></span>
+    }
+    else{
+      return <span>marked this as complete</span>
+    }
+  },
   changedLabels : (item, board) => {
     return (
       <span>
@@ -49,6 +57,16 @@ export default React.createClass({
         <Comment commentId={item.comment}></Comment>
       )
     }
+//    if(item.event == 'completed' && item.commits && item.commits[0]){
+//      console.log(item);
+//      const commit = item.commits[0];
+//      return (
+//        <TaskTimelinePanel item={item}>
+//          <h3>{commit.summary}</h3>
+//          <div>{commit.description}</div>
+//        </TaskTimelinePanel>
+//      )
+//    }
     // Else, we add a text event
     else{
       return (
@@ -58,7 +76,7 @@ export default React.createClass({
               <UserAvatar picture={item.user.picture} size="25" shape="square"/>
             </div>
             <div>
-              <b>{item.user.name}&nbsp;</b><span className="text-grey-3">{getTextEventData(item, board)} - {moment(item.timestamp).fromNow()}</span>
+              <b>{item.user.name}&nbsp;</b><span className="text-grey-3" style={{lineHeight: '1.5em'}}>{getTextEventData(item, board)} - {moment(item.timestamp).fromNow()}</span>
             </div>
           </div>
         </TaskTimelineWrapper>
