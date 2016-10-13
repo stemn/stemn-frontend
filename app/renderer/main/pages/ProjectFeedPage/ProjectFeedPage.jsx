@@ -51,8 +51,14 @@ export const Component = React.createClass({
     })
   },
 
+  refresh(){
+    this.props.syncTimelineActions.fetchTimeline({
+      projectId: this.props.project.data._id
+    })
+  },
+
   render(){
-    const { timeline, project } = this.props;
+    const { timeline, timelineModel, project } = this.props;
     const filePrevious = timeline && timeline.selected && timeline.selected.data && timeline.selected.data.previousRevisionId
     ? i.assocIn(timeline.selected, ['data', 'revisionId'], timeline.selected.data.previousRevisionId)
     : null;
@@ -147,6 +153,9 @@ export const Component = React.createClass({
                   selected={timeline && timeline.selected ? timeline.selected._id : ''}
                   onSelect={this.selectTimelineItem}
                   loading={timeline && timeline.data ? false : true}
+                  query={timeline.query}
+                  queryModel={`${timelineModel}.query`}
+                  refresh={this.refresh}
                 />
               </ContentSidebar>
             </div>
@@ -175,6 +184,7 @@ function mapStateToProps({syncTimeline, projects}, {params}) {
   const project = projects.data[params.stub];
   return {
     timeline: syncTimeline[project.data._id],
+    timelineModel: `syncTimeline.${project.data._id}`,
     project: project
   };
 }

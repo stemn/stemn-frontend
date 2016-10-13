@@ -3,7 +3,9 @@
 .mention{
   color: primary;
 }
-
+.display{
+  line-height: 1.4em;
+}
 .display p:first-child{
   margin-top: 0px;
 }

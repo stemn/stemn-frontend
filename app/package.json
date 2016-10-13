@@ -33,7 +33,6 @@
     "lodash": "^4.13.1",
     "lodash.throttle": "^3.0.3",
     "markdown-it": "^7.0.1",
-    "markdown-it-jsx": "^1.0.0",
     "moment": "^2.13.0",
     "node-fetch": "^1.5.2",
     "node-schedule": "^1.1.0",

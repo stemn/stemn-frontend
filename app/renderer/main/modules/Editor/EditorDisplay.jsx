@@ -41,15 +41,16 @@ const md = markdownIt({
 
 const processNodeDefinitions = new htmlToReact.ProcessNodeDefinitions(React);
 const processingInstructions = [{
+  // Remove the '@' trigger if the next element is a mention
   shouldProcessNode: function (node) {
-    return node.type == 'text' && node.data.endsWith('@') && validateMention(node.next.attribs.href);
+    return node.type == 'text' && node.data.endsWith('@') && node.next && node.next.attribs && validateMention(node.next.attribs.href);
   },
   processNode: function (node, children, index) {
     return <span>{node.data.slice(0, -1)}</span>
   }
 },{
+  // Add the mention to replace the anchor
   shouldProcessNode: function (node) {
-    console.log(node);
     return node.name == 'a' && validateMention(node.attribs.href);
   },
   processNode: function (node, children, index) {

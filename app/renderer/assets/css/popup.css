@@ -27,7 +27,7 @@
   background-clip: padding-box;
   outline: none;
 }
-.PopoverMenu > a{
+.PopoverMenu a{
     display: block;
     padding: 8px 15px;
     clear: both;
@@ -43,11 +43,11 @@
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.PopoverMenu > a.active{
+.PopoverMenu a.active{
   color: rgb(68, 154, 211);
 }
 
-.PopoverMenu > a:hover {
+.PopoverMenu a:hover {
   background: rgb(68, 154, 211);
   color: white;
 }

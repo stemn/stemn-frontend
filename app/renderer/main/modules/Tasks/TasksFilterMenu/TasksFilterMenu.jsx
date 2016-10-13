@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { isFilterActive, addFilter } from '../Tasks.utils.js';
-
+import { isFilterActive, addFilter } from 'app/renderer/main/modules/StringFilter/StringFilter.utils.js';
+import StringFilterMenu from 'app/renderer/main/modules/StringFilter/StringFilterMenu.jsx';
 import classNames from 'classnames';
 
 const statusFilter = [{
@@ -36,33 +36,9 @@ export const Component = React.createClass({
 
     return (
       <div className="PopoverMenu">
-        {statusFilter.map((item, index) =>
-         <a key={index}
-           className={classNames({'active' : isFilterActive(statusFilter, item.value, value)})}
-           onClick={()=>addFilter({
-              dispatch,
-              model,
-              value,
-              filterArray: statusFilter,
-              filterString: item.value
-            })}>
-           {item.text}
-         </a>
-        )}
+        <StringFilterMenu filter={statusFilter} model={model} value={value}/>
         <div className="divider"></div>
-        {ownerFilter.map((item, index) =>
-         <a key={index}
-           className={classNames({'active' : isFilterActive(ownerFilter, item.value, value)})}
-           onClick={()=>addFilter({
-             dispatch,
-             model,
-             value,
-             filterArray: ownerFilter,
-             filterString: item.value
-           })}>
-           {item.text}
-         </a>
-        )}
+        <StringFilterMenu filter={ownerFilter} model={model} value={value}/>
       </div>
     )
   }
