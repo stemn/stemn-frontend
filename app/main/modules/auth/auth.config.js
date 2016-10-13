@@ -11,8 +11,9 @@ export const oauthCreds = {
     url                   : 'https://accounts.google.com/o/oauth2/v2/auth',
     postUrl               : `/api/v1/auth/google`,
     params                : {
+      access_type         : 'offline',
       redirect_uri        : 'https://stemn.com/auth/google',
-      response_type       : 'token',
+      response_type       : 'code',
       client_id           : '502305750839-8m9aian8ka9qb6j64t3dtjs2nq96tdae.apps.googleusercontent.com',
       scope               : 'openid profile email https://www.googleapis.com/auth/drive',
     },

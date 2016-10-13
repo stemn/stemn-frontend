@@ -54,7 +54,9 @@ export const authenticate = ({provider}) => {
       });
 
       const processToken = (url) => {
+        console.log(url);
          const params = provider == 'dropbox' ? querystring.parse(url.split('#')[1]) : querystring.parse(url.split('?')[1]);
+        console.log(params);
          if (params.access_token || params.code) {
           authHttpPromise = http({
             method: 'POST',
@@ -69,6 +71,7 @@ export const authenticate = ({provider}) => {
 
           window.close();
         } else {
+          window.close();
           reject({error: 'Could not find token'})
         }
       }

@@ -11,7 +11,7 @@ export default React.createClass({
       height: this.props.size || '30px'
     };
     return (
-      <img style={styles} src={`https://stemn.com${this.props.picture || this.default}?size=thumb&crop=true`} />
+      <img className={this.props.className} style={styles} src={`https://stemn.com${this.props.picture || this.default}?size=thumb&crop=true`} />
     );
   }
 })

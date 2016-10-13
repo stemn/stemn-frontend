@@ -25,6 +25,7 @@ import { Field } from 'react-redux-form';
 import SidebarContextmenu from './SidebarContextmenu';
 import SidebarProjectButton from './SidebarProjectButton.jsx';
 import {MdAdd, MdSettings, MdSearch, MdMenu} from 'react-icons/lib/md';
+import UserAvatar          from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -90,7 +91,7 @@ export const Component = React.createClass({
               <PopoverMenu>
                 <Link to="/settings/application" className="flex">
                   <div className={userStyles.userWrapper + ' flex layout-row layout-align-start-center'}>
-                    <img className={userStyles.userAvatar} src={'https://stemn.com' + this.props.auth.user.picture + '?size=thumb&crop=true'} />
+                    <UserAvatar picture={this.props.auth.user.picture} className={userStyles.userAvatar}/>
                     <div className="flex text-ellipsis">
                       {this.props.auth.user.name}
                     </div>
