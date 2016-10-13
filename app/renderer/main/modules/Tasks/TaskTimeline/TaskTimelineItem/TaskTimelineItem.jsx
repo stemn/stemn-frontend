@@ -10,16 +10,28 @@ import UserAvatar          from 'app/renderer/main/components/Avatar/UserAvatar/
 import Comment             from 'app/renderer/main/modules/Comments/Comment/Comment.jsx';
 import TaskTimelineWrapper from '../TaskTimelineWrapper/TaskTimelineWrapper.jsx';
 import TaskLabelDots       from '../../TaskLabelDots/TaskLabelDots.jsx'
+import { Link }            from 'react-router';
+
 // import TaskTimelinePanel   from '../TaskTimelinePanel/TaskTimelinePanel.jsx'
 
 const eventTextMap = {
   uncompleted   : (item, board) => {return <span>re-opened this task</span>},
   addAsignee    : (item, board) => {return <span>was assigned to this task</span>},
   removeAsignee : (item, board) => {return <span>was removed from assignees</span>},
-  commit        : (item, board) => {return <span>referenced this task in commit <a className="link-primary">{item.commits[0].summary}</a></span>},
+  commit        : (item, board) => {
+    const linkPath = {
+      pathname: `/project/${board.data.project}/feed`,
+      query: {item: item.commits[0]._id}
+    }
+    return <span>referenced this task in commit <Link to={linkPath} className="link-primary">{item.commits[0].summary}</Link></span>
+  },
   completed     : (item, board) => {
     if(item.commits && item.commits[0]){
-      return <span>marked this as complete in commit <a className="link-primary">{item.commits[0].summary}</a></span>
+      const linkPath = {
+        pathname: `/project/${board.data.project}/feed`,
+        query: {item: item.commits[0]._id}
+      }
+      return <span>marked this as complete in commit <Link to={linkPath} className="link-primary">{item.commits[0].summary}</Link></span>
     }
     else{
       return <span>marked this as complete</span>

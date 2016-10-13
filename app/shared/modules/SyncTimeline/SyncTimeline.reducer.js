@@ -14,11 +14,10 @@ function reducer(state, action) {
     case 'TIMELINE/FETCH_TIMELINE_REJECTED':
       return i.assocIn(state, [action.meta.cacheKey, 'loading'], false)
     case 'TIMELINE/FETCH_TIMELINE_FULFILLED':
-      return i.assocIn(state, [action.meta.cacheKey], {
-        data: action.payload.data,
-        query: '',
-        loading: false
-      })
+      return i.chain(state)
+        .assocIn([action.meta.cacheKey, 'data'], action.payload.data)
+        .assocIn([action.meta.cacheKey, 'loading'], false)
+        .value();
     default:
       return state;
   }

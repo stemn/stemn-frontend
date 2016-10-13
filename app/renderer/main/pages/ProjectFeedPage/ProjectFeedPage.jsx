@@ -13,6 +13,7 @@ import classNames from 'classnames';
 import feedPageStyles from './ProjectFeedPage.css';
 
 // Sub Components
+import { has }            from 'lodash';
 import i                  from 'icepick';
 import { Link }           from 'react-router';
 import Popover            from 'app/renderer/assets/other/react-popup';
@@ -30,19 +31,24 @@ import UserAvatar         from 'app/renderer/main/components/Avatar/UserAvatar/U
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
-const onMount = (nextProps, prevProps) => {
-  if(nextProps.project && nextProps.project.data && nextProps.project.data.remote.connected){
-    if(!prevProps || nextProps.project.data._id !== prevProps.project.data._id){
-      nextProps.syncTimelineActions.fetchTimeline({projectId: nextProps.project.data._id})
-    }
-  }
-}
-
 export const Component = React.createClass({
 
   // Mounting
-  componentWillMount() { onMount(this.props) },
-  componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
+  onMount(nextProps, prevProps){
+    if(nextProps.project && nextProps.project.data && nextProps.project.data.remote.connected){
+      if(!prevProps || nextProps.project.data._id !== prevProps.project.data._id){
+        nextProps.syncTimelineActions.fetchTimeline({projectId: nextProps.project.data._id})
+      }
+    }
+    if(has(nextProps, 'location.query.item')){
+      if(!has(prevProps, 'location.query.item') || nextProps.location.query.item != prevProps.location.query.item){
+        const itemFromQueryParams = this.props.timeline.data.find(item => item._id == nextProps.location.query.item);
+        if(itemFromQueryParams){this.selectTimelineItem(itemFromQueryParams)}
+      }
+    }
+  },
+  componentWillMount() { this.onMount(this.props) },
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
 
   selectTimelineItem(item){
     this.props.syncTimelineActions.selectTimelineItem({
@@ -58,7 +64,8 @@ export const Component = React.createClass({
   },
 
   render(){
-    const { timeline, timelineModel, project } = this.props;
+    const { timeline, timelineModel, project, location } = this.props;
+
     const filePrevious = timeline && timeline.selected && timeline.selected.data && timeline.selected.data.previousRevisionId
     ? i.assocIn(timeline.selected, ['data', 'revisionId'], timeline.selected.data.previousRevisionId)
     : null;
