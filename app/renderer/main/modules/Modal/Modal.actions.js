@@ -48,3 +48,10 @@ export function hideModal({modalId}){
     },
   };
 }
+
+export function closeAll(){
+  return {
+    type: 'MODALS/CLOSE_ALL',
+    payload: {},
+  };
+}

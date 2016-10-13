@@ -141,8 +141,8 @@ export const Component = React.createClass({
 
 function mapStateToProps({ tasks, projects }, {taskId}) {
   const task          = tasks.data[taskId];
-  const board         = task.data.board ? tasks.boards[task.data.board] : {};
-  const boardModel    = `tasks.boards.${task.data.board}`;
+  const board         = task && task.data && task.data.board ? tasks.boards[task.data.board] : {};
+  const boardModel    = task && task.data ? `tasks.boards.${task.data.board}` : '';
   return {
     task: task,
     entityModel: `tasks.data.${taskId}`,

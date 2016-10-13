@@ -15,6 +15,8 @@ export default function reducer(state = initialState, action = {}) {
       return i.merge(state, {
         stack: i.splice(state.stack, modalIndex, 1)
       })
+    case 'MODALS/CLOSE_ALL':
+      return i.assoc(state, 'stack', [])
     default:
       return state;
   }
