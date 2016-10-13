@@ -45,8 +45,7 @@ const PopupContent = (item) =>{
 
 const Component = React.createClass({
   render() {
-    const { numberToShow, items, selected, isSelected, page, onSelect, preferPlace} = this.props;
-
+    const { numberToShow, items, selected, isSelected, page, onSelect, preferPlace, size} = this.props;
     const translation = 'translateX(' + page * 100 + '%)';
     const Items = items.map((item, index)=> {
       const percentage = 100 - (index) * (100 / numberToShow);
@@ -66,7 +65,7 @@ const Component = React.createClass({
     });
 
     return(
-      <div className={classes.dots} style={{transform: translation}}>
+      <div className={classNames(classes.dots, {[classes.small]: size == 'sm'})} style={{transform: translation}}>
         {Items}
       </div>
     )

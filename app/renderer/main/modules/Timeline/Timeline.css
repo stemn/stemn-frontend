@@ -1,5 +1,12 @@
 @value primary, border1, timeline-main, timeline-bg from "app/renderer/assets/css/themes/standard.css";
 
+.timeline.small{
+  padding: 30px 15px 10px;
+}
+.timeline.small .line{
+  height: 1px;
+}
+
 .timeline{
   padding: 60px 30px 40px;
   background: timeline-bg;

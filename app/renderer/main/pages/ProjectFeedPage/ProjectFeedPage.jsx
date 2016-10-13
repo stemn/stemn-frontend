@@ -21,12 +21,10 @@ import Timeline           from 'app/renderer/main/modules/Timeline/Timeline.jsx'
 import SidebarTimeline    from 'app/shared/modules/SyncTimeline/SidebarTimeline/SidebarTimeline.jsx';
 import FileCompare        from 'app/renderer/main/modules/FileCompare/FileCompare.jsx';
 import FileCompareHeader  from 'app/renderer/main/modules/FileCompare/FileCompareHeader/FileCompareHeader.jsx';
-import FileCompareMenu    from 'app/renderer/main/modules/FileCompare/FileCompareMenu/FileCompareMenu.jsx';
 import ContentSidebar     from 'app/renderer/main/components/ContentSidebar';
-import TogglePanel        from 'app/renderer/main/components/Panels/TogglePanel/TogglePanel.jsx';
-import DragResize         from 'app/renderer/main/modules/DragResize/DragResize.jsx';
 import EditorDisplay      from 'app/renderer/main/modules/Editor/EditorDisplay.jsx';
 import UserAvatar         from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
+import CommitFilesList    from './CommitFilesList.jsx';
 
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -92,7 +90,7 @@ export const Component = React.createClass({
                 </div>
               </div>
               <div className="flex scroll-box">
-                {getFilesSection()}
+                {this.props.timeline.selected.data.items ? <CommitFilesList items={this.props.timeline.selected.data.items} project={project}/> : null}
               </div>
             </div>
           )
@@ -119,30 +117,7 @@ export const Component = React.createClass({
       }
     }
 
-    const getFilesSection = () => {
 
-      if(timeline.selected.data.items){
-        return this.props.timeline.selected.data.items.map((file)=>{
-          const filePrevious = file.data.previousRevisionId ? i.assocIn(file, ['data', 'revisionId'], file.data.previousRevisionId) : null;
-          return (
-            <TogglePanel>
-              <div className="layout-row flex layout-align-start-center">
-                <div className="flex">{file.data.path}</div>
-                <FileCompareMenu
-                  compareId={`feed-${project.data._id}-${file.data._id}`}/>
-              </div>
-              <DragResize side="bottom" height="500" heightRange={[0, 1000]} className="layout-column flex">
-                <FileCompare
-                  compareId={`feed-${project.data._id}-${file.data._id}`}
-                  project={project.data}
-                  file1={file.data}
-                  file2={filePrevious ? filePrevious.data : null} />
-              </DragResize>
-            </TogglePanel>
-          )
-        })
-      }
-    }
 
     if(project.data.remote.connected){
       return (

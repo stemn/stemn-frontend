@@ -1,5 +1,10 @@
 @value primary, border1, timeline-main, timeline-bg from "app/renderer/assets/css/themes/standard.css";
 
+.dots.small .dot{
+  height: 13px;
+  width: 13px;
+}
+
 .dots{
   transition: 0.6s cubic-bezier(0.69, 0.01, 0.17, 0.99) transform;
   height: 100%;

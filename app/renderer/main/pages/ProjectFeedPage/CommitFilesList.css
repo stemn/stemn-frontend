@@ -1,0 +1,6 @@
+@value primary, border1, bg1 from "app/renderer/assets/css/themes/standard.css";
+
+.timeline{
+  border: none;
+  background: transparent;
+}

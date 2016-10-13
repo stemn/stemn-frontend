@@ -36,13 +36,13 @@ const Component = React.createClass({
     }
   },
   render() {
-    const { items, selected, isSelected, onSelect, preferPlace, style, className } = this.props;
+    const { items, selected, isSelected, onSelect, preferPlace, style, className, size } = this.props;
     const numberToShow = 15;
     const moreLeft  = items ? this.state.page < items.length / numberToShow - 1 : false;
     const moreRight = this.state.page > 0;
 
     return (
-      <div className={classNames(styles.timeline, 'layout-row', className)} style={style}>
+      <div className={classNames(styles.timeline, 'layout-row', className, {[styles.small]: size == 'sm'})} style={style}>
         <div className="rel-box flex">
           <div className={styles.line}>
             {moreLeft  ? <MoreButton onClick={()=>this.scroll('left')} side="left"/> : ''}
@@ -61,7 +61,8 @@ const Component = React.createClass({
                   items={items}
                   selected={selected}
                   isSelected={isSelected}
-                  preferPlace={preferPlace}>
+                  preferPlace={preferPlace}
+                  size={size}>
                 </TimelineInner>
                 : ''
               }

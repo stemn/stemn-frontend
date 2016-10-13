@@ -36,7 +36,12 @@ export const addFilter = ({dispatch, model, value, filterArray, filterString}) =
   ****************************************************/
   let newSearchString = value;
   filterArray.forEach(filterObject => { newSearchString = replaceWord(newSearchString, filterObject.value, '') }); // Clear the search string
-  newSearchString = filterString ? `${newSearchString} ${filterString}` : newSearchString;                         // Add the new filterString
+  // Add the new filterString
+  if(newSearchString){
+    newSearchString = filterString ? `${newSearchString} ${filterString}` : newSearchString;
+  }else if(filterString){
+    newSearchString = filterString;
+  }
   dispatch(actions.change(model, newSearchString))
 };
 
