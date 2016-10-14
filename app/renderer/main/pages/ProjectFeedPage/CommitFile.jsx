@@ -15,7 +15,7 @@ export default React.createClass({
       selected1: this.props.file.revisions[0],
       selected2: this.props.file.revisions[1],
       lastSelected: 1,
-      mode: 'single'
+      mode: this.props.file.revisions[0] && this.props.file.revisions[1] ? 'sideBySide' : 'single'
     }
   },
   onSelect(response){

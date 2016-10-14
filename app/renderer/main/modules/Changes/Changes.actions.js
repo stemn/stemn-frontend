@@ -19,10 +19,9 @@ export function selectedFileChange({projectId, selected}) {
 
 export function toggleAll({projectId, value}) {
   return (dispatch, getState) => {
-    const newValue = !value;
     dispatch({
       type: 'CHANGES/TOGGLE_ALL_CHANGED_FILES',
-      payload: {projectId, value: newValue}
+      payload: {projectId, value}
     })
   };
 }
