@@ -71,7 +71,6 @@ export const Component = React.createClass({
   commitFn(){
     this.props.ChangesActions.commit({
       projectId: this.props.project.data._id,
-      revisions: this.props.changes.data.filter((item)=>item.selected).map((item)=>item._id),
       summary: this.props.changes.summary,
       description: this.props.changes.description
     })

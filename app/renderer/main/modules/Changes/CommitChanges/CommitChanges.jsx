@@ -19,45 +19,49 @@ import styles from './CommitChanges.css';
 const contextIdentifier = 'FileChangeCm';
 const FileChangeRowContext = ContextMenuLayer(contextIdentifier, (props) => (props))(FileChangeRow)
 
-export default (props) => {
+export default React.createClass({
+  render(){
+    const { changes, project, actToggleAll, refresh, selectedFileChange } = this.props;
+    const groupedChanges = groupRevisions(changes.data);
 
-  const groupedChanges = groupRevisions(props.changes.data);
-  return (
-    <div className="layout-column flex">
+    return (
       <div className="layout-column flex">
-        <FileChangeTitleRow
-          text={groupedChanges.length + ' file changes'}
-          model={`changes.${props.project._id}.toggleAll`}
-          value={props.changes.toggleAll}
-          changeAction={props.actToggleAll}>
-          <PopoverMenu preferPlace="below">
-            <SimpleIconButton>
-              <MdMoreHoriz size="20px" />
-            </SimpleIconButton>
-            <div className="PopoverMenu">
-              <a>Filter: All Changes</a>
-              <a>Filter: My Changes</a>
-              <div className="divider"></div>
-              <a onClick={props.refresh}>Refresh</a>
+        <div className="layout-column flex">
+          <FileChangeTitleRow
+            text={groupedChanges.length + ' file changes'}
+            model={`changes.${project._id}.toggleAll`}
+            value={changes.toggleAll}
+            changeAction={actToggleAll}>
+            <PopoverMenu preferPlace="below">
+              <SimpleIconButton>
+                <MdMoreHoriz size="20px" />
+              </SimpleIconButton>
+              <div className="PopoverMenu">
+                <a>Filter: All Changes</a>
+                <a>Filter: My Changes</a>
+                <div className="divider"></div>
+                <a onClick={refresh}>Refresh</a>
+              </div>
+            </PopoverMenu>
+          </FileChangeTitleRow>
+          {
+            groupedChanges.length > 0
+            ? <div className="scroll-box flex">
+              {groupedChanges.map((item, idx)=><FileChangeRowContext key={item._id}
+                item={item}
+                text={item.data.path}
+                clickFn={()=>{selectedFileChange({projectId: project._id, selected: item})}}
+                isActive={item._id == changes.selected._id}
+                model={`changes.${project._id}.checked.${item.data.fileId}`}
+                value={changes.checked[item.data.fileId]}
+              />)}
             </div>
-          </PopoverMenu>
-        </FileChangeTitleRow>
-        {
-          groupedChanges.length > 0
-          ? <div className="scroll-box flex">
-            {groupedChanges.map((item, idx)=><FileChangeRowContext key={item._id}
-              item={item}
-              text={item.data.path}
-              clickFn={()=>{props.selectedFileChange({projectId: props.project._id, selected: item})}}
-              isActive={item._id == props.changes.selected._id}
-              model={`changes.${props.project._id}.data.${idx}.selected`}
-              value={item.selected}/>)}
-          </div>
-          : <div className="layout-column layout-align-center-center text-title-4 flex">No Changes</div>
-        }
+            : <div className="layout-column layout-align-center-center text-title-4 flex">No Changes</div>
+          }
 
+        </div>
+        <FileContextmenu identifier={contextIdentifier}/>
       </div>
-      <FileContextmenu identifier={contextIdentifier}/>
-    </div>
-  )
-}
+    )
+  }
+})

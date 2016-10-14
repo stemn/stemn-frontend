@@ -61,7 +61,6 @@ export function pullChanges({projectId}) {
 }
 
 export function mentionTasksModal({projectId, mentions}) {
-  console.log('modal');
   return (dispatch) => {
     dispatch(showModal({
       modalType: 'TASK_COMMIT',
@@ -86,8 +85,16 @@ export function mentionTasks({projectId, mentions}) {
   }
 }
 
-export function commit({projectId, revisions, summary, description}) {
+export function commit({projectId, summary, description}) {
   return (dispatch, getState) => {
+    const changes = getState().changes[projectId];
+
+    // Get the files which have been changed
+    const files = Object.keys(changes.checked).filter(key => changes.checked[key]);
+
+    // Get the revisions from the selected files
+    const revisions = changes.data.filter(item => changes.checked[item.data.fileId]).map((item)=>item._id);
+
     dispatch({
       type: 'CHANGES/COMMIT',
       payload: http({
@@ -100,13 +107,14 @@ export function commit({projectId, revisions, summary, description}) {
         }
       }).then((response)=>{
         dispatch(showToast({
-          title: `${revisions.length} files commited.`,
+          title: `${files.length} files commited.`,
           actions: [{
             text: 'Undo',
             action: {
-              type: 'CHANGES/COMMIT_UNDO',
-              payload: {
-                commitId: response.data._id
+              functionAlias: 'ChangesActions.deleteCommit',
+              functionInputs: {
+                commitId: response.data._id,
+                projectId
               }
             }
           }]
@@ -114,7 +122,6 @@ export function commit({projectId, revisions, summary, description}) {
         // Get the mentions
         const mentions = parseMentions(response.data.description);
         // If mentionType: task-complete, we set the task to complete.
-        console.log(mentions);
         mentions.forEach(mention => {
           if(mention.mentionType == 'task-complete'){
             dispatch(actions.change(`tasks.data.${mention.entityId}.data.complete`, true));
@@ -125,6 +132,20 @@ export function commit({projectId, revisions, summary, description}) {
       meta: {
         cacheKey: projectId
       }
+    })
+  }
+}
+
+export function deleteCommit({commitId, projectId}) {
+  return (dispatch) => {
+    dispatch({
+      type: 'CHANGES/DELETE_COMMIT',
+      payload: http({
+        method: 'DELETE',
+        url: `/api/v1/commits/${commitId}`,
+      }).then(response => {
+        dispatch(fetchChanges({projectId}))
+      })
     })
   }
 }

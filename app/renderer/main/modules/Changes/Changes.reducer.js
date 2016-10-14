@@ -2,7 +2,6 @@ import i from 'icepick';
 
 import { modeled } from 'react-redux-form';
 import { parseMentions, removeExistingMentions, addMentionsToText } from '../Mentions/Mentions.utils.js';
-
 const initialState = {}
 
 const mainReducer = (state, action) => {
@@ -20,11 +19,12 @@ const mainReducer = (state, action) => {
         return addMentionsToText(state[action.payload.projectId].description, uniqueNewMentions);
       });
     case 'CHANGES/TOGGLE_ALL_CHANGED_FILES':
-      const allToggled = state[action.payload.projectId].data.map((item) => i.merge(item, {selected: action.payload.value }) );
-      return i.merge(state, {
-        [action.payload.projectId] : {
-          data : allToggled
-        }
+      return i.updateIn(state, [action.payload.projectId], (changes) => {
+        const checked = changes.data.reduce((obj, param) => {
+          obj[param.data.fileId] = action.payload.value;
+          return obj;
+        }, {});
+        return i.assoc(changes, 'checked', checked);
       })
     case 'CHANGES/FETCH_CHANGES_FULFILLED':
       return i.merge(state, {
@@ -36,12 +36,12 @@ const mainReducer = (state, action) => {
     case 'CHANGES/COMMIT_FULFILLED':
       const idsToRemove = action.payload.data.revisions.map((item)=>item._id);
       const remainingRevisions = state[action.meta.cacheKey].data.filter((item)=>!idsToRemove.includes(item._id));
-
       return i.merge(state, {
         [action.meta.cacheKey] : {
           summary: '',
           description : '',
-          data: remainingRevisions
+          data: remainingRevisions,
+          checked: {}
         }
       })
     default:
