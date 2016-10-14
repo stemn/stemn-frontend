@@ -29,6 +29,11 @@ import FileCompareHeader  from 'app/renderer/main/modules/FileCompare/FileCompar
 ///////////////////////////////// COMPONENT /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
+const CommitBoxStyles = {
+  borderTop: '1px solid rgba(0, 0, 0, 0.1)',
+  background: 'rgba(0, 0, 0, 0.03)'
+};
+
 export const Component = React.createClass({
   propTypes: {
     project: React.PropTypes.object.isRequired,
@@ -56,14 +61,9 @@ export const Component = React.createClass({
     })
   },
 
-  CommitBoxStyles: {
-    borderTop: '1px solid rgba(0, 0, 0, 0.1)',
-    background: 'rgba(0, 0, 0, 0.03)'
-  },
-
-  toggleAll(model){
-    return this.props.ChangesActions.actToggleAll({
-      model,
+  toggleAll(value){
+    return this.props.ChangesActions.toggleAll({
+      value,
       projectId: this.props.project.data._id
     })
   },
@@ -100,12 +100,12 @@ export const Component = React.createClass({
                   ? <CommitChanges
                     changes={changes}
                     project={project.data}
-                    actToggleAll={this.toggleAll}
+                    toggleAll={this.toggleAll}
                     selectedFileChange={ChangesActions.selectedFileChange}
                     refresh={this.refresh}/>
                   : ''}
 
-                <div style={this.CommitBoxStyles}>
+                <div style={CommitBoxStyles}>
                   <CommitBox
                     entityModel={entityModel}
                     changes={changes}

@@ -34,14 +34,20 @@ export const Component = React.createClass({
   componentWillReceiveProps(nextProps) {
     if (this.props.project && nextProps.project && this.props.project.data && nextProps.project.data._id !== this.props.project.data._id && nextProps.project.data.remote.connected) {
       this.props.ChangesActions.fetchChanges({
-        projectId: nextProps.project._id
+        projectId: nextProps.data.project._id
       })
     }
   },
 
-  toggleAll(model){
-    return this.props.ChangesActions.actToggleAll({
-      model,
+  refresh(){
+    this.props.ChangesActions.fetchChanges({
+      projectId: this.props.project.data._id
+    })
+  },
+
+  toggleAll(value){
+    return this.props.ChangesActions.toggleAll({
+      value,
       projectId: this.props.project.data._id
     })
   },
@@ -101,8 +107,9 @@ export const Component = React.createClass({
             <CommitChanges
               changes={changes}
               project={project.data}
-              actToggleAll={this.toggleAll}
-              selectedFileChange={ChangesActions.selectedFileChange}/>
+              toggleAll={this.toggleAll}
+              selectedFileChange={ChangesActions.selectedFileChange}
+              refresh={this.refresh}/>
             <div style={commitBoxStyles}>
               <CommitBox
                 entityModel={entityModel}

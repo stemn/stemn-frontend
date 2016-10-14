@@ -18,7 +18,7 @@ export default (props) => {
   return (
     <div className="layout-column flex">
       <div className="layout-column flex">
-        <FileChangeTitleRow text={props.changes.data.length + ' file changes'} model={`changes.${props.project._id}.toggleAll`} value={props.changes.toggleAll} changeAction={props.actToggleAll}/>
+        <FileChangeTitleRow text={props.changes.data.length + ' file changes'} value={props.changes.toggleAll} changeAction={props.toggleAll}/>
         <div className="scroll-box flex">
           {props.changes.data.map((item, idx)=><FileChangeRowContext key={item._id}
           text={item.data.name}

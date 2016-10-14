@@ -17,13 +17,12 @@ export function selectedFileChange({projectId, selected}) {
   }
 }
 
-export function actToggleAll({projectId, model}) {
+export function toggleAll({projectId, value}) {
   return (dispatch, getState) => {
-    const value = !get(getState(), model);
-    dispatch(actions.toggle(model, value));
+    const newValue = !value;
     dispatch({
       type: 'CHANGES/TOGGLE_ALL_CHANGED_FILES',
-      payload: {projectId, model, value}
+      payload: {projectId, value: newValue}
     })
   };
 }

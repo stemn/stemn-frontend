@@ -12,6 +12,7 @@ import { MdMoreHoriz } from 'react-icons/lib/md';
 
 // Functions
 import { groupRevisions } from 'app/renderer/main/modules/Timeline/Timeline.utils.js'
+import { getToggleAllStatus } from '../Changes.utils.js'
 
 // Styles
 import styles from './CommitChanges.css';
@@ -21,17 +22,18 @@ const FileChangeRowContext = ContextMenuLayer(contextIdentifier, (props) => (pro
 
 export default React.createClass({
   render(){
-    const { changes, project, actToggleAll, refresh, selectedFileChange } = this.props;
+    const { changes, project, toggleAll, refresh, selectedFileChange } = this.props;
     const groupedChanges = groupRevisions(changes.data);
+    const allChecked = getToggleAllStatus(groupedChanges, changes.checked);
 
     return (
       <div className="layout-column flex">
         <div className="layout-column flex">
           <FileChangeTitleRow
             text={groupedChanges.length + ' file changes'}
-            model={`changes.${project._id}.toggleAll`}
-            value={changes.toggleAll}
-            changeAction={actToggleAll}>
+            checkbox={true}
+            value={allChecked}
+            changeAction={toggleAll}>
             <PopoverMenu preferPlace="below">
               <SimpleIconButton>
                 <MdMoreHoriz size="20px" />

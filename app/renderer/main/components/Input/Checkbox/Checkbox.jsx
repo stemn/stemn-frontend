@@ -5,39 +5,40 @@ import { Control } from 'react-redux-form';
 import classes from './Checkbox.css';
 import classNames from 'classnames';
 
-export default (props) => {
-  const id = Math.random().toString(36).substring(7);
-  return (
-    <div
-      title={props.title}
-      className={classNames(classes.checkbox, props.className, {[classes.checkboxCircle] : props.circle})}>
-      <Control.checkbox
-        className={props.value ? 'checked' : ''}
-        id={id}
-        model={props.model}
-        changeAction={props.changeAction}/>
-      <label htmlFor={id}></label>
-    </div>
-  )
-}
+/*********************************************
+Works as either a 2-state checkbox or 3-state.
 
+3-state checkbox requires !props.model
+states: true || false || null;
+*********************************************/
 
-//import React from 'react';
-//import { Control } from 'react-redux-form';
-//
-//// Styles
-//import classes from './Checkbox.css';
-//import classNames from 'classnames';
-//
-//export default (props) => {
-//  const id = Math.random().toString(36).substring(7);
-//  return (
-//    <Field
-//      className={classNames(classes.checkbox, props.className, {[classes.checkboxCircle] : props.circle})}
-//      model={props.model}
-//      changeAction={props.changeAction}>
-//      <input className={props.value ? 'checked' : ''} type="checkbox" id={id}/>
-//      <label htmlFor={id}></label>
-//    </Field>
-//  )
-//}
+export default React.createClass({
+  render(){
+    const { value, model, title, circle, className, changeAction} = this.props;
+    const id = Math.random().toString(36).substring(7);
+    const statusClass = value === null ? 'semi' : (value === true ? 'checked' : '');
+    return (
+      <div
+        title={title}
+        className={classNames(classes.checkbox, className, {[classes.checkboxCircle] : circle})}>
+        {
+          model ?
+          <Control.checkbox
+            className={statusClass}
+            id={id}
+            model={model}
+            changeAction={changeAction}
+          />
+          :
+          <input
+            type="checkbox"
+            className={statusClass}
+            id={id}
+            onChange={()=>{changeAction(!value)}}
+          />
+        }
+        <label htmlFor={id}></label>
+      </div>
+    )
+  }
+})

@@ -35,8 +35,15 @@
   visibility: hidden;
   position: absolute;
 }
-.checkbox input:checked + label:after {
+.checkbox input:global(.checked) + label:after {
   opacity: 1 !important;
+}
+.checkbox input:global(.semi) + label:after {
+  opacity: 1 !important;
+  transform: rotate(0deg);
+  border: 4px solid;
+  height: 8px;
+  width: 8px;
 }
 .checkbox:hover {
   opacity: 1;
