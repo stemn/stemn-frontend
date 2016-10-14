@@ -13,7 +13,7 @@ export default React.createClass({
     const { model, value, checkbox, changeAction, children, text } = this.props;
     return (
       <div className={styles.fileChangeTitleRow + ' layout-row layout-align-start-center'}>
-        {checkbox ? <Checkbox className="text-primary" model={model} value={value} changeAction={changeAction}/> : null}
+        {checkbox ? <Checkbox className="text-primary" model={model} value={value} changeAction={changeAction} title="Toggle all"/> : null}
         <span className={styles.text + ' flex text-ellipsis'}>{text}</span>
         <div className="flex"></div>
         {children}

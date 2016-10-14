@@ -35,7 +35,7 @@ export default React.createClass({
             value={allChecked}
             changeAction={toggleAll}>
             <PopoverMenu preferPlace="below">
-              <SimpleIconButton>
+              <SimpleIconButton title="Filter changes">
                 <MdMoreHoriz size="20px" />
               </SimpleIconButton>
               <div className="PopoverMenu">

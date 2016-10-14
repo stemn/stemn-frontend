@@ -32,7 +32,7 @@ export default React.createClass({
     return (
       <div className={rowClasses}>
         <div className={styles.checkbox}>
-          <Checkbox model={model} value={value}/>
+          <Checkbox model={model} value={value} title={value ? 'Deselect change' : 'Select change'}/>
         </div>
         <div className={styles.text + ' flex text-ellipsis layout-row'} onClick={clickFn}>
           <div className="flex">{text}</div>
