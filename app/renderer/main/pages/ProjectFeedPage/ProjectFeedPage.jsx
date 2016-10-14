@@ -117,8 +117,6 @@ export const Component = React.createClass({
       }
     }
 
-
-
     if(project.data.remote.connected){
       return (
         <div className="layout-column flex rel-box">

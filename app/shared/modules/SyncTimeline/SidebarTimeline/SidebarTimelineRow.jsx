@@ -2,7 +2,9 @@ import React from 'react';
 import classNames from 'classnames';
 import moment from 'moment';
 
-import {MdChevronRight} from 'react-icons/lib/md';
+import { groupRevisions } from 'app/renderer/main/modules/Timeline/Timeline.utils.js'
+
+import TogglerExpand from 'app/renderer/main/components/Toggler/TogglerExpand/TogglerExpand.jsx';
 
 // Styles
 import styles from './SidebarTimelineRow.css';
@@ -19,11 +21,20 @@ export default React.createClass({
   render() {
     const timeFromNow = moment(this.props.item.timestamp).fromNow();
 
+
     if(this.props.item.event == 'commit'){
+      const groupedRevisions = groupRevisions(this.props.item.data.items);
       const getChildRows = () => {
         if(this.state.isOpen){
-          return this.props.item.data.items.map((file)=>{
-            return <div key={file._id} className={classNames(styles.timelineRow, styles.inner, {[styles.active]: this.props.isActive})} onClick={this.props.clickFn}>{file.data.path}</div>
+          return groupedRevisions.map((file)=>{
+            return (
+            <div key={file._id}
+              className={classNames(styles.timelineRow, styles.inner, 'layout-row', {[styles.active]: this.props.isActive})}
+              onClick={this.props.clickFn}>
+              <div className="flex">{file.data.path}</div>
+              <div>{file.revisions.length} revisions</div>
+            </div>
+            )
           })
         }
       }
@@ -37,10 +48,9 @@ export default React.createClass({
                 <div style={{marginTop: '5px'}}>{timeFromNow} by {this.props.item.user.name}</div>
               </div>
             </div>
-            <div className={classNames(styles.button, 'layout-row', 'layout-align-start-center', {[styles.buttonActive]: this.state.isOpen})} onClick={()=>this.toggle(null)}>
-              {this.props.item.data.items.length}
-              <MdChevronRight size="18" />
-            </div>
+            <TogglerExpand isActive={this.state.isOpen} onClick={()=>this.toggle(null)}>
+              {groupedRevisions.length}
+            </TogglerExpand>
           </div>
           {getChildRows()}
         </div>

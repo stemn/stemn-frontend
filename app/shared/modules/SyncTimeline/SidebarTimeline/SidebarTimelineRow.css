@@ -10,19 +10,6 @@
 .inner{
   padding: 8px;
 }
-.button{
-  padding: 4px 2px 4px 8px;
-  margin-right: 10px;
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 4px;
-  color: white;
-}
-.button svg{
-  transition: 0.1s ease all;
-}
-.buttonActive svg{
-  transform: rotate(90deg);
-}
 
 .timelineRow.active{
   background: primary !important;

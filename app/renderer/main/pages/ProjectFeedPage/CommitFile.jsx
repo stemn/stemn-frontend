@@ -55,9 +55,9 @@ export default React.createClass({
     const items = mode == 'single' ? [selected1, selected1] : orderBy([selected1, selected2], item => (new Date(item.timestamp)).getTime());
     return (
       <TogglePanel>
-        <div>{file.path}</div>
+        <div>{file.data.path}</div>
         <FileCompareMenu
-          compareId={`feed-${project.data._id}-${file.fileId}`}
+          compareId={`feed-${project.data._id}-${file.data.fileId}`}
           file1={items[1].data}
           file2={items[0].data}
           revisions={file.revisions}
@@ -66,7 +66,7 @@ export default React.createClass({
         />
         <DragResize side="bottom" height="500" heightRange={[0, 1000]} className="layout-column flex">
           <FileCompare
-            compareId={`feed-${project.data._id}-${file.fileId}`}
+            compareId={`feed-${project.data._id}-${file.data.fileId}`}
             project={project.data}
             file1={items[1].data}
             file2={items[0].data}

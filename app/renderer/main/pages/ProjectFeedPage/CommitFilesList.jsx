@@ -1,9 +1,8 @@
 import React from 'react';
-import { groupBy, values } from 'lodash';
 
 import classes            from './CommitFilesList.css';
 import CommitFile         from './CommitFile.jsx';
-
+import { groupRevisions } from 'app/renderer/main/modules/Timeline/Timeline.utils.js'
 
 export default React.createClass({
   onSelect(response){
@@ -21,16 +20,3 @@ export default React.createClass({
     )
   }
 })
-
-////////////////////////////////////////////////////////////////
-
-function groupRevisions(revisions){
-  return values(groupBy(revisions, 'data.fileId')).map(file => {
-    return {
-      name: file[0].data.name,
-      fileId: file[0].data.fileId,
-      path: file[0].data.path,
-      revisions: file
-    }
-  })
-}

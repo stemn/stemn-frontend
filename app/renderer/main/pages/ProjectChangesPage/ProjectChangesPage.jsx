@@ -45,9 +45,15 @@ export const Component = React.createClass({
   componentWillReceiveProps(nextProps) {
     if (this.props.project && nextProps.project && this.props.project.data && nextProps.project.data._id !== this.props.project.data._id && nextProps.project.data.remote.connected) {
       this.props.ChangesActions.fetchChanges({
-        projectId: nextProps.project._id
+        projectId: nextProps.project.data._id
       })
     }
+  },
+
+  refresh(){
+    this.props.ChangesActions.fetchChanges({
+      projectId: this.props.project.data._id
+    })
   },
 
   CommitBoxStyles: {
@@ -96,7 +102,8 @@ export const Component = React.createClass({
                     changes={changes}
                     project={project.data}
                     actToggleAll={this.toggleAll}
-                    selectedFileChange={ChangesActions.selectedFileChange}/>
+                    selectedFileChange={ChangesActions.selectedFileChange}
+                    refresh={this.refresh}/>
                   : ''}
 
                 <div style={this.CommitBoxStyles}>

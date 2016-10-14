@@ -10,6 +10,9 @@ import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 import { MdMoreHoriz } from 'react-icons/lib/md';
 
+// Functions
+import { groupRevisions } from 'app/renderer/main/modules/Timeline/Timeline.utils.js'
+
 // Styles
 import styles from './CommitChanges.css';
 
@@ -17,11 +20,13 @@ const contextIdentifier = 'FileChangeCm';
 const FileChangeRowContext = ContextMenuLayer(contextIdentifier, (props) => (props))(FileChangeRow)
 
 export default (props) => {
+
+  const groupedChanges = groupRevisions(props.changes.data);
   return (
     <div className="layout-column flex">
       <div className="layout-column flex">
         <FileChangeTitleRow
-          text={props.changes.data.length + ' file changes'}
+          text={groupedChanges.length + ' file changes'}
           model={`changes.${props.project._id}.toggleAll`}
           value={props.changes.toggleAll}
           changeAction={props.actToggleAll}>
@@ -33,14 +38,15 @@ export default (props) => {
               <a>Filter: All Changes</a>
               <a>Filter: My Changes</a>
               <div className="divider"></div>
-              <a>Refresh</a>
+              <a onClick={props.refresh}>Refresh</a>
             </div>
           </PopoverMenu>
         </FileChangeTitleRow>
         {
-          props.changes.data.length > 0
+          groupedChanges.length > 0
           ? <div className="scroll-box flex">
-            {props.changes.data.map((item, idx)=><FileChangeRowContext key={item._id}
+            {groupedChanges.map((item, idx)=><FileChangeRowContext key={item._id}
+              item={item}
               text={item.data.path}
               clickFn={()=>{props.selectedFileChange({projectId: props.project._id, selected: item})}}
               isActive={item._id == props.changes.selected._id}
