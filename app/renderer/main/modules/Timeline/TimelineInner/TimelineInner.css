@@ -4,6 +4,11 @@
   height: 13px;
   width: 13px;
 }
+.dots.small .dot.active{
+  height: 16px;
+  width: 16px;
+  margin-left: 0;
+}
 
 .dots{
   transition: 0.6s cubic-bezier(0.69, 0.01, 0.17, 0.99) transform;

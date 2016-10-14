@@ -31,17 +31,18 @@ export default React.createClass({
       if(this.state.isOpen){
         return (
           <div className={styles.content}>
-            {this.props.children[1]}
+            {this.props.children[2]}
           </div>
         )
       }
     }
     return (
       <div>
-        <div onClick={()=>this.toggle(null)} className={styles.titleBar + ' layout-row layout-align-start-center'}>
-          <MdChevronRight className={classNames(styles.toggleIcon, {[styles.toggleIconActive] : this.state.isOpen})} size='22'></MdChevronRight>
-          <div className="flex layout-row">
-            {this.props.children[0]}
+        <div className={styles.titleBar + ' layout-row layout-align-start-center'}>
+          <MdChevronRight onClick={()=>this.toggle(null)} className={classNames(styles.toggleIcon, {[styles.toggleIconActive] : this.state.isOpen})} size='22'></MdChevronRight>
+          <div className="flex layout-row layout-align-start-center">
+            <div className="flex" onClick={()=>this.toggle(null)}>{this.props.children[0]}</div>
+            {this.props.children[1]}
           </div>
         </div>
         {getContent()}

@@ -67,7 +67,7 @@ export const Component = React.createClass({
     const projectNotConnected = () => {
       return (
         <div className="layout-column layout-align-center-center flex">
-          <div className="text-title-5 text-center">Project not connected to a file store</div>
+          <div className="text-title-4 text-center">Project not connected to a file store</div>
           <div className="text-title-4 text-center link-primary" style={{marginTop: '10px'}}>
             <Link to={addStoreLink}>Add File Store</Link>
           </div>

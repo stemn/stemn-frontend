@@ -1,4 +1,5 @@
-import {intersection} from 'lodash';
+import { intersection }   from 'lodash';
+import * as CompareIcons  from 'app/renderer/assets/icons/compare/index.js';
 
 const compareModeInfo = [ // Compare modes and text
   {
@@ -17,7 +18,15 @@ const compareModeInfo = [ // Compare modes and text
     value: 'single',
     text: 'None',
   }
-]
+];
+
+const iconMap = {
+  sideBySide: CompareIcons.SideBySide,
+  aboveAndBelow: CompareIcons.TopBottom,
+  onion: CompareIcons.OnionSkin,
+  slider: CompareIcons.Slide,
+  single: CompareIcons.Single,
+};
 
 // This table maps the compare modes (above) to the preview mode
 const compareModeTable = {
@@ -31,6 +40,10 @@ const compareModeTable = {
     gdoc     : [0,1,4],
     other    : [0,1,4],
     none     : [4]
+}
+
+export const getCompareIcon = (compareMode) => {
+  return iconMap[compareMode] || CompareIcons.SideBySide;
 }
 
 export const getCompareModes = (previewerType1, previewerType2) => {

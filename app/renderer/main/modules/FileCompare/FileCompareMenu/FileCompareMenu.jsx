@@ -3,38 +3,30 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as FileCompareActions from '../FileCompare.actions.js';
 import * as ElectronWindowsActions from 'app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
 
 // Component Core
 import React from 'react';
+import { getViewerType } from 'app/renderer/main/modules/Files/PreviewFile/PreviewFile.utils.js';
 
 // Styles
 import classNames from 'classnames';
 
 // Sub Components
-import PopoverMenu        from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
-import SimpleIconButton   from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
-
-import {getCompareModes}  from '../FileCompare.utils.js';
-import {MdMoreHoriz}      from 'react-icons/lib/md';
-
+import PopoverMenu          from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
+import SimpleIconButton     from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import { getCompareModes, getCompareIcon }  from '../FileCompare.utils.js';
+import { MdMoreHoriz }      from 'react-icons/lib/md';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
-  setCompareMode(mode){
-    this.props.fileCompareActions.changeMode({
-      compareId: this.props.compareId,
-      mode
-    })
-  },
   popoutPreview(mode){
     this.props.electronWindowsActions.create({
       type: 'PREVIEW',
       props: {
-        fileId: this.props.fileCompare.file1.fileId,
-        revisionId: this.props.fileCompare.file1.revisionId,
+        fileId: this.props.file1.fileId,
+        revisionId: this.props.file1.revisionId,
       }
     })
     setTimeout(()=>{
@@ -42,39 +34,53 @@ export const Component = React.createClass({
     }, 100)
   },
   render() {
-    const { fileCompare } = this.props;
-    if(!fileCompare){return null};
+    const { mode, changeMode, revisions, file1, file2 } = this.props;
 
+    const previewType  = getViewerType(file1.extension, file1.provider);
+    const compareModes = getCompareModes(previewType, previewType);
+    const CompareIcon  = getCompareIcon(mode);
     return (
-      <PopoverMenu preferPlace="below">
-        <SimpleIconButton>
-          <MdMoreHoriz size="20px"/>
-        </SimpleIconButton>
-        <div className="PopoverMenu">
-          {getCompareModes(fileCompare.previewType1, fileCompare.previewType2).map((item)=><a key={item.value} className={classNames({'active': fileCompare.mode == item.value})} onClick={()=>this.setCompareMode(item.value)}>Compare: {item.text}</a>)}
-          <div className="divider"></div>
-          <a onClick={this.displayFileInfo}>Discard Changes</a>
-          <a onClick={this.displayFileInfo}>Open in explorer</a>
-          <a onClick={this.displayFileInfo}>File Info</a>
-          <a onClick={this.popoutPreview}>Preview</a>
-        </div>
-      </PopoverMenu>
+      <div>
+        {
+          revisions.length > 1 ?
+          <PopoverMenu preferPlace="below">
+            <SimpleIconButton title="Compare">
+              <CompareIcon size="20px" />
+            </SimpleIconButton>
+            <div className="PopoverMenu">
+              {compareModes.map(item=><a key={item.value}
+              className={classNames({'active': mode == item.value})}
+              onClick={()=>changeMode(item.value)}>
+                Compare: {item.text}
+              </a>)}
+            </div>
+          </PopoverMenu>
+          : null
+        }
+        <PopoverMenu preferPlace="below">
+          <SimpleIconButton title="Options">
+            <MdMoreHoriz size="20px" />
+          </SimpleIconButton>
+          <div className="PopoverMenu">
+            <a onClick={this.displayFileInfo}>Discard Changes</a>
+            <a onClick={this.displayFileInfo}>Open in explorer</a>
+            <a onClick={this.displayFileInfo}>File Info</a>
+            <a onClick={this.popoutPreview}>Preview</a>
+          </div>
+        </PopoverMenu>
+      </div>
     );
   }
 });
 
-
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps({fileCompare}, {compareId}) {
-  return {
-    fileCompare: fileCompare[compareId]
-  };
+function mapStateToProps() {
+  return {};
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    fileCompareActions: bindActionCreators(FileCompareActions, dispatch),
     electronWindowsActions: bindActionCreators(ElectronWindowsActions, dispatch),
   }
 }
