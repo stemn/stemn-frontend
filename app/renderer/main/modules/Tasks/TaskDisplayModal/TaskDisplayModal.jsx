@@ -11,6 +11,7 @@ import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js'
 import React from 'react';
 import moment from 'moment';
 import { actions } from 'react-redux-form';
+import { has }     from 'lodash';
 
 // Styles
 import classNames from 'classnames';
@@ -26,9 +27,8 @@ import DatePicker from 'app/renderer/main/modules/Calendar/DatePicker/DatePicker
 import Textarea from 'app/renderer/main/components/Input/Textarea/Textarea';
 import CommentNew from 'app/renderer/main/modules/Comments/Comment/CommentNew.jsx';
 
-/////////////////////////////////////////////////////////////////////////////
+
 ///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 const onMount = (nextProps, prevProps) => {
   if(nextProps.task){
@@ -61,7 +61,7 @@ export const Component = React.createClass({
     setTimeout(()=>this.props.TasksActions.updateTask({task: this.props.task.data}), 1);
   },
   render() {
-    const { taskId, task, board, entityModel, modalCancel, modalHide } = this.props;
+    const { taskId, task, board, entityModel, project, modalCancel, modalHide } = this.props;
 
     if(!task){
       return <div>Task Loading</div>
@@ -116,15 +116,22 @@ export const Component = React.createClass({
               </div>
             </div>
             <div className={classes.well}>
-              <div className="text-mini-caps" style={{padding: '15px 15px 0'}}>Asignee</div>
+              <div className="text-mini-caps" style={{padding: '15px 15px 0'}}>Asignees</div>
               <div style={{padding: '15px'}}>
-                <UserSelect model={`${entityModel}.data.asignee`} value={task.data.asignee}/>
+                <UserSelect
+                  model={`${entityModel}.data.asignee`}
+                  value={task.data.asignee}
+                  users={project.data.team}
+                />
               </div>
             </div>
             <div className={classes.well}>
               <div className="text-mini-caps" style={{padding: '15px 15px 0'}}>Due Date</div>
               <div style={{padding: '15px'}}>
-                <DatePicker  model={`${entityModel}.data.due`} value={task.data.due} />
+                <DatePicker
+                  model={`${entityModel}.data.due`}
+                  value={task.data.due}
+                />
               </div>
             </div>
           </div>
@@ -134,20 +141,19 @@ export const Component = React.createClass({
   }
 });
 
-
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps({ tasks, projects }, {taskId}) {
   const task          = tasks.data[taskId];
-  const board         = task && task.data && task.data.board ? tasks.boards[task.data.board] : {};
-  const boardModel    = task && task.data ? `tasks.boards.${task.data.board}` : '';
+  const board         = has(task, 'data.board') ? tasks.boards[task.data.board] : {};
+  const boardModel    = has(task, 'data.board') ? `tasks.boards.${task.data.board}` : '';
+  const project       = has(board, 'data.project') ? projects.data[board.data.project] : {};
   return {
     task: task,
     entityModel: `tasks.data.${taskId}`,
     board,
-    boardModel
+    boardModel,
+    project
   };
 }
 
