@@ -11,12 +11,10 @@ export default React.createClass({
     : null;
 
     return (
-      <div className="layout-column flex">
-        <FileCompareStandard
-          project={project.data}
-          file1={item.data}
-          file2={filePrevious ? filePrevious.data : null} />
-      </div>
+      <FileCompareStandard
+        project={project.data}
+        file1={item.data}
+        file2={filePrevious ? filePrevious.data : null} />
     )
   }
 })

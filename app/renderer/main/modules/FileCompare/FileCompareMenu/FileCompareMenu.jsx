@@ -1,3 +1,7 @@
+/**************************************************************************
+We pass in either revisions or file1 + file2.
+**************************************************************************/
+
 // Container Core
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -44,7 +48,7 @@ export const Component = React.createClass({
     return (
       <div>
         {
-          revisions && revisions.length > 1 ?
+          revisions && revisions.length > 1 || file1 && file2 ?
           <PopoverMenu preferPlace="below">
             <SimpleIconButton title="Compare">
               <CompareIcon size="20px" />

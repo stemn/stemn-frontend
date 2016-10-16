@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 // Component Core
 import React from 'react';
 
+// Functions
+import 'javascript-detect-element-resize'; // addResizeListener && removeResizeListener
 // Styles
 import classNames from 'classnames';
 import classes from './FileCompareInner.css'
@@ -21,7 +23,22 @@ export const Component = React.createClass({
   getInitialState () {
     return {
       position: 50,
+      width: 0,
     };
+  },
+  updateDimensions: function() {
+    if(this.refs.container){
+      this.setState({width: this.refs.container.offsetWidth})
+    }
+  },
+  componentWillMount: function() {
+    this.updateDimensions();
+  },
+  componentDidMount: function() {
+    window.addResizeListener(this.refs.container, this.updateDimensions);
+  },
+  componentWillUnmount: function() {
+    window.removeResizeListener(this.refs.container, this.updateDimensions);
   },
   sliderChange (position){
     this.setState({position: position});
@@ -29,11 +46,9 @@ export const Component = React.createClass({
   changeFn(event){
     this.setState({position: event.target.value});
   },
-  displayFileInfo(){
-    console.log('fileInfo');
-  },
   render() {
-    const {project, file1, file2, compareId, mode} = this.props;
+    const { project, file1, file2, compareId, mode } = this.props;
+    const { width } = this.state;
 
     const compareModeClasses = {
       sideBySide    : 'layout-row',
@@ -54,10 +69,7 @@ export const Component = React.createClass({
       },
       single        : {}
     }
-
-    const overylayStyles = mode == 'slider' && this.refs.container ?
-          {width: this.refs.container.offsetWidth + 'px'} : {};
-
+    const overylayStyles = mode == 'slider' && this.refs.container ? {width: width + 'px'} : {};
 
     const filePreview1 = () => {
       return (
