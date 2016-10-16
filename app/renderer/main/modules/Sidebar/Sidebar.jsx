@@ -7,6 +7,7 @@ import * as SidebarActions from 'app/shared/actions/sidebar';
 import * as AuthActions from 'app/shared/actions/auth';
 import * as ProjectsActions from 'app/shared/actions/projects';
 import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
+import * as SystemActions from 'app/shared/actions/system';
 
 // Component Core
 import React from 'react';
@@ -19,20 +20,17 @@ import userStyles from './SidebarAvatar.css';
 // Sub Components
 import DragResize      from 'app/renderer/main/modules/DragResize/DragResize.jsx';
 import { Link } from 'react-router';
-import { ContextMenu, MenuItem, ContextMenuLayer } from "react-contextmenu";
+import { ContextMenuLayer } from "react-contextmenu";
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 import { Field } from 'react-redux-form';
-import SidebarContextmenu from './SidebarContextmenu';
+import ContextMenu from 'app/renderer/main/modules/ContextMenu/ContextMenu.jsx';
 import SidebarProjectButton from './SidebarProjectButton.jsx';
 import {MdAdd, MdSettings, MdSearch, MdMenu} from 'react-icons/lib/md';
 import UserAvatar          from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
 
-
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-
-const ProjectWithContext = ContextMenuLayer('multi', (props) => (props.item))(SidebarProjectButton);
+const projectContextIdentifier = 'ProjectContextIdentifier';
+const ProjectWithContext = ContextMenuLayer(projectContextIdentifier, (props) => props.item)(SidebarProjectButton);
 
 export const Component = React.createClass({
 
@@ -54,7 +52,27 @@ export const Component = React.createClass({
 
     const nameRegex = new RegExp(this.props.sidebar.searchString, 'i');
     const filteredProjects = projects.userProjects.data ? projects.userProjects.data.filter((project) => nameRegex.test(project.name)) : [];
-    const routeState = {meta : {scope: ['main', 'menubar']}}
+    const routeState = {meta : {scope: ['main', 'menubar']}};
+
+    const projectContextMenu = [{
+      label: 'View Online',
+      onClick: (item)=>{console.log(item);},
+    },{
+      label: 'Open in explorer',
+//      onClick: ()=>{this.props.systemActions.openFileLocation({projectId: data._id, path: ''})},
+    },{
+      label: 'Project Settings',
+      subMenu: [{
+        label: 'General Settings'
+      },{
+        label: 'Task Settings'
+      },{
+        label: 'Team Settings'
+      }]
+    },{
+      label: 'Delete Project',
+      onClick: ()=>{},
+    }];
 
     return (
       <DragResize side="right" width="300" widthRange={[0, 500]} animateHide={!this.props.sidebar.show} className="layout-column flex">
@@ -82,8 +100,8 @@ export const Component = React.createClass({
           </div>
 
           <div className="scroll-box flex">
-              {filteredProjects.map((item, idx) => <ProjectWithContext key={idx} item={item} isActive={item._id == this.props.params.stub} to={{pathname: `/project/${item._id}`, state: routeState}}/>)}
-              <SidebarContextmenu />
+            {filteredProjects.map((item, idx) => <ProjectWithContext key={idx} item={item} isActive={item._id == this.props.params.stub} to={{pathname: `/project/${item._id}`, state: routeState}}/>)}
+            <ContextMenu identifier={projectContextIdentifier} menu={projectContextMenu}/>
           </div>
 
           <div>
@@ -132,7 +150,8 @@ function mapDispatchToProps(dispatch) {
     authActions: bindActionCreators(AuthActions, dispatch),
     sidebarActions: bindActionCreators(SidebarActions, dispatch),
     projectsActions: bindActionCreators(ProjectsActions, dispatch),
-    modalActions: bindActionCreators(ModalActions, dispatch)
+    modalActions: bindActionCreators(ModalActions, dispatch),
+    systemActions: bindActionCreators(SystemActions, dispatch),
   }
 }
 

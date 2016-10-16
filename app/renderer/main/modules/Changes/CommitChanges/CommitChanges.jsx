@@ -1,11 +1,12 @@
 import React from 'react';
 import { Field, Form } from 'react-redux-form';
-import { ContextMenu, MenuItem, ContextMenuLayer } from "react-contextmenu";
+import { ContextMenuLayer } from "react-contextmenu";
 
 // Components
 import FileChangeRow from './FileChangeRow';
 import FileChangeTitleRow from './FileChangeTitleRow';
-import FileContextmenu from './FileContextmenu';
+import FileChangeMenu from './FileChange.menu.js';
+import ContextMenu from 'app/renderer/main/modules/ContextMenu/ContextMenu.jsx';
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 import { MdMoreHoriz } from 'react-icons/lib/md';
@@ -62,7 +63,7 @@ export default React.createClass({
           }
 
         </div>
-        <FileContextmenu identifier={contextIdentifier}/>
+        <ContextMenu identifier={contextIdentifier} menu={FileChangeMenu}/>
       </div>
     )
   }
