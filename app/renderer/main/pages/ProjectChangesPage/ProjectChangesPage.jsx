@@ -20,8 +20,7 @@ import LoadingOverlay     from 'app/renderer/main/components/Loading/LoadingOver
 import Timeline           from 'app/renderer/main/modules/Timeline/Timeline.jsx';
 import CommitChanges      from 'app/renderer/main/modules/Changes/CommitChanges/CommitChanges.jsx';
 import CommitBox          from 'app/renderer/main/modules/Changes/CommitBox/CommitBox.jsx'
-import FileCompare        from 'app/renderer/main/modules/FileCompare/FileCompare.jsx';
-import FileCompareHeader  from 'app/renderer/main/modules/FileCompare/FileCompareHeader/FileCompareHeader.jsx';
+import FileCompareStandard  from 'app/renderer/main/modules/FileCompare/FileCompareStandard/FileCompareStandard.jsx';
 
 
 
@@ -118,16 +117,11 @@ export const Component = React.createClass({
             <div className="layout-column flex">
               {changes.selected && changes.selected.data
                 ?
-                <div className="layout-column flex">
-                  <FileCompareHeader
-                    compareId={`changes-${project.data._id}-${changes.selected._id}`}
-                    file1={changes.selected.data} />
-                  <FileCompare
-                    compareId={`changes-${project.data._id}-${changes.selected._id}`}
-                    project={project.data}
-                    file1={changes.selected.data}
-                    file2={filePrevious ? filePrevious.data : null} />
-                </div>
+                <FileCompareStandard
+                  compareId={`changes-${project.data._id}-${changes.selected._id}`}
+                  project={project.data}
+                  file1={changes.selected.data}
+                  file2={filePrevious ? filePrevious.data : null} />
                 : <div className="layout-column layout-align-center-center flex text-title-4 text-center">No file change selected.</div>
               }
             </div>

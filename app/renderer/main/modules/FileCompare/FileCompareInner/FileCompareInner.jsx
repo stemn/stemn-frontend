@@ -9,18 +9,13 @@ import React from 'react';
 
 // Styles
 import classNames from 'classnames';
-import classes from './FileCompare.css'
+import classes from './FileCompareInner.css'
 
 // Sub Components
 import PreviewFile        from 'app/renderer/main/modules/Files/PreviewFile/PreviewFile.jsx';
-import FileCompareSlider  from './components/FileCompareSlider.jsx';
-import FileCompareMenu    from './FileCompareMenu/FileCompareMenu.jsx'
+import FileCompareSlider  from './FileCompareSlider/FileCompareSlider.jsx';
 
-
-
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 export const Component = React.createClass({
   getInitialState () {

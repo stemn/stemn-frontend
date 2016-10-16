@@ -100,7 +100,7 @@ export const Component = React.createClass({
             <div className={classes.well}>
               <div className="text-mini-caps layout-row layout-align-start-end" style={{padding: '15px 15px 5px'}}>
                 <div className="flex">Labels</div>
-                <a style={{fontSize: '14px'}} onClick={this.showLabelEditModal}>+</a>
+                <a title="Edit labels" style={{fontSize: '14px'}} onClick={this.showLabelEditModal}>+</a>
               </div>
               <div style={{maxHeight: '200px', overflowY: 'auto'}}>
                 {board && board.data && board.data.labels
@@ -116,7 +116,10 @@ export const Component = React.createClass({
               </div>
             </div>
             <div className={classes.well}>
-              <div className="text-mini-caps" style={{padding: '15px 15px 0'}}>Asignees</div>
+              <div className="text-mini-caps layout-row layout-align-start-end" style={{padding: '15px 15px 5px'}}>
+                <div className="flex">Asignees</div>
+                <a title="Add team members" style={{fontSize: '14px'}}>+</a>
+              </div>
               <div style={{padding: '15px'}}>
                 <UserSelect
                   model={`${entityModel}.data.asignee`}
@@ -126,7 +129,7 @@ export const Component = React.createClass({
               </div>
             </div>
             <div className={classes.well}>
-              <div className="text-mini-caps" style={{padding: '15px 15px 0'}}>Due Date</div>
+              <div className="text-mini-caps" style={{padding: '15px 15px 5px'}}>Due Date</div>
               <div style={{padding: '15px'}}>
                 <DatePicker
                   model={`${entityModel}.data.due`}

@@ -1,11 +1,11 @@
 import React from 'react';
 
-import classes            from './CommitFile.css';
+import classes            from './FileCompareCollapse.css';
 
 import TogglePanel        from 'app/renderer/main/components/Panels/TogglePanel/TogglePanel.jsx';
 import DragResize         from 'app/renderer/main/modules/DragResize/DragResize.jsx';
 import FileCompareMenu    from 'app/renderer/main/modules/FileCompare/FileCompareMenu/FileCompareMenu.jsx';
-import FileCompare        from 'app/renderer/main/modules/FileCompare/FileCompare.jsx';
+import FileCompareInner   from 'app/renderer/main/modules/FileCompare/FileCompareInner/FileCompareInner.jsx';
 import Timeline           from 'app/renderer/main/modules/Timeline/Timeline.jsx';
 import { orderBy }        from 'lodash';
 
@@ -65,7 +65,7 @@ export default React.createClass({
           changeMode={this.changeMode}
         />
         <DragResize side="bottom" height="500" heightRange={[0, 1000]} className="layout-column flex">
-          <FileCompare
+          <FileCompareInner
             compareId={`feed-${project.data._id}-${file.data.fileId}`}
             project={project.data}
             file1={items[1].data}

@@ -13,21 +13,28 @@ import classNames from 'classnames';
 import feedPageStyles from './ProjectFeedPage.css';
 
 // Sub Components
-import { has }            from 'lodash';
-import i                  from 'icepick';
-import { Link }           from 'react-router';
-import Popover            from 'app/renderer/assets/other/react-popup';
-import Timeline           from 'app/renderer/main/modules/Timeline/Timeline.jsx';
-import SidebarTimeline    from 'app/shared/modules/SyncTimeline/SidebarTimeline/SidebarTimeline.jsx';
-import FileCompare        from 'app/renderer/main/modules/FileCompare/FileCompare.jsx';
-import FileCompareHeader  from 'app/renderer/main/modules/FileCompare/FileCompareHeader/FileCompareHeader.jsx';
-import ContentSidebar     from 'app/renderer/main/components/ContentSidebar';
-import EditorDisplay      from 'app/renderer/main/modules/Editor/EditorDisplay.jsx';
-import UserAvatar         from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
-import CommitFilesList    from './CommitFilesList.jsx';
+import { has }                  from 'lodash';
+import { Link }                 from 'react-router';
+import Popover                  from 'app/renderer/assets/other/react-popup';
+import Timeline                 from 'app/renderer/main/modules/Timeline/Timeline.jsx';
+import SidebarTimeline          from 'app/shared/modules/SyncTimeline/SidebarTimeline/SidebarTimeline.jsx';
+import ContentSidebar           from 'app/renderer/main/components/ContentSidebar';
 
+import ProjectFeedPageCommit    from './ProjectFeedPageCommit/ProjectFeedPageCommit.jsx'
+import ProjectFeedPageRevision  from './ProjectFeedPageRevision/ProjectFeedPageRevision.jsx'
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
+
+const eventComponentMap = {
+  commit   : (item, project) => (<ProjectFeedPageCommit item={item} project={project}/>),
+  revision : (item, project) => (<ProjectFeedPageRevision item={item} project={project}/>),
+}
+
+const getEventComponent = (item, project) => {
+  return eventComponentMap[item.event]
+    ? eventComponentMap[item.event](item, project)
+    : <div className="layout-column layout-align-center-center flex text-title-4 text-center">No event selected.</div>
+};
 
 export const Component = React.createClass({
 
@@ -63,59 +70,7 @@ export const Component = React.createClass({
 
   render(){
     const { timeline, timelineModel, project, location } = this.props;
-
-    const filePrevious = timeline && timeline.selected && timeline.selected.data && timeline.selected.data.previousRevisionId
-    ? i.assocIn(timeline.selected, ['data', 'revisionId'], timeline.selected.data.previousRevisionId)
-    : null;
     const baseLink = `project/${project && project.data ? project.data._id : ''}`
-
-    const getDetailSection = () => {
-      if(this.props.timeline && this.props.timeline.selected && this.props.timeline.selected.data){
-        if(this.props.timeline.selected.event == 'commit'){
-          return (
-            <div className="layout-column flex">
-              <div className={feedPageStyles.commitInfo}>
-                <h3>{this.props.timeline.selected.data.summary}</h3>
-                <div className={feedPageStyles.description}>
-                  <EditorDisplay value={this.props.timeline.selected.data.description}/>
-                </div>
-                <div className="layout-row layout-align-start-center">
-                  <UserAvatar picture={this.props.timeline.selected.user.picture} size="20"/>
-                  <div style={{marginLeft: '10px'}}>{this.props.timeline.selected.user.name}</div>
-                  <div className="flex">
-                  </div>
-                  <a className="link-primary">Revert</a>
-                  &nbsp;&nbsp;&nbsp;
-                  <a className="link-primary">View Online</a>
-                </div>
-              </div>
-              <div className="flex scroll-box">
-                {this.props.timeline.selected.data.items ? <CommitFilesList items={this.props.timeline.selected.data.items} project={project}/> : null}
-              </div>
-            </div>
-          )
-        }
-        else{
-          return(
-            <div className="layout-column flex">
-              <FileCompareHeader
-                compareId={`feed-${project.data._id}-${timeline.selected._id}`}
-                file1={timeline.selected.data} />
-              <FileCompare
-                compareId={`feed-${project.data._id}-${timeline.selected._id}`}
-                project={project.data}
-                file1={timeline.selected.data}
-                file2={filePrevious ? filePrevious.data : null} />
-            </div>
-          )
-        }
-      }
-      else{
-        return (
-          <div className="layout-column layout-align-center-center flex text-title-4 text-center">No event selected.</div>
-        )
-      }
-    }
 
     if(project.data.remote.connected){
       return (
@@ -140,7 +95,7 @@ export const Component = React.createClass({
               </ContentSidebar>
             </div>
             <div className="layout-column flex">
-              {getDetailSection()}
+              {getEventComponent(timeline.selected, project)}
             </div>
           </div>
         </div>
@@ -156,7 +111,6 @@ export const Component = React.createClass({
     }
   }
 })
-
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 

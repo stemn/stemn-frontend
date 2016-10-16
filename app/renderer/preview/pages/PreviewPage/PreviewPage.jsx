@@ -15,8 +15,7 @@ import * as FilesActions from 'app/renderer/main/modules/Files/Files.actions.js'
 import * as SyncTimelineActions from 'app/shared/modules/SyncTimeline/SyncTimeline.actions.js';
 
 // Sub Components
-import FileCompare        from 'app/renderer/main/modules/FileCompare/FileCompare.jsx';
-import FileCompareHeader  from 'app/renderer/main/modules/FileCompare/FileCompareHeader/FileCompareHeader.jsx';
+import FileCompareInner     from 'app/renderer/main/modules/FileCompare/FileCompareInner/FileCompareInner.jsx';
 import Timeline           from 'app/renderer/main/modules/Timeline/Timeline.jsx';
 import DragResize         from 'app/renderer/main/modules/DragResize/DragResize.jsx';
 import FileBreadCrumbs    from 'app/renderer/main/modules/FileList/components/FileBreadCrumbs.jsx'
@@ -78,7 +77,7 @@ export const Component = React.createClass({
             {
               fileMeta && fileMeta.data
               ? <div className="layout-column flex">
-                  <FileCompare
+                  <FileCompareInner
                     compareId={`preview-${fileMeta.data.fileId}}`}
                     project={fileMeta.data.project}
                     file1={fileMeta.data}/>

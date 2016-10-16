@@ -1,7 +1,10 @@
 @value border1 from "app/renderer/assets/css/themes/standard.css";
 
-.header{
+.commitInfo{
+  padding: 10px 20px;
   border-bottom: 1px solid border1;
-  padding: 10px 6px;
-  height: 36px;
+}
+
+.description{
+  margin-bottom: 15px;
 }

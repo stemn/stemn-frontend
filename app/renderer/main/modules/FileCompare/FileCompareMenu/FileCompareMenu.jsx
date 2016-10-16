@@ -44,7 +44,7 @@ export const Component = React.createClass({
     return (
       <div>
         {
-          revisions.length > 1 ?
+          revisions && revisions.length > 1 ?
           <PopoverMenu preferPlace="below">
             <SimpleIconButton title="Compare">
               <CompareIcon size="20px" />
