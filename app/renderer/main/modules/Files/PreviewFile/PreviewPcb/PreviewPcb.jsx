@@ -4,6 +4,11 @@ import previewPcbService from './PreviewPcbService.js';
 import classes from './PreviewPcb.css';
 
 export const Viewer = React.createClass({
+  getInitialState () {
+    return {
+      flipped: null,
+    }
+  },
   viewerInstance: null,
   componentDidMount() {
     const { data, name } = this.props;
@@ -30,7 +35,7 @@ export const Viewer = React.createClass({
       this.viewerInstance.init(layers, this.refs.canvas, previewPcbService.activeInstances);
       // Flip the board if we only have bottom layers
       if(!find(layers, 'side', 2)){
-        flip(true);
+        this.flip(true);
       }
     }
     else{
@@ -39,6 +44,13 @@ export const Viewer = React.createClass({
   },
   componentWillUnmount(){
     previewPcbService.deregister(this.viewerInstance);
+  },
+  flip(status){
+    const flipped = status ? status : !this.state.flipped;
+    this.setState({flipped: flipped})
+    previewPcbService.activeInstances.forEach(instance => {
+      instance.flip(flipped);
+    })
   },
   render() {
     return <div ref="canvas" className={classes.canvas + ' layout-column flex'}></div>
@@ -66,9 +78,7 @@ export default React.createClass({
   }
 });
 
-function flip(){
 
-}
 
 function errorMessages(layers){
   // Pop Error messages and remove bad layers

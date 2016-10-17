@@ -123,18 +123,17 @@ export default () => {
     wG.domParent = domParent;
     wG.layers = layers;
     wG.limits = _.reduce(wG.layers, function(bound, layer) {
-        return {
-            minX : bound.minX < layer.bounds.minX ? bound.minX : layer.bounds.minX,
-            minY : bound.minY < layer.bounds.minY ? bound.minY : layer.bounds.minY,
-            maxX : bound.maxX > layer.bounds.maxX ? bound.maxX : layer.bounds.maxX,
-            maxY : bound.maxY > layer.bounds.maxY ? bound.maxY : layer.bounds.maxY,
-        };
+      return {
+        minX : bound.minX < layer.bounds.minX ? bound.minX : layer.bounds.minX,
+        minY : bound.minY < layer.bounds.minY ? bound.minY : layer.bounds.minY,
+        maxX : bound.maxX > layer.bounds.maxX ? bound.maxX : layer.bounds.maxX,
+        maxY : bound.maxY > layer.bounds.maxY ? bound.maxY : layer.bounds.maxY,
+      };
     }, {});
 
     _.forEach(wG.layers, function(layer){
         layer.enabled = true;
     });
-
 
     wG.boards.width  = wG.limits.maxX - wG.limits.minX;
     wG.boards.height = wG.limits.maxY - wG.limits.minY;

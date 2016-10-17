@@ -7,7 +7,7 @@ import DragResize         from 'app/renderer/main/modules/DragResize/DragResize.
 import FileCompareMenu    from 'app/renderer/main/modules/FileCompare/FileCompareMenu/FileCompareMenu.jsx';
 import FileCompareInner   from 'app/renderer/main/modules/FileCompare/FileCompareInner/FileCompareInner.jsx';
 import Timeline           from 'app/renderer/main/modules/Timeline/Timeline.jsx';
-import { orderBy }        from 'lodash';
+import { orderBy, has }   from 'lodash';
 
 export default React.createClass({
   getInitialState () {
@@ -44,8 +44,8 @@ export default React.createClass({
     this.setState({mode: mode})
   },
   isSelected(item){
-    const selected1 = item.data.revisionId == this.state.selected1.data.revisionId;
-    const selected2 = item.data.revisionId == this.state.selected2.data.revisionId;
+    const selected1 = has(this.state, 'selected1.data.revisionId') ? item.data.revisionId == this.state.selected1.data.revisionId : false;
+    const selected2 = has(this.state, 'selected2.data.revisionId') ? item.data.revisionId == this.state.selected2.data.revisionId : false;
 
     return this.state.mode == 'single' ? selected1 : selected1 || selected2;
   },

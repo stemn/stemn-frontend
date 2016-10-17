@@ -31,7 +31,7 @@ const eventComponentMap = {
 }
 
 const getEventComponent = (item, project) => {
-  return eventComponentMap[item.event]
+  return item && item.event && eventComponentMap[item.event]
     ? eventComponentMap[item.event](item, project)
     : <div className="layout-column layout-align-center-center flex text-title-4 text-center">No event selected.</div>
 };
@@ -88,7 +88,7 @@ export const Component = React.createClass({
                   selected={timeline && timeline.selected ? timeline.selected._id : ''}
                   onSelect={this.selectTimelineItem}
                   loading={timeline && timeline.data ? false : true}
-                  query={timeline.query}
+                  query={timeline && timeline.query ? timeline.query : ''}
                   queryModel={`${timelineModel}.query`}
                   refresh={this.refresh}
                 />
