@@ -8,6 +8,7 @@ import FileChangeTitleRow from './FileChangeTitleRow';
 import FileChangeMenu from './FileChange.menu.js';
 import ContextMenu from 'app/renderer/main/modules/ContextMenu/ContextMenu.jsx';
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
+import PopoverMenuList from 'app/renderer/main/components/PopoverMenu/PopoverMenuList';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 import { MdMoreHoriz } from 'react-icons/lib/md';
 
@@ -21,11 +22,29 @@ import styles from './CommitChanges.css';
 const contextIdentifier = 'FileChangeCm';
 const FileChangeRowContext = ContextMenuLayer(contextIdentifier, (props) => (props))(FileChangeRow)
 
+
 export default React.createClass({
   render(){
     const { changes, project, toggleAll, refresh, selectedFileChange, dispatch } = this.props;
     const groupedChanges = groupRevisions(changes.data);
     const allChecked = getToggleAllStatus(groupedChanges, changes.checked);
+
+    const filterMenu = [{
+      label: 'Filter',
+      submenu: [{
+        label: 'Filter: All Changes',
+      },{
+        label: 'Filter: My Changes',
+      }]
+    },{
+      label: 'Filter: All Changes',
+    },{
+      label: 'Filter: My Changes',
+    },{
+      divider: true,
+      label: 'Refresh',
+      onClick: refresh
+    }]
 
     return (
       <div className="layout-column flex">
@@ -39,12 +58,7 @@ export default React.createClass({
               <SimpleIconButton title="Filter changes">
                 <MdMoreHoriz size="20px" />
               </SimpleIconButton>
-              <div className="PopoverMenu">
-                <a>Filter: All Changes</a>
-                <a>Filter: My Changes</a>
-                <div className="divider"></div>
-                <a onClick={refresh}>Refresh</a>
-              </div>
+              <PopoverMenuList menu={filterMenu}/>
             </PopoverMenu>
           </FileChangeTitleRow>
           {

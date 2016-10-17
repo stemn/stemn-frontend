@@ -19,8 +19,8 @@ export default React.createClass({
     this.setState({ isOpen: toState === null ? !this.state.isOpen : toState })
   },
   render() {
-    const { preferPlace, trigger, disableClickClose, children, className } = this.props;
-
+    const { preferPlace, trigger, disableClickClose, tipSize, offset, children, className } = this.props;
+    const tipSizeDefault = tipSize || 0;
     const triggerMap = {
       hover          : {
         onMouseEnter : () => {this.toggle(true)},
@@ -57,7 +57,9 @@ export default React.createClass({
         isOpen={this.state.isOpen}
         body={React.cloneElement(children[1], contentProps)}
         onOuterAction={()=>this.toggle(false)}
-        preferPlace = {preferPlace || 'above'}>
+        preferPlace = {preferPlace || 'above'}
+        tipSize={tipSizeDefault}
+        offset={offset}>
         {React.cloneElement(children[0], triggerProps)}
       </Popover>
     );

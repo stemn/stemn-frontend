@@ -39,6 +39,15 @@
     background: 0 0;
     border: 0;
 }
+.PopoverMenu a.submenu{
+  padding-right: 27px;
+}
+.PopoverMenu a.submenu:after{
+  content: "\25B6";
+  display: inline-block;
+  position: absolute;
+  right: 7px;
+}
 .PopoverMenu .divider{
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }

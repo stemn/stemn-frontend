@@ -13,6 +13,20 @@ import TimelineInner from './TimelineInner/TimelineInner.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
+const propTypesObject = {
+  items: PropTypes.array.isRequired,
+
+  selected: PropTypes.string,
+  isSelected: PropTypes.func, // function of the form (item) => return true||false
+
+  onSelect: PropTypes.func,
+  preferPlace: PropTypes.string,
+  size: PropTypes.string, // 'sm'
+
+  style: PropTypes.object,
+  className: PropTypes.string,
+};
+
 const Component = React.createClass({
   getInitialState () {
     return {
@@ -74,18 +88,7 @@ const Component = React.createClass({
   }
 });
 
-Component.propTypes = {
-  items: PropTypes.array.isRequired,
-
-  selected: PropTypes.string,
-  isSelected: PropTypes.function, // function of the form (item) => return true||false
-
-  onSelect: PropTypes.function,
-  preferPlace: PropTypes.string,
-
-  style: PropTypes.object,
-  className: PropTypes.string,
-};
+Component.propTypes = propTypesObject;
 
 
 export default Component

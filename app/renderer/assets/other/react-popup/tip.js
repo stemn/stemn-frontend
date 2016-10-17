@@ -16,7 +16,7 @@ var Tip = _react2.default.createClass({
   render: function render() {
     var direction = this.props.direction;
 
-    var size = this.props.size || 24;
+    var size = this.props.size; // || 24 - this was removed so size of zero can work
     var isPortrait = direction === 'up' || direction === 'down';
     var mainLength = size;
     var crossLength = size * 2;

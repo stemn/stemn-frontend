@@ -19,6 +19,7 @@ import classes from './Modal.css'
 // Modals
 import ConfirmModal         from './modals/ConfirmModal.jsx';
 import ErrorModal           from './modals/ErrorModal.jsx';
+import ConnectionModal      from './modals/ConnectionModal.jsx';
 import FileSelectModal      from 'app/renderer/main/modules/FileSelect/FileSelectModal.jsx';
 import TaskDisplayModal     from 'app/renderer/main/modules/Tasks/TaskDisplayModal/TaskDisplayModal.jsx'
 import TaskLabelsEditModal  from 'app/renderer/main/modules/Tasks/TaskLabelsEditModal/TaskLabelsEditModal.jsx'
@@ -29,6 +30,7 @@ import ProjectNewModal      from 'app/renderer/main/modules/Projects/ProjectNewM
 const modalComponents = {
   'CONFIRM'     : ConfirmModal,
   'ERROR'       : ErrorModal,
+  'CONNECTION'  : ConnectionModal,
   'FILE_SELECT' : FileSelectModal,
   'TASK'        : TaskDisplayModal,
   'TASK_LABELS' : TaskLabelsEditModal,

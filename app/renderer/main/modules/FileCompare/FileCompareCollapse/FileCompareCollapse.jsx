@@ -57,7 +57,6 @@ export default React.createClass({
       <TogglePanel>
         <div>{file.data.path}</div>
         <FileCompareMenu
-          compareId={`feed-${project.data._id}-${file.data.fileId}`}
           file1={items[1].data}
           file2={items[0].data}
           revisions={file.revisions}
@@ -66,7 +65,6 @@ export default React.createClass({
         />
         <DragResize side="bottom" height="500" heightRange={[0, 1000]} className="layout-column flex">
           <FileCompareInner
-            compareId={`feed-${project.data._id}-${file.data.fileId}`}
             project={project.data}
             file1={items[1].data}
             file2={items[0].data}
