@@ -4,16 +4,48 @@ import previewPcbService from './PreviewPcbService.js';
 import classes from './PreviewPcb.css';
 
 export const Viewer = React.createClass({
-  render() {
+  viewerInstance: null,
+  componentDidMount() {
     const { data, name } = this.props;
-    if(data && name){
-      setTimeout(()=>{init({element : this.refs.canvas,file : {name: name,data: data}})}, 1)
+    const file = {
+      name: name,
+      data: data
+    };
+
+    this.viewerInstance = previewPcbService.register();
+    const layers = [file].map(this.viewerInstance.parse);
+    errorMessages(layers);
+
+    // If we still have layers, display them
+    if(layers.length > 0){
+      // Push on the back layer if it is a pcb/brd file
+      if(!layers[0].isGerber){
+        layers[0].side = 2;
+        var backLayer = clone(layers[0], true);
+        backLayer.boardFlipped = true;
+        backLayer.side = 1;
+        layers.push(backLayer);
+      }
+
+      this.viewerInstance.init(layers, this.refs.canvas, previewPcbService.activeInstances);
+      // Flip the board if we only have bottom layers
+      if(!find(layers, 'side', 2)){
+        flip(true);
+      }
     }
+    else{
+      previewer.type = 'other';
+    }
+  },
+  componentWillUnmount(){
+    previewPcbService.deregister(this.viewerInstance);
+  },
+  render() {
     return <div ref="canvas" className={classes.canvas + ' layout-column flex'}></div>
   }
 });
 
-export default class extends React.Component{
+export default React.createClass({
   componentWillReceiveProps(nextProps, prevProps) {
     if(!nextProps.fileData){
       nextProps.downloadFn({
@@ -22,7 +54,7 @@ export default class extends React.Component{
         revisionId : nextProps.fileMeta.revisionId
       })
     }
-  }
+  },
   render() {
     const { fileData, fileMeta } = this.props;
     if(fileData && fileData.data){
@@ -32,35 +64,7 @@ export default class extends React.Component{
       return <div>Pending</div>
     }
   }
-};
-
-function init({element, file}){
-  const previewerInstance = previewPcbService.register();
-  const layers = [file].map(previewerInstance.parse);
-  errorMessages(layers);
-
-  // If we still have layers, display them
-  if(layers.length > 0){
-      // Push on the back layer if it is a pcb/brd file
-      if(!layers[0].isGerber){
-          layers[0].side = 2;
-          var backLayer = clone(layers[0], true);
-          backLayer.boardFlipped = true;
-          backLayer.side = 1;
-          layers.push(backLayer);
-      }
-
-      previewerInstance.init(layers, element, previewPcbService.activeInstances);
-      // Flip the board if we only have bottom layers
-      if(!find(layers, 'side', 2)){
-          flip(true);
-      }
-  }
-  else{
-      previewer.type = 'other';
-  }
-
-}
+});
 
 function flip(){
 

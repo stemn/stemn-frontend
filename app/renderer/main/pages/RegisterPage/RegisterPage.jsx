@@ -18,55 +18,60 @@ import { Link } from 'react-router';
 import Button from 'app/renderer/main/components/Buttons/Button/Button.jsx';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton';
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import astronaut from 'app/renderer/assets/images/space-vectors/astronaut.svg';
 
 
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 export const Component = React.createClass({
+  getInitialState () {
+    return {
+      isOpen: false,
+    }
+  },
+  toggle () {
+    this.setState({ isOpen: !this.state.isOpen })
+  },
   render() {
     const { AuthActions, auth } = this.props
 
-    if(auth.authLoading){
-      return (<LoadingOverlay />)
-    }
-    else{
-      return (
-        <div className="layout-column layout-align-center-center flex" style={{background: 'rgba(0, 0, 0, 0.05)'}}>
-          <div className={classes.container + ' layout-row'}>
-            <div className={classes.imageSection + ' flex-60'}>
-            </div>
-            <div className={classes.textSection + ' flex-40'}>
+    return (
+      <div className="layout-column layout-align-center-center flex" style={{background: 'rgba(0, 0, 0, 0.05)'}}>
+        <div className={classNames(classes.container, {[classes.hideForm]: this.state.isOpen} , 'layout-row')}>
+          <div className={classes.imageSection + ' layout-column layout-align-center-center'} onClick={this.toggle}>
+            <img src={astronaut} style={{width: '50%'}}/>
+          </div>
+          <div className={classes.textSection}>
+            <div className={classes.textSectionInner  + ' layout-column  layout-align-space-between'}>
               <div className="text-title-3">Register</div>
-               <div className={classes.form}>
-                 <br />
-                 <div className="layout-row">
-                   <Field model="auth.login.firstname">
-                     <input className={classes.input} style={{marginRight: '5px'}} type="text" placeholder="First name"/>
-                   </Field>
-                    <Field model="auth.login.lastname">
-                     <input className={classes.input} style={{marginLeft: '5px'}} type="text" placeholder="Last Name"/>
-                   </Field>
-                 </div>
-                 <Field model="auth.login.email">
-                   <input className={classes.input} type="text" placeholder="Email"/>
-                 </Field>
-                 <Field model="auth.login.password">
-                   <input className={classes.input} type="password" placeholder="Password"/>
-                 </Field>
-                 <div className="layout-row layout-align-end">
-                   <div className="flex-50 layout-row">
-                     <Button style={{marginLeft: '5px'}}
-                     className="primary flex"
-                     type="submit"
-                     onClick={()=>AuthActions.register({
-                         email: auth.login.email,
-                         password: auth.login.password,
-                         firstname: auth.login.firstname,
-                         lastname: auth.login.lastname
-                       })}>Register</Button>
-                     </div>
+              <div>
+                <br />
+                <div className="layout-row">
+                  <Field model="auth.login.firstname">
+                    <input className={classes.input} style={{marginRight: '5px'}} type="text" placeholder="First name"/>
+                  </Field>
+                  <Field model="auth.login.lastname">
+                    <input className={classes.input} style={{marginLeft: '5px'}} type="text" placeholder="Last Name"/>
+                  </Field>
+                </div>
+                <Field model="auth.login.email">
+                  <input className={classes.input} type="text" placeholder="Email"/>
+                </Field>
+                <Field model="auth.login.password">
+                  <input className={classes.input} type="password" placeholder="Password"/>
+                </Field>
+                <div className="layout-row layout-align-end">
+                  <div className="flex-50 layout-row">
+                    <Button style={{marginLeft: '5px'}}
+                    className="primary flex"
+                    type="submit"
+                    onClick={()=>AuthActions.register({
+                        email: auth.login.email,
+                        password: auth.login.password,
+                        firstname: auth.login.firstname,
+                        lastname: auth.login.lastname
+                      })}>Register</Button>
+                    </div>
                  </div>
                  <br />
                  <div className={classes.textDivider}>
@@ -89,8 +94,9 @@ export const Component = React.createClass({
             </div>
           </div>
         </div>
-      );
-    }
+        <LoadingOverlay show={auth.authLoading}/>
+      </div>
+    );
   }
 });
 

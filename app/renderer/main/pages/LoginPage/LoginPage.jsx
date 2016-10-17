@@ -21,11 +21,7 @@ import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/
 import Tabs from 'app/renderer/main/components/Tabs/Tabs'
 import astronaut from 'app/renderer/assets/images/space-vectors/astronaut.svg';
 
-
-
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 export const Component = React.createClass({
   getInitialState () {
@@ -46,9 +42,9 @@ export const Component = React.createClass({
           <img src={astronaut} style={{width: '50%'}}/>
         </div>
         <div className={classes.textSection}>
-          <div className={classes.textSectionInner}>
+          <div className={classes.textSectionInner + ' layout-column  layout-align-space-between'}>
             <div className="text-title-3">Sign In</div>
-            <div className={classes.form}>
+            <div>
               <br />
               <Field model="auth.login.email">
                 <input className={classes.input} type="text" placeholder="Email"/>

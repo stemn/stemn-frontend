@@ -76,7 +76,16 @@ export const Component = React.createClass({
         <p>Invite your collaborators. If you've connected your project with Dropbox or Drive, your team members will be invited to edit.</p>
         <UserSearch select={this.selectFn} />
         <br />
-        {project.data.team.map((item)=><div style={{marginBottom: '15px'}}><TeamMember item={item} changePermissionsFn={this.changePermissionsFn} removeTeamMemberFn={this.removeTeamMemberFn}/></div>)}
+        {project.data.team.map((item) => (
+          <div style={{marginBottom: '15px'}}>
+            <TeamMember
+              key={item._id}
+              item={item}
+              changePermissionsFn={this.changePermissionsFn}
+              removeTeamMemberFn={this.removeTeamMemberFn}
+            />
+          </div>)
+        )}
         <br />
         <div className="layout-row layout-align-end">
           <Button

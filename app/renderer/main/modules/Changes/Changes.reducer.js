@@ -7,11 +7,7 @@ const initialState = {}
 const mainReducer = (state, action) => {
   switch (action.type) {
     case 'CHANGES/SELECTED_FILE_CHANGE':
-      return i.merge(state, {
-        [action.payload.projectId] : {
-          selected: action.payload.selected,
-        }
-      })
+      return i.assocIn(state, [action.payload.projectId, 'selected'], action.payload.selected)
     case 'CHANGES/MENTION_TASKS':
       return i.updateIn(state, [action.payload.projectId, 'description'], (description) => {
         const existingMentions = parseMentions(description);

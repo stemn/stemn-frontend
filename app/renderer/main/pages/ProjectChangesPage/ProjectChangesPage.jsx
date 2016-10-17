@@ -8,7 +8,8 @@ import * as ChangesActions from 'app/renderer/main/modules/Changes/Changes.actio
 // Component Core
 import React from 'react';
 
-import u from 'updeep';
+import i from 'icepick';
+import { has } from 'lodash';
 
 // Styles
 import classNames from 'classnames';
@@ -85,8 +86,10 @@ export const Component = React.createClass({
       if(!changes){
         return <LoadingOverlay />
       }
+      const filePrevious = has(changes, 'selected.data.previousRevisionId')
+        ? i.assocIn(changes.selected.data, ['revisionId'], changes.selected.data.previousRevisionId)
+        : null;
 
-      const filePrevious = changes.selected.data && changes.selected.data.previousRevisionId ? u( {data: {revisionId : changes.selected.data.previousRevisionId}}, changes.selected) : null;
       return (
         <div className="layout-column flex rel-box">
           <div className="layout-row flex">
@@ -118,7 +121,7 @@ export const Component = React.createClass({
                   compareId={`changes-${project.data._id}-${changes.selected._id}`}
                   project={project.data}
                   file1={changes.selected.data}
-                  file2={filePrevious ? filePrevious.data : null} />
+                  file2={filePrevious} />
                 : <div className="layout-column layout-align-center-center flex text-title-4 text-center">No file change selected.</div>
               }
             </div>

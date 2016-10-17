@@ -70,7 +70,7 @@ export default React.createClass({
                 clickFn={()=>{selectedFileChange({projectId: project._id, selected: item})}}
                 isActive={item._id == changes.selected._id}
                 model={`changes.${project._id}.checked.${item.data.fileId}`}
-                value={changes.checked[item.data.fileId]}
+                value={changes.checked ? changes.checked[item.data.fileId] : false}
               />)}
             </div>
             : <div className="layout-column layout-align-center-center text-title-4 flex">No Changes</div>
