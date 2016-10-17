@@ -23,7 +23,7 @@ const FileChangeRowContext = ContextMenuLayer(contextIdentifier, (props) => (pro
 
 export default React.createClass({
   render(){
-    const { changes, project, toggleAll, refresh, selectedFileChange } = this.props;
+    const { changes, project, toggleAll, refresh, selectedFileChange, dispatch } = this.props;
     const groupedChanges = groupRevisions(changes.data);
     const allChecked = getToggleAllStatus(groupedChanges, changes.checked);
 
@@ -63,7 +63,7 @@ export default React.createClass({
           }
 
         </div>
-        <ContextMenu identifier={contextIdentifier} menu={FileChangeMenu}/>
+        <ContextMenu identifier={contextIdentifier} menu={FileChangeMenu(dispatch)}/>
       </div>
     )
   }
