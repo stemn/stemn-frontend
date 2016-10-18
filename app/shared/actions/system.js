@@ -21,17 +21,25 @@ export function getProviderPath() {
 export function openFile({location, path, projectId, provider}) {
   return (dispatch, getState) => {
 
+    const addSlash = (path) => {
+      return path && path[0] != '/' && path[0] != '\\' ? '/' + path : path
+    }
+
     const open = (computerToProvider, providerToProject, projectToFile) => {
+      providerToProject = addSlash(providerToProject)
+      projectToFile = addSlash(projectToFile)
       const fullPath = computerToProvider + providerToProject + projectToFile;
       console.log(fullPath);
       if(location){
-        shell.showItemInFolder(fullPath)
+        const success = shell.showItemInFolder(fullPath);
+        console.log(success);
         return dispatch({
           type: 'SYSTEM/OPEN_FILE_LOCATION',
           payload: {}
         })
       }else{
-        shell.openFile(fullPath)
+        const success = shell.openItem(fullPath);
+        console.log(success);
         dispatch({
           type: 'SYSTEM/OPEN_FILE',
           payload: {}
@@ -40,12 +48,11 @@ export function openFile({location, path, projectId, provider}) {
     };
 
     const computerToProvider = getState().system.providerPath[provider];
-    const providerToProject  = getState()[localPathModuleName][projectId];
+    const providerToProject  = getState()[localPathModuleName] ? getState()[localPathModuleName][projectId].data : false;
 
     if(!providerToProject){
       dispatch(LocalPathActions.getPath({projectId})).then(response => {
-        const newProviderToProject  = getState()[localPathModuleName][projectId];
-        return open(computerToProvider, newProviderToProject, path)
+        return open(computerToProvider, response.value.data, path)
       })
     }
     else{

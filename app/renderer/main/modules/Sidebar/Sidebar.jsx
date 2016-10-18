@@ -8,6 +8,7 @@ import * as AuthActions from 'app/shared/actions/auth';
 import * as ProjectsActions from 'app/shared/actions/projects';
 import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 import * as SystemActions from 'app/shared/actions/system';
+import { push } from 'react-router-redux'
 
 // Component Core
 import React from 'react';
@@ -47,7 +48,7 @@ export const Component = React.createClass({
   },
 
   render() {
-    const { projectsActions, projects } = this.props;
+    const { projectsActions, projects, dispatch } = this.props;
     const sidebarStyle = classNames('layout-column', 'flex' ,'rel-box', styles.sidebar);
 
     const nameRegex = new RegExp(this.props.sidebar.searchString, 'i');
@@ -55,24 +56,34 @@ export const Component = React.createClass({
     const routeState = {meta : {scope: ['main', 'menubar']}};
 
     const projectContextMenu = [{
-      label: 'View Online',
-      onClick: (item)=>{console.log(item);},
-    },{
-      label: 'Open in explorer',
-//      onClick: ()=>{this.props.systemActions.openFile({projectId: data._id, path: ''})},
+      label: 'Open Folder',
+      isHidden: item => !item.remote || !item.remote.connected,
+      onClick: item => {
+        this.props.systemActions.openFile({
+          projectId: item._id,
+          provider: item.remote.provider,
+          path: ''
+        })},
     },{
       label: 'Project Settings',
       subMenu: [{
-        label: 'General Settings'
+        label: 'General Settings',
+        onClick: item => dispatch(push(`/project/${item._id}/settings`))
       },{
-        label: 'Task Settings'
+        label: 'Task Settings',
+        onClick: item => dispatch(push(`/project/${item._id}/settings/tasks`))
       },{
-        label: 'Team Settings'
+        label: 'Team Settings',
+        onClick: item => dispatch(push(`/project/${item._id}/settings/team`))
       }]
     },{
       label: 'Delete Project',
-      onClick: ()=>{},
+      divider: true,
+      onClick: item => projectsActions.confirmDeleteProject({
+        projectId: item._id
+      }),
     }];
+
 
     return (
       <DragResize side="right" width="300" widthRange={[0, 500]} animateHide={!this.props.sidebar.show} className="layout-column flex">
@@ -152,6 +163,7 @@ function mapDispatchToProps(dispatch) {
     projectsActions: bindActionCreators(ProjectsActions, dispatch),
     modalActions: bindActionCreators(ModalActions, dispatch),
     systemActions: bindActionCreators(SystemActions, dispatch),
+    dispatch
   }
 }
 

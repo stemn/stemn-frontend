@@ -6,17 +6,17 @@ export default (dispatch) => {
     onClick: (item)=>{console.log(item)},
   }
   const openFile = {
-    label: 'Open file',
+    label: 'Open File',
     onClick: (item)=>{
       dispatch(SystemActions.openFile({
         path: item.data.path,
-        project: item.data.project._id,
+        projectId: item.data.project._id,
         provider: item.data.provider
       }))
     },
   }
   const openFolder = {
-    label: 'Open containing folder',
+    label: 'Open Containing Folder',
     onClick: (item)=>{
       dispatch(SystemActions.openFile({
         location: true,
@@ -28,7 +28,7 @@ export default (dispatch) => {
   }
 
   const preview = {
-    label: 'Open preview window',
+    label: 'Open Preview Window',
     onClick: (item)=>{
       console.log(item)
     },

@@ -1,3 +1,4 @@
+
 .react-context-menu{
     min-width: 160px;
     font-size: 12px;
@@ -27,6 +28,9 @@
 .react-context-menu-link:hover {
   background: rgb(68, 154, 211);
   color: white;
+}
+.react-context-menu-item.divider{
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 .react-context-menu-item.submenu > a {
     padding-right: 27px;

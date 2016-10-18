@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as ElectronWindowsActions from 'app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
+import * as SystemActions    from 'app/shared/actions/system';
 
 // Component Core
 import React from 'react';
@@ -18,6 +19,7 @@ import classNames from 'classnames';
 
 // Sub Components
 import PopoverMenu          from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
+import PopoverMenuList      from 'app/renderer/main/components/PopoverMenu/PopoverMenuList';
 import SimpleIconButton     from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 import { getCompareModes, getCompareIcon }  from '../FileCompare.utils.js';
 import { MdMoreHoriz }      from 'react-icons/lib/md';
@@ -25,20 +27,51 @@ import { MdMoreHoriz }      from 'react-icons/lib/md';
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
-  popoutPreview(mode){
-    this.props.electronWindowsActions.create({
-      type: 'PREVIEW',
-      props: {
-        fileId: this.props.file1.fileId,
-        revisionId: this.props.file1.revisionId,
-      }
-    })
-    setTimeout(()=>{
-      this.props.electronWindowsActions.parse();
-    }, 100)
+  menu() {
+    const { file1, dispatch, isChange } = this.props;
+    const discardChanges = {
+      label: 'Discard Changes',
+      onClick: () => {
+      },
+    }
+    const openFile = {
+      label: 'Open File',
+      onClick: () => {
+        dispatch(SystemActions.openFile({
+          path: file1.path,
+          projectId: file1.project._id,
+          provider: file1.provider
+        }))
+      },
+    }
+    const openFolder = {
+      label: 'Open Containing Folder',
+      onClick: () => {
+        dispatch(SystemActions.openFile({
+          location: true,
+          path: file1.path,
+          projectId: file1.project._id,
+          provider: file1.provider
+        }))
+      },
+    }
+    const preview = {
+      label: 'Open Preview Window',
+      onClick: () => {
+        dispatch(ElectronWindowsActions.create({
+          type: 'PREVIEW',
+          props: {
+            fileId: file1.fileId,
+            revisionId: file1.revisionId,
+          }
+        }))
+        setTimeout(() => dispatch(ElectronWindowsActions.parse()), 100)
+      },
+    }
+    return isChange ? [discardChanges, openFile, openFolder, preview] : [openFile, openFolder, preview]
   },
   render() {
-    const { mode, changeMode, revisions, file1, file2 } = this.props;
+    const { mode, changeMode, revisions, file1, file2, dispatch } = this.props;
 
     if(!file1){return null};
 
@@ -67,12 +100,7 @@ export const Component = React.createClass({
           <SimpleIconButton title="Options">
             <MdMoreHoriz size="20px" />
           </SimpleIconButton>
-          <div className="PopoverMenu">
-            <a onClick={this.displayFileInfo}>Discard Changes</a>
-            <a onClick={this.displayFileInfo}>Open in explorer</a>
-            <a onClick={this.displayFileInfo}>File Info</a>
-            <a onClick={this.popoutPreview}>Preview</a>
-          </div>
+          <PopoverMenuList menu={this.menu()} />
         </PopoverMenu>
       </div>
     );
@@ -88,6 +116,7 @@ function mapStateToProps() {
 function mapDispatchToProps(dispatch) {
   return {
     electronWindowsActions: bindActionCreators(ElectronWindowsActions, dispatch),
+    dispatch
   }
 }
 

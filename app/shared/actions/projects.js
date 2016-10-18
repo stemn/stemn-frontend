@@ -43,6 +43,7 @@ export function getUserProjects({userId}) {
         parentId: userId,
         size: 100,
         published: 'both',
+        select : ['name', 'picture', 'stub', 'type', 'remote']
       },
     }),
   }

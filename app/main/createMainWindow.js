@@ -43,6 +43,7 @@ export const createMainWindow =  function createWindow({ uri = '/' } = {}) {
 
   browserWindow.webContents.on('did-finish-load', () => {
     showMainWindow();
+    console.log('load complete');
   });
   browserWindow.webContents.on('will-navigate', handleRedirect);
   browserWindow.webContents.on('new-window', handleRedirect);
