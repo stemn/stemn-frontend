@@ -9,7 +9,7 @@ import classes from './TaskTimelineWrapper.css';
 export default React.createClass({
   render() {
     return (
-      <div className={classes.item}>
+      <div className={classes.item} style={this.props.style}>
         <div className="layout-row layout-align-start-center">
           <div className={classes.marker}></div>
           <div className="layout-row layout-align-start-center">{this.props.children}</div>

@@ -31,10 +31,13 @@ export const create = function createWindow({ uri = '/' } = {}) {
     });
   }
 
-  browserWindow.webContents.on('did-finish-load', () => {
-    browserWindow.show();
-    browserWindow.focus();
-  });
+//  browserWindow.webContents.on('did-finish-load', () => {
+//    browserWindow.show();
+//    browserWindow.focus();
+//  });
+
+  browserWindow.show();
+  browserWindow.focus();
 
   browserWindow.setMenu(null);
 }

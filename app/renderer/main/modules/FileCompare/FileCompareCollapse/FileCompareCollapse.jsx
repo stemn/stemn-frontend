@@ -10,14 +10,21 @@ import Timeline           from 'app/renderer/main/modules/Timeline/Timeline.jsx'
 import { orderBy, has }   from 'lodash';
 
 export default React.createClass({
-  getInitialState () {
-    return {
-      selected1: this.props.file.revisions[0],
-      selected2: this.props.file.revisions[1],
-      lastSelected: 1,
-      mode: this.props.file.revisions[0] && this.props.file.revisions[1] ? 'sideBySide' : 'single'
+  // Mounting
+  onMount(nextProps, prevProps){
+    if(!prevProps || nextProps.file != prevProps.file){
+      this.setState({
+        selected1: nextProps.file.revisions[0],
+        selected2: nextProps.file.revisions[1],
+        lastSelected: 1,
+        mode: nextProps.file.revisions[0] && nextProps.file.revisions[1] ? 'sideBySide' : 'single'
+      })
     }
   },
+  componentWillMount() { this.onMount(this.props) },
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
+
+
   onSelect(response){
     if(this.state.mode == 'single'){
       this.setState({
@@ -46,12 +53,12 @@ export default React.createClass({
   isSelected(item){
     const selected1 = has(this.state, 'selected1.data.revisionId') ? item.data.revisionId == this.state.selected1.data.revisionId : false;
     const selected2 = has(this.state, 'selected2.data.revisionId') ? item.data.revisionId == this.state.selected2.data.revisionId : false;
-
     return this.state.mode == 'single' ? selected1 : selected1 || selected2;
   },
   render() {
     const { file, project } = this.props;
     const { mode, selected1, selected2 } = this.state;
+    console.log(selected1, selected2 );
     const items = mode == 'single' ? [selected1, selected1] : orderBy([selected1, selected2], item => (new Date(item.timestamp)).getTime());
     return (
       <TogglePanel>

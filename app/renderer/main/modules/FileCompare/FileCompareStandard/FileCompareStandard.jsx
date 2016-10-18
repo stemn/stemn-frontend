@@ -6,11 +6,18 @@ import FileCompareMenu    from 'app/renderer/main/modules/FileCompare/FileCompar
 import FileCompareInner   from 'app/renderer/main/modules/FileCompare/FileCompareInner/FileCompareInner.jsx';
 
 export default React.createClass({
-  getInitialState () {
-    return {
-      mode: this.props.file1 && this.props.file2 ? 'sideBySide' : 'single'
+
+  // Mounting
+  onMount(nextProps, prevProps){
+    if(!prevProps || nextProps.file1 != prevProps.file1){
+      this.setState({
+        mode: nextProps.file1 && nextProps.file2 ? 'sideBySide' : 'single'
+      })
     }
   },
+  componentWillMount() { this.onMount(this.props) },
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
+
   changeMode(mode){
     this.setState({mode: mode})
   },

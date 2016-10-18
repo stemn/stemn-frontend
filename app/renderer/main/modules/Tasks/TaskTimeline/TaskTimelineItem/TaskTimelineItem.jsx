@@ -82,7 +82,7 @@ export default React.createClass({
     // Else, we add a text event
     else{
       return (
-        <TaskTimelineWrapper>
+        <TaskTimelineWrapper style={{marginLeft: '85px'}}>
           <div className="layout-row layout-align-start-center flex">
             <div className={classes.avatar}>
               <UserAvatar picture={item.user.picture} size="25" shape="square"/>

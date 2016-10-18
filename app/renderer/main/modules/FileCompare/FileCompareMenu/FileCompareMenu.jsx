@@ -63,9 +63,10 @@ export const Component = React.createClass({
           props: {
             fileId: file1.fileId,
             revisionId: file1.revisionId,
+            projectId: file1.project._id
           }
         }))
-        setTimeout(() => dispatch(ElectronWindowsActions.parse()), 100)
+//        setTimeout(() => dispatch(ElectronWindowsActions.parse()), 100)
       },
     }
     return isChange ? [discardChanges, openFile, openFolder, preview] : [openFile, openFolder, preview]

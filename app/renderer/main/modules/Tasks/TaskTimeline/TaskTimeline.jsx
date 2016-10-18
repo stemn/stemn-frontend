@@ -17,10 +17,7 @@ import classes from './TaskTimeline.css';
 import Comment from 'app/renderer/main/modules/Comments/Comment/Comment.jsx';
 import TaskTimelineItem from './TaskTimelineItem/TaskTimelineItem.jsx';
 
-
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 const onMount = (nextProps, prevProps) => {
   if(nextProps.taskId){
@@ -29,7 +26,6 @@ const onMount = (nextProps, prevProps) => {
     }
   }
 }
-
 
 
 export const Component = React.createClass({
@@ -51,9 +47,7 @@ export const Component = React.createClass({
 });
 
 
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps({ tasks }, { taskId, board }) {
   return {
@@ -71,43 +65,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);
-
-//const taskEvents = [{
-//  event: 'commit',
-//  timestamp: 1473254921922,
-//  user: {
-//    name: 'David Revay',
-//    picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg',
-//  }
-//},{
-//  event: 'open',
-//  timestamp: 1473254921922,
-//  user: {
-//    name: 'David Revay',
-//    picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg',
-//  }
-//},{
-//  event: 'closed',
-//  timestamp: 1473254921922,
-//  user: {
-//    name: 'David Revay',
-//    picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg',
-//  }
-//},{
-//  event: 'changeLabels',
-//  timestamp: 1473254921922,
-//  added: ['gooba', 'tooba'],
-//  user: {
-//    name: 'David Revay',
-//    picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg',
-//  }
-//},{
-//  event: 'changeLabels',
-//  timestamp: 1473254921922,
-//  added: ['testy', 'boon'],
-//  removed: ['gooba'],
-//  user: {
-//    name: 'David Revay',
-//    picture: '/uploads/e926ce6b-0e2c-44fb-822a-9c3cdaf29a55.jpeg',
-//  }
-//}]

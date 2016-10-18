@@ -6,7 +6,7 @@ import PreviewPage           from './pages/PreviewPage/PreviewPage.jsx';
 export default (store) => {
   return (
     <Route        component={AppRootPage}     path="/">
-      <Route path="/preview/:fileId/:revisionId" component={PreviewPage} />
+      <Route path="/preview/:projectId/:fileId/:revisionId" component={PreviewPage} />
     </Route>
   );
 }
