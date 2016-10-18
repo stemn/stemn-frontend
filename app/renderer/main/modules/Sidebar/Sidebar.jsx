@@ -59,7 +59,7 @@ export const Component = React.createClass({
       onClick: (item)=>{console.log(item);},
     },{
       label: 'Open in explorer',
-//      onClick: ()=>{this.props.systemActions.openFileLocation({projectId: data._id, path: ''})},
+//      onClick: ()=>{this.props.systemActions.openFile({projectId: data._id, path: ''})},
     },{
       label: 'Project Settings',
       subMenu: [{

@@ -26,6 +26,7 @@ import files        from '../../renderer/main/modules/Files/Files.reducer.js';
 
 import electronWindows  from '../modules/ElectronWindows/ElectronWindows.reducer.js';
 import syncTimeline     from '../modules/SyncTimeline/SyncTimeline.reducer.js';
+import localPath        from '../modules/LocalPath/LocalPath.reducer.js';
 
 export default function getRootReducer(scope = 'main') {
   let reducers = {
@@ -51,7 +52,8 @@ export default function getRootReducer(scope = 'main') {
     toasts,
     fileCompare,
     mentions,
-    electronWindows
+    electronWindows,
+    localPath
   };
 
   if(scope === 'main') {

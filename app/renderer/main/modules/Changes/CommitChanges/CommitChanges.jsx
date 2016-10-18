@@ -20,7 +20,7 @@ import { getToggleAllStatus } from '../Changes.utils.js'
 import styles from './CommitChanges.css';
 
 const contextIdentifier = 'FileChangeCm';
-const FileChangeRowContext = ContextMenuLayer(contextIdentifier, (props) => (props))(FileChangeRow)
+const FileChangeRowContext = ContextMenuLayer(contextIdentifier, (props) => props.item)(FileChangeRow)
 
 
 export default React.createClass({

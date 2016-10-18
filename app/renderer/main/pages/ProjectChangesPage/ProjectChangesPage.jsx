@@ -74,7 +74,7 @@ export const Component = React.createClass({
   },
 
   render() {
-    const { changes, project, ChangesActions, entityModel } = this.props;
+    const { changes, project, ChangesActions, entityModel, dispatch } = this.props;
 
     if(!project || !project.data){
       return <LoadingOverlay />
@@ -97,11 +97,13 @@ export const Component = React.createClass({
               <ContentSidebar>
                 {changes && changes.data
                   ? <CommitChanges
-                    changes={changes}
-                    project={project.data}
-                    toggleAll={this.toggleAll}
-                    selectedFileChange={ChangesActions.selectedFileChange}
-                    refresh={this.refresh}/>
+                      changes={changes}
+                      project={project.data}
+                      toggleAll={this.toggleAll}
+                      selectedFileChange={ChangesActions.selectedFileChange}
+                      refresh={this.refresh}
+                      dispatch={dispatch}
+                    />
                   : ''}
 
                 <div style={CommitBoxStyles}>
@@ -110,7 +112,8 @@ export const Component = React.createClass({
                     changes={changes}
                     changesActions={ChangesActions}
                     commitFn={()=>this.commitFn()}
-                    project={project.data}/>
+                    project={project.data}
+                  />
                 </div>
               </ContentSidebar>
             </div>
@@ -157,6 +160,7 @@ function mapStateToProps({changes, projects}, {params}) {
 function mapDispatchToProps(dispatch) {
   return {
     ChangesActions: bindActionCreators(ChangesActions, dispatch),
+    dispatch: dispatch
   }
 }
 

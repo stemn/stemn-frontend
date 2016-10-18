@@ -1,7 +1,9 @@
 import React from 'react';
-import { clone, forEachRight, find } from 'lodash';
+import { clone, forEachRight, find, has } from 'lodash';
 import previewPcbService from './PreviewPcbService.js';
 import classes from './PreviewPcb.css';
+
+import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 export const Viewer = React.createClass({
   getInitialState () {
@@ -10,8 +12,27 @@ export const Viewer = React.createClass({
     }
   },
   viewerInstance: null,
-  componentDidMount() {
-    const { data, name } = this.props;
+
+  // Mounting
+  onMount (nextProps, prevProps) {
+    if(!prevProps || (nextProps.data != prevProps.data && nextProps.name != prevProps.name)){
+      setTimeout(this.init(nextProps), 1); // Timeout so refs can init
+    }
+  },
+  componentDidMount() { this.onMount(this.props) },
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
+
+  componentWillUnmount(){
+    previewPcbService.deregister(this.viewerInstance);
+  },
+  init(props) {
+    const { data, name } = props;
+
+    // Deregister any existing viewers
+    if(this.viewerInstance){
+      previewPcbService.deregister(this.viewerInstance);
+    }
+
     const file = {
       name: name,
       data: data
@@ -42,9 +63,6 @@ export const Viewer = React.createClass({
       previewer.type = 'other';
     }
   },
-  componentWillUnmount(){
-    previewPcbService.deregister(this.viewerInstance);
-  },
   flip(status){
     const flipped = status ? status : !this.state.flipped;
     this.setState({flipped: flipped})
@@ -61,8 +79,8 @@ export default React.createClass({
   componentWillReceiveProps(nextProps, prevProps) {
     if(!nextProps.fileData){
       nextProps.downloadFn({
-        projectId : nextProps.fileMeta.project._id,
-        fileId : nextProps.fileMeta.fileId,
+        projectId  : nextProps.fileMeta.project._id,
+        fileId     : nextProps.fileMeta.fileId,
         revisionId : nextProps.fileMeta.revisionId
       })
     }
@@ -73,7 +91,7 @@ export default React.createClass({
       return <Viewer data={fileData.data} name={fileMeta.name} />
     }
     else{
-      return <div>Pending</div>
+      return <div className="rel-box flex"><LoadingOverlay show={true}></LoadingOverlay></div>
     }
   }
 });

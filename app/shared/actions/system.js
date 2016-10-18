@@ -1,4 +1,8 @@
+import * as LocalPathActions from '../modules/LocalPath/LocalPath.actions.js';
+import { name as localPathModuleName} from '../modules/LocalPath/LocalPath.reducer.js';
+
 import providerPathLookup from '../../main/modules/files/providerPathLookup.js';
+
 import Promise from 'es6-promise';
 import { shell } from 'electron';
 
@@ -14,25 +18,39 @@ export function getProviderPath() {
   };
 }
 
-export function openFileLocation({path}) {
+export function openFile({location, path, projectId, provider}) {
   return (dispatch, getState) => {
-    const rootPath = getState().system.providerPath['drive'];
-    shell.showItemInFolder(rootPath)
-    dispatch({
-      type: 'SYSTEM/OPEN_FILE_LOCATION',
-      payload: {}
-    })
-  }
-}
 
-export function openFile({path}) {
-  return (dispatch, getState) => {
-    const rootPath = getState().system.providerPath['drive'];
-    shell.openFile(rootPath)
-    dispatch({
-      type: 'SYSTEM/OPEN_FILE',
-      payload: {}
-    })
+    const open = (computerToProvider, providerToProject, projectToFile) => {
+      const fullPath = computerToProvider + providerToProject + projectToFile;
+      console.log(fullPath);
+      if(location){
+        shell.showItemInFolder(fullPath)
+        return dispatch({
+          type: 'SYSTEM/OPEN_FILE_LOCATION',
+          payload: {}
+        })
+      }else{
+        shell.openFile(fullPath)
+        dispatch({
+          type: 'SYSTEM/OPEN_FILE',
+          payload: {}
+        })
+      }
+    };
+
+    const computerToProvider = getState().system.providerPath[provider];
+    const providerToProject  = getState()[localPathModuleName][projectId];
+
+    if(!providerToProject){
+      dispatch(LocalPathActions.getPath({projectId})).then(response => {
+        const newProviderToProject  = getState()[localPathModuleName][projectId];
+        return open(computerToProvider, newProviderToProject, path)
+      })
+    }
+    else{
+      return open(computerToProvider, providerToProject, path)
+    }
   }
 }
 
