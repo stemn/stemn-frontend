@@ -1,4 +1,4 @@
-.button{
+.windowsButton{
   width: 46px;
   height: 32px;
   line-height: 0;
@@ -8,12 +8,49 @@
   fill: rgba(0, 0, 0, 0.4);
   transition: 0.2s ease all;
 }
-.button:hover{
+.windowsButton:hover{
   background: rgba(0, 0, 0, 0.05);
   fill: black;
 }
 
-.button svg{
+.darwinButton{
+  -webkit-user-select: none;
+  -webkit-app-region: no-drag;
+  cursor: default;
+  box-sizing: border-box;
+  width: 12px;
+  height: 12px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 50%;
+  margin-top: 1px;
+  margin-left: 4px;
+  margin-right: 4px;
+  line-height: 0;
+  background-color: rgb(221, 221, 221);
+  border-color: rgb(208, 208, 208);
+}
+.darwinButtons svg{
+  opacity: 0;
+}
+.darwinButtons:hover svg{
+  opacity: 1;
+}
+.darwinClose{
+  background-color: rgb(255, 95, 87);
+  border-color: rgb(226, 70, 63);
+}
+.darwinMinimise{
+  background-color: rgb(255, 189, 46);
+  border-color: rgb(255, 161, 22);
+}
+.darwinMaximise{
+  background-color: rgb(40, 201, 64);
+  border-color: rgb(18, 172, 40);
+}
+
+
+.windowsButton svg{
   width: 10px;
   height: 10px;
 }
@@ -31,14 +68,14 @@
   cursor: default;
 }
 
-.light .button{
+.light .windowsButton{
   fill: rgba(255, 255, 255, 0.6);
 }
-.light .button:hover{
+.light .windowsButton:hover{
   fill: rgba(255, 255, 255, 1);
 }
 
-.buttonClose:hover{
+.windowsClose:hover{
   background: rgb(232,17,35);
   fill: white;
 }

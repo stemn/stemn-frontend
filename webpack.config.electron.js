@@ -29,11 +29,14 @@ export default {
       process.env.NODE_ENV === 'development' ? 'require("source-map-support").install();' : '',
       { raw: true, entryOnly: false }
     ),
-//    new webpack.DefinePlugin({
-//      'process.env': {
-//        NODE_ENV: JSON.stringify('production'),
-//      },
-//    }),
+    new webpack.DefinePlugin({
+      __DEV__: false,
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+        API_SERVER: JSON.stringify(process.env.API_SERVER),
+        WEBSOCKET_SERVER: JSON.stringify(process.env.WEBSOCKET_SERVER),
+      },
+    }),
   ],
 
   target: 'electron-main',

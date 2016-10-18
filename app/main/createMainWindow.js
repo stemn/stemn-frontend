@@ -1,5 +1,6 @@
 import { app, BrowserWindow, Menu, shell } from 'electron';
 import path from 'path';
+import process from 'process';
 
 const mainHtml = path.join(__dirname, '../renderer/assets/html/main.html');
 
@@ -25,7 +26,7 @@ export const createMainWindow =  function createWindow({ uri = '/' } = {}) {
     height: 728,
     minWidth: 1000,
     minHeight: 800,
-    frame: false
+    frame: process.platform == 'darwin' ? true : false
   });
 
   function handleRedirect(e, url) {
