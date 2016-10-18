@@ -73,7 +73,7 @@
     "redux-thunk": "^2.0.1",
     "sortablejs": "^1.4.2",
     "sql.js": "^0.3.2",
-    "substyle": "^3.0.1",
+    "substyle": "^2.0.2",
     "updeep": "^0.16.1",
     "url-loader": "^0.5.7"
   }
