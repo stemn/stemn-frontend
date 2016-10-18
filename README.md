@@ -34,7 +34,7 @@ To build the app for windows run
 
 ```bash
 npm run build - you may need to increase memory using `node --max_old_space_size=8192 ./node_modules/webpack/bin/webpack.js ...`
-node scripts/build.js
+node scripts/build.js     flags: -windows || -osx || -linux
 ```
 
 

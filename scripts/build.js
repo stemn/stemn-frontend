@@ -1,18 +1,15 @@
 /**************************************************
 This application must be built using `npm run build`
 before this script can be used.
+
+run this with flags -windows || -linux || -osx
 **************************************************/
 
 "use strict"
-//const buildTypes = ['WINDOWS', 'LINUX', '0SX'];
-//const buildTypes = ['WINDOWS'];
-//const buildTypes = ['LINUX'];
-const buildTypes = ['OSX'];
-
+const buildTypes = ['WINDOWS', 'LINUX', '0SX'];
 const builder = require("electron-builder")
 const Platform = builder.Platform;
 
-// platform = 'WINDOWS' 'LINUX' 'OSX
 const build = (platform) => {
   builder.build({
     targets: Platform[platform].createTarget(),
@@ -25,4 +22,11 @@ const build = (platform) => {
   })
 }
 
- buildTypes.map(build);
+const PlatformsToBuild = process.argv.slice(2).map(arg => arg.substring(1).toUpperCase()).filter(type => buildTypes.includes(type));
+if(!PlatformsToBuild || PlatformsToBuild.length < 1){
+  console.error('No build type supplied. Include flag: -windows || -linux || -osx')
+}
+else{
+  console.log('Building: ', PlatformsToBuild);
+  PlatformsToBuild.map(build);
+}
