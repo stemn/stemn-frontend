@@ -83,6 +83,12 @@ export const Component = React.createClass({
             <LinkAccount text="Dropbox" isLinked={auth.user.accounts.dropbox.id} linkFn={()=>authActions.authenticate('dropbox')} unLinkFn={()=>authActions.unlink('dropbox')}/>
             <LinkAccount text="Google Drive" isLinked={auth.user.accounts.google.refreshToken} linkFn={()=>authActions.authenticate('google')} unLinkFn={()=>authActions.unlink('google')}/>
           </div>
+
+          <div className={classes.panel}>
+            <h3>Logout</h3>
+            <p>Logout from this account.</p>
+            <Button className="warn" onClick={authActions.logout}>Logout</Button>
+          </div>
         </div>
       )
     }

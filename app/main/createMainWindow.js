@@ -22,10 +22,10 @@ export const createMainWindow =  function createWindow({ uri = '/' } = {}) {
 
   browserWindow = new BrowserWindow({
     show: false,
-    width: 1024,
-    height: 728,
+    width: 1000,
+    height: 600,
     minWidth: 1000,
-    minHeight: 800,
+    minHeight: 600,
     frame: process.platform == 'darwin' ? true : false
   });
 

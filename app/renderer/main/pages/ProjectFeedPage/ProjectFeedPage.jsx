@@ -19,6 +19,7 @@ import Popover                  from 'app/renderer/assets/other/react-popup';
 import Timeline                 from 'app/renderer/main/modules/Timeline/Timeline.jsx';
 import SidebarTimeline          from 'app/shared/modules/SyncTimeline/SidebarTimeline/SidebarTimeline.jsx';
 import ContentSidebar           from 'app/renderer/main/components/ContentSidebar';
+import cloudLocked              from 'app/renderer/assets/images/pure-vectors/cloud-locked.svg';
 
 import ProjectFeedPageCommit    from './ProjectFeedPageCommit/ProjectFeedPageCommit.jsx'
 import ProjectFeedPageRevision  from './ProjectFeedPageRevision/ProjectFeedPageRevision.jsx'
@@ -104,6 +105,7 @@ export const Component = React.createClass({
     else{
       return (
         <div className="layout-column layout-align-center-center flex">
+          <img src={cloudLocked}/>
           <div className="text-title-4 text-center">Timeline not available. Connect this project to Drive or Dropbox</div>
           <div className="text-title-4 text-center link-primary" style={{marginTop: '10px'}}><Link to={baseLink+'/settings'}>Add File Store</Link></div>
         </div>

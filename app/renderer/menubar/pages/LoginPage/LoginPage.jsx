@@ -13,7 +13,7 @@ import classNames from 'classnames';
 
 // Sub Components
 import Toolbar from 'app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
-import droid   from 'app/renderer/assets/images/space-vectors/droid.svg';
+import cloudProject   from 'app/renderer/assets/images/pure-vectors/cloud-project.svg';
 import Button  from 'app/renderer/main/components/Buttons/Button/Button.jsx'
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -26,7 +26,7 @@ export const Component = React.createClass({
       <div className="layout-column flex">
         <Toolbar></Toolbar>
         <div className="flex layout-column layout-align-center-center text-center" style={{padding: '15px'}}>
-          <img src={droid} style={{width: '220px'}}/>
+          <img src={cloudProject}/>
           <div className="text-title-4"
           style={{fontWeight: '500'}}>
             Connect to STEMN

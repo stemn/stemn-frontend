@@ -1,10 +1,8 @@
 .container{
-  margin: 30px;
   height: 600px;
-  box-shadow: 0px 10px 35px 0px rgba(0,0,0,0.23);
 }
 .imageSection{
-  background: rgb(68, 154, 211);
+  background-size: cover;
   width: 600px;
   position: relative;
   z-index: 1;

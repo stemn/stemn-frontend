@@ -31,11 +31,12 @@ export default React.createClass({
         onMouseLeave : () => {this.toggleDelay(false)}
       },
       click          : {
-        onClick      : () => {this.toggle(null)}
+        onClick      : () => {this.toggle(null)},
+        onContextMenu : (e) => {
+          e.preventDefault();
+          this.toggle(null)
+        }
       },
-//      rightClick     : {
-//        onClick      : () => {this.toggle(null)}
-//      }
     };
 
     const contentMap = {

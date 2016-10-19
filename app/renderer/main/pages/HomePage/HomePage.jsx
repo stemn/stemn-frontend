@@ -2,7 +2,7 @@ import React from 'react';
 
 // Components
 import Header from 'app/renderer/main/modules/Header/Header.jsx'
-import {GoRepo} from 'react-icons/lib/go';
+import book   from 'app/renderer/assets/images/pure-vectors/book.svg';
 
 // Styles
 import classNames from 'classnames';
@@ -14,7 +14,7 @@ export default class extends React.Component{
       <div className="layout-column flex rel-box">
         <Header></Header>
         <div className="flex layout-column layout-align-center-center">
-          <GoRepo size="100" />
+          <img src={book} />
           <div className="text-title-2" style={{marginTop: '20px'}}>No Project Selected</div>
         </div>
       </div>

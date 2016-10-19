@@ -1,3 +1,5 @@
+import electron from 'electron';
+
 // Container Core
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -9,6 +11,7 @@ import React from 'react';
 // Sub Components
 import TitleBar from 'app/renderer/main/components/TitleBar/TitleBar';
 
+
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
@@ -16,6 +19,12 @@ export const Component = React.createClass({
     if(nextProps.auth.authToken){
       nextProps.dispatch(push('/'))
     }
+
+    // Resize the window
+    const window = electron.remote.getCurrentWindow();
+    window.setSize(1000, 600, true);
+    window.setMinimumSize(1000, 600);
+    window.setResizable(false);
   },
   render() {
     const { children } = this.props

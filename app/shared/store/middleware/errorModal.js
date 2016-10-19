@@ -11,10 +11,10 @@ const errorModalMap = {
 This will add an error modal when possible
 **********************************************/
 const errorModal = store => next => action => {
-  if(action.type.endsWith('_REJECTED') && has(action, 'payload.response.data')){
-    const { errorCode } = action.payload.response.data;
-    if(errorCode){
-      const errorModal = errorModalMap[errorCode];
+  if(action.type.endsWith('_REJECTED') && has(action, 'payload.response.data.error')){
+    const { type } = action.payload.response.data.error;
+    if(type){
+      const errorModal = errorModalMap[type];
       if(errorModal){
         store.dispatch(showModal({
           modalType: errorModal.modalType,

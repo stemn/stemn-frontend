@@ -22,6 +22,7 @@ import Timeline             from 'app/renderer/main/modules/Timeline/Timeline.js
 import CommitChanges        from 'app/renderer/main/modules/Changes/CommitChanges/CommitChanges.jsx';
 import CommitBox            from 'app/renderer/main/modules/Changes/CommitBox/CommitBox.jsx'
 import FileCompareStandard  from 'app/renderer/main/modules/FileCompare/FileCompareStandard/FileCompareStandard.jsx';
+import cloudLocked          from 'app/renderer/assets/images/pure-vectors/cloud-locked.svg';
 
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -136,6 +137,7 @@ export const Component = React.createClass({
     else{
       return (
         <div className="layout-column layout-align-center-center flex">
+          <img src={cloudLocked}/>
           <div className="text-title-4 text-center">Changes not available. Connect this project to Drive or Dropbox</div>
           <div className="text-title-4 text-center link-primary" style={{marginTop: '10px'}}><Link to={baseLink+'/settings'}>Add File Store</Link></div>
         </div>

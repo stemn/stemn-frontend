@@ -19,27 +19,20 @@ import Button from 'app/renderer/main/components/Buttons/Button/Button.jsx';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton';
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import Tabs from 'app/renderer/main/components/Tabs/Tabs'
-import astronaut from 'app/renderer/assets/images/space-vectors/astronaut.svg';
+
+import background3 from 'app/renderer/assets/images/satellite-backgrounds/satellite3.jpg';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
-  getInitialState () {
-    return {
-      isOpen: false,
-    }
-  },
-  toggle () {
-    this.setState({ isOpen: !this.state.isOpen })
-  },
   render() {
-    const { AuthActions, auth } = this.props
+    const { AuthActions, auth } = this.props;
 
     return (
     <div className="layout-column layout-align-center-center flex" style={{background: 'rgba(0, 0, 0, 0.05)'}}>
-      <div className={classNames(classes.container, {[classes.hideForm]: this.state.isOpen} , 'layout-row')}>
-        <div className={classes.imageSection + ' layout-column layout-align-center-center'} onClick={this.toggle}>
-          <img src={astronaut} style={{width: '50%'}}/>
+      <div className={classNames(classes.container, 'layout-row')}>
+        <div className={classes.imageSection + ' layout-column layout-align-center-center'}
+          style={{backgroundImage: 'url('+background3+')'}}>
         </div>
         <div className={classes.textSection}>
           <div className={classes.textSectionInner + ' layout-column  layout-align-space-between'}>
