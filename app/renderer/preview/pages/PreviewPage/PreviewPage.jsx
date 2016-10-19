@@ -38,7 +38,7 @@ export const InnerComponent = React.createClass({
   getInitialState () {
     return {
       selected1: this.props.syncTimeline.data[0],
-      selected2: this.props.syncTimeline.data[1],
+      selected2: null,
       lastSelected: 1,
       mode: 'single'
     }
@@ -109,7 +109,7 @@ export const InnerComponent = React.createClass({
               preferPlace="above"/>
           </div>
           <DragResize side="left" width="450" widthRange={[0, 450]} className="layout-column">
-            <aside className={classes.sidebar + ' layout-column flex'} style={{minWidth: '400px'}}>
+            <aside className={classes.sidebar + ' flex'} style={{minWidth: '400px', overflowY: 'auto'}}>
               <SectionTitle style={{marginBottom: '15px'}}>Meta</SectionTitle>
               <SimpleTable>
                 <tr><td>Name</td><td>{fileMeta.data.name}</td></tr>

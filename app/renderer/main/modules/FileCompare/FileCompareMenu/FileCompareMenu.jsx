@@ -22,7 +22,7 @@ import PopoverMenu          from 'app/renderer/main/components/PopoverMenu/Popov
 import PopoverMenuList      from 'app/renderer/main/components/PopoverMenu/PopoverMenuList';
 import SimpleIconButton     from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 import { getCompareModes, getCompareIcon }  from '../FileCompare.utils.js';
-import { MdMoreHoriz }      from 'react-icons/lib/md';
+import { MdMoreHoriz, MdOpenInNew }      from 'react-icons/lib/md';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -55,30 +55,28 @@ export const Component = React.createClass({
         }))
       },
     }
-    const preview = {
-      label: 'Open Preview Window',
-      onClick: () => {
-        dispatch(ElectronWindowsActions.create({
-          type: 'PREVIEW',
-          props: {
-            fileId: file1.fileId,
-            revisionId: file1.revisionId,
-            projectId: file1.project._id
-          }
-        }))
-//        setTimeout(() => dispatch(ElectronWindowsActions.parse()), 100)
-      },
-    }
-    return isChange ? [discardChanges, openFile, openFolder, preview] : [openFile, openFolder, preview]
+    return isChange ? [discardChanges, openFile, openFolder] : [openFile, openFolder]
   },
-  render() {
-    const { mode, changeMode, revisions, file1, file2, dispatch } = this.props;
+  preview(){
+    const { file1, dispatch } = this.props;
+    dispatch(ElectronWindowsActions.create({
+      type: 'PREVIEW',
+      props: {
+        fileId: file1.fileId,
+        revisionId: file1.revisionId,
+        projectId: file1.project._id
+      }
+    }))
+  },
+  render(){
+    const { enablePreview, mode, changeMode, revisions, file1, file2, dispatch } = this.props;
 
     if(!file1){return null};
 
     const previewType  = getViewerType(file1.extension, file1.provider);
     const compareModes = getCompareModes(previewType, previewType);
     const CompareIcon  = getCompareIcon(mode);
+
     return (
       <div>
         {
@@ -95,6 +93,13 @@ export const Component = React.createClass({
               </a>)}
             </div>
           </PopoverMenu>
+          : null
+        }
+        {
+          enablePreview ?
+          <SimpleIconButton title="Open popout preview" onClick={this.preview}>
+            <MdOpenInNew size="20px" />
+          </SimpleIconButton>
           : null
         }
         <PopoverMenu preferPlace="below">

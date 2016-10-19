@@ -69,6 +69,7 @@ export default React.createClass({
           revisions={file.revisions}
           mode={mode}
           changeMode={this.changeMode}
+          enablePreview={true}
         />
         <DragResize side="bottom" height="500" heightRange={[0, 1000]} className="layout-column flex">
           <FileCompareInner

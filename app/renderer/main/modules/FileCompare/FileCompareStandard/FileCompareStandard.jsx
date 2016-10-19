@@ -34,6 +34,7 @@ export default React.createClass({
             file2={file2}
             mode={mode}
             changeMode={this.changeMode}
+            enablePreview={true}
           />
         </div>
         <div className="layout-column flex">
