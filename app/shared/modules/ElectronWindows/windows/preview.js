@@ -1,9 +1,9 @@
 import { app, BrowserWindow, Menu, shell } from 'electron';
 import path from 'path';
-
+console.log('herererere');
 const mainHtml = path.join(__dirname, '../../../../renderer/assets/html/preview.html');
-
 export const create = function createWindow({ uri = '/' } = {}) {
+  console.log(__dirname);
   let browserWindow = new BrowserWindow({
     show: false,
     width: 1024,

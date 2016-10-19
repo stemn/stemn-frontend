@@ -6,7 +6,7 @@ const jsonStorage = pify(require('electron-json-storage'))
 import { createMainWindow, showMainWindow } from './createMainWindow';
 import { createMenuBar, showMenuWindow } from './createMenuBarWindow';
 //import { initialise as wsInitialise, write as wsWrite } from './modules/websocket/websocket.js';
-import configureStore from '../shared/store/configureStore';
+import configureStore from '../shared/store/configureStore.main.js';
 import tray from './tray';
 import autoUpdater from './tasks/autoUpdater';
 import squirrelStartup from 'electron-squirrel-startup';
@@ -34,7 +34,7 @@ if(!squirrelStartup){
       return {};
     });
 
-    const store = configureStore(global.state, 'main');
+    const store = configureStore(global.state);
 
     store.subscribe(async () => {
       global.state = store.getState();

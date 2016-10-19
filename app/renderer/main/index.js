@@ -5,7 +5,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import configureStore from '../../shared/store/configureStore';
+import configureStore from '../../shared/store/configureStore.renderer.js';
 import invokeGetters from 'app/shared/helpers/invokeGetters.js'
 import getRoutes from './routes';
 
@@ -13,7 +13,7 @@ import getRoutes from './routes';
 const initialState = remote.getGlobal('state');
 const cloneState = invokeGetters(initialState);
 
-const store = configureStore(cloneState, 'renderer');
+const store = configureStore(cloneState);
 const history = syncHistoryWithStore(hashHistory, store);
 
 ipcRenderer.on('redux-action', (event, payload) => {
