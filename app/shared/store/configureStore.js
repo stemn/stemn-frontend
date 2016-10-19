@@ -15,6 +15,7 @@ import httpPackage from './middleware/httpPackage';
 import transformHttp from './middleware/transformHttp';
 import throttle from './middleware/throttle';
 import errorToast from './middleware/errorToast';
+import errorModal from './middleware/errorModal';
 import electronWindows from '../modules/ElectronWindows/ElectronWindows.middleware.js';
 
 export default function configureStore(initialState, scope = 'main') {
@@ -35,7 +36,6 @@ export default function configureStore(initialState, scope = 'main') {
       forwardToMain,
       forwardToRendererWindow,
       router,
-      errorToast,
     ];
     if (process.env.NODE_ENV == 'development') {
        middleware.push(logger);
@@ -50,6 +50,8 @@ export default function configureStore(initialState, scope = 'main') {
       transformHttp,
       promise(),
       electronWindows,
+      errorToast,
+      errorModal,
 
 //      triggerAlias,
       forwardToRenderer,
