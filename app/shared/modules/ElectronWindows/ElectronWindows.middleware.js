@@ -7,7 +7,7 @@ It should only run in the main-thread
 
 **********************************************/
 
-import { create as createPreview } from './windows/preview.js';
+import { create as createPreview } from '../../../main/createPreviewWindow.js';
 
 export default store => next => action => {
   if(action.type == 'ELECTRON_WINDOWS/CREATE') {

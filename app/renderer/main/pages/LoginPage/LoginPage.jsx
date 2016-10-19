@@ -20,8 +20,6 @@ import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconBut
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import Tabs from 'app/renderer/main/components/Tabs/Tabs'
 
-import background3 from 'app/renderer/assets/images/satellite-backgrounds/satellite3.jpg';
-
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
@@ -32,7 +30,7 @@ export const Component = React.createClass({
     <div className="layout-column layout-align-center-center flex" style={{background: 'rgba(0, 0, 0, 0.05)'}}>
       <div className={classNames(classes.container, 'layout-row')}>
         <div className={classes.imageSection + ' layout-column layout-align-center-center'}
-          style={{backgroundImage: 'url('+background3+')'}}>
+          style={{backgroundImage: 'url(../images/satellite-backgrounds/satellite3.jpg)'}}>
         </div>
         <div className={classes.textSection}>
           <div className={classes.textSectionInner + ' layout-column  layout-align-space-between'}>

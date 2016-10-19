@@ -18,7 +18,6 @@ import { Link } from 'react-router';
 import Button from 'app/renderer/main/components/Buttons/Button/Button.jsx';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton';
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import background5 from 'app/renderer/assets/images/satellite-backgrounds/satellite5.jpg';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -30,7 +29,7 @@ export const Component = React.createClass({
       <div className="layout-column layout-align-center-center flex" style={{background: 'rgba(0, 0, 0, 0.05)'}}>
         <div className={classNames(classes.container, 'layout-row')}>
           <div className={classes.imageSection + ' layout-column layout-align-center-center'}
-          style={{backgroundImage: 'url('+background5+')'}}>
+          style={{backgroundImage: 'url(../images/satellite-backgrounds/satellite5.jpg)'}}>
           </div>
           <div className={classes.textSection}>
             <div className={classes.textSectionInner  + ' layout-column  layout-align-space-between'}>
