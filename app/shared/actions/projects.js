@@ -22,9 +22,8 @@ export function createProject(project) {
         url: `/api/v1/projects`,
         data: project
       }).then((response)=>{
-        dispatch(push(`/project/${response.data._id}/settings`))
-      }).catch((response)=>{
-
+        dispatch(push(`/project/${response.data._id}/settings`));
+        return response;
       })
     });
   }

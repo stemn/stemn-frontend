@@ -11,9 +11,9 @@ const errorMessageMap = {
 This will add an error message toast when required
 **********************************************/
 const errorToast = store => next => action => {
-  if(action.type.endsWith('_REJECTED') && has(action, 'payload.response.data.error')){
-    const { message, type } = action.payload.response.data.error;
-    let modifiedMessage = message;
+  if(action.type.endsWith('_REJECTED') && (has(action, 'payload.response.data.error') || has(action, 'payload.response.data.message'))){
+    const { message, type } = action.payload.response.data.error || action.payload.response.data;
+    let modifiedMessage = message ? message : action.payload.response.data.error;
     const errorInfo = errorMessageMap[type];
     if(errorInfo){
       modifiedMessage = errorInfo.message(action.payload.response.data.error);

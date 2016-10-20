@@ -19,11 +19,15 @@ export const Component = React.createClass({
     if(!nextProps.auth.authToken){
       nextProps.dispatch(push('/login'))
     }
-
+  },
+  componentDidMount(){
     // Resize the window
     const window = electron.remote.getCurrentWindow();
-    window.setMinimumSize(1000, 600);
+    window.setMinimumSize(500, 500);
     window.setResizable(true);
+//    window.setSize(1200, 720, true);
+//    window.setFullScreenable(true);
+    window.maximize();
   },
   render() {
     const { children } = this.props

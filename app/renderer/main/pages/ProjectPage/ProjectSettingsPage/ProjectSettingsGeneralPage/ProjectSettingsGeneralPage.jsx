@@ -8,7 +8,7 @@ import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js'
 
 // Component Core
 import React from 'react';
-
+import { has } from 'lodash';
 // Styles
 import classNames from 'classnames';
 import classes from '../ProjectSettingsPage.css'
@@ -120,9 +120,11 @@ export const Component = React.createClass({
        <div className={classes.panel}>
          <h3>File Store Settings</h3>
          <p>Connect your Dropbox or Drive to sync all files and changes. Only one Google Drive or one Dropbox can be connected to a project.</p>
-         <ProjectLinkRemote model={`${entityModel}.formModels.fileStore.remote.provider`} value={project.formModels.fileStore.remote.provider}/>
+         { has(project, 'formModels.fileStore.remote.provider')
+         ? <ProjectLinkRemote model={`${entityModel}.formModels.fileStore.remote.provider`} value={project.formModels.fileStore.remote.provider}/>
+         : null }
          <br />
-         { project.formModels && (project.formModels.fileStore.remote.provider == 'dropbox' || project.formModels.fileStore.remote.provider == 'drive')
+         { has(project, 'formModels.fileStore.remote.provider') && (project.formModels.fileStore.remote.provider == 'dropbox' || project.formModels.fileStore.remote.provider == 'drive')
          ? <div>
              <FileSelectInput
                projectId={project.data._id}
