@@ -64,6 +64,16 @@ export const Component = React.createClass({
           </div>
 
         </div>
+        {system.currentVersion
+        ? (
+          <div className={classes.panel}>
+            <h3>Application info</h3>
+            <p>Stemn Desktop is currently in alpha. Please report any bugs and they will be fixed ASAP.</p>
+            <p>Version: <b>{system.currentVersion}</b></p>
+          </div>)
+        : null}
+
+
         <div className={classes.panel}>
           <h3>Reset Application</h3>
           <p>Clear all cached data and reset the application back to factory settings.</p>

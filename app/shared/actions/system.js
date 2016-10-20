@@ -63,6 +63,13 @@ export function openFile({location, path, projectId, provider}) {
   }
 }
 
+export function currentVersion({version}) {
+  return {
+    type: 'SYSTEM/CURRENT_VERSION',
+    payload: {version}
+  };
+}
+
 export function checkingForUpdate() {
   return {
     type: 'SYSTEM/CHECKING_FOR_UPDATE',
