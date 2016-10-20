@@ -172,6 +172,7 @@ export const Component = React.createClass({
 function mapStateToProps({projects}, otherProps) {
   return {
     project: projects.data[otherProps.params.stub],
+    remote: projects.remotes[otherProps.params.stub],
     entityModel: `projects.data.${otherProps.params.stub}`
   };
 }

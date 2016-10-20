@@ -85,7 +85,9 @@ export const Component = React.createClass({
               placeholder="Task description" />
           </div>
         </div>
-        <div className="text-grey-3" style={{padding: '10px 0 20px'}}>Opened {moment(task.data.due).fromNow()} <b className="text-interpunct"></b> By <a className="link-primary">{task.data.owner}</a> <b className="text-interpunct"></b> {task.data.numComments} Comments</div>
+        <div className="text-grey-3" style={{padding: '10px 0 20px'}}>
+          Opened {moment(task.data.due).fromNow()} <b className="text-interpunct"></b> By <a className="link-primary">{task.data.owner.name}</a> <b className="text-interpunct"></b> {task.data.numComments} Comments
+        </div>
 
         <div className="layout-row">
           <div className="flex-70" style={{paddingRight: '15px'}}>

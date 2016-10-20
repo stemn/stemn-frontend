@@ -26,7 +26,7 @@ export const Component = React.createClass({
   render() {
     const { viewDate, isOpen } = this.state;
     const { model, value, dispatch } = this.props;
-    const valueDate = moment(value);
+    const valueDate = value ? moment(value) : '';
 
     return (
       <div className="rel-box">

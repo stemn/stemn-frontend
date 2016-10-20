@@ -23,6 +23,7 @@ import CommitChanges        from 'app/renderer/main/modules/Changes/CommitChange
 import CommitBox            from 'app/renderer/main/modules/Changes/CommitBox/CommitBox.jsx'
 import FileCompareStandard  from 'app/renderer/main/modules/FileCompare/FileCompareStandard/FileCompareStandard.jsx';
 import cloudLocked          from 'app/renderer/assets/images/pure-vectors/cloud-locked.svg';
+import select               from 'app/renderer/assets/images/pure-vectors/select.svg';
 
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -126,7 +127,11 @@ export const Component = React.createClass({
                   project={project.data}
                   file1={changes.selected.data}
                   file2={filePrevious} />
-                : <div className="layout-column layout-align-center-center flex text-title-4 text-center">No file change selected.</div>
+                : (
+                <div className="layout-column layout-align-center-center flex text-title-4 text-center">
+                  <img src={select} style={{width: '100px'}}/>
+                  <div>No file change selected.</div>
+                </div>)
               }
             </div>
 

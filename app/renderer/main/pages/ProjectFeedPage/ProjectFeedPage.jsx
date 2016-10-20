@@ -20,6 +20,7 @@ import Timeline                 from 'app/renderer/main/modules/Timeline/Timelin
 import SidebarTimeline          from 'app/shared/modules/SyncTimeline/SidebarTimeline/SidebarTimeline.jsx';
 import ContentSidebar           from 'app/renderer/main/components/ContentSidebar';
 import cloudLocked              from 'app/renderer/assets/images/pure-vectors/cloud-locked.svg';
+import select                   from 'app/renderer/assets/images/pure-vectors/select.svg';
 
 import ProjectFeedPageCommit    from './ProjectFeedPageCommit/ProjectFeedPageCommit.jsx'
 import ProjectFeedPageRevision  from './ProjectFeedPageRevision/ProjectFeedPageRevision.jsx'
@@ -34,7 +35,11 @@ const eventComponentMap = {
 const getEventComponent = (item, project) => {
   return item && item.event && eventComponentMap[item.event]
     ? eventComponentMap[item.event](item, project)
-    : <div className="layout-column layout-align-center-center flex text-title-4 text-center">No event selected.</div>
+    : (
+    <div className="layout-column layout-align-center-center flex text-title-4 text-center">
+      <img src={select} style={{width: '100px'}}/>
+      <div>No event selected.</div>
+    </div>)
 };
 
 export const Component = React.createClass({
@@ -96,7 +101,7 @@ export const Component = React.createClass({
               </ContentSidebar>
             </div>
             <div className="layout-column flex">
-              {getEventComponent(timeline.selected, project)}
+              {getEventComponent(timeline && timeline.selected ? timeline.selected : '', project)}
             </div>
           </div>
         </div>

@@ -19,11 +19,14 @@ const eventTextMap = {
   addAsignee    : (item, board) => {return <span>was assigned to this task</span>},
   removeAsignee : (item, board) => {return <span>was removed from assignees</span>},
   commit        : (item, board) => {
-    const linkPath = {
-      pathname: `/project/${board.data.project}/feed`,
-      query: {item: item.commits[0]._id}
+    if(item.commits && item.commits[0]){
+      const linkPath = {
+        pathname: `/project/${board.data.project}/feed`,
+        query: {item: item.commits[0]._id}
+      }
+      return <span>referenced this task in commit <Link to={linkPath} className="link-primary">{item.commits[0].summary}</Link></span>
     }
-    return <span>referenced this task in commit <Link to={linkPath} className="link-primary">{item.commits[0].summary}</Link></span>
+    else return null;
   },
   completed     : (item, board) => {
     if(item.commits && item.commits[0]){

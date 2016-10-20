@@ -28,20 +28,12 @@ export default React.createClass({
     const { changes, project, toggleAll, refresh, selectedFileChange, dispatch } = this.props;
     const groupedChanges = groupRevisions(changes.data);
     const allChecked = getToggleAllStatus(groupedChanges, changes.checked);
-
+//    ,{
+//      label: 'Filter: All Changes',
+//    },{
+//      label: 'Filter: My Changes',
+//    },
     const filterMenu = [{
-      label: 'Filter',
-      submenu: [{
-        label: 'Filter: All Changes',
-      },{
-        label: 'Filter: My Changes',
-      }]
-    },{
-      label: 'Filter: All Changes',
-    },{
-      label: 'Filter: My Changes',
-    },{
-      divider: true,
       label: 'Refresh',
       onClick: refresh
     }]

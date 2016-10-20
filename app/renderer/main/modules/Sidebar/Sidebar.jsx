@@ -53,7 +53,7 @@ export const Component = React.createClass({
     const sidebarStyle = classNames('layout-column', 'flex' ,'rel-box', styles.sidebar);
 
     const nameRegex = new RegExp(this.props.sidebar.searchString, 'i');
-    const filteredProjects = projects.userProjects.data ? projects.userProjects.data.filter((project) => nameRegex.test(project.name)) : [];
+    const filteredProjects = projects.userProjects.data ? projects.userProjects.data.filter(project => nameRegex.test(project.name)) : [];
     const routeState = {meta : {scope: ['main', 'menubar']}};
 
     const projectContextMenu = [{

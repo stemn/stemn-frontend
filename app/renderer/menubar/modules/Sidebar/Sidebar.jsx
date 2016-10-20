@@ -17,14 +17,15 @@ import classes from './Sidebar.css'
 // Sub Components
 import AnimateShow from 'app/renderer/shared/AnimateShow/AnimateShow.jsx'
 import SidebarProjectButton from 'app/renderer/main/modules/Sidebar/SidebarProjectButton.jsx'
-import { MdClose } from 'react-icons/lib/md';
+import { MdClose, MdSearch } from 'react-icons/lib/md';
+import { Field } from 'react-redux-form';
 
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
   render() {
-    const { menubarLayout, projects } = this.props;
+    const { menubarLayout, projects, sidebar } = this.props;
 
     const linkProject = (item) => {
       return {
@@ -33,14 +34,23 @@ export const Component = React.createClass({
       }
     }
 
+    const nameRegex = new RegExp(sidebar.searchString, 'i');
+    const filteredProjects = projects.userProjects.data ? projects.userProjects.data.filter(project => nameRegex.test(project.name)) : [];
+
     return (
       <div>
         <AnimateShow show={menubarLayout.showSidebar} animation={classes.animateOverlay} animationShow={classes.animateOverlayShow}>
           <div className={classes.overlay} onClick={()=>this.props.MenubarLayoutActions.toggleSidebar(false)}></div>
         </AnimateShow>
         <div className={classNames(classes.sidebar, 'layout-column', {[classes.sidebarShow] : menubarLayout.showSidebar})}>
+          <div className={classes.sidebarSearch}>
+            <Field model="sidebar.searchString">
+              <input className="dr-input text-ellipsis" type="text" placeholder="Search all projects"/>
+            </Field>
+            <MdSearch className={classes.sidebarSearchIcon} size="25"/>
+          </div>
           <div className="flex scroll-box">
-            {projects.userProjects.data.map((item)=>
+            {filteredProjects.map((item)=>
                <SidebarProjectButton item={item} to={linkProject(item)} clickFn={()=>this.props.MenubarLayoutActions.toggleSidebar(false)}/>
             )}
           </div>
@@ -52,8 +62,9 @@ export const Component = React.createClass({
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps({ menubarLayout, projects }) {
+function mapStateToProps({ menubarLayout, projects, sidebar }) {
   return {
+    sidebar,
     menubarLayout,
     projects
   };
