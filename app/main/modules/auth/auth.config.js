@@ -14,6 +14,7 @@ export const oauthCreds = {
       access_type         : 'offline',
       redirect_uri        : 'https://stemn.com/auth/google',
       response_type       : 'code',
+      prompt              : 'consent', // forces request of refresh token
       client_id           : '502305750839-8m9aian8ka9qb6j64t3dtjs2nq96tdae.apps.googleusercontent.com',
       scope               : 'openid profile email https://www.googleapis.com/auth/drive',
     },
