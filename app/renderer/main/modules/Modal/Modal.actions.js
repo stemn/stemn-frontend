@@ -4,7 +4,7 @@ export let modalPromises = {
 
 };
 
-export function showModal({modalType, modalProps, modalOptions, modalConfirm, modalCancel}) {
+export function showModal({modalType, modalProps, modalOptions, limit, modalConfirm, modalCancel}) {
   return {
     type: 'MODALS/SHOW_MODAL',
     payload: {
@@ -12,6 +12,7 @@ export function showModal({modalType, modalProps, modalOptions, modalConfirm, mo
       modalType: modalType,
       modalProps: modalProps,
       modalOptions : modalOptions,
+      limit, // Limit the number of this modalType to show
       /*******************************
       options: {
         width: '400px'
