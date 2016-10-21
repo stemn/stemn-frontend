@@ -59,7 +59,11 @@ export const Component = React.createClass({
       description: this.props.changes.description
     })
   },
-
+  deselect(){
+    this.props.changesActions.deselect({
+      projectId: this.props.project.data._id
+    })
+  },
   render() {
     const { changes, project, changesActions, entityModel } = this.props;
 
@@ -109,6 +113,7 @@ export const Component = React.createClass({
               project={project.data}
               toggleAll={this.toggleAll}
               selectedFileChange={changesActions.selectedFileChange}
+              deselect={this.deselect}
               refresh={this.refresh}/>
             <div style={commitBoxStyles}>
               <CommitBox

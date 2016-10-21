@@ -6,6 +6,8 @@ const initialState = {}
 
 const mainReducer = (state, action) => {
   switch (action.type) {
+    case 'CHANGES/DESELECT_FILE_CHANGE':
+      return i.assocIn(state, [action.payload.projectId, 'selected'], {})
     case 'CHANGES/SELECTED_FILE_CHANGE':
       return i.assocIn(state, [action.payload.projectId, 'selected'], action.payload.selected)
     case 'CHANGES/MENTION_TASKS':

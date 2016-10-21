@@ -7,6 +7,14 @@ import i                     from 'icepick';
 import http                  from 'axios';
 import { get }               from 'lodash';
 
+export function deselect({projectId}) {
+  return {
+      type: 'CHANGES/DESELECT_FILE_CHANGE',
+      payload: {
+        projectId,
+      }
+  }
+}
 export function selectedFileChange({projectId, selected}) {
   return {
       type: 'CHANGES/SELECTED_FILE_CHANGE',
