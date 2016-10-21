@@ -77,9 +77,8 @@ export const Component = React.createClass({
         <UserSearch select={this.selectFn} />
         <br />
         {project.data.team.map((item) => (
-          <div style={{marginBottom: '15px'}}>
+          <div style={{marginBottom: '15px'}}  key={item._id}>
             <TeamMember
-              key={item._id}
               item={item}
               changePermissionsFn={this.changePermissionsFn}
               removeTeamMemberFn={this.removeTeamMemberFn}

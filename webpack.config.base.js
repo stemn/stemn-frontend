@@ -29,6 +29,8 @@ export default {
     packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main'],
   },
   plugins: [
+    new webpack.IgnorePlugin(/vertx/), // Ignore vertx so ES6 promise works: https://github.com/stefanpenner/es6-promise/issues/100
+
   ],
   externals: [
     // put your node 3rd party libraries which can't be built with webpack here
