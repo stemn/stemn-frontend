@@ -20,7 +20,7 @@ import Timeline                 from 'app/renderer/main/modules/Timeline/Timelin
 import SidebarTimeline          from 'app/shared/modules/SyncTimeline/SidebarTimeline/SidebarTimeline.jsx';
 import ContentSidebar           from 'app/renderer/main/components/ContentSidebar';
 import cloudLocked              from 'app/renderer/assets/images/pure-vectors/cloud-locked.svg';
-import file                   from 'app/renderer/assets/images/pure-vectors/file.svg';
+import file                     from 'app/renderer/assets/images/pure-vectors/file.svg';
 
 import ProjectFeedPageCommit    from './ProjectFeedPageCommit/ProjectFeedPageCommit.jsx'
 import ProjectFeedPageRevision  from './ProjectFeedPageRevision/ProjectFeedPageRevision.jsx'

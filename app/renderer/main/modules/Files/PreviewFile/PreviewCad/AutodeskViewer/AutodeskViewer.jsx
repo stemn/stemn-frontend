@@ -4,8 +4,19 @@ import autodeskViewerUtils from './autodeskViewerUtils.js';
 
 export default React.createClass({
   viewerInstance: null,
-  componentDidMount() {
-
+  // Mounting
+  onMount (nextProps, prevProps) {
+    if(!prevProps || nextProps.urn != prevProps.urn || nextProps.token != prevProps.token){
+      setTimeout(this.init(nextProps), 1); // Timeout so refs can init
+    }
+  },
+  componentDidMount() { this.onMount(this.props) },
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
+  componentWillUnmount(){
+    autodeskViewerUtils.deregister(this.viewerInstance);
+  },
+  init(props) {
+    const { urn, token } = this.props;
     const loadDocument = (viewer, options) => {
       const onLoadCallback = (doc) => {
         // Get all the 3D and 2D views (but keep in separate arrays so we can differentiate in the UI)
@@ -53,8 +64,8 @@ export default React.createClass({
       oViews2D = null;
 
     var options = {
-      'document': this.props.urn,
-      'accessToken': this.props.token,
+      'document': urn,
+      'accessToken': token,
       'env': 'AutodeskProduction'
     };
 
@@ -64,9 +75,6 @@ export default React.createClass({
       this.viewerInstance.initialize();
       loadDocument(this.viewerInstance, options);
     });
-  },
-  componentWillUnmount(){
-    autodeskViewerUtils.deregister(this.viewerInstance);
   },
   render() {
     return <div className={classes.preview} ref="cadCanvas"></div>
