@@ -7,8 +7,10 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'SELECT_TIMELINE_ITEM':
+    case 'TIMELINE/SELECT_ITEM':
       return i.assocIn(state, [action.meta.cacheKey, 'selected'], action.payload.selected)
+    case 'TIMELINE/DESELECT_ITEM':
+      return i.assocIn(state, [action.payload.projectId, 'selected'], {})
     case 'TIMELINE/FETCH_TIMELINE_PENDING':
       return i.assocIn(state, [action.meta.cacheKey, 'loading'], true)
     case 'TIMELINE/FETCH_TIMELINE_REJECTED':

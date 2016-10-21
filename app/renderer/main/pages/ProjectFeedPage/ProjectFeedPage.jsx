@@ -68,6 +68,12 @@ export const Component = React.createClass({
     })
   },
 
+  deselect(){
+    this.props.syncTimelineActions.deselect({
+      projectId: this.props.project.data._id
+    })
+  },
+
   refresh(){
     this.props.syncTimelineActions.fetchTimeline({
       projectId: this.props.project.data._id
@@ -97,6 +103,7 @@ export const Component = React.createClass({
                   query={timeline && timeline.query ? timeline.query : ''}
                   queryModel={`${timelineModel}.query`}
                   refresh={this.refresh}
+                  deselect={this.deselect}
                 />
               </ContentSidebar>
             </div>
