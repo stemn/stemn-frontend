@@ -54,7 +54,6 @@ export const Component = React.createClass({
 
     const nameRegex = new RegExp(this.props.sidebar.searchString, 'i');
     const filteredProjects = projects.userProjects.data ? projects.userProjects.data.filter(project => nameRegex.test(project.name)) : [];
-    const routeState = {meta : {scope: ['main', 'menubar']}};
 
     const projectContextMenu = [{
       label: 'Open Folder',
@@ -116,7 +115,7 @@ export const Component = React.createClass({
           </div>
 
           <div className="scroll-box flex">
-            {filteredProjects.map((item, idx) => <ProjectWithContext key={idx} item={item} isActive={item._id == this.props.params.stub} to={{pathname: `/project/${item._id}`, state: routeState}}/>)}
+            {filteredProjects.map((item, idx) => <ProjectWithContext key={idx} item={item} isActive={item._id == this.props.params.stub} to={`/project/${item._id}`}/>)}
             <ContextMenu identifier={projectContextIdentifier} menu={projectContextMenu}/>
           </div>
 

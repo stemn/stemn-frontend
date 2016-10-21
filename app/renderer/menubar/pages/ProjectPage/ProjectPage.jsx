@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as ChangesActions from 'app/renderer/main/modules/Changes/Changes.actions.js';
+import * as ProjectsActions from 'app/shared/actions/projects.js';
 
 // Component Core
 import React from 'react';
-
+import { has } from 'lodash';
 // Styles
 import classNames from 'classnames';
 
@@ -19,41 +20,40 @@ import Toolbar            from 'app/renderer/menubar/modules/Toolbar/Toolbar.jsx
 import { MdOpenInNew } from 'react-icons/lib/md';
 import * as ElectronWindowActions from 'app/shared/electronActions/window.js';
 import { Link }           from 'react-router';
+import cloudLocked          from 'app/renderer/assets/images/pure-vectors/cloud-locked.svg';
 
 
 import * as stringConcat  from 'app/shared/helpers/stringConcat';
 
 export const Component = React.createClass({
-  componentWillMount() {
-    if(this.props.project && this.props.project.data && this.props.project.data.remote.connected){
-      this.props.ChangesActions.fetchChanges({
-        projectId: this.props.project.data._id
-      })
+  onMount(nextProps, prevProps){
+    // If project has changed
+    if(!prevProps || nextProps.projectId != prevProps.projectId){
+      // Set the project to active
+      nextProps.projectsActions.setActiveProject({projectId: nextProps.projectId});
+      // If project is connected
+      if(has(nextProps, 'project.data.remote.connected')){
+        nextProps.changesActions.fetchChanges({projectId: nextProps.projectId})
+      }
     }
   },
-  componentWillReceiveProps(nextProps) {
-    if (this.props.project && nextProps.project && this.props.project.data && nextProps.project.data._id !== this.props.project.data._id && nextProps.project.data.remote.connected) {
-      this.props.ChangesActions.fetchChanges({
-        projectId: nextProps.data.project._id
-      })
-    }
-  },
-
+  componentWillMount() { this.onMount(this.props) },
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
   refresh(){
-    this.props.ChangesActions.fetchChanges({
+    this.props.changesActions.fetchChanges({
       projectId: this.props.project.data._id
     })
   },
 
   toggleAll(value){
-    return this.props.ChangesActions.toggleAll({
+    return this.props.changesActions.toggleAll({
       value,
       projectId: this.props.project.data._id
     })
   },
 
   commitFn(){
-    this.props.ChangesActions.commit({
+    this.props.changesActions.commit({
       projectId: this.props.project.data._id,
       summary: this.props.changes.summary,
       description: this.props.changes.description
@@ -61,8 +61,7 @@ export const Component = React.createClass({
   },
 
   render() {
-    const { changes, project, ChangesActions, entityModel } = this.props;
-
+    const { changes, project, changesActions, entityModel } = this.props;
 
     const addStoreLink = {
       pathname: `/project/${project.data._id}/settings`,
@@ -72,8 +71,9 @@ export const Component = React.createClass({
     const projectNotConnected = () => {
       return (
         <div className="layout-column layout-align-center-center flex">
-          <div className="text-title-4 text-center">Project not connected to a file store</div>
-          <div className="text-title-4 text-center link-primary" style={{marginTop: '10px'}}>
+          <img src={cloudLocked}/>
+          <div className="text-title-5 text-center">Project not connected to a file store</div>
+          <div className="text-title-5 text-center link-primary" style={{marginTop: '10px'}}>
             <Link to={addStoreLink}>Add File Store</Link>
           </div>
         </div>
@@ -108,13 +108,13 @@ export const Component = React.createClass({
               changes={changes}
               project={project.data}
               toggleAll={this.toggleAll}
-              selectedFileChange={ChangesActions.selectedFileChange}
+              selectedFileChange={changesActions.selectedFileChange}
               refresh={this.refresh}/>
             <div style={commitBoxStyles}>
               <CommitBox
                 entityModel={entityModel}
                 changes={changes}
-                changesActions={ChangesActions}
+                changesActions={changesActions}
                 commitFn={()=>this.commitFn()}
                 project={project.data}/>
             </div>
@@ -142,6 +142,7 @@ export const Component = React.createClass({
 function mapStateToProps({changes, projects}, {params}) {
   const project = projects.data[params.stub];
   return {
+    projectId: params.stub,
     project: project,
     changes: changes[params.stub],
     entityModel: `changes.${params.stub}`,
@@ -151,7 +152,8 @@ function mapStateToProps({changes, projects}, {params}) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    ChangesActions: bindActionCreators(ChangesActions, dispatch),
+    changesActions: bindActionCreators(ChangesActions, dispatch),
+    projectsActions: bindActionCreators(ProjectsActions, dispatch),
   }
 }
 

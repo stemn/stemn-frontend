@@ -5,7 +5,6 @@ import system from './system';
 import header from './header';
 import auth from './auth';
 import sidebar from './sidebar';
-import project from './project';
 import projectSettings from './projectSettings';
 import projects from './projects';
 import users from './users';
@@ -35,7 +34,6 @@ export default function getRootReducer(scope = 'main') {
     auth,
     sidebar,
     syncTimeline,
-    project,
     projectSettings,
     projects,
     files,

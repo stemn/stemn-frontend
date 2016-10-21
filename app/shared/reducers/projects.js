@@ -3,6 +3,7 @@ import i from 'icepick';
 
 const initialState = {
   data: {},
+  activeProject: '',        // The currently active project
   userProjects: {
     loading: false,
     data: []
@@ -16,6 +17,10 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
+    case 'PROJECTS/SET_ACTIVE_PROJECT':
+      return {...state,
+        activeProject: action.payload.projectId
+      }
     case 'PROJECTS/GET_PROJECT_FULFILLED' :
       return i.assocIn(state, ['data', action.payload.data._id, 'data'], action.payload.data)
     case 'PROJECTS/ADD_TEAM_MEMBER' :

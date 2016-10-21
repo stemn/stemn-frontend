@@ -12,9 +12,13 @@ import Sidebar            from 'app/renderer/menubar/modules/Sidebar/Sidebar.jsx
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
-  componentWillReceiveProps(nextProps, prevProps) {
+  componentWillReceiveProps(nextProps) {
+    const prevProps = this.props;
     if(!nextProps.auth.authToken || !nextProps.auth.user._id){
       nextProps.dispatch(push('/login'))
+    }
+    if(nextProps.activeProject != prevProps.activeProject){
+      nextProps.dispatch(push(`/project/${nextProps.activeProject}`))
     }
   },
   render() {
@@ -32,8 +36,11 @@ export const Component = React.createClass({
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps({ auth }) {
-  return { auth };
+function mapStateToProps({ auth, projects }) {
+  return {
+    auth,
+    activeProject: projects.activeProject
+  };
 }
 
 function mapDispatchToProps(dispatch) {

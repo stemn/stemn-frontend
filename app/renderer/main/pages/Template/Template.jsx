@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as ProjectActions from 'app/shared/actions/project.js';
+import * as ProjectsActions from 'app/shared/actions/projects.js';
 
 // Component Core
 import React from 'react';
@@ -14,9 +14,8 @@ import classNames from 'classnames';
 // Sub Components
 
 
-/////////////////////////////////////////////////////////////////////////////
+
 ///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 export const Component = React.createClass({
   render() {
@@ -27,9 +26,8 @@ export const Component = React.createClass({
 });
 
 
-/////////////////////////////////////////////////////////////////////////////
+
 ///////////////////////////////// CONTAINER /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps({projects, projectSettings}, {params}) {
   return {
@@ -41,7 +39,7 @@ function mapStateToProps({projects, projectSettings}, {params}) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    ProjectActions: bindActionCreators(ProjectActions, dispatch),
+    projectsActions: bindActionCreators(ProjectsActions, dispatch),
   }
 }
 
