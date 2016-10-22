@@ -33,6 +33,7 @@ export default React.createClass({
   init(props){
     const { fileMeta } = props;
 
+    this.setState({status: 'pending'})
     clearInterval(this.checkStatusInterval); // Clear interval if we re-init
 
     if(previewCadUtils.isWebGlSupported()){

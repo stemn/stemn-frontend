@@ -65,10 +65,10 @@ export const Component = React.createClass({
     })
   },
   render() {
-    const { changes, project, changesActions, entityModel } = this.props;
+    const { changes, project, changesActions, entityModel, projectId } = this.props;
 
     const addStoreLink = {
-      pathname: `/project/${project.data._id}/settings`,
+      pathname: `/project/${projectId}/settings`,
       state: {meta : {scope: ['main']}}
     }
 

@@ -5,6 +5,7 @@ import { push } from 'react-router-redux'
 
 // Component Core
 import React from 'react';
+import { has } from 'lodash';
 
 // Sub Components
 import Sidebar            from 'app/renderer/menubar/modules/Sidebar/Sidebar.jsx'
@@ -14,10 +15,11 @@ import Sidebar            from 'app/renderer/menubar/modules/Sidebar/Sidebar.jsx
 export const Component = React.createClass({
   componentWillReceiveProps(nextProps) {
     const prevProps = this.props;
+    console.log();
     if(!nextProps.auth.authToken || !nextProps.auth.user._id){
       nextProps.dispatch(push('/login'))
     }
-    if(nextProps.activeProject != prevProps.activeProject){
+    if(!has(nextProps, 'params.stub') || nextProps.activeProject != nextProps.params.stub){
       nextProps.dispatch(push(`/project/${nextProps.activeProject}`))
     }
   },

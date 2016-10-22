@@ -20,7 +20,7 @@ import Timeline                 from 'app/renderer/main/modules/Timeline/Timelin
 import SidebarTimeline          from 'app/shared/modules/SyncTimeline/SidebarTimeline/SidebarTimeline.jsx';
 import ContentSidebar           from 'app/renderer/main/components/ContentSidebar';
 import cloudLocked              from 'app/renderer/assets/images/pure-vectors/cloud-locked.svg';
-import file                     from 'app/renderer/assets/images/pure-vectors/file.svg';
+import timeline                 from 'app/renderer/assets/images/pure-vectors/timeline.svg';
 
 import ProjectFeedPageCommit    from './ProjectFeedPageCommit/ProjectFeedPageCommit.jsx'
 import ProjectFeedPageRevision  from './ProjectFeedPageRevision/ProjectFeedPageRevision.jsx'
@@ -37,8 +37,8 @@ const getEventComponent = (item, project) => {
     ? eventComponentMap[item.event](item, project)
     : (
     <div className="layout-column layout-align-center-center flex text-title-4 text-center">
-      <img src={file} style={{width: '100px'}}/>
-      <div>No event selected.</div>
+      <img src={timeline} style={{width: '100px'}}/>
+      <div>No timeline event selected.</div>
     </div>)
 };
 

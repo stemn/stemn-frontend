@@ -26,6 +26,7 @@ export function authenticate(provider) {
       }).then((response)=>{
         dispatch(setAuthToken(response.data.token))
         dispatch(initHttpHeaders('bearer ' + response.data.token))
+        setTimeout(()=>dispatch(loadUserData()), 1)
         return response
       })
     })
@@ -56,6 +57,7 @@ export function login({email, password}) {
       }).then((response)=>{
         dispatch(setAuthToken(response.data.token))
         dispatch(initHttpHeaders('bearer ' + response.data.token))
+        setTimeout(()=>dispatch(loadUserData()), 1)
         return response
       })
     })
@@ -78,6 +80,7 @@ export function register({email, password, firstname, lastname}) {
       }).then((response)=>{
         dispatch(setAuthToken(response.data.token))
         dispatch(initHttpHeaders('bearer ' + response.data.token))
+        setTimeout(()=>dispatch(loadUserData()), 1)
         return response
       })
     })
