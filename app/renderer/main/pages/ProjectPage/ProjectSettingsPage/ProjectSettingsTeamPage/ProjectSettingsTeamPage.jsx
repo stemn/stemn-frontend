@@ -17,7 +17,7 @@ import { Field, actions } from 'react-redux-form';
 
 import UserSearch from 'app/renderer/main/modules/UserSearch/UserSearch.container.js'
 import TeamMember from 'app/renderer/main/components/Project/TeamMember/TeamMember.jsx'
-import Button from 'app/renderer/main/components/Buttons/Button/Button'
+import ProgressButton from 'app/renderer/main/components/Buttons/ProgressButton/ProgressButton'
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -87,16 +87,18 @@ export const Component = React.createClass({
         )}
         <br />
         <div className="layout-row layout-align-end">
-          <Button
-          className="primary"
-          onClick={this.saveProject}
-          loading={project.savePending}
-          >Update team</Button>
+          <ProgressButton
+           className="primary"
+           onClick={this.saveProject}
+           loading={project.savePending}>
+            Update team
+          </ProgressButton>
         </div>
       </div>
     );
   }
 });
+
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////

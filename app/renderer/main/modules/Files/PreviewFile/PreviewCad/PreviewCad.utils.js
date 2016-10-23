@@ -32,7 +32,6 @@ function authenticate(){
 }
 
 function getViewStatus(urn64){
-  console.log(library.accessToken);
   return http({
     method: 'GET',
     url: 'https://developer.api.autodesk.com/viewingservice/v1/'+urn64+'/status',

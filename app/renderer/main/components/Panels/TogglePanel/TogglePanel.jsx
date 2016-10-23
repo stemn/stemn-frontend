@@ -16,7 +16,6 @@ import styles from './TogglePanel.css'
 
 import {MdChevronRight} from 'react-icons/lib/md';
 
-
 export default React.createClass({
   getInitialState () {
     return {
