@@ -12,6 +12,9 @@ import autoUpdater from './tasks/autoUpdater';
 import squirrelStartup from 'electron-squirrel-startup';
 import mapWebsocketToRedux from './modules/websocket/mapWebsocketToRedux'
 import { getProviderPath } from '../shared/actions/system';
+import { getFilteredStoreData } from './json-storage.js';
+
+
 
 if(!squirrelStartup){
   global.state = {}; // Ease remote-loading of initial state
@@ -27,37 +30,40 @@ if(!squirrelStartup){
 
 /////////////////////////////////////////////////////////////////
 
- async function start() {
-    const appIcon = tray(); // set-up menu bar
-    global.state = await jsonStorage.get('state').catch(error => {
-      jsonStorage.clear();
-      return {};
-    });
 
-    const store = configureStore(global.state);
+async function start() {
+  const appIcon = tray(); // set-up menu bar
+  global.state = await jsonStorage.get('state').
+  catch(error => {
+    jsonStorage.clear();
+    return {};
+  });
 
-    store.subscribe(async () => {
-      global.state = store.getState();
-      await jsonStorage.set('state', global.state) // TODO: should this be blocking / wait? _.throttle?
-    });
-    ipcMain.on('redux-action', (event, action) => {
-      store.dispatch(action);
-    });
+  const store = configureStore(global.state);
 
-    ipcMain.on('electron-action', onElectronAction);
-    app.on('window-all-closed',   onCloseAllWindows);
-    app.on('activate',            onActivate);
-    appIcon.on('click',           onClickAppIcon);
+  store.subscribe(async () => {
+    global.state = store.getState();
+    const dataToStore = getFilteredStoreData(global.state);
+    await jsonStorage.set('state', dataToStore) // TODO: should this be blocking / wait? _.throttle?
+  });
+  ipcMain.on('redux-action', (event, action) => {
+    store.dispatch(action);
+  });
 
-    // init
-    createMainWindow();
-    store.dispatch(getProviderPath());
+  ipcMain.on('electron-action', onElectronAction);
+  app.on('window-all-closed',   onCloseAllWindows);
+  app.on('activate',            onActivate);
+  appIcon.on('click',           onClickAppIcon);
 
-    // auto-updating
-    setTimeout(() => {
-      autoUpdater(store);
-    }, 5000);
-  }
+  // init
+  createMainWindow();
+  store.dispatch(getProviderPath());
+
+  // auto-updating
+  setTimeout(() => {
+    autoUpdater(store);
+  }, 5000);
+}
 
 function onActivate(){
   // On OS X it's common to re-create a window in the app when the

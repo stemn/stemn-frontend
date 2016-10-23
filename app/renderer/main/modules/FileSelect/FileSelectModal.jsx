@@ -95,7 +95,18 @@ export const Component = React.createClass({
     return (
       <div style={{width: '600px'}}>
         <div className="modal-title">Select Folder</div>
-        <FileList projectId={projectId} path={activePath} singleClickFn={this.singleClickFn} doubleClickFn={this.doubleClickFn} crumbClickFn={this.crumbClickFn} selected={fileSelect.selected} options={options}/>
+        {fileSelect
+        ? <FileList
+            projectId={projectId}
+            path={activePath}
+            singleClickFn={this.singleClickFn}
+            doubleClickFn={this.doubleClickFn}
+            crumbClickFn={this.crumbClickFn}
+            selected={fileSelect.selected}
+            options={options}
+          />
+        : null
+        }
         <div className="modal-footer layout-row layout-align-start-center">
           <div className="flex"></div>
           <Button style={{marginRight: '10px'}} onClick={this.cancel}>
