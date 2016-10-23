@@ -12,7 +12,10 @@ export const dataToStoreKeyMap = [
   ['system'],
   ['auth', 'authToken'],
   ['auth', 'user'],
-  ['sidebar', 'searchString']
+  ['sidebar', 'searchString'],
+  ['projects', 'activeProject'],
+  ['projects', 'data'],
+  ['projects', 'userProjects'],
 ];
 
 export const getFilteredStoreData = (data) => {
