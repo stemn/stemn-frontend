@@ -122,17 +122,17 @@ export const Component = React.createClass({
           <div>
             <div className="layout-row layout-align-start-center">
               <PopoverMenu>
-                <Link to="/settings/application" className="flex">
+                <a className="flex">
                   <div className={userStyles.userWrapper + ' flex layout-row layout-align-start-center'}>
                     <UserAvatar picture={this.props.auth.user.picture} className={userStyles.userAvatar}/>
                     <div className="flex text-ellipsis">
                       {this.props.auth.user.name}
                     </div>
                   </div>
-                </Link>
+                </a>
                 <div className="PopoverMenu">
-                  <a href="#/settings/account">Account Settings</a>
                   <a href="#/settings/application">Application Settings</a>
+                  <a href="#/settings/account">Account Settings</a>
                   <a onClick={()=>{this.props.authActions.logout()}}>Sign out</a>
                 </div>
               </PopoverMenu>

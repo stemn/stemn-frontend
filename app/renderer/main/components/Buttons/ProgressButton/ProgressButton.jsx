@@ -81,7 +81,7 @@ export default React.createClass({
     }, 700)
   },
   render() {
-    const { children, onClick, loading } = this.props;
+    const { children, onClick, loading, className } = this.props;
     const { status, disabled, drawLoading, drawSuccess } = this.state;
 
 
@@ -107,7 +107,7 @@ export default React.createClass({
 
     return (
       <div className={classNames(
-          classes.progressButton,
+          classes.progressButton, className,
           {[classes.loading] : status == 'loading'},
           {[classes.error]   : status == 'error'},
           {[classes.success] : status == 'success'},

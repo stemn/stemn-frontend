@@ -17,7 +17,7 @@ import classes from '../ProjectSettingsPage.css'
 // Sub Components
 import { Field, actions } from 'react-redux-form';
 
-import Button from 'app/renderer/main/components/Buttons/Button/Button'
+import ProgressButton from 'app/renderer/main/components/Buttons/ProgressButton/ProgressButton'
 import TaskLabelsEdit from 'app/renderer/main/modules/Tasks/TaskLabelsEdit/TaskLabelsEdit.jsx'
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -55,12 +55,12 @@ const TasksPanel = React.createClass({
           <br />
           <div className="layout-row">
             <div className="flex"></div>
-            <Button
+            <ProgressButton
               className="primary"
               onClick={this.submit}
               loading={board.savePending}>
               Save Labels
-            </Button>
+            </ProgressButton>
           </div>
         </div>
       );
@@ -83,12 +83,19 @@ export const Component = React.createClass({
   componentWillMount() { this.onMount(this.props) },
   componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
   render() {
-    const { boardModel, board } = this.props;
-    <div>
-     { has(board, 'data.labels')
-     ? <TasksPanel boardModel={boardModel} board={board} />
-     : null }
-    </div>
+    const { boardModel, board, dispatch, tasksActions } = this.props;
+    return (
+      <div>
+       { has(board, 'data.labels')
+       ? <TasksPanel
+           boardModel={boardModel}
+           board={board}
+           dispatch={dispatch}
+           tasksActions={tasksActions}
+         />
+       : null }
+      </div>
+    )
   }
 });
 
@@ -109,7 +116,6 @@ function mapStateToProps({tasks, projects}, {params}) {
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    ProjectsActions: bindActionCreators(ProjectsActions, dispatch),
     tasksActions: bindActionCreators(TasksActions, dispatch),
   }
 }

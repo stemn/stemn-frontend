@@ -18,7 +18,7 @@ import classes from 'app/renderer/main/pages/ProjectPage/ProjectSettingsPage/Pro
 import { Field } from 'react-redux-form';
 import { Link } from 'react-router';
 import Toggle from 'app/renderer/main/components/Input/Toggle/Toggle'
-import Button from 'app/renderer/main/components/Buttons/Button/Button.jsx'
+import ProgressButton from 'app/renderer/main/components/Buttons/ProgressButton/ProgressButton.jsx'
 import FileSelectInputElectron from 'app/renderer/main/modules/FileSelectInput/FileSelectInputElectron.jsx'
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -77,9 +77,11 @@ export const Component = React.createClass({
         <div className={classes.panel}>
           <h3>Reset Application</h3>
           <p>Clear all cached data and reset the application back to factory settings.</p>
-          <Button className="warn" onClick={this.confirmReset}>
-            Clear data
-          </Button>
+          <div className="layout-row layout-align-end">
+            <ProgressButton className="warn" onClick={this.confirmReset}>
+              Clear data
+            </ProgressButton>
+          </div>
         </div>
       </div>
     );
