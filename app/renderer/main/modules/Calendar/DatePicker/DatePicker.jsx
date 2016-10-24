@@ -21,11 +21,12 @@ export const Component = React.createClass({
   },
   selectDate(date) {
     this.props.dispatch(actions.change(this.props.model, date ? date.format() : ''));
-    this.toggle(false)
+    this.toggle(false);
+    if(this.props.onChange){ this.props.onChange() }
   },
   render() {
     const { viewDate, isOpen } = this.state;
-    const { model, value, dispatch } = this.props;
+    const { model, value, dispatch, onChange } = this.props;
     const valueDate = value ? moment(value) : '';
 
     return (

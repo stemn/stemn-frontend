@@ -11,7 +11,7 @@ class Component extends React.Component{
         className={className}
         onChange={(e) => {
           dispatch(actions.change(model, e));
-          onChange()
+          if(onChange){ onChange() };
         }}
         value={value}
         placeholder={placeholder}

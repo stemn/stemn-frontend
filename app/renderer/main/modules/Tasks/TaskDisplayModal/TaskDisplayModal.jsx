@@ -82,6 +82,7 @@ export const Component = React.createClass({
                 <div className="text-title-4 flex" style={{marginLeft: '15px'}}>
                   <Textarea
                     model={`${entityModel}.data.name`}
+                    onChange={this.updateTask}
                     value={task.data.name}
                     className="input-plain"
                     type="text"
@@ -125,6 +126,7 @@ export const Component = React.createClass({
               <div style={{padding: '15px'}}>
                 <UserSelect
                   model={`${entityModel}.data.users`}
+                  onChange={this.updateTask}
                   value={task.data.users}
                   users={project.data.team}
                 />
@@ -137,6 +139,7 @@ export const Component = React.createClass({
               <div style={{padding: '15px'}}>
                 <DatePicker
                   model={`${entityModel}.data.due`}
+                  onChange={this.updateTask}
                   value={task.data.due}
                 />
               </div>

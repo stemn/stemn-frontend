@@ -11,7 +11,8 @@ import classNames from 'classnames';
 const Component = React.createClass({
   onChangeFn(items){
     const result = items.map(item => this.props.users.find(user => user._id == item.value));
-    this.props.dispatch(actions.change(this.props.model, result))
+    this.props.dispatch(actions.change(this.props.model, result));
+    if(this.props.onChange){ this.props.onChange() }
   },
   render(){
     const {model, value, users, dispatch} = this.props
