@@ -45,8 +45,8 @@ export const Component = React.createClass({
      return (
        <div className="layout-column layout-align-center-center text-center" style={{height: '100%'}}>
          <img src={comments} style={{width: '80px'}}/>
-         <div className="text-title-4" style={{marginBottom: '10px'}}>Task feed is empty</div>
-         <div className="text-title-5">Items will appear here when you commit, <br/>modify or comment on this task</div>
+         <div className="text-title-4" style={{marginBottom: '10px'}}>Task timeline is empty</div>
+         <div className="text-title-5">Items will appear here when you commit, <br/>modify or comment on this task.</div>
        </div>
       )
     }

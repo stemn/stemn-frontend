@@ -25,7 +25,6 @@ const eventTextMap = {
 }
 
 const getTextEventData = (item) => {
-  console.log(item.event);
   return eventTextMap[item.event] ? eventTextMap[item.event](item) : <span>Unknown Event Type</span>
 };
 

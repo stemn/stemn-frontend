@@ -18,7 +18,7 @@ import classes from './TaskListItem.css';
 
 // Sub Components
 import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
-import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx'
+import UserAvatars from 'app/renderer/main/components/Avatar/UserAvatars/UserAvatars.jsx'
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 import { MdMoreHoriz, MdOpenInNew } from 'react-icons/lib/md';
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
@@ -59,28 +59,6 @@ export const DueDate = React.createClass({
     }
   }
 });
-export const AsigneeAvatars = React.createClass({
-  render() {
-    const { asignees } = this.props
-    if(asignees && asignees.length > 0){
-      return (
-        <div>
-          {asignees.map( user =>
-            <UserAvatar
-              key={user._id}
-              picture={user.picture}
-              size="25px"
-            />
-          )}
-        </div>
-      )
-    }
-    else{
-      return null
-    }
-  }
-});
-
 
 const onMount = (nextProps, prevProps) => {
   if(!prevProps || prevProps.item != nextProps.item){
@@ -151,7 +129,7 @@ export const Component = React.createClass({
               : null
             }
             <div className={classes.listUser + ' layout-row layout-align-start-center text-ellipsis'}>
-              <AsigneeAvatars asignees={task.data.users} />
+              <UserAvatars users={task.data.users} limit={2}/>
             </div>
             <div className={classes.listDate}>
               <DueDate due={task.data.due}/>
@@ -196,7 +174,7 @@ export const Component = React.createClass({
                 placeholder="Task description"
               />
             </div>
-            <AsigneeAvatars asignees={task.data.users} />
+            <UserAvatars users={task.data.users} limit={2}/>
           </div>
             <div className={classes.cardFooter + ' layout-row layout-align-start-center'}>
               <div className="flex layout-row layout-align-start-center">

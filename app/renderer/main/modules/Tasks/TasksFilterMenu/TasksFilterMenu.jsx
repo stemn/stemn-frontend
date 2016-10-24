@@ -22,7 +22,7 @@ export const Component = React.createClass({
 
     const ownerFilter = [{
       text: 'My Tasks',
-      value: `asignee:${auth.user.stub}`
+      value: `assignee:${auth.user.stub}`
     },{
       text: 'All Tasks',
       value: ''

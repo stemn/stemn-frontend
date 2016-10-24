@@ -28,6 +28,11 @@ function queryByString(item, queryString){
   else if(queryString == 'is:incomplete'){
     return !item.data.complete
   }
+  // Assignee Query
+  else if(queryString.startsWith('assignee:')){
+    const assignee = queryString.replace('assignee:', '');
+    return item.data.users.find(user => user.stub == assignee);
+  }
   // Filter by the string itself (case independent)
   else if(queryString && queryString.length > 0){
     return new RegExp(queryString, 'i').test(item.data.name)
