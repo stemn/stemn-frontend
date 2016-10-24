@@ -5,7 +5,7 @@ import pify from 'pify';
 const jsonStorage = pify(require('electron-json-storage'))
 import { createMainWindow, showMainWindow } from './createMainWindow';
 import { createMenuBar, showMenuWindow } from './createMenuBarWindow';
-//import { initialise as wsInitialise, write as wsWrite } from './modules/websocket/websocket.js';
+import { initialise as wsInitialise, write as wsWrite } from './modules/websocket/websocket.js';
 import configureStore from '../shared/store/configureStore.main.js';
 import tray from './tray';
 import autoUpdater from './tasks/autoUpdater';

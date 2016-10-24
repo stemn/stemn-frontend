@@ -32,8 +32,9 @@ export default {
     new webpack.IgnorePlugin(/vertx/), // Ignore vertx so ES6 promise works: https://github.com/stefanpenner/es6-promise/issues/100
 
   ],
-  externals: [
+  externals: [{
     // put your node 3rd party libraries which can't be built with webpack here
     // (mysql, mongodb, and so on..)
-  ],
+    'ws' : 'ws'
+  }],
 };
