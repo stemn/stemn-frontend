@@ -124,8 +124,8 @@ export const Component = React.createClass({
               </div>
               <div style={{padding: '15px'}}>
                 <UserSelect
-                  model={`${entityModel}.data.asignee`}
-                  value={task.data.asignee}
+                  model={`${entityModel}.data.users`}
+                  value={task.data.users}
                   users={project.data.team}
                 />
               </div>

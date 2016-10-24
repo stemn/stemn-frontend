@@ -15,17 +15,18 @@ const statusFilter = [{
   value: ''
 }];
 
-const ownerFilter = [{
-  text: 'My Tasks',
-  value: 'author:DavidRevay'
-},{
-  text: 'All Tasks',
-  value: ''
-}];
 
 export const Component = React.createClass({
   render() {
-    const { model, value, dispatch } = this.props;
+    const { model, value, dispatch, auth } = this.props;
+
+    const ownerFilter = [{
+      text: 'My Tasks',
+      value: `asignee:${auth.user.stub}`
+    },{
+      text: 'All Tasks',
+      value: ''
+    }];
 
     /****************************************************
     model: the model representing the search string:
@@ -44,4 +45,10 @@ export const Component = React.createClass({
   }
 });
 
-export default connect()(Component);
+function mapStateToProps({ auth }) {
+  return {
+    auth
+  };
+}
+
+export default connect(mapStateToProps)(Component);

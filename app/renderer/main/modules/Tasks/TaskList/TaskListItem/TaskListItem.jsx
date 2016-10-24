@@ -51,7 +51,7 @@ export const DueDate = React.createClass({
 
     if(due){
       return (
-        <div style={style}>Due {moment(due).fromNow()}</div>
+        <div className="text-ellipsis" style={style}>Due {moment(due).fromNow()}</div>
       )
     }
     else {
@@ -61,17 +61,11 @@ export const DueDate = React.createClass({
 });
 export const AsigneeAvatars = React.createClass({
   render() {
-    const { asignees, team } = this.props
-    if(asignees && team){
-      // Get the asignees which are still on the team.
-      const assigneesWithData = asignees.reduce((prev, userId) => {
-        const userData = team.find(user => user._id == userId);
-        if(userData){prev.push({_id: userId, name: userData.name, picture: userData.picture})}
-        return prev
-      }, []);
+    const { asignees } = this.props
+    if(asignees && asignees.length > 0){
       return (
         <div>
-          {assigneesWithData.map( user =>
+          {asignees.map( user =>
             <UserAvatar
               key={user._id}
               picture={user.picture}
@@ -157,9 +151,9 @@ export const Component = React.createClass({
               : null
             }
             <div className={classes.listUser + ' layout-row layout-align-start-center text-ellipsis'}>
-              {has(task, 'data.asignee') && has(project, 'data.team') ? <AsigneeAvatars asignees={task.data.asignee} team={project.data.team}/> : null}
+              <AsigneeAvatars asignees={task.data.users} />
             </div>
-            <div className={classes.listDate + ' text-ellipsis'}>
+            <div className={classes.listDate}>
               <DueDate due={task.data.due}/>
             </div>
             <div className={classes.listActions + ' text-ellipsis layout-row layout-align-end-center'}>
@@ -202,7 +196,7 @@ export const Component = React.createClass({
                 placeholder="Task description"
               />
             </div>
-            {has(task, 'data.asignee') && has(project, 'data.team') ? <AsigneeAvatars asignees={task.data.asignee} team={project.data.team}/> : null}
+            <AsigneeAvatars asignees={task.data.users} />
           </div>
             <div className={classes.cardFooter + ' layout-row layout-align-start-center'}>
               <div className="flex layout-row layout-align-start-center">

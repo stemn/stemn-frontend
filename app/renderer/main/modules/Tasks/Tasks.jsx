@@ -32,25 +32,6 @@ const layouts = [{
   value: 'board'
 }];
 
-const statusFilter = [{
-  text: 'Status: Complete',
-  value: 'is:complete',
-},{
-  text: 'Status: Incomplete',
-  value: 'is:incomplete',
-},{
-  text: 'Status: All',
-  value: ''
-}];
-
-const ownerFilter = [{
-  text: 'My Tasks',
-  value: 'author:DavidRevay'
-},{
-  text: 'All Tasks',
-  value: ''
-}];
-
 export const Component = React.createClass({
   componentWillMount() {
     this.props.TasksActions.getBoard({
@@ -118,7 +99,7 @@ function mapStateToProps({ tasks, projects }, {projectId}) {
     tasks: tasks.data,
     project: projects[projectId],
     board: board,
-    boardModel: board && board.data && board.data._id ? `tasks.boards.${board.data._id}` : ''
+    boardModel: board && board.data && board.data._id ? `tasks.boards.${board.data._id}` : '',
   };
 }
 
