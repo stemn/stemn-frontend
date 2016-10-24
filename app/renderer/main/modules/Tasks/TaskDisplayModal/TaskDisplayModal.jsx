@@ -68,41 +68,42 @@ export const Component = React.createClass({
     }
 
     return (
-      <div className={classNames(classes.taskDisplayModal)}>
-        <div className="layout-row layout-align-start-center">
-          <Checkbox
-            model={`${entityModel}.data.complete`}
-            value={task.data.complete}
-            changeAction={this.toggleComplete}
-            className="text-primary"
-            circle={true} />
-          <div className="text-title-4 flex" style={{marginLeft: '15px'}}>
-            <Textarea
-              model={`${entityModel}.data.name`}
-              value={task.data.name}
-              className="input-plain"
-              type="text"
-              placeholder="Task description" />
-          </div>
-        </div>
-        <div className="text-grey-3" style={{padding: '10px 0 20px'}}>
-          Opened {moment(task.data.due).fromNow()} <b className="text-interpunct"></b> By <a className="link-primary">{task.data.owner.name}</a> <b className="text-interpunct"></b> {task.data.numComments} Comments
-        </div>
-
-        <div className="layout-row">
-          <div className="flex-70" style={{paddingRight: '15px'}}>
-            <div className="scroll-box" style={{maxHeight: '500px', paddingRight: '15px', borderTop: '1px solid rgba(0, 0, 0, 0.1)', borderBottom: '1px solid rgba(0, 0, 0, 0.1)'}}>
+      <div className={classNames(classes.taskDisplayModal, 'layout-column')}>
+        <div className="layout-row flex">
+          <div className="flex-70 layout-column">
+            <div className={classes.header}>
+              <div className="layout-row layout-align-start-center">
+                <Checkbox
+                  model={`${entityModel}.data.complete`}
+                  value={task.data.complete}
+                  changeAction={this.toggleComplete}
+                  className="text-primary"
+                  circle={true} />
+                <div className="text-title-4 flex" style={{marginLeft: '15px'}}>
+                  <Textarea
+                    model={`${entityModel}.data.name`}
+                    value={task.data.name}
+                    className="input-plain"
+                    type="text"
+                    placeholder="Task description" />
+                </div>
+              </div>
+              <div className="text-grey-3" style={{padding: '15px 0 20px'}}>
+                Created {moment(task.data.created).fromNow()} <b className="text-interpunct"></b> By <a className="link-primary">{task.data.owner.name}</a> <b className="text-interpunct"></b> {task.data.numComments} Comments
+              </div>
+            </div>
+            <div className={classes.timeline + ' flex scroll-box'}>
               <TaskTimeline taskId={taskId} board={board} />
             </div>
-            <div style={{paddingTop: '15px', paddingRight: '15px'}}>
+            <div className={classes.newComment}>
               <CommentNew taskId={taskId} />
             </div>
           </div>
-          <div className="flex">
+          <div className={classes.sidebar + ' flex'}>
             <div className={classes.well}>
-              <div className="text-mini-caps layout-row layout-align-start-end" style={{padding: '15px 15px 5px'}}>
+              <div className={classes.settingTitle + ' text-mini-caps layout-row layout-align-start-center'}>
                 <div className="flex">Labels</div>
-                <a title="Edit labels" style={{fontSize: '14px'}} onClick={this.showLabelEditModal}>+</a>
+                <a className={classes.add} title="Edit labels" onClick={this.showLabelEditModal}>+</a>
               </div>
               <div style={{maxHeight: '200px', overflowY: 'auto'}}>
                 {board && board.data && board.data.labels
@@ -118,9 +119,8 @@ export const Component = React.createClass({
               </div>
             </div>
             <div className={classes.well}>
-              <div className="text-mini-caps layout-row layout-align-start-end" style={{padding: '15px 15px 5px'}}>
+              <div className={classes.settingTitle + ' text-mini-caps layout-row layout-align-start-center'}>
                 <div className="flex">Asignees</div>
-                <a title="Add team members" style={{fontSize: '14px'}}>+</a>
               </div>
               <div style={{padding: '15px'}}>
                 <UserSelect
@@ -131,7 +131,9 @@ export const Component = React.createClass({
               </div>
             </div>
             <div className={classes.well}>
-              <div className="text-mini-caps" style={{padding: '15px 15px 5px'}}>Due Date</div>
+              <div className={classes.settingTitle + ' text-mini-caps layout-row layout-align-start-center'}>
+                Due Date
+              </div>
               <div style={{padding: '15px'}}>
                 <DatePicker
                   model={`${entityModel}.data.due`}

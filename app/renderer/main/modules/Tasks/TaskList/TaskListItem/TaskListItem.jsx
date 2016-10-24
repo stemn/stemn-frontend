@@ -28,6 +28,38 @@ import UserSelect from 'app/renderer/main/components/Users/UserSelect/UserSelect
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
+export const DueDate = React.createClass({
+  svgEl: '',
+  render() {
+    const { due } = this.props;
+
+    const day = 1000 * 60 * 60 * 24;
+    const colorMap = [
+      {
+        period: 1 * day,
+        color : 'red'
+      },{
+        period: 3 * day,
+        color : 'orange'
+      }
+    ]
+    const currentTime = moment().valueOf();
+    const dueTime     = moment(due).valueOf();
+    const difference  = dueTime - currentTime;
+    const currentInfo = colorMap.find(({period, color}) => difference < period);
+    const style       = currentInfo ? { color : currentInfo.color } : {color : 'rgba(0, 0, 0, 0.4)' };
+
+    if(due){
+      return (
+        <div style={style}>Due {moment(due).fromNow()}</div>
+      )
+    }
+    else {
+      return null
+    }
+  }
+});
+
 
 const onMount = (nextProps, prevProps) => {
   if(!prevProps || prevProps.item != nextProps.item){
@@ -105,7 +137,7 @@ export const Component = React.createClass({
               ) : null}
             </div>
             <div className={classes.listDate + ' text-ellipsis'}>
-              {moment(task.data.due).fromNow()}
+              <DueDate due={task.data.due}/>
             </div>
             <div className={classes.listActions + ' text-ellipsis layout-row layout-align-end-center'}>
               <SimpleIconButton onClick={this.showModal}>
@@ -148,30 +180,25 @@ export const Component = React.createClass({
               />
             </div>
 
-            {task.data.users && task.data.users.length > 0 ?
-              <PopoverMenu preferPlace="right" disableClickClose={true}>
-                <div>
-                  {task.data.users.map( user =>
-                    <UserAvatar
-                      key={user._id}
-                      picture={user.picture}
-                      size="25px"/>
-                  )}
-                </div>
-                <div className="PopoverMenu" style={{padding: '15px'}}>
-                  <UserSelect value="dropbox" />
-                </div>
-              </PopoverMenu>
-              : ''
+            {task.data.users && task.data.users.length > 0
+              ? task.data.users.map( user =>
+                <UserAvatar
+                  key={user._id}
+                  picture={user.picture}
+                  size="25px"
+                />
+              )
+              : null
             }
           </div>
-            <div className={classes.cardFooter + ' layout-row'}>
+            <div className={classes.cardFooter + ' layout-row layout-align-start-center'}>
               <div className="flex layout-row layout-align-start-center">
                 { task.data.labels && task.data.labels.length > 0 && board && board.data && board.data.labels ?
                 <TaskLabelDots labels={task.data.labels} labelInfo={board.data.labels} />
                   : null
                 }
               </div>
+              <div style={{padding: '0 5px'}}><DueDate due={task.data.due}/></div>
               <SimpleIconButton onClick={this.showModal}>
                 <MdOpenInNew size="20px"/>
               </SimpleIconButton>

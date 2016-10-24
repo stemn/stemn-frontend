@@ -4,3 +4,19 @@
   border: 1px solid rgba(0, 0, 0, 0.4) !important;
   margin-top: -1px;
 }
+.input{
+  color: #aaa;
+}
+.close{
+  padding: 10px;
+  z-index: 1;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999999;
+  font-size: 16px;
+}
+.close:hover{
+  color: black;
+}

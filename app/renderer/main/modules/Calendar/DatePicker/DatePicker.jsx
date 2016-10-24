@@ -17,10 +17,10 @@ export const Component = React.createClass({
     }
   },
   toggle(openStatus) {
-    this.setState({'isOpen': openStatus || !this.state.isOpen})
+    this.setState({isOpen: openStatus === undefined ? !this.state.isOpen : openStatus})
   },
   selectDate(date) {
-    this.props.dispatch(actions.change(this.props.model, date.format()));
+    this.props.dispatch(actions.change(this.props.model, date ? date.format() : ''));
     this.toggle(false)
   },
   render() {
@@ -30,9 +30,10 @@ export const Component = React.createClass({
 
     return (
       <div className="rel-box">
-        <div className={classNames('dr-input', {'active' : isOpen})} onClick={()=>this.toggle()}>
+        <div className={classNames('dr-input', classes.input, {'active' : isOpen})} onClick={()=>this.toggle()}>
           {valueDate ? valueDate.format('dddd, Do MMMM') : 'Select a due date'}
         </div>
+        {valueDate ? <a className={classes.close} onClick={() => this.selectDate()}>×</a> : null}
         {
           isOpen
           ?
