@@ -89,7 +89,7 @@ export const Component = React.createClass({
                 </div>
               </div>
               <div className="text-grey-3" style={{padding: '15px 0 20px'}}>
-                Created {moment(task.data.created).fromNow()} <b className="text-interpunct"></b> By <a className="link-primary">{task.data.owner.name}</a> <b className="text-interpunct"></b> {task.data.numComments} Comments
+                Created {moment(task.data.created).fromNow()} <b className="text-interpunct"></b> By <a className="link-primary">{task.data.owner.name}</a>
               </div>
             </div>
             <div className={classes.timeline + ' flex scroll-box'}>
@@ -156,7 +156,7 @@ function mapStateToProps({ tasks, projects }, {taskId}) {
   const boardModel    = has(task, 'data.board') ? `tasks.boards.${task.data.board}` : '';
   const project       = has(board, 'data.project') ? projects.data[board.data.project] : {};
   return {
-    task: task,
+    task,
     entityModel: `tasks.data.${taskId}`,
     board,
     boardModel,

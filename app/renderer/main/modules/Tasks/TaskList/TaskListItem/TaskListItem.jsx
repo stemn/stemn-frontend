@@ -9,6 +9,7 @@ import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js'
 // Component Core
 import React from 'react';
 import moment from 'moment';
+import { has } from 'lodash';
 import { Field } from 'react-redux-form';
 
 // Styles
@@ -29,7 +30,6 @@ import UserSelect from 'app/renderer/main/components/Users/UserSelect/UserSelect
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const DueDate = React.createClass({
-  svgEl: '',
   render() {
     const { due } = this.props;
 
@@ -55,6 +55,33 @@ export const DueDate = React.createClass({
       )
     }
     else {
+      return null
+    }
+  }
+});
+export const AsigneeAvatars = React.createClass({
+  render() {
+    const { asignees, team } = this.props
+    if(asignees && team){
+      // Get the asignees which are still on the team.
+      const assigneesWithData = asignees.reduce((prev, userId) => {
+        const userData = team.find(user => user._id == userId);
+        if(userData){prev.push({_id: userId, name: userData.name, picture: userData.picture})}
+        return prev
+      }, []);
+      return (
+        <div>
+          {assigneesWithData.map( user =>
+            <UserAvatar
+              key={user._id}
+              picture={user.picture}
+              size="25px"
+            />
+          )}
+        </div>
+      )
+    }
+    else{
       return null
     }
   }
@@ -101,7 +128,7 @@ export const Component = React.createClass({
     })
   },
   render() {
-    const { task, entityModel, draggable, layout, board } = this.props;
+    const { task, entityModel, draggable, layout, board, project } = this.props;
     if(!task || !task.data){
       return <div>Task Loading</div>
     }
@@ -130,11 +157,7 @@ export const Component = React.createClass({
               : null
             }
             <div className={classes.listUser + ' layout-row layout-align-start-center text-ellipsis'}>
-              {task.data.users ? task.data.users.map( user =>
-                <UserAvatar
-                  picture={user.picture}
-                  size="25px"/>
-              ) : null}
+              {has(task, 'data.asignee') && has(project, 'data.team') ? <AsigneeAvatars asignees={task.data.asignee} team={project.data.team}/> : null}
             </div>
             <div className={classes.listDate + ' text-ellipsis'}>
               <DueDate due={task.data.due}/>
@@ -179,17 +202,7 @@ export const Component = React.createClass({
                 placeholder="Task description"
               />
             </div>
-
-            {task.data.users && task.data.users.length > 0
-              ? task.data.users.map( user =>
-                <UserAvatar
-                  key={user._id}
-                  picture={user.picture}
-                  size="25px"
-                />
-              )
-              : null
-            }
+            {has(task, 'data.asignee') && has(project, 'data.team') ? <AsigneeAvatars asignees={task.data.asignee} team={project.data.team}/> : null}
           </div>
             <div className={classes.cardFooter + ' layout-row layout-align-start-center'}>
               <div className="flex layout-row layout-align-start-center">
@@ -214,15 +227,18 @@ export const Component = React.createClass({
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps({ tasks }, {item}) {
+function mapStateToProps({ tasks, projects }, {item}) {
   const task          = tasks.data[item];
-  const board         = task && task.data && task.data.board ? tasks.boards[task.data.board] : {};
-  const boardModel    = task && task.data && task.data.board ?`tasks.boards.${task.data.board}` : '';
+  const board         = has(task, 'data.board') ? tasks.boards[task.data.board] : {};
+  const boardModel    = has(task, 'data.board') ? `tasks.boards.${task.data.board}` : '';
+  const project       = has(board, 'data.project') ? projects.data[board.data.project] : {};
+
   return {
-    task: task,
+    task,
     entityModel: `tasks.data.${item}`,
     board,
-    boardModel
+    boardModel,
+    project
   };
 }
 

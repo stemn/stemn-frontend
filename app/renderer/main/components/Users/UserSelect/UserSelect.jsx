@@ -30,10 +30,10 @@ const Component = React.createClass({
           name="form-field-name"
           value={value}
           options={userOptions}
-          joinValues={true}
-          simpleValue={true}
           onChange={this.onChangeFn}
           clearable={false}
+          joinValues={true}
+          simpleValue={true}
           multi={true}
         />
       </div>
