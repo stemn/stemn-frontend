@@ -1,4 +1,3 @@
-import u from 'updeep';
 import i from 'icepick';
 import { cloneDeep } from 'lodash';
 import { modeled } from 'react-redux-form';
@@ -7,6 +6,16 @@ const initialState = {
   data: {},
   projects: {},
   events: {},
+  boards: {
+    /********************************
+    boardId: {
+      data: {the board data},
+      searchString: 'Some search string'
+      layout: 'board' || 'list'
+    }
+    ********************************/
+  },
+
 }
 
 const mainReducer = (state, action) => {
@@ -128,9 +137,11 @@ const mainReducer = (state, action) => {
 
     case 'TASKS/BEGIN_DRAG':
       return i.assocIn(state, ['data', action.payload.taskId, 'isDragging'], true)
-
     case 'TASKS/END_DRAG':
       return i.assocIn(state, ['data', action.payload.taskId, 'isDragging'], false)
+
+    case 'TASKS/CHANGE_LAYOUT':
+      return i.assocIn(state, ['boards', action.payload.boardId, 'layout'], action.payload.layout)
 
 
     default:
@@ -191,5 +202,8 @@ function addItem (keyItems, item) {
 }
 
 export default function (state = initialState, action) {
+  if (!state.hydrated) {
+    state = { ...initialState, ...state, hydrated: true };
+  }
   return modeled(mainReducer, 'tasks')(state, action)
 }

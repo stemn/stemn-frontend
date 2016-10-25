@@ -31,8 +31,9 @@ export default class Calendar extends Component {
     const { className, selectedDate, viewDate, type, weekOffset, renderDay, onNextMonth, onPrevMonth, onPickDate } = this.props;
 
     const calendarObject = createDateObjects(viewDate, weekOffset);
+
     calendarObject.forEach( item => {
-      if(item.day.format("YYYY-MM-DD") == selectedDate.format("YYYY-MM-DD")){
+      if(selectedDate && item.day.format("YYYY-MM-DD") == selectedDate.format("YYYY-MM-DD")){
         item.classNames = item.classNames ? item.classNames + ' selected' : 'selected';
       }
       if(item.day.format("YYYY-MM-DD") == moment().format("YYYY-MM-DD")){

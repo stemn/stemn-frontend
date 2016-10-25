@@ -12,7 +12,7 @@ import React from 'react';
 
 export const Component = React.createClass({
   componentWillReceiveProps(nextProps, prevProps) {
-    if(nextProps.auth.authToken){
+    if(nextProps.auth.authToken && nextProps.auth.user._id){
       nextProps.dispatch(push('/'))
     }
   },

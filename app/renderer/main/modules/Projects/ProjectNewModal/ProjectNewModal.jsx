@@ -24,7 +24,6 @@ import Textarea from 'app/renderer/main/components/Input/Textarea/Textarea';
 export const Component = React.createClass({
   createProject(){
     this.props.projectsActions.createProject(this.props.newProject);
-    this.props.dispatch(actions.change(this.props.entityModel, {}))
     this.props.modalHide();
   },
   render() {

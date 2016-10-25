@@ -60,7 +60,7 @@ export const Component = React.createClass({
     const { item, comment, entityModel, commentsActions, style } = this.props;
 
     if(!comment || !comment.data){
-      return <div>Comment Loading</div>
+      return null
     }
 
     return (

@@ -28,9 +28,11 @@ export const authenticate = ({provider}) => {
   let authHttpPromise = null;
 
   return new Promise((resolve, reject) => {
+    let ranAlready = false;
     // If the provider is supported
     if(oauthCreds[provider]){
       const url = oauthCreds[provider].url +'?'+ querystring.stringify(oauthCreds[provider].params);
+      console.log(url);
       const window = getWindow();
 
       window.loadURL(url);
@@ -41,10 +43,16 @@ export const authenticate = ({provider}) => {
 
       // Process the url if it changes - check for access token
       window.webContents.on('will-navigate', function (event, url) {
-        processToken(url);
+        if(!ranAlready){
+          processToken(newUrl);
+        }
+        ranAlready = true;
       });
       window.webContents.on('did-get-redirect-request', function (event, oldUrl, newUrl) {
-        processToken(newUrl);
+        if(!ranAlready){
+          processToken(newUrl);
+        }
+        ranAlready = true;
       });
 
       window.on('closed', () => {
@@ -54,9 +62,7 @@ export const authenticate = ({provider}) => {
       });
 
       const processToken = (url) => {
-        console.log(url);
          const params = provider == 'dropbox' ? querystring.parse(url.split('#')[1]) : querystring.parse(url.split('?')[1]);
-        console.log(params);
          if (params.access_token || params.code) {
           authHttpPromise = http({
             method: 'POST',

@@ -25,23 +25,15 @@ const FileChangeRowContext = ContextMenuLayer(contextIdentifier, (props) => prop
 
 export default React.createClass({
   render(){
-    const { changes, project, toggleAll, refresh, selectedFileChange, dispatch } = this.props;
+    const { changes, project, toggleAll, refresh, selectedFileChange, deselect, dispatch } = this.props;
     const groupedChanges = groupRevisions(changes.data);
     const allChecked = getToggleAllStatus(groupedChanges, changes.checked);
-
+//    ,{
+//      label: 'Filter: All Changes',
+//    },{
+//      label: 'Filter: My Changes',
+//    },
     const filterMenu = [{
-      label: 'Filter',
-      submenu: [{
-        label: 'Filter: All Changes',
-      },{
-        label: 'Filter: My Changes',
-      }]
-    },{
-      label: 'Filter: All Changes',
-    },{
-      label: 'Filter: My Changes',
-    },{
-      divider: true,
       label: 'Refresh',
       onClick: refresh
     }]
@@ -63,7 +55,7 @@ export default React.createClass({
           </FileChangeTitleRow>
           {
             groupedChanges.length > 0
-            ? <div className="scroll-box flex">
+            ? <div className="scroll-box layout-column flex">
               {groupedChanges.map((item, idx)=><FileChangeRowContext key={item._id}
                 item={item}
                 text={item.data.path}
@@ -72,6 +64,7 @@ export default React.createClass({
                 model={`changes.${project._id}.checked.${item.data.fileId}`}
                 value={changes.checked ? changes.checked[item.data.fileId] : false}
               />)}
+              <div className="flex" onClick={deselect} style={{minHeight: '60px'}}></div>
             </div>
             : <div className="layout-column layout-align-center-center text-title-4 flex">No Changes</div>
           }

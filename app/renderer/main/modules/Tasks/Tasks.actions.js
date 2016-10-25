@@ -319,5 +319,13 @@ export function showLabelEditModal({boardId}) {
     }))
   }
 }
-//`${this.props.boardModel}.formModels.TaskSettings.labels`,
-//  dispatch(actions.load(`${this.props.boardModel}.formModels.TaskSettings.labels`, this.props.board.data.labels));
+
+export function changeLayout({boardId, layout}) {
+  return {
+    type: 'TASKS/CHANGE_LAYOUT',
+    payload: {
+      boardId,
+      layout
+    }
+  }
+}

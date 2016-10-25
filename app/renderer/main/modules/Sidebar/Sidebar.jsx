@@ -53,8 +53,7 @@ export const Component = React.createClass({
     const sidebarStyle = classNames('layout-column', 'flex' ,'rel-box', styles.sidebar);
 
     const nameRegex = new RegExp(this.props.sidebar.searchString, 'i');
-    const filteredProjects = projects.userProjects.data ? projects.userProjects.data.filter((project) => nameRegex.test(project.name)) : [];
-    const routeState = {meta : {scope: ['main', 'menubar']}};
+    const filteredProjects = projects.userProjects.data ? projects.userProjects.data.filter(project => nameRegex.test(project.name)) : [];
 
     const projectContextMenu = [{
       label: 'Open Folder',
@@ -116,24 +115,24 @@ export const Component = React.createClass({
           </div>
 
           <div className="scroll-box flex">
-            {filteredProjects.map((item, idx) => <ProjectWithContext key={idx} item={item} isActive={item._id == this.props.params.stub} to={{pathname: `/project/${item._id}`, state: routeState}}/>)}
+            {filteredProjects.map((item, idx) => <ProjectWithContext key={idx} item={item} isActive={item._id == this.props.params.stub} to={`/project/${item._id}`}/>)}
             <ContextMenu identifier={projectContextIdentifier} menu={projectContextMenu}/>
           </div>
 
           <div>
             <div className="layout-row layout-align-start-center">
               <PopoverMenu>
-                <Link to="/settings/application" className="flex">
+                <a className="flex">
                   <div className={userStyles.userWrapper + ' flex layout-row layout-align-start-center'}>
                     <UserAvatar picture={this.props.auth.user.picture} className={userStyles.userAvatar}/>
                     <div className="flex text-ellipsis">
                       {this.props.auth.user.name}
                     </div>
                   </div>
-                </Link>
+                </a>
                 <div className="PopoverMenu">
-                  <a href="#/settings/account">Account Settings</a>
                   <a href="#/settings/application">Application Settings</a>
+                  <a href="#/settings/account">Account Settings</a>
                   <a onClick={()=>{this.props.authActions.logout()}}>Sign out</a>
                 </div>
               </PopoverMenu>

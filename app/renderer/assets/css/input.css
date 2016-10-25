@@ -7,6 +7,7 @@
   width: 100%;
   border: 1px solid border1;
   resize: none;
+  background: white;
 }
 .dr-input:global(.active) {
   border: 1px solid rgba(0, 0, 0, 0.4);

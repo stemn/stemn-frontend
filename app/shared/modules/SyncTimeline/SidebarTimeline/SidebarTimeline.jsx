@@ -49,7 +49,7 @@ export default React.createClass({
     }
   },
   render() {
-    const { selected, items, loading, onSelect, query, queryModel, refresh } = this.props;
+    const { selected, items, loading, onSelect, query, queryModel, refresh, deselect } = this.props;
     const filteredItems = this.filterItems(items, query);
     return (
       <div className="layout-column flex">
@@ -65,22 +65,26 @@ export default React.createClass({
             </div>
           </PopoverMenu>
         </FileChangeTitleRow>
-        <div className="scroll-box flex rel-box">
-          {
-            filteredItems && filteredItems.length > 0
-            ? filteredItems.map((item)=>
-              <SidebarTimelineRow
-                item={item}
-                key={item._id}
-                isActive={item._id == selected}
-                clickFn={()=>onSelect(item)} />
-              )
-            : <div className="layout-column layout-align-center-center flex" style={{height: '100%'}}>
-                <div className="text-center text-title-4">No Feed items yet</div>
-              </div>
-          }
-          <LoadingOverlay show={loading} />
-        </div>
+        {
+          filteredItems && filteredItems.length > 0
+          ? (
+          <div className="scroll-box layout-column flex">
+            <div>
+               {filteredItems.map(item=>
+                <SidebarTimelineRow
+                  item={item}
+                  key={item._id}
+                  isActive={item._id == selected}
+                  clickFn={()=>onSelect(item)}
+                />
+              )}
+            </div>
+            <div className="flex" onClick={deselect} style={{minHeight: '60px'}}></div>
+          </div>
+          )
+          : <div className="layout-column layout-align-center-center text-title-4 flex">No Feed items yet</div>
+        }
+        <LoadingOverlay show={loading} />
       </div>
     )
   }

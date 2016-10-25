@@ -9,10 +9,10 @@ import { actions } from 'react-redux-form';
 import classNames from 'classnames';
 
 const Component = React.createClass({
-  onChangeFn(val){
-    console.log(val);
-    const array =  val.split(',');
-    this.props.dispatch(actions.change(this.props.model, array))
+  onChangeFn(items){
+    const result = items.map(item => this.props.users.find(user => user._id == item.value));
+    this.props.dispatch(actions.change(this.props.model, result));
+    if(this.props.onChange){ this.props.onChange() }
   },
   render(){
     const {model, value, users, dispatch} = this.props
@@ -24,14 +24,14 @@ const Component = React.createClass({
       }
     });
 
+    const mappedValue = value.map(user => user._id);
+
     return (
       <div>
         <Select
           name="form-field-name"
-          value={value}
+          value={mappedValue}
           options={userOptions}
-          joinValues={true}
-          simpleValue={true}
           onChange={this.onChangeFn}
           clearable={false}
           multi={true}
@@ -40,6 +40,5 @@ const Component = React.createClass({
     );
   }
 });
-
 
 export default connect()(Component);

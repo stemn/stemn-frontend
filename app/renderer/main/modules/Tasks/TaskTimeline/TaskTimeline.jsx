@@ -16,6 +16,7 @@ import classes from './TaskTimeline.css';
 // Sub Components
 import Comment from 'app/renderer/main/modules/Comments/Comment/Comment.jsx';
 import TaskTimelineItem from './TaskTimelineItem/TaskTimelineItem.jsx';
+import comments      from 'app/renderer/assets/images/pure-vectors/comments.svg';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -36,13 +37,19 @@ export const Component = React.createClass({
 
   render() {
     const { events, entityModel, board } = this.props;
-    return (
-      <div>
-        {events && events.data ? events.data.map(item =>
-          <TaskTimelineItem key={item._id} item={item} board={board} />
-        ) : ''}
-      </div>
-    )
+
+    if(events && events.data && events.data.length > 0){
+      return <div>{events.data.map(item => <TaskTimelineItem key={item._id} item={item} board={board} /> )}</div>
+    }
+    else{
+     return (
+       <div className="layout-column layout-align-center-center text-center" style={{height: '100%'}}>
+         <img src={comments} style={{width: '80px'}}/>
+         <div className="text-title-4" style={{marginBottom: '10px'}}>Task timeline is empty</div>
+         <div className="text-title-5">Items will appear here when you commit, <br/>modify or comment on this task.</div>
+       </div>
+      )
+    }
   }
 });
 

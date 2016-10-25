@@ -5,6 +5,7 @@ import providerPathLookup from '../../main/modules/files/providerPathLookup.js';
 
 import Promise from 'es6-promise';
 import { shell } from 'electron';
+import { has } from 'lodash';
 
 export function getProviderPath() {
   return {
@@ -47,8 +48,9 @@ export function openFile({location, path, projectId, provider}) {
       }
     };
 
-    const computerToProvider = getState().system.providerPath[provider];
-    const providerToProject  = getState()[localPathModuleName] ? getState()[localPathModuleName][projectId].data : false;
+    const storeState = getState();
+    const computerToProvider = storeState.system.providerPath[provider];
+    const providerToProject  = has(storeState, [localPathModuleName, projectId, 'data']) ? storeState[localPathModuleName][projectId].data : false;
 
     if(!providerToProject){
       dispatch(LocalPathActions.getPath({projectId})).then(response => {
@@ -59,6 +61,13 @@ export function openFile({location, path, projectId, provider}) {
       return open(computerToProvider, providerToProject, path)
     }
   }
+}
+
+export function currentVersion({version}) {
+  return {
+    type: 'SYSTEM/CURRENT_VERSION',
+    payload: {version}
+  };
 }
 
 export function checkingForUpdate() {

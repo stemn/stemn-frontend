@@ -9,6 +9,7 @@ import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js'
 // Component Core
 import React from 'react';
 import moment from 'moment';
+import { has } from 'lodash';
 import { Field } from 'react-redux-form';
 
 // Styles
@@ -17,7 +18,7 @@ import classes from './TaskListItem.css';
 
 // Sub Components
 import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
-import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx'
+import UserAvatars from 'app/renderer/main/components/Avatar/UserAvatars/UserAvatars.jsx'
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 import { MdMoreHoriz, MdOpenInNew } from 'react-icons/lib/md';
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
@@ -28,6 +29,36 @@ import UserSelect from 'app/renderer/main/components/Users/UserSelect/UserSelect
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
+export const DueDate = React.createClass({
+  render() {
+    const { due } = this.props;
+
+    const day = 1000 * 60 * 60 * 24;
+    const colorMap = [
+      {
+        period: 1 * day,
+        color : 'red'
+      },{
+        period: 3 * day,
+        color : 'orange'
+      }
+    ]
+    const currentTime = moment().valueOf();
+    const dueTime     = moment(due).valueOf();
+    const difference  = dueTime - currentTime;
+    const currentInfo = colorMap.find(({period, color}) => difference < period);
+    const style       = currentInfo ? { color : currentInfo.color } : {color : 'rgba(0, 0, 0, 0.4)' };
+
+    if(due){
+      return (
+        <div className="text-ellipsis" style={style}>Due {moment(due).fromNow()}</div>
+      )
+    }
+    else {
+      return null
+    }
+  }
+});
 
 const onMount = (nextProps, prevProps) => {
   if(!prevProps || prevProps.item != nextProps.item){
@@ -69,9 +100,9 @@ export const Component = React.createClass({
     })
   },
   render() {
-    const { task, entityModel, draggable, layout, board } = this.props;
+    const { task, entityModel, draggable, layout, board, project } = this.props;
     if(!task || !task.data){
-      return <div>Task Loading</div>
+      return null
     }
     if(layout == 'list'){
       return (
@@ -98,17 +129,13 @@ export const Component = React.createClass({
               : null
             }
             <div className={classes.listUser + ' layout-row layout-align-start-center text-ellipsis'}>
-              {task.data.users ? task.data.users.map( user =>
-                <UserAvatar
-                  picture={user.picture}
-                  size="25px"/>
-              ) : null}
+              <UserAvatars users={task.data.users} limit={3}/>
             </div>
-            <div className={classes.listDate + ' text-ellipsis'}>
-              {moment(task.data.due).fromNow()}
+            <div className={classes.listDate}>
+              <DueDate due={task.data.due}/>
             </div>
             <div className={classes.listActions + ' text-ellipsis layout-row layout-align-end-center'}>
-              <SimpleIconButton onClick={this.showModal}>
+              <SimpleIconButton onClick={this.showModal} title="Show Task">
                 <MdOpenInNew size="20px"/>
               </SimpleIconButton>
               <PopoverMenu preferPlace="below">
@@ -147,32 +174,17 @@ export const Component = React.createClass({
                 placeholder="Task description"
               />
             </div>
-
-            {task.data.users && task.data.users.length > 0 ?
-              <PopoverMenu preferPlace="right" disableClickClose={true}>
-                <div>
-                  {task.data.users.map( user =>
-                    <UserAvatar
-                      key={user._id}
-                      picture={user.picture}
-                      size="25px"/>
-                  )}
-                </div>
-                <div className="PopoverMenu" style={{padding: '15px'}}>
-                  <UserSelect value="dropbox" />
-                </div>
-              </PopoverMenu>
-              : ''
-            }
+            <UserAvatars users={task.data.users} limit={2}/>
           </div>
-            <div className={classes.cardFooter + ' layout-row'}>
+            <div className={classes.cardFooter + ' layout-row layout-align-start-center'}>
               <div className="flex layout-row layout-align-start-center">
                 { task.data.labels && task.data.labels.length > 0 && board && board.data && board.data.labels ?
                 <TaskLabelDots labels={task.data.labels} labelInfo={board.data.labels} />
                   : null
                 }
               </div>
-              <SimpleIconButton onClick={this.showModal}>
+              <div style={{padding: '0 5px'}}><DueDate due={task.data.due}/></div>
+              <SimpleIconButton onClick={this.showModal} title="Show Task">
                 <MdOpenInNew size="20px"/>
               </SimpleIconButton>
             </div>
@@ -187,15 +199,18 @@ export const Component = React.createClass({
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps({ tasks }, {item}) {
+function mapStateToProps({ tasks, projects }, {item}) {
   const task          = tasks.data[item];
-  const board         = task && task.data && task.data.board ? tasks.boards[task.data.board] : {};
-  const boardModel    = task && task.data && task.data.board ?`tasks.boards.${task.data.board}` : '';
+  const board         = has(task, 'data.board') ? tasks.boards[task.data.board] : {};
+  const boardModel    = has(task, 'data.board') ? `tasks.boards.${task.data.board}` : '';
+  const project       = has(board, 'data.project') ? projects.data[board.data.project] : {};
+
   return {
-    task: task,
+    task,
     entityModel: `tasks.data.${item}`,
     board,
-    boardModel
+    boardModel,
+    project
   };
 }
 

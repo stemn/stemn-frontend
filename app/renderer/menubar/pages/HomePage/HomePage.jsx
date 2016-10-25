@@ -16,7 +16,7 @@ export default class extends React.Component{
         </Toolbar>
         <div className="flex layout-column layout-align-center-center">
           <img src={book} style={{width: '100px', height: '100px'}} />
-          <div className="text-title-4" style={{marginTop: '20px'}}>No Project Selected</div>
+          <div className="text-title-5" style={{marginTop: '20px'}}>No Project Selected</div>
         </div>
       </div>
     );

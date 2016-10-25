@@ -1,15 +1,16 @@
-import { createSocket } from 'primus';
-import 'ws';
+import primus from '../../../primus-websockets.js';
+import ws from 'ws';
 
-const Socket = createSocket({ transformer : 'websockets' });
+console.log('ws', !!ws);
+console.log('primus', !!primus);
 
-const lib = {
-  log : (data) => console.log(data)
-};
 
 export const initialise = (config) => {
 
-  const socket = new Socket(`${config.host}:${config.port}`);
+  const socket = primus.connect(`${config.host}:${config.port}`);
+
+//  console.log('primus', socket);
+//  const socket = new Socket(`${config.host}:${config.port}`);
 
   const socketError = (err) => socket.write({
     type : 'log',

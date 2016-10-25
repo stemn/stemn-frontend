@@ -1,6 +1,15 @@
+export function deselect({projectId}) {
+  return {
+    type:'TIMELINE/DESELECT_ITEM',
+    payload: {
+      projectId,
+    },
+  }
+}
+
 export function selectTimelineItem({projectId, selected}) {
   return {
-    type:'SELECT_TIMELINE_ITEM',
+    type:'TIMELINE/SELECT_ITEM',
     payload: {
       projectId,
       selected

@@ -1,11 +1,40 @@
 @value primary, border1, bg1 from "app/renderer/assets/css/themes/standard.css";
 
 .taskDisplayModal{
-  padding: 30px;
   width: 950px;
+  height: 650px;
 }
+
 
 .well{
   margin-bottom: 15px;
-  border: 1px solid border1;
+}
+.header{
+  padding: 15px 15px 0;
+  border-bottom: 1px solid rgb(230, 230, 230);
+  z-index: 1;
+}
+.timeline{
+  margin-top: -1px;
+  padding: 0 30px;
+  border-bottom: 1px solid rgb(230, 230, 230);
+}
+.newComment{
+  padding: 0 30px;
+}
+.sidebar{
+  background: bg1;
+  border-left: 1px solid border1;
+}
+.add{
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+  padding: 5px;
+}
+.add:hover{
+  color: black;
+}
+
+.settingTitle{
+  padding: 15px 12px 0px 15px;
 }

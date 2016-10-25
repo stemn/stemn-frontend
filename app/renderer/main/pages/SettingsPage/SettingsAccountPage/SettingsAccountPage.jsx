@@ -16,7 +16,7 @@ import classes from 'app/renderer/main/pages/ProjectPage/ProjectSettingsPage/Pro
 // Sub Components
 import { Field } from 'react-redux-form';
 import Upload from 'app/renderer/main/modules/Upload/Upload.jsx'
-import Button from 'app/renderer/main/components/Buttons/Button/Button.jsx'
+import ProgressButton from 'app/renderer/main/components/Buttons/ProgressButton/ProgressButton.jsx'
 import LinkAccount from 'app/renderer/main/modules/Settings/LinkAccount/LinkAccount.jsx'
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
@@ -46,7 +46,7 @@ export const Component = React.createClass({
               uploadId="UserSettingsAvatar"
             />
             <div className="layout-row layout-align-end">
-              <Button className="primary" onClick={()=>this.linkRemote()}>Save</Button>
+              <ProgressButton className="primary" onClick={()=>this.saveUser()}>Update Avatar</ProgressButton>
             </div>
           </div>
 
@@ -66,7 +66,7 @@ export const Component = React.createClass({
             </Field>
             <br />
             <div className="layout-row layout-align-end">
-              <Button className="primary" onClick={()=>this.linkRemote()}>Save</Button>
+              <ProgressButton className="primary" onClick={()=>this.saveUser()}>Save Profile</ProgressButton>
             </div>
           </div>
 
@@ -87,7 +87,9 @@ export const Component = React.createClass({
           <div className={classes.panel}>
             <h3>Logout</h3>
             <p>Logout from this account.</p>
-            <Button className="warn" onClick={authActions.logout}>Logout</Button>
+            <div className="layout-row layout-align-end">
+              <ProgressButton className="warn" onClick={authActions.logout}>Logout</ProgressButton>
+            </div>
           </div>
         </div>
       )

@@ -1,12 +1,12 @@
 @value primary, border1, bg1, grey-3 from "app/renderer/assets/css/themes/standard.css";
 
 .comment{
-
 }
 .commentAvatar{
   margin-right: 10px
 }
 .commentBody{
+  background: white;
   border: 1px solid border1;
   line-height: 1.5em;
 }

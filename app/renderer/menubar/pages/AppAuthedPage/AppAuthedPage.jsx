@@ -5,6 +5,7 @@ import { push } from 'react-router-redux'
 
 // Component Core
 import React from 'react';
+import { has } from 'lodash';
 
 // Sub Components
 import Sidebar            from 'app/renderer/menubar/modules/Sidebar/Sidebar.jsx'
@@ -12,11 +13,16 @@ import Sidebar            from 'app/renderer/menubar/modules/Sidebar/Sidebar.jsx
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
-  componentWillReceiveProps(nextProps, prevProps) {
-    if(!nextProps.auth.authToken){
+  onMount(nextProps, prevProps){
+    if(!nextProps.auth.authToken || !nextProps.auth.user._id){
       nextProps.dispatch(push('/login'))
     }
+    if(!has(nextProps, 'params.stub') || nextProps.activeProject != nextProps.params.stub){
+      nextProps.dispatch(push(`/project/${nextProps.activeProject}`))
+    }
   },
+  componentWillMount() { this.onMount(this.props) },
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
   render() {
     const { children } = this.props
 
@@ -32,8 +38,11 @@ export const Component = React.createClass({
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps({ auth }) {
-  return { auth };
+function mapStateToProps({ auth, projects }) {
+  return {
+    auth,
+    activeProject: projects.activeProject
+  };
 }
 
 function mapDispatchToProps(dispatch) {

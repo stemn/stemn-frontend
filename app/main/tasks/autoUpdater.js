@@ -3,6 +3,7 @@ import os from 'os';
 import { autoUpdater } from 'electron';
 import pkg from '../../package.json';
 import {
+  currentVersion,
   checkingForUpdate,
   updateAvailable,
   updateDownloaded,
@@ -13,34 +14,36 @@ import {
 const UPDATE_SERVER = 'timesheets-app.herokuapp.com';
 
 export default function (store) {
-  if (process.env.NODE_ENV !== 'production') {
-    return;
-  }
-
-  if (os.platform() !== 'darwin') {
-    return;
-  }
-
   const { version } = pkg;
+  store.dispatch(currentVersion({version}))
 
-  autoUpdater.addListener('checking-for-update', () => {
-    store.dispatch(checkingForUpdate());
-  });
-  autoUpdater.addListener('update-available', () => {
-    store.dispatch(updateAvailable());
-  });
-  autoUpdater.addListener('update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateURL) => {
-    store.dispatch(updateDownloaded(releaseNotes, releaseName, releaseDate, updateURL));
-  });
-  autoUpdater.addListener('error', (error) => {
-    store.dispatch(updateError(error));
-  });
-  autoUpdater.addListener('update-not-available', () => {
-    store.dispatch(updateNotAvailable());
-  });
+//  if (process.env.NODE_ENV !== 'production') {
+//    return;
+//  }
+//
+//  if (os.platform() !== 'darwin') {
+//    return;
+//  }
 
-  store.dispatch(checkingForUpdate());
-
-  autoUpdater.setFeedURL(`http://${UPDATE_SERVER}/update/${os.platform()}_${os.arch()}/${version}`);
-  autoUpdater.checkForUpdates();
+//
+//  autoUpdater.addListener('checking-for-update', () => {
+//    store.dispatch(checkingForUpdate());
+//  });
+//  autoUpdater.addListener('update-available', () => {
+//    store.dispatch(updateAvailable());
+//  });
+//  autoUpdater.addListener('update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateURL) => {
+//    store.dispatch(updateDownloaded(releaseNotes, releaseName, releaseDate, updateURL));
+//  });
+//  autoUpdater.addListener('error', (error) => {
+//    store.dispatch(updateError(error));
+//  });
+//  autoUpdater.addListener('update-not-available', () => {
+//    store.dispatch(updateNotAvailable());
+//  });
+//
+//  store.dispatch(checkingForUpdate());
+//
+//  autoUpdater.setFeedURL(`http://${UPDATE_SERVER}/update/${os.platform()}_${os.arch()}/${version}`);
+//  autoUpdater.checkForUpdates();
 }

@@ -2,6 +2,14 @@ import http from 'axios';
 import { push } from 'react-router-redux'
 import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 
+export function setActiveProject({projectId}) {
+  return {
+    type: 'PROJECTS/SET_ACTIVE_PROJECT',
+    payload: {
+      projectId
+    }
+  }
+}
 export function getProject({projectId}) {
   return {
     type: 'PROJECTS/GET_PROJECT',
@@ -22,9 +30,8 @@ export function createProject(project) {
         url: `/api/v1/projects`,
         data: project
       }).then((response)=>{
-        dispatch(push(`/project/${response.data._id}/settings`))
-      }).catch((response)=>{
-
+        dispatch(push(`/project/${response.data._id}/settings`));
+        return response;
       })
     });
   }
@@ -53,7 +60,7 @@ export function confirmDeleteProject({projectId}) {
   return ModalActions.showConfirm({
     message: 'Deleting a project is permanent. You will not be able to undo this.',
     modalConfirm: {
-      functionAlias: 'ProjectActions.deleteProject',
+      functionAlias: 'ProjectsActions.deleteProject',
       functionInputs: { projectId }
     }
   })

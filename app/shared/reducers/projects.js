@@ -3,15 +3,24 @@ import i from 'icepick';
 
 const initialState = {
   data: {},
+  activeProject: '',        // The currently active project
   userProjects: {
     loading: false,
     data: []
   },
-  newProject: {}
+  newProject: {
+    summary: '',
+    name: '',
+    savePending: ''
+  }
 }
 
 function reducer(state, action) {
   switch (action.type) {
+    case 'PROJECTS/SET_ACTIVE_PROJECT':
+      return {...state,
+        activeProject: action.payload.projectId
+      }
     case 'PROJECTS/GET_PROJECT_FULFILLED' :
       return i.assocIn(state, ['data', action.payload.data._id, 'data'], action.payload.data)
     case 'PROJECTS/ADD_TEAM_MEMBER' :
@@ -53,6 +62,18 @@ function reducer(state, action) {
       return i.assocIn(state, ['userProjects'], {loading: false, data: action.payload.data})
     case 'PROJECTS/GET_USER_PROJECTS_REJECTED':
       return i.assocIn(state, ['userProjects', 'loading'], false)
+
+    case 'PROJECTS/CREATE_PROJECT_PENDING':
+      return i.assocIn(state, ['newProject', 'savePending'], true)
+    case 'PROJECTS/CREATE_PROJECT_REJECTED':
+      return i.assocIn(state, ['newProject', 'savePending'], false)
+    case 'PROJECTS/CREATE_PROJECT_FULFILLED':
+      return i.chain(state)
+      .assoc('newProject', {})                             // Clear the newProject object
+      .updateIn(['userProjects', 'data'], (projects) => {  // Push the new project onto the userProjects array
+        return i.push(projects, action.payload.data);
+      })
+      .value();
 
     case 'PROJECTS/SAVE_PROJECT_PENDING':
       return i.assocIn(state, ['data', action.meta.projectId, 'savePending'], true)

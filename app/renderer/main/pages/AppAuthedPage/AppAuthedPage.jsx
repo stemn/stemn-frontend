@@ -16,14 +16,18 @@ import Sidebar  from 'app/renderer/main/modules/Sidebar/Sidebar.jsx';
 
 export const Component = React.createClass({
   componentWillReceiveProps(nextProps, prevProps) {
-    if(!nextProps.auth.authToken){
+    if(!nextProps.auth.authToken || !nextProps.auth.user._id){
       nextProps.dispatch(push('/login'))
     }
-
+  },
+  componentDidMount(){
     // Resize the window
     const window = electron.remote.getCurrentWindow();
-    window.setMinimumSize(1000, 600);
+    window.setMinimumSize(500, 500);
     window.setResizable(true);
+//    window.setSize(1200, 720, true);
+//    window.setFullScreenable(true);
+    window.maximize();
   },
   render() {
     const { children } = this.props

@@ -2,6 +2,8 @@
   height: 600px;
 }
 .imageSection{
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
   background-size: cover;
   width: 600px;
   position: relative;

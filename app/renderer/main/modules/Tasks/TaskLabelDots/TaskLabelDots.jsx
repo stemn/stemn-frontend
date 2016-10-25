@@ -18,9 +18,9 @@ export default React.createClass({
           if(info){
             return (
               <span key={labelId}
-                className={classNames({[classes.tag] : tag}, {[classes.dot] : !tag}, {'tooltip' : !tag})}
+                className={classNames({[classes.tag] : tag}, {[classes.dot] : !tag})}
                 style={{background: info.color}}
-                alt={info.name}>{tag ? <span>{info.name}</span> : null}</span>
+                title={!tag ? info.name : ''}>{tag ? <span>{info.name}</span> : null}</span>
             )
           }
           else{

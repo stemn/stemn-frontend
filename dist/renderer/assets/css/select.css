@@ -213,7 +213,6 @@
 
 :global(.Select--multi .Select-multi-value-wrapper) {
   display: inline-block;
-  height: 34px;
 }
 
 :global(.Select .Select-aria-only) {

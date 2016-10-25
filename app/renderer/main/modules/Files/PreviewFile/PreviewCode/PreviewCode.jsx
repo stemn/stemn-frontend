@@ -21,7 +21,8 @@ export const Viewer = React.createClass({
           lineNumbers: true,
         });
         // Get Mode
-        const mode = codemirror.findModeByExtension(extension).mode;
+        const modeInfo = codemirror.findModeByExtension(extension);
+        const mode = modeInfo ? modeInfo.mode : 'null';
         if(mode && mode != 'null'){
           const modePath = `./${mode}/${mode}.js`
           requireCodemirrorMode(modePath);

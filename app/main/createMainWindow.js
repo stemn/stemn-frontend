@@ -24,8 +24,8 @@ export const createMainWindow =  function createWindow({ uri = '/' } = {}) {
     show: false,
     width: 1000,
     height: 600,
-    minWidth: 1000,
-    minHeight: 600,
+    minWidth: 500,
+    minHeight: 500,
     frame: process.platform == 'darwin' ? true : false
   });
 

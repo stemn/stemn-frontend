@@ -1,5 +1,4 @@
-import u from 'updeep';
-
+import i from 'icepick';
 const initialState = {
 
 };
@@ -7,46 +6,26 @@ const initialState = {
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case 'FILE_LIST/FETCH_FILES_PENDING':
-      return u({
-        [action.meta.key] : {
-          loading: true
-        }
-      }, state)
-    case 'FILE_LIST/FETCH_FILES_FULFILLED':
-      return u({
-        [action.meta.key] : {
-          entries : action.payload.data.entries,
-          folder  : action.payload.data.folder,
-          loading : false
-        }
-      }, state)
+      return i.assocIn(state, [action.meta.key, 'loading'], true)
     case 'FILE_LIST/FETCH_FILES_REJECTED':
-      return u({
-        [action.meta.key] : {
-          loading: false
-        }
-      }, state)
+      return i.assocIn(state, [action.meta.key, 'loading'], false)
+    case 'FILE_LIST/FETCH_FILES_FULFILLED':
+      return i.assoc(state, action.meta.key, {
+        entries : action.payload.data.entries,
+        folder  : action.payload.data.folder,
+        loading : false
+      })
 
     case 'FILE_LIST/EXPLORE_FOLDER_PENDING':
-      return u({
-        [action.meta.key] : {
-          loading: true
-        }
-      }, state)
-    case 'FILE_LIST/EXPLORE_FOLDER_FULFILLED':
-      return u({
-        [action.meta.key] : {
-          entries : action.payload.data.entries,
-          folder  : action.payload.data.folder,
-          loading : false
-        }
-      }, state)
+      return i.assocIn(state, [action.meta.key, 'loading'], true)
     case 'FILE_LIST/EXPLORE_FOLDER_REJECTED':
-      return u({
-        [action.meta.key] : {
-          loading: false
-        }
-      }, state)
+      return i.assocIn(state, [action.meta.key, 'loading'], false)
+    case 'FILE_LIST/EXPLORE_FOLDER_FULFILLED':
+      return i.assoc(state, action.meta.key, {
+        entries : action.payload.data.entries,
+        folder  : action.payload.data.folder,
+        loading : false
+      })
     default:
       return state;
   }

@@ -15,10 +15,10 @@ const routerFix = store => next => action => {
     action.meta = action.payload.state.meta;
     delete action.payload.state.meta;
   }
-  // Close modals
-  if(action.type == '@@router/LOCATION_CHANGE'){
-    store.dispatch(modalActions.closeAll())
-  }
+//  // Close modals
+//  if(action.type == '@@router/LOCATION_CHANGE'){
+//    store.dispatch(modalActions.closeAll())
+//  }
   return next(action);
 };
 

@@ -34,26 +34,18 @@ const AuthActions = require('../../shared/actions/auth');
 export default (store) => {
 
   const requireAuth = (nextState, replace, callback) => {
-    if (!store.getState().auth.authToken) {
-      replace('/login');
-    }
-    else{
+    if (store.getState().auth.authToken) {
       store.dispatch(AuthActions.initHttpHeaders('bearer '+ store.getState().auth.authToken));
       setTimeout(()=>store.dispatch(AuthActions.loadUserData()), 1)
     }
     callback();
   };
 
-  const requireNonAuth = (nextState, replace, callback) => {
-    if (store.getState().auth.authToken) {
-      replace('/');
-    }
-    callback();
-  };
+
 
   return (
-    <Route                                           component={AppRootPage} >
-      <Route                                         component={AppAuthedPage}   onEnter={requireAuth}>
+    <Route                                           component={AppRootPage}   onEnter={requireAuth}>
+      <Route                                         component={AppAuthedPage}>
         <Route   path="/project/:stub"               component={ProjectPage}>
           <IndexRoute                                component={ProjectChangesPage} />
           <Route path="feed"                         component={ProjectFeedPage}/>
@@ -72,7 +64,7 @@ export default (store) => {
         </Route>
       </Route>
       <Route                                         component={AppUnAuthedPage}>
-        <Route onEnter={requireNonAuth}>
+        <Route>
           <Route path="/login"                       component={LoginPage} />
           <Route path="/register"                    component={RegisterPage} />
         </Route>

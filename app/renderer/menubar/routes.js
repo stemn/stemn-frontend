@@ -10,32 +10,13 @@ import AppUnAuthedPage  from './pages/AppUnAuthedPage/AppUnAuthedPage.jsx';
 const AuthActions = require('../../shared/actions/auth');
 
 export default (store) => {
-
-  const requireAuth = (nextState, replace, callback) => {
-    if (!store.getState().auth.authToken) {
-      replace('/login');
-    }
-    else{
-      store.dispatch(AuthActions.initHttpHeaders('bearer '+ store.getState().auth.authToken));
-      setTimeout(()=>store.dispatch(AuthActions.loadUserData()), 1)
-    }
-    callback();
-  };
-
-  const requireNonAuth = (nextState, replace, callback) => {
-    if (store.getState().auth.authToken) {
-      replace('/');
-    }
-    callback();
-  };
-
   return (
     <Route           component={AppRootPage}     path="/">
-      <Route         component={AppAuthedPage}   onEnter={requireAuth}>
+      <Route         component={AppAuthedPage}>
         <IndexRoute  component={HomePage} />
         <Route       component={ProjectPage}     path="/project/:stub"/>
       </Route>
-      <Route         component={AppUnAuthedPage} onEnter={requireNonAuth}>
+      <Route         component={AppUnAuthedPage}>
         <Route       component={LoginPage}       path="/login"/>
       </Route>
     </Route>

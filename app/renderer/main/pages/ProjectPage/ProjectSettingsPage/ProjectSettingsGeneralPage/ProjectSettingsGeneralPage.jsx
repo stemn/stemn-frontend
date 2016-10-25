@@ -8,7 +8,7 @@ import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js'
 
 // Component Core
 import React from 'react';
-
+import { has } from 'lodash';
 // Styles
 import classNames from 'classnames';
 import classes from '../ProjectSettingsPage.css'
@@ -23,7 +23,7 @@ import TeamMember from 'app/renderer/main/components/Project/TeamMember/TeamMemb
 import ProjectPermissionsRadio from 'app/renderer/main/components/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx'
 import ProjectLinkRemote from 'app/renderer/main/components/Project/ProjectLinkRemote/ProjectLinkRemote.jsx'
 import FileSelectInput from 'app/renderer/main/modules/FileSelectInput/FileSelectInput.jsx'
-import Button from 'app/renderer/main/components/Buttons/Button/Button'
+import ProgressButton from 'app/renderer/main/components/Buttons/ProgressButton/ProgressButton'
 import TaskLabelsEdit from 'app/renderer/main/modules/Tasks/TaskLabelsEdit/TaskLabelsEdit.jsx'
 import NavPill from 'app/renderer/main/components/Buttons/NavPill/NavPill'
 
@@ -110,19 +110,21 @@ export const Component = React.createClass({
          </Field>
          <br />
          <div className="layout-row layout-align-end">
-           <Button
+           <ProgressButton
            className="primary"
            onClick={()=>this.saveProject()}
            loading={project.savePending}
-           >Update Project</Button>
+           >Update Project</ProgressButton>
          </div>
        </div>
        <div className={classes.panel}>
          <h3>File Store Settings</h3>
          <p>Connect your Dropbox or Drive to sync all files and changes. Only one Google Drive or one Dropbox can be connected to a project.</p>
-         <ProjectLinkRemote model={`${entityModel}.formModels.fileStore.remote.provider`} value={project.formModels.fileStore.remote.provider}/>
+         { has(project, 'formModels.fileStore.remote.provider')
+         ? <ProjectLinkRemote model={`${entityModel}.formModels.fileStore.remote.provider`} value={project.formModels.fileStore.remote.provider}/>
+         : null }
          <br />
-         { project.formModels && (project.formModels.fileStore.remote.provider == 'dropbox' || project.formModels.fileStore.remote.provider == 'drive')
+         { has(project, 'formModels.fileStore.remote.provider') && (project.formModels.fileStore.remote.provider == 'dropbox' || project.formModels.fileStore.remote.provider == 'drive')
          ? <div>
              <FileSelectInput
                projectId={project.data._id}
@@ -134,11 +136,11 @@ export const Component = React.createClass({
          : ''}
          <br />
          <div className="layout-row layout-align-end">
-           <Button
+           <ProgressButton
            className="primary"
            onClick={()=>this.confirmLinkRemote()}
            loading={project.linkPending}
-           >Update File Store</Button>
+           >Update File Store</ProgressButton>
          </div>
        </div>
 
@@ -148,7 +150,10 @@ export const Component = React.createClass({
          <h3>Delete Project</h3>
          <p>Once you delete a project, there is no going back. Please be certain.</p>
          <div className="layout-row layout-align-end">
-            <Button className="warn" onClick={()=>ProjectsActions.confirmDeleteProject({projectId: project.data._id})}>Delete Project</Button>
+            <ProgressButton className="warn"
+              onClick={()=>ProjectsActions.confirmDeleteProject({projectId: project.data._id})}>
+              Delete Project
+            </ProgressButton>
          </div>
        </div>
       </div>

@@ -61,20 +61,6 @@ const ModalRoot = (modal) => {
   return (
     <SpecificModal {...extendedModalProps} />
   )
-//  return (
-//    <div><ul>
-//      <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores ipsum cupiditate, ducimus iste assumenda officiis tenetur et laboriosam alias ut, repellat eligendi odio deserunt inventore eaque cumque, nulla velit quos.
-//      </li>
-//      <li>At delectus odit amet, error reiciendis nostrum veritatis quod possimus temporibus hic libero saepe cumque asperiores officia minus quam deserunt non quis atque beatae voluptates dolorem. Dignissimos cumque obcaecati harum.
-//      </li>
-//      <li>Minus excepturi placeat, pariatur ducimus deleniti tempora impedit, esse voluptas ut, quam eum quasi at dolorem ratione. Labore totam inventore nihil officia, quasi rerum. Suscipit voluptatem ex facilis voluptas inventore.
-//      </li>
-//      <li>Nemo assumenda, earum eligendi id quibusdam iusto minus. Voluptates illum suscipit pariatur nulla quam deserunt, doloribus, facere eaque ab expedita nesciunt eveniet, tempore fuga provident, odit repudiandae esse odio quidem.
-//      </li>
-//      <li>Labore earum, nemo molestias ratione praesentium accusantium optio molestiae corporis delectus illum, nobis impedit perferendis sunt incidunt, harum temporibus aliquid expedita asperiores assumenda, reprehenderit quia quidem tempore. Tempore, hic ex!
-//      </li>
-//    </ul></div>
-//  )
 }
 
 export const Component = React.createClass({

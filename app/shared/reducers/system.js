@@ -6,6 +6,7 @@ const initialState = {
     drive: null,
     onedrive: null,
   },
+  currentVersion: null,
   checkingForUpdate: false,
   updateAvailable: false,
   updateDownloaded: false,
@@ -23,6 +24,13 @@ function reducer(state, action) {
           dropbox: action.payload.dropbox,
           drive: action.payload.drive
         }
+      };
+    }
+
+    case 'SYSTEM/CURRENT_VERSION': {
+      return {
+        ...state,
+        currentVersion: action.payload.version,
       };
     }
 

@@ -1,5 +1,4 @@
 import { modelReducer, formReducer, modeled } from 'react-redux-form';
-import u from 'updeep';
 import http from 'axios';
 
 
@@ -71,9 +70,9 @@ const mainReducer = (state, action) => {
       }
 
     case 'AUTH/UNLINK_FULFILLED':
-      return u({
+      return i.merge(state, {
         user: { accounts: action.payload.data}
-      }, state)
+      })
 
     case 'AUTH/LOGIN_PENDING':
       return {...state,

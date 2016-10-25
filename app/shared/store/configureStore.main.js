@@ -7,8 +7,7 @@ import forwardToRenderer from './middleware/forwardToRenderer';
 import httpPackage from './middleware/httpPackage';
 import transformHttp from './middleware/transformHttp';
 import throttle from './middleware/throttle';
-import errorToast from './middleware/errorToast';
-import errorModal from './middleware/errorModal';
+import errorModalToast from './middleware/errorModalToast';
 import electronWindows from '../modules/ElectronWindows/ElectronWindows.middleware.js';
 
 export default function configureStore(initialState) {
@@ -20,8 +19,7 @@ export default function configureStore(initialState) {
     transformHttp,
     promise(),
     electronWindows,
-    errorToast,
-    errorModal,
+    errorModalToast,
     forwardToRenderer,
   ];
 
@@ -29,6 +27,7 @@ export default function configureStore(initialState) {
 
   const rootReducer = getRootReducer(scope);
   const enhancer = compose(...enhanced);
+
   const store = createStore(rootReducer, initialState, enhancer);
 
   if (!process.env.NODE_ENV && module.hot) {

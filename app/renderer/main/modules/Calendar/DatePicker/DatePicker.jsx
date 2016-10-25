@@ -17,22 +17,24 @@ export const Component = React.createClass({
     }
   },
   toggle(openStatus) {
-    this.setState({'isOpen': openStatus || !this.state.isOpen})
+    this.setState({isOpen: openStatus === undefined ? !this.state.isOpen : openStatus})
   },
   selectDate(date) {
-    this.props.dispatch(actions.change(this.props.model, date.format()));
-    this.toggle(false)
+    this.props.dispatch(actions.change(this.props.model, date ? date.format() : ''));
+    this.toggle(false);
+    if(this.props.onChange){ this.props.onChange() }
   },
   render() {
     const { viewDate, isOpen } = this.state;
-    const { model, value, dispatch } = this.props;
-    const valueDate = moment(value);
+    const { model, value, dispatch, onChange } = this.props;
+    const valueDate = value ? moment(value) : '';
 
     return (
       <div className="rel-box">
-        <div className={classNames('dr-input', {'active' : isOpen})} onClick={()=>this.toggle()}>
+        <div className={classNames('dr-input', classes.input, {'active' : isOpen})} onClick={()=>this.toggle()}>
           {valueDate ? valueDate.format('dddd, Do MMMM') : 'Select a due date'}
         </div>
+        {valueDate ? <a className={classes.close} onClick={() => this.selectDate()}>×</a> : null}
         {
           isOpen
           ?

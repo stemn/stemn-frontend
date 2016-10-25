@@ -23,6 +23,7 @@ import CommitChanges        from 'app/renderer/main/modules/Changes/CommitChange
 import CommitBox            from 'app/renderer/main/modules/Changes/CommitBox/CommitBox.jsx'
 import FileCompareStandard  from 'app/renderer/main/modules/FileCompare/FileCompareStandard/FileCompareStandard.jsx';
 import cloudLocked          from 'app/renderer/assets/images/pure-vectors/cloud-locked.svg';
+import file               from 'app/renderer/assets/images/pure-vectors/file.svg';
 
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -39,7 +40,7 @@ export const Component = React.createClass({
 
   componentWillMount() {
     if(this.props.project && this.props.project.data && this.props.project.data.remote.connected){
-      this.props.ChangesActions.fetchChanges({
+      this.props.changesActions.fetchChanges({
         projectId: this.props.project.data._id
       })
     }
@@ -47,35 +48,40 @@ export const Component = React.createClass({
 
   componentWillReceiveProps(nextProps) {
     if (this.props.project && nextProps.project && this.props.project.data && nextProps.project.data._id !== this.props.project.data._id && nextProps.project.data.remote.connected) {
-      this.props.ChangesActions.fetchChanges({
+      this.props.changesActions.fetchChanges({
         projectId: nextProps.project.data._id
       })
     }
   },
 
   refresh(){
-    this.props.ChangesActions.fetchChanges({
+    this.props.changesActions.fetchChanges({
       projectId: this.props.project.data._id
     })
   },
 
   toggleAll(value){
-    return this.props.ChangesActions.toggleAll({
+    return this.props.changesActions.toggleAll({
       value,
       projectId: this.props.project.data._id
     })
   },
 
   commitFn(){
-    this.props.ChangesActions.commit({
+    this.props.changesActions.commit({
       projectId: this.props.project.data._id,
       summary: this.props.changes.summary,
       description: this.props.changes.description
     })
   },
 
+  deselect(){
+    this.props.changesActions.deselect({
+      projectId: this.props.project.data._id
+    })
+  },
   render() {
-    const { changes, project, ChangesActions, entityModel, dispatch } = this.props;
+    const { changes, project, changesActions, entityModel, dispatch } = this.props;
 
     if(!project || !project.data){
       return <LoadingOverlay />
@@ -101,8 +107,9 @@ export const Component = React.createClass({
                       changes={changes}
                       project={project.data}
                       toggleAll={this.toggleAll}
-                      selectedFileChange={ChangesActions.selectedFileChange}
+                      selectedFileChange={changesActions.selectedFileChange}
                       refresh={this.refresh}
+                      deselect={this.deselect}
                       dispatch={dispatch}
                     />
                   : ''}
@@ -111,7 +118,7 @@ export const Component = React.createClass({
                   <CommitBox
                     entityModel={entityModel}
                     changes={changes}
-                    changesActions={ChangesActions}
+                    changesActions={changesActions}
                     commitFn={()=>this.commitFn()}
                     project={project.data}
                   />
@@ -126,7 +133,11 @@ export const Component = React.createClass({
                   project={project.data}
                   file1={changes.selected.data}
                   file2={filePrevious} />
-                : <div className="layout-column layout-align-center-center flex text-title-4 text-center">No file change selected.</div>
+                : (
+                <div className="layout-column layout-align-center-center flex text-title-4 text-center">
+                  <img src={file} style={{width: '100px'}}/>
+                  <div>No file change selected.</div>
+                </div>)
               }
             </div>
 
@@ -161,7 +172,7 @@ function mapStateToProps({changes, projects}, {params}) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    ChangesActions: bindActionCreators(ChangesActions, dispatch),
+    changesActions: bindActionCreators(ChangesActions, dispatch),
     dispatch: dispatch
   }
 }

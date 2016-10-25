@@ -19,7 +19,7 @@ import PreviewPdf         from './PreviewPdf/PreviewPdf'
 import PreviewImage       from './PreviewImage/PreviewImage'
 import PreviewCad         from './PreviewCad/PreviewCad'
 import LoadingOverlay     from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import { MdErrorOutline } from 'react-icons/lib/md';
+import laptopSpanner      from 'app/renderer/assets/images/pure-vectors/laptop-spanner.svg';
 import { getViewerType }  from './PreviewFile.utils.js'
 
 
@@ -53,7 +53,12 @@ export const Component = React.createClass({
         return <PreviewPdf previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile}/>
       }
       else{
-        return <div className="layout-column layout-align-center-center flex"><MdErrorOutline size="40" /><div className="text-title-5 text-center" style={{marginTop: '10px'}}>Cannot preview this file.</div></div>
+        return (
+          <div className="layout-column layout-align-center-center flex">
+            <img src={laptopSpanner} style={{width: '100px'}}/>
+            <div className="text-title-5 text-center" style={{marginTop: '10px'}}>Cannot preview this file.</div>
+          </div>
+        )
       }
     }
     return (
