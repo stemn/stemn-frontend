@@ -8,7 +8,7 @@ import * as TasksActions from '../Tasks.actions.js';
 // Component Core
 import React from 'react';
 import moment from 'moment';
-import { get } from 'lodash';
+import { get, has } from 'lodash';
 import { actions } from 'react-redux-form';
 
 // Styles
@@ -24,7 +24,7 @@ import Button from 'app/renderer/main/components/Buttons/Button/Button'
 
 export const Component = React.createClass({
   componentWillMount() {
-    if(this.props.board && this.props.board.data && this.props.board.data.labels){
+    if(has(this.props, 'board.data.labels')){
       this.props.dispatch(actions.load(`${this.props.boardModel}.forms.labels`, this.props.board.data.labels));
     }
   },
@@ -46,7 +46,9 @@ export const Component = React.createClass({
       <div style={{width: '500px'}}>
         <div className="modal-title">Edit Labels</div>
         <div className="modal-body" style={{maxHeight: '400px', overflowY: 'auto'}}>
-          <TaskLabelsEdit model={`${boardModel}.forms.labels`} value={board.forms.labels} />
+          { has(board, 'forms.labels')
+          ? <TaskLabelsEdit model={`${boardModel}.forms.labels`} value={board.forms.labels} />
+          : null}
         </div>
         <div className="modal-footer-no-line layout-row layout-align-end">
           <Button style={{marginRight: '10px'}} onClick={() => {modalCancel(); modalHide()}}>Cancel</Button>

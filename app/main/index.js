@@ -90,18 +90,20 @@ function onElectronAction(event, action){
 }
 
 
-//   const websocket = wsInitialise({
-//     host : `http://${process.env.WEBSOCKET_SERVER}`,
-//     port : 8000
-//   });
-//
-//    websocket.on('data', (action) => {
-//     const reduxAction = mapWebsocketToRedux(action);
-//     if(reduxAction){
-//       store.dispatch(reduxAction)
-//     };
-//    });
-//
+   const websocket = wsInitialise({
+     host : `http://${process.env.WEBSOCKET_SERVER}`,
+     port : 8000
+   });
+
+    websocket.on('data', (action) => {
+     const reduxAction = mapWebsocketToRedux(action);
+     if(reduxAction){
+       store.dispatch(reduxAction)
+     };
+    });
+
+console.log(websocket);
+
 //    websocket.write({
 //      type : 'CHANGES/FETCH_CHANGES',
 //      payload : {
