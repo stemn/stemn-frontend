@@ -18,5 +18,8 @@ const mainReducer = (state, action) => {
 }
 
 export default function (state = initialState, action) {
+  if (!state.hydrated) {
+    state = { ...initialState, ...state, hydrated: true };
+  }
   return modeled(mainReducer, 'sidebar')(state, action)
 }
