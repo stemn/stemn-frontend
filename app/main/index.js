@@ -53,6 +53,7 @@ async function start() {
   app.on('window-all-closed',   onCloseAllWindows);
   app.on('activate',            onActivate);
   appIcon.on('click',           onClickAppIcon);
+  appIcon.on('right-click',     ()=>{console.log('right click');});
 
   // init
   createMainWindow();
@@ -71,6 +72,7 @@ function onActivate(){
 }
 
 function onClickAppIcon(event, trayBounds){
+  console.log('click');
   createMenuBar({ trayBounds });
   showMenuWindow();
 }
