@@ -1,3 +1,6 @@
+// Other
+import autoLaunch from 'auto-launch';
+
 // Container Core
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -20,8 +23,13 @@ import { Link } from 'react-router';
 import Toggle from 'app/renderer/main/components/Input/Toggle/Toggle'
 import ProgressButton from 'app/renderer/main/components/Buttons/ProgressButton/ProgressButton.jsx'
 import FileSelectInputElectron from 'app/renderer/main/modules/FileSelectInput/FileSelectInputElectron.jsx'
+import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
+
+const stemnAutoLaunch = new autoLaunch({
+    name: 'Stemn',
+});
 
 const inputStyles = {
   textTransform: 'capitalize',
@@ -33,14 +41,36 @@ const inputStyles = {
 }
 
 export const Component = React.createClass({
-  confirmReset(){
+  getInitialState () {
+    return {
+      autoStart: false,
+    }
+  },
+  componentDidMount() {
+    stemnAutoLaunch.isEnabled().then(response => {
+      console.log(response)
+      this.setState({autoStart: response});
+    })
+  },
+  confirmReset() {
     this.props.modalActions.showConfirm({
       message: 'This will clear all data and reset the application back to factory settings. This can be useful if some data has been corrupted.',
       modalConfirm: StateActions.clearState()
     })
   },
+  toggleStartup() {
+    if(this.state.autoStart){
+      stemnAutoLaunch.disable();
+      this.setState({ autoStart: false })
+    }
+    else{
+      stemnAutoLaunch.enable();
+      this.setState({ autoStart: true })
+    }
+  },
   render() {
     const { system } = this.props;
+    const { autoStart } = this.state;
     return (
       <div>
         <div className={classes.panel}>
@@ -81,6 +111,13 @@ export const Component = React.createClass({
             <ProgressButton className="warn" onClick={this.confirmReset}>
               Clear data
             </ProgressButton>
+          </div>
+        </div>       
+        <div className={classes.panel}>
+          <h3>Other options</h3>
+          <div className="layout-row layout-align-start-center">
+            <Checkbox changeAction={this.toggleStartup} value={autoStart}/>
+            <div style={{paddingLeft: '10px'}}>Start Stemn on system startup</div>
           </div>
         </div>
       </div>
