@@ -6,7 +6,7 @@ run this with flags -windows || -linux || -mac
 **************************************************/
 
 "use strict"
-const buildTypes = ['WINDOWS', 'LINUX', ‘MAC’];
+const buildTypes = ['WINDOWS', 'LINUX', 'MAC'];
 const builder = require("electron-builder")
 const Platform = builder.Platform;
 
