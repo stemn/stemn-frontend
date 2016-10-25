@@ -24,7 +24,7 @@ const build = (platform) => {
 
 const PlatformsToBuild = process.argv.slice(2).map(arg => arg.substring(1).toUpperCase()).filter(type => buildTypes.includes(type));
 if(!PlatformsToBuild || PlatformsToBuild.length < 1){
-  console.error('No build type supplied. Include flag: -windows || -linux || -mac’)
+  console.error('No build type supplied. Include flag: -windows || -linux || -mac')
 }
 else{
   console.log('Building: ', PlatformsToBuild);
