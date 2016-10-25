@@ -102,7 +102,7 @@ export const Component = React.createClass({
   render() {
     const { task, entityModel, draggable, layout, board, project } = this.props;
     if(!task || !task.data){
-      return <div>Task Loading</div>
+      return null
     }
     if(layout == 'list'){
       return (
@@ -129,13 +129,13 @@ export const Component = React.createClass({
               : null
             }
             <div className={classes.listUser + ' layout-row layout-align-start-center text-ellipsis'}>
-              <UserAvatars users={task.data.users} limit={2}/>
+              <UserAvatars users={task.data.users} limit={3}/>
             </div>
             <div className={classes.listDate}>
               <DueDate due={task.data.due}/>
             </div>
             <div className={classes.listActions + ' text-ellipsis layout-row layout-align-end-center'}>
-              <SimpleIconButton onClick={this.showModal}>
+              <SimpleIconButton onClick={this.showModal} title="Show Task">
                 <MdOpenInNew size="20px"/>
               </SimpleIconButton>
               <PopoverMenu preferPlace="below">
@@ -184,7 +184,7 @@ export const Component = React.createClass({
                 }
               </div>
               <div style={{padding: '0 5px'}}><DueDate due={task.data.due}/></div>
-              <SimpleIconButton onClick={this.showModal}>
+              <SimpleIconButton onClick={this.showModal} title="Show Task">
                 <MdOpenInNew size="20px"/>
               </SimpleIconButton>
             </div>

@@ -13,9 +13,7 @@ import Sidebar            from 'app/renderer/menubar/modules/Sidebar/Sidebar.jsx
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
-  componentWillReceiveProps(nextProps) {
-    const prevProps = this.props;
-    console.log();
+  onMount(nextProps, prevProps){
     if(!nextProps.auth.authToken || !nextProps.auth.user._id){
       nextProps.dispatch(push('/login'))
     }
@@ -23,6 +21,8 @@ export const Component = React.createClass({
       nextProps.dispatch(push(`/project/${nextProps.activeProject}`))
     }
   },
+  componentWillMount() { this.onMount(this.props) },
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
   render() {
     const { children } = this.props
 

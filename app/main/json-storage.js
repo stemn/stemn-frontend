@@ -16,10 +16,32 @@ export const dataToStoreKeyMap = [
   ['projects', 'activeProject'],
   ['projects', 'data'],
   ['projects', 'userProjects'],
+  ['tasks','boards', '*', 'layout'],
 ];
 
 export const getFilteredStoreData = (data) => {
   // This will filter the store data by the keys map
   // keysMap example: [ ['system'], ['auth', 'authToken'], ['auth', 'user'] ]
-  return dataToStoreKeyMap.reduce((storeObject, keyPath) => set(storeObject, keyPath, get(data, keyPath)), {})
+  let count = 0;
+  return dataToStoreKeyMap.reduce((storeObject, keyPath) => {
+    const wildCardIndex = keyPath.indexOf('*');
+    // If the wildcard exists:
+    if(wildCardIndex != -1){
+      const pathBeforeWildcard = keyPath.slice(0, wildCardIndex);
+      const pathAfterWildcard  = keyPath.slice(wildCardIndex + 1);
+      const wildcardData       = get(data, pathBeforeWildcard);
+      const dataToSet          = {};
+      Object.keys(wildcardData).forEach(key => {
+        const pathIncludingWildcard = [key].concat(pathAfterWildcard);
+        const subDataToSet          = get(wildcardData, pathIncludingWildcard);
+        set(dataToSet, pathIncludingWildcard, subDataToSet);
+      })
+      return set(storeObject, pathBeforeWildcard, dataToSet);
+    }
+    // Else, there is no wildcard
+    else{
+      const dataToSet = get(data, keyPath);
+      return set(storeObject, keyPath, dataToSet);
+    }
+  }, {})
 }

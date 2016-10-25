@@ -27,6 +27,7 @@ export default function configureStore(initialState) {
 
   const rootReducer = getRootReducer(scope);
   const enhancer = compose(...enhanced);
+
   const store = createStore(rootReducer, initialState, enhancer);
 
   if (!process.env.NODE_ENV && module.hot) {

@@ -38,7 +38,6 @@ async function start() {
     jsonStorage.clear();
     return {};
   });
-
   const store = configureStore(global.state);
 
   store.subscribe(async () => {
@@ -102,7 +101,6 @@ function onElectronAction(event, action){
      };
     });
 
-console.log(websocket);
 
 //    websocket.write({
 //      type : 'CHANGES/FETCH_CHANGES',

@@ -19,7 +19,7 @@
 }
 .listUser{
   color: rgba(0, 0, 0, 0.6);
-  width: 140px;
+  width: 105px;
 }
 .listItem:hover .listDate{
   opacity: 0;

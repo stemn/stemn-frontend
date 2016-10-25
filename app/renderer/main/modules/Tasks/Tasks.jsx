@@ -38,21 +38,21 @@ export const Component = React.createClass({
       projectId: this.props.projectId
     })
   },
-  getInitialState () {
-    return { layout: 'board' }
-  },
   setLayout (layout) {
-    this.setState({ layout: layout }) // layout = 'board' || 'list'
+    this.props.TasksActions.changeLayout({
+      layout,
+      boardId: this.props.board.data._id
+    })
   },
-
-
-
   render() {
     const { tasks, board, boardModel, project } = this.props;
+
+    const layout = board && board.layout == 'list' ? 'list' : 'board';
 
     if(!board || !board.data || !board.data.groups){
       return null
     }
+
 
     return (
       <div className="layout-column flex">
@@ -67,11 +67,11 @@ export const Component = React.createClass({
           <PopoverMenu preferPlace="below">
             <Button style={{marginLeft: '10px'}} className="white">Layout</Button>
             <div className="PopoverMenu">
-              {layouts.map((layout, index) =>
+              {layouts.map((layoutOpt, index) =>
                <a key={index}
-                 className={classNames({'active' : this.state.layout == layout.value})}
-                 onClick={()=>this.setLayout(layout.value)}>
-                 {layout.text}
+                 className={classNames({'active' : layout == layoutOpt.value})}
+                 onClick={()=>this.setLayout(layoutOpt.value)}>
+                 {layoutOpt.text}
                </a>
               )}
             </div>
@@ -81,7 +81,7 @@ export const Component = React.createClass({
             <TasksFilterMenu model={`${boardModel}.searchString`} value={board.searchString}/>
           </PopoverMenu>
         </div>
-        <TaskList className={classes.tasks} board={filterBoard(board, tasks, board.searchString)} layout={this.state.layout}/>
+        <TaskList className={classes.tasks} board={filterBoard(board, tasks, board.searchString)} layout={layout}/>
       </div>
     )
   }
