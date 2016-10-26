@@ -9,7 +9,6 @@ export default React.createClass({
     const { value, model, title, className, changeAction} = this.props;
 
     const id = Math.random().toString(36).substring(7);
-
     return (
       <div
         title={title}

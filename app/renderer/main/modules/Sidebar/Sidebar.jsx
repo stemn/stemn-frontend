@@ -92,7 +92,7 @@ export const Component = React.createClass({
 
             <PopoverMenu preferPlace="below">
               <div>
-                <SimpleIconButton style={{padding: '0px', color: 'black'}} title="New">
+                <SimpleIconButton style={{padding: '0px', color: 'black'}} title="Create new project">
                   <MdAdd size="25"/>
                 </SimpleIconButton>
               </div>
@@ -102,7 +102,7 @@ export const Component = React.createClass({
             </PopoverMenu>
 
             <div className="flex"></div>
-            <SimpleIconButton title="Menu" style={{padding: '0px', color: 'black'}} onClick={()=>{this.props.sidebarActions.toggleSidebar();}}>
+            <SimpleIconButton title="Toggle sidebar" style={{padding: '0px', color: 'black'}} onClick={()=>{this.props.sidebarActions.toggleSidebar();}}>
               <MdMenu size="25"/>
             </SimpleIconButton>
 

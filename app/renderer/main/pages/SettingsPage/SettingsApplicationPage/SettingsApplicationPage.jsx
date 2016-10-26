@@ -22,6 +22,7 @@ import Toggle from 'app/renderer/main/components/Input/Toggle/Toggle'
 import ProgressButton from 'app/renderer/main/components/Buttons/ProgressButton/ProgressButton.jsx'
 import FileSelectInputElectron from 'app/renderer/main/modules/FileSelectInput/FileSelectInputElectron.jsx'
 import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
+import SimpleTable        from 'app/shared/modules/Tables/SimpleTable/SimpleTable.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -46,11 +47,8 @@ export const Component = React.createClass({
       modalConfirm: StateActions.clearState()
     })
   },
-  toggleStartup() {
-    this.props.autoLaunchActions.toggle();
-  },
   render() {
-    const { system, autoLaunch } = this.props;
+    const { system, autoLaunch, autoLaunchActions } = this.props;
     return (
       <div>
         <div className={classes.panel}>
@@ -79,7 +77,7 @@ export const Component = React.createClass({
           <h3>Other options</h3>
           <div className="layout-row layout-align-start-center">
             <p className="flex" style={{margin: '10px 10px 10px 0'}}>Start Stemn Desktop on system startup</p>
-            <Toggle changeAction={this.toggleStartup} value={autoLaunch.status}/>
+            <Toggle changeAction={autoLaunchActions.toggle} value={autoLaunch.status}/>
           </div>
           <div className="layout-row layout-align-start-center">
             <p className="flex" style={{margin: '10px 10px 10px 0'}}>Help improve Stemn by sending usage data</p>
@@ -89,13 +87,18 @@ export const Component = React.createClass({
         <div className={classes.panel}>
           <h3>Application info</h3>
           <p>Stemn Desktop is currently in alpha. Please report any bugs and they will be fixed ASAP.</p>
+          {system.currentVersion
+          ? <SimpleTable>
+              <tr><td>Stream</td><td>alpha</td></tr>
+              <tr><td>Version</td><td>{system.currentVersion}</td></tr>
+            </SimpleTable>
+          : null}
+        </div>
+
+        <div className={classes.panel}>
+          <h3>Reset application</h3>
           <p>If something goes wrong, please clear all cached data, this will reset the application back to factory settings.</p>
-          <div className="layout-row">
-            <div className="flex">
-              {system.currentVersion
-              ? <p>Version: <b>{system.currentVersion}</b></p>
-              : null}
-            </div>
+          <div className="layout-row layout-align-end">
             <ProgressButton className="warn" onClick={this.confirmReset}>
               Clear data
             </ProgressButton>
