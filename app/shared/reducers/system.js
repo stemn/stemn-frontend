@@ -6,6 +6,9 @@ const initialState = {
     drive: null,
     onedrive: null,
   },
+  settings: {
+    usageData: true
+  },
   currentVersion: null,
   checkingForUpdate: false,
   updateAvailable: false,
@@ -87,5 +90,8 @@ function reducer(state, action) {
 }
 
 export default function (state = initialState, action) {
+  if (!state.hydrated) {
+    state = { ...initialState, ...state, hydrated: true };
+  }
   return modeled(reducer, 'system')(state, action)
 }

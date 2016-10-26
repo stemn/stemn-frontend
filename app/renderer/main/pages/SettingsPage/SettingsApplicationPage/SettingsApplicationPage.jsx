@@ -78,14 +78,18 @@ export const Component = React.createClass({
         <div className={classes.panel}>
           <h3>Other options</h3>
           <div className="layout-row layout-align-start-center">
-            <p className="flex" style={{paddingRight: '10px'}}>Start Stemn on system startup</p>
+            <p className="flex" style={{margin: '10px 10px 10px 0'}}>Start Stemn Desktop on system startup</p>
             <Toggle changeAction={this.toggleStartup} value={autoLaunch.status}/>
+          </div>
+          <div className="layout-row layout-align-start-center">
+            <p className="flex" style={{margin: '10px 10px 10px 0'}}>Help improve Stemn by sending usage data</p>
+            <Toggle model="system.settings.usageData" value={system.settings.usageData}/>
           </div>
         </div>
         <div className={classes.panel}>
           <h3>Application info</h3>
           <p>Stemn Desktop is currently in alpha. Please report any bugs and they will be fixed ASAP.</p>
-          <p>If something goes wrong, please clear all cached data and reset the application back to factory settings:</p>
+          <p>If something goes wrong, please clear all cached data, this will reset the application back to factory settings.</p>
           <div className="layout-row">
             <div className="flex">
               {system.currentVersion
@@ -96,7 +100,6 @@ export const Component = React.createClass({
               Clear data
             </ProgressButton>
           </div>
-
         </div>
       </div>
     );

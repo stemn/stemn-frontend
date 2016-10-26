@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field } from 'react-redux-form';
+import { Control } from 'react-redux-form';
 
 // Styles
 import styles from './Toggle.css';
@@ -16,16 +16,12 @@ export default React.createClass({
         className={styles.toggle}>
         { model
         ? (
-        <Field
+        <Control.checkbox
+          className={value ? 'checked' : ''}
+          id={id}
           model={model}
-          changeAction={changeAction}>
-          <input
-            type="checkbox"
-            className={value ? 'checked' : ''}
-            id={id}
-          />
-          <label htmlFor={id}></label>
-        </Field>)
+          changeAction={changeAction}
+        />)
         : (
         <input
           type="checkbox"
@@ -37,5 +33,6 @@ export default React.createClass({
         <label htmlFor={id}></label>
       </div>
     )
+
   }
 })
