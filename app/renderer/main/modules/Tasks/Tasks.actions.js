@@ -2,7 +2,7 @@ import http                  from 'axios';
 import getUuid               from '../../../../shared/helpers/getUuid.js';
 import { actions }           from 'react-redux-form';
 import { show as showToast } from '../Toasts/Toasts.actions.js';
-import { showModal }         from '../Modal/Modal.actions.js';
+import { showModal, showConfirm } from '../Modal/Modal.actions.js';
 import { get }               from 'lodash';
 
 export function newTask({boardId, task}) {
@@ -111,7 +111,6 @@ export function getTask({taskId}) {
 }
 
 export function updateTask({task}) {
-  console.log(task);
   return {
     type: 'TASKS/UPDATE_TASK',
     http: true,
@@ -284,8 +283,11 @@ export function newGroup({boardId, group}) {
         type: 'TASKS/NEW_GROUP',
         payload: http({
           method: 'POST',
-          url: `/api/v1/boards/${boardId}/groups`,
-          data: group
+          url: `/api/v1/groups`,
+          data: {
+            ...group,
+            board: boardId
+          }
         }),
         meta: {
           boardId
@@ -295,6 +297,15 @@ export function newGroup({boardId, group}) {
   }
 }
 
+export function deleteGroupConfirm({boardId, groupId}) {
+  return showConfirm({
+    message: 'Deleting a group is permanent. All tasks which belong to this group will be deleted (even archived tasks).',
+    modalConfirm: {
+      functionAlias: 'TasksActions.deleteGroup',
+      functionInputs: { boardId, groupId }
+    }
+  })
+}
 export function deleteGroup({boardId, groupId}) {
   return {
     type: 'TASKS/DELETE_GROUP',

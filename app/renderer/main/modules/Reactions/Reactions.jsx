@@ -19,7 +19,7 @@ export default React.createClass({
     return (
       <span>
         {groupedReactions.map(reaction => <PopoverMenu key={reaction.type} preferPlace="below" trigger="hover">
-          <img className={classes.icon} src={reaction.path}/>
+          <a className={classes.icon}>{reaction.icon}</a>
           <div className="PopoverMenu">
             {reaction.list.map(userReaction => <div className="layout-row layout-align-start-center" style={{padding: '5px'}} key={userReaction.owner._id}>
               <UserAvatar picture={userReaction.owner.picture} size="20px"/>

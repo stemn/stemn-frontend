@@ -1,5 +1,6 @@
 import React                from 'react';
 import markdownIt           from 'markdown-it';
+import emoji                from 'markdown-it-emoji';
 import classes              from './EditorDisplay.css';
 import { validateMention }  from 'app/renderer/main/modules/Mentions/Mentions.utils.js';
 import htmlToReact          from 'html-to-react';
@@ -33,11 +34,13 @@ const TaskMentionConnected = connect()(TaskMention);
 /////////////////////////////////////////////////////////////////////////
 
 const htmlToReactParser = new htmlToReact.Parser();
+
 const md = markdownIt({
   html: true,
   linkify: true,
   typographer: true
 });
+md.use(emoji);
 
 const processNodeDefinitions = new htmlToReact.ProcessNodeDefinitions(React);
 const processingInstructions = [{

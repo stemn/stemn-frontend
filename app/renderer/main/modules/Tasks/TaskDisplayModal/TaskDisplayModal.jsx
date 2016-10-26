@@ -27,6 +27,12 @@ import DatePicker from 'app/renderer/main/modules/Calendar/DatePicker/DatePicker
 import Textarea from 'app/renderer/main/components/Input/Textarea/Textarea';
 import CommentNew from 'app/renderer/main/modules/Comments/Comment/CommentNew.jsx';
 
+import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
+import PopoverMenuList from 'app/renderer/main/components/PopoverMenu/PopoverMenuList';
+import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import { MdMoreHoriz } from 'react-icons/lib/md';
+
+
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -60,8 +66,23 @@ export const Component = React.createClass({
   updateTask(){
     setTimeout(()=>this.props.TasksActions.updateTask({task: this.props.task.data}), 1);
   },
+  deleteTask(){
+    this.props.TasksActions.deleteTask({
+      taskId: this.props.task.data._id,
+      boardId: this.props.task.data.board,
+    });
+    this.props.modalHide();
+  },
   render() {
     const { taskId, task, board, entityModel, project, modalCancel, modalHide } = this.props;
+
+    const menu = [{
+      label: 'Refresh',
+      onClick: () => {}
+    },{
+      label: 'Delete Task',
+      onClick: this.deleteTask
+    }];
 
     if(!task){
       return <div>Task Loading</div>
@@ -88,6 +109,12 @@ export const Component = React.createClass({
                     type="text"
                     placeholder="Task description" />
                 </div>
+                <PopoverMenu preferPlace="below">
+                  <SimpleIconButton>
+                    <MdMoreHoriz size="20px"/>
+                  </SimpleIconButton>
+                  <PopoverMenuList menu={menu}/>
+                </PopoverMenu>
               </div>
               <div className="text-grey-3" style={{padding: '15px 0 20px'}}>
                 Created {moment(task.data.created).fromNow()} <b className="text-interpunct"></b> By <a className="link-primary">{task.data.owner.name}</a>

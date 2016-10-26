@@ -21,6 +21,7 @@ import ConfirmModal         from './modals/ConfirmModal.jsx';
 import ErrorModal           from './modals/ErrorModal.jsx';
 import ConnectionModal      from './modals/ConnectionModal.jsx';
 import GoogleRevokeModal    from './modals/GoogleRevokeModal.jsx'
+import ReleaseNotesModal    from './modals/ReleaseNotesModal.jsx'
 import FileSelectModal      from 'app/renderer/main/modules/FileSelect/FileSelectModal.jsx';
 import TaskDisplayModal     from 'app/renderer/main/modules/Tasks/TaskDisplayModal/TaskDisplayModal.jsx'
 import TaskLabelsEditModal  from 'app/renderer/main/modules/Tasks/TaskLabelsEditModal/TaskLabelsEditModal.jsx'
@@ -37,7 +38,8 @@ const modalComponents = {
   'TASK_LABELS'   : TaskLabelsEditModal,
   'TASK_COMMIT'   : TaskMentionModal,
   'PROJECT_NEW'   : ProjectNewModal,
-  'GOOGLE_REVOKE' : GoogleRevokeModal
+  'GOOGLE_REVOKE' : GoogleRevokeModal,
+  'RELEASE_NOTES' : ReleaseNotesModal
 }
 
 /////////////////////////////////////////////////////////////////////////////

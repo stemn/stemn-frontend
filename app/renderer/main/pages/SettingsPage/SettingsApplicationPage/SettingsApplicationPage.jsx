@@ -47,6 +47,11 @@ export const Component = React.createClass({
       modalConfirm: StateActions.clearState()
     })
   },
+  showReleaseModal() {
+    this.props.modalActions.showModal({
+      modalType: 'RELEASE_NOTES'
+    })
+  },
   render() {
     const { system, autoLaunch, autoLaunchActions } = this.props;
     return (
@@ -70,7 +75,6 @@ export const Component = React.createClass({
               <div className="layout-column layout-align-center-center" style={inputStyles}>Drive</div>
             </FileSelectInputElectron>
           </div>
-
         </div>
 
         <div className={classes.panel}>
@@ -91,6 +95,7 @@ export const Component = React.createClass({
           ? <SimpleTable>
               <tr><td>Stream</td><td>alpha</td></tr>
               <tr><td>Version</td><td>{system.currentVersion}</td></tr>
+              <tr><td>Release Notes</td><td><a className="link-primary" onClick={this.showReleaseModal}>Click here</a></td></tr>
             </SimpleTable>
           : null}
         </div>

@@ -12,3 +12,6 @@
 .display p:last-child{
   margin-bottom: 0px;
 }
+.display ul {
+  padding-left: 15px;
+}

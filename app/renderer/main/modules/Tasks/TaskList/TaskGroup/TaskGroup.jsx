@@ -31,7 +31,7 @@ export default class Component extends React.Component {
           <div className={classes.header + ' layout-row layout-align-start-center'}>
             <h3 className="flex">
               <Field model={`${entityModel}.name`}>
-                <input className="input-plain text-mini-caps" type="text" onChange={()=>{setTimeout(updateGroup, 1)}}></input>
+                <input placeholder="Group name" className="input-plain text-mini-caps" type="text" onChange={()=>{setTimeout(updateGroup, 1)}}></input>
               </Field>
             </h3>
             <div className={classes.options}>

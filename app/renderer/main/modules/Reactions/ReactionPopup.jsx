@@ -21,13 +21,14 @@ export default React.createClass({
           <MdInsertEmoticon size="20px" />
         </SimpleIconButton>
         <div className="PopoverMenu">
-          {options.map(option => <img
+          {options.map(option => <span
             title={option.type}
             onClick={()=>submitFn(option.type)}
             key={option.type}
             className={classes.popupIcon}
-            src={option.path}
-          />)}
+           >
+           {option.icon}
+           </span>)}
         </div>
       </PopoverMenu>
     );

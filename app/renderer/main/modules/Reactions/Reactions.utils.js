@@ -1,24 +1,18 @@
-import confused    from './emoji/one/confused.png'
-import party       from './emoji/one/party.png'
-import thumbs_up   from './emoji/one/thumbs_up.png'
-import thumbs_down from './emoji/one/thumbs_down.png'
-import heart       from './emoji/one/heart.png'
-
 export const options = [{
-  path: thumbs_up,
-  type: 'up'
+  type: 'up',
+  icon: '👍'
 },{
-  path: thumbs_down,
-  type: 'down'
+  type: 'down',
+  icon: '👎'
 },{
-  path: party,
-  type: 'party'
+  type: 'party',
+  icon: '🎉'
 },{
-  path: heart,
-  type: 'heart'
+  type: 'heart',
+  icon: '❤️'
 },{
-  path: confused,
-  type: 'confused'
+  type: 'confused',
+  icon: '😕'
 }]
 
 export const groupAndOrderReactions = (reactions, options) => {
@@ -49,7 +43,7 @@ function orderReactions(groupedReactions, options){
     if(groupedReactions[option.type] && groupedReactions[option.type].list && groupedReactions[option.type].list.length > 0){
       orderedReactions.push({
         type: option.type,
-        path: option.path,
+        icon: option.icon,
         list: groupedReactions[option.type].list
       })
     }

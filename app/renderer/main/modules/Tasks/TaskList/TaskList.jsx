@@ -79,7 +79,7 @@ export const Component = React.createClass({
     })
   },
   deleteGroup(groupId){
-    this.props.TasksActions.deleteGroup({
+    this.props.TasksActions.deleteGroupConfirm({
       boardId: this.props.board.data._id,
       groupId: groupId
     })

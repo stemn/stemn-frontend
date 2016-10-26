@@ -85,12 +85,6 @@ export const Component = React.createClass({
     })
     this.updateTask();
   },
-  deleteTask(){
-    this.props.TasksActions.deleteTask({
-      taskId: this.props.task.data._id,
-      boardId: this.props.task.data.board,
-    })
-  },
   showModal(){
     this.props.ModalActions.showModal({
       modalType: 'TASK',
@@ -138,15 +132,6 @@ export const Component = React.createClass({
               <SimpleIconButton onClick={this.showModal} title="Show Task">
                 <MdOpenInNew size="20px"/>
               </SimpleIconButton>
-              <PopoverMenu preferPlace="below">
-                <SimpleIconButton>
-                  <MdMoreHoriz size="20px"/>
-                </SimpleIconButton>
-                <div className="PopoverMenu">
-                  <a>View Task</a>
-                  <a onClick={this.deleteTask}>Delete Task</a>
-                </div>
-              </PopoverMenu>
             </div>
           </div>
         </div>
