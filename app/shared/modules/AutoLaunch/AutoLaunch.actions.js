@@ -1,12 +1,10 @@
-export function toggle() {
-  return (dispatch, getState) => {
-    dispatch({
-      type: 'AUTO_LAUNCH/TOGGLE',
-      payload: {},
-      meta: {
-        status: !getState().autoLaunch.status
-      }
-    })
+export function toggle(status) {
+  return {
+    type: 'AUTO_LAUNCH/TOGGLE',
+    payload: {},
+    meta: {
+      status: status
+    }
   }
 }
 export function getStatus() {

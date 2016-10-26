@@ -74,42 +74,36 @@ export const Component = React.createClass({
           </div>
 
         </div>
-        {system.currentVersion
-        ? (
-          <div className={classes.panel}>
-            <h3>Application info</h3>
-            <p>Stemn Desktop is currently in alpha. Please report any bugs and they will be fixed ASAP.</p>
-            <p>Version: <b>{system.currentVersion}</b></p>
-          </div>)
-        : null}
-
 
         <div className={classes.panel}>
-          <h3>Reset Application</h3>
-          <p>Clear all cached data and reset the application back to factory settings.</p>
-          <div className="layout-row layout-align-end">
+          <h3>Other options</h3>
+          <div className="layout-row layout-align-start-center">
+            <p className="flex" style={{paddingRight: '10px'}}>Start Stemn on system startup</p>
+            <Toggle changeAction={this.toggleStartup} value={autoLaunch.status}/>
+          </div>
+        </div>
+        <div className={classes.panel}>
+          <h3>Application info</h3>
+          <p>Stemn Desktop is currently in alpha. Please report any bugs and they will be fixed ASAP.</p>
+          <p>If something goes wrong, please clear all cached data and reset the application back to factory settings:</p>
+          <div className="layout-row">
+            <div className="flex">
+              {system.currentVersion
+              ? <p>Version: <b>{system.currentVersion}</b></p>
+              : null}
+            </div>
             <ProgressButton className="warn" onClick={this.confirmReset}>
               Clear data
             </ProgressButton>
           </div>
-        </div>       
-        <div className={classes.panel}>
-          <h3>Other options</h3>
-          <div className="layout-row layout-align-start-center">
-            <Checkbox changeAction={this.toggleStartup} value={autoLaunch.status}/>
-            <div style={{paddingLeft: '10px'}}>Start Stemn on system startup</div>
-          </div>
+
         </div>
       </div>
     );
   }
 });
 
-//          <div className={classes.panel}>
-//            <h3>Privacy</h3>
-//            <p>Help us improve by sending anonymous usage data</p>
-//          </div>
-//            <Toggle model="settings.privacy" value={this.props.settings.privacy} />
+
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 

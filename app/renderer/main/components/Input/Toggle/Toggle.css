@@ -40,9 +40,9 @@
 .toggle input + label:before {
   display: none;
 }
-.toggle input:checked + label {
+.toggle input:global(.checked) + label {
   background: primary;
 }
-.toggle input:checked + label:after {
+.toggle input:global(.checked) + label:after {
   left: 50%;
 }
