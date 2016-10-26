@@ -1,6 +1,3 @@
-// Other
-import autoLaunch from 'auto-launch';
-
 // Container Core
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -9,6 +6,7 @@ import { connect } from 'react-redux';
 import * as SystemActions from 'app/shared/actions/system';
 import * as StateActions from 'app/shared/actions/state';
 import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
+import * as AutoLaunchActions from 'app/shared/modules/AutoLaunch/AutoLaunch.actions.js';
 
 // Component Core
 import React from 'react';
@@ -27,9 +25,7 @@ import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
-const stemnAutoLaunch = new autoLaunch({
-    name: 'Stemn',
-});
+
 
 const inputStyles = {
   textTransform: 'capitalize',
@@ -41,16 +37,8 @@ const inputStyles = {
 }
 
 export const Component = React.createClass({
-  getInitialState () {
-    return {
-      autoStart: false,
-    }
-  },
   componentDidMount() {
-    stemnAutoLaunch.isEnabled().then(response => {
-      console.log(response)
-      this.setState({autoStart: response});
-    })
+    this.props.autoLaunchActions.getStatus();
   },
   confirmReset() {
     this.props.modalActions.showConfirm({
@@ -59,18 +47,10 @@ export const Component = React.createClass({
     })
   },
   toggleStartup() {
-    if(this.state.autoStart){
-      stemnAutoLaunch.disable();
-      this.setState({ autoStart: false })
-    }
-    else{
-      stemnAutoLaunch.enable();
-      this.setState({ autoStart: true })
-    }
+    this.props.autoLaunchActions.toggle();
   },
   render() {
-    const { system } = this.props;
-    const { autoStart } = this.state;
+    const { system, autoLaunch } = this.props;
     return (
       <div>
         <div className={classes.panel}>
@@ -116,7 +96,7 @@ export const Component = React.createClass({
         <div className={classes.panel}>
           <h3>Other options</h3>
           <div className="layout-row layout-align-start-center">
-            <Checkbox changeAction={this.toggleStartup} value={autoStart}/>
+            <Checkbox changeAction={this.toggleStartup} value={autoLaunch.status}/>
             <div style={{paddingLeft: '10px'}}>Start Stemn on system startup</div>
           </div>
         </div>
@@ -133,9 +113,10 @@ export const Component = React.createClass({
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps({users, system}, {params}) {
+function mapStateToProps({users, system, autoLaunch}, {params}) {
   return {
     system,
+    autoLaunch
   };
 }
 
@@ -144,6 +125,7 @@ function mapDispatchToProps(dispatch) {
     systemActions: bindActionCreators(SystemActions, dispatch),
     stateActions: bindActionCreators(StateActions, dispatch),
     modalActions: bindActionCreators(ModalActions, dispatch),
+    autoLaunchActions: bindActionCreators(AutoLaunchActions, dispatch),
   }
 }
 

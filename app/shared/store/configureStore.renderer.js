@@ -5,13 +5,12 @@ import promise from 'redux-promise-middleware';
 import createLogger from 'redux-logger';
 import { hashHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
-import getRootReducer from '../reducers';
+import getRootReducerRenderer from '../reducers/rootReducer.renderer.js';
 import forwardToMain from './middleware/forwardToMain';
 import forwardToRendererWindow from './middleware/forwardToRendererWindow';
 import routerFix from './middleware/routerFix';
 
 export default function configureStore(initialState) {
-  const scope = 'renderer';
   const middleware =[
     thunk,
     promise(),
@@ -22,7 +21,7 @@ export default function configureStore(initialState) {
   ];
   if(process.env.NODE_ENV == 'development') {
      middleware.push(createLogger({
-      level: scope === 'main' ? undefined : 'info',
+      level: 'info',
       collapsed: true,
     }));
   }
@@ -37,9 +36,9 @@ export default function configureStore(initialState) {
 //    ));
 
 
-  const rootReducer = getRootReducer(scope);
-  const enhancer = compose(...enhanced);
-  const store = createStore(rootReducer, initialState, enhancer);
+  const rootReducer = getRootReducerRenderer();
+  const enhancer    = compose(...enhanced);
+  const store       = createStore(rootReducer, initialState, enhancer);
 
   if (!process.env.NODE_ENV && module.hot) {
     module.hot.accept('../reducers', () => {
