@@ -10,12 +10,14 @@ import throttle from './middleware/throttle';
 import errorModalToast from './middleware/errorModalToast';
 import electronWindows from '../modules/ElectronWindows/ElectronWindows.middleware.js';
 import autoLaunch from '../modules/AutoLaunch/AutoLaunch.middleware.js';
+import functionLibrary from '../modules/FunctionLibrary/FunctionLibrary.middleware.js';
 
 export default function configureStore(initialState) {
   const middleware = [
     thunk,
     throttle,
     httpPackage,
+    functionLibrary,
     transformHttp,
     promise(),
     electronWindows,

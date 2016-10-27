@@ -1,7 +1,7 @@
 import * as LocalPathActions from '../modules/LocalPath/LocalPath.actions.js';
 import { name as localPathModuleName} from '../modules/LocalPath/LocalPath.reducer.js';
 
-import providerPathLookup from '../../main/modules/files/providerPathLookup.js';
+//import providerPathLookup from '../../main/modules/files/providerPathLookup.js';
 
 import Promise from 'es6-promise';
 import { shell } from 'electron';
@@ -10,12 +10,16 @@ import { has } from 'lodash';
 export function getProviderPath() {
   return {
     type: 'SYSTEM/GET_PROVIDER_PATH',
-    payload: Promise.all(['dropbox', 'drive'].map(providerPathLookup)).then(response => {
-      return {
-        dropbox: response[0],
-        drive: response[1]
-      }
-    }).catch( error => console.log(error))
+    payload: {
+      functionAlias : 'ProviderPathActions.getPath',
+      functionInputs: ['dropbox', 'drive']
+    }
+//    payload: Promise.all(['dropbox', 'drive'].map(providerPathLookup)).then(response => {
+//      return {
+//        dropbox: response[0],
+//        drive: response[1]
+//      }
+//    }).catch( error => console.log(error))
   };
 }
 

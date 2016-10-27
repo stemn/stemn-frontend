@@ -57,6 +57,11 @@ const config = {
 
   plugins: [
     ...baseConfig.plugins,
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'common',
+      filename: 'common.js',
+      chunks: ['main', 'menubar', 'preview'],
+    }),    
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({

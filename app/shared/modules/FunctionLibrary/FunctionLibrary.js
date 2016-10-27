@@ -2,6 +2,7 @@ import * as ProjectsActions from '../../actions/projects.js'
 import * as TasksActions from '../../../renderer/main/modules/Tasks/Tasks.actions.js'
 import * as ChangesActions from '../../../renderer/main/modules/Changes/Changes.actions.js'
 import * as CommentsActions from '../../../renderer/main/modules/Comments/Comments.actions.js'
+
 import { actions } from 'react-redux-form';
 
 const library = {

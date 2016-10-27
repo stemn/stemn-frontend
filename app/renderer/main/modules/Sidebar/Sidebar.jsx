@@ -26,8 +26,8 @@ import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 import { Field } from 'react-redux-form';
 import ContextMenu from 'app/renderer/main/modules/ContextMenu/ContextMenu.jsx';
 import SidebarProjectButton from './SidebarProjectButton.jsx';
-import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
-import {MdAdd, MdSettings, MdSearch, MdMenu} from 'react-icons/lib/md';
+import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton';
+import {MdAdd, MdSettings, MdSearch, MdMenu} from 'react-icons/md';
 import UserAvatar          from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////

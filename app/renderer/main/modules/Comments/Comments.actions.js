@@ -1,5 +1,5 @@
 import http from 'axios';
-import * as TasksActions from 'app/renderer/main/modules/Tasks/Tasks.actions.js';
+import * as TasksActions from '../Tasks/Tasks.actions.js';
 
 export function getComment({commentId}) {
   return {

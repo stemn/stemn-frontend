@@ -1,6 +1,6 @@
 import http from 'axios';
 import { push } from 'react-router-redux'
-import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
+import * as ModalActions from '../../renderer/main/modules/Modal/Modal.actions.js';
 
 export function setActiveProject({projectId}) {
   return {

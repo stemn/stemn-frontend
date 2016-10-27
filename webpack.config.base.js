@@ -1,13 +1,21 @@
 import path from 'path';
 import webpack from 'webpack';
 
+const config = {
+  iconPath: 'node_modules/react-icons'
+}; 
+
 export default {
   module: {
     loaders: [{
       test: /\.jsx?$/,
       loaders: ['babel-loader'],
       exclude: /node_modules/,
-    }, {
+    },{
+      test: /react-icons\/(.)*(.js)$/,
+      loader: 'babel',
+      include: config.iconPath
+    },{
       test: /\.json$/,
       loader: 'json-loader',
     },{
