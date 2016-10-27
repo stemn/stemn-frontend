@@ -1,0 +1,107 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.authenticate = exports.getWindow = undefined;
+
+var _electron = require('electron');
+
+var _authConfig = require('./auth.config.js');
+
+var _querystring = require('querystring');
+
+var _querystring2 = _interopRequireDefault(_querystring);
+
+var _axios = require('axios');
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _es6Promise = require('es6-promise');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Init the Auth Window
+var window = null;
+
+var getWindow = exports.getWindow = function getWindow() {
+  if (!window) {
+    window = new _electron.remote.BrowserWindow({
+      show: false,
+      width: 800,
+      height: 850
+    });
+    window.setMenu(null);
+    window.setAlwaysOnTop(true);
+    window.setResizable(false);
+    window.on('closed', function () {
+      window = null;
+    });
+  }
+  return window;
+};
+
+var authenticate = exports.authenticate = function authenticate(_ref) {
+  var provider = _ref.provider;
+
+  var authHttpPromise = null;
+
+  return new _es6Promise.Promise(function (resolve, reject) {
+    var ranAlready = false;
+    // If the provider is supported
+    if (_authConfig.oauthCreds[provider]) {
+      (function () {
+        var url = _authConfig.oauthCreds[provider].url + '?' + _querystring2.default.stringify(_authConfig.oauthCreds[provider].params);
+        console.log(url);
+        var window = getWindow();
+
+        window.loadURL(url);
+        window.webContents.on('did-finish-load', function () {
+          window.show();
+          window.focus();
+        });
+
+        // Process the url if it changes - check for access token
+        window.webContents.on('will-navigate', function (event, url) {
+          if (!ranAlready) {
+            processToken(newUrl);
+          }
+          ranAlready = true;
+        });
+        window.webContents.on('did-get-redirect-request', function (event, oldUrl, newUrl) {
+          if (!ranAlready) {
+            processToken(newUrl);
+          }
+          ranAlready = true;
+        });
+
+        window.on('closed', function () {
+          if (!authHttpPromise) {
+            reject({ error: 'Window Closed' });
+          }
+        });
+
+        var processToken = function processToken(url) {
+          var params = provider == 'dropbox' ? _querystring2.default.parse(url.split('#')[1]) : _querystring2.default.parse(url.split('?')[1]);
+          if (params.access_token || params.code) {
+            authHttpPromise = (0, _axios2.default)({
+              method: 'POST',
+              url: _authConfig.oauthCreds[provider].postUrl,
+              data: {
+                code: params.code || params.access_token,
+                redirectUri: _authConfig.oauthCreds[provider].params.redirect_uri
+              }
+            }).then(resolve).catch(reject);
+
+            window.close();
+          } else {
+            window.close();
+            reject({ error: 'Could not find token' });
+          }
+        };
+      })();
+    } else {
+      reject({ error: 'Unsupported Type' });
+    }
+  });
+};

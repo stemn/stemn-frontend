@@ -1,0 +1,291 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Component = exports.NewItem = undefined;
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _reactRedux = require('react-redux');
+
+var _redux = require('redux');
+
+var _TasksActions = require('../Tasks.actions.js');
+
+var TasksActions = _interopRequireWildcard(_TasksActions);
+
+var _reactReduxForm = require('react-redux-form');
+
+var _TaskGroupParent = require('./TaskGroup/TaskGroupParent.jsx');
+
+var _TaskGroupParent2 = _interopRequireDefault(_TaskGroupParent);
+
+var _TaskGroupWrapped = require('./TaskGroup/TaskGroupWrapped.jsx');
+
+var _TaskGroupWrapped2 = _interopRequireDefault(_TaskGroupWrapped);
+
+var _TaskGroup = require('./TaskGroup/TaskGroup.jsx');
+
+var _TaskGroup2 = _interopRequireDefault(_TaskGroup);
+
+var _TaskListItemParent = require('./TaskListItem/TaskListItemParent.jsx');
+
+var _TaskListItemParent2 = _interopRequireDefault(_TaskListItemParent);
+
+var _TaskListItemWrapped = require('./TaskListItem/TaskListItemWrapped.jsx');
+
+var _TaskListItemWrapped2 = _interopRequireDefault(_TaskListItemWrapped);
+
+var _TaskListItem = require('./TaskListItem/TaskListItem.jsx');
+
+var _TaskListItem2 = _interopRequireDefault(_TaskListItem);
+
+var _TaskList = require('./TaskList.css');
+
+var _TaskList2 = _interopRequireDefault(_TaskList);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _components = {
+  _component: {},
+  _component2: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Tasks/TaskList/TaskList.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Tasks/TaskList/TaskList.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+}
+
+var NewItem = exports.NewItem = _wrapComponent('_component')(_react3.default.createClass({
+  displayName: 'NewItem',
+  render: function render() {
+    var _props = this.props;
+    var model = _props.model;
+    var submitFn = _props.submitFn;
+    var placeholder = _props.placeholder;
+    var box = _props.box;
+    var style = _props.style;
+
+    return _react3.default.createElement(
+      'form',
+      { style: style, name: 'form', onSubmit: submitFn },
+      _react3.default.createElement(
+        _reactReduxForm.Field,
+        { model: model },
+        _react3.default.createElement('input', { className: box ? _TaskList2.default.newItemBox : _TaskList2.default.newItem, type: 'text', placeholder: placeholder })
+      )
+    );
+  }
+}));
+
+var Component = exports.Component = _wrapComponent('_component2')(_react3.default.createClass({
+  displayName: 'Component',
+  moveGroup: function moveGroup(_ref) {
+    var group = _ref.group;
+    var destinationGroup = _ref.destinationGroup;
+    var after = _ref.after;
+    var save = _ref.save;
+
+    this.props.TasksActions.moveGroup({
+      boardId: this.props.board.data._id,
+      group: group,
+      destinationGroup: destinationGroup,
+      after: after,
+      save: save
+    });
+  },
+  moveCard: function moveCard(_ref2) {
+    var task = _ref2.task;
+    var destinationTask = _ref2.destinationTask;
+    var destinationGroup = _ref2.destinationGroup;
+    var after = _ref2.after;
+    var save = _ref2.save;
+
+    this.props.TasksActions.moveTask({
+      boardId: this.props.board.data._id,
+      task: task,
+      destinationTask: destinationTask,
+      destinationGroup: destinationGroup,
+      after: after,
+      save: save
+    });
+  },
+  beginDrag: function beginDrag(taskId) {
+    this.props.TasksActions.beginDrag({
+      boardId: this.props.board.data._id,
+      taskId: taskId
+    });
+  },
+  endDrag: function endDrag(taskId) {
+    this.props.TasksActions.endDrag({
+      boardId: this.props.board.data._id,
+      taskId: taskId
+    });
+  },
+  newTask: function newTask(event, groupId) {
+    event.preventDefault();
+    this.props.TasksActions.newTask({
+      boardId: this.props.board.data._id,
+      task: {
+        name: this.props.board.newTaskString[groupId],
+        group: groupId,
+        boardId: this.props.board.data._id
+      }
+    });
+  },
+  newGroup: function newGroup(event) {
+    event.preventDefault();
+    this.props.TasksActions.newGroup({
+      boardId: this.props.board.data._id,
+      group: {
+        name: this.props.board.newGroupString
+      }
+    });
+  },
+  deleteGroup: function deleteGroup(groupId) {
+    this.props.TasksActions.deleteGroupConfirm({
+      boardId: this.props.board.data._id,
+      groupId: groupId
+    });
+  },
+  updateGroup: function updateGroup(group) {
+    this.props.TasksActions.updateGroup({
+      group: group
+    });
+  },
+  render: function render() {
+    var _this = this;
+
+    var _props2 = this.props;
+    var board = _props2.board;
+    var layout = _props2.layout;
+    var className = _props2.className;
+
+    var entityModel = 'tasks.boards.' + board.data._id;
+
+    return _react3.default.createElement(
+      'div',
+      { className: className + ' layout-column flex', style: layout == 'board' ? { overflowX: 'scroll' } : { overflowY: 'scroll' } },
+      _react3.default.createElement(
+        _TaskGroupParent2.default,
+        { layout: layout },
+        board.data.groups.map(function (group, groupIndex) {
+          return _react3.default.createElement(
+            _TaskGroupWrapped2.default,
+            {
+              key: group._id,
+              index: groupIndex,
+              id: group._id,
+              item: group,
+              groups: board.data.groups.map(function (group) {
+                return group._id;
+              }),
+              moveGroup: _this.moveGroup,
+              layout: layout },
+            _react3.default.createElement(
+              _TaskGroup2.default,
+              {
+                item: group,
+                layout: layout,
+                entityModel: entityModel + '.data.groups[' + groupIndex + ']',
+                deleteGroup: function deleteGroup() {
+                  return _this.deleteGroup(group._id);
+                },
+                updateGroup: function updateGroup() {
+                  return _this.updateGroup(group);
+                } },
+              _react3.default.createElement(
+                _TaskListItemParent2.default,
+                {
+                  groupId: group._id,
+                  moveCard: _this.moveCard,
+                  tasks: group.tasks,
+                  layout: layout },
+                group.tasks ? group.tasks.map(function (taskId, cardIndex) {
+                  return _react3.default.createElement(
+                    _TaskListItemWrapped2.default,
+                    {
+                      index: cardIndex,
+                      id: taskId,
+                      item: taskId,
+                      groupId: group._id,
+                      tasks: group.tasks,
+                      moveCard: _this.moveCard,
+                      beginDrag: _this.beginDrag,
+                      endDrag: _this.endDrag },
+                    _react3.default.createElement(_TaskListItem2.default, { item: taskId, draggable: true, layout: layout })
+                  );
+                }) : '',
+                _react3.default.createElement(NewItem, {
+                  style: layout == 'list' ? { marginLeft: '60px' } : {},
+                  model: entityModel + '.newTaskString.' + group._id,
+                  placeholder: 'New Task',
+                  submitFn: function submitFn(event) {
+                    return _this.newTask(event, group._id);
+                  },
+                  box: layout == 'board'
+                })
+              )
+            )
+          );
+        }),
+        _react3.default.createElement(
+          _TaskGroup2.default,
+          { simpleGroup: true },
+          _react3.default.createElement(NewItem, {
+            model: entityModel + '.newGroupString',
+            placeholder: 'New Group',
+            submitFn: this.newGroup,
+            box: layout == 'board'
+          })
+        )
+      )
+    );
+  }
+}));
+
+////////////////////////////////////////////////////////////////////
+
+function mapStateToProps() {
+  return {};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    TasksActions: (0, _redux.bindActionCreators)(TasksActions, dispatch)
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Component);

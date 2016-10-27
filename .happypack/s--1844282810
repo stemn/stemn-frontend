@@ -1,0 +1,185 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
+var _TimelineUtils = require('app/renderer/main/modules/Timeline/Timeline.utils.js');
+
+var _TogglerExpand = require('app/renderer/main/components/Toggler/TogglerExpand/TogglerExpand.jsx');
+
+var _TogglerExpand2 = _interopRequireDefault(_TogglerExpand);
+
+var _SidebarTimelineRow = require('./SidebarTimelineRow.css');
+
+var _SidebarTimelineRow2 = _interopRequireDefault(_SidebarTimelineRow);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/shared/modules/SyncTimeline/SidebarTimeline/SidebarTimelineRow.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/shared/modules/SyncTimeline/SidebarTimeline/SidebarTimelineRow.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+}
+
+// Styles
+
+
+exports.default = _wrapComponent('_component')(_react3.default.createClass({
+  getInitialState: function getInitialState() {
+    return {
+      isOpen: false
+    };
+  },
+  toggle: function toggle(toState) {
+    this.setState({ isOpen: toState === null ? !this.state.isOpen : toState });
+  },
+  render: function render() {
+    var _this = this;
+
+    var timeFromNow = (0, _moment2.default)(this.props.item.timestamp).fromNow();
+
+    if (this.props.item.event == 'commit') {
+      var _ret = function () {
+        var groupedRevisions = (0, _TimelineUtils.groupRevisions)(_this.props.item.data.items);
+        var getChildRows = function getChildRows() {
+          if (_this.state.isOpen) {
+            return groupedRevisions.map(function (file) {
+              return _react3.default.createElement(
+                'div',
+                { key: file._id,
+                  className: (0, _classnames2.default)(_SidebarTimelineRow2.default.timelineRow, _SidebarTimelineRow2.default.inner, 'layout-row', _defineProperty({}, _SidebarTimelineRow2.default.active, _this.props.isActive)),
+                  onClick: _this.props.clickFn },
+                _react3.default.createElement(
+                  'div',
+                  { className: 'flex' },
+                  file.data.path
+                ),
+                _react3.default.createElement(
+                  'div',
+                  null,
+                  file.revisions.length,
+                  ' revisions'
+                )
+              );
+            });
+          }
+        };
+        return {
+          v: _react3.default.createElement(
+            'div',
+            null,
+            _react3.default.createElement(
+              'div',
+              { className: (0, _classnames2.default)('layout-row', 'layout-align-start-center', _SidebarTimelineRow2.default.timelineRow, _defineProperty({}, _SidebarTimelineRow2.default.active, _this.props.isActive)) },
+              _react3.default.createElement(
+                'div',
+                { className: _SidebarTimelineRow2.default.inner + ' flex layout-row layout-align-start-center', onClick: _this.props.clickFn },
+                _react3.default.createElement('img', { style: { width: '40px', height: '40px' }, src: 'https://stemn.com' + _this.props.item.user.picture + '?size=thumb&crop=true' }),
+                _react3.default.createElement(
+                  'div',
+                  { className: _SidebarTimelineRow2.default.text + ' flex text-ellipsis' },
+                  _react3.default.createElement(
+                    'b',
+                    null,
+                    _this.props.item.data.summary
+                  ),
+                  _react3.default.createElement(
+                    'div',
+                    { style: { marginTop: '5px' } },
+                    timeFromNow,
+                    ' by ',
+                    _this.props.item.user.name
+                  )
+                )
+              ),
+              _react3.default.createElement(
+                _TogglerExpand2.default,
+                { isActive: _this.state.isOpen, onClick: function onClick() {
+                    return _this.toggle(null);
+                  } },
+                groupedRevisions.length
+              )
+            ),
+            getChildRows()
+          )
+        };
+      }();
+
+      if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+    } else {
+      return _react3.default.createElement(
+        'div',
+        { className: (0, _classnames2.default)('layout-row', 'layout-align-start-center', _SidebarTimelineRow2.default.timelineRow, _defineProperty({}, _SidebarTimelineRow2.default.active, this.props.isActive)) },
+        _react3.default.createElement(
+          'div',
+          { className: _SidebarTimelineRow2.default.inner + ' flex layout-row layout-align-start-center', onClick: this.props.clickFn },
+          _react3.default.createElement('img', { style: { width: '40px', height: '40px' }, src: 'https://stemn.com' + this.props.item.user.picture + '?size=thumb&crop=true' }),
+          _react3.default.createElement(
+            'div',
+            { className: _SidebarTimelineRow2.default.text + ' flex text-ellipsis' },
+            _react3.default.createElement(
+              'b',
+              null,
+              this.props.item.data.path
+            ),
+            _react3.default.createElement(
+              'div',
+              { style: { marginTop: '5px' } },
+              timeFromNow,
+              ' by ',
+              this.props.item.user.name
+            )
+          )
+        )
+      );
+    }
+  }
+}));
+module.exports = exports['default'];

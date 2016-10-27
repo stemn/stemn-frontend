@@ -14,7 +14,6 @@ const compiler = webpack(config, (err, stats) => {
   - http://webpack.github.io/analyse/
   - https://alexkuz.github.io/webpack-chart/
   - https://chrisbateman.github.io/webpack-visualizer/
-  
   ********************************************/
   fs.writeFileSync('./stats.json', JSON.stringify(stats.toJson()));
 });

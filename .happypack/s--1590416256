@@ -1,0 +1,43 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.loadSuggestions = loadSuggestions;
+exports.updateInputValue = updateInputValue;
+exports.clearSuggestions = clearSuggestions;
+var UPDATE_INPUT_VALUE = exports.UPDATE_INPUT_VALUE = 'UPDATE_INPUT_VALUE';
+var CLEAR_SUGGESTIONS = exports.CLEAR_SUGGESTIONS = 'CLEAR_SUGGESTIONS';
+
+function loadSuggestions(value) {
+  return {
+    type: 'FETCH_SUGGESTIONS',
+    http: true,
+    payload: {
+      url: '/api/v1/search',
+      method: 'GET',
+      params: {
+        type: 'user',
+        key: 'name',
+        value: value,
+        size: 20,
+        match: 'regex'
+      }
+    }
+  };
+}
+
+function updateInputValue(value) {
+  return {
+    type: UPDATE_INPUT_VALUE,
+    payload: {
+      value: value
+    }
+  };
+}
+
+function clearSuggestions() {
+  return {
+    type: CLEAR_SUGGESTIONS
+  };
+}

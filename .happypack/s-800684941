@@ -1,0 +1,188 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var _projects = require('app/shared/actions/projects.js');
+
+var ProjectsActions = _interopRequireWildcard(_projects);
+
+var _auth = require('app/shared/actions/auth.js');
+
+var AuthActions = _interopRequireWildcard(_auth);
+
+var _reactSelect = require('react-select');
+
+var _reactSelect2 = _interopRequireDefault(_reactSelect);
+
+var _select = require('app/renderer/assets/css/select.css');
+
+var _select2 = _interopRequireDefault(_select);
+
+var _reactReduxForm = require('react-redux-form');
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/components/Project/ProjectLinkRemote/ProjectLinkRemote.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/components/Project/ProjectLinkRemote/ProjectLinkRemote.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+} // Container Core
+
+
+// Container Actions
+
+
+// Component
+
+
+// Styles
+
+
+/////////////////////////////////////////////////////////////////////////////
+///////////////////////////////// COMPONENT /////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+var Component = _wrapComponent('_component')(_react3.default.createClass({
+  displayName: 'Component',
+  linkRemote: function linkRemote() {
+    this.props.ProjectsActions.linkRemote({
+      projectId: this.props.project._id,
+      provider: 'drive',
+      path_display: '',
+      path: '',
+      id: ''
+    });
+  },
+  onChangeFn: function onChangeFn(selectedProvider) {
+    var _this = this;
+
+    // If the selected provider is not authed, auth it
+    if (!selectedProvider.isAuthed(this.props.auth.user.accounts)) {
+      this.props.AuthActions.authenticate(selectedProvider.authType).then(function (response) {
+        _this.props.dispatch(_reactReduxForm.actions.change(_this.props.model, selectedProvider.value));
+        console.log(response);
+      }).catch(function (response) {
+        console.log(response);
+      });
+    }
+    // Else, we update the model straight away
+    else {
+        this.props.dispatch(_reactReduxForm.actions.change(this.props.model, selectedProvider.value));
+      }
+  },
+  render: function render() {
+    var _props = this.props;
+    var model = _props.model;
+    var value = _props.value;
+    var dispatch = _props.dispatch;
+
+
+    var options = [{
+      value: 'dropbox',
+      label: 'Dropbox',
+      authType: 'dropbox',
+      isAuthed: function isAuthed(accounts) {
+        return accounts.dropbox.id;
+      }
+    }, {
+      value: 'drive',
+      label: 'Drive',
+      authType: 'google',
+      isAuthed: function isAuthed(accounts) {
+        return accounts.google.refreshToken;
+      }
+    }, {
+      value: 'none',
+      label: 'None',
+      authType: '',
+      isAuthed: function isAuthed(accounts) {
+        return true;
+      }
+    }];
+
+    return _react3.default.createElement(
+      'div',
+      null,
+      _react3.default.createElement(_reactSelect2.default, {
+        name: 'form-field-name',
+        value: value,
+        options: options,
+        onChange: this.onChangeFn,
+        clearable: false
+      })
+    );
+  }
+}));
+
+/////////////////////////////////////////////////////////////////////////////
+///////////////////////////////// CONTAINER /////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+function mapStateToProps(_ref, _ref2) {
+  var auth = _ref.auth;
+
+  _objectDestructuringEmpty(_ref2);
+
+  return {
+    auth: auth
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    ProjectsActions: (0, _redux.bindActionCreators)(ProjectsActions, dispatch),
+    AuthActions: (0, _redux.bindActionCreators)(AuthActions, dispatch),
+    dispatch: dispatch
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Component);
+module.exports = exports['default'];

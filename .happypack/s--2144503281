@@ -1,0 +1,54 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = reducer;
+
+var _icepick = require('icepick');
+
+var _icepick2 = _interopRequireDefault(_icepick);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var initialState = {
+  stack: []
+};
+
+function reducer() {
+  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+  var action = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+
+  switch (action.type) {
+    case 'MODALS/SHOW_MODAL':
+      return _icepick2.default.updateIn(state, ['stack'], function (stack) {
+        stack = stack || [];
+        var isLimited = action.payload.limit;
+        var isLessThanLimit = isLimited ? stack.filter(function (modal) {
+          return modal.modalType == action.payload.modalType;
+        }).length < action.payload.limit : true;
+        return isLessThanLimit ? _icepick2.default.push(stack, action.payload) : stack;
+      });
+    case 'MODALS/HIDE_MODAL':
+      var modalIndex = state.stack.findIndex(function (modal) {
+        return modal.modalId == action.payload.modalId;
+      });
+      return _icepick2.default.merge(state, {
+        stack: _icepick2.default.splice(state.stack, modalIndex, 1)
+      });
+    case 'MODALS/CLOSE_ALL':
+      return _icepick2.default.assoc(state, 'stack', []);
+    default:
+      return state;
+  }
+}
+
+//    case 'MODALS/SHOW_MODAL':
+//      return u({
+//        [action.payload.modalId] : {
+//          isOpen: true,
+//          modalProps: action.payload.modalProps
+//        }
+//      }, state)
+
+module.exports = exports['default'];

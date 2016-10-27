@@ -1,0 +1,364 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Component = undefined;
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var _sidebar = require('app/shared/actions/sidebar');
+
+var SidebarActions = _interopRequireWildcard(_sidebar);
+
+var _auth = require('app/shared/actions/auth');
+
+var AuthActions = _interopRequireWildcard(_auth);
+
+var _projects = require('app/shared/actions/projects');
+
+var ProjectsActions = _interopRequireWildcard(_projects);
+
+var _ModalActions = require('app/renderer/main/modules/Modal/Modal.actions.js');
+
+var ModalActions = _interopRequireWildcard(_ModalActions);
+
+var _system = require('app/shared/actions/system');
+
+var SystemActions = _interopRequireWildcard(_system);
+
+var _reactRouterRedux = require('react-router-redux');
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _Sidebar = require('./Sidebar.css');
+
+var _Sidebar2 = _interopRequireDefault(_Sidebar);
+
+var _SidebarAvatar = require('./SidebarAvatar.css');
+
+var _SidebarAvatar2 = _interopRequireDefault(_SidebarAvatar);
+
+var _DragResize = require('app/renderer/main/modules/DragResize/DragResize.jsx');
+
+var _DragResize2 = _interopRequireDefault(_DragResize);
+
+var _reactRouter = require('react-router');
+
+var _reactContextmenu = require('react-contextmenu');
+
+var _PopoverMenu = require('app/renderer/main/components/PopoverMenu/PopoverMenu');
+
+var _PopoverMenu2 = _interopRequireDefault(_PopoverMenu);
+
+var _reactReduxForm = require('react-redux-form');
+
+var _ContextMenu = require('app/renderer/main/modules/ContextMenu/ContextMenu.jsx');
+
+var _ContextMenu2 = _interopRequireDefault(_ContextMenu);
+
+var _SidebarProjectButton = require('./SidebarProjectButton.jsx');
+
+var _SidebarProjectButton2 = _interopRequireDefault(_SidebarProjectButton);
+
+var _SimpleIconButton = require('app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton');
+
+var _SimpleIconButton2 = _interopRequireDefault(_SimpleIconButton);
+
+var _menu = require('react-icons/md/menu');
+
+var _menu2 = _interopRequireDefault(_menu);
+
+var _search = require('react-icons/md/search');
+
+var _search2 = _interopRequireDefault(_search);
+
+var _settings = require('react-icons/md/settings');
+
+var _settings2 = _interopRequireDefault(_settings);
+
+var _add = require('react-icons/md/add');
+
+var _add2 = _interopRequireDefault(_add);
+
+var _UserAvatar = require('app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx');
+
+var _UserAvatar2 = _interopRequireDefault(_UserAvatar);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Sidebar/Sidebar.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Sidebar/Sidebar.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+} // Container Core
+
+
+// Container Actions
+
+
+// Component Core
+
+
+// Styles
+
+
+// Sub Components
+
+
+///////////////////////////////// COMPONENT /////////////////////////////////
+var projectContextIdentifier = 'ProjectContextIdentifier';
+var ProjectWithContext = (0, _reactContextmenu.ContextMenuLayer)(projectContextIdentifier, function (props) {
+  return props.item;
+})(_SidebarProjectButton2.default);
+
+var Component = exports.Component = _wrapComponent('_component')(_react3.default.createClass({
+  displayName: 'Component',
+  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.user._id && !nextProps.projects.userProjects.loading && !nextProps.projects.userProjects.data) {
+      nextProps.projectsActions.getUserProjects({
+        userId: nextProps.auth.user._id
+      });
+    }
+  },
+  showProjectNewModal: function showProjectNewModal() {
+    this.props.modalActions.showModal({ modalType: 'PROJECT_NEW' });
+  },
+  render: function render() {
+    var _this = this;
+
+    var _props = this.props;
+    var projectsActions = _props.projectsActions;
+    var projects = _props.projects;
+    var dispatch = _props.dispatch;
+
+    var sidebarStyle = (0, _classnames2.default)('layout-column', 'flex', 'rel-box', _Sidebar2.default.sidebar);
+
+    var nameRegex = new RegExp(this.props.sidebar.searchString, 'i');
+    var filteredProjects = projects.userProjects.data ? projects.userProjects.data.filter(function (project) {
+      return nameRegex.test(project.name);
+    }) : [];
+
+    var projectContextMenu = [{
+      label: 'Open Folder',
+      isHidden: function isHidden(item) {
+        return !item.remote || !item.remote.connected;
+      },
+      onClick: function onClick(item) {
+        _this.props.systemActions.openFile({
+          projectId: item._id,
+          provider: item.remote.provider,
+          path: ''
+        });
+      }
+    }, {
+      label: 'Project Settings',
+      subMenu: [{
+        label: 'General Settings',
+        onClick: function onClick(item) {
+          return dispatch((0, _reactRouterRedux.push)('/project/' + item._id + '/settings'));
+        }
+      }, {
+        label: 'Task Settings',
+        onClick: function onClick(item) {
+          return dispatch((0, _reactRouterRedux.push)('/project/' + item._id + '/settings/tasks'));
+        }
+      }, {
+        label: 'Team Settings',
+        onClick: function onClick(item) {
+          return dispatch((0, _reactRouterRedux.push)('/project/' + item._id + '/settings/team'));
+        }
+      }]
+    }, {
+      label: 'Delete Project',
+      divider: true,
+      onClick: function onClick(item) {
+        return projectsActions.confirmDeleteProject({
+          projectId: item._id
+        });
+      }
+    }];
+
+    return _react3.default.createElement(
+      _DragResize2.default,
+      { side: 'right', width: '300', widthRange: [0, 500], animateHide: !this.props.sidebar.show, className: 'layout-column flex' },
+      _react3.default.createElement(
+        'div',
+        { className: sidebarStyle },
+        _react3.default.createElement(
+          'div',
+          { className: _Sidebar2.default.sidebarToolbar + ' layout-row layout-align-start-center' },
+          _react3.default.createElement(
+            _PopoverMenu2.default,
+            { preferPlace: 'below' },
+            _react3.default.createElement(
+              'div',
+              null,
+              _react3.default.createElement(
+                _SimpleIconButton2.default,
+                { style: { padding: '0px', color: 'black' }, title: 'Create new project' },
+                _react3.default.createElement(_add2.default, { size: '25' })
+              )
+            ),
+            _react3.default.createElement(
+              'div',
+              { className: 'PopoverMenu' },
+              _react3.default.createElement(
+                'a',
+                { onClick: this.showProjectNewModal },
+                'Create New Project'
+              )
+            )
+          ),
+          _react3.default.createElement('div', { className: 'flex' }),
+          _react3.default.createElement(
+            _SimpleIconButton2.default,
+            { title: 'Toggle sidebar', style: { padding: '0px', color: 'black' }, onClick: function onClick() {
+                _this.props.sidebarActions.toggleSidebar();
+              } },
+            _react3.default.createElement(_menu2.default, { size: '25' })
+          )
+        ),
+        _react3.default.createElement(
+          'div',
+          { className: _Sidebar2.default.sidebarSearch },
+          _react3.default.createElement(
+            _reactReduxForm.Field,
+            { model: 'sidebar.searchString' },
+            _react3.default.createElement('input', { className: 'dr-input text-ellipsis', type: 'text', placeholder: 'Search all projects' })
+          ),
+          _react3.default.createElement(_search2.default, { className: _Sidebar2.default.sidebarSearchIcon, size: '25' })
+        ),
+        _react3.default.createElement(
+          'div',
+          { className: 'scroll-box flex' },
+          filteredProjects.map(function (item, idx) {
+            return _react3.default.createElement(ProjectWithContext, { key: idx, item: item, isActive: item._id == _this.props.params.stub, to: '/project/' + item._id });
+          }),
+          _react3.default.createElement(_ContextMenu2.default, { identifier: projectContextIdentifier, menu: projectContextMenu })
+        ),
+        _react3.default.createElement(
+          'div',
+          null,
+          _react3.default.createElement(
+            'div',
+            { className: 'layout-row layout-align-start-center' },
+            _react3.default.createElement(
+              _PopoverMenu2.default,
+              null,
+              _react3.default.createElement(
+                'a',
+                { className: 'flex' },
+                _react3.default.createElement(
+                  'div',
+                  { className: _SidebarAvatar2.default.userWrapper + ' flex layout-row layout-align-start-center' },
+                  _react3.default.createElement(_UserAvatar2.default, { picture: this.props.auth.user.picture, className: _SidebarAvatar2.default.userAvatar }),
+                  _react3.default.createElement(
+                    'div',
+                    { className: 'flex text-ellipsis' },
+                    this.props.auth.user.name
+                  )
+                )
+              ),
+              _react3.default.createElement(
+                'div',
+                { className: 'PopoverMenu' },
+                _react3.default.createElement(
+                  'a',
+                  { href: '#/settings/application' },
+                  'Application Settings'
+                ),
+                _react3.default.createElement(
+                  'a',
+                  { href: '#/settings/account' },
+                  'Account Settings'
+                ),
+                _react3.default.createElement(
+                  'a',
+                  { onClick: function onClick() {
+                      _this.props.authActions.logout();
+                    } },
+                  'Sign out'
+                )
+              )
+            ),
+            _react3.default.createElement(
+              _reactRouter.Link,
+              { className: _SidebarAvatar2.default.userSettings + ' layout-column layout-align-center-center', to: '/settings/application' },
+              _react3.default.createElement(_settings2.default, { size: '25' })
+            )
+          )
+        )
+      )
+    );
+  }
+}));
+
+///////////////////////////////// CONTAINER /////////////////////////////////
+
+function mapStateToProps(_ref, _ref2) {
+  var sidebar = _ref.sidebar;
+  var auth = _ref.auth;
+  var projects = _ref.projects;
+  var params = _ref2.params;
+
+  return {
+    sidebar: sidebar,
+    auth: auth,
+    params: params,
+    projects: projects
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    authActions: (0, _redux.bindActionCreators)(AuthActions, dispatch),
+    sidebarActions: (0, _redux.bindActionCreators)(SidebarActions, dispatch),
+    projectsActions: (0, _redux.bindActionCreators)(ProjectsActions, dispatch),
+    modalActions: (0, _redux.bindActionCreators)(ModalActions, dispatch),
+    systemActions: (0, _redux.bindActionCreators)(SystemActions, dispatch),
+    dispatch: dispatch
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Component);

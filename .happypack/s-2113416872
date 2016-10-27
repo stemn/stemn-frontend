@@ -1,0 +1,113 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Component = undefined;
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _LoadingOverlay = require('app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx');
+
+var _LoadingOverlay2 = _interopRequireDefault(_LoadingOverlay);
+
+var _TaskList = require('app/renderer/main/modules/Tasks/TaskList/TaskList.jsx');
+
+var _TaskList2 = _interopRequireDefault(_TaskList);
+
+var _Tasks = require('app/renderer/main/modules/Tasks/Tasks.jsx');
+
+var _Tasks2 = _interopRequireDefault(_Tasks);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/pages/ProjectTaskPage/ProjectTaskPage.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/pages/ProjectTaskPage/ProjectTaskPage.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+} // Container Core
+
+
+// Container Actions
+
+// Component Core
+
+
+// Styles
+
+
+// Sub Components
+
+
+///////////////////////////////// COMPONENT /////////////////////////////////
+
+var Component = exports.Component = _wrapComponent('_component')(_react3.default.createClass({
+  displayName: 'Component',
+  render: function render() {
+    var _props = this.props;
+    var project = _props.project;
+    var entityModel = _props.entityModel;
+
+    return _react3.default.createElement(_Tasks2.default, { projectId: project.data._id });
+  }
+}));
+
+///////////////////////////////// CONTAINER /////////////////////////////////
+
+function mapStateToProps(_ref, _ref2) {
+  var tasks = _ref.tasks;
+  var projects = _ref.projects;
+  var params = _ref2.params;
+
+  var project = projects.data[params.stub];
+  return {
+    project: project,
+    entityModel: 'projects.data.' + params.stub
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {};
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Component);

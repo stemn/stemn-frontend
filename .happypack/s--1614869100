@@ -1,0 +1,190 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Component = undefined;
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var _reactRouter = require('react-router');
+
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _DashboardPage = require('./DashboardPage.css');
+
+var _DashboardPage2 = _interopRequireDefault(_DashboardPage);
+
+var _Header = require('app/renderer/main/modules/Header/Header.jsx');
+
+var _Header2 = _interopRequireDefault(_Header);
+
+var _DragResize = require('app/renderer/main/modules/DragResize/DragResize.jsx');
+
+var _DragResize2 = _interopRequireDefault(_DragResize);
+
+var _Calendar = require('app/renderer/main/modules/Calendar/Calendar.jsx');
+
+var _Calendar2 = _interopRequireDefault(_Calendar);
+
+var _Tabs = require('app/renderer/main/components/Tabs/Tabs');
+
+var _Tabs2 = _interopRequireDefault(_Tabs);
+
+var _Tasks = require('app/renderer/main/modules/Tasks/Tasks.jsx');
+
+var _Tasks2 = _interopRequireDefault(_Tasks);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/pages/DashboardPage/DashboardPage.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/pages/DashboardPage/DashboardPage.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+} // Container Core
+
+
+// Container Actions
+
+// Component Core
+
+
+// Styles
+
+
+// Sub Components
+
+
+/////////////////////////////////////////////////////////////////////////////
+///////////////////////////////// COMPONENT /////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+var Component = exports.Component = _wrapComponent('_component')(_react3.default.createClass({
+  displayName: 'Component',
+  getInitialState: function getInitialState() {
+    return {
+      date: (0, _moment2.default)()
+    };
+  },
+  render: function render() {
+    var _this = this;
+
+    return _react3.default.createElement(
+      'div',
+      { className: 'layout-column flex rel-box' },
+      _react3.default.createElement(_Header2.default, { absolute: true }),
+      _react3.default.createElement(
+        'div',
+        { className: 'flex layout-row' },
+        _react3.default.createElement(
+          'div',
+          { className: 'flex', style: { padding: '50px' } },
+          _react3.default.createElement(
+            'div',
+            { className: 'layout-row layout-align-center' },
+            _react3.default.createElement(
+              _Tabs2.default,
+              { size: 'lg' },
+              _react3.default.createElement(
+                _reactRouter.Link,
+                { activeClassName: 'active', to: '/dashboard' },
+                'My Tasks'
+              ),
+              _react3.default.createElement(
+                _reactRouter.Link,
+                { activeClassName: 'active', to: '/feed' },
+                'Activity'
+              )
+            )
+          ),
+          _react3.default.createElement('br', null),
+          _react3.default.createElement('br', null),
+          _react3.default.createElement(_Tasks2.default, null)
+        ),
+        _react3.default.createElement(
+          _DragResize2.default,
+          { side: 'left', width: '450', widthRange: [0, 600], className: 'layout-column' },
+          _react3.default.createElement(
+            'div',
+            { className: _DashboardPage2.default.sidebarRight + ' layout-column flex' },
+            _react3.default.createElement(
+              'div',
+              { style: { marginTop: '15px' } },
+              _react3.default.createElement(_Calendar2.default, {
+                onNextMonth: function onNextMonth() {
+                  return _this.setState({ date: _this.state.date.clone().add(1, 'months') });
+                },
+                onPrevMonth: function onPrevMonth() {
+                  return _this.setState({ date: _this.state.date.clone().subtract(1, 'months') });
+                },
+                date: this.state.date,
+                onPickDate: function onPickDate(date) {
+                  _this.setState({ date: date });
+                },
+                renderDay: function renderDay(day) {
+                  return day.format('D');
+                }
+              })
+            )
+          )
+        )
+      )
+    );
+  }
+}));
+
+/////////////////////////////////////////////////////////////////////////////
+///////////////////////////////// CONTAINER /////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+function mapStateToProps() {
+  return {};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {};
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Component);

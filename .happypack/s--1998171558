@@ -1,0 +1,151 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Component = undefined;
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _TaskRow = require('./TaskRow.css');
+
+var _TaskRow2 = _interopRequireDefault(_TaskRow);
+
+var _Checkbox = require('app/renderer/main/components/Input/Checkbox/Checkbox');
+
+var _Checkbox2 = _interopRequireDefault(_Checkbox);
+
+var _Button = require('app/renderer/main/components/Buttons/Button/Button');
+
+var _Button2 = _interopRequireDefault(_Button);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Mentions/TaskMentionModal/TaskRow/TaskRow.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Mentions/TaskMentionModal/TaskRow/TaskRow.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+} // Container Core
+
+
+// Component Core
+
+// Styles
+
+
+// Sub Components
+
+
+///////////////////////////////// COMPONENT /////////////////////////////////
+
+var Component = exports.Component = _wrapComponent('_component')(_react3.default.createClass({
+  displayName: 'Component',
+  render: function render() {
+    var _props = this.props;
+    var task = _props.task;
+    var entityModel = _props.entityModel;
+    var toggleComplete = _props.toggleComplete;
+    var toggleRelated = _props.toggleRelated;
+    var mention = _props.mention;
+
+
+    if (!task) {
+      return _react3.default.createElement(
+        'div',
+        null,
+        'Task Loading'
+      );
+    }
+    return _react3.default.createElement(
+      'div',
+      { className: _TaskRow2.default.row + ' layout-row layout-align-start-center' },
+      _react3.default.createElement(
+        'div',
+        { className: 'flex text-ellipsis', style: { marginBottom: '2px' } },
+        task.data.name
+      ),
+      _react3.default.createElement(
+        _Button2.default,
+        {
+          className: (0, _classnames2.default)('xs', _TaskRow2.default.button, _defineProperty({}, _TaskRow2.default.active, mention && mention.complete)),
+          title: 'Mark as Complete',
+          onClick: toggleComplete },
+        'Complete'
+      ),
+      _react3.default.createElement(
+        _Button2.default,
+        {
+          className: (0, _classnames2.default)('xs', _TaskRow2.default.button, _defineProperty({}, _TaskRow2.default.active, mention && mention.related)),
+          title: 'Mark as related',
+          onClick: toggleRelated },
+        'Related'
+      )
+    );
+  }
+}));
+
+//        <div style={{marginRight: '10px'}} title="Mark as Complete">
+//          <Checkbox circle={true} model={`${entityModel}.data.complete`} value={task.data.complete}/>
+//        </div>
+//        <div className={classes.checkbox} title="Related Task">
+//          <Checkbox />
+//        </div>
+///////////////////////////////// CONTAINER /////////////////////////////////
+
+function mapStateToProps(_ref, _ref2) {
+  var tasks = _ref.tasks;
+  var taskId = _ref2.taskId;
+
+  return {
+    task: tasks.data[taskId],
+    entityModel: 'tasks.data[' + taskId + ']'
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(Component);

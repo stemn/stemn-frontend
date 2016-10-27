@@ -1,0 +1,79 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _reactAutosuggest = require('react-autosuggest');
+
+var _reactAutosuggest2 = _interopRequireDefault(_reactAutosuggest);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+}
+
+//import styles from './UserAvatar.css';
+
+exports.default = _wrapComponent('_component')(_react3.default.createClass({
+  default: '/assets/images/default/user-1.png',
+  render: function render() {
+    var _props = this.props;
+    var style = _props.style;
+    var shape = _props.shape;
+    var size = _props.size;
+    var className = _props.className;
+    var picture = _props.picture;
+    var title = _props.title;
+
+    var styles = {
+      borderRadius: shape == 'square' ? '3px' : '50%',
+      width: size || '30px',
+      height: size || '30px'
+    };
+    var actualStyles = Object.assign({}, style, styles);
+    return _react3.default.createElement('img', { className: className,
+      title: title,
+      style: actualStyles,
+      src: 'https://stemn.com' + (picture || this.default) + '?size=thumb&crop=true'
+    });
+  }
+}));
+module.exports = exports['default'];

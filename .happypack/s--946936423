@@ -1,0 +1,183 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _class, _temp;
+
+var _omit = require('lodash/omit');
+
+var _omit2 = _interopRequireDefault(_omit);
+
+var _keys = require('lodash/keys');
+
+var _keys2 = _interopRequireDefault(_keys);
+
+var _substyle = require('substyle');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _components = {
+  Suggestion: {
+    displayName: 'Suggestion'
+  }
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Mentions/MentionsInput/Suggestion.js',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Mentions/MentionsInput/Suggestion.js',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+}
+
+var Suggestion = _wrapComponent('Suggestion')((_temp = _class = function (_Component) {
+  _inherits(Suggestion, _Component);
+
+  function Suggestion() {
+    _classCallCheck(this, Suggestion);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Suggestion).apply(this, arguments));
+  }
+
+  _createClass(Suggestion, [{
+    key: 'render',
+    value: function render() {
+      var rest = (0, _omit2.default)(this.props, (0, _keys2.default)(Suggestion.propTypes));
+
+      return _react3.default.createElement(
+        'li',
+        _extends({}, rest, substyle(this.props, { "&focused": this.props.focused })),
+        this.renderContent()
+      );
+    }
+  }, {
+    key: 'renderContent',
+    value: function renderContent() {
+      var _props = this.props;
+      var id = _props.id;
+      var query = _props.query;
+      var descriptor = _props.descriptor;
+      var suggestion = _props.suggestion;
+      var index = _props.index;
+
+
+      var display = this.getDisplay();
+      var highlightedDisplay = this.renderHighlightedDisplay(display, query);
+
+      if (descriptor.props.renderSuggestion) {
+        return descriptor.props.renderSuggestion(suggestion, query, highlightedDisplay, index);
+      }
+
+      return highlightedDisplay;
+    }
+  }, {
+    key: 'getDisplay',
+    value: function getDisplay() {
+      var suggestion = this.props.suggestion;
+
+
+      if (suggestion instanceof String) {
+        return suggestion;
+      }
+
+      var id = suggestion.id;
+      var display = suggestion.display;
+
+
+      if (!id || !display) {
+        return id;
+      }
+
+      return display;
+    }
+  }, {
+    key: 'renderHighlightedDisplay',
+    value: function renderHighlightedDisplay(display) {
+      var query = this.props.query;
+
+
+      var i = display.toLowerCase().indexOf(query.toLowerCase());
+
+      if (i === -1) {
+        return _react3.default.createElement(
+          'span',
+          substyle(this.props, "display"),
+          display
+        );
+      }
+
+      return _react3.default.createElement(
+        'span',
+        substyle(this.props, "display"),
+        display.substring(0, i),
+        _react3.default.createElement(
+          'b',
+          substyle(this.props, "highlight"),
+          display.substring(i, i + query.length)
+        ),
+        display.substring(i + query.length)
+      );
+    }
+  }]);
+
+  return Suggestion;
+}(_react2.Component), _class.propTypes = {
+  id: _react2.PropTypes.string.isRequired,
+  query: _react2.PropTypes.string.isRequired,
+
+  suggestion: _react2.PropTypes.oneOfType([_react2.PropTypes.string, _react2.PropTypes.shape({
+    id: _react2.PropTypes.string.isRequired,
+    display: _react2.PropTypes.string
+  })]).isRequired,
+  descriptor: _react2.PropTypes.object.isRequired,
+
+  focused: _react2.PropTypes.bool
+}, _temp));
+
+exports.default = Suggestion;
+
+
+var substyle = (0, _substyle.defaultStyle)({
+  cursor: "pointer"
+});
+module.exports = exports['default'];

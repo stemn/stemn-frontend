@@ -1,0 +1,54 @@
+'use strict';
+
+require('../shared/init.js');
+
+var _electron = require('electron');
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactRedux = require('react-redux');
+
+var _reactRouter = require('react-router');
+
+var _reactRouterRedux = require('react-router-redux');
+
+var _configureStoreRenderer = require('../../shared/store/configureStore.renderer.js');
+
+var _configureStoreRenderer2 = _interopRequireDefault(_configureStoreRenderer);
+
+var _routes = require('./routes');
+
+var _routes2 = _interopRequireDefault(_routes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var initialState = _electron.remote.getGlobal('state');
+
+//const cloneState = invokeGetters(initialState);
+//const store = configureStore(cloneState);
+
+//import invokeGetters from 'app/shared/helpers/invokeGetters.js'
+var store = (0, _configureStoreRenderer2.default)(initialState);
+var history = (0, _reactRouterRedux.syncHistoryWithStore)(_reactRouter.hashHistory, store);
+
+_electron.ipcRenderer.on('redux-action', function (event, payload) {
+  store.dispatch(payload);
+});
+
+(0, _reactDom.render)(_react2.default.createElement(
+  _reactRedux.Provider,
+  { store: store },
+  _react2.default.createElement(
+    'div',
+    { className: 'layout-column flex' },
+    _react2.default.createElement(
+      _reactRouter.Router,
+      { history: history },
+      (0, _routes2.default)(store)
+    )
+  )
+), document.getElementById('root'));

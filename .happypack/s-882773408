@@ -1,0 +1,65 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.init = init;
+exports.select = select;
+exports.deselect = deselect;
+exports.changePath = changePath;
+function init(_ref) {
+  var storeKey = _ref.storeKey;
+  var path = _ref.path;
+
+  return {
+    type: 'FILE_SELECT/INIT',
+    payload: {
+      path: path
+    },
+    meta: {
+      storeKey: storeKey
+    }
+  };
+}
+
+function select(_ref2) {
+  var storeKey = _ref2.storeKey;
+  var file = _ref2.file;
+
+  return {
+    type: 'FILE_SELECT/SELECT',
+    payload: {
+      file: file
+    },
+    meta: {
+      storeKey: storeKey
+    }
+  };
+}
+
+function deselect(_ref3) {
+  var storeKey = _ref3.storeKey;
+
+  return {
+    type: 'FILE_SELECT/DESELECT',
+    payload: {},
+    meta: {
+      storeKey: storeKey
+    }
+  };
+}
+
+function changePath(_ref4) {
+  var storeKey = _ref4.storeKey;
+  var path = _ref4.path;
+
+  return {
+    type: 'FILE_SELECT/CHANGE_PATH',
+    payload: {
+      path: path
+    },
+    meta: {
+      storeKey: storeKey
+    }
+  };
+}

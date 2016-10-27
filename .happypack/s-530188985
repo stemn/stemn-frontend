@@ -1,0 +1,18 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.create = create;
+function create(_ref) {
+  var type = _ref.type;
+  var props = _ref.props;
+
+  return {
+    type: 'ELECTRON_WINDOWS/CREATE',
+    payload: {
+      type: type,
+      props: props
+    }
+  };
+}

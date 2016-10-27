@@ -1,0 +1,116 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+exports.default = function () {
+  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+  var action = arguments[1];
+
+  if (!state.hydrated) {
+    state = _extends({}, initialState, state, { hydrated: true });
+  }
+  return (0, _reactReduxForm.modeled)(reducer, 'projects')(state, action);
+};
+
+var _reactReduxForm = require('react-redux-form');
+
+var _icepick = require('icepick');
+
+var _icepick2 = _interopRequireDefault(_icepick);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var initialState = {
+  data: {},
+  activeProject: '', // The currently active project
+  userProjects: {
+    loading: false,
+    data: []
+  },
+  newProject: {
+    summary: '',
+    name: '',
+    savePending: ''
+  }
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'PROJECTS/SET_ACTIVE_PROJECT':
+      return _extends({}, state, {
+        activeProject: action.payload.projectId
+      });
+    case 'PROJECTS/GET_PROJECT_FULFILLED':
+      return _icepick2.default.assocIn(state, ['data', action.payload.data._id, 'data'], action.payload.data);
+    case 'PROJECTS/ADD_TEAM_MEMBER':
+      return _icepick2.default.updateIn(state, ['data', action.payload.projectId, 'data', 'team'], function (team) {
+        var modifiedUser = Object.assign({}, action.payload.user, { permissions: { role: 'admin' } });
+        return _icepick2.default.push(team, modifiedUser);
+      });
+    case 'PROJECTS/CHANGE_USER_PERMISSIONS':
+      return _icepick2.default.updateIn(state, ['data', action.payload.projectId, 'data', 'team'], function (team) {
+        var index = team.findIndex(function (user) {
+          return user._id == action.payload.userId;
+        });
+        return [].concat(_toConsumableArray(team.slice(0, index)), [_icepick2.default.assocIn(team[index], ['permissions', 'role'], action.payload.role)], _toConsumableArray(team.slice(index + 1)));
+      });
+    case 'PROJECTS/REMOVE_TEAM_MEMBER':
+      return _icepick2.default.updateIn(state, ['data', action.payload.projectId, 'data', 'team'], function (team) {
+        var index = team.findIndex(function (user) {
+          return user._id == action.payload.userId;
+        });
+        return [].concat(_toConsumableArray(team.slice(0, index)), _toConsumableArray(team.slice(index + 1)));
+      });
+    case 'PROJECTS/LINK_REMOTE_PENDING':
+      return _icepick2.default.assocIn(state, ['data', action.meta.cacheKey, 'linkPending'], true);
+    case 'PROJECTS/LINK_REMOTE_FULFILLED':
+      return _icepick2.default.chain(state).assocIn(['data', action.meta.cacheKey, 'linkPending'], false).assocIn(['data', action.meta.cacheKey, 'data', 'remote'], action.payload.data).value();
+    case 'PROJECTS/LINK_REMOTE_REJECTED':
+      return _icepick2.default.assocIn(state, ['data', action.meta.cacheKey, 'linkPending'], false);
+
+    case 'PROJECTS/GET_USER_PROJECTS_PENDING':
+      return _icepick2.default.assocIn(state, ['userProjects', 'loading'], true);
+    case 'PROJECTS/GET_USER_PROJECTS_FULFILLED':
+      return _icepick2.default.assocIn(state, ['userProjects'], { loading: false, data: action.payload.data });
+    case 'PROJECTS/GET_USER_PROJECTS_REJECTED':
+      return _icepick2.default.assocIn(state, ['userProjects', 'loading'], false);
+
+    case 'PROJECTS/CREATE_PROJECT_PENDING':
+      return _icepick2.default.assocIn(state, ['newProject', 'savePending'], true);
+    case 'PROJECTS/CREATE_PROJECT_REJECTED':
+      return _icepick2.default.assocIn(state, ['newProject', 'savePending'], false);
+    case 'PROJECTS/CREATE_PROJECT_FULFILLED':
+      return _icepick2.default.chain(state).assoc('newProject', {}) // Clear the newProject object
+      .updateIn(['userProjects', 'data'], function (projects) {
+        // Push the new project onto the userProjects array
+        return _icepick2.default.push(projects, action.payload.data);
+      }).value();
+
+    case 'PROJECTS/SAVE_PROJECT_PENDING':
+      return _icepick2.default.assocIn(state, ['data', action.meta.projectId, 'savePending'], true);
+    case 'PROJECTS/SAVE_PROJECT_FULFILLED':
+      return _icepick2.default.assocIn(state, ['data', action.meta.projectId, 'savePending'], false);
+    case 'PROJECTS/SAVE_PROJECT_REJECTED':
+      return _icepick2.default.assocIn(state, ['data', action.meta.projectId, 'savePending'], false);
+
+    case 'PROJECTS/DELETE_PROJECT_FULFILLED':
+      return _icepick2.default.chain(state).assocIn(['data', action.meta.projectId], undefined) // Delete the project from the main store
+      .updateIn(['userProjects', 'data'], function (projects) {
+        // Delete it from the userProjects list
+        var projectIndex = projects.findIndex(function (project) {
+          return project._id == action.meta.projectId;
+        });
+        return _icepick2.default.splice(projects, projectIndex, 1);
+      }).value();
+    default:
+      return state;
+  }
+}
+
+module.exports = exports['default'];

@@ -1,0 +1,215 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.deselect = deselect;
+exports.selectedFileChange = selectedFileChange;
+exports.toggleAll = toggleAll;
+exports.fetchChanges = fetchChanges;
+exports.pullChanges = pullChanges;
+exports.mentionTasksModal = mentionTasksModal;
+exports.mentionTasks = mentionTasks;
+exports.commit = commit;
+exports.deleteCommit = deleteCommit;
+
+var _reactReduxForm = require('react-redux-form');
+
+var _ToastsActions = require('../Toasts/Toasts.actions.js');
+
+var _ModalActions = require('../Modal/Modal.actions.js');
+
+var _MentionsUtils = require('../Mentions/Mentions.utils.js');
+
+var _TasksActions = require('../Tasks/Tasks.actions.js');
+
+var _icepick = require('icepick');
+
+var _icepick2 = _interopRequireDefault(_icepick);
+
+var _axios = require('axios');
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _lodash = require('lodash');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function deselect(_ref) {
+  var projectId = _ref.projectId;
+
+  return {
+    type: 'CHANGES/DESELECT_FILE_CHANGE',
+    payload: {
+      projectId: projectId
+    }
+  };
+}
+function selectedFileChange(_ref2) {
+  var projectId = _ref2.projectId;
+  var selected = _ref2.selected;
+
+  return {
+    type: 'CHANGES/SELECTED_FILE_CHANGE',
+    payload: {
+      projectId: projectId,
+      selected: selected
+    }
+  };
+}
+
+function toggleAll(_ref3) {
+  var projectId = _ref3.projectId;
+  var value = _ref3.value;
+
+  return function (dispatch, getState) {
+    dispatch({
+      type: 'CHANGES/TOGGLE_ALL_CHANGED_FILES',
+      payload: { projectId: projectId, value: value }
+    });
+  };
+}
+
+function fetchChanges(_ref4) {
+  var projectId = _ref4.projectId;
+
+  return function (dispatch) {
+    dispatch(pullChanges({ projectId: projectId }));
+    dispatch({
+      type: 'CHANGES/FETCH_CHANGES',
+      http: true,
+      payload: {
+        method: 'GET',
+        url: '/api/v1/sync/timeline/' + projectId,
+        params: {
+          types: ['changes']
+        },
+        meta: {
+          projectId: projectId
+        }
+      }
+    });
+  };
+}
+
+function pullChanges(_ref5) {
+  var projectId = _ref5.projectId;
+
+  return {
+    type: 'CHANGES/PULL_REMOTE_CHANGES',
+    http: true,
+    payload: {
+      method: 'GET',
+      url: '/api/v1/sync/pullRemoteChanges/' + projectId
+    }
+  };
+}
+
+function mentionTasksModal(_ref6) {
+  var projectId = _ref6.projectId;
+  var mentions = _ref6.mentions;
+
+  return function (dispatch) {
+    dispatch((0, _ModalActions.showModal)({
+      modalType: 'TASK_COMMIT',
+      modalProps: {
+        projectId: projectId
+      },
+      modalConfirm: {
+        functionAlias: 'ChangesActions.mentionTasks',
+        functionInputs: { projectId: projectId }
+      }
+    }));
+  };
+}
+
+function mentionTasks(_ref7) {
+  var projectId = _ref7.projectId;
+  var mentions = _ref7.mentions;
+
+  return {
+    type: 'CHANGES/MENTION_TASKS',
+    payload: {
+      projectId: projectId,
+      mentions: mentions
+    }
+  };
+}
+
+function commit(_ref8) {
+  var projectId = _ref8.projectId;
+  var summary = _ref8.summary;
+  var description = _ref8.description;
+
+  return function (dispatch, getState) {
+    var changes = getState().changes[projectId];
+
+    // Get the files which have been changed
+    var files = Object.keys(changes.checked).filter(function (key) {
+      return changes.checked[key];
+    });
+
+    // Get the revisions from the selected files
+    var revisions = changes.data.filter(function (item) {
+      return changes.checked[item.data.fileId];
+    }).map(function (item) {
+      return item._id;
+    });
+
+    dispatch({
+      type: 'CHANGES/COMMIT',
+      payload: (0, _axios2.default)({
+        method: 'POST',
+        url: '/api/v1/sync/commit/' + projectId,
+        data: {
+          revisions: revisions,
+          summary: summary,
+          description: description
+        }
+      }).then(function (response) {
+        dispatch((0, _ToastsActions.show)({
+          title: files.length + ' files commited.',
+          actions: [{
+            text: 'Undo',
+            action: {
+              functionAlias: 'ChangesActions.deleteCommit',
+              functionInputs: {
+                commitId: response.data._id,
+                projectId: projectId
+              }
+            }
+          }]
+        }));
+        // Get the mentions
+        var mentions = (0, _MentionsUtils.parseMentions)(response.data.description);
+        // If mentionType: task-complete, we set the task to complete.
+        mentions.forEach(function (mention) {
+          if (mention.mentionType == 'task-complete') {
+            dispatch(_reactReduxForm.actions.change('tasks.data.' + mention.entityId + '.data.complete', true));
+          }
+        });
+        return response;
+      }),
+      meta: {
+        cacheKey: projectId
+      }
+    });
+  };
+}
+
+function deleteCommit(_ref9) {
+  var commitId = _ref9.commitId;
+  var projectId = _ref9.projectId;
+
+  return function (dispatch) {
+    dispatch({
+      type: 'CHANGES/DELETE_COMMIT',
+      payload: (0, _axios2.default)({
+        method: 'DELETE',
+        url: '/api/v1/commits/' + commitId
+      }).then(function (response) {
+        dispatch(fetchChanges({ projectId: projectId }));
+      })
+    });
+  };
+}

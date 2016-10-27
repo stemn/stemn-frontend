@@ -1,0 +1,131 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Viewer = undefined;
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _codemirror = require('codemirror');
+
+var _codemirror2 = _interopRequireDefault(_codemirror);
+
+require('codemirror/mode/meta.js');
+
+var _LoadingOverlay = require('app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx');
+
+var _LoadingOverlay2 = _interopRequireDefault(_LoadingOverlay);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _components = {
+  _component: {},
+  _component2: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Files/PreviewFile/PreviewCode/PreviewCode.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Files/PreviewFile/PreviewCode/PreviewCode.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+}
+
+var requireCodemirrorMode = require.context("codemirror/mode/", true);
+var Viewer = exports.Viewer = _wrapComponent('_component')(_react3.default.createClass({
+  displayName: 'Viewer',
+  render: function render() {
+    var _this = this;
+
+    var _props = this.props;
+    var data = _props.data;
+    var extension = _props.extension;
+
+
+    if (data && extension) {
+      setTimeout(function () {
+        // Give the component time to render (so we get refs)
+        _this.refs.codemirror.innerHTML = "";
+        var editorInstance = (0, _codemirror2.default)(_this.refs.codemirror, {
+          value: data,
+          indentWithTabs: true,
+          readOnly: true,
+          dragDrop: false,
+          lineWrapping: true,
+          lineNumbers: true
+        });
+        // Get Mode
+        var modeInfo = _codemirror2.default.findModeByExtension(extension);
+        var mode = modeInfo ? modeInfo.mode : 'null';
+        if (mode && mode != 'null') {
+          var modePath = './' + mode + '/' + mode + '.js';
+          requireCodemirrorMode(modePath);
+          editorInstance.setOption("mode", mode);
+        }
+      }, 1);
+    }
+
+    return _react3.default.createElement('div', { className: 'scroll-box flex', ref: 'codemirror' });
+  }
+}));
+
+exports.default = _wrapComponent('_component2')(_react3.default.createClass({
+  componentWillMount: function componentWillMount() {
+    this.onMount(this.props);
+  },
+  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    this.onMount(nextProps, this.props);
+  },
+  onMount: function onMount(nextProps, prevProps) {
+    // If the previewId changes, download a new file
+    if (!prevProps || nextProps.previewId !== prevProps.previewId) {
+      // If we don't already have the file, get it
+      if (!nextProps.fileData) {
+        nextProps.downloadFn({
+          projectId: nextProps.fileMeta.project._id,
+          fileId: nextProps.fileMeta.fileId,
+          revisionId: nextProps.fileMeta.revisionId
+        });
+      }
+    }
+  },
+  render: function render() {
+    var _props2 = this.props;
+    var fileData = _props2.fileData;
+    var fileMeta = _props2.fileMeta;
+
+    return _react3.default.createElement(
+      'div',
+      { className: 'layout-column flex' },
+      fileData && fileData.data ? _react3.default.createElement(Viewer, { extension: fileMeta.extension, data: fileData.data }) : '',
+      fileData ? _react3.default.createElement(_LoadingOverlay2.default, { show: fileData.loading }) : ''
+    );
+  }
+}));

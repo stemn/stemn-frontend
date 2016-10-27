@@ -1,0 +1,173 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Component = undefined;
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var _ChangesActions = require('../Changes.actions.js');
+
+var ChangesActions = _interopRequireWildcard(_ChangesActions);
+
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
+var _reactReduxForm = require('react-redux-form');
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _CommitBox = require('./CommitBox.css');
+
+var _CommitBox2 = _interopRequireDefault(_CommitBox);
+
+var _IconButton = require('app/renderer/main/components/Buttons/IconButton');
+
+var _IconButton2 = _interopRequireDefault(_IconButton);
+
+var _Button = require('app/renderer/main/components/Buttons/Button/Button.jsx');
+
+var _Button2 = _interopRequireDefault(_Button);
+
+var _Editor = require('app/renderer/main/modules/Editor/Editor.jsx');
+
+var _Editor2 = _interopRequireDefault(_Editor);
+
+var _done = require('react-icons/md/done');
+
+var _done2 = _interopRequireDefault(_done);
+
+var _reactMentions = require('react-mentions');
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Changes/CommitBox/CommitBox.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Changes/CommitBox/CommitBox.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+} // Container Core
+
+
+// Container Actions
+
+
+// Component Core
+
+
+// Styles
+
+
+// Sub Components
+
+
+/////////////////////////////////////////////////////////////////////////////
+///////////////////////////////// COMPONENT /////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+var Component = exports.Component = _wrapComponent('_component')(_react3.default.createClass({
+  displayName: 'Component',
+  render: function render() {
+    var _this = this;
+
+    var _props = this.props;
+    var entityModel = _props.entityModel;
+    var changes = _props.changes;
+
+    return _react3.default.createElement(
+      'div',
+      { className: 'p-15' },
+      _react3.default.createElement(
+        _reactReduxForm.Field,
+        { model: 'changes.' + this.props.project._id + '.summary' },
+        _react3.default.createElement('input', { className: _CommitBox2.default.input, type: 'text', placeholder: 'Summary' })
+      ),
+      _react3.default.createElement(_Editor2.default, {
+        model: entityModel + '.description',
+        value: changes.description,
+        className: _CommitBox2.default.description }),
+      _react3.default.createElement(
+        'div',
+        { className: 'layout-row layout-align-start-center' },
+        _react3.default.createElement(
+          'a',
+          { className: 'link-primary', onClick: function onClick() {
+              return _this.props.changesActions.mentionTasksModal({ projectId: _this.props.project._id });
+            } },
+          _react3.default.createElement(_done2.default, { size: '16', style: { marginRight: '3px', marginBottom: '2px' } }),
+          'Add related tasks'
+        ),
+        _react3.default.createElement('div', { className: 'flex' }),
+        _react3.default.createElement(
+          _Button2.default,
+          {
+            onClick: this.props.commitFn,
+            className: 'primary',
+            disabled: !changes.summary || changes.summary.length < 1
+          },
+          'Add Commit'
+        )
+      )
+    );
+  }
+}));
+
+/////////////////////////////////////////////////////////////////////////////
+///////////////////////////////// CONTAINER /////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+function mapStateToProps() {
+  return {};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    changesActions: (0, _redux.bindActionCreators)(ChangesActions, dispatch),
+    dispatch: dispatch
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Component);
+
+//          <IconButton ><MdDone size="22"/>Add Commit Message</IconButton>

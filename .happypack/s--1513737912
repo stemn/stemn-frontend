@@ -1,0 +1,81 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getAllTasks = exports.filterBoard = undefined;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+var _icepick = require('icepick');
+
+var _icepick2 = _interopRequireDefault(_icepick);
+
+var _lodash = require('lodash');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var filterBoard = exports.filterBoard = function filterBoard(board, tasks, searchString) {
+  // This will filter the board by the the search string
+  var queryStringArray = searchString ? searchString.split(' ') : [];
+  return _icepick2.default.updateIn(board, ['data', 'groups'], function (groups) {
+    return filterGroups({ groups: groups, tasks: tasks, filterFn: function filterFn(task) {
+        return task && task.data ? (0, _lodash.every)(queryStringArray, function (queryString) {
+          return queryByString(task, queryString);
+        }) : true;
+      } });
+  });
+};
+
+var getAllTasks = exports.getAllTasks = function getAllTasks(boardGroups) {
+  var tasks = [];
+  boardGroups.forEach(function (group) {
+    return tasks = tasks.concat(group.tasks);
+  });
+  return tasks;
+};
+
+function queryByString(item, queryString) {
+  /****************************************************
+  This is the main query function. It takes in a string
+  and will filter the task by this string in some way
+  ****************************************************/
+  if (queryString == 'is:complete' || queryString == 'is:!complete') {
+    return item.data.complete;
+  } else if (queryString == 'is:incomplete') {
+    return !item.data.complete;
+  }
+  // Assignee Query
+  else if (queryString.startsWith('assignee:')) {
+      var _ret = function () {
+        var assignee = queryString.replace('assignee:', '');
+        return {
+          v: item.data.users.find(function (user) {
+            return user.stub == assignee;
+          })
+        };
+      }();
+
+      if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+    }
+    // Filter by the string itself (case independent)
+    else if (queryString && queryString.length > 0) {
+        return new RegExp(queryString, 'i').test(item.data.name);
+      } else {
+        return true;
+      }
+}
+
+function filterGroups(_ref) {
+  var groups = _ref.groups;
+  var tasks = _ref.tasks;
+  var filterFn = _ref.filterFn;
+
+  return groups.map(function (group) {
+    return _icepick2.default.updateIn(group, ['tasks'], function (taskIds) {
+      return taskIds.filter(function (taskId) {
+        return filterFn(tasks[taskId]);
+      });
+    });
+  });
+}

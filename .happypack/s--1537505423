@@ -1,0 +1,45 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _electron = require('electron');
+
+var _electron2 = _interopRequireDefault(_electron);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var forwardToRenderer = function forwardToRenderer(store) {
+  return function (next) {
+    return function (action) {
+
+      // change scope to avoid endless-loop
+      var rendererAction = _extends({}, action, {
+        meta: _extends({}, action.meta, {
+          scope: 'local'
+        })
+      });
+
+      var openWindows = _electron2.default.remote.BrowserWindow.getAllWindows();
+
+      if (action.meta && action.meta.scope.includes('menubar') && openWindows[1]) {
+        openWindows[1].webContents.send('redux-action', rendererAction);
+      }
+
+      if (action.meta && action.meta.scope.includes('main') && openWindows[0]) {
+        openWindows[0].webContents.send('redux-action', rendererAction);
+      }
+
+      if (action.meta && action.meta.scope.includes('menubar') || action.meta && action.meta.scope.includes('main')) {
+        return;
+      }
+      return next(action);
+    };
+  };
+};
+
+exports.default = forwardToRenderer;
+module.exports = exports['default'];

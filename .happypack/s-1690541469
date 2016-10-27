@@ -1,0 +1,118 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _FileBreadCrumbs = require('./FileBreadCrumbs.css');
+
+var _FileBreadCrumbs2 = _interopRequireDefault(_FileBreadCrumbs);
+
+var _stringConcat = require('app/shared/helpers/stringConcat');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/FileList/components/FileBreadCrumbs.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/FileList/components/FileBreadCrumbs.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+}
+
+// Styles
+
+
+exports.default = _wrapComponent('_component')(_react3.default.createClass({
+  render: function render() {
+    var _props = this.props;
+    var meta = _props.meta;
+    var clickFn = _props.clickFn;
+
+
+    var displayCrumbs = function displayCrumbs() {
+      if (meta.parents && meta.parents.length > 0) {
+        var crumbs = meta.parents.map(function (parent, idx) {
+          return _react3.default.createElement(
+            'span',
+            { key: parent._id },
+            _react3.default.createElement(
+              'a',
+              { onClick: function onClick() {
+                  return clickFn({ file: parent });
+                } },
+              (0, _stringConcat.middle)(parent.name, 30, 0.8)
+            ),
+            _react3.default.createElement(
+              'span',
+              null,
+              ' / '
+            )
+          );
+        });
+
+        crumbs.push(_react3.default.createElement(
+          'span',
+          null,
+          (0, _stringConcat.middle)(meta.name, 30, 0.8)
+        ));
+        return crumbs;
+      } else if (meta.name) {
+        return _react3.default.createElement(
+          'span',
+          null,
+          (0, _stringConcat.middle)(meta.name, 30, 0.8)
+        );
+      } else {
+        return _react3.default.createElement(
+          'span',
+          null,
+          '. . .'
+        );
+      }
+    };
+
+    return _react3.default.createElement(
+      'div',
+      { className: _FileBreadCrumbs2.default.crumbs },
+      displayCrumbs()
+    );
+  }
+}));
+module.exports = exports['default'];

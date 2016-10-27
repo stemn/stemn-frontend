@@ -1,0 +1,56 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var options = exports.options = [{
+  type: 'up',
+  icon: '👍'
+}, {
+  type: 'down',
+  icon: '👎'
+}, {
+  type: 'party',
+  icon: '🎉'
+}, {
+  type: 'heart',
+  icon: '❤️'
+}, {
+  type: 'confused',
+  icon: '😕'
+}];
+
+var groupAndOrderReactions = exports.groupAndOrderReactions = function groupAndOrderReactions(reactions, options) {
+  return orderReactions(groupReactions(reactions), options);
+};
+
+//////////////////////////////////////////////////////////////////
+
+function groupReactions(reactions) {
+  var groupedReactions = {};
+  reactions.forEach(function (reaction) {
+    if (!groupedReactions[reaction.type] || !groupedReactions[reaction.type].list) {
+      groupedReactions[reaction.type] = {
+        list: [reaction]
+      };
+    } else {
+      groupedReactions[reaction.type] = groupedReactions[reaction.type].list.push(reaction);
+    }
+  });
+  return groupedReactions;
+}
+
+function orderReactions(groupedReactions, options) {
+  // Orders reactions by the options array
+  var orderedReactions = [];
+  options.forEach(function (option) {
+    if (groupedReactions[option.type] && groupedReactions[option.type].list && groupedReactions[option.type].list.length > 0) {
+      orderedReactions.push({
+        type: option.type,
+        icon: option.icon,
+        list: groupedReactions[option.type].list
+      });
+    }
+  });
+  return orderedReactions;
+}

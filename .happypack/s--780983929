@@ -1,0 +1,111 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _FileRow = require('./FileRow.css');
+
+var _FileRow2 = _interopRequireDefault(_FileRow);
+
+var _bytes = require('app/shared/helpers/filters/bytes.js');
+
+var _bytes2 = _interopRequireDefault(_bytes);
+
+var _FileIcon = require('./FileIcon');
+
+var _FileIcon2 = _interopRequireDefault(_FileIcon);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/FileList/components/FileRow.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/FileList/components/FileRow.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+}
+
+// Styles
+
+
+exports.default = _wrapComponent('_component')(_react3.default.createClass({
+  render: function render() {
+    var _props = this.props;
+    var singleClick = _props.singleClick;
+    var doubleClick = _props.doubleClick;
+    var isActive = _props.isActive;
+    var file = _props.file;
+
+
+    var timeFromNow = (0, _moment2.default)(file.modified).fromNow();
+
+    return _react3.default.createElement(
+      'div',
+      { className: (0, _classnames2.default)(_FileRow2.default.row, 'layout-row layout-align-start-center', _defineProperty({}, _FileRow2.default.active, isActive)), onClick: function onClick() {
+          return singleClick({ file: file });
+        }, onDoubleClick: function onDoubleClick() {
+          return doubleClick({ file: file });
+        } },
+      _react3.default.createElement(_FileIcon2.default, { fileType: file.fileType }),
+      _react3.default.createElement(
+        'div',
+        { className: 'flex' },
+        file.name
+      ),
+      _react3.default.createElement(
+        'div',
+        { style: { width: '100px' } },
+        timeFromNow
+      ),
+      _react3.default.createElement(
+        'div',
+        { style: { width: '50px' } },
+        (0, _bytes2.default)(file.size)
+      )
+    );
+  }
+}));
+module.exports = exports['default'];

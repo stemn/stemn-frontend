@@ -1,0 +1,244 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Component = undefined;
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var _icepick = require('icepick');
+
+var _icepick2 = _interopRequireDefault(_icepick);
+
+var _ModalActions = require('./Modal.actions.js');
+
+var ModalActions = _interopRequireWildcard(_ModalActions);
+
+var _FunctionLibrary = require('app/shared/modules/FunctionLibrary/FunctionLibrary.js');
+
+var _reactModal = require('react-modal');
+
+var _reactModal2 = _interopRequireDefault(_reactModal);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _Modal = require('./Modal.css');
+
+var _Modal2 = _interopRequireDefault(_Modal);
+
+var _ConfirmModal = require('./modals/ConfirmModal.jsx');
+
+var _ConfirmModal2 = _interopRequireDefault(_ConfirmModal);
+
+var _ErrorModal = require('./modals/ErrorModal.jsx');
+
+var _ErrorModal2 = _interopRequireDefault(_ErrorModal);
+
+var _ConnectionModal = require('./modals/ConnectionModal.jsx');
+
+var _ConnectionModal2 = _interopRequireDefault(_ConnectionModal);
+
+var _GoogleRevokeModal = require('./modals/GoogleRevokeModal.jsx');
+
+var _GoogleRevokeModal2 = _interopRequireDefault(_GoogleRevokeModal);
+
+var _ReleaseNotesModal = require('./modals/ReleaseNotesModal.jsx');
+
+var _ReleaseNotesModal2 = _interopRequireDefault(_ReleaseNotesModal);
+
+var _FileSelectModal = require('app/renderer/main/modules/FileSelect/FileSelectModal.jsx');
+
+var _FileSelectModal2 = _interopRequireDefault(_FileSelectModal);
+
+var _TaskDisplayModal = require('app/renderer/main/modules/Tasks/TaskDisplayModal/TaskDisplayModal.jsx');
+
+var _TaskDisplayModal2 = _interopRequireDefault(_TaskDisplayModal);
+
+var _TaskLabelsEditModal = require('app/renderer/main/modules/Tasks/TaskLabelsEditModal/TaskLabelsEditModal.jsx');
+
+var _TaskLabelsEditModal2 = _interopRequireDefault(_TaskLabelsEditModal);
+
+var _TaskMentionModal = require('app/renderer/main/modules/Mentions/TaskMentionModal/TaskMentionModal.jsx');
+
+var _TaskMentionModal2 = _interopRequireDefault(_TaskMentionModal);
+
+var _ProjectNewModal = require('app/renderer/main/modules/Projects/ProjectNewModal/ProjectNewModal.jsx');
+
+var _ProjectNewModal2 = _interopRequireDefault(_ProjectNewModal);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Modal/Modal.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Modal/Modal.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+} // Container Core
+
+
+// Container Actions
+
+
+// Component Core
+
+
+// Styles
+
+
+// Modals
+
+
+var modalComponents = {
+  'CONFIRM': _ConfirmModal2.default,
+  'ERROR': _ErrorModal2.default,
+  'CONNECTION': _ConnectionModal2.default,
+  'FILE_SELECT': _FileSelectModal2.default,
+  'TASK': _TaskDisplayModal2.default,
+  'TASK_LABELS': _TaskLabelsEditModal2.default,
+  'TASK_COMMIT': _TaskMentionModal2.default,
+  'PROJECT_NEW': _ProjectNewModal2.default,
+  'GOOGLE_REVOKE': _GoogleRevokeModal2.default,
+  'RELEASE_NOTES': _ReleaseNotesModal2.default
+};
+
+/////////////////////////////////////////////////////////////////////////////
+///////////////////////////////// COMPONENT /////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+var ModalRoot = function ModalRoot(modal) {
+  if (!modal.modalType) {
+    return null;
+  }
+  var SpecificModal = modalComponents[modal.modalType];
+  if (!SpecificModal) {
+    console.error(modal.modalType + ' Modal could not be found');
+    return null;
+  }
+  var extendedModalProps = Object.assign({}, modal.modalProps, {
+    modalHide: modal.modalHide,
+    modalCancel: modal.modalCancel,
+    modalConfirm: modal.modalConfirm
+  });
+  return _react3.default.createElement(SpecificModal, extendedModalProps);
+};
+
+var Component = exports.Component = _wrapComponent('_component')(_react3.default.createClass({
+  displayName: 'Component',
+
+  render: function render() {
+    var _this = this;
+
+    var _props = this.props;
+    var modal = _props.modal;
+    var dispatch = _props.dispatch;
+
+    // This transforms the modalCancel and modalConfirm actions and adds the modalHide action
+
+    var modalExtended = Object.assign({}, modal, {
+      modalHide: function modalHide() {
+        _this.props.ModalActions.hideModal({ modalId: modal.modalId });
+      },
+      // The cancel and confirm actions can be extended before dispatching
+      modalCancel: function modalCancel(extendObject) {
+        return callbackFunction(modal.modalCancel, dispatch, extendObject);
+      },
+      modalConfirm: function modalConfirm(extendObject) {
+        return callbackFunction(modal.modalConfirm, dispatch, extendObject);
+      }
+    });
+
+    return _react3.default.createElement(
+      _reactModal2.default,
+      {
+        isOpen: true,
+        onRequestClose: function onRequestClose() {
+          modalExtended.modalCancel();
+          modalExtended.modalHide();
+        },
+        className: _Modal2.default.modal,
+        overlayClassName: _Modal2.default.overlay + ' layout-column layout-align-center-center' },
+      ModalRoot(modalExtended)
+    );
+  }
+}));
+
+function callbackFunction(callbackObject, dispatch, extendObject) {
+  // If we have a function alias:
+  if (callbackObject && callbackObject.functionAlias) {
+    var functionFromAlias = (0, _FunctionLibrary.getFunction)(callbackObject.functionAlias);
+    if (functionFromAlias) {
+
+      // If it is an array, pass in the array of params
+      if (Array.isArray(callbackObject.functionInputs)) {
+        dispatch(functionFromAlias.apply(undefined, _toConsumableArray(callbackObject.functionInputs)));
+      }
+      // If the inputs are an object, extend them
+      else {
+          dispatch(functionFromAlias(_icepick2.default.merge(callbackObject.functionInputs, extendObject)));
+        }
+    }
+  }
+  // Else, if it is a normal object, dispatch it
+  else if (callbackObject) {
+      dispatch(_icepick2.default.merge(callbackObject, extendObject));
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////
+///////////////////////////////// CONTAINER /////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+function mapStateToProps() {
+  return {};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    ModalActions: (0, _redux.bindActionCreators)(ModalActions, dispatch),
+    dispatch: dispatch
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Component);

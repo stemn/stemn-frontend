@@ -1,0 +1,89 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _reactReduxForm = require('react-redux-form');
+
+var _Checkbox = require('app/renderer/main/components/Input/Checkbox/Checkbox');
+
+var _Checkbox2 = _interopRequireDefault(_Checkbox);
+
+var _FileChangeTitleRow = require('./FileChangeTitleRow.css');
+
+var _FileChangeTitleRow2 = _interopRequireDefault(_FileChangeTitleRow);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Changes/CommitChanges/FileChangeTitleRow.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Changes/CommitChanges/FileChangeTitleRow.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+}
+
+// Components
+
+
+// Styles
+
+
+exports.default = _wrapComponent('_component')(_react3.default.createClass({
+  render: function render() {
+    var _props = this.props;
+    var model = _props.model;
+    var value = _props.value;
+    var checkbox = _props.checkbox;
+    var changeAction = _props.changeAction;
+    var children = _props.children;
+    var text = _props.text;
+
+    return _react3.default.createElement(
+      'div',
+      { className: _FileChangeTitleRow2.default.fileChangeTitleRow + ' layout-row layout-align-start-center' },
+      checkbox ? _react3.default.createElement(_Checkbox2.default, { className: 'text-primary', model: model, value: value, changeAction: changeAction, title: 'Toggle all' }) : null,
+      _react3.default.createElement(
+        'span',
+        { className: _FileChangeTitleRow2.default.text + ' flex text-ellipsis' },
+        text
+      ),
+      _react3.default.createElement('div', { className: 'flex' }),
+      children
+    );
+  }
+}));
+module.exports = exports['default'];

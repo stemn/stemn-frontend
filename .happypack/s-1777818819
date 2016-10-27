@@ -1,0 +1,55 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.deselect = deselect;
+exports.selectTimelineItem = selectTimelineItem;
+exports.fetchTimeline = fetchTimeline;
+function deselect(_ref) {
+  var projectId = _ref.projectId;
+
+  return {
+    type: 'TIMELINE/DESELECT_ITEM',
+    payload: {
+      projectId: projectId
+    }
+  };
+}
+
+function selectTimelineItem(_ref2) {
+  var projectId = _ref2.projectId;
+  var selected = _ref2.selected;
+
+  return {
+    type: 'TIMELINE/SELECT_ITEM',
+    payload: {
+      projectId: projectId,
+      selected: selected
+    },
+    meta: {
+      cacheKey: projectId
+    }
+  };
+}
+
+function fetchTimeline(_ref3) {
+  var projectId = _ref3.projectId;
+  var fileId = _ref3.fileId;
+
+  return {
+    type: 'TIMELINE/FETCH_TIMELINE',
+    http: true,
+    payload: {
+      method: 'GET',
+      url: '/api/v1/sync/timeline/' + projectId,
+      params: {
+        types: ['revisions', 'commits'],
+        file: fileId
+      }
+    },
+    meta: {
+      cacheKey: fileId ? fileId : projectId
+    }
+  };
+}

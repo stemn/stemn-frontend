@@ -1,0 +1,58 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.GET_META = exports.GET_FILE = undefined;
+exports.getFile = getFile;
+exports.getMeta = getMeta;
+
+var _axios = require('axios');
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var GET_FILE = exports.GET_FILE = 'FILES/GET_FILE';
+var GET_META = exports.GET_META = 'FILES/GET_META';
+
+function getFile(_ref) {
+  var projectId = _ref.projectId;
+  var fileId = _ref.fileId;
+  var revisionId = _ref.revisionId;
+
+  return {
+    type: GET_FILE,
+    http: true,
+    payload: {
+      method: 'GET',
+      url: '/api/v1/remote/download/' + projectId + '/' + fileId,
+      params: {
+        revisionId: revisionId
+      }
+    },
+    meta: {
+      cacheKey: projectId + '-' + fileId + '-' + revisionId
+    }
+  };
+}
+
+function getMeta(_ref2) {
+  var fileId = _ref2.fileId;
+  var revisionId = _ref2.revisionId;
+
+  return {
+    type: GET_META,
+    http: true,
+    payload: {
+      method: 'GET',
+      url: '/api/v1/files/' + fileId,
+      params: {
+        revisionId: revisionId
+      }
+    },
+    meta: {
+      cacheKey: fileId + '-' + revisionId
+    }
+  };
+}

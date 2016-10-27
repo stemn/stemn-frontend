@@ -1,0 +1,139 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Component = undefined;
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
+var _reactRedux = require('react-redux');
+
+var _reactReduxForm = require('react-redux-form');
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _DatePicker = require('./DatePicker.css');
+
+var _DatePicker2 = _interopRequireDefault(_DatePicker);
+
+var _Calendar = require('../Calendar.jsx');
+
+var _Calendar2 = _interopRequireDefault(_Calendar);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Calendar/DatePicker/DatePicker.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Calendar/DatePicker/DatePicker.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+}
+
+var Component = exports.Component = _wrapComponent('_component')(_react3.default.createClass({
+  displayName: 'Component',
+  getInitialState: function getInitialState() {
+    return {
+      viewDate: (0, _moment2.default)(),
+      isOpen: false
+    };
+  },
+  toggle: function toggle(openStatus) {
+    this.setState({ isOpen: openStatus === undefined ? !this.state.isOpen : openStatus });
+  },
+  selectDate: function selectDate(date) {
+    this.props.dispatch(_reactReduxForm.actions.change(this.props.model, date ? date.format() : ''));
+    this.toggle(false);
+    if (this.props.onChange) {
+      this.props.onChange();
+    }
+  },
+  render: function render() {
+    var _this = this;
+
+    var _state = this.state;
+    var viewDate = _state.viewDate;
+    var isOpen = _state.isOpen;
+    var _props = this.props;
+    var model = _props.model;
+    var value = _props.value;
+    var dispatch = _props.dispatch;
+    var onChange = _props.onChange;
+
+    var valueDate = value ? (0, _moment2.default)(value) : '';
+
+    return _react3.default.createElement(
+      'div',
+      { className: 'rel-box' },
+      _react3.default.createElement(
+        'div',
+        { className: (0, _classnames2.default)('dr-input', _DatePicker2.default.input, { 'active': isOpen }), onClick: function onClick() {
+            return _this.toggle();
+          } },
+        valueDate ? valueDate.format('dddd, Do MMMM') : 'Select a due date'
+      ),
+      valueDate ? _react3.default.createElement(
+        'a',
+        { className: _DatePicker2.default.close, onClick: function onClick() {
+            return _this.selectDate();
+          } },
+        '×'
+      ) : null,
+      isOpen ? _react3.default.createElement(_Calendar2.default, {
+        className: _DatePicker2.default.popup,
+        onNextMonth: function onNextMonth() {
+          return _this.setState({ viewDate: viewDate.clone().add(1, 'months') });
+        },
+        onPrevMonth: function onPrevMonth() {
+          return _this.setState({ viewDate: viewDate.clone().subtract(1, 'months') });
+        },
+        selectedDate: valueDate,
+        viewDate: viewDate,
+        onPickDate: this.selectDate,
+        renderDay: function renderDay(day) {
+          return day.format('D');
+        },
+        type: 'datepicker'
+      }) : null
+    );
+  }
+}));
+
+exports.default = (0, _reactRedux.connect)()(Component);

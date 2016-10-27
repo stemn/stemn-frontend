@@ -1,0 +1,14 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _lodash = require('lodash');
+
+exports.default = function () {
+  var possible = 'abcdef0123456789abcdef0123456789';
+  return (0, _lodash.sampleSize)(possible, 24).join('');
+};
+
+module.exports = exports['default'];

@@ -1,0 +1,31 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouter = require('react-router');
+
+var _AppRootPage = require('./pages/AppRootPage/AppRootPage.jsx');
+
+var _AppRootPage2 = _interopRequireDefault(_AppRootPage);
+
+var _PreviewPage = require('./pages/PreviewPage/PreviewPage.jsx');
+
+var _PreviewPage2 = _interopRequireDefault(_PreviewPage);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (store) {
+  return _react2.default.createElement(
+    _reactRouter.Route,
+    { component: _AppRootPage2.default, path: '/' },
+    _react2.default.createElement(_reactRouter.Route, { path: '/preview/:projectId/:fileId/:revisionId', component: _PreviewPage2.default })
+  );
+};
+
+module.exports = exports['default'];

@@ -1,0 +1,180 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Component = undefined;
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var _TasksActions = require('../Tasks.actions.js');
+
+var TasksActions = _interopRequireWildcard(_TasksActions);
+
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
+var _lodash = require('lodash');
+
+var _reactReduxForm = require('react-redux-form');
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _TaskLabelsEdit = require('../TaskLabelsEdit/TaskLabelsEdit.jsx');
+
+var _TaskLabelsEdit2 = _interopRequireDefault(_TaskLabelsEdit);
+
+var _Button = require('app/renderer/main/components/Buttons/Button/Button');
+
+var _Button2 = _interopRequireDefault(_Button);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Tasks/TaskLabelsEditModal/TaskLabelsEditModal.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Tasks/TaskLabelsEditModal/TaskLabelsEditModal.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+} // Container Core
+
+
+// Container Actions
+
+
+// Component Core
+
+
+// Styles
+
+
+// Sub Components
+
+
+/////////////////////////////////////////////////////////////////////////////
+///////////////////////////////// COMPONENT /////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+var Component = exports.Component = _wrapComponent('_component')(_react3.default.createClass({
+  displayName: 'Component',
+  componentWillMount: function componentWillMount() {
+    if ((0, _lodash.has)(this.props, 'board.data.labels')) {
+      this.props.dispatch(_reactReduxForm.actions.load(this.props.boardModel + '.forms.labels', this.props.board.data.labels));
+    }
+  },
+  submit: function submit() {
+    var _this = this;
+
+    this.props.dispatch(_reactReduxForm.actions.change(this.props.boardModel + '.data.labels', this.props.board.forms.labels));
+    setTimeout(function () {
+      _this.props.tasksActions.updateBoard({ board: _this.props.board.data }).then(function (response) {
+        _this.props.modalHide();
+      });
+    });
+  },
+  render: function render() {
+    var _props = this.props;
+    var boardModel = _props.boardModel;
+    var board = _props.board;
+    var modalCancel = _props.modalCancel;
+    var modalConfirm = _props.modalConfirm;
+    var modalHide = _props.modalHide;
+
+
+    return _react3.default.createElement(
+      'div',
+      { style: { width: '500px' } },
+      _react3.default.createElement(
+        'div',
+        { className: 'modal-title' },
+        'Edit Labels'
+      ),
+      _react3.default.createElement(
+        'div',
+        { className: 'modal-body', style: { maxHeight: '400px', overflowY: 'auto' } },
+        (0, _lodash.has)(board, 'forms.labels') ? _react3.default.createElement(_TaskLabelsEdit2.default, { model: boardModel + '.forms.labels', value: board.forms.labels }) : null
+      ),
+      _react3.default.createElement(
+        'div',
+        { className: 'modal-footer-no-line layout-row layout-align-end' },
+        _react3.default.createElement(
+          _Button2.default,
+          { style: { marginRight: '10px' }, onClick: function onClick() {
+              modalCancel();modalHide();
+            } },
+          'Cancel'
+        ),
+        _react3.default.createElement(
+          _Button2.default,
+          { className: 'primary',
+            onClick: this.submit,
+            loading: board.savePending
+          },
+          'Update Labels'
+        )
+      )
+    );
+  }
+}));
+
+/////////////////////////////////////////////////////////////////////////////
+///////////////////////////////// CONTAINER /////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+function mapStateToProps(state, _ref) {
+  var boardId = _ref.boardId;
+
+  var boardModel = 'tasks.boards.' + boardId;
+  return {
+    board: (0, _lodash.get)(state, boardModel), // Get the value from the model
+    boardModel: boardModel
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch: dispatch,
+    tasksActions: (0, _redux.bindActionCreators)(TasksActions, dispatch)
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Component);

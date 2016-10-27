@@ -1,0 +1,35 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.name = undefined;
+exports.default = reducer;
+
+var _icepick = require('icepick');
+
+var _icepick2 = _interopRequireDefault(_icepick);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var name = exports.name = 'localPath';
+
+var initialState = {
+  // Paths cached by projectId are stored here
+};
+
+function reducer() {
+  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+  var action = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+
+  switch (action.type) {
+    case 'LOCAL_PATH/GET_PATH_PENDING':
+      return _icepick2.default.assoc(state, action.meta.projectId, { loading: true });
+    case 'LOCAL_PATH/GET_PATH_REJECTED':
+      return _icepick2.default.assoc(state, action.meta.projectId, { loading: false });
+    case 'LOCAL_PATH/GET_PATH_FULFILLED':
+      return _icepick2.default.assoc(state, action.meta.projectId, { loading: false, data: action.payload.data });
+    default:
+      return state;
+  }
+}

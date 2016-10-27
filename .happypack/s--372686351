@@ -1,0 +1,87 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function () {
+  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+  var action = arguments[1];
+
+  return (0, _reactReduxForm.modeled)(mainReducer, 'comments')(state, action);
+};
+
+var _reactReduxForm = require('react-redux-form');
+
+var _icepick = require('icepick');
+
+var _icepick2 = _interopRequireDefault(_icepick);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var initialState = {
+  data: {},
+  tasks: {}
+};
+
+var mainReducer = function mainReducer(state, action) {
+  switch (action.type) {
+    case 'COMMENTS/GET_COMMENT_PENDING':
+      return _icepick2.default.assocIn(state, ['data', action.meta.commentId, 'loading'], true);
+    case 'COMMENTS/GET_COMMENT_REJECTED':
+      return _icepick2.default.assocIn(state, ['data', action.meta.commentId, 'loading'], false);
+    case 'COMMENTS/GET_COMMENT_FULFILLED':
+      return _icepick2.default.assocIn(state, ['data', action.meta.commentId], {
+        loading: false,
+        data: action.payload.data
+      });
+
+    case 'COMMENTS/START_EDIT':
+      return _icepick2.default.assocIn(state, ['data', action.payload.commentId, 'editActive'], true);
+    case 'COMMENTS/FINISH_EDIT':
+      return _icepick2.default.assocIn(state, ['data', action.payload.commentId, 'editActive'], false);
+
+    case 'COMMENTS/NEW_COMMENT_PENDING':
+      return _icepick2.default.assocIn(state, ['tasks', action.meta.taskId, 'newComment', 'savePending'], true);
+    case 'COMMENTS/NEW_COMMENT_REJECTED':
+      return _icepick2.default.assocIn(state, ['tasks', action.meta.taskId, 'newComment', 'savePending'], false);
+    case 'COMMENTS/NEW_COMMENT_FULFILLED':
+      return _icepick2.default.chain(state).assocIn(['tasks', action.meta.taskId, 'newComment'], {}) // Reset the newComment objected
+      .assocIn(['data', action.payload.data._id, 'data'], action.payload.data) // Put the comment in the store
+      .value();
+
+    case 'COMMENTS/DELETE_PENDING':
+      return _icepick2.default.assocIn(state, ['data', action.meta.commentId, 'deletePending'], true);
+    case 'COMMENTS/DELETE_REJECTED':
+      return _icepick2.default.assocIn(state, ['data', action.meta.commentId, 'deletePending'], false);
+    case 'COMMENTS/DELETE_FULFILLED':
+      return _icepick2.default.assocIn(state, ['data', action.meta.commentId], undefined);
+
+    case 'COMMENTS/UPDATE_PENDING':
+      return _icepick2.default.assocIn(state, ['data', action.meta.commentId, 'savePending'], true);
+    case 'COMMENTS/UPDATE_REJECTED':
+      return _icepick2.default.assocIn(state, ['data', action.meta.commentId, 'savePending'], false);
+    case 'COMMENTS/UPDATE_FULFILLED':
+      return _icepick2.default.assocIn(state, ['data', action.meta.commentId], {
+        data: action.payload.data,
+        savePending: false
+      });
+
+    case 'COMMENTS/NEW_REACTION_FULFILLED':
+      return _icepick2.default.updateIn(state, ['data', action.meta.commentId, 'data', 'reactions'], function (reactions) {
+        return _icepick2.default.push(reactions, action.payload.data);
+      });
+    case 'COMMENTS/DELETE_REACTION_FULFILLED':
+      return _icepick2.default.updateIn(state, ['data', action.meta.commentId, 'data', 'reactions'], function (reactions) {
+        var index = reactions.findIndex(function (reaction) {
+          return reaction.type == action.meta.reactionType && reaction.owner._id == action.meta.userId;
+        });
+        return index == -1 ? reactions : _icepick2.default.splice(reactions, index, 1);
+      });
+
+    default:
+      return state;
+  }
+};
+
+module.exports = exports['default'];

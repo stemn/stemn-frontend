@@ -1,0 +1,176 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Component = undefined;
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var _TasksActions = require('../Tasks.actions.js');
+
+var TasksActions = _interopRequireWildcard(_TasksActions);
+
+var _CommentsActions = require('app/renderer/main/modules/Comments/Comments.actions.js');
+
+var CommentsActions = _interopRequireWildcard(_CommentsActions);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _TaskTimeline = require('./TaskTimeline.css');
+
+var _TaskTimeline2 = _interopRequireDefault(_TaskTimeline);
+
+var _Comment = require('app/renderer/main/modules/Comments/Comment/Comment.jsx');
+
+var _Comment2 = _interopRequireDefault(_Comment);
+
+var _TaskTimelineItem = require('./TaskTimelineItem/TaskTimelineItem.jsx');
+
+var _TaskTimelineItem2 = _interopRequireDefault(_TaskTimelineItem);
+
+var _comments = require('app/renderer/assets/images/pure-vectors/comments.svg');
+
+var _comments2 = _interopRequireDefault(_comments);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Tasks/TaskTimeline/TaskTimeline.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Tasks/TaskTimeline/TaskTimeline.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+} // Container Core
+
+
+// Container Actions
+
+
+// Component Core
+
+
+// Styles
+
+
+// Sub Components
+
+
+///////////////////////////////// COMPONENT /////////////////////////////////
+
+var onMount = function onMount(nextProps, prevProps) {
+  if (nextProps.taskId) {
+    if (!prevProps || nextProps.taskId !== prevProps.taskId) {
+      nextProps.tasksActions.getEvents({ taskId: nextProps.taskId });
+    }
+  }
+};
+
+var Component = exports.Component = _wrapComponent('_component')(_react3.default.createClass({
+  displayName: 'Component',
+
+
+  // Mounting
+  componentWillMount: function componentWillMount() {
+    onMount(this.props);
+  },
+  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    onMount(nextProps, this.props);
+  },
+  render: function render() {
+    var _props = this.props;
+    var events = _props.events;
+    var entityModel = _props.entityModel;
+    var board = _props.board;
+
+
+    if (events && events.data && events.data.length > 0) {
+      return _react3.default.createElement(
+        'div',
+        null,
+        events.data.map(function (item) {
+          return _react3.default.createElement(_TaskTimelineItem2.default, { key: item._id, item: item, board: board });
+        })
+      );
+    } else {
+      return _react3.default.createElement(
+        'div',
+        { className: 'layout-column layout-align-center-center text-center', style: { height: '100%' } },
+        _react3.default.createElement('img', { src: _comments2.default, style: { width: '80px' } }),
+        _react3.default.createElement(
+          'div',
+          { className: 'text-title-4', style: { marginBottom: '10px' } },
+          'Task timeline is empty'
+        ),
+        _react3.default.createElement(
+          'div',
+          { className: 'text-title-5' },
+          'Items will appear here when you commit, ',
+          _react3.default.createElement('br', null),
+          'modify or comment on this task.'
+        )
+      );
+    }
+  }
+}));
+
+///////////////////////////////// CONTAINER /////////////////////////////////
+
+function mapStateToProps(_ref, _ref2) {
+  var tasks = _ref.tasks;
+  var taskId = _ref2.taskId;
+  var board = _ref2.board;
+
+  return {
+    events: tasks.events[taskId],
+    entityModel: 'tasks.events.' + taskId,
+    board: board
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    tasksActions: (0, _redux.bindActionCreators)(TasksActions, dispatch),
+    commentsActions: (0, _redux.bindActionCreators)(CommentsActions, dispatch)
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Component);

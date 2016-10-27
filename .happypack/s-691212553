@@ -1,0 +1,12 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.toggleUserMenu = toggleUserMenu;
+function toggleUserMenu(status) {
+  return {
+    type: 'HEADER/TOGGLE_USER_MENU',
+    payload: status // If status exists, we set, otherwise we toggle
+  };
+}

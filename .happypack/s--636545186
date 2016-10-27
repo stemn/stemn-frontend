@@ -1,0 +1,175 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _reactRouter = require('react-router');
+
+var _Tabs = require('app/renderer/main/components/Tabs/Tabs');
+
+var _Tabs2 = _interopRequireDefault(_Tabs);
+
+var _Header = require('app/renderer/main/modules/Header/Header.jsx');
+
+var _Header2 = _interopRequireDefault(_Header);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _ProjectPage = require('./ProjectPage.css');
+
+var _ProjectPage2 = _interopRequireDefault(_ProjectPage);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _components = {
+  Component: {
+    displayName: 'Component'
+  }
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/pages/ProjectPage/ProjectPage.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/pages/ProjectPage/ProjectPage.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+}
+
+// Components
+
+
+// Styles
+
+
+var Component = _wrapComponent('Component')(function (_React$Component) {
+  _inherits(Component, _React$Component);
+
+  function Component() {
+    _classCallCheck(this, Component);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Component).apply(this, arguments));
+  }
+
+  _createClass(Component, [{
+    key: 'getChildContext',
+    value: function getChildContext() {
+      return {
+        project: this.props.project
+      };
+    }
+  }, {
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.props.ProjectsActions.getProject({ projectId: this.props.params.stub });
+      this.props.ProjectsActions.setActiveProject({ projectId: this.props.params.stub });
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      if (nextProps.params.stub !== this.props.params.stub) {
+        this.props.ProjectsActions.getProject({ projectId: nextProps.params.stub });
+        this.props.ProjectsActions.setActiveProject({ projectId: nextProps.params.stub });
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var project = this.props.project;
+
+      var baseLink = 'project/' + (project && project.data ? project.data._id : '');
+
+      if (!project) {
+        return _react3.default.createElement('div', null);
+      }
+
+      return _react3.default.createElement(
+        'div',
+        { className: 'layout-column flex rel-box' },
+        _react3.default.createElement(
+          _Header2.default,
+          null,
+          project.data ? project.data.name : ''
+        ),
+        _react3.default.createElement(
+          _Tabs2.default,
+          { size: 'lg' },
+          _react3.default.createElement(
+            _reactRouter.Link,
+            { activeClassName: 'active', to: baseLink, onlyActiveOnIndex: true },
+            'Changes'
+          ),
+          _react3.default.createElement(
+            _reactRouter.Link,
+            { activeClassName: 'active', to: baseLink + '/feed' },
+            'Timeline'
+          ),
+          _react3.default.createElement(
+            _reactRouter.Link,
+            { activeClassName: 'active', to: baseLink + '/tasks' },
+            'Tasks'
+          ),
+          _react3.default.createElement(
+            _reactRouter.Link,
+            { activeClassName: 'active', to: baseLink + '/settings' },
+            'Settings'
+          )
+        ),
+        _react3.default.createElement(
+          'div',
+          { className: 'layout-column flex rel-box' },
+          this.props.children
+        )
+      );
+    }
+  }]);
+
+  return Component;
+}(_react3.default.Component));
+
+;
+
+Component.childContextTypes = {
+  project: _react3.default.PropTypes.object
+};
+
+exports.default = Component;
+module.exports = exports['default'];

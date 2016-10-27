@@ -1,0 +1,35 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ContentSidebar = require('./ContentSidebar.css');
+
+var _ContentSidebar2 = _interopRequireDefault(_ContentSidebar);
+
+var _DragResize = require('app/renderer/main/modules/DragResize/DragResize.jsx');
+
+var _DragResize2 = _interopRequireDefault(_DragResize);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Styles
+var Sidebar = function Sidebar(props) {
+  return _react2.default.createElement(
+    _DragResize2.default,
+    { side: 'right', width: '450', widthRange: [0, 1000], className: 'layout-column flex' },
+    _react2.default.createElement(
+      'aside',
+      { className: _ContentSidebar2.default.contentSidebar + ' layout-column flex' },
+      props.children
+    )
+  );
+};
+
+exports.default = Sidebar;
+module.exports = exports['default'];

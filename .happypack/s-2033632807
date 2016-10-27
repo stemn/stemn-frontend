@@ -1,0 +1,147 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getProviderPath = getProviderPath;
+exports.openFile = openFile;
+exports.currentVersion = currentVersion;
+exports.checkingForUpdate = checkingForUpdate;
+exports.updateAvailable = updateAvailable;
+exports.updateDownloaded = updateDownloaded;
+exports.updateError = updateError;
+exports.updateNotAvailable = updateNotAvailable;
+
+var _LocalPathActions = require('../modules/LocalPath/LocalPath.actions.js');
+
+var LocalPathActions = _interopRequireWildcard(_LocalPathActions);
+
+var _LocalPathReducer = require('../modules/LocalPath/LocalPath.reducer.js');
+
+var _es6Promise = require('es6-promise');
+
+var _es6Promise2 = _interopRequireDefault(_es6Promise);
+
+var _electron = require('electron');
+
+var _lodash = require('lodash');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function getProviderPath() {
+  return {
+    type: 'SYSTEM/GET_PROVIDER_PATH',
+    payload: {
+      functionAlias: 'ProviderPathActions.getPath',
+      functionInputs: ['dropbox', 'drive']
+    }
+    //    payload: Promise.all(['dropbox', 'drive'].map(providerPathLookup)).then(response => {
+    //      return {
+    //        dropbox: response[0],
+    //        drive: response[1]
+    //      }
+    //    }).catch( error => console.log(error))
+  };
+}
+
+//import providerPathLookup from '../../main/modules/files/providerPathLookup.js';
+
+function openFile(_ref) {
+  var location = _ref.location;
+  var path = _ref.path;
+  var projectId = _ref.projectId;
+  var provider = _ref.provider;
+
+  return function (dispatch, getState) {
+
+    var addSlash = function addSlash(path) {
+      return path && path[0] != '/' && path[0] != '\\' ? '/' + path : path;
+    };
+
+    var open = function open(computerToProvider, providerToProject, projectToFile) {
+      providerToProject = addSlash(providerToProject);
+      projectToFile = addSlash(projectToFile);
+      var fullPath = computerToProvider + providerToProject + projectToFile;
+      console.log(fullPath);
+      if (location) {
+        var success = _electron.shell.showItemInFolder(fullPath);
+        console.log(success);
+        return dispatch({
+          type: 'SYSTEM/OPEN_FILE_LOCATION',
+          payload: {}
+        });
+      } else {
+        var _success = _electron.shell.openItem(fullPath);
+        console.log(_success);
+        dispatch({
+          type: 'SYSTEM/OPEN_FILE',
+          payload: {}
+        });
+      }
+    };
+
+    var storeState = getState();
+    var computerToProvider = storeState.system.providerPath[provider];
+    var providerToProject = (0, _lodash.has)(storeState, [_LocalPathReducer.name, projectId, 'data']) ? storeState[_LocalPathReducer.name][projectId].data : false;
+
+    if (!providerToProject) {
+      dispatch(LocalPathActions.getPath({ projectId: projectId })).then(function (response) {
+        return open(computerToProvider, response.value.data, path);
+      });
+    } else {
+      return open(computerToProvider, providerToProject, path);
+    }
+  };
+}
+
+function currentVersion(_ref2) {
+  var version = _ref2.version;
+
+  return {
+    type: 'SYSTEM/CURRENT_VERSION',
+    payload: { version: version }
+  };
+}
+
+function checkingForUpdate() {
+  return {
+    type: 'SYSTEM/CHECKING_FOR_UPDATE',
+    payload: {}
+  };
+}
+
+function updateAvailable() {
+  return {
+    type: 'SYSTEM/UPDATE_AVAILABLE',
+    payload: {}
+  };
+}
+
+function updateDownloaded(releaseNotes, releaseName, releaseDate, updateURL) {
+  return {
+    type: 'SYSTEM/UPDATE_DOWNLOADED',
+    payload: {
+      releaseNotes: releaseNotes,
+      releaseName: releaseName,
+      releaseDate: releaseDate,
+      updateURL: updateURL
+    }
+  };
+}
+
+function updateError(error) {
+  return {
+    type: 'SYSTEM/UPDATE_ERROR',
+    error: true,
+    payload: error.message
+  };
+}
+
+function updateNotAvailable() {
+  return {
+    type: 'SYSTEM/UPDATE_NOT_AVAILABLE',
+    payload: {}
+  };
+}

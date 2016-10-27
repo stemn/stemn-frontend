@@ -1,0 +1,81 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _chevronRight = require('react-icons/md/chevron-right');
+
+var _chevronRight2 = _interopRequireDefault(_chevronRight);
+
+var _TogglerExpand = require('./TogglerExpand.css');
+
+var _TogglerExpand2 = _interopRequireDefault(_TogglerExpand);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/components/Toggler/TogglerExpand/TogglerExpand.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/components/Toggler/TogglerExpand/TogglerExpand.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+}
+
+// Styles
+
+
+exports.default = _wrapComponent('_component')(_react3.default.createClass({
+  render: function render() {
+    var _props = this.props;
+    var children = _props.children;
+    var onClick = _props.onClick;
+    var isActive = _props.isActive;
+
+    return _react3.default.createElement(
+      'div',
+      { className: (0, _classnames2.default)(_TogglerExpand2.default.button, 'layout-row', 'layout-align-start-center', _defineProperty({}, _TogglerExpand2.default.buttonActive, isActive)), onClick: onClick },
+      children,
+      _react3.default.createElement(_chevronRight2.default, { size: '18' })
+    );
+  }
+}));
+module.exports = exports['default'];

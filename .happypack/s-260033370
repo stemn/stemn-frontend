@@ -1,0 +1,72 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _icepick = require('icepick');
+
+var _icepick2 = _interopRequireDefault(_icepick);
+
+var _FileCompareStandard = require('app/renderer/main/modules/FileCompare/FileCompareStandard/FileCompareStandard.jsx');
+
+var _FileCompareStandard2 = _interopRequireDefault(_FileCompareStandard);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/pages/ProjectFeedPage/ProjectFeedPageRevision/ProjectFeedPageRevision.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/pages/ProjectFeedPage/ProjectFeedPageRevision/ProjectFeedPageRevision.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+}
+
+exports.default = _wrapComponent('_component')(_react3.default.createClass({
+  render: function render() {
+    var _props = this.props;
+    var project = _props.project;
+    var item = _props.item;
+
+
+    var filePrevious = item && item.data && item.data.previousRevisionId ? _icepick2.default.assocIn(item, ['data', 'revisionId'], item.data.previousRevisionId) : null;
+
+    return _react3.default.createElement(_FileCompareStandard2.default, {
+      project: project.data,
+      file1: item.data,
+      file2: filePrevious ? filePrevious.data : null });
+  }
+}));
+module.exports = exports['default'];

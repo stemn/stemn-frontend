@@ -1,0 +1,22 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.toggle = toggle;
+exports.getStatus = getStatus;
+function toggle(status) {
+  return {
+    type: 'AUTO_LAUNCH/TOGGLE',
+    payload: {},
+    meta: {
+      status: status
+    }
+  };
+}
+function getStatus() {
+  return {
+    type: 'AUTO_LAUNCH/GET_STATUS',
+    payload: {}
+  };
+}

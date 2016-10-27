@@ -1,0 +1,300 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Component = undefined;
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var _users = require('app/shared/actions/users');
+
+var UsersActions = _interopRequireWildcard(_users);
+
+var _auth = require('app/shared/actions/auth');
+
+var AuthActions = _interopRequireWildcard(_auth);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _ProjectSettingsPage = require('app/renderer/main/pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css');
+
+var _ProjectSettingsPage2 = _interopRequireDefault(_ProjectSettingsPage);
+
+var _reactReduxForm = require('react-redux-form');
+
+var _Upload = require('app/renderer/main/modules/Upload/Upload.jsx');
+
+var _Upload2 = _interopRequireDefault(_Upload);
+
+var _ProgressButton = require('app/renderer/main/components/Buttons/ProgressButton/ProgressButton.jsx');
+
+var _ProgressButton2 = _interopRequireDefault(_ProgressButton);
+
+var _LinkAccount = require('app/renderer/main/modules/Settings/LinkAccount/LinkAccount.jsx');
+
+var _LinkAccount2 = _interopRequireDefault(_LinkAccount);
+
+var _LoadingOverlay = require('app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx');
+
+var _LoadingOverlay2 = _interopRequireDefault(_LoadingOverlay);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/pages/SettingsPage/SettingsAccountPage/SettingsAccountPage.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/pages/SettingsPage/SettingsAccountPage/SettingsAccountPage.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+} // Container Core
+
+
+// Container Actions
+
+
+// Component Core
+
+
+// Styles
+
+
+// Sub Components
+
+
+/////////////////////////////////////////////////////////////////////////////
+///////////////////////////////// COMPONENT /////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+var Component = exports.Component = _wrapComponent('_component')(_react3.default.createClass({
+  displayName: 'Component',
+  componentWillMount: function componentWillMount() {
+    this.props.usersActions.getUser({ userId: this.props.auth.user._id });
+  },
+  saveUser: function saveUser() {
+    this.props.usersActions.saveUser({ userId: this.props.user.data });
+  },
+  render: function render() {
+    var _this = this;
+
+    var _props = this.props;
+    var entityModel = _props.entityModel;
+    var user = _props.user;
+    var auth = _props.auth;
+    var authActions = _props.authActions;
+    var usersActions = _props.usersActions;
+
+    var getInner = function getInner() {
+      return _react3.default.createElement(
+        'div',
+        null,
+        _react3.default.createElement(
+          'div',
+          { className: _ProjectSettingsPage2.default.panel },
+          _react3.default.createElement(
+            'h3',
+            null,
+            'Account Avatar'
+          ),
+          _react3.default.createElement(_Upload2.default, {
+            model: entityModel + '.data.profile.firstname',
+            value: user.data.profile.picture,
+            uploadId: 'UserSettingsAvatar'
+          }),
+          _react3.default.createElement(
+            'div',
+            { className: 'layout-row layout-align-end' },
+            _react3.default.createElement(
+              _ProgressButton2.default,
+              { className: 'primary', onClick: function onClick() {
+                  return _this.saveUser();
+                } },
+              'Update Avatar'
+            )
+          )
+        ),
+        _react3.default.createElement(
+          'div',
+          { className: _ProjectSettingsPage2.default.panel },
+          _react3.default.createElement(
+            'h3',
+            null,
+            'Basic Profile Info'
+          ),
+          _react3.default.createElement(
+            'div',
+            { className: 'layout-row' },
+            _react3.default.createElement(
+              _reactReduxForm.Field,
+              { className: 'flex', model: entityModel + '.data.profile.firstname' },
+              _react3.default.createElement('input', { className: 'dr-input', type: 'text', placeholder: 'First Name', style: { marginRight: '7px' } })
+            ),
+            _react3.default.createElement(
+              _reactReduxForm.Field,
+              { className: 'flex', model: entityModel + '.data.profile.lastname' },
+              _react3.default.createElement('input', { className: 'dr-input', type: 'text', placeholder: 'Last Name', style: { marginLeft: '7px' } })
+            )
+          ),
+          _react3.default.createElement('br', null),
+          _react3.default.createElement(
+            _reactReduxForm.Field,
+            { model: entityModel + '.data.profile.blurb' },
+            _react3.default.createElement('input', { className: 'dr-input', type: 'text', placeholder: 'Profile blurb' })
+          ),
+          _react3.default.createElement('br', null),
+          _react3.default.createElement(
+            'div',
+            { className: 'layout-row layout-align-end' },
+            _react3.default.createElement(
+              _ProgressButton2.default,
+              { className: 'primary', onClick: function onClick() {
+                  return _this.saveUser();
+                } },
+              'Save Profile'
+            )
+          )
+        ),
+        _react3.default.createElement(
+          'div',
+          { className: _ProjectSettingsPage2.default.panel },
+          _react3.default.createElement(
+            'h3',
+            null,
+            'Link Accounts'
+          ),
+          _react3.default.createElement(
+            'p',
+            null,
+            'By linking accounts you\'ll be able to login to STEMN using either Facebook and/or LinkedIn. LinkedIn login won\'t work on your mobile phone but Facebook works a treat.'
+          ),
+          _react3.default.createElement(_LinkAccount2.default, { text: 'Facebook', isLinked: auth.user.accounts.facebook, linkFn: function linkFn() {
+              return authActions.authenticate('facebook');
+            }, unLinkFn: function unLinkFn() {
+              return authActions.unlink('facebook');
+            } }),
+          _react3.default.createElement(_LinkAccount2.default, { text: 'Linkedin', isLinked: auth.user.accounts.linkedin, linkFn: function linkFn() {
+              return authActions.authenticate('linkedin');
+            }, unLinkFn: function unLinkFn() {
+              return authActions.unlink('linkedin');
+            } })
+        ),
+        _react3.default.createElement(
+          'div',
+          { className: _ProjectSettingsPage2.default.panel },
+          _react3.default.createElement(
+            'h3',
+            null,
+            'Sync Accounts'
+          ),
+          _react3.default.createElement(
+            'p',
+            null,
+            'Connect your dropbox account to take advantage of STEMN Sync. This will automatically sync your project files to STEMN.'
+          ),
+          _react3.default.createElement(_LinkAccount2.default, { text: 'Dropbox', isLinked: auth.user.accounts.dropbox.id, linkFn: function linkFn() {
+              return authActions.authenticate('dropbox');
+            }, unLinkFn: function unLinkFn() {
+              return authActions.unlink('dropbox');
+            } }),
+          _react3.default.createElement(_LinkAccount2.default, { text: 'Google Drive', isLinked: auth.user.accounts.google.refreshToken, linkFn: function linkFn() {
+              return authActions.authenticate('google');
+            }, unLinkFn: function unLinkFn() {
+              return authActions.unlink('google');
+            } })
+        ),
+        _react3.default.createElement(
+          'div',
+          { className: _ProjectSettingsPage2.default.panel },
+          _react3.default.createElement(
+            'h3',
+            null,
+            'Logout'
+          ),
+          _react3.default.createElement(
+            'p',
+            null,
+            'Logout from this account.'
+          ),
+          _react3.default.createElement(
+            'div',
+            { className: 'layout-row layout-align-end' },
+            _react3.default.createElement(
+              _ProgressButton2.default,
+              { className: 'warn', onClick: authActions.logout },
+              'Logout'
+            )
+          )
+        )
+      );
+    };
+    return _react3.default.createElement(
+      'div',
+      { className: 'rel-box' },
+      auth.user && user.data ? getInner() : '',
+      _react3.default.createElement(_LoadingOverlay2.default, { show: auth.authLoading || !user || !user.data })
+    );
+  }
+}));
+
+/////////////////////////////////////////////////////////////////////////////
+///////////////////////////////// CONTAINER /////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+function mapStateToProps(_ref, _ref2) {
+  var auth = _ref.auth;
+  var users = _ref.users;
+  var params = _ref2.params;
+
+  return {
+    auth: auth,
+    user: users[auth.user._id],
+    entityModel: 'users.' + auth.user._id
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    usersActions: (0, _redux.bindActionCreators)(UsersActions, dispatch),
+    authActions: (0, _redux.bindActionCreators)(AuthActions, dispatch)
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Component);

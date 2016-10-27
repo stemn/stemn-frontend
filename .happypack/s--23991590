@@ -1,0 +1,276 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Component = undefined;
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var _SyncTimelineActions = require('app/shared/modules/SyncTimeline/SyncTimeline.actions.js');
+
+var SyncTimelineActions = _interopRequireWildcard(_SyncTimelineActions);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _ProjectFeedPage = require('./ProjectFeedPage.css');
+
+var _ProjectFeedPage2 = _interopRequireDefault(_ProjectFeedPage);
+
+var _lodash = require('lodash');
+
+var _reactRouter = require('react-router');
+
+var _reactPopup = require('app/renderer/assets/other/react-popup');
+
+var _reactPopup2 = _interopRequireDefault(_reactPopup);
+
+var _Timeline = require('app/renderer/main/modules/Timeline/Timeline.jsx');
+
+var _Timeline2 = _interopRequireDefault(_Timeline);
+
+var _SidebarTimeline = require('app/shared/modules/SyncTimeline/SidebarTimeline/SidebarTimeline.jsx');
+
+var _SidebarTimeline2 = _interopRequireDefault(_SidebarTimeline);
+
+var _ContentSidebar = require('app/renderer/main/components/ContentSidebar');
+
+var _ContentSidebar2 = _interopRequireDefault(_ContentSidebar);
+
+var _cloudLocked = require('app/renderer/assets/images/pure-vectors/cloud-locked.svg');
+
+var _cloudLocked2 = _interopRequireDefault(_cloudLocked);
+
+var _timeline = require('app/renderer/assets/images/pure-vectors/timeline.svg');
+
+var _timeline2 = _interopRequireDefault(_timeline);
+
+var _ProjectFeedPageCommit = require('./ProjectFeedPageCommit/ProjectFeedPageCommit.jsx');
+
+var _ProjectFeedPageCommit2 = _interopRequireDefault(_ProjectFeedPageCommit);
+
+var _ProjectFeedPageRevision = require('./ProjectFeedPageRevision/ProjectFeedPageRevision.jsx');
+
+var _ProjectFeedPageRevision2 = _interopRequireDefault(_ProjectFeedPageRevision);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/pages/ProjectFeedPage/ProjectFeedPage.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/pages/ProjectFeedPage/ProjectFeedPage.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+} // Container Core
+
+
+// Container Actions
+
+
+// Component Core
+
+
+// Styles
+
+
+// Sub Components
+
+
+///////////////////////////////// COMPONENT /////////////////////////////////
+
+var eventComponentMap = {
+  commit: function commit(item, project) {
+    return _react3.default.createElement(_ProjectFeedPageCommit2.default, { item: item, project: project });
+  },
+  revision: function revision(item, project) {
+    return _react3.default.createElement(_ProjectFeedPageRevision2.default, { item: item, project: project });
+  }
+};
+
+var getEventComponent = function getEventComponent(item, project) {
+  return item && item.event && eventComponentMap[item.event] ? eventComponentMap[item.event](item, project) : _react3.default.createElement(
+    'div',
+    { className: 'layout-column layout-align-center-center flex text-title-4 text-center' },
+    _react3.default.createElement('img', { src: _timeline2.default, style: { width: '100px' } }),
+    _react3.default.createElement(
+      'div',
+      null,
+      'No timeline event selected.'
+    )
+  );
+};
+
+var Component = exports.Component = _wrapComponent('_component')(_react3.default.createClass({
+  displayName: 'Component',
+
+
+  // Mounting
+  onMount: function onMount(nextProps, prevProps) {
+    if (nextProps.project && nextProps.project.data && nextProps.project.data.remote.connected) {
+      if (!prevProps || nextProps.project.data._id !== prevProps.project.data._id) {
+        nextProps.syncTimelineActions.fetchTimeline({ projectId: nextProps.project.data._id });
+      }
+    }
+    if ((0, _lodash.has)(nextProps, 'location.query.item')) {
+      if (!(0, _lodash.has)(prevProps, 'location.query.item') || nextProps.location.query.item != prevProps.location.query.item) {
+        var itemFromQueryParams = this.props.timeline.data.find(function (item) {
+          return item._id == nextProps.location.query.item;
+        });
+        if (itemFromQueryParams) {
+          this.selectTimelineItem(itemFromQueryParams);
+        }
+      }
+    }
+  },
+  componentWillMount: function componentWillMount() {
+    this.onMount(this.props);
+  },
+  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    this.onMount(nextProps, this.props);
+  },
+  selectTimelineItem: function selectTimelineItem(item) {
+    this.props.syncTimelineActions.selectTimelineItem({
+      projectId: this.props.project.data._id,
+      selected: item
+    });
+  },
+  deselect: function deselect() {
+    this.props.syncTimelineActions.deselect({
+      projectId: this.props.project.data._id
+    });
+  },
+  refresh: function refresh() {
+    this.props.syncTimelineActions.fetchTimeline({
+      projectId: this.props.project.data._id
+    });
+  },
+  render: function render() {
+    var _props = this.props;
+    var timeline = _props.timeline;
+    var timelineModel = _props.timelineModel;
+    var project = _props.project;
+    var location = _props.location;
+
+    var baseLink = 'project/' + (project && project.data ? project.data._id : '');
+
+    if (project.data.remote.connected) {
+      return _react3.default.createElement(
+        'div',
+        { className: 'layout-column flex rel-box' },
+        _react3.default.createElement(_Timeline2.default, {
+          items: timeline && timeline.data ? timeline.data : [],
+          selected: timeline && timeline.selected ? timeline.selected._id : '',
+          onSelect: this.selectTimelineItem
+        }),
+        _react3.default.createElement(
+          'div',
+          { className: 'layout-row flex' },
+          _react3.default.createElement(
+            'div',
+            { className: 'layout-column' },
+            _react3.default.createElement(
+              _ContentSidebar2.default,
+              { className: 'flex' },
+              _react3.default.createElement(_SidebarTimeline2.default, {
+                items: timeline && timeline.data ? timeline.data : [],
+                selected: timeline && timeline.selected ? timeline.selected._id : '',
+                onSelect: this.selectTimelineItem,
+                loading: timeline && timeline.data ? false : true,
+                query: timeline && timeline.query ? timeline.query : '',
+                queryModel: timelineModel + '.query',
+                refresh: this.refresh,
+                deselect: this.deselect
+              })
+            )
+          ),
+          _react3.default.createElement(
+            'div',
+            { className: 'layout-column flex' },
+            getEventComponent(timeline && timeline.selected ? timeline.selected : '', project)
+          )
+        )
+      );
+    } else {
+      return _react3.default.createElement(
+        'div',
+        { className: 'layout-column layout-align-center-center flex' },
+        _react3.default.createElement('img', { src: _cloudLocked2.default }),
+        _react3.default.createElement(
+          'div',
+          { className: 'text-title-4 text-center' },
+          'Timeline not available. Connect this project to Drive or Dropbox'
+        ),
+        _react3.default.createElement(
+          'div',
+          { className: 'text-title-4 text-center link-primary', style: { marginTop: '10px' } },
+          _react3.default.createElement(
+            _reactRouter.Link,
+            { to: baseLink + '/settings' },
+            'Add File Store'
+          )
+        )
+      );
+    }
+  }
+}));
+
+///////////////////////////////// CONTAINER /////////////////////////////////
+
+function mapStateToProps(_ref, _ref2) {
+  var syncTimeline = _ref.syncTimeline;
+  var projects = _ref.projects;
+  var params = _ref2.params;
+
+  var project = projects.data[params.stub];
+  return {
+    timeline: syncTimeline[project.data._id],
+    timelineModel: 'syncTimeline.' + project.data._id,
+    project: project
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    syncTimelineActions: (0, _redux.bindActionCreators)(SyncTimelineActions, dispatch)
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Component);

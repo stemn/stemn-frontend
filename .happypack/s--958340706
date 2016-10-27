@@ -1,0 +1,11 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var getToggleAllStatus = exports.getToggleAllStatus = function getToggleAllStatus(groupedChanges, checkedObject) {
+  return groupedChanges.reduce(function (prev, currentGroup, index) {
+    var current = checkedObject ? checkedObject[currentGroup.data.fileId] : false;
+    return index == 0 ? current : current == prev ? current : null;
+  }, null); // true || false || null
+};

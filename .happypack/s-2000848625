@@ -1,0 +1,99 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _FileCompareSlider = require('./FileCompareSlider.css');
+
+var _FileCompareSlider2 = _interopRequireDefault(_FileCompareSlider);
+
+var _reactClickdrag = require('react-clickdrag');
+
+var _reactClickdrag2 = _interopRequireDefault(_reactClickdrag);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/FileCompare/FileCompareInner/FileCompareSlider/FileCompareSlider.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/FileCompare/FileCompareInner/FileCompareSlider/FileCompareSlider.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+}
+
+// Styles
+
+
+var Component = _wrapComponent('_component')(_react3.default.createClass({
+  displayName: 'Component',
+  getInitialState: function getInitialState() {
+    return {
+      active: false,
+      lastEventId: ''
+    };
+  },
+  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    if (nextProps.dataDrag.isMoving && nextProps.dataDrag.id && nextProps.dataDrag.id != this.state.lastEventId) {
+      var containerWidth = this.props.container.offsetWidth;
+      var prevPositionPx = nextProps.position / 100 * containerWidth;
+      var newPositionPx = prevPositionPx + nextProps.dataDrag.deltaX;
+      if (newPositionPx <= 0) {
+        newPositionPx = 0;
+      } else if (newPositionPx >= containerWidth) {
+        newPositionPx = containerWidth;
+      }
+      var positionPerc = newPositionPx / containerWidth * 100;
+      this.setState({ active: true });
+      this.setState({ lastEventId: nextProps.dataDrag.id });
+      this.props.changeFn(positionPerc);
+    } else {
+      this.setState({ active: false });
+    }
+  },
+  render: function render() {
+    var translation = this.props.position + '%';
+    return _react3.default.createElement('div', { className: (0, _classnames2.default)(_FileCompareSlider2.default.slider, _defineProperty({}, _FileCompareSlider2.default.active, this.state.active)), style: { left: translation } });
+  }
+}));
+
+exports.default = (0, _reactClickdrag2.default)(Component, { touch: true });
+module.exports = exports['default'];

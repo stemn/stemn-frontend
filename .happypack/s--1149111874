@@ -1,0 +1,78 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = configureStore;
+
+var _redux = require('redux');
+
+var _reduxThunk = require('redux-thunk');
+
+var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
+var _reduxPromiseMiddleware = require('redux-promise-middleware');
+
+var _reduxPromiseMiddleware2 = _interopRequireDefault(_reduxPromiseMiddleware);
+
+var _reduxLogger = require('redux-logger');
+
+var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
+
+var _reactRouter = require('react-router');
+
+var _reactRouterRedux = require('react-router-redux');
+
+var _rootReducerRenderer = require('../reducers/rootReducer.renderer.js');
+
+var _rootReducerRenderer2 = _interopRequireDefault(_rootReducerRenderer);
+
+var _forwardToMain = require('./middleware/forwardToMain');
+
+var _forwardToMain2 = _interopRequireDefault(_forwardToMain);
+
+var _forwardToRendererWindow = require('./middleware/forwardToRendererWindow');
+
+var _forwardToRendererWindow2 = _interopRequireDefault(_forwardToRendererWindow);
+
+var _routerFix = require('./middleware/routerFix');
+
+var _routerFix2 = _interopRequireDefault(_routerFix);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function configureStore(initialState) {
+  var middleware = [_reduxThunk2.default, (0, _reduxPromiseMiddleware2.default)(), _routerFix2.default, _forwardToMain2.default, _forwardToRendererWindow2.default, (0, _reactRouterRedux.routerMiddleware)(_reactRouter.hashHistory)];
+  if (process.env.NODE_ENV == 'development') {
+    middleware.push((0, _reduxLogger2.default)({
+      level: 'info',
+      collapsed: true
+    }));
+  }
+
+  var enhanced = [_redux.applyMiddleware.apply(undefined, middleware)];
+
+  enhanced.push(window.devToolsExtension ? window.devToolsExtension() : function (noop) {
+    return noop;
+  });
+  //    enhanced.push(persistState(
+  //      window.location.href.match(
+  //        /[?&]debug_session=([^&]+)\b/
+  //      )
+  //    ));
+
+
+  var rootReducer = (0, _rootReducerRenderer2.default)();
+  var enhancer = _redux.compose.apply(undefined, enhanced);
+  var store = (0, _redux.createStore)(rootReducer, initialState, enhancer);
+
+  if (!process.env.NODE_ENV && module.hot) {
+    module.hot.accept('../reducers', function () {
+      store.replaceReducer(require('../reducers'));
+    });
+  }
+
+  return store;
+}
+//import { persistState } from 'redux-devtools';
+module.exports = exports['default'];

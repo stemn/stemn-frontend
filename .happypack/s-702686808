@@ -1,0 +1,39 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _ModalActions = require('../../../renderer/main/modules/Modal/Modal.actions.js');
+
+var modalActions = _interopRequireWildcard(_ModalActions);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var routerFix = function routerFix(store) {
+  return function (next) {
+    return function (action) {
+
+      if (action.type == '@@router/LOCATION_CHANGE' && action.payload.state && action.payload.state.meta) {
+        // muteable
+        action.meta = action.payload.state.meta;
+        delete action.payload.state.meta;
+      }
+      //  // Close modals
+      //  if(action.type == '@@router/LOCATION_CHANGE'){
+      //    store.dispatch(modalActions.closeAll())
+      //  }
+      return next(action);
+    };
+  };
+}; /**********************************************
+   React Redux Router does not let us add meta to the payload.
+   
+   Instead, we add the meta to the state object.
+   This is transfered to the metadata here.
+   
+   It will also close any modals.
+   **********************************************/
+
+exports.default = routerFix;
+module.exports = exports['default'];

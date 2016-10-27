@@ -1,0 +1,14 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.groupRevisions = undefined;
+
+var _lodash = require('lodash');
+
+var groupRevisions = exports.groupRevisions = function groupRevisions(revisions) {
+  return (0, _lodash.values)((0, _lodash.groupBy)(revisions, 'data.fileId')).map(function (file) {
+    return Object.assign({}, file[0], { revisions: file });
+  });
+};

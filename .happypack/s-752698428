@@ -1,0 +1,200 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.setActiveProject = setActiveProject;
+exports.getProject = getProject;
+exports.createProject = createProject;
+exports.getUserProjects = getUserProjects;
+exports.confirmDeleteProject = confirmDeleteProject;
+exports.deleteProject = deleteProject;
+exports.saveProject = saveProject;
+exports.addTeamMember = addTeamMember;
+exports.changeUserPermissions = changeUserPermissions;
+exports.removeTeamMember = removeTeamMember;
+exports.linkRemote = linkRemote;
+
+var _axios = require('axios');
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _reactRouterRedux = require('react-router-redux');
+
+var _ModalActions = require('../../renderer/main/modules/Modal/Modal.actions.js');
+
+var ModalActions = _interopRequireWildcard(_ModalActions);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function setActiveProject(_ref) {
+  var projectId = _ref.projectId;
+
+  return {
+    type: 'PROJECTS/SET_ACTIVE_PROJECT',
+    payload: {
+      projectId: projectId
+    }
+  };
+}
+function getProject(_ref2) {
+  var projectId = _ref2.projectId;
+
+  return {
+    type: 'PROJECTS/GET_PROJECT',
+    http: true,
+    payload: {
+      method: 'GET',
+      url: '/api/v1/projects/' + projectId
+    }
+  };
+}
+
+function createProject(project) {
+  return function (dispatch) {
+    dispatch({
+      type: 'PROJECTS/CREATE_PROJECT',
+      payload: (0, _axios2.default)({
+        method: 'POST',
+        url: '/api/v1/projects',
+        data: project
+      }).then(function (response) {
+        dispatch((0, _reactRouterRedux.push)('/project/' + response.data._id + '/settings'));
+        return response;
+      })
+    });
+  };
+}
+
+function getUserProjects(_ref3) {
+  var userId = _ref3.userId;
+
+  return {
+    type: 'PROJECTS/GET_USER_PROJECTS',
+    payload: (0, _axios2.default)({
+      url: '/api/v1/search',
+      method: 'GET',
+      params: {
+        type: 'project',
+        parentType: 'user',
+        parentId: userId,
+        size: 100,
+        published: 'both',
+        select: ['name', 'picture', 'stub', 'type', 'remote']
+      }
+    })
+  };
+}
+
+function confirmDeleteProject(_ref4) {
+  var projectId = _ref4.projectId;
+
+  return ModalActions.showConfirm({
+    message: 'Deleting a project is permanent. You will not be able to undo this.',
+    modalConfirm: {
+      functionAlias: 'ProjectsActions.deleteProject',
+      functionInputs: { projectId: projectId }
+    }
+  });
+}
+
+function deleteProject(_ref5) {
+  var projectId = _ref5.projectId;
+
+  return function (dispatch) {
+    dispatch({
+      type: 'PROJECTS/DELETE_PROJECT',
+      payload: (0, _axios2.default)({
+        method: 'DELETE',
+        url: '/api/v1/projects/' + projectId
+      }).then(function (response) {
+        dispatch((0, _reactRouterRedux.push)('/'));
+      }),
+      meta: {
+        projectId: projectId
+      }
+    });
+  };
+}
+
+function saveProject(_ref6) {
+  var project = _ref6.project;
+
+  return {
+    type: 'PROJECTS/SAVE_PROJECT',
+    payload: (0, _axios2.default)({
+      method: 'PUT',
+      url: '/api/v1/projects/' + project._id,
+      data: project
+    }),
+    meta: {
+      projectId: project._id
+    }
+  };
+}
+
+function addTeamMember(_ref7) {
+  var projectId = _ref7.projectId;
+  var user = _ref7.user;
+
+  return {
+    type: 'PROJECTS/ADD_TEAM_MEMBER',
+    payload: {
+      projectId: projectId,
+      user: user
+    }
+  };
+}
+
+function changeUserPermissions(_ref8) {
+  var projectId = _ref8.projectId;
+  var userId = _ref8.userId;
+  var role = _ref8.role;
+
+  return {
+    type: 'PROJECTS/CHANGE_USER_PERMISSIONS',
+    payload: {
+      projectId: projectId,
+      userId: userId,
+      role: role
+    }
+  };
+}
+
+function removeTeamMember(_ref9) {
+  var projectId = _ref9.projectId;
+  var userId = _ref9.userId;
+
+  return {
+    type: 'PROJECTS/REMOVE_TEAM_MEMBER',
+    payload: {
+      projectId: projectId,
+      userId: userId
+    }
+  };
+}
+
+function linkRemote(_ref10) {
+  var projectId = _ref10.projectId;
+  var provider = _ref10.provider;
+  var path = _ref10.path;
+  var id = _ref10.id;
+
+  return {
+    type: 'PROJECTS/LINK_REMOTE',
+    http: true,
+    payload: {
+      method: 'PUT',
+      url: '/api/v1/remote/link/' + projectId + '/' + provider,
+      params: {
+        path: path,
+        id: id
+      }
+    },
+    meta: {
+      cacheKey: projectId
+    }
+  };
+}

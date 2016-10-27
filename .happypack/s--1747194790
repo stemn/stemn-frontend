@@ -1,0 +1,123 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Component = undefined;
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var _menubarLayout = require('app/shared/actions/menubarLayout');
+
+var MenubarLayoutActions = _interopRequireWildcard(_menubarLayout);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _Toolbar = require('./Toolbar.css');
+
+var _Toolbar2 = _interopRequireDefault(_Toolbar);
+
+var _menu = require('react-icons/md/menu');
+
+var _menu2 = _interopRequireDefault(_menu);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/menubar/modules/Toolbar/Toolbar.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/menubar/modules/Toolbar/Toolbar.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+} // Container Core
+
+
+// Container Actions
+
+
+// Component Core
+
+
+// Styles
+
+
+// Sub Components
+
+
+///////////////////////////////// COMPONENT /////////////////////////////////
+
+var Component = exports.Component = _wrapComponent('_component')(_react3.default.createClass({
+  displayName: 'Component',
+  render: function render() {
+    var _props = this.props;
+    var menu = _props.menu;
+    var menubarLayoutActions = _props.menubarLayoutActions;
+    var children = _props.children;
+
+    var textStyle = menu ? { marginLeft: '10px' } : {};
+    return _react3.default.createElement(
+      'div',
+      { className: (0, _classnames2.default)(_Toolbar2.default.toolbar, 'layout-row layout-align-start-center') },
+      menu ? _react3.default.createElement(_menu2.default, { size: '22', onClick: function onClick() {
+          return menubarLayoutActions.toggleSidebar(true);
+        } }) : '',
+      _react3.default.createElement(
+        'div',
+        { className: 'flex layout-row layout-align-start-center', style: textStyle },
+        children
+      )
+    );
+  }
+}));
+
+///////////////////////////////// CONTAINER /////////////////////////////////
+
+function mapStateToProps() {
+  return {};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    menubarLayoutActions: (0, _redux.bindActionCreators)(MenubarLayoutActions, dispatch)
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Component);

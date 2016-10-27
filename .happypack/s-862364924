@@ -1,0 +1,438 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+exports.newTask = newTask;
+exports.getBoard = getBoard;
+exports.newEvent = newEvent;
+exports.deleteEvent = deleteEvent;
+exports.getEvents = getEvents;
+exports.updateBoard = updateBoard;
+exports.getTask = getTask;
+exports.updateTask = updateTask;
+exports.updateGroup = updateGroup;
+exports.deleteTask = deleteTask;
+exports.moveTask = moveTask;
+exports.beginDrag = beginDrag;
+exports.endDrag = endDrag;
+exports.moveGroup = moveGroup;
+exports.toggleComplete = toggleComplete;
+exports.toggleCompleteUndo = toggleCompleteUndo;
+exports.newGroup = newGroup;
+exports.deleteGroupConfirm = deleteGroupConfirm;
+exports.deleteGroup = deleteGroup;
+exports.showLabelEditModal = showLabelEditModal;
+exports.changeLayout = changeLayout;
+
+var _axios = require('axios');
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _getUuid = require('../../../../shared/helpers/getUuid.js');
+
+var _getUuid2 = _interopRequireDefault(_getUuid);
+
+var _reactReduxForm = require('react-redux-form');
+
+var _ToastsActions = require('../Toasts/Toasts.actions.js');
+
+var _ModalActions = require('../Modal/Modal.actions.js');
+
+var _lodash = require('lodash');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function newTask(_ref) {
+  var boardId = _ref.boardId;
+  var task = _ref.task;
+
+  return function (dispatch, getState) {
+    var taskDefault = {
+      users: [{
+        _id: getState().auth.user._id,
+        name: getState().auth.user.name,
+        picture: getState().auth.user.picture
+      }]
+    };
+    dispatch({
+      type: 'TASKS/NEW_TASK',
+      payload: (0, _axios2.default)({
+        method: 'POST',
+        url: '/api/v1/boards/' + boardId + '/tasks',
+        data: Object.assign({}, taskDefault, task)
+      }),
+      meta: {
+        cacheKey: boardId
+      }
+    });
+  };
+}
+
+function getBoard(_ref2) {
+  var projectId = _ref2.projectId;
+
+  return {
+    type: 'TASKS/GET_BOARD',
+    payload: (0, _axios2.default)({
+      method: 'GET',
+      url: '/api/v1/projects/' + projectId + '/boards'
+    }),
+    meta: {
+      cacheKey: projectId
+    }
+  };
+}
+
+function newEvent(_ref3) {
+  var taskId = _ref3.taskId;
+  var event = _ref3.event;
+
+  var eventObject = Object.assign({}, {
+    _id: (0, _getUuid2.default)()
+  }, event);
+  return {
+    type: 'TASKS/NEW_EVENT',
+    payload: {
+      event: eventObject,
+      taskId: taskId
+    }
+  };
+}
+function deleteEvent(_ref4) {
+  var taskId = _ref4.taskId;
+  var eventId = _ref4.eventId;
+
+  return {
+    type: 'TASKS/DELETE_EVENT',
+    payload: {
+      taskId: taskId,
+      eventId: eventId
+    }
+  };
+}
+
+function getEvents(_ref5) {
+  var taskId = _ref5.taskId;
+
+  return {
+    type: 'TASKS/GET_EVENTS',
+    payload: (0, _axios2.default)({
+      method: 'GET',
+      url: '/api/v1/tasks/' + taskId + '/events'
+    }),
+    meta: {
+      cacheKey: taskId
+    }
+  };
+}
+
+function updateBoard(_ref6) {
+  var board = _ref6.board;
+
+  return {
+    type: 'TASKS/UPDATE_BOARD',
+    payload: (0, _axios2.default)({
+      method: 'PUT',
+      url: '/api/v1/boards/' + board._id,
+      data: board
+    }),
+    meta: {
+      cacheKey: board._id
+    }
+  };
+}
+
+function getTask(_ref7) {
+  var taskId = _ref7.taskId;
+
+  return {
+    type: 'TASKS/GET_TASK',
+    httpPackage: {
+      endpoint: 'api/v1/tasks',
+      url: '/api/v1/tasks',
+      method: 'GET',
+      params: {
+        'ids': taskId
+      }
+    },
+    meta: {
+      cacheKey: taskId
+    }
+  };
+}
+
+function updateTask(_ref8) {
+  var task = _ref8.task;
+
+  return {
+    type: 'TASKS/UPDATE_TASK',
+    http: true,
+    throttle: {
+      time: 2000,
+      endpoint: 'TASKS/UPDATE_TASK-' + task._id
+    },
+    payload: {
+      method: 'PUT',
+      url: '/api/v1/tasks/' + task._id,
+      data: task
+    },
+    meta: {
+      cacheKey: task._id
+    }
+  };
+}
+
+function updateGroup(_ref9) {
+  var group = _ref9.group;
+
+  return {
+    type: 'TASKS/UPDATE_GROUP',
+    http: true,
+    throttle: {
+      time: 2000,
+      endpoint: 'TASKS/UPDATE_GROUP-' + group._id
+    },
+    payload: {
+      method: 'PUT',
+      url: '/api/v1/groups/' + group._id,
+      data: group
+    },
+    meta: {
+      cacheKey: group._id
+    }
+  };
+}
+
+function deleteTask(_ref10) {
+  var boardId = _ref10.boardId;
+  var taskId = _ref10.taskId;
+
+  return {
+    type: 'TASKS/DELETE_TASK',
+    payload: (0, _axios2.default)({
+      method: 'DELETE',
+      url: '/api/v1/tasks/' + taskId
+    }),
+    meta: {
+      taskId: taskId,
+      boardId: boardId
+    }
+  };
+}
+
+function moveTask(_ref11) {
+  var boardId = _ref11.boardId;
+  var task = _ref11.task;
+  var destinationTask = _ref11.destinationTask;
+  var destinationGroup = _ref11.destinationGroup;
+  var after = _ref11.after;
+  var save = _ref11.save;
+
+  // To move a task you must have either hoverItem or destinationGroup
+  // destinationGroup is used if the group is empty
+  return function (dispatch) {
+    if (save) {
+      dispatch({
+        type: 'TASKS/MOVE_TASK',
+        payload: (0, _axios2.default)({
+          method: 'POST',
+          url: '/api/v1/tasks/move',
+          data: {
+            board: boardId,
+            task: task,
+            destinationGroup: destinationGroup,
+            destinationTask: destinationTask,
+            after: after
+          }
+        })
+      });
+    } else {
+      dispatch({
+        type: 'TASKS/MOVE_TASK',
+        payload: {
+          task: task,
+          destinationGroup: destinationGroup,
+          destinationTask: destinationTask,
+          boardId: boardId
+        }
+      });
+    }
+  };
+}
+
+function beginDrag(_ref12) {
+  var boardId = _ref12.boardId;
+  var taskId = _ref12.taskId;
+
+  return {
+    type: 'TASKS/BEGIN_DRAG',
+    payload: {
+      taskId: taskId
+    },
+    meta: {
+      cacheKey: boardId
+    }
+  };
+}
+
+function endDrag(_ref13) {
+  var boardId = _ref13.boardId;
+  var taskId = _ref13.taskId;
+
+  return {
+    type: 'TASKS/END_DRAG',
+    payload: {
+      taskId: taskId
+    },
+    meta: {
+      cacheKey: boardId
+    }
+  };
+}
+
+function moveGroup(_ref14) {
+  var boardId = _ref14.boardId;
+  var group = _ref14.group;
+  var destinationGroup = _ref14.destinationGroup;
+  var after = _ref14.after;
+  var save = _ref14.save;
+
+  return function (dispatch) {
+    if (save) {
+      dispatch({
+        type: 'TASKS/MOVE_TASK',
+        payload: (0, _axios2.default)({
+          method: 'POST',
+          url: '/api/v1/groups/move',
+          data: {
+            board: boardId,
+            group: group,
+            destinationGroup: destinationGroup,
+            after: after
+          }
+        })
+      });
+    } else {
+      dispatch({
+        type: 'TASKS/MOVE_GROUP',
+        payload: {
+          group: group, destinationGroup: destinationGroup, boardId: boardId
+        }
+      });
+    }
+  };
+}
+
+function toggleComplete(_ref15) {
+  var taskId = _ref15.taskId;
+  var model = _ref15.model;
+
+  return function (dispatch, getState) {
+    var value = !(0, _lodash.get)(getState(), model);
+    dispatch(_reactReduxForm.actions.change(model, value));
+    dispatch((0, _ToastsActions.show)({
+      title: 'This task was marked ' + (value ? 'complete' : 'incomplete') + '.',
+      actions: [{
+        text: 'Undo',
+        action: {
+          functionAlias: 'TasksActions.toggleCompleteUndo',
+          functionInputs: { taskId: taskId, model: model, value: value }
+        }
+      }]
+    }));
+  };
+}
+function toggleCompleteUndo(_ref16) {
+  var taskId = _ref16.taskId;
+  var model = _ref16.model;
+  var value = _ref16.value;
+
+  return function (dispatch, getState) {
+    dispatch(_reactReduxForm.actions.change(model, !value));
+    setTimeout(function () {
+      updateTask({ task: getState().tasks.data[taskId].data });
+    }, 1);
+  };
+}
+
+function newGroup(_ref17) {
+  var boardId = _ref17.boardId;
+  var group = _ref17.group;
+
+  return function (dispatch) {
+    if (group.name.length > 1) {
+      dispatch({
+        type: 'TASKS/NEW_GROUP',
+        payload: (0, _axios2.default)({
+          method: 'POST',
+          url: '/api/v1/groups',
+          data: _extends({}, group, {
+            board: boardId
+          })
+        }),
+        meta: {
+          boardId: boardId
+        }
+      });
+    }
+  };
+}
+
+function deleteGroupConfirm(_ref18) {
+  var boardId = _ref18.boardId;
+  var groupId = _ref18.groupId;
+
+  return (0, _ModalActions.showConfirm)({
+    message: 'Deleting a group is permanent. All tasks which belong to this group will be deleted (even archived tasks).',
+    modalConfirm: {
+      functionAlias: 'TasksActions.deleteGroup',
+      functionInputs: { boardId: boardId, groupId: groupId }
+    }
+  });
+}
+function deleteGroup(_ref19) {
+  var boardId = _ref19.boardId;
+  var groupId = _ref19.groupId;
+
+  return {
+    type: 'TASKS/DELETE_GROUP',
+    payload: (0, _axios2.default)({
+      method: 'DELETE',
+      url: '/api/v1/boards/' + boardId + '/groups/' + groupId
+    }),
+    meta: {
+      groupId: groupId,
+      boardId: boardId
+    }
+  };
+}
+
+function showLabelEditModal(_ref20) {
+  var boardId = _ref20.boardId;
+
+  return function (dispatch) {
+    dispatch((0, _ModalActions.showModal)({
+      modalType: 'TASK_LABELS',
+      modalProps: {
+        boardId: boardId
+      }
+    }));
+  };
+}
+
+function changeLayout(_ref21) {
+  var boardId = _ref21.boardId;
+  var layout = _ref21.layout;
+
+  return {
+    type: 'TASKS/CHANGE_LAYOUT',
+    payload: {
+      boardId: boardId,
+      layout: layout
+    }
+  };
+}

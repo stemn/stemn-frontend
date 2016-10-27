@@ -1,0 +1,69 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.getViewerType = exports.viewerFileTypes = undefined;
+
+var _lodash = require('lodash');
+
+var _codemirror = require('codemirror');
+
+var _codemirror2 = _interopRequireDefault(_codemirror);
+
+require('codemirror/mode/meta.js');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var getCodeMirrorExts = function getCodeMirrorExts() {
+    var codeExts = [];
+    (0, _lodash.forEach)(_codemirror2.default.modeInfo, function (mode) {
+        if (mode.ext) {
+            codeExts = codeExts.concat(mode.ext);
+        }
+    });
+    return codeExts;
+};
+
+var viewerFileTypes = exports.viewerFileTypes = {
+    general: {
+        gerber: ['gerber', // Virtual gerber type
+        'drl', 'drd', 'txt', // This goes first so txt does not display as gerber
+        'out', 'outline', 'gbl', 'sol', 'gbs', 'sts', 'gbp', 'crs', 'gbo', 'pls', 'gtl', 'cmp', 'gts', 'stc', 'gtp', 'crc', 'gto', 'plc'],
+        pcb: ['brd', 'pcb', 'kicad_pcb'],
+        code: getCodeMirrorExts(),
+        autodesk: ['3dm', '3ds', 'asm', 'cam360', 'catpart', 'cgr', 'collaboration', 'dae', 'dgn', 'dlv3', 'dwf', 'dwfx', 'dwg', 'dwt', 'dxf', 'exp', 'f3d', 'fbx', 'g', 'gbxml', 'iam', 'idw', 'ifc', 'ige', 'iges', 'igs', 'ipt', 'jt', 'model', 'neu', 'nwc', 'nwd', 'obj', 'pdf', 'prt', 'rcp', 'rvt', 'sab', 'sat', 'session', 'skp', 'sldprt', 'smb', 'smt', 'ste', 'step', 'stl', 'stla', 'stlb', 'stp', 'wire', 'x_b', 'x_t', 'xas', 'xpr'],
+        // Assem - 'sldasm' 'catproduct'
+        google: ['webm', 'mpeg4', '3gpp', 'mov', 'avi', 'mpegps', 'wmv', 'flv', //https://gist.github.com/izazueta/4961650
+        'xls', 'xlsx', 'pages', 'psd', 'tiff', 'eps', 'ps', 'ai', 'ttf', 'xps'],
+        image: ['png', 'jpg', 'jpeg', 'gif', 'svg', 'bmp', 'ico'],
+        pdf: ['pdf']
+    },
+    dropbox: {
+        pdf: ['docx', 'doc', 'docm', 'ppt', 'pps', 'ppsx', 'ppsm', 'pptx', 'pptm', 'rtf']
+    },
+    drive: {
+        google: ['docx', 'doc', 'docm', 'ppt', 'pps', 'ppsx', 'ppsm', 'pptx', 'pptm', 'rtf'],
+        gdoc: ['gdoc', 'gsheet', 'gslides']
+    }
+};
+
+var getViewerType = exports.getViewerType = function getViewerType(fileType, provider) {
+    var result;
+    var fileTypeLower = fileType ? fileType.toLowerCase() : '';
+    provider = provider == 'drive' ? 'drive' : 'dropbox';
+
+    // Extend the fileTypes array by the provider specific info
+    var viewerFileTypesProvider = (0, _lodash.clone)(viewerFileTypes.general);
+    Object.keys(viewerFileTypes[provider]).forEach(function (key) {
+        viewerFileTypesProvider[key] = viewerFileTypesProvider[key] || [];
+        viewerFileTypesProvider[key] = viewerFileTypesProvider[key].concat(viewerFileTypes[key]);
+    });
+
+    Object.keys(viewerFileTypesProvider).forEach(function (viewerType) {
+        if (viewerFileTypesProvider[viewerType].indexOf(fileTypeLower) != -1) {
+            result = viewerType;
+        }
+    });
+    return fileTypeLower ? result || 'other' : 'code'; // If there is no esxtension, it is code.
+};

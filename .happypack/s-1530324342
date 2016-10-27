@@ -1,0 +1,46 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Tabs = require('./Tabs.css');
+
+var _Tabs2 = _interopRequireDefault(_Tabs);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// Styles
+
+
+exports.default = function (props) {
+  return _react2.default.createElement(
+    'div',
+    { className: (0, _classnames2.default)(_Tabs2.default.tabs, _defineProperty({}, _Tabs2.default.tabsLg, props.size == 'lg')) },
+    _react2.default.createElement(
+      'div',
+      { className: (0, _classnames2.default)('tabs-inner', 'flex', 'layout-row', _Tabs2.default.inner) },
+      props.children
+    )
+  );
+};
+
+//      <div class="overflow-arrow overflow-arrow-left" layout="column" layout-align="center">
+//          <md-icon md-svg-icon="chevron-left"></md-icon>
+//      </div>
+//      <div class="overflow-arrow overflow-arrow-right" layout="column" layout-align="center">
+//          <md-icon md-svg-icon="chevron-right"></md-icon>
+//      </div>
+
+
+module.exports = exports['default'];

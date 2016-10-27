@@ -1,0 +1,396 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Component = undefined;
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var _TasksActions = require('../Tasks.actions.js');
+
+var TasksActions = _interopRequireWildcard(_TasksActions);
+
+var _projects = require('app/shared/actions/projects.js');
+
+var ProjectsActions = _interopRequireWildcard(_projects);
+
+var _ModalActions = require('app/renderer/main/modules/Modal/Modal.actions.js');
+
+var ModalActions = _interopRequireWildcard(_ModalActions);
+
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
+var _reactReduxForm = require('react-redux-form');
+
+var _lodash = require('lodash');
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _TaskDisplayModal = require('./TaskDisplayModal.css');
+
+var _TaskDisplayModal2 = _interopRequireDefault(_TaskDisplayModal);
+
+var _Checkbox = require('app/renderer/main/components/Input/Checkbox/Checkbox');
+
+var _Checkbox2 = _interopRequireDefault(_Checkbox);
+
+var _UserAvatar = require('app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx');
+
+var _UserAvatar2 = _interopRequireDefault(_UserAvatar);
+
+var _LabelSelect = require('./LabelSelect/LabelSelect.jsx');
+
+var _LabelSelect2 = _interopRequireDefault(_LabelSelect);
+
+var _UserSelect = require('app/renderer/main/components/Users/UserSelect/UserSelect.jsx');
+
+var _UserSelect2 = _interopRequireDefault(_UserSelect);
+
+var _TaskTimeline = require('../TaskTimeline/TaskTimeline.jsx');
+
+var _TaskTimeline2 = _interopRequireDefault(_TaskTimeline);
+
+var _DatePicker = require('app/renderer/main/modules/Calendar/DatePicker/DatePicker.jsx');
+
+var _DatePicker2 = _interopRequireDefault(_DatePicker);
+
+var _Textarea = require('app/renderer/main/components/Input/Textarea/Textarea');
+
+var _Textarea2 = _interopRequireDefault(_Textarea);
+
+var _CommentNew = require('app/renderer/main/modules/Comments/Comment/CommentNew.jsx');
+
+var _CommentNew2 = _interopRequireDefault(_CommentNew);
+
+var _PopoverMenu = require('app/renderer/main/components/PopoverMenu/PopoverMenu');
+
+var _PopoverMenu2 = _interopRequireDefault(_PopoverMenu);
+
+var _PopoverMenuList = require('app/renderer/main/components/PopoverMenu/PopoverMenuList');
+
+var _PopoverMenuList2 = _interopRequireDefault(_PopoverMenuList);
+
+var _SimpleIconButton = require('app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton');
+
+var _SimpleIconButton2 = _interopRequireDefault(_SimpleIconButton);
+
+var _moreHoriz = require('react-icons/md/more-horiz');
+
+var _moreHoriz2 = _interopRequireDefault(_moreHoriz);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Tasks/TaskDisplayModal/TaskDisplayModal.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Tasks/TaskDisplayModal/TaskDisplayModal.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+} // Container Core
+
+
+// Container Actions
+
+
+// Component Core
+
+
+// Styles
+
+
+// Sub Components
+
+
+///////////////////////////////// COMPONENT /////////////////////////////////
+
+var onMount = function onMount(nextProps, prevProps) {
+  if (nextProps.task) {
+    //    if(!prevProps || nextProps.task.project._id !== prevProps.task.project._id){
+    ////      nextProps.ProjectsActions.getProject({projectId: nextProps.task.project._id});
+    //    }
+  }
+};
+
+var Component = exports.Component = _wrapComponent('_component')(_react3.default.createClass({
+  displayName: 'Component',
+
+
+  // Mounting
+  componentWillMount: function componentWillMount() {
+    onMount(this.props);
+  },
+  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    onMount(nextProps, this.props);
+  },
+  showLabelEditModal: function showLabelEditModal() {
+    this.props.TasksActions.showLabelEditModal({
+      boardId: this.props.task.data.board
+    });
+  },
+  toggleComplete: function toggleComplete(model, value) {
+    this.props.TasksActions.toggleComplete({
+      taskId: this.props.task.data._id,
+      model: model,
+      value: value
+    });
+    this.updateTask();
+  },
+  updateTask: function updateTask() {
+    var _this = this;
+
+    setTimeout(function () {
+      return _this.props.TasksActions.updateTask({ task: _this.props.task.data });
+    }, 1);
+  },
+  deleteTask: function deleteTask() {
+    this.props.TasksActions.deleteTask({
+      taskId: this.props.task.data._id,
+      boardId: this.props.task.data.board
+    });
+    this.props.modalHide();
+  },
+  render: function render() {
+    var _props = this.props;
+    var taskId = _props.taskId;
+    var task = _props.task;
+    var board = _props.board;
+    var entityModel = _props.entityModel;
+    var project = _props.project;
+    var modalCancel = _props.modalCancel;
+    var modalHide = _props.modalHide;
+
+
+    var menu = [{
+      label: 'Refresh',
+      onClick: function onClick() {}
+    }, {
+      label: 'Delete Task',
+      onClick: this.deleteTask
+    }];
+
+    if (!task) {
+      return _react3.default.createElement(
+        'div',
+        null,
+        'Task Loading'
+      );
+    }
+
+    return _react3.default.createElement(
+      'div',
+      { className: (0, _classnames2.default)(_TaskDisplayModal2.default.taskDisplayModal, 'layout-column') },
+      _react3.default.createElement(
+        'div',
+        { className: 'layout-row flex' },
+        _react3.default.createElement(
+          'div',
+          { className: 'flex-70 layout-column' },
+          _react3.default.createElement(
+            'div',
+            { className: _TaskDisplayModal2.default.header },
+            _react3.default.createElement(
+              'div',
+              { className: 'layout-row layout-align-start-center' },
+              _react3.default.createElement(_Checkbox2.default, {
+                model: entityModel + '.data.complete',
+                value: task.data.complete,
+                changeAction: this.toggleComplete,
+                className: 'text-primary',
+                circle: true }),
+              _react3.default.createElement(
+                'div',
+                { className: 'text-title-4 flex', style: { marginLeft: '15px' } },
+                _react3.default.createElement(_Textarea2.default, {
+                  model: entityModel + '.data.name',
+                  onChange: this.updateTask,
+                  value: task.data.name,
+                  className: 'input-plain',
+                  type: 'text',
+                  placeholder: 'Task description' })
+              ),
+              _react3.default.createElement(
+                _PopoverMenu2.default,
+                { preferPlace: 'below' },
+                _react3.default.createElement(
+                  _SimpleIconButton2.default,
+                  null,
+                  _react3.default.createElement(_moreHoriz2.default, { size: '20px' })
+                ),
+                _react3.default.createElement(_PopoverMenuList2.default, { menu: menu })
+              )
+            ),
+            _react3.default.createElement(
+              'div',
+              { className: 'text-grey-3', style: { padding: '15px 0 20px' } },
+              'Created ',
+              (0, _moment2.default)(task.data.created).fromNow(),
+              ' ',
+              _react3.default.createElement('b', { className: 'text-interpunct' }),
+              ' By ',
+              _react3.default.createElement(
+                'a',
+                { className: 'link-primary' },
+                task.data.owner.name
+              )
+            )
+          ),
+          _react3.default.createElement(
+            'div',
+            { className: _TaskDisplayModal2.default.timeline + ' flex scroll-box' },
+            _react3.default.createElement(_TaskTimeline2.default, { taskId: taskId, board: board })
+          ),
+          _react3.default.createElement(
+            'div',
+            { className: _TaskDisplayModal2.default.newComment },
+            _react3.default.createElement(_CommentNew2.default, { taskId: taskId })
+          )
+        ),
+        _react3.default.createElement(
+          'div',
+          { className: _TaskDisplayModal2.default.sidebar + ' flex' },
+          _react3.default.createElement(
+            'div',
+            { className: _TaskDisplayModal2.default.well },
+            _react3.default.createElement(
+              'div',
+              { className: _TaskDisplayModal2.default.settingTitle + ' text-mini-caps layout-row layout-align-start-center' },
+              _react3.default.createElement(
+                'div',
+                { className: 'flex' },
+                'Labels'
+              ),
+              _react3.default.createElement(
+                'a',
+                { className: _TaskDisplayModal2.default.add, title: 'Edit labels', onClick: this.showLabelEditModal },
+                '+'
+              )
+            ),
+            _react3.default.createElement(
+              'div',
+              { style: { maxHeight: '200px', overflowY: 'auto' } },
+              board && board.data && board.data.labels ? _react3.default.createElement(_LabelSelect2.default, {
+                model: entityModel + '.data.labels',
+                value: task.data.labels,
+                onChange: this.updateTask,
+                labelInfo: board.data.labels
+              }) : ''
+            )
+          ),
+          _react3.default.createElement(
+            'div',
+            { className: _TaskDisplayModal2.default.well },
+            _react3.default.createElement(
+              'div',
+              { className: _TaskDisplayModal2.default.settingTitle + ' text-mini-caps layout-row layout-align-start-center' },
+              _react3.default.createElement(
+                'div',
+                { className: 'flex' },
+                'Asignees'
+              )
+            ),
+            _react3.default.createElement(
+              'div',
+              { style: { padding: '15px' } },
+              _react3.default.createElement(_UserSelect2.default, {
+                model: entityModel + '.data.users',
+                onChange: this.updateTask,
+                value: task.data.users,
+                users: project.data.team
+              })
+            )
+          ),
+          _react3.default.createElement(
+            'div',
+            { className: _TaskDisplayModal2.default.well },
+            _react3.default.createElement(
+              'div',
+              { className: _TaskDisplayModal2.default.settingTitle + ' text-mini-caps layout-row layout-align-start-center' },
+              'Due Date'
+            ),
+            _react3.default.createElement(
+              'div',
+              { style: { padding: '15px' } },
+              _react3.default.createElement(_DatePicker2.default, {
+                model: entityModel + '.data.due',
+                onChange: this.updateTask,
+                value: task.data.due
+              })
+            )
+          )
+        )
+      )
+    );
+  }
+}));
+
+///////////////////////////////// CONTAINER /////////////////////////////////
+
+function mapStateToProps(_ref, _ref2) {
+  var tasks = _ref.tasks;
+  var projects = _ref.projects;
+  var taskId = _ref2.taskId;
+
+  var task = tasks.data[taskId];
+  var board = (0, _lodash.has)(task, 'data.board') ? tasks.boards[task.data.board] : {};
+  var boardModel = (0, _lodash.has)(task, 'data.board') ? 'tasks.boards.' + task.data.board : '';
+  var project = (0, _lodash.has)(board, 'data.project') ? projects.data[board.data.project] : {};
+  return {
+    task: task,
+    entityModel: 'tasks.data.' + taskId,
+    board: board,
+    boardModel: boardModel,
+    project: project
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    TasksActions: (0, _redux.bindActionCreators)(TasksActions, dispatch),
+    ModalActions: (0, _redux.bindActionCreators)(ModalActions, dispatch),
+    ProjectsActions: (0, _redux.bindActionCreators)(ProjectsActions, dispatch),
+    dispatch: dispatch
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Component);

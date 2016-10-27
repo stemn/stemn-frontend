@@ -1,0 +1,183 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Component = undefined;
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var _menubarLayout = require('app/shared/actions/menubarLayout');
+
+var MenubarLayoutActions = _interopRequireWildcard(_menubarLayout);
+
+var _reactAddonsCssTransitionGroup = require('react-addons-css-transition-group');
+
+var _reactAddonsCssTransitionGroup2 = _interopRequireDefault(_reactAddonsCssTransitionGroup);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _Sidebar = require('./Sidebar.css');
+
+var _Sidebar2 = _interopRequireDefault(_Sidebar);
+
+var _AnimateShow = require('app/renderer/shared/AnimateShow/AnimateShow.jsx');
+
+var _AnimateShow2 = _interopRequireDefault(_AnimateShow);
+
+var _SidebarProjectButton = require('app/renderer/main/modules/Sidebar/SidebarProjectButton.jsx');
+
+var _SidebarProjectButton2 = _interopRequireDefault(_SidebarProjectButton);
+
+var _search = require('react-icons/md/search');
+
+var _search2 = _interopRequireDefault(_search);
+
+var _reactReduxForm = require('react-redux-form');
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/menubar/modules/Sidebar/Sidebar.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/menubar/modules/Sidebar/Sidebar.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+} // Container Core
+
+
+// Container Actions
+
+
+// Component Core
+
+
+// Styles
+
+
+// Sub Components
+
+
+///////////////////////////////// COMPONENT /////////////////////////////////
+
+var Component = exports.Component = _wrapComponent('_component')(_react3.default.createClass({
+  displayName: 'Component',
+  render: function render() {
+    var _this = this;
+
+    var _props = this.props;
+    var menubarLayout = _props.menubarLayout;
+    var projects = _props.projects;
+    var sidebar = _props.sidebar;
+
+
+    var linkProject = function linkProject(item) {
+      return {
+        pathname: '/project/' + item._id,
+        state: { meta: { scope: ['main', 'menubar'] } }
+      };
+    };
+
+    var nameRegex = new RegExp(sidebar.searchString, 'i');
+    var filteredProjects = projects.userProjects.data ? projects.userProjects.data.filter(function (project) {
+      return nameRegex.test(project.name);
+    }) : [];
+
+    return _react3.default.createElement(
+      'div',
+      null,
+      _react3.default.createElement(
+        _AnimateShow2.default,
+        { show: menubarLayout.showSidebar, animation: _Sidebar2.default.animateOverlay, animationShow: _Sidebar2.default.animateOverlayShow },
+        _react3.default.createElement('div', { className: _Sidebar2.default.overlay, onClick: function onClick() {
+            return _this.props.MenubarLayoutActions.toggleSidebar(false);
+          } })
+      ),
+      _react3.default.createElement(
+        'div',
+        { className: (0, _classnames2.default)(_Sidebar2.default.sidebar, 'layout-column', _defineProperty({}, _Sidebar2.default.sidebarShow, menubarLayout.showSidebar)) },
+        _react3.default.createElement(
+          'div',
+          { className: _Sidebar2.default.sidebarSearch },
+          _react3.default.createElement(
+            _reactReduxForm.Field,
+            { model: 'sidebar.searchString' },
+            _react3.default.createElement('input', { className: 'dr-input text-ellipsis', type: 'text', placeholder: 'Search all projects' })
+          ),
+          _react3.default.createElement(_search2.default, { className: _Sidebar2.default.sidebarSearchIcon, size: '25' })
+        ),
+        _react3.default.createElement(
+          'div',
+          { className: 'flex scroll-box' },
+          filteredProjects.map(function (item) {
+            return _react3.default.createElement(_SidebarProjectButton2.default, { item: item, to: linkProject(item), clickFn: function clickFn() {
+                return _this.props.MenubarLayoutActions.toggleSidebar(false);
+              } });
+          })
+        )
+      )
+    );
+  }
+}));
+
+///////////////////////////////// CONTAINER /////////////////////////////////
+
+function mapStateToProps(_ref) {
+  var menubarLayout = _ref.menubarLayout;
+  var projects = _ref.projects;
+  var sidebar = _ref.sidebar;
+
+  return {
+    sidebar: sidebar,
+    menubarLayout: menubarLayout,
+    projects: projects
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    MenubarLayoutActions: (0, _redux.bindActionCreators)(MenubarLayoutActions, dispatch)
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Component);

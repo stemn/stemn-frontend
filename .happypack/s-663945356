@@ -1,0 +1,180 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Viewer = undefined;
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _lodash = require('lodash');
+
+var _PreviewPcbService = require('./PreviewPcbService.js');
+
+var _PreviewPcbService2 = _interopRequireDefault(_PreviewPcbService);
+
+var _PreviewPcb = require('./PreviewPcb.css');
+
+var _PreviewPcb2 = _interopRequireDefault(_PreviewPcb);
+
+var _LoadingOverlay = require('app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx');
+
+var _LoadingOverlay2 = _interopRequireDefault(_LoadingOverlay);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _components = {
+  _component: {},
+  _component2: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Files/PreviewFile/PreviewPcb/PreviewPcb.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Files/PreviewFile/PreviewPcb/PreviewPcb.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+}
+
+var Viewer = exports.Viewer = _wrapComponent('_component')(_react3.default.createClass({
+  displayName: 'Viewer',
+  getInitialState: function getInitialState() {
+    return {
+      flipped: null
+    };
+  },
+
+  viewerInstance: null,
+
+  // Mounting
+  onMount: function onMount(nextProps, prevProps) {
+    if (!prevProps || nextProps.data != prevProps.data && nextProps.name != prevProps.name) {
+      setTimeout(this.init(nextProps), 1); // Timeout so refs can init
+    }
+  },
+  componentDidMount: function componentDidMount() {
+    this.onMount(this.props);
+  },
+  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    this.onMount(nextProps, this.props);
+  },
+  componentWillUnmount: function componentWillUnmount() {
+    _PreviewPcbService2.default.deregister(this.viewerInstance);
+  },
+  init: function init(props) {
+    var data = props.data;
+    var name = props.name;
+
+    // Deregister any existing viewers
+
+    if (this.viewerInstance) {
+      _PreviewPcbService2.default.deregister(this.viewerInstance);
+    }
+
+    var file = {
+      name: name,
+      data: data
+    };
+
+    this.viewerInstance = _PreviewPcbService2.default.register();
+    var layers = [file].map(this.viewerInstance.parse);
+    errorMessages(layers);
+
+    // If we still have layers, display them
+    if (layers.length > 0) {
+      // Push on the back layer if it is a pcb/brd file
+      if (!layers[0].isGerber) {
+        layers[0].side = 2;
+        var backLayer = (0, _lodash.clone)(layers[0], true);
+        backLayer.boardFlipped = true;
+        backLayer.side = 1;
+        layers.push(backLayer);
+      }
+
+      this.viewerInstance.init(layers, this.refs.canvas, _PreviewPcbService2.default.activeInstances);
+      // Flip the board if we only have bottom layers
+      if (!(0, _lodash.find)(layers, 'side', 2)) {
+        this.flip(true);
+      }
+    } else {
+      previewer.type = 'other';
+    }
+  },
+  flip: function flip(status) {
+    var flipped = status ? status : !this.state.flipped;
+    this.setState({ flipped: flipped });
+    _PreviewPcbService2.default.activeInstances.forEach(function (instance) {
+      instance.flip(flipped);
+    });
+  },
+  render: function render() {
+    return _react3.default.createElement('div', { ref: 'canvas', className: _PreviewPcb2.default.canvas + ' layout-column flex' });
+  }
+}));
+
+exports.default = _wrapComponent('_component2')(_react3.default.createClass({
+  componentWillReceiveProps: function componentWillReceiveProps(nextProps, prevProps) {
+    if (!nextProps.fileData) {
+      nextProps.downloadFn({
+        projectId: nextProps.fileMeta.project._id,
+        fileId: nextProps.fileMeta.fileId,
+        revisionId: nextProps.fileMeta.revisionId
+      });
+    }
+  },
+  render: function render() {
+    var _props = this.props;
+    var fileData = _props.fileData;
+    var fileMeta = _props.fileMeta;
+
+    if (fileData && fileData.data) {
+      return _react3.default.createElement(Viewer, { data: fileData.data, name: fileMeta.name });
+    } else {
+      return _react3.default.createElement(
+        'div',
+        { className: 'rel-box flex' },
+        _react3.default.createElement(_LoadingOverlay2.default, { show: true })
+      );
+    }
+  }
+}));
+
+
+function errorMessages(layers) {
+  // Pop Error messages and remove bad layers
+  (0, _lodash.forEachRight)(layers, function (layer, index) {
+    if (layer.error) {
+      toast(layer.error);
+      layers.splice(index, 1);
+    } else if (layer.isGerber && layer.cmds.length === 0) {
+      toast('Could not parse file.');
+      layers.splice(index, 1);
+    }
+  });
+}

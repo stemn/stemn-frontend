@@ -1,0 +1,58 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.init = init;
+exports.upload = upload;
+
+var _axios = require('axios');
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function init(_ref) {
+  var cacheKey = _ref.cacheKey;
+  var files = _ref.files;
+
+  return {
+    type: 'UPLOAD/INIT',
+    payload: {
+      cacheKey: cacheKey,
+      files: files
+    }
+  };
+}
+
+function upload(_ref2) {
+  var cacheKey = _ref2.cacheKey;
+  var files = _ref2.files;
+
+
+  // Create the data object
+  var data = new FormData();
+  files.forEach(function (file) {
+    return data.append('file', file);
+  });
+
+  console.log(files);
+
+  // Submit it
+  return {
+    type: 'UPLOAD/UPLOAD',
+    payload: (0, _axios2.default)({
+      method: 'POST',
+      url: '/api/v1/uploads',
+      data: data,
+      progressUpload: function progressUpload(progressEvent) {
+        var percentCompleted = progressEvent.loaded / progressEvent.total;
+        console.log(percentCompleted);
+      }
+    }),
+    meta: {
+      cacheKey: cacheKey,
+      files: files
+    }
+  };
+}

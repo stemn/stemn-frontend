@@ -1,0 +1,173 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Component = undefined;
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var _projects = require('app/shared/actions/projects.js');
+
+var ProjectsActions = _interopRequireWildcard(_projects);
+
+var _reactReduxForm = require('react-redux-form');
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _ProjectNewModal = require('./ProjectNewModal.css');
+
+var _ProjectNewModal2 = _interopRequireDefault(_ProjectNewModal);
+
+var _Button = require('app/renderer/main/components/Buttons/Button/Button');
+
+var _Button2 = _interopRequireDefault(_Button);
+
+var _ProjectLinkRemote = require('app/renderer/main/components/Project/ProjectLinkRemote/ProjectLinkRemote.jsx');
+
+var _ProjectLinkRemote2 = _interopRequireDefault(_ProjectLinkRemote);
+
+var _FileSelectInput = require('app/renderer/main/modules/FileSelectInput/FileSelectInput.jsx');
+
+var _FileSelectInput2 = _interopRequireDefault(_FileSelectInput);
+
+var _Textarea = require('app/renderer/main/components/Input/Textarea/Textarea');
+
+var _Textarea2 = _interopRequireDefault(_Textarea);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Projects/ProjectNewModal/ProjectNewModal.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Projects/ProjectNewModal/ProjectNewModal.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+} // Container Core
+
+
+// Container Actions
+
+// Component Core
+
+
+// Styles
+
+
+// Sub Components
+
+
+///////////////////////////////// COMPONENT /////////////////////////////////
+
+var Component = exports.Component = _wrapComponent('_component')(_react3.default.createClass({
+  displayName: 'Component',
+  createProject: function createProject() {
+    this.props.projectsActions.createProject(this.props.newProject);
+    this.props.modalHide();
+  },
+  render: function render() {
+    var _props = this.props;
+    var newProject = _props.newProject;
+    var entityModel = _props.entityModel;
+    var modalCancel = _props.modalCancel;
+    var modalHide = _props.modalHide;
+
+    return _react3.default.createElement(
+      'div',
+      { style: { width: '500px' } },
+      _react3.default.createElement(
+        'div',
+        { className: 'modal-title' },
+        'Create New Project'
+      ),
+      _react3.default.createElement(
+        'div',
+        { className: 'modal-body' },
+        _react3.default.createElement(
+          _reactReduxForm.Field,
+          { model: entityModel + '.name' },
+          _react3.default.createElement('input', { className: 'dr-input', type: 'text', placeholder: 'Project Name' })
+        ),
+        _react3.default.createElement(_Textarea2.default, { model: entityModel + '.summary',
+          value: newProject.summary,
+          className: 'dr-input',
+          type: 'text',
+          placeholder: 'Project Summary (Optional)',
+          style: { marginTop: '15px', minHeight: '70px' } })
+      ),
+      _react3.default.createElement(
+        'div',
+        { className: 'modal-footer-no-line layout-row layout-align-end' },
+        _react3.default.createElement(
+          _Button2.default,
+          { style: { marginRight: '10px' }, onClick: function onClick() {
+              modalCancel();modalHide();
+            } },
+          'Cancel'
+        ),
+        _react3.default.createElement(
+          _Button2.default,
+          { className: 'primary', onClick: this.createProject },
+          'Create Project'
+        )
+      )
+    );
+  }
+}));
+
+///////////////////////////////// CONTAINER /////////////////////////////////
+
+function mapStateToProps(_ref) {
+  var projects = _ref.projects;
+
+  return {
+    newProject: projects.newProject,
+    entityModel: 'projects.newProject'
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    projectsActions: (0, _redux.bindActionCreators)(ProjectsActions, dispatch),
+    dispatch: dispatch
+  };
+}
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Component);

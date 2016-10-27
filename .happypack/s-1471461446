@@ -1,0 +1,250 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Component = undefined;
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var _auth = require('app/shared/actions/auth.js');
+
+var AuthActions = _interopRequireWildcard(_auth);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _LoginPage = require('../LoginPage/LoginPage.css');
+
+var _LoginPage2 = _interopRequireDefault(_LoginPage);
+
+var _reactReduxForm = require('react-redux-form');
+
+var _reactRouter = require('react-router');
+
+var _Button = require('app/renderer/main/components/Buttons/Button/Button.jsx');
+
+var _Button2 = _interopRequireDefault(_Button);
+
+var _SimpleIconButton = require('app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton');
+
+var _SimpleIconButton2 = _interopRequireDefault(_SimpleIconButton);
+
+var _LoadingOverlay = require('app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx');
+
+var _LoadingOverlay2 = _interopRequireDefault(_LoadingOverlay);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/pages/RegisterPage/RegisterPage.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/pages/RegisterPage/RegisterPage.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+} // Container Core
+
+
+// Container Actions
+
+
+// Component Core
+
+
+// Styles
+
+
+// Sub Components
+
+
+///////////////////////////////// COMPONENT /////////////////////////////////
+
+var Component = exports.Component = _wrapComponent('_component')(_react3.default.createClass({
+  displayName: 'Component',
+  render: function render() {
+    var _props = this.props;
+    var AuthActions = _props.AuthActions;
+    var auth = _props.auth;
+
+
+    return _react3.default.createElement(
+      'div',
+      { className: 'layout-column layout-align-center-center flex', style: { background: 'rgba(0, 0, 0, 0.05)' } },
+      _react3.default.createElement(
+        'div',
+        { className: (0, _classnames2.default)(_LoginPage2.default.container, 'layout-row') },
+        _react3.default.createElement('div', { className: _LoginPage2.default.imageSection + ' layout-column layout-align-center-center',
+          style: { backgroundImage: 'url(../images/satellite-backgrounds/satellite5.jpg)' } }),
+        _react3.default.createElement(
+          'div',
+          { className: _LoginPage2.default.textSection },
+          _react3.default.createElement(
+            'div',
+            { className: _LoginPage2.default.textSectionInner + ' layout-column  layout-align-space-between' },
+            _react3.default.createElement(
+              'div',
+              { className: 'text-title-3' },
+              'Register'
+            ),
+            _react3.default.createElement(
+              'div',
+              null,
+              _react3.default.createElement('br', null),
+              _react3.default.createElement(
+                'div',
+                { className: 'layout-row' },
+                _react3.default.createElement(
+                  _reactReduxForm.Field,
+                  { model: 'auth.login.firstname' },
+                  _react3.default.createElement('input', { className: _LoginPage2.default.input, style: { marginRight: '5px' }, type: 'text', placeholder: 'First name' })
+                ),
+                _react3.default.createElement(
+                  _reactReduxForm.Field,
+                  { model: 'auth.login.lastname' },
+                  _react3.default.createElement('input', { className: _LoginPage2.default.input, style: { marginLeft: '5px' }, type: 'text', placeholder: 'Last Name' })
+                )
+              ),
+              _react3.default.createElement(
+                _reactReduxForm.Field,
+                { model: 'auth.login.email' },
+                _react3.default.createElement('input', { className: _LoginPage2.default.input, type: 'text', placeholder: 'Email' })
+              ),
+              _react3.default.createElement(
+                _reactReduxForm.Field,
+                { model: 'auth.login.password' },
+                _react3.default.createElement('input', { className: _LoginPage2.default.input, type: 'password', placeholder: 'Password' })
+              ),
+              _react3.default.createElement(
+                'div',
+                { className: 'layout-row layout-align-end' },
+                _react3.default.createElement(
+                  'div',
+                  { className: 'flex-50 layout-row' },
+                  _react3.default.createElement(
+                    _Button2.default,
+                    { style: { marginLeft: '5px' },
+                      className: 'primary flex',
+                      type: 'submit',
+                      onClick: function onClick() {
+                        return AuthActions.register({
+                          email: auth.login.email,
+                          password: auth.login.password,
+                          firstname: auth.login.firstname,
+                          lastname: auth.login.lastname
+                        });
+                      } },
+                    'Register'
+                  )
+                )
+              ),
+              _react3.default.createElement('br', null),
+              _react3.default.createElement(
+                'div',
+                { className: _LoginPage2.default.textDivider },
+                _react3.default.createElement(
+                  'div',
+                  null,
+                  'OR'
+                )
+              ),
+              _react3.default.createElement(
+                'div',
+                { className: 'layout-row', style: { paddingTop: '12px' } },
+                _react3.default.createElement(
+                  _Button2.default,
+                  { onClick: function onClick() {
+                      return AuthActions.authenticate('linkedin');
+                    },
+                    style: { marginRight: '5px' },
+                    className: 'flex linkedin',
+                    type: 'button' },
+                  'Linkedin'
+                ),
+                _react3.default.createElement(
+                  _Button2.default,
+                  { onClick: function onClick() {
+                      return AuthActions.authenticate('facebook');
+                    },
+                    style: { marginLeft: '5px' },
+                    className: 'flex facebook',
+                    type: 'button' },
+                  'Facebook'
+                )
+              )
+            ),
+            _react3.default.createElement(
+              'div',
+              { className: 'layout-row' },
+              _react3.default.createElement(
+                'div',
+                null,
+                'Already have an account? ',
+                _react3.default.createElement(
+                  _reactRouter.Link,
+                  { to: '/login', className: 'link-primary' },
+                  'Login'
+                )
+              )
+            )
+          )
+        )
+      ),
+      _react3.default.createElement(_LoadingOverlay2.default, { show: auth.authLoading })
+    );
+  }
+}));
+
+/////////////////////////////////////////////////////////////////////////////
+///////////////////////////////// CONTAINER /////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+function mapStateToProps(_ref) {
+  var auth = _ref.auth;
+
+  return { auth: auth };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    AuthActions: (0, _redux.bindActionCreators)(AuthActions, dispatch)
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Component);

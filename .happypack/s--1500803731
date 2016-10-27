@@ -1,0 +1,225 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Component = undefined;
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var _TasksActions = require('./Tasks.actions.js');
+
+var TasksActions = _interopRequireWildcard(_TasksActions);
+
+var _TasksUtils = require('./Tasks.utils.js');
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _Tasks = require('./Tasks.css');
+
+var _Tasks2 = _interopRequireDefault(_Tasks);
+
+var _reactReduxForm = require('react-redux-form');
+
+var _TasksFilterMenu = require('./TasksFilterMenu/TasksFilterMenu.jsx');
+
+var _TasksFilterMenu2 = _interopRequireDefault(_TasksFilterMenu);
+
+var _TaskList = require('./TaskList/TaskList.jsx');
+
+var _TaskList2 = _interopRequireDefault(_TaskList);
+
+var _Button = require('app/renderer/main/components/Buttons/Button/Button');
+
+var _Button2 = _interopRequireDefault(_Button);
+
+var _search = require('react-icons/md/search');
+
+var _search2 = _interopRequireDefault(_search);
+
+var _PopoverMenu = require('app/renderer/main/components/PopoverMenu/PopoverMenu');
+
+var _PopoverMenu2 = _interopRequireDefault(_PopoverMenu);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Tasks/Tasks.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Tasks/Tasks.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+} // Container Core
+
+
+// Container Actions
+
+
+// Component Core
+
+
+// Styles
+
+
+// Sub Components
+
+
+///////////////////////////////// COMPONENT /////////////////////////////////
+
+var layouts = [{
+  text: 'Layout: List',
+  value: 'list'
+}, {
+  text: 'Layout: Board',
+  value: 'board'
+}];
+
+var Component = exports.Component = _wrapComponent('_component')(_react3.default.createClass({
+  displayName: 'Component',
+  componentWillMount: function componentWillMount() {
+    this.props.TasksActions.getBoard({
+      projectId: this.props.projectId
+    });
+  },
+  setLayout: function setLayout(layout) {
+    this.props.TasksActions.changeLayout({
+      layout: layout,
+      boardId: this.props.board.data._id
+    });
+  },
+  render: function render() {
+    var _this = this;
+
+    var _props = this.props;
+    var tasks = _props.tasks;
+    var board = _props.board;
+    var boardModel = _props.boardModel;
+    var project = _props.project;
+
+
+    var layout = board && board.layout == 'list' ? 'list' : 'board';
+
+    if (!board || !board.data || !board.data.groups) {
+      return null;
+    }
+
+    return _react3.default.createElement(
+      'div',
+      { className: 'layout-column flex' },
+      _react3.default.createElement(
+        'div',
+        { className: _Tasks2.default.header + ' layout-row layout-align-start-center' },
+        _react3.default.createElement(
+          'div',
+          { className: _Tasks2.default.search },
+          _react3.default.createElement(
+            _reactReduxForm.Field,
+            { model: boardModel + '.searchString' },
+            _react3.default.createElement('input', { className: 'dr-input text-ellipsis', type: 'text', placeholder: 'Search tasks' })
+          ),
+          _react3.default.createElement(_search2.default, { size: '25' })
+        ),
+        _react3.default.createElement('div', { className: 'flex' }),
+        _react3.default.createElement(
+          _PopoverMenu2.default,
+          { preferPlace: 'below' },
+          _react3.default.createElement(
+            _Button2.default,
+            { style: { marginLeft: '10px' }, className: 'white' },
+            'Layout'
+          ),
+          _react3.default.createElement(
+            'div',
+            { className: 'PopoverMenu' },
+            layouts.map(function (layoutOpt, index) {
+              return _react3.default.createElement(
+                'a',
+                { key: index,
+                  className: (0, _classnames2.default)({ 'active': layout == layoutOpt.value }),
+                  onClick: function onClick() {
+                    return _this.setLayout(layoutOpt.value);
+                  } },
+                layoutOpt.text
+              );
+            })
+          )
+        ),
+        _react3.default.createElement(
+          _PopoverMenu2.default,
+          { preferPlace: 'below' },
+          _react3.default.createElement(
+            _Button2.default,
+            { style: { marginLeft: '10px' }, className: 'primary' },
+            'Filter'
+          ),
+          _react3.default.createElement(_TasksFilterMenu2.default, { model: boardModel + '.searchString', value: board.searchString })
+        )
+      ),
+      _react3.default.createElement(_TaskList2.default, { className: _Tasks2.default.tasks, board: (0, _TasksUtils.filterBoard)(board, tasks, board.searchString), layout: layout })
+    );
+  }
+}));
+
+///////////////////////////////// CONTAINER /////////////////////////////////
+
+function mapStateToProps(_ref, _ref2) {
+  var tasks = _ref.tasks;
+  var projects = _ref.projects;
+  var projectId = _ref2.projectId;
+
+  var projectBoards = tasks.projects && tasks.projects[projectId] ? tasks.projects[projectId].boards : null;
+  var board = projectBoards ? tasks.boards[projectBoards[0]] : {};
+  return {
+    tasks: tasks.data,
+    project: projects[projectId],
+    board: board,
+    boardModel: board && board.data && board.data._id ? 'tasks.boards.' + board.data._id : ''
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    TasksActions: (0, _redux.bindActionCreators)(TasksActions, dispatch),
+    dispatch: dispatch
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Component);

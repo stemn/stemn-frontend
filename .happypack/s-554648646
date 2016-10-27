@@ -1,0 +1,156 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\redbox-react\\lib\\index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _index3 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-catch-errors\\lib\\index.js');
+
+var _index4 = _interopRequireDefault(_index3);
+
+var _react2 = require('react');
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_modules\\react-transform-hmr\\lib\\index.js');
+
+var _index6 = _interopRequireDefault(_index5);
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _PopoverMenu = require('app/renderer/main/components/PopoverMenu/PopoverMenu');
+
+var _PopoverMenu2 = _interopRequireDefault(_PopoverMenu);
+
+var _SimpleIconButton = require('app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton');
+
+var _SimpleIconButton2 = _interopRequireDefault(_SimpleIconButton);
+
+var _done = require('react-icons/md/done');
+
+var _done2 = _interopRequireDefault(_done);
+
+var _link = require('react-icons/md/link');
+
+var _link2 = _interopRequireDefault(_link);
+
+var _moreHoriz = require('react-icons/md/more-horiz');
+
+var _moreHoriz2 = _interopRequireDefault(_moreHoriz);
+
+var _LinkAccount = require('./LinkAccount.css');
+
+var _LinkAccount2 = _interopRequireDefault(_LinkAccount);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _components = {
+  _component: {}
+};
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2 = (0, _index6.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Settings/LinkAccount/LinkAccount.jsx',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+var _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2 = (0, _index4.default)({
+  filename: 'C:/Users/david/repositories/stemn-electron-2/app/renderer/main/modules/Settings/LinkAccount/LinkAccount.jsx',
+  components: _components,
+  locals: [],
+  imports: [_react3.default, _index2.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformHmrLibIndexJs2(_CUsersDavidRepositoriesStemnElectron2Node_modulesReactTransformCatchErrorsLibIndexJs2(Component, id), id);
+  };
+}
+
+// Styles
+
+
+var _component = _wrapComponent('_component')(function (_React$Component) {
+  _inherits(_class, _React$Component);
+
+  function _class() {
+    _classCallCheck(this, _class);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(_class).apply(this, arguments));
+  }
+
+  _createClass(_class, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react3.default.createElement(
+        'div',
+        { className: _LinkAccount2.default.row + ' layout-row layout-align-start-center' },
+        _react3.default.createElement(
+          'div',
+          { onClick: function onClick() {
+              if (!_this2.props.isLinked) {
+                _this2.props.linkFn();
+              }
+            }, className: 'flex layout-row layout-align-start-center' },
+          this.props.isLinked ? _react3.default.createElement(_done2.default, { size: '22' }) : _react3.default.createElement(_link2.default, { size: '20' }),
+          _react3.default.createElement(
+            'div',
+            { className: 'flex', style: { marginLeft: '10px' } },
+            this.props.isLinked ? _react3.default.createElement(
+              'span',
+              null,
+              'Connected with ',
+              this.props.text
+            ) : _react3.default.createElement(
+              'span',
+              null,
+              'Connect to ',
+              this.props.text
+            )
+          )
+        ),
+        this.props.isLinked ? _react3.default.createElement(
+          _PopoverMenu2.default,
+          { preferPlace: 'right' },
+          _react3.default.createElement(
+            _SimpleIconButton2.default,
+            null,
+            _react3.default.createElement(_moreHoriz2.default, { size: '20' })
+          ),
+          _react3.default.createElement(
+            'div',
+            { className: 'PopoverMenu' },
+            _react3.default.createElement(
+              'a',
+              { onClick: this.props.unLinkFn },
+              'Unlink'
+            )
+          )
+        ) : ''
+      );
+    }
+  }]);
+
+  return _class;
+}(_react3.default.Component));
+
+exports.default = _component;
+;
+module.exports = exports['default'];
