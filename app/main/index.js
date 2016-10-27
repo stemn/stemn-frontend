@@ -104,9 +104,9 @@ function onElectronAction(event, action){
     });
 
 
-//    websocket.write({
-//      type : 'CHANGES/FETCH_CHANGES',
-//      payload : {
-//        projectId : '57c77e2896f1d3a2604fc92c'
-//      }
-//    });
+   // websocket.write({
+   //   type : 'CHANGES/FETCH_CHANGES',
+   //   payload : {
+   //     projectId : '57c77e2896f1d3a2604fc92c'
+   //   }
+   // });
