@@ -17,7 +17,7 @@ import classes from './Sidebar.css'
 // Sub Components
 import AnimateShow from 'app/renderer/shared/AnimateShow/AnimateShow.jsx'
 import SidebarProjectButton from 'app/renderer/main/modules/Sidebar/SidebarProjectButton.jsx'
-import { MdClose, MdSearch } from 'react-icons/lib/md';
+import MdSearch from 'react-icons/md/search';
 import { Field } from 'react-redux-form';
 
 

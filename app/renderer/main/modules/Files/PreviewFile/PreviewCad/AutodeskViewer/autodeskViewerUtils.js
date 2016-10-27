@@ -1,5 +1,5 @@
 import getUuid from 'app/shared/helpers/getUuid.js';
-import _ from 'lodash';
+import { findIndex, forEach } from 'lodash';
 
 let oldState       = {viewport: { eye: [1]}};
 const filter       = {viewport: true};
@@ -31,7 +31,7 @@ function register(viewerEl){
 
 function deregister(instance){
   if(instance){
-    library.activeInstances.splice(_.findIndex(library.activeInstances, 'id', instance.id),1);
+    library.activeInstances.splice(findIndex(library.activeInstances, 'id', instance.id),1);
     if(library.activeInstances.length < 2 && syncIsActive){
       syncIsActive = false;
       removeListenerMulti(document, 'mousemove vmousemove mousewheel click mousedown DOMMouseScroll scroll', onMove);
@@ -44,7 +44,7 @@ function onMove(){
   if(library.activeInstances && library.activeInstances.length > 1){
     var newState;
     var oldInstances = [];
-    _.forEach(library.activeInstances, function(instance){
+    forEach(library.activeInstances, function(instance){
       if(instance.viewerState){
         var possibleNewState = instance.getState(filter);
         // If the state is different, this is the new state!
@@ -60,7 +60,7 @@ function onMove(){
     // If there is a new state, update the old instances
     if(newState){
       if(oldInstances.length > 0){
-        _.forEach(oldInstances, function(instance){
+        forEach(oldInstances, function(instance){
           instance.restoreState(newState, filter, true)
         })
       }

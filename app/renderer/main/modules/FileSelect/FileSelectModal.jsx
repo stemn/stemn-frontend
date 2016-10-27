@@ -15,7 +15,7 @@ import classNames from 'classnames';
 // Sub Components
 import FileList from 'app/renderer/main/modules/FileList/FileList';
 import Button from 'app/renderer/main/components/Buttons/Button/Button';
-import {MdDone} from 'react-icons/lib/md';
+import MdDone from 'react-icons/md/done';
 
 
 

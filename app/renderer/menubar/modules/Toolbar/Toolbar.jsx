@@ -13,7 +13,7 @@ import classNames from 'classnames';
 import toolbarStyles from './Toolbar.css'
 
 // Sub Components
-import { MdMenu } from 'react-icons/lib/md';
+import MdMenu from 'react-icons/md/menu';
 
 
 ///////////////////////////////// COMPONENT /////////////////////////////////

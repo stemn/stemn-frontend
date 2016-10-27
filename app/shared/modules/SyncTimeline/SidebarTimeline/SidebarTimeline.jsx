@@ -10,7 +10,7 @@ import FileChangeTitleRow from 'app/renderer/main/modules/Changes/CommitChanges/
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
-import { MdMoreHoriz } from 'react-icons/lib/md';
+import MdMoreHoriz from 'react-icons/md/more-horiz';
 import { every } from 'lodash';
 import StringFilterMenu from 'app/renderer/main/modules/StringFilter/StringFilterMenu.jsx';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { MdChevronRight } from 'react-icons/lib/md';
+import MdChevronRight from 'react-icons/md/chevron-right';
 
 // Styles
 import classes from './TogglerExpand.css';

@@ -20,7 +20,7 @@ import classes from './TaskListItem.css';
 import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
 import UserAvatars from 'app/renderer/main/components/Avatar/UserAvatars/UserAvatars.jsx'
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
-import { MdMoreHoriz, MdOpenInNew } from 'react-icons/lib/md';
+import MdOpenInNew from 'react-icons/md/open-in-new';
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 import TaskLabelDots from 'app/renderer/main/modules/Tasks/TaskLabelDots/TaskLabelDots.jsx'
 import Textarea from 'app/renderer/main/components/Input/Textarea/Textarea';

@@ -15,7 +15,7 @@ import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js'
 
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
-import {MdMoreHoriz} from 'react-icons/lib/md';
+import MdMoreHoriz from 'react-icons/md/more-horiz';
 import ColorSelect from './ColorSelect/ColorSelect.jsx'
 
 

@@ -17,7 +17,7 @@ import LoadingOverlay     from 'app/renderer/main/components/Loading/LoadingOver
 import CommitChanges      from 'app/renderer/main/modules/Changes/CommitChanges/CommitChanges.jsx';
 import CommitBox          from 'app/renderer/main/modules/Changes/CommitBox/CommitBox.jsx'
 import Toolbar            from 'app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
-import { MdOpenInNew } from 'react-icons/lib/md';
+import MdOpenInNew from 'react-icons/md/open-in-new';
 import * as ElectronWindowActions from 'app/shared/electronActions/window.js';
 import { Link }           from 'react-router';
 import cloudLocked          from 'app/renderer/assets/images/pure-vectors/cloud-locked.svg';

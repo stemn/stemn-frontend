@@ -18,7 +18,7 @@ import { Field } from 'react-redux-form';
 import TasksFilterMenu from './TasksFilterMenu/TasksFilterMenu.jsx';
 import TaskList from './TaskList/TaskList.jsx';
 import Button from 'app/renderer/main/components/Buttons/Button/Button'
-import { MdSearch } from 'react-icons/lib/md';
+import MdSearch from 'react-icons/md/search';
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 
 

@@ -23,7 +23,7 @@ import ReactionPopup from 'app/renderer/main/modules/Reactions/ReactionPopup.jsx
 import Reactions from 'app/renderer/main/modules/Reactions/Reactions.jsx';
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
-import {MdMoreHoriz} from 'react-icons/lib/md';
+import MdMoreHoriz from 'react-icons/md/more-horiz';
 
 
 /////////////////////////////////////////////////////////////////////////////

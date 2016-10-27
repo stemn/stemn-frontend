@@ -2,7 +2,7 @@ import React from 'react';
 
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
-import { MdMoreHoriz } from 'react-icons/lib/md';
+import MdMoreHoriz from 'react-icons/md/more-horiz';
 import { Field } from 'react-redux-form';
 
 import classes from './TaskGroup.css'

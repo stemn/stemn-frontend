@@ -5,7 +5,9 @@ import classNames from 'classnames';
 
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
-import {MdDone, MdLink, MdMoreHoriz} from 'react-icons/lib/md';
+import MdDone from 'react-icons/md/done';
+import MdLink from 'react-icons/md/link';
+import MdMoreHoriz from 'react-icons/md/more-horiz';
 
 import classes from './LinkAccount.css';
 

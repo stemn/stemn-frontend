@@ -4,7 +4,7 @@ import React from 'react';
 import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx'
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
-import {MdMoreHoriz} from 'react-icons/lib/md';
+import MdMoreHoriz from 'react-icons/md/more-horiz';
 
 // Styles
 import classNames from 'classnames';

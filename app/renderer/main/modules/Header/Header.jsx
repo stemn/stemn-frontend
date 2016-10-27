@@ -15,7 +15,7 @@ import classNames from 'classnames';
 import classes from './Header.css';
 
 // Sub Components
-import {MdMenu} from 'react-icons/lib/md';
+import MdMenu from 'react-icons/md/menu';
 
 
 /////////////////////////////////////////////////////////////////////////////

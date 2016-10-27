@@ -2,7 +2,7 @@ import React from 'react';
 
 // Components
 import book   from 'app/renderer/assets/images/pure-vectors/book.svg';
-import { MdOpenInNew } from 'react-icons/lib/md';
+import MdOpenInNew from 'react-icons/md/open-in-new';
 import Toolbar         from 'app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
 import * as ElectronWindowActions from 'app/shared/electronActions/window.js';
 

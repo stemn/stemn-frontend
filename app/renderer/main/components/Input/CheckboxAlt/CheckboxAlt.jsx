@@ -1,5 +1,5 @@
 import React from 'react';
-import { MdDone } from 'react-icons/lib/md';
+import MdDone from 'react-icons/md/done';
 
 // Styles
 import classNames from 'classnames';

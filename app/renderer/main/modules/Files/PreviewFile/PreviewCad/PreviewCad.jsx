@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import Promise from 'es6-promise'
 
 import previewCadUtils from './PreviewCad.utils.js';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field } from 'react-redux-form';
-import {MdDone} from 'react-icons/lib/md';
+import MdDone from 'react-icons/md/done';
 
 
 // Styles

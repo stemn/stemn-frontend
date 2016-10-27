@@ -19,7 +19,7 @@ import IconButton from 'app/renderer/main/components/Buttons/IconButton';
 import Button from 'app/renderer/main/components/Buttons/Button/Button.jsx';
 import Editor from 'app/renderer/main/modules/Editor/Editor.jsx';
 
-import { MdDone } from 'react-icons/lib/md';
+import MdDone from 'react-icons/md/done';
 import { MentionsInput, Mention } from 'react-mentions';
 
 

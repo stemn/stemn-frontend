@@ -12,9 +12,9 @@ export default {
       loaders: ['babel-loader'],
       exclude: /node_modules/,
     },{
-      test: /react-icons\/(.)*(.js)$/,
+      test: /(\.js|\.jsx)$/,
       loader: 'babel',
-      include: config.iconPath
+      include: [path.resolve(__dirname, './app/node_modules/react-icons/md')],
     },{
       test: /\.json$/,
       loader: 'json-loader',

@@ -7,7 +7,7 @@ import { actions } from 'react-redux-form';
 import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 
 import classes from './FileSelectInput.css'
-import { MdFolder } from 'react-icons/lib/md';
+import MdFolder from 'react-icons/md/folder';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 
 const Component = React.createClass({

@@ -22,7 +22,8 @@ import PopoverMenu          from 'app/renderer/main/components/PopoverMenu/Popov
 import PopoverMenuList      from 'app/renderer/main/components/PopoverMenu/PopoverMenuList';
 import SimpleIconButton     from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 import { getCompareModes, getCompareIcon }  from '../FileCompare.utils.js';
-import { MdMoreHoriz, MdOpenInNew }      from 'react-icons/lib/md';
+import MdMoreHoriz      from 'react-icons/md/more-horiz';
+import MdOpenInNew      from 'react-icons/md/open-in-new';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

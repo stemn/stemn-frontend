@@ -7,7 +7,7 @@ import { Field } from 'react-redux-form';
 
 // Components
 import IconButton from 'app/renderer/main/components/Buttons/IconButton';
-import {MdDone} from 'react-icons/lib/md';
+import MdDone from 'react-icons/md/done';
 import { MentionsInput, Mention } from 'react-mentions'
 
 export default React.createClass({

@@ -30,7 +30,7 @@ import CommentNew from 'app/renderer/main/modules/Comments/Comment/CommentNew.js
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 import PopoverMenuList from 'app/renderer/main/components/PopoverMenu/PopoverMenuList';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
-import { MdMoreHoriz } from 'react-icons/lib/md';
+import MdMoreHoriz from 'react-icons/md/more-horiz';
 
 
 

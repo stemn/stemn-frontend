@@ -4,7 +4,7 @@ import React from 'react';
 import classNames from 'classnames';
 import classes from './MoreButton.css';
 
-import {MdChevronRight} from 'react-icons/lib/md';
+import MdChevronRight from 'react-icons/md/chevron-right';
 
 
 export default React.createClass({

@@ -21,7 +21,7 @@ import howMany from 'app/shared/helpers/strings/howMany.js';
 import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
 import Button from 'app/renderer/main/components/Buttons/Button/Button';
 import TaskRow from './TaskRow/TaskRow.jsx';
-import { MdSearch } from 'react-icons/lib/md';
+import MdSearch from 'react-icons/md/search';
 import { filterBoard, getAllTasks } from 'app/renderer/main/modules/Tasks/Tasks.utils.js';
 import TasksFilterMenu from 'app/renderer/main/modules/Tasks/TasksFilterMenu/TasksFilterMenu.jsx';
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';

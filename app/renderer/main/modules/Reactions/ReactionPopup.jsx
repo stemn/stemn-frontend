@@ -6,7 +6,7 @@ import classes from './Reactions.css';
 
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
-import { MdInsertEmoticon } from 'react-icons/lib/md';
+import MdInsertEmoticon from 'react-icons/md/insert-emoticon';
 
 import { options } from './Reactions.utils.js';
 

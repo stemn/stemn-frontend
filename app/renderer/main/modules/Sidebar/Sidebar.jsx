@@ -27,7 +27,11 @@ import { Field } from 'react-redux-form';
 import ContextMenu from 'app/renderer/main/modules/ContextMenu/ContextMenu.jsx';
 import SidebarProjectButton from './SidebarProjectButton.jsx';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton';
-import {MdAdd, MdSettings, MdSearch, MdMenu} from 'react-icons/md';
+import MdMenu from 'react-icons/md/menu';
+import MdSearch from 'react-icons/md/search';
+import MdSettings from 'react-icons/md/settings';
+import MdAdd from 'react-icons/md/add';
+
 import UserAvatar          from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////

@@ -10,7 +10,8 @@ import * as ToastsActions from './Toasts.actions.js';
 import React from 'react';
 
 // Sub components
-import {MdError, MdClose} from 'react-icons/lib/md';
+import MdError from 'react-icons/md/error';
+import MdClose from 'react-icons/md/close';
 
 
 // Styles

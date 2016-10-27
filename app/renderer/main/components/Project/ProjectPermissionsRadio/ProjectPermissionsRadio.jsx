@@ -1,7 +1,6 @@
 import React from 'react';
 
 import RadioAlt from 'app/renderer/main/components/Input/RadioAlt/RadioAlt.jsx'
-//import {MdLockOutline, MdPublic} from 'react-icons/lib/md';
 
 
 // Styles
