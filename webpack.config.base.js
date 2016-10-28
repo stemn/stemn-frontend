@@ -1,13 +1,16 @@
 import path from 'path';
 import webpack from 'webpack';
 import HappyPack from 'happypack';
+
 const config = {
-  iconPath: 'node_modules/react-icons'
+  iconPath: 'node_modules/react-icons',
+  enableHappy: false
 }; 
 
-export default {
-  module: {
-    loaders: [{
+const getHappyConfig = (enable) => {
+  const config = {};
+  config.loaders = enable 
+    ? [{
       test: /\.jsx?$/,
       loader: 'happypack/loader?id=babel',
       exclude: /node_modules/,
@@ -15,7 +18,31 @@ export default {
       test: /(\.js|\.jsx)$/,
       loader: 'happypack/loader?id=babel',
       include: [path.resolve(__dirname, './app/node_modules/react-icons/md')],
+    }]
+    : [{
+      test: /\.jsx?$/,
+      loader: 'babel',
+      exclude: /node_modules/,
     },{
+      test: /(\.js|\.jsx)$/,
+      loader: 'babel',
+      include: [path.resolve(__dirname, './app/node_modules/react-icons/md')],
+    }];
+  
+  config.plugins = enable 
+    ? [new HappyPack({ threads: 4, id: 'babel', loaders: ['babel']})]
+    : [];
+  
+  return config;
+}
+
+const happyConfig = getHappyConfig(config.enableHappy);
+
+export default {
+  module: {
+    loaders: [
+    ...happyConfig.loaders,
+    {
       test: /\.json$/,
       loader: 'json-loader',
     },{
@@ -36,12 +63,9 @@ export default {
     packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main'],
   },
   plugins: [
-    new HappyPack({ threads: 4, id: 'babel', loaders: [ 'babel' ]}),
+    ...happyConfig.plugins,
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/), // http://stackoverflow.com/questions/25384360/how-to-prevent-moment-js-from-loading-locales-with-webpack
-    new webpack.IgnorePlugin(/vertx/), // Ignore vertx so ES6 promise works: https://github.com/stefanpenner/es6-promise/issues/100
+    new webpack.IgnorePlugin(/vertx/),                                 // Ignore vertx so ES6 promise works: https://github.com/stefanpenner/es6-promise/issues/100
   ],
-  externals: [{
-    // put your node 3rd party libraries which can't be built with webpack here
-    // (mysql, mongodb, and so on..)
-  }],
+  externals: [{}],
 };

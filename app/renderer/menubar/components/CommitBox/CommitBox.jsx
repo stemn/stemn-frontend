@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import styles from './CommitBox.css';
 import { Field } from 'react-redux-form';
 
-
 // Components
 import IconButton from 'app/renderer/main/components/Buttons/IconButton';
 import MdDone from 'react-icons/md/done';

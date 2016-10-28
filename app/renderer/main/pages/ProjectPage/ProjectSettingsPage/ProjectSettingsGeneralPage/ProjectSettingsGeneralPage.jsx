@@ -14,7 +14,7 @@ import classNames from 'classnames';
 import classes from '../ProjectSettingsPage.css'
 
 // Sub Components
-import { Field, actions } from 'react-redux-form';
+import { actions } from 'react-redux-form';
 
 import Tabs from 'app/renderer/main/components/Tabs/Tabs'
 import Toggle from 'app/renderer/main/components/Input/Toggle/Toggle'
@@ -26,6 +26,9 @@ import FileSelectInput from 'app/renderer/main/modules/FileSelectInput/FileSelec
 import ProgressButton from 'app/renderer/main/components/Buttons/ProgressButton/ProgressButton'
 import TaskLabelsEdit from 'app/renderer/main/modules/Tasks/TaskLabelsEdit/TaskLabelsEdit.jsx'
 import NavPill from 'app/renderer/main/components/Buttons/NavPill/NavPill'
+import Field from 'app/renderer/main/components/Input/Field/Field'
+import Input from 'app/renderer/main/components/Input/Input/Input'
+
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -101,12 +104,10 @@ export const Component = React.createClass({
         <div className={classes.panel}>
          <h3>General Settings</h3>
          <p>Add your project name and blurb.</p>
-         <Field model={`${entityModel}.data.name`}>
-           <input className="dr-input" type="text" placeholder="Project Name"/>
-         </Field>
+         <Input model={`${entityModel}.data.name`} value={project.data.name} className="dr-input" type="text" placeholder="Project Name"/>
          <br />
          <Field model={`${entityModel}.data.summary`}>
-           <input className="dr-input" type="text" placeholder="Project Summary"/>
+           <input value={project.data.summary} className="dr-input" type="text" placeholder="Project Summary"/>
          </Field>
          <br />
          <div className="layout-row layout-align-end">

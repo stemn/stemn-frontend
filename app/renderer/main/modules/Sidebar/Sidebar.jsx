@@ -88,12 +88,10 @@ export const Component = React.createClass({
       }),
     }];
 
-
     return (
       <DragResize side="right" width="300" widthRange={[0, 500]} animateHide={!this.props.sidebar.show} className="layout-column flex">
         <div className={sidebarStyle}>
           <div className={styles.sidebarToolbar + ' layout-row layout-align-start-center'}>
-
             <PopoverMenu preferPlace="below">
               <div>
                 <SimpleIconButton style={{padding: '0px', color: 'black'}} title="Create new project">

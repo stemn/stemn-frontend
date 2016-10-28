@@ -13,7 +13,7 @@ import classNames from 'classnames';
 import classes from './ProjectSettingsPage.css'
 
 // Sub Components
-import { Field, actions } from 'react-redux-form';
+import { actions } from 'react-redux-form';
 
 import NavPill from 'app/renderer/main/components/Buttons/NavPill/NavPill'
 

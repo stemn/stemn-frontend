@@ -16,7 +16,6 @@ import classNames from 'classnames';
 import classes from 'app/renderer/main/pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css'
 
 // Sub Components
-import { Field } from 'react-redux-form';
 import { Link } from 'react-router';
 import Toggle from 'app/renderer/main/components/Input/Toggle/Toggle'
 import ProgressButton from 'app/renderer/main/components/Buttons/ProgressButton/ProgressButton.jsx'
@@ -58,6 +57,7 @@ export const Component = React.createClass({
       <div>
         <div className={classes.panel}>
           <h3>Cloud Providers</h3>
+          fsafasfsasf afsaf asfsaaaf asffs saffsa asfsa
           <p>Set the root folder for Dropbox and Drive.</p>
           <div style={{marginBottom: '10px'}}>
             <FileSelectInputElectron
@@ -76,7 +76,6 @@ export const Component = React.createClass({
             </FileSelectInputElectron>
           </div>
         </div>
-
         <div className={classes.panel}>
           <h3>Other options</h3>
           <div className="layout-row layout-align-start-center">

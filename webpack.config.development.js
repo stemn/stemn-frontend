@@ -2,6 +2,37 @@
 import webpack from 'webpack';
 import baseConfig from './webpack.config.base';
 import HappyPack from 'happypack';
+const enableHappy = false;
+
+const getHappyConfig = (enable) => {
+  const config = {};
+  config.loaders = enable 
+    ? [{
+        test: /\.global\.css$/,
+        loader: 'happypack/loader?id=cssGlobal',
+      },{
+        test: /^((?!\.global).)*\.css$/,
+        loader: 'happypack/loader?id=cssLocal',
+      }]
+    : [{
+      test: /\.global\.css$/,
+      loaders: [ 'style-loader', 'css-loader?sourceMap']
+    },{
+      test: /^((?!\.global).)*\.css$/,
+      loaders: [ 'style-loader', 'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name][emoji:6]']
+    }];
+  
+  config.plugins = enable 
+    ? [
+      new HappyPack({ threads: 4, id: 'cssLocal',  loaders: [ 'style-loader', 'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name][emoji:6]']}),
+      new HappyPack({ threads: 4, id: 'cssGlobal', loaders: [ 'style-loader', 'css-loader?sourceMap']})
+    ]
+    : [];
+  
+  return config;
+}
+
+const happyConfig = getHappyConfig(enableHappy)
 
 const config = {
   ...baseConfig,
@@ -37,22 +68,13 @@ const config = {
     ...baseConfig.module,
     loaders: [
       ...baseConfig.module.loaders,
-      {
-        test: /\.global\.css$/,
-        loader: 'happypack/loader?id=cssGlobal',
-      },
-
-      {
-        test: /^((?!\.global).)*\.css$/,
-        loader: 'happypack/loader?id=cssLocal',
-      },
+      ...happyConfig.loaders
     ],
   },
 
   plugins: [
     ...baseConfig.plugins,
-    new HappyPack({ threads: 4, id: 'cssLocal',  loaders: [ 'style-loader', 'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name][emoji:6]']}),
-    new HappyPack({ threads: 4, id: 'cssGlobal', loaders: [ 'style-loader', 'css-loader?sourceMap']}),
+    ...happyConfig.plugins,
     new webpack.optimize.CommonsChunkPlugin({
       name: 'commonPreview',
       filename: 'commonPreview.js',
