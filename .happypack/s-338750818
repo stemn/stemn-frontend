@@ -34,7 +34,9 @@ var _moreHoriz = require('react-icons/md/more-horiz');
 
 var _moreHoriz2 = _interopRequireDefault(_moreHoriz);
 
-var _reactReduxForm = require('react-redux-form');
+var _Input = require('app/renderer/main/components/Input/Input/Input');
+
+var _Input2 = _interopRequireDefault(_Input);
 
 var _TaskGroup = require('./TaskGroup.css');
 
@@ -120,13 +122,16 @@ var Component = _wrapComponent('Component')(function (_React$Component) {
             _react3.default.createElement(
               'h3',
               { className: 'flex' },
-              _react3.default.createElement(
-                _reactReduxForm.Field,
-                { model: entityModel + '.name' },
-                _react3.default.createElement('input', { placeholder: 'Group name', className: 'input-plain text-mini-caps', type: 'text', onChange: function onChange() {
-                    setTimeout(updateGroup, 1);
-                  } })
-              )
+              _react3.default.createElement(_Input2.default, {
+                model: entityModel + '.name',
+                value: item.name,
+                placeholder: 'Group name',
+                className: 'input-plain text-mini-caps',
+                type: 'text',
+                changeAction: function changeAction() {
+                  setTimeout(updateGroup, 1);
+                }
+              })
             ),
             _react3.default.createElement(
               'div',

@@ -51,6 +51,10 @@ var _Checkbox = require('app/renderer/main/components/Input/Checkbox/Checkbox');
 
 var _Checkbox2 = _interopRequireDefault(_Checkbox);
 
+var _Input = require('app/renderer/main/components/Input/Input/Input');
+
+var _Input2 = _interopRequireDefault(_Input);
+
 var _Button = require('app/renderer/main/components/Buttons/Button/Button');
 
 var _Button2 = _interopRequireDefault(_Button);
@@ -205,11 +209,12 @@ var Component = exports.Component = _wrapComponent('_component')(_react3.default
         _react3.default.createElement(
           'div',
           { className: _TaskMentionModal2.default.search },
-          _react3.default.createElement(
-            _reactReduxForm.Field,
-            { model: boardModel + '.searchString' },
-            _react3.default.createElement('input', { className: 'dr-input', placeholder: 'Search tasks' })
-          ),
+          _react3.default.createElement(_Input2.default, {
+            model: boardModel + '.searchString',
+            value: board.searchString,
+            className: 'dr-input',
+            placeholder: 'Search tasks'
+          }),
           _react3.default.createElement(
             _PopoverMenu2.default,
             { preferPlace: 'right', trigger: 'hoverDelay' },

@@ -61,10 +61,6 @@ var _TeamMember = require('app/renderer/main/components/Project/TeamMember/TeamM
 
 var _TeamMember2 = _interopRequireDefault(_TeamMember);
 
-var _ProjectPermissionsRadio = require('app/renderer/main/components/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx');
-
-var _ProjectPermissionsRadio2 = _interopRequireDefault(_ProjectPermissionsRadio);
-
 var _ProjectLinkRemote = require('app/renderer/main/components/Project/ProjectLinkRemote/ProjectLinkRemote.jsx');
 
 var _ProjectLinkRemote2 = _interopRequireDefault(_ProjectLinkRemote);
@@ -84,6 +80,10 @@ var _TaskLabelsEdit2 = _interopRequireDefault(_TaskLabelsEdit);
 var _NavPill = require('app/renderer/main/components/Buttons/NavPill/NavPill');
 
 var _NavPill2 = _interopRequireDefault(_NavPill);
+
+var _Input = require('app/renderer/main/components/Input/Input/Input');
+
+var _Input2 = _interopRequireDefault(_Input);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -124,10 +124,10 @@ function _wrapComponent(id) {
 
 // Sub Components
 
+//import ProjectPermissionsRadio from 'app/renderer/main/components/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx'
 
-/////////////////////////////////////////////////////////////////////////////
+
 ///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 var onMount = function onMount(nextProps, prevProps) {
   if (nextProps.project && nextProps.project.data) {
@@ -229,17 +229,21 @@ var Component = exports.Component = _wrapComponent('_component')(_react3.default
           null,
           'Add your project name and blurb.'
         ),
-        _react3.default.createElement(
-          _reactReduxForm.Field,
-          { model: entityModel + '.data.name' },
-          _react3.default.createElement('input', { className: 'dr-input', type: 'text', placeholder: 'Project Name' })
-        ),
+        _react3.default.createElement(_Input2.default, {
+          model: entityModel + '.data.name',
+          value: project.data.name,
+          className: 'dr-input',
+          type: 'text',
+          placeholder: 'Project Name'
+        }),
         _react3.default.createElement('br', null),
-        _react3.default.createElement(
-          _reactReduxForm.Field,
-          { model: entityModel + '.data.summary' },
-          _react3.default.createElement('input', { className: 'dr-input', type: 'text', placeholder: 'Project Summary' })
-        ),
+        _react3.default.createElement(_Input2.default, {
+          model: entityModel + '.data.summary',
+          value: project.data.summary,
+          className: 'dr-input',
+          type: 'text',
+          placeholder: 'Project Summary'
+        }),
         _react3.default.createElement('br', null),
         _react3.default.createElement(
           'div',

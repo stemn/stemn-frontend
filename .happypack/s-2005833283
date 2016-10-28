@@ -55,6 +55,10 @@ var _Textarea = require('app/renderer/main/components/Input/Textarea/Textarea');
 
 var _Textarea2 = _interopRequireDefault(_Textarea);
 
+var _Input = require('app/renderer/main/components/Input/Input/Input');
+
+var _Input2 = _interopRequireDefault(_Input);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -121,11 +125,7 @@ var Component = exports.Component = _wrapComponent('_component')(_react3.default
       _react3.default.createElement(
         'div',
         { className: 'modal-body' },
-        _react3.default.createElement(
-          _reactReduxForm.Field,
-          { model: entityModel + '.name' },
-          _react3.default.createElement('input', { className: 'dr-input', type: 'text', placeholder: 'Project Name' })
-        ),
+        _react3.default.createElement(_Input2.default, { model: entityModel + '.name', value: newProject.name, className: 'dr-input', type: 'text', placeholder: 'Project Name' }),
         _react3.default.createElement(_Textarea2.default, { model: entityModel + '.summary',
           value: newProject.summary,
           className: 'dr-input',

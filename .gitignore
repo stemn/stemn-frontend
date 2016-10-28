@@ -36,3 +36,6 @@ main.js.map
 
 # Environment-specific
 .env
+
+#HappyPack
+.happypack

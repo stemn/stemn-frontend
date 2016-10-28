@@ -71,7 +71,9 @@ var _PopoverMenu = require('app/renderer/main/components/PopoverMenu/PopoverMenu
 
 var _PopoverMenu2 = _interopRequireDefault(_PopoverMenu);
 
-var _reactReduxForm = require('react-redux-form');
+var _Input = require('app/renderer/main/components/Input/Input/Input');
+
+var _Input2 = _interopRequireDefault(_Input);
 
 var _ContextMenu = require('app/renderer/main/modules/ContextMenu/ContextMenu.jsx');
 
@@ -262,11 +264,7 @@ var Component = exports.Component = _wrapComponent('_component')(_react3.default
         _react3.default.createElement(
           'div',
           { className: _Sidebar2.default.sidebarSearch },
-          _react3.default.createElement(
-            _reactReduxForm.Field,
-            { model: 'sidebar.searchString' },
-            _react3.default.createElement('input', { className: 'dr-input text-ellipsis', type: 'text', placeholder: 'Search all projects' })
-          ),
+          _react3.default.createElement(_Input2.default, { model: 'sidebar.searchString', value: this.props.sidebar.searchString, className: 'dr-input text-ellipsis', type: 'text', placeholder: 'Search all projects' }),
           _react3.default.createElement(_search2.default, { className: _Sidebar2.default.sidebarSearchIcon, size: '25' })
         ),
         _react3.default.createElement(

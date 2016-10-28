@@ -39,8 +39,6 @@ var _moment2 = _interopRequireDefault(_moment);
 
 var _lodash = require('lodash');
 
-var _reactReduxForm = require('react-redux-form');
-
 var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
@@ -52,6 +50,10 @@ var _TaskListItem2 = _interopRequireDefault(_TaskListItem);
 var _Checkbox = require('app/renderer/main/components/Input/Checkbox/Checkbox');
 
 var _Checkbox2 = _interopRequireDefault(_Checkbox);
+
+var _Input = require('app/renderer/main/components/Input/Input/Input');
+
+var _Input2 = _interopRequireDefault(_Input);
 
 var _UserAvatars = require('app/renderer/main/components/Avatar/UserAvatars/UserAvatars.jsx');
 
@@ -235,15 +237,14 @@ var Component = exports.Component = _wrapComponent('_component2')(_react3.defaul
           _react3.default.createElement(
             'div',
             { className: 'flex text-ellipsis', style: { lineHeight: '1.4em' } },
-            _react3.default.createElement(
-              _reactReduxForm.Field,
-              { model: entityModel + '.data.name' },
-              _react3.default.createElement('input', {
-                onChange: this.updateTask,
-                className: 'input-plain',
-                type: 'text',
-                placeholder: 'Task description' })
-            )
+            _react3.default.createElement(_Input2.default, {
+              model: entityModel + '.name',
+              value: task.data.name,
+              onChange: this.updateTask,
+              className: 'input-plain',
+              type: 'text',
+              placeholder: 'Task description'
+            })
           ),
           task.data.labels && task.data.labels.length > 0 && board && board.data && board.data.labels ? _react3.default.createElement(_TaskLabelDots2.default, { labels: task.data.labels, labelInfo: board.data.labels, tag: true }) : null,
           _react3.default.createElement(

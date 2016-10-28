@@ -20,7 +20,9 @@ var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_mo
 
 var _index6 = _interopRequireDefault(_index5);
 
-var _reactReduxForm = require('react-redux-form');
+var _Input = require('app/renderer/main/components/Input/Input/Input');
+
+var _Input2 = _interopRequireDefault(_Input);
 
 var _Toggle = require('./Toggle.css');
 
@@ -71,17 +73,11 @@ exports.default = _wrapComponent('_component')(_react3.default.createClass({
       {
         title: title,
         className: _Toggle2.default.toggle },
-      model ? _react3.default.createElement(_reactReduxForm.Control.checkbox, {
-        className: value ? 'checked' : '',
-        id: id,
-        model: model,
-        changeAction: changeAction
-      }) : _react3.default.createElement('input', {
+      _react3.default.createElement(_Input2.default, {
         type: 'checkbox',
         value: value,
-        onChange: function onChange() {
-          changeAction(!value);
-        },
+        model: model,
+        changeAction: changeAction,
         className: value ? 'checked' : '',
         id: id
       }),

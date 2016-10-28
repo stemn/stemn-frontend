@@ -29,8 +29,6 @@ var _TasksActions = require('../Tasks.actions.js');
 
 var TasksActions = _interopRequireWildcard(_TasksActions);
 
-var _reactReduxForm = require('react-redux-form');
-
 var _TaskGroupParent = require('./TaskGroup/TaskGroupParent.jsx');
 
 var _TaskGroupParent2 = _interopRequireDefault(_TaskGroupParent);
@@ -54,6 +52,10 @@ var _TaskListItemWrapped2 = _interopRequireDefault(_TaskListItemWrapped);
 var _TaskListItem = require('./TaskListItem/TaskListItem.jsx');
 
 var _TaskListItem2 = _interopRequireDefault(_TaskListItem);
+
+var _Input = require('app/renderer/main/components/Input/Input/Input');
+
+var _Input2 = _interopRequireDefault(_Input);
 
 var _TaskList = require('./TaskList.css');
 
@@ -93,6 +95,7 @@ var NewItem = exports.NewItem = _wrapComponent('_component')(_react3.default.cre
   render: function render() {
     var _props = this.props;
     var model = _props.model;
+    var value = _props.value;
     var submitFn = _props.submitFn;
     var placeholder = _props.placeholder;
     var box = _props.box;
@@ -101,11 +104,12 @@ var NewItem = exports.NewItem = _wrapComponent('_component')(_react3.default.cre
     return _react3.default.createElement(
       'form',
       { style: style, name: 'form', onSubmit: submitFn },
-      _react3.default.createElement(
-        _reactReduxForm.Field,
-        { model: model },
-        _react3.default.createElement('input', { className: box ? _TaskList2.default.newItemBox : _TaskList2.default.newItem, type: 'text', placeholder: placeholder })
-      )
+      _react3.default.createElement(_Input2.default, {
+        model: model,
+        value: value,
+        className: box ? _TaskList2.default.newItemBox : _TaskList2.default.newItem,
+        type: 'text', placeholder: placeholder
+      })
     );
   }
 }));
@@ -251,6 +255,7 @@ var Component = exports.Component = _wrapComponent('_component2')(_react3.defaul
                 _react3.default.createElement(NewItem, {
                   style: layout == 'list' ? { marginLeft: '60px' } : {},
                   model: entityModel + '.newTaskString.' + group._id,
+                  value: board.newTaskString ? board.newTaskString[group._id] : '',
                   placeholder: 'New Task',
                   submitFn: function submitFn(event) {
                     return _this.newTask(event, group._id);
@@ -266,6 +271,7 @@ var Component = exports.Component = _wrapComponent('_component2')(_react3.defaul
           { simpleGroup: true },
           _react3.default.createElement(NewItem, {
             model: entityModel + '.newGroupString',
+            value: board.newGroupString,
             placeholder: 'New Group',
             submitFn: this.newGroup,
             box: layout == 'board'

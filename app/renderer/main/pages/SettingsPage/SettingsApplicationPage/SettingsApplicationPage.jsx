@@ -57,7 +57,6 @@ export const Component = React.createClass({
       <div>
         <div className={classes.panel}>
           <h3>Cloud Providers</h3>
-          fsafasfsasf afsaf asfsaaaf asffs saffsa asfsa
           <p>Set the root folder for Dropbox and Drive.</p>
           <div style={{marginBottom: '10px'}}>
             <FileSelectInputElectron

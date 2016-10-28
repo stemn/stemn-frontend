@@ -45,6 +45,10 @@ var _PopoverMenu = require('app/renderer/main/components/PopoverMenu/PopoverMenu
 
 var _PopoverMenu2 = _interopRequireDefault(_PopoverMenu);
 
+var _Input = require('app/renderer/main/components/Input/Input/Input');
+
+var _Input2 = _interopRequireDefault(_Input);
+
 var _SimpleIconButton = require('app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton');
 
 var _SimpleIconButton2 = _interopRequireDefault(_SimpleIconButton);
@@ -148,20 +152,25 @@ var Component = exports.Component = _wrapComponent('_component')(_react3.default
                 value: label.color
               })
             ),
-            _react3.default.createElement(
-              _reactReduxForm.Field,
-              { model: model + '[' + index + '].color' },
-              _react3.default.createElement('input', { className: _TaskLabelsEdit2.default.colorSelectInput + ' dr-input', type: 'text', placeholder: 'Color Code', id: label._id })
-            )
+            _react3.default.createElement(_Input2.default, {
+              model: model + '[' + index + '].color',
+              value: label.color,
+              className: _TaskLabelsEdit2.default.colorSelectInput + ' dr-input',
+              type: 'text',
+              placeholder: 'Color Code',
+              id: label._id
+            })
           ),
           _react3.default.createElement(
             'div',
             { className: _TaskLabelsEdit2.default.name + ' flex' },
-            _react3.default.createElement(
-              _reactReduxForm.Field,
-              { model: model + '[' + index + '].name' },
-              _react3.default.createElement('input', { className: 'dr-input', type: 'text', placeholder: 'Label Name' })
-            )
+            _react3.default.createElement(_Input2.default, {
+              model: model + '[' + index + '].name',
+              value: label.name,
+              className: 'dr-input',
+              type: 'text',
+              placeholder: 'Label Name'
+            })
           ),
           _react3.default.createElement(
             _PopoverMenu2.default,

@@ -33,8 +33,6 @@ var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
 
-var _reactReduxForm = require('react-redux-form');
-
 var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
@@ -54,6 +52,10 @@ var _Button2 = _interopRequireDefault(_Button);
 var _Editor = require('app/renderer/main/modules/Editor/Editor.jsx');
 
 var _Editor2 = _interopRequireDefault(_Editor);
+
+var _Input = require('app/renderer/main/components/Input/Input/Input');
+
+var _Input2 = _interopRequireDefault(_Input);
 
 var _done = require('react-icons/md/done');
 
@@ -118,11 +120,7 @@ var Component = exports.Component = _wrapComponent('_component')(_react3.default
     return _react3.default.createElement(
       'div',
       { className: 'p-15' },
-      _react3.default.createElement(
-        _reactReduxForm.Field,
-        { model: 'changes.' + this.props.project._id + '.summary' },
-        _react3.default.createElement('input', { className: _CommitBox2.default.input, type: 'text', placeholder: 'Summary' })
-      ),
+      _react3.default.createElement(_Input2.default, { model: 'changes.' + this.props.project._id + '.summary', value: changes.summary, className: _CommitBox2.default.input, type: 'text', placeholder: 'Summary' }),
       _react3.default.createElement(_Editor2.default, {
         model: entityModel + '.description',
         value: changes.description,

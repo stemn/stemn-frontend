@@ -37,13 +37,15 @@ var _LoginPage = require('../LoginPage/LoginPage.css');
 
 var _LoginPage2 = _interopRequireDefault(_LoginPage);
 
-var _reactReduxForm = require('react-redux-form');
-
 var _reactRouter = require('react-router');
 
 var _Button = require('app/renderer/main/components/Buttons/Button/Button.jsx');
 
 var _Button2 = _interopRequireDefault(_Button);
+
+var _Input = require('app/renderer/main/components/Input/Input/Input');
+
+var _Input2 = _interopRequireDefault(_Input);
 
 var _SimpleIconButton = require('app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton');
 
@@ -130,27 +132,11 @@ var Component = exports.Component = _wrapComponent('_component')(_react3.default
               _react3.default.createElement(
                 'div',
                 { className: 'layout-row' },
-                _react3.default.createElement(
-                  _reactReduxForm.Field,
-                  { model: 'auth.login.firstname' },
-                  _react3.default.createElement('input', { className: _LoginPage2.default.input, style: { marginRight: '5px' }, type: 'text', placeholder: 'First name' })
-                ),
-                _react3.default.createElement(
-                  _reactReduxForm.Field,
-                  { model: 'auth.login.lastname' },
-                  _react3.default.createElement('input', { className: _LoginPage2.default.input, style: { marginLeft: '5px' }, type: 'text', placeholder: 'Last Name' })
-                )
+                _react3.default.createElement(_Input2.default, { model: 'auth.login.firstname', value: auth.login.firstname, className: _LoginPage2.default.input, style: { marginRight: '5px' }, type: 'text', placeholder: 'First name' }),
+                _react3.default.createElement(_Input2.default, { model: 'auth.login.lastname', value: auth.login.lastname, className: _LoginPage2.default.input, style: { marginLeft: '5px' }, type: 'text', placeholder: 'Last Name' })
               ),
-              _react3.default.createElement(
-                _reactReduxForm.Field,
-                { model: 'auth.login.email' },
-                _react3.default.createElement('input', { className: _LoginPage2.default.input, type: 'text', placeholder: 'Email' })
-              ),
-              _react3.default.createElement(
-                _reactReduxForm.Field,
-                { model: 'auth.login.password' },
-                _react3.default.createElement('input', { className: _LoginPage2.default.input, type: 'password', placeholder: 'Password' })
-              ),
+              _react3.default.createElement(_Input2.default, { model: 'auth.login.email', value: auth.login.email, className: _LoginPage2.default.input, type: 'text', placeholder: 'Email' }),
+              _react3.default.createElement(_Input2.default, { model: 'auth.login.password', value: auth.login.password, className: _LoginPage2.default.input, type: 'password', placeholder: 'Password' }),
               _react3.default.createElement(
                 'div',
                 { className: 'layout-row layout-align-end' },

@@ -135,7 +135,7 @@ export const Component = React.createClass({
                   <NewItem
                     style={layout == 'list' ? {marginLeft: '60px'} : {}}
                     model={`${entityModel}.newTaskString.${group._id}`}
-                    value={board.newTaskString[group._id]}
+                    value={board.newTaskString ? board.newTaskString[group._id] : ''}
                     placeholder="New Task"
                     submitFn={(event) => this.newTask(event, group._id)}
                     box={layout=='board'}

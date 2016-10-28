@@ -20,7 +20,9 @@ var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_mo
 
 var _index6 = _interopRequireDefault(_index5);
 
-var _reactReduxForm = require('react-redux-form');
+var _Input = require('app/renderer/main/components/Input/Input/Input');
+
+var _Input2 = _interopRequireDefault(_Input);
 
 var _Checkbox = require('./Checkbox.css');
 
@@ -79,24 +81,19 @@ exports.default = _wrapComponent('_component')(_react3.default.createClass({
     var changeAction = _props.changeAction;
 
     var id = Math.random().toString(36).substring(7);
-    var statusClass = value === null ? 'semi' : value === true ? 'checked' : '';
+    var statusClass = value === 'other' ? 'semi' : value === true ? 'checked' : '';
     return _react3.default.createElement(
       'div',
       {
         title: title,
         className: (0, _classnames2.default)(_Checkbox2.default.checkbox, className, _defineProperty({}, _Checkbox2.default.checkboxCircle, circle)) },
-      model ? _react3.default.createElement(_reactReduxForm.Control.checkbox, {
+      _react3.default.createElement(_Input2.default, {
+        value: value,
+        type: 'checkbox',
         className: statusClass,
         id: id,
         model: model,
         changeAction: changeAction
-      }) : _react3.default.createElement('input', {
-        type: 'checkbox',
-        className: statusClass,
-        id: id,
-        onChange: function onChange() {
-          changeAction(!value);
-        }
       }),
       _react3.default.createElement('label', { htmlFor: id })
     );

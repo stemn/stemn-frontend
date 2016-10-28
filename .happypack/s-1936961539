@@ -5,12 +5,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.toggle = toggle;
 exports.getStatus = getStatus;
-function toggle(status) {
+function toggle(_ref) {
+  var value = _ref.value;
+
   return {
     type: 'AUTO_LAUNCH/TOGGLE',
     payload: {},
     meta: {
-      status: status
+      status: value
     }
   };
 }

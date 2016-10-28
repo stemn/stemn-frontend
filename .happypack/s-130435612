@@ -53,7 +53,9 @@ var _search = require('react-icons/md/search');
 
 var _search2 = _interopRequireDefault(_search);
 
-var _reactReduxForm = require('react-redux-form');
+var _Input = require('app/renderer/main/components/Input/Input/Input');
+
+var _Input2 = _interopRequireDefault(_Input);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -139,11 +141,13 @@ var Component = exports.Component = _wrapComponent('_component')(_react3.default
         _react3.default.createElement(
           'div',
           { className: _Sidebar2.default.sidebarSearch },
-          _react3.default.createElement(
-            _reactReduxForm.Field,
-            { model: 'sidebar.searchString' },
-            _react3.default.createElement('input', { className: 'dr-input text-ellipsis', type: 'text', placeholder: 'Search all projects' })
-          ),
+          _react3.default.createElement(_Input2.default, {
+            model: 'sidebar.searchString',
+            value: sidebar.searchString,
+            className: 'dr-input text-ellipsis',
+            type: 'text',
+            placeholder: 'Search all projects'
+          }),
           _react3.default.createElement(_search2.default, { className: _Sidebar2.default.sidebarSearchIcon, size: '25' })
         ),
         _react3.default.createElement(

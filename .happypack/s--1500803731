@@ -39,7 +39,9 @@ var _Tasks = require('./Tasks.css');
 
 var _Tasks2 = _interopRequireDefault(_Tasks);
 
-var _reactReduxForm = require('react-redux-form');
+var _Input = require('app/renderer/main/components/Input/Input/Input');
+
+var _Input2 = _interopRequireDefault(_Input);
 
 var _TasksFilterMenu = require('./TasksFilterMenu/TasksFilterMenu.jsx');
 
@@ -150,11 +152,13 @@ var Component = exports.Component = _wrapComponent('_component')(_react3.default
         _react3.default.createElement(
           'div',
           { className: _Tasks2.default.search },
-          _react3.default.createElement(
-            _reactReduxForm.Field,
-            { model: boardModel + '.searchString' },
-            _react3.default.createElement('input', { className: 'dr-input text-ellipsis', type: 'text', placeholder: 'Search tasks' })
-          ),
+          _react3.default.createElement(_Input2.default, {
+            model: boardModel + '.searchString',
+            value: board.searchString,
+            className: 'dr-input text-ellipsis',
+            type: 'text',
+            placeholder: 'Search tasks'
+          }),
           _react3.default.createElement(_search2.default, { size: '25' })
         ),
         _react3.default.createElement('div', { className: 'flex' }),

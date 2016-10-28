@@ -1,5 +1,43 @@
 'use strict';
 
+var start = function () {
+  var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+    var initialState, store, history;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return jsonStorage.get('sessionState');
+
+          case 2:
+            initialState = _context.sent;
+            store = (0, _configureStoreRenderer2.default)(initialState);
+            history = (0, _reactRouterRedux.syncHistoryWithStore)(_reactRouter.hashHistory, store);
+
+            _electron.ipcRenderer.on('redux-action', function (event, payload) {
+              store.dispatch(payload);
+            });
+
+            (0, _reactDom.render)(_react2.default.createElement(
+              _reactRedux.Provider,
+              { store: store },
+              _react2.default.createElement(_reactRouter.Router, { history: history, routes: (0, _routes2.default)(store) })
+            ), document.getElementById('root'));
+
+          case 7:
+          case 'end':
+            return _context.stop();
+        }
+      }
+    }, _callee, this);
+  }));
+
+  return function start() {
+    return _ref.apply(this, arguments);
+  };
+}();
+
 require('../shared/init.js');
 
 var _electron = require('electron');
@@ -24,23 +62,18 @@ var _routes = require('./routes');
 
 var _routes2 = _interopRequireDefault(_routes);
 
+var _pify = require('pify');
+
+var _pify2 = _interopRequireDefault(_pify);
+
+var _electronJsonStorage = require('electron-json-storage');
+
+var _electronJsonStorage2 = _interopRequireDefault(_electronJsonStorage);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var initialState = _electron.remote.getGlobal('state');
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
 
-//const cloneState = invokeGetters(initialState);
-//const store = configureStore(cloneState);
+var jsonStorage = (0, _pify2.default)(_electronJsonStorage2.default);
 
-//import invokeGetters from 'app/shared/helpers/invokeGetters.js'
-var store = (0, _configureStoreRenderer2.default)(initialState);
-var history = (0, _reactRouterRedux.syncHistoryWithStore)(_reactRouter.hashHistory, store);
-
-_electron.ipcRenderer.on('redux-action', function (event, payload) {
-  store.dispatch(payload);
-});
-
-(0, _reactDom.render)(_react2.default.createElement(
-  _reactRedux.Provider,
-  { store: store },
-  _react2.default.createElement(_reactRouter.Router, { history: history, routes: (0, _routes2.default)(store) })
-), document.getElementById('root'));
+start();

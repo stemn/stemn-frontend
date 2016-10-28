@@ -36,9 +36,7 @@ const happyConfig = getHappyConfig(enableHappy)
 
 const config = {
   ...baseConfig,
-
   debug: true,
-
   devtool: 'cheap-module-eval-source-map',
 
   entry: {

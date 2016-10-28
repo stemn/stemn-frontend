@@ -8,16 +8,20 @@ import fs from 'fs';
 import config from './webpack.config.development';
 
 const app = express();
-const compiler = webpack(config, (err, stats) => {
-  /*******************************************
-  Write the stats.json for analysis using:
-  - http://webpack.github.io/analyse/
-  - https://alexkuz.github.io/webpack-chart/
-  - https://chrisbateman.github.io/webpack-visualizer/
-  ********************************************/
-  fs.writeFileSync('./stats.json', JSON.stringify(stats.toJson()));
-});
+const compiler = webpack(config);
+
 const PORT = 3001;
+
+
+compiler.plugin('compile', () => {
+  console.log('------------- Begin Webpack Build -------------');
+});
+
+compiler.plugin('done', (stats) => {
+  console.log('--------------- Build Complete ----------------');
+  fs.writeFileSync('./stats.json', JSON.stringify(stats.toJson()));
+  console.log('------------- stats.json created --------------');
+});
 
 app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath,
@@ -25,6 +29,8 @@ app.use(webpackDevMiddleware(compiler, {
     colors: true
   }
 }));
+
+
 
 app.use(webpackHotMiddleware(compiler));
 

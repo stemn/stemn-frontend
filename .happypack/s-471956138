@@ -49,8 +49,6 @@ var _ProjectSettingsPage = require('app/renderer/main/pages/ProjectPage/ProjectS
 
 var _ProjectSettingsPage2 = _interopRequireDefault(_ProjectSettingsPage);
 
-var _reactReduxForm = require('react-redux-form');
-
 var _reactRouter = require('react-router');
 
 var _Toggle = require('app/renderer/main/components/Input/Toggle/Toggle');
@@ -159,7 +157,11 @@ var Component = exports.Component = _wrapComponent('_component')(_react3.default
           null,
           'Cloud Providers'
         ),
-        'fsafasfsasf afsaf asfsaaaf asffs saffsa asfsa',
+        _react3.default.createElement(
+          'div',
+          null,
+          'asfs aaaaaa aaasffsa  afaaaaasf asfaaaaaasafasfsf'
+        ),
         _react3.default.createElement(
           'p',
           null,

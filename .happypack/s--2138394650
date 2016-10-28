@@ -147,7 +147,9 @@ var Component = exports.Component = _wrapComponent('_component')(_react3.default
       projectId: this.props.project.data._id
     });
   },
-  toggleAll: function toggleAll(value) {
+  toggleAll: function toggleAll(_ref) {
+    var value = _ref.value;
+
     return this.props.changesActions.toggleAll({
       value: value,
       projectId: this.props.project.data._id
@@ -270,10 +272,10 @@ var Component = exports.Component = _wrapComponent('_component')(_react3.default
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps(_ref, _ref2) {
-  var changes = _ref.changes;
-  var projects = _ref.projects;
-  var params = _ref2.params;
+function mapStateToProps(_ref2, _ref3) {
+  var changes = _ref2.changes;
+  var projects = _ref2.projects;
+  var params = _ref3.params;
 
   var project = projects.data[params.stub];
   return {

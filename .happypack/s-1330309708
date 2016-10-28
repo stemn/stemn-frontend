@@ -20,8 +20,6 @@ var _index5 = require('C:\\Users\\david\\repositories\\stemn-electron-2\\node_mo
 
 var _index6 = _interopRequireDefault(_index5);
 
-var _reactReduxForm = require('react-redux-form');
-
 var _Checkbox = require('app/renderer/main/components/Input/Checkbox/Checkbox');
 
 var _Checkbox2 = _interopRequireDefault(_Checkbox);
