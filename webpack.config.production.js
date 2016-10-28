@@ -5,7 +5,6 @@ import baseConfig from './webpack.config.base';
 
 const config = {
   ...baseConfig,
-
   entry: {
     main: [
       'babel-polyfill',
@@ -20,30 +19,23 @@ const config = {
       './app/renderer/preview/index',
     ],
   },
-
   output: {
     ...baseConfig.output,
-
     path: path.join(__dirname, 'dist', 'renderer'),
     publicPath: '../dist/',
     filename: '[name]/index.js',
   },
-
   module: {
     ...baseConfig.module,
-
     loaders: [
       ...baseConfig.module.loaders,
-
       {
         test: /\.global\.css$/,
         loader: ExtractTextPlugin.extract(
           'style-loader',
           'css-loader'
         ),
-      },
-
-      {
+      }, {
         test: /^((?!\.global).)*\.css$/,
         loader: ExtractTextPlugin.extract(
           'style-loader',
@@ -52,10 +44,19 @@ const config = {
       },
     ],
   },
-
   plugins: [
     ...baseConfig.plugins,
     new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'commonPreview',
+      filename: 'commonPreview/index.js',
+      chunks: ['main', 'preview'],
+    }),    
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'common',
+      filename: 'common/index.js',
+      chunks: ['commonPreview', 'menubar'],
+    }),     
     new webpack.DefinePlugin({
       __DEV__: false,
       'process.env': {
@@ -74,7 +75,6 @@ const config = {
     }),
     new ExtractTextPlugin('[name]/style.css', { allChunks: true }),
   ],
-
   target: 'electron-renderer',
 };
 

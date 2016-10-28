@@ -4,14 +4,19 @@
     <meta charset="utf-8">
     <title>Preview File</title>
     <link rel="stylesheet" href="../fonts/opensans/opensans.css" />
-
     <script>
       (function() {
-        if (!process.env.HOT) {
+        function createLink(href){
           const link = document.createElement('link');
           link.rel = 'stylesheet';
-          link.href = '../../preview/style.css';
+          link.href = href;
           document.write(link.outerHTML);
+        }
+        if (!process.env.HOT) {
+          [ '../../preview/style.css',
+            '../../common/style.css',
+            '../../commonPreview/style.css'
+          ].map(createLink);
         }
       }());
     </script>
@@ -20,25 +25,17 @@
     <div class="layout-column flex" id="root"></div>
     <script>
       (function() {
-        const script = document.createElement('script');
-        script.src = (process.env.HOT) ? 'http://localhost:3001/dist/common.js' : '../../common.js';
-        document.write(script.outerHTML);
+        function createScript(hrefs){
+          const script = document.createElement('script');
+          script.src = (process.env.HOT) ? href[0] : href[1];
+          document.write(script.outerHTML);
+        }
+        [ ['http://localhost:3001/dist/common.js'        , '../../common/index.js'],
+          ['http://localhost:3001/dist/commonPreview.js' , '../../commonPreview/index.js'],
+          ['http://localhost:3001/dist/preview/index.js' , '../../preview/index.js']
+        ].map(createScript);
       }());
     </script>   
-    <script>
-      (function() {
-        const script = document.createElement('script');
-        script.src = (process.env.HOT) ? 'http://localhost:3001/dist/commonPreview.js' : '../../commonPreview.js';
-        document.write(script.outerHTML);
-      }());
-    </script>  
-    <script>
-      (function() {
-        const script = document.createElement('script');
-        script.src = (process.env.HOT) ? 'http://localhost:3001/dist/preview/index.js' : '../../preview/index.js';
-        document.write(script.outerHTML);
-      }());
-    </script>
     <script src="../other/autodesk/viewer3D.min.js"></script>
     <script src="../other/autodesk/three.min.js"></script>
     <link rel="stylesheet" href="../other/autodesk/style.min.css">

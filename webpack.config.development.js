@@ -38,7 +38,6 @@ const config = {
   ...baseConfig,
   debug: true,
   devtool: 'cheap-module-eval-source-map',
-
   entry: {
     main: [
       'babel-polyfill',
@@ -56,12 +55,10 @@ const config = {
       './app/renderer/preview/index',
     ],
   },
-
   output: {
     ...baseConfig.output,
     publicPath: 'http://localhost:3001/dist/',
   },
-
   module: {
     ...baseConfig.module,
     loaders: [
@@ -69,7 +66,6 @@ const config = {
       ...happyConfig.loaders
     ],
   },
-
   plugins: [
     ...baseConfig.plugins,
     ...happyConfig.plugins,
@@ -94,7 +90,6 @@ const config = {
       },
     }),
   ],
-
   target: 'electron-renderer',
 };
 
