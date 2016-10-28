@@ -39,11 +39,18 @@ async function start() {
     return {};
   });
   const store = configureStore(global.state);
+  
+  global.test = {
+    gooba: {
+      gooba: 'yep'
+    }
+  }
 
   store.subscribe(async () => {
     global.state = store.getState();
     const dataToStore = getFilteredStoreData(global.state);
-    await jsonStorage.set('state', dataToStore) // TODO: should this be blocking / wait? _.throttle?
+    await jsonStorage.set('state', dataToStore);
+    await jsonStorage.set('sessionState',  global.state);
   });
   ipcMain.on('redux-action', (event, action) => {
     store.dispatch(action);
