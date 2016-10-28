@@ -13,7 +13,7 @@ import classNames from 'classnames';
 import classes from '../ProjectSettingsPage.css'
 
 // Sub Components
-import { Field, actions } from 'react-redux-form';
+import { actions } from 'react-redux-form';
 
 import UserSearch from 'app/renderer/main/modules/UserSearch/UserSearch.container.js'
 import TeamMember from 'app/renderer/main/components/Project/TeamMember/TeamMember.jsx'

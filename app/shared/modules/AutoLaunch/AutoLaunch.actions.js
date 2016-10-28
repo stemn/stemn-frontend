@@ -1,9 +1,9 @@
-export function toggle(status) {
+export function toggle({value}) {
   return {
     type: 'AUTO_LAUNCH/TOGGLE',
     payload: {},
     meta: {
-      status: status
+      status: value
     }
   }
 }

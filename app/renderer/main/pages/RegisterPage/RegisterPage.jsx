@@ -13,9 +13,9 @@ import classNames from 'classnames';
 import classes from '../LoginPage/LoginPage.css'
 
 // Sub Components
-import {Form , Field } from 'react-redux-form';
 import { Link } from 'react-router';
 import Button from 'app/renderer/main/components/Buttons/Button/Button.jsx';
+import Input from 'app/renderer/main/components/Input/Input/Input';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton';
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
@@ -37,19 +37,11 @@ export const Component = React.createClass({
               <div>
                 <br />
                 <div className="layout-row">
-                  <Field model="auth.login.firstname">
-                    <input className={classes.input} style={{marginRight: '5px'}} type="text" placeholder="First name"/>
-                  </Field>
-                  <Field model="auth.login.lastname">
-                    <input className={classes.input} style={{marginLeft: '5px'}} type="text" placeholder="Last Name"/>
-                  </Field>
+                  <Input model="auth.login.firstname" value={auth.login.firstname} className={classes.input} style={{marginRight: '5px'}} type="text" placeholder="First name"/>
+                  <Input model="auth.login.lastname" value={auth.login.lastname} className={classes.input} style={{marginLeft: '5px'}} type="text" placeholder="Last Name"/>
                 </div>
-                <Field model="auth.login.email">
-                  <input className={classes.input} type="text" placeholder="Email"/>
-                </Field>
-                <Field model="auth.login.password">
-                  <input className={classes.input} type="password" placeholder="Password"/>
-                </Field>
+                <Input model="auth.login.email" value={auth.login.email} className={classes.input} type="text" placeholder="Email"/>
+                <Input model="auth.login.password" value={auth.login.password} className={classes.input} type="password" placeholder="Password"/>
                 <div className="layout-row layout-align-end">
                   <div className="flex-50 layout-row">
                     <Button style={{marginLeft: '5px'}}

@@ -13,11 +13,11 @@ import classNames from 'classnames';
 import classes from './ProjectNewModal.css';
 
 // Sub Components
-import { Field } from 'react-redux-form';
 import Button from 'app/renderer/main/components/Buttons/Button/Button';
 import ProjectLinkRemote from 'app/renderer/main/components/Project/ProjectLinkRemote/ProjectLinkRemote.jsx'
 import FileSelectInput from 'app/renderer/main/modules/FileSelectInput/FileSelectInput.jsx'
 import Textarea from 'app/renderer/main/components/Input/Textarea/Textarea';
+import Input from 'app/renderer/main/components/Input/Input/Input';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -32,9 +32,7 @@ export const Component = React.createClass({
       <div style={{width: '500px'}}>
         <div className="modal-title">Create New Project</div>
         <div className="modal-body">
-          <Field model={`${entityModel}.name`}>
-            <input className="dr-input" type="text" placeholder="Project Name"/>
-          </Field>
+          <Input model={`${entityModel}.name`} value={newProject.name} className="dr-input" type="text" placeholder="Project Name"/>
           <Textarea model={`${entityModel}.summary`}
             value={newProject.summary}
             className="dr-input"

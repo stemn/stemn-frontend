@@ -1,5 +1,5 @@
 import React from 'react';
-import { Control } from 'react-redux-form';
+import Input from 'app/renderer/main/components/Input/Input/Input'
 
 // Styles
 import classes from './Checkbox.css';
@@ -16,27 +16,19 @@ export default React.createClass({
   render(){
     const { value, model, title, circle, className, changeAction} = this.props;
     const id = Math.random().toString(36).substring(7);
-    const statusClass = value === null ? 'semi' : (value === true ? 'checked' : '');
+    const statusClass = value === 'other' ? 'semi' : (value === true ? 'checked' : '');
     return (
       <div
         title={title}
         className={classNames(classes.checkbox, className, {[classes.checkboxCircle] : circle})}>
-        {
-          model ?
-          <Control.checkbox
-            className={statusClass}
-            id={id}
-            model={model}
-            changeAction={changeAction}
-          />
-          :
-          <input
-            type="checkbox"
-            className={statusClass}
-            id={id}
-            onChange={()=>{changeAction(!value)}}
-          />
-        }
+        <Input
+          value={value}
+          type="checkbox"
+          className={statusClass}
+          id={id}
+          model={model}
+          changeAction={changeAction}
+        />
         <label htmlFor={id}></label>
       </div>
     )

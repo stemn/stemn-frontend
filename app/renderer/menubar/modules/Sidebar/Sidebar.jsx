@@ -18,7 +18,7 @@ import classes from './Sidebar.css'
 import AnimateShow from 'app/renderer/shared/AnimateShow/AnimateShow.jsx'
 import SidebarProjectButton from 'app/renderer/main/modules/Sidebar/SidebarProjectButton.jsx'
 import MdSearch from 'react-icons/md/search';
-import { Field } from 'react-redux-form';
+import Input from 'app/renderer/main/components/Input/Input/Input';
 
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -44,9 +44,13 @@ export const Component = React.createClass({
         </AnimateShow>
         <div className={classNames(classes.sidebar, 'layout-column', {[classes.sidebarShow] : menubarLayout.showSidebar})}>
           <div className={classes.sidebarSearch}>
-            <Field model="sidebar.searchString">
-              <input className="dr-input text-ellipsis" type="text" placeholder="Search all projects"/>
-            </Field>
+            <Input 
+              model="sidebar.searchString"
+              value={sidebar.searchString}
+              className="dr-input text-ellipsis" 
+              type="text" 
+              placeholder="Search all projects"
+            />
             <MdSearch className={classes.sidebarSearchIcon} size="25"/>
           </div>
           <div className="flex scroll-box">

@@ -14,7 +14,7 @@ import classNames from 'classnames';
 import classes from './Tasks.css';
 
 // Sub Components
-import { Field } from 'react-redux-form';
+import Input from 'app/renderer/main/components/Input/Input/Input';
 import TasksFilterMenu from './TasksFilterMenu/TasksFilterMenu.jsx';
 import TaskList from './TaskList/TaskList.jsx';
 import Button from 'app/renderer/main/components/Buttons/Button/Button'
@@ -58,9 +58,13 @@ export const Component = React.createClass({
       <div className="layout-column flex">
         <div className={classes.header + ' layout-row layout-align-start-center'}>
           <div className={classes.search}>
-            <Field model={`${boardModel}.searchString`}>
-              <input className="dr-input text-ellipsis" type="text" placeholder="Search tasks"/>
-            </Field>
+            <Input 
+              model={`${boardModel}.searchString`} 
+              value={board.searchString} 
+              className="dr-input text-ellipsis" 
+              type="text" 
+              placeholder="Search tasks"
+            />
             <MdSearch size="25"/>
           </div>
           <div className="flex"></div>

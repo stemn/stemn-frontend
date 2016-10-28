@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 // Styles
 import classNames from 'classnames';
 import classes from './ColorSelect.css';
-import { Field, actions } from 'react-redux-form';
+import { actions } from 'react-redux-form';
 
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'

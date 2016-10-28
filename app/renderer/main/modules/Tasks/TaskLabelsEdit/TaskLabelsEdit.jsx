@@ -10,10 +10,11 @@ import classNames from 'classnames';
 import classes from './TaskLabelsEdit.css';
 
 // Actions
-import { Field, actions } from 'react-redux-form';
+import { actions } from 'react-redux-form';
 import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
+import Input from 'app/renderer/main/components/Input/Input/Input';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
 import ColorSelect from './ColorSelect/ColorSelect.jsx'
@@ -64,15 +65,24 @@ export const Component = React.createClass({
                   value={label.color}
                 />
               </PopoverMenu>
-              <Field model={`${model}[${index}].color`}>
-                <input className={classes.colorSelectInput + ' dr-input'} type="text" placeholder="Color Code" id={label._id}/>
-              </Field>
+              <Input 
+                model={`${model}[${index}].color`} 
+                value={label.color} 
+                className={classes.colorSelectInput + ' dr-input'} 
+                type="text" 
+                placeholder="Color Code" 
+                id={label._id}
+              />
             </div>
 
             <div className={classes.name + ' flex'}>
-              <Field model={`${model}[${index}].name`}>
-                <input className="dr-input" type="text" placeholder="Label Name"/>
-              </Field>
+              <Input 
+                model={`${model}[${index}].name`}
+                value={label.name}
+                className="dr-input" 
+                type="text" 
+                placeholder="Label Name"
+              />
             </div>
             <PopoverMenu preferPlace="right">
               <SimpleIconButton>

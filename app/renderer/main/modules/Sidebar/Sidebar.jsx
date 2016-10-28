@@ -23,7 +23,7 @@ import DragResize      from 'app/renderer/main/modules/DragResize/DragResize.jsx
 import { Link } from 'react-router';
 import { ContextMenuLayer } from "react-contextmenu";
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
-import { Field } from 'react-redux-form';
+import Input from 'app/renderer/main/components/Input/Input/Input'
 import ContextMenu from 'app/renderer/main/modules/ContextMenu/ContextMenu.jsx';
 import SidebarProjectButton from './SidebarProjectButton.jsx';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton';
@@ -110,9 +110,7 @@ export const Component = React.createClass({
 
           </div>
           <div className={styles.sidebarSearch}>
-            <Field model="sidebar.searchString">
-              <input className="dr-input text-ellipsis" type="text" placeholder="Search all projects"/>
-            </Field>
+            <Input model="sidebar.searchString" value={this.props.sidebar.searchString} className="dr-input text-ellipsis" type="text" placeholder="Search all projects"/>
             <MdSearch className={styles.sidebarSearchIcon} size="25"/>
           </div>
 

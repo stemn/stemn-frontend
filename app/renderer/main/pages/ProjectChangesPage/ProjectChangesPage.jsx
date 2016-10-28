@@ -60,7 +60,7 @@ export const Component = React.createClass({
     })
   },
 
-  toggleAll(value){
+  toggleAll({value}){
     return this.props.changesActions.toggleAll({
       value,
       projectId: this.props.project.data._id

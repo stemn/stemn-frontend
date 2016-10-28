@@ -2,7 +2,7 @@ import React from 'react';
 
 import classNames from 'classnames';
 import styles from './CommitBox.css';
-import { Field } from 'react-redux-form';
+import Input from 'app/renderer/main/components/Input/Input/Input';
 
 // Components
 import IconButton from 'app/renderer/main/components/Buttons/IconButton';
@@ -27,9 +27,13 @@ export default React.createClass({
     }
     return (
       <div className="p-15">
-        <Field model={`changes.${this.props.project._id}.summary`}>
-          <input className={styles.input} type="text" placeholder="Summary"/>
-        </Field>
+        <Input 
+          model={`changes.${this.props.project._id}.summary`}
+          value={this.props.changes.summary}
+          className={styles.input} 
+          type="text" 
+          placeholder="Summary"
+        />
         <div className={classNames(styles.container, {[styles.containerShow]: this.props.changes.summary && this.props.changes.summary.length > 0})}>
           <MentionsInput
             className={styles.mentionsBox}

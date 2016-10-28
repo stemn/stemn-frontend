@@ -8,7 +8,6 @@ import * as ChangesActions from '../Changes.actions.js';
 // Component Core
 import React from 'react';
 import moment from 'moment';
-import { Field, actions } from 'react-redux-form';
 
 // Styles
 import classNames from 'classnames';
@@ -18,6 +17,7 @@ import classes from './CommitBox.css';
 import IconButton from 'app/renderer/main/components/Buttons/IconButton';
 import Button from 'app/renderer/main/components/Buttons/Button/Button.jsx';
 import Editor from 'app/renderer/main/modules/Editor/Editor.jsx';
+import Input from 'app/renderer/main/components/Input/Input/Input'
 
 import MdDone from 'react-icons/md/done';
 import { MentionsInput, Mention } from 'react-mentions';
@@ -32,9 +32,7 @@ export const Component = React.createClass({
     const { entityModel, changes } = this.props;
     return (
       <div className="p-15">
-        <Field model={`changes.${this.props.project._id}.summary`}>
-          <input className={classes.input} type="text" placeholder="Summary"/>
-        </Field>
+        <Input model={`changes.${this.props.project._id}.summary`} value={changes.summary} className={classes.input} type="text" placeholder="Summary"/>
         <Editor
           model={`${entityModel}.description`}
           value={changes.description}

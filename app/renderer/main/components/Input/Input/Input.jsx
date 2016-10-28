@@ -10,8 +10,22 @@ export const Component = React.createClass({
     }
   },
   onChange(event){
-    this.props.dispatch(actions.change(this.props.model, event.target.value));
-    this.setState({value: event.target.value});
+    const { model, dispatch, type, changeAction } = this.props;
+    let value = event.target.value;
+
+    // Toggle if checkbox
+    if(type == 'checkbox'){
+      const isFalse = value == 'false' || !value;
+      value = isFalse ? true : false; // toggle
+    }
+    
+    if(model){
+      this.props.dispatch(actions.change(model, value));
+    }
+    if(changeAction){
+      changeAction({value, model})
+    }
+    this.setState({value});
   },
   componentWillReceiveProps(nextProps) {
     // Update the internal state if it differs from the redux state
@@ -20,7 +34,7 @@ export const Component = React.createClass({
     }
   },
   render() {
-    const otherProps = omit(this.props, ['dispatch', 'model', 'value']);
+    const otherProps = omit(this.props, ['dispatch', 'model', 'value', 'changeAction']);
     const { value } = this.state;
     return <input {...otherProps} onChange={this.onChange} value={value}/>
   }

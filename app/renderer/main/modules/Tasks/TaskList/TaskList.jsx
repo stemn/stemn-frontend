@@ -3,24 +3,27 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as TasksActions from '../Tasks.actions.js';
 
-import { Field }           from 'react-redux-form';
 import TaskGroupParent     from './TaskGroup/TaskGroupParent.jsx';
 import TaskGroupWrapped    from './TaskGroup/TaskGroupWrapped.jsx'
 import TaskGroup           from './TaskGroup/TaskGroup.jsx'
 import TaskListItemParent  from './TaskListItem/TaskListItemParent.jsx'
 import TaskListItemWrapped from './TaskListItem/TaskListItemWrapped.jsx'
 import TaskListItem        from './TaskListItem/TaskListItem.jsx'
+import Input from 'app/renderer/main/components/Input/Input/Input';
 
 import classes from './TaskList.css';
 
 export const NewItem = React.createClass({
   render() {
-    const { model, submitFn, placeholder, box, style } = this.props;
+    const { model, value, submitFn, placeholder, box, style } = this.props;
     return (
       <form style={style} name="form" onSubmit={submitFn}>
-        <Field model={model}>
-          <input className={box ? classes.newItemBox : classes.newItem} type="text" placeholder={placeholder}/>
-        </Field>
+        <Input 
+          model={model} 
+          value={value}
+          className={box ? classes.newItemBox : classes.newItem} 
+          type="text" placeholder={placeholder}
+        />
       </form>
     )
   }
@@ -132,6 +135,7 @@ export const Component = React.createClass({
                   <NewItem
                     style={layout == 'list' ? {marginLeft: '60px'} : {}}
                     model={`${entityModel}.newTaskString.${group._id}`}
+                    value={board.newTaskString[group._id]}
                     placeholder="New Task"
                     submitFn={(event) => this.newTask(event, group._id)}
                     box={layout=='board'}
@@ -143,6 +147,7 @@ export const Component = React.createClass({
           <TaskGroup simpleGroup={true}>
             <NewItem
               model={`${entityModel}.newGroupString`}
+              value={board.newGroupString}
               placeholder="New Group"
               submitFn={this.newGroup}
               box={layout=='board'}

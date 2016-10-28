@@ -10,7 +10,6 @@ import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js'
 import React from 'react';
 import moment from 'moment';
 import { has } from 'lodash';
-import { Field } from 'react-redux-form';
 
 // Styles
 import classNames from 'classnames';
@@ -18,6 +17,7 @@ import classes from './TaskListItem.css';
 
 // Sub Components
 import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
+import Input from 'app/renderer/main/components/Input/Input/Input';
 import UserAvatars from 'app/renderer/main/components/Avatar/UserAvatars/UserAvatars.jsx'
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 import MdOpenInNew from 'react-icons/md/open-in-new';
@@ -110,13 +110,14 @@ export const Component = React.createClass({
               className="text-primary"
               circle={true} />
             <div className="flex text-ellipsis" style={{lineHeight: '1.4em'}}>
-              <Field model={`${entityModel}.data.name`}>
-                <input
-                  onChange={this.updateTask}
-                  className="input-plain"
-                  type="text"
-                  placeholder="Task description" />
-              </Field>
+              <Input
+                model={`${entityModel}.name`}
+                value={task.data.name}
+                onChange={this.updateTask}
+                className="input-plain"
+                type="text"
+                placeholder="Task description" 
+              />
             </div>
             { task.data.labels && task.data.labels.length > 0 && board && board.data && board.data.labels ?
               <TaskLabelDots labels={task.data.labels} labelInfo={board.data.labels} tag={true} />

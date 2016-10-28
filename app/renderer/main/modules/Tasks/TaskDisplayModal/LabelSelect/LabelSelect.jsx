@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Field, actions } from 'react-redux-form';
+import { actions } from 'react-redux-form';
 
 import CheckboxAlt from 'app/renderer/main/components/Input/CheckboxAlt/CheckboxAlt.jsx'
 import classes from './LabelSelect.css'

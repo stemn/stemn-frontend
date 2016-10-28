@@ -1,5 +1,4 @@
 import React from 'react';
-import { Field, Form } from 'react-redux-form';
 import MdDone from 'react-icons/md/done';
 // Styles
 import classNames from 'classnames';
@@ -20,8 +19,3 @@ export default class SelectList extends React.Component{
     )
   }
 }
-
-//        <Field model={props.model} changeAction={props.changeAction}>
-//          <input className={props.value ? 'checked' : ''} type="checkbox" id={id}/>
-//          <label htmlFor={id}></label>
-//        </Field>

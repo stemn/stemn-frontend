@@ -13,7 +13,7 @@ import classNames from 'classnames';
 import classes from './LoginPage.css'
 
 // Sub Components
-import {Form , Field } from 'react-redux-form';
+import Input from 'app/renderer/main/components/Input/Input/Input';
 import { Link } from 'react-router';
 import Button from 'app/renderer/main/components/Buttons/Button/Button.jsx';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton';
@@ -37,12 +37,20 @@ export const Component = React.createClass({
             <div className="text-title-3">Sign In</div>
             <div>
               <br />
-              <Field model="auth.login.email">
-                <input className={classes.input} type="text" placeholder="Email"/>
-              </Field>
-              <Field model="auth.login.password">
-                <input className={classes.input} type="password" placeholder="Password"/>
-              </Field>
+              <Input 
+                model="auth.login.email" 
+                value={auth.login.email}
+                className={classes.input} 
+                type="text" 
+                placeholder="Email"
+              />
+              <Input 
+                model="auth.login.password" 
+                value={auth.login.password}
+                className={classes.input} 
+                type="password" 
+                placeholder="Password"
+              />
               <div className="layout-row layout-align-end">
                 <div className="flex-50 layout-row">
                   <Button style={{marginLeft: '5px'}}

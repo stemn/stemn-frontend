@@ -15,7 +15,7 @@ import classNames from 'classnames';
 import classes from '../ProjectSettingsPage.css'
 
 // Sub Components
-import { Field, actions } from 'react-redux-form';
+import { actions } from 'react-redux-form';
 
 import ProgressButton from 'app/renderer/main/components/Buttons/ProgressButton/ProgressButton'
 import TaskLabelsEdit from 'app/renderer/main/modules/Tasks/TaskLabelsEdit/TaskLabelsEdit.jsx'

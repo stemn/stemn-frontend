@@ -3,7 +3,7 @@ import React from 'react';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 import MdMoreHoriz from 'react-icons/md/more-horiz';
-import { Field } from 'react-redux-form';
+import Input from 'app/renderer/main/components/Input/Input/Input';
 
 import classes from './TaskGroup.css'
 export default class Component extends React.Component {
@@ -30,9 +30,14 @@ export default class Component extends React.Component {
         <div style={styles}>
           <div className={classes.header + ' layout-row layout-align-start-center'}>
             <h3 className="flex">
-              <Field model={`${entityModel}.name`}>
-                <input placeholder="Group name" className="input-plain text-mini-caps" type="text" onChange={()=>{setTimeout(updateGroup, 1)}}></input>
-              </Field>
+              <Input 
+                model={`${entityModel}.name`}
+                value={item.name}
+                placeholder="Group name" 
+                className="input-plain text-mini-caps" 
+                type="text" 
+                changeAction={()=>{setTimeout(updateGroup, 1)}} 
+              />
             </h3>
             <div className={classes.options}>
               <PopoverMenu preferPlace="below">

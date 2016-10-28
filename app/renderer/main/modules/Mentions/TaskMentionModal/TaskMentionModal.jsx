@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 // Component Core
 import React from 'react';
 import moment from 'moment';
-import { actions, Field } from 'react-redux-form';
+import { actions } from 'react-redux-form';
 import getUuid from 'app/shared/helpers/getUuid.js';
 
 // Styles
@@ -19,6 +19,7 @@ import howMany from 'app/shared/helpers/strings/howMany.js';
 
 // Sub Components
 import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
+import Input from 'app/renderer/main/components/Input/Input/Input';
 import Button from 'app/renderer/main/components/Buttons/Button/Button';
 import TaskRow from './TaskRow/TaskRow.jsx';
 import MdSearch from 'react-icons/md/search';
@@ -87,9 +88,12 @@ export const Component = React.createClass({
         <div className={classes.header + ' layout-row layout-align-start-center'}>
           <div className="flex">{howMany({count: filterMentions(mentions, 'complete').length, adj: 'complete'}, {count: filterMentions(mentions, 'related').length, adj: 'related'}, 'task')}</div>
           <div className={classes.search}>
-            <Field model={`${boardModel}.searchString`}>
-              <input className="dr-input" placeholder="Search tasks"/>
-            </Field>
+            <Input 
+              model={`${boardModel}.searchString`}
+              value={board.searchString}
+              className="dr-input" 
+              placeholder="Search tasks"
+            />
             <PopoverMenu preferPlace="right" trigger="hoverDelay">
               <MdSearch size="20"/>
               <div><TasksFilterMenu model={`${boardModel}.searchString`} value={board.searchString}/></div>

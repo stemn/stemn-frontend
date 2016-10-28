@@ -14,11 +14,11 @@ import classNames from 'classnames';
 import classes from 'app/renderer/main/pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css'
 
 // Sub Components
-import { Field } from 'react-redux-form';
 import Upload from 'app/renderer/main/modules/Upload/Upload.jsx'
 import ProgressButton from 'app/renderer/main/components/Buttons/ProgressButton/ProgressButton.jsx'
 import LinkAccount from 'app/renderer/main/modules/Settings/LinkAccount/LinkAccount.jsx'
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import Input from 'app/renderer/main/components/Input/Input/Input';
 
 
 
@@ -53,17 +53,31 @@ export const Component = React.createClass({
           <div className={classes.panel}>
             <h3>Basic Profile Info</h3>
             <div className="layout-row">
-              <Field className="flex" model={`${entityModel}.data.profile.firstname`}>
-                <input className="dr-input" type="text" placeholder="First Name" style={{marginRight: '7px'}}/>
-              </Field>
-              <Field className="flex" model={`${entityModel}.data.profile.lastname`}>
-                <input className="dr-input" type="text" placeholder="Last Name" style={{marginLeft: '7px'}}/>
-              </Field>
+              <Input 
+                model={`${entityModel}.data.profile.firstname`}
+                value={user.data.profile.firstname}
+                className="dr-input flex" 
+                type="text" 
+                placeholder="First Name" 
+                style={{marginRight: '7px'}}
+              />
+              <Input 
+                model={`${entityModel}.data.profile.lastname`}
+                value={user.data.profile.lastname}
+                className="dr-input flex" 
+                type="text" 
+                placeholder="Last Name" 
+                style={{marginLeft: '7px'}}
+              />
             </div>
             <br />
-            <Field model={`${entityModel}.data.profile.blurb`}>
-              <input className="dr-input" type="text" placeholder="Profile blurb"/>
-            </Field>
+            <Input 
+              model={`${entityModel}.data.profile.blurb`}
+              value={user.data.profile.blurb}
+              className="dr-input" 
+              type="text" 
+              placeholder="Profile blurb"
+            />
             <br />
             <div className="layout-row layout-align-end">
               <ProgressButton className="primary" onClick={()=>this.saveUser()}>Save Profile</ProgressButton>

@@ -20,19 +20,15 @@ import Tabs from 'app/renderer/main/components/Tabs/Tabs'
 import Toggle from 'app/renderer/main/components/Input/Toggle/Toggle'
 import UserSearch from 'app/renderer/main/modules/UserSearch/UserSearch.container.js'
 import TeamMember from 'app/renderer/main/components/Project/TeamMember/TeamMember.jsx'
-import ProjectPermissionsRadio from 'app/renderer/main/components/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx'
+//import ProjectPermissionsRadio from 'app/renderer/main/components/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx'
 import ProjectLinkRemote from 'app/renderer/main/components/Project/ProjectLinkRemote/ProjectLinkRemote.jsx'
 import FileSelectInput from 'app/renderer/main/modules/FileSelectInput/FileSelectInput.jsx'
 import ProgressButton from 'app/renderer/main/components/Buttons/ProgressButton/ProgressButton'
 import TaskLabelsEdit from 'app/renderer/main/modules/Tasks/TaskLabelsEdit/TaskLabelsEdit.jsx'
 import NavPill from 'app/renderer/main/components/Buttons/NavPill/NavPill'
-import Field from 'app/renderer/main/components/Input/Field/Field'
 import Input from 'app/renderer/main/components/Input/Input/Input'
 
-
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 const onMount = (nextProps, prevProps) => {
   if(nextProps.project && nextProps.project.data){
@@ -104,11 +100,21 @@ export const Component = React.createClass({
         <div className={classes.panel}>
          <h3>General Settings</h3>
          <p>Add your project name and blurb.</p>
-         <Input model={`${entityModel}.data.name`} value={project.data.name} className="dr-input" type="text" placeholder="Project Name"/>
+         <Input 
+           model={`${entityModel}.data.name`} 
+           value={project.data.name} 
+           className="dr-input" 
+           type="text" 
+           placeholder="Project Name"
+         />
          <br />
-         <Field model={`${entityModel}.data.summary`}>
-           <input value={project.data.summary} className="dr-input" type="text" placeholder="Project Summary"/>
-         </Field>
+         <Input 
+           model={`${entityModel}.data.summary`} 
+           value={project.data.summary} 
+           className="dr-input" 
+           type="text" 
+           placeholder="Project Summary"
+         />
          <br />
          <div className="layout-row layout-align-end">
            <ProgressButton

@@ -9,19 +9,19 @@ import { get }               from 'lodash';
 
 export function deselect({projectId}) {
   return {
-      type: 'CHANGES/DESELECT_FILE_CHANGE',
-      payload: {
-        projectId,
-      }
+    type: 'CHANGES/DESELECT_FILE_CHANGE',
+    payload: {
+      projectId,
+    }
   }
 }
 export function selectedFileChange({projectId, selected}) {
   return {
-      type: 'CHANGES/SELECTED_FILE_CHANGE',
-      payload: {
-        projectId,
-        selected
-      }
+    type: 'CHANGES/SELECTED_FILE_CHANGE',
+    payload: {
+      projectId,
+      selected
+    }
   }
 }
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Field, Form } from 'react-redux-form';
 import { ContextMenuLayer } from "react-contextmenu";
 
 // Components

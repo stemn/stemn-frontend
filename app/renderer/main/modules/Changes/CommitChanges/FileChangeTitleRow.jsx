@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { Field, Form } from 'react-redux-form';
 
 // Components
 import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
