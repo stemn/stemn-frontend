@@ -10,6 +10,7 @@ import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 import PopoverMenuList from 'app/renderer/main/components/PopoverMenu/PopoverMenuList';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
+import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 // Functions
 import { groupRevisions } from 'app/renderer/main/modules/Timeline/Timeline.utils.js'
@@ -24,7 +25,7 @@ const FileChangeRowContext = ContextMenuLayer(contextIdentifier, (props) => prop
 
 export default React.createClass({
   render(){
-    const { changes, project, toggleAll, refresh, selectedFileChange, deselect, dispatch } = this.props;
+    const { changes, project, toggleAll, refresh, selectedFileChange, deselect, loading, dispatch } = this.props;
     const groupedChanges = groupRevisions(changes.data);
     const allChecked = getToggleAllStatus(groupedChanges, changes.checked);
 //    ,{
@@ -67,6 +68,7 @@ export default React.createClass({
           : <div className="layout-column layout-align-center-center text-title-4 flex">No Changes</div>}
 
         </div>
+        <LoadingOverlay show={loading} linear={true} hideBg={true} />
         <ContextMenu identifier={contextIdentifier} menu={FileChangeMenu(dispatch)}/>
       </div>
     )

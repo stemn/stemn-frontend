@@ -9,9 +9,32 @@ import LoadingLinear  from 'app/renderer/main/components/Loading/LoadingLinear/L
 import classes from './LoadingOverlay.css';
 import classNames from 'classnames';
 
-export default class extends Component {
+export default React.createClass({
+    getInitialState () {
+    return {
+      loading: false,
+    }
+  },
+  componentWillReceiveProps(nextProps) {
+    const prevProps = this.props;
+    // If we just began loading:
+    if(nextProps.show && (!prevProps || !prevProps.show)){
+      this.startLoading();
+    }
+    // If we finished loading
+    else if(prevProps && prevProps.show && !nextProps.show){
+      this.endLoading();
+    }
+  },
+  startLoading(){
+    console.log('start-loading');
+  },  
+  endLoading(){
+    console.log('end-loading');
+  },
   render() {
     const { size, show, children, style, linear, hideBg } = this.props; // size == 'xs'
+    const { loading } = this.state;
 
     const transitionName = {
       enter: classes.enter,
@@ -45,7 +68,7 @@ export default class extends Component {
       </ReactCSSTransitionGroup>
     )
   }
-}
+})
 
 
 

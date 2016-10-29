@@ -67809,7 +67809,17 @@
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-	var initialState = {};
+	var initialState = {
+	  /**************************************
+	  [projectId] : {
+	    data: { changesData },
+	    selected: { the Selected Change},
+	    loading: true || false,
+	    summary: 'commit summary',
+	    description: 'commit description'
+	  }
+	  **************************************/
+	};
 
 	var mainReducer = function mainReducer(state, action) {
 	  var _ret = function () {
@@ -67840,13 +67850,20 @@
 	            return _icepick2.default.assoc(changes, 'checked', checked);
 	          })
 	        };
+
+	      case 'CHANGES/FETCH_CHANGES_PENDING':
+	        return {
+	          v: _icepick2.default.assocIn(state, [action.meta.projectId, 'loading'], true)
+	        };
+	      case 'CHANGES/FETCH_CHANGES_REJECTED':
+	        return {
+	          v: _icepick2.default.assocIn(state, [action.meta.projectId, 'loading'], false)
+	        };
 	      case 'CHANGES/FETCH_CHANGES_FULFILLED':
 	        return {
-	          v: _icepick2.default.merge(state, _defineProperty({}, action.payload.config.meta.projectId, {
-	            data: action.payload.data,
-	            selected: {}
-	          }))
+	          v: _icepick2.default.chain(state).assocIn([action.meta.projectId, 'data'], action.payload.data).assocIn([action.meta.projectId, 'loading'], false).value()
 	        };
+
 	      case 'CHANGES/COMMIT_FULFILLED':
 	        var idsToRemove = action.payload.data.revisions.map(function (item) {
 	          return item._id;
@@ -71917,10 +71934,10 @@
 	        url: '/api/v1/sync/timeline/' + projectId,
 	        params: {
 	          types: ['changes']
-	        },
-	        meta: {
-	          projectId: projectId
 	        }
+	      },
+	      meta: {
+	        projectId: projectId
 	      }
 	    });
 	  };
@@ -72429,6 +72446,8 @@
 			"lodash.throttle": "^3.0.3",
 			"markdown-it": "^7.0.1",
 			"markdown-it-emoji": "^1.3.0",
+			"markdown-it-mathjax": "^1.0.3",
+			"mathjax": "^2.7.0",
 			"moment": "^2.13.0",
 			"node-fetch": "^1.5.2",
 			"node-schedule": "^1.1.0",
@@ -72450,11 +72469,12 @@
 			"react-dnd": "^2.1.4",
 			"react-dnd-html5-backend": "^2.1.2",
 			"react-dnd-touch-backend": "^0.3.2",
-			"react-dom": "^15.0.1",
+			"react-dom": "^15.3.2",
 			"react-dropzone": "^3.5.3",
 			"react-flip-move": "^2.4.2",
 			"react-icon-base": "^2.0.4",
 			"react-icons": "^2.2.1",
+			"react-mentions": "^0.5.2",
 			"react-modal": "^1.4.0",
 			"react-popover": "^0.4.4",
 			"react-redux": "^4.4.5",
