@@ -3,13 +3,15 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 // Components
 import LoadingSpinner from 'app/renderer/main/components/Loading/LoadingSpinner/LoadingSpinner';
+import LoadingLinear  from 'app/renderer/main/components/Loading/LoadingLinear/LoadingLinear.jsx';
 
 // Styles
 import classes from './LoadingOverlay.css';
+import classNames from 'classnames';
 
 export default class extends Component {
   render() {
-    const { size, show, children, style } = this.props; // size == 'xs'
+    const { size, show, children, style, linear, hideBg } = this.props; // size == 'xs'
 
     const transitionName = {
       enter: classes.enter,
@@ -29,11 +31,14 @@ export default class extends Component {
         transitionLeaveTimeout={300}>
         {
           show ?
-          <div className={classes.loadingOverlay + ' overlay'} style={style}>
-            <div className={classes.loaderContainer}>
-              <LoadingSpinner size={size}/>
-              {children ? <div className={classes.text}>{children}</div> : null}
-            </div>
+          <div className={classNames(classes.loadingOverlay, hideBg ? '' : classes.bgWhite)} style={style}>
+            { linear
+            ? <LoadingLinear />
+            : <div className={classes.loaderContainer}>
+                <LoadingSpinner size={size}/>
+                {children ? <div className={classes.text}>{children}</div> : null}
+              </div>
+            }
           </div>
           : null
         }

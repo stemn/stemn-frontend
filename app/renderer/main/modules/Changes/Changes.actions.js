@@ -47,9 +47,9 @@ export function fetchChanges({projectId}) {
         params: {
           types: ['changes'],
         },
-        meta: {
-          projectId
-        }
+      },
+      meta: {
+        projectId
       }
     })
   }

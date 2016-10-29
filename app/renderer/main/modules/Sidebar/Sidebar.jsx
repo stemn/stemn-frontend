@@ -107,7 +107,6 @@ export const Component = React.createClass({
             <SimpleIconButton title="Toggle sidebar" style={{padding: '0px', color: 'black'}} onClick={()=>{this.props.sidebarActions.toggleSidebar();}}>
               <MdMenu size="25"/>
             </SimpleIconButton>
-
           </div>
           <div className={styles.sidebarSearch}>
             <Input model="sidebar.searchString" value={this.props.sidebar.searchString} className="dr-input text-ellipsis" type="text" placeholder="Search all projects"/>

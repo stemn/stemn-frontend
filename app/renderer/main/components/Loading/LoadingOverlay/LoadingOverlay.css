@@ -4,8 +4,10 @@
   left: 0px;
   right: 0px;
   bottom: 0px;
-  background: white;
   z-index: 10;
+}
+.bgWhite{
+  background: white;
 }
 .loaderContainer{
   position: absolute;

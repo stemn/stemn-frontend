@@ -58,7 +58,7 @@ export default React.createClass({
                   item={item}
                   text={item.data.path}
                   clickFn={()=>{selectedFileChange({projectId: project._id, selected: item})}}
-                  isActive={item._id == changes.selected._id}
+                  isActive={changes.selected ? item._id == changes.selected._id : false}
                   model={`changes.${project._id}.checked.${item.data.fileId}`}
                   value={changes.checked ? changes.checked[item.data.fileId] : false}
                   />)}

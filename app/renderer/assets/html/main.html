@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>STEMN</title>
     <link rel="stylesheet" href="../fonts/opensans/opensans.css" />
+    <link rel="stylesheet" href="../fonts/blokk/blokkfont.css" />
     <script>
       (function() {
         function createLink(href){
@@ -13,9 +14,9 @@
           document.write(link.outerHTML);
         }
         if (!process.env.HOT) {
-          [ '../../main/style.css',
-            '../../common/style.css',
-            '../../commonPreview/style.css'
+          [ '../../common/style.css',
+            '../../commonPreview/style.css',
+            '../../main/style.css'
           ].map(createLink);
         }
       }());

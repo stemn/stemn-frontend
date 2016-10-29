@@ -2,7 +2,17 @@ import i from 'icepick';
 
 import { modeled } from 'react-redux-form';
 import { parseMentions, removeExistingMentions, addMentionsToText } from '../Mentions/Mentions.utils.js';
-const initialState = {}
+const initialState = {
+  /**************************************
+  [projectId] : {
+    data: { changesData },
+    selected: { the Selected Change},
+    loading: true || false,
+    summary: 'commit summary',
+    description: 'commit description'
+  }
+  **************************************/
+}
 
 const mainReducer = (state, action) => {
   switch (action.type) {
@@ -24,13 +34,17 @@ const mainReducer = (state, action) => {
         }, {});
         return i.assoc(changes, 'checked', checked);
       })
+
+    case 'CHANGES/FETCH_CHANGES_PENDING':
+      return i.assocIn(state, [action.meta.projectId, 'loading'], true);
+    case 'CHANGES/FETCH_CHANGES_REJECTED':
+      return i.assocIn(state, [action.meta.projectId, 'loading'], false);
     case 'CHANGES/FETCH_CHANGES_FULFILLED':
-      return i.merge(state, {
-        [action.payload.config.meta.projectId] : {
-          data : action.payload.data,
-          selected: {},
-        }
-      })
+      return i.chain(state)
+        .assocIn([action.meta.projectId, 'data'], action.payload.data)
+        .assocIn([action.meta.projectId, 'loading'], false)
+        .value();
+
     case 'CHANGES/COMMIT_FULFILLED':
       const idsToRemove = action.payload.data.revisions.map((item)=>item._id);
       const remainingRevisions = state[action.meta.cacheKey].data.filter((item)=>!idsToRemove.includes(item._id));
