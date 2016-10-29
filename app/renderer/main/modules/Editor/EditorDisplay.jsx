@@ -1,6 +1,7 @@
 import React                from 'react';
 import markdownIt           from 'markdown-it';
 import emoji                from 'markdown-it-emoji';
+import mdMathjax            from 'markdown-it-mathjax';
 import classes              from './EditorDisplay.css';
 import { validateMention }  from 'app/renderer/main/modules/Mentions/Mentions.utils.js';
 import htmlToReact          from 'html-to-react';
@@ -41,6 +42,7 @@ const md = markdownIt({
   typographer: true
 });
 md.use(emoji);
+md.use(mdMathjax);
 
 const processNodeDefinitions = new htmlToReact.ProcessNodeDefinitions(React);
 const processingInstructions = [{

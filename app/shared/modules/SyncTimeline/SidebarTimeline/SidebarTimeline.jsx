@@ -84,7 +84,7 @@ export default React.createClass({
           )
           : <div className="layout-column layout-align-center-center text-title-4 flex">No Feed items yet</div>
         }
-        <LoadingOverlay show={loading} />
+        <LoadingOverlay show={loading} linear={true} hideBg={true} />
       </div>
     )
   }

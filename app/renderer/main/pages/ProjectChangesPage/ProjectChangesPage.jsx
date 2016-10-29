@@ -109,6 +109,7 @@ export const Component = React.createClass({
                       toggleAll={this.toggleAll}
                       selectedFileChange={changesActions.selectedFileChange}
                       refresh={this.refresh}
+                      loading={changes.loading}
                       deselect={this.deselect}
                       dispatch={dispatch}
                     />
