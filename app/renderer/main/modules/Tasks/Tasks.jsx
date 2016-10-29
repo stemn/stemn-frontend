@@ -34,7 +34,7 @@ const layouts = [{
 
 export const Component = React.createClass({
   componentWillMount() {
-    this.props.TasksActions.getBoard({
+    this.props.TasksActions.getBoards({
       projectId: this.props.projectId
     })
   },
@@ -58,11 +58,11 @@ export const Component = React.createClass({
       <div className="layout-column flex">
         <div className={classes.header + ' layout-row layout-align-start-center'}>
           <div className={classes.search}>
-            <Input 
-              model={`${boardModel}.searchString`} 
-              value={board.searchString} 
-              className="dr-input text-ellipsis" 
-              type="text" 
+            <Input
+              model={`${boardModel}.searchString`}
+              value={board.searchString}
+              className="dr-input text-ellipsis"
+              type="text"
               placeholder="Search tasks"
             />
             <MdSearch size="25"/>

@@ -75,7 +75,7 @@ const TasksPanel = React.createClass({
 export const Component = React.createClass({
   onMount(nextProps, prevProps){
     if(!prevProps || nextProps.projectId !== prevProps.projectId){
-      nextProps.tasksActions.getBoard({
+      nextProps.tasksActions.getBoards({
         projectId: nextProps.projectId
       })
     }

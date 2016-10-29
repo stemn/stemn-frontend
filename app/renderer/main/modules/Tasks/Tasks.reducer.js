@@ -30,11 +30,11 @@ const mainReducer = (state, action) => {
       })
       .value();
 
-    case 'TASKS/GET_BOARD_PENDING':
+    case 'TASKS/GET_BOARDS_PENDING':
       return i.assocIn(state, ['projects', action.meta.cacheKey, 'loading'], true);
-    case 'TASKS/GET_BOARD_REJECTED':
+    case 'TASKS/GET_BOARDS_REJECTED':
       return i.assocIn(state, ['projects', action.meta.cacheKey, 'loading'], false);
-    case 'TASKS/GET_BOARD_FULFILLED':
+    case 'TASKS/GET_BOARDS_FULFILLED':
       return i.merge(state, {
         projects: {
           [action.meta.cacheKey] : {

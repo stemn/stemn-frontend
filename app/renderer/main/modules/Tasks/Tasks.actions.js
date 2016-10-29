@@ -28,15 +28,28 @@ export function newTask({boardId, task}) {
  }
 }
 
-export function getBoard({projectId}){
+export function getBoards({projectId}){
   return {
-    type: 'TASKS/GET_BOARD',
+    type: 'TASKS/GET_BOARDS',
     payload: http({
       method: 'GET',
       url: `/api/v1/projects/${projectId}/boards`,
     }),
     meta: {
       cacheKey: projectId
+    }
+  }
+}
+
+export function getBoard({boardId}){
+  return {
+    type: 'TASKS/GET_BOARD',
+    payload: http({
+      method: 'GET',
+      url: `/api/v1/boards/${boardId}`,
+    }),
+    meta: {
+      cacheKey: boardId
     }
   }
 }
@@ -122,6 +135,19 @@ export function updateTask({task}) {
     },
     meta: {
       cacheKey: task._id
+    }
+  }
+}
+
+export function getGroup({boardId, groupId}) {
+  return {
+    type: 'TASKS/GET_GROUP',
+    httpPackage: {
+      method: 'GET',
+      url: `api/v1/boards/${boardId}/groups/${groupId}`
+    },
+    meta: {
+      cacheKey: groupId
     }
   }
 }
