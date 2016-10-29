@@ -15,5 +15,7 @@ export const initialise = (config) => {
 
   socket.on('error', socketError);
 
+  socket.on('data', (data) => console.log('WEBSOCKET RECEIVED DATA:\n', JSON.stringify(data)));
+
   return socket;
 }
