@@ -46,7 +46,7 @@ async function start() {
   
   // Configure store
   const store = configureStore(global.state);
-  
+
   store.subscribe(async () => {
     global.state = store.getState();
     const dataToStore = getFilteredStoreData(global.state);
@@ -105,6 +105,7 @@ function onElectronAction(event, action){
    });
 
     websocket.on('data', (action) => {
+     console.log('websocket received data\n', JSON.stringify(action))
      const reduxAction = mapWebsocketToRedux(action);
      if(reduxAction){
        store.dispatch(reduxAction)
