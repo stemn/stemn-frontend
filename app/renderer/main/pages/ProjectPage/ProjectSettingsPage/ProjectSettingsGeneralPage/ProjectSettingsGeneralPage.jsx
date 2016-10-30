@@ -67,13 +67,35 @@ export const Component = React.createClass({
     })
   },
   linkRemote(){
+    const { project } = this.props;
     // This is not wrapped in dispach!
-    return ProjectsActions.linkRemote({
-      projectId: this.props.project.data._id,
-      provider: this.props.project.formModels.fileStore.remote.provider,
-      path: this.props.project.formModels.fileStore.remote.root.path,
-      id: this.props.project.formModels.fileStore.remote.root.fileId
-    })
+    if(project.formModels.fileStore.remote.provider == 'none'){
+      return {
+        aliased: true,
+        payload: {
+          functionAlias: 'ProjectsActions.unlinkRemote',
+          functionInputs: {
+            projectId: project.data._id,
+            prevProvider: project.data.remote.provider
+          }
+        }
+      }
+    }
+    else{
+      return {
+        aliased: true,
+        payload: {
+          functionAlias: 'ProjectsActions.linkRemote',
+          functionInputs: {
+            projectId: project.data._id,
+            provider: project.formModels.fileStore.remote.provider,
+            path: project.formModels.fileStore.remote.root.path,
+            id: project.formModels.fileStore.remote.root.fileId,
+            prevProvider: project.data.remote.provider
+          }
+        }
+      }
+    }
   },
   confirmLinkRemote(){
     // If the store is connected - we confirm the change

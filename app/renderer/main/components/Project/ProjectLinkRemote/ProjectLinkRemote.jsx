@@ -20,15 +20,6 @@ import classNames from 'classnames';
 /////////////////////////////////////////////////////////////////////////////
 
 const Component = React.createClass({
-  linkRemote(){
-    this.props.ProjectsActions.linkRemote({
-      projectId: this.props.project._id,
-      provider: 'drive',
-      path_display: '',
-      path: '',
-      id: ''
-    })
-  },
   onChangeFn(selectedProvider){
     // If the selected provider is not authed, auth it
     if(!selectedProvider.isAuthed(this.props.auth.user.accounts)){

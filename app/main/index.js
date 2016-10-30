@@ -33,19 +33,20 @@ if(!squirrelStartup){
 
 async function start() {
   const appIcon = tray(); // set-up menu bar
+  
+  // Clear sessionState
+  await jsonStorage.set('sessionState', {});
+  
+  // Getch perma-state
   global.state = await jsonStorage.get('state').
   catch(error => {
     jsonStorage.clear();
     return {};
   });
+  
+  // Configure store
   const store = configureStore(global.state);
   
-  global.test = {
-    gooba: {
-      gooba: 'yep'
-    }
-  }
-
   store.subscribe(async () => {
     global.state = store.getState();
     const dataToStore = getFilteredStoreData(global.state);

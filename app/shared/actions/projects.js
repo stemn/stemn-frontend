@@ -141,22 +141,61 @@ export function removeTeamMember({projectId, userId}) {
 }
 
 
-export function linkRemote({projectId, provider, path, id}) {
-  return {
-    type: 'PROJECTS/LINK_REMOTE',
-    http: true,
-    payload: {
-      method: 'PUT',
-      url: `/api/v1/remote/link/${projectId}/${provider}`,
-      params: {
-        path         : path,
-        id           : id
+export function linkRemote({projectId, provider, path, id, prevProvider}) {
+  return (dispatch) => {
+    const link = () => dispatch({
+      type: 'PROJECTS/LINK_REMOTE',
+      payload: http({
+        method: 'PUT',
+        url: `/api/v1/remote/link/${projectId}/${provider}`,
+        params: {
+          path         : path,
+          id           : id
+        }
+      }),
+      meta: {
+        cacheKey: projectId
       }
-    },
-    meta: {
-      cacheKey: projectId
+    });
+    const unlink = () => dispatch({
+      type: 'PROJECTS/UNLINK_REMOTE',
+      payload: http({
+        method: 'DELETE',
+        url: `/api/v1/remote/link/${projectId}/${prevProvider}`,
+      }),
+      meta: {
+        cacheKey: projectId
+      }
+    });
+    const updateProject = () => dispatch(getProject({projectId}));
+
+    if(prevProvider){
+      return unlink().then(link).then(updateProject);
     }
-  };
+    else{
+      return link().then(updateProject);
+    }
+  }
+}
+
+
+
+export function unlinkRemote({projectId, prevProvider}) {
+  console.log(prevProvider);
+  return (dispatch) => {
+    dispatch({
+      type: 'PROJECTS/UNLINK_REMOTE',
+      payload: http({
+        method: 'DELETE',
+        url: `/api/v1/remote/link/${projectId}/${prevProvider}`,
+      }).then(response => {
+        dispatch(getProject({projectId}))
+      }),
+      meta: {
+        cacheKey: projectId
+      }
+    })
+  }
 }
 
 export function websocketJoinProject({projectId}) {

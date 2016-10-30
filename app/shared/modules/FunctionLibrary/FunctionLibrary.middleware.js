@@ -15,11 +15,11 @@ export default store => next => action => {
     if(functionFromAlias){
       // If it is an array, pass in the array of params
       if(Array.isArray(functionInputs)){
-        dispatch(functionFromAlias(...functionInputs));
+        store.dispatch(functionFromAlias(...functionInputs));
       }
       // If the inputs are an object:
       else{
-        dispatch(functionFromAlias(functionInputs));
+        store.dispatch(functionFromAlias(functionInputs));
       }
     }
   }

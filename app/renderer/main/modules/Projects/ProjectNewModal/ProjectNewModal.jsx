@@ -14,7 +14,6 @@ import classes from './ProjectNewModal.css';
 
 // Sub Components
 import Button from 'app/renderer/main/components/Buttons/Button/Button';
-import ProjectLinkRemote from 'app/renderer/main/components/Project/ProjectLinkRemote/ProjectLinkRemote.jsx'
 import FileSelectInput from 'app/renderer/main/modules/FileSelectInput/FileSelectInput.jsx'
 import Textarea from 'app/renderer/main/components/Input/Textarea/Textarea';
 import Input from 'app/renderer/main/components/Input/Input/Input';
