@@ -102,7 +102,8 @@ export const Component = React.createClass({
           <div className="layout-row flex">
             <div className="layout-column">
               <ContentSidebar>
-                {changes && changes.data
+                <div className="flex">
+                  {changes && changes.data
                   ? <CommitChanges
                       changes={changes}
                       project={project.data}
@@ -114,7 +115,7 @@ export const Component = React.createClass({
                       dispatch={dispatch}
                     />
                   : ''}
-
+                </div>
                 <div style={CommitBoxStyles}>
                   <CommitBox
                     entityModel={entityModel}

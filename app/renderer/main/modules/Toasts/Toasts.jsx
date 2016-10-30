@@ -2,7 +2,6 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import { getFunction } from 'app/shared/modules/FunctionLibrary/FunctionLibrary.js'
 
 import * as ToastsActions from './Toasts.actions.js';
 
@@ -50,14 +49,7 @@ const Toast = React.createClass({
     }
 
     const processAction = (action) => {
-      if(action && action.functionAlias) {
-        const functionFromAlias = getFunction(action.functionAlias);
-        if(functionFromAlias){
-          dispatch(functionFromAlias(action.functionInputs));
-        }
-      }
-      // Else, if it is a normal object, dispatch it
-      else if(action){
+      if(action){
         dispatch(action)
       }
     }

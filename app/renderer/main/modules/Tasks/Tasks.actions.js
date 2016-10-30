@@ -283,8 +283,11 @@ export function toggleComplete({taskId, model}) {
       actions: [{
         text: 'Undo',
         action: {
-          functionAlias: 'TasksActions.toggleCompleteUndo',
-          functionInputs: { taskId, model, value }
+          aliased: true,
+          payload: {
+            functionAlias: 'TasksActions.toggleCompleteUndo',
+            functionInputs: { taskId, model, value }
+          }
         }
       }]
     }));
@@ -324,8 +327,11 @@ export function deleteGroupConfirm({boardId, groupId}) {
   return showConfirm({
     message: 'Deleting a group is permanent. All tasks which belong to this group will be deleted (even archived tasks).',
     modalConfirm: {
-      functionAlias: 'TasksActions.deleteGroup',
-      functionInputs: { boardId, groupId }
+      aliased: true,
+      payload: {
+        functionAlias: 'TasksActions.deleteGroup',
+        functionInputs: { boardId, groupId }
+      }
     }
   })
 }

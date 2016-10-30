@@ -45,8 +45,11 @@ export const Component = React.createClass({
   confirmDelete(){
     this.props.modalActions.showConfirm({
       modalConfirm: {
-        functionAlias: 'CommentsActions.deleteComment',
-        functionInputs: {comment: this.props.comment.data}
+        aliased: true,
+        payload: {
+          functionAlias: 'CommentsActions.deleteComment',
+          functionInputs: {comment: this.props.comment.data}
+        }
       }
     })
   },

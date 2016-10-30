@@ -74,8 +74,11 @@ export function mentionTasksModal({projectId, mentions}) {
         projectId: projectId
       },
       modalConfirm: {
-        functionAlias: 'ChangesActions.mentionTasks',
-        functionInputs: { projectId }
+        aliased: 'true',
+        payload: {
+          functionAlias: 'ChangesActions.mentionTasks',
+          functionInputs: { projectId }
+        }
       }
     }))
   }
@@ -117,10 +120,13 @@ export function commit({projectId, summary, description}) {
           actions: [{
             text: 'Undo',
             action: {
-              functionAlias: 'ChangesActions.deleteCommit',
-              functionInputs: {
-                commitId: response.data._id,
-                projectId
+              aliased: 'true',
+              payload: {
+                functionAlias: 'ChangesActions.deleteCommit',
+                functionInputs: {
+                  commitId: response.data._id,
+                  projectId
+                }
               }
             }
           }]

@@ -6,8 +6,6 @@ import i from 'icepick';
 // Container Actions
 import * as ModalActions from './Modal.actions.js';
 
-import { getFunction } from 'app/shared/modules/FunctionLibrary/FunctionLibrary.js'
-
 // Component Core
 import React from 'react';
 import Modal from 'react-modal';
@@ -93,23 +91,8 @@ export const Component = React.createClass({
 });
 
 function callbackFunction(callbackObject, dispatch, extendObject){
-  // If we have a function alias:
-  if(callbackObject && callbackObject.functionAlias) {
-    const functionFromAlias = getFunction(callbackObject.functionAlias);
-    if(functionFromAlias){
-
-      // If it is an array, pass in the array of params
-      if(Array.isArray(callbackObject.functionInputs)){
-        dispatch(functionFromAlias(...callbackObject.functionInputs));
-      }
-      // If the inputs are an object, extend them
-      else{
-        dispatch(functionFromAlias(i.merge(callbackObject.functionInputs, extendObject)));
-      }
-    }
-  }
-  // Else, if it is a normal object, dispatch it
-  else if(callbackObject){
+  // If it is a normal object, extend and dispatch it
+  if(callbackObject){
     dispatch(i.merge(callbackObject, extendObject))
   }
 }

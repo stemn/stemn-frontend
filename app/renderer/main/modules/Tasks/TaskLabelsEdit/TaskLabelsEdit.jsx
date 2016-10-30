@@ -26,8 +26,11 @@ export const Component = React.createClass({
       ModalActions.showConfirm({
         message: 'If you delete a label it will be removed from all existing tasks.',
         modalConfirm: {
-          functionAlias: 'FormActions.remove',
-          functionInputs: [model, index]
+          aliased: true,
+          payload: {
+            functionAlias: 'FormActions.remove',
+            functionInputs: [model, index]
+          }
         }
       })
     )
