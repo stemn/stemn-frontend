@@ -3,10 +3,19 @@ import { push } from 'react-router-redux'
 import * as ModalActions from '../../renderer/main/modules/Modal/Modal.actions.js';
 
 export function setActiveProject({projectId}) {
-  return {
-    type: 'PROJECTS/SET_ACTIVE_PROJECT',
-    payload: {
-      projectId
+  return (dispatch, getState) => {
+    const activeProject = getState().projects.activeProject;
+    if(activeProject != projectId){
+      dispatch({
+        type: 'PROJECTS/SET_ACTIVE_PROJECT',
+        payload: {
+          projectId
+        }
+      });
+      if(activeProject){
+        dispatch(websocketLeaveProject({projectId: activeProject}));
+      }
+      dispatch(websocketJoinProject({projectId}));
     }
   }
 }
@@ -60,8 +69,11 @@ export function confirmDeleteProject({projectId}) {
   return ModalActions.showConfirm({
     message: 'Deleting a project is permanent. You will not be able to undo this.',
     modalConfirm: {
-      functionAlias: 'ProjectsActions.deleteProject',
-      functionInputs: { projectId }
+      aliased: true,
+      payload: {
+        functionAlias: 'ProjectsActions.deleteProject',
+        functionInputs: { projectId }
+      }
     }
   })
 }
@@ -128,6 +140,7 @@ export function removeTeamMember({projectId, userId}) {
   };
 }
 
+
 export function linkRemote({projectId, provider, path, id}) {
   return {
     type: 'PROJECTS/LINK_REMOTE',
@@ -142,6 +155,31 @@ export function linkRemote({projectId, provider, path, id}) {
     },
     meta: {
       cacheKey: projectId
+    }
+  };
+}
+
+export function websocketJoinProject({projectId}) {
+  return {
+    type: 'PROJECTS/WEBSOCKET_JOIN_PROJECT',
+    websocket: true,
+    payload: {
+      type : 'ROOM/JOIN',
+      payload : {
+        projectId : projectId
+      }
+    }
+  };
+}
+export function websocketLeaveProject({projectId}) {
+  return {
+    type: 'PROJECTS/WEBSOCKET_LEAVE_PROJECT',
+    websocket: true,
+    payload: {
+      type : 'ROOM/LEAVE',
+      payload : {
+        projectId : projectId
+      }
     }
   };
 }

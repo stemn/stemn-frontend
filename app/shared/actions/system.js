@@ -10,6 +10,7 @@ import { has } from 'lodash';
 export function getProviderPath() {
   return {
     type: 'SYSTEM/GET_PROVIDER_PATH',
+    aliased: true,
     payload: {
       functionAlias : 'ProviderPathActions.getPath',
       functionInputs: ['dropbox', 'drive']

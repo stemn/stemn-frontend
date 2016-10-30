@@ -1,9 +1,11 @@
 import primus from '../../../primus-websockets.js';
 import ws from 'ws';
 
+export let socket = undefined;
+
 export const initialise = (config) => {
 
-  const socket = primus.connect(`${config.host}:${config.port}`);
+  socket = primus.connect(`${config.host}:${config.port}`);
 
   const socketError = (err) => socket.write({
     type : 'log',
