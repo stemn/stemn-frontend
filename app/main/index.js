@@ -39,7 +39,7 @@ async function start() {
     return {};
   });
   const store = configureStore(global.state);
-  
+
   global.test = {
     gooba: {
       gooba: 'yep'
@@ -104,6 +104,7 @@ function onElectronAction(event, action){
    });
 
     websocket.on('data', (action) => {
+     console.log('websocket received data\n', JSON.stringify(action))
      const reduxAction = mapWebsocketToRedux(action);
      if(reduxAction){
        store.dispatch(reduxAction)
