@@ -15,10 +15,11 @@ export function setActiveProject({projectId}) {
       if(activeProject){
         dispatch(websocketLeaveProject({projectId: activeProject}));
       }
-      dispatch(websocketJoinProject({projectId}));
     }
+    dispatch(websocketJoinProject({projectId}));
   }
 }
+
 export function getProject({projectId}) {
   return {
     type: 'PROJECTS/GET_PROJECT',
@@ -45,7 +46,6 @@ export function createProject(project) {
     });
   }
 }
-
 
 export function getUserProjects({userId}) {
   return {
