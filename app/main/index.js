@@ -66,7 +66,7 @@ async function start() {
   // init
   createMainWindow();
   store.dispatch(getProviderPath());
-  
+
   // Init Websockets
   const websocket = wsInitialise({
    host : `http://${process.env.WEBSOCKET_SERVER}`,
@@ -124,3 +124,4 @@ function onElectronAction(event, action){
   else if(action.type == 'WINDOW_MENUBAR_CLOSE'){
     console.log('Close Menubar');
   }
+}
