@@ -169,7 +169,7 @@ export const Component = React.createClass({
            className="primary"
            onClick={()=>this.confirmLinkRemote()}
            loading={project.linkPending}
-           rejected={project.linkRejected}
+           error={project.linkRejected}
            >Update File Store</ProgressButton>
          </div>
        </div>

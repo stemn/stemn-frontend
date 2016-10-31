@@ -108,8 +108,8 @@
 }
 
 .error.progressButton button {
-  border-color: #FB797E;
-  background-color: #FB797E;
+  border-color: warn;
+  background-color: warn;
 }
 
 .loading.progressButton svg.progressCircle path{
