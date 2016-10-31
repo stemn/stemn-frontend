@@ -85,20 +85,6 @@ async function start() {
   setTimeout(() => {
     autoUpdater(store);
   }, 5000);
-
-  // connect to websocket server
-  const websocket = wsInitialise({
-    host : `http://${process.env.WEBSOCKET_SERVER}`,
-    port : 8000
-  });
-
-  websocket.on('data', (action) => {
-    const reduxAction = mapWebsocketToRedux(action);
-    if (reduxAction) {
-      store.dispatch(reduxAction)
-    }
-  });
-
 }
 
 function onActivate(){
