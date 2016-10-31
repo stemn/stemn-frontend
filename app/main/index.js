@@ -33,17 +33,17 @@ if(!squirrelStartup){
 
 async function start() {
   const appIcon = tray(); // set-up menu bar
-  
+
+  // Clear sessionState
+  await jsonStorage.set('sessionState', {});
+
   // Fetch perma-state
   global.state = await jsonStorage.get('state').
   catch(error => {
     jsonStorage.clear();
     return {};
   });
-  
-  // Set sessionState
-  await jsonStorage.set('sessionState', global.state);
-  
+
   // Configure store
   const store = configureStore(global.state);
 
@@ -85,6 +85,20 @@ async function start() {
   setTimeout(() => {
     autoUpdater(store);
   }, 5000);
+
+  // connect to websocket server
+  const websocket = wsInitialise({
+    host : `http://${process.env.WEBSOCKET_SERVER}`,
+    port : 8000
+  });
+
+  websocket.on('data', (action) => {
+    const reduxAction = mapWebsocketToRedux(action);
+    if (reduxAction) {
+      store.dispatch(reduxAction)
+    }
+  });
+
 }
 
 function onActivate(){
@@ -110,4 +124,3 @@ function onElectronAction(event, action){
   else if(action.type == 'WINDOW_MENUBAR_CLOSE'){
     console.log('Close Menubar');
   }
-}
