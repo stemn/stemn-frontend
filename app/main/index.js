@@ -66,6 +66,20 @@ async function start() {
   // init
   createMainWindow();
   store.dispatch(getProviderPath());
+  
+  // Init Websockets
+  const websocket = wsInitialise({
+   host : `http://${process.env.WEBSOCKET_SERVER}`,
+   port : 8000
+  });
+
+  websocket.on('data', (action) => {
+    console.log('websocket received data\n', JSON.stringify(action))
+    const reduxAction = mapWebsocketToRedux(action);
+    if(reduxAction){
+      store.dispatch(reduxAction)
+    };
+  })
 
   // auto-updating
   setTimeout(() => {
@@ -97,25 +111,3 @@ function onElectronAction(event, action){
     console.log('Close Menubar');
   }
 }
-
-
-   const websocket = wsInitialise({
-     host : `http://${process.env.WEBSOCKET_SERVER}`,
-     port : 8000
-   });
-
-    websocket.on('data', (action) => {
-     console.log('websocket received data\n', JSON.stringify(action))
-     const reduxAction = mapWebsocketToRedux(action);
-     if(reduxAction){
-       store.dispatch(reduxAction)
-     };
-    });
-
-
-   // websocket.write({
-   //   type : 'CHANGES/FETCH_CHANGES',
-   //   payload : {
-   //     projectId : '57c77e2896f1d3a2604fc92c'
-   //   }
-   // });

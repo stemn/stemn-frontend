@@ -16,9 +16,9 @@ import websocket from '../../main/modules/websocket/websocket.middleware.js';
 export default function configureStore(initialState) {
   const middleware = [
     thunk,
+    functionLibrary,
     throttle,
     httpPackage,
-    functionLibrary,
     websocket,
     transformHttp,
     promise(),

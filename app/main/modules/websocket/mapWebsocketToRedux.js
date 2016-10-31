@@ -21,6 +21,6 @@ export default (action) => {
     case 'PROJECT/FETCH_PROJECT':
       return ProjectActions.getProject({ projectId : action.payload.projectId });
     default:
-      return {};
+      return undefined;
   }
 }

@@ -14,16 +14,28 @@ export default store => next => action => {
 
     if(functionFromAlias){
       // If it is an array, pass in the array of params
-      if(Array.isArray(functionInputs)){
-        store.dispatch(functionFromAlias(...functionInputs));
-      }
-      // If the inputs are an object:
-      else{
-        store.dispatch(functionFromAlias(functionInputs));
-      }
+      const aliasedResult = Array.isArray(functionInputs) ? functionFromAlias(...functionInputs) : functionFromAlias(functionInputs);
+      dispatchAction(store, action, aliasedResult)
     }
   }
   else{
     return next(action);
   }
 };
+
+
+function dispatchAction(store, action, aliasedResult){
+  if(action.type){
+    // If the initial action has a type, we use the aliasedResult as the payload.
+    const updatedAction = Object.assign({}, action, {
+      payload: aliasedResult, 
+      aliased: false // Set alias to false so we don't loop
+    });
+    store.dispatch(updatedAction);
+  }
+  else if(aliasedResult.type){
+    // If the aliased result has a type, we dispatch it
+    store.dispatch(aliasedResult);
+  }
+  // Else, the function does not need to be dispatched - it is not a redux style action
+}

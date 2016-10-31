@@ -18,7 +18,7 @@ This will add an error modal/toast when possible
 **********************************************/
 
 const middleware = store => next => action => {
-  if(action.type.endsWith('_REJECTED')){
+  if(action.type && action.type.endsWith('_REJECTED')){
     if(has(action, 'payload.errno')){
       processLocalError(store, action);
     }
