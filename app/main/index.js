@@ -33,17 +33,17 @@ if(!squirrelStartup){
 
 async function start() {
   const appIcon = tray(); // set-up menu bar
-  
+
   // Clear sessionState
   await jsonStorage.set('sessionState', {});
-  
+
   // Getch perma-state
   global.state = await jsonStorage.get('state').
   catch(error => {
     jsonStorage.clear();
     return {};
   });
-  
+
   // Configure store
   const store = configureStore(global.state);
 
@@ -71,6 +71,20 @@ async function start() {
   setTimeout(() => {
     autoUpdater(store);
   }, 5000);
+
+  // connect to websocket server
+  const websocket = wsInitialise({
+    host : `http://${process.env.WEBSOCKET_SERVER}`,
+    port : 8000
+  });
+
+  websocket.on('data', (action) => {
+    const reduxAction = mapWebsocketToRedux(action);
+    if (reduxAction) {
+      store.dispatch(reduxAction)
+    }
+  });
+
 }
 
 function onActivate(){
@@ -97,21 +111,6 @@ function onElectronAction(event, action){
     console.log('Close Menubar');
   }
 }
-
-
-   const websocket = wsInitialise({
-     host : `http://${process.env.WEBSOCKET_SERVER}`,
-     port : 8000
-   });
-
-    websocket.on('data', (action) => {
-     console.log('websocket received data\n', JSON.stringify(action))
-     const reduxAction = mapWebsocketToRedux(action);
-     if(reduxAction){
-       store.dispatch(reduxAction)
-     };
-    });
-
 
    // websocket.write({
    //   type : 'CHANGES/FETCH_CHANGES',
