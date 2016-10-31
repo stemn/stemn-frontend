@@ -52,7 +52,7 @@ const Component = React.createClass({
         authType: 'google',
         isAuthed: (accounts) => accounts.google.refreshToken
       },{
-        value: 'none',
+        value: undefined,
         label: 'None',
         authType: '',
         isAuthed: (accounts) => true

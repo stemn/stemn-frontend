@@ -18,8 +18,14 @@ Action should be of the form:
 import { socket } from './websocket.js';
 
 export default store => next => action => {
-  if(action.websocket && socket) {
-    socket.write(action.payload)
+  const token = store.getState().auth.authToken;
+  if(action.websocket && socket && action.payload) {
+    socket.write({
+      type: action.payload.type,
+      payload: Object.assign({}, action.payload.payload, {
+        token: token
+      })
+    })
     return next(action);
   }
   else{

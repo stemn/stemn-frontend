@@ -75,7 +75,7 @@ export const Component = React.createClass({
         </div>
         <div className="rel-box" style={{height: '300px', overflowY: 'auto'}}>
           {files && !files.loading ? displayResults() :  ''}
-          <LoadingOverlay show={!files || files.loading} />
+          <LoadingOverlay show={!files || files.loading} linear={true} hideBg={true}/>
         </div>
       </div>
     );

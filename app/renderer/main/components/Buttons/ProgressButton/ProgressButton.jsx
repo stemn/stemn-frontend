@@ -44,13 +44,13 @@ export default React.createClass({
     }
   },
   partialLoadTimeout: null,
-  successTimeout: null,
-  successIconTimeout: null,
+  completeTimeout: null,
+  completeIconTimeout: null,
   resetTimeout: null,
   clearTimeouts() {
     clearTimeout(this.partialLoadTimeout);
-    clearTimeout(this.successTimeout);
-    clearTimeout(this.successIconTimeout);
+    clearTimeout(this.completeTimeout);
+    clearTimeout(this.completeIconTimeout);
     clearTimeout(this.resetTimeout);
   },
   componentWillUnmount(){
@@ -62,7 +62,7 @@ export default React.createClass({
       status: 'loading',
       disabled: true ,
       drawLoading: 0,
-      drawSuccess: 0
+      drawComplete: 0
     });
     this.partialLoadTimeout = setTimeout(()=>{this.setState({drawLoading: 0.7})}, 100);
   },
@@ -70,10 +70,10 @@ export default React.createClass({
     this.clearTimeouts();
     this.setState({ drawLoading: 1 });
 
-    this.successTimeout = setTimeout(() => {
-      this.setState({ status: 'success'});
-      this.successIconTimeout = setTimeout(() => {
-        this.setState({drawSuccess: 1})
+    this.completeTimeout = setTimeout(() => {
+      this.setState(this.props.error ? { status: 'error'} : { status: 'success'});
+      this.completeIconTimeout = setTimeout(() => {
+        this.setState({drawComplete: 1})
       }, 100)
       this.resetTimeout = setTimeout(() => {
         this.setState({ status: '', disabled: false, drawLoading: 0 });
@@ -82,7 +82,7 @@ export default React.createClass({
   },
   render() {
     const { children, onClick, loading, className } = this.props;
-    const { status, disabled, drawLoading, drawSuccess } = this.state;
+    const { status, disabled, drawLoading, drawComplete } = this.state;
 
 
     const Progress = (
@@ -114,8 +114,9 @@ export default React.createClass({
         )}>
         <button onClick={() => {if(!disabled){onClick()}}}><span>{children}</span></button>
         <AnimateSvg draw={drawLoading}>{Progress}</AnimateSvg>
-        <AnimateSvg draw={drawSuccess}>{Checkmark}</AnimateSvg>
-        <AnimateSvg>{Cross}</AnimateSvg>
+        { status == 'success'
+        ? <AnimateSvg draw={drawComplete}>{Checkmark}</AnimateSvg>
+        : <AnimateSvg draw={drawComplete}>{Cross}</AnimateSvg>}
       </div>
     );
   }

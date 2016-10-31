@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
@@ -10,7 +10,15 @@ import classes from './FileSelectInput.css'
 import MdFolder from 'react-icons/md/folder';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 
-const Component = React.createClass({
+
+const propTypesObject = {
+  projectId: PropTypes.string.isRequired,
+  provider: PropTypes.string.isRequired,
+  model: PropTypes.string.isRequired,
+  value: PropTypes.object.isRequired // { path, id}
+};
+
+const FileSelectInput = React.createClass({
   showModal(){
     this.props.ModalActions.showModal({
       modalType: 'FILE_SELECT',
@@ -52,4 +60,6 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+FileSelectInput.propTypes = propTypesObject;
+
+export default connect(mapStateToProps, mapDispatchToProps)(FileSelectInput);

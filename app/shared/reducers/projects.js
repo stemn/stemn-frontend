@@ -45,15 +45,23 @@ function reducer(state, action) {
           ...team.slice(index+ 1)
         ]
       });
+      
     case 'PROJECTS/LINK_REMOTE_PENDING' :
-      return i.assocIn(state, ['data', action.meta.cacheKey, 'linkPending'], true);
+      return i.chain(state)
+      .assocIn(['data', action.meta.cacheKey, 'linkPending'], true)
+      .assocIn(['data', action.meta.cacheKey, 'linkRejected'], false)
+      .value();
     case 'PROJECTS/LINK_REMOTE_FULFILLED' :
       return i.chain(state)
       .assocIn(['data', action.meta.cacheKey, 'linkPending'], false)
+      .assocIn(['data', action.meta.cacheKey, 'linkRejected'], false)
       .assocIn(['data', action.meta.cacheKey, 'data', 'remote'], action.payload.data)
       .value();
     case 'PROJECTS/LINK_REMOTE_REJECTED' :
-      return i.assocIn(state, ['data', action.meta.cacheKey, 'linkPending'], false);
+      return i.chain(state)
+      .assocIn(['data', action.meta.cacheKey, 'linkPending'], false)
+      .assocIn(['data', action.meta.cacheKey, 'linkRejected'], true)
+      .value();
 
 
     case 'PROJECTS/GET_USER_PROJECTS_PENDING':

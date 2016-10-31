@@ -37,7 +37,7 @@ async function start() {
   // Clear sessionState
   await jsonStorage.set('sessionState', {});
 
-  // Getch perma-state
+  // Fetch perma-state
   global.state = await jsonStorage.get('state').
   catch(error => {
     jsonStorage.clear();
