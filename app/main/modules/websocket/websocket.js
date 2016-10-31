@@ -19,7 +19,7 @@ export const initialise = (config) => {
       type : 'error',
       message : err.message
     }
-  });
+}));
 
   socket.on('data', (data) => console.log('WEBSOCKET RECEIVED DATA:\n', JSON.stringify(data)));
 
