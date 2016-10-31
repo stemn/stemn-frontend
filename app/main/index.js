@@ -34,15 +34,15 @@ if(!squirrelStartup){
 async function start() {
   const appIcon = tray(); // set-up menu bar
   
-  // Clear sessionState
-  await jsonStorage.set('sessionState', {});
-  
-  // Getch perma-state
+  // Fetch perma-state
   global.state = await jsonStorage.get('state').
   catch(error => {
     jsonStorage.clear();
     return {};
   });
+  
+  // Set sessionState
+  await jsonStorage.set('sessionState', global.state);
   
   // Configure store
   const store = configureStore(global.state);

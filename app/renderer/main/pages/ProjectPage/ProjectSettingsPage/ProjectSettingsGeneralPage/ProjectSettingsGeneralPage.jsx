@@ -69,7 +69,7 @@ export const Component = React.createClass({
   linkRemote(){
     const { project } = this.props;
     // This is not wrapped in dispach!
-    if(project.formModels.fileStore.remote.provider == 'none'){
+    if(!project.formModels.fileStore.remote.provider){
       return {
         aliased: true,
         payload: {
@@ -149,7 +149,7 @@ export const Component = React.createClass({
        <div className={classes.panel}>
          <h3>File Store Settings</h3>
          <p>Connect your Dropbox or Drive to sync all files and changes. Only one Google Drive or one Dropbox can be connected to a project.</p>
-         { has(project, 'formModels.fileStore.remote.provider')
+         { has(project, 'formModels.fileStore.remote')
          ? <ProjectLinkRemote model={`${entityModel}.formModels.fileStore.remote.provider`} value={project.formModels.fileStore.remote.provider}/>
          : null }
          <br />
@@ -169,6 +169,7 @@ export const Component = React.createClass({
            className="primary"
            onClick={()=>this.confirmLinkRemote()}
            loading={project.linkPending}
+           rejected={project.linkRejected}
            >Update File Store</ProgressButton>
          </div>
        </div>
