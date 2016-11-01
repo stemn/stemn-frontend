@@ -67,20 +67,6 @@ async function start() {
   createMainWindow();
   store.dispatch(getProviderPath());
   
-  // Init Websockets
-  const websocket = wsInitialise({
-   host : `http://${process.env.WEBSOCKET_SERVER}`,
-   port : 8000
-  });
-
-  websocket.on('data', (action) => {
-    console.log('websocket received data\n', JSON.stringify(action))
-    const reduxAction = mapWebsocketToRedux(action);
-    if(reduxAction){
-      store.dispatch(reduxAction)
-    };
-  })
-
   // auto-updating
   setTimeout(() => {
     autoUpdater(store);
@@ -124,3 +110,4 @@ function onElectronAction(event, action){
   else if(action.type == 'WINDOW_MENUBAR_CLOSE'){
     console.log('Close Menubar');
   }
+}
