@@ -10,6 +10,7 @@ import getRoutes from './routes';
 import pify from 'pify';
 import electronJsonStorage from 'electron-json-storage';
 const jsonStorage = pify(electronJsonStorage);
+import { initHttpHeaders } from 'app/shared/actions/auth.js';
 
 async function start() {
   const initialState = await jsonStorage.get('sessionState');
@@ -18,6 +19,8 @@ async function start() {
   ipcRenderer.on('redux-action', (event, payload) => {
     store.dispatch(payload);
   });
+
+  store.dispatch(initHttpHeaders())
 
   render(
     <Provider store={store}>

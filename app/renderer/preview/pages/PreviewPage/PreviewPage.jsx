@@ -79,7 +79,9 @@ export const InnerComponent = React.createClass({
   render() {
     const { fileMeta, syncTimeline } = this.props;
     const { mode, selected1, selected2 } = this.state;
-    const items = mode == 'single' ? [selected1, selected1] : orderBy([selected1, selected2], item => (new Date(item.timestamp)).getTime());
+    const items = mode == 'single' ? [selected1] : orderBy([selected1, selected2], item => (new Date(item.timestamp)).getTime());
+    const file1 = items[0].data;
+    const file2 = items[1] ? items[1].data : undefined;
 
     const revisions = syncTimeline && syncTimeline.data ? syncTimeline.data.filter(item => item.event == 'revision') : [];
 
@@ -88,8 +90,8 @@ export const InnerComponent = React.createClass({
         <div className={classes.header + ' layout-row layout-align-start-center'}>
           <div className="flex">{fileMeta && fileMeta.data ? <FileBreadCrumbs meta={fileMeta.data} clickFn={this.clickCrumb}/> : ''}</div>
           <FileCompareMenu
-            file1={items[1].data}
-            file2={items[0].data}
+            file1={file1}
+            file2={file2}
             revisions={revisions}
             mode={mode}
             changeMode={this.changeMode}
@@ -99,8 +101,8 @@ export const InnerComponent = React.createClass({
           <div className="layout-column flex">
             <FileCompareInner
               project={fileMeta.data.project}
-              file1={items[1].data}
-              file2={items[0].data}
+              file1={file1}
+              file2={file2}
               mode={mode} />
             <Timeline className={classes.timeline}
               items={revisions}

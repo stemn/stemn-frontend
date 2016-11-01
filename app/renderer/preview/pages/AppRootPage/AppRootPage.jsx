@@ -10,10 +10,6 @@ function App({ children }) {
   );
 }
 
-//    <div className="layout-column flex">
-//      <TitleBar />
-//    </div>
-
 App.propTypes = {
   children: PropTypes.element.isRequired,
 };

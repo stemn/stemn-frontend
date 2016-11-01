@@ -14,9 +14,11 @@ const stemnAutoLaunch = new autoLaunch({
 
 export default store => next => action => {
   if    (action.type == 'AUTO_LAUNCH/TOGGLE') {
+    const promise = action.meta.status ? stemnAutoLaunch.enable() : stemnAutoLaunch.disable();
+    console.log(promise);
     store.dispatch({
       ...action,
-      payload: action.meta.status ? stemnAutoLaunch.enable() : stemnAutoLaunch.disable(),
+      payload: promise,
     })
   }
   else if(action.type == 'AUTO_LAUNCH/GET_STATUS'){

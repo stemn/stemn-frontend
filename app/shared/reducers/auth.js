@@ -47,15 +47,6 @@ const mainReducer = (state, action) => {
         authToken: null
       }
 
-    case 'AUTH/INIT_HTTP_HEADER':
-      http.defaults.headers.common['Authorization'] = action.payload.fullToken;
-      return {...state
-    }
-    case 'AUTH/REMOVE_HTTP_HEADER':
-      delete http.defaults.headers.common['Authorization'];
-      return {...state
-    }
-
     case 'AUTH/AUTHENTICATE_PENDING':
       return {...state,
         authLoading: true

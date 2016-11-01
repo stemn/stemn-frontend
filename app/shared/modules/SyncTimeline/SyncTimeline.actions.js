@@ -28,7 +28,7 @@ export function fetchTimeline({projectId, fileId}) {
       method: 'GET',
       url: `/api/v1/sync/timeline/${projectId}`,
       params: {
-        types: ['commits'],
+        types: ['commits', 'revisions'],
         file: fileId
       },
     },

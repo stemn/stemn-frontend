@@ -29,17 +29,14 @@ export function openFile({location, path, projectId, provider}) {
       providerToProject = addSlash(providerToProject)
       projectToFile = addSlash(projectToFile)
       const fullPath = computerToProvider + providerToProject + projectToFile;
-      console.log(fullPath);
       if(location){
         const success = shell.showItemInFolder(fullPath);
-        console.log(success);
         return dispatch({
           type: 'SYSTEM/OPEN_FILE_LOCATION',
           payload: {}
         })
       }else{
         const success = shell.openItem(fullPath);
-        console.log(success);
         dispatch({
           type: 'SYSTEM/OPEN_FILE',
           payload: {}
@@ -50,7 +47,7 @@ export function openFile({location, path, projectId, provider}) {
     const storeState = getState();
     const computerToProvider = storeState.system.providerPath[provider];
     const providerToProject  = has(storeState, [localPathModuleName, projectId, 'data']) ? storeState[localPathModuleName][projectId].data : false;
-
+        
     if(!providerToProject){
       dispatch(LocalPathActions.getPath({projectId})).then(response => {
         return open(computerToProvider, response.value.data, path)

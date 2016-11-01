@@ -7,9 +7,13 @@ const mainHtml = path.join(__dirname, '../renderer/assets/html/main.html');
 let browserWindow = null;
 
 export const showMainWindow = () => {
-  //  browserWindow.maximize();
-  browserWindow.show();
-  browserWindow.focus();
+  if(browserWindow){
+    if (browserWindow.isMinimized()){
+      browserWindow.restore();
+    }
+    browserWindow.show();
+    browserWindow.focus();
+  }
 }
 
 export const createMainWindow =  function createWindow({ uri = '/' } = {}) {
