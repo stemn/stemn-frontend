@@ -27,10 +27,10 @@ export default React.createClass({
     }
   },
   startLoading(){
-    console.log('start-loading');
+//    console.log('start-loading');
   },  
   endLoading(){
-    console.log('end-loading');
+//    console.log('end-loading');
   },
   render() {
     const { size, show, children, style, linear, hideBg } = this.props; // size == 'xs'

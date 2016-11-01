@@ -23,6 +23,12 @@ import Tabs from 'app/renderer/main/components/Tabs/Tabs'
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
+  submit() {
+    this.props.AuthActions.login({
+      email: this.props.auth.login.email,
+      password: this.props.auth.login.password
+    })
+  },
   render() {
     const { AuthActions, auth } = this.props;
 
@@ -35,7 +41,7 @@ export const Component = React.createClass({
         <div className={classes.textSection}>
           <div className={classes.textSectionInner + ' layout-column  layout-align-space-between'}>
             <div className="text-title-3">Sign In</div>
-            <div>
+            <form onSubmit={this.submit}>
               <br />
               <Input 
                 model="auth.login.email" 
@@ -55,11 +61,7 @@ export const Component = React.createClass({
                 <div className="flex-50 layout-row">
                   <Button style={{marginLeft: '5px'}}
                     className="primary flex"
-                    type="submit"
-                    onClick={()=>AuthActions.login({
-                    email: auth.login.email,
-                    password: auth.login.password
-                    })}>
+                    type="submit">
                     Sign In
                   </Button>
                 </div>
@@ -82,14 +84,14 @@ export const Component = React.createClass({
                   Facebook
                 </Button>
               </div>
-            </div>
+            </form>
             <div className="layout-row">
               <div>Dont have an account? <Link to="/register" className="link-primary">Register</Link></div>
             </div>
           </div>
+          <LoadingOverlay show={auth.authLoading}/>
         </div>
       </div>
-      <LoadingOverlay show={auth.authLoading}/>
     </div>
     );
   }

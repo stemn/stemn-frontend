@@ -8,12 +8,13 @@ import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/
 
 export default class extends React.Component{
   render() {
-    const { loading, disabled, title, style, onClick } = this.props
+    const { loading, disabled, title, style, onClick, type } = this.props
     return (
       <button className={classNames(classes.button, this.props.className)}
        onClick={onClick}
        style={style}
        title={title}
+       type={type}
        disabled={disabled}>
         {this.props.children}
         <LoadingOverlay

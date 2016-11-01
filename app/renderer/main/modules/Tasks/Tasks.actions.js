@@ -275,10 +275,8 @@ export function moveGroup({boardId, group, destinationGroup, after, save}) {
   }
 }
 
-export function toggleComplete({taskId, model}) {
-  return (dispatch, getState) => {
-    const value = !get(getState(), model);
-    dispatch(actions.change(model, value));
+export function toggleComplete({taskId, model, value}) {
+  return (dispatch) => {
     dispatch(showToast({
       title: `This task was marked ${value ? 'complete' : 'incomplete'}.`,
       actions: [{
@@ -297,9 +295,7 @@ export function toggleComplete({taskId, model}) {
 export function toggleCompleteUndo({taskId, model, value}) {
   return (dispatch, getState) => {
     dispatch(actions.change(model, !value));
-    setTimeout(()=>{
-      updateTask({task: getState().tasks.data[taskId].data})
-    }, 1)
+    setTimeout(() => updateTask({task: getState().tasks.data[taskId].data}), 1)
   };
 }
 

@@ -9,10 +9,11 @@ export function loadUserData() {
       payload: http({
         url: `/api/v1/me`,
         method: 'GET',
-      }).then((response)=>{
-        dispatch(ProjectsActions.getUserProjects({userId: response.data._id}))
-        return response
-      }),
+      })
+    }).then(response => {
+      dispatch(ProjectsActions.getUserProjects({userId: response.value.data._id}))
+    }).catch(error => {
+      dispatch(logout())
     })
   }
 }

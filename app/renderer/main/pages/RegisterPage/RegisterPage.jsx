@@ -22,6 +22,14 @@ import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
+  submit() {
+    this.props.AuthActions.register({
+      email: this.props.auth.login.email,
+      password: this.props.auth.login.password,
+      firstname: this.props.auth.login.firstname,
+      lastname: this.props.auth.login.lastname
+    })
+  },
   render() {
     const { AuthActions, auth } = this.props
 
@@ -34,7 +42,7 @@ export const Component = React.createClass({
           <div className={classes.textSection}>
             <div className={classes.textSectionInner  + ' layout-column  layout-align-space-between'}>
               <div className="text-title-3">Register</div>
-              <div>
+              <form onSubmit={this.submit}>
                 <br />
                 <div className="layout-row">
                   <Input model="auth.login.firstname" value={auth.login.firstname} className={classes.input} style={{marginRight: '5px'}} type="text" placeholder="First name"/>
@@ -46,13 +54,7 @@ export const Component = React.createClass({
                   <div className="flex-50 layout-row">
                     <Button style={{marginLeft: '5px'}}
                     className="primary flex"
-                    type="submit"
-                    onClick={()=>AuthActions.register({
-                        email: auth.login.email,
-                        password: auth.login.password,
-                        firstname: auth.login.firstname,
-                        lastname: auth.login.lastname
-                      })}>Register</Button>
+                    type="submit">Register</Button>
                     </div>
                  </div>
                  <br />
@@ -69,14 +71,14 @@ export const Component = React.createClass({
                   className="flex facebook"
                   type="button">Facebook</Button>
                 </div>
-              </div>
+              </form>
               <div className="layout-row">
                 <div>Already have an account? <Link to="/login" className="link-primary">Login</Link></div>
               </div>
             </div>
+            <LoadingOverlay show={auth.authLoading}/>
           </div>
         </div>
-        <LoadingOverlay show={auth.authLoading}/>
       </div>
     );
   }
