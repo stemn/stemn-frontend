@@ -9,13 +9,14 @@
     "test-watch"      : "npm test -- --watch",
     "test-e2e"        : "cross-env NODE_ENV=test mocha --compilers js:babel-register --require ./test/setup.js --require co-mocha ./test/e2e.js",
     "lint"            : "eslint app test *.js",
-    "build"           : "better-npm-run build:main better-npm-run build:renderer",
+    "build"           : "better-npm-run build:main && better-npm-run build:renderer",
     "build:main"      : "better-npm-run build:main",
     "build:renderer"  : "better-npm-run build:renderer",
     "app"             : "better-npm-run app",
     "app:prod"        : "better-npm-run app:prod",
     "serve"           : "better-npm-run serve",
-    "serve:prod"      : "better-npm-run serve:prod"
+    "serve:prod"      : "better-npm-run serve:prod",
+    "compile"         : "node ./scripts/build.js"
   },
   "betterScripts": {
     "build:main": {

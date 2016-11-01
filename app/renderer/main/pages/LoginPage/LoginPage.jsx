@@ -23,7 +23,8 @@ import Tabs from 'app/renderer/main/components/Tabs/Tabs'
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
-  submit() {
+  submit(event) {
+    event.preventDefault();
     this.props.AuthActions.login({
       email: this.props.auth.login.email,
       password: this.props.auth.login.password

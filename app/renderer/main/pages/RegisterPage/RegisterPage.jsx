@@ -22,7 +22,8 @@ import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
-  submit() {
+  submit(event) {
+    event.preventDefault();
     this.props.AuthActions.register({
       email: this.props.auth.login.email,
       password: this.props.auth.login.password,
