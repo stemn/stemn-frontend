@@ -12,5 +12,5 @@
   "plugins": [
     "import",
     "react"
-  ]
+  ],
 }

@@ -11,7 +11,7 @@ export default class extends React.Component{
     const { loading, disabled, title, style, onClick, type } = this.props
     return (
       <button className={classNames(classes.button, this.props.className)}
-       onClick={onClick}
+       onClick={() => {if(onClick){onClick()}}}
        style={style}
        title={title}
        type={type}

@@ -5,26 +5,68 @@
   "description": "Painless Engineering Versioning",
   "main": "dist/main/index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test mocha --compilers js:babel-register --recursive --require ./test/setup.js test/**/*.spec.js",
-    "test-watch": "npm test -- --watch",
-    "test-e2e": "cross-env NODE_ENV=test mocha --compilers js:babel-register --require ./test/setup.js --require co-mocha ./test/e2e.js",
-    "lint": "eslint app test *.js",
-    "build-main": "cross-env NODE_ENV=production API_SERVER=54.70.226.125 WEBSOCKET_SERVER=54.70.226.125 node -r babel-register ./node_modules/webpack/bin/webpack --config webpack.config.electron.js   --progress --profile --colors && cp app/package.json dist/",
-    "build-renderer": "cross-env NODE_ENV=production API_SERVER=54.70.226.125 WEBSOCKET_SERVER=54.70.226.125 node -r babel-register ./node_modules/webpack/bin/webpack --config webpack.config.production.js --progress --profile --colors && cp -R app/renderer/assets dist/renderer",
-    "build": "npm run build-main && npm run build-renderer",
-    "start": "cross-env NODE_ENV=production electron ./",
-    "hot-server": "cross-env API_SERVER=localhost:3000 WEBSOCKET_SERVER=localhost node --max-old-space-size=4096 -r babel-register server.js",
-    "start-hot": "cross-env HOT=1 NODE_ENV=development API_SERVER=localhost:3000 WEBSOCKET_SERVER=localhost electron -r babel-register -r babel-polyfill ./app/main/index",
-    "hot-server-production": "cross-env API_SERVER=stemn.com WEBSOCKET_SERVER=stemn.com node --max-old-space-size=4096 -r babel-register server.js",
-    "start-hot-production": "cross-env HOT=1 NODE_ENV=development API_SERVER=stemn.com WEBSOCKET_SERVER=stemn.com electron -r babel-register -r babel-polyfill ./app/main/index",
-    "hot-server-test": "cross-env API_SERVER=54.70.226.125 WEBSOCKET_SERVER=54.70.226.125 node --max-old-space-size=4096 -r babel-register server.js",
-    "start-hot-test": "cross-env HOT=1 NODE_ENV=development API_SERVER=54.70.226.125 WEBSOCKET_SERVER=54.70.226.125 electron -r babel-register -r babel-polyfill ./app/main/index",
-    "production": "concurrently --kill-others \"npm run hot-server-production\" \"npm run start-hot-production\"",
-    "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
-    "webfont:roboto": "webfont-dl \"https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en\" -o app/renderer/assets/css/fonts/roboto.global.css --woff1=data --svg=omit --ttf=omit --eot=omit",
-    "webfont:material-icons": "webfont-dl \"https://fonts.googleapis.com/icon?family=Material+Icons\" -o app/renderer/assets/css/fonts/material-icons.global.css --woff1=data --svg=omit --ttf=omit --eot=omit",
-    "postinstall": "cd app/ && npm install",
-    "compile": "node scripts/build.js"
+    "test"            : "cross-env NODE_ENV=test mocha --compilers js:babel-register --recursive --require ./test/setup.js test/**/*.spec.js",
+    "test-watch"      : "npm test -- --watch",
+    "test-e2e"        : "cross-env NODE_ENV=test mocha --compilers js:babel-register --require ./test/setup.js --require co-mocha ./test/e2e.js",
+    "lint"            : "eslint app test *.js",
+    "build"           : "better-npm-run build:main better-npm-run build:renderer",
+    "build:main"      : "better-npm-run build:main",
+    "build:renderer"  : "better-npm-run build:renderer",
+    "app"             : "better-npm-run app",
+    "app:prod"        : "better-npm-run app:prod",
+    "serve"           : "better-npm-run serve",
+    "serve:prod"      : "better-npm-run serve:prod"
+  },
+  "betterScripts": {
+    "build:main": {
+      "command": "node -r babel-register ./node_modules/webpack/bin/webpack --config webpack.config.electron.js  --progress --profile --colors && cp app/package.json dist/",
+      "env": {
+        "NODE_ENV": "production",
+        "API_SERVER": "54.70.226.125",
+        "WEBSOCKET_SERVER": "54.70.226.125"
+      }
+    },    
+    "build:renderer": {
+      "command": "node -r babel-register ./node_modules/webpack/bin/webpack --config webpack.config.production.js --progress --profile --colors && cp -R app/renderer/assets dist/renderer",
+      "env": {
+        "NODE_ENV": "production",
+        "API_SERVER": "54.70.226.125",
+        "WEBSOCKET_SERVER": "54.70.226.125"
+      }
+    },   
+    "app": {
+      "command": "electron -r babel-register -r babel-polyfill ./app/main/index",
+      "env": {
+        "HOT": "1",
+        "NODE_ENV": "development",
+        "API_SERVER": "localhost:3000",
+        "WEBSOCKET_SERVER": "localhost"
+      }
+    },      
+    "app:prod": {
+      "command": "electron -r babel-register -r babel-polyfill ./app/main/index",
+      "env": {
+        "HOT": "1",
+        "NODE_ENV": "production",
+        "API_SERVER": "54.70.226.125",
+        "WEBSOCKET_SERVER": "54.70.226.125"
+      }
+    },  
+    "serve": {
+      "command": "node --max-old-space-size=4096 -r babel-register server.js",
+      "env": {
+        "API_SERVER": "localhost:3000",
+        "WEBSOCKET_SERVER": "localhost"
+      }
+    },  
+    "serve:prod": {
+      "command": "node --max-old-space-size=4096 -r babel-register server.js",
+      "env": {
+        "NODE_ENV": "production",
+        "API_SERVER": "54.70.226.125",
+        "WEBSOCKET_SERVER": "54.70.226.125"
+      }
+    }
   },
   "bin": {
     "electron": "./node_modules/.bin/electron"
@@ -48,7 +90,7 @@
   },
   "dependencies": {
     "asar": "^0.11.0",
-    "babel-core": "^6.7.6",
+    "babel-core": "^6.11.4",
     "babel-eslint": "^6.0.2",
     "babel-loader": "^6.2.4",
     "babel-plugin-add-module-exports": "^0.1.2",
@@ -60,6 +102,7 @@
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.7.2",
+    "better-npm-run": "0.0.13",
     "chai": "^3.5.0",
     "chromedriver": "^2.21.2",
     "co-mocha": "^1.1.2",

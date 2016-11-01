@@ -18,9 +18,9 @@ import { getFilteredStoreData } from './json-storage.js';
 
 if(!squirrelStartup){
   global.state = {}; // Ease remote-loading of initial state
-
-  require('electron-debug')({enabled: true});
   
+  require('electron-debug')({enabled: true});
+
   // Make this a single instance application
   const shouldQuit = app.makeSingleInstance((commandLine, workingDirectory) => {
     showMainWindow();

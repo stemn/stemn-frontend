@@ -59,7 +59,7 @@ const config = {
     }),     
     new webpack.DefinePlugin({
       __DEV__: false,
-      'process.env': {
+      'GLOBAL_ENV': {
         NODE_ENV: JSON.stringify('production'),
         API_SERVER: JSON.stringify(process.env.API_SERVER),
         WEBSOCKET_SERVER: JSON.stringify(process.env.WEBSOCKET_SERVER),
