@@ -66,25 +66,26 @@ async function start() {
   // init
   createMainWindow();
   store.dispatch(getProviderPath());
-  
+
+
+  // Init Websockets
+  const websocket = wsInitialise({
+   host : `http://${process.env.WEBSOCKET_SERVER}`,
+   port : 8000
+  });
+
+  websocket.on('data', (action) => {
+    console.log('websocket received data\n', JSON.stringify(action))
+    const reduxAction = mapWebsocketToRedux(action);
+    if(reduxAction){
+      store.dispatch(reduxAction)
+    };
+  })
+
   // auto-updating
   setTimeout(() => {
     autoUpdater(store);
   }, 5000);
-
-  // connect to websocket server
-  const websocket = wsInitialise({
-    host : `http://${process.env.WEBSOCKET_SERVER}`,
-    port : 8000
-  });
-
-  websocket.on('data', (action) => {
-    const reduxAction = mapWebsocketToRedux(action);
-    if (reduxAction) {
-      store.dispatch(reduxAction)
-    }
-  });
-
 }
 
 function onActivate(){

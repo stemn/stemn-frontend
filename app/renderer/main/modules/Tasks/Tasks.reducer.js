@@ -49,6 +49,12 @@ const mainReducer = (state, action) => {
         }
       })
 
+    case 'TASKS/GET_GROUP_FULFILLED':
+      return i.updateIn(state, ['tasks', 'boards', action.meta.boardId, 'data', 'groups'], (groups) => {
+        const groupsIndex = groups.findIndex(group => group._id == action.payload.data._id);
+        return i.assoc(groups, groupsIndex, action.payload.data);
+      });
+
     case 'TASKS/GET_TASK_PENDING':
       return i.assocIn(state, ['data', action.meta.cacheKey, 'loading'], true);
     case 'TASKS/GET_TASK_REJECTED':

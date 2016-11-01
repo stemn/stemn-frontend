@@ -15,10 +15,11 @@ export function setActiveProject({projectId}) {
       if(activeProject){
         dispatch(websocketLeaveProject({projectId: activeProject}));
       }
-      dispatch(websocketJoinProject({projectId}));
     }
+    dispatch(websocketJoinProject({projectId}));
   }
 }
+
 export function getProject({projectId}) {
   return {
     type: 'PROJECTS/GET_PROJECT',
@@ -45,7 +46,6 @@ export function createProject(project) {
     });
   }
 }
-
 
 export function getUserProjects({userId}) {
   return {
@@ -181,7 +181,6 @@ export function linkRemote({projectId, provider, path, id, prevProvider}) {
 
 
 export function unlinkRemote({projectId, prevProvider}) {
-  console.log(prevProvider);
   return (dispatch) => {
     dispatch({
       type: 'PROJECTS/UNLINK_REMOTE',
@@ -205,7 +204,7 @@ export function websocketJoinProject({projectId}) {
     payload: {
       type : 'ROOM/JOIN',
       payload : {
-        projectId : projectId
+        room : projectId
       }
     }
   };
@@ -217,7 +216,7 @@ export function websocketLeaveProject({projectId}) {
     payload: {
       type : 'ROOM/LEAVE',
       payload : {
-        projectId : projectId
+        room : projectId
       }
     }
   };

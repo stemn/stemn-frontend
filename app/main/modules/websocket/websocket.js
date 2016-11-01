@@ -20,9 +20,10 @@ export const initialise = (config) => {
   // nonsense
   const oldWrite = socket.write.bind(socket);
   socket.write = (data) => {
-      console.log('WRITING DATA\n', JSON.stringify(data, null, 4));
-      return oldWrite(data);
+    console.log('WRITING DATA\n', JSON.stringify(data, null, 4));
+    return oldWrite(data);
   }
+
   socket.on('data', (data) => console.log('WEBSOCKET RECEIVED DATA:\n', JSON.stringify(data)));
   
   return socket;

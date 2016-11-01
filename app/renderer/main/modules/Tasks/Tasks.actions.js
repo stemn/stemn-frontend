@@ -142,12 +142,13 @@ export function updateTask({task}) {
 export function getGroup({boardId, groupId}) {
   return {
     type: 'TASKS/GET_GROUP',
-    httpPackage: {
+    http: true,
+    payload: {
       method: 'GET',
       url: `api/v1/boards/${boardId}/groups/${groupId}`
     },
     meta: {
-      cacheKey: groupId
+      boardId
     }
   }
 }
