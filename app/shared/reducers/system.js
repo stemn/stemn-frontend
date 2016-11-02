@@ -38,6 +38,8 @@ function reducer(state, action) {
     }
 
     case 'SYSTEM/CHECKING_FOR_UPDATE': {
+      console.log('Checking', action.payload.url);
+
       return {
         ...state,
         ...initialState,
@@ -46,6 +48,8 @@ function reducer(state, action) {
     }
 
     case 'SYSTEM/UPDATE_AVAILABLE': {
+      console.log('Available');
+
       return {
         ...state,
         ...initialState,
@@ -55,6 +59,8 @@ function reducer(state, action) {
 
     case 'SYSTEM/UPDATE_DOWNLOADED': {
       const { releaseNotes, releaseName, releaseDate, updateURL } = action.payload;
+      console.log('Downloaded', {releaseNotes, releaseName, releaseDate, updateURL});
+
       return {
         ...state,
         ...initialState,
@@ -69,6 +75,8 @@ function reducer(state, action) {
     }
 
     case 'SYSTEM/UPDATE_ERROR': {
+      console.log('Error', error);
+
       return {
         ...state,
         ...initialState,
@@ -77,6 +85,8 @@ function reducer(state, action) {
     }
 
     case 'SYSTEM/UPDATE_NOT_AVAILABLE': {
+      console.log('Not Available');
+
       return {
         ...state,
         ...initialState,

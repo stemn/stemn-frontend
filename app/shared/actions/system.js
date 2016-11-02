@@ -66,10 +66,10 @@ export function currentVersion({version}) {
   };
 }
 
-export function checkingForUpdate() {
+export function checkingForUpdate({url}) {
   return {
     type: 'SYSTEM/CHECKING_FOR_UPDATE',
-    payload: {}
+    payload: {url}
   };
 }
 

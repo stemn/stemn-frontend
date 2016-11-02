@@ -1,8 +1,12 @@
 {
   "name": "STEMN",
   "productName": "STEMN",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Painless Engineering Versioning",
+  "repository" : { 
+    "type" : "git",
+    "url"  : "https://github.com/MrBlenny/STEMN-Desktop"
+  },
   "main": "dist/main/index.js",
   "scripts": {
     "test"            : "cross-env NODE_ENV=test mocha --compilers js:babel-register --recursive --require ./test/setup.js test/**/*.spec.js",
@@ -16,7 +20,8 @@
     "app:prod"        : "better-npm-run app:prod",
     "app:test"        : "better-npm-run app:test",
     "server"          : "better-npm-run serve",
-    "compile"         : "node ./scripts/build.js"
+    "compile"         : "node ./scripts/build.js",
+    "release"         : "node ./scripts/build.js"
   },
   "betterScripts": {
     "build:main": {
@@ -24,7 +29,8 @@
       "env": {
         "NODE_ENV": "production",
         "API_SERVER": "54.70.226.125",
-        "WEBSOCKET_SERVER": "54.70.226.125"
+        "WEBSOCKET_SERVER": "54.70.226.125",
+        "UPDATE_SERVER": "localhost:4000"
       }
     },    
     "build:renderer": {
@@ -32,7 +38,8 @@
       "env": {
         "NODE_ENV": "production",
         "API_SERVER": "54.70.226.125",
-        "WEBSOCKET_SERVER": "54.70.226.125"
+        "WEBSOCKET_SERVER": "54.70.226.125",
+        "UPDATE_SERVER": "localhost:4000"
       }
     },   
     "app": {
@@ -41,7 +48,8 @@
         "HOT": "1",
         "NODE_ENV": "development",
         "API_SERVER": "localhost:3000",
-        "WEBSOCKET_SERVER": "localhost"
+        "WEBSOCKET_SERVER": "localhost",
+        "UPDATE_SERVER": "localhost:4000"
       }
     },      
     "app:prod": {
@@ -53,14 +61,16 @@
         "HOT": "1",
         "NODE_ENV": "production",
         "API_SERVER": "54.70.226.125",
-        "WEBSOCKET_SERVER": "54.70.226.125"
+        "WEBSOCKET_SERVER": "54.70.226.125",
+        "UPDATE_SERVER": "localhost:4000"
       }
     },  
     "serve": {
       "command": "node --max-old-space-size=4096 -r babel-register server.js",
       "env": {
         "API_SERVER": "localhost:3000",
-        "WEBSOCKET_SERVER": "localhost"
+        "WEBSOCKET_SERVER": "localhost",
+        "UPDATE_SERVER": "localhost:4000"
       }
     }
   },

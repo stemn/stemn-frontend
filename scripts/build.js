@@ -10,6 +10,8 @@ const buildTypes = ['WINDOWS', 'LINUX', 'MAC'];
 const builder = require("electron-builder")
 const Platform = builder.Platform;
 
+process.env.GH_TOKEN = '5e22e573ebfc575a4227e51cc5c8bf0808b94376'; // Github token to be used to publish the release: https://github.com/electron-userland/electron-builder/wiki/Publishing-Artifacts
+
 const build = (platform) => {
   builder.build({
     targets: Platform[platform].createTarget(),

@@ -34,6 +34,7 @@ export default {
         NODE_ENV  : JSON.stringify('production'),
         API_SERVER: JSON.stringify(process.env.API_SERVER),
         WEBSOCKET_SERVER: JSON.stringify(process.env.WEBSOCKET_SERVER),
+        UPDATE_SERVER: JSON.stringify(process.env.UPDATE_SERVER),
       },
     }),
   ],
