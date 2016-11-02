@@ -21,6 +21,7 @@ import files            from '../../renderer/main/modules/Files/Files.reducer.js
 import syncTimeline     from '../modules/SyncTimeline/SyncTimeline.reducer.js';
 import localPath        from '../modules/LocalPath/LocalPath.reducer.js';
 import autoLaunch       from '../modules/AutoLaunch/AutoLaunch.reducer.js';
+import autoUpdate       from '../modules/AutoUpdate/AutoUpdate.reducer.js';
 
 export default {
   system,
@@ -45,5 +46,6 @@ export default {
   fileCompare,
   mentions,
   localPath,
-  autoLaunch
+  autoLaunch,
+  autoUpdate
 };

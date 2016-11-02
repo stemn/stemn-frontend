@@ -1,8 +1,6 @@
 import * as LocalPathActions from '../modules/LocalPath/LocalPath.actions.js';
 import { name as localPathModuleName} from '../modules/LocalPath/LocalPath.reducer.js';
 
-//import providerPathLookup from '../../main/modules/files/providerPathLookup.js';
-
 import Promise from 'es6-promise';
 import { shell } from 'electron';
 import { has } from 'lodash';
@@ -57,52 +55,4 @@ export function openFile({location, path, projectId, provider}) {
       return open(computerToProvider, providerToProject, path)
     }
   }
-}
-
-export function currentVersion({version}) {
-  return {
-    type: 'SYSTEM/CURRENT_VERSION',
-    payload: {version}
-  };
-}
-
-export function checkingForUpdate({url}) {
-  return {
-    type: 'SYSTEM/CHECKING_FOR_UPDATE',
-    payload: {url}
-  };
-}
-
-export function updateAvailable() {
-  return {
-    type: 'SYSTEM/UPDATE_AVAILABLE',
-    payload: {}
-  };
-}
-
-export function updateDownloaded(releaseNotes, releaseName, releaseDate, updateURL) {
-  return {
-    type: 'SYSTEM/UPDATE_DOWNLOADED',
-    payload: {
-      releaseNotes,
-      releaseName,
-      releaseDate,
-      updateURL,
-    },
-  };
-}
-
-export function updateError(error) {
-  return {
-    type: 'SYSTEM/UPDATE_ERROR',
-    error: true,
-    payload: error.message,
-  };
-}
-
-export function updateNotAvailable() {
-  return {
-    type: 'SYSTEM/UPDATE_NOT_AVAILABLE',
-    payload: {}
-  };
 }

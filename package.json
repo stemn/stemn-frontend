@@ -30,7 +30,7 @@
         "NODE_ENV": "production",
         "API_SERVER": "54.70.226.125",
         "WEBSOCKET_SERVER": "54.70.226.125",
-        "UPDATE_SERVER": "localhost:4000"
+        "UPDATE_SERVER": "54.70.226.125:4000"
       }
     },    
     "build:renderer": {
@@ -39,7 +39,7 @@
         "NODE_ENV": "production",
         "API_SERVER": "54.70.226.125",
         "WEBSOCKET_SERVER": "54.70.226.125",
-        "UPDATE_SERVER": "localhost:4000"
+        "UPDATE_SERVER": "54.70.226.125:4000"
       }
     },   
     "app": {
@@ -49,7 +49,7 @@
         "NODE_ENV": "development",
         "API_SERVER": "localhost:3000",
         "WEBSOCKET_SERVER": "localhost",
-        "UPDATE_SERVER": "localhost:4000"
+        "UPDATE_SERVER": "54.70.226.125:4000"
       }
     },      
     "app:prod": {
@@ -62,7 +62,7 @@
         "NODE_ENV": "production",
         "API_SERVER": "54.70.226.125",
         "WEBSOCKET_SERVER": "54.70.226.125",
-        "UPDATE_SERVER": "localhost:4000"
+        "UPDATE_SERVER": "54.70.226.125:4000"
       }
     },  
     "serve": {

@@ -8,7 +8,7 @@ import { createMenuBar, showMenuWindow } from './createMenuBarWindow';
 import { initialise as wsInitialise, write as wsWrite } from './modules/websocket/websocket.js';
 import configureStore from '../shared/store/configureStore.main.js';
 import tray from './tray';
-import autoUpdater from './tasks/autoUpdater';
+import AutoUpdateInit from '../shared/modules/AutoUpdate/AutoUpdate.init.js';
 import squirrelStartup from 'electron-squirrel-startup';
 import mapWebsocketToRedux from './modules/websocket/mapWebsocketToRedux'
 import { getProviderPath } from '../shared/actions/system';
@@ -93,7 +93,7 @@ async function start() {
 
   // auto-updating
   setTimeout(() => {
-    autoUpdater(store);
+    AutoUpdateInit(store);
   }, 5000);
 }
 

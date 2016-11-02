@@ -7,6 +7,7 @@ import * as SystemActions from 'app/shared/actions/system';
 import * as StateActions from 'app/shared/actions/state';
 import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 import * as AutoLaunchActions from 'app/shared/modules/AutoLaunch/AutoLaunch.actions.js';
+import * as AutoUpdateActions from 'app/shared/modules/AutoUpdate/AutoUpdate.actions.js';
 
 // Component Core
 import React from 'react';
@@ -52,7 +53,7 @@ export const Component = React.createClass({
     })
   },
   render() {
-    const { system, autoLaunch, autoLaunchActions } = this.props;
+    const { system, autoLaunch, autoUpdate, autoLaunchActions, autoUpdateActions } = this.props;
     return (
       <div>
         <div className={classes.panel}>
@@ -89,11 +90,12 @@ export const Component = React.createClass({
         <div className={classes.panel}>
           <h3>Application info</h3>
           <p>Stemn Desktop is currently in alpha. Please report any bugs and they will be fixed ASAP.</p>
-          {system.currentVersion
+          {autoUpdate.currentVersion
           ? <SimpleTable>
               <tr><td>Stream</td><td>alpha</td></tr>
-              <tr><td>Version</td><td>{system.currentVersion}</td></tr>
-              <tr><td>Release Notes</td><td><a className="link-primary" onClick={this.showReleaseModal}>Click here</a></td></tr>
+              <tr><td>Version</td><td>{autoUpdate.currentVersion}</td></tr>
+              <tr><td>Release Notes</td><td><a className="link-primary" onClick={this.showReleaseModal}>View release notes</a></td></tr>
+              <tr><td>Update</td><td><a className="link-primary" onClick={autoUpdateActions.checkForUpdates}>Check for updates</a></td></tr>
             </SimpleTable>
           : null}
         </div>
@@ -116,10 +118,11 @@ export const Component = React.createClass({
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps({users, system, autoLaunch}, {params}) {
+function mapStateToProps({users, system, autoLaunch, autoUpdate}, {params}) {
   return {
     system,
-    autoLaunch
+    autoLaunch,
+    autoUpdate
   };
 }
 
@@ -129,6 +132,7 @@ function mapDispatchToProps(dispatch) {
     stateActions: bindActionCreators(StateActions, dispatch),
     modalActions: bindActionCreators(ModalActions, dispatch),
     autoLaunchActions: bindActionCreators(AutoLaunchActions, dispatch),
+    autoUpdateActions: bindActionCreators(AutoUpdateActions, dispatch),
   }
 }
 
