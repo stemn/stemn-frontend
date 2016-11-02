@@ -12,7 +12,7 @@ export default function create() {
   if (appIcon !== null) return appIcon;
   
   appIcon = new Tray(trayIcon);
-  appIcon.setToolTip('STEMN Sync');
+  appIcon.setToolTip('Stemn Desktop');
   if(!process.platform == 'darwin'){
     const contextMenu = Menu.buildFromTemplate([
       {

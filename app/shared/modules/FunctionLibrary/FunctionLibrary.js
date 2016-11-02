@@ -4,6 +4,7 @@ import * as ChangesActions    from '../../../renderer/main/modules/Changes/Chang
 import * as CommentsActions   from '../../../renderer/main/modules/Comments/Comments.actions.js'
 import * as ProviderPathUtils from '../ProviderPath/ProviderPath.utils.js'
 import * as AutoUpdateUtils   from '../AutoUpdate/AutoUpdate.utils.js'
+import * as ElectronWindowsUtils   from '../ElectronWindows/ElectronWindows.utils.js'
 
 import { actions } from 'react-redux-form';
 
@@ -14,6 +15,7 @@ const library = {
   CommentsActions,
   ProviderPathUtils,
   AutoUpdateUtils,
+  ElectronWindowsUtils,
   FormActions: actions
 }
 

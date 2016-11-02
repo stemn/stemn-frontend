@@ -66,8 +66,8 @@ async function start() {
     store.dispatch(action);
   });
 
-  ipcMain.on('electron-action', onElectronAction);
-  app.on('window-all-closed',   onCloseAllWindows);
+//  ipcMain.on('electron-action', onElectronAction);
+//  app.on('window-all-closed',   onCloseAllWindows);
   app.on('activate',            onActivate);
   appIcon.on('click',           onClickAppIcon);
   appIcon.on('right-click',     ()=>{console.log('right click');});
@@ -109,15 +109,15 @@ function onClickAppIcon(event, trayBounds){
   showMenuWindow();
 }
 
-function onCloseAllWindows(){
-  if (process.platform !== 'darwin') app.quit();
-}
+//function onCloseAllWindows(){
+//  if (process.platform !== 'darwin') app.quit();
+//}
 
-function onElectronAction(event, action){
-  if(action.type == 'WINDOW_MAIN_OPEN'){
-    showMainWindow();
-  }
-  else if(action.type == 'WINDOW_MENUBAR_CLOSE'){
-    console.log('Close Menubar');
-  }
-}
+//function onElectronAction(event, action){
+//  if(action.type == 'WINDOW_MAIN_OPEN'){
+//    showMainWindow();
+//  }
+//  else if(action.type == 'WINDOW_MENUBAR_CLOSE'){
+//    console.log('Close Menubar');
+//  }
+//}

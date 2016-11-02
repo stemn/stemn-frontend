@@ -3,7 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as ElectronWindowActions from 'app/shared/electronActions/window.js';
+//import * as ElectronWindowActions from 'app/shared/electronActions/window.js';
+import * as ElectronWindowsActions from 'app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
 
 // Component Core
 import React from 'react';
@@ -14,19 +15,52 @@ import classNames from 'classnames';
 // Sub Components
 import Toolbar from 'app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
 import cloudProject   from 'app/renderer/assets/images/pure-vectors/cloud-project.svg';
-import Button  from 'app/renderer/main/components/Buttons/Button/Button.jsx'
+import Button  from 'app/renderer/main/components/Buttons/Button/Button.jsx';
+
+import PopoverMenu          from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
+import PopoverMenuList      from 'app/renderer/main/components/PopoverMenu/PopoverMenuList';
+import SimpleIconButton     from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import MdMoreHoriz          from 'react-icons/md/more-horiz';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
+
+// event.sender.send('tray-removed')
+// trayIcon.destroy()
+        
 export const Component = React.createClass({
   render() {
-    const { AuthActions, auth } = this.props
+    const { AuthActions, auth, dispatch } = this.props;
+    
+    const menu = [{
+      label: 'Open main window',
+      onClick: () => dispatch(ElectronWindowsActions.show('main'))
+    },{
+      label: 'Preferences',
+      onClick: () => {}
+    },{
+      label: 'Account Settings',
+      onClick: () => {}
+    },{
+      label: 'Quit Stemn',
+      divider: true,
+      onClick: () => dispatch(ElectronWindowsActions.quit())
+    }]
 
     return (
       <div className="layout-column flex">
-        <Toolbar></Toolbar>
+        <Toolbar>
+         <div className="flex"></div>
+          <PopoverMenu preferPlace="below">
+            <SimpleIconButton title="Options">
+              <MdMoreHoriz size="20px" />
+            </SimpleIconButton>
+            <PopoverMenuList menu={menu} />
+          </PopoverMenu>
+          
+        </Toolbar>
         <div className="flex layout-column layout-align-center-center text-center" style={{padding: '15px'}}>
-          <img src={cloudProject}/>
+          <img src={cloudProject} style={{width: '100px', height: '100px'}}/>
           <div className="text-title-4"
           style={{fontWeight: '500'}}>
             Connect to STEMN
@@ -36,7 +70,7 @@ export const Component = React.createClass({
             Access revision history, file previews<br/>and STEMN collaboration tools.
           </div>
           <Button style={{marginBottom: '40px'}}
-          onClick={ElectronWindowActions.windowMainOpen}
+          onClick={() => dispatch(ElectronWindowsActions.show('main'))}
           className="primary">
             Get started
           </Button>
@@ -53,8 +87,4 @@ function mapStateToProps() {
   return {};
 }
 
-function mapDispatchToProps(dispatch) {
-  return {}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps)(Component);
