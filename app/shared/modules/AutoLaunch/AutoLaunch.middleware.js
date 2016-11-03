@@ -13,10 +13,10 @@ const stemnAutoLaunch = new autoLaunch({
 });
 
 export default store => next => action => {
-  if    (action.type == 'AUTO_LAUNCH/TOGGLE') {
+  if (action.type == 'AUTO_LAUNCH/TOGGLE') {
     store.dispatch({
       ...action,
-      payload: action.meta.status ? stemnAutoLaunch.enable() : stemnAutoLaunch.disable(),
+      payload: action.meta.status ? stemnAutoLaunch.enable() : stemnAutoLaunch.disable()
     })
   }
   else if(action.type == 'AUTO_LAUNCH/GET_STATUS'){

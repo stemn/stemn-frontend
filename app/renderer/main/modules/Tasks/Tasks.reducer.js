@@ -50,7 +50,9 @@ const mainReducer = (state, action) => {
       })
 
     case 'TASKS/GET_GROUP_FULFILLED':
-      return i.updateIn(state, ['tasks', 'boards', action.meta.boardId, 'data', 'groups'], (groups) => {
+      return i.updateIn(state, ['boards', action.meta.boardId, 'data', 'groups'], (groups) => {
+          console.log(action.meta.boardId)
+          console.log(groups)
         const groupsIndex = groups.findIndex(group => group._id == action.payload.data._id);
         return i.assoc(groups, groupsIndex, action.payload.data);
       });
