@@ -30,7 +30,7 @@ export default function (store) {
     store.dispatch(updateDownloaded(releaseNotes, releaseName, releaseDate, updateURL));
   });
   autoUpdater.addListener('error', (error) => {
-    store.dispatch(updateError(error));
+    setTimeout(() => store.dispatch(updateError(error)), 1)
   });
   autoUpdater.addListener('update-not-available', () => {
     store.dispatch(updateNotAvailable());

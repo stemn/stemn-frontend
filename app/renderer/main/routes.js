@@ -7,6 +7,7 @@ import http from 'axios';
 import AppRootPage                 from './pages/AppRootPage/AppRootPage';
 import AppAuthedPage               from './pages/AppAuthedPage/AppAuthedPage';
 import AppUnAuthedPage             from './pages/AppUnAuthedPage/AppUnAuthedPage';
+import AppEitherPage               from './pages/AppEitherPage/AppEitherPage';
 
 import ProjectChangesPage          from './pages/ProjectChangesPage/ProjectChangesPage.jsx';
 import LoginPage                   from './pages/LoginPage/LoginPage.jsx';
@@ -41,8 +42,6 @@ export default (store) => {
     callback();
   };
 
-
-
   return (
     <Route                                           component={AppRootPage}   onEnter={requireAuth}>
       <Route                                         component={AppAuthedPage}>
@@ -59,16 +58,20 @@ export default (store) => {
         <Route   path="/"                            component={HomePage}/>
         <Route   path="/dashboard"                   component={DashboardPage}/>
         <Route   path="/settings"                    component={SettingsPage}>
-          <Route path="/settings/application"        component={SettingsApplicationPage}/>
           <Route path="/settings/account"            component={SettingsAccountPage}/>
         </Route>
       </Route>
       <Route                                         component={AppUnAuthedPage}>
-        <Route>
-          <Route path="/login"                       component={LoginPage} />
-          <Route path="/register"                    component={RegisterPage} />
+        <Route path="/login"                         component={LoginPage} />
+        <Route path="/register"                      component={RegisterPage} />
+      </Route>
+      <Route                                         component={AppEitherPage}>
+        <Route   path="/settings"                    component={SettingsPage}>
+          <Route path="/settings/application"        component={SettingsApplicationPage}/>
         </Route>
       </Route>
     </Route>
   );
 };
+
+//

@@ -10,32 +10,31 @@ import React from 'react';
 
 // Sub Components
 import TitleBar from 'app/renderer/main/components/TitleBar/TitleBar';
-
+import Sidebar  from 'app/renderer/main/modules/Sidebar/Sidebar.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
-  componentWillReceiveProps(nextProps, prevProps) {
-    if(nextProps.auth.authToken && nextProps.auth.user._id){
-      nextProps.dispatch(push('/'))
-    }
-  },
-  componentDidMount() {
-    if(this.props.auth.authToken && this.props.auth.user._id){
-      this.props.dispatch(push('/'))
-    }
+  componentDidMount(){
     // Resize the window
     const window = electron.remote.getCurrentWindow();
-    window.setSize(1000, 600, true);
     window.setMinimumSize(500, 500);
-    window.setResizable(false);
+    window.setResizable(true);
+    window.maximize();
   },
   render() {
-    const { children } = this.props
+    const { children, auth } = this.props;
+    const isAuthed = auth.authToken && auth.user._id;
+
     return (
-      <div className="layout-column flex">
-        <TitleBar theme="dark"/>
-        {children}
+      <div className="layout-row flex">
+        <div className="layout-column">
+          { isAuthed ? <Sidebar params={this.props.params}/> : null }
+        </div>
+        <div className="layout-column flex rel-box">
+          <TitleBar theme="dark"/>
+          {children}
+        </div>
       </div>
     )
   }

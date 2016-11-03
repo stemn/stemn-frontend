@@ -24,10 +24,11 @@ export function create({store, windows}) {
   }
 
   appIcon.on('right-click', (event, trayBounds) => {
+    const { auth } = store.getState();
     const contextMenu = Menu.buildFromTemplate([
       {
         label: 'Open Main Window',
-        click: () => dispatch(ElectronWindowsActions.show('main'))
+        click: () => windows.main.show()
       }, {
         label: 'Open Mini Window',
         click: () => windows.menubar.show()
@@ -38,18 +39,23 @@ export function create({store, windows}) {
         type: 'separator'
       }, {
         label: 'Preferences',
-//        accelerator: 'Ctrl+P',
-        click: () => dispatch(push({
-          pathname: '/settings/application',
-          state: {meta : {scope: ['main']}}
-        }))
+        click: () => {
+          windows.main.show();
+          dispatch(push({
+            pathname: '/settings/application',
+            state: {meta : {scope: ['main']}}
+          }))
+        }
       },{
         label: 'Account Settings',
-        enabled: false,
-        onClick: () => dispatch(push({
-          pathname: '/settings/account',
-          state: {meta : {scope: ['main']}}
-        }))
+        enabled: (auth.authToken && auth.user._id) === true,
+        onClick: () => {
+          windows.main.show();
+          dispatch(push({
+            pathname: '/settings/account',
+            state: {meta : {scope: ['main']}}
+          }))
+        }
       }, {
         type: 'separator'
       }, {

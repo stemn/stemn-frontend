@@ -54,6 +54,23 @@ export const Component = React.createClass({
   },
   render() {
     const { system, autoLaunch, autoUpdate, autoLaunchActions, autoUpdateActions } = this.props;
+
+    const autoUpdateMessage = () => {
+      if(autoUpdate.checkingForUpdate){
+        return
+      }
+      else if(autoUpdate.updateAvailable){
+        return <span>Downloading update...</span>
+      }
+      else{
+        return (
+          <span>
+            <a className="link-primary" onClick={autoUpdateActions.checkForUpdates}>Check for updates</a>
+            { autoUpdate.updateError ? <span style={{marginLeft: '20px'}}>Error: {autoUpdate.updateError}</span> : null }
+          </span>
+        )
+      }
+    }
     return (
       <div>
         <div className={classes.panel}>
@@ -95,7 +112,7 @@ export const Component = React.createClass({
               <tr><td>Stream</td><td>alpha</td></tr>
               <tr><td>Version</td><td>{autoUpdate.currentVersion}</td></tr>
               <tr><td>Release Notes</td><td><a className="link-primary" onClick={this.showReleaseModal}>View release notes</a></td></tr>
-              <tr><td>Update</td><td><a className="link-primary" onClick={autoUpdateActions.checkForUpdates}>Check for updates</a></td></tr>
+              <tr><td>Update</td><td>{autoUpdateMessage()}</td></tr>
             </SimpleTable>
           : null}
         </div>

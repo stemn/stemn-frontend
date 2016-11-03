@@ -39,23 +39,12 @@ const projectContextIdentifier = 'ProjectContextIdentifier';
 const ProjectWithContext = ContextMenuLayer(projectContextIdentifier, (props) => props.item)(SidebarProjectButton);
 
 export const Component = React.createClass({
-
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.auth.user._id && !nextProps.projects.userProjects.loading && !nextProps.projects.userProjects.data){
-      nextProps.projectsActions.getUserProjects({
-        userId: nextProps.auth.user._id,
-      });
-    }
-  },
-
   showProjectNewModal(){
     this.props.modalActions.showModal({modalType: 'PROJECT_NEW',})
   },
-
   render() {
-    const { projectsActions, projects, dispatch } = this.props;
+    const { projectsActions, projects, auth, dispatch } = this.props;
     const sidebarStyle = classNames('layout-column', 'flex' ,'rel-box', styles.sidebar);
-
     const nameRegex = new RegExp(this.props.sidebar.searchString, 'i');
     const filteredProjects = projects.userProjects.data ? projects.userProjects.data.filter(project => nameRegex.test(project.name)) : [];
 
@@ -88,6 +77,7 @@ export const Component = React.createClass({
       }),
     }];
 
+
     return (
       <DragResize side="right" width="300" widthRange={[0, 500]} animateHide={!this.props.sidebar.show} className="layout-column flex">
         <div className={sidebarStyle}>
@@ -102,22 +92,21 @@ export const Component = React.createClass({
                 <a onClick={this.showProjectNewModal}>Create New Project</a>
               </div>
             </PopoverMenu>
-
-            <div className="flex"></div>
+            <div className="flex" />
             <SimpleIconButton title="Toggle sidebar" style={{padding: '0px', color: 'black'}} onClick={()=>{this.props.sidebarActions.toggleSidebar();}}>
               <MdMenu size="25"/>
             </SimpleIconButton>
           </div>
-          <div className={styles.sidebarSearch}>
-            <Input model="sidebar.searchString" value={this.props.sidebar.searchString} className="dr-input text-ellipsis" type="text" placeholder="Search all projects"/>
-            <MdSearch className={styles.sidebarSearchIcon} size="25"/>
+          <div className="layout-column flex">
+            <div className={styles.sidebarSearch}>
+              <Input model="sidebar.searchString" value={this.props.sidebar.searchString} className="dr-input text-ellipsis" type="text" placeholder="Search all projects"/>
+              <MdSearch className={styles.sidebarSearchIcon} size="25"/>
+            </div>
+            <div className="scroll-box flex">
+              {filteredProjects.map((item, idx) => <ProjectWithContext key={idx} item={item} isActive={item._id == this.props.params.stub} to={`/project/${item._id}`}/>)}
+              <ContextMenu identifier={projectContextIdentifier} menu={projectContextMenu}/>
+            </div>
           </div>
-
-          <div className="scroll-box flex">
-            {filteredProjects.map((item, idx) => <ProjectWithContext key={idx} item={item} isActive={item._id == this.props.params.stub} to={`/project/${item._id}`}/>)}
-            <ContextMenu identifier={projectContextIdentifier} menu={projectContextMenu}/>
-          </div>
-
           <div>
             <div className="layout-row layout-align-start-center">
               <PopoverMenu>

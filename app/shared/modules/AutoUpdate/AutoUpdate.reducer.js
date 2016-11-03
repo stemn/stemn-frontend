@@ -29,7 +29,10 @@ function reducer(state, action) {
     }
     case 'AUTO_UPDATE/UPDATE_AVAILABLE': {
       console.log('Available');
-      return i.assoc(state, 'updateAvailable', true)
+      return i.merge(state, {
+        updateAvailable    : true,
+        checkingForUpdate  : false,
+      })
     }
     case 'AUTO_UPDATE/UPDATE_DOWNLOADED': {
       const { releaseNotes, releaseName, releaseDate, updateURL } = action.payload;
@@ -45,12 +48,16 @@ function reducer(state, action) {
       .value();
     }
     case 'AUTO_UPDATE/UPDATE_ERROR': {
-      console.log('Error', action.payload);
-      return i.assoc(state, 'updateError', action.payload)
+      return i.merge(state, {
+        updateError        : action.payload,
+        checkingForUpdate  : false,
+      })
     }
     case 'AUTO_UPDATE/UPDATE_NOT_AVAILABLE': {
-      console.log('Not Available');
-      return i.assoc(state, 'updateNotAvailable', true)
+      return i.merge(state, {
+        updateNotAvailable : true,
+        checkingForUpdate  : false,
+      })
     }
     default:
       return state;
