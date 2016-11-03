@@ -30,10 +30,11 @@ export default {
     ),
     new webpack.DefinePlugin({
       __DEV__: false,
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
+      'GLOBAL_ENV': {
+        NODE_ENV  : JSON.stringify('production'),
         API_SERVER: JSON.stringify(process.env.API_SERVER),
         WEBSOCKET_SERVER: JSON.stringify(process.env.WEBSOCKET_SERVER),
+        UPDATE_SERVER: JSON.stringify(process.env.UPDATE_SERVER),
       },
     }),
   ],

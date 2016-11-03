@@ -28,9 +28,7 @@ export const Component = React.createClass({
     const window = electron.remote.getCurrentWindow();
     window.setMinimumSize(500, 500);
     window.setResizable(true);
-//    window.setSize(1200, 720, true);
-//    window.setFullScreenable(true);
-    window.maximize();
+//    window.maximize();
   },
   render() {
     const { children } = this.props

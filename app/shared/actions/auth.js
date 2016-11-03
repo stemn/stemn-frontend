@@ -9,10 +9,11 @@ export function loadUserData() {
       payload: http({
         url: `/api/v1/me`,
         method: 'GET',
-      }).then((response)=>{
-        dispatch(ProjectsActions.getUserProjects({userId: response.data._id}))
-        return response
-      }),
+      })
+    }).then(response => {
+      dispatch(ProjectsActions.getUserProjects({userId: response.value.data._id}))
+    }).catch(error => {
+      dispatch(logout())
     })
   }
 }
@@ -25,8 +26,8 @@ export function authenticate(provider) {
         provider
       }).then((response)=>{
         dispatch(setAuthToken(response.data.token))
-        dispatch(initHttpHeaders('bearer ' + response.data.token))
-        setTimeout(()=>dispatch(loadUserData()), 1)
+        dispatch(initHttpHeaders())
+        setTimeout(()=>dispatch(loadUserData()), 10)
         return response
       })
     })
@@ -56,8 +57,8 @@ export function login({email, password}) {
         }
       }).then((response)=>{
         dispatch(setAuthToken(response.data.token))
-        dispatch(initHttpHeaders('bearer ' + response.data.token))
-        setTimeout(()=>dispatch(loadUserData()), 1)
+        dispatch(initHttpHeaders())
+        setTimeout(()=>dispatch(loadUserData()), 10)
         return response
       })
     })
@@ -79,8 +80,8 @@ export function register({email, password, firstname, lastname}) {
         }
       }).then((response)=>{
         dispatch(setAuthToken(response.data.token))
-        dispatch(initHttpHeaders('bearer ' + response.data.token))
-        setTimeout(()=>dispatch(loadUserData()), 1)
+        dispatch(initHttpHeaders())
+        setTimeout(()=>dispatch(loadUserData()), 10)
         return response
       })
     })
@@ -89,34 +90,39 @@ export function register({email, password, firstname, lastname}) {
 
 export function setAuthToken(token) {
   return {
-      type:'AUTH/SET_AUTH_TOKEN',
-      payload: token
+    type:'AUTH/SET_AUTH_TOKEN',
+    payload: token
   }
 }
 
 export function removeAuthToken() {
   return {
-      type:'AUTH/REMOVE_AUTH_TOKEN',
+    type:'AUTH/REMOVE_AUTH_TOKEN',
   }
 }
 
-export function initHttpHeaders(fullToken) {
-
-  return {
-    type:'AUTH/INIT_HTTP_HEADER',
-    payload: {fullToken : fullToken}
+export function initHttpHeaders() {
+  return (dispatch, getState) => {
+    const token = getState().auth.authToken;
+    const fullToken = token ? 'bearer '+ token : '';
+    http.defaults.headers.common['Authorization'] = fullToken;
+    dispatch({
+      type:'AUTH/INIT_HTTP_HEADER',
+      payload: {fullToken}
+    })
   }
 }
 
 export function removeHttpHeaders() {
+  delete http.defaults.headers.common['Authorization'];
   return {
-      type:'AUTH/REMOVE_HTTP_HEADER',
+    type:'AUTH/REMOVE_HTTP_HEADER',
   }
 }
 
 export function clearUserData() {
   return {
-      type:'AUTH/CLEAR_USER_DATA',
+    type:'AUTH/CLEAR_USER_DATA',
   }
 }
 

@@ -78,10 +78,11 @@ export const Component = React.createClass({
   updateTask(){
     setTimeout(()=>this.props.TasksActions.updateTask({task: this.props.task.data}), 1);
   },
-  toggleComplete(model, value){
+  toggleComplete({model, value}){
     this.props.TasksActions.toggleComplete({
       taskId: this.props.task.data._id,
-      model
+      model,
+      value
     })
     this.updateTask();
   },
@@ -162,18 +163,18 @@ export const Component = React.createClass({
             </div>
             <UserAvatars users={task.data.users} limit={2}/>
           </div>
-            <div className={classes.cardFooter + ' layout-row layout-align-start-center'}>
-              <div className="flex layout-row layout-align-start-center">
-                { task.data.labels && task.data.labels.length > 0 && board && board.data && board.data.labels ?
-                <TaskLabelDots labels={task.data.labels} labelInfo={board.data.labels} />
-                  : null
-                }
-              </div>
-              <div style={{padding: '0 5px'}}><DueDate due={task.data.due}/></div>
-              <SimpleIconButton onClick={this.showModal} title="Show Task">
-                <MdOpenInNew size="20px"/>
-              </SimpleIconButton>
+          <div className={classes.cardFooter + ' layout-row layout-align-start-center'} onClick={this.showModal}>
+            <div className="flex layout-row layout-align-start-center">
+              { task.data.labels && task.data.labels.length > 0 && board && board.data && board.data.labels ?
+              <TaskLabelDots labels={task.data.labels} labelInfo={board.data.labels} />
+                : null
+              }
             </div>
+            <div style={{padding: '0 5px'}}><DueDate due={task.data.due}/></div>
+            <SimpleIconButton title="Show Task">
+              <MdOpenInNew size="20px"/>
+            </SimpleIconButton>
+          </div>
         </div>
       );
     }

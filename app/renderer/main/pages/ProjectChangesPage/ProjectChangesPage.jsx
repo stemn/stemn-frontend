@@ -102,7 +102,7 @@ export const Component = React.createClass({
           <div className="layout-row flex">
             <div className="layout-column">
               <ContentSidebar>
-                <div className="flex">
+                <div className="layout-column flex">
                   {changes && changes.data
                   ? <CommitChanges
                       changes={changes}

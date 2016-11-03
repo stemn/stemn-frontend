@@ -31,8 +31,8 @@ export const Component = React.createClass({
       <div className="layout-column flex">
         <Header
           style={{
-              background: 'white',
-              borderBottom: '1px solid rgba(0, 0, 0, 0.1)'
+            background: 'white',
+            borderBottom: '1px solid rgba(0, 0, 0, 0.1)'
           }}>
           Settings
         </Header>
