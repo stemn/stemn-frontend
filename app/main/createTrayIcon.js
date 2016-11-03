@@ -12,16 +12,18 @@ let appIcon = null;
 
 export function create({store, windows}) {
   if (appIcon !== null) return appIcon;
-  
+
   const { dispatch } = store;
-  
+
   appIcon = new Tray(trayIcon);
   appIcon.setToolTip('Stemn Desktop');
-  
+
   if(process.platform == 'win32'){
 
 //    appIcon.setContextMenu(contextMenu);
   }
+
+  let lastClickTime = Date.now();
 
   appIcon.on('right-click', (event, trayBounds) => {
     const { auth } = store.getState();
@@ -67,7 +69,13 @@ export function create({store, windows}) {
     appIcon.popUpContextMenu(contextMenu)
   });
   appIcon.on('click', (event, trayBounds) => {
-    windows.menubar.show({reposition: true})
+    const clickTimeout = 200;
+    if (process.platform === 'linux' && lastClickTime + clickTimeout > Date.now()) {
+        windows.main.show(); // double click action
+    } else {
+        windows.menubar.show({reposition: true})
+    }
+    lastClickTime = Date.now();
   });
   appIcon.on('double-click', (event, trayBounds) => {
     windows.main.show()
