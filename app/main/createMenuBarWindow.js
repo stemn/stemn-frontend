@@ -42,12 +42,12 @@ export const create = () => {
 
   browserWindow.loadURL(`file://${menuBarHtml}`);
 
-  browserWindow.on('closed', () => {
-    browserWindow = null;
-  });
+//  browserWindow.on('closed', () => {
+//    browserWindow = null;
+//  });
 
   browserWindow.on('blur', () => {
-//    browserWindow.hide();
+    browserWindow.hide();
   });
 
   return {

@@ -19,6 +19,11 @@ export function create({store, windows}) {
   appIcon.setToolTip('Stemn Desktop');
   
   if(process.platform == 'win32'){
+
+//    appIcon.setContextMenu(contextMenu);
+  }
+
+  appIcon.on('right-click', (event, trayBounds) => {
     const contextMenu = Menu.buildFromTemplate([
       {
         label: 'Open Main Window',
@@ -53,11 +58,13 @@ export function create({store, windows}) {
         click: () => dispatch(ElectronWindowsActions.quit())
       }
     ])
-    appIcon.setContextMenu(contextMenu);
-  }
-  
+    appIcon.popUpContextMenu(contextMenu)
+  });
   appIcon.on('click', (event, trayBounds) => {
     windows.menubar.show({reposition: true})
+  });
+  appIcon.on('double-click', (event, trayBounds) => {
+    windows.main.show()
   });
 
   return appIcon;
