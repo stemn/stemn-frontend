@@ -57,10 +57,13 @@ export const Component = React.createClass({
 
     const autoUpdateMessage = () => {
       if(autoUpdate.checkingForUpdate){
-        return
+        return <span>Checking for update...</span>
       }
       else if(autoUpdate.updateAvailable){
         return <span>Downloading update...</span>
+      }      
+      else if(autoUpdate.updateNotAvailable){
+        return <span>You are up-to-date.<a style={{marginLeft: '20px'}} className="link-primary" onClick={autoUpdateActions.checkForUpdates}>Check again</a></span>
       }
       else{
         return (

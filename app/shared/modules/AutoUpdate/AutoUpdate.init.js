@@ -37,7 +37,7 @@ export default function (store) {
   });
 
   const platform = os.platform() == 'win32' ? 'win32' : os.platform() + '_' + os.arch();
-  const feedUrl = `http://${process.env.UPDATE_SERVER}/update/${platform}/${version}`;
+  const feedUrl = `${process.env.UPDATE_SERVER}/update/${platform}/${version}`;
   autoUpdater.setFeedURL(feedUrl);
 //  store.dispatch(checkForUpdates({url: feedUrl}));
 }

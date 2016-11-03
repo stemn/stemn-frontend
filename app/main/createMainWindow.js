@@ -1,9 +1,9 @@
 import { app, BrowserWindow, Menu, shell } from 'electron';
 import path from 'path';
 import process from 'process';
+import log from 'electron-log';
 
 const mainHtml = path.join(__dirname, '../renderer/assets/html/main.html');
-
 
 export const create = function createWindow({ uri = '/' } = {}) {
   let browserWindow = null;
@@ -33,12 +33,10 @@ export const create = function createWindow({ uri = '/' } = {}) {
     }
 
     browserWindow.loadURL(`file://${mainHtml}#${uri}`);
-
     browserWindow.on('closed', () => {
       browserWindow = null;
     });
 
-    browserWindow.webContents.on('did-finish-load', show);
     browserWindow.webContents.on('will-navigate', handleRedirect);
     browserWindow.webContents.on('new-window', handleRedirect);
 
@@ -58,6 +56,7 @@ export const create = function createWindow({ uri = '/' } = {}) {
     browserWindow.setMenu(null);
   }
   function show () {
+    console.log('show window');
     if(!browserWindow){ init() };
     if (browserWindow.isMinimized()){
       browserWindow.restore();

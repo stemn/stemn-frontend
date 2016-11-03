@@ -13,6 +13,9 @@ import squirrelStartup from 'electron-squirrel-startup';
 import mapWebsocketToRedux from './modules/websocket/mapWebsocketToRedux'
 import { getProviderPath } from '../shared/actions/system';
 import { getFilteredStoreData } from './json-storage.js';
+import log from 'electron-log';
+
+import http from 'axios'
 
 export const windows = {
   main: undefined,
@@ -20,8 +23,21 @@ export const windows = {
   trayIcon: undefined
 }
 
+/************************************************
+Get the application start-type.
+
+Hidden mode can be activated using a flag such as "--hidden" in the args
+"C:\Users\david\AppData\Local\STEMN\update.exe" --processStart "STEMN.exe" --process-start-args "--hidden"
+in the application shortcut
+************************************************/
+const modeFlags = {
+  hidden: process.argv && process.argv[1] && process.argv[1] == '--hidden'
+}
+log.info('Application started');
+log.info('modeFlags', modeFlags);
 
 if(!squirrelStartup){
+  
   global.state = {}; // Ease remote-loading of initial state
   
   require('electron-debug')({enabled: true});
@@ -33,7 +49,6 @@ if(!squirrelStartup){
   if (shouldQuit) {
     app.quit()
   }
-  
 
   app.on('ready', () => {
     start().catch((err) => {
@@ -44,7 +59,6 @@ if(!squirrelStartup){
 }
 
 /////////////////////////////////////////////////////////////////
-
 
 async function start() {
 
@@ -75,6 +89,11 @@ async function start() {
   windows.menubar  = createMenubarWindow();
   windows.trayIcon = createTrayIcon({store, windows}); 
   
+  // Show the main window if it is not started in hidden mode
+//  if(!modeFlags.hidden){
+//    windows.main.show();
+//  }
+  
   // Dispatch redux initial events
   store.dispatch(getProviderPath());
   
@@ -84,7 +103,7 @@ async function start() {
    port : 8000
   });
   websocket.on('data', (action) => {
-    console.log('websocket received data\n', JSON.stringify(action))
+    log.info('websocket received data\n', JSON.stringify(action))
     const reduxAction = mapWebsocketToRedux(action);
     if(reduxAction){
       store.dispatch(reduxAction)
@@ -98,7 +117,7 @@ async function start() {
 }
 
 function onActivate(){
-  console.log('Activate');
+  log.info('Activate window');
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   windows.main = createMainWindow();

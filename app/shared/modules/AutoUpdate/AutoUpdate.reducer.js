@@ -18,6 +18,7 @@ function reducer(state, action) {
       return i.assoc(state, 'currentVersion', action.payload.version)
     }
     case 'AUTO_UPDATE/CHECK_FOR_UPDATES': {
+      console.log(action.payload);
       return i.merge(state, {
         checkingForUpdate   : true,
         updateAvailable     : false,
