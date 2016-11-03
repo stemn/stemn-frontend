@@ -90,9 +90,9 @@ async function start() {
   windows.trayIcon = createTrayIcon({store, windows}); 
   
   // Show the main window if it is not started in hidden mode
-//  if(!modeFlags.hidden){
-//    windows.main.show();
-//  }
+  if(!modeFlags.hidden){
+    windows.main.show();
+  }
   
   // Dispatch redux initial events
   store.dispatch(getProviderPath());
