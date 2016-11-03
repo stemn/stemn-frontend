@@ -1,5 +1,5 @@
 import path from 'path';
-import { Tray, Menu } from 'electron';
+import { Tray, Menu, shell } from 'electron';
 import process from 'process';
 
 // Actions
@@ -25,9 +25,10 @@ export function create({store, windows}) {
         click: () => dispatch(ElectronWindowsActions.show('main'))
       }, {
         label: 'Open Mini Window',
-        click: () => {
-          windows.menubar.show()
-        }
+        click: () => windows.menubar.show()
+      }, {
+        label: 'Open Website',
+        click: () => shell.openExternal('https://stemn.com')
       }, {
         type: 'separator'
       }, {

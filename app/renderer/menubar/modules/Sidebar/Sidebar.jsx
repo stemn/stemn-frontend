@@ -51,7 +51,7 @@ export const Component = React.createClass({
               type="text" 
               placeholder="Search all projects"
             />
-            <MdSearch className={classes.sidebarSearchIcon} size="25"/>
+            <MdSearch className={classes.sidebarSearchIcon} size="20"/>
           </div>
           <div className="flex scroll-box">
             {filteredProjects.map((item)=>

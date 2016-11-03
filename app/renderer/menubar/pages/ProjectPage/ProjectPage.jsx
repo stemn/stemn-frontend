@@ -18,7 +18,6 @@ import CommitChanges      from 'app/renderer/main/modules/Changes/CommitChanges/
 import CommitBox          from 'app/renderer/main/modules/Changes/CommitBox/CommitBox.jsx'
 import Toolbar            from 'app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
 import MdOpenInNew from 'react-icons/md/open-in-new';
-import * as ElectronWindowActions from 'app/shared/electronActions/window.js';
 import { Link }           from 'react-router';
 import cloudLocked          from 'app/renderer/assets/images/pure-vectors/cloud-locked.svg';
 
@@ -133,7 +132,6 @@ export const Component = React.createClass({
       <div className="layout-column flex">
         <Toolbar menu={true}>
           <div className="flex">{project && project.data && project.data.name ? stringConcat.end(project.data.name, 28) : ''}</div>
-          <MdOpenInNew onClick={()=>ElectronWindowActions.windowMainOpen()} size="22"/>
         </Toolbar>
         {getInnerContent()}
         <LoadingOverlay show={project && project.loading} />

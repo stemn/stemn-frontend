@@ -12,7 +12,6 @@ export default class extends React.Component{
       <div className="flex layout-column">
         <Toolbar menu={true}>
           <div className="flex"></div>
-          <MdOpenInNew onClick={()=>ElectronWindowActions.windowMainOpen()} size="22"/>
         </Toolbar>
         <div className="flex layout-column layout-align-center-center">
           <img src={book} style={{width: '100px', height: '100px'}} />

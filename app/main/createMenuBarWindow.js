@@ -47,7 +47,7 @@ export const create = () => {
   });
 
   browserWindow.on('blur', () => {
-    browserWindow.hide();
+//    browserWindow.hide();
   });
 
   return {
