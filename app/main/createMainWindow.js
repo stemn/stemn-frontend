@@ -4,22 +4,13 @@ import process from 'process';
 
 const mainHtml = path.join(__dirname, '../renderer/assets/html/main.html');
 
-let browserWindow = null;
 
-export const showMainWindow = () => {
-  if(browserWindow){
-    if (browserWindow.isMinimized()){
-      browserWindow.restore();
-    }
-    browserWindow.show();
-    browserWindow.focus();
-  }
-}
-
-export const createMainWindow =  function createWindow({ uri = '/' } = {}) {
+export const create = function createWindow({ uri = '/' } = {}) {
+  let browserWindow = null;
+  
   if (browserWindow !== null) {
     if (!browserWindow.webContents.isLoading()) {
-      showMainWindow();
+      show();
     }
     return browserWindow;
   }
@@ -46,10 +37,7 @@ export const createMainWindow =  function createWindow({ uri = '/' } = {}) {
     browserWindow = null;
   });
 
-  browserWindow.webContents.on('did-finish-load', () => {
-    showMainWindow();
-    console.log('load complete');
-  });
+  browserWindow.webContents.on('did-finish-load', show);
   browserWindow.webContents.on('will-navigate', handleRedirect);
   browserWindow.webContents.on('new-window', handleRedirect);
 
@@ -69,5 +57,20 @@ export const createMainWindow =  function createWindow({ uri = '/' } = {}) {
   browserWindow.setMenu(null);
 
 
-  return browserWindow;
+  return {
+    browserWindow: browserWindow,
+    show: show
+  };
+  
+  function show () {
+    if(browserWindow){
+      if (browserWindow.isMinimized()){
+        browserWindow.restore();
+      }
+      browserWindow.show();
+      browserWindow.focus();
+    }
+  }
 }
+
+

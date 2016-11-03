@@ -4,7 +4,6 @@ import path from 'path';
 const mainHtml = path.join(__dirname, '../renderer/assets/html/preview.html');
 
 export const create = function createWindow({ uri = '/' } = {}) {
-  console.log(__dirname, mainHtml);
   let browserWindow = new BrowserWindow({
     show: false,
     width: 1200,
@@ -37,8 +36,16 @@ export const create = function createWindow({ uri = '/' } = {}) {
 //    browserWindow.focus();
 //  });
 
-  browserWindow.show();
-  browserWindow.focus();
-
+  show();
   browserWindow.setMenu(null);
+  
+  return {
+    browserWindow: browserWindow,
+    show: show
+  }
+  
+  function show(){
+    browserWindow.show();
+    browserWindow.focus();
+  }
 }

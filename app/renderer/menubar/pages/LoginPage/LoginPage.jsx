@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 // Container Actions
 //import * as ElectronWindowActions from 'app/shared/electronActions/window.js';
 import * as ElectronWindowsActions from 'app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
-
+import { push } from 'react-router-redux';
 // Component Core
 import React from 'react';
 
@@ -31,16 +31,22 @@ import MdMoreHoriz          from 'react-icons/md/more-horiz';
 export const Component = React.createClass({
   render() {
     const { AuthActions, auth, dispatch } = this.props;
-    
+    console.log(auth);
     const menu = [{
       label: 'Open main window',
       onClick: () => dispatch(ElectronWindowsActions.show('main'))
     },{
       label: 'Preferences',
-      onClick: () => {}
+      onClick: () => dispatch(push({
+        pathname: '/settings/application',
+        state: {meta : {scope: ['main']}}
+      }))
     },{
       label: 'Account Settings',
-      onClick: () => {}
+      onClick: () => dispatch(push({
+        pathname: '/settings/account',
+        state: {meta : {scope: ['main']}}
+      }))
     },{
       label: 'Quit Stemn',
       divider: true,

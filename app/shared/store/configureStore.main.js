@@ -1,17 +1,16 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import promise from 'redux-promise-middleware';
+import thunk              from 'redux-thunk';
+import promise            from 'redux-promise-middleware';
 import getRootReducerMain from '../reducers/rootReducer.main.js';
 
-import forwardToRenderer from './middleware/forwardToRenderer';
-import httpPackage from './middleware/httpPackage';
-import transformHttp from './middleware/transformHttp';
-import throttle from './middleware/throttle';
-import errorModalToast from './middleware/errorModalToast';
-import electronWindows from '../modules/ElectronWindows/ElectronWindows.middleware.js';
-import autoLaunch from '../modules/AutoLaunch/AutoLaunch.middleware.js';
-import functionLibrary from '../modules/FunctionLibrary/FunctionLibrary.middleware.js';
-import websocket from '../../main/modules/websocket/websocket.middleware.js';
+import forwardToRenderer  from './middleware/forwardToRenderer';
+import httpPackage        from './middleware/httpPackage';
+import transformHttp      from './middleware/transformHttp';
+import throttle           from './middleware/throttle';
+import errorModalToast    from './middleware/errorModalToast';
+import autoLaunch         from '../modules/AutoLaunch/AutoLaunch.middleware.js';
+import functionLibrary    from '../modules/FunctionLibrary/FunctionLibrary.middleware.js';
+import websocket          from '../../main/modules/websocket/websocket.middleware.js';
 
 export default function configureStore(initialState) {
   const middleware = [
@@ -22,7 +21,6 @@ export default function configureStore(initialState) {
     websocket,
     transformHttp,
     promise(),
-    electronWindows,
     autoLaunch,
     errorModalToast,
     forwardToRenderer,
