@@ -34,7 +34,7 @@ const modeFlags = {
   hidden: process.argv && process.argv[1] && process.argv[1] == '--hidden'
 }
 log.info('Application started');
-log.info('modeFlags', modeFlags);
+log.info('Startup mode flags:', modeFlags);
 
 if(!squirrelStartup){
 
@@ -52,6 +52,7 @@ if(!squirrelStartup){
 
   app.on('ready', () => {
     start().catch((err) => {
+      log.error('Startup error:', err);
       dialog.showErrorBox('Something went wrong:', err.message);
     });
   });
@@ -68,6 +69,7 @@ async function start() {
   // Fetch the permanant portion of the state
   global.state = await jsonStorage.get('state').
   catch(error => {
+    log.error('Invalid state store:', error);
     jsonStorage.clear();
     return {};
   });
@@ -117,7 +119,6 @@ async function start() {
 }
 
 function onActivate(){
-  log.info('Activate window');
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   windows.main = createMainWindow();

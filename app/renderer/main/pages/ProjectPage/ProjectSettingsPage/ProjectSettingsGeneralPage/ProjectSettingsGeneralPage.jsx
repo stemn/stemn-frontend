@@ -71,6 +71,7 @@ export const Component = React.createClass({
     // This is not wrapped in dispach!
     if(!project.formModels.fileStore.remote.provider){
       return {
+        type: 'ALIASED',
         aliased: true,
         payload: {
           functionAlias: 'ProjectsActions.unlinkRemote',
@@ -83,6 +84,7 @@ export const Component = React.createClass({
     }
     else{
       return {
+        type: 'ALIASED',
         aliased: true,
         payload: {
           functionAlias: 'ProjectsActions.linkRemote',

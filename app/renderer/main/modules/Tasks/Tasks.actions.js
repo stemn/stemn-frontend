@@ -282,6 +282,7 @@ export function toggleComplete({taskId, model, value}) {
       actions: [{
         text: 'Undo',
         action: {
+          type: 'ALIASED',
           aliased: true,
           payload: {
             functionAlias: 'TasksActions.toggleCompleteUndo',
