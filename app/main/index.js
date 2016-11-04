@@ -37,9 +37,9 @@ log.info('Application started');
 log.info('modeFlags', modeFlags);
 
 if(!squirrelStartup){
-  
+
   global.state = {}; // Ease remote-loading of initial state
-  
+
   require('electron-debug')({enabled: true});
 
   // Make this a single instance application
@@ -87,16 +87,16 @@ async function start() {
   // Create windows and tray icon
   windows.main     = createMainWindow();
   windows.menubar  = createMenubarWindow();
-  windows.trayIcon = createTrayIcon({store, windows}); 
-  
+  windows.trayIcon = createTrayIcon({store, windows});
+
   // Show the main window if it is not started in hidden mode
   if(!modeFlags.hidden){
     windows.main.show();
   }
-  
+
   // Dispatch redux initial events
   store.dispatch(getProviderPath());
-  
+
   // Initialise the Websocket connection
   const websocket = wsInitialise({
    host : `http://${process.env.WEBSOCKET_SERVER}`,
@@ -104,7 +104,7 @@ async function start() {
   });
   websocket.on('data', (action) => {
     log.info('websocket received data\n', JSON.stringify(action))
-    const reduxAction = mapWebsocketToRedux(action);
+    const reduxAction = mapWebsocketToRedux(store, action);
     if(reduxAction){
       store.dispatch(reduxAction)
     };
