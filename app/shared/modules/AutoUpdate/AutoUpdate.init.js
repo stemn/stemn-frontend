@@ -1,43 +1,54 @@
 import os from 'os';
-import { autoUpdater } from 'electron';
-import pkg from '../../../package.json';
+
+import updater from 'electron-simple-updater';
+import { version } from '../../../package.json';
+import log from 'electron-log';
+
 import {
   currentVersion,
   checkForUpdates,
   updateAvailable,
   updateDownloaded,
   updateError,
-  updateNotAvailable,
+  updateNotAvailable
 } from './AutoUpdate.actions.js';
+  
+updater.init({
+  url: 'https://raw.githubusercontent.com/MrBlenny/STEMN-Desktop/master/updates.json',
+  checkUpdateOnStart: false,
+  version: version,
+  logger: {
+    info(text) { log.info(text); },
+    warn(text) { log.warn(text); }
+  }
+});
 
 export default function (store) {
-//  const { version } = pkg;
-  const version = '0.0.1';
+  log.info('Current version:', version);
   store.dispatch(currentVersion({version}));
 
 //  if (process.env.NODE_ENV !== 'production') {
 //    return;
 //  }
 
-//  if (os.platform() !== 'darwin') {
-//    return;
-//  }
-
-  autoUpdater.addListener('update-available', () => {
+  updater.on('update-available', () => {
+    log.info('Update available')
     store.dispatch(updateAvailable());
   });
-  autoUpdater.addListener('update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateURL) => {
+  updater.on('update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateURL) => {
+    log.info('Update downloaded:', event, releaseNotes, releaseName, releaseDate, updateURL)
     store.dispatch(updateDownloaded(releaseNotes, releaseName, releaseDate, updateURL));
+//    updater.quitAndInstall();
   });
-  autoUpdater.addListener('error', (error) => {
+  updater.on('error', (error) => {
+    log.info('Update Error:', error)
     setTimeout(() => store.dispatch(updateError(error)), 1)
   });
-  autoUpdater.addListener('update-not-available', () => {
+  updater.on('update-not-available', () => {
     store.dispatch(updateNotAvailable());
   });
-
-  const platform = os.platform() == 'win32' ? 'win32' : os.platform() + '_' + os.arch();
-  const feedUrl = `${process.env.UPDATE_SERVER}/update/${platform}/${version}`;
-  autoUpdater.setFeedURL(feedUrl);
 //  store.dispatch(checkForUpdates({url: feedUrl}));
+
+
+
 }

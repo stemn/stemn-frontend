@@ -18,7 +18,7 @@ function reducer(state, action) {
       return i.assoc(state, 'currentVersion', action.payload.version)
     }
     case 'AUTO_UPDATE/CHECK_FOR_UPDATES': {
-      console.log(action.payload);
+      console.log('Check for updates');
       return i.merge(state, {
         checkingForUpdate   : true,
         updateAvailable     : false,
@@ -49,12 +49,14 @@ function reducer(state, action) {
       .value();
     }
     case 'AUTO_UPDATE/UPDATE_ERROR': {
+      console.log('error:', action.payload);
       return i.merge(state, {
         updateError        : action.payload,
         checkingForUpdate  : false,
       })
     }
     case 'AUTO_UPDATE/UPDATE_NOT_AVAILABLE': {
+      console.log('Not available');
       return i.merge(state, {
         updateNotAvailable : true,
         checkingForUpdate  : false,

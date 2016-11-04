@@ -1,6 +1,6 @@
-import { autoUpdater } from 'electron';
+import updater from 'electron-simple-updater';
 
 export const checkForUpdates = () => {
-  autoUpdater.checkForUpdates();
-  return autoUpdater.getFeedURL()
+  updater.checkForUpdates();
+  return ''
 }
