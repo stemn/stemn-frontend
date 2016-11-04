@@ -59,6 +59,9 @@ export const Component = React.createClass({
       if(autoUpdate.checkingForUpdate){
         return <span>Checking for update...</span>
       }
+      else if(autoUpdate.updateDownloaded){
+        return <span>Download complete. <a style={{marginLeft: '20px'}} className="link-primary" onClick={autoUpdateActions.installUpdate}>Update and restart</a></span>
+      }   
       else if(autoUpdate.updateAvailable){
         return <span>Downloading update...</span>
       }      

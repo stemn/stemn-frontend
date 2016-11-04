@@ -1,3 +1,5 @@
+import { showConfirm } from '../../../renderer/main/modules/Modal/Modal.actions.js';
+
 export function currentVersion({version}) {
   return {
     type: 'AUTO_UPDATE/CURRENT_VERSION',
@@ -21,16 +23,38 @@ export function updateAvailable() {
   };
 }
 
-export function updateDownloaded(releaseNotes, releaseName, releaseDate, updateURL) {
+export function updateDownloaded({update, version, platform, readme}) {
+  return () => {
+    dispatch({
+      type: 'AUTO_UPDATE/UPDATE_DOWNLOADED',
+      payload: {
+        update,
+        version,
+        platform,
+        readme,
+      },
+    })
+    dispatch(showConfirm({
+      title: 'Install update',
+      message: 'A new update has been downloaded and is ready for installation. Would you like to restart Stemn Desktop now?',
+      modalConfirm: {
+        aliased: true,
+        payload: {
+          functionAlias: 'AutoUpdateUtils.installUpdates',
+        }
+      }
+    }))
+  }
+}
+
+export function installUpdate() {
   return {
-    type: 'AUTO_UPDATE/UPDATE_DOWNLOADED',
+    type: 'AUTO_UPDATE/INSTALL_UPDATE',
+    aliased: true,
     payload: {
-      releaseNotes,
-      releaseName,
-      releaseDate,
-      updateURL,
-    },
-  };
+      functionAlias: 'AutoUpdateUtils.installUpdates',
+    }
+  }
 }
 
 export function updateError(error) {

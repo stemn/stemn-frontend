@@ -4,3 +4,7 @@ export const checkForUpdates = () => {
   updater.checkForUpdates();
   return ''
 }
+export const installUpdates = () => {
+  updater.quitAndInstall();
+  return
+}

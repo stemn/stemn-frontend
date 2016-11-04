@@ -18,7 +18,6 @@ function reducer(state, action) {
       return i.assoc(state, 'currentVersion', action.payload.version)
     }
     case 'AUTO_UPDATE/CHECK_FOR_UPDATES': {
-      console.log('Check for updates');
       return i.merge(state, {
         checkingForUpdate   : true,
         updateAvailable     : false,
@@ -29,22 +28,20 @@ function reducer(state, action) {
       })
     }
     case 'AUTO_UPDATE/UPDATE_AVAILABLE': {
-      console.log('Available');
       return i.merge(state, {
         updateAvailable    : true,
         checkingForUpdate  : false,
       })
     }
     case 'AUTO_UPDATE/UPDATE_DOWNLOADED': {
-      const { releaseNotes, releaseName, releaseDate, updateURL } = action.payload;
-      console.log('Downloaded', {releaseNotes, releaseName, releaseDate, updateURL});
+      const { update, version, platform, readme } = action.payload;
       return i.chain(state)
       .assoc('updateDownloaded', true)
       .assoc('release', {
-        releaseNotes,
-        releaseName,
-        releaseDate,
-        updateURL,
+        update,
+        version,
+        platform,
+        readme,
       })
       .value();
     }
@@ -56,7 +53,6 @@ function reducer(state, action) {
       })
     }
     case 'AUTO_UPDATE/UPDATE_NOT_AVAILABLE': {
-      console.log('Not available');
       return i.merge(state, {
         updateNotAvailable : true,
         checkingForUpdate  : false,

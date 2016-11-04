@@ -32,13 +32,11 @@ export default function (store) {
 //  }
 
   updater.on('update-available', () => {
-    log.info('Update available')
     store.dispatch(updateAvailable());
   });
-  updater.on('update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateURL) => {
-    log.info('Update downloaded:', event, releaseNotes, releaseName, releaseDate, updateURL)
-    store.dispatch(updateDownloaded(releaseNotes, releaseName, releaseDate, updateURL));
-//    updater.quitAndInstall();
+  updater.on('update-downloaded', (event) => {
+    log.info('Update downloaded:', event)
+    store.dispatch(updateDownloaded(event));
   });
   updater.on('error', (error) => {
     log.info('Update Error:', error)
@@ -47,8 +45,6 @@ export default function (store) {
   updater.on('update-not-available', () => {
     store.dispatch(updateNotAvailable());
   });
+  
 //  store.dispatch(checkForUpdates({url: feedUrl}));
-
-
-
 }
