@@ -2,7 +2,12 @@ import * as ChangesActions from '../../../renderer/main/modules/Changes/Changes.
 import * as TasksActions from '../../../renderer/main/modules/Tasks/Tasks.actions.js';
 import * as ProjectActions from '../../../shared/actions/projects.js';
 
-export default (action) => {
+export default (store, action) => {
+
+  // don't process the action if it was created by this user
+  if (action.payload.actioner === store.getState().auth.user._id)
+    return undefined;
+
   switch (action.type) {
     case 'CHANGES/FETCH_CHANGES':
       return ChangesActions.fetchChanges({ projectId : action.payload.projectId });
