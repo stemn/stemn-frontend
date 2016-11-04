@@ -1,6 +1,6 @@
 {
   "name": "STEMN",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Painless Engineering Versioning",
   "main": "main/index.js",
   "author": {
