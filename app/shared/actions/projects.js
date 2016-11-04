@@ -69,6 +69,7 @@ export function confirmDeleteProject({projectId}) {
   return ModalActions.showConfirm({
     message: 'Deleting a project is permanent. You will not be able to undo this.',
     modalConfirm: {
+      type: 'ALIASED',
       aliased: true,
       payload: {
         functionAlias: 'ProjectsActions.deleteProject',

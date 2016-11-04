@@ -74,6 +74,7 @@ export function mentionTasksModal({projectId, mentions}) {
         projectId: projectId
       },
       modalConfirm: {
+        type: 'ALIASED',
         aliased: 'true',
         payload: {
           functionAlias: 'ChangesActions.mentionTasks',

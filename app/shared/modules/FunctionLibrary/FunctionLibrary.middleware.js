@@ -25,7 +25,7 @@ export default store => next => action => {
 
 
 function dispatchAction(store, action, aliasedResult){
-  if(action.type){
+  if(action.type && action.type != 'ALIAS'){
     // If the initial action has a type, we use the aliasedResult as the payload.
     const updatedAction = Object.assign({}, action, {
       payload: aliasedResult, 

@@ -24,7 +24,7 @@ export function updateAvailable() {
 }
 
 export function updateDownloaded({update, version, platform, readme}) {
-  return () => {
+  return (dispatch) => {
     dispatch({
       type: 'AUTO_UPDATE/UPDATE_DOWNLOADED',
       payload: {
@@ -38,6 +38,7 @@ export function updateDownloaded({update, version, platform, readme}) {
       title: 'Install update',
       message: 'A new update has been downloaded and is ready for installation. Would you like to restart Stemn Desktop now?',
       modalConfirm: {
+        type: 'ALIASED',
         aliased: true,
         payload: {
           functionAlias: 'AutoUpdateUtils.installUpdates',

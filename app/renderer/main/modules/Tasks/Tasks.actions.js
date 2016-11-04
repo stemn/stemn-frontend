@@ -324,6 +324,7 @@ export function deleteGroupConfirm({boardId, groupId}) {
   return showConfirm({
     message: 'Deleting a group is permanent. All tasks which belong to this group will be deleted (even archived tasks).',
     modalConfirm: {
+      type: 'ALIASED',
       aliased: true,
       payload: {
         functionAlias: 'TasksActions.deleteGroup',
