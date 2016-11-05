@@ -19,8 +19,7 @@ $ npm run app
 
 ### Release
 * bump the version in the `package.json` AND `app/package.json`
-* `npm run build`       you may need to increase memory using `node --max_old_space_size=8192 ./node_modules/webpack/bin/webpack.js ...`
-* `cd` into the [GitHub](https://github.com/Stemn/Stemn-Desktop) release repo `stemn-desktop-release`
+* Run `npm run build` (you may need to increase memory using `node --max_old_space_size=8192 ./node_modules/webpack/bin/webpack.js ...`)
 * Run the `release.sh` or `release.bat`. This will copy the dist into the release repo and push it up to the CI servers.
 * Monitor CI status at [AppVeyor](https://ci.appveyor.com/project/MrBlenny/stemn-desktop) and [Travis](https://travis-ci.org/Stemn/Stemn-Desktop)
 * A new release will be created [here](https://github.com/Stemn/Stemn-Desktop/releases)

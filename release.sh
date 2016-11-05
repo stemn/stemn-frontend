@@ -15,4 +15,7 @@ echo "---------------------- Pushing releases to repo -----------------------"
 git config --global core.safecrlf false
 git commit -am 'release'
 git push
+# xdg-open https://github.com/Stemn/Stemn-Desktop/releases
+# xdg-open https://travis-ci.org/Stemn/Stemn-Desktop
+# xdg-open https://ci.appveyor.com/project/MrBlenny/stemn-desktop
 echo "------------------- Push, complete. CI is building --------------------"
