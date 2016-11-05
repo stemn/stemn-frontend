@@ -1,6 +1,7 @@
 import './init.js';
 import os from 'os';
-import { app, ipcMain, dialog } from 'electron';
+import { version } from '../package.json'
+import { app, ipcMain, dialog, crashReporter } from 'electron';
 import pify from 'pify';
 const jsonStorage = pify(require('electron-json-storage'))
 import { create as createMainWindow } from './createMainWindow';
@@ -23,6 +24,18 @@ export const windows = {
   trayIcon: undefined
 }
 
+crashReporter.start({
+  companyName: 'Stemn',
+  productName: 'Stemn Desktop',
+  submitURL: 'http://localhost:1127',
+  autoSubmit: true,
+  extra: {
+    app_version: version
+  }
+})
+//setTimeout(()=>{ console.log(thisVarIsUndefined) })
+//console.log(thisVarIsUndefined);
+
 /************************************************
 Get the application start-type.
 
@@ -37,7 +50,6 @@ log.info('Application started');
 log.info('Startup mode flags:', modeFlags);
 
 if(!squirrelStartup){
-
   global.state = {}; // Ease remote-loading of initial state
 
   require('electron-debug')({enabled: true});

@@ -33,17 +33,8 @@ const AuthActions = require('../../shared/actions/auth');
 
 
 export default (store) => {
-
-  const requireAuth = (nextState, replace, callback) => {
-    if (store.getState().auth.authToken) {
-      store.dispatch(AuthActions.initHttpHeaders('bearer '+ store.getState().auth.authToken));
-      setTimeout(()=>store.dispatch(AuthActions.loadUserData()), 1)
-    }
-    callback();
-  };
-
   return (
-    <Route                                           component={AppRootPage}   onEnter={requireAuth}>
+    <Route                                           component={AppRootPage}>
       <Route                                         component={AppAuthedPage}>
         <Route   path="/project/:stub"               component={ProjectPage}>
           <IndexRoute                                component={ProjectChangesPage} />

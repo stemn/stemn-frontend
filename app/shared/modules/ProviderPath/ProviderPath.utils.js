@@ -1,10 +1,10 @@
-import Promise from 'es6-promise';
-const sql  = require('sql.js');
-const path = require('path');
-const fs   = require('fs');
-const os   = require('os');
-const ini  = require('ini');
-import { zipObject } from 'lodash';
+import Promise        from 'es6-promise';
+import sql            from 'sql.js';
+import path           from 'path';
+import fs             from 'fs';
+import os             from 'os';
+import ini            from 'ini';
+import { zipObject }  from 'lodash';
 
 const parseWindowsEnvVariable = (path) => path.replace(/%([^%]+)%/g, (_, variable) => process.env[variable]);
 

@@ -26,8 +26,8 @@ export function authenticate(provider) {
         provider
       }).then((response)=>{
         dispatch(setAuthToken(response.data.token))
-        dispatch(initHttpHeaders())
-        setTimeout(()=>dispatch(loadUserData()), 10)
+        dispatch(initHttpHeaders(response.data.token))
+        setTimeout(()=>dispatch(loadUserData()), 1)
         return response
       })
     })
@@ -57,8 +57,8 @@ export function login({email, password}) {
         }
       }).then((response)=>{
         dispatch(setAuthToken(response.data.token))
-        dispatch(initHttpHeaders())
-        setTimeout(()=>dispatch(loadUserData()), 10)
+        dispatch(initHttpHeaders(response.data.token))
+        setTimeout(()=>dispatch(loadUserData()), 1)
         return response
       })
     })
@@ -80,8 +80,8 @@ export function register({email, password, firstname, lastname}) {
         }
       }).then((response)=>{
         dispatch(setAuthToken(response.data.token))
-        dispatch(initHttpHeaders())
-        setTimeout(()=>dispatch(loadUserData()), 10)
+        dispatch(initHttpHeaders(response.data.token))
+        setTimeout(()=>dispatch(loadUserData()), 1)
         return response
       })
     })
@@ -101,10 +101,11 @@ export function removeAuthToken() {
   }
 }
 
-export function initHttpHeaders() {
+export function initHttpHeaders(token) {
   return (dispatch, getState) => {
-    const token = getState().auth.authToken;
+    token = token || getState().auth.authToken
     const fullToken = token ? 'bearer '+ token : '';
+    console.log(fullToken);
     http.defaults.headers.common['Authorization'] = fullToken;
     dispatch({
       type:'AUTH/INIT_HTTP_HEADER',

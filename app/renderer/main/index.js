@@ -10,7 +10,7 @@ import getRoutes from './routes';
 import pify from 'pify';
 import electronJsonStorage from 'electron-json-storage';
 const jsonStorage = pify(electronJsonStorage);
-import { initHttpHeaders } from 'app/shared/actions/auth.js';
+import { initHttpHeaders, loadUserData } from 'app/shared/actions/auth.js';
 
 async function start() {
   const initialState = await jsonStorage.get('sessionState');
@@ -20,7 +20,11 @@ async function start() {
     store.dispatch(payload);
   });
 
-  store.dispatch(initHttpHeaders())
+  const state = store.getState();
+  if(state.auth.authToken){
+    store.dispatch(initHttpHeaders());
+    setTimeout(store.dispatch(loadUserData()), 1)
+  }
 
   render(
     <Provider store={store}>

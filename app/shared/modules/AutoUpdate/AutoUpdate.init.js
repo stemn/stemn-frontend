@@ -45,6 +45,6 @@ export default function (store) {
   updater.on('update-not-available', () => {
     store.dispatch(updateNotAvailable());
   });
-  
-//  store.dispatch(checkForUpdates({url: feedUrl}));
+    
+  store.dispatch(checkForUpdates());
 }
