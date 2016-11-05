@@ -14,7 +14,7 @@ import {
 } from './AutoUpdate.actions.js';
   
 updater.init({
-  url: 'https://raw.githubusercontent.com/Stemn/Stemn-Desktop/master/updates.json',
+  url: 'https://raw.githubusercontent.com/Stemn/Stemn-Updates/master/updates.json',
   checkUpdateOnStart: false,
   version: version,
   logger: {
