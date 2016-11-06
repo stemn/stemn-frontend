@@ -2,6 +2,9 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+// Container Actions
+import * as SystemActions from 'app/shared/actions/system';
+
 // Component Core
 import React from 'react';
 import { Link } from 'react-router';
@@ -32,7 +35,7 @@ class Component extends React.Component{
     }
   }
   render() {
-    const { project, system } = this.props;
+    const { project, system, systemActions } = this.props;
     const baseLink = `project/${project && project.data ? project.data._id : ''}`;
     const downloadLinks = {
       drive   : 'https://tools.google.com/dlpage/drive/index.html',
@@ -42,14 +45,14 @@ class Component extends React.Component{
       const provider   = project.data.remote.provider;
       const capitalize = { textTransform: 'capitalize' };
       const underline  = { textDecoration: 'underline' };
-      if(!system.providerPath[provider]){
+      if(provider && !system.providerPath[provider]){
         return (
           <Banner type="warn">
             Could not find <span style={capitalize}>{provider}</span> on your computer.
             The <span style={capitalize}>{provider}</span> desktop client must be installed for this project to Sync to your computer.
             &nbsp;&nbsp;&nbsp;<a style={underline} href={downloadLinks[provider]}>Download {provider}</a>
             &nbsp;or&nbsp;
-            <a style={underline} href={downloadLinks[provider]}>Check again</a>
+            <a style={underline} onClick={systemActions.getProviderPath}>Check again</a>
           </Banner>
         );
       }
@@ -91,7 +94,9 @@ function mapStateToProps({system}) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {}
+  return {
+    systemActions: bindActionCreators(SystemActions, dispatch)
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);
