@@ -53,7 +53,7 @@ export const Component = React.createClass({
     })
   },
   render() {
-    const { system, autoLaunch, autoUpdate, autoLaunchActions, autoUpdateActions } = this.props;
+    const { system, autoLaunch, autoUpdate, autoLaunchActions, autoUpdateActions, systemActions } = this.props;
 
     const autoUpdateMessage = () => {
       if(autoUpdate.checkingForUpdate){
@@ -81,12 +81,14 @@ export const Component = React.createClass({
       <div>
         <div className={classes.panel}>
           <h3>Cloud Providers</h3>
-          <p>Set the root folder for Dropbox and Drive.</p>
+          <p>Stemn Desktop relies on Dropbox and Drive (cloud providers) to sync your files. You should have the desktop client for at least one of these installed.</p>
+          <p><a className="link-primary" onClick={systemActions.getProviderPath}>Locate providers automatically</a></p>
           <div style={{marginBottom: '10px'}}>
             <FileSelectInputElectron
               title="Select Root Dropbox Location"
               model="system.providerPath.dropbox"
-              value={system.providerPath.dropbox}>
+              value={system.providerPath.dropbox}
+              placeholder="Could not be located">
               <div className="layout-column layout-align-center-center" style={inputStyles}>Dropbox</div>
             </FileSelectInputElectron>
           </div>
@@ -94,7 +96,8 @@ export const Component = React.createClass({
             <FileSelectInputElectron
               title="Select Root Drive Location"
               model="system.providerPath.drive"
-              value={system.providerPath.drive}>
+              value={system.providerPath.drive}
+              placeholder="Could not be located">
               <div className="layout-column layout-align-center-center" style={inputStyles}>Drive</div>
             </FileSelectInputElectron>
           </div>

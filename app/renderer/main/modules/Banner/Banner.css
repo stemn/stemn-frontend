@@ -1,0 +1,11 @@
+@value primary from "app/renderer/assets/css/themes/standard.css";
+
+.banner{
+  padding: 15px;
+  background: primary;
+  color: white;
+}
+.warn{
+  background: rgb(244,67,54);
+  color: white;
+}

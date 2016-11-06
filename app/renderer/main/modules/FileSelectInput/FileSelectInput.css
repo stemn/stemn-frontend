@@ -1,4 +1,4 @@
-@value border1 from "app/renderer/assets/css/themes/standard.css";
+@value border1, placholder from "app/renderer/assets/css/themes/standard.css";
 
 .fileSelectInput{
   height: 36px;
@@ -9,4 +9,7 @@
 }
 .text{
   padding: 0px 10px;
+}
+.placeholder{
+  color: placholder;
 }

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
 import { remote } from 'electron';
 
+import classNames from 'classnames';
 import classes from './FileSelectInput.css'
 import MdFolder from 'react-icons/md/folder';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
@@ -24,11 +25,11 @@ const Component = React.createClass({
     })
   },
   render() {
-    const {model, value, children} = this.props;
+    const { model, value, children, placeholder } = this.props;
     return (
       <div className={classes.fileSelectInput + ' layout-row layout-align-start-center'} onClick={this.showModal}>
         {children}
-        <div className={classes.text + ' flex'}>{value}</div>
+        <div className={classNames(classes.text, {[classes.placeholder] : !value}, 'flex')}>{value || placeholder}</div>
         <SimpleIconButton>
           <MdFolder size="22" />
         </SimpleIconButton>

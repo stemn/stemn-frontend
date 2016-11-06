@@ -1,9 +1,15 @@
+// Container Core
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+// Component Core
 import React from 'react';
 import { Link } from 'react-router';
 
 // Components
 import Tabs from 'app/renderer/main/components/Tabs/Tabs'
 import Header from 'app/renderer/main/modules/Header/Header.jsx'
+import Banner from 'app/renderer/main/modules/Banner/Banner.jsx'
 
 // Styles
 import classNames from 'classnames';
@@ -26,8 +32,31 @@ class Component extends React.Component{
     }
   }
   render() {
-    const { project } = this.props;
-    const baseLink = `project/${project && project.data ? project.data._id : ''}`
+    const { project, system } = this.props;
+    const baseLink = `project/${project && project.data ? project.data._id : ''}`;
+    const downloadLinks = {
+      drive   : 'https://tools.google.com/dlpage/drive/index.html',
+      dropbox : 'https://www.dropbox.com/downloading'
+    }
+    const missingClientBanner = () => {
+      const provider   = project.data.remote.provider;
+      const capitalize = { textTransform: 'capitalize' };
+      const underline  = { textDecoration: 'underline' };
+      if(!system.providerPath[provider]){
+        return (
+          <Banner type="warn">
+            Could not find <span style={capitalize}>{provider}</span> on your computer.
+            The <span style={capitalize}>{provider}</span> desktop client must be installed for this project to Sync to your computer.
+            &nbsp;&nbsp;&nbsp;<a style={underline} href={downloadLinks[provider]}>Download {provider}</a>
+            &nbsp;or&nbsp;
+            <a style={underline} href={downloadLinks[provider]}>Check again</a>
+          </Banner>
+        );
+      }
+      else{
+        return null
+      }
+    }
 
     if(!project){return <div></div>}
 
@@ -40,6 +69,9 @@ class Component extends React.Component{
           <Link activeClassName="active" to={baseLink+'/tasks'}>Tasks</Link>
           <Link activeClassName="active" to={baseLink+'/settings'}>Settings</Link>
         </Tabs>
+        { project.data
+        ? missingClientBanner()
+        : null }
         <div className="layout-column flex rel-box">{this.props.children}</div>
       </div>
     );
@@ -50,5 +82,16 @@ Component.childContextTypes = {
   project: React.PropTypes.object
 }
 
+///////////////////////////////// CONTAINER /////////////////////////////////
 
-export default Component
+function mapStateToProps({system}) {
+  return {
+    system,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Component);
