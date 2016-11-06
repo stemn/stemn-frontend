@@ -182,6 +182,7 @@ export function linkRemote({projectId, provider, path, id, prevProvider}) {
 
 
 export function unlinkRemote({projectId, prevProvider}) {
+  console.log('unlink');
   return (dispatch) => {
     dispatch({
       type: 'PROJECTS/UNLINK_REMOTE',
