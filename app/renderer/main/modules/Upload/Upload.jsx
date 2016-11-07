@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as UploadActions from './Upload.actions.js';
+import { actions } from 'react-redux-form'
 
 // Component Core
 import React from 'react';
@@ -14,11 +15,32 @@ import classNames from 'classnames';
 // Sub Components
 import Dropzone from 'react-dropzone';
 import Button from 'app/renderer/main/components/Buttons/Button/Button.jsx';
+import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import MdFileUpload from 'react-icons/md/file-upload';
 
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
+
+
+export const UploadOverlay = React.createClass({
+  render: function () {
+    const overlayStyle = {
+      position: 'absolute', 
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+      background: 'rgba(0, 0, 0, 0.2)',
+    }
+    return (
+      <div style={overlayStyle} className="layout-column layout-align-center-center">
+        <MdFileUpload size="30px" style={{color: 'white'}}/>
+      </div>
+    );
+  }
+});
 
 export const Component = React.createClass({
   componentWillMount() {
@@ -34,6 +56,9 @@ export const Component = React.createClass({
     this.props.UploadActions.upload({
       files,
       cacheKey: this.props.uploadId
+    }).then(response => {
+      // Update the model
+      this.props.dispatch(actions.change(this.props.model, response.value.data.url))
     })
   },
 
@@ -51,33 +76,39 @@ export const Component = React.createClass({
 
   render: function () {
     const imgStyle = {
-      maxWidth: '100px',
-      maxHeight: '100px',
-      marginRight: '20px'
+      maxWidth: '130px',
+      maxHeight: '130px',
+      borderRadius: '50%',
+      overflow: 'hidden'
     }
     const {upload, style, className, model, value} = this.props;
 
     return (
       <div style={style} className={className}>
         <Dropzone ref="dropzone"
-         onDrop={this.onDrop}
-         style={this.dropStyle}
-         activeStyle={this.dropActiveStyle}
-         disableClick={true}>
+          onDrop={this.onDrop}
+          style={this.dropStyle}
+          activeStyle={this.dropActiveStyle}
+          disableClick={false}
+          multiple={false}>
           <div className="layout-row layout-align-start-start">
             {upload && upload.files && upload.files.length > 0
               ?
               <div className="layout-row layout-align-start-center">
                 {upload.files.map((file, index) =>
-                  <img key={index} style={imgStyle} src={file.path ? `https://stemn.com${file.path}` : file.preview} />
+                  <a key={index} className="rel-box" style={imgStyle}>
+                    <img style={{width: '100%', height: '100%'}} src={file.path ? `https://stemn.com${file.path}` : file.preview} />
+                    { upload.loading ? null : <UploadOverlay /> }
+                    <LoadingOverlay 
+                      show={upload.loading} 
+                      size="sm"
+                      background="rgba(255, 255, 255, 0.8)"
+                    />
+                  </a>
                 )}
               </div>
               : null
             }
-            <div>
-              <Button className="secondary" onClick={this.onOpenClick}>Upload Picture</Button>
-              <p>You can also drag and drop a picture from your computer.</p>
-            </div>
           </div>
         </Dropzone>
       </div>
@@ -98,6 +129,7 @@ function mapStateToProps({upload}, {uploadId}) {
 function mapDispatchToProps(dispatch) {
   return {
     UploadActions: bindActionCreators(UploadActions, dispatch),
+    dispatch
   };
 }
 

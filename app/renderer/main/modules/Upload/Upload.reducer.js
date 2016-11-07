@@ -1,8 +1,6 @@
 import i from 'icepick';
 
-const initialState = {
-
-};
+const initialState = { };
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
@@ -17,10 +15,10 @@ export default function reducer(state = initialState, action = {}) {
     case 'UPLOAD/UPLOAD_REJECTED':
       return i.assocIn(state, [action.meta.cacheKey], { loading: false })
     case 'UPLOAD/UPLOAD_FULFILLED':
-      return i.assocIn(state, [action.meta.cacheKey], {
-        files: action.payload.data,
-        loading: false
-      })
+      return i.chain(state)
+      .assocIn([action.meta.cacheKey, 'loading'], false)
+      .assocIn([action.meta.cacheKey, 'files', '0', 'response'], action.payload.data)
+      .value()
     default:
       return state;
   }

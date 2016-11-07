@@ -3,9 +3,9 @@ import ws from 'ws';
 
 export let socket = undefined;
 
-export const initialise = (config) => {
+export const initialise = (hostUrl) => {
 
-  socket = primus.connect(`${config.host}:${config.port}`);
+  socket = primus.connect(hostUrl);
 
   const socketError = (err) => socket.write({
     type : 'log',

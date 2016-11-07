@@ -27,7 +27,7 @@ export const windows = {
 crashReporter.start({
   companyName: 'Stemn',
   productName: 'Stemn Desktop',
-  submitURL: 'http://localhost:1127',
+  submitURL: process.env.ELECTRON_CRASH_REPORT_SERVER,
   autoSubmit: true,
   extra: {
     app_version: version
@@ -112,10 +112,7 @@ async function start() {
   store.dispatch(getProviderPath());
 
   // Initialise the Websocket connection
-  const websocket = wsInitialise({
-   host : `http://${process.env.WEBSOCKET_SERVER}`,
-   port : 8000
-  });
+  const websocket = wsInitialise(process.env.WEBSOCKET_SERVER);
   websocket.on('data', (action) => {
     log.info('websocket received data\n', JSON.stringify(action))
     const reduxAction = mapWebsocketToRedux(store, action);

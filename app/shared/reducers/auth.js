@@ -24,6 +24,12 @@ const initialState = {
 
 const mainReducer = (state, action) => {
   switch (action.type) {
+    case 'AUTH/REMOVE_HTTP_HEADER':
+      delete http.defaults.headers.common['Authorization']; // In reducer so it happens on all threads
+      return state    
+    case 'AUTH/INIT_HTTP_HEADER':
+      http.defaults.headers.common['Authorization'] = action.payload.fullToken; // In reducer so it happens on all threads
+      return state
     case 'AUTH/LOAD_USER_DATA_PENDING':
       return {...state,
         userLoading: true

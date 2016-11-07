@@ -5,5 +5,4 @@ import http from 'axios';
 if((typeof GLOBAL_ENV !== 'undefined')){
   Object.assign(process.env, GLOBAL_ENV);
 }
-
-http.defaults.baseURL = `http://${process.env.API_SERVER}/`;
+http.defaults.baseURL = `${process.env.API_SERVER}/`;

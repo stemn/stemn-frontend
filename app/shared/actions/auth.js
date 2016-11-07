@@ -105,16 +105,14 @@ export function initHttpHeaders(token) {
   return (dispatch, getState) => {
     token = token || getState().auth.authToken
     const fullToken = token ? 'bearer '+ token : '';
-    http.defaults.headers.common['Authorization'] = fullToken;
     dispatch({
       type:'AUTH/INIT_HTTP_HEADER',
-      payload: {fullToken}
+      payload: { fullToken }
     })
   }
 }
 
 export function removeHttpHeaders() {
-  delete http.defaults.headers.common['Authorization'];
   return {
     type:'AUTH/REMOVE_HTTP_HEADER',
   }

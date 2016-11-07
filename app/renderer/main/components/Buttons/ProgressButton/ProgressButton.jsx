@@ -104,6 +104,18 @@ export default React.createClass({
         <path d="m35,35l9.3,-9.3"/>
       </svg>
     )
+    
+    const getIcon = () => {
+      if( status == 'success'){
+        return <AnimateSvg draw={drawComplete}>{Checkmark}</AnimateSvg>
+      }
+      else if(status == 'error'){
+        return <AnimateSvg draw={drawComplete}>{Cross}</AnimateSvg>
+      }
+      else{
+        return null
+      }
+    }
 
     return (
       <div className={classNames(
@@ -114,9 +126,7 @@ export default React.createClass({
         )}>
         <button onClick={() => {if(!disabled){onClick()}}}><span>{children}</span></button>
         <AnimateSvg draw={drawLoading}>{Progress}</AnimateSvg>
-        { status == 'success'
-        ? <AnimateSvg draw={drawComplete}>{Checkmark}</AnimateSvg>
-        : <AnimateSvg draw={drawComplete}>{Cross}</AnimateSvg>}
+        { getIcon() }
       </div>
     );
   }

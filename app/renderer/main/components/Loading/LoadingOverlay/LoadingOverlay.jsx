@@ -10,7 +10,7 @@ import classes from './LoadingOverlay.css';
 import classNames from 'classnames';
 
 export default React.createClass({
-    getInitialState () {
+  getInitialState () {
     return {
       loading: false,
     }
@@ -33,7 +33,7 @@ export default React.createClass({
 //    console.log('end-loading');
   },
   render() {
-    const { size, show, children, style, linear, hideBg } = this.props; // size == 'xs'
+    const { size, show, children, style, linear, hideBg, background } = this.props; // size == 'xs' || 'sm'
     const { loading } = this.state;
 
     const transitionName = {
@@ -44,6 +44,12 @@ export default React.createClass({
       appear: classes.appear,
       appearActive: classes.appearActive
     };
+    
+    const otherStyles = background ? {
+      background: background
+    } : {};
+    
+    const allStyles = Object.assign({}, otherStyles, style)
 
     return (
       <ReactCSSTransitionGroup
@@ -54,7 +60,7 @@ export default React.createClass({
         transitionLeaveTimeout={300}>
         {
           show ?
-          <div className={classNames(classes.loadingOverlay, hideBg ? '' : classes.bgWhite)} style={style}>
+          <div className={classNames(classes.loadingOverlay, hideBg ? '' : classes.bgWhite)} style={allStyles}>
             { linear
             ? <LoadingLinear />
             : <div className={classes.loaderContainer}>

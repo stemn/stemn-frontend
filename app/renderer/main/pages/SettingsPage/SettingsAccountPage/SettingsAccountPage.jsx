@@ -31,7 +31,7 @@ export const Component = React.createClass({
     this.props.usersActions.getUser({userId: this.props.auth.user._id});
   },
   saveUser(){
-    this.props.usersActions.saveUser({userId: this.props.user.data});
+    this.props.usersActions.saveUser({user: this.props.user.data});
   },
   render() {
     const { entityModel, user, auth, authActions, usersActions } = this.props;
@@ -39,19 +39,18 @@ export const Component = React.createClass({
       return (
         <div>
           <div className={classes.panel}>
-          <h3>Account Avatar</h3>
-            <Upload
-              model={`${entityModel}.data.profile.firstname`}
-              value={user.data.profile.picture}
-              uploadId="UserSettingsAvatar"
-            />
-            <div className="layout-row layout-align-end">
-              <ProgressButton className="primary" onClick={()=>this.saveUser()}>Update Avatar</ProgressButton>
+            <h3>Profile Info</h3>
+            <div className="layout-row layout-align-start-center" style={{margin: '30px 0'}}>
+              <Upload
+                square={true}
+                model={`${entityModel}.data.profile.picture`}
+                value={user.data.profile.picture}
+                uploadId="UserSettingsAvatar"
+              />
+              <div className="flex text-center">
+                { user.data.profile.picture ? <p>Looking good!</p> : <p>Add a profile photo.</p> }
+              </div>
             </div>
-          </div>
-
-          <div className={classes.panel}>
-            <h3>Basic Profile Info</h3>
             <div className="layout-row">
               <Input 
                 model={`${entityModel}.data.profile.firstname`}
@@ -80,7 +79,12 @@ export const Component = React.createClass({
             />
             <br />
             <div className="layout-row layout-align-end">
-              <ProgressButton className="primary" onClick={()=>this.saveUser()}>Save Profile</ProgressButton>
+              <ProgressButton 
+                className="primary" 
+                loading={user.savePending} 
+                onClick={this.saveUser}>
+                Save Profile
+              </ProgressButton>
             </div>
           </div>
 

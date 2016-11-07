@@ -86,7 +86,8 @@ const config = {
       'GLOBAL_ENV': {
         NODE_ENV: JSON.stringify('development'),
         API_SERVER: JSON.stringify(process.env.API_SERVER),
-        WEBSOCKET_SERVER: JSON.stringify(process.env.WEBSOCKET_SERVER)
+        WEBSOCKET_SERVER: JSON.stringify(process.env.WEBSOCKET_SERVER),
+        ELECTRON_CRASH_REPORT_SERVER: JSON.stringify(process.env.ELECTRON_CRASH_REPORT_SERVER)
       },
     }),
   ],
