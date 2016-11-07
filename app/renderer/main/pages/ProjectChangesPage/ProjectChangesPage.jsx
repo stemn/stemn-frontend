@@ -22,9 +22,23 @@ import Timeline             from 'app/renderer/main/modules/Timeline/Timeline.js
 import CommitChanges        from 'app/renderer/main/modules/Changes/CommitChanges/CommitChanges.jsx';
 import CommitBox            from 'app/renderer/main/modules/Changes/CommitBox/CommitBox.jsx'
 import FileCompareStandard  from 'app/renderer/main/modules/FileCompare/FileCompareStandard/FileCompareStandard.jsx';
+import Guide                from 'app/renderer/main/modules/Guide/Guide';
 import cloudLocked          from 'app/renderer/assets/images/pure-vectors/cloud-locked.svg';
-import file               from 'app/renderer/assets/images/pure-vectors/file.svg';
+import file                 from 'app/renderer/assets/images/pure-vectors/file.svg';
+import commitChanges        from './commit-changes.svg'
+import compareFile          from './compare-file.svg'
+import Button               from 'app/renderer/main/components/Buttons/Button/Button'
 
+
+const guideInfo = [{
+  title: 'Commit changes and check off tasks',
+  description: 'Package recent file changes into a \'commit\' that describes what has changed. Tag teammates and mark related tasks as complete.',
+  image: commitChanges,
+},{
+  title: 'Review recent file changes',
+  description: 'Compare your files before and after recent changes. Review changes to help you add informative commit messages for your teammates.',
+  image: compareFile,
+}]
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -96,7 +110,7 @@ export const Component = React.createClass({
       const filePrevious = has(changes, 'selected.data.previousRevisionId')
         ? i.assocIn(changes.selected.data, ['revisionId'], changes.selected.data.previousRevisionId)
         : null;
-
+    
       return (
         <div className="layout-column flex rel-box">
           <div className="layout-row flex">
@@ -149,12 +163,23 @@ export const Component = React.createClass({
     }
     else{
       return (
-        <div className="layout-column layout-align-center-center flex">
-          <img src={cloudLocked}/>
-          <div className="text-title-4 text-center">Changes not available. Connect this project to Drive or Dropbox</div>
-          <div className="text-title-4 text-center link-primary" style={{marginTop: '10px'}}><Link to={baseLink+'/settings'}>Add File Store</Link></div>
+        <div className="layout-column flex layout-align-center">
+          <div className="layout-row layout-align-center">
+            <Guide data={guideInfo[0]}/>
+            <Guide data={guideInfo[1]}/>
+          </div>
+          <div className="layout-row layout-align-center">
+            <Button className="primary lg">Create your first commit</Button>        
+          </div>
         </div>
       )
+//      return (
+//        <div className="layout-column layout-align-center-center flex">
+//          <img src={cloudLocked}/>
+//          <div className="text-title-4 text-center">Changes not available. Connect this project to Drive or Dropbox</div>
+//          <div className="text-title-4 text-center link-primary" style={{marginTop: '10px'}}><Link to={baseLink+'/settings'}>Add File Store</Link></div>
+//        </div>
+//      )
     }
   }
 });

@@ -28,6 +28,10 @@
   cursor: not-allowed;
 }
 
+.button:global(.lg) {
+  padding: 15px;
+  font-size: 14px;
+}
 .button:global(.sm) {
   padding: 7px 5px;
 }
