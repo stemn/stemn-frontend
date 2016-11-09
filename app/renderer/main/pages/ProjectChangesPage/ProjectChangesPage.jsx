@@ -27,6 +27,7 @@ import cloudLocked          from 'app/renderer/assets/images/pure-vectors/cloud-
 import file                 from 'app/renderer/assets/images/pure-vectors/file.svg';
 import commitChanges        from './commit-changes.svg'
 import compareFile          from './compare-file.svg'
+import cloudProviders       from 'app/renderer/assets/images/illustrations/cloud-providers.svg'
 import Button               from 'app/renderer/main/components/Buttons/Button/Button'
 
 
@@ -38,6 +39,12 @@ const guideInfo = [{
   title: 'Review recent file changes',
   description: 'Compare your files before and after recent changes. Review changes to help you add informative commit messages for your teammates.',
   image: compareFile,
+}]
+
+const notConnectedGuide = [{
+  title: 'File store not found',
+  description: 'You must connect this project to a file store (Dropbox or Google Drive) so Stemn can access your file changes.',
+  image: cloudProviders,
 }]
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -103,7 +110,32 @@ export const Component = React.createClass({
 
     const baseLink = `project/${project.data._id}`;
 
-    if(project.data.remote.connected){
+    if(!project.data.remote.connected){
+      return (
+        <div className="layout-column flex layout-align-center">
+          <div className="layout-row layout-align-center">
+            <Guide data={notConnectedGuide[0]}/>
+          </div>
+          <div className="layout-row layout-align-center">
+            <Link to={`${baseLink}/settings`}><Button className="primary lg">Connect a file store</Button> </Link>
+          </div>
+        </div>
+      )
+    }
+    else if(!changes.loading && changes.data.length == 0){
+      return (
+        <div className="layout-column flex layout-align-center">
+          <div className="layout-row layout-align-center">
+            <Guide data={guideInfo[0]}/>
+            <Guide data={guideInfo[1]}/>
+          </div>
+          <div className="layout-row layout-align-center">
+            <Button className="primary lg">Create your first commit</Button>
+          </div>
+        </div>
+      )
+    }
+    else{
       if(!changes){
         return <LoadingOverlay />
       }
@@ -160,26 +192,6 @@ export const Component = React.createClass({
           </div>
         </div>
       );
-    }
-    else{
-      return (
-        <div className="layout-column flex layout-align-center">
-          <div className="layout-row layout-align-center">
-            <Guide data={guideInfo[0]}/>
-            <Guide data={guideInfo[1]}/>
-          </div>
-          <div className="layout-row layout-align-center">
-            <Button className="primary lg">Create your first commit</Button>        
-          </div>
-        </div>
-      )
-//      return (
-//        <div className="layout-column layout-align-center-center flex">
-//          <img src={cloudLocked}/>
-//          <div className="text-title-4 text-center">Changes not available. Connect this project to Drive or Dropbox</div>
-//          <div className="text-title-4 text-center link-primary" style={{marginTop: '10px'}}><Link to={baseLink+'/settings'}>Add File Store</Link></div>
-//        </div>
-//      )
     }
   }
 });

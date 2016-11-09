@@ -19,11 +19,13 @@ import Popover                  from 'app/renderer/assets/other/react-popup';
 import Timeline                 from 'app/renderer/main/modules/Timeline/Timeline.jsx';
 import SidebarTimeline          from 'app/shared/modules/SyncTimeline/SidebarTimeline/SidebarTimeline.jsx';
 import ContentSidebar           from 'app/renderer/main/components/ContentSidebar';
-import cloudLocked              from 'app/renderer/assets/images/pure-vectors/cloud-locked.svg';
 import timeline                 from 'app/renderer/assets/images/pure-vectors/timeline.svg';
-
+import Guide                    from 'app/renderer/main/modules/Guide/Guide';
+import Button                   from 'app/renderer/main/components/Buttons/Button/Button'
 import ProjectFeedPageCommit    from './ProjectFeedPageCommit/ProjectFeedPageCommit.jsx'
 import ProjectFeedPageRevision  from './ProjectFeedPageRevision/ProjectFeedPageRevision.jsx'
+import cloudProviders           from 'app/renderer/assets/images/illustrations/cloud-providers.svg'
+
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -115,11 +117,17 @@ export const Component = React.createClass({
       );
     }
     else{
+      const guideInfo = [{
+        title: 'File store not found',
+        description: 'You must connect this project to a file store (Dropbox or Google Drive) so Stemn can access your file changes.',
+        image: cloudProviders,
+      }];
       return (
-        <div className="layout-column layout-align-center-center flex">
-          <img src={cloudLocked}/>
-          <div className="text-title-4 text-center">Timeline not available. Connect this project to Drive or Dropbox</div>
-          <div className="text-title-4 text-center link-primary" style={{marginTop: '10px'}}><Link to={baseLink+'/settings'}>Add File Store</Link></div>
+        <div className="layout-column flex layout-align-center">
+          <div className="layout-row layout-align-center"><Guide data={guideInfo[0]}/></div>
+          <div className="layout-row layout-align-center">
+            <Link to={`${baseLink}/settings`}><Button className="primary lg">Connect a file store</Button> </Link>
+          </div>
         </div>
       )
     }
