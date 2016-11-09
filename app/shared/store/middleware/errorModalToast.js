@@ -5,7 +5,11 @@ import { has }                from 'lodash';
 const errorMap = {
   GOOGLE_CONNECTION_ERROR: {
     displayType: 'modal',
-    modalType: 'GOOGLE_REVOKE',
+    modalType: 'PROVIDER_ACCESS_ERROR',
+  },  
+  DRIVE_ACCESS_REVOKED: {
+    displayType: 'modal',
+    modalType: 'PROVIDER_ACCESS_REVOKED',
   },
   LINK_FOLDER_CONFLICT: {
     displayType: 'toast',
@@ -38,6 +42,7 @@ function processLocalError(store, action){
   if(action.payload.errno == 'ENETUNREACH'){
     store.dispatch(showModal({
       modalType: 'CONNECTION',
+      modalProps: action.payload.data,
       limit: 1,
     }))
   }
@@ -45,7 +50,7 @@ function processLocalError(store, action){
 
 function processServerError(store, action){
   // Get the toast message and error type
-  const { message, type } = action.payload.response.data.error;
+  const { message, type, data } = action.payload.response.data.error;
   let toastMessage = message ? message : action.payload.response.data.error;
 
   // Error Display Info
@@ -56,6 +61,7 @@ function processServerError(store, action){
     if(errorInfo.displayType == 'modal'){
       store.dispatch(showModal({
         modalType: errorInfo.modalType,
+        modalProps: data,
       }))
     }
     else if(errorInfo.displayType == 'toast'){

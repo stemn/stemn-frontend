@@ -15,29 +15,31 @@ import classNames from 'classnames';
 import classes from './Modal.css'
 
 // Modals
-import ConfirmModal         from './modals/ConfirmModal.jsx';
-import ErrorModal           from './modals/ErrorModal.jsx';
-import ConnectionModal      from './modals/ConnectionModal.jsx';
-import GoogleRevokeModal    from './modals/GoogleRevokeModal.jsx'
-import ReleaseNotesModal    from './modals/ReleaseNotesModal.jsx'
-import FileSelectModal      from 'app/renderer/main/modules/FileSelect/FileSelectModal.jsx';
-import TaskDisplayModal     from 'app/renderer/main/modules/Tasks/TaskDisplayModal/TaskDisplayModal.jsx'
-import TaskLabelsEditModal  from 'app/renderer/main/modules/Tasks/TaskLabelsEditModal/TaskLabelsEditModal.jsx'
-import TaskMentionModal     from 'app/renderer/main/modules/Mentions/TaskMentionModal/TaskMentionModal.jsx'
-import ProjectNewModal      from 'app/renderer/main/modules/Projects/ProjectNewModal/ProjectNewModal.jsx'
-
+import ConfirmModal           from './modals/ConfirmModal.jsx';
+import ErrorModal             from './modals/ErrorModal.jsx';
+import ConnectionModal        from './modals/ConnectionModal.jsx';
+import ProviderAccessError    from './modals/ProviderAccessErrorModal.jsx'
+import ProviderAccessRevoked  from './modals/ProviderAccessRevokedModal.jsx'
+import ReleaseNotesModal      from './modals/ReleaseNotesModal.jsx'
+import FileSelectModal        from 'app/renderer/main/modules/FileSelect/FileSelectModal.jsx';
+import TaskDisplayModal       from 'app/renderer/main/modules/Tasks/TaskDisplayModal/TaskDisplayModal.jsx'
+import TaskLabelsEditModal    from 'app/renderer/main/modules/Tasks/TaskLabelsEditModal/TaskLabelsEditModal.jsx'
+import TaskMentionModal       from 'app/renderer/main/modules/Mentions/TaskMentionModal/TaskMentionModal.jsx'
+import ProjectNewModal        from 'app/renderer/main/modules/Projects/ProjectNewModal/ProjectNewModal.jsx'
+  
 
 const modalComponents = {
-  'CONFIRM'       : ConfirmModal,
-  'ERROR'         : ErrorModal,
-  'CONNECTION'    : ConnectionModal,
-  'FILE_SELECT'   : FileSelectModal,
-  'TASK'          : TaskDisplayModal,
-  'TASK_LABELS'   : TaskLabelsEditModal,
-  'TASK_COMMIT'   : TaskMentionModal,
-  'PROJECT_NEW'   : ProjectNewModal,
-  'GOOGLE_REVOKE' : GoogleRevokeModal,
-  'RELEASE_NOTES' : ReleaseNotesModal
+  'CONFIRM'                 : ConfirmModal,
+  'ERROR'                   : ErrorModal,
+  'CONNECTION'              : ConnectionModal,
+  'FILE_SELECT'             : FileSelectModal,
+  'TASK'                    : TaskDisplayModal,
+  'TASK_LABELS'             : TaskLabelsEditModal,
+  'TASK_COMMIT'             : TaskMentionModal,
+  'PROJECT_NEW'             : ProjectNewModal,
+  'PROVIDER_ACCESS_ERROR'   : ProviderAccessError,
+  'PROVIDER_ACCESS_REVOKED' : ProviderAccessRevoked,
+  'RELEASE_NOTES'           : ReleaseNotesModal
 }
 
 /////////////////////////////////////////////////////////////////////////////
