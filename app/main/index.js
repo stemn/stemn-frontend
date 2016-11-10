@@ -15,7 +15,6 @@ import mapWebsocketToRedux from './modules/websocket/mapWebsocketToRedux'
 import { getProviderPath } from '../shared/actions/system';
 import { getFilteredStoreData } from './json-storage.js';
 import log from 'electron-log';
-
 import http from 'axios'
 
 export const windows = {
@@ -23,6 +22,13 @@ export const windows = {
   menubar: undefined,
   trayIcon: undefined
 }
+
+
+process.on('uncaughtException', (error) => {
+  log.error('uncaughtException', error);
+  const stringError = `${error.toString()} \r\rStemn has been notified.`
+  dialog.showErrorBox('Something went wrong:', stringError)
+});
 
 crashReporter.start({
   companyName: 'Stemn',
@@ -33,8 +39,6 @@ crashReporter.start({
     app_version: version
   }
 })
-//setTimeout(()=>{ console.log(thisVarIsUndefined) })
-//console.log(thisVarIsUndefined);
 
 /************************************************
 Get the application start-type.

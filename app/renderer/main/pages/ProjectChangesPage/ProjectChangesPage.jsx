@@ -104,13 +104,11 @@ export const Component = React.createClass({
   render() {
     const { changes, project, changesActions, entityModel, dispatch } = this.props;
 
-    if(!project || !project.data){
+    if(!project || !project.data || !changes){
       return <LoadingOverlay />
     }
-
-    const baseLink = `project/${project.data._id}`;
-
-    if(!project.data.remote.connected){
+    else if(!project.data.remote.connected){
+      const baseLink = `project/${project.data._id}`;
       return (
         <div className="layout-column flex layout-align-center">
           <div className="layout-row layout-align-center">
@@ -136,9 +134,6 @@ export const Component = React.createClass({
       )
     }
     else{
-      if(!changes){
-        return <LoadingOverlay />
-      }
       const filePrevious = has(changes, 'selected.data.previousRevisionId')
         ? i.assocIn(changes.selected.data, ['revisionId'], changes.selected.data.previousRevisionId)
         : null;
