@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as ChangesActions from '../Changes.actions.js';
+import * as ElectronWindowsActions from 'app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
 
 // Component Core
 import React from 'react';
@@ -27,9 +28,10 @@ import { MentionsInput, Mention } from 'react-mentions';
 ///////////////////////////////// COMPONENT /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
+
 export const Component = React.createClass({
   render() {
-    const { entityModel, changes } = this.props;
+    const { entityModel, changes, electronWindowsActions, changesActions } = this.props;
     return (
       <div className="p-15">
         <Input model={`changes.${this.props.project._id}.summary`} value={changes.summary} className={classes.input} type="text" placeholder="Summary"/>
@@ -38,7 +40,10 @@ export const Component = React.createClass({
           value={changes.description}
           className={classes.description}/>
         <div className="layout-row layout-align-start-center">
-          <a className="link-primary" onClick={()=>this.props.changesActions.mentionTasksModal({projectId: this.props.project._id})}>
+          <a className="link-primary" onClick={()=> {
+            electronWindowsActions.show('main');
+            changesActions.mentionTasksModal({projectId: this.props.project._id});
+          }}>
             <MdDone size="16" style={{marginRight: '3px', marginBottom: '2px'}}/>
             Add related tasks
           </a>
@@ -66,6 +71,7 @@ function mapStateToProps() {
 function mapDispatchToProps(dispatch) {
   return {
     changesActions: bindActionCreators(ChangesActions, dispatch),
+    electronWindowsActions: bindActionCreators(ElectronWindowsActions, dispatch),
     dispatch
   }
 }
