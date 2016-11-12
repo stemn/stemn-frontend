@@ -1,6 +1,5 @@
 import './init.js';
 import os from 'os';
-import { version } from '../package.json'
 import { app, ipcMain, dialog, crashReporter } from 'electron';
 import pify from 'pify';
 const jsonStorage = pify(require('electron-json-storage'))
@@ -22,23 +21,6 @@ export const windows = {
   menubar: undefined,
   trayIcon: undefined
 }
-
-
-process.on('uncaughtException', (error) => {
-  log.error('uncaughtException', error);
-  const stringError = `${error.toString()} \r\rStemn has been notified.`
-  dialog.showErrorBox('Something went wrong:', stringError)
-});
-
-crashReporter.start({
-  companyName: 'Stemn',
-  productName: 'Stemn Desktop',
-  submitURL: process.env.ELECTRON_CRASH_REPORT_SERVER,
-  autoSubmit: true,
-  extra: {
-    app_version: version
-  }
-})
 
 /************************************************
 Get the application start-type.

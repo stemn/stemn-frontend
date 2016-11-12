@@ -30,6 +30,10 @@ import { MentionsInput, Mention } from 'react-mentions';
 
 
 export const Component = React.createClass({
+  error() {
+    console.log('error');
+    throw new Error("Something bad happened.")
+  },
   render() {
     const { entityModel, changes, electronWindowsActions, changesActions } = this.props;
     return (
@@ -48,6 +52,10 @@ export const Component = React.createClass({
             Add related tasks
           </a>
           <div className="flex"></div>
+          <button
+          onClick={this.error}
+          className="primary"
+          >Error</button>
           <Button
           onClick={this.props.commitFn}
           className="primary"

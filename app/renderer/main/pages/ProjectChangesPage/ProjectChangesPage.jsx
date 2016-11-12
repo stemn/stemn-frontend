@@ -115,7 +115,7 @@ export const Component = React.createClass({
             <Guide data={notConnectedGuide[0]}/>
           </div>
           <div className="layout-row layout-align-center">
-            <Link to={`${baseLink}/settings`}><Button className="primary lg">Connect a file store</Button> </Link>
+            <Link to={`${baseLink}/settings`}><Button className="primary lg">Connect a file store</Button></Link>
           </div>
         </div>
       )
