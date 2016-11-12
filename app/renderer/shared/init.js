@@ -17,12 +17,3 @@ initRaven();
 
 moment.locale('en-gb');
 http.defaults.baseURL = `${process.env.API_SERVER}/`;
-
-//http.interceptors.response.use(response => response, error => {
-//  if(error instanceof Error){
-//    error = {
-//      errorType: error.toString()
-//    }
-//  }
-//  return Promise.reject(error);
-//});

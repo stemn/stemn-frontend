@@ -89,6 +89,7 @@ export function register({email, password, firstname, lastname}) {
 }
 
 export function setAuthToken(token) {
+
   return {
     type:'AUTH/SET_AUTH_TOKEN',
     payload: token
