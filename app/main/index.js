@@ -14,7 +14,7 @@ import mapWebsocketToRedux from './modules/websocket/mapWebsocketToRedux'
 import { getProviderPath } from '../shared/actions/system';
 import { getFilteredStoreData } from './json-storage.js';
 import log from 'electron-log';
-import http from 'axios'
+import postStoreSetup from './postStoreSetup.js'
 
 export const windows = {
   main: undefined,
@@ -74,15 +74,15 @@ async function start() {
 
   // Configure store
   const store = configureStore(global.state);
+  postStoreSetup(store);
+  
   store.subscribe(async () => {
     global.state = store.getState();
     const dataToStore = getFilteredStoreData(global.state);
     await jsonStorage.set('state', dataToStore);
     await jsonStorage.set('sessionState',  global.state);
   });
-  ipcMain.on('redux-action', (event, action) => {
-    store.dispatch(action);
-  });
+
 
   // Create windows and tray icon
   windows.main     = createMainWindow();
@@ -93,9 +93,6 @@ async function start() {
   if(!modeFlags.hidden){
     windows.main.show();
   }
-
-  // Dispatch redux initial events
-  store.dispatch(getProviderPath());
 
   // Initialise the Websocket connection
   const websocket = wsInitialise(process.env.WEBSOCKET_SERVER);
