@@ -2,7 +2,7 @@ import React from 'react';
 
 // Styles
 import classNames from 'classnames';
-import classes from './banner.css';
+import classes from './Banner.css';
 
 export default React.createClass({
   render() {

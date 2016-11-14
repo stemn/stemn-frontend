@@ -45,7 +45,7 @@ export default React.createClass({
         previewCadUtils.authenticate()
       ]).then(response => {
         // Apply to state
-        this.setState({urn: response[0].data.urn, token: response[1].data.token});
+        this.setState({urn: response[0].data.urn64, token: response[1].data.token});
 
         // Begin to check status
         this.checkStatusInterval = setInterval(this.checkStatus, 700);
