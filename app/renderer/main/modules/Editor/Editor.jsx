@@ -22,39 +22,7 @@ import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
 import getUuid from 'app/shared/helpers/getUuid.js';
 import http from 'axios';
 
-
-
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-
-//export const Component = React.createClass({
-//  getInitialState () {
-//    return {
-//      value: this.props.value,
-//    }
-//  },
-//  componentWillReceiveProps(nextProps) {
-//    if(nextProps.value != this.props.value){
-//      this.setState({ value: nextProps.value })
-//    }
-//  },
-//
-//  handleChange(event){
-//    this.props.dispatch(actions.change(this.props.model, event.target.value));
-//  },
-//  render() {
-//    const { className, model, value } = this.props;
-//
-//    return (
-//      <textarea value={this.state.value}
-//       onChange={this.handleChange}
-//       className={classNames(classes.editor, className)} />
-//    )
-//  }
-//});
-
-
 
 export const Component = React.createClass({
   getInitialState () {
@@ -174,9 +142,7 @@ export const Component = React.createClass({
 });
 
 
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps({}) {
   return {};
