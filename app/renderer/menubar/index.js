@@ -1,5 +1,4 @@
 import '../shared/init.js';
-import { ipcRenderer } from 'electron';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -10,17 +9,13 @@ import getRoutes from './routes';
 import pify from 'pify';
 import electronJsonStorage from 'electron-json-storage';
 const jsonStorage = pify(electronJsonStorage);
-import { initHttpHeaders } from 'app/shared/actions/auth.js';
+import standardSetup from '../shared/standardSetup.js'
 
 async function start() {
   const initialState = await jsonStorage.get('sessionState');
   const store        = configureStore(initialState);
   const history      = syncHistoryWithStore(hashHistory, store);
-  ipcRenderer.on('redux-action', (event, payload) => {
-    store.dispatch(payload);
-  });
-
-  store.dispatch(initHttpHeaders())
+  standardSetup(store);
 
   render(
     <Provider store={store}>

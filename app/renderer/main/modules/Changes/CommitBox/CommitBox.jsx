@@ -19,6 +19,7 @@ import IconButton from 'app/renderer/main/components/Buttons/IconButton';
 import Button from 'app/renderer/main/components/Buttons/Button/Button.jsx';
 import Editor from 'app/renderer/main/modules/Editor/Editor.jsx';
 import Input from 'app/renderer/main/components/Input/Input/Input'
+import MarkdownButton from 'app/renderer/main/modules/Editor/MarkdownButton/MarkdownButton.jsx';
 
 import MdDone from 'react-icons/md/done';
 import { MentionsInput, Mention } from 'react-mentions';
@@ -34,11 +35,21 @@ export const Component = React.createClass({
     const { entityModel, changes, electronWindowsActions, changesActions } = this.props;
     return (
       <div className="p-15">
-        <Input model={`changes.${this.props.project._id}.summary`} value={changes.summary} className={classes.input} type="text" placeholder="Summary"/>
-        <Editor
-          model={`${entityModel}.description`}
-          value={changes.description}
-          className={classes.description}/>
+          <Input 
+            model={`changes.${this.props.project._id}.summary`} 
+            value={changes.summary} 
+            className={classes.input} 
+            type="text" 
+            placeholder="Summary"
+          />
+        <div className="rel-box">
+          <Editor
+            model={`${entityModel}.description`}
+            value={changes.description}
+            className={classes.description}
+          />
+          <MarkdownButton style={{position: 'absolute', bottom: '2px', right: '5px'}} />
+        </div>
         <div className="layout-row layout-align-start-center">
           <a className="link-primary" onClick={()=> {
             electronWindowsActions.show('main');

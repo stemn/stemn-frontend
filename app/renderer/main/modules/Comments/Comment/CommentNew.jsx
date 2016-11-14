@@ -16,6 +16,7 @@ import classes from './Comment.css';
 // Sub Components
 import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
 import Editor from 'app/renderer/main/modules/Editor/Editor.jsx';
+import MarkdownButton from 'app/renderer/main/modules/Editor/MarkdownButton/MarkdownButton.jsx';
 import EditorDisplay from 'app/renderer/main/modules/Editor/EditorDisplay.jsx';
 import Button from 'app/renderer/main/components/Buttons/Button/Button'
 
@@ -48,7 +49,8 @@ export const Component = React.createClass({
           <div className={classes.commentContent}>
             <Editor model={`${entityModel}.body`} value={newComment.body}/>
           </div>
-          <div className="layout-row" style={{padding: '0 10px 10px'}}>
+          <div className="layout-row layout-align-start-end" style={{padding: '0 10px 10px'}}>
+            <MarkdownButton>Markdown formatting supported</MarkdownButton>
             <div className="flex"></div>
             <Button className="primary sm"
             loading={newComment.savePending}
