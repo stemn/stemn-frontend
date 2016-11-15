@@ -1,5 +1,6 @@
 #!/bin/bash
-
+echo "------------------------ Build the dist version ------------------------"
+npm run build
 echo "-------------------- Pushing source to private repo --------------------"
 git config --global core.safecrlf false
 git add .

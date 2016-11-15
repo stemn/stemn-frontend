@@ -1,107 +1,42 @@
+import * as helpers from './global-setup';
 import path from 'path';
-import chromedriver from 'chromedriver';
-import webdriver from 'selenium-webdriver';
-import { expect } from 'chai';
-import electronPath from 'electron-prebuilt';
-import homeStyles from '../app/renderer/components/Home.css';
-import counterStyles from '../app/renderer/components/Counter.css';
 
-chromedriver.start(); // on port 9515
-process.on('exit', chromedriver.stop);
+const describe = global.describe
+const it = global.it
+const beforeEach = global.beforeEach
+const afterEach = global.afterEach
 
-const delay = time => new Promise(resolve => setTimeout(resolve, time));
+describe('multiple windows', function () {
+  helpers.setupTimeout(this)
 
-describe('main window', function spec() {
-  this.timeout(5000);
+  var app = null
 
-  before(async () => {
-    await delay(1000); // wait chromedriver start time
-    this.driver = new webdriver.Builder()
-      .usingServer('http://localhost:9515')
-      .withCapabilities({
-        chromeOptions: {
-          binary: electronPath,
-          args: [`app=${path.resolve()}`]
-        }
-      })
-      .forBrowser('electron')
-      .build();
-  });
+  beforeEach(function () {
+    return helpers.startApplication('../dist/main').then(function (startedApp) { app = startedApp })
+  })
 
-  after(async () => {
-    await this.driver.quit();
-  });
+  afterEach(function () {
+    return helpers.stopApplication(app)
+  })
 
-  const findCounter = () => this.driver.findElement(webdriver.By.className(counterStyles.counter));
-
-  const findButtons = () => this.driver.findElements(webdriver.By.className(counterStyles.btn));
-
-  it('should open window', async () => {
-    const title = await this.driver.getTitle();
-    expect(title).to.equal('Hello Electron React!');
-  });
-
-  it('should to Counter with click "to Counter" link', async () => {
-    const link = await this.driver.findElement(webdriver.By.css(`.${homeStyles.container} > a`));
-    link.click();
-
-    const counter = await findCounter();
-    expect(await counter.getText()).to.equal('0');
-  });
-
-  it('should display updated count after increment button click', async () => {
-    const buttons = await findButtons();
-    buttons[0].click();
-
-    const counter = await findCounter();
-    expect(await counter.getText()).to.equal('1');
-  });
-
-  it('should display updated count after descrement button click', async () => {
-    const buttons = await findButtons();
-    const counter = await findCounter();
-
-    buttons[1].click();  // -
-
-    expect(await counter.getText()).to.equal('0');
-  });
-
-  it('shouldnt change if even and if odd button clicked', async () => {
-    const buttons = await findButtons();
-    const counter = await findCounter();
-    buttons[2].click();  // odd
-
-    expect(await counter.getText()).to.equal('0');
-  });
-
-  it('should change if odd and if odd button clicked', async () => {
-    const buttons = await findButtons();
-    const counter = await findCounter();
-
-    buttons[0].click();  // +
-    buttons[2].click();  // odd
-
-    expect(await counter.getText()).to.equal('2');
-  });
-
-  it('should change if async button clicked and a second later', async () => {
-    const buttons = await findButtons();
-    const counter = await findCounter();
-    buttons[3].click();  // async
-
-    expect(await counter.getText()).to.equal('2');
-
-    await this.driver.wait(() =>
-      counter.getText().then(text => text === '3')
-    , 1000, 'count not as expected');
-  });
-
-  it('should back to home if back button clicked', async () => {
-    const link = await this.driver.findElement(
-      webdriver.By.css(`.${counterStyles.backButton} > a`)
-    );
-    link.click();
-
-    await this.driver.findElement(webdriver.By.className(homeStyles.container));
-  });
-});
+  it('launches the application', function () {
+    return app.client
+      .getWindowCount().should.eventually.equal(2)
+      .windowByIndex(1)
+        .browserWindow.getBounds().should.eventually.deep.equal({
+          x: 25,
+          y: 35,
+          width: 200,
+          height: 100
+        })
+        .getTitle().should.eventually.equal('Top')
+      .windowByIndex(0)
+        .browserWindow.getBounds().should.eventually.deep.equal({
+          x: 25,
+          y: 135,
+          width: 300,
+          height: 50
+        })
+        .getTitle().should.eventually.equal('Bottom')
+  })
+})

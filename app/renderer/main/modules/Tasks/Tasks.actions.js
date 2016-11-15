@@ -34,6 +34,9 @@ export function getBoards({projectId}){
     payload: http({
       method: 'GET',
       url: `/api/v1/projects/${projectId}/boards`,
+      params: {
+        populate: false
+      }
     }),
     meta: {
       cacheKey: projectId
