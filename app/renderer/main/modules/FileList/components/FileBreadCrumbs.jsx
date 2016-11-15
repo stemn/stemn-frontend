@@ -13,16 +13,14 @@ export default React.createClass({
 
     const displayCrumbs = () => {
       if(meta.parents && meta.parents.length > 0){
-        let crumbs = meta.parents.map((parent, idx)=>{
-          return (
-            <span key={parent._id}>
-              <a onClick={()=>clickFn({file: parent})}>{middleConcat(parent.name, 30, 0.8)}</a>
-              <span> / </span>
-            </span>
-          )
-        })
+        let crumbs = meta.parents.map((parent, idx) => (
+          <span key={idx}>
+            <a onClick={()=>clickFn({file: parent})}>{middleConcat(parent.name, 30, 0.8)}</a>
+            <span> / </span>
+          </span>
+        ))
 
-        crumbs.push(<span>{middleConcat(meta.name, 30, 0.8)}</span>)
+        crumbs.push(<span key="final">{middleConcat(meta.name, 30, 0.8)}</span>)
         return crumbs
       }
       else if (meta.name){
