@@ -6,14 +6,14 @@ const errorMap = {
   GOOGLE_CONNECTION_ERROR: {
     displayType: 'modal',
     modalType: 'PROVIDER_ACCESS_ERROR',
-  },  
+  },
   DRIVE_ACCESS_REVOKED: {
     displayType: 'modal',
     modalType: 'PROVIDER_ACCESS_REVOKED',
   },
   LINK_FOLDER_CONFLICT: {
     displayType: 'toast',
-    message: (error) => has(error, 'data.project.name') ? `Folder cannot be connect to 2 STEMN projects. Already connected to: '${error.data.project.name}'.` : error.message
+    message: (error) => has(error, 'data.project.name') ? `Folder cannot be connect to two STEMN projects. Already connected to: '${error.data.project.name}'.` : error.message
   }
 }
 
@@ -80,5 +80,3 @@ function processServerError(store, action){
     }))
   }
 }
-
-
