@@ -1,8 +1,8 @@
 {
-  "name": "STEMN",
-  "productName": "STEMN",
-  "version": "0.0.10",
-  "description": "Painless Engineering Versioning",
+  "name": "Stemn",
+  "productName": "Stemn",
+  "version": "0.0.11",
+  "description": "Engineering Versioning and Project Management",
   "repository" : { 
     "type" : "git",
     "url"  : "https://github.com/Stemn/Stemn-Desktop"
@@ -95,7 +95,7 @@
   ],
   "homepage": "https://stemn.com",
   "bugs": {
-    "url": "https://stemn.com",
+    "url": "https://github.com/Stemn/Stemn-Desktop/issues",
     "email": "bugs@stemn.com"
   },
   "dependencies": {
@@ -163,7 +163,7 @@
     "appId": "stemn.stemn",
     "app-bundle-id": "stemn.stemn",
     "app-category-type": "public.app-category.productivity",
-    "productName": "STEMN",
+    "productName": "Stemn",
     "compression": "normal",
     "asar": true,
     "win": {
