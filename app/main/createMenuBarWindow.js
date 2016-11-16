@@ -1,4 +1,4 @@
-import { BrowserWindow, screen, Menu } from 'electron';
+import { BrowserWindow, screen, Menu, shell } from 'electron';
 import path from 'path';
 import process from 'process';
 import Positioner from 'electron-positioner';
@@ -13,7 +13,7 @@ const VERT_PADDING = 30;
 export const create = () => {
   let browserWindow = null;
   let lastPosition = undefined;
-  
+
   if (browserWindow !== null) {
     return browserWindow;
   }
@@ -40,6 +40,16 @@ export const create = () => {
     });
   }
 
+  function handleRedirect(e, url) {
+    if (url !== browserWindow.webContents.getURL()) {
+      e.preventDefault();
+      shell.openExternal(url);
+    }
+  }
+
+  browserWindow.webContents.on('will-navigate', handleRedirect);
+  browserWindow.webContents.on('new-window', handleRedirect);
+
   browserWindow.loadURL(`file://${menuBarHtml}`);
   browserWindow.on('blur', () => {
     browserWindow.hide();
@@ -49,7 +59,7 @@ export const create = () => {
     browserWindow: browserWindow,
     show: show
   };
-  
+
   function show({ reposition } = {}){ // Set default otherwise ir crashes if the function has no inputs...
     if(reposition || !lastPosition){
       const cursorPosition = screen.getCursorScreenPoint();
@@ -79,10 +89,9 @@ export const create = () => {
         return trayPositionVert == 'bottom' ? cursorPosition.y - WINDOW_HEIGHT - VERT_PADDING : cursorPosition.y + VERT_PADDING;
       }
     }
-    
+
     browserWindow.show();
     browserWindow.focus();
-    
+
   }
 }
-
