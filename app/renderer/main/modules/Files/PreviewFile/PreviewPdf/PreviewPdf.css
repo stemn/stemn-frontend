@@ -1,14 +1,12 @@
 @value border1, bg1 from "app/renderer/assets/css/themes/standard.css";
 
 .viewer {
-  padding-top: 3em;
-  padding-bottom: 3em;
   background: bg1;
 }
 
 .page {
   position: relative;
-  margin: 0 auto 3em auto;
+  margin: 30px auto;
   background-clip: content-box;
   background-color: white;
   outline: 1px solid border1;
@@ -22,7 +20,6 @@
   top: 0;
   right: 0;
   bottom: 0;
-  overflow: hidden;
   opacity: 0.2;
   line-height: 1.0;
 

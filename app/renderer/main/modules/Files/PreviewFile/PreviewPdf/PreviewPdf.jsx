@@ -73,11 +73,11 @@ const PDF = React.createClass({
   render () {
     const { pdf, scale } = this.state;
     return (
-      <ScrollZoom zoomIn={() => this.zoom('in')} zoomOut={() => this.zoom('out') }>
-        <div className="pdf-context">
+      <div className={classes.viewer + ' layout-column flex'}>
+        <ScrollZoom zoomIn={() => this.zoom('in')} zoomOut={() => this.zoom('out') }>
           <Viewer pdf={pdf} scale={scale} />
-        </div>
-      </ScrollZoom>
+        </ScrollZoom>
+      </div>
     )
   }
 });

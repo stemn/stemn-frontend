@@ -1,6 +1,5 @@
 import React from 'react';
 import Page from './PreviewPdfPage.jsx'
-import classes from './PreviewPdf.css';
 
 class Viewer extends React.Component {
   render () {
@@ -18,7 +17,7 @@ class Viewer extends React.Component {
       ))
 
     return (
-      <div className={classes.viewer}>
+      <div>
         {pages}
       </div>
     )

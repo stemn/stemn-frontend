@@ -58,24 +58,26 @@ const Page = React.createClass({
     }
   },
   scale (scale){
-    console.log(scale);
 //    if(this.state.page){
 //      this._renderPage(this.state.page)
 //    }
   },
+  context: undefined,
+  viewport: undefined,
+  textLayer: undefined,
   _renderPage (page) {
     const { scale, index } = this.props;
-    const viewport = page.getViewport(scale);
-    const { width, height } = viewport;
+    this.viewport = page.getViewport(scale);
+    const { width, height } = this.viewport;
     const canvas = this.refs.canvas
     const textEl = this.refs.text;
-    const context = canvas.getContext('2d');
+    this.context = canvas.getContext('2d');
 
     // Create a HDPI canvas
     const ratio = 3;
     canvas.width = width * ratio;
     canvas.height = height * ratio;
-    context.scale(ratio, ratio);
+    this.context.scale(ratio, ratio);
 
     this.setState({
       status: 'rendered',
@@ -84,37 +86,43 @@ const Page = React.createClass({
     })
 
     page.render({
-      canvasContext: context,
-      viewport: viewport
+      canvasContext: this.context,
+      viewport: this.viewport
     })
-    page.getTextContent().then(function(textContent){
-      var textLayer = new PDFJSUtils.PDFJS.TextLayerBuilder({
+    page.getTextContent().then((textContent) => {
+      this.textLayer = new PDFJSUtils.PDFJS.TextLayerBuilder({
         textLayerDiv : textEl,
         pageIndex : index - 1,
-        viewport : viewport
+        viewport : this.viewport
       });
 
-      textLayer.setTextContent(textContent);
-      textLayer.render();
+      this.textLayer.setTextContent(textContent);
+      this.textLayer.render();
     });
   },
+
+
   render () {
     const { pdf, scale, index } = this.props;
     const { width, height, status, page } = this.state;
 
-    const size = {
+    const sizeStyles = {
       width: width * scale,
       height: height * scale,
     };
+    const textStyles = {
+      transform: `scale(${scale})`,
+      transformOrigin: '0% 0%'
+    }
 
     return (
-      <div className={classes.page + ' ' + status} style={size}>
+      <div className={classes.page + ' ' + status} style={sizeStyles}>
         <LoadingOverlay show={status == 'loading'}/>
         <Waypoint onEnter={this._enterPage}/>
-        <div style={size}>
-          <canvas ref="canvas" style={size}/>
+        <div style={sizeStyles}>
+          <canvas ref="canvas" style={sizeStyles}/>
         </div>
-        <div ref="text" className={classes.textLayer} style={{transform: `scale(${scale})`}}></div>
+        <div ref="text" className={classes.textLayer} style={textStyles}></div>
       </div>
     )
   }
