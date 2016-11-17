@@ -5,6 +5,7 @@ import mdMathjax            from 'markdown-it-mathjax';
 import classes              from './EditorDisplay.css';
 import { validateMention }  from 'app/renderer/main/modules/Mentions/Mentions.utils.js';
 import htmlToReact          from 'html-to-react';
+import hljs                 from 'highlight.js';
 import classNames           from 'classnames';
 import { connect }          from 'react-redux';
 import * as ModalActions    from 'app/renderer/main/modules/Modal/Modal.actions.js';
@@ -39,7 +40,15 @@ const htmlToReactParser = new htmlToReact.Parser();
 const md = markdownIt({
   html: true,
   linkify: true,
-  typographer: true
+  typographer: true,
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(lang, str).value;
+      } catch (__) {}
+    }
+    return ''; // use external default escaping
+  }
 });
 md.use(emoji);
 md.use(mdMathjax);

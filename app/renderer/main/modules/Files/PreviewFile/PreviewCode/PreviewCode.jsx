@@ -4,6 +4,7 @@ import codemirror from 'codemirror'
 import 'codemirror/mode/meta.js'
 const requireCodemirrorMode = require.context("codemirror/mode/", true);
 import LoadingOverlay     from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import EditorDisplay from 'app/renderer/main/modules/Editor/EditorDisplay.jsx';
 
 export const Viewer = React.createClass({
   render() {
@@ -31,8 +32,18 @@ export const Viewer = React.createClass({
       }, 1)
     }
 
+    const isMarkdown = false;
+//    const isMarkdown = extension == 'md';
     return (
-      <div className="scroll-box flex" ref="codemirror"></div>
+      <div className="layout-row flex">
+        <div className="scroll-box flex" ref="codemirror"></div>
+        { isMarkdown
+          ? <div className="scroll-box flex" style={{padding: '15px 30px'}}>
+              <EditorDisplay value={data}/>
+            </div>
+          : null
+        }
+      </div>
     )
   }
 });
