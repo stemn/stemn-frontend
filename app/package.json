@@ -90,6 +90,7 @@
     "sortablejs": "^1.4.2",
     "sql.js": "https://github.com/Stemn/sql.js/tarball/master",
     "substyle": "^2.0.2",
-    "url-loader": "^0.5.7"
+    "url-loader": "^0.5.7",
+    "winreg": "^1.2.2"
   }
 }

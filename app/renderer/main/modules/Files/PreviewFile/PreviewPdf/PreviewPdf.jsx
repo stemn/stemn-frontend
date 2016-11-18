@@ -9,7 +9,6 @@ import ScrollZoom from 'app/shared/modules/scroll/ScrollZoom/ScrollZoom.jsx'
 const propTypesObject = {
 //  src: React.PropTypes.string.isRequired
 };
-
 const PDF = React.createClass({
   getInitialState () {
     return {

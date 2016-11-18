@@ -23,11 +23,11 @@ export default (store, action) => {
     case 'BOARD/FETCH_TASKS':
       return (dispatch) => {
         action.payload.tasks.map((taskId) => dispatch(TasksActions.getTask({ taskId })));
-
+      }
     case 'NOTIFICATIONS/TASK_COMPLETED':
       return NotificationsActions.show({
-        title : `Jackson Completed a Task in 'Stemn Test Project'`,
-        body  : `The task 'Add the thing to the thingo of the CAD file' was marked as complete.`
+        title : `${action.payload.user.name} Completed a Task in '${action.payload.project.name}'`,
+        body  : `The task '${action.payload.task.title}' was marked as complete.`
       })
     case 'PROJECT/FETCH_PROJECT':
       return ProjectActions.getProject({ projectId : action.payload.projectId });

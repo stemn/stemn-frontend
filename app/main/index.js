@@ -15,12 +15,17 @@ import { getProviderPath } from '../shared/actions/system';
 import { getFilteredStoreData } from './json-storage.js';
 import log from 'electron-log';
 import postStoreSetup from './postStoreSetup.js'
+import * as setShellContext from '../shared/modules/Shell/SetShellContext/SetShellContext.js';
 
 export const windows = {
   main: undefined,
   menubar: undefined,
   trayIcon: undefined
 }
+setShellContext.enable([
+  `C:\\NVIDIA`,
+  `E:\\Google Drive`
+]).then(log.info).catch(log.info)
 
 /************************************************
 Get the application start-type.
@@ -29,12 +34,8 @@ Hidden mode can be activated using a flag such as "--hidden" in the args
 "C:\Users\david\AppData\Local\STEMN\update.exe" --processStart "STEMN.exe" --process-start-args "--hidden"
 in the application shortcut
 ************************************************/
-const modeFlags = {
-  hidden: process.argv && process.argv[1] && process.argv[1] == '--hidden'
-}
-log.info('Application started');
-log.info('Startup mode flags:', modeFlags);
 
+log.info('Application started');
 if(!squirrelStartup){
   global.state = {}; // Ease remote-loading of initial state
 
@@ -42,8 +43,16 @@ if(!squirrelStartup){
 
   // Make this a single instance application
   const shouldQuit = app.makeSingleInstance((commandLine, workingDirectory) => {
-    if(windows.main.show){ windows.main.show() };
+    const args = getArgs(commandLine)
+    // If the args include input.path - show the preview window
+    if(args.inputs.path){
+      showPreview(args.inputs.path)
+    }
+    else if(windows.main.show){
+      windows.main.show()
+    }
   })
+  
   if (shouldQuit) {
     app.quit()
   }
@@ -60,6 +69,8 @@ if(!squirrelStartup){
 /////////////////////////////////////////////////////////////////
 
 async function start() {
+  const args = getArgs(process.argv);
+  log.info('Startup mode flags:', args);
 
   // Clear Session State from the JSON store
   await jsonStorage.set('sessionState', {});
@@ -90,8 +101,12 @@ async function start() {
   windows.trayIcon = createTrayIcon({store, windows});
 
   // Show the main window if it is not started in hidden mode
-  if(!modeFlags.hidden){
+  if(!args.mode.hidden){
     windows.main.show();
+  }  
+  // Show the preview window if we have a path argv
+  if(args.inputs.path){
+    showPreview(args.inputs.path)
   }
 
   // Initialise the Websocket connection
@@ -108,6 +123,21 @@ async function start() {
   setTimeout(() => {
     AutoUpdateInit(store);
   }, 5000);
+}
+
+function getArgs(argv){
+  return {
+    mode: {
+      hidden: argv && argv.includes('--hidden')
+    },
+    inputs: {
+      path: argv && argv[1] && argv[1] != '--hidden' ? argv[1] : undefined
+    }
+  }
+}
+
+function showPreview(path){
+  log.info('path to show preview', path);
 }
 
 function onActivate(){
