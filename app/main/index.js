@@ -15,17 +15,12 @@ import { getProviderPath } from '../shared/actions/system';
 import { getFilteredStoreData } from './json-storage.js';
 import log from 'electron-log';
 import postStoreSetup from './postStoreSetup.js'
-import * as setShellContext from '../shared/modules/Shell/SetShellContext/SetShellContext.js';
 
 export const windows = {
   main: undefined,
   menubar: undefined,
   trayIcon: undefined
 }
-setShellContext.enable([
-  `C:\\NVIDIA`,
-  `E:\\Google Drive`
-]).then(log.info).catch(log.info)
 
 /************************************************
 Get the application start-type.

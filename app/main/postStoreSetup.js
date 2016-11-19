@@ -1,6 +1,7 @@
 import http from 'axios';
 import { ipcMain } from 'electron';
 import { getProviderPath } from '../shared/actions/system';
+import { enable as enableContext } from '../shared/modules/Shell/ShellContext/ShellContext.actions.js';
 
 
 export default (store) => {
@@ -16,6 +17,7 @@ export default (store) => {
   
   // Dispatch redux initial events
   store.dispatch(getProviderPath());
+  store.dispatch(enableContext());
   
 
 }
