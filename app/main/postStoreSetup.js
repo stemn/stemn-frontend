@@ -1,7 +1,8 @@
 import http from 'axios';
+import { values } from 'lodash';
 import { ipcMain } from 'electron';
 import { getProviderPath } from '../shared/actions/system';
-import { enable as enableContext } from '../shared/modules/Shell/ShellContext/ShellContext.actions.js';
+import  * as shellContext from '../shared/modules/Shell/ShellContext/ShellContext.actions.js';
 
 
 export default (store) => {
@@ -17,7 +18,14 @@ export default (store) => {
   
   // Dispatch redux initial events
   store.dispatch(getProviderPath());
-  store.dispatch(enableContext());
-  
 
+  // Dispatch context-menu setup
+  setTimeout(() => {
+    // Get set the Dropbox/Drive provider paths as the context-menu folders
+    store.dispatch(shellContext.updateConfig({
+      folders: values(store.getState().system.providerPath)
+    }))
+    // Enable the context menu
+    store.dispatch(shellContext.enable());
+  }, 1000)
 }

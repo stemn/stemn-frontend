@@ -14,7 +14,11 @@ import mapWebsocketToRedux from './modules/websocket/mapWebsocketToRedux'
 import { getProviderPath } from '../shared/actions/system';
 import { getFilteredStoreData } from './json-storage.js';
 import log from 'electron-log';
-import postStoreSetup from './postStoreSetup.js'
+import postStoreSetup from './postStoreSetup.js';
+import initApiServer from './api/index.js';
+
+// Actions
+import * as ElectronWindowsActions from '../shared/modules/ElectronWindows/ElectronWindows.actions.js';
 
 export const windows = {
   main: undefined,
@@ -22,15 +26,26 @@ export const windows = {
   trayIcon: undefined
 }
 
-/************************************************
-Get the application start-type.
+let store = {};
 
-Hidden mode can be activated using a flag such as "--hidden" in the args
-"C:\Users\david\AppData\Local\STEMN\update.exe" --processStart "STEMN.exe" --process-start-args "--hidden"
-in the application shortcut
-************************************************/
+/***********************************************************************************************
 
-log.info('Application started');
+STARTUP FLAGS:
+Hidden mode can be activated using a flag such as "--hidden" in the args:
+  "C:\Users\david\AppData\Local\STEMN\update.exe" --processStart "STEMN.exe"
+  --process-start-args "--hidden"
+
+Additionally, the local-path to a file can be passed in such as:
+  "C:\Users\david\AppData\Local\STEMN\update.exe" --processStart "STEMN.exe" "E:\Dropbox
+  (Platino Properties)\David Revay Resume.pdf"
+
+If a file-path is found a preview-window will pop that attempts to display revisions for that
+file.
+
+***********************************************************************************************/
+
+log.info('---------------- Application started ----------------');
+
 if(!squirrelStartup){
   global.state = {}; // Ease remote-loading of initial state
 
@@ -41,7 +56,7 @@ if(!squirrelStartup){
     const args = getArgs(commandLine)
     // If the args include input.path - show the preview window
     if(args.inputs.path){
-      showPreview(args.inputs.path)
+      showPreview(store.dispatch, args.inputs.path)
     }
     else if(windows.main.show){
       windows.main.show()
@@ -61,8 +76,6 @@ if(!squirrelStartup){
   app.on('activate', onActivate);
 }
 
-/////////////////////////////////////////////////////////////////
-
 async function start() {
   const args = getArgs(process.argv);
   log.info('Startup mode flags:', args);
@@ -79,7 +92,7 @@ async function start() {
   });
 
   // Configure store
-  const store = configureStore(global.state);
+  store = configureStore(global.state);
   postStoreSetup(store);
   
   store.subscribe(async () => {
@@ -88,6 +101,9 @@ async function start() {
     await jsonStorage.set('state', dataToStore);
     await jsonStorage.set('sessionState',  global.state);
   });
+
+  // Initialise the api server
+  initApiServer(store);
 
 
   // Create windows and tray icon
@@ -101,8 +117,9 @@ async function start() {
   }  
   // Show the preview window if we have a path argv
   if(args.inputs.path){
-    showPreview(args.inputs.path)
+    showPreview(store.dispatch, args.inputs.path)
   }
+//  showPreview(store.dispatch)
 
   // Initialise the Websocket connection
   const websocket = wsInitialise(process.env.WEBSOCKET_SERVER);
@@ -131,8 +148,17 @@ function getArgs(argv){
   }
 }
 
-function showPreview(path){
+function showPreview(dispatch, path){
+  path = 'E:\Dropbox (Platino Properties)\David Revay Resume.pdf'
   log.info('path to show preview', path);
+  if(dispatch && path){
+    dispatch(ElectronWindowsActions.create({
+      type: 'PREVIEW',
+      props: {
+        localPath: path
+      }
+    }))
+  }
 }
 
 function onActivate(){

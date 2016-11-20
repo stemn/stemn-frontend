@@ -35,3 +35,18 @@ export function getMeta({fileId, revisionId}) {
     }
   };
 }
+
+export function getIdFromPath({provider, path}) {
+  return {
+    type: 'FILES/GET_ID_FROM_PATH',
+    http: true,
+    payload: {
+      method: 'GET',
+      url: `/api/v1/remote/pathToId/${provider}/${path}`,
+    },
+    meta: {
+      provider,
+      path
+    }
+  };
+}
