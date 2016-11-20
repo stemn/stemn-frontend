@@ -7,8 +7,6 @@ import ProjectPage      from './pages/ProjectPage/ProjectPage.jsx';
 import AppAuthedPage    from './pages/AppAuthedPage/AppAuthedPage.jsx';
 import AppUnAuthedPage  from './pages/AppUnAuthedPage/AppUnAuthedPage.jsx';
 
-const AuthActions = require('../../shared/actions/auth');
-
 export default (store) => {
   return (
     <Route           component={AppRootPage}     path="/">

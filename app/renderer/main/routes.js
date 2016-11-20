@@ -28,10 +28,6 @@ import ProjectSettingsTeamPage     from './pages/ProjectPage/ProjectSettingsPage
 import ProjectFeedPage             from './pages/ProjectFeedPage/ProjectFeedPage.jsx';
 import ProjectTaskPage             from './pages/ProjectTaskPage/ProjectTaskPage.jsx';
 
-// Actions
-const AuthActions = require('../../shared/actions/auth');
-
-
 export default (store) => {
   return (
     <Route                                           component={AppRootPage}>

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as ProjectsActions from 'app/shared/actions/projects.js';
-import * as AuthActions from 'app/shared/actions/auth.js';
+import * as AuthActions from 'app/shared/modules/Auth/Auth.actions.js';
 
 // Component
 import Select from 'react-select';
