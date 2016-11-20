@@ -1,5 +1,5 @@
 import {  shell } from 'electron';
-import { oauthCreds } from './auth.config.js';
+import { oauthCreds } from './Auth.config.js';
 import querystring from 'querystring';
 import http from 'axios';
 import * as ProjectsActions from '../../actions/projects.js';
