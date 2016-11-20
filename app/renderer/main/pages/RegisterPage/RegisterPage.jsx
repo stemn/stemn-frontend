@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as AuthActions from 'app/shared/actions/auth.js';
+import * as AuthActions from 'app/shared/modules/Auth/Auth.actions.js';;
 
 // Component Core
 import React from 'react';

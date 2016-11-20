@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 // Container Actions
 import * as SidebarActions from 'app/shared/actions/sidebar';
 import * as HeaderActions from 'app/shared/actions/header';
-import * as AuthActions from 'app/shared/actions/auth';
+import * as AuthActions from 'app/shared/modules/Auth/Auth.actions.js';
 
 // Component Core
 import React from 'react';

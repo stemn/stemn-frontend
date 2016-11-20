@@ -38,7 +38,7 @@ const suffixes = {
 }
 
 export default store => next => action => {
-  if(action.httpPackage){
+  if(action && action.httpPackage){
     const { endpoint } = action.httpPackage;
     const dispatch     = store.dispatch;
     if(!requests[endpoint]){            // If the requests object does not exist:

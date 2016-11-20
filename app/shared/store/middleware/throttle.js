@@ -23,7 +23,7 @@ import i from 'icepick';
 const timeouts = {};
 
 export default store => next => action => {
-  if(action.throttle && action.throttle.endpoint && action.throttle.time){
+  if(action && action.throttle && action.throttle.endpoint && action.throttle.time){
     const { endpoint, time } = action.throttle;
 
     if(timeouts[endpoint]){                                           // If the timeout exists:

@@ -105,7 +105,6 @@ async function start() {
   // Initialise the api server
   initApiServer(store);
 
-
   // Create windows and tray icon
   windows.main     = createMainWindow();
   windows.menubar  = createMenubarWindow();
@@ -119,7 +118,7 @@ async function start() {
   if(args.inputs.path){
     showPreview(store.dispatch, args.inputs.path)
   }
-//  showPreview(store.dispatch)
+  showPreview(store.dispatch, '"E:\\Google Drive\David Test folder\\5_Cylinder_Engine.skp"')
 
   // Initialise the Websocket connection
   const websocket = wsInitialise(process.env.WEBSOCKET_SERVER);
@@ -138,18 +137,19 @@ async function start() {
 }
 
 function getArgs(argv){
+  // Note - the argv.length > 3 condition is to stop it pulling in short flags as a path
+  // This would break file-paths < 4 characters - hopefully this is not a problem...
   return {
     mode: {
       hidden: argv && argv.includes('--hidden')
     },
     inputs: {
-      path: argv && argv[1] && argv[1] != '--hidden' ? argv[1] : undefined
+      path: argv && argv[1] && argv[1] != '--hidden' && argv[1].length > 3 ? argv[1] : undefined
     }
   }
 }
 
 function showPreview(dispatch, path){
-  path = 'E:\Dropbox (Platino Properties)\David Revay Resume.pdf'
   log.info('path to show preview', path);
   if(dispatch && path){
     dispatch(ElectronWindowsActions.create({

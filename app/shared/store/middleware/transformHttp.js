@@ -4,7 +4,7 @@ import http from 'axios';
 const transformHttp = store => next => action => {
   // If the action has action.http = true, we wrap the payload in axios.
   let modifiedAction;
-  if(action.http){
+  if(action && action.http){
     modifiedAction = i.merge(action, {
       payload: http(action.payload).then(action.then)
     })

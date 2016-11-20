@@ -8,7 +8,7 @@ It will execute in the main thread.
 import { getFunction } from './FunctionLibrary.js';
 
 export default store => next => action => {
-  if(action.aliased) {
+  if(action && action.aliased) {
     const { functionAlias, functionInputs } = action.payload;
     const functionFromAlias = getFunction(functionAlias);
     if(functionFromAlias){

@@ -19,7 +19,7 @@ import { socket } from './websocket.js';
 
 export default store => next => action => {
   const token = store.getState().auth.authToken;
-  if(action.websocket && socket && action.payload) {
+  if(action && action.websocket && socket && action.payload) {
     socket.write({
       type: action.payload.type,
       payload: Object.assign({}, action.payload.payload, {
