@@ -18,6 +18,19 @@ export function loadUserData() {
   }
 }
 
+export function sendAuthToken({url, code}) {
+  return {
+    type: 'AUTH/SEND_AUTH_TOKEN',
+    payload: http({
+      method: 'POST',
+      url: url,
+      data: {
+        code: code
+      }
+    })
+  }
+}
+
 export function authenticate(provider) {
   return (dispatch) => {
     return dispatch({

@@ -1,9 +1,11 @@
+const rootDomain = 'http://localhost:49554';
+
 export const oauthCreds = {
   facebook: {
     url                   : 'https://www.facebook.com/dialog/oauth',
     postUrl               : `/api/v1/auth/facebook`,
     params                : {
-      redirect_uri        : 'https://stemn.com/auth/facebook',
+      redirect_uri        : `${rootDomain}/auth/facebook`,
       client_id           : '710281375734499',
     },
   },
@@ -12,7 +14,7 @@ export const oauthCreds = {
     postUrl               : `/api/v1/auth/google`,
     params                : {
       access_type         : 'offline',
-      redirect_uri        : 'https://stemn.com/auth/google',
+      redirect_uri        : `${rootDomain}/auth/google`,
       response_type       : 'code',
       prompt              : 'consent', // forces request of refresh token
       client_id           : '502305750839-8m9aian8ka9qb6j64t3dtjs2nq96tdae.apps.googleusercontent.com',
@@ -24,7 +26,7 @@ export const oauthCreds = {
     postUrl               : `/api/v1/auth/linkedin`,
     params                : {
       response_type       : 'code',
-      redirect_uri        : 'https://stemn.com/auth/linkedin',
+      redirect_uri        : `${rootDomain}/auth/linkedin`,
       client_id           : '75gm1u1gda1xoe',
       scope               : ['r_fullprofile', 'r_emailaddress'],
     },
@@ -33,7 +35,7 @@ export const oauthCreds = {
     url                   : 'https://www.dropbox.com/oauth2/authorize',
     postUrl               : `/api/v1/auth/dropbox`,
     params                : {
-      redirect_uri        : 'https://stemn.com/auth/dropbox',
+      redirect_uri        : `${rootDomain}/auth/dropbox`,
       response_type       : 'token',
       client_id           : '0wgo11dn573805b'
     },
