@@ -58,7 +58,7 @@ export default React.createClass({
 
   render() {
     const inputProps = {
-        placeholder: "Search for team member",
+      placeholder: "Search for team member",
       value: this.props.userSearch.value,
       onChange: this.onChange
     };
