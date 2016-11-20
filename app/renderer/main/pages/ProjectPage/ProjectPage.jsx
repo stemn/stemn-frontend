@@ -49,10 +49,10 @@ class Component extends React.Component{
         return (
           <Banner type="warn">
             Could not find <span style={capitalize}>{provider}</span> on your computer.
-            The <span style={capitalize}>{provider}</span> desktop client must be installed for this project to Sync to your computer.
-            &nbsp;&nbsp;&nbsp;<a style={underline} href={downloadLinks[provider]}>Download {provider}</a>
+            The <span style={capitalize}>{provider}</span> desktop client must be installed for this project to sync to your computer.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style={underline} href={downloadLinks[provider]}>Download {provider}</a>
             &nbsp;or&nbsp;
-            <a style={underline} onClick={systemActions.getProviderPath}>Check again</a>
+            <a style={underline} onClick={systemActions.getProviderPath}>Check again.</a>
           </Banner>
         );
       }

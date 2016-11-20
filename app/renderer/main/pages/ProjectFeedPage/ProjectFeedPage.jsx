@@ -118,15 +118,15 @@ export const Component = React.createClass({
     }
     else{
       const guideInfo = [{
-        title: 'File store not found',
-        description: 'You must connect this project to a file store (Dropbox or Google Drive) so Stemn can access your file changes.',
+        title: 'Cloud Storage Not Connected',
+        description: 'Connect this project to your cloud storage folder so STEMN can track changes to your files.',
         image: cloudProviders,
       }];
       return (
         <div className="layout-column flex layout-align-center">
           <div className="layout-row layout-align-center"><Guide data={guideInfo[0]}/></div>
           <div className="layout-row layout-align-center">
-            <Link to={`${baseLink}/settings`}><Button className="primary lg">Connect a file store</Button> </Link>
+            <Link to={`${baseLink}/settings`}><Button className="primary lg">Select Project Folder</Button> </Link>
           </div>
         </div>
       )

@@ -123,20 +123,20 @@ export const Component = React.createClass({
       <div>
         <div className={classes.panel}>
          <h3>General Settings</h3>
-         <p>Add your project name and blurb.</p>
-         <Input 
-           model={`${entityModel}.data.name`} 
-           value={project.data.name} 
-           className="dr-input" 
-           type="text" 
+         <p>Set your project name and blurb.</p>
+         <Input
+           model={`${entityModel}.data.name`}
+           value={project.data.name}
+           className="dr-input"
+           type="text"
            placeholder="Project Name"
          />
          <br />
-         <Input 
-           model={`${entityModel}.data.summary`} 
-           value={project.data.summary} 
-           className="dr-input" 
-           type="text" 
+         <Input
+           model={`${entityModel}.data.summary`}
+           value={project.data.summary}
+           className="dr-input"
+           type="text"
            placeholder="Project Summary"
          />
          <br />
@@ -149,8 +149,8 @@ export const Component = React.createClass({
          </div>
        </div>
        <div className={classes.panel}>
-         <h3>File Store Settings</h3>
-         <p>Connect your Dropbox or Drive to sync all files and changes. Only one Google Drive or one Dropbox can be connected to a project.</p>
+         <h3>Cloud Storage Folder</h3>
+         <p>Select your project's cloud storage folder. STEMN will track all changes to files in this folder.</p>
          { has(project, 'formModels.fileStore.remote')
          ? <ProjectLinkRemote model={`${entityModel}.formModels.fileStore.remote.provider`} value={project.formModels.fileStore.remote.provider}/>
          : null }
@@ -172,7 +172,7 @@ export const Component = React.createClass({
            onClick={()=>this.confirmLinkRemote()}
            loading={project.linkPending}
            error={project.linkRejected}
-           >Update File Store</ProgressButton>
+           >Update Folder</ProgressButton>
          </div>
        </div>
 

@@ -49,8 +49,8 @@ const TasksPanel = React.createClass({
     if(has(board, 'forms.labels')){
       return(
         <div className={classes.panel}>
-          <h3>Task Label Settings</h3>
-          <p>Labels are used to classify tasks. If you delete a label, it will be removed from all existing tasks.</p>
+          <h3>Task Labels</h3>
+          <p>Labels are used to categorize tasks. If you delete a label, it will be removed from all assigned tasks.</p>
           <TaskLabelsEdit model={`${boardModel}.forms.labels`} value={board.forms.labels} />
           <br />
           <div className="layout-row">

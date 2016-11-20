@@ -24,7 +24,7 @@ export const Component = React.createClass({
   confirmDelete(model, index){
     this.props.dispatch(
       ModalActions.showConfirm({
-        message: 'If you delete a label it will be removed from all existing tasks.',
+        message: 'If you delete this label it will be removed from all assigned tasks.',
         modalConfirm: {
           type: 'ALIASED',
           aliased: true,
@@ -69,22 +69,22 @@ export const Component = React.createClass({
                   value={label.color}
                 />
               </PopoverMenu>
-              <Input 
-                model={`${model}[${index}].color`} 
-                value={label.color} 
-                className={classes.colorSelectInput + ' dr-input'} 
-                type="text" 
-                placeholder="Color Code" 
+              <Input
+                model={`${model}[${index}].color`}
+                value={label.color}
+                className={classes.colorSelectInput + ' dr-input'}
+                type="text"
+                placeholder="Color Code"
                 id={label._id}
               />
             </div>
 
             <div className={classes.name + ' flex'}>
-              <Input 
+              <Input
                 model={`${model}[${index}].name`}
                 value={label.name}
-                className="dr-input" 
-                type="text" 
+                className="dr-input"
+                type="text"
                 placeholder="Label Name"
               />
             </div>
