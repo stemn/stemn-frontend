@@ -1,6 +1,6 @@
 import express from 'express';
-import config from '../config/config.js'
-import { authGoogle } from './routes.js'
+import config from '../config/config.js';
+import { authGoogle } from './routes.js';
 
 export default (store) => {
 
@@ -13,6 +13,8 @@ export default (store) => {
   });
 
   server.get('/api/auth/google', authGoogle);
+  server.get('/api/auth/dropbox', authDropox);
+  server.get('/api/auth/facebook', authFacebook);
 
   server.listen(config.api.port);
 
