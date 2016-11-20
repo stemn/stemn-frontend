@@ -4,7 +4,7 @@ import PDFJS from 'pdfjs-dist'
 import Viewer from './PreviewPdfViewer.jsx'
 const PDF_URL = 'https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf'
 import classes from './PreviewPdf.css';
-import ScrollZoom from 'app/shared/modules/scroll/ScrollZoom/ScrollZoom.jsx'
+import ScrollZoom from 'app/shared/modules/Scroll/ScrollZoom/ScrollZoom.jsx'
 
 const propTypesObject = {
 //  src: React.PropTypes.string.isRequired
@@ -60,6 +60,3 @@ PDF.childContextTypes = {
 }
 
 export default PDF;
-
-
-

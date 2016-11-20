@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './PreviewImage.css';
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import ScrollZoom from 'app/shared/modules/scroll/ScrollZoom/ScrollZoom.jsx'
+import ScrollZoom from 'app/shared/modules/Scroll/ScrollZoom/ScrollZoom.jsx'
 
 export default React.createClass({
   getInitialState () {
