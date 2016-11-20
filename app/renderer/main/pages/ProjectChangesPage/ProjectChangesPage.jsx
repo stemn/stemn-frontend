@@ -37,13 +37,13 @@ const guideInfo = [{
   image: commitChanges,
 },{
   title: 'Review recent file changes',
-  description: 'Compare your files before and after recent changes. Review changes to help you add informative commit messages for your teammates.',
+  description: 'Compare your files before and after recent changes. Review changes to help you add an informative commit message for your teammates.',
   image: compareFile,
 }]
 
 const notConnectedGuide = [{
-  title: 'File store not found',
-  description: 'You must connect this project to a file store (Dropbox or Google Drive) so Stemn can access your file changes.',
+  title: 'Cloud Storage Not Connected',
+  description: 'Connect this project to your cloud storage folder so STEMN can track changes to your files.',
   image: cloudProviders,
 }]
 
@@ -115,7 +115,7 @@ export const Component = React.createClass({
             <Guide data={notConnectedGuide[0]}/>
           </div>
           <div className="layout-row layout-align-center">
-            <Link to={`${baseLink}/settings`}><Button className="primary lg">Connect a file store</Button></Link>
+            <Link to={`${baseLink}/settings`}><Button className="primary lg">Select Project Folder</Button></Link>
           </div>
         </div>
       )
@@ -137,7 +137,7 @@ export const Component = React.createClass({
       const filePrevious = has(changes, 'selected.data.previousRevisionId')
         ? i.assocIn(changes.selected.data, ['revisionId'], changes.selected.data.previousRevisionId)
         : null;
-    
+
       return (
         <div className="layout-column flex rel-box">
           <div className="layout-row flex">

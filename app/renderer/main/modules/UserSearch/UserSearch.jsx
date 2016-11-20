@@ -58,7 +58,7 @@ export default React.createClass({
 
   render() {
     const inputProps = {
-      placeholder: "Invite a user.",
+      placeholder: "Invite a user",
       value: this.props.userSearch.value,
       onChange: this.onChange
     };
