@@ -1,6 +1,6 @@
 import express from 'express';
 import config from '../config/config.js';
-import { authGoogle } from './routes.js';
+import { authGoogle, authDropbox, authFacebook } from './routes.js';
 
 export default (store) => {
   const server = express();
@@ -12,7 +12,7 @@ export default (store) => {
   });
 
   server.get('/api/auth/google', authGoogle);
-  server.get('/api/auth/dropbox', authDropox);
+  server.get('/api/auth/dropbox', authDropbox);
   server.get('/api/auth/facebook', authFacebook);
 
   server.listen(config.api.port);

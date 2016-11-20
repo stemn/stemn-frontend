@@ -118,7 +118,7 @@ async function start() {
   if(args.inputs.path){
     showPreview(store.dispatch, args.inputs.path)
   }
-  showPreview(store.dispatch, 'E:\\Dropbox (Platino Properties)\\David Revay Resume.pdf')
+  showPreview(store.dispatch, '"E:\\Google Drive\David Test folder\\5_Cylinder_Engine.skp"')
 
   // Initialise the Websocket connection
   const websocket = wsInitialise(process.env.WEBSOCKET_SERVER);
