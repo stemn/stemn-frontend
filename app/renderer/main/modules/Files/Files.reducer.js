@@ -1,7 +1,8 @@
 import i from 'icepick'
 const initialState = {
   fileData: {},
-  fileMeta: {}
+  fileMeta: {},
+  pathToId: {}
 };
 
 export default function (state = initialState, action) {
@@ -25,15 +26,21 @@ export default function (state = initialState, action) {
         data: action.payload.data,
         loading: false
       })
-//    case 'FILES/GET_ID_FROM_PATH_PENDING' :
-//      return i.assocIn(state, ['fileMeta', action.meta.cacheKey, 'loading'], true)
-//    case 'FILES/GET_ID_FROM_PATH_REJECTED' :
-//      return i.assocIn(state, ['fileMeta', action.meta.cacheKey, 'loading'], false)
-//    case 'FILES/GET_ID_FROM_PATH_FULFILLED' :
-//      return i.assocIn(state, ['fileMeta', action.meta.cacheKey], {
-//        data: action.payload.data,
-//        loading: false
-//      })
+    case 'FILES/GET_META_FROM_PATH_PENDING' :
+      return i.assocIn(state, ['pathToId', action.meta.cacheKey, 'loading'], true)
+    case 'FILES/GET_META_FROM_PATH_REJECTED' :
+      return i.assocIn(state, ['pathToId', action.meta.cacheKey, 'loading'], false)
+    case 'FILES/GET_META_FROM_PATH_FULFILLED' :
+      return i.chain(state)
+      .assocIn(['pathToId', action.meta.cacheKey], {
+        data: action.payload.data.fileId,
+        loading: false
+      })
+      .assocIn(['fileMeta', `${action.payload.data.fileId}`], {
+        data: action.payload.data,
+        loading: false
+      })
+      .value();
 
 //    case 'FILES/GET_META_FULFILLED' :
 //      return u({
