@@ -15,6 +15,9 @@ export default React.createClass({
       this.toggle(toState);
     }, this.toggleDelayTime)
   },
+  componentWillUnmount(){
+    clearInterval(this.toggleDelayTimeout);
+  },
   toggle (toState) {
     this.setState({ isOpen: toState === null ? !this.state.isOpen : toState })
   },

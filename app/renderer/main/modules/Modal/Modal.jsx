@@ -93,9 +93,18 @@ export const Component = React.createClass({
 });
 
 function callbackFunction(callbackObject, dispatch, extendObject){
+  console.log(callbackObject, extendObject);
   // If it is a normal object, extend and dispatch it
-  if(callbackObject){
+  if(callbackObject && !callbackObject.aliased){
     dispatch(i.merge(callbackObject, extendObject))
+  }
+  else if(callbackObject && callbackObject.aliased){
+    // Extend the aliased function inputs
+    dispatch(i.merge(callbackObject, {
+      payload: {
+        functionInputs: extendObject
+      }
+    }))
   }
 }
 

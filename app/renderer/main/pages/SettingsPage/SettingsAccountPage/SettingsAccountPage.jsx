@@ -98,8 +98,8 @@ export const Component = React.createClass({
           <div className={classes.panel}>
             <h3>Cloud Providers</h3>
             <p>Link your cloud file storage to STEMN to track changes to your files.</p>
-            <LinkAccount text="Dropbox" isLinked={auth.user.accounts.dropbox.id} linkFn={()=>authActions.authenticate('dropbox')} unLinkFn={()=>authActions.unlink('dropbox')}/>
-            <LinkAccount text="Google Drive" isLinked={auth.user.accounts.google.refreshToken} linkFn={()=>authActions.authenticate('google')} unLinkFn={()=>authActions.unlink('google')}/>
+            <LinkAccount text="Dropbox" isLinked={auth.user.accounts.dropbox && auth.user.accounts.dropbox.id} linkFn={()=>authActions.authenticate('dropbox')} unLinkFn={()=>authActions.unlink('dropbox')}/>
+            <LinkAccount text="Google Drive" isLinked={auth.user.accounts.google &&  auth.user.accounts.google.refreshToken} linkFn={()=>authActions.authenticate('google')} unLinkFn={()=>authActions.unlink('google')}/>
           </div>
 
           <div className={classes.panel}>

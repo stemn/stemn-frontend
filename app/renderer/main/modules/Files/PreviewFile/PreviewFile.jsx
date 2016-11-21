@@ -38,8 +38,7 @@ export const Component = React.createClass({
         return <PreviewPcb previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile} />
       }
       else if(viewerType == 'code'){
-//        return <PreviewCode previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile}/>
-        return <PreviewPdf previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile}/>
+        return <PreviewCode previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile}/>
       }
       else if(viewerType == 'autodesk'){
         return <PreviewCad previewId={previewId} fileMeta={file} />

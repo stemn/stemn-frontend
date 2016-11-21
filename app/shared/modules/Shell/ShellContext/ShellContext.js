@@ -61,7 +61,7 @@ const getKeys = ({folders, title, appName, appPath}) => {
     command: {
       key: `\\Software\\Classes\\*\\shell\\${appName}\\command`,
       name: '',
-      value: `${appPath} "%1"`,
+      value: `${appPath} --path "%1"`,
       hive, type
     }
   }

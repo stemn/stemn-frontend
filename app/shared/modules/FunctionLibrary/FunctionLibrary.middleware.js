@@ -28,7 +28,7 @@ function dispatchAction(store, action, aliasedResult){
   if(typeof aliasedResult === "function"){
     store.dispatch(aliasedResult);
   }
-  // If the initial action has a type, we use the aliasedResult as the payload.
+  // If the initial action has a type (that is not ALIASED), we use the aliasedResult as the payload.
   else if(action.type && action.type != 'ALIASED'){
     const updatedAction = Object.assign({}, action, {
       payload: aliasedResult, 

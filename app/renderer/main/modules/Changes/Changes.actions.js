@@ -78,7 +78,7 @@ export function mentionTasksModal({projectId, mentions}) {
         aliased: 'true',
         payload: {
           functionAlias: 'ChangesActions.mentionTasks',
-          functionInputs: { projectId }
+          functionInputs: { projectId, mentions }
         }
       }
     }))

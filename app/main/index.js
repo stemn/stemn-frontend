@@ -36,7 +36,7 @@ Hidden mode can be activated using a flag such as "--hidden" in the args:
   --process-start-args "--hidden"
 
 Additionally, the local-path to a file can be passed in such as:
-  "C:\Users\david\AppData\Local\STEMN\update.exe" --processStart "STEMN.exe" "E:\Dropbox
+  "C:\Users\david\AppData\Local\STEMN\update.exe" --processStart "STEMN.exe" --path "E:\Dropbox
   (Platino Properties)\David Revay Resume.pdf"
 
 If a file-path is found a preview-window will pop that attempts to display revisions for that
@@ -118,12 +118,10 @@ async function start() {
   if(args.inputs.path){
     showPreview(store.dispatch, args.inputs.path)
   }
-  showPreview(store.dispatch, 'E:\\Google Drive\\David Test folder\\5_Cylinder_Engine.skp')
 
   // Initialise the Websocket connection
   const websocket = wsInitialise(process.env.WEBSOCKET_SERVER);
   websocket.on('data', (action) => {
-    log.info('websocket received data\n', JSON.stringify(action))
     const reduxAction = mapWebsocketToRedux(store, action);
     if(reduxAction){
       store.dispatch(reduxAction)
@@ -137,14 +135,15 @@ async function start() {
 }
 
 function getArgs(argv){
-  // Note - the argv.length > 3 condition is to stop it pulling in short flags as a path
-  // This would break file-paths < 4 characters - hopefully this is not a problem...
+  const pathFlagIndex = argv.indexOf('--path');
+  const pathIndex = pathFlagIndex != -1 ? pathFlagIndex + 1 : -1;
+  log.info('argv', argv)
   return {
     mode: {
       hidden: argv && argv.includes('--hidden')
     },
     inputs: {
-      path: argv && argv[1] && argv[1] != '--hidden' && argv[1].length > 3 ? argv[1] : undefined
+      path: argv && pathIndex != -1 ? argv[pathIndex] : undefined
     }
   }
 }

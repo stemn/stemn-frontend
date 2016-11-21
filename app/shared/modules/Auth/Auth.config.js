@@ -35,8 +35,9 @@ export const oauthCreds = {
     url                   : 'https://www.dropbox.com/oauth2/authorize',
     postUrl               : `/api/v1/auth/dropbox`,
     params                : {
+      force_reapprove     : true,
       redirect_uri        : `${rootDomain}/api/auth/dropbox`,
-      response_type       : 'token',
+      response_type       : 'code',
       client_id           : '0wgo11dn573805b'
     },
   }

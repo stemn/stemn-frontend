@@ -43,9 +43,9 @@ function queryByString(item, queryString){
 }
 
 function filterGroups({groups, tasks, filterFn}){
-  return groups.map(group => {
+  return groups ? groups.map(group => {
     return i.updateIn(group, ['tasks'], taskIds => {
       return taskIds.filter(taskId => filterFn(tasks[taskId]))
     })
-  })
+  }) : [];
 }
