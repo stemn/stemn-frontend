@@ -13,6 +13,7 @@ import classNames from 'classnames';
 // Functions
 import { orderBy, has }        from 'lodash';
 import moment from 'moment';
+import { formatBytes } from 'app/renderer/main/modules/Files/Files.utils.js'
 
 // Actions
 import * as FilesActions from 'app/renderer/main/modules/Files/Files.actions.js';
@@ -28,13 +29,28 @@ import LoadingOverlay     from 'app/renderer/main/components/Loading/LoadingOver
 import TimelineVertical   from 'app/shared/modules/TimelineVertical/TimelineVertical.jsx';
 import SimpleTable        from 'app/shared/modules/Tables/SimpleTable/SimpleTable.jsx';
 import SectionTitle       from 'app/shared/modules/Titles/SectionTitle/SectionTitle.jsx';
+import Tag                from 'app/shared/modules/Tags/Tag.jsx';
 
 // Styles
 import classes from './PagePreview.css';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
-export const InnerComponent = React.createClass({
+export const Component = React.createClass({
+    // Mounting
+  onMount(nextProps, prevProps){
+    // If we don't have the timeline, get it:
+    if(!nextProps.syncTimeline || !nextProps.syncTimeline.data && !nextProps.syncTimeline.loading){
+      nextProps.syncTimelineActions.fetchTimeline({
+        projectId : nextProps.fileMeta.project._id,
+        fileId    : nextProps.fileMeta.fileId
+      })      
+      nextProps.filesActions.getRelatedTasks({
+        fileId    : nextProps.fileMeta.fileId
+      })
+    }
+  },
+  componentWillMount() { this.onMount(this.props) },
   getInitialState () {
     return {
       selected1: this.props.fileMeta,
@@ -84,6 +100,13 @@ export const InnerComponent = React.createClass({
     const file2 = items[1] ? items[1].data : undefined;
     const revisions = syncTimeline && syncTimeline.data ? syncTimeline.data.filter(item => item.event == 'revision') : [];
 
+    const taskTags = [
+      {name:'This is the first task', completed: false},
+      {name:'And the second task goes here', completed: true},
+      {name:'There can be long tasks like this that get cut-off in the middle', completed: true},
+      {name:'Or short', completed: false},
+      {name:'And lots of tasks if required', completed: false},
+    ];
     return (
       <div className="layout-column flex">
         <div className={classes.header + ' layout-row layout-align-start-center'}>
@@ -110,18 +133,26 @@ export const InnerComponent = React.createClass({
               preferPlace="above"/>
           </div>
           <DragResize side="left" width="450" widthRange={[0, 450]} className="layout-column">
-            <aside className={classes.sidebar + ' flex'} style={{minWidth: '400px', overflowY: 'auto'}}>
+            <aside className={classes.sidebar + ' layout-column flex'} style={{minWidth: '400px', overflowY: 'auto'}}>
               <SectionTitle style={{marginBottom: '15px'}}>Meta</SectionTitle>
               <SimpleTable>
                 <tr><td>Name</td><td>{fileMeta.name}</td></tr>
-                <tr><td>Size</td><td>{fileMeta.size}</td></tr>
+                <tr><td>Size</td><td>{formatBytes(fileMeta.size)}</td></tr>
                 <tr><td>Last modified</td><td>{moment(fileMeta.modified).fromNow()}</td></tr>
-                <tr><td>Revisions</td><td>{revisions.length}</td></tr>
+                { revisions.length > 0 
+                ? <tr><td>Revisions</td><td>{revisions.length}</td></tr> 
+                : null }
               </SimpleTable>
+              <div>
+                <SectionTitle style={{margin: '30px 0 15px'}}>Related Tasks</SectionTitle>
+                {orderBy(taskTags, ['completed']).map((task, index) => <Tag key={index} text={task.name} style={task.completed ? {opacity: '0.5'} : {}} />)}
+              </div>
               <SectionTitle style={{margin: '30px 0'}}>Timeline</SectionTitle>
-              <TimelineVertical
-                items={syncTimeline && syncTimeline.data ? syncTimeline.data : []}
-              />
+              <div className="flex">
+                <TimelineVertical
+                  items={syncTimeline && syncTimeline.data ? syncTimeline.data : []}
+                />
+              </div>
             </aside>
           </DragResize>
         </div>
@@ -129,36 +160,6 @@ export const InnerComponent = React.createClass({
     );
   }
 });
-
-export const Component = React.createClass({
-
-  // Mounting
-  onMount(nextProps, prevProps){
-    // If we don't have the timeline, get it:
-    if(!nextProps.syncTimeline || !nextProps.syncTimeline.data && !nextProps.syncTimeline.loading){
-      nextProps.syncTimelineActions.fetchTimeline({
-        projectId : nextProps.fileMeta.project._id,
-        fileId    : nextProps.fileMeta.fileId
-      })
-    }
-  },
-  componentWillMount() { this.onMount(this.props) },
-
-  render() {
-    const { fileMeta, syncTimeline } = this.props;
-    return (
-      <div className="layout-column flex">
-        <InnerComponent fileMeta={fileMeta} syncTimeline={syncTimeline}/>
-      </div>
-    );
-  }
-});
-
-//        {
-//          fileMeta && syncTimeline && syncTimeline.data
-//          ? <InnerComponent fileMeta={fileMeta} syncTimeline={syncTimeline}/>
-//          : null
-//        }
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
@@ -171,6 +172,7 @@ function mapStateToProps({ syncTimeline }, { fileMeta }) {
 function mapDispatchToProps(dispatch) {
   return {
     syncTimelineActions: bindActionCreators(SyncTimelineActions, dispatch),
+    filesActions: bindActionCreators(FilesActions, dispatch),
   }
 }
 

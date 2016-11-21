@@ -6,16 +6,18 @@ export const end = (string, chars) => {
 export const middle = (string, chars, ratio) => {
   ratio = ratio || 0.5;
 
-  // Get all the spaces in the string
-  const indices   = getWordBreaks(string);
-  const startIndex = closest( chars * ratio, indices);
-  const endIndex   = closest( string.length - chars * (1-ratio), indices)
 
-  if (string.length > chars * ratio) {
+  if (string.length > chars) {
+    // Get all the spaces in the string
+    const indices   = getWordBreaks(string);
+    const startIndex = closest( chars * ratio, indices);
+    const endIndex   = closest( string.length - chars * (1-ratio), indices)
+    
     return string.substr(0, startIndex) + ' ...' + string.substr(endIndex, string.length);
   }
   return string;
 }
+
 function closest (num, arr) {
   var curr = arr[0];
   var diff = Math.abs (num - curr);
@@ -30,5 +32,10 @@ function closest (num, arr) {
 }
 
 function getWordBreaks (string){
-  return string.split('').map(letter => [' ', '/', '-'].includes(letter))
+  return string.split('').reduce((accumulator, currentLetter, currentIndex) => {
+    if([' ', '/', '-'].includes(currentLetter)){
+      accumulator.push(currentIndex)
+    }
+    return accumulator
+  }, [])
 }

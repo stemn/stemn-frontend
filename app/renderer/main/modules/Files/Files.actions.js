@@ -57,3 +57,17 @@ export function getMetaFromPath({ path }) {
     }
   }
 }
+
+export function getRelatedTasks({ fileId }) {
+  return {
+    type: 'FILES/GET_RELATED_TASKS',
+    http: true,
+    payload: {
+      method: 'GET',
+      url: `/api/v1/files/${fileId}/tasks`,
+    },
+    meta: {
+      fileId
+    }
+  }
+}

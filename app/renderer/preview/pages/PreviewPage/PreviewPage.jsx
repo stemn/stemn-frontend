@@ -37,7 +37,6 @@ export const Component = React.createClass({
 
   render() {
     const { fileMeta } = this.props;
-    console.log(fileMeta);
     return (
       <div className="layout-column flex">
         { fileMeta && fileMeta.data && fileMeta.data.project && fileMeta.data.project._id
