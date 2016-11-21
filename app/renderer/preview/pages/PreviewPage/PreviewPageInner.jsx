@@ -37,7 +37,7 @@ import classes from './PagePreview.css';
 export const InnerComponent = React.createClass({
   getInitialState () {
     return {
-      selected1: this.props.syncTimeline.data[0],
+      selected1: this.props.fileMeta,
       selected2: null,
       lastSelected: 1,
       mode: 'single'
@@ -80,15 +80,14 @@ export const InnerComponent = React.createClass({
     const { fileMeta, syncTimeline } = this.props;
     const { mode, selected1, selected2 } = this.state;
     const items = mode == 'single' ? [selected1] : orderBy([selected1, selected2], item => (new Date(item.timestamp)).getTime());
-    const file1 = items[0].data;
+    const file1 = items[0];
     const file2 = items[1] ? items[1].data : undefined;
-
     const revisions = syncTimeline && syncTimeline.data ? syncTimeline.data.filter(item => item.event == 'revision') : [];
 
     return (
       <div className="layout-column flex">
         <div className={classes.header + ' layout-row layout-align-start-center'}>
-          <div className="flex">{fileMeta && fileMeta.data ? <FileBreadCrumbs meta={fileMeta.data} clickFn={this.clickCrumb}/> : ''}</div>
+          <div className="flex">{fileMeta ? <FileBreadCrumbs meta={fileMeta} clickFn={this.clickCrumb}/> : ''}</div>
           <FileCompareMenu
             file1={file1}
             file2={file2}
@@ -100,7 +99,7 @@ export const InnerComponent = React.createClass({
         <div className="layout-row flex">
           <div className="layout-column flex">
             <FileCompareInner
-              project={fileMeta.data.project}
+              project={fileMeta.project}
               file1={file1}
               file2={file2}
               mode={mode} />
@@ -114,9 +113,9 @@ export const InnerComponent = React.createClass({
             <aside className={classes.sidebar + ' flex'} style={{minWidth: '400px', overflowY: 'auto'}}>
               <SectionTitle style={{marginBottom: '15px'}}>Meta</SectionTitle>
               <SimpleTable>
-                <tr><td>Name</td><td>{fileMeta.data.name}</td></tr>
-                <tr><td>Size</td><td>{fileMeta.data.size}</td></tr>
-                <tr><td>Last modified</td><td>{moment(fileMeta.data.modified).fromNow()}</td></tr>
+                <tr><td>Name</td><td>{fileMeta.name}</td></tr>
+                <tr><td>Size</td><td>{fileMeta.size}</td></tr>
+                <tr><td>Last modified</td><td>{moment(fileMeta.modified).fromNow()}</td></tr>
                 <tr><td>Revisions</td><td>{revisions.length}</td></tr>
               </SimpleTable>
               <SectionTitle style={{margin: '30px 0'}}>Timeline</SectionTitle>
@@ -149,17 +148,17 @@ export const Component = React.createClass({
     const { fileMeta, syncTimeline } = this.props;
     return (
       <div className="layout-column flex">
-        {
-          fileMeta && syncTimeline && syncTimeline.data
-          ? <InnerComponent fileMeta={fileMeta} syncTimeline={syncTimeline}/>
-          : null
-        }
-        <LoadingOverlay show={!syncTimeline}/>
+        <InnerComponent fileMeta={fileMeta} syncTimeline={syncTimeline}/>
       </div>
     );
   }
 });
 
+//        {
+//          fileMeta && syncTimeline && syncTimeline.data
+//          ? <InnerComponent fileMeta={fileMeta} syncTimeline={syncTimeline}/>
+//          : null
+//        }
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 

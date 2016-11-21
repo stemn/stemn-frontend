@@ -68,9 +68,7 @@ const mainReducer = (state, action) => {
       }
 
     case 'AUTH/UNLINK_FULFILLED':
-      return i.merge(state, {
-        user: { accounts: action.payload.data}
-      })
+      return i.assocIn(state, ['user', 'accounts'], action.payload.data)
 
     case 'AUTH/LOGIN_PENDING':
       return {...state,

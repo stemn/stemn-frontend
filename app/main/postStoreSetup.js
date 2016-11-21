@@ -1,9 +1,9 @@
 import http from 'axios';
 import { values } from 'lodash';
 import { ipcMain } from 'electron';
-import { getProviderPath } from '../shared/actions/system';
-import  * as shellContext from '../shared/modules/Shell/ShellContext/ShellContext.actions.js';
-
+import { getProviderPath }  from '../shared/actions/system';
+import * as shellContext    from '../shared/modules/Shell/ShellContext/ShellContext.actions.js';
+import * as protocolHandler from '../shared/modules/Shell/ProtocolHandler/ProtocolHandler.js'
 
 export default (store) => {
   http.interceptors.request.use(config => {
@@ -28,4 +28,12 @@ export default (store) => {
     // Enable the context menu
     store.dispatch(shellContext.enable());
   }, 1000)
+
+  // Setup protocol handler
+  const protocolHandlerInstance = protocolHandler.init({
+    appName: 'Stemn',
+    appPath: process.execPath
+  });
+  protocolHandlerInstance.enable();
+
 }

@@ -15,38 +15,41 @@ import PreviewPageInner from './PreviewPageInner.jsx'
 // Styles
 import classes from './PagePreview.css';
 
+import modelLocked    from 'app/renderer/assets/images/pure-vectors/model-locked.svg';
+
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
 
   // Mounting
   onMount(nextProps, prevProps){
-    const { localPath } = nextProps;
-    console.log(nextProps);
+    const { localPath, fileId, fileMeta, revisionId } = nextProps;
     // If localPath exists - we must get the fileId
     if(localPath){
       nextProps.filesActions.getMetaFromPath({path: localPath})
     }
     // If we do not yet have the meta, get it:
-    else if(!nextProps.fileMeta || !nextProps.fileMeta.data && !nextProps.fileMeta.loading){
+    else if(!fileMeta || !fileMeta.data && !fileMeta.loading){
       nextProps.filesActions.getMeta({fileId, revisionId});
     }
-    else{
-
-    }
-
-//    // If we don't have the timeline, get it:
-//    if(!nextProps.syncTimeline || !nextProps.syncTimeline.data && !nextProps.syncTimeline.loading){
-//      nextProps.syncTimelineActions.fetchTimeline({projectId, fileId })
-//    }
   },
   componentWillMount() { this.onMount(this.props) },
 
   render() {
     const { fileMeta } = this.props;
+    console.log(fileMeta);
     return (
       <div className="layout-column flex">
-        {fileMeta ? <PreviewPageInner fileMeta={fileMeta}/> : null}
+        { fileMeta && fileMeta.data && fileMeta.data.project && fileMeta.data.project._id
+          ? <PreviewPageInner fileMeta={fileMeta.data}/>
+          : null }
+        { fileMeta && fileMeta.data && fileMeta.data.project && !fileMeta.data.project._id
+          ? <div className="layout-column layout-align-center-center flex text-center">
+              <img style={{width: '100px'}} src={modelLocked}/>
+              <div className="text-title-4" style={{marginBottom: '10px'}}>This file is not in a Stemn Project</div>
+              <div className="text-title-5">Files must be part of a Stemn project in order to be viewed.</div>
+            </div>
+          : null }
         <LoadingOverlay show={!fileMeta}/>
       </div>
     );
