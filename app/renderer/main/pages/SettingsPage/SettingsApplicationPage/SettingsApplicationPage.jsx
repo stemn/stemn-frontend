@@ -61,10 +61,10 @@ export const Component = React.createClass({
       }
       else if(autoUpdate.updateDownloaded){
         return <span>Download complete. <a style={{marginLeft: '20px'}} className="link-primary" onClick={autoUpdateActions.installUpdate}>Update and restart</a></span>
-      }   
+      }
       else if(autoUpdate.updateAvailable){
         return <span>Downloading update...</span>
-      }      
+      }
       else if(autoUpdate.updateNotAvailable){
         return <span>You are up-to-date.<a style={{marginLeft: '20px'}} className="link-primary" onClick={autoUpdateActions.checkForUpdates}>Check again</a></span>
       }
@@ -81,11 +81,11 @@ export const Component = React.createClass({
       <div>
         <div className={classes.panel}>
           <h3>Cloud Providers</h3>
-          <p>Stemn Desktop relies on Dropbox and Drive (cloud providers) to sync your files. You should have the desktop client for at least one of these installed.</p>
+          <p>Stemn Desktop relies on Dropbox and Drive to track changes to your files. You should have the desktop client for at least one of these installed.</p>
           <p><a className="link-primary" onClick={systemActions.getProviderPath}>Locate providers automatically</a></p>
           <div style={{marginBottom: '10px'}}>
             <FileSelectInputElectron
-              title="Select Root Dropbox Location"
+              title="Select Dropbox Location"
               model="system.providerPath.dropbox"
               value={system.providerPath.dropbox}
               placeholder="Could not be located">
@@ -94,7 +94,7 @@ export const Component = React.createClass({
           </div>
           <div style={{marginBottom: '10px'}}>
             <FileSelectInputElectron
-              title="Select Root Drive Location"
+              title="Select Drive Location"
               model="system.providerPath.drive"
               value={system.providerPath.drive}
               placeholder="Could not be located">
@@ -105,11 +105,11 @@ export const Component = React.createClass({
         <div className={classes.panel}>
           <h3>Other options</h3>
           <div className="layout-row layout-align-start-center">
-            <p className="flex" style={{margin: '10px 10px 10px 0'}}>Start Stemn Desktop on system startup</p>
+            <p className="flex" style={{margin: '10px 10px 10px 0'}}>Start Stemn Desktop on system startup.</p>
             <Toggle changeAction={autoLaunchActions.toggle} value={autoLaunch.status}/>
           </div>
           <div className="layout-row layout-align-start-center">
-            <p className="flex" style={{margin: '10px 10px 10px 0'}}>Help improve Stemn by sending usage data</p>
+            <p className="flex" style={{margin: '10px 10px 10px 0'}}>Help improve Stemn by sending usage data.</p>
             <Toggle model="system.settings.usageData" value={system.settings.usageData}/>
           </div>
         </div>
@@ -128,7 +128,7 @@ export const Component = React.createClass({
 
         <div className={classes.panel}>
           <h3>Reset application</h3>
-          <p>If something goes wrong, please clear all cached data, this will reset the application back to factory settings.</p>
+          <p>If something goes wrong, this button will clear all cached data and reset the application.</p>
           <div className="layout-row layout-align-end">
             <ProgressButton className="warn" onClick={this.confirmReset}>
               Clear data

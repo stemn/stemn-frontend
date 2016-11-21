@@ -33,7 +33,7 @@ const layouts = [{
 },{
   text: 'Layout: Board',
   value: 'board'
-}];     
+}];
 
 const guideInfo = [{
   title: 'Drag and drop to organize your work',
@@ -41,10 +41,10 @@ const guideInfo = [{
   image: cardsColumns,
 },{
   title: 'Track tasks from beginning to end',
-  description: 'Monitor the status of tasks. Tasks are linked to files as they are completed. View files before and after the task was completed.',
+  description: 'See what your team has worked on. Tasks are linked to files as they are completed. View files before and after the task was completed.',
   image: cardsStacked,
 }]
-     
+
 export const Component = React.createClass({
   getInitialState () {
     return {
@@ -68,12 +68,12 @@ export const Component = React.createClass({
   render() {
     const { tasks, board, boardModel, project } = this.props;
     const { hideGuide } = this.state;
-    
+
     if(!board || !board.data || !board.data.groups){ return null };
-    
+
     const numTasks = getAllTasks(board.data.groups).length;
     const layout = board && board.layout == 'list' ? 'list' : 'board';
-    
+
     if(numTasks == 0 && !hideGuide){
       return (
         <div className="layout-column flex layout-align-center">
@@ -82,7 +82,7 @@ export const Component = React.createClass({
             <Guide data={guideInfo[1]}/>
           </div>
           <div className="layout-row layout-align-center">
-            <Button className="primary lg" onClick={this.getStarted}>Get started with Tasks</Button>        
+            <Button className="primary lg" onClick={this.getStarted}>Get started with Tasks</Button>
           </div>
         </div>
       )

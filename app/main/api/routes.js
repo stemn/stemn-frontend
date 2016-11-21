@@ -8,7 +8,7 @@ const pageHtml = `
     <title>Authorisation Successful</title>
   </head>
   <body style="font-family: sans-serif; background: rgba(0, 0, 0, 0.03);">
-    <div style="width: 300px;
+    <div style="width: 340px;
       position: absolute;
       left: 50%;
       top:50%;
@@ -63,4 +63,3 @@ export const authLinkedin = (req, res) => {
   }));
   res.send(pageHtml)
 }
-

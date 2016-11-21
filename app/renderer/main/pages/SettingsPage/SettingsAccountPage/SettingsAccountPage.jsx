@@ -52,36 +52,36 @@ export const Component = React.createClass({
               </div>
             </div>
             <div className="layout-row">
-              <Input 
+              <Input
                 model={`${entityModel}.data.profile.firstname`}
                 value={user.data.profile.firstname}
-                className="dr-input flex" 
-                type="text" 
-                placeholder="First Name" 
+                className="dr-input flex"
+                type="text"
+                placeholder="First Name"
                 style={{marginRight: '7px'}}
               />
-              <Input 
+              <Input
                 model={`${entityModel}.data.profile.lastname`}
                 value={user.data.profile.lastname}
-                className="dr-input flex" 
-                type="text" 
-                placeholder="Last Name" 
+                className="dr-input flex"
+                type="text"
+                placeholder="Last Name"
                 style={{marginLeft: '7px'}}
               />
             </div>
             <br />
-            <Input 
+            <Input
               model={`${entityModel}.data.profile.blurb`}
               value={user.data.profile.blurb}
-              className="dr-input" 
-              type="text" 
+              className="dr-input"
+              type="text"
               placeholder="Profile blurb"
             />
             <br />
             <div className="layout-row layout-align-end">
-              <ProgressButton 
-                className="primary" 
-                loading={user.savePending} 
+              <ProgressButton
+                className="primary"
+                loading={user.savePending}
                 onClick={this.saveUser}>
                 Save Profile
               </ProgressButton>
@@ -89,15 +89,15 @@ export const Component = React.createClass({
           </div>
 
           <div className={classes.panel}>
-            <h3>Link Accounts</h3>
-            <p>By linking accounts you'll be able to login to STEMN using either Facebook and/or LinkedIn. LinkedIn login won't work on your mobile phone but Facebook works a treat.</p>
+            <h3>Login</h3>
+            <p>By linking social accounts you'll be able to login to STEMN using Facebook and LinkedIn. We never post to your social networks.</p>
             <LinkAccount text="Facebook" isLinked={auth.user.accounts.facebook} linkFn={()=>authActions.authenticate('facebook')} unLinkFn={()=>authActions.unlink('facebook')}/>
             <LinkAccount text="Linkedin" isLinked={auth.user.accounts.linkedin} linkFn={()=>authActions.authenticate('linkedin')} unLinkFn={()=>authActions.unlink('linkedin')}/>
           </div>
 
           <div className={classes.panel}>
-            <h3>Sync Accounts</h3>
-            <p>Connect your dropbox account to take advantage of STEMN Sync. This will automatically sync your project files to STEMN.</p>
+            <h3>Cloud Providers</h3>
+            <p>Link your cloud file storage to STEMN to track changes to your files.</p>
             <LinkAccount text="Dropbox" isLinked={auth.user.accounts.dropbox.id} linkFn={()=>authActions.authenticate('dropbox')} unLinkFn={()=>authActions.unlink('dropbox')}/>
             <LinkAccount text="Google Drive" isLinked={auth.user.accounts.google.refreshToken} linkFn={()=>authActions.authenticate('google')} unLinkFn={()=>authActions.unlink('google')}/>
           </div>

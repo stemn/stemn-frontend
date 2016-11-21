@@ -73,7 +73,7 @@ export const Component = React.createClass({
     return (
       <div className={classes.panel}>
         <h3>Team Members</h3>
-        <p>Invite your collaborators. If you've connected your project with Dropbox or Drive, your team members will be invited to edit.</p>
+        <p>Invite your team to your project. STEMN adds your team members to your shared cloud storage folder.</p>
         <UserSearch select={this.selectFn} />
         <br />
         {project.data.team.map((item) => (
@@ -91,7 +91,7 @@ export const Component = React.createClass({
            className="primary"
            onClick={this.saveProject}
            loading={project.savePending}>
-            Update team
+            Update Team
           </ProgressButton>
         </div>
       </div>
