@@ -57,6 +57,7 @@ export const Component = React.createClass({
 
   render() {
     const {files, singleClickFn, doubleClickFn, crumbClickFn, selected, options} = this.props;
+    console.log(this.props);
 
     const displayResults = () => {
       const filesFiltered = options.foldersOnly && files.entries && files.entries.length > 0 ? files.entries.filter((file)=>file.type == 'folder') : files.data;

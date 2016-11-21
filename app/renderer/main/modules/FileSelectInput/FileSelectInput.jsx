@@ -29,14 +29,14 @@ const FileSelectInput = React.createClass({
         options: {
           allowFolder : true,
           foldersOnly : true,
-          explore     : 'drive'
+          explore     : this.props.provider
         },
       },
       modalConfirm: actions.change(this.props.model)
     })
   },
   render() {
-    const {provider, model, value} = this.props;
+    const { provider, model, value } = this.props;
     return (
       <div className={classes.fileSelectInput + ' layout-row layout-align-start-center'} onClick={this.showModal}>
         <div className={classes.text + ' flex'}>

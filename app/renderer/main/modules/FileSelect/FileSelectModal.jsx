@@ -89,7 +89,7 @@ export const Component = React.createClass({
     this.props.modalHide();
   },
   render() {
-    const {projectId, path, fileSelect, options} = this.props;
+    const { projectId, path, fileSelect, options } = this.props;
 
     const activePath = fileSelect && fileSelect.path ? fileSelect.path : '';
     return (

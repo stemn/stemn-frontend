@@ -1,8 +1,6 @@
 module.exports = {
   api : {
-    port : process.env.NODE_ENV === 'development'
-      ? 49554
-      : 49555
+    port : 49554
   },
   websocket : {
     host : process.env.WEBSOCKET_SERVER || 'localhost',
