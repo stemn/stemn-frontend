@@ -7,7 +7,7 @@ git add .
 git commit -m 'release'
 git push
 echo "-------------------- Copying dist to releases repo --------------------"
-cd ../stemn-desktop-release
+cd ../stemn-desktop
 git pull
 cp -r ../stemn-electron/dist .
 cp -r ../stemn-electron/build .
