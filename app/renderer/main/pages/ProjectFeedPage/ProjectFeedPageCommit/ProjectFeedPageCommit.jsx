@@ -18,7 +18,7 @@ export default React.createClass({
             <EditorDisplay value={item.data.description}/>
           </div>
           <div className="layout-row layout-align-start-center">
-            <UserAvatar picture={item.user.picture} size="20"/>
+            <UserAvatar picture={item.user.picture} name={item.user.name} size="20"/>
             <div style={{marginLeft: '10px'}}>{item.user.name}</div>
             <div className="flex">
             </div>

@@ -39,6 +39,7 @@ import classes from './PagePreview.css';
 export const Component = React.createClass({
     // Mounting
   onMount(nextProps, prevProps){
+    console.log(nextProps.fileMeta);
     // If we don't have the timeline, get it:
     if(!nextProps.syncTimeline || !nextProps.syncTimeline.data && !nextProps.syncTimeline.loading){
       nextProps.syncTimelineActions.fetchTimeline({

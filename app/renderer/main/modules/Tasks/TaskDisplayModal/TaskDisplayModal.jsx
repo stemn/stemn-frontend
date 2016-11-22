@@ -36,19 +36,17 @@ import MdMoreHoriz from 'react-icons/md/more-horiz';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
-const onMount = (nextProps, prevProps) => {
-  if(nextProps.task){
-//    if(!prevProps || nextProps.task.project._id !== prevProps.task.project._id){
-////      nextProps.ProjectsActions.getProject({projectId: nextProps.task.project._id});
-//    }
-  }
-}
 
 export const Component = React.createClass({
 
   // Mounting
-  componentWillMount() { onMount(this.props) },
-  componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
+  componentWillMount() { this.onMount(this.props) },
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
+  onMount (nextProps, prevProps) {
+    if(!nextProps.task){
+      nextProps.TasksActions.getTask({taskId: nextProps.taskId});
+    }
+  },
 
   showLabelEditModal(){
     this.props.TasksActions.showLabelEditModal({

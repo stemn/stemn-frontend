@@ -29,8 +29,8 @@ export default React.createClass({
   onLoad() {
     const [ containerWidth, containerHeight ] = [ this.refs.container.offsetWidth, this.refs.container.offsetHeight] ;
     const { naturalWidth, naturalHeight } = this.refs.image;
-    const widthScale = containerWidth / naturalWidth;
-    const heightScale = containerHeight / naturalHeight;
+    const widthScale = (containerWidth / naturalWidth) * 0.9;
+    const heightScale = (containerHeight / naturalHeight) * 0.9;
     const scale = widthScale < heightScale ? widthScale : heightScale;
     this.setState({
       loading: false,
@@ -61,14 +61,16 @@ export default React.createClass({
     };
 
     return (
-      <div ref="container" className={styles.container + ' layout-column layout-align-center-center flex'}>
-        <ScrollZoom zoomIn={() => this.zoom('in')} zoomOut={() => this.zoom('out')}>
-          <img src={fileUrl}
-            ref="image"
-            className={styles.image}
-            onLoad={this.onLoad}
-            style={sizeStyles}
-          />
+      <div ref="container" className={styles.container + ' flex rel-box'}>
+        <ScrollZoom zoomIn={() => this.zoom('in')} zoomOut={() => this.zoom('out')} style={{display: 'table', width: '100%', height: '100%'}}>
+          <div style={{display: 'table-cell', textAlign: 'center', verticalAlign: 'middle'}}>
+            <img src={fileUrl}
+              ref="image"
+              className={styles.image}
+              onLoad={this.onLoad}
+              style={sizeStyles}
+            />
+          </div>
         </ScrollZoom>
         <LoadingOverlay show={this.state.loading} />
       </div>
