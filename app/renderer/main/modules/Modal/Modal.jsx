@@ -100,11 +100,18 @@ function callbackFunction(callbackObject, dispatch, extendObject){
   }
   else if(callbackObject && callbackObject.aliased){
     // Extend the aliased function inputs
-    dispatch(i.merge(callbackObject, {
-      payload: {
-        functionInputs: extendObject
-      }
-    }))
+    // We only extend if the object exists because sometimes the functionInputs
+    // are an array and do not allow for extending.
+    if(extendObject){
+      dispatch(i.merge(callbackObject, {
+        payload: {
+          functionInputs: extendObject
+        }
+      }))
+    }
+    else{
+      dispatch(callbackObject)
+    }
   }
 }
 

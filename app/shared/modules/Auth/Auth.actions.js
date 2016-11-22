@@ -3,6 +3,7 @@ import { oauthCreds } from './Auth.config.js';
 import querystring from 'querystring';
 import http from 'axios';
 import * as ProjectsActions from '../../actions/projects.js';
+import * as ElectronWindowsActions from '../ElectronWindows/ElectronWindows.actions.js';
 
 export function loadUserData() {
   return (dispatch) => {
@@ -33,6 +34,7 @@ export function sendAuthToken({ provider, code }) {
             redirectUri: oauthCreds[provider].params.redirect_uri
           }
         }).then(response => {
+          setTimeout(() => dispatch(ElectronWindowsActions.show('main')), 100)
           dispatch(setAuthToken(response.data.token))
           dispatch(initHttpHeaders(response.data.token))
           setTimeout(()=>dispatch(loadUserData()), 1)

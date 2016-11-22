@@ -30,7 +30,7 @@ export const Component = React.createClass({
           aliased: true,
           payload: {
             functionAlias: 'FormActions.remove',
-            functionInputs: [model, index]
+            functionInputs: [ model, index ]
           }
         }
       })

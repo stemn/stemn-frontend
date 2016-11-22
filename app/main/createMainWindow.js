@@ -56,7 +56,6 @@ export const create = function createWindow({ uri = '/' } = {}) {
     browserWindow.setMenu(null);
   }
   function show () {
-    console.log('show window');
     if(!browserWindow){ init() };
     if (browserWindow.isMinimized()){
       browserWindow.restore();

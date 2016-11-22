@@ -1,5 +1,5 @@
 import i from 'icepick';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, has } from 'lodash';
 import { modeled } from 'react-redux-form';
 
 const initialState = {
@@ -35,20 +35,27 @@ const mainReducer = (state, action) => {
     case 'TASKS/GET_BOARDS_REJECTED':
       return i.assocIn(state, ['projects', action.meta.cacheKey, 'loading'], false);
     case 'TASKS/GET_BOARDS_FULFILLED':
-      return i.merge(state, {
-        projects: {
-          [action.meta.cacheKey] : {
-            boards: [action.payload.data[0]._id],
-            loading : false
+      if(has(action, 'payload.data[0]._id')){
+        return i.merge(state, {
+          projects: {
+            [action.meta.cacheKey] : {
+              boards: [ action.payload.data[0]._id ],
+              loading : false
+            }
+          },
+          boards: {
+            [action.payload.data[0]._id] : {
+              data: action.payload.data[0]
+            }
           }
-        },
-        boards: {
-          [action.payload.data[0]._id] : {
-            data: action.payload.data[0]
-          }
-        }
-      })
-
+        })
+      }
+      else{
+        return i.assocIn(state, ['projects', action.meta.cacheKey], {
+          boards  : [],
+          loading : false
+        })
+      }
     case 'TASKS/GET_GROUP_FULFILLED':
       return i.updateIn(state, ['boards', action.meta.boardId, 'data', 'groups'], (groups) => {
           console.log(action.meta.boardId)

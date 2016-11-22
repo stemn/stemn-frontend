@@ -20,6 +20,7 @@ import initApiServer from './api/index.js';
 // Actions
 import * as ElectronWindowsActions from '../shared/modules/ElectronWindows/ElectronWindows.actions.js';
 
+// The windows object is exported so it can be accessed elsewhere
 export const windows = {
   main: undefined,
   menubar: undefined,

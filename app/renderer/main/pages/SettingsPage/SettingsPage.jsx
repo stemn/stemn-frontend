@@ -23,10 +23,8 @@ import NavPill from 'app/renderer/main/components/Buttons/NavPill/NavPill'
 /////////////////////////////////////////////////////////////////////////////
 
 export const Component = React.createClass({
-  componentWillMount() {
-    this.props.UsersActions.getUser({userId: this.props.auth.user._id});
-  },
   render() {
+    const { auth } = this.props;
     return (
       <div className="layout-column flex">
         <Header
@@ -40,7 +38,9 @@ export const Component = React.createClass({
           <div style={{width: '250px', marginRight: '15px'}}>
             <div className={classes.panel} style={{padding: '0px'}}>
               <NavPill to="/settings/application">Application</NavPill>
-              <NavPill to="/settings/account">Account</NavPill>
+              { auth.authToken
+              ? <NavPill to="/settings/account">Account</NavPill>
+              : <NavPill to="/login">Login</NavPill> }
             </div>
           </div>
           <div style={{width: '650px'}}>
@@ -64,9 +64,7 @@ function mapStateToProps({auth}, {params}) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    UsersActions: bindActionCreators(UsersActions, dispatch),
-  }
+  return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);

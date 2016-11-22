@@ -1,5 +1,8 @@
+@value primary, border1, bg1 from "app/renderer/assets/css/themes/standard.css";
+
 .popup{
   position: absolute;
+  width: 100%;
   background: white;
   border: 1px solid rgba(0, 0, 0, 0.4) !important;
   margin-top: -1px;
@@ -19,4 +22,19 @@
 }
 .close:hover{
   color: black;
+}
+
+.fixedOption{
+  padding: 10px 15px;
+  transition: 0.2s ease;
+}
+.fixedOption:hover{
+  background: bg1;
+}
+.fixedOptionTime{
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+}
+.divider{
+  border-top: 1px solid border1;
 }

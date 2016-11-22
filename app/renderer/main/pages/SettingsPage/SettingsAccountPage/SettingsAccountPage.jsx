@@ -113,8 +113,8 @@ export const Component = React.createClass({
       )
     }
     return (
-      <div className="rel-box">
-        {auth.user && user.data ? getInner() : ''}
+      <div className="rel-box" style={{minHeight: '200px'}}>
+        {auth.user && user && user.data ? getInner() : ''}
         <LoadingOverlay show={auth.authLoading || !user || !user.data}/>
       </div>
     );
