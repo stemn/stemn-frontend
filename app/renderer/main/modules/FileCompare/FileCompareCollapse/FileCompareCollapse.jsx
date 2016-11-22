@@ -13,9 +13,10 @@ export default React.createClass({
   // Mounting
   onMount(nextProps, prevProps){
     if(!prevProps || nextProps.file != prevProps.file){
+      console.log(nextProps.file.revisions);
       this.setState({
         selected1: nextProps.file.revisions[0],
-        selected2: nextProps.file.revisions[1],
+        selected2: nextProps.file.revisions[nextProps.file.revisions.length - 1],
         lastSelected: 1,
         mode: nextProps.file.revisions[0] && nextProps.file.revisions[1] ? 'sideBySide' : 'single'
       })
@@ -58,7 +59,6 @@ export default React.createClass({
   render() {
     const { file, project } = this.props;
     const { mode, selected1, selected2 } = this.state;
-    console.log(selected1, selected2 );
     const items = mode == 'single' ? [selected1, selected1] : orderBy([selected1, selected2], item => (new Date(item.timestamp)).getTime());
     return (
       <TogglePanel>

@@ -7,11 +7,37 @@ export default React.createClass({
   getInitialState () {
     return {
       loading: true,
-      scale: 1
+      scale: 1,
+      naturalWidth: 0,
+      naturalHeight: 0,
     }
   },
+  componentWillMount() { this.onMount(this.props) },
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
+  onMount(nextProps, prevProps) {
+    // If the previewId changes, download a new file
+    if(!prevProps
+       || nextProps.project._id !== prevProps.project._id
+       || nextProps.fileMeta.revisionId !== prevProps.fileMeta.revisionId
+       || nextProps.fileMeta.fileId !== prevProps.fileMeta.fileId){
+      this.setState({
+        loading: true,
+      })
+    }
+  },
+
   onLoad() {
-    this.setState({ loading: false })
+    const [ containerWidth, containerHeight ] = [ this.refs.container.offsetWidth, this.refs.container.offsetHeight] ;
+    const { naturalWidth, naturalHeight } = this.refs.image;
+    const widthScale = containerWidth / naturalWidth;
+    const heightScale = containerHeight / naturalHeight;
+    const scale = widthScale < heightScale ? widthScale : heightScale;
+    this.setState({
+      loading: false,
+      naturalWidth,
+      naturalHeight,
+      scale: scale > 1 ? 1 : scale
+    })
   },
   zoom (direction) {
     let newValue = 0;
@@ -23,20 +49,22 @@ export default React.createClass({
       newValue = newValue > 0 ? newValue : this.state.scale;
     }
     this.setState({scale: newValue})
-    console.log(this.state.scale);
   },
   render() {
     const { fileMeta, project } = this.props;
-    const { scale } = this.state;
+    const { scale, naturalWidth, naturalHeight } = this.state;
     const fileUrl = `${process.env.API_SERVER}/api/v1/remote/download/${project._id}/${fileMeta.fileId}?revisionId=${fileMeta.revisionId}`;
 
     const sizeStyles = {
-      transform: `scale(${scale})`
-    }
+      width: naturalWidth * scale,
+      height: naturalHeight * scale,
+    };
+
     return (
-      <div className={styles.container + ' layout-column layout-align-center-center flex'}>
+      <div ref="container" className={styles.container + ' layout-column layout-align-center-center flex'}>
         <ScrollZoom zoomIn={() => this.zoom('in')} zoomOut={() => this.zoom('out')}>
           <img src={fileUrl}
+            ref="image"
             className={styles.image}
             onLoad={this.onLoad}
             style={sizeStyles}
