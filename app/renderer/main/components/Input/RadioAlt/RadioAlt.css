@@ -7,7 +7,7 @@
   padding: 10px;
   transition: all 0.1s ease
 }
-.radio input:checked + div {
+.radio input.checked + div {
   background: primary !important;
   color: white !important;
 }
@@ -24,6 +24,6 @@
   opacity: 1;
 }
 
-.radio input:checked + div svg{
+.radio input.checked + div svg{
   opacity: 1;
 }

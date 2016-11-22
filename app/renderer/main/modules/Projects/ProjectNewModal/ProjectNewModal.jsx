@@ -31,7 +31,7 @@ export const Component = React.createClass({
       <div style={{width: '500px'}}>
         <div className="modal-title">Create New Project</div>
         <div className="modal-body">
-          <Input model={`${entityModel}.name`} value={newProject.name} className="dr-input" type="text" placeholder="Project Name"/>
+          <Input autoFocus={true} model={`${entityModel}.name`} value={newProject.name} className="dr-input" type="text" placeholder="Project Name"/>
           <Textarea model={`${entityModel}.summary`}
             value={newProject.summary}
             className="dr-input"

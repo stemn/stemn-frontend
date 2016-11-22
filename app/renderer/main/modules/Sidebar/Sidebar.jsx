@@ -103,7 +103,8 @@ export const Component = React.createClass({
               <MdSearch className={styles.sidebarSearchIcon} size="25"/>
             </div>
             <div className="scroll-box flex">
-              {filteredProjects.map((item, idx) => <ProjectWithContext key={idx} item={item} isActive={item._id == this.props.params.stub} to={`/project/${item._id}`}/>)}
+              {projects.userProjects.data && projects.userProjects.data.length == 0 ? <SidebarProjectButton  item={{name: 'Create a project'}} clickFn={this.showProjectNewModal} /> : null }
+              {filteredProjects.map((item, idx) => <ProjectWithContext key={item._id} item={item} isActive={item._id == this.props.params.stub} to={`/project/${item._id}`}/>)}
               <ContextMenu identifier={projectContextIdentifier} menu={projectContextMenu}/>
             </div>
           </div>
@@ -112,7 +113,7 @@ export const Component = React.createClass({
               <PopoverMenu>
                 <a className="flex">
                   <div className={userStyles.userWrapper + ' flex layout-row layout-align-start-center'}>
-                    <UserAvatar picture={this.props.auth.user.picture} className={userStyles.userAvatar}/>
+                    <UserAvatar picture={this.props.auth.user.picture} name={this.props.auth.user.name} className={userStyles.userAvatar}/>
                     <div className="flex text-ellipsis">
                       {this.props.auth.user.name}
                     </div>

@@ -16,6 +16,7 @@
 }
 
 .sidebarSearch{
+  overflow: hidden;
   position: relative;
   margin: 0 20px 10px;
 }

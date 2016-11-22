@@ -18,7 +18,8 @@ import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvata
 import Editor from 'app/renderer/main/modules/Editor/Editor.jsx';
 import MarkdownButton from 'app/renderer/main/modules/Editor/MarkdownButton/MarkdownButton.jsx';
 import EditorDisplay from 'app/renderer/main/modules/Editor/EditorDisplay.jsx';
-import Button from 'app/renderer/main/components/Buttons/Button/Button'
+import Button from 'app/renderer/main/components/Buttons/Button/Button';
+import { ctrlEnterHandler } from 'app/shared/modules/Forms/Forms.utils.js'
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -34,6 +35,9 @@ export const Component = React.createClass({
       }
     })
   },
+  componentDidMount(){
+    ctrlEnterHandler(this.refs.form, this.submitNewComment)
+  },
   render() {
     const { auth, newComment, entityModel, commentsActions } = this.props;
 
@@ -42,12 +46,12 @@ export const Component = React.createClass({
         <div className={classes.commentAvatar}>
           <UserAvatar picture={auth.user.picture} size="33" shape="square" />
         </div>
-        <div className={classes.commentBody + ' flex'}>
+        <div ref="form" className={classes.commentBody + ' flex'}>
           <div className={classes.commentHeader}>
             New Comment
           </div>
           <div className={classes.commentContent}>
-            <Editor model={`${entityModel}.body`} value={newComment.body}/>
+            <Editor autoFocus={true} model={`${entityModel}.body`} value={newComment.body} placeholder="Write a comment"/>
           </div>
           <div className="layout-row layout-align-start-end" style={{padding: '0 10px 10px'}}>
             <MarkdownButton>Markdown formatting supported</MarkdownButton>

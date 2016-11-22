@@ -11,21 +11,25 @@ export const Component = React.createClass({
   },
   onChange(event){
     const { model, dispatch, type, changeAction } = this.props;
-    let value = event.target.value;
+    let newValue = event.target.value;
 
     // Toggle if checkbox
     if(type == 'checkbox'){
-      const isFalse = value == 'false' || !value;
-      value = isFalse ? true : false; // toggle
+      const isFalse = newValue == 'false' || !newValue;
+      newValue = isFalse ? true : false; // toggle
     }
+//    else if( type == 'radio'){
+//      console.log(newValue);
+//      newValue = this.props.value
+//    }
     
     if(model){
-      this.props.dispatch(actions.change(model, value));
+      this.props.dispatch(actions.change(model, newValue));
     }
     if(changeAction){
-      changeAction({value, model})
+      changeAction({value: newValue, model})
     }
-    this.setState({value});
+    this.setState({value: newValue});
   },
   componentWillReceiveProps(nextProps) {
     // Update the internal state if it differs from the redux state
@@ -33,10 +37,15 @@ export const Component = React.createClass({
       this.setState({ value: nextProps.value })
     }
   },
+  componentDidMount(){
+    if(this.props.autoFocus){
+      setTimeout(() => this.refs.input.focus(), 1);
+    }
+  },
   render() {
     const otherProps = omit(this.props, ['dispatch', 'model', 'value', 'changeAction']);
     const { value } = this.state;
-    return <input {...otherProps} onChange={this.onChange} value={value}/>
+    return <input ref="input" {...otherProps} onChange={this.onChange} value={value}/>
   }
 });
 

@@ -13,23 +13,22 @@
   border-radius: 50%;
   display: inline-block;
   margin-right: 7px;
-  padding: 7px;
   position: relative;
   width: 20px;
   height: 20px;
 }
-.radio input:checked + span {
+.checked + span {
   color: primary;
 }
-.radio input:checked + span:after {
+.checked + span:after {
   background: primary;
   border-radius: 50%;
   content: " ";
-  height: 12px;
-  left: 3px;
+  height: 10px;
+  left: 5px;
+  top: 4px;
   position: absolute;
-  top: 3px;
-  width: 12px;
+  width: 10px;
 }
 .radio label:hover input + span {
   border-color: primary;

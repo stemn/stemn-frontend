@@ -30,6 +30,11 @@ export const Component = React.createClass({
       value: this.props.value,
     }
   },
+  componentDidMount(){
+    if(this.props.autoFocus){
+      setTimeout(() => this.refs.input.refs.input.focus(), 1);
+    }
+  },
   componentWillReceiveProps(nextProps) {
     // Update the internal state if it differs from the redux state
     if(nextProps.value != this.state.value){
@@ -106,11 +111,12 @@ export const Component = React.createClass({
     );
   },
   render() {
-    const { className } = this.props;
+    const { className, placeholder } = this.props;
     return (
       <MentionsInput
+        ref="input"
         className={classNames(classes.editor, className)}
-        placeholder="Detailed Description"
+        placeholder={placeholder}
         value={this.state.value}
         displayTransform={this.displayTransform}
         markup="@__display__:__type__:__id__)" // format @[username](userName:mentionType:mentionId)

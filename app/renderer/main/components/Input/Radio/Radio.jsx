@@ -1,6 +1,5 @@
 import React from 'react';
-//import { Field } from 'react-redux-form';
-
+import Input from 'app/renderer/main/components/Input/Input/Input'
 
 // Styles
 import classNames from 'classnames';
@@ -8,17 +7,20 @@ import classes from './Radio.css'
 
 export default class extends React.Component{
   render(){
-    const id = Math.random().toString(36).substring(7);
+    const { value, model, modelValue, children } = this.props;
     return (
       <div className={classes.radio}>
+        <label className="layout-row layout-align-start-center">
+          <Input
+            value={value}
+            type="radio"
+            className={classNames({[classes.checked] : modelValue == value})}
+            model={model}
+          />
+          <span></span>
+          <div className="layout-row layout-align-start-center flex">{children}</div>
+        </label>
       </div>
     );
   }
 };
-
-//        <Field model={this.props.model} changeAction={this.props.changeAction}>
-//          <label className="layout-row layout-align-start-center">
-//            <input type="radio" value={this.props.value} /> <span></span>
-//            <div className="layout-row layout-align-start-center flex">{this.props.children}</div>
-//          </label>
-//        </Field>

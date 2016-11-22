@@ -1,22 +1,21 @@
 import React from 'react';
 
-import RadioAlt from 'app/renderer/main/components/Input/RadioAlt/RadioAlt.jsx'
-
+import Radio from 'app/renderer/main/components/Input/Radio/Radio.jsx'
 
 // Styles
 import classNames from 'classnames';
 
 export default class extends React.Component{
   render(){
-    const {model} = this.props
+    const { model, value } = this.props
     return (
       <div>
-        <RadioAlt model={model} value='public'>
+        <Radio model={model} value="public" modelValue={value}>
           Public Project (recommended)
-        </RadioAlt>
-        <RadioAlt model={model} value='private'>
+        </Radio>
+        <Radio model={model} value="private" modelValue={value}>
           Private Project
-        </RadioAlt>
+        </Radio>
       </div>
     );
   }

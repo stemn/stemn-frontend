@@ -39,13 +39,19 @@ import classes from './PagePreview.css';
 export const Component = React.createClass({
     // Mounting
   onMount(nextProps, prevProps){
-    console.log(nextProps.fileMeta);
     // If we don't have the timeline, get it:
     if(!nextProps.syncTimeline || !nextProps.syncTimeline.data && !nextProps.syncTimeline.loading){
-      nextProps.syncTimelineActions.fetchTimeline({
-        projectId : nextProps.fileMeta.project._id,
-        fileId    : nextProps.fileMeta.fileId
-      })      
+      if(nextProps.fileMeta.project && nextProps.fileMeta.project._id){
+        nextProps.syncTimelineActions.fetchTimeline({
+          projectId : nextProps.fileMeta.project._id,
+          fileId    : nextProps.fileMeta.fileId,
+        })
+      }
+      else{
+        nextProps.syncTimelineActions.fetchTimeline({
+          fileId    : nextProps.fileMeta.fileId,
+        })
+      }
       nextProps.filesActions.getRelatedTasks({
         fileId    : nextProps.fileMeta.fileId
       })
@@ -96,6 +102,7 @@ export const Component = React.createClass({
   render() {
     const { fileMeta, syncTimeline } = this.props;
     const { mode, selected1, selected2 } = this.state;
+    const isPartOfProject = fileMeta.project && fileMeta.project._id;
     const items = mode == 'single' ? [selected1] : orderBy([selected1, selected2], item => (new Date(item.timestamp)).getTime());
     const file1 = items[0];
     const file2 = items[1] ? items[1].data : undefined;

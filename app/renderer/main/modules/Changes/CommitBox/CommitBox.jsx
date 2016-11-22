@@ -36,6 +36,7 @@ export const Component = React.createClass({
     return (
       <div className="p-15">
           <Input 
+            autoFocus={true}
             model={`changes.${this.props.project._id}.summary`} 
             value={changes.summary} 
             className={classes.input} 
@@ -44,6 +45,7 @@ export const Component = React.createClass({
           />
         <div className="rel-box">
           <Editor
+            placeholder="Detailed description"
             model={`${entityModel}.description`}
             value={changes.description}
             className={classes.description}

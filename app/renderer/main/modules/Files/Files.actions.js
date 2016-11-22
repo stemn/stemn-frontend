@@ -1,10 +1,8 @@
 import http from 'axios';
-export const GET_FILE = 'FILES/GET_FILE';
-export const GET_META = 'FILES/GET_META';
 
 export function getFile({projectId, fileId, revisionId}) {
   return {
-    type: GET_FILE,
+    type: 'FILES/GET_FILE',
     http: true,
     payload: {
       method: 'GET',
@@ -21,11 +19,11 @@ export function getFile({projectId, fileId, revisionId}) {
 
 export function getMeta({fileId, revisionId}) {
   return {
-    type: GET_META,
+    type: 'FILES/GET_META',
     http: true,
     payload: {
       method: 'GET',
-      url: `/api/v1/files/${fileId}`,
+      url: `/api/v1/sync/files/${fileId}`,
       params: {
         revisionId
       }

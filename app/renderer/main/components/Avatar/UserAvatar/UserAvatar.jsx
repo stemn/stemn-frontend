@@ -40,7 +40,8 @@ export default React.createClass({
         background: name ? colours[colourIndex] : '#eaeaea',
         color: 'white',
         fontSize: size > 25 ? '14px' : '11px',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        textTransform: 'uppercase'
       }
 
       return (

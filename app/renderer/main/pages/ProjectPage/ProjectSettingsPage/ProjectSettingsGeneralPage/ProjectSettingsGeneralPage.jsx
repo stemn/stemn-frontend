@@ -20,7 +20,7 @@ import Tabs from 'app/renderer/main/components/Tabs/Tabs'
 import Toggle from 'app/renderer/main/components/Input/Toggle/Toggle'
 import UserSearch from 'app/renderer/main/modules/UserSearch/UserSearch.container.js'
 import TeamMember from 'app/renderer/main/components/Project/TeamMember/TeamMember.jsx'
-//import ProjectPermissionsRadio from 'app/renderer/main/components/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx'
+import ProjectPermissionsRadio from 'app/renderer/main/components/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx'
 import ProjectLinkRemote from 'app/renderer/main/components/Project/ProjectLinkRemote/ProjectLinkRemote.jsx'
 import FileSelectInput from 'app/renderer/main/modules/FileSelectInput/FileSelectInput.jsx'
 import ProgressButton from 'app/renderer/main/components/Buttons/ProgressButton/ProgressButton'
@@ -140,6 +140,10 @@ export const Component = React.createClass({
            placeholder="Project Summary"
          />
          <br />
+         <hr style={{border:' 1px solid rgb(239, 239, 239)', margin: '20px 0 30px'}}/>
+         <p>Is this a public or private project? Change your project to public to open-source your work.</p>
+         <ProjectPermissionsRadio model={`${entityModel}.data.permissions.projectType`} value={project.data.permissions.projectType} />
+
          <div className="layout-row layout-align-end">
            <ProgressButton
            className="primary"
@@ -177,7 +181,6 @@ export const Component = React.createClass({
        </div>
 
 
-
        <div className={classes.panel}>
          <h3>Delete Project</h3>
          <p>Once you delete a project, there is no going back. Please be certain.</p>
@@ -188,17 +191,17 @@ export const Component = React.createClass({
             </ProgressButton>
          </div>
        </div>
-      </div>
+     </div>
     );
   }
 });
 
-
 //       <div className={classes.panel}>
 //         <h3>Project Type</h3>
 //         <p>Is this a public or private project? Change your project to public to open-source your work.</p>
-//         <ProjectPermissionsRadio model={`${entityModel}.data.permissions.projectType`} />
 //       </div>
+
+
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////
