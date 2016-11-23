@@ -141,7 +141,7 @@ export const Component = React.createClass({
          />
          <br />
          <hr style={{border:' 1px solid rgb(239, 239, 239)', margin: '20px 0 30px'}}/>
-         <p>Is this a public or private project? Change your project to public to open-source your work.</p>
+         <p>Is this a public or private project? Set your project as 'public' to your work available to everyone on the Stemn website.</p>
          <ProjectPermissionsRadio model={`${entityModel}.data.permissions.projectType`} value={project.data.permissions.projectType} />
 
          <div className="layout-row layout-align-end">

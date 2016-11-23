@@ -27,7 +27,8 @@ export default class extends React.Component{
               <MdMoreHoriz size="20"/>
             </SimpleIconButton>
             <div className="PopoverMenu">
-              <a onClick={this.props.unLinkFn}>Unlink</a>
+              <a onClick={this.props.unLinkFn}>Unlink Account</a>
+              {this.props.email ? <a className="info">Email: {this.props.email}</a> : null}
             </div>
           </PopoverMenu>
           : ''

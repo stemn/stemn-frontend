@@ -91,15 +91,33 @@ export const Component = React.createClass({
           <div className={classes.panel}>
             <h3>Login</h3>
             <p>By linking social accounts you'll be able to login to STEMN using Facebook and LinkedIn. We never post to your social networks.</p>
-            <LinkAccount text="Facebook" isLinked={auth.user.accounts.facebook} linkFn={()=>authActions.authenticate('facebook')} unLinkFn={()=>authActions.unlink('facebook')}/>
-            <LinkAccount text="Linkedin" isLinked={auth.user.accounts.linkedin} linkFn={()=>authActions.authenticate('linkedin')} unLinkFn={()=>authActions.unlink('linkedin')}/>
+            <LinkAccount
+              text="Facebook"
+              isLinked={auth.user.accounts.facebook}
+              linkFn={()=>authActions.authenticate('facebook')}
+              unLinkFn={()=>authActions.unlink('facebook')}/>
+            <LinkAccount
+              text="Linkedin"
+              isLinked={auth.user.accounts.linkedin}
+              linkFn={()=>authActions.authenticate('linkedin')}
+              unLinkFn={()=>authActions.unlink('linkedin')}/>
           </div>
 
           <div className={classes.panel}>
             <h3>Cloud Providers</h3>
             <p>Link your cloud file storage to STEMN to track changes to your files.</p>
-            <LinkAccount text="Dropbox" isLinked={auth.user.accounts.dropbox && auth.user.accounts.dropbox.id} linkFn={()=>authActions.authenticate('dropbox')} unLinkFn={()=>authActions.unlink('dropbox')}/>
-            <LinkAccount text="Google Drive" isLinked={auth.user.accounts.google &&  auth.user.accounts.google.refreshToken} linkFn={()=>authActions.authenticate('google')} unLinkFn={()=>authActions.unlink('google')}/>
+            <LinkAccount
+              text="Dropbox"
+              isLinked={auth.user.accounts.dropbox && auth.user.accounts.dropbox.id}
+              linkFn={()=>authActions.authenticate('dropbox')}
+              unLinkFn={()=>authActions.unlink('dropbox')}
+              email={auth.user.accounts.dropbox && auth.user.accounts.dropbox.email ? auth.user.accounts.dropbox.email : ''}/>
+            <LinkAccount
+              text="Google Drive"
+              isLinked={auth.user.accounts.google &&  auth.user.accounts.google.refreshToken}
+              linkFn={()=>authActions.authenticate('google')}
+              unLinkFn={()=>authActions.unlink('google')}
+              email={auth.user.accounts.google && auth.user.accounts.google.email ? auth.user.accounts.google.email : ''}/>
           </div>
 
           <div className={classes.panel}>
