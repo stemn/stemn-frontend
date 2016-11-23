@@ -186,7 +186,7 @@ export const Component = React.createClass({
          <p>Once you delete a project, there is no going back. Please be certain.</p>
          <div className="layout-row layout-align-end">
             <ProgressButton className="warn"
-              onClick={()=>ProjectsActions.confirmDeleteProject({projectId: project.data._id})}>
+              onClick={()=>ProjectsActions.confirmDeleteProject({projectId: project.data._id, name: project.data.name})}>
               Delete Project
             </ProgressButton>
          </div>

@@ -22,9 +22,6 @@ export default React.createClass({
             <div style={{marginLeft: '10px'}}>{item.user.name}</div>
             <div className="flex">
             </div>
-            <a className="link-primary">Revert</a>
-            &nbsp;&nbsp;&nbsp;
-            <a className="link-primary">View Online</a>
           </div>
         </div>
         <div className="flex scroll-box">
@@ -36,3 +33,7 @@ export default React.createClass({
     )
   }
 })
+
+//            <a className="link-primary">Revert</a>
+//            &nbsp;&nbsp;&nbsp;
+//            <a className="link-primary">View Online</a>

@@ -99,7 +99,7 @@ export default class Card extends Component {
     const { item, isDragging, connectDragSource, connectDropTarget, children, id } = this.props;
     const outerStyles = isDragging ? {opacity: '0.5'} : {opacity: '1', transform: 'translate3d(0,0,0)'};
     return connectDragSource(connectDropTarget(
-      <div style={outerStyles} key={id}>
+      <div style={outerStyles} key={id} className="layout-column">
         {children}
       </div>
     ));

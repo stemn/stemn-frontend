@@ -11,24 +11,25 @@ export const Component = React.createClass({
   },
   onChange(event){
     const { model, dispatch, type, changeAction } = this.props;
+    const prevValue = this.state.value;
     let newValue = event.target.value;
 
     // Toggle if checkbox
+    // Value can be: true || false || 'other' || undefined
     if(type == 'checkbox'){
-      const isFalse = newValue == 'false' || !newValue;
+      const isFalse = prevValue === 'false' || prevValue === false || prevValue === undefined;
       newValue = isFalse ? true : false; // toggle
     }
-//    else if( type == 'radio'){
-//      console.log(newValue);
-//      newValue = this.props.value
-//    }
     
     if(model){
+      // If model exists, we dispatch an update
       this.props.dispatch(actions.change(model, newValue));
     }
     if(changeAction){
+      // If a changeActions exists, we run it
       changeAction({value: newValue, model})
     }
+    // We update our internal state
     this.setState({value: newValue});
   },
   componentWillReceiveProps(nextProps) {

@@ -9,7 +9,7 @@ import classNames from 'classnames';
 Works as either a 2-state checkbox or 3-state.
 
 3-state checkbox requires !props.model
-states: true || false || null;
+states: true || false || 'other';
 *********************************************/
 
 export default React.createClass({
@@ -22,11 +22,11 @@ export default React.createClass({
         title={title}
         className={classNames(classes.checkbox, className, {[classes.checkboxCircle] : circle})}>
         <Input
-          value={value}
           type="checkbox"
           className={statusClass}
           id={id}
           model={model}
+          value={value}
           changeAction={changeAction}
         />
         <label htmlFor={id}></label>

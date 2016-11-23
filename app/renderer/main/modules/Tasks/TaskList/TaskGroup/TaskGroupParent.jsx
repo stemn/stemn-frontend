@@ -12,8 +12,7 @@ export default class Container extends React.Component {
        enterAnimation="none"
        leaveAnimation="none"
        duration={200}
-       className={layout == 'list' ? 'layout-column flex' : 'layout-row flex'}
-       style={layout == 'list' ? {} : {margin: '0 -15px'}}>
+       className={layout == 'list' ? 'layout-column flex' : 'layout-row flex'}>
         {children}
       </FlipMove>
     );

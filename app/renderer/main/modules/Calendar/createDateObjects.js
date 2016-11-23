@@ -14,7 +14,7 @@ export default function createDateObjects(date, weekOffset = 0) {
 
 
   const currentMonthDays = range(1, date.daysInMonth() + 1).map(index => ({
-    day: moment([date.year(), date.month(), index, '10'])
+    day: moment([date.year(), date.month(), index, '16'])
   }));
 
   const daysAdded = prevMonthDays.length + currentMonthDays.length - 1;

@@ -65,9 +65,11 @@ export function getUserProjects({userId}) {
   }
 }
 
-export function confirmDeleteProject({projectId}) {
+export function confirmDeleteProject({projectId, name}) {
   return ModalActions.showConfirm({
     message: 'Deleting a project is permanent. You will not be able to undo this.',
+    confirmValue: name,
+    confirmPlaceholder: 'Please type in the name of this project to confirm.',
     modalConfirm: {
       type: 'ALIASED',
       aliased: true,

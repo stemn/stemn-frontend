@@ -1,5 +1,5 @@
 import React from 'react';
-
+import classNames from 'classnames';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 import MdMoreHoriz from 'react-icons/md/more-horiz';
@@ -10,25 +10,22 @@ export default class Component extends React.Component {
   render() {
     const { item, children, layout, entityModel, deleteGroup, updateGroup, simpleGroup } = this.props;
 
-    const styles = layout == 'list' ? {
-      marginBottom: '20px'
-    } : {
-      padding: '0 15px',
-      width: '350px',
-      minWidth: '350px',
-    }
+    const headerClasses = classNames(classes.header, layout == 'list' ? classes.headerList : classes.headerBoard, 'layout-row layout-align-start-center');
+    
     if(simpleGroup){
       return (
-        <div style={styles}>
-          <div className={classes.header}></div>
-          {children}
+        <div className={layout == 'list' ? classes.wrapperList : classes.wrapperBoard}>
+          <div className={headerClasses}></div>
+          <div className={layout == 'list' ? classes.contentList : classes.contentBoard}>
+            {children}
+          </div>
         </div>
       );
     }
     else{
       return (
-        <div style={styles}>
-          <div className={classes.header + ' layout-row layout-align-start-center'}>
+        <div className={layout == 'list' ? classes.wrapperList : classes.wrapperBoard + ' layout-column flex'}>
+          <div className={headerClasses}>
             <h3 className="flex">
               <Input 
                 model={`${entityModel}.name`}
@@ -50,7 +47,9 @@ export default class Component extends React.Component {
               </PopoverMenu>
             </div>
           </div>
-          {children}
+          <div className={layout == 'list' ? classes.contentList : classes.contentBoard}>
+            {children}
+          </div>
         </div>
       );
     }

@@ -59,24 +59,15 @@ export const Component = React.createClass({
         })},
     },{
       label: 'Project Settings',
-      subMenu: [{
-        label: 'General Settings',
-        onClick: item => dispatch(push(`/project/${item._id}/settings`))
-      },{
-        label: 'Task Settings',
-        onClick: item => dispatch(push(`/project/${item._id}/settings/tasks`))
-      },{
-        label: 'Team Settings',
-        onClick: item => dispatch(push(`/project/${item._id}/settings/team`))
-      }]
+      onClick: item => dispatch(push(`/project/${item._id}/settings`))
     },{
       label: 'Delete Project',
       divider: true,
       onClick: item => projectsActions.confirmDeleteProject({
-        projectId: item._id
+        projectId: item._id,
+        name: item.name
       }),
     }];
-
 
     return (
       <DragResize side="right" width="300" widthRange={[0, 500]} animateHide={!this.props.sidebar.show} className="layout-column flex">

@@ -11,6 +11,7 @@ import TaskListItemWrapped from './TaskListItem/TaskListItemWrapped.jsx'
 import TaskListItem        from './TaskListItem/TaskListItem.jsx'
 import Input from 'app/renderer/main/components/Input/Input/Input';
 
+import classNames from 'classnames'
 import classes from './TaskList.css';
 
 export const NewItem = React.createClass({
@@ -96,8 +97,9 @@ export const Component = React.createClass({
     const { board, layout, className } = this.props;
     const entityModel = `tasks.boards.${board.data._id}`;
 
+    const outerClasses = classNames(className, layout == 'board' ? 'layout-column flex' : 'flex')
     return (
-      <div className={className + ' layout-column flex'} style={layout == 'board' ? {overflowX : 'scroll'} : {overflowY : 'scroll'}}>
+      <div className={outerClasses} style={layout == 'board' ? {overflowX : 'scroll'} : {overflowY : 'scroll'}}>
         <TaskGroupParent layout={layout}>
           {board.data.groups.map((group, groupIndex) =>
             <TaskGroupWrapped
@@ -109,11 +111,11 @@ export const Component = React.createClass({
               moveGroup={this.moveGroup}
               layout={layout}>
               <TaskGroup
-               item={group}
-               layout={layout}
-               entityModel={`${entityModel}.data.groups[${groupIndex}]`}
-               deleteGroup={() => this.deleteGroup(group._id)}
-               updateGroup={() => this.updateGroup(group)}>
+                item={group}
+                layout={layout}
+                entityModel={`${entityModel}.data.groups[${groupIndex}]`}
+                deleteGroup={() => this.deleteGroup(group._id)}
+                updateGroup={() => this.updateGroup(group)}>
                 <TaskListItemParent
                  groupId={group._id}
                  moveCard={this.moveCard}
@@ -144,7 +146,7 @@ export const Component = React.createClass({
               </TaskGroup>
            </TaskGroupWrapped>
           )}
-          <TaskGroup simpleGroup={true}>
+          <TaskGroup layout={layout} simpleGroup={true}>
             <NewItem
               model={`${entityModel}.newGroupString`}
               value={board.newGroupString}

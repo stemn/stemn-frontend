@@ -24,7 +24,7 @@ export function showModal({modalType, modalProps, modalOptions, limit, modalConf
   };
 }
 
-export function showConfirm({title, message, modalConfirm, modalCancel}) {
+export function showConfirm({title, message, confirmValue, confirmPlaceholder, modalConfirm, modalCancel}) {
   return {
     type: 'MODALS/SHOW_MODAL',
     payload: {
@@ -32,7 +32,9 @@ export function showConfirm({title, message, modalConfirm, modalCancel}) {
       modalType: 'CONFIRM',
       modalProps: {
         title,
-        message
+        message,
+        confirmValue,       // Some string that must be entered to confirm
+        confirmPlaceholder  // Placeholder for the confirm string
       },
       modalOptions : {},
       modalConfirm : modalConfirm,
