@@ -9,7 +9,7 @@ import getRoutes from './routes';
 import pify from 'pify';
 import electronJsonStorage from 'electron-json-storage';
 const jsonStorage = pify(electronJsonStorage);
-import standardSetup from '../shared/standardSetup.js'
+import standardSetup from '../shared/standardSetup.js';
 
 async function start() {
   const initialState = await jsonStorage.get('sessionState');

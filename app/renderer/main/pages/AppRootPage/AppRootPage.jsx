@@ -1,6 +1,7 @@
 import React from 'react';
 import ModalContainer from 'app/renderer/main/modules/Modal/ModalContainer.jsx'
 import ToastContainer from 'app/renderer/main/modules/Toasts/Toasts.jsx'
+//import Smooch from 'app/shared/modules/Smooch/Smooch.jsx'
 
 export default (props) => {
   return (
@@ -11,3 +12,5 @@ export default (props) => {
     </div>
   )
 }
+
+//      <Smooch />
