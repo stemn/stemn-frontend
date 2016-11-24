@@ -1,13 +1,17 @@
-/**********************************************
+/*****************************************************************
+
 React Redux Router does not let us add meta to the payload.
 
 Instead, we add the meta to the state object.
 This is transfered to the metadata here.
 
-It will also close any modals.
-**********************************************/
+This meta-data is typically used to set the route actions 'scope'
+property so we can send each action to the right renderer.
+This behavior requires the 'forwardToRendererWindow' middleware.
 
-import * as modalActions from '../../../renderer/main/modules/Modal/Modal.actions.js'
+*****************************************************************/
+
+//import * as modalActions from '../../../renderer/main/modules/Modal/Modal.actions.js'
 
 const routerFix = store => next => action => {
 

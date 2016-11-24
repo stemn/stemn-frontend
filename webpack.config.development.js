@@ -19,12 +19,12 @@ const getHappyConfig = (enable) => {
       loaders: [ 'style-loader', 'css-loader?sourceMap']
     },{
       test: /^((?!\.global).)*\.css$/,
-      loaders: [ 'style-loader', 'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name][emoji:6]']
+      loaders: [ 'style-loader', 'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]-[local]-[emoji:6]']
     }];
   
   config.plugins = enable 
     ? [
-      new HappyPack({ threads: 4, id: 'cssLocal',  loaders: [ 'style-loader', 'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name][emoji:6]']}),
+      new HappyPack({ threads: 4, id: 'cssLocal',  loaders: [ 'style-loader', 'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]-[local]-[emoji:6]']}),
       new HappyPack({ threads: 4, id: 'cssGlobal', loaders: [ 'style-loader', 'css-loader?sourceMap']})
     ]
     : [];

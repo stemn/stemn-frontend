@@ -9,6 +9,7 @@ import * as ElectronWindowsActions from 'app/shared/modules/ElectronWindows/Elec
 // Component Core
 import React from 'react';
 import moment from 'moment';
+import { some } from 'lodash';
 
 // Styles
 import classNames from 'classnames';
@@ -33,6 +34,21 @@ import { MentionsInput, Mention } from 'react-mentions';
 export const Component = React.createClass({
   render() {
     const { entityModel, changes, electronWindowsActions, changesActions } = this.props;
+    const noChangesChecked = !some(changes.checked);
+    const noSummary = !changes.summary || changes.summary.length < 1;
+
+    const getMessage = () => {
+      if(noSummary){
+        return 'You must have a commit summary.'
+      }
+      else if(noChangesChecked){
+        return 'You must select at least one change to commit.'
+      }
+      else {
+        return 'Commit these files.'
+      }
+    }
+
     return (
       <div className="p-15">
           <Input 
@@ -64,7 +80,8 @@ export const Component = React.createClass({
           <Button
           onClick={this.props.commitFn}
           className="primary"
-          disabled={!changes.summary || changes.summary.length < 1}
+          disabled={noSummary || noChangesChecked}
+          title={getMessage()}
           >Add Commit</Button>
         </div>
       </div>

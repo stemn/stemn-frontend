@@ -9,18 +9,15 @@ import classes from 'app/renderer/main/modules/Tasks/TaskTimeline/TaskTimelineIt
 import UserAvatar          from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
 import Comment             from 'app/renderer/main/modules/Comments/Comment/Comment.jsx';
 import TaskTimelineWrapper from 'app/renderer/main/modules/Tasks/TaskTimeline/TaskTimelineWrapper/TaskTimelineWrapper.jsx';
-import { Link }            from 'react-router';
+import Link                from 'app/shared/modules/Router/Link/Link.jsx';
 
 // import TaskTimelinePanel   from '../TaskTimelinePanel/TaskTimelinePanel.jsx'
 
 const eventTextMap = {
   revision   : (item) => {return <span>modified this file.</span>},
   commit     : (item) => {
-    const linkPath = {
-      pathname: `/project/${item.data.project}/feed`,
-      query: {item: item.data._id}
-    }
-    return <span>added this file to commit: <Link to={linkPath} className="link-primary">{item.data.summary}</Link></span>
+    console.log(item);
+    return <span>added this file to commit: <Link path={`/project/${item.data.project}/feed`} show={true} query={{ item: item.data._id }} scope="main" className="link-primary">{item.data.summary}</Link></span>
   },
 }
 

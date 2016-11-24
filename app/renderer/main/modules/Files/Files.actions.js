@@ -20,14 +20,14 @@ export function getFile({projectId, fileId, revisionId}) {
 export function getMeta({projectId, fileId, revisionId}) {
   return {
     type: 'FILES/GET_META',
-    http: true,
-    payload: {
+//    http: true,
+    payload: http({
       method: 'GET',
       url: `/api/v1/sync/files/${projectId}/${fileId}`,
       params: {
         revisionId
       }
-    },
+    }),
     meta: {
       cacheKey: `${fileId}-${revisionId}`
     }

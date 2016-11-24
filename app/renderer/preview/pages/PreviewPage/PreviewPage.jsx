@@ -40,12 +40,11 @@ export const Component = React.createClass({
         { fileMeta && fileMeta.data && fileMeta.data.data
           ? <PreviewPageInner fileMeta={fileMeta.data.data} />
           : null }
-        <LoadingOverlay show={fileMeta.loading} />
+        <LoadingOverlay show={fileMeta && fileMeta.loading} />
       </div>
     );
   }
 });
-
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 

@@ -39,24 +39,21 @@ import classes from './PagePreview.css';
 export const Component = React.createClass({
     // Mounting
   onMount(nextProps, prevProps){
-    // If we don't have the timeline, get it:
-    if(!nextProps.syncTimeline || !nextProps.syncTimeline.data && !nextProps.syncTimeline.loading){
-      if(nextProps.fileMeta.project && nextProps.fileMeta.project._id){
-        nextProps.syncTimelineActions.fetchTimeline({
-          projectId : nextProps.fileMeta.project._id,
-          fileId    : nextProps.fileMeta.fileId,
-        })
-      }
-      else{
-        nextProps.syncTimelineActions.fetchTimeline({
-          fileId    : nextProps.fileMeta.fileId,
-        })
-      }
-      nextProps.filesActions.getRelatedTasks({
+    if(nextProps.fileMeta.project && nextProps.fileMeta.project._id){
+      nextProps.syncTimelineActions.fetchTimeline({
+        projectId : nextProps.fileMeta.project._id,
         fileId    : nextProps.fileMeta.fileId,
-        projectId : nextProps.fileMeta.project._id
       })
     }
+    else{
+      nextProps.syncTimelineActions.fetchTimeline({
+        fileId    : nextProps.fileMeta.fileId,
+      })
+    }
+    nextProps.filesActions.getRelatedTasks({
+      fileId    : nextProps.fileMeta.fileId,
+      projectId : nextProps.fileMeta.project._id
+    })
   },
   componentWillMount() { this.onMount(this.props) },
   getInitialState () {
@@ -157,7 +154,7 @@ export const Component = React.createClass({
                 {orderBy(taskTags, ['completed']).map((task, index) => <Tag key={index} text={task.name} style={task.completed ? {opacity: '0.5'} : {}} />)}
               </div>
               <SectionTitle style={{margin: '30px 0'}}>Timeline</SectionTitle>
-              <div className="flex">
+              <div className="flex layout-column">
                 <TimelineVertical
                   items={syncTimeline && syncTimeline.data ? syncTimeline.data : []}
                 />

@@ -8,7 +8,7 @@ import { routerMiddleware }     from 'react-router-redux';
 import getRootReducerRenderer   from '../reducers/rootReducer.renderer.js';
 import forwardToMain            from './middleware/forwardToMain';
 import forwardToRendererWindow  from './middleware/forwardToRendererWindow';
-import routerFix                from './middleware/routerFix';
+import routerFix                from '../modules/Router/Router.middleware.js';
 
 export default function configureStore(initialState) {
   const middleware =[
