@@ -32,9 +32,9 @@ const MenuItem = React.createClass({
 
 const Menu = React.createClass({
   render() {
-    const { menu } = this.props;
+    const { menu, onClick } = this.props;
     return (
-      <div className="PopoverMenu">
+      <div className="PopoverMenu" onClick={onClick}>
         {menu.map(menuItem => <MenuItem key={menuItem.label} menuItem={menuItem}/>)}
       </div>
     );

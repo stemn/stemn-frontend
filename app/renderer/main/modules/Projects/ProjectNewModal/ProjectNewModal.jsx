@@ -17,6 +17,7 @@ import Button from 'app/renderer/main/components/Buttons/Button/Button';
 import FileSelectInput from 'app/renderer/main/modules/FileSelectInput/FileSelectInput.jsx'
 import Textarea from 'app/renderer/main/components/Input/Textarea/Textarea';
 import Input from 'app/renderer/main/components/Input/Input/Input';
+import ProjectLinkRemote from 'app/renderer/main/components/Project/ProjectLinkRemote/ProjectLinkRemote.jsx'
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -37,7 +38,8 @@ export const Component = React.createClass({
             className="dr-input"
             type="text"
             placeholder="Project Summary (Optional)"
-            style={{marginTop: '15px', minHeight: '70px'}} />
+            style={{marginTop: '15px', marginBottom: '15px', minHeight: '70px'}} />
+          <ProjectLinkRemote model={`${entityModel}.provider`} value={newProject.provider}/>
         </div>
         <div className="modal-footer-no-line layout-row layout-align-end">
           <Button style={{marginRight: '10px'}} onClick={() => {modalCancel(); modalHide()}}>Cancel</Button>

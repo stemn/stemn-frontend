@@ -85,8 +85,7 @@ async function start() {
   await jsonStorage.set('sessionState', {});
 
   // Fetch the permanant portion of the state
-  global.state = await jsonStorage.get('state').
-  catch(error => {
+  global.state = await jsonStorage.get('state').catch(error => {
     log.error('Invalid state store:', error);
     jsonStorage.clear();
     return {};

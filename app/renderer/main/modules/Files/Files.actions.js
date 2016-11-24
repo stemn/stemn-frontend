@@ -17,13 +17,13 @@ export function getFile({projectId, fileId, revisionId}) {
   };
 }
 
-export function getMeta({fileId, revisionId}) {
+export function getMeta({projectId, fileId, revisionId}) {
   return {
     type: 'FILES/GET_META',
     http: true,
     payload: {
       method: 'GET',
-      url: `/api/v1/sync/files/${fileId}`,
+      url: `/api/v1/sync/files/${projectId}/${fileId}`,
       params: {
         revisionId
       }
@@ -56,13 +56,13 @@ export function getMetaFromPath({ path }) {
   }
 }
 
-export function getRelatedTasks({ fileId }) {
+export function getRelatedTasks({ projectId, fileId }) {
   return {
     type: 'FILES/GET_RELATED_TASKS',
     http: true,
     payload: {
       method: 'GET',
-      url: `/api/v1/files/${fileId}/tasks`,
+      url: `/api/v1/sync/files/${projectId}/${fileId}/tasks`,
     },
     meta: {
       fileId

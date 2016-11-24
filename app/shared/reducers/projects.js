@@ -11,6 +11,7 @@ const initialState = {
   newProject: {
     summary: '',
     name: '',
+    remote: '',
     savePending: ''
   }
 }

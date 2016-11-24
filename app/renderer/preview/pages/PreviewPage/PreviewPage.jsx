@@ -21,14 +21,14 @@ export const Component = React.createClass({
 
   // Mounting
   onMount(nextProps, prevProps){
-    const { localPath, fileId, fileMeta, revisionId } = nextProps;
-    // If localPath exists - we must get the fileId
+    const { localPath, fileId, fileMeta, revisionId, projectId } = nextProps;
+    // If localPath exists - we must get the fileId - this will get the meta
     if(localPath){
       nextProps.filesActions.getMetaFromPath({path: localPath})
     }
     // If we do not yet have the meta, get it:
     else if(!fileMeta || !fileMeta.data && !fileMeta.loading){
-      nextProps.filesActions.getMeta({fileId, revisionId});
+      nextProps.filesActions.getMeta({projectId, fileId, revisionId});
     }
   },
   componentWillMount() { this.onMount(this.props) },
@@ -37,11 +37,10 @@ export const Component = React.createClass({
     const { fileMeta } = this.props;
     return (
       <div className="layout-column flex">
-        { fileMeta && fileMeta.data
-          ? <PreviewPageInner fileMeta={fileMeta.data} />
+        { fileMeta && fileMeta.data && fileMeta.data.data
+          ? <PreviewPageInner fileMeta={fileMeta.data.data} />
           : null }
-
-        <LoadingOverlay show={!fileMeta}/>
+        <LoadingOverlay show={fileMeta.loading} />
       </div>
     );
   }

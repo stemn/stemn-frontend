@@ -53,7 +53,8 @@ export const Component = React.createClass({
         })
       }
       nextProps.filesActions.getRelatedTasks({
-        fileId    : nextProps.fileMeta.fileId
+        fileId    : nextProps.fileMeta.fileId,
+        projectId : nextProps.fileMeta.project._id
       })
     }
   },
