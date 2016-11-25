@@ -11,7 +11,7 @@ export default React.createClass({
       marginRight: '10px'
     }
     return (
-      <img style={style} src={`https://stemn.com/assets/images/vectors/filetype/${this.props.fileType || 'other'}.svg`} />
+      <img style={style} src={`https://stemn.com/assets/images/vectors/filetype/${this.props.fileType || 'folder'}.svg`} />
     );
   }
 });

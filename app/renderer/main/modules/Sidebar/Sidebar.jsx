@@ -12,6 +12,7 @@ import { push } from 'react-router-redux'
 
 // Component Core
 import React from 'react';
+import { escapeRegExp } from 'lodash';
 
 // Styles
 import classNames from 'classnames';
@@ -45,7 +46,7 @@ export const Component = React.createClass({
   render() {
     const { projectsActions, projects, auth, dispatch } = this.props;
     const sidebarStyle = classNames('layout-column', 'flex' ,'rel-box', styles.sidebar);
-    const nameRegex = new RegExp(this.props.sidebar.searchString, 'i');
+    const nameRegex = new RegExp(escapeRegExp(this.props.sidebar.searchString), 'i');
     const filteredProjects = projects.userProjects.data ? projects.userProjects.data.filter(project => nameRegex.test(project.name)) : [];
 
     const projectContextMenu = [{
