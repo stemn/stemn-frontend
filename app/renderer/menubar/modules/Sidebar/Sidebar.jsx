@@ -8,6 +8,7 @@ import * as MenubarLayoutActions from 'app/shared/actions/menubarLayout';
 // Component Core
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { escapeRegExp } from 'lodash';
 
 // Styles
 import classNames from 'classnames';
@@ -34,7 +35,7 @@ export const Component = React.createClass({
       }
     }
 
-    const nameRegex = new RegExp(sidebar.searchString, 'i');
+    const nameRegex = new RegExp(escapeRegExp(sidebar.searchString), 'i');
     const filteredProjects = projects.userProjects.data ? projects.userProjects.data.filter(project => nameRegex.test(project.name)) : [];
 
     return (
@@ -44,11 +45,11 @@ export const Component = React.createClass({
         </AnimateShow>
         <div className={classNames(classes.sidebar, 'layout-column', {[classes.sidebarShow] : menubarLayout.showSidebar})}>
           <div className={classes.sidebarSearch}>
-            <Input 
+            <Input
               model="sidebar.searchString"
               value={sidebar.searchString}
-              className="dr-input text-ellipsis" 
-              type="text" 
+              className="dr-input text-ellipsis"
+              type="text"
               placeholder="Search all projects"
             />
             <MdSearch className={classes.sidebarSearchIcon} size="20"/>

@@ -19,7 +19,7 @@ const pageHtml = `
       background: white;
       line-height: 1.3em;
       font-size: 14px">
-      <b style="margin-bottom: 10px; display: block;">Authorisation Successful.</b>
+      <b style="margin-bottom: 10px; display: block;">Authorisation Successful</b>
       <div>You can close this window and return to Stemn Desktop.</div>
       <div style="text-align: right; margin-top: 25px">
         <a style="text-decoration: none;" href="stemn:open">Open Stemn</a>
@@ -63,5 +63,3 @@ export const authLinkedin = (req, res) => {
   }));
   res.send(pageHtml)
 }
-
-
