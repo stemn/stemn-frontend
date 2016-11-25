@@ -14,6 +14,7 @@ import moment from 'moment';
 // Styles
 import classNames from 'classnames';
 import classes from './Comment.css';
+import loadingClasses from 'app/shared/modules/Loading/LoadingPlaceholders/LoadingPlaceholders.css'
 
 // Sub Components
 import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
@@ -64,7 +65,21 @@ export const Component = React.createClass({
     const { item, comment, entityModel, commentsActions, style } = this.props;
 
     if(!comment || !comment.data){
-      return null
+      return (
+        <div className={classNames(classes.comment, loadingClasses.loading, 'layout-row')} style={style}>
+          <div className={classes.commentAvatar}>
+            <UserAvatar size="33" shape="square" />
+          </div>
+          <div className={classes.commentBody + ' flex'}>
+            <div className={classes.commentHeader}>
+              Somebodys name
+            </div>
+            <div className={classes.commentContent}>
+              Some dummy goes here. This text should be obscured by the blokk font.
+            </div>
+          </div>
+        </div>
+      )
     }
 
     return (

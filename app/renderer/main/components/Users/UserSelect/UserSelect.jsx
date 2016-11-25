@@ -15,17 +15,14 @@ const Component = React.createClass({
     if(this.props.onChange){ this.props.onChange() }
   },
   render(){
-    const {model, value, users, dispatch} = this.props
-
+    const { model, value, users, dispatch } = this.props
     const userOptions = users.map(user => {
       return {
         value: user._id,
         label: user.name
       }
     });
-
     const mappedValue = value.map(user => user._id);
-
     return (
       <div>
         <Select

@@ -12,6 +12,7 @@ const initialState = {
       data: {the board data},
       searchString: 'Some search string'
       layout: 'board' || 'list'
+      loading: true || false
     }
     ********************************/
   },
@@ -55,7 +56,19 @@ const mainReducer = (state, action) => {
           boards  : [],
           loading : false
         })
-      }
+      }    
+    
+    
+    case 'TASKS/GET_BOARD_PENDING':
+      return i.assocIn(state, ['boards', action.meta.cacheKey, 'loading'], true);
+    case 'TASKS/GET_BOARD_REJECTED':
+      return i.assocIn(state, ['boards', action.meta.cacheKey, 'loading'], false);
+    case 'TASKS/GET_BOARD_FULFILLED':
+      return i.chain(state)
+      .assocIn(['boards', action.meta.cacheKey, 'loading'], true)
+      .assocIn(['boards', action.meta.cacheKey, 'data'], action.payload.data)
+      .value();
+      
     case 'TASKS/GET_GROUP_FULFILLED':
       return i.updateIn(state, ['boards', action.meta.boardId, 'data', 'groups'], (groups) => {
           console.log(action.meta.boardId)

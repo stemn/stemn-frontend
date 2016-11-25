@@ -36,7 +36,9 @@ export function newComment({comment}) {
           taskId: comment.task,
           event: {
             event: 'comment',
-            comment: response.value.data._id
+            data: {
+              comment: response.value.data._id
+            }
           }
         }))
       })

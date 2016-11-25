@@ -72,7 +72,7 @@ class Component extends React.Component{
           <Link activeClassName="active" to={baseLink+'/tasks'}>Tasks</Link>
           <Link activeClassName="active" to={baseLink+'/settings'}>Settings</Link>
         </Tabs>
-        { project.data
+        { project.data && project.data.remote && project.data.remote.provider
         ? missingClientBanner()
         : null }
         <div className="layout-column flex rel-box">{this.props.children}</div>

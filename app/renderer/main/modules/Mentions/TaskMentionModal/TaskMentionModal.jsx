@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
+import * as TasksActions from 'app/renderer/main/modules/Tasks/Tasks.actions.js';
 
 // Component Core
 import React from 'react';
@@ -26,20 +27,19 @@ import MdSearch from 'react-icons/md/search';
 import { filterBoard, getAllTasks } from 'app/renderer/main/modules/Tasks/Tasks.utils.js';
 import TasksFilterMenu from 'app/renderer/main/modules/Tasks/TasksFilterMenu/TasksFilterMenu.jsx';
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
+import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
-const onMount = (nextProps, prevProps) => {
-  if(nextProps.task){
-    if(!prevProps || nextProps.task.project._id !== prevProps.task.project._id){
-    }
-  }
-}
 export const Component = React.createClass({
 
   // Mounting
-  componentWillMount() { onMount(this.props) },
-  componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
+   onMount(nextProps, prevProps) {
+    if(!nextProps.board || !nextProps.board.data){
+      nextProps.dispatch(TasksActions.getBoards({projectId: nextProps.projectId}))
+    }
+  },
+  componentWillMount() { this.onMount(this.props) },
   submit(){
     // Get the mentions
     const mentions = getMentionsFromObject(this.props.mentions, this.props.tasks);
@@ -72,13 +72,39 @@ export const Component = React.createClass({
   render() {
     const { tasks, board, mentions, boardModel } = this.props;
 
-    if(!board){
-      return <div>Loading</div>
+        
+    const getTasks = () => {
+      const filteredBoard = filterBoard(board, tasks, board.searchString);
+      const numTasks = getAllTasks(board.data.groups).length;
+      const numFilteredTasks = getAllTasks(filteredBoard.data.groups).length;
+      
+      if(numTasks == 0 || numFilteredTasks == 0){
+        return (
+          <div className="flex layout-column layout-align-center-center text-center">
+            {numTasks == 0
+              ? <div style={{width: '100%'}}>This project has no tasks. Add some.</div>
+              : <div style={{width: '100%'}}>No results, <a className="text-primary" onClick={() => this.props.dispatch(actions.change(`${boardModel}.searchString`, ''))}>clear search filter.</a></div>
+            }
+          </div>
+        )
+      }
+      else{
+        return (
+          <div className="flex scroll-box">
+            {filteredBoard.data.groups.map(group => <div>
+              {group.tasks.map(taskId => <TaskRow
+                key={taskId}
+                taskId={taskId}
+                mention={mentions[taskId]}
+                toggleComplete={()=>this.toggle({type: 'complete',taskId, mention: mentions[taskId]})}
+                toggleRelated={()=>this.toggle({type: 'related',taskId, mention: mentions[taskId]})}
+              />
+              )}
+            </div>)}
+          </div>
+        )
+      }
     }
-
-    const filteredBoard = filterBoard(board, tasks, board.searchString);
-    const numTasks = getAllTasks(board.data.groups).length;
-    const numFilteredTasks = getAllTasks(filteredBoard.data.groups).length;
 
     return (
       <div className={classes.modal + ' layout-column'}>
@@ -100,27 +126,10 @@ export const Component = React.createClass({
             </PopoverMenu>
           </div>
         </div>
-        {
-          numTasks == 0 || numFilteredTasks == 0 ?
-          <div className="flex layout-column layout-align-center-center text-center">
-            {numTasks == 0
-              ? <div style={{width: '100%'}}>This project has no tasks. Add some.</div>
-              : <div style={{width: '100%'}}>No results, <a className="text-primary" onClick={()=>this.props.dispatch(actions.change(`${boardModel}.searchString`, ''))}>clear search filter.</a></div>
-            }
-          </div> :
-          <div className="flex scroll-box">
-            {filteredBoard.data.groups.map(group => <div>
-              {group.tasks.map(taskId => <TaskRow
-                key={taskId}
-                taskId={taskId}
-                mention={mentions[taskId]}
-                toggleComplete={()=>this.toggle({type: 'complete',taskId, mention: mentions[taskId]})}
-                toggleRelated={()=>this.toggle({type: 'related',taskId, mention: mentions[taskId]})}
-              />
-              )}
-            </div>)}
-          </div>
-        }
+        <div className="layout-column flex rel-box">
+          <LoadingOverlay show={!board || !board.data} />
+          { board && board.data ? getTasks() : null }
+        </div>
         <div className="modal-footer layout-row layout-align-start-center">
           <div className="flex text-description-1"></div>
           <Button style={{marginRight: '10px'}} onClick={this.cancel}>Cancel</Button>
@@ -161,7 +170,7 @@ function newMention({entityId, display, mentionType}){
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps({ tasks, mentions }, {projectId}) {
+function mapStateToProps({ tasks, mentions }, { projectId }) {
   const projectBoards = tasks.projects && tasks.projects[projectId] ? tasks.projects[projectId].boards : null;
   const board = projectBoards ? tasks.boards[projectBoards[0]] : {};
   return {

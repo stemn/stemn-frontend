@@ -14,6 +14,7 @@ import { has } from 'lodash';
 // Styles
 import classNames from 'classnames';
 import classes from './TaskListItem.css';
+import loadingClasses from 'app/shared/modules/Loading/LoadingPlaceholders/LoadingPlaceholders.css'
 
 // Sub Components
 import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
@@ -97,7 +98,37 @@ export const Component = React.createClass({
   render() {
     const { task, entityModel, draggable, layout, board, project } = this.props;
     if(!task || !task.data){
-      return null
+      if(layout == 'list'){
+        return (
+          <div className={loadingClasses.loading}>
+            <div className={classNames(classes.listItem, 'layout-row flex layout-align-start-center')}>
+              <Checkbox
+                className="text-primary"
+                circle={true} />
+              <div className="flex text-ellipsis" style={{lineHeight: '1.4em'}}>
+                Some placeholder hidden with blokk font
+              </div>
+              <div className={classes.listUser + ' layout-row layout-align-start-center text-ellipsis'}>
+                <UserAvatars users={[{}]} limit={3}/>
+              </div>
+              <div className={classes.listDate}></div>
+              <div className={classes.listActions + ' text-ellipsis layout-row layout-align-end-center'}></div>
+            </div>
+          </div>
+        )
+      }
+      else{
+        return (
+          <div className={classNames(classes.card, loadingClasses.loading, 'layout-column flex')}>
+            <div className={classes.cardBody + ' layout-row'}>
+              <Checkbox className="text-primary" circle={true}/>
+              <div className={classes.cardText + ' flex'}>Some placeholder hidden with blokk font</div>
+              <UserAvatars users={[{}]}/>
+            </div>
+            <div className={classes.cardFooter + ' layout-row layout-align-start-center'}></div>
+          </div>
+        );
+      }
     }
     if(layout == 'list'){
       return (

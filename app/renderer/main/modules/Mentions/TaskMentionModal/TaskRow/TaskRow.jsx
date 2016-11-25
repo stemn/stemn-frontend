@@ -5,9 +5,15 @@ import { connect } from 'react-redux';
 // Component Core
 import React from 'react';
 import moment from 'moment';
+
+// Container Actions
+import * as TasksActions from 'app/renderer/main/modules/Tasks/Tasks.actions.js';
+
 // Styles
 import classNames from 'classnames';
 import classes from './TaskRow.css';
+import loadingClasses from 'app/shared/modules/Loading/LoadingPlaceholders/LoadingPlaceholders.css'
+
 
 // Sub Components
 import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
@@ -16,11 +22,27 @@ import Button from 'app/renderer/main/components/Buttons/Button/Button';
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
+  // Mounting
+  onMount (nextProps, prevProps) {
+    if(!prevProps || prevProps.taskId != nextProps.taskId){
+      nextProps.dispatch(TasksActions.getTask({
+        taskId: nextProps.taskId
+      }))
+    }
+  },
+  componentWillMount() { this.onMount(this.props) },
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
   render() {
     const { task, entityModel, toggleComplete, toggleRelated, mention } = this.props;
 
-    if(!task){
-      return <div>Task Loading</div>
+    if(!task && task.data){
+      return (
+        <div className={classNames(classes.row, loadingClasses.loading, 'layout-row', 'layout-align-start-center')}>
+          <div className="flex text-ellipsis" style={{marginBottom: '2px'}}>The task namelongword goes here</div>
+          <Button className={classNames('xs', classes.button)} style={{width: '60px'}}>&nbsp;</Button>
+          <Button className={classNames('xs', classes.button)} style={{width: '60px'}}>&nbsp;</Button>
+        </div>
+      )
     }
     return (
       <div className={classes.row + ' layout-row layout-align-start-center'}>
@@ -38,12 +60,6 @@ export const Component = React.createClass({
   }
 });
 
-//        <div style={{marginRight: '10px'}} title="Mark as Complete">
-//          <Checkbox circle={true} model={`${entityModel}.data.complete`} value={task.data.complete}/>
-//        </div>
-//        <div className={classes.checkbox} title="Related Task">
-//          <Checkbox />
-//        </div>
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
 function mapStateToProps({ tasks }, { taskId }) {

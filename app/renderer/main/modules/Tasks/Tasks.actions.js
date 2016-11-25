@@ -28,14 +28,14 @@ export function newTask({boardId, task}) {
  }
 }
 
-export function getBoards({projectId}){
+export function getBoards({projectId, populate}){
   return {
     type: 'TASKS/GET_BOARDS',
     payload: http({
       method: 'GET',
       url: `/api/v1/projects/${projectId}/boards`,
       params: {
-        populate: false
+        populate: populate || false
       }
     }),
     meta: {
@@ -50,6 +50,9 @@ export function getBoard({boardId}){
     payload: http({
       method: 'GET',
       url: `/api/v1/boards/${boardId}`,
+      params: {
+        populate: false
+      }
     }),
     meta: {
       cacheKey: boardId

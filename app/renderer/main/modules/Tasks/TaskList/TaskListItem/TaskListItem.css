@@ -49,11 +49,13 @@
 }
 .cardBody{
   padding: 15px;
+  min-height: 57px;
 }
 .cardFooter{
   padding: 1px 0px 1px 15px;
   border-top: 1px dashed border1;
   cursor: move;
+  height: 32px;
 }
 .cardText{
   margin-left: 4px;
