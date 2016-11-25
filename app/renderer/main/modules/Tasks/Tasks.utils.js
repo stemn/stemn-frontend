@@ -1,5 +1,5 @@
 import i from 'icepick';
-import { every } from 'lodash';
+import { every, escapeRegExp } from 'lodash';
 
 export const filterBoard = (board, tasks, searchString) => {
   // This will filter the board by the the search string
@@ -35,7 +35,7 @@ function queryByString(item, queryString){
   }
   // Filter by the string itself (case independent)
   else if(queryString && queryString.length > 0){
-    return new RegExp(queryString, 'i').test(item.data.name)
+    return new RegExp(escapeRegExp(queryString), 'i').test(item.data.name)
   }
   else{
     return true;

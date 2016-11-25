@@ -61,20 +61,20 @@ export const DueDate = React.createClass({
   }
 });
 
-const onMount = (nextProps, prevProps) => {
-  if(!prevProps || prevProps.item != nextProps.item){
-//    if(!nextProps.task || !nextProps.task.data){
-      nextProps.TasksActions.getTask({
-        taskId: nextProps.item
-      })
-//    }
-  }
-}
 
 export const Component = React.createClass({
   // Mounting
-  componentWillMount() { onMount(this.props) },
-  componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
+  onMount(nextProps, prevProps) {
+    if(!prevProps || prevProps.item != nextProps.item){
+      if(!nextProps.task || !nextProps.task.data){
+        nextProps.TasksActions.getTask({
+          taskId: nextProps.item
+        })
+      }
+    }
+  },
+  componentWillMount() { this.onMount(this.props) },
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
 
   updateTask(){
     setTimeout(()=>this.props.TasksActions.updateTask({task: this.props.task.data}), 1);

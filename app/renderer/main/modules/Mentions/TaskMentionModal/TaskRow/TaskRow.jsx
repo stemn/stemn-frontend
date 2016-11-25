@@ -25,9 +25,11 @@ export const Component = React.createClass({
   // Mounting
   onMount (nextProps, prevProps) {
     if(!prevProps || prevProps.taskId != nextProps.taskId){
-      nextProps.dispatch(TasksActions.getTask({
-        taskId: nextProps.taskId
-      }))
+      if(!nextProps.task || !nextProps.task.data){
+        nextProps.dispatch(TasksActions.getTask({
+          taskId: nextProps.taskId
+        }))
+      }
     }
   },
   componentWillMount() { this.onMount(this.props) },
@@ -35,7 +37,7 @@ export const Component = React.createClass({
   render() {
     const { task, entityModel, toggleComplete, toggleRelated, mention } = this.props;
 
-    if(!task && task.data){
+    if(!task || !task.data){
       return (
         <div className={classNames(classes.row, loadingClasses.loading, 'layout-row', 'layout-align-start-center')}>
           <div className="flex text-ellipsis" style={{marginBottom: '2px'}}>The task namelongword goes here</div>
