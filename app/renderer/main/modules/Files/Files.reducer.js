@@ -2,7 +2,8 @@ import i from 'icepick'
 const initialState = {
   fileData: {},
   fileMeta: {},
-  pathToId: {}
+  pathToId: {},
+  relatedTasks: {},
 };
 
 export default function (state = initialState, action) {
@@ -26,6 +27,17 @@ export default function (state = initialState, action) {
         data: action.payload.data,
         loading: false
       })
+
+    case 'FILES/GET_RELATED_TASKS_PENDING' :
+      return i.assocIn(state, ['relatedTasks', action.meta.fileId, 'loading'], true)
+    case 'FILES/GET_RELATED_TASKS_REJECTED' :
+      return i.assocIn(state, ['relatedTasks', action.meta.fileId, 'loading'], false)
+    case 'FILES/GET_RELATED_TASKS_FULFILLED' :
+      return i.assocIn(state, ['relatedTasks', action.meta.fileId], {
+        data: action.payload.data,
+        loading: false
+      })
+
     case 'FILES/GET_META_FROM_PATH_PENDING' :
       return i.assocIn(state, ['pathToId', action.meta.cacheKey, 'loading'], true)
     case 'FILES/GET_META_FROM_PATH_REJECTED' :

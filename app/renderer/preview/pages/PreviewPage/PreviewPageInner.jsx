@@ -16,8 +16,11 @@ import moment from 'moment';
 import { formatBytes } from 'app/renderer/main/modules/Files/Files.utils.js'
 
 // Actions
-import * as FilesActions from 'app/renderer/main/modules/Files/Files.actions.js';
+import * as FilesActions        from 'app/renderer/main/modules/Files/Files.actions.js';
 import * as SyncTimelineActions from 'app/shared/modules/SyncTimeline/SyncTimeline.actions.js';
+import * as ModalActions        from 'app/renderer/main/modules/Modal/Modal.actions.js';
+import * as ElectronWindowsActions from 'app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
+
 
 // Sub Components
 import FileCompareInner   from 'app/renderer/main/modules/FileCompare/FileCompareInner/FileCompareInner.jsx';
@@ -97,22 +100,19 @@ export const Component = React.createClass({
     const selected2 = has(this.state, 'selected2.data.revisionId') ? item.data.revisionId == this.state.selected2.data.revisionId : false;
     return this.state.mode == 'single' ? selected1 : selected1 || selected2;
   },
+  clickTag(task){
+    this.props.dispatch(ModalActions.showModal({modalType: 'TASK', modalProps: { taskId: task._id }}));
+    this.props.dispatch(ElectronWindowsActions.show('main'))
+  },
   render() {
-    const { fileMeta, syncTimeline } = this.props;
+    const { fileMeta, syncTimeline, relatedTasks } = this.props;
     const { mode, selected1, selected2 } = this.state;
     const isPartOfProject = fileMeta.project && fileMeta.project._id;
     const items = mode == 'single' ? [selected1] : orderBy([selected1, selected2], item => (new Date(item.timestamp)).getTime());
-    const file1 = items[0];
+    const file1 = items[0] ? items[0].data : undefined;
     const file2 = items[1] ? items[1].data : undefined;
     const revisions = syncTimeline && syncTimeline.data ? syncTimeline.data.filter(item => item.event == 'revision') : [];
 
-    const taskTags = [
-      {name:'This is the first task', completed: false},
-      {name:'And the second task goes here', completed: true},
-      {name:'There can be long tasks like this that get cut-off in the middle', completed: true},
-      {name:'Or short', completed: false},
-      {name:'And lots of tasks if required', completed: false},
-    ];
     return (
       <div className="layout-column flex">
         <div className={classes.header + ' layout-row layout-align-start-center'}>
@@ -143,16 +143,19 @@ export const Component = React.createClass({
               <SectionTitle style={{marginBottom: '15px'}}>Meta</SectionTitle>
               <SimpleTable>
                 <tr><td>Name</td><td>{fileMeta.name}</td></tr>
+                <tr><td>Projects</td><td>{fileMeta.project._id}</td></tr>
                 <tr><td>Size</td><td>{formatBytes(fileMeta.size)}</td></tr>
                 <tr><td>Last modified</td><td>{moment(fileMeta.modified).fromNow()}</td></tr>
                 { revisions.length > 0 
                 ? <tr><td>Revisions</td><td>{revisions.length}</td></tr> 
                 : null }
               </SimpleTable>
-              <div>
-                <SectionTitle style={{margin: '30px 0 15px'}}>Related Tasks</SectionTitle>
-                {orderBy(taskTags, ['completed']).map((task, index) => <Tag key={index} text={task.name} style={task.completed ? {opacity: '0.5'} : {}} />)}
-              </div>
+              { relatedTasks && relatedTasks.data && relatedTasks.data.length > 0
+              ? <div>
+                  <SectionTitle style={{margin: '30px 0 15px'}}>Related Tasks</SectionTitle>
+                  {orderBy(relatedTasks.data, ['complete']).map(task => <Tag key={task._id} text={task.name} onClick={() => this.clickTag(task)} />)}
+                </div>
+              : null }
               <SectionTitle style={{margin: '30px 0'}}>Timeline</SectionTitle>
               <div className="flex layout-column">
                 <TimelineVertical
@@ -169,9 +172,10 @@ export const Component = React.createClass({
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps({ syncTimeline }, { fileMeta }) {
+function mapStateToProps({ syncTimeline, files }, { fileMeta }) {
   return {
-    syncTimeline: syncTimeline[fileMeta.fileId]
+    syncTimeline: syncTimeline[fileMeta.fileId],
+    relatedTasks: files.relatedTasks[fileMeta.fileId]
   };
 }
 
@@ -179,6 +183,7 @@ function mapDispatchToProps(dispatch) {
   return {
     syncTimelineActions: bindActionCreators(SyncTimelineActions, dispatch),
     filesActions: bindActionCreators(FilesActions, dispatch),
+    dispatch
   }
 }
 

@@ -1,6 +1,7 @@
 // Component Core
 import React from 'react';
 import { middle as middleConcat } from 'app/shared/helpers/stringConcat';
+import { omit } from 'lodash';
 
 // Styles
 import classes from './Tag.css';
@@ -9,9 +10,9 @@ import classes from './Tag.css';
 
 export default React.createClass({
   render() {
-    const { text, style } = this.props;
+    const { text } = this.props;
     return (
-      <a className={classes.tag} style={style}>
+      <a className={classes.tag} { ...omit(this.props, ['text']) } >
         { middleConcat(text, 30) }
       </a>
     )

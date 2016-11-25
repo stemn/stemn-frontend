@@ -21,7 +21,7 @@ Example:
 ***************************************************************************/
 
 const propTypesObject = {
-  children: PropTypes.element.isRequired,   // Child element
+  children: PropTypes.node.isRequired,      // Child element
   dispatch: PropTypes.func.isRequired,      // Dispatch function
   path: PropTypes.string,                   // Router path, eg -> '/projects/projectId/settings'
   query: PropTypes.object,                  // Query param object
@@ -35,7 +35,6 @@ const Link = React.createClass({
     const { children, dispatch, path, query, scope, show } = this.props;
 
     const link = () => {
-
       // Dispatch a standard react-router-redux action
       // We include the scope on the state.meta
       // This state.meta is movie up to the root action object

@@ -10,21 +10,18 @@ import UserAvatar          from 'app/renderer/main/components/Avatar/UserAvatar/
 import Comment             from 'app/renderer/main/modules/Comments/Comment/Comment.jsx';
 import TaskTimelineWrapper from 'app/renderer/main/modules/Tasks/TaskTimeline/TaskTimelineWrapper/TaskTimelineWrapper.jsx';
 import Link                from 'app/shared/modules/Router/Link/Link.jsx';
-
 // import TaskTimelinePanel   from '../TaskTimelinePanel/TaskTimelinePanel.jsx'
 
 const eventTextMap = {
   revision   : (item) => {return <span>modified this file.</span>},
   commit     : (item) => {
-    console.log(item);
-    return <span>added this file to commit: <Link path={`/project/${item.data.project}/feed`} show={true} query={{ item: item.data._id }} scope="main" className="link-primary">{item.data.summary}</Link></span>
+    return <span>added this file to commit: <Link path={`/project/${item.data.project._id}/feed`} show={true} query={{ item: item._id }} scope="main" className="link-primary">{item.data.summary}</Link></span>
   },
 }
 
 const getTextEventData = (item) => {
   return eventTextMap[item.event] ? eventTextMap[item.event](item) : <span>Unknown Event Type</span>
 };
-
 
 export default React.createClass({
   render() {
@@ -35,16 +32,6 @@ export default React.createClass({
         <Comment commentId={item.comment}></Comment>
       )
     }
-//    if(item.event == 'completed' && item.commits && item.commits[0]){
-//      console.log(item);
-//      const commit = item.commits[0];
-//      return (
-//        <TaskTimelinePanel item={item}>
-//          <h3>{commit.summary}</h3>
-//          <div>{commit.description}</div>
-//        </TaskTimelinePanel>
-//      )
-//    }
     // Else, we add a text event
     else{
       return (
@@ -62,3 +49,15 @@ export default React.createClass({
     }
   }
 });
+
+
+//    if(item.event == 'completed' && item.commits && item.commits[0]){
+//      console.log(item);
+//      const commit = item.commits[0];
+//      return (
+//        <TaskTimelinePanel item={item}>
+//          <h3>{commit.summary}</h3>
+//          <div>{commit.description}</div>
+//        </TaskTimelinePanel>
+//      )
+//    }
