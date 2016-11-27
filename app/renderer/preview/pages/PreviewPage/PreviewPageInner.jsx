@@ -62,7 +62,7 @@ export const Component = React.createClass({
   getInitialState () {
     return {
       selected1: this.props.fileMeta,
-      selected2: null,
+      selected2: undefined,
       lastSelected: 1,
       mode: 'single'
     }
@@ -89,8 +89,15 @@ export const Component = React.createClass({
       }
     }
   },
-  changeMode(mode){
-    this.setState({mode: mode})
+  changeMode(mode, revisions){
+    let { selected1, selected2 } = this.state;
+    // If a second file is not selected - we select one if possible
+    if(!selected2){
+      const revisionIndex = revisions.findIndex(revision => revision.data.fileId == selected1.data.fileId && revision.data.revisionId == selected1.data.revisionId);
+      if(revisions[revisionIndex - 1]){selected2 = revisions[revisionIndex - 1];}
+      else if(revisions[revisionIndex + 1]){selected2 = revisions[revisionIndex + 1];}
+    }
+    this.setState({mode, selected2})
   },
   clickCrumb({file}){
     console.log(file);
@@ -108,7 +115,7 @@ export const Component = React.createClass({
     const { fileMeta, syncTimeline, relatedTasks } = this.props;
     const { mode, selected1, selected2 } = this.state;
     const isPartOfProject = fileMeta.data.project && fileMeta.data.project._id;
-    const items = mode == 'single' ? [selected1] : orderBy([selected1, selected2], item => (new Date(item.timestamp)).getTime());
+    const items = orderItemsByTime(mode, selected1, selected2);
     const file1 = items[0] ? items[0].data : undefined;
     const file2 = items[1] ? items[1].data : undefined;
     const revisions = syncTimeline && syncTimeline.data ? syncTimeline.data.filter(item => item.event == 'revision') : [];
@@ -143,7 +150,7 @@ export const Component = React.createClass({
               <SectionTitle style={{marginBottom: '15px'}}>Meta</SectionTitle>
               <SimpleTable>
                 <tr><td>Name</td><td>{fileMeta.data.name}</td></tr>
-                {/*<tr><td>Projects</td><td>{fileMeta.data.project._id}</td></tr>*/}
+                <tr><td>Projects</td><td>{fileMeta.data.project._id}</td></tr>
                 <tr><td>Size</td><td>{formatBytes(fileMeta.data.size)}</td></tr>
                 <tr><td>Last modified</td><td>{moment(fileMeta.data.modified).fromNow()}</td></tr>
                 { revisions.length > 0 
@@ -169,6 +176,15 @@ export const Component = React.createClass({
     );
   }
 });
+
+function orderItemsByTime(mode, item1, item2){
+  if(mode == 'single' || !item2){
+    return [ item1 ]
+  }
+  else {
+    return  orderBy([item1, item2], item => (new Date(item.timestamp)).getTime());
+  }
+}
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 

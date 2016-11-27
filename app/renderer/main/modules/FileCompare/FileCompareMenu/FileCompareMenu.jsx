@@ -89,7 +89,7 @@ export const Component = React.createClass({
             <div className="PopoverMenu">
               {compareModes.map(item=><a key={item.value}
               className={classNames({'active': mode == item.value})}
-              onClick={()=>changeMode(item.value)}>
+              onClick={()=>changeMode(item.value, revisions)}>
                 Compare: {item.text}
               </a>)}
             </div>

@@ -49,9 +49,28 @@ function processLocalError(store, action){
 }
 
 function processServerError(store, action){
+  /*********************************************************************
+
+  We can process server errors of 3 types:
+    type1:    (This is the prefered error type)
+      {error: {message, type, data, code}}
+    type2:
+      {error: 'Some error string'}
+    type3:
+      {message: 'Some other error message'}
+
+  If we find a special toast or modal in errorMap[action.payload.errror.type]
+  this will be displayed instead of the standard toast.
+
+  *********************************************************************/
   // Get the toast message and error type
   const { message, type, data } = action.payload.response.data.error;
-  let toastMessage = message ? message : action.payload.response.data.error;
+
+  // Get the message
+  let toastMessage;
+  if(message && typeof message == 'string'){toastMessage = message}                                                                                                                           // Type 1
+  else if(action.payload.response.data.error   && typeof action.payload.response.data.error == 'string'){toastMessage = action.payload.response.data.error}     // Type 2
+  else if(action.payload.response.data.message && typeof action.payload.response.data.message == 'string'){toastMessage = action.payload.response.data.message} // Type 3
 
   // Error Display Info
   const errorInfo = errorMap[type];
