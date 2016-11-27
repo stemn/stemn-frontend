@@ -12,6 +12,8 @@ import * as SyncTimelineActions from 'app/shared/modules/SyncTimeline/SyncTimeli
 // Sub Components
 import LoadingOverlay   from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import PreviewPageInner from './PreviewPageInner.jsx'
+import cloudMagnify    from 'app/renderer/assets/images/pure-vectors/cloud-magnify.svg';
+
 // Styles
 import classes from './PagePreview.css';
 
@@ -32,15 +34,25 @@ export const Component = React.createClass({
     }
   },
   componentWillMount() { this.onMount(this.props) },
-
   render() {
     const { fileMeta } = this.props;
+
     return (
       <div className="layout-column flex">
         { fileMeta && fileMeta.data && fileMeta.data.data
           ? <PreviewPageInner fileMeta={fileMeta.data} />
           : null }
         <LoadingOverlay show={fileMeta && fileMeta.loading} />
+        { !fileMeta.loading && !fileMeta.data ?
+          <div className="flex layout-column layout-align-center-center text-center">
+            <div style={{maxWidth: '300px'}}>
+              <img src={cloudMagnify} style={{width: '100px', height: '100px'}}/>
+              <div className="text-title-4" style={{marginBottom: '10px'}}>Could not locate this file</div>
+              <div className="text-title-5" style={{marginBottom: '20px'}}>This file could not be found in your connected cloud providers.</div>
+            </div>
+          </div>
+          : null
+        }
       </div>
     );
   }

@@ -150,7 +150,7 @@ export const Component = React.createClass({
               <SectionTitle style={{marginBottom: '15px'}}>Meta</SectionTitle>
               <SimpleTable>
                 <tr><td>Name</td><td>{fileMeta.data.name}</td></tr>
-                <tr><td>Projects</td><td>{fileMeta.data.project._id}</td></tr>
+                {/*<tr><td>Projects</td><td>{fileMeta.data.project._id}</td></tr>*/}
                 <tr><td>Size</td><td>{formatBytes(fileMeta.data.size)}</td></tr>
                 <tr><td>Last modified</td><td>{moment(fileMeta.data.modified).fromNow()}</td></tr>
                 { revisions.length > 0 
