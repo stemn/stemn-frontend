@@ -56,7 +56,7 @@ export const Component = React.createClass({
         return (
           <div className="layout-column layout-align-center-center flex">
             <img src={laptopSpanner} style={{width: '100px'}}/>
-            <div className="text-title-5 text-center" style={{marginTop: '10px'}}>Cannot preview this file.</div>
+            <div className="text-title-5 text-center" style={{marginTop: '10px'}}>Cannot preview this file type.</div>
           </div>
         )
       }
