@@ -4,9 +4,10 @@ import * as ChangesActions    from '../../../renderer/main/modules/Changes/Chang
 import * as CommentsActions   from '../../../renderer/main/modules/Comments/Comments.actions.js'
 import * as ProviderPathUtils from '../ProviderPath/ProviderPath.utils.js'
 import * as AutoUpdateUtils   from '../AutoUpdate/AutoUpdate.utils.js'
-import * as ElectronWindowsUtils   from '../ElectronWindows/ElectronWindows.utils.js'
-import * as NotificationsUtils   from '../Notifications/Notifications.utils.js'
-import * as ShellContextUtils   from '../Shell/ShellContext/ShellContext.utils.js'
+import * as ElectronWindowsUtils  from '../ElectronWindows/ElectronWindows.utils.js'
+import * as NotificationsUtils    from '../Notifications/Notifications.utils.js'
+import * as ShellContextUtils     from '../Shell/ShellContext/ShellContext.utils.js'
+import * as SystemUtils           from '../System/System.utils.js'
 
 import { actions } from 'react-redux-form';
 
@@ -20,6 +21,7 @@ const library = {
   ElectronWindowsUtils,
   NotificationsUtils,
   ShellContextUtils,
+  SystemUtils,
   FormActions: actions
 }
 

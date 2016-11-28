@@ -1,4 +1,5 @@
-import * as SystemActions    from 'app/shared/actions/system';
+import * as SystemActions    from 'app/shared/modules/System/System.actions.js';
+import * as ElectronWindowsActions from 'app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
 
 export default (dispatch) => {
   const discardChanges = {
@@ -30,7 +31,14 @@ export default (dispatch) => {
   const preview = {
     label: 'Open Preview Window',
     onClick: (item)=>{
-      console.log(item)
+      dispatch(ElectronWindowsActions.create({
+        type: 'PREVIEW',
+        props: {
+          fileId: item.data.fileId,
+          revisionId: item.data.revisionId,
+          projectId: item.data.project._id
+        }
+      }))
     },
   }
   return [discardChanges, openFile, openFolder, preview];

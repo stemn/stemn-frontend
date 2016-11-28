@@ -1,4 +1,4 @@
-import system           from './system';
+import system           from '../modules/System/System.reducer.js';
 import header           from './header';
 import auth             from './auth';
 import sidebar          from './sidebar';

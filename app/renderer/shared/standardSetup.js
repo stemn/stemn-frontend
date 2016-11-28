@@ -1,5 +1,6 @@
 import { ipcRenderer } from 'electron';
 import { loadUserData } from 'app/shared/modules/Auth/Auth.actions.js';;
+import { getInstallStatus } from 'app/shared/modules/System/System.actions.js';;
 import http from 'axios';
 
 export default (store, rendererType) => {
@@ -10,6 +11,7 @@ export default (store, rendererType) => {
 
   // Dispatch some initialisation actions
   const state = store.getState();
+  store.dispatch(getInstallStatus())
 
   // Setup the http interceptor
   http.interceptors.request.use(config => {

@@ -1,6 +1,8 @@
 import { modeled } from 'react-redux-form';
+import i from 'icepick';
 
 const initialState = {
+  installed: false,
   providerPath: {
     dropbox: null,
     drive: null,
@@ -21,6 +23,12 @@ function reducer(state, action) {
           drive: action.payload.drive
         }
       };
+    }
+    case 'SYSTEM/GET_INSTALL_STATUS_FULFILLED': {
+      return i.assoc(state, 'installed', action.payload)
+    }
+    case 'SYSTEM/GET_INSTALL_STATUS_REJECTED': {
+      return i.assoc(state, 'installed', action.payload)
     }
     default:
       return state;

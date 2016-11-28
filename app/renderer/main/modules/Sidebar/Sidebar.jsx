@@ -7,7 +7,7 @@ import * as SidebarActions from 'app/shared/actions/sidebar';
 import * as AuthActions from 'app/shared/modules/Auth/Auth.actions.js';
 import * as ProjectsActions from 'app/shared/actions/projects';
 import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
-import * as SystemActions from 'app/shared/actions/system';
+import * as SystemActions from 'app/shared/modules/System/System.actions.js';
 import { push } from 'react-router-redux'
 
 // Component Core

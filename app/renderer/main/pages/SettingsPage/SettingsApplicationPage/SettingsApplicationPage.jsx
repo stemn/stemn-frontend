@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as SystemActions from 'app/shared/actions/system';
+import * as SystemActions from 'app/shared/modules/System/System.actions.js';
 import * as StateActions from 'app/shared/actions/state';
 import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 import * as AutoLaunchActions from 'app/shared/modules/AutoLaunch/AutoLaunch.actions.js';
@@ -23,6 +23,7 @@ import ProgressButton from 'app/renderer/main/components/Buttons/ProgressButton/
 import FileSelectInputElectron from 'app/renderer/main/modules/FileSelectInput/FileSelectInputElectron.jsx'
 import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
 import SimpleTable        from 'app/shared/modules/Tables/SimpleTable/SimpleTable.jsx';
+import Banner from 'app/renderer/main/modules/Banner/Banner.jsx'
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -77,8 +78,11 @@ export const Component = React.createClass({
         )
       }
     }
+
     return (
       <div>
+
+        { !system.installed && process.platform == 'linux' ? <Banner type="warn" style={{marginBottom: '15px'}}>Stemn Desktop is not properly installed and integrated with your Operating System. Some features will not work until you properly install the AppImage. Please restart Stemn Desktop and follow the prompts.</Banner> : null }
         <div className={classes.panel}>
           <h3>Cloud Providers</h3>
           <p>Stemn Desktop relies on Dropbox and Drive to track changes to your files. You should have the desktop client for at least one of these installed.</p>

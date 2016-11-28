@@ -43,7 +43,7 @@ export const Component = React.createClass({
           ? <PreviewPageInner fileMeta={fileMeta.data} />
           : null }
         <LoadingOverlay show={fileMeta && fileMeta.loading} />
-        { !fileMeta.loading && !fileMeta.data ?
+        { fileMeta && !fileMeta.loading && !fileMeta.data ?
           <div className="flex layout-column layout-align-center-center text-center">
             <div style={{maxWidth: '300px'}}>
               <img src={cloudMagnify} style={{width: '100px', height: '100px'}}/>

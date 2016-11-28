@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as ElectronWindowsActions from 'app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
-import * as SystemActions    from 'app/shared/actions/system';
+import * as SystemActions    from 'app/shared/modules/System/System.actions.js';
 
 // Component Core
 import React from 'react';
