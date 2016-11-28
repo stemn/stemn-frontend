@@ -31,7 +31,6 @@ export const Component = React.createClass({
   render() {
     const {file, fileData, project, filesActions} = this.props;
     const previewId = `${project._id}-${file.fileId}-${file.revisionId}`;
-
     const getPreview = () => {
       const viewerType = getViewerType(file.extension);
       if(viewerType == 'gerber' || viewerType == 'pcb'){
@@ -73,7 +72,7 @@ export const Component = React.createClass({
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
 function mapStateToProps({files}, {project, file}) {
-  const cacheKey = `${project._id}-${file.fileId}-${file.revisionId}`;
+  const cacheKey = `${file.fileId}-${file.revisionId}`;
   return {
     fileData: files.fileData[cacheKey]
   };

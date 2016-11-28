@@ -118,7 +118,6 @@ async function start() {
   if(args.inputs.path){
     showPreview(store.dispatch, args.inputs.path)
   }
-  showPreview(store.dispatch, 'E:\\Google Drive\\David Test folder\\Markdown Cheatsheet.md')
   showPreview(store.dispatch, 'E:\\Dropbox (Platino Properties)\\Spaceman256.png')
 
 

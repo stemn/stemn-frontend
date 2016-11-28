@@ -11,7 +11,6 @@ export default (store, rendererType) => {
 
   // Dispatch some initialisation actions
   const state = store.getState();
-  store.dispatch(getInstallStatus())
 
   // Setup the http interceptor
   http.interceptors.request.use(config => {

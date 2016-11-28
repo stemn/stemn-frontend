@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { omit } from 'lodash';
 
-export default React.createClass({
+const propTypesObject = {
+  children : PropTypes.node.isRequired,      // Child element
+  zoomIn   : PropTypes.func.isRequired,      // Zoom function - This is run once on each scroll
+  zoomOut  : PropTypes.func.isRequired,      // Zoom function - This is run once on each scroll
+};
+
+const ScrollZoom = React.createClass({
   componentDidMount () {
     this.refs.container.addEventListener('DOMMouseScroll', this.handleMouseWheel);
     this.refs.container.addEventListener('mousewheel',     this.handleMouseWheel);
@@ -25,9 +32,11 @@ export default React.createClass({
     const { children } = this.props;
 
     return (
-      <div ref="container" {...this.props}>
+      <div ref="container" {...omit(this.props, Object.keys(propTypesObject))}>
         {children}
       </div>
     )
   }
 })
+
+export default ScrollZoom

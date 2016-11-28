@@ -18,6 +18,7 @@ const config = {
       'babel-polyfill',
       './app/renderer/preview/index',
     ],
+    pdfWorker: './app/node_modules/pdfjs-dist/build/pdf.worker.entry'
   },
   output: {
     ...baseConfig.output,
