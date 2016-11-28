@@ -53,7 +53,7 @@ export default React.createClass({
   render() {
     const { fileMeta, project } = this.props;
     const { scale, naturalWidth, naturalHeight } = this.state;
-    const fileUrl = `${process.env.API_SERVER}/api/v1/remote/download/${project._id}/${fileMeta.fileId}?revisionId=${fileMeta.revisionId}`;
+    const fileUrl = `${process.env.API_SERVER}/api/v1/sync/download/${project._id}/${fileMeta.fileId}?revisionId=${fileMeta.revisionId}`;
 
     const sizeStyles = {
       width: naturalWidth * scale,

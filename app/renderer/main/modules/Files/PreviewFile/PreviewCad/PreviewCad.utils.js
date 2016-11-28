@@ -14,7 +14,7 @@ export default library
 function render({projectId, fileId, revisionId}){
   return http({
     method: 'GET',
-    url: `/api/v1/remote/render/${projectId}/${fileId}`,
+    url: `/api/v1/sync/render/${projectId}/${fileId}`,
     params: {
       revisionId: revisionId
     }
