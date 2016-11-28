@@ -134,9 +134,10 @@ export const Component = React.createClass({
       )
     }
     else{
-      const filePrevious = has(changes, 'selected.data.previousRevisionId')
+      const filePrevious = has(changes, 'selected.data.previousRevisionId') && changes.selected.data.previousRevisionId != null
         ? i.assocIn(changes.selected.data, ['revisionId'], changes.selected.data.previousRevisionId)
         : null;
+
 
       return (
         <div className="layout-column flex rel-box">

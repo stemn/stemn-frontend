@@ -2,6 +2,7 @@
 
 .viewer {
   background: bg1;
+  overflow: auto;
 }
 
 .page {

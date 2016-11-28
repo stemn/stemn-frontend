@@ -5,12 +5,13 @@ import 'codemirror/mode/meta.js'
 const requireCodemirrorMode = require.context("codemirror/mode/", true);
 import LoadingOverlay     from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import EditorDisplay from 'app/renderer/main/modules/Editor/EditorDisplay.jsx';
+import file    from 'app/renderer/assets/images/pure-vectors/file.svg';
 
 export const Viewer = React.createClass({
   render() {
     const { data, extension } = this.props;
 
-    if(data && extension){
+    if(extension){
       setTimeout(()=>{ // Give the component time to render (so we get refs)
         this.refs.codemirror.innerHTML = "";
         const editorInstance = codemirror(this.refs.codemirror, {
@@ -70,7 +71,14 @@ export default React.createClass({
     return (
       <div className="layout-column flex">
         { fileData && fileData.data ? <Viewer extension={fileMeta.extension} data={fileData.data} /> : '' }
-        { fileData ? <LoadingOverlay show={fileData.loading} /> : '' }
+        { fileData ? <LoadingOverlay show={fileData.loading} /> : null }
+        { fileData && !fileData.data && !fileData.loading
+        ? <div className="layout-column layout-align-center-center flex text-center">
+            <img style={{width: '100px'}} src={file}/>
+            <div className="text-title-4" style={{marginBottom: '10px'}}>Nothing to display</div>
+            <div className="text-title-5">This file appears to be empty.</div>
+          </div>
+        : null }
       </div>
     )
   }

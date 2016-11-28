@@ -54,6 +54,7 @@ const config = {
       'webpack-hot-middleware/client?path=http://localhost:3001/__webpack_hmr',
       './app/renderer/preview/index',
     ],
+    pdfWorker: './app/node_modules/pdfjs-dist/build/pdf.worker.entry'
   },
   output: {
     ...baseConfig.output,

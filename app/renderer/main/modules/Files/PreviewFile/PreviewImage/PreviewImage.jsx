@@ -17,7 +17,7 @@ export default React.createClass({
   onMount(nextProps, prevProps) {
     // If the previewId changes, download a new file
     if(!prevProps
-       || nextProps.project._id !== prevProps.project._id
+       || nextProps.fileMeta.project._id !== prevProps.fileMeta.project._id
        || nextProps.fileMeta.revisionId !== prevProps.fileMeta.revisionId
        || nextProps.fileMeta.fileId !== prevProps.fileMeta.fileId){
       this.setState({
@@ -51,9 +51,11 @@ export default React.createClass({
     this.setState({scale: newValue})
   },
   render() {
-    const { fileMeta, project } = this.props;
+    const { fileMeta } = this.props;
     const { scale, naturalWidth, naturalHeight } = this.state;
-    const fileUrl = `${process.env.API_SERVER}/api/v1/sync/download/${project._id}/${fileMeta.fileId}?revisionId=${fileMeta.revisionId}`;
+    const fileUrl = fileMeta.project && fileMeta.project._id
+    ? `${process.env.API_SERVER}/api/v1/sync/download/${fileMeta.project._id}/${fileMeta.fileId}?revisionId=${fileMeta.revisionId}`
+    : `${process.env.API_SERVER}/api/v1/remote/download/${fileMeta.fileId}?revisionId=${fileMeta.revisionId}`;
 
     const sizeStyles = {
       width: naturalWidth * scale,

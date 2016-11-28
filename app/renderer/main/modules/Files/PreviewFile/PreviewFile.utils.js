@@ -72,5 +72,5 @@ export const getViewerType = (fileType, provider) => {
         result = viewerType;
       }
     })
-    return fileTypeLower ? (result || 'other') : 'code'; // If there is no esxtension, it is code.
+    return fileTypeLower ? (result || 'other') : 'other';
 }

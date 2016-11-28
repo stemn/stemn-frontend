@@ -6,13 +6,13 @@ export function getFile({projectId, fileId, revisionId}) {
     http: true,
     payload: {
       method: 'GET',
-      url: `/api/v1/sync/download/${projectId}/${fileId}`,
+      url: projectId ? `/api/v1/sync/download/${projectId}/${fileId}` : `/api/v1/remote/download/${fileId}`,
       params: {
         revisionId
       }
     },
     meta: {
-      cacheKey: `${projectId}-${fileId}-${revisionId}`
+      cacheKey: `${fileId}-${revisionId}`
     }
   };
 }
@@ -20,14 +20,14 @@ export function getFile({projectId, fileId, revisionId}) {
 export function getMeta({projectId, fileId, revisionId}) {
   return {
     type: 'FILES/GET_META',
-//    http: true,
-    payload: http({
+    http: true,
+    payload: {
       method: 'GET',
-      url: `/api/v1/sync/files/${projectId}/${fileId}`,
+      url: projectId ? `/api/v1/sync/files/${projectId}/${fileId}` : `/api/v1/remote/files/${fileId}`,
       params: {
         revisionId
       }
-    }),
+    },
     meta: {
       cacheKey: `${fileId}-${revisionId}`
     }

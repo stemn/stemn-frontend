@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as ElectronWindowsActions from 'app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
-import * as SystemActions    from 'app/shared/actions/system';
+import * as SystemActions    from 'app/shared/modules/System/System.actions.js';
 
 // Component Core
 import React from 'react';
@@ -89,7 +89,7 @@ export const Component = React.createClass({
             <div className="PopoverMenu">
               {compareModes.map(item=><a key={item.value}
               className={classNames({'active': mode == item.value})}
-              onClick={()=>changeMode(item.value)}>
+              onClick={()=>changeMode(item.value, revisions)}>
                 Compare: {item.text}
               </a>)}
             </div>

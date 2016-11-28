@@ -1,15 +1,43 @@
 import React from 'react';
-import PDFJS from 'pdfjs-dist'
+import PDFJS from 'pdfjs-dist/build/pdf.combined.js'
 
 import Viewer from './PreviewPdfViewer.jsx'
-const PDF_URL = 'https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf'
 import classes from './PreviewPdf.css';
-import ScrollZoom from 'app/shared/modules/Scroll/ScrollZoom/ScrollZoom.jsx'
+import ScrollZoom from 'app/shared/modules/Scroll/ScrollZoom/ScrollZoom.jsx';
+
+// Link to the workerSrc bundle (See example here https://github.com/mozilla/pdf.js/blob/master/examples/webpack/main.js)
+PDFJS.PDFJS.workerSrc = process.env.HOT ? 'http://localhost:3001/dist/pdfWorker/index.js' : '../../pdfWorker/index.js';
 
 const propTypesObject = {
 //  src: React.PropTypes.string.isRequired
 };
+
 const PDF = React.createClass({
+  componentWillMount() { this.onMount(this.props) },
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
+  onMount(nextProps, prevProps) {
+    // If the previewId changes, download a new file
+    if(!prevProps || nextProps.previewId !== prevProps.previewId){
+      // If we don't already have the file, get it
+      const { fileMeta } = nextProps;
+      const fileUrl = fileMeta.project && fileMeta.project._id
+      ? `${process.env.API_SERVER}/api/v1/sync/download/${fileMeta.project._id}/${fileMeta.fileId}?revisionId=${fileMeta.revisionId}`
+      : `${process.env.API_SERVER}/api/v1/remote/download/${fileMeta.fileId}?revisionId=${fileMeta.revisionId}`;
+
+      PDFJS.getDocument(fileUrl).then((pdf) => {
+        this.setState({ pdf })
+      })
+
+//      if(!nextProps.fileData){
+//        nextProps.downloadFn({
+//          projectId  : nextProps.fileMeta.project._id,
+//          fileId     : nextProps.fileMeta.fileId,
+//          revisionId : nextProps.fileMeta.revisionId
+//        })
+//      }
+    }
+  },
+
   getInitialState () {
     return {
       pdf: null,
@@ -21,11 +49,6 @@ const PDF = React.createClass({
       pdf: this.state.pdf,
       scale: this.state.scale
     }
-  },
-  componentDidMount () {
-    PDFJS.getDocument(PDF_URL).then((pdf) => {
-      this.setState({ pdf })
-    })
   },
   zoom (direction) {
     let newValue = 0;
@@ -39,6 +62,7 @@ const PDF = React.createClass({
     this.setState({scale: newValue})
   },
   render () {
+    const { fileMeta, fileData } = this.props;
     const { pdf, scale } = this.state;
 
     return (
@@ -51,6 +75,15 @@ const PDF = React.createClass({
   }
 });
 
+
+function str2ab(str) {
+  var buf = new ArrayBuffer(str.length*2); // 2 bytes for each char
+  var bufView = new Uint16Array(buf);
+  for (var i=0, strLen=str.length; i<strLen; i++) {
+    bufView[i] = str.charCodeAt(i);
+  }
+  return buf;
+}
 
 PDF.propTypes = propTypesObject;
 

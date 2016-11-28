@@ -11,7 +11,7 @@ import { create as createTrayIcon } from './createTrayIcon.js';
 import AutoUpdateInit from '../shared/modules/AutoUpdate/AutoUpdate.init.js';
 import squirrelStartup from 'electron-squirrel-startup';
 import mapWebsocketToRedux from './modules/websocket/mapWebsocketToRedux'
-import { getProviderPath } from '../shared/actions/system';
+import { getProviderPath } from '../shared/modules/System/System.actions.js';
 import { getFilteredStoreData } from './json-storage.js';
 import log from 'electron-log';
 import postStoreSetup from './postStoreSetup.js';
@@ -118,6 +118,8 @@ async function start() {
   if(args.inputs.path){
     showPreview(store.dispatch, args.inputs.path)
   }
+  showPreview(store.dispatch, 'E:\\Dropbox (Platino Properties)\\Spaceman256.png')
+
 
   // Initialise the Websocket connection
   const websocket = wsInitialise(process.env.WEBSOCKET_SERVER);

@@ -1,5 +1,6 @@
 import { ipcRenderer } from 'electron';
 import { loadUserData } from 'app/shared/modules/Auth/Auth.actions.js';;
+import { getInstallStatus } from 'app/shared/modules/System/System.actions.js';;
 import http from 'axios';
 
 export default (store, rendererType) => {

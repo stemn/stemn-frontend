@@ -26,20 +26,10 @@ const stemnAutoLaunch = new autoLaunch({
 export default store => next => action => {
   if (action.type == 'AUTO_LAUNCH/TOGGLE') {
     const autostart = () => action.meta.status ? stemnAutoLaunch.enable() : stemnAutoLaunch.disable();
-    const torvalds = () => {
-        // must have accepted application install to allow autostart
-        return statAsync(`${homedir()}/.local/share/applications/appimagekit-STEMN.desktop`)
-        .then(autostart)
-        .catch(() => Promise.reject({ error : 'Must accept application install on startup first!' }));
-    }
-
-    const promise = process.platform === 'linux'
-        ? torvalds()
-        : autostart();
 
     store.dispatch({
       ...action,
-      payload: promise,
+      payload: autostart(),
     })
   }
   else if(action.type == 'AUTO_LAUNCH/GET_STATUS'){

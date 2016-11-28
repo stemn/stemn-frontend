@@ -42,27 +42,27 @@ import classes from './PagePreview.css';
 export const Component = React.createClass({
     // Mounting
   onMount(nextProps, prevProps){
-    if(nextProps.fileMeta.project && nextProps.fileMeta.project._id){
+    if(nextProps.fileMeta.data.project && nextProps.fileMeta.data.project._id){
       nextProps.syncTimelineActions.fetchTimeline({
-        projectId : nextProps.fileMeta.project._id,
-        fileId    : nextProps.fileMeta.fileId,
+        projectId : nextProps.fileMeta.data.project._id,
+        fileId    : nextProps.fileMeta.data.fileId,
       })
     }
     else{
       nextProps.syncTimelineActions.fetchTimeline({
-        fileId    : nextProps.fileMeta.fileId,
+        fileId    : nextProps.fileMeta.data.fileId,
       })
     }
     nextProps.filesActions.getRelatedTasks({
-      fileId    : nextProps.fileMeta.fileId,
-      projectId : nextProps.fileMeta.project._id
+      fileId    : nextProps.fileMeta.data.fileId,
+      projectId : nextProps.fileMeta.data.project._id
     })
   },
   componentWillMount() { this.onMount(this.props) },
   getInitialState () {
     return {
       selected1: this.props.fileMeta,
-      selected2: null,
+      selected2: undefined,
       lastSelected: 1,
       mode: 'single'
     }
@@ -89,8 +89,15 @@ export const Component = React.createClass({
       }
     }
   },
-  changeMode(mode){
-    this.setState({mode: mode})
+  changeMode(mode, revisions){
+    let { selected1, selected2 } = this.state;
+    // If a second file is not selected - we select one if possible
+    if(!selected2){
+      const revisionIndex = revisions.findIndex(revision => revision.data.fileId == selected1.data.fileId && revision.data.revisionId == selected1.data.revisionId);
+      if(revisions[revisionIndex - 1]){selected2 = revisions[revisionIndex - 1];}
+      else if(revisions[revisionIndex + 1]){selected2 = revisions[revisionIndex + 1];}
+    }
+    this.setState({mode, selected2})
   },
   clickCrumb({file}){
     console.log(file);
@@ -107,16 +114,16 @@ export const Component = React.createClass({
   render() {
     const { fileMeta, syncTimeline, relatedTasks } = this.props;
     const { mode, selected1, selected2 } = this.state;
-    const isPartOfProject = fileMeta.project && fileMeta.project._id;
-    const items = mode == 'single' ? [selected1] : orderBy([selected1, selected2], item => (new Date(item.timestamp)).getTime());
+    const isPartOfProject = fileMeta.data.project && fileMeta.data.project._id;
+    const items = orderItemsByTime(mode, selected1, selected2);
     const file1 = items[0] ? items[0].data : undefined;
     const file2 = items[1] ? items[1].data : undefined;
     const revisions = syncTimeline && syncTimeline.data ? syncTimeline.data.filter(item => item.event == 'revision') : [];
-
+    
     return (
       <div className="layout-column flex">
         <div className={classes.header + ' layout-row layout-align-start-center'}>
-          <div className="flex">{fileMeta ? <FileBreadCrumbs meta={fileMeta} clickFn={this.clickCrumb}/> : ''}</div>
+          <div className="flex">{fileMeta ? <FileBreadCrumbs meta={fileMeta.data} clickFn={this.clickCrumb}/> : ''}</div>
           <FileCompareMenu
             file1={file1}
             file2={file2}
@@ -128,7 +135,7 @@ export const Component = React.createClass({
         <div className="layout-row flex">
           <div className="layout-column flex">
             <FileCompareInner
-              project={fileMeta.project}
+              project={fileMeta.data.project}
               file1={file1}
               file2={file2}
               mode={mode} />
@@ -142,10 +149,10 @@ export const Component = React.createClass({
             <aside className={classes.sidebar + ' layout-column flex'} style={{minWidth: '400px', overflowY: 'auto'}}>
               <SectionTitle style={{marginBottom: '15px'}}>Meta</SectionTitle>
               <SimpleTable>
-                <tr><td>Name</td><td>{fileMeta.name}</td></tr>
-                <tr><td>Projects</td><td>{fileMeta.project._id}</td></tr>
-                <tr><td>Size</td><td>{formatBytes(fileMeta.size)}</td></tr>
-                <tr><td>Last modified</td><td>{moment(fileMeta.modified).fromNow()}</td></tr>
+                <tr><td>Name</td><td>{fileMeta.data.name}</td></tr>
+                {/*<tr><td>Projects</td><td>{fileMeta.data.project._id}</td></tr>*/}
+                <tr><td>Size</td><td>{formatBytes(fileMeta.data.size)}</td></tr>
+                <tr><td>Last modified</td><td>{moment(fileMeta.data.modified).fromNow()}</td></tr>
                 { revisions.length > 0 
                 ? <tr><td>Revisions</td><td>{revisions.length}</td></tr> 
                 : null }
@@ -170,12 +177,21 @@ export const Component = React.createClass({
   }
 });
 
+function orderItemsByTime(mode, item1, item2){
+  if(mode == 'single' || !item2){
+    return [ item1 ]
+  }
+  else {
+    return  orderBy([item1, item2], item => (new Date(item.timestamp)).getTime());
+  }
+}
+
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
 function mapStateToProps({ syncTimeline, files }, { fileMeta }) {
   return {
-    syncTimeline: syncTimeline[fileMeta.fileId],
-    relatedTasks: files.relatedTasks[fileMeta.fileId]
+    syncTimeline: syncTimeline[fileMeta.data.fileId],
+    relatedTasks: files.relatedTasks[fileMeta.data.fileId]
   };
 }
 

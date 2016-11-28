@@ -1,7 +1,7 @@
 import http from 'axios';
 import { values } from 'lodash';
 import { ipcMain } from 'electron';
-import { getProviderPath }  from '../shared/actions/system';
+import { getProviderPath, getInstallStatus }  from '../shared/modules/System/System.actions.js';
 import * as shellContext    from '../shared/modules/Shell/ShellContext/ShellContext.actions.js';
 import * as protocolHandler from '../shared/modules/Shell/ProtocolHandler/ProtocolHandler.js'
 
@@ -18,6 +18,7 @@ export default (store) => {
   
   // Dispatch redux initial events
   store.dispatch(getProviderPath());
+  store.dispatch(getInstallStatus());
 
   // Dispatch context-menu setup
   setTimeout(() => {
