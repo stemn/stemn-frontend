@@ -11,7 +11,11 @@ const initialState = {
   newProject: {
     summary: '',
     name: '',
-    remote: '',
+    root: {
+      path: '',
+      fileId: '',
+    },
+    provider: '',
     permissions: {},
     savePending: ''
   }
@@ -79,7 +83,7 @@ function reducer(state, action) {
       return i.assocIn(state, ['newProject', 'savePending'], false)
     case 'PROJECTS/CREATE_PROJECT_FULFILLED':
       return i.chain(state)
-      .assoc('newProject', {})                             // Clear the newProject object
+      .assoc('newProject', initialState.newProject)        // Clear the newProject object
       .updateIn(['userProjects', 'data'], (projects) => {  // Push the new project onto the userProjects array
         return i.push(projects, action.payload.data);
       })

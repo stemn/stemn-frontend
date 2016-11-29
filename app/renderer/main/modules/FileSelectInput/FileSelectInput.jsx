@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { actions } from 'react-redux-form';
 
 // Container Actions
 import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
@@ -12,10 +11,10 @@ import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconBut
 
 
 const propTypesObject = {
-  projectId: PropTypes.string.isRequired,
-  provider: PropTypes.string.isRequired,
-  model: PropTypes.string.isRequired,
-  value: PropTypes.object.isRequired // { path, id}
+  projectId: PropTypes.string,
+  provider: PropTypes.string.isRequired,    // 'dropbox' || 'drive' - The provider
+  model: PropTypes.string.isRequired,       // The model to assign the selected file
+  value: PropTypes.object.isRequired        // The value of the selected file: { path, fileId }
 };
 
 const FileSelectInput = React.createClass({
@@ -24,15 +23,15 @@ const FileSelectInput = React.createClass({
       modalType: 'FILE_SELECT',
       modalProps: {
         projectId: this.props.projectId,
+        model: this.props.model,
         path: this.props.value.fileId,
-        storeKey: "FileSelect1",
+        storeKey: this.props.model, // We use the model as the storekey
         options: {
           allowFolder : true,
           foldersOnly : true,
           explore     : this.props.provider
         },
       },
-      modalConfirm: actions.change(this.props.model)
     })
   },
   render() {

@@ -21,22 +21,22 @@ import NavPill from 'app/renderer/main/components/Buttons/NavPill/NavPill'
 ///////////////////////////////// COMPONENT /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-const onMount = (nextProps, prevProps) => {
-  if(nextProps.project && nextProps.project.data){
-    if(!prevProps || nextProps.project.data._id !== prevProps.project.data._id){
-    }
-  }
-}
+//const onMount = (nextProps, prevProps) => {
+//  if(nextProps.project && nextProps.project.data){
+//    if(!prevProps || nextProps.project.data._id !== prevProps.project.data._id){
+//    }
+//  }
+//}
 
 export const Component = React.createClass({
 
-  // Mounting
-  componentWillMount() { onMount(this.props) },
-  componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
+//  // Mounting
+//  componentWillMount() { onMount(this.props) },
+//  componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
 
   render() {
     const { entityModel, project, ProjectsActions, dispatch } = this.props;
-    const baseLink = `project/${project.data._id}`;
+    const baseLink = project && project.data && project.data._id ? `project/${project.data._id}` : '';
 
     return (
       <div className={classes.container+' layout-row flex scroll-box'}>

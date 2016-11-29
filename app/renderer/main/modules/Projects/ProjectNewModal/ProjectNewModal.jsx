@@ -8,7 +8,7 @@ import { actions } from 'react-redux-form';
 
 // Component Core
 import React from 'react';
-import { has } from 'lodash';
+import { has, pick } from 'lodash';
 
 // Styles
 import classNames from 'classnames';
@@ -32,12 +32,21 @@ export const Component = React.createClass({
     }
   },
   createProject(){
-    this.props.projectsActions.createProject(this.props.newProject);
+    this.props.projectsActions.createProject(pick(this.props.newProject, ['permissions', 'name', 'summary'])).then(response => {
+      // Link the provider if we can.
+      if(response.value.data._id && this.props.newProject.provider && this.props.newProject.root.path && this.props.newProject.root.fileId){
+        this.props.projectsActions.linkRemote({
+          projectId : response.value.data._id,
+          provider  : this.props.newProject.provider,
+          path      : this.props.newProject.root.path,
+          id        : this.props.newProject.root.fileId
+        })
+      }
+    });
     this.props.modalHide();
   },
   changeTab(tab){
     this.setState({ tab: tab })
-
   },
   render() {
     const { newProject, entityModel, modalCancel, modalHide } = this.props;
@@ -56,13 +65,13 @@ export const Component = React.createClass({
             placeholder="Project Name"
           />
           <br />
-          <Input
-            model={`${entityModel}.summary`}
-            value={newProject.summary}
-            className="dr-input"
-            type="text"
-            placeholder="Project Summary"
-          />
+          <Textarea
+             model={`${entityModel}.summary`}
+             value={newProject.summary}
+             className="dr-input"
+             placeholder="Project Summary"
+           />
+
         </div>
       )
     }
@@ -72,7 +81,10 @@ export const Component = React.createClass({
         <div className={classes.panel}>
           <h3>Project Permissions</h3>
           <p>Set your project name and blurb.</p>
-           <ProjectPermissionsRadio model={`${entityModel}.permissions.projectType`} value={has(newProject, 'permissions.projectType') ? newProject.permissions.projectType : ''} />
+           <ProjectPermissionsRadio
+             model={`${entityModel}.permissions.projectType`}
+             value={has(newProject, 'permissions.projectType') ? newProject.permissions.projectType : ''}
+           />
         </div>
       )
     }
@@ -82,7 +94,10 @@ export const Component = React.createClass({
         <div className={classes.panel}>
           <h3>Cloud Storage Folder</h3>
           <p>Select your project's cloud store location.</p>
-          <ProjectLinkRemote model={`${entityModel}.provider`} value={newProject.provider}/>
+          <ProjectLinkRemote
+            model={`${entityModel}.provider`}
+            value={newProject.provider}
+          />
           <br />
           <FileSelectInput
              provider={newProject.provider}
@@ -93,7 +108,7 @@ export const Component = React.createClass({
       )
     }
 
-    const tabTemplate = ({title, blurb, body, button}) => {
+    const tabTemplate = ({title, blurb, body, button1, button2}) => {
       return (
         <div className="layout-column flex">
           <div className={classes.modalBody + ' layout-column flex'}>
@@ -106,8 +121,8 @@ export const Component = React.createClass({
             </div>
           </div>
           <div className={classes.modalFooter + ' layout-row layout-align-end'}>
-            <Button style={{marginRight: '10px'}} onClick={() => {modalCancel(); modalHide()}}>Cancel</Button>
-            <Button className="primary" onClick={button.onClick}>{button.text}</Button>
+            <Button style={{marginRight: '10px'}} onClick={button1.onClick}>{button1.text}</Button>
+            <Button className="primary"           onClick={button2.onClick}>{button2.text}</Button>
           </div>
         </div>
       )
@@ -123,7 +138,11 @@ export const Component = React.createClass({
             {permissionsTemplate()}
           </div>
         ),
-        button: {
+        button1: {
+          text: 'Cancel',
+          onClick: () => {modalCancel(); modalHide()}
+        },
+        button2: {
           text: 'Next',
           onClick: () => this.changeTab(2)
         }
@@ -136,7 +155,11 @@ export const Component = React.createClass({
             {fileStoreTemplate()}
           </div>
         ),
-        button: {
+        button1: {
+          text: 'Back',
+          onClick: () => this.changeTab(1)
+        },
+        button2: {
           text: 'Create Project',
           onClick: this.createProject
         }

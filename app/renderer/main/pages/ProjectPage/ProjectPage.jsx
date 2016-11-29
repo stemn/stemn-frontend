@@ -13,6 +13,7 @@ import { Link } from 'react-router';
 import Tabs from 'app/renderer/main/components/Tabs/Tabs'
 import Header from 'app/renderer/main/modules/Header/Header.jsx'
 import Banner from 'app/renderer/main/modules/Banner/Banner.jsx'
+import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 // Styles
 import classNames from 'classnames';
@@ -61,21 +62,30 @@ class Component extends React.Component{
       }
     }
 
-    if(!project){return <div></div>}
+    const isLoading = !project || !project.data;
+
+    const getInner = () => {
+      return (
+        <div className="layout-column flex">
+          <Header>{project.data ? project.data.name : ''}</Header>
+          <Tabs size="lg">
+            <Link activeClassName="active" to={baseLink} onlyActiveOnIndex={true}>Changes</Link>
+            <Link activeClassName="active" to={baseLink+'/feed'}>Timeline</Link>
+            <Link activeClassName="active" to={baseLink+'/tasks'}>Tasks</Link>
+            <Link activeClassName="active" to={baseLink+'/settings'}>Settings</Link>
+          </Tabs>
+          { project.data && project.data.remote && project.data.remote.provider
+          ? missingClientBanner()
+          : null }
+          <div className="layout-column flex rel-box">{this.props.children}</div>
+        </div>
+      )
+    }
 
     return (
       <div className="layout-column flex rel-box">
-        <Header>{project.data ? project.data.name : ''}</Header>
-        <Tabs size="lg">
-          <Link activeClassName="active" to={baseLink} onlyActiveOnIndex={true}>Changes</Link>
-          <Link activeClassName="active" to={baseLink+'/feed'}>Timeline</Link>
-          <Link activeClassName="active" to={baseLink+'/tasks'}>Tasks</Link>
-          <Link activeClassName="active" to={baseLink+'/settings'}>Settings</Link>
-        </Tabs>
-        { project.data && project.data.remote && project.data.remote.provider
-        ? missingClientBanner()
-        : null }
-        <div className="layout-column flex rel-box">{this.props.children}</div>
+        <LoadingOverlay show={isLoading}/>
+        {!isLoading ? getInner() : null}
       </div>
     );
   }

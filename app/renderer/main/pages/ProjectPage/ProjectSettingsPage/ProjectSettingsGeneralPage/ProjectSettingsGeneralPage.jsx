@@ -27,6 +27,7 @@ import ProgressButton from 'app/renderer/main/components/Buttons/ProgressButton/
 import TaskLabelsEdit from 'app/renderer/main/modules/Tasks/TaskLabelsEdit/TaskLabelsEdit.jsx'
 import NavPill from 'app/renderer/main/components/Buttons/NavPill/NavPill'
 import Input from 'app/renderer/main/components/Input/Input/Input'
+import Textarea from 'app/renderer/main/components/Input/Textarea/Textarea';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -132,11 +133,11 @@ export const Component = React.createClass({
            placeholder="Project Name"
          />
          <br />
-         <Input
+         <Textarea
            model={`${entityModel}.data.summary`}
            value={project.data.summary}
            className="dr-input"
-           type="text"
+           style={{minHeight: '60px'}}
            placeholder="Project Summary"
          />
          <br />
