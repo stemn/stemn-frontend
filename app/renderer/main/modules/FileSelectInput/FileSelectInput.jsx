@@ -9,6 +9,7 @@ import classes from './FileSelectInput.css'
 import classNames from 'classnames';
 import MdFolder from 'react-icons/md/folder';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import { isDriveFileId, isDropboxFileId } from 'app/renderer/main/modules/Files/Files.utils.js';
 
 
 const propTypesObject = {
@@ -38,10 +39,25 @@ const FileSelectInput = React.createClass({
   },
   render() {
     const { provider, model, value, disabled } = this.props;
+
+    const validatePath = (path, fileId, provider) => {
+      if(provider == 'drive'){
+        return isDriveFileId(fileId) ? path : '';
+      }
+      else if(provider == 'dropbox'){
+        return isDropboxFileId(fileId) ? path : '';
+      }
+      else{
+        return ''
+      }
+    }
+
+    const path = validatePath(value.path, value.fileId, provider);
+
     return (
       <div className={classNames(classes.fileSelectInput, 'layout-row layout-align-start-center', {[classes.disabled] : disabled})} onClick={()=>{if(!disabled){this.showModal()}}}>
         <div className={classes.text + ' flex'}>
-          {value && value.path && value.path.length > 0 && provider ? <span><span style={{textTransform: 'capitalize'}}>{provider}/</span>{value.path}</span> : 'Select the project path'}
+          {path ? <span><span style={{textTransform: 'capitalize'}}>{provider}/</span>{path}</span> : 'Select the project path'}
         </div>
         <SimpleIconButton>
           <MdFolder size="22" />

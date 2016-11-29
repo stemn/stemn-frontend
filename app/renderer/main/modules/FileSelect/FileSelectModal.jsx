@@ -16,7 +16,7 @@ import classNames from 'classnames';
 import FileList from 'app/renderer/main/modules/FileList/FileList';
 import Button from 'app/renderer/main/components/Buttons/Button/Button';
 import MdDone from 'react-icons/md/done';
-
+import { isDriveFileId, isDropboxFileId } from 'app/renderer/main/modules/Files/Files.utils.js';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -102,7 +102,20 @@ export const FileSelectModal = React.createClass({
   render() {
     const { projectId, path, fileSelect, options } = this.props;
 
-    const activePath = fileSelect && fileSelect.path ? fileSelect.path : '';
+
+    const validatePath = (path, provider) => {
+      if(provider == 'drive'){
+        return isDriveFileId(path) ? path : ''
+      }
+      else if(provider == 'dropbox'){
+        return isDropboxFileId(path) ? path : ''
+      }
+      else{
+        return ''
+      }
+    }
+    const activePath = fileSelect ? validatePath(fileSelect.path, options.explore) : '';
+
     return (
       <div style={{width: '600px'}}>
         <div className="modal-title">Select Folder</div>

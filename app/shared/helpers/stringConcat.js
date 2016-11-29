@@ -33,7 +33,7 @@ function closest (num, arr) {
 
 function getWordBreaks (string){
   return string.split('').reduce((accumulator, currentLetter, currentIndex) => {
-    if([' ', '/', '-'].includes(currentLetter)){
+    if([' ', '/', '-', '_'].includes(currentLetter)){
       accumulator.push(currentIndex)
     }
     return accumulator

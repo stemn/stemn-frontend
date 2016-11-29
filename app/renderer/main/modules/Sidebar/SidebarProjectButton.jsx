@@ -8,7 +8,7 @@ import book   from 'app/renderer/assets/images/pure-vectors/book.svg';
 import tutorial   from 'app/renderer/assets/images/pure-vectors/monitor-click.svg';
 
 export default (props) => {
-  const iconStyle = {width: '20px', height: '20px'};
+  const iconStyle = {width: '22px', height: '22px'};
   const inner = (
     <div className="layout-row layout-align-start-center">
       <img src={props.icon == 'tutorial' ? tutorial : book} style={iconStyle}/>

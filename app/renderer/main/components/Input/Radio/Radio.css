@@ -17,6 +17,7 @@
 }
 .checked + span {
   color: primary;
+  border-color: primary !important;
 }
 .checked + span:after {
   background: primary;

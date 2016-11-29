@@ -12,3 +12,10 @@ export const getDownloadUrl = (fileMeta) => {
   ? `${process.env.API_SERVER}/api/v1/sync/download/${fileMeta.project._id}/${fileMeta.fileId}${fileMeta.revisionId ? `?revisionId=${fileMeta.revisionId}` : ''}`
   : `${process.env.API_SERVER}/api/v1/remote/download/${fileMeta.provider}/${fileMeta.fileId}${fileMeta.revisionId ? `?revisionId=${fileMeta.revisionId}` : ''}`;
 }
+
+export const isDriveFileId = (id) => {
+  return id && id.length == 28
+}
+export const isDropboxFileId = (id) => {
+  return id && id.length == 25 && id.startsWith('id:');
+}
