@@ -1,0 +1,51 @@
+@value border1, bg1 from "app/renderer/assets/css/themes/standard.css";
+
+.modalTitle{
+  padding: 15px;
+  border-bottom: 1px solid border1;
+}
+.modalBody{
+  padding: 30px;
+  background: bg1;
+  overflow-y: auto;
+}
+.modalFooter{
+  border-top: 1px solid border1;
+  padding: 10px;
+}
+
+.panel{
+  padding: 20px;
+  background: white;
+  border: 1px solid border1;
+  margin-bottom: 15px;
+}
+.panel h3{
+  margin-top: 0px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.4);
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+}
+.panel p{
+  font-size: 13px;
+  color: #939393;
+  margin-bottom: 15px;
+  line-height: 1.4em;
+}
+
+.stepModal{
+  width: 900px;
+  height: 600px;
+}
+
+.row{
+  margin-left: -15px;
+  margin-right: -15px
+}
+.col{
+  padding-left: 15px;
+  padding-right: 15px;
+  min-width: 0;
+}

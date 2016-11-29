@@ -5,8 +5,10 @@ import { connect } from 'react-redux';
 // Container Actions
 import * as ProjectsActions from 'app/shared/actions/projects.js';
 import { actions } from 'react-redux-form';
+
 // Component Core
 import React from 'react';
+import { has } from 'lodash';
 
 // Styles
 import classNames from 'classnames';
@@ -18,37 +20,182 @@ import FileSelectInput from 'app/renderer/main/modules/FileSelectInput/FileSelec
 import Textarea from 'app/renderer/main/components/Input/Textarea/Textarea';
 import Input from 'app/renderer/main/components/Input/Input/Input';
 import ProjectLinkRemote from 'app/renderer/main/components/Project/ProjectLinkRemote/ProjectLinkRemote.jsx'
+import { ArrowTabs, ArrowTab } from 'app/shared/modules/Tabs/ArrowTabs/ArrowTabs.jsx';
+import ProjectPermissionsRadio from 'app/renderer/main/components/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx'
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
+  getInitialState () {
+    return {
+      tab: 1,
+    }
+  },
   createProject(){
     this.props.projectsActions.createProject(this.props.newProject);
     this.props.modalHide();
   },
+  changeTab(tab){
+    this.setState({ tab: tab })
+
+  },
   render() {
     const { newProject, entityModel, modalCancel, modalHide } = this.props;
-    return (
-      <div style={{width: '500px'}}>
-        <div className="modal-title">Create New Project</div>
-        <div className="modal-body">
-          <Input autoFocus={true} model={`${entityModel}.name`} value={newProject.name} className="dr-input" type="text" placeholder="Project Name"/>
-          <Textarea model={`${entityModel}.summary`}
+    const { tab } = this.state;
+
+    const namePanelTemplate = () => {
+      return (
+        <div className={classes.panel}>
+          <h3>Name and blurb</h3>
+          <p>Set your project name and blurb.</p>
+          <Input
+            model={`${entityModel}.name`}
+            value={newProject.name}
+            className="dr-input"
+            type="text"
+            placeholder="Project Name"
+          />
+          <br />
+          <Input
+            model={`${entityModel}.summary`}
             value={newProject.summary}
             className="dr-input"
             type="text"
-            placeholder="Project Summary (Optional)"
-            style={{marginTop: '15px', marginBottom: '15px', minHeight: '70px'}} />
+            placeholder="Project Summary"
+          />
+        </div>
+      )
+    }
+
+    const permissionsTemplate = () => {
+      return (
+        <div className={classes.panel}>
+          <h3>Project Permissions</h3>
+          <p>Set your project name and blurb.</p>
+           <ProjectPermissionsRadio model={`${entityModel}.permissions.projectType`} value={has(newProject, 'permissions.projectType') ? newProject.permissions.projectType : ''} />
+        </div>
+      )
+    }
+
+    const fileStoreTemplate = () => {
+      return (
+        <div className={classes.panel}>
+          <h3>Cloud Storage Folder</h3>
+          <p>Select your project's cloud store location.</p>
           <ProjectLinkRemote model={`${entityModel}.provider`} value={newProject.provider}/>
+          <br />
+          <FileSelectInput
+             provider={newProject.provider}
+             model={`${entityModel}.root`}
+             value={newProject.root}
+           />
         </div>
-        <div className="modal-footer-no-line layout-row layout-align-end">
-          <Button style={{marginRight: '10px'}} onClick={() => {modalCancel(); modalHide()}}>Cancel</Button>
-          <Button className="primary" onClick={this.createProject}>Create Project</Button>
+      )
+    }
+
+    const tabTemplate = ({title, blurb, body, button}) => {
+      return (
+        <div className="layout-column flex">
+          <div className={classes.modalBody + ' layout-column flex'}>
+            <div className="text-title-2" style={{marginBottom: '15px'}}>{title}</div>
+            <div className={classes.row + ' layout-row'}>
+              <div className={classes.col + ' flex-40'}>
+                <div className="text-title-5">{blurb}</div>
+              </div>
+              <div className={classes.col + ' flex-60'}>{body}</div>
+            </div>
+          </div>
+          <div className={classes.modalFooter + ' layout-row layout-align-end'}>
+            <Button style={{marginRight: '10px'}} onClick={() => {modalCancel(); modalHide()}}>Cancel</Button>
+            <Button className="primary" onClick={button.onClick}>{button.text}</Button>
+          </div>
         </div>
+      )
+    };
+
+    const getTab = () => {
+      if(tab == 1){ return tabTemplate({
+        title: 'Create Project',
+        blurb: 'Enter general display details such as project name and blurb. Remember to set a blurb if you want to open-source your project.',
+        body: (
+          <div>
+            {namePanelTemplate()}
+            {permissionsTemplate()}
+          </div>
+        ),
+        button: {
+          text: 'Next',
+          onClick: () => this.changeTab(2)
+        }
+      })}
+      else if(tab == 2){ return tabTemplate({
+        title: 'File Store',
+        blurb: 'Enter general display details such as project name and blurb. Remember to set a blurb if you want to open-source your project.',
+        body: (
+          <div>
+            {fileStoreTemplate()}
+          </div>
+        ),
+        button: {
+          text: 'Create Project',
+          onClick: this.createProject
+        }
+      })}
+    }
+
+    const tabTitles = [{
+      title: 'General',
+      arrow: true,
+      onClick: () => {this.changeTab(1)},
+      isActive: () => tab == 1
+    },{
+      title: 'File Store',
+      arrow: false,
+      onClick: () => {this.changeTab(2)},
+      isActive: () => tab == 2
+    }]
+
+    return (
+      <div className={classes.stepModal + ' layout-column'}>
+        <div className={classes.modalTitle}>
+          <ArrowTabs className="layout-row flex">
+            {tabTitles.map(tab => <ArrowTab key={tab.title} arrow={tab.arrow}  onClick={tab.onClick} isActive={tab.isActive()}>{tab.title}</ArrowTab>)}
+          </ArrowTabs>
+        </div>
+        {getTab()}
       </div>
     )
   }
 });
+
+//export const Component = React.createClass({
+//  createProject(){
+//    this.props.projectsActions.createProject(this.props.newProject);
+//    this.props.modalHide();
+//  },
+//  render() {
+//    const { newProject, entityModel, modalCancel, modalHide } = this.props;
+//    return (
+//      <div className={classes.stepModal + ' layout-column'}>
+//        <div className="modal-title">Create New Project</div>
+//        <div className="modal-body">
+//          <Input autoFocus={true} model={`${entityModel}.name`} value={newProject.name} className="dr-input" type="text" placeholder="Project Name"/>
+//          <Textarea model={`${entityModel}.summary`}
+//            value={newProject.summary}
+//            className="dr-input"
+//            type="text"
+//            placeholder="Project Summary (Optional)"
+//            style={{marginTop: '15px', marginBottom: '15px', minHeight: '70px'}} />
+//          <ProjectLinkRemote model={`${entityModel}.provider`} value={newProject.provider}/>
+//        </div>
+//        <div className="modal-footer-no-line layout-row layout-align-end">
+//          <Button style={{marginRight: '10px'}} onClick={() => {modalCancel(); modalHide()}}>Cancel</Button>
+//          <Button className="primary" onClick={this.createProject}>Create Project</Button>
+//        </div>
+//      </div>
+//    )
+//  }
+//});
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 

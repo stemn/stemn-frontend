@@ -12,6 +12,7 @@ const initialState = {
     summary: '',
     name: '',
     remote: '',
+    permissions: {},
     savePending: ''
   }
 }
