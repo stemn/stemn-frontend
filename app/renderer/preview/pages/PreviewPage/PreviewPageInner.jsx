@@ -42,15 +42,18 @@ import classes from './PagePreview.css';
 export const Component = React.createClass({
     // Mounting
   onMount(nextProps, prevProps){
+    // If this is a sync file
     if(nextProps.fileMeta.data.project && nextProps.fileMeta.data.project._id){
       nextProps.syncTimelineActions.fetchTimeline({
         projectId : nextProps.fileMeta.data.project._id,
         fileId    : nextProps.fileMeta.data.fileId,
       })
     }
+    // If this is remote file
     else{
       nextProps.syncTimelineActions.fetchTimeline({
         fileId    : nextProps.fileMeta.data.fileId,
+        provider  : nextProps.fileMeta.data.provider,
       })
     }
     nextProps.filesActions.getRelatedTasks({

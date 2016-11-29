@@ -150,7 +150,7 @@ export function linkRemote({projectId, provider, path, id, prevProvider}) {
       type: 'PROJECTS/LINK_REMOTE',
       payload: http({
         method: 'PUT',
-        url: `/api/v1/remote/link/${projectId}/${provider}`,
+        url: `/api/v1/sync/link/${projectId}/${provider}`,
         params: {
           path         : path,
           id           : id
@@ -164,7 +164,7 @@ export function linkRemote({projectId, provider, path, id, prevProvider}) {
       type: 'PROJECTS/UNLINK_REMOTE',
       payload: http({
         method: 'DELETE',
-        url: `/api/v1/remote/link/${projectId}/${prevProvider}`,
+        url: `/api/v1/sync/link/${projectId}/${prevProvider}`,
       }),
       meta: {
         cacheKey: projectId
@@ -190,7 +190,7 @@ export function unlinkRemote({projectId, prevProvider}) {
       type: 'PROJECTS/UNLINK_REMOTE',
       payload: http({
         method: 'DELETE',
-        url: `/api/v1/remote/link/${projectId}/${prevProvider}`,
+        url: `/api/v1/sync/link/${projectId}/${prevProvider}`,
       }).then(response => {
         dispatch(getProject({projectId}))
       }),

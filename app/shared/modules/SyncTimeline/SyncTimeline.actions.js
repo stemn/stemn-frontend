@@ -20,13 +20,13 @@ export function selectTimelineItem({projectId, selected}) {
   }
 }
 
-export function fetchTimeline({projectId, fileId}) {
+export function fetchTimeline({projectId, fileId, provider}) {
   return {
     type:'TIMELINE/FETCH_TIMELINE',
     http: true,
     payload: {
       method: 'GET',
-      url: projectId ? `/api/v1/sync/timeline/${projectId}` : '/api/v1/sync/timeline',
+      url: projectId ? `/api/v1/sync/timeline/${projectId}` : `/api/v1/remote/timeline/${provider}`,
       params: {
         types: ['commits', 'revisions'],
         file: fileId

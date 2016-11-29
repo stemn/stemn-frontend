@@ -5,12 +5,13 @@ import { Link } from 'react-router';
 import classNames from 'classnames';
 import styles from './SidebarProjectButton.css';
 import book   from 'app/renderer/assets/images/pure-vectors/book.svg';
+import tutorial   from 'app/renderer/assets/images/pure-vectors/monitor-click.svg';
 
 export default (props) => {
   const iconStyle = {width: '20px', height: '20px'};
   const inner = (
     <div className="layout-row layout-align-start-center">
-      <img src={book} style={iconStyle}/>
+      <img src={props.icon == 'tutorial' ? tutorial : book} style={iconStyle}/>
       <div className={styles.text + ' flex'}>{props.item.name}</div>
     </div>
   );

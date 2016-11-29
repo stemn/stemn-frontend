@@ -97,6 +97,7 @@ export const Component = React.createClass({
             <div className="scroll-box flex">
               {projects.userProjects.data && projects.userProjects.data.length == 0 ? <SidebarProjectButton  item={{name: 'Create a project'}} clickFn={this.showProjectNewModal} /> : null }
               {filteredProjects.map((item, idx) => <ProjectWithContext key={item._id} item={item} isActive={item._id == this.props.params.stub} to={`/project/${item._id}`}/>)}
+              <SidebarProjectButton  item={{name: 'Turorial'}} clickFn={this.showProjectNewModal} icon="tutorial" />
               <ContextMenu identifier={projectContextIdentifier} menu={projectContextMenu}/>
             </div>
           </div>

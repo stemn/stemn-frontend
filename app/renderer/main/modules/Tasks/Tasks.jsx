@@ -8,21 +8,23 @@ import * as TasksActions from './Tasks.actions.js';
 // Component Core
 import React from 'react';
 import { filterBoard, getAllTasks } from './Tasks.utils.js';
+import { has } from 'lodash';
 
 // Styles
 import classNames from 'classnames';
 import classes from './Tasks.css';
 
 // Sub Components
-import Input from 'app/renderer/main/components/Input/Input/Input';
-import TasksFilterMenu from './TasksFilterMenu/TasksFilterMenu.jsx';
-import TaskList from './TaskList/TaskList.jsx';
-import Button from 'app/renderer/main/components/Buttons/Button/Button'
-import MdSearch from 'react-icons/md/search';
-import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
-import Guide from 'app/renderer/main/modules/Guide/Guide';
-import cardsColumns from './graphics/cards-columns.svg';
-import cardsStacked from './graphics/cards-stacked.svg';
+import Input                from 'app/renderer/main/components/Input/Input/Input';
+import TasksFilterMenu      from './TasksFilterMenu/TasksFilterMenu.jsx';
+import TaskList             from './TaskList/TaskList.jsx';
+import Button               from 'app/renderer/main/components/Buttons/Button/Button'
+import MdSearch             from 'react-icons/md/search';
+import PopoverMenu          from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
+import Guide                from 'app/renderer/main/modules/Guide/Guide';
+import cardsColumns         from './graphics/cards-columns.svg';
+import cardsStacked         from './graphics/cards-stacked.svg';
+import LoadingOverlay       from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -35,15 +37,7 @@ const layouts = [{
   value: 'board'
 }];
 
-const guideInfo = [{
-  title: 'Drag and drop to organize your work',
-  description: 'Organize task cards on a kanban-style board. Add due-dates, labels, file references and collaborate with teammates.',
-  image: cardsColumns,
-},{
-  title: 'Track tasks from beginning to end',
-  description: 'See what your team has worked on. Tasks are linked to files as they are completed. View files before and after the task was completed.',
-  image: cardsStacked,
-}]
+
 
 export const Component = React.createClass({
   getInitialState () {
@@ -66,15 +60,19 @@ export const Component = React.createClass({
     })
   },
   render() {
-    const { tasks, board, boardModel, project } = this.props;
+    const { tasks, board, boardModel, project, projectBoards } = this.props;
     const { hideGuide } = this.state;
 
-    if(!board || !board.data || !board.data.groups){ return null };
-
-    const numTasks = getAllTasks(board.data.groups).length;
-    const layout = board && board.layout == 'list' ? 'list' : 'board';
-
-    if(numTasks == 0 && !hideGuide){
+    const guideTemplate = () => {
+      const guideInfo = [{
+        title: 'Drag and drop to organize your work',
+        description: 'Organize task cards on a kanban-style board. Add due-dates, labels, file references and collaborate with teammates.',
+        image: cardsColumns,
+      },{
+        title: 'Track tasks from beginning to end',
+        description: 'See what your team has worked on. Tasks are linked to files as they are completed. View files before and after the task was completed.',
+        image: cardsStacked,
+      }]
       return (
         <div className="layout-column flex layout-align-center">
           <div className="layout-row layout-align-center">
@@ -87,7 +85,9 @@ export const Component = React.createClass({
         </div>
       )
     }
-    else{
+
+    const tasksTemplate = () => {
+      const layout = board && board.layout == 'list' ? 'list' : 'board';
       return (
         <div className="layout-column flex layout-align-center">
           <div className={classes.header + ' layout-row layout-align-start-center'}>
@@ -123,6 +123,27 @@ export const Component = React.createClass({
         </div>
       )
     }
+
+    const getTemplate = () => {
+      const numTasks = has(board, 'data.groups') ? getAllTasks(board.data.groups).length : '';
+      if(numTasks == 0 && !hideGuide){
+        return guideTemplate();
+      }
+      else if(has(board, 'data.groups')){
+        return tasksTemplate();
+      }
+      else{
+        return null
+      }
+    }
+
+    const isLoading = !projectBoards || (projectBoards && projectBoards.loading && !has(board, 'data.groups'));
+    return (
+      <div className="layout-column flex rel-box">
+        <LoadingOverlay show={isLoading} />
+        {!isLoading ? getTemplate() : null}
+      </div>
+    )
   }
 });
 
@@ -131,12 +152,13 @@ export const Component = React.createClass({
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
 function mapStateToProps({ tasks, projects }, {projectId}) {
-  const projectBoards = tasks.projects && tasks.projects[projectId] ? tasks.projects[projectId].boards : null;
-  const board = projectBoards ? tasks.boards[projectBoards[0]] : {};
+  const projectBoards = tasks.projects[projectId];
+  const board = projectBoards && projectBoards.boards ? tasks.boards[projectBoards.boards[0]] : {};
   return {
     tasks: tasks.data,
     project: projects[projectId],
-    board: board,
+    projectBoards,
+    board,
     boardModel: board && board.data && board.data._id ? `tasks.boards.${board.data._id}` : '',
   };
 }

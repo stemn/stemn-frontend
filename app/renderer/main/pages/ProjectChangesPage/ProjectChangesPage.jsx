@@ -178,15 +178,11 @@ export const Component = React.createClass({
       );
     }
 
-    const isLoading = project && project.loading || changes && changes.loading;
     const getTemplate = () => {
-      if(isLoading){
-        return null
-      }
       if(!project.data.remote.connected){
         return projectNotConnectedTemplate();
       }
-      else if(!changes.loading && changes.data.length == 0){
+      else if(!changes || !changes.loading && changes.data.length == 0){
         return guideTemplate();
       }
       else{
@@ -194,11 +190,11 @@ export const Component = React.createClass({
       }
     }
 
-
+    const isLoading = project && project.loading && !project.data || changes && changes.loading && !changes.data;
     return (
       <div className="layout-column flex rel-box">
         <LoadingOverlay show={isLoading} />
-        {getTemplate()}
+        {!isLoading ? getTemplate() : null}
       </div>
     )
   }
