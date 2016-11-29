@@ -160,16 +160,16 @@ export const Component = React.createClass({
          ? <ProjectLinkRemote model={`${entityModel}.formModels.fileStore.remote.provider`} value={project.formModels.fileStore.remote.provider}/>
          : null }
          <br />
-         { has(project, 'formModels.fileStore.remote.provider') && (project.formModels.fileStore.remote.provider == 'dropbox' || project.formModels.fileStore.remote.provider == 'drive')
-         ? <div>
-             <FileSelectInput
-               projectId={project.data._id}
-               provider={project.formModels.fileStore.remote.provider}
-               model={`${entityModel}.formModels.fileStore.remote.root`}
-               value={project.formModels.fileStore.remote.root}
-             />
-           </div>
-         : ''}
+         <div >
+           <FileSelectInput
+             projectId={project.data._id}
+             provider={project.formModels.fileStore.remote.provider}
+             model={`${entityModel}.formModels.fileStore.remote.root`}
+             value={project.formModels.fileStore.remote.root}
+             disabled={!(has(project, 'formModels.fileStore.remote.provider') && (project.formModels.fileStore.remote.provider == 'dropbox' || project.formModels.fileStore.remote.provider == 'drive'))}
+           />
+         </div>
+
          <br />
          <div className="layout-row layout-align-end">
            <ProgressButton

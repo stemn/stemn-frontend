@@ -16,7 +16,9 @@ const initialState = {
       fileId: '',
     },
     provider: '',
-    permissions: {},
+    permissions: {
+      projectType: 'public'
+    },
     savePending: ''
   }
 }

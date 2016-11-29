@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 
 import classes from './FileSelectInput.css'
+import classNames from 'classnames';
 import MdFolder from 'react-icons/md/folder';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 
@@ -14,7 +15,8 @@ const propTypesObject = {
   projectId: PropTypes.string,
   provider: PropTypes.string.isRequired,    // 'dropbox' || 'drive' - The provider
   model: PropTypes.string.isRequired,       // The model to assign the selected file
-  value: PropTypes.object.isRequired        // The value of the selected file: { path, fileId }
+  value: PropTypes.object.isRequired,       // The value of the selected file: { path, fileId }
+  disabled: PropTypes.bool                  // Should we disable the input
 };
 
 const FileSelectInput = React.createClass({
@@ -35,11 +37,11 @@ const FileSelectInput = React.createClass({
     })
   },
   render() {
-    const { provider, model, value } = this.props;
+    const { provider, model, value, disabled } = this.props;
     return (
-      <div className={classes.fileSelectInput + ' layout-row layout-align-start-center'} onClick={this.showModal}>
+      <div className={classNames(classes.fileSelectInput, 'layout-row layout-align-start-center', {[classes.disabled] : disabled})} onClick={()=>{if(!disabled){this.showModal()}}}>
         <div className={classes.text + ' flex'}>
-          {value && value.path && value.path.length > 0 ? <span><span style={{textTransform: 'capitalize'}}>{provider}/</span>{value.path}</span> : 'Select the project path'}
+          {value && value.path && value.path.length > 0 && provider ? <span><span style={{textTransform: 'capitalize'}}>{provider}/</span>{value.path}</span> : 'Select the project path'}
         </div>
         <SimpleIconButton>
           <MdFolder size="22" />

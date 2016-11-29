@@ -79,9 +79,8 @@ export const Component = React.createClass({
     const permissionsTemplate = () => {
       return (
         <div className={classes.panel}>
-          <h3>Project Permissions</h3>
-          <p>Set your project name and blurb.</p>
-           <ProjectPermissionsRadio
+          <h3>Project Type</h3>
+          <ProjectPermissionsRadio
              model={`${entityModel}.permissions.projectType`}
              value={has(newProject, 'permissions.projectType') ? newProject.permissions.projectType : ''}
            />
@@ -100,6 +99,7 @@ export const Component = React.createClass({
           />
           <br />
           <FileSelectInput
+             disabled={!['drive', 'dropbox'].includes(newProject.provider)}
              provider={newProject.provider}
              model={`${entityModel}.root`}
              value={newProject.root}
@@ -190,35 +190,6 @@ export const Component = React.createClass({
     )
   }
 });
-
-//export const Component = React.createClass({
-//  createProject(){
-//    this.props.projectsActions.createProject(this.props.newProject);
-//    this.props.modalHide();
-//  },
-//  render() {
-//    const { newProject, entityModel, modalCancel, modalHide } = this.props;
-//    return (
-//      <div className={classes.stepModal + ' layout-column'}>
-//        <div className="modal-title">Create New Project</div>
-//        <div className="modal-body">
-//          <Input autoFocus={true} model={`${entityModel}.name`} value={newProject.name} className="dr-input" type="text" placeholder="Project Name"/>
-//          <Textarea model={`${entityModel}.summary`}
-//            value={newProject.summary}
-//            className="dr-input"
-//            type="text"
-//            placeholder="Project Summary (Optional)"
-//            style={{marginTop: '15px', marginBottom: '15px', minHeight: '70px'}} />
-//          <ProjectLinkRemote model={`${entityModel}.provider`} value={newProject.provider}/>
-//        </div>
-//        <div className="modal-footer-no-line layout-row layout-align-end">
-//          <Button style={{marginRight: '10px'}} onClick={() => {modalCancel(); modalHide()}}>Cancel</Button>
-//          <Button className="primary" onClick={this.createProject}>Create Project</Button>
-//        </div>
-//      </div>
-//    )
-//  }
-//});
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
