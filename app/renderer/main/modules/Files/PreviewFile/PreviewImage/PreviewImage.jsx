@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './PreviewImage.css';
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import ScrollZoom from 'app/shared/modules/Scroll/ScrollZoom/ScrollZoom.jsx'
+import ScrollZoom from 'app/shared/modules/Scroll/ScrollZoom/ScrollZoom.jsx';
+import { getDownloadUrl } from '../../Files.utils.js';
 
 export default React.createClass({
   getInitialState () {
@@ -53,10 +54,6 @@ export default React.createClass({
   render() {
     const { fileMeta } = this.props;
     const { scale, naturalWidth, naturalHeight } = this.state;
-    const fileUrl = fileMeta.project && fileMeta.project._id
-    ? `${process.env.API_SERVER}/api/v1/sync/download/${fileMeta.project._id}/${fileMeta.fileId}?revisionId=${fileMeta.revisionId}`
-    : `${process.env.API_SERVER}/api/v1/remote/download/${fileMeta.fileId}?revisionId=${fileMeta.revisionId}`;
-
     const sizeStyles = {
       width: naturalWidth * scale,
       height: naturalHeight * scale,
@@ -66,7 +63,7 @@ export default React.createClass({
       <div ref="container" className={styles.container + ' flex rel-box'}>
         <ScrollZoom zoomIn={() => this.zoom('in')} zoomOut={() => this.zoom('out')} style={{display: 'table', width: '100%', height: '100%'}}>
           <div style={{display: 'table-cell', textAlign: 'center', verticalAlign: 'middle'}}>
-            <img src={fileUrl}
+            <img src={getDownloadUrl(fileMeta)}
               ref="image"
               className={styles.image}
               onLoad={this.onLoad}

@@ -61,7 +61,8 @@ export default React.createClass({
         nextProps.downloadFn({
           projectId  : nextProps.fileMeta.project._id,
           fileId     : nextProps.fileMeta.fileId,
-          revisionId : nextProps.fileMeta.revisionId
+          revisionId : nextProps.fileMeta.revisionId,
+          provider   : nextProps.fileMeta.provider
         })
       }
     }

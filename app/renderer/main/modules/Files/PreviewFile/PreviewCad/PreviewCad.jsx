@@ -41,6 +41,7 @@ export default React.createClass({
           projectId  : fileMeta.project._id,
           fileId     : fileMeta.fileId,
           revisionId : fileMeta.revisionId,
+          provider   : fileMeta.provider,
         }),
         previewCadUtils.authenticate()
       ]).then(response => {

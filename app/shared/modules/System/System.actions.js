@@ -71,7 +71,7 @@ export function openFile({location, path, projectId, provider}) {
     const providerToProject  = has(storeState, [localPathModuleName, projectId, 'data']) ? storeState[localPathModuleName][projectId].data : false;
 
     if(!providerToProject){
-      dispatch(LocalPathActions.getPath({projectId})).then(response => {
+      dispatch(LocalPathActions.getPath({provider, projectId})).then(response => {
         return open(computerToProvider, response.value.data, path)
       })
     }

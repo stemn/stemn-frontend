@@ -81,7 +81,8 @@ export default React.createClass({
       nextProps.downloadFn({
         projectId  : nextProps.fileMeta.project._id,
         fileId     : nextProps.fileMeta.fileId,
-        revisionId : nextProps.fileMeta.revisionId
+        revisionId : nextProps.fileMeta.revisionId,
+        provider   : nextProps.fileMeta.provider
       })
     }
   },
@@ -101,13 +102,13 @@ export default React.createClass({
 function errorMessages(layers){
   // Pop Error messages and remove bad layers
   forEachRight(layers, function(layer, index){
-      if(layer.error){
-        toast(layer.error);
-        layers.splice(index, 1);
-      }
-      else if(layer.isGerber && layer.cmds.length === 0){
-        toast('Could not parse file.');
-        layers.splice(index, 1);
-      }
+    if(layer.error){
+      toast(layer.error);
+      layers.splice(index, 1);
+    }
+    else if(layer.isGerber && layer.cmds.length === 0){
+      toast('Could not parse file.');
+      layers.splice(index, 1);
+    }
   });
 }

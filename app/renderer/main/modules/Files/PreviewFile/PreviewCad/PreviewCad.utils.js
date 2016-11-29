@@ -11,10 +11,12 @@ export default library
 
 ////////////////////////////////////////////
 
-function render({projectId, fileId, revisionId}){
+function render({projectId, fileId, revisionId, provider}){
   return http({
     method: 'GET',
-    url: projectId ? `/api/v1/sync/render/${projectId}/${fileId}` : `/api/v1/remote/render/${fileId}`,
+    url: projectId
+    ? `/api/v1/sync/render/${projectId}/${fileId}`
+    : `/api/v1/remote/render/${provider}/${fileId}`,
     params: {
       revisionId: revisionId
     }
