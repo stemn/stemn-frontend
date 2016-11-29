@@ -6,7 +6,7 @@ export function getFile({projectId, fileId, revisionId, provider}) {
     http: true,
     payload: {
       method: 'GET',
-      url: projectId ? `/api/v1/sync/download/${projectId}/${fileId}` : `/api/v1/remote/download/${provider}/${fileId}`  ,
+      url: projectId ? `/api/v1/sync/download/${projectId}/${fileId}` : `/api/v1/remote/download/${provider}/${fileId}`,
       params: {
         revisionId
       }
