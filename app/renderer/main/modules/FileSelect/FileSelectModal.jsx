@@ -118,7 +118,7 @@ export const FileSelectModal = React.createClass({
 
     return (
       <div style={{width: '600px'}}>
-        <div className="modal-title">Select Folder</div>
+        {/*<div className="modal-title">Select Folder</div>*/}
         {fileSelect
         ? <FileList
             projectId={projectId}

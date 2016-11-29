@@ -157,19 +157,18 @@ export const Component = React.createClass({
          <h3>Cloud Storage Folder</h3>
          <p>Select your project's cloud storage folder. STEMN will track all changes to files in this folder.</p>
          { has(project, 'formModels.fileStore.remote')
-         ? <ProjectLinkRemote model={`${entityModel}.formModels.fileStore.remote.provider`} value={project.formModels.fileStore.remote.provider}/>
+         ? <div>
+             <ProjectLinkRemote model={`${entityModel}.formModels.fileStore.remote.provider`} value={project.formModels.fileStore.remote.provider}/>
+             <br />
+             <FileSelectInput
+               projectId={project.data._id}
+               provider={project.formModels.fileStore.remote.provider}
+               model={`${entityModel}.formModels.fileStore.remote.root`}
+               value={project.formModels.fileStore.remote.root}
+               disabled={!(has(project, 'formModels.fileStore.remote.provider') && ['drive', 'dropbox'].includes(project.formModels.fileStore.remote.provider))}
+             />
+           </div>
          : null }
-         <br />
-         <div >
-           <FileSelectInput
-             projectId={project.data._id}
-             provider={project.formModels.fileStore.remote.provider}
-             model={`${entityModel}.formModels.fileStore.remote.root`}
-             value={project.formModels.fileStore.remote.root}
-             disabled={!(has(project, 'formModels.fileStore.remote.provider') && ['drive', 'dropbox'].includes(project.formModels.fileStore.remote.provider))}
-           />
-         </div>
-
          <br />
          <div className="layout-row layout-align-end">
            <ProgressButton
