@@ -42,6 +42,9 @@ export const Component = React.createClass({
       <div className={classes.container+' layout-row flex scroll-box'}>
         <div style={{width: '250px', marginRight: '15px'}}>
           <div className={classes.panel} style={{padding: '0px'}}>
+            <NavPill className="primary" href={`https://stemn.com/projects/${project.data.stub}`}>View project on stemn.com</NavPill>
+          </div>
+          <div className={classes.panel} style={{padding: '0px'}}>
             <NavPill to={`${baseLink}/settings`} onlyActiveOnIndex={true}>General Settings</NavPill>
             <NavPill to={`${baseLink}/settings/tasks`}>Task Settings</NavPill>
             <NavPill to={`${baseLink}/settings/team`}>Team Settings</NavPill>

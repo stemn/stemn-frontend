@@ -149,7 +149,7 @@ export const Component = React.createClass({
       })}
       else if(tab == 2){ return tabTemplate({
         title: 'File Store',
-        blurb: 'Enter general display details such as project name and blurb. Remember to set a blurb if you want to open-source your project.',
+        blurb: 'Connect a cloud provider (Dropbox or Drive). This will give you access to version control and collaboration features.',
         body: (
           <div>
             {fileStoreTemplate()}
@@ -160,7 +160,7 @@ export const Component = React.createClass({
           onClick: () => this.changeTab(1)
         },
         button2: {
-          text: 'Create Project',
+          text: 'Create',
           onClick: this.createProject
         }
       })}

@@ -7,10 +7,19 @@ import classes from './NavPill.css';
 
 export default class extends React.Component{
   render() {
-    return (
-      <Link className={classNames(classes.button)} activeClassName="active" to={this.props.to} onlyActiveOnIndex={this.props.onlyActiveOnIndex}>
-        {this.props.children}
-      </Link>
-    );
+    if(this.props.to){
+      return (
+        <Link className={classNames(classes.button, this.props.className)} activeClassName="active" to={this.props.to} onlyActiveOnIndex={this.props.onlyActiveOnIndex}>
+          {this.props.children}
+        </Link>
+      );
+    }
+    else{
+      return (
+        <a className={classNames(classes.button, this.props.className)} href={this.props.href}>
+          {this.props.children}
+        </a>
+      );
+    }
   }
 };
