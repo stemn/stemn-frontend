@@ -102,7 +102,7 @@ export const Component = React.createClass({
              disabled={!['drive', 'dropbox'].includes(newProject.provider)}
              provider={newProject.provider}
              model={`${entityModel}.root`}
-             value={newProject.root}
+             value={newProject.root || {}}
            />
         </div>
       )

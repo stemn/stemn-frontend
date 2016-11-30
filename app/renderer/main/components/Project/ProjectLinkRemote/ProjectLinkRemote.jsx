@@ -26,14 +26,14 @@ const Component = React.createClass({
     // If the selected provider is not authed, auth it
     if(!selectedProvider.isAuthed(this.props.auth.user.accounts)){
       this.props.AuthActions.authenticate(selectedProvider.authType)
-      .then((response) => {
-        // TODO: NEED TO FIX THIS SHIT. TOO MUCH WINE TO UNDERSTAND HOW
-        this.props.dispatch(actions.change(this.props.model, selectedProvider.value));
-        console.log(response);
-      })
-      .catch((response) => {
-         console.log(response);
-      });
+//      .then((response) => {
+//        // TODO: NEED TO FIX THIS SHIT. TOO MUCH WINE TO UNDERSTAND HOW
+//        this.props.dispatch(actions.change(this.props.model, selectedProvider.value));
+//        console.log(response);
+//      })
+//      .catch((response) => {
+//         console.log(response);
+//      });
     }
     // Else, we update the model straight away
     else{

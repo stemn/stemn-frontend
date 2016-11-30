@@ -1,4 +1,4 @@
-import { intersection }   from 'lodash';
+import { intersection, orderBy }   from 'lodash';
 import * as CompareIcons  from 'app/renderer/assets/icons/compare/index.js';
 
 const compareModeInfo = [ // Compare modes and text
@@ -51,4 +51,13 @@ export const getCompareModes = (previewerType1, previewerType2) => {
   const compareModes2 = compareModeTable[previewerType2];
   const compareModes  = compareModes2 ? intersection(compareModes1, compareModes2) : compareModeTable.none;
   return compareModes.map((modeNum)=>compareModeInfo[modeNum])
+}
+
+export const orderItemsByTime = (mode, item1, item2) => {
+  if(mode == 'single' || !item2){
+    return [ item1 ]
+  }
+  else {
+    return orderBy([item1, item2], item => (new Date(item.timestamp)).getTime(), 'desc');
+  }
 }

@@ -123,10 +123,6 @@ export const Component = React.createClass({
     }
 
     const showChangesTemplate = () => {
-//      const filePrevious = has(changes, 'selected.data.previousRevisionId') && changes.selected.data.previousRevisionId != null
-//        ? i.assocIn(changes.selected.data, ['revisionId'], changes.selected.data.previousRevisionId)
-//        : null;
-
       return (
         <div className="layout-column flex rel-box">
           <div className="layout-row flex">
@@ -162,7 +158,7 @@ export const Component = React.createClass({
                 ? <FileCompare
                     compareId={`changes-${project.data._id}-${changes.selected._id}`}
                     project={project.data}
-                    file={changes.selected.data}
+                    file={changes.selected}
                   />
                 : (
                 <div className="layout-column layout-align-center-center flex text-title-4 text-center">

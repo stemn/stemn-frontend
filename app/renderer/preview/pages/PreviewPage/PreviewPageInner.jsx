@@ -23,6 +23,7 @@ import * as ElectronWindowsActions from 'app/shared/modules/ElectronWindows/Elec
 
 
 // Sub Components
+import { orderItemsByTime } from 'app/renderer/main/modules/FileCompare/FileCompare.utils.js';
 import FileCompareInner   from 'app/renderer/main/modules/FileCompare/FileCompareInner/FileCompareInner.jsx';
 import Timeline           from 'app/renderer/main/modules/Timeline/Timeline.jsx';
 import DragResize         from 'app/renderer/main/modules/DragResize/DragResize.jsx';
@@ -33,6 +34,7 @@ import TimelineVertical   from 'app/shared/modules/TimelineVertical/TimelineVert
 import SimpleTable        from 'app/shared/modules/Tables/SimpleTable/SimpleTable.jsx';
 import SectionTitle       from 'app/shared/modules/Titles/SectionTitle/SectionTitle.jsx';
 import Tag                from 'app/shared/modules/Tags/Tag.jsx';
+
 
 // Styles
 import classes from './PagePreview.css';
@@ -64,33 +66,18 @@ export const Component = React.createClass({
   componentWillMount() { this.onMount(this.props) },
   getInitialState () {
     return {
-      selected1: this.props.fileMeta,
-      selected2: undefined,
-      lastSelected: 1,
-      mode: 'single'
+      selected1    : this.props.fileMeta,
+      selected2    : undefined,
+      lastSelected : 1,
+      mode         : 'single'
     }
   },
   onSelect(response){
-    if(this.state.mode == 'single'){
-      this.setState({
-        selected1: response,
-        lastSelected: 1
-      })
-    }
-    else{
-      if(this.state.lastSelected == 1){
-        this.setState({
-          selected2: response,
-          lastSelected: 2
-        })
-      }
-      else{
-        this.setState({
-          selected1: response,
-          lastSelected: 1
-        })
-      }
-    }
+    const stateToSet = this.state.mode == 'single' || this.state.lastSelected == 2
+    ? {selected1: response, lastSelected: 1}
+    : {selected2: response, lastSelected: 2};
+    this.setState(stateToSet);
+    // if(this.state.selected1 == this.state.selected2){this.setState({mode: 'single'})}
   },
   changeMode(mode, revisions){
     let { selected1, selected2 } = this.state;
@@ -102,13 +89,13 @@ export const Component = React.createClass({
     }
     this.setState({mode, selected2})
   },
-  clickCrumb({file}){
-    console.log(file);
-  },
   isSelected(item){
     const selected1 = has(this.state, 'selected1.data.revisionId') ? item.data.revisionId == this.state.selected1.data.revisionId : false;
     const selected2 = has(this.state, 'selected2.data.revisionId') ? item.data.revisionId == this.state.selected2.data.revisionId : false;
     return this.state.mode == 'single' ? selected1 : selected1 || selected2;
+  },
+  clickCrumb({file}){
+    console.log(file);
   },
   clickTag(task){
     this.props.dispatch(ModalActions.showModal({modalType: 'TASK', modalProps: { taskId: task._id }}));
@@ -180,14 +167,6 @@ export const Component = React.createClass({
   }
 });
 
-function orderItemsByTime(mode, item1, item2){
-  if(mode == 'single' || !item2){
-    return [ item1 ]
-  }
-  else {
-    return  orderBy([item1, item2], item => (new Date(item.timestamp)).getTime());
-  }
-}
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 

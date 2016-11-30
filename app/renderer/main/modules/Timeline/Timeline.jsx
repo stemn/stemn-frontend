@@ -4,6 +4,7 @@ import React, { PropTypes } from 'react';
 // Styles
 import classNames from 'classnames';
 import styles from './Timeline.css';
+import { orderBy } from 'lodash';
 
 // Sub Components
 import MoreDots from './MoreDots/MoreDots.jsx';
@@ -55,6 +56,9 @@ const Component = React.createClass({
     const moreLeft  = items ? this.state.page < items.length / numberToShow - 1 : false;
     const moreRight = this.state.page > 0;
 
+    // Order the items by the timestamp
+    const itemsOrdered = orderBy(items, item => (new Date(item.timestamp)).getTime(), 'desc');
+
     return (
       <div className={classNames(styles.timeline, 'layout-row', className, {[styles.small]: size == 'sm'})} style={style}>
         <div className="rel-box flex">
@@ -72,7 +76,7 @@ const Component = React.createClass({
                   numberToShow={numberToShow}
                   onSelect={onSelect}
                   page={this.state.page}
-                  items={items}
+                  items={itemsOrdered}
                   selected={selected}
                   isSelected={isSelected}
                   preferPlace={preferPlace}

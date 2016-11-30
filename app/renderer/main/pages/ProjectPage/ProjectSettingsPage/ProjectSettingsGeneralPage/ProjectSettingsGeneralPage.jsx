@@ -161,7 +161,7 @@ export const Component = React.createClass({
                projectId={project.data._id}
                provider={project.formModels.fileStore.remote.provider}
                model={`${entityModel}.formModels.fileStore.remote.root`}
-               value={project.formModels.fileStore.remote.root}
+               value={project.formModels.fileStore.remote.root || {}}
                disabled={!(has(project, 'formModels.fileStore.remote.provider') && ['drive', 'dropbox'].includes(project.formModels.fileStore.remote.provider))}
              />
            </div>
