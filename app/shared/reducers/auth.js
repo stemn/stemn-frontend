@@ -54,18 +54,18 @@ const mainReducer = (state, action) => {
         authToken: null
       }
 
-    case 'AUTH/AUTHENTICATE_PENDING':
+    case 'AUTH/POST_AUTHENTICATE_PENDING':
       return {...state,
         authLoading: true
       }
-    case 'AUTH/AUTHENTICATE_FULFILLED':
+    case 'AUTH/POST_AUTHENTICATE_FULFILLED':
       return {...state,
         authLoading: false
       }
-    case 'AUTH/AUTHENTICATE_REJECTED':
+    case 'AUTH/POST_AUTHENTICATE_REJECTED':
       return {...state,
         authLoading: false
-      }
+      }    
 
     case 'AUTH/UNLINK_FULFILLED':
       return i.assocIn(state, ['user', 'accounts'], action.payload.data.accounts)

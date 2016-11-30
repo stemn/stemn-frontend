@@ -1,7 +1,7 @@
 import React from 'react';
 
 import classes             from './ProjectFeedPageCommit.css';
-import FileCompareCollapse from 'app/renderer/main/modules/FileCompare/FileCompareCollapse/FileCompareCollapse.jsx';
+import FileCompare         from 'app/renderer/main/modules/FileCompare/FileCompare.jsx';
 import UserAvatar          from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
 import EditorDisplay       from 'app/renderer/main/modules/Editor/EditorDisplay.jsx';
 
@@ -26,7 +26,7 @@ export default React.createClass({
         </div>
         <div className="flex scroll-box">
           {item.data.items ?
-            groupRevisions(item.data.items).map(file => <FileCompareCollapse project={project} file={file}/>)
+            groupRevisions(item.data.items).map(file => <FileCompare project={project} file={file} type="collapse"/>)
           : null}
         </div>
       </div>

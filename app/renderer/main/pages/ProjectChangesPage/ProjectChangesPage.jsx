@@ -21,7 +21,7 @@ import LoadingOverlay       from 'app/renderer/main/components/Loading/LoadingOv
 import Timeline             from 'app/renderer/main/modules/Timeline/Timeline.jsx';
 import CommitChanges        from 'app/renderer/main/modules/Changes/CommitChanges/CommitChanges.jsx';
 import CommitBox            from 'app/renderer/main/modules/Changes/CommitBox/CommitBox.jsx'
-import FileCompareStandard  from 'app/renderer/main/modules/FileCompare/FileCompareStandard/FileCompareStandard.jsx';
+import FileCompare          from 'app/renderer/main/modules/FileCompare/FileCompare.jsx';
 import Guide                from 'app/renderer/main/modules/Guide/Guide';
 import cloudLocked          from 'app/renderer/assets/images/pure-vectors/cloud-locked.svg';
 import file                 from 'app/renderer/assets/images/pure-vectors/file.svg';
@@ -123,9 +123,9 @@ export const Component = React.createClass({
     }
 
     const showChangesTemplate = () => {
-      const filePrevious = has(changes, 'selected.data.previousRevisionId') && changes.selected.data.previousRevisionId != null
-        ? i.assocIn(changes.selected.data, ['revisionId'], changes.selected.data.previousRevisionId)
-        : null;
+//      const filePrevious = has(changes, 'selected.data.previousRevisionId') && changes.selected.data.previousRevisionId != null
+//        ? i.assocIn(changes.selected.data, ['revisionId'], changes.selected.data.previousRevisionId)
+//        : null;
 
       return (
         <div className="layout-column flex rel-box">
@@ -159,12 +159,11 @@ export const Component = React.createClass({
             </div>
             <div className="layout-column flex">
               {changes.selected && changes.selected.data
-                ?
-                <FileCompareStandard
-                  compareId={`changes-${project.data._id}-${changes.selected._id}`}
-                  project={project.data}
-                  file1={changes.selected.data}
-                  file2={filePrevious} />
+                ? <FileCompare
+                    compareId={`changes-${project.data._id}-${changes.selected._id}`}
+                    project={project.data}
+                    file={changes.selected.data}
+                  />
                 : (
                 <div className="layout-column layout-align-center-center flex text-title-4 text-center">
                   <img src={file} style={{width: '100px'}}/>

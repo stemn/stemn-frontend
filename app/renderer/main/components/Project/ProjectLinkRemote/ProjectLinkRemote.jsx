@@ -10,6 +10,8 @@ import * as AuthActions from 'app/shared/modules/Auth/Auth.actions.js';
 // Component
 import Select from 'react-select';
 import selectCss from 'app/renderer/assets/css/select.css';
+import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+
 import { actions } from 'react-redux-form';
 
 // Styles
@@ -25,6 +27,7 @@ const Component = React.createClass({
     if(!selectedProvider.isAuthed(this.props.auth.user.accounts)){
       this.props.AuthActions.authenticate(selectedProvider.authType)
       .then((response) => {
+        // TODO: NEED TO FIX THIS SHIT. TOO MUCH WINE TO UNDERSTAND HOW
         this.props.dispatch(actions.change(this.props.model, selectedProvider.value));
         console.log(response);
       })
@@ -38,19 +41,19 @@ const Component = React.createClass({
     }
   },
   render(){
-    const {model, value, dispatch} = this.props
+    const {model, value, dispatch, auth} = this.props
 
     var options = [
       {
         value: 'dropbox',
         label: 'Dropbox',
         authType: 'dropbox',
-        isAuthed: (accounts) => accounts.dropbox.id
+        isAuthed: (accounts) => accounts.dropbox && accounts.dropbox.id
       }, {
         value: 'drive',
         label: 'Drive',
         authType: 'google',
-        isAuthed: (accounts) => accounts.google.refreshToken
+        isAuthed: (accounts) => accounts.google && accounts.google.refreshToken
       },{
         value: undefined,
         label: 'None',
@@ -60,7 +63,8 @@ const Component = React.createClass({
     ];
 
     return (
-      <div>
+      <div className="rel-box">
+        <LoadingOverlay show={auth.authLoading} linear={true} hideBg={true}/>
         <Select
           name="form-field-name"
           value={value}
