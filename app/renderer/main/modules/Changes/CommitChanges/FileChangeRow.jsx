@@ -4,6 +4,7 @@ import classNames from 'classnames';
 // Components
 import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
 import TogglerExpand from 'app/renderer/main/components/Toggler/TogglerExpand/TogglerExpand.jsx';
+import { middle as middleConcat } from 'app/shared/helpers/stringConcat';
 
 // Styles
 import styles from './FileChangeRow.css';
@@ -35,7 +36,7 @@ export default React.createClass({
           <Checkbox model={model} value={value} title={value ? 'Deselect change' : 'Select change'}/>
         </div>
         <div className={styles.text + ' flex text-ellipsis layout-row'} onClick={clickFn}>
-          <div className="flex">{text}</div>
+          <div className="flex" title={text}>{middleConcat(text, 60, 0.5)}</div>
         </div>
       </div>
     )

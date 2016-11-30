@@ -55,39 +55,30 @@ const CommitBoxStyles = {
 };
 
 export const Component = React.createClass({
-  propTypes: {
-    project: React.PropTypes.object.isRequired,
-  },
-
-  componentWillMount() {
-    if(this.props.project && this.props.project.data && this.props.project.data.remote.connected){
-      this.props.changesActions.fetchChanges({
-        projectId: this.props.project.data._id
-      })
+  componentWillMount() { this.onMount(this.props) },
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
+  onMount(nextProps, prevProps) {
+    // If the project is connected to a remote
+    if(has(nextProps, 'project.data.remote.connected') && nextProps.project.data.remote.connected){
+      // And the project has changed
+      if(!prevProps || nextProps.project.data._id !== prevProps.project.data._id){
+        this.props.changesActions.fetchChanges({
+          projectId: nextProps.project.data._id
+        })
+      }
     }
   },
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.project && nextProps.project && this.props.project.data && nextProps.project.data._id !== this.props.project.data._id && nextProps.project.data.remote.connected) {
-      this.props.changesActions.fetchChanges({
-        projectId: nextProps.project.data._id
-      })
-    }
-  },
-
   refresh(){
     this.props.changesActions.fetchChanges({
       projectId: this.props.project.data._id
     })
   },
-
   toggleAll({value}){
     return this.props.changesActions.toggleAll({
       value,
       projectId: this.props.project.data._id
     })
   },
-
   commitFn(){
     this.props.changesActions.commit({
       projectId: this.props.project.data._id,
@@ -95,7 +86,6 @@ export const Component = React.createClass({
       description: this.props.changes.description
     })
   },
-
   deselect(){
     this.props.changesActions.deselect({
       projectId: this.props.project.data._id
@@ -104,10 +94,7 @@ export const Component = React.createClass({
   render() {
     const { changes, project, changesActions, entityModel, dispatch } = this.props;
 
-    if(!project || !project.data || !changes){
-      return <LoadingOverlay />
-    }
-    else if(!project.data.remote.connected){
+    const projectNotConnectedTemplate = () => {
       const baseLink = `project/${project.data._id}`;
       return (
         <div className="layout-column flex layout-align-center">
@@ -120,7 +107,8 @@ export const Component = React.createClass({
         </div>
       )
     }
-    else if(!changes.loading && changes.data.length == 0){
+
+    const guideTemplate = () => {
       return (
         <div className="layout-column flex layout-align-center">
           <div className="layout-row layout-align-center">
@@ -133,11 +121,11 @@ export const Component = React.createClass({
         </div>
       )
     }
-    else{
+
+    const showChangesTemplate = () => {
       const filePrevious = has(changes, 'selected.data.previousRevisionId') && changes.selected.data.previousRevisionId != null
         ? i.assocIn(changes.selected.data, ['revisionId'], changes.selected.data.previousRevisionId)
         : null;
-
 
       return (
         <div className="layout-column flex rel-box">
@@ -189,6 +177,26 @@ export const Component = React.createClass({
         </div>
       );
     }
+
+    const getTemplate = () => {
+      if(!project.data.remote.connected){
+        return projectNotConnectedTemplate();
+      }
+      else if(!changes || !changes.loading && changes.data.length == 0){
+        return guideTemplate();
+      }
+      else{
+        return showChangesTemplate();
+      }
+    }
+
+    const isLoading = project && project.loading && !project.data || changes && changes.loading && !changes.data;
+    return (
+      <div className="layout-column flex rel-box">
+        <LoadingOverlay show={isLoading} />
+        {!isLoading ? getTemplate() : null}
+      </div>
+    )
   }
 });
 

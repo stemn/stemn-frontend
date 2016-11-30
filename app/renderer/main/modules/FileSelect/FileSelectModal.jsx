@@ -4,27 +4,37 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as FileSelectActions from './FileSelect.actions.js';
+import { actions } from 'react-redux-form';
 
 // Component Core
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 // Styles
 import classNames from 'classnames';
-//import classes from './FileList.css'
 
 // Sub Components
 import FileList from 'app/renderer/main/modules/FileList/FileList';
 import Button from 'app/renderer/main/components/Buttons/Button/Button';
 import MdDone from 'react-icons/md/done';
+import { isDriveFileId, isDropboxFileId } from 'app/renderer/main/modules/Files/Files.utils.js';
 
-
-
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
-export const Component = React.createClass({
+// Either a projectId or options.explore must be defined
+const propTypesObject = {
+  projectId     : PropTypes.string,               // Optional: The project id (this is used if we are not exploring a provider)
+  path          : PropTypes.string,               // The current fileId: This folder will be opened when the modal inits.
+  model         : PropTypes.string,               // The { fileId, path } will be assigned to this model on confirm
+  storeKey      : PropTypes.string.isRequired,    // The store key (to be used in the redicer)
+  options       : React.PropTypes.shape({
+    allowFolder : React.PropTypes.bool,
+    foldersOnly : React.PropTypes.bool,
+    explore     : React.PropTypes.string,         // Optional: 'dropbox' || 'drive' - The provider
+  }),
+};
 
+export const FileSelectModal = React.createClass({
+  propTypes: propTypesObject,
   componentWillMount() {
     if(!this.props.fileSelect){
       this.props.FileSelectActions.init({
@@ -79,9 +89,10 @@ export const Component = React.createClass({
   },
 
   submit(){
-    // The modal confirm function is a react redux form change.
-    // We extend this action object by the value to confirm the change
-    this.props.modalConfirm({value: this.props.fileSelect.selected});
+    this.props.dispatch(actions.change(this.props.model, {
+      fileId : this.props.fileSelect.selected.fileId,
+      path   : this.props.fileSelect.selected.path
+    }))
     this.props.modalHide();
   },
   cancel(){
@@ -91,10 +102,23 @@ export const Component = React.createClass({
   render() {
     const { projectId, path, fileSelect, options } = this.props;
 
-    const activePath = fileSelect && fileSelect.path ? fileSelect.path : '';
+
+    const validatePath = (path, provider) => {
+      if(provider == 'drive'){
+        return isDriveFileId(path) ? path : ''
+      }
+      else if(provider == 'dropbox'){
+        return isDropboxFileId(path) ? path : ''
+      }
+      else{
+        return ''
+      }
+    }
+    const activePath = fileSelect ? validatePath(fileSelect.path, options.explore) : '';
+
     return (
       <div style={{width: '600px'}}>
-        <div className="modal-title">Select Folder</div>
+        {/*<div className="modal-title">Select Folder</div>*/}
         {fileSelect
         ? <FileList
             projectId={projectId}
@@ -139,7 +163,8 @@ function mapStateToProps({fileSelect}, {projectId, path, storeKey, options}) {
 function mapDispatchToProps(dispatch) {
   return {
     FileSelectActions: bindActionCreators(FileSelectActions, dispatch),
+    dispatch
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps, mapDispatchToProps)(FileSelectModal);

@@ -1,12 +1,12 @@
 import http from 'axios';
 
-export function getFile({projectId, fileId, revisionId}) {
+export function getFile({projectId, fileId, revisionId, provider}) {
   return {
     type: 'FILES/GET_FILE',
     http: true,
     payload: {
       method: 'GET',
-      url: projectId ? `/api/v1/sync/download/${projectId}/${fileId}` : `/api/v1/remote/download/${fileId}`,
+      url: projectId ? `/api/v1/sync/download/${projectId}/${fileId}` : `/api/v1/remote/download/${provider}/${fileId}`,
       params: {
         revisionId
       }
@@ -17,13 +17,13 @@ export function getFile({projectId, fileId, revisionId}) {
   };
 }
 
-export function getMeta({projectId, fileId, revisionId}) {
+export function getMeta({projectId, fileId, revisionId, provider}) {
   return {
     type: 'FILES/GET_META',
     http: true,
     payload: {
       method: 'GET',
-      url: projectId ? `/api/v1/sync/files/${projectId}/${fileId}` : `/api/v1/remote/files/${fileId}`,
+      url: projectId ? `/api/v1/sync/files/${projectId}/${fileId}` : `/api/v1/remote/files/${provider}/${fileId}`,
       params: {
         revisionId
       }

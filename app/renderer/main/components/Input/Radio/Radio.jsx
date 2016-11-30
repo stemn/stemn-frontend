@@ -17,7 +17,7 @@ export default class extends React.Component{
             className={classNames({[classes.checked] : modelValue == value})}
             model={model}
           />
-          <span></span>
+          <span className="layout-column layout-align-center-center"></span>
           <div className="layout-row layout-align-start-center flex">{children}</div>
         </label>
       </div>

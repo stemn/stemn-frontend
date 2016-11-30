@@ -1,21 +1,23 @@
 import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { actions } from 'react-redux-form';
 
 // Container Actions
 import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 
 import classes from './FileSelectInput.css'
+import classNames from 'classnames';
 import MdFolder from 'react-icons/md/folder';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import { isDriveFileId, isDropboxFileId } from 'app/renderer/main/modules/Files/Files.utils.js';
 
 
 const propTypesObject = {
-  projectId: PropTypes.string.isRequired,
-  provider: PropTypes.string.isRequired,
-  model: PropTypes.string.isRequired,
-  value: PropTypes.object.isRequired // { path, id}
+  projectId: PropTypes.string,
+  provider: PropTypes.string.isRequired,    // 'dropbox' || 'drive' - The provider
+  model: PropTypes.string.isRequired,       // The model to assign the selected file
+  value: PropTypes.object.isRequired,       // The value of the selected file: { path, fileId }
+  disabled: PropTypes.bool                  // Should we disable the input
 };
 
 const FileSelectInput = React.createClass({
@@ -24,23 +26,38 @@ const FileSelectInput = React.createClass({
       modalType: 'FILE_SELECT',
       modalProps: {
         projectId: this.props.projectId,
+        model: this.props.model,
         path: this.props.value.fileId,
-        storeKey: "FileSelect1",
+        storeKey: this.props.model, // We use the model as the storekey
         options: {
           allowFolder : true,
           foldersOnly : true,
           explore     : this.props.provider
         },
       },
-      modalConfirm: actions.change(this.props.model)
     })
   },
   render() {
-    const { provider, model, value } = this.props;
+    const { provider, model, value, disabled } = this.props;
+
+    const validatePath = (path, fileId, provider) => {
+      if(provider == 'drive'){
+        return isDriveFileId(fileId) ? path : '';
+      }
+      else if(provider == 'dropbox'){
+        return isDropboxFileId(fileId) ? path : '';
+      }
+      else{
+        return ''
+      }
+    }
+
+    const path = validatePath(value.path, value.fileId, provider);
+
     return (
-      <div className={classes.fileSelectInput + ' layout-row layout-align-start-center'} onClick={this.showModal}>
+      <div className={classNames(classes.fileSelectInput, 'layout-row layout-align-start-center', {[classes.disabled] : disabled})} onClick={()=>{if(!disabled){this.showModal()}}}>
         <div className={classes.text + ' flex'}>
-          {value && value.path && value.path.length > 0 ? <span><span style={{textTransform: 'capitalize'}}>{provider}/</span>{value.path}</span> : 'Select the project folder'}
+          {path ? <span><span style={{textTransform: 'capitalize'}}>{provider}/</span>{path}</span> : 'Select the project folder'}
         </div>
         <SimpleIconButton>
           <MdFolder size="22" />

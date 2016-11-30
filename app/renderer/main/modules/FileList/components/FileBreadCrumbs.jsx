@@ -9,7 +9,7 @@ import { middle as middleConcat } from 'app/shared/helpers/stringConcat';
 
 export default React.createClass({
   render() {
-    const {meta, clickFn} = this.props;
+    const {meta, clickFn, className} = this.props;
 
     const displayCrumbs = () => {
       if(meta.parents && meta.parents.length > 0){
@@ -32,7 +32,7 @@ export default React.createClass({
     }
 
     return (
-      <div className={classes.crumbs}>
+      <div className={classNames(classes.crumbs, className)}>
         {displayCrumbs()}
       </div>
     );

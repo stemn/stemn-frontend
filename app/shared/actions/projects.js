@@ -32,8 +32,8 @@ export function getProject({projectId}) {
 }
 
 export function createProject(project) {
-  return (dispatch)=>{
-    dispatch({
+  return (dispatch) => {
+    return dispatch({
       type: 'PROJECTS/CREATE_PROJECT',
       payload: http({
         method: 'POST',
@@ -152,8 +152,8 @@ export function linkRemote({projectId, provider, path, id, prevProvider}) {
         method: 'PUT',
         url: `/api/v1/sync/link/${projectId}/${provider}`,
         params: {
-          path         : path,
-          id           : id
+          path : path,
+          id   : id
         }
       }),
       meta: {
@@ -184,7 +184,6 @@ export function linkRemote({projectId, provider, path, id, prevProvider}) {
 
 
 export function unlinkRemote({projectId, prevProvider}) {
-  console.log('unlink');
   return (dispatch) => {
     dispatch({
       type: 'PROJECTS/UNLINK_REMOTE',

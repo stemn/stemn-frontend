@@ -11,23 +11,19 @@
   border: 1px solid;
   border-color: border1;
   border-radius: 50%;
-  display: inline-block;
   margin-right: 7px;
-  position: relative;
-  width: 20px;
-  height: 20px;
+  width: 21px;
+  height: 21px;
 }
 .checked + span {
   color: primary;
+  border-color: primary !important;
 }
 .checked + span:after {
   background: primary;
   border-radius: 50%;
   content: " ";
   height: 10px;
-  left: 5px;
-  top: 4px;
-  position: absolute;
   width: 10px;
 }
 .radio label:hover input + span {

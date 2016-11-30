@@ -1,0 +1,9 @@
+{
+  "transport": {
+    "module": "github",
+    "repository": "https://github.com/Stemn/Stemn-Desktop",
+    "token": "06cf3a48521833c82b0246956c1b40a9c1c73365",
+    "updatesJsonPath": "updates.json"
+  },
+  "updatesJsonUrl": "updates.json"
+}

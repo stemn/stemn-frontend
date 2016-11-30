@@ -16,48 +16,42 @@ import classes from './FileList.css'
 import FileBreadCrumbs from './components/FileBreadCrumbs';
 import FileRow from './components/FileRow';
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
-
+import MdRefresh from 'react-icons/md/refresh';
+import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
 export const Component = React.createClass({
-  componentWillMount() {
-    if(this.props.options.explore == 'drive' || this.props.options.explore == 'dropbox'){
-      this.props.FileListActions.exploreFolder({
-        provider: this.props.options.explore,
-        folderId: this.props.path,
-      });
-    }
-    else{
-      this.props.FileListActions.fetchFiles({
-        projectId: this.props.projectId,
-        path: this.props.path,
-      });
+  componentWillMount() { this.onMount(this.props) },
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
+  onMount(nextProps, prevProps) {
+    if(!prevProps || nextProps.path !== prevProps.path){
+      this.getFiles({
+        path     : nextProps.path,
+        provider : nextProps.options.explore,
+        projectId: nextProps.projectId,
+      })
     }
   },
-
-  componentWillReceiveProps(nextProps) {
-    if(this.props.path != nextProps.path || this.props.projectId != nextProps.projectId){
-      if(nextProps.options.explore == 'drive' || nextProps.options.explore == 'dropbox'){
-        this.props.FileListActions.exploreFolder({
-          provider: nextProps.options.explore,
-          folderId: nextProps.path,
-        });
-      }
-      else{
-        this.props.FileListActions.fetchFiles({
-          projectId: nextProps.projectId,
-          path: nextProps.path,
-        });
-      }
+    getFiles({path, provider, projectId}) {
+    if(['dropbox', 'drive'].includes(provider)){
+      this.props.FileListActions.exploreFolder({
+        provider: provider,
+        folderId: path,
+      });
+    }
+    else if(projectId){
+      this.props.FileListActions.fetchFiles({
+        projectId: projectId,
+        path: path,
+      });
     }
   },
 
   render() {
-    const {files, singleClickFn, doubleClickFn, crumbClickFn, selected, options} = this.props;
-    console.log(this.props);
+    const {files, singleClickFn, doubleClickFn, crumbClickFn, selected, options, path, projectId} = this.props;
 
     const displayResults = () => {
       const filesFiltered = options.foldersOnly && files.entries && files.entries.length > 0 ? files.entries.filter((file)=>file.type == 'folder') : files.data;
@@ -67,16 +61,30 @@ export const Component = React.createClass({
       else{
         return <div style={{padding: '15px'}}>No results</div>
       }
+    };
+
+    const getFiles = () => {
+      this.getFiles({
+        path: path,
+        provider: options.explore,
+        projectId: projectId
+      })
     }
+
+    const isLoading = !files || files.loading;
+
 
     return (
       <div>
-        <div className={classes.breadcrumbs}>
-          <FileBreadCrumbs meta={files && files.folder ? files.folder : ''} clickFn={crumbClickFn}/>
+        <div className={classes.breadcrumbs + ' layout-row layout-align-start-center'}>
+          <FileBreadCrumbs className="flex" meta={files && files.folder ? files.folder : ''} clickFn={crumbClickFn}/>
+          <SimpleIconButton onClick={getFiles} title="Refresh">
+            <MdRefresh size="22px"></MdRefresh>
+          </SimpleIconButton>
         </div>
         <div className="rel-box" style={{height: '300px', overflowY: 'auto'}}>
-          {files && !files.loading ? displayResults() :  ''}
-          <LoadingOverlay show={!files || files.loading} linear={true} hideBg={true}/>
+          <LoadingOverlay show={isLoading} linear={true} hideBg={true}/>
+          {!isLoading ? displayResults() :  ''}
         </div>
       </div>
     );

@@ -1,4 +1,4 @@
-@value primary, border1, secondary from "app/renderer/assets/css/themes/standard.css";
+@value primary, primary-2, border1, secondary from "app/renderer/assets/css/themes/standard.css";
 
 .button{
   display: block;
@@ -28,4 +28,12 @@
   top: 0;
   width: 4px;
   background: primary;
+}
+
+.button:global(.primary){
+  background: primary;
+  color: white;
+}
+.button:global(.primary):hover{
+  background: primary-2;
 }

@@ -27,6 +27,7 @@ import ProgressButton from 'app/renderer/main/components/Buttons/ProgressButton/
 import TaskLabelsEdit from 'app/renderer/main/modules/Tasks/TaskLabelsEdit/TaskLabelsEdit.jsx'
 import NavPill from 'app/renderer/main/components/Buttons/NavPill/NavPill'
 import Input from 'app/renderer/main/components/Input/Input/Input'
+import Textarea from 'app/renderer/main/components/Input/Textarea/Textarea';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -132,18 +133,15 @@ export const Component = React.createClass({
            placeholder="Project Name"
          />
          <br />
-         <Input
+         <Textarea
            model={`${entityModel}.data.summary`}
            value={project.data.summary}
            className="dr-input"
-           type="text"
+           style={{minHeight: '60px'}}
            placeholder="Project Summary"
          />
          <br />
-         <hr style={{border:' 1px solid rgb(239, 239, 239)', margin: '20px 0 30px'}}/>
-         <p>Is this a public or private project? Set your project as 'public' to your work available to everyone on the Stemn website.</p>
          <ProjectPermissionsRadio model={`${entityModel}.data.permissions.projectType`} value={has(project, 'data.permissions.projectType') ? project.data.permissions.projectType : ''} />
-
          <div className="layout-row layout-align-end">
            <ProgressButton
            className="primary"
@@ -156,19 +154,18 @@ export const Component = React.createClass({
          <h3>Cloud Storage Folder</h3>
          <p>Select your project's cloud storage folder. STEMN will track all changes to files in this folder.</p>
          { has(project, 'formModels.fileStore.remote')
-         ? <ProjectLinkRemote model={`${entityModel}.formModels.fileStore.remote.provider`} value={project.formModels.fileStore.remote.provider}/>
-         : null }
-         <br />
-         { has(project, 'formModels.fileStore.remote.provider') && (project.formModels.fileStore.remote.provider == 'dropbox' || project.formModels.fileStore.remote.provider == 'drive')
          ? <div>
+             <ProjectLinkRemote model={`${entityModel}.formModels.fileStore.remote.provider`} value={project.formModels.fileStore.remote.provider}/>
+             <br />
              <FileSelectInput
                projectId={project.data._id}
                provider={project.formModels.fileStore.remote.provider}
                model={`${entityModel}.formModels.fileStore.remote.root`}
                value={project.formModels.fileStore.remote.root}
+               disabled={!(has(project, 'formModels.fileStore.remote.provider') && ['drive', 'dropbox'].includes(project.formModels.fileStore.remote.provider))}
              />
            </div>
-         : ''}
+         : null }
          <br />
          <div className="layout-row layout-align-end">
            <ProgressButton
