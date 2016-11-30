@@ -40,7 +40,7 @@ const FileSelectInput = React.createClass({
     return (
       <div className={classes.fileSelectInput + ' layout-row layout-align-start-center'} onClick={this.showModal}>
         <div className={classes.text + ' flex'}>
-          {value && value.path && value.path.length > 0 ? <span><span style={{textTransform: 'capitalize'}}>{provider}/</span>{value.path}</span> : 'Select the project path'}
+          {value && value.path && value.path.length > 0 ? <span><span style={{textTransform: 'capitalize'}}>{provider}/</span>{value.path}</span> : 'Select the project folder'}
         </div>
         <SimpleIconButton>
           <MdFolder size="22" />

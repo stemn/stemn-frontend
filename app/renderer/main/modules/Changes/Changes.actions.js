@@ -117,7 +117,7 @@ export function commit({projectId, summary, description}) {
         }
       }).then((response)=>{
         dispatch(showToast({
-          title: `${files.length} files commited.`,
+          title: `${files.length} files commited`,
           actions: [{
             text: 'Undo',
             action: {
