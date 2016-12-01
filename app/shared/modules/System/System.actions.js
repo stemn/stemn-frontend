@@ -1,11 +1,9 @@
 import * as LocalPathActions from '../LocalPath/LocalPath.actions.js';
 import * as ModalActions from '../../../renderer/main/modules/Modal/Modal.actions.js';
-
-import { name as localPathModuleName} from '../LocalPath/LocalPath.reducer.js';
+import { getFullPath }   from '../../../renderer/main/modules/Files/Files.actions.js';
 
 import Promise from 'es6-promise';
 import { shell } from 'electron';
-import { has } from 'lodash';
 
 export function getProviderPath() {
   return {
@@ -31,10 +29,6 @@ export function getInstallStatus() {
 export function openFile({location, path, projectId, provider}) {
   return (dispatch, getState) => {
 
-    const addSlash = (path) => {
-      return path && path[0] != '/' && path[0] != '\\' ? '/' + path : path
-    }
-
     const showErrorDialog = ({path}) => {
       dispatch(ModalActions.showModal({
         modalType: 'ERROR',
@@ -45,10 +39,7 @@ export function openFile({location, path, projectId, provider}) {
       }))
     }
 
-    const open = (computerToProvider, providerToProject, projectToFile) => {
-      providerToProject = addSlash(providerToProject)
-      projectToFile = addSlash(projectToFile)
-      const fullPath = computerToProvider + providerToProject + projectToFile;
+    const open = (fullPath) => {
       if(location){
         const success = shell.showItemInFolder(fullPath);
         if(!success){showErrorDialog({path: fullPath})};
@@ -67,16 +58,8 @@ export function openFile({location, path, projectId, provider}) {
     };
 
     const storeState = getState();
-    const computerToProvider = storeState.system.providerPath[provider];
-    const providerToProject  = has(storeState, [localPathModuleName, projectId, 'data']) ? storeState[localPathModuleName][projectId].data : false;
-
-    if(!providerToProject){
-      dispatch(LocalPathActions.getPath({provider, projectId})).then(response => {
-        return open(computerToProvider, response.value.data, path)
-      })
-    }
-    else{
-      return open(computerToProvider, providerToProject, path)
-    }
+    return dispatch(getFullPath({path, projectId, provider})).then(fullPath => {
+      return open(fullPath)
+    })
   }
 }

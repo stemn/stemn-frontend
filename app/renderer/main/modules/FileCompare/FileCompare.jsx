@@ -89,7 +89,7 @@ export default React.createClass({
       return (
         <div className="layout-column flex">
           <div className={classes.header + ' layout-row layout-align-start-center'}>
-            <div className="flex">{items[0].path}</div>
+            <div className="flex">{file.data.path}</div>
             <FileCompareMenu
               file1={file1}
               file2={file2}
@@ -105,6 +105,7 @@ export default React.createClass({
               file1={file1}
               file2={file2}
               mode={mode}
+              header={['sideBySide', 'aboveAndBelow'].includes(mode)}
             />
           </div>
           <Timeline className={classes.timeline}

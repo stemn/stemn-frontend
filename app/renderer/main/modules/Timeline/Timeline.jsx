@@ -63,8 +63,8 @@ const Component = React.createClass({
       <div className={classNames(styles.timeline, 'layout-row', className, {[styles.small]: size == 'sm'})} style={style}>
         <div className="rel-box flex">
           <div className={styles.line}>
-            {moreLeft  ? <MoreButton onClick={()=>this.scroll('left')} side="left"/> : ''}
-            {moreRight ? <MoreButton onClick={()=>this.scroll('right')} side="right"/> : ''}
+            {moreLeft  ? <MoreButton title="Older events" onClick={()=>this.scroll('left')} side="left"/> : ''}
+            {moreRight ? <MoreButton title="Newer events" onClick={()=>this.scroll('right')} side="right"/> : ''}
             {moreLeft  ? <MoreDots side="left" /> : ''}
             {moreRight ? <MoreDots side="right" /> : ''}
           </div>

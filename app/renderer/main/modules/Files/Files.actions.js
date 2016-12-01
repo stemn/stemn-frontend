@@ -1,4 +1,8 @@
 import http from 'axios';
+import { has } from 'lodash';
+import { name as localPathModuleName} from '../../../../shared/modules/LocalPath/LocalPath.reducer.js';
+import * as LocalPathActions          from '../../../../shared/modules/LocalPath/LocalPath.actions.js';
+import * as FilesUtils                from './Files.utils.js'
 
 export function getFile({projectId, fileId, revisionId, provider}) {
   return {
@@ -66,6 +70,56 @@ export function getRelatedTasks({ projectId, fileId }) {
     },
     meta: {
       fileId
+    }
+  }
+}
+
+export function getFullPath({ path, projectId, provider }) {
+  return (dispatch, getState) => {
+    const storeState = getState();
+    const addSlash = (path) => {
+      return path && path[0] != '/' && path[0] != '\\' ? '/' + path : path
+    }
+    const normaliseSlashes = (path) => {
+      return path.replace('/', '\\')
+    }
+    return new Promise((resolve, reject) => {
+      const computerToProvider = storeState.system.providerPath[provider];
+      const projectToFile      = path;
+
+      if(has(storeState, [localPathModuleName, projectId, 'data'])){
+        const fullPath = computerToProvider + addSlash(storeState[localPathModuleName][projectId].data) + addSlash(projectToFile);
+        resolve(normaliseSlashes(fullPath))
+      }
+      else{
+        dispatch(LocalPathActions.getPath({provider, projectId})).then(response => {
+          const fullpath = computerToProvider + addSlash(response.value.data) + addSlash(projectToFile);
+          resolve(normaliseSlashes(fullPath))
+        }).catch(reject)
+      }
+    })
+  }
+}
+
+export function saveFile({fileUrl, filePath}) {
+  return (dispatch, getState) => {
+    dispatch(downloadProgress(fileUrl, 0))
+    FilesUtils.saveFile({
+      fileUrl,
+      filePath,
+      onProgress: (progress) => {
+        dispatch(downloadProgress(fileUrl, progress))
+      }
+    })
+  }
+}
+
+export function downloadProgress(cacheKey, progress) {
+  return {
+    type: 'FILES/DOWNLOAD_PROGRESS',
+    payload: {
+      progress,
+      cacheKey
     }
   }
 }

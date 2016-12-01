@@ -3,6 +3,7 @@ const initialState = {
   fileData: {},
   fileMeta: {},
   pathToId: {},
+  downloadProgress: {},
   relatedTasks: {},
 };
 
@@ -53,6 +54,9 @@ export default function (state = initialState, action) {
         loading: false
       })
       .value();
+
+    case 'FILES/DOWNLOAD_PROGRESS' :
+      return i.assocIn(state, ['downloadProgress', action.payload.cacheKey], action.payload.progress)
 
 //    case 'FILES/GET_META_FULFILLED' :
 //      return u({

@@ -30,16 +30,16 @@ const iconMap = {
 
 // This table maps the compare modes (above) to the preview mode
 const compareModeTable = {
-    gerber   : [0,1,2,3,4],
-    code     : [0,1,4],
-    autodesk : [0,1,2,3,4],
-    google   : [0,1,4],
-    image    : [0,1,2,3,4],
-    pdf      : [0,1,4],
-    pcb      : [0,1,2,3,4],
-    gdoc     : [0,1,4],
-    other    : [0,1,4],
-    none     : [4]
+  gerber   : [0,1,2,3,4],
+  code     : [0,1,4],
+  autodesk : [0,1,2,3,4],
+  google   : [0,1,4],
+  image    : [0,1,2,3,4],
+  pdf      : [0,1,4],
+  pcb      : [0,1,2,3,4],
+  gdoc     : [0,1,4],
+  other    : [0,1,4],
+  none     : [4]
 }
 
 export const getCompareIcon = (compareMode) => {

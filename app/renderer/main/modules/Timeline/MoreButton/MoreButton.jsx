@@ -10,7 +10,9 @@ import MdChevronRight from 'react-icons/md/chevron-right';
 export default React.createClass({
   render() {
     return (
-      <a onClick={this.props.onClick} className={classNames(classes.moreButton, {[classes.moreButtonRight] : this.props.side == 'right'}, {[classes.moreButtonLeft] : this.props.side == 'left'})}>
+      <a title={this.props.title}
+       onClick={this.props.onClick}
+       className={classNames(classes.moreButton, {[classes.moreButtonRight] : this.props.side == 'right'}, {[classes.moreButtonLeft] : this.props.side == 'left'})}>
         <MdChevronRight size="15" />
       </a>
     );

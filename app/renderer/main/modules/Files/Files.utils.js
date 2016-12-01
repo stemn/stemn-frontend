@@ -1,3 +1,7 @@
+import { remote } from 'electron'
+import http       from 'http';
+import fs         from 'fs';
+
 export const formatBytes = (bytes, decimals) => {
    if(bytes == 0) return '0 Byte';
    var k = 1024; // or 1024 for binary
@@ -18,4 +22,50 @@ export const isDriveFileId = (id) => {
 }
 export const isDropboxFileId = (id) => {
   return id && id.length == 25 && id.startsWith('id:');
+}
+
+export const saveFile = ({fileUrl, filePath, onProgress}) => {
+  const getDestination = (defaultPath) => {
+    return new Promise((resolve, reject) => {
+      remote.dialog.showSaveDialog({
+        defaultPath : defaultPath,
+      }, (file) => {
+        if(file){resolve(file)}
+        else{reject(false)}
+      });
+    })
+  }
+
+  const downloadAndSave = ({url, dest, onProgress}) => {
+    return new Promise((resolve, reject) => {
+      http.get(url, (request) => {
+        const file       = fs.createWriteStream(dest);
+        const total      = request.headers['content-length'];
+        let progress     = 0;
+        let progressPerc = 0;
+        request.on('data', function (chunk) {
+          progress    += chunk.length;
+          progressPerc = parseInt((progress / total) * 100);
+          if(onProgress){onProgress(progressPerc)}
+        });
+        request.pipe(file);
+        file.on('finish', (response) => {
+          resolve()
+        });
+      }).on('error', (response) => {
+        fs.unlink(dest); // Delete the file async. (But we don't check the result)
+        reject(response)
+      });
+    })
+  };
+
+  return getDestination(filePath).
+  then(destination => {
+    return downloadAndSave({
+      url: fileUrl,
+      dest: destination,
+      onProgress: onProgress
+    })
+  }).
+  catch(error => error)
 }
