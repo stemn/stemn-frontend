@@ -64,7 +64,7 @@ export const Component = React.createClass({
       <div className="layout-column flex rel-box">
         { header
         ? <div className={classes.header + ' layout-row layout-align-start-center rel-box'}>
-            <div>Version: 1</div>
+            <div>Version: {file.revisionNumber}</div>
             {/*<div>&nbsp;&nbsp;Created: {moment(file.modified).calendar()}</div>*/}
             <div className="flex"></div>
             <DownloadFile file={file} title="Download Version 1 of this file.">Download</DownloadFile>
