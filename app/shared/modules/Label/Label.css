@@ -1,17 +1,12 @@
-.avatar{
-  margin-right: 10px;
-}
+@value border2, border1, bg1 from "app/renderer/assets/css/themes/standard.css";
 
-/*
 .label{
-  margin: 0 3px;
+  cursor: default;
   display: inline-block;
   padding: 6px;
-  font-size: 80%;
   line-height: 1;
   color: white;
   background: rgb(68, 154, 211);
   border-radius: 3px;
   text-transform: capitalize;
 }
-*/

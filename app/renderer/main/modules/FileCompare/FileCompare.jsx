@@ -53,7 +53,7 @@ export default React.createClass({
     const items = orderItemsByTime(mode, selected1, selected2);
     const file1 = items[0] ? items[0].data : undefined;
     const file2 = items[1] ? items[1].data : undefined;
-    
+
     const collapseTemplate = () => {
       return (
         <TogglePanel>

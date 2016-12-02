@@ -91,12 +91,21 @@ export default React.createClass({
           <div className="text-title-4" style={{marginBottom: '10px'}}>WebGl is disabled or not supported.</div>
           <div className="text-title-5">Visit <a className="link-primary" href="http://get.webgl.org/" target="_blank">webgl.org</a> for more.</div>
         </div>
-      )    }
-    else if(status == 'pending') {
-      return <div className="rel-box flex"><LoadingOverlay show={true}>Processing File...</LoadingOverlay></div>
+      )
     }
     else{
-      return null
+      const getText = () => {
+        if(status == 'pending'){
+          return 'Uploading to renderer...'
+        }
+        else if(status == 'inprogress'){
+          return 'Conversion in progress...'
+        }
+        else{
+          return
+        }
+      }
+      return <div className="rel-box flex"><LoadingOverlay show={true}>{getText()}</LoadingOverlay></div>
     }
   }
 })

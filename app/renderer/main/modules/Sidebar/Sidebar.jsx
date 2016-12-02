@@ -98,8 +98,6 @@ export const Component = React.createClass({
               {projects.userProjects.data && projects.userProjects.data.length == 0 ? <SidebarProjectButton  item={{name: 'Create a project'}} clickFn={this.showProjectNewModal} /> : null }
               {filteredProjects.length > 0 ? <div className="text-grey-3" style={{padding: '10px 15px 5px'}}>My Projects</div> : null}
               {filteredProjects.map((item, idx) => <ProjectWithContext key={item._id} item={item} isActive={item._id == this.props.params.stub} to={`/project/${item._id}`}/>)}
-              <div className="text-grey-3" style={{padding: '10px 15px 5px'}}>Other Projects</div>
-              <SidebarProjectButton  item={{name: 'Demo Project'}} icon="tutorial" />
               <ContextMenu identifier={projectContextIdentifier} menu={projectContextMenu}/>
             </div>
           </div>
@@ -129,6 +127,9 @@ export const Component = React.createClass({
     );
   }
 });
+
+//              <div className="text-grey-3" style={{padding: '10px 15px 5px'}}>Other Projects</div>
+//              <SidebarProjectButton  item={{name: 'Demo Project'}} icon="tutorial" />
 
 
 ///////////////////////////////// CONTAINER /////////////////////////////////

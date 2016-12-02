@@ -4,7 +4,7 @@ export let modalPromises = {
 
 };
 
-export function showModal({modalType, modalProps, modalOptions, limit, modalConfirm, modalCancel}) {
+export function showModal({modalType, modalProps, modalOptions, limit, modalConfirm, modalCancel, meta}) {
   return {
     type: 'MODALS/SHOW_MODAL',
     payload: {
@@ -21,6 +21,7 @@ export function showModal({modalType, modalProps, modalOptions, limit, modalConf
       modalConfirm : modalConfirm,
       modalCancel  : modalCancel
     },
+    meta // Meta is used for meta.scope = 'local' show the modal only shows in current window
   };
 }
 

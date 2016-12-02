@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 // Container Actions
 import * as ElectronWindowsActions from 'app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
 import * as SystemActions    from 'app/shared/modules/System/System.actions.js';
+import * as ModalActions      from 'app/renderer/main/modules/Modal/Modal.actions.js';
 
 // Component Core
 import React from 'react';
@@ -29,7 +30,7 @@ import MdOpenInNew      from 'react-icons/md/open-in-new';
 
 export const Component = React.createClass({
   menu() {
-    const { file1, dispatch, isChange } = this.props;
+    const { file1, revisions, dispatch, isChange } = this.props;
     const discardChanges = {
       label: 'Discard Changes',
       onClick: () => {
@@ -56,7 +57,22 @@ export const Component = React.createClass({
         }))
       },
     }
-    return isChange ? [discardChanges, openFile, openFolder] : [openFile, openFolder]
+    const downloadFile = {
+      label: 'Download File',
+      onClick: () => {
+        dispatch(ModalActions.showModal({
+          modalType: 'FILE_DOWNLOAD',
+          modalProps: {
+            revisions: revisions,
+            file: file1
+          },
+          meta: {
+            scope: 'local'
+          }
+        }))
+      },
+    }
+    return isChange ? [discardChanges, openFile, openFolder] : [openFile, openFolder, downloadFile]
   },
   preview(){
     const { file1, dispatch } = this.props;

@@ -3,20 +3,28 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Component Core
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 // Styles
 import Modal from './Modal.jsx'
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
-export const Component = React.createClass({
+const propTypesObject = {
+  types : PropTypes.array,   // Array of modalTypes that can be displayed such as : ['FILE_DOWNLOAD']
+                             // If not supplied, all modals will be dislayed
+};
+
+export const ModalContainer = React.createClass({
+  propTypes: propTypesObject,
   render: function() {
-    const { modals } = this.props;
-    if(modals.stack && modals.stack.length > 0){
+    const { modals, types } = this.props;
+    const stack         = modals.stack ? modals.stack : [];
+    const filteredStack = types ? stack.filter(modal => types.includes(modal.modalType)) : stack;
+    if(filteredStack.length > 0){
       return (
         <div>
-          {modals.stack.map(modal => modal ? <Modal key={modal.modalId} modal={modal}></Modal> : '')}
+          {filteredStack.map(modal => modal ? <Modal key={modal.modalId} modal={modal}></Modal> : '')}
         </div>
       );
     }
@@ -34,4 +42,4 @@ function mapStateToProps({modals}) {
   };
 }
 
-export default connect(mapStateToProps)(Component);
+export default connect(mapStateToProps)(ModalContainer);

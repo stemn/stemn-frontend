@@ -15,9 +15,7 @@ export default function reducer(state = initialState, action = {}) {
       });
     case 'MODALS/HIDE_MODAL':
       const modalIndex = state.stack.findIndex(modal => modal.modalId == action.payload.modalId);
-      return i.merge(state, {
-        stack: i.splice(state.stack, modalIndex, 1)
-      })
+      return modalIndex != -1 ? i.merge(state, {stack: i.splice(state.stack, modalIndex, 1)}) : state;
     case 'MODALS/CLOSE_ALL':
       return i.assoc(state, 'stack', [])
     default:

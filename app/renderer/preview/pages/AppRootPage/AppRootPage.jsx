@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
-import TitleBar from 'app/renderer/main/components/TitleBar/TitleBar';
-
+import ModalContainer from 'app/renderer/main/modules/Modal/ModalContainer.jsx'
 
 function App({ children }) {
   return (
     <div className="layout-column flex">
       {children}
+      <ModalContainer types={['FILE_DOWNLOAD']} />
     </div>
   );
 }
