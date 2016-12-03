@@ -9,6 +9,7 @@ import { actions } from 'react-redux-form';
 // Component Core
 import React, { PropTypes } from 'react';
 import moment from 'moment';
+import { orderBy } from 'lodash';
 
 // Styles
 import classNames from 'classnames';
@@ -51,7 +52,10 @@ export const FileSelectModal = React.createClass({
     const { modalCancel, modalHide, modalConfirm } = this.props;
     const { revisions, syncTimeline } = this.props;
 
-    const allRevisions = syncTimeline && syncTimeline.data ? syncTimeline.data.filter(item => item.event == 'revision') : [];
+    const orderByTime = (items) => orderBy(items, item => (new Date(item.timestamp)).getTime(), 'desc');
+    const filterByRevision = (items) => items.filter(item => item.event == 'revision');
+
+    const allRevisions = syncTimeline && syncTimeline.data ? orderByTime(filterByRevision(syncTimeline.data)) : [];
     return (
       <div className={classes.modal + ' layout-column'}>
         <div className="modal-title">Download previous versions</div>
@@ -64,7 +68,7 @@ export const FileSelectModal = React.createClass({
             <div className={classNames(classes.row, 'layout-row layout-align-start-center')} key={revision._id}>
               <div style={{width: '70px'}}>Version {revision.data.revisionNumber}</div>
               <div className="flex text-grey-3">{revision.timestamp ? moment(revision.timestamp).fromNow() : null}</div>
-              {index == allRevisions.length -1 ? <Label style={{marginRight: '10px'}}>Latest Version</Label> : null}
+              {index == 0 ? <Label style={{marginRight: '10px'}}>Latest Version</Label> : null}
               <DownloadFile file={revision.data}>Download</DownloadFile>
             </div>
           ))}
