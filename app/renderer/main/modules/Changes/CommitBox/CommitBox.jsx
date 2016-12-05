@@ -21,6 +21,7 @@ import Button from 'app/renderer/main/components/Buttons/Button/Button.jsx';
 import Editor from 'app/renderer/main/modules/Editor/Editor.jsx';
 import Input from 'app/renderer/main/components/Input/Input/Input'
 import MarkdownButton from 'app/renderer/main/modules/Editor/MarkdownButton/MarkdownButton.jsx';
+import PopoverMenu          from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 
 import MdDone from 'react-icons/md/done';
 import { MentionsInput, Mention } from 'react-mentions';
@@ -51,6 +52,7 @@ export const Component = React.createClass({
 
     return (
       <div className="p-15">
+        <PopoverMenu preferPlace="right" trigger="none" open={true} tipSize={6}>
           <Input 
             autoFocus={true}
             model={`changes.${this.props.project._id}.summary`} 
@@ -59,6 +61,11 @@ export const Component = React.createClass({
             type="text" 
             placeholder="Summary"
           />
+          <div className="PopoverTutorial">
+            <p>Welcome to Stemn Desktop.</p>
+            <p>Let's go through the basics of the Stemn workflow.</p>
+          </div>
+        </PopoverMenu>
         <div className="rel-box">
           <Editor
             placeholder="Detailed description"

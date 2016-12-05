@@ -69,3 +69,16 @@
   background: rgb(68, 154, 211);
   color: white;
 }
+.PopoverTutorial{
+  max-width: 250px;
+  font-size: 12px;
+  color: #373a3c;
+  padding: 15px;
+  line-height: 1.4em;
+}
+.PopoverTutorial p{
+  margin-top: 0px;
+}
+.PopoverTutorial p:last-child{
+  margin-bottom: 0px;
+}

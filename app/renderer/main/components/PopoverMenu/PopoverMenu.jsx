@@ -18,6 +18,11 @@ export default React.createClass({
   componentWillUnmount(){
     clearInterval(this.toggleDelayTimeout);
   },
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.open === true || nextProps.open === false){
+      this.setState({ isOpen: nextProps.open })
+    }
+  },
   toggle (toState) {
     this.setState({ isOpen: toState === null ? !this.state.isOpen : toState })
   },
@@ -40,6 +45,7 @@ export default React.createClass({
           this.toggle(null)
         }
       },
+      none          : {},
     };
 
     const contentMap = {
@@ -50,7 +56,8 @@ export default React.createClass({
       },
       click          : {
         onClick      : () => {disableClickClose ? null : this.toggle(false)}
-      }
+      },
+      none           : {},
     }
 
     const triggerProps = triggerMap[trigger] || triggerMap['click']; // Default to click
