@@ -1,3 +1,5 @@
+import http from 'axios';
+
 export function deselect({projectId}) {
   return {
     type:'TIMELINE/DESELECT_ITEM',
@@ -23,15 +25,14 @@ export function selectTimelineItem({projectId, selected}) {
 export function fetchTimeline({projectId, fileId, provider}) {
   return {
     type:'TIMELINE/FETCH_TIMELINE',
-    http: true,
-    payload: {
+    payload: http({
       method: 'GET',
       url: projectId ? `/api/v1/sync/timeline/${projectId}` : `/api/v1/remote/timeline/${provider}`,
       params: {
         types: ['commits', 'revisions'],
         file: fileId
       },
-    },
+    }),
     meta: {
       cacheKey: fileId ? fileId : projectId
     }
