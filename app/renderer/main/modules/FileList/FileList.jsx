@@ -17,6 +17,7 @@ import FileBreadCrumbs from './components/FileBreadCrumbs';
 import FileRow from './components/FileRow';
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import MdRefresh from 'react-icons/md/refresh';
+import MdHome from 'react-icons/md/home';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 
 /////////////////////////////////////////////////////////////////////////////
@@ -35,7 +36,8 @@ export const Component = React.createClass({
       })
     }
   },
-    getFiles({path, provider, projectId}) {
+  getFiles({path, provider, projectId}) {
+      console.log(path);
     if(['dropbox', 'drive'].includes(provider)){
       this.props.FileListActions.exploreFolder({
         provider: provider,
@@ -69,15 +71,17 @@ export const Component = React.createClass({
         provider: options.explore,
         projectId: projectId
       })
-    }
+    }    
 
     const isLoading = !files || files.loading;
-
 
     return (
       <div>
         <div className={classes.breadcrumbs + ' layout-row layout-align-start-center'}>
           <FileBreadCrumbs className="flex" meta={files && files.folder ? files.folder : ''} clickFn={crumbClickFn}/>
+          <SimpleIconButton onClick={() => crumbClickFn({file:{fileId: ''}})} title="Home">
+            <MdHome size="22px"></MdHome>
+          </SimpleIconButton>          
           <SimpleIconButton onClick={getFiles} title="Refresh">
             <MdRefresh size="22px"></MdRefresh>
           </SimpleIconButton>

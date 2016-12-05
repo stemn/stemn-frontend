@@ -132,7 +132,9 @@ export const FileSelectModal = React.createClass({
         : null
         }
         <div className="modal-footer layout-row layout-align-start-center">
-          <div className="flex"></div>
+          <div className="flex text-grey-3">
+            {fileSelect.selected.path ? <span>Selected: {fileSelect.selected.path}</span> : null}
+          </div>
           <Button style={{marginRight: '10px'}} onClick={this.cancel}>
             Cancel
           </Button>
