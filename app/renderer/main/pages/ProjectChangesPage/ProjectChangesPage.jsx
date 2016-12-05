@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as ChangesActions from 'app/renderer/main/modules/Changes/Changes.actions.js';
+import * as SyncTimelineActions from 'app/shared/modules/SyncTimeline/SyncTimeline.actions.js';
 
 // Component Core
 import React from 'react';
@@ -55,6 +56,14 @@ const CommitBoxStyles = {
 };
 
 export const Component = React.createClass({
+  getInitialState () {
+    return {
+      hideGuide: false,
+    }
+  },
+  getStarted() {
+    this.setState({ hideGuide: true })
+  },
   componentWillMount() { this.onMount(this.props) },
   componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
   onMount(nextProps, prevProps) {
@@ -62,9 +71,8 @@ export const Component = React.createClass({
     if(has(nextProps, 'project.data.remote.connected') && nextProps.project.data.remote.connected){
       // And the project has changed
       if(!prevProps || nextProps.project.data._id !== prevProps.project.data._id){
-        this.props.changesActions.fetchChanges({
-          projectId: nextProps.project.data._id
-        })
+        nextProps.changesActions.fetchChanges({projectId: nextProps.project.data._id});
+        nextProps.syncTimelineActions.fetchTimeline({projectId: nextProps.project.data._id});
       }
     }
   },
@@ -92,7 +100,15 @@ export const Component = React.createClass({
     })
   },
   render() {
-    const { changes, project, changesActions, entityModel, dispatch } = this.props;
+    const { changes, timeline, project, changesActions, entityModel, dispatch } = this.props;
+    const { hideGuide } = this.state;
+
+    const hasCommits = timeline && timeline.data && timeline.data.length > 0;
+    const isLoading  =
+          project  && project.loading  && !project.data   ||
+          changes  && changes.loading  && !changes.data   ||
+          timeline && timeline.loading && !timeline.data;
+
 
     const projectNotConnectedTemplate = () => {
       const baseLink = `project/${project.data._id}`;
@@ -116,7 +132,7 @@ export const Component = React.createClass({
             <Guide data={guideInfo[1]}/>
           </div>
           <div className="layout-row layout-align-center">
-            <Button className="primary lg">Create your first commit</Button>
+            <Button onClick={this.getStarted} className="primary lg">Create your first commit</Button>
           </div>
         </div>
       )
@@ -174,10 +190,10 @@ export const Component = React.createClass({
     }
 
     const getTemplate = () => {
-      if(!project.data.remote.connected){
+      if(!has(project, 'data.remote.connected') || !project.data.remote.connected){
         return projectNotConnectedTemplate();
       }
-      else if(!changes || !changes.loading && changes.data.length == 0){
+      else if(!hasCommits && !hideGuide){
         return guideTemplate();
       }
       else{
@@ -185,7 +201,6 @@ export const Component = React.createClass({
       }
     }
 
-    const isLoading = project && project.loading && !project.data || changes && changes.loading && !changes.data;
     return (
       <div className="layout-column flex rel-box">
         <LoadingOverlay show={isLoading} />
@@ -198,11 +213,12 @@ export const Component = React.createClass({
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps({changes, projects}, {params}) {
+function mapStateToProps({changes, projects, syncTimeline}, {params}) {
   const project = projects.data[params.stub];
   return {
     project: project,
     changes: changes[params.stub],
+    timeline: syncTimeline[params.stub],
     entityModel: `changes.${params.stub}`
   };
 }
@@ -211,6 +227,7 @@ function mapStateToProps({changes, projects}, {params}) {
 function mapDispatchToProps(dispatch) {
   return {
     changesActions: bindActionCreators(ChangesActions, dispatch),
+    syncTimelineActions: bindActionCreators(SyncTimelineActions, dispatch),
     dispatch: dispatch
   }
 }
