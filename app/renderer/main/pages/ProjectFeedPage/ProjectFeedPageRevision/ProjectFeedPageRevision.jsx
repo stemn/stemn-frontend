@@ -13,7 +13,7 @@ export default React.createClass({
     return (
       <FileCompare
         project={project.data}
-        file={item.data}
+        file={item}
       />
     )
   }

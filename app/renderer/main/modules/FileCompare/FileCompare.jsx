@@ -15,10 +15,10 @@ export default React.createClass({
   onMount(nextProps, prevProps){
     if(!prevProps || nextProps.file != prevProps.file){
       this.setState({
-        selected1    : nextProps.file.revisions[0],
-        selected2    : nextProps.file.revisions.length > 1 ? nextProps.file.revisions[nextProps.file.revisions.length - 1] : undefined,
+        selected1    : nextProps.file.revisions && nextProps.file.revisions[0] ? nextProps.file.revisions[0] : nextProps.file,
+        selected2    : nextProps.file.revisions && nextProps.file.revisions.length > 1 ? nextProps.file.revisions[nextProps.file.revisions.length - 1] : undefined,
         lastSelected : 1,
-        mode         : nextProps.file.revisions.length > 1 ? 'sideBySide' : 'single'
+        mode         : nextProps.file.revisions && nextProps.file.revisions.length > 1 ? 'sideBySide' : 'single'
       })
     }
   },
