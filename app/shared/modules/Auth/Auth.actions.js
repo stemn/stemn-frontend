@@ -16,7 +16,7 @@ export function loadUserData() {
     }).then(response => {
       dispatch(ProjectsActions.getUserProjects({userId: response.value.data._id}))
     }).catch(error => {
-      dispatch(logout())
+//      dispatch(logout())
     })
   }
 }
