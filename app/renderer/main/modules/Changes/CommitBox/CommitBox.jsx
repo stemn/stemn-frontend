@@ -52,7 +52,7 @@ export const Component = React.createClass({
 
     return (
       <div className="p-15">
-        <Walkthrough preferPlace="right" name="project.summary">
+        <Walkthrough preferPlace="right" name="commit.commitSummary">
           <Input 
             autoFocus={true}
             model={`changes.${this.props.project._id}.summary`} 
@@ -72,20 +72,24 @@ export const Component = React.createClass({
           <MarkdownButton style={{position: 'absolute', bottom: '2px', right: '5px'}} />
         </div>
         <div className="layout-row layout-align-start-center">
-          <a className="link-primary" onClick={()=> {
-            electronWindowsActions.show('main');
-            changesActions.mentionTasksModal({projectId: this.props.project._id});
-          }}>
-            <MdDone size="16" style={{marginRight: '3px', marginBottom: '2px'}}/>
-            Add related tasks
-          </a>
+          <Walkthrough preferPlace="above" name="commit.commitTasks">
+            <a className="link-primary" onClick={()=> {
+              electronWindowsActions.show('main');
+              changesActions.mentionTasksModal({projectId: this.props.project._id});
+            }}>
+              <MdDone size="16" style={{marginRight: '3px', marginBottom: '2px'}}/>
+              Add related tasks
+            </a>
+          </Walkthrough>
           <div className="flex"></div>
-          <Button
-          onClick={this.props.commitFn}
-          className="primary"
-          disabled={noSummary || noChangesChecked}
-          title={getMessage()}
-          >Add Commit</Button>
+          <Walkthrough preferPlace="right" name="commit.commitSubmit">
+            <Button
+            onClick={this.props.commitFn}
+            className="primary"
+            disabled={noSummary || noChangesChecked}
+            title={getMessage()}
+            >Add Commit</Button>
+          </Walkthrough>
         </div>
       </div>
     );

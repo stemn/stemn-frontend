@@ -42,7 +42,7 @@ export default React.createClass({
     return (
       <div className="layout-column flex">
         <div className="layout-column flex">
-          <Walkthrough name="project.changes" preferPlace="right">
+          <Walkthrough name="commit.commitIntro" preferPlace="right">
             <FileChangeTitleRow
               text={groupedChanges.length + ' file changes'}
               checkbox={true}

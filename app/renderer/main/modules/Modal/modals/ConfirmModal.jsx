@@ -28,7 +28,7 @@ const Component = React.createClass({
       <div style={{width: '400px'}}>
         <div className="modal-title">{title || 'Are you sure you want to do this?'}</div>
         <div className="modal-body" style={{lineHeight: '1.4em'}}>
-          {message || 'There will be no turning back.'}
+          <div dangerouslySetInnerHTML={{__html: message || 'There will be no turning back.'}}></div>
           {confirmValue 
           ? <input 
              type="text" 

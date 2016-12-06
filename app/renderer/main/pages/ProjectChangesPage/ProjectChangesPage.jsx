@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 // Container Actions
 import * as ChangesActions from 'app/renderer/main/modules/Changes/Changes.actions.js';
 import * as SyncTimelineActions from 'app/shared/modules/SyncTimeline/SyncTimeline.actions.js';
+import * as WalkthroughActions from 'app/shared/modules/Walkthrough/Walkthrough.actions.js';
 
 // Component Core
 import React from 'react';
@@ -62,6 +63,7 @@ export const Component = React.createClass({
     }
   },
   getStarted() {
+    this.props.walkthroughActions.activate({name: 'commit.commitIntro'})
     this.setState({ hideGuide: true })
   },
   componentWillMount() { this.onMount(this.props) },
@@ -226,9 +228,10 @@ function mapStateToProps({changes, projects, syncTimeline}, {params}) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    changesActions: bindActionCreators(ChangesActions, dispatch),
-    syncTimelineActions: bindActionCreators(SyncTimelineActions, dispatch),
-    dispatch: dispatch
+    changesActions      : bindActionCreators(ChangesActions, dispatch),
+    syncTimelineActions : bindActionCreators(SyncTimelineActions, dispatch),
+    walkthroughActions  : bindActionCreators(WalkthroughActions, dispatch),
+    dispatch            : dispatch
   }
 }
 

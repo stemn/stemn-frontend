@@ -67,7 +67,7 @@ export default React.createClass({
       <Popover
         isOpen={this.state.isOpen}
         body={React.cloneElement(children[1], contentProps)}
-        onOuterAction={()=>this.toggle(false)}
+        onOuterAction={()=>{if(trigger != 'none'){this.toggle(false)}}}
         preferPlace = {preferPlace || 'above'}
         tipSize={tipSizeDefault}
         offset={offset}>
