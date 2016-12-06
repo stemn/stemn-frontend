@@ -77,6 +77,6 @@ export default React.createClass({
     });
   },
   render() {
-    return <div className={classes.preview} ref="cadCanvas"></div>
+    return <div className={classes.preview + ' flex rel-box'} ref="cadCanvas"></div>
   }
 });

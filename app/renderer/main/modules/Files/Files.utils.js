@@ -18,10 +18,10 @@ export const getDownloadUrl = (fileMeta) => {
 }
 
 export const isDriveFileId = (id) => {
-  return id && id.length == 28
+  return id && !id.startsWith('id:');
 }
 export const isDropboxFileId = (id) => {
-  return id && id.length == 25 && id.startsWith('id:');
+  return id && id.startsWith('id:');
 }
 
 export const saveFile = ({fileUrl, filePath, onProgress}) => {
