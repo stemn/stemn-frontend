@@ -8,7 +8,7 @@ const data = {
           <div>
             <p>Let's go through the basics of commiting your changes.</p>
             <p>The 'Changes' tab allows you to inspect recent changes to your files. Click on one of the files in this list to preview.</p>
-            <p className="text-grey-3"><small>File changes are automatically synced to Stemn from Dropbox or Drive.</small></p>
+            <p className="text-grey-3"><small>Your file changes in Dropbox and Drive are automatically synced to Stemn.</small></p>
           </div>
         )
       },
@@ -16,7 +16,7 @@ const data = {
         content: (
           <div>
             <p>Use these checkboxes to select which files you want to commit.</p>
-            <p>To begin with, you may want to use the master checkbox (this one) to select all changes.</p>
+            <p>To begin, you will want to use the master checkbox (this one) to select all changes.</p>
           </div>
         )
       },
@@ -31,17 +31,17 @@ const data = {
       commitTasks : {
         content: (
           <div>
-            <p>Now you can add 'Related tasks' to the commit.</p>
-            <p>This step allows you and your team to look back and see what a file looked like before and after a task was completed.</p>
-            <p className="text-grey-3"><small>Tasks are added using the 'tasks' tab at the top of the page.</small></p>
+            <p>Next you can add 'related tasks' to the commit.</p>
+            <p>This allows you and your team see all the work related to a task in one place.</p>
+            <p className="text-grey-3"><small>Tasks are added using the 'Tasks' tab at the top of the page.</small></p>
           </div>
         )
       },
       commitSubmit : {
         content: (
           <div>
-            <p>Finally, you can now submit your commit.</p>
-            <p>Once submitted, your commit will appear in the 'timeline' and be linked from any related tasks.</p>
+            <p>Finally, you can now save your commit.</p>
+            <p>Once saved, your commit will appear in the 'timeline' and will be linked to any related tasks.</p>
             <p className="text-grey-3"><small>You should commit files multiple times each day. This will allow you to keep a good history of what work you have done and what tasks have been completed.</small></p>
           </div>
         )
