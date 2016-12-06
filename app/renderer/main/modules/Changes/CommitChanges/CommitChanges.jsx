@@ -11,6 +11,7 @@ import PopoverMenuList from 'app/renderer/main/components/PopoverMenu/PopoverMen
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import Walkthrough from 'app/shared/modules/Walkthrough/Walkthrough.jsx'
 
 // Functions
 import { groupRevisions } from 'app/renderer/main/modules/Timeline/Timeline.utils.js'
@@ -41,18 +42,20 @@ export default React.createClass({
     return (
       <div className="layout-column flex">
         <div className="layout-column flex">
-          <FileChangeTitleRow
-            text={groupedChanges.length + ' file changes'}
-            checkbox={true}
-            value={allChecked}
-            changeAction={toggleAll}>
-            <PopoverMenu preferPlace="below">
-              <SimpleIconButton title="Filter changes">
-                <MdMoreHoriz size="20px" />
-              </SimpleIconButton>
-              <PopoverMenuList menu={filterMenu}/>
-            </PopoverMenu>
-          </FileChangeTitleRow>
+          <Walkthrough name="project.changes" preferPlace="right">
+            <FileChangeTitleRow
+              text={groupedChanges.length + ' file changes'}
+              checkbox={true}
+              value={allChecked}
+              changeAction={toggleAll}>
+              <PopoverMenu preferPlace="below">
+                <SimpleIconButton title="Filter changes">
+                  <MdMoreHoriz size="20px" />
+                </SimpleIconButton>
+                <PopoverMenuList menu={filterMenu}/>
+              </PopoverMenu>
+            </FileChangeTitleRow>
+          </Walkthrough>
           {groupedChanges.length > 0
             ? <div className="scroll-box layout-column flex">
                 {groupedChanges.map((item, idx)=><FileChangeRowContext key={item._id}

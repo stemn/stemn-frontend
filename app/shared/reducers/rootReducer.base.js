@@ -22,6 +22,7 @@ import syncTimeline     from '../modules/SyncTimeline/SyncTimeline.reducer.js';
 import localPath        from '../modules/LocalPath/LocalPath.reducer.js';
 import autoLaunch       from '../modules/AutoLaunch/AutoLaunch.reducer.js';
 import autoUpdate       from '../modules/AutoUpdate/AutoUpdate.reducer.js';
+import walkthrough      from '../modules/Walkthrough/Walkthrough.reducer.js';
 
 export default {
   system,
@@ -47,5 +48,6 @@ export default {
   mentions,
   localPath,
   autoLaunch,
-  autoUpdate
+  autoUpdate,
+  walkthrough
 };
