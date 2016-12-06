@@ -104,7 +104,7 @@ export const Component = React.createClass({
     // If the store is connected - we confirm the change
     if(this.props.project.data.remote.connected){
       this.props.ModalActions.showConfirm({
-        message: 'Changing your file store settings will delete your entire commit and change history. Are you sure you want to do this? Consider creating a new project.',
+        message: 'Changing your file store will delete your entire commit and change history. Are you sure you want to do this? There is no going back.',
         modalConfirm: this.linkRemote()
       })
     }
