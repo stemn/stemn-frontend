@@ -63,6 +63,7 @@ export const Component = React.createClass({
             className="dr-input"
             type="text"
             placeholder="Project Name"
+            autoFocus={true}
           />
           <br />
           <Textarea

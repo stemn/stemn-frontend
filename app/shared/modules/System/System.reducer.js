@@ -9,7 +9,8 @@ const initialState = {
     onedrive: null,
   },
   settings: {
-    usageData: true
+    usageData: true,
+    autoUpdate: true
   },
 };
 
@@ -37,7 +38,7 @@ function reducer(state, action) {
 
 export default function (state = initialState, action) {
   if (!state.hydrated) {
-    state = { ...initialState, ...state, hydrated: true };
+    state = i.chain(initialState).merge(state).assoc('hydrated', true).value();
   }
   return modeled(reducer, 'system')(state, action)
 }

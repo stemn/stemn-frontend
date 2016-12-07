@@ -116,6 +116,10 @@ export const Component = React.createClass({
             <p className="flex" style={{margin: '10px 10px 10px 0'}}>Help improve Stemn by sending usage data.</p>
             <Toggle model="system.settings.usageData" value={system.settings.usageData}/>
           </div>
+          <div className="layout-row layout-align-start-center">
+            <p className="flex" style={{margin: '10px 10px 10px 0'}}>Auto-update Stemn Desktop.</p>
+            <Toggle model="system.settings.autoUpdate" value={system.settings.autoUpdate}/>
+          </div>
         </div>
         <div className={classes.panel}>
           <h3>Application info</h3>

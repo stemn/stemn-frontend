@@ -27,10 +27,6 @@ export default function (store) {
   log.info('Current version:', version);
   store.dispatch(currentVersion({version}));
 
-//  if (process.env.NODE_ENV !== 'production') {
-//    return;
-//  }
-
   updater.on('update-available', () => {
     store.dispatch(updateAvailable());
   });
@@ -46,5 +42,8 @@ export default function (store) {
     store.dispatch(updateNotAvailable());
   });
     
-  store.dispatch(checkForUpdates());
+  // If autoUpdate is true, we check for updates
+  if(store.getState().system.settings.autoUpdate){
+    store.dispatch(checkForUpdates());
+  }
 }

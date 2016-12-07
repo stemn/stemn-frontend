@@ -9,7 +9,10 @@ It is an array of path arrays:
 
 /**********************************************************/
 export const dataToStoreKeyMap = [
-  ['system'],
+  // Top level stores should not be cached directly because store.hydrated will also save
+  ['system', 'settings'],
+  ['system', 'installed'],
+  ['system', 'providerPath'],
   ['auth', 'authToken'],
   ['auth', 'user'],
   ['sidebar', 'searchString'],

@@ -65,7 +65,7 @@ export const Walkthrough = React.createClass({
       <PopoverMenu { ...omit(this.props, Object.keys(WalkthroughPropTypes))}
         open={isActive}
         trigger="none"
-        tipSize={6}
+        tipSize={10}
         >
         {children || <div></div>}
         <div className={classes.walkthrough}>

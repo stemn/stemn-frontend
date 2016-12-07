@@ -27,6 +27,7 @@ import TaskLabelsEditModal    from 'app/renderer/main/modules/Tasks/TaskLabelsEd
 import TaskMentionModal       from 'app/renderer/main/modules/Mentions/TaskMentionModal/TaskMentionModal.jsx'
 import ProjectNewModal        from 'app/renderer/main/modules/Projects/ProjectNewModal/ProjectNewModal.jsx'
 import FileDownload           from 'app/renderer/main/modules/Files/Download/DownloadModal/DownloadModal.jsx'
+import PreviewExpired         from 'app/renderer/main/modules/Files/PreviewFile/PreviewExpired/PreviewExpiredModal.jsx'
   
 
 const modalComponents = {
@@ -41,7 +42,8 @@ const modalComponents = {
   'PROVIDER_ACCESS_ERROR'   : ProviderAccessError,
   'PROVIDER_ACCESS_REVOKED' : ProviderAccessRevoked,
   'RELEASE_NOTES'           : ReleaseNotesModal,
-  'FILE_DOWNLOAD'           : FileDownload
+  'FILE_DOWNLOAD'           : FileDownload,
+  'PREVIEW_EXPIRED'         : PreviewExpired
 }
 
 /////////////////////////////////////////////////////////////////////////////
