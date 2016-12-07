@@ -1,8 +1,9 @@
 import i from 'icepick'
 const initialState = {
-  fileData: {},
-  fileMeta: {},
-  pathToId: {},
+  fileData    : {},
+  fileRenders : {},
+  fileMeta    : {},
+  pathToId    : {},
   downloadProgress: {},
   relatedTasks: {},
 };
@@ -12,9 +13,25 @@ export default function (state = initialState, action) {
     case 'FILES/GET_FILE_PENDING' :
       return i.assocIn(state, ['fileData', action.meta.cacheKey, 'loading'], true)
     case 'FILES/GET_FILE_REJECTED' :
-      return i.assocIn(state, ['fileData', action.meta.cacheKey, 'loading'], false)
+      return i.assocIn(state, ['fileData', action.meta.cacheKey], {
+        error: action.payload.data,
+        loading: false
+      })
     case 'FILES/GET_FILE_FULFILLED' :
       return i.assocIn(state, ['fileData', action.meta.cacheKey], {
+        data: action.payload.data,
+        loading: false
+      })
+
+    case 'FILES/RENDER_FILE_PENDING' :
+      return i.assocIn(state, ['fileRenders', action.meta.cacheKey, 'loading'], true)
+    case 'FILES/RENDER_FILE_REJECTED' :
+      return i.assocIn(state, ['fileRenders', action.meta.cacheKey], {
+        error: action.payload.response.data.error,
+        loading: false
+      })
+    case 'FILES/RENDER_FILE_FULFILLED' :
+      return i.assocIn(state, ['fileRenders', action.meta.cacheKey], {
         data: action.payload.data,
         loading: false
       })

@@ -95,7 +95,7 @@ const processingInstructions = [{
 
 export default React.createClass({
   getMarkdownText() {
-    var rawMarkup = '<div>' + md.render(this.props.value) + '</div>';
+    var rawMarkup = '<div>' + md.render(this.props.value || '') + '</div>';
     return htmlToReactParser.parseWithInstructions(rawMarkup, () => true, processingInstructions);
   },
   render() {

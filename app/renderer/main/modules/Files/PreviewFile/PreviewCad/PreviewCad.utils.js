@@ -4,24 +4,24 @@ const library = {
   authenticate: authenticate,
   getViewStatus: getViewStatus,
   isWebGlSupported: isWebGlSupported,
-  render: render,
+//  render: render,
 }
 
 export default library
 
 ////////////////////////////////////////////
 
-function render({projectId, fileId, revisionId, provider}){
-  return http({
-    method: 'GET',
-    url: projectId
-    ? `/api/v1/sync/render/${projectId}/${fileId}`
-    : `/api/v1/remote/render/${provider}/${fileId}`,
-    params: {
-      revisionId: revisionId
-    }
-  })
-}
+//function render({projectId, fileId, revisionId, provider}){
+//  return http({
+//    method: 'GET',
+//    url: projectId
+//    ? `/api/v1/sync/render/${projectId}/${fileId}`
+//    : `/api/v1/remote/render/${provider}/${fileId}`,
+//    params: {
+//      revisionId: revisionId
+//    }
+//  })
+//}
 
 function authenticate(){
   return http({

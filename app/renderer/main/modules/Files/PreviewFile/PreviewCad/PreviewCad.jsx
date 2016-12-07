@@ -8,70 +8,33 @@ import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/
 import modelLocked    from 'app/renderer/assets/images/pure-vectors/model-locked.svg';
 import modelGear      from 'app/renderer/assets/images/pure-vectors/model-gear.svg';
 
-export default React.createClass({
-  checkStatusInterval: null,
+export const GetStatusOfUrn =  React.createClass({
   getInitialState () {
     return {
       status: 'pending',
-      urn: '',
-      token: '',
     }
   },
-    // Mounting
-  onMount (nextProps, prevProps) {
-    if(!prevProps || nextProps.fileMeta != prevProps.fileMeta){
-      this.init(nextProps);
-    }
+  checkStatusInterval: null,
+  componentDidMount() {
+    this.checkStatusInterval = setInterval(this.checkStatus, 700);
   },
-  componentDidMount() { this.onMount(this.props) },
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
-
   componentWillUnmount(){
     clearInterval(this.checkStatusInterval);
   },
-  init(props){
-    const { fileMeta } = props;
-
-    this.setState({status: 'pending'})
-    clearInterval(this.checkStatusInterval); // Clear interval if we re-init
-
-    if(previewCadUtils.isWebGlSupported()){
-      Promise.all([
-        previewCadUtils.render({
-          projectId  : fileMeta.project._id,
-          fileId     : fileMeta.fileId,
-          revisionId : fileMeta.revisionId,
-          provider   : fileMeta.provider,
-        }),
-        previewCadUtils.authenticate()
-      ]).then(response => {
-        // Apply to state
-        this.setState({urn: response[0].data.urn64, token: response[1].data.token});
-
-        // Begin to check status
-        this.checkStatusInterval = setInterval(this.checkStatus, 700);
-      }).catch(error => console.log(error))
-    }
-    else{
-      this.setState({status:'disabled'});
-    }
-  },
   checkStatus(){
-    previewCadUtils.getViewStatus(this.state.urn).then((response) =>{
+    previewCadUtils.getViewStatus(this.props.urn).then(response => {
       this.setState({status: response.data.status})
-      if(this.state.status == 'success'){
+      if(this.state.status == 'success' || this.state.status == 'failed'){
         clearInterval(this.checkStatusInterval)
       }
-      else if(this.state.status == 'failed'){
-        clearInterval(this.checkStatusInterval)
-      }
-    }).catch((error)=>{
+    }).catch(error=>{
       clearInterval(this.checkStatusInterval)
       this.setState({status: 'failed'})
     })
   },
   render() {
-    const { status, token, urn } = this.state;
+    const { urn, token } = this.props;
+    const { status } = this.state;
     if(status == 'success'){
       return <AutodeskViewer urn={urn} token={token} />
     }
@@ -84,6 +47,48 @@ export default React.createClass({
         </div>
       )
     }
+    else{
+      return <div className="rel-box flex"><LoadingOverlay show={true}>Conversion underway...</LoadingOverlay></div>
+    }
+  }
+})
+
+export default React.createClass({
+  getInitialState () {
+    return {
+      status: 'pending',
+      token: '',
+    }
+  },
+  onMount (nextProps, prevProps) {
+    if(!prevProps || nextProps.fileMeta != prevProps.fileMeta){
+      const { fileMeta, fileRender, renderFn } = nextProps;
+      this.setState({status: 'pending'})
+      if(previewCadUtils.isWebGlSupported()){
+        renderFn({
+          projectId  : fileMeta.project._id,
+          fileId     : fileMeta.fileId,
+          revisionId : fileMeta.revisionId,
+          provider   : fileMeta.provider,
+        });
+        previewCadUtils.authenticate().then(response => {
+          this.setState({token: response.data.token})
+        })
+      }
+      else{
+        this.setState({status:'disabled'});
+      }
+    }
+  },
+  componentDidMount() { this.onMount(this.props) },
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
+
+  render() {
+    const { fileRender } = this.props;
+    const { token, status } = this.state;
+    if(fileRender && fileRender.data && fileRender.data.urn64 && token){
+      return <GetStatusOfUrn urn={fileRender.data.urn64} token={token}/>
+    }
     else if(status == 'disabled'){
       return (
         <div className="layout-column layout-align-center-center flex text-center">
@@ -93,19 +98,15 @@ export default React.createClass({
         </div>
       )
     }
+    else if(fileRender && fileRender.error){
+      return (
+        <div className="layout-column layout-align-center-center flex">
+          <div className="text-title-5">{fileRender.error.message}</div>
+        </div>
+      )
+    }
     else{
-      const getText = () => {
-        if(status == 'pending'){
-          return 'Uploading to renderer...'
-        }
-        else if(status == 'inprogress'){
-          return 'Conversion in progress...'
-        }
-        else{
-          return
-        }
-      }
-      return <div className="rel-box flex"><LoadingOverlay show={true}>{getText()}</LoadingOverlay></div>
+      return <div className="rel-box flex"><LoadingOverlay show={true}>Uploading to renderer...</LoadingOverlay></div>
     }
   }
 })

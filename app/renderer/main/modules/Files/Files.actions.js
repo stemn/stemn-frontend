@@ -21,6 +21,24 @@ export function getFile({projectId, fileId, revisionId, provider}) {
   };
 }
 
+export function renderFile({projectId, fileId, revisionId, provider}) {
+  return {
+    type: 'FILES/RENDER_FILE',
+    payload: http({
+      method: 'GET',
+      url: projectId
+      ? `/api/v1/sync/render/${projectId}/${fileId}`
+      : `/api/v1/remote/render/${provider}/${fileId}`,
+      params: {
+        revisionId
+      }
+    }),
+    meta: {
+      cacheKey: `${fileId}-${revisionId}`
+    }
+  };
+}
+
 export function getMeta({projectId, fileId, revisionId, provider}) {
   return {
     type: 'FILES/GET_META',

@@ -28,7 +28,7 @@ import DownloadFile       from '../DownloadFile/DownloadFile.jsx'
 
 export const Component = React.createClass({
   render() {
-    const { file, fileData, project, filesActions, header } = this.props;
+    const { file, fileData, fileRender, project, filesActions, header } = this.props;
     const previewId = `${project._id}-${file.fileId}-${file.revisionId}`;
 
     const getPreview = () => {
@@ -40,7 +40,7 @@ export const Component = React.createClass({
         return <PreviewCode previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile}/>
       }
       else if(viewerType == 'autodesk'){
-        return <PreviewCad previewId={previewId} fileMeta={file} />
+        return <PreviewCad previewId={previewId} fileMeta={file} fileRender={fileRender} renderFn={filesActions.renderFile}/>
       }
       else if(viewerType == 'google'){
         return <div>Google</div>
@@ -82,7 +82,8 @@ export const Component = React.createClass({
 function mapStateToProps({files}, {project, file}) {
   const cacheKey = `${file.fileId}-${file.revisionId}`;
   return {
-    fileData: files.fileData[cacheKey],
+    fileData  : files.fileData[cacheKey],
+    fileRender: files.fileRenders[cacheKey],
   };
 }
 
