@@ -37,7 +37,6 @@ export const Component = React.createClass({
     }
   },
   getFiles({path, provider, projectId}) {
-      console.log(path);
     if(['dropbox', 'drive'].includes(provider)){
       this.props.FileListActions.exploreFolder({
         provider: provider,

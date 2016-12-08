@@ -39,9 +39,6 @@ export function createProject(project) {
         method: 'POST',
         url: `/api/v1/projects`,
         data: project
-      }).then((response)=>{
-        dispatch(push(`/project/${response.data._id}/settings`));
-        return response;
       })
     });
   }

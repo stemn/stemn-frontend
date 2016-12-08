@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as ProjectsActions from 'app/shared/actions/projects.js';
+import { push } from 'react-router-redux'
 import { actions } from 'react-redux-form';
 
 // Component Core
@@ -22,6 +23,7 @@ import Input from 'app/renderer/main/components/Input/Input/Input';
 import ProjectLinkRemote from 'app/renderer/main/components/Project/ProjectLinkRemote/ProjectLinkRemote.jsx'
 import { ArrowTabs, ArrowTab } from 'app/shared/modules/Tabs/ArrowTabs/ArrowTabs.jsx';
 import ProjectPermissionsRadio from 'app/renderer/main/components/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx'
+import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -29,28 +31,44 @@ export const Component = React.createClass({
   getInitialState () {
     return {
       tab: 1,
+      linkPending: false
     }
   },
   createProject(){
     this.props.projectsActions.createProject(pick(this.props.newProject, ['permissions', 'name', 'summary'])).then(response => {
+      const goToProject = () => {
+        this.props.dispatch(push(`/project/${response.value.data._id}/settings`));
+        this.props.modalHide();
+      }
       // Link the provider if we can.
       if(response.value.data._id && this.props.newProject.provider && this.props.newProject.root.path && this.props.newProject.root.fileId){
+        this.setState({linkPending: true})
         this.props.projectsActions.linkRemote({
           projectId : response.value.data._id,
           provider  : this.props.newProject.provider,
           path      : this.props.newProject.root.path,
           id        : this.props.newProject.root.fileId
+        }).then(()=>{
+          // After we have linked, we go to the project
+          this.setState({linkPending: false});
+          goToProject();
+        }).catch(() => {
+          // If the link fails, we still go to the project
+          this.setState({linkPending: false});
+          goToProject();
         })
       }
+      else{
+        goToProject();
+      }
     });
-    this.props.modalHide();
   },
   changeTab(tab){
     this.setState({ tab: tab })
   },
   render() {
     const { newProject, entityModel, modalCancel, modalHide } = this.props;
-    const { tab } = this.state;
+    const { tab, linkPending } = this.state;
 
     const namePanelTemplate = () => {
       return (
@@ -91,7 +109,7 @@ export const Component = React.createClass({
 
     const fileStoreTemplate = () => {
       return (
-        <div className={classes.panel}>
+        <div className={classes.panel + ' rel-box'}>
           <h3>Cloud Storage Folder</h3>
           <p>Select your project's cloud store location.</p>
           <ProjectLinkRemote
@@ -105,6 +123,7 @@ export const Component = React.createClass({
              model={`${entityModel}.root`}
              value={newProject.root || {}}
            />
+           <LoadingOverlay show={newProject.savePending || linkPending}/>
         </div>
       )
     }

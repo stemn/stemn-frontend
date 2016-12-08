@@ -36,8 +36,12 @@ class Component extends React.Component{
     }
   }
   render() {
-    const { project, system, systemActions } = this.props;
-    const baseLink = `project/${project && project.data ? project.data._id : ''}`;
+    const { project, system, children, systemActions } = this.props;
+    const baseLink    = `project/${project && project.data ? project.data._id : ''}`;
+    const isLoading   = !project || !project.data;
+    const isConnected = project && project.data && project.data.remote && project.data.remote.provider;
+    const hasName     = project && project.data && project.data.name;
+
     const downloadLinks = {
       drive   : 'https://tools.google.com/dlpage/drive/index.html',
       dropbox : 'https://www.dropbox.com/downloading'
@@ -62,30 +66,26 @@ class Component extends React.Component{
       }
     }
 
-    const isLoading = !project || !project.data;
-
-    const getInner = () => {
-      return (
+    return (
+      <div className="layout-column flex rel-box">
         <div className="layout-column flex">
-          <Header>{project.data ? project.data.name : ''}</Header>
+          <Header>{hasName ? project.data.name : ''}</Header>
           <Tabs size="lg">
             <Link activeClassName="active" to={baseLink} onlyActiveOnIndex={true}>Changes</Link>
             <Link activeClassName="active" to={baseLink+'/feed'}>Timeline</Link>
             <Link activeClassName="active" to={baseLink+'/tasks'}>Tasks</Link>
             <Link activeClassName="active" to={baseLink+'/settings'}>Settings</Link>
           </Tabs>
-          { project.data && project.data.remote && project.data.remote.provider
+          { isConnected
           ? missingClientBanner()
           : null }
-          <div className="layout-column flex rel-box">{this.props.children}</div>
+          <div className="layout-column flex rel-box">
+            { !isLoading
+            ? children
+            : null }
+            <LoadingOverlay show={isLoading}/>
+          </div>
         </div>
-      )
-    }
-
-    return (
-      <div className="layout-column flex rel-box">
-        <LoadingOverlay show={isLoading}/>
-        {!isLoading ? getInner() : null}
       </div>
     );
   }

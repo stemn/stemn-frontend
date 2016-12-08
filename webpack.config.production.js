@@ -40,7 +40,7 @@ const config = {
         test: /^((?!\.global).)*\.css$/,
         loader: ExtractTextPlugin.extract(
           'style-loader',
-          'css-loader?modules&importLoaders=1&localIdentName=[emoji:6]'
+          'css-loader?modules&importLoaders=1&localIdentName=[name]-[local]-[emoji:6]'
         ),
       },
     ],
