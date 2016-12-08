@@ -25,11 +25,14 @@ const Component = React.createClass({
       }
     }).then(response => {
       this.setState({
-        releaseNotes: `## Version ${version} \r\n ${response.data.body}\r\n\r\n [View All Release Notes](https://github.com/Stemn/Stemn-Desktop/releases)` ,
+        releaseNotes: `${response.data.body}` ,
         loading: false
       })
-    }).then(response => {
-      this.setState({ loading: false })
+    }).catch(response => {
+      this.setState({
+        releaseNotes: `Could not find any release notes for this version.` ,
+        loading: false
+      })
     })
   },
   render: function() {
@@ -38,12 +41,14 @@ const Component = React.createClass({
 
     return (
       <div style={{width: '600px'}}>
-        <div className="modal-title">Stemn Release Notes</div>
-        <div className="modal-body rel-box" style={{minHeight: '200px', paddingTop: '0px'}}>
+        <div className="modal-title">Version {version}</div>
+        <div className="modal-body rel-box" style={{minHeight: '200px'}}>
           <LoadingOverlay show={loading}/>
           <EditorDisplay value={releaseNotes}/>
         </div>
-        <div className="modal-footer-no-line layout-row layout-align-end">
+        <div className="modal-footer-no-line layout-row layout-align-start-center">
+          <a href="https://github.com/Stemn/Stemn-Desktop/releases" className="link-primary">View all release notes</a>
+          <div className="flex"></div>
           <Button className="primary" onClick={() => {modalHide()}}>Close</Button>
         </div>
       </div>

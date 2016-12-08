@@ -118,11 +118,11 @@ export const Component = React.createClass({
             <Toggle model="system.settings.usageData" value={system.settings.usageData}/>
           </div>
           <div className="layout-row layout-align-start-center">
-            <p className="flex" style={{margin: '10px 10px 10px 0'}}>Auto-update Stemn Desktop.</p>
+            <p className="flex" style={{margin: '10px 10px 10px 0'}} title="When auto-update is on, Stemn Desktop will check for updates (and begin downloading any updates) whenever the application starts.">Auto-update Stemn Desktop.</p>
             <Toggle model="system.settings.autoUpdate" value={system.settings.autoUpdate}/>
           </div>
           <div className="layout-row layout-align-start-center">
-            <p className="flex" style={{margin: '10px 10px 10px 0'}}>Debug mode (requires <a className="link-primary" onClick={electronWindowsActions.relaunch}>restart</a>)</p>
+            <p className="flex" style={{margin: '10px 10px 10px 0'}} title="Debug mode will cause info to be logged in the debug console. Press F11 or Ctrl+Shift+I to open the console.">Debug mode (requires <a className="link-primary" onClick={electronWindowsActions.relaunch}>restart</a>)</p>
             <Toggle model="system.settings.debug" value={system.settings.debug}/>
           </div>
         </div>
@@ -137,6 +137,16 @@ export const Component = React.createClass({
               <tr><td>Update</td><td>{autoUpdateMessage()}</td></tr>
             </SimpleTable>
           : null}
+        </div>
+
+        <div className={classes.panel}>
+          <h3>Report a bug</h3>
+          <p>Found a problem with Stemn Desktop? Report it and we'll fix it ASAP!</p>
+          <div className="layout-row layout-align-end">
+            <ProgressButton className="primary" href="https://github.com/Stemn/Stemn-Desktop/issues">
+              Report Bug
+            </ProgressButton>
+          </div>
         </div>
 
         <div className={classes.panel}>

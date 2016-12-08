@@ -81,7 +81,7 @@ export default React.createClass({
     }, 700)
   },
   render() {
-    const { children, onClick, loading, className } = this.props;
+    const { children, onClick, loading, className, href } = this.props;
     const { status, disabled, drawLoading, drawComplete } = this.state;
 
 
@@ -124,7 +124,9 @@ export default React.createClass({
           {[classes.error]   : status == 'error'},
           {[classes.success] : status == 'success'},
         )}>
-        <button onClick={() => {if(!disabled){onClick()}}}><span>{children}</span></button>
+        { href
+        ? <a href={href}><button><span>{children}</span></button></a>
+        : <button onClick={() => {if(!disabled){onClick()}}}><span>{children}</span></button>}
         <AnimateSvg draw={drawLoading}>{Progress}</AnimateSvg>
         { getIcon() }
       </div>
