@@ -38,6 +38,10 @@ const inputStyles = {
   borderRight: '1px solid rgb(234, 234, 234)',
   minWidth: '80px'
 }
+const toggleStyle = {
+  margin: '8px 10px 8px 0'
+};
+
 
 export const Component = React.createClass({
   componentDidMount() {
@@ -56,6 +60,7 @@ export const Component = React.createClass({
   },
   render() {
     const { system, autoLaunch, autoUpdate, autoLaunchActions, autoUpdateActions, systemActions, electronWindowsActions } = this.props;
+
 
     const autoUpdateMessage = () => {
       if(autoUpdate.checkingForUpdate){
@@ -82,7 +87,6 @@ export const Component = React.createClass({
 
     return (
       <div>
-
         { !system.installed && process.platform == 'linux' ? <Banner type="warn" style={{marginBottom: '15px'}}>Stemn Desktop is not properly installed and integrated with your Operating System. Some features will not work until you properly install the AppImage. Please restart Stemn Desktop and follow the prompts.</Banner> : null }
         <div className={classes.panel}>
           <h3>Cloud Providers</h3>
@@ -110,19 +114,19 @@ export const Component = React.createClass({
         <div className={classes.panel}>
           <h3>Other options</h3>
           <div className="layout-row layout-align-start-center">
-            <p className="flex" style={{margin: '10px 10px 10px 0'}}>Start Stemn Desktop on system startup.</p>
+            <p className="flex" style={toggleStyle}>Start Stemn Desktop on system startup.</p>
             <Toggle changeAction={autoLaunchActions.toggle} value={autoLaunch.status}/>
           </div>
           <div className="layout-row layout-align-start-center">
-            <p className="flex" style={{margin: '10px 10px 10px 0'}}>Help improve Stemn by sending usage data.</p>
+            <p className="flex" style={toggleStyle}>Help improve Stemn by sending usage data.</p>
             <Toggle model="system.settings.usageData" value={system.settings.usageData}/>
           </div>
           <div className="layout-row layout-align-start-center">
-            <p className="flex" style={{margin: '10px 10px 10px 0'}} title="When auto-update is on, Stemn Desktop will check for updates (and begin downloading any updates) whenever the application starts.">Auto-update Stemn Desktop.</p>
+            <p className="flex" style={toggleStyle} title="When auto-update is on, Stemn Desktop will check for updates (and begin downloading any updates) whenever the application starts.">Auto-update Stemn Desktop.</p>
             <Toggle model="system.settings.autoUpdate" value={system.settings.autoUpdate}/>
           </div>
           <div className="layout-row layout-align-start-center">
-            <p className="flex" style={{margin: '10px 10px 10px 0'}} title="Debug mode will cause info to be logged in the debug console. Press F11 or Ctrl+Shift+I to open the console.">Debug mode (requires <a className="link-primary" onClick={electronWindowsActions.relaunch}>restart</a>)</p>
+            <p className="flex" style={toggleStyle} title="Debug mode will cause info to be logged in the debug console. Press F11 or Ctrl+Shift+I to open the console.">Debug mode (requires <a className="link-primary" onClick={electronWindowsActions.relaunch}>restart</a>)</p>
             <Toggle model="system.settings.debug" value={system.settings.debug}/>
           </div>
         </div>

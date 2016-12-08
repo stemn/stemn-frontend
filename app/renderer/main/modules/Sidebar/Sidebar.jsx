@@ -74,16 +74,9 @@ export const Component = React.createClass({
       <DragResize side="right" width="300" widthRange={[0, 500]} animateHide={!this.props.sidebar.show} className="layout-column flex">
         <div className={sidebarStyle}>
           <div className={styles.sidebarToolbar + ' layout-row layout-align-start-center'}>
-            <PopoverMenu preferPlace="below">
-              <div>
-                <SimpleIconButton style={{padding: '0px', color: 'black'}} title="Create new project">
-                  <MdAdd size="25"/>
-                </SimpleIconButton>
-              </div>
-              <div className="PopoverMenu">
-                <a onClick={this.showProjectNewModal}>Create New Project</a>
-              </div>
-            </PopoverMenu>
+            <SimpleIconButton style={{padding: '0px', color: 'black'}} title="Create new project" onClick={this.showProjectNewModal}>
+              <MdAdd size="25"/>
+            </SimpleIconButton>
             <div className="flex" />
             <SimpleIconButton title="Toggle sidebar" style={{padding: '0px', color: 'black'}} onClick={()=>{this.props.sidebarActions.toggleSidebar();}}>
               <MdMenu size="25"/>
