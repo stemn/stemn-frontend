@@ -37,4 +37,9 @@ export const quit = () => {
   app.quit();
 }
 
+export const relaunch = () => {
+  app.relaunch();
+  app.exit(0)
+}
+
 

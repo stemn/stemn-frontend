@@ -5,6 +5,7 @@ import fs             from 'fs';
 import os             from 'os';
 import ini            from 'ini';
 import { zipObject }  from 'lodash';
+import log from 'electron-log';
 
 const parseWindowsEnvVariable = (path) => path.replace(/%([^%]+)%/g, (_, variable) => process.env[variable]);
 
@@ -43,10 +44,15 @@ const paths = {
       });
     },
     dropbox : (platform, callback) => {
+      log.info('Provider Path Dropbox')
       return fs.readFile(dbPaths.dropbox[platform], { encoding : 'utf8' }, (err, data) => {
+        log.info('err', err)
+        log.info('data', data)
         const readDatabase = () => {
           const config = JSON.parse(data);
+          console.log('config', config);
           const account = config.personal || config.business;
+          console.log('account', account);
           return account.path;
         }
         return err

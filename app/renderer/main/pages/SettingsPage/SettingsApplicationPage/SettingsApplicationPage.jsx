@@ -8,6 +8,7 @@ import * as StateActions from 'app/shared/actions/state';
 import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 import * as AutoLaunchActions from 'app/shared/modules/AutoLaunch/AutoLaunch.actions.js';
 import * as AutoUpdateActions from 'app/shared/modules/AutoUpdate/AutoUpdate.actions.js';
+import * as ElectronWindowsActions from 'app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
 
 // Component Core
 import React from 'react';
@@ -54,7 +55,7 @@ export const Component = React.createClass({
     })
   },
   render() {
-    const { system, autoLaunch, autoUpdate, autoLaunchActions, autoUpdateActions, systemActions } = this.props;
+    const { system, autoLaunch, autoUpdate, autoLaunchActions, autoUpdateActions, systemActions, electronWindowsActions } = this.props;
 
     const autoUpdateMessage = () => {
       if(autoUpdate.checkingForUpdate){
@@ -121,7 +122,7 @@ export const Component = React.createClass({
             <Toggle model="system.settings.autoUpdate" value={system.settings.autoUpdate}/>
           </div>
           <div className="layout-row layout-align-start-center">
-            <p className="flex" style={{margin: '10px 10px 10px 0'}}>Debug mode (requires restart)</p>
+            <p className="flex" style={{margin: '10px 10px 10px 0'}}>Debug mode (requires <a className="link-primary" onClick={electronWindowsActions.relaunch}>restart</a>)</p>
             <Toggle model="system.settings.debug" value={system.settings.debug}/>
           </div>
         </div>
@@ -171,6 +172,7 @@ function mapDispatchToProps(dispatch) {
     modalActions: bindActionCreators(ModalActions, dispatch),
     autoLaunchActions: bindActionCreators(AutoLaunchActions, dispatch),
     autoUpdateActions: bindActionCreators(AutoUpdateActions, dispatch),
+    electronWindowsActions: bindActionCreators(ElectronWindowsActions, dispatch),
   }
 }
 

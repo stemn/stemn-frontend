@@ -37,7 +37,6 @@ export default function configureStore(initialState) {
 //      )
 //    ));
 
-
   const rootReducer = getRootReducerRenderer();
   const enhancer    = compose(...enhanced);
   const store       = createStore(rootReducer, initialState, enhancer);

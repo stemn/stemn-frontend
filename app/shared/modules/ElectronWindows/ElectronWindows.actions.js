@@ -40,3 +40,13 @@ export function quit() {
     }
   }
 }
+
+export function relaunch() {
+  return {
+    type: 'ELECTRON_WINDOWS/RELAUNCH',
+    aliased: true,
+    payload: {
+      functionAlias: 'ElectronWindowsUtils.relaunch'
+    }
+  }
+}
