@@ -76,10 +76,11 @@ export const Component = React.createClass({
 
   render: function () {
     const imgStyle = {
-      maxWidth: '130px',
-      maxHeight: '130px',
+      width: '130px',
+      height: '130px',
       borderRadius: '50%',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      position: 'relative'
     }
     const {upload, style, className, model, value} = this.props;
 
@@ -92,14 +93,14 @@ export const Component = React.createClass({
           disableClick={false}
           multiple={false}>
           <div className="layout-row layout-align-start-start">
-            {upload && upload.files && upload.files.length > 0
-              ?
-              <div className="layout-row layout-align-start-center">
+            { upload && upload.files && upload.files.length > 0
+            ? <div className="layout-row layout-align-start-center">
                 {upload.files.map((file, index) =>
-                  <a key={index} className="rel-box" style={imgStyle}>
+                  <a key={index} style={imgStyle}>
                     <img style={{width: '100%', height: '100%'}} src={file.path ? `https://stemn.com${file.path}` : file.preview} />
                     { upload.loading ? null : <UploadOverlay /> }
                     <LoadingOverlay 
+                      progress={upload.percentage}
                       show={upload.loading} 
                       size="sm"
                       background="rgba(255, 255, 255, 0.8)"
@@ -107,7 +108,7 @@ export const Component = React.createClass({
                   </a>
                 )}
               </div>
-              : null
+            : <a style={imgStyle}><UploadOverlay /></a>
             }
           </div>
         </Dropzone>
@@ -115,6 +116,8 @@ export const Component = React.createClass({
     );
   }
 });
+
+
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////

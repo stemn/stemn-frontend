@@ -33,7 +33,7 @@ export default React.createClass({
 //    console.log('end-loading');
   },
   render() {
-    const { size, show, children, style, linear, hideBg, background } = this.props; // size == 'xs' || 'sm'
+    const { size, show, children, style, linear, hideBg, background, progress } = this.props; // size == 'xs' || 'sm'
     const { loading } = this.state;
 
     const transitionName = {
@@ -64,7 +64,7 @@ export default React.createClass({
             { linear
             ? <LoadingLinear />
             : <div className={classes.loaderContainer}>
-                <LoadingSpinner size={size}/>
+                <LoadingSpinner size={size} progress={progress}/>
                 {children ? <div className={classes.text}>{children}</div> : null}
               </div>
             }

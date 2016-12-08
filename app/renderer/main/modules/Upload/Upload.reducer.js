@@ -7,6 +7,9 @@ export default function reducer(state = initialState, action = {}) {
     case 'UPLOAD/INIT':
       return i.assocIn(state, [action.payload.cacheKey, 'files'], action.payload.files)
 
+    case 'UPLOAD/PROGRESS':
+      return i.assocIn(state, [action.meta.cacheKey, 'percentage'], action.payload.percentage)
+
     case 'UPLOAD/UPLOAD_PENDING':
       return i.assocIn(state, [action.meta.cacheKey], {
         files: action.meta.files,

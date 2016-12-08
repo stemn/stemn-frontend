@@ -11,12 +11,25 @@
   padding-top: 100%;
 }
 
-.circular {
+.animate .circular{
   -webkit-animation: rotate 2s linear infinite;
           animation: rotate 2s linear infinite;
+}
+.animate .path{
+  -webkit-animation: dash 1.5s ease-in-out infinite;
+          animation: dash 1.5s ease-in-out infinite;
+}
+
+.progress .circular{
+  transform: rotate(-90deg);
+}
+.progress .path{
+  transition: 0.1s ease all;
+}
+
+.circular {
   height: 100%;
-  -webkit-transform-origin: center center;
-          transform-origin: center center;
+  transform-origin: center center;
   width: 100%;
   position: absolute;
   top: 0;
@@ -29,14 +42,7 @@
 .path {
   stroke-dasharray: 1, 200;
   stroke-dashoffset: 0;
-/*
-  -webkit-animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
-          animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
-*/
-  -webkit-animation: dash 1.5s ease-in-out infinite;
-        animation: dash 1.5s ease-in-out infinite;
   stroke: primary;
-
   stroke-linecap: round;
 }
 
@@ -79,37 +85,5 @@
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -124px;
-  }
-}
-@-webkit-keyframes color {
-  100%,
-  0% {
-    stroke: primary;
-  }
-  40% {
-    stroke: secondary;
-  }
-  66% {
-    stroke: primary;
-  }
-  80%,
-  90% {
-    stroke: secondary;
-  }
-}
-@keyframes color {
-  100%,
-  0% {
-    stroke: primary;
-  }
-  40% {
-    stroke: secondary;
-  }
-  66% {
-    stroke: primary;
-  }
-  80%,
-  90% {
-    stroke: secondary;
   }
 }
