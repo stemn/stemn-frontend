@@ -19,7 +19,9 @@ export default function configureStore(initialState) {
     forwardToRendererWindow,
     routerMiddleware(hashHistory),
   ];
-  if(process.env.NODE_ENV == 'development') {
+
+  // If we are in development || we have debug mode on
+  if(process.env.NODE_ENV == 'development' || initialState.system.settings.debug) {
      middleware.push(createLogger({
       level: 'info',
       collapsed: true,

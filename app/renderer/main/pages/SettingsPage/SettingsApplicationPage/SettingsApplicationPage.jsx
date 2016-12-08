@@ -120,6 +120,10 @@ export const Component = React.createClass({
             <p className="flex" style={{margin: '10px 10px 10px 0'}}>Auto-update Stemn Desktop.</p>
             <Toggle model="system.settings.autoUpdate" value={system.settings.autoUpdate}/>
           </div>
+          <div className="layout-row layout-align-start-center">
+            <p className="flex" style={{margin: '10px 10px 10px 0'}}>Debug mode (requires restart)</p>
+            <Toggle model="system.settings.debug" value={system.settings.debug}/>
+          </div>
         </div>
         <div className={classes.panel}>
           <h3>Application info</h3>

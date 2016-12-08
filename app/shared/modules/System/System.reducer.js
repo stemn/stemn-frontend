@@ -10,7 +10,8 @@ const initialState = {
   },
   settings: {
     usageData: true,
-    autoUpdate: true
+    autoUpdate: true,
+    debug: false,
   },
 };
 
