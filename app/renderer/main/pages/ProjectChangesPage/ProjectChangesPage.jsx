@@ -11,7 +11,7 @@ import * as WalkthroughActions from 'app/shared/modules/Walkthrough/Walkthrough.
 import React from 'react';
 
 import i from 'icepick';
-import { has } from 'lodash';
+import { has, some } from 'lodash';
 
 // Styles
 import classNames from 'classnames';
@@ -141,6 +141,7 @@ export const Component = React.createClass({
     }
 
     const showChangesTemplate = () => {
+      const validItemIsSelected = some(changes.data, item => changes.selected && item._id == changes.selected._id);
       return (
         <div className="layout-column flex rel-box">
           <div className="layout-row flex">
@@ -172,7 +173,7 @@ export const Component = React.createClass({
               </ContentSidebar>
             </div>
             <div className="layout-column flex">
-              {changes.selected && changes.selected.data
+              { validItemIsSelected
                 ? <FileCompare
                     compareId={`changes-${project.data._id}-${changes.selected._id}`}
                     project={project.data}

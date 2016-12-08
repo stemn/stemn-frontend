@@ -30,7 +30,7 @@ export const NewItem = React.createClass({
   }
 });
 
-export const Component = React.createClass({
+export const TaskList = React.createClass({
   moveGroup({group, destinationGroup, after, save}) {
     this.props.TasksActions.moveGroup({
       boardId: this.props.board.data._id,
@@ -125,6 +125,7 @@ export const Component = React.createClass({
                     <TaskListItemWrapped
                       index={cardIndex}
                       id={taskId}
+                      key={taskId}
                       item={taskId}
                       groupId={group._id}
                       tasks={group.tasks}
@@ -173,4 +174,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component)
+export default connect(mapStateToProps, mapDispatchToProps)(TaskList)

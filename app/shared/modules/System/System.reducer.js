@@ -20,8 +20,8 @@ function reducer(state, action) {
       return {
         ...state,
         providerPath: {
-          dropbox: action.payload.dropbox,
-          drive: action.payload.drive
+          dropbox : action.payload.dropbox,
+          drive   : action.payload.drive
         }
       };
     }

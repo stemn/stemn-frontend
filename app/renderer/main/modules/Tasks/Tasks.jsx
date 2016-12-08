@@ -39,7 +39,7 @@ const layouts = [{
 
 
 
-export const Component = React.createClass({
+export const Tasks = React.createClass({
   getInitialState () {
     return {
       hideGuide: false,
@@ -170,4 +170,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps, mapDispatchToProps)(Tasks);

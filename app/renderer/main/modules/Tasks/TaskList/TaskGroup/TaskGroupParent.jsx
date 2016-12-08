@@ -4,7 +4,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import FlipMove from 'react-flip-move';
 
 @DragDropContext(HTML5Backend)
-export default class Container extends React.Component {
+export default class TaskGroupParent extends React.Component {
   render() {
     const { children, layout } = this.props;
     return (

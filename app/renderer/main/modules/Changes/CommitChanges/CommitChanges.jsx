@@ -28,7 +28,7 @@ export default React.createClass({
   render(){
     const { changes, project, toggleAll, refresh, selectedFileChange, deselect, loading, dispatch } = this.props;
     const groupedChanges = groupRevisions(changes.data);
-    const allChecked = getToggleAllStatus(groupedChanges, changes.checked);
+    const allChecked     = getToggleAllStatus(groupedChanges, changes.checked);
 //    ,{
 //      label: 'Filter: All Changes',
 //    },{

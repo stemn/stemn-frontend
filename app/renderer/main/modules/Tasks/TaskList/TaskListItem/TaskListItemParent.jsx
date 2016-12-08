@@ -2,7 +2,7 @@ import React from 'react';
 import EmptyWrapped from './EmptyWrapped.jsx';
 import FlipMove from 'react-flip-move';
 
-export default class Container extends React.Component {
+export default class TaskListItemParent extends React.Component {
   render() {
     const { groupId, tasks, children, moveCard, layout } = this.props;
     return (

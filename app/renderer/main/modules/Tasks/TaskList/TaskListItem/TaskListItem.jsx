@@ -62,7 +62,7 @@ export const DueDate = React.createClass({
 });
 
 
-export const Component = React.createClass({
+export const TaskListItem = React.createClass({
   // Mounting
   onMount(nextProps, prevProps) {
     if(!prevProps || prevProps.item != nextProps.item){
@@ -239,4 +239,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskListItem);

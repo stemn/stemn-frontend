@@ -106,6 +106,7 @@ export const Component = React.createClass({
                   queryModel={`${timelineModel}.query`}
                   refresh={this.refresh}
                   deselect={this.deselect}
+                  toChanges={baseLink}
                 />
               </ContentSidebar>
             </div>

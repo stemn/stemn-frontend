@@ -14,7 +14,7 @@ const cardTarget = {
 @DropTarget(ItemTypes.CARD, cardTarget, connect => ({
   connectDropTarget: connect.dropTarget()
 }))
-export default class Card extends Component {
+export default class EmptyWrapped extends Component {
   static propTypes = {
     connectDropTarget: PropTypes.func.isRequired,
   };

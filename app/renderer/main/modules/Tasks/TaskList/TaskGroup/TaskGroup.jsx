@@ -6,7 +6,7 @@ import MdMoreHoriz from 'react-icons/md/more-horiz';
 import Input from 'app/renderer/main/components/Input/Input/Input';
 
 import classes from './TaskGroup.css'
-export default class Component extends React.Component {
+export default class TaskGroup extends React.Component {
   render() {
     const { item, children, layout, entityModel, deleteGroup, updateGroup, simpleGroup } = this.props;
 

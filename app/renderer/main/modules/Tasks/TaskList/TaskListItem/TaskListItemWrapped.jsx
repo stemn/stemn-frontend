@@ -22,7 +22,7 @@ const cardTarget = {
   connectDragPreview: connect.dragPreview(),
   isDragging: monitor.isDragging()
 }))
-export default class Card extends Component {
+export default class TaskListItemWrapped extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
     connectDropTarget: PropTypes.func.isRequired,

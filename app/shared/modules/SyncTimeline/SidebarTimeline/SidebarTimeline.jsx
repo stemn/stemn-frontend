@@ -13,6 +13,7 @@ import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconBut
 import MdMoreHoriz from 'react-icons/md/more-horiz';
 import { every } from 'lodash';
 import StringFilterMenu from 'app/renderer/main/modules/StringFilter/StringFilterMenu.jsx';
+import { Link } from 'react-router';
 
 
 const eventFilter = [{
@@ -49,7 +50,8 @@ export default React.createClass({
     }
   },
   render() {
-    const { selected, items, loading, onSelect, query, queryModel, refresh, deselect } = this.props;
+    const { selected, items, loading, onSelect, query, queryModel, refresh, deselect, toChanges } = this.props;
+
     const filteredItems = this.filterItems(items, query);
     return (
       <div className="layout-column flex">
@@ -82,7 +84,7 @@ export default React.createClass({
             <div className="flex" onClick={deselect} style={{minHeight: '60px'}}></div>
           </div>
           )
-          : <div className="layout-column layout-align-center-center text-title-4 flex">No Feed items yet</div>
+          : <div className="layout-column layout-align-center-center text-title-4 flex">No Feed items yet.<br/><Link className="link-primary" to={toChanges}>Create a commit.</Link></div>
         }
         <LoadingOverlay show={loading} linear={true} hideBg={true} />
       </div>
