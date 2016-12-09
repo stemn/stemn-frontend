@@ -41,7 +41,9 @@ export const Component = React.createClass({
     }
   },
   render() {
-    const { entityModel, project, path, ProjectsActions, dispatch } = this.props;
+    const { entityModel, project, path, files, ProjectsActions, dispatch } = this.props;
+    
+    console.log(files);
     const options = {};
     if(project && project.data && project.data._id){
       return (

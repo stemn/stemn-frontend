@@ -74,7 +74,7 @@ export const Component = React.createClass({
 
     const displayResults = () => {
       const filesFiltered = options.foldersOnly && has(files, 'entries') > 0 ? files.entries.filter(file => file.type == 'folder') : files.entries;
-      const filesOrdered  = orderBy(filesFiltered, file => file.type == 'folder', 'desc');
+      const filesOrdered  = orderBy(filesFiltered, ['type', 'name'], ['desc', 'asc']);
       if(filesOrdered && filesOrdered.length > 0){
         return filesOrdered.map((file)=><FileRow key={file.fileId} file={file} singleClick={singleClickFn} doubleClick={doubleClickFn} isActive={selected && selected.fileId == file.fileId}/>)
       }
