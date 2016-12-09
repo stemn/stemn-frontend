@@ -74,7 +74,7 @@ class Component extends React.Component{
             <Link activeClassName="active" to={baseLink} onlyActiveOnIndex={true}>Changes</Link>
             <Link activeClassName="active" to={baseLink+'/feed'}>Timeline</Link>
             <Link activeClassName="active" to={baseLink+'/tasks'}>Tasks</Link>
-            <Link activeClassName="active" to={baseLink+'/files'}>Files</Link>
+            <Link activeClassName="active" to={baseLink+'/files/ '}>Files</Link>
             <div className="flex"></div>
             <Link activeClassName="active" to={baseLink+'/settings'}>Project Settings</Link>
           </Tabs>
