@@ -3,6 +3,10 @@
 .row{
   border-bottom: 1px solid border1;
   padding: 7px;
+  cursor: default;
+}
+.row:last-child{
+  border-bottom: none;
 }
 .row:hover{
   background: bg1;

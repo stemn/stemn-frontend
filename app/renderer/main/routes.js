@@ -21,6 +21,7 @@ import SettingsApplicationPage     from './pages/SettingsPage/SettingsApplicatio
 import HomePage                    from './pages/HomePage/HomePage.jsx';
 import DashboardPage               from './pages/DashboardPage/DashboardPage.jsx';
 import ProjectPage                 from './pages/ProjectPage/ProjectPage.container.js';
+import ProjectFilesPage            from './pages/ProjectPage/ProjectFilesPage/ProjectFilesPage.jsx';
 import ProjectSettingsPage         from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.jsx';
 import ProjectSettingsGeneralPage  from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsGeneralPage/ProjectSettingsGeneralPage.jsx';
 import ProjectSettingsTasksPage    from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsTasksPage/ProjectSettingsTasksPage.jsx';
@@ -36,6 +37,7 @@ export default (store) => {
           <IndexRoute                                component={ProjectChangesPage} />
           <Route path="feed"                         component={ProjectFeedPage}/>
           <Route path="tasks"                        component={ProjectTaskPage}/>
+          <Route path="files"                        component={ProjectFilesPage}/>
           <Route path="settings"                     component={ProjectSettingsPage}>
             <IndexRoute                              component={ProjectSettingsGeneralPage} />
             <Route path="tasks"                      component={ProjectSettingsTasksPage} />
