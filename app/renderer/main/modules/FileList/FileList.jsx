@@ -13,11 +13,11 @@ import classNames from 'classnames';
 import classes from './FileList.css'
 
 // Sub Components
-import FileBreadCrumbs from './components/FileBreadCrumbs';
-import FileRow from './components/FileRow';
-import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import MdRefresh from 'react-icons/md/refresh';
-import MdHome from 'react-icons/md/home';
+import FileBreadCrumbs  from './components/FileBreadCrumbs';
+import FileRow          from './components/FileRow';
+import LoadingOverlay   from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import MdRefresh        from 'react-icons/md/refresh';
+import MdHome           from 'react-icons/md/home';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 
 /////////////////////////////////////////////////////////////////////////////

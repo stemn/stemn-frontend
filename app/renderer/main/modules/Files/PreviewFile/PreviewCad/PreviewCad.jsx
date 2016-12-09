@@ -7,7 +7,7 @@ import AutodeskViewer from './AutodeskViewer/AutodeskViewer';
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import modelLocked    from 'app/renderer/assets/images/pure-vectors/model-locked.svg';
 import modelGear      from 'app/renderer/assets/images/pure-vectors/model-gear.svg';
-import PreviewExpired from '../PreviewExpired/PreviewExpired.jsx';
+import ErrorMessages  from '../Messages/Messages.jsx'
 
 export const GetStatusOfUrn =  React.createClass({
   getInitialState () {
@@ -100,16 +100,7 @@ export default React.createClass({
       )
     }
     else if(fileRender && fileRender.error){
-      if(fileRender.error.type == 'REVISION_NOT_FOUND'){
-        return <PreviewExpired provider={fileMeta.provider}/>
-      }
-      else{
-        return (
-          <div className="layout-column layout-align-center-center flex">
-            <div className="text-title-5">{fileRender.error.message}</div>
-          </div>
-        )
-      }
+      return <ErrorMessages error={fileRender.error} fileMeta={fileMeta}/>
     }
     else{
       return <div className="rel-box flex"><LoadingOverlay show={true}>Uploading to renderer...</LoadingOverlay></div>

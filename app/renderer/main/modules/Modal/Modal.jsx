@@ -27,7 +27,8 @@ import TaskLabelsEditModal    from 'app/renderer/main/modules/Tasks/TaskLabelsEd
 import TaskMentionModal       from 'app/renderer/main/modules/Mentions/TaskMentionModal/TaskMentionModal.jsx'
 import ProjectNewModal        from 'app/renderer/main/modules/Projects/ProjectNewModal/ProjectNewModal.jsx'
 import FileDownload           from 'app/renderer/main/modules/Files/Download/DownloadModal/DownloadModal.jsx'
-import PreviewExpired         from 'app/renderer/main/modules/Files/PreviewFile/PreviewExpired/PreviewExpiredModal.jsx'
+import PreviewExpired         from 'app/renderer/main/modules/Files/PreviewFile/Messages/PreviewExpired/PreviewExpiredModal.jsx'
+import AssemblyPartNotFound   from 'app/renderer/main/modules/Files/PreviewFile/Messages/AssemblyPartNotFound/AssemblyPartNotFoundModal.jsx'
   
 
 const modalComponents = {
@@ -43,7 +44,8 @@ const modalComponents = {
   'PROVIDER_ACCESS_REVOKED' : ProviderAccessRevoked,
   'RELEASE_NOTES'           : ReleaseNotesModal,
   'FILE_DOWNLOAD'           : FileDownload,
-  'PREVIEW_EXPIRED'         : PreviewExpired
+  'PREVIEW_EXPIRED'         : PreviewExpired,
+  'ASSEMBLY_PART_NOT_FOUND' : AssemblyPartNotFound,
 }
 
 /////////////////////////////////////////////////////////////////////////////

@@ -1,12 +1,7 @@
 // Component Core
 import React from 'react';
-
 import Button from 'app/renderer/main/components/Buttons/Button/Button'
-
-import MagnifyInternet   from 'app/renderer/assets/images/pure-vectors/magnify-internet.svg';
 import StandardTable from 'app/shared/modules/Tables/StandardTable/StandardTable.jsx'
-
-// Styles
 import classNames from 'classnames';
 
 const Component = React.createClass({
