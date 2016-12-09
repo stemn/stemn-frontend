@@ -182,7 +182,7 @@ export const Component = React.createClass({
                 : (
                 <div className="layout-column layout-align-center-center flex text-title-4 text-center">
                   <img src={file} style={{width: '100px'}}/>
-                  <div>No file change selected.</div>
+                  <div>No file change selected</div>
                 </div>)
               }
             </div>
