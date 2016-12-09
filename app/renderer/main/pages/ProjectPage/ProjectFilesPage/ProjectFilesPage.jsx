@@ -36,10 +36,7 @@ export const Component = React.createClass({
       }))
     }else{
       dispatch(push({
-        pathname   : `project/${project.data._id}/files`,
-        query      : {
-          path     : file.fileId
-        }
+        pathname   : `project/${project.data._id}/files/${file.fileId}`,
       }))
     }
   },
@@ -74,7 +71,7 @@ export const Component = React.createClass({
 
 function mapStateToProps({ projects, projectSettings, fileList }, { params, location }) {
   const projectId   = params.stub;
-  const path        = location.query.path;
+  const path        = params.path;
   const project     = projects.data[projectId]
   const entityModel = `projects.data.${projectId}`;
   const files       = fileList[`${projectId}-${path}`];
