@@ -15,8 +15,8 @@ export const AssemblyPartNotFound = React.createClass({
       <div className="layout-column layout-align-center-center flex text-center">
         <div style={{maxWidth: '300px'}}>
           <img style={{width: '100px'}} src={modelLocked}/>
-          <div className="text-title-4" style={{marginBottom: '10px'}}>Part could not be found</div>
-          <div className="text-title-5">Assembly rendering is Beta.<br/><a className="link-primary" onClick={openModal}>Learn more.</a></div>
+          <div className="text-title-4" style={{marginBottom: '10px'}}>Assembly part could not be found!</div>
+          <div className="text-title-5">Assembly rendering is Beta.<br/><a className="link-primary" onClick={openModal}>Help us fix it.</a></div>
         </div>
       </div>
     )
