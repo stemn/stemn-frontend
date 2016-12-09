@@ -1,0 +1,9 @@
+@value border1, bg1 from "app/renderer/assets/css/themes/standard.css";
+
+.container{
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.01);
+}
+.files{
+  border: 1px solid border1;
+}

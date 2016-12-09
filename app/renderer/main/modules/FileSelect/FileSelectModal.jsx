@@ -35,24 +35,17 @@ const propTypesObject = {
 
 export const FileSelectModal = React.createClass({
   propTypes: propTypesObject,
-  componentWillMount() {
-    if(!this.props.fileSelect){
-      this.props.FileSelectActions.init({
-        storeKey: this.props.storeKey,
-        path: this.props.path
-      })
-    }
-  },
-
-  componentWillReceiveProps(nextProps) {
+  componentWillMount() { this.onMount(this.props) },
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
+  onMount(nextProps, prevProps) {
     if(!nextProps.fileSelect){
-      this.props.FileSelectActions.init({
+      nextProps.FileSelectActions.init({
         storeKey: nextProps.storeKey,
         path: nextProps.path
       })
     }
-  },
 
+  },
   singleClickFn({file}){
     if(file.type == 'file' || this.props.options.allowFolder && file.type == 'folder'){
       this.props.FileSelectActions.select({
@@ -87,7 +80,6 @@ export const FileSelectModal = React.createClass({
       path: file.fileId
     })
   },
-
   submit(){
     this.props.dispatch(actions.change(this.props.model, {
       fileId : this.props.fileSelect.selected.fileId,
@@ -101,7 +93,6 @@ export const FileSelectModal = React.createClass({
   },
   render() {
     const { projectId, path, fileSelect, options } = this.props;
-
 
     const validatePath = (path, provider) => {
       if(provider == 'drive'){
@@ -118,7 +109,6 @@ export const FileSelectModal = React.createClass({
 
     return (
       <div style={{width: '600px'}}>
-        {/*<div className="modal-title">Select Folder</div>*/}
         {fileSelect
         ? <FileList
             projectId={projectId}
@@ -128,6 +118,7 @@ export const FileSelectModal = React.createClass({
             crumbClickFn={this.crumbClickFn}
             selected={fileSelect.selected}
             options={options}
+            contentStyle={{height: '300px', overflowY: 'auto'}}
           />
         : null
         }
@@ -152,13 +143,9 @@ export const FileSelectModal = React.createClass({
 ///////////////////////////////// CONTAINER /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({fileSelect}, {projectId, path, storeKey, options}) {
+function mapStateToProps({fileSelect}, {storeKey}) {
   return {
     fileSelect: fileSelect[storeKey],
-    projectId,
-    storeKey,
-    path,
-    options
   };
 }
 
