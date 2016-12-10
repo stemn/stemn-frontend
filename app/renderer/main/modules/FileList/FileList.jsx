@@ -21,6 +21,13 @@ import MdRefresh        from 'react-icons/md/refresh';
 import MdHome           from 'react-icons/md/home';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 
+
+const contextIdentifier     = 'FileListCm';
+import { ContextMenuLayer } from "react-contextmenu";
+import ContextMenu          from 'app/renderer/main/modules/ContextMenu/ContextMenu.jsx';
+import FileListMenu         from './FileList.menu.js';
+const FileRowContext        = ContextMenuLayer(contextIdentifier, props => props.file)(FileRow)
+
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 const propTypesObject = {
@@ -36,7 +43,8 @@ const propTypesObject = {
     foldersOnly : React.PropTypes.bool,
     explore     : React.PropTypes.string,         // Optional: 'dropbox' || 'drive' - The provider
   }),
-  FileListActions      : PropTypes.object,        // Actions
+  FileListActions : PropTypes.object,      // Actions
+  dispatch        : PropTypes.func,        // Actions
 };
 
 
@@ -69,14 +77,22 @@ export const Component = React.createClass({
   },
 
   render() {
-    const { files, singleClickFn, doubleClickFn, crumbClickFn, selected, options, path, projectId } = this.props;
+    const { files, singleClickFn, doubleClickFn, crumbClickFn, selected, options, path, projectId, dispatch } = this.props;
     const { contentStyle } = this.props;
 
     const displayResults = () => {
       const filesFiltered = options.foldersOnly && has(files, 'entries') > 0 ? files.entries.filter(file => file.type == 'folder') : files.entries;
       const filesOrdered  = orderBy(filesFiltered, ['type', 'name'], ['desc', 'asc']);
       if(filesOrdered && filesOrdered.length > 0){
-        return filesOrdered.map((file)=><FileRow key={file.fileId} file={file} singleClick={singleClickFn} doubleClick={doubleClickFn} isActive={selected && selected.fileId == file.fileId}/>)
+        return filesOrdered.map(file => (
+          <FileRowContext
+            key={file.fileId}
+            file={file}
+            singleClick={singleClickFn}
+            doubleClick={doubleClickFn}
+            isActive={selected && selected.fileId == file.fileId}
+          />
+        ))
       }
       else{
         return <div style={{padding: '15px'}}>No results</div>
@@ -107,6 +123,7 @@ export const Component = React.createClass({
         <div className="rel-box" style={contentStyle}>
           <LoadingOverlay show={isLoading} linear={true} hideBg={true}/>
           {!isLoading ? displayResults() :  ''}
+          <ContextMenu identifier={contextIdentifier} menu={FileListMenu(dispatch)}/>
         </div>
       </div>
     );
@@ -125,6 +142,7 @@ function mapStateToProps({fileList}, {projectId, path, options}) {
 function mapDispatchToProps(dispatch) {
   return {
     FileListActions: bindActionCreators(FileListActions, dispatch),
+    dispatch
   }
 }
 

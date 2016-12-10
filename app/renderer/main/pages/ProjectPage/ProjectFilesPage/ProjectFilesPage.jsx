@@ -17,6 +17,7 @@ import classes from './ProjectFilesPage.css'
 
 // Sub Components
 import FileList from 'app/renderer/main/modules/FileList/FileList';
+import Readme from 'app/renderer/main/modules/Files/Readme/Readme.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -42,8 +43,6 @@ export const Component = React.createClass({
   },
   render() {
     const { entityModel, project, path, files, ProjectsActions, dispatch } = this.props;
-    
-    console.log(files);
     const options = {};
     if(project && project.data && project.data._id){
       return (
@@ -57,6 +56,9 @@ export const Component = React.createClass({
             crumbClickFn={this.fileFolderClick}
             options={options}
           />
+          { files && files.entries
+          ? <Readme files={files.entries}/>
+          : null }
         </div>
       );
     }
