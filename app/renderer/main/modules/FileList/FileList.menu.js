@@ -7,7 +7,7 @@ export default (dispatch) => {
     onClick: (file)=>{
       dispatch(SystemActions.openFile({
         path      : file.path,
-        projectId : file.project,
+        projectId : file.project._id,
         provider  : file.provider
       }))
     },
@@ -18,7 +18,7 @@ export default (dispatch) => {
       dispatch(SystemActions.openFile({
         location  : true,
         path      : file.path,
-        projectId : file.project,
+        projectId : file.project._id,
         provider  : file.provider
       }))
     },
@@ -32,7 +32,7 @@ export default (dispatch) => {
         props: {
           fileId     : file.fileId,
           revisionId : file.revisionId,
-          projectId  : file.project
+          projectId  : file.project._id,
         }
       }))
     },

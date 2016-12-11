@@ -37,6 +37,8 @@ export default (store) => {
           <IndexRoute                                component={ProjectChangesPage} />
           <Route path="feed"                         component={ProjectFeedPage}/>
           <Route path="tasks"                        component={ProjectTaskPage}/>
+          <Route path="files"                        component={ProjectFilesPage}/>
+          <Route path="files/"                       component={ProjectFilesPage}/>
           <Route path="files/:path"                  component={ProjectFilesPage}/>
           <Route path="settings"                     component={ProjectSettingsPage}>
             <IndexRoute                              component={ProjectSettingsGeneralPage} />

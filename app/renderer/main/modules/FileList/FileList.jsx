@@ -41,6 +41,7 @@ const propTypesObject = {
   options       : React.PropTypes.shape({
     allowFolder : React.PropTypes.bool,
     foldersOnly : React.PropTypes.bool,
+    showMenu    : React.PropTypes.bool,
     explore     : React.PropTypes.string,         // Optional: 'dropbox' || 'drive' - The provider
   }),
   FileListActions : PropTypes.object,      // Actions
@@ -123,7 +124,9 @@ export const Component = React.createClass({
         <div className="rel-box" style={contentStyle}>
           <LoadingOverlay show={isLoading} linear={true} hideBg={true}/>
           {!isLoading ? displayResults() :  ''}
-          <ContextMenu identifier={contextIdentifier} menu={FileListMenu(dispatch)}/>
+          { options.showMenu
+          ? <ContextMenu identifier={contextIdentifier} menu={FileListMenu(dispatch)}/>
+          : null }
         </div>
       </div>
     );

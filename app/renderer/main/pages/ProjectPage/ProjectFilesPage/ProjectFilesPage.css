@@ -7,3 +7,9 @@
 .files{
   border: 1px solid border1;
 }
+.readme{
+  border: 1px solid border1;
+  padding: 15px 20px;
+  margin-top: 30px;
+  min-height: 200px;
+}

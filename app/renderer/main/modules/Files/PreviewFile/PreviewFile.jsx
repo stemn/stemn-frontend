@@ -28,11 +28,12 @@ import DownloadFile       from '../DownloadFile/DownloadFile.jsx'
 
 export const Component = React.createClass({
   render() {
-    const { file, fileData, fileRender, project, filesActions, header } = this.props;
-    const previewId = `${project._id}-${file.fileId}-${file.revisionId}`;
+    const { file, fileData, fileRender, filesActions, header } = this.props;
+    const previewId = `${file.project._id}-${file.fileId}-${file.revisionId}`;
 
     const getPreview = () => {
       const viewerType = getViewerType(file.extension);
+      console.log(fileData);
       if(viewerType == 'gerber' || viewerType == 'pcb'){
         return <PreviewPcb previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile} />
       }
@@ -46,7 +47,7 @@ export const Component = React.createClass({
         return <div>Google</div>
       }
       else if(viewerType == 'image'){
-        return <PreviewImage project={project} fileMeta={file} />
+        return <PreviewImage fileMeta={file} />
       }
       else if(viewerType == 'pdf'){
         return <PreviewPdf previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile}/>

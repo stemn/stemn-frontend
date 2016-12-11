@@ -36,7 +36,7 @@ class Component extends React.Component{
     }
   }
   render() {
-    const { project, system, children, systemActions } = this.props;
+    const { project, system, children, systemActions, params } = this.props;
     const baseLink    = `project/${project && project.data ? project.data._id : ''}`;
     const isLoading   = !project || !project.data;
     const isConnected = project && project.data && project.data.remote && project.data.remote.provider;
@@ -65,6 +65,8 @@ class Component extends React.Component{
         return null
       }
     }
+
+    console.log(this.props);
 
     return (
       <div className="layout-column flex rel-box">

@@ -32,7 +32,7 @@ export const Component = React.createClass({
         props        : {
           fileId     : file._id,
           revisionId : file.revisionId,
-          projectId  : file.project
+          projectId  : file.project._id
         }
       }))
     }else{
@@ -43,7 +43,9 @@ export const Component = React.createClass({
   },
   render() {
     const { entityModel, project, path, files, ProjectsActions, dispatch } = this.props;
-    const options = {};
+    const options = {
+      showMenu: true
+    };
     if(project && project.data && project.data._id){
       return (
         <div className={classes.container+' flex scroll-box'}>
@@ -57,7 +59,10 @@ export const Component = React.createClass({
             options={options}
           />
           { files && files.entries
-          ? <Readme files={files.entries}/>
+          ? <Readme
+              className={classes.readme}
+              files={files.entries}
+            />
           : null }
         </div>
       );
