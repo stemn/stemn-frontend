@@ -55,7 +55,7 @@ export default React.createClass({
     const filteredItems = this.filterItems(items, query);
     return (
       <div className="layout-column flex">
-        <FileChangeTitleRow text="Recent Events">
+        <FileChangeTitleRow text="Recent Commits">
           <PopoverMenu preferPlace="below">
             <SimpleIconButton>
               <MdMoreHoriz size="20px" />
@@ -84,7 +84,7 @@ export default React.createClass({
             <div className="flex" onClick={deselect} style={{minHeight: '60px'}}></div>
           </div>
           )
-          : <div className="layout-column layout-align-center-center text-title-4 flex">No Feed items yet.<br/><Link className="link-primary" to={toChanges}>Create a commit.</Link></div>
+          : <div className="layout-column layout-align-center-center text-title-4 flex">Your commits will show here.<br/><Link className="link-primary" to={toChanges}>Create your first commit.</Link></div>
         }
         <LoadingOverlay show={loading} linear={true} hideBg={true} />
       </div>

@@ -74,7 +74,7 @@ class Component extends React.Component{
           <Header>{hasName ? project.data.name : ''}</Header>
           <Tabs size="lg">
             <Link activeClassName="active" to={baseLink} onlyActiveOnIndex={true}>Changes</Link>
-            <Link activeClassName="active" to={baseLink+'/feed'}>Timeline</Link>
+            <Link activeClassName="active" to={baseLink+'/feed'}>Commits</Link>
             <Link activeClassName="active" to={baseLink+'/tasks'}>Tasks</Link>
             <Link activeClassName="active" to={baseLink+'/files/ '}>Files</Link>
             <div className="flex"></div>

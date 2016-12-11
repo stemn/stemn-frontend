@@ -40,7 +40,7 @@ const getEventComponent = (item, project) => {
     : (
     <div className="layout-column layout-align-center-center flex text-title-4 text-center">
       <img src={timeline} style={{width: '100px'}}/>
-      <div>No timeline event selected.</div>
+      <div>No commit selected.</div>
     </div>)
 };
 
