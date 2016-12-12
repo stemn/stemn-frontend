@@ -43,6 +43,7 @@ const propTypesObject = {
     foldersOnly : React.PropTypes.bool,
     showMenu    : React.PropTypes.bool,
     explore     : React.PropTypes.string,         // Optional: 'dropbox' || 'drive' - The provider
+    crumbPopup  : React.PropTypes.bool,           // Optional: Should we show a popup on the crumbs?
   }),
   FileListActions : PropTypes.object,      // Actions
   dispatch        : PropTypes.func,        // Actions
@@ -78,11 +79,12 @@ export const Component = React.createClass({
   },
 
   render() {
-    const { files, singleClickFn, doubleClickFn, crumbClickFn, selected, options, path, projectId, dispatch } = this.props;
+    const { files, singleClickFn, doubleClickFn, crumbClickFn, selected, options, path, projectId, crumbPopup, dispatch } = this.props;
     const { contentStyle } = this.props;
 
     const displayResults = () => {
-      const filesFiltered = options.foldersOnly && has(files, 'entries') > 0 ? files.entries.filter(file => file.type == 'folder') : files.entries;
+      const filesNormal   = files && files.entries ? files.entries : [];
+      const filesFiltered = options.foldersOnly ? filesNormal.filter(file => file.type == 'folder') : filesNormal;
       const filesOrdered  = orderBy(filesFiltered, ['type', 'name'], ['desc', 'asc']);
       if(filesOrdered && filesOrdered.length > 0){
         return filesOrdered.map(file => (
@@ -113,7 +115,7 @@ export const Component = React.createClass({
     return (
       <div { ...omit(this.props, Object.keys(propTypesObject)) }>
         <div className={classes.breadcrumbs + ' layout-row layout-align-start-center'}>
-          <FileBreadCrumbs className="flex" meta={files && files.folder ? files.folder : ''} clickFn={crumbClickFn}/>
+          <FileBreadCrumbs className="flex" meta={files && files.folder ? files.folder : ''} clickFn={crumbClickFn} popup={crumbPopup}/>
           <SimpleIconButton onClick={() => crumbClickFn({
               file: {
                 fileId: '',
@@ -130,7 +132,7 @@ export const Component = React.createClass({
         </div>
         <div className="rel-box" style={contentStyle}>
           <LoadingOverlay show={isLoading} linear={true} hideBg={true}/>
-          {!isLoading ? displayResults() :  ''}
+          { displayResults() }
           { options.showMenu
           ? <ContextMenu identifier={contextIdentifier} menu={FileListMenu(dispatch)}/>
           : null }

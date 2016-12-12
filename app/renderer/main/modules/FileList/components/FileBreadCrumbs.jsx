@@ -10,9 +10,11 @@ import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 import FileListPopup from './FileListPopup.jsx';
 
 export default React.createClass({
+  defaultProps: {
+    popup: false
+  },
   render() {
-    const {meta, clickFn, className} = this.props;
-    const popup = true;
+    const { meta, clickFn, className, popup } = this.props;
 
     const displayCrumbs = () => {
       if(meta.parents && meta.parents.length > 0){

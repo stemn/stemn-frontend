@@ -18,6 +18,7 @@ import LoadingOverlay   from 'app/renderer/main/components/Loading/LoadingOverla
 import MdRefresh        from 'react-icons/md/refresh';
 import MdHome           from 'react-icons/md/home';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import FileIcon from './FileIcon'
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -36,7 +37,10 @@ export const FileRow = React.createClass({
   render() {
     const { file, isActive, clickFn } = this.props;
     return (
-      <div className={classNames(classes.file, {[classes.active] : isActive})} onClick={()=>clickFn({file})}>{file.name}</div>
+      <div className={classNames(classes.file, {[classes.active] : isActive}, 'layout-row layout-align-start-center')} onClick={()=>clickFn({file})}>
+        <FileIcon fileType={file.extension} type={file.type} size="20px"/>
+        <div className="text-ellipsis">{file.name}</div>
+      </div>
     );
   }
 });

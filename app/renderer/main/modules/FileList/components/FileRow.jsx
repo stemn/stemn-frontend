@@ -16,7 +16,7 @@ export default React.createClass({
 
     return (
       <div className={classNames(classes.row, 'layout-row layout-align-start-center', {[classes.active]: isActive})} onClick={()=>singleClick({file})} onDoubleClick={()=>doubleClick({file})} >
-        <FileIcon fileType={file.extension}/>
+        <FileIcon fileType={file.extension} type={file.type}/>
         <div className="flex">{file.name}</div>
         <div style={{width: '100px'}}>{file.modified ? timeFromNow : ''}</div>
         <div style={{width: '50px'}}>{bytes(file.size)}</div>

@@ -133,7 +133,7 @@ export const Component = React.createClass({
     return (
       <div className="layout-column flex">
         <div className={classes.header + ' layout-row layout-align-start-center'}>
-          <div className="flex">{fileMeta ? <FileBreadCrumbs meta={fileMeta.data} clickFn={this.clickCrumb}/> : ''}</div>
+          <div className="flex">{fileMeta ? <FileBreadCrumbs meta={fileMeta.data} clickFn={this.clickCrumb} popup={true}/> : ''}</div>
           <FileCompareMenu
             file1={file1}
             file2={file2}
