@@ -25,6 +25,7 @@ const propTypesObject = {
   meta            : PropTypes.object.isRequired,
   parentfolder    : PropTypes.object.isRequired,
   activeFolder    : PropTypes.object.isRequired,
+  isOpen          : PropTypes.bool,  // From the popover component
   clickFn         : PropTypes.func,
   FileListActions : PropTypes.object,      // Actions
   dispatch        : PropTypes.func,        // Actions
@@ -45,7 +46,7 @@ export const Component = React.createClass({
   componentWillMount() { this.onMount(this.props) },
   componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
   onMount(nextProps, prevProps) {
-    if(!prevProps || nextProps.parentfolder.fileId && nextProps.parentfolder.fileId !== prevProps.parentfolder.fileId && nextProps.files && !nextProps.files.loading){
+    if((!prevProps || !prevProps.isOpen) && nextProps.isOpen && !nextProps.files.entries){
       this.getFiles({
         path     : nextProps.parentfolder.fileId,
         provider : nextProps.meta.provider,
@@ -77,14 +78,15 @@ export const Component = React.createClass({
 
     return (
       <div { ...omit(this.props, Object.keys(propTypesObject)) } className={classes.popup}>
+        <LoadingOverlay show={isLoading} linear={true} hideBg={true}/>
         { foldersOnly
-        ? foldersOnly.map(file => <FileRow file={file} isActive={file.fileId == activeFolder.fileId} clickFn={clickFn}/> )
+        ? foldersOnly.map(file => <FileRow key={file._id} file={file} isActive={file.fileId == activeFolder.fileId} clickFn={clickFn}/> )
         : null }
         { foldersOnly && filesOnly
         ? <div className={classes.divider}></div>
         : null }
         { filesOnly
-        ? filesOnly.map(file => <FileRow file={file} isActive={file.fileId == activeFolder.fileId} clickFn={clickFn}/> )
+        ? filesOnly.map(file => <FileRow key={file._id} file={file} isActive={file.fileId == activeFolder.fileId} clickFn={clickFn}/> )
         : null }
       </div>
     );

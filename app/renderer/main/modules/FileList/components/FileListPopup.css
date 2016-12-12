@@ -1,17 +1,27 @@
-@value primary, border1 from "app/renderer/assets/css/themes/standard.css";
+@value primary, primary-2, border1 from "app/renderer/assets/css/themes/standard.css";
 
 .file{
   padding: 8px;
   cursor: pointer;
+  color: rgba(0, 0, 0, 0.6);
+  transition: 0.3s ease all;
+}
+.file:hover{
+  color: rgba(0, 0, 0, 1);
 }
 .active{
   color: primary;
 }
+.active:hover{
+  color: primary-2;
+}
 .popup{
+  position: relative;
   max-height: 300px;
   overflow-y: auto;
   overflow-x: hidden;
   width: 200px;
+  min-height: 50px;
 }
 .divider{
   border-bottom: 1px solid border1;

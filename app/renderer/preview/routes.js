@@ -18,5 +18,3 @@ export default (store) => {
     </Route>
   );
 }
-
-//<Route path="/preview/:projectId/:fileId/:revisionId" component={PreviewPage} />

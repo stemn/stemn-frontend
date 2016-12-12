@@ -96,13 +96,26 @@ export const Component = React.createClass({
     return this.state.mode == 'single' ? selected1 : selected1 || selected2;
   },
   clickCrumb({file}){
-    console.log(file);
-//    const { dispatch, fileMeta } = this.props;
-//    dispatch(push({
-//      pathname: `/project/${fileMeta.data.project._id}/files/${file.fileId}`,
-//      state: {meta : {scope: ['main']}}
-//    }))
-//    dispatch(ElectronWindowsActions.show('main'))
+    const { dispatch, fileMeta } = this.props;
+    if(file.type == 'file'){
+      // It is a file - open the file
+      dispatch(push({
+        pathname: '/',
+        query: {
+          fileId     : file.fileId,
+          revisionId : file.revisionId,
+          projectId  : file.project._id,
+        }
+      }))
+    }
+    else{
+      // It is a folder - open the folder
+      dispatch(push({
+        pathname: `/project/${fileMeta.data.project._id}/files/${file.fileId}`,
+        state: {meta : {scope: ['main']}}
+      }))
+      dispatch(ElectronWindowsActions.show('main'))
+    }
   },
   clickTag(task){
     this.props.dispatch(ModalActions.showModal({modalType: 'TASK', modalProps: { taskId: task._id }}));

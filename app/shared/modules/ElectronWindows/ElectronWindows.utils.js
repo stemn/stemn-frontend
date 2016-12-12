@@ -6,8 +6,6 @@ import querystring from 'querystring';
 export const create = ({type, props}) => {
   if(type == 'PREVIEW'){
     const queryParams = querystring.stringify(props);
-    console.log(queryParams);
-    console.log(props);
     createPreview({uri: queryParams ? `?${queryParams}` : ''});
   }
   else{
