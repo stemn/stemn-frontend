@@ -1,9 +1,18 @@
+@value border1, height-header, width-header-buttons from "app/renderer/assets/css/themes/standard.css";
+
 .toolbar{
-  padding: 10px;
-  height: 52px;
+  padding: 0 15px;
+  height: height-header;
+  padding-right: width-header-buttons;
+  border-bottom: 1px solid border1;
 }
 
 .inner{
   font-size: 13px;
-  padding: 0 15px;
+}
+
+.toolbar :global(.divider){
+  height: 20px;
+  margin: 0 15px 0 10px;
+  border-left: 1px solid border1;
 }

@@ -27,12 +27,8 @@ export const Component = React.createClass({
     const { auth } = this.props;
     return (
       <div className="layout-column flex">
-        <Header
-          style={{
-            background: 'white',
-            borderBottom: '1px solid rgba(0, 0, 0, 0.1)'
-          }}>
-          Settings
+        <Header>
+          <b>Settings</b>
         </Header>
         <div className={classes.container+' layout-row flex scroll-box'}>
           <div style={{width: '250px', marginRight: '15px'}}>

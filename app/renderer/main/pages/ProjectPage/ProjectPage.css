@@ -1,4 +1,4 @@
-@value secondary, border1 from "app/renderer/assets/css/themes/standard.css";
+@value primary, secondary, border1, bg1 from "app/renderer/assets/css/themes/standard.css";
 /*
 .title{
   font-size: 16px;
@@ -6,3 +6,24 @@
   margin: 0;
 }
 */
+
+.tabs{
+  margin-left: 15px;
+  padding-left: 10px;
+  border-left: 1px solid border1;
+}
+.tabs a{
+  padding: 8px 10px;
+  color: rgba(0, 0, 0, 0.5);
+  border: 1px solid transparent;
+  margin-left: 5px;
+  transition: 0.2s ease all;
+}
+.tabs a:global(.active){
+  color: rgba(0, 0, 0, 1);
+  border: 1px solid border1;
+  background: rgba(0, 0, 0, 0.04);
+}
+.tabs a:hover{
+  color: rgba(0, 0, 0, 1);
+}

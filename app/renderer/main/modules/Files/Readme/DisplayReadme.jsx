@@ -15,7 +15,7 @@ import classNames from 'classnames';
 // Sub Components
 import LoadingOverlay     from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import PreviewFile        from 'app/renderer/main/modules/Files/PreviewFile/PreviewFile.jsx';
-import EditorDisplay from 'app/renderer/main/modules/Editor/EditorDisplay.jsx';
+import EditorDisplay      from 'app/renderer/main/modules/Editor/EditorDisplay.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -46,14 +46,20 @@ export const DisplayReadme = React.createClass({
   },
   render() {
     const { file, fileData } = this.props;
-    return (
-      <div { ...omit(this.props, Object.keys(propTypesObject)) }>
-        { fileData && fileData.data
-        ? <EditorDisplay value={fileData.data}/>
-        : null }
-        <LoadingOverlay show={!fileData || fileData && !fileData.data}/>
-      </div>
-    )
+    if(fileData && fileData.loading || fileData && fileData.data){
+      return (
+        <div { ...omit(this.props, Object.keys(propTypesObject)) }>
+          { fileData && fileData.data
+          ? <EditorDisplay value={fileData.data}/>
+          : null }
+          <LoadingOverlay show={fileData && fileData.loading}/>
+        </div>
+      )
+    }
+    else{
+      return <div>This file is empty.</div>
+    }
+
   }
 });
 

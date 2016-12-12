@@ -14,10 +14,12 @@ import Tabs from 'app/renderer/main/components/Tabs/Tabs'
 import Header from 'app/renderer/main/modules/Header/Header.jsx'
 import Banner from 'app/renderer/main/modules/Banner/Banner.jsx'
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import MdSettings from 'react-icons/md/settings';
+import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 
 // Styles
 import classNames from 'classnames';
-import pageStyles from './ProjectPage.css'
+import classes from './ProjectPage.css'
 
 class Component extends React.Component{
   getChildContext() {
@@ -66,20 +68,22 @@ class Component extends React.Component{
       }
     }
 
-    console.log(this.props);
-
     return (
       <div className="layout-column flex rel-box">
         <div className="layout-column flex">
-          <Header>{hasName ? project.data.name : ''}</Header>
-          <Tabs size="lg">
-            <Link activeClassName="active" to={baseLink} onlyActiveOnIndex={true}>Changes</Link>
-            <Link activeClassName="active" to={baseLink+'/feed'}>Commits</Link>
-            <Link activeClassName="active" to={baseLink+'/tasks'}>Tasks</Link>
-            <Link activeClassName="active" to={baseLink+'/files/ '}>Files</Link>
-            <div className="flex"></div>
-            <Link activeClassName="active" to={baseLink+'/settings'}>Project Settings</Link>
-          </Tabs>
+          <Header>
+            <b className="text-ellipsis">{hasName ? project.data.name : ''}</b>
+            <div className={classes.tabs + ' flex layout-row layout-align-start-center'}>
+              <Link activeClassName="active" to={baseLink} onlyActiveOnIndex={true}>Changes</Link>
+              <Link activeClassName="active" to={baseLink+'/feed'}>Commits</Link>
+              <Link activeClassName="active" to={baseLink+'/tasks'}>Tasks</Link>
+              <Link activeClassName="active" to={baseLink+'/files/'}>Files</Link>
+            </div>
+            <SimpleIconButton to={baseLink+'/settings'} title="Project Settings">
+              <MdSettings size={20}/>
+            </SimpleIconButton>
+            <div className="divider"></div>
+          </Header>
           { isConnected
           ? missingClientBanner()
           : null }
@@ -94,6 +98,8 @@ class Component extends React.Component{
     );
   }
 };
+
+
 
 Component.childContextTypes = {
   project: React.PropTypes.object

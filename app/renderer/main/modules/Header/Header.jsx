@@ -27,8 +27,8 @@ export const Component = React.createClass({
     const styles = this.props.absolute ? {position: 'absolute'} : this.props.style;
     return (
       <div className={classes.toolbar + ' layout-row layout-align-start-center rel-box'} style={styles}>
-        {!this.props.sidebar.show ? <a onClick={()=>{this.props.sidebarActions.toggleSidebar();}}><MdMenu size="25"/></a> : ''}
-        <div className={classes.inner + ' layout-row flex'}>{this.props.children}</div>
+        {!this.props.sidebar.show ? <a onClick={()=>{this.props.sidebarActions.toggleSidebar();}} style={{marginRight: '15px'}}><MdMenu size="25"/></a> : ''}
+        <div className={classes.inner + ' layout-row layout-align-start-center flex'}>{this.props.children}</div>
       </div>
     );
   }

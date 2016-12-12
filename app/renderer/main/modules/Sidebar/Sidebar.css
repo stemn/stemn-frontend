@@ -1,4 +1,4 @@
-@value primary, secondary from "app/renderer/assets/css/themes/standard.css";
+@value primary, height-header, secondary from "app/renderer/assets/css/themes/standard.css";
 
 .sidebar{
   border-right: 1px solid rgba(0, 0, 0, 0.1);
@@ -11,7 +11,7 @@
 
 
 .sidebarToolbar{
-  height: 47px;
+  height: height-header;
   padding: 10px 20px;
 }
 
