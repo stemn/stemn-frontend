@@ -6,7 +6,18 @@ import classNames from 'classnames';
 
 export default React.createClass({
   render() {
-    const fileType = this.props.fileType ? this.props.fileType.toLowerCase() : 'folder';
+    let fileType;
+    if(this.props.type == 'file'){
+      if(this.props.fileType){
+        fileType = this.props.fileType.toLowerCase();
+      }
+      else{
+        fileType = 'other';
+      }
+    }
+    else{
+      fileType = 'folder';
+    }
     
     let src;
     try {

@@ -76,9 +76,9 @@ class Component extends React.Component{
             <b className="text-ellipsis">{hasName ? project.data.name : ''}</b>
             <div className={classes.tabs + ' flex layout-row layout-align-start-center'}>
               <Link activeClassName="active" to={baseLink} onlyActiveOnIndex={true}>Changes</Link>
-              <Link activeClassName="active" to={baseLink+'/feed'}>Commits</Link>
+              { isConnected ? <Link activeClassName="active" to={baseLink+'/feed'}>Commits</Link> : null }
               <Link activeClassName="active" to={baseLink+'/tasks'}>Tasks</Link>
-              <Link className={['files/:path', 'files'].includes(routeName.path) ? 'active' : ''} to={baseLink+'/files/'}>Files</Link>
+              { isConnected ? <Link className={['files/:path', 'files'].includes(routeName.path) ? 'active' : ''} to={baseLink+'/files/'}>Files</Link> : null }
             </div>
             <SimpleIconButton activeClassName="active" to={baseLink+'/settings'} title="Project Settings">
               <MdSettings size={20}/>

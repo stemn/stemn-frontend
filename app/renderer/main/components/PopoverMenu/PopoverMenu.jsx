@@ -24,10 +24,14 @@ export default React.createClass({
     }
   },
   toggle (toState) {
-    this.setState({ isOpen: toState === null ? !this.state.isOpen : toState })
+    const newValue = toState === null ? !this.state.isOpen : toState;
+    if(this.state.isOpen != newValue){
+      this.setState({ isOpen: newValue });
+    }
   },
   render() {
     const { preferPlace, trigger, disableClickClose, tipSize, offset, children, className } = this.props;
+    const { isOpen } = this.state;
     const tipSizeDefault = tipSize || 0;
     const triggerMap = {
       hover          : {
@@ -49,15 +53,21 @@ export default React.createClass({
     };
 
     const contentMap = {
-      hover          : {},
+      hover          : {
+        isOpen       : isOpen,
+      },
       hoverDelay     : {
         onMouseEnter : () => {this.toggleDelay(true)},
         onMouseLeave : () => {this.toggleDelay(false)},
+        isOpen       : isOpen,
       },
       click          : {
-        onClick      : () => {disableClickClose ? null : this.toggle(false)}
+        onClick      : () => {disableClickClose ? null : this.toggle(false)},
+        isOpen       : isOpen,
       },
-      none           : {},
+      none           : {
+        isOpen       : isOpen,
+      },
     }
 
     const triggerProps = triggerMap[trigger] || triggerMap['click']; // Default to click
@@ -65,7 +75,7 @@ export default React.createClass({
 
     return (
       <Popover
-        isOpen={this.state.isOpen}
+        isOpen={isOpen}
         body={React.cloneElement(children[1], contentProps)}
         onOuterAction={()=>{if(trigger != 'none'){this.toggle(false)}}}
         preferPlace = {preferPlace || 'above'}
