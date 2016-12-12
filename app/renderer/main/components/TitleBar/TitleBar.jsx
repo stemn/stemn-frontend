@@ -6,6 +6,10 @@ import process from 'process';
 import styles from './TitleBar.css';
 import classNames from 'classnames';
 
+import MaximiseIcon from 'app/renderer/assets/icons/desktop/maximise.js';
+import CloseIcon from 'app/renderer/assets/icons/desktop/close.js';
+import MinimiseIcon from 'app/renderer/assets/icons/desktop/minimise.js';
+
 export default React.createClass({
   getInitialState () {
     const window = electron.remote.getCurrentWindow();
@@ -60,12 +64,18 @@ export default React.createClass({
     else{
       return (
         <div className={classNames(styles.bar, 'layout-row', { [styles.light] : this.props.theme == 'light'})}>
-           <div className={classNames(styles.dragger, 'flex')}></div>
-           <div onClick={minimise} className={styles.windowsButton}>{WindowsMinimise}</div>
-           <div onClick={toggleMaximise} className={styles.windowsButton}>{this.state.isMaximised ? WindowsMaximised : WindowsMaximise}</div>
-           <div onClick={close} className={classNames(styles.windowsButton, styles.windowsClose)}>{WindowsClose}</div>
+          <div className={classNames(styles.dragger, 'flex')}></div>
+          <div className={'layout-row layout-align-end-center ' + styles.buttons}>
+            <a className={styles.button} title="Minimise" onClick={minimise}><MinimiseIcon size={24}/></a>
+            <a className={styles.button} title="Maximise" onClick={toggleMaximise}><MaximiseIcon size={24}/></a>
+            <a className={styles.button} title="Close" onClick={close}><CloseIcon size={24}/></a>
+          </div>
         </div>
       );
     }
   }
 })
+
+//           <div onClick={minimise} className={styles.windowsButton}>{WindowsMinimise}</div>
+//           <div onClick={toggleMaximise} className={styles.windowsButton}>{this.state.isMaximised ? WindowsMaximised : WindowsMaximise}</div>
+//           <div onClick={close} className={classNames(styles.windowsButton, styles.windowsClose)}>{WindowsClose}</div>

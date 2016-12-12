@@ -1,4 +1,4 @@
-@value primary, border1, bg1 from "app/renderer/assets/css/themes/standard.css";
+@value primary, border1, bg1, height-header, width-header-buttons from "app/renderer/assets/css/themes/standard.css";
 
 .sidebar{
   border-left: 1px solid border1;
@@ -12,4 +12,12 @@
 .header{
   padding: 10px 15px;
   border-bottom: 1px solid border1;
+  height: height-header;
+  padding-right: width-header-buttons;
+}
+
+.divider{
+  height: 20px;
+  margin: 0 15px 0 10px;
+  border-left: 1px solid border1;
 }

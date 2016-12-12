@@ -30,7 +30,7 @@ export const Component = React.createClass({
       dispatch(ElectronWindowsActions.create({
         type         : 'PREVIEW',
         props        : {
-          fileId     : file._id,
+          fileId     : file.fileId,
           revisionId : file.revisionId,
           projectId  : file.project._id
         }
@@ -52,7 +52,7 @@ export const Component = React.createClass({
           <FileList
             className={classNames(classes.files)}
             projectId={project.data._id}
-            path={path}
+            path={path || ''}
             singleClickFn={this.fileFolderClick}
             doubleClickFn={this.fileFolderClick}
             crumbClickFn={this.fileFolderClick}
@@ -63,7 +63,10 @@ export const Component = React.createClass({
               className={classes.readme}
               files={files.entries}
             />
-          : null }
+          : <div className="text-center text-grey-3" style={{marginTop: '30px'}}>
+              Add a readme.md file to this folder to help others understand what is inside.
+            </div>
+          }
         </div>
       );
     }
@@ -80,7 +83,7 @@ export const Component = React.createClass({
 
 function mapStateToProps({ projects, projectSettings, fileList }, { params, location }) {
   const projectId   = params.stub;
-  const path        = params.path;
+  const path        = params.path || '';
   const project     = projects.data[projectId]
   const entityModel = `projects.data.${projectId}`;
   const files       = fileList[`${projectId}-${path}`];

@@ -114,7 +114,14 @@ export const Component = React.createClass({
       <div { ...omit(this.props, Object.keys(propTypesObject)) }>
         <div className={classes.breadcrumbs + ' layout-row layout-align-start-center'}>
           <FileBreadCrumbs className="flex" meta={files && files.folder ? files.folder : ''} clickFn={crumbClickFn}/>
-          <SimpleIconButton onClick={() => crumbClickFn({file:{fileId: ''}})} title="Home">
+          <SimpleIconButton onClick={() => crumbClickFn({
+              file: {
+                fileId: '',
+                project: {
+                  _id: projectId
+                }
+              }
+            })} title="Home">
             <MdHome size="22px"></MdHome>
           </SimpleIconButton>          
           <SimpleIconButton onClick={getFiles} title="Refresh">

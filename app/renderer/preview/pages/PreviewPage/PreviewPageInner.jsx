@@ -20,6 +20,7 @@ import * as FilesActions        from 'app/renderer/main/modules/Files/Files.acti
 import * as SyncTimelineActions from 'app/shared/modules/SyncTimeline/SyncTimeline.actions.js';
 import * as ModalActions        from 'app/renderer/main/modules/Modal/Modal.actions.js';
 import * as ElectronWindowsActions from 'app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
+import { push } from 'react-router-redux';
 
 
 // Sub Components
@@ -95,7 +96,12 @@ export const Component = React.createClass({
     return this.state.mode == 'single' ? selected1 : selected1 || selected2;
   },
   clickCrumb({file}){
-    console.log(file);
+    const { dispatch, fileMeta } = this.props;
+    dispatch(push({
+      pathname: `/project/${fileMeta.data.project._id}/files/${file.fileId}`,
+      state: {meta : {scope: ['main']}}
+    }))
+    dispatch(ElectronWindowsActions.show('main'))
   },
   clickTag(task){
     this.props.dispatch(ModalActions.showModal({modalType: 'TASK', modalProps: { taskId: task._id }}));
@@ -121,6 +127,7 @@ export const Component = React.createClass({
             mode={mode}
             changeMode={this.changeMode}
           />
+          <div className={classes.divider}></div>
         </div>
         <div className="layout-row flex">
           <div className="layout-column flex">

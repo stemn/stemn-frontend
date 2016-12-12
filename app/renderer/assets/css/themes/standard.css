@@ -21,6 +21,9 @@
 
 @value placholder: rgba(0, 0, 0, 0.5);
 
+@value height-header: 50px;
+@value width-header-buttons: 90px;
+
 /*External*/
 @value linkedin: #1884bc;
 @value linkedin-dark: #166f9d;

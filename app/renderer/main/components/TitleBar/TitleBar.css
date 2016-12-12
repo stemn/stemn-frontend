@@ -1,3 +1,41 @@
+
+
+@value height-header, width-header-buttons from "app/renderer/assets/css/themes/standard.css";
+
+.buttons{
+  height: height-header;
+  width: width-header-buttons;
+  margin-right: 10px;
+}
+.button{
+  background: none;
+  border: none;
+  color: rgba(0, 0, 0, 0.2);
+  padding: 3px;
+  border-radius: 50%;
+  transition: 0.3s ease all;
+  line-height: 1em;
+  cursor: pointer;
+}
+.button:hover {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.bar{
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  left: 45px;
+  height: 20px;
+}
+.dragger{
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+  cursor: default;
+}
+
+/*
 .windowsButton{
   width: 46px;
   height: 32px;
@@ -48,26 +86,15 @@
   background-color: rgb(40, 201, 64);
   border-color: rgb(18, 172, 40);
 }
-
-
+*/
+/*
 .windowsButton svg{
   width: 10px;
   height: 10px;
 }
-.bar{
-  position: absolute;
-  z-index: 1000;
-  top: 0;
-  right: 0;
-  left: 45px;
-  height: 32px;
-}
-.dragger{
-  -webkit-user-select: none;
-  -webkit-app-region: drag;
-  cursor: default;
-}
+*/
 
+/*
 .light .windowsButton{
   fill: rgba(255, 255, 255, 0.6);
 }
@@ -79,3 +106,4 @@
   background: rgb(232,17,35);
   fill: white;
 }
+*/

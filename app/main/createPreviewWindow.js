@@ -10,7 +10,7 @@ export const create = function createWindow({ uri = '/' } = {}) {
     height: 720,
     minWidth: 1000,
     minHeight: 600,
-    frame: true
+    frame: process.platform == 'darwin' ? true : false
   });
 
   browserWindow.loadURL(`file://${mainHtml}#${uri}`);

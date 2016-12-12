@@ -35,7 +35,7 @@ export const DisplayReadme = React.createClass({
     if(!prevProps || nextProps.cacheKey !== prevProps.cacheKey){
       // If we don't already have the file, get it
       if(!nextProps.fileData){
-        nextProps.downloadFn({
+        nextProps.filesActions.getFile({
           projectId  : nextProps.file.project._id,
           fileId     : nextProps.file.fileId,
           revisionId : nextProps.file.revisionId,
@@ -46,8 +46,6 @@ export const DisplayReadme = React.createClass({
   },
   render() {
     const { file, fileData } = this.props;
-
-    console.log(fileData);
     return (
       <div { ...omit(this.props, Object.keys(propTypesObject)) }>
         { fileData && fileData.data

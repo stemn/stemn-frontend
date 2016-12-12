@@ -39,8 +39,8 @@ export const Component = React.createClass({
 
     return (
       <div className="layout-column flex">
-        { fileMeta && fileMeta.data && fileMeta.data.data
-          ? <PreviewPageInner fileMeta={fileMeta.data} />
+        { fileMeta && fileMeta.data
+          ? <PreviewPageInner fileMeta={fileMeta} />
           : null }
         <LoadingOverlay show={fileMeta && fileMeta.loading} />
         { fileMeta && !fileMeta.loading && !fileMeta.data ?
