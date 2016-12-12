@@ -1,7 +1,6 @@
 import { BrowserWindow, screen, Menu, shell } from 'electron';
 import path from 'path';
 import process from 'process';
-import Positioner from 'electron-positioner';
 
 const menuBarHtml = path.join(__dirname, '../renderer/assets/html/menubar.html');
 const WINDOW_WIDTH = 330;

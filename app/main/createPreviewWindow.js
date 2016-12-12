@@ -1,13 +1,16 @@
-import { app, BrowserWindow, Menu, shell } from 'electron';
+import { app, BrowserWindow, Menu, shell, screen } from 'electron';
 import path from 'path';
 
 const mainHtml = path.join(__dirname, '../renderer/assets/html/preview.html');
 
 export const create = function createWindow({ uri = '/' } = {}) {
+  const primarySize = screen.getPrimaryDisplay().workAreaSize;
+  const sizeRatio = 0.8;
+
   let browserWindow = new BrowserWindow({
     show: false,
-    width: 1200,
-    height: 720,
+    width: primarySize.width * sizeRatio,
+    height: primarySize.height * sizeRatio,
     minWidth: 1000,
     minHeight: 600,
     frame: process.platform == 'darwin' ? true : false

@@ -57,6 +57,7 @@ export const Component = React.createClass({
             doubleClickFn={this.fileFolderClick}
             crumbClickFn={this.fileFolderClick}
             options={options}
+            crumbPopup={true}
           />
           { files && files.entries
           ? <Readme
