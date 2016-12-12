@@ -8,7 +8,7 @@ import * as MenubarLayoutActions from 'app/shared/actions/menubarLayout';
 // Component Core
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import { escapeRegExp } from 'lodash';
+import { escapeRegExp, orderBy } from 'lodash';
 
 // Styles
 import classNames from 'classnames';
@@ -37,9 +37,10 @@ export const Component = React.createClass({
 
     const nameRegex = new RegExp(escapeRegExp(sidebar.searchString), 'i');
     const filteredProjects = projects.userProjects.data ? projects.userProjects.data.filter(project => nameRegex.test(project.name)) : [];
+    const filteredProjectsOrdered = orderBy(filteredProjects, 'updated', 'desc')
 
     return (
-      <div>
+      <div className="scroll-dark">
         <AnimateShow show={menubarLayout.showSidebar} animation={classes.animateOverlay} animationShow={classes.animateOverlayShow}>
           <div className={classes.overlay} onClick={()=>this.props.MenubarLayoutActions.toggleSidebar(false)}></div>
         </AnimateShow>
@@ -55,7 +56,7 @@ export const Component = React.createClass({
             <MdSearch className={classes.sidebarSearchIcon} size="20"/>
           </div>
           <div className="flex scroll-box">
-            {filteredProjects.map((item)=>
+            {filteredProjectsOrdered.map((item)=>
                <SidebarProjectButton item={item} to={linkProject(item)} clickFn={()=>this.props.MenubarLayoutActions.toggleSidebar(false)}/>
             )}
           </div>

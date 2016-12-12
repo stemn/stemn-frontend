@@ -28,6 +28,9 @@
   background: sidebar-search-bg;
   color: sidebar-search-text !important;
 }
+.sidebarSearch input:focus{
+  border: 1px solid sidebar-search-border;
+}
 .sidebarSearchIcon{
   position: absolute;
   right: 8px;

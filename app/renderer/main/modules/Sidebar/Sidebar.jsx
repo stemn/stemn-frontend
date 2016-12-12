@@ -12,7 +12,7 @@ import { push } from 'react-router-redux'
 
 // Component Core
 import React from 'react';
-import { escapeRegExp } from 'lodash';
+import { escapeRegExp, orderBy } from 'lodash';
 
 // Styles
 import classNames from 'classnames';
@@ -48,6 +48,7 @@ export const Component = React.createClass({
     const sidebarStyle = classNames('layout-column', 'flex' ,'rel-box', styles.sidebar);
     const nameRegex = new RegExp(escapeRegExp(this.props.sidebar.searchString), 'i');
     const filteredProjects = projects.userProjects.data ? projects.userProjects.data.filter(project => nameRegex.test(project.name)) : [];
+    const filteredProjectsOrdered = orderBy(filteredProjects, 'updated', 'desc')
 
     const projectContextMenu = [{
       label: 'Open Folder',
@@ -89,8 +90,8 @@ export const Component = React.createClass({
             </div>
             <div className="scroll-box flex">
               {projects.userProjects.data && projects.userProjects.data.length == 0 ? <SidebarProjectButton  item={{name: 'Create a project'}} clickFn={this.showProjectNewModal} /> : null }
-              {filteredProjects.length > 0 ? <div style={{padding: '10px 15px 5px', opacity: '0.7'}}>My Projects</div> : null}
-              {filteredProjects.map((item, idx) => <ProjectWithContext key={item._id} item={item} isActive={item._id == this.props.params.stub} to={`/project/${item._id}`}/>)}
+              {filteredProjectsOrdered.length > 0 ? <div style={{padding: '10px 15px 5px', opacity: '0.7'}}>My Projects</div> : null}
+              {filteredProjectsOrdered.map((item, idx) => <ProjectWithContext key={item._id} item={item} isActive={item._id == this.props.params.stub} to={`/project/${item._id}`}/>)}
               <ContextMenu identifier={projectContextIdentifier} menu={projectContextMenu}/>
             </div>
           </div>

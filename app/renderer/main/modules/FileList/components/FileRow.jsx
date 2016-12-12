@@ -18,6 +18,9 @@ export default React.createClass({
       <div className={classNames(classes.row, 'layout-row layout-align-start-center', {[classes.active]: isActive})} onClick={()=>singleClick({file})} onDoubleClick={()=>doubleClick({file})} >
         <FileIcon fileType={file.extension} type={file.type}/>
         <div className="flex">{file.name}</div>
+        { file.commit && file.commit.summary
+        ? <a className="link-primary" style={{padding: '0 30px'}}>{file.commit.summary}</a>
+        : null }
         <div style={{width: '100px'}}>{file.modified ? timeFromNow : ''}</div>
         <div style={{width: '50px'}}>{bytes(file.size)}</div>
       </div>

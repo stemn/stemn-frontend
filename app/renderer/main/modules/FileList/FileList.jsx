@@ -97,8 +97,11 @@ export const Component = React.createClass({
           />
         ))
       }
-      else{
+      else if(files && !files.loading){
         return <div style={{padding: '15px'}}>No results</div>
+      }
+      else{
+        return null
       }
     };
 

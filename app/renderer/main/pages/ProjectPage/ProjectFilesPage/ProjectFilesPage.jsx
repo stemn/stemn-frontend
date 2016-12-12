@@ -37,7 +37,7 @@ export const Component = React.createClass({
       }))
     }else{
       dispatch(push({
-        pathname   : `project/${project.data._id}/files/${file.fileId}`,
+        pathname   : `project/${project.data._id}/files/${file.fileId || ''}`,
       }))
     }
   },

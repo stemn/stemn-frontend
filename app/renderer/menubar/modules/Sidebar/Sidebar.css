@@ -1,10 +1,12 @@
+@value primary, height-header, sidebar-bg, sidebar-text-1, sidebar-text-2, sidebar-footer, secondary, sidebar-search-border, sidebar-search-bg, sidebar-search-border, sidebar-search-text from "app/renderer/assets/css/themes/standard.css";
+
 .overlay{
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .animateOverlay{
@@ -21,8 +23,8 @@
   bottom: 0;
   top: 0;
   width: 250px;
-  background: white;
-
+  background: sidebar-bg;
+  color: sidebar-text-2;
   transition: 0.3s ease all;
   transform: translateX(-100%);
 }
@@ -38,12 +40,18 @@
   padding: 6px;
   height: auto;
   padding-right: 40px;
+  border: 1px solid sidebar-search-border;
+  background: sidebar-search-bg;
+  color: sidebar-search-text !important;
+}
+.sidebarSearch input:focus{
+  border: 1px solid sidebar-search-border;
 }
 .sidebarSearchIcon{
   position: absolute;
   right: 4px;
   top: 4px;
   bottom: 0;
-  color: rgba(0, 0, 0, 0.3);
+  color: sidebar-search-text;
 }
 

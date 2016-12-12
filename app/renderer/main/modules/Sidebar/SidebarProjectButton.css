@@ -10,10 +10,10 @@
   line-height: 1.4em;
 }
 .sidebarButton:hover{
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(0, 0, 0, 0.3);
 }
 .sidebarButton:global(.active){
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(0, 0, 0, 0.6);
   position: relative;
 }
 .sidebarButton:global(.active):after{

@@ -5,6 +5,7 @@
   cursor: pointer;
   color: rgba(0, 0, 0, 0.6);
   transition: 0.3s ease all;
+  line-height: 1.4em;
 }
 .file:hover{
   color: rgba(0, 0, 0, 1);
