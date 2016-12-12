@@ -1,14 +1,14 @@
-@value primary, height-header, secondary from "app/renderer/assets/css/themes/standard.css";
+@value primary, height-header, sidebar-bg, sidebar-text-1, sidebar-text-2, sidebar-footer, secondary, sidebar-search-border, sidebar-search-bg, sidebar-search-border, sidebar-search-text from "app/renderer/assets/css/themes/standard.css";
 
 .sidebar{
   border-right: 1px solid rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
   transition: 0.3s ease all;
-  background: rgba(0, 0, 0, 0.03);
+  background: sidebar-bg;
+  color: sidebar-text-2;
   width: 100%;
 }
-
 
 .sidebarToolbar{
   height: height-header;
@@ -24,11 +24,24 @@
   padding: 14px;
   height: auto;
   padding-right: 40px;
+  border: 1px solid sidebar-search-border;
+  background: sidebar-search-bg;
+  color: sidebar-search-text !important;
 }
 .sidebarSearchIcon{
   position: absolute;
   right: 8px;
   top: 10px;
   bottom: 0;
-  color: rgba(0, 0, 0, 0.3);
+  color: sidebar-search-text;
+}
+.sideBarIcon{
+  color: sidebar-text-2;
+  padding: 0;
+}
+.sideBarIcon:hover{
+  color: sidebar-text-1;
+}
+.footer{
+  border-top: 1px solid sidebar-search-border;
 }

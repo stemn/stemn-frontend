@@ -71,14 +71,14 @@ export const Component = React.createClass({
     }];
 
     return (
-      <DragResize side="right" width="300" widthRange={[0, 500]} animateHide={!this.props.sidebar.show} className="layout-column flex">
+      <DragResize side="right" width="300" widthRange={[0, 500]} animateHide={!this.props.sidebar.show} className="layout-column flex scroll-dark">
         <div className={sidebarStyle}>
           <div className={styles.sidebarToolbar + ' layout-row layout-align-start-center'}>
-            <SimpleIconButton style={{padding: '0px', color: 'black'}} title="Create new project" onClick={this.showProjectNewModal}>
+            <SimpleIconButton className={styles.sideBarIcon} title="Create new project" onClick={this.showProjectNewModal}>
               <MdAdd size="25"/>
             </SimpleIconButton>
             <div className="flex" />
-            <SimpleIconButton title="Toggle sidebar" style={{padding: '0px', color: 'black'}} onClick={()=>{this.props.sidebarActions.toggleSidebar();}}>
+            <SimpleIconButton title="Toggle sidebar" className={styles.sideBarIcon} onClick={()=>{this.props.sidebarActions.toggleSidebar();}}>
               <MdMenu size="25"/>
             </SimpleIconButton>
           </div>
@@ -89,13 +89,13 @@ export const Component = React.createClass({
             </div>
             <div className="scroll-box flex">
               {projects.userProjects.data && projects.userProjects.data.length == 0 ? <SidebarProjectButton  item={{name: 'Create a project'}} clickFn={this.showProjectNewModal} /> : null }
-              {filteredProjects.length > 0 ? <div className="text-grey-3" style={{padding: '10px 15px 5px'}}>My Projects</div> : null}
+              {filteredProjects.length > 0 ? <div style={{padding: '10px 15px 5px', opacity: '0.7'}}>My Projects</div> : null}
               {filteredProjects.map((item, idx) => <ProjectWithContext key={item._id} item={item} isActive={item._id == this.props.params.stub} to={`/project/${item._id}`}/>)}
               <ContextMenu identifier={projectContextIdentifier} menu={projectContextMenu}/>
             </div>
           </div>
           <div>
-            <div className="layout-row layout-align-start-center">
+            <div className={styles.footer + ' layout-row layout-align-start-center'}>
               <PopoverMenu>
                 <a className="flex">
                   <div className={userStyles.userWrapper + ' flex layout-row layout-align-start-center'}>

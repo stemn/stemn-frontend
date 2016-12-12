@@ -43,6 +43,7 @@ class Component extends React.Component{
     const isLoading   = !project || !project.data;
     const isConnected = project && project.data && project.data.remote && project.data.remote.provider;
     const hasName     = project && project.data && project.data.name;
+    const routeName   = this.props.routes[this.props.routes.length - 1];
 
     const downloadLinks = {
       drive   : 'https://tools.google.com/dlpage/drive/index.html',
@@ -77,9 +78,9 @@ class Component extends React.Component{
               <Link activeClassName="active" to={baseLink} onlyActiveOnIndex={true}>Changes</Link>
               <Link activeClassName="active" to={baseLink+'/feed'}>Commits</Link>
               <Link activeClassName="active" to={baseLink+'/tasks'}>Tasks</Link>
-              <Link activeClassName="active" to={baseLink+'/files/'}>Files</Link>
+              <Link className={['files/:path', 'files'].includes(routeName.path) ? 'active' : ''} to={baseLink+'/files/'}>Files</Link>
             </div>
-            <SimpleIconButton to={baseLink+'/settings'} title="Project Settings">
+            <SimpleIconButton activeClassName="active" to={baseLink+'/settings'} title="Project Settings">
               <MdSettings size={20}/>
             </SimpleIconButton>
             <div className="divider"></div>
