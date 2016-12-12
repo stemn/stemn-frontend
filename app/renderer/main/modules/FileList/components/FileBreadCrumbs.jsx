@@ -1,27 +1,47 @@
 import React from 'react';
+import i from 'icepick';
 
 // Styles
 import classNames from 'classnames';
 import classes from './FileBreadCrumbs.css';
 
 import { middle as middleConcat } from 'app/shared/helpers/stringConcat';
-
+import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
+import FileListPopup from './FileListPopup.jsx';
 
 export default React.createClass({
   render() {
     const {meta, clickFn, className} = this.props;
+    const popup = true;
 
     const displayCrumbs = () => {
       if(meta.parents && meta.parents.length > 0){
-        let crumbs = meta.parents.map((parent, idx) => (
-          <span key={idx}>
-            <a onClick={()=>clickFn({file: parent})}>{middleConcat(parent.name, 30, 0.8)}</a>
-            <span> / </span>
-          </span>
-        ))
-
-        crumbs.push(<span key="final">{middleConcat(meta.name, 30, 0.8)}</span>)
-        return crumbs
+        const parentsWithName = i.push(meta.parents, {
+          name: meta.name,
+          fileId: meta.fileId
+        });
+        return parentsWithName.map((folder, idx) => {
+          const isLastChild = idx == parentsWithName.length - 1;
+          const parentfolder = parentsWithName[idx - 1];
+          return parentfolder && popup && idx != 0
+          ? <span key={idx}>
+              <PopoverMenu trigger="hoverDelay" preferPlace="below" tipSize={6}>
+                <span style={{display: 'inline-block'}}>
+                  { !isLastChild
+                  ? <a onClick={()=>clickFn({file: folder})}>{middleConcat(folder.name, 30, 0.8)}</a>
+                  : <span>{middleConcat(folder.name, 30, 0.8)}</span> }
+                </span>
+                <FileListPopup parentfolder={parentfolder} activeFolder={folder} meta={meta} clickFn={clickFn}/>
+              </PopoverMenu>
+              {!isLastChild ? <span> / </span> : null}
+            </span>
+          : <span key={idx}>
+              { !isLastChild
+              ? <a onClick={()=>clickFn({file: folder})}>{middleConcat(folder.name, 30, 0.8)}</a>
+              : <span>{middleConcat(folder.name, 30, 0.8)}</span> }
+              {!isLastChild ? <span> / </span> : null}
+            </span> }
+          )
       }
       else if (meta.name){
         return <span>{middleConcat(meta.name, 30, 0.8)}</span>

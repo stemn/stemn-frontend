@@ -96,12 +96,13 @@ export const Component = React.createClass({
     return this.state.mode == 'single' ? selected1 : selected1 || selected2;
   },
   clickCrumb({file}){
-    const { dispatch, fileMeta } = this.props;
-    dispatch(push({
-      pathname: `/project/${fileMeta.data.project._id}/files/${file.fileId}`,
-      state: {meta : {scope: ['main']}}
-    }))
-    dispatch(ElectronWindowsActions.show('main'))
+    console.log(file);
+//    const { dispatch, fileMeta } = this.props;
+//    dispatch(push({
+//      pathname: `/project/${fileMeta.data.project._id}/files/${file.fileId}`,
+//      state: {meta : {scope: ['main']}}
+//    }))
+//    dispatch(ElectronWindowsActions.show('main'))
   },
   clickTag(task){
     this.props.dispatch(ModalActions.showModal({modalType: 'TASK', modalProps: { taskId: task._id }}));

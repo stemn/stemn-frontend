@@ -1,0 +1,18 @@
+@value primary, border1 from "app/renderer/assets/css/themes/standard.css";
+
+.file{
+  padding: 8px;
+  cursor: pointer;
+}
+.active{
+  color: primary;
+}
+.popup{
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 200px;
+}
+.divider{
+  border-bottom: 1px solid border1;
+}

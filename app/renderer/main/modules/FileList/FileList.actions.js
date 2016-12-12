@@ -10,7 +10,11 @@ export function fetchFiles({projectId, path, options}) {
     },
     meta: {
       key: `${projectId}-${path}`,
-    }
+    },
+    throttle: {
+      time: 500,
+      endpoint:  `${projectId}/${path}`
+    },
   };
 }
 
@@ -23,6 +27,10 @@ export function exploreFolder({folderId, provider}) {
     }),
     meta: {
       key: `${provider}-${folderId}`,
-    }
+    },
+    throttle: {
+      time: 500,
+      endpoint:  `${provider}/${folderId}`
+    },
   };
 }

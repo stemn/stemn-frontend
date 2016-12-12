@@ -10,6 +10,7 @@ export default React.createClass({
   toggleDelayTime: 200,
   toggleDelayTimeout: null,
   toggleDelay (toState){
+    console.log('toggle');
     clearTimeout(this.toggleDelayTimeout);
     this.toggleDelayTimeout = setTimeout(()=>{
       this.toggle(toState);
@@ -24,7 +25,10 @@ export default React.createClass({
     }
   },
   toggle (toState) {
-    this.setState({ isOpen: toState === null ? !this.state.isOpen : toState })
+    const newValue = toState === null ? !this.state.isOpen : toState;
+    if(this.state.isOpen != newValue){
+      this.setState({ isOpen: newValue });
+    }
   },
   render() {
     const { preferPlace, trigger, disableClickClose, tipSize, offset, children, className } = this.props;
@@ -62,6 +66,8 @@ export default React.createClass({
 
     const triggerProps = triggerMap[trigger] || triggerMap['click']; // Default to click
     const contentProps = contentMap[trigger] || contentMap['click']; // Default to click
+
+    console.log(this.state.isOpen);
 
     return (
       <Popover
