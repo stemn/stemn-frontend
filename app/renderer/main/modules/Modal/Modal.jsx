@@ -99,7 +99,6 @@ export const Component = React.createClass({
 });
 
 function callbackFunction(callbackObject, dispatch, extendObject){
-  console.log(callbackObject, extendObject);
   // If it is a normal object, extend and dispatch it
   if(callbackObject && !callbackObject.aliased){
     dispatch(i.merge(callbackObject, extendObject))

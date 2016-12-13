@@ -28,6 +28,7 @@ const propTypesObject = {
   activeFolder    : PropTypes.object.isRequired,
   isOpen          : PropTypes.bool,  // From the popover component
   clickFn         : PropTypes.func,
+  files           : PropTypes.object,
   FileListActions : PropTypes.object,      // Actions
   dispatch        : PropTypes.func,        // Actions
 };
@@ -45,7 +46,7 @@ export const FileRow = React.createClass({
   }
 });
 
-export const Component = React.createClass({
+export const FileListPopup = React.createClass({
   propTypes: propTypesObject,
   componentWillMount() { this.onMount(this.props) },
   componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
@@ -114,4 +115,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps, mapDispatchToProps)(FileListPopup);

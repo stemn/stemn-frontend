@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Menu, shell } from 'electron';
+import { app, BrowserWindow, Menu, shell, screen } from 'electron';
 import path from 'path';
 import process from 'process';
 import log from 'electron-log';
@@ -7,8 +7,10 @@ const mainHtml = path.join(__dirname, '../renderer/assets/html/main.html');
 
 export const create = function createWindow({ uri = '/' } = {}) {
   let browserWindow = null;
-  init();
+  const primarySize = screen.getPrimaryDisplay().workAreaSize;
+  const sizeRatio = 1;
   
+  init();
   return {
     browserWindow: browserWindow,
     show: show
@@ -19,8 +21,8 @@ export const create = function createWindow({ uri = '/' } = {}) {
   function init () {
     browserWindow = new BrowserWindow({
       show: false,
-      width: 1000,
-      height: 600,
+      width: primarySize.width * sizeRatio,
+      height: primarySize.height * sizeRatio,
       minWidth: 500,
       minHeight: 500,
       frame: process.platform == 'darwin' ? true : false

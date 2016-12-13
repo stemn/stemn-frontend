@@ -23,19 +23,25 @@ export const Component = React.createClass({
 
   // Mounting
   onMount(nextProps, prevProps){
-    const { localPath, fileId, fileMeta, revisionId, projectId } = nextProps;
+    const hasFileMeta    = has(nextProps, 'fileMeta.data') && !nextProps.fileMeta.loading;
+    const string1        = prevProps ? prevProps.localPath + prevProps.projectId + prevProps.fileId + prevProps.revisionId : '';
+    const string2        = nextProps ? nextProps.localPath + nextProps.projectId + nextProps.fileId + nextProps.revisionId : '';
+    const hasChangedFile = string1 != string2;
 
-    const string1 = prevProps ? prevProps.projectId + prevProps.fileId + prevProps.revisionId : '';
-    const string2 = nextProps.projectId + nextProps.fileId + nextProps.revisionId;
-
-    if(string1 != string2 || nextProps.localPath != prevProps.localPath){
+    if(string1 != string2){
       // If localPath exists - we must get the fileId - this will get the meta
-      if(localPath){
-        nextProps.filesActions.getMetaFromPath({path: localPath})
+      if(nextProps.localPath){
+        nextProps.filesActions.getMetaFromPath({
+          path       : nextProps.localPath
+        })
       }
       // If we do not yet have the meta, get it:
-      else if(!fileMeta || !fileMeta.data && !fileMeta.loading){
-        nextProps.filesActions.getMeta({projectId, fileId, revisionId});
+      else if(!hasFileMeta){
+        nextProps.filesActions.getMeta({
+          projectId  : nextProps.projectId,
+          fileId     : nextProps.fileId,
+          revisionId : nextProps.revisionId
+        });
       }
     }
   },
@@ -43,14 +49,12 @@ export const Component = React.createClass({
   componentWillMount() { this.onMount(this.props) },
   render() {
     const { fileMeta } = this.props;
+    const hasFileMeta  = fileMeta && !fileMeta.loading && !fileMeta.data;
+
 
     return (
       <div className="layout-column flex">
-        { fileMeta && fileMeta.data && !fileMeta.loading
-          ? <PreviewPageInner fileMeta={fileMeta} />
-          : null }
-        <LoadingOverlay show={fileMeta && fileMeta.loading} />
-        { fileMeta && !fileMeta.loading && !fileMeta.data ?
+        { hasFileMeta ?
           <div className="flex layout-column layout-align-center-center text-center">
             <div style={{maxWidth: '300px'}}>
               <img src={cloudMagnify} style={{width: '100px', height: '100px'}}/>
@@ -58,7 +62,7 @@ export const Component = React.createClass({
               <div className="text-title-5" style={{marginBottom: '20px'}}>This file could not be found in your connected cloud providers.</div>
             </div>
           </div>
-          : null
+          : <PreviewPageInner fileMeta={fileMeta} />
         }
       </div>
     );

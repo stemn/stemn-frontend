@@ -43,31 +43,44 @@ import classes from './PagePreview.css';
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
-    // Mounting
   onMount(nextProps, prevProps){
-    // If this is a sync file
-    if(nextProps.fileMeta.data.project && nextProps.fileMeta.data.project._id){
-      nextProps.syncTimelineActions.fetchTimeline({
-        projectId : nextProps.fileMeta.data.project._id,
+    const hasFileMeta    = has(nextProps, 'fileMeta.data');
+    const string1        = has(prevProps, 'fileMeta.data') ? prevProps.fileMeta.data.fileId + '-' + prevProps.fileMeta.data.revisionId : '';
+    const string2        = has(nextProps, 'fileMeta.data') ? nextProps.fileMeta.data.fileId + '-' + nextProps.fileMeta.data.revisionId : '';
+    const hasChangedFile = string1 != string2;
+    // If we have file Meta
+    if(hasFileMeta && hasChangedFile){
+      // If this is a sync file
+      if(has(nextProps, 'fileMeta.data.project._id')){
+        nextProps.syncTimelineActions.fetchTimeline({
+          projectId : nextProps.fileMeta.data.project._id,
+          fileId    : nextProps.fileMeta.data.fileId,
+        })
+      }
+      // Else, If this is remote file
+      else{
+        nextProps.syncTimelineActions.fetchTimeline({
+          fileId    : nextProps.fileMeta.data.fileId,
+          provider  : nextProps.fileMeta.data.provider,
+        })
+      }
+      nextProps.filesActions.getRelatedTasks({
         fileId    : nextProps.fileMeta.data.fileId,
+        projectId : nextProps.fileMeta.data.project._id
+      })
+      this.setState({
+        selected1    : nextProps.fileMeta,
+        selected2    : undefined,
+        lastSelected : 1,
+        mode         : 'single'
       })
     }
-    // If this is remote file
-    else{
-      nextProps.syncTimelineActions.fetchTimeline({
-        fileId    : nextProps.fileMeta.data.fileId,
-        provider  : nextProps.fileMeta.data.provider,
-      })
-    }
-    nextProps.filesActions.getRelatedTasks({
-      fileId    : nextProps.fileMeta.data.fileId,
-      projectId : nextProps.fileMeta.data.project._id
-    })
   },
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
   componentWillMount() { this.onMount(this.props) },
   getInitialState () {
     return {
-      selected1    : this.props.fileMeta,
+      selected1    : undefined,
       selected2    : undefined,
       lastSelected : 1,
       mode         : 'single'
@@ -124,7 +137,8 @@ export const Component = React.createClass({
   render() {
     const { fileMeta, syncTimeline, relatedTasks } = this.props;
     const { mode, selected1, selected2 } = this.state;
-    const isPartOfProject = fileMeta.data.project && fileMeta.data.project._id;
+    const hasFileMeta = fileMeta && fileMeta.data;
+    const isPartOfProject = hasFileMeta && fileMeta.data.project && fileMeta.data.project._id;
     const items = orderItemsByTime(mode, selected1, selected2);
     const file1 = items[0] ? items[0].data : undefined;
     const file2 = items[1] ? items[1].data : undefined;
@@ -133,7 +147,7 @@ export const Component = React.createClass({
     return (
       <div className="layout-column flex">
         <div className={classes.header + ' layout-row layout-align-start-center'}>
-          <div className="flex">{fileMeta ? <FileBreadCrumbs meta={fileMeta.data} clickFn={this.clickCrumb} popup={true}/> : ''}</div>
+          <div className="flex">{hasFileMeta ? <FileBreadCrumbs meta={fileMeta.data} clickFn={this.clickCrumb} popup={true}/> : ''}</div>
           <FileCompareMenu
             file1={file1}
             file2={file2}
@@ -145,12 +159,14 @@ export const Component = React.createClass({
         </div>
         <div className="layout-row flex">
           <div className="layout-column flex">
-            <FileCompareInner
+            { hasFileMeta
+            ? <FileCompareInner
               project={fileMeta.data.project}
               file1={file1}
               file2={file2}
               mode={mode}
-              header={['sideBySide', 'aboveAndBelow'].includes(mode)}/>
+              header={['sideBySide', 'aboveAndBelow'].includes(mode)} />
+            : <div className="flex" /> }
             <Timeline className={classes.timeline}
               items={revisions}
               onSelect={this.onSelect}
@@ -160,15 +176,16 @@ export const Component = React.createClass({
           <DragResize side="left" width="450" widthRange={[0, 450]} className="layout-column">
             <aside className={classes.sidebar + ' layout-column flex'} style={{minWidth: '400px', overflowY: 'auto'}}>
               <SectionTitle style={{marginBottom: '15px'}}>Meta</SectionTitle>
-              <SimpleTable>
-                <tr><td>Name</td><td>{fileMeta.data.name}</td></tr>
-                {/*<tr><td>Projects</td><td>{fileMeta.data.project._id}</td></tr>*/}
-                <tr><td>Size</td><td>{formatBytes(fileMeta.data.size)}</td></tr>
-                <tr><td>Last modified</td><td>{moment(fileMeta.data.modified).fromNow()}</td></tr>
-                { revisions.length > 0 
-                ? <tr><td>Revisions</td><td>{revisions.length}</td></tr> 
-                : null }
-              </SimpleTable>
+              { hasFileMeta
+              ? <SimpleTable>
+                  <tr><td>Name</td><td>{fileMeta.data.name}</td></tr>
+                  <tr><td>Size</td><td>{formatBytes(fileMeta.data.size)}</td></tr>
+                  <tr><td>Last modified</td><td>{moment(fileMeta.data.modified).fromNow()}</td></tr>
+                  { revisions.length > 0
+                  ? <tr><td>Revisions</td><td>{revisions.length}</td></tr>
+                  : null }
+                </SimpleTable>
+              : null }
               { relatedTasks && relatedTasks.data && relatedTasks.data.length > 0
               ? <div>
                   <SectionTitle style={{margin: '30px 0 15px'}}>Related Tasks</SectionTitle>
@@ -193,9 +210,10 @@ export const Component = React.createClass({
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
 function mapStateToProps({ syncTimeline, files }, { fileMeta }) {
+  const hasFileId = fileMeta && fileMeta.data && fileMeta.data.fileId;
   return {
-    syncTimeline: syncTimeline[fileMeta.data.fileId],
-    relatedTasks: files.relatedTasks[fileMeta.data.fileId]
+    syncTimeline: hasFileId ? syncTimeline[fileMeta.data.fileId] : [],
+    relatedTasks: hasFileId ? files.relatedTasks[fileMeta.data.fileId] : []
   };
 }
 

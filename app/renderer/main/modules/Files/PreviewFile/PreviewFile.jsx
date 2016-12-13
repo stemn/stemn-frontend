@@ -33,7 +33,6 @@ export const Component = React.createClass({
 
     const getPreview = () => {
       const viewerType = getViewerType(file.extension);
-      console.log(fileData);
       if(viewerType == 'gerber' || viewerType == 'pcb'){
         return <PreviewPcb previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile} />
       }

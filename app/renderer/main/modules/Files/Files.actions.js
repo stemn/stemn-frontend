@@ -5,7 +5,6 @@ import * as LocalPathActions          from '../../../../shared/modules/LocalPath
 import * as FilesUtils                from './Files.utils.js'
 
 export function getFile({projectId, fileId, revisionId, provider}) {
-  console.log(projectId, fileId, revisionId, provider);
   return {
     type: 'FILES/GET_FILE',
     http: true,

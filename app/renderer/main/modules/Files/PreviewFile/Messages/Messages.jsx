@@ -5,7 +5,6 @@ import AssemblyPartNotFound from './AssemblyPartNotFound/AssemblyPartNotFound.js
 export default React.createClass({
   render() {
     const { error, fileMeta } = this.props;
-    console.log(error);
 
     if(error.type == 'REVISION_NOT_FOUND'){
       return <PreviewExpired provider={fileMeta.provider}/>
