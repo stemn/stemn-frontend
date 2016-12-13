@@ -88,7 +88,7 @@ class Component extends React.Component{
           <Header>
             <PopoverMenu preferPlace="below" tipSize={6}>
               <a className={classes.title + ' text-ellipsis'}>{hasName ? project.data.name : ''}<MdExpandMore style={{marginLeft: '5px'}} size="18px"/></a>
-              <PopoverMenuList item={project.data} menu={ProjectMenu(dispatch)}/>
+              <PopoverMenuList item={project && project.data ? project.data : {}} menu={ProjectMenu(dispatch)}/>
             </PopoverMenu>
 
             <div className={classes.tabs + ' flex layout-row layout-align-start-center'}>

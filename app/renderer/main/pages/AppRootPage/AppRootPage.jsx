@@ -6,11 +6,9 @@ import ToastContainer from 'app/renderer/main/modules/Toasts/Toasts.jsx'
 export default (props) => {
   return (
     <div className="layout-column flex">
-      <div className="layout-column flex" >{props.children}</div>
+      <div className="layout-column flex">{props.children}</div>
       <ModalContainer />
       <ToastContainer />
     </div>
   )
 }
-//style={{filter: 'blur(4px)'}}
-//      <Smooch />

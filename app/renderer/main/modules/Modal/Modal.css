@@ -14,7 +14,7 @@
 
 .modal {
   transform-origin: bottom center;
-  animation: fade-in-pulse-08 .3s forwards cubic-bezier(.8, .02, .45, .91);
+  animation: fade-in .3s ease;
   outline: none;
   background: rgb(255, 255, 255);
   box-shadow: 0 0 0 1px rgba(0,0,0,0.1),0 2px 15px rgba(0,0,0,0.1);
