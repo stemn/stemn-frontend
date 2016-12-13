@@ -1,4 +1,4 @@
-@value primary, secondary, border1, bg1 from "app/renderer/assets/css/themes/standard.css";
+@value primary, secondary, border1, bg1, height-header from "app/renderer/assets/css/themes/standard.css";
 /*
 .title{
   font-size: 16px;
@@ -8,7 +8,7 @@
 */
 
 .tabs{
-  margin-left: 25px;
+  margin-left: 15px;
   padding-left: 10px;
   border-left: 1px solid border1;
 }
@@ -26,4 +26,11 @@
 }
 .tabs a:hover{
   color: rgba(0, 0, 0, 1);
+}
+
+.title{
+  line-height: height-header;
+  font-weight: bold;
+}
+.title:hover{
 }
