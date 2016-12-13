@@ -4,6 +4,19 @@
   border-bottom: 1px solid border1;
   padding: 7px;
   cursor: default;
+  position: relative;
+  line-height: 1.4em;
+}
+.clickOverlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.clickable{
+  position: relative;
+  z-index: 1;
 }
 .row:last-child{
   border-bottom: none;

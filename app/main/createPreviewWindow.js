@@ -1,4 +1,5 @@
 import { app, BrowserWindow, Menu, shell, screen } from 'electron';
+import { bindBackForward } from './utils/browserWindowUtils.js'
 import path from 'path';
 
 const mainHtml = path.join(__dirname, '../renderer/assets/html/preview.html');
@@ -20,6 +21,7 @@ export const create = function createWindow({ uri = '/' } = {}) {
   browserWindow.on('closed', () => {
     browserWindow = null;
   });
+  bindBackForward(browserWindow);
 
   if (process.env.NODE_ENV === 'development') {
     browserWindow.openDevTools();

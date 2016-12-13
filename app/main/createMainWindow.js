@@ -1,4 +1,5 @@
 import { app, BrowserWindow, Menu, shell, screen } from 'electron';
+import { bindBackForward } from './utils/browserWindowUtils.js'
 import path from 'path';
 import process from 'process';
 import log from 'electron-log';
@@ -27,6 +28,8 @@ export const create = function createWindow({ uri = '/' } = {}) {
       minHeight: 500,
       frame: process.platform == 'darwin' ? true : false
     });
+
+
     function handleRedirect(e, url) {
       if (url !== browserWindow.webContents.getURL()) {
         e.preventDefault();
@@ -41,6 +44,7 @@ export const create = function createWindow({ uri = '/' } = {}) {
 
     browserWindow.webContents.on('will-navigate', handleRedirect);
     browserWindow.webContents.on('new-window', handleRedirect);
+    bindBackForward(browserWindow);
 
     if (process.env.NODE_ENV === 'development') {
       browserWindow.openDevTools();

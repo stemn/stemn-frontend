@@ -15,21 +15,14 @@ export const GetStatusOfUrn =  React.createClass({
       status: 'pending',
     }
   },
-  checkStatusInterval: null,
   componentDidMount() {
-    this.checkStatusInterval = setInterval(this.checkStatus, 700);
-  },
-  componentWillUnmount(){
-    clearInterval(this.checkStatusInterval);
+    this.checkStatus()
   },
   checkStatus(){
     previewCadUtils.getViewStatus(this.props.urn).then(response => {
+      console.log(response);
       this.setState({status: response.data.status})
-      if(this.state.status == 'success' || this.state.status == 'failed'){
-        clearInterval(this.checkStatusInterval)
-      }
     }).catch(error=>{
-      clearInterval(this.checkStatusInterval)
       this.setState({status: 'failed'})
     })
   },

@@ -4,24 +4,11 @@ const library = {
   authenticate: authenticate,
   getViewStatus: getViewStatus,
   isWebGlSupported: isWebGlSupported,
-//  render: render,
 }
 
 export default library
 
 ////////////////////////////////////////////
-
-//function render({projectId, fileId, revisionId, provider}){
-//  return http({
-//    method: 'GET',
-//    url: projectId
-//    ? `/api/v1/sync/render/${projectId}/${fileId}`
-//    : `/api/v1/remote/render/${provider}/${fileId}`,
-//    params: {
-//      revisionId: revisionId
-//    }
-//  })
-//}
 
 function authenticate(){
   return http({
@@ -36,10 +23,7 @@ function authenticate(){
 function getViewStatus(urn64){
   return http({
     method: 'GET',
-    url: 'https://developer.api.autodesk.com/viewingservice/v1/'+urn64+'/status',
-    headers: {
-      Authorization: 'Bearer ' + library.accessToken
-    }
+    url: `/api/v1/autodesk/info/${urn64}`,
   })
 }
 
