@@ -64,7 +64,7 @@ export function getUserProjects({userId}) {
 
 export function confirmDeleteProject({projectId, name}) {
   return ModalActions.showConfirm({
-    message: 'Deleting a project is permanent. You will not be able to undo this.',
+    message: 'Deleting a project is permanent. You will not be able to undo this.<br/><br/> Note: All your Stemn data (such as commits and tasks) will be deleted. Your files will remain in your cloud provider.',
     confirmValue: name,
     confirmPlaceholder: 'Please type in the name of this project to confirm.',
     modalConfirm: {

@@ -97,9 +97,7 @@ const mainReducer = (state, action) => {
       }
 
     case 'AUTH/LOGOUT':
-      return {...state,
-        authLoading: false,
-      }
+      return i.assoc(state, initialState);
     case 'AUTH/CLEAR_USER_DATA':
       return {...state,
         user: {},

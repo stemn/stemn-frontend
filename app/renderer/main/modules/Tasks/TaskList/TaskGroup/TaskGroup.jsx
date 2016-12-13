@@ -24,7 +24,7 @@ export default class TaskGroup extends React.Component {
     }
     else{
       return (
-        <div className={layout == 'list' ? classes.wrapperList : classes.wrapperBoard + ' layout-column flex'}>
+        <div className={layout == 'list' ? classes.wrapperList : classes.wrapperBoard + ' layout-column'}>
           <div className={headerClasses}>
             <h3 className="flex">
               <Input 

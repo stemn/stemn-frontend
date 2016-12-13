@@ -147,15 +147,17 @@ export const TaskList = React.createClass({
               </TaskGroup>
            </TaskGroupWrapped>
           )}
-          <TaskGroup layout={layout} simpleGroup={true}>
-            <NewItem
-              model={`${entityModel}.newGroupString`}
-              value={board.newGroupString}
-              placeholder="New Group"
-              submitFn={this.newGroup}
-              box={layout=='board'}
-            />
-          </TaskGroup>
+          <div>
+            <TaskGroup layout={layout} simpleGroup={true}>
+              <NewItem
+                model={`${entityModel}.newGroupString`}
+                value={board.newGroupString}
+                placeholder="New Group"
+                submitFn={this.newGroup}
+                box={layout=='board'}
+              />
+            </TaskGroup>
+          </div>
         </TaskGroupParent>
       </div>
     )

@@ -90,7 +90,7 @@ export const Component = React.createClass({
               <div>Dont have an account? <Link to="/register" className="link-primary">Register</Link></div>
             </div>
           </div>
-          <LoadingOverlay show={auth.authLoading}/>
+          <LoadingOverlay show={auth.authLoading || auth.userLoading}/>
         </div>
       </div>
     </div>

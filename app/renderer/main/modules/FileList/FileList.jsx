@@ -134,7 +134,7 @@ export const Component = React.createClass({
           </SimpleIconButton>
         </div>
         <div className="rel-box" style={contentStyle}>
-          <LoadingOverlay show={isLoading} linear={true} hideBg={true}/>
+          <LoadingOverlay show={isLoading} linear={true} hideBg={true} noOverlay={true}/>
           { displayResults() }
           { options.showMenu
           ? <ContextMenu identifier={contextIdentifier} menu={FileListMenu(dispatch)}/>

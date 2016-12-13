@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 // Component Core
 import React from 'react';
+import { has } from 'lodash';
 
 // Actions
 import * as FilesActions from 'app/renderer/main/modules/Files/Files.actions.js';

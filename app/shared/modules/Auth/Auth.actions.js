@@ -4,6 +4,7 @@ import querystring from 'querystring';
 import http from 'axios';
 import * as ProjectsActions from '../../actions/projects.js';
 import * as ElectronWindowsActions from '../ElectronWindows/ElectronWindows.actions.js';
+import { push } from 'react-router-redux';
 
 export function loadUserData() {
   return (dispatch) => {
@@ -154,9 +155,7 @@ export function logout() {
   return (dispatch) => {
     dispatch(clearUserData());
     dispatch(removeHttpHeaders());
-    dispatch(removeAuthToken());
-    dispatch({
-        type:'AUTH/LOGOUT',
-    })
+    dispatch({type:'AUTH/LOGOUT'})
+    dispatch(push('/login'))
   }
 }
