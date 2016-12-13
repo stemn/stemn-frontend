@@ -51,7 +51,7 @@ export const FileListPopup = React.createClass({
   componentWillMount() { this.onMount(this.props) },
   componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
   onMount(nextProps, prevProps) {
-    if((!prevProps || !prevProps.isOpen) && nextProps.isOpen && (!nextProps.files || !nextProps.files.entries)){
+    if((!prevProps || !prevProps.isOpen) && nextProps.isOpen && (!nextProps.files || !nextProps.files.loading)){
       this.getFiles({
         path     : nextProps.parentfolder.fileId,
         provider : nextProps.meta.provider,

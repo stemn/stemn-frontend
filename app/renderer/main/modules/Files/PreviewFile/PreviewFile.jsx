@@ -46,7 +46,7 @@ export const Component = React.createClass({
         return <div>Google</div>
       }
       else if(viewerType == 'image'){
-        return <PreviewImage fileMeta={file} />
+        return <PreviewImage previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile} />
       }
       else if(viewerType == 'pdf'){
         return <PreviewPdf previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile}/>

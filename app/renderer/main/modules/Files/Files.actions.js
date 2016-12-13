@@ -5,21 +5,39 @@ import * as LocalPathActions          from '../../../../shared/modules/LocalPath
 import * as FilesUtils                from './Files.utils.js'
 
 export function getFile({projectId, fileId, revisionId, provider, responseType}) {
+  return (dispatch) => {
+    const cacheKey = `${fileId}-${revisionId}`
+    return dispatch({
+      type: 'FILES/GET_FILE',
+      payload: http({
+        method: 'GET',
+        url: projectId ? `/api/v1/sync/download/${projectId}/${fileId}` : `/api/v1/remote/download/${provider}/${fileId}`,
+        params: {
+          revisionId
+        },
+        responseType: responseType || 'json',
+        onDownloadProgress: function (progressEvent) {
+          const percentage = progressEvent.loaded / progressEvent.total;
+          dispatch(getFileProgress({percentage, cacheKey}));
+        },
+      }),
+      meta: {
+        cacheKey
+      }
+    })
+  }
+}
+
+export function getFileProgress({percentage, cacheKey}) {
   return {
-    type: 'FILES/GET_FILE',
-    http: true,
+    type: 'FILES/GET_FILE_PROGRESS',
     payload: {
-      method: 'GET',
-      url: projectId ? `/api/v1/sync/download/${projectId}/${fileId}` : `/api/v1/remote/download/${provider}/${fileId}`,
-      params: {
-        revisionId
-      },
-      responseType: responseType || 'json',
+      percentage
     },
     meta: {
-      cacheKey: `${fileId}-${revisionId}`
+      cacheKey,
     }
-  };
+  }
 }
 
 export function renderFile({projectId, fileId, revisionId, provider}) {

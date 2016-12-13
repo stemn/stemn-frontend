@@ -22,6 +22,8 @@ export default function (state = initialState, action) {
         data: action.payload.data,
         loading: false
       })
+    case 'FILES/GET_FILE_PROGRESS':
+      return i.assocIn(state, ['fileData', action.meta.cacheKey, 'percentage'], action.payload.percentage)
 
     case 'FILES/RENDER_FILE_PENDING' :
       return i.assocIn(state, ['fileRenders', action.meta.cacheKey, 'loading'], true)
