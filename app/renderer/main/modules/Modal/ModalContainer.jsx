@@ -13,8 +13,9 @@ import Modal from './Modal.jsx'
 
 const propTypesObject = {
   types : PropTypes.array,   // Array of modalTypes that can be displayed such as : ['FILE_DOWNLOAD'] (If not supplied, all modals will be dislayed)
-  modals: PropTypes.array,    // Modals object
-  children: PropTypes.node    // Child node
+  modals: PropTypes.object,    // Modals object
+  children: PropTypes.node,    // Child node
+  dispatch: PropTypes.func
 };
 
 export const ModalContainer = React.createClass({

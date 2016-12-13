@@ -23,13 +23,26 @@ export function selectTimelineItem({projectId, selected}) {
 }
 
 export function fetchTimeline({projectId, fileId, provider}) {
+  const getTypes = () => {
+    if(fileId){
+      if(projectId){
+        return ['commits', 'revisions']
+      }
+      else{
+        return ['revisions']
+      }
+    }
+    else{
+      return ['commits']
+    }
+  }
   return {
     type:'TIMELINE/FETCH_TIMELINE',
     payload: http({
       method: 'GET',
       url: projectId ? `/api/v1/sync/timeline/${projectId}` : `/api/v1/remote/timeline/${provider}`,
       params: {
-        types: fileId ? ['commits', 'revisions'] : ['commits'],
+        types: getTypes(),
         file: fileId
       },
     }),

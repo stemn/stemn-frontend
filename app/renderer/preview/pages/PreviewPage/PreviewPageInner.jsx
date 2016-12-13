@@ -173,39 +173,41 @@ export const Component = React.createClass({
               isSelected={this.isSelected}
               preferPlace="above"/>
           </div>
-          <DragResize side="left" width="450" widthRange={[0, 450]} className="layout-column">
-            <aside className={classes.sidebar + ' layout-column flex'} style={{minWidth: '400px', overflowY: 'auto'}}>
-              <SectionTitle style={{marginBottom: '15px'}}>Meta</SectionTitle>
-              { hasFileMeta
-              ? <SimpleTable>
-                  <tr><td>Name</td><td>{fileMeta.data.name}</td></tr>
-                  <tr><td>Size</td><td>{formatBytes(fileMeta.data.size)}</td></tr>
-                  <tr><td>Last modified</td><td>{moment(fileMeta.data.modified).fromNow()}</td></tr>
-                  { revisions.length > 0
-                  ? <tr><td>Revisions</td><td>{revisions.length}</td></tr>
-                  : null }
-                </SimpleTable>
-              : null }
-              { relatedTasks && relatedTasks.data && relatedTasks.data.length > 0
-              ? <div>
-                  <SectionTitle style={{margin: '30px 0 15px'}}>Related Tasks</SectionTitle>
-                  {orderBy(relatedTasks.data, ['complete']).map(task => <Tag key={task._id} text={task.name} onClick={() => this.clickTag(task)} />)}
-                </div>
-              : null }
-              <SectionTitle style={{margin: '30px 0'}}>Timeline</SectionTitle>
-              <div className="flex layout-column">
-                <TimelineVertical
-                  items={syncTimeline && syncTimeline.data ? syncTimeline.data : []}
-                />
-              </div>
-            </aside>
-          </DragResize>
+
         </div>
       </div>
     );
   }
 });
 
+//
+//          <DragResize side="left" width="450" widthRange={[0, 450]} className="layout-column">
+//            <aside className={classes.sidebar + ' layout-column flex'} style={{minWidth: '400px', overflowY: 'auto'}}>
+//              <SectionTitle style={{marginBottom: '15px'}}>Meta</SectionTitle>
+//              { hasFileMeta
+//              ? <SimpleTable>
+//                  <tr><td>Name</td><td>{fileMeta.data.name}</td></tr>
+//                  <tr><td>Size</td><td>{formatBytes(fileMeta.data.size)}</td></tr>
+//                  <tr><td>Last modified</td><td>{moment(fileMeta.data.modified).fromNow()}</td></tr>
+//                  { revisions.length > 0
+//                  ? <tr><td>Revisions</td><td>{revisions.length}</td></tr>
+//                  : null }
+//                </SimpleTable>
+//              : null }
+//              { relatedTasks && relatedTasks.data && relatedTasks.data.length > 0
+//              ? <div>
+//                  <SectionTitle style={{margin: '30px 0 15px'}}>Related Tasks</SectionTitle>
+//                  {orderBy(relatedTasks.data, ['complete']).map(task => <Tag key={task._id} text={task.name} onClick={() => this.clickTag(task)} />)}
+//                </div>
+//              : null }
+//              <SectionTitle style={{margin: '30px 0'}}>Timeline</SectionTitle>
+//              <div className="flex layout-column">
+//                <TimelineVertical
+//                  items={syncTimeline && syncTimeline.data ? syncTimeline.data : []}
+//                />
+//              </div>
+//            </aside>
+//          </DragResize>
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 

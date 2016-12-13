@@ -4,7 +4,7 @@ import { name as localPathModuleName} from '../../../../shared/modules/LocalPath
 import * as LocalPathActions          from '../../../../shared/modules/LocalPath/LocalPath.actions.js';
 import * as FilesUtils                from './Files.utils.js'
 
-export function getFile({projectId, fileId, revisionId, provider}) {
+export function getFile({projectId, fileId, revisionId, provider, responseType}) {
   return {
     type: 'FILES/GET_FILE',
     http: true,
@@ -13,7 +13,8 @@ export function getFile({projectId, fileId, revisionId, provider}) {
       url: projectId ? `/api/v1/sync/download/${projectId}/${fileId}` : `/api/v1/remote/download/${provider}/${fileId}`,
       params: {
         revisionId
-      }
+      },
+      responseType: responseType || 'json',
     },
     meta: {
       cacheKey: `${fileId}-${revisionId}`

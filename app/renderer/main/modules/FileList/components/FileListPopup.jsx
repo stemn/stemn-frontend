@@ -63,13 +63,13 @@ export const FileListPopup = React.createClass({
     if(projectId){
       this.props.FileListActions.fetchFiles({
         projectId: projectId,
-        path: path,
+        path: path || '',
       });
     }
     else if(['dropbox', 'drive'].includes(provider)){
       this.props.FileListActions.exploreFolder({
         provider: provider,
-        folderId: path,
+        folderId: path || '',
       });
     }
   },
