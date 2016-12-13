@@ -8,7 +8,6 @@ import * as AuthActions from 'app/shared/modules/Auth/Auth.actions.js';
 import * as ProjectsActions from 'app/shared/actions/projects';
 import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
 import * as SystemActions from 'app/shared/modules/System/System.actions.js';
-import { push } from 'react-router-redux'
 
 // Component Core
 import React from 'react';
@@ -32,6 +31,7 @@ import MdMenu from 'react-icons/md/menu';
 import MdSearch from 'react-icons/md/search';
 import MdSettings from 'react-icons/md/settings';
 import MdAdd from 'react-icons/md/add';
+import ProjectMenu from 'app/renderer/main/modules/Projects/Project.menu.js';
 
 import UserAvatar          from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
 
@@ -49,27 +49,6 @@ export const Component = React.createClass({
     const nameRegex = new RegExp(escapeRegExp(this.props.sidebar.searchString), 'i');
     const filteredProjects = projects.userProjects.data ? projects.userProjects.data.filter(project => nameRegex.test(project.name)) : [];
     const filteredProjectsOrdered = orderBy(filteredProjects, 'updated', 'desc')
-
-    const projectContextMenu = [{
-      label: 'Open Folder',
-      isHidden: item => !item.remote || !item.remote.connected,
-      onClick: item => {
-        this.props.systemActions.openFile({
-          projectId: item._id,
-          provider: item.remote.provider,
-          path: ''
-        })},
-    },{
-      label: 'Project Settings',
-      onClick: item => dispatch(push(`/project/${item._id}/settings`))
-    },{
-      label: 'Delete Project',
-      divider: true,
-      onClick: item => projectsActions.confirmDeleteProject({
-        projectId: item._id,
-        name: item.name
-      }),
-    }];
 
     return (
       <DragResize side="right" width="300" widthRange={[0, 500]} animateHide={!this.props.sidebar.show} className="layout-column flex scroll-dark">
@@ -92,7 +71,7 @@ export const Component = React.createClass({
               {projects.userProjects.data && projects.userProjects.data.length == 0 ? <SidebarProjectButton  item={{name: 'Create a project'}} clickFn={this.showProjectNewModal} /> : null }
               {filteredProjectsOrdered.length > 0 ? <div style={{padding: '10px 15px 5px', opacity: '0.7'}}>My Projects</div> : null}
               {filteredProjectsOrdered.map((item, idx) => <ProjectWithContext key={item._id} item={item} isActive={item._id == this.props.params.stub} to={`/project/${item._id}`}/>)}
-              <ContextMenu identifier={projectContextIdentifier} menu={projectContextMenu}/>
+              <ContextMenu identifier={projectContextIdentifier} menu={ProjectMenu(dispatch)}/>
             </div>
           </div>
           <div>

@@ -15,7 +15,11 @@ import Header from 'app/renderer/main/modules/Header/Header.jsx'
 import Banner from 'app/renderer/main/modules/Banner/Banner.jsx'
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import MdSettings from 'react-icons/md/settings';
+import MdExpandMore from 'react-icons/md/expand-more';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
+import PopoverMenuList from 'app/renderer/main/components/PopoverMenu/PopoverMenuList';
+import ProjectMenu from 'app/renderer/main/modules/Projects/Project.menu.js';
 
 // Styles
 import classNames from 'classnames';
@@ -38,7 +42,7 @@ class Component extends React.Component{
     }
   }
   render() {
-    const { project, system, children, systemActions, params } = this.props;
+    const { project, system, children, systemActions, params, dispatch } = this.props;
     const baseLink    = `project/${project && project.data ? project.data._id : ''}`;
     const isLoading   = !project || !project.data;
     const isConnected = project && project.data && project.data.remote && project.data.remote.provider;
@@ -48,7 +52,16 @@ class Component extends React.Component{
     const downloadLinks = {
       drive   : 'https://tools.google.com/dlpage/drive/index.html',
       dropbox : 'https://www.dropbox.com/downloading'
-    }
+    };
+
+    const menu = [{
+      label: 'Project Settings',
+      onClick: () => {}
+    },{
+      label: 'Delete Projects',
+      onClick: this.deleteTask
+    }];
+
     const missingClientBanner = () => {
       const provider   = project.data.remote.provider;
       const capitalize = { textTransform: 'capitalize' };
@@ -73,7 +86,11 @@ class Component extends React.Component{
       <div className="layout-column flex rel-box">
         <div className="layout-column flex">
           <Header>
-            <b className="text-ellipsis">{hasName ? project.data.name : ''}</b>
+            <PopoverMenu preferPlace="below">
+              <b className="text-ellipsis">{hasName ? project.data.name : ''}<MdExpandMore style={{marginLeft: '5px'}} size="18px"/></b>
+              <PopoverMenuList menu={ProjectMenu(dispatch)}/>
+            </PopoverMenu>
+
             <div className={classes.tabs + ' flex layout-row layout-align-start-center'}>
               <Link activeClassName="active" to={baseLink} onlyActiveOnIndex={true}>Changes</Link>
               { isConnected ? <Link activeClassName="active" to={baseLink+'/feed'}>Commits</Link> : null }
@@ -116,7 +133,8 @@ function mapStateToProps({system}) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    systemActions: bindActionCreators(SystemActions, dispatch)
+    systemActions: bindActionCreators(SystemActions, dispatch),
+    dispatch
   }
 }
 

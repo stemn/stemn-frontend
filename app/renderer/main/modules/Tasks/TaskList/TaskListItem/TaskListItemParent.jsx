@@ -12,9 +12,10 @@ export default class TaskListItemParent extends React.Component {
         </FlipMove>
         {tasks && tasks.length >= 1 ? null :
           <EmptyWrapped
-            style={{position: 'absolute', top: '0', bottom: '0', left: '0', right: '0'}}
+            layout={layout}
             moveCard={moveCard}
-            groupId={groupId}/>
+            groupId={groupId}
+          />
         }
       </div>
     );

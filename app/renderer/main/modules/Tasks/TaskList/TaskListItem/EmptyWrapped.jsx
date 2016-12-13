@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import classes from './EmptyWrapped.css';
 
 import { emptyHover } from './TaskListItem.drag.config.js';
 import { DragSource, DropTarget } from 'react-dnd';
@@ -19,9 +20,9 @@ export default class EmptyWrapped extends Component {
     connectDropTarget: PropTypes.func.isRequired,
   };
   render() {
-    const { item, connectDropTarget, groupId, style } = this.props;
+    const { item, connectDropTarget, groupId, style, layout } = this.props;
     return connectDropTarget(
-      <div style={style}></div>
+      <div className={layout == 'board' ? classes.wrapperBoard : classes.wrapperList}></div>
     );
   }
 }

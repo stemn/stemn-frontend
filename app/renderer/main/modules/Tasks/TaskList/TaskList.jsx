@@ -136,7 +136,7 @@ export const TaskList = React.createClass({
                     </TaskListItemWrapped>
                   ) : ''}
                   <NewItem
-                    style={layout == 'list' ? {marginLeft: '60px'} : {}}
+                    style={layout == 'list' ? {marginLeft: '60px', zIndex: '1'} : {zIndex: '1'}}
                     model={`${entityModel}.newTaskString.${group._id}`}
                     value={board.newTaskString ? board.newTaskString[group._id] : ''}
                     placeholder="New Task"
@@ -150,6 +150,7 @@ export const TaskList = React.createClass({
           <div>
             <TaskGroup layout={layout} simpleGroup={true}>
               <NewItem
+                style={{zIndex: '1'}}
                 model={`${entityModel}.newGroupString`}
                 value={board.newGroupString}
                 placeholder="New Group"
