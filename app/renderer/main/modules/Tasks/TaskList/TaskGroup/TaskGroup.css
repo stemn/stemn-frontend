@@ -12,6 +12,7 @@
 }
 .header{
   height: 44px;
+  min-height: 44px;
   padding: 0 10px;
   border-bottom: 1px solid border1;
 }
