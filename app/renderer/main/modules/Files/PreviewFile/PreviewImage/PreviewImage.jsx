@@ -3,8 +3,6 @@ import { omit } from 'lodash';
 import styles from './PreviewImage.css';
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import ScrollZoom from 'app/shared/modules/Scroll/ScrollZoom/ScrollZoom.jsx';
-import { getDownloadUrl } from '../../Files.utils.js';
-
 
 const ImagePropTypes = {
   arrayBuffer  : PropTypes.array,   // Image data array buffer

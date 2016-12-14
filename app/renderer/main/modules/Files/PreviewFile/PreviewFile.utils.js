@@ -1,4 +1,5 @@
 import { forEach, clone } from 'lodash';
+import i from 'icepick';
 import codemirror from 'codemirror';
 import 'codemirror/mode/meta.js';
 
@@ -56,21 +57,20 @@ export const viewerFileTypes = {
 }
 
 export const getViewerType = (fileType, provider) => {
-    var result;
-    var fileTypeLower = fileType ? fileType.toLowerCase() : '';
-    provider = provider == 'drive' ? 'drive' : 'dropbox';
+  const providers = ['dropbox', 'drive'];
+  if(!providers.includes(provider)){
+    console.error('Invalid provider type:', provider);
+    return
+  }
+  const generalFileTypes  = viewerFileTypes.general;
+  const providerFileTypes = viewerFileTypes[provider];
 
-    // Extend the fileTypes array by the provider specific info
-    var viewerFileTypesProvider = clone(viewerFileTypes.general);
-    Object.keys(viewerFileTypes[provider]).forEach( key => {
-      viewerFileTypesProvider[key] = viewerFileTypesProvider[key] || [];
-      viewerFileTypesProvider[key] = viewerFileTypesProvider[key].concat(viewerFileTypes[key]);
-    })
+  // This merge resolver concats arrays.
+  const mergeResolver     = (targetVal, sourceVal) => Array.isArray(targetVal) && sourceVal ? targetVal.concat(sourceVal) : sourceVal;
+  const mergedFileTypes   = i.merge(generalFileTypes, providerFileTypes, mergeResolver);
 
-    Object.keys(viewerFileTypesProvider).forEach(viewerType => {
-      if (viewerFileTypesProvider[viewerType].indexOf(fileTypeLower) != -1) {
-        result = viewerType;
-      }
-    })
-    return fileTypeLower ? (result || 'other') : 'other';
+  // Get the viewer type
+  const fileTypeLower     = fileType ? fileType.toLowerCase() : '';
+  const viewerType        = Object.keys(mergedFileTypes).find(viewerType => mergedFileTypes[viewerType].includes(fileTypeLower))
+  return viewerType || 'other'
 }

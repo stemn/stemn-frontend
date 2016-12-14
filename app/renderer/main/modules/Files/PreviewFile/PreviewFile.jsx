@@ -19,6 +19,8 @@ import PreviewPcb         from './PreviewPcb/PreviewPcb'
 import PreviewPdf         from './PreviewPdf/PreviewPdf'
 import PreviewImage       from './PreviewImage/PreviewImage'
 import PreviewCad         from './PreviewCad/PreviewCad'
+import PreviewGoogle      from './PreviewGoogle/PreviewGoogle'
+import PreviewGdoc        from './PreviewGdoc/PreviewGdoc'
 import LoadingOverlay     from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import laptopSpanner      from 'app/renderer/assets/images/pure-vectors/laptop-spanner.svg';
 import { getViewerType }  from './PreviewFile.utils.js'
@@ -32,7 +34,7 @@ export const Component = React.createClass({
     const previewId = `${file.project._id}-${file.fileId}-${file.revisionId}`;
 
     const getPreview = () => {
-      const viewerType = getViewerType(file.extension);
+      const viewerType = getViewerType(file.extension, file.provider);
       if(viewerType == 'gerber' || viewerType == 'pcb'){
         return <PreviewPcb previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile} />
       }
@@ -43,7 +45,10 @@ export const Component = React.createClass({
         return <PreviewCad previewId={previewId} fileMeta={file} fileRender={fileRender} renderFn={filesActions.renderFile}/>
       }
       else if(viewerType == 'google'){
-        return <div>Google</div>
+        return <PreviewGoogle previewId={previewId} fileMeta={file} />
+      }
+      else if(viewerType == 'gdoc'){
+        return <PreviewGdoc previewId={previewId} fileMeta={file} />
       }
       else if(viewerType == 'image'){
         return <PreviewImage previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile} />
