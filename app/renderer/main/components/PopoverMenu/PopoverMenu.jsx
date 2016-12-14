@@ -1,7 +1,21 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import Popover from 'app/renderer/assets/other/react-popup';
 
+const PropTypesObject = {
+  preferPlace         : PropTypes.string,               // ['above', 'below', 'left', 'right']
+                                                        // Default: 'above'
+  open                : PropTypes.bool,                 // Is the popover open? Often used with trigger == 'none'
+  trigger             : PropTypes.string,               // ['click', 'hover', 'hoverDelay', 'none']
+                                                        // Default: 'click'
+  disableClickClose   : PropTypes.bool,                 // This will stop the popup closing when the overlay is clicked.
+  tipSize             : PropTypes.number,               // Size of the arrow. Default: 0
+  children            : PropTypes.node.isRequired,      // Two children should be passed in - children[0] is the trigger, children[1] is the popup content
+  inheritIsOpen       : PropTypes.bool,                 // Should the popup content inherit the 'isOpen' prop?
+                                                        // Default: false
+}
+
 export default React.createClass({
+  propTypes: PropTypesObject,
   getInitialState () {
     return {
       isOpen: false,
@@ -30,7 +44,7 @@ export default React.createClass({
     }
   },
   render() {
-    const { preferPlace, trigger, disableClickClose, tipSize, offset, children, className } = this.props;
+    const { preferPlace, trigger, disableClickClose, tipSize, offset, children, inheritIsOpen } = this.props;
     const { isOpen } = this.state;
     const tipSizeDefault = tipSize || 0;
     const triggerMap = {
@@ -54,29 +68,30 @@ export default React.createClass({
 
     const contentMap = {
       hover          : {
-        isOpen       : isOpen,
       },
       hoverDelay     : {
         onMouseEnter : () => {this.toggleDelay(true)},
         onMouseLeave : () => {this.toggleDelay(false)},
-        isOpen       : isOpen,
       },
       click          : {
         onClick      : () => {disableClickClose ? null : this.toggle(false)},
-        isOpen       : isOpen,
       },
       none           : {
-        isOpen       : isOpen,
       },
     }
 
     const triggerProps = triggerMap[trigger] || triggerMap['click']; // Default to click
     const contentProps = contentMap[trigger] || contentMap['click']; // Default to click
 
+    // Add the inherited props if required
+    const contentPropsWithInherit = inheritIsOpen
+    ? Object.assign({}, contentProps, {isOpen: isOpen})
+    : contentProps;
+
     return (
       <Popover
         isOpen={isOpen}
-        body={React.cloneElement(children[1], contentProps)}
+        body={React.cloneElement(children[1], contentPropsWithInherit)}
         onOuterAction={()=>{if(trigger != 'none'){this.toggle(false)}}}
         preferPlace = {preferPlace || 'above'}
         tipSize={tipSizeDefault}

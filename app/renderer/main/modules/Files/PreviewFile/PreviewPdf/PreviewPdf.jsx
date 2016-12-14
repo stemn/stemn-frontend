@@ -30,7 +30,6 @@ const PDF = React.createClass({
         })
       }
       if(nextProps.fileData && nextProps.fileData.data){
-        console.log('!!!!!!!!!!!!!!! Render it !!!!!!!!!!!!!!!!');
         const arrayBuffer = nextProps.fileData.data;
         PDFJS.getDocument(arrayBuffer).then((pdf) => {
           this.setState({ pdf })

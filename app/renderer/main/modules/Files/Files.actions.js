@@ -9,18 +9,19 @@ export function getFile({projectId, fileId, revisionId, provider, responseType})
     const cacheKey = `${fileId}-${revisionId}`
     return dispatch({
       type: 'FILES/GET_FILE',
-      payload: http({
+      http: true,
+      payload: {
         method: 'GET',
         url: projectId ? `/api/v1/sync/download/${projectId}/${fileId}` : `/api/v1/remote/download/${provider}/${fileId}`,
         params: {
           revisionId
         },
         responseType: responseType || 'json',
-        onDownloadProgress: function (progressEvent) {
-          const percentage = progressEvent.loaded / progressEvent.total;
-          dispatch(getFileProgress({percentage, cacheKey}));
-        },
-      }),
+//        onDownloadProgress: function (progressEvent) {
+//          const percentage = progressEvent.loaded / progressEvent.total;
+//          dispatch(getFileProgress({percentage, cacheKey}));
+//        },
+      },
       meta: {
         cacheKey
       }

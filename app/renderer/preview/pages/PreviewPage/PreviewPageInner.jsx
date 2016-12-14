@@ -121,13 +121,16 @@ export const Component = React.createClass({
         }
       }))
     }
-    else{
-      // It is a folder - open the folder
+    else if(fileMeta.data.project._id){
+      // It is a folder (and is linked to a project) - open the folder
       dispatch(push({
         pathname: `/project/${fileMeta.data.project._id}/files/${file.fileId}`,
         state: {meta : {scope: ['main']}}
       }))
       dispatch(ElectronWindowsActions.show('main'))
+    }
+    else{
+      console.log('Not linked to project - open folder');
     }
   },
   clickTag(task){
