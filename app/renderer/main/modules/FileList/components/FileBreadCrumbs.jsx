@@ -27,7 +27,7 @@ export default React.createClass({
           const parentfolder = parentsWithName[idx - 1];
           return parentfolder && popup && idx != 0
           ? <span key={idx}>
-              <PopoverMenu trigger="hoverDelay" preferPlace="below" tipSize={6} inheritIsOpen={true}>
+              <PopoverMenu trigger="hoverDelay" preferPlace="below" tipSize={6} inheritIsOpen={true} offset={14}>
                 <span style={{display: 'inline-block'}}>
                   { !isLastChild
                   ? <a onClick={()=>clickFn({file: folder})}>{middleConcat(folder.name, 30, 0.8)}</a>

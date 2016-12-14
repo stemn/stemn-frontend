@@ -38,12 +38,12 @@ const propTypesObject = {
   crumbClickFn  : PropTypes.func,                 // When a crumb is clicked
   selected      : PropTypes.object,               // The currently selected file
   contentStyle  : PropTypes.object,               // Styles for the content section
+  crumbPopup  : React.PropTypes.bool,           // Optional: Should we show a popup on the crumbs?
   options       : React.PropTypes.shape({
     allowFolder : React.PropTypes.bool,
     foldersOnly : React.PropTypes.bool,
     showMenu    : React.PropTypes.bool,
     explore     : React.PropTypes.string,         // Optional: 'dropbox' || 'drive' - The provider
-    crumbPopup  : React.PropTypes.bool,           // Optional: Should we show a popup on the crumbs?
   }),
   FileListActions : PropTypes.object,      // Actions
   dispatch        : PropTypes.func,        // Actions

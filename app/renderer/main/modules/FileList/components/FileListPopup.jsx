@@ -18,7 +18,7 @@ import LoadingOverlay   from 'app/renderer/main/components/Loading/LoadingOverla
 import MdRefresh        from 'react-icons/md/refresh';
 import MdHome           from 'react-icons/md/home';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
-import FileIcon from './FileIcon'
+import FileIcon         from './FileIcon'
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -48,7 +48,9 @@ export const FileRow = React.createClass({
 
 export const FileListPopup = React.createClass({
   propTypes: propTypesObject,
-  componentWillMount() { this.onMount(this.props) },
+  componentWillMount() {
+    this.onMount(this.props)
+  },
   componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
   onMount(nextProps, prevProps) {
     if((!prevProps || !prevProps.isOpen) && nextProps.isOpen && (!nextProps.files || !nextProps.files.loading)){
@@ -102,7 +104,7 @@ export const FileListPopup = React.createClass({
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
 function mapStateToProps({fileList}, {parentfolder, meta}) {
-  const cacheString = meta.project._id  ?  `${meta.project._id}-${parentfolder.fileId}` : `${meta.provider}-${parentfolder.fileId}`;
+  const cacheString = meta.project._id  ?  `${meta.project._id}-${parentfolder.fileId || ''}` : `${meta.provider}-${parentfolder.fileId || ''}`;
   return {
     files: fileList[cacheString]
   };

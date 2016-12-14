@@ -56,6 +56,10 @@ export const Component = React.createClass({
           projectId : nextProps.fileMeta.data.project._id,
           fileId    : nextProps.fileMeta.data.fileId,
         })
+        nextProps.filesActions.getRelatedTasks({
+          fileId    : nextProps.fileMeta.data.fileId,
+          projectId : nextProps.fileMeta.data.project._id
+        })
       }
       // Else, If this is remote file
       else{
@@ -64,10 +68,6 @@ export const Component = React.createClass({
           provider  : nextProps.fileMeta.data.provider,
         })
       }
-      nextProps.filesActions.getRelatedTasks({
-        fileId    : nextProps.fileMeta.data.fileId,
-        projectId : nextProps.fileMeta.data.project._id
-      })
       this.setState({
         selected1    : nextProps.fileMeta,
         selected2    : undefined,
