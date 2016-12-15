@@ -8,6 +8,7 @@ import * as SystemActions from 'app/shared/modules/System/System.actions.js';
 // Component Core
 import React from 'react';
 import { Link } from 'react-router';
+import { has } from 'lodash';
 
 // Components
 import Tabs from 'app/renderer/main/components/Tabs/Tabs'
@@ -19,8 +20,10 @@ import MdExpandMore from 'react-icons/md/expand-more';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
 import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
 import PopoverMenuList from 'app/renderer/main/components/PopoverMenu/PopoverMenuList';
+import PopoverDetails from 'app/renderer/main/components/PopoverMenu/PopoverDetails';
 import ProjectMenu from 'app/renderer/main/modules/Projects/Project.menu.js';
-
+import MdPublic       from 'react-icons/md/public';
+import MdLockOutline  from 'react-icons/md/lock-outline';
 // Styles
 import classNames from 'classnames';
 import classes from './ProjectPage.css'
@@ -43,11 +46,11 @@ class Component extends React.Component{
   }
   render() {
     const { project, system, children, systemActions, params, dispatch } = this.props;
-    const baseLink    = `project/${project && project.data ? project.data._id : ''}`;
-    const isLoading   = !project || !project.data;
-    const isConnected = project && project.data && project.data.remote && project.data.remote.provider;
-    const hasName     = project && project.data && project.data.name;
-    const routeName   = this.props.routes[this.props.routes.length - 1];
+    const baseLink       = `project/${project && project.data ? project.data._id : ''}`;
+    const isLoading      = !project || !project.data;
+    const isConnected    = project && project.data && project.data.remote && project.data.remote.provider;
+    const hasName        = project && project.data && project.data.name;
+    const routeName      = this.props.routes[this.props.routes.length - 1];
 
     const downloadLinks = {
       drive   : 'https://tools.google.com/dlpage/drive/index.html',
@@ -82,6 +85,23 @@ class Component extends React.Component{
       }
     }
 
+    const getVisibilityPopup = () => {
+      return project.data.permissions.projectType == 'public'
+      ? <PopoverDetails>
+          <div className="header">Public Project</div>
+          <div className="body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat nesciunt unde repudiandae explicabo ratione assumenda impedit, doloribus accusantium dolor deleniti nostrum neque mollitia voluptas maxime officia similique commodi alias reiciendis?</div>
+          <div className="footer"><a className="link-primary" href={`https://stemn.com/projects/${project.data.stub}`}>View online</a></div>
+        </PopoverDetails>
+      : <PopoverDetails>
+          <div className="header">Private project</div>
+          <div className="body"><p>Your project data is private - it will not be accessible on stemn.com.</p><p>Consider open-sourcing this project or upgrading to Stemn Pro to access additional features such as infinite revision history.</p></div>
+          <div className="footer layout-row">
+            <a className="link-primary" href={`https://stemn.com/projects/${project.data.stub}`}>View online</a>
+            <div className="flex"></div>
+          </div>
+        </PopoverDetails>
+    }
+
     return (
       <div className="layout-column flex rel-box">
         <div className="layout-column flex">
@@ -97,6 +117,13 @@ class Component extends React.Component{
               <Link activeClassName="active" to={baseLink+'/tasks'}>Tasks</Link>
               { isConnected ? <Link className={['files/:path', 'files'].includes(routeName.path) ? 'active' : ''} to={baseLink+'/files/'}>Files</Link> : null }
             </div>
+            <PopoverMenu preferPlace="below" tipSize={6} trigger="click">
+              <SimpleIconButton title="Visibility Settings">
+                {has(project, 'data.permissions.projectType') && project.data.permissions.projectType == 'public' ? <MdPublic style={{color: '#bbe8bb'}} size={20}/> : <MdLockOutline style={{color: '#bbe8bb'}} size={20}/>}
+              </SimpleIconButton>
+              {has(project, 'data.permissions.projectType') ? getVisibilityPopup() : null}
+            </PopoverMenu>
+            <div className="divider"></div>
             <SimpleIconButton activeClassName="active" to={baseLink+'/settings'} title="Project Settings">
               <MdSettings size={20}/>
             </SimpleIconButton>

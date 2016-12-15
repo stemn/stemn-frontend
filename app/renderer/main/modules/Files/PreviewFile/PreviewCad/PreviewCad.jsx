@@ -20,7 +20,6 @@ export const GetStatusOfUrn =  React.createClass({
   },
   checkStatus(){
     previewCadUtils.getViewStatus(this.props.urn).then(response => {
-      console.log(response);
       this.setState({status: response.data.status})
     }).catch(error=>{
       this.setState({status: 'failed'})

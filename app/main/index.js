@@ -17,6 +17,8 @@ import log from 'electron-log';
 import postStoreSetup from './postStoreSetup.js';
 import initApiServer from './api/index.js';
 
+import FileCache from '../shared/modules/FileCache/FileCache.js';
+
 // Actions
 import * as ElectronWindowsActions from '../shared/modules/ElectronWindows/ElectronWindows.actions.js';
 
