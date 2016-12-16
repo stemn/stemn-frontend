@@ -24,6 +24,9 @@ import PopoverDetails from 'app/renderer/main/components/PopoverMenu/PopoverDeta
 import ProjectMenu from 'app/renderer/main/modules/Projects/Project.menu.js';
 import MdPublic       from 'react-icons/md/public';
 import MdLockOutline  from 'react-icons/md/lock-outline';
+import folderLockedVector   from 'app/renderer/assets/images/pure-vectors/folder-locked.svg';
+import globalVector   from 'app/renderer/assets/images/pure-vectors/global.svg';
+
 // Styles
 import classNames from 'classnames';
 import classes from './ProjectPage.css'
@@ -89,15 +92,28 @@ class Component extends React.Component{
       return project.data.permissions.projectType == 'public'
       ? <PopoverDetails>
           <div className="header">Public Project</div>
-          <div className="body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat nesciunt unde repudiandae explicabo ratione assumenda impedit, doloribus accusantium dolor deleniti nostrum neque mollitia voluptas maxime officia similique commodi alias reiciendis?</div>
-          <div className="footer"><a className="link-primary" href={`https://stemn.com/projects/${project.data.stub}`}>View online</a></div>
+          <div className="body" style={{paddingTop: '5px'}}>
+            <div className="layout-row layout-align-center"><img src={globalVector} style={{height: '80px'}}/></div>
+            <p>Your project data is public - it will be accessible on stemn.com.</p>
+            <p>Your data and files will be visible to everyone - only team-members can edit.</p>
+          </div>
+          <div className="footer layout-row">
+            <a className="link-primary" href={`https://stemn.com/projects/${project.data._id}`}>View online</a>
+            <div className="flex"></div>
+            <Link className="link-grey" to={baseLink+'/settings'}>Change</Link>
+          </div>
         </PopoverDetails>
       : <PopoverDetails>
           <div className="header">Private project</div>
-          <div className="body"><p>Your project data is private - it will not be accessible on stemn.com.</p><p>Consider open-sourcing this project or upgrading to Stemn Pro to access additional features such as infinite revision history.</p></div>
+          <div className="body" style={{paddingTop: '5px'}}>
+            <div className="layout-row layout-align-center"><img src={folderLockedVector} style={{height: '80px'}}/></div>
+            <p>Your project data is private - it will not be accessible on stemn.com.</p>
+            <p>Consider open-sourcing this project or upgrading to Stemn Pro to access additional features such as infinite revision history.</p>
+          </div>
           <div className="footer layout-row">
-            <a className="link-primary" href={`https://stemn.com/projects/${project.data.stub}`}>View online</a>
+            <a className="link-primary" href={`https://stemn.com/projects/${project.data._id}`}>View online</a>
             <div className="flex"></div>
+            <Link className="link-grey" to={baseLink+'/settings'}>Change</Link>
           </div>
         </PopoverDetails>
     }

@@ -4,28 +4,51 @@ import { name as localPathModuleName} from '../../../../shared/modules/LocalPath
 import * as LocalPathActions          from '../../../../shared/modules/LocalPath/LocalPath.actions.js';
 import * as FilesUtils                from './Files.utils.js'
 
-export function getFile({projectId, fileId, revisionId, provider, responseType}) {
-  return (dispatch) => {
-    const cacheKey = `${fileId}-${revisionId}`
-    return dispatch({
-      type: 'FILES/GET_FILE',
-      http: true,
-      payload: {
-        method: 'GET',
-        url: projectId ? `/api/v1/sync/download/${projectId}/${fileId}` : `/api/v1/remote/download/${provider}/${fileId}`,
-        params: {
-          revisionId
-        },
-        responseType: responseType || 'json',
-//        onDownloadProgress: function (progressEvent) {
-//          const percentage = progressEvent.loaded / progressEvent.total;
-//          dispatch(getFileProgress({percentage, cacheKey}));
+//export function getFile({projectId, fileId, revisionId, provider, responseType}) {
+//  return (dispatch) => {
+//    const cacheKey = `${fileId}-${revisionId}`
+//    return dispatch({
+//      type: 'FILES/GET_FILE',
+//      http: true,
+//      payload: {
+//        method: 'GET',
+//        url: projectId ? `/api/v1/sync/download/${projectId}/${fileId}` : `/api/v1/remote/download/${provider}/${fileId}`,
+//        params: {
+//          revisionId
 //        },
-      },
-      meta: {
-        cacheKey
+//        responseType: responseType || 'json',
+////        onDownloadProgress: function (progressEvent) {
+////          const percentage = progressEvent.loaded / progressEvent.total;
+////          dispatch(getFileProgress({percentage, cacheKey}));
+////        },
+//      },
+//      meta: {
+//        cacheKey
+//      }
+//    })
+//  }
+//}
+
+export function getFile({projectId, fileId, revisionId, provider, responseType}) {
+  const cacheKey = `${fileId}-${revisionId}`
+  return {
+    type: 'FILES/GET_FILE',
+    aliased: true,
+    payload: {
+      functionAlias: 'FileCache.get',
+      functionInputs: {
+        key          : cacheKey,
+        url          : projectId
+                       ? `/api/v1/sync/download/${projectId}/${fileId}`
+                       : `/api/v1/remote/download/${provider}/${fileId}`,
+        params       : { revisionId },
+        name         : cacheKey,
+        responseType : responseType || 'json'
       }
-    })
+    },
+    meta: {
+      cacheKey
+    }
   }
 }
 
@@ -41,20 +64,42 @@ export function getFileProgress({percentage, cacheKey}) {
   }
 }
 
+//export function renderFile({projectId, fileId, revisionId, provider}) {
+//  return {
+//    type: 'FILES/RENDER_FILE',
+//    payload: http({
+//      method: 'GET',
+//      url: projectId
+//      ? `/api/v1/sync/render/${projectId}/${fileId}`
+//      : `/api/v1/remote/render/${provider}/${fileId}`,
+//      params: {
+//        revisionId
+//      }
+//    }),
+//    meta: {
+//      cacheKey: `${fileId}-${revisionId}`
+//    }
+//  };
+//}
+
 export function renderFile({projectId, fileId, revisionId, provider}) {
+  const cacheKey = `${fileId}-${revisionId}`;
   return {
     type: 'FILES/RENDER_FILE',
     payload: http({
-      method: 'GET',
-      url: projectId
-      ? `/api/v1/sync/render/${projectId}/${fileId}`
-      : `/api/v1/remote/render/${provider}/${fileId}`,
-      params: {
-        revisionId
+      functionAlias: 'FileCache.get',
+      functionInputs: {
+        key          : cacheKey,
+        url          : projectId
+                       ? `/api/v1/sync/render/${projectId}/${fileId}`
+                       : `/api/v1/remote/render/${provider}/${fileId}`,
+        params       : { revisionId },
+        name         : cacheKey,
+        responseType : 'path'
       }
     }),
     meta: {
-      cacheKey: `${fileId}-${revisionId}`
+      cacheKey
     }
   };
 }

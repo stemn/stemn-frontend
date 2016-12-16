@@ -8,6 +8,7 @@ import * as ElectronWindowsUtils  from '../ElectronWindows/ElectronWindows.utils
 import * as NotificationsUtils    from '../Notifications/Notifications.utils.js'
 import * as ShellContextUtils     from '../Shell/ShellContext/ShellContext.utils.js'
 import * as SystemUtils           from '../System/System.utils.js'
+import * as FileCache             from '../FileCache/FileCache.js'
 
 import { actions } from 'react-redux-form';
 
@@ -22,6 +23,7 @@ const library = {
   NotificationsUtils,
   ShellContextUtils,
   SystemUtils,
+  FileCache,
   FormActions: actions
 }
 

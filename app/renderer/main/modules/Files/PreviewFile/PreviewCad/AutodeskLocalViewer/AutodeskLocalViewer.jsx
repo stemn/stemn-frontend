@@ -9,11 +9,12 @@ export default React.createClass({
       responseType: 'blob'
     }).then(response => {
       const viewer = new Autodesk.Viewing.Private.GuiViewer3D(this.refs.cadCanvas);
-      const blobUrl = URL.createObjectURL(response.data);
+      const filePath = "C:/Users/david/Downloads/viewer-javascript-offline.sample-gh-pages/viewer-javascript-offline.sample-gh-pages/shaver/0.svf"
       const options = {
         'env' : 'Local',
-        'document' : blobUrl
+        'document' : `../../../../../../../../../${filePath}`
       };
+//
       Autodesk.Viewing.Initializer(options, function() {
         viewer.start(options.document, options);
       });

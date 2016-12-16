@@ -1,5 +1,5 @@
 import { remote } from 'electron'
-import http       from 'http';
+import http       from 'axios';
 import fs         from 'fs';
 
 export const formatBytes = (bytes, decimals) => {
@@ -38,24 +38,29 @@ export const saveFile = ({fileUrl, filePath, onProgress}) => {
 
   const downloadAndSave = ({url, dest, onProgress}) => {
     return new Promise((resolve, reject) => {
-      http.get(url, (request) => {
+      http({
+        url: url,
+        responseType: 'stream'
+      }).then(response => {
+        const stream     = response.data;
         const file       = fs.createWriteStream(dest);
-        const total      = request.headers['content-length'];
+        const total      = response.headers['content-length'];
         let progress     = 0;
         let progressPerc = 0;
-        request.on('data', function (chunk) {
+        stream.on('data', chunk => {
           progress    += chunk.length;
           progressPerc = parseInt((progress / total) * 100);
           if(onProgress){onProgress(progressPerc)}
         });
-        request.pipe(file);
-        file.on('finish', (response) => {
-          resolve()
+        stream.on('error', response => {
+          fs.unlink(dest); // Delete the file async. (But we don't check the result)
+          reject(response)
         });
-      }).on('error', (response) => {
-        fs.unlink(dest); // Delete the file async. (But we don't check the result)
-        reject(response)
-      });
+        stream.on('end', response => {
+          resolve({size: total})
+        });
+        stream.pipe(file);
+      })
     })
   };
 

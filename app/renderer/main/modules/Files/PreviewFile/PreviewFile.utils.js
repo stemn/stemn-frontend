@@ -29,7 +29,7 @@ export const viewerFileTypes = {
         pcb       : ['brd', 'pcb', 'kicad_pcb'],
         code      : getCodeMirrorExts(),
         autodesk  : ['3dm','3ds','asm','cam360', 'catpart','catproduct','cgr','collaboration','dae','dgn','dlv3','dwf','dwfx','dwg','dwt','dxf','exp',
-                     'f3d','fbx','g','gbxml','iam','idw','ifc','ige','iges','igs','ipt','jt','model','neu','nwc','nwd','obj','pdf','prt','rcp','rvt',
+                     'f3d','fbx','g','gbxml','iam','idw','ifc','ige','iges','igs','ipt','jt','model','neu','nwc','nwd','obj','prt','rcp','rvt',
                      'sab','sat','session','skp','sldasm','sldprt','smb','smt','ste','step','stl','stla','stlb','stp','wire','x_b','x_t','xas','xpr'],
         google    : ['webm', 'mpeg4', '3gpp', 'mov', 'avi', 'mpegps', 'wmv', 'flv', //https://gist.github.com/izazueta/4961650
                     'xls', 'xlsx',

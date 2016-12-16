@@ -2,7 +2,7 @@ import { app }              from 'electron';
 import mkdirp               from 'mkdirp';
 import path                 from 'path';
 import fs                   from 'fs';
-import http                 from 'http';
+import http                 from 'axios';
 import pify                 from 'pify';
 import electronJsonStorage  from 'electron-json-storage';
 const jsonStorage = pify(electronJsonStorage);
@@ -22,50 +22,66 @@ jsonStorage.get('fileCache').then(response => {
 // Create the folder if it doesn't already exist
 mkdirp(folderPath);
 
-const downloadAndSave = ({url, dest, onProgress}) => {
-  return new Promise((resolve, reject) => {
-    http.get(url, (request) => {
-      const file       = fs.createWriteStream(dest);
-      const total      = request.headers['content-length'];
-      let progress     = 0;
-      let progressPerc = 0;
-      request.on('data', function (chunk) {
-        progress    += chunk.length;
-        progressPerc = parseInt((progress / total) * 100);
-        if(onProgress){onProgress(progressPerc)}
-      });
-      request.pipe(file);
-      file.on('finish', (response) => {
-        resolve({
-          size: total
-        })
-      });
-    }).on('error', (response) => {
-      fs.unlink(dest); // Delete the file async. (But we don't check the result)
-      reject(response)
-    });
-  })
-};
 
 /*******************************************************
 This will check if a file exists in the cache, if it
 does, we return it. Otherwise we download it, save it
 and then return it.
 *******************************************************/
-export const get = ({key, url, name, returnPath}) => {
+export const get = ({key, url, name, params, responseType}) => {
   const cacheEntry = fileCache[key];
 
   const processResult = () => {
     // Return either the file data or the file path
-    // depending on the status of 'returnPath'
-    return returnPath
-    ? path.join(folderPath, cacheEntry.name)
-    : fsPromise.readFile(path.join(folderPath, cacheEntry.name))
+    // depending on the 'responseType'
+    if(responseType == 'path'){
+      return {data: path.join(folderPath, cacheEntry.name)}
+    }
+    else{
+      return fsPromise.readFile(path.join(folderPath, cacheEntry.name)).then(response => {
+        if(responseType == 'json'){
+          // Return string
+          return {data: response.toString()}
+        }
+        else{
+          // Default: Return ArrayBuffer
+          return {data: response}
+        }
+      })
+    }
   }
 
   // This will get a file from the server and save it
   // to disk and to the fileCache database.
   const getAndSet = () => {
+    const downloadAndSave = ({url, dest, onProgress}) => {
+      return new Promise((resolve, reject) => {
+        http({
+          url          : url,
+          params       : params,
+          responseType : 'stream'
+        }).then(response => {
+          const stream     = response.data;
+          const file       = fs.createWriteStream(dest);
+          const total      = response.headers['content-length'];
+          let progress     = 0;
+          let progressPerc = 0;
+          stream.on('data', chunk => {
+            progress    += chunk.length;
+            progressPerc = parseInt((progress / total) * 100);
+            if(onProgress){onProgress(progressPerc)}
+          });
+          stream.on('error', response => {
+            fs.unlink(dest); // Delete the file async. (But we don't check the result)
+            reject(response)
+          });
+          stream.on('end', response => {
+            resolve({size: total})
+          });
+          stream.pipe(file);
+        })
+      })
+    };
     return downloadAndSave({
       url: url,
       dest: path.join(folderPath, name)
@@ -103,20 +119,13 @@ export const remove = ({key}) => {
   }
 }
 
-setTimeout(()=>{
-  get({
-    url        : 'http://developer-autodesk.github.io/translated-models/shaver/0.svf',
-    key        : 'some-file1',
-    name       : 'some-file1.svf'
-  }).then(response => {
-    console.log({response});
-  })
-  get({
-    url        : 'http://developer-autodesk.github.io/translated-models/shaver/0.svf',
-    key        : 'some-file2',
-    name       : 'some-file2.svf',
-    returnPath : true,
-  }).then(response => {
-    console.log({response});
-  })
-}, 1000)
+//setTimeout(()=>{
+//  get({
+//    url        : 'http://developer-autodesk.github.io/translated-models/shaver/0.svf',
+//    key        : 'some-file6',
+//    name       : 'some-file6.svf',
+//    responseType: 'path'
+//  }).then(response => {
+//    console.log({response});
+//  })
+//}, 1000)
