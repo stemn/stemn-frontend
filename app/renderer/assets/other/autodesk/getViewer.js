@@ -6,13 +6,6 @@ const mkdirp = require('mkdirp');
 // Config
 const version = 'v2.10'
 
-// Setup
-//mkdirp('./viewer');
-//mkdirp('./res');
-//mkdirp('./res/environments');
-//mkdirp('./res/locales');
-//mkdirp('./res/textures');
-
 const downloadAndSave = ({url, dest, onProgress}) => {
   return new Promise((resolve, reject) => {
     http({

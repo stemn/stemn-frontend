@@ -22,7 +22,7 @@
 // config.BaseEndPoint
 var viewer =[
 	'viewer3D.min.js',
-	'style.css',
+	'style.min.css',
 	'three.min.js',
 	'lmvworker.min.js',
 ] ;
