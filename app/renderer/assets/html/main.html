@@ -23,7 +23,12 @@
     </script>
   </head>
   <body class="layout-column">
-    <div class="layout-column flex" id="root" style="overflow: hidden"></div>    
+    <div id="loading" class="layout-row flex">
+      <div style="width: 300px; background: #1c1e22;"></div>
+      <div class="flex"></div>
+    </div>
+    <div id="root" class="layout-column flex" style="overflow: hidden; display: none"></div>
+
     <script>
       (function() {
         function createScript(hrefs){

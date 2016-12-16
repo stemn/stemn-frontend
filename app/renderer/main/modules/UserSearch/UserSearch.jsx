@@ -32,7 +32,7 @@ export default React.createClass({
 
     return (
       <div className="layout-row layout-align-start-center">
-        <UserAvatar picture={suggestion.picture}/>
+        <UserAvatar picture={suggestion.picture} name={suggestion.name}/>
         <div style={{marginLeft: '10px'}} className="flex">
         {
           parts.map((part, index) => {

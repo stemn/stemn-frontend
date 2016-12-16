@@ -11,6 +11,19 @@ import electronJsonStorage from 'electron-json-storage';
 const jsonStorage = pify(electronJsonStorage);
 import standardSetup from '../shared/standardSetup.js';
 
+const rootEl = document.getElementById('root');
+const loadingEl = document.getElementById('loading');
+
+const AppBase = React.createClass({
+  componentDidMount: function() {
+    loadingEl.style.display = 'none'
+    rootEl.style.display = 'flex';
+  },
+  render() {
+    return this.props.children
+  }
+});
+
 async function start() {
   const initialState = await jsonStorage.get('sessionState');
   const store        = configureStore(initialState);
@@ -18,15 +31,17 @@ async function start() {
   standardSetup(store, 'main');
 
   render(
-    <Provider store={store}>
-      <div className="layout-column flex">
-        <Router history={history}>
-          {getRoutes(store)}
-        </Router>
-      </div>
-    </Provider>,
-    document.getElementById('root')
+     <AppBase>
+       <Provider store={store}>
+        <div className="layout-column flex">
+          <Router history={history}>
+            {getRoutes(store)}
+          </Router>
+        </div>
+      </Provider>
+    </AppBase>,
+    rootEl
   );
 }
-
 start();
+
