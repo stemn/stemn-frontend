@@ -5,10 +5,23 @@ import fs                   from 'fs';
 import http                 from 'axios';
 import pify                 from 'pify';
 import electronJsonStorage  from 'electron-json-storage';
-const jsonStorage = pify(electronJsonStorage);
-const fsPromise   = pify(fs);
+import { sumBy, values }    from 'lodash';
+const jsonStorage           = pify(electronJsonStorage);
+const fsPromise             = pify(fs);
 
-// Here we do some initial setup
+/*******************************************************
+
+This module is used to cache files to in the application
+storeage. 'C:\Users\david\AppData\Roaming\STEMN' on
+Windows.
+
+The main function is:
+FileCache.get({key, url, name, params, responseType})
+
+*******************************************************/
+
+// The maximise size of the file cache
+const spaceLimit   = 2 * 1024 * 1024 * 1024; // 2 GB
 // Get the app userData folder
 const userDataPath = app.getPath('userData');
 // Set the path to the files folder
@@ -119,13 +132,12 @@ export const remove = ({key}) => {
   }
 }
 
-//setTimeout(()=>{
-//  get({
-//    url        : 'http://developer-autodesk.github.io/translated-models/shaver/0.svf',
-//    key        : 'some-file6',
-//    name       : 'some-file6.svf',
-//    responseType: 'path'
-//  }).then(response => {
-//    console.log({response});
-//  })
-//}, 1000)
+export const checkSpace = () => {
+  const space = sumBy(values(fileCache), (item) => parseInt(item.size));
+  if(space >= spaceLimit){
+    makeSpace()
+  }
+}
+export const makeSpace = () => {
+  // This will delete files in excess
+}
