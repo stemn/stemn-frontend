@@ -17,7 +17,7 @@ const loadingEl = document.getElementById('loading');
 const AppBase = React.createClass({
   componentDidMount: function() {
     loadingEl.style.display = 'none'
-    rootEl.style.display = 'flex';
+    rootEl.style.display    = 'flex';
   },
   render() {
     return this.props.children
