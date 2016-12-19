@@ -1,0 +1,15 @@
+.preview :global(.infoButton){
+    display: none;
+}
+
+.preview :global(.adsk-control-group){
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.18);
+    border-radius: 0px;
+}
+.preview :global(.adsk-button){
+    border-radius: 0px;
+}
+
+.preview :global(.notouch .adsk-toolbar) {
+    opacity: 1;
+}
