@@ -1,0 +1,208 @@
+<div class="marketingView">
+	<!--
+<div layout="row" layout-margin>
+	<div flex="33" class="md-whiteframe-z1">
+		<div dx-pie-chart="pie"></div>
+	</div>
+</div>
+-->
+	<div layout="row" layout-margin>
+		<div flex class="md-whiteframe-z1">
+			<md-toolbar>
+				<div class="md-toolbar-tools">
+					<md-button class="md-icon-button" aria-label="Settings">
+						<ng-md-icon icon="menu"></ng-md-icon>
+					</md-button>
+					<h2>STEMN Time Machine</h2>
+					<span flex></span>
+					<md-button class="md-icon-button" aria-label="Favorite">
+						<ng-md-icon icon="favorite"></ng-md-icon>
+					</md-button>
+					<md-button class="md-icon-button" aria-label="More">
+						<ng-md-icon icon="more_vert"></ng-md-icon>
+					</md-button>
+				</div>
+			</md-toolbar>
+			<md-content class="md-whiteframe-z1">
+				<div dx-range-selector="range"></div>
+			</md-content>
+		</div>
+	</div>
+
+	<div layout="row" layout-margin>
+	<div class="colwidthtest" layout="column" layout-margin>
+		<div flex class="md-whiteframe-z1">
+			<md-toolbar>
+				<div class="md-toolbar-tools">
+					<md-button class="md-icon-button" aria-label="Settings">
+						<ng-md-icon icon="menu"></ng-md-icon>
+					</md-button>
+					<h2>Marketing Effectiveness</h2>
+					<span flex></span>
+					<md-button class="md-icon-button" aria-label="Favorite">
+						<ng-md-icon icon="favorite"></ng-md-icon>
+					</md-button>
+					<md-button class="md-icon-button" aria-label="More">
+						<ng-md-icon icon="more_vert"></ng-md-icon>
+					</md-button>
+				</div>
+			</md-toolbar>
+			<md-content>
+				<div class="lineChart" chart-zoom zoom="zoom" dx-chart="zoomChart"></div>
+			</md-content>
+		</div>
+		<div flex class="md-whiteframe-z1">
+			<md-toolbar>
+				<div class="md-toolbar-tools">
+					<md-button class="md-icon-button" aria-label="Settings">
+						<ng-md-icon icon="menu"></ng-md-icon>
+					</md-button>
+					<h2>Conversion Rates</h2>
+					<span flex></span>
+					<md-button class="md-icon-button" aria-label="Favorite">
+						<ng-md-icon icon="favorite"></ng-md-icon>
+					</md-button>
+					<md-button class="md-icon-button" aria-label="More">
+						<ng-md-icon icon="more_vert"></ng-md-icon>
+					</md-button>
+				</div>
+			</md-toolbar>
+			<md-content>
+				<div dx-chart="channelConvChart"></div>
+			</md-content>
+		</div>
+<!--
+		<div flex class="md-whiteframe-z1">
+			<md-toolbar>
+				<div class="md-toolbar-tools">
+					<md-button class="md-icon-button" aria-label="Settings">
+						<ng-md-icon icon="menu"></ng-md-icon>
+					</md-button>
+					<h2>Channel</h2>
+					<span flex></span>
+					<md-button class="md-icon-button" aria-label="Favorite">
+						<ng-md-icon icon="favorite"></ng-md-icon>
+					</md-button>
+					<md-button class="md-icon-button" aria-label="More">
+						<ng-md-icon icon="more_vert"></ng-md-icon>
+					</md-button>
+				</div>
+			</md-toolbar>
+			<md-content>
+				<div dx-pie-chart="channelPie"></div>
+			</md-content>
+		</div>
+-->
+	</div>
+
+	<div class="campaignTable" layout="column" layout-margin>
+		<div flex class="md-whiteframe-z1">
+			<md-toolbar>
+				<div class="md-toolbar-tools">
+					<md-button class="md-icon-button" aria-label="Settings">
+						<ng-md-icon icon="menu"></ng-md-icon>
+					</md-button>
+					<h2>Campaigns</h2>
+					<span flex></span>
+
+					<md-button class="md-icon-button" aria-label="Favorite">
+						<ng-md-icon icon="favorite"></ng-md-icon>
+					</md-button>
+					<md-button class="md-icon-button" aria-label="More">
+						<ng-md-icon icon="more_vert"></ng-md-icon>
+					</md-button>
+				</div>
+			</md-toolbar>
+			<perfect-scrollbar class="scroller">
+				<md-content>
+					<div layout="row">
+						<div flex>
+							<p><strong>Sorting:</strong> {{ tableParams.sorting() }}</p>
+						</div>
+						<div flex>
+							<md-button class="md-raised pull-right" ng-click="tableParams.sorting({})">Clear Sort</md-button>
+						</div>
+
+					</div>
+					<table ng-table="tableParams">
+						<tr ng-repeat="user in $data">
+							<td data-title="'Channel'" class="picCell">
+								<img ng-src="{{user.pic}}" class="profilePic" alt="{{ user.name }}">
+							</td>
+							<td data-title="'Name'" sortable="'name'">
+								{{user.name}}
+							</td>
+							<td data-title="'Ref Hits'" sortable="'age'">
+								{{user.age}}
+							</td>
+						</tr>
+					</table>
+				</md-content>
+			</perfect-scrollbar>
+		</div>
+	</div>
+	</div>
+
+	<div layout="row" layout-margin>
+		<div flex class="durationCard md-whiteframe-z1">
+			Twitter Camapaign Conversion Rate?
+		</div>
+		<div flex class="returnCard md-whiteframe-z1">
+			How often do people come back?
+		</div>
+		<div flex class="activeCard md-whiteframe-z1">
+			% Active Users?
+		</div>
+		<div flex class="growthCard md-whiteframe-z1">
+			Week on Week Growth?
+		</div>
+
+	</div>
+
+	<!--
+	<div layout="row" layout-margin layout-fill layout-padding layout-wrap>
+		<div flex="60" class="md-whiteframe-z1">
+			<div dx-vector-map="liveMap"></div>
+		</div>
+		<div flex="30" layout-padding>
+			<div class="md-whiteframe-z1" style="height: 100px;">
+				<p>Signed-in Users</p>
+			</div>
+			<br>
+			 not sure if appropriate
+			<div class="md-whiteframe-z1" style="height: 100px;">
+				<p>Unique Lurkers</p>
+			</div>
+		</div>
+	</div>
+
+	<div layout="row" layout-wrap>
+		<div flex="66">
+			<div ng-controller="LiveViewCtrl">
+				<md-toolbar class="md-theme-light">
+					<h2 class="md-toolbar-tools">
+						<span>Logged-in Now</span>
+					</h2>
+				</md-toolbar>
+				<md-content>
+					<md-list>
+						<md-list-item class="md-3-line" ng-repeat="item in messages">
+							<div layout="row">
+								<div flex="10">
+									<img ng-src="{{item.face}}?{{$index}}" class="face" alt="{{item.who}}">
+								</div>
+								<div flex class="md-list-item-text">
+									<h3>{{item.what}}</h3>
+									<h4>{{item.who}}</h4>
+									<p>{{item.notes}}</p>
+								</div>
+							</div>
+							<md-divider md-inset ng-if="!$last"></md-divider>
+						</md-list-item>
+					</md-list>
+				</md-content>
+			</div>
+		</div>
+	</div>
+-->
+</div>

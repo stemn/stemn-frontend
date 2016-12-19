@@ -1,0 +1,10 @@
+<div class="medium-editor-toolbar medium-editor-stalker-toolbar medium-toolbar-arrow-under">
+	<ul class="medium-editor-toolbar-actions">
+		<li  ng-repeat="layoutButton in layoutButtons">
+			<button tabindex="0" ng-class="{'medium-editor-button-active' : section.layout==layoutButton}" ng-click="section.layout=layoutButton">
+				<md-icon md-svg-icon="{{layoutButtonDetails[layoutButton].icon}}" style="color: white;"></md-icon>
+				<md-tooltip md-direction="top" md-autohide="true">{{layoutButtonDetails[layoutButton].tooltip}}</md-tooltip>
+			</button>
+		</li>
+	</ul>
+</div>

@@ -1,0 +1,28 @@
+<div class="well" style="margin-bottom: 20px;" layout="column">
+    <div ng-show="query.results.length > 0" layout="column">
+        <a ui-sref="{{typeInfo.moreSref}}" class="heading underline capitalise">
+            Latest {{type}}
+        </a>
+        <div>
+            <a class="feed-widget-item" ng-repeat="item in query.results"  ui-sref="{{item.data.sref}}" md-ink-ripple>
+                <div clamp="2">{{item.data.name}}</div>
+                <div layout="row" layout-align="start center" class="text-lightgrey meta">
+                    <div flex am-time-ago="item.data.updated"></div>
+                    <div>{{item.data.numComments + item.data.numPosts}}</div>
+<!--                    repl{{(item.data.numComments + item.data.numPosts == 1) ? 'y' : 'ies'}}-->
+                    <md-icon md-svg-icon="response">
+                        <md-tooltip md-direction="right" md-autohide="true">Replies</md-tooltip>
+                    </md-icon>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="text-lightgrey" ng-show="data.length == 0">No {{type}} yet. <a ng-show="showEdit" ng-click="typeInfo.inputFn($event, inputFnData)" class="text-green">Add one.</a></div>
+
+    <a ng-show="!showEdit && query.results.length >= 3" ui-sref="{{typeInfo.moreSref}}" class="text-green text-right">See more</a>
+    <md-button ng-show="showEdit && query.results.length>0" class="md-accent md-raised md-cornered capitalise no-margin" ng-click="typeInfo.inputFn($event, inputFnData)">
+        {{typeInfo.inputPlaceholder}}
+    </md-button>
+</div>
+

@@ -1,0 +1,36 @@
+<div class="trackView">
+    <div class="track-header" layout="row" layout-align="start center">
+        <div class="m-r-15">Filter candidates:</div>
+        <md-select placeholder="Filter by job" ng-model="filters.job" class="md-accent">
+            <md-option value="">All Jobs</md-option>
+            <md-option value="{{job._id}}" ng-repeat="job in jobs">{{job.name}}</md-option>
+        </md-select>
+
+    </div>
+    <div class="track-content" layout="row">
+        <div class="track-col" ng-repeat="column in trackColumns">
+            <div class="track-title">
+                <div class="title">{{column.name}}</div>
+                <div>{{column.applicants.length}} Total</div>
+            </div>
+            <div class="track-col-inner" layout="column">
+                <div flex ng-sortable="sortableConfig">
+                    <div ng-repeat="applicant in column.applicants" class="track-card card-z1 m-b-10 my-handle">
+                       <div class="card-header">
+                           {{applicant.parent.name}}
+                       </div>
+                        <div>{{applicant.child.name}}</div>
+                        <div layout="row" layout-align="start center">
+                            <md-icon md-svg-icon="response"></md-icon>
+                            <div flex>3</div>
+                        </div>
+
+                        <div class="card-footer">
+                            <user-icon user-id="{{applicant.status.user}}" user="user"></user-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

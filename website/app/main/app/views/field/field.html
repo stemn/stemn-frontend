@@ -1,0 +1,50 @@
+<div layout="row" layout-align="center">
+    <settings-button show-if-admin above="true">
+        <md-menu-item>
+            <md-button confirm ng-click="deleteField()">Delete</md-button>
+        </md-menu-item>
+        <md-menu-item>
+            <md-button ng-click="editStub($event)">Advanced Edit</md-button>
+        </md-menu-item>
+    </settings-button>
+    <div class="md-content-container">
+        <form name="FieldForm" class="edit-box" novalidate>
+            <edit-button show-if-admin form="FieldForm" save-fn="save()" inline="true"></edit-button>
+            <!-- If Editing -->
+            <div ng-show="FieldForm.$visible" layout="column" layout-align="center center" class="m-t-30">
+                <upload-image icon="true" name="image" image="field.banner.url" ng-model="field.banner.url">
+                    <div class="avatar-circle avatar-lg" style="background-image:url({{field.banner.url}}?size=logo-md)"></div>
+                </upload-image>
+                <h1 class="md-display-1 text-center m-t-20 m-b-40">
+                    <input name="name" ng-model="field.name" class="editable text-center" placeholder="Field Name"
+                    type="text" required>
+                </h1>
+            </div>
+            <!-- If NOT Editing -->
+            <div ng-hide="FieldForm.$visible">
+                <!-- Bread Crumbs -->
+                <div class="md-subhead m-b-20">
+                    <a ui-sref="app.browse.fields" class="text-green">Fields</a>
+                    <span ng-if="!$state.is('app.field.top')">
+                        <span> / </span>
+                        <a ui-sref="app.field.top" class="text-green">{{field.name}}</a>
+                    </span>
+                    <span> / {{$state.current.data.name || field.name}}</span>
+                </div>
+            </div>
+            <div ng-hide="FieldForm.$visible" layout="column" layout-align="center center" class="m-t-30">
+                <div ng-show="field.banner.url" class="avatar-circle avatar-lg" style="background-image:url({{field.banner.url}}?size=logo-md)" lightbox="true" lightbox-image="field.banner.url"></div>
+                <h1 class="md-display-1 text-center m-t-20" text-center>
+                    {{field.name}}
+                    <span class="capitalise"> {{$state.current.data.name}}</span>
+                </h1>
+                <a class="text-green m-v-30 m-t-10" show-explanation-modal="field">What is a field?</a>
+                <div layout="row" layout-align="center center" class="m-b-60">
+                    <stat-button type="follow" parent-type="field" parent-id="{{field._id}}" count="data.followers" class="lg m-r-30"></stat-button>
+                    <social-share-buttons style="margin-top: 3px;"></social-share-buttons>
+                </div>
+            </div>
+        </form>
+        <ui-view></ui-view>
+    </div>
+</div>

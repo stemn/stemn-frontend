@@ -1,0 +1,591 @@
+// Loading Dots
+loading-dots {
+    @-webkit-keyframes dot {
+        0% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    @keyframes dot {
+        0% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    .dot-one {
+        opacity: 0;
+        -webkit-animation: dot 1.3s infinite;
+        -webkit-animation-delay: 0.0s;
+    }
+    .dot-two {
+        opacity: 0;
+        -webkit-animation: dot 1.3s infinite;
+        -webkit-animation-delay: 0.2s;
+    }
+    .dot-three {
+        opacity: 0;
+        -webkit-animation: dot 1.3s infinite;
+        -webkit-animation-delay: 0.3s;
+    }
+}
+
+// Section Colour
+section-colour {
+    .section {
+        display: block;
+        padding-top: 60px;
+        padding-bottom: 60px;
+        border-bottom: 1px solid #f2f2f2;
+        h1 {
+            font-size: 32px;
+            color: #4d4d4d;
+            line-height: 1.4em;
+            margin-top: 0px;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 16px;
+            color: #808080;
+            line-height: 1.8em;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .row > div {
+            padding-right: 30px;
+            padding-left: 30px;
+        }
+    }
+}
+
+/* SettingsButton Directive */
+settings-button{
+    position: absolute;
+    top: 0;
+    right: 0;
+    .md-button{
+//        margin: 0px;
+        md-icon{
+            color: rgba(0, 0, 0, 0.35);
+        }
+    }
+    &.above{
+        margin-top: -35px;
+    }
+    &.white{
+        md-icon{
+            color: rgba(255, 255, 255, 1);
+        }
+    }
+}
+
+
+/* EditButton Directive */
+.edit-box {
+    position: relative;
+    &.active {
+//        outline: 15px solid white;
+//        background: white;
+        z-index: 101;
+        disable-when-edit, .disable-when-edit{
+            pointer-events: none;
+            opacity: 0.03;
+        }
+    }
+
+    &.remove-active{
+        disable-when-edit, .disable-when-edit{
+            pointer-events: inherit !important;
+            opacity: 1 !important;
+            transition: opacity 0.2s ease !important;
+        }
+    }
+    disable-when-edit, .disable-when-edit{
+        pointer-events: inherit;
+        opacity: 1;
+        transition: opacity 0.2s ease;
+    }
+
+
+    .edit-buttons .edit{
+        transform: scale(1);
+        transition: transform 0.3s ease;
+    }
+    &:hover{
+        .edit-buttons .edit{
+            transform: scale(1.5);
+            button{
+                background: rgba(0, 0, 0, 0.03);
+            }
+        }
+    }
+}
+
+
+
+.edit-buttons{
+    .edit{
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        z-index: 1;
+        .md-button{
+            margin: 0px;
+            width: 35px !important;
+            height: 35px !important;
+            line-height: 35px !important;
+            md-icon{
+                color: rgba(0, 0, 0, 0.35);
+                width: 15px;
+                height: 15px;
+            }
+        }
+    }
+}
+.form-save{
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    z-index: 105;
+    margin: 10px;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+    &.ng-hide{
+        opacity: 0;
+    }
+}
+.highlight-overlay{
+    z-index: 5;
+    background: rgba(255, 255, 255, 0.8);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom : 0px;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+    cursor: not-allowed;
+    &.ng-hide{
+        opacity: 0;
+    }
+}
+.disable-tab-view-overlay{
+    z-index: 5;
+    background: rgba(255, 255, 255, 0.1);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom : 0px;
+    cursor: not-allowed;
+}
+
+// Other
+
+.section-footer{
+    text-align: right;
+    .md-button{
+        margin-right: 0px;
+    }
+}
+
+/* UserImage Directive  ---------------------------------- */
+user-image{
+    .user-image{
+        margin: 0px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+}
+/* OrganisationImage Directive  --------------------------- */
+organisation-image{
+    .organisation-image{
+        margin: 0px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: white;
+    }
+}
+/* FieldImage Directive  --------------------------- */
+field-image{
+    .field-image{
+        margin: 0px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+}
+/* ProjectImage Directive  --------------------------- */
+project-image{
+    .project-image{
+        margin: 0px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+}
+/* SelectOnClick Directive  --------------------------- */
+.select-on-click-box {
+	font-size: 14px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+
+	border: 1px solid rgba(0, 0, 0, 0.12);
+	padding: 8px;
+	&:hover{
+		background: rgba(0, 0, 0, 0.04);
+	}
+}
+/* TeamImages Directive  --------------------------- */
+.team-images {
+	&.stacked{
+        a{
+            margin-left: -10px;
+            &:first-child{
+                margin-left: 0px;
+            }
+        }
+	}
+}
+/* UserInput Directive ------------------------------------ */
+.user-input{
+    cursor: text;
+
+    background: white;
+//    box-shadow: 0 2px 4px rgba(0,0,0,.08);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 20px;
+
+    transition: all 0.1s ease;
+
+    .medium-editor-placeholder:after{
+        display: none;
+    }
+    &:hover{
+        border: 1px solid rgba(0, 0, 0, 0.3);
+//        box-shadow: 0 4px 8px rgba(0,0,0,.12);
+    }
+//    .collapse-details{
+//        overflow: hidden;
+//        transition: height 0.3s ease;
+//        &.ng-hide{
+//            height: 0px;
+//        }
+//        &.ng-show{
+//            height: 100px;
+//        }
+//    }
+    md-radio-button{
+        margin-left: 0;
+        .md-label{
+            margin-bottom: 2px;
+        }
+    }
+}
+
+.text-switch{
+    $height: 22px;
+    overflow: hidden;
+    height: $height;
+    >div{
+        transition: transform 0.1s ease;
+        transform: translateY(0px);
+        &.active{
+            transform: translateY(-$height);
+        }
+    }
+}
+/* Loading Overlay ------------------------------------ */
+.loading-overlay{
+    &.page{
+        position: fixed;
+    }
+    &.translucent{
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+    &.light-grey{
+        background-color: #F8F8F8;
+    }
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    z-index: 5;
+
+    transition: opacity 0.2s ease;
+    &.ng-enter,
+    &.ng-leave.ng-leave-active {
+        opacity: 0;
+    }
+    &.ng-enter.ng-enter-active,
+    &.ng-leave{
+        opacity: 1;
+    }
+}
+/* FatTabs ------------------------------------ */
+
+fat-tabs {
+    $hover-color    : rgba(0, 0, 0, 0.05);
+    $page-color     : white;
+    $border-color   : rgb(237, 237, 237);
+    $inactive-color : rgba(0, 0, 0, 0.03);
+
+    border-bottom: 1px solid;
+    border-color: $border-color;
+    display: block;
+    background: $inactive-color;
+    a {
+        padding: 30px;
+        text-align: center;
+        border: 1px solid;
+        border-color: transparent;
+        margin-bottom: -1px;
+        font-weight: 700;
+        &.active {
+            background: $page-color;
+            border-color: $border-color;
+            border-bottom-color: transparent;
+            &:hover {
+                background: $hover-color;
+                cursor: default;
+                background: $page-color;
+            }
+        }
+        &:hover {
+            background: $hover-color;
+        }
+    }
+}
+
+/* Tabs ------------------------------------ */
+tabs {
+    height: 64px;
+    margin-left: -5px;
+    .tab {
+        margin: 0px 10px;
+        padding: 25px 10px;
+        height: 64px;
+        position: relative;
+        border-bottom: 1px solid transparent;
+//        transition: 0.2s opacity ease, 0.2s border-bottom ease;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 12px;
+        letter-spacing: 0.05em;
+        color: rgba(0, 0, 0, 0.5);
+        white-space: nowrap;
+        &::after{
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 5px;
+            right: 5px;
+            border-bottom: 1px solid black;
+//            border-bottom: 2px solid rgb(139,195,74);
+            opacity: 0;
+//            transition: 0.2s opacity ease;
+        }
+        &.active {
+            color: rgba(0, 0, 0, 1);
+//            font-weight: 700;
+            border-bottom: 1px solid white;
+            &::after{
+                opacity: 1;
+            }
+        }
+        &:hover {
+            color: rgba(0, 0, 0, 0.8);
+            border-bottom: 1px solid white;
+            &::after{
+                opacity: 0.8;
+            }
+
+        }
+        &:first-child{
+            margin-left: 0px;
+        }
+    }
+}
+
+/* CollapsePanel ------------------------------------ */
+.collapse-panel{
+    transition: max-height 0.5s cubic-bezier(0, 0, 1, 0);
+    max-height: 1000px;
+    overflow: hidden;
+    &.ng-hide{
+        max-height: 0px;
+        transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+    }
+}
+.collapse-panel-toggle{ // Used to rotate the toggle 90 deg
+    transition: transform 0.3s ease;
+    transform: rotate(0deg);
+    &.open{
+        transform: rotate(90deg)
+    }
+}
+
+/* Preview Gallery ------------------------------------ */
+.preview-gallery{
+    .md-circle{
+        background-color: rgba(252, 252, 252, 0.8) !important;
+        margin: 2px !important;
+    }
+    .preview{
+        width: 100%;
+        height: 400px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        margin-bottom: 10px;
+        border: 1px solid #EEEEEE;
+        @media (max-width: 600px) {
+             height: 200px;
+        }
+    }
+
+    .thumb{
+        width: 60px;
+        height: 50px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        margin-right: 10px;
+        border: 1px solid #EEEEEE;
+    }
+}
+
+/* collapsed-section ------------------------------------ */
+collapsed-section{
+    display: block;
+}
+.collapsed-section{
+    display: block;
+//    max-height: 290px;
+    position: relative;
+//    transition: max-height 1s ease;
+    overflow: hidden;
+    &.open {
+        max-height: 3000px;
+    }
+    .white-fader{
+        position: absolute;
+        z-index: 1;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 30px;
+        box-shadow: inset 0px -80px 40px -60px white;
+    }
+}
+
+
+
+// Useful
+/* Well */
+.border-box{
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.border-box-white{
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: white;
+}
+.well{
+    padding: 15px 20px;
+    background-color: rgba(0, 0, 0, 0.03);
+    border: 1px solid #EEEEEE;
+}
+.well-select{
+    border: 1px dashed #E2E2E2 !important;
+    &:hover{
+        background-color: rgba(0, 0, 0, 0.04);
+    }
+}
+.well-input{
+    position: relative;
+    input{
+        padding: 15px;
+        border: 1px solid #eee;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.03);
+        transition: background-color 0.3s ease;
+        color: rgba(0, 0, 0, 0.4);
+        &:focus, &:hover{
+            background-color: rgba(0, 0, 0, 0.02);
+            outline: none;
+        }
+    }
+    md-icon{
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        color: rgba(0, 0, 0, 0.18);
+        transform: translateY(-50%);
+    }
+}
+.well-button{
+    padding: 15px 20px;
+    background-color: rgba(0, 0, 0, 0.03);
+    border: 1px solid #EEEEEE;
+    transition: all 0.3s ease;
+    color: #8DC63F;
+    &:hover:not([disabled]){
+        background: #8DC63F;
+        color: white;
+    }
+    &[disabled]{
+        opacity: 0.6;
+        cursor: inherit;
+        pointer-events: none;
+    }
+}
+
+
+.fade-all{
+    > div{
+        z-index: 101;
+    }
+    &::before{
+        content: '';
+        position: relative;
+        display: block;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(255,255,255,0.8);
+        z-index: 100;
+        opacity: 1;
+        transition: opacity 300ms ease;
+    }
+}
+.banner-box{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+.overlay-dark{
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}

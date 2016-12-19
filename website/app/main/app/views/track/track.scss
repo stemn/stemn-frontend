@@ -1,0 +1,38 @@
+.trackView{
+    .sortable-ghost{
+        opacity: 0.8 !important;
+    }    
+    .track-header{
+        background: white;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        font-size: 16px;
+        padding: 0px 15px;
+    }
+    .track-content{
+        width: 100%;
+        overflow-x: auto;
+        min-height: 90vh;
+    }
+    .track-col{
+        border-right: 1px solid rgba(0, 0, 0, 0.05);
+        .track-title{
+            background: white;
+            padding: 20px 15px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .track-col-inner{
+            min-height: 80vh;
+            width: 350px;
+            padding: 15px;
+        }
+    }
+    
+    .track-card{
+    
+        .card-footer{
+            
+        }
+    }
+}

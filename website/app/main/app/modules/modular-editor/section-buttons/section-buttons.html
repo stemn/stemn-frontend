@@ -1,0 +1,40 @@
+<div class="editor-section-buttons" ng-class="{'minimal' : editorOptions.minimal}">
+<!--
+	<a class="button my-handle" ng-mouseenter="highlightSections()" ng-mouseleave="unhighlightSections()">
+		<md-icon md-svg-icon="section-move"></md-icon>
+	</a>
+-->
+    <div class="button my-handle" realtime-editor-section="{{::editorOptions.realtime}}" ng-mouseenter="highlightSections()" ng-mouseleave="unhighlightSections()">
+        <md-icon md-svg-icon="navigation:more_horiz"></md-icon>
+        <popup class="tooltip-menu" popup-side="right" popup-position="center" popup-padding="0 0 0 8px" layout="column">
+            <a class="md-subhead"
+                confirm ng-click="deleteSection()" layout="row" ng-mouseenter="deleteHighlight(editorSectionIndex)" ng-mouseleave="deleteUnhighlight(editorSectionIndex)">
+                Delete Section
+            </a>
+            <a class="md-subhead" ng-if="checkMergeAbove()"
+                ng-click="mergeWihAbove()" ng-mouseenter="highlightSection(editorSectionIndex, mergeStyles); highlightSection(editorSectionIndex - 1, mergeStyles);" ng-mouseleave="unhighlightSection(editorSectionIndex); unhighlightSection(editorSectionIndex - 1)">
+                Merge Up
+            </a>
+            <a class="md-subhead" ng-if="checkMergeBelow()"
+                ng-click="mergeWithBelow()" ng-mouseenter="highlightSection(editorSectionIndex, mergeStyles); highlightSection(editorSectionIndex + 1, mergeStyles);" ng-mouseleave="unhighlightSection(editorSectionIndex); unhighlightSection(editorSectionIndex + 1)">
+                Merge Down
+            </a>
+            <a class="md-subhead" ng-if="editorSections[editorSectionId].type == 'image'"
+               ng-click="changeImage($event)">
+                Change Image
+            </a>
+            <a class="md-subhead" ng-if="editorSections[editorSectionId].type == 'file'"
+               ng-click="uploadFiles($event)">
+                Upload Files
+            </a>
+            <a class="md-subhead" ng-if="editorSections[editorSectionId].type == 'image'"
+                ng-click="createLink($event, editorSections[editorSectionId].linkUrl)">
+                Create Link
+            </a>
+            <a class="md-subhead" ng-if="editorSections[editorSectionId].type == 'video'"
+                ng-click="changeVideo($event)">
+                Change Video
+            </a>
+        </popup>
+    </div>
+</div>

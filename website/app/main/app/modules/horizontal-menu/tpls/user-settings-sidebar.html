@@ -1,0 +1,53 @@
+<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+    <!-- IF LOGGED IN  -->
+    <div ng-show="user.isLoggedIn()">
+       <div class="header">
+            <md-button class="md-icon-button close-btn" aria-label="Close" ng-click="close()"><md-icon md-svg-icon="arrow-back"></md-icon></md-button>
+            <md-button class="md-circle" aria-label="User Profile" ui-sref="app.user.profile({'stub': user.stub})"
+                style="background-image: url('{{user.picture || '/assets/images/default/user-1.png'}}?size=thumb&crop=true');">
+            </md-button>
+            <div class="md-body bold">{{user.name}}</div>
+            <div class="md-body">{{user.blurb}}</div>
+        </div>
+        <md-content ng-click="close()">
+            <md-menu-item ng-repeat="item in MenuItems.main">
+                <md-button ui-sref="{{item.sref}}">
+                    <p>{{item.label}}</p>
+                </md-button>
+            </md-menu-item>
+            <md-menu-item ng-repeat="item in MenuItems.more">
+                <md-button ui-sref="{{item.sref}}">
+                    <p>{{item.label}}</p>
+                </md-button>
+            </md-menu-item>
+            <md-divider></md-divider>
+            <md-menu-item>
+                <md-button ng-click="user.logout(); popLogout()">
+                    <md-icon md-svg-icon="exit_to_app"></md-icon>
+                    <p>Sign out</p>
+                </md-button>
+            </md-menu-item>
+        </md-content>
+    </div>
+    <!-- IF NOT LOGGED IN  -->
+    <div ng-hide="user.isLoggedIn()">
+        <div class="header">
+            <md-button class="md-icon-button close-btn" aria-label="Close" ng-click="close()"><md-icon md-svg-icon="arrow-back"></md-icon></md-button>
+            <div class="md-headline">You are not logged in.</div>
+        </div>
+        <md-content ng-click="close()">
+            <md-menu-item>
+                <md-button ng-click="login($event)">
+                    <md-icon md-svg-icon="person"></md-icon>
+                    <p>Sign in</p>
+                </md-button>
+            </md-menu-item>
+            <md-divider></md-divider>
+            <md-menu-item ng-repeat="item in MenuItems.more">
+                <md-button ui-sref="{{item.sref}}" authenticate="item.authenticate">
+                    <p>{{item.label}}</p>
+                </md-button>
+            </md-menu-item>
+        </md-content>
+    </div>
+</md-sidenav>

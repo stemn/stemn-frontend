@@ -1,0 +1,10 @@
+<div class="card-z1 m-b-15">
+    <!-- Owner -->
+    <div>
+        <b>Posted in: </b>
+        <a ui-sref="{{sref}}" class="text-green">{{post.thread.name || post.project.name}}</a>
+        <span class="text-lightgrey" am-time-ago="::post.timestamp"></span>
+    </div>
+    <!-- Content -->
+    <a ui-sref="{{sref}}" style="padding-top: 5px; display: block;" ng-bind-html="post.blurb"></a>
+</div>

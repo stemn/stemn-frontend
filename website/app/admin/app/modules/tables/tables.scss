@@ -1,0 +1,85 @@
+.md-table {
+    min-width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    td, th{
+        padding: 15px 15px;
+    }
+    thead{
+        tr{
+            border-top: 1px solid #EEEEEE;
+            &:hover{
+                background-color: rgba(0, 0, 0, 0.0);
+            }
+        }
+        th{
+             &:hover{
+                background-color: rgba(0, 0, 0, 0.05);
+            }
+        }
+    }
+    tr{
+        border-bottom: 1px solid #EEEEEE;
+        &:hover{
+            background-color: rgba(0, 0, 0, 0.03);
+        }
+    }
+    &.loading{
+        position: relative;
+        &::before{
+            content: " ";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 5;
+            background: rgba(255, 255, 255, 0.5);
+        }
+    }
+}
+
+.selected-rows-overlay{
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: 205px;
+    color: white;
+    background: #3F51B5;
+    padding: 10px 20px;
+    z-index: 100;
+
+    transition: all 0.3s ease;
+    &.ng-hide{
+        opacity: 0;
+    }
+}
+
+/* Filter Column Order Directive */
+.filter-column-order{
+    cursor: pointer;
+    &::after{
+        position: relative;
+        display: inline-block;
+        top: 2px;
+        left: 7px;
+        content: " ";
+        -webkit-background-size: 24px 13px;
+        background-size: 24px 13px;
+        width: 6px;
+        height: 13px;
+        background-image: url(/icons/other/sorting_arrows.png);
+        background-position: -9px 0;
+    }
+    &.down{
+        &::after{
+            background-position: 0 0;
+        }
+    }
+    &.up{
+        &::after{
+            background-position: -18px 0;
+        }
+    }
+}

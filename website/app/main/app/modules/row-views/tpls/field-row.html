@@ -1,0 +1,12 @@
+<div class="row-view" layout="row" layout-align="start center">
+    <div class="avatar">
+        <field-image src="data.picture" image-id="{{data._id}}" image-stub="{{data.stub}}"></field-image>
+    </div>
+    <div flex class="ellipsis-container">
+        <a class="text-green ellipsis" ui-sref="app.field.top({'stub' : data.stub})">{{data.name}}</a>
+        <div class="text-lightgrey ellipsis">{{data.blurb}}</div>
+    </div>
+    <div>
+        <stat-button ng-hide="showEdit" hide-stat="true" size="sm" hide-icon="true" type="follow" parent-type="field" parent-id="{{data._id}}" count="data.followers"></stat-button>
+    </div>
+</div>

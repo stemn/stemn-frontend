@@ -1,0 +1,38 @@
+<div class="organisationView">
+    <div layout="row" layout-align="center">
+        <div class="md-content-container">
+            <div ng-hide="$state.includes('app.organisation.settings')">
+                <!-- Bread Crumbs -->
+                <div class="md-subhead m-b-20 disable-when-edit">
+                    <a ui-sref="app.browse.organisations" class="text-green">Organisations</a>
+                    <span ng-if="!$state.is('app.organisation.overview')">
+                        <span> / </span>
+                        <a ui-sref="app.organisation.overview" class="text-green">{{organisation.name}}</a>
+                    </span>
+                    <span> / {{$state.current.data.name || organisation.name}}</span>
+                </div>
+
+                <div layout="column" layout-align="center center" class="m-t-30">
+                    <div ng-show="organisation.logo.url" class="avatar-square-contain avatar-lg" style="background-image:url({{organisation.logo.url}}?size=logo-md)" lightbox="true" lightbox-image="organisation.logo.url"></div>
+                    <h1 class="md-display-1 text-center m-t-20 m-b-10">
+                        {{organisation.name}}
+                    </h1>
+
+                    <a ng-hide="showEdit" class="text-green" authenticate click-request-ownership parent-type="organisation" parent-id="{{organisation._id}}">Request Ownership</a>
+                    <div layout="row" layout-align="center center" class="m-b-60 m-t-30">
+                        <stat-button type="follow" parent-type="organisation" parent-id="{{organisation._id}}" count="data.followers" class="lg m-r-30"></stat-button>
+                        <social-share-buttons style="margin-top: 3px;"></social-share-buttons>
+                    </div>
+                </div>
+
+                <div class="text-tabs m-b-30" layout="row">
+                    <a class="md-subhead" ng-class="{'active':$state.includes(tab.parent || tab.sref)}" ng-repeat="tab in tabs" ui-sref="{{tab.sref}}">{{tab.label}}</a>
+                    <div flex></div>
+                    <a ng-show="userPermissions.isMin('collaborator')" class="md-subhead" ui-sref="app.organisation.settings.overview">Settings</a>
+                </div>
+            </div>
+
+            <ui-view class="m-b-60"></ui-view>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,105 @@
+.rating-bar {
+    position: relative;
+    width: 10px;
+    height: 30px;
+    background: rgba(0, 0, 0, 0.1);
+    margin: auto;
+    overflow: hidden;
+    &.bar-md {
+        height: 50px;
+    }
+    &.bar-lg {
+        height: 70px;
+    }
+    .inner-bar {
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        background: rgb(139, 195, 74);
+    }
+}
+
+.rating-pie {
+    $primary-color: rgb(139, 195, 74);
+    $secondary-color: rgb(247, 247, 247);
+    $bg-color: white;
+    $thickness: 5px;
+    $size: 80px;
+    margin: auto;
+    width: $size;
+    height: $size;
+    line-height: $size;
+    background: $secondary-color;
+    background-image: linear-gradient(to right, transparent 50%, $primary-color 0);
+    position: relative;
+    border-radius: 50%;
+    color: transparent;
+    text-align: center;
+    @keyframes spin {
+        to {
+            transform: rotate(.5turn);
+        }
+    }
+    @keyframes bg {
+        50% {
+            background: $primary-color;
+        }
+    }
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 50%;
+        height: 100%;
+        border-radius: 0 100% 100% 0 / 50%;
+        background-color: inherit;
+        transform-origin: left;
+        animation: spin 50s linear infinite, bg 100s step-end infinite;
+        animation-play-state: paused;
+        animation-delay: inherit;
+    }
+    .number {
+        color: rgba(0, 0, 0, 0.6);
+        font-weight: 300;
+        font-size: 16px;
+        position: absolute;
+        border-radius: 50%;
+        background: $bg-color;
+        top: $thickness;
+        bottom: $thickness;
+        left: $thickness;
+        right: $thickness;
+        line-height: $size - 2 * $thickness;
+    }
+
+    &.pie-sm{
+        $size: 40px;
+        $thickness: 3px;
+        width: $size;
+        height: $size;
+        .number {
+            top: $thickness;
+            bottom: $thickness;
+            left: $thickness;
+            right: $thickness;
+            font-size: 14px;
+            line-height: $size - 2 * $thickness;
+        }
+    }
+    &.pie-lg{
+        $size: 120px;
+        $thickness: 5px;
+        width: $size;
+        height: $size;
+        .number {
+            top: $thickness;
+            bottom: $thickness;
+            left: $thickness;
+            right: $thickness;
+            font-size: 18px;
+            line-height: $size - 2 * $thickness;
+        }
+    }
+}

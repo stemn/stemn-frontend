@@ -1,0 +1,37 @@
+<h1 class="md-display-1 text-center m-t-30">Recommended Positions</h1>
+<div class="md-title text-grey light-font text-center">Here are the best jobs for you (based on your skills and experience)</div>
+<md-divider class="m-v-60"></md-divider>
+
+<div ng-show="query.results[0].rating <= 60">
+    <tip-banner local="true" style="margin-bottom: 60px;">
+        <b>Important: </b> Your best match has suitability rating of <b>{{query.results[0].rating}}%</b>. We recommend you <a ng-click="addMoreFields();">add more skills</a> so we can match you to more appropriate jobs.
+    </tip-banner>
+</div>
+
+<div class="rel-box" style="min-height: 100px;">
+    <a class="card-z1 m-b-15 rel-box" layout="row" layout-align="start center" ng-repeat="item in query.results" set-entity-href="'job'" entity-stub="item.stub" style="font-size: 14px;">
+        <div class="avatar-square-contain avatar-md m-r-15" ng-style="item.organisations[0].picture && { 'background-image':'url('+item.organisations[0].picture+'?size=thumb-lg)'}"></div>
+        <div flex>
+            <div class="bold">{{item.organisations[0].name}}</div>
+            <div class="m-v-10">{{item.name}}</div>
+            <div class="text-lightgrey">{{item.location[0].name}}</div>
+        </div>
+
+        <div class="rating-pie" ng-style="{'animation-delay': '-'+item.rating+'s'}">
+            <div class="number">{{item.rating}}</div>
+            <popup class="tooltip-popup" popup-side="right" popup-position="center" popup-padding="0 0 0 8px" style="max-width: 150px;">
+                <p>Your skills include <b>{{item.numMatchingSkills}}/{{item.fields.length}}</b> of those listed on this job.</p>
+            </popup>
+        </div>
+    </a>
+    <loading-overlay ng-if="query.loading" class="light-grey"></loading-overlay>
+</div>
+
+<md-divider class="m-v-60"></md-divider>
+
+<div layout="row">
+    <div flex></div>
+    <md-button class="md-raised md-flat md-md md-cornered" ui-sref="app.user-onboarding.experience">Back</md-button>
+    <md-button class="md-border md-accent md-md md-cornered" ui-sref="app.home" ng-click="complete();">Go to Newsfeed</md-button>
+    <md-button class="md-border-green md-raised md-flat md-accent md-md md-cornered" ui-sref="app.browse.jobs" ng-click="complete();">See all Matches</md-button>
+</div>

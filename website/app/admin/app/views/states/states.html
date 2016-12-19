@@ -1,0 +1,47 @@
+<div class="statesView">
+
+    <div layout="row" layout-sm="column" class="md-row">
+        <div flex-sm="100" flex="100" class="md-col" style="margin-bottom: 20px;">
+            <charts-time-bar chart-type="statesVisted"></charts-time-bar>
+        </div>
+    </div>
+
+    <div layout="row" layout-sm="column" class="md-row">
+        <div flex-sm="100" flex="50" class="md-col">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2 flex>General State History</h2>
+                </div>
+            </md-toolbar>
+            <md-content class="md-whiteframe-z1 md-padding" style="height: 500px;">
+<!--
+                <md-input-container>
+                    <label>State</label>
+                    <md-select ng-model="ctrl.userState">
+                        <md-option ng-repeat="state in popularStates" value="{{state.state}}">
+                            <span>{{state.state}}</span>
+                            <span>{{state.number}}</span>
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+-->
+<!--
+                <md-datepicker ng-model="myDate" md-placeholder="From date"></md-datepicker>
+                <md-datepicker ng-model="myDate" md-placeholder="To date"></md-datepicker>
+-->
+
+                <nested-view ng-repeat="state in popularStatesGeneral" data="state" group-by-params="false"></nested-view>
+            </md-content>
+        </div>
+        <div flex-sm="100" flex="50" class="md-col">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2 flex>Specific State History</h2>
+                </div>
+            </md-toolbar>
+            <md-content class="md-whiteframe-z1 md-padding" style="height: 500px;">
+                <nested-view ng-repeat="state in popularStatesSpecific" data="state" group-by-params="true"></nested-view>
+            </md-content>
+        </div>
+    </div>
+</div>

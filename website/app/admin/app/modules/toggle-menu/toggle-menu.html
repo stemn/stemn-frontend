@@ -1,0 +1,14 @@
+<md-button class="md-button-toggle" ng-click="toggle()">
+    <div layout="row">
+        <span flex>{{section.name}}</span>
+        <md-icon class="md-toggle-icon" ng-class="{'toggled' : section.isOpen}" md-svg-src="md-toggle-arrow"></md-icon>
+    </div>
+</md-button>
+
+<div class="menu-toggle-list" ng-show="section.isOpen">
+    <div ng-repeat="page in section.pages">
+        <md-button ui-sref-active="active" ui-sref="{{page.sref}}">
+            {{page.name}}
+        </md-button>
+    </div>
+</div>

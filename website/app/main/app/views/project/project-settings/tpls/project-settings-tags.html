@@ -1,0 +1,32 @@
+<form name="forms.tagsForm" novalidate>
+    <h2 class="md-display-1">Project Tags</h2>
+    <div layout="column" layout-gt-md="row" class="md-row">
+        <div class="md-col m-b-30" flex="100" flex-gt-md="40">
+            <div class="text-subtitle-thin">Tags allow your project to be classified and easily found. Add as many accurate tags as you can.</div>
+        </div>
+        <div class="md-col" flex="100" flex-gt-md="60">
+            <div id="fields" class="card-z1 card-padding m-b-30">
+                <div layout="row">
+                    <div class="md-subhead" flex>Fields Tags</div>
+                    <div class="notes">5 Required</div>
+                </div>
+                <p class="body-small">Add related field tags. These should describe the project and any skills and technologies demonstrated.</p>
+                <field-search data="project.fields" focus="focusField" ng-mouseenter="focusField=true" ng-mouseleave="focusField=false" placeholder="Add field tags"></field-search>
+                <tags ng-if="project.fields.length>0" edit="true" size="xs" tags="project.fields" type="field"></tags>
+            </div>
+            <div id="organisations" class="card-z1 card-padding m-b-30">
+                <div layout="row">
+                    <div class="md-subhead" flex>Organisation Tags</div>
+                </div>
+                <p class="body-small">Tag any organisations associated with this project. This can be a university, company or research institution.</p>
+                <organisation-search data="project.organisations" focus="focusOrg" ng-mouseenter="focusOrg=true" ng-mouseleave="focusOrg=false" placeholder="Add organisations"></organisation-search>
+                <tags ng-if="project.organisations.length>0" edit="true" size="xs" tags="project.organisations" type="organisation"></tags>
+            </div>
+            <div id="location" class="card-z1 card-padding m-b-30">
+                <div class="md-subhead" flex>Project Location</div>
+                <p class="body-small">Where is this project based? This will display it on the <a class="text-green" ui-sref="app.map" target="_blank">project map</a>.</p>
+                <location-search data="project.location" single="true" placeholder="Location"></location-search>
+            </div>
+        </div>
+    </div>
+</form>

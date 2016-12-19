@@ -1,0 +1,9 @@
+<div class="application-rows">
+    <user-row-detailed class="m-b-15" ng-repeat="item in query.results" user-id="{{item.child._id}}" show-edit="showEdit" button-text="See application" button-href="applications/{{item._id}}" job="job"></user-row-detailed>
+    <div ng-hide="query.notEnoughResults || hideMore">
+        <a class="well-button" layout="row" layout-align="center center" ng-click="query.more()" ng-disabled="query.noMoreResults">
+            <div>{{query.noMoreResults ? 'No more applications' : 'Load more'}}</div>
+        </a>
+    </div>
+    <div ng-show="query.results.length < 1" class="text-lightgrey">No applicants yet.</div>
+</div>

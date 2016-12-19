@@ -1,0 +1,51 @@
+uploaded-file{
+	padding: 15px;
+	.md-button{
+		position: absolute;
+		margin: 0px;
+		opacity: 0;
+		transition: 0.1s all ease !important;
+		z-index: 2; // So it is above loading overlay
+		&.edit{
+			top: -15px;
+			right: -15px;
+		}
+		&.close{
+			top: -15px;
+			left: -15px;
+		}
+	}
+	&:hover{
+		.md-button{
+			opacity: 1;
+		}
+	}
+	.name{
+		padding: 5px;
+		border-top: 1px solid rgba(0, 0, 0, 0.1);
+		background-color: rgba(0, 0, 0, 0.02);
+	}
+}
+
+/* Upload Files Directive */
+upload-files-display{
+    label.btn-upload input[type="file"] {
+        position: fixed;
+        top: -1000px;
+    }
+    .btn-upload{
+        padding: 10px 15px;
+        background: white;
+        border: 1px solid rgba(0, 0, 0, 0.07);
+        cursor: pointer;
+        &:hover, &:focus, &:active{
+            background: rgba(0, 0, 0, 0.03);
+        }
+    }
+	.drop{
+		&.drag-over {
+			border-color: #8DC63F;
+			background: rgba(104, 184, 40, 0.12)
+		}
+	}
+}

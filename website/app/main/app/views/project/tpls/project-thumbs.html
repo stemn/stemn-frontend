@@ -1,0 +1,6 @@
+<div class="project-thumbs" layout="row">
+    <a ng-repeat="image in images | limitTo: 4" flex="25" lightbox="true" lightbox-image="image" lightbox-images="images">
+        <img ng-src="{{image.image.url}}?size=thumb-lg&crop=true" alt="">
+<!--       <blur-load bg-src="{{image.image.url}}?size=thumb-lg&crop=true" bg-width="{{section.image.width}}" bg-max-width="300"></blur-load>-->
+    </a>
+</div>

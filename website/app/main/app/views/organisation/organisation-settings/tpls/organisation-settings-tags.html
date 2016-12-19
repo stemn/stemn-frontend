@@ -1,0 +1,28 @@
+<form name="forms.tagsForm" novalidate>
+    <h2 class="md-display-1">Organisation Tags</h2>
+    <div layout="column" layout-gt-md="row" class="md-row">
+        <div class="md-col m-b-30" flex="100" flex-gt-md="40">
+            <div class="text-subtitle-thin">Tags allow your organisation to be classified and easily found. Add as many accurate tags as you can.</div>
+        </div>
+        <div class="md-col" flex="100" flex-gt-md="60">
+            <div id="fields" class="card-z1 card-padding m-b-30">
+                <div layout="row">
+                    <div class="md-subhead" flex>Fields Tags</div>
+                </div>
+                <p class="body-small">Add related field tags. These should describe the areas this organisation operates in.</p>
+                <field-search data="organisation.fields" focus="focusField" ng-mouseenter="focusField=true" ng-mouseleave="focusField=false" placeholder="Add field tags"></field-search>
+                <tags ng-if="organisation.fields.length>0" edit="true" size="xs" tags="organisation.fields" type="field"></tags>
+            </div>
+            <div id="organisations" class="card-z1 card-padding m-b-30">
+                <div class="md-subhead" flex>Related Organisations</div>
+                <p class="body-small">Does this organisation have branches or parent/child relationships with other organisations?</p>
+                <organisation-groups edit="true" organisations="organisation.organisations"></organisation-groups>
+            </div>
+            <div id="location" class="card-z1 card-padding m-b-30">
+                <div class="md-subhead" flex>Organisation Location</div>
+                <p class="body-small">Where is this organisation based? This will display it on the <a class="text-green" ui-sref="app.map({'type':'organisation'})" target="_blank">organisation map</a>.</p>
+                <location-search data="organisation.location" single="true" placeholder="Location"></location-search>
+            </div>
+        </div>
+    </div>
+</form>

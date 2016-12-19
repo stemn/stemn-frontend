@@ -1,0 +1,44 @@
+<div class="statesView">
+    <div class="md-display-1" style="margin-bottom: 20px;">{{state}}
+        <span ng-show="params.stub">({{params.stub}})</span>
+    </div>
+
+    <div ng-if="state == 'app.landing.standard'" layout="row" layout-sm="column" class="md-row">
+        <div flex="100" class="md-col" style="margin-bottom: 20px;">
+            <charts-time-bar chart-type="landingPageConversions" state="{{state}}" state-params="{{params}}"></charts-time-bar>
+        </div>
+    </div>
+
+    <div layout="row" layout-sm="column" class="md-row">
+        <div flex-sm="100" flex="50" class="md-col" style="margin-bottom: 20px;">
+            <charts-time-bar chart-type="timeOnState" state="{{state}}" state-params="{{params}}"></charts-time-bar>
+        </div>
+        <div flex-sm="100" flex="50" class="md-col" style="margin-bottom: 20px;">
+            <charts-time-bar chart-type="visitors" state="{{state}}" state-params="{{params}}"></charts-time-bar>
+        </div>
+    </div>
+
+
+    <div layout="row" layout-sm="column" class="md-row">
+        <div flex-sm="100" flex="50" class="md-col">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2 flex>Next State (General)</h2>
+                </div>
+            </md-toolbar>
+            <md-content class="md-whiteframe-z1 md-padding" style="height: 500px;">
+                <nested-view data="stateDataGeneral" group-by-params="false" evaluate="true"></nested-view>
+            </md-content>
+        </div>
+        <div flex-sm="100" flex="50" class="md-col">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2 flex>Next State (Specific)</h2>
+                </div>
+            </md-toolbar>
+            <md-content class="md-whiteframe-z1 md-padding" style="height: 500px;">
+                <nested-view data="stateDataSpecific" group-by-params="true" evaluate="true"></nested-view>
+            </md-content>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,4 @@
+# auto crlf to lf for windows
+#* text=auto
+
+autocrlf=true

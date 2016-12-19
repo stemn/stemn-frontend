@@ -1,0 +1,15 @@
+.checklist-item{
+	md-icon{
+		padding-right: 5px;
+		color: rgba(0, 0, 0, 0.15);
+	}
+	&.complete{
+		md-icon{
+			color: #8BC34A;
+		}
+		a{
+			text-decoration: line-through;
+			color: rgba(0, 0, 0, 0.4);
+		}
+	}
+}

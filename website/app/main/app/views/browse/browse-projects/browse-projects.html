@@ -1,0 +1,28 @@
+<div layout="row" layout-align="center">
+    <div class="md-content-container" layout="column" layout-align="center center">
+        <h1 class="md-display-1 text-center m-t-50">Projects</h1>
+        <div class="md-title text-grey light-font text-center">Discover projects or start your own</div>
+        <a class="text-green m-v-15" show-explanation-modal="project">What is a project?</a>
+    </div>
+</div>
+<div layout="row" layout-align="center">
+    <div class="md-content-container md-no-padding">
+        <div class="line-divider-bottom m-b-30" layout="row">
+            <div class="md-subhead" flex>Featured Fields</div>
+        </div>
+        <fields-filter class="m-b-30" filter="fieldFilter"></fields-filter>
+    </div>
+</div>
+<div layout="row" layout-align="center">
+    <div class="md-content-container md-no-padding rel-box" layout="column">
+        <div class="line-divider-bottom m-b-40" layout="row" layout-align="start end">
+            <div class="md-subhead" flex>Projects</div>
+            <div layout="row" layout-align="start center">
+                <md-select ng-model="sortFilter.current" placeholder="Sort by" class="no-margin md-subhead">
+                    <md-option ng-repeat="filter in sortFilter.options" value="{{filter.model}}">{{filter.name}}</md-option>
+                </md-select>
+            </div>
+        </div>
+        <card-feed parent-id="{{fieldFilter.current}}" parent-type="field" type="projects" sort="{{sortFilter.current}}" size="12"></card-feed>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<div ng-if="item.event != 'post'" style="padding-left: 20px; margin-top: -15px;">
+    <div class="timeline-item" layout="row" layout-align="start center">
+        <div class="timeline-marker" layout="column" layout-align="center center"><md-icon md-svg-icon="{{iconMap[item.event]}}"></md-icon></div>
+        <div ng-if="item.event == 'label'" class="timeline-content" flex>
+            <b>{{item.user.name}}</b>
+            <span ng-show="item.added.length>0">added the&nbsp;<span class="label" label-style="{{label}}" ng-repeat="label in item.added">{{label}}</span>{{item.added.length == 1 ? 'label' : 'labels'}}</span>
+            <span ng-show="item.added.length>0 && item.removed.length>0">&nbsp;and&nbsp;</span>
+            <span ng-show="item.removed.length>0">removed the&nbsp;<span class="label" label-style="{{label}}" ng-repeat="label in item.removed">{{label}}</span>{{item.removed.length == 1 ? 'label' : 'labels'}}</span>
+            <span>{{item.timestamp | amTimeAgo}}.</span>
+        </div>
+        <div ng-if="item.event == 'update'" class="timeline-content" flex>
+            <b>{{item.user.name}}</b> updated the original post.
+        </div>
+        <div ng-if="item.event == 'open'" class="timeline-content" flex>
+            <b>{{item.user.name}}</b> re-opened this thread.
+        </div>
+        <div ng-if="item.event == 'closed'" class="timeline-content" flex>
+            <b>{{item.user.name}}</b> closed this thread.
+        </div>
+    </div>
+</div>
+
+<post ng-if="item.event == 'post'" post="item" parent="parent" timeline="timeline" class="block m-b-15"></post>

@@ -1,0 +1,10 @@
+<div class="timeline hide-last">
+    <div class="timeline-item" ng-repeat="item in timeline | orderBy: '-timestamp'" layout="row" style="padding-bottom: 15px;">
+        <div class="timeline-marker" layout="column" layout-align="center center"><md-icon md-svg-icon="{{iconMap[item.event]}}"></md-icon></div>
+        <div class="timeline-content" flex>
+            <div ng-if="item.event == 'update'">{{item.details.sharing_info.modified_by_name.split(' ')[0]}} updated this file. <a ui-sref="app.preview({projectStub: item.details.parentProject, path: item.details.pathRev, children: item.details.childrenRev})" class="label label-md">V.{{item.details.revDecimal}}</a></div>
+            <div ng-if="item.event == 'create'">{{item.details.sharing_info.modified_by_name.split(' ')[0]}} created {{item.details.name}} <a ui-sref="app.preview({projectStub: item.details.parentProject, path: item.details.pathRev, children: item.details.childrenRev})" class="label label-md">V.1</a></div>
+            <div class="text-lightgrey">{{item.timestamp | amTimeAgo}}</div>
+        </div>
+    </div>
+</div>

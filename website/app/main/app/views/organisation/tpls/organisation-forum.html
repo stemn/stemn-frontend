@@ -1,0 +1,22 @@
+<!--
+<div class="md-row" layout="row">
+    <div hide-sm class="md-col" style="width: 300px">
+        <div class="anim-fade m-b-30">
+            <div class="well" layout="column">
+                <div class="text-lightgrey m-b-15">
+                    Want to find jobs in a specific location?
+                </div>
+                <md-button class="md-accent md-raised md-flat md-cornered md-md m-0" ui-sref="app.map({type: 'job'})">Explore job map</md-button>
+            </div>
+        </div>
+    </div>
+    <div flex class="md-col rel-box" layout="column">
+        <forum type="discussions" parent-type="organisation" parent-id="{{organisation._id}}"></forum>
+    </div>
+</div>-->
+
+<div class="well m-b-30" layout="column" layout-gt-sm="row" layout-align="start center">
+    <p flex>Got something to say? Post in the <b>{{organisation.name}}</b> forum.</p>
+    <md-button authenticate class="md-accent md-raised md-flat md-cornered md-md" ng-click="newThread($event, 'question')">Add a question or discussion</md-button>
+</div>
+<forum type="discussions" parent-type="organisation" parent-id="{{organisation._id}}"></forum>

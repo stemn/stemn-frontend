@@ -1,0 +1,35 @@
+{
+  "name": "xxhash",
+  "homepage": "https://github.com/pierrec/js-xxhash",
+  "authors": [
+    "Pierre Curto <pierre.curto@gmail.com>"
+  ],
+  "description": "xxHash - fast 32 bits hashing algorithm",
+  "main": "build/xxhash.lmd.js",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "hash",
+    "xxhash"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "5b8f0afdec",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "5b8f0afdec3cf53617520977b2828c1e321baf02"
+  },
+  "_source": "https://github.com/pierrec/js-xxhash.git",
+  "_target": "*",
+  "_originalSource": "xxhash"
+}

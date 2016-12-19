@@ -1,0 +1,4 @@
+<iframe ng-if="fileUrl" flex ng-src="{{'assets/js/pdf/web/viewer-stemn.html?file=/' + fileUrl | trustAsResourceUrl}}" frameborder="0"></iframe>
+<loading-overlay ng-if="loading" class="light-grey" style="top: 2px;">
+    <div class="m-t-15">Loading PDF</div>
+</loading-overlay>

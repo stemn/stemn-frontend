@@ -1,0 +1,10 @@
+<div class="job-tile rel-box m-v-15 text-center" style="min-height: 125px;" layout="column" layout-align="start center">
+    <a ng-href="{{item.url}}">
+        <div class="avatar avatar-square-contain avatar-md" ng-style="item.organisations[0].picture && { 'background-image':'url('+item.organisations[0].picture+'?size=thumb-lg)'}"></div>
+    </a>
+    <a ng-href="{{item.url}}">
+        <div class="bold m-t-10">{{item.organisations[0].name}}</div>
+        <div>{{item.name}}</div>
+    </a>
+    <loading-overlay ng-if="loading"></loading-overlay>
+</div>

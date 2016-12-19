@@ -1,0 +1,11 @@
+<div class="social-share-buttons" ng-if="!tiles">
+    <md-button ng-href="{{item.href}}" ng-repeat="item in shares" class="md-icon-button md-sm m-0" onclick="window.open(this.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false">
+        <md-icon md-svg-icon="{{item.icon}}"></md-icon>
+        <md-tooltip md-direction="top" md-autohide="true">{{item.title}}</md-tooltip>
+    </md-button>
+</div>
+<div class="social-share-tiles" layout="row" ng-if="tiles">
+    <a flex="33" ng-repeat="item in shares" ng-href="{{item.href}}" onclick="window.open(this.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false">
+        <img class="w-100" src="assets/images/vectors/share-tiles/{{item.icon}}.svg" alt="{{item.title}}">
+    </a>
+</div>

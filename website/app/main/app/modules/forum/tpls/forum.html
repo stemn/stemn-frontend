@@ -1,0 +1,47 @@
+<div class="forum m-b-60 rel-box" style="min-height: 60px;">
+    <div ng-show="query.results.length > 0" class="md-table text-center">
+        <div class="table-head">
+            <div class="table-row">
+                <div style="width: 40px;"></div>
+                <div class="text-left">Topic</div>
+                <div style="width: 60px;">Project</div>
+                <div style="width: 60px;">Author</div>
+                <div style="width: 100px;">Replies</div>
+<!--                <div style="width: 100px">Activity</div>-->
+            </div>
+        </div>
+        <a set-entity-href="item.type || item.entityType" entity-stub="item.stub" class="table-row" ng-repeat="item in query.results">
+            <div style="padding: 15px 20px 15px 5px;">
+                <div class="avatar avatar-square-cover" ng-style="{ 'background-image':'url('+(item.picture || '/assets/images/default/org.png')+'?size=thumb)'}"></div>
+            </div>
+            <div class="text-left">
+                <div class="bold">{{item.name | letters: 70}}&nbsp;<span class="label" label-style="{{label}}" ng-repeat="label in item.labels">{{label}}</span></div>
+                <div>{{item.blurb | letters: 70}}</div>
+            </div>
+            <div>
+                <div ng-if="item.project.name" class="avatar-square-cover avatar-sm m-a" ng-style="{ 'background-image':'url('+(item.project.picture || '/assets/images/default/user-1.png')+'?size=thumb&crop=true)'}">
+                    <md-tooltip md-direction="bottom" md-autohide="true">{{item.project.name}}</md-tooltip>
+                </div>
+            </div>
+            <div>
+                <div class="avatar-circle avatar-sm m-a" ng-style="{ 'background-image':'url('+(item.owner.picture || '/assets/images/default/user-1.png')+'?size=thumb&crop=true)'}">
+                    <md-tooltip md-direction="bottom" md-autohide="true">{{item.owner.name}}</md-tooltip>
+                </div>
+            </div>
+            <div>{{item.numPosts}}</div>
+<!--            <div>{{item.data.updated | amTimeAgo}}</div>-->
+        </a>
+    </div>
+
+    <div ng-if="query.notEnoughResults" class="text-no-results m-t-15">
+       {{query.results.length > 0 ? 'No more threads' : 'No threads yet'}}
+    </div>
+
+    <div ng-hide="query.notEnoughResults" class="m-t-30">
+        <a class="well-button" layout="row" layout-align="center center" ng-click="query.more()" ng-disabled="query.noMoreResults">
+            <div>{{query.noMoreResults ? 'No more discussions' : 'Load more discussions'}}</div>
+        </a>
+    </div>
+    <loading-overlay ng-if="query.loading" ng-class="{'translucent' : query.results.length > 0}"></loading-overlay>
+
+</div>

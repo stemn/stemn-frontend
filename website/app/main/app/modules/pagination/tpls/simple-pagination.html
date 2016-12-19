@@ -1,0 +1,16 @@
+<div layout="row" layout-align="center center" style="margin-top: 60px;">
+    <div>
+        <div class="inline" ng-show="page > 1">
+            <md-button class="md-fab md-mini md-accent " ui-sref=".({'page':prevPage})" ng-click="prev()" aria-label="Previous Page">
+                <md-tooltip md-autohide="true">Previous</md-tooltip>
+                <md-icon md-svg-src="chevron-left"></md-icon>
+            </md-button>
+        </div>
+        <div class="inline" ng-hide="noMoreResults">
+            <md-button class="md-fab md-mini md-accent" ui-sref=".({'page':nextPage})" ng-click="next()" aria-label="Next Page">
+                <md-tooltip md-autohide="true">Next</md-tooltip>
+                <md-icon md-svg-src="chevron-right"></md-icon>
+            </md-button>
+        </div>
+    </div>
+</div>

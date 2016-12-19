@@ -1,0 +1,128 @@
+<div layout="row" layout-align="center">
+    <div class="md-content-container" layout="column" layout-align="center">
+        <h1 class="md-display-1 text-center m-t-50">Referrals</h1>
+        <div class="md-title text-grey light-font text-center">Refer your friends – Win awesome prizes!</div>
+        <a class="text-green text-center m-v-15" show-explanation-modal="ambassador">Become an ambassador</a>
+    </div>
+</div>
+
+
+<div class="infobar m-b-30 p-v-15 overflow-x-box" layout="row" layout-align="center">
+    <div class="md-content-container md-row text-center" layout="column" layout-gt-sm="row">
+        <div flex="100" flex-gt-sm="33" class="md-col" layout="column">
+            <h2 class="md-title bold">Win prizes</h2>
+            <p>Signup friends - get awesome prizes <br>including stickers and official t-shirts.</p>
+        </div>
+        <div flex="100" flex-gt-sm="33" class="md-col" layout="column">
+            <h2 class="md-title bold">Accelerate science</h2>
+            <p>More people on STEMN means more<br>collaboration and knowledge sharing.</p>
+        </div>
+        <div flex="100" flex-gt-sm="33" class="md-col" layout="column">
+            <h2 class="md-title bold">Become an ambassador</h2>
+            <p>Get paid $$$ for everyone you<br>signup at your company or university.</p>
+        </div>
+    </div>
+</div>
+
+<div layout="row" layout-align="center">
+    <div class="md-content-container">
+        <div layout="row" class="md-row m-b-60">
+
+            <div class="md-col" flex>
+                <div class="line-divider-bottom m-b-15" layout="row">
+                    <div class="md-subhead" flex>Your Referral Code</div>
+                </div>
+                <div class="m-b-10 bold">Get your friends to sign up with this unique URL:</div>
+                <div class="well well-select" select-on-click>
+                    https://stemn.com?ref={{user.ref}}
+                    <md-tooltip md-direction="top" md-autohide="true">Click to highlight</md-tooltip>
+                </div>
+            </div>
+
+            <div class="md-col" style="width: 300px;">
+                <div class="line-divider-bottom m-b-15" layout="row">
+                    <div class="md-subhead" flex>Social referrals</div>
+                </div>
+                <div class="m-b-10 bold">Share to Social Networks:</div>
+                <social-share-buttons ref="{{user.ref}}" root="true" title="Sign up to STEMN" summary="STEMN is probably the best Engineering Portfolio site out there. Apply for hundreds of jobs in just 1 click."></social-share-buttons>
+            </div>
+
+        </div>
+
+        <div layout="row" class="md-row m-b-60">
+
+            <div class="md-col rel-box" flex>
+                <div class="line-divider-bottom" layout="row">
+                    <div class="md-subhead" flex>Your Referrals</div>
+                    <div class="md-subhead">Total: {{query.results[0].signups.length || 0}}</div>
+                </div>
+                <loading-overlay ng-if="query.loading"></loading-overlay>
+                <table class="md-table" ng-show="query.results[0].signups.length>=1" style="min-height: 100px;">
+                    <thead>
+                        <tr style="border-top: none;">
+                            <td style="width: 40px;"></td>
+                            <td>Name</td>
+                            <td style="width: 140px;" class="text-center">Signup</td>
+                            <td hide-sm style="width: 75px;"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in query.results[0].signups">
+                            <td style="padding: 15px 20px 15px 5px;">
+                                <a ui-sref="app.user.profile({stub:item.user.stub})">
+                                    <div class="avatar-circle" ng-style="{ 'background-image':'url('+(item.user.picture || '/assets/images/default/user-1.png')+'?size=thumb&crop=true)'}"></div>
+                                    <popup class="card-popup" popup-side="bottom" popup-position="center">
+                                        <card card-type="user" card-id="{{item.user._id}}"></card>
+                                    </popup>
+                                </a>
+                            </td>
+                            <td>
+                                <a ui-sref="app.user.profile({stub:item.stub})">
+                                    <div class="bold">{{item.user.name}}</div>
+                                    <div>{{item.user.blurb | letters: 70}}</div>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                {{item.timestamp | amTimeAgo}}
+                            </td>
+                            <td hide-sm>
+                                <hide-if-owner owner="{{item.user._id}}">
+                                    <stat-button hide-stat="true" size="sm" type="follow" parent-type="user" parent-id="{{item.user._id}}" count="item.user.followers"></stat-button>
+                                </hide-if-owner>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-no-results" ng-hide="query.results[0].signups.length > 0">
+                    You have no successful referrals yet.
+                </div>
+                <div ng-if="query.results[0].signups.length>=5" class="m-t-15">Email your <a href="mailto:swag@stemn.com.au" class="text-green">swag@stemn.com.au</a> to claim your prize.</div>
+            </div>
+
+            <div class="md-col" style="width: 300px;">
+                <div class="line-divider-bottom m-b-15" layout="row">
+                    <div class="md-subhead" flex>Prizes</div>
+                </div>
+                <div layout="row" layout-align="start center">
+                    <div class="m-r-10" style="width: 100px;">
+                        <img class="w-100" src="/assets/images/swag/stickers-mockup-edges-sm.jpg" alt="STEMN Stickers">
+                    </div>
+                    <div flex><b>Refer 5 friends</b> and we'll send you some STEMN stickers.</div>
+                </div>
+                <div layout="row" layout-align="start center">
+                    <div class="m-r-10" style="width: 100px;">
+                        <img class="w-100" src="/assets/images/swag/white-shirt-sm.jpg" alt="STEMN t-shirt">
+                    </div>
+                    <div flex><b>Refer 10 friends</b> to receive an official STEMN t-shirt.</div>
+                </div>
+                <div layout="row" layout-align="start center">
+                    <div class="m-r-10" style="width: 100px;">
+                        <img class="w-100" src="/assets/images/swag/blue-shirt-sm.jpg" alt="STEMN t-shirt">
+                    </div>
+                    <div flex><b>Refer 20 friends</b> to get another STEMN t-shirt. Keep it fresh. </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

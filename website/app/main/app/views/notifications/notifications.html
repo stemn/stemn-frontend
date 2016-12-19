@@ -1,0 +1,11 @@
+<div layout="row" layout-align="center" class="m-t-10">
+    <div class="md-content-container overflow-x-box">
+        <h1 class="md-display-2">Notifications</h1>
+        <div class="text-tabs text-tabs-top m-t-40 m-b-30" layout="row">
+            <a class="md-subhead" ng-class="{'active':$state.includes(tab.sref)}" ng-repeat="tab in tabs" ui-sref="{{tab.sref}}">{{tab.label}}</a>
+        </div>
+        <div ui-view="all" ng-show="$state.includes('app.notifications.all')"></div>
+        <div ui-view="invites" ng-show="$state.includes('app.notifications.invites')" ></div>
+        <div ui-view="applications" ng-show="$state.includes('app.notifications.applications')" ></div>
+    </div>
+</div>

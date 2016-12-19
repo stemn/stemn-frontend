@@ -1,0 +1,41 @@
+<div layout="row" layout-align="center">
+    <div class="md-content-container m-b-30">
+<!--
+        <tip-banner local="true" class="m-v-15">
+            Followers will be notified when this organisation adds a new <b>project</b>, <b>blog</b> or <b>discussion</b>.
+        </tip-banner>
+-->
+        <h1 class="md-display-1">Things you follow</h1>
+        <div class="line-divider-bottom m-v-30" layout="row">
+            <div class="md-subhead" flex>Fields</div>
+            <a class="md-subhead text-green" ui-sref="app.following.fields">See More</a>
+        </div>
+        <following-detailed hide-more="true" size="3" type="field" ></following-detailed>
+
+
+        <div class="line-divider-bottom m-v-30" layout="row">
+            <div class="md-subhead" flex>Organisations</div>
+            <a class="md-subhead text-green" ui-sref="app.following.organisations">See More</a>
+        </div>
+        <following-detailed hide-more="true" size="3" type="organisation" ></following-detailed>
+
+        <div class="line-divider-bottom m-v-30" layout="row">
+            <div class="md-subhead" flex>Projects</div>
+            <a class="md-subhead text-green" ui-sref="app.following.projects">See More</a>
+        </div>
+        <following-detailed hide-more="true" size="3" type="project" ></following-detailed>
+
+        <div class="line-divider-bottom m-v-30" layout="row">
+            <div class="md-subhead" flex>Blogs and Questions</div>
+            <a class="md-subhead text-green" ui-sref="app.following.threads">See More</a>
+        </div>
+        <following-detailed hide-more="true" size="3" type="thread" ></following-detailed>
+
+
+        <div class="line-divider-bottom m-v-30" layout="row">
+            <div class="md-subhead" flex>Users</div>
+            <a class="md-subhead text-green" ui-sref="app.following.users">See More</a>
+        </div>
+        <following-detailed hide-more="true" size="3" type="user" ></following-detailed>
+    </div>
+</div>

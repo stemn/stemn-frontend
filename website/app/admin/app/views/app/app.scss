@@ -1,0 +1,45 @@
+.menuBtn {
+    background-color: transparent;
+    border: none;
+    height: 38px;
+    margin: 13px;
+    width: 36px;
+}
+
+md-toolbar h1 {
+    font-weight: normal;
+    font-weight: normal;
+}
+
+md-list .md-button {
+    color: inherit;
+    font-weight: 500;
+    text-align: left;
+    width: 100%;
+}
+
+md-sidenav {
+    background-color: #3F51B5;
+    .header {
+        padding: 30px;
+        background: linear-gradient(#32408A, #3F51B5);
+        text-align: center;
+        display: block;
+    }
+    .md-button {
+        padding: 5px 20px;
+        border-radius: 0px !important;
+        margin: 0px;
+        text-align: left;
+        width: 100%;
+        color: white;
+        &.active {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        md-icon{
+            color: white;
+        }
+    }
+
+}
+

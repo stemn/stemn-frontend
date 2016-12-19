@@ -1,0 +1,15 @@
+<md-dialog>
+    <md-dialog-content>
+        <div style="width: 500px;">
+            <h1 class="md-headline" style="margin-top: 0px; margin-bottom: 40px;">Are you sure?</h1>
+            <p>This will <strong>overwrite</strong> parts of your STEMN user profile using information in your Linkedin profile.</p>
+            <p>If you are unsure, you should make a copy of your STEMN profile's summary and education sections.</p>
+        </div>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <div flex></div>
+        <md-button class="" ng-click="cancel()">Cancel</md-button>
+        <md-button class="md-raised md-warn" ng-click="finish()">Proceed</md-button>
+    </div>
+    <loading-overlay ng-if="loading"></loading-overlay>
+</md-dialog>

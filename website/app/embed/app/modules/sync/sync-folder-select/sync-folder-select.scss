@@ -1,0 +1,20 @@
+.sync-folder-select{
+    .display-row{
+        padding: 2px 0;
+        &:hover{
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        &.selected{
+            background: rgb(248, 248, 248);
+            outline: 1px solid rgba(0, 0, 0, 0.3);
+        }
+    }
+    md-icon{
+        color: rgba(0, 0, 0, 0.2);
+        &:hover{
+            color: rgba(0, 0, 0, 0.4);
+        }
+        transition: all 0.2s ease;
+    }
+}

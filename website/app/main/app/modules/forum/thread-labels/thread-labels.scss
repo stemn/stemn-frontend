@@ -1,0 +1,28 @@
+.label{
+    margin-right: 5px;
+    display: inline-block;
+    padding: 3px;
+    font-size: 80%;
+    font-weight: 600;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.6);
+    background: rgba(212, 212, 212, 0.4);
+    border-radius: 3px;
+    text-transform: capitalize;
+    &.label-green{
+        background: #8DC63F;
+        color: white;
+    }
+    &.label-md{
+        padding: 5px;
+        font-size: 100%;
+        font-weight: 500;
+    }
+}
+
+a.label{
+    border: 1px solid rgba(0, 0, 0, 0);
+    &:hover{
+        border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+}

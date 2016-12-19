@@ -1,0 +1,36 @@
+.userSettingsView{
+    padding-top: 10px;
+    .toggle-group {
+        padding-top: 0px;
+        padding-bottom: 10px;
+        [flex]{
+            margin-right: 40px;
+            @media (max-width: 600px){
+                margin-right: 0px;
+            }
+        }
+    }
+    md-switch{
+       @media (max-width: 600px){
+            margin-right: 0px;
+        }
+    }
+    .toggle {
+        padding: 10px 0;
+        h4 {
+            margin: 0;
+            font-weight: 600;
+        }
+        [flex]{
+            margin-right: 40px;
+        }
+    }
+    .md-subhead{
+        color: rgba(0, 0, 0, 0.7);
+    }
+    p{
+        font-size: 13px;
+        margin: 10px 0 0 0;
+        color: #939393;
+    }
+}

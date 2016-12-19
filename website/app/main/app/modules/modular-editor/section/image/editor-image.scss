@@ -1,0 +1,139 @@
+.editor-image{
+    background: white;
+	position: relative;
+	.image-box{
+		position: relative;
+	}
+	.editor-caption{
+		display: block;
+        margin: auto;
+		text-align: center;
+		> div{
+			font-size: 13px;
+			font-style: italic;
+			p{
+				font-size: 13px;
+				font-style: italic;
+			}
+		}
+	}
+	img{
+		width: 100%;
+		height: 100%;
+        background: white;
+	}
+	.image-box{
+		display: block;
+		height: 100%;
+	}
+
+	&.layout-full-width{
+		.image-box{
+			width: 100%;
+            z-index: 1;
+		}
+        .editor-caption{
+            max-width: 650px;
+            margin: 0px auto;
+        }
+	}
+	&.layout-full-width-banner{
+		.image-box{
+			height: 500px;
+			background-repeat: no-repeat;
+   			background-size: cover;
+			background-position: center;
+            z-index: 1;
+		}
+        .editor-caption{
+            max-width: 650px;
+            margin: 0px auto;
+        }
+	}
+	&.layout-full-width-banner-text{
+		.image-box{
+			height: 500px;
+			background-repeat: no-repeat;
+   			background-size: cover;
+			background-position: center;
+            z-index: 1;
+		}
+        .editor-caption{
+            max-width: 650px;
+            margin: 0px auto;
+        }
+		.overlay{
+			position: absolute;
+			top: 0;
+			right: 0;
+			left: 0;
+			bottom: 0;
+			background: rgba(0, 0, 0, 0.35);
+            z-index: 2;
+			.editor-caption{
+				max-width: 800px;
+                >div{
+                    color: white !important;
+                    font-style: normal;
+                    font-size: 25px !important;
+                    &.medium-editor-placeholder:after {
+                        color: inherit !important;
+                    }
+                }
+				p{
+					font-size: 25px !important;
+					font-style: normal;
+				}
+				h2{
+					font-size: 35px;
+					color: inherit;
+				}
+				a{
+					color: inherit;
+				}
+				blockquote {
+					border-left: none;
+					color: inherit;
+					quotes: "\201C""\201D""\2018""\2019";
+					font-style: italic;
+					font-size: 30px;
+					margin-bottom: 15px;
+					&:before {
+						content: open-quote;
+					}
+					&:after {
+						content: close-quote;
+					}
+				}
+			}
+		}
+	}
+	&.layout-left{
+		.editor-caption{
+			margin-top: 0px;
+			margin-left: 20px;
+			border-top: 1px solid rgba(0, 0, 0, 0.30);
+			text-align: left;
+			>div {
+				margin-top: 10px;
+			}
+		}
+	}
+//    &.layout-center{
+//        .image-box{
+//            margin: auto;
+//        }
+//    }
+
+	&.layout-right{
+		.editor-caption{
+			margin-top: 0px;
+			margin-right: 20px;
+			border-top: 1px solid rgba(0, 0, 0, 0.30);
+			text-align: right;
+			>div {
+				margin-top: 10px;
+			}
+		}
+	}
+}

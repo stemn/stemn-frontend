@@ -1,0 +1,30 @@
+<div>
+   <div ng-if="link!='false'" class="team-images" layout="row">
+        <a ng-repeat="member in team | limitTo: limit-1" popup popup-content="<card card-type='user' card-id='{{member._id}}'></card>" ng-href="users/{{member.stub}}" class="p-2 inline">
+            <div class="avatar-circle" style="background-image:url({{member.picture || '/assets/images/default/user-1.png'}}?size=thumb&crop=true)"></div>
+        </a>
+        <!-- If the limit is the same as length, we show the last member -->
+        <a ng-if="limit == team.length" popup popup-content="<card card-type='user' card-id='{{team[limit-1]._id}}'></card>" ng-href="users/{{team[limit-1].stub}}" class="p-2 inline">
+            <div class="avatar-circle" style="background-image:url({{team[limit-1].picture || '/assets/images/default/user-1.png'}}?size=thumb&crop=true)"></div>
+        </a>
+        <!-- Else, we show a counter -->
+        <a ng-if="team.length > limit" class="p-2 inline" ng-click="showMore()">
+            <md-tooltip md-direction="top" md-autohide="true">{{team.length-limit+1}} more team members</md-tooltip>
+            <div class="avatar-circle text-lightgrey" layout="column" layout-align="center center" style="background: rgb(230, 230, 230);"><div>+{{team.length-limit+1}}</div></div>
+        </a>
+    </div>
+    <div ng-if="link=='false'" class="team-images" layout="row">
+        <div ng-repeat="member in team | limitTo: limit-1" class="p-2 inline">
+            <div class="avatar-circle" style="background-image:url({{member.picture || '/assets/images/default/user-1.png'}}?size=thumb&crop=true)"></div>
+        </div>
+        <!-- If the limit is the same as length, we show the last member -->
+        <div ng-if="limit == team.length" class="p-2 inline">
+            <div class="avatar-circle" style="background-image:url({{team[limit-1].picture || '/assets/images/default/user-1.png'}}?size=thumb&crop=true)"></div>
+        </div>
+        <!-- Else, we show a counter -->
+        <div ng-if="team.length > limit" class="p-2 inline">
+            <md-tooltip md-direction="top" md-autohide="true">{{team.length-limit+1}} more team members</md-tooltip>
+            <div class="avatar-circle text-lightgrey" layout="column" layout-align="center center" style="background: rgb(230, 230, 230);"><div>+{{team.length-limit+1}}</div></div>
+        </div>
+    </div>
+</div>

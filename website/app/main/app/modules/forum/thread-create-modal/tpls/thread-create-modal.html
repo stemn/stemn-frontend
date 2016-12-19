@@ -1,0 +1,24 @@
+<md-dialog aria-label="Create Thread">
+
+    <div class="md-modal-header" layout="row" layout-align="start center">
+        <div class="onboarding-steps" layout="row" layout-align="start center">
+            <div ng-repeat="tab in tabs" layout="row" layout-align="start center">
+                <a class="md-subhead" ng-click="steps[tab].clickFn()" ng-class="{'active' : activeTab.label == steps[tab].label, 'disabled' : steps[tab].isDisabled()}">{{steps[tab].label}}</a>
+                <md-icon md-svg-icon="chevron-right" ng-hide="$last"></md-icon>
+            </div>
+        </div>
+    </div>
+
+    <md-dialog-content class="bg-lightgrey overflow-x-box p-0">
+        <div class="md-content-container content-md" style="padding: 30px;">
+            <div ng-include="activeTab.path"></div>
+            <div layout="row" class="m-t-30">
+                <div flex></div>
+                <md-button class="m-0" ng-click="cancel()">Cancel</md-button>
+                <md-button class="md-accent md-raised" style="margin: 0 0 0 10px;" ng-disabled="steps[activeTab.label].isDisabled()" ng-click="steps[activeTab.label].nextFn()">
+                    {{steps[activeTab.label].nextText}}
+                </md-button>
+            </div>
+        </div>
+    </md-dialog-content>
+</md-dialog>

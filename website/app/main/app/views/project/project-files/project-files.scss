@@ -1,0 +1,39 @@
+.file-explorer{
+    .file-icon{
+        $size: 30px;
+        width: $size;
+        height: $size;
+//        margin: 5px 0px;
+    }
+    .files-table{
+//        border: 1px solid rgba(0, 0, 0, 0.2);
+//        background: white;
+//        padding-left: 15px;
+//        padding-right: 15px;
+        td{
+            padding: 5px 0;
+        }
+        tr{
+            height: 40px;
+        }
+        thead tr{
+            border-top: none;
+        }
+        tbody{
+            tr{
+                &:last-child{
+                    border-bottom: none;
+                }
+            }
+        }
+    }
+}
+
+.ProjectFilesView{
+    .fileTypeDemo{
+        img{
+            width: 40px;
+            height: 40px;
+        }
+    }
+}

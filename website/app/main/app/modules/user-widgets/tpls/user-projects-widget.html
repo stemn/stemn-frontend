@@ -1,0 +1,10 @@
+<div class="preview-squares" layout="row">
+    <a ng-repeat="item in query.results | orderBy: '-picture' | limitTo: 3" ui-sref="app.project.overview({stub: item.stub})">
+        <img ng-src="{{item.picture || 'assets/images/default/org.png'}}?size=thumb&crop=true" alt="">
+        <md-tooltip md-direction="top" md-autohide="true">{{item.name}}</md-tooltip>
+    </a>
+    <a class="more" click-create>
+        <md-icon md-svg-icon="add"></md-icon>
+        <md-tooltip md-direction="top" md-autohide="true">Add project, blog or question</md-tooltip>
+    </a>
+</div>

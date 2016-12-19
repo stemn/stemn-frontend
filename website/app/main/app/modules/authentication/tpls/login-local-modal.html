@@ -1,0 +1,53 @@
+<md-dialog class="md-full-screen loginRegisterModal">
+    <md-toolbar style="background: transparent;">
+        <div class="md-toolbar-tools">
+			<md-button class="md-icon-button" ng-click="back($event)">
+				<md-icon md-svg-icon="arrow-back" aria-label="Back"></md-icon>
+			</md-button>
+            <span flex>
+            </span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-icon="navigation:close" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <form unsaved-warning-form novalidate ng-submit="loginLocal()" name="LoginForm">
+        <md-dialog-content>
+            <div layout="column" layout-align="center center" style="min-height: 80vh;">
+				<div class="dialog-container">
+					<h1 class="md-display-1">STEMN beta</h1>
+					<h4 class="text-lightgrey">Sign in to STEMN</h4>
+					<div class="text-left">
+						<md-input-container class="md-accent">
+							<label>Email</label>
+							<input name="email" ng-model="login.email"
+							required type="email">
+							<div ng-messages="LoginForm.email.$error" ng-if="LoginForm.email.$dirty">
+								<div ng-message="required">We'll be needing this...</div>
+								<div ng-message="email">That is not a valid email.</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-accent">
+							<label>Password</label>
+							<input name="password" ng-model="login.password"
+							required type="password">
+							<div ng-messages="LoginForm.password.$error" ng-if="LoginForm.password.$dirty">
+								<div ng-message="required">If only the world was that simple... You'll need the password :)</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div class="next-buttons" layout="row" layout-align="center center">
+						<md-button flex-order="2" type="submit" class="md-raised md-accent" ng-disabled="LoginForm.$invalid">Login</md-button>
+						<md-button flex-order="1" type="button" ng-click="back($event)">Back</md-button>
+					</div>
+				</div>
+				<div class="info-container">
+					<p class="text-lightgrey">If you have previously logged in using a social account (LinkedIn or Facebook), you can create an email and password combo too, by visiting your settings panel after logging in socially.</p>
+					<p class="text-lightgrey">If you have forgotten your password you can <a class="underlined" ng-click="recoverPassword($event)">recover it here.</a></p>
+				</div>
+			</div>
+        </md-dialog-content>
+        <loading-overlay ng-if="loading"></loading-overlay>
+
+    </form>
+</md-dialog>

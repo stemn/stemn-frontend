@@ -1,0 +1,11 @@
+<div flex="">
+   <md-autocomplete md-no-cache="true" md-selected-item="selectedItem" md-selected-item-change="processResult(selectedItem)"  md-search-text="searchText"
+        md-items="item in search(searchText)" md-item-text="item.name"
+        md-floating-label="{{placeholder || 'Team members'}}" focus-me="{{focus}}">
+        <md-item-template>
+            <user-image src="item.picture" image-stub="{{item.stub}}" style="margin-right:15px" ng-hide="{{item.addNew}}"></user-image>
+            <span md-highlight-text="searchText">{{item.name}}</span>
+        </md-item-template>
+    </md-autocomplete>
+</div>
+

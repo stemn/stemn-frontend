@@ -1,0 +1,16 @@
+// Z-INDEX - 10,000
+page-loading-overlay{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    z-index: 10000;
+
+    transition: opacity 0.2s ease;
+    opacity: 1;
+    &.animate{
+        opacity: 0;
+    }
+}

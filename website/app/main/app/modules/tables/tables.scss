@@ -1,0 +1,118 @@
+.md-table {
+    min-width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    td{
+        padding: 15px 0;
+        vertical-align: inherit;
+        display: table-cell;
+    }
+    thead{
+        tr, .table-row{
+            border-top: 1px solid #EEEEEE;
+        }
+    }
+    tr{
+        border-bottom: 1px solid #EEEEEE;
+    }
+
+    &.loading{
+        position: relative;
+        &::before{
+            content: " ";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 5;
+            background: rgba(255, 255, 255, 0.5);
+        }
+    }
+}
+
+.md-table {
+    min-width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    display: table;
+    .table-row > div{
+        padding: 15px 0;
+        vertical-align: inherit;
+        display: table-cell;
+    }
+    .table-head{
+        display: table-header-group;
+        vertical-align: middle;
+        .table-row{
+            border-top: 1px solid #EEEEEE;
+            background: transparent !important;
+            > div{
+                transition: background 0.2s ease;
+//                &:hover{
+//                    background: rgba(0, 0, 0, 0.02);
+//                }
+            }
+        }
+    }
+    .table-row{
+        display: table-row;
+        vertical-align: middle;
+//        border-color: inherit;
+        border-bottom: 1px solid #EEEEEE;
+//        transition: background 0.2s ease;
+        &:hover{
+            background: rgba(0, 0, 0, 0.02);
+        }
+    }
+}
+
+
+/* Filter Column Order Directive */
+[filter-column-order]{
+    cursor: pointer;
+    &::after{
+        padding-left: 5px;
+        position: relative;
+        display: inline-block;
+        top: 2px;
+        left: 7px;
+        content: " ";
+        -webkit-background-size: 24px 13px;
+        background-size: 24px 13px;
+        width: 6px;
+        height: 13px;
+        background-image: url(/assets/icons/other/sorting_arrows.png);
+        background-position: -9px 0;
+    }
+    &.down{
+        &::after{
+            background-position: 0 0;
+        }
+    }
+    &.up{
+        &::after{
+            background-position: -18px 0;
+        }
+    }
+}
+
+.st-meta-table{
+
+    tr{
+        vertical-align: top;
+    }
+    td{
+        padding-bottom: 2px;
+        padding-top: 2px;
+        &:first-child{
+            color: rgba(0, 0, 0, 0.4);
+            padding-right: 10px;
+        }
+    }
+    a{
+        &:hover{
+            opacity: 0.8;
+        }
+    }
+}

@@ -1,0 +1,36 @@
+<div attention-animation animate-toggle="{{animate}}" class="reply-editor content-md" ng-class="{'minimised' : editor.minimised}" ng-if="editor.visible">
+    <md-container>
+        <div class="rel-box">
+<!--            <user-image src="currentUser.picture"></user-image>-->
+            <form novalidate name="replyForm" ng-submit="submit()" style="margin-top: 20px;">
+                <div class="top-right" layout="row">
+                   	<div ng-show="editor.minimised">
+						<md-button type="button" class="md-circle md-xs no-margin" ng-click="editor.show()">
+							<md-icon md-svg-icon="add"></md-icon>
+							<md-tooltip md-direction="top" md-autohide="true">Maximise</md-tooltip>
+						</md-button>
+                    </div>
+                    <div ng-hide="editor.minimised">
+						<md-button type="button" class="md-circle md-xs no-margin" ng-click="editorOptions.showHelp = !editorOptions.showHelp">
+							<md-icon md-svg-icon="help"></md-icon>
+							<md-tooltip md-direction="top" md-autohide="true">Help with editor</md-tooltip>
+						</md-button>
+						<md-button type="button" class="md-circle md-xs no-margin" ng-click="editor.minimise()">
+							<md-icon md-svg-icon="remove"></md-icon>
+							<md-tooltip md-direction="top" md-autohide="true">Minimise</md-tooltip>
+						</md-button>
+					</div>
+                    <md-button type="button" class="md-circle md-xs no-margin" ng-click="closeFn()">
+                        <md-icon md-svg-icon="navigation:close"></md-icon>
+                        <md-tooltip md-direction="top" md-autohide="true">Close</md-tooltip>
+                    </md-button>
+                </div>
+                <modular-editor class="editor-compact md-content-container content-sm" style="min-height: 120px; max-height: 90vh; margin: auto; overflow-y: auto;" editor-sections="editor.model" editor-options="editorOptions" edit="true"></modular-editor>
+                <div layout="row">
+                    <div flex></div>
+                    <md-button type="submit" class="md-accent md-raised no-margin" ng-disabled="replyForm.$invalid">{{editor.submitText}}</md-button>
+                </div>
+            </form>
+        </div>
+    </md-container>
+</div>

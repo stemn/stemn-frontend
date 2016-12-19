@@ -1,0 +1,24 @@
+
+<div class="md-whiteframe-z1">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2 flex>Companies - Total: <analytics-count type="organisation" criteria="{'numApplications': ';>0'}"></analytics-count></h2>
+            <search-filter filter="searchFilterOrganisations"></search-filter>
+            <md-button aria-label="refresh" class="md-icon-button" ng-click="organisationsQuery.refresh()">
+                <ng-md-icon icon="refresh" style="fill: white"></ng-md-icon>
+            </md-button>
+            <md-button aria-label="add" class="md-icon-button" display-table-column-select columns="organisationsQueryorganisationsQuery.columns">
+                <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-content>
+        <modular-table query="organisationsQuery" scroll-load="true"></modular-table>
+    </md-content>
+</div>
+
+<div layout="row" layout-align="center" class="md-padding" style="margin-bottom: 80px;">
+    <md-button class="md-icon-button md-raised md-accent" ng-click="organisationsQuery.more()" aria-label="add more">
+        <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
+    </md-button>
+</div>

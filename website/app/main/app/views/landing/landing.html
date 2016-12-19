@@ -1,0 +1,25 @@
+<div class="landingView">
+    <edit-toolbar class="absolute" ng-style="$state.is('app.landing.sync') && {'color':'black'}">
+        <div flex>
+            <md-button ui-sref="app.home" aria-label="Home" class="md-sm m-0" style="padding: 5px;">
+                <div style="width: 50px;">
+                    <img src="assets/images/logo80x80.png" alt="STEMN logo" class="img-trans" />
+                </div>
+            </md-button>
+        </div>
+        <div layout="row" layout-align="start center" class="landingTopNav">
+            <a hide-sm ng-repeat="item in menu" ui-sref="{{item.sref}}" ng-class="{'active': $state.includes(item.parent || item.sref) }">{{item.label}}</a>
+            <a ng-click="login($event)" style="opacity: 0.6;">Login</a>
+            <md-button hide-gt-md class="md-icon-button" ng-click="toggleMenu()" aria-label="Menu"><md-icon md-svg-icon="menu"></md-icon></md-button>
+        </div>
+    </edit-toolbar>
+
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="landing">
+        <div layout="column">
+            <md-button ng-repeat="item in menu" ui-sref="{{item.sref}}" ng-click="toggleMenu()" class="text-left m-0 md-cornered md-md" ng-class="{'active': $state.includes(item.parent || item.sref) }">
+                {{item.label}}
+            </md-button>
+        </div>
+    </md-sidenav>
+    <ui-view></ui-view>
+</div>

@@ -1,0 +1,86 @@
+<form name="forms.generalForm" novalidate>
+    <h2 class="md-display-1">General Details</h2>
+    <div layout="column" layout-gt-md="row" class="md-row">
+        <div class="md-col m-b-30" flex="100" flex-gt-md="40">
+            <div class="text-subtitle-thin">Basic display details such as organisation name and blurb.</div>
+        </div>
+        <div class="md-col" flex="100" flex-gt-md="60">
+            <div id="name" class="card-z1 card-padding m-b-30">
+                <div class="md-subhead" flex>Organisation Name</div>
+                <md-input-container class="md-accent">
+                    <label>Name</label>
+                    <input name="name" ng-model="organisation.name"
+                    required type="text">
+                    <div ng-messages="forms.generalForm.name.$error" ng-if="forms.generalForm.name.$dirty">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+            </div>
+
+            <div id="summary" class="card-z1 card-padding m-b-30">
+                <div class="md-subhead m-b-15" flex>Organisation Summary</div>
+                <div class="angular-medium-editor" medium-editor name="blurb" ng-model="organisation.blurb" editor-type="text" style="min-height: 100px;" placeholder="What does this organisation do?"></div>
+            </div>
+        </div>
+    </div>
+    
+    <md-divider class="m-v-60"></md-divider>
+    
+    <h2 class="md-display-1">Images & Links</h2>
+    <div layout="column" layout-gt-md="row" class="md-row">
+        <div class="md-col m-b-30" flex="100" flex-gt-md="40">
+            <div class="text-subtitle-thin">Add your logo and pictures of your organisation. Add links to your website and social-media accounts.</div>
+        </div>
+        <div class="md-col" flex="100" flex-gt-md="60">
+
+            <div id="banner" class="card-z1 card-padding m-b-30">
+                <div class="md-subhead" flex>Organisation Logo</div>
+                <p class="body-small">Add your organisation logo to be displayed on all content relating to this organisation.</p>
+                <div ng-show="organisation.logo.url" layout="row">
+                    <upload-image class="block" name="OrgLogo" image="organisation.logo.url" ng-model="organisation.logo.url" direct="true" icon="true">
+                        <div class="avatar-square-contain avatar-lg" style="background-image:url({{organisation.logo.url}}?size=logo-md)"></div>
+                    </upload-image>
+                </div>
+                <div ng-hide="organisation.logo.url">
+                    <md-button class="md-raised md-flat md-accent md-cornered md-md m-0" click-upload-image image="organisation.logo.url" ng-model="organisation.logo.url" name="OrgLogo">Select Image</md-button>
+                </div>
+            </div>            
+               
+            <div id="gallery" class="card-z1 card-padding m-b-30">
+                <div class="md-subhead" flex>Gallery Images</div>
+                <p class="body-small">Add gallery images. These will be displayed at the top of your organisation page.</p>
+                <div layout="row" class="md-row-sm" layout-wrap ng-show="organisation.gallery.length > 0">
+                    <div ng-repeat="image in organisation.gallery" class="md-col-sm m-b-15">
+                        <div class="avatar-square-cover avatar-lg" style="background-image:url({{image.url}}?size=logo-md)"></div>
+                    </div>
+                </div>
+                <md-button class="md-raised md-flat md-accent md-cornered md-md m-0" ng-click="editGallery($event)">Edit Gallery</md-button>
+            </div>
+
+            <div id="links" class="card-z1 card-padding m-b-30">
+                <div class="md-subhead m-b-15" flex>Other Links</div>
+                <p class="body-small">Add links to your website and other social-media accounts.</p>
+                <social-links show-edit="false" edit="true" data="organisation.socialLinks" type="organisation"></social-links>
+            </div>
+        </div>
+    </div>
+
+<!--
+    <div ng-if="userPermissions.isMin('admin')">
+        <md-divider class="m-v-60"></md-divider>
+        <h2 class="md-display-1">Danger Zone</h2>
+        <div layout="column" layout-gt-md="row" class="md-row">
+            <div class="md-col m-b-30" flex="100" flex-gt-md="40">
+                <div class="text-subtitle-thin">Tread carefully. It's a jungle out there.</div>
+            </div>
+            <div class="md-col" flex="100" flex-gt-md="60">
+                <div id="delete" class="card-z1 card-padding m-b-30">
+                    <div class="md-subhead" flex>Delete Organisation</div>
+                    <p class="body-small m-b-15">Once you delete a organisation, there is no going back. Please be certain..</p>
+                    <md-button class="md-warn md-raised md-cornered m-0 md-flat md-md" confirm ng-click="deleteOrganisation()">Delete Organisation</md-button>
+                </div>
+            </div>
+        </div>
+    </div>
+-->
+</form>

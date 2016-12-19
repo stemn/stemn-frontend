@@ -1,0 +1,17 @@
+<div class="toolbar-sm p-h-10" layout="row" layout-align="start center" ng-hide="!previewer.enabled">
+    <a class="text-subtitle-thin" ng-click="openFileFolder(fileMeta)" style="white-space: nowrap;">
+        <span hide-sm class="text-black">{{fileMeta.name}}&nbsp;</span>
+        <span hide-sm>V.{{fileMeta.revDecimal}}  </span>
+    </a>
+    <div flex></div>
+<!--
+    <a class="st-icon-button">
+        <md-tooltip md-direction="bottom" md-autohide="true">Open version</md-tooltip>
+        <md-icon md-svg-icon="action:open_in_new"></md-icon>
+    </a>
+-->
+    <a class="st-icon-button" ng-click="closeWindow()">
+        <md-tooltip md-direction="bottom" md-autohide="true">Close</md-tooltip>
+        <md-icon md-svg-icon="navigation:close"></md-icon>
+    </a>
+</div>

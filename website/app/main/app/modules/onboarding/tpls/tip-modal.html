@@ -1,0 +1,17 @@
+<md-dialog class="tipModal">
+    <md-dialog-content>
+        <div style="width: 500px;">
+            <h1 class="md-headline" style="margin-top: 0px;">{{data.title}}</h1>
+            <div ng-bind-html="data.body"></div>
+        </div>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <div flex class="text-lightgrey">
+            Seen this before? <a class="underlined" ng-click="optOut()">Opt out of these tips.</a>
+        </div>
+        <div>
+<!--            <md-button ng-click="cancel()">Tell me more</md-button>-->
+            <md-button class="md-accent md-raised" ng-click="confirm()">Ok, I get it</md-button>
+        </div>
+    </div>
+</md-dialog>

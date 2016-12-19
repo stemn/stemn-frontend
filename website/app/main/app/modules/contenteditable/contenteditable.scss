@@ -1,0 +1,59 @@
+[contenteditable]{
+//    outline: none;
+}
+[contenteditable=true]:empty:before {
+    content: attr(placeholder);
+    color: rgba(0, 0, 0, 0.2);
+    display: block; /* For Firefox */
+}
+
+[contenteditable=true] {
+    border: none;
+//    outline: none;
+    min-width: 100px;
+    cursor: text;
+    background: rgba(0, 0, 0, 0.0);
+
+//    &:hover {
+//        background: rgba(0, 0, 0, 0.02);
+//    }
+}
+[contenteditable=false] {
+    outline: none;
+    border: none;
+}
+
+.editable{
+    display: block;
+    width: 100%;
+    outline: none;
+    border: none;
+    background: rgba(0, 0, 0, 0.0);
+    padding: 0px;
+	font-weight: inherit;
+    &:hover{
+        background: rgba(0, 0, 0, 0.02);
+    }
+    &:focus{
+        background: rgba(0, 0, 0, 0.02);
+    }
+}
+.wrap-text{
+    white-space: pre-wrap;
+    border: none;
+    outline: none;
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    rgba(0, 0, 0, 0.3);
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    rgba(0, 0, 0, 0.3);
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    rgba(0, 0, 0, 0.3);
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+   color:    rgba(0, 0, 0, 0.3);
+}

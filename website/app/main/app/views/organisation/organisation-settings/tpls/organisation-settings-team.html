@@ -1,0 +1,18 @@
+<div ng-if="!userPermissions.isMin('admin')" class="border-box-white p-60 text-center">
+    <div class="text-subtitle-thin">You must be an Admin to change team settings.</div>
+</div>
+
+<form ng-if="userPermissions.isMin('admin')" name="forms.permissionsForm" novalidate>
+    <h2 class="md-display-1">Team & Permissions</h2>
+    <div layout="column" layout-gt-md="row" class="md-row">
+        <div class="md-col m-b-30" flex="100" flex-gt-md="40">
+            <div class="text-subtitle-thin">Invite other team members to help administer this organisation.</div>
+        </div>
+        <div class="md-col" flex="100" flex-gt-md="60">
+            <div id="team" class="card-z1 card-padding m-b-30">
+                <div class="md-subhead m-b-15" flex>Add team members</div>
+                <users-permissions-edit users="organisation.team" user-permissions="userPermissions" parent="organisation" type="organisation"></users-permissions-edit>
+            </div>
+        </div>
+    </div>
+</form>

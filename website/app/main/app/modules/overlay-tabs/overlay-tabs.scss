@@ -1,0 +1,71 @@
+/* Overlay Views  ----------------------------------------- */
+overlay-views{
+    display: block;
+    &.enabled{
+    position: relative;
+        fade-overlay{
+            z-index: 4;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+
+            opacity: 1;
+            transition: opacity 0.3s linear;
+            &.ng-hide {
+                opacity: 0 !important;
+            }
+            &:hover{
+                opacity: 0.9
+            }
+        }
+        overlay.enabled{
+            position: fixed;
+            z-index: 6;
+            background: white;
+            top: 64px;
+            right: 0;
+            bottom: 0;
+            border-left: 1px solid rgba(0, 0, 0, 0.07);
+
+            transform: translateX(0);
+            transition: transform 0.3s ease;
+            &.ng-hide{
+                transform: translateX(70vw);
+            }
+
+            > md-content {
+				height: 100%;
+                width: 70vw;
+                @media (max-width: 959px){
+                    width: 80vw;
+                }
+                @media (max-width: 599px){
+                    width: 90vw;
+                }
+            }
+        }
+        // This is the overlay inside the overlay
+        .overlay{
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.7);
+            top: 0px;
+            right: 0px;
+            left: 0px;
+            bottom: 0px;
+
+            opacity: 1;
+            transition: opacity 0.3s linear;
+            &.ng-hide{
+                opacity: 0 !important;
+            }
+
+            &:hover{
+                opacity: 0.9
+            }
+        }
+    }
+}

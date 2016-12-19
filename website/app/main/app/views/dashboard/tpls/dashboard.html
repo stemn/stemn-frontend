@@ -1,0 +1,10 @@
+<div layout="row" layout-align="center" class="dashboardView">
+    <div class="md-content-container">
+        <div class="text-tabs tabs-light-grey m-t-15 m-b-30" layout="row">
+            <a class="md-subhead" ng-class="{'active':$state.includes(tab.sref)}" ng-repeat="tab in tabs" ui-sref="{{tab.sref}}">{{tab.label}}</a>
+        </div>
+
+        <ui-view class="rel-box"></ui-view>
+    </div>
+
+</div>

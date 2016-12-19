@@ -1,0 +1,11 @@
+<div class="line-divider-bottom m-b-40" layout="row">
+    <div class="md-subhead" flex>Newest {{field.name}} Questions and Discussions</div>
+</div>
+<forum size="20" parent-id="{{field._id}}" parent-type="{{field.type}}" type="discussions" query="discussionQuery"></forum>
+
+<!--<card-feed parent-id="{{field._id}}" parent-type="{{field.type}}" type="discussions" size="12" items="discussiontItems"></card-feed>-->
+<!-- FIELDS -->
+<div class="line-divider-bottom m-b-15" layout="row">
+    <div class="md-subhead" flex>Related Fields</div>
+</div>
+<related class="m-b-60" parent-type="field" parent-id="{{field._id}}" type="field"></related>

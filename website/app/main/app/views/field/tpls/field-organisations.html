@@ -1,0 +1,10 @@
+<div class="line-divider-bottom m-b-40" layout="row">
+    <div class="md-subhead" flex>Latest {{field.name}} Organisations</div>
+</div>
+<organisation-cards size="12" field="{{field._id}}" class="m-b-60" items="organisationItems"></organisation-cards>
+<!-- FIELDS -->
+<div class="line-divider-bottom m-b-15" layout="row">
+    <div class="md-subhead" flex>Related Fields</div>
+</div>
+<related class="m-b-60" parent-type="field" parent-id="{{field._id}}" type="field"></related>
+

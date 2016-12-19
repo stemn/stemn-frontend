@@ -1,0 +1,20 @@
+<div class="rel-box" flex="">
+<!--
+    <md-button ng-show="searchText.length>1" class="add-new-button md-accent md-border-green md-sm" ng-click="create($event, searchText)">
+        Create organisation
+    </md-button>
+-->
+   <md-autocomplete md-selected-item="selectedItem" md-selected-item-change="processResult(selectedItem)"  md-search-text="searchText"
+        md-items="item in search(searchText)" md-item-text="item.name"
+        md-floating-label="{{placeholder || 'Organisations'}}" focus-me="{{focus}}">
+        <md-item-template>
+            <span md-highlight-text="searchText">{{item.name}}</span>
+        </md-item-template>
+<!--
+        <md-not-found>
+            <span>No more organisations found.</span>
+            <md-button ng-click="create($event,searchText)" class="md-accent md-raised">Click here to create one...</md-button>
+        </md-not-found>
+-->
+    </md-autocomplete>
+</div>

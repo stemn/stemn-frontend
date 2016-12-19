@@ -1,0 +1,113 @@
+.tags{
+    $border-color: #d8d8d8;
+    $hover-bg: rgba(0, 0, 0, 0.03);
+    $hover-border: #dbdbdb;
+    .tag{
+        display: inline-block;
+        border: 1px solid $border-color;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        background: white;
+
+        transition: all 0.1s ease;
+        &.sortable-ghost{
+            opacity: 0.5;
+            background: rgba(0, 0, 0, 0.05);
+        }
+        &.tag-hover{
+            .tag-content:hover{
+                background: $hover-bg;
+            }
+            .tag-count:hover{
+                background: $hover-bg;
+            }
+        }
+
+        &.tag-active{
+//            border: 1px solid #8BC34A;
+//            background: rgba(139, 195, 74, 0.16);
+//            .tag-inner{
+//                color: #8BC34A;
+//            }
+            transition: all 0.2s ease;
+            border: 1px solid #8BC34A;
+            background: #8BC34A;
+            .tag-inner{
+                transition: all 0.2s ease;
+                color: white;
+            }
+        }
+    }
+    .tag-inner{
+        font-size: 14px;
+        color: rgba(0,0,0,0.6);
+    }
+    .tag-content{
+        padding: 5px 10px;
+        max-width: 200px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .tag-count{
+        padding: 5px 10px;
+        border-left: 1px solid $border-color;
+        &.count-warn{
+            background: rgba(255, 0, 0, 0.13);
+        }
+    }
+    .tag-delete{
+        font-size: 21px;
+        padding-right: 5px;
+        padding-left : 5px;
+        border-left: 1px solid $border-color;
+        &:hover{
+            color: rgba(0, 0, 0, 0.4);
+        }
+    }
+    .tag-image{
+        height: 30px;
+        width: 30px;
+    }
+
+    .tags-edit{
+        position: relative;
+        min-height: 30px;
+        >div{
+            padding-bottom: 5px;
+        }
+        .tag-drop-area{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            border: 1px dashed rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: rgba(0, 0, 0, 0.5);
+            line-height: 28px;
+        }
+    }
+
+    &.sm{
+        .tag-inner{
+            font-size: 13px;
+        }
+        .tag-image{
+            height: 28px;
+            width: 28px;
+        }
+    }
+    &.xs{
+        .tag-inner{
+            font-size: 11px;
+        }
+        .tag-image{
+            height: 25px;
+            width: 25px;
+        }
+        .tag-delete{
+            font-size: 17px;
+        }
+    }
+}

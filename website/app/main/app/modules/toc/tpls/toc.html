@@ -1,0 +1,14 @@
+<div class="toc-nav">
+    <div class="content">
+        <div ng-repeat="section in sections">
+            <div class="section {{section.level}}" du-scrollspy="{{section.id}}">
+                <a class="ellipsis" flex href="#{{section.id}}" du-smooth-scroll data-offset="30">{{section.label}}</a>
+            </div>
+        </div>
+    </div>
+    <div class="markers">
+        <div ng-repeat="section in sections">
+            <div class="marker {{section.level}}" du-scrollspy="{{section.id}}"></div>
+        </div>
+    </div>
+</div>

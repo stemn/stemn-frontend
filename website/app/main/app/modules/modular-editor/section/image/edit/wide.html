@@ -1,0 +1,11 @@
+<div class="editor-section container editor-image layout-wide" editor-section-element>
+    <div layout="column">
+        <div layout="row">
+            <a flex="100" ng-href="{{section.linkUrl}}" class="image-box" editor-toolbar="true">
+                <img ng-src="{{section.image.url}}?size=editor" alt="">
+            </a>
+        </div>
+        <editor-caption-edit editor-content-element></editor-caption-edit>
+        <editor-section-buttons></editor-section-buttons>
+    </div>
+</div>

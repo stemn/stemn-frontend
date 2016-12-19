@@ -1,0 +1,20 @@
+<div class="tags-edit">
+    <div ng-sortable="sortableConfig">
+        <div class="tag-drop-area" ng-if="tags.length == 0 && dropArea">Drag and drop fields here</div>
+        <div class="tag my-handle" ng-repeat="tag in tags track by $index">
+            <div class="tag-inner" layout="row" layout-align="start center">
+                <div class="tag-content">
+                    {{tag.name}}
+                </div>
+                <div class="tag-count" ng-if="evidence" ng-class="{'count-warn': !tag.evidence.length>0}">
+                    {{tag.evidence.length || 0}}
+                    <popup class="tooltip-popup" popup-side="right" popup-position="center" popup-padding="0 0 0 8px" layout="column">
+                        <p ng-if=" tag.evidence.length > 0">You have <b>{{tag.evidence.length}}</b> item{{tag.evidence.length == 1 ? '' : 's'}} in your portfolio tagged with <b>{{tag.name}}</b>.</p>
+                        <p ng-if="!tag.evidence.length > 0">You have no portfolio evidence for <b>{{tag.name}}</b> yet. <b>Add a project</b> to your portfolio that demonstrated this skill.</p>
+                    </popup>
+                </div>
+                <a class="tag-delete" ng-hide="tag.noDelete" type="button" ng-click="delTag($index)">×</a>
+            </div>
+        </div>
+    </div>
+</div>

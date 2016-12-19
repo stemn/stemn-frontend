@@ -1,0 +1,8 @@
+<div class="tag" ng-repeat="tag in ::tags | limitTo:limit">
+    <a class="tag-inner" href="/users/{{tag.stub}}" popup-user user-id="{{tag._id}}">
+        <div ng-show="image" ng-style="tag.picture && {'background-image':'url('+tag.picture+'?size=thumb&crop=true)'}" class="bounding-box picture profile-img"></div>
+        <div class="tag-content">
+            {{tag.name}}
+        </div>
+    </a>
+</div>

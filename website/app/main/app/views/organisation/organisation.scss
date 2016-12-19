@@ -1,0 +1,38 @@
+.organisationView{
+    .feed-widgets{
+        width: 300px;
+    }
+    .location-search{
+        md-autocomplete{
+            padding-bottom: 0px !important;
+        }
+    }
+    .social-buttons{
+        .md-button{
+            margin: 0px;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+        }
+        md-icon{
+            color: rgba(0, 0, 0, 0.2);
+        }
+    }
+
+    .section-break{
+        margin: 40px 0;
+    }
+    organisation-groups{
+        h3.md-subhead{
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+            padding: 8px 0 10px;
+            color: #5f5f5f;
+            margin-bottom: 25px;
+        }
+    }
+    users-groups{
+        h3.md-subhead{
+            margin: 0px;
+        }
+    }
+}

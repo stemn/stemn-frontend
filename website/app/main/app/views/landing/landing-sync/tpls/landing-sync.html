@@ -1,0 +1,124 @@
+<div class="landingSyncView overflow-x-box">
+    <div style="background-color: rgba(0, 0, 0, 0.03); min-height: 700px; box-shadow: inset 0px -60px 50px -60px rgba(0,0,0,0.05);" class="pattern" layout="column" layout-align="start center">
+        <div class="md-content-container md-no-padding text-center m-t-60">
+            <h1 class="md-display-2  m-t-60">Painless Engineering Versioning</h1>
+            <h3 style="line-height: 1.6em;">STEMN is smart engineering file management,<br>integrated seamlessly into your workflow.</h3>
+            <md-button class="md-accent md-raised md-flat md-cornered md-lg m-t-30" ng-click="login($event)">Get Started For Free</md-button>
+        </div>
+    </div>
+    <div layout="row" layout-align="center">
+        <div class="compare-laptop">
+            <img class="laptop" src="assets/images/landing/sync/laptop.png" alt="">
+            <div class="screen" compare-slider="slider.width">
+                <img class="slide-1" src="assets/images/landing/sync/pcbv2-crop.jpg" alt="">
+                <div class="slide-2" ng-style="{'width' : slider.width + '%'}">
+                      <img src="assets/images/landing/sync/pcbv1-crop.jpg" alt="">
+                </div>
+                <div class="handle" ng-style="{'left' : slider.width + '%'}"></div>
+            </div>
+        </div>
+    </div>
+
+    <div layout="row" layout-align="center" class="m-t-60">
+        <div class="md-content-container content-sm text-center">
+            <h2 class="md-headline uppercase  m-t-30">Everything you need to stay on track</h2>
+            <div class="text-subtitle-thin">Relax. STEMN keeps your team on the same page. Your design process is more robust, so you can be sure there’s no more nasty surprises.</div>
+        </div>
+    </div>
+    <div layout="row" layout-align="center">
+        <div class="md-content-container text-center section">
+            <div layout="column" layout-gt-sm="row" class="md-row-lg">
+                <div flex class="md-col-lg m-v-15">
+                    <img class="m-b-15" src="assets/images/landing/sync/robot.png">
+                    <div class="md-title m-b-15">Visually Compare Changes</div>
+                    <div class="text-subtitle-thin">See and compare design changes quickly. Stay updated on the latest. Revert your designs with a single click.</div>
+                </div>
+                <div flex class="md-col-lg m-v-15">
+                    <img class="m-b-15" src="assets/images/landing/sync/network.png">
+                    <div class="md-title m-b-15">Open Source Community</div>
+                    <div class="text-subtitle-thin">STEMN is home to thousands of open source engineering projects. Find your inspiration and get started on your own.</div>
+                </div>
+                <div flex class="md-col-lg m-v-15">
+                    <img class="m-b-15" src="assets/images/landing/sync/shield.png">
+                    <div class="md-title m-b-15">Industry Level Security</div>
+                    <div class="text-subtitle-thin">With industry standard AES-256 file encryption at rest and SSL in transit, rest assured that your data is safe and secure.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <md-divider></md-divider>
+
+    <div layout="row" layout-align="center">
+        <div class="md-content-container section">
+            <div layout="column" layout-gt-sm="row" class="md-row">
+                <div flex-order-sm="2" flex class="md-col">
+                    <div class="md-whiteframe-z5 p-30" style="max-width: 350px;">
+                        <div class="text-tabs m-b-30" layout="row">
+                            <div class="md-subhead active">Timeline</div>
+                        </div>
+                        <landing-timeline class="m-v-30"></landing-timeline>
+                    </div>
+                </div>
+                <div flex-order-sm="1" flex class="md-col" layout="column" layout-align="space-around">
+                    <div class="m-v-15">
+                        <h2 class="md-headline uppercase">Automatic Version Control</h2>
+                        <div class="text-subtitle-thin">All your work is automatically synced as you work. View any previous versions, complete with comments, with the automatic version control features. Revert your files with a single click.</div>
+                    </div>
+                    <div class="m-v-15">
+                        <h2 class="md-headline uppercase">No more miscommunication</h2>
+                        <div class="text-subtitle-thin m-b-15">Simplify your feedback process by having clients, team members, and stakeholders comment directly on your models.</div>
+                        <div class="text-subtitle-thin">Stay informed of discussions and project milestones as soon as they happen.</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <md-divider></md-divider>
+
+    <div layout="row" layout-align="center" class="section-md">
+        <div class="md-content-container md-no-padding">
+            <div id="screens-section" layout="column" layout-gt-sm="row" class="md-row" layout-align="start center">
+                <div flex class="md-col">
+                    <div style="max-width: 350px;">
+                        <h2 class="md-headline uppercase">Access your files anywhere</h2>
+                        <div class="text-subtitle-thin m-b-15">Whether you’re in the office, in the lab, or on the go, access your files in your browser, from any device.</div>
+                        <div class="text-subtitle-thin m-b-30">Preview hundreds of different file-types directly in your web browser.</div>
+                        <div layout="row" layout-align="start center" layout-wrap class="fileTypeDemo" style="margin-left: -6px;">
+                            <img src="/assets/images/vectors/filetype/dxf.svg">
+                            <img src="/assets/images/vectors/filetype/dwg.svg">
+                            <img src="/assets/images/vectors/filetype/pdf.svg">
+                            <img src="/assets/images/vectors/filetype/tex.svg">
+                            <img src="/assets/images/vectors/filetype/xlsx.svg">
+                            <img src="/assets/images/vectors/filetype/js.svg">
+                            <img src="/assets/images/vectors/filetype/cpp.svg">
+                            <img src="/assets/images/vectors/filetype/more.svg">
+                        </div>
+                    </div>
+                </div>
+                <div flex class="md-col">
+                    <img id="screens" src="assets/images/landing/sync/screens.jpg">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div layout="row" layout-align="center" class="bg-lightgrey">
+        <div class="md-content-container content-sm text-center section">
+            <h2 class="md-headline uppercase">Save like you always have</h2>
+            <div class="text-subtitle-thin m-b-30">STEMN works with your existing tools. Connect once, always synced.</div>
+            <img src="assets/images/landing/sync/save-diagram.png">
+        </div>
+    </div>
+
+    <div layout="row" layout-align="center">
+        <div class="md-content-container content-sm text-center section">
+            <h2 class="md-headline uppercase">Get your projects organised now</h2>
+            <div class="text-subtitle-thin">Get started for free. Get your files organized in 2 minutes.</div>
+            <md-button class="md-accent md-raised md-flat md-cornered md-lg m-t-30" ng-click="login($event)">Get Started For Free</md-button>
+        </div>
+    </div>
+
+</div>

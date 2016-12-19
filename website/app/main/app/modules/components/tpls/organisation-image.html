@@ -1,0 +1,6 @@
+<md-button class="md-circle organisation-image md-sm md-border-light"
+    ui-sref="app.organisation.overview({'stub': imageStub})"
+    popup popup-content="<organisation-card id='{{imageId}}' size='sm'></organisation-card>" popup-fixed-bottom="popupFixedBottom"
+    aria-label="Organisation"
+    style="background-image: url('{{src || '/assets/images/default/user-1.png'}}?size=thumb'); border-radius: 3px !important;">
+</md-button>

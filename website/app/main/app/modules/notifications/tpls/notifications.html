@@ -1,0 +1,20 @@
+<div>
+    <a class="notification-button md-button md-icon-button md-border-light" aria-label="Notifications" ui-sref="app.notifications.all">
+        <span class="badge" ng-if="(query.results | filter:{read:false}).length > 0">{{(query.results | filter:{read:false}).length}}</span>
+        <md-icon md-svg-src="notification"></md-icon>
+    </a>
+    <popup popup-side="bottom" popup-position="center" popup-padding="10px 0 0 0" layout="column" class="notifications-dropdown">
+        <div class="toolbar" layout="row" layout-align="start center">
+            <div flex><strong>{{(query.results | filter:{read:false}).length}}</strong> new notifications.</div>
+            <div><a ng-click="markAllRead()">Mark as read</a></div>
+            <md-button class="md-circle md-xs no-margin" ng-click="goSettings()" aria-label="Notification Settings"><md-icon md-svg-icon="navigation:more_horiz"></md-icon></md-button>
+        </div>
+        <md-content style="max-height: 250px;">
+            <div ng-show="query.results.length == 0" class="p-15 text-lightgrey">Welcome! You have no notifications yet.</div>
+            <notification ng-repeat="notification in query.results" ng-class="{'unread' : !notification.read}" notification="notification"></notification>
+        </md-content>
+        <div class="footer" layout="row" layout-align="start center">
+            <div flex><a ui-sref="app.notifications.all">See all notifications</a></div>
+        </div>
+    </popup>
+</div>

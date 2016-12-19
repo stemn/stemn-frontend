@@ -1,0 +1,25 @@
+<md-dialog class="upload-image-modal">
+    <form>
+        <md-dialog-content layout="row" layout-align="center center">
+            <div class="md-content-container content-sm">
+
+                <div nv-file-drop="" uploader="uploader" layout="row" layout-align="center center">
+                    <div nv-file-over="" uploader="uploader" over-class="drag-over" class="drop text-center">
+                        <label class="btn-upload">
+                            <input type="file" class="upload" nv-file-select="" uploader="uploader" multiple />
+                            <span>Upload Files</span>
+                        </label>
+                        <strong style="padding-left: 5px;">OR</strong>
+                        Drag and Drop files here to upload
+                    </div>
+                </div>
+                <loading-overlay ng-if="uploader.progress > 0 && uploader.progress < 100" determinate="uploader.progress">
+                    Files uploading
+                </loading-overlay>
+                <loading-overlay ng-if="uploader.progress == 100">
+                    Processing. Please wait.
+                </loading-overlay>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

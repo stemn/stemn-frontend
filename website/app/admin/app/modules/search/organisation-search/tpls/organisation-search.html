@@ -1,0 +1,9 @@
+<div class="rel-box" flex="">
+   <ng-md-icon ng-if="linked" icon="link" style="position: absolute; top: 0px; z-index: 1; right: 35px;"></ng-md-icon>
+   <md-autocomplete md-selected-item="selectedItem" md-selected-item-change="processResult(selectedItem)"  md-search-text="searchText"
+        md-items="item in search(searchText)" md-item-text="item.name" focus-me="{{focus}}">
+        <md-item-template>
+            <span md-highlight-text="searchText">{{item.name}}</span>
+        </md-item-template>
+    </md-autocomplete>
+</div>

@@ -1,0 +1,34 @@
+<!-- If Editing -->
+<div ng-if="edit">
+    <div class="card-z1 m-b-30">
+        <div class="md-subhead">Skills and Fields</div>
+        <field-search id="skillsEdit" data="user.profile.profileDetails.skills" focus="focusTech" ng-mouseenter="focusTech=true" ng-mouseleave="focusTech=false" placeholder="Skills and fields"></field-search>
+        <tags edit="true" size="sm" tags="user.profile.profileDetails.skills" type="field" evidence="true" drop-area="true"></tags>
+    </div>
+    <div class="card-z1 m-b-30">
+        <div class="md-subhead">Technologies and Technical Languages</div>
+        <field-search id="technologiesEdit" data="user.profile.profileDetails.technologies" focus="focusField" ng-mouseenter="focusField=true" ng-mouseleave="focusField=false" placeholder="Technologies, Programs and Languages"></field-search>
+        <tags edit="true" size="sm" tags="user.profile.profileDetails.technologies" type="field" evidence="true" drop-area="true"></tags>
+    </div>
+    <div class="card-z1 m-b-15">
+        <div class="md-subhead m-b-10">Unclassified Skills</div>
+        <p class="text-lightgrey">Drag and drop these into the sections above</p>
+        <tags tags="unclassifiedFields" type="field" size="sm" edit="true" evidence="true" drop-area="true"></tags>
+    </div>
+</div>
+
+<!-- If NOT Editing -->
+<div ng-if="!edit">
+    <div class="m-b-15" ng-show="user.profile.profileDetails.skills.length > 0">
+        <div class="md-subhead m-b-10">Skills and Fields</div>
+        <tags tags="user.profile.profileDetails.skills" type="field" size="sm" edit="false" evidence="true"></tags>
+    </div>
+    <div class="m-b-15" ng-show="user.profile.profileDetails.technologies.length > 0">
+        <div class="md-subhead m-b-10">Technologies and Technical Languages</div>
+        <tags tags="user.profile.profileDetails.technologies" type="field" size="sm" edit="false" evidence="true"></tags>
+    </div>
+    <div class="m-b-15" ng-show="unclassifiedFields.length > 0">
+        <div class="md-subhead m-b-10">Other Skills</div>
+        <tags tags="unclassifiedFields" type="field" size="sm" edit="false" evidence="true"></tags>
+    </div>
+</div>

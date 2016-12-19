@@ -1,0 +1,6 @@
+<div infinite-scroll="more()" infinite-scroll-distance="1" infinite-scroll-disabled="loading">
+    <div class="rel-box">
+        <user-row ng-repeat="item in results" item-id="{{::item}}"></user-row>
+    </div>
+    <div class="text-no-results" ng-show="noMoreResults">That's all there is.</div>
+</div>

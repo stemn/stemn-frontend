@@ -1,0 +1,99 @@
+<div class="homeView overflow-x-box" layout="row" layout-align="center">
+    <div class="md-content-container">
+        <div layout="row" class="md-row-sm">
+            <div flex class="md-col-sm">
+                <feed type="all" data="feedData" size="sm" contained="false"></feed>
+            </div>
+            <div hide-sm hide-md class="md-col-sm" style="width: 350px;">
+                <!-- WELCOME -->
+                <div ng-if="!currentUser.isLoggedIn()" class="card-z1 m-b-15">
+                    <div class="md-subhead">Welcome to STEMN</div>
+                    <div class="text-lightgrey m-v-10">Sign up to find projects, ideas, people and jobs that matter.</div>
+                    <div layout="row">
+                        <md-button type="button" class="md-accent md-cornered md-raised md-flat" authenticate style="margin-left: 0px;">Sign up</md-button>
+                        <md-button type="button" class="md-accent md-cornered md-border-green" ng-click="learnMore()">Learn more</md-button>
+                    </div>
+                </div>
+                <!-- USER -->
+                <div ng-if="currentUser.isLoggedIn()" class="card-z1 m-b-15 user-widget">
+                    <div layout="row">
+                        <div flex layout="column" class="p-r-15">
+                            <a ui-sref="app.user.profile({stub: user.stub})" flex class="md-headline">{{user.name}}</a>
+                            <div class="text-lightgrey">{{user.blurb | letters : 60}}</div>
+                        </div>
+                        <div>
+                            <a ui-sref="app.user.profile({stub: user.stub})">
+                                <img class="profile-picture" ng-src="{{user.picture || '/assets/images/default/user-1.png'}}?size=user&crop=true" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="md-subhead m-b-15 m-t-30">Your recent projects</div>
+                    <user-projects-widget></user-projects-widget>
+                    <div class="md-subhead m-b-15 m-t-30">Your Organisations</div>
+                    <user-organisations-widget></user-organisations-widget>
+                </div>
+                <!-- CHECKLIST -->
+                <div class="card-z1 m-b-15" ng-show="incomplete.status">
+                    <div class="md-subhead m-b-15">Welcome tasks</div>
+                    <feed-checklist incomplete="incomplete"></feed-checklist>
+                </div>
+                <!-- COMPLETION -->
+                <div ng-if="currentUser.isLoggedIn()" class="card-z1 m-b-15" ng-hide="completionPercentage == 100">
+                    <user-completion-widget completion-percentage="completionPercentage"></user-completion-widget>
+                </div>
+                <!-- JOBS -->
+                <div class="card-z1 m-b-15 p-0" style="min-height: 100px;">
+                    <div class="md-subhead p-20" style="padding-bottom: 10px;" layout="row">
+                        <div flex>Latest Jobs</div>
+                        <a class="text-green" ng-click="jobQuery.more();">More</a>
+                    </div>
+                    <a ng-repeat="item in jobQuery.results" class="picture-row" layout="row" layout-align="start center" ui-sref="app.job({stub: item.stub})">
+                        <div class="avatar avatar-square-contain m-r-15" ng-style="{'background-image':'url('+(item.organisations[0].picture || '/assets/images/default/user-1.png')+'?size=thumb)'}"></div>
+                        <div flex layout="column" class="ellipsis-container">
+                            <div flex class="semi-bold ellipsis">{{::item.name}}</div>
+                            <div class="text-lightgrey ellipsis">{{::item.organisations[0].name}}</div>
+                        </div>
+                    </a>
+                    <loading-overlay ng-if="jobQuery.loading" ng-class="{'translucent' : jobQuery.results.length > 0}"></loading-overlay>
+                </div>
+                <!-- PEOPLE -->
+                <div ng-if="currentUser.isLoggedIn()" class="card-z1 m-b-15 p-0" ng-show="peopleQuery.results.length > 0" style="min-height: 100px;">
+                    <div class="md-subhead p-20" style="padding-bottom: 10px;" layout="row">
+                        <div flex>People you may know</div>
+                        <a class="text-green" ng-click="peopleQuery.more();" ng-hide="peopleQuery.noMoreResults">More</a>
+                    </div>
+                    <div ng-repeat="item in peopleQuery.results">
+                        <div class="picture-row" layout="row" layout-align="start center">
+                            <a ui-sref="app.user.profile({stub: item.user.stub})" class="avatar avatar-circle m-r-15" ng-style="{'background-image':'url('+(item.user.picture || '/assets/images/default/user-1.png')+'?size=thumb)'}"></a>
+                            <a ui-sref="app.user.profile({stub: item.user.stub})" flex layout="column" class="ellipsis-container">
+                                <div flex class="semi-bold ellipsis">{{::item.user.name}}</div>
+                                <div class="text-lightgrey ellipsis">{{::item.why}}</div>
+                            </a>
+                            <stat-button class="m-l-15" hidepublic hide-stat="true" type="follow" parent-type="user" parent-id="{{item.user._id}}" count="item.user.followers"></stat-button>
+                        </div>
+                    </div>
+                    <loading-overlay ng-if="peopleQuery.loading" ng-class="{'translucent' : peopleQuery.results.length > 0}"></loading-overlay>
+                </div>
+                <!-- FACEBOOK CONNECT -->
+                <div ng-if="currentUser.isLoggedIn() && !currentUser.accounts.facebook" class="card-z1 m-b-15">
+                    <div class="md-subhead">Connect to Facebook</div>
+                    <div class="text-lightgrey m-v-15">By linking accounts you'll be able to login to STEMN using Facebook. This makes using STEMN on your mobile much easier.</div>
+                    <md-button class="md-social md-facebook md-cornered m-0 md-md" ng-click="authenticate('facebook')">
+                        Connect to Facebook
+                    </md-button>
+                </div>
+                <!-- FOOTER -->
+                <div class="footer">
+                    <a ng-repeat="item in footerItems" ui-sref="{{item.sref}}">{{item.text}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+<md-button class="md-fab md-fab-fixed-bottom-right" hide-gt-sm ui-sref="app.search.all" aria-label="site-search">
+    <md-icon md-svg-icon="search"></md-icon>
+    <md-tooltip md-direction="left" md-autohide="true">Search</md-tooltip>
+</md-button>
+-->

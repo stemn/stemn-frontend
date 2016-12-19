@@ -1,0 +1,9 @@
+<div class="bg-white md-whiteframe-z1">
+    <tabs style="margin-bottom: 20px;" keyboard-navigation-tabs enable="true" tabs="tabs">
+        <a ng-repeat="tab in tabs" ui-sref="{{tab.sref}}" ng-class="{'active':$state.includes(tab.sref)}">{{tab.label}}</a>
+    </tabs>
+</div>
+
+<div ui-view="applications"  ng-show="$state.includes('app.job-manager.applications')"  class=""></div>
+<div ui-view="applicants"    ng-show="$state.includes('app.job-manager.applicants')"  class=""></div>
+<div ui-view="organisations" ng-show="$state.includes('app.job-manager.organisations')"  class=""></div>

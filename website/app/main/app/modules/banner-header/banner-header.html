@@ -1,0 +1,21 @@
+<div class="banner-header"
+ng-class="{'background-gradient-1' : !image, 'bounding-box' : image}"
+ng-hide="close"
+style="margin: 0px -15px; width: 110%;"
+ng-style="image && colour && {'background-image':'url('+image+'?size=banner-lg&crop=true),linear-gradient('+angle+','+colour[0]+' 10%, '+colour[1]+' 90%)'} ||
+image && {'background-image':'url('+image+'?size=banner-lg&crop=true)'} ||
+colour && {'background-image':'linear-gradient('+angle+','+colour[0]+' 10%, '+colour[1]+' 90%)'}">
+</div>
+
+<div class="{{text || 'white'}}" ng-show="showClose">
+   <a class="close-top-right" ng-click="close=true">&times;</a>
+</div>
+
+<div class="overlay-child banner-header" ng-hide="close" lightbox="true" lightbox-image="lightboxImage">
+    <div class="vertical-center-parent text-center" style="margin:auto">
+        <div class="vertical-center-child {{text || 'white'}} ng-transclude">
+        </div>
+    </div>
+</div>
+
+<div class="expand-toggle" ng-show="close==true" ng-click="close=false"></div>

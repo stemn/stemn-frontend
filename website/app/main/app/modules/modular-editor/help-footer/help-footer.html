@@ -1,0 +1,14 @@
+<div ng-if="editorOptions.showHelp && edit" class="editor-help-footer" layout="column" layout-align="center center">
+	<div layout="row" layout-align="center center" class="rel-box content-md">
+		<div class="md-content-container" layout="row" layout-align="center center">
+			<md-button type="button" aria-label="previous" class="md-icon-button" ng-click="previous()"><md-icon md-svg-icon="chevron-left"></md-icon></md-button>
+			<div flex class="md-headine" layout="column" layout-align="start center" ng-bind-html="helpSections[currentHelpSection].html"></div>
+			<md-button type="button" aria-label="next" class="md-icon-button" ng-click="next()"><md-icon md-svg-icon="chevron-right"></md-icon></md-button>
+		</div>
+	</div>
+	<md-button type="button" class="md-icon-button close" aria-label="close" ng-click="close()">
+		<md-icon md-svg-icon="navigation:close"></md-icon>
+	</md-button>
+</div>
+
+

@@ -1,0 +1,115 @@
+<dynamic-footer>
+    <entity-footer entity="thread" user-can-edit="userCanEdit" show-edit="showEdit" edit-fn="$state.go('app.thread.edit')" publish-fn="publish($event)"></entity-footer>
+</dynamic-footer>
+
+<missing-fields ng-hide="!publishAttempted || forms.ThreadForm.$completed" entity="thread" required-fields="requiredFields" form="forms.ThreadForm"></missing-fields>
+
+<div class="threadView" style="margin-bottom: 50px;">
+    <div ng-if="$state.is('app.thread')">
+        <div layout="row" layout-align="center">
+            <div class="md-content-container" style="padding-bottom: 0px;">
+                <div class="rel-box">
+                    <div ng-if="userPermissions.isMin('admin')">
+                        <settings-button>
+                            <md-menu-item>
+                                <md-button ui-sref="app.thread.edit">Edit Thread</md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button confirm ng-click="deleteThread()">Delete Thread</md-button>
+                            </md-menu-item>
+                            <feed-recommend entity-type="thread" entity-id="{{thread._id}}"></feed-recommend>
+                            <md-menu-item show-if-admin>Thread id:
+                                <br>{{thread._id}}</md-menu-item>
+                        </settings-button>
+                    </div>
+
+                    <div class="md-subhead">
+                        <a ui-sref="app.browse.all" class="text-green">Browse</a>
+                        /
+                        <a ui-sref="app.browse.threads" class="text-green">Threads</a>
+                        <span> / Thread</span>
+                    </div>
+
+                    <md-divider class="m-v-30"></md-divider>
+
+                    <!-- Title -->
+                    <h1 class="md-display-1">{{thread.name || 'No Title'}}</h1>
+
+                    <md-divider class="m-v-30"></md-divider>
+
+                    <div ng-if="thread.banner" class="border-box m-b-30">
+                        <a class="featured-image bg-img-cover" blur-load-bg bg-src="{{thread.banner}}?size=featured-md" lightbox="true" lightbox-image="thread.banner"></a>
+                    </div>
+
+                    <div layout="column" layout-gt-sm="row" class="md-row">
+                        <div flex class="md-col">
+                            <modular-editor class="p-b-10" editor-sections="thread.sectionData" editor-options="editorOptions" edit="false"></modular-editor>
+                            <md-divider class="m-t-30 m-b-15"></md-divider>
+                            <thread-timeline parent="thread" timeline="thread.timeline" save-fn="saveThread()" user-permissions="userPermissions"></thread-timeline>
+                        </div>
+
+                        <div class="sidebar md-col">
+                            <div sticky offset="31">
+                                <div class="border-box-white p-15 m-b-30">
+                                    <div class="md-subhead m-b-10">Thread creator</div>
+                                    <a ui-sref="app.user.profile({stub:thread.owner.stub})" layout="row" layout-align="start center">
+                                        <div class="avatar-circle" ng-style="{ 'background-image':'url('+(thread.owner.picture || '/assets/images/default/user-1.png')+'?size=thumb&crop=true)'}"></div>
+                                        <div class="m-l-10 text-lightgrey">{{thread.owner.name}}</div>
+                                    </a>
+                                </div>
+                                <div class="border-box-white p-15 m-b-30">
+                                    <table class="st-meta-table">
+                                        <tr>
+                                            <td>Updated</td>
+                                            <td>{{thread.updated | amTimeAgo}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Created</td>
+                                            <td>{{thread.submitted | amTimeAgo}}</td>
+                                        </tr>
+                                        <tr ng-show="thread.fields.length > 0">
+                                            <td>Fields</td>
+                                            <td>
+                                                <item-fields fields="thread.fields" limit="10"></item-fields>
+                                            </td>
+                                        </tr>
+                                        <tr ng-show="thread.labels.length > 0">
+                                            <td>Labels</td>
+                                            <td>
+                                                <span class="label" label-style="{{label}}" ng-repeat="label in thread.labels">{{label}}</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="border-box-white p-15 m-b-30" ng-show="thread.projects.length > 0">
+                                    <div class="md-subhead">Related Projects</div>
+                                    <a ng-repeat="project in thread.projects" ui-sref="app.project.overview({stub:project.stub})" layout="row" layout-align="start center" class="m-t-10">
+                                        <div class="avatar-square-cover" ng-style="{ 'background-image':'url('+(project.picture || '/assets/images/default/user-1.png')+'?size=thumb&crop=true)'}"></div>
+                                        <div flex class="m-l-10 text-lightgrey">{{project.name}}</div>
+                                    </a>
+                                </div>
+                                <div class="border-box-white p-15 m-b-30" ng-show="thread.organisations.length > 0">
+                                    <div class="md-subhead">Related Organisations</div>
+                                    <a ng-repeat="organisation in thread.organisations" ui-sref="app.organisation.overview({stub:organisation.stub})" layout="row" layout-align="start center" class="m-t-10">
+                                        <div class="avatar-square-contain" ng-style="{ 'background-image':'url('+(organisation.picture || '/assets/images/default/user-1.png')+'?size=thumb)'}"></div>
+                                        <div flex class="m-l-10 text-lightgrey">{{organisation.name}}</div>
+                                    </a>
+                                </div>
+                                <div class="border-box-white p-15 m-b-30" ng-show="getParticipants().length > 0">
+                                    <div class="md-subhead m-b-10">Participants</div>
+                                    <div style="margin: 0 -3px;" layout="row" layout-wrap>
+                                        <a style="padding: 3px;" ng-repeat="user in getParticipants()" ui-sref="app.user.profile({stub:user.stub})">
+                                            <div class="avatar-circle avatar-sm" ng-style="{ 'background-image':'url('+(user.picture || '/assets/images/default/user-1.png')+'?size=thumb&crop=true)'}"></div>
+                                            <md-tooltip>{{user.name}}</md-tooltip>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ui-view></ui-view>
+</div>

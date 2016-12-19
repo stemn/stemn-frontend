@@ -1,0 +1,5 @@
+<div class="CodeMirrorNumbered">
+    <loading-overlay ng-if="loading" class="light-grey"></loading-overlay>
+    <textarea ng-if="!previewer.edit" ui-codemirror="optionsView" ng-model="previewer.fileData"></textarea>
+    <textarea ng-if=" previewer.edit" ui-codemirror="optionsEdit" ng-model="previewer.fileData"></textarea>
+</div>

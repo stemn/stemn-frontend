@@ -1,0 +1,15 @@
+<div layout="column">
+    <div flex class="organisation-card" layout="column">
+        <a md-ink-ripple ui-sref="app.organisation.overview({'stub':entity.stub})"
+        class="avatar-contain avatar-100 square"
+        style="background-image:url({{ entity.picture || '/assets/images/default/org.png' }}?size=thumb-lg)"></a>
+
+        <div flex class="p-15 text-center" layout="column" layout-align="start center">
+            <a flex class="title m-b-30" ui-sref="app.organisation.overview({'stub':entity.stub})">{{entity.name}}</a>
+            <div hidepublic>
+                <stat-button hide-stat="true" hide-icon="true" type="follow" parent-type="organisation" parent-id="{{entity._id}}" count="entity.followers" class="lg m-b-15"></stat-button>
+            </div>
+        </div>
+    <!--    <div class="card-loading-overlay anim-fade" ng-show="loading"></div>-->
+    </div>
+</div>

@@ -1,0 +1,25 @@
+/* OrgUserRow Directive ------------------------------------- */
+.row-view{
+    padding: 10px 0;
+    .avatar{
+        width: 55px !important;
+        height: 55px !important;
+        margin-right: 15px;
+        .md-button{
+            width: 55px !important;
+            height: 55px !important;
+        }
+    }
+    [flex]{
+        margin-right: 15px;
+//        @media (min-width: 600px){
+//            margin-right: 40px;
+//        }
+    }
+}
+
+
+row-view{
+    position: relative;
+    display: block;
+}

@@ -1,0 +1,34 @@
+
+.fields-filter{
+    a{
+        color: rgba(0, 0, 0, 0.8);
+        font-size: 14px;
+        &.active{
+            font-weight: 700;
+            font-size: 15px;
+        }
+    }
+}
+
+
+.infobar{
+    background: rgb(248, 248, 248);
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-color: #EEEEEE;
+}
+.browseView{
+
+}
+
+
+.count-circle{
+    $size: 25px;
+    width: $size;
+    height: $size;
+    line-height: $size;
+    background: black;
+    border-radius: 50%;
+    text-align: center;
+    color: white;
+}

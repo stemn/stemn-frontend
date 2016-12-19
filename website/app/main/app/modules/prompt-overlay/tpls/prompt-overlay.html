@@ -1,0 +1,5 @@
+<div ng-show="PromptOverlayService.showPrompt" class="prompt-overlay md-whiteframe-z3" layout="row">
+    <img ng-show="img" class="img-circle" ng-src="{{img}}">
+    <div flex class="text" ng-transclude></div>
+    <md-button class="md-icon-button close-btn" aria-label="Close" ng-click="close()"><md-icon md-svg-icon="navigation:close"></md-icon></md-button>
+</div>

@@ -1,0 +1,79 @@
+<div layout="row" layout-align="center" class="m-b-30">
+    <div class="md-content-container" layout="column" layout-align="center center">
+        <h1 class="md-display-1 text-center m-t-50">Threads and Discussions</h1>
+        <div class="md-title text-grey light-font text-center">Contribute to project threads; help bring projects to life</div>
+        <a class="text-green text-center m-t-15" show-explanation-modal="thread">What is a thread?</a>
+    </div>
+</div>
+
+
+<div class="infobar m-b-30 p-v-15 overflow-x-box" layout="row" layout-align="center">
+    <div class="md-content-container md-row text-center" layout="column" layout-gt-sm="row">
+        <div flex="100" flex-gt-sm="33" class="md-col" layout="column">
+            <h2 class="md-title bold">Start a discussion</h2>
+            <p>Got news or an event coming up?<br>Post about something interesting.</p>
+        </div>
+        <div flex="100" flex-gt-sm="33" class="md-col" layout="column">
+            <h2 class="md-title bold">Ask anything</h2>
+            <p>Link your project and ask a question. <br>Ask for help, feedback or collaborators.</p>
+        </div>
+        <div flex="100" flex-gt-sm="33" class="md-col" layout="column">
+            <h2 class="md-title bold">Get your answer.</h2>
+            <p>Expect a response in less than 24 hrs. <br>Get your results faster.</p>
+        </div>
+    </div>
+</div>
+
+<div layout="row" layout-align="center" class="m-t-15 overflow-x-box">
+    <div class="md-content-container md-no-padding m-b-60 rel-box" layout="column" style="min-height: 100px">
+
+        <div class="md-row" layout="row">
+            <div hide-sm class="md-col" style="width: 300px">
+
+                <div class="m-b-30" >
+                    <div class="md-subhead m-b-10">Start a discussion</div>
+                    <div class="well" layout="column">
+                        <div class="text-lightgrey m-b-15">
+                            Got news or an event coming up? Post about something interesting.
+                        </div>
+                        <md-button authenticate class="md-accent md-raised md-flat md-cornered md-md m-0" ng-click="newThread($event, {type: 'general'})">Start a discussion</md-button>
+                    </div>
+                </div>
+
+                <div class="md-subhead m-b-10">Sort by field</div>
+                <div class="well m-b-30" layout="column">
+                    <md-radio-group class="md-compact" ng-model="fieldFilter.current" ng-change="fieldFilter.change(fieldFilter.current)">
+                        <md-radio-button value="" class="md-accent">All</md-radio-button>
+                        <md-radio-button ng-repeat="field in fieldFilter.options" value="{{field._id}}" class="md-accent">{{field.name | letters: 23}} ({{field.numThreads}})</md-radio-button>
+                    </md-radio-group>
+                </div>
+                <div class="md-subhead m-b-10">Reply status</div>
+                <div class="well m-b-30" layout="column">
+                    <md-radio-group class="md-compact" ng-model="statusFilter.current" ng-change="statusFilter.change(statusFilter.current)">
+                        <md-radio-button ng-repeat="item in statusFilter.options" value="{{item.model}}" class="md-accent">{{item.name}}</md-radio-button>
+                    </md-radio-group>
+                </div>
+                <div class="md-subhead m-b-10">Thread type</div>
+                <div class="well m-b-30" layout="column">
+                    <md-radio-group class="md-compact" ng-model="typeFilter.current" ng-change="typeFilter.change(typeFilter.current)">
+                        <md-radio-button ng-repeat="item in typeFilter.options" value="{{item.model}}" class="md-accent">{{item.label}}</md-radio-button>
+                    </md-radio-group>
+                </div>
+<!--
+                <div class="md-subhead m-b-10">Link to project</div>
+                <div class="well m-b-30" layout="column">
+                    <md-radio-group class="md-compact" ng-model="projectFilter.current" ng-change="projectFilter.change(projectFilter.current)">
+                        <md-radio-button ng-repeat="item in projectFilter.options" value="{{item.model}}" class="md-accent">{{item.name}}</md-radio-button>
+                    </md-radio-group>
+                </div>
+-->
+            </div>
+
+            <div flex class="md-col rel-box" layout="column">
+                <div class="md-subhead m-b-10">Recent threads</div>
+                <forum query="query" type="threads"></forum>
+            </div>
+        </div>
+
+    </div>
+</div>

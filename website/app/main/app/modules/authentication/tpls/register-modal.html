@@ -1,0 +1,35 @@
+<md-dialog class="md-full-screen loginRegisterModal">
+    <md-toolbar style="background: transparent;">
+        <div class="md-toolbar-tools">
+			<md-button class="md-icon-button" ng-click="back($event)">
+				<md-icon md-svg-icon="arrow-back" aria-label="Back"></md-icon>
+			</md-button>
+            <span flex>
+            </span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-icon="navigation:close" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <form unsaved-warning-form novalidate ng-submit="signupFormSubmit()" name="RegisterForm">
+        <md-dialog-content>
+            <div layout="column" layout-align="center center" style="min-height: 80vh;">
+				<div class="dialog-container">
+					<h1 class="md-display-1">STEMN beta</h1>
+					<h4 class="text-lightgrey">Sign up to STEMN. Your space adventure awaits.</h4>
+					<div class="text-left">
+						<register-form></register-form>
+					</div>
+					<div class="next-buttons" layout="row" layout-align="center center">
+						<md-button flex-order="2" type="submit" class="md-accent md-raised" ng-disabled="RegisterForm.$invalid">Sign Up</md-button>
+						<md-button flex-order="1" type="button" ng-click="back($event)">Back</md-button>
+					</div>
+				</div>
+				<div class="info-container">
+					<p class="text-lightgrey">Creating your account means you are agreeing to our <a class="underlined" href="/terms">Terms of Service</a>. If you do not agree, you cannot use STEMN.</p>
+				</div>
+			</div>
+        </md-dialog-content>
+        <loading-overlay ng-if="loading"></loading-overlay>
+    </form>
+</md-dialog>

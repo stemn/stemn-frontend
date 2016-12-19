@@ -1,0 +1,26 @@
+<h2 class="md-display-1 m-t-0">Other Info</h2>
+<div layout="column" layout-gt-md="row" class="md-row">
+    <div class="md-col m-b-30" flex="100" flex-gt-md="40">
+        <div class="text-subtitle-thin">Add your contact details and citizenship info. This is very important as many Aerospace jobs have strict citizenship requirements.</div>
+    </div>
+    <div class="md-col" flex="100" flex-gt-md="60">
+        <form name="forms.infoForm">
+            <div class="card-z1 card-padding m-b-30">
+                <div class="md-subhead m-b-15">Contact Details</div>
+                <md-input-container class="md-block md-accent">
+                    <label>Email*</label>
+                    <input required name="email" ng-model="application.email" type="email">
+                </md-input-container>
+                <md-input-container class="md-block md-accent">
+                    <label>Phone Number</label>
+                    <input name="phone" ng-model="user.profile.phone" type="text">
+                </md-input-container>
+            </div>
+            <div class="card-z1 card-padding m-b-30">
+                <div class="md-subhead m-b-15">Nationality and Location</div>
+                <country-select placeholder="Citizenship" ng-model="user.profile.citizenship"></country-select>
+                <location-search placeholder="Current Location" data="user.profile.location" single="true"></location-search>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<div layout="column" style="min-height: 100vh" class="appView" layout-offset-top-banner="true">
+    <main-horizontal-menu></main-horizontal-menu>
+    <div layout-offset-horizontal-menu>
+        <overlay-views class="contentView">
+            <div ui-view class="rel-box"></div>
+            <div view-cache ui-view="feed" class="rel-box"></div>
+            <overlay ng-hide="tab1" view="tab1"><div ui-view="tab1"></div></overlay>
+            <overlay ng-hide="tab2" view="tab2"><div ui-view="tab2"></div></overlay>
+            <overlay ng-hide="tab3" view="tab3"><div ui-view="tab3"></div></overlay>
+            <overlay ng-hide="tab4" view="tab4"><div ui-view="tab4"></div></overlay>
+            <overlay ng-hide="tab5" view="tab5"><div ui-view="tab5"></div></overlay>
+            <overlay ng-hide="tab6" view="tab6"><div ui-view="tab6"></div></overlay>
+            <overlay ng-hide="tabThread" view="tab-thread" class="layer2"><div ui-view="tab-thread"></div></overlay>
+
+        </overlay-views>
+        <!-- Fixed relative to inner  -->
+    </div>
+
+    <!-- Fixed relative to window  -->
+    <transition-overlay></transition-overlay>
+    <loading-overlay class="page" ng-if="LayoutOptions.overlay.loading"></loading-overlay>
+
+    <!-- Footer -->
+    <div flex=""></div>
+    <footer></footer>
+</div>

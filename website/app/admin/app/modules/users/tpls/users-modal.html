@@ -1,0 +1,25 @@
+<md-dialog aria-label="dialog">
+	<form>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2 flex>Users</h2>
+				<md-button class="md-icon-button" ng-click="cancel()">
+					<ng-md-icon icon="close" aria-label="Close dialog" style="fill: white"></ng-md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-dialog-content style="width:600px; max-height:810px; padding: 0px;">
+			<div ng-repeat="user in users">
+				<user-row entity-id="{{user.userId || user.userId || user}}" text="{{user.date | amTimeAgo}}">
+                    <span ng-if="user.seconds">{{user.seconds}} Seconds</span>
+                </user-row>
+			</div>
+		</md-dialog-content>
+		<div class="md-actions" layout="row">
+			<span flex></span>
+			<md-button ng-click="cancel()">
+				Close
+			</md-button>
+		</div>
+	</form>
+</md-dialog>

@@ -1,0 +1,62 @@
+.loading-animation{
+    $bg-colour: rgba(0, 0, 0, 0.05);
+    -webkit-animation: pulse 1s linear;
+    animation: pulse 1s linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    .loading{
+        background: $bg-colour;
+        border-radius: 4px;
+    }
+    .loading-text{
+        display: inline-block;
+        background: $bg-colour;
+        border-radius: 4px;
+        min-height: 12px;
+        &.lg{
+            min-width: 200px;
+            min-height: 18px;
+        }
+        &.md{
+            min-width: 160px;
+        }
+        &.sm{
+            min-width: 80px;
+        }
+        &.wide{
+            min-width: 100%;
+        }
+    }
+    .loading-button{
+        background: $bg-colour;
+        border-radius: 4px;
+        min-height: 30px;
+        min-width: 75px;
+    }
+    .loading-avatar{
+        background: $bg-colour;
+        border-radius: 4px;
+        width: 42px;
+        height: 42px;
+    }
+}
+.loading-overlay-fade{
+    z-index: 2;
+    background: white;
+    transition: opacity 0.2s ease;
+    position: absolute;
+    width: 100%;
+    &.ng-enter,
+    &.ng-leave.ng-leave-active {
+        opacity: 0;
+    }
+    &.ng-enter.ng-enter-active,
+    &.ng-leave{
+        opacity: 1;
+    }
+}
+.loading-item{
+    z-index: 2;
+    background: white;
+}
+

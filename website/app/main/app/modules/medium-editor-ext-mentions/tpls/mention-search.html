@@ -1,0 +1,6 @@
+<div list-keyboard-navigation enable="showPopup" list="results" active-index="activeIndex" selector="list-nav-active" esc-fn="hidePanel()">
+    <a ng-repeat="item in results" ng-click="mentionSelect(item._id, item.type, item.name)" layout="row" layout-align="start center" ng-class="{'list-nav-active' : activeIndex == $index}">
+        <div class="avatar-circle avatar-sm" ng-style="{ 'background-image':'url('+(item.picture || '/assets/images/default/user-1.png')+'?size=thumb&crop=true)'}"></div>
+        <div flex="" class="ellipsis" ng-bind-html="item.name | typeaheadHighlightMatch: word.wordSearch"></div>
+    </a>
+</div>

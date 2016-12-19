@@ -1,0 +1,23 @@
+// realtime-editor-locked
+.realtime-editor-locked{
+	background: rgba(255, 255, 255, 0.8);
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	position: absolute;
+//	cursor: not-allowed;
+	z-index: 2;
+//	box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+
+	&.ng-animate {
+		transition: 0.2s opacity ease;
+	}
+	&.ng-enter, &.ng-leave.ng-leave-active {
+      opacity: 0;
+	}
+
+	&.ng-leave, &.ng-enter.ng-enter-active {
+      opacity: 1;
+	}
+}

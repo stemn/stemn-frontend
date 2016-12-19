@@ -1,0 +1,8 @@
+<md-menu hidepublic md-position-mode="target-right target" ng-class="{'above' : above}">
+    <md-button class="md-circle md-xs no-margin" aria-label="Settings" ng-click="$mdOpenMenu();">
+        <md-icon md-svg-src="more-h"></md-icon>
+        <md-tooltip md-direction="bottom" md-autohide="true">Edit and Settings</md-tooltip>
+    </md-button>
+    <md-menu-content width="2" ng-transclude>
+    </md-menu-content>
+</md-menu>

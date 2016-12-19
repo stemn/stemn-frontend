@@ -1,0 +1,19 @@
+<div layout="row" layout-align="center">
+    <div class="md-content-container" style="padding-bottom: 0px;">
+        <!-- Bread Crumbs -->
+        <div class="md-subhead" ng-hide="$state.is('app.browse.all')">
+            <a ui-sref="app.browse.all" class="text-green">Browse</a>
+            <span> / {{$state.current.data.name}}
+                <popup class="tooltip-menu" popup-side="bottom" popup-position="center" popup-padding="10px 0 0 0" layout="column">
+                    <a class="md-subhead" ui-sref-active="active" ui-sref="app.browse.projects">Projects</a>
+                    <a class="md-subhead" ui-sref-active="active" ui-sref="app.browse.threads">Threads</a>
+                    <a class="md-subhead" ui-sref-active="active" ui-sref="app.browse.jobs">Jobs</a>
+                    <a class="md-subhead" ui-sref-active="active" ui-sref="app.browse.fields">Fields</a>
+                    <a class="md-subhead" ui-sref-active="active" ui-sref="app.browse.organisations">Organisations</a>
+                    <a class="md-subhead" ui-sref-active="active" ui-sref="app.browse.users">Users</a>
+                </popup>
+            </span>
+        </div>
+    </div>
+</div>
+<ui-view layout="column" class="browseView"></ui-view>

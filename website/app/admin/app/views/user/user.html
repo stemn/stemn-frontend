@@ -1,0 +1,26 @@
+<div>
+   <div class="bg-white md-whiteframe-z1">
+        <div layout="row" layout-align="center center" class="md-padding">
+            <md-button aria-label="back" class="md-icon-button m-0" ui-sref="app.users">
+                <ng-md-icon icon="arrow_back"></ng-md-icon>
+            </md-button>
+            <div class="avatar-circle avatar-md" style="margin-right: 15px; background-image: url('https://stemn.com{{entity.picture || '/assets/images/default/org.png'}}?size=thumb-lg&crop=true')"></div>
+            <h1 class="md-display-1" style="margin-right: 10px;">{{entity.name}}</h1>
+            <div flex>{{entity.blurb}}</div>
+            <md-button class="md-raised md-accent" target="_blank" ng-href="https://stemn.com/users/{{entity.stub}}">Go To Profile</md-button>
+        </div>
+
+        <div class="md-padding">
+            <timeline user="{{entity._id}}"></timeline>
+        </div>
+
+        <tabs style="margin-bottom: 20px;" keyboard-navigation-tabs enable="true" tabs="tabs">
+            <a ng-repeat="tab in tabs" ui-sref="{{tab.sref}}" ng-class="{'active':$state.includes(tab.sref)}">{{tab.label}}</a>
+        </tabs>
+    </div>
+
+    <div ui-view="analytics"     ng-show="$state.includes('app.users.user.analytics')"  class=""></div>
+    <div ui-view="info"          ng-show="$state.includes('app.users.user.info')"  class=""></div>
+    <div ui-view="applications"  ng-show="$state.includes('app.users.user.applications')"  class=""></div>
+    <div ui-view="crm"           ng-show="$state.includes('app.users.user.crm')"  class=""></div>
+</div>

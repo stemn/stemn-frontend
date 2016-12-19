@@ -1,0 +1,11 @@
+preview-gerber{
+    position: relative;
+    canvas:not(.layer) {
+        width: 100%;
+        height: 100%;
+    }
+
+    canvas.layer {
+        display: none;
+    }
+}

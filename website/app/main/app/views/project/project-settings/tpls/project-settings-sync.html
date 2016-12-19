@@ -1,0 +1,45 @@
+<div ng-if="!userPermissions.isMin('admin')" class="border-box-white p-60 text-center">
+    <div class="text-subtitle-thin">You must be an Admin to change sync settings.</div>
+</div>
+
+<div ng-if="userPermissions.isMin('admin')">
+    <h2 class="md-display-1">Sync Settings</h2>
+    <div layout="column" layout-gt-md="row" class="md-row" >
+        <div class="md-col m-b-30" flex="100" flex-gt-md="40">
+            <div class="text-subtitle-thin">Sync this project with your Dropbox or Google Drive.</div>
+        </div>
+        <div class="md-col" flex="100" flex-gt-md="60">
+            <div ng-if="userPermissions.isMin('admin')">
+                <div class="card-z1 card-padding m-b-30">
+                    <div class="md-subhead" flex>Dropbox and Drive Sync</div>
+                    <p class="body-small m-b-15">Connect a Dropbox or Drive to sync all project files. Only one Google Drive or one Dropbox can be connected to a project.</p>
+                    <table class="st-meta-table m-b-15" ng-show="project.remote.connected && ownerInfo.data">
+                        <tr>
+                            <td class="capitalise">{{project.remote.provider}} Account</td>
+                            <td>{{ownerInfo.data.given_name}} {{ownerInfo.data.family_name}} - {{ownerInfo.data.email}}</td>
+                        </tr>
+                        <tr>
+                            <td>Folder Path</td>
+                            <td>{{ownerInfo.data.given_name}}'s <span class="capitalise">{{project.remote.provider}}</span>/{{project.remote.root.path}}</td>
+                        </tr>
+                    </table>
+                    <md-button class="md-accent md-border md-cornered m-l-0 md-flat md-sm" ng-class="{'md-raised' : project.remote.provider == 'dropbox'}" layout="row" layout-align="start center" ng-click="remoteLink($event, 'dropbox')">
+                        <md-icon md-svg-icon="dropbox"></md-icon>
+                        {{project.remote.provider == 'dropbox' ? 'Change Dropbox Path' : 'Connect to Dropbox'}}
+                    </md-button>
+                    <md-button class="md-accent md-border md-cornered m-l-0 md-flat md-sm" ng-class="{'md-raised' : project.remote.provider == 'drive'}" layout="row" layout-align="start center"   ng-click="remoteLink($event, 'drive')">
+                        <md-icon md-svg-icon="drive"></md-icon>
+                        {{project.remote.provider == 'drive' ? 'Change Drive Path' : 'Connect to Drive'}}
+                    </md-button>
+                    <loading-overlay ng-if="ownerInfo.loading"></loading-overlay>
+                </div>
+
+                <div class="card-z1 card-padding m-b-30" ng-show="project.remote.connected">
+                    <div class="md-subhead" flex>Unlink {{project.remote.provider == 'dropbox' ? 'Dropbox' : 'Google Drive'}}</div>
+                    <p class="body-small m-b-15">This will stop STEMN syncing files from your {{project.remote.provider == 'dropbox' ? 'Dropbox' : 'Google Drive'}}.</p>
+                    <md-button ng-click="remoteUnlink(project.remote.provider)" class="md-raised md-flat md-warn md-md md-cornered m-l-0">Unlink {{project.remote.provider == 'dropbox' ? 'Dropbox' : 'Google Drive'}}</md-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

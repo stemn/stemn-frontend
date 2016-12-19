@@ -1,0 +1,11 @@
+<div class="title" layout="row" layout-align="start center" ng-click="toggleShowChildren()">
+    <div class="bar" style="width: {{data.percentage}}%"></div>
+    <div flex>
+        <span>{{data.name}}</span><br>
+        <span class="text-lightgrey ellipsis">{{data.params.stub}}</span>
+    </div>
+    <md-button class="md-raised md-accent" style="margin: 0px;" ng-show="data.percentage" ui-sref="app.state({'state':data.name, 'stub': data.params.stub})">{{data.percentage}}%</md-button>
+</div>
+<div class="children" ng-show="data.showChildren">
+    <nested-view ng-repeat="item in data.children track by $index" data="item" group-by-params="groupByParams"></nested-view>
+</div>

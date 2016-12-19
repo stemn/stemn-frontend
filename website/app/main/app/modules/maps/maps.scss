@@ -1,0 +1,109 @@
+.map-display{
+
+
+//.label {
+//  box-sizing:border-box;
+//  background: #05F24C;
+//  box-shadow: 2px 2px 4px #333;
+//  border:5px solid #346FF7;
+//  height: 20px;
+//  width: 20px;
+//  border-radius: 10px;
+//  -webkit-animation: pulse2 1s ease 1s 3;
+//  -moz-animation: pulse2 1s ease 1s 3;
+//  animation: pulse2 1s ease 1s 3;
+//}
+//
+///* ANIMATIONS */
+//@-webkit-keyframes pulse2 {
+// 40% {
+//    -webkit-transform: scale(2);
+//    -moz-transform: scale(2);
+//    transform: scale(2);
+//  }
+//
+//  100% {
+//    -webkit-transform: scale(1);
+//    -moz-transform: scale(1);
+//    transform: scale(1);
+//  }
+//}
+//@-moz-keyframes pulse2 {
+// 40% {
+//    -webkit-transform: scale(2);
+//    -moz-transform: scale(2);
+//    transform: scale(2);
+//  }
+//
+//  100% {
+//    -webkit-transform: scale(1);
+//    -moz-transform: scale(1);
+//    transform: scale(1);
+//  }
+//}
+//@keyframes pulse2 {
+//  40% {
+//    -webkit-transform: scale(2);
+//    -moz-transform: scale(2);
+//    transform: scale(2);
+//  }
+//
+//  100% {
+//    -webkit-transform: scale(1);
+//    -moz-transform: scale(1);
+//    transform: scale(1);
+//  }
+//}
+//
+
+    position: relative;
+    a[href^="http://maps.google.com/maps"] img,
+    .gmnoprint a, .gmnoprint span,
+    .gmnoprint .gm-style-cc div,
+    .gmnoprint.gm-style-cc,
+    .gmnoprint.gm-style-cc + div{
+        opacity: 0.0;
+        transition: opacity 1s ease;
+    }
+    .angular-google-map-container:hover a[href^="http://maps.google.com/maps"] img,
+    .angular-google-map-container:hover .gmnoprint a,
+    .angular-google-map-container:hover .gmnoprint span,
+    .angular-google-map-container:hover .gmnoprint .gm-style-cc div,
+    .angular-google-map-container:hover .gmnoprint.gm-style-cc,
+    .angular-google-map-container:hover .gmnoprint.gm-style-cc + div{
+        opacity: 0.2;
+    }
+    a[href^="http://maps.google.com/maps"] img:hover,
+    .gmnoprint a:hover,
+    .gmnoprint span:hover,
+    .gmnoprint .gm-style-cc div:hover,
+    .gmnoprint.gm-style-cc:hover,
+    .gmnoprint.gm-style-cc + div:hover{
+        opacity: 1 !important;
+    }
+    .angular-google-map, .angular-google-map-container{
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+    .angular-google-map-container img{
+        max-width: none;
+    }
+    .map-tools{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1;
+    }
+    .map-tools .btn{
+        background: rgba(255, 255, 255, 0.5);
+        width: 40px;
+        margin-left: 4px;
+    }
+}
+.highlight-anim{
+    -webkit-animation: bounce 1s;
+    animation: bounce 1s;
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width" initial-scale="1.0">
+    <meta name="description" content="Embed">
+    <meta name="author" content="Row1">
+
+    <title>STEMN Embeds - {{$state.current.data.pageTitle}}</title>
+    <link rel="stylesheet" href="http://localhost:3333/assets/js/codemirror/codemirror.css" type="text/css">
+    <link rel="stylesheet" href="stylesheets/vendor.css?DIGEST">
+    <link rel="stylesheet" href="stylesheets/app.css?DIGEST">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="fonts/ocr-a/fonts.css" type="text/css">
+
+</head>
+
+<body layout="column">
+    <div flex layout="column" ui-view></div>
+<!--
+    <loading-overlay layout="column" layout-align="center center">
+        <div class="loader"></div>
+    </loading-overlay>
+-->
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
+    <script src="javascript/vendor.js?DIGEST"></script>
+    <script src="javascript/templates.js?DIGEST"></script>
+    <script src="javascript/app.js?DIGEST"></script>
+    <script src="http://localhost:3333/assets/js/codemirror/codemirror-2.min.js"></script>
+    <script src="http://localhost:3333/assets/js/codemirror/mode/meta.min.js"></script>
+
+</body>
+
+<script>
+    window.rootHostDomain = location.protocol + '//' + location.host.replace('embed.stemn', 'stemn')
+</script>
+
+
+</html>

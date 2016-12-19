@@ -1,0 +1,39 @@
+<md-dialog class="apply-for-job-modal" aria-label="Job application">
+    <div class="md-modal-header text-subtitle-thin" layout="row" layout-align="start center">
+        <span class="text-black">Edit User:</span>&nbsp;{{user.name}}
+    </div>
+
+    <md-dialog-content class="bg-lightgrey overflow-x-box p-0">
+        <div class="md-content-container content-sm" style="padding: 30px;">
+
+            <div class="card-z1 card-padding m-b-30">
+                <div class="md-subhead m-b-15">User Role</div>
+                <md-input-container class="md-accent">
+					<label>What is {{user.profile.firstname}}'s role on the team?</label>
+					<input name="role" ng-model="user.role" type="text">
+				</md-input-container>
+            </div>
+
+            <div class="card-z1 card-padding"  ng-hide="user.owner">
+                <div class="md-subhead m-b-30">Edit Permissions</div>
+                <md-radio-group ng-model="user.permissions.role">
+                    <md-radio-button value="{{item.value}}" class="md-accent m-l-0" ng-repeat="item in permissions">
+                        <div layout="row">
+                            <md-icon class="m-r-10 s30" md-svg-icon="{{item.icon}}"></md-icon>
+                            <div>
+                                <div class="text-subtitle-thin text-black">{{item.title}}</div>
+                                <div class="text-lightgrey">{{item.descriptionDetailed}}</div>
+                            </div>
+                        </div>
+                    </md-radio-button>
+                </md-radio-group>
+            </div>
+
+            <div layout="row" class="m-t-30">
+                <div flex></div>
+                <md-button class="m-0" ng-click="cancel()">Cancel</md-button>
+                <md-button class="md-accent md-raised" style="margin: 0 0 0 10px;" ng-click="save()">Finish</md-button>
+            </div>
+        </div>
+    </md-dialog-content>
+</md-dialog>

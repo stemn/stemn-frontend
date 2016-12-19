@@ -1,0 +1,43 @@
+<!-- Autodesk -->
+<div ng-if="previewer.type == 'autodesk'" flex class="bg-lightgrey rel-box" layout="column">
+    <preview-autodesk layout="column" flex project="project" file-meta="fileMeta" previewer="previewer"></preview-autodesk>
+</div>
+<!-- Image -->
+<div ng-if="previewer.type == 'image'" flex class="bg-lightgrey rel-box" layout="column" layout-align="center center" ng-init="loading = true">
+    <loading-overlay ng-if="loading" class="light-grey"></loading-overlay>
+    <img ng-src="api/v1/sync/download/{{fileMeta.endingUrl}}" style="max-width: 100%; max-height: 100%;" image-on-load="loading = false">
+</div>
+<!-- PDF -->
+<div ng-if="previewer.type == 'pdf'" flex class="bg-lightgrey rel-box" layout="row">
+    <preview-pdf file-url="api/v1/sync/{{ fileMeta.fileType == 'pdf' || fileMeta.provider == 'drive' ? 'download' : 'preview'}}/{{fileMeta.endingUrl}}" flex layout="row"></preview-pdf>
+</div>
+<!-- Google -->
+<div ng-if="previewer.type == 'google'" flex class="bg-lightgrey rel-box" layout="column">
+    <iframe flex ng-src="{{'https://docs.google.com/gview?url=http://'+ hostDomain +'/api/v1/sync/download/' + fileMeta.endingUrl + '&embedded=true' | trustAsResourceUrl}}" frameborder="0"></iframe>
+</div>
+<!-- Code -->
+<div ng-if="previewer.type == 'code'" flex class="bg-lightgrey rel-box" style="min-height: 200px; overflow-y: auto;" >
+    <preview-code layout="column" flex project="project" file-meta="fileMeta" previewer="previewer"></preview-code>
+</div>
+<!-- Gerber -->
+<div ng-if="previewer.type == 'gerber'" flex class="bg-lightgrey rel-box noselect" layout="column">
+<!--    <iframe flex src="/assets/js/gerber/gerber-viewer.html" frameborder="0"></iframe>-->
+    <preview-gerber file-meta="fileMeta" previewer="previewer" flex layout="column" style="overflow: auto;"></preview-gerber>
+</div>
+<!-- PCB -->
+<div ng-if="previewer.type == 'pcb'" flex class="bg-lightgrey rel-box noselect" layout="column">
+    <preview-gerber file-meta="fileMeta" previewer="previewer" flex layout="column" style="overflow: auto;"></preview-gerber>
+</div>
+<!-- GDoc -->
+<div ng-if="previewer.type == 'gdoc'" flex class="bg-lightgrey rel-box" layout="column">
+    <iframe flex ng-src="{{fileMeta.webViewLink | trustAsResourceUrl}}" frameborder="0"></iframe>
+</div>
+<!-- Other -->
+<div ng-if="previewer.type == 'other'" flex class="bg-lightgrey rel-box" layout="column" layout-align="center center">
+    <div layout="column" layout-align="center center">
+        <img class="m-b-15" style="width: 70px;" ng-src="/assets/images/vectors/filetype/{{fileMeta.fileType || 'folder'}}.svg" err-src="/assets/images/vectors/filetype/other.svg">
+        <div class="text-subtitle-thin text-black m-b-10">{{fileMeta.name}} <span ng-show="fileMeta.revDecimal" class="interpunct">Version {{fileMeta.revDecimal}}</span></div>
+    </div>
+    <div class="text-subtitle-thin m-b-10">{{fileMeta.client_modified | amTimeAgo}}<span ng-show="fileMeta.size > 0" class="interpunct">{{fileMeta.size | bytes}}</span></div>
+    <a target="_self" ng-href="api/v1/sync/download/{{fileMeta.endingUrl}}" download="{{fileMeta.name}}" class="text-green">Download File</a>
+</div>

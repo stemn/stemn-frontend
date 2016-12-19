@@ -1,0 +1,16 @@
+<div class="feed-widget-timeline" layout="column">
+    <div class="well-box" layout="column">
+        <div class="text-lightgrey" ng-show="query.results.length == 0">{{typeInfo.empty}} <a ng-show="showEdit" ng-click="typeInfo.inputFn($event, inputFnData)" class="text-green">Add one.</a></div>
+        <div class="feed-widget-item anim-repeat-stagger-fade" ng-repeat="item in query.results | limitTo: 3" layout="row">
+            <dot class="dot-lg">
+<!--               ng-class="{'green' : $index == 1}"-->
+                <md-tooltip md-direction="left" md-autohide= "true">Updated <span am-time-ago="item.data.updated"></span></md-tooltip>
+            </dot>
+            <a class="text" flex ui-sref="{{item.data.sref}}" layout="column">
+                <div>{{item.data.name}}</div>
+                <div class="text-lightgrey">{{item.data.owner.name}}</div>
+            </a>
+        </div>
+    </div>
+    <a ng-show="query.results.length > 3" ui-sref="{{typeInfo.moreSref}}" class="text-green text-right m-t-15">See more</a>
+</div>

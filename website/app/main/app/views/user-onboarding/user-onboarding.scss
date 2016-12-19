@@ -1,0 +1,24 @@
+.onboarding-edit-card{
+	position: relative;
+	background: rgba(255, 255, 255, 1);
+	margin-bottom: 30px;
+	.close{
+		position: absolute;
+		margin: 0px;
+		top: -20px;
+		right: -20px;
+	}
+}
+
+.userOnboarding{
+    p{
+        font-size: 13px;
+        color: #939393;
+    }
+
+    .notes{
+        font-size: 12px;
+        font-weight: 300;
+        color: #7e7e7e;
+    }
+}

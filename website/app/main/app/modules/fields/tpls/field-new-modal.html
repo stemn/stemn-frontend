@@ -1,0 +1,32 @@
+<md-dialog>
+    <form unsaved-warning-form novalidate name="NewFieldForm">
+        <md-dialog-content>
+            <div class="md-content-container content-xs">
+                <h1 class="md-headline" style="margin-top: 0px;">Add a new field</h1>
+                <br>
+                <br>
+                <md-input-container class="md-accent">
+                    <label>Field Name</label>
+                    <input name="name" ng-model="data.name"
+                    required ng-pattern="/[a-zA-Z0-9 !#.,'\-\(\)]*/" ng-keyup="checkFieldExists(data.name)">
+                    <div ng-messages="NewFieldForm.name.$error" ng-if="NewFieldForm.name.$dirty">
+                        <div ng-message="required">This is required.</div>
+                        <div ng-message="pattern">Sorry, that field name is invalid. You can't use the characters: / \ [ ]</div>
+                        <div ng-message="fieldexists">A field with that name already exists. Try another.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-accent">
+                    <label>Description</label>
+                    <textarea name="blurb" ng-model="data.blurb" columns="1" md-maxlength="500" focus-me="true"></textarea>
+                </md-input-container>
+                <div class="md-dialog-footer" layout="row">
+                    <div flex></div>
+                    <div>
+                        <md-button ng-click="cancel()">Cancel</md-button>
+                        <md-button style="margin-right: 0px;" class="md-accent md-raised" ng-disabled="NewFieldForm.$invalid" ng-click="save()">Save</md-button>
+                    </div>
+                </div>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

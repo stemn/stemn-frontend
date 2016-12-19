@@ -1,0 +1,14 @@
+<div hide-sm hide-md class="top-banner" ng-show="TopBannerService.banner.open && !TopBannerService.banner.closed">
+	<div layout="row" layout-align="center center" ng-show="!currentUser.isLoggedIn()">
+		<div style="margin-right: 10px;">New to STEMN?</div>
+		<md-button style="margin-right: 10px;" class="md-border" ng-click="signup($event)">Sign up</md-button>
+		<div style="margin-right: 5px;">or</div>
+		<md-button class="md-border" ng-click="learnMore()">Learn More</md-button>
+	</div>
+	<div layout="row" layout-align="center center" ng-show="!currentUser.verified">
+		<div>One quick thing: We need you to verify your email address by clicking the link we sent.</div>
+		<md-button style="margin-left: 10px;" class="md-border" ng-click="resendVerification()" ng-disabled="resendVerificationDisabled">Send it again</md-button>
+		<div ng-show="resendVerificationCount >= 2">(be sure to check your spam folder)</div>
+	</div>
+	<md-button class="md-icon-button close-btn" ng-click="TopBannerService.closeBanner()" aria-label="Close"><md-icon md-svg-icon="navigation:close"></md-icon></md-button>
+</div>
