@@ -1,1 +1,0 @@
-{"version":3,"sources":["app\\shared\\actions\\state.js"],"names":[],"mappings":";;;;;QAAgB,U,GAAA,U;AAAT,SAAS,UAAT,GAAsB;AAC3B,SAAO;AACL,UAAM,aADD;AAEL,aAAS;AAFJ,GAAP;AAID","file":"state.js","sourceRoot":"C:/Users/david/repositories/stemn-electron-2","sourcesContent":["export function clearState() {\n  return {\n    type: 'STATE/CLEAR',\n    payload: 'all'\n  };\n}\n"]}

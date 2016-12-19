@@ -1,1 +1,0 @@
-{"version":3,"sources":["app\\renderer\\main\\modules\\Mentions\\MentionsInput\\index.js"],"names":[],"mappings":";;;;;;;;;;;;;;;;;QAAO,a;QACA,O","file":"index.js","sourceRoot":"C:/Users/david/repositories/stemn-electron-2","sourcesContent":["export MentionsInput from './MentionsInput';\nexport Mention from './Mention';\n"]}
