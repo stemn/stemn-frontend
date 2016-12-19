@@ -70,34 +70,36 @@ export const get = ({key, url, name, params, responseType, extract}) => {
   // to disk and to the fileCache database.
   const getAndSet = () => {
     const downloadAndSave = ({url, dest, onProgress, extract}) => {
-      const download = new Promise((resolve, reject) => {
-        http({
-          url          : url,
-          params       : params,
-          responseType : 'stream'
-        }).then(response => {
-          const stream     = response.data;
-          const file       = extract
-                             ? unzip({ path : dest })
-                             : fs.createWriteStream(dest);
-          const total      = response.headers['content-length'];
-          let progress     = 0;
-          let progressPerc = 0;
-          stream.on('data', chunk => {
-            progress    += chunk.length;
-            progressPerc = parseInt((progress / total) * 100);
-            if(onProgress){onProgress(progressPerc)}
-          });
-          stream.on('error', response => {
-            fs.unlink(dest); // Delete the file async. (But we don't check the result)
-            reject(response)
-          });
-          stream.on('end', response => {
-            resolve({size: total})
-          });
-          stream.pipe(file)
+      const download = () => {
+        return new Promise((resolve, reject) => {
+          http({
+            url          : url,
+            params       : params,
+            responseType : 'stream'
+          }).then(response => {
+            const stream     = response.data;
+            const file       = extract
+                               ? unzip({ path : dest })
+                               : fs.createWriteStream(dest);
+            const total      = response.headers['content-length'];
+            let progress     = 0;
+            let progressPerc = 0;
+            stream.on('data', chunk => {
+              progress    += chunk.length;
+              progressPerc = parseInt((progress / total) * 100);
+              if(onProgress){onProgress(progressPerc)}
+            });
+            stream.on('error', response => {
+              fs.unlink(dest); // Delete the file async. (But we don't check the result)
+              reject(response)
+            });
+            stream.on('end', response => {
+              resolve({size: total})
+            });
+            stream.pipe(file)
+          })
         })
-      })
+      }
       
       const renameFiles = (response) => {
         // We create a new promise which we resolve with the 'response' from  the last promise.
