@@ -43,17 +43,16 @@ does, we return it. Otherwise we download it, save it
 and then return it.
 *******************************************************/
 export const get = ({key, url, name, params, responseType, extract}) => {
-  console.log({key, url, name, params, responseType, extract});
-  const cacheEntry = fileCache[key];
-
+  // This will process and return the result based on the 'responseType' indicated
   const processResult = () => {
     // Return either the file data or the file path
     // depending on the 'responseType'
     if(responseType == 'path'){
-      return {data: path.join(folderPath, cacheEntry.name)}
+      const filePath = path.join(folderPath, fileCache[key].name);
+      return { data: filePath }
     }
     else{
-      return fsPromise.readFile(path.join(folderPath, cacheEntry.name)).then(response => {
+      return fsPromise.readFile(path.join(folderPath, fileCache[key].name)).then(response => {
         if(responseType == 'json'){
           // Return string
           return {data: response.toString()}
@@ -66,73 +65,64 @@ export const get = ({key, url, name, params, responseType, extract}) => {
     }
   }
 
-  // This will get a file from the server and save it
-  // to disk and to the fileCache database.
+  // This will get a file from the server and save it to disk
+  // and to the fileCache database.
   const getAndSet = () => {
-    const downloadAndSave = ({url, dest, onProgress, extract}) => {
-      const download = () => {
-        return new Promise((resolve, reject) => {
-          http({
-            url          : url,
-            params       : params,
-            responseType : 'stream'
-          }).then(response => {
-            const stream     = response.data;
-            const file       = extract
-                               ? unzip({ path : dest })
-                               : fs.createWriteStream(dest);
-            const total      = response.headers['content-length'];
-            let progress     = 0;
-            let progressPerc = 0;
-            stream.on('data', chunk => {
-              progress    += chunk.length;
-              progressPerc = parseInt((progress / total) * 100);
-              if(onProgress){onProgress(progressPerc)}
-            });
-            stream.on('error', response => {
-              fs.unlink(dest); // Delete the file async. (But we don't check the result)
-              reject(response)
-            });
-            stream.on('end', response => {
-              resolve({size: total})
-            });
-            stream.pipe(file)
-          })
-        })
-      }
-      
-      const renameFiles = (response) => {
-        // We create a new promise which we resolve with the 'response' from  the last promise.
-        return new Promise((resolve, reject) => {
-          // We want to rename any svf/png files model.svf and model.png to make them easy to access
-          fsPromise.readdir(dest).then(files => {
-            // This returns the part folders such as '1', '2' etc
-            const renameSvfAndPng = (subFolderPath) => {
-              // Read the contents of the subfolder, this will contain the svf and png
-              return fsPromise.readdir(subFolderPath).then(files => {
-                const filesToRename = files.filter(fileName => fileName.endsWith('.svf') || fileName.endsWith('png'));
-                const renameFile = (fileName) => {
-                  const extension = fileName.substr(fileName.lastIndexOf('.') + 1);
-                  return fsPromise.rename(`${subFolderPath}/${fileName}`, `${subFolderPath}/model.${extension}`)
-                }
-                return Promise.all(filesToRename.map(renameFile))
-              })
-            }
-            files.map(folderName => renameSvfAndPng(`${dest}/${folderName}`))
-          }).then(() => resolve(response)).catch(reject)
-        })
-      }
 
-      return extract
-        ? download().then(renameFiles)
-        : download()
+    // This will download and save a file to the file cache
+    const downloadAndSave = ({url, dest, onProgress, extract}) => {
+      return new Promise((resolve, reject) => {
+        http({
+          url          : url,
+          params       : params,
+          responseType : 'stream'
+        }).then(response => {
+          const stream     = response.data;
+          const file       = extract
+                             ? unzip({ path : dest })
+                             : fs.createWriteStream(dest);
+          const total      = response.headers['content-length'];
+          let progress     = 0;
+          let progressPerc = 0;
+          stream.on('data', chunk => {
+            progress    += chunk.length;
+            progressPerc = parseInt((progress / total) * 100);
+            if(onProgress){onProgress(progressPerc)}
+          });
+          stream.on('error', response => {
+            fs.unlink(dest); // Delete the file async. (But we don't check the result)
+            reject(response)
+          });
+          stream.on('end', response => {
+            resolve({size: total})
+          });
+          stream.pipe(file)
+        })
+      })
     };
 
-    return downloadAndSave({
-      url: url,
-      dest: path.join(folderPath, name),
-      extract: extract
-    }).then(response => {
+    // This will rename any svf/png files model.svf and model.png to make them easy to access
+    const renameFiles = ({dest}) => {
+      return fsPromise.readdir(dest).then(files => {
+        // This returns the part folders such as '1', '2' etc
+        const renameSvfAndPng = (subFolderPath) => {
+          // Read the contents of the subfolder, this will contain the svf and png
+          return fsPromise.readdir(subFolderPath).then(files => {
+            const filesToRename = files.filter(fileName => fileName.endsWith('.svf') || fileName.endsWith('png'));
+            const renameFile = (fileName) => {
+              const extension = fileName.substr(fileName.lastIndexOf('.') + 1);
+              return fsPromise.rename(`${subFolderPath}/${fileName}`, `${subFolderPath}/model.${extension}`)
+            }
+            return Promise.all(filesToRename.map(renameFile))
+          })
+        }
+        return files.map(folderName => renameSvfAndPng(`${dest}/${folderName}`))
+      })
+    }
+
+    // This will save the file meta into the json store
+    // The response from 'downloadAndSave' is passed in here so we have access to the file size
+    const saveToJsonStore = (response) => {
       const { size } = response;
       // Save the info to the cache
       fileCache[key] = {
@@ -141,13 +131,30 @@ export const get = ({key, url, name, params, responseType, extract}) => {
         size      : size
       }
       // Save the cache (and return the file data)
-      return jsonStorage.set('fileCache', fileCache).then(processResult);
+      return jsonStorage.set('fileCache', fileCache)
+    }
+
+    return downloadAndSave({
+      url: url,
+      dest: path.join(folderPath, name),
+      extract: extract
+    }).then(response => {
+      // If extract is true, we rename the files, then save them to the store and process
+      if(extract){
+        return renameFiles({dest: path.join(folderPath, name)}).then(saveToJsonStore(response).then(processResult))
+      }
+      // Otherwise, we just save to the store and process
+      else{
+        return saveToJsonStore(response).then(processResult)
+      }
     })
   }
 
   // If we have a cache entry, get the file
-  return cacheEntry
-  ? fsPromise.stat(path.join(folderPath, cacheEntry.name)).then(processResult).catch(getAndSet)
+  return fileCache[key]
+  // If the file is in the json store, get it and process it. If we cannot find it on disk, we getAndSet
+  ? fsPromise.stat(path.join(folderPath, fileCache[key].name)).then(processResult).catch(getAndSet)
+  // Otherwise, the file does not exist so we getAndSet straight away
   : getAndSet();
 }
 
@@ -185,5 +192,5 @@ export const makeSpace = () => {
 //    params: { revisionId: '5850dfed78e6fd11242617d4' },
 //    responseType: 'path',
 //    extract: true
-//  })
-//}, 100)
+//  }).then(response => console.log('response1', response))
+//}, 1000)
