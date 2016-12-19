@@ -6,6 +6,7 @@ import http                 from 'axios';
 import pify                 from 'pify';
 import electronJsonStorage  from 'electron-json-storage';
 import { sumBy, values }    from 'lodash';
+import { Extract as unzip } from 'unzipper';
 const jsonStorage           = pify(electronJsonStorage);
 const fsPromise             = pify(fs);
 
@@ -41,7 +42,8 @@ This will check if a file exists in the cache, if it
 does, we return it. Otherwise we download it, save it
 and then return it.
 *******************************************************/
-export const get = ({key, url, name, params, responseType}) => {
+export const get = ({key, url, name, params, responseType, extract}) => {
+  console.log({key, url, name, params, responseType, extract});
   const cacheEntry = fileCache[key];
 
   const processResult = () => {
@@ -67,15 +69,17 @@ export const get = ({key, url, name, params, responseType}) => {
   // This will get a file from the server and save it
   // to disk and to the fileCache database.
   const getAndSet = () => {
-    const downloadAndSave = ({url, dest, onProgress}) => {
-      return new Promise((resolve, reject) => {
+    const downloadAndSave = ({url, dest, onProgress, extract}) => {
+      const download = new Promise((resolve, reject) => {
         http({
           url          : url,
           params       : params,
           responseType : 'stream'
         }).then(response => {
           const stream     = response.data;
-          const file       = fs.createWriteStream(dest);
+          const file       = extract
+                             ? unzip({ path : dest })
+                             : fs.createWriteStream(dest);
           const total      = response.headers['content-length'];
           let progress     = 0;
           let progressPerc = 0;
@@ -91,13 +95,38 @@ export const get = ({key, url, name, params, responseType}) => {
           stream.on('end', response => {
             resolve({size: total})
           });
-          stream.pipe(file);
+          stream.pipe(file)
         })
+      })
+      
+      return download.then(() => {
+        if (extract) {
+          // We want to rename any svf/png files model.svf and model.png to make them easy to access
+          return fsPromise.readdir(dest).then(files => {
+            // This returns the part folders such as '1', '2' etc
+            const renameSvfAndPng = (subFolderPath) => {
+              // Read the contents of the subfolder, this will contain the svf and png
+              return fsPromise.readdir(subFolderPath).then(files => {
+                files.forEach(fileName => {
+                  // If the file is a svf or png, we rename it
+                  if(fileName.endsWith('.svf')){
+                    fs.renameSync(`${subFolderPath}/${fileName}`, `${subFolderPath}/model.svf`)
+                  }
+                  else if(fileName.endsWith('.png')){
+                    fs.renameSync(`${subFolderPath}/${fileName}`, `${subFolderPath}/model.png`)
+                  }
+                })
+              })
+            }
+            files.map(folderName => renameSvfAndPng(`${dest}/${folderName}`))
+          })
+        }
       })
     };
     return downloadAndSave({
       url: url,
-      dest: path.join(folderPath, name)
+      dest: path.join(folderPath, name),
+      extract: extract
     }).then(response => {
       const { size } = response;
       // Save the info to the cache
@@ -141,3 +170,15 @@ export const checkSpace = () => {
 export const makeSpace = () => {
   // This will delete files in excess
 }
+
+
+//setTimeout(()=>{
+//  get({
+//    key: '5850dfeda81f36ec5a28ff3e-5850dfed78e6fd11242617d4',
+//    url: '/api/v1/sync/render/5850df2378e6fd11242617c7/5850dfeda81f36ec5a28ff3e',
+//    name: '5850dfeda81f36ec5a28ff3e-5850dfed78e6fd11242617d4',
+//    params: { revisionId: '5850dfed78e6fd11242617d4' },
+//    responseType: 'path',
+//    extract: true
+//  })
+//}, 100)
