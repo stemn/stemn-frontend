@@ -99,30 +99,33 @@ export const get = ({key, url, name, params, responseType, extract}) => {
         })
       })
       
-      return download.then(() => {
-        if (extract) {
+      const renameFiles = (response) => {
+        // We create a new promise which we resolve with the 'response' from  the last promise.
+        return new Promise((resolve, reject) => {
           // We want to rename any svf/png files model.svf and model.png to make them easy to access
-          return fsPromise.readdir(dest).then(files => {
+          fsPromise.readdir(dest).then(files => {
             // This returns the part folders such as '1', '2' etc
             const renameSvfAndPng = (subFolderPath) => {
               // Read the contents of the subfolder, this will contain the svf and png
               return fsPromise.readdir(subFolderPath).then(files => {
-                files.forEach(fileName => {
-                  // If the file is a svf or png, we rename it
-                  if(fileName.endsWith('.svf')){
-                    fs.renameSync(`${subFolderPath}/${fileName}`, `${subFolderPath}/model.svf`)
-                  }
-                  else if(fileName.endsWith('.png')){
-                    fs.renameSync(`${subFolderPath}/${fileName}`, `${subFolderPath}/model.png`)
-                  }
-                })
+                const filesToRename = files.filter(fileName => fileName.endsWith('.svf') || fileName.endsWith('png'));
+                const renameFile = (fileName) => {
+                  const extension = fileName.substr(fileName.lastIndexOf('.') + 1);
+                  return fsPromise.rename(`${subFolderPath}/${fileName}`, `${subFolderPath}/model.${extension}`)
+                }
+                return Promise.all(filesToRename.map(renameFile))
               })
             }
             files.map(folderName => renameSvfAndPng(`${dest}/${folderName}`))
-          })
-        }
-      })
+          }).then(() => resolve(response)).catch(reject)
+        })
+      }
+
+      return extract
+        ? download().then(renameFiles)
+        : download()
     };
+
     return downloadAndSave({
       url: url,
       dest: path.join(folderPath, name),
