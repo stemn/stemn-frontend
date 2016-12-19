@@ -1,0 +1,17 @@
+<div class="row-view" layout="row" layout-align="start center">
+    <div class="avatar">
+        <organisation-image src="data.picture" image-id="{{data._id}}" image-stub="{{data.stub}}"></organisation-image>
+    </div>
+    <div flex>
+        <div class="md-subhead" ng-show="showRole">
+            <span  ng-hide="showEdit">{{data.role}}</span>
+            <input ng-show="showEdit" class="editable" type="text" ng-model="data.role" placeholder="Role" name="role">
+        </div>
+        <a class="text-green" ui-sref="app.organisation.overview({'stub' : data.stub})">{{data.name}}</a>
+        <div class="text-lightgrey">{{data.blurb | words: 20}}</div>
+    </div>
+    <div>
+        <stat-button ng-hide="showEdit" hide-stat="true" size="sm" hide-icon="true" type="follow" parent-type="organisation" parent-id="{{data._id}}" count="data.followers"></stat-button>
+        <md-button   ng-show="showEdit && !data.owner" aria-label="delete" class="md-warn md-border md-sm md-border md-lower no-hover" ng-click="deleteFn()">Delete</md-button>
+    </div>
+</div>

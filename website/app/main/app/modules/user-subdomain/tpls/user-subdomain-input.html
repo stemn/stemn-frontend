@@ -1,0 +1,43 @@
+<div ng-if="displayType != 'form'">
+    <form class="user-subdomain-input inline" name="forms.GetSubdomainForm" novalidate ng-submit="submit()">
+        <div layout="row" class="input-box md-whiteframe-z2">
+            <div layout="row" class="domain" layout-align="start center">
+                <input name="subdomain" required minlength="5" maxlength="40" ng-model="formModel.username" pu-elastic-input style="text-align:right;" placeholder="yourname" ng-keyup="checkUsernameExists(formModel.username)">
+                <div>.stemn.com</div>
+            </div>
+            <md-button type="submit" ng-class="forms.GetSubdomainForm.$valid || !forms.GetSubdomainForm.$dirty ? 'md-accent' : 'md-warn'" class="md-raised md-flat md-lg no-margin md-cornered">
+                <span hide-gt-md>Create</span>
+                <span hide-sm hide-md>Get Started</span>
+            </md-button>
+        </div>
+        <div class="messages" ng-messages="forms.GetSubdomainForm.subdomain.$error" ng-if="forms.GetSubdomainForm.subdomain.$dirty">
+            <div ng-message="required"><dot class="red"></dot>This is required.</div>
+            <div ng-message="minlength"><dot class="red"></dot>Your domain must be more than 5 characters.</div>
+            <div ng-message="maxlength"><dot class="red"></dot>Try keep it under 20 characters.</div>
+            <div ng-message="nameexists"><dot class="red"></dot>That name is already taken</div>
+        </div>
+        <div class="messages" ng-if="forms.GetSubdomainForm.$valid">
+            <dot class="green"></dot>That domain is available, you're good to go!
+        </div>
+        <div ng-if="formModel.username && loggedIn" class="messages" style="margin-top: 20px">Your profile will also be available at: <span class="underlined">stemn.com/users/{{formModel.username}}</span></div>
+    </form>
+</div>
+<div ng-if="displayType == 'form'">
+    <form name="forms.GetSubdomainForm" novalidate ng-submit="submit()">
+        <p>Your profile will also be available at: <span class="underlined">stemn.com/users/{{formModel.username}}</span></p>
+        <md-input-container class="md-accent m-t-15">
+            <label>Username</label>
+            <input name="subdomain" required minlength="5" maxlength="40" ng-model="formModel.username" ng-keyup="checkUsernameExists(formModel.username)">
+            <div ng-messages="forms.GetSubdomainForm.subdomain.$error" ng-if="forms.GetSubdomainForm.subdomain.$dirty">
+                <div ng-message="required">This is required.</div>
+                <div ng-message="minlength">Your domain must be more than 5 characters.</div>
+                <div ng-message="maxlength">Try keep it under 20 characters.</div>
+                <div ng-message="nameexists">That name is already taken</div>
+            </div>
+        </md-input-container>
+        <div layout="row">
+            <div flex></div>
+            <md-button type="submit" class="md-raised md-accent md-cornered md-flat m-0 md-md" ng-disabled="forms.GetSubdomainForm.$invalid">Update username</md-button>
+        </div>
+    </form>
+</div>

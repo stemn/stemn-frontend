@@ -1,0 +1,37 @@
+<div layout="row" flex style="height: 100vh;">
+    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z4" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+        <a class="header" ui-sref="app.usage">
+            <img src="images/logo-Trans-Rect-600.png" alt="" style="height: 80px; margin-bottom: 15px;">
+            <div>
+                 <img src="images/text-white.png" alt="" style="width: 150px;">
+            </div>
+        </a>
+
+        <md-content flex style="background: transparent;">
+            <md-button ui-sref-active="active" ui-sref="app.campaigns">
+                Campaigns
+            </md-button>
+            <div ng-hide="Authentication.userData.isContractor">
+                <toggle-menu section="section" ng-repeat="section in menu"></toggle-menu>
+            </div>
+            <div flex></div>
+        </md-content>
+        <md-button authentication-logout ng-show="Authentication.isLoggedIn">
+            Logout
+        </md-button>
+    </md-sidenav>
+    <div style="max-width: 100vw;" layout="column" flex id="content">
+        <md-toolbar layout="row" layout-align="start center" class="md-whiteframe-z3" hide-gt-sm style="z-index: 10;">
+            <div flex></div>
+            <md-button authentication-logout ng-show="Authentication.isLoggedIn">Logout</md-button>
+            <md-button ng-click="toggleSidenav()" class="md-icon-button" aria-label="menu">
+                <ng-md-icon icon="{{menuIcon}}" style="fill: white" options='{"duration": 300}'></ng-md-icon>
+            </md-button>
+        </md-toolbar>
+        <md-content layout="column" flex class="md-padding main-content-container" style="background: rgba(0, 0, 0, 0.06);">
+            <ui-view flex></ui-view>
+            <transition-overlay></transition-overlay>
+        </md-content>
+    </div>
+</div>
+<page-loading-overlay></page-loading-overlay>

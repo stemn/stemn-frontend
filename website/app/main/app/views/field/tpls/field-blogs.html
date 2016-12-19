@@ -1,0 +1,9 @@
+<div class="line-divider-bottom m-b-40" layout="row">
+    <div class="md-subhead" flex>Newest {{field.name}} Updates</div>
+</div>
+<card-feed parent-id="{{field._id}}" parent-type="{{field.type}}" type="blogs" size="12" items="projectItems"></card-feed>
+<!-- FIELDS -->
+<div class="line-divider-bottom m-b-15" layout="row">
+    <div class="md-subhead" flex>Related Fields</div>
+</div>
+<related class="m-b-60" parent-type="field" parent-id="{{field._id}}" type="field"></related>

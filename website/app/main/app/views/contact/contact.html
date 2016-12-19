@@ -1,0 +1,40 @@
+<bannerheader colour="['#FF7043', '#AB47BC']">
+    <h1>Let's have a chat</h1>
+</bannerheader>
+<md-container class="static-page">
+    <h3 class="md-headline">We're all ears!</h3>
+    <br>
+     <form name="forms.contactForm" ng-submit="submitContactForm()" novalidate>
+        <md-input-container class="md-accent">
+            <label>What do we call you?</label>
+            <input name="name" ng-model="contact.from_name"
+            required>
+            <div ng-messages="forms.contactForm.name.$error" ng-if="forms.contactForm.name.$dirty">
+                <div ng-message="required">This is required.</div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-accent">
+            <label>Your email?</label>
+            <input name="email" ng-model="contact.from_email"
+            type="email" required>
+            <div ng-messages="forms.contactForm.email.$error" ng-if="forms.contactForm.email.$dirty">
+                <div ng-message="required">This is required.</div>
+                <div ng-message="email">Not a valid email.</div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-accent">
+            <label>What can we do for you?</label>
+            <textarea name="message" ng-model="contact.text"
+            required ng-minlength="20"></textarea>
+            <div ng-messages="forms.contactForm.message.$error" ng-if="forms.contactForm.message.$dirty">
+                <div ng-message="required">This is required.</div>
+                <div ng-message="minlength">Bit longer than that please.</div>
+            </div>
+        </md-input-container>
+        <alert ng-if="alert.show" class="anim-slide-alert" type="{{alert.type}}">{{alert.message}}</alert>
+        <div layout="row">
+            <div flex></div>
+            <md-button type="submit" class="md-accent md-raised" ng-disabled="forms.contactForm.$invalid">Send</md-button>
+        </div>
+    </form>
+</md-container>

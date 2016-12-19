@@ -1,0 +1,36 @@
+<md-dialog aria-label="dialog">
+    <form style="width:330px">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 flex>Select Chart Details</h2>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <ng-md-icon icon="close" aria-label="Close dialog" style="fill: white"></ng-md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content style="max-height:810px; padding: 20px 50px;">
+            <h4 class="m-b-5">From:</h4>
+            <md-datepicker ng-model="selectedChartTime.from" md-placeholder="Enter date"></md-datepicker>
+            <h4 class="m-b-5">To:</h4>
+            <md-datepicker ng-model="selectedChartTime.to" md-placeholder="Enter date"></md-datepicker>
+            <h4 class="m-b-5">Resolution:</h4>
+            <md-input-container class="m-0 p-t-0" style="padding-left: 65px; height: 30px;">
+                <md-select placeholder="Select" ng-model="selectedChartOptions.timeResolution" style="font-size: 14px; width:120px; min-width:120px; text-transform: capitalize">
+                    <md-option ng-repeat="item in resolutionObject" ng-value="{{item.value}}" style="text-transform: capitalize">{{item.name}}</md-option>
+                </md-select>
+            </md-input-container>
+
+        </md-dialog-content>
+
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button ng-click="cancel()">
+                Cancel
+            </md-button>
+            <md-button class="md-primary" ng-click="save()">
+                Save
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -1,0 +1,27 @@
+<md-dialog>
+    <form novalidate name="LinkForm" ng-submit="save()">
+        <md-dialog-content layout="row" layout-align="center center">
+            <div style="width: 500px;">
+                <h1 class="md-headline" style="margin-top: 0px; margin-bottom: 40px;">What's the link?</h1>
+                    <md-input-container class="md-accent">
+                        <label>Youtube/Vimeo Url</label>
+                        <input name="link" ng-model="link" type="text" focus-me="true"
+                        required ng-minlength="10" ng-maxlength="200" ng-pattern="/(\byoutu)|(\bvimeo\b)/">
+                        <div ng-messages="LinkForm.link.$error" ng-if="LinkForm.link.$dirty">
+                            <div ng-message="required">This is required.</div>
+                            <div ng-message="minlength">A little short don't you think?</div>
+                            <div ng-message="maxlength">Wow, that is a long Url... Too long...</div>
+                            <div ng-message="pattern">Sorry, that is not a valid youtube/vimeo url.</div>
+                        </div>
+                    </md-input-container>
+            </div>
+        </md-dialog-content>
+        <div class="md-actions" layout="row">
+            <div flex></div>
+            <div>
+                <md-button type="button" ng-click="cancel()">Cancel</md-button>
+                <md-button type="submit" class="md-accent md-raised" ng-disabled="LinkForm.$invalid">Insert</md-button>
+            </div>
+        </div>
+    </form>
+</md-dialog>

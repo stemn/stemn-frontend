@@ -1,0 +1,20 @@
+<md-radio-group ng-model="project.permissions.projectType">
+    <md-radio-button value="public" class="md-accent m-l-0">
+        <div layout="row">
+            <md-icon class="m-r-10 s30" md-svg-icon="public" style="color: #bbe8bb;"></md-icon>
+            <div>
+                <div class="text-subtitle-thin text-black">Public Project (recommended)</div>
+                <div class="text-lightgrey">Everyone can see this project. You choose who can collaborate.</div>
+            </div>
+        </div>
+    </md-radio-button>
+    <md-radio-button value="private" class="md-accent m-l-0">
+        <div layout="row">
+            <md-icon class="m-r-10 s30" md-svg-icon="lock-outline" style="color: #f5dbab"></md-icon>
+            <div>
+                <div class="text-subtitle-thin text-black">Private Project</div>
+                <div class="text-lightgrey">You choose who can view and who can collaborate.</div>
+            </div>
+        </div>
+    </md-radio-button>
+</md-radio-group>

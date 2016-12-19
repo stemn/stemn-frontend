@@ -1,0 +1,21 @@
+.user-row{
+	padding: 10px 10px;
+	&:hover{
+		background: rgba(0, 0, 0, 0.03);
+	}
+	.name{
+		padding-right: 5px;
+	}
+}
+
+[display-users-modal]{
+	cursor: pointer;
+}
+
+.mini-avatar{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+//    margin-right: 15px;
+}

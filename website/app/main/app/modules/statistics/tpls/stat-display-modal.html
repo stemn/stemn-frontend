@@ -1,0 +1,26 @@
+<md-dialog class="md-full-screen">
+    <md-toolbar style="background: white;">
+        <div class="md-toolbar-tools">
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-icon="navigation:close" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content layout="row" layout-align="center start">
+        <div class="md-content-container content-sm">
+            <div layout="row">
+                <div class="md-headline" flex>{{data.title}}</div>
+                <stat-button parent-id="{{data.parentId}}" parent-type="{{data.parentType}}" type="{{data.type}}" count="numLikes" ng-click="refresh()"></stat-button>
+            </div>
+            <md-divider class="md-md"></md-divider>
+            <stat-display    parent-id="{{data.parentId}}" parent-type="{{data.parentType}}" type="{{data.type}}" refresh-callback="refresh"></stat-display>
+        </div>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <div flex></div>
+        <div>
+            <md-button class="md-accent md-raised" ng-click="cancel()">Back</md-button>
+        </div>
+    </div>
+</md-dialog>

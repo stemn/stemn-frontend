@@ -1,0 +1,129 @@
+.MapView{
+    $width: 350px;
+    $left : 15px;
+    $header-height: 50px;
+    $mobile-header-height: 64px;
+    .content{
+        position: absolute;
+        z-index: 20;
+//        top: -49px;
+        top: 10px;
+        left: $left;
+        width: $width;
+        margin-bottom: 100px;
+        @media (max-width: 960px) {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            .header{
+                height: $mobile-header-height;
+                background: rgb(22, 22, 22);
+                .tab{
+                    padding: 12px 10px;
+                    height: $mobile-header-height;
+                    &.active{
+                        background: black;
+                        color: white;
+                    }
+                }
+                .geolocate{
+                    position: absolute;
+                    right: -4px;
+                    top: 8px;
+                    md-icon{
+                        color: white;
+                    }
+                }
+            }
+            .logo{
+                height: $mobile-header-height;
+                img{
+                    padding: 5px;
+                    height: $mobile-header-height !important;
+                }
+            }
+        }
+    }
+    .map{
+        position: fixed;
+        background: #E5E3DF;
+        height: 105vh;
+        top: 0;
+        right: 0px;
+        width: 100%;
+    }
+    .header{
+        background: rgb(247, 247, 247);
+        position: relative;
+        z-index: 21;
+        height: $header-height;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+        .logo{
+            margin: 0px;
+            border-radius: 0px;
+            min-width: 0px;
+            padding: 0px;
+            img{
+                padding: 5px;
+                height: $header-height;
+            }
+        }
+        .tab{
+            margin: 0px;
+            border-radius: 0px;
+            color: #9C9C9C;
+            border: 1px solid;
+            border-color: transparent;
+            height: $header-height;
+            padding: 6px 10px;
+            min-width: 0px;
+            &.active{
+                border-color: rgba(0, 0, 0, 0.07);
+                border-bottom: 1px solid transparent;
+                color: black;
+                background: rgba(255, 255, 255, 1);
+            }
+        }
+        .geolocate{
+            position: absolute;
+            right: -4px;
+            top: 0;
+            md-icon{
+                color: rgba(0, 0, 0, 0.25);
+            }
+        }
+    }
+    .results{
+        background: white;
+        margin-top: -1px;
+    }
+    .result{
+        overflow: hidden;
+        padding: 15px 15px;
+        border-top: 1px solid rgba(0, 0, 0, 0.07);
+        .picture{
+            border: 1px solid rgba(0, 0, 0, 0.07);
+            margin-left: 10px;
+            width: 75px;
+            height: 75px;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            &.contain{
+                background-size: contain;
+            }
+        }
+        .text{
+            overflow: hidden;
+            height: 75px;
+        }
+    }
+    .loadMore{
+        border-top: 1px solid rgba(0, 0, 0, 0.07);
+        a{
+            padding: 10px 15px;
+        }
+    }
+}

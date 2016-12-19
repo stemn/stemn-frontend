@@ -1,0 +1,7 @@
+<div ng-if="data.length > 0">
+    <h3 class="md-subhead">{{typeInfo.title}}</h3>
+    <md-divider class="m-b-30"></md-divider>
+    <div ng-repeat="result in data">
+        <feed-item data="result" item-type="{{type}}" size="sm"></feed-item>
+    </div>
+</div>

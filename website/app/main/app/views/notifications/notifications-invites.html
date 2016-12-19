@@ -1,0 +1,10 @@
+<h2 class="md-display-1">Accept Invites</h2>
+<div layout="column" layout-gt-md="row" class="md-row" infinite-scroll="query.more()" infinite-scroll-distance="1" infinite-scroll-disabled="query.loading || query.noMoreResults">
+    <div class="md-col m-b-30" flex="100" flex-gt-md="40">
+        <div class="text-subtitle-thin">If you are invited to a project or organisations, your invite will appear here. You can <a class="text-green underlined" ui-sref="app.usersettings.notifications({'#':'Mentions'})">change settings here.</a></div>
+    </div>
+    <div class="md-col" flex="100" flex-gt-md="60">
+        <notification-cards query="query" type="['added-project', 'added-organisation', 'invite-accepted']"></notification-cards>
+        <div ng-show="query.results.length == 0" class="card-z1 text-no-results text-center">You have no invite notifications yet.</div>
+    </div>
+</div>

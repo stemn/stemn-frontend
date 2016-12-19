@@ -1,0 +1,11 @@
+<div class="card-feed m-b-60 rel-box overflow-x-box">
+    <div layout="row" layout-wrap style="margin: 0 -15px;">
+        <creation-card flex="33" flex-md="50" flex-sm="100" style="padding: 0 15px 30px;" ng-repeat="item in query.results" entity="item.data"></creation-card>
+    </div>
+    <div ng-hide="query.notEnoughResults || hideMore">
+        <a class="well-button" layout="row" layout-align="center center" ng-click="query.more()" ng-disabled="query.noMoreResults">
+            <div>{{query.noMoreResults ? messageNoMore : messageMore}}</div>
+        </a>
+    </div>
+    <loading-overlay ng-if="query.loading" ng-class="{'translucent' : query.results.length > 0}"></loading-overlay>
+</div>

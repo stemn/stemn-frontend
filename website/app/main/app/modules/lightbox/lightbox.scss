@@ -1,0 +1,33 @@
+.carousel-modal {
+    position: relative;
+    img {
+        background: rgba(255, 255, 255, 1);
+        max-height: 80vh;
+        max-width: 80vw;
+    }
+    .controls{
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        md-icon{
+            width: 50px;
+            height: 50px;
+        }
+        >div{
+            opacity: 0.2;
+            height: 100%;
+            transition: opacity 0.2s ease;
+            &:hover{
+                opacity: 1;
+            }
+        }
+    }
+}
+
+[lightbox=true] {
+	cursor: -webkit-zoom-in;
+	cursor: -moz-zoom-in;
+    cursor: zoom-in;
+}

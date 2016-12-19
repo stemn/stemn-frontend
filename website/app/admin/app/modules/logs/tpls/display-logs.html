@@ -1,0 +1,16 @@
+<md-content class="scroll-container" style="max-height:600px; padding: 0px;">
+    <div infinite-scroll="getLogs()" infinite-scroll-distance="1" infinite-scroll-container="'.scroll-container'" infinite-scroll-disabled="loading">
+        <div class="log-row" ng-repeat="event in logs | orderBy: '-date'" layout="row" layout-align="start center">
+            <core-entity-picture entity-id="{{event.parentId || event.entityId}}" entity-type="{{event.parentType || event.entityType}}"></core-entity-picture>
+            <div flex layout="column">
+                <div class="ellipsis bold">
+                    <core-entity-row entity-id="{{event.parentId || event.entityId}}" entity-type="{{event.parentType || event.entityType}}"></core-entity-row>
+                </div>
+                <div layout="row">
+                    <div class="text-lightgrey">{{event.date | amTimeAgo}}</div>
+                </div>
+            </div>
+            <div>[{{event.event}}]</div>
+        </div>
+    </div>
+</md-content>

@@ -1,0 +1,11 @@
+<div class="section-container" ng-show="users">
+	<div class="title-row" layout="row" style="margin-bottom: 10px;">
+		<a href="" class="active">Recent Users (24h)</a>
+		<div flex></div>
+		<a ng-click="more()" ng-disabled="noMoreResults">More</a>
+	</div>
+    <a ng-repeat="userId in users" ui-sref="app.user.profile({'stub': user.stub})" class="anim-repeat-stagger-fade">
+        <user-icon class="inline" style="padding: 0 7px 7px 0;" user-id="{{userId}}" user="user"></user-icon>
+        <md-tooltip>{{user.name}}</md-tooltip>
+    </a>
+</div>

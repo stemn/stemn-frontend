@@ -1,0 +1,142 @@
+<dynamic-footer>
+    <div layout="row" layout-align="center" ng-if="project.permissions.projectType == 'private'">
+        <!-- PRIVATE FOOTER -->
+        <div ng-if="showEdit" class="md-content-container md-no-padding" layout="row" layout-align="start center">
+            <div flex class="ellipsis text-lightgrey"><b>Important:</b> This is a private project.</div>
+            <md-button class="md-grey md-border md-cornered" ui-sref="app.project.settings.team({'#':'projectType'})">Visibility</md-button>
+            <md-button class="md-accent md-border md-cornered m-0" ui-sref="app.project.settings.options">Settings</md-button>
+        </div>
+
+        <!-- PUBLISH FOOTER PUBLIC -->
+        <div ng-if="!project.published && !showEdit" class="md-content-container md-no-padding" layout="column" layout-align="center">
+            <div class="ellipsis text-lightgrey text-center">You have been given a private link to this page. Only people with the link can see it.</div>
+        </div>
+    </div>
+    <div layout="row" layout-align="center" ng-if="project.permissions.projectType == 'public'">
+        <!-- PUBLIC FOOTER -->
+        <div ng-if="project.published && !showEdit" class="md-content-container md-no-padding" layout="row" layout-align="start center">
+            <stat-button display-style="circle" type="like"   parent-type="{{project.type}}" parent-id="{{project._id}}" count="project.likes" class="green"></stat-button>
+            <a stat-display-modal               type="like"   parent-type="{{project.type}}" parent-id="{{project._id}}" class="text-lightgrey count">{{project.likes || 0}}</a>
+            <md-button class="md-icon-button md-sm m-0" aria-label="comments" scroll-highlight="reply">
+                <md-tooltip md-direction="top" md-autohide="true">Comment</md-tooltip>
+                <md-icon md-svg-icon="response"></md-icon>
+            </md-button>
+            <a class="text-lightgrey count" scroll-highlight="responses">{{project.posts.length || 0}}</a>
+            <stat-button hide-sm entity-text="project"  type="follow" parent-type="{{project.type}}" parent-id="{{project._id}}" count="project.followers" class="lg m-l-15"></stat-button>
+            <div flex></div>
+            <social-share-buttons></social-share-buttons>
+        </div>
+
+        <!-- PRIVATE FOOTER -->
+        <div ng-if="project.published && showEdit" class="md-content-container md-no-padding" layout="row" layout-align="start center">
+            <stat-button display-style="circle" type="like"   parent-type="{{project.type}}" parent-id="{{project._id}}" count="project.likes" class="green"></stat-button>
+            <a stat-display-modal               type="like"   parent-type="{{project.type}}" parent-id="{{project._id}}" class="text-lightgrey count">{{project.likes || 0}}</a>
+            <md-button class="md-icon-button md-sm m-0" aria-label="comments" scroll-highlight="reply">
+                <md-tooltip md-direction="top" md-autohide="true">Comment</md-tooltip>
+                <md-icon md-svg-icon="response"></md-icon>
+            </md-button>
+            <a class="text-lightgrey count" scroll-highlight="responses">{{project.posts.length || 0}}</a>
+            <stat-button hide-sm entity-text="project"  type="follow" parent-type="{{project.type}}" parent-id="{{project._id}}" count="project.followers" class="lg m-l-15"></stat-button>
+            <div flex></div>
+            <md-button hide-sm class="md-accent md-border md-cornered" ui-sref="app.project.settings.options">Settings</md-button>
+            <social-share-buttons></social-share-buttons>
+        </div>
+
+        <!-- PUBLISH FOOTER -->
+        <div ng-if="!project.published && showEdit" class="md-content-container md-no-padding" layout="row" layout-align="start center">
+            <div flex class="ellipsis text-lightgrey"><b>Important:</b> This Project has not been published yet.</div>
+            <md-button class="md-accent md-border md-cornered" ui-sref="app.project.settings.options">Settings</md-button>
+            <md-button hide-sm class="md-raised md-accent md-flat md-border-green md-cornered m-0" ui-sref="app.project.settings.team({'#':'publish'})">Publish project</md-button>
+        </div>
+
+        <!-- PUBLISH FOOTER PUBLIC -->
+        <div ng-if="!project.published && !showEdit" class="md-content-container md-no-padding" layout="column" layout-align="center">
+            <div class="ellipsis text-lightgrey text-center">You have been given a private link to this page. Only people with the link can see it.</div>
+        </div>
+    </div>
+</dynamic-footer>
+
+<div class="projectView overflow-x-box">
+    <div ng-hide="$state.includes('app.project.settings')">
+        <div layout="row" layout-align="center">
+            <div class="rel-box md-content-container md-no-padding" layout="column">
+                <settings-button show-if-admin>
+                    <feed-recommend></feed-recommend>
+                    <md-menu-item show-if-admin>Project id:
+                        <br>{{project._id}}
+                    </md-menu-item>
+                    <md-menu-item show-if-admin>
+                        <md-button click-unpublish entity="project" save-fn="SaveProject()">Unpublish</md-button>
+                    </md-menu-item>
+                </settings-button>
+                <div class="m-t-50" layout="row" layout-align="center center">
+                    <div>
+                        <dot class="dot-lg green"></dot>
+                        <md-tooltip md-direction="left" md-autohide="true">Updated in the last week</md-tooltip>
+                        <span class="md-subhead">Active Project</span>
+                    </div>
+                    <div class="md-subhead">&nbsp;|&nbsp;{{project.updated | date : short}}
+                        <md-tooltip md-direction="right" md-autohide="true"><span am-time-ago="project.updated"></span></md-tooltip>
+                    </div>
+                </div>
+                <h1 id="entityTitle" class="md-display-1 m-v-30 text-center">{{project.name || 'No Title'}}</h1>
+                <div class="team-text" layout="column" layout-align="center center">
+                    <div class="m-b-10">By<span team-text team="project.team" limit="3"></span></div>
+                    <div layout="row">
+                        <a ng-show="showEdit" class="p-2" ui-sref="app.project.settings.tags({'#':'organisations'})">
+                            <div class="avatar-square-contain st-dashed-button" layout="column" layout-align="center center">+</div>
+                            <md-tooltip md-direction="left" md-autohide="true">Add Organisation</md-tooltip>
+                        </a>
+                        <organisation-images organisations="project.organisations" limit="10"></organisation-images>
+                        <div ng-if="project.organisations.length>0 || showEdit" class="divider-v"></div>
+                        <team-images team="project.team" limit="10" show-more="showTeam()"></team-images>
+                        <a ng-show="showEdit" class="p-2" ui-sref="app.project.settings.team({'#':'team'})">
+                            <div class="avatar-circle st-dashed-button" layout="column" layout-align="center center">+</div>
+                            <md-tooltip md-direction="right" md-autohide="true">Add Team</md-tooltip>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div layout="row" layout-align="center">
+            <div class="md-content-container md-no-padding">
+                <div class="text-tabs m-b-30" layout="row">
+                    <a class="md-subhead" ng-class="{'active':$state.includes(tab.sref)}" ng-repeat="tab in tabs" ui-sref="{{tab.sref}}" ng-hide="tab.isHidden();">{{tab.label}}</a>
+                    <div flex></div>
+                    <a ng-show="showEdit" class="md-subhead" ng-class="{'active':$state.includes('app.project.settings.options')}" ui-sref="app.project.settings.options">Settings</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ui-view></div>
+
+    <!-- Responses -->
+    <div ng-show="$state.is('app.project.overview')">
+<!--
+        <div class="replies" id="responses" ng-show="project.published" layout="row" layout-align="center">
+            <div class="rel-box md-content-container md-no-padding">
+                <div layout="row" class="md-row">
+                    <div flex layout="column" class="md-col">
+                        <posts parent="project"></posts>
+                    </div>
+                    <div hide-sm hide-md class="md-col sidebar" layout="column"></div>
+                </div>
+            </div>
+        </div>
+-->
+
+        <div class="related" id="related" ng-show="project.published" layout="row" layout-align="center" hide-footer-when-visible>
+            <div class="rel-box md-content-container md-no-padding">
+                <div layout="row" class="md-row">
+                    <div flex layout="column" class="md-col">
+                        <related parent-type="project" parent-id="{{project._id}}" type="project" display-style="feed"></related>
+                    </div>
+                    <div hide-sm hide-md class="md-col sidebar" layout="column"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

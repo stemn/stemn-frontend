@@ -1,0 +1,24 @@
+<div style="width: 100%;">
+   <div ng-if="!edit" class="date-range">
+        {{start.year}} - <span ng-if="!current">{{end.year}}</span><span ng-if="current">current</span>
+        <!--{{months[start.month+1]}} -->
+    </div>
+    <div ng-if="edit">
+        <div layout="row" layout-align="start center">
+            <md-select flex-order="1" placeholder="Start Date" ng-model="start.year" class="md-accent">
+                <md-option ng-repeat="year in ::years" value="{{::year}}">{{::year}}</md-option>
+            </md-select>
+            <div flex-order="2" ng-hide="current" style="padding: 0px 10px;">to</div>
+            <md-select flex-order="3" ng-hide="current" placeholder="End Date" ng-model="end.year" class="md-accent">
+                <md-option ng-repeat="year in ::years" value="{{::year}}">{{::year}}</md-option>
+            </md-select>
+            <div flex-order="4" layout="row" layout-align="start center">
+                <md-checkbox
+                    ng-model="$parent.current"
+                    class="md-accent" aria-label="Is Current Checkbox">
+                </md-checkbox>
+                Current?
+            </div>
+        </div>
+    </div>
+</div>

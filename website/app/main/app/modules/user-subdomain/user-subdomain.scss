@@ -1,0 +1,73 @@
+user-subdomain-input{
+	display: block;
+	.input-box{
+//		transition: 0.3s all ease;
+//		&:hover{
+//			box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.14), 0px 6px 10px 0px rgba(0, 0, 0, 0.098), 0px 1px 18px 0px rgba(0, 0, 0, 0.084);
+//		}
+	}
+	.bordered{
+		border: 1px solid rgba(0, 0, 0, 0.1);
+	}
+	.domain{
+		font-size: 19px;
+		color: black;
+		div, input{
+			&:focus{
+				background: #f0f0f0;
+				outline: none;
+			}
+			border: none;
+			padding: 10px 0;
+			background: white;
+		}
+		input{
+			min-width: 100px;
+			padding-left:15px;
+		}
+		>div{
+			padding-right: 15px;
+		}
+	}
+	.md-button.md-lg{
+		font-size: 19px;
+		padding: 13px 15px;
+	}
+	.messages{
+		padding-top: 10px;
+		position: absolute;
+		color: rgba(0, 0, 0, 0.4);
+	}
+	@media (max-width: 1300px){
+		.domain{
+			font-size: 18px;
+			input{
+				padding-left: 10px;
+				min-width: 100px;
+			}
+			>div{
+				padding-right: 10px;
+			}
+		}
+		.md-button.md-lg{
+			font-size: 18px;
+    		padding: 13px 15px;
+		}
+	}
+	@media (max-width: 600px){
+		.domain{
+			font-size: 16px;
+			input{
+				padding-left: 10px;
+				min-width: 90px;
+			}
+			>div{
+				padding-right: 10px;
+			}
+		}
+		.md-button.md-lg{
+			font-size: 16px;
+    		padding: 10px 15px;
+		}
+	}
+}

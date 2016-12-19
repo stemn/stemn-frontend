@@ -1,0 +1,9 @@
+<div class="rel-box overflow-x-box">
+    <div layout="row" layout-wrap style="margin: 0 -15px;">
+        <organisation-card style="padding: 0 15px 15px;" flex="25" flex-sm="50" ng-repeat="item in items" entity="item"></organisation-card>
+    </div>
+    <a class="well-button m-t-40" layout="row" layout-align="center center" ng-disabled="noMoreResults" ng-click="more()" ng-hide="notEnoughResults || hideMore">
+        <div>{{noMoreResults ? 'No more organisations' : 'See more organisations'}}</div>
+    </a>
+    <loading-overlay ng-if="loading" ng-class="{'translucent' : items.length > 0}"></loading-overlay>
+</div>

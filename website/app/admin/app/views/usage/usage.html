@@ -1,0 +1,69 @@
+<div class="usageView">
+<!--
+    <div layout="row" layout-sm="column" class="md-row">
+        <div flex="100" class="md-col" style="margin-bottom: 20px;">
+            <charts-user-retention title="User Retention"></charts-user-retention>
+        </div>
+    </div>
+-->
+    <div layout="column" layout-gt-sm="row" class="md-row">
+        <div flex="100" flex-gt-md="33" class="md-col" style="margin-bottom: 20px;">
+            <charts-time-bar type="creations" divisor="activeUsers" y-axis="Avg Creations" title="Average Creations per User"></charts-time-bar>
+        </div>
+        <div flex="100" flex-gt-md="33" class="md-col" style="margin-bottom: 20px;">
+            <charts-time-bar type="userSessions" divisor="activeUsers" y-axis="Avg Sessions" title="Average Sessions per User"></charts-time-bar>
+        </div>
+        <div flex="100" flex-gt-md="33" class="md-col" style="margin-bottom: 20px;">
+            <charts-time-bar type="activeUsers" divisor="cumulative-users" y-axis="Active Users (%)" title="Percentage of users active"></charts-time-bar>
+        </div>
+    </div>
+    <div layout="column" layout-gt-sm="row" class="md-row">
+        <div flex="100" class="md-col" style="margin-bottom: 20px;">
+            <charts-time-bar chart-type="creations" chart-style="multiBar"></charts-time-bar>
+        </div>
+    </div>
+    <div layout="column" layout-gt-sm="row" class="md-row">
+        <div flex="100" class="md-col" style="margin-bottom: 20px;">
+            <charts-time-bar chart-type="visitors"></charts-time-bar>
+        </div>
+    </div>
+    <div layout="column" layout-gt-sm="row" class="md-row">
+        <div flex-sm="100" flex="50" class="md-col" style="margin-bottom: 20px;">
+            <charts-time-bar chart-type="timeOnSite"></charts-time-bar>
+        </div>
+        <div flex-sm="100" flex="50" class="md-col" style="margin-bottom: 20px;">
+            <charts-time-bar chart-type="activeUsers"></charts-time-bar>
+        </div>
+    </div>
+    <div layout="column" layout-gt-sm="row" class="md-row">
+        <div flex-sm="100" flex="50" class="md-col" style="margin-bottom: 20px;">
+            <charts-time-bar chart-type="statesVisted"></charts-time-bar>
+        </div>
+        <div flex-sm="100" flex="50" class="md-col" style="margin-bottom: 20px;">
+            <charts-time-bar chart-type="newSignups" divisor="true"></charts-time-bar>
+        </div>
+    </div>
+    <!--
+    <div layout="row" layout-sm="column" class="md-row">
+        <div flex-sm="100" flex="50" class="md-col" style="margin-bottom: 20px;">
+            <charts-time-bar chart-type="projectCreation"></charts-time-bar>
+        </div>
+        <div flex-sm="100" flex="50" class="md-col" style="margin-bottom: 20px;">
+            <charts-time-bar chart-type="threadCreation"></charts-time-bar>
+        </div>
+    </div>
+    <div layout="row" layout-sm="column" class="md-row">
+        <div flex-sm="100" flex="50" class="md-col" style="margin-bottom: 20px;">
+            <charts-time-bar chart-type="postCreation"></charts-time-bar>
+        </div>
+        <div flex-sm="100" flex="50" class="md-col" style="margin-bottom: 20px;">
+            <charts-time-bar chart-type="commentCreation"></charts-time-bar>
+        </div>
+    </div>
+    <div layout="row" layout-sm="column" class="md-row">
+        <div flex-sm="100" flex="50" class="md-col" style="margin-bottom: 20px;">
+            <charts-time-bar chart-type="organisationCreation"></charts-time-bar>
+        </div>
+    </div>
+-->
+</div>

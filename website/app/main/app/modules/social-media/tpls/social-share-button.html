@@ -1,0 +1,15 @@
+<md-menu md-position-mode="target-right target">
+    <md-button class="md-icon-button md-sm no-margin" aria-label="Share To Networks" ng-click="$mdOpenMenu()">
+        <md-tooltip md-direction="top" md-autohide="true">Share</md-tooltip>
+        <md-icon md-svg-src="share"></md-icon>
+    </md-button>
+
+    <md-menu-content width="2">
+        <md-menu-item ng-repeat="item in shares">
+            <md-button href="{{item.href}}" onclick="window.open(this.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false">
+                <md-icon md-font-icon="{{item.icon}}"></md-icon>
+                <p>{{item.title}}</p>
+            </md-button>
+        </md-menu-item>
+    </md-menu-content>
+</md-menu>

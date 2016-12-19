@@ -1,0 +1,297 @@
+<!------------------------------------------------------>
+<!--------------------- ABOUT BIO ---------------------->
+<!------------------------------------------------------>
+<md-container style="margin-bottom:50px" ng-if="user.profile.profileDetails.summary || showEdit">
+	<div ng-if="showEdit">
+		<tip-banner ng-if="!completionPercentage == 100" local="true">
+            <div style="margin-bottom: 10px;">Posting <b>projects</b> and <b>blogs</b> will increase the strength of your portfolio.</div>
+            <user-completion-widget display-type="banner" completion-percentage="completionPercentage"></user-completion-widget>
+		</tip-banner>
+	</div>
+    <form id="summary" novalidate name="AboutForm" class="edit-box">
+        <edit-button ng-show="showEdit" form="AboutForm" inline="true" save-fn="SaveUser()"></edit-button>
+        <h2 class="md-headline">About Me</h2>
+        <!-- If Editing -->
+        <p ng-show="AboutForm.$visible"><textarea name="overview" ng-model="user.profile.profileDetails.summary" msd-elastic class="editable" placeholder="What do you do and what are you interested in?"></textarea></p>
+        <!-- If NOT Editing -->
+        <p ng-hide="AboutForm.$visible" class="wrap-text">{{user.profile.profileDetails.summary}}</p>
+    </form>
+</md-container>
+
+
+<div ng-if="projects.length > 0 || showEdit" class="projects-section" layout="column" layout-align="center center" >
+    <div class="title-block md-content-container md-no-padding" layout="row">
+    	<div class="md-subhead">{{user.profile.firstname}}'s Projects</div>
+    </div>
+	<div layout="row" layout-align="center">
+        <creation-card ng-repeat="project in projects | orderBy : '-picture' | limitTo : numProjectsToShow" entity="project.data" style="width: 300px;"></creation-card>
+		<a ng-show="showEdit" class="add-projects" layout="column" ng-click="newProject($event)">
+			<div md-ink-ripple class="picture" layout="column" layout-align="center center"><md-icon md-svg-icon="add"></md-icon></div>
+			<div flex layout="column" layout-align="center center"><div class="text-lightgrey md-padding">Add a project</div></div>
+		</a>
+
+		<a ng-show="projects.length > numProjectsToShow" ui-sref="app.user.projects" class="more-projects" layout="column" layout-align="center center" md-ink-ripple>
+			<md-icon md-svg-icon="chevron-right"></md-icon>
+			<md-tooltip md-direction="top" md-autohide="true">See all projects</md-tooltip>
+		</a>
+	</div>
+</div>
+
+<div class="content-lg">
+    <!------------------------------------------------------>
+    <!--------------------- EXPERIENCE --------------------->
+    <!------------------------------------------------------>
+    <md-container style="margin: 50px 0;" ng-if="showEdit">
+        <form id="experience" novalidate name="ExperienceForm" class="edit-box" >
+            <div layout="row">
+                <div hide-sm flex="20"></div>
+                <h2 flex-sm="100" flex="80" flex-gt-md="60" class="md-headline rel-box">
+                    <edit-button ng-show="showEdit" form="ExperienceForm" inline="true" save-fn="SaveUser()"></edit-button>
+                    My Experience
+                </h2>
+                <div flex="0" flex-gt-md="20"></div>
+            </div>
+            <div ng-sortable="sortConfig">
+                <div class="profile-item" layout="row" ng-repeat="item in user.profile.profileDetails.experience" ng-show="showEdit || item.company || item.organisations[0].name">
+                    <div hide-sm flex="20" layout="column" layout-align="start end" ng-class="{'my-handle' : ExperienceForm.$visible==true}">
+                        <date-range edit="false" start="item.startDate" end="item.endDate" current="item.isCurrent"></date-range>
+                    </div>
+                    <div flex-sm="100" flex="80" flex-gt-md="60">
+                        <!-- If NOT Editing -->
+                        <div ng-hide="ExperienceForm.$visible">
+                            <div class="md-subhead" layout="row" layout-align-gt-sm="start center">
+                                <div flex><span>{{item.position}}</span><span class="inter" ng-show="item.position || item.company || item.organisations[0].name">·</span><span class="bold">{{item.organisations[0].name || item.company}}</span></div>
+                                <a hide-sm ng-if="item.organisations[0].picture" ui-sref="app.organisation.overview({stub:item.organisations[0].stub})">
+                                    <div class="avatar-square-contain" ng-style="{ 'background-image':'url('+item.organisations[0].picture+'?size=thumb)'}"></div>
+                                </a>
+                            </div>
+                            <p class="wrap-text">{{item.notes}}</p>
+                        </div>
+                        <!-- If Editing -->
+                        <div ng-show="ExperienceForm.$visible">
+                            <md-button confirm ng-show="ExperienceForm.$visible" class="md-warn md-circle md-raised md-sm bullet-button" ng-click="delRow(user.profile.profileDetails.experience, $index)">
+                                <md-icon md-svg-icon="navigation:close"></md-icon>
+                                <md-tooltip md-direction="top" md-autohide="true">Remove row</md-tooltip>
+                            </md-button>
+                            <div layout="row">
+                                <md-input-container flex class="md-accent">
+                                    <label>Position</label>
+                                    <input name="positon" ng-model="item.position">
+                                </md-input-container>
+                                <organisation-search single="true" data="item.organisations" search-text="item.company" placeholder="Organisation" organisation-type="company"></organisation-search>
+<!--
+                                <md-input-container flex class="md-accent">
+                                    <label>Organisation</label>
+                                    <input required name="company" ng-model="item.company">
+                                </md-input-container>
+-->
+                            </div>
+                            <date-range edit="ExperienceForm.$visible" start="item.startDate" end="item.endDate" current="item.isCurrent"></date-range>
+                            <md-input-container class="md-accent">
+                                <label>Description</label>
+                                <textarea name="notes" ng-model="item.notes" md-maxlength="500"></textarea>
+                            </md-input-container>
+                        </div>
+                        <md-divider ng-hide="$last"></md-divider>
+                    </div>
+                     <div flex="0" flex-gt-md="20"></div>
+                </div>
+            </div>
+            <!-- If Editing -->
+            <div ng-if="ExperienceForm.$visible" layout="row">
+                <div hide-sm flex="20"></div>
+                <div flex-sm="100" flex="80" flex-gt-md="60"><add-another add-fn="addExperience()"></add-another></div>
+                <div flex="20" flex-sm="0"></div>
+            </div>
+        </form>
+    </md-container>
+
+    <md-container style="margin: 50px 0;" ng-if="!showEdit && !isEmptyExperience()">
+        <div layout="row">
+            <div hide-sm flex="20"></div>
+            <h2 flex-sm="100" flex="80" flex-gt-md="60" class="md-headline">
+                My Experience
+            </h2>
+            <div flex="0" flex-gt-md="20"></div>
+        </div>
+        <div class="profile-item" layout="row" ng-repeat="item in user.profile.profileDetails.experience" ng-show="item.company || item.organisations[0].name">
+            <div hide-sm flex="20" layout="column" layout-align="start end">
+                <date-range edit="false" start="item.startDate" end="item.endDate" current="item.isCurrent"></date-range>
+            </div>
+            <div flex-sm="100" flex="80" flex-gt-md="60">
+                <div class="md-subhead">
+                    <span>{{item.position}}</span><span class="inter" ng-show="item.position || item.company || item.organisations[0].name">·</span><span class="bold">{{item.organisations[0].name || item.company}}</span>
+                </div>
+                <p class="wrap-text">{{item.notes}}</p>
+                <md-divider ng-hide="$last"></md-divider>
+            </div>
+             <div flex="0" flex-gt-md="20"></div>
+        </div>
+    </md-container>
+
+
+	<!------------------------------------------------------>
+	<!--------------------- STATS BAR ---------------------->
+	<!------------------------------------------------------>
+
+	<div class="divider-bar" style="background-position: center;"
+	   ng-style="{'background-image':'url('+(user.profile.banner.url || alternateBanner)+'?size=banner-lg&crop=true)'}">
+		<md-container>
+			<div layout="row" layout-align="center center" style="color: white">
+				<a ui-sref="app.user.projects" flex layout="column" layout-align="center center">
+					<div class="stat-number wow" count-to="{{user.numProjects || 0}}" duration="1"></div>
+					<div class="md-title">Project<span ng-show="user.numProjects!=1">s</span></div>
+				</a>
+				<a ui-sref="app.user.threads" flex layout="column" layout-align="center center">
+					<div class="stat-number wow" count-to="{{user.numQuestions + user.numGenerals || 0}}" duration="1.5"></div>
+					<div class="md-title">Discussion<span ng-show="user.numQuestions + user.numGenerals!=1">s</span></div>
+				</a>
+				<a ui-sref="app.user.blogs" flex layout="column" layout-align="center center">
+					<div class="stat-number wow" count-to="{{user.numBlogs || 0}}" duration="1.5"></div>
+					<div class="md-title">Blog<span ng-show="user.numBlogs!=1">s</span></div>
+				</a>
+				<a ui-sref="app.user.comments" flex layout="column" layout-align="center center">
+					<div class="stat-number wow" count-to="{{user.numComments + user.numPosts || 0}}" duration="1"></div>
+					<div class="md-title">Comment<span ng-show="user.numComments + user.numPosts!=1">s</span></div>
+				</a>
+			</div>
+		</md-container>
+	</div>
+
+
+
+    <!------------------------------------------------------>
+    <!--------------------- EDUCATION ---------------------->
+    <!------------------------------------------------------>
+    <md-container style="margin: 50px 0;" ng-if="showEdit">
+        <form id="education" novalidate name="EducationForm" class="edit-box">
+            <div layout="row">
+                <div hide-sm flex="20"></div>
+                <h2 flex-sm="100" flex="80" flex-gt-md="60" class="md-headline rel-box">
+                    My Education
+                    <edit-button ng-show="showEdit" form="EducationForm" inline="true" save-fn="SaveUser()"></edit-button>
+                </h2>
+                <div flex="0" flex-gt-md="20"></div>
+            </div>
+            <div ng-sortable="sortConfig">
+                <div class="profile-item" layout="row" ng-repeat="item in user.profile.profileDetails.education" ng-show="showEdit || item.school || item.organisations[0].name">
+                    <div hide-sm flex="20" layout="column" layout-align="start end" ng-class="{'my-handle' : EducationForm.$visible==true}">
+                        <date-range edit="false" start="item.startDate" end="item.endDate" current="item.isCurrent"></date-range>
+                    </div>
+                    <div flex-sm="100" flex="80" flex-gt-md="60">
+                        <!-- If NOT Editing -->
+                        <div ng-hide="EducationForm.$visible">
+                            <div class="md-subhead" layout="row" layout-align-gt-sm="start center">
+                               <div flex class="m-r-15"><span>{{item.degree}}</span><span class="inter" ng-show="item.degree && (item.school || item.organisations[0].name)">·</span><span class="bold">{{item.organisations[0].name || item.school}}</span></div>
+                                <a hide-sm ng-if="item.organisations[0].picture" ui-sref="app.organisation.overview({stub:item.organisations[0].stub})">
+                                    <div class="avatar-square-contain" ng-style="{ 'background-image':'url('+item.organisations[0].picture+'?size=thumb)'}"></div>
+                                </a>
+                            </div>
+                            <p class="wrap-text">{{item.notes}}</p>
+                        </div>
+                        <!-- If Editing -->
+                        <div ng-show="EducationForm.$visible">
+                            <md-button confirm ng-show="EducationForm.$visible" class="md-warn md-circle md-raised md-sm bullet-button" ng-click="delRow(user.profile.profileDetails.education, $index)">
+                                <md-icon md-svg-icon="navigation:close"></md-icon>
+                                <md-tooltip md-direction="top" md-autohide="true">Remove row</md-tooltip>
+                            </md-button>
+                            <div layout="row">
+                                <md-input-container flex class="md-accent">
+                                    <label>Degree / Certificatee</label>
+                                    <input name="degree" ng-model="item.degree">
+                                </md-input-container>
+                                <organisation-search single="true" data="item.organisations" placeholder="School / University" search-text="item.school" organisation-type="school"></organisation-search>
+                            </div>
+                            <date-range edit="EducationForm.$visible" start="item.startDate" end="item.endDate" current="item.isCurrent"></date-range>
+                            <md-input-container class="md-accent">
+                                <label>Description</label>
+                                <textarea name="notes" ng-model="item.notes" md-maxlength="500"></textarea>
+                            </md-input-container>
+                        </div>
+                        <md-divider ng-hide="$last"></md-divider>
+                    </div>
+                    <div flex="0" flex-gt-md="20"></div>
+                </div>
+            </div>
+            <!-- If Editing -->
+            <div ng-if="EducationForm.$visible" layout="row">
+                <div hide-sm flex="20"></div>
+                <div flex-sm="100" flex="80" flex-gt-md="60"><add-another add-fn="addEducation()"></add-another></div>
+                <div flex="0"  flex-gt-md="20"></div>
+            </div>
+        </form>
+    </md-container>
+
+    <md-container style="margin-bottom: 70px;" ng-if="!showEdit && !isEmptyEducation()">
+        <form novalidate name="EducationForm">
+            <div layout="row">
+                <div hide-sm flex="20"></div>
+                <h2 flex-sm="100" flex="80" flex-gt-md="60" class="md-headline rel-box">
+                    My Education
+                </h2>
+                <div flex="0" flex-gt-md="20"></div>
+            </div>
+            <div class="profile-item" layout="row" ng-repeat="item in user.profile.profileDetails.education" ng-show="item.school || item.organisations[0].name">
+                <div hide-sm flex="20" layout="column" layout-align="start end">
+                    <date-range edit="false" start="item.startDate" end="item.endDate" current="item.isCurrent"></date-range>
+                </div>
+                <div flex-sm="100" flex="80" flex-gt-md="60">
+                    <div ng-hide="EducationForm.$visible">
+                        <div class="md-subhead">
+                            <span>{{item.degree}}</span><span class="inter" ng-show="item.degree && (item.school || item.organisations[0].name)">·</span><span class="bold">{{item.organisations[0].name || item.school}}</span>
+                        </div>
+                        <p class="wrap-text">{{item.notes}}</p>
+                    </div>
+                    <md-divider ng-hide="$last"></md-divider>
+                </div>
+                <div flex="0" flex-gt-md="20"></div>
+            </div>
+        </form>
+    </md-container>
+
+    <!------------------------------------------------------>
+    <!---------------------- SKILLS ------------------------>
+    <!------------------------------------------------------>
+    <div layout="row" layout-align="center" id="skills" class="edit-box" style="background-color:rgba(0, 0, 0, 0.03); padding: 50px 0;" ng-show="showEdit || user.profile.profileDetails.skills.length > 0 || user.profile.profileDetails.technologies.length>0">
+        <div class="md-content-container">
+            <form novalidate name="SkillsForm">
+                <div layout="row" >
+                    <div flex="20" flex-sm="0"></div>
+                    <div flex="80" flex-sm="100" flex-gt-md="60" class="rel-box">
+                        <h2 class="md-headline">
+                            Skills and knowledge
+                            <edit-button ng-show="showEdit" form="SkillsForm" inline="true" save-fn="SaveUser()"></edit-button>
+                        </h2>
+
+                        <div ng-if="SkillsForm.$visible">
+                            <tip-banner local="true" class="m-b-30">
+                                Add your skills and abilities. We'll use these to match you to the most appropriate jobs. These skills are <b>automatically populated</b> based on fields you've tagged in your projects and blogs. You can <b>add additional skills here</b> but we recommend you add a project to your portfolio to act as evidence.
+                            </tip-banner>
+                        </div>
+                        <evidenced-fields user="user" edit="SkillsForm.$visible"></evidenced-fields>
+                    </div>
+                    <div flex="0" flex-gt-md="20"></div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+    <!------------------------------------------------------>
+    <!---------------------- FOOTER ------------------------>
+    <!------------------------------------------------------>
+    <form id="social" name="FooterForm" ng-hide="!user.profile.socialLinks">
+        <div hide-footer-when-visible="{{userCanEdit}}" class="divider-bar edit-box" style="margin-bottom: -50px; background-position: bottom;"
+           ng-style="{'background-image':'url('+(user.profile.banner.url || alternateBanner)+'?size=banner-lg&crop=true)'}">
+            <div layout="column" layout-align="center center" style="padding: 0px;">
+                <div class="md-content-container content-sm">
+                    <div style="min-height: 200px;" class="rel-box" layout="column" layout-align="center center">
+                        <edit-button ng-show="showEdit" form="FooterForm" inline="true" save-fn="SaveUser()"></edit-button>
+                        <p><social-links edit="FooterForm.$visible" data="user.profile.socialLinks" type="user"></social-links></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

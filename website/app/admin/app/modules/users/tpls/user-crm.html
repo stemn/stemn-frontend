@@ -1,0 +1,25 @@
+<div class="md-whiteframe-z1"><md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2 flex>Last contacted</h2>
+            <md-button ng-show="entity" class="md-button-md" ng-click="sendEmail($event)">New email</md-button>
+            <md-button class="md-button-md" style="margin-right: 15px;" ng-click="newItem($event)">New entry</md-button>
+        </div>
+    </md-toolbar>
+    <div class="bg-white" layout="column" flex>
+        <table class="table">
+            <tr ng-repeat="item in data">
+                <td>{{item.contactedBy}} - {{item.date | amTimeAgo}}
+                    <div class="text-lightgrey">{{item.notes | words : 7}}</div>
+                </td>
+                <td style="width: 110px;">
+                    <md-button aria-label="edit" class="md-icon-button" ng-click="edit($event, item)">
+                        <ng-md-icon icon="edit"></ng-md-icon>
+                    </md-button>
+                    <md-button aria-label="delete" class="md-icon-button" ng-click="remove($index)">
+                        <ng-md-icon icon="close"></ng-md-icon>
+                    </md-button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

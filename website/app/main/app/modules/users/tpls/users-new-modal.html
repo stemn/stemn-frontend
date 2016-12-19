@@ -1,0 +1,51 @@
+<md-dialog>
+    <form unsaved-warning-form novalidate name="NewUserForm" ng-submit="invite()">
+        <md-dialog-content>
+            <div class="md-content-container content-xs">
+                <h1 class="md-headline no-margin">Invite someone to STEMN</h1>
+                <br>
+                <br>
+                <br>
+                <div layout="row">
+                    <md-input-container flex="50" class="md-accent" focus-me="true">
+                        <label>Name*</label>
+                        <input name="name" ng-model="data.name"
+                        required>
+                        <div ng-messages="NewUserForm.name.$error" ng-if="NewUserForm.name.$dirty">
+                            <div ng-message="required">This is required.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container flex="50" class="md-accent">
+                        <label>Email*</label>
+                        <input name="email" ng-model="data.email"
+                        required type="email">
+                        <div ng-messages="NewUserForm.email.$error" ng-if="NewUserForm.email.$dirty">
+                            <div ng-message="required">This is required.</div>
+                            <div ng-message="email">Not a valid email</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <md-input-container flex="50" class="md-accent">
+                    <label>Role (eg: Team Leader or Junior Engineer)</label>
+                    <input name="role" ng-model="role"
+                    type="text">
+                </md-input-container>
+                <md-input-container flex="50" class="md-accent">
+                    <label>Group (eg: Marketing Team or Thermal Subsystem)</label>
+                    <input name="group" ng-model="data.group"
+                    type="text">
+                </md-input-container>
+                <br>
+                <br>
+                <br>
+            </div>
+            <div layout="row" layout-align="start center">
+                <div flex class="text-lightgrey">*required fields</div>
+                <div>
+                    <md-button ng-click="cancel()">Cancel</md-button>
+                    <md-button type="submit" class="md-accent md-raised" ng-disabled="NewUserForm.$invalid">Invite</md-button>
+                </div>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

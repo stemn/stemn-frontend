@@ -1,0 +1,35 @@
+<div ng-if="$state.is('app.jobsQuery')">
+    <div layout="row" layout-align="center" class="m-b-30">
+        <div class="md-content-container" layout="column">
+            <div class="md-subhead m-b-20">
+                <a ui-sref="app.browse.jobs" class="text-green">Jobs</a> / {{field.name}}
+            </div>
+            <h1 class="md-display-1 text-center m-t-50">{{field.name}} jobs</h1>
+            <div class="md-title text-grey light-font text-center">Apply to hundreds of jobs with one profile · 100% free</div>
+        </div>
+    </div>
+
+    <div layout="row" layout-align="center" class="m-b-30">
+        <div class="md-content-container" layout="column">
+            <div class="md-subhead m-b-10">Available Positions</div>
+            <job-rows parent-type="field" query="jobQuery" parent-id="{{field._id}}" size="10" near="[location.geo.lng, location.geo.lat]"></job-rows>
+            <div class="md-subhead m-b-10 m-t-50">Popular locations</div>
+            <div class="flex-square-tile-row" layout="row" layout-wrap>
+                <div class="flex-square-tile" flex="20" flex-md="25" flex-sm="50" ng-repeat="item in locations | limitTo: locationsLimit">
+                   <div class="image-overlay" ng-style="{'background-image':'url(assets/images/default/square.png?size=thumb-lg)'}"></div>
+                    <a class="text-overlay"
+                       ui-sref="app.jobsQuery.location({'location': item[0]})" layout="column" layout-align="center center">
+                        <div>{{item[0]}}</div>
+                    </a>
+                </div>
+                <div class="flex-square-tile" flex="20" flex-md="25" flex-sm="50">
+                    <div class="image-overlay" style="background-image:url('/assets/images/default/square.png')"></div>
+                    <a class="text-overlay"  layout="column" layout-align="center center" ui-sref=".({locations: locationsPage+1})" ng-click="assignStateParams();">
+                        <div>See More</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ui-view></ui-view>

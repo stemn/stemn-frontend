@@ -1,0 +1,48 @@
+<div layout="column" layout-gt-sm="row" class="md-row">
+
+    <div hide-xs hide-sm style="width: 250px;" class="md-col">
+        <div class="md-whiteframe-z1">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2 flex>Filter Results</h2>
+                </div>
+            </md-toolbar>
+            <md-content class="md-whiteframe-z1 md-padding">
+                <checkbox-filter filter="typeFilter"></checkbox-filter>
+                <md-divider style="margin: 15px 0;"></md-divider>
+                <checkbox-filter filter="ownerFilter"></checkbox-filter>
+            </md-content>
+        </div>
+    </div>
+    <div flex class="md-col">
+        <div class="md-whiteframe-z1">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2 flex>Referals</h2>
+                    <search-filter filter="searchFilter"></search-filter>
+                    <md-button ng-click="newCampaignModal($event)">New Campaign</md-button>
+                    <md-button aria-label="refresh" class="md-icon-button" ng-click="campaignQuery.refresh()">
+                        <ng-md-icon icon="refresh" style="fill: white"></ng-md-icon>
+                    </md-button>
+                    <md-button aria-label="edit" ng-if="selectedRows.length>0" ng-click="multiEdit(selectedRows, campaignQuery.results)">
+                        EDIT
+                    </md-button>
+                    <md-button aria-label="clone" ng-if="selectedRows.length>0" ng-click="multiClone(selectedRows, campaignQuery.results)">
+                        CLONE
+                    </md-button>
+                    <md-button class="md-warn md-raised" aria-label="delete" ng-if="selectedRows.length>0" ng-click="multiDelete(selectedRows, campaignQuery.results)">
+                        DELETE
+                    </md-button>
+                </div>
+            </md-toolbar>
+            <md-content style="min-height: 400px;">
+                <modular-table query="campaignQuery" select="true" selected-rows="selectedRows"></modular-table>
+            </md-content>
+        </div>
+        <div layout="row" layout-align="center" class="md-padding">
+            <md-button class="md-icon-button md-raised md-accent" ng-click="campaignQuery.more()" aria-label="add more">
+                <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
+            </md-button>
+        </div>
+    </div>
+</div>

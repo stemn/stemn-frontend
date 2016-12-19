@@ -1,0 +1,10 @@
+<div class="user-row" layout="row" layout-align="start center">
+	<a ng-href="https://stemn.com/users/{{user.stub}}" style="margin-right: 15px;"><img class="mini-avatar" ng-src="https://stemn.com{{user.picture || '/assets/images/default/org.png'}}?size=thumb&crop=true"></a>
+	<div class="ellipsis-container">
+		<div class="ellipsis" ng-transclude></div>
+		<div layout="row">
+			<a target="_blank" ng-href="users/{{user.stub}}" class="name bold">{{user.name}}</a>
+			<div>{{text}}</div>
+		</div>
+	</div>
+</div>

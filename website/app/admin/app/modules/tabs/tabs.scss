@@ -1,0 +1,68 @@
+tabs {
+    display: block;
+    white-space: nowrap;
+    position: relative;
+    .tabs-inner{
+        overflow: auto;
+        position: relative;
+    }
+    // Line
+    &:after{
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+//        border-bottom: 1px solid rgba(0, 0, 0, 0.2);;
+    }
+
+    // Overflow marker
+    &:before{
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: 70px;
+        z-index: 1;
+        pointer-events: none;
+        background: linear-gradient(to left, #fff, rgba(248, 247, 238, 0));
+        visibility: visible;
+        opacity: 1;
+        transition: opacity .3s 0s, visibility 0s 0s;
+    }
+    &.isEnded:before{
+        visibility: none;
+        opacity: 0;
+    }
+    a {
+        color: rgba(0, 0, 0, 0.5);
+        position: relative;
+        padding: 15px 24px;
+        text-transform: uppercase;
+        font-size: 14px;
+        font-weight: 500;
+        transition: color 0.2s ease;
+        &.active{
+            color: rgb(63,81,181);
+            &:after{
+                opacity: 1 !important;
+            }
+        }
+        &:hover{
+            &:after{
+                opacity: 0.2;
+            }
+        }
+        &:after{
+            content: '';
+            position: absolute;
+            bottom: 0px;
+            left: 0;
+            right: 0;
+            border-bottom: 2px solid rgb(255,64,129);
+            opacity: 0;
+            transition: 0.2s opacity ease;
+        }
+    }
+}

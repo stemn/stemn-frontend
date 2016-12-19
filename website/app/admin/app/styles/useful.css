@@ -1,0 +1,12 @@
+.block{
+    display: block;
+}
+.rel-box{
+    position: relative;
+}
+.bg-white{
+    background: white;
+}
+.text-center{
+    text-align: center;
+}

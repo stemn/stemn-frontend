@@ -1,0 +1,13 @@
+<div class="stat-button inline {{itemStatus.status ? 'active' : 'inactive'}}">
+    <md-button authenticate ng-if="displayStyle=='circle'" ng-click="clickButton()" class="circle vert-middle md-icon-button md-sm no-margin">
+        <md-tooltip md-direction="top" md-autohide="true">{{itemStatus.status ? types[type].active.usual.text : types[type].inactive.usual.text }}</md-tooltip>
+        <md-icon ng-show="itemStatus.status"  md-svg-icon="{{types[type].active.hover.icon}}"></md-icon>
+        <md-icon ng-show="!itemStatus.status" md-svg-icon="{{types[type].inactive.hover.icon}}"></md-icon>
+    </md-button>
+    <md-button authenticate ng-if="displayStyle!='circle'" ng-click="clickButton()" class="rect vert-middle md-accent md-border md-sm no-margin">
+        <div class="anim-button-text-block {{itemStatus.status ? 'active' : 'inactive'}} capitalise">
+            <div>{{types[type].inactive.usual.text}}<span hide-sm>&nbsp;{{entityText}}</span></div>
+            <div>{{types[type].active.usual.text}}<span hide-sm>&nbsp;{{entityText}}</span></div>
+        </div>
+    </md-button>
+</div>

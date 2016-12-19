@@ -1,0 +1,114 @@
+.anim-files.ng-enter, .anim-files.ng-move{
+	-webkit-animation: fadeInLeft 1s;
+	animation: fadeInLeft 1s;
+}
+.anim-files.ng-leave{
+	-webkit-animation: bounceOut 1s;
+	animation: bounceOut 1s;
+}
+.anim-files.ng-move{
+	-webkit-animation: fadeIn 0.2s;
+	animation: fadeIn 0.2s;
+}
+
+/* uploadImage Directive */
+upload-image{
+    display: inline-block;
+    position: relative;
+    outline: none;
+    .upload-icon{
+        $icon-size: 40px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        height: $icon-size;
+        width: $icon-size;
+        margin-top: -$icon-size/2;
+        margin-left: -$icon-size/2;
+    }
+    .darken-image{
+        filter : brightness(80%);
+        -webkit-filter : brightness(80%);
+        background-color: rgba(0, 0, 0, 0.15);
+    }
+
+    /* Custom Upload Button */
+    label.btn-upload{
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        cursor: pointer;
+        input[type="file"] {
+            position: fixed;
+            top: -1000px;
+        }
+    }
+}
+
+
+.upload-image-modal{
+    .drop {
+        padding: 100px;
+        width: 100%;
+        border: 1px dashed #b9b9b9;
+    }
+    .gallery{
+        margin-bottom: 30px;
+    }
+    .drop .btn {
+        margin-bottom: 5px;
+    }
+    .drop.drag-over {
+        border-color: #8DC63F;
+        background: rgba(104, 184, 40, 0.12)
+    }
+    .upload-progress{
+        position: absolute;
+        top: -5px;
+        right: 0px;
+        left: 0px;
+        z-index: 5;
+    }
+
+    /* Custom Upload Button */
+    label.btn-upload input[type="file"] {
+        position: fixed;
+        top: -1000px;
+    }
+    .btn-upload{
+        display: inline-block;
+        padding: 10px 15px;
+        background: white;
+        border: 1px solid rgba(0, 0, 0, 0.07);
+        cursor: pointer;
+        &:hover, &:focus, &:active{
+            background: rgba(0, 0, 0, 0.03);
+        }
+    }
+    .remove-button{
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+        margin: 0px;
+    }
+
+    /* Multi image upload */
+    .gallery-display{
+        margin: -15px;
+        >div{
+            padding: 15px;
+            position: relative;
+            .md-button{
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+            img{
+                cursor: move;
+            }
+        }
+    }
+
+}

@@ -1,0 +1,59 @@
+<md-dialog aria-label="Edit Candidate">
+    <md-dialog-content class="overflow-x-box p-0">
+        <div class="md-content-container content-md p-0" layout="row">
+            <md-content class="p-30" flex>
+                <div layout="row">
+                    <div class="avatar-circle avatar-md m-r-30" style="background-image:url({{user.picture || '/assets/images/default/user-1.png'}}?size=thumb&crop=true)"></div>
+                    <div flex>
+                        <div class="md-title bold">{{user.name}}</div>
+                        <div>{{user.blurb}}</div>
+                    </div>
+                </div>
+                <div class="line-divider-bottom m-b-15 m-t-30" layout="row">
+                    <div class="md-subhead">Application Details</div>
+                </div>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla hic iste fuga a sit saepe pariatur, sunt modi qui, eligendi, necessitatibus commodi quisquam! Dolore quam sint illum harum magni facere!
+
+                <div class="line-divider-bottom m-b-15 m-t-30" layout="row">
+                    <div class="md-subhead">Candidate Details</div>
+                </div>
+                <div layout="row" layout-align="start center" class="m-b-5">
+                    <div class="md-subhead w-100x">Email</div>
+                    <div flex>Email</div>
+                </div>
+                <div layout="row" layout-align="start center" class="m-b-5">
+                    <div class="md-subhead w-100x">Phone</div>
+                    <div flex>{{user.profile.phone}}</div>
+                </div>
+                <div layout="row" layout-align="start center" class="m-b-5">
+                    <div class="md-subhead w-100x">Citizenship</div>
+                    <div flex><span ng-repeat="item in user.profile.citizenship">{{item}} </span></div>
+                </div>
+                <div layout="row" layout-align="start center" class="m-b-5">
+                    <div class="md-subhead w-100x">Location</div>
+                    <div flex>Location</div>
+                </div>
+
+                <div class="line-divider-bottom m-b-15 m-t-30" layout="row">
+                    <div class="md-subhead">Candidate Profile</div>
+                </div>
+                <div>
+                    <br>
+                    <br> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla hic iste fuga a sit saepe pariatur, sunt modi qui, eligendi, necessitatibus commodi quisquam! Dolore quam sint illum harum magni facere!
+                    <br> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla hic iste fuga a sit saepe pariatur, sunt modi qui, eligendi, necessitatibus commodi quisquam! Dolore quam sint illum harum magni facere!
+                </div>
+            </md-content>
+            <div class="bg-lightgrey" flex layout="column">
+                <md-content flex>
+                    <div class="p-30">
+                        <div class="text-tabs tabs-light-grey" layout="row">
+                            <a class="md-subhead" ng-class="{'active': activeTab == tab.label}" ng-repeat="tab in tabs" ng-click="tab.click()">{{tab.label}}</a>
+                        </div>
+                        <track-comments></track-comments>
+                    </div>
+                </md-content>
+                <traffic-buttons></traffic-buttons>
+            </div>
+        </div>
+    </md-dialog-content>
+</md-dialog>

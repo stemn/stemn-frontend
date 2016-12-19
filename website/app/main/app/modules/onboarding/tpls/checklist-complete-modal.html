@@ -1,0 +1,23 @@
+<md-dialog aria-label="Tasklist Complete">
+    <md-dialog-content>
+        <div style="width: 500px;">
+            <h1 class="md-headline" style="margin-top: 0px;">Nice work {{user.firstname}}!</h1>
+            <p>You've finished everything on the task-list. With any luck, you've also grasped the site layout and how everything fits together.</p>
+            <img src="/assets/images/gifs/launch.gif" alt="Liftoff">
+            <p>One final way you can improve your STEMN experience is to <strong>help grow the community</strong>. Please like and share on social media and help us opensource science and engineering.</p>
+        </div>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <div flex>
+            <md-button target="_blank" href="https://www.facebook.com/stem.network" class="md-icon-button">
+                <md-icon md-font-icon="fa-facebook"></md-icon>
+            </md-button>
+            <md-button target="_blank" href="https://twitter.com/stem_network" class="md-icon-button">
+                <md-icon md-font-icon="fa-twitter"></md-icon>
+            </md-button>
+        </div>
+        <div>
+            <md-button class="md-accent md-raised" ng-click="cancel()">Keep browsing</md-button>
+        </div>
+    </div>
+</md-dialog>

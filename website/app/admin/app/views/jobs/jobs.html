@@ -1,0 +1,26 @@
+<charts-time-bar chart-type="cumulativeJobs" style="margin-bottom: 15px;"></charts-time-bar>
+
+<div class="md-whiteframe-z1">
+    <md-toolbar >
+        <div class="md-toolbar-tools">
+            <h2 flex>Jobs - Total: <analytics-count type="job"></analytics-count></h2>
+            <md-button aria-label="refresh" ng-click="query.params.published=!query.params.published; query.refresh()">
+                {{query.params.published === false ? 'unpublished' : 'published'}}
+            </md-button>
+            <md-button aria-label="refresh" class="md-icon-button" ng-click="query.refresh()">
+                <ng-md-icon icon="refresh" style="fill: white"></ng-md-icon>
+            </md-button>
+            <md-button aria-label="add" class="md-icon-button" display-table-column-select columns="query.columns">
+                <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-content>
+        <modular-table query="query" select="true" scroll-load="true"></modular-table>
+    </md-content>
+</div>
+<div layout="row" layout-align="center" class="md-padding">
+    <md-button class="md-icon-button md-raised md-accent" ng-click="query.more()" aria-label="add more">
+        <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
+    </md-button>
+</div>

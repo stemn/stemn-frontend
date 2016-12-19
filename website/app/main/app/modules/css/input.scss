@@ -1,0 +1,7 @@
+.input-bordered{
+    padding: 10px;
+    border: 1px solid #dbdbdb;
+    &:focus{
+        outline: none;
+    }
+}

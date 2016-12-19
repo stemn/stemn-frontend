@@ -1,0 +1,17 @@
+<h2 class="md-display-1">Project Permissions</h2>
+<div layout="column" layout-gt-md="row" class="md-row">
+    <div class="md-col m-b-30" flex="100" flex-gt-md="40">
+        <div class="text-subtitle-thin">Select an appropriate project type and license. A public project with creative commons license is recommended.</div>
+    </div>
+    <div class="md-col" flex="100" flex-gt-md="60">
+        <div class="card-z1 card-padding m-b-30">
+            <div class="md-subhead m-b-20" flex>Project Type</div>
+            <project-type-radios></project-type-radios>
+        </div>
+        <div class="card-z1 card-padding m-b-30" ng-show="project.permissions.projectType == 'public'">
+            <div class="md-subhead" flex>Copyright License</div>
+            <p class="body-small">Protect your work by selecting an appropriate license.</p>
+            <project-licenses></project-licenses>
+        </div>
+    </div>
+</div>

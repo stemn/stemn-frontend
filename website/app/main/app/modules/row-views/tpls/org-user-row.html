@@ -1,0 +1,15 @@
+<div class="row-view" layout="row" layout-align="start center">
+    <div class="avatar">
+        <organisation-image ng-if="showOrg"  src="picture" image-id="{{itemId}}" image-stub="{{stub}}"></organisation-image>
+        <user-image         ng-if="!showOrg" src="picture" image-id="{{itemId}}" image-stub="{{stub}}"></user-image>
+    </div>
+    <div flex class="ellipsis-container">
+        <div class="md-subhead" contenteditable="{{showEdit || 'false'}}" ng-model="role" placeholder="role"></div>
+        <a class="text-green ellipsis">{{name}}</a>
+        <div class="text-lightgrey ellipsis">{{blurb}}</div>
+    </div>
+    <div>
+        <md-button ng-hide="showEdit" class="md-accent md-border md-sm md-border md-lower no-hover">Follow</md-button>
+        <md-button ng-show="showEdit" class="md-warn   md-border md-sm md-border md-lower no-hover">Delete</md-button>
+    </div>
+</div>

@@ -1,0 +1,141 @@
+<div layout="row" layout-margin>
+    <div flex>
+        <md-toolbar>
+            <div class="md-toolbar-tools" layout="row">
+                <h2 flex>User Email<b>{{emailQuery.email ? ': ' + emailQuery.email : ''}}</b></h2>
+                <md-input-container class="md-accent" md-no-float>
+                    <input placeholder="GitHub Username" ng-model="emailQuery.login">
+                </md-input-container>
+                <md-button class="md-cornered md-accent" ng-click="getUserEmail(emailQuery)">Search</md-button>
+            </div>
+        </md-toolbar>
+    </div>
+</div>
+<div layout="row" layout-margin>
+    <div flex>
+        <md-toolbar>
+            <div class="md-toolbar-tools" layout="row">
+                <h2 flex>Get Repo Info</h2>
+                <md-input-container class="md-accent" md-no-float style="width: 400px;">
+                    <input placeholder="File Types" ng-model="fileQuery.fileTypes">
+                </md-input-container>
+                <md-input-container class="md-accent" md-no-float>
+                    <input placeholder="Repo Name" ng-model="fileQuery.repoName">
+                </md-input-container>
+                <md-button class="md-cornered md-accent" ng-click="fileQuery.get();">Search</md-button>
+            </div>
+        </md-toolbar>
+        <div class="md-whiteframe-z1 bg-white rel-box">
+            <loading-overlay ng-if="fileQuery.loading"></loading-overlay>
+            <table class="md-table" ng-show="files">
+                <thead>
+                    <tr>
+                        <th style="width: 300px">Name</th>
+                        <th>STEMN Preview</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in files">
+                        <td>{{item.name}}</td>
+                        <td><a class="underlined" style="word-break: break-all;" ng-href="{{item.previewUrl}}" target="_blank">{{item.previewUrl}}</a></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <div flex>
+        <md-toolbar>
+            <div class="md-toolbar-tools" layout="row">
+                <h2 flex>Get Repo Events</h2>
+                <md-input-container class="md-accent" md-no-float>
+                    <input placeholder="Repo Name" ng-model="repoEventsQuery.params.full_name">
+                </md-input-container>
+                <md-button class="md-cornered md-accent" ng-click="repoEventsQuery.get()">Search</md-button>
+            </div>
+        </md-toolbar>
+        <div class="md-whiteframe-z1 bg-white rel-box">
+            <loading-overlay ng-if="repoEventsQuery.loading"></loading-overlay>
+            <div ng-show="repoEventsQuery.results.length > 0">
+                <table class="md-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 300px">Event Type</th>
+                            <th>Actor</th>
+                            <th>Email</th>
+                            <th style="width: 50px">Info</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in repoEventsQuery.results">
+                            <td ng-class="{'bold' : item.type == 'PushEvent' || item.type == 'PullRequestEvent' || item.type == 'IssueCommentEvent'}">{{item.type}}</td>
+                            <td>{{item.actor.login}}</td>
+                            <td>{{item.actor.email}}</td>
+                            <td><a ng-click="getUserEmail(item.actor)"><ng-md-icon icon="search"></ng-md-icon></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div layout="row" layout-align="center" class="md-padding">
+                    <md-button ng-show="repoEventsQuery.params.page > 1" class="md-icon-button md-raised md-accent" ng-click="repoEventsQuery.params.page = repoEventsQuery.params.page - 1; repoEventsQuery.get();" aria-label="add more">
+                        {{repoEventsQuery.params.page - 1 }}
+                    </md-button>
+                    <md-button class="md-icon-button md-raised md-accent" ng-disabled="true" aria-label="add more">
+                        {{repoEventsQuery.params.page}}
+                    </md-button>
+                    <md-button class="md-icon-button md-raised md-accent" ng-click="repoEventsQuery.params.page = repoEventsQuery.params.page + 1; repoEventsQuery.get();" aria-label="add more">
+                        {{repoEventsQuery.params.page + 1 }}
+                    </md-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div layout="row" layout-margin>
+    <div flex>
+        <md-toolbar>
+            <div class="md-toolbar-tools" layout="row">
+                <h2 flex>Top Projects</h2>
+                <md-input-container class="md-accent" md-no-float style="width: 350px;">
+                    <input placeholder="Query String" ng-model="projectQuery.queryString">
+                </md-input-container>
+                <md-button class="md-cornered md-accent" ng-click="projectQuery.get()">Search</md-button>
+            </div>
+        </md-toolbar>
+        <div class="md-whiteframe-z1 bg-white rel-box">
+            <loading-overlay ng-if="projectQuery.loading"></loading-overlay>
+            <table class="md-table">
+                <thead>
+                    <tr>
+                        <th style="width: 300px">Name</th>
+                        <th style="width: 200px">Owner</th>
+                        <th>Description</th>
+                        <th style="width: 100px">Stars</th>
+                        <th style="width: 50px">Info</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in projects">
+                        <td><a target="_blank" ng-href="{{item.html_url}}"><b>{{item.owner.login}}</b>/{{item.name}}</a></td>
+                        <td><a target="_blank" ng-href="{{item.owner.html_url}}">{{item.owner.login}}</a></td>
+                        <td>{{item.description}}</td>
+                        <td>{{item.stargazers_count}}</td>
+                        <td><a ng-click="fileQuery.repoName = item.full_name ; fileQuery.get(); repoEventsQuery.params.full_name = item.full_name; repoEventsQuery.get()"><ng-md-icon icon="search"></ng-md-icon></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div layout="row" layout-align="center" class="md-padding">
+    <md-button ng-show="projectQuery.page > 1" class="md-icon-button md-raised md-accent" ng-click="projectQuery.page = projectQuery.page - 1; projectQuery.get();" aria-label="add more">
+        {{projectQuery.page - 1 }}
+    </md-button>
+    <md-button class="md-icon-button md-raised md-accent" ng-disabled="true" aria-label="add more">
+        {{projectQuery.page}}
+    </md-button>
+    <md-button class="md-icon-button md-raised md-accent" ng-click="projectQuery.page = projectQuery.page + 1; projectQuery.get();" aria-label="add more">
+        {{projectQuery.page + 1 }}
+    </md-button>
+</div>

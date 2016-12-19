@@ -1,0 +1,10 @@
+<div class="preview-gallery">
+   <div class="rel-box overflow-box">
+       <div layout="column" ng-show="gallery.length > 0">
+            <div class="preview" ng-style="gallery[previewIndex].url && {'background-image':'url('+gallery[previewIndex].url+'?size=slider&crop=true)'}" lightbox="true" lightbox-image="gallery[previewIndex].url"></div>
+            <div layout="row" ng-show="gallery.length > 1">
+                <div class="thumb" ng-repeat="item in gallery" ng-style="item.url && {'background-image':'url('+item.url+'?size=slider&crop=true)'}" ng-mouseenter="$parent.previewIndex = $index" lightbox="true" lightbox-image="item.url"></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<h2 class="md-display-1 m-t-0">Job Requirements</h2>
+<div layout="column" layout-gt-md="row" class="md-row">
+    <div class="md-col m-b-30" flex="100" flex-gt-md="40">
+        <div class="text-subtitle-thin">You must pass the following requirements to apply to {{job.organisations[0].name || 'this position'}}. This will ensure your skills and experience are appropriate for the position.</div>
+    </div>
+    <div class="md-col" flex="100" flex-gt-md="60">
+        <div ng-if="job.requiredFields.length > 0" class="card-z1 card-padding m-b-30">
+            <div layout="row" class="m-b-15">
+                <div flex class="md-subhead">Required Skills</div>
+                <div ng-show="isFailedRequiredFields()" class="text-red">Fail</div>
+                <div ng-hide="isFailedRequiredFields()" class="text-green">Pass</div>
+            </div>
+            <p class="body-small" ng-show="isFailedRequiredFields()">You do not have all the required skills. <a class="text-green" click-create-project>Create another project</a> that evidences these skills or add them to <a class="text-green" ng-click="cancel()" ui-sref="app.user.profile({stub: user.stub, edit: 'SkillsForm'})">your profile</a>.</p>
+            <tags edit="false" size="xs" tags="job.requiredFields" type="field" status="true"></tags>
+        </div>
+        <div ng-if="job.fields.length > 0" class="card-z1 card-padding m-b-30">
+            <div layout="row" class="m-b-15">
+                <div flex class="md-subhead">Related Skills</div>
+                <div class="text-green">Pass</div>
+            </div>
+            <tags edit="false" size="xs" tags="job.fields" type="field" status="true"></tags>
+        </div>
+        <div class="card-z1 card-padding m-b-30">
+            <div layout="row" class="m-b-15">
+                <div flex class="md-subhead">2 Projects in portfolio</div>
+                <div ng-show="isFailedRequiredProjects()" class="text-red">Fail</div>
+                <div ng-hide="isFailedRequiredProjects()" class="text-green">Pass</div>
+            </div>
+            <p class="body-small">You must have at least 2 projects in your portfolio before you can apply to <b>{{job.organisations[0].name || 'this position'}}</b>.</p>
+            <md-button ng-show="isFailedRequiredProjects()" class="md-accent md-raised md-cornered md-flat md-md m-0" click-create-project>Create Project</md-button>
+        </div>
+    </div>
+</div>

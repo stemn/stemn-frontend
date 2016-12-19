@@ -1,0 +1,26 @@
+<bannerheader colour="['#7332cb', '#00ff80']">
+    <h1>STEMN Partners</h1>
+</bannerheader>
+
+<md-container class="static-page">
+
+	<div class="partnerRow" layout="row" ng-repeat="partner in partners">
+		<a href="{{partner.url}}"><img src="/assets/images/partners/{{partner.image}}" alt="{{partner.name}} Logo"></a>
+		<div flex href="{{partner.url}}">
+			<div layout-sm="column" layout="row">
+				<a class="md-headline" href="{{partner.url}}">{{partner.name}}</a>
+				<div flex></div>
+				<div>
+					<social-links type="organisation" data="partner.links"></social-links>
+				</div>
+			</div>
+			<p>{{partner.desc}}</p>
+		</div>
+	</div>
+
+	<div class="text-lightgrey">
+		Believe in our mission and want to become a partner? <br>
+		Email us at <a class="underlined" href="mailto:partnerships@stemn.com">partnerships@stemn.com</a>
+	</div>
+
+</md-container>

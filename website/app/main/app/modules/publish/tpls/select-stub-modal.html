@@ -1,0 +1,31 @@
+<md-dialog>
+    <form novalidate name="Form" ng-submit="save()">
+        <md-dialog-content>
+            <div class="md-content-container content-xs">
+                <h1 class="md-headline" style="margin-top: 0px;">Select a URL</h1>
+                <p>Finalise your {{urlType}}'s name. This will determine the URL.</p>
+                <br>
+                <md-input-container class="md-accent">
+                    <label class="capitalise">{{urlType}} name</label>
+                    <input name="title" ng-model="entity.name" required ng-minlength="5" ng-maxlength="100" ng-pattern="/[a-zA-Z0-9 !#.,'\-\(\)]*/" ng-keyup="checkAvailability(entity.name)" focus-me="true">
+                    <div ng-messages="Form.title.$error">
+                        <div ng-message="required">This is required.</div>
+                        <div ng-message="minlength">The title has be more than 5 characters.</div>
+                        <div ng-message="maxlength">Try keep your title under 100 characters.</div>
+                        <div ng-message="pattern">Sorry, that title is invalid. You can't use the characters: / \ [ ]</div>
+                        <div ng-message="notavailable">A {{urlType}} with that title already exists. Try another.</div>
+                    </div>
+                </md-input-container>
+                <div>
+                    <p>After publishing, your {{urlType}} will be available at:</p>
+                    <p class="text-lightgrey"><strong>stemn.com/</strong>{{urlType}}s/{{stub}}</p>
+                </div>
+                <div layout="row">
+                    <div flex></div>
+                    <md-button class="" ng-click="cancel()">Cancel</md-button>
+                    <md-button class="md-accent md-raised" ng-click="save()" ng-disabled="Form.$invalid">Publish</md-button>
+                </div>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

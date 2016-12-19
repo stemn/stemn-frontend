@@ -1,0 +1,3 @@
+<loading-overlay ng-if="loading"></loading-overlay>
+<a ng-repeat="item in files" ng-click="select(item)"
+class="ellipsis" ng-class="{'text-green' : !item.isCurrent, 'divider' : item.isDivider}">{{item.name}}</a>

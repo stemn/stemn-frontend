@@ -1,0 +1,75 @@
+<h2 class="md-display-1">Experience</h2>
+<div layout="column" layout-gt-md="row" class="md-row">
+    <div class="md-col m-b-30" flex="100" flex-gt-md="40">
+        <div class="text-subtitle-thin">What experiences can you bring to your dream job? What did you contribute previously? The more relevant and specific the better.</div>
+    </div>
+    <div class="md-col" flex="100" flex-gt-md="60">
+        <div ng-sortable="sortConfig">
+            <div class="onboarding-edit-card card-z1 md-padding my-handle" ng-repeat="item in user.profile.profileDetails.experience">
+                <md-button confirm class="md-warn md-circle md-raised md-sm close" ng-click="delRow(user.profile.profileDetails.experience, $index)">
+                    <md-icon md-svg-icon="navigation:close"></md-icon>
+                    <md-tooltip md-direction="top" md-autohide="true">Remove row</md-tooltip>
+                </md-button>
+                <div layout="row">
+                    <md-input-container flex class="md-accent">
+                        <label>Position</label>
+                        <input name="position" ng-model="item.position">
+                    </md-input-container>
+                    <organisation-search single="true" data="item.organisations" search-text="item.company" placeholder="Organisation" organisation-type="company"></organisation-search>
+                </div>
+                <date-range edit="true" start="item.startDate" end="item.endDate" current="item.isCurrent"></date-range>
+                <md-input-container class="md-accent">
+                    <label>Description</label>
+                    <textarea name="notes" ng-model="item.notes" md-maxlength="500"></textarea>
+                </md-input-container>
+            </div>
+        </div>
+        <div layout="row" layout-align="center center">
+            <add-another add-fn="addExperience()" white="true"></add-another>
+        </div>
+    </div>
+</div>
+
+<md-divider class="m-v-60"></md-divider>
+
+<h2 class="md-display-1">Education</h2>
+<div layout="column" layout-gt-md="row" class="md-row">
+    <div class="md-col m-b-30" flex="100" flex-gt-md="40">
+        <div class="text-subtitle-thin">Where did you study? What relevant skills did you learn there? We'll use these to match you to positions that match your education level.</div>
+    </div>
+    <div class="md-col" flex="100" flex-gt-md="60">
+        <div ng-sortable="sortConfig">
+            <div class="onboarding-edit-card card-z1 md-padding my-handle" ng-repeat="item in user.profile.profileDetails.education">
+
+                <md-button confirm class="md-warn md-circle md-raised md-sm close" ng-click="delRow(user.profile.profileDetails.education, $index)">
+                    <md-icon md-svg-icon="navigation:close"></md-icon>
+                    <md-tooltip md-direction="top" md-autohide="true">Remove row</md-tooltip>
+                </md-button>
+                <div layout="row">
+                    <md-input-container flex class="md-accent">
+                        <label>Degree / Certificatee</label>
+                        <input name="degree" ng-model="item.degree">
+                    </md-input-container>
+                    <organisation-search single="true" data="item.organisations" placeholder="School / University" search-text="item.school" organisation-type="school"></organisation-search>
+                </div>
+                <date-range edit="true" start="item.startDate" end="item.endDate" current="item.isCurrent"></date-range>
+                <md-input-container class="md-accent">
+                    <label>Description</label>
+                    <textarea name="notes" ng-model="item.notes" md-maxlength="500"></textarea>
+                </md-input-container>
+            </div>
+        </div>
+        <div layout="row" layout-align="center center">
+            <add-another add-fn="addEducation()" white="true"></add-another>
+        </div>
+
+    </div>
+</div>
+
+<md-divider class="m-v-60"></md-divider>
+
+<div layout="row">
+    <div flex></div>
+    <md-button class="md-raised md-flat md-md md-cornered" ui-sref="app.user-onboarding.intro">Back</md-button>
+    <md-button class="md-raised md-flat md-accent md-md md-cornered" ng-click="nextStep()">Next: Find matches</md-button>
+</div>

@@ -1,0 +1,5 @@
+<div class="results-block card-z1" ng-show="results.thread.length > 0 || results.project.length > 0">
+    <div class="md-subhead m-b-15">Creations</div>
+    <row-view ng-repeat="result in results.thread"  class="anim-repeat-slide sm" data="result"></row-view>
+    <row-view ng-repeat="result in results.project" class="anim-repeat-slide sm" data="result"></row-view>
+</div>

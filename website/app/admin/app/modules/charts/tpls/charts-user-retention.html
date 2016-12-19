@@ -1,0 +1,16 @@
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <h2 flex class="ellipsis">{{title}}</h2>
+        <div hide-sm hide-md download-chart-data data="data" class="md-icon-button m-0"></div>
+        <md-button aria-label="add" class="md-icon-button m-0" ng-click="showChartsSelectModal($event)">
+            <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
+        </md-button>
+        <md-button aria-label="refresh" class="md-icon-button m-0" ng-click="refreshData()">
+            <ng-md-icon icon="refresh" style="fill: white"></ng-md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+<md-content class="md-whiteframe-z1 md-padding" style="height: 355px; overflow-x: hidden;">
+    <loading-overlay ng-if="loading"></loading-overlay>
+    <nvd3 ng-if="data" options="options" data="data"></nvd3>
+</md-content>

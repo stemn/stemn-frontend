@@ -1,0 +1,4 @@
+<a class="avatar avatar-circle block m-r-10" style="background-image: url('{{user.picture || '/assets/images/default/user-1.png'}}?size=thumb&crop=true'); border: none;"></a>
+<popup class="tooltip-menu" popup-side="bottom" popup-position="center" popup-padding="11px 0 0 0" layout="column" style="min-width: 200px;">
+    <a ng-repeat="item in menu" class="md-subhead" ng-class="{'divider':item.divider}" ng-href="{{item.href}}" ng-click="item.click($event)">{{item.label}}</a>
+</popup>

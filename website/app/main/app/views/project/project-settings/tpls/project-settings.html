@@ -1,0 +1,29 @@
+<div class="projectSettingsView" layout="row" layout-align="center">
+    <div class="rel-box md-content-container">
+        <!-- Bread Crumbs -->
+        <div class="md-subhead m-b-30">
+            <a ui-sref="app.project.overview" class="text-green">{{project.name}}</a>
+            <span> / Settings</span>
+        </div>
+        <div layout="row" layout-align="start center">
+            <h1 flex class="md-display-2 m-b-30">Project Settings</h1>
+            <save-button button-class="m-r-0 md-raised md-flat md-border-green" save-fn="saveProject()" entity="project">Save</save-button>
+        </div>
+        <div class="text-tabs tabs-light-grey text-tabs-top m-t-40 m-b-30" layout="row">
+            <a class="md-subhead" ng-class="{'active':$state.includes(tab.sref)}" ng-repeat="tab in tabs" ui-sref="{{tab.sref}}" ng-hide="tab.isHidden()">{{tab.label}}</a>
+        </div>
+        <div flex ui-view class="m-b-60"></div>
+    </div>
+</div>
+
+<!--<missing-fields ng-hide="!publishAttempted" entity="project" required-fields="requiredFields" form="forms.main"></missing-fields>-->
+
+<dynamic-footer>
+    <div layout="row" layout-align="center">
+        <div class="md-content-container md-no-padding" layout="row">
+            <div flex></div>
+            <md-button ng-click="backToProject();" class="md-grey md-border md-cornered m-r-0">Back</md-button>
+            <save-button button-class="m-r-0 md-raised md-flat md-border-green" save-fn="saveProject()" entity="project">Save</save-button>
+        </div>
+    </div>
+</dynamic-footer>

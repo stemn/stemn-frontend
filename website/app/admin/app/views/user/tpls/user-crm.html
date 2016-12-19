@@ -1,0 +1,6 @@
+<div layout="row" layout-sm="column" class="md-row">
+    <div flex-sm="100" flex="50" class="md-col" layout="column">
+        <user-crm data="entity.adminData.contacted" entity="entity" save-fn="saveEntity()"></user-crm>
+    </div>
+    <recent-emails flex-sm="100" flex="50" class="md-col" parent-id="{{entity._id}}"></recent-emails>
+</div>

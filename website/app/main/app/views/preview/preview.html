@@ -1,0 +1,145 @@
+<div class="previewView" style="width: 100vw; height: 100vh" layout="column">
+
+    <!-- Toolbar -->
+    <div class="toolbar p-h-15" layout="row" layout-align="start center">
+        <div ng-hide="previewer.edit" layout="row" class="h-100" layout-align="start center">
+            <div class="text-subtitle-thin ellipsis">
+                <file-bread-crumbs hide-sm bread-crumbs="breadCrumbs" project="project" show-project-name="true"></file-bread-crumbs>
+                <div hide-gt-sm>{{fileMeta.name}}</div>
+            </div>
+        </div>
+        <div ng-if="previewer.edit">
+            <span hide-sm class="text-subtitle-thin text-black">Editing:</span>
+            <span hide-sm class="text-subtitle-thin">{{project.name}}/{{fileMeta.path}}</span>
+            <div hide-gt-sm>{{fileMeta.name}}</div>
+        </div>
+        <div flex></div>
+        <div ng-if="previewer.edit">
+            <save-button save-fn="saveFile()" entity="previewer">Save</save-button>
+            <md-button hide-sm ng-click="saveAndExit()" class="md-raised md-border-green md-accent md-flat md-cornered p-h-15">{{savePending ? 'Saving...' : 'Save & Exit'}}</md-button>
+        </div>
+        <div ng-hide="previewer.edit" layout="row" layout-align="start center">
+            <md-button class="md-icon-button" aria-label="more">
+                <md-icon md-svg-icon="navigation:more_horiz"></md-icon>
+                <popup class="tooltip-menu" popup-side="bottom" popup-position="center" popup-padding="11px0 0 0 0" layout="column">
+                    <a class="md-subhead" target="_self" ng-href="{{fileMeta.downloadUrl}}" download="{{fileMeta.name}}">Download</a>
+                    <a hide-gt-sm class="md-subhead" ng-click="sidebar.show = !sidebar.show">Toggle Sidebar</a>
+                    <a class="md-subhead" ng-click="embed($event, fileMeta)">Embed Preview</a>
+                    <a ng-if="userPermissions.isMin('collaborator')" class="md-subhead" ui-sref="app.project.settings.team({stub: project.stub})">Visability Settings</a>
+                </popup>
+            </md-button>
+            <md-button hide-sm class="md-icon-button" aria-label="download" target="_self" ng-href="{{fileMeta.downloadUrl}}" download="{{fileMeta.name}}">
+                <md-icon md-svg-icon="file:file_download"></md-icon>
+            </md-button>
+            <md-button ng-show="userPermissions.isMin('collaborator') && previewer.type == 'code'" hide-gt-sm class="md-icon-button" aria-label="edit" ng-click="previewer.edit = !previewer.edit">
+                <md-icon md-svg-icon="edit"></md-icon>
+            </md-button>
+            <md-button ng-show="userPermissions.isMin('collaborator') && previewer.type == 'code'" hide-sm class="md-accent md-border md-cornered" ng-click="previewer.edit = !previewer.edit">Edit</md-button>
+        </div>
+        <div class="divider-v-dark m-10 h-50"></div>
+        <md-button class="md-icon-button" ng-click="closePreview()" aria-label="close">
+            <md-icon md-svg-icon="navigation:close"></md-icon>
+        </md-button>
+    </div>
+    <div flex layout="row" style="min-height: 0">
+        <!-- Main Content -->
+        <div layout="column" flex style="min-width: 0;">
+<!--           <md-button ng-click="goFullscreen()">Doit - {{fullscreen.active}}</md-button>-->
+            <md-content layout="column" flex fullscreen="fullscreen.active" only-watched-property>
+                <preview-files layout="column" flex project="project" file-meta="fileMeta" previewer="previewer"></preview-files>
+            </md-content>
+            <!-- Footer -->
+            <div class="footer-toolbar" ng-hide="previewer.edit">
+                <md-content class="h-100 p-h-15" layout="row" layout-align="start center">
+                    <div hide-sm ng-hide="fileMeta.revisions.length<1" layout="row" layout-align="start center" class="h-100">
+                        <a class="st-icon-button active">
+                            <md-tooltip md-direction="top" md-autohide="true">Preview</md-tooltip>
+                            <md-icon md-svg-icon="compare-single"></md-icon>
+                        </a>
+                        <span class="divider-v-dark m-10 h-50"></span>
+                        <a class="st-icon-button" ng-click="compare('sideBySide')">
+                            <md-tooltip md-direction="top" md-autohide="true">Compare Mode</md-tooltip>
+                            <md-icon md-svg-icon="compare-side"></md-icon>
+                        </a>
+                    </div>
+
+                    <div flex>
+                        <div flex class="revision-dots text-center" ng-show="fileMeta.revisions.length>1">
+                            <span ng-repeat="revision in fileMeta.revisions">
+                                <a class="revision-dot" ng-class="{'active' : revision.rev == fileMeta.rev}" ng-click="revisionChange(revision)"></a>
+                                <popup class="tooltip-menu" popup-side="top" popup-position="center" popup-padding="0 0 11px 0" layout="column">
+                                    <a class="md-subhead">Version {{revision.revDecimal}} - {{revision.client_modified | amTimeAgo}}</a>
+                                </popup>
+                            </span>
+                        </div>
+                    </div>
+                    <div hide-sm ng-show="fileMeta.revDecimal" class="md-subhead m-l-15">Version: {{fileMeta.revDecimal}}</div>
+
+                </md-content>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div layout="column" class="sidebar" ng-hide="previewer.edit || (!sidebar.show && $mdMedia('sm'))">
+            <md-content layout="column" flex class="p-30 p-b-0">
+                <div class="text-tabs m-b-30" layout="row">
+                    <div class="md-subhead active">Meta</div>
+                </div>
+                <table class="st-meta-table">
+                    <tr>
+                        <td>Name</td>
+                        <td>{{fileMeta.name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Project</td>
+                        <td>{{project.name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Size</td>
+                        <td>{{fileMeta.size | bytes}}</td>
+                    </tr>
+                    <tr>
+                        <td>Last modified</td>
+                        <td>{{fileMeta.client_modified | amCalendar}}</td>
+                    </tr>
+                    <tr ng-show="fileMeta.revisions">
+                        <td>Revisions</td>
+                        <td>{{fileMeta.revisions.length}}</td>
+                    </tr>
+                </table>
+                <div ng-if="fileMeta.virtualChildren && previewer.instance.layers">
+                    <div class="text-tabs m-b-15 m-t-30" layout="row">
+                        <div class="md-subhead active">Child Layers</div>
+                    </div>
+                    <div ng-repeat="child in fileMeta.virtualChildren">
+                        <div layout="row" layout-align="start center">
+                            <a flex ng-click="openFileFolder(child)" layout="row" layout-align="start center">
+                                <file-thumbnail ending-url="child.endingUrl" file-type="child.fileType" thumb-link="child.thumbLink"></file-thumbnail>
+                                {{child.name}}
+                            </a>
+                            <md-checkbox ng-model="child.enabled" ng-click="toggleLayer(child)" aria-label="toggle layer"></md-checkbox>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-if="fileMeta.virtualParent">
+                    <div class="text-tabs m-b-15 m-t-30" layout="row">
+                        <div class="md-subhead active">Parent Assembly</div>
+                    </div>
+                    <a ng-click="openFileFolder(fileMeta.virtualParent)" layout="row" layout-align="start center">
+                        <file-thumbnail ending-url="fileMeta.virtualParent.endingUrl" file-type="fileMeta.virtualParent.fileType" thumb-link="fileMeta.virtualParent.thumbLink"></file-thumbnail>
+                        {{fileMeta.virtualParent.name}}
+                    </a>
+                </div>
+
+                <div ng-show="timeline.length > 1">
+                    <div class="text-tabs m-b-30 m-t-30" layout="row">
+                        <div class="md-subhead active">Timeline</div>
+                    </div>
+                    <sync-timeline timeline="timeline"></sync-timeline>
+                </div>
+            </md-content>
+        </div>
+    </div>
+
+</div>

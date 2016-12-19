@@ -1,0 +1,9 @@
+<div layout="row" layout-align="center start" class="userSettingsView">
+    <div layout="column" class="md-content-container overflow-x-box">
+        <h1 flex class="md-display-2">Settings</h1>
+        <div class="text-tabs tabs-light-grey text-tabs-top m-t-40 m-b-30" layout="row">
+            <a class="md-subhead" ng-class="{'active':$state.includes(tab.sref)}" ng-repeat="tab in tabs" ui-sref="{{tab.sref}}">{{tab.label}}</a>
+        </div>
+        <div flex ui-view></div>
+    </div>
+</div>

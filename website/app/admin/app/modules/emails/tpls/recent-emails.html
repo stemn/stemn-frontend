@@ -1,0 +1,36 @@
+<div class="md-whiteframe-z1 bg-white">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2 flex>Recent Emails</h2>
+            <md-button aria-label="refresh" class="md-icon-button" ng-click="query.refresh()">
+                <ng-md-icon icon="refresh" style="fill: white"></ng-md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <div class="rel-box" layout="column" flex>
+        <table class="table" style="min-height: 100px;">
+            <tr>
+                <th style="width: 50px;">Recipient</th>
+                <th style="width: 120px;">Time</th>
+                <th>Email type</th>
+                <th style="width: 50px;">Actioner</th>
+            </tr>
+            <tr ng-repeat="item in query.results">
+                <td><core-entity-picture entity-type="user" entity-id="{{item.recipient}}" entity="entity"></core-entity-picture></td>
+                <td>{{item.created | amTimeAgo}}</td>
+                <td>
+                    <div>{{item.subject}}</div>
+                    <div class="text-lightgrey">{{item.notificationType}}</div>
+                </td>
+                <td><core-entity-picture entity-type="user" entity-id="{{item.actioner}}" entity="entity"></core-entity-picture></td>
+            </tr>
+        </table>
+        <loading-overlay ng-if="query.loading" ng-class="{'translucent': query.loading.results>0}"></loading-overlay>
+    </div>
+</div>
+
+<div layout="row" layout-align="center" class="md-padding">
+    <md-button class="md-icon-button md-raised md-accent" ng-click="query.more()" aria-label="add more">
+        <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
+    </md-button>
+</div>

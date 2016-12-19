@@ -1,0 +1,48 @@
+<div class="post card-z1" id="{{post._id}}" >
+   <div class="edit-box">
+        <!-- Settings -->
+        <show-if-owner-or-admin owner="{{post.owner._id}}">
+           <md-button class="md-circle md-xs md-grey pin-top-right" style="margin: 0;" aria-label="Settings">
+                <md-icon md-svg-src="more-h"></md-icon>
+                <popup class="tooltip-menu" popup-side="right" popup-position="center" popup-padding="0 0 0 8px" layout="column">
+                    <a class="md-subhead" ng-click="editPost()">Edit</a>
+                    <a class="md-subhead" confirm ng-click="deletePost()">Delete</a>
+                </popup>
+            </md-button>
+        </show-if-owner-or-admin>
+        <!-- Owner -->
+        <item-owner avatar="{{post.owner.picture}}" type="user" owner-id="{{post.owner._id}}" owner-stub="{{post.owner.stub}}">
+            <h3>
+                <a ui-sref="app.user.profile({'stub' : post.owner.stub })" class="text-green">{{::post.owner.name}}</a>
+                <span ng-show="post.isOwner || post.isTeam" class="owner">
+                    <md-tooltip ng-if="post.isOwner" md-direction="top" md-autohide="true">Original Poster</md-tooltip>
+                    <md-tooltip ng-if="!post.isOwner"  md-direction="top" md-autohide="true">Project Team Member</md-tooltip>
+                </span>
+            </h3>
+            <div class="sub">
+                <a popup popup-width="400" popup-content="<url-card title='Link this post' sub-title='{{post.timestamp | date : 'h:mm a \'on\' d MMM y'}}' anchor='{{post._id}}'></url-card>">posted <span am-time-ago="::post.timestamp"></span></a>
+            </div>
+        </item-owner>
+        <!-- Content -->
+        <div class="main">
+            <modular-editor class="editor-compact" editor-sections="post.sectionData" editor-options="editorOptions" edit="edit"></modular-editor>
+            <div class="sub" layout="row" layout-align="start center">
+				<div ng-if="!edit" layout="row" layout-align="start center">
+					<stat-button  type="like" parent-type="post" parent-id="{{post._id}}" count="post.likes" display-style="circle" class="green"></stat-button>
+					<stat-counter type="like" parent-type="post" parent-id="{{post._id}}" count="post.likes" class="text-lightgrey"></stat-counter>
+					<div flex></div>
+				</div>
+                <div flex></div>
+<!--
+                <md-button ng-if="!edit" class="md-icon-button md-sm no-margin" aria-label="reply" authenticate ng-click="replyPost()">
+                    <md-tooltip md-direction="top" md-autohide="true">Reply</md-tooltip>
+                    <md-icon md-svg-icon="reply"></md-icon>
+                </md-button>
+-->
+                <md-button ng-if="edit" ng-click="cancel()" class="no-margin" style="margin-right: 15px !important">Cancel</md-button>
+                <md-button ng-if="edit" ng-click="savePost()" class="md-raised md-accent no-margin">Save Edit</md-button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<post-reply ng-if="replyActive" class="m-t-15 block" parent="parent" timeline="timeline" parent-post="post._id" reply-active="replyActive"></post-reply>-->

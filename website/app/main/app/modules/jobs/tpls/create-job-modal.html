@@ -1,0 +1,42 @@
+<md-dialog>
+    <md-dialog-content>
+        <form name="form" unsaved-warning-form novalidate class="md-content-container content-xs">
+            <loading-overlay ng-if="queryOrganisations.loading"></loading-overlay>
+
+            <h1 class="md-headline" style="margin: 0px 0 30px;">Create a new job listing</h1>
+
+
+            <div ng-show="queryOrganisations.results.length>0">
+                <p class="text-lightgrey">You can add jobs listing for any organisation you are a part of. Want to add a position for another organisation? <a class="text-green" ng-click="createOrganisation($event)">Click here</a> to create a new organisation.</p>
+
+                <md-input-container>
+                    <label>Job name</label>
+                    <input required type="text" ng-model="entity.name">
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Organisations</label>
+                    <md-select required ng-model="entity.organisations[0]._id" placeholder="Select your organisation">
+                        <md-option ng-repeat="org in queryOrganisations.results" value="{{org._id}}">
+                            {{org.name}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <div ng-hide="queryOrganisations.results.length>0">
+                <div class="well" layout="row" layout-align="start center">
+                    <p class="text-lightgrey" flex>You can't add a job because you are not part of an organisation.</p>
+                    <md-button class="md-accent md-raised md-cornered md-flat md-md" ng-click="createOrganisation($event)">Create Organisation</md-button>
+                </div>
+            </div>
+
+            <div layout="row" class="m-t-15" ng-show="queryOrganisations.results.length>0">
+                <div flex></div>
+                <div>
+                    <md-button class="" ng-click="cancel()">Cancel</md-button>
+                    <md-button class="md-accent md-raised m-r-0" ng-click="confirm()">Create</md-button>
+                </div>
+            </div>
+        </form>
+    </md-dialog-content>
+</md-dialog>

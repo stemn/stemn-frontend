@@ -1,0 +1,7 @@
+.darken{
+    transition: background 0.3s ease;
+    background: rgba(0, 0, 0, 0.1);
+    &:hover{
+        background: rgba(0, 0, 0, 0.3);
+    }
+}

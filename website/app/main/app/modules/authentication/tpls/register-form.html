@@ -1,0 +1,42 @@
+<div layout="row">
+    <md-input-container flex class="md-accent">
+        <label>First name</label>
+        <input name="firstname" ng-model="data.firstname" type="text"
+        required ng-minlength="2" ng-maxlength="30">
+        <div ng-messages="RegisterForm.firstname.$error" ng-if="RegisterForm.firstname.$dirty">
+            <div ng-message="required">This is required.</div>
+            <div ng-message="minlength">Bit short...</div>
+            <div ng-message="maxlength">Wow! too long...</div>
+        </div>
+    </md-input-container>
+    <md-input-container flex class="md-accent">
+        <label>Last name</label>
+        <input name="lastname" ng-model="data.lastname" type="text"
+        required ng-minlength="2" ng-maxlength="30">
+        <div ng-messages="RegisterForm.lastname.$error" ng-if="RegisterForm.lastname.$dirty">
+            <div ng-message="required">This is required.</div>
+            <div ng-message="minlength">Bit short...</div>
+            <div ng-message="maxlength">Wow! too long...</div>
+        </div>
+    </md-input-container>
+</div>
+<md-input-container class="md-accent">
+    <label>Email address</label>
+    <input name="email" ng-model="data.email" type="email"
+    required>
+    <div ng-messages="RegisterForm.email.$error" ng-if="RegisterForm.email.$dirty">
+        <div ng-message="required">This is required.</div>
+        <div ng-message="email">That is not a valid email.</div>
+    </div>
+</md-input-container>
+<md-input-container class="md-accent">
+    <label>Password</label>
+    <input name="password" ng-model="data.password" type="password"
+    required ng-minlength="5" ng-maxlength="35">
+    <div ng-messages="RegisterForm.password.$error" ng-if="RegisterForm.password.$dirty">
+        <div ng-message="required">This is required.</div>
+        <div ng-message="pattern">Sorry, that field name is invalid. You can't use the characters: / \ [ ]</div>
+        <div ng-message="minlength">Bit short...</div>
+        <div ng-message="maxlength">Wow! too long...</div>
+    </div>
+</md-input-container>

@@ -1,0 +1,30 @@
+<div>
+    <!-- PRIVATE FOOTER -->
+    <div layout="row" layout-align="space-between center" ng-if="showEdit">
+		<div hide-sm layout="row" layout-align="center center" style="margin-left: 15px">
+			<div class="text-lightgrey" style="margin-right:10px">Your profile link:</div>
+			<div class="select-on-click-box text-lightgrey" select-on-click>
+				{{user.stub}}.stemn.com
+				<md-tooltip md-direction="top" md-autohide="true">Click to highlight URL</md-tooltip>
+			</div>
+		</div>
+        <div flex></div>
+		<md-button hide-sm class="md-accent md-border" ng-click="forms.OverviewForm.$edit()">
+			Edit Images and Info
+		</md-button>
+		<md-button hide-sm class="md-grey md-border" ng-click="togglePublicView()">
+			Switch to public view
+		</md-button>
+  		<social-share-button></social-share-button>
+    </div>
+    <!-- PUBLIC FOOTER -->
+    <div layout="row" layout-align="space-between center" ng-if="!showEdit">
+        <div hide-sm flex class="text-lightgrey">
+        	This is what your profile will look like to the public. Why not share the link with your next job application?
+        </div>
+        <md-button class="md-grey md-border" ng-click="togglePublicView()" ng-show="userCanEdit">
+			Switch back to edit view
+		</md-button>
+<!--        <stat-button hidepublic hide-stat="true" type="follow" parent-type="user" parent-id="{{user._id}}" count="user.followers"></stat-button>-->
+    </div>
+</div>

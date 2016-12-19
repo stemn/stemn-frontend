@@ -1,0 +1,73 @@
+<div class="previewView compareView" style="width: 100vw; height: 100vh; overflow-x-box;" layout="column">
+    <!-- Toolbar -->
+    <div class="toolbar p-h-15" layout="row" layout-align="start center">
+        <div class="text-subtitle-thin ellipsis">
+            <file-bread-crumbs bread-crumbs="breadCrumbs" project="project" show-project-name="true"></file-bread-crumbs>
+        </div>
+        <div flex></div>
+        <div class="divider-v-dark m-10 h-50"></div>
+        <md-button class="md-icon-button" ng-click="closeCompare()" aria-label="close">
+            <md-icon md-svg-icon="navigation:close"></md-icon>
+        </md-button>
+    </div>
+
+    <div flex layout="column" class="overflow-x-box" style="min-height: 0;" compare-slider="slider.width">
+
+        <div ng-if="compareType == 'onion' || compareType == 'slider'" layout="row">
+            <compare-header file-meta="fileMeta1" previewer="previewer1" ng-style="slider.width < 50 && {'min-width': slider.width+'%'} || slider.width >= 50 && {'width': slider.width+'%'}"></compare-header>
+            <compare-header flex file-meta="fileMeta2" previewer="previewer2" style="border-left: 1px solid rgba(0, 0, 0, 0.2); margin-left: -1px;"></compare-header>
+        </div>
+
+        <div flex layout="{{compareType == 'sideBySide' ? 'row' : 'column'}}" style="min-height: 0" class="rel-box">
+            <!-- Main Content 2-->
+            <div flex style="min-width: 0;" layout="column" ng-style="compareType == 'onion' && {'opacity' : slider.width/100}
+                || compareType == 'slider' && {'width' : slider.width + '%'}"
+               ng-class="{'overlay-image' : compareType == 'onion' || compareType == 'slider', 'onion' : compareType == 'onion'}">
+                <compare-window layout="column" flex project="project" file-meta="fileMeta1" previewer="previewer1" compare-type="compareType" provider="provider" parent-folder="parentFolder"></compare-window>
+            </div>
+            <!-- Main Content 1-->
+            <div flex style="min-width: 0;" layout="column" ng-style="compareType == 'sideBySide' && {'border-left': '1px solid rgba(0, 0, 0, 0.2)'}
+                || compareType == 'aboveAndBelow' && {'border-top': '1px solid rgba(0, 0, 0, 0.2)'}">
+                <compare-window layout="column" flex project="project" file-meta="fileMeta2" previewer="previewer2" compare-type="compareType" provider="provider" parent-folder="parentFolder"></compare-window>
+            </div>
+            <div ng-show="compareType == 'slider'" class="handle" ng-style="compareType == 'slider' && {'left' : slider.width + '%'}"></div>
+        </div>
+
+        <div ng-if="compareType == 'onion' || compareType == 'slider'" class="p-v-5" layout="row" style="border-top: 1px solid rgba(0, 0, 0, 0.2);">
+            <input flex type="range" min="0" max="100" step="0.1" ng-model="slider.width" style="cursor: move;"/>
+        </div>
+        <div ng-if="compareType == 'onion' || compareType == 'slider'" layout="row">
+            <div class="footer-toolbar p-h-15" layout="row" layout-align="start center" ng-style="slider.width < 50 && {'min-width': slider.width+'%'} || slider.width >= 50 && {'width': slider.width+'%'}">
+                <compare-revision-timeline layout="row" flex file-meta="fileMeta1" previewer="previewer1"></compare-revision-timeline>
+
+            </div>
+            <div flex class="footer-toolbar p-h-15" layout="row" layout-align="start center" style="border-left: 1px solid rgba(0, 0, 0, 0.2);">
+                <compare-revision-timeline layout="row" flex file-meta="fileMeta2" previewer="previewer2"></compare-revision-timeline>
+            </div>
+        </div>
+
+        <div class="footer-toolbar p-h-15" layout="row" layout-align="start center">
+            <a class="st-icon-button" ui-sref="app.preview({projectStub: project.stub, path: fileMeta1.path, children: fileMeta1.virtualChildrenMap.join(','), rev: fileMeta1.rev})">
+                <md-tooltip md-direction="top" md-autohide="true">Preview</md-tooltip>
+                <md-icon md-svg-icon="compare-single"></md-icon>
+            </a>
+            <span class="divider-v-dark m-10 h-50"></span>
+            <a ng-show="compareModes.indexOf('sideBySide') >= 0" class="st-icon-button" ng-click="setCompareType('sideBySide')" ng-class="{'active' : compareType == 'sideBySide'}">
+                <md-tooltip md-direction="top" md-autohide="true">Compare Side By Side</md-tooltip>
+                <md-icon md-svg-icon="compare-side"></md-icon>
+            </a>
+            <a ng-show="compareModes.indexOf('aboveAndBelow') >= 0" class="st-icon-button" ng-click="setCompareType('aboveAndBelow')" ng-class="{'active' : compareType == 'aboveAndBelow'}">
+                <md-tooltip md-direction="top" md-autohide="true">Compare Above and Below</md-tooltip>
+                <md-icon md-svg-icon="compare-top"></md-icon>
+            </a>
+            <a ng-show="compareModes.indexOf('onion') >= 0" class="st-icon-button" ng-click="setCompareType('onion')" ng-class="{'active' : compareType == 'onion'}">
+                <md-tooltip md-direction="top" md-autohide="true">Compare Onion Skin</md-tooltip>
+                <md-icon md-svg-icon="compare-onion"></md-icon>
+            </a>
+            <a ng-show="compareModes.indexOf('slider') >= 0" class="st-icon-button" ng-click="setCompareType('slider')" ng-class="{'active' : compareType == 'slider'}">
+                <md-tooltip md-direction="top" md-autohide="true">Compare Slider</md-tooltip>
+                <md-icon md-svg-icon="compare-slide"></md-icon>
+            </a>
+        </div>
+    </div>
+</div>

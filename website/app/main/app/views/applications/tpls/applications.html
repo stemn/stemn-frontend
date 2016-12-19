@@ -1,0 +1,33 @@
+<div class="applicationsView m-t-10">
+    <div layout="row" layout-align="center">
+        <div class="md-content-container">
+            <div layout="row" layout-align="start center">
+                <h1 flex class="md-display-2">Your Job Applications</h1>
+            </div>
+            <md-divider class="m-t-40 md-divider-grey"></md-divider>
+        </div>
+    </div>
+
+    <div layout="row" layout-align="center">
+        <div class="md-content-container rel-box" infinite-scroll="query.more()" infinite-scroll-distance="2" infinite-scroll-disabled="query.loading || query.notEnoughResults || query.noMoreResults">
+            <div ng-repeat="item in query.results" class="card-z1 rel-box m-b-15" layout="column" layout-gt-sm="row" layout-align="start center">
+                <div layout="column" flex>
+                    <a class="md-title p-r-30 inline" ng-href="{{item.href}}"><b class="capitalise">{{item.organisations[0].name}}</b>/{{item.parent.name}}</a>
+                    <div class="m-t-10">
+                        <a class="text-lightgrey" ng-href="{{item.href}}">Applied <span am-time-ago="item.timestamp"></span></a>
+                        <span class="interpunct">Current Status:&nbsp;<span class="text-lightgrey">{{resubmitted ? 'Re-submitted - Pending Review' : item.mappedStatusText}}</span></span>
+                    </div>
+                </div>
+                <div ng-show="item.status.state == 'awaitingUpdate'">
+                    <div resubmit-application-button application="item" resubmitted="resubmitted"></div>
+                </div>
+            </div>
+            <div layout="row" layout-align="center" ng-hide="query.results.length>0">
+                <div class="md-content-container content-sm text-center light-font">
+                    <p>You have no job applications yet.</p>
+                </div>
+            </div>
+            <loading-overlay ng-if="query.loading && query.params.page==1"></loading-overlay>
+        </div>
+    </div>
+</div>

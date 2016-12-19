@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width" initial-scale="1.0">
+    <meta name="description" content="STEMN Admin Panel">
+    <meta name="author" content="Row1">
+
+    <title>STEMN Admin :: {{$state.current.data.pageTitle}}</title>
+    <link rel="stylesheet" href="stylesheets/vendor.css?DIGEST">
+    <link rel="stylesheet" href="stylesheets/app.css?DIGEST">
+</head>
+
+<body layout="column">
+    <div layout="column" ui-view></div>
+    <page-loading-overlay></page-loading-overlay>
+    <script src="javascript/vendor.js?DIGEST"></script>
+    <script src="javascript/templates.js?DIGEST"></script>
+    <script src="javascript/app.js?DIGEST"></script>
+</body>
+
+</html>

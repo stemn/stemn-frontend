@@ -1,0 +1,16 @@
+<div class="notification" layout="row" layout-align="start" ng-click="markRead(notification)">
+    <div>
+        <a ng-href="{{notification.link1}}"><img class="picture img-circle" ng-src="{{notification.picture1 || '/assets/images/default/user-1.png'}}?size=thumb&crop=true"></a>
+    </div>
+    <div flex>
+        <a ng-href="{{notification.link2 || notification.link1}}">
+            <strong>{{notification.name1}}</strong> {{notification.text}} <strong>{{notification.name2}}<span ng-if="notification.name2">.</span></strong><br>
+            <div class="time" am-time-ago="::notification.timestamp"></div>
+        </a>
+    </div>
+    <div ng-if="notification.picture2">
+        <a ng-href="{{notification.link2}}">
+            <img class="picture" ng-src="{{notification.picture2}}?size=thumb&crop=true">
+        </a>
+    </div>
+</div>

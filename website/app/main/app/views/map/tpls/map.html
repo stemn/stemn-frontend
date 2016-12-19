@@ -1,0 +1,42 @@
+<div class="MapView">
+    <mapbox class="map" layout="row" callback="callback"></mapbox>
+    <!--        <map-display flex="100" class="rel-box" data="results" map="map"></map-display>-->
+    <div class="content md-whiteframe-z3">
+        <div class="header">
+            <md-button ui-sref="app.home" class="logo" aria-label="home"><img src="assets/images/logo80x80.png" alt="STEMN logo"></md-button>
+            <md-button class="tab" ui-sref="app.map({type: 'project'})"      ng-class="{'active': query.type == 'project'}"      ng-click="setType('project')">Projects</md-button>
+            <md-button class="tab" ui-sref="app.map({type: 'organisation'})" ng-class="{'active': query.type == 'organisation'}" ng-click="setType('organisation')">Organisations</md-button>
+            <md-button class="tab" ui-sref="app.map({type: 'job'})"          ng-class="{'active': query.type == 'job'}"          ng-click="setType('job')">Jobs</md-button>
+            <md-button class="md-icon-button geolocate" ng-click="geolocate()" aria-label="geolocate">
+                <md-icon md-svg-icon="gps-fixed"></md-icon>
+                <md-tooltip md-direction="left" md-autohide="true">Geolocate</md-tooltip>
+           </md-button>
+        </div>
+        <div class="results" hide-sm hide-md>
+            <div class="result anim-repeat-slide md" ng-repeat="item in results | limitTo: displayLimit">
+                <a ng-click="panToMarker(item.location[0].coords, item._id)" layout="row">
+                    <div class="text" flex>
+                        <div class="bold">{{item.name}}</div>
+                        <div>{{item.blurb}}</div>
+                    </div>
+                    <div ng-if="item.picture" class="picture" ng-class="{'contain':item.entityType == 'job'}" ng-style="::item.picture && {'background-image': 'url('+item.picture+'?size=feed-sm)'}"></div>
+                </a>
+            </div>
+            <div class="loadMore" layout="row" ng-show="results.length > displayLimit && !hideLoadMore">
+                <a class="text-green" ng-click="hideLoadMore = true; displayLimit=9999">Show More</a>
+            </div>
+        </div>
+    </div>
+    <div hide-sm hide-md>
+        <prompt-overlay ng-show="query.type == 'project'" img="/assets/images/map/help-style.png">
+            <h4 class="bold">Working on an interesting project?</h4>
+            <span class="text-lightgrey">Pin it on the map and join the community making space happen.</span>
+            <a class="text-green" click-create-project>Pin my project.</a>
+        </prompt-overlay>
+        <prompt-overlay ng-show="query.type == 'organisation'" img="/assets/images/map/help-data.png">
+            <h4 class="bold">Your team missing?</h4>
+            <span class="text-lightgrey">Add your team or organisation and join the community making space happen.</span>
+            <a class="text-green" ng-click="newOrganisation($event)">Add my organisation.</a>
+        </prompt-overlay>
+    </div>
+</div>

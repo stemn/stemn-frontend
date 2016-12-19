@@ -1,0 +1,11 @@
+<md-input-container>
+    <label>License</label>
+    <md-select class="block" name="projectLicense" ng-model="project.license" placeholder="Select License">
+        <md-option ng-repeat="license in licenses" value="{{license.type}}">
+            {{license.name}}
+        </md-option>
+    </md-select>
+</md-input-container>
+<div class="text-lightgrey">
+    {{license.description}}&nbsp;<a ng-if="license.url" ng-href="{{license.url}}" target="_blank" class="text-green">Learn more.</a>
+</div>

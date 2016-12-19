@@ -1,0 +1,53 @@
+<div class="md-whiteframe-z1">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2 flex>Entities</h2>
+            <div layout="row" class="anim-show" ng-show="showDetails" layout-align="start center">
+                <md-input-container>
+                    <md-select ng-model="config[2].current" ng-change="typeChange()" placeholder="Type">
+                        <md-option ng-value="item.model" ng-repeat="item in config[2].options">{{item.title}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-button aria-label="select" ng-click="select($event)" class="md-icon-button m-0">
+                    <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
+                </md-button>
+                <md-button aria-label="refresh" class="md-icon-button m-0" ng-click="popularQuery.refresh()">
+                    <ng-md-icon icon="refresh" style="fill: white"></ng-md-icon>
+                </md-button>
+            </div>
+            <md-button aria-label="refresh" class="md-icon-button m-0" ng-click="showDetails = !showDetails;">
+                <ng-md-icon icon="{{showDetails ? 'close' : 'more_horiz'}}" style="fill: white" options='{"duration": 300}'></ng-md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-content class="md-whiteframe-z1" style="min-height: 400px;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="width: 150px;">Picture</th>
+                    <th style="width: 150px;" filter-column-order filter-object="orderFilter" filter-model="name" filter-reverse="true">Name</th>
+                    <th style="width: 100px;" filter-column-order filter-object="orderFilter" filter-model="views" filter-reverse="true">Views</th>
+                    <th style="width: 100px;" filter-column-order filter-object="orderFilter" filter-model="type" filter-reverse="true">Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="popular in popularQuery.results">
+                    <td>
+                        <a ng-href="{{entity.url}}" target="_blank"><img ng-src="https://stemn.com{{entity.picture}}?size=thumb&crop=true"></a>
+                    </td>
+                    <td>
+                        <core-entity-row entity-type="{{popular.type}}" entity-id="{{popular.id}}" entity="entity"></core-entity-row>
+                    </td>
+                    <td class="a" ng-click="showDetailsModal($event, popular.requestUsers)">{{popular.views}}</td>
+                    <td>{{popular.type}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <loading-overlay ng-if="popularQuery.loading"></loading-overlay>
+    </md-content>
+</div>
+<div layout="row" layout-align="center" class="md-padding">
+    <md-button class="md-icon-button md-raised md-accent" ng-click="popularQuery.more()" aria-label="add more">
+        <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
+    </md-button>
+</div>

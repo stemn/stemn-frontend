@@ -1,0 +1,10 @@
+<div class="editor-section container editor-image layout-wide">
+    <div layout="column">
+        <div layout="row">
+            <a flex="100" ng-href="{{section.linkUrl}}" class="image-box" lightbox="{{!section.linkUrl}}" lightbox-image="section">
+                <blur-load bg-src="{{section.image.url}}?size=editor"></blur-load>
+            </a>
+        </div>
+        <editor-caption-public></editor-caption-public>
+    </div>
+</div>

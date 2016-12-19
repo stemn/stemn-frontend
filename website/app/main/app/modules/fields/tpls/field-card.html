@@ -1,0 +1,13 @@
+<div class="card field-card relative-box" ng-class="{'card-sm' : (size=='sm'), }">
+    <a class="banner" ng-href="/fields/{{data.stub}}">
+        <div class="bounding-box" ng-style="data.banner.url && {'background-image':'url('+data.banner.url+'?size=banner-sm&crop=true)'}" ng-class="{'background-gradient-1' : !data.banner.url}"></div>
+    </a>
+    <div class="content">
+        <div class="name">
+            <a ng-href="/fields/{{data.stub}}">{{data.name}}</a>
+        </div>
+        <stat-button hide-stat="false" size="sm" type="follow" parent-type="field" parent-id="{{data._id}}" count="data.followers"></stat-button>
+        <a style="margin-left:5px;" ng-href="/fields/{{data.stub}}?tab=projects" class="btn btn-white btn-sm">{{data.numProjects}} Project<span ng-hide="data.numProjects == 1">s</span></a>
+    </div>
+    <div class="card-loading-overlay anim-fade" ng-show="loading"></div>
+</div>

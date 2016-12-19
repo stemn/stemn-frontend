@@ -1,0 +1,17 @@
+<div layout="row" layout-align="center" class="m-b-30">
+    <div class="md-content-container overflow-x-box" layout="column">
+        <h1 class="md-display-1 text-center m-t-50">Browse Jobs</h1>
+        <div class="md-title text-grey light-font text-center m-b-30">Apply to hundreds of jobs with one profile · 100% free</div>
+
+
+        <div class="flex-square-tile-row" layout="row" layout-wrap>
+            <div class="flex-square-tile" flex="20" flex-md="25" flex-sm="50" ng-repeat="item in fields">
+                <div class="image-overlay" ng-style="{'background-image':'url('+(item.picture || '/assets/images/default/square.png')+'?size=thumb-lg)'}"></div>
+                <a class="text-overlay"
+                   ui-sref="app.jobsQuery({'field': item.stub})" layout="column" layout-align="center center">
+                    <div>{{item.name}} Jobs</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

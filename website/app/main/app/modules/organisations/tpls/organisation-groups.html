@@ -1,0 +1,22 @@
+<!-- If Editing  -->
+<div ng-if="edit">
+    <div ng-sortable="sortConfig">
+        <organisation-row class="my-handle block disable-href" ng-repeat="organisation in organisations track by $index" data="organisation" show-edit="true" show-role="true" delete-fn="delete(organisations, $index)"></organisation-row>
+    </div>
+    <organisation-search data="organisations" placeholder="Add other organisations" ng-style="organisations != 0 && {'margin-left' : '67px'}" focus="edit"></organisation-search>
+</div>
+
+<!-- If Not Editing  -->
+<div ng-if="!edit">
+    <div ng-if="viewLayout!='tile'">
+        <organisation-row ng-repeat="organisation in organisations track by $index" data="organisation"></organisation-row>
+    </div>
+    <div ng-if="viewLayout=='tile'" style="margin: 0px -10px;" layout="row" layout-align="start start" layout-wrap>
+        <a ui-sref="app.organisation.overview({stub: item.stub})" ng-repeat="item in organisations" style="margin: 0 10px;" layout="column" layout-align="center center">
+            <div class="avatar-square-contain m-b-10" style="width: 109px; height: 109px;" ng-style="item.picture && {'background-image':'url('+item.picture+'?size=thumb-lg)'}">
+                <md-tooltip md-direction="top" md-autohide="true">{{item.name}}</md-tooltip>
+            </div>
+            <div class="md-subhead text-center m-b-15" style="width: 100px;">{{item.role}}</div>
+        </a>
+    </div>
+</div>

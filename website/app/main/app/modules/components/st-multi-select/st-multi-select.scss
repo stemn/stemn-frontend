@@ -1,0 +1,19 @@
+.st-select-option{
+    padding: 10px;
+
+    &.active{
+        md-icon{
+            opacity: 1;
+        }
+    }
+    md-icon{
+        opacity: 0;
+    }
+    &:hover{
+        background: rgba(0, 0, 0, 0.03);
+    }
+    .inner{
+        padding: 0px 10px;
+    }
+    transition: all 0.3s ease;
+}

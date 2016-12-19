@@ -1,0 +1,56 @@
+.landingView{
+
+    .landingTopNav{
+        a{
+            font-size: 16px;
+            opacity: 0.8;
+            margin-right: 40px;
+            text-align: center;
+            text-transform: uppercase;
+            @media (max-width: 900px) {
+                margin-right: 15px;
+            }
+            &.active{
+                opacity: 1;
+            }
+        }
+    }
+
+    .section-title{
+        font-weight: 700;
+        font-size: 30px;
+        color: rgba(0, 0, 0, 0.8);
+    }
+    .section-sub{
+        font-weight: 300;
+        font-size: 18px;
+        margin-top: 0px;
+        margin-bottom: 60px;
+    }
+
+    .section-md{
+        padding-top: 60px;
+        padding-bottom: 60px;
+        @media (max-width: 960px){
+            padding-top: 30px;
+            padding-bottom: 30px;
+		}
+    }
+    .section{
+        padding-top: 100px;
+        padding-bottom: 100px;
+        overflow: hidden;
+        position: relative;
+        @media (max-width: 960px){
+            padding-top: 50px;
+            padding-bottom: 50px;
+		}
+        &.full-height{
+            min-height: 100vh;
+            @media (max-width: 960px){
+                min-height: 0px;
+            }
+        }
+    }
+
+}

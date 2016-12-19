@@ -1,0 +1,23 @@
+.authView{
+    text-align: center;
+    height: 90vh;
+    h1{
+        font-size: 50px;
+        font-family: "Roboto Condensed";
+        font-weight: 700;
+        letter-spacing: 5px;
+        line-height: 1.3em;
+        @media (max-width: 900px){
+            font-size: 30px;
+            letter-spacing: 5px;
+        }
+    }
+    h3{
+        font-size: 20px;
+        line-height: 1.3em;
+        padding-bottom: 30px;
+    }
+    img{
+        margin-bottom: 30px;
+    }
+}

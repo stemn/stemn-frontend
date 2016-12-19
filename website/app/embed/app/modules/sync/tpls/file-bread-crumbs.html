@@ -1,0 +1,14 @@
+<span ng-hide="breadCrumbs.length > 0">{{showProjectName ? project.name : 'Home'}}</span>
+<a ng-show="breadCrumbs.length > 0" class="text-green" ng-click="select({path: '',  parentProject: project.stub, '.tag': 'folder'})">{{showProjectName ? project.name : 'Home'}}</a>
+<span ng-repeat="crumb in breadCrumbs">
+    <span>/</span>
+    <span>
+        <a ng-hide="$last" class="text-green" ng-click="select({path: crumb.path, parentProject: project.stub, '.tag': 'folder'})">
+            {{crumb.name}}
+        </a>
+        <span ng-show="$last">{{crumb.name}}</span>
+        <popup class="tooltip-menu" popup-side="bottom" popup-position="center" popup-padding="{{showProjectName ? '21px' : '10px'}} 0 0 0" layout="column">
+            <file-list project="project" path="breadCrumbs[$index-1].path" class="{{showProjectName ? 'text-subtitle-thin' : 'md-subhead'}}" select-fn="select"></file-list>
+        </popup>
+    </span>
+</span>

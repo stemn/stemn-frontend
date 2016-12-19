@@ -1,0 +1,46 @@
+<div ng-class="{'editor-contained':editorOptions.contained}">
+    <div ng-if="!edit">
+        <div ng-repeat="sectionId in editorSections.sectionOrder" class="editor-section-row {{editorSections.sections[sectionId].type}}">
+            <editor-section
+                section="editorSections.sections[sectionId]"
+                editor-options="editorOptions"
+                editor-order="editorSections.sectionOrder"
+                editor-sections="editorSections.sections"
+                editor-section-index="$index"
+                editor-section-id="sectionId"
+                edit="false">
+            </editor-section>
+        </div>
+    </div>
+    <div ng-if="edit">
+        <div ng-sortable="sortableConfig">
+            <div ng-repeat="sectionId in editorSections.sectionOrder" class="editor-section-row {{editorSections.sections[sectionId].type}}">
+                <editor-section
+                    section="editorSections.sections[sectionId]"
+                    editor-options="editorOptions"
+                    editor-order="editorSections.sectionOrder"
+                    editor-sections="editorSections.sections"
+                    editor-section-index="$index"
+                    editor-section-id="sectionId"
+                    edit="true"
+                    placeholder="{{$index == 0 ? placeholder : ''}}"
+                    realtime-editor-section="{{editorOptions.realtime}}">
+                </editor-section>
+                <realtime-editor-locked ng-if="editorOptions.realtime"
+                    section="editorSections.sections[sectionId]">
+                </realtime-editor-locked>
+            </div>
+        </div>
+        <editor-append-buttons ng-hide="editorOptions.minimal" ng-class="{'minimal':editorOptions.minimal}"></editor-append-buttons>
+        <editor-help-footer></editor-help-footer>
+    </div>
+</div>
+<!--
+		<editor-divider section="editorSections.sections[sectionId]"
+            editor-options="editorOptions"
+            editor-order="editorSections.sectionOrder"
+            editor-sections="editorSections.sections"
+            editor-section-index="$index"
+            editor-section-id="sectionId">
+        </editor-divider>
+-->

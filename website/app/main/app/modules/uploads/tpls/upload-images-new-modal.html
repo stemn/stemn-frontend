@@ -1,0 +1,51 @@
+<md-dialog class="md-full-screen upload-image-modal">
+    <md-toolbar style="background: white;">
+        <div class="md-toolbar-tools">
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-icon="navigation:close" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <form>
+        <md-dialog-content layout="row" layout-align="center center">
+            <div class="md-content-container content-sm">
+                <h1 class="md-headline">Arrange your images...</h1>
+                <br>
+                <br>
+
+                <div layout="row" layout-wrap class="gallery-display" ng-sortable="sortableConfig">
+                    <div flex="20" flex-md="25" flex-sm="50" ng-repeat="image in images">
+                        <md-button class="md-circle md-xs md-raised" ng-click="remove($index)"><md-icon md-svg-icon="navigation:close"></md-icon></md-button>
+                        <img class="md-whiteframe-z1" ng-src="{{image.url}}">
+                    </div>
+                </div>
+
+                <div nv-file-drop="" uploader="uploader" layout="row" layout-align="center center" style="margin: 40px 0;">
+                    <div nv-file-over="" uploader="uploader" over-class="drag-over" class="drop text-center">
+                        <label class="btn-upload">
+                            <input type="file" accept=".png, .jpg, .jpeg, .gif" class="upload" nv-file-select="" uploader="uploader" multiple/>
+                            <span>Upload images</span>
+                        </label>
+                        <strong style="padding-left: 5px;">OR</strong>
+                        Drag and Drop an image here to upload
+                    </div>
+                </div>
+<!--
+                <div class="upload-progress">
+                    <md-progress-linear class="md-accent" md-mode="determinate" value="{{uploader.progress}}"></md-progress-linear>
+                </div>
+-->
+                <loading-overlay ng-if="uploader.progress > 0 && uploader.progress < 100" determinate="uploader.progress">Uploading...</loading-overlay>
+                <loading-overlay ng-if="uploader.progress == 100 && !uploader.queue[uploader.queue.length-1].file.url">Processing...</loading-overlay>
+            </div>
+        </md-dialog-content>
+        <div class="md-actions" layout="row">
+            <div flex></div>
+            <div>
+                <md-button ng-click="cancel()">Cancel</md-button>
+                <md-button class="md-accent md-raised" ng-click="save()">Save</md-button>
+            </div>
+        </div>
+    </form>
+</md-dialog>

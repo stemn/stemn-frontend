@@ -1,0 +1,14 @@
+<div class="creationsView m-t-10">
+    <md-container>
+        <div layout="row" layout-align="start center">
+            <h1 flex class="md-display-2">Your Creations</h1>
+            <!--			<md-button class="md-raised md-accent md-flat md-cornered" click-create>Create something</md-button>-->
+        </div>
+        <div class="text-tabs text-tabs-top tabs-light-grey m-t-40" layout="row">
+            <a class="md-subhead" ng-class="{'active':$state.includes(tab.sref)}" ng-repeat="tab in tabs" ui-sref="{{tab.sref}}">{{tab.label}}</a>
+        </div>
+    </md-container>
+    <div ng-show="$state.is('app.creations.all')" ui-view="all"></div>
+    <div ng-show="$state.is('app.creations.drafts')" ui-view="drafts"></div>
+    <div ng-show="$state.is('app.creations.published')" ui-view="published"></div>
+</div>

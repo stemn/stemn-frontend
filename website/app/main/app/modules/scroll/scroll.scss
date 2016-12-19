@@ -1,0 +1,28 @@
+.scroll-down{
+    $width: 50px;
+    transition: 0.3s ease all;
+    .scrolled-past-top &{
+        transform: translateY(2*$width)
+    }
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    width: $width;
+    margin-left: -$width/2;
+    z-index: 200;
+    md-icon{
+        width: $width;
+        height: $width;
+    }
+
+    &.white{
+        md-icon{
+            color: white;
+        }
+    }
+
+    -webkit-animation: pulse 1s linear;
+    animation: pulse 1s linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+}

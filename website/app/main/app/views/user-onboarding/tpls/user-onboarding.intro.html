@@ -1,0 +1,99 @@
+<h1 class="md-display-1 text-center m-t-30">Find a match</h1>
+<div class="md-title text-grey light-font text-center">See jobs that match your skills and experience</div>
+<md-divider class="m-v-60"></md-divider>
+<h2 class="md-display-1">About you</h2>
+<div layout="column" layout-gt-md="row" class="md-row">
+    <div class="md-col m-b-30" flex="100" flex-gt-md="40">
+        <div class="text-subtitle-thin">Tell the companies about yourself or import from LinkedIn. We'll use your this to match you to jobs that match your skills and experience.</div>
+    </div>
+    <div class="md-col" flex="100" flex-gt-md="60">
+
+       <form name="forms.overview">
+
+            <div class="card-z1 card-padding m-b-30 rel-box">
+                <div class="md-subhead">Want to get a head start?</div>
+                <p>Import your profile from Linkedin. This will automatically fill out your profile picture, education and experience.</p>
+                <md-button class="md-social md-linkedin md-md m-l-0 md-cornered" ng-click="linkedinImport()">Import from Linkedin</md-button>
+                <loading-overlay ng-if="linkedinLoading"></loading-overlay>
+            </div>
+
+            <div class="card-z1 card-padding m-b-30">
+                <div class="md-subhead">Profile Photo</div>
+                <div layout="column" layout-gt-sm="row" layout-align="start center" class="m-t-30">
+                    <upload-image icon="true" image="user.profile.picture" ng-model="user.profile.picture" circle="true" name="ProfileImage">
+                        <img class="avatar-circle avatar-xl" ng-src="{{user.profile.picture || '/assets/images/default/user-1.png' }}?size=user&crop=true">
+                    </upload-image>
+                    <div flex class="text-center">
+                        <div ng-show="user.profile.picture">
+                           <p ng-show="linkedinImported">Your LinkedIn photo is low resolution. Consider uploading another now.</p>
+                           <p ng-hide="linkedinImported">Looking good!</p>
+
+                        </div>
+                        <div ng-hide="user.profile.picture">
+                            <p>Profiles with a photo get 78% more views</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-z1 card-padding m-b-30">
+                <div layout="row">
+                    <div class="md-subhead" flex>Mini Resume</div>
+                    <div class="notes">Required</div>
+                </div>
+                <p>Introduce yourself in 100 characters</p>
+                <md-input-container class="md-accent">
+                    <label>e.g. MIT AeroAstro, Materials and Structures specialist; worked at SpaceX</label>
+                    <textarea required ng-model="user.blurb" md-maxlength="100"
+                    name="Blurb"></textarea>
+                    <div ng-messages="forms.overview.Blurb.$error" ng-if="forms.overview.Blurb.$dirty">
+                        <div ng-message="required">This is required.</div>
+                        <div ng-message="md-maxlength">Your blurb has to be less than 100 characters long.</div>
+                    </div>
+                </md-input-container>
+            </div>
+        </form>
+    </div>
+</div>
+
+<md-divider class="m-v-60"></md-divider>
+
+<h2 class="md-display-1">Skills and knowledge</h2>
+<div layout="column" layout-gt-md="row" class="md-row">
+    <div class="md-col m-b-30" flex="100" flex-gt-md="40">
+        <div class="text-subtitle-thin">What technical languages and programs do you know? What are your key fields of interest? We'll use these to match you to the most appropriate jobs for your skills and abilities.</div>
+    </div>
+    <div class="md-col" flex="100" flex-gt-md="60">
+
+       <form name="forms.skills">
+            <div id="technologiesEdit" class="card-z1 card-padding m-b-30">
+                <div class="md-subhead">Technologies and Technical Languages</div>
+                <p>Type and select each technology separately. E.g. Matlab, C++, SolidWorks. Later on, you'll need to add a few projects to your portfolio as evidence for these skills.</p>
+                <field-search data="user.profile.profileDetails.technologies" focus="focusField" ng-mouseenter="focusField=true" ng-mouseleave="focusField=false" placeholder="Technologies, Programs and Languages"></field-search>
+                <tags ng-if="user.profile.profileDetails.technologies.length>0" edit="true" size="xs" tags="user.profile.profileDetails.technologies" type="field"></tags>
+            </div>
+            <div id="skillsEdit" class="card-z1 card-padding m-b-30">
+               <div layout="row">
+                    <div class="md-subhead" flex>Skills and Fields</div>
+                    <div class="notes">5 Required</div>
+                </div>
+                <p>Type and select each field separately. E.g. Avionics, Structural Analysis</p>
+                <field-search data="user.profile.profileDetails.skills" focus="focusTech" ng-mouseenter="focusTech=true" ng-mouseleave="focusTech=false" placeholder="Skills and fields"></field-search>
+                <tags ng-if="user.profile.profileDetails.skills.length>0" edit="true" size="xs" tags="user.profile.profileDetails.skills" type="field"></tags>
+            </div>
+            <div id="interestsEdit" class="card-z1 card-padding m-b-30">
+                <div class="md-subhead" flex>Interests</div>
+                <p>Interests should be fields or technical hobbies. E.g. Drones, Arduino, 3D printing</p>
+                <field-search data="user.profile.profileDetails.interests" focus="focusInterest" ng-mouseenter="focusInterest=true" ng-mouseleave="focusInterest=false" placeholder="Interests"></field-search>
+                <tags ng-if="user.profile.profileDetails.interests.length>0" edit="true" size="xs" tags="user.profile.profileDetails.interests" type="field"></tags>
+            </div>
+        </form>
+    </div>
+</div>
+
+<md-divider class="m-v-60"></md-divider>
+
+<div layout="row">
+    <div flex></div>
+    <md-button class="md-raised md-flat md-accent md-md md-cornered m-r-0" ng-click="nextStep()">Next: Your experience</md-button>
+</div>

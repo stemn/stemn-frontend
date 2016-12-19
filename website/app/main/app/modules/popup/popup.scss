@@ -1,0 +1,95 @@
+[popup]{
+    cursor: pointer;
+}
+popup{
+    display: none !important; // Don't display the popup el (until it is appended to body)
+}
+
+$size  : 10px;
+$border: 1px;
+$border-color: #D9D9D9;
+$bg-color: #ffffff;
+
+.popup{
+    position: absolute;
+//    padding-top: 10px;
+    z-index: 1050;
+    -webkit-animation: fadeIn 0.3s;
+    animation: fadeIn 0.3s;
+    &.ng-hide{
+        opacity: 0;
+    }
+    transition: all 0.3s ease;
+    .popup-arrow{
+        position: absolute;
+        width: $size;
+        height: $size;
+        border: 1px solid $border-color;
+        background: $bg-color;
+        transform: rotate(45deg)
+    }
+}
+// Popup types
+.tooltip-menu{
+    color: rgba(0, 0, 0, 0.6);
+    line-height: 1.5em;
+    background: #ffffff;
+    max-width: 290px;
+    z-index: 1;
+    position: relative;
+    border: 1px solid $border-color;
+    box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.08);
+    $extra-padding: 8px;
+    .md-subhead{
+        font-weight: 400;
+    }
+    a{
+        display: block;
+        padding: 0px 25px 0px 15px;
+        line-height: 25px;
+        &.divider{
+            padding-bottom: $extra-padding;
+            border-bottom: 1px solid #EEEEEE;
+        }
+        &:first-child{
+            padding-top: $extra-padding;
+        }
+        &:last-child{
+            padding-bottom: $extra-padding;
+        }
+        &:hover{
+            color: rgba(0, 0, 0, 0.8);
+        }
+        &.active{
+            color: black;
+        }
+    }
+    .divider+a{
+        padding-top: $extra-padding;
+    }
+}
+.tooltip-popup{
+    color: rgba(0, 0, 0, 0.6);
+    line-height: 1.5em;
+    background: #ffffff;
+    padding: 15px;
+    max-width: 290px;
+    z-index: 1;
+    position: relative;
+    box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.08);
+    border: 1px solid $border-color;
+    p{
+        font-size: 13px;
+        margin-top: 0px;
+        margin-bottom: 10px;
+        &:last-child{
+            margin-bottom: 0px;
+        }
+    }
+}
+.card-popup{
+    background: white;
+    z-index: 1;
+    position: relative;
+    width: 300px;
+}

@@ -1,0 +1,13 @@
+<md-dialog class="social-prompt-modal" aria-label="social-prompt">
+    <md-dialog-content>
+        <div class="md-content-container content-xs">
+            <h1 class="md-headline m-t-0">Last step: Share your {{ data.entity || 'project'}}</h1>
+            <p>Want to get feedback faster? Help us grow the community by sharing this {{ data.entity || 'project'}} with your friends and colleagues.</p>
+           <social-share-buttons class="block m-v-30" tiles="true"></social-share-buttons>
+            <div layout="row">
+                <div flex></div>
+                <md-button ng-click="cancel()" class="m-0">Skip</md-button>
+            </div>
+        </div>
+    </md-dialog-content>
+</md-dialog>

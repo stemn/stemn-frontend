@@ -1,0 +1,137 @@
+<div class="userView" ng-class="{'profileTab':$state.includes('app.user.profile')}">
+    <form unsaved-warning-form novalidate name="forms.OverviewForm" class="edit-box">
+        <!-- EDITING  -->
+        <div ng-if="forms.OverviewForm.$visible">
+            <upload-image icon="true" md-ink-ripple class="block" image="user.profile.banner.url" name="BannerImage" ng-model="user.profile.banner.url">
+                <div class="user-banner-top divider-bar" style="background-position: top;"
+                ng-style="{'background-image':'url('+(user.profile.banner.url || alternateBanner)+'?size=banner-lg&crop=true)'}">
+                    <div></div>
+                </div>
+            </upload-image>
+        </div>
+        <!-- NOT EDITING  -->
+        <div ng-if="!forms.OverviewForm.$visible">
+            <div class="user-banner-top divider-bar" style="background-position: top;"
+               ng-style="{'background-image':'url('+(user.profile.banner.url || alternateBanner)+'?size=banner-lg&crop=true)'}">
+                <div class="headerTitle" layout="row" layout-align="center">
+                    <div class="md-content-container" layout="row" layout-align="space-between center" ng-hide="$state.includes('app.user.profile')">
+                        <h1 class="capitalise no-margin text-white md-display-1">{{user.profile.firstname}}'s {{tabName}}</h1>
+                        <hide-if-owner owner="{{user._id}}">
+                            <stat-button hidepublic hide-stat="true" type="follow" parent-type="user" parent-id="{{user._id}}" count="user.followers"></stat-button>
+                        </hide-if-owner>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <md-container ng-show="$state.includes('app.user.profile')">
+            <div class="rel-box">
+
+                <edit-button ng-if="showEdit" form="forms.OverviewForm" save-fn="SaveUser()" inline="true" hide-edit="true"></edit-button>
+                <settings-button ng-if="showEdit" ng-hide="forms.OverviewForm.$visible">
+                    <md-menu-item><md-button ng-click="forms.OverviewForm.$edit()">Edit info and banner</md-button></md-menu-item>
+                    <md-menu-item><md-button ng-click="linkedinImport($event)">Import from linkedin</md-button></md-menu-item>
+                    <md-menu-item ng-if="isAdmin"><md-button ng-click="authenticateAsUser(user._id)">Authenticate as user</md-button></md-menu-item>
+                </settings-button>
+
+                <div class="user-picture-area text-center">
+                    <!-- EDITING  -->
+                    <div ng-show="forms.OverviewForm.$visible">
+                        <upload-image image="user.profile.picture" ng-model="user.profile.picture"
+                        name="ProfileImage" icon="true">
+                            <img id="picture" class="picture md-whiteframe-z1" ng-src="{{user.profile.picture || '/assets/images/default/user-1.png'}}?size=user&crop=true">
+                        </upload-image>
+                    </div>
+                     <!-- NOT EDITING  -->
+                    <div ng-show="!forms.OverviewForm.$visible">
+                        <img lightbox="true" lightbox-image="user.profile.picture" class="picture md-whiteframe-z1" ng-src="{{user.profile.picture || '/assets/images/default/user-1.png'}}?size=user&crop=true" alt="{{user.name}}">
+                    </div>
+                </div>
+                <!-- NOT EDITING  -->
+                <div ng-show="!forms.OverviewForm.$visible">
+                    <div class="user-info-area text-center">
+                        <h1>{{user.profile.firstname}} {{user.profile.lastname}}</h1>
+                        <h3>{{user.blurb}}</h3>
+                        <div class="user-stats">
+                            <md-button class="no-hover" ui-sref="app.user.followers">
+                                <small>FOLLOWERS</small>
+                                <h3>{{user.followers || 0}}</h3>
+                            </md-button>
+                            <md-button class="no-hover" ui-sref="app.user.following">
+                                <small>FOLLOWING</small>
+                                <h3>{{user.following || 0}}</h3>
+                            </md-button>
+                            <md-button class="no-hover" ui-sref="app.user.projects">
+                                <small>PROJECTS</small>
+                                <h3>{{user.numProjects || 0}}</h3>
+                            </md-button>
+                        </div>
+                    </div>
+                    <div class="user-buttons text-center" style="margin-bottom: 40px;">
+                        <hide-if-owner owner="{{user._id}}">
+                            <stat-button hidepublic hide-stat="true" type="follow" parent-type="user" parent-id="{{user._id}}" count="user.followers"></stat-button>
+                        </hide-if-owner>
+                    </div>
+                </div>
+                <!-- EDITING  -->
+                <div ng-show="forms.OverviewForm.$visible">
+                   <br>
+                   <br>
+                   <br>
+                   <div id="name" layout="row" layout-sm="column">
+                        <md-input-container flex>
+                            <label>First name*</label>
+                            <input required ng-model="user.profile.firstname"
+                            name="FirstName">
+                            <div ng-messages="forms.OverviewForm.FirstName.$error">
+                                <div ng-message="required">This is required.</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label>Last Name*</label>
+                            <input required ng-model="user.profile.lastname"
+                            name="LastName">
+                            <div ng-messages="forms.OverviewForm.LastName.$error">
+                                <div ng-message="required">This is required.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <md-input-container id="blurb">
+                        <label>Blurb* (example: Propulsion Engineer at SpaceX)</label>
+                        <input required ng-model="user.blurb" md-maxlength="100"
+                        name="Blurb">
+                        <div ng-messages="forms.OverviewForm.Blurb.$error">
+                            <div ng-message="required">This is required.</div>
+                            <div ng-message="md-maxlength">Your blurb has to be less than 100 characters long.</div>
+                        </div>
+                    </md-input-container>
+                    <location-search data="user.profile.location" single="true"></location-search>
+<!--
+                    <md-input-container>
+                        <label>School / University</label>
+                        <input ng-model="user.profile.school">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Company</label>
+                        <input ng-model="user.profile.company">
+                    </md-input-container>
+-->
+                    <span class="text-lightgrey">*required field</span>
+                </div>
+            </div>
+        </md-container>
+    </form>
+    <div layout="row" layout-align="center">
+        <div class="md-content-container md-no-padding">
+            <div ng-hide="forms.OverviewForm.$visible">
+                <div class="text-tabs m-t-40 m-b-30" layout="row">
+                    <a class="md-subhead" ng-class="{'active':$state.includes(tab.sref)}" ng-repeat="tab in tabs" ui-sref="{{tab.sref}}">{{tab.label}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ui-view="projects" ng-show="$state.includes('app.user.projects')" class="m-b-60"></div>
+    <div ui-view="profile"  ng-show="$state.includes('app.user.profile')"  class=""></div>
+    <div ui-view="blog"     ng-show="$state.includes('app.user.blogs')"    class="m-b-60"></div>
+    <div ui-view="threads"  ng-show="$state.includes('app.user.threads')"  class="m-b-60"></div>
+    <div ui-view="comments" ng-show="$state.includes('app.user.comments')" class="m-b-60"></div>
+</div>

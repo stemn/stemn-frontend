@@ -1,0 +1,46 @@
+<div layout="row" layout-sm="column" class="md-row">
+	<div flex-sm="100" flex="20" class="md-col">
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2 flex>Filter Results</h2>
+			</div>
+		</md-toolbar>
+		<md-content class="md-whiteframe-z1 md-padding">
+            <div class="md-subhead">Event Type</div>
+            <md-checkbox style="display: block;" ng-repeat="item in filter.events" ng-model="item.status" aria-label="Checkbox 1">
+                {{item.name}}
+            </md-checkbox>
+            <div class="md-subhead">Filter Fakes</div>
+            <md-checkbox ng-model="filter.noFakes.status" aria-label="Checkbox 1">
+                {{filter.noFakes.name}}
+            </md-checkbox>
+		</md-content>
+	</div>
+	<div flex-sm="100" flex="80" class="md-col">
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2 flex>Live View</h2>
+                <md-button aria-label="refresh" class="md-icon-button" ng-click="getLogs(1)">
+					<ng-md-icon icon="refresh" style="fill: white"></ng-md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-content class="md-whiteframe-z1">
+		    <div infinite-scroll="getLogs(page)" infinite-scroll-distance="1" infinite-scroll-disabled="loading">
+                <div class="log-row" ng-repeat="event in logs | orderBy: '-date'" layout="row" layout-align="start center">
+                    <core-entity-picture entity-id="{{event.parentId || event.entityId}}" entity-type="{{event.parentType || event.entityType}}"></core-entity-picture>
+                    <div flex layout="column">
+                        <div class="ellipsis bold">
+                            <core-entity-row entity-id="{{event.parentId || event.entityId}}" entity-type="{{event.parentType || event.entityType}}"></core-entity-row>
+                        </div>
+                        <div layout="row"  class="text-lightgrey">
+                            <core-entity-row entity-id="{{event.requestUser}}" entity-type="user"></core-entity-row>
+                            <div style="margin-left: 5px;">{{event.date | amTimeAgo}}</div>
+                        </div>
+                    </div>
+                    <div>[{{event.event}}]</div>
+                </div>
+			</div>
+		</md-content>
+	</div>
+</div>

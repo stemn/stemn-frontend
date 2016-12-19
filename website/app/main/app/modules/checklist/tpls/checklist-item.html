@@ -1,0 +1,6 @@
+<div class="checklist-item" ng-class="{'complete':itemComplete}" layout="row" layout-align="start center">
+	<md-icon md-svg-icon="done"></md-icon>
+	<div flex>
+		<a ng-href="{{itemHref}}" ng-click="itemClick($event)" ng-transclude></a>
+	</div>
+</div>

@@ -1,0 +1,50 @@
+<md-dialog>
+    <form>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2 flex>Edit</h2>
+				<md-button class="md-icon-button" ng-click="cancel()">
+					<ng-md-icon icon="close" aria-label="Close dialog"></ng-md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+        <md-dialog-content style="width: 700px;">
+            <div class="md-dialog-content">
+                <md-input-container class="md-block">
+                    <label>Name</label>
+                    <input ng-model="item.name">
+                </md-input-container>
+
+                <div layout="row" layout-align="start center">
+                    <md-input-container flex class="md-block" style="margin-bottom: 0px;">
+                        <label>Wiki Search String</label>
+                        <input ng-model="blurbQuery">
+                    </md-input-container>
+                    <md-button class="md-cornered md-accent" click-search-wiki name="{{blurbQuery}}" model="item.blurb">Search Wiki</md-button>
+                </div>
+
+                <md-input-container class="md-block">
+                    <label>Blurb</label>
+                    <textarea ng-model="item.blurb" cols="50"></textarea>
+                </md-input-container>
+                <div layout="row" layout-align="start center">
+                    <md-input-container flex class="md-block" style="margin-bottom: 0px;">
+                        <label>Image Search String</label>
+                        <input ng-model="itemName">
+                    </md-input-container>
+                    <md-button class="md-cornered md-accent" ng-click="imageSearchCallback()">Search</md-button>
+                </div>
+                <image-search query="imageSearchCallback" name="{{itemName}}" model="item.banner.url"></image-search>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <div flex></div>
+            <md-button ng-click="cancel()">
+                Cancel
+            </md-button>
+            <md-button class="md-raised md-primary" ng-click="save()">
+                Save
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

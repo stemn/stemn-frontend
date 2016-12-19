@@ -1,0 +1,18 @@
+
+<div layout="row" style="position: absolute; top: 5px; right: 10px; left: 0;">
+    <div flex></div>
+    <a class="st-icon-button" ng-click="flipBoard()">
+        <md-icon md-svg-icon="swap_horiz"></md-icon>
+        <md-tooltip md-direction="bottom" md-autohide="true">Flip</md-tooltip>
+    </a>
+    <a class="st-icon-button" ng-click="reset()">
+        <md-icon md-svg-icon="home"></md-icon>
+        <md-tooltip md-direction="bottom" md-autohide="true">Reset</md-tooltip>
+    </a>
+</div>
+<div flex layout="column" layout-align="center center">
+    <canvas class="canvas"></canvas>
+<!--     style="width: 100%; height: 100%;" -->
+</div>
+
+<loading-overlay ng-if="loading" class="light-grey"></loading-overlay>

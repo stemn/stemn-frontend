@@ -1,0 +1,19 @@
+<md-dialog style="z-index: 1001">
+    <md-dialog-content>
+        <div style="width: 500px;">
+            <h1 class="md-headline" style="margin-top: 0px;">Wait! This is unpublished.</h1>
+            <div>
+            	<p>It will not be visible to others until you publish it.</p>
+            	<p>You'll find the publish button in the bottom right corner of the page footer.</p>
+            	<img src="/assets/images/tips/publish.png" alt="Publish Image">
+            </div>
+        </div>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <div flex></div>
+        <div>
+            <md-button ng-click="cancel()">Publish later</md-button>
+            <md-button class="md-accent md-raised" ng-click="confirm()">Go back and publish</md-button>
+        </div>
+    </div>
+</md-dialog>

@@ -1,0 +1,63 @@
+.editor-insert-buttons{
+	position: absolute;
+	margin-left: -48px;
+	margin-top: -3px;
+	opacity: 0;
+    z-index: 4;
+	&.minimal{
+		margin-left: 0px;
+	}
+	.insert-button{
+		md-icon{
+			transform: rotate(0deg);
+			transition: transform 0.1s ease;
+			&.close{
+				transform: rotate(45deg)
+			}
+		}
+	}
+	.editor-section:hover &{
+		opacity: 1;
+	}
+	&.append{
+		opacity: 1;
+	}
+	// Animate buttons on show
+	.animate-throw {
+		$throw: -47px;
+		transition: all 0.2s ease;
+		transform: translateX(0px);
+		opacity: 1;
+		md-icon{
+			transform: rotate(0deg);
+			transition: transform 0.2s linear;
+		}
+		&.ng-hide{
+			opacity: 0;
+			md-icon{
+				transform: rotate(-45deg);
+			}
+		}
+		&.throw-1.ng-hide{
+			transform: translateX($throw*1);
+		}
+		&.throw-2.ng-hide{
+			transform: translateX($throw*2);
+		}
+		&.throw-3.ng-hide{
+			transform: translateX($throw*3);
+		}
+		&.throw-4.ng-hide{
+			transform: translateX($throw*4);
+		}
+		&.throw-5.ng-hide{
+			transform: translateX($throw*5);
+		}
+        &.throw-6.ng-hide{
+			transform: translateX($throw*6);
+		}
+	}
+	.editor-image-caption & { // move insert icon up a bit if in a caption (text is smaller)
+		margin-top: -8px;
+	}
+}

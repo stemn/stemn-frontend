@@ -1,0 +1,32 @@
+<div class="card card-centered person-card relative-box" ng-class="{'card-sm' : (size=='sm')}">
+    <a ng-href="/users/{{user.stub}}">
+        <div class="banner">
+            <div class="bounding-box" ng-style="{'background-image':'url('+(user.profile.banner.url || alternateBanner)+'?size=banner-sm&crop=true)'}"></div>
+        </div>
+        <div>
+            <div ng-style="!!user.picture && {'background-image':'url('+user.picture+'?size=user&crop=true)'}" class="img-circle bounding-box profile-img picture"></div>
+        </div>
+    </a>
+    <div class="content">
+        <div class="name">
+            <a ng-href="/users/{{user.stub}}">{{user.name}}</a>
+        </div>
+        <div class="blurb">
+            {{user.blurb || '_'}}
+        </div>
+        <hide-if-owner dr-class="vishidden" owner="{{id || user._id}}">
+            <stat-button hidepublic hide-stat="true" hide-icon="true" type="follow" parent-type="user" parent-id="{{user._id}}" count="user.followers"></stat-button>
+        </hide-if-owner>
+        <div class="stats">
+            <div>
+                <h3>{{user.numProjects || 0}}</h3>
+                <small>projects</small>
+            </div>
+            <div stat-display-modal type="follow" parent-type="user" parent-id="{{user._id}}" class="a">
+                <h3>{{user.followers || 0}}</h3>
+                <small>followers</small>
+            </div>
+        </div>
+    </div>
+    <div class="card-loading-overlay anim-fade" ng-show="loading"></div>
+</div>

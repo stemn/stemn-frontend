@@ -1,0 +1,74 @@
+<div layout="row" class="md-row">
+    <div flex class="md-col">
+        <preview-gallery class="m-b-30" gallery="organisation.gallery"></preview-gallery>
+        <div class="line-divider-bottom m-b-15" layout="row">
+            <div class="md-subhead" flex>About</div>
+        </div>
+        <div class="m-b-30">
+            <div class="angular-medium-editor rel-box m-b-30" style="min-height: 50px" ng-show="organisation.blurb.length > 5">
+                <div ng-bind-html="organisation.blurb"></div>
+            </div>
+<!--            <p style="white-space: pre-wrap;">{{organisation.blurb}}</p>-->
+            <p ng-show="organisation.location[0]">
+                <span>Location:</span>
+                <a go-to-map location="organisation.location[0].geo" location-type="organisation" class="text-green">{{organisation.location[0].name}}</a>
+            </p>
+        </div>
+
+        <div class="line-divider-bottom m-b-30" layout="row">
+            <div class="md-subhead" flex>Recent Projects</div>
+            <a class="md-subhead text-green" ui-sref="app.organisation.projects">See All</a>
+        </div>
+        <div class="m-b-30">
+            <div layout="row" layout-align="start center" style="margin: 0px -10px;" layout-wrap>
+                <creation-card flex="33" flex-md="50" flex-sm="100" style="padding: 0 10px 10px;" ng-repeat="project in projects | orderBy : '-picture' | limitTo : 3" entity="project.data"></creation-card>
+                <div ng-show="projects.length==0" class="text-lightgrey" style="padding: 0 10px">No projects yet. <a ng-click="newProject($event)" class="text-green">Add one.</a></div>
+            </div>
+        </div>
+
+        <div ng-show="organisation.organisations.length > 0" class="m-b-30">
+            <div class="line-divider-bottom m-b-30" layout="row">
+                <div class="md-subhead" flex>Related Organisations</div>
+            </div>
+            <organisation-groups organisations="organisation.organisations" view-layout="tile"></organisation-groups>
+        </div>
+
+        <div ng-show="organisation.fields.length > 0" class="m-b-30">
+            <div class="line-divider-bottom m-b-15" layout="row">
+                <div class="md-subhead" flex>Related Fields</div>
+            </div>
+            <div class="m-b-30">
+                <tags edit="false" size="xs" tags="organisation.fields" type="field"></tags>
+            </div>
+        </div>
+
+        <div ng-show="organisation.team.length > 0">
+            <div class="line-divider-bottom m-b-15" layout="row">
+                <div class="md-subhead" flex>Team Members</div>
+            </div>
+            <user-row class="md-col" flex="100" flex-sm="100" ng-repeat="user in organisation.team" data="user" type="user"></user-row>
+            <div ng-hide="userCanEdit"><span class="text-lightgrey m-t-15">Are you part of this organisation?</span> <a authenticate click-request-ownership parent-type="organisation" parent-id="{{organisation._id}}" class="text-green">Request an invite</a></div>
+        </div>
+    </div>
+
+    <div hide-sm hide-md class="md-col feed-widgets" layout="column">
+<!--
+        <div class="md-subhead m-b-10">Questions</div>
+        <feed-widget-timeline type="discussions" parent-type="organisation" parent-id="{{organisation._id}}" parent="organisation" show-edit="showEdit"></feed-widget-timeline>
+        <div class="md-subhead m-b-10 m-t-15">Updates</div>
+        <feed-widget-timeline type="blogs"       parent-type="organisation" parent-id="{{organisation._id}}" parent="organisation" show-edit="showEdit"></feed-widget-timeline>
+
+-->
+        <div class="md-subhead m-b-10 m-t-15">External Links</div>
+        <div class="border-box-white p-15">
+            <social-links class="social-buttons" show-edit="false" edit="false" data="organisation.socialLinks" type="organisation"></social-links>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+

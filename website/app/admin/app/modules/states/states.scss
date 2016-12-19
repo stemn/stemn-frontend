@@ -1,0 +1,22 @@
+nested-view{
+    display: block;
+    margin-top: -1px;
+    > .title{
+        padding: 10px;
+        border: 1px solid #e6e6e6;
+        position: relative;
+        &:focus{
+            outline: none;
+        }
+        > .bar{
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            background: rgba(63, 81, 181, 0.10);
+        }
+    }
+    > .children{
+        margin-left: 20px;
+    }
+}

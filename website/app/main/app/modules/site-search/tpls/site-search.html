@@ -1,0 +1,41 @@
+<div class="search-box showResultsOnClick" layout="row" layout-align="start center">
+    <a ui-sref="app.search.all({'q':search})"><md-icon class="showResultsOnClick" md-svg-icon="search" style="color: rgba(0, 0, 0, 0.15); width: 20px;"></md-icon></a>
+    <input flex class="showResultsOnClick" type="text" ng-model="search" placeholder="Search STEMN">
+</div>
+<div class="dropdown-results showResultsOnClick" ng-show="showResults"
+   list-keyboard-navigation enable="showResults" list="fullResults" active-index="activeIndex" selector="list-nav-active" esc-fn="hidePanel()">
+    <div class="results-group" ng-show="results.creations.length > 0">
+        <div class="md-subhead" ui-sref="app.search.creations({'q':search})"><span>Creations</span><a class="float-right text-green">MORE</a></div>
+        <a class="result ellipsis anim-repeat-slide" ng-repeat="result in results.creations" ng-click="goToResult(result.stub, result.type)" ng-class="{'list-nav-active': fullResults[activeIndex]._id == result._id}">
+            <img ng-src="{{result.picture || 'assets/images/default/org.png'}}?size=thumb&crop=true" alt="">{{result.name}}
+        </a>
+    </div>
+    <div class="results-group" ng-show="results.user.length > 0">
+        <div class="md-subhead" ui-sref="app.search.users({'q':search})"><span>Users</span><a class="float-right text-green">MORE</a></div>
+        <a class="result ellipsis anim-repeat-slide" ng-repeat="result in results.user" ng-click="goToResult(result.stub, 'user')" ng-class="{'list-nav-active': fullResults[activeIndex]._id  == result._id}">
+            <img class="img-circle" ng-src="{{result.picture || 'assets/images/default/user-1.png'}}?size=thumb&crop=true" alt="">{{result.name}}
+        </a>
+    </div>
+    <div class="results-group" ng-show="results.organisation.length > 0">
+        <div class="md-subhead" ui-sref="app.search.organisations({'q':search})"><span>Organisations</span><a class="float-right text-green">MORE</a></div>
+        <a class="result ellipsis anim-repeat-slide" ng-repeat="result in results.organisation" ng-click="goToResult(result.stub, 'organisation')" ng-class="{'list-nav-active': fullResults[activeIndex]._id  == result._id}">
+            <img ng-src="{{result.picture || 'assets/images/default/user-1.png'}}?size=thumb&crop=true" alt="">{{result.name}}
+        </a>
+    </div>
+    <div class="results-group" ng-show="results.field.length > 0">
+        <div class="md-subhead" ui-sref="app.search.fields({'q':search})"><span>Fields</span><a class="float-right text-green">MORE</a></div>
+        <a class="result ellipsis anim-repeat-slide" ng-repeat="result in results.field" ng-click="goToResult(result.stub, 'field')" ng-class="{'list-nav-active': fullResults[activeIndex]._id  == result._id}">
+            <img ng-src="{{result.picture || 'assets/images/default/user-1.png'}}?size=thumb&crop=true" alt="">{{result.name}}
+        </a>
+    </div>
+    <div class="results-group" ng-show="results.job.length > 0">
+        <div class="md-subhead" ui-sref="app.search.jobs({'q':search})"><span>Jobs</span><a class="float-right text-green">MORE</a></div>
+        <a class="result ellipsis anim-repeat-slide" ng-repeat="result in results.job" ng-click="goToResult(result.stub, 'job')" ng-class="{'list-nav-active': fullResults[activeIndex]._id  == result._id}">
+            <img ng-src="{{result.picture || 'assets/images/default/user-1.png'}}?size=thumb&crop=true" alt="">{{result.name}}
+        </a>
+    </div>
+    <!-- Show NOT FOUND if nothing found... -->
+    <div class="results-group" ng-show="fullResults.length == 0">
+        <div class="md-subhead">No Results</div>
+    </div>
+</div>

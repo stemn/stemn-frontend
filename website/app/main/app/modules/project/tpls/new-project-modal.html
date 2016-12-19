@@ -1,0 +1,28 @@
+<md-dialog>
+    <md-dialog-content>
+        <form name="CreateProjectForm" novalidate ng-submit="createProject()" unsaved-warning-form class="md-content-container content-xs">
+
+            <h1 class="md-headline" style="margin: 0px 0 30px;">Create your project.</h1>
+            <p class="text-lightgrey">Give your project a title. Don't worry, you can change this later.</p>
+            <md-input-container class="md-accent" style="margin-top:40px;">
+                <label>Project Title</label>
+                <input name="projectTitle" ng-model="project.name" focus-me="true">
+            </md-input-container>
+
+            <div ng-show="project.fields.length > 0 || project.organisations.length > 0 || project.projects.length > 0">
+                <p class="text-lightgrey">This project will be linked to the following pages: (you can change this later)</p>
+                <tags edit="false" size="sm" tags="project.projects" type="project"></tags>
+                <tags edit="false" size="sm" tags="project.organisations" type="organisation"></tags>
+                <tags edit="false" size="sm" tags="project.fields" type="field"></tags>
+            </div>
+
+            <div class="m-t-15" layout="row">
+                <div flex></div>
+                <div>
+                    <md-button type="button" ng-click="cancel()">Cancel</md-button>
+                    <md-button type="submit" class="md-accent md-raised m-r-0">Next</md-button>
+                </div>
+            </div>
+        </form>
+    </md-dialog-content>
+</md-dialog>

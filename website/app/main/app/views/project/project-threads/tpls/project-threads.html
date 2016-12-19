@@ -1,0 +1,9 @@
+<div layout="row" layout-align="center">
+    <div class="rel-box md-content-container md-no-padding">
+        <div class="well m-b-30" layout="column" layout-gt-sm="row" layout-align="start center">
+            <p flex>Got something to say? Post in the <b>{{project.name}}</b> forum.</p>
+            <md-button authenticate class="md-accent md-raised md-flat md-cornered md-md" ng-click="newThread($event, 'question')">New thread</md-button>
+        </div>
+        <forum class="block w-100" type="threads" parent-type="project" parent-id="{{project._id}}" query="query"></forum>
+    </div>
+</div>
