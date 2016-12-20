@@ -24,6 +24,14 @@ export default store => next => action => {
 
 
 function dispatchAction(store, action, aliasedResult){
+  if(action.type == 'FILES/RENDER_FILE'){
+//    console.log({aliasedResult});
+    aliasedResult.then(response => {
+//      console.log({response});
+      return response
+    })
+  }
+
   // If it is a function, (it is a thunk, dispatch it)
   if(typeof aliasedResult === "function"){
     store.dispatch(aliasedResult);

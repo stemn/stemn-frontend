@@ -43,12 +43,15 @@ does, we return it. Otherwise we download it, save it
 and then return it.
 *******************************************************/
 export const get = ({key, url, name, params, responseType, extract}) => {
+
   // This will process and return the result based on the 'responseType' indicated
   const processResult = () => {
+    console.log('7');
     // Return either the file data or the file path
     // depending on the 'responseType'
     if(responseType == 'path'){
       const filePath = path.join(folderPath, fileCache[key].name);
+      console.log({filePath});
       return { data: filePath }
     }
     else{
@@ -116,7 +119,7 @@ export const get = ({key, url, name, params, responseType, extract}) => {
             return Promise.all(filesToRename.map(renameFile))
           })
         }
-        return files.map(folderName => renameSvfAndPng(`${dest}/${folderName}`))
+        return Promise.all(files.map(folderName => renameSvfAndPng(`${dest}/${folderName}`)));
       })
     }
 
@@ -138,10 +141,10 @@ export const get = ({key, url, name, params, responseType, extract}) => {
       url: url,
       dest: path.join(folderPath, name),
       extract: extract
-    }).then(response => {
+    }).then(response1 => {
       // If extract is true, we rename the files, then save them to the store and process
       if(extract){
-        return renameFiles({dest: path.join(folderPath, name)}).then(saveToJsonStore(response).then(processResult))
+        return renameFiles({dest: path.join(folderPath, name)}).then(response2 => saveToJsonStore(response1).then(processResult))
       }
       // Otherwise, we just save to the store and process
       else{
@@ -192,5 +195,5 @@ export const makeSpace = () => {
 //    params: { revisionId: '5850dfed78e6fd11242617d4' },
 //    responseType: 'path',
 //    extract: true
-//  }).then(response => console.log('response1', response))
+//  }).then(response => console.log('!!!END!!!', response))
 //}, 1000)
