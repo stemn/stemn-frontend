@@ -1,6 +1,22 @@
 angular.module('views.home', []);
 angular.module('views.home').
 
+//value('HelloComponent', React.createClass({
+//  render: function() {
+//    return (
+//        <div>
+//            <div>asffsasfafs</div>
+//            <div>asffsasfafs</div>
+//            <div>asffsasfafs</div>
+//            <div>asffsasfafs</div>
+//            <div>asffsasfafs</div>
+//            <div>asffsasfafs</div>
+//            <div>asffsasfafs</div>
+//        </div>
+//    );
+//  }
+//})).
+
 config(function ($stateProvider) {
     $stateProvider.
     state('app.home', {

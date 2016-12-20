@@ -12,6 +12,7 @@
         'monospaced.elastic',
         'puElasticInput',
         'ng-showdown',
+        'react',
 
         'ui.router',
         'ct.ui.router.extras',

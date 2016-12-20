@@ -3,7 +3,7 @@
 (function () {
     'use strict';
 
-    var dependencies = ['ngCookies', 'ngAnimate', 'ngSanitize', 'angularFileUpload', 'sticky', 'infinite-scroll', 'unsavedChanges', 'monospaced.elastic', 'puElasticInput', 'ng-showdown', 'ui.router', 'ct.ui.router.extras',
+    var dependencies = ['ngCookies', 'ngAnimate', 'ngSanitize', 'angularFileUpload', 'sticky', 'infinite-scroll', 'unsavedChanges', 'monospaced.elastic', 'puElasticInput', 'ng-showdown', 'react', 'ui.router', 'ct.ui.router.extras',
 
     // STEMN Core Modules
     'modules.app-version', 'modules.material-design', 'modules.restangular', 'modules.http', 'modules.banner-header', 'modules.core', 'modules.cards', 'modules.lightbox', 'modules.components', 'modules.popup', 'modules.favico', 'modules.projects', 'modules.page-loading-overlay', 'modules.layout-options', 'modules.error-handling', 'modules.filters', 'modules.animations', 'modules.toc', 'modules.seo', 'modules.scroll', 'modules.moment', 'modules.modular-editor', 'modules.pagination', 'modules.validation', 'modules.feed', 'modules.dynamic-footer', 'modules.contenteditable', 'modules.line-clamp', 'modules.row-views', 'modules.easter-eggs', 'modules.settings', 'modules.sortable', 'modules.realtime-editor', 'modules.reading-time', 'modules.browser-info', 'modules.tab-dropdown', 'modules.view-cache', 'modules.posts', 'modules.statistics', 'modules.schema', 'modules.referrals', 'modules.user-widgets', 'modules.footer', 'modules.tables', 'modules.loadbar', 'modules.local-cache', 'modules.analytics', 'modules.lazy-loading', 'modules.code-mirror', 'modules.new-creations', 'modules.explanation-modals', 'modules.location', 'modules.onboarding', 'modules.tabs', 'modules.related', 'modules.state-history', 'modules.sync', 'modules.preview', 'modules.intercom',
@@ -21550,7 +21550,25 @@ angular.module('views.following').config(function ($stateProvider) {
 'use strict';
 
 angular.module('views.home', []);
-angular.module('views.home').config(function ($stateProvider) {
+angular.module('views.home').
+
+//value('HelloComponent', React.createClass({
+//  render: function() {
+//    return (
+//        <div>
+//            <div>asffsasfafs</div>
+//            <div>asffsasfafs</div>
+//            <div>asffsasfafs</div>
+//            <div>asffsasfafs</div>
+//            <div>asffsasfafs</div>
+//            <div>asffsasfafs</div>
+//            <div>asffsasfafs</div>
+//        </div>
+//    );
+//  }
+//})).
+
+config(function ($stateProvider) {
     $stateProvider.state('app.home', {
         url: '/?type&projectview&location',
         //        resolve: {
