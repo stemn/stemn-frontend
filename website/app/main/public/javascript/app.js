@@ -3951,7 +3951,7 @@ angular.module('modules.error-handling').config(function ($httpProvider) {
 
                 // If we get a response (4XX) and we have an error property - set the message
                 if (response.data && response.data.error) {
-                    errorMessage = response.data.error;
+                    errorMessage = response.data.error.message ? response.data.error.message : response.data.error;
                 }
 
                 // If 50X error - Send a message to the server
@@ -3982,42 +3982,9 @@ angular.module('modules.error-handling').config(function ($httpProvider) {
         };
     });
 }).run(function ($rootScope, $state, $timeout) {
-
-    //    $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-    //        // Log out the number of watchers
-    //        $timeout(function () {
-    //            console.log('Lag coefficient ' + watchers())
-    //        }, 3000);
-    //    });
-
     $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
-        //        console.log('Error');
-        //        console.error('errored changing to ' + toState.name);
-        //        console.error('stateChangeError:');
-        //        if (error.getStack)
-        //            console.error(error.getStack());
-        //        console.error(error);
         $state.go('app.404', null, { location: false });
     });
-
-    ///////////////////////////////////
-
-    //    function watchers() {
-    //        var root = $(document.getElementsByTagName('body'));
-    //        var watchersList = [];
-    //        var f = function (element) {
-    //            if (element.data() && element.data().hasOwnProperty('$scope')) {
-    //                angular.forEach(element.data().$scope.$$watchers, function (watcher) {
-    //                    watchersList.push(watcher);
-    //                });
-    //            }
-    //            angular.forEach(element.children(), function (childElement) {
-    //                f($(childElement));
-    //            });
-    //        };
-    //        f(root);
-    //        return watchersList.length;
-    //    }
 }).service('ErrorModalService', function ($mdDialog) {
     this.error = function (event, data) {
         /************************************************
@@ -4263,6 +4230,7 @@ angular.module('modules.favico', []).factory('favicoService', [function () {
                 //    $scope.data = { data : 'ITEM DATA', itemType : 'ITEM TYPE'}
                 // 2. Data can also come in on the $scope.data object and $scope.itemType:
                 //    $scope.data = 'ITEM DATA'  and   $scope.itemType : 'ITEM TYPE'
+
 
                 var data = $scope.data.data || $scope.data;
                 // If there is no name, we must fetch the item
@@ -19689,12 +19657,14 @@ angular.module('views.app').config(function ($stateProvider) {
                 }
             },
             userdata: function userdata(jwt, Authentication, $stateParams) {
-                return Authentication.loadUserData().then(function (userdata) {
-                    if ($stateParams.admin === 'false') {
-                        userdata.isAdmin = false;
-                    }
-                    return userdata;
-                });
+                if (Authentication.getToken()) {
+                    return Authentication.loadUserData().then(function (userdata) {
+                        if ($stateParams.admin === 'false') {
+                            userdata.isAdmin = false;
+                        }
+                        return userdata;
+                    });
+                }
             }
         },
         layout: {},

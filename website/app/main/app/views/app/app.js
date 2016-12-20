@@ -25,12 +25,14 @@ config(function ($stateProvider) {
                 }
             },
             userdata: function (jwt, Authentication, $stateParams) {
-                return Authentication.loadUserData().then(function(userdata){
-                    if($stateParams.admin === 'false'){
-                        userdata.isAdmin = false;
-                    }
-                    return userdata
-                });
+                if(Authentication.getToken()){
+                    return Authentication.loadUserData().then(function(userdata){
+                        if($stateParams.admin === 'false'){
+                            userdata.isAdmin = false;
+                        }
+                        return userdata
+                    });
+                }
             },
         },
         layout: {
