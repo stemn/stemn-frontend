@@ -37,6 +37,7 @@
                 //    $scope.data = { data : 'ITEM DATA', itemType : 'ITEM TYPE'}
                 // 2. Data can also come in on the $scope.data object and $scope.itemType:
                 //    $scope.data = 'ITEM DATA'  and   $scope.itemType : 'ITEM TYPE'
+              
 
                 var data = $scope.data.data || $scope.data;
                 // If there is no name, we must fetch the item

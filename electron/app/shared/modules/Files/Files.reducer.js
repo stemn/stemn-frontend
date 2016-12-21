@@ -1,11 +1,12 @@
 import i from 'icepick'
 const initialState = {
-  fileData    : {},
-  fileRenders : {},
-  fileMeta    : {},
-  pathToId    : {},
-  downloadProgress: {},
-  relatedTasks: {},
+  fileData          : {},
+  fileRenders       : {},
+  fileMeta          : {},
+  fileAssemblyParts : {},
+  pathToId          : {},
+  downloadProgress  : {},
+  relatedTasks      : {},
 };
 
 export default function (state = initialState, action) {
@@ -44,6 +45,16 @@ export default function (state = initialState, action) {
       return i.assocIn(state, ['fileMeta', action.meta.cacheKey, 'loading'], false)
     case 'FILES/GET_META_FULFILLED' :
       return i.assocIn(state, ['fileMeta', action.meta.cacheKey], {
+        data: action.payload.data,
+        loading: false
+      })
+      
+    case 'FILES/GET_ASSEMBLY_PARTS_PENDING' :
+      return i.assocIn(state, ['fileAssemblyParts', action.meta.cacheKey, 'loading'], true)
+    case 'FILES/GET_ASSEMBLY_PARTS_REJECTED' :
+      return i.assocIn(state, ['fileAssemblyParts', action.meta.cacheKey, 'loading'], false)
+    case 'FILES/GET_ASSEMBLY_PARTS_FULFILLED' :
+      return i.assocIn(state, ['fileAssemblyParts', action.meta.cacheKey], {
         data: action.payload.data,
         loading: false
       })

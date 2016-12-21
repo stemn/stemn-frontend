@@ -14,7 +14,7 @@ config(function ($httpProvider) {
 
                 // If we get a response (4XX) and we have an error property - set the message
                 if(response.data && response.data.error){
-                    errorMessage = response.data.error;
+                    errorMessage = response.data.error.message ? response.data.error.message : response.data.error;
                 }
 
                 // If 50X error - Send a message to the server
@@ -51,46 +51,9 @@ config(function ($httpProvider) {
 }).
 
 run(function ($rootScope, $state, $timeout) {
-
-//    $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-//        // Log out the number of watchers
-//        $timeout(function () {
-//            console.log('Lag coefficient ' + watchers())
-//        }, 3000);
-//    });
-
     $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
-//        console.log('Error');
-//        console.error('errored changing to ' + toState.name);
-//        console.error('stateChangeError:');
-//        if (error.getStack)
-//            console.error(error.getStack());
-//        console.error(error);
         $state.go('app.404', null, {location: false});
     });
-
-
-
-
-    ///////////////////////////////////
-
-//    function watchers() {
-//        var root = $(document.getElementsByTagName('body'));
-//        var watchersList = [];
-//        var f = function (element) {
-//            if (element.data() && element.data().hasOwnProperty('$scope')) {
-//                angular.forEach(element.data().$scope.$$watchers, function (watcher) {
-//                    watchersList.push(watcher);
-//                });
-//            }
-//            angular.forEach(element.children(), function (childElement) {
-//                f($(childElement));
-//            });
-//        };
-//        f(root);
-//        return watchersList.length;
-//    }
-
 }).
 
 
