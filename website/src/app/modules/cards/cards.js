@@ -1,3 +1,5 @@
+import './cards.scss';
+
 angular.module('modules.cards', [
 ]);
 angular.module('modules.cards').

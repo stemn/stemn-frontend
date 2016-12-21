@@ -1,3 +1,5 @@
+import './explanation-modals.scss';
+
 angular.module('modules.explanation-modals', []);
 angular.module('modules.explanation-modals').
 

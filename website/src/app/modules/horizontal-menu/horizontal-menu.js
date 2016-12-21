@@ -1,3 +1,5 @@
+import './horizontal-menu.scss';
+
 angular.module('modules.horizontal-menu', [
     'modules.search',
     'modules.authentication',

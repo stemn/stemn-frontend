@@ -33,7 +33,7 @@ import forum                          from './modules/forum/forum.js';
 import horizontalMenu                 from './modules/horizontal-menu/horizontal-menu.js';
 import http                           from './modules/http/http.js';
 import idle                           from './modules/idle/idle.js';
-import intercom                       from './modules/intercom/intercom.js';
+//import intercom                       from './modules/intercom/intercom.js';
 import invite                         from './modules/invite/invite.js';
 import jobs                           from './modules/jobs/jobs.js';
 import keyboardNavigation             from './modules/keyboard-navigation/keyboard-navigation.js';
@@ -171,7 +171,7 @@ angular.module(moduleName, [
    'modules.state-history',
    'modules.sync',
    'modules.preview',
-   'modules.intercom'
+//   'modules.intercom'
 ])
 
 export default moduleName

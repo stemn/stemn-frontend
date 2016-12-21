@@ -3,15 +3,15 @@ angular.module('modules.user-widgets', [
     'modules.feed'
 ]);
 angular.module('modules.user-widgets').
-directive('userPortfolioWidget', function ($state, $timeout, $window, OrganisationModalService, UserService, ProjectCreateModalService, UserWidgetService, UserWidgetModalService, FeedService) {
-    return {
-        restrict: 'E',
-        template: require('./tpls/user-portfolio-widget.html'),
-        controller: function($scope, Authentication){
-
-        }
-    };
-}).
+//directive('userPortfolioWidget', function ($state, $timeout, $window, OrganisationModalService, UserService, ProjectCreateModalService, UserWidgetService, UserWidgetModalService, FeedService) {
+//    return {
+//        restrict: 'E',
+//        template: require('./tpls/user-portfolio-widget.html'),
+//        controller: function($scope, Authentication){
+//
+//        }
+//    };
+//}).
 
 directive('userCompletionWidget', function ($timeout, $window, UserService, ProjectCreateModalService, UserWidgetService, UserWidgetModalService) {
     return {

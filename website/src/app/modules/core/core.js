@@ -101,12 +101,12 @@ service('CoreLibrary', function ($state) {
 
 	this.getUuid = function(){
         var possible = 'abcdef0123456789abcdef0123456789';
-        return _.sample(possible, 24).join('');
+        return _.sampleSize(possible, 24).join('');
 	}
 
     this.getRandomString = function(num){
         var possible = 'abcdefghijklmnopqrstuvwxyz0123456789';
-        return _.sample(possible, num || 30).join('');
+        return _.sampleSize(possible, num || 30).join('');
 	}
 
     this.keyCodes = {

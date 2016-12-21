@@ -1,5 +1,6 @@
+import './call-to-action.scss';
+
 angular.module('modules.call-to-action', [
-    'ngMaterial',
 ]);
 angular.module('modules.call-to-action').
 

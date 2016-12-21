@@ -113,7 +113,6 @@
         ng-style="{
             'background-color':LayoutOptions.body.color
         }">
-            some stuff goes here
         <div ng-hide="$state.includes('basic')" style="min-height: 100vh;" ui-view></div>
         <div ng-show="$state.includes('basic')" style="min-height: 100vh;" ui-view="basic"></div>
 
@@ -135,7 +134,6 @@
             </article>
         </page-loading-overlay>
 
-<!--
         <script>
             var welcomeMessages = [
                 'STEMN loves you.',
@@ -161,13 +159,8 @@
             ]
             document.getElementById("welcome-message").innerHTML = welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)];
         </script>
--->
 
 <!--
-        <script src="javascript/vendor.js?DIGEST"></script>
-        <script src="javascript/templates.js?DIGEST"></script>
-        <script src="javascript/app.js?DIGEST"></script>
-
         <script src="assets/js/angular-sticky/sticky.js"></script>
         <script src="assets/js/angular-sticky/sticky.js"></script>
         <script src="assets/js/sdk/segment-development.js"></script>

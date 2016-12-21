@@ -1,3 +1,4 @@
+import './edit-toolbar.scss';
 angular.module('modules.edit-toolbar', [
 ]);
 angular.module('modules.edit-toolbar').

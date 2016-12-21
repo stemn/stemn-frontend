@@ -1,3 +1,5 @@
+import './carousel.scss';
+
 angular.module('modules.carousel', []);
 angular.module('modules.carousel').
 

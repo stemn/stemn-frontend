@@ -1,3 +1,5 @@
+import './checklist.scss';
+
 angular.module('modules.checklist', []);
 angular.module('modules.checklist').
 

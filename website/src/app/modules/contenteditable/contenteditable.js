@@ -1,3 +1,4 @@
+import './contenteditable.scss';
 angular.module('modules.contenteditable', [
 ]);
 angular.module('modules.contenteditable');

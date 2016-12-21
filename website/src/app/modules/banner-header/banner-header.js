@@ -1,3 +1,5 @@
+import './banner-header.scss';
+
 angular.module('modules.banner-header', []);
 angular.module('modules.banner-header').
 directive('bannerheader', function ($window) {

@@ -1,22 +1,25 @@
-angular.module('modules.feed').
+import './widget-timeline.scss';
 
-directive('feedWidget', function () {
-    return {
-        restrict: 'E',
-        scope: {
-            parentId: '@', // The id of the parent
-            parentType: '@', // project || organisation
-            parent: '=?', // The parent object - This is used to create a more detailed empty message
-            type: '@', // blogs || discussions || all
-            data: '=?', // Feed data from resolve
-            published: '=?', // true || false || 'both' - true behavior defaults
-            showEdit: '=?' // true || false - will enabled edit features
+angular.module('modules.feed.widget-timeline', []);
+angular.module('modules.feed.widget-timeline').
 
-        },
-        template: require('./tpls/feed-widget.html'),
-        controller: 'feedWidgetCtrl'
-    }
-}).
+//directive('feedWidget', function () {
+//    return {
+//        restrict: 'E',
+//        scope: {
+//            parentId: '@', // The id of the parent
+//            parentType: '@', // project || organisation
+//            parent: '=?', // The parent object - This is used to create a more detailed empty message
+//            type: '@', // blogs || discussions || all
+//            data: '=?', // Feed data from resolve
+//            published: '=?', // true || false || 'both' - true behavior defaults
+//            showEdit: '=?' // true || false - will enabled edit features
+//
+//        },
+//        template: require('./tpls/feed-widget.html'),
+//        controller: 'feedWidgetCtrl'
+//    }
+//}).
 
 
 directive('feedWidgetTimeline', function () {

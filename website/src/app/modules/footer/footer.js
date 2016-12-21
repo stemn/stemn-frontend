@@ -1,3 +1,4 @@
+import './footer.scss';
 angular.module('modules.footer', [
 ]);
 angular.module('modules.footer').

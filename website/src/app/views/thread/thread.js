@@ -151,13 +151,13 @@ config(function ($stateProvider, $urlRouterProvider) {
             size: 'md'
         }
     });
-}).
+})
 
-directive('threadFooter', function () {
-    return {
-        restrict: 'E',
-        replace: true,
-        template: require('./tpls/thread-footer.html'),
-    };
-});
-
+//directive('threadFooter', function () {
+//    return {
+//        restrict: 'E',
+//        replace: true,
+//        template: require('./tpls/thread-footer.html'),
+//    };
+//});
+//

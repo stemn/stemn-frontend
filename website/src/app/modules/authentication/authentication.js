@@ -1,5 +1,6 @@
 import satellizer from 'satellizer';
 import permissions from './permissions/permissions.js'
+import './authentication.scss';
 
 angular.module('modules.authentication', [
     'modules.authentication.permissions',
@@ -243,7 +244,7 @@ service('AuthenticationModalService', function ($mdDialog) {
 
     this.loginRecruit = function(event){
         return $mdDialog.show({
-            template: require('./tpls/login-recruit-modal.html)',
+            template: require('./tpls/login-recruit-modal.html'),
             controller: 'LoginRecruitModalCtrl',
             targetEvent: event,
             clickOutsideToClose: true

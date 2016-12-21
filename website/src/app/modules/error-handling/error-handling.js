@@ -9,42 +9,42 @@ config(function ($httpProvider) {
                 return response;
             },
             responseError: function (response) {
-//                var $mdToast = $injector.get("$mdToast"); // Avoid circulr reference (%mdToast cannot be injected into config)
-//                var errorMessage;
-//
-//                // If we get a response (4XX) and we have an error property - set the message
-//                if(response.data && response.data.error){
-//                    errorMessage = response.data.error.message ? response.data.error.message : response.data.error;
-//                }
-//
-//                // If 50X error - Send a message to the server
-//                if(/50\d/.test(response.status)){
-//                    // If we are posting and we 50X - Set the important message
-//                    if(response.config.method == 'POST'){
-//                        errorMessage = 'Something went wrong - we have been notified.'
-//                    }
-//                    $.ajax({
-//                        type        : 'POST',
-//                        url         : '/api/v1/logging/clienterrors',
-//                        contentType : 'application/json',
-//                        data        : angular.toJson({
-//                            errorUrl      : response.config.url,
-//                            errorParams   : response.config.params,
-//                            errorStatus   : response.status,
-//                            errorResponse : response.data
-//                        })
-//                    });
-//                }
-//
-//                // Pop the error message
-//                if(errorMessage){
-//                    $mdToast.show(
-//                        $mdToast.simple().
-//                        theme('warn').
-//                        content(errorMessage)
-//                    );
-//                }
-//                return $q.reject(response);
+                var $mdToast = $injector.get("$mdToast"); // Avoid circulr reference (%mdToast cannot be injected into config)
+                var errorMessage;
+
+                // If we get a response (4XX) and we have an error property - set the message
+                if(response.data && response.data.error){
+                    errorMessage = response.data.error.message ? response.data.error.message : response.data.error;
+                }
+
+                // If 50X error - Send a message to the server
+                if(/50\d/.test(response.status)){
+                    // If we are posting and we 50X - Set the important message
+                    if(response.config.method == 'POST'){
+                        errorMessage = 'Something went wrong - we have been notified.'
+                    }
+                    $.ajax({
+                        type        : 'POST',
+                        url         : '/api/v1/logging/clienterrors',
+                        contentType : 'application/json',
+                        data        : angular.toJson({
+                            errorUrl      : response.config.url,
+                            errorParams   : response.config.params,
+                            errorStatus   : response.status,
+                            errorResponse : response.data
+                        })
+                    });
+                }
+
+                // Pop the error message
+                if(errorMessage){
+                    $mdToast.show(
+                        $mdToast.simple().
+                        theme('warn').
+                        content(errorMessage)
+                    );
+                }
+                return $q.reject(response);
             }
         };
     });

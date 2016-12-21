@@ -1,3 +1,4 @@
+import './fields.scss';
 angular.module('modules.fields', [
     'modules.authentication',
     'modules.restangular',

@@ -1,4 +1,5 @@
-import angular            from 'angular'; 
+import angular            from 'angular';
+
 import ngAnimate          from 'angular-animate'; 
 import ngAria             from 'angular-aria'; 
 import ngSantize          from 'angular-sanitize'; 
@@ -6,7 +7,6 @@ import ngCookies          from 'angular-cookies';
 import ngMessages         from 'angular-messages'; 
 import angularFileUpload  from 'angular-file-upload/angular-file-upload.js'; 
 import ngInfiniteScroll   from 'ng-infinite-scroll/build/ng-infinite-scroll.js';
-
 import react              from 'ngreact'
 import uiRouter           from 'angular-ui-router';
 import uiRouterExtras     from 'ui-router-extras';
@@ -34,16 +34,15 @@ const dependencies = [
     'ngCookies',
     'ngMessages',
     'angularFileUpload',
-//    'sticky',
     'infinite-scroll',
+    'react',
+    'ui.router',
+    'ct.ui.router.extras',
+//    'sticky',
 //    'unsavedChanges',
 //    'monospaced.elastic',
 //    'puElasticInput',
 //    'ng-showdown',
-    'react',
-    'ui.router',
-    'ct.ui.router.extras',
-  
     routes,
     modules
 ];
@@ -106,6 +105,6 @@ function MainCtrl($scope, $document, $rootScope, $location, $sce, ProjectCreateM
     }
 }
 
-
+//
 
 export default moduleName

@@ -1,3 +1,4 @@
+import './editor.scss';
 angular.module('modules.editor', [
     'modules.uploads',
 	'modules.edit-toolbar',

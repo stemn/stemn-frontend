@@ -1,4 +1,5 @@
 import uiCodermurror from './angular-ui-code-mirror.js';
+import './code-mirror.scss';
 
 angular.module('modules.code-mirror', [
     'ui.codemirror'

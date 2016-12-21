@@ -2,6 +2,8 @@ import './thread-labels/thread-labels.js';
 import './thread-timeline/thread-timeline.js';
 import './thread-create-modal/thread-create-modal.js';
 
+import './forum.scss';
+
 angular.module('modules.forum', [
     'modules.thread.thread-create-modal',
     'modules.thread.timeline',

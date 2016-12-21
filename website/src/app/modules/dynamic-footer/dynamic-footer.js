@@ -1,3 +1,5 @@
+import './dynamic-footer.scss';
+
 angular.module('modules.dynamic-footer', [
     'modules.compile'
 ]);

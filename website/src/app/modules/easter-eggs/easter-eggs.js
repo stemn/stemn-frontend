@@ -1,3 +1,4 @@
+import './easter-eggs.scss'
 angular.module('modules.easter-eggs', []);
 angular.module('modules.easter-eggs').
 

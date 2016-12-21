@@ -59,18 +59,18 @@ config(function ($stateProvider) {
         overlay: false,
         template: require('./tpls/project-overview.html'),
     }).
-    state('app.project.about', {
-        url: '/about',
-        template: require('./tpls/project-about.html'),
-        layout: {
-            bgColor: 'rgba(0, 0, 0, 0.03)'
-        },
-        seo: function(resolve){
-            return {
-                title       : 'About ' + resolve.project.name + ' - STEMN',
-            }
-        }
-    }).
+//    state('app.project.about', {
+//        url: '/about',
+//        template: require('./tpls/project-about.html'),
+//        layout: {
+//            bgColor: 'rgba(0, 0, 0, 0.03)'
+//        },
+//        seo: function(resolve){
+//            return {
+//                title       : 'About ' + resolve.project.name + ' - STEMN',
+//            }
+//        }
+//    }).
     state('app.project.blogs', {
         url: '/blog',
         template: require('./tpls/project-blog.html'),

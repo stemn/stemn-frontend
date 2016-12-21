@@ -70,6 +70,8 @@ module.exports = function makeWebpackConfig () {
   } else {
     config.devtool = 'eval-source-map';
   }
+  
+  config.devtool = 'source-map';
 
   /**
    * Loaders
@@ -119,26 +121,12 @@ module.exports = function makeWebpackConfig () {
     })
   }
 
-  /**
-   * PostCSS
-   * Reference: https://github.com/postcss/autoprefixer-core
-   * Add vendor prefixes to your css
-   */
   config.postcss = [
     autoprefixer({
       browsers: ['last 2 version']
     })
   ];
-  /**
-   * Plugins
-   * Reference: http://webpack.github.io/docs/configuration.html#plugins
-   * List: http://webpack.github.io/docs/list-of-plugins.html
-   */
-  config.plugins = [];
-    
-//  config.plugins.push(
-//      new BowerWebpackPlugin()
-//  )
+  
   config.resolve = {
     modlesDirectories: ["node_modules", "bower_components"],
     alias: {
@@ -147,6 +135,9 @@ module.exports = function makeWebpackConfig () {
       "ngGeolocation"    : __dirname + "/bower_components/ngGeolocation/ngGeolocation.js",
     }
   };
+  
+  config.plugins = [];
+  
   config.plugins.push(
     new webpack.ResolverPlugin(
       new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin(".bower.json", ["main"])
@@ -155,17 +146,11 @@ module.exports = function makeWebpackConfig () {
 
   // Skip rendering index.html in test mode
   if (!isTest) {
-    // Reference: https://github.com/ampedandwired/html-webpack-plugin
-    // Render index.html
     config.plugins.push(
       new HtmlWebpackPlugin({
         template: './src/public/index.html',
         inject: 'body'
       }),
-
-      // Reference: https://github.com/webpack/extract-text-webpack-plugin
-      // Extract css files
-      // Disabled when in test mode or not in build mode
       new ExtractTextPlugin('[name].[hash].css', {disable: !isProd})
     )
   }
@@ -173,31 +158,16 @@ module.exports = function makeWebpackConfig () {
   // Add build specific plugins
   if (isProd) {
     config.plugins.push(
-      // Reference: http://webpack.github.io/docs/list-of-plugins.html#noerrorsplugin
-      // Only emit files when there are no errors
       new webpack.NoErrorsPlugin(),
-
-      // Reference: http://webpack.github.io/docs/list-of-plugins.html#dedupeplugin
-      // Dedupe modules in the output
       new webpack.optimize.DedupePlugin(),
-
-      // Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
-      // Minify all javascript, switch loaders to minimizing mode
       new webpack.optimize.UglifyJsPlugin(),
-
-      // Copy assets from the public folder
-      // Reference: https://github.com/kevlened/copy-webpack-plugin
       new CopyWebpackPlugin([{
         from: __dirname + '/src/public'
       }])
     )
   }
 
-  /**
-   * Dev server configuration
-   * Reference: http://webpack.github.io/docs/configuration.html#devserver
-   * Reference: http://webpack.github.io/docs/webpack-dev-server.html
-   */
+  // Dev server configuration
   config.devServer = {
     contentBase: './src/public',
     stats: 'minimal'

@@ -1,3 +1,5 @@
+import './animations.scss';
+
 angular.module('modules.animations', []);
 angular.module('modules.animations').
 
