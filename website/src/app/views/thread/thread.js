@@ -32,7 +32,7 @@ config(function ($stateProvider, $urlRouterProvider) {
                 })
             },
         },
-        templateUrl: 'app/views/thread/tpls/thread.html',
+        template: require('./tpls/thread.html'),
         controller: function(thread, userPermissions, $rootScope, $document, $timeout, $scope, $state, Authentication, ThreadService, ThreadTimelineService, EntityService, EditorService, SocialModalService, TagsModalService, HighlightElement, $dynamicFooter, $mdToast, PublishService){
             var initialData = _.clone(thread, true);
             // Data ------------------------------------------------------
@@ -157,7 +157,7 @@ directive('threadFooter', function () {
     return {
         restrict: 'E',
         replace: true,
-        templateUrl: 'app/views/thread/tpls/thread-footer.html',
+        template: require('./tpls/thread-footer.html'),
     };
 });
 

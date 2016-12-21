@@ -11,7 +11,7 @@ config(function ($stateProvider) {
         url : '/dashboard',
         abstract: true,
         authLevel: 'user',
-        templateUrl: 'app/views/dashboard/tpls/dashboard.html',
+        template: require('./tpls/dashboard.html'),
         controller: function ($scope) {
 
 			// Tabs ------------------------------------------------------
@@ -38,7 +38,7 @@ config(function ($stateProvider) {
     }).
     state('app.dashboard.projects', {
         url : '',
-        templateUrl: 'app/views/dashboard/tpls/dashboard-projects.html',
+        template: require('./tpls/dashboard-projects.html'),
         controller: function($scope, HttpQuery, Authentication){
             $scope.query = HttpQuery({
                 url: '/api/v1/search',
@@ -62,6 +62,6 @@ config(function ($stateProvider) {
     }).
     state('app.dashboard.feed', {
         url : '/feed',
-        templateUrl: 'app/views/dashboard/tpls/dashboard-feed.html',
+        template: require('./tpls/dashboard-feed.html'),
     })
 });

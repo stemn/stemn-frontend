@@ -17,7 +17,7 @@ directive('users', function () {
             parentId   : '@?',
             type       : '@?',
         },
-        templateUrl: 'app/modules/users/tpls/users.html',
+        template: require('./tpls/users.html'),
         controller: function($scope, UserService) {
 
             var typeInfos = { // The keys match type inputs
@@ -61,7 +61,7 @@ directive('userRows', function () {
             order : '=?',
             criteria : '=?'
         },
-        templateUrl: 'app/modules/users/tpls/user-rows.html',
+        template: require('./tpls/user-rows.html'),
         controller: function($scope, UserService, HttpQuery) {
             console.log($scope.criteria);
             $scope.query = HttpQuery({
@@ -101,7 +101,7 @@ directive('usersGroups', function ($mdDialog, $timeout) {
             modalCallback : '&?' // Modal callback function
 
         },
-        templateUrl: 'app/modules/users/tpls/users-groups.html',
+        template: require('./tpls/users-groups.html'),
         controller: function($scope) {
             $scope.usersGroups = teamToGroups($scope.users);
 
@@ -235,7 +235,7 @@ directive('emptyGroup', function () {
         scope: {
             deleteFn : '&?'
         },
-        templateUrl: 'app/modules/users/tpls/empty-group.html',
+        template: require('./tpls/empty-group.html'),
     }
 }).
 
@@ -245,7 +245,7 @@ directive('addRow', function () {
         scope: {
             addFn : '&?'
         },
-        templateUrl: 'app/modules/users/tpls/add-row.html',
+        template: require('./tpls/add-row.html'),
     }
 }).
 
@@ -257,7 +257,7 @@ directive('personcard', function () {
             size : '@',
             user : '=?'
         },
-        templateUrl: 'app/modules/users/tpls/personcard.html',
+        template: require('./tpls/personcard.html'),
         controller: function ($scope, Authentication, UserService) {
             setBanner();
             if ($scope.id) {
@@ -293,7 +293,7 @@ directive('userRowDetailed', function () {
             buttonHref : '@',
             job        : '=?'
         },
-        templateUrl: 'app/modules/users/tpls/user-row-detailed.html',
+        template: require('./tpls/user-row-detailed.html'),
         controller: function ($scope, UserService) {
 			if($scope.userId){
                 $scope.loading = true;
@@ -318,7 +318,7 @@ directive('userIcon', function () {
             userId : '@?',
             user   : '=?',
         },
-        templateUrl: 'app/modules/users/tpls/user-icon.html',
+        template: require('./tpls/user-icon.html'),
         controller: function ($scope, Authentication, UserService) {
 			if($scope.userId){
 				UserService.getUser($scope.userId, 'sm').then(function (user) {
@@ -333,7 +333,7 @@ service('UsersModalService', function($mdDialog) {
     var service = this;
     this.usersNew = function (event, data) {
         return $mdDialog.show({
-            templateUrl: 'app/modules/users/tpls/users-new-modal.html',
+            template: require('./tpls/users-new-modal.html'),
             controller: 'UsersNewModalCtrl',
             clickOutsideToClose: true,
             targetEvent: event,

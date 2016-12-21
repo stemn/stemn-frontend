@@ -14,7 +14,7 @@ directive('mainHorizontalMenu', function ($window, $mdSidenav) {
     return {
         restrict: 'E',
         scope: {},
-        templateUrl: 'app/modules/horizontal-menu/tpls/main-horizontal-menu.html',
+        template: require('./tpls/main-horizontal-menu.html'),
         controller: function ($rootScope, $scope, $window, Authentication, LayoutOptions, AuthenticationModalService, ProjectCreateModalService, MenuItems, $mdMedia, $timeout, $state, HorizontalMenuService, NewCreationsService) {
             $scope.user = Authentication.currentUser;
             $scope.LayoutOptions         = LayoutOptions;
@@ -78,7 +78,7 @@ service('HorizontalMenuService', function($rootScope){
 directive('userSettingsDropdown', function () {
     return {
         restrict: 'E',
-        templateUrl: 'app/modules/horizontal-menu/tpls/user-settings-dropdown.html',
+        template: require('./tpls/user-settings-dropdown.html'),
         controller: 'userSettingsCtrl'
     };
 }).
@@ -86,7 +86,7 @@ directive('userSettingsDropdown', function () {
 directive('userSettingsSidebar', function () {
     return {
         restrict: 'E',
-        templateUrl: 'app/modules/horizontal-menu/tpls/user-settings-sidebar.html',
+        template: require('./tpls/user-settings-sidebar.html'),
         controller: 'userSettingsCtrl'
     };
 }).

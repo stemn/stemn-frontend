@@ -8,7 +8,7 @@ config(function ($stateProvider) {
     state('app.notifications', {
         url: '/notifications',
         abstract: true,
-        templateUrl: 'app/views/notifications/notifications.html',
+        template: require('./notifications.html'),
         controller: function($scope){
             $scope.tabs = [
                 {
@@ -38,7 +38,7 @@ config(function ($stateProvider) {
         sticky: true,
         views: {
             'all': {
-                templateUrl: 'app/views/notifications/notifications-all.html',
+                template: require('./notifications-all.html'),
             }
         }
     }).
@@ -46,7 +46,7 @@ config(function ($stateProvider) {
         url: '/invites',
         views: {
             'invites': {
-                templateUrl: 'app/views/notifications/notifications-invites.html',
+                template: require('./notifications-invites.html'),
             }
         }
     }).
@@ -54,7 +54,7 @@ config(function ($stateProvider) {
         url: '/applications',
         views: {
             'applications': {
-                templateUrl: 'app/views/notifications/notifications-applications.html',
+                template: require('./notifications-applications.html'),
             }
         }
     });
@@ -68,7 +68,7 @@ directive('notificationCards', function () {
             query : '=',
             type  : '=?'
         },
-        templateUrl: 'app/views/notifications/tpls/notification-cards.html',
+        template: require('./tpls/notification-cards.html'),
         controller: function($scope, NotificationService, HttpQuery) {
             $scope.query = HttpQuery({
                 url: 'api/v1/notifications',

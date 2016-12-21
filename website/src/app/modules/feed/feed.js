@@ -30,7 +30,7 @@
                 itemType: '@?',
                 size: '@?', // lg || sm  - lg defaults
             },
-            templateUrl: 'app/modules/feed/tpls/feed-item.html',
+            template: require('./tpls/feed-item.html'),
             controller: function ($scope) {
                 // This directive accepts 2 forms of data
                 // 1. Data can be passed in on the data object with form:
@@ -154,7 +154,7 @@
         return {
             restrict: 'E',
             replace: true,
-            templateUrl: 'app/modules/feed/tpls/feed-loading.html'
+            template: require('./tpls/feed-loading.html')
         };
     }
 
@@ -165,7 +165,7 @@
                 fields: '=',
                 limit: '=' // The number to display
             },
-            templateUrl: 'app/modules/feed/tpls/item-fields.html',
+            template: require('./tpls/item-fields.html'),
             controller: function ($scope, CoreLibrary) {
                 _.forEach($scope.fields, function (field) {
                     field.sref = CoreLibrary.getSref('field', field.stub);
@@ -184,7 +184,7 @@
                 ownerId: '@',
                 ownerStub: '@'
             },
-            templateUrl: 'app/modules/feed/tpls/item-owner.html',
+            template: require('./tpls/item-owner.html'),
         };
     }
 
@@ -193,7 +193,7 @@
             restrict: 'E',
             transclude: true,
             replace: true,
-            templateUrl: 'app/modules/feed/tpls/item-image.html',
+            template: require('./tpls/item-image.html'),
         };
     }
 
@@ -213,7 +213,7 @@
                 showEdit   : '=?', // true || false - will enabled edit features
                 hideInput  : '='   // hides the input box
             },
-            templateUrl: 'app/modules/feed/tpls/feed.html',
+            template: require('./tpls/feed.html'),
             controller: function ($scope, ThreadCreateModalService, NewCreationsService, HttpQuery) {
                 var page, size = 10, typeInfos = getTypeInfos();
                 // Initiate
@@ -349,7 +349,7 @@
                 hideMore   : '=?', // true || false - if true, the 'see more' button will be hidden
                 query      : '=?'  // Query(to be used in the parent scope)
             },
-            templateUrl: 'app/modules/feed/tpls/card-feed.html',
+            template: require('./tpls/card-feed.html'),
             controller: function ($scope, $timeout, HttpQuery) {
                 var page;
                 var initDebounce, initDebounceTime = 10;
@@ -414,7 +414,7 @@
                 entityType : '@',
                 entityId : '@'
             },
-            templateUrl: 'app/modules/feed/tpls/feed-recommend.html',
+            template: require('./tpls/feed-recommend.html'),
             link : function(scope, element){
                 element.bind('click', function(event) {
                     $http.post('/api/v1/feed/recommend', {

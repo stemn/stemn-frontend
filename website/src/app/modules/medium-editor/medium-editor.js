@@ -206,7 +206,7 @@ directive('mediumEditor', function (MediumEditorInsertMediaExt, MediumEditorBack
 service('MediumEditorModalService', function ($mdDialog) {
     this.insertVideo = function (event) {
         return $mdDialog.show({
-            templateUrl: 'app/modules/medium-editor/tpls/editor-video-modal.html',
+            template: require('./tpls/editor-video-modal.html'),
             controller: function($scope){
                 $scope.cancel = function () {
                     $mdDialog.cancel();
@@ -222,7 +222,7 @@ service('MediumEditorModalService', function ($mdDialog) {
     }
 	this.createLink = function (event, link) {
         return $mdDialog.show({
-            templateUrl: 'app/modules/medium-editor/tpls/editor-link-modal.html',
+            template: require('./tpls/editor-link-modal.html'),
             controller: function(data, $scope){
 				$scope.data =  {
 					link : data

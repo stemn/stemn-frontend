@@ -16,7 +16,7 @@ angular.module('modules.forum').
 directive('forum', function () {
     return {
         restrict: 'E',
-        templateUrl: 'app/modules/forum/tpls/forum.html',
+        template: require('./tpls/forum.html'),
         scope: {
             parentId   : '@?',
             parentType : '@?',

@@ -40,7 +40,7 @@ directive('verticalNav', function() {
     ]
 
         ****************************/
-        templateUrl: 'app/modules/scroll/vertical-nav/vertical-nav.html',
+        template: require('./vertical-nav.html'),
         controller: function ($scope, $rootScope, $window) {
             $rootScope.$on('duScrollspy:becameActive', function($event, $element, $target){
                 var menuId = $element[0].getAttribute('du-scrollspy');

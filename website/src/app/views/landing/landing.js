@@ -25,7 +25,7 @@ config(function ($stateProvider) {
     state('app.landing', {
 		abstract: true,
         url: '/landing',
-        templateUrl: 'app/views/landing/landing.html',
+        template: require('./landing.html'),
 		controller: 'LandingViewCtrl',
         layout: {
             horizontalMenu: false,

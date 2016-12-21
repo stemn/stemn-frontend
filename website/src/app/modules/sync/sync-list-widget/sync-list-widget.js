@@ -12,7 +12,7 @@ directive('syncListWidget', function () {
             project: '=',
             path: '@'
         },
-        templateUrl: 'app/modules/sync/sync-list-widget/tpls/sync-list-widget.html',
+        template: require('./tpls/sync-list-widget.html'),
         controller: function ($scope, SyncService, SyncUtilService) {
             $scope.loading = true;
             $scope.openFileFolder = SyncUtilService.openFileFolder; //function(path, projectStub, type)

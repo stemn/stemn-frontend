@@ -17,7 +17,7 @@ directive('jobRows', function () {
             query     : '=?',  // Query object to be passed up to the parent
             near      : '=?'   // Near location
         },
-        templateUrl: 'app/modules/jobs/tpls/job-rows.html',
+        template: require('./tpls/job-rows.html'),
         controller: function ($scope, HttpQuery, SearchService) {
             $scope.size = $scope.size || 6;
 
@@ -48,7 +48,7 @@ directive('jobTile', function () {
         scope: {
             entityId   : '@?',
         },
-        templateUrl: 'app/modules/jobs/tpls/job-tile.html',
+        template: require('./tpls/job-tile.html'),
         controller: function($scope, EntityService, CoreLibrary){
             $scope.loading = true;
             EntityService.get('job', $scope.entityId, 'sm').then(function(response){
@@ -67,7 +67,7 @@ directive('resubmitApplicationButton', function () {
             application   : '=',
             resubmitted   : '=?'
         },
-        templateUrl: 'app/modules/jobs/tpls/resubmit-application-button.html',
+        template: require('./tpls/resubmit-application-button.html'),
         controller: function($scope, EntityService, $mdToast){
             $scope.resubmitApplication = function(){
                 $scope.application.status.state = 'pendingReview';
@@ -90,7 +90,7 @@ directive('applicationRows', function () {
             parentId   : '@',
             job        : '=?'
         },
-        templateUrl: 'app/modules/jobs/tpls/application-rows.html',
+        template: require('./tpls/application-rows.html'),
         controller: function ($scope, HttpQuery, SearchService) {
             $scope.query = HttpQuery({
                 url: '/api/v1/search',
@@ -122,7 +122,7 @@ directive('applyButton', function () {
             textApply: '@?',
             buttonStatus: '=?' // Status to be used in parent scope
         },
-        templateUrl: 'app/modules/jobs/tpls/apply-button.html',
+        template: require('./tpls/apply-button.html'),
         controller: function ($scope, $state, $timeout, ApplicationService, JobModalService, Authentication) {
             if(Authentication.currentUser.isLoggedIn()){
                 ApplicationService.getStatus($scope.jobId).then(function(response){
@@ -169,7 +169,7 @@ service('JobModalService', function($mdDialog){
 
     function createJob(event, data){
         return $mdDialog.show({
-            templateUrl: 'app/modules/jobs/tpls/create-job-modal.html',
+            template: require('./tpls/create-job-modal.html'),
             controller: function(data, $scope, $state, Authentication, $mdToast, UserService, OrganisationService, NewCreationsService, OrganisationModalService, HttpQuery){
 
                 $scope.entity = {
@@ -219,7 +219,7 @@ service('JobModalService', function($mdDialog){
 
     function applicationSuccess(event, data){
         return $mdDialog.show({
-            templateUrl: 'app/modules/jobs/tpls/application-success-modal.html',
+            template: require('./tpls/application-success-modal.html'),
             controller: function($scope, $state){
 				$scope.cancel = function () {
                     $mdDialog.cancel();
@@ -235,7 +235,7 @@ service('JobModalService', function($mdDialog){
 
     function applyForJob(event, job){
         return $mdDialog.show({
-            templateUrl: 'app/modules/jobs/tpls/job-application-modal.html',
+            template: require('./tpls/job-application-modal.html'),
             controller: function(job, $scope, $state, Authentication, $mdToast, HttpQuery, LocationService, $http, EntityService){
                 $scope.job = job;
                 $scope.forms = {};

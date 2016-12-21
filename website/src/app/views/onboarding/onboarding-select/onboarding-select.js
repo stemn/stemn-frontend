@@ -6,7 +6,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.onboarding.select', {
         url: '',
-        templateUrl: 'app/views/onboarding/onboarding-select/tpls/onboarding-select.html',
+        template: require('./tpls/onboarding-select.html'),
         controller: 'OnboardingSelectViewCtrl',
     })
 }).

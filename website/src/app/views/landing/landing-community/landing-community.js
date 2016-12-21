@@ -7,7 +7,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.landing.community', {
         url: '/community',
-        templateUrl: 'app/views/landing/landing-community/tpls/landing-community.html',
+        template: require('./tpls/landing-community.html'),
         controller: function($scope, $timeout, $interval){
 
         },

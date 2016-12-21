@@ -8,7 +8,7 @@ directive('textTabs', function ($timeout) {
     return {
         restrict: 'AC',
         transclude: true,
-        templateUrl: 'app/modules/tabs/tpls/tabs.html',
+        template: require('./tpls/tabs.html'),
         link : function (scope, element, attrs) {
             var scrollElement = angular.element(element.children()[1]);
             var fudgeFactor = 10; // If we are 10px from the end, the funtion will run

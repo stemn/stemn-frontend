@@ -12,7 +12,7 @@ directive('syncTimeline', function () {
         scope:{
             timeline: '='
         },
-        templateUrl: 'app/modules/sync/sync-timeline/tpls/timeline.html',
+        template: require('./tpls/timeline.html'),
         controller: function ($scope) {
             $scope.iconMap = {
                 update : 'editor:mode_edit',

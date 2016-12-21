@@ -21,7 +21,7 @@ directive('locationSearch', function ($http) {
             single : '=?', // true || false - This will overwrite the first entry in the array
             focus  : '=?'  // true || false - Autofocus
         },
-        templateUrl : 'app/modules/search/tpls/location-search.html',
+        template: require('./tpls/location-search.html'),
         controller : function ($scope, LocationService){
 
             // Default data
@@ -68,7 +68,7 @@ directive('userSearch', function ($http) {
             focus       : '=?', // true || false - Autofocus
             preProcessFn : '=?'
         },
-        templateUrl : 'app/modules/search/tpls/user-search.html',
+        template: require('./tpls/user-search.html'),
         controller : function ($scope, SearchService, UsersModalService, $mdToast){
             // Default data
             $scope.data = $scope.data || [];
@@ -166,7 +166,7 @@ directive('projectSearch', function () {
             placeholder : '@?',
             focus       : '=?'  // true || false - Autofocus
         },
-        templateUrl : 'app/modules/search/tpls/project-search.html',
+        template: require('./tpls/project-search.html'),
         controller : function ($scope, SearchService){
 
             // Default data
@@ -223,7 +223,7 @@ directive('fieldSearch', function () {
             placeholder : '@?',
             focus       : '=?'  // true || false - Autofocus
         },
-        templateUrl : 'app/modules/search/tpls/field-search.html',
+        template: require('./tpls/field-search.html'),
         controller : function ($scope, SearchService, FieldModalService){
 
             // Default data

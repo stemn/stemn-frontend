@@ -73,6 +73,6 @@ directive('urlCard', function () {
         controller : function ($scope){
             $scope.href = 'https://stemn.com' + location.pathname;
         },
-        templateUrl: 'app/modules/popup-cards/tpls/url-card.html',
+        template: require('./tpls/url-card.html'),
     };
 });

@@ -6,7 +6,7 @@ angular.module('modules.modular-editor.help-footer').
 directive('editorHelpFooter', function () {
 	return {
 		restrict: 'E',
-		templateUrl: 'app/modules/modular-editor/help-footer/help-footer.html',
+		template: require('./help-footer.html'),
 		controller: function($scope, TipService, Authentication){
 			$scope.currentHelpSection = 0;
 			$scope.next      = next;     // function()

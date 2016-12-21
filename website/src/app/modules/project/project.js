@@ -24,14 +24,14 @@ directive('clickCreateProject', function (ProjectCreateModalService) {
 directive('projectTypeRadios', function () {
     return {
         restrict: 'E',
-        templateUrl: 'app/modules/project/tpls/project-type-radios.html'
+        template: require('./tpls/project-type-radios.html')
     }
 }).
 
 directive('projectLicenses', function () {
     return {
         restrict: 'E',
-        templateUrl: 'app/modules/project/tpls/project-licenses.html',
+        template: require('./tpls/project-licenses.html'),
         controller: function($scope, LicenseData){
             $scope.licenses = LicenseData.licenses;
             $scope.$watch('project.license', function(){

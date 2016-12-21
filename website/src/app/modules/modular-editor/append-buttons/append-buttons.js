@@ -6,7 +6,7 @@ angular.module('modules.modular-editor.append-buttons').
 directive('editorAppendButtons', function () {
 	return {
 		restrict: 'E',
-		templateUrl: 'app/modules/modular-editor/append-buttons/append-buttons.html',
+		template: require('./append-buttons.html'),
 		controller: function($scope, $timeout, ModularEditorService, UploadsModalService, MediumEditorModalService, RealtimeEditorService){
 			$scope.insertText = function(event){
 				var newSection = ModularEditorService.getTextSection();

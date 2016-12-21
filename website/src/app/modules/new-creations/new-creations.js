@@ -43,7 +43,7 @@ service('NewCreationsService', function(ProjectService, ThreadService, $state, $
     
     function createModal(event) {
         return $mdDialog.show({
-            templateUrl: 'app/modules/new-creations/tpls/new-something-modal.html',
+            template: require('./tpls/new-something-modal.html'),
             controller: 'NewSomethingModalCtrl',
             clickOutsideToClose: true,
             targetEvent: event,

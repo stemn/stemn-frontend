@@ -16,7 +16,7 @@ run(function ($rootScope, Authentication, $state, $q, CoreLibrary) {
 
 	state('app.state', {
 		url : '/state',
-		templateUrl: 'app/views/state/state.html',
+		template: require('./state.html'),
 		authLevel: 'user' || 'admin' || 'public'
 	})
 
@@ -235,7 +235,7 @@ directive('authenticate', function (Authentication, AuthenticationModalService) 
 directive('registerForm', function (Authentication) {
     return {
         restrict: 'E',
-        templateUrl: require('./tpls/register-form.html'),
+        template: require('./tpls/register-form.html'),
     };
 }).
 
@@ -243,7 +243,7 @@ service('AuthenticationModalService', function ($mdDialog) {
 
     this.loginRecruit = function(event){
         return $mdDialog.show({
-            templateUrl: require('./tpls/login-recruit-modal.html)',
+            template: require('./tpls/login-recruit-modal.html)',
             controller: 'LoginRecruitModalCtrl',
             targetEvent: event,
             clickOutsideToClose: true
@@ -259,7 +259,7 @@ service('AuthenticationModalService', function ($mdDialog) {
         }
         *************************************************************/
         return $mdDialog.show({
-            templateUrl: require('./tpls/login-modal.html'),
+            template: require('./tpls/login-modal.html'),
             controller: 'LoginModalCtrl',
             targetEvent: event,
             locals: {data:data}
@@ -267,21 +267,21 @@ service('AuthenticationModalService', function ($mdDialog) {
     }
     this.loginLocal = function (event) {
         return $mdDialog.show({
-            templateUrl: require('./tpls/login-local-modal.html'),
+            template: require('./tpls/login-local-modal.html'),
             controller: 'LoginLocalModalCtrl',
             targetEvent: event,
         })
     }
     this.register = function (event) {
         return $mdDialog.show({
-            templateUrl: require('./tpls/register-modal.html'),
+            template: require('./tpls/register-modal.html'),
             controller: 'RegisterModalCtrl',
             targetEvent: event,
         })
     }
     this.linkedinWarn = function (event) {
         return $mdDialog.show({
-            templateUrl: require('./tpls/linkedin-warn-modal.html'),
+            template: require('./tpls/linkedin-warn-modal.html'),
             controller: 'LinkedinWarnModalCtrl',
             clickOutsideToClose: true,
             targetEvent: event,
@@ -289,7 +289,7 @@ service('AuthenticationModalService', function ($mdDialog) {
     }
     this.recoverPassword = function (event) {
         return $mdDialog.show({
-            templateUrl: require('./tpls/recover-password-modal.html'),
+            template: require('./tpls/recover-password-modal.html'),
             controller: 'RecoverPasswordModalCtrl',
             targetEvent: event,
         })

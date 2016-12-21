@@ -108,7 +108,7 @@ directive('saveButton', function () {
             saveFn: '&',
             buttonClass: '@'
         },
-        templateUrl: 'app/modules/edit-toolbar/tpls/save-button.html',
+        template: require('./tpls/save-button.html'),
         controller: function ($scope, $interval, XxhashService) {
 
             var currentHash, previousHash;
@@ -150,6 +150,6 @@ directive('editToolbar', function () {
     return {
         restrict: 'E',
         transclude: true,
-        templateUrl: 'app/modules/edit-toolbar/tpls/edit-toolbar.html',
+        template: require('./tpls/edit-toolbar.html'),
     };
 });

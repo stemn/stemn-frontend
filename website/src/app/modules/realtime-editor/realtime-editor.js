@@ -240,7 +240,7 @@ service('RealtimeEditorService', function (SocketService, $mdToast, $document, $
 service('RealtimeEditorModalService', function($mdDialog){
     this.multipleEdit = function (event, data) {
         return $mdDialog.show({
-            templateUrl: 'app/modules/realtime-editor/tpls/multiple-edit-modal.html',
+            template: require('./tpls/multiple-edit-modal.html'),
             controller: function(data, $scope){
 				$scope.data = data;
                 $scope.cancel = function () {
@@ -367,7 +367,7 @@ directive('realtimeEditorLocked', function () {
 		scope: {
 			section: '='
 		},
-		templateUrl: 'app/modules/realtime-editor/tpls/realtime-editor-locked.html',
+		template: require('./tpls/realtime-editor-locked.html'),
 		controller: function($scope, RealtimeEditorService){
 			$scope.RealtimeEditorService = RealtimeEditorService;
 		}

@@ -7,7 +7,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.browse.organisations', {
         url: '/organisations?sort&order&q',
-        templateUrl: 'app/views/browse/browse-organisations/browse-organisations.html',
+        template: require('./browse-organisations.html'),
         resolve: {
             fields: function(SearchService){
                 return SearchService.search({

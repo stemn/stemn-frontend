@@ -13,7 +13,7 @@ directive('feedWidget', function () {
             showEdit: '=?' // true || false - will enabled edit features
 
         },
-        templateUrl: 'app/modules/feed/tpls/feed-widget.html',
+        template: require('./tpls/feed-widget.html'),
         controller: 'feedWidgetCtrl'
     }
 }).
@@ -32,7 +32,7 @@ directive('feedWidgetTimeline', function () {
             showEdit: '=?' // true || false - will enabled edit features
 
         },
-        templateUrl: 'app/modules/feed/widget-timeline/tpls/feed-widget-timeline.html',
+        template: require('./tpls/feed-widget-timeline.html'),
         controller: 'feedWidgetCtrl'
     }
 }).

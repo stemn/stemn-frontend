@@ -82,7 +82,7 @@ directive('tagged', function () {
             type       : '@?', // field || organisation || projects
         },
         replace: true,
-        templateUrl: 'app/modules/related/tpls/related-tags.html',
+        template: require('./tpls/related-tags.html'),
         controller: function($scope, $timeout, Authentication){
             // Set default
             $scope.type = $scope.type || 'field';

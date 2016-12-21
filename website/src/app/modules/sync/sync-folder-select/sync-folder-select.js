@@ -14,7 +14,7 @@ directive('syncFolderSelect', function (RecursionHelper) {
             selected: '=',
             loading: '=?'
         },
-        templateUrl: 'app/modules/sync/sync-folder-select/tpls/sync-folder-select.html',
+        template: require('./tpls/sync-folder-select.html'),
         compile: function(element) {
             return RecursionHelper.compile(element);
         },
@@ -84,7 +84,7 @@ service('SyncFolderSelectService', function ($mdDialog) {
         }
         ************************************************/
         return $mdDialog.show({
-            templateUrl: 'app/modules/sync/sync-folder-select/tpls/sync-folder-select-modal.html',
+            template: require('./tpls/sync-folder-select-modal.html'),
             controller: function($scope, $mdDialog, CoreLibrary){
                 $scope.selected    = {};
                 $scope.loading     = {};

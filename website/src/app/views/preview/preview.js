@@ -39,7 +39,7 @@ config(function ($stateProvider) {
                 })
             },
         },
-        templateUrl: 'app/views/preview/preview.html',
+        template: require('./preview.html'),
         controller: function (userPermissions, project, fileMeta, previousState, $scope, $state, $timeout, $stateParams, SyncService, SyncUtilService, $location, SyncUrlService, PreviewEmbedService) {
 
             $scope.userPermissions = userPermissions;

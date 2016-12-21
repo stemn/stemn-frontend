@@ -8,7 +8,7 @@ directive('editorSectionButtons', function (UploadsModalService, MediumEditorMod
 	return {
 		restrict: 'E',
 		replace: true,
-		templateUrl: 'app/modules/modular-editor/section-buttons/section-buttons.html',
+		template: require('./section-buttons.html'),
 		controller: function($scope){
 			$scope.deleteSection       = deleteSection;       // function()
 			$scope.checkMergeAbove     = checkMergeAbove;     // function()

@@ -411,7 +411,7 @@ service('CoreModalService', function($mdDialog) {
         ****************************************************/
         if(data.length>0){
             $mdDialog.show({
-                templateUrl: 'app/modules/core/tpls/core-entity-modal.html',
+                template: require('./tpls/core-entity-modal.html'),
                 controller: function ($scope) {
                     $scope.enitities = data;
                     $scope.options   = options;

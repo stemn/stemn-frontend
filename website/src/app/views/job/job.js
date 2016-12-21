@@ -9,7 +9,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.job', {
         url: '/jobs/:stub?edit',
-        templateUrl: 'app/views/job/tpls/job.html',
+        template: require('./tpls/job.html'),
 		controller: 'JobViewCtrl',
         seo: function(resolve){
             return {

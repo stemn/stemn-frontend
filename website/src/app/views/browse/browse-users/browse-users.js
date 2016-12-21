@@ -7,7 +7,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.browse.users', {
         url: '/people?page&sort',
-        templateUrl: 'app/views/browse/browse-users/browse-users.html',
+        template: require('./browse-users.html'),
         resolve: {
             educationOrgs: function(SearchService){
                 return SearchService.search({

@@ -11,7 +11,7 @@ run(function ($mdDialog, $timeout) {
     // Hoisted functions -----------------------------------------------------------------------------
     function showBadBrowserModal(){
         $mdDialog.show({
-            templateUrl: 'app/modules/browser-info/tpls/bad-browser-modal.html',
+            template: require('./tpls/bad-browser-modal.html'),
             controller: function(data, $scope){
 				console.log('open');
                 $scope.data = data;

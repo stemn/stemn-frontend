@@ -28,7 +28,7 @@ directive('countrySelect', function ($http) {
             ngModel: '=',
             placeholder: '@'
         },
-        templateUrl : 'app/modules/location/tpls/country-select.html',
+        template: require('./tpls/country-select.html'),
         controller : function ($scope, LocationService){
             if($scope.ngModel.length < 1){
                 $scope.ngModel = [''];

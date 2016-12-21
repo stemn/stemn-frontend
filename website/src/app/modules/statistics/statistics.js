@@ -16,7 +16,7 @@ directive('statButton', function () {
             displayStyle : '@?', // rectangle || circle
             entityText   : '@?'  // Entity text to be displayed on the button eg) project gives 'follow project' on button
         },
-        templateUrl: 'app/modules/statistics/tpls/stat-button.html',
+        template: require('./tpls/stat-button.html'),
         controller: function ($scope, Authentication, StatButtonTypes, $element, FollowLikeService, LocalCache) {
             $scope.hover  = false;
 
@@ -222,7 +222,7 @@ directive('statDisplayModal', function () {
                 }
 
                 return $mdDialog.show({
-                    templateUrl: 'app/modules/statistics/tpls/stat-display-modal.html',
+                    template: require('./tpls/stat-display-modal.html'),
                     targetEvent: event,
                     locals : {
                         data : data
@@ -248,7 +248,7 @@ directive('statDisplay', function () {
             type            : '@?', // like || follow || vote
             refreshCallback : '=?', // callback function to refresh this displau
         },
-        templateUrl: 'app/modules/statistics/tpls/stat-display.html',
+        template: require('./tpls/stat-display.html'),
         controller: function ($scope, $element, Restangular) {
             var page = 1;
             var size = 12;

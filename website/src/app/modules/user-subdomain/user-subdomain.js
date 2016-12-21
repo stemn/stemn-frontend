@@ -11,7 +11,7 @@ directive('userSubdomainInput', function () {
             displayType: '@?', // '' || 'form' - Changes the display to be a simple form
             username   : '=?'
         },
-		templateUrl: 'app/modules/user-subdomain/tpls/user-subdomain-input.html',
+		template: require('./tpls/user-subdomain-input.html'),
         controller: 'userSubdomainCtrl'
     };
 }).

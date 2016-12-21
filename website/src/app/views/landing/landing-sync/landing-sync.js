@@ -8,7 +8,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.landing.sync', {
         url: '',
-        templateUrl: 'app/views/landing/landing-sync/tpls/landing-sync.html',
+        template: require('./tpls/landing-sync.html'),
         controller: function($scope, $timeout, $interval){
             $scope.slider = {
                 width: 50
@@ -43,7 +43,7 @@ config(function ($stateProvider) {
 directive('landingTimeline', function () {
     return {
         restrict: 'E',
-        templateUrl: 'app/views/landing/landing-sync/tpls/landing-timeline.html',
+        template: require('./tpls/landing-timeline.html'),
         controller: function($scope){
 
             $scope.iconMap = {

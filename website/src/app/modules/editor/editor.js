@@ -7,7 +7,7 @@ angular.module('modules.editor').
 service('EditorModalService', function ($mdDialog) {
     this.insertLink = function (event, link) {
         return $mdDialog.show({
-            templateUrl: 'app/modules/editor/tpls/insert-link-modal.html',
+            template: require('./tpls/insert-link-modal.html'),
             controller: function(link, $scope){
                 $scope.link = angular.copy(link)
                 $scope.cancel = function () {
@@ -27,7 +27,7 @@ service('EditorModalService', function ($mdDialog) {
     }
 //    this.insertVideo = function (event, data) {
 //        return $mdDialog.show({
-//            templateUrl: 'app/modules/editor/tpls/insert-video-modal.html',
+//            template: require('./tpls/insert-video-modal.html'),
 //            controller: function($scope){
 //                $scope.cancel = function () {
 //                    $mdDialog.cancel();
@@ -64,7 +64,7 @@ directive('replyEditor', function () {
     return {
         restrict: 'E',
         scope : {},
-        templateUrl: 'app/modules/editor/tpls/reply-editor.html',
+        template: require('./tpls/reply-editor.html'),
         controller : function ($scope, $rootScope, EditorService, Authentication, $element){
 
 			$scope.editorOptions = {

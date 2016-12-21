@@ -5,7 +5,7 @@
 //    $stateProvider.
 //    state('app.search', {
 //        url: '/search',
-//        templateUrl: 'app/views/search/search.html',
+//        template: require('./search.html'),
 //        resolve: {
 //            users: function (UserService) {
 //                return UserService.getUsers({

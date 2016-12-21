@@ -32,7 +32,7 @@ directive('creationCard', function () {
             entityType : '@?',
             size       : '@?' // small
         },
-        templateUrl: 'app/modules/cards/tpls/creation-card.html',
+        template: require('./tpls/creation-card.html'),
         controller: function ($scope, FeedService, CoreLibrary) {
             if ($scope.entityId && $scope.entityType) {
                 // Initiate Loading class
@@ -87,7 +87,7 @@ directive('organisationCard', function () {
             entity : '=?',
             size : '@?'
         },
-        templateUrl: 'app/modules/cards/tpls/organisation-card.html',
+        template: require('./tpls/organisation-card.html'),
         controller: function ($scope, Authentication, OrganisationService) {
             if ($scope.id) {
                 // Initiate Loading class

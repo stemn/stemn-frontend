@@ -18,7 +18,7 @@ config(function ($stateProvider) {
 
     state('app.jobsIndex', {
         url: '/explore/jobs',
-        templateUrl: 'app/views/index/tpls/jobs-index.html',
+        template: require('./tpls/jobs-index.html'),
         resolve: {
             fields: function(SearchService){
                 return SearchService.search({
@@ -50,7 +50,7 @@ config(function ($stateProvider) {
 
     state('app.jobsQuery', {
         url: '/browse-jobs/:field?locations',
-        templateUrl: 'app/views/index/tpls/jobs-query-field.html',
+        template: require('./tpls/jobs-query-field.html'),
         resolve: {
             field: function(SearchService, $stateParams){
                 return SearchService.search({
@@ -121,7 +121,7 @@ config(function ($stateProvider) {
 
     state('app.jobsQuery.location', {
         url: '/:location',
-        templateUrl: 'app/views/index/tpls/jobs-query-field-location.html',
+        template: require('./tpls/jobs-query-field-location.html'),
         resolve: {
             location: function(LocationService, $stateParams){
                 return LocationService.geoCode($stateParams.location).then(function(response){

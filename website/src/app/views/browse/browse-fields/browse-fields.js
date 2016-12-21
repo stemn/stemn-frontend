@@ -7,7 +7,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.browse.fields', {
         url: '/fields?sort&order&q',
-        templateUrl: 'app/views/browse/browse-fields/browse-fields.html',
+        template: require('./browse-fields.html'),
         layout: {
             size: 'lg',
             footer: true

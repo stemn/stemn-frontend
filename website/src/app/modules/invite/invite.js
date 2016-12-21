@@ -22,7 +22,7 @@ directive('showInviteLinkModal', function ($mdDialog) {
                     role       : scope.role,
                 }
                 return $mdDialog.show({
-                    templateUrl: 'app/modules/invite/tpls/invite-link-modal.html',
+                    template: require('./tpls/invite-link-modal.html'),
                     controller: function(data, $scope, InviteService, Authentication){
                         $scope.type = data.parentType;
                         InviteService.generateInviteCode({

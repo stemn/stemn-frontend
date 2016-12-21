@@ -13,7 +13,7 @@ directive('fieldCard', function () {
             data : '=?',
             size : '@?'
         },
-        templateUrl: 'app/modules/fields/tpls/field-card.html',
+        template: require('./tpls/field-card.html'),
         controller: function ($scope, Authentication, FieldService) {
             if ($scope.id) {
                 // Initiate Loading class
@@ -31,7 +31,7 @@ directive('fieldCard', function () {
 service('FieldModalService', function($mdDialog) {
     this.fieldNewModal = function (event, data) {
         return $mdDialog.show({
-            templateUrl: 'app/modules/fields/tpls/field-new-modal.html',
+            template: require('./tpls/field-new-modal.html'),
             controller: 'FieldNewModalCtrl',
             clickOutsideToClose: true,
             targetEvent: event,

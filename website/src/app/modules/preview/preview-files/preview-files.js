@@ -15,6 +15,6 @@ directive('previewFiles', function ($window) {
 
             $scope.hostDomain   = window.location.hostname;
         },
-        templateUrl: 'app/modules/preview/preview-files/tpls/preview-files.html',
+        template: require('./tpls/preview-files.html'),
     };
 });

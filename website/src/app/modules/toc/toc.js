@@ -54,7 +54,7 @@ directive('tocNav', function(){
         scope : {
             sections : '=',
         },
-        templateUrl : 'app/modules/toc/tpls/toc.html',
+        template: require('./tpls/toc.html'),
         controller: function ($scope, $document){
 
         }

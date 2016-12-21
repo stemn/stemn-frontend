@@ -7,7 +7,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.referrals', {
         url: '/referrals',
-        templateUrl: 'app/views/referrals/referrals.html',
+        template: require('./referrals.html'),
         controller: function ($scope, HttpQuery, Authentication) {
             $scope.user = Authentication.currentUser;
             $scope.query = HttpQuery({

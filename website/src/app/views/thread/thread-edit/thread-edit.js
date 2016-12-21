@@ -16,7 +16,7 @@ config(function ($stateProvider) {
                 })
             },
         },
-        templateUrl: 'app/views/thread/thread-edit/tpls/thread-edit.html',
+        template: require('./tpls/thread-edit.html'),
         controller: function(thread, userPermissions, $scope, HighlightElement, ThreadLabelService){
             $scope.userPermissions = userPermissions;
             $scope.labels = ThreadLabelService.labels;

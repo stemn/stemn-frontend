@@ -5,7 +5,7 @@ angular.module('modules.preview.cad').
 directive('previewAutodesk', function () {
     return {
         restrict: 'E',
-        templateUrl: 'app/modules/preview/preview-cad/tpls/autodesk-preview.html',
+        template: require('./tpls/autodesk-preview.html'),
         scope: {
             project: '=',
             fileMeta: '=',

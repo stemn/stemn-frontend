@@ -39,7 +39,7 @@ directive('bannerheader', function ($window) {
                 $scope.lightboxImage = $scope.image;
             }
         },
-        templateUrl: 'app/modules/banner-header/banner-header.html',
+        template: require('./banner-header.html'),
     };
 }).
 directive('blurOnScroll', function ($window) {

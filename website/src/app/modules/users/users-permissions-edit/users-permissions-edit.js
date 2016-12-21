@@ -15,7 +15,7 @@ directive('usersPermissionsEdit', function ($mdDialog, $timeout) {
             parent: '=?',
             type: '@?' // project || organisation
         },
-        templateUrl: 'app/modules/users/users-permissions-edit/tpls/users-permissions-edit.html',
+        template: require('./tpls/users-permissions-edit.html'),
         controller: function($scope, Authentication) {
 
             var permissions;
@@ -84,7 +84,7 @@ directive('usersPermissionsEdit', function ($mdDialog, $timeout) {
             function editUser(event, index){
                 var user = $scope.users[index];
                 $mdDialog.show({
-                    templateUrl: 'app/modules/users/users-permissions-edit/tpls/users-permissions-edit-modal.html',
+                    template: require('./tpls/users-permissions-edit-modal.html'),
                     controller: function($scope, $mdDialog){
                         $scope.user   = angular.copy(user);
                         $scope.cancel = $mdDialog.cancel; // function()

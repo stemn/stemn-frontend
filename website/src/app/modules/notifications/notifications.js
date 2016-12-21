@@ -9,7 +9,7 @@ directive('notifications', function () {
     return {
         restrict: 'E',
 		replace: true,
-        templateUrl: 'app/modules/notifications/tpls/notifications.html',
+        template: require('./tpls/notifications.html'),
 		controller: function($scope, NotificationService, $state, HttpQuery){
             $scope.query = NotificationService.query;
 
@@ -27,7 +27,7 @@ directive('notification', function () {
     return {
         restrict: 'E',
 		replace: true,
-        templateUrl: 'app/modules/notifications/tpls/notification.html',
+        template: require('./tpls/notification.html'),
     };
 }).
 

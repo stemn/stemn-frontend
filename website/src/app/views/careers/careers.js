@@ -10,7 +10,7 @@ config(function ($stateProvider) {
         params : {
             tab : 'leader'
         },
-        templateUrl: 'app/views/careers/careers.html',
+        template: require('./careers.html'),
         controller: function ($rootScope, $scope, $state, Authentication, $mdToast) {
             $scope.tab = $state.params.tab;
 

@@ -6,7 +6,7 @@ directive('editorToolbarLayout', function () {
 	return {
 		restrict: 'E',
 		replace: true,
-		templateUrl: 'app/modules/modular-editor/toolbar/toolbar.html',
+		template: require('./toolbar.html'),
 		controller: function($scope){
 			$scope.layoutButtonDetails = {
 				'full-width' : {

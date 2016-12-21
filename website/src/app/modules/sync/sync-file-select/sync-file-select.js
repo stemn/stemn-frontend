@@ -13,7 +13,7 @@ directive('syncFileSelect', function (RecursionHelper) {
             provider: '=',
             selected: '=',
         },
-        templateUrl: 'app/modules/sync/sync-file-select/tpls/sync-file-select.html',
+        template: require('./tpls/sync-file-select.html'),
         controller: function ($scope, SyncUtilService, SyncService, $stateParams) {
             $scope.select = select; //function(item)
             $scope.selected = $scope.selected || {};
@@ -70,7 +70,7 @@ service('SyncFileSelectService', function ($mdDialog) {
         }
         ************************************************/
         return $mdDialog.show({
-            templateUrl: 'app/modules/sync/sync-file-select/tpls/sync-file-select-modal.html',
+            template: require('./tpls/sync-file-select-modal.html'),
             controller: function($scope, $mdDialog, CoreLibrary){
                 $scope.project  = data.project;
                 $scope.provider = data.provider;

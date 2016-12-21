@@ -24,7 +24,7 @@ config(function ($stateProvider) {
                 });
             },
         },
-        templateUrl: 'app/views/error/error.html',
+        template: require('./error.html'),
         controller: 'VerifyCtrl',
         layout: {
             size: 'md',
@@ -34,7 +34,7 @@ config(function ($stateProvider) {
     state('app.404', {
         url: '/404',
         controller: '404PageCtrl',
-        templateUrl: 'app/views/error/error.html',
+        template: require('./error.html'),
 		seo: function(resolve){
             return {
                 title : "Lost in Space - STEMN",
@@ -48,7 +48,7 @@ config(function ($stateProvider) {
     state('app.permissions', {
         url: '/permissions',
         controller: 'ErrorPermissionsCtrl',
-        templateUrl: 'app/views/error/error.html',
+        template: require('./error.html'),
         layout: {
             size: 'md',
             bgColor: 'rgba(0, 0, 0, 0.03)'
@@ -57,7 +57,7 @@ config(function ($stateProvider) {
     state('app.admin-only', {
         url: '/admin-only',
         controller: 'AdminOnlyCtrl',
-        templateUrl: 'app/views/error/error.html',
+        template: require('./error.html'),
         layout: {
             size: 'md',
             bgColor: 'rgba(0, 0, 0, 0.03)'

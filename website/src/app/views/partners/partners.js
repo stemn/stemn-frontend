@@ -6,7 +6,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.partners', {
         url: '/partners',
-        templateUrl: 'app/views/partners/partners.html',
+        template: require('./partners.html'),
         controller: function ($scope, $rootScope) {
 			$scope.partners = [
 				{

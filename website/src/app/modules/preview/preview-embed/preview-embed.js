@@ -3,7 +3,7 @@ angular.module('modules.preview.embed').
 service('PreviewEmbedService', function ($mdDialog) {
     this.modal = function(event, fileMeta){
         return $mdDialog.show({
-            templateUrl: 'app/modules/preview/preview-embed/tpls/preview-embed-modal.html',
+            template: require('./tpls/preview-embed-modal.html'),
             controller: function($scope, $mdDialog, SyncUrlService){
                 $scope.fileMeta = fileMeta;
                 $scope.version = 'latest'

@@ -7,7 +7,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.usersettings', {
         url: '/settings?id?toggle',
-        templateUrl: 'app/views/usersettings/usersettings.html',
+        template: require('./usersettings.html'),
         resolve: {
             jwt: function(Authentication, $stateParams) {
                 // login via the jwt
@@ -34,23 +34,23 @@ config(function ($stateProvider) {
     }).
     state('app.usersettings.account', {
         url: '/account',
-        templateUrl: 'app/views/usersettings/usersettings-account.html',
+        template: require('./usersettings-account.html'),
     }).
     state('app.usersettings.email', {
         url: '/email',
-        templateUrl: 'app/views/usersettings/usersettings-email.html',
+        template: require('./usersettings-email.html'),
     }).
     state('app.usersettings.notifications', {
         url: '/notifications',
-        templateUrl: 'app/views/usersettings/usersettings-notifications.html',
+        template: require('./usersettings-notifications.html'),
     }).
     state('app.usersettings.profile', {
         url: '/profile',
-        templateUrl: 'app/views/usersettings/usersettings-profile.html',
+        template: require('./usersettings-profile.html'),
     }).
     state('app.usersettings.feed', {
         url: '/feed',
-        templateUrl: 'app/views/usersettings/usersettings-feed.html',
+        template: require('./usersettings-feed.html'),
     });
 }).
 

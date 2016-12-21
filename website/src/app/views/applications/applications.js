@@ -8,7 +8,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.applications', {
         url: '/applications',
-        templateUrl: 'app/views/applications/tpls/applications.html',
+        template: require('./tpls/applications.html'),
         authLevel: 'user',
         seo: function(resolve){
             return {
@@ -55,7 +55,7 @@ config(function ($stateProvider) {
     }).
     state('app.application', {
         url: '/applications/:stub',
-        templateUrl: 'app/views/applications/tpls/application.html',
+        template: require('./tpls/application.html'),
         resolve: {
             entity: function (EntityService, $stateParams, $state, $timeout) {
                 return EntityService.get('application', $stateParams.stub)

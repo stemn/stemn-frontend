@@ -15,7 +15,7 @@ directive('organisationSearch', function () {
             focus       : '=?',  // true || false - Autofocus
             organisationType : '@?', // school || company - sets the type on creation
         },
-        templateUrl : 'app/modules/search/organisation-search/tpls/organisation-search.html',
+        template: require('./tpls/organisation-search.html'),
         controller : function ($scope, $http, OrganisationModalService){
             // Default data
             $scope.data = $scope.data || [];

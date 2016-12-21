@@ -5,7 +5,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.terms', {
         url: '/terms',
-        templateUrl: 'app/views/terms/terms.html',
+        template: require('./terms.html'),
         layout:{
             footer: true,
         },

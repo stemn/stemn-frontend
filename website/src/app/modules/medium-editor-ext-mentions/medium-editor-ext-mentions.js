@@ -263,7 +263,7 @@ service('MediumEditorMentionsExt', function ($rootScope, $timeout, PopupService,
 directive('mentionSearch', function (SearchService) {
     return {
         restrict: 'E',
-        templateUrl: 'app/modules/medium-editor-ext-mentions/tpls/mention-search.html',
+        template: require('./tpls/mention-search.html'),
         controller: function ($scope, $timeout, $document, CoreLibrary) {
             $scope.$watch('word.wordSearch', search);
 

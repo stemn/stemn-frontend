@@ -4,7 +4,7 @@ angular.module('modules.following').
 directive('followingDetailed', function () {
     return {
         restrict: 'E',
-        templateUrl: 'app/modules/following/tpls/following-detailed.html',
+        template: require('./tpls/following-detailed.html'),
         scope: {
             type   : '@', // field || organisation || project || user || thread
             userId : '@',

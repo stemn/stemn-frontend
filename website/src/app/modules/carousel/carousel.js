@@ -11,7 +11,7 @@ directive('carousel', function () {
         },
         replace: true,
         transclude: true,
-        templateUrl: 'app/modules/carousel/tpls/carousel.html',
+        template: require('./tpls/carousel.html'),
         controller: function ($scope, $interval) {
             $scope.interval = $scope.interval || 7000;
             $scope.activeSlide = 0;

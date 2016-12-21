@@ -10,6 +10,6 @@ directive('checklistItem', function () {
 			itemHref     : '=',
 			itemClick    : '=',
         },
-        templateUrl: 'app/modules/checklist/tpls/checklist-item.html',
+        template: require('./tpls/checklist-item.html'),
     };
 });

@@ -114,7 +114,7 @@ directive('tipThrobber', function ($compile, $window, $timeout, $rootScope, $mdD
                     $timeout(function(){throbberEl.remove()},1000)
                     addActiveStyle(element)
                     $mdDialog.show({
-                        templateUrl: 'app/modules/onboarding/tpls/tip-modal.html',
+                        template: require('./tpls/tip-modal.html'),
                         controller: function(tip, $scope, TipService){
                             $scope.data = TipService.tips[tip];
                             $scope.cancel = function () {
@@ -175,7 +175,7 @@ directive('tipBanner', function (TipService, Authentication) {
 			tipHide : '=?',
 			local   : '=?'  // true || false - if true, we do not check server for status
 		},
-		templateUrl: 'app/modules/onboarding/tpls/tip-banner.html',
+		template: require('./tpls/tip-banner.html'),
         link: function(scope, element, attrs){
 
 			initialise();
@@ -282,7 +282,7 @@ directive('feedChecklist', function (ChecklistService) {
         scope: {
             incomplete: '='
         },
-        templateUrl: 'app/modules/onboarding/tpls/feed-checklist.html',
+        template: require('./tpls/feed-checklist.html'),
         link: function(scope, element, attrs){
             ChecklistService.updateChecklist();
             scope.checklist      = ChecklistService.checklist;

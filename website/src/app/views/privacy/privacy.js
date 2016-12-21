@@ -5,7 +5,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.privacy', {
         url: '/privacy',
-        templateUrl: require('./privacy.html'),
+        template: require('./privacy.html'),
         controller: function ($rootScope) {
         },
         layout:{

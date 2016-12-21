@@ -15,7 +15,7 @@ service('ProjectCreateModalService', function ($mdDialog, $timeout) {
             }
         ********************************************************************/
         return $mdDialog.show({
-            templateUrl: 'app/modules/project/project-create-modal/tpls/project-create-modal.html',
+            template: require('./tpls/project-create-modal.html'),
             controller: 'ProjectCreateModalCtrl',
             targetEvent: event,
             locals: {

@@ -25,12 +25,12 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.browse', {
         url: '/browse',
-        templateUrl: 'app/views/browse/browse.html',
+        template: require('./browse.html'),
         abstract: true,
     }).
     state('app.browse.all', {
         url: '/',
-        templateUrl: 'app/views/browse/browse-all.html',
+        template: require('./browse-all.html'),
         layout: {
             size: 'md',
             footer: true
@@ -46,7 +46,7 @@ config(function ($stateProvider) {
 directive('fieldsFilter', function () {
     return {
         restrict: 'E',
-        templateUrl: 'app/views/browse/tpls/fields-filter.html',
+        template: require('./tpls/fields-filter.html'),
         replace: true,
 		scope: {
 			filter : '=',

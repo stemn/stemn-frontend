@@ -10,7 +10,7 @@ config(function ($stateProvider) {
     state('app.user', {
         abstract: true,
         url: '/users/:stub?edit',
-        templateUrl: 'app/views/user/user.html',
+        template: require('./user.html'),
         controller: 'ProfileViewCtrl as ProfileCtrl',
         resolve: {
             user: function (UserService, $stateParams, $timeout, $state) {
@@ -46,7 +46,7 @@ config(function ($stateProvider) {
         sticky: true,
         views: {
             'profile': {
-                templateUrl: 'app/views/user/user-profile.html',
+                template: require('./user-profile.html'),
             }
         }
     }).
@@ -92,7 +92,7 @@ config(function ($stateProvider) {
         overlay: true,
         views: {
             'tab3@app': {
-                templateUrl: 'app/views/user/tpls/user-following.html',
+                template: require('./tpls/user-following.html'),
                 controller: function(user, $scope){
                     $scope.user = user;
                 }
@@ -258,7 +258,7 @@ directive('userFooter', function () {
     return {
         restrict: 'E',
         replace: true,
-        templateUrl: 'app/views/user/tpls/user-footer.html',
+        template: require('./tpls/user-footer.html'),
     };
 }).
 
@@ -270,7 +270,7 @@ directive('addAnother', function () {
             addFn : '&',
             white : '=?'
         },
-        templateUrl: 'app/views/user/tpls/add-another.html',
+        template: require('./tpls/add-another.html'),
     };
 }).
 
@@ -303,7 +303,7 @@ directive('dateRange', function () {
             current : '=', // true || false
             edit    : '='  // true || false
         },
-        templateUrl: 'app/views/user/tpls/date-range.html',
+        template: require('./tpls/date-range.html'),
         controller: function($scope, monthsService, $timeout){
             $scope.months = monthsService;
             $scope.years = _.range(1940, 2025);

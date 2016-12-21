@@ -8,7 +8,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.user-onboarding', {
         url: '/profile-wizard',
-        templateUrl: 'app/views/user-onboarding/tpls/user-onboarding.html',
+        template: require('./tpls/user-onboarding.html'),
         controller: 'UserOnboardingCtrl',
         abstract: true,
         resolve: {
@@ -29,19 +29,19 @@ config(function ($stateProvider) {
     }).
     state('app.user-onboarding.intro', {
         url: '',
-        templateUrl: 'app/views/user-onboarding/tpls/user-onboarding.intro.html',
+        template: require('./tpls/user-onboarding.intro.html'),
         controller: 'UserOnboardingIntroModalCtrl',
 		authLevel: 'user'
     }).
 	state('app.user-onboarding.experience', {
         url: '/experience',
-        templateUrl: 'app/views/user-onboarding/tpls/user-onboarding.experience.html',
+        template: require('./tpls/user-onboarding.experience.html'),
         controller: 'UserOnboardingExperienceModalCtrl',
 		authLevel: 'user'
     }).
 	state('app.user-onboarding.final', {
         url: '/final',
-        templateUrl: 'app/views/user-onboarding/tpls/user-onboarding.final.html',
+        template: require('./tpls/user-onboarding.final.html'),
 		authLevel: 'user',
         controller: function($scope, $state, $timeout, HighlightElement, HttpQuery, Authentication){
             $scope.query = HttpQuery({

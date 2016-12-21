@@ -7,7 +7,7 @@ angular.module('modules.thread.timeline').
 directive('threadTimelineItem', function () {
     return {
         restrict: 'E',
-        templateUrl: 'app/modules/forum/thread-timeline/tpls/thread-timeline-item.html',
+        template: require('./tpls/thread-timeline-item.html'),
         scope: {
             item: '=',
             parent: '=',
@@ -27,7 +27,7 @@ directive('threadTimelineItem', function () {
 directive('threadTimeline', function () {
     return {
         restrict: 'E',
-        templateUrl: 'app/modules/forum/thread-timeline/tpls/thread-timeline.html',
+        template: require('./tpls/thread-timeline.html'),
         scope: {
             parent: '=',
             timeline: '=',

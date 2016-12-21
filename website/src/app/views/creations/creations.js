@@ -12,7 +12,7 @@ config(function ($stateProvider) {
         abstract: true,
         authLevel: 'user',
         sticky: true,
-        templateUrl: 'app/views/creations/tpls/creations.html',
+        template: require('./tpls/creations.html'),
         controller: function ($scope, $rootScope, $state, NewCreationsService, Authentication, CoreLibrary) {
 
             // Data -----------------------------------------------------
@@ -50,7 +50,7 @@ config(function ($stateProvider) {
         sticky: true,
         views: {
             'all' : {
-                templateUrl: 'app/views/creations/tpls/creations-all.html',
+                template: require('./tpls/creations-all.html'),
             }
         }
     }).
@@ -59,7 +59,7 @@ config(function ($stateProvider) {
         sticky: true,
         views: {
             'drafts' : {
-                templateUrl: 'app/views/creations/tpls/creations-drafts.html',
+                template: require('./tpls/creations-drafts.html'),
 
             }
         }
@@ -69,7 +69,7 @@ config(function ($stateProvider) {
         sticky: true,
         views: {
             'published' : {
-                templateUrl: 'app/views/creations/tpls/creations-published.html',
+                template: require('./tpls/creations-published.html'),
             }
         }
     })
@@ -81,7 +81,7 @@ directive('myCreations', function($timeout, $state) {
         scope: {
           published: '@' // true || false || 'both' - true behavior defaults
         },
-        templateUrl: 'app/views/creations/tpls/my-creations.html',
+        template: require('./tpls/my-creations.html'),
         controller: function($scope, FeedService, Authentication, CoreLibrary, ThreadService, ProjectService, $location, HttpQuery, EntityService){
             $scope.message = getMessage();
 

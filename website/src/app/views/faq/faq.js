@@ -5,7 +5,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.faq', {
         url: '/faq',
-        templateUrl: 'app/views/faq/faq.html',
+        template: require('./faq.html'),
         controller: function ($scope, $rootScope, NewCreationsService) {
             $scope.newSomething =  NewCreationsService.createModal // function($event)
         },

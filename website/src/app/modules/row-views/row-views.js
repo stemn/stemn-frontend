@@ -22,7 +22,7 @@ directive('userRow', function () {
                 })
             }
         },
-        templateUrl: 'app/modules/row-views/tpls/user-row.html'
+        template: require('./tpls/user-row.html')
     };
 }).
 
@@ -32,7 +32,7 @@ directive('fieldRow', function () {
         scope: {
             data     : '=',
         },
-        templateUrl: 'app/modules/row-views/tpls/field-row.html'
+        template: require('./tpls/field-row.html')
     };
 }).
 
@@ -45,7 +45,7 @@ directive('organisationRow', function () {
             showRole : '=?',
             deleteFn : '&?',
         },
-        templateUrl: 'app/modules/row-views/tpls/organisation-row.html'
+        template: require('./tpls/organisation-row.html')
     };
 }).
 
@@ -56,7 +56,7 @@ directive('rowView', function () {
         scope: {
             data     : '=',
         },
-        templateUrl: 'app/modules/row-views/tpls/row-view.html',
+        template: require('./tpls/row-view.html'),
         controller : function($scope, EntityService, CoreLibrary){
             $scope.data = angular.copy($scope.data); // Clone the data so $scope.data.loading is not saved in the parent scope
             // Set avatar Type
@@ -103,6 +103,6 @@ directive('loadingRow', function () {
     return {
         restrict: 'E',
         replace: true,
-        templateUrl: 'app/modules/row-views/tpls/loading-row.html'
+        template: require('./tpls/loading-row.html')
     };
 });

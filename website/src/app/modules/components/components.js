@@ -24,7 +24,7 @@ directive('sectionColour', function () {
         scope: {
             colour: "@"
         },
-        templateUrl: 'app/modules/components/tpls/section-colour.html',
+        template: require('./tpls/section-colour.html'),
     };
 }).
 
@@ -35,7 +35,7 @@ directive('backButton', function () {
             backState: "@?",
             backFn   : '&?'
         },
-        templateUrl: 'app/modules/components/tpls/back-button.html',
+        template: require('./tpls/back-button.html'),
         controller: function($scope, $state){
             $scope.back = function(){
                 if($scope.backState){
@@ -83,7 +83,7 @@ directive('userInput', function () {
             radioDetails  : '=?',   // {options: [{val:'opt1', title:'Option 1'}], selected: 'selected option'}
             titleText     : '@?'    // text to be displayed in the title area when editing
         },
-        templateUrl: 'app/modules/components/tpls/user-input.html',
+        template: require('./tpls/user-input.html'),
         controller: function($scope, Authentication, ProjectCreateModalService, ThreadCreateModalService){
             var $window = angular.element(window);
             $scope.status = $scope.status || {};
@@ -155,7 +155,7 @@ directive('settingsButton', function () {
         scope: {
             above : '=?' // true || false - this makes the button above the corner
         },
-        templateUrl: 'app/modules/components/tpls/settings-button.html',
+        template: require('./tpls/settings-button.html'),
     };
 }).
 
@@ -166,7 +166,7 @@ directive('teamText', function () {
             team : '=',
             limit: '='
         },
-        templateUrl: 'app/modules/components/tpls/team-text.html',
+        template: require('./tpls/team-text.html'),
     };
 }).
 directive('teamImages', function () {
@@ -179,7 +179,7 @@ directive('teamImages', function () {
             link: '@?', // true(default) || false
             showMore: '&?' // showMore team-members click fin
         },
-        templateUrl: 'app/modules/components/tpls/team-images.html',
+        template: require('./tpls/team-images.html'),
     };
 }).
 directive('organisationImages', function () {
@@ -190,7 +190,7 @@ directive('organisationImages', function () {
             organisations : '=',
             limit: '='
         },
-        templateUrl: 'app/modules/components/tpls/organisation-images.html',
+        template: require('./tpls/organisation-images.html'),
     };
 }).
 
@@ -203,7 +203,7 @@ directive('userImage', function () {
             imageStub        : '@?',
             popupFixedBottom : '='   // Fix popup to bottom
         },
-        templateUrl: 'app/modules/components/tpls/user-image.html',
+        template: require('./tpls/user-image.html'),
     };
 }).
 
@@ -216,7 +216,7 @@ directive('organisationImage', function () {
             imageStub        : '@?',
             popupFixedBottom : '='   // Fix popup to bottom
         },
-        templateUrl: 'app/modules/components/tpls/organisation-image.html',
+        template: require('./tpls/organisation-image.html'),
     };
 }).
 
@@ -229,7 +229,7 @@ directive('projectImage', function () {
             imageStub        : '@?',
             popupFixedBottom : '='   // Fix popup to bottom
         },
-        templateUrl: 'app/modules/components/tpls/project-image.html',
+        template: require('./tpls/project-image.html'),
     };
 }).
 
@@ -241,7 +241,7 @@ directive('fieldImage', function () {
             imageId          : '@?',
             imageStub        : '@?',
         },
-        templateUrl: 'app/modules/components/tpls/field-image.html',
+        template: require('./tpls/field-image.html'),
     };
 }).
 
@@ -254,7 +254,7 @@ directive('collapsedSection', function ($timeout) {
             height     : '@',   // The height in collapsed form
             verb       : '@'    // See || Read etc
         },
-        templateUrl: 'app/modules/components/tpls/collapsed-section.html',
+        template: require('./tpls/collapsed-section.html'),
         link: function(scope, element, attrs){
             $timeout(function(){
                 if(element[0].offsetHeight <= scope.height){
@@ -285,7 +285,7 @@ directive('fatTabs', function () {
     return {
         restrict: 'E',
         transclude: true,
-        templateUrl: 'app/modules/components/tpls/fat-tabs.html',
+        template: require('./tpls/fat-tabs.html'),
     };
 }).
 
@@ -384,7 +384,7 @@ directive('editButton', function () {
             hideEdit  : '=?', // Hide Edit button - this is used when the edit is activated using form.$edit externally
             draft     : '=?', // true || false - if true, the text will be 'Save Draft' instead of 'Save'
         },
-        templateUrl: 'app/modules/components/tpls/edit-button1.html',
+        template: require('./tpls/edit-button1.html'),
         controller : function ($scope, $rootScope, $element, $timeout, LayoutOptions, $compile, $stateParams, TopBannerService, $q, $state, $location, $document){
             // Each form input but have a 'name' and 'ng-mode'.
             // These are required to append ng-model to the form controller.
@@ -594,7 +594,7 @@ directive('confirm', function ($mdDialog) {
 						event.stopImmediatePropagation();
 						event.preventDefault();
 						$mdDialog.show({
-							templateUrl: 'app/modules/components/tpls/confirm-modal.html',
+							template: require('./tpls/confirm-modal.html'),
 							controller: function(data, $scope){
 								$scope.data = data;
 								$scope.cancel = function () {
@@ -832,7 +832,7 @@ directive('previewGallery', function () {
 			showEdit : '=?',
             saveFn   : '&'
 		},
-        templateUrl : 'app/modules/components/tpls/preview-gallery.html',
+        template: require('./tpls/preview-gallery.html'),
         controller  : function($scope, $timeout, UploadsModalService){
             $scope.previewIndex = 0;
             $scope.editGallery = function($event, data){

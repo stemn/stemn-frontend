@@ -10,7 +10,7 @@ directive('previewPcb', function ($window) {
             fileUrl : '@',
             previewer: '=?'
         },
-        templateUrl: 'app/modules/preview/preview-pcb/tpls/preview-pcb.html',
+        template: require('./tpls/preview-pcb.html'),
         controller: function($scope, LazyLoadingService, $element, $timeout, PanZoomService, ViewPcbService, $q, SyncService){
 
             var ViewEEInstance;

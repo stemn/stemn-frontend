@@ -12,7 +12,7 @@ directive('loadMore', function () {
             loading : '=?', // true || false - Represents the state of loading
             loadFn  : '&?'
         },
-        templateUrl: 'app/modules/pagination/tpls/load-more.html',
+        template: require('./tpls/load-more.html'),
         controller: function($scope, $state){
             $scope.loading = false;
             $scope.loadMore = function(){
@@ -27,7 +27,7 @@ directive('simplePagination', function () {
     return {
         restrict: 'E',
         replace : true,
-        templateUrl: 'app/modules/pagination/tpls/simple-pagination.html',
+        template: require('./tpls/simple-pagination.html'),
         scope: {
             noMoreResults : '=?',
             page          : '=?',

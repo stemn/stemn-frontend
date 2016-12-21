@@ -17,7 +17,7 @@ service('ThreadCreateModalService', function ($mdDialog) {
             }
         ********************************************************************/
         return $mdDialog.show({
-            templateUrl: 'app/modules/forum/thread-create-modal/tpls/thread-create-modal.html',
+            template: require('./tpls/thread-create-modal.html'),
             controller: 'ThreadCreateModalCtrl',
             targetEvent: event,
             locals: {

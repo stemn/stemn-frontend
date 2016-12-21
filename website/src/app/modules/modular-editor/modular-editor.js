@@ -223,7 +223,7 @@ directive('editorCaptionElement', function () {
 directive('modularEditor', function () {
 	return {
 		restrict: 'E',
-		templateUrl: 'app/modules/modular-editor/tpls/editor-sections.html',
+		template: require('./tpls/editor-sections.html'),
         // Classes: minimal
 		scope: {
 			editorSections  : '=',
@@ -322,6 +322,6 @@ directive('editorDivider', function () {
 			editorSectionId    : '=',
 			editorOptions      : '=',
 		},
-		templateUrl: 'app/modules/modular-editor/tpls/editor-divider.html',
+		template: require('./tpls/editor-divider.html'),
 	};
 });

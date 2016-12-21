@@ -104,7 +104,7 @@ service('UploadsModalService', function ($mdDialog) {
         });
         ************************************************************/
         return $mdDialog.show({
-            templateUrl: 'app/modules/uploads/tpls/upload-image-new-modal.html',
+            template: require('./tpls/upload-image-new-modal.html'),
             controller: 'UploadImageNewModalCtrl',
             targetEvent: event,
             clickOutsideToClose: true,
@@ -124,7 +124,7 @@ service('UploadsModalService', function ($mdDialog) {
         ************************************************************/
 
         return $mdDialog.show({
-            templateUrl: 'app/modules/uploads/tpls/upload-images-new-modal.html',
+            template: require('./tpls/upload-images-new-modal.html'),
             controller: 'UploadImagesNewModalCtrl',
             targetEvent: event,
             locals : {
@@ -143,7 +143,7 @@ service('UploadsModalService', function ($mdDialog) {
         ************************************************************/
 
         return $mdDialog.show({
-            templateUrl: 'app/modules/uploads/tpls/upload-files-modal.html',
+            template: require('./tpls/upload-files-modal.html'),
             controller: 'UploadFilesModalCtrl',
             targetEvent: event,
 			clickOutsideToClose: true,
@@ -226,7 +226,7 @@ controller('UploadFilesModalCtrl', function (data, $scope, $mdDialog, FileUpload
 //    ]
 //    $scope.uploadImageModal = function(files, single, crop, shape, imgSize, aspect){
 ////        $modal.open({
-////            templateUrl: 'app/modules/uploads/tpls/crop-imageuploadmodal.html',
+////            template: require('./tpls/crop-imageuploadmodal.html'),
 ////            size: 'md',
 ////            backdrop: 'static',
 ////            resolve: {

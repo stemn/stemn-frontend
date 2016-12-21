@@ -7,7 +7,7 @@ directive('topBanner', function(){
     return {
         restrict:'E',
 		replace: true,
-		templateUrl: 'app/modules/top-banner/tpls/top-banner.html',
+		template: require('./tpls/top-banner.html'),
 		scope:{},
         controller: function ($rootScope, $stateParams, $scope, $timeout, TopBannerService, AuthenticationModalService, Authentication, $state, $http, $mdToast, OnboardingService){
 			$scope.TopBannerService = TopBannerService;

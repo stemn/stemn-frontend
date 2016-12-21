@@ -16,7 +16,7 @@ directive('organisationIcon', function () {
             itemId : '@?',
             item   : '=?',
         },
-        templateUrl: 'app/modules/organisations/tpls/organisation-icon.html',
+        template: require('./tpls/organisation-icon.html'),
         controller: function ($scope, Authentication, OrganisationService) {
 			if($scope.itemId){
 				OrganisationService.getOrganisation($scope.itemId, 'sm').then(function (result) {
@@ -52,7 +52,7 @@ directive('organisationCards', function () {
             hideMore   : '=?', // true || false - if true, the 'see more' button will be hidden
             items: '=?'
         },
-        templateUrl: 'app/modules/organisations/tpls/organisation-cards.html',
+        template: require('./tpls/organisation-cards.html'),
         controller: function ($scope, HttpService) {
             initialise()
             $scope.more = more; // function()
@@ -109,7 +109,7 @@ directive('organisationGroups', function ($mdDialog, $timeout) {
             viewLayout    : '@?', // tile || row(default)
             edit          : '=?' // true || false - change the edit status
         },
-        templateUrl: 'app/modules/organisations/tpls/organisation-groups.html',
+        template: require('./tpls/organisation-groups.html'),
         controller: function($scope) {
 
 
@@ -127,7 +127,7 @@ directive('organisationGroups', function ($mdDialog, $timeout) {
 service('OrganisationModalService', function($mdDialog) {
     this.organisationNewModal = function (event, data) {
         return $mdDialog.show({
-            templateUrl: 'app/modules/organisations/tpls/organisation-new-modal.html',
+            template: require('./tpls/organisation-new-modal.html'),
             controller: 'OrganisationNewModalCtrl',
             clickOutsideToClose: true,
             targetEvent: event,

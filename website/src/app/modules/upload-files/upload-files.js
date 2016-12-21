@@ -7,7 +7,7 @@ angular.module('modules.upload-files').
 directive('uploadFilesDisplay', function (FileUploadService, UploadsModalService) {
     return {
         restrict: 'E',
-        templateUrl: 'app/modules/upload-files/tpls/upload-files-display.html',
+        template: require('./tpls/upload-files-display.html'),
 		scope: {
 			edit : '=',
 			files: '='
@@ -52,7 +52,7 @@ directive('uploadFilesDisplay', function (FileUploadService, UploadsModalService
 directive('uploadedFile', function ($mdDialog) {
     return {
         restrict: 'E',
-        templateUrl: 'app/modules/upload-files/tpls/uploaded-file.html',
+        template: require('./tpls/uploaded-file.html'),
         controller: function($scope){
 
 			$scope.editFile = editFile; //function(event)
@@ -61,7 +61,7 @@ directive('uploadedFile', function ($mdDialog) {
 
 			function editFile(event){
 				$mdDialog.show({
-					templateUrl: 'app/modules/upload-files/tpls/uploaded-file-edit-modal.html',
+					template: require('./tpls/uploaded-file-edit-modal.html'),
 					controller: function(data, $scope){
 						$scope.data = angular.copy(data);
 						$scope.cancel = function () {

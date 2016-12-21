@@ -33,6 +33,6 @@ directive('missingFields', function () {
                 })
             })
         },
-        templateUrl: 'app/modules/missing-fields/tpls/missing-fields.html',
+        template: require('./tpls/missing-fields.html'),
     };
 });

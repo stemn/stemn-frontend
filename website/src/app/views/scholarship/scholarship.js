@@ -5,7 +5,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.scholarship-aerofutures', {
         url: '/aerofutures',
-        templateUrl: 'app/views/scholarships/aerofutures',
+        template: require('./aerofutures'),
         controller: function ($rootScope) {
             $rootScope.page.title = 'AeroFutures Scholarship - STEMN';
         }

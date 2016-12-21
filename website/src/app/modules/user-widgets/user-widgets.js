@@ -6,7 +6,7 @@ angular.module('modules.user-widgets').
 directive('userPortfolioWidget', function ($state, $timeout, $window, OrganisationModalService, UserService, ProjectCreateModalService, UserWidgetService, UserWidgetModalService, FeedService) {
     return {
         restrict: 'E',
-        templateUrl: 'app/modules/user-widgets/tpls/user-portfolio-widget.html',
+        template: require('./tpls/user-portfolio-widget.html'),
         controller: function($scope, Authentication){
 
         }
@@ -16,7 +16,7 @@ directive('userPortfolioWidget', function ($state, $timeout, $window, Organisati
 directive('userCompletionWidget', function ($timeout, $window, UserService, ProjectCreateModalService, UserWidgetService, UserWidgetModalService) {
     return {
         restrict: 'E',
-        templateUrl: 'app/modules/user-widgets/tpls/user-completion-widget.html',
+        template: require('./tpls/user-completion-widget.html'),
         scope: {
             displayType          : '@?', // banner
             completionPercentage : '=?'  // The completion percentage to be passed up the scope.
@@ -41,7 +41,7 @@ directive('userCompletionWidget', function ($timeout, $window, UserService, Proj
 directive('userOrganisationsWidget', function () {
     return {
         restrict: 'E',
-        templateUrl: 'app/modules/user-widgets/tpls/user-organisations-widget.html',
+        template: require('./tpls/user-organisations-widget.html'),
         controller: function($scope, $state, Authentication, UserService, OrganisationModalService){
             UserService.getUserOrgs(Authentication.currentUser._id).then(function (results) {
                 $scope.organisations = results.data;
@@ -64,7 +64,7 @@ directive('userProjectsWidget', function () {
             query: '=?',
             size : '@?'
         },
-        templateUrl: 'app/modules/user-widgets/tpls/user-projects-widget.html',
+        template: require('./tpls/user-projects-widget.html'),
         controller: function($scope, Authentication, HttpQuery){
             $scope.size = $scope.size || 7;
             $scope.query = HttpQuery({
@@ -86,7 +86,7 @@ directive('userProjectsWidget', function () {
 directive('userRecentWidget', function () {
     return {
         restrict: 'E',
-        templateUrl: 'app/modules/user-widgets/tpls/user-recent-widget.html',
+        template: require('./tpls/user-recent-widget.html'),
         scope: {
             displayType          : '@?', // banner
             completionPercentage : '=?'  // The completion percentage to be passed up the scope.
@@ -212,7 +212,7 @@ service('UserWidgetService', function ($mdDialog, ThreadCreateModalService, Proj
 service('UserWidgetModalService', function ($mdDialog) {
     this.checklist = function (event) {
         return $mdDialog.show({
-            templateUrl: 'app/modules/user-widgets/tpls/user-portfolio-checklist-modal.html',
+            template: require('./tpls/user-portfolio-checklist-modal.html'),
             targetEvent: event,
 			clickOutsideToClose: true,
             controller: function ($scope, $mdDialog, UserWidgetService) {

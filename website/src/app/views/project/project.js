@@ -23,7 +23,7 @@ config(function ($stateProvider) {
     state('app.project', {
         abstract: true,
         url: '/projects/:stub?edit&reply',
-        templateUrl: 'app/views/project/tpls/project.html',
+        template: require('./tpls/project.html'),
         controller: 'ProjectViewCtrl',
         resolve: {
             project: function (userdata, ProjectService, $stateParams, PublishService, $state, $timeout, $q) {
@@ -57,11 +57,11 @@ config(function ($stateProvider) {
         url: '',
         sticky: true,
         overlay: false,
-        templateUrl: 'app/views/project/tpls/project-overview.html',
+        template: require('./tpls/project-overview.html'),
     }).
     state('app.project.about', {
         url: '/about',
-        templateUrl : 'app/views/project/tpls/project-about.html',
+        template: require('./tpls/project-about.html'),
         layout: {
             bgColor: 'rgba(0, 0, 0, 0.03)'
         },
@@ -73,7 +73,7 @@ config(function ($stateProvider) {
     }).
     state('app.project.blogs', {
         url: '/blog',
-        templateUrl: 'app/views/project/tpls/project-blog.html',
+        template: require('./tpls/project-blog.html'),
         layout: {
             bgColor: 'rgba(0, 0, 0, 0.03)'
         },
@@ -172,7 +172,7 @@ directive('projectThumbs', function () {
             editorSections: '=',
             images: '=?' // Images object to be passed up to parent scope
         },
-        templateUrl: 'app/views/project/tpls/project-thumbs.html',
+        template: require('./tpls/project-thumbs.html'),
         controller: function($scope){
             $scope.images = parseImages($scope.editorSections);
 

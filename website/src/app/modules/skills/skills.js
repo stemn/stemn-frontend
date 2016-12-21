@@ -9,7 +9,7 @@ directive('userSkills', function () {
             user       : '=',
             activeFields : '=',
         },
-        templateUrl: 'app/modules/skills/tpls/user-skills.html',
+        template: require('./tpls/user-skills.html'),
         controller: function($scope, $http, EntityService, SkillsService){
             var activeFieldsArray = _.map($scope.activeFields, '_id');
 
@@ -42,7 +42,7 @@ directive('evidencedFields', function () {
             edit : '=',
             activeFields : '=',
         },
-        templateUrl: 'app/modules/skills/tpls/evidenced-fields.html',
+        template: require('./tpls/evidenced-fields.html'),
         controller: function($scope, $http, EntityService, SkillsService){
             var evidencedFieldsAll;          // All evidenced fields
             init();

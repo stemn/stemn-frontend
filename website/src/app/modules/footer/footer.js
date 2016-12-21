@@ -7,7 +7,7 @@ directive('footer', function (FooterService) {
         restrict: 'E',
         scope:{},
         replace: true,
-        templateUrl: 'app/modules/footer/tpls/footer.html',
+        template: require('./tpls/footer.html'),
         controller: function ($scope, LayoutOptions) {
             $scope.LayoutOptions = LayoutOptions;
 			$scope.items = FooterService.items;

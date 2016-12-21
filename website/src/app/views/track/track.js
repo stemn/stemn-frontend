@@ -7,7 +7,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.track', {
         url: '/:stub/track',
-        templateUrl: 'app/views/track/tpls/track.html',
+        template: require('./tpls/track.html'),
         layout: {
             size: 'lg',
             bgColor: 'rgba(0, 0, 0, 0.03)'
@@ -105,7 +105,7 @@ directive('trackComments', function () {
         restrict: 'E',
         scope: {
         },
-        templateUrl: 'app/views/track/tpls/track-comments.html',
+        template: require('./tpls/track-comments.html'),
         controller : function($scope){
             console.log('here');
         }
@@ -117,7 +117,7 @@ directive('trafficButtons', function () {
         restrict: 'E',
         scope: {
         },
-        templateUrl: 'app/views/track/tpls/traffic-buttons.html',
+        template: require('./tpls/traffic-buttons.html'),
         controller : function($scope){
             console.log('here');
         }
@@ -133,7 +133,7 @@ service('TrackService', function ($mdDialog) {
 
     function editCandidate(event, application) {
         return $mdDialog.show({
-            templateUrl: 'app/views/track/tpls/edit-candidate-modal.html',
+            template: require('./tpls/edit-candidate-modal.html'),
             controller: function (application, $scope, $state, Authentication, $mdToast, HttpQuery, LocationService, $http, EntityService) {
 
                 $scope.application = application;

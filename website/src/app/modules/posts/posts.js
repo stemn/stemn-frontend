@@ -24,7 +24,7 @@ angular.module('modules.posts').
 //        scope: {
 //            parent : '=', // The parent object (thread/project)
 //        },
-//        templateUrl: 'app/modules/posts/tpls/posts.html',
+//        template: require('./tpls/posts.html'),
 //        controller: function ($scope, PostService, $stateParams, $timeout, HighlightElement) {
 //            getPosts($scope.parent);
 //            $scope.orderFilter = '';        // Set default order filter - 'timestamp' || '' if tree
@@ -151,7 +151,7 @@ angular.module('modules.posts').
 directive('post', function () {
     return {
         restrict: 'E',
-        templateUrl: 'app/modules/posts/tpls/post.html',
+        template: require('./tpls/post.html'),
         scope: {
             post     : '=',
             parent   : '=',
@@ -227,7 +227,7 @@ directive('post', function () {
 directive('postReply', function () {
     return {
         restrict: 'E',
-        templateUrl: 'app/modules/posts/tpls/post-reply.html',
+        template: require('./tpls/post-reply.html'),
         scope: {
             parent: '=',
             timeline: '=',
@@ -266,7 +266,7 @@ directive('postReply', function () {
 directive('postSummary', function () {
     return {
         restrict: 'E',
-        templateUrl: 'app/modules/posts/tpls/post-summary.html',
+        template: require('./tpls/post-summary.html'),
         scope: {
             post: '='
         },
@@ -289,7 +289,7 @@ directive('postSummary', function () {
 directive('userPosts', function () {
     return {
         restrict: 'E',
-        templateUrl: 'app/modules/posts/tpls/user-posts.html',
+        template: require('./tpls/user-posts.html'),
         scope: {
             userId: '@'
         },

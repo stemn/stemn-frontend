@@ -5,7 +5,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.test', {
         url: '/test',
-        templateUrl: 'app/views/test/test.html',
+        template: require('./test.html'),
         resolve: {
             project: function (userdata, ProjectService, $stateParams, PublishService) {
 				// userdata required
@@ -70,7 +70,7 @@ config(function ($stateProvider) {
     }).
     state('app.test2', {
         url: '/test2',
-        templateUrl: 'app/views/test/test2.html',
+        template: require('./test2.html'),
         controller: function($scope, $mdDialog){
 
               // The ui-codemirror option

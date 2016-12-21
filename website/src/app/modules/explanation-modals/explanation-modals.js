@@ -11,7 +11,7 @@ directive('showExplanationModal', function ($mdDialog) {
                 var validModals = ['project', 'field', 'thread', 'ambassador', 'job']
                 if(validModals.indexOf(attrs.showExplanationModal) != -1){
                     $mdDialog.show({
-                        templateUrl: 'app/modules/explanation-modals/tpls/explanation-modal.html',
+                        template: require('./tpls/explanation-modal.html'),
                         controller: function($scope, $mdDialog){
                             $scope.modal = modalInfo[attrs.showExplanationModal];
                             $scope.cancel = $mdDialog.cancel; // function()

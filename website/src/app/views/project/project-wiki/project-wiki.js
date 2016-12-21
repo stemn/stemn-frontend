@@ -6,7 +6,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.project.wiki', {
         url: '/wiki',
-        templateUrl: 'app/views/project/project-wiki/tpls/project-wiki.html',
+        template: require('./tpls/project-wiki.html'),
         layout: {
             size: 'sm',
             bgColor: 'rgba(0, 0, 0, 0.03)'

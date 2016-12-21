@@ -5,7 +5,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.security', {
         url: '/security',
-        templateUrl: 'app/views/security/security.html',
+        template: require('./security.html'),
         layout:{
             footer: true,
         },

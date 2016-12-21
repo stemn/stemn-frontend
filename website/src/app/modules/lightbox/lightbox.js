@@ -36,7 +36,7 @@ directive('lightbox', function ($mdDialog, $parse) {
 
 					if (lightboxImage || lightboxImages){
 						return $mdDialog.show({
-							templateUrl: 'app/modules/lightbox/tpls/lightbox-modal.html',
+							template: require('./tpls/lightbox-modal.html'),
 							targetEvent: event,
 							locals : {
 								data : data

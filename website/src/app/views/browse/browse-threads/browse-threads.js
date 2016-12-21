@@ -7,7 +7,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.browse.threads', {
         url: '/threads?sort&order&parentType&parentId&criteria',
-        templateUrl: 'app/views/browse/browse-threads/browse-threads.html',
+        template: require('./browse-threads.html'),
         resolve: {
             fields: function (SearchService, $stateParams) {
                 return SearchService.search({

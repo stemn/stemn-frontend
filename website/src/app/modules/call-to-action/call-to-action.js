@@ -10,7 +10,7 @@ directive('callToAction', function (callToActionService, ThreadCreateModalServic
         scope: {
             size : '@' // sm || lg
         },
-        templateUrl: 'app/modules/call-to-action/tpls/call-to-action.html',
+        template: require('./tpls/call-to-action.html'),
         controller: function($scope){
             getBanner();
             // Get a new banner when we log in (this will make sure there are not logged-out only banners).
@@ -31,13 +31,13 @@ service('callToActionService', function (Authentication) {
     var service = this;
     this.bannerDetails = {
         b1 : {
-            templateUrl : 'app/modules/call-to-action/tpls/cta-referrals.html',
+            template: require('./tpls/cta-referrals.html'),
         },
         b2 : {
-            templateUrl : 'app/modules/call-to-action/tpls/cta-map.html',
+            template: require('./tpls/cta-map.html'),
         },
         b3 : {
-            templateUrl : 'app/modules/call-to-action/tpls/cta-project.html',
+            template: require('./tpls/cta-project.html'),
         }
     };
     // Initialise first random banner

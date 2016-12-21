@@ -6,7 +6,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.organisation.settings', {
         url: '/settings',
-        templateUrl: 'app/views/organisation/organisation-settings/tpls/organisation-settings.html',
+        template: require('./tpls/organisation-settings.html'),
         layout: {
             bgColor: 'rgba(0, 0, 0, 0.03)',
             footer: false
@@ -31,15 +31,15 @@ config(function ($stateProvider) {
     }).
     state('app.organisation.settings.overview', {
         url: '',
-        templateUrl: 'app/views/organisation/organisation-settings/tpls/organisation-settings-overview.html',
+        template: require('./tpls/organisation-settings-overview.html'),
     }).
     state('app.organisation.settings.team', {
         url: '/team',
-        templateUrl: 'app/views/organisation/organisation-settings/tpls/organisation-settings-team.html',
+        template: require('./tpls/organisation-settings-team.html'),
     }).
     state('app.organisation.settings.tags', {
         url: '/tags',
-        templateUrl: 'app/views/organisation/organisation-settings/tpls/organisation-settings-tags.html',
+        template: require('./tpls/organisation-settings-tags.html'),
     })
 }).
 

@@ -21,7 +21,7 @@ directive('tags', function () {
             status   : '=?', // true or false - If true, we get the skill status for each field
             dropArea : '=?', // true or false - If true, the drop area is enabled
         },
-        templateUrl: 'app/modules/tags/tpls/tags.html',
+        template: require('./tpls/tags.html'),
         link       : function (scope, element, attrs){
             var path = 'app/modules/tags/tpls/types/'
             if (scope.edit){
@@ -73,7 +73,7 @@ service('TagsModalService', function ($mdDialog) {
 
     ****************************************************/
         return $mdDialog.show({
-            templateUrl: 'app/modules/tags/tpls/tags-edit-modal.html',
+            template: require('./tpls/tags-edit-modal.html'),
             controller: 'TagsEditModalCtrl',
             targetEvent: event,
             locals : {

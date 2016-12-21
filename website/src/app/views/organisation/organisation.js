@@ -25,7 +25,7 @@ config(function ($stateProvider, $urlRouterProvider) {
     state('app.organisation', {
         url: '/org/:stub?projectview&location&edit&showEdit',
         abstract: true,
-        templateUrl: 'app/views/organisation/organisation.html',
+        template: require('./organisation.html'),
         resolve: {
             organisation: function (OrganisationService, $stateParams) {
                 return OrganisationService.getOrganisation($stateParams.stub).then(function (organisation) {
@@ -57,7 +57,7 @@ config(function ($stateProvider, $urlRouterProvider) {
     state('app.organisation.overview', {
         url: '/overview',
         sticky: true,
-        templateUrl: 'app/views/organisation/tpls/organisation-overview.html',
+        template: require('./tpls/organisation-overview.html'),
         controller: 'OrganisationOverviewCtrl',
         layout: {
             size: 'lg',
@@ -67,14 +67,14 @@ config(function ($stateProvider, $urlRouterProvider) {
     state('app.organisation.applications', {
         url: '/applications',
         sticky: true,
-        templateUrl: 'app/views/organisation/tpls/organisation-applications.html',
+        template: require('./tpls/organisation-applications.html'),
         controller: 'OrganisationOverviewCtrl',
     }).
     state('app.organisation.people', {
         url: '/people',
         sticky: true,
         abstract: true,
-        templateUrl: 'app/views/organisation/tpls/organisation-people.html',
+        template: require('./tpls/organisation-people.html'),
         controller: function($scope, CoreLibrary){
         	$scope.tabs = [
                 {
@@ -92,7 +92,7 @@ config(function ($stateProvider, $urlRouterProvider) {
     }).
     state('app.organisation.people.followers', {
         url: '/followers',
-        templateUrl: 'app/views/organisation/tpls/organisation-followers.html',
+        template: require('./tpls/organisation-followers.html'),
         seo: function(resolve){
             return {
                 title       : 'Followers of the ' + resolve.organisation.name + ' Organisation - STEMN',
@@ -104,7 +104,7 @@ config(function ($stateProvider, $urlRouterProvider) {
     }).
     state('app.organisation.people.contributors', {
         url: '/contributors',
-        templateUrl: 'app/views/organisation/tpls/organisation-contributors.html',
+        template: require('./tpls/organisation-contributors.html'),
         seo: function(resolve){
             return {
                 title       : 'People Contributing to the ' + resolve.organisation.name + ' Organisation - STEMN',
@@ -116,7 +116,7 @@ config(function ($stateProvider, $urlRouterProvider) {
     }).
     state('app.organisation.people.alumni', {
         url: '/alumni',
-        templateUrl: 'app/views/organisation/tpls/organisation-alumni.html',
+        template: require('./tpls/organisation-alumni.html'),
         seo: function(resolve){
             return {
                 title       : 'People that went to ' + resolve.organisation.name + ' Organisation - STEMN',
@@ -129,7 +129,7 @@ config(function ($stateProvider, $urlRouterProvider) {
     state('app.organisation.jobs', {
         url: '/jobs',
         sticky: true,
-        templateUrl: 'app/views/organisation/tpls/organisation-jobs.html',
+        template: require('./tpls/organisation-jobs.html'),
         seo: function(resolve){
             return {
                 title       : 'Jobs openings at ' + resolve.organisation.name + ' - STEMN',
@@ -142,7 +142,7 @@ config(function ($stateProvider, $urlRouterProvider) {
     state('app.organisation.projects', {
         url: '/projects',
         sticky: true,
-        templateUrl: 'app/views/organisation/tpls/organisation-projects.html',
+        template: require('./tpls/organisation-projects.html'),
         seo: function(resolve){
             return {
                 title       : 'Projects Created by the ' + resolve.organisation.name + ' Organisation - STEMN',
@@ -155,7 +155,7 @@ config(function ($stateProvider, $urlRouterProvider) {
     state('app.organisation.forum', {
         url: '/forum',
         sticky: true,
-        templateUrl: 'app/views/organisation/tpls/organisation-forum.html',
+        template: require('./tpls/organisation-forum.html'),
         seo: function(resolve){
             return {
                 title       : 'Questions and Answers from the ' + resolve.organisation.name + ' Organisation - STEMN',
@@ -168,7 +168,7 @@ config(function ($stateProvider, $urlRouterProvider) {
     state('app.organisation.blogs', {
         url: '/blogs',
         sticky: true,
-        templateUrl: 'app/views/organisation/tpls/organisation-blogs.html',
+        template: require('./tpls/organisation-blogs.html'),
         seo: function(resolve){
             return {
                 title       : 'Blogs and Updates from the ' + resolve.organisation.name + ' Organisation - STEMN',

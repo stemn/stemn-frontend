@@ -8,7 +8,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.landing.jobs', {
         url: '/jobs',
-        templateUrl: 'app/views/landing/landing-jobs/tpls/landing-jobs.html',
+        template: require('./tpls/landing-jobs.html'),
         controller: function(OnboardingService){
             OnboardingService.beenLanding = true;
         },

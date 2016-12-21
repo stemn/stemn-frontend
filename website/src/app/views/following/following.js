@@ -17,11 +17,11 @@ config(function ($stateProvider) {
     }).
     state('app.following.all', {
         url : '',
-        templateUrl: 'app/views/following/tpls/following-all.html',
+        template: require('./tpls/following-all.html'),
     }).
     state('app.following.fields', {
         url : '/fields',
-        templateUrl: 'app/views/following/tpls/following.html',
+        template: require('./tpls/following.html'),
         controller: function($scope){
             $scope.type  = 'field';
             $scope.title = 'Fields'
@@ -29,7 +29,7 @@ config(function ($stateProvider) {
     }).
     state('app.following.organisations', {
         url : '/organisations',
-        templateUrl: 'app/views/following/tpls/following.html',
+        template: require('./tpls/following.html'),
         controller: function($scope){
             $scope.type  = 'organisation';
             $scope.title = 'Organisations'
@@ -38,7 +38,7 @@ config(function ($stateProvider) {
     }).
     state('app.following.projects', {
         url : '/projects',
-        templateUrl: 'app/views/following/tpls/following.html',
+        template: require('./tpls/following.html'),
         controller: function($scope){
             $scope.type  = 'project';
             $scope.title = 'Projects';
@@ -46,7 +46,7 @@ config(function ($stateProvider) {
     }).
     state('app.following.threads', {
         url : '/threads',
-        templateUrl: 'app/views/following/tpls/following.html',
+        template: require('./tpls/following.html'),
         controller: function($scope){
             $scope.type  = 'thread';
             $scope.title = 'Blogs and Questions';
@@ -54,7 +54,7 @@ config(function ($stateProvider) {
     }).
     state('app.following.users', {
         url : '/users',
-        templateUrl: 'app/views/following/tpls/following.html',
+        template: require('./tpls/following.html'),
         controller: function($scope){
             $scope.type = 'user';
             $scope.title = 'Users';

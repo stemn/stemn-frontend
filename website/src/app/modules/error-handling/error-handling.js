@@ -69,7 +69,7 @@ service('ErrorModalService', function($mdDialog){
 	}
 	************************************************/
         return $mdDialog.show({
-            templateUrl: 'app/modules/error-handling/tpls/error-modal.html',
+            template: require('./tpls/error-modal.html'),
             controller: function(data, $scope){
 				$scope.data = data;
                 $scope.confirm = function () {

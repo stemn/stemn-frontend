@@ -5,7 +5,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('password-reset', {
         url: '/password-reset?id&token',
-        templateUrl: 'app/views/password-reset/password-reset.html',
+        template: require('./password-reset.html'),
         resolve: {
             jwt: function(Authentication, $stateParams) {
                 // login via the jwt

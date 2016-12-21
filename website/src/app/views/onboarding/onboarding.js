@@ -13,7 +13,7 @@ config(function ($stateProvider) {
     state('app.onboarding', {
         url: '/onboarding',
         abstract: true,
-        templateUrl: 'app/views/onboarding/tpls/onboarding.html',
+        template: require('./tpls/onboarding.html'),
         controller: 'OnboardingViewCtrl',
 		authLevel: 'user', // Auth level does not seem to work on abstract states
         layout: {

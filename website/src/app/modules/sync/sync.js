@@ -281,7 +281,7 @@ directive('fileThumbnail', function () {
             fileType: '=',
             thumbLink: '=?'
         },
-        templateUrl: 'app/modules/sync/tpls/file-thumbnail.html',
+        template: require('./tpls/file-thumbnail.html'),
         controller: function ($scope) {
             var imageTypes = ['jpeg', 'png', 'jpg'];
             if (imageTypes.indexOf($scope.fileType) != -1) {
@@ -303,7 +303,7 @@ directive('fileBreadCrumbs', function () {
             showProjectName: '=',
             selectFn: '=?'
         },
-        templateUrl: 'app/modules/sync/tpls/file-bread-crumbs.html',
+        template: require('./tpls/file-bread-crumbs.html'),
         controller: function ($scope, SyncUtilService) {
             $scope.select = function(item){
                 if($scope.selectFn){
@@ -326,7 +326,7 @@ directive('fileReadme', function () {
             path: '@?',  // Either path or files is required
             readme: '=',
         },
-        templateUrl: 'app/modules/sync/tpls/file-readme.html',
+        template: require('./tpls/file-readme.html'),
         controller: function ($scope, SyncService) {
             $scope.readme = $scope.readme || {};
 
@@ -373,7 +373,7 @@ directive('fileList', function () {
             path: '=',
             selectFn: '=?'
         },
-        templateUrl: 'app/modules/sync/tpls/file-list.html',
+        template: require('./tpls/file-list.html'),
         controller: function ($scope, SyncUtilService, SyncService, $stateParams) {
             $scope.loading = true;
             SyncService.list($scope.project.stub, $scope.path || '').then(function (response) {

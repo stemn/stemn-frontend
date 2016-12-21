@@ -8,7 +8,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.project.files', {
         url: '/files/*path?query',
-        templateUrl: 'app/views/project/project-files/tpls/project-files.html',
+        template: require('./tpls/project-files.html'),
         layout: {
             size: 'md',
             bgColor: 'rgba(0, 0, 0, 0.03)'

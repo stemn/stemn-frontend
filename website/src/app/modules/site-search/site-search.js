@@ -8,7 +8,7 @@ angular.module('modules.site-search').
 directive('siteSearch', function () {
     return {
         restrict: 'E',
-        templateUrl: 'app/modules/site-search/tpls/site-search.html',
+        template: require('./tpls/site-search.html'),
         scope: {},
         controller: function ($scope, $timeout, $state, $document, $element, CoreLibrary, SearchService) {
             var debounceTimeout;

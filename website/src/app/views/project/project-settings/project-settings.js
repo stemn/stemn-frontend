@@ -8,7 +8,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.project.settings', {
         url: '/settings',
-        templateUrl: 'app/views/project/project-settings/tpls/project-settings.html',
+        template: require('./tpls/project-settings.html'),
         layout: {
             bgColor: 'rgba(0, 0, 0, 0.03)'
         },
@@ -32,24 +32,24 @@ config(function ($stateProvider) {
     }).
     state('app.project.settings.options', {
         url: '',
-        templateUrl: 'app/views/project/project-settings/tpls/project-settings-options.html',
+        template: require('./tpls/project-settings-options.html'),
     }).
     state('app.project.settings.team', {
         url: '/team',
-        templateUrl: 'app/views/project/project-settings/tpls/project-settings-team.html',
+        template: require('./tpls/project-settings-team.html'),
     }).
     state('app.project.settings.tags', {
         url: '/tags',
-        templateUrl: 'app/views/project/project-settings/tpls/project-settings-tags.html',
+        template: require('./tpls/project-settings-tags.html'),
     }).
     state('app.project.settings.sync', {
         url: '/sync',
-        templateUrl: 'app/views/project/project-settings/tpls/project-settings-sync.html',
+        template: require('./tpls/project-settings-sync.html'),
         controller: 'ProjectSettingsSyncCtrl',
     }).
     state('app.project.settings.sections', {
         url: '/sections',
-        templateUrl: 'app/views/project/project-settings/tpls/project-settings-sections.html',
+        template: require('./tpls/project-settings-sections.html'),
         controller: 'ProjectSectionsSyncCtrl'
     })
 }).

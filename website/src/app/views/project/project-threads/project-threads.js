@@ -8,7 +8,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.project.threads', {
         url: '/threads',
-        templateUrl: 'app/views/project/project-threads/tpls/project-threads.html',
+        template: require('./tpls/project-threads.html'),
         layout: {
             bgColor: 'rgba(0, 0, 0, 0)'
         },

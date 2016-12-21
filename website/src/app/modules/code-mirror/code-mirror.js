@@ -13,7 +13,7 @@ directive('cmCodeMode', function (CodeMirrorService) {
             mode   : '=',
             editor : '='
         },
-        templateUrl: 'app/modules/code-mirror/tpls/code-mode.html',
+        template: require('./tpls/code-mode.html'),
         link: function (scope, element, attrs) {
             scope.codeModes = [
                 {
@@ -94,7 +94,7 @@ directive('latexInput', function (CodeMirrorService) {
         scope: {
             content : '=',
         },
-        templateUrl: 'app/modules/code-mirror/tpls/latex-input.html',
+        template: require('./tpls/latex-input.html'),
         controller: function ($scope) {
             $scope.options = {
                 indentWithTabs: true,

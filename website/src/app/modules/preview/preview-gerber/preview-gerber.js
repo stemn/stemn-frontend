@@ -9,7 +9,7 @@ directive('previewGerber', function ($window) {
             fileMeta: '=?',
             previewer: '=?'
         },
-        templateUrl: 'app/modules/preview/preview-gerber/tpls/preview-gerber.html',
+        template: require('./tpls/preview-gerber.html'),
         controller: function($scope, WebGerberService, LazyLoadingService, $element, $http, $q, SyncService, SyncUtilService, $timeout, $mdToast){
             var webGerberInstance, gerberFile = {};
 

@@ -14,7 +14,7 @@ directive('stSelectOption', function () {
             ngModel: '=',
             value: '@?'
         },
-        templateUrl: 'app/modules/components/st-multi-select/tpls/st-select-option.html',
+        template: require('./tpls/st-select-option.html'),
         controller: function($scope){
             $scope.ngModel = $scope.ngModel || [];
             $scope.active  = $scope.ngModel.indexOf($scope.value) != -1;

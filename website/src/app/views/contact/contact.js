@@ -5,7 +5,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.contact', {
         url: '/contact',
-        templateUrl: 'app/views/contact/contact.html',
+        template: require('./contact.html'),
         controller: 'ContactFormCtrl',
         layout:{
             footer: true,

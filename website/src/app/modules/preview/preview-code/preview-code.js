@@ -53,6 +53,6 @@ directive('previewCode', function ($window) {
 
 
         },
-        templateUrl: 'app/modules/preview/preview-code/tpls/preview-code.html',
+        template: require('./tpls/preview-code.html'),
     };
 });

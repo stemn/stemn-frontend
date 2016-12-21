@@ -17,7 +17,7 @@ service('SocialModalService', function($mdDialog){
         }
         ************************************************************/
         return $mdDialog.show({
-            templateUrl: 'app/modules/social-media/tpls/social-prompt-modal.html',
+            template: require('./tpls/social-prompt-modal.html'),
             controller: function($scope, $mdDialog, data){
                 $scope.data = data;
                 $scope.cancel = $mdDialog.hide; //function()
@@ -35,7 +35,7 @@ service('SocialModalService', function($mdDialog){
 directive('socialShareButton', function (Authentication) {
     return {
         restrict: 'E',
-        templateUrl: 'app/modules/social-media/tpls/social-share-button.html',
+        template: require('./tpls/social-share-button.html'),
         scope: {
             title   : '@?',// Optional, reverts to default
             summary : '@?',// Optional, reverts to default
@@ -86,7 +86,7 @@ directive('socialShareButton', function (Authentication) {
 directive('socialShareButtons', function (Authentication) {
     return {
         restrict: 'E',
-        templateUrl: 'app/modules/social-media/tpls/social-share-buttons.html',
+        template: require('./tpls/social-share-buttons.html'),
         scope: {
             title   : '@?', // Optional, reverts to default
             summary : '@?', // Optional, reverts to default
@@ -153,7 +153,7 @@ directive('socialLinks', function ($timeout) {
             showEdit : '=?',    // showEdit button
             saveFn   : '&?'     // saveFn for edit modal
         },
-        templateUrl: 'app/modules/social-media/tpls/social-links.html',
+        template: require('./tpls/social-links.html'),
         controller: function($scope, $mdDialog){
 
             // Set defaults
@@ -217,7 +217,7 @@ directive('socialLinks', function ($timeout) {
 
             function editModal($event){
                 $mdDialog.show({
-                    templateUrl: 'app/modules/social-media/tpls/social-links-modal.html',
+                    template: require('./tpls/social-links-modal.html'),
                     controller: function(data, type, $scope){
                         $scope.data = angular.copy(data);
                         $scope.type = type;

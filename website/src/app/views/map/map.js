@@ -13,7 +13,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.map', {
         url: '/map?type&c',
-        templateUrl: require('./tpls/map.html'),
+        template: require('./tpls/map.html'),
         controller: 'MapViewCtrl',
         layout: {
             size: 'lg',

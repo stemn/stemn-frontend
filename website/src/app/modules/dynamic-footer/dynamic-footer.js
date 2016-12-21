@@ -22,7 +22,7 @@ directive('dynamicFooter', function () {
         replace: true,
         transclude: true,
         scope: {},
-        templateUrl: 'app/modules/dynamic-footer/tpls/dynamic-footer.html',
+        template: require('./tpls/dynamic-footer.html'),
         controller: function ($scope, $dynamicFooter) {
             $scope.$dynamicFooter = $dynamicFooter;
             $scope.$dynamicFooter.open = true;
@@ -43,7 +43,7 @@ directive('entityFooter', function () {
             publishFn: '&',
             editFn   : '&'
         },
-        templateUrl: 'app/modules/dynamic-footer/tpls/entity-footer.html',
+        template: require('./tpls/entity-footer.html'),
         controller: function($scope, CoreLibrary){
             if($scope.entity.type == 'project'){
                 $scope.confirmBody = 'You should add as many relevant tags as possible. If you dont, your project will be difficult to find and will not reach an appropriate audience. <br><a class="text-green" href="/projects/'+$scope.entity.stub+'?edit=ProjectMainForm#tagsEdit">Add tags now.</a>'

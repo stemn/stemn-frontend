@@ -7,7 +7,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.browse.projects', {
         url: '/projects?page&sort',
-        templateUrl: 'app/views/browse/browse-projects/browse-projects.html',
+        template: require('./browse-projects.html'),
         layout: {
             size: 'md',
             footer: true

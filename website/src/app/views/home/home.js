@@ -28,7 +28,7 @@ config(function ($stateProvider) {
 //                return userdata;
 //            },
 //        },
-        templateUrl: 'app/views/home/home.html',
+        template: require('./home.html'),
         controller: 'HomeViewCtrl',
         layout:{
 //            chat: false,

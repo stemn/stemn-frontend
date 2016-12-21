@@ -13,7 +13,7 @@ config(function ($stateProvider, $urlRouterProvider) {
     state('app.field', {
         url: '/fields/:stub?projectview&location',
         sticky: true,
-        templateUrl: 'app/views/field/field.html',
+        template: require('./field.html'),
         resolve: {
             field: function (FieldService, $stateParams) {
                 return FieldService.getField($stateParams.stub).then(function (field) {
@@ -37,7 +37,7 @@ config(function ($stateProvider, $urlRouterProvider) {
     }).
     state('app.field.top', {
         url: '/top',
-        templateUrl: 'app/views/field/tpls/field-top.html',
+        template: require('./tpls/field-top.html'),
         seo: function(resolve){
             return {
                 title       : 'Top ' + resolve.field.name + ' Projects, Questions and Organisations - STEMN',
@@ -46,7 +46,7 @@ config(function ($stateProvider, $urlRouterProvider) {
     }).
     state('app.field.threads', {
         url: '/threads',
-        templateUrl: 'app/views/field/tpls/field-threads.html',
+        template: require('./tpls/field-threads.html'),
         data: {
             name: 'forum'
         },
@@ -58,7 +58,7 @@ config(function ($stateProvider, $urlRouterProvider) {
     }).
     state('app.field.blogs', {
         url: '/blogs',
-        templateUrl: 'app/views/field/tpls/field-blogs.html',
+        template: require('./tpls/field-blogs.html'),
         data: {
             name: 'updates'
         },
@@ -70,7 +70,7 @@ config(function ($stateProvider, $urlRouterProvider) {
     }).
     state('app.field.projects', {
         url: '/projects',
-        templateUrl: 'app/views/field/tpls/field-project.html',
+        template: require('./tpls/field-project.html'),
         data: {
             name: 'projects'
         },
@@ -82,7 +82,7 @@ config(function ($stateProvider, $urlRouterProvider) {
     }).
     state('app.field.jobs', {
         url: '/jobs',
-        templateUrl: 'app/views/field/tpls/field-jobs.html',
+        template: require('./tpls/field-jobs.html'),
         data: {
             name: 'jobs'
         },
@@ -94,7 +94,7 @@ config(function ($stateProvider, $urlRouterProvider) {
     }).
     state('app.field.organisations', {
         url: '/organisations',
-        templateUrl: 'app/views/field/tpls/field-organisations.html',
+        template: require('./tpls/field-organisations.html'),
         data: {
             name: 'organisations'
         },
@@ -106,7 +106,7 @@ config(function ($stateProvider, $urlRouterProvider) {
     })
 //    state('app.field.people', {
 //        url: '/people',
-//        templateUrl: 'app/views/field/tpls/field-people.html',
+//        template: require('./tpls/field-people.html'),
 //        controller: 'FieldSubViewCtrl'
 //    })
 }).

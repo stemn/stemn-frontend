@@ -7,7 +7,7 @@ directive('editorInsertButtons', function (ModularEditorService, UploadsModalSer
 	return {
 		restrict: 'E',
 		replace: true,
-		templateUrl: 'app/modules/modular-editor/insert-buttons/insert-buttons.html',
+		template: require('./insert-buttons.html'),
 		link: function(scope, element, attrs, ctrl){
 			ctrl         = scope.ctrl;     // Pass Ctrl through scope
 			var iElement = scope.iElement; // Pass iElement through scope

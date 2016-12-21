@@ -9,7 +9,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.browse.jobs', {
         url: '/jobs?near[]&sort&order&parentType&parentId',
-        templateUrl: 'app/views/browse/browse-jobs/browse-jobs.html',
+        template: require('./browse-jobs.html'),
         layout: {
             size: 'lg',
             footer: true

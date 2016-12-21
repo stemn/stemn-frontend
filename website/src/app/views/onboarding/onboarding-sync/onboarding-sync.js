@@ -7,7 +7,7 @@ config(function ($stateProvider) {
     state('app.onboarding.sync', {
         abstract: true,
         url: '/sync',
-        templateUrl: 'app/views/onboarding/onboarding-sync/tpls/onboarding-sync.html',
+        template: require('./tpls/onboarding-sync.html'),
         controller: 'OnboardingSyncViewCtrl',
         resolve: {
             user : function(userdata, UserService, Authentication){
@@ -19,12 +19,12 @@ config(function ($stateProvider) {
     }).
     state('app.onboarding.sync.intro', {
         url: '',
-        templateUrl: 'app/views/onboarding/onboarding-sync/tpls/onboarding-sync-intro.html',
+        template: require('./tpls/onboarding-sync-intro.html'),
         controller: 'OnboardingSyncIntroViewCtrl'
     }).
     state('app.onboarding.sync.account', {
         url: '/account',
-        templateUrl: 'app/views/onboarding/onboarding-sync/tpls/onboarding-sync-account.html',
+        template: require('./tpls/onboarding-sync-account.html'),
         controller: 'OnboardingSyncAccountViewCtrl'
     })
 }).

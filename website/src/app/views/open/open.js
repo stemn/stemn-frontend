@@ -21,7 +21,7 @@ config(function ($stateProvider) {
                 }
             }
         },
-        templateUrl: 'app/views/open/open.html',
+        template: require('./open.html'),
         layout: {
             chat: false,
             topBanner: false

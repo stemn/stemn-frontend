@@ -11,7 +11,7 @@ directive('publishShareLink', function ($mdDialog, $location) {
         link : function (scope, element, attrs){
 			element.bind('click', function (event) {
 				$mdDialog.show({
-					templateUrl: 'app/modules/publish/tpls/publish-share-link-modal.html',
+					template: require('./tpls/publish-share-link-modal.html'),
 					controller: function (data, $scope) {
 						$scope.url = $location.absUrl();
 						$scope.cancel = function () {
@@ -84,7 +84,7 @@ service('PublishService', function ($mdDialog, $mdToast) {
     function selectStubModal(event, entity, stubPrefix){
         stubPrefix = stubPrefix || ''; // Default the stub prepend
         return $mdDialog.show({
-            templateUrl: 'app/modules/publish/tpls/select-stub-modal.html',
+            template: require('./tpls/select-stub-modal.html'),
             controller: function(entity, $scope, CoreLibrary, SearchService){
                 $scope.checkAvailability = checkAvailability; //function(name)
                 $scope.entity = entity;

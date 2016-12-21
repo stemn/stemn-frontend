@@ -11,7 +11,7 @@ directive('promptOverlay', function () {
         scope: {
             img: '@'
         },
-        templateUrl: 'app/modules/prompt-overlay/tpls/prompt-overlay.html',
+        template: require('./tpls/prompt-overlay.html'),
         controller: function($scope, PromptOverlayService){
             $scope.PromptOverlayService = PromptOverlayService;
             $scope.close    = function(){

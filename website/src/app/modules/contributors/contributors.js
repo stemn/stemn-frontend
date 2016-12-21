@@ -35,7 +35,7 @@ directive('contributors', function () {
                 })
             }
         },
-        templateUrl: 'app/modules/contributors/tpls/contributors.html'
+        template: require('./tpls/contributors.html')
     };
 }).
 service('ContributorsService', function ($http) {

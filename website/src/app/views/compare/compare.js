@@ -46,7 +46,7 @@ config(function ($stateProvider) {
                 })
             },
         },
-        templateUrl: 'app/views/compare/tpls/compare.html',
+        template: require('./tpls/compare.html'),
         controller: 'CompareViewCtrl',
         layout: {
             size: 'md',
@@ -213,7 +213,7 @@ directive('compareWindow', function() {
             provider: '=',
             parentFolder: '='
         },
-        templateUrl: 'app/views/compare/tpls/compare-window.html',
+        template: require('./tpls/compare-window.html'),
         controller: function($scope, SyncFileSelectService, $location, SyncUrlService, SyncUtilService, $stateParams, $state, SyncService, $timeout){
             $scope.selectFile  = selectFile;      // function()
             $scope.openFileFolder = SyncUtilService.openFileFolder; //function()
@@ -257,7 +257,7 @@ directive('compareHeader', function() {
             fileMeta: '=',
             previewer: '=',
         },
-        templateUrl: 'app/views/compare/tpls/compare-header.html',
+        template: require('./tpls/compare-header.html'),
         controller: function($scope, SyncFileSelectService, $location, SyncUrlService, SyncUtilService, $stateParams, $state, SyncService, $timeout){
             $scope.closeWindow = closeWindow;     // function()
             $scope.openFileFolder = SyncUtilService.openFileFolder; //function()
@@ -286,7 +286,7 @@ directive('compareRevisionTimeline', function() {
             fileMeta: '=',
             previewer: '=',
         },
-        templateUrl: 'app/views/compare/tpls/compare-revision-timeline.html',
+        template: require('./tpls/compare-revision-timeline.html'),
         controller: function($scope, SyncFileSelectService, $location, SyncUrlService, $stateParams, $state, SyncService, $timeout){
             $scope.revisionChange = revisionChange;     //function()
 

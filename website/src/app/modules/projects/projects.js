@@ -12,7 +12,7 @@ directive('projectFilterBar', function () {
             filter : '=',
             view   : '='
         },
-        templateUrl: 'app/modules/projects/tpls/projects-filter-bar.html',
+        template: require('./tpls/projects-filter-bar.html'),
         controller: function($scope) {
             // The diffrent types of filters
             $scope.filters = [{

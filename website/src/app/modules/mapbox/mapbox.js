@@ -10,7 +10,7 @@ directive('mapbox', function () {
         scope: {
             callback: '=',
         },
-        templateUrl:'app/modules/mapbox/tpls/mapbox.html',
+        template:'app/modules/mapbox/tpls/mapbox.html',
         link: function (scope, element, attributes) {
 
 

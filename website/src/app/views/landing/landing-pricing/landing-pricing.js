@@ -8,7 +8,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('app.landing.pricing', {
         url: '/pricing',
-        templateUrl: 'app/views/landing/landing-pricing/tpls/landing-pricing.html',
+        template: require('./tpls/landing-pricing.html'),
 //        controller: function(OnboardingService){
 //            OnboardingService.beenLanding = true;
 //        },

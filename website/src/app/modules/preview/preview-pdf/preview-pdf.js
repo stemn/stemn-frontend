@@ -8,7 +8,7 @@ directive('previewPdf', function ($window) {
         scope: {
             fileUrl : '@',
         },
-        templateUrl: 'app/modules/preview/preview-pdf/tpls/preview-pdf.html',
+        template: require('./tpls/preview-pdf.html'),
         controller: function($scope){
             console.log($scope.fileUrl);
             $scope.loading = true;

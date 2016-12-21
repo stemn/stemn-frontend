@@ -10,7 +10,7 @@ config(function ($stateProvider) {
     state('app.search', {
         abstract: true,
         url: '/search?q&type',
-        templateUrl: 'app/views/site-search/site-search.html',
+        template: require('./site-search.html'),
         controller: 'SearchViewCtrl',
         seo: function(resolve){
             return {
@@ -25,27 +25,27 @@ config(function ($stateProvider) {
     }).
     state('app.search.all', {
         url: '/',
-        templateUrl: 'app/views/site-search/site-search-all.html',
+        template: require('./site-search-all.html'),
     }).
     state('app.search.creations', {
         url: '/creations',
-        templateUrl: 'app/views/site-search/site-search-creations.html',
+        template: require('./site-search-creations.html'),
     }).
     state('app.search.organisations', {
         url: '/organisations',
-        templateUrl: 'app/views/site-search/site-search-organisations.html',
+        template: require('./site-search-organisations.html'),
     }).
     state('app.search.fields', {
         url: '/fields',
-        templateUrl: 'app/views/site-search/site-search-fields.html',
+        template: require('./site-search-fields.html'),
     }).
     state('app.search.users', {
         url: '/people',
-        templateUrl: 'app/views/site-search/site-search-users.html',
+        template: require('./site-search-users.html'),
     }).
     state('app.search.jobs', {
         url: '/jobs',
-        templateUrl: 'app/views/site-search/site-search-jobs.html',
+        template: require('./site-search-jobs.html'),
     })
 }).
 
