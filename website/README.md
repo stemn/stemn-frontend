@@ -1,44 +1,89 @@
-# README #
+# angular-webpack
 
-### Requirements
-Make sure you have installed:
+[![Dependency Status](https://david-dm.org/preboot/angular-webpack/status.svg)](https://david-dm.org/preboot/angular-webpack#info=dependencies) [![devDependency Status](https://david-dm.org/preboot/angular-webpack/dev-status.svg)](https://david-dm.org/preboot/angular-webpack#info=devDependencies)
 
-* Node.js - [https://nodejs.org/en/](Link URL)
-* MongoDB - [https://www.mongodb.org/downloads#production](Link URL)
-* git - [https://git-scm.com/downloads](Link URL)
-* Python2.7 - [https://www.python.org/downloads/](Link URL)
-* Ruby - [http://rubyinstaller.org/downloads/](Ruby)
-* SASS - `gem install sass` (This requires Ruby)
-* Visual Studio & Sharp - [https://www.microsoft.com/en-us/download/details.aspx?id=48159](Link URL) - Only required for Windows (to build Sharp) then `npm install sharp --msvs_version=2015 --with-modules=no`
+A complete, yet simple, starter for Angular using Webpack.
 
-### How do I get set up? ###
-* Clone this repo onto your computer
-* Navigate to the root of the STEMN directory
-* Run `npm install` to download 3rd party packages
-* Run `npm install -g grunt-cli brunch nodemon`
+This workflow serves as a starting point for building Angular 1.x applications using Webpack. Should be noted that apart from the pre-installed angular package, this workflow is pretty much generic.
 
-## Run the App
-#### To run the main app
-* Run the dependencies (MongoDB and Redis) `stemn\server\start-dependencies.bat`
-* Change directory to `app/main` and run `brunch w --server`
-* The app will be available at `localhost:3333`
+* Heavily commented webpack configuration with reasonable defaults.
+* ES6, and ES7 support with babel.
+* Source maps included in all builds.
+* Development server with live reload.
+* Production builds with cache busting.
+* Testing environment using karma to run tests and jasmine as the framework.
+* Code coverage when tests are run.
+* No gulp and no grunt, just npm scripts.
 
-#### To run the admin panel
-* Add the mapping `127.0.0.1 admin.stemn.dev` to the hostfile `C:\Windows\System32\drivers\etc\` or `/etc/hosts`
-* Run the dependencies (MongoDB and Redis) `stemn\server\start-dependencies.bat`
-* Change directory to `app/admin` and run `brunch w --server`
-* The admin panel will be available at `admin.stemn.dev:3333`
+>Warning: Make sure you're using the latest version of Node.js and NPM
 
-#### Deploy the app
-* Run `grunt deploy`
+### Quick start
 
-#### Test the app
-* Install protractor `npm install -g protractor`
-* run `grunt test`
+> Clone/Download the repo then edit `app.js` inside [`/src/app/app.js`](/src/app/app.js)
 
-### Utilities
-* Download the latest database `node scripts/mongodb/get-latest-database` (Requires [OpenSSH for Windows](https://sourceforge.net/projects/sshwindows/files/OpenSSH%20for%20Windows%20-%20Release/3.8p1-1%2020040709%20Build/setupssh381-20040709.zip/download))
-* Connect to the AWS servers `node scripts/aws/ssh`
-* View real time application server logs `node scripts/aws/logs`
-* To clear the analytics cache `GET http://localhost:3000/api/v1/analytics/flushCache`
-* To clear the entire cache `GET http://localhost:3000/api/v1/flushCache`
+```bash
+# clone our repo
+$ git clone https://github.com/preboot/angular-webpack.git my-app
+
+# change directory to your app
+$ cd my-app
+
+# install the dependencies with npm
+$ npm install
+
+# start the server
+$ npm start
+```
+
+go to [http://localhost:8080](http://localhost:8080) in your browser.
+
+# Table of Contents
+
+* [Getting Started](#getting-started)
+    * [Dependencies](#dependencies)
+    * [Installing](#installing)
+    * [Running the app](#running-the-app)
+    * [Developing](#developing)
+    * [Testing](#testing)
+* [License](#license)
+
+# Getting Started
+
+## Dependencies
+
+What you need to run this app:
+* `node` and `npm` (Use [NVM](https://github.com/creationix/nvm))
+* Ensure you're running Node (`v4.1.x`+) and NPM (`2.14.x`+)
+
+## Installing
+
+* `fork` this repo
+* `clone` your fork
+* `npm install` to install all dependencies
+
+## Running the app
+
+After you have installed all dependencies you can now run the app with:
+```bash
+npm start
+```
+
+It will start a local server using `webpack-dev-server` which will watch, build (in-memory), and reload for you. The port will be displayed to you as `http://localhost:8080`.
+
+## Developing
+
+### Build files
+
+* single run: `npm run build`
+* build files and watch: `npm start`
+
+## Testing
+
+#### 1. Unit Tests
+
+* single run: `npm test`
+* live mode (TDD style): `npm run test-watch`
+
+# License
+
+[MIT](/LICENSE)
