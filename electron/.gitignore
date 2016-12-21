@@ -41,3 +41,5 @@ main.js.map
 .happypack
 
 stats.json
+
+npm-debug*
