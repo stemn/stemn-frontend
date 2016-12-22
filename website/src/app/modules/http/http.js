@@ -8,7 +8,7 @@ config(($httpProvider) => {
         return {
             request: function(config) {
                 if (config.url.includes('api/v1')) {
-                    config.url = configValues.api+config.url
+                    config.url = configValues.env.API_SERVER + config.url
                 }
                 return config;
             }

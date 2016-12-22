@@ -1,4 +1,9 @@
 import angular            from 'angular';
+import configValues       from './config.js';
+
+// Css Globals
+import '../../bower_components/angular-material/angular-material.css';
+import './css/index.js';
 
 import ngAnimate          from 'angular-animate'; 
 import ngAria             from 'angular-aria'; 
@@ -21,8 +26,7 @@ window._   = lodash;
 window.WOW = wowjs.WOW;
 
 
-// Css Globals
-import './css/index.js';
+
 
 
 const moduleName = 'app';
@@ -60,7 +64,7 @@ angular.module('infinite-scroll')
 /////////////////////////////////////////////////////////////////////////
 
 function config($locationProvider, $urlRouterProvider, $stateProvider) {
-    $locationProvider.html5Mode(true); // use html5Mode so the state routes don't have #/route
+  $locationProvider.html5Mode(true); // use html5Mode so the state routes don't have #/route
 
     // Inisitalise any 3rd party vanillla JS
     new WOW().init();
@@ -94,6 +98,7 @@ function MainCtrl($scope, $document, $rootScope, $location, $sce, ProjectCreateM
     $rootScope.$state = $state;
     $rootScope.user = Authentication.currentUser;
     $rootScope.$mdMedia = $mdMedia;
+    $rootScope.env = configValues.env;
     $scope.LayoutOptions = LayoutOptions;
     $scope.$dynamicFooter = $dynamicFooter;
 

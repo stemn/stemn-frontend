@@ -1,3 +1,6 @@
 export default {
-  api: 'http://localhost:3000'
+  env: {
+    API_SERVER   : 'http://localhost:3000',
+    IMAGE_SERVER : 'https://stemn.com'
+  }
 }

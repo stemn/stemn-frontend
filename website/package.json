@@ -41,7 +41,8 @@
     "react-dom": "^15.4.1",
     "satellizer": "^0.15.5",
     "sortablejs": "^1.5.0-rc1",
-    "wowjs": "^1.1.3"
+    "wowjs": "^1.1.3",
+    "xxhashjs": "^0.2.1"
   },
   "devDependencies": {
     "angular-mocks": "^1.5.0",
