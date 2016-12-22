@@ -21,6 +21,7 @@
             </div>
             <div flex-order-sm="1">
                 <!-- IMAGE BLOCK -->
+                {{env}}
                 <item-image ng-if="::image">
                     <a ui-sref="{{::sref}}"><div ng-style="::image && {'background-image': 'url('+image+'?size=feed-sm&crop=true)'}"></div></a>
                 </item-image>

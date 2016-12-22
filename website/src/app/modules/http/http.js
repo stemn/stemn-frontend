@@ -1,21 +1,6 @@
 
-import configValues from '../../config.js';
-
 angular.module('modules.http', []);
 angular.module('modules.http').
-config(($httpProvider) => {
-    $httpProvider.interceptors.push(function() {
-        return {
-            request: function(config) {
-                if (config.url.includes('api/v1')) {
-                    config.url = configValues.env.API_SERVER + config.url
-                }
-                return config;
-            }
-        };
-    });
-}).
-
 service('HttpService', HttpService).
 service('HttpQuery', HttpQuery).
 service('QueryParamsService', QueryParamsService);

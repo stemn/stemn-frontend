@@ -1,3 +1,4 @@
+import jobStepTpl from 'ngtemplate!app/views/landing/landing-jobs/tpls/jobs-steps.html';
 import './landing-jobs.scss';
 
 angular.module('views.landing.jobs', [
@@ -11,6 +12,7 @@ config(function ($stateProvider) {
         template: require('./tpls/landing-jobs.html'),
         controller: function(OnboardingService){
             OnboardingService.beenLanding = true;
+            $scope.jobStepTpl = jobStepTpl;
         },
         seo: function(){
             return {

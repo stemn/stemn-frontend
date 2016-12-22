@@ -1,5 +1,6 @@
 'use strict';
 
+
 // Modules
 const path = require('path');
 const webpack = require('webpack');
@@ -9,7 +10,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const BowerWebpackPlugin = require("bower-webpack-plugin");
 const HappyPack = require('happypack');
-
 
 const serverPort = 3333;
 // Env
@@ -90,6 +90,7 @@ module.exports = function makeWebpackConfig () {
   ];
   
   config.resolve = {
+    root: [path.resolve('./src')],
     modlesDirectories: ["node_modules", "bower_components"],
     alias: {
       "ui-router-extras" : __dirname + "/bower_components/ui-router-extras/release/ct-ui-router-extras.js",

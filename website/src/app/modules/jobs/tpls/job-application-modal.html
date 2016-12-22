@@ -18,9 +18,9 @@
         </div>
         <div class="md-content-container content-md" style="padding: 30px;">
 
-            <div ng-if="activeTab == 'Requirements'" ng-include="'app/modules/jobs/tpls/job-application-modal.requirements.html'"></div>
-            <div ng-if="activeTab == 'Cover Letter'" ng-include="'app/modules/jobs/tpls/job-application-modal.coverletter.html'"></div>
-            <div ng-if="activeTab == 'Other Info'"   ng-include="'app/modules/jobs/tpls/job-application-modal.other.html'"></div>
+            <div ng-if="activeTab == 'Requirements'" ng-include="modalRequirementsTpl"></div>
+            <div ng-if="activeTab == 'Cover Letter'" ng-include="modalCoverletterTpl"></div>
+            <div ng-if="activeTab == 'Other Info'"   ng-include="modalOtherTpl"></div>
 
             <div layout="row" class="m-t-30">
                 <div flex></div>

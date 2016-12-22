@@ -1,5 +1,9 @@
 import './jobs.scss';
 
+import modalRequirementsTpl from 'ngtemplate!./tpls/job-application-modal.requirements.html';
+import modalCoverletterTpl  from 'ngtemplate!./tpls/job-application-modal.coverletter.html';
+import modalOtherTpl        from 'ngtemplate!./tpls/job-application-modal.other.html';
+
 angular.module('modules.jobs', [
 ]);
 angular.module('modules.jobs').
@@ -239,6 +243,10 @@ service('JobModalService', function($mdDialog){
             controller: function(job, $scope, $state, Authentication, $mdToast, HttpQuery, LocationService, $http, EntityService){
                 $scope.job = job;
                 $scope.forms = {};
+
+                $scope.modalRequirementsTpl = modalRequirementsTpl;
+                $scope.modalCoverletterTpl = modalCoverletterTpl;
+                $scope.modalOtherTpl = modalOtherTpl;
 
                 // Get User, Job and Projects
                 EntityService.get('user', Authentication.currentUser._id, 'lg').then(function(response){

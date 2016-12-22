@@ -1,4 +1,7 @@
 import './related.scss';
+import feedTpl from 'ngtemplate!./tpls/related-compact-feed.html';
+import tagsTpl from 'ngtemplate!./tpls/related-tags.html';
+
 angular.module('modules.related', [
     'modules.tags',
     'modules.feed' // Used for feed-item display
@@ -39,8 +42,8 @@ directive('related', function (RelatedService) {
             // Set layout --------------------------------------------------------------------
             $scope.displayStyle = $scope.displayStyle || 'tags';
             var displayStyles = { // The keys match type inputs
-                'feed'        : {template:'app/modules/related/tpls/related-compact-feed.html'},
-                'tags'        : {template:'app/modules/related/tpls/related-tags.html'},
+                'feed'        : {template: feedTpl},
+                'tags'        : {template: tagsTpl},
             };
             $scope.template = displayStyles[$scope.displayStyle].template;
 

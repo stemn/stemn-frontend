@@ -1,5 +1,9 @@
 import './call-to-action.scss';
 
+import referralsTpl from 'ngtemplate!./tpls/cta-referrals.html';
+import mapTpl       from 'ngtemplate!./tpls/cta-map.html';
+import projectTpl   from 'ngtemplate!./tpls/cta-project.html';
+
 angular.module('modules.call-to-action', [
 ]);
 angular.module('modules.call-to-action').
@@ -32,13 +36,13 @@ service('callToActionService', function (Authentication) {
     var service = this;
     this.bannerDetails = {
         b1 : {
-            template: require('./tpls/cta-referrals.html'),
+            templateUrl: referralsTpl,
         },
         b2 : {
-            template: require('./tpls/cta-map.html'),
+            templateUrl: mapTpl,
         },
         b3 : {
-            template: require('./tpls/cta-project.html'),
+            templateUrl: projectTpl,
         }
     };
     // Initialise first random banner

@@ -35,7 +35,8 @@ directive('creationCard', function () {
             size       : '@?' // small
         },
         template: require('./tpls/creation-card.html'),
-        controller: function ($scope, FeedService, CoreLibrary) {
+        controller: function ($scope, $rootScope, FeedService, CoreLibrary) {
+            $scope.env = $rootScope.env;
             if ($scope.entityId && $scope.entityType) {
                 // Initiate Loading class
                 $scope.loading = true;

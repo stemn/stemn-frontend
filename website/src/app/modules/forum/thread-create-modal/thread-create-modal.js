@@ -1,3 +1,5 @@
+import overviewTpl from 'ngtemplate!./tpls/thread-create-modal.overview.html';
+
 angular.module('modules.thread.thread-create-modal', [
 ]);
 angular.module('modules.thread.thread-create-modal').
@@ -39,7 +41,7 @@ controller('ThreadCreateModalCtrl', function (data, $scope, $state, $mdDialog, P
     $scope.steps = {
         'Overview' : {
             label: 'Overview',
-            path: 'app/modules/forum/thread-create-modal/tpls/thread-create-modal.overview.html',
+            path: overviewTpl,
             nextText : 'Create Thread',
             clickFn : function(){
                 $scope.activeTab.label = this.label;

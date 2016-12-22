@@ -1,4 +1,12 @@
 import './section.scss';
+
+// Require all the template files
+const editorTemplates = require.context('ngtemplate?relativeTo=section!./', true, /\.html$/);
+editorTemplates.keys().forEach(key => {
+  // Invoke the iifes
+  editorTemplates(key);
+});
+
 angular.module('modules.modular-editor.section', [
 ]);
 angular.module('modules.modular-editor.section').
@@ -17,10 +25,7 @@ directive('editorSection', function (CodeMirrorService) {
             placeholder        : '@'
 		},
         link: function (scope, element, attrs){
-//            getTemplatePath();
             scope.$watch('section.layout', getTemplatePath)
-
-
 
             if(scope.section.type == 'code'){
                 // Code otions
@@ -39,7 +44,7 @@ directive('editorSection', function (CodeMirrorService) {
             ////////////////////////////
 
             function getTemplatePath(){
-                var path = 'app/modules/modular-editor/section/';
+                var path = '';
                 path += scope.section.type + '/';
                 path += scope.edit ? 'edit/' : 'public/';
                 path += scope.section.layout ? scope.section.layout : scope.section.type;

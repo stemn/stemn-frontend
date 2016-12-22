@@ -1,5 +1,11 @@
-
 import './tags.scss';
+
+import fieldTpl         from 'ngtemplate?relativeTo=modules/!./tpls/types/field.html';
+import locationTpl      from 'ngtemplate?relativeTo=modules/!./tpls/types/location.html';
+import organisationTpl  from 'ngtemplate?relativeTo=modules/!./tpls/types/organisation.html';
+import projectTpl       from 'ngtemplate?relativeTo=modules/!./tpls/types/project.html';
+import userTpl          from 'ngtemplate?relativeTo=modules/!./tpls/types/user.html';
+import tagEditTpl       from 'ngtemplate?relativeTo=modules/!./tpls/types/tag-edit.html';
 
 angular.module('modules.tags', [
     'modules.popup-cards'
@@ -23,11 +29,12 @@ directive('tags', function () {
         },
         template: require('./tpls/tags.html'),
         link       : function (scope, element, attrs){
-            var path = 'app/modules/tags/tpls/types/'
+            var path = 'tags/tpls/types/'
             if (scope.edit){
                 scope.template = path + 'tag-edit.html';
             }
             else{
+//                scope.template = 'tags/field.html';
                 scope.template = path + scope.type + '.html';
             }
         },
