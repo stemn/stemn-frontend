@@ -12,7 +12,7 @@
     "medium-editor": "git://github.com/DaveRevay2/medium-editor.git#master",
     "ngGeolocation": "~0.0.8",
     "particles.js": "~2.0.0",
-    "restangular": "~1.5.1",
+    "restangular": "~1.5.2",
     "Sortable": "~1.2.0",
     "stacktrace-js": "~0.6.4",
     "ui-router-extras": "~0.0.14",

@@ -1,5 +1,3 @@
-import configValues from '../../config.js';
-
 angular.module('modules.error-handling', []);
 angular.module('modules.error-handling').
 
@@ -150,7 +148,7 @@ factory('errorLogService', function($log, $window, stacktraceService, FunctionLi
                     // Log the JavaScript error to the server.
 //                    $.ajax({
 //                        type        : 'POST',
-//                        url         : configValues.env.API_SERVER + '/api/v1/logging/clienterrors',
+//                        url         : GLOBAL_ENV.API_SERVER + '/api/v1/logging/clienterrors',
 //                        contentType : 'application/json',
 //                        data        : angular.toJson({
 //                            errorUrl     : $window.location.href,

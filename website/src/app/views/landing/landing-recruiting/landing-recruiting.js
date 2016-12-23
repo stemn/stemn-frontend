@@ -1,3 +1,4 @@
+import recruitingStepTpl from 'ngtemplate!./tpls/recruiting-steps.html';
 import './landing-recruiting.scss';
 
 angular.module('views.landing.recruiting', [
@@ -12,6 +13,7 @@ config(function ($stateProvider) {
         controller: function($scope, OnboardingService, AuthenticationModalService){
             OnboardingService.beenLanding = true;
             $scope.loginRecruit = AuthenticationModalService.loginRecruit; // function(event)
+            $scope.recruitingStepTpl = recruitingStepTpl;
         },
         seo: function(){
             return {

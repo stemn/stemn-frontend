@@ -305,7 +305,7 @@ directive('userPosts', function () {
 }).
 
 
-service('PostService', function (Restangular, $http, Authentication, ModularEditorService, $q) {
+service('PostService', function ($http, Authentication, ModularEditorService, $q) {
 
     // this service handles both thread posts and project comments
 

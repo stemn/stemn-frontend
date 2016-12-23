@@ -48,7 +48,7 @@
                         <a class="text-green" ng-click="jobQuery.more();">More</a>
                     </div>
                     <a ng-repeat="item in jobQuery.results" class="picture-row" layout="row" layout-align="start center" ui-sref="app.job({stub: item.stub})">
-                        <div class="avatar avatar-square-contain m-r-15" ng-style="{'background-image': item.organisations[0].picture ? 'url(' + env.IMAGE_SERVER + item.organisations[0].picture + '?size=thumb)' : 'url(/assets/images/default/user-1.png)'}"></div>
+                        <div class="avatar avatar-square-contain m-r-15" ng-style="{'background-image': item.organisations[0].picture ? 'url(' + item.organisations[0].picture + '?size=thumb)' : 'url(/assets/images/default/user-1.png)'}"></div>
                         <div flex layout="column" class="ellipsis-container">
                             <div flex class="semi-bold ellipsis">{{::item.name}}</div>
                             <div class="text-lightgrey ellipsis">{{::item.organisations[0].name}}</div>
@@ -64,7 +64,7 @@
                     </div>
                     <div ng-repeat="item in peopleQuery.results">
                         <div class="picture-row" layout="row" layout-align="start center">
-                            <a ui-sref="app.user.profile({stub: item.user.stub})" class="avatar avatar-circle m-r-15" ng-style="{'background-image': item.user.picture ? 'url(' + env.IMAGE_SERVER + item.user.picture + '?size=thumb)' : 'url(/assets/images/default/user-1.png)'}"></a>
+                            <a ui-sref="app.user.profile({stub: item.user.stub})" class="avatar avatar-circle m-r-15" ng-style="{'background-image': item.user.picture ? 'url(' + item.user.picture + '?size=thumb)' : 'url(/assets/images/default/user-1.png)'}"></a>
                             <a ui-sref="app.user.profile({stub: item.user.stub})" flex layout="column" class="ellipsis-container">
                                 <div flex class="semi-bold ellipsis">{{::item.user.name}}</div>
                                 <div class="text-lightgrey ellipsis">{{::item.why}}</div>

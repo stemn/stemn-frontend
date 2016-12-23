@@ -1,10 +1,14 @@
 import angular            from 'angular';
-import configValues       from './config.js';
 
 // Css Globals
 import '../../bower_components/angular-material/angular-material.css';
 import './css/index.js';
 
+// Other Code
+import initSegment from 'public/assets/js/segment.io/init.js';
+initSegment(GLOBAL_ENV.ENV_TYPE)
+
+// Angular modules
 import ngAnimate          from 'angular-animate'; 
 import ngAria             from 'angular-aria'; 
 import ngSantize          from 'angular-sanitize'; 
@@ -98,7 +102,6 @@ function MainCtrl($scope, $document, $rootScope, $location, $sce, ProjectCreateM
     $rootScope.$state = $state;
     $rootScope.user = Authentication.currentUser;
     $rootScope.$mdMedia = $mdMedia;
-    $rootScope.env = configValues.env;
     $scope.LayoutOptions = LayoutOptions;
     $scope.$dynamicFooter = $dynamicFooter;
 

@@ -87,7 +87,6 @@ controller('UserSettingsViewCtrl', function ($scope, $timeout, $rootScope, Authe
             );
         } else {
             SettingsService.updatePassword($scope.password.oldPassword, $scope.password.newPassword).then(function() {
-                // error case is handled by restangular intercepter
                 $mdToast.show(
                     $mdToast.simple().
                     content('Great, your password has been updated.')
