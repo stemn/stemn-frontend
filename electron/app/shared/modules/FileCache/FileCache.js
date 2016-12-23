@@ -156,7 +156,7 @@ export const get = ({key, url, name, params, responseType, extract}) => {
       }
       // Otherwise, we just save to the store and process
       else{
-        return saveToJsonStore(response).then(processResult)
+        return saveToJsonStore(response1).then(processResult)
       }
     })
   }
