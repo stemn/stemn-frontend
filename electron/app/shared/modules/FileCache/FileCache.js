@@ -96,9 +96,17 @@ export const get = ({key, url, name, params, responseType, extract}) => {
             fs.unlink(dest); // Delete the file async. (But we don't check the result)
             reject(response)
           });
-          stream.on('end', response => {
-            resolve({size: total})
-          });
+
+          // unzip event uses close, but all others use end
+          if (extract) {
+            file.on('close', response => {
+              resolve({size: total});
+            });
+          } else {
+            stream.on('end', response => {
+              resolve({size: total});
+            });
+          }
           stream.pipe(file)
         })
       })
