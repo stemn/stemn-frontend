@@ -1,5 +1,3 @@
-import configValues from '../../config.js';
-
 import './loadbar.scss';
 import 'angular-loading-bar';
 import 'angular-loading-bar/src/loading-bar.css';
@@ -22,7 +20,7 @@ config(function ($httpProvider, cfpLoadingBarProvider) {
                     config.ignoreLoadingBar = true;
                 }
                 if (config.url.includes('api/v1')) {
-                    config.url = config.url[0] == '/' ? configValues.env.API_SERVER + config.url : configValues.env.API_SERVER + "/" + config.url
+                    config.url = config.url[0] == '/' ? GLOBAL_ENV.API_SERVER + config.url : GLOBAL_ENV.API_SERVER + "/" + config.url
                 }
                 return config;
             }

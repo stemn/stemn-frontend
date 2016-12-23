@@ -1,5 +1,5 @@
 <div class="organisation-images">
     <a ng-repeat="member in organisations | limitTo: limit" popup popup-content="<card card-type='organisation' card-id='{{member._id}}'></card>" ng-href="org/{{member.stub}}" class="p-2 inline">
-        <div class="avatar-square-contain" style="background-image:url({{member.picture}}?size=thumb)"></div>
+        <div class="avatar-square-contain" ng-style="member.picture && {'background-image': 'url(' + member.picture + '?size=thumb)'}"></div>
     </a>
 </div>

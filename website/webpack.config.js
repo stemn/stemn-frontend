@@ -1,19 +1,18 @@
 'use strict';
 
-
 // Modules
-const path = require('path');
-const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path               = require('path');
+const webpack            = require('webpack');
+const autoprefixer       = require('autoprefixer');
+const HtmlWebpackPlugin  = require('html-webpack-plugin');
+const ExtractTextPlugin  = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin  = require('copy-webpack-plugin');
 const BowerWebpackPlugin = require("bower-webpack-plugin");
-const HappyPack = require('happypack');
+const HappyPack          = require('happypack');
+const serverPort         = 3333;
 
-const serverPort = 3333;
 // Env
-var ENV = process.env.npm_lifecycle_event;
+var ENV    = process.env.npm_lifecycle_event;
 var isTest = ENV === 'test' || ENV === 'test-watch';
 var isProd = ENV === 'build';
 
@@ -28,13 +27,13 @@ module.exports = function makeWebpackConfig () {
   // rma will handle setting it up for you when it's a test build
   config.output = isTest ? {} : {
     // Absolute output directory
-    path: __dirname + '/dist',
+    path          : __dirname + '/dist',
     // Output path from the view of the page
-    publicPath: isProd ? '/' : `http://localhost:${serverPort}/`,
+    publicPath    : isProd ? '/'                : `http://localhost:${serverPort}/`,
     // Filename for entry points
-    filename: isProd ? '[name].[hash].js' : '[name].bundle.js',
+    filename      : isProd ? '[name].[hash].js' : '[name].bundle.js',
     // Filename for non-entry points
-    chunkFilename: isProd ? '[name].[hash].js' : '[name].bundle.js'
+    chunkFilename : isProd ? '[name].[hash].js' : '[name].bundle.js'
   };
 
   // Devtool Source Map
@@ -43,43 +42,39 @@ module.exports = function makeWebpackConfig () {
   } else if (isProd) {
     config.devtool = 'source-map';
   } else {
-    config.devtool = 'eval-source-map';
+    config.devtool = 'source-map';
+//    config.devtool = 'eval-source-map';
   }
 
   // Loaders
   config.module = {
-    preLoaders: [],
-    loaders: [{
-      test: /\.js$/,
-      loaders: [ 'happypack/loader' ],
-      exclude: /node_modules/,
+    preLoaders  : [],
+    loaders     : [{
+      test      : /\.js$/,
+      loaders   : [ 'happypack/loader' ],
+      exclude   : /node_modules/,
     }, {
-      test: /\.css$/,
-      loader: isTest ? 'null' : ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap!postcss-loader')
+      test      : /\.css$/,
+      loader    : isTest ? 'null' : ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap!postcss-loader')
     }, {
-      test: /\.scss$/,
-      loaders: ["style-loader", "css-loader", "sass-loader"]
+      test      : /\.scss$/,
+      loaders   : ["style-loader", "css-loader", "sass-loader"]
     }, {
-      test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
-      loader: 'file'
+      test      : /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
+      loader    : 'file'
     }, {
-      test: /\.html$/,
-      loader: 'raw'
+      test      : /\.html$/,
+      loader    : 'raw'
     }]
   };
 
   // Istanbul Loader
   if (isTest) {
     config.module.preLoaders.push({
-      test: /\.js$/,
-      exclude: [
-        /node_modules/,
-        /\.spec\.js$/
-      ],
-      loader: 'istanbul-instrumenter',
-      query: {
-        esModules: true
-      }
+      test    : /\.js$/,
+      exclude : [/node_modules/, /\.spec\.js$/],
+      loader  : 'istanbul-instrumenter',
+      query   : { esModules: true }
     })
   }
 
@@ -90,11 +85,10 @@ module.exports = function makeWebpackConfig () {
   ];
   
   config.resolve = {
-    root: [path.resolve('./src')],
-    modlesDirectories: ["node_modules", "bower_components"],
-    alias: {
+    root                 : [path.resolve('./src')],
+    modlesDirectories    : ["node_modules", "bower_components"],
+    alias                : {
       "ui-router-extras" : __dirname + "/bower_components/ui-router-extras/release/ct-ui-router-extras.js",
-      "restangular"      : __dirname + "/bower_components/restangular/dist/restangular.js",
       "ngGeolocation"    : __dirname + "/bower_components/ngGeolocation/ngGeolocation.js"
     }
   };
@@ -104,8 +98,14 @@ module.exports = function makeWebpackConfig () {
       new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin(".bower.json", ["main"])
     ),
     new HappyPack({
-      loaders: [ 'babel?presets[]=react' ],
-    })
+      loaders      : [ 'babel?presets[]=react' ],
+    }),
+    new webpack.DefinePlugin({
+      GLOBAL_ENV   : {
+        ENV_TYPE   : JSON.stringify(process.env.ENV_TYPE),
+        API_SERVER : JSON.stringify(process.env.API_SERVER),
+      },
+    }),
   ];
 
 
@@ -134,9 +134,15 @@ module.exports = function makeWebpackConfig () {
 
   // Dev server configuration
   config.devServer = {
-    contentBase: './src/public',
-    port: serverPort,
-    stats: 'minimal'
+    contentBase    : './src/public',
+    port           : serverPort,
+    stats          : 'minimal',
+    // All images (uploads) are proxied from the API_SERVER
+    proxy          : [{
+      context      : ['/uploads/**'],
+      target       : process.env.API_SERVER,
+      secure       : false
+    }]
   };
 
   return config;

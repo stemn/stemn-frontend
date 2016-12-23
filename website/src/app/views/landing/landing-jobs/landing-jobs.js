@@ -10,7 +10,7 @@ config(function ($stateProvider) {
     state('app.landing.jobs', {
         url: '/jobs',
         template: require('./tpls/landing-jobs.html'),
-        controller: function(OnboardingService){
+        controller: function(OnboardingService, $scope){
             OnboardingService.beenLanding = true;
             $scope.jobStepTpl = jobStepTpl;
         },

@@ -1,3 +1,4 @@
+import jobStepTpl from 'ngtemplate!app/views/landing/landing-jobs/tpls/jobs-steps.html';
 import './browse-jobs.scss';
 
 angular.module('views.browse.jobs', [
@@ -72,6 +73,8 @@ controller('BrowseJobsViewCtrl', function(fields, $scope, $http, $timeout, HttpQ
     $scope.create = create;           // function()
     $scope.clearFilter = clearFilter; // function()
     $scope.sortByNear = sortByNear;   // function()
+
+    $scope.jobStepTpl = jobStepTpl;
 
     // Main Query
     $scope.query = HttpQuery({

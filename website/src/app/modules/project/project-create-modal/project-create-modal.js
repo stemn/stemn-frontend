@@ -1,3 +1,6 @@
+import basicTpl       from 'ngtemplate!./tpls/project-create-modal.basic.html';
+import permissionsTpl from 'ngtemplate!./tpls/project-create-modal.permissions.html';
+
 angular.module('modules.project.project-create-modal', [
 ]);
 angular.module('modules.project.project-create-modal').
@@ -38,14 +41,14 @@ controller('ProjectCreateModalCtrl', function (data, $scope, $state, $mdDialog, 
     $scope.tabs = [
         {
             label: 'General',
-            path: 'app/modules/project/project-create-modal/tpls/project-create-modal.basic.html',
+            path: basicTpl,
             click: function(){
                 $scope.activeTab.label = this.label;
                 $scope.activeTab.path  = this.path;
             }
         },{
             label: 'Permissions',
-            path: 'app/modules/project/project-create-modal/tpls/project-create-modal.permissions.html',
+            path: permissionsTpl,
             click: function(){
                 $scope.activeTab.label = this.label;
                 $scope.activeTab.path  = this.path;

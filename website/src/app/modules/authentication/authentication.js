@@ -310,11 +310,6 @@ controller('LoginModalCtrl', function (data, $scope, $mdDialog, Authentication, 
             Authentication.onboardingRedirect();
             $mdDialog.hide();
         }).catch(function(response) {
-            $mdToast.show(
-                $mdToast.simple().
-                theme('warn').
-                content('We couldn\'t log you in: '+ (response.error || response.data.message || response.data))
-            );
             $scope.loading = false;
         });
     }
@@ -372,13 +367,7 @@ controller('RegisterModalCtrl', function ($scope, $mdDialog, Authentication, $md
             }).then(function (response) {
                 Authentication.onboardingRedirect();
                 $mdDialog.hide();
-            }).catch(function (response) {
-                $mdToast.show(
-                    $mdToast.simple().
-                    theme('warn').
-                    content('That didn\'t work..'+ response.data.message || response.data)
-                );
-            });
+            })
         }
     }
     $scope.openLogin = function(event){
@@ -406,14 +395,7 @@ controller('LoginLocalModalCtrl', function ($scope, $mdDialog, Authentication, $
                     content('Welcome back, good to see you again :)')
                 );
                 $mdDialog.hide();
-            }).catch(function (response) {
-                $scope.loading = false;
-                $mdToast.show(
-                    $mdToast.simple().
-                    theme('warn').
-                    content('We couldn\'t log you in: '+ (response.error || response.data.message || response.data))
-                );
-            });
+            })
 
         }
     }
@@ -438,14 +420,7 @@ controller('LinkedinWarnModalCtrl', function ($scope, $mdDialog, Authentication,
             );
             $scope.loading = false;
             $mdDialog.hide();
-        }).catch(function(response) {
-            $mdToast.show(
-                $mdToast.simple().
-                theme('warn').
-                content('Couldn\'t do it... '+ response.data.message || response.data)
-            );
-            $scope.loading = false;
-        });
+        })
     }
     $scope.cancel = function(){
         $mdDialog.cancel();

@@ -25,7 +25,6 @@ config(function ($stateProvider) {
                     );
                 } else {
                     SettingsService.updatePassword($scope.password.oldPassword, $scope.password.newPassword, $stateParams.token).then(function() {
-                        // error case is handled by restangular intercepter
                         $mdToast.show(
                             $mdToast.simple().
                             content('Great, your password has been updated.')

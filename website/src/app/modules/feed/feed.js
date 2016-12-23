@@ -433,7 +433,7 @@ function feedRecommendDirective($http, $mdToast) {
     }
 }
 
-function feedService(Restangular, ThreadService, ProjectService, HttpService) {
+function feedService(ThreadService, ProjectService, HttpService) {
 
     this.getFeed = function (options) {
         /*********************************************************************************************************************

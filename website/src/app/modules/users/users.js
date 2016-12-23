@@ -3,7 +3,6 @@ import './users-permissions-edit/users-permissions-edit.js';
 
 angular.module('modules.users', [
     'modules.authentication',
-    'modules.restangular',
     'modules.users.permissions-edit'
 ]);
 
@@ -378,7 +377,7 @@ controller('UsersNewModalCtrl', function (data, $scope, $mdDialog, OrganisationS
 
 }).
 
-service('UserService', function($http, HttpService, Restangular, LocalCache, $rootScope) {
+service('UserService', function($http, HttpService, LocalCache, $rootScope) {
 
 	this.getUser     = getUser;     // function(id, select, fresh)
 	this.getUserOrgs = getUserOrgs; // function(id)
@@ -424,7 +423,7 @@ service('UserService', function($http, HttpService, Restangular, LocalCache, $ro
 	}
 
 	function getUsers(data) {
-        return Restangular.all('users').getList(data);
+      console.log('GET USERS', data);
     }
 	function updateUser(user) {
 		// Save to local cache

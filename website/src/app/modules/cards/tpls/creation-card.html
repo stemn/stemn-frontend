@@ -1,6 +1,6 @@
 <div>
     <div flex class="creation-card rel-box" layout="column">
-        <a md-ink-ripple ng-href="{{url}}" class="picture bounding-box" ng-style="(entity.picture || picture) && {'background-image': 'url(' + env.IMAGE_SERVER + (entity.picture || picture) + '?size=project-card&crop=true)'}"></a>
+        <a md-ink-ripple ng-href="{{url}}" class="picture bounding-box" ng-style="(entity.picture || picture) && {'background-image': 'url(' + (entity.picture || picture) + '?size=project-card&crop=true)'}"></a>
         <div flex class="content ellipsis-container" layout="column">
             <a ng-href="{{url}}" class="title">{{entity.name | letters: 50}}</a>
             <div flex class="sub">{{entity.blurb | letters: 150}}</div>
