@@ -1,3 +1,30 @@
+.background{
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+.backgroundBlurred{
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-size: cover;
+  filter: blur(10px);
+}
+.mask{
+  width: 800px;
+  height: 600px;
+  overflow: hidden;
+}
+.brandPanel{
+  background: rgba(255, 255, 255, 0.95);
+}
+.formPanel{
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/*
 .container{
   height: 600px;
 }
@@ -60,3 +87,4 @@
   display: inline-block;
   font-weight: 300;
 }
+*/
