@@ -3,31 +3,67 @@
   width: 100%;
   height: 100%;
 }
+.center{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: box;
+    display: flex;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -o-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -o-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    z-index: 1;
+}
 .backgroundBlurred{
   position: absolute;
   top: 0;
-  right: 0;
   left: 0;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-position: center center;
   background-size: cover;
-  filter: blur(10px);
 }
 .mask{
+  overflow: hidden;
   width: 800px;
   height: 600px;
-  overflow: hidden;
+  filter: blur(10px);
+}
+.content{
+  width: 800px;
+  height: 600px;
+  position: absolute;
 }
 .brandPanel{
-  background: rgba(255, 255, 255, 0.95);
+  width: 300px;
+  background: rgba(255, 255, 255, 0.8);
 }
 .formPanel{
+  padding: 30px;
   background: rgba(0, 0, 0, 0.4);
+  color: white;
 }
 
-/*
 .container{
   height: 600px;
 }
+/*
 .imageSection{
   -webkit-user-select: none;
   -webkit-app-region: drag;
@@ -60,6 +96,7 @@
 .container.hideForm .textSectionInner{
   transform: translateX(-100%);
 }
+*/
 
 .input{
   margin-top: 5px;
@@ -87,4 +124,3 @@
   display: inline-block;
   font-weight: 300;
 }
-*/

@@ -36,7 +36,7 @@ export const Component = React.createClass({
     const backgroundImage = { backgroundImage: 'url(../images/satellite-backgrounds/satellite3.jpg)' };
     
     const formPanel = (
-      <div className={classNames(classes.formPanel, 'layout-column', 'layout-align-space-between')}>
+      <div className={classNames(classes.formPanel, 'flex', 'layout-column', 'layout-align-space-between')}>
         <div className="text-title-3">Sign In</div>
         <form onSubmit={this.submit}>
           <br />
@@ -64,9 +64,6 @@ export const Component = React.createClass({
             </div>
           </div>
           <br />
-          <div className={classes.textDivider}>
-            <div>OR</div>
-          </div>
           <div className="layout-row" style={{paddingTop: '12px'}}>
             <Button onClick={()=>AuthActions.authenticate('linkedin')}
             style={{marginRight: '5px'}}
@@ -96,17 +93,28 @@ export const Component = React.createClass({
     );
     
     return (
-      <div className="rel-box">
+      <div className="flex rel-box">
         <div className={classes.background} style={backgroundImage}></div>
-        <div className={classNames(classes.backgroundBlurred, 'layout-column', 'layout-align-center-center')} style={backgroundImage}>
-          <div className={classNames(classes.mask, 'layout-row')}>
+        <div className={classes.center}>
+          <div className={classNames(classes.mask)}>
+            <div className={classNames(classes.backgroundBlurred)} style={backgroundImage}></div>          
+          </div>
+        </div>
+        <div className={classes.center}>
+          <div className={classNames(classes.content, 'layout-row')}>
             {brandPanel}
             {formPanel}
           </div>
         </div>
       </div>
     )
+//          <div className={classes.textDivider}>
+//            <div>OR</div>
+//          </div>
 
+//          <div className={classNames(classes.content, 'layout-row')} style={backgroundImage}>
+//          </div>
+          
 //    return (
 //    <div className="layout-column layout-align-center-center flex" style={{background: 'rgba(0, 0, 0, 0.05)'}}>
 //      <div className={classNames(classes.container, 'layout-row')}>
