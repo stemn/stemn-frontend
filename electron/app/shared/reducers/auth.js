@@ -19,7 +19,8 @@ const initialState = {
     password: '',
     firstname: '',
     lastname: '',
-  }
+  },
+  background: Math.floor(Math.random() * 8) + 1 // We init a random number between 1 and 8 to use as the background
 }
 
 
