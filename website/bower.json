@@ -15,7 +15,6 @@
     "restangular": "~1.5.2",
     "Sortable": "~1.2.0",
     "stacktrace-js": "~0.6.4",
-    "ui-router-extras": "~0.0.14",
-    "xxhash": "*"
+    "ui-router-extras": "~0.0.14"
   }
 }

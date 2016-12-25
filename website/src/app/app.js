@@ -6,7 +6,13 @@ import './css/index.js';
 
 // Other Code
 import initSegment from 'public/assets/js/segment.io/init.js';
-initSegment(GLOBAL_ENV.ENV_TYPE)
+import configureStore from './redux/configureStore.js';
+initSegment(GLOBAL_ENV.ENV_TYPE);
+
+const store = configureStore();
+store.dispatch({
+  type: 'SOME_TEST_ACTION'
+})
 
 // Angular modules
 import ngAnimate          from 'angular-animate'; 
@@ -19,6 +25,7 @@ import ngInfiniteScroll   from 'ng-infinite-scroll/build/ng-infinite-scroll.js';
 import react              from 'ngreact'
 import uiRouter           from 'angular-ui-router';
 import uiRouterExtras     from 'ui-router-extras';
+import sticky             from 'public/assets/js/angular-sticky/sticky.js'
 
 import routes             from './routes.js';
 import modules            from './modules.js';
@@ -28,9 +35,6 @@ import * as lodash        from 'lodash';
 import wowjs              from 'wowjs';
 window._   = lodash;
 window.WOW = wowjs.WOW;
-
-
-
 
 
 const moduleName = 'app';
@@ -46,7 +50,7 @@ const dependencies = [
     'react',
     'ui.router',
     'ct.ui.router.extras',
-//    'sticky',
+    'sticky',
 //    'unsavedChanges',
 //    'monospaced.elastic',
 //    'puElasticInput',

@@ -145,6 +145,7 @@
     "node-monkey": "^1.0.0-beta.2",
     "react": "^15.2.1",
     "react-addons-test-utils": "^15.0.1",
+    "redux": "^3.6.0",
     "satellizer": "^0.10.1",
     "selenium-webdriver": "^2.53.1",
     "sinon": "^1.17.3",
