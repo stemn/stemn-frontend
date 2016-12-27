@@ -65,7 +65,7 @@ export const Component = React.createClass({
               files={files.entries}
             />
           : <div className="text-center text-grey-3" style={{marginTop: '30px'}}>
-              Add a readme.md file to this folder to help others understand what is inside.
+              Add a README.md file to this folder to help others understand what is inside.
             </div>
           }
         </div>

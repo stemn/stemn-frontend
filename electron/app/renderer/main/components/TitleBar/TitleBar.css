@@ -37,6 +37,13 @@
   background: rgb(232,17,35);
   color: white;
 }
+
+.light .button{
+  color: rgba(255, 255, 255, 0.6);
+}
+.light .button:hover{
+  color: white;
+}
 /*
 .windowsButton{
   width: 46px;

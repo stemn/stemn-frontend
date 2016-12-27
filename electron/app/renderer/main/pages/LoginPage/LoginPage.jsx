@@ -32,12 +32,15 @@ export const Component = React.createClass({
   },
   render() {
     const { AuthActions, auth } = this.props;
-    
-    const backgroundImage = { backgroundImage: 'url(../images/satellite-backgrounds/satellite3.jpg)' };
+    const parseBackground = (bgNumber) => {
+      const total = 8;
+      return bgNumber > total ? 1 : bgNumber;
+    }
+    const backgroundImage = { backgroundImage: `url(../images/satellite-backgrounds/satellite-${parseBackground(auth.background)}.jpg)` };
     
     const formPanel = (
       <div className={classNames(classes.formPanel, 'flex', 'layout-column', 'layout-align-space-between')}>
-        <div className="text-title-3">Sign In</div>
+        <div className={classes.title + ' text-title-3'}>Sign In</div>
         <form onSubmit={this.submit}>
           <br />
           <Input 
@@ -63,8 +66,8 @@ export const Component = React.createClass({
               </Button>
             </div>
           </div>
-          <br />
-          <div className="layout-row" style={{paddingTop: '12px'}}>
+          <div className={classes.textDivider}><div>OR</div></div>
+          <div className="layout-row">
             <Button onClick={()=>AuthActions.authenticate('linkedin')}
             style={{marginRight: '5px'}}
             className="flex linkedin"
@@ -78,56 +81,36 @@ export const Component = React.createClass({
               Facebook
             </Button>
           </div>
+          <LoadingOverlay show={auth.authLoading || auth.userLoading}/>
         </form>
         <div className="layout-row">
           <div>Dont have an account? <Link to="/register" className="link-primary">Register</Link></div>
         </div>
-        <LoadingOverlay show={auth.authLoading || auth.userLoading}/>
       </div>
     );
     
     const brandPanel = (
       <div className={classNames(classes.brandPanel, 'layout-column', 'layout-align-center-center')}>
-        Logo here?
+        <img src="../images/astronaut.svg" style={{width: '150px'}} draggable="false"/>
       </div>
     );
     
     return (
       <div className="flex rel-box">
         <div className={classes.background} style={backgroundImage}></div>
-        <div className={classes.center}>
+        <div className={classes.center + ' layout-column layout-align-center-center'}>
           <div className={classNames(classes.mask)}>
             <div className={classNames(classes.backgroundBlurred)} style={backgroundImage}></div>          
           </div>
         </div>
-        <div className={classes.center}>
+        <div className={classes.center + ' layout-column layout-align-center-center'}>
           <div className={classNames(classes.content, 'layout-row')}>
             {brandPanel}
             {formPanel}
           </div>
         </div>
       </div>
-    )
-//          <div className={classes.textDivider}>
-//            <div>OR</div>
-//          </div>
-
-//          <div className={classNames(classes.content, 'layout-row')} style={backgroundImage}>
-//          </div>
-          
-//    return (
-//    <div className="layout-column layout-align-center-center flex" style={{background: 'rgba(0, 0, 0, 0.05)'}}>
-//      <div className={classNames(classes.container, 'layout-row')}>
-//        <div className={classes.imageSection + ' layout-column layout-align-center-center'}
-//          style={{backgroundImage: 'url(../images/satellite-backgrounds/satellite3.jpg)'}}>
-//        </div>
-//        <div className={classes.textSection}>
-//          <div className={classes.textSectionInner + ' layout-column  layout-align-space-between'}>
-
-//        </div>
-//      </div>
-//    </div>
-//    );
+    )          
   }
 });
 

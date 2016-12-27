@@ -1,0 +1,110 @@
+{
+  "name": "Stemn",
+  "version": "1.0.0",
+  "description": "A workflow for Angular made with Webpack",
+  "scripts": {
+    "build": "better-npm-run build",
+    "server": "better-npm-run server",
+    "server:test": "better-npm-run server:test",
+    "test": "karma start",
+    "test-watch": "karma start --auto-watch --no-single-run"
+  },
+  "betterScripts": {
+    "build": {
+      "command": "rimraf dist && webpack --bail --progress --profile",
+      "env": {
+        "ENV_TYPE": "production",
+        "API_SERVER": "https://stemn.com"
+      }
+    },
+    "server": {
+      "command": "webpack-dev-server --history-api-fallback --inline --progress",
+      "env": {
+        "ENV_TYPE": "development",
+        "API_SERVER": "http://localhost:3000"
+      }
+    },
+    "server:test": {
+      "command": "webpack-dev-server --history-api-fallback --inline --progress",
+      "env": {
+        "ENV_TYPE": "development",
+        "API_SERVER": "http://35.162.145.41"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Foxandxss/angular-webpack-workflow.git"
+  },
+  "author": "David Revay",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Foxandxss/angular-webpack-workflow/issues"
+  },
+  "homepage": "https://github.com/Foxandxss/angular-webpack-workflow",
+  "dependencies": {
+    "angular": "^1.3.20",
+    "angular-animate": "^1.3.20",
+    "angular-aria": "^1.3.20",
+    "angular-cookies": "^1.3.20",
+    "angular-file-upload": "^1.1.5",
+    "angular-loading-bar": "^0.7.1",
+    "angular-messages": "^1.3.20",
+    "angular-moment": "^0.10.1",
+    "angular-sanitize": "^1.4.5",
+    "angular-scroll": "^0.7.0",
+    "angular-ui-router": "^0.2.15",
+    "animate.css": "^3.5.2",
+    "lodash": "^4.17.2",
+    "ng-infinite-scroll": "^1.2.1",
+    "ng-showdown": "^1.1.0",
+    "ngreact": "^0.3.0",
+    "ngstorage": "^0.3.9",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "redux": "^3.6.0",
+    "redux-logger": "^2.7.4",
+    "redux-promise-middleware": "^4.2.0",
+    "redux-thunk": "^2.1.0",
+    "satellizer": "^0.15.5",
+    "sortablejs": "^1.5.0-rc1",
+    "wowjs": "^1.1.3",
+    "xxhashjs": "^0.2.1"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.5.0",
+    "autoprefixer": "^6.0.3",
+    "babel-core": "^6.2.1",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-preset-react": "^6.16.0",
+    "better-npm-run": "0.0.13",
+    "bower-webpack-plugin": "^0.1.9",
+    "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.23.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "html-webpack-plugin": "^2.7.1",
+    "istanbul-instrumenter-loader": "^1.0.0",
+    "jasmine-core": "^2.3.4",
+    "karma": "^1.1.0",
+    "karma-coverage": "^1.0.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-spec-reporter": "0.0.26",
+    "karma-webpack": "^1.7.0",
+    "ngtemplate-loader": "^1.3.1",
+    "node-libs-browser": "^2.0.0",
+    "node-sass": "^4.1.0",
+    "null-loader": "^0.1.1",
+    "phantomjs-prebuilt": "^2.1.4",
+    "postcss-loader": "^1.1.1",
+    "raw-loader": "^0.5.1",
+    "rimraf": "^2.5.1",
+    "sass-loader": "^4.1.0",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.14.1"
+  }
+}
