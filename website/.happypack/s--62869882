@@ -1,0 +1,98 @@
+'use strict';
+
+require('./section.scss');
+
+var _code = require('ngtemplate!./code/edit/code.html');
+
+var _code2 = _interopRequireDefault(_code);
+
+var _code3 = require('ngtemplate!./code/public/code.html');
+
+var _code4 = _interopRequireDefault(_code3);
+
+var _file = require('ngtemplate!./file/edit/file.html');
+
+var _file2 = _interopRequireDefault(_file);
+
+var _file3 = require('ngtemplate!./file/public/file.html');
+
+var _file4 = _interopRequireDefault(_file3);
+
+var _math = require('ngtemplate!./math/edit/math.html');
+
+var _math2 = _interopRequireDefault(_math);
+
+var _math3 = require('ngtemplate!./math/public/math.html');
+
+var _math4 = _interopRequireDefault(_math3);
+
+var _text = require('ngtemplate!./text/edit/text.html');
+
+var _text2 = _interopRequireDefault(_text);
+
+var _text3 = require('ngtemplate!./text/public/text.html');
+
+var _text4 = _interopRequireDefault(_text3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var imageEdit = require.context('ngtemplate!./image/edit', false, /\.html$/);
+
+imageEdit.keys().forEach(function (key) {
+    console.log(key);
+    //  imageEdit(key);
+});
+console.log(imageEdit);
+
+angular.module('modules.modular-editor.section', []);
+angular.module('modules.modular-editor.section').directive('editorSection', function (CodeMirrorService) {
+    return {
+        restrict: 'E',
+        scope: {
+            section: '=',
+            editorSections: '=',
+            editorOrder: '=',
+            editorSectionIndex: '=',
+            editorSectionId: '=',
+            editorOptions: '=',
+            edit: '=',
+            placeholder: '@'
+        },
+        link: function link(scope, element, attrs) {
+            scope.$watch('section.layout', getTemplatePath);
+
+            if (scope.section.type == 'code') {
+                // Code otions
+                scope.options = {
+                    indentWithTabs: true,
+                    readOnly: !scope.edit,
+                    dragDrop: false,
+                    lineWrapping: true,
+                    onLoad: function onLoad(cmEditor) {
+                        scope.cmEditor = cmEditor;
+                        CodeMirrorService.changeCodeMode(cmEditor, scope.section.codeMode);
+                    }
+                };
+            }
+
+            ////////////////////////////
+
+            function getTemplatePath() {
+                var path = 'app/modules/modular-editor/section/';
+                path += scope.section.type + '/';
+                path += scope.edit ? 'edit/' : 'public/';
+                path += scope.section.layout ? scope.section.layout : scope.section.type;
+                path += '.html';
+                scope.template = path;
+            }
+        },
+        template: '<div layout="row" layout-align="center" ng-include="template"></div>'
+    };
+}).directive('editorVideoOverlay', function () {
+    return {
+        restrict: 'E',
+        replace: true,
+        // tabindex allows the div to be focused
+        template: '<div tabindex="0" ng-if="edit" class="editor-video-overlay"></div>'
+    };
+});

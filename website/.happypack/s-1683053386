@@ -1,0 +1,32 @@
+'use strict';
+
+var _jobsSteps = require('ngtemplate!app/views/landing/landing-jobs/tpls/jobs-steps.html');
+
+var _jobsSteps2 = _interopRequireDefault(_jobsSteps);
+
+require('./landing-jobs.scss');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+angular.module('views.landing.jobs', []);
+angular.module('views.landing.jobs').config(function ($stateProvider) {
+    $stateProvider.state('app.landing.jobs', {
+        url: '/jobs',
+        template: require('./tpls/landing-jobs.html'),
+        controller: function controller(OnboardingService, $scope) {
+            OnboardingService.beenLanding = true;
+            $scope.jobStepTpl = _jobsSteps2.default;
+        },
+        seo: function seo() {
+            return {
+                title: "Aerospace Jobs - Simple 2 Click Application - STEMN"
+            };
+        },
+        layout: {
+            size: 'md',
+            sidebar: false,
+            footer: true,
+            topBanner: false
+        }
+    });
+});

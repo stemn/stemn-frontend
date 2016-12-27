@@ -1,0 +1,177 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _app = require('./views/app/app.js');
+
+var _app2 = _interopRequireDefault(_app);
+
+var _applications = require('./views/applications/applications.js');
+
+var _applications2 = _interopRequireDefault(_applications);
+
+var _auth = require('./views/auth/auth.js');
+
+var _auth2 = _interopRequireDefault(_auth);
+
+var _browse = require('./views/browse/browse.js');
+
+var _browse2 = _interopRequireDefault(_browse);
+
+var _careers = require('./views/careers/careers.js');
+
+var _careers2 = _interopRequireDefault(_careers);
+
+var _compare = require('./views/compare/compare.js');
+
+var _compare2 = _interopRequireDefault(_compare);
+
+var _contact = require('./views/contact/contact.js');
+
+var _contact2 = _interopRequireDefault(_contact);
+
+var _create = require('./views/create/create.js');
+
+var _create2 = _interopRequireDefault(_create);
+
+var _creations = require('./views/creations/creations.js');
+
+var _creations2 = _interopRequireDefault(_creations);
+
+var _dashboard = require('./views/dashboard/dashboard.js');
+
+var _dashboard2 = _interopRequireDefault(_dashboard);
+
+var _error = require('./views/error/error.js');
+
+var _error2 = _interopRequireDefault(_error);
+
+var _faq = require('./views/faq/faq.js');
+
+var _faq2 = _interopRequireDefault(_faq);
+
+var _field = require('./views/field/field.js');
+
+var _field2 = _interopRequireDefault(_field);
+
+var _following = require('./views/following/following.js');
+
+var _following2 = _interopRequireDefault(_following);
+
+var _home = require('./views/home/home.js');
+
+var _home2 = _interopRequireDefault(_home);
+
+var _index = require('./views/index/index.js');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _job = require('./views/job/job.js');
+
+var _job2 = _interopRequireDefault(_job);
+
+var _landing = require('./views/landing/landing.js');
+
+var _landing2 = _interopRequireDefault(_landing);
+
+var _login = require('./views/login/login.js');
+
+var _login2 = _interopRequireDefault(_login);
+
+var _map = require('./views/map/map.js');
+
+var _map2 = _interopRequireDefault(_map);
+
+var _notifications = require('./views/notifications/notifications.js');
+
+var _notifications2 = _interopRequireDefault(_notifications);
+
+var _onboarding = require('./views/onboarding/onboarding.js');
+
+var _onboarding2 = _interopRequireDefault(_onboarding);
+
+var _open = require('./views/open/open.js');
+
+var _open2 = _interopRequireDefault(_open);
+
+var _organisation = require('./views/organisation/organisation.js');
+
+var _organisation2 = _interopRequireDefault(_organisation);
+
+var _partners = require('./views/partners/partners.js');
+
+var _partners2 = _interopRequireDefault(_partners);
+
+var _passwordReset = require('./views/password-reset/password-reset.js');
+
+var _passwordReset2 = _interopRequireDefault(_passwordReset);
+
+var _preview = require('./views/preview/preview.js');
+
+var _preview2 = _interopRequireDefault(_preview);
+
+var _privacy = require('./views/privacy/privacy.js');
+
+var _privacy2 = _interopRequireDefault(_privacy);
+
+var _project = require('./views/project/project.js');
+
+var _project2 = _interopRequireDefault(_project);
+
+var _referrals = require('./views/referrals/referrals.js');
+
+var _referrals2 = _interopRequireDefault(_referrals);
+
+var _scholarship = require('./views/scholarship/scholarship.js');
+
+var _scholarship2 = _interopRequireDefault(_scholarship);
+
+var _search = require('./views/search/search.js');
+
+var _search2 = _interopRequireDefault(_search);
+
+var _security = require('./views/security/security.js');
+
+var _security2 = _interopRequireDefault(_security);
+
+var _siteSearch = require('./views/site-search/site-search.js');
+
+var _siteSearch2 = _interopRequireDefault(_siteSearch);
+
+var _terms = require('./views/terms/terms.js');
+
+var _terms2 = _interopRequireDefault(_terms);
+
+var _test = require('./views/test/test.js');
+
+var _test2 = _interopRequireDefault(_test);
+
+var _thread = require('./views/thread/thread.js');
+
+var _thread2 = _interopRequireDefault(_thread);
+
+var _track = require('./views/track/track.js');
+
+var _track2 = _interopRequireDefault(_track);
+
+var _user = require('./views/user/user.js');
+
+var _user2 = _interopRequireDefault(_user);
+
+var _userOnboarding = require('./views/user-onboarding/user-onboarding.js');
+
+var _userOnboarding2 = _interopRequireDefault(_userOnboarding);
+
+var _usersettings = require('./views/usersettings/usersettings.js');
+
+var _usersettings2 = _interopRequireDefault(_usersettings);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var moduleName = 'routes';
+
+angular.module(moduleName, ['views.app', 'views.careers', 'views.contact', 'views.create', 'views.creations', 'views.error', 'views.faq', 'views.field', 'views.home', 'views.landing', 'views.login', 'views.organisation', 'views.partners', 'views.privacy', 'views.project', 'views.scholarship', 'views.search', 'views.security', 'views.terms', 'views.test', 'views.thread', 'views.user', 'views.user-onboarding', 'views.usersettings', 'views.following', 'views.browse', 'views.password-reset', 'views.map', 'views.job', 'views.index', 'views.applications', 'views.referrals', 'views.notifications', 'views.track', 'views.open', 'views.onboarding', 'views.preview', 'views.auth', 'views.dashboard', 'views.compare']);
+
+exports.default = moduleName;

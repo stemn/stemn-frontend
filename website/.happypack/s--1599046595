@@ -1,0 +1,51 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = configureStore;
+
+var _redux = require('redux');
+
+var _reduxThunk = require('redux-thunk');
+
+var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
+var _reduxPromiseMiddleware = require('redux-promise-middleware');
+
+var _reduxPromiseMiddleware2 = _interopRequireDefault(_reduxPromiseMiddleware);
+
+var _reduxLogger = require('redux-logger');
+
+var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
+
+var _rootReducerRenderer = require('./reducers/rootReducer.renderer.js');
+
+var _rootReducerRenderer2 = _interopRequireDefault(_rootReducerRenderer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function configureStore(initialState) {
+  var middleware = [_reduxThunk2.default, (0, _reduxPromiseMiddleware2.default)()];
+
+  // If we are in development || we have debug mode on
+  if (process.env.NODE_ENV == 'development' || initialState.system.settings.debug) {
+    middleware.push((0, _reduxLogger2.default)({
+      level: 'info',
+      collapsed: true
+    }));
+  }
+
+  var enhanced = [_redux.applyMiddleware.apply(undefined, middleware)];
+  var rootReducer = (0, _rootReducerRenderer2.default)();
+  var enhancer = _redux.compose.apply(undefined, enhanced);
+  var store = (0, _redux.createStore)(rootReducer, initialState, enhancer);
+
+  if (!process.env.NODE_ENV && module.hot) {
+    module.hot.accept('../reducers/rootReducer.base.js', function () {
+      store.replaceReducer(require('../reducers/rootReducer.base.js'));
+    });
+  }
+
+  return store;
+}
