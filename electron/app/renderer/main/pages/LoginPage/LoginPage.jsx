@@ -98,12 +98,12 @@ export const Component = React.createClass({
     return (
       <div className="flex rel-box">
         <div className={classes.background} style={backgroundImage}></div>
-        <div className={classes.center}>
+        <div className={classes.center + ' layout-column layout-align-center-center'}>
           <div className={classNames(classes.mask)}>
             <div className={classNames(classes.backgroundBlurred)} style={backgroundImage}></div>          
           </div>
         </div>
-        <div className={classes.center}>
+        <div className={classes.center + ' layout-column layout-align-center-center'}>
           <div className={classNames(classes.content, 'layout-row')}>
             {brandPanel}
             {formPanel}
