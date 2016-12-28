@@ -5,7 +5,7 @@ import * as NotificationsActions  from '../../../shared/modules/Notifications/No
 import { renderFileDownload }     from '../../../shared/modules/Files/Files.actions.js';
 
 export default (store, action) => {
-  console.log(action)
+
   // Actions that we process if user is the actioner
   switch (action.type) {
     case 'RENDER/RENDER_COMPLETE':
