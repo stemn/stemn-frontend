@@ -67,6 +67,7 @@
     "redux-logger": "^2.7.4",
     "redux-promise-middleware": "^4.2.0",
     "redux-thunk": "^2.1.0",
+    "restangular": "^1.5.2",
     "satellizer": "^0.15.5",
     "sortablejs": "^1.5.0-rc1",
     "wowjs": "^1.1.3",

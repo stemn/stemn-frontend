@@ -1,5 +1,5 @@
 node_modules
 dist
 coverage
-.happypack/
+.happypack
 npm-debug.log
