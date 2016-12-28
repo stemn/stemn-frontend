@@ -1,4 +1,0 @@
-<div class="md-subhead bold" style="margin-bottom: 10px;">{{filter.title}}</div>
-<md-checkbox style="display: block;" ng-repeat="item in filter.options" ng-model="item.status" ng-change="filter.onChange();">
-    <span>{{item.name | letters: 25}} <span ng-if="showCount">(<analytics-count type="application" criteria="{'status.state':item.model}"></analytics-count>)</span></span>
-</md-checkbox>

@@ -1,6 +1,6 @@
 {
   "name": "Stemn",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Stemn Desktop: Versioning and project management",
   "main": "main/index.js",
   "author": {
@@ -92,7 +92,6 @@
     "smooch": "^3.8.0",
     "sortablejs": "^1.4.2",
     "sql.js": "https://github.com/Stemn/sql.js/tarball/master",
-    "stemn-files": "git+ssh://git@bitbucket.org/stemn/stemn-files.git",
     "substyle": "^2.0.2",
     "unzipper": "^0.7.2",
     "url-loader": "^0.5.7",

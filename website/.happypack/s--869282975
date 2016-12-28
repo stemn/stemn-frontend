@@ -1,0 +1,33 @@
+'use strict';
+
+var _config = require('../../config.js');
+
+var _config2 = _interopRequireDefault(_config);
+
+require('./loadbar.scss');
+
+require('angular-loading-bar');
+
+require('angular-loading-bar/src/loading-bar.css');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+angular.module('modules.loadbar', ['angular-loading-bar']);
+angular.module('modules.loadbar').config(function ($httpProvider, cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeSpinner = false;
+    $httpProvider.interceptors.unshift(function () {
+        return {
+            request: function request(config) {
+                // disable the angular loading bar for certain urls
+                if (config.url.indexOf('api/v1/notifications') > -1 || config.url.indexOf('api/v1/search') > -1 || config.url.indexOf('api/v1/events') > -1 || config.url.indexOf('maps.googleapis.com') > -1 || config.url.indexOf('autodesk.com') > -1 || config.url.indexOf('api/v1/geolocate') > -1) {
+                    config.ignoreLoadingBar = true;
+                }
+                if (config.url.includes('api/v1')) {
+                    config.url = _config2.default.env.API_SERVER + "/" + config.url;
+                }
+                console.log(config.url);
+                return config;
+            }
+        };
+    });
+});

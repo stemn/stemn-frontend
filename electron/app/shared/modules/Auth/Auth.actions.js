@@ -16,6 +16,7 @@ export function loadUserData() {
       })
     }).then(response => {
       dispatch(ProjectsActions.getUserProjects({userId: response.value.data._id}))
+      dispatch(websocketJoinRoom({userId: response.value.data._id}))
     }).catch(error => {
 //      dispatch(logout())
     })
@@ -37,7 +38,6 @@ export function sendAuthToken({ provider, code }) {
         }).then(response => {
           setTimeout(() => dispatch(ElectronWindowsActions.show('main')), 100)
           dispatch(setAuthToken(response.data.token))
-          dispatch(initHttpHeaders(response.data.token))
           setTimeout(()=>dispatch(loadUserData()), 1)
           return response
         })
@@ -83,7 +83,6 @@ export function login({email, password}) {
         }
       }).then((response)=>{
         dispatch(setAuthToken(response.data.token))
-        dispatch(initHttpHeaders(response.data.token))
         setTimeout(()=>dispatch(loadUserData()), 1)
         return response
       })
@@ -106,7 +105,6 @@ export function register({email, password, firstname, lastname}) {
         }
       }).then((response)=>{
         dispatch(setAuthToken(response.data.token))
-        dispatch(initHttpHeaders(response.data.token))
         setTimeout(()=>dispatch(loadUserData()), 1)
         return response
       })
@@ -127,34 +125,39 @@ export function removeAuthToken() {
   }
 }
 
-export function initHttpHeaders(token) {
-  return (dispatch, getState) => {
-    token = token || getState().auth.authToken
-    const fullToken = token ? 'bearer '+ token : '';
-    dispatch({
-      type:'AUTH/INIT_HTTP_HEADER',
-      payload: { fullToken }
-    })
-  }
-}
-
-export function removeHttpHeaders() {
-  return {
-    type:'AUTH/REMOVE_HTTP_HEADER',
-  }
-}
-
-export function clearUserData() {
-  return {
-    type:'AUTH/CLEAR_USER_DATA',
-  }
-}
-
 export function logout() {
-  return (dispatch) => {
-    dispatch(clearUserData());
-    dispatch(removeHttpHeaders());
-    dispatch({type:'AUTH/LOGOUT'})
+  return (dispatch, getState) => {
+    dispatch({
+      type:'AUTH/LOGOUT'
+    })
     dispatch(push('/login'))
+    dispatch(websocketLeaveRoom({
+      userId: getState().auth.user._id
+    }))
   }
+}
+
+export function websocketJoinRoom({userId}) {
+  return {
+    type: 'AUTH/WEBSOCKET_JOIN_ROOM',
+    websocket: true,
+    payload: {
+      type : 'ROOM/JOIN',
+      payload : {
+        room : userId
+      }
+    }
+  };
+}
+export function websocketLeaveRoom({userId}) {
+  return {
+    type: 'AUTH/WEBSOCKET_LEAVE_ROOM',
+    websocket: true,
+    payload: {
+      type : 'ROOM/LEAVE',
+      payload : {
+        room : userId
+      }
+    }
+  };
 }

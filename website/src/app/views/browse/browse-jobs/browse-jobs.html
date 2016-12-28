@@ -1,0 +1,129 @@
+<div layout="row" layout-align="center" class="m-b-30">
+    <div class="md-content-container" layout="column">
+        <h1 class="md-display-1 text-center m-t-50">STEMN Jobs</h1>
+        <div class="md-title text-grey light-font text-center">Apply to hundreds of jobs with one profile · 100% free</div>
+        <a class="text-center text-green m-t-15" show-explanation-modal="job">How it works</a>
+    </div>
+</div>
+
+<div class="infobar m-b-30 p-v-15 overflow-x-box" layout="row" layout-align="center">
+    <div class="md-content-container">
+        <div ng-include="jobStepTpl"></div>
+    </div>
+</div>
+<div layout="row" layout-align="center" class="m-t-15 overflow-x-box">
+    <div class="md-content-container md-no-padding m-b-60 rel-box" layout="column" style="min-height: 100px">
+
+        <div class="md-row" layout="row">
+            <div hide-sm class="md-col" style="width: 300px">
+
+                <div class="m-b-30">
+                    <div class="md-subhead m-b-10">Search Jobs</div>
+                    <div class="well-input">
+                        <input type="text" ng-model="searchFilter.model" ng-change="searchFilter.onChange()" placeholder="Query jobs">
+                        <md-icon md-svg-icon="search"></md-icon>
+                    </div>
+                </div>
+
+                <div class="anim-fade m-b-30">
+                    <div class="md-subhead m-b-10">Job Map</div>
+                    <div class="well" layout="column">
+                        <div class="text-lightgrey m-b-15">
+                            Want to find jobs in a specific location?
+                        </div>
+                        <md-button class="md-accent md-raised md-flat md-cornered md-md m-0" ui-sref="app.map({type: 'job'})">Explore job map</md-button>
+                    </div>
+                </div>
+
+                <div class="md-subhead m-b-10">Sort by field</div>
+                <div class="well m-b-30" layout="column">
+                    <md-radio-group class="md-compact" ng-model="fieldFilter.current" ng-change="fieldFilter.change(fieldFilter.current)">
+                        <md-radio-button value="" class="md-accent">All</md-radio-button>
+                        <md-radio-button ng-repeat="field in fieldFilter.options" value="{{field._id}}" class="md-accent">{{field.name | letters: 23}} ({{field.numJobs}})</md-radio-button>
+                    </md-radio-group>
+                </div>
+
+                <div ng-show="location && location.latitude && location.longitude" class="anim-fade m-b-30">
+                    <div class="md-subhead m-b-10">Location</div>
+                    <div class="well" layout="column">
+                        <div class="text-lightgrey m-b-15">
+                            <span ng-show="location.country_name">It looks like you are from <span ng-show="location.city"><b>{{location.city}}</b>, </span><b>{{location.country_name}}</b>. Want to see jobs close to you?</span>
+                            <span ng-hide="location.country_name">Want to see jobs close to you?</span>
+                        </div>
+                        <md-button class="md-accent md-raised md-flat md-cornered md-md m-0" ng-click="sortByNear()">Sort by proximity</md-button>
+                    </div>
+                </div>
+
+
+                <div class="anim-fade m-b-30">
+                    <div class="md-subhead m-b-10">Add a new job</div>
+                    <div class="well" layout="column">
+                        <div class="text-lightgrey m-b-15">
+                            Are you part of an organisation looking to hire?
+                        </div>
+                        <md-button class="md-accent md-raised md-flat md-cornered md-md m-0" ng-click="create($event)" authenticate>Add a job</md-button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div flex class="md-col rel-box" layout="column">
+                <div class="md-subhead m-b-10">Available Positions</div>
+
+                <table class="md-table">
+                    <thead>
+                        <tr>
+                            <td style="width: 40px;"></td>
+                            <td                 filter-column-order filter-object="orderFilter" filter-reverse="true" filter-model="organisations[0].name">Name</td>
+                            <td                 filter-column-order filter-object="orderFilter"                       filter-model="location[0].name" style="width: 150px;" class="text-center">Location</td>
+                            <td hide-sm hide-md filter-column-order filter-object="orderFilter" filter-reverse="true" filter-model="rating"           style="width: 100px;" class="text-center" ng-show="suggestedJobs">Suitability</td>
+                            <td hide-sm hide-md filter-column-order filter-object="orderFilter" filter-reverse="true" filter-model="jobType"          style="width: 100px;" class="text-center">Type</td>
+                            <td hide-sm hide-md style="width: 95px;"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in query.results">
+                            <td style="padding: 15px 20px 15px 5px;">
+                                <a set-entity-href="'organisation'" entity-stub="item.organisations[0].stub">
+                                    <div class="avatar avatar-square-contain" ng-style="item.organisations[0].picture && { 'background-image':'url('+item.organisations[0].picture+'?size=thumb)'}"></div>
+                                </a>
+                            </td>
+                            <td>
+                                <a set-entity-href="'job'" entity-stub="item.stub">
+                                    <div class="bold">{{item.organisations[0].name}}</div>
+                                    <div>{{item.name}}</div>
+                                </a>
+                            </td>
+                            <td class="text-center">{{item.location[0].name}}</td>
+                            <td hide-sm hide-md class="text-center" ng-show="suggestedJobs">
+                               <div class="rating-pie pie-sm" ng-style="{'animation-delay': '-'+item.rating+'s'}">
+                                    <div class="number">{{item.rating}}</div>
+                                    <popup class="tooltip-popup" popup-side="right" popup-position="center" popup-padding="0 0 0 8px" style="max-width: 150px;">
+                                        <p>Your skills include <b>{{item.numMatchingSkills}}/{{item.fields.length}}</b> of those listed on this job.</p>
+                                    </popup>
+                                </div>
+                            </td>
+                            <td hide-sm hide-md class="text-center">{{item.jobType}}</td>
+                            <td hide-sm hide-md class="text-right">
+                                <apply-button job="item" job-id="{{item._id}}" job-stub="{{item.stub}}" class="md-sm no-margin" style="min-width: 70px;" change-state="true"></apply-button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+                <div ng-hide="query.notEnoughResults" class="m-t-30">
+                    <a class="well-button" layout="row" layout-align="center center" ng-click="query.more()" ng-disabled="query.noMoreResults">
+                        <div>{{noMoreResults ? 'No more results' : 'See more jobs'}}</div>
+                    </a>
+                </div>
+
+                <div ng-show="query.notEnoughResults" class="text-lightgrey m-v-40">
+                    No more results. <a class="underlined text-green" ng-click="clearFilter()">Clear filters</a>
+                </div>
+                <loading-overlay ng-if="query.loading" ng-class="{'translucent' : query.results.length > 0}"></loading-overlay>
+            </div>
+        </div>
+
+    </div>
+</div>

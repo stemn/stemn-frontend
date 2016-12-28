@@ -2,45 +2,19 @@
   "name": "stemn",
   "version": "0.0.0",
   "dependencies": {
-    "angular": "~1.4.*",
-    "angular-animate": "~1.4.*",
-    "angular-cookies": "~1.4.*",
-    "angular-loading-bar": "~0.7.1",
-    "angular-material": "git://github.com/DaveRevay2/bower-material.git#master",
-    "angular-medium-editor": "~1.1.1",
-    "medium-editor": "git://github.com/DaveRevay2/medium-editor.git#master",
-
-    "angular-messages": "~1.4.*",
-    "angular-moment": "~0.10.2",
-    "angular-resource": "~1.4.3",
-    "angular-sanitize": "~1.4.*",
-    "angular-ui-router": "~0.2.15",
-
+    "angular-digest-hud": "~0.1.14",
     "angular-elastic": "~2.4.2",
     "angular-elastic-input": "~2.0.2",
-    "angular-file-upload": "~1.1.5",
-    "angular-scroll": "~0.7.0",
-    "angular-unsavedChanges": "~0.1.1",
-    "lodash": "~3.8.0",
+    "angular-material": "git://github.com/DaveRevay2/bower-material.git#master",
     "favico.js": "~0.3.7",
-    "ngstorage": "~0.3.9",
+    "lodash": "~3.8.0",
     "mapbox.js": "~2.2.3",
+    "medium-editor": "git://github.com/DaveRevay2/medium-editor.git#master",
+    "ngGeolocation": "~0.0.8",
     "particles.js": "~2.0.0",
-
-    "animate.css": "~3.2.6",
-    "font-awesome": "~4.5.0",
-    "jquery": "~2.1.4",
-    "ngInfiniteScroll": "~1.2.1",
-    "nvd3": "~1.8.1",
-    "restangular": "~1.5.1",
-    "satellizer": "~0.11.3",
-
-    "ui-router-extras": "~0.0.14",
-    "wow": "~1.1.2",
-    "xxhash": "*"
-  },
-  "devDependencies": {
-    "angular-digest-hud": "~0.1.14",
-    "angular-mocks": "~1.4.4"
+    "restangular": "~1.5.2",
+    "Sortable": "~1.2.0",
+    "stacktrace-js": "~0.6.4",
+    "ui-router-extras": "~0.0.14"
   }
 }

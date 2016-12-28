@@ -5,13 +5,20 @@ const fileTypeIcons = require.context("app/renderer/assets/icons/filetype", true
 import classNames from 'classnames';
 
 export default React.createClass({
+  getDefaultProps: function() {
+    return {
+      size: 30
+    };
+  },
   render() {
     let fileType;
+    let isOther = false;
     if(this.props.type == 'file'){
       if(this.props.fileType){
         fileType = this.props.fileType.toLowerCase();
       }
       else{
+        isOther = true;
         fileType = 'other';
       }
     }
@@ -24,17 +31,30 @@ export default React.createClass({
       src = fileTypeIcons(`./${fileType}.svg`);
     }
     catch(err) {
+      isOther = true;
       src = fileTypeIcons(`./other.svg`);
     }
     
-    const style = {
-      width: this.props.size || '30px',
-      height:  this.props.size || '30px',
-      marginRight: '10px'
+    const imgStyle = {
+      width       : this.props.size + 'px',
+      height      : this.props.size + 'px',
+    }
+    const textStyle = {
+      position      : 'absolute',
+      left          : '50%',
+      bottom        : '21%',
+      transform     : 'translateX(-50%)',
+      color         : 'white',
+      fontSize      : this.props.size * 0.24,
+      fontWeight    : 'bold',
+      textTransform : 'uppercase',
+      lineHeight    : '1em'
     }
     return (
-      <img style={style} src={src} />
-//      <img style={style} src={`https://stemn.com/assets/images/vectors/filetype/${fileType}.svg`} />
+      <div className="rel-box" style={{marginRight : '10px'}}>
+        <img style={imgStyle} src={src} />
+        {isOther ? <span style={textStyle}>{fileType}</span> : null}
+      </div>
     );
   }
 });

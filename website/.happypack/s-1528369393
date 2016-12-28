@@ -1,0 +1,18 @@
+'use strict';
+
+require('./preview-cad/preview-cad.js');
+
+require('./preview-code/preview-code.js');
+
+require('./preview-embed/preview-embed.js');
+
+require('./preview-files/preview-files.js');
+
+require('./preview-gerber/preview-gerber.js');
+
+require('./preview-pcb/preview-pcb.js');
+
+require('./preview-pdf/preview-pdf.js');
+
+angular.module('modules.preview', ['modules.preview.cad', 'modules.preview.code', 'modules.preview.files', 'modules.preview.gerber', 'modules.preview.pcb', 'modules.preview.embed', 'modules.preview.pdf']);
+angular.module('modules.preview');

@@ -15,13 +15,6 @@ import Sidebar  from 'app/renderer/main/modules/Sidebar/Sidebar.jsx';
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
-  componentDidMount(){
-//    // Resize the window
-//    const window = electron.remote.getCurrentWindow();
-//    window.setMinimumSize(500, 500);
-//    window.setResizable(true);
-//    window.maximize();
-  },
   render() {
     const { children, auth } = this.props;
     const isAuthed = auth.authToken && auth.user._id;

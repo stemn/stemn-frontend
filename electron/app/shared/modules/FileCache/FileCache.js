@@ -2,23 +2,23 @@ import { app }              from 'electron';
 import mkdirp               from 'mkdirp';
 import path                 from 'path';
 import fs                   from 'fs';
-import http                 from 'axios';
 import pify                 from 'pify';
 import electronJsonStorage  from 'electron-json-storage';
 import { sumBy, values }    from 'lodash';
-import { Extract as unzip } from 'unzipper';
+import http                 from 'axios';
 const jsonStorage           = pify(electronJsonStorage);
 const fsPromise             = pify(fs);
 
-/*******************************************************
+import renameFiles          from './lib/renameFiles.js';
+import downloadToDisk       from './lib/downloadToDisk.js';
 
+/*******************************************************
 This module is used to cache files to in the application
 storeage. 'C:\Users\david\AppData\Roaming\STEMN' on
 Windows.
 
 The main function is:
 FileCache.get({key, url, name, params, responseType})
-
 *******************************************************/
 
 // The maximise size of the file cache
@@ -38,127 +38,98 @@ mkdirp(folderPath);
 
 
 /*******************************************************
+Download to Disk and Save.
+
+This will download a file from the server and write it
+to disk. It will also save file details into the 
+fileCache JSON store.
+*******************************************************/
+export const downloadToDiskAndSave = ({key, url, params, name, extract, onProgressAction}) => {
+  // The response from 'downloadToDisk' is passed in here so we have access to the file size
+  const saveToJsonStore = ({size}) => {
+    // Save the info to the cache
+    fileCache[key] = {
+      timestamp : new Date(),
+      name      : name,
+      size      : size
+    }
+    // Save the cache (and return the file data)
+    return jsonStorage.set('fileCache', fileCache)
+  }
+
+  const dest = path.join(folderPath, name);
+  const onProgress = (progressPerc) => {
+    console.log(onProgressAction, progressPerc);
+  }
+  return downloadToDisk({url, params, dest, extract, onProgress}).then(response1 => {
+    // If extract is true, we rename the files, then save them to the store
+    if(extract){
+      return renameFiles({dest}).then(response2 => saveToJsonStore(response1))
+    }
+    // Otherwise, we just save to the store
+    else{
+      return saveToJsonStore(response1)
+    }
+  })
+}
+
+/*******************************************************
+Get file.
+
 This will check if a file exists in the cache, if it
 does, we return it. Otherwise we download it, save it
 and then return it.
 *******************************************************/
-export const get = ({key, url, name, params, responseType, extract}) => {
+export const get = ({key, url, params, name, responseType, extract, onProgressAction, renderUrl}) => {
 
   // This will process and return the result based on the 'responseType' indicated
   const processResult = () => {
-    console.log('7');
     // Return either the file data or the file path
     // depending on the 'responseType'
     if(responseType == 'path'){
       const filePath = path.join(folderPath, fileCache[key].name);
-      console.log({filePath});
       return { data: filePath }
     }
     else{
       return fsPromise.readFile(path.join(folderPath, fileCache[key].name)).then(response => {
         if(responseType == 'json'){
           // Return string
-          return {data: response.toString()}
+          return { data: response.toString() }
         }
         else{
           // Default: Return ArrayBuffer
-          return {data: response}
+          return { data: response }
         }
       })
     }
   }
-
-  // This will get a file from the server and save it to disk
-  // and to the fileCache database.
-  const getAndSet = () => {
-
-    // This will download and save a file to the file cache
-    const downloadAndSave = ({url, dest, onProgress, extract}) => {
-      return new Promise((resolve, reject) => {
-        http({
-          url          : url,
-          params       : params,
-          responseType : 'stream'
-        }).then(response => {
-          const stream     = response.data;
-          const file       = extract
-                             ? unzip({ path : dest })
-                             : fs.createWriteStream(dest);
-          const total      = response.headers['content-length'];
-          let progress     = 0;
-          let progressPerc = 0;
-          stream.on('data', chunk => {
-            progress    += chunk.length;
-            progressPerc = parseInt((progress / total) * 100);
-            if(onProgress){onProgress(progressPerc)}
-          });
-          stream.on('error', response => {
-            fs.unlink(dest); // Delete the file async. (But we don't check the result)
-            reject(response)
-          });
-          stream.on('end', response => {
-            resolve({size: total})
-          });
-          stream.pipe(file)
-        })
-      })
-    };
-
-    // This will rename any svf/png files model.svf and model.png to make them easy to access
-    const renameFiles = ({dest}) => {
-      return fsPromise.readdir(dest).then(files => {
-        // This returns the part folders such as '1', '2' etc
-        const renameSvfAndPng = (subFolderPath) => {
-          // Read the contents of the subfolder, this will contain the svf and png
-          return fsPromise.readdir(subFolderPath).then(files => {
-            const filesToRename = files.filter(fileName => fileName.endsWith('.svf') || fileName.endsWith('png'));
-            const renameFile = (fileName) => {
-              const extension = fileName.substr(fileName.lastIndexOf('.') + 1);
-              return fsPromise.rename(`${subFolderPath}/${fileName}`, `${subFolderPath}/model.${extension}`)
-            }
-            return Promise.all(filesToRename.map(renameFile))
-          })
-        }
-        return Promise.all(files.map(folderName => renameSvfAndPng(`${dest}/${folderName}`)));
-      })
-    }
-
-    // This will save the file meta into the json store
-    // The response from 'downloadAndSave' is passed in here so we have access to the file size
-    const saveToJsonStore = (response) => {
-      const { size } = response;
-      // Save the info to the cache
-      fileCache[key] = {
-        timestamp : new Date(),
-        name      : name,
-        size      : size
-      }
-      // Save the cache (and return the file data)
-      return jsonStorage.set('fileCache', fileCache)
-    }
-
-    return downloadAndSave({
-      url: url,
-      dest: path.join(folderPath, name),
-      extract: extract
-    }).then(response1 => {
-      // If extract is true, we rename the files, then save them to the store and process
-      if(extract){
-        return renameFiles({dest: path.join(folderPath, name)}).then(response2 => saveToJsonStore(response1).then(processResult))
-      }
-      // Otherwise, we just save to the store and process
-      else{
-        return saveToJsonStore(response).then(processResult)
-      }
-    })
+  
+  const getFile = () => {
+    // If there is a render url, we check the render.status, otherwise we just download directly
+    return renderUrl
+    ? http({url: renderUrl, params}).then(response => 
+        // If render.status is pending, we do not download the file, we just submit a render request
+        // The file download will be handled by websocket
+        response && response.data && response.data.status == 'pending'
+        ? response
+        : downloadToDiskAndSave({key, url, params, name, extract, onProgressAction}).then(processResult)
+      )
+    : downloadToDiskAndSave({key, url, params, name, extract, onProgressAction}).then(processResult)
   }
-
+  
   // If we have a cache entry, get the file
   return fileCache[key]
-  // If the file is in the json store, get it and process it. If we cannot find it on disk, we getAndSet
-  ? fsPromise.stat(path.join(folderPath, fileCache[key].name)).then(processResult).catch(getAndSet)
-  // Otherwise, the file does not exist so we getAndSet straight away
-  : getAndSet();
+  ? fsPromise.stat(path.join(folderPath, fileCache[key].name))
+    .then(processResult)
+    .catch(getFile)
+  : getFile();
+}
+
+/*******************************************************
+This will check if a file is in the cache
+*******************************************************/
+export const isCached = ({key}) => {
+  return !!fileCache[key]
 }
 
 export const remove = ({key}) => {

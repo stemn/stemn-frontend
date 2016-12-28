@@ -1,0 +1,33 @@
+'use strict';
+
+var _recruitingSteps = require('ngtemplate!./tpls/recruiting-steps.html');
+
+var _recruitingSteps2 = _interopRequireDefault(_recruitingSteps);
+
+require('./landing-recruiting.scss');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+angular.module('views.landing.recruiting', []);
+angular.module('views.landing.recruiting').config(function ($stateProvider) {
+    $stateProvider.state('app.landing.recruiting', {
+        url: '/recruiting',
+        template: require('./landing-recruiting.html'),
+        controller: function controller($scope, OnboardingService, AuthenticationModalService) {
+            OnboardingService.beenLanding = true;
+            $scope.loginRecruit = AuthenticationModalService.loginRecruit; // function(event)
+            $scope.recruitingStepTpl = _recruitingSteps2.default;
+        },
+        seo: function seo() {
+            return {
+                title: "For Employers - Recruit the world's best scientists and engineers - STEMN"
+            };
+        },
+        layout: {
+            size: 'md',
+            sidebar: false,
+            footer: true,
+            topBanner: false
+        }
+    });
+});

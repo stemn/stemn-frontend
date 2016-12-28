@@ -1,37 +1,47 @@
-.container{
-  height: 600px;
-}
-.imageSection{
-  -webkit-user-select: none;
-  -webkit-app-region: drag;
+.background{
+  background-position: center center;
   background-size: cover;
-  width: 600px;
-  position: relative;
-  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: black;
 }
-.textSection{
-  background: white;
-  width: 400px;
-  position: relative;
-  transition: all 0.3s ease;
-  position: relative;
-}
-.textSectionInner{
+.center{
   position: absolute;
-  left: 0;
   top: 0;
   right: 0;
   bottom: 0;
-  width: 400px;
-  padding: 40px;
-  transition: all 0.3s ease;
+  left: 0;
+  z-index: 1;
 }
-
-.container.hideForm .textSection{
-  width: 0px;
+.backgroundBlurred{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-position: center center;
+  background-size: cover;
 }
-.container.hideForm .textSectionInner{
-  transform: translateX(-100%);
+.mask{
+  overflow: hidden;
+  width: 750px;
+  height: 500px;
+  filter: blur(10px);
+}
+.content{
+  width: 750px;
+  height: 500px;
+  position: absolute;
+}
+.brandPanel{
+  width: 300px;
+  background: rgba(255, 255, 255, 0.5);
+}
+.formPanel{
+  padding: 30px;
+  background: rgba(0, 0, 0, 0.3);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .input{
@@ -40,23 +50,37 @@
   display: block;
   width: 100%;
   margin-bottom: 15px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: transparent;
 }
 .input:focus{
   outline: none;
-  border: 1px solid rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 1);
 }
 
 .textDivider{
-  width: 100%;
-  height: 20px;
-  margin-bottom: 20px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  text-align: center
+  position: relative;
+  padding: 30px 0;
+}
+.textDivider:after, .textDivider:before{
+  content: ' ';
+  border-top: 1px solid rgba(255, 255, 255, 0.6);  
+  width: 45%;
+  position: absolute;
+}
+.textDivider:before{
+  left: 0;
+}
+.textDivider:after{
+  right: 0;
 }
 .textDivider div{
-  background-color: white;
-  padding: 12px 10px 0;
-  display: inline-block;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-weight: 300;
+}
+.title{
+  color: white;
 }

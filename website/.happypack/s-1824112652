@@ -1,0 +1,63 @@
+'use strict';
+
+require('./section.scss');
+
+// Require all the template files
+var editorTemplates = require.context('ngtemplate?relativeTo=section!./', true, /\.html$/);
+editorTemplates.keys().forEach(function (key) {
+    // Invoke the iifes
+    editorTemplates(key);
+});
+
+angular.module('modules.modular-editor.section', []);
+angular.module('modules.modular-editor.section').directive('editorSection', function (CodeMirrorService) {
+    return {
+        restrict: 'E',
+        scope: {
+            section: '=',
+            editorSections: '=',
+            editorOrder: '=',
+            editorSectionIndex: '=',
+            editorSectionId: '=',
+            editorOptions: '=',
+            edit: '=',
+            placeholder: '@'
+        },
+        link: function link(scope, element, attrs) {
+            scope.$watch('section.layout', getTemplatePath);
+
+            if (scope.section.type == 'code') {
+                // Code otions
+                scope.options = {
+                    indentWithTabs: true,
+                    readOnly: !scope.edit,
+                    dragDrop: false,
+                    lineWrapping: true,
+                    onLoad: function onLoad(cmEditor) {
+                        scope.cmEditor = cmEditor;
+                        CodeMirrorService.changeCodeMode(cmEditor, scope.section.codeMode);
+                    }
+                };
+            }
+
+            ////////////////////////////
+
+            function getTemplatePath() {
+                var path = '';
+                path += scope.section.type + '/';
+                path += scope.edit ? 'edit/' : 'public/';
+                path += scope.section.layout ? scope.section.layout : scope.section.type;
+                path += '.html';
+                scope.template = path;
+            }
+        },
+        template: '<div layout="row" layout-align="center" ng-include="template"></div>'
+    };
+}).directive('editorVideoOverlay', function () {
+    return {
+        restrict: 'E',
+        replace: true,
+        // tabindex allows the div to be focused
+        template: '<div tabindex="0" ng-if="edit" class="editor-video-overlay"></div>'
+    };
+});

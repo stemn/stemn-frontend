@@ -1,9 +1,0 @@
-<md-input-container style="margin-right: 10px;" hide-xs>
-    <md-select ng-model="filter.key" placeholder="Search by" ng-change="filter.onChange();">
-        <md-option value="{{item.model}}" ng-repeat="item in filter.options">{{item.name}}</md-option>
-    </md-select>
-</md-input-container>
-
-<md-input-container class="md-accent" md-no-float hide-xs>
-    <input placeholder="search" ng-model="filter.model" ng-change="filter.onChange();">
-</md-input-container>
