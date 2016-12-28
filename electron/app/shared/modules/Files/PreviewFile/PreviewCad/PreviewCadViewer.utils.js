@@ -18,12 +18,11 @@ export default library
 
 function register(viewerEl){
   var id = getUuid();
-  var instance = new window.Autodesk.Viewing.Private.GuiViewer3D(viewerEl, {});
+  var instance = new window.Autodesk.Viewing.Private.GuiViewer3D(viewerEl);
   instance.id = id;
   library.activeInstances.push(instance);
   if(library.activeInstances.length > 1 && !syncIsActive){
     syncIsActive = true;
-
     addListenerMulti(document, 'mousemove vmousemove mousewheel click mousedown DOMMouseScroll scroll', onMove);
   }
   return instance;

@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './AutodeskViewer.css';
-import autodeskViewerUtils from './autodeskViewerUtils.js';
+import autodeskViewerUtils from '../PreviewCadViewer.utils.js';
 
 export default React.createClass({
   viewerInstance: null,

@@ -39,7 +39,7 @@ export const FileRow = React.createClass({
     const { file, isActive, clickFn } = this.props;
     return (
       <div className={classNames(classes.file, {[classes.active] : isActive}, 'layout-row layout-align-start-center')} onClick={()=>clickFn({file})}>
-        <FileIcon fileType={file.extension} type={file.type} size="20px"/>
+        <FileIcon fileType={file.extension} type={file.type} size={20}/>
         <div className="text-ellipsis">{file.name}</div>
       </div>
     );
