@@ -1,8 +1,0 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = {
-  api: 'http://localhost:3000'
-};
