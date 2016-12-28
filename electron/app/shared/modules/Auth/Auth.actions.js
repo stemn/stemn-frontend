@@ -16,6 +16,7 @@ export function loadUserData() {
       })
     }).then(response => {
       dispatch(ProjectsActions.getUserProjects({userId: response.value.data._id}))
+      dispatch(websocketJoinRoom({userId: response.value.data._id}))
     }).catch(error => {
 //      dispatch(logout())
     })
@@ -125,10 +126,38 @@ export function removeAuthToken() {
 }
 
 export function logout() {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch({
       type:'AUTH/LOGOUT'
     })
     dispatch(push('/login'))
+    dispatch(websocketLeaveRoom({
+      userId: getState().auth.user._id
+    }))
   }
+}
+
+export function websocketJoinRoom({userId}) {
+  return {
+    type: 'AUTH/WEBSOCKET_JOIN_ROOM',
+    websocket: true,
+    payload: {
+      type : 'ROOM/JOIN',
+      payload : {
+        room : userId
+      }
+    }
+  };
+}
+export function websocketLeaveRoom({userId}) {
+  return {
+    type: 'AUTH/WEBSOCKET_LEAVE_ROOM',
+    websocket: true,
+    payload: {
+      type : 'ROOM/LEAVE',
+      payload : {
+        room : userId
+      }
+    }
+  };
 }

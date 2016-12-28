@@ -1,14 +1,27 @@
-import * as ChangesActions from '../../../renderer/main/modules/Changes/Changes.actions.js';
-import * as TasksActions from '../../../renderer/main/modules/Tasks/Tasks.actions.js';
-import * as ProjectActions from '../../../shared/actions/projects.js';
-import * as NotificationsActions from '../../../shared/modules/Notifications/Notifications.actions.js';
+import * as ChangesActions        from '../../../renderer/main/modules/Changes/Changes.actions.js';
+import * as TasksActions          from '../../../renderer/main/modules/Tasks/Tasks.actions.js';
+import * as ProjectActions        from '../../../shared/actions/projects.js';
+import * as NotificationsActions  from '../../../shared/modules/Notifications/Notifications.actions.js';
+import { renderFileDownload }     from '../../../shared/modules/Files/Files.actions.js';
 
 export default (store, action) => {
+  
+  // Actions that we process if user is the actioner
+  switch (action.type) {
+    case 'RENDER/RENDER_COMPLETE':
+      return renderFileDownload({ 
+        projectId   : action.payload.projectId, 
+        fileId      : action.payload.fileId, 
+        revisionId  : action.payload.revisionId, 
+        provider    : action.payload.provider
+      });
+  }
 
-  // don't process the action if it was created by this user
-  if (action.payload.actioner === store.getState().auth.user._id)
+  if (action.payload.actioner === store.getState().auth.user._id){
     return undefined;
-
+  }
+  
+  // Actions that we DON'T process if user is the actioner
   switch (action.type) {
     case 'CHANGES/FETCH_CHANGES':
       return ChangesActions.fetchChanges({ projectId : action.payload.projectId });
@@ -30,7 +43,7 @@ export default (store, action) => {
         body  : `The task '${action.payload.task.title}' was marked as complete.`
       })
     case 'PROJECT/FETCH_PROJECT':
-      return ProjectActions.getProject({ projectId : action.payload.projectId });
+      return ProjectActions.getProject({ projectId : action.payload.projectId });    
     default:
       return undefined;
   }
