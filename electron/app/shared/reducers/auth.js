@@ -1,6 +1,7 @@
 import { modelReducer, formReducer, modeled } from 'react-redux-form';
 import i from 'icepick';
 
+const numBackgrounds = 8;
 
 const initialState = {
   authLoading: false,
@@ -19,7 +20,7 @@ const initialState = {
     firstname: '',
     lastname: '',
   },
-  background: Math.floor(Math.random() * 8) + 1 // We init a random number between 1 and 8 to use as the background
+  background: Math.floor(Math.random() * numBackgrounds) + 1 // We init a random number between 1 and 8 to use as the background
 }
 
 
@@ -91,6 +92,11 @@ const mainReducer = (state, action) => {
       return {...state,
         authLoading: false,
       }
+
+    case 'AUTH/NEXT_BACKGROUND':
+      return state.background + 1 <= numBackgrounds
+      ? i.assoc(state, 'background', state.background + 1)
+      : i.assoc(state, 'background', 1)
 
     case 'AUTH/LOGOUT':
       return Object.assign({}, state, initialState);
