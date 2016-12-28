@@ -5,14 +5,14 @@ import * as NotificationsActions  from '../../../shared/modules/Notifications/No
 import { renderFileDownload }     from '../../../shared/modules/Files/Files.actions.js';
 
 export default (store, action) => {
-  
+  console.log(action)
   // Actions that we process if user is the actioner
   switch (action.type) {
     case 'RENDER/RENDER_COMPLETE':
-      return renderFileDownload({ 
-        projectId   : action.payload.projectId, 
-        fileId      : action.payload.fileId, 
-        revisionId  : action.payload.revisionId, 
+      return renderFileDownload({
+        projectId   : action.payload.projectId,
+        fileId      : action.payload.fileId,
+        revisionId  : action.payload.revisionId,
         provider    : action.payload.provider
       });
   }
@@ -20,7 +20,7 @@ export default (store, action) => {
   if (action.payload.actioner === store.getState().auth.user._id){
     return undefined;
   }
-  
+
   // Actions that we DON'T process if user is the actioner
   switch (action.type) {
     case 'CHANGES/FETCH_CHANGES':
@@ -43,7 +43,7 @@ export default (store, action) => {
         body  : `The task '${action.payload.task.title}' was marked as complete.`
       })
     case 'PROJECT/FETCH_PROJECT':
-      return ProjectActions.getProject({ projectId : action.payload.projectId });    
+      return ProjectActions.getProject({ projectId : action.payload.projectId });
     default:
       return undefined;
   }
