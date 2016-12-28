@@ -1,5 +1,4 @@
 import { modelReducer, formReducer, modeled } from 'react-redux-form';
-import http from 'axios';
 import i from 'icepick';
 
 
@@ -26,8 +25,6 @@ const initialState = {
 
 const mainReducer = (state, action) => {
   switch (action.type) {
-    case 'AUTH/REMOVE_HTTP_HEADER':
-      return state    
     case 'AUTH/INIT_HTTP_HEADER':
       return state
     case 'AUTH/LOAD_USER_DATA_PENDING':
@@ -96,11 +93,8 @@ const mainReducer = (state, action) => {
       }
 
     case 'AUTH/LOGOUT':
-      return i.assoc(state, initialState);
-    case 'AUTH/CLEAR_USER_DATA':
-      return {...state,
-        user: {},
-      }
+      return Object.assign({}, state, initialState);
+
     default:
         return state;
   }
