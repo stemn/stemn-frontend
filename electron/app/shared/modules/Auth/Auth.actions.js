@@ -161,3 +161,10 @@ export function websocketLeaveRoom({userId}) {
     }
   };
 }
+
+export function nextBackground() {
+  return {
+    type: 'AUTH/NEXT_BACKGROUND',
+    payload: {}
+  };
+}

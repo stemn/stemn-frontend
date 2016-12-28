@@ -18,6 +18,7 @@ import { Link } from 'react-router';
 import Button from 'app/renderer/main/components/Buttons/Button/Button.jsx';
 import Input from 'app/renderer/main/components/Input/Input/Input';
 import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton';
+import MdPhoto from 'react-icons/md/photo';
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -97,6 +98,13 @@ export const Component = React.createClass({
             {formPanel}
           </div>
         </div>
+        <SimpleIconButton
+          className={classes.nextBg}
+          onClick={AuthActions.nextBackground}
+          title="Change background"
+          color="white">
+          <MdPhoto size={24}/>
+        </SimpleIconButton>
       </div>
     )
   }
