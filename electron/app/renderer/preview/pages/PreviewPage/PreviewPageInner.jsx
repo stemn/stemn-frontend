@@ -134,7 +134,7 @@ export const Component = React.createClass({
     }
   },
   clickTag(task){
-    this.props.dispatch(ModalActions.showModal({modalType: 'TASK', modalProps: { taskId: task._id }}));
+    this.props.dispatch(ModalActions.showModal({modalType: 'TASK', limit: 1, modalProps: { taskId: task._id }}));
     this.props.dispatch(ElectronWindowsActions.show('main'))
   },
   render() {

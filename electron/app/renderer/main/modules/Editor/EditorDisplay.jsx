@@ -14,6 +14,7 @@ const TaskMention = React.createClass({
   showModal(){
     this.props.dispatch(ModalActions.showModal({
       modalType: 'TASK',
+      limit: 1,
       modalProps: {
         taskId: this.props.entityId
       }

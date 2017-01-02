@@ -23,6 +23,12 @@
 .display>*:last-child {
     margin-bottom: 0 !important
 }
+.display>div >*:first-child {
+    margin-top: 0 !important
+}
+.display>div >*:last-child {
+    margin-bottom: 0 !important
+}
 .display a:not([href]) {
     color: inherit;
     text-decoration: none

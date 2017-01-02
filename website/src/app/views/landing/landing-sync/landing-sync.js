@@ -1,6 +1,8 @@
 import './landing-sync.scss';
+import AppDownloadButton from 'modules/AppDownloadButton/AppDownloadButton.js';
 
 angular.module('views.landing.sync', [
+  AppDownloadButton
 ]);
 angular.module('views.landing.sync').
 

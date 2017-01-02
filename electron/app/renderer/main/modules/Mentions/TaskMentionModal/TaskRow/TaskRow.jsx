@@ -40,7 +40,7 @@ export const Component = React.createClass({
     if(!task || !task.data){
       return (
         <div className={classNames(classes.row, loadingClasses.loading, 'layout-row', 'layout-align-start-center')}>
-          <div className="flex text-ellipsis" style={{marginBottom: '2px'}}>The task namelongword goes here</div>
+          <div className="flex text-ellipsis">The task namelongword goes here</div>
           <Button className={classNames('xs', classes.button)} style={{width: '60px'}}>&nbsp;</Button>
           <Button className={classNames('xs', classes.button)} style={{width: '60px'}}>&nbsp;</Button>
         </div>
@@ -48,7 +48,7 @@ export const Component = React.createClass({
     }
     return (
       <div className={classes.row + ' layout-row layout-align-start-center'}>
-        <div className="flex text-ellipsis" style={{marginBottom: '2px'}}>{task.data.name}</div>
+        <div className="flex text-ellipsis">{task.data.name}</div>
         <Button
            className={classNames('xs', classes.button, {[classes.active] : mention && mention.complete})}
            title="Mark as Complete"
