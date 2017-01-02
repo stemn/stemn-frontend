@@ -4,7 +4,7 @@ import Promise from 'es6-promise'
 import previewCadUtils from './PreviewCad.utils.js';
 
 //import AutodeskViewer from './AutodeskViewer/AutodeskViewer';
-import AutodeskViewer from './AutodeskLocalViewer/AutodeskLocalViewer'
+import AutodeskLocalViewer from './AutodeskLocalViewer/AutodeskLocalViewer'
 
 import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import modelLocked    from 'app/renderer/assets/images/pure-vectors/model-locked.svg';
@@ -78,7 +78,7 @@ export default React.createClass({
     const { fileMeta, fileRender } = this.props;
     const { status } = this.state;
     if(fileRender && fileRender.data){
-      return <AutodeskViewer path={fileRender.data} />
+      return <AutodeskLocalViewer path={fileRender.data} linkKey={fileMeta.fileId} />
     }
     else if(status == 'disabled'){
       return (

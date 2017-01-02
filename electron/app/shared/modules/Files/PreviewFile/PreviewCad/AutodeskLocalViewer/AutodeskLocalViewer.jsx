@@ -5,20 +5,27 @@ import autodeskViewerUtils from '../PreviewCadViewer.utils.js';
 export default React.createClass({
   viewer: null,
   onMount (nextProps, prevProps) {
-    this.viewer = autodeskViewerUtils.register(this.refs.cadCanvas);
-    const filePath = `${nextProps.path}/1/model.svf`;
-    const options = {
-      'env' : 'Local',
-      'document' : `file://${filePath}`
-    };
-    Autodesk.Viewing.Initializer(options, () => {
-      this.viewer.start(options.document, options);
-    });
+
+    if(!prevProps || nextProps.path != prevProps.path){
+      // deregister the viewer if it already exists.
+      if(this.viewer && this.viewer.deregister){
+        this.viewer.deregister();
+      }
+      this.viewer = autodeskViewerUtils.register(this.refs.cadCanvas, nextProps.linkKey);
+      const filePath = `${nextProps.path}/1/model.svf`;
+      const options = {
+        'env' : 'Local',
+        'document' : `file://${filePath}`
+      };
+      Autodesk.Viewing.Initializer(options, () => {
+        this.viewer.start(options.document, options);
+      });
+    }
   },
   componentDidMount() { this.onMount(this.props) },
   componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
   componentWillUnmount(){
-    autodeskViewerUtils.deregister(this.viewer);
+    this.viewer.deregister();
   },
   render() {
     return <div className={classes.preview + ' flex rel-box'} ref="cadCanvas"></div>

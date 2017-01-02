@@ -1,71 +1,62 @@
 import getUuid from 'app/shared/helpers/getUuid.js';
-import { findIndex, forEach } from 'lodash';
+import { forEach } from 'lodash';
 
 let oldState       = {viewport: { eye: [1]}};
 const filter       = {viewport: true};
-let syncIsActive = false;
 
 const library = {
   activeInstances : [],
-  register : register,
-  deregister : deregister,
+  register        : register,
 }
 
 export default library
 
 ////////////////////////////////////////////
 
+const onMoveTriggers = 'mousemove vmousemove mousewheel click mousedown DOMMouseScroll scroll';
 
-function register(viewerEl){
-  var id = getUuid();
-  var instance = new window.Autodesk.Viewing.Private.GuiViewer3D(viewerEl);
-  instance.id = id;
-  library.activeInstances.push(instance);
-  if(library.activeInstances.length > 1 && !syncIsActive){
-    syncIsActive = true;
-    addListenerMulti(document, 'mousemove vmousemove mousewheel click mousedown DOMMouseScroll scroll', onMove);
-  }
-  return instance;
-}
+function register(viewerEl, linkKey){
+  // linkKey is used to link viewers of the same file so they move at the same time.
 
-function deregister(instance){
-  if(instance){
-    library.activeInstances.splice(findIndex(library.activeInstances, 'id', instance.id),1);
-    if(library.activeInstances.length < 2 && syncIsActive){
-      syncIsActive = false;
-      removeListenerMulti(document, 'mousemove vmousemove mousewheel click mousedown DOMMouseScroll scroll', onMove);
+  const id = getUuid();
+  const instance = new window.Autodesk.Viewing.Private.GuiViewer3D(viewerEl);
+
+  // Create the onMove function that will be used to sync instances
+  const onMove = () => {
+    console.log(library.activeInstances);
+    // Get the instances linked to this one (not including this one)
+    const linkedInstances = library.activeInstances.filter(item => item.linkKey == linkKey && item.id != id);
+    // If we have 1 or more linked instance
+    if(linkedInstances.length >= 1 && instance.viewerState){
+      // Get the new state
+      const newState = instance.getState(filter);
+      // Apply the new state to the linked instances
+      linkedInstances.forEach(item => item.restoreState(newState, filter, true))
     }
+  }
+
+  const deregister = () => {
+    // Remove ithe instance from the activeInstances array
+    const instanceIndex = library.activeInstances.findIndex(item => item.id == instance.id);
+    library.activeInstances.splice(instanceIndex, 1);
+    // Remove the event listeners
+    removeListenerMulti(viewerEl, onMoveTriggers, onMove);
+    // Call the Autodesk finish function
     instance.finish();
   }
-}
 
-function onMove(){
-  if(library.activeInstances && library.activeInstances.length > 1){
-    var newState;
-    var oldInstances = [];
-    forEach(library.activeInstances, function(instance){
-      if(instance.viewerState){
-        var possibleNewState = instance.getState(filter);
-        // If the state is different, this is the new state!
-        if(possibleNewState.viewport.eye[0] != oldState.viewport.eye[0]){
-          newState = possibleNewState;
-        }
-        else{
-          oldInstances.push(instance);
-        }
-      }
-    });
+  // Add some additional meta and functions to the instance
+  instance.id         = id;
+  instance.linkKey    = linkKey;
+  instance.deregister = deregister;
 
-    // If there is a new state, update the old instances
-    if(newState){
-      if(oldInstances.length > 0){
-        forEach(oldInstances, function(instance){
-          instance.restoreState(newState, filter, true)
-        })
-      }
-      oldState = newState;
-    }
-  }
+  // Add the onMove listener
+  addListenerMulti(viewerEl, onMoveTriggers, onMove);
+
+  // Push this instance onto the activeInstances array
+  library.activeInstances.push(instance);
+
+  return instance;
 }
 
 function addListenerMulti(el, events, fn) {
