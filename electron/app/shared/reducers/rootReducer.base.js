@@ -23,6 +23,7 @@ import localPath        from '../modules/LocalPath/LocalPath.reducer.js';
 import autoLaunch       from '../modules/AutoLaunch/AutoLaunch.reducer.js';
 import autoUpdate       from '../modules/AutoUpdate/AutoUpdate.reducer.js';
 import walkthrough      from '../modules/Walkthrough/Walkthrough.reducer.js';
+import togglePanel      from '../modules/TogglePanel/TogglePanel.reducer.js';
 
 export default {
   system,
@@ -49,5 +50,6 @@ export default {
   localPath,
   autoLaunch,
   autoUpdate,
-  walkthrough
+  walkthrough,
+  togglePanel
 };

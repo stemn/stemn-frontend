@@ -3,7 +3,7 @@ import React from 'react';
 import classes            from './FileCompare.css';
 
 import { orderItemsByTime } from 'app/renderer/main/modules/FileCompare/FileCompare.utils.js';
-import TogglePanel        from 'app/renderer/main/components/Panels/TogglePanel/TogglePanel.jsx';
+import TogglePanel        from 'app/shared/modules/TogglePanel/TogglePanel.jsx';
 import DragResize         from 'app/renderer/main/modules/DragResize/DragResize.jsx';
 import FileCompareMenu    from 'app/renderer/main/modules/FileCompare/FileCompareMenu/FileCompareMenu.jsx';
 import FileCompareInner   from 'app/renderer/main/modules/FileCompare/FileCompareInner/FileCompareInner.jsx';
@@ -56,7 +56,7 @@ export default React.createClass({
 
     const collapseTemplate = () => {
       return (
-        <TogglePanel>
+        <TogglePanel cacheKey={file.data.fileId+'-'+file.data.revisionId}>
           <div>{file.data.path}</div>
           <FileCompareMenu
             file1={file1}

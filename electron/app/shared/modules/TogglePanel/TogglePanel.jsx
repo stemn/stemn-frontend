@@ -1,5 +1,5 @@
 /**************************************************************
-  <TogglePanel>
+  <TogglePanel cacheKey="some-cache-id">
     <div className="layout-row flex layout-align-start-center">
       <div className="flex">Header Content</div>
     </div>
@@ -9,25 +9,28 @@
   </TogglePanel>
 **************************************************************/
 
-import React from 'react';
-
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux'
 import classNames from 'classnames';
-import styles from './TogglePanel.css'
 
+import { toggle } from './TogglePanel.actions.js';
+import styles from './TogglePanel.css'
 import MdChevronRight from 'react-icons/md/chevron-right';
 
-export default React.createClass({
-  getInitialState () {
-    return {
-      isOpen: false,
-    }
+export const TogglePanel = React.createClass({
+  propTypes: {
+    cacheKey : PropTypes.string.isRequired,  // Some cache key string (used as the key in the 'togglePanel' store)
   },
   toggle (toState) {
-    this.setState({ isOpen: toState === null ? !this.state.isOpen : toState })
+    this.props.dispatch(toggle({
+      cacheKey: this.props.cacheKey,
+      value: toState
+    }))
   },
   render() {
+    const { toggleState } = this.props;
     const getContent = () => {
-      if(this.state.isOpen){
+      if(toggleState){
         return (
           <div className={styles.content}>
             {this.props.children[2]}
@@ -38,7 +41,7 @@ export default React.createClass({
     return (
       <div>
         <div className={styles.titleBar + ' layout-row layout-align-start-center'}>
-          <MdChevronRight onClick={()=>this.toggle(null)} className={classNames(styles.toggleIcon, {[styles.toggleIconActive] : this.state.isOpen})} size='22'></MdChevronRight>
+          <MdChevronRight onClick={()=>this.toggle(null)} className={classNames(styles.toggleIcon, {[styles.toggleIconActive] : toggleState})} size='22'></MdChevronRight>
           <div className="flex layout-row layout-align-start-center">
             <div className="flex" onClick={()=>this.toggle(null)}>{this.props.children[0]}</div>
             {this.props.children[1]}
@@ -49,3 +52,11 @@ export default React.createClass({
     );
   }
 })
+
+const mapStateToProps = ({togglePanel}, {cacheKey}) => {
+  return {
+    toggleState: togglePanel[cacheKey]
+  };
+}
+
+export default connect(mapStateToProps)(TogglePanel)

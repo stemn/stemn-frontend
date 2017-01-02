@@ -46,13 +46,9 @@ const paths = {
     dropbox : (platform, callback) => {
       log.info('Provider Path Dropbox')
       return fs.readFile(dbPaths.dropbox[platform], { encoding : 'utf8' }, (err, data) => {
-        log.info('err', err)
-        log.info('data', data)
         const readDatabase = () => {
           const config = JSON.parse(data);
-          console.log('config', config);
           const account = config.personal || config.business;
-          console.log('account', account);
           return account.path;
         }
         return err
@@ -96,6 +92,6 @@ export const getPath = (provider) => {
   });
 }
 
-export const getPaths = (providers) => {
-  return Promise.all(providers.map(getPath)).then(response => zipObject(providers, response))
-}
+//export const getPaths = (providers) => {
+//  return Promise.all(providers.map(getPath)).then(response => zipObject(providers, response))
+//}

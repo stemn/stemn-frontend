@@ -6,14 +6,16 @@ import Promise from 'es6-promise';
 import { shell } from 'electron';
 
 export function getProviderPath() {
-  return {
-    type: 'SYSTEM/GET_PROVIDER_PATH',
-    aliased: true,
-    payload: {
-      functionAlias : 'ProviderPathUtils.getPaths',
-      functionInputs: [['dropbox', 'drive']]
-    }
-  };
+  return (dispatch, getState) => {
+    dispatch({
+      type: 'SYSTEM/GET_PROVIDER_PATH',
+      aliased: true,
+      payload: {
+        functionAlias : 'ProviderPathUtils.getPath',
+        functionInputs: [['dropbox', 'drive']]
+      }
+    })
+  }
 }
 
 export function getInstallStatus() {

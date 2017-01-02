@@ -204,7 +204,8 @@ export function websocketJoinProject({projectId}) {
     payload: {
       type : 'ROOM/JOIN',
       payload : {
-        room : projectId
+        room : projectId,
+        type : 'project'
       }
     }
   };
@@ -216,7 +217,8 @@ export function websocketLeaveProject({projectId}) {
     payload: {
       type : 'ROOM/LEAVE',
       payload : {
-        room : projectId
+        room : projectId,
+        type : 'project'
       }
     }
   };

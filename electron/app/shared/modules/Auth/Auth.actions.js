@@ -144,7 +144,8 @@ export function websocketJoinRoom({userId}) {
     payload: {
       type : 'ROOM/JOIN',
       payload : {
-        room : userId
+        room : userId,
+        type : 'user'
       }
     }
   };
@@ -156,7 +157,8 @@ export function websocketLeaveRoom({userId}) {
     payload: {
       type : 'ROOM/LEAVE',
       payload : {
-        room : userId
+        room : userId,
+        type : 'user'
       }
     }
   };

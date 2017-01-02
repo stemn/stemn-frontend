@@ -160,7 +160,7 @@ export const TaskListItem = React.createClass({
               <UserAvatars users={task.data.users} limit={3}/>
             </div>
             <div className={classes.listDate}>
-              <DueDate due={task.data.due}/>
+              { !task.data.complete ? <DueDate due={task.data.due}/> : null }
             </div>
             <div className={classes.listActions + ' text-ellipsis layout-row layout-align-end-center'}>
               <SimpleIconButton onClick={this.showModal} title="Show Task">
@@ -202,7 +202,7 @@ export const TaskListItem = React.createClass({
                 : null
               }
             </div>
-            <div style={{padding: '0 5px'}}><DueDate due={task.data.due}/></div>
+            <div style={{padding: '0 5px'}}>{ !task.data.complete ? <DueDate due={task.data.due}/> : null }</div>
             <SimpleIconButton title="Show Task">
               <MdOpenInNew size="20px"/>
             </SimpleIconButton>
