@@ -18,14 +18,7 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case 'SYSTEM/GET_PROVIDER_PATH_FULFILLED': {
-      let chain = i.chain(state)
-      if(action.payload.dropbox){
-        chain = chain.assocIn(['providerPath', 'dropbox'], action.payload.dropbox)
-      }      
-      if(action.payload.dropbox){
-        chain = chain.assocIn(['providerPath', 'drive'], action.payload.drive)
-      }
-      return chain.value();
+      return i.assocIn(state, ['providerPath', action.meta.provider], action.payload)
     }
     case 'SYSTEM/GET_INSTALL_STATUS_FULFILLED': {
       return i.assoc(state, 'installed', action.payload)

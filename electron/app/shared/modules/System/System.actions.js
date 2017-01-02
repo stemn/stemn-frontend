@@ -12,7 +12,21 @@ export function getProviderPath() {
       aliased: true,
       payload: {
         functionAlias : 'ProviderPathUtils.getPath',
-        functionInputs: [['dropbox', 'drive']]
+        functionInputs: ['dropbox']
+      },
+      meta: {
+        provider: 'dropbox'
+      }
+    })
+    dispatch({
+      type: 'SYSTEM/GET_PROVIDER_PATH',
+      aliased: true,
+      payload: {
+        functionAlias : 'ProviderPathUtils.getPath',
+        functionInputs: ['drive']
+      },
+      meta: {
+        provider: 'drive'
       }
     })
   }
