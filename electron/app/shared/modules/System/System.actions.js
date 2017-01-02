@@ -50,7 +50,7 @@ export function openFile({location, path, projectId, provider}) {
         modalType: 'ERROR',
         modalProps: {
           title: 'File could not be found',
-          body: `Could no locate the file/folder:<div class="dr-input text-ellipsis" style="margin: 15px 0">${path}</div>You should double-check this file exists on your computer. Additionally, make sure you have not disabled sync using dropbox/drive's selective-sync feature.`
+          body: `Could not locate the file/folder:<div class="dr-input text-ellipsis" style="margin: 15px 0">${path}</div>You should double-check this file exists on your computer. Additionally, make sure you have not disabled syncing of this file/folder using Dropbox/Drive's selective-sync feature.`
         }
       }))
     }
