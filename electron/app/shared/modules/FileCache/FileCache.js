@@ -64,7 +64,8 @@ export const downloadToDiskAndSave = ({key, url, params, name, extract, onProgre
   return downloadToDisk({url, params, dest, extract, onProgress}).then(response1 => {
     // If extract is true, we rename the files, then save them to the store
     if(extract){
-      return renameFiles({dest}).then(response2 => saveToJsonStore(response1))
+      return renameFiles({dest}).
+      then(response2 => saveToJsonStore(response1))
     }
     // Otherwise, we just save to the store
     else{
@@ -107,13 +108,14 @@ export const get = ({key, url, params, name, responseType, extract, onProgressAc
   const getFile = () => {
     // If there is a render url, we check the render.status, otherwise we just download directly
     return renderUrl
-    ? http({url: renderUrl, params}).then(response => 
+    ? http({url: renderUrl, params})
+      .then(response => {
         // If render.status is pending, we do not download the file, we just submit a render request
         // The file download will be handled by websocket
-        response && response.data && response.data.status == 'pending'
+        return response && response.data && response.data.status == 'pending'
         ? response
         : downloadToDiskAndSave({key, url, params, name, extract, onProgressAction}).then(processResult)
-      )
+      })
     : downloadToDiskAndSave({key, url, params, name, extract, onProgressAction}).then(processResult)
   }
   

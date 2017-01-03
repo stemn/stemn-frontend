@@ -34,8 +34,8 @@ import LoadingOverlay     from 'app/renderer/main/components/Loading/LoadingOver
 import TimelineVertical   from 'app/shared/modules/TimelineVertical/TimelineVertical.jsx';
 import SimpleTable        from 'app/shared/modules/Tables/SimpleTable/SimpleTable.jsx';
 import SectionTitle       from 'app/shared/modules/Titles/SectionTitle/SectionTitle.jsx';
+import AssemblyParts      from 'app/shared/modules/Files/PreviewFile/PreviewCad/AssemblyParts/AssemblyParts.jsx'
 import Tag                from 'app/shared/modules/Tags/Tag.jsx';
-
 
 // Styles
 import classes from './PagePreview.css';
@@ -53,19 +53,19 @@ export const Component = React.createClass({
       // If this is a sync file
       if(has(nextProps, 'fileMeta.data.project._id')){
         nextProps.syncTimelineActions.fetchTimeline({
-          projectId : nextProps.fileMeta.data.project._id,
-          fileId    : nextProps.fileMeta.data.fileId,
+          projectId  : nextProps.fileMeta.data.project._id,
+          fileId     : nextProps.fileMeta.data.fileId,
         })
         nextProps.filesActions.getRelatedTasks({
-          fileId    : nextProps.fileMeta.data.fileId,
-          projectId : nextProps.fileMeta.data.project._id
+          fileId     : nextProps.fileMeta.data.fileId,
+          projectId  : nextProps.fileMeta.data.project._id
         })
       }
       // Else, If this is remote file
       else{
         nextProps.syncTimelineActions.fetchTimeline({
-          fileId    : nextProps.fileMeta.data.fileId,
-          provider  : nextProps.fileMeta.data.provider,
+          fileId     : nextProps.fileMeta.data.fileId,
+          provider   : nextProps.fileMeta.data.provider,
         })
       }
       this.setState({
@@ -189,6 +189,7 @@ export const Component = React.createClass({
                   : null }
                 </SimpleTable>
               : null }
+              { hasFileMeta ? <AssemblyParts fileMeta={fileMeta} /> : null }
               { relatedTasks && relatedTasks.data && relatedTasks.data.length > 0
               ? <div>
                   <SectionTitle style={{margin: '30px 0 15px'}}>Related Tasks</SectionTitle>

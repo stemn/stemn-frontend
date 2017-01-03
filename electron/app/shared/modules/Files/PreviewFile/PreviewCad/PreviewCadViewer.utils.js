@@ -23,7 +23,6 @@ function register(viewerEl, linkKey){
 
   // Create the onMove function that will be used to sync instances
   const onMove = () => {
-    console.log(library.activeInstances);
     // Get the instances linked to this one (not including this one)
     const linkedInstances = library.activeInstances.filter(item => item.linkKey == linkKey && item.id != id);
     // If we have 1 or more linked instance

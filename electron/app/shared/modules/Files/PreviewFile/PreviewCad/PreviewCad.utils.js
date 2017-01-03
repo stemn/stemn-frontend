@@ -4,11 +4,18 @@ const library = {
   authenticate: authenticate,
   getViewStatus: getViewStatus,
   isWebGlSupported: isWebGlSupported,
+  isAssembly: isAssembly
 }
 
 export default library
 
 ////////////////////////////////////////////
+
+
+function isAssembly(fileType){
+  const assemblyFileTypes = ['sldasm', 'catproduct', 'iam'];
+  return assemblyFileTypes.includes(fileType.toLowerCase())
+}
 
 function authenticate(){
   return http({

@@ -121,8 +121,8 @@ export function getAssemblyParts({projectId, fileId, revisionId, provider}) {
     type: 'FILES/GET_ASSEMBLY_PARTS',
     payload: http({
       url    : projectId
-             ? `/api/v1/sync/assemblyFiles/${projectId}/${fileId}`
-             : `/api/v1/remote/assemblyFiles/${provider}/${fileId}`,
+             ? `/api/v1/sync/assemblyParts/${projectId}/${fileId}`
+             : `/api/v1/remote/assemblyParts/${provider}/${fileId}`,
       params : { revisionId },
     }),
     meta: {
