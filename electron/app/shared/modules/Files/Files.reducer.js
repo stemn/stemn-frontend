@@ -4,6 +4,7 @@ const initialState = {
   fileRenders       : {},
   fileMeta          : {},
   fileAssemblyParts : {},
+  fileAssemblies    : {},
   pathToId          : {},
   downloadProgress  : {},
   relatedTasks      : {},

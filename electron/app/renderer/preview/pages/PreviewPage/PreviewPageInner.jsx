@@ -189,7 +189,7 @@ export const Component = React.createClass({
                   : null }
                 </SimpleTable>
               : null }
-              { hasFileMeta ? <AssemblyParts fileMeta={fileMeta} /> : null }
+              { hasFileMeta ? <AssemblyParts fileMeta={fileMeta} clickFn={this.clickCrumb}/> : null }
               { relatedTasks && relatedTasks.data && relatedTasks.data.length > 0
               ? <div>
                   <SectionTitle style={{margin: '30px 0 15px'}}>Related Tasks</SectionTitle>
