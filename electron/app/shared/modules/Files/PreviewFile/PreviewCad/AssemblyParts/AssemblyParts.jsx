@@ -13,6 +13,20 @@ const propTypesObject = {
   clickFn         : PropTypes.func.isRequired      // clickFn(part) - Run when a part is clicked
 };
 
+export const Row = React.createClass({
+  render() {
+    const { file, clickFn } = this.props;
+    const timeFromNow = moment(file.modified).fromNow();
+    return (
+      <a className={classes.part+ ' layout-row'} onClick={()=>clickFn({file})}>
+        <div className="flex">{file.name}</div>
+        <div className={classes.time}>{timeFromNow}</div>
+      </a>
+    )
+  }
+})
+
+
 export const AssemblyParts = React.createClass({
   propTypes: propTypesObject,
   onMount (nextProps, prevProps) {
@@ -29,20 +43,22 @@ export const AssemblyParts = React.createClass({
   componentDidMount() { this.onMount(this.props) },
   componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
   render() {
-    const { parts, clickFn } = this.props;
+
+    const { parts, assemblies, clickFn } = this.props;
     if(parts && parts.data){
       const partsOrdered = orderBy(parts.data, 'name');
       return (
         <div>
           <SectionTitle style={{margin: '30px 0 15px'}}>Assembly Parts</SectionTitle>
-          {partsOrdered.map(file => {
-            const timeFromNow = moment(file.modified).fromNow();
-            return (
-              <a className={classes.part+ ' layout-row'} onClick={()=>clickFn({file})}>
-                <div className="flex">{file.name}</div>
-                <div className={classes.time}>{timeFromNow}</div>
-              </a>
-            )})}
+          {partsOrdered.map(file => <Row file={file} clickFn={clickFn} />)}
+        </div>
+      )
+    }
+    else if(assemblies && assemblies.length > 0){
+      return (
+        <div>
+          <SectionTitle style={{margin: '30px 0 15px'}}>Parent Assemblies</SectionTitle>
+          {assemblies.map(file => <Row file={file} clickFn={clickFn} />)}
         </div>
       )
     }
@@ -54,10 +70,11 @@ export const AssemblyParts = React.createClass({
 
 const mapStateToProps = ({files}, {fileMeta}) => {
   const cacheKey = fileMeta.data.fileId+'-'+fileMeta.data.revisionId;
-
-  console.log(files.fileAssemblyParts);
+  const assembliesRaw = files.fileAssemblies[cacheKey];
+  const assemblies = assembliesRaw ? assembliesRaw.map(cacheKey => files.fileMeta[cacheKey] && files.fileMeta[cacheKey].data ? files.fileMeta[cacheKey].data : undefined) : [];
   return {
-    parts: files.fileAssemblyParts[cacheKey]
+    parts     : files.fileAssemblyParts[cacheKey],
+    assemblies: assemblies
   };
 }
 

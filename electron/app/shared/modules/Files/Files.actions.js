@@ -110,7 +110,7 @@ export function renderFileDownload({projectId, fileId, revisionId, provider}) {
       }
     },
     meta: {
-      cacheKey
+      cacheKey,
     }
   };
 }
@@ -126,7 +126,9 @@ export function getAssemblyParts({projectId, fileId, revisionId, provider}) {
       params : { revisionId },
     }),
     meta: {
-      cacheKey
+      cacheKey,
+      fileId,
+      revisionId
     }
   };
 }

@@ -1,4 +1,6 @@
-import i from 'icepick'
+import i from 'icepick';
+import { uniq } from 'lodash';
+
 const initialState = {
   fileData          : {},
   fileRenders       : {},
@@ -69,10 +71,23 @@ export default function (state = initialState, action) {
     case 'FILES/GET_ASSEMBLY_PARTS_REJECTED' :
       return i.assocIn(state, ['fileAssemblyParts', action.meta.cacheKey, 'loading'], false)
     case 'FILES/GET_ASSEMBLY_PARTS_FULFILLED' :
-      return i.assocIn(state, ['fileAssemblyParts', action.meta.cacheKey], {
+      return i.chain(state)
+      // Create an entry for each part that links it to the assembly
+      .updateIn(['fileAssemblies'], (allParts) => {
+        const newParts = action.payload.data.reduce((accum, current) => {
+          // Assign the assembly cachekey to each part
+          accum[current.fileId+'-'+current.revisionId] = [action.meta.cacheKey];
+          return accum
+        }, {});
+
+        const resolver = (targetVal, sourceVal) => Array.isArray(targetVal) && sourceVal ? uniq(targetVal.concat(sourceVal)) : sourceVal;
+        return i.merge(allParts, newParts, resolver);
+      })
+      .assocIn(['fileAssemblyParts', action.meta.cacheKey], {
         data: action.payload.data,
         loading: false
       })
+      .value();
 
     case 'FILES/GET_RELATED_TASKS_PENDING' :
       return i.assocIn(state, ['relatedTasks', action.meta.fileId, 'loading'], true)
