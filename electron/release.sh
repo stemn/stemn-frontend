@@ -14,6 +14,7 @@ cp -r ../stemn-frontend/electron/build .
 cp -r ../stemn-frontend/electron/package.json .
 echo "---------------------- Pushing releases to repo -----------------------"
 git config --global core.safecrlf false
+git add .
 git commit -am 'release'
 git push
 # xdg-open https://github.com/Stemn/Stemn-Desktop/releases
