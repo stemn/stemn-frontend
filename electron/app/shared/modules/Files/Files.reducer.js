@@ -2,6 +2,7 @@ import i from 'icepick';
 import { uniq } from 'lodash';
 
 const initialState = {
+  hydrated          : false,
   fileData          : {},
   fileRenders       : {},
   fileMeta          : {},
@@ -12,7 +13,7 @@ const initialState = {
   relatedTasks      : {},
 };
 
-export default function (state = initialState, action) {
+function reducer(state, action) {
   switch (action.type) {
     case 'FILES/GET_FILE_PENDING' :
       return i.assocIn(state, ['fileData', action.meta.cacheKey, 'loading'], true)
@@ -128,5 +129,12 @@ export default function (state = initialState, action) {
     default:
         return state;
   }
+}
+
+export default function (state = initialState, action) {
+  if (!state.hydrated) {
+    state = { ...initialState, ...state, hydrated: true };
+  }
+  return reducer(state, action)
 }
 

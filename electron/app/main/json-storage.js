@@ -20,6 +20,10 @@ export const dataToStoreKeyMap = [
   ['projects', 'data'],
   ['projects', 'userProjects'],
   ['tasks','boards', '*', 'layout'],
+  ['files', 'fileAssemblyParts'],     // All assembly-part mappings
+  ['files', 'fileAssemblies'],        // All part-assembly mappings
+  ['files', 'fileMeta'],              // All file meta
+  ['fileList'],                       // All folder list queries
 ];
 
 export const getFilteredStoreData = (data) => {
