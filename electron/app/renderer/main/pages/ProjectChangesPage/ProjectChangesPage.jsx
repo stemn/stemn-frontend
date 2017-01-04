@@ -73,7 +73,6 @@ export const Component = React.createClass({
     if(has(nextProps, 'project.data.remote.connected') && nextProps.project.data.remote.connected){
       // And the project has changed
       if(!prevProps || nextProps.project.data._id !== prevProps.project.data._id){
-        nextProps.changesActions.fetchChanges({projectId: nextProps.project.data._id});
         nextProps.syncTimelineActions.fetchTimeline({projectId: nextProps.project.data._id});
       }
     }
