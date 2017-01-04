@@ -43,22 +43,39 @@ export const AssemblyParts = React.createClass({
   componentDidMount() { this.onMount(this.props) },
   componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
   render() {
-
     const { parts, assemblies, clickFn } = this.props;
-    if(parts && parts.data){
+
+    const childParts = () => {
       const partsOrdered = orderBy(parts.data, 'name');
       return (
         <div>
           <SectionTitle style={{margin: '30px 0 15px'}}>Assembly Parts</SectionTitle>
-          {partsOrdered.map(file => <Row file={file} clickFn={clickFn} />)}
+          { partsOrdered.map(file => <Row file={file} clickFn={clickFn} />) }
         </div>
       )
     }
-    else if(assemblies && assemblies.length > 0){
+
+    const parentAssemblies = () => {
       return (
         <div>
           <SectionTitle style={{margin: '30px 0 15px'}}>Parent Assemblies</SectionTitle>
-          {assemblies.map(file => <Row file={file} clickFn={clickFn} />)}
+          { assemblies.map(file => <Row file={file} clickFn={clickFn} />) }
+        </div>
+      )
+    }
+
+    const hasChildParts       = parts && parts.data;
+    const hasParentAssemblies = assemblies && assemblies.length > 0;
+
+    if(hasChildParts || hasParentAssemblies){
+      return (
+        <div>
+          { hasChildParts
+          ? childParts()
+          : null }
+          { hasParentAssemblies
+          ? parentAssemblies()
+          : null }
         </div>
       )
     }

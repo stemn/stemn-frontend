@@ -28,6 +28,6 @@ export default React.createClass({
     this.viewer.deregister();
   },
   render() {
-    return <div className={classes.preview + ' flex rel-box'} ref="cadCanvas"></div>
+    return <div className={classes.preview + ' flex rel-box'} ref="cadCanvas"><div className={classes.scrollOverlay}></div></div>
   }
 });

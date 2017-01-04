@@ -13,3 +13,12 @@
 .preview :global(.notouch .adsk-toolbar) {
     opacity: 1;
 }
+
+.scrollOverlay{
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 30px;
+}
