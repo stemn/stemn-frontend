@@ -20,6 +20,10 @@ export const create = function createWindow({ uri = '/' } = {}) {
   ////////////////////////////////////////////
 
   function init () {
+
+    // Create a new stringified state global - this will be parsed in the renderer
+    global.stateStringified = JSON.stringify(global.state);
+
     browserWindow = new BrowserWindow({
       show: false,
       width: primarySize.width * sizeRatio,

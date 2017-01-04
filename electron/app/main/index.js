@@ -83,9 +83,6 @@ async function start() {
   const args = getArgs(process.argv);
   log.info('Startup mode flags:', args);
 
-  // Clear Session State from the JSON store
-  await jsonStorage.set('sessionState', {});
-
   // Fetch the permanant portion of the state
   global.state = await jsonStorage.get('state').catch(error => {
     log.error('Invalid state store:', error);
@@ -101,7 +98,6 @@ async function start() {
     global.state = store.getState();
     const dataToStore = getFilteredStoreData(global.state);
     await jsonStorage.set('state', dataToStore);
-    await jsonStorage.set('sessionState',  global.state);
   });
 
   // Initialise the api server

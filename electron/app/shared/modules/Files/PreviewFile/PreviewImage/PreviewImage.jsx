@@ -60,15 +60,13 @@ export default React.createClass({
     // If the previewId changes, download a new file
     if(!prevProps || nextProps.previewId !== prevProps.previewId){
       // If we don't already have the file, get it
-      if(!nextProps.fileData){
-        nextProps.downloadFn({
-          projectId    : nextProps.fileMeta.project._id,
-          fileId       : nextProps.fileMeta.fileId,
-          revisionId   : nextProps.fileMeta.revisionId,
-          provider     : nextProps.fileMeta.provider,
-          responseType : 'path'
-        })
-      }
+      nextProps.downloadFn({
+        projectId    : nextProps.fileMeta.project._id,
+        fileId       : nextProps.fileMeta.fileId,
+        revisionId   : nextProps.fileMeta.revisionId,
+        provider     : nextProps.fileMeta.provider,
+        responseType : 'path'
+      })
     }
   },
   onLoad() {

@@ -96,7 +96,6 @@ export const get = ({key, url, params, name, responseType, extract, onProgressAc
     }
     else{
       return fsPromise.readFile(path.join(folderPath, fileCache[key].name)).then(response => {
-        console.log(response);
         if(responseType == 'json'){
           // Return string
           return { data: response.toString() }

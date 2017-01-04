@@ -6,10 +6,8 @@ import { Router, hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import configureStore from '../../shared/store/configureStore.renderer.js';
 import getRoutes from './routes';
-import pify from 'pify';
-import electronJsonStorage from 'electron-json-storage';
-const jsonStorage = pify(electronJsonStorage);
 import standardSetup from '../shared/standardSetup.js';
+import { remote } from 'electron';
 
 const rootEl = document.getElementById('root');
 const loadingEl = document.getElementById('loading');
@@ -24,8 +22,8 @@ const AppBase = React.createClass({
   }
 });
 
-async function start() {
-  const initialState = await jsonStorage.get('sessionState');
+function start() {
+  const initialState = JSON.parse(remote.getGlobal('stateStringified'));
   const store        = configureStore(initialState);
   const history      = syncHistoryWithStore(hashHistory, store);
   standardSetup(store, 'main');

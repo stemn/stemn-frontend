@@ -19,16 +19,14 @@ const PDF = React.createClass({
   onMount(nextProps, prevProps) {
     // If the previewId changes, download a new file
     if(!prevProps || nextProps.previewId !== prevProps.previewId){
-      // If we don't already have the file, get it
-      if(!nextProps.fileData){
-        nextProps.downloadFn({
-          projectId    : nextProps.fileMeta.project._id,
-          provider     : nextProps.fileMeta.provider,
-          fileId       : nextProps.fileMeta.fileId,
-          revisionId   : nextProps.fileMeta.revisionId,
-          responseType : 'path'
-        })
-      }
+      // Get the file data
+      nextProps.downloadFn({
+        projectId    : nextProps.fileMeta.project._id,
+        provider     : nextProps.fileMeta.provider,
+        fileId       : nextProps.fileMeta.fileId,
+        revisionId   : nextProps.fileMeta.revisionId,
+        responseType : 'path'
+      })
       if(nextProps.fileData && nextProps.fileData.data){
         PDFJS.getDocument(nextProps.fileData.data).then((pdf) => {
           this.setState({ pdf })
