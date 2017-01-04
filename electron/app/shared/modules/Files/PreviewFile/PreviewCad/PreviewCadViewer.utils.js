@@ -26,6 +26,7 @@ function register(viewerEl, linkKey){
     if(linkedInstances.length >= 1 && instance.viewerState){
       // Get the new state
       const newState = instance.getState(filter);
+      console.log(instance.getState());
       // Apply the new state to the linked instances
       linkedInstances.forEach(item => {
         const lastStateString = JSON.stringify(lastState);

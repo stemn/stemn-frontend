@@ -42,7 +42,7 @@ export const ProjectFeedPageCommit = React.createClass({
         </div>
         <div className="flex scroll-box">
           {item.data.items ?
-            groupedRevisions.map(file => <FileCompare project={project} file={file} type="collapse"/>)
+            groupedRevisions.map(file => <FileCompare project={project} file={file} type="collapse" key={file._id}/>)
           : null}
         </div>
       </div>
