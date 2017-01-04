@@ -37,7 +37,6 @@ export function toggleAll({projectId, value}) {
 
 export function fetchChanges({projectId}) {
   return (dispatch) => {
-    dispatch(pullChanges({projectId}))
     dispatch({
       type:'CHANGES/FETCH_CHANGES',
       http: true,
