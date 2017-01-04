@@ -12,15 +12,16 @@ const compiler = webpack(config);
 
 const PORT = 3001;
 
+//compiler.apply(new DashboardPlugin({port: PORT}));
 
 compiler.plugin('compile', () => {
-  console.log('------------- Begin Webpack Build -------------');
+  console.log('Begin Webpack Build...');
 });
 
 compiler.plugin('done', (stats) => {
-  console.log('--------------- Build Complete ----------------');
+  console.log('Build Complete.');
   fs.writeFileSync('./stats.json', JSON.stringify(stats.toJson()));
-  console.log('------------- stats.json created --------------');
+  console.log('Stats.json created');
 });
 
 app.use(webpackDevMiddleware(compiler, {
@@ -30,14 +31,11 @@ app.use(webpackDevMiddleware(compiler, {
   }
 }));
 
-
-
 app.use(webpackHotMiddleware(compiler));
 
 app.listen(PORT, 'localhost', err => {
   if (err) {
     return;
   }
-
-  console.log(`Listening at http://localhost:${PORT}`);
+  console.log(`Listening on http://localhost:${PORT}..`);
 });

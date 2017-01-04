@@ -6,9 +6,11 @@
 }
 .files{
   border: 1px solid border1;
+  background: white;
 }
 .readme{
   border: 1px solid border1;
   padding: 15px 20px;
   min-height: 200px;
+  background: white;
 }

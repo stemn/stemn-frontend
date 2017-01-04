@@ -39,7 +39,7 @@ export default class extends React.Component{
 
     return (
       <div className="layout-row layout-align-start-center">
-        <UserAvatar picture={item.picture} size="40px"/>
+        <UserAvatar picture={item.picture} size={40}/>
         <div className="flex" style={{marginLeft: '15px'}}>
           <div className="text-bold" style={{marginBottom: '5px'}}>{item.name}</div>
           <div className="text-description-1">{permissions[item.permissions.role].description}</div>

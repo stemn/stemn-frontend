@@ -68,7 +68,7 @@ export default {
   plugins: [
     ...happyConfig.plugins,
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/), // http://stackoverflow.com/questions/25384360/how-to-prevent-moment-js-from-loading-locales-with-webpack
-    new webpack.IgnorePlugin(/vertx/),                                 // Ignore vertx so ES6 promise works: https://github.com/stefanpenner/es6-promise/issues/100
+    new webpack.IgnorePlugin(/vertx/)                                  // Ignore vertx so ES6 promise works: https://github.com/stefanpenner/es6-promise/issues/100
   ],
   externals: [{}],
 };

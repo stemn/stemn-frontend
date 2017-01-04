@@ -73,8 +73,10 @@ export const Component = React.createClass({
 
     const filePreview1 = () => {
       return (
-        <div className={classes.preview1 + ' flex layout-column'}>
-          {file2 ? <PreviewFile project={project} file={file2} header={header}/> : ''}
+        <div className={classes.preview1 + ' flex layout-column'} style={preview2Style[mode]}>
+          <div className="layout-column flex" style={overylayStyles}>
+            {file2 ? <PreviewFile project={project} file={file2} header={header}/> : ''}
+          </div>
         </div>
       )
     }
@@ -82,10 +84,8 @@ export const Component = React.createClass({
     const filePreview2 = () => {
       if(file1){
         return (
-          <div className={classes.preview2 + ' flex layout-column'} style={preview2Style[mode]}>
-            <div className="layout-column flex" style={overylayStyles}>
-              {file1 ? <PreviewFile project={project} file={file1} header={header}/> : ''}
-            </div>
+          <div className={classes.preview2 + ' flex layout-column'}>
+            {file1 ? <PreviewFile project={project} file={file1} header={header}/> : ''}
           </div>
         )
       }

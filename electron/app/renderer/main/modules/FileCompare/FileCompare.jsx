@@ -10,7 +10,7 @@ import FileCompareInner   from 'app/renderer/main/modules/FileCompare/FileCompar
 import Timeline           from 'app/renderer/main/modules/Timeline/Timeline.jsx';
 import { orderBy, has }   from 'lodash';
 
-export default React.createClass({
+export const FileCompare = React.createClass({
   // Mounting
   onMount(nextProps, prevProps){
     if(!prevProps || nextProps.file != prevProps.file){
@@ -121,3 +121,5 @@ export default React.createClass({
     return type == 'collapse' ? collapseTemplate() : standardTemplate()
   }
 })
+
+export default FileCompare

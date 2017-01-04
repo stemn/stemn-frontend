@@ -38,7 +38,7 @@ export default React.createClass({
         <TaskTimelineWrapper style={{marginLeft: '5px'}}>
           <div className="layout-row layout-align-start-center flex">
             <div className={classes.avatar}>
-              <UserAvatar picture={item.user.picture} size="25px" shape="square"/>
+              <UserAvatar picture={item.user.picture} size={25} shape="square"/>
             </div>
             <div>
               <b>{item.user.name}&nbsp;</b><span className="text-grey-3" style={{lineHeight: '1.5em'}}>{getTextEventData(item)} - {moment(item.timestamp).fromNow()}</span>
