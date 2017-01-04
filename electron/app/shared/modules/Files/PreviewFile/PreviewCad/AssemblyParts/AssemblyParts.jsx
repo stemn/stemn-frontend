@@ -50,7 +50,7 @@ export const AssemblyParts = React.createClass({
       return (
         <div>
           <SectionTitle style={{margin: '30px 0 15px'}}>Assembly Parts</SectionTitle>
-          { partsOrdered.map(file => <Row file={file} clickFn={clickFn} />) }
+          { partsOrdered.map(file => <Row file={file} clickFn={clickFn} key={file._id}/>) }
         </div>
       )
     }
@@ -59,7 +59,7 @@ export const AssemblyParts = React.createClass({
       return (
         <div>
           <SectionTitle style={{margin: '30px 0 15px'}}>Parent Assemblies</SectionTitle>
-          { assemblies.map(file => <Row file={file} clickFn={clickFn} />) }
+          { assemblies.map(file => <Row file={file} clickFn={clickFn} key={file._id}/>) }
         </div>
       )
     }

@@ -13,16 +13,16 @@
   border-top: 1px solid border1;
 }
 
-.onion .preview2{
+.onion .preview1{
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 1;
+  z-index: 2;
 }
 
-.slider .preview2{
+.slider .preview1{
   position: absolute;
   top: 0;
   left: 0;
@@ -30,7 +30,7 @@
   width: 50%;
   overflow: hidden;
   border-right: 1px dotted primary;
-  z-index: 1;
+  z-index: 2;
 }
 
 .single .preview1{

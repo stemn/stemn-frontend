@@ -1,8 +1,7 @@
 import getUuid from 'app/shared/helpers/getUuid.js';
 import { forEach } from 'lodash';
 
-let oldState       = {viewport: { eye: [1]}};
-const filter       = {viewport: true};
+const filter       = { viewport: true };
 
 const library = {
   activeInstances : [],
@@ -13,16 +12,14 @@ export default library
 
 ////////////////////////////////////////////
 
-const onMoveTriggers = 'mousemove vmousemove mousewheel click mousedown DOMMouseScroll scroll';
-
 function register(viewerEl, linkKey){
   // linkKey is used to link viewers of the same file so they move at the same time.
-
   const id = getUuid();
   const instance = new window.Autodesk.Viewing.Private.GuiViewer3D(viewerEl);
 
   // Create the onMove function that will be used to sync instances
-  const onMove = () => {
+  let lastState = {};
+  const onMove = (event) => {
     // Get the instances linked to this one (not including this one)
     const linkedInstances = library.activeInstances.filter(item => item.linkKey == linkKey && item.id != id);
     // If we have 1 or more linked instance
@@ -30,7 +27,15 @@ function register(viewerEl, linkKey){
       // Get the new state
       const newState = instance.getState(filter);
       // Apply the new state to the linked instances
-      linkedInstances.forEach(item => item.restoreState(newState, filter, true))
+      linkedInstances.forEach(item => {
+        const lastStateString = JSON.stringify(lastState);
+        const newStateString  = JSON.stringify(newState);
+        const stateHasChanges = !(newStateString === lastStateString);
+        if(stateHasChanges){
+          item.restoreState(newState, filter, true)
+        }
+      })
+      lastState = newState;
     }
   }
 
@@ -39,7 +44,7 @@ function register(viewerEl, linkKey){
     const instanceIndex = library.activeInstances.findIndex(item => item.id == instance.id);
     library.activeInstances.splice(instanceIndex, 1);
     // Remove the event listeners
-    removeListenerMulti(viewerEl, onMoveTriggers, onMove);
+    instance.removeEventListener(window.Autodesk.Viewing.CAMERA_CHANGE_EVENT, onMove);
     // Call the Autodesk finish function
     instance.finish();
   }
@@ -50,17 +55,10 @@ function register(viewerEl, linkKey){
   instance.deregister = deregister;
 
   // Add the onMove listener
-  addListenerMulti(viewerEl, onMoveTriggers, onMove);
+  instance.addEventListener(window.Autodesk.Viewing.CAMERA_CHANGE_EVENT, onMove);
 
   // Push this instance onto the activeInstances array
   library.activeInstances.push(instance);
 
   return instance;
-}
-
-function addListenerMulti(el, events, fn) {
-  events.split(' ').forEach(event => el.addEventListener(event, fn));
-}
-function removeListenerMulti(el, events, fn) {
-  events.split(' ').forEach(event => el.removeEventListener(event, fn));
 }
