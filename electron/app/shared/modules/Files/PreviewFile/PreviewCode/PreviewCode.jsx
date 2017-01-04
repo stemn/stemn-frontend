@@ -2,7 +2,7 @@ import React from 'react';
 
 import codemirror from 'codemirror'
 import 'codemirror/mode/meta.js'
-const requireCodemirrorMode = require.context("codemirror/mode/", true);
+const requireCodemirrorMode = require.context("codemirror/mode/", true, /\.js$/);
 import LoadingOverlay     from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import EditorDisplay from 'app/renderer/main/modules/Editor/EditorDisplay.jsx';
 import file    from 'app/renderer/assets/images/pure-vectors/file.svg';

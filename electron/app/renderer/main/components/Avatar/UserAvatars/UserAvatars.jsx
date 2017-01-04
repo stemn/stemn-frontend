@@ -30,7 +30,7 @@ export default React.createClass({
               style={{margin: '0 2px'}}
               key={user._id}
               picture={user.picture}
-              size="25px"
+              size={25}
             />
           )}
           { usersNotShown.length > 0

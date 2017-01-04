@@ -11,9 +11,9 @@ export default React.createClass({
   render() {
     const { style, shape, size, className, picture, title, name } = this.props;
     const styles = {
-      borderRadius: shape == 'square' ? '3px' : '50%',
-      width: size || '30px',
-      height: size || '30px'
+      borderRadius : shape == 'square' ? '3px' : '50%',
+      width        : size+'px' || '30px',
+      height       : size+'px' || '30px'
     };
     const actualStyles = Object.assign({}, style, styles);
 
