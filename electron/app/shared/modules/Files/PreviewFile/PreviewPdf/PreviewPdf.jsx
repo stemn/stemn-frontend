@@ -26,12 +26,11 @@ const PDF = React.createClass({
           provider     : nextProps.fileMeta.provider,
           fileId       : nextProps.fileMeta.fileId,
           revisionId   : nextProps.fileMeta.revisionId,
-          responseType : 'arraybuffer'
+          responseType : 'path'
         })
       }
       if(nextProps.fileData && nextProps.fileData.data){
-        const arrayBuffer = nextProps.fileData.data;
-        PDFJS.getDocument(arrayBuffer).then((pdf) => {
+        PDFJS.getDocument(nextProps.fileData.data).then((pdf) => {
           this.setState({ pdf })
         })
       }
@@ -75,40 +74,6 @@ const PDF = React.createClass({
   }
 });
 
-
-//function str2ab(str) {
-//  var buf = new ArrayBuffer(str.length*2); // 2 bytes for each char
-//  var bufView = new Uint16Array(buf);
-//  for (var i=0, strLen=str.length; i<strLen; i++) {
-//    bufView[i] = str.charCodeAt(i);
-//  }
-//  return buf;
-//}
-
-function str2ab(str) {
-  var raw = str;
-  var rawLength = raw.length;
-  var array = new Uint8Array(new ArrayBuffer(rawLength));
-
-  for(var i = 0; i < rawLength; i++) {
-    array[i] = raw.charCodeAt(i);
-  }
-  return array;
-}
-
-var BASE64_MARKER = ';base64,';
-function convertDataURIToBinary(dataURI) {
-  var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
-  var base64 = dataURI.substring(base64Index);
-  var raw = window.atob(base64);
-  var rawLength = raw.length;
-  var array = new Uint8Array(new ArrayBuffer(rawLength));
-
-  for(var i = 0; i < rawLength; i++) {
-    array[i] = raw.charCodeAt(i);
-  }
-  return array;
-}
 
 PDF.propTypes = propTypesObject;
 

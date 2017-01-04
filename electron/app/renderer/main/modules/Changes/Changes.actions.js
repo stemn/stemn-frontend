@@ -54,16 +54,16 @@ export function fetchChanges({projectId}) {
   }
 }
 
-export function pullChanges({projectId}) {
-  return {
-    type:'CHANGES/PULL_REMOTE_CHANGES',
-    http: true,
-    payload: {
-      method: 'GET',
-      url: `/api/v1/sync/pullRemoteChanges/${projectId}`,
-    }
-  }
-}
+//export function pullChanges({projectId}) {
+//  return {
+//    type:'CHANGES/PULL_REMOTE_CHANGES',
+//    http: true,
+//    payload: {
+//      method: 'GET',
+//      url: `/api/v1/sync/pullRemoteChanges/${projectId}`,
+//    }
+//  }
+//}
 
 export function mentionTasksModal({projectId, mentions}) {
   return (dispatch) => {
