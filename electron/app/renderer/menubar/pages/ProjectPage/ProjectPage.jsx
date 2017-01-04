@@ -30,6 +30,10 @@ export const Component = React.createClass({
     if(!prevProps || nextProps.projectId != prevProps.projectId){
       // Set the project to active
       nextProps.projectsActions.setActiveProject({projectId: nextProps.projectId});
+      // If project is connected
+      if(has(nextProps, 'project.data.remote.connected')){
+        nextProps.changesActions.fetchChanges({projectId: nextProps.projectId})
+      }
     }
   },
   componentWillMount() { this.onMount(this.props) },
