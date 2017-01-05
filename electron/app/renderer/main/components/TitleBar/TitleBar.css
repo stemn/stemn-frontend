@@ -1,4 +1,4 @@
-@value height-header, width-header-buttons from "app/renderer/assets/css/themes/standard.css";
+@value height-header, width-header-buttons from "theme";
 
 .buttons{
   height: height-header;

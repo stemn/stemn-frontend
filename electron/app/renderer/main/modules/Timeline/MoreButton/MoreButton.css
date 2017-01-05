@@ -1,4 +1,4 @@
-@value timeline-main from "app/renderer/assets/css/themes/standard.css";
+@value timeline-main from "theme";
 
 .moreButton{
   width: 18px;

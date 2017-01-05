@@ -1,4 +1,4 @@
-@value primary, border1 from "app/renderer/assets/css/themes/standard.css";
+@value primary, border1 from "theme";
 
 .rangeSlider{
   border-top: 1px solid border1;

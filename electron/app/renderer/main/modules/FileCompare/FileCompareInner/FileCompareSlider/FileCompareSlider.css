@@ -1,4 +1,4 @@
-@value primary from "app/renderer/assets/css/themes/standard.css";
+@value primary from "theme";
 
 .slider{
   position: absolute;

@@ -1,4 +1,4 @@
-@value primary, border1, bg1, height-header, width-header-buttons from "app/renderer/assets/css/themes/standard.css";
+@value primary, border1, bg1, height-header, width-header-buttons from "theme";
 
 .sidebar{
   border-left: 1px solid border1;

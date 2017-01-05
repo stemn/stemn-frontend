@@ -64,6 +64,9 @@ export default {
     ],
     extensions: ['', '.js', '.jsx'],
     packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main'],
+    alias                : {
+      'theme'            : __dirname + "/app/theme.css"
+    }
   },
   plugins: [
     ...happyConfig.plugins,

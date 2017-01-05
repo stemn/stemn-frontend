@@ -86,7 +86,7 @@ module.exports = function makeWebpackConfig () {
   
   config.resolve = {
     root                 : [ path.resolve('..'), path.resolve('./src') ],
-    modlesDirectories    : ["node_modules", "bower_components"],
+    modulesDirectories    : ["node_modules", "bower_components"],
     alias                : {
       'ui-router-extras' : __dirname + "/bower_components/ui-router-extras/release/ct-ui-router-extras.js",
       'ngGeolocation'    : __dirname + "/bower_components/ngGeolocation/ngGeolocation.js",

@@ -1,4 +1,4 @@
-@value bg1, border1 from "app/renderer/assets/css/themes/standard.css";
+@value bg1, border1 from "theme";
 
 .header{
   padding: 30px;

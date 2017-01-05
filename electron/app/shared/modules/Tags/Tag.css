@@ -1,4 +1,4 @@
-@value border2, border1, bg1 from "app/renderer/assets/css/themes/standard.css";
+@value border2, border1, bg1 from "theme";
 
 .tag{
   border: 1px solid border1;

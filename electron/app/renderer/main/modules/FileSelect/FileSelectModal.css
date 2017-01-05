@@ -1,4 +1,4 @@
-@value border1, bg1 from "app/renderer/assets/css/themes/standard.css";
+@value border1, bg1 from "theme";
 
 .breadcrumbs{
   border-bottom: 1px solid border1;

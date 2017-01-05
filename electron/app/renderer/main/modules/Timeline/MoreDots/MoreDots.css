@@ -1,4 +1,4 @@
-@value timeline-bg from "app/renderer/assets/css/themes/standard.css";
+@value timeline-bg from "theme";
 
 .moreDots{
   position: absolute;

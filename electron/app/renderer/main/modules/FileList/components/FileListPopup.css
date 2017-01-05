@@ -1,4 +1,4 @@
-@value primary, primary-2, border1 from "app/renderer/assets/css/themes/standard.css";
+@value primary, primary-2, border1 from "theme";
 
 .file{
   padding: 8px;
