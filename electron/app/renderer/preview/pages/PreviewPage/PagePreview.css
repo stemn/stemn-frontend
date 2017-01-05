@@ -9,12 +9,7 @@
   border-top: 1px solid border1;
   padding: 30px 15px 10px;
 }
-.header{
-  padding: 10px 15px;
-  border-bottom: 1px solid border1;
-  height: height-header;
-  padding-right: width-header-buttons;
-}
+
 .divider{
   height: 20px;
   margin: 0 15px 0 10px;
