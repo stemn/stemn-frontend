@@ -18,14 +18,14 @@
       }
     },
     "server": {
-      "command": "webpack-dev-server --history-api-fallback --inline --progress",
+      "command": "webpack-dev-server --history-api-fallback --inline --progress --display-error-details",
       "env": {
         "ENV_TYPE": "development",
         "API_SERVER": "http://localhost:3000"
       }
     },
     "server:test": {
-      "command": "webpack-dev-server --history-api-fallback --inline --progress",
+      "command": "webpack-dev-server --history-api-fallback --inline --progress --display-error-details",
       "env": {
         "ENV_TYPE": "development",
         "API_SERVER": "http://35.162.145.41"
@@ -56,6 +56,7 @@
     "angular-ui-router": "^0.2.15",
     "animate.css": "^3.5.2",
     "axios": "^0.15.3",
+    "classnames": "^2.2.5",
     "happypack": "^3.0.1",
     "lodash": "^4.17.2",
     "ng-infinite-scroll": "^1.2.1",

@@ -50,15 +50,15 @@ module.exports = function makeWebpackConfig () {
   config.module = {
     preLoaders  : [],
     loaders     : [{
-      test      : /\.js$/,
+      test      : /(\.js|\.jsx)$/,
       loaders   : [ 'happypack/loader' ],
       exclude   : /node_modules/,
     }, {
       test      : /\.css$/,
-      loader    : isTest ? 'null' : ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap!postcss-loader')
+      loaders   : [ 'style-loader', 'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]-[local]-[emoji:6]']
     }, {
       test      : /\.scss$/,
-      loaders   : ["style-loader", "css-loader", "sass-loader"]
+      loaders   : ['style-loader', 'css-loader', 'sass-loader']
     }, {
       test      : /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
       loader    : 'file'
@@ -85,11 +85,12 @@ module.exports = function makeWebpackConfig () {
   ];
   
   config.resolve = {
-    root                 : [path.resolve('./src')],
+    root                 : [ path.resolve('..'), path.resolve('./src') ],
     modlesDirectories    : ["node_modules", "bower_components"],
     alias                : {
-      "ui-router-extras" : __dirname + "/bower_components/ui-router-extras/release/ct-ui-router-extras.js",
-      "ngGeolocation"    : __dirname + "/bower_components/ngGeolocation/ngGeolocation.js"
+      'ui-router-extras' : __dirname + "/bower_components/ui-router-extras/release/ct-ui-router-extras.js",
+      'ngGeolocation'    : __dirname + "/bower_components/ngGeolocation/ngGeolocation.js",
+      'theme'            : __dirname + "/src/theme.css"
     }
   };
   
