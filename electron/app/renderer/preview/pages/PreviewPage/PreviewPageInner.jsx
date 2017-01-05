@@ -36,6 +36,7 @@ import SimpleTable        from 'app/shared/modules/Tables/SimpleTable/SimpleTabl
 import SectionTitle       from 'app/shared/modules/Titles/SectionTitle/SectionTitle.jsx';
 import AssemblyParts      from 'app/shared/modules/Files/PreviewFile/PreviewCad/AssemblyParts/AssemblyParts.jsx'
 import Tag                from 'app/shared/modules/Tags/Tag.jsx';
+import Header             from 'app/renderer/main/modules/Header/Header.jsx'
 
 // Styles
 import classes from './PagePreview.css';
@@ -149,8 +150,9 @@ export const Component = React.createClass({
     
     return (
       <div className="layout-column flex">
-        <div className={classes.header + ' layout-row layout-align-start-center'}>
-          <div className="flex">{hasFileMeta ? <FileBreadCrumbs meta={fileMeta.data} clickFn={this.clickCrumb} popup={true}/> : ''}</div>
+        <Header>
+          <div className="no-drag">{hasFileMeta ? <FileBreadCrumbs meta={fileMeta.data} clickFn={this.clickCrumb} popup={true}/> : ''}</div>
+          <div className="flex"></div>
           <FileCompareMenu
             file1={file1}
             file2={file2}
@@ -158,8 +160,8 @@ export const Component = React.createClass({
             mode={mode}
             changeMode={this.changeMode}
           />
-          <div className={classes.divider}></div>
-        </div>
+          <div className="divider"></div>
+        </Header>
         <div className="layout-row flex">
           <div className="layout-column flex">
             { hasFileMeta

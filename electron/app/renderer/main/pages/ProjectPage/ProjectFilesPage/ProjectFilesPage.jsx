@@ -5,8 +5,7 @@ import { connect } from 'react-redux';
 // Container Actions
 import * as ProjectsActions        from 'app/shared/actions/projects.js';
 import * as ElectronWindowsActions from 'app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
-
-import { push } from 'react-router-redux'
+import ProjectFilesPageRoute from './ProjectFilesPage.routeActions.js';
 
 // Component Core
 import React from 'react';
@@ -36,8 +35,9 @@ export const Component = React.createClass({
         }
       }))
     }else{
-      dispatch(push({
-        pathname   : `project/${project.data._id}/files/${file.fileId || ''}`,
+      dispatch(ProjectFilesPageRoute({
+        projectId: project.data._id,
+        fileId: file.fileId
       }))
     }
   },

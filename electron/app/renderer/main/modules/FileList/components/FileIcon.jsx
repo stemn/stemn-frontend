@@ -35,6 +35,7 @@ export default React.createClass({
       src = fileTypeIcons(`./other.svg`);
     }
     
+
     const imgStyle = {
       width       : this.props.size + 'px',
       height      : this.props.size + 'px',
@@ -42,14 +43,16 @@ export default React.createClass({
     const textStyle = {
       position      : 'absolute',
       left          : '50%',
-      bottom        : '21%',
+      bottom        : fileType.length < 4 ? '21%' : '24%',
       transform     : 'translateX(-50%)',
       color         : 'white',
-      fontSize      : this.props.size * 0.24,
+      fontSize      : this.props.size * (fileType.length < 4 ? 0.24 : 0.14),
       fontWeight    : 'bold',
       textTransform : 'uppercase',
       lineHeight    : '1em'
     }
+
+
     return (
       <div className="rel-box" style={{marginRight : '10px'}}>
         <img style={imgStyle} src={src} />
