@@ -75,7 +75,7 @@ export function renderFile({projectId, fileId, revisionId, provider}) {
         key          : cacheKey,
         renderUrl    : projectId
                        ? `/api/v1/sync/render/${projectId}/${fileId}`
-                       : `/api/v1/remote/render/${provider}/${fileId}`,      
+                       : `/api/v1/remote/render/${provider}/${fileId}`,
         url          : projectId
                        ? `/api/v1/sync/downloadRender/${projectId}/${fileId}`
                        : `/api/v1/remote/downloadRender/${provider}/${fileId}`,
@@ -237,7 +237,7 @@ export function downloadProgress(cacheKey, progress) {
 
 export function websocketJoinFile({fileId}) {
   return (dispatch, getState) => {
-    const alreadyConnected = getState().websocketRooms.includes(fileId);
+    const alreadyConnected = getState().files.websocketRooms.includes(fileId);
     if(!alreadyConnected){
       dispatch({
         type: 'FILES/WEBSOCKET_JOIN_FILE',
@@ -256,7 +256,7 @@ export function websocketJoinFile({fileId}) {
 
 export function websocketLeaveFile({fileId}) {
   return (dispatch, getState) => {
-    const alreadyConnected = getState().websocketRooms.includes(fileId);
+    const alreadyConnected = getState().files.websocketRooms.includes(fileId);
     if(alreadyConnected){
       dispatch({
         type: 'FILES/WEBSOCKET_LEAVE_FILE',

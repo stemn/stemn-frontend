@@ -1,8 +1,9 @@
 import * as ChangesActions        from '../../../renderer/main/modules/Changes/Changes.actions.js';
 import * as TasksActions          from '../../../renderer/main/modules/Tasks/Tasks.actions.js';
 import * as ProjectActions        from '../../../shared/actions/projects.js';
-import * as SyncTimelineActions   from '../../..//shared/modules/SyncTimeline/SyncTimeline.actions.js';
+import * as SyncTimelineActions   from '../../../shared/modules/SyncTimeline/SyncTimeline.actions.js';
 import * as NotificationsActions  from '../../../shared/modules/Notifications/Notifications.actions.js';
+import * as FileListActions       from '../../../mail/modules/FileList/FileList.actions.js';
 import { renderFileDownload }     from '../../../shared/modules/Files/Files.actions.js';
 
 export default (store, action) => {
@@ -24,8 +25,11 @@ export default (store, action) => {
 
   // Actions that we DON'T process if user is the actioner
   switch (action.type) {
-    case 'CHANGES/FETCH_CHANGES':
-      return ChangesActions.fetchChanges({ projectId : action.payload.projectId });
+    case 'FILES/CHANGED_FILES':
+      return (dispatch) => {
+          dispatch(ChangesActions.fetchChanges({ projectId : action.payload.projectId }));
+        //   dispatch(FileListActions.fetchFilesGooba({ projectId : action.payload.projectId }));
+      }
     case 'BOARD/FETCH_BOARDS':
       return (dispatch) => {
         action.payload.boards.map((boardId) => dispatch(TasksActions.getBoard({ boardId })));
