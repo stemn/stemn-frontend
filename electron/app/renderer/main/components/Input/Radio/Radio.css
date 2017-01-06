@@ -1,4 +1,4 @@
-@value primary, secondary, border1 from "app/renderer/assets/css/themes/standard.css";
+@value primary, secondary, border1 from "theme";
 
 .radio{
   padding: 5px 0;

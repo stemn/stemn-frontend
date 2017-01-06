@@ -3,12 +3,12 @@ import markdownIt           from 'markdown-it';
 import emoji                from 'markdown-it-emoji';
 import mdMathjax            from 'markdown-it-mathjax';
 import classes              from './EditorDisplay.css';
-import { validateMention }  from 'app/renderer/main/modules/Mentions/Mentions.utils.js';
+import { validateMention }  from 'electron/app/renderer/main/modules/Mentions/Mentions.utils.js';
 import htmlToReact          from 'html-to-react';
 import hljs                 from 'highlight.js';
 import classNames           from 'classnames';
 import { connect }          from 'react-redux';
-import * as ModalActions    from 'app/renderer/main/modules/Modal/Modal.actions.js';
+import * as ModalActions    from 'electron/app/renderer/main/modules/Modal/Modal.actions.js';
 
 const TaskMention = React.createClass({
   showModal(){

@@ -1,5 +1,5 @@
 import React          from 'react';
-import Radio          from 'app/renderer/main/components/Input/Radio/Radio.jsx'
+import Radio          from 'electron/app/renderer/main/components/Input/Radio/Radio.jsx'
 import MdPublic       from 'react-icons/md/public';
 import MdLockOutline  from 'react-icons/md/lock-outline';
 

@@ -1,7 +1,7 @@
 // Component Core
 import React from 'react';
 
-import Button from 'app/renderer/main/components/Buttons/Button/Button'
+import Button from 'electron/app/renderer/main/components/Buttons/Button/Button'
 
 // Styles
 import classNames from 'classnames';

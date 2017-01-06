@@ -1,4 +1,4 @@
-@value height-header, width-header-buttons from "app/renderer/assets/css/themes/standard.css";
+@value height-header, width-header-buttons from "theme";
 
 .buttons{
   height: height-header;
@@ -39,7 +39,7 @@
 }
 
 .light .button{
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.8);
 }
 .light .button:hover{
   color: white;

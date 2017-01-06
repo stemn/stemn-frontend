@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import ModalContainer from 'app/renderer/main/modules/Modal/ModalContainer.jsx'
-import TitleBar from 'app/renderer/main/components/TitleBar/TitleBar';
+import ModalContainer from 'electron/app/renderer/main/modules/Modal/ModalContainer.jsx'
+import TitleBar from 'electron/app/renderer/main/components/TitleBar/TitleBar';
 
 function App({ children }) {
   return (

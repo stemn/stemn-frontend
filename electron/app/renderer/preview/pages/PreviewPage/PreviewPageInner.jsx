@@ -13,29 +13,30 @@ import classNames from 'classnames';
 // Functions
 import { orderBy, has }        from 'lodash';
 import moment from 'moment';
-import { formatBytes } from 'app/shared/modules/Files/Files.utils.js'
+import { formatBytes } from 'electron/app/shared/modules/Files/Files.utils.js'
 
 // Actions
-import * as FilesActions        from 'app/shared/modules/Files/Files.actions.js';
-import * as SyncTimelineActions from 'app/shared/modules/SyncTimeline/SyncTimeline.actions.js';
-import * as ModalActions        from 'app/renderer/main/modules/Modal/Modal.actions.js';
-import * as ElectronWindowsActions from 'app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
+import * as FilesActions        from 'electron/app/shared/modules/Files/Files.actions.js';
+import * as SyncTimelineActions from 'electron/app/shared/modules/SyncTimeline/SyncTimeline.actions.js';
+import * as ModalActions        from 'electron/app/renderer/main/modules/Modal/Modal.actions.js';
+import * as ElectronWindowsActions from 'electron/app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
 import { push } from 'react-router-redux';
 
 
 // Sub Components
-import { orderItemsByTime } from 'app/renderer/main/modules/FileCompare/FileCompare.utils.js';
-import FileCompareInner   from 'app/renderer/main/modules/FileCompare/FileCompareInner/FileCompareInner.jsx';
-import Timeline           from 'app/renderer/main/modules/Timeline/Timeline.jsx';
-import DragResize         from 'app/renderer/main/modules/DragResize/DragResize.jsx';
-import FileBreadCrumbs    from 'app/renderer/main/modules/FileList/components/FileBreadCrumbs.jsx'
-import FileCompareMenu    from 'app/renderer/main/modules/FileCompare/FileCompareMenu/FileCompareMenu.jsx';
-import LoadingOverlay     from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import TimelineVertical   from 'app/shared/modules/TimelineVertical/TimelineVertical.jsx';
-import SimpleTable        from 'app/shared/modules/Tables/SimpleTable/SimpleTable.jsx';
-import SectionTitle       from 'app/shared/modules/Titles/SectionTitle/SectionTitle.jsx';
-import AssemblyParts      from 'app/shared/modules/Files/PreviewFile/PreviewCad/AssemblyParts/AssemblyParts.jsx'
-import Tag                from 'app/shared/modules/Tags/Tag.jsx';
+import { orderItemsByTime } from 'electron/app/renderer/main/modules/FileCompare/FileCompare.utils.js';
+import FileCompareInner   from 'electron/app/renderer/main/modules/FileCompare/FileCompareInner/FileCompareInner.jsx';
+import Timeline           from 'electron/app/renderer/main/modules/Timeline/Timeline.jsx';
+import DragResize         from 'electron/app/renderer/main/modules/DragResize/DragResize.jsx';
+import FileBreadCrumbs    from 'electron/app/renderer/main/modules/FileList/components/FileBreadCrumbs.jsx'
+import FileCompareMenu    from 'electron/app/renderer/main/modules/FileCompare/FileCompareMenu/FileCompareMenu.jsx';
+import LoadingOverlay     from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import TimelineVertical   from 'electron/app/shared/modules/TimelineVertical/TimelineVertical.jsx';
+import SimpleTable        from 'electron/app/shared/modules/Tables/SimpleTable/SimpleTable.jsx';
+import SectionTitle       from 'electron/app/shared/modules/Titles/SectionTitle/SectionTitle.jsx';
+import AssemblyParts      from 'electron/app/shared/modules/Files/PreviewFile/PreviewCad/AssemblyParts/AssemblyParts.jsx'
+import Tag                from 'electron/app/shared/modules/Tags/Tag.jsx';
+import Header             from 'electron/app/renderer/main/modules/Header/Header.jsx'
 
 // Styles
 import classes from './PagePreview.css';
@@ -73,7 +74,13 @@ export const Component = React.createClass({
         selected2    : undefined,
         lastSelected : 1,
         mode         : 'single'
-      })
+      });
+
+
+      // Join the File room
+      nextProps.filesActions.websocketJoinFile({
+        fileId: nextProps.fileMeta.data.fileId
+      });
     }
   },
   componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
@@ -149,8 +156,9 @@ export const Component = React.createClass({
     
     return (
       <div className="layout-column flex">
-        <div className={classes.header + ' layout-row layout-align-start-center'}>
-          <div className="flex">{hasFileMeta ? <FileBreadCrumbs meta={fileMeta.data} clickFn={this.clickCrumb} popup={true}/> : ''}</div>
+        <Header>
+          <div className="no-drag">{hasFileMeta ? <FileBreadCrumbs meta={fileMeta.data} clickFn={this.clickCrumb} popup={true}/> : ''}</div>
+          <div className="flex"></div>
           <FileCompareMenu
             file1={file1}
             file2={file2}
@@ -158,8 +166,8 @@ export const Component = React.createClass({
             mode={mode}
             changeMode={this.changeMode}
           />
-          <div className={classes.divider}></div>
-        </div>
+          <div className="divider"></div>
+        </Header>
         <div className="layout-row flex">
           <div className="layout-column flex">
             { hasFileMeta

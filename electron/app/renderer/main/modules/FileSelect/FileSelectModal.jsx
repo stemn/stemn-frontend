@@ -13,10 +13,10 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
 // Sub Components
-import FileList from 'app/renderer/main/modules/FileList/FileList';
-import Button from 'app/renderer/main/components/Buttons/Button/Button';
+import FileList from 'electron/app/renderer/main/modules/FileList/FileList';
+import Button from 'electron/app/renderer/main/components/Buttons/Button/Button';
 import MdDone from 'react-icons/md/done';
-import { isDriveFileId, isDropboxFileId } from 'app/shared/modules/Files/Files.utils.js';
+import { isDriveFileId, isDropboxFileId } from 'electron/app/shared/modules/Files/Files.utils.js';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

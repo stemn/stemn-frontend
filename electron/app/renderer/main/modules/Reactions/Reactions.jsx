@@ -4,10 +4,10 @@ import React from 'react';
 import classNames from 'classnames';
 import classes from './Reactions.css';
 
-import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
-import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import PopoverMenu from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenu';
+import SimpleIconButton from 'electron/app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdInsertEmoticon from 'react-icons/md/insert-emoticon';
-import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx'
+import UserAvatar from 'electron/app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx'
 
 import { options, groupAndOrderReactions } from './Reactions.utils.js';
 

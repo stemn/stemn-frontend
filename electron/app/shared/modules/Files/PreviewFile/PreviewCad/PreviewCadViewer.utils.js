@@ -1,4 +1,4 @@
-import getUuid from 'app/shared/helpers/getUuid.js';
+import getUuid from 'electron/app/shared/helpers/getUuid.js';
 import { forEach } from 'lodash';
 
 const filter       = { viewport: true };

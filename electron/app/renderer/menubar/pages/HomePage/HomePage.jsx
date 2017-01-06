@@ -1,9 +1,9 @@
 import React from 'react';
 
 // Components
-import book   from 'app/renderer/assets/images/pure-vectors/book.svg';
+import book   from 'electron/app/renderer/assets/images/pure-vectors/book.svg';
 import MdOpenInNew from 'react-icons/md/open-in-new';
-import Toolbar         from 'app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
+import Toolbar         from 'electron/app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
 
 export default class extends React.Component{
   render() {

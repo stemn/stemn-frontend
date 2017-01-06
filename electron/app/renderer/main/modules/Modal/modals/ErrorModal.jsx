@@ -3,7 +3,7 @@ import React from 'react';
 
 // Styles
 import classNames from 'classnames';
-import Button from 'app/renderer/main/components/Buttons/Button/Button'
+import Button from 'electron/app/renderer/main/components/Buttons/Button/Button'
 
 const Component = React.createClass({
   render() {

@@ -1,4 +1,4 @@
-@value primary, bg1, border1 from "app/renderer/assets/css/themes/standard.css";
+@value primary, bg1, border1 from "theme";
 
 .fileChangeRow {
   border-bottom: 1px solid border1;

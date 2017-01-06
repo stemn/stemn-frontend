@@ -1,9 +1,9 @@
 // Component Core
 import React from 'react';
 
-import Button from 'app/renderer/main/components/Buttons/Button/Button'
+import Button from 'electron/app/renderer/main/components/Buttons/Button/Button'
 
-import MagnifyInternet   from 'app/renderer/assets/images/pure-vectors/magnify-internet.svg';
+import MagnifyInternet   from 'electron/app/renderer/assets/images/pure-vectors/magnify-internet.svg';
 
 // Styles
 import classNames from 'classnames';

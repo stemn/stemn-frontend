@@ -7,17 +7,17 @@ import React from 'react';
 import moment from 'moment';
 
 // Container Actions
-import * as TasksActions from 'app/renderer/main/modules/Tasks/Tasks.actions.js';
+import * as TasksActions from 'electron/app/renderer/main/modules/Tasks/Tasks.actions.js';
 
 // Styles
 import classNames from 'classnames';
 import classes from './TaskRow.css';
-import loadingClasses from 'app/shared/modules/Loading/LoadingPlaceholders/LoadingPlaceholders.css'
+import loadingClasses from 'electron/app/shared/modules/Loading/LoadingPlaceholders/LoadingPlaceholders.css'
 
 
 // Sub Components
-import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
-import Button from 'app/renderer/main/components/Buttons/Button/Button';
+import Checkbox from 'electron/app/renderer/main/components/Input/Checkbox/Checkbox';
+import Button from 'electron/app/renderer/main/components/Buttons/Button/Button';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

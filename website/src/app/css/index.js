@@ -14,3 +14,4 @@ import './rotate.scss';
 import './swatch.scss';
 import './typography.scss';
 import './useful.scss';
+import 'electron/app/renderer/assets/css/layout/layout.scss';

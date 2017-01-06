@@ -3,7 +3,7 @@ import { clone, forEachRight, find, has } from 'lodash';
 import previewPcbService from './PreviewPcbService.js';
 import classes from './PreviewPcb.css';
 
-import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import LoadingOverlay from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 export const Viewer = React.createClass({
   getInitialState () {

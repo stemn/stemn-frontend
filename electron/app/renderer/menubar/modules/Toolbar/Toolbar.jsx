@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as MenubarLayoutActions from 'app/shared/actions/menubarLayout';
-import * as ElectronWindowsActions from 'app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
+import * as MenubarLayoutActions from 'electron/app/shared/actions/menubarLayout';
+import * as ElectronWindowsActions from 'electron/app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
 import { push } from 'react-router-redux';
 
 // Component Core
@@ -15,9 +15,9 @@ import classNames from 'classnames';
 import toolbarStyles from './Toolbar.css'
 
 // Sub Components
-import PopoverMenu          from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
-import PopoverMenuList      from 'app/renderer/main/components/PopoverMenu/PopoverMenuList';
-import SimpleIconButton     from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import PopoverMenu          from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenu';
+import PopoverMenuList      from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenuList';
+import SimpleIconButton     from 'electron/app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMenu               from 'react-icons/md/menu';
 import MdMoreHoriz          from 'react-icons/md/more-horiz';
 import MdOpenInNew          from 'react-icons/md/open-in-new';

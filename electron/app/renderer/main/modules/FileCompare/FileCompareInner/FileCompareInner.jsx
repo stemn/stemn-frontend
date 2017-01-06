@@ -14,7 +14,7 @@ import classNames from 'classnames';
 import classes from './FileCompareInner.css'
 
 // Sub Components
-import PreviewFile        from 'app/shared/modules/Files/PreviewFile/PreviewFile.jsx';
+import PreviewFile        from 'electron/app/shared/modules/Files/PreviewFile/PreviewFile.jsx';
 import FileCompareSlider  from './FileCompareSlider/FileCompareSlider.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////

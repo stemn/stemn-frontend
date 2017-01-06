@@ -1,4 +1,4 @@
-import { getViewerType } from 'app/shared/modules/Files/PreviewFile/PreviewFile.utils.js';
+import { getViewerType } from 'electron/app/shared/modules/Files/PreviewFile/PreviewFile.utils.js';
 
 
 //export function init({compareId, mode, provider, file1, file2}) {

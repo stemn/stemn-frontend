@@ -3,8 +3,8 @@ import React from 'react';
 // Styles
 import classNames from 'classnames';
 
-import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
-import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import PopoverMenu from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenu';
+import SimpleIconButton from 'electron/app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdDone from 'react-icons/md/done';
 import MdLink from 'react-icons/md/link';
 import MdMoreHoriz from 'react-icons/md/more-horiz';

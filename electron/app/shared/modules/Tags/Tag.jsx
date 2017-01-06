@@ -1,6 +1,6 @@
 // Component Core
 import React from 'react';
-import { middle as middleConcat } from 'app/shared/helpers/stringConcat';
+import { middle as middleConcat } from 'electron/app/shared/helpers/stringConcat';
 import { omit } from 'lodash';
 
 // Styles

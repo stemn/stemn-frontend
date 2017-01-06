@@ -6,11 +6,11 @@ import moment from 'moment';
 import classNames from 'classnames';
 import classes from './TaskTimelineItem.css';
 
-import UserAvatar          from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
-import Comment             from 'app/renderer/main/modules/Comments/Comment/Comment.jsx';
+import UserAvatar          from 'electron/app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
+import Comment             from 'electron/app/renderer/main/modules/Comments/Comment/Comment.jsx';
 import TaskTimelineWrapper from '../TaskTimelineWrapper/TaskTimelineWrapper.jsx';
 import TaskLabelDots       from '../../TaskLabelDots/TaskLabelDots.jsx'
-import Link                from 'app/shared/modules/Router/Link/Link.jsx';
+import Link                from 'electron/app/shared/modules/Router/Link/Link.jsx';
 // import TaskTimelinePanel   from '../TaskTimelinePanel/TaskTimelinePanel.jsx'
 
 const eventTextMap = {

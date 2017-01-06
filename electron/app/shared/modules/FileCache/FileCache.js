@@ -80,6 +80,9 @@ Get file.
 This will check if a file exists in the cache, if it
 does, we return it. Otherwise we download it, save it
 and then return it.
+
+This also supports passing in a 'renderUrl' which will
+be queried before the download progresses.
 *******************************************************/
 export const get = ({key, url, params, name, responseType, extract, onProgressAction, renderUrl}) => {
 
@@ -107,16 +110,18 @@ export const get = ({key, url, params, name, responseType, extract, onProgressAc
   
   const getFile = () => {
     // If there is a render url, we check the render.status, otherwise we just download directly
-    return renderUrl
-    ? http({url: renderUrl, params})
-      .then(response => {
+    if(!renderUrl){
+      return downloadToDiskAndSave({key, url, params, name, extract, onProgressAction}).then(processResult)
+    }
+    else{
+      return http({url: renderUrl, params}).then(response => {
         // If render.status is pending, we do not download the file, we just submit a render request
         // The file download will be handled by websocket
         return response && response.data && response.data.status == 'pending'
         ? response
         : downloadToDiskAndSave({key, url, params, name, extract, onProgressAction}).then(processResult)
       })
-    : downloadToDiskAndSave({key, url, params, name, extract, onProgressAction}).then(processResult)
+    }
   }
   
   // If we have a cache entry, get the file

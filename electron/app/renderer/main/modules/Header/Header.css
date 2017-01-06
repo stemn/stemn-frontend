@@ -1,14 +1,31 @@
-@value border1, height-header, width-header-buttons from "app/renderer/assets/css/themes/standard.css";
+@value border1, height-header, width-header-buttons from "theme";
 
 .toolbar{
   padding: 0 15px;
   height: height-header;
   padding-right: width-header-buttons;
   border-bottom: 1px solid border1;
+  position: relative;
+}
+
+.dragger{
+  -webkit-app-region: drag;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: width-header-buttons;
+  bottom: 0;
+  z-index: -1;
+}
+
+.toolbar a, .toolbar button{
+  -webkit-app-region: no-drag;
+}
+.toolbar :global(.no-drag){
+  -webkit-app-region: no-drag;
 }
 
 .inner{
-  font-size: 13px;
 }
 
 .toolbar :global(.divider){

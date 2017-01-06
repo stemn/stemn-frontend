@@ -2,10 +2,10 @@ import React from 'react';
 import classNames from 'classnames';
 import moment from 'moment';
 
-import { groupRevisions } from 'app/renderer/main/modules/Timeline/Timeline.utils.js'
+import { groupRevisions } from 'electron/app/renderer/main/modules/Timeline/Timeline.utils.js'
 
-import TogglerExpand from 'app/renderer/main/components/Toggler/TogglerExpand/TogglerExpand.jsx';
-import UserAvatar    from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
+import TogglerExpand from 'electron/app/renderer/main/components/Toggler/TogglerExpand/TogglerExpand.jsx';
+import UserAvatar    from 'electron/app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
 
 // Styles
 import styles from './SidebarTimelineRow.css';

@@ -1,5 +1,5 @@
 import React from 'react';
-import Input from 'app/renderer/main/components/Input/Input/Input'
+import Input from 'electron/app/renderer/main/components/Input/Input/Input'
 import MdDone from 'react-icons/md/done';
 
 // Styles

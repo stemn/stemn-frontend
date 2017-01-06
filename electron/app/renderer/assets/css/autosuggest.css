@@ -1,5 +1,5 @@
 
-@value primary, border1, bg1 from "app/renderer/assets/css/themes/standard.css";
+@value primary, border1, bg1 from "theme";
 
 :global(.react-autosuggest__container) {
   position: relative;

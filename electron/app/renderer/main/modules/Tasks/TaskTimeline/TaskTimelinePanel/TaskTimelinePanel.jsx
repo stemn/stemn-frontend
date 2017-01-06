@@ -7,8 +7,8 @@ import classNames from 'classnames';
 import classes from './TaskTimelinePanel.css';
 
 // Sub Components
-import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
-import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import UserAvatar from 'electron/app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
+import SimpleIconButton from 'electron/app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 
 export default React.createClass({
   render() {

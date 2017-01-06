@@ -2,9 +2,9 @@ import React from 'react';
 import Autosuggest from 'react-autosuggest';
 import AutosuggestHighlight from 'autosuggest-highlight';
 
-import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx'
+import UserAvatar from 'electron/app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx'
 
-import 'app/renderer/assets/css/autosuggest.css';
+import 'electron/app/renderer/assets/css/autosuggest.css';
 
 export default React.createClass({
   onChange(event, { newValue }) {

@@ -8,6 +8,9 @@ export const create = function createWindow({ uri = '/' } = {}) {
   const primarySize = screen.getPrimaryDisplay().workAreaSize;
   const sizeRatio = 0.8;
 
+  // Create a new stringified state global - this will be parsed in the renderer
+  global.stateStringified = JSON.stringify(global.state);
+
   let browserWindow = new BrowserWindow({
     show: false,
     width: primarySize.width * sizeRatio,
@@ -22,6 +25,8 @@ export const create = function createWindow({ uri = '/' } = {}) {
     browserWindow = null;
   });
   bindBackForward(browserWindow);
+
+
 
   if (process.env.NODE_ENV === 'development') {
     browserWindow.openDevTools();

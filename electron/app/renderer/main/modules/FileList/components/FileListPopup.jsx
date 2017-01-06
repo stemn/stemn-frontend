@@ -14,10 +14,10 @@ import classNames from 'classnames';
 import classes from './FileListPopup.css'
 
 // Sub Components
-import LoadingOverlay   from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import LoadingOverlay   from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import MdRefresh        from 'react-icons/md/refresh';
 import MdHome           from 'react-icons/md/home';
-import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import SimpleIconButton from 'electron/app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import FileIcon         from './FileIcon'
 
 ///////////////////////////////// COMPONENT /////////////////////////////////

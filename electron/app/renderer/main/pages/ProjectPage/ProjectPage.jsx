@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as SystemActions from 'app/shared/modules/System/System.actions.js';
+import * as SystemActions from 'electron/app/shared/modules/System/System.actions.js';
 
 // Component Core
 import React from 'react';
@@ -11,21 +11,21 @@ import { Link } from 'react-router';
 import { has } from 'lodash';
 
 // Components
-import Tabs from 'app/renderer/main/components/Tabs/Tabs'
-import Header from 'app/renderer/main/modules/Header/Header.jsx'
-import Banner from 'app/renderer/main/modules/Banner/Banner.jsx'
-import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import Tabs from 'electron/app/renderer/main/components/Tabs/Tabs'
+import Header from 'electron/app/renderer/main/modules/Header/Header.jsx'
+import Banner from 'electron/app/renderer/main/modules/Banner/Banner.jsx'
+import LoadingOverlay from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import MdSettings from 'react-icons/md/settings';
 import MdExpandMore from 'react-icons/md/expand-more';
-import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
-import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
-import PopoverMenuList from 'app/renderer/main/components/PopoverMenu/PopoverMenuList';
-import PopoverDetails from 'app/renderer/main/components/PopoverMenu/PopoverDetails';
-import ProjectMenu from 'app/renderer/main/modules/Projects/Project.menu.js';
+import SimpleIconButton from 'electron/app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import PopoverMenu from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenu';
+import PopoverMenuList from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenuList';
+import PopoverDetails from 'electron/app/renderer/main/components/PopoverMenu/PopoverDetails';
+import ProjectMenu from 'electron/app/renderer/main/modules/Projects/Project.menu.js';
 import MdPublic       from 'react-icons/md/public';
 import MdLockOutline  from 'react-icons/md/lock-outline';
-import folderLockedVector   from 'app/renderer/assets/images/pure-vectors/folder-locked.svg';
-import globalVector   from 'app/renderer/assets/images/pure-vectors/global.svg';
+import folderLockedVector   from 'electron/app/renderer/assets/images/pure-vectors/folder-locked.svg';
+import globalVector   from 'electron/app/renderer/assets/images/pure-vectors/global.svg';
 
 // Styles
 import classNames from 'classnames';

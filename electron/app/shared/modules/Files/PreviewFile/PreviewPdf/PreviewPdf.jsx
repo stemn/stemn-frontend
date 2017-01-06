@@ -3,7 +3,7 @@ import PDFJS from 'pdfjs-dist/build/pdf.combined.js'
 
 import Viewer from './PreviewPdfViewer.jsx'
 import classes from './PreviewPdf.css';
-import ScrollZoom from 'app/shared/modules/Scroll/ScrollZoom/ScrollZoom.jsx';
+import ScrollZoom from 'electron/app/shared/modules/Scroll/ScrollZoom/ScrollZoom.jsx';
 import { getDownloadUrl } from '../../Files.utils.js';
 
 // Link to the workerSrc bundle (See example here https://github.com/mozilla/pdf.js/blob/master/examples/webpack/main.js)
@@ -19,19 +19,16 @@ const PDF = React.createClass({
   onMount(nextProps, prevProps) {
     // If the previewId changes, download a new file
     if(!prevProps || nextProps.previewId !== prevProps.previewId){
-      // If we don't already have the file, get it
-      if(!nextProps.fileData){
-        nextProps.downloadFn({
-          projectId    : nextProps.fileMeta.project._id,
-          provider     : nextProps.fileMeta.provider,
-          fileId       : nextProps.fileMeta.fileId,
-          revisionId   : nextProps.fileMeta.revisionId,
-          responseType : 'arraybuffer'
-        })
-      }
+      // Get the file data
+      nextProps.downloadFn({
+        projectId    : nextProps.fileMeta.project._id,
+        provider     : nextProps.fileMeta.provider,
+        fileId       : nextProps.fileMeta.fileId,
+        revisionId   : nextProps.fileMeta.revisionId,
+        responseType : 'path'
+      })
       if(nextProps.fileData && nextProps.fileData.data){
-        const arrayBuffer = nextProps.fileData.data;
-        PDFJS.getDocument(arrayBuffer).then((pdf) => {
+        PDFJS.getDocument(nextProps.fileData.data).then((pdf) => {
           this.setState({ pdf })
         })
       }
@@ -75,40 +72,6 @@ const PDF = React.createClass({
   }
 });
 
-
-//function str2ab(str) {
-//  var buf = new ArrayBuffer(str.length*2); // 2 bytes for each char
-//  var bufView = new Uint16Array(buf);
-//  for (var i=0, strLen=str.length; i<strLen; i++) {
-//    bufView[i] = str.charCodeAt(i);
-//  }
-//  return buf;
-//}
-
-function str2ab(str) {
-  var raw = str;
-  var rawLength = raw.length;
-  var array = new Uint8Array(new ArrayBuffer(rawLength));
-
-  for(var i = 0; i < rawLength; i++) {
-    array[i] = raw.charCodeAt(i);
-  }
-  return array;
-}
-
-var BASE64_MARKER = ';base64,';
-function convertDataURIToBinary(dataURI) {
-  var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
-  var base64 = dataURI.substring(base64Index);
-  var raw = window.atob(base64);
-  var rawLength = raw.length;
-  var array = new Uint8Array(new ArrayBuffer(rawLength));
-
-  for(var i = 0; i < rawLength; i++) {
-    array[i] = raw.charCodeAt(i);
-  }
-  return array;
-}
 
 PDF.propTypes = propTypesObject;
 

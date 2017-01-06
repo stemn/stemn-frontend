@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as CommentsActions from 'app/renderer/main/modules/Comments/Comments.actions.js';
-import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
+import * as CommentsActions from 'electron/app/renderer/main/modules/Comments/Comments.actions.js';
+import * as ModalActions from 'electron/app/renderer/main/modules/Modal/Modal.actions.js';
 import { actions } from 'react-redux-form';
 
 // Component Core
@@ -14,16 +14,16 @@ import moment from 'moment';
 // Styles
 import classNames from 'classnames';
 import classes from './Comment.css';
-import loadingClasses from 'app/shared/modules/Loading/LoadingPlaceholders/LoadingPlaceholders.css'
+import loadingClasses from 'electron/app/shared/modules/Loading/LoadingPlaceholders/LoadingPlaceholders.css'
 
 // Sub Components
-import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
-import Editor from 'app/renderer/main/modules/Editor/Editor.jsx';
-import EditorDisplay from 'app/renderer/main/modules/Editor/EditorDisplay.jsx';
-import ReactionPopup from 'app/renderer/main/modules/Reactions/ReactionPopup.jsx';
-import Reactions from 'app/renderer/main/modules/Reactions/Reactions.jsx';
-import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
-import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import UserAvatar from 'electron/app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
+import Editor from 'electron/app/renderer/main/modules/Editor/Editor.jsx';
+import EditorDisplay from 'electron/app/renderer/main/modules/Editor/EditorDisplay.jsx';
+import ReactionPopup from 'electron/app/renderer/main/modules/Reactions/ReactionPopup.jsx';
+import Reactions from 'electron/app/renderer/main/modules/Reactions/Reactions.jsx';
+import PopoverMenu from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenu';
+import SimpleIconButton from 'electron/app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
 
 

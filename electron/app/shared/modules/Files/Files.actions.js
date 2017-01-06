@@ -234,3 +234,41 @@ export function downloadProgress(cacheKey, progress) {
     }
   }
 }
+
+export function websocketJoinFile({fileId}) {
+  return (dispatch, getState) => {
+    const alreadyConnected = getState().websocketRooms.includes(fileId);
+    if(!alreadyConnected){
+      dispatch({
+        type: 'FILES/WEBSOCKET_JOIN_FILE',
+        websocket: true,
+        payload: {
+          type : 'ROOM/JOIN',
+          payload : {
+            room : fileId,
+            type : 'file'
+          }
+        }
+      });
+    }
+  }
+}
+
+export function websocketLeaveFile({fileId}) {
+  return (dispatch, getState) => {
+    const alreadyConnected = getState().websocketRooms.includes(fileId);
+    if(alreadyConnected){
+      dispatch({
+        type: 'FILES/WEBSOCKET_LEAVE_FILE',
+        websocket: true,
+        payload: {
+          type : 'ROOM/LEAVE',
+          payload : {
+            room : fileId,
+            type : 'file'
+          }
+        }
+      });
+    }
+  }
+}

@@ -21,14 +21,14 @@ import ConnectionModal        from './modals/ConnectionModal.jsx';
 import ProviderAccessError    from './modals/ProviderAccessErrorModal.jsx'
 import ProviderAccessRevoked  from './modals/ProviderAccessRevokedModal.jsx'
 import ReleaseNotesModal      from './modals/ReleaseNotesModal.jsx'
-import FileSelectModal        from 'app/renderer/main/modules/FileSelect/FileSelectModal.jsx';
-import TaskDisplayModal       from 'app/renderer/main/modules/Tasks/TaskDisplayModal/TaskDisplayModal.jsx'
-import TaskLabelsEditModal    from 'app/renderer/main/modules/Tasks/TaskLabelsEditModal/TaskLabelsEditModal.jsx'
-import TaskMentionModal       from 'app/renderer/main/modules/Mentions/TaskMentionModal/TaskMentionModal.jsx'
-import ProjectNewModal        from 'app/renderer/main/modules/Projects/ProjectNewModal/ProjectNewModal.jsx'
-import FileDownload           from 'app/shared/modules/Files/Download/DownloadModal/DownloadModal.jsx'
-import PreviewExpired         from 'app/shared/modules/Files/PreviewFile/Messages/PreviewExpired/PreviewExpiredModal.jsx'
-import AssemblyPartNotFound   from 'app/shared/modules/Files/PreviewFile/Messages/AssemblyPartNotFound/AssemblyPartNotFoundModal.jsx'
+import FileSelectModal        from 'electron/app/renderer/main/modules/FileSelect/FileSelectModal.jsx';
+import TaskDisplayModal       from 'electron/app/renderer/main/modules/Tasks/TaskDisplayModal/TaskDisplayModal.jsx'
+import TaskLabelsEditModal    from 'electron/app/renderer/main/modules/Tasks/TaskLabelsEditModal/TaskLabelsEditModal.jsx'
+import TaskMentionModal       from 'electron/app/renderer/main/modules/Mentions/TaskMentionModal/TaskMentionModal.jsx'
+import ProjectNewModal        from 'electron/app/renderer/main/modules/Projects/ProjectNewModal/ProjectNewModal.jsx'
+import FileDownload           from 'electron/app/shared/modules/Files/Download/DownloadModal/DownloadModal.jsx'
+import PreviewExpired         from 'electron/app/shared/modules/Files/PreviewFile/Messages/PreviewExpired/PreviewExpiredModal.jsx'
+import AssemblyPartNotFound   from 'electron/app/shared/modules/Files/PreviewFile/Messages/AssemblyPartNotFound/AssemblyPartNotFoundModal.jsx'
 
 
 const modalComponents = {

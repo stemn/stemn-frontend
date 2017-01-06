@@ -6,7 +6,7 @@ import { orderBy } from 'lodash';
 import moment from 'moment';
 import { isAssembly } from '../PreviewCad.utils.js';
 import * as filesActions from '../../../Files.actions.js';
-import SectionTitle       from 'app/shared/modules/Titles/SectionTitle/SectionTitle.jsx';
+import SectionTitle       from 'electron/app/shared/modules/Titles/SectionTitle/SectionTitle.jsx';
 
 const propTypesObject = {
   fileMeta        : PropTypes.object.isRequired,   // fileMeta for the assembly

@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as TasksActions from '../Tasks.actions.js';
-import * as ProjectsActions from 'app/shared/actions/projects.js';
-import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
+import * as ProjectsActions from 'electron/app/shared/actions/projects.js';
+import * as ModalActions from 'electron/app/renderer/main/modules/Modal/Modal.actions.js';
 
 // Component Core
 import React from 'react';
@@ -18,19 +18,19 @@ import classNames from 'classnames';
 import classes from './TaskDisplayModal.css';
 
 // Sub Components
-import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
-import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
+import Checkbox from 'electron/app/renderer/main/components/Input/Checkbox/Checkbox';
+import UserAvatar from 'electron/app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
 import LabelSelect from './LabelSelect/LabelSelect.jsx';
-import UserSelect from 'app/renderer/main/components/Users/UserSelect/UserSelect.jsx';
+import UserSelect from 'electron/app/renderer/main/components/Users/UserSelect/UserSelect.jsx';
 import TaskTimeline from '../TaskTimeline/TaskTimeline.jsx';
-import DatePicker from 'app/renderer/main/modules/Calendar/DatePicker/DatePicker.jsx';
-import Textarea from 'app/renderer/main/components/Input/Textarea/Textarea';
-import CommentNew from 'app/renderer/main/modules/Comments/Comment/CommentNew.jsx';
-import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
-import PopoverMenuList from 'app/renderer/main/components/PopoverMenu/PopoverMenuList';
-import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import DatePicker from 'electron/app/renderer/main/modules/Calendar/DatePicker/DatePicker.jsx';
+import Textarea from 'electron/app/renderer/main/components/Input/Textarea/Textarea';
+import CommentNew from 'electron/app/renderer/main/modules/Comments/Comment/CommentNew.jsx';
+import PopoverMenu from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenu';
+import PopoverMenuList from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenuList';
+import SimpleIconButton from 'electron/app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
-import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import LoadingOverlay from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 
 ///////////////////////////////// COMPONENT /////////////////////////////////

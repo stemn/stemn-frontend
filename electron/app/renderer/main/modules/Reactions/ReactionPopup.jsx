@@ -4,8 +4,8 @@ import React from 'react';
 import classNames from 'classnames';
 import classes from './Reactions.css';
 
-import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
-import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import PopoverMenu from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenu';
+import SimpleIconButton from 'electron/app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdInsertEmoticon from 'react-icons/md/insert-emoticon';
 
 import { options } from './Reactions.utils.js';

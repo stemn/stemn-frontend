@@ -1,8 +1,8 @@
 import React from 'react';
 
-import modelLocked    from 'app/renderer/assets/images/pure-vectors/model-locked.svg';
+import modelLocked    from 'electron/app/renderer/assets/images/pure-vectors/model-locked.svg';
 import { connect } from 'react-redux';
-import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
+import * as ModalActions from 'electron/app/renderer/main/modules/Modal/Modal.actions.js';
 
 export const AssemblyPartNotFound = React.createClass({
   render() {

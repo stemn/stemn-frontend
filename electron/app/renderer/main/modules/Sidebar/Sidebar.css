@@ -1,4 +1,4 @@
-@value primary, height-header, sidebar-bg, sidebar-text-1, sidebar-text-2, sidebar-footer, secondary, sidebar-search-border, sidebar-search-bg, sidebar-search-border, sidebar-search-text from "app/renderer/assets/css/themes/standard.css";
+@value primary, height-header, sidebar-bg, sidebar-text-1, sidebar-text-2, sidebar-footer, secondary, sidebar-search-border, sidebar-search-bg, sidebar-search-border, sidebar-search-text from "theme";
 
 .sidebar{
   border-right: 1px solid rgba(0, 0, 0, 0.1);

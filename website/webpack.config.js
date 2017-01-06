@@ -50,15 +50,20 @@ module.exports = function makeWebpackConfig () {
   config.module = {
     preLoaders  : [],
     loaders     : [{
-      test      : /\.js$/,
-      loaders   : [ 'happypack/loader' ],
+      test      : /(\.js|\.jsx)$/,
+//      loaders   : [ 'happypack/loader' ],
+      loader    : 'babel?presets[]=react&presets[]=stage-2',
       exclude   : /node_modules/,
     }, {
+      test      : /\.js$/,
+      loader    : 'babel?presets[]=react&presets[]=stage-2',
+      include   : [path.resolve(__dirname, '../electron/app/node_modules/react-icons/md')]
+    }, {
       test      : /\.css$/,
-      loader    : isTest ? 'null' : ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap!postcss-loader')
+      loaders   : [ 'style-loader', 'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]-[local]-[emoji:6]']
     }, {
       test      : /\.scss$/,
-      loaders   : ["style-loader", "css-loader", "sass-loader"]
+      loaders   : ['style-loader', 'css-loader', 'sass-loader']
     }, {
       test      : /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
       loader    : 'file'
@@ -85,11 +90,13 @@ module.exports = function makeWebpackConfig () {
   ];
   
   config.resolve = {
-    root                 : [path.resolve('./src')],
-    modlesDirectories    : ["node_modules", "bower_components"],
+    root                 : [ path.resolve('..'), path.resolve('./src') ],
+    extensions: ['', '.js', '.jsx'],
+    modulesDirectories    : ["node_modules", "bower_components"],
     alias                : {
-      "ui-router-extras" : __dirname + "/bower_components/ui-router-extras/release/ct-ui-router-extras.js",
-      "ngGeolocation"    : __dirname + "/bower_components/ngGeolocation/ngGeolocation.js"
+      'ui-router-extras' : __dirname + "/bower_components/ui-router-extras/release/ct-ui-router-extras.js",
+      'ngGeolocation'    : __dirname + "/bower_components/ngGeolocation/ngGeolocation.js",
+      'theme'            : __dirname + "/src/theme.css"
     }
   };
   

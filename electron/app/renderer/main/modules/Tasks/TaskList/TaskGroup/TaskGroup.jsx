@@ -1,9 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
-import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
-import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
+import SimpleIconButton from 'electron/app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import PopoverMenu from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenu';
 import MdMoreHoriz from 'react-icons/md/more-horiz';
-import Input from 'app/renderer/main/components/Input/Input/Input';
+import Input from 'electron/app/renderer/main/components/Input/Input/Input';
 
 import classes from './TaskGroup.css'
 export default class TaskGroup extends React.Component {

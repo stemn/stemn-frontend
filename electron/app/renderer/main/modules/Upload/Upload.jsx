@@ -14,8 +14,8 @@ import classNames from 'classnames';
 
 // Sub Components
 import Dropzone from 'react-dropzone';
-import Button from 'app/renderer/main/components/Buttons/Button/Button.jsx';
-import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import Button from 'electron/app/renderer/main/components/Buttons/Button/Button.jsx';
+import LoadingOverlay from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import MdFileUpload from 'react-icons/md/file-upload';
 
 

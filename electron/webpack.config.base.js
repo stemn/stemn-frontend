@@ -27,8 +27,7 @@ const getHappyConfig = (enable) => {
       test: /(\.js|\.jsx)$/,
       loader: 'babel',
       include: [
-        path.resolve(__dirname, './app/node_modules/react-icons/md'),
-        path.resolve(__dirname, './app/node_modules/stemn-files')
+        path.resolve(__dirname, './app/node_modules/react-icons/md')
       ]
     }];
   
@@ -60,10 +59,13 @@ export default {
   },
   resolve: {
     root: [
-      path.resolve('./')
+      path.resolve('../')
     ],
     extensions: ['', '.js', '.jsx'],
     packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main'],
+    alias                : {
+      'theme'            : __dirname + "/app/theme.css"
+    }
   },
   plugins: [
     ...happyConfig.plugins,

@@ -6,13 +6,8 @@ import './css/index.js';
 
 // Other Code
 import initSegment from 'public/assets/js/segment.io/init.js';
-import configureStore from './redux/configureStore.js';
+import store from './redux/store.js';
 initSegment(GLOBAL_ENV.ENV_TYPE);
-
-const store = configureStore();
-store.dispatch({
-  type: 'SOME_TEST_ACTION'
-})
 
 // Angular modules
 import ngAnimate          from 'angular-animate'; 

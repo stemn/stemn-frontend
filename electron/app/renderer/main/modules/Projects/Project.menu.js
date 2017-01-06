@@ -1,5 +1,5 @@
-import * as ProjectsActions from 'app/shared/actions/projects';
-import * as SystemActions from 'app/shared/modules/System/System.actions.js';
+import * as ProjectsActions from 'electron/app/shared/actions/projects';
+import * as SystemActions from 'electron/app/shared/modules/System/System.actions.js';
 import { push } from 'react-router-redux'
 
 export default (dispatch) => {

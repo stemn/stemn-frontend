@@ -3,9 +3,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as ChangesActions from 'app/renderer/main/modules/Changes/Changes.actions.js';
-import * as SyncTimelineActions from 'app/shared/modules/SyncTimeline/SyncTimeline.actions.js';
-import * as WalkthroughActions from 'app/shared/modules/Walkthrough/Walkthrough.actions.js';
+import * as ChangesActions from 'electron/app/renderer/main/modules/Changes/Changes.actions.js';
+import * as SyncTimelineActions from 'electron/app/shared/modules/SyncTimeline/SyncTimeline.actions.js';
+import * as WalkthroughActions from 'electron/app/shared/modules/Walkthrough/Walkthrough.actions.js';
 
 // Component Core
 import React from 'react';
@@ -18,19 +18,19 @@ import classNames from 'classnames';
 
 // Sub Components
 import { Link }             from 'react-router';
-import ContentSidebar       from 'app/renderer/main/components/ContentSidebar';
-import LoadingOverlay       from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import Timeline             from 'app/renderer/main/modules/Timeline/Timeline.jsx';
-import CommitChanges        from 'app/renderer/main/modules/Changes/CommitChanges/CommitChanges.jsx';
-import CommitBox            from 'app/renderer/main/modules/Changes/CommitBox/CommitBox.jsx'
-import FileCompare          from 'app/renderer/main/modules/FileCompare/FileCompare.jsx';
-import Guide                from 'app/renderer/main/modules/Guide/Guide';
-import cloudLocked          from 'app/renderer/assets/images/pure-vectors/cloud-locked.svg';
-import file                 from 'app/renderer/assets/images/pure-vectors/file.svg';
+import ContentSidebar       from 'electron/app/renderer/main/components/ContentSidebar';
+import LoadingOverlay       from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import Timeline             from 'electron/app/renderer/main/modules/Timeline/Timeline.jsx';
+import CommitChanges        from 'electron/app/renderer/main/modules/Changes/CommitChanges/CommitChanges.jsx';
+import CommitBox            from 'electron/app/renderer/main/modules/Changes/CommitBox/CommitBox.jsx'
+import FileCompare          from 'electron/app/renderer/main/modules/FileCompare/FileCompare.jsx';
+import Guide                from 'electron/app/renderer/main/modules/Guide/Guide';
+import cloudLocked          from 'electron/app/renderer/assets/images/pure-vectors/cloud-locked.svg';
+import file                 from 'electron/app/renderer/assets/images/pure-vectors/file.svg';
 import commitChanges        from './commit-changes.svg'
 import compareFile          from './compare-file.svg'
-import cloudProviders       from 'app/renderer/assets/images/illustrations/cloud-providers.svg'
-import Button               from 'app/renderer/main/components/Buttons/Button/Button'
+import cloudProviders       from 'electron/app/renderer/assets/images/illustrations/cloud-providers.svg'
+import Button               from 'electron/app/renderer/main/components/Buttons/Button/Button'
 
 
 const guideInfo = [{

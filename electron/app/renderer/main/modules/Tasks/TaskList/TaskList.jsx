@@ -9,7 +9,7 @@ import TaskGroup           from './TaskGroup/TaskGroup.jsx'
 import TaskListItemParent  from './TaskListItem/TaskListItemParent.jsx'
 import TaskListItemWrapped from './TaskListItem/TaskListItemWrapped.jsx'
 import TaskListItem        from './TaskListItem/TaskListItem.jsx'
-import Input from 'app/renderer/main/components/Input/Input/Input';
+import Input from 'electron/app/renderer/main/components/Input/Input/Input';
 
 import classNames from 'classnames'
 import classes from './TaskList.css';

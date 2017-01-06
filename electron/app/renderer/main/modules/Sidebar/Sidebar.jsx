@@ -3,11 +3,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as SidebarActions from 'app/shared/actions/sidebar';
-import * as AuthActions from 'app/shared/modules/Auth/Auth.actions.js';
-import * as ProjectsActions from 'app/shared/actions/projects';
-import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
-import * as SystemActions from 'app/shared/modules/System/System.actions.js';
+import * as SidebarActions from 'electron/app/shared/actions/sidebar';
+import * as AuthActions from 'electron/app/shared/modules/Auth/Auth.actions.js';
+import * as ProjectsActions from 'electron/app/shared/actions/projects';
+import * as ModalActions from 'electron/app/renderer/main/modules/Modal/Modal.actions.js';
+import * as SystemActions from 'electron/app/shared/modules/System/System.actions.js';
 
 // Component Core
 import React from 'react';
@@ -19,21 +19,21 @@ import styles from './Sidebar.css';
 import userStyles from './SidebarAvatar.css';
 
 // Sub Components
-import DragResize      from 'app/renderer/main/modules/DragResize/DragResize.jsx';
+import DragResize      from 'electron/app/renderer/main/modules/DragResize/DragResize.jsx';
 import { Link } from 'react-router';
 import { ContextMenuLayer } from "react-contextmenu";
-import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
-import Input from 'app/renderer/main/components/Input/Input/Input'
-import ContextMenu from 'app/renderer/main/modules/ContextMenu/ContextMenu.jsx';
+import PopoverMenu from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenu';
+import Input from 'electron/app/renderer/main/components/Input/Input/Input'
+import ContextMenu from 'electron/app/renderer/main/modules/ContextMenu/ContextMenu.jsx';
 import SidebarProjectButton from './SidebarProjectButton.jsx';
-import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton';
+import SimpleIconButton from 'electron/app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton.jsx';
 import MdMenu from 'react-icons/md/menu';
 import MdSearch from 'react-icons/md/search';
 import MdSettings from 'react-icons/md/settings';
 import MdAdd from 'react-icons/md/add';
-import ProjectMenu from 'app/renderer/main/modules/Projects/Project.menu.js';
+import ProjectMenu from 'electron/app/renderer/main/modules/Projects/Project.menu.js';
 
-import UserAvatar          from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
+import UserAvatar          from 'electron/app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 const projectContextIdentifier = 'ProjectContextIdentifier';

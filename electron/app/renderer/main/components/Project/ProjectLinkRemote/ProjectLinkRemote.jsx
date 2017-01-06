@@ -4,13 +4,13 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as ProjectsActions from 'app/shared/actions/projects.js';
-import * as AuthActions from 'app/shared/modules/Auth/Auth.actions.js';
+import * as ProjectsActions from 'electron/app/shared/actions/projects.js';
+import * as AuthActions from 'electron/app/shared/modules/Auth/Auth.actions.js';
 
 // Component
 import Select from 'react-select';
-import selectCss from 'app/renderer/assets/css/select.css';
-import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import selectCss from 'electron/app/renderer/assets/css/select.css';
+import LoadingOverlay from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 import { actions } from 'react-redux-form';
 

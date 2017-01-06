@@ -4,7 +4,7 @@ import classes from './Smooch.css';
 import classNames from 'classnames';
 import Smooch from 'smooch';
 import { init as initSmooch } from './Smooch.utils.js';
-import comments      from 'app/renderer/assets/images/pure-vectors/comments.svg';
+import comments      from 'electron/app/renderer/assets/images/pure-vectors/comments.svg';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

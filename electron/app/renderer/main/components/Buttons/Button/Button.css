@@ -1,4 +1,4 @@
-@value primary, primary-2, secondary, secondary-2, warn, warn-2, grey-3, bg1, linkedin, linkedin-dark, facebook, facebook-dark from "app/renderer/assets/css/themes/standard.css";
+@value primary, primary-2, secondary, secondary-2, warn, warn-2, grey-3, bg1, linkedin, linkedin-dark, facebook, facebook-dark from 'theme';
 
 .button {
   border: none;

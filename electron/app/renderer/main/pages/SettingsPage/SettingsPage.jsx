@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as UsersActions from 'app/shared/actions/users';
+import * as UsersActions from 'electron/app/shared/actions/users';
 
 // Component Core
 import React from 'react';
@@ -13,8 +13,8 @@ import classNames from 'classnames';
 import classes from '../ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css'
 
 // Sub Components
-import Header from 'app/renderer/main/modules/Header/Header.jsx'
-import NavPill from 'app/renderer/main/components/Buttons/NavPill/NavPill'
+import Header from 'electron/app/renderer/main/modules/Header/Header.jsx'
+import NavPill from 'electron/app/renderer/main/components/Buttons/NavPill/NavPill'
 
 
 

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import expired from 'app/renderer/assets/images/pure-vectors/expired.svg';
+import expired from 'electron/app/renderer/assets/images/pure-vectors/expired.svg';
 import { connect } from 'react-redux';
-import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
+import * as ModalActions from 'electron/app/renderer/main/modules/Modal/Modal.actions.js';
 
 export const PreviewExpired = React.createClass({
   render() {

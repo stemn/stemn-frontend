@@ -16,7 +16,7 @@ import classNames from 'classnames';
 
 // Sub Components
 import TaskLabelsEdit from '../TaskLabelsEdit/TaskLabelsEdit.jsx'
-import Button from 'app/renderer/main/components/Buttons/Button/Button'
+import Button from 'electron/app/renderer/main/components/Buttons/Button/Button'
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////

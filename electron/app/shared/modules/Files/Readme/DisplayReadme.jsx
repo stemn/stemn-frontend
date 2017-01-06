@@ -13,8 +13,8 @@ import { omit } from 'lodash';
 import classNames from 'classnames';
 
 // Sub Components
-import LoadingOverlay     from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import EditorDisplay      from 'app/renderer/main/modules/Editor/EditorDisplay.jsx';
+import LoadingOverlay     from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import EditorDisplay      from 'electron/app/renderer/main/modules/Editor/EditorDisplay.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

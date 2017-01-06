@@ -3,11 +3,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as AuthActions from 'app/shared/modules/Auth/Auth.actions.js';
+import * as AuthActions from 'electron/app/shared/modules/Auth/Auth.actions.js';
 
 // Component Core
 import React from 'react';
-import Button from 'app/renderer/main/components/Buttons/Button/Button';
+import Button from 'electron/app/renderer/main/components/Buttons/Button/Button';
 import { Link } from 'react-router';
 
 // Styles

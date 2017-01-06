@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
+import PopoverMenu from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenu';
 
 const MenuItem = React.createClass({
   render() {

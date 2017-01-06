@@ -16,15 +16,15 @@ import classes from './FileList.css'
 // Sub Components
 import FileBreadCrumbs  from './components/FileBreadCrumbs';
 import FileRow          from './components/FileRow';
-import LoadingOverlay   from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import LoadingOverlay   from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import MdRefresh        from 'react-icons/md/refresh';
 import MdHome           from 'react-icons/md/home';
-import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import SimpleIconButton from 'electron/app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 
 
 const contextIdentifier     = 'FileListCm';
 import { ContextMenuLayer } from "react-contextmenu";
-import ContextMenu          from 'app/renderer/main/modules/ContextMenu/ContextMenu.jsx';
+import ContextMenu          from 'electron/app/renderer/main/modules/ContextMenu/ContextMenu.jsx';
 import FileListMenu         from './FileList.menu.js';
 const FileRowContext        = ContextMenuLayer(contextIdentifier, props => props.file)(FileRow)
 

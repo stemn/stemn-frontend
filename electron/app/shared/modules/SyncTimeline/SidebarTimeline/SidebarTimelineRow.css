@@ -1,4 +1,4 @@
-@value primary, secondary, bg1, border1 from "app/renderer/assets/css/themes/standard.css";
+@value primary, secondary, bg1, border1 from "theme";
 
 .timelineRow{
   border-bottom: 1px solid border1;

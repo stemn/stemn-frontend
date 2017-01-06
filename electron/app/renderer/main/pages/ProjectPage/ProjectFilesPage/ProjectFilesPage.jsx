@@ -3,10 +3,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as ProjectsActions        from 'app/shared/actions/projects.js';
-import * as ElectronWindowsActions from 'app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
-
-import { push } from 'react-router-redux'
+import * as ProjectsActions        from 'electron/app/shared/actions/projects.js';
+import * as ElectronWindowsActions from 'electron/app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
+import ProjectFilesPageRoute from './ProjectFilesPage.routeActions.js';
 
 // Component Core
 import React from 'react';
@@ -16,8 +15,8 @@ import classNames from 'classnames';
 import classes from './ProjectFilesPage.css'
 
 // Sub Components
-import FileList from 'app/renderer/main/modules/FileList/FileList';
-import Readme from 'app/shared/modules/Files/Readme/Readme.jsx';
+import FileList from 'electron/app/renderer/main/modules/FileList/FileList';
+import Readme from 'electron/app/shared/modules/Files/Readme/Readme.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -36,8 +35,9 @@ export const Component = React.createClass({
         }
       }))
     }else{
-      dispatch(push({
-        pathname   : `project/${project.data._id}/files/${file.fileId || ''}`,
+      dispatch(ProjectFilesPageRoute({
+        projectId: project.data._id,
+        fileId: file.fileId
       }))
     }
   },

@@ -14,11 +14,11 @@ import classNames from 'classnames';
 import classes from './DashboardPage.css'
 
 // Sub Components
-import Header       from 'app/renderer/main/modules/Header/Header.jsx'
-import DragResize   from 'app/renderer/main/modules/DragResize/DragResize.jsx';
-import Calendar     from 'app/renderer/main/modules/Calendar/Calendar.jsx';
-import Tabs         from 'app/renderer/main/components/Tabs/Tabs';
-import Tasks        from 'app/renderer/main/modules/Tasks/Tasks.jsx'
+import Header       from 'electron/app/renderer/main/modules/Header/Header.jsx'
+import DragResize   from 'electron/app/renderer/main/modules/DragResize/DragResize.jsx';
+import Calendar     from 'electron/app/renderer/main/modules/Calendar/Calendar.jsx';
+import Tabs         from 'electron/app/renderer/main/components/Tabs/Tabs';
+import Tasks        from 'electron/app/renderer/main/modules/Tasks/Tasks.jsx'
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////

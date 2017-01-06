@@ -2,8 +2,8 @@
 import React from 'react';
 
 // Components
-import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
-import Walkthrough from 'app/shared/modules/Walkthrough/Walkthrough.jsx'
+import Checkbox from 'electron/app/renderer/main/components/Input/Checkbox/Checkbox';
+import Walkthrough from 'electron/app/shared/modules/Walkthrough/Walkthrough.jsx'
 
 // Styles
 import styles from './FileChangeTitleRow.css';

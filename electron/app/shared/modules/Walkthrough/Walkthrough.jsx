@@ -14,8 +14,8 @@ import { getStepData } from './Walkthrough.config.js';
 import classNames from 'classnames';
 import classes from './Walkthrough.css';
 
-import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
-import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import PopoverMenu from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenu';
+import SimpleIconButton from 'electron/app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdClose from 'react-icons/md/close';
 
 const WalkthroughPropTypes = {
