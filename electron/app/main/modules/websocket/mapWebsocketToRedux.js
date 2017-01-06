@@ -30,7 +30,7 @@ export default (store, action) => {
           dispatch(ChangesActions.fetchChanges({ projectId : action.payload.projectId }));
           // dispatch(FileListActions.fetchFilesGooba({ projectId : action.payload.projectId }));
       }
-    case 'FILES/FILES_CHANGED':
+    case 'FILES/FILES_UPDATED':
       return (dispatch) => {
         action.payload.files.map((fileId) => dispatch(SyncTimelineActions.fetchTimeline({
             projectId : action.payload.projectId,
