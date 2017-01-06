@@ -25,16 +25,12 @@ export default (store, action) => {
 
   // Actions that we DON'T process if user is the actioner
   switch (action.type) {
-    case 'FILES/CHANGED_FILES':
+    case 'PROJECT/PROJECT_CHANGES':
       return (dispatch) => {
           dispatch(ChangesActions.fetchChanges({ projectId : action.payload.projectId }));
-        //   dispatch(FileListActions.fetchFilesGooba({ projectId : action.payload.projectId }));
+          // dispatch(FileListActions.fetchFilesGooba({ projectId : action.payload.projectId }));
       }
-    case 'BOARD/FETCH_BOARDS':
-      return (dispatch) => {
-        action.payload.boards.map((boardId) => dispatch(TasksActions.getBoard({ boardId })));
-      }
-    case 'TIMELINE/FETCH_FILES_TIMELINE':
+    case 'FILES/FILES_CHANGED':
       return (dispatch) => {
         action.payload.files.map((fileId) => dispatch(SyncTimelineActions.fetchTimeline({
             projectId : action.payload.projectId,
@@ -42,24 +38,28 @@ export default (store, action) => {
             fileId
         })));
       }
-    case 'TIMELINE/FETCH_COMMIT_TIMELINE':
+    case 'COMMITS/COMMITS_CHANGED':
       return SyncTimelineActions.fetchTimeline({ projectId : action.payload.projectId });
-    case 'BOARD/FETCH_GROUPS':
+    case 'BOARD/BOARDS_UPDATED':
+      return (dispatch) => {
+        action.payload.boards.map((boardId) => dispatch(TasksActions.getBoard({ boardId })));
+      }
+    case 'BOARD/GROUPS_UPDATED':
       return (dispatch) => {
         action.payload.groups.map((groupId) => dispatch(TasksActions.getGroup({ groupId, boardId : action.payload.boardId })));
       }
-    case 'BOARD/FETCH_TASKS':
+    case 'BOARD/TASKS_UPDATED':
       return (dispatch) => {
         action.payload.tasks.map((taskId) => dispatch(TasksActions.getTask({ taskId })));
       }
-    case 'NOTIFICATIONS/TASK_COMPLETED':
+    case 'BOARD/TASK_COMPLETED':
       return NotificationsActions.show({
         title : `${action.payload.user.name} Completed a Task in '${action.payload.project.name}'`,
         body  : `The task '${action.payload.task.title}' was marked as complete.`
       })
-    case 'PROJECT/FETCH_PROJECTS':
+    case 'PROJECT/PROJECT_UPDATED':
       return (dispatch) => {
-        action.payload.projects.map((projectId) => dispatch(ProjectActions.getProject({ projectId })));
+        return ProjectActions.getProject({ projectId : action.payload.projectId });
       }
     default:
       return undefined;
