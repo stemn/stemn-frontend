@@ -1,7 +1,6 @@
 import * as ChangesActions        from '../../../renderer/main/modules/Changes/Changes.actions.js';
 import * as TasksActions          from '../../../renderer/main/modules/Tasks/Tasks.actions.js';
 import * as ProjectActions        from '../../../shared/actions/projects.js';
-import * as ProjectActions        from '../../../shared/actions/projects.js';
 import * as SyncTimelineActions   from '../../..//shared/modules/SyncTimeline/SyncTimeline.actions.js';
 import * as NotificationsActions  from '../../../shared/modules/Notifications/Notifications.actions.js';
 import { renderFileDownload }     from '../../../shared/modules/Files/Files.actions.js';
