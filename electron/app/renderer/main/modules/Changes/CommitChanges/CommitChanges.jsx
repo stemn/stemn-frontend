@@ -5,16 +5,16 @@ import { ContextMenuLayer } from "react-contextmenu";
 import FileChangeRow from './FileChangeRow';
 import FileChangeTitleRow from './FileChangeTitleRow';
 import FileChangeMenu from './FileChange.menu.js';
-import ContextMenu from 'app/renderer/main/modules/ContextMenu/ContextMenu.jsx';
-import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
-import PopoverMenuList from 'app/renderer/main/components/PopoverMenu/PopoverMenuList';
-import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import ContextMenu from 'electron/app/renderer/main/modules/ContextMenu/ContextMenu.jsx';
+import PopoverMenu from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenu';
+import PopoverMenuList from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenuList';
+import SimpleIconButton from 'electron/app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
-import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import Walkthrough from 'app/shared/modules/Walkthrough/Walkthrough.jsx'
+import LoadingOverlay from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import Walkthrough from 'electron/app/shared/modules/Walkthrough/Walkthrough.jsx'
 
 // Functions
-import { groupRevisions } from 'app/renderer/main/modules/Timeline/Timeline.utils.js'
+import { groupRevisions } from 'electron/app/renderer/main/modules/Timeline/Timeline.utils.js'
 import { getToggleAllStatus } from '../Changes.utils.js'
 
 // Styles

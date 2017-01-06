@@ -1,9 +1,9 @@
 import React from 'react';
 
 // Components
-import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx'
-import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
-import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import UserAvatar from 'electron/app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx'
+import PopoverMenu from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenu';
+import SimpleIconButton from 'electron/app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
 
 // Styles

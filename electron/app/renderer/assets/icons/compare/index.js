@@ -1,5 +1,11 @@
-export OnionSkin  from './onion-skin';
-export Single     from './single';
-export TopBottom  from './top-bottom';
-export SideBySide from './side-by-side';
-export Slide      from './slide';
+import onionSkin  from './onion-skin';
+import single     from './single';
+import topBottom  from './top-bottom';
+import sideBySide from './side-by-side';
+import slide      from './slide';
+
+export const OnionSkin = onionSkin;
+export const Single = single;
+export const TopBottom = topBottom;
+export const SideBySide = sideBySide;
+export const Slide = slide;

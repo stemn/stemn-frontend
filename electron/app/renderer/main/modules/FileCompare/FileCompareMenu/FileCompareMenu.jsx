@@ -7,21 +7,21 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as ElectronWindowsActions from 'app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
-import * as SystemActions    from 'app/shared/modules/System/System.actions.js';
-import * as ModalActions      from 'app/renderer/main/modules/Modal/Modal.actions.js';
+import * as ElectronWindowsActions from 'electron/app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
+import * as SystemActions    from 'electron/app/shared/modules/System/System.actions.js';
+import * as ModalActions      from 'electron/app/renderer/main/modules/Modal/Modal.actions.js';
 
 // Component Core
 import React from 'react';
-import { getViewerType } from 'app/shared/modules/Files/PreviewFile/PreviewFile.utils.js';
+import { getViewerType } from 'electron/app/shared/modules/Files/PreviewFile/PreviewFile.utils.js';
 
 // Styles
 import classNames from 'classnames';
 
 // Sub Components
-import PopoverMenu          from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
-import PopoverMenuList      from 'app/renderer/main/components/PopoverMenu/PopoverMenuList';
-import SimpleIconButton     from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import PopoverMenu          from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenu';
+import PopoverMenuList      from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenuList';
+import SimpleIconButton     from 'electron/app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import { getCompareModes, getCompareIcon }  from '../FileCompare.utils.js';
 import MdMoreHoriz      from 'react-icons/md/more-horiz';
 import MdOpenInNew      from 'react-icons/md/open-in-new';

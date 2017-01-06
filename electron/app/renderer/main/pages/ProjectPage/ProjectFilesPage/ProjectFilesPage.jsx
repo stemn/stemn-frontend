@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as ProjectsActions        from 'app/shared/actions/projects.js';
-import * as ElectronWindowsActions from 'app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
+import * as ProjectsActions        from 'electron/app/shared/actions/projects.js';
+import * as ElectronWindowsActions from 'electron/app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
 import ProjectFilesPageRoute from './ProjectFilesPage.routeActions.js';
 
 // Component Core
@@ -15,8 +15,8 @@ import classNames from 'classnames';
 import classes from './ProjectFilesPage.css'
 
 // Sub Components
-import FileList from 'app/renderer/main/modules/FileList/FileList';
-import Readme from 'app/shared/modules/Files/Readme/Readme.jsx';
+import FileList from 'electron/app/renderer/main/modules/FileList/FileList';
+import Readme from 'electron/app/shared/modules/Files/Readme/Readme.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

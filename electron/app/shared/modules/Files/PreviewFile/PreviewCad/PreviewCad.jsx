@@ -6,9 +6,9 @@ import previewCadUtils from './PreviewCad.utils.js';
 //import AutodeskViewer from './AutodeskViewer/AutodeskViewer';
 import AutodeskLocalViewer from './AutodeskLocalViewer/AutodeskLocalViewer'
 
-import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import modelLocked    from 'app/renderer/assets/images/pure-vectors/model-locked.svg';
-import modelGear      from 'app/renderer/assets/images/pure-vectors/model-gear.svg';
+import LoadingOverlay from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import modelLocked    from 'electron/app/renderer/assets/images/pure-vectors/model-locked.svg';
+import modelGear      from 'electron/app/renderer/assets/images/pure-vectors/model-gear.svg';
 import ErrorMessages  from '../Messages/Messages.jsx'
 
 //export const GetStatusOfUrn =  React.createClass({

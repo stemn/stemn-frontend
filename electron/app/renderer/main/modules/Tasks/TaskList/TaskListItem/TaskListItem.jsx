@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as TasksActions from '../../Tasks.actions.js';
-import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
+import * as ModalActions from 'electron/app/renderer/main/modules/Modal/Modal.actions.js';
 
 // Component Core
 import React from 'react';
@@ -14,18 +14,18 @@ import { has } from 'lodash';
 // Styles
 import classNames from 'classnames';
 import classes from './TaskListItem.css';
-import loadingClasses from 'app/shared/modules/Loading/LoadingPlaceholders/LoadingPlaceholders.css'
+import loadingClasses from 'electron/app/shared/modules/Loading/LoadingPlaceholders/LoadingPlaceholders.css'
 
 // Sub Components
-import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
-import Input from 'app/renderer/main/components/Input/Input/Input';
-import UserAvatars from 'app/renderer/main/components/Avatar/UserAvatars/UserAvatars.jsx'
-import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import Checkbox from 'electron/app/renderer/main/components/Input/Checkbox/Checkbox';
+import Input from 'electron/app/renderer/main/components/Input/Input/Input';
+import UserAvatars from 'electron/app/renderer/main/components/Avatar/UserAvatars/UserAvatars.jsx'
+import SimpleIconButton from 'electron/app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdOpenInNew from 'react-icons/md/open-in-new';
-import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
-import TaskLabelDots from 'app/renderer/main/modules/Tasks/TaskLabelDots/TaskLabelDots.jsx'
-import Textarea from 'app/renderer/main/components/Input/Textarea/Textarea';
-import UserSelect from 'app/renderer/main/components/Users/UserSelect/UserSelect.jsx';
+import PopoverMenu from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenu';
+import TaskLabelDots from 'electron/app/renderer/main/modules/Tasks/TaskLabelDots/TaskLabelDots.jsx'
+import Textarea from 'electron/app/renderer/main/components/Input/Textarea/Textarea';
+import UserSelect from 'electron/app/renderer/main/components/Users/UserSelect/UserSelect.jsx';
 
 
 ///////////////////////////////// COMPONENT /////////////////////////////////

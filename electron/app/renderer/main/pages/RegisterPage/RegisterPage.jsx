@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as AuthActions from 'app/shared/modules/Auth/Auth.actions.js';
+import * as AuthActions from 'electron/app/shared/modules/Auth/Auth.actions.js';
 
 
 // Component Core
@@ -15,11 +15,11 @@ import classes from '../LoginPage/LoginPage.css'
 
 // Sub Components
 import { Link } from 'react-router';
-import Button from 'app/renderer/main/components/Buttons/Button/Button.jsx';
-import Input from 'app/renderer/main/components/Input/Input/Input';
-import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton';
+import Button from 'electron/app/renderer/main/components/Buttons/Button/Button.jsx';
+import Input from 'electron/app/renderer/main/components/Input/Input/Input';
+import SimpleIconButton from 'electron/app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton.jsx';
 import MdPhoto from 'react-icons/md/photo';
-import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import LoadingOverlay from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

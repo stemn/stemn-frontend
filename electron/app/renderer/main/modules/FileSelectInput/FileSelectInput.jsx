@@ -3,13 +3,13 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
+import * as ModalActions from 'electron/app/renderer/main/modules/Modal/Modal.actions.js';
 
 import classes from './FileSelectInput.css'
 import classNames from 'classnames';
 import MdFolder from 'react-icons/md/folder';
-import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
-import { isDriveFileId, isDropboxFileId } from 'app/shared/modules/Files/Files.utils.js';
+import SimpleIconButton from 'electron/app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import { isDriveFileId, isDropboxFileId } from 'electron/app/shared/modules/Files/Files.utils.js';
 
 
 const propTypesObject = {

@@ -5,10 +5,10 @@ import moment from 'moment';
 import classNames from 'classnames';
 import classes from './FileRow.css'
 
-import bytes from 'app/shared/helpers/filters/bytes.js';
+import bytes from 'electron/app/shared/helpers/filters/bytes.js';
 import FileIcon from './FileIcon'
-import Label        from 'app/shared/modules/Label/Label.jsx'
-import Link                from 'app/shared/modules/Router/Link/Link.jsx';
+import Label        from 'electron/app/shared/modules/Label/Label.jsx'
+import Link                from 'electron/app/shared/modules/Router/Link/Link.jsx';
 
 export default React.createClass({
   render() {

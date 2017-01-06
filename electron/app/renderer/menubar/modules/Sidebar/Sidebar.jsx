@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as MenubarLayoutActions from 'app/shared/actions/menubarLayout';
+import * as MenubarLayoutActions from 'electron/app/shared/actions/menubarLayout';
 
 // Component Core
 import React from 'react';
@@ -16,10 +16,10 @@ import classes from './Sidebar.css'
 
 
 // Sub Components
-import AnimateShow from 'app/renderer/shared/AnimateShow/AnimateShow.jsx'
-import SidebarProjectButton from 'app/renderer/main/modules/Sidebar/SidebarProjectButton.jsx'
+import AnimateShow from 'electron/app/renderer/shared/AnimateShow/AnimateShow.jsx'
+import SidebarProjectButton from 'electron/app/renderer/main/modules/Sidebar/SidebarProjectButton.jsx'
 import MdSearch from 'react-icons/md/search';
-import Input from 'app/renderer/main/components/Input/Input/Input';
+import Input from 'electron/app/renderer/main/components/Input/Input/Input';
 
 
 ///////////////////////////////// COMPONENT /////////////////////////////////

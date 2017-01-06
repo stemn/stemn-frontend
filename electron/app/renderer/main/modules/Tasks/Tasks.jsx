@@ -15,16 +15,16 @@ import classNames from 'classnames';
 import classes from './Tasks.css';
 
 // Sub Components
-import Input                from 'app/renderer/main/components/Input/Input/Input';
+import Input                from 'electron/app/renderer/main/components/Input/Input/Input';
 import TasksFilterMenu      from './TasksFilterMenu/TasksFilterMenu.jsx';
 import TaskList             from './TaskList/TaskList.jsx';
-import Button               from 'app/renderer/main/components/Buttons/Button/Button'
+import Button               from 'electron/app/renderer/main/components/Buttons/Button/Button'
 import MdSearch             from 'react-icons/md/search';
-import PopoverMenu          from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
-import Guide                from 'app/renderer/main/modules/Guide/Guide';
+import PopoverMenu          from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenu';
+import Guide                from 'electron/app/renderer/main/modules/Guide/Guide';
 import cardsColumns         from './graphics/cards-columns.svg';
 import cardsStacked         from './graphics/cards-stacked.svg';
-import LoadingOverlay       from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import LoadingOverlay       from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 
 ///////////////////////////////// COMPONENT /////////////////////////////////

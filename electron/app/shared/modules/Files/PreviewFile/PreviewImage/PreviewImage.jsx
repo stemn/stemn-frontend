@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 import { omit } from 'lodash';
 import styles from './PreviewImage.css';
-import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import ScrollZoom from 'app/shared/modules/Scroll/ScrollZoom/ScrollZoom.jsx';
+import LoadingOverlay from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import ScrollZoom from 'electron/app/shared/modules/Scroll/ScrollZoom/ScrollZoom.jsx';
 
 //const ImagePropTypes = {
 //  arrayBuffer  : PropTypes.array,   // Image data array buffer

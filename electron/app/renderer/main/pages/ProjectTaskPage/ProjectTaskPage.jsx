@@ -11,9 +11,9 @@ import React from 'react';
 import classNames from 'classnames';
 
 // Sub Components
-import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import TaskList       from 'app/renderer/main/modules/Tasks/TaskList/TaskList.jsx'
-import Tasks          from 'app/renderer/main/modules/Tasks/Tasks.jsx'
+import LoadingOverlay from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import TaskList       from 'electron/app/renderer/main/modules/Tasks/TaskList/TaskList.jsx'
+import Tasks          from 'electron/app/renderer/main/modules/Tasks/Tasks.jsx'
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

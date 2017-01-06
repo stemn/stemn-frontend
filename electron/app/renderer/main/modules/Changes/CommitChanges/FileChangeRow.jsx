@@ -2,9 +2,9 @@ import React from 'react';
 import classNames from 'classnames';
 
 // Components
-import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
-import TogglerExpand from 'app/renderer/main/components/Toggler/TogglerExpand/TogglerExpand.jsx';
-import { middle as middleConcat } from 'app/shared/helpers/stringConcat';
+import Checkbox from 'electron/app/renderer/main/components/Input/Checkbox/Checkbox';
+import TogglerExpand from 'electron/app/renderer/main/components/Toggler/TogglerExpand/TogglerExpand.jsx';
+import { middle as middleConcat } from 'electron/app/shared/helpers/stringConcat';
 
 // Styles
 import styles from './FileChangeRow.css';

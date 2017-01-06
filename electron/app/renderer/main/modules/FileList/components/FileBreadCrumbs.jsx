@@ -5,8 +5,8 @@ import i from 'icepick';
 import classNames from 'classnames';
 import classes from './FileBreadCrumbs.css';
 
-import { middle as middleConcat } from 'app/shared/helpers/stringConcat';
-import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
+import { middle as middleConcat } from 'electron/app/shared/helpers/stringConcat';
+import PopoverMenu from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenu';
 import FileListPopup from './FileListPopup.jsx';
 
 export default React.createClass({

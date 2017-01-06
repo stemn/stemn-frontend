@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import getUuid from 'app/shared/helpers/getUuid.js';
+import getUuid from 'electron/app/shared/helpers/getUuid.js';
 
 
 // Styles
@@ -11,11 +11,11 @@ import classes from './TaskLabelsEdit.css';
 
 // Actions
 import { actions } from 'react-redux-form';
-import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
+import * as ModalActions from 'electron/app/renderer/main/modules/Modal/Modal.actions.js';
 
-import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
-import Input from 'app/renderer/main/components/Input/Input/Input';
-import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import PopoverMenu from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenu';
+import Input from 'electron/app/renderer/main/components/Input/Input/Input';
+import SimpleIconButton from 'electron/app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
 import ColorSelect from './ColorSelect/ColorSelect.jsx'
 

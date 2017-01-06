@@ -9,8 +9,8 @@ import { push } from 'react-router-redux'
 import React from 'react';
 
 // Sub Components
-import TitleBar from 'app/renderer/main/components/TitleBar/TitleBar';
-import Sidebar  from 'app/renderer/main/modules/Sidebar/Sidebar.jsx';
+import TitleBar from 'electron/app/renderer/main/components/TitleBar/TitleBar';
+import Sidebar  from 'electron/app/renderer/main/modules/Sidebar/Sidebar.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

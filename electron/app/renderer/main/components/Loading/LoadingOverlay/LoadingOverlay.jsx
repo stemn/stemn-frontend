@@ -2,8 +2,8 @@ import React, { PropTypes, Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 // Components
-import LoadingSpinner from 'app/renderer/main/components/Loading/LoadingSpinner/LoadingSpinner';
-import LoadingLinear  from 'app/renderer/main/components/Loading/LoadingLinear/LoadingLinear.jsx';
+import LoadingSpinner from 'electron/app/renderer/main/components/Loading/LoadingSpinner/LoadingSpinner';
+import LoadingLinear  from 'electron/app/renderer/main/components/Loading/LoadingLinear/LoadingLinear.jsx';
 
 // Styles
 import classes from './LoadingOverlay.css';

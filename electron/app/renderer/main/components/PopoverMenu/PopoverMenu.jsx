@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import Popover from 'app/renderer/assets/other/react-popup';
+import Popover from 'electron/app/renderer/assets/other/react-popup';
 
 const PropTypesObject = {
   preferPlace         : PropTypes.string,               // ['above', 'below', 'left', 'right']

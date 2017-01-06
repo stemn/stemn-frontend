@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as ChangesActions from 'app/renderer/main/modules/Changes/Changes.actions.js';
-import * as ProjectsActions from 'app/shared/actions/projects.js';
+import * as ChangesActions from 'electron/app/renderer/main/modules/Changes/Changes.actions.js';
+import * as ProjectsActions from 'electron/app/shared/actions/projects.js';
 
 // Component Core
 import React from 'react';
@@ -13,16 +13,16 @@ import { has } from 'lodash';
 import classNames from 'classnames';
 
 // Sub Components
-import LoadingOverlay     from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import CommitChanges      from 'app/renderer/main/modules/Changes/CommitChanges/CommitChanges.jsx';
-import CommitBox          from 'app/renderer/main/modules/Changes/CommitBox/CommitBox.jsx'
-import Toolbar            from 'app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
+import LoadingOverlay     from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import CommitChanges      from 'electron/app/renderer/main/modules/Changes/CommitChanges/CommitChanges.jsx';
+import CommitBox          from 'electron/app/renderer/main/modules/Changes/CommitBox/CommitBox.jsx'
+import Toolbar            from 'electron/app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
 import MdOpenInNew from 'react-icons/md/open-in-new';
 import { Link }           from 'react-router';
-import cloudLocked          from 'app/renderer/assets/images/pure-vectors/cloud-locked.svg';
+import cloudLocked          from 'electron/app/renderer/assets/images/pure-vectors/cloud-locked.svg';
 
 
-import * as stringConcat  from 'app/shared/helpers/stringConcat';
+import * as stringConcat  from 'electron/app/shared/helpers/stringConcat';
 
 export const Component = React.createClass({
   onMount(nextProps, prevProps){

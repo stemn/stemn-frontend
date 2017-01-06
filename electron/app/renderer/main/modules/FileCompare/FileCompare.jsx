@@ -2,12 +2,12 @@ import React from 'react';
 
 import classes            from './FileCompare.css';
 
-import { orderItemsByTime } from 'app/renderer/main/modules/FileCompare/FileCompare.utils.js';
-import TogglePanel        from 'app/shared/modules/TogglePanel/TogglePanel.jsx';
-import DragResize         from 'app/renderer/main/modules/DragResize/DragResize.jsx';
-import FileCompareMenu    from 'app/renderer/main/modules/FileCompare/FileCompareMenu/FileCompareMenu.jsx';
-import FileCompareInner   from 'app/renderer/main/modules/FileCompare/FileCompareInner/FileCompareInner.jsx';
-import Timeline           from 'app/renderer/main/modules/Timeline/Timeline.jsx';
+import { orderItemsByTime } from 'electron/app/renderer/main/modules/FileCompare/FileCompare.utils.js';
+import TogglePanel        from 'electron/app/shared/modules/TogglePanel/TogglePanel.jsx';
+import DragResize         from 'electron/app/renderer/main/modules/DragResize/DragResize.jsx';
+import FileCompareMenu    from 'electron/app/renderer/main/modules/FileCompare/FileCompareMenu/FileCompareMenu.jsx';
+import FileCompareInner   from 'electron/app/renderer/main/modules/FileCompare/FileCompareInner/FileCompareInner.jsx';
+import Timeline           from 'electron/app/renderer/main/modules/Timeline/Timeline.jsx';
 import { orderBy, has }   from 'lodash';
 
 export const FileCompare = React.createClass({

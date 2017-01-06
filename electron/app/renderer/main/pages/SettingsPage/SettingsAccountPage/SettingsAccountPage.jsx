@@ -3,22 +3,22 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as UsersActions from 'app/shared/actions/users';
-import * as AuthActions from 'app/shared/modules/Auth/Auth.actions.js';
+import * as UsersActions from 'electron/app/shared/actions/users';
+import * as AuthActions from 'electron/app/shared/modules/Auth/Auth.actions.js';
 
 // Component Core
 import React from 'react';
 
 // Styles
 import classNames from 'classnames';
-import classes from 'app/renderer/main/pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css'
+import classes from 'electron/app/renderer/main/pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css'
 
 // Sub Components
-import Upload from 'app/renderer/main/modules/Upload/Upload.jsx'
-import ProgressButton from 'app/renderer/main/components/Buttons/ProgressButton/ProgressButton.jsx'
-import LinkAccount from 'app/renderer/main/modules/Settings/LinkAccount/LinkAccount.jsx'
-import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import Input from 'app/renderer/main/components/Input/Input/Input';
+import Upload from 'electron/app/renderer/main/modules/Upload/Upload.jsx'
+import ProgressButton from 'electron/app/renderer/main/components/Buttons/ProgressButton/ProgressButton.jsx'
+import LinkAccount from 'electron/app/renderer/main/modules/Settings/LinkAccount/LinkAccount.jsx'
+import LoadingOverlay from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import Input from 'electron/app/renderer/main/components/Input/Input/Input';
 
 
 

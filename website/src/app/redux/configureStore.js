@@ -5,6 +5,7 @@ import createLogger  from 'redux-logger';
 import rootReducer   from './reducers.js';
 
 export default function configureStore(initialState) {
+  console.log('Configure Store');
   const middleware =[
     thunk,
     promise(),

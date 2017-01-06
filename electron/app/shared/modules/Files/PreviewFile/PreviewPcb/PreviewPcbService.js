@@ -1,6 +1,6 @@
-import getUuid from 'app/shared/helpers/getUuid.js';
+import getUuid from 'electron/app/shared/helpers/getUuid.js';
 import { findIndex } from 'lodash';
-import webGerber from 'app/renderer/assets/other/gerber/js/webGerber.js';
+import webGerber from 'electron/app/renderer/assets/other/gerber/js/webGerber.js';
 
 const previewPcbService = {
   activeInstances : [],

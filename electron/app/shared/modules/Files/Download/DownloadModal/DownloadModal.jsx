@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as SyncTimelineActions from 'app/shared/modules/SyncTimeline/SyncTimeline.actions.js';
+import * as SyncTimelineActions from 'electron/app/shared/modules/SyncTimeline/SyncTimeline.actions.js';
 import { actions } from 'react-redux-form';
 
 // Component Core
@@ -16,11 +16,11 @@ import classNames from 'classnames';
 import classes from './DownloadModal.css'
 
 // Sub Components
-import Button from 'app/renderer/main/components/Buttons/Button/Button';
+import Button from 'electron/app/renderer/main/components/Buttons/Button/Button';
 import MdDone from 'react-icons/md/done';
 import DownloadFile from '../../DownloadFile/DownloadFile.jsx'
-import Label        from 'app/shared/modules/Label/Label.jsx'
-import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import Label        from 'electron/app/shared/modules/Label/Label.jsx'
+import LoadingOverlay from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

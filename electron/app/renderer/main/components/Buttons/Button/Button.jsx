@@ -4,7 +4,7 @@
 //import classNames from 'classnames';
 //import classes from './Button.css';
 //
-//import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+//import LoadingOverlay from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 //
 //export default class extends React.Component{
 //  render() {

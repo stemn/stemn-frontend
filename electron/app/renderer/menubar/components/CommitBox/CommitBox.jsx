@@ -2,10 +2,10 @@ import React from 'react';
 
 import classNames from 'classnames';
 import styles from './CommitBox.css';
-import Input from 'app/renderer/main/components/Input/Input/Input';
+import Input from 'electron/app/renderer/main/components/Input/Input/Input';
 
 // Components
-import IconButton from 'app/renderer/main/components/Buttons/IconButton';
+import IconButton from 'electron/app/renderer/main/components/Buttons/IconButton';
 import MdDone from 'react-icons/md/done';
 import { MentionsInput, Mention } from 'react-mentions'
 

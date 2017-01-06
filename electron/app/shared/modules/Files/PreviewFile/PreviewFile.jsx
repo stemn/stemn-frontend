@@ -22,8 +22,8 @@ import PreviewCad         from './PreviewCad/PreviewCad'
 //import PreviewCad         from './PreviewCad/AutodeskLocalViewer/AutodeskLocalViewer'
 import PreviewGoogle      from './PreviewGoogle/PreviewGoogle'
 import PreviewGdoc        from './PreviewGdoc/PreviewGdoc'
-import LoadingOverlay     from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import laptopSpanner      from 'app/renderer/assets/images/pure-vectors/laptop-spanner.svg';
+import LoadingOverlay     from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import laptopSpanner      from 'electron/app/renderer/assets/images/pure-vectors/laptop-spanner.svg';
 import { getViewerType }  from './PreviewFile.utils.js'
 import DownloadFile       from '../DownloadFile/DownloadFile.jsx'
 
@@ -73,7 +73,7 @@ export const Component = React.createClass({
             <div>Version: {file.revisionNumber}</div>
             {/*<div>&nbsp;&nbsp;Created: {moment(file.modified).calendar()}</div>*/}
             <div className="flex"></div>
-            <DownloadFile file={file} title="Download Version 1 of this file.">Download</DownloadFile>
+            <DownloadFile file={file} title={`Download Version ${file.revisionNumber} of this file.`}>Download</DownloadFile>
           </div>
         : null }
         {getPreview()}

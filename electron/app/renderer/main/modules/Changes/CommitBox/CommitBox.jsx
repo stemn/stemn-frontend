@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as ChangesActions from '../Changes.actions.js';
-import * as ElectronWindowsActions from 'app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
+import * as ElectronWindowsActions from 'electron/app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
 
 // Component Core
 import React from 'react';
@@ -16,12 +16,12 @@ import classNames from 'classnames';
 import classes from './CommitBox.css';
 
 // Sub Components
-import IconButton from 'app/renderer/main/components/Buttons/IconButton';
-import Button from 'app/renderer/main/components/Buttons/Button/Button.jsx';
-import Editor from 'app/renderer/main/modules/Editor/Editor.jsx';
-import Input from 'app/renderer/main/components/Input/Input/Input'
-import MarkdownButton from 'app/renderer/main/modules/Editor/MarkdownButton/MarkdownButton.jsx';
-import Walkthrough from 'app/shared/modules/Walkthrough/Walkthrough.jsx'
+import IconButton from 'electron/app/renderer/main/components/Buttons/IconButton';
+import Button from 'electron/app/renderer/main/components/Buttons/Button/Button.jsx';
+import Editor from 'electron/app/renderer/main/modules/Editor/Editor.jsx';
+import Input from 'electron/app/renderer/main/components/Input/Input/Input'
+import MarkdownButton from 'electron/app/renderer/main/modules/Editor/MarkdownButton/MarkdownButton.jsx';
+import Walkthrough from 'electron/app/shared/modules/Walkthrough/Walkthrough.jsx'
 
 import MdDone from 'react-icons/md/done';
 import { MentionsInput, Mention } from 'react-mentions';

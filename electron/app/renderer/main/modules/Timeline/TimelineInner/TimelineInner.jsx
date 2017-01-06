@@ -5,10 +5,10 @@ import classNames from 'classnames';
 import classes from './TimelineInner.css';
 
 import moment from 'moment';
-import Popover from 'app/renderer/assets/other/react-popup';
-import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
+import Popover from 'electron/app/renderer/assets/other/react-popup';
+import PopoverMenu from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenu';
 
-import * as stringConcat from 'app/shared/helpers/stringConcat';
+import * as stringConcat from 'electron/app/shared/helpers/stringConcat';
 
 
 const EventMap = {

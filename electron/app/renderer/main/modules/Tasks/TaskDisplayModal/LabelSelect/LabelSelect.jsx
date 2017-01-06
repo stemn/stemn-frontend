@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
 
-import CheckboxAlt from 'app/renderer/main/components/Input/CheckboxAlt/CheckboxAlt.jsx'
+import CheckboxAlt from 'electron/app/renderer/main/components/Input/CheckboxAlt/CheckboxAlt.jsx'
 import classes from './LabelSelect.css'
 
 export const Component = React.createClass({

@@ -1,6 +1,6 @@
-import * as SystemActions    from 'app/shared/modules/System/System.actions.js';
-import * as ElectronWindowsActions from 'app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
-import ProjectFilesPageRoute from 'app/renderer/main/pages/ProjectPage/ProjectFilesPage/ProjectFilesPage.routeActions.js';
+import * as SystemActions    from 'electron/app/shared/modules/System/System.actions.js';
+import * as ElectronWindowsActions from 'electron/app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
+import ProjectFilesPageRoute from 'electron/app/renderer/main/pages/ProjectPage/ProjectFilesPage/ProjectFilesPage.routeActions.js';
 
 export default (dispatch) => {
   return [{

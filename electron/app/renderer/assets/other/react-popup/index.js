@@ -455,7 +455,7 @@ const Popover = createClass({
 
     const popoverProps = {
       className: `Popover ${className}`,
-      style: { ...coreStyle, ...style }
+      style: Object.assign({}, coreStyle, style)
     }
 
     const tipProps = {

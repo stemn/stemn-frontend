@@ -6,9 +6,9 @@ import process from 'process';
 import styles from './TitleBar.css';
 import classNames from 'classnames';
 
-import MaximiseIcon from 'app/renderer/assets/icons/desktop/maximise.js';
-import CloseIcon from 'app/renderer/assets/icons/desktop/close.js';
-import MinimiseIcon from 'app/renderer/assets/icons/desktop/minimise.js';
+import MaximiseIcon from 'electron/app/renderer/assets/icons/desktop/maximise.js';
+import CloseIcon from 'electron/app/renderer/assets/icons/desktop/close.js';
+import MinimiseIcon from 'electron/app/renderer/assets/icons/desktop/minimise.js';
 
 export default React.createClass({
   getInitialState () {

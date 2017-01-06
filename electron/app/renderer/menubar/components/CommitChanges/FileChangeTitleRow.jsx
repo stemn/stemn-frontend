@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Components
-import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
+import Checkbox from 'electron/app/renderer/main/components/Input/Checkbox/Checkbox';
 // Styles
 import styles from './FileChangeTitleRow.css';
 

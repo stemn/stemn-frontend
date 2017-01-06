@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as CommentsActions from 'app/renderer/main/modules/Comments/Comments.actions.js';
+import * as CommentsActions from 'electron/app/renderer/main/modules/Comments/Comments.actions.js';
 
 // Component Core
 import React from 'react';
@@ -14,12 +14,12 @@ import classNames from 'classnames';
 import classes from './Comment.css';
 
 // Sub Components
-import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
-import Editor from 'app/renderer/main/modules/Editor/Editor.jsx';
-import MarkdownButton from 'app/renderer/main/modules/Editor/MarkdownButton/MarkdownButton.jsx';
-import EditorDisplay from 'app/renderer/main/modules/Editor/EditorDisplay.jsx';
-import Button from 'app/renderer/main/components/Buttons/Button/Button';
-import { ctrlEnterHandler } from 'app/shared/modules/Forms/Forms.utils.js'
+import UserAvatar from 'electron/app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
+import Editor from 'electron/app/renderer/main/modules/Editor/Editor.jsx';
+import MarkdownButton from 'electron/app/renderer/main/modules/Editor/MarkdownButton/MarkdownButton.jsx';
+import EditorDisplay from 'electron/app/renderer/main/modules/Editor/EditorDisplay.jsx';
+import Button from 'electron/app/renderer/main/components/Buttons/Button/Button';
+import { ctrlEnterHandler } from 'electron/app/shared/modules/Forms/Forms.utils.js'
 
 
 /////////////////////////////////////////////////////////////////////////////

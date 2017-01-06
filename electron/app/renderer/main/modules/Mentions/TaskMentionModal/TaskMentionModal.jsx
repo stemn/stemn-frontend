@@ -3,31 +3,31 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as TasksActions from 'app/renderer/main/modules/Tasks/Tasks.actions.js';
+import * as TasksActions from 'electron/app/renderer/main/modules/Tasks/Tasks.actions.js';
 
 // Component Core
 import React from 'react';
 import moment from 'moment';
 import { actions } from 'react-redux-form';
-import getUuid from 'app/shared/helpers/getUuid.js';
+import getUuid from 'electron/app/shared/helpers/getUuid.js';
 
 // Styles
 import classNames from 'classnames';
 import classes from './TaskMentionModal.css';
 
 // Helpers
-import howMany from 'app/shared/helpers/strings/howMany.js';
+import howMany from 'electron/app/shared/helpers/strings/howMany.js';
 
 // Sub Components
-import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
-import Input from 'app/renderer/main/components/Input/Input/Input';
-import Button from 'app/renderer/main/components/Buttons/Button/Button';
+import Checkbox from 'electron/app/renderer/main/components/Input/Checkbox/Checkbox';
+import Input from 'electron/app/renderer/main/components/Input/Input/Input';
+import Button from 'electron/app/renderer/main/components/Buttons/Button/Button';
 import TaskRow from './TaskRow/TaskRow.jsx';
 import MdSearch from 'react-icons/md/search';
-import { filterBoard, getAllTasks } from 'app/renderer/main/modules/Tasks/Tasks.utils.js';
-import TasksFilterMenu from 'app/renderer/main/modules/Tasks/TasksFilterMenu/TasksFilterMenu.jsx';
-import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
-import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import { filterBoard, getAllTasks } from 'electron/app/renderer/main/modules/Tasks/Tasks.utils.js';
+import TasksFilterMenu from 'electron/app/renderer/main/modules/Tasks/TasksFilterMenu/TasksFilterMenu.jsx';
+import PopoverMenu from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenu';
+import LoadingOverlay from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

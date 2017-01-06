@@ -9,7 +9,7 @@ config(function ($stateProvider) {
     $stateProvider.
     state('test', {
         url: '/test',
-        template: `<test-page params="params"></test-page>`,
+        template: `<test-page params="params" class="layout-column flex" style="height: 100vh"></test-page>`,
         controller: function($scope, $stateParams, $state){
             $scope.params = $stateParams;
         }

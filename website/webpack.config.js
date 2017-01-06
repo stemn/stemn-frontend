@@ -51,8 +51,13 @@ module.exports = function makeWebpackConfig () {
     preLoaders  : [],
     loaders     : [{
       test      : /(\.js|\.jsx)$/,
-      loaders   : [ 'happypack/loader' ],
+//      loaders   : [ 'happypack/loader' ],
+      loader    : 'babel?presets[]=react&presets[]=stage-2',
       exclude   : /node_modules/,
+    }, {
+      test      : /\.js$/,
+      loader    : 'babel?presets[]=react&presets[]=stage-2',
+      include   : [path.resolve(__dirname, '../electron/app/node_modules/react-icons/md')]
     }, {
       test      : /\.css$/,
       loaders   : [ 'style-loader', 'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]-[local]-[emoji:6]']
@@ -86,6 +91,7 @@ module.exports = function makeWebpackConfig () {
   
   config.resolve = {
     root                 : [ path.resolve('..'), path.resolve('./src') ],
+    extensions: ['', '.js', '.jsx'],
     modulesDirectories    : ["node_modules", "bower_components"],
     alias                : {
       'ui-router-extras' : __dirname + "/bower_components/ui-router-extras/release/ct-ui-router-extras.js",

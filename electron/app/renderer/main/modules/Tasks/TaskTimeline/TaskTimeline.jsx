@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as TasksActions from '../Tasks.actions.js';
-import * as CommentsActions from 'app/renderer/main/modules/Comments/Comments.actions.js';
+import * as CommentsActions from 'electron/app/renderer/main/modules/Comments/Comments.actions.js';
 
 // Component Core
 import React from 'react';
@@ -14,9 +14,9 @@ import classNames from 'classnames';
 import classes from './TaskTimeline.css';
 
 // Sub Components
-import Comment from 'app/renderer/main/modules/Comments/Comment/Comment.jsx';
+import Comment from 'electron/app/renderer/main/modules/Comments/Comment/Comment.jsx';
 import TaskTimelineItem from './TaskTimelineItem/TaskTimelineItem.jsx';
-import comments      from 'app/renderer/assets/images/pure-vectors/comments.svg';
+import comments      from 'electron/app/renderer/assets/images/pure-vectors/comments.svg';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

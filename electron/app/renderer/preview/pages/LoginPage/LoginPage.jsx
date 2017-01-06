@@ -6,15 +6,15 @@ import { connect } from 'react-redux';
 import React from 'react';
 
 // Actions
-import * as ElectronWindowsActions from 'app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
+import * as ElectronWindowsActions from 'electron/app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
 
 // Styles
 import classNames from 'classnames';
 
 // Sub Components
-import Toolbar from 'app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
-import cloudProject   from 'app/renderer/assets/images/pure-vectors/cloud-project.svg';
-import Button  from 'app/renderer/main/components/Buttons/Button/Button.jsx';
+import Toolbar from 'electron/app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
+import cloudProject   from 'electron/app/renderer/assets/images/pure-vectors/cloud-project.svg';
+import Button  from 'electron/app/renderer/main/components/Buttons/Button/Button.jsx';
 
 
 

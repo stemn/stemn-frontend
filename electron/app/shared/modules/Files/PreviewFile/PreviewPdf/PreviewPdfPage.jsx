@@ -4,7 +4,7 @@ import classes from './PreviewPdf.css';
 import PDFJS from 'pdfjs-dist'
 import PDFJSUtils from 'pdfjs-dist/web/pdf_viewer.js';
 import Waypoint from 'react-waypoint';
-import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import LoadingOverlay from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 const Page = React.createClass({
   getInitialState () {

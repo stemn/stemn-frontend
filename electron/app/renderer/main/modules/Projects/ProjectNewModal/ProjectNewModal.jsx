@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as ProjectsActions from 'app/shared/actions/projects.js';
+import * as ProjectsActions from 'electron/app/shared/actions/projects.js';
 import { push } from 'react-router-redux'
 import { actions } from 'react-redux-form';
 
@@ -16,14 +16,14 @@ import classNames from 'classnames';
 import classes from './ProjectNewModal.css';
 
 // Sub Components
-import Button from 'app/renderer/main/components/Buttons/Button/Button';
-import FileSelectInput from 'app/renderer/main/modules/FileSelectInput/FileSelectInput.jsx'
-import Textarea from 'app/renderer/main/components/Input/Textarea/Textarea';
-import Input from 'app/renderer/main/components/Input/Input/Input';
-import ProjectLinkRemote from 'app/renderer/main/components/Project/ProjectLinkRemote/ProjectLinkRemote.jsx'
-import { ArrowTabs, ArrowTab } from 'app/shared/modules/Tabs/ArrowTabs/ArrowTabs.jsx';
-import ProjectPermissionsRadio from 'app/renderer/main/components/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx'
-import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import Button from 'electron/app/renderer/main/components/Buttons/Button/Button';
+import FileSelectInput from 'electron/app/renderer/main/modules/FileSelectInput/FileSelectInput.jsx'
+import Textarea from 'electron/app/renderer/main/components/Input/Textarea/Textarea';
+import Input from 'electron/app/renderer/main/components/Input/Input/Input';
+import ProjectLinkRemote from 'electron/app/renderer/main/components/Project/ProjectLinkRemote/ProjectLinkRemote.jsx'
+import { ArrowTabs, ArrowTab } from 'electron/app/shared/modules/Tabs/ArrowTabs/ArrowTabs.jsx';
+import ProjectPermissionsRadio from 'electron/app/renderer/main/components/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx'
+import LoadingOverlay from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

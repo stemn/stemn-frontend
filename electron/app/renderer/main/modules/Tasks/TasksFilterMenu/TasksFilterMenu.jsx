@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { isFilterActive, addFilter } from 'app/renderer/main/modules/StringFilter/StringFilter.utils.js';
-import StringFilterMenu from 'app/renderer/main/modules/StringFilter/StringFilterMenu.jsx';
+import { isFilterActive, addFilter } from 'electron/app/renderer/main/modules/StringFilter/StringFilter.utils.js';
+import StringFilterMenu from 'electron/app/renderer/main/modules/StringFilter/StringFilterMenu.jsx';
 import classNames from 'classnames';
 
 const statusFilter = [{

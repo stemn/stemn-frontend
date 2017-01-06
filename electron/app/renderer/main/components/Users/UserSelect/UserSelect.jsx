@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Select from 'react-select';
-import selectCss from 'app/renderer/assets/css/select.css';
+import selectCss from 'electron/app/renderer/assets/css/select.css';
 import { actions } from 'react-redux-form';
 
 // Styles

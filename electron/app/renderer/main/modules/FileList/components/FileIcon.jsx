@@ -1,5 +1,5 @@
 import React from 'react';
-const fileTypeIcons = require.context("app/renderer/assets/icons/filetype", true);
+const fileTypeIcons = require.context("electron/app/renderer/assets/icons/filetype", true);
   
 // Styles
 import classNames from 'classnames';

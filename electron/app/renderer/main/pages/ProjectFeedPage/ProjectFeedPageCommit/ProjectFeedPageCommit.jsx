@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import classes             from './ProjectFeedPageCommit.css';
-import FileCompare         from 'app/renderer/main/modules/FileCompare/FileCompare.jsx';
-import UserAvatar          from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
-import EditorDisplay       from 'app/renderer/main/modules/Editor/EditorDisplay.jsx';
+import FileCompare         from 'electron/app/renderer/main/modules/FileCompare/FileCompare.jsx';
+import UserAvatar          from 'electron/app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
+import EditorDisplay       from 'electron/app/renderer/main/modules/Editor/EditorDisplay.jsx';
 import moment              from 'moment';
-import { toggleMulti }     from 'app/shared/modules/TogglePanel/TogglePanel.actions.js';
+import { toggleMulti }     from 'electron/app/shared/modules/TogglePanel/TogglePanel.actions.js';
 
-import { groupRevisions }  from 'app/renderer/main/modules/Timeline/Timeline.utils.js';
+import { groupRevisions }  from 'electron/app/renderer/main/modules/Timeline/Timeline.utils.js';
 
 export const ProjectFeedPageCommit = React.createClass({
   render() {

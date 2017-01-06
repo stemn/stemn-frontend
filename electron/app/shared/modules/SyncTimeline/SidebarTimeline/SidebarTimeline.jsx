@@ -6,13 +6,13 @@ import classNames from 'classnames';
 
 // Sub Components
 import SidebarTimelineRow from './SidebarTimelineRow'
-import FileChangeTitleRow from 'app/renderer/main/modules/Changes/CommitChanges/FileChangeTitleRow';
-import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import PopoverMenu from 'app/renderer/main/components/PopoverMenu/PopoverMenu';
-import SimpleIconButton from 'app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton'
+import FileChangeTitleRow from 'electron/app/renderer/main/modules/Changes/CommitChanges/FileChangeTitleRow';
+import LoadingOverlay from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import PopoverMenu from 'electron/app/renderer/main/components/PopoverMenu/PopoverMenu';
+import SimpleIconButton from 'electron/app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
 import { every } from 'lodash';
-import StringFilterMenu from 'app/renderer/main/modules/StringFilter/StringFilterMenu.jsx';
+import StringFilterMenu from 'electron/app/renderer/main/modules/StringFilter/StringFilterMenu.jsx';
 import { Link } from 'react-router';
 
 

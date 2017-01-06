@@ -1,8 +1,8 @@
 import React from 'react';
 
 // Components
-import Header from 'app/renderer/main/modules/Header/Header.jsx'
-import book   from 'app/renderer/assets/images/pure-vectors/book.svg';
+import Header from 'electron/app/renderer/main/modules/Header/Header.jsx'
+import book   from 'electron/app/renderer/assets/images/pure-vectors/book.svg';
 
 // Styles
 import classNames from 'classnames';

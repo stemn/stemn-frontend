@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from 'app/renderer/main/components/Buttons/Button/Button'
-import StandardTable from 'app/shared/modules/Tables/StandardTable/StandardTable.jsx'
+import Button from 'electron/app/renderer/main/components/Buttons/Button/Button'
+import StandardTable from 'electron/app/shared/modules/Tables/StandardTable/StandardTable.jsx'
 import classNames from 'classnames';
 
 const Component = React.createClass({

@@ -3,28 +3,28 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as SystemActions from 'app/shared/modules/System/System.actions.js';
-import * as StateActions from 'app/shared/actions/state';
-import * as ModalActions from 'app/renderer/main/modules/Modal/Modal.actions.js';
-import * as AutoLaunchActions from 'app/shared/modules/AutoLaunch/AutoLaunch.actions.js';
-import * as AutoUpdateActions from 'app/shared/modules/AutoUpdate/AutoUpdate.actions.js';
-import * as ElectronWindowsActions from 'app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
+import * as SystemActions from 'electron/app/shared/modules/System/System.actions.js';
+import * as StateActions from 'electron/app/shared/actions/state';
+import * as ModalActions from 'electron/app/renderer/main/modules/Modal/Modal.actions.js';
+import * as AutoLaunchActions from 'electron/app/shared/modules/AutoLaunch/AutoLaunch.actions.js';
+import * as AutoUpdateActions from 'electron/app/shared/modules/AutoUpdate/AutoUpdate.actions.js';
+import * as ElectronWindowsActions from 'electron/app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
 
 // Component Core
 import React from 'react';
 
 // Styles
 import classNames from 'classnames';
-import classes from 'app/renderer/main/pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css'
+import classes from 'electron/app/renderer/main/pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css'
 
 // Sub Components
 import { Link } from 'react-router';
-import Toggle from 'app/renderer/main/components/Input/Toggle/Toggle'
-import ProgressButton from 'app/renderer/main/components/Buttons/ProgressButton/ProgressButton.jsx'
-import FileSelectInputElectron from 'app/renderer/main/modules/FileSelectInput/FileSelectInputElectron.jsx'
-import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
-import SimpleTable        from 'app/shared/modules/Tables/SimpleTable/SimpleTable.jsx';
-import Banner from 'app/renderer/main/modules/Banner/Banner.jsx'
+import Toggle from 'electron/app/renderer/main/components/Input/Toggle/Toggle'
+import ProgressButton from 'electron/app/renderer/main/components/Buttons/ProgressButton/ProgressButton.jsx'
+import FileSelectInputElectron from 'electron/app/renderer/main/modules/FileSelectInput/FileSelectInputElectron.jsx'
+import Checkbox from 'electron/app/renderer/main/components/Input/Checkbox/Checkbox';
+import SimpleTable        from 'electron/app/shared/modules/Tables/SimpleTable/SimpleTable.jsx';
+import Banner from 'electron/app/renderer/main/modules/Banner/Banner.jsx'
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

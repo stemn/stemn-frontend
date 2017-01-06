@@ -14,12 +14,12 @@ import classNames from 'classnames';
 import classes from './Editor.css';
 
 // Sub Components
-import { MentionsInput, Mention } from 'app/renderer/main/modules/Mentions/MentionsInput/index.js'
-import UserAvatar from 'app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
+import { MentionsInput, Mention } from 'electron/app/renderer/main/modules/Mentions/MentionsInput/index.js'
+import UserAvatar from 'electron/app/renderer/main/components/Avatar/UserAvatar/UserAvatar.jsx';
 import AutosuggestHighlight from 'autosuggest-highlight';
-import Checkbox from 'app/renderer/main/components/Input/Checkbox/Checkbox';
+import Checkbox from 'electron/app/renderer/main/components/Input/Checkbox/Checkbox';
 
-import getUuid from 'app/shared/helpers/getUuid.js';
+import getUuid from 'electron/app/shared/helpers/getUuid.js';
 import http from 'axios';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////

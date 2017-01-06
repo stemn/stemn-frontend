@@ -1,14 +1,14 @@
 // Component Core
 import React from 'react';
 import http from 'axios';
-import { version } from 'app/package.json'
+import { version } from 'electron/app/package.json'
 
 // Styles
 import classNames from 'classnames';
 
-import Button from 'app/renderer/main/components/Buttons/Button/Button'
-import EditorDisplay from 'app/renderer/main/modules/Editor/EditorDisplay.jsx';
-import LoadingOverlay from 'app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import Button from 'electron/app/renderer/main/components/Buttons/Button/Button'
+import EditorDisplay from 'electron/app/renderer/main/modules/Editor/EditorDisplay.jsx';
+import LoadingOverlay from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 const Component = React.createClass({
   getInitialState () {
