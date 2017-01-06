@@ -20,6 +20,11 @@ export const FileCompare = React.createClass({
         lastSelected : 1,
         mode         : nextProps.file.revisions && nextProps.file.revisions.length > 1 ? 'sideBySide' : 'single'
       })
+
+      // Join the File room
+      nextProps.filesActions.websocketJoinFile({
+        fileId: nextProps.file.data.fileId
+      });
     }
   },
   componentWillMount() { this.onMount(this.props) },
