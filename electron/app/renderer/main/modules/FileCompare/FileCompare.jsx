@@ -5,7 +5,7 @@ import classes            from './FileCompare.css';
 import { orderItemsByTime } from 'electron/app/renderer/main/modules/FileCompare/FileCompare.utils.js';
 import TogglePanel        from 'electron/app/shared/modules/TogglePanel/TogglePanel.jsx';
 import DragResize         from 'electron/app/renderer/main/modules/DragResize/DragResize.jsx';
-import FileCompareMenu    from 'electron/app/renderer/main/modules/FileCompare/FileCompareMenu/FileCompareMenu.jsx';
+import FileCompareMenu    from 'electron/app/renderer/main/modules/FileCompare/FileCompareMenu';
 import FileCompareInner   from 'electron/app/renderer/main/modules/FileCompare/FileCompareInner/FileCompareInner.jsx';
 import Timeline           from 'electron/app/renderer/main/modules/Timeline/Timeline.jsx';
 import { orderBy, has }   from 'lodash';

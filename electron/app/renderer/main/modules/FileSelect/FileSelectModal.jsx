@@ -16,7 +16,7 @@ import classNames from 'classnames';
 import FileList from 'electron/app/renderer/main/modules/FileList/FileList';
 import Button from 'electron/app/renderer/main/components/Buttons/Button/Button';
 import MdDone from 'react-icons/md/done';
-import { isDriveFileId, isDropboxFileId } from 'electron/app/shared/modules/Files/Files.utils.js';
+import { isDriveFileId, isDropboxFileId } from 'electron/app/shared/modules/Files/utils';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

@@ -6,8 +6,16 @@ import './css/index.js';
 
 // Other Code
 import initSegment from 'public/assets/js/segment.io/init.js';
+import initHttp    from 'website/src/init/initHttp.js';
 import store from './redux/store.js';
 initSegment(GLOBAL_ENV.ENV_TYPE);
+initHttp(store)
+
+import http from 'axios';
+http('/api/v1/me').then(response => {
+  console.log(response);
+})
+
 
 // Angular modules
 import ngAnimate          from 'angular-animate'; 

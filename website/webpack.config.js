@@ -70,7 +70,10 @@ module.exports = function makeWebpackConfig () {
     }, {
       test      : /\.html$/,
       loader    : 'raw'
-    }]
+    }, {
+      test      : /\.json$/,
+      loader    : 'json-loader',
+    },]
   };
 
   // Istanbul Loader
@@ -96,7 +99,10 @@ module.exports = function makeWebpackConfig () {
     alias                : {
       'ui-router-extras' : __dirname + "/bower_components/ui-router-extras/release/ct-ui-router-extras.js",
       'ngGeolocation'    : __dirname + "/bower_components/ngGeolocation/ngGeolocation.js",
-      'theme'            : __dirname + "/src/theme.css"
+      'theme'            : __dirname + "/src/theme.css",
+//      'electron'         : __dirname + "/src/app/other/placeholderLibs/electron.js",
+      'fs'               : __dirname + "/src/app/other/placeholderLibs/fs.js",
+      'process'          : __dirname + "/src/app/other/placeholderLibs/process.js"
     }
   };
   
@@ -105,12 +111,13 @@ module.exports = function makeWebpackConfig () {
       new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin(".bower.json", ["main"])
     ),
     new HappyPack({
-      loaders      : [ 'babel?presets[]=react' ],
+      loaders      : [ 'babel?presets[]=react&presets[]=stage-2' ],
     }),
     new webpack.DefinePlugin({
       GLOBAL_ENV   : {
         ENV_TYPE   : JSON.stringify(process.env.ENV_TYPE),
         API_SERVER : JSON.stringify(process.env.API_SERVER),
+        APP_TYPE   : JSON.stringify('web'),
       },
     }),
   ];

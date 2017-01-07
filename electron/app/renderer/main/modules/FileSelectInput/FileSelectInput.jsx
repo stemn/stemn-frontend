@@ -9,7 +9,7 @@ import classes from './FileSelectInput.css'
 import classNames from 'classnames';
 import MdFolder from 'react-icons/md/folder';
 import SimpleIconButton from 'electron/app/renderer/main/components/Buttons/SimpleIconButton/SimpleIconButton.jsx'
-import { isDriveFileId, isDropboxFileId } from 'electron/app/shared/modules/Files/Files.utils.js';
+import { isDriveFileId, isDropboxFileId } from 'electron/app/shared/modules/Files/utils';
 
 
 const propTypesObject = {

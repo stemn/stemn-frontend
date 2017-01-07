@@ -4,7 +4,7 @@ import PDFJS from 'pdfjs-dist/build/pdf.combined.js'
 import Viewer from './PreviewPdfViewer.jsx'
 import classes from './PreviewPdf.css';
 import ScrollZoom from 'electron/app/shared/modules/Scroll/ScrollZoom/ScrollZoom.jsx';
-import { getDownloadUrl } from '../../Files.utils.js';
+import { getDownloadUrl } from '../../utils';
 
 // Link to the workerSrc bundle (See example here https://github.com/mozilla/pdf.js/blob/master/examples/webpack/main.js)
 PDFJS.PDFJS.workerSrc = process.env.HOT ? 'http://localhost:3001/dist/pdfWorker/index.js' : '../../pdfWorker/index.js';

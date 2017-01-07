@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import { getDownloadUrl } from '../../Files.utils.js';
+import { getDownloadUrl } from '../../utils';
 
 export default React.createClass({
   render() {

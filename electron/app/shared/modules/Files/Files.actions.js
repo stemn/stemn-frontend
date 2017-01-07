@@ -2,32 +2,7 @@ import http from 'axios';
 import { has } from 'lodash';
 import { name as localPathModuleName} from '../LocalPath/LocalPath.reducer.js';
 import * as LocalPathActions          from '../LocalPath/LocalPath.actions.js';
-import * as FilesUtils                from './Files.utils.js'
-
-//export function getFile({projectId, fileId, revisionId, provider, responseType}) {
-//  return (dispatch) => {
-//    const cacheKey = `${fileId}-${revisionId}`
-//    return dispatch({
-//      type: 'FILES/GET_FILE',
-//      http: true,
-//      payload: {
-//        method: 'GET',
-//        url: projectId ? `/api/v1/sync/download/${projectId}/${fileId}` : `/api/v1/remote/download/${provider}/${fileId}`,
-//        params: {
-//          revisionId
-//        },
-//        responseType: responseType || 'json',
-////        onDownloadProgress: function (progressEvent) {
-////          const percentage = progressEvent.loaded / progressEvent.total;
-////          dispatch(getFileProgress({percentage, cacheKey}));
-////        },
-//      },
-//      meta: {
-//        cacheKey
-//      }
-//    })
-//  }
-//}
+import * as FilesUtils                from './utils'
 
 export function getFile({projectId, fileId, revisionId, provider, responseType}) {
   const cacheKey = `${fileId}-${revisionId}`

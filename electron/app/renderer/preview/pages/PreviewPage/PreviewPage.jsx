@@ -15,9 +15,6 @@ import LoadingOverlay   from 'electron/app/renderer/main/components/Loading/Load
 import PreviewPageInner from './PreviewPageInner.jsx'
 import cloudMagnify    from 'electron/app/renderer/assets/images/pure-vectors/cloud-magnify.svg';
 
-// Styles
-import classes from './PagePreview.css';
-
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({

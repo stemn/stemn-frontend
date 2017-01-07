@@ -1,12 +1,12 @@
 
 import React, { PropTypes } from 'react';
-import classes from './AssemblyParts.css';
-import { connect } from 'react-redux';
-import { orderBy } from 'lodash';
-import moment from 'moment';
-import { isAssembly } from '../PreviewCad.utils.js';
-import * as filesActions from '../../../Files.actions.js';
-import SectionTitle       from 'electron/app/shared/modules/Titles/SectionTitle/SectionTitle.jsx';
+import classes              from './AssemblyParts.css';
+import { connect }          from 'react-redux';
+import { orderBy }          from 'lodash';
+import moment               from 'moment';
+import { isAssembly }       from '../PreviewCad.utils.js';
+import * as filesActions    from '../../../Files.actions.js';
+import SectionTitle         from 'electron/app/shared/modules/Titles/SectionTitle/SectionTitle.jsx';
 
 const propTypesObject = {
   fileMeta        : PropTypes.object.isRequired,   // fileMeta for the assembly

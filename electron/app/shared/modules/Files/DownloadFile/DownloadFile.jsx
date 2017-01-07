@@ -13,7 +13,7 @@ import classNames from 'classnames';
 
 // Sub Components
 import LoadingOverlay     from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import { getDownloadUrl } from '../Files.utils.js';
+import { getDownloadUrl } from '../utils';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
