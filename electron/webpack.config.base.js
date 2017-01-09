@@ -17,17 +17,18 @@ const getHappyConfig = (enable) => {
     },{
       test: /(\.js|\.jsx)$/,
       loader: 'happypack/loader?id=babel',
-      include: [path.resolve(__dirname, './app/node_modules/react-icons/md')],
+      include: [path.resolve(__dirname, './app/node_modules/react-icons/md')]
     }]
     : [{
-      test: /\.jsx?$/,
-      loader: 'babel',
-      exclude: /node_modules/,
+      test      : /\.jsx?$/,
+      loader    : 'babel',
+      exclude   : /node_modules/
     },{
-      test: /(\.js|\.jsx)$/,
-      loader: 'babel',
+      test      : /(\.js|\.jsx)$/,
+      loader    : 'babel',
       include: [
-        path.resolve(__dirname, './app/node_modules/react-icons/md')
+        path.resolve(__dirname, './app/node_modules/react-icons/md'),
+        path.resolve(__dirname, './app/node_modules/stemn-frontend-shared')
       ]
     }];
   
@@ -58,14 +59,16 @@ export default {
     libraryTarget: 'commonjs2',
   },
   resolve: {
-    root: [
-      path.resolve('../')
-    ],
-    extensions: ['', '.js', '.jsx'],
-    packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main'],
+    root                 : [path.resolve('../')],
+    extensions           : ['', '.js', '.jsx'],
+    packageMains         : ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main'],
     alias                : {
-      'theme'            : __dirname + "/app/theme.css"
-    }
+      'theme'            : path.resolve(__dirname, './app/theme.css')
+    },
+    fallback             : [ path.resolve(__dirname, './app/node_modules'), path.resolve(__dirname, './node_modules')]
+  },
+  resolveLoader          : {
+    fallback             : [ path.resolve(__dirname, './app/node_modules'), path.resolve(__dirname, './node_modules')]
   },
   plugins: [
     ...happyConfig.plugins,

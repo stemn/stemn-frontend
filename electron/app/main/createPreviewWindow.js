@@ -2,7 +2,10 @@ import { app, BrowserWindow, Menu, shell, screen } from 'electron';
 import { bindBackForward } from './utils/browserWindowUtils.js'
 import path from 'path';
 
-const mainHtml = path.join(__dirname, '../renderer/assets/html/preview.html');
+const mainHtml = process.env.NODE_ENV === 'development' 
+               ? path.join(__dirname, '../../app/renderer/assets/html/preview.html')
+               : path.join(__dirname, '../renderer/assets/html/preview.html');
+
 
 export const create = function createWindow({ uri = '/' } = {}) {
   const primarySize = screen.getPrimaryDisplay().workAreaSize;

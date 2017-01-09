@@ -1,3 +1,5 @@
+console.log('here we are 2');
+
 // for babel-plugin-webpack-loaders
 require('babel-register');
 const devConfigs = require('./webpack.config.development');

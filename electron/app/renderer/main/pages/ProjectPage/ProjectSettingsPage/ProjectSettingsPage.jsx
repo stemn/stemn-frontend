@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as ProjectsActions from 'electron/app/shared/actions/projects.js';
+import * as ProjectsActions from 'stemn-frontend-shared/src/redux/actions/projects.js';
 
 // Component Core
 import React from 'react';
@@ -15,7 +15,7 @@ import classes from './ProjectSettingsPage.css'
 // Sub Components
 import { actions } from 'react-redux-form';
 
-import NavPill from 'electron/app/renderer/main/components/Buttons/NavPill/NavPill'
+import NavPill from 'stemn-frontend-shared/src/misc/Buttons/NavPill/NavPill'
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////

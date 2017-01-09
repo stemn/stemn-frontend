@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Components
-import Header from 'electron/app/renderer/main/modules/Header/Header.jsx'
+import Header from 'stemn-frontend-shared/src/misc/Header/Header.jsx'
 import book   from 'electron/app/renderer/assets/images/pure-vectors/book.svg';
 
 // Styles

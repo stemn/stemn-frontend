@@ -6,9 +6,9 @@ import createLogger             from 'redux-logger';
 import { hashHistory }          from 'react-router';
 import { routerMiddleware }     from 'react-router-redux';
 import getRootReducerRenderer   from '../reducers/rootReducer.renderer.js';
-import forwardToMain            from './middleware/forwardToMain';
-import forwardToRendererWindow  from './middleware/forwardToRendererWindow';
-import routerFix                from '../modules/Router/Router.middleware.js';
+import forwardToMain            from '../middleware/forwardToMain';
+import forwardToRendererWindow  from '../middleware/forwardToRendererWindow';
+import routerFix                from 'stemn-frontend-shared/src/misc/Router/Router.middleware.js';
 
 export default function configureStore(initialState) {
   const middleware =[

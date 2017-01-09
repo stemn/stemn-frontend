@@ -1,5 +1,0 @@
-@value border1 from "theme";
-
-.panelRight{
-  border-left: 1px solid border1;
-}

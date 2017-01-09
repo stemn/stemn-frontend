@@ -2,7 +2,11 @@ import { BrowserWindow, screen, Menu, shell } from 'electron';
 import path from 'path';
 import process from 'process';
 
-const menuBarHtml = path.join(__dirname, '../renderer/assets/html/menubar.html');
+const menuBarHtml = process.env.NODE_ENV === 'development' 
+                  ? path.join(__dirname, '../../app/renderer/assets/html/menubar.html')
+                  : path.join(__dirname, '../renderer/assets/html/menubar.html');
+
+
 const WINDOW_WIDTH = 330;
 //const WINDOW_WIDTH = 600;
 const WINDOW_HEIGHT = 450;

@@ -1,7 +1,0 @@
-.button{
-  color: rgba(0, 0, 0, 0.2);
-  transition: 0.2s ease;
-}
-.button:hover{
-  color: rgba(0, 0, 0, 0.8);
-}

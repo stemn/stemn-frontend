@@ -1,26 +1,33 @@
 import './init.js';
-import os from 'os';
-import { app, ipcMain, dialog, crashReporter } from 'electron';
-import pify from 'pify';
-const jsonStorage = pify(require('electron-json-storage'))
-import { create as createMainWindow } from './createMainWindow';
-import { create as createMenubarWindow } from './createMenuBarWindow';
-import { initialise as wsInitialise, write as wsWrite } from './modules/websocket/websocket.js';
-import configureStore from '../shared/store/configureStore.main.js';
-import { create as createTrayIcon } from './createTrayIcon.js';
-import AutoUpdateInit from '../shared/modules/AutoUpdate/AutoUpdate.init.js';
-import squirrelStartup from 'electron-squirrel-startup';
-import mapWebsocketToRedux from './modules/websocket/mapWebsocketToRedux'
-import { getProviderPath } from '../shared/modules/System/System.actions.js';
-import { getFilteredStoreData } from './json-storage.js';
-import log from 'electron-log';
-import postStoreSetup from './postStoreSetup.js';
-import initApiServer from './api/index.js';
 
-import FileCache from '../shared/modules/FileCache/FileCache.js';
+import os                       from 'os';
+import squirrelStartup          from 'electron-squirrel-startup';
+import { app, ipcMain, dialog, crashReporter } from 'electron';
+import pify                     from 'pify';
+import log                      from 'electron-log';
+const jsonStorage               = pify(require('electron-json-storage'))
+
+import { create as createMainWindow }     from './createMainWindow';
+import { create as createMenubarWindow }  from './createMenuBarWindow';
+import { create as createTrayIcon }       from './createTrayIcon.js';
+
+import { 
+  initialise as wsInitialise, 
+  write as wsWrite }            from 'stemn-frontend-shared/src/misc/Websocket/websocket.js';
+import mapWebsocketToRedux      from 'stemn-frontend-shared/src/misc/Websocket/mapWebsocketToRedux'
+import FileCache                from 'stemn-frontend-shared/src/desktop/FileCache/FileCache.js';
+import AutoUpdateInit           from 'stemn-frontend-shared/src/desktop/AutoUpdate/AutoUpdate.init.js';
+import { getProviderPath }      from 'stemn-frontend-shared/src/desktop/System/System.actions.js';
+import configureStore           from '../shared/store/configureStore.main.js';
+import { getFilteredStoreData } from './json-storage.js';
+import postStoreSetup           from './postStoreSetup.js';
+import initApiServer            from './api/index.js';
 
 // Actions
-import * as ElectronWindowsActions from '../shared/modules/ElectronWindows/ElectronWindows.actions.js';
+import {
+  create as createWindow
+} from 'stemn-frontend-shared/src/desktop/ElectronWindows/ElectronWindows.actions.js';
+
 
 // The windows object is exported so it can be accessed elsewhere
 export const windows = {
@@ -152,7 +159,7 @@ function getArgs(argv){
 function showPreview(dispatch, path){
   log.info('path to show preview', path);
   if(dispatch && path){
-    dispatch(ElectronWindowsActions.create({
+    dispatch(createWindow({
       type: 'PREVIEW',
       props: {
         localPath: path

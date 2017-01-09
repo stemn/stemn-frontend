@@ -1,4 +1,4 @@
-import { sendAuthToken } from '../../shared/modules/Auth/Auth.actions.js';
+import { sendAuthToken } from 'stemn-frontend-shared/src/misc/Auth/Auth.actions.js';
 
 const pageHtml = `
 <!DOCTYPE html>

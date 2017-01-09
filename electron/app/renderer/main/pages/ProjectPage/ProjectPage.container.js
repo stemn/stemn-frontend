@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import ProjectPage from './ProjectPage';
-import * as ProjectsActions from 'electron/app/shared/actions/projects.js';
+import * as ProjectsActions from 'stemn-frontend-shared/src/redux/actions/projects.js';
 
 
 function mapStateToProps({projects}, otherProps) {

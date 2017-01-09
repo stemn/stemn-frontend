@@ -4,7 +4,10 @@ import path from 'path';
 import process from 'process';
 import log from 'electron-log';
 
-const mainHtml = path.join(__dirname, '../renderer/assets/html/main.html');
+const mainHtml = process.env.NODE_ENV === 'development' 
+               ? path.join(__dirname, '../../app/renderer/assets/html/main.html')
+               : path.join(__dirname, '../renderer/assets/html/main.html');
+
 
 export const create = function createWindow({ uri = '/' } = {}) {
   let browserWindow = null;

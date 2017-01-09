@@ -31,7 +31,7 @@ export default {
     new webpack.DefinePlugin({
       __DEV__: false,
       'GLOBAL_ENV': {
-        NODE_ENV  : JSON.stringify('production'),
+        NODE_ENV  : JSON.stringify(process.env.NODE_ENV),
         API_SERVER: JSON.stringify(process.env.API_SERVER),
         WEBSOCKET_SERVER: JSON.stringify(process.env.WEBSOCKET_SERVER),
         ELECTRON_CRASH_REPORT_SERVER: JSON.stringify(process.env.ELECTRON_CRASH_REPORT_SERVER)

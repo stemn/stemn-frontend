@@ -14,11 +14,11 @@ import classNames from 'classnames';
 import classes from './DashboardPage.css'
 
 // Sub Components
-import Header       from 'electron/app/renderer/main/modules/Header/Header.jsx'
-import DragResize   from 'electron/app/renderer/main/modules/DragResize/DragResize.jsx';
-import Calendar     from 'electron/app/renderer/main/modules/Calendar/Calendar.jsx';
-import Tabs         from 'electron/app/renderer/main/components/Tabs/Tabs';
-import Tasks        from 'electron/app/renderer/main/modules/Tasks/Tasks.jsx'
+import Header       from 'stemn-frontend-shared/src/misc/Header/Header.jsx'
+import DragResize   from 'stemn-frontend-shared/src/misc/DragResize/DragResize.jsx';
+import Calendar     from 'stemn-frontend-shared/src/misc/Calendar/Calendar.jsx';
+import Tabs         from 'stemn-frontend-shared/src/misc/Tabs/Tabs';
+import Tasks        from 'stemn-frontend-shared/src/misc/Tasks/Tasks.jsx'
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////

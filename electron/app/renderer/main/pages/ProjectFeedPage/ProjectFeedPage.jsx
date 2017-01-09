@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as SyncTimelineActions from 'electron/app/shared/modules/SyncTimeline/SyncTimeline.actions.js';
+import * as SyncTimelineActions from 'stemn-frontend-shared/src/misc/SyncTimeline/SyncTimeline.actions.js';
 
 // Component Core
 import React from 'react';
@@ -15,15 +15,14 @@ import feedPageStyles from './ProjectFeedPage.css';
 // Sub Components
 import { has }                  from 'lodash';
 import { Link }                 from 'react-router';
-import Popover                  from 'electron/app/renderer/assets/other/react-popup';
-import Timeline                 from 'electron/app/renderer/main/modules/Timeline/Timeline.jsx';
-import SidebarTimeline          from 'electron/app/shared/modules/SyncTimeline/SidebarTimeline/SidebarTimeline.jsx';
-import ContentSidebar           from 'electron/app/renderer/main/components/ContentSidebar';
-import timeline                 from 'electron/app/renderer/assets/images/pure-vectors/timeline.svg';
-import Guide                    from 'electron/app/renderer/main/modules/Guide/Guide';
-import Button                   from 'electron/app/renderer/main/components/Buttons/Button/Button'
+import Timeline                 from 'stemn-frontend-shared/src/misc/Timeline/Timeline.jsx';
+import SidebarTimeline          from 'stemn-frontend-shared/src/misc/SyncTimeline/SidebarTimeline/SidebarTimeline.jsx';
+import ContentSidebar           from 'stemn-frontend-shared/src/misc/ContentSidebar';
+import Guide                    from 'stemn-frontend-shared/src/misc/Guide/Guide';
+import Button                   from 'stemn-frontend-shared/src/misc/Buttons/Button/Button'
 import ProjectFeedPageCommit    from './ProjectFeedPageCommit/ProjectFeedPageCommit.jsx'
 import ProjectFeedPageRevision  from './ProjectFeedPageRevision/ProjectFeedPageRevision.jsx'
+import timeline                 from 'electron/app/renderer/assets/images/pure-vectors/timeline.svg';
 import cloudProviders           from 'electron/app/renderer/assets/images/illustrations/cloud-providers.svg'
 
 

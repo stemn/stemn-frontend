@@ -7,11 +7,11 @@ import React from 'react';
 import { has } from 'lodash';
 
 // Actions
-import * as FilesActions from 'electron/app/shared/modules/Files/Files.actions.js';
-import * as SyncTimelineActions from 'electron/app/shared/modules/SyncTimeline/SyncTimeline.actions.js';
+import * as FilesActions from 'stemn-frontend-shared/src/misc/Files/Files.actions.js';
+import * as SyncTimelineActions from 'stemn-frontend-shared/src/misc/SyncTimeline/SyncTimeline.actions.js';
 
 // Sub Components
-import LoadingOverlay   from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import LoadingOverlay   from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import PreviewPageInner from './PreviewPageInner.jsx'
 import cloudMagnify    from 'electron/app/renderer/assets/images/pure-vectors/cloud-magnify.svg';
 

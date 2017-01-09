@@ -3,11 +3,14 @@ import { Tray, Menu, shell } from 'electron';
 import process from 'process';
 
 // Actions
-import * as ElectronWindowsActions from '../shared/modules/ElectronWindows/ElectronWindows.actions.js';
+import * as ElectronWindowsActions from 'stemn-frontend-shared/src/desktop/ElectronWindows/ElectronWindows.actions.js';
 import { push } from 'react-router-redux';
 
+console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+const trayIcon = process.env.NODE_ENV === 'development' 
+               ? path.join(__dirname, '../../app/renderer/assets/images/logo.png')
+               : path.join(__dirname, '../renderer/assets/images/logo.png');
 
-const trayIcon = path.join(__dirname, '../renderer/assets/images/logo.png');
 let appIcon = null;
 
 export function create({store, windows}) {

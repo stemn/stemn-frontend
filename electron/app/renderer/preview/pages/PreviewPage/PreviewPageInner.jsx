@@ -13,30 +13,30 @@ import classNames from 'classnames';
 // Functions
 import { orderBy, has }        from 'lodash';
 import moment from 'moment';
-import { formatBytes } from 'electron/app/shared/modules/Files/utils'
+import { formatBytes } from 'stemn-frontend-shared/src/misc/Files/utils'
 
 // Actions
-import * as FilesActions        from 'electron/app/shared/modules/Files/Files.actions.js';
-import * as SyncTimelineActions from 'electron/app/shared/modules/SyncTimeline/SyncTimeline.actions.js';
-import * as ModalActions        from 'electron/app/renderer/main/modules/Modal/Modal.actions.js';
-import * as ElectronWindowsActions from 'electron/app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
+import * as FilesActions        from 'stemn-frontend-shared/src/misc/Files/Files.actions.js';
+import * as SyncTimelineActions from 'stemn-frontend-shared/src/misc/SyncTimeline/SyncTimeline.actions.js';
+import * as ModalActions        from 'stemn-frontend-shared/src/misc/Modal/Modal.actions.js';
+import * as ElectronWindowsActions from 'stemn-frontend-shared/src/desktop/ElectronWindows/ElectronWindows.actions.js';
 import { push } from 'react-router-redux';
 
 
 // Sub Components
-import { orderItemsByTime } from 'electron/app/renderer/main/modules/FileCompare/FileCompare.utils.js';
-import FileCompareInner     from 'electron/app/renderer/main/modules/FileCompare/FileCompareInner/FileCompareInner.jsx';
-import Timeline             from 'electron/app/renderer/main/modules/Timeline/Timeline.jsx';
-import DragResize           from 'electron/app/renderer/main/modules/DragResize/DragResize.jsx';
-import FileBreadCrumbs      from 'electron/app/renderer/main/modules/FileList/components/FileBreadCrumbs.jsx'
-import FileCompareMenu      from 'electron/app/renderer/main/modules/FileCompare/FileCompareMenu';
-import LoadingOverlay       from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import TimelineVertical     from 'electron/app/shared/modules/TimelineVertical/TimelineVertical.jsx';
-import SimpleTable          from 'electron/app/shared/modules/Tables/SimpleTable/SimpleTable.jsx';
-import SectionTitle         from 'electron/app/shared/modules/Titles/SectionTitle/SectionTitle.jsx';
-import AssemblyParts        from 'electron/app/shared/modules/Files/PreviewFile/PreviewCad/AssemblyParts/AssemblyParts.jsx'
-import Tag                  from 'electron/app/shared/modules/Tags/Tag.jsx';
-import Header               from 'electron/app/renderer/main/modules/Header/Header.jsx'
+import { orderItemsByTime } from 'stemn-frontend-shared/src/misc/FileCompare/FileCompare.utils.js';
+import FileCompareInner     from 'stemn-frontend-shared/src/misc/FileCompare/FileCompareInner/FileCompareInner.jsx';
+import Timeline             from 'stemn-frontend-shared/src/misc/Timeline/Timeline.jsx';
+import DragResize           from 'stemn-frontend-shared/src/misc/DragResize/DragResize.jsx';
+import FileBreadCrumbs      from 'stemn-frontend-shared/src/misc/FileList/components/FileBreadCrumbs.jsx'
+import FileCompareMenu      from 'stemn-frontend-shared/src/misc/FileCompare/FileCompareMenu';
+import LoadingOverlay       from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import TimelineVertical     from 'stemn-frontend-shared/src/misc/TimelineVertical/TimelineVertical.jsx';
+import SimpleTable          from 'stemn-frontend-shared/src/misc/Tables/SimpleTable/SimpleTable.jsx';
+import SectionTitle         from 'stemn-frontend-shared/src/misc/Titles/SectionTitle/SectionTitle.jsx';
+import AssemblyParts        from 'stemn-frontend-shared/src/misc/Files/PreviewFile/PreviewCad/AssemblyParts/AssemblyParts.jsx'
+import Tag                  from 'stemn-frontend-shared/src/misc/Tags/Tag.jsx';
+import Header               from 'stemn-frontend-shared/src/misc/Header/Header.jsx'
 
 // Styles
 import classes from './PagePreview.css';

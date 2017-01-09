@@ -3,12 +3,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as SystemActions from 'electron/app/shared/modules/System/System.actions.js';
-import * as StateActions from 'electron/app/shared/actions/state';
-import * as ModalActions from 'electron/app/renderer/main/modules/Modal/Modal.actions.js';
-import * as AutoLaunchActions from 'electron/app/shared/modules/AutoLaunch/AutoLaunch.actions.js';
-import * as AutoUpdateActions from 'electron/app/shared/modules/AutoUpdate/AutoUpdate.actions.js';
-import * as ElectronWindowsActions from 'electron/app/shared/modules/ElectronWindows/ElectronWindows.actions.js';
+import * as SystemActions from 'stemn-frontend-shared/src/desktop/System/System.actions.js';
+import * as StateActions from 'stemn-frontend-shared/src/redux/actions/state';
+import * as ModalActions from 'stemn-frontend-shared/src/misc/Modal/Modal.actions.js';
+import * as AutoLaunchActions from 'stemn-frontend-shared/src/desktop/AutoLaunch/AutoLaunch.actions.js';
+import * as AutoUpdateActions from 'stemn-frontend-shared/src/desktop/AutoUpdate/AutoUpdate.actions.js';
+import * as ElectronWindowsActions from 'stemn-frontend-shared/src/desktop/ElectronWindows/ElectronWindows.actions.js';
 
 // Component Core
 import React from 'react';
@@ -19,12 +19,12 @@ import classes from 'electron/app/renderer/main/pages/ProjectPage/ProjectSetting
 
 // Sub Components
 import { Link } from 'react-router';
-import Toggle from 'electron/app/renderer/main/components/Input/Toggle/Toggle'
-import ProgressButton from 'electron/app/renderer/main/components/Buttons/ProgressButton/ProgressButton.jsx'
-import FileSelectInputElectron from 'electron/app/renderer/main/modules/FileSelectInput/FileSelectInputElectron.jsx'
-import Checkbox from 'electron/app/renderer/main/components/Input/Checkbox/Checkbox';
-import SimpleTable        from 'electron/app/shared/modules/Tables/SimpleTable/SimpleTable.jsx';
-import Banner from 'electron/app/renderer/main/modules/Banner/Banner.jsx'
+import Toggle             from 'stemn-frontend-shared/src/misc/Input/Toggle/Toggle'
+import ProgressButton     from 'stemn-frontend-shared/src/misc/Buttons/ProgressButton/ProgressButton.jsx'
+import FileSelectInputElectron from 'stemn-frontend-shared/src/misc/FileSelectInput/FileSelectInputElectron.jsx'
+import Checkbox           from 'stemn-frontend-shared/src/misc/Input/Checkbox/Checkbox';
+import SimpleTable        from 'stemn-frontend-shared/src/misc/Tables/SimpleTable/SimpleTable.jsx';
+import Banner             from 'stemn-frontend-shared/src/misc/Banner/Banner.jsx'
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
