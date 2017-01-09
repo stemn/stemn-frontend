@@ -19,7 +19,7 @@ import CommitBox          from 'stemn-frontend-shared/src/misc/Changes/CommitBox
 import Toolbar            from 'electron/app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
 import MdOpenInNew from 'react-icons/md/open-in-new';
 import { Link }           from 'react-router';
-import cloudLocked          from 'electron/app/renderer/assets/images/pure-vectors/cloud-locked.svg';
+import cloudLocked          from 'stemn-frontend-shared/src/assets/images/pure-vectors/cloud-locked.svg';
 
 
 import * as stringConcat  from 'stemn-frontend-shared/src/utils/stringConcat';

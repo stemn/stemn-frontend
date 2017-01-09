@@ -13,7 +13,7 @@ import * as SyncTimelineActions from 'stemn-frontend-shared/src/misc/SyncTimelin
 // Sub Components
 import LoadingOverlay   from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import PreviewPageInner from './PreviewPageInner.jsx'
-import cloudMagnify    from 'electron/app/renderer/assets/images/pure-vectors/cloud-magnify.svg';
+import cloudMagnify    from 'stemn-frontend-shared/src/assets/images/pure-vectors/cloud-magnify.svg';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

@@ -63,7 +63,8 @@ export default {
     extensions           : ['', '.js', '.jsx'],
     packageMains         : ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main'],
     alias                : {
-      'theme'            : path.resolve(__dirname, './app/theme.css')
+      'theme'            : path.resolve(__dirname, './app/theme.css'),
+      'route-actions'    : path.resolve(__dirname, './app/renderer/main/routeActions.js')
     },
     fallback             : [ path.resolve(__dirname, './app/node_modules'), path.resolve(__dirname, './node_modules')]
   },

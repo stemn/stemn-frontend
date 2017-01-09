@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Components
-import book   from 'electron/app/renderer/assets/images/pure-vectors/book.svg';
+import book   from 'stemn-frontend-shared/src/assets/images/pure-vectors/book.svg';
 import MdOpenInNew from 'react-icons/md/open-in-new';
 import Toolbar         from 'electron/app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
 

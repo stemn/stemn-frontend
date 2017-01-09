@@ -64,5 +64,3 @@ export default (store) => {
     </Route>
   );
 };
-
-//

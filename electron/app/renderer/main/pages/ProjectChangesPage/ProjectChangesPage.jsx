@@ -25,11 +25,11 @@ import CommitChanges        from 'stemn-frontend-shared/src/misc/Changes/CommitC
 import CommitBox            from 'stemn-frontend-shared/src/misc/Changes/CommitBox/CommitBox.jsx'
 import FileCompare          from 'stemn-frontend-shared/src/misc/FileCompare/FileCompare.jsx';
 import Guide                from 'stemn-frontend-shared/src/misc/Guide/Guide';
-import cloudLocked          from 'electron/app/renderer/assets/images/pure-vectors/cloud-locked.svg';
-import file                 from 'electron/app/renderer/assets/images/pure-vectors/file.svg';
+import cloudLocked          from 'stemn-frontend-shared/src/assets/images/pure-vectors/cloud-locked.svg';
+import file                 from 'stemn-frontend-shared/src/assets/images/pure-vectors/file.svg';
 import commitChanges        from './commit-changes.svg'
 import compareFile          from './compare-file.svg'
-import cloudProviders       from 'electron/app/renderer/assets/images/illustrations/cloud-providers.svg'
+import cloudProviders       from 'stemn-frontend-shared/src/assets/images/illustrations/cloud-providers.svg'
 import Button               from 'stemn-frontend-shared/src/misc/Buttons/Button/Button'
 
 

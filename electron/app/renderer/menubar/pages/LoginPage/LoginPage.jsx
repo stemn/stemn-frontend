@@ -13,7 +13,7 @@ import classNames from 'classnames';
 
 // Sub Components
 import Toolbar from 'electron/app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
-import cloudProject   from 'electron/app/renderer/assets/images/pure-vectors/cloud-project.svg';
+import cloudProject   from 'stemn-frontend-shared/src/assets/images/pure-vectors/cloud-project.svg';
 import Button  from 'stemn-frontend-shared/src/misc/Buttons/Button/Button.jsx';
 
 

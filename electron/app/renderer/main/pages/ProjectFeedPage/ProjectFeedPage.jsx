@@ -22,8 +22,8 @@ import Guide                    from 'stemn-frontend-shared/src/misc/Guide/Guide
 import Button                   from 'stemn-frontend-shared/src/misc/Buttons/Button/Button'
 import ProjectFeedPageCommit    from './ProjectFeedPageCommit/ProjectFeedPageCommit.jsx'
 import ProjectFeedPageRevision  from './ProjectFeedPageRevision/ProjectFeedPageRevision.jsx'
-import timeline                 from 'electron/app/renderer/assets/images/pure-vectors/timeline.svg';
-import cloudProviders           from 'electron/app/renderer/assets/images/illustrations/cloud-providers.svg'
+import timeline                 from 'stemn-frontend-shared/src/assets/images/pure-vectors/timeline.svg';
+import cloudProviders           from 'stemn-frontend-shared/src/assets/images/illustrations/cloud-providers.svg'
 
 
 ///////////////////////////////// COMPONENT /////////////////////////////////

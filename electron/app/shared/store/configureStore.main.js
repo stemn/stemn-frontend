@@ -20,6 +20,7 @@ export default function configureStore(initialState) {
     thunk,
     functionLibrary,
     throttle,
+    httpPackage,
     httpTransform,
     websocket,
     promise(),

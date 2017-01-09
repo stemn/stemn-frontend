@@ -76,7 +76,6 @@ export const Component = React.createClass({
         mode         : 'single'
       });
 
-
       // Join the File room
       nextProps.filesActions.websocketJoinFile({
         fileId: nextProps.fileMeta.data.fileId

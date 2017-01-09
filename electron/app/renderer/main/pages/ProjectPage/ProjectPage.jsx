@@ -24,8 +24,8 @@ import PopoverDetails from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverDe
 import ProjectMenu from 'stemn-frontend-shared/src/misc/Projects/Project.menu.js';
 import MdPublic       from 'react-icons/md/public';
 import MdLockOutline  from 'react-icons/md/lock-outline';
-import folderLockedVector   from 'electron/app/renderer/assets/images/pure-vectors/folder-locked.svg';
-import globalVector   from 'electron/app/renderer/assets/images/pure-vectors/global.svg';
+import folderLockedVector   from 'stemn-frontend-shared/src/assets/images/pure-vectors/folder-locked.svg';
+import globalVector   from 'stemn-frontend-shared/src/assets/images/pure-vectors/global.svg';
 
 // Styles
 import classNames from 'classnames';

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 // Container Actions
 import * as ProjectsActions        from 'stemn-frontend-shared/src/redux/actions/projects.js';
 import * as ElectronWindowsActions from 'stemn-frontend-shared/src/desktop/ElectronWindows/ElectronWindows.actions.js';
-import ProjectFilesPageRoute from './ProjectFilesPage.routeActions.js';
+import { projectFolderRoute }        from 'route-actions';
 
 // Component Core
 import React from 'react';
@@ -34,7 +34,7 @@ export const Component = React.createClass({
         }
       }))
     }else{
-      dispatch(ProjectFilesPageRoute({
+      dispatch(projectFolderRoute({
         projectId: project.data._id,
         fileId: file.fileId
       }))
