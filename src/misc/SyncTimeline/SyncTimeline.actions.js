@@ -40,7 +40,9 @@ export function fetchTimeline({projectId, fileId, provider}) {
     type:'TIMELINE/FETCH_TIMELINE',
     payload: http({
       method: 'GET',
-      url: projectId ? `/api/v1/sync/timeline/${projectId}` : `/api/v1/remote/timeline/${provider}`,
+      url: projectId 
+      ? `/api/v1/sync/timeline/${projectId}` 
+      : `/api/v1/remote/timeline/${provider}`,
       params: {
         types: getTypes(),
         file: fileId

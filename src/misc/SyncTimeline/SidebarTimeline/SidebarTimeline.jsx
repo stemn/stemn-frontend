@@ -5,15 +5,15 @@ import React from 'react';
 import classNames from 'classnames';
 
 // Sub Components
-import SidebarTimelineRow from './SidebarTimelineRow'
-import FileChangeTitleRow from 'stemn-frontend-shared/src/misc/Changes/CommitChanges/FileChangeTitleRow';
-import LoadingOverlay from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import PopoverMenu from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenu';
-import SimpleIconButton from 'stemn-frontend-shared/src/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
-import MdMoreHoriz from 'react-icons/md/more-horiz';
-import { every } from 'lodash';
-import StringFilterMenu from 'stemn-frontend-shared/src/misc/StringFilter/StringFilterMenu.jsx';
-import { Link } from 'react-router';
+import FileChangeTitleRow  from 'stemn-frontend-shared/src/misc/Changes/CommitChanges/FileChangeTitleRow';
+import LoadingOverlay      from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import MdMoreHoriz         from 'react-icons/md/more-horiz';
+import PopoverMenu         from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenu';
+import SidebarTimelineRow  from './SidebarTimelineRow'
+import SimpleIconButton    from 'stemn-frontend-shared/src/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import StringFilterMenu    from 'stemn-frontend-shared/src/misc/StringFilter/StringFilterMenu.jsx';
+import { Link }            from 'react-router';
+import { every }           from 'lodash';
 
 
 const eventFilter = [{

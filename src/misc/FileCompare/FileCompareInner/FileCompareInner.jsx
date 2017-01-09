@@ -49,7 +49,7 @@ export const Component = React.createClass({
   render() {
     const { project, file1, file2, compareId, mode, header } = this.props;
     const { width } = this.state;
-
+    
     const compareModeClasses = {
       sideBySide    : 'layout-row',
       aboveAndBelow : 'layout-column',
