@@ -1,6 +1,6 @@
 import { app } from 'electron';
-import { windows } from '../../../main/index.js';
-import { create as createPreview } from '../../../main/createPreviewWindow.js';
+import { windows } from 'electron/app/main/index.js';
+import { create as createPreview } from 'electron/app/main/createPreviewWindow.js';
 import querystring from 'querystring';
 
 export const create = ({type, props}) => {

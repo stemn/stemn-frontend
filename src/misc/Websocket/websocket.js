@@ -1,5 +1,5 @@
-import primus from '../../../primus-websockets.js';
 import ws from 'ws';
+import primus from './primus-websockets.js';
 
 export let socket = undefined;
 
