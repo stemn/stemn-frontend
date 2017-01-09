@@ -12,6 +12,8 @@ import * as FilesActions from 'electron/app/shared/modules/Files/Files.actions.j
 import * as SyncTimelineActions from 'electron/app/shared/modules/SyncTimeline/SyncTimeline.actions.js';
 
 // Sub Components
+import { formatBytes }      from 'electron/app/shared/modules/Files/utils';
+import moment               from 'moment';
 import LoadingOverlay       from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import cloudMagnify         from 'electron/app/renderer/assets/images/pure-vectors/cloud-magnify.svg';
 import { orderItemsByTime } from 'electron/app/renderer/main/modules/FileCompare/FileCompare.utils.js';

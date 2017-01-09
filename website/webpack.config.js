@@ -46,18 +46,28 @@ module.exports = function makeWebpackConfig () {
 //    config.devtool = 'eval-source-map';
   }
 
+  console.log(path.resolve(__dirname, './node_modules/stemn-frontend-shared'));
   // Loaders
   config.module = {
     preLoaders  : [],
     loaders     : [{
       test      : /(\.js|\.jsx)$/,
 //      loaders   : [ 'happypack/loader' ],
-      loader    : 'babel?presets[]=react&presets[]=stage-2',
+      loader    : 'babel',
+      query     : {
+        presets : ["stage-2", "react"]
+      },
       exclude   : /node_modules/,
     }, {
-      test      : /\.js$/,
-      loader    : 'babel?presets[]=react&presets[]=stage-2',
-      include   : [path.resolve(__dirname, '../electron/app/node_modules/react-icons/md')]
+      test      : /(\.js|\.jsx)$/,
+      loader    : 'babel',
+      query     : {
+        presets : ["stage-2", "react"]
+      },
+      include   : [
+        path.resolve(__dirname, '../electron/app/node_modules/react-icons/md'),
+        path.resolve(__dirname, './node_modules/stemn-frontend-shared/'),
+      ]
     }, {
       test      : /\.css$/,
       loaders   : [ 'style-loader', 'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]-[local]-[emoji:6]']
@@ -100,10 +110,14 @@ module.exports = function makeWebpackConfig () {
       'ui-router-extras' : __dirname + "/bower_components/ui-router-extras/release/ct-ui-router-extras.js",
       'ngGeolocation'    : __dirname + "/bower_components/ngGeolocation/ngGeolocation.js",
       'theme'            : __dirname + "/src/theme.css",
-//      'electron'         : __dirname + "/src/app/other/placeholderLibs/electron.js",
       'fs'               : __dirname + "/src/app/other/placeholderLibs/fs.js",
       'process'          : __dirname + "/src/app/other/placeholderLibs/process.js"
-    }
+    },
+    fallback: path.resolve(__dirname, './node_modules'),
+  };  
+  
+  config.resolveLoader = {
+    fallback: path.resolve(__dirname, './node_modules')
   };
   
   config.plugins = [
