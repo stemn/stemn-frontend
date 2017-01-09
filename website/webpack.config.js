@@ -65,7 +65,7 @@ module.exports = function makeWebpackConfig () {
         presets : ["stage-2", "react"]
       },
       include   : [
-        path.resolve(__dirname, '../electron/app/node_modules/react-icons/md'),
+        path.resolve(__dirname, './node_modules/react-icons/md'),
         path.resolve(__dirname, './node_modules/stemn-frontend-shared/'),
       ]
     }, {
@@ -111,7 +111,7 @@ module.exports = function makeWebpackConfig () {
       'ngGeolocation'    : __dirname + "/bower_components/ngGeolocation/ngGeolocation.js",
       'theme'            : __dirname + "/src/theme.css",
       'fs'               : __dirname + "/src/app/other/placeholderLibs/fs.js",
-      'process'          : __dirname + "/src/app/other/placeholderLibs/process.js"
+      'process'          : __dirname + "/src/app/other/placeholderLibs/process.js",
     },
     fallback: path.resolve(__dirname, './node_modules'),
   };  

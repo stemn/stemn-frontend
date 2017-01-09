@@ -8,24 +8,24 @@ import React, { PropTypes } from 'react';
 import { has } from 'lodash';
 
 // Actions
-import * as FilesActions from 'electron/app/shared/modules/Files/Files.actions.js';
-import * as SyncTimelineActions from 'electron/app/shared/modules/SyncTimeline/SyncTimeline.actions.js';
+import * as FilesActions from 'stemn-frontend-shared/src/misc/Files/Files.actions.js';
+import * as SyncTimelineActions from 'stemn-frontend-shared/src/misc/SyncTimeline/SyncTimeline.actions.js';
 
 // Sub Components
-import { formatBytes }      from 'electron/app/shared/modules/Files/utils';
+import { formatBytes }      from 'stemn-frontend-shared/src/misc/Files/utils';
 import moment               from 'moment';
-import LoadingOverlay       from 'electron/app/renderer/main/components/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import cloudMagnify         from 'electron/app/renderer/assets/images/pure-vectors/cloud-magnify.svg';
-import { orderItemsByTime } from 'electron/app/renderer/main/modules/FileCompare/FileCompare.utils.js';
-import FileBreadCrumbs      from 'electron/app/renderer/main/modules/FileList/components/FileBreadCrumbs.jsx';
-import Timeline             from 'electron/app/renderer/main/modules/Timeline/Timeline.jsx';
-import AssemblyParts        from 'electron/app/shared/modules/Files/PreviewFile/PreviewCad/AssemblyParts/AssemblyParts.jsx'
-import FileCompareInner     from 'electron/app/renderer/main/modules/FileCompare/FileCompareInner/FileCompareInner.jsx';
-import FileCompareMenu      from 'electron/app/renderer/main/modules/FileCompare/FileCompareMenu';
-import Header               from 'electron/app/renderer/main/modules/Header/Header.jsx'
-import DragResize           from 'electron/app/renderer/main/modules/DragResize/DragResize.jsx';
-import SectionTitle         from 'electron/app/shared/modules/Titles/SectionTitle/SectionTitle.jsx';
-import SimpleTable          from 'electron/app/shared/modules/Tables/SimpleTable/SimpleTable.jsx';
+import LoadingOverlay       from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import cloudMagnify         from 'stemn-frontend-shared/src/assets/images/pure-vectors/cloud-magnify.svg';
+import { orderItemsByTime } from 'stemn-frontend-shared/src/misc/FileCompare/FileCompare.utils.js';
+import FileBreadCrumbs      from 'stemn-frontend-shared/src/misc/FileList/components/FileBreadCrumbs.jsx';
+import Timeline             from 'stemn-frontend-shared/src/misc/Timeline/Timeline.jsx';
+import AssemblyParts        from 'stemn-frontend-shared/src/misc/Files/PreviewFile/PreviewCad/AssemblyParts/AssemblyParts.jsx'
+import FileCompareInner     from 'stemn-frontend-shared/src/misc/FileCompare/FileCompareInner/FileCompareInner.jsx';
+import FileCompareMenu      from 'stemn-frontend-shared/src/misc/FileCompare/FileCompareMenu';
+import Header               from 'stemn-frontend-shared/src/misc/Header/Header.jsx'
+import DragResize           from 'stemn-frontend-shared/src/misc/DragResize/DragResize.jsx';
+import SectionTitle         from 'stemn-frontend-shared/src/misc/Titles/SectionTitle/SectionTitle.jsx';
+import SimpleTable          from 'stemn-frontend-shared/src/misc/Tables/SimpleTable/SimpleTable.jsx';
 import classes              from './TestPage.css'
 
 
@@ -38,26 +38,48 @@ const propTypes = {
 export const TestPage = React.createClass({
   // Mounting
   onMount(nextProps, prevProps){
-    const hasFileMeta    = has(nextProps, 'fileMeta.data') && !nextProps.fileMeta.loading;
-    const string1        = prevProps ? prevProps.localPath + prevProps.projectId + prevProps.fileId + prevProps.revisionId : '';
-    const string2        = nextProps ? nextProps.localPath + nextProps.projectId + nextProps.fileId + nextProps.revisionId : '';
-    const hasChangedFile = string1 != string2;
+    const hasFileMeta     = has(nextProps, 'fileMeta.data');
+    const fileString1     = prevProps ? prevProps.fileId + prevProps.revisionId : '';
+    const fileString2     = nextProps ? nextProps.fileId + nextProps.revisionId : '';
+    const hasChangedFile  = fileString1 != fileString2;
+    const fileMetaString1 = has(prevProps, 'fileMeta.data') ? prevProps.fileMeta.data.fileId + '-' + prevProps.fileMeta.data.revisionId : '';
+    const fileMetaString2 = has(nextProps, 'fileMeta.data') ? nextProps.fileMeta.data.fileId + '-' + nextProps.fileMeta.data.revisionId : '';
+    const hasMetaChanged  = fileMetaString1 != fileMetaString2;
 
-    if(string1 != string2){
-      // If localPath exists - we must get the fileId - this will get the meta
-      if(nextProps.localPath){
-        nextProps.filesActions.getMetaFromPath({
-          path       : nextProps.localPath
-        })
-      }
-      // If we do not yet have the meta, get it:
-      else if(!hasFileMeta){
-        nextProps.filesActions.getMeta({
-          projectId  : nextProps.projectId,
-          fileId     : nextProps.fileId,
-          revisionId : nextProps.revisionId
-        });
-      }
+    // Get the file meta if the file has changed
+    if(hasChangedFile && !hasFileMeta){
+      nextProps.filesActions.getMeta({
+        projectId  : nextProps.projectId,
+        fileId     : nextProps.fileId,
+        revisionId : nextProps.revisionId
+      });
+    }
+    
+    if(hasMetaChanged){
+      // Set the selected state if the file-meta was just received
+      this.setState({
+        selected1    : nextProps.fileMeta,
+        selected2    : undefined,
+        lastSelected : 1,
+        mode         : 'single'
+      });
+      
+      // Join the File room
+      nextProps.filesActions.websocketJoinFile({
+        fileId: nextProps.fileMeta.data.fileId
+      });
+      
+      // Get the Timeline
+      nextProps.syncTimelineActions.fetchTimeline({
+        projectId  : nextProps.fileMeta.data.project._id,
+        fileId     : nextProps.fileMeta.data.fileId,
+      })
+      
+      // Get the Related Tasks
+      nextProps.filesActions.getRelatedTasks({
+        fileId     : nextProps.fileMeta.data.fileId,
+        projectId  : nextProps.fileMeta.data.project._id
+      })
     }
   },
   componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
@@ -69,6 +91,57 @@ export const TestPage = React.createClass({
       lastSelected : 1,
       mode         : 'single'
     }
+  },
+  onSelect(response){
+    const stateToSet = this.state.mode == 'single' || this.state.lastSelected == 2
+    ? {selected1: response, lastSelected: 1}
+    : {selected2: response, lastSelected: 2};
+    this.setState(stateToSet);
+    // if(this.state.selected1 == this.state.selected2){this.setState({mode: 'single'})}
+  },
+  changeMode(mode, revisions){
+    let { selected1, selected2 } = this.state;
+    // If a second file is not selected - we select one if possible
+    if(!selected2){
+      const revisionIndex = revisions.findIndex(revision => revision.data.fileId == selected1.data.fileId && revision.data.revisionId == selected1.data.revisionId);
+      if(revisions[revisionIndex - 1]){selected2 = revisions[revisionIndex - 1];}
+      else if(revisions[revisionIndex + 1]){selected2 = revisions[revisionIndex + 1];}
+    }
+    this.setState({mode, selected2})
+  },
+  isSelected(item){
+    const selected1 = has(this.state, 'selected1.data.revisionId') ? item.data.revisionId == this.state.selected1.data.revisionId : false;
+    const selected2 = has(this.state, 'selected2.data.revisionId') ? item.data.revisionId == this.state.selected2.data.revisionId : false;
+    return this.state.mode == 'single' ? selected1 : selected1 || selected2;
+  },
+  clickCrumb({file}){
+    const { dispatch, fileMeta } = this.props;
+    if(file.type == 'file'){
+      // It is a file - open the file
+      dispatch(push({
+        pathname: '/',
+        query: {
+          fileId     : file.fileId,
+          revisionId : file.revisionId,
+          projectId  : file.project._id,
+        }
+      }))
+    }
+    else if(fileMeta.data.project._id){
+      // It is a folder (and is linked to a project) - open the folder
+      dispatch(push({
+        pathname: `/project/${fileMeta.data.project._id}/files/${file.fileId}`,
+        state: {meta : {scope: ['main']}}
+      }))
+      dispatch(ElectronWindowsActions.show('main'))
+    }
+    else{
+      console.log('Not linked to project - open folder');
+    }
+  },
+  clickTag(task){
+    this.props.dispatch(ModalActions.showModal({modalType: 'TASK', limit: 1, modalProps: { taskId: task._id }}));
+    this.props.dispatch(ElectronWindowsActions.show('main'))
   },
   render() {
     const { fileMeta, syncTimeline, relatedTasks } = this.props;
@@ -140,9 +213,8 @@ export const TestPage = React.createClass({
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps({files}, {params}) {
-  let { localPath, revisionId, fileId, projectId } = params;
-  fileId = fileId || (files.pathToId[localPath] ? files.pathToId[localPath].data : '');
+function mapStateToProps({ syncTimeline, files }, { params }) {
+  const { localPath, revisionId, fileId, projectId } = params;
   const cacheKey = localPath ? fileId : `${fileId}-${revisionId}`;
   return {
     localPath,
@@ -150,6 +222,8 @@ function mapStateToProps({files}, {params}) {
     revisionId,
     projectId,
     fileMeta: files.fileMeta[cacheKey],
+    syncTimeline: syncTimeline[fileId]       ? syncTimeline[fileId] : [],
+    relatedTasks: files.relatedTasks[fileId] ? files.relatedTasks[fileId] : []
   }
 }
 
