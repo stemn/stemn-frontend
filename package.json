@@ -1,24 +1,26 @@
 {
-  "name": "stemn-frontent",
+  "name": "stemn-frontend-shared",
   "version": "1.0.0",
-  "description": "Basic resources shared between Stemn Desktop and Stemn Web",
+  "description": "Make sure the following Babel Presets are instlaled:\r ```\r     \"babel-preset-es2015\": \"^6.1.18\",\r     \"babel-preset-react\": \"^6.16.0\",\r     \"babel-preset-stage-2\": \"^6.18.0\",\r ```",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://daverevay@bitbucket.org/stemn/stemn-frontend-shared.git"
+  },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "axios": "^0.15.3",
-    "icepick": "^1.3.0",
-    "lodash": "^4.17.4",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "react-redux": "^5.0.1"
-  },
+  "homepage": "https://bitbucket.org/stemn/stemn-frontend-shared#readme",
   "devDependencies": {
+    "babel-core": "^6.21.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-webpack-loaders": "^0.8.0",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-2": "^6.18.0"
-  }
+  },
+  "dependencies": {}
 }

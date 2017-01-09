@@ -1,0 +1,23 @@
+@value primary, border1, bg1, grey-3 from "theme";
+
+.comment{
+}
+.avatar{
+  margin-right: 10px
+}
+.body{
+  border: 1px solid border1;
+  line-height: 1.5em;
+}
+.content{
+  padding: 10px;
+}
+.item:first-child{
+  margin-top: 15px;
+}
+.item:last-child{
+  margin-bottom: 15px;
+}
+.item + .item{
+  margin-top: 15px;
+}

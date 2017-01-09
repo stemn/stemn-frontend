@@ -1,0 +1,22 @@
+.editor{
+  background: white;
+  width: 100%;
+  line-height: 1.4em;
+}
+.editor textarea{
+  resize: none;
+}
+.editor textarea {
+  border: none;
+}
+.editor textarea:focus {
+  outline: none;
+  border: none;
+}
+
+.editor ul{
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.1),0 2px 15px rgba(0,0,0,0.1);
+}
+.editor li{
+  padding: 8px;
+}

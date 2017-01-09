@@ -1,0 +1,39 @@
+@value primary, border1 from "theme";
+
+.rangeSlider{
+  border-top: 1px solid border1;
+  padding: 5px
+}
+
+.sideBySide .preview2{
+  border-left: 1px solid border1;
+}
+
+.aboveAndBelow .preview2{
+  border-top: 1px solid border1;
+}
+
+.onion .preview1{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+}
+
+.slider .preview1{
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 50%;
+  overflow: hidden;
+  border-right: 1px dotted primary;
+  z-index: 2;
+}
+
+.single .preview1{
+  display: none;
+}
+

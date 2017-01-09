@@ -1,0 +1,31 @@
+@value timeline-main from "theme";
+
+.moreButton{
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  position: absolute;
+  background: timeline-main;
+  margin-top: 1px;
+  line-height: 16px;
+  text-align: center;
+  z-index: 2;
+
+  opacity: 0;
+  transition: 0.2s ease all;
+}
+.moreButton:hover{
+  opacity: 1;
+}
+.moreButtonLeft{
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+.moreButtonRight{
+  left: auto;
+  right: 0;
+  transform: translate(50%, -50%);
+}
+.moreButtonLeft svg{
+  transform: rotate(180deg);
+}

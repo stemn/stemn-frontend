@@ -1,0 +1,23 @@
+@value bg1, border1 from "theme";
+
+.header{
+  padding: 30px;
+  border-bottom: 1px solid border1;
+  background: bg1;
+}
+.search{
+  width: 400px;
+  position: relative;
+}
+.search input{
+  padding-right: 40px;
+}
+.search svg{
+  position: absolute;
+  right: 5px;
+  top: 6px;
+  color: rgba(0, 0, 0, 0.3);
+}
+.tasks{
+  padding: 15px;
+}

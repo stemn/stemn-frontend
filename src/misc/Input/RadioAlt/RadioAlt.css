@@ -1,0 +1,29 @@
+@value primary, bg1 from "theme";
+
+.radio input {
+  display: none;
+}
+.radio input + div {
+  padding: 10px;
+  transition: all 0.1s ease
+}
+.radio input.checked + div {
+  background: primary !important;
+  color: white !important;
+}
+
+.radio label:hover input + div {
+  background-color: bg1;
+}
+
+.radio svg{
+  transition: opacity 0.1s ease;
+  opacity: 0;
+}
+.radio label:hover svg {
+  opacity: 1;
+}
+
+.radio input.checked + div svg{
+  opacity: 1;
+}

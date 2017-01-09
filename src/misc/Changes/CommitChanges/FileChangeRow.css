@@ -1,0 +1,24 @@
+@value primary, bg1, border1 from "theme";
+
+.fileChangeRow {
+  border-bottom: 1px solid border1;
+  cursor: default;
+}
+.checkbox {
+  color: primary;
+  padding-right: 3px;
+  padding-left: 6px;
+}
+.text {
+  padding: 8px;
+}
+.fileChangeRow:hover {
+  background: bg1;
+}
+.active {
+  background: primary !important;
+  color: white;
+}
+.active .checkbox{
+  color: white;
+}

@@ -1,0 +1,31 @@
+.input {
+  padding: 7px;
+  line-height: 1.4em;
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.input:focus {
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.description{
+  margin-bottom: 10px;
+  min-height: 80px;
+}
+.description > div > div{
+  padding: 8px;
+  /* 1 extra px due to border ? */
+}
+
+.description textarea{
+  padding: 7px;
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+}
+
+.description textarea:focus {
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.4) !important;
+}
