@@ -4,9 +4,9 @@ import promise       from 'redux-promise-middleware';
 import createLogger  from 'redux-logger';
 import rootReducer   from './reducers.js';
 
-import throttle      from 'stemn-frontend-shared/src/redux/middleware/throttle/throttle.middleware.js';
-import httpPackage   from 'stemn-frontend-shared/src/redux/middleware/httpPackage/httpPackage.middleware.js';
-import httpTransform from 'stemn-frontend-shared/src/redux/middleware/httpTransform/httpTransform.middleware.js';
+import throttle      from 'stemn-shared/redux/middleware/throttle/throttle.middleware.js';
+import httpPackage   from 'stemn-shared/redux/middleware/httpPackage/httpPackage.middleware.js';
+import httpTransform from 'stemn-shared/redux/middleware/httpTransform/httpTransform.middleware.js';
 
 export default function configureStore(initialState) {
   console.log('Configure Store');

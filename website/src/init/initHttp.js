@@ -16,7 +16,7 @@ export default (store) => {
   http.defaults.baseURL = `${GLOBAL_ENV.API_SERVER}/`;
 }
 
-//import { loadUserData } from 'stemn-frontend-shared/src/misc/Auth/Auth.actions.js';;
+//import { loadUserData } from 'stemn-shared/misc/Auth/Auth.actions.js';;
 //  if(rendererType == 'main' && state.auth.authToken){
 //    setTimeout(() => store.dispatch(loadUserData()), 1)
 //  }

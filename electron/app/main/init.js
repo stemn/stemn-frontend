@@ -12,4 +12,4 @@ if((typeof GLOBAL_ENV !== 'undefined')){
 initElectronCrash();
 initRaven();
 
-http.defaults.baseURL = `${process.env.API_SERVER}/`;
+http.defaults.baseURL = `${GLOBAL_ENV.API_SERVER}/`;

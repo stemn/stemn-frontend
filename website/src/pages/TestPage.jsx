@@ -8,24 +8,24 @@ import React, { PropTypes } from 'react';
 import { has } from 'lodash';
 
 // Actions
-import * as FilesActions from 'stemn-frontend-shared/src/misc/Files/Files.actions.js';
-import * as SyncTimelineActions from 'stemn-frontend-shared/src/misc/SyncTimeline/SyncTimeline.actions.js';
+import * as FilesActions from 'stemn-shared/misc/Files/Files.actions.js';
+import * as SyncTimelineActions from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js';
 
 // Sub Components
-import { formatBytes }      from 'stemn-frontend-shared/src/misc/Files/utils';
+import { formatBytes }      from 'stemn-shared/misc/Files/utils';
 import moment               from 'moment';
-import LoadingOverlay       from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import cloudMagnify         from 'stemn-frontend-shared/src/assets/images/pure-vectors/cloud-magnify.svg';
-import { orderItemsByTime } from 'stemn-frontend-shared/src/misc/FileCompare/FileCompare.utils.js';
-import FileBreadCrumbs      from 'stemn-frontend-shared/src/misc/FileList/components/FileBreadCrumbs.jsx';
-import Timeline             from 'stemn-frontend-shared/src/misc/Timeline/Timeline.jsx';
-import AssemblyParts        from 'stemn-frontend-shared/src/misc/Files/PreviewFile/PreviewCad/AssemblyParts/AssemblyParts.jsx'
-import FileCompareInner     from 'stemn-frontend-shared/src/misc/FileCompare/FileCompareInner/FileCompareInner.jsx';
-import FileCompareMenu      from 'stemn-frontend-shared/src/misc/FileCompare/FileCompareMenu';
-import Header               from 'stemn-frontend-shared/src/misc/Header/Header.jsx'
-import DragResize           from 'stemn-frontend-shared/src/misc/DragResize/DragResize.jsx';
-import SectionTitle         from 'stemn-frontend-shared/src/misc/Titles/SectionTitle/SectionTitle.jsx';
-import SimpleTable          from 'stemn-frontend-shared/src/misc/Tables/SimpleTable/SimpleTable.jsx';
+import LoadingOverlay       from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import cloudMagnify         from 'stemn-shared/assets/images/pure-vectors/cloud-magnify.svg';
+import { orderItemsByTime } from 'stemn-shared/misc/FileCompare/FileCompare.utils.js';
+import FileBreadCrumbs      from 'stemn-shared/misc/FileList/components/FileBreadCrumbs.jsx';
+import Timeline             from 'stemn-shared/misc/Timeline/Timeline.jsx';
+import AssemblyParts        from 'stemn-shared/misc/Files/PreviewFile/PreviewCad/AssemblyParts/AssemblyParts.jsx'
+import FileCompareInner     from 'stemn-shared/misc/FileCompare/FileCompareInner/FileCompareInner.jsx';
+import FileCompareMenu      from 'stemn-shared/misc/FileCompare/FileCompareMenu';
+import Header               from 'stemn-shared/misc/Header/Header.jsx'
+import DragResize           from 'stemn-shared/misc/DragResize/DragResize.jsx';
+import SectionTitle         from 'stemn-shared/misc/Titles/SectionTitle/SectionTitle.jsx';
+import SimpleTable          from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable.jsx';
 import classes              from './TestPage.css'
 
 

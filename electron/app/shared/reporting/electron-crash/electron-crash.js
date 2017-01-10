@@ -5,7 +5,7 @@ export default () => {
   crashReporter.start({
     companyName: 'Stemn',
     productName: 'Stemn Desktop',
-    submitURL: process.env.ELECTRON_CRASH_REPORT_SERVER,
+    submitURL: GLOBAL_ENV.ELECTRON_CRASH_REPORT_SERVER,
     autoSubmit: true,
     extra: {
       app_version: version,

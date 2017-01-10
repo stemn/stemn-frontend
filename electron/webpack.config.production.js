@@ -59,12 +59,14 @@ const config = {
       chunks: ['commonPreview', 'menubar'],
     }),     
     new webpack.DefinePlugin({
-      __DEV__: false,
-      'GLOBAL_ENV': {
-        NODE_ENV: JSON.stringify('production'),
-        API_SERVER: JSON.stringify(process.env.API_SERVER),
-        WEBSOCKET_SERVER: JSON.stringify(process.env.WEBSOCKET_SERVER),
-        ELECTRON_CRASH_REPORT_SERVER: JSON.stringify(process.env.ELECTRON_CRASH_REPORT_SERVER)
+      __DEV__                        : false,
+      'GLOBAL_ENV'                   : {
+        APP_TYPE                     : JSON.stringify('desktop'),
+        NODE_ENV                     : JSON.stringify('production'),
+        WEBSITE_URL                  : JSON.stringify('https://stemn.com'),
+        API_SERVER                   : JSON.stringify(process.env.API_SERVER),
+        WEBSOCKET_SERVER             : JSON.stringify(process.env.WEBSOCKET_SERVER),
+        ELECTRON_CRASH_REPORT_SERVER : JSON.stringify(process.env.ELECTRON_CRASH_REPORT_SERVER)
       },
     }),
     new webpack.optimize.UglifyJsPlugin({

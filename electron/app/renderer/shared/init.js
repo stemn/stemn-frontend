@@ -16,4 +16,4 @@ initElectronCrash();
 initRaven();
 
 moment.locale('en-gb');
-http.defaults.baseURL = `${process.env.API_SERVER}/`;
+http.defaults.baseURL = `${GLOBAL_ENV.API_SERVER}/`;

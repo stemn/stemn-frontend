@@ -3,7 +3,7 @@ module.exports = {
     port : 49554
   },
   websocket : {
-    host : process.env.WEBSOCKET_SERVER || 'localhost',
+    host : GLOBAL_ENV.WEBSOCKET_SERVER || 'localhost',
     port : 8000
   }
 }

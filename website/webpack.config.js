@@ -111,7 +111,7 @@ module.exports = function makeWebpackConfig () {
       'ngGeolocation'    : path.resolve(__dirname, './bower_components/ngGeolocation/ngGeolocation.js'),
       'theme'            : path.resolve(__dirname, './src/theme.css'),
       'route-actions'    : path.resolve(__dirname, './src/routeActions.js'),
-      'stemn-shared'     : path.resolve(__dirname, './node_modules/stemn-frontend-shared/src'),
+      'stemn-shared'     : path.resolve(__dirname, './node_modules/stemn-shared'),
     },
     fallback: path.resolve(__dirname, './node_modules'),
   };  
@@ -128,10 +128,11 @@ module.exports = function makeWebpackConfig () {
       loaders      : [ 'babel?presets[]=react&presets[]=stage-2' ],
     }),
     new webpack.DefinePlugin({
-      GLOBAL_ENV   : {
-        ENV_TYPE   : JSON.stringify(process.env.ENV_TYPE),
-        API_SERVER : JSON.stringify(process.env.API_SERVER),
-        APP_TYPE   : JSON.stringify('web'),
+      GLOBAL_ENV    : {
+        ENV_TYPE    : JSON.stringify(process.env.ENV_TYPE),
+        API_SERVER  : JSON.stringify(process.env.API_SERVER),
+        APP_TYPE    : JSON.stringify('web'),
+        WEBSITE_URL : JSON.stringify('http://stemn.com'),
       },
     }),
   ];

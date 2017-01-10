@@ -84,11 +84,13 @@ const config = {
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       __DEV__: true,
-      'GLOBAL_ENV': {
-        NODE_ENV: JSON.stringify('development'),
-        API_SERVER: JSON.stringify(process.env.API_SERVER),
-        WEBSOCKET_SERVER: JSON.stringify(process.env.WEBSOCKET_SERVER),
-        ELECTRON_CRASH_REPORT_SERVER: JSON.stringify(process.env.ELECTRON_CRASH_REPORT_SERVER)
+      'GLOBAL_ENV'                   : {
+        APP_TYPE                     : JSON.stringify('desktop'),
+        NODE_ENV                     : JSON.stringify('development'),
+        WEBSITE_URL                  : JSON.stringify('http://localhost:3333'),
+        API_SERVER                   : JSON.stringify(process.env.API_SERVER),
+        WEBSOCKET_SERVER             : JSON.stringify(process.env.WEBSOCKET_SERVER),
+        ELECTRON_CRASH_REPORT_SERVER : JSON.stringify(process.env.ELECTRON_CRASH_REPORT_SERVER)
       },
     }),
   ],

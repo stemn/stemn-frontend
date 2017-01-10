@@ -128,7 +128,7 @@ async function start() {
 
 
   // Initialise the Websocket connection
-  const websocket = wsInitialise(process.env.WEBSOCKET_SERVER);
+  const websocket = wsInitialise(GLOBAL_ENV.WEBSOCKET_SERVER);
   websocket.on('data', (action) => {
     const reduxAction = mapWebsocketToRedux(store, action);
     if(reduxAction){
