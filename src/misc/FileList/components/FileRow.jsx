@@ -5,10 +5,10 @@ import moment from 'moment';
 import classNames from 'classnames';
 import classes from './FileRow.css'
 
-import bytes from 'stemn-frontend-shared/src/utils/filters/bytes.js';
+import bytes from 'stemn-shared/utils/filters/bytes.js';
 import FileIcon from './FileIcon'
-import Label        from 'stemn-frontend-shared/src/misc/Label/Label.jsx'
-import Link                from 'stemn-frontend-shared/src/misc/Router/Link/Link.jsx';
+import Label        from 'stemn-shared/misc/Label/Label.jsx'
+import Link                from 'stemn-shared/misc/Router/Link/Link.jsx';
 
 export default React.createClass({
   render() {

@@ -3,9 +3,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as ProjectsActions from 'stemn-frontend-shared/src/redux/actions/projects.js';
-import { push } from 'react-router-redux'
+import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js';
 import { actions } from 'react-redux-form';
+import { projectSettingsRoute } from 'route-actions';
 
 // Component Core
 import React from 'react';
@@ -16,14 +16,14 @@ import classNames from 'classnames';
 import classes from './ProjectNewModal.css';
 
 // Sub Components
-import Button from 'stemn-frontend-shared/src/misc/Buttons/Button/Button';
-import FileSelectInput from 'stemn-frontend-shared/src/misc/FileSelectInput/FileSelectInput.jsx'
-import Textarea from 'stemn-frontend-shared/src/misc/Input/Textarea/Textarea';
-import Input from 'stemn-frontend-shared/src/misc/Input/Input/Input';
-import ProjectLinkRemote from 'stemn-frontend-shared/src/misc/Project/ProjectLinkRemote/ProjectLinkRemote.jsx'
-import { ArrowTabs, ArrowTab } from 'stemn-frontend-shared/src/misc/Tabs/ArrowTabs/ArrowTabs.jsx';
-import ProjectPermissionsRadio from 'stemn-frontend-shared/src/misc/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx'
-import LoadingOverlay from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import Button from 'stemn-shared/misc/Buttons/Button/Button';
+import FileSelectInput from 'stemn-shared/misc/FileSelectInput/FileSelectInput.jsx'
+import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea';
+import Input from 'stemn-shared/misc/Input/Input/Input';
+import ProjectLinkRemote from 'stemn-shared/misc/Project/ProjectLinkRemote/ProjectLinkRemote.jsx'
+import { ArrowTabs, ArrowTab } from 'stemn-shared/misc/Tabs/ArrowTabs/ArrowTabs.jsx';
+import ProjectPermissionsRadio from 'stemn-shared/misc/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx'
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -37,7 +37,7 @@ export const Component = React.createClass({
   createProject(){
     this.props.projectsActions.createProject(pick(this.props.newProject, ['permissions', 'name', 'summary'])).then(response => {
       const goToProject = () => {
-        this.props.dispatch(push(`/project/${response.value.data._id}/settings`));
+        this.props.dispatch(projectSettingsRoute({projectId: response.value.data._id}));
         this.props.modalHide();
       }
       // Link the provider if we can.

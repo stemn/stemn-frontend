@@ -1,7 +1,7 @@
 // Component Core
 import React from 'react';
 
-import Button from 'stemn-frontend-shared/src/misc/Buttons/Button/Button';
+import Button from 'stemn-shared/misc/Buttons/Button/Button';
 import { Link } from 'react-router';
 
 // Styles

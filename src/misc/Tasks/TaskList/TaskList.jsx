@@ -9,7 +9,7 @@ import TaskGroup           from './TaskGroup/TaskGroup.jsx'
 import TaskListItemParent  from './TaskListItem/TaskListItemParent.jsx'
 import TaskListItemWrapped from './TaskListItem/TaskListItemWrapped.jsx'
 import TaskListItem        from './TaskListItem/TaskListItem.jsx'
-import Input from 'stemn-frontend-shared/src/misc/Input/Input/Input';
+import Input from 'stemn-shared/misc/Input/Input/Input';
 
 import classNames from 'classnames'
 import classes from './TaskList.css';

@@ -13,10 +13,10 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
 // Sub Components
-import FileList from 'stemn-frontend-shared/src/misc/FileList/FileList';
-import Button from 'stemn-frontend-shared/src/misc/Buttons/Button/Button';
+import FileList from 'stemn-shared/misc/FileList/FileList';
+import Button from 'stemn-shared/misc/Buttons/Button/Button';
 import MdDone from 'react-icons/md/done';
-import { isDriveFileId, isDropboxFileId } from 'stemn-frontend-shared/src/misc/Files/utils';
+import { isDriveFileId, isDropboxFileId } from 'stemn-shared/misc/Files/utils';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

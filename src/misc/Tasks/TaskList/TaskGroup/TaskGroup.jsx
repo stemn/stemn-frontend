@@ -1,9 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
-import SimpleIconButton from 'stemn-frontend-shared/src/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
-import PopoverMenu from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenu';
+import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
 import MdMoreHoriz from 'react-icons/md/more-horiz';
-import Input from 'stemn-frontend-shared/src/misc/Input/Input/Input';
+import Input from 'stemn-shared/misc/Input/Input/Input';
 
 import classes from './TaskGroup.css'
 export default class TaskGroup extends React.Component {

@@ -21,14 +21,14 @@ import ConnectionModal        from './modals/ConnectionModal.jsx';
 import ProviderAccessError    from './modals/ProviderAccessErrorModal.jsx'
 import ProviderAccessRevoked  from './modals/ProviderAccessRevokedModal.jsx'
 import ReleaseNotesModal      from './modals/ReleaseNotesModal.jsx'
-import FileSelectModal        from 'stemn-frontend-shared/src/misc/FileSelect/FileSelectModal.jsx';
-import TaskDisplayModal       from 'stemn-frontend-shared/src/misc/Tasks/TaskDisplayModal/TaskDisplayModal.jsx'
-import TaskLabelsEditModal    from 'stemn-frontend-shared/src/misc/Tasks/TaskLabelsEditModal/TaskLabelsEditModal.jsx'
-import TaskMentionModal       from 'stemn-frontend-shared/src/misc/Mentions/TaskMentionModal/TaskMentionModal.jsx'
-import ProjectNewModal        from 'stemn-frontend-shared/src/misc/Projects/ProjectNewModal/ProjectNewModal.jsx'
-import FileDownload           from 'stemn-frontend-shared/src/misc/Files/Download/DownloadModal/DownloadModal.jsx'
-import PreviewExpired         from 'stemn-frontend-shared/src/misc/Files/PreviewFile/Messages/PreviewExpired/PreviewExpiredModal.jsx'
-import AssemblyPartNotFound   from 'stemn-frontend-shared/src/misc/Files/PreviewFile/Messages/AssemblyPartNotFound/AssemblyPartNotFoundModal.jsx'
+import FileSelectModal        from 'stemn-shared/misc/FileSelect/FileSelectModal.jsx';
+import TaskDisplayModal       from 'stemn-shared/misc/Tasks/TaskDisplayModal/TaskDisplayModal.jsx'
+import TaskLabelsEditModal    from 'stemn-shared/misc/Tasks/TaskLabelsEditModal/TaskLabelsEditModal.jsx'
+import TaskMentionModal       from 'stemn-shared/misc/Mentions/TaskMentionModal/TaskMentionModal.jsx'
+import ProjectNewModal        from 'stemn-shared/misc/Projects/ProjectNewModal/ProjectNewModal.jsx'
+import FileDownload           from 'stemn-shared/misc/Files/Download/DownloadModal/DownloadModal.jsx'
+import PreviewExpired         from 'stemn-shared/misc/Files/PreviewFile/Messages/PreviewExpired/PreviewExpiredModal.jsx'
+import AssemblyPartNotFound   from 'stemn-shared/misc/Files/PreviewFile/Messages/AssemblyPartNotFound/AssemblyPartNotFoundModal.jsx'
 
 
 const modalComponents = {

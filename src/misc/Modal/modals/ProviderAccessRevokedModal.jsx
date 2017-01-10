@@ -3,11 +3,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as AuthActions from 'stemn-frontend-shared/src/misc/Auth/Auth.actions.js';
+import * as AuthActions from 'stemn-shared/misc/Auth/Auth.actions.js';
 
 // Component Core
 import React from 'react';
-import Button from 'stemn-frontend-shared/src/misc/Buttons/Button/Button';
+import Button from 'stemn-shared/misc/Buttons/Button/Button';
 import { Link } from 'react-router';
 
 // Styles

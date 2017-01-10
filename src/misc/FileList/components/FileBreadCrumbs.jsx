@@ -5,8 +5,8 @@ import i from 'icepick';
 import classNames from 'classnames';
 import classes from './FileBreadCrumbs.css';
 
-import { middle as middleConcat } from 'stemn-frontend-shared/src/utils/stringConcat';
-import PopoverMenu from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenu';
+import { middle as middleConcat } from 'stemn-shared/utils/stringConcat';
+import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
 import FileListPopup from './FileListPopup.jsx';
 
 export default React.createClass({

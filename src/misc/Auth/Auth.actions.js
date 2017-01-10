@@ -2,9 +2,9 @@ import {  shell } from 'electron';
 import { oauthCreds } from './Auth.config.js';
 import querystring from 'querystring';
 import http from 'axios';
-import * as ProjectsActions from 'stemn-frontend-shared/src/redux/actions/projects.js';
-import * as ElectronWindowsActions from 'stemn-frontend-shared/src/desktop/ElectronWindows/ElectronWindows.actions.js';
-import { push } from 'react-router-redux';
+import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js';
+import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js';
+import { loginRoute } from 'route-actions';
 
 export function loadUserData() {
   return (dispatch) => {
@@ -130,7 +130,7 @@ export function logout() {
     dispatch({
       type:'AUTH/LOGOUT'
     })
-    dispatch(push('/login'))
+    dispatch(loginRoute())
     dispatch(websocketLeaveRoom({
       userId: getState().auth.user._id
     }))

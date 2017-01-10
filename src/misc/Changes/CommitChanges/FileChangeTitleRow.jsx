@@ -2,8 +2,8 @@
 import React from 'react';
 
 // Components
-import Checkbox from 'stemn-frontend-shared/src/misc/Input/Checkbox/Checkbox';
-import Walkthrough from 'stemn-frontend-shared/src/misc/Walkthrough/Walkthrough.jsx'
+import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox';
+import Walkthrough from 'stemn-shared/misc/Walkthrough/Walkthrough.jsx'
 
 // Styles
 import styles from './FileChangeTitleRow.css';

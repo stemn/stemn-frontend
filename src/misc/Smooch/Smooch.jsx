@@ -4,7 +4,7 @@ import classes from './Smooch.css';
 import classNames from 'classnames';
 import Smooch from 'smooch';
 import { init as initSmooch } from './Smooch.utils.js';
-import comments      from 'stemn-frontend-shared/src/assets/images/pure-vectors/comments.svg';
+import comments      from 'stemn-shared/assets/images/pure-vectors/comments.svg';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

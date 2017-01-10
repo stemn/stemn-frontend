@@ -1,8 +1,8 @@
 import React from 'react';
 
-import modelLocked    from 'stemn-frontend-shared/src/assets/images/pure-vectors/model-locked.svg';
+import modelLocked    from 'stemn-shared/assets/images/pure-vectors/model-locked.svg';
 import { connect } from 'react-redux';
-import * as ModalActions from 'stemn-frontend-shared/src/misc/Modal/Modal.actions.js';
+import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js';
 
 export const AssemblyPartNotFound = React.createClass({
   render() {

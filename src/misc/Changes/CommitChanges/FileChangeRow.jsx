@@ -2,9 +2,9 @@ import React from 'react';
 import classNames from 'classnames';
 
 // Components
-import Checkbox from 'stemn-frontend-shared/src/misc/Input/Checkbox/Checkbox';
-import TogglerExpand from 'stemn-frontend-shared/src/misc/Toggler/TogglerExpand/TogglerExpand.jsx';
-import { middle as middleConcat } from 'stemn-frontend-shared/src/utils/stringConcat';
+import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox';
+import TogglerExpand from 'stemn-shared/misc/Toggler/TogglerExpand/TogglerExpand.jsx';
+import { middle as middleConcat } from 'stemn-shared/utils/stringConcat';
 
 // Styles
 import styles from './FileChangeRow.css';

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { omit } from 'lodash';
 import { push } from 'react-router-redux';
-import * as ElectronWindowsActions from 'stemn-frontend-shared/src/desktop/ElectronWindows/ElectronWindows.actions.js';
+import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js';
 
 /***************************************************************************
 
@@ -40,9 +40,9 @@ const Link = React.createClass({
       // This state.meta is movie up to the root action object
       // inside the Router.middleware
       dispatch(push({
-        pathname: path,
-        query: query,
-        state: {meta : {scope: [scope]}}
+        pathname : path,
+        query    : query,
+        state    : {meta : {scope: [scope]}}
       }))
       // Dispatch the show event if required
       if(scope && show){

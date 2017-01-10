@@ -1,9 +1,9 @@
 import React, {PropTypes} from 'react';
 import { omit }       from 'lodash';
 import styles         from './PreviewImage.css';
-import LoadingOverlay from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import ScrollZoom     from 'stemn-frontend-shared/src/misc/Scroll/ScrollZoom/ScrollZoom.jsx';
-//import { getDownloadUrl } from 'stemn-frontend-shared/src/misc/Files/utils';
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import ScrollZoom     from 'stemn-shared/misc/Scroll/ScrollZoom/ScrollZoom.jsx';
+import { getDownloadUrl } from 'stemn-shared/misc/Files/utils';
 //const ImagePropTypes = {
 //  arrayBuffer  : PropTypes.array,   // Image data array buffer
 //  onLoad       : PropTypes.func,    // Function to be run on load
@@ -59,14 +59,21 @@ export default React.createClass({
   onMount(nextProps, prevProps) {
     // If the previewId changes, download a new file
     if(!prevProps || nextProps.previewId !== prevProps.previewId){
-      // If we don't already have the file, get it
-      nextProps.downloadFn({
-        projectId    : nextProps.fileMeta.project._id,
-        fileId       : nextProps.fileMeta.fileId,
-        revisionId   : nextProps.fileMeta.revisionId,
-        provider     : nextProps.fileMeta.provider,
-        responseType : 'path'
-      })
+
+      // If this is a desktop app, we download the file (otherwise we fetch with img src)
+      if(GLOBAL_ENV.APP_TYPE == 'desktop'){
+        nextProps.downloadFn({
+          projectId    : nextProps.fileMeta.project._id,
+          fileId       : nextProps.fileMeta.fileId,
+          revisionId   : nextProps.fileMeta.revisionId,
+          provider     : nextProps.fileMeta.provider,
+          responseType : 'path'
+        })
+      }
+      // Else, this is web - we set loading to true
+      else{
+        this.setState({loading: true})
+      }
     }
   },
   onLoad() {
@@ -97,17 +104,26 @@ export default React.createClass({
   },
   render() {
     const { fileMeta, fileData } = this.props;
-    const { scale, naturalWidth, naturalHeight } = this.state;
+    const { scale, naturalWidth, naturalHeight, loading } = this.state;
     const sizeStyles = {
       width  : naturalWidth  * scale,
       height : naturalHeight * scale,
     };
+
+    const imageUrl  = GLOBAL_ENV.APP_TYPE == 'desktop'
+                    ? ( fileData && fileData.data ? fileData.data : '' )
+                    : getDownloadUrl(fileMeta);
+
+    const isLoading = GLOBAL_ENV.APP_TYPE == 'desktop'
+                    ? ( fileData && fileData.data ? fileData.loading : true )
+                    : loading;
+
     return (
       <div ref="container" className={styles.container + ' flex rel-box'}>
         <ScrollZoom zoomIn={() => this.zoom('in')} zoomOut={() => this.zoom('out')} style={{display: 'table', width: '100%', height: '100%'}}>
           <div style={{display: 'table-cell', textAlign: 'center', verticalAlign: 'middle'}}>
             <img
-              src={fileData && fileData.data ? fileData.data : ''}
+              src={imageUrl}
               ref="image"
               className={styles.image}
               style={sizeStyles}
@@ -115,7 +131,7 @@ export default React.createClass({
             />
           </div>
         </ScrollZoom>
-        <LoadingOverlay show={fileData && fileData.data ? fileData.loading : true} />
+        <LoadingOverlay show={isLoading} />
       </div>
     )
   }

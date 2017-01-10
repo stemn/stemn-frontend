@@ -16,7 +16,7 @@ import classNames from 'classnames';
 
 // Sub Components
 import TaskLabelsEdit from '../TaskLabelsEdit/TaskLabelsEdit.jsx'
-import Button from 'stemn-frontend-shared/src/misc/Buttons/Button/Button'
+import Button from 'stemn-shared/misc/Buttons/Button/Button'
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////

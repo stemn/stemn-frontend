@@ -1,8 +1,8 @@
 import React from 'react';
 
-import expired from 'stemn-frontend-shared/src/assets/images/pure-vectors/expired.svg';
+import expired from 'stemn-shared/assets/images/pure-vectors/expired.svg';
 import { connect } from 'react-redux';
-import * as ModalActions from 'stemn-frontend-shared/src/misc/Modal/Modal.actions.js';
+import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js';
 
 export const PreviewExpired = React.createClass({
   render() {

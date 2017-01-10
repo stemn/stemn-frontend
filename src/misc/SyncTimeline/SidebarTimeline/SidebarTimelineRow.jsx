@@ -2,10 +2,10 @@ import React from 'react';
 import classNames from 'classnames';
 import moment from 'moment';
 
-import { groupRevisions } from 'stemn-frontend-shared/src/misc/Timeline/Timeline.utils.js'
+import { groupRevisions } from 'stemn-shared/misc/Timeline/Timeline.utils.js'
 
-import TogglerExpand from 'stemn-frontend-shared/src/misc/Toggler/TogglerExpand/TogglerExpand.jsx';
-import UserAvatar    from 'stemn-frontend-shared/src/misc/Avatar/UserAvatar/UserAvatar.jsx';
+import TogglerExpand from 'stemn-shared/misc/Toggler/TogglerExpand/TogglerExpand.jsx';
+import UserAvatar    from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx';
 
 // Styles
 import styles from './SidebarTimelineRow.css';

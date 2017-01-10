@@ -8,7 +8,7 @@ const initialState = {
 
 const mainReducer = (state, action) => {
   switch (action.type) {
-    case 'TOGGLE_SIDEBAR':
+    case 'SIDEBAR/TOGGLE_SIDEBAR':
       return {...state,
         show: action.payload || !state.show
       }

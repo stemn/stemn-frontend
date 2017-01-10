@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Components
-import Checkbox from 'stemn-frontend-shared/src/misc/Input/Checkbox/Checkbox';
+import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox';
 // Styles
 import styles from './FileChangeTitleRow.css';
 

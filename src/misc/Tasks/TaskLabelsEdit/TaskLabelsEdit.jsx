@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import getUuid from 'stemn-frontend-shared/src/utils/getUuid.js';
+import getUuid from 'stemn-shared/utils/getUuid.js';
 
 
 // Styles
@@ -11,11 +11,11 @@ import classes from './TaskLabelsEdit.css';
 
 // Actions
 import { actions } from 'react-redux-form';
-import * as ModalActions from 'stemn-frontend-shared/src/misc/Modal/Modal.actions.js';
+import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js';
 
-import PopoverMenu from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenu';
-import Input from 'stemn-frontend-shared/src/misc/Input/Input/Input';
-import SimpleIconButton from 'stemn-frontend-shared/src/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import Input from 'stemn-shared/misc/Input/Input/Input';
+import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
 import ColorSelect from './ColorSelect/ColorSelect.jsx'
 

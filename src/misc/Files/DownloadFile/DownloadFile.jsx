@@ -12,7 +12,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 // Sub Components
-import LoadingOverlay     from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import LoadingOverlay     from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import { getDownloadUrl } from '../utils';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////

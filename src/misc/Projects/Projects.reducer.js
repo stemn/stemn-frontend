@@ -53,7 +53,7 @@ function reducer(state, action) {
           ...team.slice(index+ 1)
         ]
       });
-      
+
     case 'PROJECTS/LINK_REMOTE_PENDING' :
       return i.chain(state)
       .assocIn(['data', action.meta.cacheKey, 'linkPending'], true)

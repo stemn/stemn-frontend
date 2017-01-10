@@ -7,8 +7,8 @@ import classNames from 'classnames';
 import classes from './TaskTimelinePanel.css';
 
 // Sub Components
-import UserAvatar from 'stemn-frontend-shared/src/misc/Avatar/UserAvatar/UserAvatar.jsx';
-import SimpleIconButton from 'stemn-frontend-shared/src/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx';
+import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 
 export default React.createClass({
   render() {

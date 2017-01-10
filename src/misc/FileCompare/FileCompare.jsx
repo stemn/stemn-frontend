@@ -2,13 +2,13 @@ import React from 'react';
 
 import classes                from './FileCompare.css';
 
-import { orderItemsByTime }   from 'stemn-frontend-shared/src/misc/FileCompare/FileCompare.utils.js';
-import TogglePanel            from 'stemn-frontend-shared/src/misc/TogglePanel/TogglePanel.jsx';
-import DragResize             from 'stemn-frontend-shared/src/misc/DragResize/DragResize.jsx';
-import FileCompareMenu        from 'stemn-frontend-shared/src/misc/FileCompare/FileCompareMenu';
-import FileCompareInner       from 'stemn-frontend-shared/src/misc/FileCompare/FileCompareInner/FileCompareInner.jsx';
-import Timeline               from 'stemn-frontend-shared/src/misc/Timeline/Timeline.jsx';
-//import { websocketJoinFile }  from 'stemn-frontend-shared/src/misc/Files/actions';
+import { orderItemsByTime }   from 'stemn-shared/misc/FileCompare/FileCompare.utils.js';
+import TogglePanel            from 'stemn-shared/misc/TogglePanel/TogglePanel.jsx';
+import DragResize             from 'stemn-shared/misc/DragResize/DragResize.jsx';
+import FileCompareMenu        from 'stemn-shared/misc/FileCompare/FileCompareMenu';
+import FileCompareInner       from 'stemn-shared/misc/FileCompare/FileCompareInner/FileCompareInner.jsx';
+import Timeline               from 'stemn-shared/misc/Timeline/Timeline.jsx';
+//import { websocketJoinFile }  from 'stemn-shared/misc/Files/actions';
 import { orderBy, has }       from 'lodash';
 
 export const FileCompare = React.createClass({

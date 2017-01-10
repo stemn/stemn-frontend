@@ -1,5 +1,5 @@
-import * as SystemActions    from 'stemn-frontend-shared/src/desktop/System/System.actions.js';
-import * as ElectronWindowsActions from 'stemn-frontend-shared/src/desktop/ElectronWindows/ElectronWindows.actions.js';
+import * as SystemActions    from 'stemn-shared/desktop/System/System.actions.js';
+import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js';
 
 export default (dispatch) => {
   const discardChanges = {

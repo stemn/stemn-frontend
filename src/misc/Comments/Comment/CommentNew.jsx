@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as CommentsActions from 'stemn-frontend-shared/src/misc/Comments/Comments.actions.js';
+import * as CommentsActions from 'stemn-shared/misc/Comments/Comments.actions.js';
 
 // Component Core
 import React from 'react';
@@ -14,12 +14,12 @@ import classNames from 'classnames';
 import classes from './Comment.css';
 
 // Sub Components
-import UserAvatar from 'stemn-frontend-shared/src/misc/Avatar/UserAvatar/UserAvatar.jsx';
-import Editor from 'stemn-frontend-shared/src/misc/Editor/Editor.jsx';
-import MarkdownButton from 'stemn-frontend-shared/src/misc/Editor/MarkdownButton/MarkdownButton.jsx';
-import EditorDisplay from 'stemn-frontend-shared/src/misc/Editor/EditorDisplay.jsx';
-import Button from 'stemn-frontend-shared/src/misc/Buttons/Button/Button';
-import { ctrlEnterHandler } from 'stemn-frontend-shared/src/misc/Forms/Forms.utils.js'
+import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx';
+import Editor from 'stemn-shared/misc/Editor/Editor.jsx';
+import MarkdownButton from 'stemn-shared/misc/Editor/MarkdownButton/MarkdownButton.jsx';
+import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx';
+import Button from 'stemn-shared/misc/Buttons/Button/Button';
+import { ctrlEnterHandler } from 'stemn-shared/misc/Forms/Forms.utils.js'
 
 
 /////////////////////////////////////////////////////////////////////////////

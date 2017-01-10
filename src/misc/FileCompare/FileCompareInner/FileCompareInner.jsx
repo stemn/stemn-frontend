@@ -14,7 +14,7 @@ import classNames from 'classnames';
 import classes from './FileCompareInner.css'
 
 // Sub Components
-import PreviewFile        from 'stemn-frontend-shared/src/misc/Files/PreviewFile/PreviewFile.jsx';
+import PreviewFile        from 'stemn-shared/misc/Files/PreviewFile/PreviewFile.jsx';
 import FileCompareSlider  from './FileCompareSlider/FileCompareSlider.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////

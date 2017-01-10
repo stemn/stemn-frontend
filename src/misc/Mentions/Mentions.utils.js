@@ -1,4 +1,4 @@
-import isUuid from 'stemn-frontend-shared/src/utils/isUuid.js';
+import isUuid from 'stemn-shared/utils/isUuid.js';
 
 export const validateMention = (href) => {
   // mention should be of the form 'entityId:entityType:mentionId'

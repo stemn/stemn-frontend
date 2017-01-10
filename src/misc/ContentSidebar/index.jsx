@@ -2,7 +2,7 @@ import React from 'react';
 
 // Styles
 import styles from './ContentSidebar.css';
-import DragResize      from 'stemn-frontend-shared/src/misc/DragResize/DragResize.jsx';
+import DragResize      from 'stemn-shared/misc/DragResize/DragResize.jsx';
 
 const Sidebar = (props) => {
   return (

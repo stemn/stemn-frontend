@@ -14,8 +14,8 @@ import classNames from 'classnames';
 
 // Sub Components
 import Dropzone from 'react-dropzone';
-import Button from 'stemn-frontend-shared/src/misc/Buttons/Button/Button.jsx';
-import LoadingOverlay from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import Button from 'stemn-shared/misc/Buttons/Button/Button.jsx';
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import MdFileUpload from 'react-icons/md/file-upload';
 
 

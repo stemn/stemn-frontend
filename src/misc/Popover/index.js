@@ -11,6 +11,8 @@ import { isServer, window } from './platform'
 import { arrayify, clientOnly } from './utils'
 import Tip from './tip'
 
+import classes from './popover.css';
+
 export const ContextProvider = React.createClass({
   // This will add store, history and router to the child's context
   getChildContext() {

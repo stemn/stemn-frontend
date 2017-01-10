@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as TasksActions from '../Tasks.actions.js';
-import * as ProjectsActions from 'stemn-frontend-shared/src/redux/actions/projects.js';
-import * as ModalActions from 'stemn-frontend-shared/src/misc/Modal/Modal.actions.js';
+import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js';
+import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js';
 
 // Component Core
 import React from 'react';
@@ -18,19 +18,19 @@ import classNames from 'classnames';
 import classes from './TaskDisplayModal.css';
 
 // Sub Components
-import Checkbox from 'stemn-frontend-shared/src/misc/Input/Checkbox/Checkbox';
-import UserAvatar from 'stemn-frontend-shared/src/misc/Avatar/UserAvatar/UserAvatar.jsx';
+import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox';
+import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx';
 import LabelSelect from './LabelSelect/LabelSelect.jsx';
-import UserSelect from 'stemn-frontend-shared/src/misc/Users/UserSelect/UserSelect.jsx';
+import UserSelect from 'stemn-shared/misc/Users/UserSelect/UserSelect.jsx';
 import TaskTimeline from '../TaskTimeline/TaskTimeline.jsx';
-import DatePicker from 'stemn-frontend-shared/src/misc/Calendar/DatePicker/DatePicker.jsx';
-import Textarea from 'stemn-frontend-shared/src/misc/Input/Textarea/Textarea';
-import CommentNew from 'stemn-frontend-shared/src/misc/Comments/Comment/CommentNew.jsx';
-import PopoverMenu from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenu';
-import PopoverMenuList from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenuList';
-import SimpleIconButton from 'stemn-frontend-shared/src/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import DatePicker from 'stemn-shared/misc/Calendar/DatePicker/DatePicker.jsx';
+import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea';
+import CommentNew from 'stemn-shared/misc/Comments/Comment/CommentNew.jsx';
+import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList';
+import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
-import LoadingOverlay from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 
 ///////////////////////////////// COMPONENT /////////////////////////////////

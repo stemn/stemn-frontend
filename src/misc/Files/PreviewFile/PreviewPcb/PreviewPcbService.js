@@ -1,4 +1,4 @@
-import getUuid from 'stemn-frontend-shared/src/utils/getUuid.js';
+import getUuid from 'stemn-shared/utils/getUuid.js';
 import { findIndex } from 'lodash';
 import webGerber from './viewer/webGerber.js';
 

@@ -14,8 +14,8 @@ import { getStepData } from './Walkthrough.config.js';
 import classNames from 'classnames';
 import classes from './Walkthrough.css';
 
-import PopoverMenu from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenu';
-import SimpleIconButton from 'stemn-frontend-shared/src/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdClose from 'react-icons/md/close';
 
 const WalkthroughPropTypes = {

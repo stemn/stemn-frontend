@@ -5,16 +5,16 @@ import { ContextMenuLayer } from "react-contextmenu";
 import FileChangeRow from './FileChangeRow';
 import FileChangeTitleRow from './FileChangeTitleRow';
 import FileChangeMenu from './FileChange.menu.js';
-import ContextMenu from 'stemn-frontend-shared/src/misc/ContextMenu/ContextMenu.jsx';
-import PopoverMenu from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenu';
-import PopoverMenuList from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenuList';
-import SimpleIconButton from 'stemn-frontend-shared/src/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import ContextMenu from 'stemn-shared/misc/ContextMenu/ContextMenu.jsx';
+import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList';
+import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
-import LoadingOverlay from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import Walkthrough from 'stemn-frontend-shared/src/misc/Walkthrough/Walkthrough.jsx'
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import Walkthrough from 'stemn-shared/misc/Walkthrough/Walkthrough.jsx'
 
 // Functions
-import { groupRevisions } from 'stemn-frontend-shared/src/misc/Timeline/Timeline.utils.js'
+import { groupRevisions } from 'stemn-shared/misc/Timeline/Timeline.utils.js'
 import { getToggleAllStatus } from '../Changes.utils.js'
 
 // Styles

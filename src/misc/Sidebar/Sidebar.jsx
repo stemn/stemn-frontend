@@ -3,11 +3,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as SidebarActions            from 'stemn-frontend-shared/src/redux/actions/sidebar';
-import * as AuthActions               from 'stemn-frontend-shared/src/misc/Auth/Auth.actions.js';
-import * as ProjectsActions           from 'stemn-frontend-shared/src/redux/actions/projects';
-import * as ModalActions              from 'stemn-frontend-shared/src/misc/Modal/Modal.actions.js';
-import * as SystemActions             from 'stemn-frontend-shared/src/desktop/System/System.actions.js';
+import * as SidebarActions            from 'stemn-shared/misc/Sidebar/Sidebar.actions.js';
+import * as AuthActions               from 'stemn-shared/misc/Auth/Auth.actions.js';
+import * as ProjectsActions           from 'stemn-shared/misc/Projects/Projects.actions.js';
+import * as ModalActions              from 'stemn-shared/misc/Modal/Modal.actions.js';
+import * as SystemActions             from 'stemn-shared/desktop/System/System.actions.js';
 
 // Component Core
 import React from 'react';
@@ -18,20 +18,20 @@ import classNames                     from 'classnames';
 import styles                         from './Sidebar.css';
 import userStyles                     from './SidebarAvatar.css';
 // Sub Components 
-import DragResize                     from 'stemn-frontend-shared/src/misc/DragResize/DragResize.jsx';
+import DragResize                     from 'stemn-shared/misc/DragResize/DragResize.jsx';
 import { Link }                       from 'react-router';
 import { ContextMenuLayer }           from "react-contextmenu";
-import PopoverMenu                    from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenu';
-import Input                          from 'stemn-frontend-shared/src/misc/Input/Input/Input'
-import ContextMenu                    from 'stemn-frontend-shared/src/misc/ContextMenu/ContextMenu.jsx';
+import PopoverMenu                    from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import Input                          from 'stemn-shared/misc/Input/Input/Input'
+import ContextMenu                    from 'stemn-shared/misc/ContextMenu/ContextMenu.jsx';
 import SidebarProjectButton           from './SidebarProjectButton.jsx';
-import SimpleIconButton               from 'stemn-frontend-shared/src/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx';
+import SimpleIconButton               from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx';
 import MdMenu                         from 'react-icons/md/menu';
 import MdSearch                       from 'react-icons/md/search';
 import MdSettings                     from 'react-icons/md/settings';
 import MdAdd                          from 'react-icons/md/add';
-import ProjectMenu                    from 'stemn-frontend-shared/src/misc/Projects/Project.menu.js';
-import UserAvatar                     from 'stemn-frontend-shared/src/misc/Avatar/UserAvatar/UserAvatar.jsx';
+import ProjectMenu                    from 'stemn-shared/misc/Projects/Project.menu.js';
+import UserAvatar                     from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 const projectContextIdentifier = 'ProjectContextIdentifier';

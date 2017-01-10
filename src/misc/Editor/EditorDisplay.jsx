@@ -3,12 +3,12 @@ import markdownIt           from 'markdown-it';
 import emoji                from 'markdown-it-emoji';
 import mdMathjax            from 'markdown-it-mathjax';
 import classes              from './EditorDisplay.css';
-import { validateMention }  from 'stemn-frontend-shared/src/misc/Mentions/Mentions.utils.js';
+import { validateMention }  from 'stemn-shared/misc/Mentions/Mentions.utils.js';
 import htmlToReact          from 'html-to-react';
 import hljs                 from 'highlight.js';
 import classNames           from 'classnames';
 import { connect }          from 'react-redux';
-import * as ModalActions    from 'stemn-frontend-shared/src/misc/Modal/Modal.actions.js';
+import * as ModalActions    from 'stemn-shared/misc/Modal/Modal.actions.js';
 
 const TaskMention = React.createClass({
   showModal(){

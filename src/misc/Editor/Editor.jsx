@@ -14,12 +14,12 @@ import classNames from 'classnames';
 import classes from './Editor.css';
 
 // Sub Components
-import { MentionsInput, Mention } from 'stemn-frontend-shared/src/misc/Mentions/MentionsInput/index.js'
-import UserAvatar from 'stemn-frontend-shared/src/misc/Avatar/UserAvatar/UserAvatar.jsx';
+import { MentionsInput, Mention } from 'stemn-shared/misc/Mentions/MentionsInput/index.js'
+import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx';
 import AutosuggestHighlight from 'autosuggest-highlight';
-import Checkbox from 'stemn-frontend-shared/src/misc/Input/Checkbox/Checkbox';
+import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox';
 
-import getUuid from 'stemn-frontend-shared/src/utils/getUuid.js';
+import getUuid from 'stemn-shared/utils/getUuid.js';
 import http from 'axios';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////

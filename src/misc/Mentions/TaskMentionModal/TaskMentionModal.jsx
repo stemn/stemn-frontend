@@ -3,31 +3,31 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as TasksActions from 'stemn-frontend-shared/src/misc/Tasks/Tasks.actions.js';
+import * as TasksActions from 'stemn-shared/misc/Tasks/Tasks.actions.js';
 
 // Component Core
 import React from 'react';
 import moment from 'moment';
 import { actions } from 'react-redux-form';
-import getUuid from 'stemn-frontend-shared/src/utils/getUuid.js';
+import getUuid from 'stemn-shared/utils/getUuid.js';
 
 // Styles
 import classNames from 'classnames';
 import classes from './TaskMentionModal.css';
 
 // Helpers
-import howMany from 'stemn-frontend-shared/src/utils/strings/howMany.js';
+import howMany from 'stemn-shared/utils/strings/howMany.js';
 
 // Sub Components
-import Checkbox from 'stemn-frontend-shared/src/misc/Input/Checkbox/Checkbox';
-import Input from 'stemn-frontend-shared/src/misc/Input/Input/Input';
-import Button from 'stemn-frontend-shared/src/misc/Buttons/Button/Button';
+import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox';
+import Input from 'stemn-shared/misc/Input/Input/Input';
+import Button from 'stemn-shared/misc/Buttons/Button/Button';
 import TaskRow from './TaskRow/TaskRow.jsx';
 import MdSearch from 'react-icons/md/search';
-import { filterBoard, getAllTasks } from 'stemn-frontend-shared/src/misc/Tasks/Tasks.utils.js';
-import TasksFilterMenu from 'stemn-frontend-shared/src/misc/Tasks/TasksFilterMenu/TasksFilterMenu.jsx';
-import PopoverMenu from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenu';
-import LoadingOverlay from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import { filterBoard, getAllTasks } from 'stemn-shared/misc/Tasks/Tasks.utils.js';
+import TasksFilterMenu from 'stemn-shared/misc/Tasks/TasksFilterMenu/TasksFilterMenu.jsx';
+import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

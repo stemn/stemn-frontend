@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as SyncTimelineActions from 'stemn-frontend-shared/src/misc/SyncTimeline/SyncTimeline.actions.js';
+import * as SyncTimelineActions from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js';
 import { actions } from 'react-redux-form';
 
 // Component Core
@@ -16,11 +16,11 @@ import classNames from 'classnames';
 import classes from './DownloadModal.css'
 
 // Sub Components
-import Button from 'stemn-frontend-shared/src/misc/Buttons/Button/Button';
+import Button from 'stemn-shared/misc/Buttons/Button/Button';
 import MdDone from 'react-icons/md/done';
 import DownloadFile from '../../DownloadFile/DownloadFile.jsx'
-import Label        from 'stemn-frontend-shared/src/misc/Label/Label.jsx'
-import LoadingOverlay from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import Label        from 'stemn-shared/misc/Label/Label.jsx'
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

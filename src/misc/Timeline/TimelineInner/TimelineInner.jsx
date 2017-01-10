@@ -5,10 +5,10 @@ import classNames from 'classnames';
 import classes from './TimelineInner.css';
 
 import moment from 'moment';
-import Popover from 'stemn-frontend-shared/src/misc/Popover';
-import PopoverMenu from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenu';
+import Popover from 'stemn-shared/misc/Popover';
+import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
 
-import * as stringConcat from 'stemn-frontend-shared/src/utils/stringConcat';
+import * as stringConcat from 'stemn-shared/utils/stringConcat';
 
 
 const EventMap = {

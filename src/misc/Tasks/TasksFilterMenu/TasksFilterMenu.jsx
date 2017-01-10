@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { isFilterActive, addFilter } from 'stemn-frontend-shared/src/misc/StringFilter/StringFilter.utils.js';
-import StringFilterMenu from 'stemn-frontend-shared/src/misc/StringFilter/StringFilterMenu.jsx';
+import { isFilterActive, addFilter } from 'stemn-shared/misc/StringFilter/StringFilter.utils.js';
+import StringFilterMenu from 'stemn-shared/misc/StringFilter/StringFilterMenu.jsx';
 import classNames from 'classnames';
 
 const statusFilter = [{

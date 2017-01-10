@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as TasksActions from '../../Tasks.actions.js';
-import * as ModalActions from 'stemn-frontend-shared/src/misc/Modal/Modal.actions.js';
+import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js';
 
 // Component Core
 import React from 'react';
@@ -14,18 +14,18 @@ import { has } from 'lodash';
 // Styles
 import classNames from 'classnames';
 import classes from './TaskListItem.css';
-import loadingClasses from 'stemn-frontend-shared/src/misc/Loading/LoadingPlaceholders/LoadingPlaceholders.css'
+import loadingClasses from 'stemn-shared/misc/Loading/LoadingPlaceholders/LoadingPlaceholders.css'
 
 // Sub Components
-import Checkbox from 'stemn-frontend-shared/src/misc/Input/Checkbox/Checkbox';
-import Input from 'stemn-frontend-shared/src/misc/Input/Input/Input';
-import UserAvatars from 'stemn-frontend-shared/src/misc/Avatar/UserAvatars/UserAvatars.jsx'
-import SimpleIconButton from 'stemn-frontend-shared/src/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox';
+import Input from 'stemn-shared/misc/Input/Input/Input';
+import UserAvatars from 'stemn-shared/misc/Avatar/UserAvatars/UserAvatars.jsx'
+import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdOpenInNew from 'react-icons/md/open-in-new';
-import PopoverMenu from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenu';
-import TaskLabelDots from 'stemn-frontend-shared/src/misc/Tasks/TaskLabelDots/TaskLabelDots.jsx'
-import Textarea from 'stemn-frontend-shared/src/misc/Input/Textarea/Textarea';
-import UserSelect from 'stemn-frontend-shared/src/misc/Users/UserSelect/UserSelect.jsx';
+import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import TaskLabelDots from 'stemn-shared/misc/Tasks/TaskLabelDots/TaskLabelDots.jsx'
+import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea';
+import UserSelect from 'stemn-shared/misc/Users/UserSelect/UserSelect.jsx';
 
 
 ///////////////////////////////// COMPONENT /////////////////////////////////

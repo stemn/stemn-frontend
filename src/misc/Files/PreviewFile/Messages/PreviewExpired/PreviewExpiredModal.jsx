@@ -1,7 +1,7 @@
 // Component Core
 import React from 'react';
-import Button from 'stemn-frontend-shared/src/misc/Buttons/Button/Button'
-import StandardTable from 'stemn-frontend-shared/src/misc/Tables/StandardTable/StandardTable.jsx'
+import Button from 'stemn-shared/misc/Buttons/Button/Button'
+import StandardTable from 'stemn-shared/misc/Tables/StandardTable/StandardTable.jsx'
 import classNames from 'classnames';
 
 const Component = React.createClass({

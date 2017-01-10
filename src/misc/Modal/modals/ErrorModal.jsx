@@ -3,7 +3,7 @@ import React from 'react';
 
 // Styles
 import classNames from 'classnames';
-import Button from 'stemn-frontend-shared/src/misc/Buttons/Button/Button'
+import Button from 'stemn-shared/misc/Buttons/Button/Button'
 
 const Component = React.createClass({
   render() {

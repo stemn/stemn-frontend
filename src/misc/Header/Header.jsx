@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-//import * as SidebarActions from 'stemn-frontend-shared/src/redux/actions/sidebar';
+//import * as SidebarActions from 'stemn-shared/misc/Sidebar/Sidebar.actions.js';
 const SidebarActions = {};
 
 // Component Core

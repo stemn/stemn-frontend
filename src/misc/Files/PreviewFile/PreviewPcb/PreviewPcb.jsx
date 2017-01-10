@@ -3,7 +3,7 @@ import { clone, forEachRight, find, has } from 'lodash';
 import previewPcbService from './PreviewPcbService.js';
 import classes from './PreviewPcb.css';
 
-import LoadingOverlay from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 export const Viewer = React.createClass({
   getInitialState () {

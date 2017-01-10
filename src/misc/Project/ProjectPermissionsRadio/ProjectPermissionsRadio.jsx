@@ -1,5 +1,5 @@
 import React          from 'react';
-import Radio          from 'stemn-frontend-shared/src/misc/Input/Radio/Radio.jsx'
+import Radio          from 'stemn-shared/misc/Input/Radio/Radio.jsx'
 import MdPublic       from 'react-icons/md/public';
 import MdLockOutline  from 'react-icons/md/lock-outline';
 

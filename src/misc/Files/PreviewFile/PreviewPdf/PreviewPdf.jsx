@@ -3,7 +3,7 @@ import PDFJS from 'pdfjs-dist/build/pdf.combined.js'
 
 import Viewer from './PreviewPdfViewer.jsx'
 import classes from './PreviewPdf.css';
-import ScrollZoom from 'stemn-frontend-shared/src/misc/Scroll/ScrollZoom/ScrollZoom.jsx';
+import ScrollZoom from 'stemn-shared/misc/Scroll/ScrollZoom/ScrollZoom.jsx';
 import { getDownloadUrl } from '../../utils';
 
 // Link to the workerSrc bundle (See example here https://github.com/mozilla/pdf.js/blob/master/examples/webpack/main.js)

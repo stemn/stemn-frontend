@@ -16,15 +16,15 @@ import classes from './FileList.css'
 // Sub Components
 import FileBreadCrumbs  from './components/FileBreadCrumbs';
 import FileRow          from './components/FileRow';
-import LoadingOverlay   from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import LoadingOverlay   from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import MdRefresh        from 'react-icons/md/refresh';
 import MdHome           from 'react-icons/md/home';
-import SimpleIconButton from 'stemn-frontend-shared/src/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 
 
 const contextIdentifier     = 'FileListCm';
 import { ContextMenuLayer } from "react-contextmenu";
-import ContextMenu          from 'stemn-frontend-shared/src/misc/ContextMenu/ContextMenu.jsx';
+import ContextMenu          from 'stemn-shared/misc/ContextMenu/ContextMenu.jsx';
 import FileListMenu         from './FileList.menu.js';
 const FileRowContext        = ContextMenuLayer(contextIdentifier, props => props.file)(FileRow)
 

@@ -22,7 +22,7 @@ export default React.createClass({
         <img className={className}
           title={title}
           style={actualStyles}
-          src={`${process.env.API_SERVER}${picture || this.default}?size=thumb&crop=true`}
+          src={`${GLOBAL_ENV.API_SERVER}${picture || this.default}?size=thumb&crop=true`}
         />
       );
     }

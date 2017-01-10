@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as TasksActions from '../Tasks.actions.js';
-import * as CommentsActions from 'stemn-frontend-shared/src/misc/Comments/Comments.actions.js';
+import * as CommentsActions from 'stemn-shared/misc/Comments/Comments.actions.js';
 
 // Component Core
 import React from 'react';
@@ -14,9 +14,9 @@ import classNames from 'classnames';
 import classes from './TaskTimeline.css';
 
 // Sub Components
-import Comment from 'stemn-frontend-shared/src/misc/Comments/Comment/Comment.jsx';
+import Comment from 'stemn-shared/misc/Comments/Comment/Comment.jsx';
 import TaskTimelineItem from './TaskTimelineItem/TaskTimelineItem.jsx';
-import comments      from 'stemn-frontend-shared/src/assets/images/pure-vectors/comments.svg';
+import comments      from 'stemn-shared/assets/images/pure-vectors/comments.svg';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

@@ -1,4 +1,4 @@
-import { showConfirm } from 'stemn-frontend-shared/src/misc/Modal/Modal.actions.js';
+import { showConfirm } from 'stemn-shared/misc/Modal/Modal.actions.js';
 
 export function currentVersion({version}) {
   return {

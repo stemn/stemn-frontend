@@ -1,10 +1,10 @@
-import { fetchChanges }                 from 'stemn-frontend-shared/src/misc/Changes/Changes.actions.js';
-import { fetchTimeline }                from 'stemn-frontend-shared/src/misc/SyncTimeline/SyncTimeline.actions.js';
-import { getBoard, getGroup, getTask }  from 'stemn-frontend-shared/src/misc/Tasks/Tasks.actions.js';
-import { getProject }                   from 'stemn-frontend-shared/src/redux/actions/projects.js';
-import { renderFileDownload }           from 'stemn-frontend-shared/src/misc/Files/Files.actions.js';
-//import * as NotificationsActions  from 'stemn-frontend-shared/src/misc/Notifications/Notifications.actions.js';
-//import * as FileListActions       from 'stemn-frontend-shared/src/misc/FileList/FileList.actions.js';
+import { fetchChanges }                 from 'stemn-shared/misc/Changes/Changes.actions.js';
+import { fetchTimeline }                from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js';
+import { getBoard, getGroup, getTask }  from 'stemn-shared/misc/Tasks/Tasks.actions.js';
+import { getProject }                   from 'stemn-shared/misc/Projects/Projects.actions.js';
+import { renderFileDownload }           from 'stemn-shared/misc/Files/Files.actions.js';
+//import * as NotificationsActions  from 'stemn-shared/misc/Notifications/Notifications.actions.js';
+//import * as FileListActions       from 'stemn-shared/misc/FileList/FileList.actions.js';
 
 export default (store, action) => {
 

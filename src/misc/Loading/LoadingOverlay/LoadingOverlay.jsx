@@ -2,8 +2,8 @@ import React, { PropTypes, Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 // Components
-import LoadingSpinner from 'stemn-frontend-shared/src/misc/Loading/LoadingSpinner/LoadingSpinner';
-import LoadingLinear  from 'stemn-frontend-shared/src/misc/Loading/LoadingLinear/LoadingLinear.jsx';
+import LoadingSpinner from 'stemn-shared/misc/Loading/LoadingSpinner/LoadingSpinner';
+import LoadingLinear  from 'stemn-shared/misc/Loading/LoadingLinear/LoadingLinear.jsx';
 
 // Styles
 import classes from './LoadingOverlay.css';

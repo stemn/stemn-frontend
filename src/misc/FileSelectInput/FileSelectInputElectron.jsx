@@ -9,7 +9,7 @@ import { remote } from 'electron';
 import classNames from 'classnames';
 import classes from './FileSelectInput.css'
 import MdFolder from 'react-icons/md/folder';
-import SimpleIconButton from 'stemn-frontend-shared/src/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 
 const Component = React.createClass({
   showModal(){

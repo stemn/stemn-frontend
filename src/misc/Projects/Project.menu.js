@@ -1,6 +1,6 @@
-import * as ProjectsActions from 'stemn-frontend-shared/src/redux/actions/projects';
-import * as SystemActions from 'stemn-frontend-shared/src/desktop/System/System.actions.js';
-import { push } from 'react-router-redux'
+import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js';
+import * as SystemActions from 'stemn-shared/desktop/System/System.actions.js';
+import { projectSettingsRoute } from 'route-actions';
 
 export default (dispatch) => {
   return [{
@@ -13,7 +13,7 @@ export default (dispatch) => {
       })),
   },{
     label: 'Project Settings',
-    onClick: item => dispatch(push(`/project/${item._id}/settings`))
+    onClick: item => dispatch(projectSettingsRoute({projectId: item._id}))
   },{
     label: 'Delete Project',
     divider: true,

@@ -1,4 +1,4 @@
-import { getViewerType } from 'stemn-frontend-shared/src/misc/Files/PreviewFile/PreviewFile.utils.js';
+import { getViewerType } from 'stemn-shared/misc/Files/PreviewFile/PreviewFile.utils.js';
 
 
 //export function init({compareId, mode, provider, file1, file2}) {

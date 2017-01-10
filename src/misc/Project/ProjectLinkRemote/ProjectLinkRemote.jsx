@@ -4,13 +4,13 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as ProjectsActions from 'stemn-frontend-shared/src/redux/actions/projects.js';
-import * as AuthActions from 'stemn-frontend-shared/src/misc/Auth/Auth.actions.js';
+import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js';
+import * as AuthActions from 'stemn-shared/misc/Auth/Auth.actions.js';
 
 // Component
 import Select from 'react-select';
 import selectCss from 'electron/app/renderer/assets/css/select.css';
-import LoadingOverlay from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 import { actions } from 'react-redux-form';
 

@@ -59,7 +59,7 @@ var CustomDragLayer = React.createClass({
         )
       case 'group':
         return (
-          <div>asfasfafs asfsafsafasf fsasafsaf</div>
+          <div>asfasfafs aafsafasf fsasafsaf</div>
         )
     }
   },

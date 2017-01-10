@@ -3,13 +3,13 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as ModalActions from 'stemn-frontend-shared/src/misc/Modal/Modal.actions.js';
+import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js';
 
 import classes from './FileSelectInput.css'
 import classNames from 'classnames';
 import MdFolder from 'react-icons/md/folder';
-import SimpleIconButton from 'stemn-frontend-shared/src/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
-import { isDriveFileId, isDropboxFileId } from 'stemn-frontend-shared/src/misc/Files/utils';
+import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import { isDriveFileId, isDropboxFileId } from 'stemn-shared/misc/Files/utils';
 
 
 const propTypesObject = {

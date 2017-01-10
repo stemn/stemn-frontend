@@ -1,6 +1,6 @@
-import * as LocalPathActions from 'stemn-frontend-shared/src/desktop/LocalPath/LocalPath.actions.js';
-import * as ModalActions from 'stemn-frontend-shared/src/misc/Modal/Modal.actions.js';
-import { getFullPath }   from 'stemn-frontend-shared/src/misc/Files/Files.actions.js';
+import * as LocalPathActions from 'stemn-shared/desktop/LocalPath/LocalPath.actions.js';
+import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js';
+import { getFullPath }   from 'stemn-shared/misc/Files/Files.actions.js';
 
 import Promise from 'es6-promise';
 import { shell } from 'electron';
@@ -38,6 +38,17 @@ export function getInstallStatus() {
     aliased: true,
     payload: {
       functionAlias : 'SystemUtils.getInstallStatus',
+    }
+  };
+}
+
+export function openExternal({url, params}) {
+  return {
+    type: 'SYSTEM/OPEN_EXTERNAL',
+    aliased: true,
+    payload: {
+      functionAlias  : 'SystemUtils.openExternal',
+      functionInputs : { url, params }
     }
   };
 }

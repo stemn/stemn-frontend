@@ -4,12 +4,12 @@ import moment from 'moment';
 
 // Styles
 import classNames from 'classnames';
-import classes from 'stemn-frontend-shared/src/misc/Tasks/TaskTimeline/TaskTimelineItem/TaskTimelineItem.css';
+import classes from 'stemn-shared/misc/Tasks/TaskTimeline/TaskTimelineItem/TaskTimelineItem.css';
 
-import UserAvatar          from 'stemn-frontend-shared/src/misc/Avatar/UserAvatar/UserAvatar.jsx';
-import Comment             from 'stemn-frontend-shared/src/misc/Comments/Comment/Comment.jsx';
-import TaskTimelineWrapper from 'stemn-frontend-shared/src/misc/Tasks/TaskTimeline/TaskTimelineWrapper/TaskTimelineWrapper.jsx';
-import Link                from 'stemn-frontend-shared/src/misc/Router/Link/Link.jsx';
+import UserAvatar          from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx';
+import Comment             from 'stemn-shared/misc/Comments/Comment/Comment.jsx';
+import TaskTimelineWrapper from 'stemn-shared/misc/Tasks/TaskTimeline/TaskTimelineWrapper/TaskTimelineWrapper.jsx';
+import Link                from 'stemn-shared/misc/Router/Link/Link.jsx';
 // import TaskTimelinePanel   from '../TaskTimelinePanel/TaskTimelinePanel.jsx'
 
 const eventTextMap = {

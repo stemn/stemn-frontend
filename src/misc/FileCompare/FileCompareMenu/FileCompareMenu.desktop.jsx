@@ -7,21 +7,21 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as ElectronWindowsActions from 'stemn-frontend-shared/src/desktop/ElectronWindows/ElectronWindows.actions.js';
-import * as SystemActions          from 'stemn-frontend-shared/src/desktop/System/System.actions.js';
-import * as ModalActions           from 'stemn-frontend-shared/src/misc/Modal/Modal.actions.js';
+import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js';
+import * as SystemActions          from 'stemn-shared/desktop/System/System.actions.js';
+import * as ModalActions           from 'stemn-shared/misc/Modal/Modal.actions.js';
 
 // Component Core
 import React from 'react';
-import { getViewerType } from 'stemn-frontend-shared/src/misc/Files/PreviewFile/PreviewFile.utils.js';
+import { getViewerType } from 'stemn-shared/misc/Files/PreviewFile/PreviewFile.utils.js';
 
 // Styles
 import classNames from 'classnames';
 
 // Sub Components
-import PopoverMenu          from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenu';
-import PopoverMenuList      from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenuList';
-import SimpleIconButton     from 'stemn-frontend-shared/src/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import PopoverMenu          from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import PopoverMenuList      from 'stemn-shared/misc/PopoverMenu/PopoverMenuList';
+import SimpleIconButton     from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import { getCompareModes, getCompareIcon } from '../FileCompare.utils.js';
 import MdMoreHoriz          from 'react-icons/md/more-horiz';
 import MdOpenInNew          from 'react-icons/md/open-in-new';
@@ -72,7 +72,16 @@ export const Component = React.createClass({
         }))
       },
     }
-    return isChange ? [discardChanges, openFile, openFolder] : [openFile, openFolder, downloadFile]
+    const viewOnline = {
+      label: 'View File Online',
+      onClick: () => dispatch(SystemActions.openExternal({
+        url          : `${GLOBAL_ENV.WEBSITE_URL}/test/${file1.project._id}/${file1.fileId}`,
+        params       : {
+          revisionId : file1.revisionId
+        }
+      }))
+    }
+    return isChange ? [discardChanges, openFile, openFolder] : [openFile, openFolder, downloadFile, viewOnline]
   },
   preview(){
     const { file1, dispatch } = this.props;

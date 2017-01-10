@@ -15,16 +15,16 @@ import classNames from 'classnames';
 import classes from './Tasks.css';
 
 // Sub Components
-import Input                from 'stemn-frontend-shared/src/misc/Input/Input/Input';
+import Input                from 'stemn-shared/misc/Input/Input/Input';
 import TasksFilterMenu      from './TasksFilterMenu/TasksFilterMenu.jsx';
 import TaskList             from './TaskList/TaskList.jsx';
-import Button               from 'stemn-frontend-shared/src/misc/Buttons/Button/Button'
+import Button               from 'stemn-shared/misc/Buttons/Button/Button'
 import MdSearch             from 'react-icons/md/search';
-import PopoverMenu          from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenu';
-import Guide                from 'stemn-frontend-shared/src/misc/Guide/Guide';
+import PopoverMenu          from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import Guide                from 'stemn-shared/misc/Guide/Guide';
 import cardsColumns         from './graphics/cards-columns.svg';
 import cardsStacked         from './graphics/cards-stacked.svg';
-import LoadingOverlay       from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import LoadingOverlay       from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 
 ///////////////////////////////// COMPONENT /////////////////////////////////

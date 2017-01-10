@@ -3,9 +3,9 @@ import React from 'react';
 import codemirror from 'codemirror'
 import 'codemirror/mode/meta.js'
 const requireCodemirrorMode = require.context("codemirror/mode/", true, /\.js$/);
-import LoadingOverlay     from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import EditorDisplay from 'stemn-frontend-shared/src/misc/Editor/EditorDisplay.jsx';
-import file    from 'stemn-frontend-shared/src/assets/images/pure-vectors/file.svg';
+import LoadingOverlay     from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx';
+import file    from 'stemn-shared/assets/images/pure-vectors/file.svg';
 
 export const Viewer = React.createClass({
   render() {

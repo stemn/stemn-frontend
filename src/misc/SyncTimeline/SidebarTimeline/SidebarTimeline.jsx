@@ -5,13 +5,13 @@ import React from 'react';
 import classNames from 'classnames';
 
 // Sub Components
-import FileChangeTitleRow  from 'stemn-frontend-shared/src/misc/Changes/CommitChanges/FileChangeTitleRow';
-import LoadingOverlay      from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import FileChangeTitleRow  from 'stemn-shared/misc/Changes/CommitChanges/FileChangeTitleRow';
+import LoadingOverlay      from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import MdMoreHoriz         from 'react-icons/md/more-horiz';
-import PopoverMenu         from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenu';
+import PopoverMenu         from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
 import SidebarTimelineRow  from './SidebarTimelineRow'
-import SimpleIconButton    from 'stemn-frontend-shared/src/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
-import StringFilterMenu    from 'stemn-frontend-shared/src/misc/StringFilter/StringFilterMenu.jsx';
+import SimpleIconButton    from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import StringFilterMenu    from 'stemn-shared/misc/StringFilter/StringFilterMenu.jsx';
 import { Link }            from 'react-router';
 import { every }           from 'lodash';
 

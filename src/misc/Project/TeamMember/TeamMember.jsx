@@ -1,9 +1,9 @@
 import React from 'react';
 
 // Components
-import UserAvatar from 'stemn-frontend-shared/src/misc/Avatar/UserAvatar/UserAvatar.jsx'
-import PopoverMenu from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenu';
-import SimpleIconButton from 'stemn-frontend-shared/src/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
+import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
 
 // Styles

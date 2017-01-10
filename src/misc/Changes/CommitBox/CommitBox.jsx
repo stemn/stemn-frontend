@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as ChangesActions from '../Changes.actions.js';
-import * as ElectronWindowsActions from 'stemn-frontend-shared/src/desktop/ElectronWindows/ElectronWindows.actions.js';
+import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js';
 
 // Component Core
 import React from 'react';
@@ -16,12 +16,12 @@ import classNames from 'classnames';
 import classes from './CommitBox.css';
 
 // Sub Components
-import IconButton from 'stemn-frontend-shared/src/misc/Buttons/IconButton';
-import Button from 'stemn-frontend-shared/src/misc/Buttons/Button/Button.jsx';
-import Editor from 'stemn-frontend-shared/src/misc/Editor/Editor.jsx';
-import Input from 'stemn-frontend-shared/src/misc/Input/Input/Input'
-import MarkdownButton from 'stemn-frontend-shared/src/misc/Editor/MarkdownButton/MarkdownButton.jsx';
-import Walkthrough from 'stemn-frontend-shared/src/misc/Walkthrough/Walkthrough.jsx'
+import IconButton from 'stemn-shared/misc/Buttons/IconButton';
+import Button from 'stemn-shared/misc/Buttons/Button/Button.jsx';
+import Editor from 'stemn-shared/misc/Editor/Editor.jsx';
+import Input from 'stemn-shared/misc/Input/Input/Input'
+import MarkdownButton from 'stemn-shared/misc/Editor/MarkdownButton/MarkdownButton.jsx';
+import Walkthrough from 'stemn-shared/misc/Walkthrough/Walkthrough.jsx'
 
 import MdDone from 'react-icons/md/done';
 import { MentionsInput, Mention } from 'react-mentions';

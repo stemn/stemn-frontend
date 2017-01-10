@@ -2,10 +2,10 @@ import React from 'react';
 
 import classNames from 'classnames';
 import styles from './CommitBox.css';
-import Input from 'stemn-frontend-shared/src/misc/Input/Input/Input';
+import Input from 'stemn-shared/misc/Input/Input/Input';
 
 // Components
-import IconButton from 'stemn-frontend-shared/src/misc/Buttons/IconButton';
+import IconButton from 'stemn-shared/misc/Buttons/IconButton';
 import MdDone from 'react-icons/md/done';
 import { MentionsInput, Mention } from 'react-mentions'
 

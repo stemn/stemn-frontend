@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as CommentsActions from 'stemn-frontend-shared/src/misc/Comments/Comments.actions.js';
-import * as ModalActions from 'stemn-frontend-shared/src/misc/Modal/Modal.actions.js';
+import * as CommentsActions from 'stemn-shared/misc/Comments/Comments.actions.js';
+import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js';
 import { actions } from 'react-redux-form';
 
 // Component Core
@@ -14,16 +14,16 @@ import moment from 'moment';
 // Styles
 import classNames from 'classnames';
 import classes from './Comment.css';
-import loadingClasses from 'stemn-frontend-shared/src/misc/Loading/LoadingPlaceholders/LoadingPlaceholders.css'
+import loadingClasses from 'stemn-shared/misc/Loading/LoadingPlaceholders/LoadingPlaceholders.css'
 
 // Sub Components
-import UserAvatar from 'stemn-frontend-shared/src/misc/Avatar/UserAvatar/UserAvatar.jsx';
-import Editor from 'stemn-frontend-shared/src/misc/Editor/Editor.jsx';
-import EditorDisplay from 'stemn-frontend-shared/src/misc/Editor/EditorDisplay.jsx';
-import ReactionPopup from 'stemn-frontend-shared/src/misc/Reactions/ReactionPopup.jsx';
-import Reactions from 'stemn-frontend-shared/src/misc/Reactions/Reactions.jsx';
-import PopoverMenu from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenu';
-import SimpleIconButton from 'stemn-frontend-shared/src/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx';
+import Editor from 'stemn-shared/misc/Editor/Editor.jsx';
+import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx';
+import ReactionPopup from 'stemn-shared/misc/Reactions/ReactionPopup.jsx';
+import Reactions from 'stemn-shared/misc/Reactions/Reactions.jsx';
+import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
 
 

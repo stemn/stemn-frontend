@@ -1,5 +1,5 @@
 import React from 'react';
-import Input from 'stemn-frontend-shared/src/misc/Input/Input/Input'
+import Input from 'stemn-shared/misc/Input/Input/Input'
 
 // Styles
 import classes from './Checkbox.css';

@@ -4,8 +4,8 @@ import { Link } from 'react-router';
 // Styles
 import classNames from 'classnames';
 import styles from './SidebarProjectButton.css';
-import book   from 'stemn-frontend-shared/src/assets/images/pure-vectors/book.svg';
-import tutorial   from 'stemn-frontend-shared/src/assets/images/pure-vectors/monitor-click.svg';
+import book   from 'stemn-shared/assets/images/pure-vectors/book.svg';
+import tutorial   from 'stemn-shared/assets/images/pure-vectors/monitor-click.svg';
 
 export default (props) => {
   const iconStyle = {width: '22px', height: '22px'};

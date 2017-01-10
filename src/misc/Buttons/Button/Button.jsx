@@ -4,7 +4,7 @@
 //import classNames from 'classnames';
 //import classes from './Button.css';
 //
-//import LoadingOverlay from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+//import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 //
 //export default class extends React.Component{
 //  render() {

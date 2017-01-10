@@ -1,7 +1,9 @@
 import fs from 'fs';
 import os from 'os';
 import pify from 'pify';
-import Promise from 'es6-promise'
+import Promise from 'es6-promise';
+import { shell } from 'electron';
+import querystring from 'querystring';
 
 export const getInstallStatus = () => {
   if(process.platform == 'linux'){
@@ -15,4 +17,9 @@ export const getInstallStatus = () => {
       resolve(true)
     })
   }
+}
+
+export const openExternal = ({url, params}) => {
+  const stringParams = querystring.stringify(params);
+  shell.openExternal(stringParams ? url+'?'+stringParams : url)
 }

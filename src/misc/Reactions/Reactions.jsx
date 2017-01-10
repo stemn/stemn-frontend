@@ -4,10 +4,10 @@ import React from 'react';
 import classNames from 'classnames';
 import classes from './Reactions.css';
 
-import PopoverMenu from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenu';
-import SimpleIconButton from 'stemn-frontend-shared/src/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdInsertEmoticon from 'react-icons/md/insert-emoticon';
-import UserAvatar from 'stemn-frontend-shared/src/misc/Avatar/UserAvatar/UserAvatar.jsx'
+import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 
 import { options, groupAndOrderReactions } from './Reactions.utils.js';
 

@@ -10,13 +10,13 @@ import { connect } from 'react-redux';
 
 // Component Core
 import React from 'react';
-import { getViewerType } from 'stemn-frontend-shared/src/misc/Files/PreviewFile/PreviewFile.utils.js';
+import { getViewerType } from 'stemn-shared/misc/Files/PreviewFile/PreviewFile.utils.js';
 
 // Styles
 import classNames from 'classnames';
 
 // Sub Components
-import SimpleIconButton     from 'stemn-frontend-shared/src/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import SimpleIconButton     from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import { getCompareModes, getCompareIcon }  from '../FileCompare.utils.js';
 import MdMoreHoriz          from 'react-icons/md/more-horiz';
 import MdOpenInNew          from 'react-icons/md/open-in-new';

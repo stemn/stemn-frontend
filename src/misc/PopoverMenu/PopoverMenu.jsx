@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import Popover from 'stemn-frontend-shared/src/misc/Popover';
+import Popover from 'stemn-shared/misc/Popover';
 
 const PropTypesObject = {
   preferPlace         : PropTypes.string,               // ['above', 'below', 'left', 'right']

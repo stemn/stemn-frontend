@@ -1,4 +1,4 @@
-import getUuid from 'stemn-frontend-shared/src/utils/getUuid.js';
+import getUuid from 'stemn-shared/utils/getUuid.js';
 
 export let modalPromises = {
 

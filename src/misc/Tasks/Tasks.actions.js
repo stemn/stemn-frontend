@@ -1,5 +1,5 @@
 import http                  from 'axios';
-import getUuid               from 'stemn-frontend-shared/src/utils/getUuid.js';
+import getUuid               from 'stemn-shared/utils/getUuid.js';
 import { actions }           from 'react-redux-form';
 import { show as showToast } from '../Toasts/Toasts.actions.js';
 import { showModal, showConfirm } from '../Modal/Modal.actions.js';

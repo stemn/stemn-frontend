@@ -1,6 +1,6 @@
 import http from 'axios';
-import { push } from 'react-router-redux'
-import * as ModalActions from 'stemn-frontend-shared/src/misc/Modal/Modal.actions.js';
+import { homeRoute } from 'route-actions';
+import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js';
 
 export function setActiveProject({projectId}) {
   return (dispatch, getState) => {
@@ -86,7 +86,7 @@ export function deleteProject({projectId}) {
         method: 'DELETE',
         url: `/api/v1/projects/${projectId}`,
       }).then((response)=>{
-        dispatch(push(`/`))
+        dispatch(homeRoute())
       }),
       meta: {
         projectId

@@ -3,8 +3,8 @@ import React from 'react';
 // Styles
 import classNames from 'classnames';
 
-import PopoverMenu from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenu';
-import SimpleIconButton from 'stemn-frontend-shared/src/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdDone from 'react-icons/md/done';
 import MdLink from 'react-icons/md/link';
 import MdMoreHoriz from 'react-icons/md/more-horiz';

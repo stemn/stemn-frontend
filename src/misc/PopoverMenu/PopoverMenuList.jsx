@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import PopoverMenu from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenu';
+import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
 
 const MenuItem = React.createClass({
   render() {
