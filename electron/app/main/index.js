@@ -13,11 +13,11 @@ import { create as createTrayIcon }       from './createTrayIcon.js';
 
 import { 
   initialise as wsInitialise, 
-  write as wsWrite }            from 'stemn-frontend-shared/src/misc/Websocket/websocket.js';
-import mapWebsocketToRedux      from 'stemn-frontend-shared/src/misc/Websocket/mapWebsocketToRedux'
-import FileCache                from 'stemn-frontend-shared/src/desktop/FileCache/FileCache.js';
-import AutoUpdateInit           from 'stemn-frontend-shared/src/desktop/AutoUpdate/AutoUpdate.init.js';
-import { getProviderPath }      from 'stemn-frontend-shared/src/desktop/System/System.actions.js';
+  write as wsWrite }            from 'stemn-shared/misc/Websocket/websocket.js';
+import mapWebsocketToRedux      from 'stemn-shared/misc/Websocket/mapWebsocketToRedux'
+import FileCache                from 'stemn-shared/desktop/FileCache/FileCache.js';
+import AutoUpdateInit           from 'stemn-shared/desktop/AutoUpdate/AutoUpdate.init.js';
+import { getProviderPath }      from 'stemn-shared/desktop/System/System.actions.js';
 import configureStore           from '../shared/store/configureStore.main.js';
 import { getFilteredStoreData } from './json-storage.js';
 import postStoreSetup           from './postStoreSetup.js';
@@ -26,7 +26,7 @@ import initApiServer            from './api/index.js';
 // Actions
 import {
   create as createWindow
-} from 'stemn-frontend-shared/src/desktop/ElectronWindows/ElectronWindows.actions.js';
+} from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js';
 
 
 // The windows object is exported so it can be accessed elsewhere

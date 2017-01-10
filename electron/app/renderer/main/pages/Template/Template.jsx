@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as ProjectsActions from 'stemn-frontend-shared/src/redux/actions/projects.js';
+import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js';
 
 // Component Core
 import React from 'react';

@@ -9,8 +9,8 @@ import { push } from 'react-router-redux'
 import React from 'react';
 
 // Sub Components
-import TitleBar from 'stemn-frontend-shared/src/misc/TitleBar/TitleBar';
-import Sidebar  from 'stemn-frontend-shared/src/misc/Sidebar/Sidebar.jsx';
+import TitleBar from 'stemn-shared/misc/TitleBar/TitleBar';
+import Sidebar  from 'stemn-shared/misc/Sidebar/Sidebar.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

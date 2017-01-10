@@ -1,6 +1,6 @@
 import React                from 'react';
 import i                    from 'icepick';
-import FileCompare          from 'stemn-frontend-shared/src/misc/FileCompare/FileCompare.jsx';
+import FileCompare          from 'stemn-shared/misc/FileCompare/FileCompare.jsx';
 
 export default React.createClass({
   render() {

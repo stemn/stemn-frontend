@@ -107,11 +107,11 @@ module.exports = function makeWebpackConfig () {
     extensions: ['', '.js', '.jsx'],
     modulesDirectories    : ["node_modules", "bower_components"],
     alias                : {
-      'ui-router-extras' : __dirname + "/bower_components/ui-router-extras/release/ct-ui-router-extras.js",
-      'ngGeolocation'    : __dirname + "/bower_components/ngGeolocation/ngGeolocation.js",
-      'theme'            : __dirname + "/src/theme.css",
-      'fs'               : __dirname + "/src/app/other/placeholderLibs/fs.js",
-      'process'          : __dirname + "/src/app/other/placeholderLibs/process.js",
+      'ui-router-extras' : path.resolve(__dirname, './bower_components/ui-router-extras/release/ct-ui-router-extras.js'),
+      'ngGeolocation'    : path.resolve(__dirname, './bower_components/ngGeolocation/ngGeolocation.js'),
+      'theme'            : path.resolve(__dirname, './src/theme.css'),
+      'route-actions'    : path.resolve(__dirname, './src/routeActions.js'),
+      'stemn-shared'     : path.resolve(__dirname, './node_modules/stemn-frontend-shared/src'),
     },
     fallback: path.resolve(__dirname, './node_modules'),
   };  

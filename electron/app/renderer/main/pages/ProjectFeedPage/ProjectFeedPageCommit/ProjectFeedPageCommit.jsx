@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import classes             from './ProjectFeedPageCommit.css';
-import FileCompare         from 'stemn-frontend-shared/src/misc/FileCompare/FileCompare.jsx';
-import UserAvatar          from 'stemn-frontend-shared/src/misc/Avatar/UserAvatar/UserAvatar.jsx';
-import EditorDisplay       from 'stemn-frontend-shared/src/misc/Editor/EditorDisplay.jsx';
+import FileCompare         from 'stemn-shared/misc/FileCompare/FileCompare.jsx';
+import UserAvatar          from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx';
+import EditorDisplay       from 'stemn-shared/misc/Editor/EditorDisplay.jsx';
 import moment              from 'moment';
-import { toggleMulti }     from 'stemn-frontend-shared/src/misc/TogglePanel/TogglePanel.actions.js';
+import { toggleMulti }     from 'stemn-shared/misc/TogglePanel/TogglePanel.actions.js';
 
-import { groupRevisions }  from 'stemn-frontend-shared/src/misc/Timeline/Timeline.utils.js';
+import { groupRevisions }  from 'stemn-shared/misc/Timeline/Timeline.utils.js';
 
 export const ProjectFeedPageCommit = React.createClass({
   render() {

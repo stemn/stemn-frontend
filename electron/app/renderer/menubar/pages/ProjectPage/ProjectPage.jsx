@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as ChangesActions from 'stemn-frontend-shared/src/misc/Changes/Changes.actions.js';
-import * as ProjectsActions from 'stemn-frontend-shared/src/redux/actions/projects.js';
+import * as ChangesActions  from 'stemn-shared/misc/Changes/Changes.actions.js';
+import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js';
 
 // Component Core
 import React from 'react';
@@ -13,16 +13,16 @@ import { has } from 'lodash';
 import classNames from 'classnames';
 
 // Sub Components
-import LoadingOverlay     from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import CommitChanges      from 'stemn-frontend-shared/src/misc/Changes/CommitChanges/CommitChanges.jsx';
-import CommitBox          from 'stemn-frontend-shared/src/misc/Changes/CommitBox/CommitBox.jsx'
+import LoadingOverlay     from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import CommitChanges      from 'stemn-shared/misc/Changes/CommitChanges/CommitChanges.jsx';
+import CommitBox          from 'stemn-shared/misc/Changes/CommitBox/CommitBox.jsx'
 import Toolbar            from 'electron/app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
-import MdOpenInNew from 'react-icons/md/open-in-new';
+import MdOpenInNew        from 'react-icons/md/open-in-new';
 import { Link }           from 'react-router';
-import cloudLocked          from 'stemn-frontend-shared/src/assets/images/pure-vectors/cloud-locked.svg';
+import cloudLocked        from 'stemn-shared/assets/images/pure-vectors/cloud-locked.svg';
 
 
-import * as stringConcat  from 'stemn-frontend-shared/src/utils/stringConcat';
+import * as stringConcat  from 'stemn-shared/utils/stringConcat';
 
 export const Component = React.createClass({
   onMount(nextProps, prevProps){

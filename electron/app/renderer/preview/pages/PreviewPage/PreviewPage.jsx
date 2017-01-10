@@ -7,13 +7,13 @@ import React from 'react';
 import { has } from 'lodash';
 
 // Actions
-import * as FilesActions from 'stemn-frontend-shared/src/misc/Files/Files.actions.js';
-import * as SyncTimelineActions from 'stemn-frontend-shared/src/misc/SyncTimeline/SyncTimeline.actions.js';
+import * as FilesActions from 'stemn-shared/misc/Files/Files.actions.js';
+import * as SyncTimelineActions from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js';
 
 // Sub Components
-import LoadingOverlay   from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import LoadingOverlay   from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import PreviewPageInner from './PreviewPageInner.jsx'
-import cloudMagnify    from 'stemn-frontend-shared/src/assets/images/pure-vectors/cloud-magnify.svg';
+import cloudMagnify    from 'stemn-shared/assets/images/pure-vectors/cloud-magnify.svg';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

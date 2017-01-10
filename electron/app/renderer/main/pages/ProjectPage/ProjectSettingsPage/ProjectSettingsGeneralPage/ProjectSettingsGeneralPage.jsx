@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as ProjectsActions from 'stemn-frontend-shared/src/redux/actions/projects.js';
-import * as ModalActions from 'stemn-frontend-shared/src/misc/Modal/Modal.actions.js';
+import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js';
+import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js';
 
 // Component Core
 import React from 'react';
@@ -16,18 +16,18 @@ import classes from '../ProjectSettingsPage.css'
 // Sub Components
 import { actions } from 'react-redux-form';
 
-import Tabs from 'stemn-frontend-shared/src/misc/Tabs/Tabs'
-import Toggle from 'stemn-frontend-shared/src/misc/Input/Toggle/Toggle'
-import UserSearch from 'stemn-frontend-shared/src/misc/UserSearch/UserSearch.container.js'
-import TeamMember from 'stemn-frontend-shared/src/misc/Project/TeamMember/TeamMember.jsx'
-import ProjectPermissionsRadio from 'stemn-frontend-shared/src/misc/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx'
-import ProjectLinkRemote from 'stemn-frontend-shared/src/misc/Project/ProjectLinkRemote/ProjectLinkRemote.jsx'
-import FileSelectInput from 'stemn-frontend-shared/src/misc/FileSelectInput/FileSelectInput.jsx'
-import ProgressButton from 'stemn-frontend-shared/src/misc/Buttons/ProgressButton/ProgressButton'
-import TaskLabelsEdit from 'stemn-frontend-shared/src/misc/Tasks/TaskLabelsEdit/TaskLabelsEdit.jsx'
-import NavPill from 'stemn-frontend-shared/src/misc/Buttons/NavPill/NavPill'
-import Input from 'stemn-frontend-shared/src/misc/Input/Input/Input'
-import Textarea from 'stemn-frontend-shared/src/misc/Input/Textarea/Textarea';
+import Tabs from 'stemn-shared/misc/Tabs/Tabs'
+import Toggle from 'stemn-shared/misc/Input/Toggle/Toggle'
+import UserSearch from 'stemn-shared/misc/UserSearch/UserSearch.container.js'
+import TeamMember from 'stemn-shared/misc/Project/TeamMember/TeamMember.jsx'
+import ProjectPermissionsRadio from 'stemn-shared/misc/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx'
+import ProjectLinkRemote from 'stemn-shared/misc/Project/ProjectLinkRemote/ProjectLinkRemote.jsx'
+import FileSelectInput from 'stemn-shared/misc/FileSelectInput/FileSelectInput.jsx'
+import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
+import TaskLabelsEdit from 'stemn-shared/misc/Tasks/TaskLabelsEdit/TaskLabelsEdit.jsx'
+import NavPill from 'stemn-shared/misc/Buttons/NavPill/NavPill'
+import Input from 'stemn-shared/misc/Input/Input/Input'
+import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

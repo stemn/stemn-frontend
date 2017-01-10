@@ -1,31 +1,28 @@
-import system           from 'stemn-frontend-shared/src/desktop/System/System.reducer.js';
-import autoLaunch       from 'stemn-frontend-shared/src/desktop/AutoLaunch/AutoLaunch.reducer.js';
-import autoUpdate       from 'stemn-frontend-shared/src/desktop/AutoUpdate/AutoUpdate.reducer.js';
-import localPath        from 'stemn-frontend-shared/src/desktop/LocalPath/LocalPath.reducer.js';
+import system           from 'stemn-shared/desktop/System/System.reducer.js';
+import autoLaunch       from 'stemn-shared/desktop/AutoLaunch/AutoLaunch.reducer.js';
+import autoUpdate       from 'stemn-shared/desktop/AutoUpdate/AutoUpdate.reducer.js';
+import localPath        from 'stemn-shared/desktop/LocalPath/LocalPath.reducer.js';
 
-import header           from 'stemn-frontend-shared/src/redux/reducers/header';
-import auth             from 'stemn-frontend-shared/src/redux/reducers/auth';
-import sidebar          from 'stemn-frontend-shared/src/redux/reducers/sidebar';
-import projectSettings  from 'stemn-frontend-shared/src/redux/reducers/projectSettings';
-import projects         from 'stemn-frontend-shared/src/redux/reducers/projects';
-import users            from 'stemn-frontend-shared/src/redux/reducers/users';
-import menubarLayout    from 'stemn-frontend-shared/src/redux/reducers/menubarLayout';
-
-import userSearch       from 'stemn-frontend-shared/src/misc/UserSearch/UserSearch.reducer.js';
-import fileList         from 'stemn-frontend-shared/src/misc/FileList/FileList.reducer.js';
-import fileSelect       from 'stemn-frontend-shared/src/misc/FileSelect/FileSelect.reducer.js';
-import modals           from 'stemn-frontend-shared/src/misc/Modal/Modal.reducer.js';
-import upload           from 'stemn-frontend-shared/src/misc/Upload/Upload.reducer.js';
-import tasks            from 'stemn-frontend-shared/src/misc/Tasks/Tasks.reducer.js';
-import comments         from 'stemn-frontend-shared/src/misc/Comments/Comments.reducer.js';
-import toasts           from 'stemn-frontend-shared/src/misc/Toasts/Toasts.reducer.js';
-import fileCompare      from 'stemn-frontend-shared/src/misc/FileCompare/FileCompare.reducer.js';
-import changes          from 'stemn-frontend-shared/src/misc/Changes/Changes.reducer.js';
-import mentions         from 'stemn-frontend-shared/src/misc/Mentions/Mentions.reducer.js';
-import files            from 'stemn-frontend-shared/src/misc/Files/Files.reducer.js';
-import syncTimeline     from 'stemn-frontend-shared/src/misc/SyncTimeline/SyncTimeline.reducer.js';
-import walkthrough      from 'stemn-frontend-shared/src/misc/Walkthrough/Walkthrough.reducer.js';
-import togglePanel      from 'stemn-frontend-shared/src/misc/TogglePanel/TogglePanel.reducer.js';
+import auth             from 'stemn-shared/misc/Auth/Auth.reducer.js';
+import changes          from 'stemn-shared/misc/Changes/Changes.reducer.js';
+import comments         from 'stemn-shared/misc/Comments/Comments.reducer.js';
+import fileCompare      from 'stemn-shared/misc/FileCompare/FileCompare.reducer.js';
+import fileList         from 'stemn-shared/misc/FileList/FileList.reducer.js';
+import fileSelect       from 'stemn-shared/misc/FileSelect/FileSelect.reducer.js';
+import files            from 'stemn-shared/misc/Files/Files.reducer.js';
+import header           from 'stemn-shared/misc/Header/Header.reducer.js';
+import mentions         from 'stemn-shared/misc/Mentions/Mentions.reducer.js';
+import modals           from 'stemn-shared/misc/Modal/Modal.reducer.js';
+import projects         from 'stemn-shared/misc/Projects/Projects.reducer.js';
+import sidebar          from 'stemn-shared/misc/Sidebar/Sidebar.reducer.js';
+import syncTimeline     from 'stemn-shared/misc/SyncTimeline/SyncTimeline.reducer.js';
+import tasks            from 'stemn-shared/misc/Tasks/Tasks.reducer.js';
+import toasts           from 'stemn-shared/misc/Toasts/Toasts.reducer.js';
+import togglePanel      from 'stemn-shared/misc/TogglePanel/TogglePanel.reducer.js';
+import upload           from 'stemn-shared/misc/Upload/Upload.reducer.js';
+import userSearch       from 'stemn-shared/misc/UserSearch/UserSearch.reducer.js';
+import users            from 'stemn-shared/misc/Users/Users.reducer.js';
+import walkthrough      from 'stemn-shared/misc/Walkthrough/Walkthrough.reducer.js';
 
 export default {
   auth,
@@ -40,9 +37,7 @@ export default {
   header,
   localPath,
   mentions,
-  menubarLayout,
   modals,
-  projectSettings,
   projects,
   sidebar,
   syncTimeline,

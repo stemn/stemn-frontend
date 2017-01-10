@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as SyncTimelineActions from 'stemn-frontend-shared/src/misc/SyncTimeline/SyncTimeline.actions.js';
+import * as SyncTimelineActions from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js';
 
 // Component Core
 import React from 'react';
@@ -15,15 +15,15 @@ import feedPageStyles from './ProjectFeedPage.css';
 // Sub Components
 import { has }                  from 'lodash';
 import { Link }                 from 'react-router';
-import Timeline                 from 'stemn-frontend-shared/src/misc/Timeline/Timeline.jsx';
-import SidebarTimeline          from 'stemn-frontend-shared/src/misc/SyncTimeline/SidebarTimeline/SidebarTimeline.jsx';
-import ContentSidebar           from 'stemn-frontend-shared/src/misc/ContentSidebar';
-import Guide                    from 'stemn-frontend-shared/src/misc/Guide/Guide';
-import Button                   from 'stemn-frontend-shared/src/misc/Buttons/Button/Button'
+import Timeline                 from 'stemn-shared/misc/Timeline/Timeline.jsx';
+import SidebarTimeline          from 'stemn-shared/misc/SyncTimeline/SidebarTimeline/SidebarTimeline.jsx';
+import ContentSidebar           from 'stemn-shared/misc/ContentSidebar';
+import Guide                    from 'stemn-shared/misc/Guide/Guide';
+import Button                   from 'stemn-shared/misc/Buttons/Button/Button'
 import ProjectFeedPageCommit    from './ProjectFeedPageCommit/ProjectFeedPageCommit.jsx'
 import ProjectFeedPageRevision  from './ProjectFeedPageRevision/ProjectFeedPageRevision.jsx'
-import timeline                 from 'stemn-frontend-shared/src/assets/images/pure-vectors/timeline.svg';
-import cloudProviders           from 'stemn-frontend-shared/src/assets/images/illustrations/cloud-providers.svg'
+import timeline                 from 'stemn-shared/assets/images/pure-vectors/timeline.svg';
+import cloudProviders           from 'stemn-shared/assets/images/illustrations/cloud-providers.svg'
 
 
 ///////////////////////////////// COMPONENT /////////////////////////////////

@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as UsersActions from 'stemn-frontend-shared/src/redux/actions/users';
-import * as AuthActions from 'stemn-frontend-shared/src/misc/Auth/Auth.actions.js';
+import * as UsersActions from 'stemn-shared/misc/Users/Users.actions.js';
+import * as AuthActions from 'stemn-shared/misc/Auth/Auth.actions.js';
 
 // Component Core
 import React from 'react';
@@ -14,11 +14,11 @@ import classNames from 'classnames';
 import classes from 'electron/app/renderer/main/pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css'
 
 // Sub Components
-import Upload from 'stemn-frontend-shared/src/misc/Upload/Upload.jsx'
-import ProgressButton from 'stemn-frontend-shared/src/misc/Buttons/ProgressButton/ProgressButton.jsx'
-import LinkAccount from 'stemn-frontend-shared/src/misc/Settings/LinkAccount/LinkAccount.jsx'
-import LoadingOverlay from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import Input from 'stemn-frontend-shared/src/misc/Input/Input/Input';
+import Upload from 'stemn-shared/misc/Upload/Upload.jsx'
+import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton.jsx'
+import LinkAccount from 'stemn-shared/misc/Settings/LinkAccount/LinkAccount.jsx'
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import Input from 'stemn-shared/misc/Input/Input/Input';
 
 
 

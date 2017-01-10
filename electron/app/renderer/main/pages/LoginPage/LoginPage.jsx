@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as AuthActions from 'stemn-frontend-shared/src/misc/Auth/Auth.actions.js';
+import * as AuthActions from 'stemn-shared/misc/Auth/Auth.actions.js';
 
 // Component Core
 import React from 'react';
@@ -13,13 +13,13 @@ import classNames from 'classnames';
 import classes from './LoginPage.css'
 
 // Sub Components
-import Input from 'stemn-frontend-shared/src/misc/Input/Input/Input';
+import Input from 'stemn-shared/misc/Input/Input/Input';
 import { Link } from 'react-router';
-import Button from 'stemn-frontend-shared/src/misc/Buttons/Button/Button.jsx';
-import SimpleIconButton from 'stemn-frontend-shared/src/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx';
+import Button from 'stemn-shared/misc/Buttons/Button/Button.jsx';
+import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx';
 import MdPhoto from 'react-icons/md/photo';
-import LoadingOverlay from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import Tabs from 'stemn-frontend-shared/src/misc/Tabs/Tabs'
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import Tabs from 'stemn-shared/misc/Tabs/Tabs'
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

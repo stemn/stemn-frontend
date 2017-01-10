@@ -8,7 +8,7 @@ import { routerMiddleware }     from 'react-router-redux';
 import getRootReducerRenderer   from '../reducers/rootReducer.renderer.js';
 import forwardToMain            from '../middleware/forwardToMain';
 import forwardToRendererWindow  from '../middleware/forwardToRendererWindow';
-import routerFix                from 'stemn-frontend-shared/src/misc/Router/Router.middleware.js';
+import routerFix                from 'stemn-shared/misc/Router/Router.middleware.js';
 
 export default function configureStore(initialState) {
   const middleware =[

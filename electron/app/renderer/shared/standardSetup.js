@@ -1,6 +1,6 @@
 import { ipcRenderer } from 'electron';
-import { loadUserData } from 'stemn-frontend-shared/src/misc/Auth/Auth.actions.js';;
-import { getInstallStatus } from 'stemn-frontend-shared/src/desktop/System/System.actions.js';;
+import { loadUserData } from 'stemn-shared/misc/Auth/Auth.actions.js';;
+import { getInstallStatus } from 'stemn-shared/desktop/System/System.actions.js';;
 import http from 'axios';
 
 export default (store, rendererType) => {

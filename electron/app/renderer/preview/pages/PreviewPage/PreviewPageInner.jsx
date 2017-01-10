@@ -13,30 +13,30 @@ import classNames from 'classnames';
 // Functions
 import { orderBy, has }        from 'lodash';
 import moment from 'moment';
-import { formatBytes } from 'stemn-frontend-shared/src/misc/Files/utils'
+import { formatBytes } from 'stemn-shared/misc/Files/utils'
 
 // Actions
-import * as FilesActions        from 'stemn-frontend-shared/src/misc/Files/Files.actions.js';
-import * as SyncTimelineActions from 'stemn-frontend-shared/src/misc/SyncTimeline/SyncTimeline.actions.js';
-import * as ModalActions        from 'stemn-frontend-shared/src/misc/Modal/Modal.actions.js';
-import * as ElectronWindowsActions from 'stemn-frontend-shared/src/desktop/ElectronWindows/ElectronWindows.actions.js';
+import * as FilesActions        from 'stemn-shared/misc/Files/Files.actions.js';
+import * as SyncTimelineActions from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js';
+import * as ModalActions        from 'stemn-shared/misc/Modal/Modal.actions.js';
+import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js';
 import { push } from 'react-router-redux';
 
 
 // Sub Components
-import { orderItemsByTime } from 'stemn-frontend-shared/src/misc/FileCompare/FileCompare.utils.js';
-import FileCompareInner     from 'stemn-frontend-shared/src/misc/FileCompare/FileCompareInner/FileCompareInner.jsx';
-import Timeline             from 'stemn-frontend-shared/src/misc/Timeline/Timeline.jsx';
-import DragResize           from 'stemn-frontend-shared/src/misc/DragResize/DragResize.jsx';
-import FileBreadCrumbs      from 'stemn-frontend-shared/src/misc/FileList/components/FileBreadCrumbs.jsx'
-import FileCompareMenu      from 'stemn-frontend-shared/src/misc/FileCompare/FileCompareMenu';
-import LoadingOverlay       from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import TimelineVertical     from 'stemn-frontend-shared/src/misc/TimelineVertical/TimelineVertical.jsx';
-import SimpleTable          from 'stemn-frontend-shared/src/misc/Tables/SimpleTable/SimpleTable.jsx';
-import SectionTitle         from 'stemn-frontend-shared/src/misc/Titles/SectionTitle/SectionTitle.jsx';
-import AssemblyParts        from 'stemn-frontend-shared/src/misc/Files/PreviewFile/PreviewCad/AssemblyParts/AssemblyParts.jsx'
-import Tag                  from 'stemn-frontend-shared/src/misc/Tags/Tag.jsx';
-import Header               from 'stemn-frontend-shared/src/misc/Header/Header.jsx'
+import { orderItemsByTime } from 'stemn-shared/misc/FileCompare/FileCompare.utils.js';
+import FileCompareInner     from 'stemn-shared/misc/FileCompare/FileCompareInner/FileCompareInner.jsx';
+import Timeline             from 'stemn-shared/misc/Timeline/Timeline.jsx';
+import DragResize           from 'stemn-shared/misc/DragResize/DragResize.jsx';
+import FileBreadCrumbs      from 'stemn-shared/misc/FileList/components/FileBreadCrumbs.jsx'
+import FileCompareMenu      from 'stemn-shared/misc/FileCompare/FileCompareMenu';
+import LoadingOverlay       from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import TimelineVertical     from 'stemn-shared/misc/TimelineVertical/TimelineVertical.jsx';
+import SimpleTable          from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable.jsx';
+import SectionTitle         from 'stemn-shared/misc/Titles/SectionTitle/SectionTitle.jsx';
+import AssemblyParts        from 'stemn-shared/misc/Files/PreviewFile/PreviewCad/AssemblyParts/AssemblyParts.jsx'
+import Tag                  from 'stemn-shared/misc/Tags/Tag.jsx';
+import Header               from 'stemn-shared/misc/Header/Header.jsx'
 
 // Styles
 import classes from './PagePreview.css';

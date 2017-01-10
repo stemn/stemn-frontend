@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import ModalContainer from 'stemn-frontend-shared/src/misc/Modal/ModalContainer.jsx'
-import TitleBar from 'stemn-frontend-shared/src/misc/TitleBar/TitleBar';
+import ModalContainer from 'stemn-shared/misc/Modal/ModalContainer.jsx'
+import TitleBar from 'stemn-shared/misc/TitleBar/TitleBar';
 
 function App({ children }) {
   return (

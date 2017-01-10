@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as ProjectsActions from 'stemn-frontend-shared/src/redux/actions/projects.js';
-import * as TasksActions    from 'stemn-frontend-shared/src/misc/Tasks/Tasks.actions.js';
+import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js';
+import * as TasksActions    from 'stemn-shared/misc/Tasks/Tasks.actions.js';
 
 // Component Core
 import React, { PropTypes } from 'react';
@@ -17,8 +17,8 @@ import classes from '../ProjectSettingsPage.css'
 // Sub Components
 import { actions } from 'react-redux-form';
 
-import ProgressButton from 'stemn-frontend-shared/src/misc/Buttons/ProgressButton/ProgressButton'
-import TaskLabelsEdit from 'stemn-frontend-shared/src/misc/Tasks/TaskLabelsEdit/TaskLabelsEdit.jsx'
+import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
+import TaskLabelsEdit from 'stemn-shared/misc/Tasks/TaskLabelsEdit/TaskLabelsEdit.jsx'
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as UsersActions from 'stemn-frontend-shared/src/redux/actions/users';
+import * as UsersActions from 'stemn-shared/misc/Users/Users.actions.js';
 
 // Component Core
 import React from 'react';
@@ -13,8 +13,8 @@ import classNames from 'classnames';
 import classes from '../ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css'
 
 // Sub Components
-import Header from 'stemn-frontend-shared/src/misc/Header/Header.jsx'
-import NavPill from 'stemn-frontend-shared/src/misc/Buttons/NavPill/NavPill'
+import Header from 'stemn-shared/misc/Header/Header.jsx'
+import NavPill from 'stemn-shared/misc/Buttons/NavPill/NavPill'
 
 
 

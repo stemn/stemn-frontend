@@ -3,9 +3,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as ChangesActions from 'stemn-frontend-shared/src/misc/Changes/Changes.actions.js';
-import * as SyncTimelineActions from 'stemn-frontend-shared/src/misc/SyncTimeline/SyncTimeline.actions.js';
-import * as WalkthroughActions from 'stemn-frontend-shared/src/misc/Walkthrough/Walkthrough.actions.js';
+import * as ChangesActions from 'stemn-shared/misc/Changes/Changes.actions.js';
+import * as SyncTimelineActions from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js';
+import * as WalkthroughActions from 'stemn-shared/misc/Walkthrough/Walkthrough.actions.js';
 
 // Component Core
 import React from 'react';
@@ -18,19 +18,19 @@ import classNames from 'classnames';
 
 // Sub Components
 import { Link }             from 'react-router';
-import ContentSidebar       from 'stemn-frontend-shared/src/misc/ContentSidebar';
-import LoadingOverlay       from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import Timeline             from 'stemn-frontend-shared/src/misc/Timeline/Timeline.jsx';
-import CommitChanges        from 'stemn-frontend-shared/src/misc/Changes/CommitChanges/CommitChanges.jsx';
-import CommitBox            from 'stemn-frontend-shared/src/misc/Changes/CommitBox/CommitBox.jsx'
-import FileCompare          from 'stemn-frontend-shared/src/misc/FileCompare/FileCompare.jsx';
-import Guide                from 'stemn-frontend-shared/src/misc/Guide/Guide';
-import cloudLocked          from 'stemn-frontend-shared/src/assets/images/pure-vectors/cloud-locked.svg';
-import file                 from 'stemn-frontend-shared/src/assets/images/pure-vectors/file.svg';
+import ContentSidebar       from 'stemn-shared/misc/ContentSidebar';
+import LoadingOverlay       from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import Timeline             from 'stemn-shared/misc/Timeline/Timeline.jsx';
+import CommitChanges        from 'stemn-shared/misc/Changes/CommitChanges/CommitChanges.jsx';
+import CommitBox            from 'stemn-shared/misc/Changes/CommitBox/CommitBox.jsx'
+import FileCompare          from 'stemn-shared/misc/FileCompare/FileCompare.jsx';
+import Guide                from 'stemn-shared/misc/Guide/Guide';
+import cloudLocked          from 'stemn-shared/assets/images/pure-vectors/cloud-locked.svg';
+import file                 from 'stemn-shared/assets/images/pure-vectors/file.svg';
 import commitChanges        from './commit-changes.svg'
 import compareFile          from './compare-file.svg'
-import cloudProviders       from 'stemn-frontend-shared/src/assets/images/illustrations/cloud-providers.svg'
-import Button               from 'stemn-frontend-shared/src/misc/Buttons/Button/Button'
+import cloudProviders       from 'stemn-shared/assets/images/illustrations/cloud-providers.svg'
+import Button               from 'stemn-shared/misc/Buttons/Button/Button'
 
 
 const guideInfo = [{

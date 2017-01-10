@@ -1,9 +1,9 @@
 import http from 'axios';
 import { values } from 'lodash';
 import { ipcMain } from 'electron';
-import { getProviderPath, getInstallStatus } from 'stemn-frontend-shared/src/desktop/System/System.actions.js';
-import * as shellContext    from 'stemn-frontend-shared/src/desktop/Shell/ShellContext/ShellContext.actions.js';
-import * as protocolHandler from 'stemn-frontend-shared/src/desktop/Shell/ProtocolHandler/ProtocolHandler.js'
+import { getProviderPath, getInstallStatus } from 'stemn-shared/desktop/System/System.actions.js';
+import * as shellContext    from 'stemn-shared/desktop/Shell/ShellContext/ShellContext.actions.js';
+import * as protocolHandler from 'stemn-shared/desktop/Shell/ProtocolHandler/ProtocolHandler.js'
 
 export default (store) => {
   http.interceptors.request.use(config => {

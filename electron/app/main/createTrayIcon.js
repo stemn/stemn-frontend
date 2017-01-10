@@ -3,7 +3,7 @@ import { Tray, Menu, shell } from 'electron';
 import process from 'process';
 
 // Actions
-import * as ElectronWindowsActions from 'stemn-frontend-shared/src/desktop/ElectronWindows/ElectronWindows.actions.js';
+import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js';
 import { push } from 'react-router-redux';
 
 console.log('process.env.NODE_ENV', process.env.NODE_ENV);

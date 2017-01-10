@@ -3,8 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as MenubarLayoutActions from 'stemn-frontend-shared/src/redux/actions/menubarLayout';
-import * as ElectronWindowsActions from 'stemn-frontend-shared/src/desktop/ElectronWindows/ElectronWindows.actions.js';
+import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js';
 import { push } from 'react-router-redux';
 
 // Component Core
@@ -15,9 +14,9 @@ import classNames from 'classnames';
 import toolbarStyles from './Toolbar.css'
 
 // Sub Components
-import PopoverMenu          from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenu';
-import PopoverMenuList      from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenuList';
-import SimpleIconButton     from 'stemn-frontend-shared/src/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import PopoverMenu          from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import PopoverMenuList      from 'stemn-shared/misc/PopoverMenu/PopoverMenuList';
+import SimpleIconButton     from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMenu               from 'react-icons/md/menu';
 import MdMoreHoriz          from 'react-icons/md/more-horiz';
 import MdOpenInNew          from 'react-icons/md/open-in-new';
@@ -26,7 +25,7 @@ import MdOpenInNew          from 'react-icons/md/open-in-new';
 
 export const Component = React.createClass({
   render() {
-    const { menu, menubarLayoutActions, children, dispatch } = this.props;
+    const { menu, children, dispatch } = this.props;
 
 
     const menuItems = [{
@@ -57,7 +56,7 @@ export const Component = React.createClass({
         ? <SimpleIconButton
             color="white"
             title="Projects Menu"
-            onClick={()=>menubarLayoutActions.toggleSidebar(true)}>
+            onClick={() => dispatch(toggleSidebar(true))}>
             <MdMenu size="22"/>
           </SimpleIconButton>
         : '' }
@@ -90,7 +89,6 @@ function mapStateToProps() {
 
 function mapDispatchToProps(dispatch) {
   return {
-    menubarLayoutActions: bindActionCreators(MenubarLayoutActions, dispatch),
     dispatch
   }
 }

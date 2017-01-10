@@ -11,9 +11,9 @@ import React from 'react';
 import classNames from 'classnames';
 
 // Sub Components
-import LoadingOverlay from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import TaskList       from 'stemn-frontend-shared/src/misc/Tasks/TaskList/TaskList.jsx'
-import Tasks          from 'stemn-frontend-shared/src/misc/Tasks/Tasks.jsx'
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import TaskList       from 'stemn-shared/misc/Tasks/TaskList/TaskList.jsx'
+import Tasks          from 'stemn-shared/misc/Tasks/Tasks.jsx'
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

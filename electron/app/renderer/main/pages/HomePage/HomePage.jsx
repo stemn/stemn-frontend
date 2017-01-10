@@ -1,8 +1,8 @@
 import React from 'react';
 
 // Components
-import Header from 'stemn-frontend-shared/src/misc/Header/Header.jsx'
-import book   from 'stemn-frontend-shared/src/assets/images/pure-vectors/book.svg';
+import Header from 'stemn-shared/misc/Header/Header.jsx'
+import book   from 'stemn-shared/assets/images/pure-vectors/book.svg';
 
 // Styles
 import classNames from 'classnames';

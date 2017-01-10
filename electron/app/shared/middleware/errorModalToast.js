@@ -1,5 +1,5 @@
-import { showModal }          from 'stemn-frontend-shared/src/misc/Modal/Modal.actions.js';
-import { show as toastShow }  from 'stemn-frontend-shared/src/misc/Toasts/Toasts.actions.js';
+import { showModal }          from 'stemn-shared/misc/Modal/Modal.actions.js';
+import { show as toastShow }  from 'stemn-shared/misc/Toasts/Toasts.actions.js';
 import { has }                from 'lodash';
 
 const errorMap = {

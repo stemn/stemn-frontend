@@ -9,7 +9,7 @@ import { push } from 'react-router-redux'
 import React from 'react';
 
 // Sub Components
-import TitleBar from 'stemn-frontend-shared/src/misc/TitleBar/TitleBar';
+import TitleBar from 'stemn-shared/misc/TitleBar/TitleBar';
 
 
 ///////////////////////////////// COMPONENT /////////////////////////////////

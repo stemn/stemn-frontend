@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as SystemActions from 'stemn-frontend-shared/src/desktop/System/System.actions.js';
+import * as SystemActions from 'stemn-shared/desktop/System/System.actions.js';
 
 // Component Core
 import React from 'react';
@@ -11,21 +11,21 @@ import { Link } from 'react-router';
 import { has } from 'lodash';
 
 // Components
-import Tabs from 'stemn-frontend-shared/src/misc/Tabs/Tabs'
-import Header from 'stemn-frontend-shared/src/misc/Header/Header.jsx'
-import Banner from 'stemn-frontend-shared/src/misc/Banner/Banner.jsx'
-import LoadingOverlay from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import Tabs from 'stemn-shared/misc/Tabs/Tabs'
+import Header from 'stemn-shared/misc/Header/Header.jsx'
+import Banner from 'stemn-shared/misc/Banner/Banner.jsx'
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import MdSettings from 'react-icons/md/settings';
 import MdExpandMore from 'react-icons/md/expand-more';
-import SimpleIconButton from 'stemn-frontend-shared/src/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
-import PopoverMenu from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenu';
-import PopoverMenuList from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverMenuList';
-import PopoverDetails from 'stemn-frontend-shared/src/misc/PopoverMenu/PopoverDetails';
-import ProjectMenu from 'stemn-frontend-shared/src/misc/Projects/Project.menu.js';
+import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList';
+import PopoverDetails from 'stemn-shared/misc/PopoverMenu/PopoverDetails';
+import ProjectMenu from 'stemn-shared/misc/Projects/Project.menu.js';
 import MdPublic       from 'react-icons/md/public';
 import MdLockOutline  from 'react-icons/md/lock-outline';
-import folderLockedVector   from 'stemn-frontend-shared/src/assets/images/pure-vectors/folder-locked.svg';
-import globalVector   from 'stemn-frontend-shared/src/assets/images/pure-vectors/global.svg';
+import folderLockedVector   from 'stemn-shared/assets/images/pure-vectors/folder-locked.svg';
+import globalVector   from 'stemn-shared/assets/images/pure-vectors/global.svg';
 
 // Styles
 import classNames from 'classnames';

@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as ProjectsActions from 'stemn-frontend-shared/src/redux/actions/projects.js';
+import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js';
 
 // Component Core
 import React from 'react';
@@ -15,9 +15,9 @@ import classes from '../ProjectSettingsPage.css'
 // Sub Components
 import { actions } from 'react-redux-form';
 
-import UserSearch from 'stemn-frontend-shared/src/misc/UserSearch/UserSearch.container.js'
-import TeamMember from 'stemn-frontend-shared/src/misc/Project/TeamMember/TeamMember.jsx'
-import ProgressButton from 'stemn-frontend-shared/src/misc/Buttons/ProgressButton/ProgressButton'
+import UserSearch from 'stemn-shared/misc/UserSearch/UserSearch.container.js'
+import TeamMember from 'stemn-shared/misc/Project/TeamMember/TeamMember.jsx'
+import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////

@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as ProjectsActions        from 'stemn-frontend-shared/src/redux/actions/projects.js';
-import * as ElectronWindowsActions from 'stemn-frontend-shared/src/desktop/ElectronWindows/ElectronWindows.actions.js';
+import * as ProjectsActions        from 'stemn-shared/misc/Projects/Projects.actions.js';
+import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js';
 import { projectFolderRoute }        from 'route-actions';
 
 // Component Core
@@ -15,8 +15,8 @@ import classNames from 'classnames';
 import classes from './ProjectFilesPage.css'
 
 // Sub Components
-import FileList from 'stemn-frontend-shared/src/misc/FileList/FileList';
-import Readme from 'stemn-frontend-shared/src/misc/Files/Readme/Readme.jsx';
+import FileList from 'stemn-shared/misc/FileList/FileList';
+import Readme from 'stemn-shared/misc/Files/Readme/Readme.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

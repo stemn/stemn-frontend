@@ -14,11 +14,11 @@ import classNames from 'classnames';
 import classes from './DashboardPage.css'
 
 // Sub Components
-import Header       from 'stemn-frontend-shared/src/misc/Header/Header.jsx'
-import DragResize   from 'stemn-frontend-shared/src/misc/DragResize/DragResize.jsx';
-import Calendar     from 'stemn-frontend-shared/src/misc/Calendar/Calendar.jsx';
-import Tabs         from 'stemn-frontend-shared/src/misc/Tabs/Tabs';
-import Tasks        from 'stemn-frontend-shared/src/misc/Tasks/Tasks.jsx'
+import Header       from 'stemn-shared/misc/Header/Header.jsx'
+import DragResize   from 'stemn-shared/misc/DragResize/DragResize.jsx';
+import Calendar     from 'stemn-shared/misc/Calendar/Calendar.jsx';
+import Tabs         from 'stemn-shared/misc/Tabs/Tabs';
+import Tasks        from 'stemn-shared/misc/Tasks/Tasks.jsx'
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////

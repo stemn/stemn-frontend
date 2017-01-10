@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as MenubarLayoutActions from 'stemn-frontend-shared/src/redux/actions/menubarLayout';
+import { toggleSidebar } from 'stemn-shared/misc/Sidebar/Sidebar.actions.js';
 
 // Component Core
 import React from 'react';
@@ -16,17 +16,17 @@ import classes from './Sidebar.css'
 
 
 // Sub Components
-import AnimateShow from 'stemn-frontend-shared/src/misc/AnimateShow/AnimateShow.jsx'
-import SidebarProjectButton from 'stemn-frontend-shared/src/misc/Sidebar/SidebarProjectButton.jsx'
+import AnimateShow from 'stemn-shared/misc/AnimateShow/AnimateShow.jsx'
+import SidebarProjectButton from 'stemn-shared/misc/Sidebar/SidebarProjectButton.jsx'
 import MdSearch from 'react-icons/md/search';
-import Input from 'stemn-frontend-shared/src/misc/Input/Input/Input';
+import Input from 'stemn-shared/misc/Input/Input/Input';
 
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
   render() {
-    const { menubarLayout, projects, sidebar } = this.props;
+    const { projects, sidebar, dispatch } = this.props;
 
     const linkProject = (item) => {
       return {
@@ -41,10 +41,10 @@ export const Component = React.createClass({
 
     return (
       <div className="scroll-dark">
-        <AnimateShow show={menubarLayout.showSidebar} animation={classes.animateOverlay} animationShow={classes.animateOverlayShow}>
-          <div className={classes.overlay} onClick={()=>this.props.MenubarLayoutActions.toggleSidebar(false)}></div>
+        <AnimateShow show={sidebar.show} animation={classes.animateOverlay} animationShow={classes.animateOverlayShow}>
+          <div className={classes.overlay} onClick={() => dispatch(toggleSidebar(false))}></div>
         </AnimateShow>
-        <div className={classNames(classes.sidebar, 'layout-column', {[classes.sidebarShow] : menubarLayout.showSidebar})}>
+        <div className={classNames(classes.sidebar, 'layout-column', {[classes.sidebarShow] : sidebar.show})}>
           <div className={classes.sidebarSearch}>
             <Input
               model="sidebar.searchString"
@@ -57,7 +57,7 @@ export const Component = React.createClass({
           </div>
           <div className="flex scroll-box">
             {filteredProjectsOrdered.map((item)=>
-               <SidebarProjectButton item={item} to={linkProject(item)} clickFn={()=>this.props.MenubarLayoutActions.toggleSidebar(false)}/>
+               <SidebarProjectButton item={item} to={linkProject(item)} clickFn={() => dispatch(toggleSidebar(false))}/>
             )}
           </div>
         </div>
@@ -68,18 +68,11 @@ export const Component = React.createClass({
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps({ menubarLayout, projects, sidebar }) {
+function mapStateToProps({ projects, sidebar }) {
   return {
     sidebar,
-    menubarLayout,
     projects
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    MenubarLayoutActions: bindActionCreators(MenubarLayoutActions, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps)(Component);
