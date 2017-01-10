@@ -1,0 +1,74 @@
+:global(.Popover-body)  {
+  display: inline-flex;
+  flex-direction: column;
+  background: white;
+  z-index: 1;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.1),0 2px 15px rgba(0,0,0,0.1);
+  margin-top: -1px;
+}
+
+:global(.Popover-tipShape)  {
+  fill: white;
+  stroke-width: 1;
+  stroke: rgba(0, 0, 0, 0.12);
+}
+
+:global(.Popover) {
+  z-index: 100;
+  transform: translateY(0px) !important;
+}
+
+:global(.PopoverMenu) {
+  min-width: 160px;
+  font-size: 12px;
+  color: #373a3c;
+  text-align: left;
+  background-color: #fff;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  outline: none;
+}
+
+:global(.PopoverMenu a) {
+  display: block;
+  padding: 8px 15px;
+  clear: both;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #373a3c;
+  text-align: inherit;
+  white-space: nowrap;
+  background: 0 0;
+  border: 0;
+}
+
+:global(.PopoverMenu a.info) {
+  cursor: default;
+  color: rgba(0, 0, 0, 0.3);
+}
+:global(.PopoverMenu a.info:hover) {
+  background: inherit;
+  color: rgba(0, 0, 0, 0.3);
+}
+:global(.PopoverMenu a.submenu) {
+  padding-right: 27px;
+}
+:global(.PopoverMenu a.submenu:after) {
+  content: "\25B6";
+  display: inline-block;
+  position: absolute;
+  right: 7px;
+}
+
+:global(.PopoverMenu .divider) {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+:global(.PopoverMenu a.active) {
+  color: rgb(68, 154, 211);
+}
+
+:global(.PopoverMenu a:hover) {
+  background: rgb(68, 154, 211);
+  color: white;
+}
