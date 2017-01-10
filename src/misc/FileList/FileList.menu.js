@@ -1,6 +1,6 @@
 import * as SystemActions    from 'stemn-frontend-shared/src/desktop/System/System.actions.js';
 import * as ElectronWindowsActions from 'stemn-frontend-shared/src/desktop/ElectronWindows/ElectronWindows.actions.js';
-//import ProjectFilesPageRoute from 'stemn-frontend-shared/src/miscpages/ProjectPage/ProjectFilesPage/ProjectFilesPage.routeActions.js';
+import { projectFolderRoute }      from 'route-actions';
 
 export default (dispatch) => {
   return [{
@@ -34,7 +34,7 @@ export default (dispatch) => {
   },{
     label: 'Open Folder',
     isHidden: item => item.type == 'file',
-    onClick: item => dispatch(ProjectFilesPageRoute({
+    onClick: item => dispatch(projectFolderRoute({
       projectId : item.project._id,
       fileId    : item.fileId
     }))

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import modelLocked    from 'electron/app/renderer/assets/images/pure-vectors/model-locked.svg';
+import modelLocked    from 'stemn-frontend-shared/src/assets/images/pure-vectors/model-locked.svg';
 import { connect } from 'react-redux';
 import * as ModalActions from 'stemn-frontend-shared/src/misc/Modal/Modal.actions.js';
 

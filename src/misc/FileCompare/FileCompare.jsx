@@ -1,14 +1,15 @@
 import React from 'react';
 
-import classes            from './FileCompare.css';
+import classes                from './FileCompare.css';
 
-import { orderItemsByTime } from 'stemn-frontend-shared/src/misc/FileCompare/FileCompare.utils.js';
-import TogglePanel        from 'stemn-frontend-shared/src/misc/TogglePanel/TogglePanel.jsx';
-import DragResize         from 'stemn-frontend-shared/src/misc/DragResize/DragResize.jsx';
-import FileCompareMenu    from 'stemn-frontend-shared/src/misc/FileCompare/FileCompareMenu';
-import FileCompareInner   from 'stemn-frontend-shared/src/misc/FileCompare/FileCompareInner/FileCompareInner.jsx';
-import Timeline           from 'stemn-frontend-shared/src/misc/Timeline/Timeline.jsx';
-import { orderBy, has }   from 'lodash';
+import { orderItemsByTime }   from 'stemn-frontend-shared/src/misc/FileCompare/FileCompare.utils.js';
+import TogglePanel            from 'stemn-frontend-shared/src/misc/TogglePanel/TogglePanel.jsx';
+import DragResize             from 'stemn-frontend-shared/src/misc/DragResize/DragResize.jsx';
+import FileCompareMenu        from 'stemn-frontend-shared/src/misc/FileCompare/FileCompareMenu';
+import FileCompareInner       from 'stemn-frontend-shared/src/misc/FileCompare/FileCompareInner/FileCompareInner.jsx';
+import Timeline               from 'stemn-frontend-shared/src/misc/Timeline/Timeline.jsx';
+//import { websocketJoinFile }  from 'stemn-frontend-shared/src/misc/Files/actions';
+import { orderBy, has }       from 'lodash';
 
 export const FileCompare = React.createClass({
   // Mounting
@@ -21,10 +22,10 @@ export const FileCompare = React.createClass({
         mode         : nextProps.file.revisions && nextProps.file.revisions.length > 1 ? 'sideBySide' : 'single'
       })
 
-      // Join the File room
-      nextProps.filesActions.websocketJoinFile({
-        fileId: nextProps.file.data.fileId
-      });
+//      // Join the File room
+//      nextProps.filesActions.websocketJoinFile({
+//        fileId: nextProps.file.data.fileId
+//      });
     }
   },
   componentWillMount() { this.onMount(this.props) },

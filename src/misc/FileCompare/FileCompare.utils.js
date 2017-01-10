@@ -1,5 +1,5 @@
 import { intersection, orderBy }   from 'lodash';
-import * as CompareIcons  from 'electron/app/renderer/assets/icons/compare/index.js';
+import * as CompareIcons  from 'stemn-frontend-shared/src/assets/icons/compare/index.js';
 
 const compareModeInfo = [ // Compare modes and text
   {

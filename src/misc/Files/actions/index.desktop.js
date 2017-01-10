@@ -6,6 +6,7 @@ export getFullPath         from './getFullPath.desktop';
 export getMeta             from './getMeta';
 export getMetaFromPath     from './getMetaFromPath.desktop';
 export getRelatedTasks     from './getRelatedTasks';
+export renderFile          from './renderFile.desktop';
 export renderFileDownload  from './renderFileDownload.desktop';
 export saveFile            from './saveFile.desktop';
 export websocketJoinFile   from './websocketJoinFile';

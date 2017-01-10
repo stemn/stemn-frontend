@@ -1,9 +1,10 @@
-import * as ChangesActions        from 'stemn-frontend-shared/src/misc/Changes/Changes.actions.js';
-import * as TasksActions          from 'stemn-frontend-shared/src/misc/Tasks/Tasks.actions.js';
-import * as NotificationsActions  from 'stemn-frontend-shared/src/misc/Notifications/Notifications.actions.js';
-import { renderFileDownload }     from 'stemn-frontend-shared/src/misc/Files/Files.actions.js';
-
-import * as ProjectActions        from 'stemn-frontend-shared/src/redux/actions/projects.js';
+import { fetchChanges }                 from 'stemn-frontend-shared/src/misc/Changes/Changes.actions.js';
+import { fetchTimeline }                from 'stemn-frontend-shared/src/misc/SyncTimeline/SyncTimeline.actions.js';
+import { getBoard, getGroup, getTask }  from 'stemn-frontend-shared/src/misc/Tasks/Tasks.actions.js';
+import { getProject }                   from 'stemn-frontend-shared/src/redux/actions/projects.js';
+import { renderFileDownload }           from 'stemn-frontend-shared/src/misc/Files/Files.actions.js';
+//import * as NotificationsActions  from 'stemn-frontend-shared/src/misc/Notifications/Notifications.actions.js';
+//import * as FileListActions       from 'stemn-frontend-shared/src/misc/FileList/FileList.actions.js';
 
 export default (store, action) => {
 
@@ -24,27 +25,42 @@ export default (store, action) => {
 
   // Actions that we DON'T process if user is the actioner
   switch (action.type) {
-    case 'CHANGES/FETCH_CHANGES':
-      return ChangesActions.fetchChanges({ projectId : action.payload.projectId });
-    case 'BOARD/FETCH_BOARDS':
+    case 'PROJECT/PROJECT_CHANGES':
       return (dispatch) => {
-        action.payload.boards.map((boardId) => dispatch(TasksActions.getBoard({ boardId })));
+          dispatch(fetchChanges({ projectId : action.payload.projectId }));
+          // dispatch(FileListActions.fetchFilesGooba({ projectId : action.payload.projectId }));
       }
-    case 'BOARD/FETCH_GROUPS':
+    case 'FILES/FILES_UPDATED':
       return (dispatch) => {
-        action.payload.groups.map((groupId) => dispatch(TasksActions.getGroup({ groupId, boardId : action.payload.boardId })));
+        action.payload.files.map((fileId) => dispatch(fetchTimeline({
+            projectId : action.payload.projectId,
+            provider : action.payload.provider,
+            fileId
+        })));
       }
-    case 'BOARD/FETCH_TASKS':
+    case 'COMMITS/COMMITS_CHANGED':
+      return fetchTimeline({ projectId : action.payload.projectId });
+    case 'BOARD/BOARDS_UPDATED':
       return (dispatch) => {
-        action.payload.tasks.map((taskId) => dispatch(TasksActions.getTask({ taskId })));
+        action.payload.boards.map((boardId) => dispatch(getBoard({ boardId })));
       }
-    case 'NOTIFICATIONS/TASK_COMPLETED':
-      return NotificationsActions.show({
-        title : `${action.payload.user.name} Completed a Task in '${action.payload.project.name}'`,
-        body  : `The task '${action.payload.task.title}' was marked as complete.`
-      })
-    case 'PROJECT/FETCH_PROJECT':
-      return ProjectActions.getProject({ projectId : action.payload.projectId });
+    case 'BOARD/GROUPS_UPDATED':
+      return (dispatch) => {
+        action.payload.groups.map((groupId) => dispatch(getGroup({ groupId, boardId : action.payload.boardId })));
+      }
+    case 'BOARD/TASKS_UPDATED':
+      return (dispatch) => {
+        action.payload.tasks.map((taskId) => dispatch(getTask({ taskId })));
+      }
+//    case 'BOARD/TASK_COMPLETED':
+//      return NotificationsActions.show({
+//        title : `${action.payload.user.name} Completed a Task in '${action.payload.project.name}'`,
+//        body  : `The task '${action.payload.task.title}' was marked as complete.`
+//      })
+    case 'PROJECT/PROJECT_UPDATED':
+      return (dispatch) => {
+        return getProject({ projectId : action.payload.projectId });
+      }
     default:
       return undefined;
   }

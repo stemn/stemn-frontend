@@ -23,7 +23,7 @@ import PreviewCad         from './PreviewCad/PreviewCad'
 import PreviewGoogle      from './PreviewGoogle/PreviewGoogle'
 import PreviewGdoc        from './PreviewGdoc/PreviewGdoc'
 import LoadingOverlay     from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import laptopSpanner      from 'electron/app/renderer/assets/images/pure-vectors/laptop-spanner.svg';
+import laptopSpanner      from 'stemn-frontend-shared/src/assets/images/pure-vectors/laptop-spanner.svg';
 import { getViewerType }  from './PreviewFile.utils.js'
 import DownloadFile       from '../DownloadFile/DownloadFile.jsx'
 

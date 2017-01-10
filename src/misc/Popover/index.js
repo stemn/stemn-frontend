@@ -18,8 +18,8 @@ export const ContextProvider = React.createClass({
   },
   childContextTypes: {
     store: React.PropTypes.object.isRequired,
-    history: React.PropTypes.object.isRequired,
-    router: React.PropTypes.object.isRequired
+    history: React.PropTypes.object,
+    router: React.PropTypes.object
   },
   render() {
     return this.props.children

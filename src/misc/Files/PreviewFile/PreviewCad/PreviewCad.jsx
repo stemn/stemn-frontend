@@ -7,8 +7,8 @@ import previewCadUtils from './PreviewCad.utils.js';
 import AutodeskLocalViewer from './AutodeskLocalViewer/AutodeskLocalViewer'
 
 import LoadingOverlay from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import modelLocked    from 'electron/app/renderer/assets/images/pure-vectors/model-locked.svg';
-import modelGear      from 'electron/app/renderer/assets/images/pure-vectors/model-gear.svg';
+import modelLocked    from 'stemn-frontend-shared/src/assets/images/pure-vectors/model-locked.svg';
+import modelGear      from 'stemn-frontend-shared/src/assets/images/pure-vectors/model-gear.svg';
 import ErrorMessages  from '../Messages/Messages.jsx'
 
 //export const GetStatusOfUrn =  React.createClass({

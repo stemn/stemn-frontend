@@ -5,7 +5,7 @@ import 'codemirror/mode/meta.js'
 const requireCodemirrorMode = require.context("codemirror/mode/", true, /\.js$/);
 import LoadingOverlay     from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import EditorDisplay from 'stemn-frontend-shared/src/misc/Editor/EditorDisplay.jsx';
-import file    from 'electron/app/renderer/assets/images/pure-vectors/file.svg';
+import file    from 'stemn-frontend-shared/src/assets/images/pure-vectors/file.svg';
 
 export const Viewer = React.createClass({
   render() {

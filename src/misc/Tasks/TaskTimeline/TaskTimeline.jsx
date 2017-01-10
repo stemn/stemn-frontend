@@ -16,7 +16,7 @@ import classes from './TaskTimeline.css';
 // Sub Components
 import Comment from 'stemn-frontend-shared/src/misc/Comments/Comment/Comment.jsx';
 import TaskTimelineItem from './TaskTimelineItem/TaskTimelineItem.jsx';
-import comments      from 'electron/app/renderer/assets/images/pure-vectors/comments.svg';
+import comments      from 'stemn-frontend-shared/src/assets/images/pure-vectors/comments.svg';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

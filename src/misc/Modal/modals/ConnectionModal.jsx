@@ -3,7 +3,7 @@ import React from 'react';
 
 import Button from 'stemn-frontend-shared/src/misc/Buttons/Button/Button'
 
-import MagnifyInternet   from 'electron/app/renderer/assets/images/pure-vectors/magnify-internet.svg';
+import MagnifyInternet   from 'stemn-frontend-shared/src/assets/images/pure-vectors/magnify-internet.svg';
 
 // Styles
 import classNames from 'classnames';

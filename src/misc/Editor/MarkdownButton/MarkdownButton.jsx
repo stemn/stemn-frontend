@@ -2,7 +2,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import classes from './MarkdownButton.css';
-import Markdown from 'electron/app/renderer/assets/icons/editor/markdown.js';
+import Markdown from 'stemn-frontend-shared/src/assets/icons/editor/markdown.js';
 
 export default React.createClass({
   render() {

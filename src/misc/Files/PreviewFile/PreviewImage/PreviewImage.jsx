@@ -1,9 +1,9 @@
 import React, {PropTypes} from 'react';
-import { omit } from 'lodash';
-import styles from './PreviewImage.css';
+import { omit }       from 'lodash';
+import styles         from './PreviewImage.css';
 import LoadingOverlay from 'stemn-frontend-shared/src/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import ScrollZoom from 'stemn-frontend-shared/src/misc/Scroll/ScrollZoom/ScrollZoom.jsx';
-
+import ScrollZoom     from 'stemn-frontend-shared/src/misc/Scroll/ScrollZoom/ScrollZoom.jsx';
+//import { getDownloadUrl } from 'stemn-frontend-shared/src/misc/Files/utils';
 //const ImagePropTypes = {
 //  arrayBuffer  : PropTypes.array,   // Image data array buffer
 //  onLoad       : PropTypes.func,    // Function to be run on load
