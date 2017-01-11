@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { ContextMenu, MenuItem, SubMenu, connect} from "react-contextmenu";
+import './ContextMenu.global.css';
 
 const AdvancedMenuItem = React.createClass({
     render() {

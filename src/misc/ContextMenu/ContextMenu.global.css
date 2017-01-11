@@ -1,4 +1,4 @@
-:global(.react-context-menu){
+.react-context-menu{
     min-width: 160px;
     font-size: 12px;
     color: #373a3c;
@@ -9,7 +9,7 @@
     box-shadow: 0 0 0 1px rgba(0,0,0,0.1),0 2px 15px rgba(0,0,0,0.1);
     outline: none;
 }
-:global(.react-context-menu-link){
+.react-context-menu-link{
     display: inline-block;
     width: 100%;
     padding: 8px 15px;
@@ -23,17 +23,17 @@
     border: 0;
 }
 
-:global(.react-context-menu-link.active, .react-context-menu-link:hover){
+.react-context-menu-link.active, .react-context-menu-link:hover{
   background: rgb(68, 154, 211);
   color: white;
 }
-:global(.react-context-menu-item.divider){
+.react-context-menu-item.divider{
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
-:global(.react-context-menu-item.submenu > a){
+.react-context-menu-item.submenu > a{
     padding-right: 27px;
 }
-:global(.react-context-menu-item.submenu > a:after){
+.react-context-menu-item.submenu > a:after{
     content: "▶";
     display: inline-block;
     position: absolute;

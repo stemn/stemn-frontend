@@ -2,6 +2,10 @@ import React from 'react';
 import classes from './AutodeskLocalViewer.css';
 import autodeskViewerUtils from '../PreviewCadViewer.utils.js';
 
+//import trhee    from 'stemn-shared/assets/other/autodesk/viewer/three.min.js';
+//import autodesk from 'stemn-shared/assets/other/autodesk/viewer/viewer3d.min.js';
+//console.log(autodesk);
+
 export default React.createClass({
   viewer: null,
   onMount (nextProps, prevProps) {
