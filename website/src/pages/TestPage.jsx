@@ -28,6 +28,8 @@ import SectionTitle         from 'stemn-shared/misc/Titles/SectionTitle/SectionT
 import SimpleTable          from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable.jsx';
 import classes              from './TestPage.css'
 
+import { filePreviewRoute,
+        projectFilesRoute } from 'route-actions';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -118,22 +120,18 @@ export const TestPage = React.createClass({
     const { dispatch, fileMeta } = this.props;
     if(file.type == 'file'){
       // It is a file - open the file
-      dispatch(push({
-        pathname: '/',
-        query: {
-          fileId     : file.fileId,
-          revisionId : file.revisionId,
-          projectId  : file.project._id,
-        }
+      dispatch(filePreviewRoute({
+        fileId     : file.fileId,
+        revisionId : file.revisionId,
+        projectId  : file.project._id,
       }))
     }
     else if(fileMeta.data.project._id){
       // It is a folder (and is linked to a project) - open the folder
-      dispatch(push({
-        pathname: `/project/${fileMeta.data.project._id}/files/${file.fileId}`,
-        state: {meta : {scope: ['main']}}
+      dispatch(projectFilesRoute({
+        projectId : fileMeta.data.project._id,
+        path      : file.fileId
       }))
-      dispatch(ElectronWindowsActions.show('main'))
     }
     else{
       console.log('Not linked to project - open folder');
@@ -141,7 +139,6 @@ export const TestPage = React.createClass({
   },
   clickTag(task){
     this.props.dispatch(ModalActions.showModal({modalType: 'TASK', limit: 1, modalProps: { taskId: task._id }}));
-    this.props.dispatch(ElectronWindowsActions.show('main'))
   },
   render() {
     const { fileMeta, syncTimeline, relatedTasks } = this.props;
@@ -231,6 +228,7 @@ function mapDispatchToProps(dispatch) {
   return {
     filesActions: bindActionCreators(FilesActions, dispatch),
     syncTimelineActions: bindActionCreators(SyncTimelineActions, dispatch),
+    dispatch
   }
 }
 

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 // Container Actions
 import * as ProjectsActions        from 'stemn-shared/misc/Projects/Projects.actions.js';
 import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js';
-import { projectFolderRoute }        from 'route-actions';
+import { projectFolderRoute }      from 'route-actions';
 
 // Component Core
 import React from 'react';

@@ -1,9 +1,9 @@
-import moment from 'moment';
+import moment             from 'moment';
+import http               from 'axios';
+import initElectronCrash  from 'electron/app/shared/reporting/electron-crash/electron-crash.js';
+import initRaven          from 'electron/app/shared/reporting/raven/raven.renderer.js';
 import 'moment/locale/en-gb';
-import 'electron/app/renderer/assets/css/app.global.css';
-import http from 'axios';
-import initElectronCrash from 'electron/app/shared/reporting/electron-crash/electron-crash.js';
-import initRaven from 'electron/app/shared/reporting/raven/raven.renderer.js';
+import 'stemn-shared/assets/css/index.global.css';
 
 // Assign the global_env to process.env
 // GLOBAL_ENV is set in webpack using the definePlugin

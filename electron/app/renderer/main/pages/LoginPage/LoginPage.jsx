@@ -21,6 +21,9 @@ import MdPhoto from 'react-icons/md/photo';
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import Tabs from 'stemn-shared/misc/Tabs/Tabs'
 
+import logoSvg from 'stemn-shared/assets/images/astronaut.svg';
+const backgroundImages = require.context('stemn-shared/assets/images/satellite-backgrounds');
+
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
@@ -37,7 +40,8 @@ export const Component = React.createClass({
       const total = 8;
       return bgNumber > total ? 1 : bgNumber;
     }
-    const backgroundImage = { backgroundImage: `url(../images/satellite-backgrounds/satellite-${parseBackground(auth.background)}.jpg)` };
+    const backgroundImagePath =  `./satellite-${parseBackground(auth.background)}.jpg`
+    const backgroundImage     = { backgroundImage: `url(${backgroundImages(backgroundImagePath)}` };
     
     const formPanel = (
       <div className={classNames(classes.formPanel, 'flex', 'layout-column', 'layout-align-space-between')}>
@@ -92,7 +96,7 @@ export const Component = React.createClass({
     
     const brandPanel = (
       <div className={classNames(classes.brandPanel, 'layout-column', 'layout-align-center-center')}>
-        <img src="../images/astronaut.svg" style={{width: '150px'}} draggable="false"/>
+        <img src={logoSvg} style={{width: '150px'}} draggable="false"/>
       </div>
     );
     
