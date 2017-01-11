@@ -21,7 +21,7 @@
     "app:watch": "better-npm-run app:watch",
     "server": "better-npm-run server",
     "server:test": "better-npm-run server:test",
-    "electron": "electron dist/main",
+    "electron": "better-npm-run electron",
     "compile": "node ./scripts/build.js"
   },
   "betterScripts": {
@@ -43,8 +43,14 @@
         "ELECTRON_CRASH_REPORT_SERVER": "http://35.162.145.41:2096"
       }
     },
+    "electron": {
+      "command": "electron dist/main",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
     "app": {
-      "command": "electron -r babel-register -r babel-polyfill ./app/main/index",
+      "command": "node -r babel-register ./node_modules/webpack/bin/webpack --watch --config webpack.config.electron.js  --progress --profile --colors",
       "env": {
         "NODE_ENV": "development",
         "API_SERVER": "http://localhost:3000",
