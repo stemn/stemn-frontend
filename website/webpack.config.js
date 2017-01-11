@@ -69,7 +69,10 @@ module.exports = function makeWebpackConfig () {
         path.resolve(__dirname, './node_modules/stemn-frontend-shared/'),
       ]
     }, {
-      test      : /\.css$/,
+      test      : /\.global\.css$/,
+      loaders   : [ 'style-loader', 'css-loader?sourceMap']
+    }, {
+      test      : /^((?!\.global).)*\.css$/,
       loaders   : [ 'style-loader', 'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]-[local]-[emoji:6]']
     }, {
       test      : /\.scss$/,
@@ -86,6 +89,7 @@ module.exports = function makeWebpackConfig () {
     },]
   };
 
+  
   // Istanbul Loader
   if (isTest) {
     config.module.preLoaders.push({
@@ -111,7 +115,7 @@ module.exports = function makeWebpackConfig () {
       'ngGeolocation'    : path.resolve(__dirname, './bower_components/ngGeolocation/ngGeolocation.js'),
       'theme'            : path.resolve(__dirname, './src/theme.css'),
       'route-actions'    : path.resolve(__dirname, './src/routeActions.js'),
-      'stemn-shared'     : path.resolve(__dirname, './node_modules/stemn-shared'),
+      'stemn-shared'     : path.resolve(__dirname, './node_modules/stemn-frontend-shared/src'),
     },
     fallback: path.resolve(__dirname, './node_modules'),
   };  
