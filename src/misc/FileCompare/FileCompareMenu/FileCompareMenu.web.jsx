@@ -18,8 +18,10 @@ import classNames from 'classnames';
 // Sub Components
 import SimpleIconButton     from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import { getCompareModes, getCompareIcon }  from '../FileCompare.utils.js';
+import PopoverMenu          from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
 import MdMoreHoriz          from 'react-icons/md/more-horiz';
 import MdOpenInNew          from 'react-icons/md/open-in-new';
+
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

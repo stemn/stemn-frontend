@@ -9,7 +9,6 @@ import * as AuthActions from 'stemn-shared/misc/Auth/Auth.actions.js';
 
 // Component
 import Select from 'react-select';
-import selectCss from 'electron/app/renderer/assets/css/select.css';
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 import { actions } from 'react-redux-form';

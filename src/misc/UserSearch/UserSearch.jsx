@@ -4,8 +4,6 @@ import AutosuggestHighlight from 'autosuggest-highlight';
 
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 
-import 'electron/app/renderer/assets/css/autosuggest.css';
-
 export default React.createClass({
   onChange(event, { newValue }) {
     this.props.UserSearchActions.updateInputValue(newValue)
