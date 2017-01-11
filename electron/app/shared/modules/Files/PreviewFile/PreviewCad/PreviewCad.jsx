@@ -93,7 +93,7 @@ export default React.createClass({
       return <ErrorMessages error={fileRender.error} fileMeta={fileMeta}/>
     }
     else{
-      return <div className="rel-box flex"><LoadingOverlay show={true}>Processing render...</LoadingOverlay></div>
+      return <div className="rel-box flex"><LoadingOverlay show={true}>Rendering file...</LoadingOverlay></div>
     }
   }
 })

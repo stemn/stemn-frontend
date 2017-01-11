@@ -3,7 +3,7 @@ import * as TasksActions          from '../../../renderer/main/modules/Tasks/Tas
 import * as ProjectActions        from '../../../shared/actions/projects.js';
 import * as SyncTimelineActions   from '../../../shared/modules/SyncTimeline/SyncTimeline.actions.js';
 import * as NotificationsActions  from '../../../shared/modules/Notifications/Notifications.actions.js';
-import * as FileListActions       from '../../../mail/modules/FileList/FileList.actions.js';
+import * as FileListActions       from '../../../renderer/main/modules/FileList/FileList.actions.js';
 import { renderFileDownload }     from '../../../shared/modules/Files/Files.actions.js';
 
 export default (store, action) => {
@@ -25,11 +25,13 @@ export default (store, action) => {
 
   // Actions that we DON'T process if user is the actioner
   switch (action.type) {
-    case 'PROJECT/PROJECT_CHANGES':
+    case 'PROJECT/NEW_CHANGES':
       return (dispatch) => {
           dispatch(ChangesActions.fetchChanges({ projectId : action.payload.projectId }));
           // dispatch(FileListActions.fetchFilesGooba({ projectId : action.payload.projectId }));
       }
+    case 'PROJECT/NEW_COMMITS':
+      return SyncTimelineActions.fetchTimeline({ projectId : action.payload.projectId });
     case 'FILES/FILES_UPDATED':
       return (dispatch) => {
         action.payload.files.map((fileId) => dispatch(SyncTimelineActions.fetchTimeline({
@@ -38,8 +40,6 @@ export default (store, action) => {
             fileId
         })));
       }
-    case 'COMMITS/COMMITS_CHANGED':
-      return SyncTimelineActions.fetchTimeline({ projectId : action.payload.projectId });
     case 'BOARD/BOARDS_UPDATED':
       return (dispatch) => {
         action.payload.boards.map((boardId) => dispatch(TasksActions.getBoard({ boardId })));
