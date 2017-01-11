@@ -67,6 +67,15 @@
         "ELECTRON_CRASH_REPORT_SERVER": "http://35.162.145.41:2096"
       }
     },
+    "app:jackson": {
+      "command": "node -r babel-register ./node_modules/webpack/bin/webpack --watch --config webpack.config.electron.js  --progress --profile --colors",
+      "env": {
+        "NODE_ENV": "development",
+        "API_SERVER": "http://192.168.1.2:3000",
+        "WEBSOCKET_SERVER": "http://192.168.1.2:8000",
+        "ELECTRON_CRASH_REPORT_SERVER": "http://192.168.1.2:2096"
+      }
+    },
     "server": {
       "command": "node --max-old-space-size=4096 -r babel-register server.js",
       "env": {
@@ -83,6 +92,15 @@
         "API_SERVER": "http://35.162.145.41",
         "WEBSOCKET_SERVER": "http://35.162.145.41:8000",
         "ELECTRON_CRASH_REPORT_SERVER": "http://35.162.145.41:2096"
+      }
+  },
+    "server:jackson": {
+      "command": "node --max-old-space-size=4096 -r babel-register server.js",
+      "env": {
+        "NODE_ENV": "development",
+        "API_SERVER": "http://192.168.1.2:3000",
+        "WEBSOCKET_SERVER": "http://192.168.1.2:8000",
+        "ELECTRON_CRASH_REPORT_SERVER": "http://192.168.1.2:2096"
       }
     }
   },
