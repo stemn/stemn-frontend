@@ -64,6 +64,7 @@
     "server": {
       "command": "node --max-old-space-size=4096 -r babel-register server.js",
       "env": {
+        "NODE_ENV": "development",
         "API_SERVER": "http://localhost:3000",
         "WEBSOCKET_SERVER": "http://localhost:8000",
         "ELECTRON_CRASH_REPORT_SERVER": "http://localhost:2096"
@@ -72,6 +73,7 @@
     "server:test": {
       "command": "node --max-old-space-size=4096 -r babel-register server.js",
       "env": {
+        "NODE_ENV": "development",
         "API_SERVER": "http://35.162.145.41",
         "WEBSOCKET_SERVER": "http://35.162.145.41:8000",
         "ELECTRON_CRASH_REPORT_SERVER": "http://35.162.145.41:2096"
