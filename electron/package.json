@@ -18,9 +18,11 @@
     "build:renderer": "better-npm-run build:renderer",
     "app": "better-npm-run app",
     "app:test": "better-npm-run app:test",
+    "app:jackson": "better-npm-run app:jackson",
     "app:watch": "better-npm-run app:watch",
     "server": "better-npm-run server",
     "server:test": "better-npm-run server:test",
+    "server:jackson": "better-npm-run server:jackson",
     "electron": "better-npm-run electron",
     "compile": "node ./scripts/build.js"
   },
@@ -93,7 +95,7 @@
         "WEBSOCKET_SERVER": "http://35.162.145.41:8000",
         "ELECTRON_CRASH_REPORT_SERVER": "http://35.162.145.41:2096"
       }
-  },
+    },
     "server:jackson": {
       "command": "node --max-old-space-size=4096 -r babel-register server.js",
       "env": {
