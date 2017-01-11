@@ -25,11 +25,13 @@ export default (store, action) => {
 
   // Actions that we DON'T process if user is the actioner
   switch (action.type) {
-    case 'PROJECT/PROJECT_CHANGES':
+    case 'PROJECT/NEW_CHANGES':
       return (dispatch) => {
           dispatch(fetchChanges({ projectId : action.payload.projectId }));
           // dispatch(FileListActions.fetchFilesGooba({ projectId : action.payload.projectId }));
       }
+    case 'PROJECT/NEW_COMMITS':
+      return fetchTimeline({ projectId : action.payload.projectId });
     case 'FILES/FILES_UPDATED':
       return (dispatch) => {
         action.payload.files.map((fileId) => dispatch(fetchTimeline({
@@ -38,8 +40,6 @@ export default (store, action) => {
             fileId
         })));
       }
-    case 'COMMITS/COMMITS_CHANGED':
-      return fetchTimeline({ projectId : action.payload.projectId });
     case 'BOARD/BOARDS_UPDATED':
       return (dispatch) => {
         action.payload.boards.map((boardId) => dispatch(getBoard({ boardId })));
