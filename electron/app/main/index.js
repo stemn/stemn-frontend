@@ -103,6 +103,7 @@ async function start() {
   
   store.subscribe(async () => {
     global.state = store.getState();
+    global.stateStringified = JSON.stringify(global.state);
     const dataToStore = getFilteredStoreData(global.state);
     await jsonStorage.set('state', dataToStore);
   });
