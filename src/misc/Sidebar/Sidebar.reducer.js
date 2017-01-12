@@ -2,7 +2,8 @@ import { modelReducer, formReducer, modeled } from 'react-redux-form';
 
 const initialState = {
   searchString: '',
-  show: true // shows the sidebar
+  show: true, // shows the sidebar
+  showMenubar: false, // shows the sidebar
 }
 
 
@@ -11,6 +12,10 @@ const mainReducer = (state, action) => {
     case 'SIDEBAR/TOGGLE_SIDEBAR':
       return {...state,
         show: action.payload || !state.show
+      }    
+    case 'SIDEBAR/TOGGLE_MENUBAR_SIDEBAR':
+      return {...state,
+        showMenubar: action.payload || !state.showMenubar
       }
     default:
       return state;

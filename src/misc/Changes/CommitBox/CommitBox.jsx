@@ -51,7 +51,7 @@ export const Component = React.createClass({
     }
 
     return (
-      <div className="p-15">
+      <div style={{padding: '15px'}}>
         <Walkthrough preferPlace="right" name="commit.commitSummary">
           <Input
             autoFocus={true}
