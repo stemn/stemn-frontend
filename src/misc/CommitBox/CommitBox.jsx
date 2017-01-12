@@ -26,7 +26,7 @@ export default React.createClass({
       ]
     }
     return (
-      <div className="p-15">
+      <div style={{padding: '15px'}}>
         <Input
           model={`changes.${this.props.project._id}.summary`}
           value={this.props.changes.summary}

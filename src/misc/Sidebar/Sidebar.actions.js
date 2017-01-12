@@ -4,3 +4,9 @@ export function toggleSidebar(status) {
       payload: status // If status exists, we set, otherwise we toggle
   }
 }
+export function toggleMenubarSidebar(status) {
+  return {
+      type:'SIDEBAR/TOGGLE_MENUBAR_SIDEBAR',
+      payload: status // If status exists, we set, otherwise we toggle
+  }
+}

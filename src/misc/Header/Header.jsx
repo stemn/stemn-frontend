@@ -3,8 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-//import * as SidebarActions from 'stemn-shared/misc/Sidebar/Sidebar.actions.js';
-const SidebarActions = {};
+import { toggleSidebar } from 'stemn-shared/misc/Sidebar/Sidebar.actions.js';
 
 // Component Core
 import React from 'react';
@@ -25,7 +24,10 @@ export const Component = React.createClass({
     return (
       <div className={classes.toolbar + ' layout-row layout-align-start-center rel-box'} style={styles}>
         <div className={classes.dragger}></div>
-        <div className={classes.inner + ' layout-row layout-align-start-center flex'}>{children}</div>
+        <div className={classes.inner + ' layout-row layout-align-start-center flex'}>
+          {!sidebar.show ? <a onClick={() => dispatch(toggleSidebar())} style={{marginRight: '15px'}}><MdMenu size="25"/></a> : ''}
+          {children}
+        </div>
       </div>
     );
   }
@@ -42,7 +44,6 @@ function mapStateToProps({ header, auth, sidebar }, {location}) {
   };
 }
 
-//        {!sidebar.show ? <a onClick={() => dispatch(SidebarActions.toggleSidebar())} style={{marginRight: '15px'}}><MdMenu size="25"/></a> : ''}
 
 
 export default connect(mapStateToProps)(Component);
