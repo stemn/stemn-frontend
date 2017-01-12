@@ -17,21 +17,15 @@ export default (store, action) => {
         revisionId  : action.payload.revisionId,
         provider    : action.payload.provider
       });
-  }
-
-  if (action.payload.actioner === store.getState().auth.user._id){
-    return undefined;
-  }
-
-  // Actions that we DON'T process if user is the actioner
-  switch (action.type) {
-    case 'PROJECT/NEW_CHANGES':
-      return (dispatch) => {
-          dispatch(fetchChanges({ projectId : action.payload.projectId }));
-          // dispatch(FileListActions.fetchFilesGooba({ projectId : action.payload.projectId }));
-      }
-    case 'PROJECT/NEW_COMMITS':
-      return fetchTimeline({ projectId : action.payload.projectId });
+    case 'RENDER/RENDER_FAILED':
+      return TODOrenderFailedErrorHandler({ // TODO: david implement this action handler. available params below
+        projectId,
+        provider,
+        renderId,
+        fileId,
+        revisionId,
+        actioner,
+      });
     case 'FILES/FILES_UPDATED':
       return (dispatch) => {
         action.payload.files.map((fileId) => dispatch(fetchTimeline({
@@ -40,6 +34,35 @@ export default (store, action) => {
             fileId
         })));
       }
+    case 'DROPBOX/ACCEPT_PENDING_SHARE_FAILED':
+      return TODOrenderFailedErrorHandler({ // TODO: david implement this action handler. available params below. reasons list at https://trello.com/c/bJ7bCkNm/269-dropbox-accept-pending-share-failed-popup-to-explain-why-project-couldn-t-be-shared-with-user
+        projectId : app.core.utils.pickId(data.projectId),
+        memberId : app.core.utils.pickId(data.memberId),
+        reason : app.core.utils.pickId(data.reason),
+        actioner : app.core.utils.pickId(data.actioner)
+      });
+  }
+
+  if (action.payload.actioner === store.getState().auth.user._id){
+    return undefined;
+  }
+
+  // Actions that we DON'T process if user is the actioner
+  switch (action.type) {
+    case 'PROJECT/ADDED_TO_PROJECT':
+      return (dispatch) => {
+          // TODO: get projects list?
+          return getProject({ projectId : action.payload.projectId });
+      }
+    case 'PROJECT/PROJECT_UPDATED':
+      return getProject({ projectId : action.payload.projectId });
+    case 'PROJECT/NEW_CHANGES':
+      return (dispatch) => {
+          dispatch(fetchChanges({ projectId : action.payload.projectId }));
+          // dispatch(FileListActions.fetchFilesGooba({ projectId : action.payload.projectId }));
+      }
+    case 'PROJECT/NEW_COMMITS':
+      return fetchTimeline({ projectId : action.payload.projectId }); // TODO: add commit type to timeline?
     case 'BOARD/BOARDS_UPDATED':
       return (dispatch) => {
         action.payload.boards.map((boardId) => dispatch(getBoard({ boardId })));
@@ -57,10 +80,6 @@ export default (store, action) => {
 //        title : `${action.payload.user.name} Completed a Task in '${action.payload.project.name}'`,
 //        body  : `The task '${action.payload.task.title}' was marked as complete.`
 //      })
-    case 'PROJECT/PROJECT_UPDATED':
-      return (dispatch) => {
-        return getProject({ projectId : action.payload.projectId });
-      }
     default:
       return undefined;
   }
