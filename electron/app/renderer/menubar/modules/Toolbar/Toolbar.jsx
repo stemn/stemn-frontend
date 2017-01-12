@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 // Container Actions
 import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js';
 import { push } from 'react-router-redux';
+import { toggleMenubarSidebar } from 'stemn-shared/misc/Sidebar/Sidebar.actions.js';
 
 // Component Core
 import React from 'react';
@@ -56,7 +57,7 @@ export const Component = React.createClass({
         ? <SimpleIconButton
             color="white"
             title="Projects Menu"
-            onClick={() => dispatch(toggleSidebar(true))}>
+            onClick={() => dispatch(toggleMenubarSidebar(true))}>
             <MdMenu size="22"/>
           </SimpleIconButton>
         : '' }

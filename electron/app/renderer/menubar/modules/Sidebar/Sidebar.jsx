@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import { toggleSidebar } from 'stemn-shared/misc/Sidebar/Sidebar.actions.js';
+import { toggleMenubarSidebar } from 'stemn-shared/misc/Sidebar/Sidebar.actions.js';
 
 // Component Core
 import React from 'react';
@@ -41,10 +41,10 @@ export const Component = React.createClass({
 
     return (
       <div className="scroll-dark">
-        <AnimateShow show={sidebar.show} animation={classes.animateOverlay} animationShow={classes.animateOverlayShow}>
-          <div className={classes.overlay} onClick={() => dispatch(toggleSidebar(false))}></div>
+        <AnimateShow show={sidebar.showMenubar} animation={classes.animateOverlay} animationShow={classes.animateOverlayShow}>
+          <div className={classes.overlay} onClick={() => dispatch(toggleMenubarSidebar(false))}></div>
         </AnimateShow>
-        <div className={classNames(classes.sidebar, 'layout-column', {[classes.sidebarShow] : sidebar.show})}>
+        <div className={classNames(classes.sidebar, 'layout-column', {[classes.sidebarShow] : sidebar.showMenubar})}>
           <div className={classes.sidebarSearch}>
             <Input
               model="sidebar.searchString"
@@ -57,7 +57,7 @@ export const Component = React.createClass({
           </div>
           <div className="flex scroll-box">
             {filteredProjectsOrdered.map((item)=>
-               <SidebarProjectButton item={item} to={linkProject(item)} clickFn={() => dispatch(toggleSidebar(false))}/>
+               <SidebarProjectButton item={item} to={linkProject(item)} clickFn={() => dispatch(toggleMenubarSidebar(false))}/>
             )}
           </div>
         </div>
