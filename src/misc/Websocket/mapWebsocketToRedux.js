@@ -62,7 +62,10 @@ export default (store, action) => {
           // dispatch(FileListActions.fetchFilesGooba({ projectId : action.payload.projectId }));
       }
     case 'PROJECT/NEW_COMMITS':
-      return fetchTimeline({ projectId : action.payload.projectId }); // TODO: add commit type to timeline?
+      return (dispatch) => {
+        dispatch(fetchTimeline({ projectId : action.payload.projectId })); // TODO: add commit type to timeline?
+        dispatch(fetchChanges({ projectId : action.payload.projectId }));
+      }
     case 'BOARD/BOARD_UPDATED':
       return getBoard({ boardId : action.payload.boardId });
     case 'BOARD/GROUPS_UPDATED':
