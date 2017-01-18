@@ -77,10 +77,13 @@ export default (store, action) => {
         action.payload.tasks.map((taskId) => dispatch(getTask({ taskId })));
       }
    case 'BOARD/TASK_COMPLETED_UPDATED':
-     return NotificationsActions.show({
-       title : `${action.payload.user.name} Completed a Task in '${action.payload.project.name}'`,
-       body  : `The task '${action.payload.task.title}' was marked as complete.`
-     })
+     return (dispatch) => {
+       dispatch(getTask({ taskId : action.payload.taskId }));
+       return NotificationsActions.show({
+         title : `${action.payload.user.name} Completed a Task in '${action.payload.project.name}'`,
+         body  : `The task '${action.payload.task.title}' was marked as complete.`
+       });
+     }
     default:
       return undefined;
   }
