@@ -2,12 +2,14 @@ import { fetchChanges }                 from 'stemn-shared/misc/Changes/Changes.
 import { fetchTimeline }                from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js';
 import { getBoard, getGroup, getTask }  from 'stemn-shared/misc/Tasks/Tasks.actions.js';
 import { getProject }                   from 'stemn-shared/misc/Projects/Projects.actions.js';
-import { renderFileDownload,
-         renderFileError }              from 'stemn-shared/misc/Files/Files.actions.js';
-import { show as showToast }            from 'stemn-shared/misc/Toasts/Toasts.actions.js';
-
+import { renderFileDownload }           from 'stemn-shared/misc/Files/Files.actions.js';
+//import * as NotificationsActions  from 'stemn-shared/misc/Notifications/Notifications.actions.js';
+//import * as FileListActions       from 'stemn-shared/misc/FileList/FileList.actions.js';
 
 export default (store, action) => {
+
+console.log(action)
+console.log('----------------')
 
   // Actions that we process if user is the actioner
   switch (action.type) {
@@ -19,22 +21,29 @@ export default (store, action) => {
         provider    : action.payload.provider
       });
     case 'RENDER/RENDER_FAILED':
-      return renderFileError({
-        projectId   : action.payload.projectId,
-        fileId      : action.payload.fileId,
-        revisionId  : action.payload.revisionId,
-        error       : action.payload.error,
+      return TODOrenderFailedErrorHandler({ // TODO: david implement this action handler. available params below
+        projectId,
+        provider,
+        renderId,
+        fileId,
+        revisionId,
+        actioner,
       });
     case 'FILES/FILES_UPDATED':
       return (dispatch) => {
-        action.payload.files.map(fileId => dispatch(fetchTimeline({
+        action.payload.files.map((fileId) => dispatch(fetchTimeline({
             projectId : action.payload.projectId,
             provider : action.payload.provider,
             fileId
         })));
       }
     case 'DROPBOX/ACCEPT_PENDING_SHARE_FAILED':
-      return showToast({type: 'error', title: `${action.payload.reason}`})
+      return TODOrenderFailedErrorHandler({ // TODO: david implement this action handler. available params below. reasons list at https://trello.com/c/bJ7bCkNm/269-dropbox-accept-pending-share-failed-popup-to-explain-why-project-couldn-t-be-shared-with-user
+        projectId : app.core.utils.pickId(data.projectId),
+        memberId : app.core.utils.pickId(data.memberId),
+        reason : app.core.utils.pickId(data.reason),
+        actioner : app.core.utils.pickId(data.actioner)
+      });
   }
 
   if (action.payload.actioner === store.getState().auth.user._id){
