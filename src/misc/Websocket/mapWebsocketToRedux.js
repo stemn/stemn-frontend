@@ -56,11 +56,12 @@ export default (store, action) => {
           // dispatch(FileListActions.fetchFilesGooba({ projectId : action.payload.projectId }));
       }
     case 'PROJECT/NEW_COMMITS':
-      return fetchTimeline({ projectId : action.payload.projectId }); // TODO: add commit type to timeline?
-    case 'BOARD/BOARDS_UPDATED':
       return (dispatch) => {
-        action.payload.boards.map((boardId) => dispatch(getBoard({ boardId })));
+        dispatch(fetchTimeline({ projectId : action.payload.projectId })); // TODO: add commit type to timeline?
+        dispatch(fetchChanges({ projectId : action.payload.projectId }));
       }
+    case 'BOARD/BOARD_UPDATED':
+      return getBoard({ boardId : action.payload.boardId });
     case 'BOARD/GROUPS_UPDATED':
       return (dispatch) => {
         action.payload.groups.map((groupId) => dispatch(getGroup({ groupId, boardId : action.payload.boardId })));
@@ -69,11 +70,11 @@ export default (store, action) => {
       return (dispatch) => {
         action.payload.tasks.map((taskId) => dispatch(getTask({ taskId })));
       }
-//    case 'BOARD/TASK_COMPLETED':
-//      return NotificationsActions.show({
-//        title : `${action.payload.user.name} Completed a Task in '${action.payload.project.name}'`,
-//        body  : `The task '${action.payload.task.title}' was marked as complete.`
-//      })
+   case 'BOARD/TASK_COMPLETED_UPDATED':
+     return NotificationsActions.show({
+       title : `${action.payload.user.name} Completed a Task in '${action.payload.project.name}'`,
+       body  : `The task '${action.payload.task.title}' was marked as complete.`
+     })
     default:
       return undefined;
   }
