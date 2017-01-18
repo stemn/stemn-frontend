@@ -31,6 +31,18 @@ export const NewItem = React.createClass({
 });
 
 export const TaskList = React.createClass({
+  componentWillMount(){
+    this.props.TasksActions.websocketJoinBoard({
+      boardId: this.props.board.data._id
+    })
+  },
+
+  componentWillUnmount(){
+    this.props.TasksActions.websocketLeaveBoard({
+      boardId: this.props.board.data._id
+    })
+  },
+
   moveGroup({group, destinationGroup, after, save}) {
     this.props.TasksActions.moveGroup({
       boardId: this.props.board.data._id,

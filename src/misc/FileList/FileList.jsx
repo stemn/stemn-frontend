@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as FileListActions from './FileList.actions.js';
+//import { websocketJoinFile, websocketLeaveFile }  from 'stemn-shared/misc/Files/actions';
 
 // Component Core
 import React, { PropTypes } from 'react';

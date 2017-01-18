@@ -34,3 +34,42 @@ export function exploreFolder({folderId, provider}) {
     },
   };
 }
+
+
+//export const joinRoom = ({fileId}) => {
+//  return (dispatch, getState) => {
+//    const alreadyConnected = getState().fileList.websocketRooms.includes(fileId);
+//    if(!alreadyConnected){
+//      dispatch({
+//        type      : 'FILE_LIST/WEBSOCKET_JOIN_FILE',
+//        websocket : true,
+//        payload   : {
+//          type    : 'ROOM/JOIN',
+//          payload : {
+//            room  : fileId,
+//            type  : 'file'
+//          }
+//        }
+//      });
+//    }
+//  }
+//}
+//
+//export const leaveRoom = ({fileId}) => {
+//  return (dispatch, getState) => {
+//    const alreadyConnected = getState().fileList.websocketRooms.includes(fileId);
+//    if(alreadyConnected){
+//      dispatch({
+//        type      : 'FILE_LIST/WEBSOCKET_LEAVE_FILE',
+//        websocket : true,
+//        payload   : {
+//          type    : 'ROOM/LEAVE',
+//          payload : {
+//            room  : fileId,
+//            type  : 'file'
+//          }
+//        }
+//      });
+//    }
+//  }
+//}
