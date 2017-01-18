@@ -9,7 +9,9 @@ export default ({dest}) => {
     const renameSvfAndPng = (subFolderPath) => {
       // Read the contents of the subfolder, this will contain the svf and png
       return fsPromise.readdir(subFolderPath).then(files => {
-        const filesToRename = files.filter(fileName => fileName.endsWith('.svf') || fileName.endsWith('.png'));
+        const hasModelSvf   = files.includes('model.svf'); // We only rename if the file does not already exit
+        const hasModelPng   = files.includes('model.png'); // We only rename if the file does not already exit
+        const filesToRename = files.filter(fileName => (!hasModelSvf && fileName.endsWith('.svf')) || (!hasModelPng && fileName.endsWith('.png')));
         const renameFile = (fileName) => {
           const extension = fileName.substr(fileName.lastIndexOf('.') + 1);
           return fsPromise.rename(`${subFolderPath}/${fileName}`, `${subFolderPath}/model.${extension}`)

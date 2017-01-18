@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { connect }            from 'react-redux';
 import classes                from './FileCompare.css';
 
 import { orderItemsByTime }   from 'stemn-shared/misc/FileCompare/FileCompare.utils.js';
@@ -8,7 +8,7 @@ import DragResize             from 'stemn-shared/misc/DragResize/DragResize.jsx'
 import FileCompareMenu        from 'stemn-shared/misc/FileCompare/FileCompareMenu';
 import FileCompareInner       from 'stemn-shared/misc/FileCompare/FileCompareInner/FileCompareInner.jsx';
 import Timeline               from 'stemn-shared/misc/Timeline/Timeline.jsx';
-//import { websocketJoinFile }  from 'stemn-shared/misc/Files/actions';
+import { websocketJoinFile, websocketLeaveFile }  from 'stemn-shared/misc/Files/actions';
 import { orderBy, has }       from 'lodash';
 
 export const FileCompare = React.createClass({
@@ -22,14 +22,20 @@ export const FileCompare = React.createClass({
         mode         : nextProps.file.revisions && nextProps.file.revisions.length > 1 ? 'sideBySide' : 'single'
       })
 
-//      // Join the File room
-//      nextProps.filesActions.websocketJoinFile({
-//        fileId: nextProps.file.data.fileId
-//      });
+      // Join the File room
+      nextProps.dispatch(websocketJoinFile({
+        fileId: nextProps.file.data.fileId
+      }))
     }
   },
   componentWillMount() { this.onMount(this.props) },
   componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
+  componentWillUnmount() {
+    // Join the File room
+    this.props.dispatch(websocketLeaveFile({
+      fileId: this.props.file.data.fileId
+    }))
+  },
 
   onSelect(response){
     const selectState = this.state.mode == 'single' || this.state.lastSelected == 2
@@ -128,4 +134,4 @@ export const FileCompare = React.createClass({
   }
 })
 
-export default FileCompare
+export default connect()(FileCompare)

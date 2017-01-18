@@ -8,6 +8,7 @@ export getMetaFromPath     from './getMetaFromPath.desktop';
 export getRelatedTasks     from './getRelatedTasks';
 export renderFile          from './renderFile.desktop';
 export renderFileDownload  from './renderFileDownload.desktop';
+export renderFileError     from './renderFileError';
 export saveFile            from './saveFile.desktop';
 export websocketJoinFile   from './websocketJoinFile';
 export websocketLeaveFile  from './websocketLeaveFile';
