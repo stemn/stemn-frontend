@@ -98,9 +98,6 @@ export function commit({projectId, summary, description}) {
   return (dispatch, getState) => {
     const changes = getState().changes[projectId];
 
-    // Get the files which have been changed
-    const files = Object.keys(changes.checked).filter(key => changes.checked[key]);
-
     // Get the revisions from the selected files
     const revisions = changes.data.filter(item => changes.checked[item.data.fileId]).map((item)=>item._id);
 
@@ -115,8 +112,9 @@ export function commit({projectId, summary, description}) {
           description,
         }
       }).then((response)=>{
+        console.log();
         dispatch(showToast({
-          title: `${files.length} files commited`,
+          title: `${response.data.files.length} files commited`,
           actions: [{
             text: 'Undo',
             action: {
