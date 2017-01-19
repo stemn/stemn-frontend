@@ -1,6 +1,7 @@
 import { fetchChanges }                 from 'stemn-shared/misc/Changes/Changes.actions.js';
 import { fetchTimeline }                from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js';
 import { getBoard, getGroup, getTask }  from 'stemn-shared/misc/Tasks/Tasks.actions.js';
+import { getComment }                   from 'stemn-shared/misc/Comments/Comments.actions.js';
 import { getProject }                   from 'stemn-shared/misc/Projects/Projects.actions.js';
 import { renderFileDownload }           from 'stemn-shared/misc/Files/Files.actions.js';
 //import * as NotificationsActions  from 'stemn-shared/misc/Notifications/Notifications.actions.js';
@@ -79,14 +80,18 @@ console.log('----------------')
       return (dispatch) => {
         action.payload.tasks.map((taskId) => dispatch(getTask({ taskId })));
       }
-   case 'BOARD/TASK_COMPLETED_UPDATED':
-     return (dispatch) => {
-       dispatch(getTask({ taskId : action.payload.taskId }));
-       return NotificationsActions.show({
-         title : `${action.payload.user.name} Completed a Task in '${action.payload.project.name}'`,
-         body  : `The task '${action.payload.task.title}' was marked as complete.`
-       });
-     }
+    case 'BOARD/TASK_COMPLETED_UPDATED':
+      return (dispatch) => {
+        dispatch(getTask({ taskId : action.payload.taskId }));
+        // return NotificationsActions.show({
+        //   title : `${action.payload.user.name} Completed a Task in '${action.payload.project.name}'`,
+        //   body  : `The task '${action.payload.task.title}' was marked as complete.`
+        // });
+      }
+    case 'BOARD/COMMENTS_UPDATED':
+      return (dispatch) => {
+        action.payload.comments.map((commentId) => dispatch(getComment({ commentId })));
+      }
     default:
       return undefined;
   }
