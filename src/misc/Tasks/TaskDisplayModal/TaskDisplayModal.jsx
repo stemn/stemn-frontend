@@ -41,6 +41,7 @@ export const Component = React.createClass({
   componentWillMount() { this.onMount(this.props) },
   componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
   onMount (nextProps, prevProps) {
+    console.log(nextProps);
     // If we don't yet have the task (and it is not loading)
     if(!nextProps.task || !nextProps.task.data && !nextProps.task.loading){
       nextProps.TasksActions.getTask({taskId: nextProps.taskId});

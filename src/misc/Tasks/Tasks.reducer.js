@@ -138,7 +138,7 @@ const mainReducer = (state, action) => {
 
     case 'TASKS/MOVE_TASK':
       return i.chain(state)
-      .assocIn(['data', action.payload.task, 'data', 'board'], action.payload.destinationGroup)    // Update the group property
+      .assocIn(['data', action.payload.task, 'data', 'group'], action.payload.destinationGroup)    // Update the group property
       .updateIn(['boards', action.payload.boardId, 'data', 'groups'], (groups) => {                // Move the task in the groups array
         const from = getLocationIndex(groups, action.payload.task);
         const to = action.payload.destinationTask ? getLocationIndex(groups, action.payload.destinationTask) : {groupIndex: getGroupIndex(groups, action.payload.destinationGroup), taskIndex: 0};

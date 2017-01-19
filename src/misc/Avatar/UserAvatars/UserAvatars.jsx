@@ -24,11 +24,11 @@ export default React.createClass({
       const usersNotShown = users.length > limit ? users.slice(limit - 1, users.length) : [];
       return (
         <div>
-          {usersToShow.map( user =>
+          {usersToShow.map( (user, index) =>
             <UserAvatar
               title={user.name}
               style={{margin: '0 2px'}}
-              key={user._id}
+              key={user._id || index}
               picture={user.picture}
               size={25}
             />

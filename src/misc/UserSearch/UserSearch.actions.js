@@ -12,7 +12,7 @@ export function loadSuggestions(value) {
         type:'user',
         key: 'name',
         value: value,
-        size: 20,
+        size: 10,
         match: 'regex'
       },
     }
