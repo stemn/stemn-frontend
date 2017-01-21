@@ -64,7 +64,7 @@ export const Component = React.createClass({
     })
   },
   render() {
-    const { changes, project, changesActions, entityModel, projectId } = this.props;
+    const { changes, project, changesActions, entityModel, projectId, dispatch } = this.props;
 
     const addStoreLink = {
       pathname: `/project/${projectId}/settings`,
@@ -113,7 +113,8 @@ export const Component = React.createClass({
               toggleAll={this.toggleAll}
               selectedFileChange={changesActions.selectedFileChange}
               deselect={this.deselect}
-              refresh={this.refresh}/>
+              refresh={this.refresh}
+              dispatch={dispatch}/>
             <div style={commitBoxStyles}>
               <CommitBox
                 entityModel={entityModel}
@@ -157,6 +158,7 @@ function mapDispatchToProps(dispatch) {
   return {
     changesActions: bindActionCreators(ChangesActions, dispatch),
     projectsActions: bindActionCreators(ProjectsActions, dispatch),
+    dispatch
   }
 }
 

@@ -141,7 +141,7 @@ export const Component = React.createClass({
     }
 
     const showChangesTemplate = () => {
-      const validItemIsSelected = some(changes.data, item => changes.selected && item._id == changes.selected._id);
+      const validItemIsSelected = changes ? some(changes.data, item => changes.selected && item._id == changes.selected._id) : false;
       return (
         <div className="layout-column flex rel-box">
           <div className="layout-row flex">
