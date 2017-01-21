@@ -18,12 +18,6 @@ export default {
   },
 
   plugins: [
-//    new webpack.optimize.UglifyJsPlugin({
-//      compressor: {
-//        warnings: false,
-//      },
-//    }),
-
     new webpack.BannerPlugin(
       process.env.NODE_ENV === 'development' ? 'require("source-map-support").install();' : '',
       { raw: true, entryOnly: false }
