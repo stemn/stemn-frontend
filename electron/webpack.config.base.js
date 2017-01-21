@@ -65,7 +65,8 @@ export default {
     alias                : {
       'theme'            : path.resolve(__dirname, './app/theme.css'),
       'route-actions'    : path.resolve(__dirname, './app/renderer/main/routeActions.js'),
-      'stemn-shared'     : path.resolve(__dirname, './app/node_modules/stemn-frontend-shared/src')
+      'stemn-shared'     : path.resolve(__dirname, './app/node_modules/stemn-frontend-shared/src'),
+      'package-json'     : path.resolve(__dirname, './app/package.json'),
     },
     fallback             : [ path.resolve(__dirname, './app/node_modules'), path.resolve(__dirname, './node_modules')]
   },
