@@ -1,7 +1,7 @@
 // Component Core
 import React from 'react';
 import http from 'axios';
-import { version } from 'electron/app/package.json'
+import { version } from 'package-json'
 
 // Styles
 import classNames from 'classnames';

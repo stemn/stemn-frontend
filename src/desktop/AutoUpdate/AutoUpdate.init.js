@@ -1,7 +1,7 @@
 import os from 'os';
 
 import updater from 'electron-simple-updater';
-import { version } from '../../../package.json';
+import { version } from 'package-json';
 import log from 'electron-log';
 
 import {

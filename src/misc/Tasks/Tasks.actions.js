@@ -257,7 +257,7 @@ export function moveGroup({boardId, group, destinationGroup, after, save}) {
   return (dispatch) => {
     if(save){
       dispatch({
-        type: 'TASKS/MOVE_TASK',
+        type: 'TASKS/MOVE_GROUP',
         payload: http({
           method: 'POST',
           url: `/api/v1/groups/move`,

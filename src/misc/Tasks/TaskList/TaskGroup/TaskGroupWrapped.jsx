@@ -21,7 +21,7 @@ const cardSource = {
 
   endDrag(props) {
     // If the group has moved, save it
-    if(beginDragProps.index != endDragProps.index){
+    if(endDragProps.index && beginDragProps.index != endDragProps.index){
       props.moveGroup({
         group: beginDragProps.id,
         destinationGroup: endDragProps.id,
