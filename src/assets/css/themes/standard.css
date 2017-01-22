@@ -1,3 +1,4 @@
+/*
 @value primary: rgb(68, 154, 211);
 @value primary-2: rgb(64, 129, 173);
 
@@ -6,6 +7,8 @@
 
 @value warn: rgb(244,67,54);
 @value warn-2: rgb(219, 59, 47);
+
+@value success: #59e659;
 
 @value timeline-main: rgb(188, 188, 188);
 @value timeline-bg: #f8f8f8;
@@ -31,8 +34,8 @@
 @value height-header: 50px;
 @value width-header-buttons: 100px;
 
-/*External*/
 @value linkedin: #1884bc;
 @value linkedin-dark: #166f9d;
 @value facebook: #3b5998;
 @value facebook-dark: #2d4579;
+*/

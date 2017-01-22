@@ -41,5 +41,5 @@ export default (dispatch) => {
       }))
     },
   }
-  return [discardChanges, openFile, openFolder, preview];
+  return [openFile, openFolder, preview];
 }

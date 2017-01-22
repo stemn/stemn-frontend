@@ -1,4 +1,4 @@
-@value primary, bg1, border1 from "theme";
+@value primary, bg1, border1, success, grey-2, warn from "theme";
 
 .fileChangeRow {
   border-bottom: 1px solid border1;
@@ -21,4 +21,27 @@
 }
 .active .checkbox{
   color: white;
+}
+
+.active .icon{
+  color: white !important;
+}
+.icon{
+  margin-right: 6px;
+  border: 1px solid !important;
+  border-color: inherit;
+  width: 16px;
+  height: 16px;
+}
+.icon svg{
+  color: inherit;
+}
+.icon.created{
+  color: success;
+}
+.icon.deleted{
+  color: warn;
+}
+.icon.modified{
+  color: grey-2;
 }

@@ -25,6 +25,7 @@ import Reactions from 'stemn-shared/misc/Reactions/Reactions.jsx';
 import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
+import IsOwner from 'stemn-shared/misc/Auth/IsOwner/IsOwner.jsx';
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -92,15 +93,17 @@ export const Component = React.createClass({
             {comment.data.owner.name}<span className={classes.date}> <b className="text-interpunct"></b> {moment(comment.data.timestamp).fromNow()} </span>
             <div className="flex"></div>
             <ReactionPopup reactions={comment.data.reactions} preferPlace="above" submitFn={this.submitReaction} />
-            <PopoverMenu preferPlace="right">
-              <SimpleIconButton style={{padding: '0 0 0 5px'}}>
-                <MdMoreHoriz size="20px"/>
-              </SimpleIconButton>
-              <div className="PopoverMenu">
-                {comment.editActive ? null : <a onClick={() => commentsActions.startEdit({commentId: comment.data._id})}>Edit</a> }
-                <a onClick={this.confirmDelete}>Delete</a>
-              </div>
-            </PopoverMenu>
+            <IsOwner ownerId={comment.data.owner._id}>
+              <PopoverMenu preferPlace="right">
+                <SimpleIconButton style={{padding: '0 0 0 5px'}}>
+                  <MdMoreHoriz size="20px"/>
+                </SimpleIconButton>
+                <div className="PopoverMenu">
+                  {comment.editActive ? null : <a onClick={() => commentsActions.startEdit({commentId: comment.data._id})}>Edit</a> }
+                  <a onClick={this.confirmDelete}>Delete</a>
+                </div>
+              </PopoverMenu>
+            </IsOwner>
           </div>
           <div className={classes.commentContent}>
           {

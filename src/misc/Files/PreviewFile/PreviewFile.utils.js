@@ -16,7 +16,7 @@ const getCodeMirrorExts = () => {
 export const viewerFileTypes = {
     general       : {
         gerber   : ['gerber', // Virtual gerber type
-                    'drl', 'drd', 'txt', // This goes first so txt does not display as gerber
+                    'drl', 'drd',
                     'out', 'outline',
                     'gbl', 'sol',
                     'gbs', 'sts',

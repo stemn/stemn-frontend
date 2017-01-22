@@ -65,6 +65,7 @@ export default React.createClass({
                   isActive={changes.selected ? item._id == changes.selected._id : false}
                   model={`changes.${project._id}.checked.${item.data.fileId}`}
                   value={changes.checked ? changes.checked[item.data.fileId] : false}
+                  status={item.data.state}
                   />)}
                 <div className="flex" onClick={deselect} style={{minHeight: '60px'}}></div>
               </div>
