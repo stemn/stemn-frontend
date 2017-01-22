@@ -33,7 +33,7 @@ export const ProjectFeedPageCommit = React.createClass({
             <UserAvatar picture={item.user.picture} name={item.user.name} size="20"/>
             <div style={{marginLeft: '10px'}}>
               {item.user.name}
-              <span className="text-grey-3" style={{marginLeft: '10px'}}>{moment(item.timestamp).fromNow()}</span>
+              <span className="text-grey-3" style={{marginLeft: '10px'}}>{moment(item.timestamp).format('LLLL')}</span>
             </div>
             <div className="flex">
             </div>
