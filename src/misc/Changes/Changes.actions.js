@@ -112,7 +112,6 @@ export function commit({projectId, summary, description}) {
           description,
         }
       }).then((response)=>{
-        console.log();
         dispatch(showToast({
           title: `${response.data.files.length} files commited`,
           actions: [{
