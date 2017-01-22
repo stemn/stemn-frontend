@@ -20,11 +20,6 @@ export function create({store, windows}) {
   appIcon = new Tray(trayIcon);
   appIcon.setToolTip('Stemn Desktop');
 
-  if(process.platform == 'win32'){
-
-//    appIcon.setContextMenu(contextMenu);
-  }
-
   let lastClickTime = Date.now();
 
   appIcon.on('right-click', (event, trayBounds) => {
@@ -52,8 +47,8 @@ export function create({store, windows}) {
         }
       },{
         label: 'Account Settings',
-        enabled: (auth.authToken && auth.user._id) === true,
-        onClick: () => {
+        enabled: auth.authToken && auth.user._id ? true : false,
+        click: () => {
           windows.main.show();
           dispatch(push({
             pathname: '/settings/account',
