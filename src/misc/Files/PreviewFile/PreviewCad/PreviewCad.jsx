@@ -9,7 +9,6 @@ import AutodeskLocalViewer from './AutodeskLocalViewer/AutodeskLocalViewer'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import modelLocked    from 'stemn-shared/assets/images/pure-vectors/model-locked.svg';
 import modelGear      from 'stemn-shared/assets/images/pure-vectors/model-gear.svg';
-import ErrorMessages  from '../Messages/Messages.jsx'
 
 //export const GetStatusOfUrn =  React.createClass({
 //  getInitialState () {
@@ -88,9 +87,6 @@ export default React.createClass({
           <div className="text-title-5">Visit <a className="link-primary" href="http://get.webgl.org/" target="_blank">webgl.org</a> for more.</div>
         </div>
       )
-    }
-    else if(fileRender && fileRender.error){
-      return <ErrorMessages error={fileRender.error} fileMeta={fileMeta}/>
     }
     else{
       return <div className="rel-box flex"><LoadingOverlay show={true}>Rendering file...</LoadingOverlay></div>

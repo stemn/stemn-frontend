@@ -57,7 +57,7 @@ export default React.createClass({
     // If the previewId changes, download a new file
     if(!prevProps || nextProps.previewId !== prevProps.previewId){
       // If we don't already have the file, get it
-      if(!nextProps.fileData){
+      if(!nextProps.fileData || !nextProps.fileData.data){
         nextProps.downloadFn({
           projectId  : nextProps.fileMeta.project._id,
           fileId     : nextProps.fileMeta.fileId,

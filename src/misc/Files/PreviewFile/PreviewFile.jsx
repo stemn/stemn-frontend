@@ -26,6 +26,7 @@ import LoadingOverlay     from 'stemn-shared/misc/Loading/LoadingOverlay/Loading
 import laptopSpanner      from 'stemn-shared/assets/images/pure-vectors/laptop-spanner.svg';
 import { getViewerType }  from './PreviewFile.utils.js'
 import DownloadFile       from '../DownloadFile/DownloadFile.jsx'
+import ErrorMessages      from './Messages/Messages.jsx'
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -36,6 +37,10 @@ export const Component = React.createClass({
 
     const getPreview = () => {
       const viewerType = getViewerType(file.extension, file.provider);
+      console.log(fileData);
+      if(fileData && fileData.error || fileRender && fileRender.error){
+        return <ErrorMessages error={fileData.error || fileRender.error} fileMeta={file}/>
+      }
       if(viewerType == 'gerber' || viewerType == 'pcb'){
         return <PreviewPcb previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile} />
       }
@@ -71,7 +76,6 @@ export const Component = React.createClass({
         { header
         ? <div className={classes.header + ' layout-row layout-align-start-center rel-box'}>
             <div>Version: {file.revisionNumber}</div>
-            {/*<div>&nbsp;&nbsp;Created: {moment(file.modified).calendar()}</div>*/}
             <div className="flex"></div>
             <DownloadFile file={file} title={`Download Version ${file.revisionNumber} of this file.`}>Download</DownloadFile>
           </div>
