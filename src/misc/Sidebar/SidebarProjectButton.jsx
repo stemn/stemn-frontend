@@ -27,7 +27,7 @@ export default (props) => {
 
   const inner = (
     <div className="layout-row layout-align-start-center">
-      <div style={iconStyle} className="layout-column layout-align-center-center">{getIcon(item.remote.provider)}</div>
+      <div style={iconStyle} className="layout-column layout-align-center-center">{getIcon(item.remote ? item.remote.provider : '')}</div>
       <div className={styles.text + ' flex'}>{item.name}</div>
     </div>
   );
