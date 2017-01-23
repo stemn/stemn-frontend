@@ -59,7 +59,7 @@ export const downloadToDiskAndSave = ({key, url, params, name, extract, onProgre
 
   const dest = path.join(folderPath, name);
   const onProgress = (progressPerc) => {
-    console.log(onProgressAction, progressPerc);
+//    console.log(onProgressAction, progressPerc);
   }
   return downloadToDisk({url, params, dest, extract, onProgress}).then(response1 => {
     // If extract is true, we rename the files, then save them to the store
@@ -111,6 +111,7 @@ export const get = ({key, url, params, name, responseType, extract, onProgressAc
   const getFile = () => {
     // If there is a render url, we check the render.status, otherwise we just download directly
     if(!renderUrl){
+      console.log(url);
       return downloadToDiskAndSave({key, url, params, name, extract, onProgressAction}).then(processResult)
     }
     else{
@@ -129,6 +130,7 @@ export const get = ({key, url, params, name, responseType, extract, onProgressAc
   ? fsPromise.stat(path.join(folderPath, fileCache[key].name))
     .then(processResult)
     .catch(getFile)
+  // Else, we download the file.
   : getFile();
 }
 

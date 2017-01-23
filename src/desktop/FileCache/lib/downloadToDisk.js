@@ -29,7 +29,6 @@ export default ({url, params, dest, onProgress, extract}) => {
 
       // unzip event uses close, but all others use end
       if (extract) {
-//        console.log('Download to Disk Complete', {url, params, dest, onProgress, extract});
         file.on('close', response => {
           resolve({
             size: total,
@@ -45,6 +44,8 @@ export default ({url, params, dest, onProgress, extract}) => {
         });
       }
       stream.pipe(file)
+    }).catch(error => {
+      reject(error.response)
     })
   })
 };

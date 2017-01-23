@@ -19,6 +19,7 @@ function reducer(state, action) {
     case 'FILES/GET_FILE_PENDING' :
       return i.assocIn(state, ['fileData', action.meta.cacheKey, 'loading'], true)
     case 'FILES/GET_FILE_REJECTED' :
+      console.log(action.payload);
       return i.assocIn(state, ['fileData', action.meta.cacheKey], {
         error: action.payload.data,
         loading: false
