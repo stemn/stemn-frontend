@@ -23,7 +23,8 @@ const config = {
   output: {
     ...baseConfig.output,
     path: path.join(__dirname, 'dist', 'renderer'),
-    publicPath: '../dist/',
+    publicPath: '../../',
+//    publicPath: '../dist/',
     filename: '[name]/index.js',
   },
   module: {
