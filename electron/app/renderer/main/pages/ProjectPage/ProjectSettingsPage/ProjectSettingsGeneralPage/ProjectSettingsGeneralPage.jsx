@@ -68,7 +68,7 @@ export const Component = React.createClass({
     })
   },
   linkRemote(){
-    const { project } = this.props;
+    const { auth, project } = this.props;
     // This is not wrapped in dispach!
     if(!project.formModels.fileStore.remote.provider){
       return {
@@ -78,7 +78,8 @@ export const Component = React.createClass({
           functionAlias: 'ProjectsActions.unlinkRemote',
           functionInputs: {
             projectId: project.data._id,
-            prevProvider: project.data.remote.provider
+            prevProvider: project.data.remote.provider,
+            userId : auth.user._id
           }
         }
       }
@@ -94,7 +95,8 @@ export const Component = React.createClass({
             provider: project.formModels.fileStore.remote.provider,
             path: project.formModels.fileStore.remote.root.path,
             id: project.formModels.fileStore.remote.root.fileId,
-            prevProvider: project.data.remote.provider
+            prevProvider: project.data.remote.provider,
+            userId : auth.user._id
           }
         }
       }
@@ -204,8 +206,9 @@ export const Component = React.createClass({
 ///////////////////////////////// CONTAINER /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({projects}, otherProps) {
+function mapStateToProps({auth, projects}, otherProps) {
   return {
+    auth,
     project: projects.data[otherProps.params.stub],
     entityModel: `projects.data.${otherProps.params.stub}`
   };
