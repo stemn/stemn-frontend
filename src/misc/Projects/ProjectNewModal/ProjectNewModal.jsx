@@ -47,7 +47,8 @@ export const Component = React.createClass({
           projectId : response.value.data._id,
           provider  : this.props.newProject.provider,
           path      : this.props.newProject.root.path,
-          id        : this.props.newProject.root.fileId
+          id        : this.props.newProject.root.fileId,
+          userId    : this.props.auth.user._id
         }).then(()=>{
           // After we have linked, we go to the project
           this.setState({linkPending: false});
@@ -213,8 +214,9 @@ export const Component = React.createClass({
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps({projects}) {
+function mapStateToProps({auth, projects}) {
   return {
+    auth,
     newProject: projects.newProject,
     entityModel: 'projects.newProject',
   };

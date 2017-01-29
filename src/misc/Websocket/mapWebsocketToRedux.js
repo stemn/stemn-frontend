@@ -2,7 +2,7 @@ import { fetchChanges }                 from 'stemn-shared/misc/Changes/Changes.
 import { fetchTimeline }                from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js';
 import { getBoard, getGroup, getTask }  from 'stemn-shared/misc/Tasks/Tasks.actions.js';
 import { getComment }                   from 'stemn-shared/misc/Comments/Comments.actions.js';
-import { getProject }                   from 'stemn-shared/misc/Projects/Projects.actions.js';
+import { getProject, getUserProjects }  from 'stemn-shared/misc/Projects/Projects.actions.js';
 import { renderFileDownload }           from 'stemn-shared/misc/Files/Files.actions.js';
 //import * as NotificationsActions  from 'stemn-shared/misc/Notifications/Notifications.actions.js';
 //import * as FileListActions       from 'stemn-shared/misc/FileList/FileList.actions.js';
@@ -22,14 +22,14 @@ console.log('----------------')
         provider    : action.payload.provider
       });
     case 'RENDER/RENDER_FAILED':
-      return TODOrenderFailedErrorHandler({ // TODO: david implement this action handler. available params below
-        projectId,
-        provider,
-        renderId,
-        fileId,
-        revisionId,
-        actioner,
-      });
+    //   return TODOrenderFailedErrorHandler({ // TODO: david implement this action handler. available params below
+    //     projectId,
+    //     provider,
+    //     renderId,
+    //     fileId,
+    //     revisionId,
+    //     actioner,
+    //   });
     case 'FILES/FILES_UPDATED':
       return (dispatch) => {
         action.payload.files.map((fileId) => dispatch(fetchTimeline({
@@ -39,12 +39,12 @@ console.log('----------------')
         })));
       }
     case 'DROPBOX/ACCEPT_PENDING_SHARE_FAILED':
-      return TODOrenderFailedErrorHandler({ // TODO: david implement this action handler. available params below. reasons list at https://trello.com/c/bJ7bCkNm/269-dropbox-accept-pending-share-failed-popup-to-explain-why-project-couldn-t-be-shared-with-user
-        projectId : app.core.utils.pickId(data.projectId),
-        memberId : app.core.utils.pickId(data.memberId),
-        reason : app.core.utils.pickId(data.reason),
-        actioner : app.core.utils.pickId(data.actioner)
-      });
+    //   return TODOrenderFailedErrorHandler({ // TODO: david implement this action handler. available params below. reasons list at https://trello.com/c/bJ7bCkNm/269-dropbox-accept-pending-share-failed-popup-to-explain-why-project-couldn-t-be-shared-with-user
+    //     projectId : app.core.utils.pickId(data.projectId),
+    //     memberId : app.core.utils.pickId(data.memberId),
+    //     reason : app.core.utils.pickId(data.reason),
+    //     actioner : app.core.utils.pickId(data.actioner)
+    //   });
   }
 
   if (action.payload.actioner === store.getState().auth.user._id){
@@ -55,8 +55,7 @@ console.log('----------------')
   switch (action.type) {
     case 'PROJECT/ADDED_TO_PROJECT':
       return (dispatch) => {
-          // TODO: get projects list?
-          return getProject({ projectId : action.payload.projectId });
+          return getUserProjects({ userId : store.getState().auth.user._id });
       }
     case 'PROJECT/PROJECT_UPDATED':
       return getProject({ projectId : action.payload.projectId });
