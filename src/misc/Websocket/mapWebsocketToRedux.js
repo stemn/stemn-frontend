@@ -21,7 +21,7 @@ console.log('----------------')
         revisionId  : action.payload.revisionId,
         provider    : action.payload.provider
       });
-    case 'RENDER/RENDER_FAILED':
+    // case 'RENDER/RENDER_FAILED':
     //   return TODOrenderFailedErrorHandler({ // TODO: david implement this action handler. available params below
     //     projectId,
     //     provider,
@@ -38,7 +38,7 @@ console.log('----------------')
             fileId
         })));
       }
-    case 'DROPBOX/ACCEPT_PENDING_SHARE_FAILED':
+    // case 'DROPBOX/ACCEPT_PENDING_SHARE_FAILED':
     //   return TODOrenderFailedErrorHandler({ // TODO: david implement this action handler. available params below. reasons list at https://trello.com/c/bJ7bCkNm/269-dropbox-accept-pending-share-failed-popup-to-explain-why-project-couldn-t-be-shared-with-user
     //     projectId : app.core.utils.pickId(data.projectId),
     //     memberId : app.core.utils.pickId(data.memberId),
