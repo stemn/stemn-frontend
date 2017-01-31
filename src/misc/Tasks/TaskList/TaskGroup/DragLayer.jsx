@@ -51,7 +51,6 @@ var CustomDragLayer = React.createClass({
   },
 
   renderItem: function (type, item) {
-    console.log(item, type);
     switch (type) {
       case 'card':
         return (

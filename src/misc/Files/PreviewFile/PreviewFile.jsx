@@ -37,7 +37,6 @@ export const Component = React.createClass({
 
     const getPreview = () => {
       const viewerType = getViewerType(file.extension, file.provider);
-      console.log(fileData);
       if(fileData && fileData.error || fileRender && fileRender.error){
         return <ErrorMessages error={fileData.error || fileRender.error} fileMeta={file}/>
       }

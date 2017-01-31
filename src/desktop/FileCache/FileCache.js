@@ -87,7 +87,7 @@ be queried before the download progresses.
 export const get = ({key, url, params, name, responseType, extract, onProgressAction, renderUrl}) => {
 
   // This will process and return the result based on the 'responseType' indicated
-  const processResult = () => {
+  const processResult = (response) => {
     // Return either the file data or the file path
     // depending on the 'responseType'
     if(responseType == 'path'){
@@ -111,7 +111,6 @@ export const get = ({key, url, params, name, responseType, extract, onProgressAc
   const getFile = () => {
     // If there is a render url, we check the render.status, otherwise we just download directly
     if(!renderUrl){
-      console.log(url);
       return downloadToDiskAndSave({key, url, params, name, extract, onProgressAction}).then(processResult)
     }
     else{

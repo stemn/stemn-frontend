@@ -1,5 +1,6 @@
 import getUuid from 'stemn-shared/utils/getUuid.js';
 import { forEach } from 'lodash';
+import 'javascript-detect-element-resize'; // addResizeListener && removeResizeListener
 
 const filter       = { viewport: true };
 
@@ -17,6 +18,13 @@ function register(viewerEl, linkKey){
   const id = getUuid();
   const instance = new window.Autodesk.Viewing.Private.GuiViewer3D(viewerEl);
 
+  const onResize = () => {
+    instance.resize();
+  }
+
+  // Add the resize listener
+  window.addResizeListener(viewerEl, onResize);
+
   // Create the onMove function that will be used to sync instances
   let lastState = {};
   const onMove = (event) => {
@@ -26,7 +34,6 @@ function register(viewerEl, linkKey){
     if(linkedInstances.length >= 1 && instance.viewerState){
       // Get the new state
       const newState = instance.getState(filter);
-      console.log(instance.getState());
       // Apply the new state to the linked instances
       linkedInstances.forEach(item => {
         const lastStateString = JSON.stringify(lastState);
@@ -46,6 +53,9 @@ function register(viewerEl, linkKey){
     library.activeInstances.splice(instanceIndex, 1);
     // Remove the event listeners
     instance.removeEventListener(window.Autodesk.Viewing.CAMERA_CHANGE_EVENT, onMove);
+    // Remove the resize listener
+    window.removeResizeListener(viewerEl, onResize);
+
     // Call the Autodesk finish function
     instance.finish();
   }

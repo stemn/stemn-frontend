@@ -9,7 +9,6 @@ import autodeskViewerUtils from '../PreviewCadViewer.utils.js';
 export default React.createClass({
   viewer: null,
   onMount (nextProps, prevProps) {
-
     if(!prevProps || nextProps.path != prevProps.path){
       // deregister the viewer if it already exists.
       if(this.viewer && this.viewer.deregister){
