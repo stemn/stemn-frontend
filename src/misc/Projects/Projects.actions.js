@@ -141,7 +141,7 @@ export function removeTeamMember({projectId, userId}) {
 }
 
 
-export function linkRemote({projectId, provider, path, id, prevProvider}) {
+export function linkRemote({projectId, provider, path, id, prevProvider, userId}) {
   return (dispatch) => {
     const link = () => dispatch({
       type: 'PROJECTS/LINK_REMOTE',
@@ -168,12 +168,14 @@ export function linkRemote({projectId, provider, path, id, prevProvider}) {
       }
     });
     const updateProject = () => dispatch(getProject({projectId}));
+    const updateUserProjects = () => dispatch(getUserProjects({userId}));
+    const projectUpdates = () => Promise.all([updateProject(), updateUserProjects()]);
 
     if(prevProvider){
-      return unlink().then(link).then(updateProject);
+      return unlink().then(link).then(projectUpdates);
     }
     else{
-      return link().then(updateProject);
+      return link().then(projectUpdates);
     }
   }
 }
