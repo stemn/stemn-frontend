@@ -73,11 +73,11 @@ export const AssemblyParts = React.createClass({
     if(hasChildParts || hasParentAssemblies){
       return (
         <div>
-          { hasChildParts
-          ? displayRows(parts, 'Assembly Parts')
-          : null }
           { hasParentAssemblies
           ? displayRows(assemblies, 'Parent Assemblies')
+          : null }
+          { hasChildParts
+          ? displayRows(parts, 'Assembly Parts')
           : null }
         </div>
       )
