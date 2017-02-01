@@ -7,6 +7,7 @@ import moment               from 'moment';
 import { isAssembly }       from '../PreviewCad.utils.js';
 import * as filesActions    from '../../../Files.actions.js';
 import SectionTitle         from 'stemn-shared/misc/Titles/SectionTitle/SectionTitle.jsx';
+import LoadingOverlay       from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 const propTypesObject = {
   fileMeta        : PropTypes.object.isRequired,   // fileMeta for the assembly
@@ -50,7 +51,10 @@ export const AssemblyParts = React.createClass({
       return (
         <div>
           <SectionTitle style={{margin: '30px 0 15px'}}>Assembly Parts</SectionTitle>
-          { partsOrdered.map(file => <Row file={file} clickFn={clickFn} key={file._id}/>) }
+          <div className="rel-box" style={parts.loading ? {minHeight: '70px'} : {}}>
+            { partsOrdered.map(file => <Row file={file} clickFn={clickFn} key={file._id}/>) }
+            <LoadingOverlay show={parts.loading} size='sm'/>
+          </div>
         </div>
       )
     }
