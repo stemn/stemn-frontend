@@ -5,7 +5,10 @@ import { connect }          from 'react-redux';
 import { orderBy }          from 'lodash';
 import moment               from 'moment';
 import { isAssembly }       from '../PreviewCad.utils.js';
-import * as filesActions    from '../../../Files.actions.js';
+import {
+  getAssemblyParts,
+  getAssemblyParents
+}                           from '../../../Files.actions.js';
 import SectionTitle         from 'stemn-shared/misc/Titles/SectionTitle/SectionTitle.jsx';
 import LoadingOverlay       from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
@@ -33,12 +36,17 @@ export const AssemblyParts = React.createClass({
   onMount (nextProps, prevProps) {
     if(!prevProps || nextProps.fileMeta != prevProps.fileMeta && nextProps.fileMeta.data){
       if(isAssembly(nextProps.fileMeta.data.extension)){
-        nextProps.dispatch(filesActions.getAssemblyParts({
+        nextProps.dispatch(getAssemblyParts({
           fileId     : nextProps.fileMeta.data.fileId,
           projectId  : nextProps.fileMeta.data.project._id,
           revisionId : nextProps.fileMeta.data.revisionId,
         }))
       }
+      nextProps.dispatch(getAssemblyParents({
+        fileId     : nextProps.fileMeta.data.fileId,
+        projectId  : nextProps.fileMeta.data.project._id,
+        revisionId : nextProps.fileMeta.data.revisionId,
+      }))
     }
   },
   componentDidMount() { this.onMount(this.props) },
@@ -46,39 +54,30 @@ export const AssemblyParts = React.createClass({
   render() {
     const { parts, assemblies, clickFn } = this.props;
 
-    const childParts = () => {
-      const partsOrdered = orderBy(parts.data, 'name');
+    const displayRows = (items, title) => {
+      const itemsOrdrered = orderBy(items.data, 'name');
       return (
         <div>
-          <SectionTitle style={{margin: '30px 0 15px'}}>Assembly Parts</SectionTitle>
-          <div className="rel-box" style={parts.loading ? {minHeight: '70px'} : {}}>
-            { partsOrdered.map(file => <Row file={file} clickFn={clickFn} key={file._id}/>) }
-            <LoadingOverlay show={parts.loading} size='sm'/>
+          <SectionTitle style={{margin: '30px 0 15px'}}>{title}</SectionTitle>
+          <div className="rel-box" style={items.loading ? {minHeight: '70px'} : {}}>
+            { itemsOrdrered.map(file => <Row file={file} clickFn={clickFn} key={file._id}/>) }
+            <LoadingOverlay show={items.loading} size='sm'/>
           </div>
         </div>
       )
     }
 
-    const parentAssemblies = () => {
-      return (
-        <div>
-          <SectionTitle style={{margin: '30px 0 15px'}}>Parent Assemblies</SectionTitle>
-          { assemblies.map(file => <Row file={file} clickFn={clickFn} key={file._id}/>) }
-        </div>
-      )
-    }
-
-    const hasChildParts       = parts && parts.data;
-    const hasParentAssemblies = assemblies && assemblies.length > 0;
+    const hasChildParts       = parts && parts.data && parts.data.length > 0 || parts.loading;
+    const hasParentAssemblies = assemblies && assemblies.data && assemblies.data.length > 0 || assemblies.loading;
 
     if(hasChildParts || hasParentAssemblies){
       return (
         <div>
           { hasChildParts
-          ? childParts()
+          ? displayRows(parts, 'Assembly Parts')
           : null }
           { hasParentAssemblies
-          ? parentAssemblies()
+          ? displayRows(assemblies, 'Parent Assemblies')
           : null }
         </div>
       )
@@ -91,11 +90,9 @@ export const AssemblyParts = React.createClass({
 
 const mapStateToProps = ({files}, {fileMeta}) => {
   const cacheKey = fileMeta.data.fileId+'-'+fileMeta.data.revisionId;
-  const assembliesRaw = files.fileAssemblies[cacheKey];
-  const assemblies = assembliesRaw ? assembliesRaw.map(cacheKey => files.fileMeta[cacheKey] && files.fileMeta[cacheKey].data ? files.fileMeta[cacheKey].data : undefined) : [];
   return {
     parts     : files.fileAssemblyParts[cacheKey],
-    assemblies: assemblies
+    assemblies: files.fileAssemblyParents[cacheKey]
   };
 }
 

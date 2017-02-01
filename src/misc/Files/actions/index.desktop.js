@@ -1,5 +1,6 @@
 export downloadProgress    from './downloadProgress';
 export getAssemblyParts    from './getAssemblyParts';
+export getAssemblyParents  from './getAssemblyParents';
 export getFile             from './getFile.desktop';
 export getFileProgress     from './getFileProgress';
 export getFullPath         from './getFullPath.desktop';
