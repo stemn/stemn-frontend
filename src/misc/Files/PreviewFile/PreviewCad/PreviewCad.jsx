@@ -58,12 +58,7 @@ export default React.createClass({
       const { fileMeta, fileRender, renderFn } = nextProps;
       this.setState({status: 'pending'})
       if(previewCadUtils.isWebGlSupported()){
-        renderFn({
-          projectId  : fileMeta.project._id,
-          fileId     : fileMeta.fileId,
-          revisionId : fileMeta.revisionId,
-          provider   : fileMeta.provider,
-        });
+        renderFn();
       }
       else{
         this.setState({status:'disabled'});

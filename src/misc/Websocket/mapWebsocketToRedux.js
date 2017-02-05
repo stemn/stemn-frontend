@@ -19,7 +19,8 @@ console.log('----------------')
         projectId   : action.payload.projectId,
         fileId      : action.payload.fileId,
         revisionId  : action.payload.revisionId,
-        provider    : action.payload.provider
+        provider    : action.payload.provider,
+        timestamp   : action.payload.timestamp,
       });
     // case 'RENDER/RENDER_FAILED':
     //   return TODOrenderFailedErrorHandler({ // TODO: david implement this action handler. available params below

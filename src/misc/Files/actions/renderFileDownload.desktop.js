@@ -1,5 +1,5 @@
-export default ({projectId, fileId, revisionId, provider}) => {
-  const cacheKey = `${fileId}-${revisionId}`;
+export default ({projectId, fileId, revisionId, provider, timestamp}) => {
+  const cacheKey = timestamp ? `${fileId}-${revisionId}-${timestamp}` : `${fileId}-${revisionId}`;
   return {
     type: 'FILES/RENDER_FILE_DOWNLOAD',
     aliased: true,
@@ -10,7 +10,7 @@ export default ({projectId, fileId, revisionId, provider}) => {
         url          : projectId
                        ? `/api/v1/sync/downloadRender/${projectId}/${fileId}`
                        : `/api/v1/remote/downloadRender/${provider}/${fileId}`,
-        params       : { revisionId },
+        params       : { revisionId, timestamp },
         name         : cacheKey,
         responseType : 'path',
         extract      : true

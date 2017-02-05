@@ -47,7 +47,7 @@ export const Component = React.createClass({
     this.setState({position: event.target.value});
   },
   render() {
-    const { project, file1, file2, compareId, mode, header } = this.props;
+    const { project, file1, file2, event, compareId, mode, header } = this.props;
     const { width } = this.state;
     
     const compareModeClasses = {
@@ -75,7 +75,7 @@ export const Component = React.createClass({
       return (
         <div className={classes.preview1 + ' flex layout-column'} style={preview2Style[mode]}>
           <div className="layout-column flex" style={overylayStyles}>
-            {file2 ? <PreviewFile project={project} file={file2} header={header}/> : ''}
+            {file2 ? <PreviewFile project={project} file={file2} event={event} header={header}/> : ''}
           </div>
         </div>
       )
@@ -85,7 +85,7 @@ export const Component = React.createClass({
       if(file1){
         return (
           <div className={classes.preview2 + ' flex layout-column'}>
-            {file1 ? <PreviewFile project={project} file={file1} header={header}/> : ''}
+            {file1 ? <PreviewFile project={project} file={file1} event={event} header={header}/> : ''}
           </div>
         )
       }

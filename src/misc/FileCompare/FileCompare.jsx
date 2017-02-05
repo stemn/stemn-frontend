@@ -66,6 +66,7 @@ export const FileCompare = React.createClass({
     const file1 = items[0] ? items[0].data : undefined;
     const file2 = items[1] ? items[1].data : undefined;
 
+
     const collapseTemplate = () => {
       return (
         <TogglePanel cacheKey={file.data.fileId+'-'+file.data.revisionId}>
@@ -81,6 +82,7 @@ export const FileCompare = React.createClass({
           <DragResize side="bottom" height="500" heightRange={[0, 1000]} className="layout-column flex">
             <FileCompareInner
               project={project.data}
+              event={selected1}
               file1={file1}
               file2={file2}
               mode={mode} />
@@ -114,6 +116,7 @@ export const FileCompare = React.createClass({
           <div className="layout-column flex">
             <FileCompareInner
               project={project}
+              event={selected1}
               file1={file1}
               file2={file2}
               mode={mode}
