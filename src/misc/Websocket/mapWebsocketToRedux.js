@@ -22,6 +22,11 @@ console.log('----------------')
         provider    : action.payload.provider,
         timestamp   : action.payload.timestamp,
       });
+    // case 'RENDER/RENDER_PROGRESS':
+    //   return renderProgress({
+    //     roomId   : action.payload.roomId,
+    //     message  : action.payload.message
+    //   });
     // case 'RENDER/RENDER_FAILED':
     //   return TODOrenderFailedErrorHandler({ // TODO: david implement this action handler. available params below
     //     projectId,
