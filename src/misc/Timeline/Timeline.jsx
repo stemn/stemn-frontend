@@ -31,66 +31,66 @@ const propTypesObject = {
 const Component = React.createClass({
   getInitialState () {
     return {
-      isOpen: false,
-      page: 0
+      page: 0,
+      numPages: 1
     }
-  },
-  toggle (toState) {
-    this.setState({ isOpen: toState === null ? !this.state.isOpen : toState })
   },
   scroll (direction){
     if(direction == 'left'){
-      this.setState({
-        page : this.state.page + 1
-      })
+      this.setState({ page : this.state.page + 1})
     }
     else if (direction == 'right' && this.state.page > 0){
-      this.setState({
-        page : this.state.page - 1
-      })
+      this.setState({page : this.state.page - 1})
     }
+  },
+  getNumPages(){
+    const contentWidth = this.refs.inner.refs.inner.offsetWidth;
+    const containerWidth = this.refs.container.offsetWidth;
+    const numPages = Math.ceil(contentWidth / containerWidth);
+    this.setState({numPages});
+  },
+  componentDidMount(){
+    setTimeout(this.getNumPages, 1);
   },
   render() {
     const { items, selected, isSelected, onSelect, preferPlace, style, className, size } = this.props;
+    const { page, numPages } = this.state;
     const numberToShow = 15;
-    const moreLeft  = items ? this.state.page < items.length / numberToShow - 1 : false;
-    const moreRight = this.state.page > 0;
+    const moreLeft  = numPages - 1 > page;
+    const moreRight = page > 0;
 
     // Order the items by the timestamp
-    const itemsOrdered = orderBy(items, item => (new Date(item.timestamp)).getTime(), 'desc');
+    const itemsOrdered = orderBy(items, item => (new Date(item.timestamp)).getTime(), 'asc');
 
     return (
-      <div className={classNames(styles.timeline, 'layout-row', className, {[styles.small]: size == 'sm'})} style={style}>
-        <div className="rel-box flex">
+      <div className={classNames(styles.timeline, className, {[styles.small]: size == 'sm'})} style={style}>
+        <div className="rel-box">
           <div className={styles.line}>
             {moreLeft  ? <MoreButton title="Older events" onClick={()=>this.scroll('left')} side="left"/> : ''}
             {moreRight ? <MoreButton title="Newer events" onClick={()=>this.scroll('right')} side="right"/> : ''}
             {moreLeft  ? <MoreDots side="left" /> : ''}
             {moreRight ? <MoreDots side="right" /> : ''}
           </div>
-          <div className={styles.dotsOverflow}>
-            <div className={styles.dotsPosContainer}>
-              {items && items.length > 0
-                ?
-                <TimelineInner
-                  numberToShow={numberToShow}
-                  onSelect={onSelect}
-                  page={this.state.page}
-                  items={itemsOrdered}
-                  selected={selected}
-                  isSelected={isSelected}
-                  preferPlace={preferPlace}
-                  size={size}>
-                </TimelineInner>
-                : ''
-              }
-            </div>
+          <div ref="container" className={styles.dotsOverflow}>
+            { items && items.length > 0
+            ? <TimelineInner
+                ref="inner"
+                onSelect={onSelect}
+                page={page}
+                items={itemsOrdered}
+                selected={selected}
+                isSelected={isSelected}
+                preferPlace={preferPlace}
+                size={size}>
+              </TimelineInner>
+            : null }
           </div>
         </div>
       </div>
     );
   }
 });
+
 
 Component.propTypes = propTypesObject;
 

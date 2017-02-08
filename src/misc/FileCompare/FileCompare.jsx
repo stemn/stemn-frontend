@@ -8,6 +8,8 @@ import DragResize             from 'stemn-shared/misc/DragResize/DragResize.jsx'
 import FileCompareMenu        from 'stemn-shared/misc/FileCompare/FileCompareMenu';
 import FileCompareInner       from 'stemn-shared/misc/FileCompare/FileCompareInner/FileCompareInner.jsx';
 import Timeline               from 'stemn-shared/misc/Timeline/Timeline.jsx';
+
+import { fetchTimeline }                          from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js';
 import { websocketJoinFile, websocketLeaveFile }  from 'stemn-shared/misc/Files/actions';
 import { orderBy, has }       from 'lodash';
 
@@ -22,6 +24,19 @@ export const FileCompare = React.createClass({
         mode         : nextProps.file.revisions && nextProps.file.revisions.length > 1 ? 'sideBySide' : 'single'
       })
 
+      if(has(nextProps, 'file.data.project._id')){
+        nextProps.dispatch(fetchTimeline({
+          projectId  : nextProps.file.data.project._id,
+          fileId     : nextProps.file.data.fileId,
+        }))
+      }
+      else{
+        nextProps.dispatch(fetchTimeline({
+          fileId     : nextProps.file.data.fileId,
+          provider   : nextProps.file.data.provider,
+        }))
+      }
+      
       // Join the File room
       nextProps.dispatch(websocketJoinFile({
         fileId: nextProps.file.data.fileId
@@ -60,12 +75,12 @@ export const FileCompare = React.createClass({
     return this.state.mode == 'single' ? selected1 : selected1 || selected2;
   },
   render() {
-    const { file, project, type } = this.props;
+    const { file, project, type, syncTimeline } = this.props;
     const { mode, selected1, selected2 } = this.state;
     const items = orderItemsByTime(mode, selected1, selected2);
     const file1 = items[0] ? items[0].data : undefined;
     const file2 = items[1] ? items[1].data : undefined;
-
+    
 
     const collapseTemplate = () => {
       return (
@@ -91,7 +106,7 @@ export const FileCompare = React.createClass({
               size="sm"
               onSelect={this.onSelect}
               isSelected={this.isSelected}
-              items={file.revisions}
+              items={syncTimeline}
               preferPlace="above" />
             : null }
           </DragResize>
@@ -127,7 +142,7 @@ export const FileCompare = React.createClass({
             size="sm"
             onSelect={this.onSelect}
             isSelected={this.isSelected}
-            items={file.revisions}
+            items={syncTimeline}
             preferPlace="above" />
         </div>
       )
@@ -137,4 +152,13 @@ export const FileCompare = React.createClass({
   }
 })
 
-export default connect()(FileCompare)
+function mapStateToProps({ syncTimeline }, { file }) {
+  const hasFileId = file && file.data && file.data.fileId;
+  return {
+    syncTimeline : hasFileId && syncTimeline[file.data.fileId] && syncTimeline[file.data.fileId].data
+      ? syncTimeline[file.data.fileId].data  
+      : []
+  };
+}
+
+export default connect(mapStateToProps)(FileCompare)

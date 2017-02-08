@@ -1,18 +1,19 @@
 @value primary, border1, timeline-main, timeline-bg from "theme";
 
 .timeline.small{
-  padding: 20px 15px 0px;
+  padding: 20px 15px;
 }
 .timeline.small .line{
   height: 1px;
 }
 
 .timeline{
-  padding: 48px 30px 27px;;
+  padding: 30px 30px;
   background: timeline-bg;
   color: white;
   border-bottom: 1px solid border1;
 }
+
 .line{
   display: block;
   height: 2px;
@@ -22,15 +23,10 @@
 }
 
 .dotsOverflow{
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  top: -20px;
+  bottom: -20px;
   overflow: hidden;
-  width: 100%;
-  height: 20px;
-  transform: translateY(-50%);
-  margin-top: -1px;
-  padding: 0px 20px;
-}
-.dotsPosContainer{
-  position: relative;
-  width: 100%;
-  height: 100%;
 }

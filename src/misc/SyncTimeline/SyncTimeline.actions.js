@@ -26,7 +26,7 @@ export function fetchTimeline({projectId, fileId, provider}) {
   const getTypes = () => {
     if(fileId){
       if(projectId){
-        return ['commits', 'revisions']
+        return ['commits', 'changes']
       }
       else{
         return ['revisions']

@@ -67,8 +67,8 @@ export const AssemblyParts = React.createClass({
       )
     }
 
-    const hasChildParts       = parts && parts.data && parts.data.length > 0 || parts.loading;
-    const hasParentAssemblies = assemblies && assemblies.data && assemblies.data.length > 0 || assemblies.loading;
+    const hasChildParts       = parts && parts.data && parts.data.length > 0 || (parts && parts.loading);
+    const hasParentAssemblies = assemblies && assemblies.data && assemblies.data.length > 0 || (assemblies && assemblies.loading);
 
     if(hasChildParts || hasParentAssemblies){
       return (
