@@ -24,7 +24,6 @@ const AppBase = React.createClass({
 
 function start() {
   const initialState = JSON.parse(remote.getGlobal('stateStringified'));
-  console.log(initialState);
   const store        = configureStore(initialState);
   const history      = syncHistoryWithStore(hashHistory, store);
   standardSetup(store, 'main');

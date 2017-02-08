@@ -3,6 +3,7 @@ import { bindBackForward } from './utils/browserWindowUtils.js'
 import path from 'path';
 import process from 'process';
 import log from 'electron-log';
+import stringify from './utils/stringify.js'
 
 const mainHtml = process.env.NODE_ENV === 'development' 
                ? path.join(__dirname, '../../app/renderer/assets/html/main.html')
@@ -25,7 +26,7 @@ export const create = function createWindow({ uri = '/' } = {}) {
   function init () {
 
     // Create a new stringified state global - this will be parsed in the renderer
-    global.stateStringified = JSON.stringify(global.state);
+    global.stateStringified = stringify(global.state);
 
     browserWindow = new BrowserWindow({
       show: false,

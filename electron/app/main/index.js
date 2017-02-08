@@ -22,6 +22,7 @@ import configureStore           from '../shared/store/configureStore.main.js';
 import { getFilteredStoreData } from './json-storage.js';
 import postStoreSetup           from './postStoreSetup.js';
 import initApiServer            from './api/index.js';
+import stringify                from './utils/stringify.js'
 
 // Actions
 import {
@@ -103,7 +104,8 @@ async function start() {
   
   store.subscribe(async () => {
     global.state = store.getState();
-    global.stateStringified = JSON.stringify(global.state);
+    global.state.auth.circular = global.state.auth;
+    global.stateStringified = stringify(global.state);
     const dataToStore = getFilteredStoreData(global.state);
     await jsonStorage.set('state', dataToStore);
   });

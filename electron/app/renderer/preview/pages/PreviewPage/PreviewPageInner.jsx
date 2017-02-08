@@ -152,6 +152,7 @@ export const Component = React.createClass({
     const file1 = items[0] ? items[0].data : undefined;
     const file2 = items[1] ? items[1].data : undefined;
     const revisions = syncTimeline && syncTimeline.data ? syncTimeline.data.filter(item => item.event == 'revision') : [];
+    const commitsAndChanges = syncTimeline && syncTimeline.data ? syncTimeline.data : [];
     
     return (
       <div className="layout-column flex">
@@ -178,7 +179,7 @@ export const Component = React.createClass({
               header={['sideBySide', 'aboveAndBelow'].includes(mode)} />
             : <div className="flex" /> }
             <Timeline className={classes.timeline}
-              items={revisions}
+              items={commitsAndChanges}
               onSelect={this.onSelect}
               isSelected={this.isSelected}
               preferPlace="above"/>

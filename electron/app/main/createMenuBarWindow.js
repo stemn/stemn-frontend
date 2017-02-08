@@ -1,6 +1,7 @@
 import { BrowserWindow, screen, Menu, shell } from 'electron';
 import path from 'path';
 import process from 'process';
+import stringify from './utils/stringify.js'
 
 const menuBarHtml = process.env.NODE_ENV === 'development' 
                   ? path.join(__dirname, '../../app/renderer/assets/html/menubar.html')
@@ -22,7 +23,7 @@ export const create = () => {
   }
 
   // Create a new stringified state global - this will be parsed in the renderer
-  global.stateStringified = JSON.stringify(global.state);
+  global.stateStringified = stringify(global.state);
 
   browserWindow = new BrowserWindow({
     show: false,
