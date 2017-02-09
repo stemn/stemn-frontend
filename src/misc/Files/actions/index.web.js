@@ -6,5 +6,6 @@ export getFileProgress     from './getFileProgress';
 export getMeta             from './getMeta';
 export getRelatedTasks     from './getRelatedTasks';
 export renderFileError     from './renderFileError';
+export renderFileProgress  from './renderFileProgress';
 export websocketJoinFile   from './websocketJoinFile';
 export websocketLeaveFile  from './websocketLeaveFile';

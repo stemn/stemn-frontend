@@ -58,6 +58,11 @@ function reducer(state, action) {
         loading: false
       })
 
+    case 'FILES/RENDER_FILE_PROGRESS' :
+      return i.assocIn(state, ['fileRenders', action.meta.cacheKey], {
+        status: action.payload.message,
+      })
+
     case 'FILES/GET_META_PENDING' :
       return i.assocIn(state, ['fileMeta', action.meta.cacheKey, 'loading'], true)
     case 'FILES/GET_META_REJECTED' :

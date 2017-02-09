@@ -84,7 +84,7 @@ export default React.createClass({
       )
     }
     else{
-      return <div className="rel-box flex"><LoadingOverlay show={true}>Rendering file...</LoadingOverlay></div>
+      return <div className="rel-box flex"><LoadingOverlay show={true}>{ fileRender && fileRender.status ? fileRender.status : 'Rendering file...' }</LoadingOverlay></div>
     }
   }
 })

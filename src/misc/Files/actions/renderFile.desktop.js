@@ -3,8 +3,7 @@ import getUuid from 'stemn-shared/utils/getUuid.js';
 
 export default ({projectId, fileId, revisionId, provider, timestamp}) => {
   const cacheKey = timestamp ? `${fileId}-${revisionId}-${timestamp}` : `${fileId}-${revisionId}`;
-  // Create a render id. This will be used to create a websocket room to get status events.
-  const renderId = getUuid();
+  // The cache key is used as the renderId/roomId
 
   return (dispatch) => {
     dispatch({
@@ -20,7 +19,7 @@ export default ({projectId, fileId, revisionId, provider, timestamp}) => {
           url          : projectId
                          ? `/api/v1/sync/downloadRender/${projectId}/${fileId}`
                          : `/api/v1/remote/downloadRender/${provider}/${fileId}`,
-          params       : { revisionId, timestamp, roomId: renderId },
+          params       : { revisionId, timestamp, roomId: cacheKey },
           name         : cacheKey,
           responseType : 'path',
           extract      : true
@@ -32,6 +31,6 @@ export default ({projectId, fileId, revisionId, provider, timestamp}) => {
     });
 
     // Join the websocket room
-    dispatch(websocketJoinFile({renderId}))
+    dispatch(websocketJoinFile({renderId: cacheKey}))
   }
 }
