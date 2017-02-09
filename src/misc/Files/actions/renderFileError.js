@@ -3,8 +3,10 @@ export default ({fileId, revisionId, error}) => {
   return {
     type: 'FILES/RENDER_FILE_REJECTED',
     payload: {
-      data: {
-        error: error
+      response: {
+        data: {
+          error: error
+        }
       }
     },
     meta: {

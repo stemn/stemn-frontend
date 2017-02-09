@@ -1,6 +1,7 @@
-export default ({fileId}) => {
+export default ({fileId, renderId}) => {
   return (dispatch, getState) => {
-    const alreadyConnected = getState().files.websocketRooms.includes(fileId);
+    const room = renderId ? renderId : fileId;
+    const alreadyConnected = getState().files.websocketRooms.includes(room);
     if(alreadyConnected){
       dispatch({
         type      : 'FILES/WEBSOCKET_LEAVE_FILE',
@@ -8,8 +9,8 @@ export default ({fileId}) => {
         payload   : {
           type    : 'ROOM/LEAVE',
           payload : {
-            room  : fileId,
-            type  : 'file'
+            room  : room,
+            type  : renderId ? 'render' : 'file'
           }
         }
       });

@@ -3,7 +3,8 @@ import { fetchTimeline }                from 'stemn-shared/misc/SyncTimeline/Syn
 import { getBoard, getGroup, getTask }  from 'stemn-shared/misc/Tasks/Tasks.actions.js';
 import { getComment }                   from 'stemn-shared/misc/Comments/Comments.actions.js';
 import { getProject, getUserProjects }  from 'stemn-shared/misc/Projects/Projects.actions.js';
-import { renderFileDownload }           from 'stemn-shared/misc/Files/Files.actions.js';
+import { renderFileDownload,
+         renderFileError }              from 'stemn-shared/misc/Files/Files.actions.js';
 //import * as NotificationsActions  from 'stemn-shared/misc/Notifications/Notifications.actions.js';
 //import * as FileListActions       from 'stemn-shared/misc/FileList/FileList.actions.js';
 
@@ -22,15 +23,12 @@ console.log('----------------')
         provider    : action.payload.provider,
         timestamp   : action.payload.timestamp,
       });
-    // case 'RENDER/RENDER_FAILED':
-    //   return TODOrenderFailedErrorHandler({ // TODO: david implement this action handler. available params below
-    //     projectId,
-    //     provider,
-    //     renderId,
-    //     fileId,
-    //     revisionId,
-    //     actioner,
-    //   });
+     case 'RENDER/RENDER_FAILED':
+       return renderFileError({
+         fileId     : action.payload.fileId,
+         revisionId : action.payload.revisionId,
+         error      : action.payload.error,
+       });
     case 'FILES/FILES_UPDATED':
       return (dispatch) => {
         action.payload.files.map((fileId) => dispatch(fetchTimeline({
