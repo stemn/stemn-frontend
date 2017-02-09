@@ -25,6 +25,7 @@ import { push } from 'react-router-redux';
 
 // Sub Components
 import { orderItemsByTime } from 'stemn-shared/misc/FileCompare/FileCompare.utils.js';
+import { getRevisions }     from 'stemn-shared/misc/SyncTimeline/SyncTimeline.utils.js';
 import FileCompareInner     from 'stemn-shared/misc/FileCompare/FileCompareInner/FileCompareInner.jsx';
 import Timeline             from 'stemn-shared/misc/Timeline/Timeline.jsx';
 import DragResize           from 'stemn-shared/misc/DragResize/DragResize.jsx';
@@ -151,9 +152,9 @@ export const Component = React.createClass({
     const items = orderItemsByTime(mode, selected1, selected2);
     const file1 = items[0] ? items[0].data : undefined;
     const file2 = items[1] ? items[1].data : undefined;
-    const revisions = syncTimeline && syncTimeline.data ? syncTimeline.data.filter(item => item.event == 'revision') : [];
     const commitsAndChanges = syncTimeline && syncTimeline.data ? syncTimeline.data : [];
-    
+    const revisions = getRevisions(commitsAndChanges);
+
     return (
       <div className="layout-column flex">
         <Header>
