@@ -88,11 +88,6 @@ export const Component = React.createClass({
     if(project.data.remote.connected){
       return (
         <div className="layout-column flex rel-box">
-          <Timeline
-            items={timeline && timeline.data ? timeline.data : []}
-            selected={timeline && timeline.selected ? timeline.selected._id : ''}
-            onSelect={this.selectTimelineItem}
-          />
           <div className="layout-row flex">
             <div className="layout-column">
               <ContentSidebar className="flex">
