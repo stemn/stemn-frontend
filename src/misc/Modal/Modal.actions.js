@@ -14,8 +14,9 @@ export function showModal({modalType, modalProps, modalOptions, limit, modalConf
       modalOptions : modalOptions,
       limit, // Limit the number of this modalType to show
       /*******************************
-      options: {
-        width: '400px'
+      modalOptions: {
+        width: '400px',
+        noClickClose: true || false
       }
       *******************************/
       modalConfirm : modalConfirm,

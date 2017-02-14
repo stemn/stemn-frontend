@@ -5,6 +5,8 @@ import http from 'axios';
 import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js';
 import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js';
 import { loginRoute } from 'route-actions';
+import { show as showToast } from '../Toasts/Toasts.actions.js';
+
 
 export function loadUserData() {
   return (dispatch) => {
@@ -169,4 +171,36 @@ export function nextBackground() {
     type: 'AUTH/NEXT_BACKGROUND',
     payload: {}
   };
+}
+
+export function requestBetaCode() {
+  return (dispatch) => {
+    return dispatch({
+      type: 'AUTH/REQUEST_BETA_CODE',
+      payload: http({
+        url: `/api/v1/beta/request`,
+        method: 'GET',
+      })
+    }).then(response => {
+      dispatch(showToast({ title: `Beta Code has been requested. We will contact you soon.`}));
+    })
+  }
+}
+
+export function submitBetaCode(code) {
+  return (dispatch) => {
+    return dispatch({
+      type: 'AUTH/SUBMIT_BETA_CODE',
+      payload: http({
+        url: `/api/v1/beta/signup`,
+        method: 'POST',
+        data: {
+          ref: code
+        }
+      })
+    }).then(response => {
+      dispatch(loadUserData());
+      dispatch(showToast({ title: `Beta access granted. Welcome to the Stemn Desktop Beta!`}));
+    })
+  }
 }

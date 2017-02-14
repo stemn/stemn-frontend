@@ -16,6 +16,7 @@ import classes from './Modal.css'
 
 // Modals
 import ConfirmModal           from './modals/ConfirmModal.jsx';
+import BetaModal              from './modals/BetaModal.jsx';
 import ErrorModal             from './modals/ErrorModal.jsx';
 import ConnectionModal        from './modals/ConnectionModal.jsx';
 import ProviderAccessError    from './modals/ProviderAccessErrorModal.jsx'
@@ -33,6 +34,7 @@ import AssemblyPartNotFound   from 'stemn-shared/misc/Files/PreviewFile/Messages
 
 const modalComponents = {
   'CONFIRM'                 : ConfirmModal,
+  'BETA'                    : BetaModal,
   'ERROR'                   : ErrorModal,
   'CONNECTION'              : ConnectionModal,
   'FILE_SELECT'             : FileSelectModal,
@@ -87,6 +89,7 @@ export const Component = React.createClass({
       <Modal
         isOpen={true}
         onRequestClose={()=>{
+          if (modal.modalOptions && modal.modalOptions.noClickClose) return;
           modalExtended.modalCancel()
           modalExtended.modalHide()
         }}
