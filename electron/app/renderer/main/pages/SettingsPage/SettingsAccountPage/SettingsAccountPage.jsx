@@ -19,6 +19,7 @@ import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressBut
 import LinkAccount from 'stemn-shared/misc/Settings/LinkAccount/LinkAccount.jsx'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import Input from 'stemn-shared/misc/Input/Input/Input';
+import TextDisplayBox from 'stemn-shared/misc/TextDisplayBox/TextDisplayBox.jsx'
 
 
 
@@ -118,6 +119,12 @@ export const Component = React.createClass({
               linkFn={()=>authActions.authenticate('google')}
               unLinkFn={()=>authActions.unlink('google')}
               email={auth.user.accounts.google && auth.user.accounts.google.email ? auth.user.accounts.google.email : ''}/>
+          </div>
+
+          <div className={classes.panel}>
+            <h3>Beta</h3>
+            <p>Invite your friends to the <a className="link-primary" href="https://github.com/Stemn/Stemn-Desktop/releases">Stemn beta</a> using your access code below and get rewarded for each referral. Email <a className="link-primary" href="mailto:rewards@stemn.com">rewards@stemn.com</a> for more info.</p>
+            <TextDisplayBox>{user.data._id}</TextDisplayBox>
           </div>
 
           <div className={classes.panel}>
