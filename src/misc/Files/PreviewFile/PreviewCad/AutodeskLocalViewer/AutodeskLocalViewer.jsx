@@ -14,10 +14,13 @@ export default React.createClass({
       if(this.viewer && this.viewer.deregister){
         this.viewer.deregister();
       }
+      console.log(nextProps.path);
       this.viewer = autodeskViewerUtils.register(this.refs.cadCanvas, nextProps.linkKey);
       const filePath = `${nextProps.path}/1/model.svf`;
       const options = {
         'env' : 'Local',
+//        'document' : `http://developer-autodesk.github.io/translated-models/shaver/0.svf`
+//        'document' : `http://35.167.249.144/api/v1/sync/downloadRenderFile/5897e9418960f33210dd416c/5897e945b7333c08b6690475/5897e945b7333c08b6690474/1/model.svf?jacson=hello`
         'document' : `file://${filePath}`
       };
       Autodesk.Viewing.Initializer(options, () => {

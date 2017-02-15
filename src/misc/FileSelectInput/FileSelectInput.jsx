@@ -10,6 +10,7 @@ import classNames from 'classnames';
 import MdFolder from 'react-icons/md/folder';
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import { isDriveFileId, isDropboxFileId } from 'stemn-shared/misc/Files/utils';
+import TextDisplayBox from 'stemn-shared/misc/TextDisplayBox/TextDisplayBox.jsx'
 
 
 const propTypesObject = {
@@ -55,17 +56,20 @@ const FileSelectInput = React.createClass({
     const path = validatePath(value.path, value.fileId, provider);
 
     return (
-      <div className={classNames(classes.fileSelectInput, 'layout-row layout-align-start-center', {[classes.disabled] : disabled})} onClick={()=>{if(!disabled){this.showModal()}}}>
-        <div className={classes.text + ' flex'}>
+      <TextDisplayBox
+      disabled={disabled}
+      onClick={()=>{if(!disabled){this.showModal()}}}>
+        <div className='flex'>
           {path ? <span><span style={{textTransform: 'capitalize'}}>{provider}/</span>{path}</span> : 'Select the project folder'}
         </div>
         <SimpleIconButton>
           <MdFolder size="22" />
         </SimpleIconButton>
-      </div>
+      </TextDisplayBox>
     );
   }
 });
+
 
 function mapStateToProps() {
   return {};
