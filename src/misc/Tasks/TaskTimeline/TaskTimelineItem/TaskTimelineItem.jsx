@@ -18,11 +18,11 @@ const eventTextMap = {
   addAsignee    : (item, board) => {return <span>was assigned to this task</span>},
   removeAsignee : (item, board) => {return <span>was removed from assignees</span>},
   commit        : (item, board) => {
-    return <span>referenced this task in commit <Link path={`/project/${item.data.project._id}/feed`} show={true} query={{ item: item._id }} scope="main" className="link-primary">{item.data.summary}</Link></span>
+    return <span>referenced this task in commit <Link path={`/project/${item.data.project._id}/feed`} show closeModals query={{ item: item._id }} scope="main" className="link-primary">{item.data.summary}</Link></span>
   },
   completed     : (item, board) => {
     if(item.data.summary){
-      return <span>marked this as complete in commit <Link path={`/project/${item.data.project._id}/feed`} show={true} query={{ item: item._id }} scope="main" className="link-primary">{item.data.summary}</Link></span>
+      return <span>marked this as complete in commit <Link path={`/project/${item.data.project._id}/feed`} show closeModals query={{ item: item._id }} scope="main" className="link-primary">{item.data.summary}</Link></span>
     }
     else{
       return <span>marked this as complete</span>

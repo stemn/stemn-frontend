@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { omit } from 'lodash';
 import { push } from 'react-router-redux';
 import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js';
+import { closeAll } from 'stemn-shared/misc/Modal/Modal.actions.js';
 
 /***************************************************************************
 
@@ -26,13 +27,14 @@ const propTypesObject = {
   path: PropTypes.string,                   // Router path, eg -> '/projects/projectId/settings'
   query: PropTypes.object,                  // Query param object
   scope: PropTypes.string,                  // The renderer window to change, eg -> 'main' || 'menubar'
-  show: PropTypes.bool                      // Should the window show/focus?
+  show: PropTypes.bool,                     // Should the window show/focus?
+  closeModals: PropTypes.bool,              // Should all the modals close?
 };
 
 const Link = React.createClass({
   render() {
     const propNames = Object.keys(propTypesObject);
-    const { children, dispatch, path, query, scope, show } = this.props;
+    const { children, dispatch, path, query, scope, show, closeModals } = this.props;
 
     const link = () => {
       // Dispatch a standard react-router-redux action
@@ -45,9 +47,9 @@ const Link = React.createClass({
         state    : {meta : {scope: [scope]}}
       }))
       // Dispatch the show event if required
-      if(scope && show){
-        dispatch(ElectronWindowsActions.show(scope))
-      }
+      if (scope && show) dispatch(ElectronWindowsActions.show(scope))
+      // dispatch the closeModals
+      if (closeModals) dispatch(closeAll())
     };
 
     return (
