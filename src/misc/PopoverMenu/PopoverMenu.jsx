@@ -56,6 +56,10 @@ export default React.createClass({
         onMouseEnter : () => {this.toggleDelay(true)},
         onMouseLeave : () => {this.toggleDelay(false)}
       },
+      hoverSingleDelay : { // This will not trigger out when a child is triggered
+        onMouseEnter : () => {this.toggleDelay(true)},
+        onMouseOut   : () => {this.toggleDelay(false)}
+      },
       click          : {
         onClick      : () => {this.toggle(null)},
         onContextMenu : (e) => {

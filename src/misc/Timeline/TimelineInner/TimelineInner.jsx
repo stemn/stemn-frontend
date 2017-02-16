@@ -19,16 +19,9 @@ const EventMap = {
         <div className="layout-row layout-align-start-center">
           <img className={classes.popupImage} src={'https://stemn.com' + item.user.picture + '?size=thumb&crop=true'} />
           <div className="flex">
-            <b>{stringConcat.end(item.data.summary, 30)}</b>
-            <div>{timeFromNow} by {item.user.name}</div>
+            <b>Commit: {stringConcat.end(item.data.summary, 25)}</b>
+            <div className="text-grey-3">{timeFromNow} by {item.user.name}</div>
           </div>
-        </div>
-        <div>
-          { item.data.items.map(item => 
-            <div>
-              {item.data.revisionNumber}
-            </div>
-          )}
         </div>
       </div>
     )
@@ -40,7 +33,7 @@ const EventMap = {
         <img className={classes.popupImage} src={'https://stemn.com' + item.user.picture + '?size=thumb&crop=true'} />
         <div className="flex">
           <b>Revision: {item.data.revisionNumber}</b>
-          <div>{timeFromNow} by {item.user.name}</div>
+          <div className="text-grey-3">{timeFromNow} by {item.user.name}</div>
         </div>
       </div>
     )
@@ -78,18 +71,21 @@ const Component = React.createClass({
         // Order the items by the timestamp
         const subItemsOrdered = orderBy(item.data.items, subItem => (new Date(subItem.timestamp)).getTime(), 'asc');
         return (
-          <div key={item._id}  className={classNames(classes.dotGroup, 'layout-row layout-align-center-center')}>
-            {subItemsOrdered.map(subItem => (
-              <Dot 
-                key={subItem._id} 
-                item={subItem} 
-                isSelected={isSelected} 
-                selected={selected} 
-                onSelect={onSelect} 
-                preferPlace={preferPlace}
-              />
-            ))}
-          </div>
+          <PopoverMenu preferPlace={preferPlace || 'below'} trigger="hoverSingleDelay" tipSize={6}>
+            <div key={item._id}  className={classNames(classes.dotGroup, 'layout-row layout-align-center-center')}>
+              {subItemsOrdered.map(subItem => (
+                <Dot
+                  key={subItem._id}
+                  item={subItem}
+                  isSelected={isSelected}
+                  selected={selected}
+                  onSelect={onSelect}
+                  preferPlace={preferPlace}
+                />
+              ))}
+            </div>
+            <div>{PopupContent(item)}</div>
+          </PopoverMenu>
         )
       }
       else {
