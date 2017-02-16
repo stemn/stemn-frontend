@@ -34,3 +34,6 @@ export default ({projectId, fileId, revisionId, provider, timestamp}) => {
     dispatch(websocketJoinFile({renderId: cacheKey}))
   }
 }
+
+
+//`http://35.167.249.144/api/v1/sync/downloadRenderFile/${projectId}/${fileId}/${revisionId}`

@@ -8,6 +8,7 @@ import * as AuthActions               from 'stemn-shared/misc/Auth/Auth.actions.
 import * as ProjectsActions           from 'stemn-shared/misc/Projects/Projects.actions.js';
 import * as ModalActions              from 'stemn-shared/misc/Modal/Modal.actions.js';
 import * as SystemActions             from 'stemn-shared/desktop/System/System.actions.js';
+import { push } from 'react-router-redux';
 
 // Component Core
 import React from 'react';
@@ -41,6 +42,11 @@ export const Component = React.createClass({
   showProjectNewModal(){
     this.props.modalActions.showModal({modalType: 'PROJECT_NEW',})
   },
+  secretSearch(){
+    if (this.props.sidebar.searchString.length == 24) {
+      this.props.dispatch(push(`/project/${this.props.sidebar.searchString}`))
+    }
+  },
   render() {
     const { projectsActions, projects, auth, dispatch } = this.props;
     const sidebarStyle = classNames('layout-column', 'flex' ,'rel-box', styles.sidebar);
@@ -63,7 +69,7 @@ export const Component = React.createClass({
           <div className="layout-column flex">
             <div className={styles.sidebarSearch}>
               <Input model="sidebar.searchString" value={this.props.sidebar.searchString} className="dr-input text-ellipsis" type="text" placeholder="Search all projects"/>
-              <MdSearch className={styles.sidebarSearchIcon} size="25"/>
+              <MdSearch className={styles.sidebarSearchIcon} size="25" onClick={this.secretSearch}/>
             </div>
             <div className="scroll-box flex">
               {projects.userProjects.data && projects.userProjects.data.length == 0 ? <SidebarProjectButton  item={{name: 'Create a project'}} clickFn={this.showProjectNewModal} /> : null }

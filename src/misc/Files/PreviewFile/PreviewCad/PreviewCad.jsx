@@ -10,42 +10,6 @@ import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOver
 import modelLocked    from 'stemn-shared/assets/images/pure-vectors/model-locked.svg';
 import modelGear      from 'stemn-shared/assets/images/pure-vectors/model-gear.svg';
 
-//export const GetStatusOfUrn =  React.createClass({
-//  getInitialState () {
-//    return {
-//      status: 'pending',
-//    }
-//  },
-//  componentDidMount() {
-//    this.checkStatus()
-//  },
-//  checkStatus(){
-//    previewCadUtils.getViewStatus(this.props.urn).then(response => {
-//      this.setState({status: response.data.status})
-//    }).catch(error=>{
-//      this.setState({status: 'failed'})
-//    })
-//  },
-//  render() {
-//    const { urn, token } = this.props;
-//    const { status } = this.state;
-//    if(status == 'success'){
-//      return <AutodeskViewer urn={urn} token={token} />
-//    }
-//    else if(status == 'failed'){
-//      return (
-//        <div className="layout-column layout-align-center-center flex">
-//          <img style={{width: '100px'}} src={modelGear}/>
-//          <div className="text-title-4" style={{marginBottom: '10px'}}>Something went wrong.</div>
-//          <div className="text-title-5">Your model could not be processed for viewing.</div>
-//        </div>
-//      )
-//    }
-//    else{
-//      return <div className="rel-box flex"><LoadingOverlay show={true}>Conversion underway...</LoadingOverlay></div>
-//    }
-//  }
-//})
 
 export default React.createClass({
   getInitialState () {
