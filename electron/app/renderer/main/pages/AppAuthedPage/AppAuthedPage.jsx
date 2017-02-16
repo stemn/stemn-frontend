@@ -29,7 +29,7 @@ export const Component = React.createClass({
     }
 
     // If the user is not in the beta... Pop the beta modal.
-    if (!this.props.auth.user.beta) {
+    if (this.props.auth.user && this.props.auth.user._id && !this.props.auth.user.beta) {
       this.props.dispatch(showModal({
         modalType: 'BETA',
         modalOptions: {
