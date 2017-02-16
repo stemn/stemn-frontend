@@ -55,7 +55,7 @@ export const Component = React.createClass({
     if(has(nextProps, 'location.query.item')){
       if(!has(prevProps, 'location.query.item') || nextProps.location.query.item != prevProps.location.query.item){
         const itemFromQueryParams = this.props.timeline.data.find(item => item._id == nextProps.location.query.item);
-        if(itemFromQueryParams){this.selectTimelineItem(itemFromQueryParams)}
+        if (itemFromQueryParams) {this.selectTimelineItem(itemFromQueryParams)}
       }
     }
   },
