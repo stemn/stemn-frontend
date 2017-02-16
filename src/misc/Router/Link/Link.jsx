@@ -39,14 +39,14 @@ const Link = React.createClass({
     const link = () => {
       // Dispatch a standard react-router-redux action
       // We include the scope on the state.meta
-      // This state.meta is movie up to the root action object
+      // This state.meta is moved up to the root action object
       // inside the Router.middleware
       dispatch(push({
         pathname : path,
         query    : query,
         state    : {meta : {scope: [scope]}}
-      }))
-      // Dispatch the show event if required
+      }));
+//      // Dispatch the show event if required
       if (scope && show) dispatch(ElectronWindowsActions.show(scope))
       // dispatch the closeModals
       if (closeModals) dispatch(closeAll())
