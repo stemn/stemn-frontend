@@ -20,9 +20,9 @@ module.exports = {
       'node_modules'
     ],
     alias: {
-      'models': path.join(__dirname, '../src/client/assets/javascripts/models'),
       'stemn-shared': path.resolve(__dirname, '../node_modules/stemn-frontend-shared/src'),
-      'theme': path.resolve(__dirname, '../src/client/assets/styles/modules/theme.css')
+      'theme': path.resolve(__dirname, '../src/client/assets/styles/modules/theme.css'),
+      'route-actions': path.resolve(__dirname, '../src/client/assets/javascripts/pages/routeActions.js'),
     },
     extensions: ['.js', '.jsx', '.json', '.scss']
   },
@@ -39,14 +39,33 @@ module.exports = {
   ],
   module: {
     loaders: [
+      // JSON
+      {
+      test: /\.json$/,
+        loader: 'json-loader',
+      },
       // JavaScript / ES6
       {
         test: /\.jsx?$/,
         include: [
           path.resolve(__dirname, '../src/client/assets/javascripts'),
           path.resolve(__dirname, '../node_modules/stemn-frontend-shared'),
-          path.resolve(__dirname, '../node_modules/react-icons/md')
+          path.resolve(__dirname, '../node_modules/react-icons'),
+          path.resolve(__dirname, '../node_modules/react-popover-wrapper'),
+          
         ],
+        query: {
+          presets: [
+            'babel-preset-es2015',
+            'babel-preset-react',
+            'babel-preset-stage-0'
+          ].map(require.resolve),
+          plugins: [
+            'babel-plugin-transform-runtime',
+            'babel-plugin-transform-decorators-legacy',
+            'react-hot-loader/babel'
+          ].map(require.resolve),
+        },
         loader: 'babel'
       },
       // Images

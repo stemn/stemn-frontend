@@ -11,6 +11,8 @@ const GLOBALS = {
   GLOBAL_ENV: {
     APP_TYPE: JSON.stringify('web'),
     NODE_ENV: JSON.stringify('development'),
+    WEBSITE_URL: JSON.stringify('http://stemn.com'),
+    API_SERVER: JSON.stringify('http://35.167.249.144'),
   },
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'true'))
 };

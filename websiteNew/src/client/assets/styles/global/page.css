@@ -1,12 +1,19 @@
-body {
-  background: white;
-  margin: 0px;
-  font-family: 'Open Sans';
-}
-
 html {
   box-sizing: border-box;
 }
 *, *:before, *:after {
   box-sizing: inherit;
 }
+
+body {
+  color: black;
+  min-height: 100vh;
+  background-color: white;
+  font-family: Open Sans;
+/*  overflow-y: hidden;*/
+  overflow-x: hidden;
+  margin: 0px;
+  font-size: 13px;
+  padding: 0px;
+}
+

@@ -1,5 +1,13 @@
 .header {
-  background: rgb(28, 30, 34);
+  background: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   height: 60px;
   color: white;
+}
+
+.logo {
+  height: 45px;
+}
+.logo img {
+  height: 100%;
 }

@@ -8,6 +8,9 @@ import throttle      from 'stemn-shared/redux/middleware/throttle/throttle.middl
 import httpPackage   from 'stemn-shared/redux/middleware/httpPackage/httpPackage.middleware.js';
 import httpTransform from 'stemn-shared/redux/middleware/httpTransform/httpTransform.middleware.js';
 import createLogger  from 'redux-logger';
+import { routerMiddleware } from 'react-router-redux'
+import { browserHistory } from 'react-router'
+
 
 // Other
 import rootReducer   from '../reducer';
@@ -26,7 +29,8 @@ const middlewares = [
   httpPackage,
   httpTransform,
   promise(),
-  createLogger({collapsed: true}), 
+  createLogger({collapsed: true}),
+  routerMiddleware(browserHistory),
   require('redux-immutable-state-invariant')()
 ];
 
@@ -40,11 +44,11 @@ const enhancer = compose(
   applyMiddleware(...middlewares),
   window.devToolsExtension ? window.devToolsExtension() : DevTools.instrument(),
   // Optional. Lets you write ?debug_session=<key> in address bar to persist debug sessions
-  persistState(getDebugSessionKey())
+  persistState(getDebugSessionKey()),
 );
 
 export default function configureStore(initialState) {
-  const store = createStore(rootReducer, initialState, enhancer);
+    const store = createStore(rootReducer, initialState, enhancer);
 
   // Enable hot module replacement for reducers (requires Webpack or Browserify HMR to be enabled)
   if (module.hot) {
@@ -53,6 +57,6 @@ export default function configureStore(initialState) {
       store.replaceReducer(nextReducer);
     });
   }
-
+  
   return store;
 }

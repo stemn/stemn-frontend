@@ -1,20 +1,35 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc';
 
-import Settings from './Settings';
+import { getProject } from 'stemn-shared/misc/Projects/Projects.actions';
 
-const stateToProps = () => ({});
+import Project from './Project';
+
+const stateToProps = (state, { params }) => ({
+  project: state.projects.data[params.stub]
+});
 
 const dispatchToProps = {
-
+  getProject
 };
 
+const fetchConfigs = [{
+  hasChanged: 'params.stub',
+  onChange: (props) => {
+    props.getProject({projectId: props.params.stub})
+  }
+}];
+
 @connect(stateToProps, dispatchToProps)
-export default class LoginContainer extends Component {
+@fetchDataHoc(fetchConfigs)
+class ProjectContainer extends Component {
   render() {
     return (
-      <Settings {...this.props} />
+      <Project {...this.props} />
     );
   }
 }
+
+export default ProjectContainer
