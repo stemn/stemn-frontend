@@ -1,0 +1,95 @@
+.background{
+  background-position: center center;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  transition: all 0.2s ease;
+}
+.center{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+.backgroundBlurred{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-position: center center;
+  background-size: cover;
+  transition: all 0.2s ease;
+}
+.mask{
+  overflow: hidden;
+  width: 750px;
+  height: 500px;
+  filter: blur(10px);
+}
+.content{
+  width: 750px;
+  height: 500px;
+  position: absolute;
+}
+.brandPanel{
+  width: 300px;
+  background: rgba(255, 255, 255, 0.5);
+}
+.formPanel{
+  padding: 30px;
+  background: rgba(0, 0, 0, 0.3);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.input{
+  margin-top: 5px;
+  padding: 10px;
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: transparent;
+}
+.input:focus{
+  outline: none;
+  border: 1px solid rgba(255, 255, 255, 1);
+}
+
+.textDivider{
+  position: relative;
+  padding: 30px 0;
+}
+.textDivider:after, .textDivider:before{
+  content: ' ';
+  border-top: 1px solid rgba(255, 255, 255, 0.6);  
+  width: 45%;
+  position: absolute;
+}
+.textDivider:before{
+  left: 0;
+}
+.textDivider:after{
+  right: 0;
+}
+.textDivider div{
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 300;
+}
+.title{
+  color: white;
+}
+.nextBg{
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  z-index: 2;
+  opacity: 0.5;
+}
