@@ -1,0 +1,50 @@
+
+.header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background: white;
+}
+
+.headerInner {
+  padding-bottom: 20px;
+  margin-top: -1px;
+}
+.headerBorder {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 20px;
+}
+
+.blurb {
+  padding-bottom: 15px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.files {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: white;
+}
+
+.tags > a {
+  margin-bottom: 0
+}
+
+.infoBoxes {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+.infoBoxes > div {
+  padding: 20px;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 12px;
+}
+.infoBoxes > div svg {
+  width: 20px;
+  height: 20px;
+  color: rgba(0, 0, 0, 0.2);
+  margin-right: 15px;
+}
+.infoBoxes > div:first-child {
+  border-left: none
+}

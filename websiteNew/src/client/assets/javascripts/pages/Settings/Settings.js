@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import NavPill from 'stemn-shared/misc/Buttons/NavPill/NavPill';
 import NavPillContainer from 'stemn-shared/misc/Buttons/NavPillContainer';
 import StandardLayout from 'layout/StandardLayout';
-import { Container, Row, Col } from 'stemn-shared/misc/Layout';
+import { Row, Col } from 'stemn-shared/misc/Layout';
 
 class Settings extends Component {
   render() {

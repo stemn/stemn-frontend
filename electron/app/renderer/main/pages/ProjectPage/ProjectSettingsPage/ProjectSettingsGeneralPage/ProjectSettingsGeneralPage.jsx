@@ -16,18 +16,10 @@ import classes from '../ProjectSettingsPage.css'
 // Sub Components
 import { actions } from 'react-redux-form';
 
-import Tabs from 'stemn-shared/misc/Tabs/Tabs'
-import Toggle from 'stemn-shared/misc/Input/Toggle/Toggle'
-import UserSearch from 'stemn-shared/misc/UserSearch/UserSearch.container.js'
-import TeamMember from 'stemn-shared/misc/Project/TeamMember/TeamMember.jsx'
-import ProjectPermissionsRadio from 'stemn-shared/misc/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx'
-import ProjectLinkRemote from 'stemn-shared/misc/Project/ProjectLinkRemote/ProjectLinkRemote.jsx'
-import FileSelectInput from 'stemn-shared/misc/FileSelectInput/FileSelectInput.jsx'
-import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
-import TaskLabelsEdit from 'stemn-shared/misc/Tasks/TaskLabelsEdit/TaskLabelsEdit.jsx'
-import NavPill from 'stemn-shared/misc/Buttons/NavPill/NavPill'
-import Input from 'stemn-shared/misc/Input/Input/Input'
-import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea';
+import GeneralSettings from 'stemn-shared/misc/ProjectSettings/GeneralSettings';
+import DeleteSettings from 'stemn-shared/misc/ProjectSettings/DeleteSettings';
+import CloudSettings from 'stemn-shared/misc/ProjectSettings/CloudSettings';
+import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -45,166 +37,54 @@ export const Component = React.createClass({
   // Mounting
   componentWillMount() { onMount(this.props) },
   componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
-
-  selectFn(selection){
-    if(!this.props.project.data.team.find((item)=>item._id == selection._id)){
-      this.props.ProjectsActions.addTeamMember({
-        projectId: this.props.project.data._id,
-        user: selection
-      })
-    }
-  },
-  changePermissionsFn({role, userId}){
-    this.props.ProjectsActions.changeUserPermissions({
-      role,
-      userId,
-      projectId: this.props.project.data._id,
+  confirmLinkRemote() {
+    const { project, auth } = this.props;
+    ProjectsActions.confirmLinkRemote({
+      userId: auth.user._id,
+      isConnected: project.data.remote.connected,
+      projectId: project.data._id,
+      provider: project.formModels.fileStore.remote.provider,
+      prevProvider: project.data.remote.provider,
+      id: project.formModels.fileStore.remote.root.fileId,
+      path: project.formModels.fileStore.remote.root.path,
     })
   },
-  removeTeamMemberFn({userId}){
-    this.props.ProjectsActions.removeTeamMember({
-      userId,
+  deleteProject() {
+    ProjectsActions.confirmDeleteProject({
       projectId: this.props.project.data._id,
-    })
-  },
-  linkRemote(){
-    const { auth, project } = this.props;
-    // This is not wrapped in dispach!
-    if(!project.formModels.fileStore.remote.provider){
-      return {
-        type: 'ALIASED',
-        aliased: true,
-        payload: {
-          functionAlias: 'ProjectsActions.unlinkRemote',
-          functionInputs: {
-            projectId: project.data._id,
-            prevProvider: project.data.remote.provider,
-            userId : auth.user._id
-          }
-        }
-      }
-    }
-    else{
-      return {
-        type: 'ALIASED',
-        aliased: true,
-        payload: {
-          functionAlias: 'ProjectsActions.linkRemote',
-          functionInputs: {
-            projectId: project.data._id,
-            provider: project.formModels.fileStore.remote.provider,
-            path: project.formModels.fileStore.remote.root.path,
-            id: project.formModels.fileStore.remote.root.fileId,
-            prevProvider: project.data.remote.provider,
-            userId : auth.user._id
-          }
-        }
-      }
-    }
-  },
-  confirmLinkRemote(){
-    // If the store is connected - we confirm the change
-    if(this.props.project.data.remote.connected){
-      this.props.ModalActions.showConfirm({
-        message: 'Changing your file store <b>will delete your entire commit and change history.</b> Are you sure you want to do this? There is no going back.',
-        modalConfirm: this.linkRemote()
-      })
-    }
-    // Else change straight away.
-    else{
-      this.props.dispatch(this.linkRemote())
-    }
-  },
-  saveProject(){
-    this.props.ProjectsActions.saveProject({
-      project: this.props.project.data
+      name: this.props.project.data.name
     })
   },
   render() {
     const { entityModel, project, ProjectsActions, dispatch } = this.props;
     return (
       <div>
-        <div className={classes.panel}>
-         <h3>General Settings</h3>
-         <p>Set your project name and blurb.</p>
-         <Input
-           model={`${entityModel}.data.name`}
-           value={project.data.name}
-           className="dr-input"
-           type="text"
-           placeholder="Project Name"
-         />
-         <br />
-         <Textarea
-           model={`${entityModel}.data.summary`}
-           value={project.data.summary}
-           className="dr-input"
-           style={{minHeight: '60px'}}
-           placeholder="Project Summary"
-         />
-         <br />
-         <ProjectPermissionsRadio model={`${entityModel}.data.permissions.projectType`} value={has(project, 'data.permissions.projectType') ? project.data.permissions.projectType : ''} />
-         <div className="layout-row layout-align-end">
-           <ProgressButton
-           className="primary"
-           onClick={()=>this.saveProject()}
-           loading={project.savePending}
-           >Update Project</ProgressButton>
-         </div>
-       </div>
-       <div className={classes.panel}>
-         <h3>Cloud Storage Folder</h3>
-         <p>Select your project's cloud storage folder. STEMN will track all changes to files in this folder.</p>
-         { has(project, 'formModels.fileStore.remote')
-         ? <div>
-             <ProjectLinkRemote model={`${entityModel}.formModels.fileStore.remote.provider`} value={project.formModels.fileStore.remote.provider}/>
-             <br />
-             <FileSelectInput
-               projectId={project.data._id}
-               provider={project.formModels.fileStore.remote.provider}
-               model={`${entityModel}.formModels.fileStore.remote.root`}
-               value={project.formModels.fileStore.remote.root || {}}
-               disabled={!(has(project, 'formModels.fileStore.remote.provider') && ['drive', 'dropbox'].includes(project.formModels.fileStore.remote.provider))}
-             />
-           </div>
-         : null }
-         <br />
-         <div className="layout-row layout-align-end">
-           <ProgressButton
-           className="primary"
-           onClick={()=>this.confirmLinkRemote()}
-           loading={project.linkPending}
-           error={project.linkRejected}
-           >Update Folder</ProgressButton>
-         </div>
-       </div>
-
-
-       <div className={classes.panel}>
-         <h3>Delete Project</h3>
-         <p>Once you delete a project, there is no going back. Please be certain.</p>
-         <div className="layout-row layout-align-end">
-            <ProgressButton className="warn"
-              onClick={()=>ProjectsActions.confirmDeleteProject({projectId: project.data._id, name: project.data.name})}>
-              Delete Project
-            </ProgressButton>
-         </div>
-       </div>
+        <InfoPanel>
+          <GeneralSettings
+            project={ project }
+            entityModel={ entityModel }
+            saveProject={ this.props.ProjectsActions.saveProject }
+          />
+        </InfoPanel>
+        <InfoPanel>
+          <CloudSettings
+            project={ project }
+            entityModel={ entityModel }
+            confirmLinkRemote={ this.confirmLinkRemote }
+          />
+        </InfoPanel>
+        <InfoPanel>
+          <DeleteSettings
+            deleteProject={ this.deleteProject }
+          />
+        </InfoPanel>
      </div>
     );
   }
 });
 
-//       <div className={classes.panel}>
-//         <h3>Project Type</h3>
-//         <p>Is this a public or private project? Change your project to public to open-source your work.</p>
-//       </div>
 
-
-
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps({auth, projects}, otherProps) {
   return {

@@ -1,5 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import Header from '../modules/Header'
+import Header from 'modules/Header';
+import Footer from 'modules/Footer';
+
+import classNames from 'classnames';
 import { Container } from 'stemn-shared/misc/Layout';
 
 class StandardLayout extends Component {
@@ -16,11 +19,15 @@ class StandardLayout extends Component {
     }
   }
   render() {
-    const { children, contained, style, ...otherProps } = this.props;
+    const { children, contained, className, style, ...otherProps } = this.props;
+    const standardClasses = 'layout-column flex'
     return (
-      <div { ...otherProps }>
+      <div className={ classNames(standardClasses, className) } { ...otherProps }>
         <Header />
-        { this.renderInner(children, contained, style) }
+        <div className="flex">
+           { this.renderInner(children, contained, style) }
+        </div>
+        <Footer />
       </div>
 
     )

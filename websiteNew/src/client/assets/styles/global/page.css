@@ -7,8 +7,8 @@ html {
 
 body {
   color: black;
+  background: rgba(0, 0, 0, 0.02);
   min-height: 100vh;
-  background-color: white;
   font-family: Open Sans;
 /*  overflow-y: hidden;*/
   overflow-x: hidden;

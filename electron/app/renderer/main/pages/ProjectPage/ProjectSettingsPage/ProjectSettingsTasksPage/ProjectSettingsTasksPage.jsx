@@ -15,10 +15,9 @@ import classNames from 'classnames';
 import classes from '../ProjectSettingsPage.css'
 
 // Sub Components
-import { actions } from 'react-redux-form';
 
-import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
-import TaskLabelsEdit from 'stemn-shared/misc/Tasks/TaskLabelsEdit/TaskLabelsEdit.jsx'
+import TasksSettings from 'stemn-shared/misc/ProjectSettings/TasksSettings';
+import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -44,32 +43,6 @@ const TasksPanel = React.createClass({
       })
     }, 1)
   },
-  render() {
-    const { boardModel, board } = this.props;
-    if(has(board, 'forms.labels')){
-      return(
-        <div className={classes.panel}>
-          <h3>Task Labels</h3>
-          <p>Labels are used to categorize tasks. If you delete a label, it will be removed from all assigned tasks.</p>
-          <TaskLabelsEdit model={`${boardModel}.forms.labels`} value={board.forms.labels} />
-          <br />
-          <div className="layout-row">
-            <div className="flex"></div>
-            <ProgressButton
-              className="primary"
-              onClick={this.submit}
-              loading={board.savePending}>
-              Save Labels
-            </ProgressButton>
-          </div>
-        </div>
-      );
-    }
-    else{
-      return null
-    }
-  }
-
 });
 
 export const Component = React.createClass({
@@ -86,14 +59,14 @@ export const Component = React.createClass({
     const { boardModel, board, dispatch, tasksActions } = this.props;
     return (
       <div>
-       { has(board, 'data.labels')
-       ? <TasksPanel
-           boardModel={boardModel}
-           board={board}
-           dispatch={dispatch}
-           tasksActions={tasksActions}
+       <InfoPanel>
+         <TasksSettings
+           boardModel={ boardModel }
+           board={ board }
+           dispatch={ dispatch }
+           updateBoard={ tasksActions.updateBoard }
          />
-       : null }
+       </InfoPanel>
       </div>
     )
   }

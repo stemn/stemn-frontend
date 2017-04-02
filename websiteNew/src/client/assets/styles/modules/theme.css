@@ -1,5 +1,7 @@
 @value primary: rgb(68, 154, 211);
 @value primary-2: rgb(64, 129, 173);
+@value primaryLight1: rgba(0, 152, 255, 0.08);
+@value primaryLight2: rgba(0, 152, 255, 0.12);
 
 @value secondary: rgba(0, 0, 0, 0.7);
 @value secondary-2: rgba(0, 0, 0, 0.8);

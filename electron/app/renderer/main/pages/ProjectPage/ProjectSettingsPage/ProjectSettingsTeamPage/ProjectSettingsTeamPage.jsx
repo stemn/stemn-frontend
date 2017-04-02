@@ -15,29 +15,12 @@ import classes from '../ProjectSettingsPage.css'
 // Sub Components
 import { actions } from 'react-redux-form';
 
-import UserSearch from 'stemn-shared/misc/UserSearch/UserSearch.container.js'
-import TeamMember from 'stemn-shared/misc/Project/TeamMember/TeamMember.jsx'
-import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
+import TeamSettings from 'stemn-shared/misc/ProjectSettings/TeamSettings';
+import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
 
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-
-const onMount = (nextProps, prevProps) => {
-  if(nextProps.project && nextProps.project.data){
-    if(!prevProps || nextProps.project.data._id !== prevProps.project.data._id){
-      // Init the filestore form model
-      // nextProps.dispatch(actions.load(`${nextProps.entityModel}.formModels.fileStore.remote`, nextProps.project.data.remote))
-    }
-  }
-}
 
 export const Component = React.createClass({
-
-  // Mounting
-  componentWillMount() { onMount(this.props) },
-  componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
-
   selectFn(selection){
     if(!this.props.project.data.team.find((item)=>item._id == selection._id)){
       this.props.ProjectsActions.addTeamMember({
@@ -65,43 +48,23 @@ export const Component = React.createClass({
     })
   },
   render() {
-    const { entityModel, project, ProjectsActions, dispatch } = this.props;
-    const PageStyles = {
-      padding: '20px 40px'
-    }
+    const { project } = this.props;
 
     return (
-      <div className={classes.panel}>
-        <h3>Team Members</h3>
-        <p>Invite your team to your project. STEMN adds your team members to your shared cloud storage folder.</p>
-        <UserSearch select={this.selectFn} />
-        <br />
-        {project.data.team.map((item) => (
-          <div style={{marginBottom: '15px'}}  key={item._id}>
-            <TeamMember
-              item={item}
-              changePermissionsFn={this.changePermissionsFn}
-              removeTeamMemberFn={this.removeTeamMemberFn}
-            />
-          </div>)
-        )}
-        <br />
-        <div className="layout-row layout-align-end">
-          <ProgressButton
-           className="primary"
-           onClick={this.saveProject}
-           loading={project.savePending}>
-            Update Team
-          </ProgressButton>
-        </div>
-      </div>
+      <InfoPanel>
+        <TeamSettings
+          changePermissionsFn={ this.changePermissionsFn }
+          project={ project }
+          removeTeamMemberFn={ this.removeTeamMemberFn }
+          saveProject={ this.saveProject }
+          selectFn={ this.selectFn }
+        />
+      </InfoPanel>
     );
   }
 });
 
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CONTAINER /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps({projects}, otherProps) {
   return {
