@@ -1,4 +1,7 @@
-const rootDomain = 'http://localhost:49554';
+const rootDomain = GLOBAL_ENV.APP_TYPE == 'web'
+? window.location.origin
+: 'http://localhost:49554';
+
 
 export const oauthCreds = {
   facebook: {

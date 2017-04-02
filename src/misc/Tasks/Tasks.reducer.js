@@ -10,6 +10,7 @@ const initialState = {
     /********************************
     boardId: {
       data: {the board data},
+      forms: {}
       searchString: 'Some search string'
       layout: 'board' || 'list'
       loading: true || false

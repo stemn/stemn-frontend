@@ -1,4 +1,4 @@
-@value border2, border1, bg1 from "theme";
+@value primary, border2, primaryLight1, primaryLight2, border1, bg1 from "theme";
 
 .tag{
   border: 1px solid border1;
@@ -12,4 +12,15 @@
 }
 .tag:hover{
   border: 1px solid border2;
+}
+
+.tag:global(.primary){
+  background: primaryLight1;
+  color: primary;
+  border: none;
+}
+
+.tag:hover:global(.primary){
+  background: primaryLight2;
+  border: none;
 }

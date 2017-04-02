@@ -114,12 +114,10 @@ export default React.createClass({
           onClick={nextBackground}
           title="Change background"
           color="white">
-          ICON HERE
+          <MdPhoto size={24}/>
         </SimpleIconButton>
       </div>
     )          
   }
 });
-
-//          <MdPhoto size={24}/>
 

@@ -2,23 +2,20 @@ import React, { Component } from 'react';
 
 import tabClasses from './Tabs.css';
 
-
-// Styles
 import classNames from 'classnames';
 
 export default (props) => {
+  const rootClasses = classNames(tabClasses.tabs, { 
+    [tabClasses.tabsLg] : props.size === 'lg',
+    [tabClasses.noLine] : props.noline,
+  }, props.className);
+  const innerClasses = classNames('tabs-inner', 'layout-row', tabClasses.inner);
+  
   return (
-    <div className={classNames(tabClasses.tabs, { [tabClasses.tabsLg] : props.size == 'lg' })}>
-      <div className={classNames('tabs-inner', 'flex', 'layout-row', tabClasses.inner)}>
-        {props.children}
+    <div className={ rootClasses }>
+      <div className={ innerClasses }>
+        { props.children }
       </div>
     </div>
   );
 }
-
-//      <div class="overflow-arrow overflow-arrow-left" layout="column" layout-align="center">
-//          <md-icon md-svg-icon="chevron-left"></md-icon>
-//      </div>
-//      <div class="overflow-arrow overflow-arrow-right" layout="column" layout-align="center">
-//          <md-icon md-svg-icon="chevron-right"></md-icon>
-//      </div>

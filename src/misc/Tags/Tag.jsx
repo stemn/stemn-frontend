@@ -1,7 +1,7 @@
 // Component Core
 import React from 'react';
+import classNames from 'classnames';
 import { middle as middleConcat } from 'stemn-shared/utils/stringConcat';
-import { omit } from 'lodash';
 
 // Styles
 import classes from './Tag.css';
@@ -10,9 +10,9 @@ import classes from './Tag.css';
 
 export default React.createClass({
   render() {
-    const { text } = this.props;
+    const { text, className, ...otherProps } = this.props;
     return (
-      <a className={classes.tag} { ...omit(this.props, ['text']) } >
+      <a className={classNames(classes.tag, className)} { ...otherProps }>
         { middleConcat(text, 30) }
       </a>
     )

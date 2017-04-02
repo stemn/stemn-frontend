@@ -95,8 +95,8 @@ export function getEvents({taskId}){
   }
 }
 
-export function updateBoard({board}){
-  return {
+export const updateBoard({ board }) => {
+  dispatch({
     type: 'TASKS/UPDATE_BOARD',
     payload: http({
       method: 'PUT',
@@ -106,8 +106,13 @@ export function updateBoard({board}){
     meta: {
       cacheKey: board._id
     }
-  }
+  })
 }
+
+export const editBoard({ model, value }) => ({
+  type: 'TASKS/EDIT_BOARD',
+  payload: board
+})
 
 export function getTask({taskId}) {
   return {

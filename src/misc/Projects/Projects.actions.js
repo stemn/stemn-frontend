@@ -140,6 +140,56 @@ export function removeTeamMember({projectId, userId}) {
   };
 }
 
+export const linkRemoteAlias = ({ id, path, prevProvider, project,  projectId, provider, userId }) => {
+  // This will return a plain object with an alias function
+  // This is used in modal callbacks.
+  if(!provider){
+    return {
+      type: 'ALIASED',
+      aliased: true,
+      payload: {
+        functionAlias: 'ProjectsActions.unlinkRemote',
+        functionInputs: {
+          prevProvider,
+          projectId,
+          userId,
+        }
+      }
+    }
+  }
+  else{
+    return {
+      type: 'ALIASED',
+      aliased: true,
+      payload: {
+        functionAlias: 'ProjectsActions.linkRemote',
+        functionInputs: {
+          id,
+          path,
+          prevProvider,
+          projectId,
+          provider,
+          userId,
+        }
+      }
+    }
+  }
+}
+
+export const confirmLinkRemote = ({ isConnected, id, path, prevProvider, project,  projectId, provider, userId }) => (dispatch) => {
+  // If the store is connected - we confirm the change
+  if(isConnected){
+    dispatch(ModalActions.showConfirm({
+      message: 'Changing your file store <b>will delete your entire commit and change history.</b> Are you sure you want to do this? There is no going back.',
+      modalConfirm: linkRemoteAlias({ id, path, prevProvider, project,  projectId, provider, userId })
+    }))
+  }
+  // Else change straight away.
+  else{
+    dispatch(linkRemoteAlias({ id, path, prevProvider, project,  projectId, provider, userId }))
+  }
+};
+
 
 export function linkRemote({projectId, provider, path, id, prevProvider, userId}) {
   return (dispatch) => {
