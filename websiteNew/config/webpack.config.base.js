@@ -1,5 +1,4 @@
-// Common Webpack configuration used by webpack.config.development and webpack.config.production    
-const fs = require('fs');
+// Common Webpack configuration used by webpack.config.development and webpack.config.production
 const path = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
@@ -52,7 +51,6 @@ module.exports = {
           path.resolve(__dirname, '../node_modules/stemn-frontend-shared'),
           path.resolve(__dirname, '../node_modules/react-icons'),
           path.resolve(__dirname, '../node_modules/react-popover-wrapper'),
-          
         ],
         query: {
           presets: [
@@ -61,7 +59,7 @@ module.exports = {
             'babel-preset-stage-0'
           ].map(require.resolve),
           plugins: [
-            'babel-plugin-transform-runtime',
+            // 'babel-plugin-transform-runtime',
             'babel-plugin-transform-decorators-legacy',
             'react-hot-loader/babel'
           ].map(require.resolve),
