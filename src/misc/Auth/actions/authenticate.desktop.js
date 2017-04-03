@@ -1,4 +1,4 @@
-import { oauthCreds } from './Auth.config.js';
+import { oauthCreds } from '../Auth.config.js';
 import { shell } from 'electron';
 import querystring from 'querystring';
 
