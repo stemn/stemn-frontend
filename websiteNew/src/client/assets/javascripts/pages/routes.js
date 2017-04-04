@@ -49,10 +49,11 @@ export default (
     <Route path="/files/:projectId/:fileId"    component={File} />
     <Route path="project/:stub"                component={ProjectView}>
       <IndexRoute                              component={ProjectOverview} />
+      <Route path="files/:path"                component={ProjectOverview} />
       <Route path="tasks"                      component={ProjectTasks} />
-      <Route path="tasks/:stub"                component={ProjectTask} />
+      <Route path="tasks/:taskId"              component={ProjectTask} />
       <Route path="commits"                    component={ProjectCommits} />
-      <Route path="commits/:stub"              component={ProjectCommit} />
+      <Route path="commits/:commitId"          component={ProjectCommit} />
       <Route path="settings"                   component={ProjectSettings}>
         <IndexRoute                            component={ProjectSettingsGeneral} />
         <Route path="tasks"                    component={ProjectSettingsTasks} />

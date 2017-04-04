@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import * as ProjectsActions        from 'stemn-shared/misc/Projects/Projects.actions.js';
+import { push as pushRoute } from 'react-router-redux';
 
 import ProjectOverview from './ProjectOverview';
 
@@ -17,11 +17,13 @@ const stateToProps = ({ projects, projectSettings, fileList }, { params, locatio
     project,
     entityModel,
     path,
-    files
+    files,
+    isFilePage: location.pathname.includes('/files/')
   };
 }
 
 const dispatchToProps = {
+  pushRoute
 };
 
 @connect(stateToProps, dispatchToProps)

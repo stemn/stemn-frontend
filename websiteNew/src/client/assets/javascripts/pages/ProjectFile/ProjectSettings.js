@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 
 import classNames from 'classnames';
-import classes from './ProjectSettings.css'
+import classes from './ProjectCommit.css'
 
-import NavPill from 'stemn-shared/misc/Buttons/NavPill/NavPill';
-import NavPillContainer from 'stemn-shared/misc/Buttons/NavPillContainer';
 import { Row, Col, Container } from 'stemn-shared/misc/Layout';
 
-export default class ProjectSettings extends Component {
+export default class ProjectCommit extends Component {
   render() {
     const { children, project } = this.props;
     const baseUrl = `/project/${project.data._id}/settings`;
@@ -16,11 +14,7 @@ export default class ProjectSettings extends Component {
         <Container>
           <Row className="layout-row">
             <Col style={ { width: '250px' } }>
-              <NavPillContainer>
-                <NavPill to={ baseUrl } onlyActiveOnIndex={true}>General Settings</NavPill>
-                <NavPill to={ baseUrl + '/tasks' }>Task Settings</NavPill>
-                <NavPill to={ baseUrl + '/team'}>Team Settings</NavPill>
-              </NavPillContainer>
+
             </Col>
             <Col className="flex">
               { children }

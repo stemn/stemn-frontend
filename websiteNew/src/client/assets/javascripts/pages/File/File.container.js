@@ -2,45 +2,53 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc';
 
-import { getMeta } from 'stemn-shared/misc/Files/Files.actions.js';
+import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js';
+import { getMeta, getRelatedTasks } from 'stemn-shared/misc/Files/Files.actions.js';
+import { push as pushRoute } from 'react-router-redux';
+
 import File from './File';
 
-const stateToProps = ({ files }, { params }) => {
+const stateToProps = ({ files, syncTimeline }, { params }) => {
   const { projectId, fileId, revisionId } = params;
   const cacheKey = `${fileId}-${revisionId}`;
   return {
     cacheKey,
     fileId,
-    fileMeta: files.fileMeta[cacheKey],
+    file: files.fileMeta[cacheKey],
     projectId,
     revisonId: revisionId || '',
+    syncTimeline: syncTimeline[fileId],
+    relatedTasks: files.relatedTasks[fileId],
   }
 };
 
 const dispatchToProps = {
-  getMeta
+  fetchTimeline,
+  getMeta,
+  getRelatedTasks,
+  pushRoute,
 };
 
 const fetchConfigs = [{
   hasChanged: 'cacheKey',
-  onChange: (props) => {
-    const { fileId, projectId, revisionId } = props;
-    props.getMeta({
-      fileId,
-      projectId,
-      revisionId,
-    })
-  }
+  onChange: ({ getMeta, fileId, revisionId, projectId }) => getMeta({ fileId, revisionId, projectId })
+},{
+  hasChanged: 'cacheKey',
+  onChange: ({ getRelatedTasks, fileId, projectId }) => getRelatedTasks({ fileId, projectId })
+},{
+  hasChanged: 'cacheKey',
+  onChange: ({ fetchTimeline, fileId, projectId }) => fetchTimeline({ fileId, projectId })
 }];
 
 @connect(stateToProps, dispatchToProps)
 @fetchDataHoc(fetchConfigs)
 export default class FileContainer extends Component {
   render() {
-    console.log(this.props);
-    return (
-      <File {...this.props} />
-    );
+    const { file, syncTimeline, relatedTasks } = this.props;
+    
+    return file && file.data && syncTimeline && syncTimeline.data && relatedTasks
+      ? <File {...this.props} />
+      : null
   }
 }
 

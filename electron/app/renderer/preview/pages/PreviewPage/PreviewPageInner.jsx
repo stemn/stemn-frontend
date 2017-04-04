@@ -98,7 +98,6 @@ export const Component = React.createClass({
     ? {selected1: response, lastSelected: 1}
     : {selected2: response, lastSelected: 2};
     this.setState(stateToSet);
-    // if(this.state.selected1 == this.state.selected2){this.setState({mode: 'single'})}
   },
   changeMode(mode, revisions){
     let { selected1, selected2 } = this.state;

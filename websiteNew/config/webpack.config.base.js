@@ -3,6 +3,8 @@ const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 
 
 module.exports = {
@@ -30,6 +32,10 @@ module.exports = {
     new webpack.ProvidePlugin({
       'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'  // fetch API
     }),
+    // Static files
+    new CopyWebpackPlugin([{ 
+      from: path.join(__dirname, '../src/client/assets/static'),
+    }]),
     // Shared code
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',

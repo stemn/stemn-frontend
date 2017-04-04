@@ -13,7 +13,7 @@ import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleI
 
 class Header extends Component {
   render() {
-    const { auth, logout } = this.props;
+    const { auth, logout, newProject } = this.props;
     return (
       <header className={ classNames(classes.header, 'layout-row', 'layout-align-start-center') }>
         <Container className='layout-row layout-align-start-center'>
@@ -21,10 +21,14 @@ class Header extends Component {
             <img src={logo} alt=""/>
           </Link>
           <div className="flex"></div>
-          <SimpleIconButton title="Create new project">
+          <SimpleIconButton 
+           title='Create new project'
+           onClick={ newProject} >
             <MdAdd size={ 25 }/>
           </SimpleIconButton>
-          <SimpleIconButton title="Notifications" style={{marginRight: '10px'}}>
+          <SimpleIconButton 
+           title='Notifications' 
+           style={ { marginRight: '10px' } }>
             <MdNotifications size={ 22 }/>
           </SimpleIconButton>
           <PopoverWrapper 

@@ -5,7 +5,7 @@ import Footer from './Footer';
 import { logout } from 'stemn-shared/misc/Auth/Auth.actions.js';
 
 const stateToProps = ({ auth }) => ({
-  auth
+  auth,
 });
 
 const dispatchToProps = {

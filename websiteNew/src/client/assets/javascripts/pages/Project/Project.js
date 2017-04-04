@@ -12,7 +12,7 @@ import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar';
 
 class Project extends Component {
   renderComplete() {
-    const { children, params, project } = this.props;
+    const { children, project, pathname } = this.props;
     return (
       <div className="layout-column flex">
         <div className={ classes.header }>
@@ -30,10 +30,26 @@ class Project extends Component {
             </h1>
             <div className='flex'></div>
             <Tabs noline className={ classes.tabs }>
-              <Link activeClassName='active' to={`/project/${project.data._id}`} onlyActiveOnIndex>Overview</Link>
-              <Link activeClassName='active' to={`/project/${project.data._id}/commits`}>15 Commits</Link>
-              <Link activeClassName='active' to={`/project/${project.data._id}/tasks`}>6 Tasks</Link>
-              <Link activeClassName='active' to={`/project/${project.data._id}/settings`}>Settings</Link>
+              <Link 
+                className={ classNames({ 'active': pathname === `/project/${project.data._id}` }) } 
+                to={`/project/${project.data._id}`}>
+                Overview
+              </Link>
+              <Link 
+                className={ classNames({ 'active': pathname.includes(`/project/${project.data._id}/commits`) }) } 
+                to={`/project/${project.data._id}/commits`}>
+                15 Commits
+              </Link>
+              <Link 
+                className={ classNames({ 'active': pathname.includes(`/project/${project.data._id}/tasks`) }) } 
+                to={`/project/${project.data._id}/tasks`}>
+                6 Tasks
+              </Link>
+              <Link 
+                className={ classNames({ 'active': pathname.includes(`/project/${project.data._id}/settings`) }) } 
+                to={`/project/${project.data._id}/settings`}>
+                Settings
+              </Link>
             </Tabs>
           </Container>
         </div>

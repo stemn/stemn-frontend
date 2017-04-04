@@ -1,0 +1,28 @@
+.header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  height: 60px;
+  padding: 0 15px;
+}
+
+.timeline {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  background: white;
+}
+
+.sidebar {
+  background: white;
+  overflow-y: auto;
+  min-width: 400px;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 30px;
+}
+
+.sidebarTitle {
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+.sidebarTitle:first-child {
+  margin-top: 0;
+}

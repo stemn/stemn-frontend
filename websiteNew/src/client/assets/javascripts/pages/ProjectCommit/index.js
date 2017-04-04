@@ -1,1 +1,1 @@
-export default from './ProjectSettings.container';
+export default from './ProjectCommit.container';

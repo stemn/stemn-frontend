@@ -1,0 +1,42 @@
+.content {
+  margin-top: -1px;
+}
+
+.header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background: white;
+  padding-bottom: 20px;
+}
+
+.headerBorder {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 20px;
+}
+
+.title {
+  margin: 0 0 10px;
+  font-size: 22px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.blurb {
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 15px;
+}
+
+.commitNumber {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.meta {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 12px;
+}
+
+.avatar {
+  margin-right: 10px;
+}
+
+.files {
+  margin-top: 30px;
+}

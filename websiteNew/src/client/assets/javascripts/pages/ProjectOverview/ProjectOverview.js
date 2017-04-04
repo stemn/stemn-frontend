@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 
-// Styles
 import classNames from 'classnames';
 import classes from './ProjectOverview.css'
 
-// Sub Components
+import { projectRoute, fileRoute, projectFolderRoute } from 'route-actions';
+
 import FileList from 'stemn-shared/misc/FileList/FileList';
 import Readme from 'stemn-shared/misc/Files/Readme/Readme.jsx';
 import { Container } from 'stemn-shared/misc/Layout';
 import Button from 'stemn-shared/misc/Buttons/Button/Button';
 import Tag from 'stemn-shared/misc/Tags/Tag';
+import LikeButton from 'stemn-shared/misc/Likes/LikeButton';
 
 import MdLocationOn from 'react-icons/md/location-on';
 import MdPeople from 'react-icons/md/people';
@@ -17,71 +18,78 @@ import MdAccount from 'react-icons/md/account-balance';
 import MdAccessTime from 'react-icons/md/access-time';
 
 export default class ProjectOverview extends Component {
-  fileFolderClick = ({file}) => {
-    const { project } = this.props;
-    const isFile = file.type == 'file';
-    if(isFile){
-//      dispatch(ElectronWindowsActions.create({
-//        type         : 'PREVIEW',
-//        props        : {
-//          fileId     : file.fileId,
-//          revisionId : file.revisionId,
-//          projectId  : file.project._id
-//        }
-//      }))
-    } else {
-//      dispatch(projectFolderRoute({
-//        projectId: project.data._id,
-//        fileId: file.fileId
-//      }))
+  clickFileOrFolder = ({ file }) => {
+    const { fileId, revisionId } = file;
+    const { pushRoute } = this.props;
+    const projectId = this.props.project.data._id;
+
+    if(file.type == 'file'){
+      pushRoute(fileRoute({fileId, projectId, revisionId}));
+    }    
+    else if(file.type == 'folder'){
+      pushRoute(projectFolderRoute({fileId, projectId}));
+    }
+    else if(projectId){
+      pushRoute(projectRoute({projectId}));
     }
   }
+    
   render() {
-    const { entityModel, project, path, files } = this.props;
+    const { entityModel, project, path, files, isFilePage } = this.props;
     const options = {
       showMenu: true
     };
     if(project && project.data && project.data._id){
+      
+      const infoBoxes = (
+        <div className={ classNames('layout-row', classes.infoBoxes)}>
+          <div className='flex'>
+            <MdAccessTime />
+            Updated 1 month ago
+          </div>
+          <div className='flex'>
+            <MdPeople />
+            { project.data.team.length === 1 
+            ? `${project.data.team.length} team member`
+            : `${project.data.team.length} team members` }
+          </div>
+          <div className='flex'>
+            <MdLocationOn />
+            Sydney Australia
+          </div>
+          <div className='flex'>
+            <MdAccount />
+            Creative Commons
+          </div>
+        </div>
+      );
+      
       return (
         <div>
           <div className={ classes.header }>
             <Container className={ classes.headerInner }>
               <div className={ classes.headerBorder }/>
-              <div className={ classes.blurb }>{ project.data.blurb }</div>
+              { project.data.blurb.length > 0
+              ? <div className={ classes.blurb }>{ project.data.blurb }</div>
+              : null }
               <div className='layout-row layout-align-start-center'>
                 <div className={ classes.tags }>
                   { project.data.fields.map((field) => <Tag className='primary' key={ field._id } text={ field.name } /> )}
                 </div>
+                <div className="flex" />
+                <LikeButton />
               </div>
-              <div className="flex" />
             </Container>
           </div>
           <Container style={{marginTop: '30px'}}>
-            <div className={ classNames('layout-row', classes.infoBoxes)}>
-              <div className='flex'>
-                <MdAccessTime />
-                Updated 1 month ago
-              </div>
-              <div className='flex'>
-                <MdPeople />
-                3 team members
-              </div>
-              <div className='flex'>
-                <MdLocationOn />
-                Sydney Australia
-              </div>
-              <div className='flex'>
-                <MdAccount />
-                Creative Commons
-              </div>
-            </div>
+            { isFilePage ? null : infoBoxes }
             <FileList
               className={classNames(classes.files)}
               projectId={project.data._id}
               path={path || ''}
-              singleClickFn={this.fileFolderClick}
-              doubleClickFn={this.fileFolderClick}
-              crumbClickFn={this.fileFolderClick}
+              singleClickFn={this.clickFileOrFolder}
+              doubleClickFn={this.clickFileOrFolder}
+              crumbClickFn={this.clickFileOrFolder}
               options={options}
               crumbPopup={true}
             />
