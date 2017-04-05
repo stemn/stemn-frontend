@@ -14,8 +14,6 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button';
 import Tag from 'stemn-shared/misc/Tags/Tag';
 import LikeButton from 'stemn-shared/misc/Likes/LikeButton';
 
-import { like, unlike } from 'stemn-shared/misc/Likes/Likes.actions.js';
-
 import MdLocationOn from 'react-icons/md/location-on';
 import MdPeople from 'react-icons/md/people';
 import MdAccount from 'react-icons/md/account-balance';
@@ -82,12 +80,9 @@ export default class ProjectOverview extends Component {
                 </div>
                 <div className="flex" />
                 <LikeButton
-                  active={ project.data.liked }
                   number={ project.data.likes }
                   entityType='project'
                   entityId={ project.data._id }
-                  like={ like }
-                  unlike={ unlike }
                 />
               </div>
             </Container>
