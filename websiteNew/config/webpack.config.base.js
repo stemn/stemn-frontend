@@ -5,6 +5,7 @@ const autoprefixer = require('autoprefixer');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HappyPack = require('happypack');
 const querystring = require('querystring');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const babelLoaderQuery = {
   presets: [
@@ -13,7 +14,6 @@ const babelLoaderQuery = {
     'babel-preset-stage-0'
   ].map(require.resolve),
   plugins: [
-    // 'babel-plugin-transform-runtime',
     'babel-plugin-transform-decorators-legacy',
     'react-hot-loader/babel'
   ].map(require.resolve),
@@ -56,7 +56,12 @@ module.exports = {
         path: 'babel',
         query: babelLoaderQuery
       }],
-    })
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, '../src/client/assets/index.html'),
+      filename: 'index.html',
+      inject: 'body',
+    }),
   ],
   module: {
     loaders: [

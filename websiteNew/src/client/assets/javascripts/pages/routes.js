@@ -1,79 +1,91 @@
 import React                                   from 'react';
 import { Route, IndexRoute, Redirect }         from 'react-router';
 
-import AppAuthed                               from './AppAuthed';
-import AppRoot                                 from './AppRoot';
-import AppUnAuthed                             from './AppUnAuthed';
-import File                                    from './File';
-import Home                                    from './Home';
-import LoginView                               from './Login';
+// Routes that we don't split...
+import AppAuthed                               from 'pages/AppAuthed';
+import AppRoot                                 from 'pages/AppRoot';
+import AppUnAuthed                             from 'pages/AppUnAuthed';
 import NotFoundView                            from 'pages/NotFound';
-import ProjectCommit                           from './ProjectCommit'
-import ProjectCommits                          from './ProjectCommits'
-import ProjectOverview                         from './ProjectOverview'
-import ProjectSettings                         from './ProjectSettings'
-import ProjectSettingsGeneral                  from './ProjectSettingsGeneral'
-import ProjectSettingsTasks                    from './ProjectSettingsTasks'
-import ProjectSettingsTeam                     from './ProjectSettingsTeam'
-import ProjectSettingsTags                     from './ProjectSettingsTags'
-import ProjectTask                             from './ProjectTask'
-import ProjectTasks                            from './ProjectTasks'
-import ProjectView                             from './Project'
-import Register                                from './Register';
-import Settings                                from './Settings';
-import SettingsAccount                         from './SettingsAccount';
-import SettingsBilling                         from './SettingsBilling';
-import SettingsEmails                          from './SettingsEmails';
-import SettingsProfile                         from './SettingsProfile';
-import SettingsProjects                        from './SettingsProjects';
-import User                                    from './User';
-import UserFollowers                           from './UserFollowers';
-import UserFollowing                           from './UserFollowing';
-import UserOverview                            from './UserOverview';
-import UserProjects                            from './UserProjects';
-import UserStars                               from './UserStars';
+
+// Route loading utils
+const errorLoading = (err)  =>{
+  console.error('Dynamic page loading failed', err);
+}
+const loadRoute = (cb) => (module) => cb(null, module.default);
+const getRoute = (systemImport, cb) => systemImport.then(loadRoute(cb)).catch(errorLoading);
+
+// Async Routes
+// Split using webpack magic.
+// http://moduscreate.com/code-splitting-for-react-router-with-es6-imports/
+const getHome                    = (loc, cb) => getRoute(System.import('pages/Home'), cb);
+const getFile                    = (loc, cb) => getRoute(System.import('pages/File'), cb);
+const getLogin                   = (loc, cb) => getRoute(System.import('pages/Login'), cb);
+const getProject                 = (loc, cb) => getRoute(System.import('pages/Project'), cb);
+const getProjectCommit           = (loc, cb) => getRoute(System.import('pages/ProjectCommit'), cb);
+const getProjectCommits          = (loc, cb) => getRoute(System.import('pages/ProjectCommits'), cb);
+const getProjectOverview         = (loc, cb) => getRoute(System.import('pages/ProjectOverview'), cb);
+const getProjectSettings         = (loc, cb) => getRoute(System.import('pages/ProjectSettings'), cb);
+const getProjectSettingsGeneral  = (loc, cb) => getRoute(System.import('pages/ProjectSettingsGeneral'), cb);
+const getProjectSettingsTags     = (loc, cb) => getRoute(System.import('pages/ProjectSettingsTags'), cb);
+const getProjectSettingsTasks    = (loc, cb) => getRoute(System.import('pages/ProjectSettingsTasks'), cb);
+const getProjectSettingsTeam     = (loc, cb) => getRoute(System.import('pages/ProjectSettingsTeam'), cb);
+const getProjectTask             = (loc, cb) => getRoute(System.import('pages/ProjectTask'), cb);
+const getProjectTasks            = (loc, cb) => getRoute(System.import('pages/ProjectTasks'), cb);
+const getRegister                = (loc, cb) => getRoute(System.import('pages/Register'), cb);
+const getSettings                = (loc, cb) => getRoute(System.import('pages/Settings'), cb);
+const getSettingsAccount         = (loc, cb) => getRoute(System.import('pages/SettingsAccount'), cb);
+const getSettingsBilling         = (loc, cb) => getRoute(System.import('pages/SettingsBilling'), cb);
+const getSettingsEmails          = (loc, cb) => getRoute(System.import('pages/SettingsEmails'), cb);
+const getSettingsProfile         = (loc, cb) => getRoute(System.import('pages/SettingsProfile'), cb);
+const getSettingsProjects        = (loc, cb) => getRoute(System.import('pages/SettingsProjects'), cb);
+const getUser                    = (loc, cb) => getRoute(System.import('pages/User'), cb);
+const getUserFollowers           = (loc, cb) => getRoute(System.import('pages/UserFollowers'), cb);
+const getUserFollowing           = (loc, cb) => getRoute(System.import('pages/UserFollowing'), cb);
+const getUserOverview            = (loc, cb) => getRoute(System.import('pages/UserOverview'), cb);
+const getUserProjects            = (loc, cb) => getRoute(System.import('pages/UserProjects'), cb);
+const getUserStars               = (loc, cb) => getRoute(System.import('pages/UserStars'), cb);
 
 export default (
   <Route                                       component={AppRoot}>
    
     <Route                                     component={AppAuthed}>
-      <Route path="settings"                   component={Settings}>
-        <IndexRoute                            component={SettingsProfile}/>
-        <Route path="account"                  component={SettingsAccount}/>
-        <Route path="billing"                  component={SettingsBilling}/>
-        <Route path="emails"                   component={SettingsEmails}/>
-        <Route path="projects"                 component={SettingsProjects}/>
+      <Route path="settings"                   getComponent={getSettings}>
+        <IndexRoute                            getComponent={getSettingsProfile}/>
+        <Route path="account"                  getComponent={getSettingsAccount}/>
+        <Route path="billing"                  getComponent={getSettingsBilling}/>
+        <Route path="emails"                   getComponent={getSettingsEmails}/>
+        <Route path="projects"                 getComponent={getSettingsProjects}/>
       </Route>    
     </Route>   
        
     <Route                                     component={AppUnAuthed}>
-      <Route path="login"                      component={LoginView} />
-      <Route path="register"                   component={Register} />
+      <Route path="login"                      getComponent={getLogin} />
+      <Route path="register"                   getComponent={getRegister} />
     </Route>  
         
-    <Route path="/"                            component={Home} />
-    <Route path="/files/:projectId/:fileId"    component={File} />
-    <Route path="project/:stub"                component={ProjectView}>
-      <IndexRoute                              component={ProjectOverview} />
-      <Route path="files/:path"                component={ProjectOverview} />
-      <Route path="tasks"                      component={ProjectTasks} />
-      <Route path="tasks/:taskId"              component={ProjectTask} />
-      <Route path="commits"                    component={ProjectCommits} />
-      <Route path="commits/:commitId"          component={ProjectCommit} />
-      <Route path="settings"                   component={ProjectSettings}>
-        <IndexRoute                            component={ProjectSettingsGeneral} />
-        <Route path="tasks"                    component={ProjectSettingsTasks} />
-        <Route path="team"                     component={ProjectSettingsTeam} />
-        <Route path="tags"                     component={ProjectSettingsTags} />
+    <Route path="/"                            getComponent={getHome} />
+    <Route path="/files/:projectId/:fileId"    getComponent={getFile} />
+    <Route path="project/:stub"                getComponent={getProject}>
+      <IndexRoute                              getComponent={getProjectOverview} />
+      <Route path="files/:path"                getComponent={getProjectOverview} />
+      <Route path="tasks"                      getComponent={getProjectTasks} />
+      <Route path="tasks/:taskId"              getComponent={getProjectTask} />
+      <Route path="commits"                    getComponent={getProjectCommits} />
+      <Route path="commits/:commitId"          getComponent={getProjectCommit} />
+      <Route path="settings"                   getComponent={getProjectSettings}>
+        <IndexRoute                            getComponent={getProjectSettingsGeneral} />
+        <Route path="tasks"                    getComponent={getProjectSettingsTasks} />
+        <Route path="team"                     getComponent={getProjectSettingsTeam} />
+        <Route path="tags"                     getComponent={getProjectSettingsTags} />
       </Route>
     </Route>
     <Route path="404"                          component={NotFoundView} />
-    <Route path="users/:stub"                  component={User}>
-      <IndexRoute                              component={UserOverview} />
-      <Route path="followers"                  component={UserFollowers} />
-      <Route path="following"                  component={UserFollowing} />
-      <Route path="projects"                   component={UserProjects} />
-      <Route path="stars"                      component={UserStars} />
+    <Route path="users/:stub"                  getComponent={getUser}>
+      <IndexRoute                              getComponent={getUserOverview} />
+      <Route path="followers"                  getComponent={getUserFollowers} />
+      <Route path="following"                  getComponent={getUserFollowing} />
+      <Route path="projects"                   getComponent={getUserProjects} />
+      <Route path="stars"                      getComponent={getUserStars} />
     </Route>
     <Redirect from="*"                         to="404" />
   </Route>
