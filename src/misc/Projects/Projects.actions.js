@@ -57,7 +57,7 @@ export function getUserProjects({userId}) {
         parentId: userId,
         size: 1000,
         published: 'both',
-        select : ['name', 'picture', 'stub', 'type', 'remote', 'updated']
+        select : ['name', 'picture', 'stub', 'type', 'remote', 'updated', 'blurb']
       },
     }),
   }

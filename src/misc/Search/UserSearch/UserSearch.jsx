@@ -25,7 +25,7 @@ export default class UserSearch extends Component {
 
   render() {
     const { select, cacheKey } = this.props;
-      
+    
     return (
       <Autosuggest
         cacheKey={ `user-search-${cacheKey}` }

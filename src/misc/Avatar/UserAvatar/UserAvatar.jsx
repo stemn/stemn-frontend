@@ -16,13 +16,17 @@ export default React.createClass({
       height       : size+'px' || '30px'
     };
     const actualStyles = Object.assign({}, style, styles);
+    
+    const resizeType = size && size > 50
+      ? 'thumb-lg'
+      : 'thumb';
 
     if(picture){
       return (
         <img className={className}
           title={title}
           style={actualStyles}
-          src={`${GLOBAL_ENV.API_SERVER}${picture || this.default}?size=thumb&crop=true`}
+          src={`${GLOBAL_ENV.API_SERVER}${picture || this.default}?size=${resizeType}&crop=true`}
         />
       );
     }
@@ -39,7 +43,7 @@ export default React.createClass({
       const colorStyles = {
         background: name ? colours[colourIndex] : '#eaeaea',
         color: 'white',
-        fontSize: size > 25 ? '14px' : '11px',
+        fontSize: size && size > 40 ? `${size * 0.6}px` : '11px',
         fontWeight: 'bold',
         textTransform: 'uppercase'
       }

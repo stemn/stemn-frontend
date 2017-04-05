@@ -14,3 +14,7 @@
   height: 0;
   width: 0;
 }
+
+textarea {
+  font-family: inherit;
+}

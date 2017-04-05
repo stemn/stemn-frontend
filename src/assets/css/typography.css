@@ -82,3 +82,17 @@
     content: '\00B7';
     padding: 0 3px;
 }
+
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: rgba(0, 0, 0, 0.3);
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: rgba(0, 0, 0, 0.3);
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: rgba(0, 0, 0, 0.3);
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: rgba(0, 0, 0, 0.3);
+}
