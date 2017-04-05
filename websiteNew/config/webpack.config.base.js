@@ -52,6 +52,7 @@ module.exports = {
       minChunks: Infinity
     }),
     new HappyPack({
+      threads: 4,
       loaders: [{
         path: 'babel',
         query: babelLoaderQuery

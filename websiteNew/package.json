@@ -138,6 +138,7 @@
     "redux-promise-middleware": "4.2.0",
     "redux-thunk": "2.2.0",
     "reselect": "2.5.3",
+    "stats-webpack-plugin": "0.6.0",
     "substyle": "2.0.2"
   }
 }
