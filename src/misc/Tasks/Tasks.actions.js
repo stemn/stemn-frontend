@@ -95,7 +95,7 @@ export function getEvents({taskId}){
   }
 }
 
-export const updateBoard({ board }) => {
+export const updateBoard = ({ board }) => {
   dispatch({
     type: 'TASKS/UPDATE_BOARD',
     payload: http({
@@ -109,7 +109,7 @@ export const updateBoard({ board }) => {
   })
 }
 
-export const editBoard({ model, value }) => ({
+export const editBoard = ({ model, value }) => ({
   type: 'TASKS/EDIT_BOARD',
   payload: board
 })

@@ -18,7 +18,7 @@
 		if (text.match (/\<\?xml/) && text.match (/\<eagle/)) return true;
 	}
 
-	EagleXMLParser.name = "eagle xml brd";
+//	EagleXMLParser.name = "eagle xml brd";
 
 	var layerMaps = {
 		"Front": "Top",

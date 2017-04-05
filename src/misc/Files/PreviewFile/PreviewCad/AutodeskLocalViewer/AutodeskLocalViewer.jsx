@@ -11,7 +11,6 @@ export default React.createClass({
       if(this.viewer && this.viewer.deregister){
         this.viewer.deregister();
       }
-      console.log(nextProps.path);
       this.viewer = autodeskViewerUtils.register(this.refs.cadCanvas, nextProps.linkKey);
       const filePath = `${nextProps.path}/1/model.svf`;
       const filePathWithProtocol = filePath.includes('http://') ? filePath : `file://${filePath}`;

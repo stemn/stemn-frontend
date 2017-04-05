@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js';
 import { actions } from 'react-redux-form';
 import { projectSettingsRoute } from 'route-actions';
+import { push } from 'react-router-redux';
 
 // Component Core
 import React from 'react';
@@ -37,7 +38,7 @@ export const Component = React.createClass({
   createProject(){
     this.props.projectsActions.createProject(pick(this.props.newProject, ['permissions', 'name', 'summary'])).then(response => {
       const goToProject = () => {
-        this.props.dispatch(projectSettingsRoute({projectId: response.value.data._id}));
+        this.props.dispatch(push(projectSettingsRoute({projectId: response.value.data._id})));
         this.props.modalHide();
       }
       // Link the provider if we can.

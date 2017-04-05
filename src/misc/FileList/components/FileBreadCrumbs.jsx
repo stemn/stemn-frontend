@@ -20,11 +20,13 @@ export default React.createClass({
       if(meta.parents && meta.parents.length > 0){
         const parentsWithName = i.push(meta.parents, {
           name: meta.name,
-          fileId: meta.fileId
+          fileId: meta.fileId,
         });
         return parentsWithName.map((folder, idx) => {
+          
           const isLastChild = idx == parentsWithName.length - 1;
           const parentfolder = parentsWithName[idx - 1];
+          
           return parentfolder && popup && idx != 0
           ? <span key={idx}>
               <PopoverMenu trigger="hoverDelay" preferPlace="below" tipSize={6} inheritIsOpen={true} offset={14}>
@@ -46,7 +48,7 @@ export default React.createClass({
           )
       }
       else if (meta.name){
-        return <span>{middleConcat(meta.name, 30, 0.8)}</span>
+        return <span>{ middleConcat(meta.name, 30, 0.8) }</span>
       }
       else{
         return <span>. . .</span>
@@ -54,8 +56,8 @@ export default React.createClass({
     }
 
     return (
-      <div className={classNames(classes.crumbs, className)}>
-        {displayCrumbs()}
+      <div className={ classNames(classes.crumbs, className) }>
+        { displayCrumbs() }
       </div>
     );
   }

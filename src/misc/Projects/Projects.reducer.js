@@ -1,5 +1,6 @@
 import { modeled } from 'react-redux-form';
 import i from 'icepick';
+import { uniqBy } from 'lodash';
 
 const initialState = {
   data: {},
@@ -31,11 +32,16 @@ function reducer(state, action) {
       }
     case 'PROJECTS/GET_PROJECT_FULFILLED' :
       return i.assocIn(state, ['data', action.payload.data._id, 'data'], action.payload.data)
+      
     case 'PROJECTS/ADD_TEAM_MEMBER' :
       return i.updateIn(state, ['data', action.payload.projectId, 'data', 'team'], (team) => {
         const modifiedUser = Object.assign({}, action.payload.user, {permissions: {role: 'admin'}})
         return i.push(team, modifiedUser)
       })
+    case 'PROJECTS/REMOVE_TEAM_MEMBER' :
+      return i.updateIn(state, ['data', action.payload.projectId, 'data', 'team'], (team) => {
+        return team.filter(user => user._id != action.payload.userId)
+      });    
     case 'PROJECTS/CHANGE_USER_PERMISSIONS' :
       return i.updateIn(state, ['data', action.payload.projectId, 'data', 'team'], (team) => {
         const index = team.findIndex((user)=>user._id == action.payload.userId);
@@ -45,13 +51,14 @@ function reducer(state, action) {
           ...team.slice(index + 1)
         ]
       })
-    case 'PROJECTS/REMOVE_TEAM_MEMBER' :
-      return i.updateIn(state, ['data', action.payload.projectId, 'data', 'team'], (team) => {
-        const index = team.findIndex((user)=>user._id == action.payload.userId);
-        return  [
-          ...team.slice(0, index),
-          ...team.slice(index+ 1)
-        ]
+    
+    case 'PROJECTS/ADD_FIELD' :
+      return i.updateIn(state, ['data', action.payload.projectId, 'data', 'fields'], (fields) => {
+        return uniqBy(i.push(fields, action.payload.field), '_id')
+      })
+    case 'PROJECTS/REMOVE_FIELD' :
+      return i.updateIn(state, ['data', action.payload.projectId, 'data', 'fields'], (fields) => {
+        return fields.filter(field => field._id != action.payload.fieldId)
       });
 
     case 'PROJECTS/LINK_REMOTE_PENDING' :

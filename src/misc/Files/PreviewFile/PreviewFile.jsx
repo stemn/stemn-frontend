@@ -48,7 +48,7 @@ export const Component = React.createClass({
     const getPreview = () => {
       const viewerType = getViewerType(file.extension, file.provider);
       if(fileData && fileData.error || fileRender && fileRender.error){
-        return <ErrorMessages error={fileData.error || fileRender.error} fileMeta={file}/>
+        return <ErrorMessages error={fileData && fileData.error ? fileData.error : fileRender.error} fileMeta={file}/>
       }
       if(viewerType == 'gerber' || viewerType == 'pcb'){
         return <PreviewPcb previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile} />

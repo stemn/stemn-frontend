@@ -1,5 +1,6 @@
 import http from 'axios';
 import { homeRoute } from 'route-actions';
+import { push } from 'react-router-redux';
 import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js';
 
 export function setActiveProject({projectId}) {
@@ -86,7 +87,7 @@ export function deleteProject({projectId}) {
         method: 'DELETE',
         url: `/api/v1/projects/${projectId}`,
       }).then((response)=>{
-        dispatch(homeRoute())
+        dispatch(push(homeRoute()))
       }),
       meta: {
         projectId
@@ -109,12 +110,23 @@ export function saveProject({project}) {
   }
 }
 
-export function addTeamMember({projectId, user}) {
+export function addField({projectId, field}) {
   return {
-    type: 'PROJECTS/ADD_TEAM_MEMBER',
+    type: 'PROJECTS/ADD_FIELD',
     payload: {
       projectId,
-      user
+      field
+    }
+  };
+}
+
+
+export function removeField({projectId, fieldId}) {
+  return {
+    type: 'PROJECTS/REMOVE_FIELD',
+    payload: {
+      projectId,
+      fieldId,
     }
   };
 }
@@ -126,16 +138,6 @@ export function changeUserPermissions({projectId, userId, role}) {
       projectId,
       userId,
       role
-    }
-  };
-}
-
-export function removeTeamMember({projectId, userId}) {
-  return {
-    type: 'PROJECTS/REMOVE_TEAM_MEMBER',
-    payload: {
-      projectId,
-      userId,
     }
   };
 }

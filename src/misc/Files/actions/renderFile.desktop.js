@@ -1,5 +1,4 @@
 import websocketJoinFile from './websocketJoinFile.js';
-import getUuid from 'stemn-shared/utils/getUuid.js';
 
 export default ({projectId, fileId, revisionId, provider, timestamp}) => {
   const cacheKey = timestamp ? `${fileId}-${revisionId}-${timestamp}` : `${fileId}-${revisionId}`;

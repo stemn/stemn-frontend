@@ -7,8 +7,8 @@ import classes from './FileRow.css'
 
 import bytes from 'stemn-shared/utils/filters/bytes.js';
 import FileIcon from './FileIcon'
-import Label        from 'stemn-shared/misc/Label/Label.jsx'
-import Link                from 'stemn-shared/misc/Router/Link/Link.jsx';
+import Label from 'stemn-shared/misc/Label/Label.jsx'
+import Link from 'stemn-shared/misc/Router/Link/Link.jsx';
 
 export default React.createClass({
   render() {
@@ -36,7 +36,7 @@ export default React.createClass({
         ? <div style={{padding: '0 15px'}}><Label title={file.revisionNumber + ' revisions'}>{file.revisionNumber} Revisions</Label></div>
         : null }
         <div style={{width: '100px'}}>{file.modified ? timeFromNow : ''}</div>
-        <div style={{width: '50px'}}>{bytes(file.size)}</div>
+        <div style={{width: '80px'}}>{bytes(file.size)}</div>
       </div>
     );
   }

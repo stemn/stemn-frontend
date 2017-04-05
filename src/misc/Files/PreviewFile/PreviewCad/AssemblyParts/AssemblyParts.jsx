@@ -30,7 +30,6 @@ export const Row = React.createClass({
   }
 })
 
-
 export const AssemblyParts = React.createClass({
   propTypes: propTypesObject,
   onMount (nextProps, prevProps) {

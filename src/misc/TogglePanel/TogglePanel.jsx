@@ -28,7 +28,7 @@ export const TogglePanel = React.createClass({
     }))
   },
   render() {
-    const { toggleState } = this.props;
+    const { toggleState, className } = this.props;
     const getContent = () => {
       if(toggleState){
         return (
@@ -40,7 +40,7 @@ export const TogglePanel = React.createClass({
     }
     return (
       <div>
-        <div className={styles.titleBar + ' layout-row layout-align-start-center'}>
+        <div className={ classNames(styles.titleBar, 'layout-row layout-align-start-center', className) }>
           <MdChevronRight onClick={()=>this.toggle(null)} className={classNames(styles.toggleIcon, {[styles.toggleIconActive] : toggleState})} size='22'></MdChevronRight>
           <div className="flex layout-row layout-align-start-center">
             <div className="flex" onClick={()=>this.toggle(null)}>{this.props.children[0]}</div>

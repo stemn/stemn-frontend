@@ -1,7 +1,7 @@
 import React from 'react';
 import Promise from 'es6-promise'
 
-import previewCadUtils from './PreviewCad.utils.js';
+import { isWebGlSupported } from './PreviewCad.utils.js';
 
 //import AutodeskViewer from './AutodeskViewer/AutodeskViewer';
 import AutodeskLocalViewer from './AutodeskLocalViewer/AutodeskLocalViewer'
@@ -21,7 +21,7 @@ export default React.createClass({
     if(!prevProps || nextProps.fileMeta != prevProps.fileMeta){
       const { fileMeta, fileRender, renderFn } = nextProps;
       this.setState({status: 'pending'})
-      if(previewCadUtils.isWebGlSupported()){
+      if(isWebGlSupported()){
         renderFn();
       }
       else{
