@@ -1,8 +1,8 @@
 // Common Webpack configuration used by webpack.config.development and webpack.config.production
-const path = require('path');
-const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path')
+const webpack = require('webpack')
+const autoprefixer = require('autoprefixer')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 
 
@@ -94,6 +94,6 @@ module.exports = {
       autoprefixer({
         browsers: ['last 2 versions']
       })
-    ];
+    ]
   }
-};
+}

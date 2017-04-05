@@ -15,4 +15,4 @@ class SettingsEmails extends Component {
   }
 }
 
-export default SettingsEmails;
+export default SettingsEmails

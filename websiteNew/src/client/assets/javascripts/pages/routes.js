@@ -1,13 +1,13 @@
-import React                                   from 'react';
-import { Route, IndexRoute, Redirect }         from 'react-router';
+import React                                   from 'react'
+import { Route, IndexRoute, Redirect }         from 'react-router'
 
-import AppAuthed                               from './AppAuthed';
-import AppRoot                                 from './AppRoot';
-import AppUnAuthed                             from './AppUnAuthed';
-import File                                    from './File';
-import Home                                    from './Home';
-import LoginView                               from './Login';
-import NotFoundView                            from 'pages/NotFound';
+import AppAuthed                               from './AppAuthed'
+import AppRoot                                 from './AppRoot'
+import AppUnAuthed                             from './AppUnAuthed'
+import File                                    from './File'
+import Home                                    from './Home'
+import LoginView                               from './Login'
+import NotFoundView                            from 'pages/NotFound'
 import ProjectCommit                           from './ProjectCommit'
 import ProjectCommits                          from './ProjectCommits'
 import ProjectOverview                         from './ProjectOverview'
@@ -19,23 +19,23 @@ import ProjectSettingsTags                     from './ProjectSettingsTags'
 import ProjectTask                             from './ProjectTask'
 import ProjectTasks                            from './ProjectTasks'
 import ProjectView                             from './Project'
-import Register                                from './Register';
-import Settings                                from './Settings';
-import SettingsAccount                         from './SettingsAccount';
-import SettingsBilling                         from './SettingsBilling';
-import SettingsEmails                          from './SettingsEmails';
-import SettingsProfile                         from './SettingsProfile';
-import SettingsProjects                        from './SettingsProjects';
-import User                                    from './User';
-import UserFollowers                           from './UserFollowers';
-import UserFollowing                           from './UserFollowing';
-import UserOverview                            from './UserOverview';
-import UserProjects                            from './UserProjects';
-import UserStars                               from './UserStars';
+import Register                                from './Register'
+import Settings                                from './Settings'
+import SettingsAccount                         from './SettingsAccount'
+import SettingsBilling                         from './SettingsBilling'
+import SettingsEmails                          from './SettingsEmails'
+import SettingsProfile                         from './SettingsProfile'
+import SettingsProjects                        from './SettingsProjects'
+import User                                    from './User'
+import UserFollowers                           from './UserFollowers'
+import UserFollowing                           from './UserFollowing'
+import UserOverview                            from './UserOverview'
+import UserProjects                            from './UserProjects'
+import UserStars                               from './UserStars'
 
 export default (
   <Route                                       component={AppRoot}>
-   
+
     <Route                                     component={AppAuthed}>
       <Route path="settings"                   component={Settings}>
         <IndexRoute                            component={SettingsProfile}/>
@@ -43,14 +43,14 @@ export default (
         <Route path="billing"                  component={SettingsBilling}/>
         <Route path="emails"                   component={SettingsEmails}/>
         <Route path="projects"                 component={SettingsProjects}/>
-      </Route>    
-    </Route>   
-       
+      </Route>
+    </Route>
+
     <Route                                     component={AppUnAuthed}>
       <Route path="login"                      component={LoginView} />
       <Route path="register"                   component={Register} />
-    </Route>  
-        
+    </Route>
+
     <Route path="/"                            component={Home} />
     <Route path="/files/:projectId/:fileId"    component={File} />
     <Route path="project/:stub"                component={ProjectView}>
@@ -77,4 +77,4 @@ export default (
     </Route>
     <Redirect from="*"                         to="404" />
   </Route>
-);
+)

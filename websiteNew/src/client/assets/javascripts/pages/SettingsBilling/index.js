@@ -1,1 +1,1 @@
-export default from './SettingsBilling.container';
+export default from './SettingsBilling.container'

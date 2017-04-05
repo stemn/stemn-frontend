@@ -1,1 +1,1 @@
-export default from './UserStars.container';
+export default from './UserStars.container'

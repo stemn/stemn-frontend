@@ -1,1 +1,1 @@
-export default from './UserFollowing.container';
+export default from './UserFollowing.container'

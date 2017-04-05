@@ -15,4 +15,4 @@ class SettingsBilling extends Component {
   }
 }
 
-export default SettingsBilling;
+export default SettingsBilling

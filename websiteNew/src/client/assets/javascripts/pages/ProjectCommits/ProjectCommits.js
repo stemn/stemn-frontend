@@ -84,4 +84,4 @@ export default class ProjectCommits extends Component {
     )
       
   }
-};
+}
