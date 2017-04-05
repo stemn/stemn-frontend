@@ -27,6 +27,11 @@ import SettingsEmails                          from './SettingsEmails';
 import SettingsProfile                         from './SettingsProfile';
 import SettingsProjects                        from './SettingsProjects';
 import User                                    from './User';
+import UserFollowers                           from './UserFollowers';
+import UserFollowing                           from './UserFollowing';
+import UserOverview                            from './UserOverview';
+import UserProjects                            from './UserProjects';
+import UserStars                               from './UserStars';
 
 export default (
   <Route                                       component={AppRoot}>
@@ -63,7 +68,13 @@ export default (
       </Route>
     </Route>
     <Route path="404"                          component={NotFoundView} />
-    <Route path="users/:stub"                  component={User} />
+    <Route path="users/:stub"                  component={User}>
+      <IndexRoute                              component={UserOverview} />
+      <Route path="followers"                  component={UserFollowers} />
+      <Route path="following"                  component={UserFollowing} />
+      <Route path="projects"                   component={UserProjects} />
+      <Route path="stars"                      component={UserStars} />
+    </Route>
     <Redirect from="*"                         to="404" />
   </Route>
 );

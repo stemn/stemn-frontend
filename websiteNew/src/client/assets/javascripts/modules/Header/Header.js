@@ -9,7 +9,8 @@ import { Link } from 'react-router';
 import logo from 'images/logo80x80.png';
 import MdAdd from 'react-icons/md/add';
 import MdNotifications from 'react-icons/md/notifications';
-import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton'
+import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton';
+import SiteSearch from 'modules/SiteSearch';
 
 class Header extends Component {
   render() {
@@ -20,6 +21,7 @@ class Header extends Component {
           <Link to='/' className={ classes.logo }>
             <img src={logo} alt=""/>
           </Link>
+          <SiteSearch />
           <div className="flex"></div>
           <SimpleIconButton 
            title='Create new project'
