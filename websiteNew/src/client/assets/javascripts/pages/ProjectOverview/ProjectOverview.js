@@ -14,6 +14,8 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button';
 import Tag from 'stemn-shared/misc/Tags/Tag';
 import LikeButton from 'stemn-shared/misc/Likes/LikeButton';
 
+import { like, unlike } from 'stemn-shared/misc/Likes/Likes.actions.js';
+
 import MdLocationOn from 'react-icons/md/location-on';
 import MdPeople from 'react-icons/md/people';
 import MdAccount from 'react-icons/md/account-balance';
@@ -27,7 +29,7 @@ export default class ProjectOverview extends Component {
 
     if(file.type == 'file'){
       pushRoute(fileRoute({fileId, projectId, revisionId}));
-    }    
+    }
     else if(file.type == 'folder'){
       pushRoute(projectFolderRoute({fileId, projectId}));
     }
@@ -35,14 +37,14 @@ export default class ProjectOverview extends Component {
       pushRoute(projectRoute({projectId}));
     }
   }
-    
+
   render() {
     const { entityModel, project, path, files, isFilePage } = this.props;
     const options = {
       showMenu: true
     };
     if(project && project.data && project.data._id){
-      
+
       const infoBoxes = (
         <div className={ classNames('layout-row', classes.infoBoxes)}>
           <div className='flex'>
@@ -51,7 +53,7 @@ export default class ProjectOverview extends Component {
           </div>
           <div className='flex'>
             <MdPeople />
-            { project.data.team.length === 1 
+            { project.data.team.length === 1
             ? `${project.data.team.length} team member`
             : `${project.data.team.length} team members` }
           </div>
@@ -65,7 +67,7 @@ export default class ProjectOverview extends Component {
           </div>
         </div>
       );
-      
+
       return (
         <div>
           <div className={ classes.header }>
@@ -79,10 +81,13 @@ export default class ProjectOverview extends Component {
                   { project.data.fields.map((field) => <Tag className='primary' key={ field._id } text={ field.name } /> )}
                 </div>
                 <div className="flex" />
-                <LikeButton 
-                  number={ project.data.likes } 
+                <LikeButton
+                  active={ project.data.liked }
+                  number={ project.data.likes }
                   entityType='project'
                   entityId={ project.data._id }
+                  like={ like }
+                  unlike={ unlike }
                 />
               </div>
             </Container>
