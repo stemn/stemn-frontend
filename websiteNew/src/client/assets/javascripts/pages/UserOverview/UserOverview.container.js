@@ -5,37 +5,23 @@ import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc';
 import { getUserProjects } from 'stemn-shared/misc/Projects/Projects.actions.js';
 import { getUser } from 'stemn-shared/misc/Users/Users.actions';
 
-import User from './User';
+import UserOverview from './UserOverview';
 
 const stateToProps = (state, { params }) => ({
   user: state.users[params.stub],
-  currentUser: state.auth.user,
   projects: state.projects.userProjects
 });
 
-const dispatchToProps = {
-  getUser,
-  getUserProjects
-};
+const dispatchToProps = {};
 
-const fetchConfigs = [{
-  hasChanged: 'params.stub',
-  onChange: (props) => {
-    props.getUser({ userId: props.params.stub })
-  }
-}, {
-  hasChanged: 'params.stub',
-  onChange: (props) => {
-    props.getUserProjects({ userId: props.params.stub })
-  }
-}];
+const fetchConfigs = [];
 
 @connect(stateToProps, dispatchToProps)
 @fetchDataHoc(fetchConfigs)
-export default class UserContainer extends Component {
+export default class UserOverviewContainer extends Component {
   render() {
     return (
-      <User {...this.props} />
+      <UserOverview {...this.props} />
     );
   }
 }
