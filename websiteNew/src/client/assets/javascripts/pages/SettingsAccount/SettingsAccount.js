@@ -1,18 +1,20 @@
 import React, { Component, PropTypes } from 'react';
 
-class SettingsAccount extends Component {
+import UserNameSettings from 'stemn-shared/misc/UserSettings/UserNameSettings';
+import UserEmailSettings from 'stemn-shared/misc/UserSettings/UserEmailSettings';
+import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
+
+export default class SettingsAccount extends Component {
   render() {
     return (
       <div>
-        <h1>Account Settings</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse rem, accusamus inventore corporis ratione doloremque temporibus architecto mollitia totam illo eos adipisci. Eligendi totam dolorem dignissimos. Sequi velit incidunt recusandae.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse rem, accusamus inventore corporis ratione doloremque temporibus architecto mollitia totam illo eos adipisci. Eligendi totam dolorem dignissimos. Sequi velit incidunt recusandae.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse rem, accusamus inventore corporis ratione doloremque temporibus architecto mollitia totam illo eos adipisci. Eligendi totam dolorem dignissimos. Sequi velit incidunt recusandae.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse rem, accusamus inventore corporis ratione doloremque temporibus architecto mollitia totam illo eos adipisci. Eligendi totam dolorem dignissimos. Sequi velit incidunt recusandae.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse rem, accusamus inventore corporis ratione doloremque temporibus architecto mollitia totam illo eos adipisci. Eligendi totam dolorem dignissimos. Sequi velit incidunt recusandae.</p>
+        <InfoPanel>
+          <UserNameSettings />
+        </InfoPanel>        
+        <InfoPanel>
+          <UserEmailSettings />
+        </InfoPanel>
       </div>
     )
   }
 }
-
-export default SettingsAccount;

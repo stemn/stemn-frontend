@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 
 import SettingsProfile from './SettingsProfile';
 
-const stateToProps = () => ({});
+const stateToProps = ({ users, auth }, { params }) => ({
+  user: users[auth.user._id],
+  currentUser: auth.user,
+  entityModel: `users.${auth.user._id}`
+});
 
 const dispatchToProps = {
 

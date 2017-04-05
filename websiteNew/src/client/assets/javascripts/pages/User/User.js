@@ -24,6 +24,7 @@ class User extends Component {
             <Col className={ classes.sidebar }>
               <UserAvatar 
                 name={ user.data.name }
+                picture={ user.data.picture }
                 shape='square'
                 size={ 270 }
                 className={ classes.avatar }
