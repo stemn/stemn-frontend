@@ -62,6 +62,7 @@
     "eslint-plugin-react": "6.2.0",
     "extract-text-webpack-plugin": "2.0.0-beta.3",
     "file-loader": "0.9.0",
+    "happypack": "3.0.3",
     "http-server": "0.9.0",
     "jquery": "3.1.0",
     "jscs": "3.0.7",

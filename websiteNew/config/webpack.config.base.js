@@ -3,7 +3,21 @@ const path = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HappyPack = require('happypack');
+const querystring = require('querystring');
 
+const babelLoaderQuery = {
+  presets: [
+    'babel-preset-es2015',
+    'babel-preset-react',
+    'babel-preset-stage-0'
+  ].map(require.resolve),
+  plugins: [
+    // 'babel-plugin-transform-runtime',
+    'babel-plugin-transform-decorators-legacy',
+    'react-hot-loader/babel'
+  ].map(require.resolve),
+};
 
 
 module.exports = {
@@ -36,6 +50,12 @@ module.exports = {
       name: 'vendor',
       filename: 'js/vendor.bundle.js',
       minChunks: Infinity
+    }),
+    new HappyPack({
+      loaders: [{
+        path: 'babel',
+        query: babelLoaderQuery
+      }],
     })
   ],
   module: {
@@ -54,19 +74,7 @@ module.exports = {
           path.resolve(__dirname, '../node_modules/react-icons'),
           path.resolve(__dirname, '../node_modules/react-popover-wrapper'),
         ],
-        query: {
-          presets: [
-            'babel-preset-es2015',
-            'babel-preset-react',
-            'babel-preset-stage-0'
-          ].map(require.resolve),
-          plugins: [
-            // 'babel-plugin-transform-runtime',
-            'babel-plugin-transform-decorators-legacy',
-            'react-hot-loader/babel'
-          ].map(require.resolve),
-        },
-        loader: 'babel'
+        loader: 'happypack/loader'
       },
       // Images
       // Inline base64 URLs for <=8k images, direct URLs for the rest
