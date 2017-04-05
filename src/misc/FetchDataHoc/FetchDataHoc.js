@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { get } from 'lodash';
 
-const simpleCompare = () => {
-  
-}
-
 const fetchDataHoc = (configs) => (WrappedComponent) => {
   return class fetchData extends Component {
     componentDidMount() {
@@ -23,7 +19,7 @@ const fetchDataHoc = (configs) => (WrappedComponent) => {
       }
       else {
         // Else, we run the function
-        return config.hasChanged(nextProps, prevProps); 
+        return config.hasChanged(nextProps, prevProps);
       }
     }
     mount = (nextProps, prevProps, firstRun) => {

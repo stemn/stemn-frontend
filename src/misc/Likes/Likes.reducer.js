@@ -5,11 +5,20 @@ const initialState = {
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case 'LIKES/LIKE':
-      return i.assocIn(state, [action.payload], true)
-    case 'LIKES/UN_LIKE':
-      return i.assocIn(state, [action.payload], false)
+    case 'LIKES/LIKE_PENDING':
+      return i.assocIn(state, [action.meta.entityId], true)
+    case 'LIKES/LIKE_REJECTED':
+      return i.assocIn(state, [action.meta.entityId], false)
+
+    case 'LIKES/UN_LIKE_PENDING':
+      return i.assocIn(state, [action.meta.entityId], false)
+    case 'LIKES/UN_LIKE_REJECTED':
+      return i.assocIn(state, [action.meta.entityId], true)
+
+    case 'LIKES/UPDATE_LIKED':
+      return i.assocIn(state, [action.payload.entityId], action.payload.liked)
+
     default:
-      return state;
+      return state
   }
 }

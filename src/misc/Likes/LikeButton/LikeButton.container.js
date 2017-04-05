@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import LikeButton from './LikeButton';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import LikeButton from './LikeButton'
 
-import { like, unlike } from '../Likes.actions';
+import { like, unlike, checkIsLiked } from '../Likes.actions'
 
-const stateToProps = ({ likes }, { projectId }) => ({
-  active: likes[projectId]
-});
+const stateToProps = ({ likes }, { entityId }) => ({
+  active: likes[entityId]
+})
 
 const dispatchToProps = {
   like,
-  unlike
-};
+  unlike,
+  checkIsLiked
+}
 
-export default connect(stateToProps, dispatchToProps)(LikeButton);
+export default connect(stateToProps, dispatchToProps)(LikeButton)
