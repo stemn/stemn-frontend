@@ -15,6 +15,7 @@ import ProjectSettings                         from './ProjectSettings'
 import ProjectSettingsGeneral                  from './ProjectSettingsGeneral'
 import ProjectSettingsTasks                    from './ProjectSettingsTasks'
 import ProjectSettingsTeam                     from './ProjectSettingsTeam'
+import ProjectSettingsTags                     from './ProjectSettingsTags'
 import ProjectTask                             from './ProjectTask'
 import ProjectTasks                            from './ProjectTasks'
 import ProjectView                             from './Project'
@@ -58,6 +59,7 @@ export default (
         <IndexRoute                            component={ProjectSettingsGeneral} />
         <Route path="tasks"                    component={ProjectSettingsTasks} />
         <Route path="team"                     component={ProjectSettingsTeam} />
+        <Route path="tags"                     component={ProjectSettingsTags} />
       </Route>
     </Route>
     <Route path="404"                          component={NotFoundView} />

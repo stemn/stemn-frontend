@@ -31,10 +31,6 @@ module.exports = {
     new webpack.ProvidePlugin({
       'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'  // fetch API
     }),
-    // Static files
-    new CopyWebpackPlugin([{ 
-      from: path.join(__dirname, '../src/client/assets/static'),
-    }]),
     // Shared code
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',

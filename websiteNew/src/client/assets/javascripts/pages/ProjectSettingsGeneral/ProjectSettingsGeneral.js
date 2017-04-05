@@ -25,7 +25,7 @@ class ProjectSettingsGeneral extends Component {
     })
   }
   render() {
-    const { project, entityModel, saveProject } = this.props;
+    const { project, entityModel, saveProject, removeField, addField } = this.props;
     return (
       <div>
         <InfoPanel>
@@ -41,7 +41,7 @@ class ProjectSettingsGeneral extends Component {
             entityModel={ entityModel }
             confirmLinkRemote={ this.confirmLinkRemote }
           />
-        </InfoPanel>
+        </InfoPanel>        
         <InfoPanel>
           <DeleteSettings
             deleteProject={ this.confirmDeleteProject }

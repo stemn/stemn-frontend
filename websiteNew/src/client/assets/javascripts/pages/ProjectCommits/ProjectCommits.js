@@ -29,7 +29,6 @@ export default class ProjectCommits extends Component {
     const baseUrl = `/project/${project.data._id}`;
     
     const groupedCommits = groupByDay(syncTimeline.data);
-    console.log(groupedCommits);
     
     const getCalendarText = (time) => (moment(time).calendar().split(' at'))[0];
 

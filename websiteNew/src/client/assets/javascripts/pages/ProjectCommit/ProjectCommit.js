@@ -3,13 +3,17 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import classes from './ProjectCommit.css'
 
+import { groupRevisions }  from 'stemn-shared/misc/Timeline/Timeline.utils.js';
+
 import { Container } from 'stemn-shared/misc/Layout';
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar';
-//import FileCompare from 'stemn-shared/misc/FileCompare/FileCompare.jsx';
+import FileCompare from 'stemn-shared/misc/FileCompare/FileCompare.jsx';
 
 export default class ProjectCommit extends Component {
   renderLoaded() {
     const { commit: { data: commit }, project } = this.props;
+    
+    const groupedRevisions = groupRevisions(commit.data.items);
 
     return (
       <div>
@@ -37,9 +41,16 @@ export default class ProjectCommit extends Component {
           </Container>
         </div>
         <Container className={ classes.files }>
-          { commit.data.items.map((commit) => (
-            <div key={ commit._id }>{ commit.data.name }</div>
-          ))}
+          <div className='text-mini-caps'>Files updated:</div>
+          { groupedRevisions.map((file) => (
+            <FileCompare 
+              className={ classes.file }
+              project={ project } 
+              file={ file } 
+              type='collapse' 
+              key={ file._id }
+            />
+           ))}
         </Container>
       </div>
     );

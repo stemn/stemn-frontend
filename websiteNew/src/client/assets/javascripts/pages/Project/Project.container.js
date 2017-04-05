@@ -6,6 +6,7 @@ import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc';
 import { getProject } from 'stemn-shared/misc/Projects/Projects.actions';
 
 import Project from './Project';
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 const stateToProps = (state, { params, location }) => ({
   project: state.projects.data[params.stub],
@@ -27,8 +28,14 @@ const fetchConfigs = [{
 @fetchDataHoc(fetchConfigs)
 class ProjectContainer extends Component {
   render() {
+    const isLoaded = this.props.project && this.props.project.data;
     return (
-      <Project {...this.props} />
+      <div className='layout-column flex'>
+        <LoadingOverlay show={ !isLoaded } hideBg/>
+        { isLoaded 
+        ? <Project {...this.props} />
+        : null }
+      </div>
     );
   }
 }

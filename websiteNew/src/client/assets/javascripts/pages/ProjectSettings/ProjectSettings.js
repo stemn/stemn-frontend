@@ -17,9 +17,10 @@ export default class ProjectSettings extends Component {
           <Row className="layout-row">
             <Col style={ { width: '250px' } }>
               <NavPillContainer>
-                <NavPill to={ baseUrl } onlyActiveOnIndex={true}>General Settings</NavPill>
-                <NavPill to={ baseUrl + '/tasks' }>Task Settings</NavPill>
-                <NavPill to={ baseUrl + '/team'}>Team Settings</NavPill>
+                <NavPill to={ baseUrl } onlyActiveOnIndex={true}>General</NavPill>
+                <NavPill to={ baseUrl + '/tags' }>Tags</NavPill>
+                <NavPill to={ baseUrl + '/tasks' }>Task</NavPill>
+                <NavPill to={ baseUrl + '/team'}>Team</NavPill>
               </NavPillContainer>
             </Col>
             <Col className="flex">

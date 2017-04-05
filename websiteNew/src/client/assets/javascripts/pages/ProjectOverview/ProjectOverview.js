@@ -5,6 +5,8 @@ import classes from './ProjectOverview.css'
 
 import { projectRoute, fileRoute, projectFolderRoute } from 'route-actions';
 
+import moment from 'moment';
+
 import FileList from 'stemn-shared/misc/FileList/FileList';
 import Readme from 'stemn-shared/misc/Files/Readme/Readme.jsx';
 import { Container } from 'stemn-shared/misc/Layout';
@@ -45,7 +47,7 @@ export default class ProjectOverview extends Component {
         <div className={ classNames('layout-row', classes.infoBoxes)}>
           <div className='flex'>
             <MdAccessTime />
-            Updated 1 month ago
+            Updated { moment(project.data.updated).fromNow() }
           </div>
           <div className='flex'>
             <MdPeople />
@@ -77,7 +79,11 @@ export default class ProjectOverview extends Component {
                   { project.data.fields.map((field) => <Tag className='primary' key={ field._id } text={ field.name } /> )}
                 </div>
                 <div className="flex" />
-                <LikeButton />
+                <LikeButton 
+                  number={ project.data.likes } 
+                  entityType='project'
+                  entityId={ project.data._id }
+                />
               </div>
             </Container>
           </div>

@@ -19,6 +19,7 @@ import SimpleTable from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable';
 import Timeline from 'stemn-shared/misc/Timeline/Timeline';
 import TimelineVertical from 'stemn-shared/misc/TimelineVertical/TimelineVertical';
 import FileCompareInner from 'stemn-shared/misc/FileCompare/FileCompareInner/FileCompareInner';
+import FileCompareMenu from 'stemn-shared/misc/FileCompare/FileCompareMenu';
 
 
 
@@ -46,11 +47,27 @@ class File extends Component {
     }
   }
   
+  changeMode = (mode, revisions) => {
+    let { selected1, selected2 } = this.state;
+    // If a second file is not selected - we select one if possible
+    if(!selected2){
+      const revisionIndex = revisions.findIndex(revision => revision.data.fileId == selected1.data.fileId && revision.data.revisionId == selected1.data.revisionId);
+      if(revisions[revisionIndex - 1]){selected2 = revisions[revisionIndex - 1];}
+      else if(revisions[revisionIndex + 1]){selected2 = revisions[revisionIndex + 1];}
+    }
+    this.setState({mode, selected2})
+  }
+  
   onSelect = (response) => {
     const stateToSet = this.state.mode == 'single' || this.state.lastSelected == 2
     ? {selected1: response, lastSelected: 1}
     : {selected2: response, lastSelected: 2};
     this.setState(stateToSet);
+  }
+  
+  clickTag = (task) => {
+    this.props.dispatch(ModalActions.showModal({modalType: 'TASK', limit: 1, modalProps: { taskId: task._id }}));
+    this.props.dispatch(ElectronWindowsActions.show('main'))
   }
   
   isSelected = (item) => {
@@ -74,6 +91,13 @@ class File extends Component {
         <div className={ classes.header }>
           <FileBreadCrumbs meta={ file.data } clickFn={ this.clickFileOrFolder } popup />
           <div className='flex'/>
+          <FileCompareMenu
+            file1={ file1 }
+            file2={ file2 }
+            revisions={ revisions }
+            mode={ mode }
+            changeMode={ this.changeMode }
+          />
         </div>
         <div className='layout-row flex'>
           <div className='layout-column flex'>

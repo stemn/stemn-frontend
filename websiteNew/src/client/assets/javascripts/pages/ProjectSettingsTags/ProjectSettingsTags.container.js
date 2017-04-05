@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ProjectSettingsGeneral from './ProjectSettingsGeneral';
-import { saveProject } from 'stemn-shared/misc/Projects/Projects.actions';
+import ProjectSettingsTags from './ProjectSettingsTags';
+import { saveProject, removeField, addField } from 'stemn-shared/misc/Projects/Projects.actions';
 
 const stateToProps = ({ projects }, { params }) => {
   const projectId   = params.stub;
@@ -17,13 +17,15 @@ const stateToProps = ({ projects }, { params }) => {
 
 const dispatchToProps = {
   saveProject,
+  removeField, 
+  addField
 };
 
 @connect(stateToProps, dispatchToProps)
-export default class ProjectSettingsGeneralContainer extends Component {
+export default class ProjectSettingsTagsContainer extends Component {
   render() {
     return (
-      <ProjectSettingsGeneral {...this.props} />
+      <ProjectSettingsTags {...this.props} />
     );
   }
 }

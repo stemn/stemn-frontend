@@ -2,9 +2,10 @@ import { combineReducers } from 'redux';
 import { routerReducer as routing } from 'react-router-redux';
 
 import auth             from 'stemn-shared/misc/Auth/Auth.reducer.js';
+import autosuggest      from 'stemn-shared/misc/Autosuggest/Autosuggest.reducer.js';
 import changes          from 'stemn-shared/misc/Changes/Changes.reducer.js';
-import commits          from 'stemn-shared/misc/Commits/Commits.reducer.js';
 import comments         from 'stemn-shared/misc/Comments/Comments.reducer.js';
+import commits          from 'stemn-shared/misc/Commits/Commits.reducer.js';
 import fileCompare      from 'stemn-shared/misc/FileCompare/FileCompare.reducer.js';
 import fileList         from 'stemn-shared/misc/FileList/FileList.reducer.js';
 import fileSelect       from 'stemn-shared/misc/FileSelect/FileSelect.reducer.js';
@@ -20,7 +21,6 @@ import tasks            from 'stemn-shared/misc/Tasks/Tasks.reducer.js';
 import toasts           from 'stemn-shared/misc/Toasts/Toasts.reducer.js';
 import togglePanel      from 'stemn-shared/misc/TogglePanel/TogglePanel.reducer.js';
 import upload           from 'stemn-shared/misc/Upload/Upload.reducer.js';
-import userSearch       from 'stemn-shared/misc/UserSearch/UserSearch.reducer.js';
 import users            from 'stemn-shared/misc/Users/Users.reducer.js';
 import walkthrough      from 'stemn-shared/misc/Walkthrough/Walkthrough.reducer.js';
 
@@ -45,7 +45,7 @@ export default combineReducers({
   toasts,
   togglePanel,
   upload,
-  userSearch,
+  autosuggest,
   users,
   walkthrough,
 });

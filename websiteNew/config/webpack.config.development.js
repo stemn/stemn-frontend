@@ -36,7 +36,7 @@ module.exports = merge(config, {
   ],
   module: {
     loaders: [
-      // Global Sass
+      // Globals
       {
         test: /\.(css|scss)$/,
         include: [
@@ -49,7 +49,7 @@ module.exports = merge(config, {
           { loader: 'sass', query: { outputStyle: 'expanded' } }
         ]
       },
-      // Sass + CSS Modules
+      // CSS Modules
        {
          test: /\.(css|scss)$/,
          include: [

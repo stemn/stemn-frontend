@@ -9,6 +9,12 @@ const GLOBALS = {
   'process.env': {
     'NODE_ENV': JSON.stringify('production')
   },
+  GLOBAL_ENV: {
+    APP_TYPE: JSON.stringify('web'),
+    NODE_ENV: JSON.stringify('production'),
+    WEBSITE_URL: JSON.stringify('http://stemn.com'),
+    API_SERVER: JSON.stringify('http://35.167.249.144'),
+  },
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
 };
 
@@ -24,6 +30,9 @@ module.exports = merge(config, {
       {
         from: path.join(__dirname, '../src/client/assets/images'),
         to: 'images'
+      }, {
+        from: path.join(__dirname, '../src/client/assets/static'),
+        to: 'static'
       }
     ]),
     // Avoid publishing files when compilation fails
@@ -52,13 +61,11 @@ module.exports = merge(config, {
   module: {
     noParse: /\.min\.js$/,
     loaders: [
-      // Sass
+      // Globals
       {
-        test: /\.scss$/,
+        test: /\.(css|scss)$/,
         include: [
-          path.resolve(__dirname, '../src/client/assets/javascripts'),
-          path.resolve(__dirname, '../src/client/assets/styles'),
-          path.resolve(__dirname, '../src/client/scripts')
+          path.resolve(__dirname, '../src/client/assets/styles/global'),
         ],
         loader: ExtractTextPlugin.extract({
           fallbackLoader: 'style',
@@ -69,34 +76,30 @@ module.exports = merge(config, {
           ]
         })
       },
-      // Sass + CSS Modules
-      // {
-      //   test: /\.scss$/,
-      //   include: /src\/client\/assets\/javascripts/,
-      //   loader: ExtractTextPlugin.extract({
-      //     fallbackLoader: 'style',
-      //     loader: [
-      //       {
-      //         loader: 'css',
-      //         query: {
-      //           modules: true,
-      //           importLoaders: 1,
-      //           localIdentName: '[path][name]__[local]--[hash:base64:5]'
-      //         }
-      //       },
-      //       'postcss',
-      //       { loader: 'sass', query: { outputStyle: 'compressed' } }
-      //     ]
-      //   })
-      // },
-      // CSS
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style',
-          loader: ['css', 'postcss']
-        })
-      }
+      // CSS Modules
+       {
+         test: /\.(css|scss)$/,
+         include: [
+           path.resolve(__dirname, '../src/client/assets/javascripts'),
+           path.resolve(__dirname, '../src/client/assets/styles/modules'),
+           path.resolve(__dirname, '../node_modules/stemn-frontend-shared')
+         ],
+         loader: ExtractTextPlugin.extract({
+           fallbackLoader: 'style',
+           loader: [
+             {
+               loader: 'css',
+               query: {
+                 modules: true,
+                 importLoaders: 1,
+                 localIdentName: '[path][name]__[local]--[hash:base64:5]'
+               }
+             },
+             'postcss',
+             { loader: 'sass', query: { outputStyle: 'compressed' } }
+           ]
+         })
+       },
     ]
   },
 });

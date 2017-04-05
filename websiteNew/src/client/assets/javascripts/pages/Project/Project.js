@@ -17,21 +17,21 @@ class Project extends Component {
       <div className="layout-column flex">
         <div className={ classes.header }>
           <Container className={classNames(classes.headerInner, 'layout-row layout-align-start-center')}>
-            <a href="">
+            <Link to={`/users/${ project.data.team[0]._id }`}>
               <UserAvatar
                 name={ project.data.team[0].name }
                 picture={ project.data.team[0].picture }
                 size={ 30 }
                 shape='square'
               />
-            </a>
+            </Link>
             <h1 className={ classes.title }>
               { project.data.name }
             </h1>
             <div className='flex'></div>
             <Tabs noline className={ classes.tabs }>
               <Link 
-                className={ classNames({ 'active': pathname === `/project/${project.data._id}` }) } 
+                className={ classNames({ 'active': pathname === `/project/${project.data._id}` || pathname.includes(`/project/${project.data._id}/files/`)}) } 
                 to={`/project/${project.data._id}`}>
                 Overview
               </Link>
