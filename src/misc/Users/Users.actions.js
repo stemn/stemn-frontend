@@ -15,7 +15,7 @@
 const fields = {
   sm: ['name', 'picture', 'stub'],
   md: ['name', 'picture', 'stub', 'blurb'],
-  lg: ''
+  lg: ['*']
 }
 
 const shouldDownload = (requestedSize, existingSize) => {
