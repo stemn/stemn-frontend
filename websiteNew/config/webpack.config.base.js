@@ -1,11 +1,11 @@
 // Common Webpack configuration used by webpack.config.development and webpack.config.production
-const path = require('path');
-const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HappyPack = require('happypack');
-const querystring = require('querystring');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path')
+const webpack = require('webpack')
+const autoprefixer = require('autoprefixer')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HappyPack = require('happypack')
+const querystring = require('querystring')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const babelLoaderQuery = {
   presets: [
@@ -17,8 +17,7 @@ const babelLoaderQuery = {
     'babel-plugin-transform-decorators-legacy',
     'react-hot-loader/babel'
   ].map(require.resolve),
-};
-
+}
 
 module.exports = {
   output: {

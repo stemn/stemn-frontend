@@ -1,17 +1,26 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 
-import UserStars from './UserStars';
+import { getUserStars } from 'stemn-shared/misc/UserStars/UserStars.actions.js'
+
+import UserStars from './UserStars'
 
 const stateToProps = (state, { params }) => ({
   user: state.users[params.stub],
-  projects: state.projects.userProjects
-});
+  followers: state.userStars[params.stub]
+})
 
-const dispatchToProps = {};
+const dispatchToProps = {
+  getUserStars
+}
 
-const fetchConfigs = [];
+const fetchConfigs = [{
+  hasChanged: 'params.stub',
+  onChange: (props) => {
+    props.getUserStars({ userId: props.params.stub })
+  }
+}]
 
 @connect(stateToProps, dispatchToProps)
 @fetchDataHoc(fetchConfigs)
@@ -19,6 +28,6 @@ export default class UserStarsContainer extends Component {
   render() {
     return (
       <UserStars {...this.props} />
-    );
+    )
   }
 }
