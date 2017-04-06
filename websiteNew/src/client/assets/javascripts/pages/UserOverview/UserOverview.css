@@ -6,7 +6,7 @@
   margin-bottom: 14px;
 }
 
-.heatGraph {
+.panel {
   background: white;
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -27,6 +27,10 @@
 :global(.react-calendar-heatmap rect:hover) {
   stroke: #555;
   stroke-width: 1px;
+}
+
+:global(.react-calendar-heatmap rect) {
+  transition: 0.3s ease all;
 }
 
 

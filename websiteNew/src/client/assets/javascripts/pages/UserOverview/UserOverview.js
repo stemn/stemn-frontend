@@ -8,27 +8,28 @@ import { Row, Col } from 'stemn-shared/misc/Layout'
 import Project from 'modules/Project';
 import CalendarHeatmap from 'react-calendar-heatmap';
 
-const values = [
-  { date: '2017-04-01', count: 1 },
-  { date: '2017-04-03', count: 2 },
-  { date: '2017-04-06', count: 3 },  
-  { date: '2017-02-01', count: 4 },
-  { date: '2017-02-03', count: 2 },
-  { date: '2017-02-06', count: 5 },  
-  { date: '2017-01-01', count: 1 },
-  { date: '2017-01-04', count: 2 },
-  { date: '2017-01-06', count: 5 },  
-  { date: '2017-01-07', count: 4 },
-  { date: '2017-01-12', count: 3 },
-  { date: '2017-01-18', count: 3 },
-];
+const normaliseValue = (value) => {
+  if ( value === 0) {
+    return 0
+  } else if ( value === 1 ) {
+    return 1
+  } else if ( value <= 3 ) {
+    return 2
+  } else if ( value <= 5 ) {
+    return 3
+  } else if ( value <= 10 ) {
+    return 4
+  } else {
+    return 5
+  }
+};
 
 export default class UserOverview extends Component {
   getColorClass = (value) => {
     if (!value) {
       return classes.s0
     }
-    return classes[`s${value.count}`];
+    return classes[`s${normaliseValue(value.count)}`];
   }
   render() {
     const { user, projects } = this.props;
@@ -50,15 +51,22 @@ export default class UserOverview extends Component {
           ))}
         </Row>
         <br/>
-        <div className='text-mini-caps'>Contribution Activity</div>
+        <div className='text-mini-caps'>Contribution History</div>
         <br/>
-        <div className={ classes.heatGraph }>
+        <div className={ classes.panel }>
           <CalendarHeatmap
             numDays={280}
             gutterSize={2}
-            values={ values }
+            values={ user.commitHistory && user.commitHistory.data ? user.commitHistory.data : [] }
             classForValue={ this.getColorClass }
           />
+        </div>
+        <br/>
+        <br/>
+        <div className='text-mini-caps'>Contribution Activity</div>
+        <br/>
+        <div className={ classes.panel }>
+          The contribution timeline will go here. Similar to the tasks page...
         </div>
 
       </div>
