@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as FilesActions from '../Files.actions.js';
+import { loadCode } from 'stemn-shared/misc/CodeSplitting/CodeSplitting.actions';
 
 // Component Core
 import React from 'react';
@@ -16,9 +17,7 @@ import classes from './PreviewFile.css';
 // Sub Components
 import PreviewCode        from './PreviewCode/PreviewCode';
 import PreviewPcb         from './PreviewPcb/PreviewPcb';
-import PreviewPdf         from './PreviewPdf/PreviewPdf';
 import PreviewImage       from './PreviewImage/PreviewImage';
-import PreviewCad         from './PreviewCad/PreviewCad';
 import PreviewGoogle      from './PreviewGoogle/PreviewGoogle';
 import PreviewGdoc        from './PreviewGdoc/PreviewGdoc';
 import LoadingOverlay     from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
@@ -31,8 +30,22 @@ import ErrorMessages      from './Messages/Messages.jsx';
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
+  getPreviewCad() {
+    const cacheKey = 'previewCad';
+    const importPromise = System.import('./PreviewCad/PreviewCad').then((response) => this.PreviewCad = response.default);
+    if (!this.props.codeSplitting[cacheKey]) {
+      this.props.loadCode(importPromise, cacheKey);
+    }
+  },  
+  getPreviewPdf() {
+    const cacheKey = 'previewPdf';
+    const importPromise = System.import('./PreviewPdf/PreviewPdf').then((response) => this.PreviewPdf = response.default);
+    if (!this.props.codeSplitting[cacheKey]) {
+      this.props.loadCode(importPromise, cacheKey);
+    }
+  },
   render() {
-    const { file, fileData, fileRender, filesActions, header, event } = this.props;
+    const { file, fileData, fileRender, filesActions, header, event, codeSplitting, loadCode } = this.props;
     const previewId = `${file.project._id}-${file.fileId}-${file.revisionId}`;
 
     const renderFn = () => {
@@ -50,6 +63,7 @@ export const Component = React.createClass({
       if(fileData && fileData.error || fileRender && fileRender.error){
         return <ErrorMessages error={fileData && fileData.error ? fileData.error : fileRender.error} fileMeta={file}/>
       }
+      
       if(viewerType == 'gerber' || viewerType == 'pcb'){
         return <PreviewPcb previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile} />
       }
@@ -57,7 +71,10 @@ export const Component = React.createClass({
         return <PreviewCode previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile} />
       }
       else if(viewerType == 'autodesk'){
-        return <PreviewCad previewId={previewId} fileMeta={file} fileRender={fileRender} renderFn={renderFn}/>
+        this.getPreviewCad();
+        return this.PreviewCad
+          ? <this.PreviewCad previewId={previewId} fileMeta={file} fileRender={fileRender} renderFn={renderFn}/>
+          : <div>Loading</div>
       }
       else if(viewerType == 'google'){
         return <PreviewGoogle previewId={previewId} fileMeta={file} />
@@ -69,7 +86,10 @@ export const Component = React.createClass({
         return <PreviewImage previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile} />
       }
       else if(viewerType == 'pdf'){
-        return <PreviewPdf previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile} />
+        this.getPreviewPdf();
+        return this.PreviewPdf
+          ? <this.PreviewPdf previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile} />
+          : <div>Loading</div>
       }
       else{
         return (
@@ -98,19 +118,21 @@ export const Component = React.createClass({
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps({files}, {project, file, event}) {
+function mapStateToProps({files, codeSplitting}, {project, file, event}) {
   const cacheKey = event && event.timestamp && isAssembly(file.extension)
                  ? `${file.fileId}-${file.revisionId}-${event.timestamp}`
                  : `${file.fileId}-${file.revisionId}`;
   return {
-    fileData  : files.fileData[cacheKey],
+    fileData: files.fileData[cacheKey],
     fileRender: files.fileRenders[cacheKey],
+    codeSplitting
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     filesActions: bindActionCreators(FilesActions, dispatch),
+    loadCode: bindActionCreators(loadCode, dispatch),
   }
 }
 

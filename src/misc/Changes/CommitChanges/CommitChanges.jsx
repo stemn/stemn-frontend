@@ -6,7 +6,7 @@ import FileChangeRow from './FileChangeRow';
 import FileChangeTitleRow from './FileChangeTitleRow';
 import FileChangeMenu from './FileChange.menu.js';
 import ContextMenu from 'stemn-shared/misc/ContextMenu/ContextMenu.jsx';
-import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import Popover from 'stemn-shared/misc/Popover/Popover';
 import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList';
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
@@ -48,12 +48,12 @@ export default React.createClass({
               checkbox={true}
               value={allChecked}
               changeAction={toggleAll}>
-              <PopoverMenu preferPlace="below">
+              <Popover preferPlace="below">
                 <SimpleIconButton title="Filter changes">
                   <MdMoreHoriz size="20px" />
                 </SimpleIconButton>
                 <PopoverMenuList menu={filterMenu}/>
-              </PopoverMenu>
+              </Popover>
             </FileChangeTitleRow>
           </Walkthrough>
           {groupedChanges.length > 0

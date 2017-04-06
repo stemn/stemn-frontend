@@ -19,7 +19,7 @@ import { getViewerType } from 'stemn-shared/misc/Files/PreviewFile/PreviewFile.u
 import classNames from 'classnames';
 
 // Sub Components
-import PopoverMenu          from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import Popover              from 'stemn-shared/misc/Popover';
 import PopoverMenuList      from 'stemn-shared/misc/PopoverMenu/PopoverMenuList';
 import SimpleIconButton     from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import { getCompareModes, getCompareIcon } from '../FileCompare.utils.js';
@@ -107,7 +107,7 @@ export const Component = React.createClass({
       <div>
         {
           revisions && revisions.length > 1 || file1 && file2 ?
-          <PopoverMenu preferPlace="below">
+          <Popover preferPlace="below">
             <SimpleIconButton title="Compare">
               <CompareIcon size="20px" />
             </SimpleIconButton>
@@ -118,7 +118,7 @@ export const Component = React.createClass({
                 Compare: {item.text}
               </a>)}
             </div>
-          </PopoverMenu>
+          </Popover>
           : null
         }
         {
@@ -128,12 +128,12 @@ export const Component = React.createClass({
           </SimpleIconButton>
           : null
         }
-        <PopoverMenu preferPlace="below">
+        <Popover preferPlace="below">
           <SimpleIconButton title="Options">
             <MdMoreHoriz size="20px" />
           </SimpleIconButton>
           <PopoverMenuList menu={this.menu()} />
-        </PopoverMenu>
+        </Popover>
       </div>
     );
   }

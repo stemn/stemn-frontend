@@ -8,7 +8,7 @@ import classNames from 'classnames';
 import FileChangeTitleRow  from 'stemn-shared/misc/Changes/CommitChanges/FileChangeTitleRow';
 import LoadingOverlay      from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import MdMoreHoriz         from 'react-icons/md/more-horiz';
-import PopoverMenu         from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import Popover             from 'stemn-shared/misc/Popover';
 import SidebarTimelineRow  from './SidebarTimelineRow'
 import SimpleIconButton    from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import StringFilterMenu    from 'stemn-shared/misc/StringFilter/StringFilterMenu.jsx';
@@ -56,7 +56,7 @@ export default React.createClass({
     return (
       <div className="layout-column flex">
         <FileChangeTitleRow text="Recent Commits">
-          <PopoverMenu preferPlace="below">
+          <Popover preferPlace="below">
             <SimpleIconButton>
               <MdMoreHoriz size="20px" />
             </SimpleIconButton>
@@ -65,7 +65,7 @@ export default React.createClass({
               <div className="divider"></div>
               <a onClick={refresh}>Refresh</a>
             </div>
-          </PopoverMenu>
+          </Popover>
         </FileChangeTitleRow>
         {
           filteredItems && filteredItems.length > 0

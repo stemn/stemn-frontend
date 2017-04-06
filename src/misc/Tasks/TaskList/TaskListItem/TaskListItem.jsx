@@ -22,7 +22,6 @@ import Input from 'stemn-shared/misc/Input/Input/Input';
 import UserAvatars from 'stemn-shared/misc/Avatar/UserAvatars/UserAvatars.jsx'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdOpenInNew from 'react-icons/md/open-in-new';
-import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
 import TaskLabelDots from 'stemn-shared/misc/Tasks/TaskLabelDots/TaskLabelDots.jsx'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea';
 import UserSelect from 'stemn-shared/misc/Users/UserSelect/UserSelect.jsx';

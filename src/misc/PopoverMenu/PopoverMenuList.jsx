@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import Popover from 'stemn-shared/misc/Popover/Popover';
 
 const MenuItem = React.createClass({
   render() {
@@ -10,7 +10,7 @@ const MenuItem = React.createClass({
     if(!menuItem.isHidden || !menuItem.isHidden(item)){
       if(menuItem.submenu){
         return (
-          <PopoverMenu preferPlace="right" trigger="hoverDelay" tipSize={0} offset={0}>
+          <Popover preferPlace="right" trigger="hoverDelay" tipSize={0} offset={0}>
             <div>
               <a onClick={() => menuItem.onClick(item)}
               className={classNames({'divider': menuItem.divider}, 'submenu')}>
@@ -18,7 +18,7 @@ const MenuItem = React.createClass({
               </a>
             </div>
             <div><Menu menu={menuItem.submenu}/></div>
-          </PopoverMenu>
+          </Popover>
         );
       }
       else{

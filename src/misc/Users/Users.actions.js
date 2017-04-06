@@ -75,3 +75,15 @@ export const saveUser = ({ user }) => ({
     userId: user._id
   }
 })
+
+export const getCommitHistory = ({ userId }) => ({
+  type: 'USERS/GET_COMMIT_HISTORY',
+  http: true,
+  payload: {
+    method: 'GET',
+    url: `/api/v1/users/${userId}/commitHistory`,
+  },
+  meta: {
+    userId
+  }
+})

@@ -3,7 +3,7 @@ import React from 'react';
 // Styles
 import classNames from 'classnames';
 
-import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import Popover from 'stemn-shared/misc/Popover';
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdDone from 'react-icons/md/done';
 import MdLink from 'react-icons/md/link';
@@ -22,7 +22,7 @@ export default class extends React.Component{
         {
           this.props.isLinked
           ?
-          <PopoverMenu preferPlace="right">
+          <Popover preferPlace="right">
             <SimpleIconButton>
               <MdMoreHoriz size="20"/>
             </SimpleIconButton>
@@ -30,7 +30,7 @@ export default class extends React.Component{
               <a onClick={this.props.unLinkFn}>Unlink Account</a>
               {this.props.email ? <a className="info">Email: {this.props.email}</a> : null}
             </div>
-          </PopoverMenu>
+          </Popover>
           : ''
         }
       </div>

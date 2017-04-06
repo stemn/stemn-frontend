@@ -2,3 +2,7 @@
   margin-left: -15px;
   margin-right: -15px;
 }
+
+.root:global(.sm) {
+  margin-left: -7px;
+  margin-right: -7px;}

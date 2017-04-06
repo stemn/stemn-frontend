@@ -20,7 +20,7 @@ import TasksFilterMenu      from './TasksFilterMenu/TasksFilterMenu.jsx';
 import TaskList             from './TaskList/TaskList.jsx';
 import Button               from 'stemn-shared/misc/Buttons/Button/Button'
 import MdSearch             from 'react-icons/md/search';
-import PopoverMenu          from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import Popover              from 'stemn-shared/misc/Popover';
 import Guide                from 'stemn-shared/misc/Guide/Guide';
 import cardsColumns         from './graphics/cards-columns.svg';
 import cardsStacked         from './graphics/cards-stacked.svg';
@@ -102,7 +102,7 @@ export const Tasks = React.createClass({
               <MdSearch size="25"/>
             </div>
             <div className="flex"></div>
-            <PopoverMenu preferPlace="below">
+            <Popover preferPlace="below">
               <Button style={{marginLeft: '10px'}} className="white">Layout</Button>
               <div className="PopoverMenu">
                 {layouts.map((layoutOpt, index) =>
@@ -113,11 +113,11 @@ export const Tasks = React.createClass({
                  </a>
                 )}
               </div>
-            </PopoverMenu>
-            <PopoverMenu preferPlace="below">
+            </Popover>
+            <Popover preferPlace="below">
               <Button style={{marginLeft: '10px'}} className="primary">Filter</Button>
               <TasksFilterMenu model={`${boardModel}.searchString`} value={board.searchString}/>
-            </PopoverMenu>
+            </Popover>
           </div>
           <TaskList className={classes.tasks} board={filterBoard(board, tasks, board.searchString)} layout={layout}/>
         </div>
