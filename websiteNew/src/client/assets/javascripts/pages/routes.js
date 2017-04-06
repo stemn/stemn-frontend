@@ -2,49 +2,50 @@ import React                                   from 'react'
 import { Route, IndexRoute, Redirect }         from 'react-router'
 
 // Routes that we don't split...
-import AppAuthed                               from 'pages/AppAuthed';
-import AppRoot                                 from 'pages/AppRoot';
-import AppUnAuthed                             from 'pages/AppUnAuthed';
-import NotFoundView                            from 'pages/NotFound';
+import AppAuthed                               from 'pages/AppAuthed'
+import AppRoot                                 from 'pages/AppRoot'
+import AppUnAuthed                             from 'pages/AppUnAuthed'
+import NotFoundView                            from 'pages/NotFound'
 
 // Route loading utils
 const errorLoading = (err)  =>{
-  console.error('Dynamic page loading failed', err);
+  console.error('Dynamic page loading failed', err)
 }
-const loadRoute = (cb) => (module) => cb(null, module.default);
-const getRoute = (systemImport, cb) => systemImport.then(loadRoute(cb)).catch(errorLoading);
+const loadRoute = (cb) => (module) => cb(null, module.default)
+
+const getRoute = (systemImport, cb) => systemImport.then(loadRoute(cb)).catch(errorLoading)
 
 // Async Routes
 // Split using webpack magic.
 // http://moduscreate.com/code-splitting-for-react-router-with-es6-imports/
-const getHome                    = (loc, cb) => getRoute(System.import('pages/Home'), cb);
-const getFile                    = (loc, cb) => getRoute(System.import('pages/File'), cb);
-const getLogin                   = (loc, cb) => getRoute(System.import('pages/Login'), cb);
-const getProject                 = (loc, cb) => getRoute(System.import('pages/Project'), cb);
-const getProjectCommit           = (loc, cb) => getRoute(System.import('pages/ProjectCommit'), cb);
-const getProjectCommits          = (loc, cb) => getRoute(System.import('pages/ProjectCommits'), cb);
-const getProjectOverview         = (loc, cb) => getRoute(System.import('pages/ProjectOverview'), cb);
-const getProjectSettings         = (loc, cb) => getRoute(System.import('pages/ProjectSettings'), cb);
-const getProjectSettingsGeneral  = (loc, cb) => getRoute(System.import('pages/ProjectSettingsGeneral'), cb);
-const getProjectSettingsTags     = (loc, cb) => getRoute(System.import('pages/ProjectSettingsTags'), cb);
-const getProjectSettingsTasks    = (loc, cb) => getRoute(System.import('pages/ProjectSettingsTasks'), cb);
-const getProjectSettingsTeam     = (loc, cb) => getRoute(System.import('pages/ProjectSettingsTeam'), cb);
-const getProjectTask             = (loc, cb) => getRoute(System.import('pages/ProjectTask'), cb);
-const getProjectTasks            = (loc, cb) => getRoute(System.import('pages/ProjectTasks'), cb);
-const getRegister                = (loc, cb) => getRoute(System.import('pages/Register'), cb);
-const getSettings                = (loc, cb) => getRoute(System.import('pages/Settings'), cb);
-const getSettingsAccount         = (loc, cb) => getRoute(System.import('pages/SettingsAccount'), cb);
-const getSettingsBilling         = (loc, cb) => getRoute(System.import('pages/SettingsBilling'), cb);
-const getSettingsEmails          = (loc, cb) => getRoute(System.import('pages/SettingsEmails'), cb);
-const getSettingsProfile         = (loc, cb) => getRoute(System.import('pages/SettingsProfile'), cb);
-const getSettingsProjects        = (loc, cb) => getRoute(System.import('pages/SettingsProjects'), cb);
-const getUser                    = (loc, cb) => getRoute(System.import('pages/User'), cb);
-const getUserDetails             = (loc, cb) => getRoute(System.import('pages/UserDetails'), cb);
-const getUserFollowers           = (loc, cb) => getRoute(System.import('pages/UserFollowers'), cb);
-const getUserFollowing           = (loc, cb) => getRoute(System.import('pages/UserFollowing'), cb);
-const getUserOverview            = (loc, cb) => getRoute(System.import('pages/UserOverview'), cb);
-const getUserProjects            = (loc, cb) => getRoute(System.import('pages/UserProjects'), cb);
-const getUserStars               = (loc, cb) => getRoute(System.import('pages/UserStars'), cb);
+const getHome                    = (loc, cb) => getRoute(System.import('pages/Home'), cb)
+const getFile                    = (loc, cb) => getRoute(System.import('pages/File'), cb)
+const getLogin                   = (loc, cb) => getRoute(System.import('pages/Login'), cb)
+const getProject                 = (loc, cb) => getRoute(System.import('pages/Project'), cb)
+const getProjectCommit           = (loc, cb) => getRoute(System.import('pages/ProjectCommit'), cb)
+const getProjectCommits          = (loc, cb) => getRoute(System.import('pages/ProjectCommits'), cb)
+const getProjectOverview         = (loc, cb) => getRoute(System.import('pages/ProjectOverview'), cb)
+const getProjectSettings         = (loc, cb) => getRoute(System.import('pages/ProjectSettings'), cb)
+const getProjectSettingsGeneral  = (loc, cb) => getRoute(System.import('pages/ProjectSettingsGeneral'), cb)
+const getProjectSettingsTags     = (loc, cb) => getRoute(System.import('pages/ProjectSettingsTags'), cb)
+const getProjectSettingsTasks    = (loc, cb) => getRoute(System.import('pages/ProjectSettingsTasks'), cb)
+const getProjectSettingsTeam     = (loc, cb) => getRoute(System.import('pages/ProjectSettingsTeam'), cb)
+const getProjectTask             = (loc, cb) => getRoute(System.import('pages/ProjectTask'), cb)
+const getProjectTasks            = (loc, cb) => getRoute(System.import('pages/ProjectTasks'), cb)
+const getRegister                = (loc, cb) => getRoute(System.import('pages/Register'), cb)
+const getSettings                = (loc, cb) => getRoute(System.import('pages/Settings'), cb)
+const getSettingsAccount         = (loc, cb) => getRoute(System.import('pages/SettingsAccount'), cb)
+const getSettingsBilling         = (loc, cb) => getRoute(System.import('pages/SettingsBilling'), cb)
+const getSettingsEmails          = (loc, cb) => getRoute(System.import('pages/SettingsEmails'), cb)
+const getSettingsProfile         = (loc, cb) => getRoute(System.import('pages/SettingsProfile'), cb)
+const getSettingsProjects        = (loc, cb) => getRoute(System.import('pages/SettingsProjects'), cb)
+const getUser                    = (loc, cb) => getRoute(System.import('pages/User'), cb)
+const getUserDetails             = (loc, cb) => getRoute(System.import('pages/UserDetails'), cb)
+const getUserFollowers           = (loc, cb) => getRoute(System.import('pages/UserFollowers'), cb)
+const getUserFollowing           = (loc, cb) => getRoute(System.import('pages/UserFollowing'), cb)
+const getUserOverview            = (loc, cb) => getRoute(System.import('pages/UserOverview'), cb)
+const getUserProjects            = (loc, cb) => getRoute(System.import('pages/UserProjects'), cb)
+const getUserStars               = (loc, cb) => getRoute(System.import('pages/UserStars'), cb)
 
 export default (
   <Route                                       component={AppRoot}>
