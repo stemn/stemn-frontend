@@ -54,11 +54,6 @@ class User extends Component {
       </div>
     )
   }
-  renderPending() {
-    return (
-      <div>Loading</div>
-    )
-  }
   render() {
     const { user, children } = this.props
 
@@ -69,7 +64,7 @@ class User extends Component {
         <LoadingOverlay show={ !isLoaded } hideBg/>
         { isLoaded
         ? this.renderComplete()
-        : this.renderPending() }
+        : null }
       </StandardLayout>
     )
   }

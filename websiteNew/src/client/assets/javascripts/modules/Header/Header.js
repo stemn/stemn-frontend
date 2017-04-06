@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import classes from './Header.css';
 import classNames from 'classnames';
 
+import { loginRoute } from 'route-actions';
+
 import { Container, Row, Col } from 'stemn-shared/misc/Layout';
 import Avatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar';
 import Popover from 'stemn-shared/misc/Popover';
@@ -13,6 +15,53 @@ import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleI
 import SiteSearch from 'modules/SiteSearch';
 
 class Header extends Component {
+  isLoggedIn() {
+    const { auth, logout, newProject } = this.props;
+    return (
+      <div className='layout-row layout-align-start-center'>
+        <SimpleIconButton
+         title='Create new project'
+         onClick={ newProject} >
+          <MdAdd size={ 25 }/>
+        </SimpleIconButton>
+        <SimpleIconButton
+         title='Notifications'
+         style={ { marginRight: '10px' } }>
+          <MdNotifications size={ 22 }/>
+        </SimpleIconButton>
+        <Popover
+          offset={13}
+          tipSize={1}
+          preferPlace='below'
+          trigger='click'>
+          <a>
+            <Avatar
+              shape='square'
+              size={ 30 }
+              name={ auth.user.name }
+              picture={ auth.user.picture }
+            />
+          </a>
+          <div className="PopoverMenu">
+            <Link to={`/users/${auth.user._id}`}>Your profile</Link>
+            <Link to={`/users/${auth.user._id}/stars`}>Your stars</Link>
+            <Link to='/settings'>Settings</Link>
+            <div className="divider" />
+            <a onClick={ logout }>Logout</a>
+          </div>
+        </Popover>
+      </div>
+    )
+
+  }
+  isLoggedOut() {
+    return (
+      <div className='layout-row layout-align-start-center'>
+        <Link to={ loginRoute() } className='link-primary'>Sign in</Link>
+      </div>
+    )
+
+  }
   render() {
     const { auth, logout, newProject } = this.props;
     return (
@@ -23,37 +72,9 @@ class Header extends Component {
           </Link>
           <SiteSearch />
           <div className="flex"></div>
-          <SimpleIconButton 
-           title='Create new project'
-           onClick={ newProject} >
-            <MdAdd size={ 25 }/>
-          </SimpleIconButton>
-          <SimpleIconButton 
-           title='Notifications' 
-           style={ { marginRight: '10px' } }>
-            <MdNotifications size={ 22 }/>
-          </SimpleIconButton>
-          <Popover 
-            offset={13}
-            tipSize={1}
-            preferPlace='below' 
-            trigger='click'>
-            <a>
-              <Avatar 
-                shape='square'
-                size={ 30 }
-                name={ auth.user.name }
-                picture={ auth.user.picture }
-              />
-            </a>
-            <div className="PopoverMenu">
-              <Link to={`/users/${auth.user._id}`}>Your profile</Link>
-              <a>Your stars</a>
-              <Link to='/settings'>Settings</Link>
-              <div className="divider" />
-              <a onClick={ logout }>Logout</a>
-            </div>
-          </Popover>
+          { auth.user._id
+          ? this.isLoggedIn()
+          : this.isLoggedOut() }
         </Container>
       </header>
     )

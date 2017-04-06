@@ -19,7 +19,7 @@ const fetchConfigs = [{
   onChange: (props) => {
     props.getUser({
       userId: props.userId,
-      size: 'sm'
+      size: 'md'
     })
   }
 }]

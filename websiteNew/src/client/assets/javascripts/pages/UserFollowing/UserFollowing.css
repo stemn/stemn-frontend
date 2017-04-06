@@ -1,0 +1,12 @@
+.panel {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: white;
+  padding: 30px;
+}
+
+.user {
+  margin-bottom: 20px;
+}
+.user:last-child {
+  margin-bottom: 0px;
+}
