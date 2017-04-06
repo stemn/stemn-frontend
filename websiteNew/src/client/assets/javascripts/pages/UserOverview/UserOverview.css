@@ -1,0 +1,46 @@
+.project {
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: white;
+  height: 160px;
+  margin-bottom: 14px;
+}
+
+.panel {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.summary {
+  white-space: pre-wrap;
+}
+
+
+:global(.react-calendar-heatmap text) {
+  font-size: 8px;
+  fill: #aaa;
+  padding-bottom: 4px;
+  display: inline-block;
+}
+
+:global(.react-calendar-heatmap > g:first-child) {
+  transform: translateY(-2px);
+}
+
+:global(.react-calendar-heatmap rect:hover) {
+  stroke: #555;
+  stroke-width: 1px;
+}
+
+:global(.react-calendar-heatmap rect) {
+  transition: 0.3s ease all;
+}
+
+
+.s0 { fill: rgba(0, 0, 0, 0.05); }
+.s1 { fill: rgba(68, 154, 211, 0.2); }
+.s2 { fill: rgba(68, 154, 211, 0.4); }
+.s3 { fill: rgba(68, 154, 211, 0.6); }
+.s4 { fill: rgba(68, 154, 211, 0.8); }
+.s5 { fill: rgba(68, 154, 211, 1); }

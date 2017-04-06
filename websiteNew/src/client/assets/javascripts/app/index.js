@@ -35,7 +35,8 @@ const initReactAndRedux = (initialState) => {
     </AppContainer>,
     rootEl
   );
-  if (module.hot) {
+  
+  if (module.hot && process.env.NODE_ENV !== 'production') {
     /**
      * Warning from React Router, caused by react-hot-loader.
      * The warning can be safely ignored, so filter it from the console.

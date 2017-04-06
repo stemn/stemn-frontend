@@ -1,8 +1,6 @@
-.panel {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-bottom: none;
-  background: white;
-}
 .project { 
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background: white;
+  margin-bottom: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }

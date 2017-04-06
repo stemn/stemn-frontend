@@ -10,9 +10,10 @@ import { Link } from 'react-router'
 
 class Project extends Component {
   render() {
-    const { project, className } = this.props
+    const { project, className, size } = this.props;
 
-    const projectId = project._id
+    const projectId = project._id;
+
     return (
       <div className={ classNames(classes.project, 'layout-row', className) } >
         <div className='layout-column flex'>
@@ -20,7 +21,7 @@ class Project extends Component {
           <div className={ classNames('flex', classes.blurb )}>{ project.blurb }</div>
           <div className={ classes.meta }>{ moment(project.updated).fromNow() }</div>
         </div>
-        { project.picture
+        { size === 'wide' && project.picture
         ? <Link to={ projectRoute({projectId}) }>
             <img
               className={ classes.picture }

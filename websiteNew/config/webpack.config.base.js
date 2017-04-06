@@ -1,9 +1,23 @@
 // Common Webpack configuration used by webpack.config.development and webpack.config.production
-const path = require('path')
-const webpack = require('webpack')
-const autoprefixer = require('autoprefixer')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const path = require('path');
+const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HappyPack = require('happypack');
+const querystring = require('querystring');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const babelLoaderQuery = {
+  presets: [
+    'babel-preset-es2015-native-modules',
+    'babel-preset-react',
+    'babel-preset-stage-0'
+  ].map(require.resolve),
+  plugins: [
+    'babel-plugin-transform-decorators-legacy',
+    'react-hot-loader/babel'
+  ].map(require.resolve),
+};
 
 
 module.exports = {
@@ -36,6 +50,13 @@ module.exports = {
       name: 'vendor',
       filename: 'js/vendor.bundle.js',
       minChunks: Infinity
+    }),
+    new HappyPack({
+      threads: 4,
+      loaders: [{
+        path: 'babel',
+        query: babelLoaderQuery
+      }],
     })
   ],
   module: {
@@ -54,22 +75,22 @@ module.exports = {
           path.resolve(__dirname, '../node_modules/react-icons'),
           path.resolve(__dirname, '../node_modules/react-popover-wrapper'),
         ],
-        query: {
-          presets: [
-            'babel-preset-es2015',
-            'babel-preset-react',
-            'babel-preset-stage-0'
-          ].map(require.resolve),
-          plugins: [
-            // 'babel-plugin-transform-runtime',
-            'babel-plugin-transform-decorators-legacy',
-            'react-hot-loader/babel'
-          ].map(require.resolve),
-        },
-        loader: 'babel'
+        loader: 'happypack/loader'
       },
       // Images
-      // Inline base64 URLs for <=8k images, direct URLs for the rest
+      // Any images inside FileList/filetype should use urls
+      // Small images in other folders will be inlined.
+      {
+        test: /\.(png|jpg|jpeg|gif|svg)$/,
+        include: [
+          path.resolve(__dirname, '../node_modules/stemn-frontend-shared/src/misc/FileList/filetype'),
+        ],
+        loader: 'url',
+        query: {
+          limit: 1,
+          name: 'images/[name].[ext]?[hash]'
+        }
+      },
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/,
         loader: 'url',

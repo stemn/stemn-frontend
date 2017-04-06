@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 
-import { getUserProjects } from 'stemn-shared/misc/Projects/Projects.actions.js';
+import { getCommitHistory } from 'stemn-shared/misc/Users/Users.actions'
 
 import UserOverview from './UserOverview';
 
@@ -11,9 +11,16 @@ const stateToProps = (state, { params }) => ({
   projects: state.projects.userProjects
 });
 
-const dispatchToProps = {};
+const dispatchToProps = {
+  getCommitHistory
+};
 
-const fetchConfigs = [];
+const fetchConfigs = [{
+  hasChanged: 'params.stub',
+  onChange: (props) => {
+    props.getCommitHistory({ userId: props.params.stub })
+  }
+}];
 
 @connect(stateToProps, dispatchToProps)
 @fetchDataHoc(fetchConfigs)

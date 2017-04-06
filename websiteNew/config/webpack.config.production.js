@@ -26,15 +26,6 @@ module.exports = merge(config, {
     vendor: ['react', 'react-dom', 'react-redux', 'react-router', 'react-router-redux', 'redux']
   },
   plugins: [
-    new CopyWebpackPlugin([
-      {
-        from: path.join(__dirname, '../src/client/assets/images'),
-        to: 'images'
-      }, {
-        from: path.join(__dirname, '../src/client/assets/static'),
-        to: 'static'
-      }
-    ]),
     // Avoid publishing files when compilation fails
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin(GLOBALS),
@@ -42,12 +33,14 @@ module.exports = merge(config, {
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
-        'screw_ie8': true
+        screw_ie8: true,
+        drop_console: true,
+        drop_debugger: true,
+        dead_code: true,
       },
       output: {
         comments: false
-      },
-      sourceMap: false
+      }
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
