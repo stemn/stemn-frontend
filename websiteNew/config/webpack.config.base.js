@@ -57,12 +57,7 @@ module.exports = {
         path: 'babel',
         query: babelLoaderQuery
       }],
-    }),
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, '../src/client/assets/index.html'),
-      filename: 'index.html',
-      inject: 'body',
-    }),
+    })
   ],
   module: {
     loaders: [

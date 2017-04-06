@@ -4,6 +4,7 @@ import { routerReducer as routing } from 'react-router-redux';
 import auth             from 'stemn-shared/misc/Auth/Auth.reducer.js';
 import autosuggest      from 'stemn-shared/misc/Autosuggest/Autosuggest.reducer.js';
 import changes          from 'stemn-shared/misc/Changes/Changes.reducer.js';
+import codeSplitting    from 'stemn-shared/misc/CodeSplitting/CodeSplitting.reducer.js';
 import comments         from 'stemn-shared/misc/Comments/Comments.reducer.js';
 import commits          from 'stemn-shared/misc/Commits/Commits.reducer.js';
 import fileCompare      from 'stemn-shared/misc/FileCompare/FileCompare.reducer.js';
@@ -26,7 +27,9 @@ import walkthrough      from 'stemn-shared/misc/Walkthrough/Walkthrough.reducer.
 
 export default combineReducers({
   auth,
+  autosuggest,
   changes,
+  codeSplitting,
   comments,
   commits,
   fileCompare,
@@ -45,7 +48,6 @@ export default combineReducers({
   toasts,
   togglePanel,
   upload,
-  autosuggest,
   users,
   walkthrough,
 });

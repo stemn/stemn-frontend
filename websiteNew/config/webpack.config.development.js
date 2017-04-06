@@ -2,6 +2,7 @@ const merge = require('webpack-merge');
 const webpack = require('webpack');
 const config = require('./webpack.config.base');
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 
 const GLOBALS = {
@@ -32,7 +33,16 @@ module.exports = merge(config, {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.DefinePlugin(GLOBALS)
+    new webpack.DefinePlugin(GLOBALS),
+    new CopyWebpackPlugin([
+      {
+        from: path.join(__dirname, '../src/client/assets/images'),
+        to: 'images'
+      }, {
+        from: path.join(__dirname, '../src/client/assets/static'),
+        to: 'static'
+      }
+    ]),
   ],
   module: {
     loaders: [
