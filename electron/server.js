@@ -20,6 +20,7 @@ compiler.plugin('compile', () => {
 
 compiler.plugin('done', (stats) => {
   console.log('Build Complete.');
+  // https://webpack.github.io/analyse/
   fs.writeFileSync('./stats.json', JSON.stringify(stats.toJson()));
   console.log('Stats.json created');
 });

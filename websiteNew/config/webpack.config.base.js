@@ -9,7 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const babelLoaderQuery = {
   presets: [
-    'babel-preset-es2015-native-modules',
+    'babel-preset-es2015',
     'babel-preset-react',
     'babel-preset-stage-0'
   ].map(require.resolve),
