@@ -1,4 +1,4 @@
-import { modelReducer, formReducer, modeled } from 'react-redux-form';
+import { modeled } from 'react-redux-form'
 
 const initialState = {
   searchString: '',
@@ -6,25 +6,24 @@ const initialState = {
   showMenubar: false, // shows the sidebar
 }
 
-
 const mainReducer = (state, action) => {
   switch (action.type) {
     case 'SIDEBAR/TOGGLE_SIDEBAR':
       return {...state,
         show: action.payload || !state.show
-      }    
+      }
     case 'SIDEBAR/TOGGLE_MENUBAR_SIDEBAR':
       return {...state,
         showMenubar: action.payload || !state.showMenubar
       }
     default:
-      return state;
+      return state
   }
 }
 
 export default function (state = initialState, action) {
   if (!state.hydrated) {
-    state = { ...initialState, ...state, hydrated: true };
+    state = { ...initialState, ...state, hydrated: true }
   }
   return modeled(mainReducer, 'sidebar')(state, action)
 }

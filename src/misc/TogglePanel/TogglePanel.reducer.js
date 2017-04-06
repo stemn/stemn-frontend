@@ -1,8 +1,6 @@
-import i from 'icepick';
+import i from 'icepick'
 
-const initialState = {
-
-};
+const initialState = {}
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -12,7 +10,7 @@ export default (state = initialState, action = {}) => {
       const newItems = action.payload.cacheKeys.reduce((accum, val) => {
         accum[val] = action.payload.value
         return accum
-      }, {});
+      }, {})
       return Object.assign({}, state, newItems)
     default:
       return state

@@ -1,8 +1,8 @@
-import i from 'icepick';
-import { modeled } from 'react-redux-form';
+import i from 'icepick'
+import { modeled } from 'react-redux-form'
 
 const initialState = {
-  tasks: {},
+  tasks: {}
 }
 
 const mainReducer = (state, action) => {
@@ -10,7 +10,7 @@ const mainReducer = (state, action) => {
     case 'MENTIONS/':
       return state
     default:
-      return state;
+      return state
   }
 }
 export default function (state = initialState, action) {

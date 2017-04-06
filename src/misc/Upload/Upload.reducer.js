@@ -1,6 +1,6 @@
-import i from 'icepick';
+import i from 'icepick'
 
-const initialState = { };
+const initialState = {}
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -23,6 +23,6 @@ export default (state = initialState, action = {}) => {
       .assocIn([action.meta.cacheKey, 'files', '0', 'response'], action.payload.data)
       .value()
     default:
-      return state;
+      return state
   }
 }

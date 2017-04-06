@@ -1,12 +1,11 @@
 import i from 'icepick'
 
-const initialState = {
-}
+const initialState = {}
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case 'CODE_SPLITTING/LOAD_PENDING':
-      return i.assocIn(state, [action.meta.cacheKey, 'loading'], true)    
+      return i.assocIn(state, [action.meta.cacheKey, 'loading'], true)
     case 'CODE_SPLITTING/LOAD_FULFILLED':
       return i.chain(state)
         .assocIn([action.meta.cacheKey, 'loading'], false)

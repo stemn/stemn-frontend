@@ -1,9 +1,7 @@
 import i from 'icepick'
-import { modeled } from 'react-redux-form';
+import { modeled } from 'react-redux-form'
 
-const initialState = {
-
-}
+const initialState = {}
 
 function reducer(state, action) {
   switch (action.type) {
@@ -19,9 +17,9 @@ function reducer(state, action) {
       return i.chain(state)
         .assocIn([action.meta.cacheKey, 'data'], action.payload.data)
         .assocIn([action.meta.cacheKey, 'loading'], false)
-        .value();
+        .value()
     default:
-      return state;
+      return state
   }
 }
 

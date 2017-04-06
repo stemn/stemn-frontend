@@ -1,8 +1,8 @@
-import i from 'icepick';
+import i from 'icepick'
 
 const initialState = {
   stack: []
-};
+}
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -11,11 +11,11 @@ export default (state = initialState, action = {}) => {
         stack: i.push(state.stack, action.payload)
       })
     case 'TOAST/HIDE':
-      const index = state.stack.findIndex(toast => toast.id == action.payload.id);
+      const index = state.stack.findIndex(toast => toast.id === action.payload.id)
       return i.merge(state, {
         stack: i.splice(state.stack, index, 1)
       })
     default:
-      return state;
+      return state
   }
 }

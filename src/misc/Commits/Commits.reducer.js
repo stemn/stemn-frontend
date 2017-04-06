@@ -1,7 +1,6 @@
 import i from 'icepick'
 
-const initialState = {
-}
+const initialState = {}
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -13,8 +12,8 @@ export default (state = initialState, action = {}) => {
       return i.chain(state)
         .assocIn([action.meta.cacheKey, 'data'], action.payload.data)
         .assocIn([action.meta.cacheKey, 'loading'], false)
-        .value();
+        .value()
     default:
-      return state;
+      return state
   }
 }

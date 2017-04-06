@@ -1,8 +1,6 @@
-import i from 'icepick';
+import i from 'icepick'
 
-const initialState = {
-
-};
+const initialState = {}
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -15,6 +13,6 @@ export default (state = initialState, action = {}) => {
     case 'FILE_SELECT/CHANGE_PATH':
       return i.assocIn(state, [action.meta.storeKey, 'path'], action.payload.path)
     default:
-      return state;
+      return state
   }
 }
