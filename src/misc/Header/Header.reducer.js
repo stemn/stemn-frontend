@@ -1,10 +1,9 @@
-/* eslint-disable no-param-reassign */
 const initialState = {
   navMenu: [
     {
       name: 'Changes',
       path: '/'
-    },{
+    }, {
       name: 'History',
       path: '/feed'
     }
@@ -12,7 +11,7 @@ const initialState = {
   userPopup: {
     isOpen: false
   }
-};
+}
 
 export default function job(state = initialState, action) {
   switch (action.type) {
@@ -20,9 +19,9 @@ export default function job(state = initialState, action) {
       return {...state,
         userPopup: { ...state.userPopup,
           isOpen: action.payload || !state.userPopup.isOpen
-         }
+        }
       }
     default:
-      return state;
+      return state
   }
 }

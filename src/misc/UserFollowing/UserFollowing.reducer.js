@@ -4,11 +4,11 @@ const initialState = {}
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
-    case 'USER_FOLLOWERS/GET_FOLLOWERS_PENDING':
+    case 'USER_FOLLOWING/GET_FOLLOWING_PENDING':
       return i.assocIn(state, [action.meta.userId, 'loading'], true)
-    case 'USER_FOLLOWERS/GET_FOLLOWERS_REJECTED':
+    case 'USER_FOLLOWING/GET_FOLLOWING_REJECTED':
       return i.assocIn(state, [action.meta.userId, 'loading'], false)
-    case 'USER_FOLLOWERS/GET_FOLLOWERS_FULFILLED':
+    case 'USER_FOLLOWING/GET_FOLLOWING_FULFILLED':
       return i.assocIn(state, [action.meta.userId], {
         loading: false,
         data: action.payload.data

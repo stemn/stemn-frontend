@@ -1,9 +1,8 @@
 import i from 'icepick'
 
-const initialState = {
-}
+const initialState = {}
 
-export default function reducer(state = initialState, action = {}) {
+export default (state = initialState, action = {}) => {
   switch (action.type) {
     case 'COMMITS/GET_COMMIT_PENDING':
       return i.assocIn(state, [action.meta.cacheKey, 'loading'], true)
@@ -13,8 +12,8 @@ export default function reducer(state = initialState, action = {}) {
       return i.chain(state)
         .assocIn([action.meta.cacheKey, 'data'], action.payload.data)
         .assocIn([action.meta.cacheKey, 'loading'], false)
-        .value();
+        .value()
     default:
-      return state;
+      return state
   }
 }

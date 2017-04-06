@@ -1,10 +1,8 @@
-import i from 'icepick';
+import i from 'icepick'
 
-const initialState = {
+const initialState = {}
 
-};
-
-export default function reducer(state = initialState, action = {}) {
+export default (state = initialState, action = {}) => {
   switch (action.type) {
 //    case 'FILE_COMPARE/INIT':
 //      return i.merge(state, {
@@ -23,6 +21,6 @@ export default function reducer(state = initialState, action = {}) {
         }
       })
     default:
-      return state;
+      return state
   }
 }

@@ -5,7 +5,7 @@ const initialState = {
   status: false
 };
 
-export default function reducer(state = initialState, action = {}) {
+export default (state = initialState, action = {}) => {
   switch (action.type) {
     case 'AUTO_LAUNCH/GET_STATUS_FULFILLED':
       return i.assoc(state, 'status', action.payload)

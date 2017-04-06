@@ -1,9 +1,7 @@
 import { modeled } from 'react-redux-form'
 import i from 'icepick'
 
-const initialState = {
-
-}
+const initialState = {}
 
 function reducer(state, action) {
   switch (action.type) {
@@ -23,8 +21,8 @@ function reducer(state, action) {
     case 'USERS/SAVE_USER_REJECTED':
       return i.assocIn(state, [action.meta.userId, 'savePending'], false)
     case 'USERS/SAVE_USER_FULFILLED':
-      return i.assocIn(state, [action.meta.userId, 'savePending'], false)    
-      
+      return i.assocIn(state, [action.meta.userId, 'savePending'], false)
+
     case 'USERS/GET_COMMIT_HISTORY_PENDING':
       return i.assocIn(state, [action.meta.userId, 'commitHistory', 'loading'], true)
     case 'USERS/GET_COMMIT_HISTORY_REJECTED':

@@ -1,10 +1,8 @@
-import i from 'icepick';
+import i from 'icepick'
 
-const initialState = {
+const initialState = {}
 
-};
-
-export default function reducer(state = initialState, action = {}) {
+export default (state = initialState, action = {}) => {
   switch (action.type) {
     case 'TOGGLE_PANEL/TOGGLE':
       return i.assoc(state, action.payload.cacheKey, action.payload.value)
@@ -12,7 +10,7 @@ export default function reducer(state = initialState, action = {}) {
       const newItems = action.payload.cacheKeys.reduce((accum, val) => {
         accum[val] = action.payload.value
         return accum
-      }, {});
+      }, {})
       return Object.assign({}, state, newItems)
     default:
       return state
