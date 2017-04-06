@@ -4,7 +4,7 @@ const initialState = {
 
 };
 
-export default function reducer(state = initialState, action = {}) {
+export default (state = initialState, action = {}) => {
   switch (action.type) {
     case 'FILE_SELECT/INIT':
       return i.assocIn(state, [action.meta.storeKey, 'path'], action.payload.path)

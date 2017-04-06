@@ -6,7 +6,7 @@ const initialState = {
   // Paths cached by projectId are stored here
 };
 
-export default function reducer(state = initialState, action = {}) {
+export default (state = initialState, action = {}) => {
   switch (action.type) {
     case 'LOCAL_PATH/GET_PATH_PENDING':
       return i.assoc(state, action.meta.projectId, {loading: true})

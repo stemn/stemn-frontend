@@ -3,7 +3,7 @@ import i from 'icepick'
 const initialState = {
 }
 
-export default function reducer(state = initialState, action = {}) {
+export default (state = initialState, action = {}) => {
   switch (action.type) {
     case 'LIKES/LIKE_PENDING':
       return i.assocIn(state, [action.meta.entityId], true)

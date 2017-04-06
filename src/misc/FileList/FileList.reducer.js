@@ -3,7 +3,7 @@ const initialState = {
 
 };
 
-export default function reducer(state = initialState, action = {}) {
+export default (state = initialState, action = {}) => {
   switch (action.type) {
     case 'FILE_LIST/FETCH_FILES_PENDING':
       return i.assocIn(state, [action.meta.key, 'loading'], true)

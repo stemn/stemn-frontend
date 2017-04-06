@@ -4,7 +4,7 @@ const initialState = {
   stack: []
 };
 
-export default function reducer(state = initialState, action = {}) {
+export default (state = initialState, action = {}) => {
   switch (action.type) {
     case 'TOAST/SHOW':
       return i.merge(state, {

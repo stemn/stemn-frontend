@@ -4,7 +4,7 @@ const initialState = {
   stack: []
 };
 
-export default function reducer(state = initialState, action = {}) {
+export default (state = initialState, action = {}) => {
   switch (action.type) {
     case 'MODALS/SHOW_MODAL':
       return i.updateIn(state, ['stack'], stack => {

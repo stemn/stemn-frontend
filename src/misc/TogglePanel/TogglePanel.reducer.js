@@ -4,7 +4,7 @@ const initialState = {
 
 };
 
-export default function reducer(state = initialState, action = {}) {
+export default (state = initialState, action = {}) => {
   switch (action.type) {
     case 'TOGGLE_PANEL/TOGGLE':
       return i.assoc(state, action.payload.cacheKey, action.payload.value)

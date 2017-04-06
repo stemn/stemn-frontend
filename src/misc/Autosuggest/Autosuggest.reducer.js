@@ -8,7 +8,7 @@ const initialState = {
   // }
 };
 
-export default function reducer(state = initialState, action = {}) {
+export default (state = initialState, action = {}) => {
   switch (action.type) {
     case 'AUTO_SUGGEST/UPDATE_INPUT':
       return i.assocIn(state,  [action.meta.cacheKey, 'value'], action.payload.value)
