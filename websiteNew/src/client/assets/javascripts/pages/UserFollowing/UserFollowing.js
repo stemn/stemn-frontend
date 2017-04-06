@@ -8,14 +8,14 @@ import User from 'modules/User'
 export default class UserFollowing extends Component {
 
   render() {
-    const { user, followers } = this.props
+    const { following } = this.props
     return (
       <div className={ classes.panel }>
-        { followers && followers.data
-          ? followers.data.map((userId) => (
+        { following && following.data
+          ? following.data.map((userId) => (
             <User key={ userId } userId={ userId } className={ classes.user } />
           ))
-          : <div>No followers found</div>
+          : <div>No following found</div>
         }
       </div>
     )
