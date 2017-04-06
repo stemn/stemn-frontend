@@ -1,21 +1,21 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
 import classes from './SettingsProfile.css'
 
-import UserNameSettings from 'stemn-shared/misc/UserSettings/UserNameSettings';
-import UserEmailSettings from 'stemn-shared/misc/UserSettings/UserEmailSettings';
-import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
-import { Row, Col } from 'stemn-shared/misc/Layout';
-import Input from 'stemn-shared/misc/Input/Input/Input';
-import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea';
+import UserNameSettings from 'stemn-shared/misc/UserSettings/UserNameSettings'
+import UserEmailSettings from 'stemn-shared/misc/UserSettings/UserEmailSettings'
+import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
+import { Row, Col } from 'stemn-shared/misc/Layout'
+import Input from 'stemn-shared/misc/Input/Input/Input'
+import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton.jsx'
-import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar';
+import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 
 //import Upload from 'stemn-shared/misc/Upload/Upload'
 
 export default class SettingsProfile extends Component {
   render() {
-    const { user, entityModel, saveUser } = this.props;
+    const { user, entityModel, saveUser } = this.props
     return (
       <div>
         <InfoPanel>
@@ -57,10 +57,10 @@ export default class SettingsProfile extends Component {
                 onClick={ saveUser }>
                 Save Profile
               </ProgressButton>
-            </Col>            
+            </Col>
             <Col className={ classes.avatarCol }>
               <h3>Profile Picture</h3>
-              <UserAvatar 
+              <UserAvatar
                 name={ user.data.name }
                 picture={ user.data.picture }
                 shape='square'

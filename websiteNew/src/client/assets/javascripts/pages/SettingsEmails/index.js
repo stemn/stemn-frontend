@@ -1,1 +1,1 @@
-export default from './SettingsEmails.container';
+export default from './SettingsEmails.container'

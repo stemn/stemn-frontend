@@ -1,5 +1,5 @@
-import React                                   from 'react';
-import { Route, IndexRoute, Redirect }         from 'react-router';
+import React                                   from 'react'
+import { Route, IndexRoute, Redirect }         from 'react-router'
 
 // Routes that we don't split...
 import AppAuthed                               from 'pages/AppAuthed';
@@ -48,7 +48,7 @@ const getUserStars               = (loc, cb) => getRoute(System.import('pages/Us
 
 export default (
   <Route                                       component={AppRoot}>
-   
+
     <Route                                     component={AppAuthed}>
       <Route path="settings"                   getComponent={getSettings}>
         <IndexRoute                            getComponent={getSettingsProfile}/>
@@ -56,14 +56,14 @@ export default (
         <Route path="billing"                  getComponent={getSettingsBilling}/>
         <Route path="emails"                   getComponent={getSettingsEmails}/>
         <Route path="projects"                 getComponent={getSettingsProjects}/>
-      </Route>    
-    </Route>   
-       
+      </Route>
+    </Route>
+
     <Route                                     component={AppUnAuthed}>
       <Route path="login"                      getComponent={getLogin} />
       <Route path="register"                   getComponent={getRegister} />
-    </Route>  
-        
+    </Route>
+
     <Route path="/"                            getComponent={getHome} />
     <Route path="/files/:projectId/:fileId"    getComponent={getFile} />
     <Route path="project/:stub"                getComponent={getProject}>
@@ -91,4 +91,4 @@ export default (
     </Route>
     <Redirect from="*"                         to="404" />
   </Route>
-);
+)

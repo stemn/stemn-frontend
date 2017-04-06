@@ -1,1 +1,1 @@
-export default from './SettingsProfile.container';
+export default from './SettingsProfile.container'

@@ -1,1 +1,1 @@
-export default from './UserProjects.container';
+export default from './UserProjects.container'

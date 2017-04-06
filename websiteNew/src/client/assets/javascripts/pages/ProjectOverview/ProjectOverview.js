@@ -1,48 +1,48 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import classNames from 'classnames';
+import classNames from 'classnames'
 import classes from './ProjectOverview.css'
 
-import { projectRoute, fileRoute, projectFolderRoute } from 'route-actions';
+import { projectRoute, fileRoute, projectFolderRoute } from 'route-actions'
 
-import moment from 'moment';
+import moment from 'moment'
 
-import FileList from 'stemn-shared/misc/FileList/FileList';
-import Readme from 'stemn-shared/misc/Files/Readme/Readme.jsx';
-import { Container } from 'stemn-shared/misc/Layout';
-import Button from 'stemn-shared/misc/Buttons/Button/Button';
-import Tag from 'stemn-shared/misc/Tags/Tag';
-import LikeButton from 'stemn-shared/misc/Likes/LikeButton';
+import FileList from 'stemn-shared/misc/FileList/FileList'
+import Readme from 'stemn-shared/misc/Files/Readme/Readme.jsx'
+import { Container } from 'stemn-shared/misc/Layout'
+import Button from 'stemn-shared/misc/Buttons/Button/Button'
+import Tag from 'stemn-shared/misc/Tags/Tag'
+import LikeButton from 'stemn-shared/misc/Likes/LikeButton'
 
-import MdLocationOn from 'react-icons/md/location-on';
-import MdPeople from 'react-icons/md/people';
-import MdAccount from 'react-icons/md/account-balance';
-import MdAccessTime from 'react-icons/md/access-time';
+import MdLocationOn from 'react-icons/md/location-on'
+import MdPeople from 'react-icons/md/people'
+import MdAccount from 'react-icons/md/account-balance'
+import MdAccessTime from 'react-icons/md/access-time'
 
 export default class ProjectOverview extends Component {
   clickFileOrFolder = ({ file }) => {
-    const { fileId, revisionId } = file;
-    const { pushRoute } = this.props;
-    const projectId = this.props.project.data._id;
+    const { fileId, revisionId } = file
+    const { pushRoute } = this.props
+    const projectId = this.props.project.data._id
 
     if(file.type == 'file'){
-      pushRoute(fileRoute({fileId, projectId, revisionId}));
-    }    
+      pushRoute(fileRoute({fileId, projectId, revisionId}))
+    }
     else if(file.type == 'folder'){
-      pushRoute(projectFolderRoute({fileId, projectId}));
+      pushRoute(projectFolderRoute({fileId, projectId}))
     }
     else if(projectId){
-      pushRoute(projectRoute({projectId}));
+      pushRoute(projectRoute({projectId}))
     }
   }
-    
+
   render() {
-    const { entityModel, project, path, files, isFilePage } = this.props;
+    const { entityModel, project, path, files, isFilePage } = this.props
     const options = {
       showMenu: true
-    };
+    }
     if(project && project.data && project.data._id){
-      
+
       const infoBoxes = (
         <div className={ classNames('layout-row', classes.infoBoxes)}>
           <div className='flex'>
@@ -51,7 +51,7 @@ export default class ProjectOverview extends Component {
           </div>
           <div className='flex'>
             <MdPeople />
-            { project.data.team.length === 1 
+            { project.data.team.length === 1
             ? `${project.data.team.length} team member`
             : `${project.data.team.length} team members` }
           </div>
@@ -64,8 +64,8 @@ export default class ProjectOverview extends Component {
             Creative Commons
           </div>
         </div>
-      );
-      
+      )
+
       return (
         <div>
           <div className={ classes.header }>
@@ -79,8 +79,8 @@ export default class ProjectOverview extends Component {
                   { project.data.fields.map((field) => <Tag className='primary' key={ field._id } text={ field.name } /> )}
                 </div>
                 <div className="flex" />
-                <LikeButton 
-                  number={ project.data.likes } 
+                <LikeButton
+                  number={ project.data.likes }
                   entityType='project'
                   entityId={ project.data._id }
                 />
@@ -110,10 +110,10 @@ export default class ProjectOverview extends Component {
             }
           </Container>
         </div>
-      );
+      )
     }
     else{
       return null
     }
   }
-};
+}

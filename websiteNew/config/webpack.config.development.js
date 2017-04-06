@@ -16,7 +16,7 @@ const GLOBALS = {
     API_SERVER: JSON.stringify('http://35.167.249.144'),
   },
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'true'))
-};
+}
 
 
 module.exports = merge(config, {
@@ -83,4 +83,4 @@ module.exports = merge(config, {
        }
     ]
   }
-});
+})

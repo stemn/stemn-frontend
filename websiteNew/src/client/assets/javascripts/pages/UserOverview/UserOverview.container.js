@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 
-import { getCommitHistory } from 'stemn-shared/misc/Users/Users.actions';
+import { getCommitHistory } from 'stemn-shared/misc/Users/Users.actions'
 
 import UserOverview from './UserOverview';
 

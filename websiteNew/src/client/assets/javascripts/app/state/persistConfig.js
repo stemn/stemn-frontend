@@ -11,4 +11,4 @@ const transform = {
 export default {
   whitelist: [ 'auth' ],
   transforms: [ transform ]
-};
+}

@@ -1,23 +1,23 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import classes from './User.css';
-import classNames from 'classnames';
+import classes from './User.css'
+import classNames from 'classnames'
 
-import StandardLayout from 'layout/StandardLayout';
-import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar';
+import StandardLayout from 'layout/StandardLayout'
+import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import { Row, Col, Container } from 'stemn-shared/misc/Layout'
-import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import UserNavHeader from 'modules/UserNavHeader';
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
+import UserNavHeader from 'modules/UserNavHeader'
 
 import MdLocationOn from 'react-icons/md/location-on';
 import MdLink from 'react-icons/md/link';
 
 class User extends Component {
   renderComplete() {
-    const { user, children, currentUser } = this.props;
-    
-    const isCurrentUser = user.data._id === currentUser._id;
-    
+    const { user, children, currentUser } = this.props
+
+    const isCurrentUser = user.data._id === currentUser._id
+
     const baseUrl = `/users/${user.data._id}`
     return (
       <div>
@@ -25,7 +25,7 @@ class User extends Component {
         <Container>
           <Row className='layout-column layout-gt-xs-row'>
             <Col className={ classes.sidebar }>
-              <UserAvatar 
+              <UserAvatar
                 name={ user.data.name }
                 picture={ user.data.picture }
                 shape='square'
@@ -60,19 +60,19 @@ class User extends Component {
     )
   }
   render() {
-    const { user, children } = this.props;
-    
-    const isLoaded = user && user.data;
+    const { user, children } = this.props
+
+    const isLoaded = user && user.data
 
     return (
       <StandardLayout>
         <LoadingOverlay show={ !isLoaded } hideBg/>
         { isLoaded
         ? this.renderComplete()
-        : null }
+        : this.renderPending() }
       </StandardLayout>
     )
   }
 }
 
-export default User;
+export default User

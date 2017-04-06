@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
-import { routerReducer as routing } from 'react-router-redux';
+import { combineReducers } from 'redux'
+import { routerReducer as routing } from 'react-router-redux'
 
 import auth             from 'stemn-shared/misc/Auth/Auth.reducer.js';
 import autosuggest      from 'stemn-shared/misc/Autosuggest/Autosuggest.reducer.js';
@@ -49,5 +49,6 @@ export default combineReducers({
   togglePanel,
   upload,
   users,
+  userFollowers,
   walkthrough,
-});
+})

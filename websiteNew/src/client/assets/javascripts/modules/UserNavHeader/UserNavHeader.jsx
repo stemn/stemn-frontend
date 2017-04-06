@@ -1,11 +1,11 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import classes from './UserNavHeader.css';
-import classNames from 'classnames';
+import classes from './UserNavHeader.css'
+import classNames from 'classnames'
 
 import { Container } from 'stemn-shared/misc/Layout'
-import Tabs from 'stemn-shared/misc/Tabs/Tabs';
-import { Link } from 'react-router';
+import Tabs from 'stemn-shared/misc/Tabs/Tabs'
+import { Link } from 'react-router'
 
 export default class UserNavHeader extends Component {
   static propTypes = {
@@ -14,9 +14,9 @@ export default class UserNavHeader extends Component {
   }
 
   render() {
-    const { user } = this.props;
-    
-    const isCurrentUser = user && user.data;
+    const { user } = this.props
+
+    const isCurrentUser = user && user.data
     const baseUrl = `/users/${user.data._id}`
 
     return (
@@ -34,7 +34,7 @@ export default class UserNavHeader extends Component {
             <Link activeClassName='active' to={`${baseUrl}/followers`}>Followers</Link>
             <Link activeClassName='active' to={`${baseUrl}/following`}>Following</Link>
             { isCurrentUser
-            ? <Link activeClassName='active' to={`/settings`}>Settings</Link> 
+            ? <Link activeClassName='active' to={`/settings`}>Settings</Link>
             : null }
           </Tabs>
         </Container>

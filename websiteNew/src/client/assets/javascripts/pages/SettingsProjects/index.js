@@ -1,1 +1,1 @@
-export default from './SettingsProjects.container';
+export default from './SettingsProjects.container'

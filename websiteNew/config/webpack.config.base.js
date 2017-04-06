@@ -90,7 +90,7 @@ module.exports = {
           limit: 1,
           name: 'images/[name].[ext]?[hash]'
         }
-      },      
+      },
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/,
         loader: 'url',
@@ -115,6 +115,6 @@ module.exports = {
       autoprefixer({
         browsers: ['last 2 versions']
       })
-    ];
+    ]
   }
-};
+}

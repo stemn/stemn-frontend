@@ -33,8 +33,7 @@
     "build": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.production.js --progress",
     "postbuild": "npm run build:html",
     "build:serve": "http-server build/client -p 3003 --cors -o",
-    "lint": "eslint config src/js/** --ext .js",
-    "jscs": "jscs src/js/",
+    "lint": "standard --verbose | snazzy",
     "test": "mocha --compilers js:babel-core/register,css:./test/unit/cssNullCompiler.js --require ./test/unit/testHelper.js --recursive ./test/unit",
     "test:watch": "npm run test -- --watch",
     "tunnel": "lt --port 3000"
@@ -82,6 +81,8 @@
     "redux-slider-monitor": "1.0.7",
     "rimraf": "2.5.4",
     "sass-loader": "4.0.1",
+    "snazzy": "6.0.0",
+    "standard": "10.0.0",
     "style-loader": "0.13.1",
     "url-loader": "0.5.7",
     "webpack": "2.1.0-beta.21",
@@ -114,15 +115,15 @@
     "normalize.css": "6.0.0",
     "pdfjs-dist": "1.7.406",
     "raven-js": "3.6.1",
-    "react": "15.4.2",
-    "react-addons-css-transition-group": "15.4.2",
+    "react": "15.3.1",
+    "react-addons-css-transition-group": "15.3.1",
     "react-autosuggest": "9.0.0",
     "react-calendar-heatmap": "1.1.0",
     "react-clickdrag": "3.0.2",
     "react-contextmenu": "1.6.2",
-    "react-dom": "15.4.2",
+    "react-dom": "15.3.1",
     "react-helmet": "5.0.2",
-    "react-hot-loader": "3.0.0-beta.2",
+    "react-hot-loader": "3.0.0-beta.6",
     "react-icons": "2.2.3",
     "react-popover-wrapper": "1.0.0",
     "react-redux": "4.4.5",
@@ -141,5 +142,11 @@
     "reselect": "2.5.3",
     "stats-webpack-plugin": "0.6.0",
     "substyle": "2.0.2"
+  },
+  "standard": {
+    "ignore": [
+      "src/client/assets/static/other",
+      "test"
+    ]
   }
 }

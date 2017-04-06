@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
 class SettingsProjects extends Component {
   render() {
@@ -15,4 +15,4 @@ class SettingsProjects extends Component {
   }
 }
 
-export default SettingsProjects;
+export default SettingsProjects

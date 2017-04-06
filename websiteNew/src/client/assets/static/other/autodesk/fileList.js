@@ -113,7 +113,7 @@ locales =locales.reduce (
 ) ;
 
 //-
-module.exports =viewer
+module.exports = viewer
 	.concat (environments)
 	.concat (textures)
 	.concat (locales) ;

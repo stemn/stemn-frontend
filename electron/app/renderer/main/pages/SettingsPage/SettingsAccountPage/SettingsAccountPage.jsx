@@ -29,7 +29,10 @@ import TextDisplayBox from 'stemn-shared/misc/TextDisplayBox/TextDisplayBox.jsx'
 
 export const Component = React.createClass({
   componentWillMount() {
-    this.props.usersActions.getUser({userId: this.props.auth.user._id});
+    this.props.usersActions.getUser({
+      userId: this.props.auth.user._id,
+      force: true
+    });
   },
   saveUser(){
     this.props.usersActions.saveUser({user: this.props.user.data});
