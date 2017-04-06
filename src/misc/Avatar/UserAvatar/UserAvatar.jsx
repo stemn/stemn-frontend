@@ -1,5 +1,6 @@
 import React from 'react';
-import classNames from 'classnames'
+import classNames from 'classnames';
+import classes from './UserAvatar.css';
 
 const colours = [
   '#D50000','#FF4081','#CE93D8','#AA00FF','#B39DDB','#6200EA','#3F51B5','#1A237E','#2962FF','#0091EA','#00B8D4','#00BFA5',
@@ -9,11 +10,13 @@ const colours = [
 export default React.createClass({
   default: '/assets/images/default/user-1.png',
   render() {
-    const { style, shape, size, className, picture, title, name } = this.props;
+    // display: 'contain' (Default: 'cover')
+    const { style, shape, size, className, picture, title, name, display } = this.props;
     const styles = {
-      borderRadius : shape == 'square' ? '3px' : '50%',
-      width        : size+'px' || '30px',
-      height       : size+'px' || '30px'
+      borderRadius    : shape == 'square' ? '3px' : '50%',
+      width           : size+'px' || '30px',
+      height          : size+'px' || '30px',
+      backgroundColor : 'rgba(0, 0, 0, 0.03)'
     };
     const actualStyles = Object.assign({}, style, styles);
     
@@ -22,11 +25,13 @@ export default React.createClass({
       : 'thumb';
 
     if(picture){
+      const pictureStyles = { 
+        backgroundImage: `url(${GLOBAL_ENV.API_SERVER}${picture || this.default}?size=${resizeType}&crop=${display === 'contain' ? 'false' : 'true'})` 
+      };
       return (
-        <img className={className}
+        <div className={ classNames(display === 'cover' ? classes.cover : classes.contain, className) }
           title={title}
-          style={actualStyles}
-          src={`${GLOBAL_ENV.API_SERVER}${picture || this.default}?size=${resizeType}&crop=true`}
+          style={ Object.assign({}, actualStyles, pictureStyles) }
         />
       );
     }
