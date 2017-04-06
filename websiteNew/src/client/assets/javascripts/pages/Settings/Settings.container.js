@@ -18,7 +18,10 @@ const dispatchToProps = {
 const fetchConfigs = [{
   hasChanged: 'currentUser._id',
   onChange: (props) => {
-    props.getUser({ userId: props.currentUser._id})
+    props.getUser({
+      userId: props.currentUser._id,
+      force: true
+    })
   }
 }];
 

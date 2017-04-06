@@ -57,7 +57,7 @@ class User extends Component {
         <LoadingOverlay show={ !isLoaded } hideBg/>
         { isLoaded
         ? this.renderComplete()
-        : null }
+        : this.renderPending() }
       </StandardLayout>
     )
   }

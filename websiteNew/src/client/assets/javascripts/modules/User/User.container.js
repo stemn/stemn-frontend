@@ -2,34 +2,25 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 
-import { getUserProjects } from 'stemn-shared/misc/Projects/Projects.actions.js'
 import { getUser } from 'stemn-shared/misc/Users/Users.actions'
 
 import User from './User'
 
-const stateToProps = (state, { params }) => ({
-  user: state.users[params.stub],
-  currentUser: state.auth.user,
-  projects: state.projects.userProjects
+const stateToProps = (state, { userId }) => ({
+  user: state.users[userId]
 })
 
 const dispatchToProps = {
-  getUser,
-  getUserProjects
+  getUser
 }
 
 const fetchConfigs = [{
-  hasChanged: 'params.stub',
+  hasChanged: 'userId',
   onChange: (props) => {
     props.getUser({
-      userId: props.params.stub,
-      force: true
+      userId: props.userId,
+      size: 'sm'
     })
-  }
-}, {
-  hasChanged: 'params.stub',
-  onChange: (props) => {
-    props.getUserProjects({ userId: props.params.stub })
   }
 }]
 

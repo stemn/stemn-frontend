@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc';
 
 import { getUserProjects } from 'stemn-shared/misc/Projects/Projects.actions.js';
-import { getUser } from 'stemn-shared/misc/Users/Users.actions';
 
 import UserOverview from './UserOverview';
 
