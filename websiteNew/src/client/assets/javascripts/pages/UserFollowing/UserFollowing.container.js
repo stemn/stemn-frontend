@@ -8,7 +8,7 @@ import UserFollowing from './UserFollowing'
 
 const stateToProps = (state, { params }) => ({
   user: state.users[params.stub],
-  followers: state.UserFollowing[params.stub]
+  followers: state.userFollowing[params.stub]
 })
 
 const dispatchToProps = {

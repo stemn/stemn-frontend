@@ -24,6 +24,7 @@ import togglePanel      from 'stemn-shared/misc/TogglePanel/TogglePanel.reducer.
 import upload           from 'stemn-shared/misc/Upload/Upload.reducer.js'
 import users            from 'stemn-shared/misc/Users/Users.reducer.js'
 import userFollowers    from 'stemn-shared/misc/UserFollowers/UserFollowers.reducer.js'
+import userFollowing    from 'stemn-shared/misc/UserFollowing/UserFollowing.reducer.js'
 import walkthrough      from 'stemn-shared/misc/Walkthrough/Walkthrough.reducer.js'
 
 export default combineReducers({
@@ -51,5 +52,6 @@ export default combineReducers({
   upload,
   users,
   userFollowers,
+  userFollowing,
   walkthrough,
 })
