@@ -2,7 +2,7 @@ import React from 'react';
 
 // Components
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
-import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import Popover from 'stemn-shared/misc/Popover';
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
 
@@ -47,7 +47,7 @@ export default class extends React.Component{
 
         {!item.owner
           ?
-          <PopoverMenu preferPlace="right">
+          <Popover preferPlace="right">
             <SimpleIconButton>
               <MdMoreHoriz size="20px"/>
             </SimpleIconButton>
@@ -58,7 +58,7 @@ export default class extends React.Component{
               <div className="divider"></div>
               <a onClick={()=>removeTeamMemberFn({userId: item._id})}>Remove User</a>
               </div>
-          </PopoverMenu>
+          </Popover>
           :
           ''
         }

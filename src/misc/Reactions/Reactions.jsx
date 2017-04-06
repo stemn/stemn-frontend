@@ -4,7 +4,7 @@ import React from 'react';
 import classNames from 'classnames';
 import classes from './Reactions.css';
 
-import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import Popover from 'stemn-shared/misc/Popover';
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdInsertEmoticon from 'react-icons/md/insert-emoticon';
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
@@ -18,7 +18,7 @@ export default React.createClass({
     const groupedReactions = reactions && reactions.length > 0 ? groupAndOrderReactions(reactions, options) : [];
     return (
       <span>
-        {groupedReactions.map(reaction => <PopoverMenu key={reaction.type} preferPlace="below" trigger="hover">
+        {groupedReactions.map(reaction => <Popover key={reaction.type} preferPlace="below" trigger="hover">
           <a className={classes.icon}>{reaction.icon}</a>
           <div className="PopoverMenu">
             {reaction.list.map(userReaction => <div className="layout-row layout-align-start-center" style={{padding: '5px'}} key={userReaction.owner._id}>
@@ -26,7 +26,7 @@ export default React.createClass({
               <div style={{marginLeft: '5px'}}>{userReaction.owner.name}</div>
             </div>)}
           </div>
-        </PopoverMenu>)}
+        </Popover>)}
       </span>
     );
   }

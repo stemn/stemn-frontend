@@ -3,7 +3,6 @@ import Promise from 'es6-promise'
 
 import { isWebGlSupported } from './PreviewCad.utils.js';
 
-//import AutodeskViewer from './AutodeskViewer/AutodeskViewer';
 import AutodeskLocalViewer from './AutodeskLocalViewer/AutodeskLocalViewer'
 
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';

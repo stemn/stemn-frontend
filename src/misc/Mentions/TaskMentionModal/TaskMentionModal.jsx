@@ -26,7 +26,7 @@ import TaskRow from './TaskRow/TaskRow.jsx';
 import MdSearch from 'react-icons/md/search';
 import { filterBoard, getAllTasks } from 'stemn-shared/misc/Tasks/Tasks.utils.js';
 import TasksFilterMenu from 'stemn-shared/misc/Tasks/TasksFilterMenu/TasksFilterMenu.jsx';
-import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import Popover from 'stemn-shared/misc/Popover';
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -120,10 +120,10 @@ export const Component = React.createClass({
               className="dr-input"
               placeholder="Search tasks"
             />
-            <PopoverMenu preferPlace="right" trigger="hoverDelay">
+            <Popover preferPlace="right" trigger="hoverDelay">
               <MdSearch size="20"/>
               <div><TasksFilterMenu model={`${boardModel}.searchString`} value={board.searchString}/></div>
-            </PopoverMenu>
+            </Popover>
           </div>
         </div>
         <div className="layout-column flex rel-box">

@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import classes from './FileBreadCrumbs.css';
 
 import { middle as middleConcat } from 'stemn-shared/utils/stringConcat';
-import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import Popover from 'stemn-shared/misc/Popover';
 import FileListPopup from './FileListPopup.jsx';
 
 export default React.createClass({
@@ -29,14 +29,14 @@ export default React.createClass({
           
           return parentfolder && popup && idx != 0
           ? <span key={idx}>
-              <PopoverMenu trigger="hoverDelay" preferPlace="below" tipSize={6} inheritIsOpen={true} offset={14}>
+              <Popover trigger="hoverDelay" preferPlace="below" tipSize={6} inheritIsOpen={true} offset={14}>
                 <span style={{display: 'inline-block'}}>
                   { !isLastChild
                   ? <a onClick={()=>clickFn({file: folder})}>{middleConcat(folder.name, 30, 0.8)}</a>
                   : <span>{middleConcat(folder.name, 30, 0.8)}</span> }
                 </span>
                 <FileListPopup parentfolder={parentfolder} activeFolder={folder} meta={meta} clickFn={clickFn}/>
-              </PopoverMenu>
+              </Popover>
               {!isLastChild ? <span> / </span> : null}
             </span>
           : <span key={idx}>

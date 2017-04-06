@@ -22,7 +22,7 @@ import userStyles                     from './SidebarAvatar.css';
 import DragResize                     from 'stemn-shared/misc/DragResize/DragResize.jsx';
 import { Link }                       from 'react-router';
 import { ContextMenuLayer }           from "react-contextmenu";
-import PopoverMenu                    from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import Popover                        from 'stemn-shared/misc/Popover';
 import Input                          from 'stemn-shared/misc/Input/Input/Input'
 import ContextMenu                    from 'stemn-shared/misc/ContextMenu/ContextMenu.jsx';
 import SidebarProjectButton           from './SidebarProjectButton.jsx';
@@ -80,7 +80,7 @@ export const Component = React.createClass({
           </div>
           <div>
             <div className={styles.footer + ' layout-row layout-align-start-center'}>
-              <PopoverMenu>
+              <Popover>
                 <a className="flex">
                   <div className={userStyles.userWrapper + ' flex layout-row layout-align-start-center'}>
                     <UserAvatar picture={this.props.auth.user.picture} name={this.props.auth.user.name} className={userStyles.userAvatar}/>
@@ -94,7 +94,7 @@ export const Component = React.createClass({
                   <a href="#/settings/account">Account Settings</a>
                   <a onClick={()=>{this.props.authActions.logout()}}>Sign out</a>
                 </div>
-              </PopoverMenu>
+              </Popover>
               <Link className={userStyles.userSettings + ' layout-column layout-align-center-center'} to="/settings/application"><MdSettings size="25"/></Link>
             </div>
           </div>

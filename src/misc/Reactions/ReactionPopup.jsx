@@ -4,7 +4,7 @@ import React from 'react';
 import classNames from 'classnames';
 import classes from './Reactions.css';
 
-import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import Popover from 'stemn-shared/misc/Popover';
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdInsertEmoticon from 'react-icons/md/insert-emoticon';
 
@@ -16,7 +16,7 @@ export default React.createClass({
     const { submitFn, reactions } = this.props;
 
     return (
-      <PopoverMenu preferPlace={this.props.preferPlace}>
+      <Popover preferPlace={this.props.preferPlace}>
         <SimpleIconButton style={{padding: '0'}}>
           <MdInsertEmoticon size="20px" />
         </SimpleIconButton>
@@ -30,7 +30,7 @@ export default React.createClass({
            {option.icon}
            </span>)}
         </div>
-      </PopoverMenu>
+      </Popover>
     );
   }
 });

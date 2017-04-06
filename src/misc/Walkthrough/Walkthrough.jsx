@@ -14,7 +14,7 @@ import { getStepData } from './Walkthrough.config.js';
 import classNames from 'classnames';
 import classes from './Walkthrough.css';
 
-import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import Popover from 'stemn-shared/misc/Popover';
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdClose from 'react-icons/md/close';
 
@@ -62,7 +62,7 @@ export const Walkthrough = React.createClass({
     }
 
     return (
-      <PopoverMenu { ...omit(this.props, Object.keys(WalkthroughPropTypes))}
+      <Popover { ...omit(this.props, Object.keys(WalkthroughPropTypes))}
         open={isActive}
         trigger="none"
         tipSize={10}
@@ -82,7 +82,7 @@ export const Walkthrough = React.createClass({
             : null }
           </div>
         </div>
-      </PopoverMenu>
+      </Popover>
     )
   }
 });

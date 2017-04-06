@@ -7,7 +7,6 @@ import classNames from 'classnames';
 import classes from './ColorSelect.css';
 import { actions } from 'react-redux-form';
 
-import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
 

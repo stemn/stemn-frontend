@@ -22,7 +22,7 @@ import Editor from 'stemn-shared/misc/Editor/Editor.jsx';
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx';
 import ReactionPopup from 'stemn-shared/misc/Reactions/ReactionPopup.jsx';
 import Reactions from 'stemn-shared/misc/Reactions/Reactions.jsx';
-import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import Popover from 'stemn-shared/misc/Popover';
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
 import IsOwner from 'stemn-shared/misc/Auth/IsOwner/IsOwner.jsx';
@@ -94,7 +94,7 @@ export const Component = React.createClass({
             <div className="flex"></div>
             <ReactionPopup reactions={comment.data.reactions} preferPlace="above" submitFn={this.submitReaction} />
             <IsOwner ownerId={comment.data.owner._id}>
-              <PopoverMenu preferPlace="right">
+              <Popover preferPlace="right">
                 <SimpleIconButton style={{padding: '0 0 0 5px'}}>
                   <MdMoreHoriz size="20px"/>
                 </SimpleIconButton>
@@ -102,7 +102,7 @@ export const Component = React.createClass({
                   {comment.editActive ? null : <a onClick={() => commentsActions.startEdit({commentId: comment.data._id})}>Edit</a> }
                   <a onClick={this.confirmDelete}>Delete</a>
                 </div>
-              </PopoverMenu>
+              </Popover>
             </IsOwner>
           </div>
           <div className={classes.commentContent}>

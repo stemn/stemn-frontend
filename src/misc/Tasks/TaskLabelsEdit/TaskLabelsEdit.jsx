@@ -13,7 +13,7 @@ import classes from './TaskLabelsEdit.css';
 import { actions } from 'react-redux-form';
 import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js';
 
-import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import Popover from 'stemn-shared/misc/Popover';
 import Input from 'stemn-shared/misc/Input/Input/Input';
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
@@ -62,13 +62,13 @@ export const Component = React.createClass({
         {value.map((label, index)=>
           <div key={label._id} className={classes.row + ' layout-row layout-align-start-center'}>
             <div className={classes.colorSelect}>
-              <PopoverMenu preferPlace="above">
+              <Popover preferPlace="above">
                 <label htmlFor={label._id} className={classes.swatch} style={{background: label.color}}/>
                 <ColorSelect
                   model={`${model}[${index}].color`}
                   value={label.color}
                 />
-              </PopoverMenu>
+              </Popover>
               <Input
                 model={`${model}[${index}].color`}
                 value={label.color}
@@ -88,14 +88,14 @@ export const Component = React.createClass({
                 placeholder="Label Name"
               />
             </div>
-            <PopoverMenu preferPlace="right">
+            <Popover preferPlace="right">
               <SimpleIconButton>
                 <MdMoreHoriz size="20px"/>
               </SimpleIconButton>
               <div className="PopoverMenu">
                 <a onClick={()=>this.confirmDelete(model, index)}>Remove Label</a>
               </div>
-            </PopoverMenu>
+            </Popover>
           </div>
         )}
       </div>

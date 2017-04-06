@@ -7,7 +7,6 @@ import classes from './TimelineInner.css';
 import { orderBy } from 'lodash';
 import moment from 'moment';
 import Popover from 'stemn-shared/misc/Popover';
-import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
 
 import * as stringConcat from 'stemn-shared/utils/stringConcat';
 
@@ -52,10 +51,10 @@ const Dot = React.createClass({
     return (
         // If the isSelected function is provided, we use this to determine if the item is active
       <a className={dotClasses} onClick={()=>onSelect(item)}>
-        <PopoverMenu preferPlace={preferPlace || 'below'} trigger="hoverDelay" tipSize={6}>
+        <Popover preferPlace={preferPlace || 'below'} trigger="hoverDelay" tipSize={6}>
           <div className="layout-column layout-align-center-center" style={{height: '100%'}}></div>
           <div>{PopupContent(item)}</div>
-        </PopoverMenu>
+        </Popover>
       </a>
     )
   }
@@ -71,7 +70,7 @@ const Component = React.createClass({
         // Order the items by the timestamp
         const subItemsOrdered = orderBy(item.data.items, subItem => (new Date(subItem.timestamp)).getTime(), 'asc');
         return (
-          <PopoverMenu preferPlace={preferPlace || 'below'} trigger="hoverSingleDelay" tipSize={6}>
+          <Popover preferPlace={preferPlace || 'below'} trigger="hoverSingleDelay" tipSize={6}>
             <div key={item._id}  className={classNames(classes.dotGroup, 'layout-row layout-align-center-center')}>
               {subItemsOrdered.map(subItem => (
                 <Dot
@@ -85,7 +84,7 @@ const Component = React.createClass({
               ))}
             </div>
             <div>{PopupContent(item)}</div>
-          </PopoverMenu>
+          </Popover>
         )
       }
       else {

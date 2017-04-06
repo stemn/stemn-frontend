@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
-import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import Popover from 'stemn-shared/misc/Popover';
 import MdMoreHoriz from 'react-icons/md/more-horiz';
 import Input from 'stemn-shared/misc/Input/Input/Input';
 
@@ -37,14 +37,14 @@ export default class TaskGroup extends React.Component {
               />
             </h3>
             <div className={classes.options}>
-              <PopoverMenu preferPlace="below">
+              <Popover preferPlace="below">
                 <SimpleIconButton>
                   <MdMoreHoriz size="20px"/>
                 </SimpleIconButton>
                 <div className="PopoverMenu">
                   <a onClick={deleteGroup}>Delete Group</a>
                 </div>
-              </PopoverMenu>
+              </Popover>
             </div>
           </div>
           <div className={layout == 'list' ? classes.contentList : classes.contentBoard}>

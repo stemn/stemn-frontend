@@ -26,7 +26,7 @@ import TaskTimeline from '../TaskTimeline/TaskTimeline.jsx';
 import DatePicker from 'stemn-shared/misc/Calendar/DatePicker/DatePicker.jsx';
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea';
 import CommentNew from 'stemn-shared/misc/Comments/Comment/CommentNew.jsx';
-import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import Popover from 'stemn-shared/misc/Popover';
 import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList';
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
@@ -111,12 +111,12 @@ export const Component = React.createClass({
                   type="text"
                   placeholder="Task description" />
               </div>
-              <PopoverMenu preferPlace="below">
+              <Popover preferPlace="below">
                 <SimpleIconButton>
                   <MdMoreHoriz size="20px"/>
                 </SimpleIconButton>
                 <PopoverMenuList menu={menu}/>
-              </PopoverMenu>
+              </Popover>
             </div>
             <div className="text-grey-3" style={{padding: '15px 0 20px'}}>
               Created {moment(task.data.created).fromNow()} <b className="text-interpunct"></b> By <a className="link-primary">{task.data.owner.name}</a>
