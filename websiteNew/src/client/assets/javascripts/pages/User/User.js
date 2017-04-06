@@ -23,7 +23,7 @@ class User extends Component {
       <div>
         <UserNavHeader user={ user } currentUser={ currentUser }/>
         <Container>
-          <Row className='layout-row'>
+          <Row className='layout-column layout-gt-sm-row'>
             <Col className={ classes.sidebar }>
               <UserAvatar 
                 name={ user.data.name }

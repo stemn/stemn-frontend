@@ -4,6 +4,7 @@ import classes from './UserOverview.css';
 import classNames from 'classnames';
 import { orderBy } from 'lodash';
 import { Row, Col } from 'stemn-shared/misc/Layout'
+import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
 
 import Project from 'modules/Project';
 import CalendarHeatmap from 'react-calendar-heatmap';
@@ -41,7 +42,7 @@ export default class UserOverview extends Component {
         <br/>
         <Row className='sm layout-row layout-wrap'>
           { projectsToDisplay.map(project => (
-            <Col key={ project._id } className='sm flex-50'>
+            <Col key={ project._id } className='sm flex-100 flex-gt-sm-50'>
               <Project 
                 key={ project._id } 
                 project={ project } 
@@ -62,15 +63,20 @@ export default class UserOverview extends Component {
           />
         </div>
         <br/>
-        <br/>
-        <div className='text-mini-caps'>Contribution Activity</div>
-        <br/>
-        <div className={ classes.panel }>
-          The contribution timeline will go here. Similar to the tasks page...
-        </div>
-
+        <div className='text-mini-caps'>About</div>
+        <br />
+        <InfoPanel>
+          <p className={ classes.summary }>{ user.data.profile.profileDetails.summary }</p>
+        </InfoPanel>      
+        <br />
       </div>
     )
   }
 }
-//        { user.data.profile.profileDetails.summary }
+
+//        <br/>
+//        <div className='text-mini-caps'>Contribution Activity</div>
+//        <br/>
+//        <div className={ classes.panel }>
+//          The contribution timeline will go here. Similar to the tasks page...
+//        </div>

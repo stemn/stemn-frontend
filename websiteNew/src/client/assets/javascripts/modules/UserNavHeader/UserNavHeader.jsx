@@ -28,6 +28,7 @@ export default class UserNavHeader extends Component {
           <div className='flex'></div>
           <Tabs noline className={ classes.tabs }>
             <Link activeClassName='active' to={`${baseUrl}`} onlyActiveOnIndex>Overview</Link>
+            <Link activeClassName='active' to={`${baseUrl}/details`}>Details</Link>
             <Link activeClassName='active' to={`${baseUrl}/projects`}>Projects</Link>
             <Link activeClassName='active' to={`${baseUrl}/stars`}>Stars</Link>
             <Link activeClassName='active' to={`${baseUrl}/followers`}>Followers</Link>

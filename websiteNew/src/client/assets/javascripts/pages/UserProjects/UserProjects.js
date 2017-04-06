@@ -11,7 +11,7 @@ export default class UserProjects extends Component {
   render() {
     const { projects } = this.props;
     return (
-      <div className={ classes.panel }>
+      <div>
         { orderBy(projects.data, 'updated', 'desc').map(project => (
           <Project 
             size='wide'

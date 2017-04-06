@@ -39,6 +39,7 @@ const getSettingsEmails          = (loc, cb) => getRoute(System.import('pages/Se
 const getSettingsProfile         = (loc, cb) => getRoute(System.import('pages/SettingsProfile'), cb);
 const getSettingsProjects        = (loc, cb) => getRoute(System.import('pages/SettingsProjects'), cb);
 const getUser                    = (loc, cb) => getRoute(System.import('pages/User'), cb);
+const getUserDetails             = (loc, cb) => getRoute(System.import('pages/UserDetails'), cb);
 const getUserFollowers           = (loc, cb) => getRoute(System.import('pages/UserFollowers'), cb);
 const getUserFollowing           = (loc, cb) => getRoute(System.import('pages/UserFollowing'), cb);
 const getUserOverview            = (loc, cb) => getRoute(System.import('pages/UserOverview'), cb);
@@ -82,6 +83,7 @@ export default (
     <Route path="404"                          component={NotFoundView} />
     <Route path="users/:stub"                  getComponent={getUser}>
       <IndexRoute                              getComponent={getUserOverview} />
+      <Route path="details"                    getComponent={getUserDetails} />
       <Route path="followers"                  getComponent={getUserFollowers} />
       <Route path="following"                  getComponent={getUserFollowing} />
       <Route path="projects"                   getComponent={getUserProjects} />
