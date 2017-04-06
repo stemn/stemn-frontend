@@ -118,7 +118,6 @@ export function getTask({taskId}) {
   return {
     type: 'TASKS/GET_TASK',
     httpPackage: {
-      endpoint: 'api/v1/tasks',
       url: `/api/v1/tasks`,
       method: 'GET',
       params: {

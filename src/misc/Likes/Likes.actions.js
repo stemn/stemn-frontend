@@ -14,7 +14,7 @@ export const checkIsLiked = (entityId) => (dispatch, getState) => {
   })
   .then((response) => {
 
-    const liked = response.data[0].status;
+    const liked = response.data[0].status
 
     dispatch({
       type: 'PROJECTS/UPDATE_LIKED',

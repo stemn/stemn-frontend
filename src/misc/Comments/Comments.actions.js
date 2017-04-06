@@ -5,7 +5,6 @@ export function getComment({commentId}) {
   return {
     type: 'COMMENTS/GET_COMMENT',
     httpPackage: {
-      endpoint: 'api/v1/comments',
       url: `/api/v1/comments`,
       method: 'GET',
       params: {

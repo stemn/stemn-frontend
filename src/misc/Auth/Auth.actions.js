@@ -1,2 +1,2 @@
-import * as actions from './actions';
-module.exports = actions;
+import * as actions from './actions'
+module.exports = actions

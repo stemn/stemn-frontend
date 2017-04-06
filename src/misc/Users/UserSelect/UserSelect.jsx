@@ -25,7 +25,7 @@ const Component = React.createClass({
     return (
       <div>
         <Select
-          name="form-field-name"
+          name='form-field-name'
           value={mappedValue}
           options={userOptions}
           onChange={this.onChangeFn}
