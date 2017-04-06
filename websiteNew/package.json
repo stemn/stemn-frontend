@@ -117,6 +117,7 @@
     "react": "15.4.2",
     "react-addons-css-transition-group": "15.4.2",
     "react-autosuggest": "9.0.0",
+    "react-calendar-heatmap": "1.1.0",
     "react-clickdrag": "3.0.2",
     "react-contextmenu": "1.6.2",
     "react-dom": "15.4.2",

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { Container, Row, Col } from 'stemn-shared/misc/Layout';
 import Avatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar';
-import PopoverWrapper from 'react-popover-wrapper';
+import Popover from 'stemn-shared/misc/Popover';
 import { Link } from 'react-router';
 import logo from 'images/logo80x80.png';
 import MdAdd from 'react-icons/md/add';
@@ -33,7 +33,7 @@ class Header extends Component {
            style={ { marginRight: '10px' } }>
             <MdNotifications size={ 22 }/>
           </SimpleIconButton>
-          <PopoverWrapper 
+          <Popover 
             offset={13}
             tipSize={1}
             preferPlace='below' 
@@ -53,7 +53,7 @@ class Header extends Component {
               <div className="divider" />
               <a onClick={ logout }>Logout</a>
             </div>
-          </PopoverWrapper>
+          </Popover>
         </Container>
       </header>
     )

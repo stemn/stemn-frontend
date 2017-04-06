@@ -78,7 +78,19 @@ module.exports = {
         loader: 'happypack/loader'
       },
       // Images
-      // Inline base64 URLs for <=8k images, direct URLs for the rest
+      // Any images inside FileList/filetype should use urls
+      // Small images in other folders will be inlined.
+      {
+        test: /\.(png|jpg|jpeg|gif|svg)$/,
+        include: [
+          path.resolve(__dirname, '../node_modules/stemn-frontend-shared/src/misc/FileList/filetype'),
+        ],
+        loader: 'url',
+        query: {
+          limit: 1,
+          name: 'images/[name].[ext]?[hash]'
+        }
+      },      
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/,
         loader: 'url',

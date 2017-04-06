@@ -32,7 +32,8 @@ app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
   publicPath: config.output.publicPath,
   stats: {
-    colors: true
+    colors: true,
+    chunkModules: true,
   },
   historyApiFallback: true
 }));

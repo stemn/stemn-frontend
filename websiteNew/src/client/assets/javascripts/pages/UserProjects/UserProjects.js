@@ -13,7 +13,12 @@ export default class UserProjects extends Component {
     return (
       <div className={ classes.panel }>
         { orderBy(projects.data, 'updated', 'desc').map(project => (
-          <Project key={ project._id } project={ project } className={ classes.project } />
+          <Project 
+            size='wide'
+            key={ project._id } 
+            project={ project } 
+            className={ classes.project } 
+          />
         ))}
       </div>
     )
