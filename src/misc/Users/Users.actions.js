@@ -27,3 +27,17 @@ export function saveUser({user}) {
     }
   }
 }
+
+export function getCommitHistory({ userId }) {
+  return {
+    type: 'USERS/GET_COMMIT_HISTORY',
+    http: true,
+    payload: {
+      method: 'GET',
+      url: `/api/v1/users/${ userId }/commitHistory`,
+    },
+    meta: {
+      userId
+    }
+  }
+}
