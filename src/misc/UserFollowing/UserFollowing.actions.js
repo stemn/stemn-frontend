@@ -1,5 +1,5 @@
-export const getUserFollowers = ({ userId }) => ({
-  type: 'USER_FOLLOWERS/GET_FOLLOWING',
+export const getUserFollowing = ({ userId }) => ({
+  type: 'USER_FOLLOWING/GET_FOLLOWING',
   http: true,
   payload: {
     method: 'GET',
