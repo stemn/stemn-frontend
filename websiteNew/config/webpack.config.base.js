@@ -2,25 +2,28 @@
 const path = require('path')
 const webpack = require('webpack')
 const autoprefixer = require('autoprefixer')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HappyPack = require('happypack')
+const querystring = require('querystring')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const babelLoaderQuery = {
   presets: [
     'babel-preset-es2015',
     'babel-preset-react',
-    'babel-preset-stage-0',
+    'babel-preset-stage-0'
   ].map(require.resolve),
   plugins: [
     'babel-plugin-transform-decorators-legacy',
-    'react-hot-loader/babel',
-  ].map(require.resolve),
+    'react-hot-loader/babel'
+  ].map(require.resolve)
 }
 
 module.exports = {
   output: {
     filename: 'js/[name].js',
     path: path.resolve(__dirname, '../build/client'),
-    publicPath: '/',
+    publicPath: '/'
   },
   resolve: {
     symlinks: false,
@@ -28,39 +31,39 @@ module.exports = {
       path.join(__dirname, '../src/client/scripts'),
       path.join(__dirname, '../src/client/assets'),
       path.join(__dirname, '../src/client/assets/javascripts'),
-      'node_modules',
+      'node_modules'
     ],
     alias: {
       'stemn-shared': path.resolve(__dirname, '../node_modules/stemn-frontend-shared/src'),
-      theme: path.resolve(__dirname, '../src/client/assets/styles/modules/theme.css'),
-      'route-actions': path.resolve(__dirname, '../src/client/assets/javascripts/pages/routeActions.js'),
+      'theme': path.resolve(__dirname, '../src/client/assets/styles/modules/theme.css'),
+      'route-actions': path.resolve(__dirname, '../src/client/assets/javascripts/pages/routeActions.js')
     },
-    extensions: ['.js', '.jsx', '.json', '.scss'],
+    extensions: ['.js', '.jsx', '.json', '.scss']
   },
   plugins: [
     new webpack.ProvidePlugin({
-      fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',  // fetch API
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'  // fetch API
     }),
     // Shared code
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       filename: 'js/vendor.bundle.js',
-      minChunks: Infinity,
+      minChunks: Infinity
     }),
     new HappyPack({
       threads: 4,
       loaders: [{
         path: 'babel',
-        query: babelLoaderQuery,
-      }],
-    }),
+        query: babelLoaderQuery
+      }]
+    })
   ],
   module: {
     loaders: [
       // JSON
       {
         test: /\.json$/,
-        loader: 'json-loader',
+        loader: 'json-loader'
       },
       // JavaScript / ES6
       {
@@ -69,9 +72,9 @@ module.exports = {
           path.resolve(__dirname, '../src/client/assets/javascripts'),
           path.resolve(__dirname, '../node_modules/stemn-frontend-shared'),
           path.resolve(__dirname, '../node_modules/react-icons'),
-          path.resolve(__dirname, '../node_modules/react-popover-wrapper'),
+          path.resolve(__dirname, '../node_modules/react-popover-wrapper')
         ],
-        loader: 'happypack/loader',
+        loader: 'happypack/loader'
       },
       // Images
       // Any images inside FileList/filetype should use urls
@@ -79,13 +82,13 @@ module.exports = {
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/,
         include: [
-          path.resolve(__dirname, '../node_modules/stemn-frontend-shared/src/misc/FileList/filetype'),
+          path.resolve(__dirname, '../node_modules/stemn-frontend-shared/src/misc/FileList/filetype')
         ],
         loader: 'url',
         query: {
           limit: 1,
-          name: 'images/[name].[ext]?[hash]',
-        },
+          name: 'images/[name].[ext]?[hash]'
+        }
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/,
@@ -95,8 +98,8 @@ module.exports = {
         loader: 'url',
         query: {
           limit: 8192,
-          name: 'images/[name].[ext]?[hash]',
-        },
+          name: 'images/[name].[ext]?[hash]'
+        }
       },
 
       // Fonts
@@ -105,14 +108,16 @@ module.exports = {
         loader: 'url',
         query: {
           limit: 8192,
-          name: 'fonts/[name].[ext]?[hash]',
-        },
-      },
-    ],
+          name: 'fonts/[name].[ext]?[hash]'
+        }
+      }
+    ]
   },
-  postcss: () => [
-    autoprefixer({
-      browsers: ['last 2 versions'],
-    }),
-  ],
+  postcss: function () {
+    return [
+      autoprefixer({
+        browsers: ['last 2 versions']
+      })
+    ]
+  }
 }
