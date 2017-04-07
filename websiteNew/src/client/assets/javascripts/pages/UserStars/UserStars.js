@@ -10,7 +10,6 @@ import Project from 'modules/Project'
 export default class UserStars extends Component {
   render () {
     const { projects } = this.props
-    console.log('user projec 122222222222', this.props)
     return (
       <div className={ classes.panel }>
         { projects && projects.data

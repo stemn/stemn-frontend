@@ -7,7 +7,7 @@ import { getProject } from 'stemn-shared/misc/Projects/Projects.actions'
 import Project from './Project'
 
 const stateToProps = (state, { projectId }) => ({
-  project: state.projects[projectId]
+  project: state.projects.data[projectId]
 })
 
 const dispatchToProps = {
@@ -19,7 +19,7 @@ const fetchConfigs = [{
   onChange: (props) => {
     props.getProject({
       projectId: props.projectId,
-      size: 'lg'
+      size: 'md'
     })
   }
 }]

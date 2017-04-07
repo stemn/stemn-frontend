@@ -25,7 +25,7 @@ console.log(this.props)
           ? <Link to={ projectRoute({ projectId }) }>
               <img
                 className={ classes.picture }
-                src={`${GLOBAL_ENV.API_SERVER}${project.picture}?size=feed-sm&crop=true`}
+                src={`${GLOBAL_ENV.API_SERVER}${picture}?size=feed-sm&crop=true`}
               />
             </Link>
           : null }

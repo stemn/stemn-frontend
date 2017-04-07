@@ -10,14 +10,13 @@ import Project from 'modules/Project'
 export default class UserProjects extends Component {
   render() {
     const { projects } = this.props
-    console.log('user projec', this.props)
     return (
       <div>
-        { orderBy(projects.data, 'updated', 'desc').map((projectId) => (
+        { orderBy(projects.data, 'updated', 'desc').map((project) => (
           <Project
             size='wide'
-            key={ projectId }
-            projectId={ projectId }
+            key={ project._id }
+            projectId={ project._id }
             className={ classes.project }
           />
         ))}
