@@ -10,7 +10,6 @@ import { Link } from 'react-router'
 class Project extends Component {
   render () {
     const { project, className, size } = this.props;
-console.log(this.props)
     if (project && project.data) {
       const { _id: projectId, name, blurb, picture, updated } = project.data;
 

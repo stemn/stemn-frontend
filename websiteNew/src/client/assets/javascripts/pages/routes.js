@@ -49,6 +49,7 @@ const getUserFollowing           = (loc, cb) => getRoute(System.import('pages/Us
 const getUserOverview            = (loc, cb) => getRoute(System.import('pages/UserOverview'), cb)
 const getUserProjects            = (loc, cb) => getRoute(System.import('pages/UserProjects'), cb)
 const getUserStars               = (loc, cb) => getRoute(System.import('pages/UserStars'), cb)
+const getNotifications           = (loc, cb) => getRoute(System.import('pages/Notifications'), cb)
 
 export default (
   <Route                                       component={AppRoot}>
@@ -61,6 +62,7 @@ export default (
         <Route path='emails'                   getComponent={getSettingsEmails}/>
         <Route path='projects'                 getComponent={getSettingsProjects}/>
       </Route>
+      <Route path='notifications'              getComponent={getNotifications} />
     </Route>
 
     <Route                                     component={AppUnAuthed}>
