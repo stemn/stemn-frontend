@@ -1,0 +1,17 @@
+{
+  "extends": "airbnb",
+
+  "env": {
+    "node": true,
+    "browser": true,
+  },
+
+  "globals": {
+    "GLOBAL_ENV": true,
+  },
+
+  "rules": {
+    "linebreak-style": 0,       // Both CRLF/LF are fine
+    "semi": ["error", "never"], // Never allow semi colons
+  }
+}
