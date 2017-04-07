@@ -18,9 +18,10 @@ const getRoute = (systemImport, cb) => systemImport.then(loadRoute(cb)).catch(er
 // Async Routes
 // Split using webpack magic.
 // http://moduscreate.com/code-splitting-for-react-router-with-es6-imports/
-const getHome                    = (loc, cb) => getRoute(System.import('pages/Home'), cb)
 const getFile                    = (loc, cb) => getRoute(System.import('pages/File'), cb)
+const getHome                    = (loc, cb) => getRoute(System.import('pages/Home'), cb)
 const getLogin                   = (loc, cb) => getRoute(System.import('pages/Login'), cb)
+const getPrivacy                 = (loc, cb) => getRoute(System.import('pages/Privacy'), cb)
 const getProject                 = (loc, cb) => getRoute(System.import('pages/Project'), cb)
 const getProjectCommit           = (loc, cb) => getRoute(System.import('pages/ProjectCommit'), cb)
 const getProjectCommits          = (loc, cb) => getRoute(System.import('pages/ProjectCommits'), cb)
@@ -33,12 +34,14 @@ const getProjectSettingsTeam     = (loc, cb) => getRoute(System.import('pages/Pr
 const getProjectTask             = (loc, cb) => getRoute(System.import('pages/ProjectTask'), cb)
 const getProjectTasks            = (loc, cb) => getRoute(System.import('pages/ProjectTasks'), cb)
 const getRegister                = (loc, cb) => getRoute(System.import('pages/Register'), cb)
+const getSecurity                = (loc, cb) => getRoute(System.import('pages/Security'), cb)
 const getSettings                = (loc, cb) => getRoute(System.import('pages/Settings'), cb)
 const getSettingsAccount         = (loc, cb) => getRoute(System.import('pages/SettingsAccount'), cb)
 const getSettingsBilling         = (loc, cb) => getRoute(System.import('pages/SettingsBilling'), cb)
 const getSettingsEmails          = (loc, cb) => getRoute(System.import('pages/SettingsEmails'), cb)
 const getSettingsProfile         = (loc, cb) => getRoute(System.import('pages/SettingsProfile'), cb)
 const getSettingsProjects        = (loc, cb) => getRoute(System.import('pages/SettingsProjects'), cb)
+const getTerms                   = (loc, cb) => getRoute(System.import('pages/Terms'), cb)
 const getUser                    = (loc, cb) => getRoute(System.import('pages/User'), cb)
 const getUserDetails             = (loc, cb) => getRoute(System.import('pages/UserDetails'), cb)
 const getUserFollowers           = (loc, cb) => getRoute(System.import('pages/UserFollowers'), cb)
@@ -66,6 +69,9 @@ export default (
     </Route>
 
     <Route path='/'                            getComponent={getHome} />
+    <Route path='/terms'                       getComponent={getTerms} />
+    <Route path='/security'                    getComponent={getSecurity} />
+    <Route path='/privacy'                     getComponent={getPrivacy} />
     <Route path='/files/:projectId/:fileId'    getComponent={getFile} />
     <Route path='project/:stub'                getComponent={getProject}>
       <IndexRoute                              getComponent={getProjectOverview} />

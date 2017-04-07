@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import StandardLayout from 'layout/StandardLayout'
+
+import classes from './NotFound.css'
+
 const NotFound = () => (
-  <StandardLayout contained>
-    <h1>404</h1>
-    <p>This page could not be found</p>
-    <Link to="/">Back To Home</Link>
+  <StandardLayout contained className={ classes.root + ' flex layout-column layout-align-center-center' }>
+    <h1>LOST IN SPACE</h1>
+    <p>It looks like the page you were looing for is gone</p>
   </StandardLayout>
 );
 

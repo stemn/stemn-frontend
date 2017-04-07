@@ -4,11 +4,15 @@ import classes from './UserFollowers.css'
 import classNames from 'classnames'
 
 import User from 'modules/User'
+import Pagination from 'stemn-shared/misc/Buttons/Pagination'
 
 export default class UserFollowers extends Component {
 
   render() {
-    const { user, followers } = this.props
+    const { user, followers, page, size, location } = this.props
+    const noMoreResults = followers && followers.data && followers.data.length < size
+    console.log(this.props);
+
     return (
       <div>
         <div className='text-mini-caps'>People who follow { user.data.profile.firstname }</div>
@@ -20,6 +24,7 @@ export default class UserFollowers extends Component {
           ))
           : null }
         </div>
+        <Pagination path={ location.pathname } page={ page } noMoreResults={ noMoreResults }/>
       </div>
     )
   }

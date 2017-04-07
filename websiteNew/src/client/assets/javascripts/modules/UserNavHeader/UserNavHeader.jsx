@@ -14,9 +14,9 @@ export default class UserNavHeader extends Component {
   }
 
   render() {
-    const { user } = this.props
+    const { user, currentUser } = this.props
 
-    const isCurrentUser = user && user.data
+    const isCurrentUser = user.data._id === currentUser._id;
     const baseUrl = `/users/${user.data._id}`
 
     return (

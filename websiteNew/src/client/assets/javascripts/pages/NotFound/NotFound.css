@@ -1,0 +1,12 @@
+.root h1 {
+  font-weight: 700;
+  letter-spacing: 5px;
+  line-height: 1.3em;
+  margin-bottom: 10px;
+  font-size: 50px;
+}
+
+.root p {
+  font-size: 20px;
+  line-height: 1.3em;
+}

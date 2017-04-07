@@ -6,10 +6,10 @@ import classNames from 'classnames';
 import { Container } from 'stemn-shared/misc/Layout';
 
 class StandardLayout extends Component {
-  renderInner(children, contained, style) {
+  renderInner(children, contained, style, className) {
     if (contained) {
       return (
-        <Container style={ style }>
+        <Container style={ style } className={ className }>
           { children }
         </Container>
       )
@@ -22,14 +22,13 @@ class StandardLayout extends Component {
     const { children, contained, className, style, ...otherProps } = this.props;
     const standardClasses = 'layout-column flex'
     return (
-      <div className={ classNames(standardClasses, className) } { ...otherProps }>
+      <div className={ classNames(standardClasses) } { ...otherProps }>
         <Header />
-        <div className="flex">
-           { this.renderInner(children, contained, style) }
+        <div className="flex layout-column">
+           { this.renderInner(children, contained, style, className) }
         </div>
         <Footer />
       </div>
-
     )
   }
 }

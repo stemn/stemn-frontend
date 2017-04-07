@@ -5,6 +5,10 @@ import Header from './Header';
 import { logout } from 'stemn-shared/misc/Auth/Auth.actions.js';
 import { showModal } from 'stemn-shared/misc/Modal/Modal.actions.js';
 
+import ProjectNewModal, { modalName } from 'stemn-shared/misc/Projects/ProjectNewModal/ProjectNewModal.jsx'
+import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry';
+registerModal(modalName, ProjectNewModal);
+
 const stateToProps = ({ auth }) => ({
   auth
 });

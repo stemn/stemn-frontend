@@ -125,6 +125,7 @@
     "react-helmet": "5.0.2",
     "react-hot-loader": "3.0.0-beta.6",
     "react-icons": "2.2.3",
+    "react-modal": "1.7.3",
     "react-popover-wrapper": "1.0.0",
     "react-redux": "4.4.5",
     "react-redux-form": "1.8.2",

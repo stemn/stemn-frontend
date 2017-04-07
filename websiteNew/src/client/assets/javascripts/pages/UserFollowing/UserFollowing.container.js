@@ -6,9 +6,12 @@ import { getUserFollowing } from 'stemn-shared/misc/UserFollowing/UserFollowing.
 
 import UserFollowing from './UserFollowing'
 
-const stateToProps = (state, { params }) => ({
+const stateToProps = (state, { params, location }) => ({
+  following: state.userFollowing[params.stub],
+  page: parseInt(location.query.page),
+  pageId: `${params.stub}-${location.query.page}`,
+  size: 30,
   user: state.users[params.stub],
-  following: state.userFollowing[params.stub]
 })
 
 const dispatchToProps = {
@@ -16,9 +19,13 @@ const dispatchToProps = {
 }
 
 const fetchConfigs = [{
-  hasChanged: 'params.stub',
+  hasChanged: 'pageId',
   onChange: (props) => {
-    props.getUserFollowing({ userId: props.params.stub })
+    props.getUserFollowing({
+      userId: props.params.stub,
+      page: props.page,
+      size: props.size
+    })
   }
 }]
 

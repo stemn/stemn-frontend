@@ -26,9 +26,12 @@ import Checkbox           from 'stemn-shared/misc/Input/Checkbox/Checkbox';
 import SimpleTable        from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable.jsx';
 import Banner             from 'stemn-shared/misc/Banner/Banner.jsx'
 
+import ReleaseNotesModal, { modalName as ReleaseNotesModalName } from 'stemn-shared/misc/Modal/modals/ReleaseNotesModal'
+import { registerModal } from 'stemn-shared/misc/Modal/modals/ModalRegistry';
+registerModal(ReleaseNotesModalName, ReleaseNotesModal);
+
+
 ///////////////////////////////// COMPONENT /////////////////////////////////
-
-
 
 const inputStyles = {
   textTransform: 'capitalize',
@@ -55,7 +58,7 @@ export const Component = React.createClass({
   },
   showReleaseModal() {
     this.props.modalActions.showModal({
-      modalType: 'RELEASE_NOTES'
+      modalType: ReleaseNotesModalName
     })
   },
   render() {

@@ -1,0 +1,32 @@
+.staticPage {
+  margin-top: 60px;
+  max-width: 600px;
+}
+.staticPage h1 {
+  font-weight: 300;
+  font-size: 50px;
+}
+.staticPage h2 {
+  margin-top: 40px;
+  font-weight: 300;
+  font-size: 20px;
+  color: black;
+}
+.staticPage h3 {
+  font-weight: bold;
+}
+.staticPage p, .staticPage ul, .staticPage ol {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 1.2em;
+  line-height: 1.8em;
+}
+.staticPage li {
+  padding: 0.2em 0px;
+}
+.staticPage a {
+  text-decoration: underline;
+}
+
+.staticPage small {
+  color: rgba(0, 0, 0, 0.5);
+}
