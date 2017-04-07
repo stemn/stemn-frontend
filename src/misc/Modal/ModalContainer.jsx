@@ -12,16 +12,14 @@ import Modal from './Modal.jsx'
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 const propTypesObject = {
-  types : PropTypes.array,   // Array of modalTypes that can be displayed such as : ['FILE_DOWNLOAD'] (If not supplied, all modals will be dislayed)
+  types : PropTypes.array,     // Array of modalTypes that can be displayed such as : ['FILE_DOWNLOAD'] (If not supplied, all modals will be dislayed)
   modals: PropTypes.object,    // Modals object
-  children: PropTypes.node,    // Child node
-  dispatch: PropTypes.func
 };
 
 export const ModalContainer = React.createClass({
   propTypes: propTypesObject,
   render: function() {
-    const { modals, types, children } = this.props;
+    const { modals, types } = this.props;
     const stack         = modals.stack ? modals.stack : [];
     const filteredStack = types ? stack.filter(modal => types.includes(modal.modalType)) : stack;
     const modalIsOpen   = filteredStack.length > 0
@@ -34,16 +32,9 @@ export const ModalContainer = React.createClass({
       : null
     }
 
-    const childStyles = modalIsOpen ? {
-      filter: 'blur(2px)',
-      transition: '0s ease all'
-    } : {
-      transition: '0s ease all'
-    };
 
     return (
       <div { ...omit(this.props, Object.keys(propTypesObject))}>
-        { children ? React.cloneElement(children, {style: childStyles}) : null}
         { getModals () }
       </div>
     )

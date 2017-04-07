@@ -33,6 +33,7 @@
   filter: blur(5px);
 }
 .content{
+  position: relative;
   width: 750px;
   height: 500px;
 }

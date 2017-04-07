@@ -26,7 +26,10 @@ import { ArrowTabs, ArrowTab } from 'stemn-shared/misc/Tabs/ArrowTabs/ArrowTabs.
 import ProjectPermissionsRadio from 'stemn-shared/misc/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
+
 ///////////////////////////////// COMPONENT /////////////////////////////////
+
+export const modalName = 'PROJECT_NEW';
 
 export const Component = React.createClass({
   getInitialState () {

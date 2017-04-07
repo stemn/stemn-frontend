@@ -1,131 +1,98 @@
-// Container Core
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import i from 'icepick';
 
-// Container Actions
-import * as ModalActions from './Modal.actions.js';
+import { hideModal } from './Modal.actions.js';
 
-// Component Core
-import React from 'react';
+import React, { Component } from 'react';
 import Modal from 'react-modal';
 
-// Styles
-import classNames from 'classnames';
 import classes from './Modal.css'
 
-// Modals
-import ConfirmModal           from './modals/ConfirmModal.jsx';
-import BetaModal              from './modals/BetaModal.jsx';
-import ErrorModal             from './modals/ErrorModal.jsx';
-import ConnectionModal        from './modals/ConnectionModal.jsx';
-import ProviderAccessError    from './modals/ProviderAccessErrorModal.jsx'
-import ProviderAccessRevoked  from './modals/ProviderAccessRevokedModal.jsx'
-import ReleaseNotesModal      from './modals/ReleaseNotesModal.jsx'
-import FileSelectModal        from 'stemn-shared/misc/FileSelect/FileSelectModal.jsx';
-import TaskDisplayModal       from 'stemn-shared/misc/Tasks/TaskDisplayModal/TaskDisplayModal.jsx'
-import TaskLabelsEditModal    from 'stemn-shared/misc/Tasks/TaskLabelsEditModal/TaskLabelsEditModal.jsx'
-import TaskMentionModal       from 'stemn-shared/misc/Mentions/TaskMentionModal/TaskMentionModal.jsx'
-import ProjectNewModal        from 'stemn-shared/misc/Projects/ProjectNewModal/ProjectNewModal.jsx'
-import FileDownload           from 'stemn-shared/misc/Files/Download/DownloadModal/DownloadModal.jsx'
-import PreviewExpired         from 'stemn-shared/misc/Files/PreviewFile/Messages/PreviewExpired/PreviewExpiredModal.jsx'
-import AssemblyPartNotFound   from 'stemn-shared/misc/Files/PreviewFile/Messages/AssemblyPartNotFound/AssemblyPartNotFoundModal.jsx'
+import { getModal } from './ModalRegistry';
 
 
-const modalComponents = {
-  'CONFIRM'                 : ConfirmModal,
-  'BETA'                    : BetaModal,
-  'ERROR'                   : ErrorModal,
-  'CONNECTION'              : ConnectionModal,
-  'FILE_SELECT'             : FileSelectModal,
-  'TASK'                    : TaskDisplayModal,
-  'TASK_LABELS'             : TaskLabelsEditModal,
-  'TASK_COMMIT'             : TaskMentionModal,
-  'PROJECT_NEW'             : ProjectNewModal,
-  'PROVIDER_ACCESS_ERROR'   : ProviderAccessError,
-  'PROVIDER_ACCESS_REVOKED' : ProviderAccessRevoked,
-  'RELEASE_NOTES'           : ReleaseNotesModal,
-  'FILE_DOWNLOAD'           : FileDownload,
-  'PREVIEW_EXPIRED'         : PreviewExpired,
-  'ASSEMBLY_PART_NOT_FOUND' : AssemblyPartNotFound,
-}
-
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
-const ModalRoot = (modal) => {
-  if (!modal.modalType) {
-    return null
-  }
-  const SpecificModal = modalComponents[modal.modalType];
-  if(!SpecificModal){
-    console.error(`${modal.modalType} Modal could not be found`);
-    return null
-  }
-  const extendedModalProps = Object.assign({}, modal.modalProps, {
-    modalHide: modal.modalHide,
-    modalCancel: modal.modalCancel,
-    modalConfirm: modal.modalConfirm
-  });
-  return (
-    <SpecificModal {...extendedModalProps} />
-  )
-}
+class ModalComponent extends Component {
+  renderContent() {
+    // Get the modal from the modal registry and add the modal props.
+    const { modal } = this.props;
 
-export const Component = React.createClass({
-  render: function() {
+    let template = null
+    if (modal.modalType) {
+      const ModalTemplate = getModal(modal.modalType);
+      if (ModalTemplate) {
+        const additionalProps = {
+          modalHide: this.modalHide,
+          modalCancel: this.modalCancel,
+          modalConfirm: this.modalConfirm
+        }
+        const allProps = Object.assign({}, modal.modalProps, additionalProps)
+        template = <ModalTemplate { ...allProps } />
+      }
+    }
+
+    return template
+  }
+
+  callbackFunction = (callbackObject, extendObject) => {
+    const { dispatch } = this.props;
+    // If it is a normal object, extend and dispatch it
+    if(callbackObject && !callbackObject.aliased){
+      dispatch(i.merge(callbackObject, extendObject))
+    }
+    else if(callbackObject && callbackObject.aliased){
+      // Extend the aliased function inputs
+      // We only extend if the object exists because sometimes the functionInputs
+      // are an array and do not allow for extending.
+      if(extendObject){
+        dispatch(i.merge(callbackObject, {
+          payload: {
+            functionInputs: extendObject
+          }
+        }))
+      }
+      else{
+        dispatch(callbackObject)
+      }
+    }
+  }
+
+  modalHide = () => {
+    const { modalId } = this.props.modal;
+    this.props.hideModal({ modalId })
+  }
+  modalCancel = (extendObject) => this.callbackFunction(this.props.modal.modalCancel, extendObject)
+  modalConfirm = (extendObject) => this.callbackFunction(this.props.modal.modalConfirm, extendObject)
+  onRequestClose = () => {
+    const { modal } = this.props;
+    if (modal.modalOptions && modal.modalOptions.noClickClose) {
+      return
+    } else {
+      this.modalCancel()
+      this.modalHide()
+    }
+  }
+  render() {
     const { modal, dispatch } = this.props;
-
-    // This transforms the modalCancel and modalConfirm actions and adds the modalHide action
-    const modalExtended = Object.assign({}, modal, {
-      modalHide: ()    => { this.props.ModalActions.hideModal({modalId: modal.modalId}) },
-      // The cancel and confirm actions can be extended before dispatching
-      modalCancel: (extendObject)  => callbackFunction(modal.modalCancel, dispatch, extendObject),
-      modalConfirm: (extendObject) => callbackFunction(modal.modalConfirm, dispatch, extendObject),
-    })
+    const overlayClassName = classes.overlay+ ' layout-column layout-align-center-center';
 
     return (
       <Modal
-        isOpen={true}
-        onRequestClose={()=>{
-          if (modal.modalOptions && modal.modalOptions.noClickClose) return;
-          modalExtended.modalCancel()
-          modalExtended.modalHide()
-        }}
-        className={classes.modal}
-        overlayClassName={classes.overlay+ ' layout-column layout-align-center-center'}>
-        { ModalRoot(modalExtended) }
+        isOpen
+        onRequestClose={ this.onRequestClose }
+        className={ classes.modal }
+        overlayClassName={ overlayClassName }>
+        { this.renderContent() }
       </Modal>
     );
   }
-});
+};
 
-function callbackFunction(callbackObject, dispatch, extendObject){
-  // If it is a normal object, extend and dispatch it
-  if(callbackObject && !callbackObject.aliased){
-    dispatch(i.merge(callbackObject, extendObject))
-  }
-  else if(callbackObject && callbackObject.aliased){
-    // Extend the aliased function inputs
-    // We only extend if the object exists because sometimes the functionInputs
-    // are an array and do not allow for extending.
-    if(extendObject){
-      dispatch(i.merge(callbackObject, {
-        payload: {
-          functionInputs: extendObject
-        }
-      }))
-    }
-    else{
-      dispatch(callbackObject)
-    }
-  }
-}
 
-/////////////////////////////////////////////////////////////////////////////
+
 ///////////////////////////////// CONTAINER /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps() {
   return {};
@@ -133,9 +100,9 @@ function mapStateToProps() {
 
 function mapDispatchToProps(dispatch) {
   return {
-    ModalActions: bindActionCreators(ModalActions, dispatch),
+    hideModal: bindActionCreators(hideModal, dispatch),
     dispatch
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps, mapDispatchToProps)(ModalComponent);

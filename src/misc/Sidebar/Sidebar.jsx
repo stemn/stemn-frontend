@@ -34,7 +34,12 @@ import MdAdd                          from 'react-icons/md/add';
 import ProjectMenu                    from 'stemn-shared/misc/Projects/Project.menu.js';
 import UserAvatar                     from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx';
 
+import ProjectNewModal, { modalName } from 'stemn-shared/misc/Projects/ProjectNewModal/ProjectNewModal.jsx'
+import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry';
+registerModal(modalName, ProjectNewModal);
+
 ///////////////////////////////// COMPONENT /////////////////////////////////
+
 const projectContextIdentifier = 'ProjectContextIdentifier';
 const ProjectWithContext = ContextMenuLayer(projectContextIdentifier, (props) => props.item)(SidebarProjectButton);
 
