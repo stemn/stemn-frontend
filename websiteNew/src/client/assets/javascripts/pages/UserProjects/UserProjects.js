@@ -12,12 +12,12 @@ export default class UserProjects extends Component {
     const { projects } = this.props
     return (
       <div>
-        { orderBy(projects.data, 'updated', 'desc').map(project => (
-          <Project 
+        { orderBy(projects.data, 'updated', 'desc').map((project) => (
+          <Project
             size='wide'
-            key={ project._id } 
-            project={ project } 
-            className={ classes.project } 
+            key={ project._id }
+            projectId={ project._id }
+            className={ classes.project }
           />
         ))}
       </div>
