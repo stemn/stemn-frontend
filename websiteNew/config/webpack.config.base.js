@@ -92,12 +92,16 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/,
+        exclude: [
+          path.resolve(__dirname, '../node_modules/stemn-frontend-shared/src/misc/FileList/filetype'),
+        ],
         loader: 'url',
         query: {
           limit: 8192,
           name: 'images/[name].[ext]?[hash]'
         }
       },
+
       // Fonts
       {
         test: /\.(woff|woff2|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,

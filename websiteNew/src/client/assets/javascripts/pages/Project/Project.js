@@ -58,7 +58,6 @@ class Project extends Component {
       </div>
     )
   }
-
   renderPending () {
     return (
       <div>Loading</div>
@@ -71,7 +70,7 @@ class Project extends Component {
       <StandardLayout style={ { marginTop: '30px' } }>
         { project && project.data
           ? this.renderComplete()
-          : this.renderPending()
+          : null
         }
       </StandardLayout>
     )

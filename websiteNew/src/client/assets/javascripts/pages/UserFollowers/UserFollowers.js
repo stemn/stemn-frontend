@@ -10,13 +10,16 @@ export default class UserFollowers extends Component {
   render() {
     const { user, followers } = this.props
     return (
-      <div className={ classes.panel }>
-        { followers && followers.data
+      <div>
+        <div className='text-mini-caps'>People who follow { user.data.profile.firstname }</div>
+        <br/>
+        <div className={ classes.panel }>
+          { followers && followers.data
           ? followers.data.map((userId) => (
             <User key={ userId } userId={ userId } className={ classes.user } />
           ))
-          : <div>No followers found</div>
-        }
+          : null }
+        </div>
       </div>
     )
   }
