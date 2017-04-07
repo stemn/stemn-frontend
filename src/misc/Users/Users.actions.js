@@ -1,38 +1,9 @@
-// export function getUser({ userId }) {
-//   return {
-//     type: 'USERS/GET_USER',
-//     http: true,
-//     payload: {
-//       method: 'GET',
-//       url: `/api/v1/users/${userId}`
-//     },
-//     meta: {
-//       cacheKey: userId
-//     }
-//   };
-// }
+import { shouldDownload } from '../../redux/utils'
 
 const fields = {
   sm: ['name', 'picture', 'stub'],
   md: ['name', 'picture', 'stub', 'blurb'],
   lg: ['*']
-}
-
-const shouldDownload = (requestedSize, existingSize) => {
-  if (requestedSize === existingSize) {
-    return false
-  }
-
-  if (requestedSize === 'sm' && (existingSize === 'md' || existingSize === 'lg')) {
-    return false
-  }
-
-  if (requestedSize === 'md' && existingSize === 'lg') {
-    return false
-  }
-
-  // we don't have the requested data locally, we should download
-  return true
 }
 
 export const getUser = ({ userId, size = 'lg', force }) => (dispatch, getState) => {
@@ -81,7 +52,7 @@ export const getCommitHistory = ({ userId }) => ({
   http: true,
   payload: {
     method: 'GET',
-    url: `/api/v1/users/${userId}/commitHistory`,
+    url: `/api/v1/users/${userId}/commitHistory`
   },
   meta: {
     userId
