@@ -26,6 +26,7 @@ class Header extends Component {
         </SimpleIconButton>
         <SimpleIconButton
          title='Notifications'
+         to='/notifications'
          style={ { marginRight: '10px' } }>
           <MdNotifications size={ 22 }/>
         </SimpleIconButton>
