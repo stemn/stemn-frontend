@@ -13,5 +13,6 @@
   "rules": {
     "linebreak-style": 0,       // Both CRLF/LF are fine
     "semi": ["error", "never"], // Never allow semi colons
+    "no-underscore-dangle": 0,  // Allow _ in var names such as _id
   }
 }
