@@ -1,4 +1,4 @@
-export const getUserFollowing = ({ userId, page, size }) => ({
+export const getUserFollowing = ({ userId, page = 1, size }) => ({
   type: 'USER_FOLLOWING/GET_FOLLOWING',
   http: true,
   payload: {
@@ -11,6 +11,7 @@ export const getUserFollowing = ({ userId, page, size }) => ({
     }
   },
   meta: {
-    userId
+    userId,
+    page
   }
 })

@@ -12,7 +12,7 @@ export default (props) => {
   const innerClasses = classNames('tabs-inner', 'layout-row', tabClasses.inner);
   
   return (
-    <div className={ rootClasses }>
+    <div className={ rootClasses } style={ props.style }>
       <div className={ innerClasses }>
         { props.children }
       </div>
