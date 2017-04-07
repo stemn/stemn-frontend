@@ -5,7 +5,6 @@ import classNames from 'classnames'
 import { userRoute } from 'route-actions'
 import moment from 'moment'
 
-import Avatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import { Link } from 'react-router'
 
 class User extends Component {

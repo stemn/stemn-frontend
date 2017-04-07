@@ -1,21 +1,28 @@
 import React, { Component, PropTypes } from 'react'
 
+import { orderBy } from 'lodash'
+
 import classes from './UserStars.css'
 import classNames from 'classnames'
 
-import User from 'modules/User'
+import Project from 'modules/Project'
 
 export default class UserStars extends Component {
-
-  render() {
-    const { user, followers } = this.props
+  render () {
+    const { projects } = this.props
+    console.log('user projec 122222222222', this.props)
     return (
       <div className={ classes.panel }>
-        { followers && followers.data
-          ? followers.data.map((userId) => (
-            <User key={ userId } userId={ userId } className={ classes.user } />
+        { projects && projects.data
+          ? projects.data.map((projectId) => (
+            <Project
+              size='wide'
+              key={ projectId }
+              projectId={ projectId }
+              className={ classes.project }
+            />
           ))
-          : <div>No followers found</div>
+          : <div>No stars found</div>
         }
       </div>
     )

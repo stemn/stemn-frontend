@@ -16,7 +16,7 @@ const babelLoaderQuery = {
   plugins: [
     'babel-plugin-transform-decorators-legacy',
     'react-hot-loader/babel'
-  ].map(require.resolve),
+  ].map(require.resolve)
 }
 
 module.exports = {
@@ -36,7 +36,7 @@ module.exports = {
     alias: {
       'stemn-shared': path.resolve(__dirname, '../node_modules/stemn-frontend-shared/src'),
       'theme': path.resolve(__dirname, '../src/client/assets/styles/modules/theme.css'),
-      'route-actions': path.resolve(__dirname, '../src/client/assets/javascripts/pages/routeActions.js'),
+      'route-actions': path.resolve(__dirname, '../src/client/assets/javascripts/pages/routeActions.js')
     },
     extensions: ['.js', '.jsx', '.json', '.scss']
   },
@@ -55,15 +55,15 @@ module.exports = {
       loaders: [{
         path: 'babel',
         query: babelLoaderQuery
-      }],
+      }]
     })
   ],
   module: {
     loaders: [
       // JSON
       {
-      test: /\.json$/,
-        loader: 'json-loader',
+        test: /\.json$/,
+        loader: 'json-loader'
       },
       // JavaScript / ES6
       {
@@ -72,7 +72,7 @@ module.exports = {
           path.resolve(__dirname, '../src/client/assets/javascripts'),
           path.resolve(__dirname, '../node_modules/stemn-frontend-shared'),
           path.resolve(__dirname, '../node_modules/react-icons'),
-          path.resolve(__dirname, '../node_modules/react-popover-wrapper'),
+          path.resolve(__dirname, '../node_modules/react-popover-wrapper')
         ],
         loader: 'happypack/loader'
       },
@@ -82,7 +82,7 @@ module.exports = {
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/,
         include: [
-          path.resolve(__dirname, '../node_modules/stemn-frontend-shared/src/misc/FileList/filetype'),
+          path.resolve(__dirname, '../node_modules/stemn-frontend-shared/src/misc/FileList/filetype')
         ],
         loader: 'url',
         query: {

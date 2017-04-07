@@ -8,7 +8,7 @@ import UserStars from './UserStars'
 
 const stateToProps = (state, { params }) => ({
   user: state.users[params.stub],
-  followers: state.userStars[params.stub]
+  projects: state.userStars[params.stub]
 })
 
 const dispatchToProps = {
