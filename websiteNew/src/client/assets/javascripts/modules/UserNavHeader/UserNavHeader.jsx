@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 
 import SubHeader from 'modules/SubHeader'
 import Tabs from 'stemn-shared/misc/Tabs/Tabs'
-import { Link } from 'react-router'
+import Link from 'stemn-shared/misc/Router/Link'
 
 export default class UserNavHeader extends Component {
   static propTypes = {
@@ -14,19 +14,19 @@ export default class UserNavHeader extends Component {
     const { user, currentUser } = this.props
 
     const isCurrentUser = user.data._id === currentUser._id;
-    const baseUrl = `/users/${user.data._id}`
+    const routeParams = { userId: user.data._id }
 
     return (
       <SubHeader title={ user.data.name }>
         <Tabs noline style={ { height: '100%' } }>
-          <Link activeClassName='active' to={`${baseUrl}`} onlyActiveOnIndex>Overview</Link>
-          <Link activeClassName='active' to={`${baseUrl}/details`}>Details</Link>
-          <Link activeClassName='active' to={`${baseUrl}/projects`}>Projects</Link>
-          <Link activeClassName='active' to={`${baseUrl}/stars`}>Stars</Link>
-          <Link activeClassName='active' to={`${baseUrl}/followers`}>Followers</Link>
-          <Link activeClassName='active' to={`${baseUrl}/following`}>Following</Link>
+          <Link activeClassName='active' params={routeParams} name="userRoute" onlyActiveOnIndex>Overview</Link>
+          <Link activeClassName='active' params={routeParams} name="userDetailsRoute">Details</Link>
+          <Link activeClassName='active' params={routeParams} name="userProjectsRoute">Projects</Link>
+          <Link activeClassName='active' params={routeParams} name="userStarsRoute">Stars</Link>
+          <Link activeClassName='active' params={routeParams} name="userFollowersRoute">Followers</Link>
+          <Link activeClassName='active' params={routeParams} name="userFollowingRoute">Following</Link>
           { isCurrentUser
-          ? <Link activeClassName='active' to={`/settings`}>Settings</Link>
+          ? <Link activeClassName='active' name="settingsRoute">Settings</Link>
           : null }
         </Tabs>
       </SubHeader>

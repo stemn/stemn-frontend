@@ -3,8 +3,7 @@ import classes from './Footer.css';
 import classNames from 'classnames';
 
 import { Container, Row, Col } from 'stemn-shared/misc/Layout';
-import { Link } from 'react-router';
-
+import Link from 'stemn-shared/misc/Router/Link'
 
 class Footer extends Component {
   render() {
@@ -13,11 +12,11 @@ class Footer extends Component {
         <Container className={ classNames(classes.inner, 'layout-row', 'layout-align-start-center') }>
           <div>© 2017 Stemn.</div>
           <div className="flex" />
-          <Link className="link-primary" to='/'>Stemn Desktop</Link>
+          <Link className="link-primary" name="homeRoute">Stemn Desktop</Link>
           <span className="text-interpunct" />
-          <Link className="link-primary" to='/terms'>Terms</Link>
-          <Link className="link-primary" to='/privacy'>Privacy</Link>
-          <Link className="link-primary" to='/security'>Security</Link>
+          <Link className="link-primary" name="termsRoute">Terms</Link>
+          <Link className="link-primary" name="privacyRoute">Privacy</Link>
+          <Link className="link-primary" name="securityRoute">Security</Link>
         </Container>
       </footer>
     )

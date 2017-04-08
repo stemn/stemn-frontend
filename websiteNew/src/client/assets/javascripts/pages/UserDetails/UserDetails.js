@@ -4,7 +4,7 @@ import classes from './UserDetails.css';
 import classNames from 'classnames';
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar';
-import { Link } from 'react-router';
+import Link from 'stemn-shared/misc/Router/Link'
 
 
 class EducationItem extends Component {
@@ -33,7 +33,7 @@ class EducationItem extends Component {
             </div>
           </div>
           { item.organisations[0]
-          ? <Link to='/'>
+          ? <Link name="organisationRoute" params={ { organisationId: item.organisations[0]._id } }>
               <UserAvatar 
                 name={ item.organisations[0].name }
                 picture={ item.organisations[0].picture }

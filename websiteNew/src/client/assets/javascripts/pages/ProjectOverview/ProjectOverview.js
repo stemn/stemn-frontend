@@ -9,7 +9,7 @@ import moment from 'moment'
 
 import FileList from 'stemn-shared/misc/FileList/FileList'
 import Readme from 'stemn-shared/misc/Files/Readme/Readme.jsx'
-import { Container } from 'stemn-shared/misc/Layout'
+import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import Tag from 'stemn-shared/misc/Tags/Tag'
 import LikeButton from 'stemn-shared/misc/Likes/LikeButton'
@@ -42,28 +42,47 @@ export default class ProjectOverview extends Component {
       showMenu: true
     }
     if(project && project.data && project.data._id){
+      
 
       const infoBoxes = (
-        <div className={ classNames('layout-row', classes.infoBoxes)}>
-          <div className='flex'>
-            <MdAccessTime />
-            Updated { moment(project.data.updated).fromNow() }
+        <Col className={ classNames(project.data.picture ? 'flex flex-gt-xs-33' : 'flex') }>
+          <div className={ classNames(project.data.picture ? 'layout-column' : 'layout-xs-column layout-gt-xs-row', classes.infoBoxes)}>
+            <div className='flex'>
+              <MdAccessTime />
+              Updated { moment(project.data.updated).fromNow() }
+            </div>
+            <div className='flex'>
+              <MdPeople />
+              { project.data.team.length === 1
+              ? `${project.data.team.length} team member`
+              : `${project.data.team.length} team members` }
+            </div>
+            <div className='flex'>
+              <MdLocationOn />
+              Sydney Australia
+            </div>
+            <div className='flex'>
+              <MdAccount />
+              Creative Commons
+            </div>
           </div>
-          <div className='flex'>
-            <MdPeople />
-            { project.data.team.length === 1
-            ? `${project.data.team.length} team member`
-            : `${project.data.team.length} team members` }
-          </div>
-          <div className='flex'>
-            <MdLocationOn />
-            Sydney Australia
-          </div>
-          <div className='flex'>
-            <MdAccount />
-            Creative Commons
-          </div>
-        </div>
+        </Col>
+      )
+      
+      const imageBlock = (
+        <Col className="flex">
+          <div 
+            style={ { backgroundImage: `url(${GLOBAL_ENV.API_SERVER}${project.data.picture})`} }
+            className={ classes.image  }
+          />
+        </Col>
+      )
+      
+      const imageInfoSection = (
+        <Row className="layout-xs-column layout-gt-xs-row" style={ { marginBottom: '30px' } } >
+          { project.data.picture ? imageBlock : null }
+          { infoBoxes }
+        </Row>
       )
 
       return (
@@ -88,7 +107,9 @@ export default class ProjectOverview extends Component {
             </Container>
           </div>
           <Container style={{marginTop: '30px'}}>
-            { isFilePage ? null : infoBoxes }
+            { !isFilePage 
+            ? imageInfoSection 
+            : null }
             <FileList
               className={classNames(classes.files)}
               projectId={project.data._id}

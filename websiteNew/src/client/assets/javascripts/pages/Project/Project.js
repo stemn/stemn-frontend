@@ -6,17 +6,20 @@ import classes from './Project.css'
 import StandardLayout from 'layout/StandardLayout'
 import Tabs from 'stemn-shared/misc/Tabs/Tabs'
 import { Container } from 'stemn-shared/misc/Layout'
-import { Link } from 'react-router'
+import Link from 'stemn-shared/misc/Router/Link'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 
 class Project extends Component {
   renderComplete () {
     const { children, project, pathname } = this.props
+    
+    const routeParams = { projectId: project.data._id }
+    
     return (
       <div className='layout-column flex'>
         <div className={ classes.header }>
           <Container className={classNames(classes.headerInner, 'layout-row layout-align-start-center')}>
-            <Link to={`/users/${ project.data.team[0]._id }`}>
+            <Link name='userRoute' params={ { userId: project.data.team[0]._id } }>
               <UserAvatar
                 name={ project.data.team[0].name }
                 picture={ project.data.team[0].picture }
@@ -29,24 +32,23 @@ class Project extends Component {
             </h1>
             <div className='flex'></div>
             <Tabs noline className={ classes.tabs }>
-              <Link
-                className={ classNames({ active: pathname === `/project/${project.data._id}` || pathname.includes(`/project/${project.data._id}/files/`)}) }
-                to={`/project/${project.data._id}`}>
+              <Link activeIf={ { is: ['projectRoute'], includes: ['projectFilesRoute'] } }
+                name='projectRoute' params={ routeParams }>
                 Overview
               </Link>
               <Link
-                className={ classNames({ active: pathname.includes(`/project/${project.data._id}/commits`) }) }
-                to={`/project/${project.data._id}/commits`}>
+                activeIf={ { includes: ['projectCommitsRoute'] } }
+                name='projectCommitsRoute' params={ routeParams }>
                 15 Commits
               </Link>
               <Link
-                className={ classNames({ active: pathname.includes(`/project/${project.data._id}/tasks`) }) }
-                to={`/project/${project.data._id}/tasks`}>
+                activeIf={ { includes: ['projectTasksRoute'] } }
+                name='projectTasksRoute' params={ routeParams }>
                 6 Tasks
               </Link>
               <Link
-                className={ classNames({ active: pathname.includes(`/project/${project.data._id}/settings`) }) }
-                to={`/project/${project.data._id}/settings`}>
+                activeIf={ { includes: ['projectSettingsRoute'] } }
+                name='projectSettingsRoute' params={ routeParams }>
                 Settings
               </Link>
             </Tabs>
@@ -58,13 +60,13 @@ class Project extends Component {
       </div>
     )
   }
-  renderPending () {
+  renderPending() {
     return (
       <div>Loading</div>
     )
   }
 
-  render () {
+  render() {
     const { project } = this.props
     return (
       <StandardLayout style={ { marginTop: '30px' } }>

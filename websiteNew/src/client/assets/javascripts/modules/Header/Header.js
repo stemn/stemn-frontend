@@ -7,7 +7,7 @@ import { loginRoute } from 'route-actions';
 import { Container, Row, Col } from 'stemn-shared/misc/Layout';
 import Avatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar';
 import Popover from 'stemn-shared/misc/Popover';
-import { Link } from 'react-router';
+import Link from 'stemn-shared/misc/Router/Link'
 import logo from 'images/logo80x80.png';
 import MdAdd from 'react-icons/md/add';
 import MdNotifications from 'react-icons/md/notifications';
@@ -17,6 +17,8 @@ import SiteSearch from 'modules/SiteSearch';
 class Header extends Component {
   isLoggedIn() {
     const { auth, logout, newProject } = this.props;
+    const routeParams = { userId: auth.user._id }
+    
     return (
       <div className='layout-row layout-align-start-center'>
         <SimpleIconButton
@@ -44,9 +46,9 @@ class Header extends Component {
             />
           </a>
           <div className="PopoverMenu">
-            <Link to={`/users/${auth.user._id}`}>Your profile</Link>
-            <Link to={`/users/${auth.user._id}/stars`}>Your stars</Link>
-            <Link to='/settings'>Settings</Link>
+            <Link name="userRoute" params={ routeParams }>Your profile</Link>
+            <Link name="userStarsRoute" params={ routeParams }>Your stars</Link>
+            <Link name="settingsRoute">Settings</Link>
             <div className="divider" />
             <a onClick={ logout }>Logout</a>
           </div>

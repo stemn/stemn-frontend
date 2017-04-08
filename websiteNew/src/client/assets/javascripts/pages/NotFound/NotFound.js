@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 import StandardLayout from 'layout/StandardLayout'
 
 import classes from './NotFound.css'

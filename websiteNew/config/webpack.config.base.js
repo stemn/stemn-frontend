@@ -36,9 +36,9 @@ module.exports = {
     alias: {
       'stemn-shared': path.resolve(__dirname, '../node_modules/stemn-frontend-shared/src'),
       'theme': path.resolve(__dirname, '../src/client/assets/styles/modules/theme.css'),
-      'route-actions': path.resolve(__dirname, '../src/client/assets/javascripts/pages/routeActions.js')
+      'route-actions': path.resolve(__dirname, '../src/client/assets/javascripts/pages/routeActions.js'),
     },
-    extensions: ['.js', '.jsx', '.json', '.scss']
+    extensions: ['.js', '.jsx', '.json', '.scss'],
   },
   plugins: [
     new webpack.ProvidePlugin({

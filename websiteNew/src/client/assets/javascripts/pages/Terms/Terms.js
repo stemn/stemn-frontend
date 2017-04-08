@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import StandardLayout from 'layout/StandardLayout';
 
 import classes from 'layout/layout.css';
+import Link from 'stemn-shared/misc/Router/Link'
 
 export default class Terms extends Component {
   render() {
@@ -18,7 +19,7 @@ export default class Terms extends Component {
           IF YOU ARE ENTERING INTO THIS AGREEMENT ON BEHALF OF A COMPANY OR OTHER LEGAL ENTITY, YOU REPRESENT THAT YOU HAVE THE AUTHORITY TO BIND SUCH ENTITY, ITS AFFILIATES AND ALL USERS WHO ACCESS OUR SERVICES THROUGH YOUR ACCOUNT TO THESE TERMS AND CONDITIONS, IN WHICH CASE THE TERMS "YOU" OR "YOUR" SHALL REFER TO SUCH ENTITY, ITS AFFILIATES AND USERS ASSOCIATED WITH IT. IF YOU DO NOT HAVE SUCH AUTHORITY, OR IF YOU DO NOT AGREE WITH THESE TERMS AND CONDITIONS, YOU MUST NOT ACCEPT THIS AGREEMENT AND MAY NOT USE THE SERVICES.
         </p>
         <p>
-          If STEMN makes material changes to these Terms, we will notify you by email or by posting a notice on our site before the changes are effective. Any new features that augment or enhance the current Service, including the release of new tools and resources, shall be subject to the Terms of Service. Continued use of the Service after any such changes shall constitute your consent to such changes. You can review the most current version of the Terms of Service at any time at: <a class="text-green" href="/terms">https://stemn.com/terms</a>
+          If STEMN makes material changes to these Terms, we will notify you by email or by posting a notice on our site before the changes are effective. Any new features that augment or enhance the current Service, including the release of new tools and resources, shall be subject to the Terms of Service. Continued use of the Service after any such changes shall constitute your consent to such changes. You can review the most current version of the Terms of Service at any time at: <Link name="termsRoute">https://stemn.com/terms</Link>
         </p>
         <p>
           Violation of any of the terms below will result in the termination of your Account. While STEMN prohibits such conduct and Content on the Service, you understand and agree that STEMN cannot be responsible for the Content posted on the Service and you nonetheless may be exposed to such materials. You agree to use the Service at your own risk.
