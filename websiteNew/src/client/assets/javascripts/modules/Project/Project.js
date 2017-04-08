@@ -9,10 +9,10 @@ import { Link } from 'react-router'
 
 class Project extends Component {
   render () {
-    const { project, className, size } = this.props;
-console.log(this.props)
+    const { project, className, size } = this.props
+
     if (project && project.data) {
-      const { _id: projectId, name, blurb, picture, updated } = project.data;
+      const { _id: projectId, name, blurb, picture, updated } = project.data
 
       return (
         <div className={ classNames(classes.project, 'layout-row', className) } >
@@ -32,7 +32,7 @@ console.log(this.props)
         </div>
       )
     } else {
-      return null;
+      return null
     }
   }
 }

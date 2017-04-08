@@ -1,16 +1,16 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import UserNameSettings from 'stemn-shared/misc/UserSettings/UserNameSettings';
-import UserEmailSettings from 'stemn-shared/misc/UserSettings/UserEmailSettings';
-import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
+import UserNameSettings from 'stemn-shared/misc/UserSettings/UserNameSettings'
+import UserEmailSettings from 'stemn-shared/misc/UserSettings/UserEmailSettings'
+import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 
 export default class SettingsAccount extends Component {
-  render() {
+  render () {
     return (
       <div>
         <InfoPanel>
-          <UserNameSettings />
-        </InfoPanel>        
+          <UserNameSettings entityModel={ 'auth.user' } />
+        </InfoPanel>
         <InfoPanel>
           <UserEmailSettings />
         </InfoPanel>
