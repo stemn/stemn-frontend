@@ -9,7 +9,7 @@ import classes from 'stemn-shared/misc/Tasks/TaskTimeline/TaskTimelineItem/TaskT
 import UserAvatar          from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx';
 import Comment             from 'stemn-shared/misc/Comments/Comment/Comment.jsx';
 import TaskTimelineWrapper from 'stemn-shared/misc/Tasks/TaskTimeline/TaskTimelineWrapper/TaskTimelineWrapper.jsx';
-import Link                from 'stemn-shared/misc/Router/Link/Link.jsx';
+import Link                from 'stemn-shared/misc/Router/Link';
 // import TaskTimelinePanel   from '../TaskTimelinePanel/TaskTimelinePanel.jsx'
 
 const eventTextMap = {

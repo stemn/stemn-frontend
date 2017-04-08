@@ -8,7 +8,7 @@ import classes from './FileRow.css'
 import bytes from 'stemn-shared/utils/filters/bytes.js';
 import FileIcon from './FileIcon'
 import Label from 'stemn-shared/misc/Label/Label.jsx'
-import Link from 'stemn-shared/misc/Router/Link/Link.jsx';
+import Link from 'stemn-shared/misc/Router/Link';
 
 export default React.createClass({
   render() {
@@ -22,11 +22,12 @@ export default React.createClass({
         <FileIcon fileType={file.extension} type={file.type}/>
         <div style={{width: '200px'}} className="text-ellipsis">{file.name}</div>
         { file.commit && file.commit.summary && file.commit._id
-        ? <Link path={`/project/${file.project._id}/feed`}
-            show={true}
-            query={{ item: file.commit._id }}
+        ? <Link
+            name='commitRoute'
+            params={ { projectId: file.project._id, commitId: file.commit._id } }
+            show
             scope="main"
-            className={classNames(classes.clickable, 'link-primary flex')}
+            className={ classNames(classes.clickable, 'link-primary') }
           >
           {file.commit.summary}
           </Link>
