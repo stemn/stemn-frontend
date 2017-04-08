@@ -2,10 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import classes from './User.css'
 import classNames from 'classnames'
 
-import { userRoute } from 'route-actions'
-
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar';
-import { Link } from 'react-router'
+import Link from 'stemn-shared/misc/Router/Link'
 
 class User extends Component {
   render() {
@@ -15,7 +13,7 @@ class User extends Component {
       const userId = user.data._id
       return (
         <div className={ classNames('layout-row layout-align-start-center', className) } >
-          <Link to={ userRoute({ userId }) }>
+          <Link name="userRoute" params={ { userId } }>
             <UserAvatar
               className={ classes.avatar }
               name={ user.data.name }
@@ -27,7 +25,7 @@ class User extends Component {
           <div className='layout-column flex'>
             <Link
               className={ classNames('link-primary', classes.title) }
-              to={ userRoute({ userId }) }>
+              name="userRoute" params={ { userId } }>
               { user.data.name }
             </Link>
             <div className={ classes.blurb }>{ user.data.blurb }</div>

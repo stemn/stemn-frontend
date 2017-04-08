@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux'
 
 const stateToProps = ({ auth }) => ({
   authToken: auth.authToken,

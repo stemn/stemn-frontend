@@ -45,7 +45,7 @@ export default class UserOverview extends Component {
             <Col key={ project._id } className='sm flex-100 flex-gt-sm-50'>
               <Project 
                 key={ project._id } 
-                project={ project } 
+                projectId={ project._id } 
                 className={ classes.project }
               />
             </Col>

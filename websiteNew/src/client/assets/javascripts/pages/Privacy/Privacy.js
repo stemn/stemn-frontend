@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import StandardLayout from 'layout/StandardLayout';
 
 import classes from 'layout/layout.css';
-import { Link } from 'react-router';
+import Link from 'stemn-shared/misc/Router/Link'
 
 export default class Privacy extends Component {
   render() {

@@ -27,24 +27,33 @@
   margin-bottom: 0
 }
 
+.image {
+  height: 400px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
 .infoBoxes {
   background: white;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
 }
+
 .infoBoxes > div {
   padding: 20px;
-  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   text-align: center;
   color: rgba(0, 0, 0, 0.5);
   font-size: 12px;
 }
+
 .infoBoxes > div svg {
   width: 20px;
   height: 20px;
   color: rgba(0, 0, 0, 0.2);
   margin-right: 15px;
-}
-.infoBoxes > div:first-child {
-  border-left: none
 }
