@@ -97,12 +97,12 @@ export const Component = React.createClass({
             <p>By linking social accounts you'll be able to login to STEMN using Facebook and LinkedIn. We never post to your social networks.</p>
             <LinkAccount
               text="Facebook"
-              isLinked={auth.user.accounts.facebook}
+              isLinked={auth.user.accounts.facebook && auth.user.accounts.facebook.id}
               linkFn={()=>authActions.authenticate('facebook')}
               unLinkFn={()=>authActions.unlink('facebook')}/>
             <LinkAccount
               text="Linkedin"
-              isLinked={auth.user.accounts.linkedin}
+              isLinked={auth.user.accounts.linkedin && auth.user.accounts.linkedin.id}
               linkFn={()=>authActions.authenticate('linkedin')}
               unLinkFn={()=>authActions.unlink('linkedin')}/>
           </div>

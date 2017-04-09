@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react';
-import StandardLayout from 'layout/StandardLayout';
+import React, { Component, PropTypes } from 'react'
+import StandardLayout from 'layout/StandardLayout'
 
-import classes from 'layout/layout.css';
+import classes from 'layout/layout.css'
 import Link from 'stemn-shared/misc/Router/Link'
 
 export default class Privacy extends Component {
@@ -36,4 +36,3 @@ export default class Privacy extends Component {
     )
   }
 }
-

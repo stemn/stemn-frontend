@@ -19,8 +19,8 @@ export default class Notifications extends Component {
           <Row className="layout-row">
             <Col style={ { width: '250px' } }>
               <NavPillContainer>
-                <NavPill to='/settings' onlyActiveOnIndex={true}>Unread</NavPill>
-                <NavPill to='/settings/account'>All Notifications</NavPill>
+                <NavPill to='/notifications' onlyActiveOnIndex={ true }>Unread</NavPill>
+                <NavPill to='/notifications/all'>All Notifications</NavPill>
               </NavPillContainer>
             </Col>
             <Col className="flex">
