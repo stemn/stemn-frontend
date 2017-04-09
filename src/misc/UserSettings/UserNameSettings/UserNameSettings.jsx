@@ -1,30 +1,31 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import Input from 'stemn-shared/misc/Input/Input/Input';
-import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton';
+import Input from 'stemn-shared/misc/Input/Input/Input'
+import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 
 export default class UserNameSettings extends Component {
 //  static propTypes = {
 //    updateUsername: PropTypes.func.isRequired,
 //    username: PropTypes.string.isRequired,
 //  }
-  render() {
-    const { updateUsername, username, project, entityModel } = this.props;
+  render () {
+    const { updateUsername, username, entityModel } = this.props
+    console.log('xxxx', this.props)
     return (
       <div>
         <h3>Update Username</h3>
-        <p>Your profile will also be available at: stemn.com/users { username }</p>
+        <p>Your profile will be available at: stemn.com/users/{ username }</p>
         <Input
           model={`${entityModel}.username`}
-          className="dr-input"
-          type="text"
-          placeholder="Username"
+          className='dr-input'
+          type='text'
+          placeholder='Username'
         />
         <br />
-         
-        <div className="layout-row layout-align-end">
-          <ProgressButton 
-            className="primary"
+
+        <div className='layout-row layout-align-end'>
+          <ProgressButton
+            className='primary'
             onClick={ updateUsername }>
             Update Username
           </ProgressButton>
@@ -33,5 +34,3 @@ export default class UserNameSettings extends Component {
     )
   }
 }
-
-//           value={ project.data.name }

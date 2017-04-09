@@ -1,8 +1,3 @@
-let loadedModule  = {};
-if(GLOBAL_ENV.APP_TYPE == 'web'){
-  loadedModule  = require('./renderFile.web.js')
-}
-else{
-  loadedModule  = require('./renderFile.desktop.js')
-}
-module.exports = loadedModule ;
+module.exports = GLOBAL_ENV.APP_TYPE === 'web'
+  ? require('./renderFile.web.js')
+  : require('./renderFile.desktop.js')

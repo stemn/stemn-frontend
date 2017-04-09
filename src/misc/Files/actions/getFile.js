@@ -1,8 +1,3 @@
-let loadedModule  = {};
-if(GLOBAL_ENV.APP_TYPE == 'web'){
-  loadedModule  = require('./getFile.web.js')
-}
-else{
-  loadedModule  = require('./getFile.desktop.js')
-}
-module.exports = loadedModule ;
+module.exports = GLOBAL_ENV.APP_TYPE === 'web'
+  ? require('./getFile.web.js')
+  : require('./getFile.desktop.js')

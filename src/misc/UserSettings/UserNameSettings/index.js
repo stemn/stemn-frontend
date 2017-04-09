@@ -1,1 +1,1 @@
-export default from './UserNameSettings';
+export default from './UserNameSettings'
