@@ -14,6 +14,7 @@ import files            from 'stemn-shared/misc/Files/Files.reducer.js'
 import header           from 'stemn-shared/misc/Header/Header.reducer.js'
 import likes            from 'stemn-shared/misc/Likes/Likes.reducer.js'
 import mentions         from 'stemn-shared/misc/Mentions/Mentions.reducer.js'
+import notifications    from 'stemn-shared/misc/Notifications/Notifications.reducer.js'
 import modals           from 'stemn-shared/misc/Modal/Modal.reducer.js'
 import projects         from 'stemn-shared/misc/Projects/Projects.reducer.js'
 import sidebar          from 'stemn-shared/misc/Sidebar/Sidebar.reducer.js'
@@ -43,6 +44,7 @@ export default combineReducers({
   likes,
   mentions,
   modals,
+  notifications,
   projects,
   routing,
   sidebar,

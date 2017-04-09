@@ -1,17 +1,25 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 
-import Notifications from './Notifications';
+import { getNotifications } from 'stemn-shared/misc/Notifications/Notifications.actions.js';
 
-const stateToProps = (state, { params }) => ({
-  currentUser: state.auth.user,
-});
+import Notifications from './Notifications'
+
+const stateToProps = ({ notifications }) => ({
+  notifications
+})
 
 const dispatchToProps = {
-};
+  getNotifications
+}
 
-const fetchConfigs = [];
+const fetchConfigs = [{
+  hasChanged: 'location.pathname',
+  onChange: (props) => {
+    props.getNotifications()
+  }
+}]
 
 @connect(stateToProps, dispatchToProps)
 @fetchDataHoc(fetchConfigs)
