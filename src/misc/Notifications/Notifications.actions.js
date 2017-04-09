@@ -13,7 +13,6 @@ export const getNotifications = () => ({
   http: true,
   payload: {
     url: '/api/v1/notifications',
-    method: 'GET',
-    data: reaction
+    method: 'GET'
   }
 })
