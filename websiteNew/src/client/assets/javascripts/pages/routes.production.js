@@ -22,6 +22,8 @@ const getFile                                  = (loc, cb) => getRoute(System.im
 const getHome                                  = (loc, cb) => getRoute(System.import('pages/Home'), cb)
 const getLogin                                 = (loc, cb) => getRoute(System.import('pages/Login'), cb)
 const getNotifications                         = (loc, cb) => getRoute(System.import('pages/Notifications'), cb)
+const getNotificationsUnread                   = (loc, cb) => getRoute(System.import('pages/NotificationsUnread'), cb)
+const getNotificationsAll                      = (loc, cb) => getRoute(System.import('pages/NotificationsAll'), cb)
 const getPrivacy                               = (loc, cb) => getRoute(System.import('pages/Privacy'), cb)
 const getProject                               = (loc, cb) => getRoute(System.import('pages/Project'), cb)
 const getProjectCommit                         = (loc, cb) => getRoute(System.import('pages/ProjectCommit'), cb)
@@ -61,7 +63,11 @@ export default (
         <Route path='emails'                   getComponent={getSettingsEmails}/>
         <Route path='projects'                 getComponent={getSettingsProjects}/>
       </Route>
-      <Route path='notifications'              getComponent={getNotifications} />
+      <Route path='notifications'              getComponent={getNotifications}>
+        <IndexRoute                            getComponent={getNotifications}/>
+        <Route path='unread'                   getComponent={getNotificationsUnread}/>
+        <Route path='all'                      getComponent={getNotificationsAll}/>
+      </Route>
     </Route>
     <Route                                     component={AppUnAuthed}>
       <Route path='login'                      getComponent={getLogin} />

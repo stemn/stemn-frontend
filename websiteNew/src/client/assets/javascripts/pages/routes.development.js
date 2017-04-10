@@ -21,6 +21,9 @@ import NotFoundView                            from 'pages/NotFound'
 import File                                    from 'pages/File'
 import Home                                    from 'pages/Home'
 import Login                                   from 'pages/Login'
+import Notifications                           from 'pages/Notifications'
+import NotificationsUnread                     from 'pages/NotificationsUnread'
+import NotificationsAll                        from 'pages/NotificationsUnread'
 import Privacy                                 from 'pages/Privacy'
 import Project                                 from 'pages/Project'
 import ProjectCommit                           from 'pages/ProjectCommit'
@@ -49,7 +52,6 @@ import UserFollowing                           from 'pages/UserFollowing'
 import UserOverview                            from 'pages/UserOverview'
 import UserProjects                            from 'pages/UserProjects'
 import UserStars                               from 'pages/UserStars'
-import Notifications                           from 'pages/Notifications'
 
 export default (
   <Route                                       component={AppRoot}>
@@ -61,7 +63,11 @@ export default (
         <Route path='emails'                   component={SettingsEmails}/>
         <Route path='projects'                 component={SettingsProjects}/>
       </Route>
-      <Route path='notifications'              component={Notifications} />
+      <Route path='notifications'              component={Notifications}>
+        <IndexRoute                            component={NotificationsUnread}/>
+        <Route path='unread'                   component={NotificationsUnread}/>
+        <Route path='all'                      component={NotificationsAll}/>
+      </Route>
     </Route>
     <Route                                     component={AppUnAuthed}>
       <Route path='login'                      component={Login} />

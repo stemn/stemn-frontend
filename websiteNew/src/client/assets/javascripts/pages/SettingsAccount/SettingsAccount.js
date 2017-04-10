@@ -8,6 +8,12 @@ import UserCloudProviderSettings from 'stemn-shared/misc/UserSettings/UserCloudP
 import UserBetaSettings from 'stemn-shared/misc/UserSettings/UserBetaSettings'
 
 export default class SettingsAccount extends Component {
+  static propTypes = {
+    user: PropTypes.object.isRequired,
+    authenticate: PropTypes.func.isRequired,
+    unlink: PropTypes.func.isRequired,
+    updateEmail: PropTypes.func.isRequired,
+  }
   render() {
     const { user, authenticate, unlink, updateEmail } = this.props
     return (
