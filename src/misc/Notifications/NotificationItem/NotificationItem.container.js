@@ -19,7 +19,7 @@ const fetchConfigs = []
 export default class ProjectContainer extends Component {
   render() {
     return (
-      <Project {...this.props} />
+      <NotificationItem {...this.props} />
     )
   }
 }
