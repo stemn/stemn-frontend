@@ -30,9 +30,18 @@ function reducer(state, action) {
       return {...state,
         activeProject: action.payload.projectId
       }
+    
+    case 'PROJECTS/GET_PROJECT_PENDING':
+      return i.assocIn(state, ['data', action.meta.projectId, 'loading'], true)
+    case 'PROJECTS/GET_PROJECT_REJECTED':
+      return i.assocIn(state, ['data', action.meta.projectId, 'loading'], false)
     case 'PROJECTS/GET_PROJECT_FULFILLED':
-      return i.assocIn(state, ['data', action.payload.data._id, 'data'], action.payload.data)
-
+      return i.assocIn(state, ['data', action.meta.projectId], {
+        loading: false,
+        dataSize: action.meta.size,
+        data: action.payload.data
+      })
+      
     case 'PROJECTS/ADD_TEAM_MEMBER':
       return i.updateIn(state, ['data', action.payload.projectId, 'data', 'team'], (team) => {
         const modifiedUser = Object.assign({}, action.payload.user, {permissions: {role: 'admin'}})

@@ -11,18 +11,50 @@ import Comment             from 'stemn-shared/misc/Comments/Comment/Comment.jsx'
 import TaskTimelineWrapper from '../TaskTimelineWrapper/TaskTimelineWrapper.jsx';
 import TaskLabelDots       from '../../TaskLabelDots/TaskLabelDots.jsx'
 import Link                from 'stemn-shared/misc/Router/Link';
-// import TaskTimelinePanel   from '../TaskTimelinePanel/TaskTimelinePanel.jsx'
 
 const eventTextMap = {
   uncompleted   : (item, board) => {return <span>re-opened this task</span>},
   addAsignee    : (item, board) => {return <span>was assigned to this task</span>},
   removeAsignee : (item, board) => {return <span>was removed from assignees</span>},
   commit        : (item, board) => {
-    return <span>referenced this task in commit <Link path={`/project/${item.data.project._id}/feed`} show closeModals query={{ item: item._id }} scope="main" className="link-primary">{item.data.summary}</Link></span>
+    const params = { 
+      projectId: item.data.project._id, 
+      commitId: item._id 
+    };
+    return <span>
+      referenced this task in commit
+      <Link 
+        className="link-primary"
+        closeModals 
+        name="commitRoute"
+        params={ params }
+        scope="main" 
+        show 
+      >
+        &nbsp;{item.data.summary}
+      </Link>
+    </span>
   },
   completed     : (item, board) => {
+    console.log(item);
     if(item.data.summary){
-      return <span>marked this as complete in commit <Link path={`/project/${item.data.project._id}/feed`} show closeModals query={{ item: item._id }} scope="main" className="link-primary">{item.data.summary}</Link></span>
+      const params = { 
+        projectId: item.data.project._id, 
+        commitId: item.commitId 
+      };
+      return <span>
+        marked this as complete in commit 
+        <Link 
+          className="link-primary"
+          closeModals
+          name="commitRoute"
+          params={ params }          
+          scope="main"
+          show
+        >
+          &nbsp;{item.data.summary}
+        </Link>
+      </span>
     }
     else{
       return <span>marked this as complete</span>
