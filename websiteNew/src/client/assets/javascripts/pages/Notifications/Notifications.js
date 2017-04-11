@@ -9,7 +9,7 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button'
 
 export default class Notifications extends Component {
   render() {
-    const { children, user, currentUser } = this.props
+    const { children } = this.props
     return (
       <StandardLayout>
         <SubHeader title='Notifications'>

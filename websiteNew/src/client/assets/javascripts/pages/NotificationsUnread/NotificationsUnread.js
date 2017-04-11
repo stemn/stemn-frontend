@@ -8,12 +8,15 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button'
 
 export default class Notifications extends Component {
   render() {
-    const { notifications } = this.props
+    const { notifications, markAsRead } = this.props
     return (
       <div>
-        { notifications && notifications.data
-          ? notifications.data.map(n=> n._id)
-          : null }
+          { notifications.map((notification) => (
+              <NotificationItem
+                notification={ notificaiton }
+                markAsRead={ markAsRead }
+              />
+          )) }
       </div>
     )
   }

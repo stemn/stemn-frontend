@@ -17,6 +17,7 @@ const dispatchToProps = {
 const fetchConfigs = [{
   hasChanged: 'location.pathname',
   onChange: (props) => {
+      console.log(props.location.pathname)
     props.getNotifications()
   }
 }]
