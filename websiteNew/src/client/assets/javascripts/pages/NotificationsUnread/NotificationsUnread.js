@@ -1,22 +1,22 @@
 import React, { Component, PropTypes } from 'react'
-import NavPill from 'stemn-shared/misc/Buttons/NavPill/NavPill'
-import NavPillContainer from 'stemn-shared/misc/Buttons/NavPillContainer'
-import StandardLayout from 'layout/StandardLayout'
-import { Container, Row, Col } from 'stemn-shared/misc/Layout'
-import SubHeader from 'modules/SubHeader'
-import Button from 'stemn-shared/misc/Buttons/Button/Button'
 
-export default class Notifications extends Component {
+import NotificationItem from 'stemn-shared/misc/Notifications/NotificationItem/NotificationItem'
+
+export default class NotificationsUnread extends Component {
   render() {
     const { notifications, markAsRead } = this.props
+    console.log(this.props)
     return (
       <div>
-          { notifications.map((notification) => (
-              <NotificationItem
-                notification={ notificaiton }
-                markAsRead={ markAsRead }
-              />
-          )) }
+          { notifications && notifications.data
+              ? notifications.data.map((notification) => (
+                <NotificationItem
+                  key={ notification._id }
+                  notification={ notification }
+                  markAsRead={ markAsRead }
+                />
+            ))
+            : null }
       </div>
     )
   }
