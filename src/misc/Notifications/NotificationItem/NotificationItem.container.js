@@ -2,27 +2,17 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 
-import { getProject } from 'stemn-shared/misc/Projects/Projects.actions'
+import NotificationItem from './NotificationItem'
 
-import Project from './Project'
+import { markAsRead } from 'stemn-shared/misc/Notifications/Notifications.actions'
 
-const stateToProps = (state, { projectId }) => ({
-  project: state.projects.data[projectId]
-})
+const stateToProps = {}
 
 const dispatchToProps = {
-  getProject
+  markAsRead
 }
 
-const fetchConfigs = [{
-  hasChanged: 'projectId',
-  onChange: (props) => {
-    props.getProject({
-      projectId: props.projectId,
-      size: 'md'
-    })
-  }
-}]
+const fetchConfigs = []
 
 @connect(stateToProps, dispatchToProps)
 @fetchDataHoc(fetchConfigs)
