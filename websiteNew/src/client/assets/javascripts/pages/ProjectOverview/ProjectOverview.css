@@ -1,18 +1,3 @@
-
-.header {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  background: white;
-}
-
-.headerInner {
-  padding-bottom: 20px;
-  margin-top: -1px;
-}
-.headerBorder {
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  padding-bottom: 20px;
-}
-
 .blurb {
   padding-bottom: 15px;
   color: rgba(0, 0, 0, 0.6);
