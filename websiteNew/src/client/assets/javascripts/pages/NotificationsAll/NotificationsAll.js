@@ -5,21 +5,21 @@ import NotificationItem from 'stemn-shared/misc/Notifications/NotificationItem/N
 export default class NotificationsUnread extends Component {
   render() {
     const { notifications, markAsRead } = this.props
-    const unreadNotifications = notifications && notifications.data
-      ? notifications.data.filter((notification) => !notification.read)
+    const allNotifications = notifications && notifications.data
+      ? notifications.data
       : []
 
     return (
       <div>
-        { unreadNotifications.length > 0
-          ? unreadNotifications.map((notification) => (
+        { allNotifications.length > 0
+          ? allNotifications.map((notification) => (
             <NotificationItem
               key={ notification._id }
               notification={ notification }
               markAsRead={ markAsRead }
             />
           ))
-          : 'No unread notifications' }
+          : 'No notifications' }
       </div>
     )
   }

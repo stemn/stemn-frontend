@@ -9,11 +9,20 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button'
 
 export default class Notifications extends Component {
   render() {
-    const { children } = this.props
+    const { children, notifications, markAsRead } = this.props
+
+    const markAllRead = () => {
+      const unreadNotifications = notifications && notifications.data
+        ? notifications.data.filter((notification) => !notification.read)
+        : []
+
+      unreadNotifications.forEach((notification) => markAsRead(notification._id))
+    }
+
     return (
       <StandardLayout>
         <SubHeader title='Notifications'>
-          <Button className='primary'>Mark as read</Button>
+          <Button className='primary' onClick={ markAllRead }>Mark all read</Button>
         </SubHeader>
         <Container>
           <Row className="layout-row">
