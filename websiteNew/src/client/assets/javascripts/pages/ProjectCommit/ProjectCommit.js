@@ -8,6 +8,7 @@ import { groupRevisions }  from 'stemn-shared/misc/Timeline/Timeline.utils.js';
 import { Container } from 'stemn-shared/misc/Layout';
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar';
 import FileCompare from 'stemn-shared/misc/FileCompare/FileCompare.jsx';
+import SubSubHeader from 'modules/SubSubHeader'
 
 export default class ProjectCommit extends Component {
   renderLoaded() {
@@ -17,29 +18,26 @@ export default class ProjectCommit extends Component {
 
     return (
       <div>
-        <div className={ classes.header }>
-          <Container>
-            <div className={ classes.headerBorder } />
-            <h2 className={ classes.title }>
-              <span>{ commit.data.summary }</span>
-              <span className={ classes.commitNumber }>&nbsp;#234</span>
-            </h2>
-            <div className={ classes.blurb }>
-              { commit.data.description }
-            </div>
-            <div className={ classNames('layout-row layout-align-start-center', classes.meta)}>
-              <UserAvatar
-                className={ classes.avatar }
-                name={ commit.user.name }
-                picture={ commit.user.picture }
-                size={ 20 }
-                shape='square'
-              />
-              <b>{ commit.user.name }</b>
-              <div>&nbsp;commited 13 files.</div>
-            </div>
-          </Container>
-        </div>
+        <SubSubHeader>
+          <h2 className={ classes.title }>
+            <span>{ commit.data.summary }</span>
+            <span className={ classes.number }>&nbsp;#C234</span>
+          </h2>
+          <div className={ classes.blurb }>
+            { commit.data.description }
+          </div>
+          <div className={ classNames('layout-row layout-align-start-center', classes.meta)}>
+            <UserAvatar
+              className={ classes.avatar }
+              name={ commit.user.name }
+              picture={ commit.user.picture }
+              size={ 20 }
+              shape='square'
+            />
+            <b>{ commit.user.name }</b>
+            <div>&nbsp;commited 13 files.</div>
+          </div>
+        </SubSubHeader>
         <Container className={ classes.files }>
           <div className='text-mini-caps'>Files updated:</div>
           { groupedRevisions.map((file) => (

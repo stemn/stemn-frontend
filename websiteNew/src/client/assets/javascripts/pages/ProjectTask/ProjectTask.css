@@ -1,5 +1,41 @@
-.content {
-  margin-top: -1px;
-  padding-top: 30px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+.title {
+  margin: 0 0 10px;
+  font-size: 22px;
+  line-height: 1.5em;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.blurb {
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 15px;
+}
+
+.number {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.meta {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 12px;
+}
+
+.avatar {
+  margin-right: 10px;
+}
+
+.tag {
+  margin-bottom: 0;
+}
+
+.panel {
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: white;
+}
+.panel > div:first-child {
+  margin-bottom: 10px;
+}
+.newComment {
+  margin-top: 30px;
 }

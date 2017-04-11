@@ -13,6 +13,7 @@ import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import Tag from 'stemn-shared/misc/Tags/Tag'
 import LikeButton from 'stemn-shared/misc/Likes/LikeButton'
+import SubSubHeader from 'modules/SubSubHeader'
 
 import MdLocationOn from 'react-icons/md/location-on'
 import MdPeople from 'react-icons/md/people'
@@ -87,25 +88,22 @@ export default class ProjectOverview extends Component {
 
       return (
         <div>
-          <div className={ classes.header }>
-            <Container className={ classes.headerInner }>
-              <div className={ classes.headerBorder }/>
-              { project.data.blurb.length > 0
-              ? <div className={ classes.blurb }>{ project.data.blurb }</div>
-              : null }
-              <div className='layout-row layout-align-start-center'>
-                <div className={ classes.tags }>
-                  { project.data.fields.map((field) => <Tag className='primary' key={ field._id } text={ field.name } /> )}
-                </div>
-                <div className="flex" />
-                <LikeButton
-                  number={ project.data.likes }
-                  entityType='project'
-                  entityId={ project.data._id }
-                />
+          <SubSubHeader>
+            { project.data.blurb.length > 0
+            ? <div className={ classes.blurb }>{ project.data.blurb }</div>
+            : null }
+            <div className='layout-row layout-align-start-center'>
+              <div className={ classes.tags }>
+                { project.data.fields.map((field) => <Tag className='primary' key={ field._id } text={ field.name } /> )}
               </div>
-            </Container>
-          </div>
+              <div className="flex" />
+              <LikeButton
+                number={ project.data.likes }
+                entityType='project'
+                entityId={ project.data._id }
+              />
+            </div>
+          </SubSubHeader>
           <Container style={ { marginTop: '30px' } }>
             { !isFilePage 
             ? imageInfoSection 
