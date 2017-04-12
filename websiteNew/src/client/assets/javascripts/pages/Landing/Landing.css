@@ -1,0 +1,25 @@
+.banner {
+  height: 100vh;
+}
+
+.banner h1 {
+  margin-top: 60px;
+}
+
+.screenshot {
+}
+.screenshot img {
+  box-shadow: 0px 20px 100px 0px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  border-radius: 4px;
+}
+
+.downloadButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 60px;
+}
+.downloadButton svg {
+  margin-right: 10px;
+}

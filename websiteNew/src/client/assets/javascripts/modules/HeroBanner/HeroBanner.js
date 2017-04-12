@@ -5,9 +5,20 @@ import { Container } from 'stemn-shared/misc/Layout'
 
 export default class HeroBanner extends Component {
   render() {
-    const { children } = this.props;
+    const { children, image, style, className, ...otherProps } = this.props;
+
+
+    const allStyles = image
+      ? Object.assign({}, { backgroundImage: `url(${image})`}, style)
+      : style
+
+    const allClasses = classNames(classes.banner, 'layout-column', className)
+
     return (
-      <section className={ classNames(classes.banner, 'layout-column') }>
+      <section
+        className={ allClasses }
+        style={ allStyles }
+        { ...otherProps }>
         <Container className='flex layout-column layout-align-center-center'>
           { children }
         </Container>

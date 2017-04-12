@@ -1,10 +1,16 @@
 .header {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   color: white;
   height: 60px;
+  transition: 0.3s ease all;
+  z-index: 10;
+}
+
+.headerFilled {
+  background: rgb(28, 30, 34);
 }
 
 .logo {
@@ -28,7 +34,7 @@
   border-bottom: 2px solid transparent;
 }
 .link:global(.active) {
-  border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.8);
 }
 
 .dashboardLink {
