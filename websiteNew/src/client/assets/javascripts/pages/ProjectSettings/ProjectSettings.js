@@ -19,7 +19,7 @@ export default class ProjectSettings extends Component {
               <NavPillContainer>
                 <NavPill to={ baseUrl } onlyActiveOnIndex={true}>General</NavPill>
                 <NavPill to={ baseUrl + '/tags' }>Tags</NavPill>
-                <NavPill to={ baseUrl + '/tasks' }>Task</NavPill>
+                <NavPill to={ baseUrl + '/tasks' }>Threads</NavPill>
                 <NavPill to={ baseUrl + '/team'}>Team</NavPill>
               </NavPillContainer>
             </Col>

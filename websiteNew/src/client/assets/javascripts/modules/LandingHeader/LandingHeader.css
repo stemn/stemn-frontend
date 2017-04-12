@@ -1,0 +1,44 @@
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  color: white;
+  height: 60px;
+}
+
+.logo {
+  height: 45px;
+  margin-right: 5px;
+}
+
+.logo img {
+  height: 100%;
+}
+
+.header {
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+.link {
+  padding: 5px 0;
+  margin: 0 8px;
+  border-bottom: 2px solid transparent;
+}
+.link:global(.active) {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+.dashboardLink {
+  border-radius: 4px;
+  transition: 0.3s ease all;
+  background: rgba(255, 255, 255, 0.1);
+}
+.dashboardLink:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+.dashboardLink > div{
+  padding: 5px 10px;
+}

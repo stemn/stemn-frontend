@@ -5,9 +5,7 @@ import { get } from 'lodash'
 
 import ProjectsTasks from './ProjectsTasks'
 
-import {
-  getBoards,
-} from 'stemn-shared/misc/Tasks/Tasks.actions'
+import { getBoards } from 'stemn-shared/misc/Tasks/Tasks.actions'
 
 
 const stateToProps = ({ projects, tasks }, { params }) => {
@@ -45,25 +43,5 @@ export default class ProjectsTasksContainer extends Component {
     return (
       <ProjectsTasks {...this.props} />
     );
-  }
-}
-
-
-function mapStateToProps({ tasks, projects }, {projectId}) {
-  const projectBoards = tasks.projects[projectId];
-  const board = projectBoards && projectBoards.boards ? tasks.boards[projectBoards.boards[0]] : {};
-  return {
-    tasks: tasks.data,
-    project: projects[projectId],
-    projectBoards,
-    board,
-    boardModel: board && board.data && board.data._id ? `tasks.boards.${board.data._id}` : '',
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    TasksActions: bindActionCreators(TasksActions, dispatch),
-    dispatch
   }
 }

@@ -28,6 +28,7 @@ import userFollowers    from 'stemn-shared/misc/UserFollowers/UserFollowers.redu
 import userFollowing    from 'stemn-shared/misc/UserFollowing/UserFollowing.reducer.js'
 import userStars        from 'stemn-shared/misc/UserStars/UserStars.reducer.js'
 import walkthrough      from 'stemn-shared/misc/Walkthrough/Walkthrough.reducer.js'
+import desktopReleases  from 'stemn-shared/misc/DesktopReleases/DesktopReleases.reducer.js'
 
 export default combineReducers({
   auth,
@@ -58,4 +59,5 @@ export default combineReducers({
   userFollowing,
   userStars,
   walkthrough,
+  desktopReleases,
 })

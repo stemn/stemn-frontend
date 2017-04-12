@@ -1,0 +1,18 @@
+.banner {
+  background: rgb(68, 154, 211);
+  min-height: 400px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  color: white;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.banner h1 {
+  font-size: 40px;
+  font-weight: 300;
+}
+.banner h3 {
+  font-size: 24px;
+  font-weight: 300;
+}
