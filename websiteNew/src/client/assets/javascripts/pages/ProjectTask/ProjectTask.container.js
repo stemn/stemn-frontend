@@ -5,7 +5,12 @@ import { get } from 'lodash'
 
 import ProjectTask from './ProjectTask';
 
-import { getTask, getBoard, getBoards } from 'stemn-shared/misc/Tasks/Tasks.actions'
+import { 
+  getBoard, 
+  getBoards, 
+  getTask, 
+  updateTask,
+} from 'stemn-shared/misc/Tasks/Tasks.actions'
 
 const stateToProps = ({ tasks, projects }, { params }) => {
   const taskId = params.taskId;
@@ -20,7 +25,8 @@ const stateToProps = ({ tasks, projects }, { params }) => {
     projectId,
     project,
     boardId,
-    board
+    board,
+    taskModel: `tasks.data.${taskId}`
   };
 }
 
@@ -28,6 +34,7 @@ const dispatchToProps = {
   getBoard,
   getBoards,
   getTask,
+  updateTask,
 };
 
 const fetchConfigs = [{

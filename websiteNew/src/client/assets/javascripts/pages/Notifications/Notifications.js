@@ -24,7 +24,7 @@ export default class Notifications extends Component {
         <SubHeader title='Notifications'>
           <Button className='primary' onClick={ markAllRead }>Mark all read</Button>
         </SubHeader>
-        <Container>
+        <Container style={ { marginTop: '30px' } }>
           <Row className="layout-row">
             <Col style={ { width: '250px' } }>
               <NavPillContainer>
