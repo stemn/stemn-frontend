@@ -10,11 +10,14 @@
   display: inline-flex;
   
   margin-right: 8px;
-  margin-bottom: 8px;
 }
 
 .tagInner {
   padding: 5px 10px;
+}
+
+.tag:global(.lg) .tagInner{
+  padding: 7px 12px;
 }
 
 .tag:hover{
@@ -30,6 +33,12 @@
 .tag:hover:global(.primary){
   background: primaryLight2;
   border-color: primaryLight2;
+}
+
+.tag:global(.success){
+  background: #e3f9ed;
+  border-color: rgba(33, 211, 112, 0.2);
+  color: #21d370;
 }
 
 .close {

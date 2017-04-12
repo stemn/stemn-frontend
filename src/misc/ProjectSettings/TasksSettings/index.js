@@ -13,16 +13,16 @@ export default class TasksSettings extends Component {
     const { boardModel, board, saveBoard } = this.props;
     return(
       <div>
-        <h3>Task Labels</h3>
-        <p>Labels are used to categorize tasks. If you delete a label, it will be removed from all assigned tasks.</p>
-        <TaskLabelsEdit model={`${boardModel}.forms.labels`} value={board.forms.labels} />
+        <h3>Thread Labels</h3>
+        <p>Labels are used to categorize thread. If you delete a label, it will be removed from all assigned threads.</p>
+        <TaskLabelsEdit model={ `${boardModel}.forms.labels` } value={ board.data.labels } />
         <br />
         <div className="layout-row">
           <div className="flex"></div>
           <ProgressButton
             className="primary"
-            onClick={saveBoard}
-            loading={board.savePending}>
+            onClick={ saveBoard }
+            loading={ board.savePending }>
             Save Labels
           </ProgressButton>
         </div>

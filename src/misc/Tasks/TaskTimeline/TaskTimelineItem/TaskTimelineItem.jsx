@@ -97,11 +97,17 @@ export default React.createClass({
       return (
         <TaskTimelineWrapper style={{marginLeft: '85px'}}>
           <div className="layout-row layout-align-start-center flex">
-            <div className={classes.avatar}>
+            <div className={ classes.avatar }>
               <UserAvatar picture={item.user.picture} size="25" shape="square"/>
             </div>
-            <div>
-              <b>{item.user.name}&nbsp;</b><span className="text-grey-3" style={{lineHeight: '1.5em'}}>{getTextEventData(item, board)} - {moment(item.timestamp).fromNow()}</span>
+            <div style={{lineHeight: '1.5em'}}>
+              <b>{item.user.name}&nbsp;</b>
+              <span className="text-grey-3">
+                { getTextEventData(item, board) }
+              </span>
+              <span className="text-grey-2">
+                &nbsp;{ moment(item.timestamp).fromNow() }
+              </span>
             </div>
           </div>
         </TaskTimelineWrapper>

@@ -6,16 +6,20 @@ import classes from './Button.css';
 
 export default class extends React.Component{
   render() {
-    const { loading, disabled, title, style, onClick, type } = this.props
-    return (
-      <button className={classNames(classes.button, this.props.className)}
-       onClick={() => {if(onClick){onClick()}}}
-       style={style}
-       title={title}
-       type={type}
-       disabled={disabled}>
-        {this.props.children}
-      </button>
-    );
+    const { className, href, children, ...otherProps } = this.props
+
+    if (href) {
+      return (
+        <a className={classNames(classes.button, className)} href={ href } { ...otherProps }>
+          { children }
+        </a>
+      );
+    } else {
+      return (
+        <button className={classNames(classes.button, className)} { ...otherProps }>
+          { children }
+        </button>
+      );
+    }
   }
 };

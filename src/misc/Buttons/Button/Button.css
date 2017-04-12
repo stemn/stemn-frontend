@@ -10,18 +10,10 @@
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
 }
-
-/*
-.overlay{
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: primary;
-}
-*/
 
 .button[disabled]{
   opacity: 0.4;
@@ -29,7 +21,7 @@
 }
 
 .button:global(.lg) {
-  padding: 15px;
+  padding: 15px 20px;
   font-size: 14px;
 }
 .button:global(.sm) {
@@ -85,11 +77,11 @@
 }
 
 .button:global(.secondary){
-  background: secondary;
+  background: rgb(28, 30, 34);
   color: white;
 }
 .button:global(.secondary):hover{
-  background: secondary-2;
+  background: black;
 }
 
 .button:global(.linkedin){

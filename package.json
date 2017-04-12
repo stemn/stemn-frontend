@@ -39,5 +39,8 @@
     "codemirror": "^5.17.0",
     "react-clickdrag": "https://github.com/MrBlenny/react-clickdrag/tarball/master",
     "react-addons-css-transition-group": "^15.2.1"
+  },
+  "dependencies": {
+    "react-dnd-html5-backend": "^2.3.0"
   }
 }

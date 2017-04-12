@@ -39,11 +39,10 @@ const Component = React.createClass({
           {
             niceColors.map(color =>
               <div
-                onClick={()=>{
-                  dispatch(actions.change(model, color))
-                }}
-                className={classes.sampleSwatch}
-                style={{background: color}}
+                key={ color }
+                onClick={ () => dispatch(actions.change(model, color)) }
+                className={ classes.sampleSwatch }
+                style={ { background: color } }
               />
             )
           }
