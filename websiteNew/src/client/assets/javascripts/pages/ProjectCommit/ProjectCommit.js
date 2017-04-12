@@ -3,12 +3,13 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import classes from './ProjectCommit.css'
 
-import { groupRevisions }  from 'stemn-shared/misc/Timeline/Timeline.utils.js';
+import { groupRevisions }  from 'stemn-shared/misc/Timeline/Timeline.utils.js'
 
-import { Container } from 'stemn-shared/misc/Layout';
-import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar';
-import FileCompare from 'stemn-shared/misc/FileCompare/FileCompare.jsx';
+import { Container } from 'stemn-shared/misc/Layout'
+import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
+import FileCompare from 'stemn-shared/misc/FileCompare/FileCompare.jsx'
 import SubSubHeader from 'modules/SubSubHeader'
+import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'
 
 export default class ProjectCommit extends Component {
   renderLoaded() {
@@ -24,7 +25,7 @@ export default class ProjectCommit extends Component {
             <span className={ classes.number }>&nbsp;#C234</span>
           </h2>
           <div className={ classes.blurb }>
-            { commit.data.description }
+            <EditorDisplay value={ commit.data.description } />
           </div>
           <div className={ classNames('layout-row layout-align-start-center', classes.meta)}>
             <UserAvatar

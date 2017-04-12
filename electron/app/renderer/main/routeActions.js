@@ -25,3 +25,5 @@ export const loginRoute = () => {
     pathname: `/login`
   })
 }
+
+export const commitRoute = ({ projectId, commitId }) => `/project/${projectId}/feed?item=${commitId}`

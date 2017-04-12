@@ -42,7 +42,7 @@ class Project extends Component {
             </Link>
           </Tabs>
         </SubHeader>
-        <div className={ classNames('flex') }>
+        <div className={ "flex layout-column" }>
           { children }
         </div>
       </div>
@@ -57,7 +57,7 @@ class Project extends Component {
   render() {
     const { project } = this.props
     return (
-      <StandardLayout style={ { marginTop: '30px' } }>
+      <StandardLayout style={ { marginTop: '30px' } } nofooter>
         { project && project.data
           ? this.renderComplete()
           : null

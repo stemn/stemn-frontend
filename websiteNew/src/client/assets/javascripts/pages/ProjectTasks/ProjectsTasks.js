@@ -1,28 +1,33 @@
 import React, { Component } from 'react';
 
-import classNames from 'classnames';
+import classNames from 'classnames'
 import classes from './ProjectsTasks.css'
 
-import { Row, Col, Container } from 'stemn-shared/misc/Layout';
+import { Row, Col, Container } from 'stemn-shared/misc/Layout'
+import TaskList from 'stemn-shared/misc/Tasks/TaskList/TaskList.jsx'
+import { filterBoard } from 'stemn-shared/misc/Tasks/Tasks.utils.js';
+
 
 export default class ProjectsTasks extends Component {
   render() {
-    const { project } = this.props;
-    const baseUrl = `/project/${project.data._id}/settings`;
-    return (
-      <div className={ classes.content }>
-        <Container>
-          <Row className="layout-row">
-            <Col className="flex">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit voluptatum, quo doloribus tempore magnam nihil fugiat ex ullam optio recusandae, corrupti repellendus veniam velit. Ad consectetur sint provident, saepe inventore.
-            </Col>
-            <Col style={ { width: '250px' } }>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure unde, saepe temporibus laudantium totam ipsam officiis labore repellat voluptate omnis dicta placeat doloribus, ducimus, velit deleniti ullam quis in odio!
-            </Col>
-          </Row>
-        </Container>
-      </div>
-    )
+    const { project, board, tasks } = this.props
+    const layout = 'board'
+
+    console.log(this.props)
+
+    if (board && tasks) {
+      return (
+        <div className={ classes.content + ' layout-column flex' }>
+          <TaskList
+            className={ classes.tasks }
+            board={ filterBoard(board, tasks, board.searchString) }
+            layout={ layout }
+          />
+        </div>
+      )
+    } else {
+      return <div>Here</div>
+    }
   }
 };
 

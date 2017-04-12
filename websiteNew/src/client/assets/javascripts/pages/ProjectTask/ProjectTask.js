@@ -14,6 +14,9 @@ import UserSelect from 'stemn-shared/misc/Users/UserSelect/UserSelect.jsx'
 import TaskTimeline from 'stemn-shared/misc/Tasks/TaskTimeline/TaskTimeline'
 import LabelSelect from 'stemn-shared/misc/Tasks/TaskDisplayModal/LabelSelect/LabelSelect'
 import CommentNew from 'stemn-shared/misc/Comments/Comment/CommentNew.jsx'
+import MdDone from 'react-icons/md/done'
+import MdAccessTime from 'react-icons/md/access-time'
+
 
 export default class ProjectTask extends Component {
   updateTask = () => {
@@ -41,16 +44,16 @@ export default class ProjectTask extends Component {
                 shape='square'
               />
               <b>{ task.data.owner.name }</b>
-              <div>&nbsp;created this thread { moment(task.data.created).fromNow() }</div>
+              <div>&nbsp;created this thread { moment(task.data.created).fromNow() }.</div>
               <div className="flex" />
-              <Tag 
-                text="Open Thread" 
-                className={ classes.tag + ' primary' }
-              />             
-              <Tag 
-                text={`Due ${ moment(task.data.due).fromNow() }`}
-                className={ classes.tag + ' primary' }
-              />
+              <Tag className="success">
+                <MdDone size={ 20 } style={ { marginRight: '5px' } }/>
+                OPEN
+              </Tag>
+              <Tag className="primary">
+                <MdAccessTime size={ 20 } style={ { marginRight: '5px' } }/>
+                {`Due ${ moment(task.data.due).fromNow() }`}
+              </Tag>
             </div>
           </SubSubHeader>
           <Container style={ { marginTop: '30px' } }>

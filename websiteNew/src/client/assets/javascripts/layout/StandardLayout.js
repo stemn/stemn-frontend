@@ -19,7 +19,7 @@ class StandardLayout extends Component {
     }
   }
   render() {
-    const { children, contained, className, style, ...otherProps } = this.props;
+    const { children, contained, className, style, nofooter, ...otherProps } = this.props;
     const standardClasses = 'layout-column flex'
     return (
       <div className={ classNames(standardClasses) } { ...otherProps }>
@@ -27,7 +27,9 @@ class StandardLayout extends Component {
         <div className="flex layout-column">
            { this.renderInner(children, contained, style, className) }
         </div>
-        <Footer />
+        { nofooter
+        ? null
+        : <Footer /> }
       </div>
     )
   }

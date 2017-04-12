@@ -1,5 +1,8 @@
 .content {
   margin-top: -1px;
-  padding-top: 30px;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.tasks {
+  padding: 20px 15px;
 }
