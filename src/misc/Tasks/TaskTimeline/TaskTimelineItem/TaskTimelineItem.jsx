@@ -40,7 +40,7 @@ const eventTextMap = {
     if(item.data.summary){
       const params = { 
         projectId: item.data.project._id, 
-        commitId: item.commitId 
+        commitId: item.commit._id
       };
       return <span>
         marked this as complete in commit 

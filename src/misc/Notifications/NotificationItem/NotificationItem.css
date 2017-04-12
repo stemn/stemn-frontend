@@ -1,13 +1,30 @@
 .notification {
-  height: 45px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: white;
+  margin-bottom: 15px;
+  padding: 15px;
 }
 
-.name {
-  font-size: 16px;
-  margin-bottom: 8px;
+.avatar1 {
+  margin-right: 15px;
+}
+.avatar2 {
+  margin-left: 15px;
 }
 
 .meta {
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(0, 0, 0, 0.3);
   font-size: 12px;
+  margin-top: 3px;
+}
+
+.mark {
+  margin-left: 15px;
+  color: rgba(0, 0, 0, 0.6);
+  transition: 0.3s ease all;
+}
+
+.markRead {
+  opacity: 0;
+  cursor: default;
 }

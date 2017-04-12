@@ -1,1 +1,1 @@
-export default from './NotificationItem.container';
+export default from './NotificationItem';
