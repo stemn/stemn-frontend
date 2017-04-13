@@ -6,7 +6,7 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import { Container } from 'stemn-shared/misc/Layout'
 
 import classes from './Pricing.scss'
-import classnames from 'classNames'
+import classNames from 'classnames'
 
 import MdDone from 'react-icons/md/done'
 
@@ -14,7 +14,7 @@ class Table extends Component {
   render() {
     const { important, data } = this.props;
     return (
-      <div className={ classnames(classes.table, { [classes.important]: important }) }>
+      <div className={ classNames('flex', 'flex-sm-50', classes.table, { [classes.important]: important }) }>
         <div className={ classes.price }>
           { typeof data.price === 'number'
           ? `$${data.price}`
@@ -40,7 +40,7 @@ class Table extends Component {
 const tableData = [{
   price: 'FREE',
   period: 'Forever',
-  type: 'Open-Source',
+  type: 'Open-source',
   description: 'For public projects',
   features: [
     'Personal Account',
@@ -89,7 +89,7 @@ export default class Pricing extends Component {
           <h3>Work together across unlimited private projects with a paid plan</h3>
         </HeroBanner>
         <Container>
-          <div className={ classes.tables }>
+          <div className={ classNames(classes.tables, 'layout-column layout-gt-xs-row layout-wrap') }>
             <Table data={ tableData[0] }/>
             <Table data={ tableData[1] }/>
             <Table data={ tableData[2] } important/>

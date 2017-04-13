@@ -18,12 +18,18 @@ import AppUnAuthed                            from 'pages/AppUnAuthed'
 import NotFoundView                           from 'pages/NotFound'
 
 // Routes which are aync in prod
+const getDownload                              = (loc, cb) => getRoute(System.import('pages/Download'), cb)
+const getExplore                               = (loc, cb) => getRoute(System.import('pages/Explore'), cb)
+const getFeatures                              = (loc, cb) => getRoute(System.import('pages/Features'), cb)
 const getFile                                  = (loc, cb) => getRoute(System.import('pages/File'), cb)
 const getHome                                  = (loc, cb) => getRoute(System.import('pages/Home'), cb)
+const getLanding                               = (loc, cb) => getRoute(System.import('pages/Landing'), cb)
 const getLogin                                 = (loc, cb) => getRoute(System.import('pages/Login'), cb)
 const getNotifications                         = (loc, cb) => getRoute(System.import('pages/Notifications'), cb)
-const getNotificationsUnread                   = (loc, cb) => getRoute(System.import('pages/NotificationsUnread'), cb)
 const getNotificationsAll                      = (loc, cb) => getRoute(System.import('pages/NotificationsAll'), cb)
+const getNotificationsUnread                   = (loc, cb) => getRoute(System.import('pages/NotificationsUnread'), cb)
+const getOpenSource                            = (loc, cb) => getRoute(System.import('pages/OpenSource'), cb)
+const getPricing                               = (loc, cb) => getRoute(System.import('pages/Pricing'), cb)
 const getPrivacy                               = (loc, cb) => getRoute(System.import('pages/Privacy'), cb)
 const getProject                               = (loc, cb) => getRoute(System.import('pages/Project'), cb)
 const getProjectCommit                         = (loc, cb) => getRoute(System.import('pages/ProjectCommit'), cb)
@@ -74,9 +80,15 @@ export default (
       <Route path='register'                   getComponent={getRegister} />
     </Route>
     <Route path='/'                            getComponent={getHome} />
-    <Route path='/terms'                       getComponent={getTerms} />
-    <Route path='/security'                    getComponent={getSecurity} />
+    <Route path='/download'                    getComponent={getDownload} />
+    <Route path='/explore'                     getComponent={getExplore} />
+    <Route path='/features'                    getComponent={getFeatures} />
+    <Route path='/landing'                     getComponent={getLanding} />
+    <Route path='/open-source'                 getComponent={getOpenSource} />
+    <Route path='/pricing'                     getComponent={getPricing} />
     <Route path='/privacy'                     getComponent={getPrivacy} />
+    <Route path='/security'                    getComponent={getSecurity} />
+    <Route path='/terms'                       getComponent={getTerms} />
     <Route path='/files/:projectId/:fileId'    getComponent={getFile} />
     <Route path='project/:stub'                getComponent={getProject}>
       <IndexRoute                              getComponent={getProjectOverview} />

@@ -19,17 +19,17 @@ import NotFoundView                            from 'pages/NotFound'
 
 // Routes that are async in prod
 import Download                                from 'pages/Download'
-import Landing                                 from 'pages/Landing'
 import Explore                                 from 'pages/Explore'
-import Pricing                                 from 'pages/Pricing'
 import Features                                from 'pages/Features'
-
 import File                                    from 'pages/File'
 import Home                                    from 'pages/Home'
+import Landing                                 from 'pages/Landing'
 import Login                                   from 'pages/Login'
 import Notifications                           from 'pages/Notifications'
-import NotificationsUnread                     from 'pages/NotificationsUnread'
 import NotificationsAll                        from 'pages/NotificationsAll'
+import NotificationsUnread                     from 'pages/NotificationsUnread'
+import OpenSource                              from 'pages/OpenSource'
+import Pricing                                 from 'pages/Pricing'
 import Privacy                                 from 'pages/Privacy'
 import Project                                 from 'pages/Project'
 import ProjectCommit                           from 'pages/ProjectCommit'
@@ -79,15 +79,16 @@ export default (
       <Route path='login'                      component={Login} />
       <Route path='register'                   component={Register} />
     </Route>
-    <Route path='/landing'                     component={Landing} />
+    <Route path='/'                            component={Home} />
     <Route path='/download'                    component={Download} />
-    <Route path='/pricing'                     component={Pricing} />
     <Route path='/explore'                     component={Explore} />
     <Route path='/features'                    component={Features} />
-    <Route path='/'                            component={Home} />
-    <Route path='/terms'                       component={Terms} />
-    <Route path='/security'                    component={Security} />
+    <Route path='/landing'                     component={Landing} />
+    <Route path='/open-source'                 component={OpenSource} />
+    <Route path='/pricing'                     component={Pricing} />
     <Route path='/privacy'                     component={Privacy} />
+    <Route path='/security'                    component={Security} />
+    <Route path='/terms'                       component={Terms} />
     <Route path='/files/:projectId/:fileId'    component={File} />
     <Route path='project/:stub'                component={Project}>
       <IndexRoute                              component={ProjectOverview} />

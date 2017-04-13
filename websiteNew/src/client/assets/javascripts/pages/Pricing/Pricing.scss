@@ -1,13 +1,10 @@
 .tables {
-  display: flex;
-  flex-direction: row;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   margin-top: 60px;
 }
 
 .table {
-  flex: 1;
   border-left: 1px solid rgba(0, 0, 0, 0.1);
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   padding: 20px 25px;
@@ -74,6 +71,7 @@
 .changePlan {
   margin-top: 60px;
   text-align: center;
+  margin-bottom: 60px;
 
   h3 {
     margin: 15px 0;

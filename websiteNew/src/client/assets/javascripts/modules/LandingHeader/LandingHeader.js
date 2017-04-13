@@ -73,9 +73,9 @@ export default class LandingHeader extends Component {
             <img src={logo} alt=""/>
           </Link>
           <Link activeClassName="active" className={ classes.link } name="featuresRoute">Features</Link>
+          <Link activeClassName="active" className={ classes.link } name="openSourceRoute">Open source</Link>
           <Link activeClassName="active" className={ classes.link } name="pricingRoute">Pricing</Link>
           <Link activeClassName="active" className={ classes.link } name="downloadRoute">Download</Link>
-          <Link activeClassName="active" className={ classes.link } name="exploreRoute">Explore</Link>
           <div className="flex"></div>
           { auth.user._id
           ? this.isLoggedIn()
