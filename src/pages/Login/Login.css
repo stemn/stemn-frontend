@@ -1,4 +1,4 @@
-.background{
+.background {
   background-position: center center;
   background-size: cover;
   width: 100%;
@@ -8,13 +8,18 @@
   background-image: linear-gradient(to bottom right, #7753eb, #449ad3);
 }
 
-.panel{
+.panel {
+  position: relative;
   width: 400px;
   height: 500px;
   padding: 30px;
   background: rgb(255, 255, 255);
   color: rgba(0, 0, 0, 0.8);
   box-shadow: 0px 20px 100px 0px rgba(0, 0, 0, 0.4);
+}
+
+.panel input {
+  margin-bottom: 10px;
 }
 
 .panel button {

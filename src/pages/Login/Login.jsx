@@ -25,14 +25,12 @@ export default React.createClass({
   render () {
     const { authenticate, nextBackground, auth } = this.props
 
-    const inputStyle = { marginBottom: '10px' }
-
     return (
       <div className='flex rel-box'>
         <div className={ classNames(classes.background, 'layout-column layout-align-center-center') }>
           <div className={ classNames(classes.panel, 'layout-column', 'layout-align-space-between') }>
             <div className="text-title-3">Sign In</div>
-            <form onSubmit={this.submit}>
+            <form onSubmit={ this.submit }>
               <br />
               <Input
                 model="auth.login.email"
@@ -40,7 +38,6 @@ export default React.createClass({
                 className="dr-input"
                 type="text"
                 placeholder="Email"
-                style={ inputStyle }
               />
               <Input
                 model="auth.login.password"
@@ -48,7 +45,6 @@ export default React.createClass({
                 className="dr-input"
                 type="password"
                 placeholder="Password"
-                style={ inputStyle }
               />
               <div className='layout-row layout-align-end'>
                 <div className='flex-50 layout-row'>
