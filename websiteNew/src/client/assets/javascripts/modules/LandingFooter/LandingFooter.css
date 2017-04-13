@@ -1,0 +1,29 @@
+.footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.inner {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  font-size: 12px;
+}
+
+.logo {
+  width: 100px;
+  margin-bottom: 15px;
+}
+
+.inner a {
+  display: inline-block;
+  color: rgba(0, 0, 0, 0.5);
+  margin-top: 5px;
+}
+.inner a:hover {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.title {
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 14px;
+}

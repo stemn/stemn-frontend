@@ -37,14 +37,15 @@
   border-bottom: 2px solid rgba(255, 255, 255, 0.8);
 }
 
-.dashboardLink {
+.specialLink {
   border-radius: 4px;
   transition: 0.3s ease all;
   background: rgba(255, 255, 255, 0.1);
+  height: 30px;
 }
-.dashboardLink:hover {
+.specialLink:hover {
   background: rgba(255, 255, 255, 0.2);
 }
-.dashboardLink > div{
+.specialLink > div{
   padding: 5px 10px;
 }

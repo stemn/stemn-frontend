@@ -40,7 +40,7 @@ export default class LandingHeader extends Component {
     const routeParams = { userId: auth.user._id }
 
     return (
-      <Link to='/' className={ classNames('layout-row layout-align-start-center', classes.dashboardLink )}>
+      <Link to='/' className={ classNames('layout-row layout-align-start-center', classes.specialLink )}>
         <div>Dashboard</div>
         <Avatar
           shape='square'
@@ -55,7 +55,9 @@ export default class LandingHeader extends Component {
   isLoggedOut() {
     return (
       <div className='layout-row layout-align-start-center'>
-        <Link to={ loginRoute() } className='link-primary'>Sign in</Link>
+        <Link to={ loginRoute() } className={ classNames('layout-row layout-align-start-center', classes.specialLink ) }>
+          <div>Sign in</div>
+        </Link>
       </div>
     )
 
@@ -70,10 +72,10 @@ export default class LandingHeader extends Component {
           <Link to='/landing' className={ classes.logo }>
             <img src={logo} alt=""/>
           </Link>
-          <Link activeClassName="active" className={ classes.link } to='/download'>Features</Link>
-          <Link activeClassName="active" className={ classes.link } to='/download'>Pricing</Link>
-          <Link activeClassName="active" className={ classes.link } to='/download'>Download</Link>
-          <Link activeClassName="active" className={ classes.link } to='/'>Explore</Link>
+          <Link activeClassName="active" className={ classes.link } name="featuresRoute">Features</Link>
+          <Link activeClassName="active" className={ classes.link } name="pricingRoute">Pricing</Link>
+          <Link activeClassName="active" className={ classes.link } name="downloadRoute">Download</Link>
+          <Link activeClassName="active" className={ classes.link } name="exploreRoute">Explore</Link>
           <div className="flex"></div>
           { auth.user._id
           ? this.isLoggedIn()

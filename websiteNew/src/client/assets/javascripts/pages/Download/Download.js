@@ -43,24 +43,20 @@ export default class Download extends Component {
         </Button>
       </div>
     )
-
-    if (latest && latest.version) {
-      return (
-
-        <LandingLayout>
-          <HeroBanner>
-            <h1>Download Stemn Desktop</h1>
-            <h3>Collaboration tools for Engineers</h3>
-          </HeroBanner>
-          <Container>
+    return (
+      <LandingLayout>
+        <HeroBanner>
+          <h1>Download Stemn Desktop</h1>
+          <h3>Collaboration tools for Engineers</h3>
+        </HeroBanner>
+        { latest && latest.version
+        ? <Container>
             { getPlatformSection('windows') }
             { getPlatformSection('mac') }
             { getPlatformSection('linux') }
           </Container>
-        </LandingLayout>
-      )
-    } else {
-      return null
-    }
+        : null }
+      </LandingLayout>
+    )
   }
 }

@@ -20,6 +20,10 @@ import NotFoundView                            from 'pages/NotFound'
 // Routes that are async in prod
 import Download                                from 'pages/Download'
 import Landing                                 from 'pages/Landing'
+import Explore                                 from 'pages/Explore'
+import Pricing                                 from 'pages/Pricing'
+import Features                                from 'pages/Features'
+
 import File                                    from 'pages/File'
 import Home                                    from 'pages/Home'
 import Login                                   from 'pages/Login'
@@ -77,6 +81,9 @@ export default (
     </Route>
     <Route path='/landing'                     component={Landing} />
     <Route path='/download'                    component={Download} />
+    <Route path='/pricing'                     component={Pricing} />
+    <Route path='/explore'                     component={Explore} />
+    <Route path='/features'                    component={Features} />
     <Route path='/'                            component={Home} />
     <Route path='/terms'                       component={Terms} />
     <Route path='/security'                    component={Security} />

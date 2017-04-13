@@ -12,7 +12,7 @@ class Footer extends Component {
         <Container className={ classNames(classes.inner, 'layout-row', 'layout-align-start-center') }>
           <div>© 2017 Stemn.</div>
           <div className="flex" />
-          <Link className="link-primary" name="homeRoute">Stemn Desktop</Link>
+          <Link className="link-primary" name="landingRoute">Stemn Desktop</Link>
           <span className="text-interpunct" />
           <Link className="link-primary" name="termsRoute">Terms</Link>
           <Link className="link-primary" name="privacyRoute">Privacy</Link>

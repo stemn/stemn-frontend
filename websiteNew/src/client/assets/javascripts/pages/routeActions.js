@@ -21,3 +21,8 @@ export const privacyRoute         = ()                        => `/privacy`
 export const securityRoute        = ()                        => `/security`
 export const contactRoute         = ()                        => `/contact`
 export const organisationRoute    = ({ organisationId })      => `/organisaitons/${organisationId}`
+export const exploreRoute         = ()                        => `/explore`
+export const pricingRoute         = ()                        => `/pricing`
+export const landingRoute         = ()                        => `/landing`
+export const featuresRoute        = ()                        => `/features`
+export const downloadRoute        = ()                        => `/download`

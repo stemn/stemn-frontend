@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import LandingHeader from 'modules/LandingHeader'
-import Footer from 'modules/Footer'
+import LandingFooter from 'modules/LandingFooter'
 
 export default class LandingLayout extends Component {
   render() {
@@ -12,7 +12,7 @@ export default class LandingLayout extends Component {
         <div className="flex">
           { children }
         </div>
-        <Footer />
+        <LandingFooter />
       </div>
     )
   }
