@@ -19,7 +19,7 @@ const Component = React.createClass({
     const {
       title, message,
       confirmValue, confirmPlaceholder,
-      modalCancel, modalHide, modalConfirm
+      modalCancel, modalConfirm
     } = this.props;
 
     const { value } = this.state;
@@ -40,11 +40,11 @@ const Component = React.createClass({
            : null }
         </div>
         <div className="modal-footer-no-line layout-row layout-align-end">
-          <Button style={{marginRight: '10px'}} onClick={() => {modalCancel(); modalHide()}}>Cancel</Button>
+          <Button style={{marginRight: '10px'}} onClick={ modalCancel }>Cancel</Button>
           <Button
             className="warn"
             disabled={confirmValue && value.toLowerCase() != confirmValue.toLowerCase() }
-            onClick={() => {modalConfirm(); modalHide()}}>
+            onClick={ modalConfirm }>
             Confirm
           </Button>
         </div>

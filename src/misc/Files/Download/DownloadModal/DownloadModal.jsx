@@ -49,7 +49,7 @@ export const FileSelectModal = React.createClass({
   },
   componentWillMount() { this.onMount(this.props) },
   render() {
-    const { modalCancel, modalHide, modalConfirm } = this.props;
+    const { modalCancel, modalConfirm } = this.props;
     const { revisions, syncTimeline } = this.props;
 
     const orderByTime = (items) => orderBy(items, item => (new Date(item.timestamp)).getTime(), 'desc');
@@ -75,7 +75,7 @@ export const FileSelectModal = React.createClass({
         </div>
         <div className="modal-footer layout-row layout-align-start-center">
           <div className="flex"></div>
-          <Button className="primary" onClick={modalHide}>Close</Button>
+          <Button className="primary" onClick={ modalCancel }>Close</Button>
         </div>
       </div>
     );

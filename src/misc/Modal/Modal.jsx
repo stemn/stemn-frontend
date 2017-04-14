@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import i from 'icepick';
 
-import { hideModal } from './Modal.actions.js';
+import { hideModal, resolveModal, rejectModal } from './Modal.actions.js';
 
 import React, { Component } from 'react';
 import Modal from 'react-modal';
@@ -24,7 +24,6 @@ class ModalComponent extends Component {
       const ModalTemplate = getModal(modal.modalType);
       if (ModalTemplate) {
         const additionalProps = {
-          modalHide: this.modalHide,
           modalCancel: this.modalCancel,
           modalConfirm: this.modalConfirm
         }
@@ -36,46 +35,38 @@ class ModalComponent extends Component {
     return template
   }
 
-  callbackFunction = (callbackObject, extendObject) => {
-    const { dispatch } = this.props;
-    // If it is a normal object, extend and dispatch it
-    if(callbackObject && !callbackObject.aliased){
-      dispatch(i.merge(callbackObject, extendObject))
-    }
-    else if(callbackObject && callbackObject.aliased){
-      // Extend the aliased function inputs
-      // We only extend if the object exists because sometimes the functionInputs
-      // are an array and do not allow for extending.
-      if(extendObject){
-        dispatch(i.merge(callbackObject, {
-          payload: {
-            functionInputs: extendObject
-          }
-        }))
-      }
-      else{
-        dispatch(callbackObject)
-      }
-    }
-  }
-
-  modalHide = () => {
+  modalCancel = (data = {}) => {
     const { modalId } = this.props.modal;
+    // If the data is an object, string, number or boolean. Resolve
+    // This is used to ignore mouse click events
+    if (['Object', 'String', 'Number', 'Boolean'].includes(data.constructor.name)) {
+      this.props.rejectModal({ modalId, data })
+    } else {
+      this.props.rejectModal({ modalId })
+    }
     this.props.hideModal({ modalId })
   }
-  modalCancel = (extendObject) => this.callbackFunction(this.props.modal.modalCancel, extendObject)
-  modalConfirm = (extendObject) => this.callbackFunction(this.props.modal.modalConfirm, extendObject)
+  modalConfirm = (data = {}) => {
+    const { modalId } = this.props.modal;
+    // If the data is an object, string, number or boolean. Resolve
+    // This is used to ignore mouse click events
+    if (['Object', 'String', 'Number', 'Boolean'].includes(data.constructor.name)) {
+      this.props.resolveModal({ modalId, data })
+    } else {
+      this.props.resolveModal({ modalId })
+    }
+    this.props.hideModal({ modalId })
+  }
   onRequestClose = () => {
     const { modal } = this.props;
     if (modal.modalOptions && modal.modalOptions.noClickClose) {
       return
     } else {
       this.modalCancel()
-      this.modalHide()
     }
   }
   render() {
-    const { modal, dispatch } = this.props;
+    const { modal } = this.props;
     const overlayClassName = classes.overlay+ ' layout-column layout-align-center-center';
 
     return (
@@ -98,11 +89,10 @@ function mapStateToProps() {
   return {};
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    hideModal: bindActionCreators(hideModal, dispatch),
-    dispatch
-  };
+const mapDispatchToProps = {
+  hideModal,
+  resolveModal,
+  rejectModal,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalComponent);

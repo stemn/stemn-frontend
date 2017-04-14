@@ -9,12 +9,7 @@ import classes from '../Login/Login.css'
 import { Link } from 'react-router';
 import Button from 'stemn-shared/misc/Buttons/Button/Button.jsx';
 import Input from 'stemn-shared/misc/Input/Input/Input';
-import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx';
-import MdPhoto from 'react-icons/md/photo';
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-
-import logoSvg from 'stemn-shared/assets/images/astronaut.svg';
-const backgroundImages = require.context('stemn-shared/assets/images/satellite-backgrounds');
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

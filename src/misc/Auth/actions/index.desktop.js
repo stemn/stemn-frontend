@@ -1,4 +1,5 @@
 export authenticate        from './authenticate'
+export confirmLinkedinImport  from './confirmLinkedinImport'
 export loadUserData        from './loadUserData'
 export login               from './login'
 export logout              from './logout'

@@ -331,19 +331,14 @@ export function newGroup({boardId, group}) {
   }
 }
 
-export function deleteGroupConfirm({boardId, groupId}) {
-  return showConfirm({
+export const deleteGroupConfirm = ({boardId, groupId}) => (dispatch) => {
+  return dispatch(showConfirm({
     message: 'Deleting a group is permanent. All tasks which belong to this group will be deleted (even archived tasks).',
-    modalConfirm: {
-      type: 'ALIASED',
-      aliased: true,
-      payload: {
-        functionAlias: 'TasksActions.deleteGroup',
-        functionInputs: { boardId, groupId }
-      }
-    }
+  })).then(() => {
+    dispatch(deleteGroup({ boardId, groupId }))
   })
 }
+
 export function deleteGroup({boardId, groupId}) {
   return {
     type: 'TASKS/DELETE_GROUP',

@@ -6,15 +6,18 @@ import { omit } from 'lodash';
 import classNames from 'classnames';
 import classes from './ArrowTabs.css';
 import MdChrevronRight from 'react-icons/md/chevron-right';
+import Link from 'stemn-shared/misc/Router/Link'
 
 const arrowTabsPropTypes = {
-  children  : PropTypes.node.isRequired,      // Child element
-  className : PropTypes.string,      // Classes
+  children  : PropTypes.node.isRequired,     // Child element
+  className : PropTypes.string,              // Classes
 }
 const arrowTabPropTypes = {
   children : PropTypes.node.isRequired,      // Child element
   isActive : PropTypes.bool,                 // Is the tab active?
   arrow    : PropTypes.bool,                 // Should we show the arrow?
+  name     : PropTypes.string,               // Link path name
+  params   : PropTypes.object,               // Link params
 }
 
 export const ArrowTabs = React.createClass({
@@ -33,15 +36,32 @@ export const ArrowTabs = React.createClass({
 
 export const ArrowTab = React.createClass({
   propTypes: arrowTabPropTypes,
+  renderLinkEl() {
+    const linkClasses = classNames(classes.tab, {active : isActive})
+    const { children, isActive, arrow, name, ...otherProps } = this.props
+    if (name) {
+      return (
+        <Link className={ linkClasses } name={ name } {...otherProps }>
+          { children }
+        </Link>
+      )
+    } else {
+      return (
+        <a className={ linkClasses } {...otherProps }>
+          { children }
+        </a>
+      )
+    }
+  },
   render() {
-    const { children, isActive, arrow } = this.props;
+    const { arrow } = this.props;
+
     return (
       <div className="layout-row layout-align-start-center">
-        <a { ...omit(this.props, Object.keys(arrowTabPropTypes))}
-          className={classNames(classes.tab, {[classes.tabActive] : isActive})}>
-          {children}
-        </a>
-        {arrow ? <MdChrevronRight className={classes.arrow} size="22px"/> : null}
+        { this.renderLinkEl() }
+        { arrow
+        ? <MdChrevronRight className={ classes.arrow } size={ 22 }/>
+        : null }
       </div>
 
     )

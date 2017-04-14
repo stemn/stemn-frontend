@@ -85,11 +85,10 @@ export const FileSelectModal = React.createClass({
       fileId : this.props.fileSelect.selected.fileId,
       path   : this.props.fileSelect.selected.path
     }))
-    this.props.modalHide();
+    this.props.modalConfirm();
   },
   cancel(){
     this.props.modalCancel();
-    this.props.modalHide();
   },
   render() {
     const { projectId, path, fileSelect, options } = this.props;

@@ -47,11 +47,9 @@ export const Component = React.createClass({
     this.props.dispatch(actions.change(this.props.mentionsModel, {}))
 
     this.props.modalConfirm({mentions});
-    this.props.modalHide();
   },
   cancel(){
     this.props.modalCancel();
-    this.props.modalHide();
   },
 
   toggle({type, taskId, mention}){

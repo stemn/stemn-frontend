@@ -37,14 +37,15 @@ export function updateDownloaded({update, version, platform, readme}) {
     dispatch(showConfirm({
       title: 'Install update',
       message: 'A new update has been downloaded and is ready for installation. Would you like to restart Stemn Desktop now?',
-      modalConfirm: {
+    })).then(() => {
+      dispatch({
         type: 'ALIASED',
         aliased: true,
         payload: {
           functionAlias: 'AutoUpdateUtils.installUpdates',
         }
-      }
-    }))
+      })
+    })
   }
 }
 

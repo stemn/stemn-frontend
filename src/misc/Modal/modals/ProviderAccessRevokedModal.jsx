@@ -17,7 +17,7 @@ const Component = React.createClass({
   render: function() {
     const {
       owner, auth, authActions,
-      modalCancel, modalHide, modalConfirm
+      modalCancel, modalConfirm
     } = this.props;
 
     const isCurrentUser = owner._id == auth.user._id;
@@ -37,12 +37,12 @@ const Component = React.createClass({
           }
         </div>
         <div className="modal-footer-no-line layout-row layout-align-end">
-          <Button onClick={() => {modalHide()}}>Cancel</Button>
+          <Button onClick={ modalCancel }>Cancel</Button>
           { isCurrentUser
           ? <Button
               style={{marginLeft: '10px'}}
               className="primary"
-              onClick={() => {authActions.authenticate('google'); modalHide()}}
+              onClick={() => {authActions.authenticate('google'); modalConfirm()}}
             >
               Authenticate
             </Button>

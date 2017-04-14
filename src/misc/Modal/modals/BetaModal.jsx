@@ -17,14 +17,13 @@ const Component = React.createClass({
   },
   submitCode() {
     this.props.dispatch(submitBetaCode(this.state.value)).then(() => {
-      this.props.modalHide();
+      this.props.modalConfirm();
     })
   },
   submitRequest() {
     this.props.dispatch(requestBetaCode());
   },
   render: function() {
-    const { modalHide } = this.props;
     const { value } = this.state;
 
     return (

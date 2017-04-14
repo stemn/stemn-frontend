@@ -79,10 +79,10 @@ export const Component = React.createClass({
       taskId: this.props.task.data._id,
       boardId: this.props.task.data.board,
     });
-    this.props.modalHide();
+    this.props.modalConfirm();
   },
   render() {
-    const { taskId, task, board, entityModel, project, modalCancel, modalHide } = this.props;
+    const { taskId, task, board, entityModel, project, modalCancel } = this.props;
 
     const getMain = () => {
       const menu = [{

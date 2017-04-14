@@ -66,9 +66,7 @@ export const Component = React.createClass({
             revisions: revisions,
             file: file1
           },
-          meta: {
-            scope: 'local'
-          }
+          scope: 'local'
         }))
       },
     }

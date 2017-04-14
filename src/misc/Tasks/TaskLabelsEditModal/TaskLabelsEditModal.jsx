@@ -32,14 +32,14 @@ export const Component = React.createClass({
     this.props.dispatch(actions.change(`${this.props.boardModel}.data.labels`, this.props.board.forms.labels));
     setTimeout(()=>{
       this.props.tasksActions.updateBoard({board: this.props.board.data}).then( response => {
-        this.props.modalHide();
+        this.props.modalConfirm();
       });
     })
   },
   render() {
     const {
       boardModel, board,
-      modalCancel, modalConfirm, modalHide
+      modalCancel, modalConfirm
     } = this.props;
 
     return (
@@ -51,7 +51,7 @@ export const Component = React.createClass({
           : null}
         </div>
         <div className="modal-footer-no-line layout-row layout-align-end">
-          <Button style={{marginRight: '10px'}} onClick={() => {modalCancel(); modalHide()}}>Cancel</Button>
+          <Button style={{marginRight: '10px'}} onClick={ modalCancel }>Cancel</Button>
           <Button className="primary"
             onClick={this.submit}
             loading={board.savePending}

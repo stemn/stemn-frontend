@@ -6,7 +6,7 @@ import classNames from 'classnames';
 
 const Component = React.createClass({
   render: function() {
-    const { modalCancel, modalHide, modalConfirm } = this.props;
+    const { modalCancel, modalConfirm } = this.props;
     const { provider } = this.props;
     const providerText = provider == 'drive' ? 'Google Drive' : 'Dropbox';
     return (
@@ -65,7 +65,7 @@ const Component = React.createClass({
         <div className="modal-footer-no-line layout-row layout-align-end">
           <Button
             className="primary"
-            onClick={modalHide}>
+            onClick={ modalConfirm }>
             Ok
           </Button>
         </div>

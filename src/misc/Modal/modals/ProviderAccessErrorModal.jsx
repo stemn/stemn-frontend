@@ -9,7 +9,7 @@ import classNames from 'classnames';
 
 const Component = React.createClass({
   render: function() {
-    const { title, message, modalCancel, modalHide, modalConfirm } = this.props;
+    const { title, message, modalCancel, modalConfirm } = this.props;
     return (
       <div style={{width: '500px'}}>
         <div className="modal-title">Google Authentication Error</div>
@@ -21,7 +21,7 @@ const Component = React.createClass({
           <p>After you have fully revoked STEMN's access to your google account, vist your <Link to="/settings/account" className="link-primary">account settings page</Link> and re-connect your google account. </p>
         </div>
         <div className="modal-footer-no-line layout-row layout-align-end">
-          <Button className="primary" onClick={() => {modalConfirm(); modalHide()}}>Continue</Button>
+          <Button className="primary" onClick={ modalConfirm }>Continue</Button>
         </div>
       </div>
     )

@@ -9,6 +9,7 @@
 }
 
 .panel {
+  border-radius: 4px;
   position: relative;
   width: 400px;
   height: 500px;

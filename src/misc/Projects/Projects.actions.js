@@ -82,19 +82,13 @@ export const getUserProjects = ({ userId }) => ({
   })
 })
 
-export const confirmDeleteProject = ({ projectId, name }) => {
-  return ModalActions.showConfirm({
+export const confirmDeleteProject = ({ projectId, name }) => (dispatch) => {
+  return dispatch(ModalActions.showConfirm({
     message: 'Deleting a project is permanent. You will not be able to undo this.<br/><br/> Note: All your Stemn data (such as commits and tasks) will be deleted. Your files will remain in your cloud provider.',
     confirmValue: name,
     confirmPlaceholder: 'Please type in the name of this project to confirm.',
-    modalConfirm: {
-      type: 'ALIASED',
-      aliased: true,
-      payload: {
-        functionAlias: 'ProjectsActions.deleteProject',
-        functionInputs: { projectId }
-      }
-    }
+  })).then(() => {
+    dispatch(deleteProject({ projectId }))
   })
 }
 
@@ -151,45 +145,39 @@ export const changeUserPermissions = ({ projectId, userId, role }) => ({
   }
 })
 
-// This will return a plain object with an alias function
-// This is used in modal callbacks.
-export const linkRemoteAlias = ({ id, path, prevProvider, project, projectId, provider, userId }) => !provider
-  ? {
-    type: 'ALIASED',
-    aliased: true,
-    payload: {
-      functionAlias: 'ProjectsActions.unlinkRemote',
-      functionInputs: {
+// If the store is connected - we confirm the change
+// Else change straight away.
+export const confirmLinkRemote = ({ isConnected, id, path, prevProvider, project, projectId, provider, userId }) => (dispatch) => {
+
+  const linkRemoteProviderDependent = () => {
+    if (!provider) {
+      return unlinkRemote({
         prevProvider,
         projectId,
         userId
-      }
-    }
-  }
-  : {
-    type: 'ALIASED',
-    aliased: true,
-    payload: {
-      functionAlias: 'ProjectsActions.linkRemote',
-      functionInputs: {
+      })
+    } else {
+      return linkRemote({
         id,
         path,
         prevProvider,
         projectId,
         provider,
         userId
-      }
+      })
     }
   }
 
-// If the store is connected - we confirm the change
-// Else change straight away.
-export const confirmLinkRemote = ({ isConnected, id, path, prevProvider, project, projectId, provider, userId }) => (dispatch) => isConnected
-  ? dispatch(ModalActions.showConfirm({
-    message: 'Changing your file store <b>will delete your entire commit and change history.</b> Are you sure you want to do this? There is no going back.',
-    modalConfirm: linkRemoteAlias({ id, path, prevProvider, project, projectId, provider, userId })
-  }))
-  : dispatch(linkRemoteAlias({ id, path, prevProvider, project, projectId, provider, userId }))
+  if (isConnected) {
+    dispatch(ModalActions.showConfirm({
+      message: 'Changing your file store <b>will delete your entire commit and change history.</b> Are you sure you want to do this? There is no going back.',
+    })).then(() => {
+      dispatch(linkRemoteProviderDependent())
+    })
+  } else {
+    dispatch(linkRemoteProviderDependent())
+  }
+}
 
 export const linkRemote = ({ projectId, provider, path, id, prevProvider, userId }) => {
   return (dispatch) => {

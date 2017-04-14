@@ -36,7 +36,7 @@ const Component = React.createClass({
     })
   },
   render: function() {
-    const { modalHide } = this.props;
+    const { modalConfirm } = this.props;
     const { loading, releaseNotes} = this.state;
 
     return (
@@ -49,7 +49,7 @@ const Component = React.createClass({
         <div className="modal-footer-no-line layout-row layout-align-start-center">
           <a href="https://github.com/Stemn/Stemn-Desktop/releases" className="link-primary">View all release notes</a>
           <div className="flex"></div>
-          <Button className="primary" onClick={() => {modalHide()}}>Close</Button>
+          <Button className="primary" onClick={ modalConfirm }>Close</Button>
         </div>
       </div>
     )

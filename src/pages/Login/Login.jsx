@@ -9,8 +9,6 @@ import classes from './Login.css'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import { Link } from 'react-router'
 import Button from 'stemn-shared/misc/Buttons/Button/Button.jsx'
-import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
-import MdPhoto from 'react-icons/md/photo'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
 export default React.createClass({
@@ -23,7 +21,7 @@ export default React.createClass({
   },
 
   render () {
-    const { authenticate, nextBackground, auth } = this.props
+    const { authenticate, auth } = this.props
 
     return (
       <div className='flex rel-box'>

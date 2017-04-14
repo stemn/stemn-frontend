@@ -10,7 +10,7 @@ import classNames from 'classnames';
 
 const Component = React.createClass({
   render: function() {
-    const { title, message, modalCancel, modalHide, modalConfirm } = this.props;
+    const { title, message, modalCancel, modalConfirm } = this.props;
     return (
       <div style={{width: '100vw', padding: '30px'}}>
         <div className="modal-body" style={{lineHeight: '1.4em'}}>

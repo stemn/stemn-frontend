@@ -72,15 +72,16 @@ export function mentionTasksModal({projectId, mentions}) {
       modalProps: {
         projectId: projectId
       },
-      modalConfirm: {
+    })).then(() => {
+      dispatch({
         type: 'ALIASED',
         aliased: 'true',
         payload: {
           functionAlias: 'ChangesActions.mentionTasks',
           functionInputs: { projectId, mentions }
         }
-      }
-    }))
+      })
+    })
   }
 }
 

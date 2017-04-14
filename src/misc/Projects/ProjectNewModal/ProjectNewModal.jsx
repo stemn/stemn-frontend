@@ -42,7 +42,7 @@ export const Component = React.createClass({
     this.props.projectsActions.createProject(pick(this.props.newProject, ['permissions', 'name', 'summary'])).then(response => {
       const goToProject = () => {
         this.props.dispatch(push(projectSettingsRoute({projectId: response.value.data._id})));
-        this.props.modalHide();
+        this.props.modalConfirm();
       }
       // Link the provider if we can.
       if(response.value.data._id && this.props.newProject.provider && this.props.newProject.root.path && this.props.newProject.root.fileId){
@@ -72,7 +72,7 @@ export const Component = React.createClass({
     this.setState({ tab: tab })
   },
   render() {
-    const { newProject, entityModel, modalCancel, modalHide } = this.props;
+    const { newProject, entityModel, modalCancel } = this.props;
     const { tab, linkPending } = this.state;
 
     const namePanelTemplate = () => {
@@ -165,7 +165,7 @@ export const Component = React.createClass({
         ),
         button1: {
           text: 'Cancel',
-          onClick: () => {modalCancel(); modalHide()}
+          onClick: modalCancel
         },
         button2: {
           text: 'Next',

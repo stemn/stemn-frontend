@@ -21,15 +21,15 @@ export default class UserCloudProviderSettings extends Component {
         <LinkAccount
           text="Dropbox"
           isLinked={user.accounts.dropbox && user.accounts.dropbox.id}
-          linkFn={()=>authActions.authenticate('dropbox')}
-          unLinkFn={()=>authActions.unlink('dropbox')}
+          linkFn={()=>authenticate('dropbox')}
+          unLinkFn={()=>unlink('dropbox')}
           email={user.accounts.dropbox && user.accounts.dropbox.email ? user.accounts.dropbox.email : ''}/>
 
         <LinkAccount
           text="Google Drive"
           isLinked={user.accounts.google &&  user.accounts.google.refreshToken}
-          linkFn={()=>authActions.authenticate('google')}
-          unLinkFn={()=>authActions.unlink('google')}
+          linkFn={()=>authenticate('google')}
+          unLinkFn={()=>unlink('google')}
           email={user.accounts.google && user.accounts.google.email ? user.accounts.google.email : ''}/>
 
       </div>
