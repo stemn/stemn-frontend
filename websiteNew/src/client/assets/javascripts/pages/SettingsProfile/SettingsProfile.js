@@ -14,8 +14,13 @@ import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 //import Upload from 'stemn-shared/misc/Upload/Upload'
 
 export default class SettingsProfile extends Component {
+  saveUser = () => {
+    this.props.saveUser({
+      user: this.props.user.data,
+    })
+  }
   render() {
-    const { user, entityModel, saveUser } = this.props
+    const { user, entityModel } = this.props
     return (
       <div>
         <InfoPanel>

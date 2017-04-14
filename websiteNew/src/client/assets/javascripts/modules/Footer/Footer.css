@@ -5,6 +5,10 @@
   margin-top: 30px;
 }
 
+.logo {
+  height: 20px;
+}
+
 .inner {
   padding-top: 15px;
   padding-bottom: 15px;
@@ -13,4 +17,13 @@
 
 .footer a {
   margin: 0 5px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.footer a:hover {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.footer a:global(.active) {
+  color: rgba(0, 0, 0, 0.8);
 }

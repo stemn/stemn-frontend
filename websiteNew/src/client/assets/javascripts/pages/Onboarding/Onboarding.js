@@ -27,7 +27,7 @@ export default class Onboarding extends Component {
             </ArrowTabs>
           </Container>
         </div>
-        <Container>
+        <Container className={ classes.content }>
           <div className={ classes.title }>
             <div className="text-title-2">Setup Sync</div>
             <div className="text-title-4">Nice! You'll have STEMN up and running very soon</div>

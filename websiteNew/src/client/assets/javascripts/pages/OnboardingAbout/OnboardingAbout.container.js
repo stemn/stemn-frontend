@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import OnboardingAbout from './OnboardingAbout'
 
 import { confirmLinkedinImport } from 'stemn-shared/misc/Auth/Auth.actions'
+import { saveUser } from 'stemn-shared/misc/Users/Users.actions'
 
 const stateToProps = ({ users, auth }) => ({
   user: users[auth.user._id],
@@ -10,7 +11,8 @@ const stateToProps = ({ users, auth }) => ({
 })
 
 const dispatchToProps = {
-  confirmLinkedinImport
+  confirmLinkedinImport,
+  saveUser
 }
 
 @connect(stateToProps, dispatchToProps)

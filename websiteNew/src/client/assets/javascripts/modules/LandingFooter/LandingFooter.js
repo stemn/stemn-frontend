@@ -9,7 +9,7 @@ import logo from './logo.png'
 class Footer extends Component {
   render() {
     return (
-      <footer className={ classNames(classes.footer) }>
+      <footer className={ classNames(classes.footer) } { ...this.props }>
         <Container className={ classes.inner }>
           <Row className="layout-row">
             <Col className="flex">
