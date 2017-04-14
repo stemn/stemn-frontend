@@ -60,59 +60,59 @@ import UserProjects                            from 'pages/UserProjects'
 import UserStars                               from 'pages/UserStars'
 
 export default (
-  <Route                                       component={AppRoot}>
-    <Route                                     component={AppAuthed}>
-      <Route path='settings'                   component={Settings}>
-        <IndexRoute                            component={SettingsProfile}/>
-        <Route path='account'                  component={SettingsAccount}/>
-        <Route path='billing'                  component={SettingsBilling}/>
-        <Route path='emails'                   component={SettingsEmails}/>
-        <Route path='projects'                 component={SettingsProjects}/>
+  <Route                                       component={ AppRoot }>
+    <Route                                     component={ AppAuthed }>
+      <Route path="settings"                   component={ Settings }>
+        <IndexRoute                            component={ SettingsProfile } />
+        <Route path="account"                  component={ SettingsAccount } />
+        <Route path="billing"                  component={ SettingsBilling } />
+        <Route path="emails"                   component={ SettingsEmails } />
+        <Route path="projects"                 component={ SettingsProjects } />
       </Route>
-      <Route path='notifications'              component={Notifications}>
-        <IndexRoute                            component={NotificationsUnread}/>
-        <Route path='unread'                   component={NotificationsUnread}/>
-        <Route path='all'                      component={NotificationsAll}/>
-      </Route>
-    </Route>
-    <Route                                     component={AppUnAuthed}>
-      <Route path='login'                      component={Login} />
-      <Route path='register'                   component={Register} />
-    </Route>
-    <Route path='/'                            component={Home} />
-    <Route path='/download'                    component={Download} />
-    <Route path='/explore'                     component={Explore} />
-    <Route path='/features'                    component={Features} />
-    <Route path='/landing'                     component={Landing} />
-    <Route path='/open-source'                 component={OpenSource} />
-    <Route path='/pricing'                     component={Pricing} />
-    <Route path='/privacy'                     component={Privacy} />
-    <Route path='/security'                    component={Security} />
-    <Route path='/terms'                       component={Terms} />
-    <Route path='/files/:projectId/:fileId'    component={File} />
-    <Route path='project/:stub'                component={Project}>
-      <IndexRoute                              component={ProjectOverview} />
-      <Route path='files/:path'                component={ProjectOverview} />
-      <Route path='tasks'                      component={ProjectTasks} />
-      <Route path='tasks/:taskId'              component={ProjectTask} />
-      <Route path='commits'                    component={ProjectCommits} />
-      <Route path='commits/:commitId'          component={ProjectCommit} />
-      <Route path='settings'                   component={ProjectSettings}>
-        <IndexRoute                            component={ProjectSettingsGeneral} />
-        <Route path='tasks'                    component={ProjectSettingsTasks} />
-        <Route path='team'                     component={ProjectSettingsTeam} />
-        <Route path='tags'                     component={ProjectSettingsTags} />
+      <Route path="notifications"              component={ Notifications }>
+        <IndexRoute                            component={ NotificationsUnread } />
+        <Route path="unread"                   component={ NotificationsUnread } />
+        <Route path="all"                      component={ NotificationsAll } />
       </Route>
     </Route>
-    <Route path='404'                          component={NotFoundView} />
-    <Route path='users/:stub'                  component={User}>
-      <IndexRoute                              component={UserOverview} />
-      <Route path='details'                    component={UserDetails} />
-      <Route path='followers'                  component={UserFollowers} />
-      <Route path='following'                  component={UserFollowing} />
-      <Route path='projects'                   component={UserProjects} />
-      <Route path='stars'                      component={UserStars} />
+    <Route                                     component={ AppUnAuthed }>
+      <Route path="login"                      component={ Login } />
+      <Route path="register"                   component={ Register } />
     </Route>
-    <Redirect from='*'                         to='404' />
+    <Route path="/"                            component={ Home } />
+    <Route path="/download"                    component={ Download } />
+    <Route path="/explore"                     component={ Explore } />
+    <Route path="/features"                    component={ Features } />
+    <Route path="/landing"                     component={ Landing } />
+    <Route path="/open-source"                 component={ OpenSource } />
+    <Route path="/pricing"                     component={ Pricing } />
+    <Route path="/privacy"                     component={ Privacy } />
+    <Route path="/security"                    component={ Security } />
+    <Route path="/terms"                       component={ Terms } />
+    <Route path="/files/:projectId/:fileId"    component={ File } />
+    <Route path="project/:stub"                component={ Project }>
+      <IndexRoute                              component={ ProjectOverview } />
+      <Route path="files/:path"                component={ ProjectOverview } />
+      <Route path="tasks"                      component={ ProjectTasks } />
+      <Route path="tasks/:taskId"              component={ ProjectTask } />
+      <Route path="commits"                    component={ ProjectCommits } />
+      <Route path="commits/:commitId"          component={ ProjectCommit } />
+      <Route path="settings"                   component={ ProjectSettings }>
+        <IndexRoute                            component={ ProjectSettingsGeneral } />
+        <Route path="tasks"                    component={ ProjectSettingsTasks } />
+        <Route path="team"                     component={ ProjectSettingsTeam } />
+        <Route path="tags"                     component={ ProjectSettingsTags } />
+      </Route>
+    </Route>
+    <Route path="404"                          component={ NotFoundView } />
+    <Route path="users/:stub"                  component={ User }>
+      <IndexRoute                              component={ UserOverview } />
+      <Route path="details"                    component={ UserDetails } />
+      <Route path="followers"                  component={ UserFollowers } />
+      <Route path="following"                  component={ UserFollowing } />
+      <Route path="projects"                   component={ UserProjects } />
+      <Route path="stars"                      component={ UserStars } />
+    </Route>
+    <Redirect from="*"                         to="404" />
   </Route>
 )

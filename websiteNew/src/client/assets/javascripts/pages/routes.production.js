@@ -60,59 +60,59 @@ const getUserProjects                          = (loc, cb) => getRoute(System.im
 const getUserStars                             = (loc, cb) => getRoute(System.import('pages/UserStars'), cb)
 
 export default (
-  <Route                                       component={AppRoot}>
-    <Route                                     component={AppAuthed}>
-      <Route path='settings'                   getComponent={getSettings}>
-        <IndexRoute                            getComponent={getSettingsProfile}/>
-        <Route path='account'                  getComponent={getSettingsAccount}/>
-        <Route path='billing'                  getComponent={getSettingsBilling}/>
-        <Route path='emails'                   getComponent={getSettingsEmails}/>
-        <Route path='projects'                 getComponent={getSettingsProjects}/>
+  <Route                                       component={ AppRoot }>
+    <Route                                     component={ AppAuthed }>
+      <Route path="settings"                   getComponent={ getSettings }>
+        <IndexRoute                            getComponent={ getSettingsProfile } />
+        <Route path="account"                  getComponent={ getSettingsAccount } />
+        <Route path="billing"                  getComponent={ getSettingsBilling } />
+        <Route path="emails"                   getComponent={ getSettingsEmails } />
+        <Route path="projects"                 getComponent={ getSettingsProjects } />
       </Route>
-      <Route path='notifications'              getComponent={getNotifications}>
-        <IndexRoute                            getComponent={getNotifications}/>
-        <Route path='unread'                   getComponent={getNotificationsUnread}/>
-        <Route path='all'                      getComponent={getNotificationsAll}/>
-      </Route>
-    </Route>
-    <Route                                     component={AppUnAuthed}>
-      <Route path='login'                      getComponent={getLogin} />
-      <Route path='register'                   getComponent={getRegister} />
-    </Route>
-    <Route path='/'                            getComponent={getHome} />
-    <Route path='/download'                    getComponent={getDownload} />
-    <Route path='/explore'                     getComponent={getExplore} />
-    <Route path='/features'                    getComponent={getFeatures} />
-    <Route path='/landing'                     getComponent={getLanding} />
-    <Route path='/open-source'                 getComponent={getOpenSource} />
-    <Route path='/pricing'                     getComponent={getPricing} />
-    <Route path='/privacy'                     getComponent={getPrivacy} />
-    <Route path='/security'                    getComponent={getSecurity} />
-    <Route path='/terms'                       getComponent={getTerms} />
-    <Route path='/files/:projectId/:fileId'    getComponent={getFile} />
-    <Route path='project/:stub'                getComponent={getProject}>
-      <IndexRoute                              getComponent={getProjectOverview} />
-      <Route path='files/:path'                getComponent={getProjectOverview} />
-      <Route path='tasks'                      getComponent={getProjectTasks} />
-      <Route path='tasks/:taskId'              getComponent={getProjectTask} />
-      <Route path='commits'                    getComponent={getProjectCommits} />
-      <Route path='commits/:commitId'          getComponent={getProjectCommit} />
-      <Route path='settings'                   getComponent={getProjectSettings}>
-        <IndexRoute                            getComponent={getProjectSettingsGeneral} />
-        <Route path='tasks'                    getComponent={getProjectSettingsTasks} />
-        <Route path='team'                     getComponent={getProjectSettingsTeam} />
-        <Route path='tags'                     getComponent={getProjectSettingsTags} />
+      <Route path="notifications"              getComponent={ getNotifications }>
+        <IndexRoute                            getComponent={ getNotifications } />
+        <Route path="unread"                   getComponent={ getNotificationsUnread } />
+        <Route path="all"                      getComponent={ getNotificationsAll } />
       </Route>
     </Route>
-    <Route path='404'                          component={NotFoundView} />
-    <Route path='users/:stub'                  getComponent={getUser}>
-      <IndexRoute                              getComponent={getUserOverview} />
-      <Route path='details'                    getComponent={getUserDetails} />
-      <Route path='followers'                  getComponent={getUserFollowers} />
-      <Route path='following'                  getComponent={getUserFollowing} />
-      <Route path='projects'                   getComponent={getUserProjects} />
-      <Route path='stars'                      getComponent={getUserStars} />
+    <Route                                     component={ AppUnAuthed }>
+      <Route path="login"                      getComponent={ getLogin } />
+      <Route path="register"                   getComponent={ getRegister } />
     </Route>
-    <Redirect from='*'                         to='404' />
+    <Route path="/"                            getComponent={ getHome } />
+    <Route path="/download"                    getComponent={ getDownload } />
+    <Route path="/explore"                     getComponent={ getExplore } />
+    <Route path="/features"                    getComponent={ getFeatures } />
+    <Route path="/landing"                     getComponent={ getLanding } />
+    <Route path="/open-source"                 getComponent={ getOpenSource } />
+    <Route path="/pricing"                     getComponent={ getPricing } />
+    <Route path="/privacy"                     getComponent={ getPrivacy } />
+    <Route path="/security"                    getComponent={ getSecurity } />
+    <Route path="/terms"                       getComponent={ getTerms } />
+    <Route path="/files/:projectId/:fileId"    getComponent={ getFile } />
+    <Route path="project/:stub"                getComponent={ getProject }>
+      <IndexRoute                              getComponent={ getProjectOverview } />
+      <Route path="files/:path"                getComponent={ getProjectOverview } />
+      <Route path="tasks"                      getComponent={ getProjectTasks } />
+      <Route path="tasks/:taskId"              getComponent={ getProjectTask } />
+      <Route path="commits"                    getComponent={ getProjectCommits } />
+      <Route path="commits/:commitId"          getComponent={ getProjectCommit } />
+      <Route path="settings"                   getComponent={ getProjectSettings }>
+        <IndexRoute                            getComponent={ getProjectSettingsGeneral } />
+        <Route path="tasks"                    getComponent={ getProjectSettingsTasks } />
+        <Route path="team"                     getComponent={ getProjectSettingsTeam } />
+        <Route path="tags"                     getComponent={ getProjectSettingsTags } />
+      </Route>
+    </Route>
+    <Route path="404"                          component={ NotFoundView } />
+    <Route path="users/:stub"                  getComponent={ getUser }>
+      <IndexRoute                              getComponent={ getUserOverview } />
+      <Route path="details"                    getComponent={ getUserDetails } />
+      <Route path="followers"                  getComponent={ getUserFollowers } />
+      <Route path="following"                  getComponent={ getUserFollowing } />
+      <Route path="projects"                   getComponent={ getUserProjects } />
+      <Route path="stars"                      getComponent={ getUserStars } />
+    </Route>
+    <Redirect from="*"                         to="404" />
   </Route>
 )

@@ -19,5 +19,6 @@
     "import/extensions": 0,            // Don't require file extensions
     "import/no-extraneous-dependencies": 0,  // Allow extensions webpack aliases
     "import/no-unresolved": 0,  // Allow unresolved imports (webpack resolves)
+    "no-multi-spaces": 0,  // Allow multi spaces so things line up
   }
 }
