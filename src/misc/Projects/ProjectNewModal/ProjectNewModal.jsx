@@ -25,6 +25,7 @@ import ProjectLinkRemote from 'stemn-shared/misc/Project/ProjectLinkRemote/Proje
 import { ArrowTabs, ArrowTab } from 'stemn-shared/misc/Tabs/ArrowTabs/ArrowTabs.jsx';
 import ProjectPermissionsRadio from 'stemn-shared/misc/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import PanelDescription from 'stemn-shared/misc/Panels/PanelDescription'
 
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -137,13 +138,12 @@ export const Component = React.createClass({
       return (
         <div className="layout-column flex">
           <div className={classes.modalBody + ' layout-column flex'}>
-            <div className="text-title-2" style={{marginBottom: '15px'}}>{title}</div>
-            <div className={classes.row + ' layout-row'}>
-              <div className={classes.col + ' flex-40'}>
-                <div className="text-title-5">{blurb}</div>
-              </div>
-              <div className={classes.col + ' flex-60'}>{body}</div>
-            </div>
+            <PanelDescription
+              title={ title }
+              description={ blurb }
+            >
+              { body }
+            </PanelDescription>
           </div>
           <div className={classes.modalFooter + ' layout-row layout-align-end'}>
             <Button style={{marginRight: '10px'}} onClick={button1.onClick}>{button1.text}</Button>
@@ -207,10 +207,18 @@ export const Component = React.createClass({
       <div className={classes.stepModal + ' layout-column'}>
         <div className={classes.modalTitle}>
           <ArrowTabs className="layout-row flex">
-            {tabTitles.map(tab => <ArrowTab key={tab.title} arrow={tab.arrow}  onClick={tab.onClick} isActive={tab.isActive()}>{tab.title}</ArrowTab>)}
+            { tabTitles.map(tab => <ArrowTab
+              key={ tab.title }
+              arrow={ tab.arrow }
+              onClick={ tab.onClick }
+              isActive={ tab.isActive() }
+              >
+                { tab.title }
+              </ArrowTab>
+            )}
           </ArrowTabs>
         </div>
-        {getTab()}
+        { getTab() }
       </div>
     )
   }

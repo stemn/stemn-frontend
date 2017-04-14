@@ -1,7 +1,8 @@
-import { showConfirm } from 'stemn-shared/misc/Modal/Modal.actions.js'
-import authenticate from './Authenticate'
+import { showConfirm } from 'stemn-shared/misc/Modal/Modal.actions'
+import authenticate from './authenticate'
+import { getUser } from 'stemn-shared/misc/Users/Users.actions'
 
-export default () => (dispatch) => {
+export default () => (dispatch, getState) => {
   return dispatch(showConfirm({
     message: `
       This will <strong>overwrite</strong> parts of your Stemn user profile using information from your Linkedin profile.
@@ -9,8 +10,13 @@ export default () => (dispatch) => {
       If you are unsure, you should make a copy of your Stemn profile's summary and education sections.
     `,
   })).then((result) => {
-    dispatch(authenticate('linkedin'))
+    dispatch(authenticate('linkedin')).then((response) => {
+      // We get the new user data
+      return dispatch(getUser({
+        userId: getState().auth.user._id,
+        size: 'lg',
+        force: true,
+      }))
+    })
   })
 }
-
-

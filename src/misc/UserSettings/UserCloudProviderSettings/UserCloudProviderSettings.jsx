@@ -16,8 +16,8 @@ export default class UserCloudProviderSettings extends Component {
     return (
       <div>
         <h3>Cloud Providers</h3>
-        <p>Link your cloud file storage to STEMN to track changes to your files.</p>
-
+        <p>Link your cloud storage providers to Stemn. Your files and revision history will be automatically synced.</p>
+        <br />
         <LinkAccount
           text="Dropbox"
           isLinked={user.accounts.dropbox && user.accounts.dropbox.id}

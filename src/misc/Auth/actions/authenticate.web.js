@@ -48,7 +48,7 @@ export default (provider) => (dispatch) => {
       payload: popOauth(url)
     })
     .then(({ value: { code } }) => {
-      dispatch(sendAuthToken({
+      return dispatch(sendAuthToken({
         provider,
         code
       }))
