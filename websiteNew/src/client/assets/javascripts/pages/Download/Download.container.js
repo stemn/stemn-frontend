@@ -9,7 +9,6 @@ const stateToProps = ({ desktopReleases } ) => ({
 });
 
 const dispatchToProps = {
-  getLatest
 };
 
 @connect(stateToProps, dispatchToProps)

@@ -26,4 +26,7 @@ export const pricingRoute         = ()                        => `/pricing`
 export const landingRoute         = ()                        => `/landing`
 export const featuresRoute        = ()                        => `/features`
 export const downloadRoute        = ()                        => `/download`
-export const openSourceRoute        = ()                      => `/open-source`
+export const openSourceRoute      = ()                        => `/open-source`
+export const onboardingAboutRoute = ()                        => `/onboarding`
+export const onboardingSyncRoute  = ()                        => `/onboarding/sync`
+export const onboardingDownloadRoute  = ()                    => `/onboarding/download`

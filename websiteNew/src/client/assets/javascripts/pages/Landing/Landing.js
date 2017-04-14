@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import LandingLayout from 'layout/LandingLayout'
 import HeroBanner from 'modules/HeroBanner'
-import Button from 'stemn-shared/misc/Buttons/Button/Button'
+import DownloadButton from 'stemn-shared/misc/DesktopReleases/DownloadButton'
 import bytes from 'stemn-shared/utils/filters/bytes.js'
 import { Container } from 'stemn-shared/misc/Layout'
 import screenshot from './screenshot.png'
@@ -22,10 +22,9 @@ export default class Landing extends Component {
         <HeroBanner className={ classes.banner }>
           <h1>Download Stemn Desktop</h1>
           <h3>Collaboration tools for Engineers</h3>
-          <Button className={ classes.downloadButton + ' secondary lg'}>
-            <WindowsIcon size={24}/>
+          <DownloadButton className={ classes.downloadButton + ' secondary lg'} platform="auto" >
             Download Now
-          </Button>
+          </DownloadButton>
           <div className={ classes.screenshot }>
            <img src={screenshot}/>
           </div>

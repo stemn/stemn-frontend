@@ -18,6 +18,11 @@ import AppUnAuthed                             from 'pages/AppUnAuthed'
 import NotFoundView                            from 'pages/NotFound'
 
 // Routes that are async in prod
+import Onboarding                              from 'pages/Onboarding'
+import OnboardingAbout                         from 'pages/OnboardingAbout'
+import OnboardingSync                          from 'pages/OnboardingSync'
+import OnboardingDownload                      from 'pages/OnboardingDownload'
+
 import Download                                from 'pages/Download'
 import Explore                                 from 'pages/Explore'
 import Features                                from 'pages/Features'
@@ -62,6 +67,11 @@ import UserStars                               from 'pages/UserStars'
 export default (
   <Route                                       component={ AppRoot }>
     <Route                                     component={ AppAuthed }>
+      <Route path="onboarding"                 component={ Onboarding }>
+        <IndexRoute                            component={ OnboardingAbout } />
+        <Route path="sync"                     component={ OnboardingSync } />
+        <Route path="download"                 component={ OnboardingDownload } />
+      </Route>
       <Route path="settings"                   component={ Settings }>
         <IndexRoute                            component={ SettingsProfile } />
         <Route path="account"                  component={ SettingsAccount } />

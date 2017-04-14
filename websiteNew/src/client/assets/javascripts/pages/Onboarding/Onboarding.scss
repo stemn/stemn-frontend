@@ -1,0 +1,15 @@
+.header {
+  height: 60px;
+  background: white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  div:first-child {
+    margin-bottom: 10px;
+  }
+  padding: 50px 0;
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 50px;
+}

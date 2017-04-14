@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import LandingLayout from 'layout/LandingLayout'
 import HeroBanner from 'modules/HeroBanner'
-import Button from 'stemn-shared/misc/Buttons/Button/Button'
+import DownloadButton from 'stemn-shared/misc/DesktopReleases/DownloadButton'
 import bytes from 'stemn-shared/utils/filters/bytes.js'
 import { Container } from 'stemn-shared/misc/Layout'
 
@@ -9,24 +9,7 @@ import moment from 'moment';
 
 import classes from './Download.scss'
 
-import WindowsIcon from 'stemn-shared/assets/icons/os/windows'
-import LinuxIcon from 'stemn-shared/assets/icons/os/linux'
-import AppleIcon from 'stemn-shared/assets/icons/os/apple'
-
-const getIcon = (platform) => {
-  if (platform === 'mac') {
-    return <AppleIcon className={ classes.icon } />
-  } else if (platform === 'linux') {
-    return <LinuxIcon className={ classes.icon } />
-  } else {
-    return <WindowsIcon className={ classes.icon } />
-  }
-}
-
 export default class Download extends Component {
-  componentDidMount() {
-    this.props.getLatest()
-  }
   render() {
     const { latest } = this.props;
 
@@ -38,9 +21,9 @@ export default class Download extends Component {
           <div>Size - { bytes(latest[platform].size) }</div>
           <a className="link-primary">Release Notes</a>
         </div>
-        <Button className="secondary lg" download href={ latest[platform].browser_download_url}>
-          { getIcon(platform) } Download
-        </Button>
+        <DownloadButton className="secondary lg" platform={ platform }>
+          Download
+        </DownloadButton>
       </div>
     )
     return (

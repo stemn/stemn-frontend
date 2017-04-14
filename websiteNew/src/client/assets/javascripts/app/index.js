@@ -13,6 +13,7 @@ import initHttp from './init/initHttp';
 import initRaven from './init/initRaven';
 import initAuth from './init/initAuth';
 import { createPersistor } from 'redux-persist';
+import { getLatest } from 'stemn-shared/misc/DesktopReleases/DesktopReleases.actions'
 
 import 'styles/global/index.global.css';
 
@@ -25,6 +26,10 @@ const initReactAndRedux = (initialState) => {
   initRaven();
   initAuth(store)
   
+  // Dispatch some actions
+  // Get the latest desktop revisions
+  store.dispatch(getLatest())
+
   // Get the DOM Element that will host our React application
   const rootEl = document.getElementById('app');
 

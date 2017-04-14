@@ -1,20 +1,20 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import { persistState } from 'redux-devtools';
+import { createStore, applyMiddleware, compose } from 'redux'
+import { persistState } from 'redux-devtools'
 
 // Middleware
-import thunk         from 'redux-thunk';
-import promise       from 'redux-promise-middleware';
-import throttle      from 'stemn-shared/redux/middleware/throttle/throttle.middleware.js';
-import httpPackage   from 'stemn-shared/redux/middleware/httpPackage/httpPackage.middleware.js';
-import httpTransform from 'stemn-shared/redux/middleware/httpTransform/httpTransform.middleware.js';
-import createLogger  from 'redux-logger';
+import thunk from 'redux-thunk'
+import promise from 'redux-promise-middleware'
+import throttle from 'stemn-shared/redux/middleware/throttle/throttle.middleware.js'
+import httpPackage from 'stemn-shared/redux/middleware/httpPackage/httpPackage.middleware.js'
+import httpTransform from 'stemn-shared/redux/middleware/httpTransform/httpTransform.middleware.js'
+import createLogger from 'redux-logger'
 import { routerMiddleware } from 'react-router-redux'
 import { browserHistory } from 'react-router'
 
 
 // Other
-import rootReducer   from '../reducer';
-import DevTools      from '../../modules/DevTools';
+import rootReducer from '../reducer'
+import DevTools from '../../modules/DevTools'
 
 /**
  * Entirely optional.
