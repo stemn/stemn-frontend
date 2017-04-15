@@ -37,8 +37,10 @@ export const ArrowTabs = React.createClass({
 export const ArrowTab = React.createClass({
   propTypes: arrowTabPropTypes,
   renderLinkEl() {
-    const linkClasses = classNames(classes.tab, {active : isActive})
     const { children, isActive, arrow, name, ...otherProps } = this.props
+
+    const linkClasses = classNames(classes.tab, { active : isActive })
+
     if (name) {
       return (
         <Link className={ linkClasses } name={ name } {...otherProps }>

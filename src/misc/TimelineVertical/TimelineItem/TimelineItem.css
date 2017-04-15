@@ -1,0 +1,12 @@
+@value primary, primary-2 from "theme";
+
+.item a {
+  color: primary;
+  margin: 0 4px;
+}
+.item a:hover {
+  color: primary-2;
+}
+.avatar{
+  margin-right: 10px;
+}

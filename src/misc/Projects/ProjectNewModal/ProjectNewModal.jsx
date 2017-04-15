@@ -35,7 +35,7 @@ export const modalName = 'PROJECT_NEW';
 export const Component = React.createClass({
   getInitialState () {
     return {
-      tab: 1,
+      activeTab: 1,
       linkPending: false
     }
   },
@@ -69,12 +69,12 @@ export const Component = React.createClass({
       }
     });
   },
-  changeTab(tab){
-    this.setState({ tab: tab })
+  changeTab(activeTab){
+    this.setState({ activeTab: activeTab })
   },
   render() {
     const { newProject, entityModel, modalCancel } = this.props;
-    const { tab, linkPending } = this.state;
+    const { activeTab, linkPending } = this.state;
 
     const namePanelTemplate = () => {
       return (
@@ -154,7 +154,7 @@ export const Component = React.createClass({
     };
 
     const getTab = () => {
-      if(tab == 1){ return tabTemplate({
+      if(activeTab == 1){ return tabTemplate({
         title: 'Create Project',
         blurb: 'Enter general display details such as project name and blurb. Remember to set a blurb if you want to open-source your project.',
         body: (
@@ -172,7 +172,7 @@ export const Component = React.createClass({
           onClick: () => this.changeTab(2)
         }
       })}
-      else if(tab == 2){ return tabTemplate({
+      else if(activeTab == 2){ return tabTemplate({
         title: 'File Store',
         blurb: 'Connect a cloud provider (Dropbox or Drive). This will give you access to version control and collaboration features.',
         body: (
@@ -195,12 +195,12 @@ export const Component = React.createClass({
       title: 'General',
       arrow: true,
       onClick: () => {this.changeTab(1)},
-      isActive: () => tab == 1
+      isActive: () => activeTab === 1
     },{
       title: 'File Store',
       arrow: false,
       onClick: () => {this.changeTab(2)},
-      isActive: () => tab == 2
+      isActive: () => activeTab === 2
     }]
 
     return (

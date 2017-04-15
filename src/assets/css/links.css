@@ -1,9 +1,14 @@
 a {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a[disabled] {
+  opacity: 0.2;
+  cursor: default;
 }
 
 a:hover {
-    text-decoration: none;
-    cursor: pointer;
+  text-decoration: none;
 }

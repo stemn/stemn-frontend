@@ -1,21 +1,17 @@
-// Component Core
-import React from 'react';
-
-// Styles
-import classNames from 'classnames';
-
-// Sub Components
+import React, { Component, PropTypes } from 'react';
 import TimelineItem from './TimelineItem/TimelineItem'
 
-///////////////////////////////// COMPONENT /////////////////////////////////
-
-export default React.createClass({
+export default class TimelineVertical extends Component {
+  static propTypes = {
+    type: PropTypes.oneOf(['feed', 'user', 'file', 'task', 'project']),
+    items: PropTypes.array,
+  }
   render() {
-    const { items } = this.props;
+    const { items, type } = this.props;
     return (
       <div>
-        {items.map(item => <TimelineItem key={item._id} item={item}/>)}
+        {items.map(item => <TimelineItem key={ item._id } item={ item } type={ type } />)}
       </div>
     )
   }
-});
+};
