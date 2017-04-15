@@ -12,7 +12,6 @@ import logo from 'images/logo80x80none.png';
 import MdAdd from 'react-icons/md/add';
 import MdNotifications from 'react-icons/md/notifications';
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton';
-import SiteSearch from 'modules/SiteSearch';
 
 export default class LandingHeader extends Component {
   constructor(props) {

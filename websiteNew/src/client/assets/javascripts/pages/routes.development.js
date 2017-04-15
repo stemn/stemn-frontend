@@ -22,6 +22,7 @@ import Onboarding                              from 'pages/Onboarding'
 import OnboardingAbout                         from 'pages/OnboardingAbout'
 import OnboardingSync                          from 'pages/OnboardingSync'
 import OnboardingDownload                      from 'pages/OnboardingDownload'
+import Search                                  from 'pages/Search'
 
 import Download                                from 'pages/Download'
 import Explore                                 from 'pages/Explore'
@@ -93,13 +94,14 @@ export default (
     <Route path="/download"                    component={ Download } />
     <Route path="/explore"                     component={ Explore } />
     <Route path="/features"                    component={ Features } />
+    <Route path="/files/:projectId/:fileId"    component={ File } />
     <Route path="/landing"                     component={ Landing } />
     <Route path="/open-source"                 component={ OpenSource } />
     <Route path="/pricing"                     component={ Pricing } />
     <Route path="/privacy"                     component={ Privacy } />
+    <Route path="/search"                      component={ Search } />
     <Route path="/security"                    component={ Security } />
     <Route path="/terms"                       component={ Terms } />
-    <Route path="/files/:projectId/:fileId"    component={ File } />
     <Route path="project/:stub"                component={ Project }>
       <IndexRoute                              component={ ProjectOverview } />
       <Route path="files/:path"                component={ ProjectOverview } />

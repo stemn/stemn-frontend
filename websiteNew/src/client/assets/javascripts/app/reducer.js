@@ -7,6 +7,7 @@ import changes          from 'stemn-shared/misc/Changes/Changes.reducer.js'
 import codeSplitting    from 'stemn-shared/misc/CodeSplitting/CodeSplitting.reducer.js'
 import comments         from 'stemn-shared/misc/Comments/Comments.reducer.js'
 import commits          from 'stemn-shared/misc/Commits/Commits.reducer.js'
+import desktopReleases  from 'stemn-shared/misc/DesktopReleases/DesktopReleases.reducer.js'
 import fileCompare      from 'stemn-shared/misc/FileCompare/FileCompare.reducer.js'
 import fileList         from 'stemn-shared/misc/FileList/FileList.reducer.js'
 import fileSelect       from 'stemn-shared/misc/FileSelect/FileSelect.reducer.js'
@@ -14,21 +15,21 @@ import files            from 'stemn-shared/misc/Files/Files.reducer.js'
 import header           from 'stemn-shared/misc/Header/Header.reducer.js'
 import likes            from 'stemn-shared/misc/Likes/Likes.reducer.js'
 import mentions         from 'stemn-shared/misc/Mentions/Mentions.reducer.js'
-import notifications    from 'stemn-shared/misc/Notifications/Notifications.reducer.js'
 import modals           from 'stemn-shared/misc/Modal/Modal.reducer.js'
+import notifications    from 'stemn-shared/misc/Notifications/Notifications.reducer.js'
 import projects         from 'stemn-shared/misc/Projects/Projects.reducer.js'
+import search           from 'stemn-shared/misc/Search/Search.reducer.js'
 import sidebar          from 'stemn-shared/misc/Sidebar/Sidebar.reducer.js'
 import syncTimeline     from 'stemn-shared/misc/SyncTimeline/SyncTimeline.reducer.js'
 import tasks            from 'stemn-shared/misc/Tasks/Tasks.reducer.js'
 import toasts           from 'stemn-shared/misc/Toasts/Toasts.reducer.js'
 import togglePanel      from 'stemn-shared/misc/TogglePanel/TogglePanel.reducer.js'
 import upload           from 'stemn-shared/misc/Upload/Upload.reducer.js'
-import users            from 'stemn-shared/misc/Users/Users.reducer.js'
 import userFollowers    from 'stemn-shared/misc/UserFollowers/UserFollowers.reducer.js'
 import userFollowing    from 'stemn-shared/misc/UserFollowing/UserFollowing.reducer.js'
 import userStars        from 'stemn-shared/misc/UserStars/UserStars.reducer.js'
+import users            from 'stemn-shared/misc/Users/Users.reducer.js'
 import walkthrough      from 'stemn-shared/misc/Walkthrough/Walkthrough.reducer.js'
-import desktopReleases  from 'stemn-shared/misc/DesktopReleases/DesktopReleases.reducer.js'
 
 export default combineReducers({
   auth,
@@ -48,6 +49,7 @@ export default combineReducers({
   notifications,
   projects,
   routing,
+  search,
   sidebar,
   syncTimeline,
   tasks,

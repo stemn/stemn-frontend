@@ -5,7 +5,7 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import DownloadButton from 'stemn-shared/misc/DesktopReleases/DownloadButton'
 import Link from 'stemn-shared/misc/Router/Link'
-import PanelDescription from 'modules/PanelDescription'
+import PanelDescription from 'stemn-shared/misc/Panels/PanelDescription'
 
 import classNames from 'classnames'
 

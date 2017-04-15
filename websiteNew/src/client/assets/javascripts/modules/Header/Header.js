@@ -12,7 +12,7 @@ import logo from 'images/logo80x80.png';
 import MdAdd from 'react-icons/md/add';
 import MdNotifications from 'react-icons/md/notifications';
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton';
-import SiteSearch from 'modules/SiteSearch';
+import SiteSearch from 'stemn-shared/misc/Search/SiteSearch';
 
 class Header extends Component {
   isLoggedIn() {
