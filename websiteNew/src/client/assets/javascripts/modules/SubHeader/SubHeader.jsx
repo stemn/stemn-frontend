@@ -19,8 +19,8 @@ export default class SubHeader extends Component {
     return (
       <div className={ classes.header } style={ Object.assign({}, borderStyle, style) }>
         <Container className={classNames(classes.headerInner, 'layout-row layout-align-start-center')}>
-          <h1 className={ classes.title }>{ title }</h1>
-          <div className='flex'></div>
+          { title && <h1 className={ classes.title }>{ title }</h1> }
+          { title && <div className='flex'></div> }
           { children }
         </Container>
       </div>

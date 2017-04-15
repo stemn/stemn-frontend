@@ -6,23 +6,34 @@ import { search } from 'stemn-shared/misc/Search/Search.actions'
 
 import Search from './Search'
 
-const stateToProps = ({ search }, { location }) => ({
-  query: location.query.q || '',
-  type: location.query.type || 'project',
-  queryString: `${location.query.type}-${location.query.q}`,
-  results: search,
-})
+const stateToProps = ({ search: results }, { location }) => {
+  const size = 18
+  const page = parseInt(location.query.page || 1)
+  const query = location.query.q || ''
+  const type = location.query.type || 'project'
+
+  return {
+    query,
+    type,
+    pageId: `${type}-${query}-${page}`,
+    results,
+    size,
+    page,
+  }
+}
 
 const dispatchToProps = {
   search
 }
 
 const fetchConfigs = [{
-  hasChanged: 'queryString',
+  hasChanged: 'pageId',
   onChange: (props) => {
     props.search({
       entityType: props.type,
-      value: props.query
+      value: props.query,
+      page: props.page,
+      size: props.size,
     })
   }
 }]

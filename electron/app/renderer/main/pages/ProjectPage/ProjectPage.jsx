@@ -22,8 +22,7 @@ import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
 import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList';
 import PopoverDetails from 'stemn-shared/misc/PopoverMenu/PopoverDetails';
 import ProjectMenu from 'stemn-shared/misc/Projects/Project.menu.js';
-import MdPublic       from 'react-icons/md/public';
-import MdLockOutline  from 'react-icons/md/lock-outline';
+import PublicPrivateIcon from 'stemn-shared/misc/Icons/PublicPrivateIcon'
 import folderLockedVector   from 'stemn-shared/assets/images/pure-vectors/folder-locked.svg';
 import globalVector   from 'stemn-shared/assets/images/pure-vectors/global.svg';
 
@@ -135,7 +134,9 @@ class Component extends React.Component{
             </div>
             <PopoverMenu preferPlace="below" tipSize={6} trigger="click">
               <SimpleIconButton title="Visibility Settings">
-                {has(project, 'data.permissions.projectType') && project.data.permissions.projectType == 'public' ? <MdPublic style={{color: '#bbe8bb'}} size={20}/> : <MdLockOutline style={{color: '#bbe8bb'}} size={20}/>}
+                { has(project, 'data.permissions.projectType') && project.data.permissions.projectType == 'public'
+                ? <PublicPrivateIcon type="public" size={ 20 } />
+                : <PublicPrivateIcon type="private" size={ 20 } /> }
               </SimpleIconButton>
               {has(project, 'data.permissions.projectType') ? getVisibilityPopup() : null}
             </PopoverMenu>
