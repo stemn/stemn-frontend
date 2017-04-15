@@ -13,6 +13,7 @@ export default class Pagination extends Component {
     page: PropTypes.number.isRequired,
     noMoreResults: PropTypes.bool.isRequired,
     path: PropTypes.string.isRequired,
+    query: PropTypes.object, // query params to be extended
   }
 
   static defaultProps = {
@@ -21,16 +22,26 @@ export default class Pagination extends Component {
   }
 
   render() {
-    const { noMoreResults, page, path } = this.props;
+    const { noMoreResults, page, query, path } = this.props;
+
+    const routePrev = {
+      pathname: path,
+      query: Object.assign({}, query, { page: parseInt(page) - 1})
+    }
+    const nextRoute = {
+      pathname: path,
+      query: Object.assign({}, query, { page: parseInt(page) + 1})
+    }
+
     return (
       <div className='layout-row layout-align-end-center'>
         { page > 1
-        ? <Link to={`${ path }?page=${ parseInt(page) - 1 }`} className={ classes.button + ' layout-column layout-align-center-center'}>
+        ? <Link to={ routePrev } className={ classes.button + ' layout-column layout-align-center-center'}>
             <MdChevronLeft size={ 20 } />
           </Link>
         : null }
         { !noMoreResults
-        ? <Link to={`${ path }?page=${ parseInt(page) + 1 }`} className={ classes.button + ' layout-column layout-align-center-center'}>
+        ? <Link to={ nextRoute } className={ classes.button + ' layout-column layout-align-center-center'}>
             <MdChevronRight size={ 20 } />
           </Link>
         : null }

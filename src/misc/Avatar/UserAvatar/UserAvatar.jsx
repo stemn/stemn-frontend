@@ -16,6 +16,8 @@ export default React.createClass({
       borderRadius    : shape == 'square' ? '3px' : '50%',
       width           : size+'px' || '30px',
       height          : size+'px' || '30px',
+      minHeight       : size+'px' || '30px',
+      minWidth        : size+'px' || '30px',
       backgroundColor : 'rgba(0, 0, 0, 0.03)'
     };
     const actualStyles = Object.assign({}, style, styles);

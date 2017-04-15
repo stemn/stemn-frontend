@@ -13,12 +13,12 @@ export default class Highlight extends Component {
   }
   
   render() {
-    const { text, query, hightlightClass } = this.props;
+    const { text, query, hightlightClass, ...otherProps } = this.props;
     const matches = AutosuggestHighlight.match(text, query);
     const parts = AutosuggestHighlight.parse(text, matches);
     
     return (
-      <span>
+      <span { ...otherProps }>
         { parts.map((part, index) => {
             const className = part.highlight ? hightlightClass : null;
             return (

@@ -19,7 +19,7 @@ const propTypesObject = {
 };
 
 const LinkComponent = (props) => {
-  const { name, params, activeIf, to, className, scope, show, closeModals, onClick, ...otherProps } = props
+  const { name, params, activeIf, to, className, scope, show, closeModals, onClick, query, ...otherProps } = props
 
   // Get the path from the route name
   const routePath = getRoutePath(name, params)
@@ -37,9 +37,11 @@ const LinkComponent = (props) => {
 
   const toWithPath = routePath ? {
     pathname: routePath,
+    query: query,
     state: routeState
   } : {
     pathname: to,
+    query: query,
     state: routeState
   }
 

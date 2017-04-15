@@ -1,0 +1,11 @@
+.groupTitle {
+  margin-bottom: 10px;
+}
+.group {
+  margin-bottom: 15px;
+/*
+  padding: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: white;
+*/
+}
