@@ -7,7 +7,7 @@ import { Container } from 'stemn-shared/misc/Layout'
 
 export default class SubHeader extends Component {
   static propTypes = {
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string,
     children: PropTypes.node,
     noline: PropTypes.bool,
     style: PropTypes.object,
