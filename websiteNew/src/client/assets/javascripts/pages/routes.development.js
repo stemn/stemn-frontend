@@ -23,6 +23,8 @@ import OnboardingAbout                         from 'pages/OnboardingAbout'
 import OnboardingSync                          from 'pages/OnboardingSync'
 import OnboardingDownload                      from 'pages/OnboardingDownload'
 import Search                                  from 'pages/Search'
+import Field                                   from 'pages/Field'
+import FieldOverview                           from 'pages/FieldOverview'
 
 import Download                                from 'pages/Download'
 import Explore                                 from 'pages/Explore'
@@ -91,6 +93,9 @@ export default (
       <Route path="register"                   component={ Register } />
     </Route>
     <Route path="/"                            component={ Home } />
+    <Route path="/fields/:fieldId"             component={ Field }>
+      <IndexRoute                              component={ FieldOverview } />
+    </Route>
     <Route path="/download"                    component={ Download } />
     <Route path="/explore"                     component={ Explore } />
     <Route path="/features"                    component={ Features } />
