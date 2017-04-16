@@ -1,24 +1,3 @@
 {
-  "extends": "airbnb",
-
-  "env": {
-    "node": true,
-    "browser": true,
-  },
-
-  "globals": {
-    "GLOBAL_ENV": true,
-  },
-
-  "rules": {
-    "linebreak-style": 0,              // Both CRLF/LF are fine
-    "semi": ["error", "never"],        // Never allow semi colons
-    "no-underscore-dangle": 0,         // Allow _ in var names such as _id
-    "react/jsx-curly-spacing": [2, "always"], // Use spaces in jsx around vars
-    "import/first": 0,                 // Don't force absolute imports to be first
-    "import/extensions": 0,            // Don't require file extensions
-    "import/no-extraneous-dependencies": 0,  // Allow extensions webpack aliases
-    "import/no-unresolved": 0,  // Allow unresolved imports (webpack resolves)
-    "no-multi-spaces": 0,  // Allow multi spaces so things line up
-  }
+  "extends": "stemn",
 }
