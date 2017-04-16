@@ -40,6 +40,9 @@ export default class Pagination extends Component {
             <MdChevronLeft size={ 20 } />
           </Link>
         : null }
+        <div className={ classes.indicator + ' layout-column layout-align-center-center'}>
+          Page: { page }
+        </div>
         { !noMoreResults
         ? <Link to={ nextRoute } className={ classes.button + ' layout-column layout-align-center-center'}>
             <MdChevronRight size={ 20 } />

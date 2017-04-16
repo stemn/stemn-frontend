@@ -1,6 +1,6 @@
 import { replace } from 'react-router-redux'
 
-export const search = ({ entityType, value, size = 20, page = 1 }) => ({
+export const search = ({ entityType, value, size = 20, page = 1, parentType, parentId }) => ({
   type: 'SEARCH/SEARCH',
   http: true,
   payload: {
@@ -12,6 +12,8 @@ export const search = ({ entityType, value, size = 20, page = 1 }) => ({
       value: value,
       size,
       page,
+      parentType,
+      parentId,
       match: 'regex'
     },
   },

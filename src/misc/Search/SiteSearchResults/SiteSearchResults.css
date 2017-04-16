@@ -1,0 +1,6 @@
+.results {
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: white;
+  min-height: 70px;
+}

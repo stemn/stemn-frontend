@@ -13,3 +13,13 @@
 .button:hover {
   background: bg1;
 }
+
+.indicator {
+  margin-top: 10px;
+  padding: 0 10px;
+  margin-left: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.2);
+  height: 30px;
+  cursor: default;
+}

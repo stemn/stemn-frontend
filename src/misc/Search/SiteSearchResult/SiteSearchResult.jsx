@@ -5,9 +5,44 @@ import Highlight from 'stemn-shared/misc/Autosuggest/Highlight'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import Link from 'stemn-shared/misc/Router/Link'
 
+const getRouteNameAndParams = (result) => {
+  if (result.entityType === 'project') {
+    return {
+      name: 'projectRoute',
+      params: {
+        projectId: result._id
+      }
+    }
+  } else if (result.entityType === 'task') {
+    return {
+      name: 'taskRoute',
+      params: {
+        taskId: result._id
+      }
+    }
+  } else if (result.entityType === 'user') {
+    return {
+      name: 'userRoute',
+      params: {
+        userId: result._id
+      }
+    }
+  } else if (result.entityType === 'commit') {
+    return {
+      name: 'commitRoute',
+      params: {
+        commitId: result._id
+      }
+    }
+  } else {
+    return {}
+  }
+}
+
 export default class SiteSearchResult extends Component {
   render() {
     const { result, query } = this.props
+    const route = getRouteNameAndParams(result)
 
     return (
       <div className={ classNames('layout-row layout-align-start-center', classes.result) } >
@@ -19,7 +54,7 @@ export default class SiteSearchResult extends Component {
           className={ classes.avatar }
         />
         <div className="flex">
-          <Link className="link-primary">
+          <Link className="link-primary" name={ route.name } params={ route.params }>
             <Highlight
               className="text-ellipsis"
               text={ result.name }

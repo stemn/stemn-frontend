@@ -11,6 +11,11 @@ export default class Highlight extends Component {
     // The class to be applied to the highlighted section
     hightlightClass: PropTypes.string.isRequired,
   }
+  static defaultProps = {
+    text: '',
+    query: '',
+    hightlightClass: 'bold'
+  }
   
   render() {
     const { text, query, hightlightClass, ...otherProps } = this.props;

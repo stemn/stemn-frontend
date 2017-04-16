@@ -26,7 +26,7 @@ export default class SiteSearch extends Component {
     }
 
     return (
-      <form className={ classNames('layout-row layout-align-start-center', classes.search) }  ame="siteSearch" onSubmit={ onSubmit }>
+      <form className={ classNames('layout-row layout-align-start-center', classes.search) } name="siteSearch" onSubmit={ onSubmit }>
         <Input
           className="flex"
           placeholder="Search"
