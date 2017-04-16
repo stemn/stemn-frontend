@@ -10,12 +10,12 @@ export default React.createClass({
   render() {
     const { text, className, children, ...otherProps } = this.props;
     return (
-      <a className={classNames(classes.tag, className)} { ...otherProps }>
+      <div className={classNames(classes.tag, className)} { ...otherProps }>
         <div className={ classes.tagInner }>
           { children }
           { middleConcat(text, 30) }
         </div>
-      </a>
+      </div>
     )
   }
 });

@@ -7,23 +7,23 @@ import Pagination from 'stemn-shared/misc/Pagination'
 
 export default class SiteSearchResults extends Component {
   render() {
-    const { results, size, page, location } = this.props
-    const noResults = !results.loading && !get(results, ['data', 'length']) > 0
+    const { results, size, page, location, query } = this.props
+    const noResults = results && !results.loading && !get(results, ['data', 'length']) > 0
     const noMoreResults = results && results.data && results.data.length < size
 
     return (
       <div>
         <div className={ classes.results + ' layout-column'}>
           <LoadingOverlay
-            show={ results.loading }
+            show={ !results || results.loading }
             linear
-            style={ { background: 'rgba(255, 255, 255, 0.8)' } }
+            noOverlay
           />
-          { results.data.map((result) => (
+          { results && results.data && results.data.map((result) => (
             <SiteSearchResult
               key={ result._id }
               result={ result }
-              query={ results.query }
+              query={ query }
             />
           )) }
           { noResults && <div className="layout-column flex layout-align-center-center text-title-5">No Search Results</div> }

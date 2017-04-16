@@ -34,6 +34,13 @@ const getRouteNameAndParams = (result) => {
         commitId: result._id
       }
     }
+  } else if (result.entityType === 'field') {
+    return {
+      name: 'fieldRoute',
+      params: {
+        fieldId: result._id
+      }
+    }
   } else {
     return {}
   }
@@ -41,7 +48,7 @@ const getRouteNameAndParams = (result) => {
 
 export default class SiteSearchResult extends Component {
   render() {
-    const { result, query } = this.props
+    const { result, searchQuery } = this.props
     const route = getRouteNameAndParams(result)
 
     return (
@@ -58,7 +65,7 @@ export default class SiteSearchResult extends Component {
             <Highlight
               className="text-ellipsis"
               text={ result.name }
-              query={ query }
+              query={ searchQuery }
               hightlightClass={ classes.highlight }
             />
           </Link>

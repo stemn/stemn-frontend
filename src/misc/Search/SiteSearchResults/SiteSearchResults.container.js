@@ -6,19 +6,22 @@ import { search } from 'stemn-shared/misc/Search/Search.actions'
 
 import SiteSearchResults from './SiteSearchResults'
 
-const stateToProps = ({ search: results, routing }, { page, query, type, size, parentType, parentId }) => {
+const stateToProps = ({ search, routing }, { page, query, type, size, parentType, parentId }) => {
   // Add some defaults
   const _type = type || 'project'
   const _page = page || 1
-  const _query = query || ''
+  const _query = query
   const _size = size || 30
 
+  const cacheKey = `${_type}-${query}-${_page}-${parentType}-${parentId}`
+  console.log(cacheKey);
   return {
     query: _query,
     type: _type,
     page: _page,
-    pageId: `${_type}-${_query}-${_page}-${parentType}-${parentId}`,
-    results,
+    cacheKey,
+    results: search.data[cacheKey],
+    searchQuery: search.query,
     size: _size,
     location: routing.locationBeforeTransitions,
   }
@@ -29,8 +32,9 @@ const dispatchToProps = {
 }
 
 const fetchConfigs = [{
-  hasChanged: 'pageId',
+  hasChanged: 'cacheKey',
   onChange: (props) => {
+    console.log(props.cacheKey);
     props.search({
       entityType: props.type,
       parentType: props.parentType,
