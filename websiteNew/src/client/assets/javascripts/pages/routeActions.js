@@ -30,3 +30,4 @@ export const openSourceRoute      = ()                        => `/open-source`
 export const onboardingAboutRoute = ()                        => `/onboarding`
 export const onboardingSyncRoute  = ()                        => `/onboarding/sync`
 export const onboardingDownloadRoute  = ()                    => `/onboarding/download`
+export const fieldRoute           = ({ fieldId })             => `/fields/${fieldId}`

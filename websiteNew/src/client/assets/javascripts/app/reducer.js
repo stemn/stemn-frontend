@@ -31,6 +31,7 @@ import userStars        from 'stemn-shared/misc/UserStars/UserStars.reducer.js'
 import users            from 'stemn-shared/misc/Users/Users.reducer.js'
 import walkthrough      from 'stemn-shared/misc/Walkthrough/Walkthrough.reducer.js'
 import fields           from 'stemn-shared/misc/Fields/Fields.reducer.js'
+import relatedFields    from 'stemn-shared/misc/RelatedFields/RelatedFields.reducer.js'
 
 export default combineReducers({
   auth,
@@ -51,6 +52,7 @@ export default combineReducers({
   notifications,
   projects,
   routing,
+  relatedFields,
   search,
   sidebar,
   syncTimeline,

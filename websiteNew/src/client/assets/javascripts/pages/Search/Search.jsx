@@ -31,12 +31,11 @@ export default class Search extends Component {
               <SiteSearchResults
                 query={ location.query.q }
                 type={ location.query.type }
-                page={ location.query.page }
+                page={ parseInt(location.query.page) }
                 size={ 30 }
               />
             </Col>            
             <Col className="flex-30">
-
             </Col>
           </Row>
         </Container>

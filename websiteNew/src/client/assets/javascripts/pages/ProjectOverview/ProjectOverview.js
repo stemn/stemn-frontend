@@ -14,6 +14,8 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import Tag from 'stemn-shared/misc/Tags/Tag'
 import LikeButton from 'stemn-shared/misc/Likes/LikeButton'
 import SubSubHeader from 'modules/SubSubHeader'
+import Link from 'stemn-shared/misc/Router/Link'
+
 
 import MdLocationOn from 'react-icons/md/location-on'
 import MdPeople from 'react-icons/md/people'
@@ -94,7 +96,11 @@ export default class ProjectOverview extends Component {
             : null }
             <div className='layout-row layout-align-start-center'>
               <div className={ classes.tags }>
-                { project.data.fields.map((field) => <Tag className='primary' key={ field._id } text={ field.name } /> )}
+                { project.data.fields.map((field) => (
+                  <Link key={ field._id } name="fieldRoute" params={{ fieldId: field.stub }}>
+                    <Tag className="primary" text={ field.name } />
+                  </Link>
+                ))}
               </div>
               <div className="flex" />
               <LikeButton
