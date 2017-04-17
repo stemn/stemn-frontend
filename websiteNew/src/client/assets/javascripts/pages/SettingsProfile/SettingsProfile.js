@@ -9,6 +9,7 @@ import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton.jsx'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import Upload from 'stemn-shared/misc/Upload/Upload'
+import LocationSearch from 'stemn-shared/misc/Search/LocationSearch'
 
 export default class SettingsProfile extends Component {
   saveUser = () => {
@@ -44,7 +45,6 @@ export default class SettingsProfile extends Component {
                 />
               </div>
               <br />
-              <br />
               <h3>Blurb</h3>
               <Textarea
                 model={`${entityModel}.data.profile.blurb`}
@@ -52,6 +52,21 @@ export default class SettingsProfile extends Component {
                 className="dr-input"
                 type="text"
                 placeholder="Profile blurb"
+              />
+              <br />
+              <h3>Website</h3>
+              <Input
+                model={`${entityModel}.data.profile.socialLinks.website`}
+                value={user.data.profile.socialLinks.website}
+                className="dr-input flex"
+                type="text"
+              />
+              <br />
+              <h3>Location</h3>
+              <LocationSearch
+                cacheKey={ user.data._id }
+                model={ `${entityModel}.data.profile.location[0]` }
+                value={ user.data.profile.location[0] }
               />
               <br />
               <ProgressButton
