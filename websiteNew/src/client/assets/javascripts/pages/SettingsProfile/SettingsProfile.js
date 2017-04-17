@@ -2,8 +2,7 @@ import React, { Component, PropTypes } from 'react'
 
 import classes from './SettingsProfile.css'
 
-import UserNameSettings from 'stemn-shared/misc/UserSettings/UserNameSettings'
-import UserEmailSettings from 'stemn-shared/misc/UserSettings/UserEmailSettings'
+import UserExperienceSettings from 'stemn-shared/misc/UserSettings/UserExperienceSettings'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import { Row, Col } from 'stemn-shared/misc/Layout'
 import Input from 'stemn-shared/misc/Input/Input/Input'
@@ -59,7 +58,7 @@ export default class SettingsProfile extends Component {
               <ProgressButton
                 className="primary"
                 loading={ user.savePending }
-                onClick={ saveUser }>
+                onClick={ this.saveUser }>
                 Save Profile
               </ProgressButton>
             </Col>
@@ -75,6 +74,10 @@ export default class SettingsProfile extends Component {
             </Col>
           </Row>
         </InfoPanel>
+        <UserExperienceSettings
+          experience={user.data.profile.profileDetails.experience}
+          experienceModel={ `${entityModel}.data.profile.profileDetails.experience` }
+        />
         <InfoPanel>
           <h3>Detailed Summary</h3>
           <Textarea

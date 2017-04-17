@@ -15,7 +15,8 @@ class Settings extends Component {
           <Row className="layout-row">
             <Col style={ { width: '250px' } }>
               <NavPillContainer>
-                <NavPill to='/settings' onlyActiveOnIndex={true}>Profile</NavPill>
+                <NavPill to='/settings' onlyActiveOnIndex={true}>Basic Profile</NavPill>
+                <NavPill to='/settings/details'>Detailed Profile</NavPill>
                 <NavPill to='/settings/account'>Account</NavPill>
                 <NavPill to='/settings/emails'>Emails</NavPill>
                 <NavPill to='/settings/billing'>Billing</NavPill>

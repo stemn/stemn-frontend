@@ -25,6 +25,7 @@ import OnboardingDownload                      from 'pages/OnboardingDownload'
 import Search                                  from 'pages/Search'
 import Field                                   from 'pages/Field'
 import FieldOverview                           from 'pages/FieldOverview'
+import SettingsProfileDetails                  from 'pages/SettingsProfileDetails'
 
 import Download                                from 'pages/Download'
 import Explore                                 from 'pages/Explore'
@@ -77,6 +78,7 @@ export default (
       </Route>
       <Route path="settings"                   component={ Settings }>
         <IndexRoute                            component={ SettingsProfile } />
+        <Route path="details"                  component={ SettingsProfileDetails } />
         <Route path="account"                  component={ SettingsAccount } />
         <Route path="billing"                  component={ SettingsBilling } />
         <Route path="emails"                   component={ SettingsEmails } />
