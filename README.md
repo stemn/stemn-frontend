@@ -1,7 +1,6 @@
 ## Usage
 
 ### Babel and Webpack Setup
-* `npm install` to make sure the babel presets are installed.
 * Make sure there is a babel-loader (that includes `stemn-frontend-shared`) in the main webpack.config:
 ```
   {
@@ -18,3 +17,6 @@
   'route-actions'    : path.resolve(__dirname, './src/routeActions.js'),
   'stemn-shared'     : path.resolve(__dirname, './node_modules/stemn-frontend-shared/src'),
 ```
+
+### Eslint
+The package.json contains a link to stemns eslint settings. These are in the `stemn-eslint` repo which is shared between projects.

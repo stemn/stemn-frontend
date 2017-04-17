@@ -14,7 +14,6 @@ const stateToProps = ({ search, routing }, { page, query, type, size, parentType
   const _size = size || 30
 
   const cacheKey = `${_type}-${query}-${_page}-${parentType}-${parentId}`
-  console.log(cacheKey);
   return {
     query: _query,
     type: _type,

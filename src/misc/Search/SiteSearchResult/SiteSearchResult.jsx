@@ -6,43 +6,42 @@ import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import Link from 'stemn-shared/misc/Router/Link'
 
 const getRouteNameAndParams = (result) => {
+  console.log(result);
   if (result.entityType === 'project') {
     return {
       name: 'projectRoute',
       params: {
-        projectId: result._id
-      }
+        projectId: result._id,
+      },
     }
   } else if (result.entityType === 'task') {
     return {
       name: 'taskRoute',
       params: {
-        taskId: result._id
-      }
-    }
-  } else if (result.entityType === 'user') {
-    return {
-      name: 'userRoute',
-      params: {
-        userId: result._id
-      }
+        taskId: result._id,
+      },
     }
   } else if (result.entityType === 'commit') {
     return {
       name: 'commitRoute',
       params: {
-        commitId: result._id
-      }
+        commitId: result._id,
+      },
     }
   } else if (result.entityType === 'field') {
     return {
       name: 'fieldRoute',
       params: {
-        fieldId: result._id
-      }
+        fieldId: result._id,
+      },
     }
   } else {
-    return {}
+    return {
+      name: 'userRoute',
+      params: {
+        userId: result._id,
+      },
+    }
   }
 }
 
