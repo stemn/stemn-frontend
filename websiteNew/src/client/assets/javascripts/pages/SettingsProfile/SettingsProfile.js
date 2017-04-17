@@ -51,7 +51,6 @@ export default class SettingsProfile extends Component {
                 value={user.data.profile.blurb}
                 className="dr-input"
                 type="text"
-                placeholder="Profile blurb"
               />
               <br />
               <h3>Website</h3>

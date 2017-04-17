@@ -8,20 +8,17 @@ import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import { Row, Col, Container } from 'stemn-shared/misc/Layout'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import UserNavHeader from 'modules/UserNavHeader'
+import { get } from 'lodash'
 
-import MdLocationOn from 'react-icons/md/location-on';
-import MdLink from 'react-icons/md/link';
+import MdLocationOn from 'react-icons/md/location-on'
+import MdLink from 'react-icons/md/link'
 
 class User extends Component {
   renderComplete() {
     const { user, children, currentUser } = this.props
-
-    const isCurrentUser = user.data._id === currentUser._id
-
-    const baseUrl = `/users/${user.data._id}`
     return (
       <div>
-        <UserNavHeader user={ user } currentUser={ currentUser }/>
+        <UserNavHeader user={ user } currentUser={ currentUser } />
         <Container>
           <Row className='layout-column layout-gt-xs-row'>
             <Col className={ classes.sidebar }>
@@ -36,14 +33,18 @@ class User extends Component {
                 <h2 className={ classes.name }>{ user.data.name }</h2>
                 <h3 className={ classes.blurb }>{ user.data.blurb }</h3>
                 <hr />
-                <div className={ classes.iconInfo}>
-                  <MdLocationOn size={20} />
-                  Sydney, Australia
-                </div>               
-                <div className={ classes.iconInfo}>
-                  <MdLink size={20} />
-                  davidrevay.com
-                </div>
+                { get(user, 'data.profile.location[0].name') &&
+                  <div className={ classes.iconInfo}>
+                    <MdLocationOn size={20} />
+                    { user.data.profile.location[0].name }
+                  </div>
+                }
+                { get(user, 'data.profile.socialLinks.website') &&
+                  <div className={ classes.iconInfo}>
+                    <MdLink size={20} />
+                    { user.data.profile.socialLinks.website }
+                  </div>
+                }
               </div>
             </Col>
             <Col className='flex'>
