@@ -46,6 +46,7 @@ export default class GeneralSettings extends Component {
               key={ field._id }
               text={ field.name }
               className='primary'
+              style={ { marginBottom: '6px' } }
               onClick={ () => this.removeField(field._id)}
             />
           ))}

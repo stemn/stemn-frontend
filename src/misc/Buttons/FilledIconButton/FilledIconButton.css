@@ -1,0 +1,26 @@
+@value primary, primary-2, secondary, secondary-2, warn, warn-2, grey-3, bg1, linkedin, linkedin-dark, facebook, facebook-dark from 'theme';
+
+.button {
+  border-radius: 50%;
+  padding: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: 0.2s ease all;
+}
+
+.button:global(.primary){
+  background: primary;
+  color: white;
+}
+.button:global(.primary):hover{
+  background: primary-2;
+}
+
+.button:global(.warn){
+  background: warn;
+  color: white;
+}
+.button:global(.warn):hover{
+  background: warn-2;
+}

@@ -36,7 +36,7 @@ export default class TimelineItem extends Component {
             </div>
             <div>
               <b>{ item.user.name }&nbsp;</b>
-              <span className="text-grey-3 text-ellipsis">
+              <span className="text-grey-3" style={ { lineHeight: '1.4em' } }>
                 <TimelineItemText item={ item } type={ type }/> - { moment(item.timestamp).fromNow() }
               </span>
             </div>

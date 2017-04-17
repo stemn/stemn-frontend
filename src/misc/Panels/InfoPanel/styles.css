@@ -5,6 +5,7 @@
   background: white;
   border: 1px solid border1;
   margin-bottom: 15px;
+  position: relative;
 }
 .root h3{
   margin-top: 0px;
