@@ -135,6 +135,7 @@ class File extends Component {
               <SectionTitle className={ classes.sidebarTitle }>Timeline</SectionTitle>
               <TimelineVertical
                 items={ syncTimeline.data }
+                type="file"
               />
             </aside>
           </DragResize>

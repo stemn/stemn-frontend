@@ -2,15 +2,13 @@ import React, { Component, PropTypes } from 'react'
 
 import classes from './SettingsProfile.css'
 
-import UserExperienceSettings from 'stemn-shared/misc/UserSettings/UserExperienceSettings'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import { Row, Col } from 'stemn-shared/misc/Layout'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton.jsx'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
-
-//import Upload from 'stemn-shared/misc/Upload/Upload'
+import Upload from 'stemn-shared/misc/Upload/Upload'
 
 export default class SettingsProfile extends Component {
   saveUser = () => {
@@ -20,6 +18,7 @@ export default class SettingsProfile extends Component {
   }
   render() {
     const { user, entityModel } = this.props
+    console.log(user);
     return (
       <div>
         <InfoPanel>
@@ -64,20 +63,17 @@ export default class SettingsProfile extends Component {
             </Col>
             <Col className={ classes.avatarCol }>
               <h3>Profile Picture</h3>
-              <UserAvatar
-                name={ user.data.name }
-                picture={ user.data.picture }
-                shape='square'
-                size={ 220 }
-                className={ classes.avatar }
+              <Upload
+                containerClassName={ classes.container }
+                imageClassName={ classes.avatar }
+                model={ `${entityModel}.data.profile.picture` }
+                value={ user.data.profile.picture }
+                uploadId="UserSettingsAvatar"
               />
             </Col>
           </Row>
         </InfoPanel>
-        <UserExperienceSettings
-          experience={user.data.profile.profileDetails.experience}
-          experienceModel={ `${entityModel}.data.profile.profileDetails.experience` }
-        />
+
         <InfoPanel>
           <h3>Detailed Summary</h3>
           <Textarea
@@ -100,10 +96,3 @@ export default class SettingsProfile extends Component {
   }
 }
 
-
-//              <Upload
-//                square={ true }
-//                model={ `${entityModel}.data.profile.picture` }
-//                value={ user.data.profile.picture }
-//                uploadId='user-avatar'
-//              />
