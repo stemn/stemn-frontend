@@ -41,7 +41,7 @@ export default class LocationSearch extends Component {
 
     return (
       <Autosuggest
-        initialValue={ value.name }
+        initialValue={ value ? value.name : '' }
         cacheKey={ `location-search-${cacheKey}` }
         select={ this.select }
         renderSuggestion={ this.renderSuggestion }

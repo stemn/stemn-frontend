@@ -8,6 +8,7 @@ import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressBut
 import { Row, Col } from 'stemn-shared/misc/Layout'
 import Upload from 'stemn-shared/misc/Upload/Upload'
 import classes from './GeneralSettings.css'
+import LocationSearch from 'stemn-shared/misc/Search/LocationSearch'
 
 export default class GeneralSettings extends Component {
   static propTypes = {
@@ -21,11 +22,11 @@ export default class GeneralSettings extends Component {
     })
   }
   render() {
-    const { entityModel, project, saveProject } = this.props;
+    const { entityModel, project, saveProject } = this.props
     return (
       <div>
         <Row className="layout-xs-col layout-gt-xs-row">
-          <Col className="layout-column flex">
+          <Col className="flex">
             <h3>Project name</h3>
             <Input
               model={`${entityModel}.data.name`}
@@ -40,16 +41,21 @@ export default class GeneralSettings extends Component {
               model={`${entityModel}.data.summary`}
               value={project.data.summary}
               className="dr-input"
-              style={{minHeight: '70px'}}
               placeholder="Project Summary"
             />
             <br />
-            <div className="flex" />
+            <h3>Location</h3>
+            <LocationSearch
+              cacheKey={ entityModel }
+              model={ `${entityModel}.data.location[0]` }
+              value={ project.data.location[0] }
+            />
+            <br />
             <div className="layout-row">
               <ProgressButton
                 className="primary"
-                onClick={this.saveProject}
-                loading={project.savePending}
+                onClick={ this.saveProject }
+                loading={ project.savePending }
               >Update Project</ProgressButton>
             </div>
           </Col>
@@ -68,11 +74,3 @@ export default class GeneralSettings extends Component {
     )
   }
 }
-
-//            <ProjectPermissionsRadio
-//              model={`${entityModel}.data.permissions.projectType`}
-//              value={
-//              has(project, 'data.permissions.projectType')
-//              ? project.data.permissions.projectType
-//              : '' }
-//            />
