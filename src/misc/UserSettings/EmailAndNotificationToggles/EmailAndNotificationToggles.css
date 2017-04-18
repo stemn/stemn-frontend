@@ -1,0 +1,16 @@
+.parentRow {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+.childRow {
+  margin: 15px 0;
+}
+
+.toggle {
+  margin-left: 30px;
+}
+.miniToggle {
+  font-size: 10px;
+}

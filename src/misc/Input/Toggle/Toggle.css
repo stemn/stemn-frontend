@@ -1,5 +1,9 @@
 @value primary from "theme";
 
+.toggle:global(.disabled) {
+  pointer-events: none;
+  opacity: 0.4;
+}
 .toggle input{
   display: none;
 }
@@ -45,4 +49,7 @@
 }
 .toggle input:global(.checked) + label:after {
   left: 50%;
+}
+.toggle input:global(.semi) + label:after {
+  left: 25%;
 }
