@@ -1,12 +1,15 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { actions } from 'react-redux-form';
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
+import { actions } from 'react-redux-form'
+import { get } from 'lodash'
 
 
-const stateToProps = () => ({});
+const stateToProps = () => ({
+})
+
 const dispatchToProps = {
   load: actions.load,
-};
+}
 
 @connect(stateToProps, dispatchToProps)
 export default class Form extends Component {
@@ -19,9 +22,10 @@ export default class Form extends Component {
     this.props.load(this.props.model, this.props.value);
   }
   render() {
+    const { children } = this.props
     return (
       <form>
-        { this.props.children }
+        { children }
       </form>
     )
   }

@@ -6,7 +6,6 @@ import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import Link from 'stemn-shared/misc/Router/Link'
 
 const getRouteNameAndParams = (result) => {
-  console.log(result);
   if (result.entityType === 'project') {
     return {
       name: 'projectRoute',

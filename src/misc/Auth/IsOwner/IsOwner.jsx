@@ -1,23 +1,36 @@
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
+import { permissionsIsMin } from 'stemn-shared/misc/Auth/Auth.utils'
 
-const propTypesObject = {
-  ownerId  : PropTypes.string,
-  userId   : PropTypes.string.isRequired,
-  children : PropTypes.node.isRequired,
-};
-
-export const IsOwner = React.createClass({
-  propTypes: propTypesObject,
-  render() {
-    const { userId, ownerId, children } = this.props
-    return ownerId == userId ? children : null
+class IsOwner extends Component {
+  static propTypes = {
+    ownerId: PropTypes.string,
+    team: PropTypes.array,
+    userId: PropTypes.string.isRequired,
+    children: PropTypes.node.isRequired,
+    minRole: PropTypes.string,
   }
-});
+  render() {
+    const { userId, minRole, team, ownerId, children } = this.props
+    let template = null
 
-function mapStateToProps({auth}) {
-  return {
-    userId: auth.user._id,
-  };
+    if (ownerId && ownerId === userId) {
+      // If we are just checking owner... Do it
+      template = children
+    } else if (team) {
+      // If we are checking team permissions...
+      const userInfo = team.find(member => member._id === userId)
+      if (userInfo && userInfo.permissions && permissionsIsMin(userInfo.permissions.role, minRole)) {
+        template = children
+      }
+    }
+
+    return template
+  }
 }
+
+const mapStateToProps = ({auth}) => ({
+  userId: auth.user._id,
+})
+
 export default connect(mapStateToProps)(IsOwner);

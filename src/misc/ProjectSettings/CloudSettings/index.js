@@ -4,42 +4,58 @@ import { has } from 'lodash';
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton';
 import FileSelectInput from 'stemn-shared/misc/FileSelectInput/FileSelectInput.jsx'
 import ProjectLinkRemote from 'stemn-shared/misc/Project/ProjectLinkRemote/ProjectLinkRemote.jsx'
+import Form from 'stemn-shared/misc/Forms/Form'
 
-export default class GeneralSettings extends Component {
+export default class CloudSettings extends Component {
   static propTypes = {
-    entityModel: PropTypes.string.isRequired,
+    projectModel: PropTypes.string.isRequired,
     project: PropTypes.object.isRequired,
     confirmLinkRemote: PropTypes.func.isRequired,
   }
-  render() {
-    const { entityModel, project, confirmLinkRemote } = this.props;
+  renderFormInner() {
+    const { projectModel, project, confirmLinkRemote } = this.props
     return (
       <div>
-         <h3>Cloud Storage Folder</h3>
-         <p>Select your project's cloud storage folder. STEMN will track all changes to files in this folder.</p>
-         { has(project, 'formModels.fileStore.remote')
-         ? <div>
-             <ProjectLinkRemote model={`${entityModel}.formModels.fileStore.remote.provider`} value={project.formModels.fileStore.remote.provider}/>
-             <br />
-             <FileSelectInput
-               projectId={project.data._id}
-               provider={project.formModels.fileStore.remote.provider}
-               model={`${entityModel}.formModels.fileStore.remote.root`}
-               value={project.formModels.fileStore.remote.root || {}}
-               disabled={!(has(project, 'formModels.fileStore.remote.provider') && ['drive', 'dropbox'].includes(project.formModels.fileStore.remote.provider))}
-             />
-           </div>
-         : null }
-         <br />
-         <div className="layout-row layout-align-end">
-           <ProgressButton
-           className="primary"
-           onClick={confirmLinkRemote}
-           loading={project.linkPending}
-           error={project.linkRejected}
-           >Update Folder</ProgressButton>
-         </div>
+        <h3>Cloud Storage Folder</h3>
+        <p>Select your project's cloud storage folder. STEMN will track all changes to files in this folder.</p>
+        <ProjectLinkRemote
+          model={`${projectModel}.fileStoreForm.provider`}
+          value={ project.fileStoreForm.provider }
+        />
+        <br />
+        <FileSelectInput
+          projectId={ project.data._id }
+          provider={ project.fileStoreForm.provider }
+          model={ `${projectModel}.fileStoreForm.root` }
+          value={ project.fileStoreForm.root || {} }
+          disabled={ !['drive', 'dropbox'].includes(project.fileStoreForm.provider) }
+        />
+        <br />
+        <div className="layout-row layout-align-end">
+          <ProgressButton
+            className="primary"
+            onClick={ confirmLinkRemote }
+            loading={ project.linkPending }
+            error={ project.linkRejected }
+          >
+            Update Folder
+          </ProgressButton>
+        </div>
       </div>
+    )
+  }
+  render() {
+    const { projectModel, project } = this.props
+
+    return (
+      <Form
+        model={ `${projectModel}.fileStoreForm` }
+        value={ project.data.remote }
+      >
+        { project.fileStoreForm
+        ? this.renderFormInner()
+        : null }
+      </Form>
     )
   }
 }

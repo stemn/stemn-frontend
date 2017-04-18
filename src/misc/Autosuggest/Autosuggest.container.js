@@ -11,7 +11,9 @@ import {
 function mapStateToProps({ autosuggest }, { cacheKey, initialValue }) {
   const instance = autosuggest[cacheKey] || {}
   return {
-    value: instance.value === undefined ? initialValue : instance.value,
+    value: instance.value === undefined
+      ? (initialValue || '')
+      : instance.value,
     suggestions: instance.suggestions || [],
     isLoading: instance.isLoading || false,
   }
