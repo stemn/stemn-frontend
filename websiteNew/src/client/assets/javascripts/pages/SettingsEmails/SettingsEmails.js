@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 
 class SettingsEmails extends Component {
+  componentWillMount() {
+    this.props.getSettings()
+  }
   render() {
     return (
       <div>

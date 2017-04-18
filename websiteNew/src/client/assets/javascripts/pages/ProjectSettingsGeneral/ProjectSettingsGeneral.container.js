@@ -2,21 +2,24 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import ProjectSettingsGeneral from './ProjectSettingsGeneral';
-import { saveProject } from 'stemn-shared/misc/Projects/Projects.actions';
+import { saveProject, confirmLinkRemote, confirmDeleteProject } from 'stemn-shared/misc/Projects/Projects.actions';
 
-const stateToProps = ({ projects }, { params }) => {
-  const projectId   = params.stub;
-  const project     = projects.data[projectId]
-  const entityModel = `projects.data.${projectId}`;
+const stateToProps = ({ projects, auth }, { params }) => {
+  const projectId = params.stub;
+  const project = projects.data[projectId]
+  const projectModel = `projects.data.${projectId}`;
 
   return {
     project,
-    entityModel,
+    projectModel,
+    auth,
   };
 };
 
 const dispatchToProps = {
   saveProject,
+  confirmLinkRemote,
+  confirmDeleteProject,
 };
 
 @connect(stateToProps, dispatchToProps)

@@ -12,10 +12,10 @@ class ProjectSettingsGeneral extends Component {
       userId: auth.user._id,
       isConnected: project.data.remote.connected,
       projectId: project.data._id,
-      provider: project.formModels.fileStore.remote.provider,
+      provider: project.fileStoreForm.provider,
       prevProvider: project.data.remote.provider,
-      id: project.formModels.fileStore.remote.root.fileId,
-      path: project.formModels.fileStore.remote.root.path,
+      id: project.fileStoreForm.root.fileId,
+      path: project.fileStoreForm.root.path,
     })
   }
   confirmDeleteProject = () => {
@@ -25,20 +25,20 @@ class ProjectSettingsGeneral extends Component {
     })
   }
   render() {
-    const { project, entityModel, saveProject, removeField, addField } = this.props;
+    const { project, projectModel, saveProject, removeField, addField } = this.props;
     return (
       <div>
         <InfoPanel>
           <GeneralSettings
             project={ project }
-            entityModel={ entityModel }
+            entityModel={ projectModel }
             saveProject={ saveProject }
           />
         </InfoPanel>
         <InfoPanel>
           <CloudSettings
             project={ project }
-            entityModel={ entityModel }
+            projectModel={ projectModel }
             confirmLinkRemote={ this.confirmLinkRemote }
           />
         </InfoPanel>        

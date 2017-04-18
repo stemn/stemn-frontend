@@ -8,9 +8,9 @@ import { getProject } from 'stemn-shared/misc/Projects/Projects.actions'
 import Project from './Project'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
-const stateToProps = (state, { params, location }) => ({
-  project: state.projects.data[params.stub],
-  pathname: location.pathname
+const stateToProps = ({ projects }, { params, location }) => ({
+  project: projects.data[params.stub],
+  pathname: location.pathname,
 })
 
 const dispatchToProps = {

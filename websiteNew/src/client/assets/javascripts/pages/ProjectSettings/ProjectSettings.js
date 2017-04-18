@@ -14,8 +14,8 @@ export default class ProjectSettings extends Component {
     return (
       <div className={ classes.content }>
         <Container>
-          <Row className="layout-row">
-            <Col style={ { width: '280px' } }>
+          <Row className="layout-xs-column layout-gt-xs-row">
+            <Col className="flex-gt-xs-30">
               <NavPillContainer>
                 <NavPill to={ baseUrl } onlyActiveOnIndex={true}>General</NavPill>
                 <NavPill to={ baseUrl + '/permissions' }>Permissions</NavPill>

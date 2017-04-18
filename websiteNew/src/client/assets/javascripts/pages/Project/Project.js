@@ -9,14 +9,19 @@ import { Container } from 'stemn-shared/misc/Layout'
 import Link from 'stemn-shared/misc/Router/Link'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import SubHeader from 'modules/SubHeader'
+import IsOwner from 'stemn-shared/misc/Auth/IsOwner'
 
 
 class Project extends Component {
   renderComplete () {
-    const { children, project, pathname } = this.props
-    
+    const { children, project, pathname, currentUser } = this.props
     const routeParams = { projectId: project.data._id }
     
+//    console.log(currentUser._id, project);
+//    const canEdit = false;
+
+
+
     return (
       <div className='layout-column flex'>
         <SubHeader title={ project.data.name } noline>
@@ -35,11 +40,13 @@ class Project extends Component {
               name="projectTasksRoute" params={ routeParams }>
               6 Tasks
             </Link>
-            <Link
-              activeIf={ { includes: ['projectSettingsRoute'] } }
-              name="projectSettingsRoute" params={ routeParams }>
-              Settings
-            </Link>
+            <IsOwner team={ project.data.team } minRole="admin">
+              <Link
+                activeIf={ { includes: ['projectSettingsRoute'] } }
+                name="projectSettingsRoute" params={ routeParams }>
+                Settings
+              </Link>
+            </IsOwner>
           </Tabs>
         </SubHeader>
         <div className={ "flex layout-column" }>
