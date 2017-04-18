@@ -19,7 +19,6 @@ export default class SettingsProfile extends Component {
   }
   render() {
     const { user, entityModel } = this.props
-    console.log(user);
     return (
       <div>
         <InfoPanel>

@@ -26,6 +26,7 @@ import Search                                  from 'pages/Search'
 import Field                                   from 'pages/Field'
 import FieldOverview                           from 'pages/FieldOverview'
 import SettingsProfileDetails                  from 'pages/SettingsProfileDetails'
+import ProjectSettingsPermissions              from 'pages/ProjectSettingsPermissions'
 
 import Download                                from 'pages/Download'
 import Explore                                 from 'pages/Explore'
@@ -118,6 +119,7 @@ export default (
       <Route path="commits/:commitId"          component={ ProjectCommit } />
       <Route path="settings"                   component={ ProjectSettings }>
         <IndexRoute                            component={ ProjectSettingsGeneral } />
+        <Route path="permissions"              component={ ProjectSettingsPermissions } />
         <Route path="tasks"                    component={ ProjectSettingsTasks } />
         <Route path="team"                     component={ ProjectSettingsTeam } />
         <Route path="tags"                     component={ ProjectSettingsTags } />
