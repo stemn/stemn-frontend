@@ -3,7 +3,7 @@
 }
 
 .image {
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.1);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;

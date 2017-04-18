@@ -5,6 +5,9 @@ import ProjectPermissionsRadio from 'stemn-shared/misc/Project/ProjectPermission
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea';
 import Input from 'stemn-shared/misc/Input/Input/Input';
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton';
+import { Row, Col } from 'stemn-shared/misc/Layout'
+import Upload from 'stemn-shared/misc/Upload/Upload'
+import classes from './GeneralSettings.css'
 
 export default class GeneralSettings extends Component {
   static propTypes = {
@@ -21,39 +24,55 @@ export default class GeneralSettings extends Component {
     const { entityModel, project, saveProject } = this.props;
     return (
       <div>
-         <h3>General Settings</h3>
-         <p>Set your project name and blurb.</p>
-         <Input
-           model={`${entityModel}.data.name`}
-           value={project.data.name}
-           className="dr-input"
-           type="text"
-           placeholder="Project Name"
-         />
-         <br />
-         <Textarea
-           model={`${entityModel}.data.summary`}
-           value={project.data.summary}
-           className="dr-input"
-           style={{minHeight: '60px'}}
-           placeholder="Project Summary"
-         />
-         <br />
-         <ProjectPermissionsRadio 
-           model={`${entityModel}.data.permissions.projectType`} 
-           value={ 
-            has(project, 'data.permissions.projectType') 
-            ? project.data.permissions.projectType 
-            : '' } 
-         />
-         <div className="layout-row layout-align-end">
-           <ProgressButton
-           className="primary"
-           onClick={this.saveProject}
-           loading={project.savePending}
-           >Update Project</ProgressButton>
-         </div>
+        <Row className="layout-xs-col layout-gt-xs-row">
+          <Col className="layout-column flex">
+            <h3>Project name</h3>
+            <Input
+              model={`${entityModel}.data.name`}
+              value={project.data.name}
+              className="dr-input"
+              type="text"
+              placeholder="Project Name"
+            />
+            <br />
+            <h3>Summary</h3>
+            <Textarea
+              model={`${entityModel}.data.summary`}
+              value={project.data.summary}
+              className="dr-input"
+              style={{minHeight: '70px'}}
+              placeholder="Project Summary"
+            />
+            <br />
+            <div className="flex" />
+            <div className="layout-row">
+              <ProgressButton
+                className="primary"
+                onClick={this.saveProject}
+                loading={project.savePending}
+              >Update Project</ProgressButton>
+            </div>
+          </Col>
+          <Col>
+            <h3>Project Picture</h3>
+            <Upload
+              containerClassName={ classes.container }
+              imageClassName={ classes.avatar }
+              model={ `${entityModel}.data.picture` }
+              value={ project.data.picture }
+              uploadId="entityModel"
+            />
+          </Col>
+        </Row>
       </div>
     )
   }
 }
+
+//            <ProjectPermissionsRadio
+//              model={`${entityModel}.data.permissions.projectType`}
+//              value={
+//              has(project, 'data.permissions.projectType')
+//              ? project.data.permissions.projectType
+//              : '' }
+//            />
