@@ -1,15 +1,27 @@
 import React, { Component, PropTypes } from 'react'
+import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
+import SiteSearchResult from 'stemn-shared/misc/Search/SiteSearchResult'
+import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton'
+import MdSettings from 'react-icons/md/settings'
 
 class SettingsProjects extends Component {
   render() {
+    const { projects } = this.props
     return (
       <div>
-        <h1>Project Settings</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse rem, accusamus inventore corporis ratione doloremque temporibus architecto mollitia totam illo eos adipisci. Eligendi totam dolorem dignissimos. Sequi velit incidunt recusandae.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse rem, accusamus inventore corporis ratione doloremque temporibus architecto mollitia totam illo eos adipisci. Eligendi totam dolorem dignissimos. Sequi velit incidunt recusandae.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse rem, accusamus inventore corporis ratione doloremque temporibus architecto mollitia totam illo eos adipisci. Eligendi totam dolorem dignissimos. Sequi velit incidunt recusandae.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse rem, accusamus inventore corporis ratione doloremque temporibus architecto mollitia totam illo eos adipisci. Eligendi totam dolorem dignissimos. Sequi velit incidunt recusandae.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse rem, accusamus inventore corporis ratione doloremque temporibus architecto mollitia totam illo eos adipisci. Eligendi totam dolorem dignissimos. Sequi velit incidunt recusandae.</p>
+        <InfoPanel style={ { padding: '0px' } }>
+          { projects && projects.data.map(project => (
+            <SiteSearchResult result={ project } key={ project._id }>
+              <SimpleIconButton
+                name="projectSettingsRoute"
+                params={ { projectId: project._id } }
+                style={ { marginLeft: '20px' } }
+              >
+                <MdSettings size={ 20 } />
+              </SimpleIconButton>
+            </SiteSearchResult>
+          ))}
+        </InfoPanel>
       </div>
     )
   }
