@@ -20,8 +20,8 @@ class User extends Component {
       <div>
         <UserNavHeader user={ user } currentUser={ currentUser } />
         <Container>
-          <Row className='layout-column layout-gt-xs-row'>
-            <Col className={ classes.sidebar }>
+          <Row className='layout-xs-column layout-gt-xs-row'>
+            <Col className={ classNames(classes.sidebar, 'flex-gt-xs-30')}>
               <UserAvatar
                 name={ user.data.name }
                 picture={ user.data.picture }

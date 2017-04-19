@@ -1,18 +1,20 @@
 import React, { Component, PropTypes } from 'react';
+import EmailAndNotificationToggles from 'stemn-shared/misc/UserSettings/EmailAndNotificationToggles'
 
 class SettingsEmails extends Component {
   componentWillMount() {
     this.props.getSettings()
   }
   render() {
+    const { toggleValues, toggleModel, saveSettings } = this.props
     return (
       <div>
-        <h1>Email Settings</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse rem, accusamus inventore corporis ratione doloremque temporibus architecto mollitia totam illo eos adipisci. Eligendi totam dolorem dignissimos. Sequi velit incidunt recusandae.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse rem, accusamus inventore corporis ratione doloremque temporibus architecto mollitia totam illo eos adipisci. Eligendi totam dolorem dignissimos. Sequi velit incidunt recusandae.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse rem, accusamus inventore corporis ratione doloremque temporibus architecto mollitia totam illo eos adipisci. Eligendi totam dolorem dignissimos. Sequi velit incidunt recusandae.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse rem, accusamus inventore corporis ratione doloremque temporibus architecto mollitia totam illo eos adipisci. Eligendi totam dolorem dignissimos. Sequi velit incidunt recusandae.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse rem, accusamus inventore corporis ratione doloremque temporibus architecto mollitia totam illo eos adipisci. Eligendi totam dolorem dignissimos. Sequi velit incidunt recusandae.</p>
+        <EmailAndNotificationToggles
+          type="emails"
+          toggleValues={ toggleValues }
+          toggleModel={ toggleModel}
+          saveSettings={ saveSettings }
+        />
       </div>
     )
   }

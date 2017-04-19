@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getSettings } from 'stemn-shared/misc/UserSettings/UserSettings.actions'
+import { getSettings, saveSettings } from 'stemn-shared/misc/UserSettings/UserSettings.actions'
 import SettingsEmails from './SettingsEmails';
 
-const stateToProps = () => ({})
+const stateToProps = ({ userSettings }) => ({
+  toggleValues: userSettings.data.emails,
+  toggleModel: 'userSettings.data.emails'
+})
 
 const dispatchToProps = {
-  getSettings
+  getSettings,
+  saveSettings,
 }
 
 @connect(stateToProps, dispatchToProps)

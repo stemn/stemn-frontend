@@ -12,8 +12,8 @@ class Settings extends Component {
       <StandardLayout>
         <UserNavHeader user={ user } currentUser={ currentUser }/>
         <Container>
-          <Row className="layout-row">
-            <Col style={ { width: '270px' } }>
+          <Row className="layout-xs-column layout-gt-xs-row">
+            <Col className="flex-gt-xs-30">
               <NavPillContainer>
                 <NavPill to='/settings' onlyActiveOnIndex={true}>Basic Profile</NavPill>
                 <NavPill to='/settings/details'>Experience and Education</NavPill>
