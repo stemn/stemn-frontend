@@ -19,7 +19,7 @@ export default class NotificationsUnread extends Component {
               markAsRead={ markAsRead }
             />
           ))
-          : 'No unread notifications' }
+          : <div className="text-title-5">No unread notifications</div> }
       </div>
     )
   }

@@ -3,11 +3,12 @@
 }
 
 .headerInner {
-  height: 60px;
+  min-height: 60px;
 }
 
 .title {
   font-size: 18px;
   color: rgba(0, 0, 0, 0.6);
   margin: 0px;
+  line-height: 60px;
 }

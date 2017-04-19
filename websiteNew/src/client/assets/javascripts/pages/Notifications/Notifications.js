@@ -22,7 +22,9 @@ export default class Notifications extends Component {
     return (
       <StandardLayout>
         <SubHeader title='Notifications'>
-          <Button className='primary' onClick={ markAllRead }>Mark all read</Button>
+          <div className="layout-column layout-align-center">
+            <Button className='primary' onClick={ markAllRead }>Mark as read</Button>
+          </div>
         </SubHeader>
         <Container style={ { marginTop: '30px' } }>
           <Row className="layout-row">

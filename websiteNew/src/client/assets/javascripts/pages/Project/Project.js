@@ -20,7 +20,7 @@ class Project extends Component {
     return (
       <div className='layout-column flex'>
         <SubHeader title={ project.data.name } noline>
-          <Tabs noline style={ { height: '100%' } }>
+          <Tabs noline>
             <Link activeIf={ { is: ['projectRoute'], includes: ['projectFilesRoute'] } }
               name="projectRoute" params={ routeParams }>
               Overview
@@ -38,7 +38,7 @@ class Project extends Component {
             <Link
               activeIf={ { includes: ['projectTasksRoute'] } }
               name="projectTasksRoute" params={ routeParams }>
-              6 Tasks
+              {project.data.numThreads} Threads
             </Link>
             <IsOwner team={ project.data.team } minRole="admin">
               <Link
