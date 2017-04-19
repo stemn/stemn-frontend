@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-
 import LandingLayout from 'layout/LandingLayout'
 import HeroBanner from 'modules/HeroBanner'
-import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import { Container } from 'stemn-shared/misc/Layout'
 import PricingTable from 'stemn-shared/misc/Billing/PricingTable'
 import { pricingTableData } from 'stemn-shared/misc/Billing/Billing.data'
@@ -19,10 +17,10 @@ export default class Pricing extends Component {
         </HeroBanner>
         <Container>
           <div className={ classNames(classes.tables, 'layout-column layout-gt-xs-row layout-wrap') }>
-            <PricingTable data={ pricingTableData[0] }/>
-            <PricingTable data={ pricingTableData[1] }/>
-            <PricingTable data={ pricingTableData[2] } important/>
-            <PricingTable data={ pricingTableData[3] }/>
+            <PricingTable data={ pricingTableData[0] } />
+            <PricingTable data={ pricingTableData[1] } />
+            <PricingTable data={ pricingTableData[2] } important />
+            <PricingTable data={ pricingTableData[3] } />
           </div>
           <div className={ classes.currencyInfo }>
             <div className="text-mini-caps">All Prices in USD</div>
@@ -39,4 +37,3 @@ export default class Pricing extends Component {
     )
   }
 }
-//            <Button className="lg secondary">Get Started For Free</Button>

@@ -4,6 +4,7 @@ export const homeRoute            = ()                        => `/`
 export const loginRoute           = ()                        => `/login`
 export const projectFolderRoute   = ({ projectId, fileId })   => `/project/${projectId}/files/${fileId || ''}`
 export const projectRoute         = ({ projectId })           => `/project/${projectId}`
+export const projectTeamRoute     = ({ projectId })           => `/project/${projectId}/team`
 export const projectFilesRoute    = ({ projectId })           => `/project/${projectId}/files`
 export const projectTasksRoute    = ({ projectId })           => `/project/${projectId}/tasks`
 export const projectCommitsRoute  = ({ projectId })           => `/project/${projectId}/commits`

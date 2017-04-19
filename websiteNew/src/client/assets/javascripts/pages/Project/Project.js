@@ -16,11 +16,6 @@ class Project extends Component {
   renderComplete () {
     const { children, project, pathname, currentUser } = this.props
     const routeParams = { projectId: project.data._id }
-    
-//    console.log(currentUser._id, project);
-//    const canEdit = false;
-
-
 
     return (
       <div className='layout-column flex'>
@@ -29,6 +24,11 @@ class Project extends Component {
             <Link activeIf={ { is: ['projectRoute'], includes: ['projectFilesRoute'] } }
               name="projectRoute" params={ routeParams }>
               Overview
+            </Link>
+            <Link
+              activeIf={ { includes: ['projectTeamRoute'] } }
+              name="projectTeamRoute" params={ routeParams }>
+              Team
             </Link>
             <Link
               activeIf={ { includes: ['projectCommitsRoute'] } }

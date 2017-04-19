@@ -27,6 +27,7 @@ import Field                                   from 'pages/Field'
 import FieldOverview                           from 'pages/FieldOverview'
 import SettingsProfileDetails                  from 'pages/SettingsProfileDetails'
 import ProjectSettingsPermissions              from 'pages/ProjectSettingsPermissions'
+import ProjectTeam                             from 'pages/ProjectTeam'
 
 import Download                                from 'pages/Download'
 import Explore                                 from 'pages/Explore'
@@ -112,6 +113,7 @@ export default (
     <Route path="/terms"                       component={ Terms } />
     <Route path="project/:stub"                component={ Project }>
       <IndexRoute                              component={ ProjectOverview } />
+      <Route path="team"                       component={ ProjectTeam } />
       <Route path="files/:path"                component={ ProjectOverview } />
       <Route path="tasks"                      component={ ProjectTasks } />
       <Route path="tasks/:taskId"              component={ ProjectTask } />
