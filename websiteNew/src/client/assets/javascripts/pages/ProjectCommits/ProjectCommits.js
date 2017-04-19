@@ -9,6 +9,7 @@ import { Container } from 'stemn-shared/misc/Layout'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import Link from 'stemn-shared/misc/Router/Link'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
+import HistoryGraph from 'stemn-shared/misc/Graphs/HistoryGraph'
 
 const groupByDay = (data) => {
   const groupedObject = groupBy(data, item => moment(item.timestamp).format('YY/MM/DD'))
@@ -28,6 +29,9 @@ export default class ProjectCommits extends Component {
     return (
       <div>
         <Container>
+          <div className={ classes.graphPanel }>
+            <HistoryGraph />
+          </div>
           { groupedCommits.map((group) => (
             <div>
               <div className="text-mini-caps">
