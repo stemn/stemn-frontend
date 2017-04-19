@@ -51,6 +51,7 @@ export default class GeneralSettings extends Component {
             />
           ))}
         </div>
+        <br />
         <div className="layout-row layout-align-end">
           <ProgressButton
             className="primary"
