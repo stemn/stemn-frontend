@@ -135,6 +135,7 @@
     "react-select": "1.0.0-rc.3",
     "react-textarea-autosize": "4.0.5",
     "react-waypoint": "5.2.1",
+    "recharts": "0.22.2",
     "redux": "3.5.2",
     "redux-logger": "2.6.1",
     "redux-persist": "4.6.0",

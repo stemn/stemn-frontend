@@ -8,6 +8,7 @@ import {
   saveProject
 } from 'stemn-shared/misc/Projects/Projects.actions';
 
+
 import ProjectSettingsTeam from './ProjectSettingsTeam';
 
 const stateToProps = ({ projects }, { params }) => {
@@ -24,6 +25,8 @@ const dispatchToProps = {
   removeTeamMember,
   saveProject,
 };
+
+console.log(dispatchToProps);
 
 @connect(stateToProps, dispatchToProps)
 export default class ProjectSettingsTeamContainer extends Component {
