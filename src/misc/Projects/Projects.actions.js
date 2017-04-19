@@ -120,11 +120,42 @@ export const saveProject = ({ project }) => ({
   }
 })
 
+export function addTeamMember({projectId, user}) {
+  return {
+    type: 'PROJECTS/ADD_TEAM_MEMBER',
+    payload: {
+      projectId,
+      user
+    }
+  };
+}
+
+export function changeUserPermissions({projectId, userId, role}) {
+  return {
+    type: 'PROJECTS/CHANGE_USER_PERMISSIONS',
+    payload: {
+      projectId,
+      userId,
+      role,
+    },
+  };
+}
+
+export function removeTeamMember({projectId, userId}) {
+  return {
+    type: 'PROJECTS/REMOVE_TEAM_MEMBER',
+    payload: {
+      projectId,
+      userId,
+    },
+  };
+}
+
 export const addField = ({ projectId, field }) => ({
   type: 'PROJECTS/ADD_FIELD',
   payload: {
     projectId,
-    field
+    field,
   }
 })
 
@@ -132,18 +163,10 @@ export const removeField = ({ projectId, fieldId }) => ({
   type: 'PROJECTS/REMOVE_FIELD',
   payload: {
     projectId,
-    fieldId
-  }
+    fieldId,
+  },
 })
 
-export const changeUserPermissions = ({ projectId, userId, role }) => ({
-  type: 'PROJECTS/CHANGE_USER_PERMISSIONS',
-  payload: {
-    projectId,
-    userId,
-    role
-  }
-})
 
 // If the store is connected - we confirm the change
 // Else change straight away.
