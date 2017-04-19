@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { getToggleData, emailToggles } from './EmailAndNotificationToggles.utils'
+import { getToggleData, emailToggles, notificationToggles } from './EmailAndNotificationToggles.utils'
 import Toggle from 'stemn-shared/misc/Input/Toggle/Toggle'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import classes from './EmailAndNotificationToggles.css'
@@ -9,6 +9,13 @@ import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleI
 import MdMoreHoriz from 'react-icons/md/more-horiz';
 
 class ToggleGroup extends Component {
+  static propTypes = {
+    toggleValues: PropTypes.object.isRequired,
+    toggleModel: PropTypes.string.isRequired,
+    group: PropTypes.object.isRequired,
+    saveSettings: PropTypes.func.isRequired,
+    change: PropTypes.func.isRequired,
+  }
   constructor(props) {
     super(props)
     this.state = {
@@ -37,6 +44,11 @@ class ToggleGroup extends Component {
     group.toggles.forEach(toggleName => {
       change(`${toggleModel}.${toggleName}`, value)
     })
+    this.saveSettings()
+  }
+  saveSettings = () => {
+    // Save in the next tick so the changes have completed.
+    setTimeout(this.props.saveSettings, 1)
   }
   render () {
     const { toggleValues, toggleModel, group } = this.props
@@ -44,8 +56,8 @@ class ToggleGroup extends Component {
     const groupToggleValue = this.getGroupToggleValue()
     const isOpen = isToggledOpen || groupToggleValue === 'semi'
 
-    const childRowHeight = 80
-    const dividerHeight = 30
+    const childRowHeight = 100
+    const dividerHeight = 50
     const panelContentStyle = isOpen
       ? { maxHeight: `${ childRowHeight * group.toggles.length + dividerHeight }px` }
       : {}
@@ -57,25 +69,30 @@ class ToggleGroup extends Component {
             <h3>{ group.title }</h3>
             <p>{ group.description }</p>
           </div>
-          <SimpleIconButton
-            disabled={ groupToggleValue === 'semi' }
-            className={ classNames(classes.iconButton, {[classes.iconButtonOpen] : isOpen}) }
-            onClick={ this.togglePanelOpen }
-          >
-            <MdMoreHoriz size={ 25 } />
-          </SimpleIconButton>
-          <Toggle
-            className={ classes.toggle }
-            changeAction={ this.toggleAll }
-            value={ groupToggleValue }
-          />
+          <div className="layout-xs-column layout-gt-xs-row layout-align-xs-center layout-align-gt-xs-start-center">
+            <SimpleIconButton
+              disabled={ groupToggleValue === 'semi' }
+              className={ classNames(classes.iconButton, {[classes.iconButtonOpen] : isOpen}) }
+              onClick={ this.togglePanelOpen }
+            >
+              <MdMoreHoriz size={ 25 } />
+            </SimpleIconButton>
+            <Toggle
+              className={ classes.toggle }
+              changeAction={ this.toggleAll }
+              value={ groupToggleValue }
+            />
+          </div>
         </div>
         <div className={ classes.childToggles } style={ panelContentStyle }>
           <div className={ classes.divider } />
           { group.toggles.map(toggleName => {
             const toggle = getToggleData(toggleName);
             return (
-              <div className={ classNames(classes.childRow, 'layout-row layout-align-start-center') }>
+              <div
+                className={ classNames(classes.childRow, 'layout-row layout-align-start-center') }
+                key={ toggleName }
+              >
                 <div className="flex">
                   <h3>{ toggle.name }</h3>
                   <p>{ toggle.description }</p>
@@ -84,6 +101,7 @@ class ToggleGroup extends Component {
                   className={ classNames(classes.miniToggle, classes.toggle) }
                   model={ `${toggleModel}.${toggleName}` }
                   value={ toggleValues[toggleName] }
+                  changeAction={ this.saveSettings }
                 />
               </div>
             )
@@ -95,15 +113,28 @@ class ToggleGroup extends Component {
 }
 
 export default class EmailAndNotificationToggles extends Component {
+  static propTypes = {
+    type: PropTypes.oneOf(['emails', 'notifications']).isRequired,
+    toggleValues: PropTypes.object.isRequired,
+    toggleModel: PropTypes.string.isRequired,
+    saveSettings: PropTypes.func.isRequired,
+    change: PropTypes.func.isRequired,
+  }
   render () {
-    const { toggleValues, toggleModel, change } = this.props
+    const { toggleValues, toggleModel, change, type, saveSettings } = this.props
+    const toggles = type === 'emails'
+      ? emailToggles
+      : notificationToggles
+
     return (
       <div>
         { emailToggles.map(group => (
           <ToggleGroup
+            key={ group.name }
             toggleValues={ toggleValues }
             toggleModel={ toggleModel }
             group={ group }
+            saveSettings={ saveSettings }
             change={ change }
           />
         ))}

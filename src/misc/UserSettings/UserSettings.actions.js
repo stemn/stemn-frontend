@@ -7,11 +7,12 @@ export const getSettings = () => ({
   },
 })
 
-export const saveSettings = () => ({
+export const saveSettings = () => (dispatch, getState) => dispatch({
   type: 'USER_SETTINGS/SAVE_SETTINGS',
   http: true,
   payload: {
     url: 'api/v1/settings',
     method: 'POST',
+    data: getState().userSettings.data,
   },
 })
