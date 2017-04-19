@@ -9,10 +9,13 @@ import classes from './SimpleIconButton.css'
 
 export default class extends React.Component{
   render() {
-    const { style, onClick, onContextMenu, title, className, color, to, activeClassName } = this.props
+    const { style, onClick, onContextMenu, title, className, color, to, activeClassName, disabled } = this.props
     if(to){
       return (
-        <Link className={classNames( classes.button, className, {[classes.white] : color == 'white'})}
+        <Link className={classNames( classes.button, className, {
+            [classes.white] : color == 'white',
+            'disabled': disabled,
+          })}
           activeClassName={activeClassName}
           to={to}
           style={style}
@@ -25,7 +28,10 @@ export default class extends React.Component{
     }
     else{
       return (
-        <button className={classNames( classes.button, className, {[classes.white] : color == 'white'})}
+        <button className={classNames( classes.button, className, {
+            [classes.white] : color == 'white',
+            'disabled': disabled,
+          })}
          style={style}
           onClick={onClick}
           title={title}

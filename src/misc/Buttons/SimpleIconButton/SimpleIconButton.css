@@ -28,3 +28,8 @@
 .white:hover{
   color: rgba(255, 255, 255, 1);
 }
+
+.button:global(.disabled) {
+  pointer-events: none;
+  opacity: 0.4;
+}

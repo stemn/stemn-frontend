@@ -1,11 +1,29 @@
+.panel {
+  padding: 30px;
+}
+.panel p{
+  margin-bottom: 0px;
+}
 .parentRow {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding-bottom: 15px;
-  margin-bottom: 15px;
+
+}
+
+.iconButton {
+  margin-left: 15px;
+  transition: 0.3s ease all;
+}
+
+.iconButtonOpen {
+  transform: rotate(90deg);
+}
+
+.divider {
+  margin: 15px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .childRow {
-  margin: 15px 0;
+  padding: 15px 0;
 }
 
 .toggle {
@@ -13,4 +31,10 @@
 }
 .miniToggle {
   font-size: 10px;
+}
+
+.childToggles {
+  overflow: hidden;
+  transition: 0.5s ease all;
+  max-height: 0px;
 }
