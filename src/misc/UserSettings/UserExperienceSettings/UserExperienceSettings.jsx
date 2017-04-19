@@ -113,9 +113,8 @@ export default class UserExperienceSettings extends Component {
             }
 
             return (
-              <div>
+              <div  key={ item._id }>
                 <InfoPanel
-                  key={ item._id }
                   className={ classes.panel }
                 >
                   <FilledIconButton

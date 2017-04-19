@@ -1,42 +1,33 @@
 import React from 'react';
-
-// Components
-import { Link } from 'react-router';
-
-// Styles
+import Link from 'stemn-shared/misc/Router/Link';
 import classNames from 'classnames';
 import classes from './SimpleIconButton.css'
 
 export default class extends React.Component{
   render() {
-    const { style, onClick, onContextMenu, title, className, color, to, activeClassName, disabled } = this.props
-    if(to){
+    const { children, className, color, disabled, ...otherProps } = this.props
+    const allClasses = classNames( classes.button, className, {
+      [classes.white] : color == 'white',
+      'disabled': disabled,
+    })
+
+    if(this.props.to || this.props.name){
       return (
-        <Link className={classNames( classes.button, className, {
-            [classes.white] : color == 'white',
-            'disabled': disabled,
-          })}
-          activeClassName={activeClassName}
-          to={to}
-          style={style}
-          onClick={onClick}
-          title={title}
-          onContextMenu={onContextMenu}>
-          {this.props.children}
+        <Link
+          className={ allClasses }
+          { ...otherProps }
+        >
+          { children }
         </Link>
       );
     }
     else{
       return (
-        <button className={classNames( classes.button, className, {
-            [classes.white] : color == 'white',
-            'disabled': disabled,
-          })}
-         style={style}
-          onClick={onClick}
-          title={title}
-          onContextMenu={onContextMenu}>
-          {this.props.children}
+        <button
+          className={ allClasses }
+          { ...otherProps }
+        >
+          { children }
         </button>
       );
 

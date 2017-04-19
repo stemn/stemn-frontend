@@ -6,7 +6,7 @@
 .result:last-child {
   border-bottom: none;
 }
-.result a {
+.link {
   display: flex;
   margin-bottom: 5px;
 }

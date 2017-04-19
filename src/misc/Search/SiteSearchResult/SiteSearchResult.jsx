@@ -46,7 +46,7 @@ const getRouteNameAndParams = (result) => {
 
 export default class SiteSearchResult extends Component {
   render() {
-    const { result, searchQuery } = this.props
+    const { result, searchQuery, children } = this.props
     const route = getRouteNameAndParams(result)
 
     return (
@@ -59,7 +59,7 @@ export default class SiteSearchResult extends Component {
           className={ classes.avatar }
         />
         <div className="flex">
-          <Link className="link-primary" name={ route.name } params={ route.params }>
+          <Link className={ classNames(classes.link, 'link-primary') } name={ route.name } params={ route.params }>
             <Highlight
               className="text-ellipsis"
               text={ result.name }
@@ -69,6 +69,7 @@ export default class SiteSearchResult extends Component {
           </Link>
           <div className={ classes.blurb + ' text-ellipsis'}>{ result.blurb }</div>
         </div>
+        { children }
       </div>
     )
   }

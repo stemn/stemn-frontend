@@ -44,7 +44,7 @@ export const pricingTableData = [{
 export const plansData = [{
   name: 'Stemn Beta',
   description: 'Unlimited public, private and collaborators for a limited time.',
-},{
+}, {
   name: 'Open Source',
   description: 'Unlimited public projects',
   disabled: true,
