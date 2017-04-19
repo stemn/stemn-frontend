@@ -17,7 +17,7 @@ export default class Search extends Component {
     return (
       <StandardLayout>
         <SubHeader>
-          <Tabs>
+          <Tabs noline>
             <Link to="/search" className={ { 'active': !location.query.type } } query={ { q: location.query.q } }>Projects</Link>
             <Link activeClassName="active" to="/search" query={ { q: location.query.q, type: 'thread' } }>Threads</Link>
             <Link activeClassName="active" to="/search" query={ { q: location.query.q, type: 'commit' } }>Commits</Link>
@@ -27,7 +27,7 @@ export default class Search extends Component {
         </SubHeader>
         <Container className={ classes.content }>
           <Row className="layout-xs-col layout-gt-xs-row">
-            <Col className="flex-70">
+            <Col className="flex-gt-xs-70">
               <SiteSearchResults
                 query={ location.query.q }
                 type={ location.query.type }

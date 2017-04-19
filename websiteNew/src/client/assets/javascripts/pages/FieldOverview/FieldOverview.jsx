@@ -9,7 +9,7 @@ export default class FieldOverview extends Component {
     const { field, location } = this.props
     return (
       <Row className="layout-xs-col layout-gt-xs-row">
-        <Col className="flex-70">
+        <Col className="flex-gt-xs-70">
           <SiteSearchResults
             page={ parseInt(location.query.page) }
             parentType="field"
@@ -18,7 +18,7 @@ export default class FieldOverview extends Component {
             type="project"
           />
         </Col>
-        <Col className="flex-30">
+        <Col className="flex-gt-xs-30">
           <div className="text-mini-caps" style={ { marginBottom: '10px' } }>Related Fields</div>
           <RelatedList fieldId={ field.data._id } limit={ 20 }/>
         </Col>

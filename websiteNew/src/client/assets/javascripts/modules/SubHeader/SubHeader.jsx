@@ -18,8 +18,8 @@ export default class SubHeader extends Component {
     const borderStyle = noline ? {} : { borderBottom: '1px solid rgba(0, 0, 0, 0.1)' }
     return (
       <div className={ classes.header } style={ Object.assign({}, borderStyle, style) }>
-        <Container className={classNames(classes.headerInner, 'layout-sm-column layout-gt-sm-row')}>
-          { title && <h1 className={ classes.title }>{ title }</h1> }
+        <Container className={classNames(classes.headerInner, 'layout-xs-column layout-sm-column layout-gt-sm-row layout-align-xs-end layout-align-sm-end')}>
+          <h1 className={ classes.title }>{ title }</h1>
           { title && <div className="flex"></div> }
           { children }
         </Container>

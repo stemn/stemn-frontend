@@ -27,8 +27,8 @@ export default class Notifications extends Component {
           </div>
         </SubHeader>
         <Container style={ { marginTop: '30px' } }>
-          <Row className="layout-row">
-            <Col style={ { width: '250px' } }>
+          <Row className="layout-xs-column layout-gt-xs-row">
+            <Col className="flex-gt-xs-30">
               <NavPillContainer>
                 <NavPill to='/notifications' onlyActiveOnIndex={ true }>Unread</NavPill>
                 <NavPill to='/notifications/all'>All Notifications</NavPill>
