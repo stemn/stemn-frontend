@@ -8,10 +8,10 @@
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  
+
   display: flex;
   flex-direction: row;
-  
+
   background: bg1;
   color: rgba(0, 0, 0, 0.6);
   border: 1px solid border1;
@@ -26,12 +26,12 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  
+
   padding: 6px;
 }
 
 .main svg {
-  margin-right: 5px;  
+  margin-right: 5px;
 }
 
 .count {
@@ -40,7 +40,7 @@
   align-items: center;
   justify-content: center;
   color: rgba(0, 0, 0, 0.3);
-  
+
   width: 25px;
   border-left: 1px solid border1;
 }

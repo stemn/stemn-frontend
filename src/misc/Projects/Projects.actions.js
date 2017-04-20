@@ -80,7 +80,7 @@ export const getUserProjects = ({ userId }) => ({
       parentId: userId,
       size: 1000,
       published: 'both',
-      select: ['name', 'picture', 'stub', 'type', 'remote', 'updated', 'blurb'],
+      select: ['_id', 'picture', 'stub', 'name', 'type', 'remote', 'updated', 'blurb', 'permissions'],
     },
   }),
   meta: {

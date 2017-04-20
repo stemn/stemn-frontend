@@ -46,7 +46,7 @@ const getRouteNameAndParams = (result) => {
 
 export default class SiteSearchResult extends Component {
   render() {
-    const { result, searchQuery, children } = this.props
+    const { result, query, children } = this.props
     const route = getRouteNameAndParams(result)
 
     return (
@@ -63,7 +63,7 @@ export default class SiteSearchResult extends Component {
             <Highlight
               className="text-ellipsis"
               text={ result.name }
-              query={ searchQuery }
+              query={ query }
               hightlightClass={ classes.highlight }
             />
           </Link>
