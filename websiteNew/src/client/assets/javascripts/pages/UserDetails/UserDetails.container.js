@@ -6,7 +6,7 @@ import UserDetails from './UserDetails';
 
 const stateToProps = (state, { params }) => ({
   user: state.users[params.stub],
-  projects: state.projects.userProjects
+  projects: state.projects.userProjects[params.stub] || {},
 });
 
 const dispatchToProps = {};

@@ -10,7 +10,7 @@ import User from './User'
 const stateToProps = (state, { params }) => ({
   user: state.users[params.stub],
   currentUser: state.auth.user,
-  projects: state.projects.userProjects
+  projects: state.projects.userProjects[params.stub] || {},
 })
 
 const dispatchToProps = {

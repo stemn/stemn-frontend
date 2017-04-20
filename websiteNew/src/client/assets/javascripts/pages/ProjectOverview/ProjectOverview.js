@@ -127,7 +127,7 @@ export default class ProjectOverview extends Component {
             { files && files.entries
             ? <Readme
                 className={classes.readme}
-                files={files.entries}
+                files={ files.entries }
               />
             : <div className="text-center text-grey-3" style={{marginTop: '30px'}}>
                 Add a README.md file to this folder to help others understand what is inside.

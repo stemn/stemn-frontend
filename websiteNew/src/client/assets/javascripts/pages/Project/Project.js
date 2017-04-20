@@ -6,20 +6,32 @@ import classes from './Project.css'
 import StandardLayout from 'layout/StandardLayout'
 import Tabs from 'stemn-shared/misc/Tabs/Tabs'
 import { Container } from 'stemn-shared/misc/Layout'
+import { get } from 'lodash'
 import Link from 'stemn-shared/misc/Router/Link'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import SubHeader from 'modules/SubHeader'
 import IsOwner from 'stemn-shared/misc/Auth/IsOwner'
-
+import PublicPrivateIcon from 'stemn-shared/misc/Icons/PublicPrivateIcon'
 
 class Project extends Component {
   renderComplete () {
     const { children, project, pathname, currentUser } = this.props
     const routeParams = { projectId: project.data._id }
+    const publicIcon = (
+      <PublicPrivateIcon
+        type={ get(project, 'data.permissions.projectType', 'public') }
+        style={ { marginRight: '8px' } }
+        size={ 30 }
+      />
+    )
 
     return (
       <div className='layout-column flex'>
-        <SubHeader title={ project.data.name } noline>
+        <SubHeader
+          title={ project.data.name }
+          noline
+          icon={ publicIcon }
+        >
           <Tabs noline>
             <Link activeIf={ { is: ['projectRoute'], includes: ['projectFilesRoute'] } }
               name="projectRoute" params={ routeParams }>

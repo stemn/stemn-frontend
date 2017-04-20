@@ -26,8 +26,6 @@ const dispatchToProps = {
   saveProject,
 };
 
-console.log(dispatchToProps);
-
 @connect(stateToProps, dispatchToProps)
 export default class ProjectSettingsTeamContainer extends Component {
   render() {

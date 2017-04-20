@@ -6,9 +6,9 @@ import { getUserProjects } from 'stemn-shared/misc/Projects/Projects.actions.js'
 
 import UserProjects from './UserProjects'
 
-const stateToProps = (state, { params }) => ({
-  user: state.users[params.stub],
-  projects: state.projects.userProjects
+const stateToProps = ({ users, projects }, { params }) => ({
+  user: users[params.stub],
+  projects: projects.userProjects[params.stub] || {},
 })
 
 const dispatchToProps = {}

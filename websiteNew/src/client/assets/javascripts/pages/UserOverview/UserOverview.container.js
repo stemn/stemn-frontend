@@ -6,9 +6,9 @@ import { getCommitHistory } from 'stemn-shared/misc/Users/Users.actions'
 
 import UserOverview from './UserOverview';
 
-const stateToProps = (state, { params }) => ({
-  user: state.users[params.stub],
-  projects: state.projects.userProjects
+const stateToProps = ({ users, projects }, { params }) => ({
+  user: users[params.stub],
+  projects: projects.userProjects[params.stub] || {},
 });
 
 const dispatchToProps = {

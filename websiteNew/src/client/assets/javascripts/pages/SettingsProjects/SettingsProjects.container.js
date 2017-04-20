@@ -6,7 +6,7 @@ import SettingsProjects from './SettingsProjects';
 
 const stateToProps = ({ auth, projects }) => ({
   currentUser: auth.user,
-  projects: projects.userProjects
+  projects: projects.userProjects[auth.user._id] || {},
 })
 
 const dispatchToProps = {
