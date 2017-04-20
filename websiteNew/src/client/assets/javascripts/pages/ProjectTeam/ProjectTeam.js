@@ -6,6 +6,7 @@ import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import Link from 'stemn-shared/misc/Router/Link'
 import HistoryGraph from 'stemn-shared/misc/Graphs/HistoryGraph'
+import SocialButton from 'stemn-shared/misc/Social/SocialButton'
 
 export default class ProjectTeam extends Component {
   render() {
@@ -36,6 +37,13 @@ export default class ProjectTeam extends Component {
                         </Link>
                         <div className={ classes.blurb }>{ user.blurb }</div>
                       </div>
+                      <div className="flex" />
+                      <SocialButton
+                        style={ { marginLeft: '10px' } }
+                        type="follow"
+                        entityType="user"
+                        entityId={ user._id }
+                      />
                     </div>
                     <div className={ classes.graph }>
                       <HistoryGraph />

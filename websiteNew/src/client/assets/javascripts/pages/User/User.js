@@ -8,10 +8,11 @@ import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import { Row, Col, Container } from 'stemn-shared/misc/Layout'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import UserNavHeader from 'modules/UserNavHeader'
+import SocialButton from 'stemn-shared/misc/Social/SocialButton'
 import { get } from 'lodash'
-
 import MdLocationOn from 'react-icons/md/location-on'
 import MdLink from 'react-icons/md/link'
+
 
 class User extends Component {
   renderComplete() {
@@ -45,6 +46,15 @@ class User extends Component {
                     { user.data.profile.socialLinks.website }
                   </div>
                 }
+                <div className="layout-row layout-align-center">
+                  <SocialButton
+                    className="primary lg"
+                    style={ { marginTop: '20px' } }
+                    type="follow"
+                    entityType="user"
+                    entityId={ user.data._id }
+                  />
+                </div>
               </div>
             </Col>
             <Col className='flex'>

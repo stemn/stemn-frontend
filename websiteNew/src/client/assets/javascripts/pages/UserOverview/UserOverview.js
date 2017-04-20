@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { orderBy } from 'lodash';
 import { Row, Col } from 'stemn-shared/misc/Layout'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
-
+import TimelineVertical from 'stemn-shared/misc/TimelineVertical/TimelineVertical';
 import Project from 'modules/Project';
 import CalendarHeatmap from 'react-calendar-heatmap';
 
@@ -67,6 +67,16 @@ export default class UserOverview extends Component {
         <br />
         <InfoPanel>
           <p className={ classes.summary }>{ user.data.profile.profileDetails.summary }</p>
+        </InfoPanel>
+        <br />
+        <div className='text-mini-caps'>Timeline</div>
+        <br />
+        <InfoPanel>
+          <TimelineVertical
+            group
+            items={ [] }
+            type="user"
+          />
         </InfoPanel>      
         <br />
       </div>
