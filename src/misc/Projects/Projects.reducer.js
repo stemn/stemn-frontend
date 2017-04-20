@@ -6,8 +6,12 @@ const initialState = {
   data: {},
   activeProject: '',        // The currently active project
   userProjects: {
-    loading: false,
-    data: []
+    /***********************************
+    [userId]: {
+      loading: false,
+      data: [],
+    }
+    ***********************************/
   },
   newProject: {
     summary: '',
@@ -96,11 +100,14 @@ function reducer(state, action) {
 
 
     case 'PROJECTS/GET_USER_PROJECTS_PENDING':
-      return i.assocIn(state, ['userProjects', 'loading'], true)
-    case 'PROJECTS/GET_USER_PROJECTS_FULFILLED':
-      return i.assocIn(state, ['userProjects'], {loading: false, data: action.payload.data})
+      return i.assocIn(state, ['userProjects', action.meta.userId, 'loading'], true)
     case 'PROJECTS/GET_USER_PROJECTS_REJECTED':
-      return i.assocIn(state, ['userProjects', 'loading'], false)
+      return i.assocIn(state, ['userProjects', action.meta.userId, 'loading'], false)
+    case 'PROJECTS/GET_USER_PROJECTS_FULFILLED':
+      return i.chain(state)
+        .assocIn(['userProjects', action.meta.userId, 'data'], action.payload.data)
+        .assocIn(['userProjects', action.meta.userId, 'loading'], false)
+        .value()
 
     case 'PROJECTS/CREATE_PROJECT_PENDING':
       return i.assocIn(state, ['newProject', 'savePending'], true)
@@ -109,7 +116,7 @@ function reducer(state, action) {
     case 'PROJECTS/CREATE_PROJECT_FULFILLED':
       return i.chain(state)
       .assoc('newProject', initialState.newProject)        // Clear the newProject object
-      .updateIn(['userProjects', 'data'], (projects) => {  // Push the new project onto the userProjects array
+      .updateIn(['userProjects', action.meta.userId, 'data'], (projects) => {  // Push the new project onto the userProjects array
         return i.push(projects, action.payload.data)
       })
       .value()
@@ -124,7 +131,7 @@ function reducer(state, action) {
     case 'PROJECTS/DELETE_PROJECT_FULFILLED':
       return i.chain(state)
       .assocIn(['data', action.meta.projectId], undefined) // Delete the project from the main store
-      .updateIn(['userProjects', 'data'], (projects) => {  // Delete it from the userProjects list
+      .updateIn(['userProjects', action.meta.userId, 'data'], (projects) => {  // Delete it from the userProjects list
         const projectIndex = projects.findIndex( project => project._id == action.meta.projectId)
         return i.splice(projects, projectIndex, 1)
       })

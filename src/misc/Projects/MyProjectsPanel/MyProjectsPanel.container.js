@@ -4,7 +4,7 @@ import MyProjectsPanel from './MyProjectsPanel'
 import { getUserProjects } from 'stemn-shared/misc/Projects/Projects.actions.js'
 
 const stateToProps = ({ projects, auth }) => ({
-  projects: projects.userProjects,
+  projects: projects.userProjects[auth.user._id] || {},
   user: auth.user,
 })
 

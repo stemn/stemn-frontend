@@ -57,13 +57,16 @@ export const getProject = ({ projectId, size = 'lg', force }) => (dispatch, getS
   }
 }
 
-export const createProject = (project) => ({
+export const createProject = (project) => (dispatch, getSate) => dispatch({
   type: 'PROJECTS/CREATE_PROJECT',
   payload: http({
     method: 'POST',
-    url: `/api/v1/projects`,
-    data: project
-  })
+    url: '/api/v1/projects',
+    data: project,
+  }),
+  meta: {
+    userId: getState().auth.user._id,
+  },
 })
 
 export const getUserProjects = ({ userId }) => ({
@@ -77,9 +80,12 @@ export const getUserProjects = ({ userId }) => ({
       parentId: userId,
       size: 1000,
       published: 'both',
-      select: ['name', 'picture', 'stub', 'type', 'remote', 'updated', 'blurb']
-    }
-  })
+      select: ['name', 'picture', 'stub', 'type', 'remote', 'updated', 'blurb'],
+    },
+  }),
+  meta: {
+    userId,
+  },
 })
 
 export const confirmDeleteProject = ({ projectId, name }) => (dispatch) => {
@@ -92,21 +98,19 @@ export const confirmDeleteProject = ({ projectId, name }) => (dispatch) => {
   })
 }
 
-export const deleteProject = ({ projectId }) => {
-  return (dispatch) => {
-    dispatch({
-      type: 'PROJECTS/DELETE_PROJECT',
-      payload: http({
-        method: 'DELETE',
-        url: `/api/v1/projects/${projectId}`
-      })
-      .then((response) => dispatch(push(homeRoute()))),
-      meta: {
-        projectId
-      }
-    })
+export const deleteProject = ({ projectId }) => (dispatch, getState) => dispatch({
+  type: 'PROJECTS/DELETE_PROJECT',
+  payload: http({
+    method: 'DELETE',
+    url: `/api/v1/projects/${projectId}`,
+  })
+  .then((response) => dispatch(push(homeRoute()))),
+  meta: {
+    projectId,
+    userId: getState().auth.user._id,
   }
-}
+})
+
 
 export const saveProject = ({ project }) => ({
   type: 'PROJECTS/SAVE_PROJECT',

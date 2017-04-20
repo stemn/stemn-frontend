@@ -32,22 +32,23 @@ const FileRowContext        = ContextMenuLayer(contextIdentifier, props => props
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 const propTypesObject = {
-  projectId     : PropTypes.string,               // Optional: The project id (this is used if we are not exploring a provider)
-  path          : PropTypes.string,               // The current fileId: This folder will be opened when the modal inits.
-  singleClickFn : PropTypes.func,                 // When a file is single clicked
-  doubleClickFn : PropTypes.func,                 // When a file is double clicked
-  crumbClickFn  : PropTypes.func,                 // When a crumb is clicked
-  selected      : PropTypes.object,               // The currently selected file
-  contentStyle  : PropTypes.object,               // Styles for the content section
-  crumbPopup  : React.PropTypes.bool,           // Optional: Should we show a popup on the crumbs?
-  options       : React.PropTypes.shape({
-    allowFolder : React.PropTypes.bool,
-    foldersOnly : React.PropTypes.bool,
-    showMenu    : React.PropTypes.bool,
-    explore     : React.PropTypes.string,         // Optional: 'dropbox' || 'drive' - The provider
+  projectId       : PropTypes.string,             // Optional: The project id (this is used if we are not exploring a provider)
+  path            : PropTypes.string,             // The current fileId: This folder will be opened when the modal inits.
+  singleClickFn   : PropTypes.func,               // When a file is single clicked
+  doubleClickFn   : PropTypes.func,               // When a file is double clicked
+  crumbClickFn    : PropTypes.func,               // When a crumb is clicked
+  selected        : PropTypes.object,             // The currently selected file
+  contentStyle    : PropTypes.object,             // Styles for the content section
+  crumbPopup      : React.PropTypes.bool,         // Optional: Should we show a popup on the crumbs?
+  options         : React.PropTypes.shape({
+    allowFolder   : React.PropTypes.bool,
+    foldersOnly   : React.PropTypes.bool,
+    showMenu      : React.PropTypes.bool,
+    explore       : React.PropTypes.string,       // Optional: 'dropbox' || 'drive' - The provider
   }),
-  FileListActions : PropTypes.object,      // Actions
-  dispatch        : PropTypes.func,        // Actions
+  FileListActions : PropTypes.object,             // Actions
+  dispatch        : PropTypes.func,               // Actions
+  files           : PropTypes.object,             // Store
 };
 
 

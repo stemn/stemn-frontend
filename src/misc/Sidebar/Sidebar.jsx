@@ -56,7 +56,9 @@ export const Component = React.createClass({
     const { projectsActions, projects, auth, dispatch } = this.props;
     const sidebarStyle = classNames('layout-column', 'flex' ,'rel-box', styles.sidebar);
     const nameRegex = new RegExp(escapeRegExp(this.props.sidebar.searchString), 'i');
-    const filteredProjects = projects.userProjects.data ? projects.userProjects.data.filter(project => nameRegex.test(project.name)) : [];
+    const filteredProjects = projects && projects.data
+      ? projects.data.filter(project => nameRegex.test(project.name))
+      : [];
     const filteredProjectsOrdered = orderBy(filteredProjects, 'updated', 'desc')
 
     return (
@@ -77,7 +79,7 @@ export const Component = React.createClass({
               <MdSearch className={styles.sidebarSearchIcon} size="25" onClick={this.secretSearch}/>
             </div>
             <div className="scroll-box flex">
-              {projects.userProjects.data && projects.userProjects.data.length == 0 ? <SidebarProjectButton  item={{name: 'Create a project'}} clickFn={this.showProjectNewModal} /> : null }
+              {projects && project.data && projects.data.length == 0 ? <SidebarProjectButton  item={{name: 'Create a project'}} clickFn={this.showProjectNewModal} /> : null }
               {filteredProjectsOrdered.length > 0 ? <div style={{padding: '10px 15px 5px', opacity: '0.7'}}>My Projects</div> : null}
               {filteredProjectsOrdered.map((item, idx) => <ProjectWithContext key={item._id} item={item} isActive={item._id == this.props.params.stub} to={`/project/${item._id}`}/>)}
               <ContextMenu identifier={projectContextIdentifier} menu={ProjectMenu(dispatch)}/>
@@ -121,7 +123,7 @@ function mapStateToProps({ sidebar, auth, projects }, {params}) {
     sidebar,
     auth,
     params,
-    projects,
+    projects: projects.userProjects[auth.user._id],
   };
 }
 
