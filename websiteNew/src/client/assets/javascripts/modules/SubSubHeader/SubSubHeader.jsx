@@ -11,9 +11,9 @@ export default class SubHeader extends Component {
   }
 
   render() {
-    const { title, children } = this.props
+    const { title, children, className, ...otherProps } = this.props
     return (
-      <div className={ classes.header }>
+      <div className={ classNames(classes.header, className) } { ...otherProps }>
         <Container>
           <div className={ classes.headerBorder }/>
           { children }
