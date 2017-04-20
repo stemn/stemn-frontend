@@ -26,18 +26,16 @@ export default class TimelineVertical extends Component {
   render() {
     const { items, type, group } = this.props
 
-    if (!items || items.length === 0) return null
+    if (!items || items.length === 0) return <div className="text-title-5">Timeline empty</div>
 
     if (group) {
       const groupedByDay = groupByDay(items)
       return (
         <div>
           { groupedByDay.map((group) => (
-            <div key={ group.date }>
+            <div className={ classes.group } key={ group.date }>
               <div className={ classes.groupTitle + ' text-mini-caps' }>{ getCalendarText(group.items[0].timestamp) }</div>
-              <div className={ classes.group }>
-                { this.renderItems(group.items) }
-              </div>
+              { this.renderItems(group.items) }
             </div>
           ))}
         </div>
