@@ -32,7 +32,9 @@ export const add = ({ entityId, type, number, numberModel }) => (dispatch, getSt
       type,
     },
   })
-  dispatch(actions.change(numberModel, number + 1))
+  if (number && numberModel) {
+    dispatch(actions.change(numberModel, number + 1))
+  }
 }
 
 export const remove = ({ entityId, type, number, numberModel }) => (dispatch, getState) => {
@@ -47,5 +49,7 @@ export const remove = ({ entityId, type, number, numberModel }) => (dispatch, ge
       type,
     },
   })
-  dispatch(actions.change(numberModel, number - 1))
+  if (number && numberModel) {
+    dispatch(actions.change(numberModel, number - 1))
+  }
 }

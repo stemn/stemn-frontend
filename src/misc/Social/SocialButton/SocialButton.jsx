@@ -38,8 +38,8 @@ export default class SocialButton extends Component {
     remove: PropTypes.func.isRequired,
     entityId: PropTypes.string.isRequired,
     entityType: PropTypes.string.isRequired,
-    number: PropTypes.number.isRequired,
-    numberModel: PropTypes.string.isRequired,
+    number: PropTypes.number,               // Count - i.e. numLikes or numFollows
+    numberModel: PropTypes.string,          // The model of the count - used to iterate it
     type: PropTypes.oneOf(['follow', 'like']).isRequired,
     status: PropTypes.bool.isRequired,
   }
@@ -78,9 +78,11 @@ export default class SocialButton extends Component {
           { getIcon(type, status) }
           { getText(type, status) }
         </div>
-        <div className={ classes.count }>
-          { number }
-        </div>
+        { number && numberModel
+        ? <div className={ classes.count }>
+            { number }
+          </div>
+        : null }
       </div>
     )
   }
