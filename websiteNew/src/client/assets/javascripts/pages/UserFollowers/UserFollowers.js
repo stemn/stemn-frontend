@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-
 import classes from './UserFollowers.css'
 import classNames from 'classnames'
-
 import User from 'modules/User'
 import Pagination from 'stemn-shared/misc/Pagination'
 

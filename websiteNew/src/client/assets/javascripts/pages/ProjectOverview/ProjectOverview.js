@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
-
 import classNames from 'classnames'
 import classes from './ProjectOverview.css'
-
 import { projectRoute, fileRoute, projectFolderRoute } from 'route-actions'
-
 import moment from 'moment'
-
 import FileList from 'stemn-shared/misc/FileList/FileList'
 import Readme from 'stemn-shared/misc/Files/Readme/Readme.jsx'
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'
@@ -15,8 +11,7 @@ import Tag from 'stemn-shared/misc/Tags/Tag'
 import LikeButton from 'stemn-shared/misc/Likes/LikeButton'
 import SubSubHeader from 'modules/SubSubHeader'
 import Link from 'stemn-shared/misc/Router/Link'
-
-
+import { licenseData } from 'stemn-shared/misc/Licenses/Licenses.data'
 import MdLocationOn from 'react-icons/md/location-on'
 import MdPeople from 'react-icons/md/people'
 import MdAccount from 'react-icons/md/account-balance'
@@ -44,8 +39,11 @@ export default class ProjectOverview extends Component {
     const options = {
       showMenu: true
     }
+
     if(project && project.data && project.data._id){
       
+      const licenseInfo = licenseData.find(license => license.type == project.data.license)
+      const projectRouteParams = { projectId: project.data._id }
 
       const infoBoxes = (
         <Col className={ classNames(project.data.picture ? 'flex flex-gt-xs-33' : 'flex') }>
@@ -56,17 +54,19 @@ export default class ProjectOverview extends Component {
             </div>
             <div className='flex'>
               <MdPeople />
-              { project.data.team.length === 1
-              ? `${project.data.team.length} team member`
-              : `${project.data.team.length} team members` }
+              <Link name="projectTeamRoute" params={ projectRouteParams }>
+                { project.data.team.length === 1
+                ? `${project.data.team.length} team member`
+                : `${project.data.team.length} team members` }
+              </Link>
             </div>
-            <div className='flex'>
+            <div className='flex text-ellipsis'>
               <MdLocationOn />
-              Sydney Australia
+              { project.data.location[0].name }
             </div>
             <div className='flex'>
               <MdAccount />
-              Creative Commons
+              <a href={ licenseInfo.url } target="_blank">{ licenseInfo.name }</a>
             </div>
           </div>
         </Col>

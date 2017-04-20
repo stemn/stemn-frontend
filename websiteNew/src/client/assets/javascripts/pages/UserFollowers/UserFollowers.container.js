@@ -43,7 +43,7 @@ const fetchConfigs = [{
 export default class UserFollowersContainer extends Component {
   render() {
     return (
-      <UserFollowers {...this.props} />
+      <UserFollowers { ...this.props } />
     )
   }
 }
