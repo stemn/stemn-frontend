@@ -26,6 +26,14 @@ const eventTextMap = {
           <Link name="projectRoute" params={ params }>{ item.data.project._id }</Link>
         </span>
       )
+    } else if ( type === 'project') {
+      return (
+        <span>
+          added a commit
+          <Link name="commitRoute" params={ params }>{ item.data.summary }</Link>
+          containing { item.data.items.length } revisions
+        </span>
+      )
     }
   },
 }
