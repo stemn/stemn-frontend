@@ -45,7 +45,7 @@ class Project extends Component {
             <Link
               activeIf={ { includes: ['projectCommitsRoute'] } }
               name="projectCommitsRoute" params={ routeParams }>
-              15 Commits
+              History
             </Link>
             <Link
               activeIf={ { includes: ['projectTasksRoute'] } }

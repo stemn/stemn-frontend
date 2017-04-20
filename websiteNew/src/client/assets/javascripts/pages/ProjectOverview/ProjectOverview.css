@@ -8,6 +8,9 @@
   background: white;
 }
 
+.tags {
+  margin-right: 10px;
+}
 .tags > a {
   margin-bottom: 0
 }

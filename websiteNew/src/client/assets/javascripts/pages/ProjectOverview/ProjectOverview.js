@@ -8,7 +8,7 @@ import Readme from 'stemn-shared/misc/Files/Readme/Readme.jsx'
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import Tag from 'stemn-shared/misc/Tags/Tag'
-import LikeButton from 'stemn-shared/misc/Likes/LikeButton'
+import SocialButton from 'stemn-shared/misc/Social/SocialButton'
 import SubSubHeader from 'modules/SubSubHeader'
 import Link from 'stemn-shared/misc/Router/Link'
 import { licenseData } from 'stemn-shared/misc/Licenses/Licenses.data'
@@ -94,20 +94,32 @@ export default class ProjectOverview extends Component {
             { project.data.blurb.length > 0
             ? <div className={ classes.blurb }>{ project.data.blurb }</div>
             : null }
-            <div className='layout-row layout-align-start-center'>
+            <div className="layout-xs-column layout-gt-xs-row layout-align-gt-xs-start-center">
               <div className={ classes.tags }>
                 { project.data.fields.map((field) => (
                   <Link key={ field._id } name="fieldRoute" params={{ fieldId: field.stub }}>
-                    <Tag className="primary" text={ field.name } />
+                    <Tag className="primary" text={ field.name } style={ { marginBottom: '6px' } } />
                   </Link>
                 ))}
               </div>
               <div className="flex" />
-              <LikeButton
-                number={ project.data.likes }
-                entityType='project'
-                entityId={ project.data._id }
-              />
+              <div className="layout-row" style={ { marginBottom: '6px' } }>
+                <SocialButton
+                  style={{marginRight: '10px'}}
+                  type="follow"
+                  numberModel={`${entityModel}.data.followers`}
+                  number={ project.data.followers }
+                  entityType="project"
+                  entityId={ project.data._id }
+                />
+                <SocialButton
+                  type="like"
+                  numberModel={`${entityModel}.data.likes`}
+                  number={ project.data.likes }
+                  entityType="project"
+                  entityId={ project.data._id }
+                />
+              </div>
             </div>
           </SubSubHeader>
           <Container style={ { marginTop: '30px' } }>

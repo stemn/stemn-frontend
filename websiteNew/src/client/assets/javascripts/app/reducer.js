@@ -13,7 +13,7 @@ import fileList         from 'stemn-shared/misc/FileList/FileList.reducer.js'
 import fileSelect       from 'stemn-shared/misc/FileSelect/FileSelect.reducer.js'
 import files            from 'stemn-shared/misc/Files/Files.reducer.js'
 import header           from 'stemn-shared/misc/Header/Header.reducer.js'
-import likes            from 'stemn-shared/misc/Likes/Likes.reducer.js'
+import social           from 'stemn-shared/misc/Social/Social.reducer.js'
 import mentions         from 'stemn-shared/misc/Mentions/Mentions.reducer.js'
 import modals           from 'stemn-shared/misc/Modal/Modal.reducer.js'
 import notifications    from 'stemn-shared/misc/Notifications/Notifications.reducer.js'
@@ -47,7 +47,7 @@ export default combineReducers({
   files,
   fields,
   header,
-  likes,
+  social,
   mentions,
   modals,
   notifications,
