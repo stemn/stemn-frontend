@@ -1,11 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-
 import { orderBy } from 'lodash'
-
 import classes from './UserProjects.css'
 import classNames from 'classnames'
-
-import Project from 'modules/Project'
+import ProjectRow from 'stemn-shared/misc/Projects/ProjectRow'
 
 export default class UserProjects extends Component {
   render() {
@@ -13,8 +10,8 @@ export default class UserProjects extends Component {
     return (
       <div>
         { orderBy(projects.data, 'updated', 'desc').map((project) => (
-          <Project
-            size='wide'
+          <ProjectRow
+            size="wide"
             key={ project._id }
             projectId={ project._id }
             className={ classes.project }

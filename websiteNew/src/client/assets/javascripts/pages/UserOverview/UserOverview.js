@@ -6,7 +6,7 @@ import { orderBy } from 'lodash';
 import { Row, Col } from 'stemn-shared/misc/Layout'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
 import TimelineVertical from 'stemn-shared/misc/TimelineVertical/TimelineVertical';
-import Project from 'modules/Project';
+import ProjectRow from 'stemn-shared/misc/Projects/ProjectRow'
 import CalendarHeatmap from 'react-calendar-heatmap';
 
 const normaliseValue = (value) => {
@@ -43,7 +43,7 @@ export default class UserOverview extends Component {
         <Row className='sm layout-row layout-wrap'>
           { projectsToDisplay.map(project => (
             <Col key={ project._id } className='sm flex-100 flex-gt-sm-50'>
-              <Project 
+              <ProjectRow
                 key={ project._id } 
                 projectId={ project._id } 
                 className={ classes.project }

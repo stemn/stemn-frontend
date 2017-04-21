@@ -14,9 +14,10 @@ import IsOwner from 'stemn-shared/misc/Auth/IsOwner'
 import PublicPrivateIcon from 'stemn-shared/misc/Icons/PublicPrivateIcon'
 
 class Project extends Component {
-  renderComplete () {
+
+  render() {
     const { children, project, pathname, currentUser } = this.props
-    const routeParams = { projectId: project.data._id }
+    const routeParams = { projectId: get(project, 'data._id') }
     const publicIcon = (
       <PublicPrivateIcon
         type={ get(project, 'data.permissions.projectType', 'public') }
@@ -26,83 +27,50 @@ class Project extends Component {
     )
 
     return (
-      <div className='layout-column flex'>
-        <SubHeader
-          title={ project.data.name }
-          noline
-          icon={ publicIcon }
-        >
-          <Tabs noline>
-            <Link activeIf={ { is: ['projectRoute'], includes: ['projectFilesRoute'] } }
-              name="projectRoute" params={ routeParams }>
-              Overview
-            </Link>
-            <Link
-              activeIf={ { includes: ['projectTeamRoute'] } }
-              name="projectTeamRoute" params={ routeParams }>
-              Team
-            </Link>
-            <Link
-              activeIf={ { includes: ['projectCommitsRoute'] } }
-              name="projectCommitsRoute" params={ routeParams }>
-              History
-            </Link>
-            <Link
-              activeIf={ { includes: ['projectTasksRoute'] } }
-              name="projectTasksRoute" params={ routeParams }>
-              {project.data.numThreads} Threads
-            </Link>
-            <IsOwner team={ project.data.team } minRole="admin">
-              <Link
-                activeIf={ { includes: ['projectSettingsRoute'] } }
-                name="projectSettingsRoute" params={ routeParams }>
-                Settings
-              </Link>
-            </IsOwner>
-          </Tabs>
-        </SubHeader>
-        <div className={ "flex layout-column" }>
-          { children }
-        </div>
-      </div>
-    )
-  }
-  renderPending() {
-    return (
-      <div>Loading</div>
-    )
-  }
-
-  render() {
-    const { project } = this.props
-    return (
       <StandardLayout style={ { marginTop: '30px' } } nofooter>
-        { project && project.data
-          ? this.renderComplete()
-          : null
-        }
+          <SubHeader
+            title={ get(project, 'data.name', ' ') || 'Untitled Project' }
+            noline
+            icon={ publicIcon }
+          >
+            <Tabs noline>
+              <Link activeIf={ { is: ['projectRoute'], includes: ['projectFilesRoute'] } }
+                name="projectRoute" params={ routeParams }>
+                Overview
+              </Link>
+              <Link
+                activeIf={ { includes: ['projectTeamRoute'] } }
+                name="projectTeamRoute" params={ routeParams }>
+                Team
+              </Link>
+              <Link
+                activeIf={ { includes: ['projectCommitsRoute'] } }
+                name="projectCommitsRoute" params={ routeParams }>
+                History
+              </Link>
+              <Link
+                activeIf={ { includes: ['projectTasksRoute'] } }
+                name="projectTasksRoute" params={ routeParams }>
+                { get(project, 'data.numThreads', 0) } Threads
+              </Link>
+              <IsOwner team={ get(project, 'data.team', []) } minRole="admin">
+                <Link
+                  activeIf={ { includes: ['projectSettingsRoute'] } }
+                  name="projectSettingsRoute" params={ routeParams }>
+                  Settings
+                </Link>
+              </IsOwner>
+            </Tabs>
+          </SubHeader>
+          <div className={ "flex layout-column" }>
+            { project && project.data && project.dataSize === 'lg'
+              ? children
+              : null
+            }
+          </div>
       </StandardLayout>
     )
   }
 }
 
 export default Project
-
-
-//        <div className={ classes.header }>
-//          <Container className={classNames(classes.headerInner, 'layout-row layout-align-start-center')}>
-//            <Link name='userRoute' params={ { userId: project.data.team[0]._id } }>
-//              <UserAvatar
-//                name={ project.data.team[0].name }
-//                picture={ project.data.team[0].picture }
-//                size={ 30 }
-//                shape='square'
-//              />
-//            </Link>
-//            <h1 className={ classes.title }>
-//              { project.data.name }
-//            </h1>
-//            <div className='flex'></div>
-
-//          </Container>
-//        </div>

@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import classes from './ProjectOverview.css'
 import { projectRoute, fileRoute, projectFolderRoute } from 'route-actions'
 import moment from 'moment'
+import { has } from 'lodash'
 import FileList from 'stemn-shared/misc/FileList/FileList'
 import Readme from 'stemn-shared/misc/Files/Readme/Readme.jsx'
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'
@@ -60,14 +61,20 @@ export default class ProjectOverview extends Component {
                 : `${project.data.team.length} team members` }
               </Link>
             </div>
-            <div className='flex text-ellipsis'>
-              <MdLocationOn />
-              { project.data.location[0].name }
-            </div>
-            <div className='flex'>
-              <MdAccount />
-              <a href={ licenseInfo.url } target="_blank">{ licenseInfo.name }</a>
-            </div>
+            { has(project, 'data.location[0].name')
+              ? <div className='flex text-ellipsis'>
+                  <MdLocationOn />
+                  { project.data.location[0].name }
+                </div>
+              : null
+            }
+            { licenseInfo
+              ? <div className='flex'>
+                <MdAccount />
+                <a href={ licenseInfo.url } target="_blank">{ licenseInfo.name }</a>
+              </div>
+              : null
+            }
           </div>
         </Col>
       )
