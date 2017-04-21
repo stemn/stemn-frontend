@@ -28,46 +28,59 @@ class Project extends Component {
 
     return (
       <StandardLayout style={ { marginTop: '30px' } } nofooter>
-          <SubHeader
-            title={ get(project, 'data.name', ' ') || 'Untitled Project' }
-            noline
-            icon={ publicIcon }
-          >
-            <Tabs noline>
-              <Link activeIf={ { is: ['projectRoute'], includes: ['projectFilesRoute'] } }
-                name="projectRoute" params={ routeParams }>
-                Overview
-              </Link>
+        <SubHeader
+          title={ get(project, 'data.name', ' ') || 'Untitled Project' }
+          noline
+          icon={ publicIcon }
+        >
+          <Tabs noline>
+            <Link
+              activeIf={ { is: ['projectRoute'], includes: ['projectFilesRoute'] } }
+              name="projectRoute"
+              params={ routeParams }
+            >
+              Overview
+            </Link>
+            <Link
+              activeIf={ { includes: ['projectTeamRoute'] } }
+              name="projectTeamRoute"
+              params={ routeParams }
+            >
+              Team
+            </Link>
+            <Link
+              activeIf={ { includes: ['projectCommitsRoute'] } }
+              name="projectCommitsRoute"
+              params={ routeParams }
+            >
+              History
+            </Link>
+            <Link
+              activeIf={ { includes: ['projectTasksRoute'] } }
+              name="projectTasksRoute" params={ routeParams }
+            >
+              { get(project, 'data.numThreads', 0) } Threads
+            </Link>
+            <IsOwner
+              team={ get(project, 'data.team', []) }
+              minRole="admin"
+            >
               <Link
-                activeIf={ { includes: ['projectTeamRoute'] } }
-                name="projectTeamRoute" params={ routeParams }>
-                Team
+                activeIf={ { includes: ['projectSettingsRoute'] } }
+                name="projectSettingsRoute"
+                params={ routeParams }
+              >
+                Settings
               </Link>
-              <Link
-                activeIf={ { includes: ['projectCommitsRoute'] } }
-                name="projectCommitsRoute" params={ routeParams }>
-                History
-              </Link>
-              <Link
-                activeIf={ { includes: ['projectTasksRoute'] } }
-                name="projectTasksRoute" params={ routeParams }>
-                { get(project, 'data.numThreads', 0) } Threads
-              </Link>
-              <IsOwner team={ get(project, 'data.team', []) } minRole="admin">
-                <Link
-                  activeIf={ { includes: ['projectSettingsRoute'] } }
-                  name="projectSettingsRoute" params={ routeParams }>
-                  Settings
-                </Link>
-              </IsOwner>
-            </Tabs>
-          </SubHeader>
-          <div className={ "flex layout-column" }>
-            { project && project.data && project.dataSize === 'lg'
-              ? children
-              : null
-            }
-          </div>
+            </IsOwner>
+          </Tabs>
+        </SubHeader>
+        <div className="flex layout-column">
+          { project && project.data && project.dataSize === 'lg'
+            ? children
+            : null
+          }
+        </div>
       </StandardLayout>
     )
   }

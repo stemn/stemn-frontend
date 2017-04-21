@@ -51,7 +51,3 @@ export default class FileContainer extends Component {
       : null
   }
 }
-
-
-
-
