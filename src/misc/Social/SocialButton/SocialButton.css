@@ -46,6 +46,7 @@
   justify-content: center;
   color: rgba(0, 0, 0, 0.3);
 
-  width: 25px;
+  min-width: 25px;
+  padding: 0 3px;
   border-left: 1px solid border1;
 }

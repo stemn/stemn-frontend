@@ -1,0 +1,27 @@
+.project {
+  height: 145px;
+}
+
+.title {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.blurb {
+  color: rgba(0, 0, 0, 0.6);
+  line-height: 1.5em;
+  height: 60px;
+  overflow: hidden;
+}
+
+.meta {
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.picture {
+  height: 100px;
+  margin-left: 15px;
+}

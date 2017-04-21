@@ -7,14 +7,14 @@ export default class LoadingPlaceholder extends Component {
     width: 200
   }
   render() {
-    const { width, className } = this.props
+    const { width, className, style } = this.props
     const sizeStyles = {
       width: `${width}px`,
     }
     return (
       <div
         className={ classNames(classes.placeholder, className) }
-        style={ sizeStyles }
+        style={ Object.assign({}, sizeStyles, style) }
       >
         &nbsp;
       </div>
