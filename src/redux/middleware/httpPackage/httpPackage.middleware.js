@@ -122,6 +122,8 @@ function getParams(endpoint){
     params[key] = requests[endpoint].actions.map(action => action.httpPackage.params[key])
     return params
   }, {})
+
+//  console.log(dynamicParams);
   const params = Object.assign({}, staticParams, dynamicParams)
   return params
 }

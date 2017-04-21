@@ -3,14 +3,15 @@ import { actions } from 'react-redux-form'
 
 export const checkStatus = (entityId, type) => (dispatch, getState) => dispatch({
   type: 'SOCIAL/GET_STATUS',
-  http: true,
-  payload: {
+  httpPackage: {
     method: 'GET',
     url: '/api/v1/social',
-    params: {
-      parentId: entityId,
-      socialType: type,
+    staticParams: {
       childId: getState().auth.user._id,
+      socialType: type,
+    },
+    params: {
+      parentIds: entityId,
     },
   },
   meta: {

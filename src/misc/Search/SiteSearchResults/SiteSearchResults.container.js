@@ -33,7 +33,6 @@ const dispatchToProps = {
 const fetchConfigs = [{
   hasChanged: 'cacheKey',
   onChange: (props) => {
-    console.log(props.cacheKey);
     props.search({
       entityType: props.type,
       parentType: props.parentType,

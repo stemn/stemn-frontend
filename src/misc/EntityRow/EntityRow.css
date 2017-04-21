@@ -1,11 +1,5 @@
-.result {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 15px;
-  overflow: hidden;
-}
-.result:last-child {
-  border-bottom: none;
-}
+.row {}
+
 .link {
   display: flex;
   margin-bottom: 5px;
@@ -21,4 +15,7 @@
 
 .avatar {
   margin-right: 10px;
+}
+.socialButton {
+  margin-left: 10px;
 }

@@ -18,7 +18,7 @@ export default (state = initialState, action = {}) => {
       return i.assocIn(state, [action.meta.type, action.meta.entityId], true)
 
     case 'SOCIAL/GET_STATUS_FULFILLED':
-      return i.assocIn(state, [action.meta.type, action.meta.entityId], action.payload.data[0].status)
+      return i.assocIn(state, [action.meta.type, action.meta.entityId], action.payload.data.status)
 
     default:
       return state

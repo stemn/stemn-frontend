@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { get } from 'lodash'
 import classes from './SiteSearchResults.css'
-import SiteSearchResult from 'stemn-shared/misc/Search/SiteSearchResult'
+import EntityRow from 'stemn-shared/misc/EntityRow'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay'
 import Pagination from 'stemn-shared/misc/Pagination'
 
@@ -20,10 +20,11 @@ export default class SiteSearchResults extends Component {
             noOverlay
           />
           { results && results.data && results.data.map((result) => (
-            <SiteSearchResult
+            <EntityRow
               key={ result._id }
-              result={ result }
+              data={ result }
               query={ query }
+              className={ classes.result }
             />
           )) }
           { noResults && <div className="layout-column flex layout-align-center-center text-title-5">No Search Results</div> }
