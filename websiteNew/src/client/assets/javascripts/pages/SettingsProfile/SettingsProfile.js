@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
 import classes from './SettingsProfile.css'
-
+import classNames from 'classnames'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import { Row, Col } from 'stemn-shared/misc/Layout'
 import Input from 'stemn-shared/misc/Input/Input/Input'
@@ -22,8 +22,8 @@ export default class SettingsProfile extends Component {
     return (
       <div>
         <InfoPanel>
-          <Row className='layout-row'>
-            <Col className='flex'>
+          <Row className="layout-xs-column layout-sm-column layout-gt-sm-row">
+            <Col className="flex flex-order-sm-1 flex-order-xs-1">
               <h3>First and Last Name</h3>
               <div className="layout-row">
                 <Input
@@ -74,7 +74,7 @@ export default class SettingsProfile extends Component {
                 Save Profile
               </ProgressButton>
             </Col>
-            <Col className={ classes.avatarCol }>
+            <Col className={ classNames(classes.avatarCol, 'flex-order-sm-0 flex-order-xs-0' ) }>
               <h3>Profile Picture</h3>
               <Upload
                 containerClassName={ classes.container }

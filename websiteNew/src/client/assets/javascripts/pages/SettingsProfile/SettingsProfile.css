@@ -1,7 +1,9 @@
 .avatarCol {
   width: 250px;
 }
-
+.container {
+  margin-bottom: 15px;
+}
 .avatar {
   width: 250px;
   height: 210px;

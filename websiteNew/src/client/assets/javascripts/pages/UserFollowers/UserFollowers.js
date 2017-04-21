@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import classes from './UserFollowers.css'
 import classNames from 'classnames'
-import User from 'modules/User'
+import UserRow from 'stemn-shared/misc/Users/UserRow'
 import Pagination from 'stemn-shared/misc/Pagination'
 
 export default class UserFollowers extends Component {
@@ -17,7 +17,7 @@ export default class UserFollowers extends Component {
         <div className={ classes.panel }>
           { followers && followers.data
           ? followers.data.map((userId) => (
-            <User key={ userId } userId={ userId } className={ classes.user } />
+            <UserRow key={ userId } userId={ userId } className={ classes.user } />
           ))
           : null }
         </div>

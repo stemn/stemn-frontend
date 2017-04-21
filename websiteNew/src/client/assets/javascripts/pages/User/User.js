@@ -12,17 +12,19 @@ import SocialButton from 'stemn-shared/misc/Social/SocialButton'
 import { get } from 'lodash'
 import MdLocationOn from 'react-icons/md/location-on'
 import MdLink from 'react-icons/md/link'
+import { userRoute } from 'route-actions'
 
 
 class User extends Component {
   renderComplete() {
-    const { user, children, currentUser } = this.props
+    const { user, children, currentUser, location } = this.props
+    const showSidebar = location.pathname === userRoute({userId : user.data._id})
     return (
       <div>
         <UserNavHeader user={ user } currentUser={ currentUser } />
         <Container>
           <Row className='layout-xs-column layout-gt-xs-row'>
-            <Col className={ classNames(classes.sidebar, 'flex-gt-xs-30')}>
+            <Col className={ classNames(classes.sidebar, 'flex-gt-xs-30', {[ classes.showSidebar] : showSidebar } )}>
               <UserAvatar
                 name={ user.data.name }
                 picture={ user.data.picture }
