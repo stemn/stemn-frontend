@@ -1,49 +1,26 @@
-// Container Core
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
-// Container Actions
-import * as FilesActions from '../Files.actions.js';
-import { loadCode } from 'stemn-shared/misc/CodeSplitting/CodeSplitting.actions';
-
-// Component Core
-import React from 'react';
-import moment from 'moment';
-
-// Styles
-import classNames from 'classnames';
-import classes from './PreviewFile.css';
-
-// Sub Components
-import PreviewCode        from './PreviewCode/PreviewCode';
-import PreviewPcb         from './PreviewPcb/PreviewPcb';
-import PreviewImage       from './PreviewImage/PreviewImage';
-import PreviewGoogle      from './PreviewGoogle/PreviewGoogle';
-import PreviewGdoc        from './PreviewGdoc/PreviewGdoc';
-import LoadingOverlay     from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import laptopSpanner      from 'stemn-shared/assets/images/pure-vectors/laptop-spanner.svg';
-import { getViewerType }  from './PreviewFile.utils.js';
-import { isAssembly }     from './PreviewCad/PreviewCad.utils.js';
-import DownloadFile       from '../DownloadFile/DownloadFile.jsx';
-import ErrorMessages      from './Messages/Messages.jsx';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as FilesActions from '../Files.actions.js'
+import { loadCode } from 'stemn-shared/misc/CodeSplitting/CodeSplitting.actions'
+import React from 'react'
+import classNames from 'classnames'
+import classes from './PreviewFile.css'
+import PreviewCode from './PreviewCode/PreviewCode'
+import PreviewCadLoader from './PreviewCadLoader'
+import PreviewPdfLoader from './PreviewPdfLoader'
+import PreviewPcb from './PreviewPcb/PreviewPcb'
+import PreviewImage from './PreviewImage/PreviewImage'
+import PreviewGoogle from './PreviewGoogle/PreviewGoogle'
+import PreviewGdoc from './PreviewGdoc/PreviewGdoc'
+import laptopSpanner from 'stemn-shared/assets/images/pure-vectors/laptop-spanner.svg'
+import { getViewerType } from './PreviewFile.utils.js'
+import { isAssembly } from './PreviewCad/PreviewCad.utils.js'
+import DownloadFile from '../DownloadFile/DownloadFile.jsx'
+import ErrorMessages from './Messages/Messages.jsx'
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
-  getPreviewCad() {
-    const cacheKey = 'previewCad';
-    const importPromise = System.import('./PreviewCad/PreviewCad').then((response) => this.PreviewCad = response.default);
-    if (!this.props.codeSplitting[cacheKey]) {
-      this.props.loadCode(importPromise, cacheKey);
-    }
-  },  
-  getPreviewPdf() {
-    const cacheKey = 'previewPdf';
-    const importPromise = System.import('./PreviewPdf/PreviewPdf').then((response) => this.PreviewPdf = response.default);
-    if (!this.props.codeSplitting[cacheKey]) {
-      this.props.loadCode(importPromise, cacheKey);
-    }
-  },
   render() {
     const { file, fileData, fileRender, filesActions, header, event, codeSplitting, loadCode } = this.props;
     const previewId = `${file.project._id}-${file.fileId}-${file.revisionId}`;
@@ -59,39 +36,75 @@ export const Component = React.createClass({
     }
 
     const getPreview = () => {
-      const viewerType = getViewerType(file.extension, file.provider);
-      if(fileData && fileData.error || fileRender && fileRender.error){
-        return <ErrorMessages error={fileData && fileData.error ? fileData.error : fileRender.error} fileMeta={file}/>
-      }
+      const viewerType = getViewerType(file.extension, file.provider)
       
-      if(viewerType == 'gerber' || viewerType == 'pcb'){
-        return <PreviewPcb previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile} />
-      }
-      else if(viewerType == 'code'){
-        return <PreviewCode previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile} />
-      }
-      else if(viewerType == 'autodesk'){
-        this.getPreviewCad();
-        return this.PreviewCad
-          ? <this.PreviewCad previewId={previewId} fileMeta={file} fileRender={fileRender} renderFn={renderFn}/>
-          : <div>Loading</div>
-      }
-      else if(viewerType == 'google'){
-        return <PreviewGoogle previewId={previewId} fileMeta={file} />
-      }
-      else if(viewerType == 'gdoc'){
-        return <PreviewGdoc previewId={previewId} fileMeta={file} />
-      }
-      else if(viewerType == 'image'){
-        return <PreviewImage previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile} />
-      }
-      else if(viewerType == 'pdf'){
-        this.getPreviewPdf();
-        return this.PreviewPdf
-          ? <this.PreviewPdf previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={filesActions.getFile} />
-          : <div>Loading</div>
-      }
-      else{
+      if (fileData && fileData.error || fileRender && fileRender.error) {
+        return (
+          <ErrorMessages
+            error={ fileData && fileData.error ? fileData.error : fileRender.error }
+            fileMeta={ file }
+          />
+        )
+      } else if (viewerType === 'gerber' || viewerType === 'pcb') {
+        return (
+          <PreviewPcb
+            previewId={ previewId }
+            fileMeta={ file }
+            fileData={ fileData }
+            downloadFn={ filesActions.getFile }
+          />
+        )
+      } else if (viewerType === 'code') {
+        return (
+          <PreviewCode
+            previewId={ previewId }
+            fileMeta={ file }
+            fileData={ fileData }
+            downloadFn={ filesActions.getFile }
+          />
+        )
+      } else if (viewerType === 'autodesk') {
+        return (
+          <PreviewCadLoader
+            previewId={ previewId }
+            fileMeta={ file }
+            fileRender={ fileRender }
+            renderFn={ renderFn }
+          />
+        )
+      } else if (viewerType === 'google') {
+        return (
+          <PreviewGoogle
+            previewId={ previewId }
+            fileMeta={ file }
+          />
+        )
+      } else if (viewerType === 'gdoc') {
+        return (
+          <PreviewGdoc
+            previewId={ previewId }
+            fileMeta={ file }
+          />
+        )
+      } else if (viewerType === 'image') {
+        return (
+          <PreviewImage
+            previewId={ previewId }
+            fileMeta={ file }
+            fileData={ fileData }
+            downloadFn={ filesActions.getFile }
+          />
+        )
+      } else if (viewerType === 'pdf') {
+        return (
+          <PreviewPdfLoader
+            previewId={ previewId }
+            fileMeta={ file }
+            fileData={ fileData }
+            downloadFn={ filesActions.getFile }
+          />
+        )
+      } else {
         return (
           <div className="layout-column layout-align-center-center flex">
             <img src={laptopSpanner} style={{width: '100px'}}/>
@@ -109,7 +122,7 @@ export const Component = React.createClass({
             <DownloadFile file={file} title={`Download Version ${file.revisionNumber} of this file.`}>Download</DownloadFile>
           </div>
         : null }
-        {getPreview()}
+        { getPreview() }
       </div>
     );
   }

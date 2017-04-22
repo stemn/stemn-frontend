@@ -85,7 +85,7 @@ export const FileListPopup = React.createClass({
 
     return (
       <div { ...omit(this.props, Object.keys(propTypesObject)) } className={classes.popup}>
-        <LoadingOverlay show={isLoading} linear={true} hideBg={true}/>
+        <LoadingOverlay show={isLoading} linear={true} noOverlay />
         { foldersOnly
         ? foldersOnly.map(file => <FileRow key={file._id} file={file} isActive={file.fileId == activeFolder.fileId} clickFn={clickFn}/> )
         : null }
