@@ -43,17 +43,20 @@ export const Component = React.createClass({
 
     return (
       <div className={classes.comment + ' layout-row'}>
-        <div className={classes.commentAvatar}>
-          <UserAvatar picture={auth.user.picture} size="33" shape="square" />
-        </div>
         <div ref="form" className={classes.commentBody + ' flex'}>
-          <div className={classes.commentHeader}>
+          <div className={classes.commentHeader + ' layout-row layout-align-start-center'}>
+            <UserAvatar
+              picture={ auth.user.picture }
+              size={ 25 }
+              shape="square"
+              className={ classes.commentAvatar }
+            />
             <b>New Comment</b>
           </div>
           <div className={classes.commentContent}>
             <Editor autoFocus={true} model={`${entityModel}.body`} value={newComment.body} placeholder="Write a comment"/>
           </div>
-          <div className="layout-row layout-align-start-end" style={{padding: '0 10px 10px'}}>
+          <div className="layout-row layout-align-start-end" style={{padding: '0 20px 10px'}}>
             <MarkdownButton>Markdown formatting supported</MarkdownButton>
             <div className="flex"></div>
             <Button className="primary sm"

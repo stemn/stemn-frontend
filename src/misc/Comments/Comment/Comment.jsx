@@ -81,11 +81,14 @@ export const Component = React.createClass({
 
     return (
       <div className={classes.comment + ' layout-row'} style={style}>
-        <div className={classes.commentAvatar}>
-          <UserAvatar picture={comment.data.owner.picture} size="33" shape="square" />
-        </div>
         <div className={classes.commentBody + ' flex'}>
           <div className={classes.commentHeader + ' layout-row layout-align-start-center'}>
+            <UserAvatar
+              picture={ comment.data.owner.picture }
+              size={ 25 }
+              shape="square"
+              className={ classes.commentAvatar }
+            />
             <b>{ comment.data.owner.name }</b>
             <span className={classes.date}>&nbsp;<b className="text-interpunct"></b> {moment(comment.data.timestamp).fromNow()} </span>
             <div className="flex"></div>
@@ -121,7 +124,7 @@ export const Component = React.createClass({
             </div>
           : ''}
           {!comment.editActive && comment.data.reactions && comment.data.reactions.length > 0 ?
-            <div><Reactions reactions={comment.data.reactions} /></div>
+            <div className={ classes.reactions }><Reactions reactions={comment.data.reactions} /></div>
           : ''}
         </div>
       </div>
