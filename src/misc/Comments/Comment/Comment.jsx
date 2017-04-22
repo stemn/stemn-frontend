@@ -86,7 +86,8 @@ export const Component = React.createClass({
         </div>
         <div className={classes.commentBody + ' flex'}>
           <div className={classes.commentHeader + ' layout-row layout-align-start-center'}>
-            {comment.data.owner.name}<span className={classes.date}> <b className="text-interpunct"></b> {moment(comment.data.timestamp).fromNow()} </span>
+            <b>{ comment.data.owner.name }</b>
+            <span className={classes.date}>&nbsp;<b className="text-interpunct"></b> {moment(comment.data.timestamp).fromNow()} </span>
             <div className="flex"></div>
             <ReactionPopup reactions={comment.data.reactions} preferPlace="above" submitFn={this.submitReaction} />
             <IsOwner ownerId={comment.data.owner._id}>

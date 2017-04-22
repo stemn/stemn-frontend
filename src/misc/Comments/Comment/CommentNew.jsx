@@ -48,7 +48,7 @@ export const Component = React.createClass({
         </div>
         <div ref="form" className={classes.commentBody + ' flex'}>
           <div className={classes.commentHeader}>
-            New Comment
+            <b>New Comment</b>
           </div>
           <div className={classes.commentContent}>
             <Editor autoFocus={true} model={`${entityModel}.body`} value={newComment.body} placeholder="Write a comment"/>

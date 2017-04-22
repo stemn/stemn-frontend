@@ -11,15 +11,13 @@
   line-height: 1.5em;
 }
 .commentHeader{
-  background: bg1;
-  border-bottom: 1px solid border1;
+  background: white;
   padding: 7px 10px;
 }
 .date{
   font-size: 11px;
   color: grey-3;
 }
-
 
 .commentContent{
   padding: 10px;
