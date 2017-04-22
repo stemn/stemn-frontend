@@ -8,7 +8,6 @@ import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js';
 
 // Component Core
 import React from 'react';
-import moment from 'moment';
 import { has } from 'lodash';
 
 // Styles
@@ -25,40 +24,7 @@ import MdOpenInNew from 'react-icons/md/open-in-new';
 import TaskLabelDots from 'stemn-shared/misc/Tasks/TaskLabelDots/TaskLabelDots.jsx'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea';
 import UserSelect from 'stemn-shared/misc/Users/UserSelect/UserSelect.jsx';
-
-
-///////////////////////////////// COMPONENT /////////////////////////////////
-
-export const DueDate = React.createClass({
-  render() {
-    const { due } = this.props;
-
-    const day = 1000 * 60 * 60 * 24;
-    const colorMap = [
-      {
-        period: 1 * day,
-        color : 'red'
-      },{
-        period: 3 * day,
-        color : 'orange'
-      }
-    ]
-    const currentTime = moment().valueOf();
-    const dueTime     = moment(due).valueOf();
-    const difference  = dueTime - currentTime;
-    const currentInfo = colorMap.find(({period, color}) => difference < period);
-    const style       = currentInfo ? { color : currentInfo.color } : {color : 'rgba(0, 0, 0, 0.4)' };
-
-    if(due){
-      return (
-        <div className="text-ellipsis" style={style}>Due {moment(due).fromNow()}</div>
-      )
-    }
-    else {
-      return null
-    }
-  }
-});
+import DueDate from 'stemn-shared/misc/Tasks/TaskDueDate'
 
 
 export const TaskListItem = React.createClass({

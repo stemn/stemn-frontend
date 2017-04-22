@@ -5,6 +5,9 @@ import Link from 'stemn-shared/misc/Router/Link'
 import MdChatBubble from 'react-icons/md/chat-bubble-outline'
 import TaskLabelDots from 'stemn-shared/misc/Tasks/TaskLabelDots/TaskLabelDots.jsx'
 import UserAvatars from 'stemn-shared/misc/Avatar/UserAvatars/UserAvatars.jsx'
+import DueDate from 'stemn-shared/misc/Tasks/TaskDueDate'
+
+const getGroupInfo = (groupId, groups) => groups.find(group => group._id == groupId)
 
 export default class TaskRow extends Component {
   render() {
@@ -16,6 +19,8 @@ export default class TaskRow extends Component {
         taskId: task.data._id,
         projectId: board.data.project,
       }
+
+      const group = getGroupInfo(task.data.group, board.data.groups)
 
       return (
         <div className={ classNames('layout-row layout-align-start-center', classes.row, className) }>
@@ -30,7 +35,11 @@ export default class TaskRow extends Component {
               </Link>
             </div>
             <div className={ classes.meta }>
-              T#123 - Unclassified - Due in 3 weeks
+              #T23
+              <span className="text-interpunct" />
+              { group.name && <span className="text-grey-2">{ group.name }</span> }
+              { task.data.due && <span className="text-interpunct" /> }
+              { task.data.due && <DueDate due={ task.data.due } /> }
             </div>
           </div>
           <div>
