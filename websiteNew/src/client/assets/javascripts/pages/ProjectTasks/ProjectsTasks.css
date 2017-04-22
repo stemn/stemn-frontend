@@ -23,6 +23,19 @@
   margin-right: 5px;
 }
 
+.threadsPanel {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: white;
+}
+
+.thread {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 15px;
+}
+.thread:last-child {
+  border-bottom: none;
+}
+
 
 /*
 .tasks {
