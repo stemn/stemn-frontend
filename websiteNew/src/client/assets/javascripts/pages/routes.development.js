@@ -115,14 +115,14 @@ export default (
       <IndexRoute                              component={ ProjectOverview } />
       <Route path="team"                       component={ ProjectTeam } />
       <Route path="files/:path"                component={ ProjectOverview } />
-      <Route path="tasks"                      component={ ProjectTasks } />
-      <Route path="tasks/:taskId"              component={ ProjectTask } />
-      <Route path="commits"                    component={ ProjectCommits } />
-      <Route path="commits/:commitId"          component={ ProjectCommit } />
+      <Route path="threads"                    component={ ProjectTasks } />
+      <Route path="threads/:taskId"            component={ ProjectTask } />
+      <Route path="history"                    component={ ProjectCommits } />
+      <Route path="history/:commitId"          component={ ProjectCommit } />
       <Route path="settings"                   component={ ProjectSettings }>
         <IndexRoute                            component={ ProjectSettingsGeneral } />
         <Route path="permissions"              component={ ProjectSettingsPermissions } />
-        <Route path="tasks"                    component={ ProjectSettingsTasks } />
+        <Route path="threads"                  component={ ProjectSettingsTasks } />
         <Route path="team"                     component={ ProjectSettingsTeam } />
         <Route path="tags"                     component={ ProjectSettingsTags } />
       </Route>

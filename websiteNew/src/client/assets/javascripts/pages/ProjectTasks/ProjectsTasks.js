@@ -10,12 +10,13 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import Pagination from 'stemn-shared/misc/Pagination'
 import MdExpandMore from 'react-icons/md/expand-more'
 import SearchInput from 'stemn-shared/misc/Search/SearchInput'
-import Popover from 'stemn-shared/misc/Popover';
-import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList';
+import Popover from 'stemn-shared/misc/Popover'
+import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList'
+import TasksFilterMenu from 'stemn-shared/misc/Tasks/TasksFilterMenu/TasksFilterMenu'
 
 export default class ProjectsTasks extends Component {
   render() {
-    const { project, board, tasks, location } = this.props
+    const { project, board, tasks, location, boardModel } = this.props
     const layout = 'list'
     const page = 1
     const noMoreResults = false
@@ -29,17 +30,22 @@ export default class ProjectsTasks extends Component {
             <div className="layout-row">
               <SearchInput
                 placeholder="Search Threads"
+                model={ `${boardModel}.searchString` }
+                value={ board.searchString }
               />
               <div className="flex" />
-              <Popover preferPlace="below">
+              <Popover preferPlace="below" tipSize={ 1 }>
                 <Button className="light" style={ { margin: '0 15px' } }>
-                  Type: All
+                  Filter
                   <MdExpandMore style={ { marginLeft: '5px' } } />
                 </Button>
-                <div>Popover</div>
+                <TasksFilterMenu
+                  model={`${boardModel}.searchString`}
+                  value={board.searchString}
+                />
               </Popover>
               <Button className="primary">
-                New Issue
+                New Thread
               </Button>
             </div>
           </SubSubHeader>
