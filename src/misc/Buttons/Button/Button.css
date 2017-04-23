@@ -4,7 +4,7 @@
   border: none;
   outline: none;
   background: none;
-  padding: 10px;
+  padding: 10px 12px;
   min-width: 80px;
   transition: all 0.2s ease;
   position: relative;
@@ -50,9 +50,11 @@
 }
 .button:global(.light){
   background: bg1;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.6);
 }
 .button:global(.light):hover{
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .button:global(.primary){
