@@ -98,7 +98,12 @@ export default React.createClass({
         <TaskTimelineWrapper style={{marginLeft: '85px'}}>
           <div className="layout-row layout-align-start-center flex">
             <div className={ classes.avatar }>
-              <UserAvatar picture={item.user.picture} size="25" shape="square"/>
+              <UserAvatar
+                picture={ item.user.picture }
+                size="25"
+                shape="square"
+                name={ item.user.name }
+              />
             </div>
             <div style={{lineHeight: '1.5em'}}>
               <b>{item.user.name}&nbsp;</b>

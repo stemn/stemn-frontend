@@ -34,7 +34,12 @@ export default class TimelineItem extends Component {
         <TaskTimelineWrapper>
           <div className={ classNames('layout-row layout-align-start-center flex')}>
             <Link name="userRoute" params={ userRouteParams } className={ classes.avatar }>
-              <UserAvatar picture={ item.user.picture } size={ 25 } shape="square"/>
+              <UserAvatar
+                picture={ item.user.picture }
+                size={ 25 }
+                shape="square"
+                name={ item.user.name }
+              />
             </Link>
             <div>
               <b>{ item.user.name }&nbsp;</b>
