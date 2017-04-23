@@ -26,12 +26,13 @@ export default React.createClass({
         <div>
           {usersToShow.map( (user, index) =>
             <UserAvatar
-              shape={shape}
-              title={user.name}
+              shape={ shape }
+              title={ user.name }
+              name={ user.name }
               style={{margin: '0 2px'}}
-              key={user._id || index}
-              picture={user.picture}
-              size={size || 25}
+              key={ user._id || index }
+              picture={ user.picture }
+              size={ size || 25 }
             />
           )}
           { usersNotShown.length > 0

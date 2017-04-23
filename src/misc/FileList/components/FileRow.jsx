@@ -20,7 +20,7 @@ export default React.createClass({
       <div className={classNames(classes.row, 'layout-row layout-align-start-center', {[classes.active]: isActive})} >
         <div className={classes.clickOverlay} onClick={()=>singleClick({file})} onDoubleClick={()=>doubleClick({file})}/>
         <FileIcon fileType={file.extension} type={file.type}/>
-        <div style={{width: '200px'}} className="text-ellipsis">{file.name}</div>
+        <div className="text-ellipsis flex">{file.name}</div>
         { file.commit && file.commit.summary && file.commit._id
         ? <Link
             name='commitRoute'

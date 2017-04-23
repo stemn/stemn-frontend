@@ -53,6 +53,7 @@ export default class TaskRow extends Component {
             <UserAvatars
               users={ task.data.users }
               limit={ 3 }
+              shape="square"
             />
           </div>
           <MdChatBubble className={ classes.commentsIcon } />

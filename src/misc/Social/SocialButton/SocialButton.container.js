@@ -1,10 +1,9 @@
-import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import SocialButton from './SocialButton'
 import { add, remove, checkStatus } from '../Social.actions'
 
 const stateToProps = ({ social }, { entityId, type }) => ({
-  status: social[type][entityId]
+  status: social[type][entityId] || false,
 })
 
 const dispatchToProps = {

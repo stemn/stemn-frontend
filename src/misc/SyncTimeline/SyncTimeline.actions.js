@@ -43,31 +43,33 @@ export function fetchTimeline({ projectId, fileId, provider }) {
     type:'TIMELINE/FETCH_TIMELINE',
     payload: http({
       method: 'GET',
-      url: projectId 
-      ? `/api/v1/sync/timeline/${projectId}` 
-      : `/api/v1/remote/timeline/${provider}`,
+      url: projectId
+        ? `/api/v1/sync/timeline/${projectId}`
+        : `/api/v1/remote/timeline/${provider}`,
       params: {
         types: getTypes(),
         file: fileId
       },
     }),
     meta: {
-      cacheKey: fileId ? fileId : projectId
+      cacheKey: fileId
+        ? fileId
+        : projectId,
     }
   }
 }
 
 export const getFeed = () => ({
   // This will get the feed for all items the current user is interested in
-  type:'TIMELINE/FETCH_TIMELINE',
+  type: 'TIMELINE/FETCH_TIMELINE',
   payload: http({
     method: 'GET',
-    url: `/api/v1/feed/sync`,
+    url: '/api/v1/feed/sync',
     params: {
-      types: ['changes', 'commits']
+      types: ['commits'],
     },
   }),
   meta: {
-    cacheKey: 'feed'
-  }
+    cacheKey: 'feed',
+  },
 })
