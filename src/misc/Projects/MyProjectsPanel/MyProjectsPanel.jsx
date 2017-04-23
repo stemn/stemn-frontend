@@ -65,7 +65,7 @@ export default class MyProjectsPanel extends Component {
           >
             <PublicPrivateIcon className={ classes.publicIcon } type={ project.permissions && project.permissions.projectType } size={ 20 } />
             <div className="text-ellipsis flex">
-              { project.name }
+              { project.name || 'Untitled Project' }
             </div>
             { getIcon(project.remote.provider) }
           </Link>

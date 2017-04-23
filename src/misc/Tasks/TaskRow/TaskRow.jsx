@@ -6,13 +6,15 @@ import MdChatBubble from 'react-icons/md/chat-bubble-outline'
 import TaskLabelDots from 'stemn-shared/misc/Tasks/TaskLabelDots/TaskLabelDots.jsx'
 import UserAvatars from 'stemn-shared/misc/Avatar/UserAvatars/UserAvatars.jsx'
 import DueDate from 'stemn-shared/misc/Tasks/TaskDueDate'
+import LoadingPlaceholder from 'stemn-shared/misc/Loading/LoadingPlaceholder'
+import LoadingAnimation from 'stemn-shared/misc/Loading/LoadingAnimation'
 
 const getGroupInfo = (groupId, groups) => groups.find(group => group._id == groupId)
 
 export default class TaskRow extends Component {
   render() {
     const { board, task, className } = this.props
-    console.log({board, task});
+
     if (task && task.data) {
 
       const taskRouteParams = {
@@ -63,6 +65,23 @@ export default class TaskRow extends Component {
         </div>
       )
     }
-    return null
+    return (
+      <LoadingAnimation className={ classNames('layout-row layout-align-start-center', classes.row, className) }>
+        <div className="layout-column flex">
+          <div>
+            <LoadingPlaceholder width={ 300 } className={ classes.title } />
+          </div>
+          <div className={ classNames(classes.meta, 'layout-row') }>
+            <LoadingPlaceholder width={ 50 } />
+            <LoadingPlaceholder width={ 50 } style={ { marginLeft: '5px' } } />
+          </div>
+        </div>
+        <UserAvatars
+          users={ [{}] }
+          limit={ 3 }
+          shape="square"
+        />
+      </LoadingAnimation>
+    )
   }
 }
