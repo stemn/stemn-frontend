@@ -12,11 +12,29 @@ import TimelineVertical from 'stemn-shared/misc/TimelineVertical/TimelineVertica
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
 import SubSubHeader from 'modules/SubSubHeader'
 import Pagination from 'stemn-shared/misc/Pagination'
-import Button from 'stemn-shared/misc/Buttons/Button/Button'
-import MdExpandMore from 'react-icons/md/expand-more'
+import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import SearchInput from 'stemn-shared/misc/Search/SearchInput'
 
 export default class ProjectCommits extends Component {
+  filterOptions = [{
+    value: 'commits',
+    name: 'Filter: Commits',
+    onClick: () => this.pushFilter('commits'),
+  }, {
+    value: 'revisions',
+    name: 'Filter: Revisions',
+    onClick: () => this.pushFilter('revisions'),
+  }, {
+    value: 'task-complete',
+    name: 'Filter: Task Complete',
+    onClick: () => this.pushFilter('task-complete'),
+  }]
+  pushFilter = filter => this.props.push({
+    pathname: window.location.pathname,
+    query: {
+      filter,
+    },
+  })
   renderLoaded() {
     const { project, syncTimeline, location } = this.props
     const page = 1
@@ -45,7 +63,7 @@ export default class ProjectCommits extends Component {
     )
   }
   render() {
-    const { project, syncTimeline } = this.props
+    const { project, syncTimeline, filterValue } = this.props
     const isLoaded = syncTimeline && syncTimeline.data
 
     return (
@@ -56,10 +74,10 @@ export default class ProjectCommits extends Component {
               placeholder="Search History"
             />
             <div className="flex" />
-            <Button className="light">
-              Type: Commits
-              <MdExpandMore style={ { marginLeft: '5px' } } />
-            </Button>
+            <PopoverDropdown
+              value={ filterValue }
+              options={ this.filterOptions }
+            />
           </div>
         </SubSubHeader>
         <LoadingOverlay show={ !isLoaded } hideBg />

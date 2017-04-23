@@ -10,10 +10,7 @@ import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import classes from './Home.css'
 
 export default class Home extends Component {
-  componentWillMount() {
-    this.props.getFeed()
-  }
-  static filterOptions = [{
+  filterOptions = [{
     value: 'all',
     name: 'Feed: All',
     onClick: () => this.pushFilter('all'),
@@ -30,7 +27,7 @@ export default class Home extends Component {
     name: 'Feed: Followed Users',
     onClick: () => this.pushFilter('followed-users'),
   }]
-  pushFilter = filter => push({
+  pushFilter = filter => this.props.push({
     pathname: window.location.pathname,
     query: {
       filter,
@@ -40,21 +37,24 @@ export default class Home extends Component {
     const { timeline, push, filterValue } = this.props
 
 
-
     return (
       <StandardLayout>
         <SubHeader title="Dashboard">
           <div className="layout-column layout-align-center-center">
             <PopoverDropdown
               value={ filterValue }
-              options={ filterOptions }
+              options={ this.filterOptions }
             />
           </div>
         </SubHeader>
         <Container>
           <Row className="layout-row" style={ { marginTop: '30px' } }>
             <Col className="flex">
-              <TimelineVertical items={ timeline } type="feed" group/>
+              <TimelineVertical
+                items={ timeline }
+                type="feed"
+                group
+              />
             </Col>
             <Col className="flex-30">
               <MyProjectsPanel />
