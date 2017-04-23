@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-
 import StandardLayout from 'layout/StandardLayout'
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
@@ -7,33 +6,49 @@ import SubHeader from 'modules/SubHeader'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import MyProjectsPanel from 'stemn-shared/misc/Projects/MyProjectsPanel'
 import TimelineVertical from 'stemn-shared/misc/TimelineVertical/TimelineVertical'
-import Popover from 'stemn-shared/misc/Popover'
-import MdExpandMore from 'react-icons/md/expand-more'
-
+import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import classes from './Home.css'
-
-
 
 export default class Home extends Component {
   componentWillMount() {
     this.props.getFeed()
   }
+  static filterOptions = [{
+    value: 'all',
+    name: 'Feed: All',
+    onClick: () => this.pushFilter('all'),
+  }, {
+    value: 'my-projects',
+    name: 'Feed: My Projects',
+    onClick: () => this.pushFilter('my-projects'),
+  }, {
+    value: 'followed-projects',
+    name: 'Feed: Followed Projects',
+    onClick: () => this.pushFilter('followed-projects'),
+  }, {
+    value: 'followed-users',
+    name: 'Feed: Followed Users',
+    onClick: () => this.pushFilter('followed-users'),
+  }]
+  pushFilter = filter => push({
+    pathname: window.location.pathname,
+    query: {
+      filter,
+    },
+  })
   render() {
-    const { timeline } = this.props
-    console.log(timeline);
+    const { timeline, push, filterValue } = this.props
+
+
+
     return (
       <StandardLayout>
         <SubHeader title="Dashboard">
           <div className="layout-column layout-align-center-center">
-            <Popover preferPlace="below" tipSize={ 1 }>
-              <Button className="light">
-                Feed: All
-                <MdExpandMore style={ { marginLeft: '5px' } } />
-              </Button>
-              <div>
-                Stuvv
-              </div>
-            </Popover>
+            <PopoverDropdown
+              value={ filterValue }
+              options={ filterOptions }
+            />
           </div>
         </SubHeader>
         <Container>
@@ -50,6 +65,10 @@ export default class Home extends Component {
     )
   }
 }
+
+
+
+
 //              <InfoPanel>
 //                <h3>Welcome to Stemn</h3>
 //                <p>Sign up to find projects, ideas and people that matter.</p>
