@@ -11,10 +11,16 @@ import HistoryGraph from 'stemn-shared/misc/Graphs/HistoryGraph'
 import TimelineVertical from 'stemn-shared/misc/TimelineVertical/TimelineVertical'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
 import SubSubHeader from 'modules/SubSubHeader'
+import Pagination from 'stemn-shared/misc/Pagination'
+import Button from 'stemn-shared/misc/Buttons/Button/Button'
+import MdExpandMore from 'react-icons/md/expand-more'
+import SearchInput from 'stemn-shared/misc/Search/SearchInput'
 
 export default class ProjectCommits extends Component {
   renderLoaded() {
-    const { project, syncTimeline } = this.props
+    const { project, syncTimeline, location } = this.props
+    const page = 1
+    const noMoreResults = false
 
     return (
       <div>
@@ -29,6 +35,11 @@ export default class ProjectCommits extends Component {
               type="project"
             />
           </InfoPanel>
+          <Pagination
+            path={ location.pathname }
+            page={ page }
+            noMoreResults={ noMoreResults }
+          />
         </Container>
       </div>
     )
@@ -40,7 +51,16 @@ export default class ProjectCommits extends Component {
     return (
       <div className={ classes.content }>
         <SubSubHeader className={ classes.subHeader }>
-          <div>here</div>
+          <div className="layout-row">
+            <SearchInput
+              placeholder="Search History"
+            />
+            <div className="flex" />
+            <Button className="light">
+              Type: Commits
+              <MdExpandMore style={ { marginLeft: '5px' } } />
+            </Button>
+          </div>
         </SubSubHeader>
         <LoadingOverlay show={ !isLoaded } hideBg />
         { isLoaded

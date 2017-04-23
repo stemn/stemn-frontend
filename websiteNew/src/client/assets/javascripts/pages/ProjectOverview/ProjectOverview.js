@@ -49,11 +49,11 @@ export default class ProjectOverview extends Component {
       const infoBoxes = (
         <Col className={ classNames(project.data.picture ? 'flex flex-gt-xs-33' : 'flex') }>
           <div className={ classNames(project.data.picture ? 'layout-column' : 'layout-xs-column layout-gt-xs-row', classes.infoBoxes)}>
-            <div className='flex'>
+            <div className='flex layout-row layout-align-center-center'>
               <MdAccessTime />
               Updated { moment(project.data.updated).fromNow() }
             </div>
-            <div className='flex'>
+            <div className='flex layout-row layout-align-center-center'>
               <MdPeople />
               <Link name="projectTeamRoute" params={ projectRouteParams }>
                 { project.data.team.length === 1
@@ -62,14 +62,14 @@ export default class ProjectOverview extends Component {
               </Link>
             </div>
             { has(project, 'data.location[0].name')
-              ? <div className='flex text-ellipsis'>
+              ? <div className='flex text-ellipsis layout-row layout-align-center-center'>
                   <MdLocationOn />
                   { project.data.location[0].name }
                 </div>
               : null
             }
             { licenseInfo
-              ? <div className='flex'>
+              ? <div className='flex layout-row layout-align-center-center'>
                 <MdAccount />
                 <a href={ licenseInfo.url } target="_blank">{ licenseInfo.name }</a>
               </div>
@@ -96,7 +96,7 @@ export default class ProjectOverview extends Component {
       )
 
       return (
-        <div>
+        <div style={{marginBottom: '30px'}}>
           <SubSubHeader>
             { project.data.blurb.length > 0
             ? <div className={ classes.blurb }>{ project.data.blurb }</div>

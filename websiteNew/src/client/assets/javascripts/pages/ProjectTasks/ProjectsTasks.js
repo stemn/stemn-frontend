@@ -6,20 +6,12 @@ import SubSubHeader from 'modules/SubSubHeader'
 import TaskList from 'stemn-shared/misc/Tasks/TaskList/TaskList.jsx'
 import TaskRow from 'stemn-shared/misc/Tasks/TaskRow'
 import { filterBoard, getAllTasks } from 'stemn-shared/misc/Tasks/Tasks.utils.js'
-import MdSearch from 'react-icons/md/search'
-import Input from 'stemn-shared/misc/Input/Input/Input'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import Pagination from 'stemn-shared/misc/Pagination'
-
-const SearchBox = () => (
-  <div className={ classNames(classes.search, 'layout-row layout-align-start-center') }>
-    <Input
-      className="flex"
-      placeholder="Search Threads"
-    />
-    <MdSearch className={ classes.icon } size={ 20 }/>
-  </div>
-)
+import MdExpandMore from 'react-icons/md/expand-more'
+import SearchInput from 'stemn-shared/misc/Search/SearchInput'
+import Popover from 'stemn-shared/misc/Popover';
+import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList';
 
 export default class ProjectsTasks extends Component {
   render() {
@@ -35,8 +27,17 @@ export default class ProjectsTasks extends Component {
         <div>
           <SubSubHeader>
             <div className="layout-row">
-              <SearchBox />
+              <SearchInput
+                placeholder="Search Threads"
+              />
               <div className="flex" />
+              <Popover preferPlace="below">
+                <Button className="light" style={ { margin: '0 15px' } }>
+                  Type: All
+                  <MdExpandMore style={ { marginLeft: '5px' } } />
+                </Button>
+                <div>Popover</div>
+              </Popover>
               <Button className="primary">
                 New Issue
               </Button>
