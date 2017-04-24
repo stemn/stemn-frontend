@@ -71,7 +71,7 @@ export default class LandingHeader extends Component {
           <Link to='/landing' className={ classes.logo }>
             <img src={logo} alt=""/>
           </Link>
-          <Link activeClassName="active" className={ classes.link } name="featuresRoute">Features</Link>
+          <Link activeClassName="active" className={ classes.link } name="flowRoute">Workflow</Link>
           <Link activeClassName="active" className={ classes.link } name="openSourceRoute">Open source</Link>
           <Link activeClassName="active" className={ classes.link } name="pricingRoute">Pricing</Link>
           <Link activeClassName="active" className={ classes.link } name="downloadRoute">Download</Link>
