@@ -7,19 +7,7 @@ import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import Editor from 'stemn-shared/misc/Editor/Editor.jsx';
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
-//  filterOptions = [{
-//    value: 'commits',
-//    name: 'Filter: Commits',
-//    onClick: () => this.pushFilter('commits'),
-//  }, {
-//    value: 'revisions',
-//    name: 'Filter: Revisions',
-//    onClick: () => this.pushFilter('revisions'),
-//  }, {
-//    value: 'task-complete',
-//    name: 'Filter: Task Complete',
-//    onClick: () => this.pushFilter('task-complete'),
-//  }]
+
 export default class NewThreadModal extends Component {
   newThread = () => {
     const { newTask, newComment, board } = this.props;
@@ -50,11 +38,9 @@ export default class NewThreadModal extends Component {
   render() {
     const { modalConfirm, board, boardModel } = this.props
 
-    console.log(board.data.groups)
     const groupOptions = board.data.groups.map(group => ({
       value: group._id,
       name: group.name,
-      onClick: () => console.log('click'),
     }))
 
     return (
@@ -72,6 +58,7 @@ export default class NewThreadModal extends Component {
             <PopoverDropdown
               options={ groupOptions }
               value={ get(board, 'newThread.group', board.data.groups[0]._id) }
+              model={ `${boardModel}.newThread.group` }
             >
               Group:&nbsp;
             </PopoverDropdown>
