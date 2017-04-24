@@ -20,7 +20,7 @@ export function getComment({commentId}) {
 export function newComment({ comment }) {
   return (dispatch) => {
     if(comment && comment.body && comment.body.length > 0){
-      dispatch({
+      return dispatch({
         type: 'COMMENTS/NEW_COMMENT',
         payload: http({
           url: `/api/v1/tasks/${comment.task}/comments`,
@@ -31,7 +31,7 @@ export function newComment({ comment }) {
           taskId: comment.task
         }
       }).then(response => {
-        dispatch(TasksActions.newEvent({
+        return dispatch(TasksActions.newEvent({
           taskId: comment.task,
           event: {
             event: 'comment',
