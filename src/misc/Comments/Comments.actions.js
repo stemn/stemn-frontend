@@ -17,7 +17,7 @@ export function getComment({commentId}) {
   }
 }
 
-export function newComment({comment}) {
+export function newComment({ comment }) {
   return (dispatch) => {
     if(comment && comment.body && comment.body.length > 0){
       dispatch({

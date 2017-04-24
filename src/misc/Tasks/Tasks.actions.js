@@ -5,7 +5,7 @@ import { show as showToast } from '../Toasts/Toasts.actions.js';
 import { showModal, showConfirm } from '../Modal/Modal.actions.js';
 import { get }               from 'lodash';
 
-export function newTask({boardId, task}) {
+export function newTask({ boardId, task }) {
   return (dispatch, getState) => {
    const taskDefault = {
     users: [{
@@ -14,7 +14,7 @@ export function newTask({boardId, task}) {
       picture: getState().auth.user.picture
     }]
   }
-  dispatch({
+  return dispatch({
     type: 'TASKS/NEW_TASK',
     payload: http({
       method: 'POST',
