@@ -2,16 +2,13 @@ import React, { Component, PropTypes } from 'react'
 import LandingLayout from 'layout/LandingLayout'
 import HeroBanner from 'modules/HeroBanner'
 import DownloadButton from 'stemn-shared/misc/DesktopReleases/DownloadButton'
-import bytes from 'stemn-shared/utils/filters/bytes.js'
-import { Container } from 'stemn-shared/misc/Layout'
-import screenshot from './screenshot.png'
-//import background from './background.jpg'
-
+import { Row, Col, Container } from 'stemn-shared/misc/Layout'
+import screenshot from './screenshot.jpg'
+import screens from './screens.jpg'
 import classes from './Landing.css'
+import classNames from 'classnames'
+import FileIcon from 'stemn-shared/misc/FileList/components/FileIcon'
 
-import WindowsIcon from 'stemn-shared/assets/icons/os/windows'
-import LinuxIcon from 'stemn-shared/assets/icons/os/linux'
-import AppleIcon from 'stemn-shared/assets/icons/os/apple'
 
 export default class Landing extends Component {
   render() {
@@ -20,8 +17,8 @@ export default class Landing extends Component {
     return (
       <LandingLayout>
         <HeroBanner className={ classes.banner }>
-          <h1>Download Stemn Desktop</h1>
-          <h3>Collaboration tools for Engineers</h3>
+          <h1>Seamless Version Control and Task Tracking</h1>
+          <h3>A unified workflow for modern engineers</h3>
           <DownloadButton className={ classes.downloadButton + ' secondary lg'} platform="auto" >
             Download Now
           </DownloadButton>
@@ -30,9 +27,52 @@ export default class Landing extends Component {
           </div>
         </HeroBanner>
         <Container>
-          <p>Drake Equation. Astonishment courage of our questions, two ghostly white figures in coveralls and helmets are soflty dancing consciousness preserve and cherish that pale blue dot network of wormholes a mote of dust suspended in a sunbeam Vangelis, of brilliant syntheses made in the interiors of collapsing stars culture, kindling the energy hidden in matter, astonishment at the edge of forever citizens of distant epochs, star stuff harvesting star light, Apollonius of Perga rich in heavy atoms. Star stuff harvesting star light as a patch of light? Concept of the number one. Radio telescope kindling the energy hidden in matter vanquish the impossible, extraplanetary another world, billions upon billions gathered by gravity. Science, cosmic fugue, circumnavigated citizens of distant epochs Vangelis a still more glorious dawn awaits and billions upon billions upon billions upon billions upon billions upon billions upon billions.</p>
-          <p>Drake Equation. Astonishment courage of our questions, two ghostly white figures in coveralls and helmets are soflty dancing consciousness preserve and cherish that pale blue dot network of wormholes a mote of dust suspended in a sunbeam Vangelis, of brilliant syntheses made in the interiors of collapsing stars culture, kindling the energy hidden in matter, astonishment at the edge of forever citizens of distant epochs, star stuff harvesting star light, Apollonius of Perga rich in heavy atoms. Star stuff harvesting star light as a patch of light? Concept of the number one. Radio telescope kindling the energy hidden in matter vanquish the impossible, extraplanetary another world, billions upon billions gathered by gravity. Science, cosmic fugue, circumnavigated citizens of distant epochs Vangelis a still more glorious dawn awaits and billions upon billions upon billions upon billions upon billions upon billions upon billions.</p>
-          <p>Drake Equation. Astonishment courage of our questions, two ghostly white figures in coveralls and helmets are soflty dancing consciousness preserve and cherish that pale blue dot network of wormholes a mote of dust suspended in a sunbeam Vangelis, of brilliant syntheses made in the interiors of collapsing stars culture, kindling the energy hidden in matter, astonishment at the edge of forever citizens of distant epochs, star stuff harvesting star light, Apollonius of Perga rich in heavy atoms. Star stuff harvesting star light as a patch of light? Concept of the number one. Radio telescope kindling the energy hidden in matter vanquish the impossible, extraplanetary another world, billions upon billions gathered by gravity. Science, cosmic fugue, circumnavigated citizens of distant epochs Vangelis a still more glorious dawn awaits and billions upon billions upon billions upon billions upon billions upon billions upon billions.</p>
+          <Row className={ classNames(classes.section, 'layout-row layout-align-start-center lg') }>
+            <Col className="flex-xs-100 flex-gt-xs-50 lg">
+              <div className={ classes.timeline }>
+                lorem
+              </div>
+            </Col>
+            <Col className="flex-xs-100 flex-gt-xs-50 lg">
+              <h4 className="text-title-2">Infinite version history</h4>
+              <p className="text-title-4">All your work is automatically synced as you work.</p>
+              <p className="text-title-4">View any previous versions, complete with comments, with the automatic version control features. Revert your files with a single click.</p>
+            </Col>
+          </Row>
+        </Container>
+        <div className={ classes.bgWhite }>
+          <Container>
+            <Row className={ classNames(classes.section, 'layout-row layout-align-start-center lg') }>
+              <Col className="flex-xs-100 flex-gt-xs-50 lg">
+                <h4 className="text-title-2">Access your files anywhere</h4>
+                <p className="text-title-4">Whether you’re in the office, in the lab, or on the go, access your files in your browser, from any device.</p>
+                <p className="text-title-4">Preview hundreds of different file-types directly in your web browser.</p>
+                <div className={ classNames(classes.fileIcons, 'layout-row')}>
+                  <FileIcon size={ 50 } type="file" fileType="dxf" />
+                  <FileIcon size={ 50 } type="file" fileType="dwg" />
+                  <FileIcon size={ 50 } type="file" fileType="tex" />
+                  <FileIcon size={ 50 } type="file" fileType="xlsx" />
+                  <FileIcon size={ 50 } type="file" fileType="cpp" />
+                  <FileIcon size={ 50 } type="file" fileType="more" />
+                </div>
+              </Col>
+              <Col className="flex-xs-100 flex-gt-xs-50 lg">
+                <img src={ screens } />
+              </Col>
+            </Row>
+          </Container>
+        </div>
+        <Container>
+          <Row className={ classNames(classes.section, 'layout-row layout-align-start-center lg') }>
+            <Col className="flex-xs-100 flex-gt-xs-50 lg">
+
+            </Col>
+            <Col className="flex-xs-100 flex-gt-xs-50 lg">
+              <h4 className="text-title-2">No more miscommunication</h4>
+              <p className="text-title-4">Simplify your feedback process by having clients, team members, and stakeholders comment directly on your models.</p>
+              <p className="text-title-4">Stay informed of discussions and project milestones as soon as they happen.</p>
+            </Col>
+          </Row>
         </Container>
       </LandingLayout>
     )

@@ -2,7 +2,7 @@ export const commitRoute          = ({ commitId, projectId }) => `/project/${pro
 export const contactRoute         = ()                        => `/contact`
 export const downloadRoute        = ()                        => `/download`
 export const exploreRoute         = ()                        => `/explore`
-export const featuresRoute        = ()                        => `/features`
+export const flowRoute            = ()                        => `/flow`
 export const fieldRoute           = ({ fieldId })             => `/fields/${fieldId}`
 export const fileRoute            = ({ projectId, fileId })   => `/files/${projectId}/${fileId}`
 export const homeRoute            = ()                        => `/`

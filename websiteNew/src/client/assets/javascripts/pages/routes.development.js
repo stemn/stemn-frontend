@@ -31,7 +31,7 @@ import ProjectTeam                             from 'pages/ProjectTeam'
 
 import Download                                from 'pages/Download'
 import Explore                                 from 'pages/Explore'
-import Features                                from 'pages/Features'
+import Flow                                    from 'pages/Flow'
 import File                                    from 'pages/File'
 import Home                                    from 'pages/Home'
 import Landing                                 from 'pages/Landing'
@@ -102,7 +102,7 @@ export default (
     </Route>
     <Route path="/download"                    component={ Download } />
     <Route path="/explore"                     component={ Explore } />
-    <Route path="/features"                    component={ Features } />
+    <Route path="/flow"                        component={ Flow } />
     <Route path="/files/:projectId/:fileId"    component={ File } />
     <Route path="/landing"                     component={ Landing } />
     <Route path="/open-source"                 component={ OpenSource } />

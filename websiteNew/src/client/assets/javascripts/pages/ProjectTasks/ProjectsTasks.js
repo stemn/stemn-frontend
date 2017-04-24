@@ -68,12 +68,3 @@ export default class ProjectsTasks extends Component {
     }
   }
 }
-
-
-
-//        <div className={ classes.content + ' layout-column flex' }>
-//          <TaskList
-//            className={ classes.tasks }
-//            board={ filterBoard(board, tasks, board.searchString) }
-//            layout={ layout }
-//          />
