@@ -5,13 +5,14 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import classNames from 'classnames'
 
 export default (props) => {
-  const { options, value } = props
+  const { children, options, value } = props
   const currentOption = options.find(option => option.value === value)
   return (
     <Popover preferPlace="below" tipSize={ 1 }>
       <Button className="light">
-        { currentOption.name || 'none' }
-        <MdExpandMore style={ { marginLeft: '5px' } } />
+        { children }
+        { currentOption && currentOption.name ? currentOption.name : 'none' }
+        <MdExpandMore style={ { marginLeft: '5px' } } size={ 20 } />
       </Button>
       <div className="PopoverMenu">
         { options.map(option => (

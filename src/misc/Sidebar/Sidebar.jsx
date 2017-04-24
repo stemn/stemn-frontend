@@ -45,7 +45,7 @@ const ProjectWithContext = ContextMenuLayer(projectContextIdentifier, (props) =>
 
 export const Component = React.createClass({
   showProjectNewModal(){
-    this.props.modalActions.showModal({modalType: 'PROJECT_NEW',})
+    this.props.modalActions.showModal({modalType: modalName,})
   },
   secretSearch(){
     if (this.props.sidebar.searchString.length == 24) {

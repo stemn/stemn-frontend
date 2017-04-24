@@ -8,6 +8,7 @@
   border: 1px solid border1;
   resize: none;
   background: white;
+  overflow: hidden;
 
   -webkit-user-select: text;
 }
@@ -20,13 +21,13 @@
 }
 
 .input-plain{
-  width: 100%;
+/*  width: 100%;*/
   outline: none;
   border: none;
   padding: 0px;
   resize: none;
   background: transparent;
 }
-textarea.input-plain{
+textarea.input-plain {
   overflow: hidden;
 }

@@ -10,6 +10,9 @@ const initialState = {
     /********************************
     boardId: {
       data: {the board data},
+      newThread: {
+
+      }
       forms: {}
       searchString: 'Some search string'
       layout: 'board' || 'list'
