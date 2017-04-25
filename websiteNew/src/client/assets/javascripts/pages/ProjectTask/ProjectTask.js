@@ -104,6 +104,9 @@ export default class ProjectTask extends Component {
                     </Link>
                   ))}
                 </div>
+                <div className={ classes.panel }>
+                  <div className="text-mini-caps">Related Files</div>
+                </div>
               </Col>
             </Row>
           </Container>

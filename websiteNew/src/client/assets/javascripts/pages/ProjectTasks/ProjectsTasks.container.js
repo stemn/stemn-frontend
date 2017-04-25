@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { get } from 'lodash'
-
+import { getBoards } from 'stemn-shared/misc/Tasks/Tasks.actions'
 import ProjectsTasks from './ProjectsTasks'
 
-import { getBoards } from 'stemn-shared/misc/Tasks/Tasks.actions'
-
+import newThreadModalName from 'stemn-shared/misc/Threads/NewThreadModal'
+import { showModal } from 'stemn-shared/misc/Modal/Modal.actions'
 
 const stateToProps = ({ projects, tasks }, { params }) => {
   const projectId = params.stub
@@ -24,7 +24,11 @@ const stateToProps = ({ projects, tasks }, { params }) => {
 }
 
 const dispatchToProps = {
-  getBoards
+  getBoards,
+  showNewProjectModal: (modalProps) => showModal({
+    modalType: newThreadModalName,
+    modalProps: modalProps,
+  })
 }
 
 const fetchConfigs = [{

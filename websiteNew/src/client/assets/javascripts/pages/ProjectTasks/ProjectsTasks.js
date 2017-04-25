@@ -15,8 +15,13 @@ import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList'
 import TasksFilterMenu from 'stemn-shared/misc/Tasks/TasksFilterMenu/TasksFilterMenu'
 
 export default class ProjectsTasks extends Component {
+  showNewProjectModal = () => {
+    this.props.showNewProjectModal({
+      boardId: this.props.board.data._id,
+    })
+  }
   render() {
-    const { project, board, tasks, location, boardModel } = this.props
+    const { project, board, tasks, location, boardModel, showNewProjectModal } = this.props
     const layout = 'list'
     const page = 1
     const noMoreResults = false
@@ -44,7 +49,7 @@ export default class ProjectsTasks extends Component {
                   value={board.searchString}
                 />
               </Popover>
-              <Button className="primary">
+              <Button className="primary" onClick={ this.showNewProjectModal }>
                 New Thread
               </Button>
             </div>
