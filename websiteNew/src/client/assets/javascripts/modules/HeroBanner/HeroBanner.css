@@ -22,3 +22,9 @@
   font-weight: 300;
   padding-bottom: 15px;
 }
+
+.banner p {
+  line-height: 1.8em;
+  font-size: 19px;
+  font-weight: 300;
+}
