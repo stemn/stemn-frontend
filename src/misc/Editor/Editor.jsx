@@ -31,14 +31,18 @@ export const Component = React.createClass({
     }
   },
   componentDidMount(){
-    if(this.props.autoFocus){
+    if (this.props.autoFocus) {
       setTimeout(() => this.refs.input.refs.input.focus(), 1);
     }
   },
   componentWillReceiveProps(nextProps) {
     // Update the internal state if it differs from the redux state
-    if(nextProps.value != this.state.value){
+    if (nextProps.value != this.state.value) {
       this.setState({ value: nextProps.value })
+    }
+    // Focus with auto-focus prop changes
+    if (nextProps.autoFocus != this.props.autoFocus && nextProps.autoFocus) {
+      this.refs.input.refs.input.focus()
     }
   },
   handleChange(event, value){

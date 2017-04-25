@@ -5,10 +5,14 @@
 .commentAvatar{
   margin-right: 10px
 }
-.commentBody{
+.commentBody {
   background: white;
   border: 1px solid border1;
   line-height: 1.5em;
+}
+.commentBodyHidden {
+  max-height: 58px;
+  overflow: hidden;
 }
 .commentHeader{
   background: white;
@@ -17,7 +21,6 @@
 .date{
   color: grey-3;
 }
-
 .commentContent{
   padding: 20px;
   padding-top: 0px;
