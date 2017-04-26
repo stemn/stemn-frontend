@@ -18,7 +18,7 @@ import loadingClasses from 'stemn-shared/misc/Loading/LoadingPlaceholders/Loadin
 
 // Sub Components
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx';
-import Editor from 'stemn-shared/misc/Editor/Editor.jsx';
+import Editor from 'stemn-shared/misc/Editor/EditorNew';
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx';
 import ReactionPopup from 'stemn-shared/misc/Reactions/ReactionPopup.jsx';
 import Reactions from 'stemn-shared/misc/Reactions/Reactions.jsx';

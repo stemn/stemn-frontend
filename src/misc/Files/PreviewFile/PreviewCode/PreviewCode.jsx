@@ -3,15 +3,15 @@ import React from 'react';
 import codemirror from 'codemirror'
 import 'codemirror/mode/meta.js'
 const requireCodemirrorMode = require.context("codemirror/mode/", true, /\.js$/);
-import LoadingOverlay     from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx';
-import file    from 'stemn-shared/assets/images/pure-vectors/file.svg';
+import file from 'stemn-shared/assets/images/pure-vectors/file.svg';
 
 export const Viewer = React.createClass({
   render() {
     const { data, extension } = this.props;
 
-    if(extension){
+    if (extension) {
       setTimeout(()=>{ // Give the component time to render (so we get refs)
         this.refs.codemirror.innerHTML = "";
         const editorInstance = codemirror(this.refs.codemirror, {
@@ -40,7 +40,7 @@ export const Viewer = React.createClass({
         <div className="scroll-box flex" ref="codemirror"></div>
         { isMarkdown
           ? <div className="scroll-box flex" style={{padding: '15px 30px'}}>
-              <EditorDisplay value={data}/>
+              <EditorDisplay value={ data }/>
             </div>
           : null
         }

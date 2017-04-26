@@ -16,8 +16,9 @@ import classes from './Editor.css';
 // Sub Components
 import { MentionsInput, Mention } from 'stemn-shared/misc/Mentions/MentionsInput/index.js'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx';
-import AutosuggestHighlight from 'autosuggest-highlight';
 import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox';
+import Highlight from 'stemn-shared/misc/Autosuggest/Highlight'
+
 
 import getUuid from 'stemn-shared/utils/getUuid.js';
 import http from 'axios';
@@ -62,18 +63,16 @@ export const Component = React.createClass({
     }
   },
   userRenderSuggestion: (entry, search, highlightedDisplay, index) => {
-    const matches = AutosuggestHighlight.match(entry.name, search);
-    const parts   = AutosuggestHighlight.parse(entry.name, matches);
     return (
       <div className="layout-row layout-align-start-center">
         <UserAvatar picture={entry.picture}/>
-        <div style={{marginLeft: '10px'}} className="flex">
-        {parts.map((part, index) => {
-          const className = part.highlight ? 'text-primary' : null;
-          return (
-            <span className={className} key={index}>{part.text}</span>
-          );
-        })}
+        <div style={ { marginLeft: '10px' } } className="flex">
+          <Highlight
+            className="text-ellipsis"
+            text={ entry.name }
+            query={ search }
+            hightlightClass={ 'text-primary' }
+          />
         </div>
       </div>
     );

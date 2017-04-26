@@ -11,9 +11,8 @@ import classNames from 'classnames';
 import classes from './Comment.css';
 // Sub Components
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx';
-import Editor from 'stemn-shared/misc/Editor/Editor.jsx';
+import EditorNew from 'stemn-shared/misc/Editor/EditorNew';
 import MarkdownButton from 'stemn-shared/misc/Editor/MarkdownButton/MarkdownButton.jsx';
-import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx';
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton';
 import { ctrlEnterHandler } from 'stemn-shared/misc/Forms/Forms.utils.js'
 import TextSwitch from 'stemn-shared/misc/Animation/TextSwitch'
@@ -65,7 +64,7 @@ export class CommentNew extends Component {
             </TextSwitch>
           </div>
           <div className={classes.commentContent}>
-            <Editor
+            <EditorNew
               autoFocus={ isFocussed }
               model={ `${entityModel}.body` }
               value={ newComment.body }
