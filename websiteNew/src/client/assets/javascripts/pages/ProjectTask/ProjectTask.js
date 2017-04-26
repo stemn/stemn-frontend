@@ -24,7 +24,6 @@ export default class ProjectTask extends Component {
   }
   render() {
     const { task, project, board, taskModel, taskId } = this.props
-    console.log(task, board);
     
     if (task && task.data && board && board.data) {
       const group = board.data.groups.find(group => group._id === task.data.group)
