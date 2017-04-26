@@ -20,7 +20,7 @@ import classes from './TaskDisplayModal.css';
 // Sub Components
 import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox';
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx';
-import LabelSelect from './LabelSelect/LabelSelect.jsx';
+import LabelSelect from 'stemn-shared/misc/Tasks/LabelSelect/LabelSelect.jsx';
 import UserSelect from 'stemn-shared/misc/Users/UserSelect/UserSelect.jsx';
 import TaskTimeline from '../TaskTimeline/TaskTimeline.jsx';
 import DatePicker from 'stemn-shared/misc/Calendar/DatePicker/DatePicker.jsx';

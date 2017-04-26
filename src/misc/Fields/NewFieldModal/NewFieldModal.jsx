@@ -25,7 +25,7 @@ export default class NewFieldModal extends Component {
     })
   }
   render() {
-    const { newFieldForm, newFieldFormModel, newFieldFormPending, modalConfirm, name, blurb } = this.props
+    const { newFieldForm, newFieldFormModel, newFieldFormPending, modalConfirm, modalCancel, name, blurb } = this.props
     const initValue = {
       name,
       blurb,
@@ -59,7 +59,7 @@ export default class NewFieldModal extends Component {
         <div className="modal-footer-no-line layout-row layout-align-end">
           <Button
             style={ { marginRight: '10px' } }
-            onClick={ modalConfirm }>
+            onClick={ modalCancel }>
             Cancel
           </Button>
           <Button

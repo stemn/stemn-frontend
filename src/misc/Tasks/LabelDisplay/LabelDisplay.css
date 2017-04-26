@@ -1,0 +1,10 @@
+.swatch{
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+  border-radius: 3px;
+}
+
+.row {
+  padding: 10px 0;
+}
