@@ -13,6 +13,9 @@ import SearchInput from 'stemn-shared/misc/Search/SearchInput'
 import Popover from 'stemn-shared/misc/Popover'
 import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList'
 import TasksFilterMenu from 'stemn-shared/misc/Tasks/TasksFilterMenu/TasksFilterMenu'
+import LabelSelect from 'stemn-shared/misc/Tasks/LabelSelect/LabelSelect'
+import GroupSelect from 'stemn-shared/misc/Tasks/GroupSelect'
+import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 
 export default class ProjectsTasks extends Component {
   showNewProjectModal = () => {
@@ -32,39 +35,62 @@ export default class ProjectsTasks extends Component {
       return (
         <div>
           <SubSubHeader>
-            <div className="layout-row">
-              <SearchInput
-                placeholder="Search Threads"
-                model={ `${boardModel}.searchString` }
-                value={ board.searchString }
-              />
-              <div className="flex" />
-              <Popover preferPlace="below" tipSize={ 1 }>
-                <Button className="light" style={ { margin: '0 15px' } }>
-                  Filter
-                  <MdExpandMore style={ { marginLeft: '5px' } } />
-                </Button>
-                <TasksFilterMenu
-                  model={`${boardModel}.searchString`}
-                  value={board.searchString}
+            <Row className="layout-row">
+              <Col className="flex-xs flex-sm flex-gt-sm-30 layout-row">
+                <SearchInput
+                  style={ { width: '100%' } }
+                  placeholder="Search Threads"
+                  model={ `${boardModel}.searchString` }
+                  value={ board.searchString }
                 />
-              </Popover>
-              <Button className="primary" onClick={ this.showNewProjectModal }>
-                New Thread
-              </Button>
-            </div>
+              </Col>
+              <div className="flex-xs-0 flex-sm-0 flex-gt-sm" />
+              <Col className="layout-row">
+                <Popover preferPlace="below" tipSize={ 1 }>
+                  <Button className="light" style={ { margin: '0 15px' } }>
+                    Filter
+                    <MdExpandMore style={ { marginLeft: '5px' } } />
+                  </Button>
+                  <TasksFilterMenu
+                    model={`${boardModel}.searchString`}
+                    value={board.searchString}
+                  />
+                </Popover>
+                <Button className="primary" onClick={ this.showNewProjectModal }>
+                  New Thread
+                </Button>
+              </Col>
+            </Row>
           </SubSubHeader>
           <Container className={ classes.content }>
-            <div className={ classes.threadsPanel }>
-              { filteredBoard.map(taskId => (
-                 <TaskRow
-                   board={ board }
-                   taskId={ taskId }
-                   className={ classes.thread }
-                 />
-              ))}
-            </div>
-            <Pagination path={ location.pathname } page={ page } noMoreResults={ noMoreResults }/>
+            <Row className="layout-xs-column layout-gt-xs-row">
+              <Col className="flex-xs-100 flex-gt-xs-30">
+                <div className={ classes.panel }>
+                  <h3 className="text-mini-caps">Groups</h3>
+                  <GroupSelect
+                    groups={ board.data.groups }
+                  />
+                </div>
+                <div className={ classes.panel }>
+                  <h3 className="text-mini-caps">Labels</h3>
+                  <LabelSelect
+                    labelInfo={ board.data.labels }
+                  />
+                </div>
+              </Col>
+              <Col className="flex">
+                <div className={ classes.threadsPanel }>
+                  { filteredBoard.map(taskId => (
+                     <TaskRow
+                       board={ board }
+                       taskId={ taskId }
+                       className={ classes.thread }
+                     />
+                  ))}
+                </div>
+                <Pagination path={ location.pathname } page={ page } noMoreResults={ noMoreResults }/>
+              </Col>
+            </Row>
           </Container>
         </div>
       )
