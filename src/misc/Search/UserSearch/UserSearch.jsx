@@ -12,7 +12,7 @@ export default class UserSearch extends Component {
     cacheKey: PropTypes.string.isRequired,
   }
     
-  renderSuggestion = (suggestion, { query }) => {
+  renderResult = (suggestion, { query }) => {
     return (
       <div className="layout-row layout-align-start-center">
         <UserAvatar picture={suggestion.picture} size={40} name={ suggestion.name }/>
@@ -30,8 +30,8 @@ export default class UserSearch extends Component {
       <Autosuggest
         cacheKey={ `user-search-${cacheKey}` }
         placeholder="Search for team member"
-        select={ select }
-        renderSuggestion={ this.renderSuggestion }
+        clickResult={ select }
+        renderResult={ this.renderResult }
         entityType='user'
       />
     );

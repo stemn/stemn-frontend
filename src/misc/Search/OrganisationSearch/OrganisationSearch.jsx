@@ -13,7 +13,7 @@ export default class OrganisationSearch extends Component {
   
   getSuggestionValue = () => suggestion => suggestion.name
   
-  renderSuggestion = (suggestion, { query }) => {
+  renderResult = (suggestion, { query }) => {
     return (
       <div className="layout-row layout-align-start-center">
         <div style={{marginLeft: '10px'}} className="flex">
@@ -30,8 +30,8 @@ export default class OrganisationSearch extends Component {
       <Autosuggest
         cacheKey={ `org-search-${cacheKey}` }
         placeholder='Search and organisations'
-        select={ select }
-        renderSuggestion={ this.renderSuggestion }
+        clickResult={ select }
+        renderResult={ this.renderResult }
         getSuggestionValue={ this.getSuggestionValue }
         entityType='organisation'
       />

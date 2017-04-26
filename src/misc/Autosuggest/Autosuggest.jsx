@@ -25,8 +25,10 @@ export default class AutosuggestWrapped extends Component {
     updateInputValue: PropTypes.func.isRequired,
     clearSuggestions: PropTypes.func.isRequired,
     loadSuggestions: PropTypes.func.isRequired,
-    renderSuggestion: PropTypes.func.isRequired,
-    select: PropTypes.func.isRequired,
+    renderResult: PropTypes.func.isRequired,
+    renderNoResult: PropTypes.func, // If true, a no-result will be added to the suggestions list
+    clickResult: PropTypes.func.isRequired,
+    clickNoResult: PropTypes.func.isRequired,
   }
     
   onChange = (event, { newValue }) => {
@@ -48,21 +50,37 @@ export default class AutosuggestWrapped extends Component {
     }
   }
   
+  renderSuggestion = (suggestion, { query }) => {
+    if (suggestion.noResult) {
+      return this.props.renderNoResult(suggestion, { query })
+    } else {
+      return this.props.renderResult(suggestion, { query })
+    }
+  }
+
   // This isnt used but is required by the lib
   getSuggestionValue = () => suggestion => suggestion.name
 
   onSuggestionSelected = (event, { suggestion }) => {
-    this.props.clearSuggestions();
-    if (!this.props.setValue) {
+    // If the suggestion is the noResult placeholder...
+    if (suggestion.noResult) {
+      this.props.clickNoResult(suggestion);
+      this.props.clearSuggestions();
       this.props.updateInputValue('')
+    // Else, if it is a normal result
     } else {
-      this.props.updateInputValue(suggestion.name)
+      this.props.clearSuggestions();
+      if (!this.props.setValue) {
+        this.props.updateInputValue('')
+      } else {
+        this.props.updateInputValue(suggestion.name)
+      }
+      this.props.clickResult(suggestion);
     }
-    this.props.select(suggestion);
   }
 
   render() {
-    const { value, suggestions, placeholder, clearSuggestions, renderSuggestion, isLoading } = this.props;
+    const { value, suggestions, placeholder, clearSuggestions, withNoResult, isLoading } = this.props;
 
     const inputProps = {
       placeholder,
@@ -70,14 +88,24 @@ export default class AutosuggestWrapped extends Component {
       onChange: this.onChange
     };
     
+    // If withNoResult is true, we add a fake suggestion to the list
+    // renderSuggestion should then be used to check for suggestion.noResult
+    // and render a different template.
+    const allSuggestions = suggestions && suggestions.length === 0 && !isLoading
+      ? [{
+          noResult: true,
+          query: value,
+        }]
+      : suggestions
+
     return (
       <div className={ classes.container }>
         <Autosuggest
-          suggestions={ suggestions }
+          suggestions={ allSuggestions }
           onSuggestionsFetchRequested={ this.onSuggestionsFetchRequested }
           onSuggestionsClearRequested={ clearSuggestions }
           getSuggestionValue={ this.getSuggestionValue }
-          renderSuggestion={ renderSuggestion }
+          renderSuggestion={ this.renderSuggestion }
           onSuggestionSelected={ this.onSuggestionSelected }
           inputProps={ inputProps }
         />

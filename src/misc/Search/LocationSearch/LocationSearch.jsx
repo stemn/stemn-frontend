@@ -26,7 +26,7 @@ export default class LocationSearch extends Component {
     }
   }
 
-  renderSuggestion = (suggestion, { query }) => {
+  renderResult = (suggestion, { query }) => {
     return (
       <div className="layout-row layout-align-start-center">
         <div style={ { marginLeft: '10px' } } className="flex">
@@ -43,8 +43,8 @@ export default class LocationSearch extends Component {
       <Autosuggest
         initialValue={ value ? value.name : '' }
         cacheKey={ `location-search-${cacheKey}` }
-        select={ this.select }
-        renderSuggestion={ this.renderSuggestion }
+        clickResult={ this.select }
+        renderResult={ this.renderResult }
         entityType="location"
         setValue
       />

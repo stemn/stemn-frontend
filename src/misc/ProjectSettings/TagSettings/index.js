@@ -17,7 +17,7 @@ export default class GeneralSettings extends Component {
       project: this.props.project.data
     })
   }
-  addField = (field) => {
+  selectField = (field) => {
     this.props.addField({
       projectId: this.props.project.data._id,
       field
@@ -37,7 +37,7 @@ export default class GeneralSettings extends Component {
         <p>Add related field tags. These should describe the project and any skills and technologies demonstrated.</p>
         <FieldSearch 
           cacheKey={ project.data._id }
-          select={ this.addField }
+          clickResult={ this.selectField }
         />
         <br />
         <div>

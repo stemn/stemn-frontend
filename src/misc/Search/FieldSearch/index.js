@@ -1,1 +1,1 @@
-export default from './FieldSearch'
+export default from './FieldSearch.container'

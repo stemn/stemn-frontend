@@ -1,39 +1,55 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import classes from './FieldSearch.css';
+import classes from './FieldSearch.css'
+import Autosuggest from 'stemn-shared/misc/Autosuggest/Autosuggest.container'
+import Highlight from 'stemn-shared/misc/Autosuggest/Highlight'
 
-import Autosuggest from 'stemn-shared/misc/Autosuggest/Autosuggest.container';
-import Highlight from 'stemn-shared/misc/Autosuggest/Highlight';
 
 export default class FieldSearch extends Component {
   static propTypes = {
-    select: PropTypes.func.isRequired,
+    clickResult: PropTypes.func.isRequired,
     cacheKey: PropTypes.string.isRequired,
+    showNewFieldModal: PropTypes.func.isRequired,
   }
-  
-  getSuggestionValue = () => suggestion => suggestion.name
-  
-  renderSuggestion = (suggestion, { query }) => {
+
+  renderResult = (suggestion, { query }) => {
     return (
       <div className="layout-row layout-align-start-center">
-        <div style={{marginLeft: '10px'}} className="flex">
-          <Highlight text={ suggestion.name } query={ query } hightlightClass={ classes.highlight }/>
-        </div>
+        <Highlight text={ suggestion.name } query={ query } hightlightClass={ classes.highlight }/>
       </div>
-    );
+    )
+  }
+
+  renderNoResult = (suggestion, { query }) => {
+    return (
+      <div>
+        Create field: <b>{ query }</b>
+      </div>
+    )
+  }
+
+  clickNoResult = (result) => {
+    console.log('click no result', result)
+    this.props.showNewFieldModal({
+      name: result.query,
+    }).then(({ value }) => {
+      console.log({ value });
+      this.props.clickResult(value)
+    })
   }
 
   render() {
-    const { select, cacheKey } = this.props;
+    const { clickResult, cacheKey } = this.props
       
     return (
       <Autosuggest
         cacheKey={ `field-search-${cacheKey}` }
-        placeholder='Search and add tags'
-        select={ select }
-        renderSuggestion={ this.renderSuggestion }
-        getSuggestionValue={ this.getSuggestionValue }
-        entityType='field'
+        placeholder="Search and add tags"
+        clickResult={ clickResult }
+        clickNoResult={ this.clickNoResult }
+        renderResult={ this.renderResult }
+        renderNoResult={ this.renderNoResult }
+        entityType="field"
       />
     );
   }
