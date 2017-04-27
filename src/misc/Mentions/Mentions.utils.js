@@ -62,18 +62,26 @@ export const getMentionString = (mention) => {
 export const parseMentions = (text) => {
   // Get all the markdown links from the raw text
   const mentionsRaw = text ? text.match(markdownLinkRegex) : [];
+
+  // Validate the mentions
   const mentions = [];
   if(mentionsRaw && mentionsRaw.length > 0){
-    mentionsRaw.forEach(mention=>{
-      const display = mention.split('[')[1].split(']')[0];    // Get the name (from between the square brackets)
-      const infoString = mention.split('(')[1].split(')')[0]; // Get the info (from between the standard brackets)
-      if(validateMention(infoString)){
-        const [entityId, mentionType, mentionId] = infoString.split(':');
+    mentionsRaw.forEach(mention => {
+      const infoString = mention.split('(')[1].split(')')[0] // Get the info (from between the standard brackets)
+      if (validateMention(infoString)) {
+        const display = mention.split('[')[1].split(']')[0]    // Get the name (from between the square brackets)
+        const [ entityId, mentionType, mentionId ] = infoString.split(':')
+        const index = text.indexOf(mention)
         mentions.push({
+          raw: mention,
           display,
           entityId,
           mentionType,
-          mentionId
+          mentionId,
+          index: {
+            from: index,
+            to: index + mention.length,
+          },
         })
       }
     })
