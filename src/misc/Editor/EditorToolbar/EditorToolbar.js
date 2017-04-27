@@ -62,7 +62,7 @@ export default class EditorToolbar extends Component {
   }
   italic = () => {
     const cursorRange = this.getCursor()
-    this.cursorWrap(cursorRange, (content) => `_${content}_`)
+    this.cursorWrap(cursorRange, (content) => `*${content}*`)
     this.cursorSet(cursorRange, 0, 2)
   }
   bullet = () => {

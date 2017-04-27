@@ -1,16 +1,9 @@
+@value primary from "theme";
+
 .editor pre{
   font-family: Open Sans
 }
 
 .mention {
-  visibility: hidden;
-}
-.mention:after {
-  content: 'Some content goes here';
-  display: inline-block;
-  visibility: visible;
-}
-
-.mention:global(.cm-url) {
-  display: none;
+  color: primary;
 }

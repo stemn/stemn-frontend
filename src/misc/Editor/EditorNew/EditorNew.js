@@ -19,6 +19,7 @@ const findAllMentionsPositions = (value = '') => {
   const allMentions = []
   mentionsInEachLine.forEach((mentions, index) => {
     mentions.forEach(mention => allMentions.push({
+      display: mention.display,
       from: {
         line: index,
         ch: mention.index.from,
@@ -57,31 +58,34 @@ export default class EditorNew extends Component {
     }
   }
   convertMentions = () => {
+    // The will convert all the mentions to atomic display versions
     // Get the position of all the valid mentions
     const mentionPositions = findAllMentionsPositions(this.props.value)
     mentionPositions.forEach((mention) => {
       // All mentions are marked with the mention class and set to atomic
-      const mentionEl = this.codemirror.markText(mention.from, mention.to)
       const newMentionEl = document.createElement('span')
       newMentionEl.className = classes.mention
-      newMentionEl.innerHTML = 'This is a replacement mention'
-      mentionEl.replacedWith = newMentionEl
-      mentionEl.atomic = true
-      mentionEl.collapsed = true
-      console.log(newMentionEl);
-//      mentionEl.className = classes.mention
+      newMentionEl.innerHTML = `@${mention.display}`
+      const mentionEl = this.codemirror.markText(mention.from, mention.to, {
+        replacedWith: newMentionEl,
+        atomic: true,
+
+      })
     })
+  }
+  componentWillReceiveProps() {
+    setTimeout(this.convertMentions, 10)
   }
   updateValue = (newValue) => {
     const { model, change, value } = this.props
     this.checkForMentions()
-    this.convertMentions()
     change(model, newValue)
   }
   codemirror = null
   getCodeMirrorRef = (ref) => {
     if (ref) {
       this.codemirror = ref.getCodeMirror()
+      this.convertMentions()
     }
   }
   checkForMentions = () => {
