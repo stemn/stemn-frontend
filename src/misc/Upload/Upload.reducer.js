@@ -16,6 +16,9 @@ export default (state = initialState, action = {}) => {
     case 'UPLOAD/PROGRESS':
       return i.assocIn(state, [action.meta.cacheKey, 'percentage'], action.payload.percentage)
 
+    case 'UPLOAD/RESET':
+      return i.assocIn(state, [action.meta.cacheKey], {})
+
     case 'UPLOAD/UPLOAD_PENDING':
       return i.assocIn(state, [action.meta.cacheKey], {
         files: action.meta.files.map(file => ({

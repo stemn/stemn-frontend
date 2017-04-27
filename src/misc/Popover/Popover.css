@@ -30,7 +30,7 @@
 }
 
 :global(.PopoverMenu a) {
-  display: block;
+  display: flex;
   padding: 8px 15px;
   clear: both;
   font-weight: 400;

@@ -1,6 +1,7 @@
 @value primary, border1, bg1, grey-3 from "theme";
 
 .comment{
+  position: relative;
 }
 .commentAvatar{
   margin-right: 10px

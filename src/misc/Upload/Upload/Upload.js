@@ -1,46 +1,59 @@
-import { connect } from 'react-redux';
-
-import { upload } from './Upload.actions.js'
-import { actions } from 'react-redux-form'
-
-import React from 'react'
-
+import React, { Component, PropTypes } from 'react'
 import classNames from 'classnames'
 import classes from './Upload.css'
-
 import Dropzone from 'react-dropzone';
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import MdFileUpload from 'react-icons/md/file-upload'
 
-export const Component = React.createClass({
-  dropStyle: {
+export default class Upload extends Component {
+  static propTypes = {
+    uploadId: PropTypes.string.isRequired,// The id of this uploader (used as cache key)
+    style: PropTypes.object,              // Styles
+    containerClassName: PropTypes.string, // Classes for the container element
+    imageClassName: PropTypes.string,     // Classes for the image element
+    model: PropTypes.string,              // The model (optional)
+    value: PropTypes.object,              // The initial value
+    onUpload: PropTypes.func,             // Function to be run when the upload is complete
+    // From container
+    uploadData: PropTypes.object,
+    upload: PropTypes.func.isRequired,
+    change: PropTypes.func.isRequired,
+  }
+  dropStyle = {
     minHeight: '50px',
-  },
+  }
 
-  dropActiveStyle: {
+  dropActiveStyle = {
     outline: '4px solid #82c382'
-  },
+  }
 
-  onDrop(files) {
-    this.props.upload({
+  onDrop = (files) => {
+    const { upload, change, uploadId, onUpload, model } = this.props
+    upload({
       files,
-      cacheKey: this.props.uploadId
+      cacheKey: uploadId
     }).then(response => {
-      this.props.change(this.props.model, response.value.data.url)
+      if (onUpload) {
+        onUpload(response.value.data)
+      }
+      // If we have a model, update it
+      if (model) {
+        change(model, response.value.data.url)
+      }
     })
-  },
+  }
 
-  onOpenClick() {
+  onOpenClick = () => {
     this.refs.dropzone.open();
-  },
+  }
 
-  renderOverlay() {
+  renderOverlay = () => {
     return (
       <div className={ classNames('layout-column layout-align-center-center', classes.overlay)}>
         <MdFileUpload size={ 30 } />
       </div>
     )
-  },
+  }
 
   render() {
     const { uploadData, style, containerClassName, imageClassName, model, value } = this.props;
@@ -86,15 +99,4 @@ export const Component = React.createClass({
       </div>
     );
   }
-});
-
-const mapStateToProps = ({ upload }, { uploadId }) => ({
-  uploadData: upload[uploadId]
-})
-
-const mapDispatchToProps = {
-  upload,
-  change: actions.change,
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Component);

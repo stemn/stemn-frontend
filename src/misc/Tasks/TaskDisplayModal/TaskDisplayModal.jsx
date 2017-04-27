@@ -1,6 +1,7 @@
 // Container Core
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry'
 
 // Container Actions
 import * as TasksActions from '../Tasks.actions.js';
@@ -223,4 +224,9 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+const modalName = 'TASK'
+
+const ModalComponent = connect(mapStateToProps, mapDispatchToProps)(Component);
+registerModal(modalName, ModalComponent)
+
+export default modalName

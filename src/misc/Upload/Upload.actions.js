@@ -27,6 +27,13 @@ export function upload({cacheKey, files}) {
   }
 }
 
+export const reset = ({ cacheKey }) => ({
+  type: 'UPLOAD/RESET',
+  meta: {
+    cacheKey,
+  }
+})
+
 export function progress({percentage, cacheKey}) {
   return {
     type: 'UPLOAD/PROGRESS',

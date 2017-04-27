@@ -3,7 +3,7 @@
 }
 
 .image {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.00);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -20,7 +20,7 @@
   right: 0;
   bottom: 0;
   position: absolute;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.1);
   color: white;
   cursor: pointer;
 }
