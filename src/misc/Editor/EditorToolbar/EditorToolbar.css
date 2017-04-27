@@ -8,26 +8,8 @@
   margin-top: 10px;
   margin-right: 10px;
 }
-.button {
-  border: none;
-  outline: none;
-  background: none;
-  padding: 5px;
-  transition: all 0.2s ease;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  display: inline-flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
 
-.button:hover {
-  color: primary;
-}
-
-.button svg {
-  width: 17px;
-  height: 17px;
+.toolbar svg {
+  width: 18px;
+  height: 18px;
 }

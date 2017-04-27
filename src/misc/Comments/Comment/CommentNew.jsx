@@ -64,11 +64,13 @@ export class CommentNew extends Component {
             </TextSwitch>
           </div>
           <div className={classes.commentContent}>
-            <EditorNew
-              autoFocus={ isFocussed }
-              model={ `${entityModel}.body` }
-              value={ newComment.body }
-            />
+            { isFocussed
+            ? <EditorNew
+                autoFocus={ isFocussed }
+                model={ `${entityModel}.body` }
+                value={ newComment.body }
+              />
+            : null }
           </div>
           <div className="layout-row layout-align-start-end" style={ { padding: '0 20px 10px' } }>
             <MarkdownButton>Markdown formatting supported</MarkdownButton>

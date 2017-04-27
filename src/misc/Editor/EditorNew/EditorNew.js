@@ -35,8 +35,6 @@ export default class EditorNew extends Component {
   }
   updateValue = (newValue) => {
     const { model, change, value } = this.props
-//    const prevMentions = parseMentions(value)
-//    const newMentions = parseMentions(newValue)
     this.checkForMentions()
     change(model, newValue)
   }
@@ -134,12 +132,15 @@ export default class EditorNew extends Component {
     this.cursorWrap((content) => `[${ content || 'text' }](url)`)
   }
   render() {
-    const { value, showUploadModal } = this.props
+    const { value, showUploadModal, hideToolbar } = this.props
     const { caretPosition, query, showPopover } = this.state
 
     return (
       <div>
-        <EditorToolbar codemirror={ this.codemirror }/>
+        <EditorToolbar
+          codemirror={ this.codemirror }
+          hide={ hideToolbar }
+        />
         <CodeMirror
           ref={ this.getCodeMirrorRef }
           className={ classes.editor }

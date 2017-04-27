@@ -1,11 +1,14 @@
 import React, { Component, PropTypes } from 'react'
 import classes from './EditorToolbar.css'
+import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton'
 import MdFormatItalic from 'react-icons/md/format-italic'
 import MdFormatBold from 'react-icons/md/format-bold'
 import MdLink from 'react-icons/md/link'
 import MdFormatListBulleted from 'react-icons/md/format-list-bulleted'
 import MdInsertPhoto from 'react-icons/md/insert-photo'
 import MdTextFields from 'react-icons/md/text-fields'
+import MdCode from 'react-icons/md/code'
+import MathIcon from 'stemn-shared/assets/icons/editor/math'
 
 export default class EditorToolbar extends Component {
   cursorWrap = (cursorRange, contentFunction) => {
@@ -79,6 +82,16 @@ export default class EditorToolbar extends Component {
     this.cursorWrap(cursorRange, (content) => `[${ content || 'text' }](url)`)
     this.cursorSet(cursorRange, 0, 1)
   }
+  code = () => {
+    const cursorRange = this.getCursor()
+    this.cursorWrap(cursorRange, (content) => `\`\`\`\n${ content } \n\`\`\``)
+    this.cursorSet(cursorRange, 1, 0)
+  }
+  math = () => {
+    const cursorRange = this.getCursor()
+    this.cursorWrap(cursorRange, (content) => `$$${ content }$$`)
+    this.cursorSet(cursorRange, 0, 2)
+  }
   buttons = [{
     title: 'Heading',
     onClick: this.heading,
@@ -96,27 +109,39 @@ export default class EditorToolbar extends Component {
     onClick: this.bullet,
     icon: <MdFormatListBulleted />,
   },{
-    title: 'Upload Image',
+    title: 'Image',
     onClick: this.upload,
     icon: <MdInsertPhoto />,
   },{
     title: 'Link',
     onClick: this.link,
     icon:  <MdLink />,
+  },{
+    title: 'Code',
+    onClick: this.code,
+    icon:  <MdCode />,
+  },{
+    title: 'Equation',
+    onClick: this.math,
+    icon:  <MathIcon />,
   }]
   render() {
-    return (
-      <div className={ classes.toolbar }>
-        { this.buttons.map(button => (
-          <button
-            className={ classes.button }
-            onClick={ button.onClick }
-            title={ button.title }
-          >
-            { button.icon }
-          </button>
-        ))}
-      </div>
-    )
+    const { hide } = this.props
+    if (!hide) {
+      return (
+        <div className={ classes.toolbar }>
+          { this.buttons.map(button => (
+            <SimpleIconButton
+              onClick={ button.onClick }
+              title={ button.title }
+            >
+              { button.icon }
+            </SimpleIconButton>
+          ))}
+        </div>
+      )
+    } else {
+      return null
+    }
   }
 }
