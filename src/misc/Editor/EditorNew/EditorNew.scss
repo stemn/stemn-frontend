@@ -1,0 +1,53 @@
+@value primary from "theme";
+
+.editor {
+  pre{
+    font-family: Open Sans;
+    padding: 0px;
+    color: rgba(0, 0, 0, 0.6);
+    line-height: 1.6em;
+  }
+
+  :global(.CodeMirror-lines) {
+    padding: 0px;
+  }
+  :global(.CodeMirror-line) {
+    padding: 0px;
+  }
+  :global(.cm-header) {
+    color: rgba(0, 0, 0, 0.6);
+  }
+  :global(.cm-header-1) {
+    display: inline-block;
+    font-size: 30px;
+    margin-bottom: 20px;
+    margin: 10px 0;
+  }
+  :global(.cm-header-2) {
+    display: inline-block;
+    font-size: 25px;
+    margin: 10px 0;
+  }
+  :global(.cm-header-3) {
+    display: inline-block;
+    font-size: 18px;
+    margin: 5px 0;
+  }
+  :global(.cm-variable-2) {
+    color: rgba(0, 0, 0, 0.6);
+  }
+  :global(.cm-string) {
+    color: rgba(0, 0, 0, 0.6);
+  }
+  :global(.cm-link) {
+    color: primary;
+  }
+  :global(.cm-comment) {
+    color: rgba(0, 0, 0, 0.4);
+  }
+  :global(.cm-delimit) {
+    color: rgb(255, 106, 106);
+  }
+}
+
+

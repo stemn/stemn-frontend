@@ -18,7 +18,7 @@ import classes from './CommitBox.css';
 // Sub Components
 import IconButton from 'stemn-shared/misc/Buttons/IconButton';
 import Button from 'stemn-shared/misc/Buttons/Button/Button.jsx';
-import Editor from 'stemn-shared/misc/Editor/Editor.jsx';
+import Editor from 'stemn-shared/misc/Editor/EditorNew';
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import MarkdownButton from 'stemn-shared/misc/Editor/MarkdownButton/MarkdownButton.jsx';
 import Walkthrough from 'stemn-shared/misc/Walkthrough/Walkthrough.jsx'

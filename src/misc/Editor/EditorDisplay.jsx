@@ -1,47 +1,19 @@
-//import React from 'react'
-//import markdownIt from 'markdown-it';
-//import pluginEmoji from 'markdown-it-emoji'
-//import pluginKatex from 'markdown-it-katex'
-//import classes from './EditorDisplay.css'
-//import { validateMention } from 'stemn-shared/misc/Mentions/Mentions.utils.js'
-//import htmlToReact from 'html-to-react'
-//import hljs from 'highlight.js'
-//import classNames from 'classnames'
-//import { connect } from 'react-redux'
-//import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js'
-//
-//const TaskMention = React.createClass({
-//  showModal(){
-//    this.props.dispatch(ModalActions.showModal({
-//      modalType: 'TASK',
-//      limit: 1,
-//      modalProps: {
-//        taskId: this.props.entityId
-//      }
-//    }))
-//  },
-//  render() {
-//    const { entityId, mentionId, mentionType, children} = this.props;
-//    return (
-//      <a id={mentionId}
-//        className={classes.mention}
-//        href={mentionType == 'user' ? `/users/${entityId}` : `/tasks/${entityId}`}
-//        onClick={this.showModal}>
-//        {children}
-//      </a>
-//    )
-//  }
-//});
-//const TaskMentionConnected = connect()(TaskMention);
-//
-///////////////////////////////////////////////////////////////////////////
-//
-//const htmlToReactParser = new htmlToReact.Parser();
-//
-//const md = markdownIt({
-//  html: true,
-//  linkify: true,
-//  typographer: true,
+import React, { Component, PropTypes } from 'react'
+import markdownIt from 'markdown-it';
+import pluginEmoji from 'markdown-it-emoji'
+import pluginKatex from 'markdown-it-katex'
+import classes from './EditorDisplay.css'
+import { validateMention } from 'stemn-shared/misc/Mentions/Mentions.utils.js'
+import MentionFromString from 'stemn-shared/misc/Mentions/MentionFromString'
+import htmlToReact from 'html-to-react'
+import hljs from 'highlight.js'
+
+const htmlToReactParser = new htmlToReact.Parser();
+
+const md = markdownIt({
+  html: true,
+  linkify: true,
+  typographer: true,
 //  highlight: function (str, lang) {
 //    if (lang && hljs.getLanguage(lang)) {
 //      try {
@@ -50,97 +22,35 @@
 //    }
 //    return ''; // use external default escaping
 //  }
-//});
-//md.use(pluginEmoji)
-//md.use(pluginKatex)
-//
-//const processNodeDefinitions = new htmlToReact.ProcessNodeDefinitions(React);
-//const processingInstructions = [{
-//  // Remove the '@' trigger if the next element is a mention
-//  shouldProcessNode: function (node) {
-//    return node.type == 'text' && node.data.endsWith('@') && node.next && node.next.attribs && validateMention(node.next.attribs.href);
-//  },
-//  processNode: function (node, children, index) {
-//    return <span>{node.data.slice(0, -1)}</span>
-//  }
-//},{
-//  // Add the mention to replace the anchor
-//  shouldProcessNode: function (node) {
-//    return node.name == 'a' && validateMention(node.attribs.href);
-//  },
-//  processNode: function (node, children, index) {
-//    const [ entityId, mentionType, mentionId ] = node.attribs.href.split(':');
-//    const innerTextFn = {
-//      user           : (display) => '@' + display,
-//      task           : (display) => '#' + display + ' (related)',
-//      'task-complete': (display) => '#' + display + ' (complete)'
-//    }
-//    const innerText = innerTextFn[mentionType] ? innerTextFn[mentionType](node.children[0].data) : node.children[0].data;
-//
-//    return (
-//      <TaskMentionConnected
-//        key={index}
-//        entityId={entityId}
-//        mentionId={mentionId}
-//        mentionType={mentionType}>
-//        {innerText}
-//      </TaskMentionConnected>
-//    )
-//  }
-//}, {
-//  shouldProcessNode: (node) => {
-//    return true;
-//  },
-//  processNode: processNodeDefinitions.processDefaultNode
-//}];
-//
-//export default React.createClass({
-//  getMarkdownText() {
-//    var rawMarkup = '<div>' + md.render(this.props.value || '') + '</div>';
-//    return htmlToReactParser.parseWithInstructions(rawMarkup, () => true, processingInstructions);
-//  },
-//  render() {
-//    const { value, onClick } = this.props;
-//    return (
-//      <div onClick={onClick}>
-//        <div className={classes.display}>{this.getMarkdownText(value)}</div>
-//      </div>
-//    )
-//  }
-//});
-
-
-import React from 'react'
-import markdownIt from 'markdown-it';
-import pluginEmoji from 'markdown-it-emoji'
-import pluginKatex from 'markdown-it-katex'
-import classes from './EditorDisplay.css'
-import classNames from 'classnames'
-
-
-const md = markdownIt({
-  html: true,
-  linkify: true,
-  typographer: true,
-})
+});
 md.use(pluginEmoji)
 md.use(pluginKatex)
 
-export default React.createClass({
+const processingInstructions = [{
+  // Add the mention to replace the anchor
+  shouldProcessNode: node => node.name === 'a' && validateMention(node.attribs.href),
+  processNode: (node, children) => (
+    <MentionFromString
+      href={ node.attribs.href }
+      display={ node.children[0].data }
+    />
+  )
+}, {
+  shouldProcessNode: node => true,
+  processNode: new htmlToReact.ProcessNodeDefinitions(React).processDefaultNode,
+}]
+
+export default class EditorDisplay extends Component {
+  getMarkdownText() {
+    const rawMarkup = `<div>${md.render(this.props.value || '')}</div>`
+    return htmlToReactParser.parseWithInstructions(rawMarkup, () => true, processingInstructions)
+  }
   render() {
     const { value, onClick } = this.props
-    const html = {
-      __html: md.render(value)
-    }
     return (
       <div onClick={ onClick }>
-        <div
-          className={ classes.display }
-          dangerouslySetInnerHTML={ html }
-        />
+        <div className={classes.display}>{this.getMarkdownText(value)}</div>
       </div>
     )
   }
-});
-
-//        <MarkdownDisplay text={ value } plugins={ [pluginEmoji, pluginKatex] }/>
+}

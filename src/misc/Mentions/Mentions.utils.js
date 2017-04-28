@@ -89,16 +89,6 @@ export const parseMentions = (text) => {
   return mentions;
 }
 
-export const replaceMentions = (text) => {
-  // This will replace all the mentions in the text with a simple version
-  const replacer = (match, p1, p2, p3, p4) => {
-    // Get the info (from between the standard brackets)
-    return validateMention(p4)
-      ? `[${p2}]()`
-      : match
-  }
-  return text ? text.replace(markdownLinkRegex, replacer) : ''
-}
 
 export const removeExistingMentions = (newMentions, existingMentions) => {
   // Create an array of existing mention entity Ids
@@ -116,4 +106,52 @@ export const addMentionsToText = (text, mentions) => {
     })
   }
   return textNew
+}
+
+export const mentionTriggers = [{
+  trigger: '@',
+  type: 'user',
+}, {
+  trigger: '#',
+  type: 'thread',
+}]
+
+export const mentionTypeFromWord = (word) => {
+  const firstLetter = word[0]
+  const mentionTriggerInfo = mentionTriggers.find(mention => mention.trigger === firstLetter)
+  return mentionTriggerInfo
+    ? mentionTriggerInfo.type
+    : undefined
+}
+
+export const getMentionInfo = (mentionType, entityId, display) => {
+  const mentionTypes = {
+    user: {
+      display: `@${display}`,
+      route: 'userRoute',
+      params: {
+        userId: entityId,
+      }
+    },
+    thread: {
+      display: `#${display}`,
+      route: 'taskRoute',
+      params: {
+        taskId: entityId,
+      }
+    },
+    'thread-complete': {
+      display: `#${display} (complete)`,
+      route: 'taskRoute',
+      params: {
+        taskId: entityId,
+      }
+    },
+  }
+  const mentionInfo = mentionTypes[mentionType];
+  if (mentionInfo) {
+    return mentionInfo
+  } else {
+    console.error('Invalid mention type', mentionType);
+  }
 }

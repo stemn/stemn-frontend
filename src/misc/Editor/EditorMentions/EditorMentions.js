@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import classes from './EditorMentions.css'
 import MentionPopover from 'stemn-shared/misc/Search/MentionPopover'
 import getUuid from 'stemn-shared/utils/getUuid'
-import { parseMentions, getMentionString } from 'stemn-shared/misc/Mentions/Mentions.utils'
+import { getMentionInfo, parseMentions, getMentionString, mentionTypeFromWord } from 'stemn-shared/misc/Mentions/Mentions.utils'
 
 // The will split at new line
 const getValueInLineFormat = (value = '') => value.split('\n')
@@ -14,7 +14,7 @@ const findAllMentionsPositions = (value = '') => {
   const allMentions = []
   mentionsInEachLine.forEach((mentions, index) => {
     mentions.forEach(mention => allMentions.push({
-      display: mention.display,
+      ...mention,
       from: {
         line: index,
         ch: mention.index.from,
@@ -27,6 +27,7 @@ const findAllMentionsPositions = (value = '') => {
   })
   return allMentions
 }
+
 
 export default class EditorMentions extends Component {
   constructor(props) {
@@ -48,22 +49,19 @@ export default class EditorMentions extends Component {
       },
       query: '',
       showPopover: false,
+      mentionType: '',
     }
   }
   componentDidMount() {
     const { codemirror } = this.props
-    if (codemirror) {
-      this.convertMentions(codemirror)
-    }
+    this.convertMentions(codemirror)
   }
   componentWillReceiveProps() {
     const { codemirror } = this.props
     if (codemirror) {
       this.getCaretPosition();
       this.checkForMentions(codemirror)
-      setTimeout(() => {
-        this.convertMentions(codemirror)
-      }, 10)
+      this.convertMentions(codemirror)
     }
   }
   convertMentions = (codemirror) => {
@@ -71,13 +69,16 @@ export default class EditorMentions extends Component {
     const mentionPositions = findAllMentionsPositions(codemirror.getValue())
     mentionPositions.forEach((mention) => {
       // All mentions are marked with the mention class and set to atomic
-      const newMentionEl = document.createElement('span')
-      newMentionEl.className = classes.mention
-      newMentionEl.innerHTML = `@${mention.display} `
-      const mentionEl = codemirror.markText(mention.from, mention.to, {
-        replacedWith: newMentionEl,
-        atomic: true,
-      })
+      const mentionInfo = getMentionInfo(mention.mentionType, mention.entityId, mention.display)
+      if (mentionInfo) {
+        const newMentionEl = document.createElement('span')
+        newMentionEl.className = classes.mention
+        newMentionEl.innerHTML = `${mentionInfo.display}`
+        const mentionEl = codemirror.markText(mention.from, mention.to, {
+          replacedWith: newMentionEl,
+          atomic: true,
+        })
+      }
     })
   }
   getCaretPosition = () => {
@@ -100,8 +101,12 @@ export default class EditorMentions extends Component {
     const wordsSplit = valueUpToCursor.split(' ')
     const lastWord = wordsSplit[wordsSplit.length - 1]
 
-    // If it starts with @, we have a mention
-    if (lastWord.startsWith('@')) {
+    // We get the mention type from the word (if it begins with a valid trigger)
+    const mentionType = mentionTypeFromWord(lastWord)
+
+    // If we find a mention
+    if (mentionType) {
+      // Determine the cursor range
       const cursorRange = {
         from: {
           line: cursor.line,
@@ -112,17 +117,19 @@ export default class EditorMentions extends Component {
           ch: cursor.ch,
         }
       }
-
+      // Mark the text of the partial mention
       codemirror.markText(cursorRange.from, cursorRange.to, {
         className: classes.mentionUnderway,
       })
-
+      // Set the state to reflect the cursor, query and mention type
       this.setState({
         cursorRange,
         query: lastWord.substring(1),
         showPopover: true,
+        mentionType,
       })
     } else {
+      // If we don't have a mention
       // Remove all mentionUnderway marks
       const allMarks = codemirror.getAllMarks()
       allMarks.forEach(mark => {
@@ -144,7 +151,7 @@ export default class EditorMentions extends Component {
     const mention = {
       display: result.name,
       entityId: result._id,
-      mentionType: 'user',
+      mentionType: this.state.mentionType,
       mentionId: getUuid(),
     }
     const mentionString = `${getMentionString(mention)}`
@@ -168,14 +175,14 @@ export default class EditorMentions extends Component {
     this.convertMentions(codemirror)
   }
   render() {
-    const { caretPosition, query, showPopover } = this.state
+    const { caretPosition, query, showPopover, mentionType } = this.state
     return (
       <MentionPopover
         caretPosition={ caretPosition }
         addMention={ this.addMention }
         showPopover={  showPopover }
         query={ query }
-        entityType="user"
+        entityType={ mentionType }
       />
     )
   }
