@@ -1,7 +1,7 @@
 .caret {
-  position: absolute;
+  position: fixed;
   height: 15px;
-  widows: 1px;
+  width: 1px;
 }
 
 .popover {

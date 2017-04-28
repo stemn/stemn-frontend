@@ -1,9 +1,3 @@
-@value primary from "theme";
-
 .editor pre{
   font-family: Open Sans
-}
-
-.mention {
-  color: primary;
 }

@@ -63,7 +63,7 @@ export default class EditorToolbar extends Component {
   italic = () => {
     const cursorRange = this.getCursor()
     this.cursorWrap(cursorRange, (content) => `*${content}*`)
-    this.cursorSet(cursorRange, 0, 2)
+    this.cursorSet(cursorRange, 0, 1)
   }
   bullet = () => {
     const cursorRange = this.getCursor()
@@ -132,6 +132,7 @@ export default class EditorToolbar extends Component {
         <div className={ classes.toolbar }>
           { this.buttons.map(button => (
             <SimpleIconButton
+              key={ button.title }
               onClick={ button.onClick }
               title={ button.title }
             >

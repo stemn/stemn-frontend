@@ -1,0 +1,182 @@
+import React, { Component, PropTypes } from 'react'
+import classes from './EditorMentions.css'
+import MentionPopover from 'stemn-shared/misc/Search/MentionPopover'
+import getUuid from 'stemn-shared/utils/getUuid'
+import { parseMentions, getMentionString } from 'stemn-shared/misc/Mentions/Mentions.utils'
+
+// The will split at new line
+const getValueInLineFormat = (value = '') => value.split('\n')
+
+// The will find all the mentions and return them in line/ch format
+const findAllMentionsPositions = (value = '') => {
+  const valueInLineFormat = getValueInLineFormat(value)
+  const mentionsInEachLine = valueInLineFormat.map(parseMentions)
+  const allMentions = []
+  mentionsInEachLine.forEach((mentions, index) => {
+    mentions.forEach(mention => allMentions.push({
+      display: mention.display,
+      from: {
+        line: index,
+        ch: mention.index.from,
+      },
+      to: {
+        line: index,
+        ch: mention.index.to,
+      }
+    }))
+  })
+  return allMentions
+}
+
+export default class EditorMentions extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      caretPosition: {
+        top: 0,
+        left: 0,
+      },
+      cursorRange: {
+        from: {
+          line: 0,
+          ch: 0,
+        },
+        to: {
+          line: 0,
+          ch: 0,
+        },
+      },
+      query: '',
+      showPopover: false,
+    }
+  }
+  componentDidMount() {
+    const { codemirror } = this.props
+    if (codemirror) {
+      this.convertMentions(codemirror)
+    }
+  }
+  componentWillReceiveProps() {
+    const { codemirror } = this.props
+    if (codemirror) {
+      this.getCaretPosition();
+      this.checkForMentions(codemirror)
+      setTimeout(() => {
+        this.convertMentions(codemirror)
+      }, 10)
+    }
+  }
+  convertMentions = (codemirror) => {
+    // Get the position of all the valid mentions
+    const mentionPositions = findAllMentionsPositions(codemirror.getValue())
+    mentionPositions.forEach((mention) => {
+      // All mentions are marked with the mention class and set to atomic
+      const newMentionEl = document.createElement('span')
+      newMentionEl.className = classes.mention
+      newMentionEl.innerHTML = `@${mention.display} `
+      const mentionEl = codemirror.markText(mention.from, mention.to, {
+        replacedWith: newMentionEl,
+        atomic: true,
+      })
+    })
+  }
+  getCaretPosition = () => {
+    const caretEl = document.getElementsByClassName('CodeMirror-cursor')[0]
+    if (caretEl) {
+      const caretPosition = caretEl.getBoundingClientRect()
+      this.setState({
+        caretPosition: {
+          left: caretPosition.left,
+          top: caretPosition.top,
+        },
+      })
+    }
+  }
+  checkForMentions = (codemirror) => {
+    const cursor = codemirror.getCursor()
+    // Get the content up to the cursor
+    const valueUpToCursor = codemirror.getLine(cursor.line)
+    // Get the word just before the cursor
+    const wordsSplit = valueUpToCursor.split(' ')
+    const lastWord = wordsSplit[wordsSplit.length - 1]
+
+    // If it starts with @, we have a mention
+    if (lastWord.startsWith('@')) {
+      const cursorRange = {
+        from: {
+          line: cursor.line,
+          ch: cursor.ch - lastWord.length,
+        },
+        to: {
+          line: cursor.line,
+          ch: cursor.ch,
+        }
+      }
+
+      codemirror.markText(cursorRange.from, cursorRange.to, {
+        className: classes.mentionUnderway,
+      })
+
+      this.setState({
+        cursorRange,
+        query: lastWord.substring(1),
+        showPopover: true,
+      })
+    } else {
+      // Remove all mentionUnderway marks
+      const allMarks = codemirror.getAllMarks()
+      allMarks.forEach(mark => {
+        if (mark.className ===  classes.mentionUnderway) {
+          mark.clear()
+        }
+      })
+      // Hide the popover
+      this.setState({
+        showPopover: false,
+      })
+    }
+  }
+  addMention = (result) => {
+    const { codemirror } = this.props
+    const { cursorRange } = this.state
+
+    // Create the mention object from the result
+    const mention = {
+      display: result.name,
+      entityId: result._id,
+      mentionType: 'user',
+      mentionId: getUuid(),
+    }
+    const mentionString = `${getMentionString(mention)}`
+
+    // Insert mention at cursor
+    codemirror.replaceRange(mentionString, cursorRange.from, cursorRange.to)
+
+    // Reposition the cursor
+    codemirror.focus()
+    codemirror.setCursor({
+      line: cursorRange.from.line,
+      ch: cursorRange.from.ch + mentionString.length,
+    })
+
+    // Hide the mention popover
+    this.setState({
+      showPopover: false,
+    })
+
+    // Convert the new mentions
+    this.convertMentions(codemirror)
+  }
+  render() {
+    const { caretPosition, query, showPopover } = this.state
+    return (
+      <MentionPopover
+        caretPosition={ caretPosition }
+        addMention={ this.addMention }
+        showPopover={  showPopover }
+        query={ query }
+        entityType="user"
+      />
+    )
+  }
+}
