@@ -38,11 +38,11 @@ const MenuItem = React.createClass({
 
 const Menu = React.createClass({
   render() {
-    const { menu, onClick, item } = this.props;
+    const { menu, item, ...otherProps } = this.props;
     // Menu - standard menu object
     // Item - the thing that will be passed into menuitem.onclick
     return (
-      <div className="PopoverMenu" onClick={onClick}>
+      <div className="PopoverMenu" { ...otherProps }>
         {menu.map(menuItem => <MenuItem key={menuItem.label} menuItem={menuItem} item={item}/>)}
       </div>
     );

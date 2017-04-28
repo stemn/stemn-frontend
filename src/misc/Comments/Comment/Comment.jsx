@@ -14,7 +14,6 @@ import moment from 'moment';
 // Styles
 import classNames from 'classnames';
 import classes from './Comment.css';
-import loadingClasses from 'stemn-shared/misc/Loading/LoadingPlaceholders/LoadingPlaceholders.css'
 
 // Sub Components
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx';
@@ -26,6 +25,8 @@ import Popover from 'stemn-shared/misc/Popover';
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
 import IsOwner from 'stemn-shared/misc/Auth/IsOwner/IsOwner.jsx';
+import LoadingPlaceholder from 'stemn-shared/misc/Loading/LoadingPlaceholder'
+import LoadingAnimation from 'stemn-shared/misc/Loading/LoadingAnimation'
 
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -61,19 +62,25 @@ export const Component = React.createClass({
 
     if(!comment || !comment.data){
       return (
-        <div className={classNames(classes.comment, loadingClasses.loading, 'layout-row')} style={style}>
-          <div className={classes.commentAvatar}>
-            <UserAvatar size="33" shape="square" />
-          </div>
+        <LoadingAnimation className={classes.comment + ' layout-row'} style={style}>
           <div className={classes.commentBody + ' flex'}>
-            <div className={classes.commentHeader}>
-              Somebodys name
+            <div className={classes.commentHeader + ' layout-row layout-align-start-center'}>
+              <UserAvatar
+                size={ 25 }
+                shape="square"
+                className={ classes.commentAvatar }
+              />
+              <LoadingPlaceholder width={ 200 } className={ classes.link }/>
             </div>
-            <div className={classes.commentContent}>
-              Some dummy goes here. This text should be obscured by the blokk font.
+            <div className={ classes.commentContent }>
+              <LoadingPlaceholder width={ 600 } />
+              <br/>
+              <LoadingPlaceholder width={ 300 } />
+              <br/>
+              <LoadingPlaceholder width={ 400 } />
             </div>
           </div>
-        </div>
+        </LoadingAnimation>
       )
     }
 

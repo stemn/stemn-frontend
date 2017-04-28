@@ -3,33 +3,10 @@ import CodeMirror from 'react-codemirror'
 import classes from './EditorNew.scss'
 import 'codemirror/mode/markdown/markdown'
 import 'codemirror/mode/stex/stex'
+import 'codemirror/addon/mode/multiplex'
 import EditorToolbar from 'stemn-shared/misc/Editor/EditorToolbar'
 import EditorMentions from 'stemn-shared/misc/Editor/EditorMentions'
 import codemirrorLib from 'codemirror'
-import 'codemirror/addon/mode/multiplex'
-//import 'codemirror/addon/mode/overlay'
-//
-//codemirrorLib.defineMode("markdownPlus", (config, parserConfig) => {
-//  const overlayMode = {
-//    token: (stream, state) => {
-//      var ch;
-//      if (stream.match("{{")) {
-//        while ((ch = stream.next()) != null)
-//          if (ch == "}" && stream.next() == "}") {
-//            stream.eat("}");
-//            return "stex";
-//          }
-//      }
-//      while (stream.next() != null && !stream.match("{{", false)) {}
-//      return null;
-//    }
-//  };
-//  const baseMode = codemirrorLib.getMode(config, "text/x-markdown")
-////  const overlayMode = codemirrorLib.getMode(config, "text/x-latex")
-//
-//  return codemirrorLib.overlayMode(baseMode, overlayMode);
-//});
-
 
 codemirrorLib.defineMode('markdownWitLatex', (config) => {
   const baseMode = codemirrorLib.getMode(config, 'text/x-markdown')
@@ -45,9 +22,8 @@ codemirrorLib.defineMode('markdownWitLatex', (config) => {
     mode: codemirrorLib.getMode(config, 'text/x-latex'),
     delimStyle: "delimit"
   }
-  return codemirrorLib.multiplexingMode(baseMode, latex$$)
+  return codemirrorLib.multiplexingMode(baseMode, latex$$, latex$)
 })
-
 
 const options = {
   lineNumbers: false,
