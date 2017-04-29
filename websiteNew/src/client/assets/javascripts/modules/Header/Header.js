@@ -22,15 +22,20 @@ class Header extends Component {
     return (
       <div className='layout-row layout-align-start-center'>
         <SimpleIconButton
-         title='Create new project'
-         onClick={ newProject} >
+          title='Create new project'
+          onClick={ newProject} >
           <MdAdd size={ 25 }/>
         </SimpleIconButton>
         <SimpleIconButton
-         title='Notifications'
-         to='/notifications'
-         style={ { marginRight: '10px' } }>
+          title='Notifications'
+          to='/notifications'
+          style={ { marginRight: '10px' } }
+          className="rel-box"
+        >
           <MdNotifications size={ 22 }/>
+          <div className={ classes.badge }>
+            1
+          </div>
         </SimpleIconButton>
         <Popover
           offset={13}
