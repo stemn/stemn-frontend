@@ -52,14 +52,18 @@ export default class LandingHeader extends Component {
 
   }
   isLoggedOut() {
-    return (
-      <div className='layout-row layout-align-start-center'>
-        <Link to={ loginRoute() } className={ classNames('layout-row layout-align-start-center', classes.specialLink ) }>
-          <div>Sign in</div>
-        </Link>
-      </div>
-    )
-
+    if (window.location.pathname !== '/login') {
+      return (
+        <div className='layout-row layout-align-start-center'>
+          <Link to={ loginRoute() } className={ classNames('layout-row layout-align-start-center', classes.specialLink ) }>
+            <div>Sign in</div>
+          </Link>
+        </div>
+      )
+    }
+    else {
+      return null
+    }
   }
   render() {
     const { atTop } = this.state

@@ -63,10 +63,10 @@ class Header extends Component {
         <Link to={ loginRoute() } className='link-primary'>Sign in</Link>
       </div>
     )
-
   }
   render() {
     const { auth, logout, newProject } = this.props;
+    console.log('test');
     return (
       <header className={ classNames(classes.header, 'layout-row', 'layout-align-start-center') }>
         <Container className='layout-row layout-align-start-center'>
