@@ -49,7 +49,6 @@ export default class LandingHeader extends Component {
         />
       </Link>
     )
-
   }
   isLoggedOut() {
     if (window.location.pathname !== '/login') {

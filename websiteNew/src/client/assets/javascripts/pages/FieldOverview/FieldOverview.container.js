@@ -6,7 +6,7 @@ const stateToProps = ({ fields }, { params }) => {
   const fieldId = params.fieldId
   return {
     fieldId,
-    field: fields[fieldId],
+    field: fields.data[fieldId],
   }
 }
 
