@@ -14,21 +14,25 @@ import initRaven from './init/initRaven';
 import initAuth from './init/initAuth';
 import { createPersistor } from 'redux-persist';
 import { getLatest } from 'stemn-shared/misc/DesktopReleases/DesktopReleases.actions'
+import { getNotifications } from 'stemn-shared/misc/Notifications/Notifications.actions'
 
 import 'styles/global/index.global.css';
 
 
 const initReactAndRedux = (initialState) => {
-  const store = configureStore(initialState);
-  const persist = createPersistor(store, persistConfig);
-  const history = syncHistoryWithStore(browserHistory, store);
-  initHttp(store);
-  initRaven();
+  const store = configureStore(initialState)
+  const persist = createPersistor(store, persistConfig)
+  const history = syncHistoryWithStore(browserHistory, store)
+  initHttp(store)
+  initRaven()
   initAuth(store)
   
   // Dispatch some actions
   // Get the latest desktop revisions
   store.dispatch(getLatest())
+  // Get the notifications
+  store.dispatch(getNotifications())
+  setInterval(() => store.dispatch(getNotifications()), 60*1000)
 
   // Get the DOM Element that will host our React application
   const rootEl = document.getElementById('app');

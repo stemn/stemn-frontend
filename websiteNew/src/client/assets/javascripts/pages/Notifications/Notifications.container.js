@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
-
-import { getNotifications, markAsRead } from 'stemn-shared/misc/Notifications/Notifications.actions';
-
+import { getNotifications, markAsRead } from 'stemn-shared/misc/Notifications/Notifications.actions'
 import Notifications from './Notifications'
 
 const stateToProps = ({ notifications }) => ({

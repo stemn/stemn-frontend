@@ -9,8 +9,9 @@ import ProjectNewModal, { modalName } from 'stemn-shared/misc/Projects/ProjectNe
 import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry';
 registerModal(modalName, ProjectNewModal);
 
-const stateToProps = ({ auth }) => ({
-  auth
+const stateToProps = ({ auth, notifications }) => ({
+  auth,
+  numNotifications: notifications.data.filter(notification => !notification.read).length
 });
 
 const dispatchToProps = {
