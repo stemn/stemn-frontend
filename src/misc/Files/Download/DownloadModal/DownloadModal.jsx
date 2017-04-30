@@ -35,15 +35,16 @@ export const FileSelectModal = React.createClass({
     // If this is a sync file
     if(nextProps.file.project && nextProps.file.project._id){
       nextProps.syncTimelineActions.fetchTimeline({
-        projectId : nextProps.file.project._id,
-        fileId    : nextProps.file.fileId,
+        entityType : 'file',
+        entityId   : nextProps.file.fileId,
       })
     }
     // If this is remote file
     else{
       nextProps.syncTimelineActions.fetchTimeline({
-        fileId    : nextProps.file.fileId,
-        provider  : nextProps.file.provider,
+        entityType : 'file',
+        entityId   : nextProps.file.fileId,
+        provider   : nextProps.file.provider,
       })
     }
   },

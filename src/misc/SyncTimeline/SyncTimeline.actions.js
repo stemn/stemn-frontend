@@ -25,17 +25,12 @@ export function selectTimelineItem({ projectId, selected }) {
   }
 }
 
-export function fetchTimeline({ projectId, fileId, provider }) {
+export function fetchTimeline({ entityType, entityId, provider }) {
+//  `/api/v1/remote/timeline/${provider}`
   const getTypes = () => {
-    if(fileId){
-      if(projectId){
-        return ['commits', 'changes']
-      }
-      else{
-        return ['revisions']
-      }
-    }
-    else{
+    if (entityType === 'file') {
+      return ['commits', 'changes']
+    } else {
       return ['commits']
     }
   }
@@ -43,18 +38,15 @@ export function fetchTimeline({ projectId, fileId, provider }) {
     type:'TIMELINE/FETCH_TIMELINE',
     payload: http({
       method: 'GET',
-      url: projectId
-        ? `/api/v1/sync/timeline/${projectId}`
-        : `/api/v1/remote/timeline/${provider}`,
+      url: '/api/v1/timeline',
       params: {
+        entityType,
+        entityId,
         types: getTypes(),
-        file: fileId
       },
     }),
     meta: {
-      cacheKey: fileId
-        ? fileId
-        : projectId,
+      cacheKey: entityId,
     }
   }
 }
@@ -64,7 +56,7 @@ export const getFeed = () => ({
   type: 'TIMELINE/FETCH_TIMELINE',
   payload: http({
     method: 'GET',
-    url: '/api/v1/feed/sync',
+    url: '/api/v1/feed',
     params: {
       types: ['commits'],
     },

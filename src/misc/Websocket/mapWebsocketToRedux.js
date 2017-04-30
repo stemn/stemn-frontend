@@ -11,9 +11,6 @@ import { renderFileDownload,
 
 export default (store, action) => {
 
-console.log(action)
-console.log('----------------')
-
   // Actions that we process if user is the actioner
   switch (action.type) {
     case 'RENDER/RENDER_COMPLETE':
@@ -38,9 +35,9 @@ console.log('----------------')
     case 'FILES/FILES_UPDATED':
       return (dispatch) => {
         action.payload.files.map((fileId) => dispatch(fetchTimeline({
-            projectId : action.payload.projectId,
-            provider : action.payload.provider,
-            fileId
+            entityType: 'project',
+            provider: action.payload.provider,
+            entityId: fileId
         })));
       }
     // case 'DROPBOX/ACCEPT_PENDING_SHARE_FAILED':
@@ -71,7 +68,10 @@ console.log('----------------')
       }
     case 'PROJECT/NEW_COMMITS':
       return (dispatch) => {
-        dispatch(fetchTimeline({ projectId : action.payload.projectId })); // TODO: add commit type to timeline?
+        dispatch(fetchTimeline({
+          entityType: 'project',
+          entityId: action.payload.projectId
+        })); // TODO: add commit type to timeline?
         dispatch(fetchChanges({ projectId : action.payload.projectId }));
       }
     case 'BOARD/BOARD_UPDATED':

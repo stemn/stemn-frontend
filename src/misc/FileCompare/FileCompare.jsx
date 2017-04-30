@@ -28,13 +28,14 @@ export const FileCompare = React.createClass({
 
       if(has(nextProps, 'file.data.project._id')){
         nextProps.dispatch(fetchTimeline({
-          projectId  : nextProps.file.data.project._id,
-          fileId     : nextProps.file.data.fileId,
+          entityType : 'file',
+          entityId   : nextProps.file.data.fileId,
         }))
       }
       else{
         nextProps.dispatch(fetchTimeline({
-          fileId     : nextProps.file.data.fileId,
+          entityType : 'file',
+          entityId   : nextProps.file.data.fileId,
           provider   : nextProps.file.data.provider,
         }))
       }
