@@ -10,7 +10,7 @@ class DeferredPromise {
   }
 };
 
-export const showModal = ({ modalType, modalProps, modalOptions, limit, scope }) => (dispatch) => {
+export const showModal = ({ modalType, modalProps, modalOptions, limit, scope } = {}) => (dispatch) => {
   const modalId = getUuid()
 
   const modalPromise = new DeferredPromise()
@@ -37,7 +37,7 @@ export const showModal = ({ modalType, modalProps, modalOptions, limit, scope })
   })
 }
 
-export const showConfirm = ({ title, message, confirmValue, confirmPlaceholder }) => {
+export const showConfirm = ({ title, message, confirmValue, confirmPlaceholder } = {}) => {
   return showModal({
     modalType: 'CONFIRM',
     modalProps: {

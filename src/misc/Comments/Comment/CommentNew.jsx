@@ -34,6 +34,10 @@ export class CommentNew extends Component {
         task: this.props.taskId,
         body: this.props.newComment.body
       }
+    }).then(() => {
+      this.setState({
+        isFocussed: false,
+      })
     })
   }
   clickComment = () => {
@@ -95,7 +99,7 @@ export class CommentNew extends Component {
 ///////////////////////////////// CONTAINER /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({ comments, auth }, {taskId}) {
+function mapStateToProps({ comments, auth }, { taskId }) {
   return {
     auth,
     entityModel: `comments.tasks.${taskId}.newComment`,
