@@ -6,12 +6,17 @@ import Markdown from 'stemn-shared/assets/icons/editor/markdown.js';
 
 export default React.createClass({
   render() {
-    const { children, style } = this.props;
+    const { children, style } = this.props
     return (
-      <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet" className={classes.button} style={style}>
-        <Markdown size="25"/>
+      <a
+        href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet"
+        target="_blank"
+        className={ classes.button }
+        style={ style }
+      >
+        <Markdown size="25" />
         { children
-        ? <span style={{paddingLeft: '5px'}}>{children}</span>
+        ? <span style={ { paddingLeft: '5px' } }>{ children }</span>
         : null }
       </a>
     );
