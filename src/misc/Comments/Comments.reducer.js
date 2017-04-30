@@ -2,7 +2,18 @@ import { modeled } from 'react-redux-form';
 import i from 'icepick';
 
 const initialState = {
-  data: {},
+  data: {
+    /*******************************
+    [commentId] : {
+      loading,
+      editActive,
+      savePending,
+      deletePending,
+      data: main comment data,
+      form,
+    }
+    *******************************/
+  },
   tasks: {}
 }
 

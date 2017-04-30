@@ -82,7 +82,7 @@ export default class EditorMentions extends Component {
     })
   }
   getCaretPosition = () => {
-    const caretEl = document.getElementsByClassName('CodeMirror-cursor')[0]
+    const caretEl = this.props.codemirror.display.cursorDiv.firstChild
     if (caretEl) {
       const caretPosition = caretEl.getBoundingClientRect()
       this.setState({

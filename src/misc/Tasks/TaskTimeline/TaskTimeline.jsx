@@ -14,7 +14,7 @@ import classNames from 'classnames';
 import classes from './TaskTimeline.css';
 
 // Sub Components
-import Comment from 'stemn-shared/misc/Comments/Comment/Comment.jsx';
+import Comment from 'stemn-shared/misc/Comments/Comment';
 import TaskTimelineItem from './TaskTimelineItem/TaskTimelineItem.jsx';
 import comments      from 'stemn-shared/assets/images/pure-vectors/comments.svg';
 

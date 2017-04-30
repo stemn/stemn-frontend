@@ -1,68 +1,48 @@
-// Container Core
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
-// Container Actions
-import * as CommentsActions from 'stemn-shared/misc/Comments/Comments.actions.js';
-import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js';
-import { actions } from 'react-redux-form';
-
-// Component Core
-import React from 'react';
+import React, { Component } from 'react';
 import moment from 'moment';
-
-// Styles
 import classNames from 'classnames';
 import classes from './Comment.css';
-
-// Sub Components
-import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx';
+import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import Editor from 'stemn-shared/misc/Editor/EditorNew';
-import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx';
-import ReactionPopup from 'stemn-shared/misc/Reactions/ReactionPopup.jsx';
-import Reactions from 'stemn-shared/misc/Reactions/Reactions.jsx';
-import Popover from 'stemn-shared/misc/Popover';
+import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'
+import ReactionPopup from 'stemn-shared/misc/Reactions/ReactionPopup.jsx'
+import Reactions from 'stemn-shared/misc/Reactions/Reactions.jsx'
+import Popover from 'stemn-shared/misc/Popover'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
-import IsOwner from 'stemn-shared/misc/Auth/IsOwner/IsOwner.jsx';
+import IsOwner from 'stemn-shared/misc/Auth/IsOwner/IsOwner.jsx'
 import LoadingPlaceholder from 'stemn-shared/misc/Loading/LoadingPlaceholder'
 import LoadingAnimation from 'stemn-shared/misc/Loading/LoadingAnimation'
+import Form from 'stemn-shared/misc/Forms/Form'
 
-
-///////////////////////////////// COMPONENT /////////////////////////////////
-
-const onMount = (nextProps, prevProps) => {
-  if(!prevProps || nextProps.commentId !== prevProps.commentId){
-    nextProps.commentsActions.getComment({commentId: nextProps.commentId})
+export default class Comment extends Component {
+  confirmDelete = () => {
+    const { showConfirm, deleteComment, comment } = this.props
+    showConfirm().then(() => deleteComment({ comment: comment.data }))
   }
-}
-
-export const Component = React.createClass({
-
-  // Mounting
-  componentWillMount() { onMount(this.props) },
-  componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
-
-  confirmDelete(){
-    this.props.modalActions.showConfirm()
-      .then(() => {
-        this.props.commentsActions.deleteComment({
-          comment: this.props.comment.data
-        })
-    })
-  },
-  submitReaction(reactionType){
-    this.props.commentsActions.toggleReaction({
-      commentId: this.props.commentId,
-      reactionType
-    })
-  },
+  submitReaction = (reactionType) => {
+    const { commentId, toggleReaction } = this.props
+    toggleReaction({ commentId, reactionType, })
+  }
+  startEdit = () => {
+    const { startEdit, comment } = this.props
+    startEdit({ commentId: comment.data._id })
+  }
+  finishEdit = () => {
+    const { finishEdit, comment } = this.props
+    finishEdit({ commentId: comment.data._id })
+  }
+  updateComment = () => {
+    const { updateComment, comment } = this.props
+    updateComment({ comment: comment.form })
+  }
   render() {
     const { item, comment, entityModel, commentsActions, style } = this.props;
 
     if(!comment || !comment.data){
       return (
-        <LoadingAnimation className={classes.comment + ' layout-row'} style={style}>
+        <LoadingAnimation className={classes.comment + ' layout-row'} style={ style }>
           <div className={classes.commentBody + ' flex'}>
             <div className={classes.commentHeader + ' layout-row layout-align-start-center'}>
               <UserAvatar
@@ -84,6 +64,8 @@ export const Component = React.createClass({
       )
     }
 
+    const hasReactions = !comment.editActive && comment.data.reactions && comment.data.reactions.length > 0
+
     return (
       <div className={classes.comment + ' layout-row'} style={style}>
         <div className={classes.commentBody + ' flex'}>
@@ -95,65 +77,55 @@ export const Component = React.createClass({
               className={ classes.commentAvatar }
             />
             <b>{ comment.data.owner.name }</b>
-            <span className={classes.date}>&nbsp;<b className="text-interpunct"></b> {moment(comment.data.timestamp).fromNow()} </span>
+            <span className={ classes.date }>
+              &nbsp;<b className="text-interpunct"></b> { moment(comment.data.timestamp).fromNow() }
+            </span>
             <div className="flex"></div>
-            <ReactionPopup reactions={comment.data.reactions} preferPlace="above" submitFn={this.submitReaction} />
+            <ReactionPopup
+              reactions={ comment.data.reactions }
+              preferPlace="above"
+              submitFn={ this.submitReaction }
+            />
             <IsOwner ownerId={comment.data.owner._id}>
               <Popover preferPlace="right">
-                <SimpleIconButton style={{padding: '0 0 0 5px'}}>
+                <SimpleIconButton style={ { padding: '0 0 0 5px' } }>
                   <MdMoreHoriz size="20px"/>
                 </SimpleIconButton>
                 <div className="PopoverMenu">
-                  {comment.editActive ? null : <a onClick={() => commentsActions.startEdit({commentId: comment.data._id})}>Edit</a> }
-                  <a onClick={this.confirmDelete}>Delete</a>
+                  { !comment.editActive && <a onClick={ this.startEdit }>Edit</a> }
+                  <a onClick={ this.confirmDelete }>Delete</a>
                 </div>
               </Popover>
             </IsOwner>
           </div>
-          <div className={classes.commentContent}>
-          {
-            comment.editActive
-            ?
-            <Editor model={`${entityModel}.data.body`} value={comment.data.body}/>
-            :
-            <EditorDisplay value={comment.data.body}/>
-          }
+          <div className={ classes.commentContent }>
+          { comment.editActive
+          ? <Form
+              model={ `${entityModel}.form` }
+              value={ comment.data }
+            >
+              { comment.form
+              ? <Editor
+                  model={ `${entityModel}.form.body` }
+                  value={ comment.form.body }
+                />
+              : null }
+            </Form>
+          : <EditorDisplay value={comment.data.body} /> }
           </div>
           {comment.editActive ?
             <div className={classes.commentFooter}>
               <div>
-                <a className="link-primary" onClick={() => commentsActions.finishEdit({commentId: comment.data._id})}>Cancel</a>
+                <a className="link-primary" onClick={ this.finishEdit }>Cancel</a>
                 &nbsp;<b className="text-interpunct text-grey-3"></b>&nbsp;
-                <a className="link-primary" onClick={() => commentsActions.updateComment({comment: comment.data})}>Save</a>
+                <a className="link-primary" onClick={ this.updateComment }>Save</a>
               </div>
             </div>
           : ''}
-          {!comment.editActive && comment.data.reactions && comment.data.reactions.length > 0 ?
-            <div className={ classes.reactions }><Reactions reactions={comment.data.reactions} /></div>
-          : ''}
+          { hasReactions && <div className={ classes.reactions }><Reactions reactions={ comment.data.reactions } /></div> }
         </div>
       </div>
     )
   }
-});
-
-
-///////////////////////////////// CONTAINER /////////////////////////////////
-
-
-function mapStateToProps({ comments }, {commentId}) {
-  return {
-    comment: comments.data[commentId],
-    entityModel: `comments.data.${commentId}`
-  };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    commentsActions : bindActionCreators(CommentsActions, dispatch),
-    modalActions    : bindActionCreators(ModalActions, dispatch),
-    dispatch
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Component);

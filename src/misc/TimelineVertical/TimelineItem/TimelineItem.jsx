@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import classes from './TimelineItem.css'
 
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
-import Comment from 'stemn-shared/misc/Comments/Comment/Comment.jsx'
+import Comment from 'stemn-shared/misc/Comments/Comment'
 import TaskTimelineWrapper from 'stemn-shared/misc/Tasks/TaskTimeline/TaskTimelineWrapper/TaskTimelineWrapper'
 import Link from 'stemn-shared/misc/Router/Link'
 import TimelineItemText from './TimelineItemText'
