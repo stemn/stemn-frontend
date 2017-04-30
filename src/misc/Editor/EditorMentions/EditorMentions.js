@@ -178,6 +178,7 @@ export default class EditorMentions extends Component {
     const { caretPosition, query, showPopover, mentionType } = this.state
     return (
       <MentionPopover
+        cacheKey={ `mentions-${mentionType}` }
         caretPosition={ caretPosition }
         addMention={ this.addMention }
         showPopover={  showPopover }

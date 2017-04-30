@@ -4,11 +4,11 @@ import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { search } from 'stemn-shared/misc/Search/Search.actions'
 import MentionPopover from './MentionPopover'
 
-const stateToProps = ({ search }, { entityType, query, page, parentType, parentId }) => {
-  const cacheKey = `${entityType}-${query}-${page}-${parentType}-${parentId}`
+const stateToProps = ({ search }, { entityType, query, page, parentType, parentId, cacheKey }) => {
+  const _cacheKey = cacheKey || `${entityType}-${query}-${page}-${parentType}-${parentId}`
   return {
     results: search.data[cacheKey],
-    cacheKey,
+    cacheKey: _cacheKey,
   }
 }
 
@@ -17,12 +17,13 @@ const dispatchToProps = {
 }
 
 const fetchConfigs = [{
-  hasChanged: 'cacheKey',
+  hasChanged: (nextProps, prevProps) => nextProps.cacheKey != prevProps.cacheKey || nextProps.query != prevProps.query,
   onChange: (props) => {
     if (props.query && props.query.length > 0) {
       props.search({
         entityType: props.entityType,
         value: props.query,
+        cacheKey: props.cacheKey,
       })
     }
   }

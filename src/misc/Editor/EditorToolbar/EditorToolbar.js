@@ -179,11 +179,11 @@ export default class EditorToolbar extends Component {
               { button.icon }
             </SimpleIconButton>
           : <Popover
+              key={ button.title }
               trigger="hoverDelay"
               preferPlace="below"
             >
               <SimpleIconButton
-                key={ button.title }
                 onClick={ button.onClick }
                 title={ button.title }
               >
