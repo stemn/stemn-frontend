@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { get } from 'lodash'
+import ProjectTask from './ProjectTask'
 
-import ProjectTask from './ProjectTask';
-
+import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
 import { 
   getBoard, 
   getBoards, 
@@ -12,7 +12,7 @@ import {
   updateTask,
 } from 'stemn-shared/misc/Tasks/Tasks.actions'
 
-const stateToProps = ({ tasks, projects }, { params }) => {
+const stateToProps = ({ tasks, projects, syncTimeline }, { params }) => {
   const taskId = params.taskId;
   const task = tasks.data[taskId]
   const projectId = params.stub
@@ -26,7 +26,8 @@ const stateToProps = ({ tasks, projects }, { params }) => {
     project,
     boardId,
     board,
-    taskModel: `tasks.data.${taskId}`
+    taskModel: `tasks.data.${taskId}`,
+    timeline: get(syncTimeline, [taskId, 'data'], [])
   };
 }
 
@@ -35,6 +36,7 @@ const dispatchToProps = {
   getBoards,
   getTask,
   updateTask,
+  fetchTimeline,
 };
 
 const fetchConfigs = [{
@@ -49,6 +51,14 @@ const fetchConfigs = [{
   onChange: (props) => {
     props.getBoards({
       projectId: props.projectId
+    })
+  }
+}, {
+  hasChanged: 'taskId',
+  onChange: (props) => {
+    props.fetchTimeline({
+      entityId: props.taskId,
+      entityType: 'task',
     })
   }
 }]

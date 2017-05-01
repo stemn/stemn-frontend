@@ -17,7 +17,7 @@ import FileBreadCrumbs from 'stemn-shared/misc/FileList/components/FileBreadCrum
 import SectionTitle from 'stemn-shared/misc/Titles/SectionTitle/SectionTitle';
 import SimpleTable from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable';
 import Timeline from 'stemn-shared/misc/Timeline/Timeline';
-import TimelineVertical from 'stemn-shared/misc/TimelineVertical/TimelineVertical';
+import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical';
 import FileCompareInner from 'stemn-shared/misc/FileCompare/FileCompareInner/FileCompareInner';
 import FileCompareMenu from 'stemn-shared/misc/FileCompare/FileCompareMenu';
 

@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { orderBy } from 'lodash';
 import { Row, Col } from 'stemn-shared/misc/Layout'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
-import TimelineVertical from 'stemn-shared/misc/TimelineVertical/TimelineVertical';
+import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical';
 import ProjectRow from 'stemn-shared/misc/Projects/ProjectRow'
 import CalendarHeatmap from 'react-calendar-heatmap';
 

@@ -8,7 +8,7 @@ import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import Tag from 'stemn-shared/misc/Tags/Tag'
 import DatePicker from 'stemn-shared/misc/Calendar/DatePicker/DatePicker'
 import UserSelect from 'stemn-shared/misc/Users/UserSelect/UserSelect.jsx'
-import TaskTimeline from 'stemn-shared/misc/Tasks/TaskTimeline/TaskTimeline'
+import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
 import CommentNew from 'stemn-shared/misc/Comments/Comment/CommentNew.jsx'
 import MdDone from 'react-icons/md/done'
 import MdAccessTime from 'react-icons/md/access-time'
@@ -23,7 +23,7 @@ export default class ProjectTask extends Component {
     }), 1);
   }
   render() {
-    const { task, project, board, taskModel, taskId } = this.props
+    const { task, project, board, taskModel, taskId, timeline } = this.props
     
     if (task && task.data && board && board.data) {
       const group = board.data.groups.find(group => group._id === task.data.group)
@@ -59,10 +59,11 @@ export default class ProjectTask extends Component {
           <Container style={ { marginTop: '30px' } }>
             <Row className="layout-row">
               <Col className="flex">
-                <TaskTimeline 
+                <TimelineVertical 
                   className={ classes.timeline }
-                  taskId={ taskId }
-                  board={ board } 
+                  items={ timeline }
+                  entity={ board }
+                  type="task"
                 />
                 <div className={ classes.newComment }>
                   <CommentNew 

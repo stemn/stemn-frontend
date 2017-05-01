@@ -8,7 +8,7 @@ import { groupBy } from 'lodash'
 import { Container } from 'stemn-shared/misc/Layout'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import HistoryGraph from 'stemn-shared/misc/Graphs/HistoryGraph'
-import TimelineVertical from 'stemn-shared/misc/TimelineVertical/TimelineVertical'
+import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
 import SubSubHeader from 'modules/SubSubHeader'
 import Pagination from 'stemn-shared/misc/Pagination'

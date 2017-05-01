@@ -5,7 +5,7 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import SubHeader from 'modules/SubHeader'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import MyProjectsPanel from 'stemn-shared/misc/Projects/MyProjectsPanel'
-import TimelineVertical from 'stemn-shared/misc/TimelineVertical/TimelineVertical'
+import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import classes from './Home.css'
 

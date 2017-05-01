@@ -6,10 +6,13 @@ import Home from './Home'
 import { push } from 'react-router-redux'
 import { get } from 'lodash'
 
-const stateToProps = ({ syncTimeline }, { location }) => ({
-  timeline: get(syncTimeline, ['feed', 'data'], []),
-  filterValue: location.query.filter || 'all'
-})
+const stateToProps = ({ syncTimeline }, { location }) => {
+  const filterValue = location.query.filter || 'all'
+  return {
+    timeline: get(syncTimeline, [filterValue, 'data'], []),
+    filterValue,
+  }
+}
 
 const dispatchToProps = {
   getFeed,
