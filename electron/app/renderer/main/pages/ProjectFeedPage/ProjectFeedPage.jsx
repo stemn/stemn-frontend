@@ -49,7 +49,10 @@ export const Component = React.createClass({
   onMount(nextProps, prevProps){
     if(nextProps.project && nextProps.project.data && nextProps.project.data.remote.connected){
       if(!prevProps || nextProps.project.data._id !== prevProps.project.data._id){
-        nextProps.syncTimelineActions.fetchTimeline({projectId: nextProps.project.data._id})
+        nextProps.syncTimelineActions.fetchTimeline({
+          entityType: 'project',
+          entityId: nextProps.project.data._id,
+        })
       }
     }
     if(has(nextProps, 'location.query.item')){
@@ -77,7 +80,8 @@ export const Component = React.createClass({
 
   refresh(){
     this.props.syncTimelineActions.fetchTimeline({
-      projectId: this.props.project.data._id
+      entityType: 'project',
+      entityId: this.props.project.data._id,
     })
   },
 

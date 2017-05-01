@@ -74,7 +74,10 @@ export const Component = React.createClass({
       // And the project has changed
       if(!prevProps || nextProps.project.data._id !== prevProps.project.data._id){
         nextProps.changesActions.fetchChanges({projectId: nextProps.project.data._id});
-        nextProps.syncTimelineActions.fetchTimeline({projectId: nextProps.project.data._id});
+        nextProps.syncTimelineActions.fetchTimeline({
+          entityType: 'project',
+          entityId: nextProps.project.data._id
+        });
       }
     }
   },

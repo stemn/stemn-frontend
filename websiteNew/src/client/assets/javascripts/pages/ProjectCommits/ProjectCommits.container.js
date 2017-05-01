@@ -23,7 +23,8 @@ const fetchConfigs = [{
   hasChanged: 'projectId',
   onChange: (props) => {
     props.fetchTimeline({
-      projectId: props.projectId,
+      entityType: 'project',
+      entityId: props.projectId,
     })
   }
 }];

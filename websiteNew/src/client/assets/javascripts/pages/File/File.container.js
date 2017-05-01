@@ -37,7 +37,10 @@ const fetchConfigs = [{
   onChange: ({ getRelatedTasks, fileId, projectId }) => getRelatedTasks({ fileId, projectId })
 },{
   hasChanged: 'cacheKey',
-  onChange: ({ fetchTimeline, fileId, projectId }) => fetchTimeline({ fileId, projectId })
+  onChange: ({ fetchTimeline, fileId, projectId }) => fetchTimeline({
+    entityType: 'file',
+    entityId: fileId,
+  })
 }];
 
 @connect(stateToProps, dispatchToProps)
