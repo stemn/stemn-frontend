@@ -20,7 +20,7 @@
 }
 
 .avatar {
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .tag {
@@ -41,6 +41,5 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .newComment {
-  margin-top: 30px;
   margin-bottom: 60px;
 }
