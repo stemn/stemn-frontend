@@ -117,6 +117,7 @@ export default (
       <Route path="files/:path"                component={ ProjectOverview } />
       <Route path="threads"                    component={ ProjectTasks } />
       <Route path="threads/:taskId"            component={ ProjectTask } />
+      <Route path="threads/:taskId/edit"       component={ ProjectTask } />
       <Route path="history"                    component={ ProjectCommits } />
       <Route path="history/:commitId"          component={ ProjectCommit } />
       <Route path="settings"                   component={ ProjectSettings }>

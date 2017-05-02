@@ -25,6 +25,7 @@ export const projectTeamRoute     = ({ projectId })           => `/project/${pro
 export const securityRoute        = ()                        => `/security`
 export const settingsRoute        = ()                        => `/settings`
 export const taskRoute            = ({ taskId, projectId })   => `/project/${projectId}/threads/${taskId}`
+export const taskEditRoute        = ({ taskId, projectId })   => `/project/${projectId}/threads/${taskId}/edit`
 export const termsRoute           = ()                        => `/terms`
 export const userDetailsRoute     = ({ userId })              => `/users/${userId}/details`
 export const userFollowersRoute   = ({ userId })              => `/users/${userId}/followers`
