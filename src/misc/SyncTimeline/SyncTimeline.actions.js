@@ -25,29 +25,22 @@ export function selectTimelineItem({ projectId, selected }) {
   }
 }
 
-export function fetchTimeline({ entityType, entityId, provider }) {
+export function fetchTimeline({ entityType, entityId, provider, types, cacheKey }) {
 //  `/api/v1/remote/timeline/${provider}`
-  const getTypes = () => {
-    if (entityType === 'file') {
-      return ['commits', 'changes']
-    } else {
-      return ['commits']
-    }
-  }
   return {
-    type:'TIMELINE/FETCH_TIMELINE',
+    type: 'TIMELINE/FETCH_TIMELINE',
     payload: http({
       method: 'GET',
       url: '/api/v1/timeline',
       params: {
         entityType,
         entityId,
-        types: getTypes(),
+        types,
       },
     }),
     meta: {
-      cacheKey: entityId,
-    }
+      cacheKey: cacheKey || entityId,
+    },
   }
 }
 

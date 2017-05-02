@@ -25,10 +25,12 @@ export default class TimelineItem extends Component {
       ? { marginLeft: '60px' }
       : {}
 
+    console.log(item);
+
     // If it is a comment, we use the comment component to display
     if(item.event == 'comment'){
       return (
-        <Comment commentId={item.comment} />
+        <Comment commentId={ item.comment } />
       )
     }
     // Else, we add a text event
@@ -45,7 +47,9 @@ export default class TimelineItem extends Component {
               />
             </Link>
             <div>
-              { !type === 'user' && <b>{ item.user.name }&nbsp;</b> }
+              { type === 'user'
+                ? null
+                : <b>{ item.user.name }&nbsp;</b> }
               <span className={ classes.item }>
                 <TimelineItemText item={ item } type={ type }/> - { moment(item.timestamp).fromNow() }
               </span>

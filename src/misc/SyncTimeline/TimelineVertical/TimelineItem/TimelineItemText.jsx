@@ -8,7 +8,25 @@ const eventTextMap = {
   addAsignee: (item, type, entity) => <span>was assigned to this task</span>,
   removeAsignee : (item, type, entity) => <span>was removed from assignees</span>,
   revision: (item, type, entity) => {
-    return <span>modified this file.</span>
+    const fileRouteParams = {
+      projectId: item.data.project._id,
+      fileId: item.data.fileId,
+      revisionId: item.data.revisionId,
+    }
+    if (type === 'file') {
+      return (
+        <span>modified this file. </span>
+      )
+    } else {
+      return (
+        <span>
+          { item.data.revisionNumber
+          ? 'created'
+          : `added revision ${item.data.revisionNumber} to`}
+          <Link name="fileRoute" params={ fileRouteParams }>{ item.data.name }</Link>
+        </span>
+      )
+    }
   },
   commit: (item, type, entity) => {
     const params = {
