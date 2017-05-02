@@ -12,13 +12,20 @@ import logo from 'images/logo80x80none.png';
 import MdAdd from 'react-icons/md/add';
 import MdNotifications from 'react-icons/md/notifications';
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton';
+import MdMenu from 'react-icons/md/menu'
 
 export default class LandingHeader extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      atTop: true
+      atTop: true,
+      isOpen: false,
     }
+  }
+  toggleOpen = () => {
+    this.setState({
+      isOpen: !this.state.isOpen,
+    })
   }
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll)
@@ -65,23 +72,74 @@ export default class LandingHeader extends Component {
     }
   }
   render() {
-    const { atTop } = this.state
+    const { atTop, isOpen } = this.state
     const { auth, logout, newProject } = this.props
-    const allClasses = classNames(classes.header, 'layout-row', 'layout-align-start-center', {[classes.headerFilled] : !atTop})
+    const allClasses = classNames(
+      classes.header,
+      'layout-xs-column layout-align-xs-center layout-gt-xs-row layout-gt-xs-align-start-center',
+      {[classes.headerFilled] : !atTop || isOpen}
+    )
+
+    const items = [{
+      route: 'flowRoute',
+      label: 'Workflow',
+    },{
+      route: 'openSourceRoute',
+      label: 'Open source',
+    },{
+      route: 'pricingRoute',
+      label: 'Pricing',
+    },{
+      route: 'downloadRoute',
+      label: 'Download',
+    }]
+
+    const linkHeight = 33
+    const mobileLinkStyle = {
+      height: `${linkHeight}px`
+    }
+    const mobileLinksStyle = isOpen
+      ? {
+        height: linkHeight * items.length
+      }
+      : {}
+
     return (
-      <header className={ allClasses } onScroll={ this.onScroll }>
-        <Container className='layout-row layout-align-start-center'>
+      <header className={ allClasses }>
+        <Container className="hide-xs layout-row layout-align-start-center">
           <Link to='/landing' className={ classes.logo }>
             <img src={logo} alt=""/>
           </Link>
-          <Link activeClassName="active" className={ classes.link } name="flowRoute">Workflow</Link>
-          <Link activeClassName="active" className={ classes.link } name="openSourceRoute">Open source</Link>
-          <Link activeClassName="active" className={ classes.link } name="pricingRoute">Pricing</Link>
-          <Link activeClassName="active" className={ classes.link } name="downloadRoute">Download</Link>
-          <div className="flex"></div>
+          { items.map(item => (
+            <Link activeClassName="active" className={ classes.link } name={ item.route }>{ item.label }</Link>
+          ))}
+          <div className="flex" />
           { auth.user._id
           ? this.isLoggedIn()
           : this.isLoggedOut() }
+        </Container>
+        <div className={ classNames(classes.mobileLinks, 'hide-gt-xs') } style={ mobileLinksStyle }>
+          { items.map(item => (
+            <Link
+              activeClassName="active"
+              className={ classNames(classes.mobileLink, 'layout-row layout-align-start-center') }
+              style={ mobileLinkStyle }
+              name={ item.route }
+            >
+              { item.label }
+            </Link>
+          ))}
+        </div>
+        <Container className="hide-gt-xs layout-row layout-align-start-center">
+          <Link to='/landing' className={ classes.logo }>
+            <img src={logo} alt=""/>
+          </Link>
+          <div className="flex" />
+          { auth.user._id
+          ? this.isLoggedIn()
+          : this.isLoggedOut() }
+
+          <MdMenu className={ classes.menuButton } onClick={ this.toggleOpen } size={ 25 } />
         </Container>
       </header>
     )

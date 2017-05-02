@@ -33,7 +33,7 @@ export default class UserOverview extends Component {
     return classes[`s${normaliseValue(value.count)}`];
   }
   render() {
-    const { user, projects } = this.props;
+    const { user, projects, timeline } = this.props;
     
     const projectsToDisplay = orderBy(projects.data,'updated', 'desc').slice(0, 4);
     return (
@@ -63,21 +63,17 @@ export default class UserOverview extends Component {
           />
         </div>
         <br/>
-        <div className='text-mini-caps'>About</div>
-        <br />
-        <InfoPanel>
-          <p className={ classes.summary }>{ user.data.profile.profileDetails.summary }</p>
-        </InfoPanel>
-        <br />
+        <br/>
         <div className='text-mini-caps'>Timeline</div>
-        <br />
+        <br/>
         <InfoPanel>
           <TimelineVertical
             group
-            items={ [] }
+            items={ timeline }
             type="user"
           />
-        </InfoPanel>      
+        </InfoPanel>
+        <br />
         <br />
       </div>
     )

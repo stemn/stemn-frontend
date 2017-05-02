@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
-
+import { get } from 'lodash'
 import { getCommitHistory } from 'stemn-shared/misc/Users/Users.actions'
-
 import UserOverview from './UserOverview';
 
-const stateToProps = ({ users, projects }, { params }) => ({
+const stateToProps = ({ users, projects, syncTimeline }, { params }) => ({
   user: users[params.stub],
   projects: projects.userProjects[params.stub] || {},
+  timeline: get(syncTimeline, [params.stub, 'data'], []),
 });
 
 const dispatchToProps = {

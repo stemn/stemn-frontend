@@ -99,6 +99,12 @@ export default class UserDetails extends Component {
     const { user } = this.props;
     return (
       <div>
+        <div className='text-mini-caps'>About</div>
+        <br />
+        <InfoPanel>
+          <p className={ classes.summary }>{ user.data.profile.profileDetails.summary }</p>
+        </InfoPanel>
+        <br />
         <div className='text-mini-caps'>Education</div>
         <br />
         <InfoPanel>

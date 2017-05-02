@@ -25,15 +25,19 @@ export const ProjectFeedPageCommit = React.createClass({
     return (
       <div className="layout-column flex">
         <div className={ classes.commitInfo }>
-          <h3 className={ classes.title }>{item.data.summary}</h3>
-          <div className={classes.description}>
-            <EditorDisplay value={item.data.description}/>
+          <h3 className={ classes.title }>{ item.data.summary }</h3>
+          <div className={ classes.description }>
+            <EditorDisplay value={ item.data.description } />
           </div>
           <div className="layout-row layout-align-start-center">
-            <UserAvatar picture={item.user.picture} name={item.user.name} size="20"/>
-            <div style={{marginLeft: '10px'}}>
-              {item.user.name}
-              <span className="text-grey-3" style={{marginLeft: '10px'}}>{moment(item.timestamp).format('LLLL')}</span>
+            <UserAvatar
+              picture={ item.user.picture }
+              name={ item.user.name }
+              size={ 20 }
+            />
+            <div style={ { marginLeft: '10px' } }>
+              { item.user.name }
+              <span className="text-grey-3" style={ { marginLeft: '10px' } }>{ moment(item.timestamp).format('LLLL') }</span>
             </div>
             <div className="flex">
             </div>
@@ -41,9 +45,9 @@ export const ProjectFeedPageCommit = React.createClass({
           </div>
         </div>
         <div className="flex scroll-box">
-          {item.data.items ?
-            groupedRevisions.map(file => <FileCompare project={project} file={file} type="collapse" key={file._id}/>)
-          : null}
+          { item.data.items ?
+            groupedRevisions.map(file => <FileCompare project={ project } file={ file } type="collapse" key={ file._id } />)
+          : null }
         </div>
       </div>
     )

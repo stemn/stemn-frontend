@@ -15,9 +15,9 @@ export default class Home extends Component {
     name: 'Feed: All',
     onClick: () => this.pushFilter('all'),
   }, {
-    value: 'my-projects',
+    value: 'own-projects',
     name: 'Feed: My Projects',
-    onClick: () => this.pushFilter('my-projects'),
+    onClick: () => this.pushFilter('own-projects'),
   }, {
     value: 'followed-projects',
     name: 'Feed: Followed Projects',
@@ -39,7 +39,7 @@ export default class Home extends Component {
 
     return (
       <StandardLayout>
-        <SubHeader title="Dashboard">
+        <SubHeader title="Dashboard" noResponsive>
           <div className="layout-column layout-align-center-center">
             <PopoverDropdown
               value={ filterValue }
@@ -48,15 +48,17 @@ export default class Home extends Component {
           </div>
         </SubHeader>
         <Container>
-          <Row className="layout-row" style={ { marginTop: '30px' } }>
-            <Col className="flex">
-              <TimelineVertical
-                items={ timeline }
-                type="feed"
-                group
-              />
+          <Row className="layout-xs-column layout-gt-xs-row" style={ { marginTop: '30px' } }>
+            <Col className="flex flex-order-xs-1">
+              <div className={ classes.panel }>
+                <TimelineVertical
+                  items={ timeline }
+                  type="feed"
+                  group
+                />
+              </div>
             </Col>
-            <Col className="flex-30">
+            <Col className="flex-gt-xs-30 flex-order-xs-0">
               <MyProjectsPanel />
             </Col>
           </Row>

@@ -12,10 +12,10 @@ class Footer extends Component {
       <footer className={ classNames(classes.footer) } { ...this.props }>
         <Container className={ classes.inner }>
           <Row className="layout-row">
-            <Col className="flex">
+            <Col className="flex hide-xs">
               <img className={ classes.logo } src={ logo } />
             </Col>
-            <Col className="flex">
+            <Col className="flex hide-xs hide-sm">
             </Col>
             <Col className="flex">
               <div className={ classes.title }>About</div>

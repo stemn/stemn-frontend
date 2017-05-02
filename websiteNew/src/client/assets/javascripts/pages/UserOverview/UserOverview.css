@@ -12,11 +12,6 @@
   padding: 20px;
 }
 
-.summary {
-  white-space: pre-wrap;
-}
-
-
 :global(.react-calendar-heatmap text) {
   font-size: 8px;
   fill: #aaa;

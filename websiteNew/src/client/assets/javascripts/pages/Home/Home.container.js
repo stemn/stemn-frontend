@@ -22,7 +22,9 @@ const dispatchToProps = {
 const fetchConfigs = [{
   hasChanged: 'filterValue',
   onChange: (props) => {
-    props.getFeed()
+    props.getFeed({
+      feedType: props.filterValue,
+    })
   }
 }]
 

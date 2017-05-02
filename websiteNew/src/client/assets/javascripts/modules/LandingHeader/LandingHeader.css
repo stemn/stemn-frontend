@@ -4,9 +4,10 @@
   left: 0;
   right: 0;
   color: white;
-  height: 60px;
   transition: 0.3s ease all;
   z-index: 10;
+  width: 100vw;
+  min-height: 60px;
 }
 
 .headerFilled {
@@ -14,6 +15,7 @@
 }
 
 .logo {
+  margin: 5px 0;
   height: 45px;
   margin-right: 5px;
 }
@@ -48,4 +50,20 @@
 }
 .specialLink > div{
   padding: 5px 10px;
+}
+.mobileLinks {
+  background: rgb(15, 16, 18);
+  overflow: hidden;
+  height: 0;
+  transition: 0.3s ease all;
+}
+.mobileLink {
+  padding: 0 20px;
+}
+.mobileLink:global(.active) {
+  font-weight: bold;
+}
+
+.menuButton {
+  margin-left: 10px;
 }
