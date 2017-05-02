@@ -10,7 +10,7 @@ function mapStateToProps({ auth }) {
   return { auth };
 }
 
-function mapDispatchToProps = {
+const mapDispatchToProps = {
   nextBackground,
   authenticate,
   register

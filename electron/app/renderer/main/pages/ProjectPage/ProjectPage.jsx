@@ -18,7 +18,7 @@ import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOver
 import MdSettings from 'react-icons/md/settings';
 import MdExpandMore from 'react-icons/md/expand-more';
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
-import PopoverMenu from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import Popover from 'stemn-shared/misc/Popover'
 import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList';
 import PopoverDetails from 'stemn-shared/misc/PopoverMenu/PopoverDetails';
 import ProjectMenu from 'stemn-shared/misc/Projects/Project.menu.js';
@@ -121,10 +121,10 @@ class Component extends React.Component{
       <div className="layout-column flex rel-box">
         <div className="layout-column flex">
           <Header>
-            <PopoverMenu preferPlace="below" tipSize={6}>
+            <Popover preferPlace="below" tipSize={6}>
               <a className={classes.title + ' text-ellipsis'}>{hasName ? project.data.name : ''}<MdExpandMore style={{marginLeft: '5px'}} size="18px"/></a>
               <PopoverMenuList item={project && project.data ? project.data : {}} menu={ProjectMenu(dispatch)}/>
-            </PopoverMenu>
+            </Popover>
 
             <div className={classes.tabs + ' flex layout-row layout-align-start-center'}>
               <Link activeClassName="active" to={baseLink} onlyActiveOnIndex={true}>Changes</Link>
@@ -132,14 +132,14 @@ class Component extends React.Component{
               <Link activeClassName="active" to={baseLink+'/tasks'}>Tasks</Link>
               { isConnected ? <Link className={['files/:path', 'files'].includes(routeName.path) ? 'active' : ''} to={baseLink+'/files/'}>Files</Link> : null }
             </div>
-            <PopoverMenu preferPlace="below" tipSize={6} trigger="click">
+            <Popover preferPlace="below" tipSize={6} trigger="click">
               <SimpleIconButton title="Visibility Settings">
                 { has(project, 'data.permissions.projectType') && project.data.permissions.projectType == 'public'
                 ? <PublicPrivateIcon type="public" size={ 20 } />
                 : <PublicPrivateIcon type="private" size={ 20 } /> }
               </SimpleIconButton>
               {has(project, 'data.permissions.projectType') ? getVisibilityPopup() : null}
-            </PopoverMenu>
+            </Popover>
             <div className="divider"></div>
             <SimpleIconButton activeClassName="active" to={baseLink+'/settings'} title="Project Settings">
               <MdSettings size={20}/>

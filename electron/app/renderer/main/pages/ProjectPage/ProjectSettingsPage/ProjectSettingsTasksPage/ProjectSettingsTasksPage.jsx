@@ -21,30 +21,6 @@ import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
-const TasksPanel = React.createClass({
-  onMount(nextProps, prevProps){
-    if(!prevProps || nextProps.board.data._id !== prevProps.board.data._id){
-      nextProps.dispatch(
-        actions.load(`${nextProps.boardModel}.forms.labels`, nextProps.board.data.labels)
-      )
-    }
-  },
-  componentWillMount() { this.onMount(this.props) },
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
-  submit(){
-    // Merge props back to the main data
-    this.props.dispatch(
-      actions.change(`${this.props.boardModel}.data.labels`, this.props.board.forms.labels)
-    );
-    // Save the board
-    setTimeout(()=>{
-      this.props.tasksActions.updateBoard({
-        board: this.props.board.data
-      })
-    }, 1)
-  },
-});
-
 export const Component = React.createClass({
   onMount(nextProps, prevProps){
     if(!prevProps || nextProps.projectId !== prevProps.projectId){

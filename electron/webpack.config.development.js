@@ -2,25 +2,26 @@
 import webpack from 'webpack';
 import baseConfig from './webpack.config.base';
 import HappyPack from 'happypack';
+import qs from 'querystring'
 const enableHappy = false;
 
 const getHappyConfig = (enable) => {
   const config = {};
-  config.loaders = enable 
-    ? [{
-        test: /\.global\.css$/,
-        loader: 'happypack/loader?id=cssGlobal',
-      },{
-        test: /^((?!\.global).)*\.css$/,
-        loader: 'happypack/loader?id=cssLocal',
-      }]
-    : [{
-      test: /\.global\.css$/,
-      loaders: [ 'style-loader', 'css-loader?sourceMap']
-    },{
-      test: /^((?!\.global).)*\.css$/,
-      loaders: [ 'style-loader', 'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]-[local]-[emoji:6]']
-    }];
+//  config.loaders = enable
+//    ? [{
+//        test: /\.global\.css$/,
+//        loader: 'happypack/loader?id=cssGlobal',
+//      },{
+//        test: /^((?!\.global).)*\.css$/,
+//        loader: 'happypack/loader?id=cssLocal',
+//      }]
+//    : [{
+//      test: /\.global\.css$/,
+//      loaders: [ 'style-loader', 'css-loader?sourceMap']
+//    },{
+//      test: /^((?!\.global).)*\.css$/,
+//      loaders: [ 'style-loader', 'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]-[local]-[emoji:6]']
+//    }];
   
   config.plugins = enable 
     ? [
@@ -29,6 +30,24 @@ const getHappyConfig = (enable) => {
     ]
     : [];
   
+    config.loaders = [{
+      test: /\.global\.(css|scss)$/,
+      loaders: [
+        'style-loader',
+        'css-loader?sourceMap',
+      ],
+    }, {
+      test: /^((?!\.global).)*\.(css|scss)$/,
+      loaders: [
+        'style-loader',
+        `css-loader?${qs.stringify({
+          modules: true,
+          importLoaders: 1,
+          localIdentName: '[name]-[local]-[emoji:6]',
+        })}`,
+        'sass-loader',
+      ],
+    }]
   return config;
 }
 

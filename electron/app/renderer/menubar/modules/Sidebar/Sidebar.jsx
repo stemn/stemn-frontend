@@ -36,7 +36,7 @@ export const Component = React.createClass({
     }
 
     const nameRegex = new RegExp(escapeRegExp(sidebar.searchString), 'i');
-    const filteredProjects = projects.userProjects.data ? projects.userProjects.data.filter(project => nameRegex.test(project.name)) : [];
+    const filteredProjects = projects && projects.data ? projects.data.filter(project => nameRegex.test(project.name)) : [];
     const filteredProjectsOrdered = orderBy(filteredProjects, 'updated', 'desc')
 
     return (
@@ -68,10 +68,10 @@ export const Component = React.createClass({
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps({ projects, sidebar }) {
+function mapStateToProps({ projects, sidebar, auth }) {
   return {
     sidebar,
-    projects
+    projects: projects.userProjects[auth.user._id],
   };
 }
 

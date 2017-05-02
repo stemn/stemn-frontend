@@ -14,18 +14,14 @@ import classNames from 'classnames';
 import classes from 'electron/app/renderer/main/pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css'
 
 // Sub Components
-import Upload from 'stemn-shared/misc/Upload/Upload.jsx'
+import Upload from 'stemn-shared/misc/Upload/Upload'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton.jsx'
 import LinkAccount from 'stemn-shared/misc/Settings/LinkAccount/LinkAccount.jsx'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import Input from 'stemn-shared/misc/Input/Input/Input';
 import TextDisplayBox from 'stemn-shared/misc/TextDisplayBox/TextDisplayBox.jsx'
 
-
-
-/////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
 export const Component = React.createClass({
   componentWillMount() {

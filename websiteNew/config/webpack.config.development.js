@@ -1,13 +1,12 @@
-const merge = require('webpack-merge');
-const webpack = require('webpack');
-const config = require('./webpack.config.base');
-const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-
+const merge = require('webpack-merge')
+const webpack = require('webpack')
+const config = require('./webpack.config.base')
+const path = require('path')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const GLOBALS = {
   'process.env': {
-    'NODE_ENV': JSON.stringify('development')
+    NODE_ENV: JSON.stringify('development'),
   },
   GLOBAL_ENV: {
     APP_TYPE: JSON.stringify('web'),
@@ -15,9 +14,8 @@ const GLOBALS = {
     WEBSITE_URL: JSON.stringify('http://stemn.com'),
     API_SERVER: JSON.stringify('http://35.167.249.144'),
   },
-  __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'true'))
+  __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'true')),
 }
-
 
 module.exports = merge(config, {
   debug: true,
@@ -27,9 +25,9 @@ module.exports = merge(config, {
     application: [
       'webpack-hot-middleware/client',
       'react-hot-loader/patch',
-      'development'
+      'development',
     ],
-    vendor: ['react', 'react-dom', 'react-redux', 'react-router', 'react-router-redux', 'redux']
+    vendor: ['react', 'react-dom', 'react-redux', 'react-router', 'react-router-redux', 'redux'],
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -37,11 +35,11 @@ module.exports = merge(config, {
     new CopyWebpackPlugin([
       {
         from: path.join(__dirname, '../src/client/assets/images'),
-        to: 'images'
+        to: 'images',
       }, {
         from: path.join(__dirname, '../src/client/assets/static'),
-        to: 'static'
-      }
+        to: 'static',
+      },
     ]),
   ],
   module: {
@@ -56,31 +54,36 @@ module.exports = merge(config, {
           'style',
           'css',
           'postcss',
-          { loader: 'sass', query: { outputStyle: 'expanded' } }
-        ]
+          { loader: 'sass', query: { outputStyle: 'expanded' } },
+        ],
       },
       // CSS Modules
-       {
-         test: /\.(css|scss)$/,
-         include: [
-           path.resolve(__dirname, '../src/client/assets/javascripts'),
-           path.resolve(__dirname, '../src/client/assets/styles/modules'),
-           path.resolve(__dirname, '../node_modules/stemn-frontend-shared')
-         ],
-         loaders: [
-           'style',
-           {
-             loader: 'css',
-             query: {
-               modules: true,
-               importLoaders: 1,
-               localIdentName: '[name]__[local]--[hash:base64:5]'
-             }
-           },
-           'postcss',
-           { loader: 'sass', query: { outputStyle: 'expanded' } }
-         ]
-       }
-    ]
-  }
+      {
+        test: /\.(css|scss)$/,
+        include: [
+          path.resolve(__dirname, '../src/client/assets/javascripts'),
+          path.resolve(__dirname, '../src/client/assets/styles/modules'),
+          path.resolve(__dirname, '../node_modules/stemn-frontend-shared'),
+        ],
+        loaders: [
+          'style',
+          {
+            loader: 'css',
+            query: {
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[name]__[local]--[hash:base64:5]',
+            },
+          },
+          'postcss',
+          {
+            loader: 'sass',
+            query: {
+              outputStyle: 'expanded',
+            },
+          },
+        ],
+      },
+    ],
+  },
 })

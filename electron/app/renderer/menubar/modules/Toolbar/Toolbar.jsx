@@ -15,7 +15,7 @@ import classNames from 'classnames';
 import toolbarStyles from './Toolbar.css'
 
 // Sub Components
-import PopoverMenu          from 'stemn-shared/misc/PopoverMenu/PopoverMenu';
+import Popover from 'stemn-shared/misc/Popover'
 import PopoverMenuList      from 'stemn-shared/misc/PopoverMenu/PopoverMenuList';
 import SimpleIconButton     from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMenu               from 'react-icons/md/menu';
@@ -70,13 +70,13 @@ export const Component = React.createClass({
           title="Open main window">
           <MdOpenInNew size="20px"/>
         </SimpleIconButton>
-        <PopoverMenu preferPlace="below">
+        <Popover preferPlace="below">
           <SimpleIconButton title="Options"
             color="white">
             <MdMoreHoriz size="20px" />
           </SimpleIconButton>
           <PopoverMenuList menu={menuItems} />
-        </PopoverMenu>
+        </Popover>
       </div>
     );
   }

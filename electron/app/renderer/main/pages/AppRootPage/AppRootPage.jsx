@@ -1,6 +1,6 @@
 import React from 'react'
-import ModalContainer from 'stemn-frontend-shared/misc/Modal/ModalContainer.jsx'
-import ToastContainer from 'stemn-frontend-shared/misc/Toasts/Toasts.jsx'
+import ModalContainer from 'stemn-shared/misc/Modal/ModalContainer.jsx'
+import ToastContainer from 'stemn-shared/misc/Toasts/Toasts.jsx'
 //import Smooch from 'stemn-shared/misc/Smooch/Smooch.jsx'
 
 export default (props) => {

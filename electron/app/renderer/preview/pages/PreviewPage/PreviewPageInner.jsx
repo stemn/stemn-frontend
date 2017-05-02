@@ -32,11 +32,11 @@ import DragResize           from 'stemn-shared/misc/DragResize/DragResize.jsx';
 import FileBreadCrumbs      from 'stemn-shared/misc/FileList/components/FileBreadCrumbs.jsx'
 import FileCompareMenu      from 'stemn-shared/misc/FileCompare/FileCompareMenu';
 import LoadingOverlay       from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import TimelineVertical     from 'stemn-shared/misc/TimelineVertical/TimelineVertical.jsx';
+import TimelineVertical     from 'stemn-shared/misc/SyncTimeline/TimelineVertical';
 import SimpleTable          from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable.jsx';
 import SectionTitle         from 'stemn-shared/misc/Titles/SectionTitle/SectionTitle.jsx';
 import AssemblyParts        from 'stemn-shared/misc/Files/PreviewFile/PreviewCad/AssemblyParts/AssemblyParts.jsx'
-import Tag                  from 'stemn-shared/misc/Tags/Tag.jsx';
+import Tag                  from 'stemn-shared/misc/Tags/Tag';
 import Header               from 'stemn-shared/misc/Header/Header.jsx'
 
 // Styles

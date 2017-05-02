@@ -24,8 +24,8 @@ export const ProjectFeedPageCommit = React.createClass({
 
     return (
       <div className="layout-column flex">
-        <div className={classes.commitInfo}>
-          <h3>{item.data.summary}</h3>
+        <div className={ classes.commitInfo }>
+          <h3 className={ classes.title }>{item.data.summary}</h3>
           <div className={classes.description}>
             <EditorDisplay value={item.data.description}/>
           </div>
@@ -37,7 +37,7 @@ export const ProjectFeedPageCommit = React.createClass({
             </div>
             <div className="flex">
             </div>
-            <a className="link-primary" onClick={toggleMultiple}>Toggle All</a>
+            <a className="link-primary" onClick={ toggleMultiple }>Toggle All</a>
           </div>
         </div>
         <div className="flex scroll-box">

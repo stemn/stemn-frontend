@@ -7,6 +7,17 @@ const config = {
   enableHappy: false
 }; 
 
+const babelLoaderQuery = {
+  presets: [
+    'babel-preset-es2015',
+    'babel-preset-react',
+    'babel-preset-stage-0'
+  ].map(require.resolve),
+  plugins: [
+    'babel-plugin-transform-decorators-legacy',
+  ].map(require.resolve)
+}
+
 const getHappyConfig = (enable) => {
   const config = {};
   config.loaders = enable 
@@ -22,14 +33,16 @@ const getHappyConfig = (enable) => {
     : [{
       test      : /\.jsx?$/,
       loader    : 'babel',
-      exclude   : /node_modules/
+      exclude   : /node_modules/,
+      query     : babelLoaderQuery,
     },{
       test      : /(\.js|\.jsx)$/,
       loader    : 'babel',
       include: [
         path.resolve(__dirname, './app/node_modules/react-icons/md'),
-        path.resolve(__dirname, './app/node_modules/stemn-frontend-shared')
-      ]
+        path.resolve(__dirname, './app/node_modules/stemn-frontend-shared'),
+        path.resolve(__dirname, './app/node_modules/react-popover-wrapper'),
+      ],
     }];
   
   config.plugins = enable 
@@ -59,6 +72,7 @@ export default {
     libraryTarget: 'commonjs2',
   },
   resolve: {
+    symlinks: false,
     root                 : [path.resolve('../')],
     extensions           : ['', '.js', '.jsx'],
     packageMains         : ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main'],

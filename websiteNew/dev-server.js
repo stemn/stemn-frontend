@@ -1,13 +1,12 @@
 // Creates a hot reloading development environment
-
-const path = require('path');
-const express = require('express');
-const webpack = require('webpack');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
-const DashboardPlugin = require('webpack-dashboard/plugin');
-const config = require('./config/webpack.config.development');
-const fs = require('fs');
+const path = require('path')
+const express = require('express')
+const webpack = require('webpack')
+const webpackDevMiddleware = require('webpack-dev-middleware')
+const webpackHotMiddleware = require('webpack-hot-middleware')
+const DashboardPlugin = require('webpack-dashboard/plugin')
+const config = require('./config/webpack.config.development')
+const fs = require('fs')
 
 const app = express()
 const compiler = webpack(config)
@@ -16,12 +15,12 @@ const compiler = webpack(config)
 compiler.apply(new DashboardPlugin())
 
 compiler.plugin('done', (stats) => {
-  fs.writeFileSync('./stats.json', JSON.stringify(stats.toJson()));
-  console.log('stats.json created. Use https://webpack.github.io/analyse to preview.');
-});
+  fs.writeFileSync('./stats.json', JSON.stringify(stats.toJson()))
+  console.log('stats.json created. Use https://webpack.github.io/analyse to preview.')
+})
 
-const host = process.env.HOST || 'localhost';
-const port = process.env.PORT || 3000;
+const host = process.env.HOST || 'localhost'
+const port = process.env.PORT || 3000
 
 function log() {
   arguments[0] = '\nWebpack: ' + arguments[0]
@@ -35,7 +34,7 @@ app.use(webpackDevMiddleware(compiler, {
     colors: true,
     chunkModules: true,
   },
-  historyApiFallback: true
+  historyApiFallback: true,
 }))
 
 app.use(webpackHotMiddleware(compiler))
