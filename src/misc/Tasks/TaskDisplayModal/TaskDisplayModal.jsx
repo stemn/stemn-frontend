@@ -23,7 +23,6 @@ import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox';
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx';
 import LabelSelect from 'stemn-shared/misc/Tasks/LabelSelect/LabelSelect.jsx';
 import UserSelect from 'stemn-shared/misc/Users/UserSelect/UserSelect.jsx';
-import TaskTimeline from '../TaskTimeline/TaskTimeline.jsx';
 import DatePicker from 'stemn-shared/misc/Calendar/DatePicker/DatePicker.jsx';
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea';
 import CommentNew from 'stemn-shared/misc/Comments/Comment/CommentNew.jsx';
@@ -124,7 +123,7 @@ export const Component = React.createClass({
             </div>
           </div>
           <div className={classes.timeline + ' flex scroll-box'}>
-            <TaskTimeline taskId={taskId} board={board} />
+
           </div>
           <div className={classes.newComment}>
             <CommentNew taskId={taskId} />
@@ -225,8 +224,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 const modalName = 'TASK'
-
 const ModalComponent = connect(mapStateToProps, mapDispatchToProps)(Component);
 registerModal(modalName, ModalComponent)
-
 export default modalName

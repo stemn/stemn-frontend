@@ -1,16 +1,13 @@
-// Component Core
 import React from 'react';
 import http from 'axios';
 import { version } from 'package-json'
-
-// Styles
 import classNames from 'classnames';
-
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx';
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry';
 
-const Component = React.createClass({
+const ModalComponent = React.createClass({
   getInitialState () {
     return {
       releaseNotes: '',
@@ -56,4 +53,6 @@ const Component = React.createClass({
   }
 });
 
-export default Component
+const modalName = 'RELEASE_NOTES'
+registerModal(modalName, ModalComponent)
+export default modalName

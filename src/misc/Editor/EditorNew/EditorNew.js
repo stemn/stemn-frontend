@@ -4,11 +4,13 @@ import classes from './EditorNew.scss'
 import 'codemirror/mode/markdown/markdown'
 import 'codemirror/mode/stex/stex'
 import 'codemirror/addon/mode/multiplex'
+import 'codemirror/addon/display/placeholder'
 import EditorToolbar from 'stemn-shared/misc/Editor/EditorToolbar'
 import EditorMentions from 'stemn-shared/misc/Editor/EditorMentions'
 import codemirrorLib from 'codemirror'
 
-codemirrorLib.defineMode('markdownWitLatex', (config) => {
+// Define the syntax highlight mode
+codemirrorLib.defineMode('markdownWithLatex', (config) => {
   const baseMode = codemirrorLib.getMode(config, 'text/x-markdown')
   const latex$$ = {
     open: '$$',
@@ -25,14 +27,14 @@ codemirrorLib.defineMode('markdownWitLatex', (config) => {
   return codemirrorLib.multiplexingMode(baseMode, latex$$, latex$)
 })
 
-const options = {
-  lineNumbers: false,
-  mode: 'markdownWitLatex',
-  dragDrop: false,
-  lineWrapping: true,
-}
-
 export default class EditorNew extends Component {
+  static propTypes = {
+    model: PropTypes.string,
+    value: PropTypes.string,
+    hideToolbar: PropTypes.bool,
+    change: PropTypes.func.isRequired,
+    placeholder: PropTypes.string,
+  }
   constructor(props) {
     super(props)
     this.state = {
@@ -55,11 +57,19 @@ export default class EditorNew extends Component {
     }
   }
   render() {
-    const { value, hideToolbar } = this.props
+    const { model, change, value, hideToolbar, placeholder, ...otherProps } = this.props
     const { codemirror } = this.state
 
+    const options = {
+      lineNumbers: false,
+      mode: 'markdownWithLatex',
+      dragDrop: false,
+      lineWrapping: true,
+      placeholder,
+    }
+
     return (
-      <div>
+      <div { ...otherProps }>
         <EditorToolbar
           codemirror={ codemirror }
           hide={ hideToolbar }

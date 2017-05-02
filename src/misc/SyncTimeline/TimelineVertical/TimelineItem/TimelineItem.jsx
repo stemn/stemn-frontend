@@ -6,7 +6,7 @@ import classes from './TimelineItem.css'
 
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import Comment from 'stemn-shared/misc/Comments/Comment'
-import TaskTimelineWrapper from 'stemn-shared/misc/Tasks/TaskTimeline/TaskTimelineWrapper/TaskTimelineWrapper'
+import TimelineWrapper from 'stemn-shared/misc/SyncTimeline/TimelineWrapper'
 import Link from 'stemn-shared/misc/Router/Link'
 import TimelineItemText from './TimelineItemText'
 // import TaskTimelinePanel   from '../TaskTimelinePanel/TaskTimelinePanel.jsx'
@@ -21,6 +21,9 @@ export default class TimelineItem extends Component {
   render() {
     const { item, type } = this.props
     const userRouteParams = { userId: item.user._id }
+    const eventStyles = type === 'task'
+      ? { marginLeft: '60px' }
+      : {}
 
     // If it is a comment, we use the comment component to display
     if(item.event == 'comment'){
@@ -31,7 +34,7 @@ export default class TimelineItem extends Component {
     // Else, we add a text event
     else{
       return (
-        <TaskTimelineWrapper>
+        <TimelineWrapper className={ eventStyles }>
           <div className={ classNames('layout-row layout-align-start-center flex')}>
             <Link name="userRoute" params={ userRouteParams } className={ classes.avatar }>
               <UserAvatar
@@ -42,13 +45,13 @@ export default class TimelineItem extends Component {
               />
             </Link>
             <div>
-              <b>{ item.user.name }&nbsp;</b>
+              { !type === 'user' && <b>{ item.user.name }&nbsp;</b> }
               <span className={ classes.item }>
                 <TimelineItemText item={ item } type={ type }/> - { moment(item.timestamp).fromNow() }
               </span>
             </div>
           </div>
-        </TaskTimelineWrapper>
+        </TimelineWrapper>
       )
     }
   }

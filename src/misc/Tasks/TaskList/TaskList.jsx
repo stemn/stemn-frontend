@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as TasksActions from '../Tasks.actions.js';
 
-import TaskGroupParent     from './TaskGroup/TaskGroupParent.jsx';
-import TaskGroupWrapped    from './TaskGroup/TaskGroupWrapped.jsx'
-import TaskGroup           from './TaskGroup/TaskGroup.jsx'
-import TaskListItemParent  from './TaskListItem/TaskListItemParent.jsx'
-import TaskListItemWrapped from './TaskListItem/TaskListItemWrapped.jsx'
-import TaskListItem        from './TaskListItem/TaskListItem.jsx'
-import Input from 'stemn-shared/misc/Input/Input/Input';
+//import TaskGroupParent     from './TaskGroup/TaskGroupParent.jsx';
+//import TaskGroupWrapped    from './TaskGroup/TaskGroupWrapped.jsx'
+//import TaskGroup           from './TaskGroup/TaskGroup.jsx'
+//import TaskListItemParent  from './TaskListItem/TaskListItemParent.jsx'
+//import TaskListItemWrapped from './TaskListItem/TaskListItemWrapped.jsx'
+//import TaskListItem        from './TaskListItem/TaskListItem.jsx'
+//import Input from 'stemn-shared/misc/Input/Input/Input';
 
 import classNames from 'classnames'
 import classes from './TaskList.css';
@@ -110,6 +110,7 @@ export const TaskList = React.createClass({
     const entityModel = `tasks.boards.${board.data._id}`;
 
     const outerClasses = classNames(className, layout == 'board' ? 'layout-column flex' : 'flex')
+    return null
     return (
       <div className={outerClasses} style={layout == 'board' ? {overflowX : 'scroll'} : {overflowY : 'scroll'}}>
         <TaskGroupParent layout={layout}>

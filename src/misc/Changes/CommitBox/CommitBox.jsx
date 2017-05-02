@@ -65,11 +65,12 @@ export const Component = React.createClass({
         <div className="rel-box">
           <Editor
             placeholder="Detailed description"
-            model={`${entityModel}.description`}
-            value={changes.description}
-            className={classes.description}
+            model={ `${entityModel}.description` }
+            value={ changes.description }
+            hideToolbar
+            className={ classes.description }
           />
-          <MarkdownButton style={{position: 'absolute', bottom: '2px', right: '5px'}} />
+          <MarkdownButton className={ classes.markdownButton } />
         </div>
         <div className="layout-row layout-align-start-center">
           <Walkthrough preferPlace="above" name="commit.commitTasks">
@@ -84,11 +85,13 @@ export const Component = React.createClass({
           <div className="flex"></div>
           <Walkthrough preferPlace="right" name="commit.commitSubmit">
             <Button
-            onClick={this.props.commitFn}
-            className="primary"
-            disabled={noSummary || noChangesChecked}
-            title={getMessage()}
-            >Add Commit</Button>
+              onClick={this.props.commitFn}
+              className="primary"
+              disabled={noSummary || noChangesChecked}
+              title={getMessage()}
+            >
+              Add Commit
+            </Button>
           </Walkthrough>
         </div>
       </div>

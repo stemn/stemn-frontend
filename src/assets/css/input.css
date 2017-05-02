@@ -27,6 +27,9 @@
   padding: 0px;
   resize: none;
   background: transparent;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
 }
 textarea.input-plain {
   overflow: hidden;

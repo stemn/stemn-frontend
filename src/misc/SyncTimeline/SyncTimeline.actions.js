@@ -51,7 +51,7 @@ export function fetchTimeline({ entityType, entityId, provider }) {
   }
 }
 
-export const getFeed = () => ({
+export const getFeed = ({ feedType = 'followed-projects' } = {}) => ({
   // This will get the feed for all items the current user is interested in
   type: 'TIMELINE/FETCH_TIMELINE',
   payload: http({
@@ -59,9 +59,10 @@ export const getFeed = () => ({
     url: '/api/v1/feed',
     params: {
       types: ['commits'],
+      feedType, // followed-users, followed-projects, followed-all
     },
   }),
   meta: {
-    cacheKey: 'feed',
+    cacheKey: feedType,
   },
 })

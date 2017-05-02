@@ -40,8 +40,8 @@ registerModal(modalName, ProjectNewModal);
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
-const projectContextIdentifier = 'ProjectContextIdentifier';
-const ProjectWithContext = ContextMenuLayer(projectContextIdentifier, (props) => props.item)(SidebarProjectButton);
+const projectContextIdentifier = 'ProjectContextIdentifier'
+const ProjectWithContext = ContextMenuLayer(projectContextIdentifier, props => props.item)(SidebarProjectButton)
 
 export const Component = React.createClass({
   showProjectNewModal(){
@@ -53,36 +53,77 @@ export const Component = React.createClass({
     }
   },
   render() {
-    const { projectsActions, projects, auth, dispatch } = this.props;
-    const sidebarStyle = classNames('layout-column', 'flex' ,'rel-box', styles.sidebar);
-    const nameRegex = new RegExp(escapeRegExp(this.props.sidebar.searchString), 'i');
+    const { projectsActions, projects, auth, dispatch } = this.props
+    const sidebarStyle = classNames('layout-column', 'flex' ,'rel-box', styles.sidebar)
+    const nameRegex = new RegExp(escapeRegExp(this.props.sidebar.searchString), 'i')
     const filteredProjects = projects && projects.data
       ? projects.data.filter(project => nameRegex.test(project.name))
-      : [];
+      : []
     const filteredProjectsOrdered = orderBy(filteredProjects, 'updated', 'desc')
 
     return (
-      <DragResize side="right" width="300" widthRange={[0, 500]} animateHide={!this.props.sidebar.show} className="layout-column flex scroll-dark">
-        <div className={sidebarStyle}>
-          <div className={styles.sidebarToolbar + ' layout-row layout-align-start-center'}>
-            <SimpleIconButton className={styles.sideBarIcon} title="Create new project" onClick={this.showProjectNewModal}>
+      <DragResize
+        side="right"
+        width="300"
+        widthRange={ [0, 500] }
+        animateHide={ !this.props.sidebar.show }
+        className="layout-column flex scroll-dark"
+      >
+        <div className={ sidebarStyle }>
+          <div className={ styles.sidebarToolbar + ' layout-row layout-align-start-center' }>
+            <SimpleIconButton
+              className={styles.sideBarIcon}
+              title="Create new project"
+              onClick={this.showProjectNewModal}
+            >
               <MdAdd size="25"/>
             </SimpleIconButton>
             <div className="flex" />
-            <SimpleIconButton title="Toggle sidebar" className={styles.sideBarIcon} onClick={()=>{this.props.sidebarActions.toggleSidebar();}}>
+            <SimpleIconButton
+              title="Toggle sidebar"
+              className={ styles.sideBarIcon }
+              onClick={ () => this.props.sidebarActions.toggleSidebar() }
+            >
               <MdMenu size="25"/>
             </SimpleIconButton>
           </div>
           <div className="layout-column flex">
             <div className={styles.sidebarSearch}>
-              <Input model="sidebar.searchString" value={this.props.sidebar.searchString} className="dr-input text-ellipsis" type="text" placeholder="Search all projects"/>
-              <MdSearch className={styles.sidebarSearchIcon} size="25" onClick={this.secretSearch}/>
+              <Input
+                model="sidebar.searchString"
+                value={this.props.sidebar.searchString}
+                className="dr-input text-ellipsis"
+                type="text"
+                placeholder="Search all projects"
+              />
+              <MdSearch
+                className={ styles.sidebarSearchIcon }
+                size="25"
+                onClick={ this.secretSearch }
+              />
             </div>
             <div className="scroll-box flex">
-              {projects && project.data && projects.data.length == 0 ? <SidebarProjectButton  item={{name: 'Create a project'}} clickFn={this.showProjectNewModal} /> : null }
-              {filteredProjectsOrdered.length > 0 ? <div style={{padding: '10px 15px 5px', opacity: '0.7'}}>My Projects</div> : null}
-              {filteredProjectsOrdered.map((item, idx) => <ProjectWithContext key={item._id} item={item} isActive={item._id == this.props.params.stub} to={`/project/${item._id}`}/>)}
-              <ContextMenu identifier={projectContextIdentifier} menu={ProjectMenu(dispatch)}/>
+              { projects && projects.data && projects.data.length == 0
+                ? <SidebarProjectButton
+                    item={ { name: 'Create a project' } }
+                    clickFn={ this.showProjectNewModal }
+                  />
+                : null }
+              { filteredProjectsOrdered.length > 0
+                ? <div style={ { padding: '10px 15px 5px', opacity: '0.7' } }>My Projects</div>
+                : null }
+              { filteredProjectsOrdered.map((item, idx) =>
+                <ProjectWithContext
+                  key={ item._id }
+                  item={ item }
+                  isActive={ item._id === this.props.params.stub }
+                  to={ `/project/${item._id}` }
+                />
+              )}
+              <ContextMenu
+                identifier={ projectContextIdentifier }
+                menu={ ProjectMenu(dispatch) }
+              />
             </div>
           </div>
           <div>
@@ -90,7 +131,11 @@ export const Component = React.createClass({
               <Popover>
                 <a className="flex">
                   <div className={userStyles.userWrapper + ' flex layout-row layout-align-start-center'}>
-                    <UserAvatar picture={this.props.auth.user.picture} name={this.props.auth.user.name} className={userStyles.userAvatar}/>
+                    <UserAvatar
+                      picture={ this.props.auth.user.picture }
+                      name={ this.props.auth.user.name }
+                      className={ userStyles.userAvatar }
+                    />
                     <div className="flex text-ellipsis">
                       {this.props.auth.user.name}
                     </div>
@@ -102,15 +147,19 @@ export const Component = React.createClass({
                   <a onClick={()=>{this.props.authActions.logout()}}>Sign out</a>
                 </div>
               </Popover>
-              <Link className={userStyles.userSettings + ' layout-column layout-align-center-center'} to="/settings/application"><MdSettings size="25"/></Link>
+              <Link
+                className={userStyles.userSettings + ' layout-column layout-align-center-center'}
+                to="/settings/application"
+              >
+                <MdSettings size="25" />
+              </Link>
             </div>
           </div>
         </div>
       </DragResize>
-
-    );
+    )
   }
-});
+})
 
 //              <div className="text-grey-3" style={{padding: '10px 15px 5px'}}>Other Projects</div>
 //              <SidebarProjectButton  item={{name: 'Demo Project'}} icon="tutorial" />
@@ -118,13 +167,13 @@ export const Component = React.createClass({
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps({ sidebar, auth, projects }, {params}) {
+function mapStateToProps({ sidebar, auth, projects }, { params }) {
   return {
     sidebar,
     auth,
     params,
     projects: projects.userProjects[auth.user._id],
-  };
+  }
 }
 
 function mapDispatchToProps(dispatch) {

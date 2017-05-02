@@ -4,7 +4,7 @@ import moment from 'moment';
 
 // Styles
 import classNames from 'classnames';
-import classes from './TaskTimelinePanel.css';
+import classes from './TimelinePanel.css';
 
 // Sub Components
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx';

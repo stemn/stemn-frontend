@@ -11,7 +11,7 @@ export default () => {
         method: 'GET',
       })
     }).then(response => {
-      dispatch(ProjectsActions.getUserProjects({userId: response.value.data._id}))
+      dispatch(getUserProjects({userId: response.value.data._id}))
       dispatch(websocketJoinRoom({userId: response.value.data._id}))
     }).catch(error => {
 //      dispatch(logout())

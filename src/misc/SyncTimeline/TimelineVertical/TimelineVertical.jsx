@@ -19,19 +19,20 @@ export default class TimelineVertical extends Component {
     type: PropTypes.oneOf(['feed', 'user', 'file', 'task', 'project']),
     items: PropTypes.array,
     group: PropTypes.bool,
+    entity: PropTypes.object,
   }
   renderItems = (items) => {
-    return items.map(item => <TimelineItem key={ item._id } item={ item } type={ this.props.type } />)
+    return items.map(item => <TimelineItem key={ item._id } item={ item } type={ this.props.type } entity={ this.props.entity } />)
   }
   render() {
-    const { items, type, group } = this.props
+    const { items, type, group, entity, ...otherProps } = this.props
 
     if (!items || items.length === 0) return <div className="text-title-5">Timeline empty</div>
 
     if (group) {
       const groupedByDay = groupByDay(items)
       return (
-        <div>
+        <div { ...otherProps }>
           { groupedByDay.map((group) => (
             <div className={ classes.group } key={ group.date }>
               <div className={ classes.groupTitle + ' text-mini-caps' }>{ getCalendarText(group.items[0].timestamp) }</div>

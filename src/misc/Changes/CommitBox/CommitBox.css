@@ -11,21 +11,22 @@
   border: 1px solid rgba(0, 0, 0, 0.4);
 }
 
-.description{
+.description {
   margin-bottom: 10px;
-  min-height: 80px;
 }
-.description > div > div{
-  padding: 8px;
-  /* 1 extra px due to border ? */
+.description :global(.CodeMirror-sizer) {
+  min-height: 80px !important;
+  padding: 8px !important;
+}
+.description :global(.CodeMirror) {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.description :global(.CodeMirror-focused){
+  border: 1px solid rgba(0, 0, 0, 0.4);
 }
 
-.description textarea{
-  padding: 7px;
-  border: 1px solid rgba(0, 0, 0, 0.2) !important;
-}
-
-.description textarea:focus {
-  outline: none;
-  border: 1px solid rgba(0, 0, 0, 0.4) !important;
+.markdownButton {
+  position: absolute;
+  bottom: 2px;
+  right: 5px;
 }
