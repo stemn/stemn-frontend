@@ -1,16 +1,5 @@
 @value primary, border1, bg1 from "theme";
 
-.popup{
-  position: absolute;
-  z-index: 1;
-  width: 100%;
-  background: white;
-  border: 1px solid rgba(0, 0, 0, 0.4) !important;
-  margin-top: -1px;
-}
-.input{
-  color: #aaa;
-}
 .close{
   padding: 10px;
   z-index: 1;

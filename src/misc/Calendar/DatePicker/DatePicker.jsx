@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import moment from 'moment';
 
 import { connect } from 'react-redux';
@@ -7,7 +7,8 @@ import { actions } from 'react-redux-form';
 import classNames from 'classnames';
 import classes from './DatePicker.css';
 import Calendar from '../Calendar.jsx'
-
+import PopoverFit from 'stemn-shared/misc/PopoverMenu/PopoverFit'
+import MdExpandMore from 'react-icons/md/expand-more'
 
 export const Component = React.createClass({
   getInitialState() {
@@ -30,7 +31,7 @@ export const Component = React.createClass({
   },
   render() {
     const { viewDate, isOpen, calendarIsOpen } = this.state;
-    const { model, value, dispatch, onChange } = this.props;
+    const { model, value, dispatch, onChange, ...otherProps } = this.props;
     const valueDate = value ? moment(value) : '';
     const currentTime = moment();
 
@@ -63,9 +64,13 @@ export const Component = React.createClass({
             type="datepicker"
           />
         : filteredOptions.map((option, index) => (
-          <a key={index} className={classes.fixedOption + ' layout-row layout-align-start-center'} onClick={() => this.selectDate(option.value)}>
-            <div className="flex">{option.name}</div>
-            <div className={classes.fixedOptionTime}>{option.value.calendar()}</div>
+          <a
+            key={index}
+            className={ classes.fixedOption + ' layout-row layout-align-start-center' }
+            onClick={() => this.selectDate(option.value)}
+          >
+            <div className="flex">{ option.name }</div>
+            <div className={ classes.fixedOptionTime }>{ option.value.calendar() }</div>
           </a>)
         )}
         <a onClick={() => this.toggleCalendar()} className={classNames(classes.fixedOption, classes.divider, 'layout-row layout-align-start-center')}>
@@ -74,14 +79,24 @@ export const Component = React.createClass({
       </div>
     )
     return (
-      <div className="rel-box">
-        <div className={classNames('dr-input', classes.input, {'active' : isOpen})} onClick={()=>this.toggle()}>
-          {valueDate ? valueDate.calendar() : 'Select a due date'}
+      <PopoverFit max disableClickClose { ...otherProps } style={ { width: '100%' } }>
+        <div className="layout-row layout-align-start-center flex">
+          { valueDate ? valueDate.calendar() : 'Select a due date' }
+          <div className="flex" />
+          <MdExpandMore style={ { marginLeft: '5px' } } size={ 15 } />
         </div>
-        { valueDate ? <a className={classes.close} onClick={() => this.selectDate()}>×</a> : null}
-        { isOpen ? content : null }
-      </div>
-    );
+        { content }
+      </PopoverFit>
+    )
+//    return (
+//      <div className="rel-box">
+//        <div className={classNames('dr-input', classes.input, {'active' : isOpen})} onClick={()=>this.toggle()}>
+//          {valueDate ? valueDate.calendar() : 'Select a due date'}
+//        </div>
+//        { valueDate ? <a className={classes.close} onClick={() => this.selectDate()}>×</a> : null}
+//        { isOpen ? content : null }
+//      </div>
+//    );
   }
 });
 
