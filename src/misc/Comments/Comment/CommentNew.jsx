@@ -53,7 +53,7 @@ export class CommentNew extends Component {
     const { isFocussed } = this.state
 
     return (
-      <div className={classes.comment + ' layout-row'} onClick={ this.clickComment }>
+      <div className={ classNames(classes.comment, classes.commentNew, 'layout-row') } onClick={ this.clickComment }>
         <div ref="form" className={ classNames(classes.commentBody, {[classes.commentBodyHidden]: !isFocussed}, 'flex') }>
           <div className={classes.commentHeader + ' layout-row layout-align-start-center'}>
             <UserAvatar

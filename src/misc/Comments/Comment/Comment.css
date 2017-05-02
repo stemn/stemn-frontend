@@ -42,3 +42,11 @@
 .comment + .comment{
   margin-top: 15px;
 }
+
+.commentNew .commentBody {
+  transition: 0.3s ease all;
+  cursor: text;
+}
+.commentNew .commentBody:hover {
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}

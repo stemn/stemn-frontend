@@ -9,28 +9,24 @@ import classes from './DatePicker.css';
 import Calendar from '../Calendar.jsx'
 import PopoverFit from 'stemn-shared/misc/PopoverMenu/PopoverFit'
 import MdExpandMore from 'react-icons/md/expand-more'
+import MdClose from 'react-icons/md/close'
 
 export const Component = React.createClass({
   getInitialState() {
     return {
       viewDate: moment(),
-      isOpen: false,
       calendarIsOpen: false,
     }
-  },
-  toggle(openStatus) {
-    this.setState({isOpen: openStatus === undefined ? !this.state.isOpen : openStatus})
   },
   toggleCalendar(openStatus) {
     this.setState({calendarIsOpen: openStatus === undefined ? !this.state.calendarIsOpen : openStatus})
   },
   selectDate(date) {
     this.props.dispatch(actions.change(this.props.model, date ? date.format() : ''));
-    this.toggle(false);
     if(this.props.onChange){ this.props.onChange() }
   },
   render() {
-    const { viewDate, isOpen, calendarIsOpen } = this.state;
+    const { viewDate, calendarIsOpen } = this.state;
     const { model, value, dispatch, onChange, ...otherProps } = this.props;
     const valueDate = value ? moment(value) : '';
     const currentTime = moment();
@@ -83,20 +79,12 @@ export const Component = React.createClass({
         <div className="layout-row layout-align-start-center flex">
           { valueDate ? valueDate.calendar() : 'Select a due date' }
           <div className="flex" />
+          <MdClose onClick={ () => this.selectDate() } style={ { marginLeft: '5px' } } size={ 15 } />
           <MdExpandMore style={ { marginLeft: '5px' } } size={ 15 } />
         </div>
         { content }
       </PopoverFit>
     )
-//    return (
-//      <div className="rel-box">
-//        <div className={classNames('dr-input', classes.input, {'active' : isOpen})} onClick={()=>this.toggle()}>
-//          {valueDate ? valueDate.calendar() : 'Select a due date'}
-//        </div>
-//        { valueDate ? <a className={classes.close} onClick={() => this.selectDate()}>×</a> : null}
-//        { isOpen ? content : null }
-//      </div>
-//    );
   }
 });
 
