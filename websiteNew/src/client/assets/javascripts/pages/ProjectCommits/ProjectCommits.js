@@ -35,13 +35,13 @@ export default class ProjectCommits extends Component {
       cacheKey: projectId,
       filterObject: {
         ...filter.object,
-        users: [ userId ],
+        user: userId,
       },
       filterModel,
       location: 'replace',
     })
   }
-  searchChange = ({ value: filterString }) => {
+  changeInput = ({ value: filterString }) => {
     const { setFilter, projectId, filterModel } = this.props
     setFilter({
       cacheKey: projectId,
@@ -79,12 +79,19 @@ export default class ProjectCommits extends Component {
   render() {
     const { project, syncTimeline, filter } = this.props
     const isLoaded = syncTimeline && syncTimeline.data
+    const isLoading = !syncTimeline || syncTimeline.loading
 
     const userFilterOptions = project.data.team.map(user => ({
       name: user.name,
-      value: user.name,
-      onClick: () => { this.changeUserFilter(user.name) }
+      value: user._id,
+      onClick: () => { this.changeUserFilter(user._id) }
     }))
+
+    userFilterOptions.push({
+      name: 'None',
+      value: '',
+      onClick: () => { this.changeUserFilter('') }
+    })
 
     const typeFilterOptions = [{
       value: 'all',
@@ -111,11 +118,11 @@ export default class ProjectCommits extends Component {
             <SearchInput
               placeholder="Search History"
               value={ filter.string }
-              changeAction={ this.searchChange }
+              changeAction={ this.changeInput }
             />
             <div className="flex" />
             <PopoverDropdown
-              value={ get(filter, ['object', 'users', '0']) }
+              value={ get(filter, ['object', 'user']) }
               options={ userFilterOptions }
               style={ { marginRight: '15px'} }
             >
@@ -129,10 +136,13 @@ export default class ProjectCommits extends Component {
             </PopoverDropdown>
           </div>
         </SubSubHeader>
-        <LoadingOverlay show={ !isLoaded } hideBg />
-        { isLoaded
-        ? this.renderLoaded()
-        : null }
+        <div className={ classes.innerContent }>
+          <LoadingOverlay show={ isLoading } linear hideBg noOverlay />
+          { isLoaded
+          ? this.renderLoaded()
+          : null }
+        </div>
+
       </div>
     )
   }

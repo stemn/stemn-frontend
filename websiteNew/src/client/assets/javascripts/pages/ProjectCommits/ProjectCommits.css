@@ -3,7 +3,11 @@
 }
 
 .subHeader {
-  margin-bottom: 30px;
+}
+
+.innerContent {
+  padding-top: 30px;
+  position: relative;
 }
 
 .graphPanel {

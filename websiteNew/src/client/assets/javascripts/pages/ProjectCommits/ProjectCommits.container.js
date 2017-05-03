@@ -6,10 +6,9 @@ import ProjectCommits from './ProjectCommits'
 import { setFilter } from 'stemn-shared/misc/StringFilter/StringFilter.actions'
 import { createFilterString, getFilter } from 'stemn-shared/misc/StringFilter/StringFilter.utils'
 
-
 const filterModel = {
   type: 'string',
-  users: 'array',
+  user: 'string',
   query: 'main',
 }
 
@@ -51,6 +50,9 @@ const fetchConfigs = [{
       entityId: props.projectId,
       types: [ props.filter.object.type ],
       cacheKey: props.timelineCacheKey,
+      criteria: {
+        owner: props.filter.object.user,
+      },
       page: props.page,
       size: props.size,
     })
