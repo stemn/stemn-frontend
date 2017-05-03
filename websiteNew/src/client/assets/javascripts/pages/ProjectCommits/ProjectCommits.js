@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import classes from './ProjectCommits.css'
 
 import moment from 'moment'
-import { groupBy } from 'lodash'
+import { get, groupBy } from 'lodash'
 
 import { Container } from 'stemn-shared/misc/Layout'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
@@ -15,30 +15,44 @@ import Pagination from 'stemn-shared/misc/Pagination'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import SearchInput from 'stemn-shared/misc/Search/SearchInput'
 
+
 export default class ProjectCommits extends Component {
-  filterOptions = [{
-    value: 'commits',
-    name: 'Filter: Commits',
-    onClick: () => this.pushFilter('commits'),
-  }, {
-    value: 'revisions',
-    name: 'Filter: Revisions',
-    onClick: () => this.pushFilter('revisions'),
-  }, {
-    value: 'task-complete',
-    name: 'Filter: Task Complete',
-    onClick: () => this.pushFilter('task-complete'),
-  }]
-  pushFilter = filter => this.props.push({
-    pathname: window.location.pathname,
-    query: {
-      filter,
-    },
-  })
+  changeTypeFilter = (filterType) => {
+    const { setFilter, projectId, filterModel, filter } = this.props
+    setFilter({
+      cacheKey: projectId,
+      filterObject: {
+        ...filter.object,
+        type: filterType,
+      },
+      filterModel,
+      location: 'push',
+    })
+  }
+  changeUserFilter = (userId) => {
+    const { setFilter, projectId, filterModel, filter } = this.props
+    setFilter({
+      cacheKey: projectId,
+      filterObject: {
+        ...filter.object,
+        users: [ userId ],
+      },
+      filterModel,
+      location: 'replace',
+    })
+  }
+  searchChange = ({ value: filterString }) => {
+    const { setFilter, projectId, filterModel } = this.props
+    setFilter({
+      cacheKey: projectId,
+      filterString,
+      filterModel,
+      location: 'replace',
+    })
+  }
   renderLoaded() {
-    const { project, syncTimeline, location } = this.props
-    const page = 1
-    const noMoreResults = false
+    const { project, syncTimeline, location, page, size, filter } = this.props
+    const noMoreResults = syncTimeline && syncTimeline.data.length < size
 
     return (
       <div>
@@ -63,8 +77,32 @@ export default class ProjectCommits extends Component {
     )
   }
   render() {
-    const { project, syncTimeline, filterValue } = this.props
+    const { project, syncTimeline, filter } = this.props
     const isLoaded = syncTimeline && syncTimeline.data
+
+    const userFilterOptions = project.data.team.map(user => ({
+      name: user.name,
+      value: user.name,
+      onClick: () => { this.changeUserFilter(user.name) }
+    }))
+
+    const typeFilterOptions = [{
+      value: 'all',
+      name: 'All',
+      onClick: () => { this.changeTypeFilter('all') },
+    }, {
+      value: 'commits',
+      name: 'Commits',
+      onClick: () => { this.changeTypeFilter('commits') },
+    }, {
+      value: 'revisions',
+      name: 'Revisions',
+      onClick: () => { this.changeTypeFilter('revisions') },
+    }, {
+      value: 'task-complete',
+      name: 'Task Complete',
+      onClick: () => { this.changeTypeFilter('task-complete') },
+    }]
 
     return (
       <div className={ classes.content }>
@@ -72,12 +110,23 @@ export default class ProjectCommits extends Component {
           <div className="layout-row">
             <SearchInput
               placeholder="Search History"
+              value={ filter.string }
+              changeAction={ this.searchChange }
             />
             <div className="flex" />
             <PopoverDropdown
-              value={ filterValue }
-              options={ this.filterOptions }
-            />
+              value={ get(filter, ['object', 'users', '0']) }
+              options={ userFilterOptions }
+              style={ { marginRight: '15px'} }
+            >
+              User:&nbsp;
+            </PopoverDropdown>
+            <PopoverDropdown
+              value={ filter.object.type }
+              options={ typeFilterOptions }
+            >
+              Type:&nbsp;
+            </PopoverDropdown>
           </div>
         </SubSubHeader>
         <LoadingOverlay show={ !isLoaded } hideBg />

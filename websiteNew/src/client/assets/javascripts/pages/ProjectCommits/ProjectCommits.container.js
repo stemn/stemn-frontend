@@ -3,28 +3,56 @@ import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
 import ProjectCommits from './ProjectCommits'
-import { push } from 'react-router-redux'
+import { setFilter } from 'stemn-shared/misc/StringFilter/StringFilter.actions'
+import { createFilterString, getFilter } from 'stemn-shared/misc/StringFilter/StringFilter.utils'
 
-const stateToProps = ({ projects, syncTimeline }, { params, location }) => {
+
+const filterModel = {
+  type: 'string',
+  users: 'array',
+  query: 'main',
+}
+
+const stateToProps = ({ projects, syncTimeline, stringFilter }, { params, location }) => {
+  const page = location.query.page || 1
+  const size = 30
+
+  const filterDefaults = {
+    type: 'all',
+    query: ''
+  }
+  const filter = stringFilter[params.stub] || getFilter(filterDefaults, filterModel, location.query)
+  const timelineCacheKey = `${params.stub}-${filter.object.type}-${page}`
+  const timelineQueryKey = `${params.stub}-${page}-${JSON.stringify(filter.object)}`
+
   return {
     project: projects.data[params.stub],
     projectId: params.stub,
-    syncTimeline: syncTimeline[params.stub],
-    filterValue: location.query.filter || 'commits',
+    syncTimeline: syncTimeline[timelineCacheKey],
+    timelineCacheKey,
+    timelineQueryKey,
+    page,
+    size,
+    filter,
+    filterModel,
   };
 }
         
 const dispatchToProps = {
   fetchTimeline,
-  push,
+  setFilter,
 };
 
 const fetchConfigs = [{
-  hasChanged: 'projectId',
+  hasChanged: 'timelineQueryKey',
   onChange: (props) => {
     props.fetchTimeline({
       entityType: 'project',
       entityId: props.projectId,
+      types: [ props.filter.object.type ],
+      cacheKey: props.timelineCacheKey,
+      page: props.page,
+      size: props.size,
     })
   }
 }];

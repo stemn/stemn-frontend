@@ -33,6 +33,7 @@ import walkthrough      from 'stemn-shared/misc/Walkthrough/Walkthrough.reducer.
 import fields           from 'stemn-shared/misc/Fields/Fields.reducer.js'
 import relatedFields    from 'stemn-shared/misc/RelatedFields/RelatedFields.reducer.js'
 import userSettings     from 'stemn-shared/misc/UserSettings/UserSettings.reducer.js'
+import stringFilter     from 'stemn-shared/misc/stringFilter/stringFilter.reducer.js'
 
 export default combineReducers({
   auth,
@@ -68,4 +69,5 @@ export default combineReducers({
   walkthrough,
   desktopReleases,
   userSettings,
+  stringFilter,
 })

@@ -40,6 +40,7 @@
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-.newComment {
-  margin-bottom: 60px;
+
+.empty {
+  min-height: 350px;
 }

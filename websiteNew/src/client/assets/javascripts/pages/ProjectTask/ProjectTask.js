@@ -18,6 +18,7 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import LabelSelect from 'stemn-shared/misc/Tasks/LabelSelect/LabelSelect'
+import TaskTimelineEmpty from 'stemn-shared/misc/Tasks/TaskTimelineEmpty'
 
 export default class ProjectTask extends Component {
   updateTask = () => {
@@ -57,6 +58,14 @@ export default class ProjectTask extends Component {
           </PopoverDropdown>
         </div>
         <div className={ classes.panel }>
+          <div className="text-mini-caps">Due Date</div>
+           <DatePicker
+            model={ `${taskModel}.data.due` }
+            onChange={ this.updateTask }
+            value={ task.data.due }
+          />
+        </div>
+        <div className={ classes.panel }>
           <div className="text-mini-caps">Labels</div>
           <LabelSelect
             model={ `${taskModel}.data.labels` }
@@ -72,14 +81,6 @@ export default class ProjectTask extends Component {
             onChange={ this.updateTask }
             value={ task.data.users }
             users={ project.data.team }
-          />
-        </div>
-        <div className={ classes.panel }>
-          <div className="text-mini-caps">Due Date</div>
-           <DatePicker
-            model={ `${taskModel}.data.due` }
-            onChange={ this.updateTask }
-            value={ task.data.due }
           />
         </div>
       </Col>
@@ -196,14 +197,23 @@ export default class ProjectTask extends Component {
                 </Button> }
             </div>
           </SubSubHeader>
-          <Container style={ { marginTop: '30px' } }>
+          <Container style={ { marginTop: '30px', marginBottom: '60px' } }>
             <Row className="layout-xs-column layout-gt-xs-row">
-              <Col className="flex flex-order-xs-1">
-                <div className={ classes.newComment }>
-                  <CommentNew 
-                    taskId={ taskId } 
+              <Col className="flex flex-order-xs-1 layout-column">
+                { timeline && timeline.length > 0 &&
+                  <TimelineVertical
+                    className={ classes.timeline }
+                    items={ timeline }
+                    entity={ board }
+                    type="task"
                   />
-                </div>
+                }
+                { timeline && timeline.length == 0 &&
+                  <TaskTimelineEmpty className={ classNames('flex-gt-xs', classes.empty) } />
+                }
+                <CommentNew
+                  taskId={ taskId }
+                />
               </Col>
               { edit
               ? this.sidebarEdit()
@@ -218,14 +228,7 @@ export default class ProjectTask extends Component {
   }
 }
 
-//                { timeline && timeline.length > 0 &&
-//                  <TimelineVertical
-//                    className={ classes.timeline }
-//                    items={ timeline }
-//                    entity={ board }
-//                    type="task"
-//                  />
-//                }
+
 
 //              <Tag className="success">
 //                <MdDone size={ 20 } style={ { marginRight: '5px' } }/>
