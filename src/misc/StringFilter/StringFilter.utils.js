@@ -1,4 +1,5 @@
 import { actions } from 'react-redux-form';
+import { pick, findKey } from 'lodash'
 
 export const isFilterActive = (filterArray, filterString, searchString) =>{
   if(filterString == ''){
@@ -50,4 +51,74 @@ function stringContainsWord(fullString, word){
 }
 function replaceWord(fullString, word, newWord){
   return fullString && fullString.length > 0 ? fullString.replace(new RegExp('(^|\\s+)'+word), newWord) : fullString;
+}
+
+// New functions
+export const createFilterString = (filterObject, filterModel) => {
+  let filterString = ''
+  Object.keys(filterObject).forEach((key) => {
+    const value = filterObject[key]
+
+    // If this is the 'main' filter item, append directly
+    if (filterModel[key] === 'main') {
+      filterString = `${filterString}${value} `
+    } else {
+      // Replace all spaces with _
+      const valueNoSpaces = typeof value === 'string'
+        ? value.replace(' ', '_')
+        : value
+      filterString = `${filterString}${key}:${valueNoSpaces} `
+    }
+  })
+  return filterString
+}
+
+export const parseFilterString = (filterString, filterModel) => {
+  const filterObject = {}
+  // Get all the items in the filterString
+  const allItems = filterString.split(' ')
+
+  // The ones that contain : are filter items
+  const filterItems = allItems.filter(item => item.includes(':'))
+  // Parse the filter items
+  filterItems.forEach((item) => {
+    const [ key, value ] = item.split(':')
+    const valueWithSpaces = value.replace('_', ' ')
+
+    const type = filterModel[key]
+    // Create cases for each model type
+    const cases = {
+      bool: () => {
+        filterObject[key] = valueWithSpaces === 'true'
+      },
+      array: () => {
+        filterObject[key] = valueWithSpaces.split(',')
+      },
+      string: () => {
+        filterObject[key] = valueWithSpaces
+      },
+    }
+    if (cases[type]) {
+      cases[type]()
+    } else {
+      console.info('Valid filter model not found for:', key, type);
+    }
+  })
+
+  // The other items are part of the 'main' filter item
+  const otherItems = allItems.filter(item => !item.includes(':'))
+  const mainFilterItemKey = findKey(filterModel, item => item === 'main')
+  filterObject[mainFilterItemKey] = otherItems.join(' ')
+
+  return filterObject
+}
+
+export const getFilter = (filterDefaults, filterModel, queryParams) => {
+  const validQueryParams = Object.keys(filterModel)
+  // Extend the defaults by the valid query params
+  const filterObject = Object.assign({}, filterDefaults, pick(queryParams, validQueryParams))
+  return {
+    object: filterObject,
+    string: createFilterString(filterObject, filterModel),
+  }
 }

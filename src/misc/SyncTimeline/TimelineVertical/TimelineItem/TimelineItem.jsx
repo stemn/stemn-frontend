@@ -25,8 +25,6 @@ export default class TimelineItem extends Component {
       ? { marginLeft: '60px' }
       : {}
 
-    console.log(item);
-
     // If it is a comment, we use the comment component to display
     if(item.event == 'comment'){
       return (
