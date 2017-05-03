@@ -133,6 +133,6 @@ export default class TimelineItemText extends Component {
     const { item, type, entity } = this.props
     return eventTextMap[item.event]
       ? eventTextMap[item.event](item, type, entity)
-      : <span>Unknown Event Type</span>
+      : <span>Unknown Event Type: { item.event }</span>
   }
 };

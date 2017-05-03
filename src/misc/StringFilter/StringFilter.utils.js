@@ -58,44 +58,50 @@ export const createFilterString = (filterObject, filterModel) => {
   let filterString = ''
   Object.keys(filterObject).forEach((key) => {
     const value = filterObject[key]
+    const type = filterModel[key]
+
+    // If there is no value, stop
+    if (value.length === 0) {
+      return
+    }
 
     // If this is the 'main' filter item, append directly
-    if (filterModel[key] === 'main') {
+    if (type === 'main') {
       filterString = `${filterString}${value} `
+    } else if (type === 'array') {
+      const valueNoSpaces = value.join(',').replace(' ', '_')
+      filterString = `${filterString}${key}:${valueNoSpaces} `
+    } else if (type === 'bool') {
+      filterString = `${filterString}${key}:${value} `
     } else {
-      // Replace all spaces with _
-      const valueNoSpaces = typeof value === 'string'
-        ? value.replace(' ', '_')
-        : value
+      const valueNoSpaces = value.replace(' ', '_')
       filterString = `${filterString}${key}:${valueNoSpaces} `
     }
   })
   return filterString
 }
 
-export const parseFilterString = (filterString, filterModel) => {
-  const filterObject = {}
-  // Get all the items in the filterString
-  const allItems = filterString.split(' ')
-
-  // The ones that contain : are filter items
-  const filterItems = allItems.filter(item => item.includes(':'))
-  // Parse the filter items
-  filterItems.forEach((item) => {
-    const [ key, value ] = item.split(':')
+export const parseObject = (object, filterModel) => {
+  const newObject = {}
+  Object.keys(object).forEach((key) => {
+    const value = object[key]
+    // Replace _ with spaces
     const valueWithSpaces = value.replace('_', ' ')
-
+    // Get the type, bool, array or string
     const type = filterModel[key]
     // Create cases for each model type
     const cases = {
       bool: () => {
-        filterObject[key] = valueWithSpaces === 'true'
+        newObject[key] = valueWithSpaces === 'true'
       },
       array: () => {
-        filterObject[key] = valueWithSpaces.split(',')
+        newObject[key] = valueWithSpaces.split(',')
       },
       string: () => {
-        filterObject[key] = valueWithSpaces
+        newObject[key] = valueWithSpaces
+      },
+      main: () => {
+        newObject[key] = valueWithSpaces
       },
     }
     if (cases[type]) {
@@ -104,12 +110,26 @@ export const parseFilterString = (filterString, filterModel) => {
       console.info('Valid filter model not found for:', key, type);
     }
   })
+  return newObject
+}
 
+export const parseFilterString = (filterString, filterModel) => {
+  // Get all the items in the filterString
+  const allItems = filterString.split(' ')
+
+  // The ones that contain : are filter items
+  const filterItems = allItems.filter(item => item.includes(':'))
+  // Split the items and create an object
+  const filterItemsObject = filterItems.reduce((accum, item) => {
+    const [key, value] = item.split(':')
+    accum[key] = value
+    return accum
+  }, {})
   // The other items are part of the 'main' filter item
   const otherItems = allItems.filter(item => !item.includes(':'))
   const mainFilterItemKey = findKey(filterModel, item => item === 'main')
-  filterObject[mainFilterItemKey] = otherItems.join(' ')
-
+  filterItemsObject[mainFilterItemKey] = otherItems.join(' ')
+  const filterObject = parseObject(filterItemsObject, filterModel)
   return filterObject
 }
 
@@ -117,8 +137,9 @@ export const getFilter = (filterDefaults, filterModel, queryParams) => {
   const validQueryParams = Object.keys(filterModel)
   // Extend the defaults by the valid query params
   const filterObject = Object.assign({}, filterDefaults, pick(queryParams, validQueryParams))
+  const filterObjectParsed = parseObject(filterObject, filterModel)
   return {
-    object: filterObject,
-    string: createFilterString(filterObject, filterModel),
+    object: filterObjectParsed,
+    string: createFilterString(filterObjectParsed, filterModel),
   }
 }

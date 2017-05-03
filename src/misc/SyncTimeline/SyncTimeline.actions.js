@@ -46,6 +46,10 @@ export function fetchTimeline({ entityType, entityId, provider, types, cacheKey,
     meta: {
       cacheKey: cacheKey || entityId,
     },
+    throttle: {
+      time: 500,
+      endpoint:  `$fetch-timeline/${entityType}`
+    },
   }
 }
 
