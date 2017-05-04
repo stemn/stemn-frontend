@@ -21,13 +21,13 @@ class PopoverDropdown extends Component {
           <MdExpandMore style={ { marginLeft: '5px' } } size={ 15 } />
         </div>
         <div className="PopoverMenu">
-          { options.map((option) => {
+          { options.map((option, idx) => {
             const onClick = model
               ? () => dispatch(actions.change(model, option.value))
               : () => option.onClick()
             return (
               <a
-                key={ option.value }
+                key={ option.value || idx }
                 onClick={ onClick }
                 className={ classNames({ 'active' : value === option.value }) }
               >

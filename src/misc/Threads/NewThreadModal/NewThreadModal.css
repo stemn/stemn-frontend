@@ -12,4 +12,5 @@
 .bodySection {
   min-height: 200px;
   padding: 20px;
+  position: relative;
 }

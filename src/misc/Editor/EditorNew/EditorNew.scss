@@ -8,6 +8,10 @@
     line-height: 1.6em;
   }
 
+  :global(.CodeMirror-placeholder) {
+    color: rgba(0, 0, 0, 0.3);
+  }
+
   :global(.CodeMirror-lines) {
     padding: 0px;
   }

@@ -85,41 +85,44 @@ const eventTextMap = {
           &nbsp;{ item.data.summary }
         </Link>
       </span>
-    }
-    else{
+    } else {
       return <span>marked this as complete</span>
     }
   },
   changedLabels: (item, type, entity) => {
-    return (
-      <span>
-        { item.data.addedLabels && item.data.addedLabels.length > 0
-          ? <span>
-              added the&nbsp;
-              <TaskLabelDots
-                labels={item.data.addedLabels}
-                labelInfo={entity.data.labels}
-                tag
-              />
-              &nbsp;{ item.data.addedLabels.length == 1 ? 'label' : 'labels' }
-            </span>
-          : null }
-        { item.data.addedLabels && item.data.removedLabels && item.data.addedLabels.length > 0 && item.data.removedLabels.length>0
-          ? <span>&nbsp;and&nbsp;</span>
-          : null }
-        { item.data.removedLabels && item.data.removedLabels.length > 0
-          ? <span>
-              removed the&nbsp;
-              <TaskLabelDots
-                labels={ item.data.removedLabels }
-                labelInfo={ entity.data.labels }
-                tag
-              />
-              &nbsp;{item.data.removedLabels.length == 1 ? 'label' : 'labels'}
-            </span>
-          : null }
-      </span>
-    )
+    if (type === 'task') {
+      return (
+        <span>
+          { item.data.addedLabels && item.data.addedLabels.length > 0
+            ? <span>
+                added the&nbsp;
+                <TaskLabelDots
+                  labels={item.data.addedLabels}
+                  labelInfo={entity.data.labels}
+                  tag
+                />
+                &nbsp;{ item.data.addedLabels.length == 1 ? 'label' : 'labels' }
+              </span>
+            : null }
+          { item.data.addedLabels && item.data.removedLabels && item.data.addedLabels.length > 0 && item.data.removedLabels.length>0
+            ? <span>&nbsp;and&nbsp;</span>
+            : null }
+          { item.data.removedLabels && item.data.removedLabels.length > 0
+            ? <span>
+                removed the&nbsp;
+                <TaskLabelDots
+                  labels={ item.data.removedLabels }
+                  labelInfo={ entity.data.labels }
+                  tag
+                />
+                &nbsp;{item.data.removedLabels.length == 1 ? 'label' : 'labels'}
+              </span>
+            : null }
+        </span>
+      )
+    } else {
+      return <span>Invalid event type</span>
+    }
   },
 }
 
