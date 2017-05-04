@@ -14,11 +14,11 @@ const filterModel = {
   groups: 'array',
   labels: 'array',
   users: 'array',
-  open: 'bool',
+  status: 'string',
   query: 'main',
 }
 
-const stateToProps = ({ projects, tasks, stringFilter }, { params, location }) => {
+const stateToProps = ({ projects, tasks, search, stringFilter }, { params, location }) => {
   const projectId = params.stub
   const project = projects.data[projectId]
   const boardId = get(tasks, ['projects', projectId, 'boards', '0'])
@@ -29,22 +29,29 @@ const stateToProps = ({ projects, tasks, stringFilter }, { params, location }) =
 
   const filterDefaults = {}
   const filter = stringFilter[params.stub] || getFilter(filterDefaults, filterModel, location.query)
-  const searchCacheKey = `${params.stub}-${filter.object.type}-${page}`
+  const searchCacheKey = `tasks-${projectId}-${page}`
   const searchQueryKey = `${params.stub}-${page}-${JSON.stringify(filter.object)}`
 
   return {
-    tasks: tasks.data,
+    page,
+    size,
+    threads: get(search, ['data', searchCacheKey], {}),
     projectId,
     project,
     boardId,
     board,
     boardModel: `tasks.boards.${boardId}`,
+    searchQueryKey,
+    searchCacheKey,
+    filter,
+    filterModel,
+    filterStorePath: `stringFilter.${params.stub}`
   }
 }
 
 const dispatchToProps = {
   getBoards,
-  showNewProjectModal: (modalProps) => showModal({
+  showNewThreadModal: (modalProps) => showModal({
     modalType: newThreadModalName,
     modalProps: modalProps,
   }),
@@ -62,11 +69,30 @@ const fetchConfigs = [{
 },{
   hasChanged: 'searchQueryKey',
   onChange: (props) => {
+
+    const parseCompleted = (status) => {
+      if (status === 'closed') {
+        return true
+      } else if (status === 'open') {
+        return false
+      }
+      return undefined
+    }
+
     props.search({
-      entityType: 'thread',
+      entityType: 'task',
       parentType: 'project',
       parentId: props.projectId,
-      select: '_id',
+      select: ['_id'],
+      cacheKey: props.searchCacheKey,
+      criteria: {
+        group: props.filter.object.groups,
+        labels: props.filter.object.labels,
+        name: props.filter.object.query && `/${props.filter.object.query}/i`,
+        complete: parseCompleted(props.filter.object.status),
+      },
+      size: props.size,
+      page: props.page,
     })
   }
 }]
