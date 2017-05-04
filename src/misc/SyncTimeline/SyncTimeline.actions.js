@@ -25,7 +25,7 @@ export function selectTimelineItem({ projectId, selected }) {
   }
 }
 
-export function fetchTimeline({ entityType, entityId, provider, types, cacheKey, page, size }) {
+export function fetchTimeline({ entityType, entityId, provider, types, cacheKey, page, size, criteria }) {
 //  `/api/v1/remote/timeline/${provider}`
   return {
     type: 'TIMELINE/FETCH_TIMELINE',
@@ -38,9 +38,7 @@ export function fetchTimeline({ entityType, entityId, provider, types, cacheKey,
         types,
         page,
         size,
-//        criteria: {
-//          summary: '/commit/i',
-//        },
+        criteria,
       },
     }),
     meta: {

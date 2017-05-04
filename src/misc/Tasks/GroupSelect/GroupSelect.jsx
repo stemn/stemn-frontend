@@ -7,24 +7,30 @@ import classes from './GroupSelect.css'
 
 class LabelSelectRow extends Component {
   onChange = () => {
-    const { group, dispatch, model, onChange } = this.props
-    dispatch(actions.change(model, group._id))
+    // The onChange function works like a checkbox
+    const { item, dispatch, value, model, onChange } = this.props
+    const labelIndex = value ? value.indexOf(item._id) : -1;
+    if (labelIndex !== -1) {
+      dispatch(actions.remove(model, labelIndex))
+    } else {
+      dispatch(actions.push(model, item._id))
+    }
     if (onChange) { onChange() } // Run the onChange function if required
   }
   render() {
-    const { group, value, onChange } = this.props
-    const status = value ? value.includes(group._id) : false
+    const { item, value, onChange } = this.props
+    const status = value ? value.includes(item._id) : false
 
     return (
       <CheckboxAlt
         status={ status }
-        value={ group._id }
+        value={ item._id }
         onChange={ this.onChange }
         className="layout-row layout-align-start-center"
         tickOnly
       >
         <div style={ { paddingLeft: '5px'} }>
-          { group.name }
+          { item.name }
         </div>
       </CheckboxAlt>
     )
@@ -37,9 +43,9 @@ class LabelSelect extends Component {
 
     return (
       <div>
-        { groups.map((group) => (
+        { groups.map((item) => (
           <LabelSelectRow
-            group={ group }
+            item={ item }
             model={ model }
             value={ value }
             onChange={ onChange }

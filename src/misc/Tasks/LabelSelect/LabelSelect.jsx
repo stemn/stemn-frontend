@@ -8,32 +8,32 @@ import classes from './LabelSelect.css'
 class LabelSelectRow extends Component {
   onChange = () => {
     // The onChange function works like a checkbox
-    const { label, dispatch, value, model, onChange } = this.props
-    const labelIndex = value ? value.indexOf(label._id) : -1;
+    const { item, dispatch, value, model, onChange } = this.props
+    const labelIndex = value ? value.indexOf(item._id) : -1;
     if (labelIndex !== -1) {
       dispatch(actions.remove(model, labelIndex))
     } else {
-      dispatch(actions.push(model, label._id))
+      dispatch(actions.push(model, item._id))
     }
     if (onChange) { onChange() } // Run the onChange function if required
   }
   render() {
-    const { label, value, onChange } = this.props
-    const status = value ? value.includes(label._id) : false
+    const { item, value, onChange } = this.props
+    const status = value ? value.includes(item._id) : false
 
     return (
       <CheckboxAlt
         status={ status }
-        value={ label._id }
+        value={ item._id }
         onChange={ this.onChange }
         className="layout-row layout-align-start-center"
         tickOnly
       >
         <div
           className={ classes.swatch }
-          style={ { background: label.color } }
+          style={ { background: item.color } }
         />
-        { label.name }
+        { item.name }
       </CheckboxAlt>
     )
   }
@@ -48,9 +48,9 @@ class LabelSelect extends Component {
 
     return (
       <div>
-        { filteredInfo.map((label) => (
+        { filteredInfo.map((item) => (
           <LabelSelectRow
-            label={ label }
+            item={ item }
             model={ model }
             value={ value }
             onChange={ onChange }

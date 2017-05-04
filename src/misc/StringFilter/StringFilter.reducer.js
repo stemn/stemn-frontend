@@ -1,4 +1,5 @@
 import i from 'icepick'
+import { modeled } from 'react-redux-form'
 
 const initialState = {
 /*********************************************
@@ -14,7 +15,7 @@ This reducer store filter state data
 *********************************************/
 }
 
-export default (state = initialState, action = {}) => {
+const mainReducer = (state, action) => {
   switch (action.type) {
     case 'STRING_FILTER/SET_FILTER':
       return i.assoc(state, action.meta.cacheKey, action.payload)
@@ -22,4 +23,8 @@ export default (state = initialState, action = {}) => {
     default:
       return state
   }
+}
+
+export default (state = initialState, action = {}) => {
+  return modeled(mainReducer, 'stringFilter')(state, action)
 }

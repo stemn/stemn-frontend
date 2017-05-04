@@ -54,14 +54,15 @@ function replaceWord(fullString, word, newWord){
 }
 
 // New functions
-export const createFilterString = (filterObject, filterModel) => {
+export const createFilterString = (filterObject = [], filterModel) => {
   let filterString = ''
   Object.keys(filterObject).forEach((key) => {
     const value = filterObject[key]
     const type = filterModel[key]
 
-    // If there is no value, stop
-    if (value.length === 0) {
+    // If there is no value,
+    // or if is an array with no value, stop
+    if (!value || value.length === 0 || ( value && value.join && value.join().length ===0 ) ) {
       return
     }
 
@@ -81,7 +82,7 @@ export const createFilterString = (filterObject, filterModel) => {
   return filterString
 }
 
-export const parseObject = (object, filterModel) => {
+export const parseObject = (object = {}, filterModel) => {
   const newObject = {}
   Object.keys(object).forEach((key) => {
     const value = object[key]
