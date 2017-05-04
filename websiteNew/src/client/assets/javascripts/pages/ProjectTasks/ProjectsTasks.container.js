@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
-import { get } from 'lodash'
+import { get, omitBy, isEqual } from 'lodash'
 import { getBoards } from 'stemn-shared/misc/Tasks/Tasks.actions'
 import ProjectsTasks from './ProjectsTasks'
 import { setFilter } from 'stemn-shared/misc/StringFilter/StringFilter.actions'
@@ -28,7 +28,10 @@ const stateToProps = ({ projects, tasks, search, stringFilter }, { params, locat
   const size = 30
 
   const filterDefaults = {}
-  const filter = stringFilter[params.stub] || getFilter(filterDefaults, filterModel, location.query)
+  const filterCacheKey = `tasks-${projectId}`
+  const filter = stringFilter[filterCacheKey] || getFilter(filterDefaults, filterModel, location.query)
+  const filterIsDefault = isEqual(filterDefaults, filter.object)
+
   const searchCacheKey = `tasks-${projectId}-${page}`
   const searchQueryKey = `${params.stub}-${page}-${JSON.stringify(filter.object)}`
 
@@ -45,7 +48,10 @@ const stateToProps = ({ projects, tasks, search, stringFilter }, { params, locat
     searchCacheKey,
     filter,
     filterModel,
-    filterStorePath: `stringFilter.${params.stub}`
+    filterCacheKey,
+    filterStorePath: `stringFilter.${filterCacheKey}`,
+    filterIsDefault,
+    filterDefaults,
   }
 }
 
@@ -54,6 +60,9 @@ const dispatchToProps = {
   showNewThreadModal: (modalProps) => showModal({
     modalType: newThreadModalName,
     modalProps: modalProps,
+    modalOptions: {
+      noClickClose: true,
+    }
   }),
   setFilter,
   search,
@@ -69,7 +78,6 @@ const fetchConfigs = [{
 },{
   hasChanged: 'searchQueryKey',
   onChange: (props) => {
-
     const parseCompleted = (status) => {
       if (status === 'closed') {
         return true
@@ -78,6 +86,14 @@ const fetchConfigs = [{
       }
       return undefined
     }
+    // Create the criteria object
+    const criteria = {
+      group: props.filter.object.groups,
+      labels: props.filter.object.labels,
+      name: props.filter.object.query && `/${props.filter.object.query}/i`,
+      complete: parseCompleted(props.filter.object.status),
+      users: props.filter.object.users,
+    }
 
     props.search({
       entityType: 'task',
@@ -85,12 +101,7 @@ const fetchConfigs = [{
       parentId: props.projectId,
       select: ['_id'],
       cacheKey: props.searchCacheKey,
-      criteria: {
-        group: props.filter.object.groups,
-        labels: props.filter.object.labels,
-        name: props.filter.object.query && `/${props.filter.object.query}/i`,
-        complete: parseCompleted(props.filter.object.status),
-      },
+      criteria: omitBy(criteria, item => item === ''),
       size: props.size,
       page: props.page,
     })

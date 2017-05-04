@@ -16,6 +16,7 @@ import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import { get } from 'lodash'
+import TasksEmpty from 'stemn-shared/misc/Tasks/TasksEmpty'
 
 export default class ProjectsTasks extends Component {
   showNewThreadModal = () => {
@@ -24,18 +25,18 @@ export default class ProjectsTasks extends Component {
     })
   }
   changeInput = ({ value: filterString }) => {
-    const { setFilter, projectId, filterModel } = this.props
+    const { setFilter, filterCacheKey, filterModel } = this.props
     setFilter({
-      cacheKey: projectId,
+      cacheKey: filterCacheKey,
       filterString,
       filterModel,
       location: 'replace',
     })
   }
   changeUserFilter = (userId) => {
-    const { setFilter, projectId, filterModel, filter } = this.props
+    const { setFilter, filterCacheKey, filterModel, filter } = this.props
     setFilter({
-      cacheKey: projectId,
+      cacheKey: filterCacheKey,
       filterObject: {
         ...filter.object,
         users: [ userId ],
@@ -45,9 +46,9 @@ export default class ProjectsTasks extends Component {
     })
   }
   changeOpenFilter = (status) => {
-    const { setFilter, projectId, filterModel, filter } = this.props
+    const { setFilter, filterCacheKey, filterModel, filter } = this.props
     setFilter({
-      cacheKey: projectId,
+      cacheKey: filterCacheKey,
       filterObject: {
         ...filter.object,
         status,
@@ -58,19 +59,30 @@ export default class ProjectsTasks extends Component {
   }
   processFilterChange = () => {
     setTimeout(() => {
-      const { setFilter, filter, projectId, filterModel } = this.props
+      const { setFilter, filter, filterCacheKey, filterModel } = this.props
       setFilter({
-        cacheKey: projectId,
+        cacheKey: filterCacheKey,
         filterObject: filter.object,
         filterModel,
         location: 'replace',
       })
     }, 1)
   }
+  clearFilter = () => {
+    const { setFilter, filterCacheKey, filterModel, filterDefaults } = this.props
+    setFilter({
+      cacheKey: filterCacheKey,
+      filterObject: filterDefaults,
+      filterModel,
+      location: 'replace',
+    })
+  }
   render() {
-    const { project, board, threads, location, filter, boardModel, showNewThreadModal, page, size, filterStorePath } = this.props
+    const { project, board, threads, location, filter, boardModel, showNewThreadModal, page, size, filterStorePath, filterIsDefault } = this.props
     const noMoreResults = threads && threads.data && threads.data.length < size
     const isLoading = !threads || threads.loading
+    const isLoaded = threads && threads.data && board && board.data
+    const hasResults = threads && threads.data  && threads.data.length > 0
 
     const userFilterOptions = project.data.team.map(user => ({
       name: user.name,
@@ -100,10 +112,10 @@ export default class ProjectsTasks extends Component {
     return (
       <div>
         <SubSubHeader>
-          <Row className="layout-row">
+          <Row className="layout-xs-column layout-gt-xs-row">
             <Col className="flex-xs flex-sm flex-gt-sm-30 layout-row">
               <SearchInput
-                style={ { width: '100%' } }
+                className={ classes.search }
                 placeholder="Search Threads"
                 value={ filter.string }
                 changeAction={ this.changeInput }
@@ -112,6 +124,7 @@ export default class ProjectsTasks extends Component {
             <div className="flex-xs-0 flex-sm-0 flex-gt-sm" />
             <Col className="layout-row">
               <PopoverDropdown
+                className="flex-xs"
                 value={ get(filter, ['object', 'status']) }
                 options={ openFilterOptions }
                 style={ { marginRight: '15px'} }
@@ -119,59 +132,68 @@ export default class ProjectsTasks extends Component {
                 Status:&nbsp;
               </PopoverDropdown>
               <PopoverDropdown
+                className="flex-xs"
                 value={ get(filter, ['object', 'users', '0']) }
                 options={ userFilterOptions }
                 style={ { marginRight: '15px'} }
               >
                 Asignee:&nbsp;
               </PopoverDropdown>
-              <Button className="primary" onClick={ this.showNewThreadModal }>
+              <Button className="primary flex-xs" onClick={ this.showNewThreadModal }>
                 New Thread
               </Button>
             </Col>
           </Row>
         </SubSubHeader>
-        { board && board.data
-        ? <Container className={ classes.content }>
-            <Row className="layout-xs-column layout-gt-xs-row">
-              <Col className="flex-xs-100 flex-gt-xs-30">
-                <div className={ classes.panel }>
-                  <h3 className="text-mini-caps">Groups</h3>
-                  <GroupSelect
-                    groups={ board.data.groups }
-                    value={ get(filter, ['object', 'groups']) }
-                    model={ `${filterStorePath}.object.groups` }
-                    onChange={ this.processFilterChange }
-                  />
-                </div>
-                <div className={ classes.panel }>
-                  <h3 className="text-mini-caps">Labels</h3>
-                  <LabelSelect
-                    labelInfo={ board.data.labels }
-                    value={ get(filter, ['object', 'labels']) }
-                    model={ `${filterStorePath}.object.labels` }
-                    onChange={ this.processFilterChange }
-                  />
-                </div>
-              </Col>
-              <Col className="flex">
-                <div className={ classes.threadsPanel }>
-                  <LoadingOverlay show={ isLoading } linear hideBg noOverlay />
-                  { threads && threads.data && threads.data.length > 0
-                  ? threads.data.map(task => (
-                     <TaskRow
-                       board={ board }
-                       taskId={ task._id }
-                       className={ classes.thread }
-                     />
-                  ))
-                  : <div>No Results</div> }
-                </div>
-                <Pagination path={ location.pathname } page={ page } noMoreResults={ noMoreResults }/>
-              </Col>
-            </Row>
-          </Container>
-        : null }
+        <div className={ classes.content }>
+          <LoadingOverlay show={ isLoading } linear hideBg noOverlay />
+          { isLoaded
+          ? <Container>
+              { (!filterIsDefault) || (filterIsDefault && hasResults)
+              ? <Row className="layout-xs-column layout-gt-xs-row">
+                  <Col className="flex-xs-100 flex-gt-xs-30">
+                    <div className={ classes.panel }>
+                      <h3 className="text-mini-caps">Groups</h3>
+                      <GroupSelect
+                        groups={ board.data.groups }
+                        value={ get(filter, ['object', 'groups']) }
+                        model={ `${filterStorePath}.object.groups` }
+                        onChange={ this.processFilterChange }
+                      />
+                    </div>
+                    <div className={ classes.panel }>
+                      <h3 className="text-mini-caps">Labels</h3>
+                      <LabelSelect
+                        labelInfo={ board.data.labels }
+                        value={ get(filter, ['object', 'labels']) }
+                        model={ `${filterStorePath}.object.labels` }
+                        onChange={ this.processFilterChange }
+                      />
+                    </div>
+                  </Col>
+                  <Col className="flex">
+                    <div className={ classes.threadsPanel }>
+                      { hasResults
+                      ? threads.data.map(task => (
+                         <TaskRow
+                           board={ board }
+                           taskId={ task._id }
+                           className={ classes.thread }
+                         />
+                      ))
+                      : <div className={ classNames('text-title-5', classes.noResult) }>
+                          No Results. <a className="link-primary"  onClick={ this.clearFilter }>Clear Filter</a>
+                        </div> }
+                    </div>
+                    <Pagination path={ location.pathname } page={ page } noMoreResults={ noMoreResults }/>
+                  </Col>
+                </Row>
+              : !isLoading && <TasksEmpty /> }
+            </Container>
+          : null }
+
+        </div>
+
 
       </div>
     )

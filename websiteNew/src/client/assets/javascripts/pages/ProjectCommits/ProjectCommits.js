@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-
 import classes from './ProjectCommits.css'
-
+import classNames from 'classnames'
 import moment from 'moment'
-import { get, groupBy } from 'lodash'
-
+import { get } from 'lodash'
 import { Container } from 'stemn-shared/misc/Layout'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import HistoryGraph from 'stemn-shared/misc/Graphs/HistoryGraph'
@@ -14,13 +12,13 @@ import SubSubHeader from 'modules/SubSubHeader'
 import Pagination from 'stemn-shared/misc/Pagination'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import SearchInput from 'stemn-shared/misc/Search/SearchInput'
-
+import HistoryEmpty from 'stemn-shared/misc/SyncTimeline/HistoryEmpty'
 
 export default class ProjectCommits extends Component {
   changeTypeFilter = (filterType) => {
-    const { setFilter, projectId, filterModel, filter } = this.props
+    const { setFilter, filterCacheKey, filterModel, filter } = this.props
     setFilter({
-      cacheKey: projectId,
+      cacheKey: filterCacheKey,
       filterObject: {
         ...filter.object,
         type: filterType,
@@ -30,9 +28,9 @@ export default class ProjectCommits extends Component {
     })
   }
   changeUserFilter = (userId) => {
-    const { setFilter, projectId, filterModel, filter } = this.props
+    const { setFilter, filterCacheKey, filterModel, filter } = this.props
     setFilter({
-      cacheKey: projectId,
+      cacheKey: filterCacheKey,
       filterObject: {
         ...filter.object,
         user: userId,
@@ -42,21 +40,34 @@ export default class ProjectCommits extends Component {
     })
   }
   changeInput = ({ value: filterString }) => {
-    const { setFilter, projectId, filterModel } = this.props
+    const { setFilter, filterCacheKey, filterModel } = this.props
     setFilter({
-      cacheKey: projectId,
+      cacheKey: filterCacheKey,
       filterString,
       filterModel,
       location: 'replace',
     })
   }
+  clearFilter = () => {
+    const { setFilter, filterCacheKey, filterModel, filterDefaults } = this.props
+    setFilter({
+      cacheKey: filterCacheKey,
+      filterObject: filterDefaults,
+      filterModel,
+      location: 'replace',
+    })
+  }
   renderLoaded() {
-    const { project, syncTimeline, location, page, size, filter } = this.props
+    const { project, syncTimeline, location, page, size, filter, filterIsDefault } = this.props
     const noMoreResults = syncTimeline && syncTimeline.data.length < size
+    const hasResults = syncTimeline && syncTimeline.data  && syncTimeline.data.length > 0
+    const projectRouteParams = {
+      projectId: project.data._id,
+    }
 
-    return (
-      <div>
-        <Container>
+    if (hasResults) {
+      return (
+        <div>
           <div className={ classes.graphPanel }>
             <HistoryGraph />
           </div>
@@ -72,9 +83,17 @@ export default class ProjectCommits extends Component {
             page={ page }
             noMoreResults={ noMoreResults }
           />
-        </Container>
-      </div>
-    )
+        </div>
+      )
+    } else if ( filterIsDefault ) {
+      return <HistoryEmpty projectRouteParams={ projectRouteParams } />
+    } else {
+      return (
+        <InfoPanel className="text-title-5">
+          No timeline events found. <a className="link-primary" onClick={ this.clearFilter }>Reset Filter</a>
+        </InfoPanel>
+      )
+    }
   }
   render() {
     const { project, syncTimeline, filter } = this.props
@@ -88,9 +107,9 @@ export default class ProjectCommits extends Component {
     }))
 
     userFilterOptions.push({
-      name: 'None',
-      value: '',
-      onClick: () => { this.changeUserFilter('') }
+      name: 'Any',
+      value: undefined,
+      onClick: () => { this.changeUserFilter(undefined) }
     })
 
     const typeFilterOptions = [{
@@ -138,11 +157,12 @@ export default class ProjectCommits extends Component {
         </SubSubHeader>
         <div className={ classes.innerContent }>
           <LoadingOverlay show={ isLoading } linear hideBg noOverlay />
-          { isLoaded
-          ? this.renderLoaded()
-          : null }
+          <Container>
+            { isLoaded
+            ? this.renderLoaded()
+            : null }
+          </Container>
         </div>
-
       </div>
     )
   }

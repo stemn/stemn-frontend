@@ -17,6 +17,12 @@ export default class ProjectTeam extends Component {
           <Row className="layout-row layout-wrap">
             { project.data.team.map((user) => {
               const userLinkParams = { userId: user._id }
+              const historyParams = {
+                projectId: project.data._id,
+              }
+              const historyQuery = {
+                user: user._id,
+              }
 
               return (
                 <Col key={ user._id } className="flex-xs-100 flex-gt-xs-50">
@@ -46,7 +52,9 @@ export default class ProjectTeam extends Component {
                       />
                     </div>
                     <div className={ classes.graph }>
-                      <HistoryGraph />
+                      <Link name="projectCommitsRoute" params={ historyParams } query={ historyQuery } className="layout-row">
+                        <HistoryGraph />
+                      </Link>
                     </div>
                   </div>
                 </Col>

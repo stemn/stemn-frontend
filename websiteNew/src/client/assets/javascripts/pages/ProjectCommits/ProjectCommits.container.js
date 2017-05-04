@@ -5,28 +5,31 @@ import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actio
 import ProjectCommits from './ProjectCommits'
 import { setFilter } from 'stemn-shared/misc/StringFilter/StringFilter.actions'
 import { createFilterString, getFilter } from 'stemn-shared/misc/StringFilter/StringFilter.utils'
+import { isEqual } from 'lodash'
 
-const filterModel = {
-  type: 'string',
-  user: 'string',
-  query: 'main',
-}
 
 const stateToProps = ({ projects, syncTimeline, stringFilter }, { params, location }) => {
   const page = location.query.page || 1
+  const projectId = params.stub
   const size = 30
 
-  const filterDefaults = {
-    type: 'all',
-    query: ''
+  // Setup the filter
+  const filterModel = {
+    type: 'string',
+    user: 'string',
+    query: 'main',
   }
-  const filter = stringFilter[params.stub] || getFilter(filterDefaults, filterModel, location.query)
+  const filterDefaults = { type: 'all' }
+  const filterCacheKey = `history-${projectId}`
+  const filter = stringFilter[filterCacheKey] || getFilter(filterDefaults, filterModel, location.query)
+  const filterIsDefault = isEqual(filterDefaults, filter.object)
+
   const timelineCacheKey = `${params.stub}-${filter.object.type}-${page}`
   const timelineQueryKey = `${params.stub}-${page}-${JSON.stringify(filter.object)}`
 
   return {
     project: projects.data[params.stub],
-    projectId: params.stub,
+    projectId,
     syncTimeline: syncTimeline[timelineCacheKey],
     timelineCacheKey,
     timelineQueryKey,
@@ -34,13 +37,16 @@ const stateToProps = ({ projects, syncTimeline, stringFilter }, { params, locati
     size,
     filter,
     filterModel,
-  };
+    filterCacheKey,
+    filterDefaults,
+    filterIsDefault,
+  }
 }
         
 const dispatchToProps = {
   fetchTimeline,
   setFilter,
-};
+}
 
 const fetchConfigs = [{
   hasChanged: 'timelineQueryKey',
@@ -57,7 +63,7 @@ const fetchConfigs = [{
       size: props.size,
     })
   }
-}];
+}]
 
 @connect(stateToProps, dispatchToProps)
 @fetchDataHoc(fetchConfigs)

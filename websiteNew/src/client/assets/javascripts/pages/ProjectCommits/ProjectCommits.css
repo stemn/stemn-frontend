@@ -24,6 +24,15 @@
   margin-top: 10px;
   margin-bottom: 20px;
 }
+
+.emptyPanel {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: white;
+  text-align: center;
+  padding: 60px 20px;
+  margin-bottom: 30px;
+}
+
 .commit {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 10px;
