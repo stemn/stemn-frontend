@@ -12,7 +12,6 @@ import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleI
 import MdMoreHoriz from 'react-icons/md/more-horiz';
 import pluralise from 'stemn-shared/utils/strings/pluralise'
 
-
 class TaskGroupsEdit extends Component {
   confirmDelete = (model, index) => {
     this.props.dispatch(
@@ -23,26 +22,37 @@ class TaskGroupsEdit extends Component {
       this.props.dispatch(actions.remove(model, index))
     })
   }
+  componentWillReceiveProps(props) {
+    this.onMount(props)
+  }
+  componentWillMount() {
+    this.onMount(this.props)
+  }
 
-  render() {
-    const { model, value, dispatch } = this.props;
-
+  onMount = (props) => {
+    const { model, value, dispatch } = props;
     // If it is empty, push on a label
-    if(value.length == 0){
+    if(value.length === 0){
       dispatch(actions.push(model, {
         _id: getUuid(),
         color: '',
         name: '',
+        tasks: [],
       }))
     }
     // Else, if the name of the last label exists, add another
-    else if(value[value.length-1].name.length >= 1){
+    else if (value[value.length-1].name.length >= 1) {
       dispatch(actions.push(model, {
         _id: getUuid(),
         color: '',
         name: '',
+        tasks: [],
       }))
     }
+  }
+
+  render() {
+    const { model, value, props } = this.props;
 
     return (
       <div>
@@ -51,7 +61,7 @@ class TaskGroupsEdit extends Component {
             <div className={classes.name + ' flex'}>
               <Input
                 model={`${model}[${index}].name`}
-                value={group.name}
+                value={ group.name }
                 className="dr-input"
                 type="text"
                 placeholder="Group Name"
@@ -65,7 +75,7 @@ class TaskGroupsEdit extends Component {
                 <MdMoreHoriz size="20px"/>
               </SimpleIconButton>
               <div className="PopoverMenu">
-                <a onClick={()=>this.confirmDelete(model, index)}>Remove Group</a>
+                <a onClick={ ()=>this.confirmDelete(model, index) }>Remove Group</a>
               </div>
             </Popover>
           </div>

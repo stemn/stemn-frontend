@@ -32,9 +32,9 @@ export default class Form extends Component {
   render() {
     const { children } = this.props
     return (
-      <form>
+      <div>
         { children }
-      </form>
+      </div>
     )
   }
 }
