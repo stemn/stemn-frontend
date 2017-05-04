@@ -95,19 +95,18 @@ export function getEvents({taskId}){
   }
 }
 
-export const updateBoard = ({ board }) => {
-  dispatch({
-    type: 'TASKS/UPDATE_BOARD',
-    payload: http({
-      method: 'PUT',
-      url: `/api/v1/boards/${board._id}`,
-      data: board
-    }),
-    meta: {
-      cacheKey: board._id
-    }
-  })
-}
+export const updateBoard = ({ board }) => ({
+  type: 'TASKS/UPDATE_BOARD',
+  payload: http({
+    method: 'PUT',
+    url: `/api/v1/boards/${board._id}`,
+    data: board
+  }),
+  meta: {
+    cacheKey: board._id
+  }
+})
+
 
 export const editBoard = ({ model, value }) => ({
   type: 'TASKS/EDIT_BOARD',

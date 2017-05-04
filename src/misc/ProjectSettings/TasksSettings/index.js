@@ -12,8 +12,22 @@ export default class TasksSettings extends Component {
     boardModel: PropTypes.string.isRequired,
     saveBoard: PropTypes.func.isRequired,
   }
+  saveBoard = () => {
+    const { board, boardModel, saveBoard } = this.props
+
+    // Get the new board data
+    // We filter out the empty tasks and groups
+    const newBoard = {
+      ...board.data,
+      groups: board.forms.groups.filter(item => item.name.length > 0 && item.tasks.length > 0),
+      labels: board.forms.labels.filter(item => item.name.length > 0 && item.color.length > 0),
+    }
+    saveBoard({
+      board: newBoard,
+    })
+  }
   render() {
-    const { boardModel, board, saveBoard } = this.props;
+    const { boardModel, board } = this.props;
     return(
       <div>
         <h3>Thread Groups</h3>
@@ -33,7 +47,7 @@ export default class TasksSettings extends Component {
           <div className="flex"></div>
           <ProgressButton
             className="primary"
-            onClick={ saveBoard }
+            onClick={ this.saveBoard }
             loading={ board.savePending }>
             Save
           </ProgressButton>
