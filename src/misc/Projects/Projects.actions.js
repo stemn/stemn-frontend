@@ -57,7 +57,7 @@ export const getProject = ({ projectId, size = 'lg', force }) => (dispatch, getS
   }
 }
 
-export const createProject = (project) => (dispatch, getSate) => dispatch({
+export const createProject = (project) => (dispatch, getState) => dispatch({
   type: 'PROJECTS/CREATE_PROJECT',
   payload: http({
     method: 'POST',
