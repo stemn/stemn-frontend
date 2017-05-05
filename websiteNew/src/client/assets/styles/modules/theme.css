@@ -35,8 +35,13 @@
 @value height-header: 50px;
 @value width-header-buttons: 100px;
 
+@value highlight-color: rgb(56, 161, 230);
+@value highlight-text-color: rgb(255, 255, 255);
+
 /*External*/
 @value linkedin: #1884bc;
 @value linkedin-dark: #166f9d;
 @value facebook: #3b5998;
 @value facebook-dark: #2d4579;
+
+

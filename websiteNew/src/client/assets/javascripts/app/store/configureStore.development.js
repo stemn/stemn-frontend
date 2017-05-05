@@ -10,6 +10,7 @@ import httpTransform from 'stemn-shared/redux/middleware/httpTransform/httpTrans
 import createLogger from 'redux-logger'
 import { routerMiddleware } from 'react-router-redux'
 import { browserHistory } from 'react-router'
+import toastsError from 'stemn-shared/misc/Toasts/ToastsError.middleware'
 
 
 // Other
@@ -29,6 +30,7 @@ const middlewares = [
   httpPackage,
   httpTransform,
   promise(),
+  toastsError,
   createLogger({collapsed: true}),
   routerMiddleware(browserHistory),
   require('redux-immutable-state-invariant')()
