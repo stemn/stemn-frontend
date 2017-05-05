@@ -5,6 +5,7 @@ import 'codemirror/mode/markdown/markdown'
 import 'codemirror/mode/stex/stex'
 import 'codemirror/addon/mode/multiplex'
 import 'codemirror/addon/display/placeholder'
+import 'codemirror/addon/selection/mark-selection'
 import EditorToolbar from 'stemn-shared/misc/Editor/EditorToolbar'
 import EditorMentions from 'stemn-shared/misc/Editor/EditorMentions'
 import codemirrorLib from 'codemirror'
@@ -65,6 +66,7 @@ export default class EditorNew extends Component {
       mode: 'markdownWithLatex',
       dragDrop: false,
       lineWrapping: true,
+      styleSelectedText: true,
       placeholder,
     }
 

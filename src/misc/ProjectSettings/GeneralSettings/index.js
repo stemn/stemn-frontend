@@ -33,7 +33,6 @@ export default class GeneralSettings extends Component {
               value={project.data.name}
               className="dr-input"
               type="text"
-              placeholder="Project Name"
             />
             <br />
             <h3>Summary</h3>
@@ -41,7 +40,6 @@ export default class GeneralSettings extends Component {
               model={`${entityModel}.data.summary`}
               value={project.data.summary}
               className="dr-input"
-              placeholder="Project Summary"
             />
             <br />
             <h3>Location</h3>
