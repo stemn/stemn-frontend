@@ -108,6 +108,7 @@
     "markdown-it-emoji": "1.3.0",
     "markdown-it-katex": "2.0.3",
     "moment": "2.18.1",
+    "moment-range": "3.0.3",
     "normalize.css": "6.0.0",
     "pdfjs-dist": "1.7.406",
     "raven-js": "3.6.1",

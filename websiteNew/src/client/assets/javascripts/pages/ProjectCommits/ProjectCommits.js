@@ -5,7 +5,7 @@ import moment from 'moment'
 import { get } from 'lodash'
 import { Container } from 'stemn-shared/misc/Layout'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
-import HistoryGraph from 'stemn-shared/misc/Graphs/HistoryGraph'
+import HistoryGraph from 'stemn-shared/misc/History/HistoryGraph'
 import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
 import SubSubHeader from 'modules/SubSubHeader'
@@ -69,7 +69,10 @@ export default class ProjectCommits extends Component {
       return (
         <div>
           <div className={ classes.graphPanel }>
-            <HistoryGraph />
+            <HistoryGraph
+              entityType="project"
+              entityId={ project.data._id }
+            />
           </div>
           <InfoPanel>
             <TimelineVertical

@@ -34,6 +34,7 @@ import fields           from 'stemn-shared/misc/Fields/Fields.reducer.js'
 import relatedFields    from 'stemn-shared/misc/RelatedFields/RelatedFields.reducer.js'
 import userSettings     from 'stemn-shared/misc/UserSettings/UserSettings.reducer.js'
 import stringFilter     from 'stemn-shared/misc/stringFilter/stringFilter.reducer.js'
+import history          from 'stemn-shared/misc/History/History.reducer.js'
 
 export default combineReducers({
   auth,
@@ -41,6 +42,7 @@ export default combineReducers({
   changes,
   codeSplitting,
   comments,
+  history,
   commits,
   fileCompare,
   fileList,
