@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ResponsiveContainer, AreaChart, Area, XAxis, CartesianGrid } from 'recharts'
+import { ResponsiveContainer, AreaChart, Area, XAxis, CartesianGrid, Tooltip } from 'recharts'
 import moment from 'moment'
 
 const demoData = [
@@ -16,12 +16,22 @@ export default class HistoryGraph extends Component {
   tickFormatter = (tick) => {
     return moment(tick).format('DD MMM')
   }
+  tooltipLabelFormatter = (date) => {
+    return moment(date).format('Do MMM YYYY')
+  }
   render() {
     const { data, loading, history } = this.props
 
+    const dataFormatted = data.map(item => ({
+      date: item.date,
+      Commits: item.counts ? item.counts.commit : undefined,
+      Revisions: item.counts ? item.counts.revision : undefined,
+      Tasks: item.counts ? item.counts.task : undefined,
+    }))
+
     return (
       <ResponsiveContainer width="100%" height={ 150 }>
-        <AreaChart data={ data }>
+        <AreaChart data={ dataFormatted }>
           <XAxis
             dataKey="date"
             fontSize="10px"
@@ -34,10 +44,30 @@ export default class HistoryGraph extends Component {
           <Area
             isAnimationActive={ false }
             type="monotone"
-            dataKey="count"
+            dataKey="Revisions"
             stackId="1"
             stroke="rgba(255, 255, 255, 0)"
             fill="rgb(68, 154, 211)"
+          />
+          <Area
+            isAnimationActive={ false }
+            type="monotone"
+            dataKey="Commits"
+            stackId="1"
+            stroke="rgba(255, 255, 255, 0)"
+            fill="rgba(68, 154, 211, 0.5)"
+          />
+          <Area
+            isAnimationActive={ false }
+            type="monotone"
+            dataKey="Tasks"
+            stackId="1"
+            stroke="rgba(255, 255, 255, 0)"
+            fill="rgba(68, 154, 211, 0.8)"
+          />
+          <Tooltip
+            labelFormatter={ this.tooltipLabelFormatter }
+            itemStyle= { { color: 'rgba(0, 0, 0, 0.5)', marginTop: '3px' } }
           />
         </AreaChart>
       </ResponsiveContainer>

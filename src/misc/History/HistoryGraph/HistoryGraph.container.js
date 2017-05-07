@@ -12,7 +12,7 @@ import { get } from 'lodash'
 const stateToProps = ({ history }, { entityType, entityId, parentType, parentId }) => {
   const historyCacheKey = `${entityType}-${entityId}-${parentType}-${parentId}`
   const to = moment()
-  const from = to.clone().subtract(30, 'days')
+  const from = to.clone().subtract(20, 'days')
 
   return {
     data: fillRange(from, to, 'date')(get(history, [historyCacheKey, 'data'], [])),
@@ -36,8 +36,8 @@ const fetchConfigs = [{
       parentType: props.parentType,
       parentId: props.parentId,
       cacheKey: props.historyCacheKey,
-      from: props.from,
-      to: props.to
+      from: props.from.format(),
+      to: props.to.format(),
     })
   },
 }]
