@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { ResponsiveContainer, AreaChart, Area, XAxis, CartesianGrid } from 'recharts'
+import moment from 'moment'
 
-const data = [
+const demoData = [
   { name: 'Page A', uv: 4000, pv: 2400, amt: 2400 },
   { name: 'Page B', uv: 3000, pv: 1398, amt: 2210 },
   { name: 'Page C', uv: 2000, pv: 9800, amt: 2290 },
@@ -12,14 +13,20 @@ const data = [
 ]
 
 export default class HistoryGraph extends Component {
+  tickFormatter = (tick) => {
+    return moment(tick).format('DD MMM')
+  }
   render() {
+    const { data, loading, history } = this.props
+
     return (
       <ResponsiveContainer width="100%" height={ 150 }>
         <AreaChart data={ data }>
           <XAxis
-            dataKey="name"
+            dataKey="date"
             fontSize="10px"
             stroke="rgba(0, 0, 0, 0.3)"
+            tickFormatter={ this.tickFormatter }
           />
           <CartesianGrid
             stroke="rgb(248, 248, 248)"
@@ -27,18 +34,10 @@ export default class HistoryGraph extends Component {
           <Area
             isAnimationActive={ false }
             type="monotone"
-            dataKey="uv"
+            dataKey="count"
             stackId="1"
             stroke="rgba(255, 255, 255, 0)"
             fill="rgb(68, 154, 211)"
-          />
-          <Area
-            isAnimationActive={ false }
-            type="monotone"
-            dataKey="pv"
-            stackId="1"
-            stroke="rgba(255, 255, 255, 0)"
-            fill="rgba(68, 154, 211, 0.5)"
           />
         </AreaChart>
       </ResponsiveContainer>
