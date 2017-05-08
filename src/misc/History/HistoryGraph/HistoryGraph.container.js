@@ -9,8 +9,8 @@ import { get } from 'lodash'
 //console.log(fillRange());
 
 
-const stateToProps = ({ history }, { entityType, entityId, parentType, parentId }) => {
-  const historyCacheKey = `${entityType}-${entityId}-${parentType}-${parentId}`
+const stateToProps = ({ history }, { entityType, entityId, parentType, parentId, type }) => {
+  const historyCacheKey = `${entityType}-${entityId}-${parentType}-${parentId}-${type}`
   const to = moment()
   const from = to.clone().subtract(20, 'days')
 
@@ -38,6 +38,7 @@ const fetchConfigs = [{
       cacheKey: props.historyCacheKey,
       from: props.from.format(),
       to: props.to.format(),
+      types: props.type ? [ props.type ] : undefined,
     })
   },
 }]
