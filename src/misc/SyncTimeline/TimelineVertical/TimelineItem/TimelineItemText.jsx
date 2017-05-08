@@ -28,6 +28,11 @@ const eventTextMap = {
       )
     }
   },
+  task: (item, type, entity) => {
+    return (
+      <span>Task</span>
+    )
+  },
   commit: (item, type, entity) => {
     const params = {
       projectId: item.data.project._id,

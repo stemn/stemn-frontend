@@ -140,6 +140,7 @@ export default class FileList extends Component {
               value={ fileList.query }
               model={ `fileList.${fileListCacheKey}.query` }
               className={ classes.search }
+              placeholder="Search Files"
             />
           : null }
 

@@ -14,8 +14,6 @@ class NotificationItem extends Component {
   render () {
     const { notification, markAsRead } = this.props
 
-    console.log(notification)
-
     const {
         _id: notificationId, type, read, timestamp,
         id1, name1, picture1, link1,

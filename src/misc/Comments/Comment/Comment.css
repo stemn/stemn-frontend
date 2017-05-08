@@ -23,8 +23,9 @@
   color: grey-3;
 }
 .commentContent{
-  padding: 20px;
-  padding-top: 0px;
+  margin: 20px;
+  margin-top: 0px;
+  overflow: hidden;
 }
 .commentFooter{
   padding: 6px 20px;
