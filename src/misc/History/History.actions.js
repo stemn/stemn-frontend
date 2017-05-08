@@ -19,7 +19,6 @@ export const getHistory = ({
       parentId,
       parentType,
       to,
-      transform: true,
       types,
     },
   },

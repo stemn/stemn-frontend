@@ -14,6 +14,8 @@ class NotificationItem extends Component {
   render () {
     const { notification, markAsRead } = this.props
 
+    console.log(notification)
+
     const {
         _id: notificationId, type, read, timestamp,
         id1, name1, picture1, link1,
@@ -34,11 +36,11 @@ class NotificationItem extends Component {
         </Link>
         <div className="flex">
           <div className="text-ellipsis">
-            <Link className={ classNames('link-primary') } name="userRoute" params={ { link1 } }>
+            <Link className={ classNames('link-primary') } to={ link1 }>
               { name1 }
             </Link>
             <span>&nbsp;{ getNotificationText(type) }</span>
-            <Link className={ classNames('link-primary') } name="userRoute" params={ { link2 } }>
+            <Link className={ classNames('link-primary') } to={ link2 }>
               &nbsp;{ name2 }
             </Link>
           </div>

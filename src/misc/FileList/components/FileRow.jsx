@@ -1,18 +1,16 @@
 import React from 'react';
 import moment from 'moment';
-
-// Styles
 import classNames from 'classnames';
 import classes from './FileRow.css'
-
 import bytes from 'stemn-shared/utils/filters/bytes.js';
 import FileIcon from './FileIcon'
 import Label from 'stemn-shared/misc/Label/Label.jsx'
 import Link from 'stemn-shared/misc/Router/Link';
+import Highlight from 'stemn-shared/misc/Autosuggest/Highlight'
 
 export default React.createClass({
   render() {
-    const { singleClick, doubleClick, isActive, file } = this.props;
+    const { singleClick, doubleClick, isActive, file, query } = this.props;
 
     const timeFromNow = moment(file.modified).fromNow();
 
@@ -20,7 +18,12 @@ export default React.createClass({
       <div className={classNames(classes.row, 'layout-row layout-align-start-center', {[classes.active]: isActive})} >
         <div className={classes.clickOverlay} onClick={()=>singleClick({file})} onDoubleClick={()=>doubleClick({file})}/>
         <FileIcon fileType={file.extension} type={file.type}/>
-        <div className="text-ellipsis flex">{file.name}</div>
+        <div className="text-ellipsis flex">
+          <Highlight
+            text={ file.name }
+            query={ query }
+          />
+        </div>
         { file.commit && file.commit.summary && file.commit._id
         ? <Link
             name='commitRoute'
