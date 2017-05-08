@@ -4,7 +4,7 @@ import classes from './ProjectOverview.css'
 import { projectRoute, fileRoute, projectFolderRoute } from 'route-actions'
 import moment from 'moment'
 import { has } from 'lodash'
-import FileList from 'stemn-shared/misc/FileList/FileList'
+import FileList from 'stemn-shared/misc/FileList'
 import Readme from 'stemn-shared/misc/Files/Readme/Readme.jsx'
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
@@ -141,7 +141,8 @@ export default class ProjectOverview extends Component {
               doubleClickFn={this.clickFileOrFolder}
               crumbClickFn={this.clickFileOrFolder}
               options={options}
-              crumbPopup={true}
+              crumbPopup
+              search
             />
             { files && files.entries
             ? <Readme

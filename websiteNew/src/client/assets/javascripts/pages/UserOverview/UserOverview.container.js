@@ -2,25 +2,34 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { get } from 'lodash'
-import { getCommitHistory } from 'stemn-shared/misc/Users/Users.actions'
+import { getHistory } from 'stemn-shared/misc/History/History.actions'
 import UserOverview from './UserOverview';
 
-const stateToProps = ({ users, projects, syncTimeline }, { params }) => ({
-  user: users[params.stub],
-  projects: projects.userProjects[params.stub] || {},
-  timeline: get(syncTimeline, [params.stub, 'data'], []),
-});
+const stateToProps = ({ users, projects, history, syncTimeline }, { params }) => {
+  const historyCacheKey = `users-${params.stub}`
+  return {
+    historyCacheKey,
+    history: history[historyCacheKey],
+    user: users[params.stub],
+    projects: projects.userProjects[params.stub] || {},
+    timeline: get(syncTimeline, [params.stub, 'data'], []),
+  }
+}
 
 const dispatchToProps = {
-  getCommitHistory
-};
+  getHistory,
+}
 
 const fetchConfigs = [{
-  hasChanged: 'params.stub',
+  hasChanged: 'historyCacheKey',
   onChange: (props) => {
-    props.getCommitHistory({ userId: props.params.stub })
+    props.getHistory({
+      entityType: 'user',
+      entityId: props.params.stub,
+      cacheKey: props.historyCacheKey,
+    })
   }
-}];
+}]
 
 @connect(stateToProps, dispatchToProps)
 @fetchDataHoc(fetchConfigs)

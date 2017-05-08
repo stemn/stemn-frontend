@@ -19,7 +19,7 @@ const stateToProps = ({ projects, syncTimeline, stringFilter }, { params, locati
     user: 'string',
     query: 'main',
   }
-  const filterDefaults = { type: 'all' }
+  const filterDefaults = { }
   const filterCacheKey = `history-${projectId}`
   const filter = stringFilter[filterCacheKey] || getFilter(filterDefaults, filterModel, location.query)
   const filterIsDefault = isEqual(filterDefaults, filter.object)
@@ -54,7 +54,7 @@ const fetchConfigs = [{
     props.fetchTimeline({
       entityType: 'project',
       entityId: props.projectId,
-      types: [ props.filter.object.type ],
+      types: props.filter.object.type ? [ props.filter.object.type ] : undefined,
       cacheKey: props.timelineCacheKey,
       criteria: {
         owner: props.filter.object.user,

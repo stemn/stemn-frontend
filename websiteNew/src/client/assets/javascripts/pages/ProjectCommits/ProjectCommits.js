@@ -70,8 +70,11 @@ export default class ProjectCommits extends Component {
         <div>
           <div className={ classes.graphPanel }>
             <HistoryGraph
-              entityType="project"
-              entityId={ project.data._id }
+              entityType={ filter.object.user ? 'user' : 'project' }
+              entityId={ filter.object.user ? filter.object.user : project.data._id }
+              type={ filter.object.type }
+              parentType={ filter.object.user ? 'project' : undefined }
+              parentId={ filter.object.user ? project.data._id : undefined }
             />
           </div>
           <InfoPanel>
@@ -116,9 +119,9 @@ export default class ProjectCommits extends Component {
     })
 
     const typeFilterOptions = [{
-      value: 'all',
+      value: undefined,
       name: 'All',
-      onClick: () => { this.changeTypeFilter('all') },
+      onClick: () => { this.changeTypeFilter(undefined) },
     }, {
       value: 'commits',
       name: 'Commits',
@@ -128,10 +131,14 @@ export default class ProjectCommits extends Component {
       name: 'Revisions',
       onClick: () => { this.changeTypeFilter('revisions') },
     }, {
-      value: 'task-complete',
-      name: 'Task Complete',
-      onClick: () => { this.changeTypeFilter('task-complete') },
-    }]
+      value: 'tasks',
+      name: 'Thread Created',
+      onClick: () => { this.changeTypeFilter('tasks') },
+    }, {
+      value: 'taskEvents',
+      name: 'Thread Events',
+      onClick: () => { this.changeTypeFilter('taskEvents') },
+    }, ]
 
     return (
       <div className={ classes.content }>
