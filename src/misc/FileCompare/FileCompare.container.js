@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux'
 import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
 import { websocketJoinFile, websocketLeaveFile } from 'stemn-shared/misc/Files/actions'
 import { toggle } from 'stemn-shared/misc/TogglePanel/TogglePanel.actions'
-import { initCompare, changeMode } from 'stemn-shared/misc/FileCompare/FileCompare.actions'
+import { initCompare, changeMode, select } from 'stemn-shared/misc/FileCompare/FileCompare.actions'
 
 
 const stateToProps = ({ syncTimeline, fileCompare }, { file }) => {
@@ -25,6 +25,7 @@ const dispatchToProps = {
   toggle,
   initCompare,
   changeMode,
+  select,
 }
 
 const fetchConfigs = [{
@@ -40,11 +41,11 @@ const fetchConfigs = [{
       file: props.file,
     })
   },
-},{
+}, {
   hasChanged: 'togglePanelCacheKey',
   onChange: (props) => {
-    if (props.collapseState) {
-      toggle({
+    if (props.isOpen) {
+      props.toggle({
         cacheKey: props.togglePanelCacheKey,
         value: true,
       })
@@ -55,3 +56,13 @@ const fetchConfigs = [{
 const withFetchData = fetchDataHoc(fetchConfigs)(FileCompare)
 const withRedux = connect(stateToProps, dispatchToProps)(withFetchData)
 export default withRedux
+
+
+//    // Join the File room
+//    nextProps.dispatch(websocketJoinFile({
+//      fileId: nextProps.file.data.fileId
+//    }))
+//    // Join the File room
+//    this.props.dispatch(websocketLeaveFile({
+//      fileId: this.props.file.data.fileId
+//    }))

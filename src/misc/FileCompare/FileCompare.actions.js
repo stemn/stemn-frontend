@@ -21,7 +21,9 @@ export const select = ({ file, mode, lastSelected, cacheKey }) => ({
   type: 'FILE_COMPARE/SELECT',
   payload: {
     file,
-    selectedKey: mode === 'single' || lastSelected === 2 ? 1 : 2,
+    selectedKey: mode === 'single' || lastSelected === 2
+      ? 1
+      : 2,
   },
   meta: {
     cacheKey,

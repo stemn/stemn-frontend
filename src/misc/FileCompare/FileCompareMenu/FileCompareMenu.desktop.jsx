@@ -130,7 +130,7 @@ export const Component = React.createClass({
           <SimpleIconButton title="Options">
             <MdMoreHoriz size="20px" />
           </SimpleIconButton>
-          <PopoverMenuList menu={this.menu()} />
+          <PopoverMenuList menu={ this.menu() } />
         </Popover>
       </div>
     );
