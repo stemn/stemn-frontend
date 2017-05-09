@@ -66,6 +66,7 @@
 
 .button:global(.primary){
   background: primary;
+  border: 1px solid primary;
   color: white;
 }
 .button:global(.primary):hover{

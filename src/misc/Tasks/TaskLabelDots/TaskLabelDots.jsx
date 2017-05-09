@@ -1,32 +1,40 @@
-// Component Core
 import React from 'react';
-
-// Styles
 import classNames from 'classnames';
 import classes from './TaskLabelDots.css';
-
 
 export default React.createClass({
   render() {
     // tag = true || false
-    const { labels, labelInfo, tag } = this.props;
+    const { labels, labelInfo, tag, oneline } = this.props
 
     return (
-      <span>
-        {labels && labelInfo ? labels.map(labelId => {
-          const info = labelInfo.find(label => label._id == labelId);
-          if(info){
+      <span className={ classNames({[classes.tagsOneline]: oneline }) }>
+        { labels && labelInfo
+          ? labels.map((labelId) => {
+          const info = labelInfo.find(label => label._id == labelId)
+          if (info) {
+            const tagStyle = {
+              color: info.color,
+              border: `1px solid ${info.color}`,
+            }
+            const tagBgStyle = {
+              background: info.color,
+            }
+
             return (
-              <span key={labelId}
-                className={classNames({[classes.tag] : tag}, {[classes.dot] : !tag})}
-                style={{background: info.color}}
-                title={!tag ? info.name : ''}>{tag ? <span>{info.name}</span> : null}</span>
+              <span
+                key={ labelId }
+                className={ classNames({[classes.tag] : tag}, {[classes.dot] : !tag}) }
+                style={ tagStyle }
+                title={ !tag ? info.name : '' }
+              >
+                { tag && info.name }
+                { tag && <span className={ classes.tagBg } style={ tagBgStyle }/> }
+              </span>
             )
-          }
-          else{
+          } else{
             return null // The label does not exist
           }
-
         }) : null}
       </span>
     )

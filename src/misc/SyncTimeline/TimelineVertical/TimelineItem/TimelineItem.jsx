@@ -26,9 +26,9 @@ export default class TimelineItem extends Component {
       : {}
 
     // If it is a comment, we use the comment component to display
-    if(item.event == 'comment'){
+    if (item.event === 'comment' && type === 'task'){
       return (
-        <Comment commentId={ item.comment } />
+        <Comment commentId={ item.data.comment } />
       )
     }
     // Else, we add a text event

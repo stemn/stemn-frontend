@@ -34,11 +34,10 @@ export default class TaskRow extends Component {
                 params={ taskRouteParams }
               >
                 { task.data.name }
+                { task.data.taskNumber && <span className={ classes.taskNumber }>&nbsp;#T{ task.data.taskNumber }</span> }
               </Link>
             </div>
             <div className={ classes.meta }>
-              #T23
-              <span className="text-interpunct" />
               { group.name && <span className="text-grey-2">{ group.name }</span> }
               { task.data.due && <span className="text-interpunct" /> }
               { task.data.due && <DueDate due={ task.data.due } /> }
@@ -48,6 +47,7 @@ export default class TaskRow extends Component {
             <TaskLabelDots
               labels={ task.data.labels }
               labelInfo={ board.data.labels }
+              oneline
               tag
             />
           </div>
@@ -57,10 +57,6 @@ export default class TaskRow extends Component {
               limit={ 3 }
               shape="square"
             />
-          </div>
-          <MdChatBubble className={ classes.commentsIcon } />
-          <div className={ classes.commentsNumber }>
-            { task.data.numComments || 0 }
           </div>
         </div>
       )
@@ -85,3 +81,8 @@ export default class TaskRow extends Component {
     )
   }
 }
+
+//          <MdChatBubble className={ classes.commentsIcon } />
+//          <div className={ classes.commentsNumber }>
+//            { task.data.numComments || 0 }
+//          </div>

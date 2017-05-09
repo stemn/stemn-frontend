@@ -18,7 +18,7 @@ const eventTextMap = {
         <span>
           { item.data.revisionNumber
           ? 'created this file'
-          : `added revision number ${item.data.revisionNumber}`}
+          : `added revision number ${item.data.revisionNumber}` }
         </span>
       )
     } else {
@@ -26,15 +26,22 @@ const eventTextMap = {
         <span>
           { item.data.revisionNumber
           ? 'created'
-          : `added revision ${item.data.revisionNumber} to`}
+          : `added revision ${item.data.revisionNumber} to` }
           <Link name="fileRoute" params={ fileRouteParams }>{ item.data.name }</Link>
         </span>
       )
     }
   },
   task: (item, type, entity) => {
+    const params = {
+      projectId: item.data.project,
+      taskId: item._id
+    }
     return (
-      <span>Task</span>
+      <span>
+        added a new thread:
+        <Link name="taskRoute" params={ params }>{ item.data.name }</Link>
+      </span>
     )
   },
   commit: (item, type, entity) => {
@@ -130,7 +137,7 @@ const eventTextMap = {
         </span>
       )
     } else {
-      return <span>Invalid event type</span>
+      return <span>Changed Labels</span>
     }
   },
 }
