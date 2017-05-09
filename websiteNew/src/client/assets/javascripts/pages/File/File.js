@@ -22,16 +22,11 @@ export default class File extends Component {
     const { fileId, revisionId } = file;
     const { pushRoute } = this.props;
     const projectId = this.props.file.data.project._id;
-
     if (file.type == 'file') {
       pushRoute(fileRoute({fileId, projectId, revisionId}));
     } else if (projectId){
       pushRoute(projectRoute({projectId}));
     }
-  }
-  clickTag = (task) => {
-    this.props.dispatch(ModalActions.showModal({modalType: 'TASK', limit: 1, modalProps: { taskId: task._id }}));
-    this.props.dispatch(ElectronWindowsActions.show('main'))
   }
   onSelect = (file) => {
     const { select, cacheKey, compare: { mode, lastSelected } } = this.props

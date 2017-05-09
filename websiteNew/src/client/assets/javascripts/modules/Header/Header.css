@@ -26,3 +26,17 @@
   top: 0;
   right: 2px;
 }
+.links {
+  margin-left: 10px;
+}
+.link {
+  padding: 5px 0;
+  margin: 0 8px;
+  border-bottom: 2px solid transparent;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+.link:global(.active) {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}

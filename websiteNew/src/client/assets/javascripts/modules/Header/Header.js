@@ -69,6 +69,15 @@ class Header extends Component {
   }
   render() {
     const { auth } = this.props
+
+    const items = [{
+      route: 'homeRoute',
+      label: 'Dashboard',
+    },{
+      route: 'exploreRoute',
+      label: 'Explore',
+    }]
+
     return (
       <header className={ classNames(classes.header, 'layout-row', 'layout-align-start-center') }>
         <Container className="layout-row layout-align-start-center">
@@ -76,6 +85,11 @@ class Header extends Component {
             <img src={ logo } alt="" />
           </Link>
           <SiteSearch />
+          <div className={ classes.links }>
+            { items.map(item => (
+              <Link activeClassName="active" className={ classes.link } name={ item.route }>{ item.label }</Link>
+            ))}
+          </div>
           <div className="flex" />
           { auth.user._id
           ? this.isLoggedIn()
