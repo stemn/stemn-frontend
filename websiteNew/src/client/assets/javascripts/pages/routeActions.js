@@ -1,10 +1,14 @@
+import qs from 'querystring'
 export const commitRoute          = ({ commitId, projectId }) => `/project/${projectId}/history/${commitId}`
 export const contactRoute         = ()                        => `/contact`
 export const downloadRoute        = ()                        => `/download`
 export const exploreRoute         = ()                        => `/explore`
 export const flowRoute            = ()                        => `/flow`
 export const fieldRoute           = ({ fieldId })             => `/fields/${fieldId}`
-export const fileRoute            = ({ projectId, fileId })   => `/files/${projectId}/${fileId}`
+export const fileRoute            = ({ projectId, fileId, selected1 }) => {
+  const query = qs.stringify({ selected1 })
+  return `/files/${projectId}/${fileId}${query && `?${query}`}`
+}
 export const homeRoute            = ()                        => `/`
 export const landingRoute         = ()                        => `/landing`
 export const loginRoute           = ()                        => `/login`

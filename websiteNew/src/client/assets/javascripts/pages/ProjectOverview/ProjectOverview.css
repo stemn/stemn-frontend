@@ -21,6 +21,7 @@
   background-repeat: no-repeat;
   background-position: center center;
   background-color: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .infoBoxes {

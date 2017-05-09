@@ -19,7 +19,7 @@ const stateToProps = ({ projects, syncTimeline, stringFilter }, { params, locati
     user: 'string',
     query: 'main',
   }
-  const filterDefaults = { }
+  const filterDefaults = {}
   const filterCacheKey = `history-${projectId}`
   const filter = stringFilter[filterCacheKey] || getFilter(filterDefaults, filterModel, location.query)
   const filterIsDefault = isEqual(filterDefaults, filter.object)
@@ -42,6 +42,8 @@ const stateToProps = ({ projects, syncTimeline, stringFilter }, { params, locati
     filterIsDefault,
   }
 }
+
+
         
 const dispatchToProps = {
   fetchTimeline,

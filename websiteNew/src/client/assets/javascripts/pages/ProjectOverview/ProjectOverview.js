@@ -134,13 +134,13 @@ export default class ProjectOverview extends Component {
             ? imageInfoSection 
             : null }
             <FileList
-              className={classNames(classes.files)}
-              projectId={project.data._id}
-              path={path || ''}
-              singleClickFn={this.clickFileOrFolder}
-              doubleClickFn={this.clickFileOrFolder}
-              crumbClickFn={this.clickFileOrFolder}
-              options={options}
+              className={ classes.files }
+              projectId={ project.data._id }
+              path={ path || '' }
+              singleClickFn={ this.clickFileOrFolder }
+              doubleClickFn={ this.clickFileOrFolder }
+              crumbClickFn={ this.clickFileOrFolder }
+              options={ options }
               crumbPopup
               search
             />
