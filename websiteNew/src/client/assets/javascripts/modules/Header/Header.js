@@ -71,9 +71,6 @@ class Header extends Component {
     const { auth } = this.props
 
     const items = [{
-      route: 'homeRoute',
-      label: 'Dashboard',
-    },{
       route: 'exploreRoute',
       label: 'Explore',
     }]

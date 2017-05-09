@@ -1,24 +1,104 @@
 import React, { Component, PropTypes } from 'react'
-
-import LandingLayout from 'layout/LandingLayout'
+import StandardLayout from 'layout/StandardLayout'
 import HeroBanner from 'modules/HeroBanner'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
-import { Container } from 'stemn-shared/misc/Layout'
-
+import { Container, Row, Col } from 'stemn-shared/misc/Layout'
+import SiteSearchResults from 'stemn-shared/misc/Search/SiteSearchResults'
 import classes from './Explore.scss'
+import SubHeader from 'modules/SubHeader'
+import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 
 export default class Explore extends Component {
+  orderOptions = [{
+    value: 'views',
+    name: 'Views',
+    onClick: () => this.updateOrder('views'),
+  }, {
+    value: 'numComments',
+    name: 'Comments',
+    onClick: () => this.updateOrder('numComments'),
+  }, {
+    value: 'follows',
+    name: 'Followers',
+    onClick: () => this.updateOrder('follows'),
+  }, {
+    value: undefined,
+    name: 'Updated',
+    onClick: () => this.updateOrder(undefined),
+  }]
+  updateOrder = sort => this.props.replace({
+    pathname: window.location.pathname,
+    query: {
+      sort,
+    },
+  })
+  connectedOptions = [{
+    value: undefined,
+    name: 'Any',
+    onClick: () => this.updateConnected(undefined),
+  }, {
+    value: 'connected',
+    name: 'Connected',
+    onClick: () => this.updateConnected('connected'),
+  }, {
+    value: 'disconnected',
+    name: 'Disconnected',
+    onClick: () => this.updateConnected('disconnected'),
+  }]
+  updateConnected = store => this.props.replace({
+    pathname: window.location.pathname,
+    query: {
+      store,
+    },
+  })
   render() {
+    const { location } = this.props
+    const criteria = location.query.store === 'connected'
+      ? { 'remote.connected': true }
+      : { }
+
     return (
-      <LandingLayout>
-        <HeroBanner>
-          <h1>Download Stemn Desktop</h1>
-          <h3>Collaboration tools for Engineers</h3>
-        </HeroBanner>
-        <Container>
-          Some content
+      <StandardLayout>
+        <SubHeader title="Explore" noResponsive>
+          <div className="layout-row layout-align-center-center">
+            <PopoverDropdown
+              style={ { margin: '0 10px' } }
+              value={ location.query.store }
+              options={ this.connectedOptions }
+            >
+              File Store:&nbsp;
+            </PopoverDropdown>
+            <PopoverDropdown
+              value={ location.query.sort }
+              options={ this.orderOptions }
+            >
+              Order By:&nbsp;
+            </PopoverDropdown>
+          </div>
+        </SubHeader>
+        <Container className={ classes.content }>
+          <Row className="layout-xs-col layout-gt-xs-row">
+            <Col className="flex-gt-xs-70">
+              <SiteSearchResults
+                type="project"
+                page={ parseInt(location.query.page) }
+                size={ 30 }
+                sort={ location.query.sort || 'updated' }
+                criteria={ criteria }
+              />
+            </Col>
+            <Col className="flex-30">
+              <SiteSearchResults
+                display="tag"
+                type="field"
+                page={ parseInt(location.query.page) }
+                size={ 20 }
+                sort={ location.query.sort || 'updated' }
+              />
+            </Col>
+          </Row>
         </Container>
-      </LandingLayout>
+      </StandardLayout>
     )
   }
 }
