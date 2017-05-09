@@ -69,7 +69,7 @@ export const Component = React.createClass({
             params={ {
               projectId: file1.project._id,
               fileId: file1.fileId,
-              selected1: file1.revisionId,
+              revisionId: file1.revisionId,
             } }
           >
             <MdOpenInNew size={ 23 } />

@@ -15,7 +15,11 @@ const eventTextMap = {
     }
     if (type === 'file') {
       return (
-        <span>modified this file. </span>
+        <span>
+          { item.data.revisionNumber
+          ? 'created this file'
+          : `added revision number ${item.data.revisionNumber}`}
+        </span>
       )
     } else {
       return (

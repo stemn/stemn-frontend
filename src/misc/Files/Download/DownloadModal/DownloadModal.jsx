@@ -30,7 +30,7 @@ export const DownloadModal = React.createClass({
       })
     }
     // If this is remote file
-    else{
+    else {
       nextProps.syncTimelineActions.fetchTimeline({
         entityType : 'file',
         entityId   : nextProps.file.fileId,
@@ -60,7 +60,7 @@ export const DownloadModal = React.createClass({
               <div style={{width: '70px'}}>Version {revision.data.revisionNumber}</div>
               <div className="flex text-grey-3">{revision.timestamp ? moment(revision.timestamp).fromNow() : null}</div>
               {index == 0 ? <Label style={{marginRight: '10px'}}>Latest Version</Label> : null}
-              <DownloadFile file={revision.data}>Download</DownloadFile>
+              <DownloadFile file={ revision.data }>Download</DownloadFile>
             </div>
           ))}
         </div>
