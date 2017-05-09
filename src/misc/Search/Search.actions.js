@@ -25,7 +25,7 @@ export const search = ({ entityType, value, size, page, parentType, parentId, cr
   },
   throttle: {
     time: 500,
-    endpoint: 'SEARCH/SEARCH'
+    endpoint: `SEARCH/${entityType}`
   },
 })
 
