@@ -13,7 +13,7 @@ const stateToProps = ({ syncTimeline, fileCompare }, { file }) => {
   const syncTimelineCacheKey = `${file.data.fileId}`
   const togglePanelCacheKey = `${file.data.fileId}-${file.data.revisionId}`
   return {
-    timeline: syncTimeline[syncTimelineCacheKey],
+//    timeline: syncTimeline[syncTimelineCacheKey],
     compare: get(fileCompare, syncTimelineCacheKey, {}),
     syncTimelineCacheKey,
     togglePanelCacheKey,
@@ -31,11 +31,11 @@ const dispatchToProps = {
 const fetchConfigs = [{
   hasChanged: 'syncTimelineCacheKey',
   onChange: (props) => {
-    props.fetchTimeline({
-      entityType: 'file',
-      entityId: props.file.data.fileId,
-      cacheKey: props.syncTimelineCacheKey,
-    })
+//    props.fetchTimeline({
+//      entityType: 'file',
+//      entityId: props.file.data.fileId,
+//      cacheKey: props.syncTimelineCacheKey,
+//    })
     props.initCompare({
       cacheKey: props.syncTimelineCacheKey,
       file: props.file,

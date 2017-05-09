@@ -1,4 +1,3 @@
-
 import { connect } from 'react-redux'
 import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry'
 import { actions } from 'react-redux-form'

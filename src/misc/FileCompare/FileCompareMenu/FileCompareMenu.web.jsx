@@ -11,9 +11,28 @@ import { getCompareModes, getCompareIcon } from '../FileCompare.utils.js'
 import Popover from 'stemn-shared/misc/Popover'
 import MdMoreHoriz from 'react-icons/md/more-horiz'
 import MdOpenInNew from 'react-icons/md/open-in-new'
-
+import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList'
+import { showModal } from 'stemn-shared/misc/Modal/Modal.actions.js'
+import downloadModalName from 'stemn-shared/misc/Files/Download/DownloadModal'
 
 export const Component = React.createClass({
+  renderMenu() {
+    const { file1, revisions, dispatch } = this.props;
+    const downloadFile = {
+      label: 'Download File',
+      onClick: () => {
+        dispatch(showModal({
+          modalType: downloadModalName,
+          modalProps: {
+            revisions,
+            file: file1,
+          },
+          scope: 'local',
+        }))
+      },
+    }
+    return [ downloadFile ]
+  },
   render(){
     const { enablePreview, mode, changeMode, revisions, file1, file2, dispatch } = this.props;
 
@@ -27,7 +46,7 @@ export const Component = React.createClass({
     return (
       <div className="layout-row layout-align-start-center">
         { hasRevisions &&
-          <Popover preferPlace="below">
+          <Popover preferPlace="below" offset={ 9 }>
             <SimpleIconButton title="Compare">
               <CompareIcon size={ 20 } />
             </SimpleIconButton>
@@ -55,6 +74,12 @@ export const Component = React.createClass({
           >
             <MdOpenInNew size={ 23 } />
           </SimpleIconButton> }
+          <Popover preferPlace="below" offset={ 9 }>
+            <SimpleIconButton title="Options">
+              <MdMoreHoriz size="20px" />
+            </SimpleIconButton>
+            <PopoverMenuList menu={ this.renderMenu() } />
+          </Popover>
       </div>
     )
   }

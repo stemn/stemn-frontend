@@ -31,7 +31,7 @@ export default class HistoryGraph extends Component {
     }))
 
     return (
-      <div className="rel-box" style={{width: '100%', height: '100%'}}>
+      <div className="rel-box" style={{width: '100%', height: '100%', marginBottom: '-10px'}}>
         <LoadingOverlay show={ loading } size="sm" hideBg />
         <ResponsiveContainer width="100%" height={ 150 }>
           <AreaChart data={ dataFormatted }>

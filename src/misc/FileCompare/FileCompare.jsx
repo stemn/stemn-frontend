@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import classNames from 'classnames'
 import classes from './FileCompare.css'
-import { orderItemsByTime } from 'stemn-shared/misc/FileCompare/FileCompare.utils.js'
+import { orderItemsByTime, isSelected } from 'stemn-shared/misc/FileCompare/FileCompare.utils.js'
 import TogglePanel from 'stemn-shared/misc/TogglePanel/TogglePanel.jsx'
 import DragResize from 'stemn-shared/misc/DragResize/DragResize.jsx'
 import FileCompareMenu from 'stemn-shared/misc/FileCompare/FileCompareMenu'
@@ -10,6 +10,13 @@ import Timeline from 'stemn-shared/misc/Timeline/Timeline.jsx'
 import { orderBy, has, get } from 'lodash'
 
 export default class FileCompare extends Component {
+  static propTypes = {
+    className: PropTypes.string,
+    project: PropTypes.object.isRequired,
+    file: PropTypes.object.isRequired,
+    isOpen: PropTypes.bool,                           // Is it open ( to be used with collapse )
+    type: PropTypes.oneOf([ 'collapse', undefined ]),
+  }
   onSelect = (file) => {
     const { select, syncTimelineCacheKey, compare: { mode, lastSelected } } = this.props
     select({
@@ -28,21 +35,18 @@ export default class FileCompare extends Component {
   }
   isSelected = (item) => {
     const { compare: { selected1, selected2, mode } } = this.props
-    const isSelected1 = get(selected1, 'data.revisionId')
-      ? item.data.revisionId === selected1.data.revisionId
-      : false
-    const isSelected2 = get(selected2, 'data.revisionId')
-      ? item.data.revisionId === selected2.data.revisionId
-      : false
-    return mode === 'single'
-      ? isSelected1
-      : isSelected1 || isSelected2
+    return isSelected({
+      item,
+      selected1,
+      selected2,
+      mode,
+    })
   }
   render() {
-    const { compare: { mode, selected1, selected2 }, file, project, togglePanelCacheKey, type, className, timeline } = this.props
+    const { compare: { mode, selected1, selected2 }, file, project, togglePanelCacheKey, type, className } = this.props
     const items = orderItemsByTime(mode, selected1, selected2)
-    const file1 = items[0] ? items[0].data : undefined
-    const file2 = items[1] ? items[1].data : undefined
+    const file1 = get(items, [0, 'data' ])
+    const file2 = get(items, [1, 'data' ])
 
     const collapseTemplate = () => {
       return (
@@ -115,7 +119,7 @@ export default class FileCompare extends Component {
             size="sm"
             onSelect={ this.onSelect }
             isSelected={ this.isSelected }
-            items={ syncTimeline }
+            items={ file.revisions }
             preferPlace="above"
           />
         </div>
