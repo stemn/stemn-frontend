@@ -24,7 +24,7 @@ export default class Form extends Component {
   static propTypes = {
     load: PropTypes.func.isRequired,
     model: PropTypes.string.isRequired,
-    value: PropTypes.object.isRequired,
+    value: PropTypes.any.isRequired,
   }
   componentWillMount() { 
     this.props.load(this.props.model, this.props.value);

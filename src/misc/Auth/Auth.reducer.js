@@ -20,6 +20,9 @@ const initialState = {
     firstname: '',
     lastname: '',
   },
+  forms: {
+    // Some forms for temp data
+  },
   background: Math.floor(Math.random() * numBackgrounds) + 1 // We init a random number between 1 and 8 to use as the background
 }
 
@@ -91,6 +94,10 @@ const mainReducer = (state, action) => {
     case 'AUTH/REGISTER_REJECTED':
       return {...state,
         authLoading: false,
+      }
+    case 'AUTH/UPDATE_USER':
+      return {...state,
+        user: action.payload.user,
       }
 
     case 'AUTH/NEXT_BACKGROUND':

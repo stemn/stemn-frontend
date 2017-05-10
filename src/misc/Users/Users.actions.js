@@ -1,4 +1,5 @@
 import { shouldDownload } from '../../redux/utils'
+import { updateUser } from 'stemn-shared/misc/Auth/Auth.actions'
 
 const fields = {
   sm: ['name', 'picture', 'stub'],
@@ -34,15 +35,24 @@ export const getUser = ({ userId, size = 'lg', force }) => (dispatch, getState) 
   }
 }
 
-export const saveUser = ({ user }) => ({
-  type: 'USERS/SAVE_USER',
-  http: true,
-  payload: {
-    method: 'PUT',
-    url: `/api/v1/users/${user._id}`,
-    data: user
-  },
-  meta: {
-    userId: user._id
-  }
-})
+export const saveUser = ({ user }) => (dispatch, getState) => {
+  dispatch({
+    type: 'USERS/SAVE_USER',
+    http: true,
+    payload: {
+      method: 'PUT',
+      url: `/api/v1/users/${user._id}`,
+      data: user,
+    },
+    meta: {
+      userId: user._id,
+    },
+  }).then((response) => {
+    const currentUserId = getState().auth.user._id
+    // If the user we are updating is the current user,
+    // we must run updateUser to update the user details in auth.
+    if (user._id  === currentUserId) {
+      dispatch(updateUser({ user: response.value.data }))
+    }
+  })
+}
