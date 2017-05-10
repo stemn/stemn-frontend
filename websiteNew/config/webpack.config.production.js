@@ -3,6 +3,7 @@ const merge = require('webpack-merge')
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const config = require('./webpack.config.base')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const GLOBALS = {
   'process.env': {
@@ -49,6 +50,15 @@ module.exports = merge(config, {
       filename: 'css/app.css',
       allChunks: true,
     }),
+    new CopyWebpackPlugin([
+      {
+        from: path.join(__dirname, '../src/client/assets/images'),
+        to: 'images',
+      }, {
+        from: path.join(__dirname, '../src/client/assets/static'),
+        to: 'static',
+      },
+    ]),
   ],
   module: {
     noParse: /\.min\.js$/,
@@ -84,7 +94,7 @@ module.exports = merge(config, {
               query: {
                 modules: true,
                 importLoaders: 1,
-                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                localIdentName: '[name]_[local]-[hash:base64:5]',
               },
             },
             'postcss',

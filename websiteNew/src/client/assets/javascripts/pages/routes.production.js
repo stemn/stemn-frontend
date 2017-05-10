@@ -20,14 +20,20 @@ import NotFoundView                           from 'pages/NotFound'
 // Routes which are aync in prod
 const getDownload                              = (loc, cb) => getRoute(System.import('pages/Download'), cb)
 const getExplore                               = (loc, cb) => getRoute(System.import('pages/Explore'), cb)
-const getFeatures                              = (loc, cb) => getRoute(System.import('pages/Features'), cb)
+const getField                                 = (loc, cb) => getRoute(System.import('pages/Field'), cb)
+const getFieldOverview                         = (loc, cb) => getRoute(System.import('pages/FieldOverview'), cb)
 const getFile                                  = (loc, cb) => getRoute(System.import('pages/File'), cb)
+const getFlow                                  = (loc, cb) => getRoute(System.import('pages/Flow'), cb)
 const getHome                                  = (loc, cb) => getRoute(System.import('pages/Home'), cb)
 const getLanding                               = (loc, cb) => getRoute(System.import('pages/Landing'), cb)
 const getLogin                                 = (loc, cb) => getRoute(System.import('pages/Login'), cb)
 const getNotifications                         = (loc, cb) => getRoute(System.import('pages/Notifications'), cb)
 const getNotificationsAll                      = (loc, cb) => getRoute(System.import('pages/NotificationsAll'), cb)
 const getNotificationsUnread                   = (loc, cb) => getRoute(System.import('pages/NotificationsUnread'), cb)
+const getOnboarding                            = (loc, cb) => getRoute(System.import('pages/Onboarding'), cb)
+const getOnboardingAbout                       = (loc, cb) => getRoute(System.import('pages/OnboardingAbout'), cb)
+const getOnboardingDownload                    = (loc, cb) => getRoute(System.import('pages/OnboardingDownload'), cb)
+const getOnboardingSync                        = (loc, cb) => getRoute(System.import('pages/OnboardingSync'), cb)
 const getOpenSource                            = (loc, cb) => getRoute(System.import('pages/OpenSource'), cb)
 const getPricing                               = (loc, cb) => getRoute(System.import('pages/Pricing'), cb)
 const getPrivacy                               = (loc, cb) => getRoute(System.import('pages/Privacy'), cb)
@@ -37,18 +43,22 @@ const getProjectCommits                        = (loc, cb) => getRoute(System.im
 const getProjectOverview                       = (loc, cb) => getRoute(System.import('pages/ProjectOverview'), cb)
 const getProjectSettings                       = (loc, cb) => getRoute(System.import('pages/ProjectSettings'), cb)
 const getProjectSettingsGeneral                = (loc, cb) => getRoute(System.import('pages/ProjectSettingsGeneral'), cb)
+const getProjectSettingsPermissions            = (loc, cb) => getRoute(System.import('pages/ProjectSettingsPermissions'), cb)
 const getProjectSettingsTags                   = (loc, cb) => getRoute(System.import('pages/ProjectSettingsTags'), cb)
 const getProjectSettingsTasks                  = (loc, cb) => getRoute(System.import('pages/ProjectSettingsTasks'), cb)
 const getProjectSettingsTeam                   = (loc, cb) => getRoute(System.import('pages/ProjectSettingsTeam'), cb)
 const getProjectTask                           = (loc, cb) => getRoute(System.import('pages/ProjectTask'), cb)
 const getProjectTasks                          = (loc, cb) => getRoute(System.import('pages/ProjectTasks'), cb)
+const getProjectTeam                           = (loc, cb) => getRoute(System.import('pages/ProjectTeam'), cb)
 const getRegister                              = (loc, cb) => getRoute(System.import('pages/Register'), cb)
+const getSearch                                = (loc, cb) => getRoute(System.import('pages/Search'), cb)
 const getSecurity                              = (loc, cb) => getRoute(System.import('pages/Security'), cb)
 const getSettings                              = (loc, cb) => getRoute(System.import('pages/Settings'), cb)
 const getSettingsAccount                       = (loc, cb) => getRoute(System.import('pages/SettingsAccount'), cb)
 const getSettingsBilling                       = (loc, cb) => getRoute(System.import('pages/SettingsBilling'), cb)
 const getSettingsEmails                        = (loc, cb) => getRoute(System.import('pages/SettingsEmails'), cb)
 const getSettingsProfile                       = (loc, cb) => getRoute(System.import('pages/SettingsProfile'), cb)
+const getSettingsProfileDetails                = (loc, cb) => getRoute(System.import('pages/SettingsProfileDetails'), cb)
 const getSettingsProjects                      = (loc, cb) => getRoute(System.import('pages/SettingsProjects'), cb)
 const getTerms                                 = (loc, cb) => getRoute(System.import('pages/Terms'), cb)
 const getUser                                  = (loc, cb) => getRoute(System.import('pages/User'), cb)
@@ -62,15 +72,21 @@ const getUserStars                             = (loc, cb) => getRoute(System.im
 export default (
   <Route                                       component={ AppRoot }>
     <Route                                     component={ AppAuthed }>
+      <Route path="onboarding"                 getComponent={ getOnboarding }>
+        <IndexRoute                            getComponent={ getOnboardingAbout } />
+        <Route path="sync"                     getComponent={ getOnboardingSync } />
+        <Route path="download"                 getComponent={ getOnboardingDownload } />
+      </Route>
       <Route path="settings"                   getComponent={ getSettings }>
         <IndexRoute                            getComponent={ getSettingsProfile } />
+        <Route path="details"                  getComponent={ getSettingsProfileDetails } />
         <Route path="account"                  getComponent={ getSettingsAccount } />
         <Route path="billing"                  getComponent={ getSettingsBilling } />
         <Route path="emails"                   getComponent={ getSettingsEmails } />
         <Route path="projects"                 getComponent={ getSettingsProjects } />
       </Route>
       <Route path="notifications"              getComponent={ getNotifications }>
-        <IndexRoute                            getComponent={ getNotifications } />
+        <IndexRoute                            getComponent={ getNotificationsUnread } />
         <Route path="unread"                   getComponent={ getNotificationsUnread } />
         <Route path="all"                      getComponent={ getNotificationsAll } />
       </Route>
@@ -80,26 +96,33 @@ export default (
       <Route path="register"                   getComponent={ getRegister } />
     </Route>
     <Route path="/"                            getComponent={ getHome } />
+    <Route path="/fields/:fieldId"             getComponent={ getField }>
+      <IndexRoute                              getComponent={ getFieldOverview } />
+    </Route>
     <Route path="/download"                    getComponent={ getDownload } />
     <Route path="/explore"                     getComponent={ getExplore } />
-    <Route path="/features"                    getComponent={ getFeatures } />
+    <Route path="/flow"                        getComponent={ getFlow } />
+    <Route path="/files/:projectId/:fileId"    getComponent={ getFile } />
     <Route path="/landing"                     getComponent={ getLanding } />
     <Route path="/open-source"                 getComponent={ getOpenSource } />
     <Route path="/pricing"                     getComponent={ getPricing } />
     <Route path="/privacy"                     getComponent={ getPrivacy } />
+    <Route path="/search"                      getComponent={ getSearch } />
     <Route path="/security"                    getComponent={ getSecurity } />
     <Route path="/terms"                       getComponent={ getTerms } />
-    <Route path="/files/:projectId/:fileId"    getComponent={ getFile } />
     <Route path="project/:stub"                getComponent={ getProject }>
       <IndexRoute                              getComponent={ getProjectOverview } />
+      <Route path="team"                       getComponent={ getProjectTeam } />
       <Route path="files/:path"                getComponent={ getProjectOverview } />
-      <Route path="tasks"                      getComponent={ getProjectTasks } />
-      <Route path="tasks/:taskId"              getComponent={ getProjectTask } />
-      <Route path="commits"                    getComponent={ getProjectCommits } />
-      <Route path="commits/:commitId"          getComponent={ getProjectCommit } />
+      <Route path="threads"                    getComponent={ getProjectTasks } />
+      <Route path="threads/:taskId"            getComponent={ getProjectTask } />
+      <Route path="threads/:taskId/edit"       getComponent={ getProjectTask } />
+      <Route path="history"                    getComponent={ getProjectCommits } />
+      <Route path="history/:commitId"          getComponent={ getProjectCommit } />
       <Route path="settings"                   getComponent={ getProjectSettings }>
         <IndexRoute                            getComponent={ getProjectSettingsGeneral } />
-        <Route path="tasks"                    getComponent={ getProjectSettingsTasks } />
+        <Route path="permissions"              getComponent={ getProjectSettingsPermissions } />
+        <Route path="threads"                  getComponent={ getProjectSettingsTasks } />
         <Route path="team"                     getComponent={ getProjectSettingsTeam } />
         <Route path="tags"                     getComponent={ getProjectSettingsTags } />
       </Route>

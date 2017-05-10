@@ -72,7 +72,7 @@ module.exports = merge(config, {
             query: {
               modules: true,
               importLoaders: 1,
-              localIdentName: '[name]__[local]--[hash:base64:5]',
+              localIdentName: '[name]_[local]-[hash:base64:5]',
             },
           },
           'postcss',

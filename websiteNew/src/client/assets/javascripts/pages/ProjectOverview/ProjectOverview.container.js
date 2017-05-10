@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-
-import { push as pushRoute } from 'react-router-redux';
-
+import { push as pushRoute } from 'react-router-redux'
+import { saveProject } from 'stemn-shared/misc/Projects/Projects.actions'
 import ProjectOverview from './ProjectOverview';
 
-const stateToProps = ({ projects, projectSettings, fileList }, { params, location }) => {
+const stateToProps = ({ projects, projectSettings, fileList }, { params, location, provider }) => {
   const projectId   = params.stub;
   const path        = params.path || '';
   const project     = projects.data[projectId]
   const entityModel = `projects.data.${projectId}`;
-  const files       = fileList[`${projectId}-${path}`];
+  const fileListCacheKey = `${projectId}-${path}-${provider}`
+  const files       = fileList[fileListCacheKey];
 
   return {
     project,
@@ -23,7 +23,8 @@ const stateToProps = ({ projects, projectSettings, fileList }, { params, locatio
 }
 
 const dispatchToProps = {
-  pushRoute
+  pushRoute,
+  saveProject,
 };
 
 @connect(stateToProps, dispatchToProps)

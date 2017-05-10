@@ -6,6 +6,8 @@ import promise from 'redux-promise-middleware'
 import throttle from 'stemn-shared/redux/middleware/throttle/throttle.middleware.js'
 import httpPackage from 'stemn-shared/redux/middleware/httpPackage/httpPackage.middleware.js'
 import httpTransform from 'stemn-shared/redux/middleware/httpTransform/httpTransform.middleware.js'
+import toastsError from 'stemn-shared/misc/Toasts/ToastsError.middleware'
+//import createLogger from 'redux-logger'
 
 const middleware = [
   thunk,
@@ -13,13 +15,15 @@ const middleware = [
   httpPackage,
   httpTransform,
   promise(),
-];
+  toastsError,
+//  createLogger({collapsed: true}),
+]
 
 const enhancer = compose(
   applyMiddleware(...middleware)
-)(createStore);
+)(createStore)
 
-export default function configureStore() {
-  const store = enhancer(rootReducer, initialState);
-  return store;
+export default function configureStore(initialState) {
+  const store = enhancer(rootReducer, initialState)
+  return store
 }

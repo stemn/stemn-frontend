@@ -9,49 +9,49 @@ import UserBetaSettings from 'stemn-shared/misc/UserSettings/UserBetaSettings'
 
 export default class SettingsAccount extends Component {
   static propTypes = {
-    user: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
     authenticate: PropTypes.func.isRequired,
     unlink: PropTypes.func.isRequired,
-    updateEmail: PropTypes.func.isRequired,
+    setPrimaryEmail: PropTypes.func.isRequired,
+    saveUser: PropTypes.func.isRequired,
   }
   render() {
-    const { user, authenticate, unlink, updateEmail } = this.props
+    const { auth, authenticate, unlink, setPrimaryEmail, saveUser } = this.props
     return (
       <div>
         <InfoPanel>
-          <UserBetaSettings
-            user={ user }
-          />
-        </InfoPanel>
-
-        <InfoPanel>
           <UserLinkedAccountSettings
-            user={ user }
+            user={ auth.user }
             authenticate={ authenticate }
             unlink={ unlink }
           />
         </InfoPanel>
-
         <InfoPanel>
           <UserCloudProviderSettings
-            user={ user }
+            user={ auth.user }
             authenticate={ authenticate }
             unlink={ unlink }
           />
         </InfoPanel>
-
-        <InfoPanel>
-          <UserNameSettings entityModel={ 'auth.user' } />
-        </InfoPanel>
-
         <InfoPanel>
           <UserEmailSettings
-            user={ user }
-            updateEmail={ updateEmail }
+            auth={ auth }
+            setPrimaryEmail={ setPrimaryEmail }
+            saveUser={ saveUser }
           />
         </InfoPanel>
-
       </div>
     )
   }
 }
+//        <InfoPanel>
+//          <UserNameSettings
+//            username={ user.stub }
+//            usernameModel="auth.user"
+//          />
+//        </InfoPanel>
+//        <InfoPanel>
+//          <UserBetaSettings
+//            user={ user }
+//          />
+//        </InfoPanel>

@@ -33,13 +33,13 @@ export default class Explore extends Component {
     },
   })
   connectedOptions = [{
-    value: undefined,
+    value: 'any',
     name: 'Any',
-    onClick: () => this.updateConnected(undefined),
+    onClick: () => this.updateConnected('any'),
   }, {
-    value: 'connected',
+    value: undefined,
     name: 'Connected',
-    onClick: () => this.updateConnected('connected'),
+    onClick: () => this.updateConnected(undefined),
   }, {
     value: 'disconnected',
     name: 'Disconnected',
@@ -53,9 +53,16 @@ export default class Explore extends Component {
   })
   render() {
     const { location } = this.props
-    const criteria = location.query.store === 'connected'
-      ? { 'remote.connected': true }
-      : { }
+
+    const getCriteria = () => {
+      if (location.query.store === undefined) {
+        return { 'remote.connected': true }
+      } else if (location.query.store === false) {
+        return { 'remote.connected': false }
+      }
+      return {}
+    }
+    const criteria = getCriteria()
 
     return (
       <StandardLayout>

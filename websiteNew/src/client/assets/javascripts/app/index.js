@@ -40,7 +40,7 @@ const initReactAndRedux = (initialState) => {
   // Render the React application to the DOM
   render(
     <AppContainer errorReporter={Redbox}>
-      <Root store={store} history={history} />
+      <Root store={ store } history={ history } />
     </AppContainer>,
     rootEl
   );

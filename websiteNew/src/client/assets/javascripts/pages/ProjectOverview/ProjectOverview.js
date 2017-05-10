@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import classes from './ProjectOverview.css'
 import { projectRoute, fileRoute, projectFolderRoute } from 'route-actions'
 import moment from 'moment'
-import { has } from 'lodash'
+import { has, get } from 'lodash'
 import FileList from 'stemn-shared/misc/FileList'
 import Readme from 'stemn-shared/misc/Files/Readme/Readme.jsx'
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'
@@ -36,7 +36,7 @@ export default class ProjectOverview extends Component {
   }
 
   render() {
-    const { entityModel, project, path, files, isFilePage } = this.props
+    const { entityModel, project, path, files, isFilePage, saveProject } = this.props
     const options = {
       showMenu: true
     }
@@ -96,7 +96,7 @@ export default class ProjectOverview extends Component {
       )
 
       return (
-        <div style={{marginBottom: '30px'}}>
+        <div style={ { marginBottom: '30px' } }>
           <SubSubHeader>
             { project.data.blurb.length > 0
             ? <div className={ classes.blurb }>{ project.data.blurb }</div>
@@ -144,15 +144,12 @@ export default class ProjectOverview extends Component {
               crumbPopup
               search
             />
-            { files && files.entries
-            ? <Readme
-                className={classes.readme}
-                files={ files.entries }
-              />
-            : <div className="text-center text-grey-3" style={{marginTop: '30px'}}>
-                Add a README.md file to this folder to help others understand what is inside.
-              </div>
-            }
+            <Readme
+              files={ get(files, 'entries', []) }
+              project={ project }
+              projectModel={ entityModel }
+              saveProject={ saveProject }
+            />
           </Container>
         </div>
       )
@@ -162,3 +159,10 @@ export default class ProjectOverview extends Component {
     }
   }
 }
+
+//            { files && files.entries
+//            ?
+//            : <div className="text-center text-grey-3" style={ { marginTop: '30px' } }>
+//                Add a README.md file to this folder to help others understand what is inside.
+//              </div>
+//            }
