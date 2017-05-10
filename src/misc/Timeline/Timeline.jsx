@@ -50,7 +50,7 @@ const Component = React.createClass({
     this.setState({numPages});
   },
   componentDidMount(){
-    setTimeout(this.getNumPages, 1);
+    setTimeout(this.getNumPages, 100);
   },
   render() {
     const { items, selected, isSelected, onSelect, preferPlace, style, className, size } = this.props;

@@ -1,5 +1,5 @@
 import { shouldDownload } from '../../redux/utils'
-import { updateUser } from 'stemn-shared/misc/Auth/Auth.actions'
+import updateUser from 'stemn-shared/misc/Auth/actions/updateUser'
 
 const fields = {
   sm: ['name', 'picture', 'stub'],

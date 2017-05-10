@@ -139,7 +139,7 @@ export default class FileList extends Component {
           ? <SearchInput
               value={ fileList.query }
               model={ `fileList.${fileListCacheKey}.query` }
-              className={ classes.search }
+              className={ classNames(classes.search, 'hide-xs') }
               placeholder="Search Files"
             />
           : null }
