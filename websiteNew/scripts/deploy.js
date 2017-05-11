@@ -1,49 +1,54 @@
-const fs = require('fs')
+const Promise = require('bluebird')
+const fs = Promise.promisifyAll(require('fs-extra'))
 const path = require('path')
 const SSH = require('ssh-promise')
 const exec = require('child-process-promise').exec
 
 const config = {
   repo: {
-    name : 'stemn-website-live'
+    name: 'stemn-website-live',
   },
   ssh: {
     host: '35.167.249.144',
     username: 'ubuntu',
-    key : fs.readFileSync(path.join('../../stemn-api/aws/keys', 'stemn.prv')),
+    key: fs.readFileSync(path.join('../../stemn-api/aws/keys', 'stemn.prv')),
   },
-  commitMessage : 'automated deployment',
+  commitMessage: 'automated deployment',
 }
-
-console.log(config);
 
 const ssh = new SSH({
-    host: config.ssh.host,
-    username: config.ssh.username,
-    privateKey: config.ssh.key
+  host: config.ssh.host,
+  username: config.ssh.username,
+  privateKey: config.ssh.key,
 })
 
-const build = () => exec('brunch build')
-const add = () => exec('git add .')
-const commit = () => exec(`git commit -am "${config.commitMessage}"`).catch(() => {})
-const pull = () => exec('git pull')
-const push = () => exec('git push')
+// Scripts
 
-const deployToServer = () => {
-    const commands = [
-        `cd repositories ${config.repo.name}`,
-        'git pull',
-        'npm install',
-    ].join('; ');
+const pullDist = () => ssh.exec(`
+  cd ~/repositories/${config.repo.name};
+  git pull;
+`)
 
-    return ssh.exec(commands);
+const pushDist = () => exec(`
+  cd ../../${config.repo.name};
+  git pull;
+  git add .;
+  git commit -am "${config.commitMessage}";
+  git push;
+`)
+
+const copyDist = () => fs.copyAsync('./build/client', `../../${config.repo.name}`)
+
+const log = (result) => {
+  console.log('stdout: ', result.stdout)
+  console.log('stderr: ', result.stderr)
+  return result
 }
 
-add()
-.then(commit)
-//.then(pull)
-//.then(build)
-//.then(add)
-//.then(commit)
-//.then(push)
-//.then(deployToServer);
+// Go time
+
+copyDist()
+.then(pushDist)
+.then(pullDist)
+.catch(console.error)
+
