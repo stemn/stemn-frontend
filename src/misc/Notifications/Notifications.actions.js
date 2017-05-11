@@ -9,14 +9,18 @@ export const show = ({ type, title, body }) => ({
   }
 })
 
-export const getNotifications = () => ({
-  type: 'NOTIFICATIONS/GET_NOTIFICATIONS',
-  http: true,
-  payload: {
-    url: '/api/v1/notifications',
-    method: 'GET'
+export const getNotifications = () => (dispatch, getState) => {
+  if (getState().auth.authToken) {
+    dispatch({
+      type: 'NOTIFICATIONS/GET_NOTIFICATIONS',
+      http: true,
+      payload: {
+        url: '/api/v1/notifications',
+        method: 'GET'
+      }
+    })
   }
-})
+}
 
 export const markAsRead = (notificationId) => ({
   type: 'NOTIFICATIONS/MARK_AS_READ',
