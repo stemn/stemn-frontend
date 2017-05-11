@@ -202,7 +202,7 @@ export default class ProjectTask extends Component {
               : <span>{ task.data.name || 'Untitled Thread'}</span> }
               { edit
               ? null
-              : <span className={ classes.number }>&nbsp;#T{ task.data.taskNumber }</span> }
+              : <span className={ classes.number }>&nbsp;{ task.data.taskNumber ? `#T${task.data.taskNumber}` : null }</span> }
             </h2>
             <div className="layout-row layout-align-start-center">
               <div className={ classNames('layout-row layout-align-start-center', classes.meta) }>
