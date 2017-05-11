@@ -1,6 +1,6 @@
 #!/bin/bash
 #echo "------------------------ Build the dist version ------------------------"
-#npm run build
+npm run build
 echo "------------------- Copying dist to website live repo ------------------"
 cd ../../../stemn-website-live
 git pull
