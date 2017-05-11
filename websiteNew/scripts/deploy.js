@@ -15,6 +15,8 @@ const config = {
   commitMessage : 'automated deployment',
 }
 
+console.log(config);
+
 const ssh = new SSH({
     host: config.ssh.host,
     username: config.ssh.username,
