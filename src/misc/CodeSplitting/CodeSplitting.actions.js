@@ -5,3 +5,16 @@ export const loadCode = (systemImport, cacheKey) => ({
     cacheKey,
   },
 })
+
+export const loading = (cacheKey) => ({
+  type: 'CODE_SPLITTING/LOADING',
+  meta: {
+    cacheKey,
+  },
+})
+export const complete = (cacheKey) => ({
+  type: 'CODE_SPLITTING/COMPLETE',
+  meta: {
+    cacheKey,
+  },
+})

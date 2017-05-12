@@ -3,9 +3,9 @@ import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOver
 
 export default class PreviewCadLoader extends Component {
   static propTypes = {
-    loadCode: PropTypes.func.isRequired,
-    systemImport: PropTypes.func.isRequired,
-    cacheKey: PropTypes.string.isRequired,
+    loadCode: PropTypes.func.isRequired,      // The loadCode function from the container
+    systemImport: PropTypes.func.isRequired,  // The actual system.import
+    cacheKey: PropTypes.string.isRequired,    // The cachekey
   }
   constructor(props) {
     super(props)

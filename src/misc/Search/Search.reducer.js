@@ -1,8 +1,10 @@
 import i from 'icepick'
-import querystring from 'querystring'
+import qs from 'querystring'
 
 const initialState = {
-  query: querystring.parse(window.location.search.substring(1)).q,
+  query: typeof window !== 'undefined'
+    ? qs.parse(window.location.search.substring(1)).q
+    : '',   // If this is used in electron, window.location will not exist.
   data: {
     /********************************
     [cacheLey] : {
