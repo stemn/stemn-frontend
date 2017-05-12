@@ -35,7 +35,7 @@ const Component = React.createClass({
       numPages: 1
     }
   },
-  scroll (direction){
+  scroll(direction){
     if(direction == 'left'){
       this.setState({ page : this.state.page + 1})
     }

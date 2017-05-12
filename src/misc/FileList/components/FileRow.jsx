@@ -16,7 +16,7 @@ export default React.createClass({
 
     return (
       <div className={classNames(classes.row, 'layout-row layout-align-start-center', {[classes.active]: isActive})} >
-        <div className={classes.clickOverlay} onClick={()=>singleClick({file})} onDoubleClick={()=>doubleClick({file})}/>
+        <div className={ classes.clickOverlay } onClick={ () => singleClick({file}) } onDoubleClick={ () => doubleClick({file}) } />
         <FileIcon fileType={file.extension} type={file.type}/>
         <div className="text-ellipsis flex">
           <Highlight

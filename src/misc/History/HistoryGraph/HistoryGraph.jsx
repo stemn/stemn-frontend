@@ -31,49 +31,51 @@ export default class HistoryGraph extends Component {
     }))
 
     return (
-      <div className="rel-box" style={{width: '100%', height: '100%', marginBottom: '-10px'}}>
-        <LoadingOverlay show={ loading } size="sm" hideBg />
-        <ResponsiveContainer width="100%" height={ 150 }>
-          <AreaChart data={ dataFormatted }>
-            <XAxis
-              dataKey="date"
-              fontSize="10px"
-              stroke="rgba(0, 0, 0, 0.3)"
-              tickFormatter={ this.tickFormatter }
-            />
-            <CartesianGrid
-              stroke="rgb(248, 248, 248)"
-            />
-            <Area
-              isAnimationActive={ false }
-              type="monotone"
-              dataKey="Revisions"
-              stackId="1"
-              stroke="rgba(255, 255, 255, 0)"
-              fill="rgb(68, 74, 211)"
-            />
-            <Area
-              isAnimationActive={ false }
-              type="monotone"
-              dataKey="Commits"
-              stackId="1"
-              stroke="rgba(255, 255, 255, 0)"
-              fill="rgba(68, 154, 211, 1)"
-            />
-            <Area
-              isAnimationActive={ false }
-              type="monotone"
-              dataKey="Threads"
-              stackId="1"
-              stroke="rgba(255, 255, 255, 0)"
-              fill="rgba(68, 200, 211, 0.8)"
-            />
-            <Tooltip
-              labelFormatter={ this.tooltipLabelFormatter }
-              itemStyle= { { color: 'rgba(0, 0, 0, 0.5)', marginTop: '3px' } }
-            />
-          </AreaChart>
-        </ResponsiveContainer>
+      <div className="rel-box" style={{width: '100%', height: '100%' }}>
+        <LoadingOverlay show={ loading } size="sm" background="rgba(255, 255, 255, 0.8)" />
+        <div style={ { marginBottom: '-10px' } }>
+          <ResponsiveContainer width="100%" height={ 150 }>
+            <AreaChart data={ dataFormatted }>
+              <XAxis
+                dataKey="date"
+                fontSize="10px"
+                stroke="rgba(0, 0, 0, 0.3)"
+                tickFormatter={ this.tickFormatter }
+              />
+              <CartesianGrid
+                stroke="rgb(248, 248, 248)"
+              />
+              <Area
+                isAnimationActive={ false }
+                type="monotone"
+                dataKey="Revisions"
+                stackId="1"
+                stroke="rgba(255, 255, 255, 0)"
+                fill="rgb(68, 74, 211)"
+              />
+              <Area
+                isAnimationActive={ false }
+                type="monotone"
+                dataKey="Commits"
+                stackId="1"
+                stroke="rgba(255, 255, 255, 0)"
+                fill="rgba(68, 154, 211, 1)"
+              />
+              <Area
+                isAnimationActive={ false }
+                type="monotone"
+                dataKey="Threads"
+                stackId="1"
+                stroke="rgba(255, 255, 255, 0)"
+                fill="rgba(68, 200, 211, 0.8)"
+              />
+              <Tooltip
+                labelFormatter={ this.tooltipLabelFormatter }
+                itemStyle= { { color: 'rgba(0, 0, 0, 0.5)', marginTop: '3px' } }
+              />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
       </div>
     )
   }

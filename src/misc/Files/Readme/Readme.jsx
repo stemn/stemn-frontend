@@ -6,7 +6,8 @@ import Editor from 'stemn-shared/misc/Editor/EditorNew'
 import classes from './Readme.scss'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton'
 import MdModeEdit from 'react-icons/md/mode-edit'
-import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton';
+import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
+import Link from 'stemn-shared/misc/Router/Link'
 
 export default class Readme extends Component {
   static propTypes = {
@@ -40,9 +41,23 @@ export default class Readme extends Component {
     const readmeFile = files.find(item => readmeNames.includes(item.name.toLowerCase()))
 
     if (readmeFile) {
+
+      const fileRouteParams = {
+        projectId: readmeFile.project._id,
+        fileId: readmeFile.fileId,
+        revisionId: readmeFile.revisionId,
+      }
+
       return (
         <div className={ classes.readme }>
-          <div style={ { marginBottom: '15px' } } className="text-mini-caps">{ readmeFile.name }</div>
+          <Link
+            style={ { marginBottom: '15px', display: 'inline-block' } }
+            className="text-mini-caps"
+            name="fileRoute"
+            params={ fileRouteParams }
+          >
+            { readmeFile.name }
+          </Link>
           <div { ...otherProps } style={ { position: 'relative' } }>
             <DisplayReadme file={ readmeFile } />
           </div>

@@ -8,7 +8,6 @@ export default ({ projectId, fileId, revisionId, provider, responseType }) => {
         ? `/api/v1/sync/download/${projectId}/${fileId}`
         : `/api/v1/remote/download/${provider}/${fileId}`,
       params: { revisionId },
-      responseType: responseType || 'json',
     },
     meta: {
       cacheKey,

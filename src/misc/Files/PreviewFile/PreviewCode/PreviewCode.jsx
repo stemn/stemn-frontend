@@ -47,7 +47,7 @@ export const Viewer = React.createClass({
       </div>
     )
   }
-});
+})
 
 
 export default React.createClass({
@@ -83,4 +83,4 @@ export default React.createClass({
       </div>
     )
   }
-});
+})
