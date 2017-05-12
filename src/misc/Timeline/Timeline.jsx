@@ -43,14 +43,26 @@ const Component = React.createClass({
       this.setState({page : this.state.page - 1})
     }
   },
-  getNumPages(){
-    const contentWidth = this.refs.inner.refs.inner.offsetWidth;
-    const containerWidth = this.refs.container.offsetWidth;
-    const numPages = Math.ceil(contentWidth / containerWidth);
-    this.setState({numPages});
+  getRefInner(ref) {
+    if (ref) {
+      this.refInner = ref
+      this.tryGetPages()
+    }
   },
-  componentDidMount(){
-    setTimeout(this.getNumPages, 100);
+  getRefOuter(ref) {
+    if (ref) {
+      this.refOuter = ref
+      this.tryGetPages()
+    }
+  },
+  tryGetPages() {
+    // If we have both refs, we can get the number of pages.
+    if (this.refOuter && this.refInner) {
+      const contentWidth = this.refInner.offsetWidth;
+      const containerWidth = this.refOuter.offsetWidth;
+      const numPages = Math.ceil(contentWidth / containerWidth);
+      this.setState({ numPages });
+    }
   },
   render() {
     const { items, selected, isSelected, onSelect, preferPlace, style, className, size } = this.props;
@@ -71,16 +83,16 @@ const Component = React.createClass({
             {moreLeft  ? <MoreDots side="left" /> : ''}
             {moreRight ? <MoreDots side="right" /> : ''}
           </div>
-          <div ref="container" className={styles.dotsOverflow}>
+          <div ref={ this.getRefOuter } className={styles.dotsOverflow}>
             { items && items.length > 0
             ? <TimelineInner
-                ref="inner"
                 onSelect={onSelect}
                 page={page}
                 items={itemsOrdered}
                 selected={selected}
                 isSelected={isSelected}
                 preferPlace={preferPlace}
+                refInner={ this.getRefInner }
                 size={size}>
               </TimelineInner>
             : null }

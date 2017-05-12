@@ -69,7 +69,7 @@ const Dot = React.createClass({
 
 const Component = React.createClass({
   render() {
-    const { items, selected, isSelected, page, onSelect, preferPlace, size} = this.props;
+    const { items, selected, isSelected, page, onSelect, preferPlace, size, refInner } = this.props;
     const translation = 'translateX(' + page * 100 + '%)';
     
     const Items = items.map((item, index)=> {
@@ -111,7 +111,7 @@ const Component = React.createClass({
     
     const containerClasses = classNames('layout-row layout-align-end-center', classes.dots, {[classes.small]: size == 'sm'});
     return(
-      <div ref="inner" className={containerClasses} style={{transform: translation}}>
+      <div ref={ refInner } className={containerClasses} style={{transform: translation}}>
         { Items }
       </div>
     )
