@@ -8,9 +8,11 @@ import { initCompare, changeMode, select } from 'stemn-shared/misc/FileCompare/F
 import { get } from 'lodash'
 import File from './File'
 
-const stateToProps = ({ files, fileCompare, syncTimeline }, { params }) => {
-  const { projectId, fileId, revisionId } = params;
-  const cacheKey = `${fileId}-${revisionId}`;
+const stateToProps = ({ files, fileCompare, syncTimeline }, { params, location }) => {
+  const { projectId, fileId } = params
+  console.log(params);
+  const revisionId = location.query.revision
+  const cacheKey = `${fileId}-${revisionId}`
   return {
     cacheKey,
     fileId,
@@ -40,6 +42,7 @@ const fetchConfigs = [{
       fileId: props.fileId,
       revisionId: props.revisionId,
       projectId: props.projectId,
+      cacheKey: props.cacheKey,
     })
     props.getRelatedTasks({
       fileId: props.fileId,

@@ -8,7 +8,7 @@
 
 .timeline {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  background: white;
+  background: rgba(0, 0, 0, 0.03);
 }
 
 .sidebar {
@@ -17,6 +17,10 @@
   min-width: 400px;
   border-left: 1px solid rgba(0, 0, 0, 0.1);
   padding: 30px;
+}
+
+.preview {
+  background: white;
 }
 
 .sidebarTitle {

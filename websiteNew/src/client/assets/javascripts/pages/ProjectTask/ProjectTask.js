@@ -123,6 +123,10 @@ export default class ProjectTask extends Component {
     const { task, board } = this.props
     const group = board.data.groups.find(group => group._id === task.data.group)
 
+    const taskRouteParams = {
+      projectId: board.data.project,
+    }
+
     return (
       <Col className="flex-gt-xs-30 flex-order-xs-0">
         <div className={ classes.panel }>
@@ -141,6 +145,9 @@ export default class ProjectTask extends Component {
             labels={ task.data.labels }
             labelInfo={ board.data.labels }
             tag
+            name="projectTasksRoute"
+            params={ taskRouteParams }
+            link
           />
         </div> }
         { task.data.users.length >= 0 &&

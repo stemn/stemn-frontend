@@ -6,10 +6,12 @@ export const exploreRoute                = ()                        => `/explor
 export const flowRoute                   = ()                        => `/flow`
 export const fieldRoute                  = ({ fieldId })             => `/fields/${fieldId}`
 export const fileRoute                   = ({ projectId, fileId, revisionId }) => {
-  const query = qs.stringify({
-    revision: revisionId,
-  })
-  return `/files/${projectId}/${fileId}${query && `?${query}`}`
+  return {
+    pathname: `/files/${projectId}/${fileId}`,
+    query: {
+      revision: revisionId,
+    },
+  }
 }
 export const homeRoute                   = ()                        => `/`
 export const landingRoute                = ()                        => `/landing`

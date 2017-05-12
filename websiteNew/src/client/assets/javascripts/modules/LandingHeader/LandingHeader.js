@@ -80,9 +80,11 @@ export default class LandingHeader extends Component {
       {[classes.headerFilled] : !atTop || isOpen}
     )
 
+//      route: 'flowRoute',
+//      label: 'Workflow',
     const items = [{
-      route: 'flowRoute',
-      label: 'Workflow',
+      route: 'exploreRoute',
+      label: 'Explore',
     },{
       route: 'openSourceRoute',
       label: 'Open source',
@@ -121,6 +123,7 @@ export default class LandingHeader extends Component {
         <div className={ classNames(classes.mobileLinks, 'hide-gt-xs') } style={ mobileLinksStyle }>
           { items.map(item => (
             <Link
+              key={ item.label }
               activeClassName="active"
               className={ classNames(classes.mobileLink, 'layout-row layout-align-start-center') }
               style={ mobileLinkStyle }

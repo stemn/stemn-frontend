@@ -58,13 +58,13 @@ export default class ProjectCommits extends Component {
     })
   }
   renderLoaded() {
-    const { project, syncTimeline, location, page, size, filter, filterIsDefault } = this.props
+    const { project, syncTimeline, location, page, size, filter, filterIsDefault, board } = this.props
+
     const noMoreResults = syncTimeline && syncTimeline.data.length < size
     const hasResults = syncTimeline && syncTimeline.data  && syncTimeline.data.length > 0
     const projectRouteParams = {
       projectId: project.data._id,
     }
-
     if (hasResults) {
       return (
         <div>
@@ -82,6 +82,7 @@ export default class ProjectCommits extends Component {
               group
               items={ syncTimeline.data }
               type="project"
+              entity={ board }
             />
           </InfoPanel>
           <Pagination

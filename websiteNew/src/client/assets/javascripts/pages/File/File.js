@@ -63,7 +63,7 @@ export default class File extends Component {
           />
         </div>
         <div className="layout-row flex">
-          <div className="layout-column flex">
+          <div className={ classNames(classes.preview, 'layout-column flex')}>
             <FileCompareInner
               className="layout-column flex"
               project={ file.data.project }

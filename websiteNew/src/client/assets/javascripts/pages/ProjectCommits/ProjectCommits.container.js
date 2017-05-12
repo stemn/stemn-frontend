@@ -5,10 +5,11 @@ import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actio
 import ProjectCommits from './ProjectCommits'
 import { setFilter } from 'stemn-shared/misc/StringFilter/StringFilter.actions'
 import { createFilterString, getFilter } from 'stemn-shared/misc/StringFilter/StringFilter.utils'
-import { isEqual } from 'lodash'
+import { get, isEqual } from 'lodash'
+import { getBoards } from 'stemn-shared/misc/Tasks/Tasks.actions'
 
 
-const stateToProps = ({ projects, syncTimeline, stringFilter }, { params, location }) => {
+const stateToProps = ({ projects, syncTimeline, stringFilter, tasks }, { params, location }) => {
   const page = location.query.page || 1
   const projectId = params.stub
   const size = 30
@@ -27,6 +28,9 @@ const stateToProps = ({ projects, syncTimeline, stringFilter }, { params, locati
   const timelineCacheKey = `${params.stub}-${filter.object.type}-${page}`
   const timelineQueryKey = `${params.stub}-${page}-${JSON.stringify(filter.object)}`
 
+  const boardId = get(tasks, ['projects', projectId, 'boards', '0'])
+  const board = get(tasks, ['boards', boardId])
+
   return {
     project: projects.data[params.stub],
     projectId,
@@ -40,19 +44,20 @@ const stateToProps = ({ projects, syncTimeline, stringFilter }, { params, locati
     filterCacheKey,
     filterDefaults,
     filterIsDefault,
+    board,
   }
 }
 
-
-        
 const dispatchToProps = {
   fetchTimeline,
   setFilter,
+  getBoards,
 }
 
 const fetchConfigs = [{
   hasChanged: 'timelineQueryKey',
   onChange: (props) => {
+//    console.log(props.timelineQueryKey);
     props.fetchTimeline({
       entityType: 'project',
       entityId: props.projectId,
@@ -63,6 +68,13 @@ const fetchConfigs = [{
       },
       page: props.page,
       size: props.size,
+    })
+  }
+},{
+  hasChanged: 'projectId',
+  onChange: (props) => {
+    props.getBoards({
+      projectId: props.projectId,
     })
   }
 }]
