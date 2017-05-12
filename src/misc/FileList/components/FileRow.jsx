@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 import classNames from 'classnames';
 import classes from './FileRow.css'
@@ -8,15 +8,73 @@ import Label from 'stemn-shared/misc/Label/Label.jsx'
 import Link from 'stemn-shared/misc/Router/Link';
 import Highlight from 'stemn-shared/misc/Autosuggest/Highlight'
 
-export default React.createClass({
+export default class FilwRow extends Component {
+  static propTypes = {
+    singleClick: PropTypes.func,
+    doubleClick: PropTypes.func,
+    file: PropTypes.object.isRequired,
+    query: PropTypes.string,
+    isActive: PropTypes.bool,
+    link: PropTypes.bool,
+  }
+  singleClick = () => {
+    const { singleClick, file } = this.props
+    if (singleClick) {
+      singleClick({ file })
+    }
+  }
+  doubleClick = () => {
+    const { doubleClick, file } = this.props
+    if (doubleClick) {
+      doubleClick({ file })
+    }
+  }
   render() {
-    const { singleClick, doubleClick, isActive, file, query } = this.props;
+    const { isActive, file, query, link } = this.props;
 
     const timeFromNow = moment(file.modified).fromNow();
 
+    const getClickOverlay = () => {
+      if (link) {
+        const params = {
+          fileId: file.fileId,
+          projectId: file.project._id,
+          revisionId: file.revisionId,
+        }
+
+        const getRouteName = () => {
+          if (file.type === 'file') {
+            return 'fileRoute'
+          } else if (file.type == 'folder') {
+            return 'projectFolderRoute'
+          } else {
+            return 'projectRoute'
+          }
+        }
+
+        return (
+          <Link
+            className={ classes.clickOverlay }
+            onClick={ this.singleClick }
+            onDoubleClick={ this.doubleClick }
+            name={ getRouteName() }
+            params={ params }
+          />
+        )
+      } else {
+        return (
+          <div
+            className={ classes.clickOverlay }
+            onClick={ this.singleClick }
+            onDoubleClick={ this.doubleClick }
+          />
+        )
+      }
+    }
+
     return (
       <div className={classNames(classes.row, 'layout-row layout-align-start-center', {[classes.active]: isActive})} >
-        <div className={ classes.clickOverlay } onClick={ () => singleClick({file}) } onDoubleClick={ () => doubleClick({file}) } />
+        { getClickOverlay() }
         <FileIcon fileType={file.extension} type={file.type}/>
         <div className="text-ellipsis flex">
           <Highlight
@@ -44,4 +102,4 @@ export default React.createClass({
       </div>
     );
   }
-});
+}

@@ -83,7 +83,7 @@ const Component = React.createClass({
             {moreLeft  ? <MoreDots side="left" /> : ''}
             {moreRight ? <MoreDots side="right" /> : ''}
           </div>
-          <div ref={ this.getRefOuter } className={styles.dotsOverflow}>
+          <div ref={ this.getRefOuter } className={ styles.dotsOverflow }>
             { items && items.length > 0
             ? <TimelineInner
                 onSelect={onSelect}

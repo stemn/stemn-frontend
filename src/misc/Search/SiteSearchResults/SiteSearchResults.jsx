@@ -26,7 +26,7 @@ export default class SiteSearchResults extends Component {
     }
     return (
       <div>
-        <div className={ classes.results + ' layout-column'}>
+        <div className={ classes.results + ' layout-column'} style={ !results || !results.data ? { minHeight: '100vh' } : {}  }>
           <LoadingOverlay
             show={ !results || results.loading }
             linear

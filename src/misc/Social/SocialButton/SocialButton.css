@@ -19,6 +19,7 @@
   background: primary;
   color: white;
 }
+
 .button:global(.lg) .main {
   padding: 12px 15px;
   font-size: 14px;
@@ -45,7 +46,6 @@
   align-items: center;
   justify-content: center;
   color: rgba(0, 0, 0, 0.3);
-
   min-width: 25px;
   padding: 0 3px;
   border-left: 1px solid border1;

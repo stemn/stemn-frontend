@@ -106,34 +106,46 @@ const eventTextMap = {
     }
   },
   changedLabels: (item, type, entity) => {
-    if (type === 'task') {
+    if (type === 'task' || type === 'project') {
+      const hasAddedLabels = item.data.addedLabels && item.data.addedLabels.length > 0
+      const hasRemovedLabels = item.data.removedLabels && item.data.removedLabels.length > 0
+      const params = {
+        projectId: entity.data.project,
+        taskId: item.task,
+      }
       return (
         <span>
-          { item.data.addedLabels && item.data.addedLabels.length > 0
-            ? <span>
-                added the&nbsp;
-                <TaskLabelDots
-                  labels={item.data.addedLabels}
-                  labelInfo={entity.data.labels}
-                  tag
-                />
-                &nbsp;{ item.data.addedLabels.length == 1 ? 'label' : 'labels' }
-              </span>
-            : null }
-          { item.data.addedLabels && item.data.removedLabels && item.data.addedLabels.length > 0 && item.data.removedLabels.length>0
-            ? <span>&nbsp;and&nbsp;</span>
-            : null }
-          { item.data.removedLabels && item.data.removedLabels.length > 0
-            ? <span>
-                removed the&nbsp;
-                <TaskLabelDots
-                  labels={ item.data.removedLabels }
-                  labelInfo={ entity.data.labels }
-                  tag
-                />
-                &nbsp;{item.data.removedLabels.length == 1 ? 'label' : 'labels'}
-              </span>
-            : null }
+          { hasAddedLabels &&
+            <span>
+              added the&nbsp;
+              <TaskLabelDots
+                labels={ item.data.addedLabels }
+                labelInfo={ entity.data.labels }
+                tag
+              />
+              { pluralise(item.data.addedLabels.length, 'label', true) }
+            </span>
+          }
+          { hasAddedLabels && hasRemovedLabels &&
+            <span>&nbsp;and&nbsp;</span>
+          }
+          { hasRemovedLabels &&
+            <span>
+              removed the&nbsp;
+              <TaskLabelDots
+                labels={ item.data.removedLabels }
+                labelInfo={ entity.data.labels }
+                tag
+              />
+              { pluralise(item.data.removedLabels.length, 'label', true) }
+            </span>
+          }
+          { type === 'project' &&
+            <span>
+              &nbsp;to
+              <Link name="taskRoute" params={ params }>{ item.data.name || 'Untitled Thread'}</Link>
+            </span>
+          }
         </span>
       )
     } else {

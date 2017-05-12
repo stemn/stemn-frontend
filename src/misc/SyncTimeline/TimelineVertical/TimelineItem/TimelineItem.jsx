@@ -19,7 +19,7 @@ export default class TimelineItem extends Component {
     item: PropTypes.object,
   }
   render() {
-    const { item, type } = this.props
+    const { item, type, entity } = this.props
     const userRouteParams = { userId: item.user._id }
     const eventStyles = type === 'task'
       ? { marginLeft: '60px' }
@@ -49,7 +49,7 @@ export default class TimelineItem extends Component {
                 ? null
                 : <b>{ item.user.name }&nbsp;</b> }
               <span className={ classes.item }>
-                <TimelineItemText item={ item } type={ type }/> - { moment(item.timestamp).fromNow() }
+                <TimelineItemText item={ item } type={ type } entity={ entity } /> - { moment(item.timestamp).fromNow() }
               </span>
             </div>
           </div>

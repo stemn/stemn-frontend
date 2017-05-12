@@ -29,6 +29,7 @@ const propTypesObject = {
   contentStyle    : PropTypes.object,             // Styles for the content section
   crumbPopup      : React.PropTypes.bool,         // Optional: Should we show a popup on the crumbs?
   search          : React.PropTypes.bool,         // Optional: Should search be enabled
+  link            : React.PropTypes.bool,         // Optional: Should each row be a link with href
   options         : React.PropTypes.shape({
     allowFolder   : React.PropTypes.bool,
     foldersOnly   : React.PropTypes.bool,
@@ -63,7 +64,7 @@ export default class FileList extends Component {
     })
   }
   renderResults = () => {
-    const { fileList, options, selected, singleClickFn, doubleClickFn } = this.props
+    const { fileList, options, selected, singleClickFn, doubleClickFn, link } = this.props
     const filesNormal = get(fileList, 'entries', [])
     const filesFiltered = options.foldersOnly
       ? filesNormal.filter(file => file.type === 'folder')
@@ -78,6 +79,7 @@ export default class FileList extends Component {
           singleClick={ singleClickFn }
           doubleClick={ doubleClickFn }
           isActive= {selected && selected.fileId == file.fileId }
+          link={ link }
         />
       ))
     } else if(fileList && !fileList.loading){
