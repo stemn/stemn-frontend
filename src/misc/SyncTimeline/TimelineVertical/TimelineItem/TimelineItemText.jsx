@@ -143,7 +143,7 @@ const eventTextMap = {
           { type === 'project' &&
             <span>
               &nbsp;to
-              <Link name="taskRoute" params={ params }>{ item.data.name || 'Untitled Thread'}</Link>
+              <Link name="taskRoute" params={ params }>{ item.task.name || 'Untitled Thread'}</Link>
             </span>
           }
         </span>

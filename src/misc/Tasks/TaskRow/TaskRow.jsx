@@ -47,8 +47,11 @@ export default class TaskRow extends Component {
             <TaskLabelDots
               labels={ task.data.labels }
               labelInfo={ board.data.labels }
+              name="projectTasksRoute"
+              params={ taskRouteParams }
               oneline
               tag
+              link
             />
           </div>
           <div className={ classes.asignees }>

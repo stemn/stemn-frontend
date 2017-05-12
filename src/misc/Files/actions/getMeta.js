@@ -1,4 +1,4 @@
-export default ({projectId, fileId, revisionId, provider}) => {
+export default ({projectId, fileId, revisionId, provider, cacheKey}) => {
   return {
     type: 'FILES/GET_META',
     http: true,
@@ -8,11 +8,11 @@ export default ({projectId, fileId, revisionId, provider}) => {
       ? `/api/v1/sync/files/${projectId}/${fileId}` 
       : `/api/v1/remote/files/${provider}/${fileId}`,
       params: {
-        revisionId
-      }
+        revisionId,
+      },
     },
     meta: {
-      cacheKey: `${fileId}-${revisionId}`
-    }
-  };
+      cacheKey: cacheKey || `${fileId}-${revisionId}`,
+    },
+  }
 }

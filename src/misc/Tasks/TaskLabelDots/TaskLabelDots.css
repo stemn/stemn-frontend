@@ -20,13 +20,21 @@
   margin-bottom: 2px;
   cursor: default;
 }
+a.tag {
+  cursor: pointer;
+}
+a .tagBg:hover {
+  opacity: 0.25
+}
+
 .tagBg {
   position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
   right: 0;
-  opacity: 0.15
+  opacity: 0.15;
+  transition: 0.3s ease all;
 }
 
 .tagsOneline .tag {
