@@ -16,15 +16,15 @@ const eventTextMap = {
     if (type === 'file') {
       return (
         <span>
-          { item.data.revisionNumber
+          {  !item.data.revisionNumber || item.data.revisionNumber === 0
           ? 'created this file'
-          : `added revision number ${item.data.revisionNumber}` }
+          : `added rev.${item.data.revisionNumber}` }
         </span>
       )
     } else {
       return (
         <span>
-          { item.data.revisionNumber
+          { !item.data.revisionNumber || item.data.revisionNumber === 0
           ? 'created'
           : `added revision ${item.data.revisionNumber} to` }
           <Link name="fileRoute" params={ fileRouteParams }>{ item.data.name }</Link>
