@@ -40,6 +40,7 @@ const pushDist = () => {
   // The push is therfore broken into another series of commands
   // where it can be run on 'then' or 'catch'.
   const commands2 = [
+    `cd ../../${config.repo.name}`,
     'git push',
   ]
   return exec(joinCommands(commands1))

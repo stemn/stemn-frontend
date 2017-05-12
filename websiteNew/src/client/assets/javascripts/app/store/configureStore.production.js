@@ -7,9 +7,8 @@ import throttle from 'stemn-shared/redux/middleware/throttle/throttle.middleware
 import httpPackage from 'stemn-shared/redux/middleware/httpPackage/httpPackage.middleware.js'
 import httpTransform from 'stemn-shared/redux/middleware/httpTransform/httpTransform.middleware.js'
 import toastsError from 'stemn-shared/misc/Toasts/ToastsError.middleware'
-//import createLogger from 'redux-logger'
+import createLogger from 'redux-logger'
 import auth from 'stemn-shared/misc/Auth/Auth.middleware'
-
 
 const middleware = [
   thunk,
@@ -19,7 +18,7 @@ const middleware = [
   httpTransform,
   promise(),
   toastsError,
-//  createLogger({collapsed: true}),
+  createLogger({collapsed: true}),
 ]
 
 const enhancer = compose(
