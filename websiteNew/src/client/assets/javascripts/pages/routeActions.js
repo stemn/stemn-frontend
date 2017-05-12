@@ -15,7 +15,7 @@ export const homeRoute                   = ()                        => `/`
 export const landingRoute                = ()                        => `/landing`
 export const loginRoute                  = ()                        => `/login`
 export const onboardingAboutRoute        = ()                        => `/onboarding`
-export const onboardingDownloadRoute     = ()                    => `/onboarding/download`
+export const onboardingDownloadRoute     = ()                        => `/onboarding/download`
 export const onboardingSyncRoute         = ()                        => `/onboarding/sync`
 export const openSourceRoute             = ()                        => `/open-source`
 export const organisationRoute           = ({ organisationId })      => `/organisaitons/${organisationId}`

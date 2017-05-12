@@ -69,7 +69,7 @@ import UserOverview                            from 'pages/UserOverview'
 import UserProjects                            from 'pages/UserProjects'
 import UserStars                               from 'pages/UserStars'
 
-export default (
+export default () => (
   <Route                                       component={ AppRoot }>
     <Route                                     component={ AppAuthed }>
       <Route path="onboarding"                 component={ Onboarding }>

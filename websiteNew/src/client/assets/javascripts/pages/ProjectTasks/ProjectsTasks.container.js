@@ -9,6 +9,7 @@ import { createFilterString, getFilter } from 'stemn-shared/misc/StringFilter/St
 import newThreadModalName from 'stemn-shared/misc/Threads/NewThreadModal'
 import { showModal } from 'stemn-shared/misc/Modal/Modal.actions'
 import { search } from 'stemn-shared/misc/Search/Search.actions'
+import confirmAuth from 'stemn-shared/misc/Auth/actions/confirmAuth'
 
 const filterModel = {
   groups: 'array',
@@ -57,13 +58,13 @@ const stateToProps = ({ projects, tasks, search, stringFilter }, { params, locat
 
 const dispatchToProps = {
   getBoards,
-  showNewThreadModal: (modalProps) => showModal({
+  showNewThreadModal: (modalProps) => confirmAuth(() => showModal({
     modalType: newThreadModalName,
     modalProps: modalProps,
     modalOptions: {
       noClickClose: true,
     }
-  }),
+  })),
   setFilter,
   search,
 }

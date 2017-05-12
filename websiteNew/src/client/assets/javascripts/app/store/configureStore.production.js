@@ -8,9 +8,12 @@ import httpPackage from 'stemn-shared/redux/middleware/httpPackage/httpPackage.m
 import httpTransform from 'stemn-shared/redux/middleware/httpTransform/httpTransform.middleware.js'
 import toastsError from 'stemn-shared/misc/Toasts/ToastsError.middleware'
 //import createLogger from 'redux-logger'
+import auth from 'stemn-shared/misc/Auth/Auth.middleware'
+
 
 const middleware = [
   thunk,
+  auth,
   throttle,
   httpPackage,
   httpTransform,

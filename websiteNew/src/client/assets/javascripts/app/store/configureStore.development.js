@@ -11,6 +11,7 @@ import createLogger from 'redux-logger'
 import { routerMiddleware } from 'react-router-redux'
 import { browserHistory } from 'react-router'
 import toastsError from 'stemn-shared/misc/Toasts/ToastsError.middleware'
+import auth from 'stemn-shared/misc/Auth/Auth.middleware'
 
 
 // Other
@@ -26,6 +27,7 @@ import DevTools from '../../modules/DevTools'
 
 const middlewares = [
   thunk,
+  auth,
   throttle,
   httpPackage,
   httpTransform,
