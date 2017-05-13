@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import classes from './LandingHeader.css';
+import classes from './LandingHeader.scss';
 import classNames from 'classnames';
 
 import { loginRoute } from 'route-actions';
@@ -12,6 +12,7 @@ import logo from 'images/logo80x80none.png';
 import MdAdd from 'react-icons/md/add';
 import MdNotifications from 'react-icons/md/notifications';
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton';
+import HeaderMobileMenu from 'modules/HeaderMobileMenu';
 import MdMenu from 'react-icons/md/menu'
 
 export default class LandingHeader extends Component {
@@ -96,19 +97,9 @@ export default class LandingHeader extends Component {
       label: 'Download',
     }]
 
-    const linkHeight = 33
-    const mobileLinkStyle = {
-      height: `${linkHeight}px`
-    }
-    const mobileLinksStyle = isOpen
-      ? {
-        height: linkHeight * items.length
-      }
-      : {}
-
     return (
       <header className={ allClasses }>
-        <Container className="hide-xs layout-row layout-align-start-center">
+        <Container className={ classNames(classes.inner, 'hide-xs layout-row layout-align-start-center') }>
           <Link to='/landing' className={ classes.logo }>
             <img src={logo} alt=""/>
           </Link>
@@ -120,20 +111,8 @@ export default class LandingHeader extends Component {
           ? this.isLoggedIn()
           : this.isLoggedOut() }
         </Container>
-        <div className={ classNames(classes.mobileLinks, 'hide-gt-xs') } style={ mobileLinksStyle }>
-          { items.map(item => (
-            <Link
-              key={ item.label }
-              activeClassName="active"
-              className={ classNames(classes.mobileLink, 'layout-row layout-align-start-center') }
-              style={ mobileLinkStyle }
-              name={ item.route }
-            >
-              { item.label }
-            </Link>
-          ))}
-        </div>
-        <Container className="hide-gt-xs layout-row layout-align-start-center">
+        <HeaderMobileMenu items={ items } isOpen={ isOpen } />
+        <Container className={ classNames(classes.inner, 'hide-gt-xs layout-row layout-align-start-center') }>
           <Link to='/landing' className={ classes.logo }>
             <img src={logo} alt=""/>
           </Link>
@@ -141,8 +120,12 @@ export default class LandingHeader extends Component {
           { auth.user._id
           ? this.isLoggedIn()
           : this.isLoggedOut() }
-
-          <MdMenu className={ classes.menuButton } onClick={ this.toggleOpen } size={ 25 } />
+          <SimpleIconButton
+            className={ classNames('hide-gt-xs', classes.menuButton) }
+            onClick={ this.toggleOpen }
+          >
+            <MdMenu size={ 25 } />
+          </SimpleIconButton>
         </Container>
       </header>
     )

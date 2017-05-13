@@ -14,9 +14,25 @@
 .sidebar {
   background: white;
   overflow-y: auto;
-  min-width: 400px;
+  width: 450px;
   border-left: 1px solid rgba(0, 0, 0, 0.1);
   padding: 30px;
+
+  @media (max-width: 800px) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: 0 9px 14px 1px rgba(0, 0, 0, 0.1);
+    border-left: none;
+    transition: 0.3s ease all;
+    transform: translateX(120%);
+
+    &.isOpen {
+      transform: translateX(0%);
+    }
+  }
+
 }
 
 .preview {

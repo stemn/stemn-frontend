@@ -9,6 +9,7 @@ body {
   color: black;
   background: rgba(0, 0, 0, 0.02);
   min-height: 100vh;
+  max-width: 100vw;
   font-family: Open Sans;
   overflow-y: scroll;
   overflow-x: hidden;

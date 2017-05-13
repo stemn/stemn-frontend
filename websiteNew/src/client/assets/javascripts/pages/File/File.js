@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import classNames from 'classnames'
-import classes from './File.css'
+import classes from './File.scss'
 import { projectRoute, fileRoute } from 'route-actions'
 import { orderItemsByTime, isSelected } from 'stemn-shared/misc/FileCompare/FileCompare.utils.js'
 import { orderBy, has, get } from 'lodash'
@@ -18,6 +18,17 @@ import FileCompareInner from 'stemn-shared/misc/FileCompare/FileCompareInner/Fil
 import FileCompareMenu from 'stemn-shared/misc/FileCompare/FileCompareMenu'
 
 export default class File extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isOpen: false,
+    }
+  }
+  toggleOpen = () => {
+    this.setState({
+      isOpen: !this.state.isOpen,
+    })
+  }
   clickFileOrFolder = ({ file }) => {
     const { fileId, revisionId } = file;
     const { pushRoute } = this.props;
@@ -62,7 +73,7 @@ export default class File extends Component {
             changeMode={ this.changeMode }
           />
         </div>
-        <div className="layout-row flex">
+        <div className="layout-row flex rel-box">
           <div className={ classNames(classes.preview, 'layout-column flex')}>
             <FileCompareInner
               className="layout-column flex"
@@ -80,27 +91,25 @@ export default class File extends Component {
               preferPlace="above"
             />
           </div>
-          <DragResize side="left" width="450" widthRange={[0, 450]} className="layout-column">
-            <aside className={ classes.sidebar + ' layout-column flex' }>
-              <SectionTitle className={ classes.sidebarTitle }>Meta</SectionTitle>
-              <SimpleTable>
-                <tr><td>Name</td><td>{file.data.name}</td></tr>
-                <tr><td>Size</td><td>{formatBytes(file.data.size)}</td></tr>
-                <tr><td>Last modified</td><td>{moment(file.data.modified).fromNow()}</td></tr>
-                { revisions.length > 0 &&
-                <tr><td>Revisions</td><td>{revisions.length}</td></tr> }
-              </SimpleTable>
-              <AssemblyParts 
-                fileMeta={ file } 
-                clickFn={ this.clickFileOrFolder }
-              />
-              <SectionTitle className={ classes.sidebarTitle }>Timeline</SectionTitle>
-              <TimelineVertical
-                items={ timelineData }
-                type="file"
-              />
-            </aside>
-          </DragResize>
+          <aside className={ classes.sidebar + ' layout-column' }>
+            <SectionTitle className={ classes.sidebarTitle }>Meta</SectionTitle>
+            <SimpleTable>
+              <tr><td>Name</td><td>{file.data.name}</td></tr>
+              <tr><td>Size</td><td>{formatBytes(file.data.size)}</td></tr>
+              <tr><td>Last modified</td><td>{moment(file.data.modified).fromNow()}</td></tr>
+              { revisions.length > 0 &&
+              <tr><td>Revisions</td><td>{revisions.length}</td></tr> }
+            </SimpleTable>
+            <AssemblyParts
+              fileMeta={ file }
+              clickFn={ this.clickFileOrFolder }
+            />
+            <SectionTitle className={ classes.sidebarTitle }>Timeline</SectionTitle>
+            <TimelineVertical
+              items={ timelineData }
+              type="file"
+            />
+          </aside>
         </div>
       </div>
     )

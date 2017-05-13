@@ -6,8 +6,10 @@
   color: white;
   transition: 0.3s ease all;
   z-index: 10;
-  width: 100vw;
   min-height: 60px;
+}
+
+.inner {
 }
 
 .headerFilled {
@@ -18,6 +20,7 @@
   margin: 5px 0;
   height: 45px;
   margin-right: 5px;
+  margin-left: -5px;
 }
 
 .logo img {
@@ -51,19 +54,12 @@
 .specialLink > div{
   padding: 5px 10px;
 }
-.mobileLinks {
-  background: rgb(15, 16, 18);
-  overflow: hidden;
-  height: 0;
-  transition: 0.3s ease all;
-}
-.mobileLink {
-  padding: 0 20px;
-}
-.mobileLink:global(.active) {
-  font-weight: bold;
-}
 
 .menuButton {
+  padding-right: 0px;
   margin-left: 10px;
+  color: white;
+  &:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
 }

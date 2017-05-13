@@ -2,15 +2,27 @@
 
 .header {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.inner {
   height: 60px;
 }
 
 .logo {
   height: 45px;
+  margin-left: -5px;
 }
 
 .logo img {
   height: 100%;
+}
+
+.search {
+  width: 350px;
+  @media (max-width: 599px) {
+    flex: 1;
+    width: auto;
+  }
 }
 
 .badge {
@@ -40,4 +52,9 @@
 }
 .link:global(.active) {
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.menuButton {
+  padding-right: 0px;
+  margin-left: 10px;
 }
