@@ -23,6 +23,9 @@ import TaskTimelineEmpty from 'stemn-shared/misc/Tasks/TaskTimelineEmpty'
 import { Breadcrumbs, Crumb } from 'stemn-shared/misc/Breadcrumbs'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton'
 import DueDate from 'stemn-shared/misc/Tasks/TaskDueDate'
+import { permissionsIsMin } from 'stemn-shared/misc/Auth/Auth.utils'
+import { get } from 'lodash'
+
 
 export default class ProjectTask extends Component {
   updateTask = () => {
@@ -163,10 +166,10 @@ export default class ProjectTask extends Component {
                 className={ classes.avatar }
                 name={ user.name }
                 picture={ user.picture }
-                size={ 30 }
+                size={ 20 }
                 shape='square'
               />
-              <div>{ user.name }</div>
+              <b style={{fontSize: '12px'}}>{ user.name }</b>
             </Link>
           ))}
         </div> }
@@ -174,9 +177,9 @@ export default class ProjectTask extends Component {
     )
   }
   render() {
-    const { task, project, board, taskModel, taskId, timeline, location } = this.props
+    const { task, project, board, taskModel, taskId, timeline, location, currentUser } = this.props
 
-    if (task && task.data && board && board.data) {
+    if (task && task.data && board && board.data && project && project.data ) {
       const group = board.data.groups.find(group => group._id === task.data.group)
 
       const userRouteParams = {
@@ -187,7 +190,11 @@ export default class ProjectTask extends Component {
         taskId: task.data._id,
       }
 
-      const edit = location.pathname.endsWith('/edit')
+      const isOwner = task.data.owner._id === currentUser._id
+      const currentUserRole = get(project.data.team.find(member => member._id === currentUser._id), 'permissions.role')
+      const isAdmin = currentUserRole && permissionsIsMin(currentUserRole, 'admin')
+      const canEdit = isOwner || isAdmin
+      const edit = canEdit && location.pathname.endsWith('/edit')
 
       return (
         <div>
@@ -230,28 +237,39 @@ export default class ProjectTask extends Component {
                 <div>&nbsp;created this thread { moment(task.data.created).fromNow() }.</div>
               </div>
               <div className="flex" />
-              <PopoverDropdown
-                value={ task.data.completed }
-                model={ `${taskModel}.data.completed` }
-                options={ this.dropdownOptions }
-                onChange={ this.updateTask }
-                style={ { margin: '0 15px' } }
-              />
-              { edit
-              ? <Button
+              { canEdit &&
+                <PopoverDropdown
+                  value={ task.data.completed }
+                  model={ `${taskModel}.data.completed` }
+                  options={ this.dropdownOptions }
+                  onChange={ this.updateTask }
+                  style={ { margin: '0 15px' } }
+                />
+              }
+              { !canEdit &&
+                <Tag className={ task.data.completed ? 'warn': 'success' } style={{ margin: '0px'}}>
+                  <MdDone size={ 20 } style={ { marginRight: '5px' } }/>
+                  { task.data.completed ? 'THREAD CLOSED': 'THREAD OPEN' }
+                </Tag>
+              }
+              { edit &&
+                <Button
                   className="primary"
                   name="taskRoute"
                   params={ taskRouteParams }
                 >
                   Save
                 </Button>
-              : <Button
+              }
+              { !edit && canEdit &&
+                <Button
                   className="primary"
                   name="taskEditRoute"
                   params={ taskRouteParams }
                 >
                   Edit
-                </Button> }
+                </Button>
+              }
             </div>
           </SubSubHeader>
           <Container style={ { marginTop: '30px', marginBottom: '60px' } }>
@@ -287,10 +305,7 @@ export default class ProjectTask extends Component {
 
 
 
-//              <Tag className="success">
-//                <MdDone size={ 20 } style={ { marginRight: '5px' } }/>
-//                OPEN
-//              </Tag>
+
 //              <Tag className="primary">
 //                <MdAccessTime size={ 20 } style={ { marginRight: '5px' } }/>
 //                {`Due ${ moment(task.data.due).fromNow() }`}
