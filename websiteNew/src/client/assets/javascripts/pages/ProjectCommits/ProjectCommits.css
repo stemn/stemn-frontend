@@ -57,3 +57,13 @@
 .avatar {
   margin-right: 10px;
 }
+
+.search {
+  width: 100%;
+}
+
+@media (max-width: 599px) {
+  .search {
+    margin-bottom: 15px;
+  }
+}

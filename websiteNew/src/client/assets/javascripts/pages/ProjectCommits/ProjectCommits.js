@@ -3,7 +3,7 @@ import classes from './ProjectCommits.css'
 import classNames from 'classnames'
 import moment from 'moment'
 import { get } from 'lodash'
-import { Container } from 'stemn-shared/misc/Layout'
+import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import HistoryGraph from 'stemn-shared/misc/History/HistoryGraph'
 import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
@@ -144,26 +144,39 @@ export default class ProjectCommits extends Component {
     return (
       <div className={ classes.content }>
         <SubSubHeader className={ classes.subHeader }>
+          <Row className="layout-xs-column layout-gt-xs-row">
+            <Col className="flex-xs flex-sm flex-gt-sm-30 layout-row">
+              <SearchInput
+                className={ classes.search }
+                placeholder="Search History"
+                value={ filter.string }
+                changeAction={ this.changeInput }
+              />
+            </Col>
+            <div className="flex-xs-0 flex-sm-0 flex-gt-sm" />
+            <Col className="layout-row">
+              <PopoverDropdown
+                className="flex-xs"
+                value={ get(filter, ['object', 'user']) }
+                options={ userFilterOptions }
+                style={ { marginRight: '15px'} }
+              >
+                User:&nbsp;
+              </PopoverDropdown>
+              <PopoverDropdown
+                className="flex-xs"
+                value={ filter.object.type }
+                options={ typeFilterOptions }
+              >
+                Type:&nbsp;
+              </PopoverDropdown>
+            </Col>
+          </Row>
+
           <div className="layout-row">
-            <SearchInput
-              placeholder="Search History"
-              value={ filter.string }
-              changeAction={ this.changeInput }
-            />
+
             <div className="flex" />
-            <PopoverDropdown
-              value={ get(filter, ['object', 'user']) }
-              options={ userFilterOptions }
-              style={ { marginRight: '15px'} }
-            >
-              User:&nbsp;
-            </PopoverDropdown>
-            <PopoverDropdown
-              value={ filter.object.type }
-              options={ typeFilterOptions }
-            >
-              Type:&nbsp;
-            </PopoverDropdown>
+
           </div>
         </SubSubHeader>
         <div className={ classes.innerContent }>

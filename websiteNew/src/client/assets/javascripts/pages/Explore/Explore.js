@@ -73,13 +73,13 @@ export default class Explore extends Component {
               value={ location.query.store }
               options={ this.connectedOptions }
             >
-              File Store:&nbsp;
+              Files:&nbsp;
             </PopoverDropdown>
             <PopoverDropdown
               value={ location.query.sort }
               options={ this.orderOptions }
             >
-              Order By:&nbsp;
+              Order:&nbsp;
             </PopoverDropdown>
           </div>
         </SubHeader>

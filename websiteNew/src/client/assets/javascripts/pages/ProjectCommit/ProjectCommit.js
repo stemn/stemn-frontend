@@ -41,8 +41,10 @@ export default class ProjectCommit extends Component {
               size={ 20 }
               shape='square'
             />
-            <b>{ commit.user.name }</b>
-            <div>&nbsp;commited { groupedRevisions.length } files containing a total of { commit.data.items.length } revisions.</div>
+            <div className="text-ellipsis">
+              <b>{ commit.user.name }</b>
+              &nbsp;commited { groupedRevisions.length } files containing a total of { commit.data.items.length } revisions.
+            </div>
           </div>
         </SubSubHeader>
         <Container className={ classes.files }>

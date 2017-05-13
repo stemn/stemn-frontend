@@ -21,7 +21,7 @@ export default class Notifications extends Component {
 
     return (
       <StandardLayout>
-        <SubHeader title='Notifications'>
+        <SubHeader title='Notifications' noResponsive>
           <div className="layout-column layout-align-center">
             <Button className='primary' onClick={ markAllRead }>Mark as read</Button>
           </div>

@@ -37,13 +37,12 @@ export default class ProjectTeam extends Component {
                           shape="square"
                         />
                       </Link>
-                      <div className="layout-column">
-                        <Link className="link-primary" name="userRoute" params={ userLinkParams }>
+                      <div className="layout-column flex">
+                        <Link className="link-primary text-ellipsis" name="userRoute" params={ userLinkParams }>
                           { user.name }
                         </Link>
-                        <div className={ classes.blurb }>{ user.blurb }</div>
+                        <div className={ classNames(classes.blurb, 'text-ellipsis') }>{ user.blurb }</div>
                       </div>
-                      <div className="flex" />
                       <SocialButton
                         style={ { marginLeft: '10px' } }
                         type="follow"
