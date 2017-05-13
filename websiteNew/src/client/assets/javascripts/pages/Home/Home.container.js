@@ -37,8 +37,8 @@ const fetchConfigs = [{
 @fetchDataHoc(fetchConfigs)
 export default class HomeContainer extends Component {
   componentWillMount() {
+    const { isLoggedIn, replace } = this.props
     // Redirect to landing route if the user is not logged in.
-    const { replace, isLoggedIn } = this.props
     if (!isLoggedIn) {
       replace(landingRoute())
     }

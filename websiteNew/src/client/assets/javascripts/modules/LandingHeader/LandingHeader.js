@@ -113,7 +113,7 @@ export default class LandingHeader extends Component {
             <img src={logo} alt=""/>
           </Link>
           { items.map(item => (
-            <Link activeClassName="active" className={ classes.link } name={ item.route }>{ item.label }</Link>
+            <Link key={ item.label } activeClassName="active" className={ classes.link } name={ item.route }>{ item.label }</Link>
           ))}
           <div className="flex" />
           { auth.user._id

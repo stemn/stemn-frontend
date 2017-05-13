@@ -1,6 +1,9 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from '../reducer';
+import qs from 'querystring'
 
+import { routerMiddleware } from 'react-router-redux'
+import { browserHistory } from 'react-router'
 import thunk from 'redux-thunk'
 import promise from 'redux-promise-middleware'
 import throttle from 'stemn-shared/redux/middleware/throttle/throttle.middleware.js'
@@ -10,6 +13,8 @@ import toastsError from 'stemn-shared/misc/Toasts/ToastsError.middleware'
 import createLogger from 'redux-logger'
 import auth from 'stemn-shared/misc/Auth/Auth.middleware'
 
+const searchParams = qs.parse(window.location.search.substring(1))
+
 const middleware = [
   thunk,
   auth,
@@ -18,7 +23,11 @@ const middleware = [
   httpTransform,
   promise(),
   toastsError,
-  createLogger({collapsed: true}),
+  // If ?debug search param is used, the redux logger is added
+  ...(searchParams.debug
+    ? [createLogger({ collapsed: true })]
+    : []),
+  routerMiddleware(browserHistory),
 ]
 
 const enhancer = compose(

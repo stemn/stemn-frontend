@@ -4,6 +4,18 @@ const path = require('path')
 const SSH = require('ssh-promise')
 const exec = require('child-process-promise').exec
 
+/*********************************************************
+This script will deploy the stemn website. It should be
+run from the root website folder using `npm run deploy`.
+
+What it does:
+1. Copies the dist to the 'stemn-website-live' folder.
+   This repo must be located at '../../stemn-website-live'
+2. Pushes this repo
+3. SSHs into the server, pulls the repo
+
+*********************************************************/
+
 const joinCommands = commands => commands.join(' && ')
 
 const config = {

@@ -52,7 +52,7 @@ const enhancer = compose(
 );
 
 export default function configureStore(initialState) {
-    const store = createStore(rootReducer, initialState, enhancer);
+  const store = createStore(rootReducer, initialState, enhancer);
 
   // Enable hot module replacement for reducers (requires Webpack or Browserify HMR to be enabled)
   if (module.hot) {

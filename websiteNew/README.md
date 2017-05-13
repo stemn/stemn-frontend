@@ -11,7 +11,8 @@ There are two ways in which you can build and run the web app:
 
   The last command will boot up HTTP server on `3000` port and serve `build/client` directory in a default browser
 
-### How do I deploy this?
+### Deploy
 
-`npm run build`. This will prepare and build the project for production use.
-`npm run deploy`. This will copy the dist to the stemn-website-live repo where it will then be pushed and pulled on the server
+Make sure the **stemn-website-live** repo is cloned and in `../../stemn-website-live`
+`npm run build`. This will build the minified dist for production use.
+`npm run deploy`. This will copy the dist to the stemn-website-live repo where it will then be pushed and pulled on the server. (see `./scripts/deploy.js`)
