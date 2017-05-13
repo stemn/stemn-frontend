@@ -106,12 +106,13 @@ const eventTextMap = {
     }
   },
   changedLabels: (item, type, entity) => {
+    console.log(item);
     if (type === 'task' || type === 'project') {
       const hasAddedLabels = item.data.addedLabels && item.data.addedLabels.length > 0
       const hasRemovedLabels = item.data.removedLabels && item.data.removedLabels.length > 0
       const params = {
         projectId: entity.data.project,
-        taskId: item.task,
+        taskId: item.task._id,
       }
       return (
         <span>

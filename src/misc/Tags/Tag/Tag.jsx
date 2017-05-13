@@ -11,7 +11,7 @@ export default React.createClass({
     const { text, className, children, ...otherProps } = this.props;
     return (
       <div className={classNames(classes.tag, className)} { ...otherProps }>
-        <div className={ classes.tagInner }>
+        <div className={ classNames(classes.tagInner, 'layout-row layout-align-start-center') }>
           { children }
           { middleConcat(text, 30) }
         </div>
