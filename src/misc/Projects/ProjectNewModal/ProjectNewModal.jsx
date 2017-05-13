@@ -14,7 +14,7 @@ import { has, pick } from 'lodash';
 
 // Styles
 import classNames from 'classnames';
-import classes from './ProjectNewModal.css';
+import classes from './ProjectNewModal.scss';
 
 // Sub Components
 import Button from 'stemn-shared/misc/Buttons/Button/Button';

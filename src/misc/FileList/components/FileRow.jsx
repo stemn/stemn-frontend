@@ -8,7 +8,7 @@ import Label from 'stemn-shared/misc/Label/Label.jsx'
 import Link from 'stemn-shared/misc/Router/Link';
 import Highlight from 'stemn-shared/misc/Autosuggest/Highlight'
 
-export default class FilwRow extends Component {
+export default class FileRow extends Component {
   static propTypes = {
     singleClick: PropTypes.func,
     doubleClick: PropTypes.func,
@@ -83,22 +83,25 @@ export default class FilwRow extends Component {
           />
         </div>
         { file.commit && file.commit.summary && file.commit._id
-        ? <Link
-            name='commitRoute'
-            params={ { projectId: file.project._id, commitId: file.commit._id } }
-            show
-            scope="main"
-            className={ classNames(classes.clickable, 'link-primary') }
-          >
-          {file.commit.summary}
-          </Link>
+        ? <div className="flex">
+            <Link
+              name='commitRoute'
+              params={ { projectId: file.project._id, commitId: file.commit._id } }
+              show
+              scope="main"
+              className={ classNames(classes.commit, classes.clickable, 'link-primary text-ellipsis') }
+            >
+            {file.commit.summary}
+            </Link>
+          </div>
         : null }
-        <div className="flex"></div>
-        { file.revisionNumber > 1
-        ? <div style={{padding: '0 15px'}}><Label title={file.revisionNumber + ' revisions'}>{file.revisionNumber} Revisions</Label></div>
-        : null }
-        <div style={{width: '100px'}}>{file.modified ? timeFromNow : ''}</div>
-        <div style={{width: '80px'}}>{bytes(file.size)}</div>
+        <div className={ classNames(classes.label, 'hide-xs') }>
+          { file.revisionNumber > 1 &&
+            <Label title={file.revisionNumber + ' revisions'}>{file.revisionNumber} Revisions</Label>
+          }
+        </div>
+        <div className={ classNames(classes.date, 'hide-xs') }>{file.modified ? timeFromNow : ''}</div>
+        <div className={ classes.size }>{bytes(file.size)}</div>
       </div>
     );
   }

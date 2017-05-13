@@ -52,7 +52,7 @@ export default class FileCompare extends Component {
       return (
         <div className={ className }>
           <TogglePanel cacheKey={ togglePanelCacheKey }>
-            <div>{ file.data.path }</div>
+            <div className="text-ellipsis text-grey-4">{ file.data.path }</div>
             <FileCompareMenu
               file1={ file1 }
               file2={ file2 }

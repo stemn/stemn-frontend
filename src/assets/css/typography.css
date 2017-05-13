@@ -43,6 +43,9 @@
 .text-grey-3{
   color: rgba(0,0,0,0.5);
 }
+.text-grey-4{
+  color: rgba(0,0,0,0.6);
+}
 
 .text-center{
   text-align: center;

@@ -28,3 +28,21 @@
   color: white !important;
   background: primary !important;
 }
+
+.size {
+  width: 60px;
+  text-align: right;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.date {
+  width: 100px;
+  text-align: right;
+  margin-left: 10px;
+}
+.commit {
+}
+.label {
+  margin-left: 10px;
+  width: 80px;
+}

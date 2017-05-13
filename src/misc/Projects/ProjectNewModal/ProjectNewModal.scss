@@ -36,16 +36,9 @@
 }
 
 .stepModal{
-  width: 900px;
+  max-width: 900px;
   height: 600px;
-}
-
-.row{
-  margin-left: -15px;
-  margin-right: -15px
-}
-.col{
-  padding-left: 15px;
-  padding-right: 15px;
-  min-width: 0;
+  @media (max-width: 599px) {
+    height: 100vh;
+  }
 }

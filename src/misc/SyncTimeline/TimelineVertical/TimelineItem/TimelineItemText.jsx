@@ -143,7 +143,7 @@ const eventTextMap = {
           }
           { type === 'project' &&
             <span>
-              &nbsp;to
+              { hasRemovedLabels ? ' from' : ' to' }
               <Link name="taskRoute" params={ params }>{ item.task.name || 'Untitled Thread'}</Link>
             </span>
           }

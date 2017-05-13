@@ -15,7 +15,10 @@ import ContextMenu from 'stemn-shared/misc/ContextMenu/ContextMenu.jsx'
 import FileListMenu from './FileList.menu.js'
 
 const contextIdentifier = 'FileListCm';
-const FileRowContext = ContextMenuLayer(contextIdentifier, props => props.file)(FileRow)
+const FileRowContext = GLOBAL_ENV.APP_TYPE === 'web'
+  ? FileRow
+  : ContextMenuLayer(contextIdentifier, props => props.file)(FileRow)
+
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

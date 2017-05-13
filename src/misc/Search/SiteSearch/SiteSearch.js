@@ -8,7 +8,7 @@ import Input from 'stemn-shared/misc/Input/Input/Input'
 
 export default class SiteSearch extends Component {
   render() {
-    const { query, setQuery, push } = this.props;
+    const { query, setQuery, push, className } = this.props;
     const route = {
       pathname: '/search',
       query: {
@@ -26,7 +26,7 @@ export default class SiteSearch extends Component {
     }
 
     return (
-      <form className={ classNames('layout-row layout-align-start-center', classes.search) } name="siteSearch" onSubmit={ onSubmit }>
+      <form className={ classNames('layout-row layout-align-start-center', classes.search, className) } name="siteSearch" onSubmit={ onSubmit }>
         <Input
           className="flex"
           placeholder="Search"
