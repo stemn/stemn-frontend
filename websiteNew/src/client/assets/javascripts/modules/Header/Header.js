@@ -75,7 +75,7 @@ export default class Header extends Component {
   }
   isLoggedOut() {
     return (
-      <div className='layout-row layout-align-start-center'>
+      <div className='layout-row layout-align-start-center' style={ { paddingLeft: '15px' } }>
         <Link to={ loginRoute() } className='link-primary'>Sign in</Link>
       </div>
     )
@@ -88,10 +88,19 @@ export default class Header extends Component {
       route: 'exploreRoute',
       label: 'Explore',
     }]
-
+    const itemsMobile = [{
+      route: 'exploreRoute',
+      label: 'Explore',
+    },{
+      route: 'openSourceRoute',
+      label: 'Open source',
+    },{
+      route: 'pricingRoute',
+      label: 'Pricing',
+    }]
     return (
       <header className={ classNames(classes.header, 'layout-column') }>
-        <HeaderMobileMenu items={ items } isOpen={ isOpen } />
+        <HeaderMobileMenu items={ itemsMobile } isOpen={ isOpen } />
         <Container className={ classNames(classes.inner, 'layout-row layout-align-start-center') }>
           <Link to="/" className={ classes.logo }>
             <img src={ logo } alt="" />

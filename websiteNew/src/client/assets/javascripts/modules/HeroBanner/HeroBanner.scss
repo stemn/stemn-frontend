@@ -16,6 +16,9 @@
 .banner h1 {
   font-size: 40px;
   font-weight: 300;
+  @media (max-width: 599px) {
+    font-size: 30px;
+  }
 }
 .banner h3 {
   font-size: 24px;
@@ -25,6 +28,9 @@
 
 .banner p {
   line-height: 1.8em;
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 300;
+  @media (max-width: 599px) {
+    font-size: 16px;
+  }
 }
