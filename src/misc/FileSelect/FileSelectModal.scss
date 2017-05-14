@@ -5,3 +5,11 @@
   background: bg1;
   padding: 10px 15px;
 }
+
+.modal {
+  width: 600px;
+
+  @media (max-width: 599px) {
+    width: 90vw;
+  }
+}

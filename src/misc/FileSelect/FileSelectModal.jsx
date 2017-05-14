@@ -11,6 +11,7 @@ import React, { PropTypes } from 'react';
 
 // Styles
 import classNames from 'classnames';
+import classes from './FileSelectModal.scss'
 
 // Sub Components
 import FileList from 'stemn-shared/misc/FileList';
@@ -107,7 +108,7 @@ export const FileSelectModal = React.createClass({
     const activePath = fileSelect ? validatePath(fileSelect.path, options.explore) : '';
 
     return (
-      <div style={{width: '600px'}}>
+      <div className={ classes.modal }>
         {fileSelect
         ? <FileList
             projectId={projectId}

@@ -1,4 +1,5 @@
 .background {
+  padding: 55px 15px 15px 15px;
   background-position: center center;
   background-size: cover;
   width: 100%;
@@ -9,7 +10,6 @@
 }
 
 .panel {
-  position: relative;
   z-index: 1;
   border-radius: 4px;
   position: relative;

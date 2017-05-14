@@ -25,8 +25,8 @@ export default class GeneralSettings extends Component {
     const { entityModel, project, saveProject } = this.props
     return (
       <div>
-        <Row className="layout-xs-col layout-gt-xs-row">
-          <Col className="flex">
+        <Row className="layout-xs-column layout-gt-xs-row">
+          <Col className="flex-order-xs-2 flex">
             <h3>Project name</h3>
             <Input
               model={`${entityModel}.data.name`}
@@ -57,7 +57,7 @@ export default class GeneralSettings extends Component {
               >Update Project</ProgressButton>
             </div>
           </Col>
-          <Col>
+          <Col className="flex-order-xs-1">
             <h3>Project Picture</h3>
             <Upload
               containerClassName={ classes.container }
