@@ -8,6 +8,7 @@ import MyProjectsPanel from 'stemn-shared/misc/Projects/MyProjectsPanel'
 import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import classes from './Home.css'
+import { Helmet } from "react-helmet";
 
 export default class Home extends Component {
   filterOptions = [{
@@ -39,6 +40,9 @@ export default class Home extends Component {
 
     return (
       <StandardLayout>
+        <Helmet>
+          <title>Dashboard</title>
+        </Helmet>
         <SubHeader title="Dashboard" noResponsive>
           <div className="layout-column layout-align-center-center">
             <PopoverDropdown

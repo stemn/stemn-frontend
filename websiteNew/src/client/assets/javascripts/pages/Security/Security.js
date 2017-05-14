@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import StandardLayout from 'layout/StandardLayout';
-
+import { Helmet } from "react-helmet";
 import classes from 'layout/layout.css';
 import Link from 'stemn-shared/misc/Router/Link'
 
@@ -8,6 +8,9 @@ export default class Security extends Component {
   render() {
     return (
       <StandardLayout contained style={ { marginTop: '30px' } } className={ classes.staticPage }>
+        <Helmet>
+          <title>Security</title>
+        </Helmet>
         <h1>Security</h1>
         <p>We know your privacy is extremely important to you, and we're very protective of it.</p>
         <h2>Need to report a security vulnerability?</h2>

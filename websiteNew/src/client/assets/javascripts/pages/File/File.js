@@ -19,6 +19,7 @@ import FileCompareMenu from 'stemn-shared/misc/FileCompare/FileCompareMenu'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton'
 import MdMenu from 'react-icons/md/menu'
 import MdClose from 'react-icons/md/close'
+import { Helmet } from "react-helmet";
 
 export default class File extends Component {
   constructor(props) {
@@ -66,6 +67,9 @@ export default class File extends Component {
 
     return (
       <div className="layout-column flex" style={ { overflow: 'hidden' } }>
+        <Helmet>
+          <title>{ `${file.data.project.name} - ${file.data.path}` }</title>
+        </Helmet>
         <div className={ classes.header }>
           <FileBreadCrumbs className="text-ellipsis" meta={ file.data } clickFn={ this.clickFileOrFolder } popup />
           <div className="flex" />

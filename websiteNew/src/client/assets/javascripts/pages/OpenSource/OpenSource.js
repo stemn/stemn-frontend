@@ -4,7 +4,7 @@ import LandingLayout from 'layout/LandingLayout'
 import HeroBanner from 'modules/HeroBanner'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import { Container } from 'stemn-shared/misc/Layout'
-
+import { Helmet } from "react-helmet";
 import classes from './OpenSource.scss'
 
 export default class OpenSource extends Component {
@@ -15,6 +15,9 @@ export default class OpenSource extends Component {
   render() {
     return (
       <LandingLayout>
+        <Helmet>
+          <title>Greate Engineering is Open</title>
+        </Helmet>
         <HeroBanner style={ { minHeight: '100vh', margin: '0px' } }>
           <div style={ { width: '680px' } }>
             <h1>Great engineering is open.</h1>

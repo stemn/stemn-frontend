@@ -4,6 +4,7 @@ import HeroBanner from 'modules/HeroBanner'
 import { Container } from 'stemn-shared/misc/Layout'
 import PricingTable from 'stemn-shared/misc/Billing/PricingTable'
 import { pricingTableData } from 'stemn-shared/misc/Billing/Billing.data'
+import { Helmet } from "react-helmet";
 import classes from './Pricing.scss'
 import classNames from 'classnames'
 
@@ -11,6 +12,9 @@ export default class Pricing extends Component {
   render() {
     return (
       <LandingLayout>
+        <Helmet>
+          <title>Pricing</title>
+        </Helmet>
         <HeroBanner>
           <h1>Plans for all workflows</h1>
           <h3>Work together across unlimited private projects with a paid plan</h3>

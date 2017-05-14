@@ -8,7 +8,7 @@ import screens from './screens.jpg'
 import classes from './Landing.scss'
 import classNames from 'classnames'
 import FileIcon from 'stemn-shared/misc/FileList/components/FileIcon'
-
+import { Helmet } from "react-helmet";
 
 export default class Landing extends Component {
   render() {
@@ -17,6 +17,9 @@ export default class Landing extends Component {
 
     return (
       <LandingLayout>
+        <Helmet>
+          <title>Stemn: Seamless Version Control and Task Tracking</title>
+        </Helmet>
         <HeroBanner className={ classes.banner }>
           <h1>Seamless Version Control and Task Tracking</h1>
           <h3>A unified workflow for modern engineers</h3>

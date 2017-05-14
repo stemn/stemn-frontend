@@ -24,7 +24,9 @@ import { Breadcrumbs, Crumb } from 'stemn-shared/misc/Breadcrumbs'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton'
 import DueDate from 'stemn-shared/misc/Tasks/TaskDueDate'
 import { permissionsIsMin } from 'stemn-shared/misc/Auth/Auth.utils'
-import { get } from 'lodash'
+import { get, has } from 'lodash'
+import { Helmet } from "react-helmet";
+
 
 
 export default class ProjectTask extends Component {
@@ -198,6 +200,11 @@ export default class ProjectTask extends Component {
 
       return (
         <div>
+          { has(task, 'data.name') &&
+            <Helmet>
+              <title>{ `Thread: ${task.data.name} by ${task.data.owner.name}` }</title>
+            </Helmet>
+          }
           <SubSubHeader>
           <Breadcrumbs>
             <Crumb name="projectTasksRoute" params={ { projectId: project.data._id } } text="Threads" />
