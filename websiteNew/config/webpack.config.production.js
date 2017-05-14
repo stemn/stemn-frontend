@@ -25,6 +25,11 @@ module.exports = merge(config, {
     application: 'production',
     vendor: ['react', 'react-dom', 'react-redux', 'react-router', 'react-router-redux', 'redux'],
   },
+  output: {
+    filename: 'js/[name].[chunkhash].js',
+    path: path.resolve(__dirname, '../build/client'),
+    publicPath: '/',
+  },
   plugins: [
     // Avoid publishing files when compilation fails
     new webpack.NoErrorsPlugin(),
@@ -47,7 +52,7 @@ module.exports = merge(config, {
       debug: false,
     }),
     new ExtractTextPlugin({
-      filename: 'css/app.css',
+      filename: 'css/app.[chunkhash].css',
       allChunks: true,
     }),
     new CopyWebpackPlugin([

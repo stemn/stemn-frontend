@@ -17,11 +17,6 @@ const babelLoaderQuery = {
 }
 
 module.exports = {
-  output: {
-    filename: 'js/[name].js',
-    path: path.resolve(__dirname, '../build/client'),
-    publicPath: '/',
-  },
   resolve: {
     symlinks: false,
     modules: [
@@ -44,8 +39,6 @@ module.exports = {
     // Shared code
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      filename: 'js/vendor.bundle.js',
-      minChunks: Infinity,
     }),
     new HappyPack({
       threads: 4,

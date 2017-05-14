@@ -26,11 +26,12 @@
   "bugs": "https://github.com/nicksp/redux-webpack-es6-boilerplate/issues",
   "scripts": {
     "clean:build": "rimraf build",
-    "build:html": "node ./bin/buildHtml.js",
+    "build:html": "node ./scripts/buildHtml.js",
     "prestart": "npm run clean:build",
     "start": "webpack-dashboard -c cyan -- node dev-server.js",
     "prebuild": "npm run clean:build",
     "build": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.production.js --progress",
+    "analyse": "webpack-bundle-size-analyzer ./stats.json",
     "postbuild": "npm run build:html",
     "build:serve": "http-server build/client -p 3000 --cors -o -c10",
     "lint": "standard --verbose | snazzy",

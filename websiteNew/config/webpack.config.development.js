@@ -29,6 +29,11 @@ module.exports = merge(config, {
     ],
     vendor: ['react', 'react-dom', 'react-redux', 'react-router', 'react-router-redux', 'redux'],
   },
+  output: {
+    filename: 'js/[name].js',
+    path: path.resolve(__dirname, '../build/client'),
+    publicPath: '/',
+  },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin(GLOBALS),
