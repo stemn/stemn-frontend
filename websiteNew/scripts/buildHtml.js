@@ -20,7 +20,6 @@ Promise.all([readCss, readJs]).then(([cssFiles, jsFiles]) => {
   // Get the CSS file
   const cssFilesNoMap = cssFiles.filter(fileName => !fileName.includes('.map'))
   const appCss = cssFilesNoMap.find(fileName => fileName.includes('app'))
-  console.log(appCss);
 
   // Load the index.html
   fs.readFileAsync('src/client/assets/index.html', 'utf8').then((markup) => {

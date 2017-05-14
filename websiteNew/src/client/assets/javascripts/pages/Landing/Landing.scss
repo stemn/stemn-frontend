@@ -16,6 +16,13 @@
   background: #f4f4f4;
 }
 
+.screen {
+  margin-top: 20px;
+  @media (max-width: 599px) {
+    width: 100%;
+  }
+}
+
 .downloadButton {
   margin-bottom: 60px;
 }
@@ -28,6 +35,9 @@
   height: 400px;
   width: 300px;
   border-radius: 4px;
+  @media (max-width: 599px) {
+    width: 100%;
+  }
 }
 
 .fileIcons > div {
@@ -37,6 +47,10 @@
 .section {
   padding-top: 60px;
   padding-bottom: 60px;
+  @media (max-width: 599px) {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
 }
 
 .bgWhite {

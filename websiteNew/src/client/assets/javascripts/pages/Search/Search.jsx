@@ -16,7 +16,7 @@ export default class Search extends Component {
 
     return (
       <StandardLayout>
-        <SubHeader>
+        <SubHeader noResponsive>
           <Tabs noline>
             <Link to="/search" className={ { 'active': !location.query.type } } query={ { q: location.query.q } }>Projects</Link>
             <Link activeClassName="active" to="/search" query={ { q: location.query.q, type: 'thread' } }>Threads</Link>

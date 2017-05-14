@@ -5,14 +5,15 @@ import DownloadButton from 'stemn-shared/misc/DesktopReleases/DownloadButton'
 import { Row, Col, Container } from 'stemn-shared/misc/Layout'
 import screenshot from './screenshot.jpg'
 import screens from './screens.jpg'
-import classes from './Landing.css'
+import classes from './Landing.scss'
 import classNames from 'classnames'
 import FileIcon from 'stemn-shared/misc/FileList/components/FileIcon'
 
 
 export default class Landing extends Component {
   render() {
-    const { latest } = this.props;
+    const { latest } = this.props
+    const secionClasses = classNames(classes.section, 'layout-xs-column layout-gt-xs-row layout-align-gt-xs-start-center lg')
 
     return (
       <LandingLayout>
@@ -27,13 +28,12 @@ export default class Landing extends Component {
           </div>
         </HeroBanner>
         <Container>
-          <Row className={ classNames(classes.section, 'layout-row layout-align-start-center lg') }>
-            <Col className="flex-xs-100 flex-gt-xs-50 lg">
+          <Row className={ secionClasses }>
+            <Col className="flex-gt-xs-50 lg">
               <div className={ classes.timeline }>
-                lorem
               </div>
             </Col>
-            <Col className="flex-xs-100 flex-gt-xs-50 lg">
+            <Col className="flex-gt-xs-50 lg">
               <h4 className="text-title-2">Infinite version history</h4>
               <p className="text-title-4">All your work is automatically synced as you work.</p>
               <p className="text-title-4">View any previous versions, complete with comments, with the automatic version control features. Revert your files with a single click.</p>
@@ -42,8 +42,8 @@ export default class Landing extends Component {
         </Container>
         <div className={ classes.bgWhite }>
           <Container>
-            <Row className={ classNames(classes.section, 'layout-row layout-align-start-center lg') }>
-              <Col className="flex-xs-100 flex-gt-xs-50 lg">
+            <Row className={ secionClasses }>
+              <Col className="flex-order-xs-2 flex-xs-100 flex-gt-xs-50 lg">
                 <h4 className="text-title-2">Access your files anywhere</h4>
                 <p className="text-title-4">Whether you’re in the office, in the lab, or on the go, access your files in your browser, from any device.</p>
                 <p className="text-title-4">Preview hundreds of different file-types directly in your web browser.</p>
@@ -56,14 +56,14 @@ export default class Landing extends Component {
                   <FileIcon size={ 50 } type="file" fileType="more" />
                 </div>
               </Col>
-              <Col className="flex-xs-100 flex-gt-xs-50 lg">
-                <img src={ screens } />
+              <Col className="flex-order-xs-1 flex-xs-100 flex-gt-xs-50 lg">
+                <img className={ classes.screen } src={ screens } />
               </Col>
             </Row>
           </Container>
         </div>
         <Container>
-          <Row className={ classNames(classes.section, 'layout-row layout-align-start-center lg') }>
+          <Row className={ secionClasses }>
             <Col className="flex-xs-100 flex-gt-xs-50 lg">
 
             </Col>
@@ -74,7 +74,9 @@ export default class Landing extends Component {
             </Col>
           </Row>
         </Container>
+
       </LandingLayout>
     )
   }
 }
+
