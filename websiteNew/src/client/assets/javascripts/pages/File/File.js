@@ -65,7 +65,7 @@ export default class File extends Component {
     const displayFileHeader = ['sideBySide', 'aboveAndBelow'].includes(mode)
 
     return (
-      <div className="layout-column flex">
+      <div className="layout-column flex" style={ { overflow: 'hidden' } }>
         <div className={ classes.header }>
           <FileBreadCrumbs className="text-ellipsis" meta={ file.data } clickFn={ this.clickFileOrFolder } popup />
           <div className="flex" />

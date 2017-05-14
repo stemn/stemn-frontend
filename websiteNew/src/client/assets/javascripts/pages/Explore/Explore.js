@@ -94,7 +94,7 @@ export default class Explore extends Component {
                 criteria={ criteria }
               />
             </Col>
-            <Col className="flex-30">
+            <Col className="flex-gt-xs-30">
               <SiteSearchResults
                 display="tag"
                 type="field"
