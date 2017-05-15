@@ -8,7 +8,7 @@ const compiler = webpack(config)
 compiler.apply(new DashboardPlugin())
 
 compiler.run((err, stats) => {
-  fs.writeFileSync('../reports/stats.json', JSON.stringify(stats.toJson()))
+  fs.writeFileSync(path.join(__dirname, '../reports/stats.json'), JSON.stringify(stats.toJson()))
   console.log('stats.json created. Use https://webpack.github.io/analyse to preview.')
   process.exit()
 })

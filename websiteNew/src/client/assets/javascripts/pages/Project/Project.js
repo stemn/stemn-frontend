@@ -61,7 +61,7 @@ class Project extends Component {
               activeIf={ { includes: ['projectTasksRoute'] } }
               name="projectTasksRoute" params={ routeParams }
             >
-              { get(project, 'data.numThreads', 0) } Threads
+              Threads
             </Link>
             <IsOwner
               team={ get(project, 'data.team', []) }

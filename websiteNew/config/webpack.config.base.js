@@ -12,6 +12,7 @@ const babelLoaderQuery = {
   ].map(require.resolve),
   plugins: [
     'babel-plugin-transform-decorators-legacy',
+    'babel-plugin-lodash',
     'react-hot-loader/babel',
   ].map(require.resolve),
 }
@@ -29,10 +30,19 @@ module.exports = {
       'stemn-shared': path.resolve(__dirname, '../node_modules/stemn-frontend-shared/src'),
       theme: path.resolve(__dirname, '../src/client/assets/styles/modules/theme.css'),
       'route-actions': path.resolve(__dirname, '../src/client/assets/javascripts/pages/routeActions.js'),
+      'lodash.get': path.resolve(__dirname, '../node_modules/lodash/get'),
+      'lodash.assign': path.resolve(__dirname, '../node_modules/lodash/assign'),
+      'lodash.throttle': path.resolve(__dirname, '../node_modules/lodash/throttle'),
+      'lodash.topath': path.resolve(__dirname, '../node_modules/lodash/topath'),
+      'lodash.repeat': path.resolve(__dirname, '../node_modules/lodash/repeat'),
+      'lodash.keys': path.resolve(__dirname, '../node_modules/lodash/keys'),
+      'lodash.debounce': path.resolve(__dirname, '../node_modules/lodash/debounce'),
     },
     extensions: ['.js', '.jsx', '.json', '.scss'],
   },
   plugins: [
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/), // http://stackoverflow.com/questions/25384360/how-to-prevent-moment-js-from-loading-locales-with-webpack
+    new webpack.IgnorePlugin(/vertx/),                                 // Ignore vertx so ES6 promise works: https://github.com/stefanpenner/es6-promise/issues/100
     new webpack.ProvidePlugin({
       fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',  // fetch API
     }),

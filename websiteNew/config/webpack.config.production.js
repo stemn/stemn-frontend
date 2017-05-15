@@ -23,7 +23,21 @@ module.exports = merge(config, {
   devtool: 'cheap-module-source-map',
   entry: {
     application: 'production',
-    vendor: ['react', 'react-dom', 'react-redux', 'react-router', 'react-router-redux', 'redux'],
+    vendor: [
+      'axios',
+      'icepick',
+      'moment',
+      'react',
+      'react-dom',
+      'react-helmet',
+      'react-popover',
+      'react-redux',
+      'react-router',
+      'react-router-redux',
+      'redux',
+      'redux-logger',
+      'redux-persist',
+    ],
   },
   output: {
     filename: 'js/[name].[chunkhash].js',
