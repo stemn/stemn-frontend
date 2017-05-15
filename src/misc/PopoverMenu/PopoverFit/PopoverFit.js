@@ -14,10 +14,18 @@ export default class PopoverFit extends Component {
   }
   getButtonRef = (ref) => {
     if (ref) {
+      this.buttonRef = ref
+    }
+  }
+  setWidth = () => {
+    if (this.buttonRef) {
       this.setState({
-        minWidth: ref.clientWidth,
+        minWidth: this.buttonRef.clientWidth,
       })
     }
+  }
+  componentWillReceiveProps() {
+    this.setWidth()
   }
   render() {
     const { children, max, style, className, ...otherProps } = this.props

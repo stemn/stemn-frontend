@@ -2,6 +2,7 @@ import http from 'axios';
 import { oauthCreds } from '../Auth.config.js';
 import setAuthToken from './setAuthToken'
 import loadUserData from './loadUserData'
+import { getSettings } from 'stemn-shared/misc/UserSettings/UserSettings.actions.js'
 
 export default ({ provider, code }) => (dispatch) => {
   if(oauthCreds[provider]){
@@ -17,6 +18,7 @@ export default ({ provider, code }) => (dispatch) => {
       }).then(response => {
         dispatch(setAuthToken(response.data.token))
         setTimeout(()=>dispatch(loadUserData()), 1)
+        setTimeout(()=>dispatch(getSettings()), 1)
         return response
       })
     })

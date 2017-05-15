@@ -39,6 +39,12 @@
   max-width: 900px;
   height: 600px;
   @media (max-width: 599px) {
-    height: 100vh;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: white;
+    height: auto;
   }
 }
