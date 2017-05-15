@@ -3,6 +3,9 @@ const path = require('path')
 const webpack = require('webpack')
 const autoprefixer = require('autoprefixer')
 const HappyPack = require('happypack')
+const WebpackChunkHash = require('webpack-chunk-hash')
+const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin')
+const HashModuleId = require('./plugins/HashModuleId')
 
 const babelLoaderQuery = {
   presets: [
@@ -46,10 +49,16 @@ module.exports = {
     new webpack.ProvidePlugin({
       fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',  // fetch API
     }),
-    // Shared code
+    // Long term caching - https://webpack.js.org/guides/caching/#deterministic-hashes
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
+      name: ['vendor', 'manifest'],
     }),
+    new WebpackChunkHash(),
+    new ChunkManifestPlugin({
+      filename: 'chunk-manifest.json',
+      manifestVariable: 'webpackManifest',
+    }),
+    new webpack.HashedModuleIdsPlugin(),
     new HappyPack({
       threads: 4,
       loaders: [{
