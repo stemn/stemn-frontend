@@ -6,4 +6,4 @@ build
 *.log*
 npm-debug.log
 .happypack
-./reports/stats.json
+reports/stats

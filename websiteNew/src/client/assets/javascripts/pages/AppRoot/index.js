@@ -5,29 +5,37 @@ import ModalContainer from 'stemn-shared/misc/Modal/ModalContainer.jsx'
 import ToastContainer from 'stemn-shared/misc/Toasts/Toasts.jsx'
 import RouteLoading from 'stemn-shared/misc/CodeSplitting/RouteLoading'
 
-const stateToProps = ({ auth }) => ({
+const stateToProps = ({ auth, userSettings }) => ({
   authToken: auth.authToken,
-  userId: auth.user._id
+  userId: auth.user._id,
+  userSettingsMessages: userSettings.data.messages || {},
 });
 
 const dispatchToProps = {
-  goLanding: () => replace('/landing')
+  goLanding: () => replace('/landing'),
+  goOnboarding: () => replace('/onboarding'),
 };
 
 @connect(stateToProps, dispatchToProps)
 export default class LoginContainer extends Component {
-  maybeGolanding = (nextProps) => {
-    const isLoggedIn = nextProps.authToken && nextProps.userId
-    const isHompage = nextProps.location.pathname === '/'
+  goSomewhere = (nextProps) => {
+    const { userSettingsMessages, authToken, location, userId, goLanding, goOnboarding } = nextProps
+    const { pathname } = location
+    const isLoggedIn = authToken && userId
+    const isHompage = pathname === '/'
+    const notYetOnboarded = userSettingsMessages.onboarding === true
+
     if (!isLoggedIn && isHompage) {
-      nextProps.goLanding()
+      goLanding()
+    } else if (isLoggedIn && notYetOnboarded && !pathname.includes('onboarding')) {
+      goOnboarding()
     }
   }
   componentWillReceiveProps(nextProps) {
-    this.maybeGolanding(nextProps)
+    this.goSomewhere(nextProps)
   }
   componentDidMount() {
-    this.maybeGolanding(this.props)
+    this.goSomewhere(this.props)
   }
   render() {
     const { children } = this.props

@@ -15,13 +15,14 @@ const dispatchToProps = {
 @connect(stateToProps, dispatchToProps)
 export default class LoginContainer extends Component {
   componentWillReceiveProps(nextProps) {
-    if (!nextProps.authToken || !nextProps.userId) {
-      nextProps.goLogin();
-    }
+    this.onMount(nextProps)
   }
   componentDidMount() {
-    if (!this.props.authToken || !this.props.userId) {
-      this.props.goLogin();
+    this.onMount(this.props)
+  }
+  onMount = (props) => {
+    if (!props.authToken || !props.userId) {
+      props.goLogin();
     }
   }
   render() {
