@@ -5,7 +5,6 @@ import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import Home from './Home'
 import { push, replace } from 'react-router-redux'
 import { get } from 'lodash'
-import { landingRoute } from 'route-actions'
 
 const stateToProps = ({ syncTimeline, auth }, { location }) => {
   const filterValue = location.query.filter || 'all'
@@ -36,13 +35,6 @@ const fetchConfigs = [{
 @connect(stateToProps, dispatchToProps)
 @fetchDataHoc(fetchConfigs)
 export default class HomeContainer extends Component {
-  componentWillMount() {
-    const { isLoggedIn, replace } = this.props
-    // Redirect to landing route if the user is not logged in.
-    if (!isLoggedIn) {
-      replace(landingRoute())
-    }
-  }
   render() {
     const { isLoggedIn } = this.props
     if (isLoggedIn) {

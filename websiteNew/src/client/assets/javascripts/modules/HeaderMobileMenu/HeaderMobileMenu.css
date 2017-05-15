@@ -9,6 +9,10 @@
   letter-spacing: 0.5px;
 }
 
+.inner {
+  padding: 10px 0;
+}
+
 .mobileLink {
   padding: 0 20px;
 }

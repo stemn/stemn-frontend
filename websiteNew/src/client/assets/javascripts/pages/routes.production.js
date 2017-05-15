@@ -16,6 +16,7 @@ import AppAuthed                              from 'pages/AppAuthed'
 import AppRoot                                from 'pages/AppRoot'
 import AppUnAuthed                            from 'pages/AppUnAuthed'
 import NotFoundView                           from 'pages/NotFound'
+import Landing                                from 'pages/Landing'
 
 export default ({ dispatch }) => {
   // Routes which are aync in prod
@@ -26,7 +27,6 @@ export default ({ dispatch }) => {
   const getFile                                  = (loc, cb) => getRoute(dispatch, System.import('pages/File'), cb)
   const getFlow                                  = (loc, cb) => getRoute(dispatch, System.import('pages/Flow'), cb)
   const getHome                                  = (loc, cb) => getRoute(dispatch, System.import('pages/Home'), cb)
-  const getLanding                               = (loc, cb) => getRoute(dispatch, System.import('pages/Landing'), cb)
   const getLogin                                 = (loc, cb) => getRoute(dispatch, System.import('pages/Login'), cb)
   const getNotifications                         = (loc, cb) => getRoute(dispatch, System.import('pages/Notifications'), cb)
   const getNotificationsAll                      = (loc, cb) => getRoute(dispatch, System.import('pages/NotificationsAll'), cb)
@@ -104,7 +104,7 @@ export default ({ dispatch }) => {
       <Route path="/explore"                     getComponent={ getExplore } />
       <Route path="/flow"                        getComponent={ getFlow } />
       <Route path="/files/:projectId/:fileId"    getComponent={ getFile } />
-      <Route path="/landing"                     getComponent={ getLanding } />
+      <Route path="/landing"                     component={ Landing } />
       <Route path="/open-source"                 getComponent={ getOpenSource } />
       <Route path="/pricing"                     getComponent={ getPricing } />
       <Route path="/privacy"                     getComponent={ getPrivacy } />

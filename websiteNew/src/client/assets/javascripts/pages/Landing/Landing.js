@@ -9,12 +9,14 @@ import classes from './Landing.scss'
 import classNames from 'classnames'
 import FileIcon from 'stemn-shared/misc/FileList/components/FileIcon'
 import { Helmet } from "react-helmet";
+import isMobile from 'stemn-shared/utils/agent/isMobile'
+import Button from 'stemn-shared/misc/Buttons/Button/Button'
+import MdLock from 'react-icons/md/input'
 
 export default class Landing extends Component {
   render() {
     const { latest } = this.props
     const secionClasses = classNames(classes.section, 'layout-xs-column layout-gt-xs-row layout-align-gt-xs-start-center lg')
-
     return (
       <LandingLayout>
         <Helmet>
@@ -23,9 +25,15 @@ export default class Landing extends Component {
         <HeroBanner className={ classes.banner }>
           <h1>Seamless Version Control and Task Tracking</h1>
           <h3>A unified workflow for modern engineers</h3>
-          <DownloadButton className={ classes.downloadButton + ' secondary lg'} platform="auto" >
-            Download Now
-          </DownloadButton>
+          { isMobile()
+          ? <Button className={ classes.downloadButton + ' secondary lg'} name="loginRoute">
+              <MdLock size={ 20 } style={ { marginRight: '10px' } } />
+              Get Started
+            </Button>
+          : <DownloadButton className={ classes.downloadButton + ' secondary lg'} platform="auto" >
+              Download Now
+            </DownloadButton>
+          }
           <div className={ classes.screenshot }>
            <img src={screenshot}/>
           </div>

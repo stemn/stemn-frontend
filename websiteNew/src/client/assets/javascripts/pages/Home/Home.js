@@ -37,7 +37,6 @@ export default class Home extends Component {
   render() {
     const { timeline, push, filterValue } = this.props
 
-
     return (
       <StandardLayout>
         <Helmet>
