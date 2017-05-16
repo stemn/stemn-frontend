@@ -7,8 +7,9 @@ import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import MyProjectsPanel from 'stemn-shared/misc/Projects/MyProjectsPanel'
 import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
+import Link from 'stemn-shared/misc/Router/Link'
 import classes from './Home.css'
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet"
 
 export default class Home extends Component {
   filterOptions = [{
@@ -54,11 +55,16 @@ export default class Home extends Component {
           <Row className="layout-xs-column layout-gt-xs-row" style={ { marginTop: '30px' } }>
             <Col className="flex flex-order-xs-1">
               <div className={ classes.panel }>
-                <TimelineVertical
-                  items={ timeline }
-                  type="feed"
-                  group
-                />
+                { timeline && timeline.length > 0 &&
+                  <TimelineVertical
+                    items={ timeline }
+                    type="feed"
+                    group
+                  />
+                }
+                { timeline && timeline.length === 0 &&
+                  <div className="text-title-5">Your feed is empty. Follow some <Link name="exploreRoute" className="link-primary">projects or users.</Link></div>
+                }
               </div>
             </Col>
             <Col className="flex-gt-xs-30 flex-order-xs-0">

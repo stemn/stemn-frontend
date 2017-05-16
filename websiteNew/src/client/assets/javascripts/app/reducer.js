@@ -36,7 +36,9 @@ import userSettings     from 'stemn-shared/misc/UserSettings/UserSettings.reduce
 import stringFilter     from 'stemn-shared/misc/stringFilter/stringFilter.reducer.js'
 import history          from 'stemn-shared/misc/History/History.reducer.js'
 
-export default combineReducers({
+import storeReducer     from 'stemn-shared/misc/Store/Store.reducer.js'
+
+const splitReducers = combineReducers({
   auth,
   autosuggest,
   changes,
@@ -73,3 +75,10 @@ export default combineReducers({
   userSettings,
   stringFilter,
 })
+
+export default (state, action) => {
+  const isStoreAction = action && action.type && action.type.startsWith('STORE/')
+  return isStoreAction
+    ? storeReducer(state, action)
+    : splitReducers(state, action)
+}
