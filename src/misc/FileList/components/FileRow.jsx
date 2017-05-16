@@ -5,8 +5,9 @@ import classes from './FileRow.css'
 import bytes from 'stemn-shared/utils/filters/bytes.js';
 import FileIcon from './FileIcon'
 import Label from 'stemn-shared/misc/Label/Label.jsx'
-import Link from 'stemn-shared/misc/Router/Link';
 import Highlight from 'stemn-shared/misc/Autosuggest/Highlight'
+import Link from 'stemn-shared/misc/Router/Link';
+import { getFileRouteName, getFileRouteParams } from 'stemn-shared/misc/FileList/FileList.utils'
 
 export default class FileRow extends Component {
   static propTypes = {
@@ -36,29 +37,13 @@ export default class FileRow extends Component {
 
     const getClickOverlay = () => {
       if (link) {
-        const params = {
-          fileId: file.fileId,
-          projectId: file.project._id,
-          revisionId: file.revisionId,
-        }
-
-        const getRouteName = () => {
-          if (file.type === 'file') {
-            return 'fileRoute'
-          } else if (file.type == 'folder') {
-            return 'projectFolderRoute'
-          } else {
-            return 'projectRoute'
-          }
-        }
-
         return (
           <Link
             className={ classes.clickOverlay }
             onClick={ this.singleClick }
             onDoubleClick={ this.doubleClick }
-            name={ getRouteName() }
-            params={ params }
+            name={ getFileRouteName(file) }
+            params={ getFileRouteParams(file) }
           />
         )
       } else {

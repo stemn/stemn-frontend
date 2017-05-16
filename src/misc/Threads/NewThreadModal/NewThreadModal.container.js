@@ -20,8 +20,6 @@ const dispatchToProps = {
 }
 
 const modalName = 'THREAD_NEW'
-
 const ModalComponent = connect(stateToProps, dispatchToProps)(NewThreadModal)
 registerModal(modalName, ModalComponent)
-
 export default modalName

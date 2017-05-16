@@ -1,13 +1,11 @@
 import React, { Component, PropTypes } from 'react'
-import i from 'icepick'
-
-// Styles
 import classNames from 'classnames'
 import classes from './FileBreadCrumbs.css'
-
 import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
 import Popover from 'stemn-shared/misc/Popover'
 import FileListPopup from 'stemn-shared/misc/FileList/FileListPopup'
+import Link from 'stemn-shared/misc/Router/Link'
+import { getFileRouteName, getFileRouteParams } from 'stemn-shared/misc/FileList/FileList.utils'
 
 export default class FileBreadCumbs extends Component {
   static defaultProps = {
@@ -17,51 +15,78 @@ export default class FileBreadCumbs extends Component {
     popup: PropTypes.bool,
     clickFn: PropTypes.func,
     meta: PropTypes.object,
+    link: PropTypes.bool, // Should the items be links
   }
   render() {
-    const { meta, clickFn, className, popup } = this.props;
+    const { meta, clickFn, className, popup, link } = this.props
+
+    const parentsExtended = [
+      ...meta.parents.map(parent => ({
+        name: parent.name,
+        fileId: parent.fileId,
+        project: {
+          _id: meta.project._id,
+        },
+        type: 'folder',
+      })),{
+        name: meta.name,
+        fileId: meta.fileId,
+        project: {
+          _id: meta.project._id,
+        },
+        type: 'file',
+      }
+    ]
 
     const displayCrumbs = () => {
       if (meta.parents && meta.parents.length > 0) {
-        const parentsWithName = i.push(meta.parents, {
-          name: meta.name,
-          fileId: meta.fileId,
-        })
-        return parentsWithName.map((folder, idx) => {
+        return parentsExtended.map((folder, idx) => {
+          const isLastChild = idx == parentsExtended.length - 1
+          const parentfolder = parentsExtended[idx - 1]
+          const clickableText = link
+            ? <Link
+                onClick={ () => clickFn({file: folder}) }
+                name={ getFileRouteName(folder) }
+                params={ getFileRouteParams(folder) }
+              >
+                { middleConcat(folder.name, 30, 0.8) }
+              </Link>
+            : <a onClick={ () => clickFn({file: folder}) }>{ middleConcat(folder.name, 30, 0.8) }</a>
           
-          const isLastChild = idx == parentsWithName.length - 1
-          const parentfolder = parentsWithName[idx - 1]
-          
-          return parentfolder && popup && idx != 0
-          ? <span key={idx}>
+          const plainText = <span>{ middleConcat(folder.name, 30, 0.8) }</span>
+
+          const getPopoverCrumb = () => (
+            <span key={ idx }>
               <Popover trigger="hoverDelay"
                 preferPlace="below"
                 tipSize={ 6 }
                 inheritIsOpen
                 offset={ 14 }
               >
-                <span style={ { display: 'inline-block' } }>
-                  { !isLastChild
-                  ? <a onClick={ () => clickFn({file: folder}) }>{ middleConcat(folder.name, 30, 0.8) }</a>
-                  : <span>{ middleConcat(folder.name, 30, 0.8) }</span> }
-                </span>
+                <span style={ { display: 'inline-block' } }> { !isLastChild ? clickableText : plainText }</span>
                 <FileListPopup
                   activeFile={ folder.fileId }
                   path={ parentfolder.fileId }
                   provider={ meta.provider }
                   projectId={ meta.project._id }
                   clickFn={ clickFn }
+                  link={ link }
                 />
               </Popover>
               { !isLastChild && <span> / </span> }
             </span>
-          : <span key={ idx }>
-              { !isLastChild
-              ? <a onClick={ () => clickFn({ file: folder }) }>{ middleConcat(folder.name, 30, 0.8) }</a>
-              : <span>{ middleConcat(folder.name, 30, 0.8) }</span> }
-              { !isLastChild && <span> / </span> }
-            </span> }
           )
+
+          const getPlainCrumb = () => (
+            <span key={ idx }>
+              { !isLastChild ? clickableText : plainText }
+              { !isLastChild && <span> / </span> }
+            </span>
+          )
+          return parentfolder && popup && idx != 0
+            ? getPopoverCrumb ()
+            : getPlainCrumb()
+        })
       } else if (meta.name){
         return <span>{ middleConcat(meta.name, 30, 0.8) }</span>
       } else {

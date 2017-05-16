@@ -1,5 +1,6 @@
 import http from 'axios';
-import { setAuthToken, loadUserData } from './';
+import loadUserData from './loadUserData'
+import setAuthToken from './setAuthToken'
 import { getSettings } from 'stemn-shared/misc/UserSettings/UserSettings.actions.js'
 
 export default ({email, password, firstname, lastname}) => {

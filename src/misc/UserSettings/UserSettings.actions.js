@@ -19,4 +19,4 @@ export const saveSettings = () => (dispatch, getState) => dispatch({
   },
 })
 
-export const completeOnboarding = () => actions.change('userSettings.messages.onboarding', false)
+export const completeOnboarding = () => actions.change('userSettings.data.messages.onboarding', false)

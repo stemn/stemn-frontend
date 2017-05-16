@@ -7,6 +7,7 @@ import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js
 import { actions } from 'react-redux-form';
 import { projectSettingsRoute } from 'route-actions';
 import { push } from 'react-router-redux';
+import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry'
 
 // Component Core
 import React from 'react';
@@ -29,8 +30,6 @@ import PanelDescription from 'stemn-shared/misc/Panels/PanelDescription'
 
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
-
-export const modalName = 'PROJECT_NEW';
 
 export const Component = React.createClass({
   getInitialState () {
@@ -240,4 +239,9 @@ function mapDispatchToProps(dispatch) {
     dispatch
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+
+const modalName = 'NEW_PROJECT'
+const ModalComponent = connect(mapStateToProps, mapDispatchToProps)(Component)
+registerModal(modalName, ModalComponent)
+export default modalName
+
