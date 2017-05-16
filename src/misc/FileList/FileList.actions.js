@@ -54,16 +54,16 @@ export const getSearchResults = ({ projectId, folderId, query, cacheKey }) => ({
 })
 
 export const getFiles = ({ path, provider, projectId, cacheKey }) => (dispatch) => {
-  if (['dropbox', 'drive'].includes(provider)){
-    dispatch(exploreFolder({
-      provider,
-      folderId: path,
-      cacheKey,
-    }))
-  } else if (projectId) {
+  if (projectId){
     dispatch(fetchFiles({
       projectId,
       path,
+      cacheKey,
+    }))
+  } else if (projectId) {
+    dispatch(exploreFolder({
+      provider,
+      folderId: path,
       cacheKey,
     }))
   }

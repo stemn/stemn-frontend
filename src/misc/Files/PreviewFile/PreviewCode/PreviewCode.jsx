@@ -33,7 +33,6 @@ export const Viewer = React.createClass({
     }
 
     const isMarkdown = false;
-//    const isMarkdown = extension == 'md';
     return (
       <div className="layout-row flex">
         <div className="scroll-box flex" ref="codemirror"></div>

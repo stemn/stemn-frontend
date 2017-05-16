@@ -77,24 +77,34 @@ export const FileListPopup = React.createClass({
   },
 
   render() {
-    const { files, parentfolder, activeFolder, dispatch, clickFn } = this.props;
-    const isLoading    = !files || files.loading;
-    const filesOrdered = files && files.entries ? orderBy(files.entries, 'name') : [];
-    const filesOnly    = filesOrdered.filter(file => file.type == 'file');
-    const foldersOnly  = filesOrdered.filter(file => file.type == 'folder');
+    const { files, parentfolder, activeFolder, dispatch, clickFn } = this.props
+    const isLoading    = !files || files.loading
+    const filesOrdered = files && files.entries ? orderBy(files.entries, 'name') : []
+    const filesOnly    = filesOrdered.filter(file => file.type == 'file')
+    const foldersOnly  = filesOrdered.filter(file => file.type == 'folder')
 
     return (
       <div { ...omit(this.props, Object.keys(propTypesObject)) } className={classes.popup}>
         <LoadingOverlay show={isLoading} linear={true} noOverlay />
-        { foldersOnly
-        ? foldersOnly.map(file => <FileRow key={file._id} file={file} isActive={file.fileId == activeFolder.fileId} clickFn={clickFn}/> )
-        : null }
-        { foldersOnly && filesOnly
-        ? <div className={classes.divider}></div>
-        : null }
-        { filesOnly
-        ? filesOnly.map(file => <FileRow key={file._id} file={file} isActive={file.fileId == activeFolder.fileId} clickFn={clickFn}/> )
-        : null }
+        { foldersOnly && foldersOnly.map(file => (
+            <FileRow
+              key={file._id}
+              file={file}
+              isActive={file.fileId == activeFolder.fileId}
+              clickFn={clickFn}
+            />
+          ))
+        }
+        { foldersOnly && filesOnly && <div className={classes.divider} /> }
+        { filesOnly && filesOnly.map(file => (
+            <FileRow
+              key={file._id}
+              file={file}
+              isActive={file.fileId == activeFolder.fileId}
+              clickFn={clickFn}
+            />
+          ))
+        }
       </div>
     );
   }
