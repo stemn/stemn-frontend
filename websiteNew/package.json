@@ -157,7 +157,8 @@
     "redux-thunk": "2.2.0",
     "reselect": "2.5.3",
     "stats-webpack-plugin": "0.6.0",
-    "substyle": "2.0.2"
+    "substyle": "2.0.2",
+    "ws": "2.3.1"
   },
   "standard": {
     "ignore": [

@@ -12,6 +12,7 @@ import { routerMiddleware } from 'react-router-redux'
 import { browserHistory } from 'react-router'
 import toastsError from 'stemn-shared/misc/Toasts/ToastsError.middleware'
 import auth from 'stemn-shared/misc/Auth/Auth.middleware'
+//import websocket from 'stemn-shared/misc/Websocket/websocket.middleware.js'
 
 
 // Other
@@ -31,6 +32,7 @@ const middlewares = [
   throttle,
   httpPackage,
   httpTransform,
+//  websocket,
   promise(),
   toastsError,
   createLogger({collapsed: true}),

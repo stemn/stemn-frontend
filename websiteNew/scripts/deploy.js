@@ -45,7 +45,7 @@ const pushDist = () => {
   const commands1 = [
     `cd ../../${config.repo.name}`,
     'git pull',
-    'git ls-files --deleted -z | xargs -0 git rm',
+//    'git ls-files --deleted -z | xargs -0 git rm',
     'git add .',
     `git commit -m "${config.commitMessage}"`,
   ]

@@ -46,6 +46,9 @@ module.exports = merge(config, {
         to: 'static',
       },
     ]),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: ['vendor'],
+    }),
   ],
   module: {
     loaders: [
