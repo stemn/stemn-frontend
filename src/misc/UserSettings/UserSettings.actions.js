@@ -1,3 +1,5 @@
+import { actions } from 'react-redux-form'
+
 export const getSettings = () => ({
   type: 'USER_SETTINGS/GET_SETTINGS',
   http: true,
@@ -16,3 +18,5 @@ export const saveSettings = () => (dispatch, getState) => dispatch({
     data: getState().userSettings.data,
   },
 })
+
+export const completeOnboarding = () => actions.change('userSettings.messages.onboarding', false)

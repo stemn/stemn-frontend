@@ -17,13 +17,11 @@ export default ({ provider, code }) => {
             code: code,
             redirectUri: oauthCreds[provider].params.redirect_uri
           }
-        }).then(response => {
-          setTimeout(() => dispatch(show('main')), 100)
-          dispatch(setAuthToken(response.data.token))
-          setTimeout(()=>dispatch(loadUserData()), 1)
-          setTimeout(()=>dispatch(getSettings()), 1)
-          return response
         })
+      }).then(({value}) => {
+        setTimeout(() => dispatch(show('main')), 100)
+        dispatch(setAuthToken(value.data.token))
+        return Promise.all([dispatch(loadUserData()), dispatch(getSettings())])
       })
     }
   }

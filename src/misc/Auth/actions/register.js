@@ -15,12 +15,10 @@ export default ({email, password, firstname, lastname}) => {
           firstname,
           lastname
         }
-      }).then((response)=>{
-        dispatch(setAuthToken(response.data.token))
-        setTimeout(()=>dispatch(loadUserData()), 1)
-        setTimeout(()=>dispatch(getSettings()), 1)
-        return response
       })
+    }).then(({ value })=>{
+      dispatch(setAuthToken(value.data.token))
+      return Promise.all([dispatch(loadUserData()), dispatch(getSettings())])
     })
   }
 }

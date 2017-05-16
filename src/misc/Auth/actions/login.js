@@ -3,6 +3,7 @@ import loadUserData from './loadUserData';
 import setAuthToken from './setAuthToken';
 import { getSettings } from 'stemn-shared/misc/UserSettings/UserSettings.actions.js'
 
+
 export default ({email, password}) => {
   return (dispatch) => {
     dispatch({
@@ -14,12 +15,10 @@ export default ({email, password}) => {
           email,
           password
         }
-      }).then((response)=>{
-        dispatch(setAuthToken(response.data.token))
-        setTimeout(()=>dispatch(loadUserData()), 1)
-        setTimeout(()=>dispatch(getSettings()), 1)
-        return response
       })
+    }).then(({ value })=>{
+      dispatch(setAuthToken(value.data.token))
+      return Promise.all([dispatch(loadUserData()), dispatch(getSettings())])
     })
   }
 }
