@@ -33,7 +33,7 @@ export default class Onboarding extends Component {
         <Container className={ classes.content }>
           <div className={ classes.title }>
             <div className="text-title-2">Setup Sync</div>
-            <div className="text-title-4">Nice! You'll have STEMN up and running very soon</div>
+            <div className="text-title-4">Nice! You'll have Stemn up and running very soon</div>
           </div>
           { user && user.dataSize === 'lg' ? children : null }
         </Container>

@@ -71,7 +71,12 @@ export default class File extends Component {
           <title>{ `${file.data.project.name} - ${file.data.path}` }</title>
         </Helmet>
         <div className={ classes.header }>
-          <FileBreadCrumbs className="text-ellipsis" meta={ file.data } clickFn={ this.clickFileOrFolder } popup />
+          <FileBreadCrumbs
+            className="text-ellipsis"
+            meta={ file.data }
+            link
+            popup
+          />
           <div className="flex" />
           <FileCompareMenu
             file1={ file1 }

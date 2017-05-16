@@ -3,7 +3,7 @@ const fs = Promise.promisifyAll(require('fs-extra'))
 const path = require('path')
 const SSH = require('ssh-promise')
 const exec = require('child-process-promise').exec
-
+const rimrafAsync = Promise.promisify(require('rimraf'))
 /*********************************************************
 This script will deploy the stemn website. It should be
 run from the root website folder using `npm run deploy`.
@@ -61,7 +61,15 @@ const pushDist = () => {
     .catch(() => exec(joinCommands(commands2)))
 }
 
-const copyDist = () => fs.copyAsync('./build/client', `../../${config.repo.name}`)
+const copyDist = () => {
+  // Create the destination folder if it doesn't exist
+  const desintation = `../../${config.repo.name}/client`
+  if (!fs.existsSync(desintation)) {
+    fs.mkdirSync(desintation)
+  }
+  return fs.copyAsync('./build/client', desintation)
+}
+const removeExisting = () => rimrafAsync(`../../${config.repo.name}/client`)
 
 const log = (result) => {
   console.log('stdout: ', result.stdout)
@@ -70,7 +78,8 @@ const log = (result) => {
 }
 
 // Go time
-copyDist()
+removeExisting()
+.then(copyDist)
 .then(pushDist)
 .then(pullDist)
 .catch(console.error)
