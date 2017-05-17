@@ -1,25 +1,7 @@
-// Container Core
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
-// Container Actions
-import * as TasksActions from 'stemn-shared/misc/Tasks/Tasks.actions.js';
-
-// Component Core
 import React from 'react';
-import moment from 'moment';
-import { actions } from 'react-redux-form';
-import getUuid from 'stemn-shared/utils/getUuid.js';
-
-// Styles
 import classNames from 'classnames';
 import classes from './TaskMentionModal.css';
-
-// Helpers
 import howMany from 'stemn-shared/utils/strings/howMany.js';
-
-// Sub Components
-import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox';
 import Input from 'stemn-shared/misc/Input/Input/Input';
 import Button from 'stemn-shared/misc/Buttons/Button/Button';
 import TaskRow from './TaskRow/TaskRow.jsx';
@@ -29,14 +11,12 @@ import TasksFilterMenu from 'stemn-shared/misc/Tasks/TasksFilterMenu/TasksFilter
 import Popover from 'stemn-shared/misc/Popover';
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
-///////////////////////////////// COMPONENT /////////////////////////////////
-
-export const Component = React.createClass({
+export default React.createClass({
 
   // Mounting
    onMount(nextProps, prevProps) {
     if(!nextProps.board || !nextProps.board.data){
-      nextProps.dispatch(TasksActions.getBoards({projectId: nextProps.projectId}))
+      nextProps.getBoards({projectId: nextProps.projectId})
     }
   },
   componentWillMount() { this.onMount(this.props) },
@@ -44,7 +24,7 @@ export const Component = React.createClass({
     // Get the mentions
     const mentions = getMentionsFromObject(this.props.mentions, this.props.tasks);
     // Clear props.mentions;
-    this.props.dispatch(actions.change(this.props.mentionsModel, {}))
+    this.props.storeChange(this.props.mentionsModel, {})
 
     this.props.modalConfirm({mentions});
   },
@@ -57,11 +37,11 @@ export const Component = React.createClass({
     const toggleField = (type1, type2) => {
       const value = mention ? !mention[type1] : true;
       if(value){
-        this.props.dispatch(actions.change(`${this.props.mentionsModel}.${taskId}.${type1}`, value))
-        this.props.dispatch(actions.change(`${this.props.mentionsModel}.${taskId}.${type2}`, !value))
+        this.props.storeChange(`${this.props.mentionsModel}.${taskId}.${type1}`, value)
+        this.props.storeChange(`${this.props.mentionsModel}.${taskId}.${type2}`, !value)
       }
       else{
-        this.props.dispatch(actions.change(`${this.props.mentionsModel}.${taskId}.${type1}`, value))
+        this.props.storeChange(`${this.props.mentionsModel}.${taskId}.${type1}`, value)
       }
     }
     return type == 'complete' ? toggleField('complete', 'related') : toggleField('related', 'complete');
@@ -81,7 +61,7 @@ export const Component = React.createClass({
           <div className="flex layout-column layout-align-center-center text-center">
             {numTasks == 0
               ? <div style={{width: '100%'}}>This project has no tasks. Add some.</div>
-              : <div style={{width: '100%'}}>No results, <a className="text-primary" onClick={() => this.props.dispatch(actions.change(`${boardModel}.searchString`, ''))}>clear search filter.</a></div>
+              : <div style={{width: '100%'}}>No results, <a className="text-primary" onClick={() => this.props.storeChange(`${boardModel}.searchString`, '')}>clear search filter.</a></div>
             }
           </div>
         )
@@ -156,34 +136,3 @@ function getMentionsFromObject(mentionsObject, tasks){
   })
   return mentions;
 }
-
-function newMention({entityId, display, mentionType}){
-  return {
-    entityId,
-    display,
-    mentionType,
-    mentionId: getUuid()
-  }
-}
-
-///////////////////////////////// CONTAINER /////////////////////////////////
-
-function mapStateToProps({ tasks, mentions }, { projectId }) {
-  const projectBoards = tasks.projects && tasks.projects[projectId] ? tasks.projects[projectId].boards : null;
-  const board = projectBoards ? tasks.boards[projectBoards[0]] : {};
-  return {
-    tasks: tasks.data,
-    board: board,
-    boardModel: board && board.data && board.data._id ? `tasks.boards.${board.data._id}` : '',
-    mentions: mentions.tasks[projectId] || {},
-    mentionsModel: `mentions.tasks.${projectId}`,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Component);

@@ -1,4 +1,3 @@
-import { modelReducer, formReducer, modeled } from 'react-redux-form';
 import i from 'icepick';
 
 const numBackgrounds = 8;
@@ -117,5 +116,5 @@ export default function (state = initialState, action) {
   if (!state.hydrated) {
     state = { ...initialState, ...state, hydrated: true };
   }
-  return modeled(mainReducer, 'auth')(state, action)
+  return mainReducer(state, action)
 }

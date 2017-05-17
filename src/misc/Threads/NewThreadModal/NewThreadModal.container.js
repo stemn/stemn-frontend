@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry'
-import { actions } from 'react-redux-form'
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import NewThreadModal from './NewThreadModal'
 import { newTask } from 'stemn-shared/misc/Tasks/Tasks.actions'
 import { newComment } from 'stemn-shared/misc/Comments/Comments.actions'
@@ -15,7 +15,7 @@ const stateToProps = ({ tasks }, { boardId }) => ({
 const dispatchToProps = {
   newTask,
   newComment,
-  change: actions.change,
+  change: storeChange,
   goToTaskRoute: ({ taskId, projectId }) => push(taskRoute({ taskId, projectId })),
 }
 

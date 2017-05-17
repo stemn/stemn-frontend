@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { actions } from 'react-redux-form';
+import { storeRemove, storePush } from 'stemn-shared/misc/Store/Store.actions'
 
 import CheckboxAlt from 'stemn-shared/misc/Input/CheckboxAlt/CheckboxAlt.jsx'
 import classes from './LabelSelect.css'
@@ -11,9 +11,9 @@ class LabelSelectRow extends Component {
     const { item, dispatch, value, model, onChange } = this.props
     const labelIndex = value ? value.indexOf(item._id) : -1;
     if (labelIndex !== -1) {
-      dispatch(actions.remove(model, labelIndex))
+      dispatch(storeRemove(model, labelIndex))
     } else {
-      dispatch(actions.push(model, item._id))
+      dispatch(storePush(model, item._id))
     }
     if (onChange) { onChange() } // Run the onChange function if required
   }

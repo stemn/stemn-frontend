@@ -5,7 +5,3 @@ export const ctrlEnterHandler = (element, handler) => {
     }
   });
 }
-
-export const modeled = (reducer, reducerKey) => (state, action) => {
-  return reducer(state, action)
-}

@@ -9,7 +9,7 @@ import * as TasksActions from '../Tasks.actions.js';
 import React from 'react';
 import moment from 'moment';
 import { get, has } from 'lodash';
-import { actions } from 'react-redux-form';
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 
 // Styles
 import classNames from 'classnames';
@@ -25,11 +25,11 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button'
 export const Component = React.createClass({
   componentWillMount() {
     if(has(this.props, 'board.data.labels')){
-      this.props.dispatch(actions.load(`${this.props.boardModel}.forms.labels`, this.props.board.data.labels));
+      this.props.dispatch(storeChange(`${this.props.boardModel}.forms.labels`, this.props.board.data.labels));
     }
   },
   submit() {
-    this.props.dispatch(actions.change(`${this.props.boardModel}.data.labels`, this.props.board.forms.labels));
+    this.props.dispatch(storeChange(`${this.props.boardModel}.data.labels`, this.props.board.forms.labels));
     setTimeout(()=>{
       this.props.tasksActions.updateBoard({board: this.props.board.data}).then( response => {
         this.props.modalConfirm();

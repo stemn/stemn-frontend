@@ -5,7 +5,7 @@ import { Link } from 'react-router'
 import { isActive, getRoutePath } from './Link.utils'
 
 const propTypesObject = {
-  children: PropTypes.node.isRequired,    // Child element
+  children: PropTypes.node,               // Child element
   name: PropTypes.string,                 // Router path name, eg -> 'userRoute'
   params: PropTypes.object,               // Query param object
   activeIf: PropTypes.object,             // Object user to determine if the link is active

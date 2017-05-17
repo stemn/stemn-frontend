@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as FileSelectActions from './FileSelect.actions.js';
-import { actions } from 'react-redux-form';
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 
 // Component Core
 import React, { PropTypes } from 'react';
@@ -82,7 +82,7 @@ export const FileSelectModal = React.createClass({
     })
   },
   submit(){
-    this.props.dispatch(actions.change(this.props.model, {
+    this.props.dispatch(storeChange(this.props.model, {
       fileId : this.props.fileSelect.selected.fileId,
       path   : this.props.fileSelect.selected.path
     }))

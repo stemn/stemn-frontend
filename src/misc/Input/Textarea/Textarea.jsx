@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { actions } from 'react-redux-form';
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import Textarea from 'react-textarea-autosize';
 
 class Component extends React.Component{
@@ -10,7 +10,7 @@ class Component extends React.Component{
       <Textarea style={style}
         className={className}
         onChange={(e) => {
-          dispatch(actions.change(model, e));
+          dispatch(storeChange(model, e));
           if(onChange){ onChange() };
         }}
         value={value}

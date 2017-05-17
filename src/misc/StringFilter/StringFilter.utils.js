@@ -1,4 +1,4 @@
-import { actions } from 'react-redux-form';
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import { pick, findKey } from 'lodash'
 
 export const isFilterActive = (filterArray, filterString, searchString) =>{
@@ -43,7 +43,7 @@ export const addFilter = ({dispatch, model, value, filterArray, filterString}) =
   }else if(filterString){
     newSearchString = filterString;
   }
-  dispatch(actions.change(model, newSearchString))
+  dispatch(storeChange(model, newSearchString))
 };
 
 function stringContainsWord(fullString, word){

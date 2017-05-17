@@ -1,6 +1,5 @@
 import i from 'icepick'
 import { cloneDeep, has } from 'lodash'
-import { modeled } from 'react-redux-form'
 
 const initialState = {
   data: {},
@@ -226,5 +225,5 @@ export default function (state = initialState, action) {
   if (!state.hydrated) {
     state = { ...initialState, ...state, hydrated: true }
   }
-  return modeled(mainReducer, 'tasks')(state, action)
+  return mainReducer(state, action)
 }

@@ -1,9 +1,10 @@
 import http                  from 'axios';
 import getUuid               from 'stemn-shared/utils/getUuid.js';
-import { actions }           from 'react-redux-form';
 import { show as showToast } from '../Toasts/Toasts.actions.js';
 import { showModal, showConfirm } from '../Modal/Modal.actions.js';
 import { get }               from 'lodash';
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
+
 
 export function newTask({ boardId, task }) {
   return (dispatch, getState) => {
@@ -304,7 +305,7 @@ export function toggleComplete({taskId, model, value}) {
 }
 export function toggleCompleteUndo({taskId, model, value}) {
   return (dispatch, getState) => {
-    dispatch(actions.change(model, !value));
+    dispatch(storeChange(model, !value));
     setTimeout(() => updateTask({task: getState().tasks.data[taskId].data}), 1)
   };
 }

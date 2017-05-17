@@ -6,6 +6,7 @@
   cursor: default;
   position: relative;
   line-height: 1.4em;
+  height: 48px;
 }
 .clickOverlay{
   position: absolute;

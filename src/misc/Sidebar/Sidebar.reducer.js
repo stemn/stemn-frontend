@@ -1,5 +1,3 @@
-import { modeled } from 'react-redux-form'
-
 const initialState = {
   searchString: '',
   show: true, // shows the sidebar
@@ -25,5 +23,5 @@ export default function (state = initialState, action) {
   if (!state.hydrated) {
     state = { ...initialState, ...state, hydrated: true }
   }
-  return modeled(mainReducer, 'sidebar')(state, action)
+  return mainReducer(state, action)
 }

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import getUuid from 'stemn-shared/utils/getUuid.js';
 import classNames from 'classnames';
 import classes from './TaskLabelsEdit.css';
-import { actions } from 'react-redux-form';
+import { storeRemove, storePush } from 'stemn-shared/misc/Store/Store.actions'
 import { showConfirm } from 'stemn-shared/misc/Modal/Modal.actions.js';
 import Popover from 'stemn-shared/misc/Popover';
 import Input from 'stemn-shared/misc/Input/Input/Input';
@@ -20,7 +20,7 @@ class TaskLabelsEdit extends Component {
         message: 'If you delete this label it will be removed from all assigned tasks.',
       })
     ).then(() => {
-      this.props.dispatch(actions.remove(model, index))
+      this.props.dispatch(storeRemove(model, index))
     })
   }
   componentWillReceiveProps(props) {
@@ -33,7 +33,7 @@ class TaskLabelsEdit extends Component {
     const { dispatch, value, model } = props
     // If it is empty, push on a label
     if( value.length === 0 ){
-      dispatch(actions.push(model, {
+      dispatch(storePush(model, {
         _id: getUuid(),
         color: '',
         name: '',
@@ -41,7 +41,7 @@ class TaskLabelsEdit extends Component {
     }
     // Else, if the name of the last label exists, add another
     else if( value[value.length-1].name.length >= 1 ){
-      dispatch(actions.push(model, {
+      dispatch(storePush(model, {
         _id: getUuid(),
         color: '',
         name: '',

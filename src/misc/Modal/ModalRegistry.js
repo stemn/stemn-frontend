@@ -10,7 +10,6 @@ import PreviewExpired         from 'stemn-shared/misc/Files/PreviewFile/Messages
 import ProviderAccessError    from './modals/ProviderAccessErrorModal.jsx'
 import ProviderAccessRevoked  from './modals/ProviderAccessRevokedModal.jsx'
 import TaskLabelsEditModal    from 'stemn-shared/misc/Tasks/TaskLabelsEditModal/TaskLabelsEditModal.jsx'
-import TaskMentionModal       from 'stemn-shared/misc/Mentions/TaskMentionModal/TaskMentionModal.jsx'
 
 const modalRegistry = {
   'BETA'                    : BetaModal,
@@ -23,7 +22,6 @@ const modalRegistry = {
   'PREVIEW_EXPIRED'         : PreviewExpired,
   'PROVIDER_ACCESS_ERROR'   : ProviderAccessError,
   'PROVIDER_ACCESS_REVOKED' : ProviderAccessRevoked,
-//  'TASK_COMMIT'             : TaskMentionModal,
   'TASK_LABELS'             : TaskLabelsEditModal,
 };
 

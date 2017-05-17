@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { actions } from 'react-redux-form';
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import { omit } from 'lodash';
 
 export const Component = React.createClass({
@@ -23,7 +23,7 @@ export const Component = React.createClass({
 
     if(model){
       // If model exists, we dispatch an update
-      this.props.dispatch(actions.change(model, newValue));
+      this.props.dispatch(storeChange(model, newValue));
     }
     if(changeAction){
       // If a changeActions exists, we run it

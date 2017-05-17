@@ -1,9 +1,8 @@
-import { modeled } from 'react-redux-form'
 import i from 'icepick'
 
 const initialState = {}
 
-function reducer(state, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
     case 'USERS/GET_USER_PENDING':
       return i.assocIn(state, [action.meta.userId, 'loading'], true)
@@ -26,8 +25,4 @@ function reducer(state, action) {
     default:
       return state
   }
-}
-
-export default function (state = initialState, action) {
-  return modeled(reducer, 'users')(state, action)
 }

@@ -1,4 +1,4 @@
-import { actions } from 'react-redux-form'
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 
 export const checkStatus = (entityId, type) => (dispatch, getState) => {
   const userId = getState().auth.user._id
@@ -40,7 +40,7 @@ export const add = ({ entityId, type, number, numberModel }) => (dispatch, getSt
     },
   })
   if (number && numberModel) {
-    dispatch(actions.change(numberModel, number + 1))
+    dispatch(storeChange(numberModel, number + 1))
   }
 }
 
@@ -59,6 +59,6 @@ export const remove = ({ entityId, type, number, numberModel }) => (dispatch, ge
     },
   })
   if (number && numberModel) {
-    dispatch(actions.change(numberModel, number - 1))
+    dispatch(storeChange(numberModel, number - 1))
   }
 }

@@ -45,7 +45,6 @@ export default class MyProjectsPanel extends Component {
     const limitedProjects = orderedByTime.slice(0, page * 6)
     const notEnoughResult = page * size >= orderedByTime.length
     const hasNoResults = limitedProjects.length === 0
-    console.log(limitedProjects);
 
     return (
       <InfoPanel className={ classNames(classes.panel, 'layout-column') }>

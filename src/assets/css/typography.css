@@ -20,6 +20,11 @@
   line-height: 1.4em;
   font-weight: 300;
 }
+.text-title-6{
+  font-size: 12px;
+  line-height: 1.4em;
+  font-weight: 300;
+}
 .text-primary{
   color: rgb(68, 154, 211);
 }

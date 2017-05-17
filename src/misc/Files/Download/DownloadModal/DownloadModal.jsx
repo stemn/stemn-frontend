@@ -2,7 +2,6 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry'
 import * as SyncTimelineActions from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js';
-import { actions } from 'react-redux-form';
 import React, { PropTypes } from 'react';
 import moment from 'moment';
 import { orderBy } from 'lodash';

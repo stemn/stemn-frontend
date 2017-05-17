@@ -1,4 +1,4 @@
-import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js';
+import { confirmDeleteProject } from 'stemn-shared/misc/Projects/Projects.actions.js';
 import * as SystemActions from 'stemn-shared/desktop/System/System.actions.js';
 import { projectSettingsRoute } from 'route-actions';
 import { push } from 'react-router-redux';
@@ -18,7 +18,7 @@ export default (dispatch) => {
   },{
     label: 'Delete Project',
     divider: true,
-    onClick: item => dispatch(ProjectsActions.confirmDeleteProject({
+    onClick: item => dispatch(confirmDeleteProject({
       projectId: item._id,
       name: item.name
     })),

@@ -12,7 +12,7 @@ import * as ShellContextUtils     from 'stemn-shared/desktop/Shell/ShellContext/
 import * as SystemUtils           from 'stemn-shared/desktop/System/System.utils.js'
 import * as FileCache             from 'stemn-shared/desktop/FileCache/FileCache.js'
 
-import { actions } from 'react-redux-form';
+import * as StoreActions from 'stemn-shared/misc/Store/Store.actions'
 
 const library = {
   ProjectsActions,
@@ -26,7 +26,7 @@ const library = {
   ShellContextUtils,
   SystemUtils,
   FileCache,
-  FormActions: actions
+  StoreActions,
 }
 
 export const addModule = (moduleName, functions) => {

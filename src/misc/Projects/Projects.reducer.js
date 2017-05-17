@@ -1,4 +1,3 @@
-import { modeled } from 'react-redux-form'
 import i from 'icepick'
 import { uniqBy } from 'lodash'
 
@@ -145,5 +144,5 @@ export default function (state = initialState, action) {
   if (!state.hydrated) {
     state = { ...initialState, ...state, hydrated: true }
   }
-  return modeled(reducer, 'projects')(state, action)
+  return reducer(state, action)
 }

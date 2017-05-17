@@ -57,8 +57,9 @@ const FileSelectInput = React.createClass({
 
     return (
       <TextDisplayBox
-      disabled={disabled}
-      onClick={()=>{if(!disabled){this.showModal()}}}>
+        disabled={disabled}
+        onClick={()=>{if(!disabled){this.showModal()}}}
+      >
         <div className='flex'>
           {path ? <span><span style={{textTransform: 'capitalize'}}>{provider}/</span>{path}</span> : 'Select the project folder'}
         </div>

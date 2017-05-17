@@ -13,7 +13,11 @@ import SearchInput from 'stemn-shared/misc/Search/SearchInput'
 import { ContextMenuLayer } from "react-contextmenu"
 import ContextMenu from 'stemn-shared/misc/ContextMenu/ContextMenu.jsx'
 import FileListMenu from './FileList.menu.js'
+import FlipMove from 'react-flip-move';
+import AccordianAnimate from 'stemn-shared/misc/Animation/AccordianAnimate'
+import ChildrenHistory from 'stemn-shared/misc/Animation//ChildrenHistory'
 
+        
 const contextIdentifier = 'FileListCm';
 const FileRowContext = GLOBAL_ENV.APP_TYPE === 'web'
   ? FileRow
@@ -66,7 +70,7 @@ export default class FileList extends Component {
       }
     })
   }
-  renderResults = () => {
+  renderResults = (isLoading) => {
     const { fileList, options, selected, singleClickFn, doubleClickFn, link } = this.props
     const filesNormal = get(fileList, 'entries', [])
     const filesFiltered = options.foldersOnly
@@ -85,12 +89,15 @@ export default class FileList extends Component {
           link={ link }
         />
       ))
-    } else if(fileList && !fileList.loading){
-      return <div style={ { padding: '15px' } }>No results</div>
+    } else if (isLoading === false){
+      return <div className="text-title-5" style={ { padding: '15px' } }>No results</div>
     }
     return null
   }
-  renderSearchResults = () => {
+  componentWillMount() {
+    this.fileRowHistory = new ChildrenHistory()
+  }
+  renderSearchResults = (isLoading) => {
     const { fileList, options, selected, singleClickFn, doubleClickFn } = this.props
     const filesNormal = get(fileList, 'search', [])
     const filesFiltered = options.foldersOnly
@@ -109,22 +116,29 @@ export default class FileList extends Component {
           isActive= {selected && selected.fileId == file.fileId }
         />
       ))
-    } else if(fileList && !fileList.loading){
-      return <div style={ { padding: '15px' } }>No results</div>
+    } else if (isLoading === false){
+      return <div className="text-title-5" style={ { padding: '15px' } }>No results</div>
     }
     return null
   }
   render() {
-    const { fileList, fileListCacheKey, search, contentStyle, singleClickFn, doubleClickFn, crumbClickFn, selected, options, path, projectId, crumbPopup, dispatch, ...otherProps } = this.props;
+    const { fileList, fileListCacheKey, getFiles, getSearchResults, link, search, contentStyle, singleClickFn, doubleClickFn, crumbClickFn, selected, options, path, projectId, crumbPopup, dispatch, ...otherProps } = this.props;
 
     const isLoading = !fileList || fileList.loading;
 
+    const fileRowChildren = get(fileList, 'query', '').length > 0
+      ? this.renderSearchResults(isLoading)
+      : this.renderResults(isLoading)
+    
+    const fileRowHistoryShouldUpdate = !isLoading
+    const fileRowHistoric = this.fileRowHistory.get(fileRowChildren, fileRowHistoryShouldUpdate)
+        
     return (
       <div { ...otherProps }>
         <div className={classes.breadcrumbs + ' layout-row layout-align-start-center'}>
           <FileBreadCrumbs
             className="flex"
-            meta={ get(fileList, 'folder', '') }
+            meta={ get(fileList, 'folder', {}) }
             clickFn={ crumbClickFn }
             popup={ crumbPopup }
           />
@@ -160,10 +174,15 @@ export default class FileList extends Component {
             hideBg
             noOverlay
           />
-          { get(fileList, 'query', '').length > 0
-            ? this.renderSearchResults()
-            : this.renderResults() }
-
+          <AccordianAnimate
+            duration={ 300 }
+            itemHeight={ 48 }
+            items={ fileRowHistoric }
+          >
+            <FlipMove duration={ 300 } enterAnimation="fade" leaveAnimation="fade">
+              { fileRowHistoric }
+            </FlipMove>
+          </AccordianAnimate>
           { options.showMenu
           ? <ContextMenu
               identifier={ contextIdentifier }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { actions } from 'react-redux-form'
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import Popover from 'stemn-shared/misc/Popover'
 import PopoverFit from 'stemn-shared/misc/PopoverMenu/PopoverFit'
 import MdExpandMore from 'react-icons/md/expand-more'
@@ -25,7 +25,7 @@ class PopoverDropdown extends Component {
 
             const onClick = () => {
               if (model) {
-                dispatch(actions.change(model, option.value))
+                dispatch(storeChange(model, option.value))
               }
               if (option.onClick) {
                 option.onClick()

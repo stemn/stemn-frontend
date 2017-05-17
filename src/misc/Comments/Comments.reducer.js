@@ -1,4 +1,3 @@
-import { modeled } from 'react-redux-form';
 import i from 'icepick';
 
 const initialState = {
@@ -80,5 +79,5 @@ const mainReducer = (state, action) => {
 }
 
 export default function (state = initialState, action) {
-  return modeled(mainReducer, 'comments')(state, action)
+  return mainReducer(state, action)
 }

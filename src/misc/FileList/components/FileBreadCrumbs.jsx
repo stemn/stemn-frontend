@@ -7,7 +7,7 @@ import FileListPopup from 'stemn-shared/misc/FileList/FileListPopup'
 import Link from 'stemn-shared/misc/Router/Link'
 import { getFileRouteName, getFileRouteParams } from 'stemn-shared/misc/FileList/FileList.utils'
 
-export default class FileBreadCumbs extends Component {
+export default class FileBreadCrumbs extends Component {
   static defaultProps = {
     popup: false
   }
@@ -19,27 +19,28 @@ export default class FileBreadCumbs extends Component {
   }
   render() {
     const { meta, clickFn, className, popup, link } = this.props
-
-    const parentsExtended = [
-      ...meta.parents.map(parent => ({
-        name: parent.name,
-        fileId: parent.fileId,
-        project: {
-          _id: meta.project._id,
-        },
-        type: 'folder',
-      })),{
-        name: meta.name,
-        fileId: meta.fileId,
-        project: {
-          _id: meta.project._id,
-        },
-        type: 'file',
-      }
-    ]
-
+    const hasParents = meta.parents && meta.parents.length > 0
+    
     const displayCrumbs = () => {
-      if (meta.parents && meta.parents.length > 0) {
+      if (hasParents) {
+        const parentsExtended = [
+          ...meta.parents.map(parent => ({
+            name: parent.name,
+            fileId: parent.fileId,
+            project: {
+              _id: meta.project._id,
+            },
+            type: 'folder',
+          }))
+          ,{
+            name: meta.name,
+            fileId: meta.fileId,
+            project: {
+              _id: meta.project._id,
+            },
+            type: 'file',
+          }
+        ]
         return parentsExtended.map((folder, idx) => {
           const isLastChild = idx == parentsExtended.length - 1
           const parentfolder = parentsExtended[idx - 1]
@@ -87,7 +88,7 @@ export default class FileBreadCumbs extends Component {
             ? getPopoverCrumb ()
             : getPlainCrumb()
         })
-      } else if (meta.name){
+      } else if (meta.name) {
         return <span>{ middleConcat(meta.name, 30, 0.8) }</span>
       } else {
         return <span>. . .</span>

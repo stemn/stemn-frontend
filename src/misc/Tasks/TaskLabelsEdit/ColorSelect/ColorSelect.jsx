@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 // Styles
 import classNames from 'classnames';
 import classes from './ColorSelect.css';
-import { actions } from 'react-redux-form';
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
@@ -40,7 +40,7 @@ const Component = React.createClass({
             niceColors.map(color =>
               <div
                 key={ color }
-                onClick={ () => dispatch(actions.change(model, color)) }
+                onClick={ () => dispatch(storeChange(model, color)) }
                 className={ classes.sampleSwatch }
                 style={ { background: color } }
               />

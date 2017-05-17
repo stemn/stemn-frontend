@@ -1,4 +1,4 @@
-import { actions } from 'react-redux-form'
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 
 export const getSettings = () => ({
   type: 'USER_SETTINGS/GET_SETTINGS',
@@ -19,4 +19,4 @@ export const saveSettings = () => (dispatch, getState) => dispatch({
   },
 })
 
-export const completeOnboarding = () => actions.change('userSettings.data.messages.onboarding', false)
+export const completeOnboarding = () => storeChange('userSettings.data.messages.onboarding', false)

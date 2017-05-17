@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { actions } from 'react-redux-form'
 import Popover from 'stemn-shared/misc/Popover'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import classNames from 'classnames'

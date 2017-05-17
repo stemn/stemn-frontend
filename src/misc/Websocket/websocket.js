@@ -1,30 +1,35 @@
-import ws from 'ws';
-import primus from './primus-websockets.js';
-
-export let socket = undefined;
+import primus from './primusSockjs.js'
+export let socket = undefined
 
 export const initialise = (hostUrl) => {
-
   socket = primus.connect(hostUrl);
-
-  const socketError = (err) => socket.write({
-    type : 'log',
-    payload : {
-      type : 'error',
-      message : err.message
-    }
-  });
+  socket.on('error', console.error )
   
-  socket.on('error', socketError);
+  // Log stuff
+  if (GLOBAL_ENV.NODE_ENV === 'development') {
+    // Receive
+    const socketData = (data) => {
+      console.groupCollapsed(` socket | RECEIVE      ${data.type}`);
+      console.log(data)
+      console.groupEnd();
+    }
+    socket.on('data', socketData)
 
-  // nonsense
-  const oldWrite = socket.write.bind(socket);
-  socket.write = (data) => {
-//    console.log('WRITING DATA\n', JSON.stringify(data, null, 4));
-    return oldWrite(data);
+    // Write
+    const oldWrite = socket.write.bind(socket);
+    socket.write = (data) => {
+      console.groupCollapsed(` socket | SEND         ${data.type}`);
+      console.log(data)
+      console.groupEnd();
+      return oldWrite(data)
+    }
   }
 
-//  socket.on('data', (data) => console.log('WEBSOCKET RECEIVED DATA:\n', JSON.stringify(data)));
-  
-  return socket;
+  socket.write({
+    type: 'ADMIN/ECHO',
+    payload: {
+      test: 'gooba'
+    }
+  })
+  return socket
 }

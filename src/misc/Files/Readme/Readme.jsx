@@ -15,6 +15,7 @@ export default class Readme extends Component {
     project: PropTypes.object.isRequired,
     projectModel: PropTypes.string.isRequired,
     saveProject: PropTypes.func.isRequired,
+    isRoot: PropTypes.bool.isRequired, // Is this the readme for the root directory?
   }
   constructor(props) {
     super(props)
@@ -35,19 +36,19 @@ export default class Readme extends Component {
     }), 1)
   }
   render() {
-    const { files, project, projectModel, ...otherProps } = this.props
+    const { files, project, projectModel, isRoot, ...otherProps } = this.props
     const { editActive } = this.state
     const readmeNames = ['readme.md', 'readme.txt']
     const readmeFile = files.find(item => readmeNames.includes(item.name.toLowerCase()))
+    const readmeTextExists = project.data.readme && project.data.readme.length > 0
 
-    if (readmeFile) {
-
+    
+    const getReadmeFileDisplay = () => {
       const fileRouteParams = {
         projectId: readmeFile.project._id,
         fileId: readmeFile.fileId,
         revisionId: readmeFile.revisionId,
       }
-
       return (
         <div className={ classes.readme }>
           <Link
@@ -64,36 +65,54 @@ export default class Readme extends Component {
         </div>
       )
     }
-
-    // Non-file Readme
-    return (
-      <div>
-        <div className={ classes.readme }>
-          <div style={ { marginBottom: '15px' } } className="text-mini-caps">Readme</div>
-          <SimpleIconButton
-            className={ classes.editButton }
-            title="Edit Readme"
-            onClick={ this.toggleEdit }
-          >
-            <MdModeEdit size={ 18 }/>
-          </SimpleIconButton>
-          { editActive
-          ? <Editor
-              value={ project.data.readme }
-              model={ `${projectModel}.data.readme` }
-            />
-          : <EditorDisplay value={ project.data.readme } /> }
-          { editActive &&
-            <div className="layout-row layout-align-end" style={ { marginTop: '15px' } }>
-              <ProgressButton
-                className="primary"
-                onClick={ this.save }
-              >
-                Save
-              </ProgressButton>
-            </div> }
+    
+    const getReadmeTextDisplay = () => (
+      <div className={ classes.readme }>
+        <div style={ { marginBottom: '15px' } } className="text-mini-caps">Readme</div>
+        <SimpleIconButton
+          className={ classes.editButton }
+          title="Edit Readme"
+          onClick={ this.toggleEdit }
+        >
+          <MdModeEdit size={ 18 }/>
+        </SimpleIconButton>
+        { editActive
+        ? <Editor
+            value={ project.data.readme }
+            model={ `${projectModel}.data.readme` }
+          />
+        : <EditorDisplay value={ project.data.readme } /> }
+        { editActive &&
+          <div className="layout-row layout-align-end" style={ { marginTop: '15px' } }>
+            <ProgressButton
+              className="primary"
+              onClick={ this.save }
+            >
+              Save
+            </ProgressButton>
+          </div> }
+      </div>
+    )
+    
+    
+    const getAddReadmeTextPrompt = () => (
+      <div className={ classNames('layout-column layout-align-center-center', classes.readme) }>
+        <div className="text-title-5">
+          { isRoot
+            ? <a className="text-primary" onClick={ this.toggleEdit }>Add a readme</a>
+            : 'Add a readme' }
+          &nbsp;to this folder to help others understand what is here.
         </div>
       </div>
     )
+    
+    if (readmeFile) {
+      return getReadmeFileDisplay()
+    } else if (readmeTextExists || (editActive && isRoot)) {
+      return getReadmeTextDisplay()
+    } else if (true) {
+      return getAddReadmeTextPrompt()
+    }
+
   }
 }

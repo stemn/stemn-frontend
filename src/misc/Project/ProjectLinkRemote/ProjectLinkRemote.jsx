@@ -11,7 +11,7 @@ import * as AuthActions from 'stemn-shared/misc/Auth/Auth.actions.js';
 import Select from 'react-select';
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
-import { actions } from 'react-redux-form';
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 
 // Styles
 import classNames from 'classnames';
@@ -27,7 +27,7 @@ const Component = React.createClass({
       this.props.AuthActions.authenticate(selectedProvider.authType)
 //      .then((response) => {
 //        // TODO: NEED TO FIX THIS SHIT. TOO MUCH WINE TO UNDERSTAND HOW
-//        this.props.dispatch(actions.change(this.props.model, selectedProvider.value));
+//        this.props.dispatch(storeChange(this.props.model, selectedProvider.value));
 //        console.log(response);
 //      })
 //      .catch((response) => {
@@ -36,7 +36,7 @@ const Component = React.createClass({
     }
     // Else, we update the model straight away
     else{
-      this.props.dispatch(actions.change(this.props.model, selectedProvider.value));
+      this.props.dispatch(storeChange(this.props.model, selectedProvider.value));
     }
   },
   render(){

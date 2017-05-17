@@ -1,5 +1,4 @@
 import i from 'icepick'
-import { modeled } from 'react-redux-form'
 
 const initialState = {
   /*
@@ -11,7 +10,7 @@ const initialState = {
   */
 }
 
-const reducer = (state = initialState, action = {}) => {
+export default (state = initialState, action = {}) => {
   switch (action.type) {
     case 'FILE_LIST/FETCH_FILES_PENDING':
       return i.assocIn(state, [action.meta.cacheKey, 'loading'], true)
@@ -49,7 +48,3 @@ const reducer = (state = initialState, action = {}) => {
       return state
   }
 }
-
-
-
-export default modeled(reducer, 'fileList')

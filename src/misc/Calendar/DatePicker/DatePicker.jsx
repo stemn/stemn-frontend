@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment';
 
 import { connect } from 'react-redux';
-import { actions } from 'react-redux-form';
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 
 import classNames from 'classnames';
 import classes from './DatePicker.css';
@@ -22,7 +22,7 @@ export const Component = React.createClass({
     this.setState({calendarIsOpen: openStatus === undefined ? !this.state.calendarIsOpen : openStatus})
   },
   selectDate(date) {
-    this.props.dispatch(actions.change(this.props.model, date ? date.format() : ''));
+    this.props.dispatch(storeChange(this.props.model, date ? date.format() : ''));
     if(this.props.onChange){ this.props.onChange() }
   },
   render() {

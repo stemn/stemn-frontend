@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js';
-import { actions } from 'react-redux-form';
 import { projectSettingsRoute } from 'route-actions';
 import { push } from 'react-router-redux';
 import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry'
