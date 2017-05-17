@@ -1,22 +1,35 @@
 import i from 'icepick'
 
-const initialState = {}
+const initialState = {
+  /*
+    [cacheKey] : {
+      mode,
+      selected1,
+      selected2,
+      lastSelected,
+    }
+  */
+
+}
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
-//    case 'FILE_COMPARE/INIT':
-//      return i.merge(state, {
-//        [action.payload.compareId]: {
-//          mode: 'single',
-//          previewType1: action.payload.previewType1,
-//          previewType2: action.payload.previewType2,
-//          file1: action.payload.file1,
-//          file2: action.payload.file2,
-//        }
-//      })
+    case 'FILE_COMPARE/INIT':
+      return i.assoc(state, action.meta.cacheKey, {
+        mode: action.payload.mode,
+        selected1: action.payload.selected1,
+        selected2: action.payload.selected2,
+        lastSelected: 1,
+      })
+    case 'FILE_COMPARE/SELECT':
+      return i.chain(state)
+        .assocIn([action.meta.cacheKey, `selected${action.payload.selectedKey}`], action.payload.file)
+        .assocIn([action.meta.cacheKey, 'lastSelected'], action.payload.selectedKey)
+        .value()
+
     case 'FILE_COMPARE/CHANGE_MODE':
       return i.merge(state, {
-        [action.payload.compareId]: {
+        [action.meta.cacheKey]: {
           mode: action.payload.mode
         }
       })

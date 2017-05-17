@@ -1,15 +1,17 @@
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
-import { groupBy } from 'lodash'
+import { groupBy, orderBy } from 'lodash'
 import TimelineItem from './TimelineItem/TimelineItem'
 import classes from './TimelineVertical.css'
 
 const groupByDay = (data) => {
   const groupedObject = groupBy(data, item => moment(item.timestamp).format('YY/MM/DD'))
-  return Object.keys(groupedObject).map(key => ({
+  const groupedArray = Object.keys(groupedObject).map(key => ({
     date: key,
     items: groupedObject[key],
   }))
+  const groupedArrayOrdered = orderBy(groupedArray, 'date', 'desc')
+  return groupedArrayOrdered
 }
 
 const getCalendarText = (time) => (moment(time).calendar().split(' at'))[0]
@@ -42,7 +44,8 @@ export default class TimelineVertical extends Component {
         </div>
       )
     } else {
-      return <div>{ this.renderItems(items) }</div>
+      const orderedItems = orderBy(items, 'timestamp', 'desc')
+      return <div>{ this.renderItems(orderedItems) }</div>
     }
   }
 }

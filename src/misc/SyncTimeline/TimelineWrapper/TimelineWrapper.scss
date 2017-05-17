@@ -3,6 +3,10 @@
 .item{
   border-left: 1px solid border1;
   padding: 15px 0;
+
+  @media (max-width: 599px) {
+    border-left: none;
+  }
 }
 .marker{
   width: 12px;
@@ -13,4 +17,9 @@
   margin-left: -6px;
   margin-right: 13px;
   background: white;
+
+  @media (max-width: 599px) {
+    display: none;
+  }
+
 }

@@ -1,4 +1,4 @@
-@value border1 from "theme";
+@value border1, highlight-color, highlight-text-color from "theme";
 
 .dr-input {
   height: 36px;
@@ -33,4 +33,13 @@
 }
 textarea.input-plain {
   overflow: hidden;
+}
+
+::selection {
+  background: highlight-color;
+  color: highlight-text-color;
+}
+::-moz-selection {
+  background: highlight-color;
+  color: highlight-text-color;
 }

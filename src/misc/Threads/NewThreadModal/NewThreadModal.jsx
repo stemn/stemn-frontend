@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { get } from 'lodash'
-import classes from './NewThreadModal.css'
+import classes from './NewThreadModal.scss'
 import classNames from 'classnames'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
@@ -68,9 +68,9 @@ export default class NewThreadModal extends Component {
     }))
 
     return (
-      <div style={ { width: '600px'} }>
+      <div className={ classNames(classes.modal, 'layout-column') }>
         <div className={ classes.modalTitle }>Create a new thread</div>
-        <div className={ classes.modalBody }>
+        <div className={ classNames(classes.modalBody, 'flex') }>
           <div className={ classNames(classes.titleSection, 'layout-row layout-align-start-center') }>
             <Textarea
               model={ `${boardModel}.newThread.name` }

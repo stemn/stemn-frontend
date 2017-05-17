@@ -1,8 +1,7 @@
-import React from 'react';
-
+import React from 'react'
 import codemirror from 'codemirror'
 import 'codemirror/mode/meta.js'
-const requireCodemirrorMode = require.context("codemirror/mode/", true, /\.js$/);
+const requireCodemirrorMode = require.context('url-loader?limit=1&name=js/codemirror/[name].[hash].[ext]!codemirror/mode/', true, /\.js$/);
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx';
 import file from 'stemn-shared/assets/images/pure-vectors/file.svg';
@@ -34,7 +33,6 @@ export const Viewer = React.createClass({
     }
 
     const isMarkdown = false;
-//    const isMarkdown = extension == 'md';
     return (
       <div className="layout-row flex">
         <div className="scroll-box flex" ref="codemirror"></div>
@@ -47,7 +45,7 @@ export const Viewer = React.createClass({
       </div>
     )
   }
-});
+})
 
 
 export default React.createClass({
@@ -75,12 +73,12 @@ export default React.createClass({
         { fileData ? <LoadingOverlay show={fileData.loading} /> : null }
         { fileData && !fileData.data && !fileData.loading
         ? <div className="layout-column layout-align-center-center flex text-center">
-            <img style={{width: '100px'}} src={file}/>
-            <div className="text-title-4" style={{marginBottom: '10px'}}>Nothing to display</div>
+            <img style={ { width: '100px' } } src={ file }/>
+            <div className="text-title-4" style={ { marginBottom: '10px' } }>Nothing to display</div>
             <div className="text-title-5">This file appears to be empty.</div>
           </div>
         : null }
       </div>
     )
   }
-});
+})

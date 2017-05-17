@@ -1,6 +1,6 @@
 import { has } from 'lodash';
 import { name as localPathModuleName } from 'stemn-shared/desktop/LocalPath/LocalPath.reducer.js';
-import { getPath }           from 'stemn-shared/desktop/LocalPath/LocalPath.actions.js';
+import { getPath } from 'stemn-shared/desktop/LocalPath/LocalPath.actions.js';
 
 export default ({ path, projectId, provider }) => {
   return (dispatch, getState) => {

@@ -85,7 +85,7 @@ export default class EntityRow extends Component {
             <Link className={ classNames(classes.link, 'link-primary') } name={ route.name } params={ route.params }>
               <Highlight
                 className="text-ellipsis"
-                text={ data.name }
+                text={ data.name || 'Untitled' }
                 query={ query }
                 hightlightClass={ classes.highlight }
               />

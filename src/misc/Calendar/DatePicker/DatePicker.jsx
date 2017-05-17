@@ -79,7 +79,8 @@ export const Component = React.createClass({
         <div className="layout-row layout-align-start-center flex">
           { valueDate ? valueDate.calendar() : 'Select a due date' }
           <div className="flex" />
-          <MdClose onClick={ () => this.selectDate() } style={ { marginLeft: '5px' } } size={ 15 } />
+          { valueDate &&
+            <MdClose onClick={ () => this.selectDate() } style={ { marginLeft: '5px' } } size={ 12 } /> }
           <MdExpandMore style={ { marginLeft: '5px' } } size={ 15 } />
         </div>
         { content }

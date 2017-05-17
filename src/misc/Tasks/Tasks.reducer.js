@@ -111,7 +111,10 @@ const mainReducer = (state, action) => {
     case 'TASKS/UPDATE_BOARD_REJECTED':
       return i.assocIn(state, ['boards', action.meta.cacheKey, 'savePending'], false)
     case 'TASKS/UPDATE_BOARD_FULFILLED':
-      return i.assocIn(state, ['boards', action.meta.cacheKey, 'savePending'], false)
+      return i.chain(state)
+        .assocIn(['boards', action.meta.cacheKey, 'savePending'], false)
+        .assocIn(['boards', action.meta.cacheKey, 'data'], action.payload.data)
+        .value()
 
     case 'TASKS/NEW_GROUP_FULFILLED':
       return i.chain(state)

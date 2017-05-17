@@ -3,6 +3,7 @@ import { show } from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actio
 import { oauthCreds } from '../Auth.config.js';
 import setAuthToken from './setAuthToken'
 import loadUserData from './loadUserData'
+import { getSettings } from 'stemn-shared/misc/UserSettings/UserSettings.actions.js'
 
 export default ({ provider, code }) => {
   return (dispatch) => {
@@ -16,12 +17,11 @@ export default ({ provider, code }) => {
             code: code,
             redirectUri: oauthCreds[provider].params.redirect_uri
           }
-        }).then(response => {
-          setTimeout(() => dispatch(show('main')), 100)
-          dispatch(setAuthToken(response.data.token))
-          setTimeout(()=>dispatch(loadUserData()), 1)
-          return response
         })
+      }).then(({value}) => {
+        setTimeout(() => dispatch(show('main')), 100)
+        dispatch(setAuthToken(value.data.token))
+        return Promise.all([dispatch(loadUserData()), dispatch(getSettings())])
       })
     }
   }

@@ -1,24 +1,28 @@
-export default (number, thing) => {
+export default (number, thing, noNumber) => {
   // takes in thing(singular)
   // adds an 's' if 0 || > 1, adds 'ies' if ends in 'y'
+
+  let end = ''
 
   // Special Cases
   if (thing === 'People') {
     if (number === 1) {
-      return `${number} Person`
+      end = `Person`
     } else {
-      return `${number} People`
+      end = `People`
     }
+    return noNumber ? end : `${number} ${end}`
   }
   // Normal cases
   const lastLetter = thing[thing.length]
   if (number === 1) {
-    return `${number} ${thing}`
+    end = thing
   } else {
     if (lastLetter === 'y') {
-      return `${number} ${thing.substring(0, thing.length - 1)}ies`
+      end = `${thing.substring(0, thing.length - 1)}ies`
     } else {
-      return `${number} ${thing}s`
+      end = `${thing}s`
     }
   }
+  return noNumber ? end : `${number} ${end}`
 }

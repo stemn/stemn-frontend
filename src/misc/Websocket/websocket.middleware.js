@@ -26,8 +26,7 @@ export default store => next => action => {
         token: token
       })
     })
-//    // stop action in-flight
-//    return;
+
     // Modify the action so the websocket is not processed again
     const modifiedAction = Object.assign({}, action, {websocket: false})
     return next(modifiedAction);

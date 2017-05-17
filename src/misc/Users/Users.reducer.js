@@ -23,16 +23,6 @@ function reducer(state, action) {
     case 'USERS/SAVE_USER_FULFILLED':
       return i.assocIn(state, [action.meta.userId, 'savePending'], false)
 
-    case 'USERS/GET_COMMIT_HISTORY_PENDING':
-      return i.assocIn(state, [action.meta.userId, 'commitHistory', 'loading'], true)
-    case 'USERS/GET_COMMIT_HISTORY_REJECTED':
-      return i.assocIn(state, [action.meta.userId, 'commitHistory', 'loading'], false)
-    case 'USERS/GET_COMMIT_HISTORY_FULFILLED':
-      return i.chain(state)
-        .assocIn([action.meta.userId, 'commitHistory', 'loading'], false)
-        .assocIn([action.meta.userId, 'commitHistory', 'data'], action.payload.data)
-        .value()
-
     default:
       return state
   }

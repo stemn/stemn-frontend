@@ -1,38 +1,45 @@
-import React from 'react';
-
-// Styles
-import classNames from 'classnames';
-import classes from './TimelineInner.css';
-
-import { orderBy } from 'lodash';
-import moment from 'moment';
-import Popover from 'stemn-shared/misc/Popover';
-
-import * as stringConcat from 'stemn-shared/utils/stringConcat';
+import React from 'react'
+import classNames from 'classnames'
+import classes from './TimelineInner.css'
+import { orderBy } from 'lodash'
+import moment from 'moment'
+import Popover from 'stemn-shared/misc/Popover'
+import * as stringConcat from 'stemn-shared/utils/stringConcat'
+import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 
 const EventMap = {
-  commit   : (item) => {
+  commit: (item) => {
     const timeFromNow = moment(item.timestamp).fromNow();
     return (
-      <div className={classes.popup}>
-        <div className="layout-row layout-align-start-center">
-          <img className={classes.popupImage} src={'https://stemn.com' + item.user.picture + '?size=thumb&crop=true'} />
-          <div className="flex">
-            <b>Commit: {stringConcat.end(item.data.summary, 25)}</b>
-            <div className="text-grey-3">{timeFromNow} by {item.user.name}</div>
-          </div>
+      <div className={ classNames(classes.popup, 'layout-row layout-align-start-center') }>
+        <UserAvatar
+          className={ classes.popupImage }
+          picture={ item.user.picture }
+          name={ item.user.name }
+          shape="square"
+          size={ 40 }
+        />
+        <div className="flex">
+          <b>Commit: { stringConcat.end(item.data.summary, 25) }</b>
+          <div className="text-grey-3">{ timeFromNow } by { item.user.name }</div>
         </div>
       </div>
     )
   },
-  revision : (item) => {
+  revision: (item) => {
     const timeFromNow = moment(item.timestamp).fromNow();
     return (
-      <div className={classes.popup + ' layout-row layout-align-start-center'}>
-        <img className={classes.popupImage} src={'https://stemn.com' + item.user.picture + '?size=thumb&crop=true'} />
+      <div className={ classNames(classes.popup, 'layout-row layout-align-start-center') }>
+        <UserAvatar
+          className={ classes.popupImage }
+          picture={ item.user.picture }
+          name={ item.user.name }
+          shape="square"
+          size={ 40 }
+        />
         <div className="flex">
-          <b>Revision: {item.data.revisionNumber}</b>
-          <div className="text-grey-3">{timeFromNow} by {item.user.name}</div>
+          <b>Revision: { item.data.revisionNumber }</b>
+          <div className="text-grey-3">{ timeFromNow } by { item.user.name }</div>
         </div>
       </div>
     )
@@ -50,10 +57,10 @@ const Dot = React.createClass({
     const dotClasses = classNames(classes.dot, {[classes.active]: isSelected ? isSelected(item) : selected == item._id});
     return (
         // If the isSelected function is provided, we use this to determine if the item is active
-      <a className={dotClasses} onClick={()=>onSelect(item)}>
-        <Popover preferPlace={preferPlace || 'below'} trigger="hoverDelay" tipSize={6}>
-          <div className="layout-column layout-align-center-center" style={{height: '100%'}}></div>
-          <div>{PopupContent(item)}</div>
+      <a className={ dotClasses } onClick={ () => onSelect(item) }>
+        <Popover preferPlace={ preferPlace || 'below' } trigger="hoverDelay" tipSize={ 6 }>
+          <div className="layout-column layout-align-center-center" style={ { height: '100%' } }></div>
+          <div>{ PopupContent(item) }</div>
         </Popover>
       </a>
     )
@@ -62,7 +69,7 @@ const Dot = React.createClass({
 
 const Component = React.createClass({
   render() {
-    const { items, selected, isSelected, page, onSelect, preferPlace, size} = this.props;
+    const { items, selected, isSelected, page, onSelect, preferPlace, size, refInner } = this.props;
     const translation = 'translateX(' + page * 100 + '%)';
     
     const Items = items.map((item, index)=> {
@@ -104,8 +111,8 @@ const Component = React.createClass({
     
     const containerClasses = classNames('layout-row layout-align-end-center', classes.dots, {[classes.small]: size == 'sm'});
     return(
-      <div ref="inner" className={containerClasses} style={{transform: translation}}>
-        {Items}
+      <div ref={ refInner } className={containerClasses} style={{transform: translation}}>
+        { Items }
       </div>
     )
   }

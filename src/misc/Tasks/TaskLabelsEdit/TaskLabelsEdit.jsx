@@ -1,18 +1,11 @@
 // Component Core
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import getUuid from 'stemn-shared/utils/getUuid.js';
-
-
-// Styles
 import classNames from 'classnames';
 import classes from './TaskLabelsEdit.css';
-
-// Actions
 import { actions } from 'react-redux-form';
-import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js';
-
+import { showConfirm } from 'stemn-shared/misc/Modal/Modal.actions.js';
 import Popover from 'stemn-shared/misc/Popover';
 import Input from 'stemn-shared/misc/Input/Input/Input';
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
@@ -20,22 +13,26 @@ import MdMoreHoriz from 'react-icons/md/more-horiz';
 import ColorSelect from './ColorSelect/ColorSelect.jsx'
 
 
-export const Component = React.createClass({
+class TaskLabelsEdit extends Component {
   confirmDelete(model, index){
     this.props.dispatch(
-      ModalActions.showConfirm({
+      showConfirm({
         message: 'If you delete this label it will be removed from all assigned tasks.',
       })
     ).then(() => {
       this.props.dispatch(actions.remove(model, index))
     })
-  },
-
-  render() {
-    const { model, value, dispatch } = this.props;
-
+  }
+  componentWillReceiveProps(props) {
+    this.onMount(props)
+  }
+  componentWillMount() {
+    this.onMount(this.props)
+  }
+  onMount = (props) => {
+    const { dispatch, value, model } = props
     // If it is empty, push on a label
-    if(value.length == 0){
+    if( value.length === 0 ){
       dispatch(actions.push(model, {
         _id: getUuid(),
         color: '',
@@ -43,17 +40,20 @@ export const Component = React.createClass({
       }))
     }
     // Else, if the name of the last label exists, add another
-    else if(value[value.length-1].name.length >= 1){
+    else if( value[value.length-1].name.length >= 1 ){
       dispatch(actions.push(model, {
         _id: getUuid(),
         color: '',
         name: '',
       }))
     }
+  }
+  render() {
+    const { model, value, dispatch } = this.props;
 
     return (
       <div>
-        {value.map((label, index)=>
+        { value.map((label, index) =>
           <div key={label._id} className={classes.row + ' layout-row layout-align-start-center'}>
             <div className={classes.colorSelect}>
               <Popover preferPlace="above">
@@ -91,10 +91,10 @@ export const Component = React.createClass({
               </div>
             </Popover>
           </div>
-        )}
+        ) }
       </div>
     )
   }
-});
+}
 
-export default connect()(Component)
+export default connect()(TaskLabelsEdit)

@@ -11,9 +11,10 @@ import React, { PropTypes } from 'react';
 
 // Styles
 import classNames from 'classnames';
+import classes from './FileSelectModal.scss'
 
 // Sub Components
-import FileList from 'stemn-shared/misc/FileList/FileList';
+import FileList from 'stemn-shared/misc/FileList';
 import Button from 'stemn-shared/misc/Buttons/Button/Button';
 import MdDone from 'react-icons/md/done';
 import { isDriveFileId, isDropboxFileId } from 'stemn-shared/misc/Files/utils';
@@ -107,7 +108,7 @@ export const FileSelectModal = React.createClass({
     const activePath = fileSelect ? validatePath(fileSelect.path, options.explore) : '';
 
     return (
-      <div style={{width: '600px'}}>
+      <div className={ classes.modal }>
         {fileSelect
         ? <FileList
             projectId={projectId}

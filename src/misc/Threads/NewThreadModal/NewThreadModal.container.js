@@ -1,4 +1,3 @@
-
 import { connect } from 'react-redux'
 import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry'
 import { actions } from 'react-redux-form'
@@ -21,8 +20,6 @@ const dispatchToProps = {
 }
 
 const modalName = 'THREAD_NEW'
-
 const ModalComponent = connect(stateToProps, dispatchToProps)(NewThreadModal)
 registerModal(modalName, ModalComponent)
-
 export default modalName

@@ -2,6 +2,7 @@ import http from 'axios';
 import { oauthCreds } from '../Auth.config.js';
 import setAuthToken from './setAuthToken'
 import loadUserData from './loadUserData'
+import { getSettings } from 'stemn-shared/misc/UserSettings/UserSettings.actions.js'
 
 export default ({ provider, code }) => (dispatch) => {
   if(oauthCreds[provider]){
@@ -14,11 +15,11 @@ export default ({ provider, code }) => (dispatch) => {
           code: code,
           redirectUri: oauthCreds[provider].params.redirect_uri
         }
-      }).then(response => {
-        dispatch(setAuthToken(response.data.token))
-        setTimeout(()=>dispatch(loadUserData()), 1)
-        return response
       })
+    }).then(({ value }) => {
+      console.log(value);
+      dispatch(setAuthToken(value.data.token))
+      return Promise.all([dispatch(loadUserData()), dispatch(getSettings())])
     })
   }
 }

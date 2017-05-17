@@ -1,44 +1,55 @@
-// Container Core
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
-// Container Actions
-import * as FilesActions from '../Files.actions.js';
-
-// Component Core
+import { getFullPath } from '../Files.actions.js';
 import React from 'react';
-
-// Styles
 import classNames from 'classnames';
-
-// Sub Components
-import LoadingOverlay     from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import { getDownloadUrl } from '../utils';
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import { getDownloadUrl, saveFile } from '../utils';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
 export const DownloadFile = React.createClass({
+  saveFile() {
+    const { file, fileUrl } = this.props
+    this.props.getFullPath({
+      path: file.path,
+      projectId: file.project._id,
+      provider: file.provider
+    }).then(filePath => {
+      this.props.saveFile({fileUrl, filePath})
+    })
+  },
   render() {
-    const { children, title,
-      filesActions, file, fileUrl, progress } = this.props;
-    const saveFile = () => {
-      filesActions.getFullPath({
-        path: file.path,
-        projectId: file.project._id,
-        provider: file.provider
-      }).then(filePath => {
-        filesActions.saveFile({fileUrl, filePath})
-      })
-    };
-
-    return (
-      <a className="link-primary" onClick={saveFile} title={title}>
-        {children}
-        <LoadingOverlay show={progress && progress>0 && progress<100} linear={true} hideBg={true} />
-      </a>
-    );
+    const { children, title, file, fileUrl, progress } = this.props
+    if (GLOBAL_ENV.APP_TYPE === 'web') {
+      return (
+        <a
+          className="link-primary"
+          href={ fileUrl }
+          download={ file.name }
+          title={ title }
+        >
+          { children }
+        </a>
+      )
+    } else {
+      return (
+        <a
+          className="link-primary"
+          onClick={ this.saveFile }
+          title={ title }
+        >
+          { children }
+          <LoadingOverlay
+            show={ progress && progress > 0 && progress < 100 }
+            linear
+            hideBg
+          />
+        </a>
+      )
+    }
   }
-});
+})
 
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
@@ -48,13 +59,12 @@ function mapStateToProps({files}, {file}) {
   return {
     fileUrl: fileUrl,
     progress: files.downloadProgress[fileUrl]
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    filesActions: bindActionCreators(FilesActions, dispatch),
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DownloadFile);
+const dispatchToProps = {
+  getDownloadUrl,
+  saveFile,
+}
+
+export default connect(mapStateToProps, dispatchToProps)(DownloadFile)

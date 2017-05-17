@@ -1,33 +1,24 @@
-// Container Core
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
-// Container Actions
-import * as FileListActions from './FileList.actions.js';
-//import { websocketJoinFile, websocketLeaveFile }  from 'stemn-shared/misc/Files/actions';
-
-// Component Core
-import React, { PropTypes } from 'react';
-import { has, omit, orderBy } from 'lodash';
-
-// Styles
+import React, { Component, PropTypes } from 'react'
+import { has, omit, orderBy, get } from 'lodash'
 import classNames from 'classnames';
 import classes from './FileList.css'
-
-// Sub Components
-import FileBreadCrumbs  from './components/FileBreadCrumbs';
-import FileRow          from './components/FileRow';
-import LoadingOverlay   from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import MdRefresh        from 'react-icons/md/refresh';
-import MdHome           from 'react-icons/md/home';
+import FileBreadCrumbs from './components/FileBreadCrumbs'
+import FileRow from './components/FileRow'
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
+import MdRefresh from 'react-icons/md/refresh'
+import MdHome from 'react-icons/md/home'
+import MdSearch from 'react-icons/md/search'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import SearchInput from 'stemn-shared/misc/Search/SearchInput'
+import { ContextMenuLayer } from "react-contextmenu"
+import ContextMenu from 'stemn-shared/misc/ContextMenu/ContextMenu.jsx'
+import FileListMenu from './FileList.menu.js'
 
+const contextIdentifier = 'FileListCm';
+const FileRowContext = GLOBAL_ENV.APP_TYPE === 'web'
+  ? FileRow
+  : ContextMenuLayer(contextIdentifier, props => props.file)(FileRow)
 
-const contextIdentifier     = 'FileListCm';
-import { ContextMenuLayer } from "react-contextmenu";
-import ContextMenu          from 'stemn-shared/misc/ContextMenu/ContextMenu.jsx';
-import FileListMenu         from './FileList.menu.js';
-const FileRowContext        = ContextMenuLayer(contextIdentifier, props => props.file)(FileRow)
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -40,127 +31,147 @@ const propTypesObject = {
   selected        : PropTypes.object,             // The currently selected file
   contentStyle    : PropTypes.object,             // Styles for the content section
   crumbPopup      : React.PropTypes.bool,         // Optional: Should we show a popup on the crumbs?
+  search          : React.PropTypes.bool,         // Optional: Should search be enabled
+  link            : React.PropTypes.bool,         // Optional: Should each row be a link with href
   options         : React.PropTypes.shape({
     allowFolder   : React.PropTypes.bool,
     foldersOnly   : React.PropTypes.bool,
     showMenu      : React.PropTypes.bool,
     explore       : React.PropTypes.string,       // Optional: 'dropbox' || 'drive' - The provider
   }),
-  FileListActions : PropTypes.object,             // Actions
   dispatch        : PropTypes.func,               // Actions
-  files           : PropTypes.object,             // Store
+  fileList         : PropTypes.object,           // Store
 };
 
 
-export const Component = React.createClass({
-  propTypes: propTypesObject,
-  componentWillMount() { this.onMount(this.props) },
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
-  onMount(nextProps, prevProps) {
-    if(!prevProps || nextProps.path !== prevProps.path){
-      this.getFiles({
-        path     : nextProps.path,
-        provider : nextProps.options.explore,
-        projectId: nextProps.projectId,
-      })
-    }
-  },
-  getFiles({path, provider, projectId}) {
-    if(['dropbox', 'drive'].includes(provider)){
-      this.props.FileListActions.exploreFolder({
-        provider: provider,
-        folderId: path,
-      });
-    }
-    else if(projectId){
-      this.props.FileListActions.fetchFiles({
-        projectId: projectId,
-        path: path,
-      });
-    }
-  },
+export default class FileList extends Component {
+  static propTypes = propTypesObject
+  refresh = () => {
+    const { getFiles, options, path, projectId } = this.props;
+    getFiles({
+      path,
+      provider: options.explore,
+      projectId,
+    })
+  }
 
+  goHome = () => {
+    const { crumbClickFn, projectId } = this.props
+    crumbClickFn({
+      file: {
+        fileId: '',
+        project: {
+          _id: projectId
+        }
+      }
+    })
+  }
+  renderResults = () => {
+    const { fileList, options, selected, singleClickFn, doubleClickFn, link } = this.props
+    const filesNormal = get(fileList, 'entries', [])
+    const filesFiltered = options.foldersOnly
+      ? filesNormal.filter(file => file.type === 'folder')
+      : filesNormal
+    const filesOrdered  = orderBy(filesFiltered, ['type', 'name'], ['desc', 'asc'])
+
+    if (filesOrdered && filesOrdered.length > 0) {
+      return filesOrdered.map(file => (
+        <FileRowContext
+          key={ file.fileId }
+          file={ file }
+          singleClick={ singleClickFn }
+          doubleClick={ doubleClickFn }
+          isActive= {selected && selected.fileId == file.fileId }
+          link={ link }
+        />
+      ))
+    } else if(fileList && !fileList.loading){
+      return <div style={ { padding: '15px' } }>No results</div>
+    }
+    return null
+  }
+  renderSearchResults = () => {
+    const { fileList, options, selected, singleClickFn, doubleClickFn } = this.props
+    const filesNormal = get(fileList, 'search', [])
+    const filesFiltered = options.foldersOnly
+      ? filesNormal.filter(file => file.type === 'folder')
+      : filesNormal
+    const filesOrdered  = orderBy(filesFiltered, ['type', 'name'], ['desc', 'asc'])
+
+    if (filesOrdered && filesOrdered.length > 0) {
+      return filesOrdered.map(file => (
+        <FileRowContext
+          key={ file.fileId }
+          query={ fileList.query }
+          file={ file }
+          singleClick={ singleClickFn }
+          doubleClick={ doubleClickFn }
+          isActive= {selected && selected.fileId == file.fileId }
+        />
+      ))
+    } else if(fileList && !fileList.loading){
+      return <div style={ { padding: '15px' } }>No results</div>
+    }
+    return null
+  }
   render() {
-    const { files, singleClickFn, doubleClickFn, crumbClickFn, selected, options, path, projectId, crumbPopup, dispatch } = this.props;
-    const { contentStyle } = this.props;
+    const { fileList, fileListCacheKey, search, contentStyle, singleClickFn, doubleClickFn, crumbClickFn, selected, options, path, projectId, crumbPopup, dispatch, ...otherProps } = this.props;
 
-    const displayResults = () => {
-      const filesNormal   = files && files.entries ? files.entries : [];
-      const filesFiltered = options.foldersOnly ? filesNormal.filter(file => file.type == 'folder') : filesNormal;
-      const filesOrdered  = orderBy(filesFiltered, ['type', 'name'], ['desc', 'asc']);
-      if(filesOrdered && filesOrdered.length > 0){
-        return filesOrdered.map(file => (
-          <FileRowContext
-            key={file.fileId}
-            file={file}
-            singleClick={singleClickFn}
-            doubleClick={doubleClickFn}
-            isActive={selected && selected.fileId == file.fileId}
-          />
-        ))
-      }
-      else if(files && !files.loading){
-        return <div style={{padding: '15px'}}>No results</div>
-      }
-      else{
-        return null
-      }
-    };
-
-    const getFiles = () => {
-      this.getFiles({
-        path: path,
-        provider: options.explore,
-        projectId: projectId
-      })
-    }
-
-    const isLoading = !files || files.loading;
+    const isLoading = !fileList || fileList.loading;
 
     return (
-      <div { ...omit(this.props, Object.keys(propTypesObject)) }>
+      <div { ...otherProps }>
         <div className={classes.breadcrumbs + ' layout-row layout-align-start-center'}>
-          <FileBreadCrumbs className="flex" meta={files && files.folder ? files.folder : ''} clickFn={crumbClickFn} popup={crumbPopup}/>
-          <SimpleIconButton onClick={() => crumbClickFn({
-              file: {
-                fileId: '',
-                project: {
-                  _id: projectId
-                }
-              }
-            })} title="Home">
-            <MdHome size="22px"></MdHome>
+          <FileBreadCrumbs
+            className="flex"
+            meta={ get(fileList, 'folder', '') }
+            clickFn={ crumbClickFn }
+            popup={ crumbPopup }
+          />
+          <SimpleIconButton
+            onClick={ this.goHome }
+            title="Home"
+          >
+            <MdHome size={ 22 } />
           </SimpleIconButton>
-          <SimpleIconButton onClick={getFiles} title="Refresh">
-            <MdRefresh size="22px"></MdRefresh>
+          <SimpleIconButton
+            onClick={ this.refresh }
+            title="Refresh"
+          >
+            <MdRefresh size={ 22 } />
           </SimpleIconButton>
+          { search
+          ? <SearchInput
+              value={ fileList.query }
+              model={ `fileList.${fileListCacheKey}.query` }
+              className={ classNames(classes.search, 'hide-xs') }
+              placeholder="Search Files"
+            />
+          : null }
+
         </div>
-        <div className="rel-box" style={contentStyle}>
-          <LoadingOverlay show={isLoading} linear={true} hideBg={true} noOverlay={true}/>
-          { displayResults() }
+        <div
+          className="rel-box"
+          style={ contentStyle }
+        >
+          <LoadingOverlay
+            show={ isLoading }
+            linear
+            hideBg
+            noOverlay
+          />
+          { get(fileList, 'query', '').length > 0
+            ? this.renderSearchResults()
+            : this.renderResults() }
+
           { options.showMenu
-          ? <ContextMenu identifier={contextIdentifier} menu={FileListMenu(dispatch)}/>
+          ? <ContextMenu
+              identifier={ contextIdentifier }
+              menu={ FileListMenu(dispatch) }
+            />
           : null }
         </div>
       </div>
-    );
-  }
-});
-
-
-///////////////////////////////// CONTAINER /////////////////////////////////
-
-function mapStateToProps({fileList}, {projectId, path, options}) {
-  return {
-    files: options.explore == 'drive' || options.explore == 'dropbox' ? fileList[`${options.explore}-${path}`] : fileList[`${projectId}-${path}`],
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    FileListActions: bindActionCreators(FileListActions, dispatch),
-    dispatch
+    )
   }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
