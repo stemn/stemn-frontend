@@ -12,7 +12,7 @@ import {
   updateTask,
 } from 'stemn-shared/misc/Tasks/Tasks.actions'
 
-const stateToProps = ({ tasks, projects, syncTimeline }, { params }) => {
+const stateToProps = ({ tasks, projects, syncTimeline, auth }, { params }) => {
   const taskId = params.taskId;
   const task = tasks.data[taskId]
   const projectId = params.stub
@@ -27,7 +27,8 @@ const stateToProps = ({ tasks, projects, syncTimeline }, { params }) => {
     boardId,
     board,
     taskModel: `tasks.data.${taskId}`,
-    timeline: get(syncTimeline, [taskId, 'data'], [])
+    timeline: get(syncTimeline, [taskId, 'data'], []),
+    currentUser: auth.user,
   };
 }
 

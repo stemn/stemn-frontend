@@ -18,6 +18,7 @@
   display: inline-block;
   color: rgba(0, 0, 0, 0.5);
   margin-top: 5px;
+  line-height: 1.4em;
 }
 .inner a:hover {
   color: rgba(0, 0, 0, 0.8);

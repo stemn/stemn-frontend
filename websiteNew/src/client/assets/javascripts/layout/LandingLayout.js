@@ -9,7 +9,7 @@ export default class LandingLayout extends Component {
     return (
       <div className="layout-column flex" { ...otherProps }>
         <LandingHeader />
-        <div className="flex">
+        <div className="flex" style={ { overflow: 'hidden' } }>
           { children }
         </div>
         <LandingFooter />

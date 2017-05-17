@@ -3,6 +3,10 @@ const merge = require('webpack-merge')
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const config = require('./webpack.config.base')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const WebpackChunkHash = require('webpack-chunk-hash')
+const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin')
+const HashModuleId = require('./plugins/HashModuleId')
 
 const GLOBALS = {
   'process.env': {
@@ -11,10 +15,14 @@ const GLOBALS = {
   GLOBAL_ENV: {
     APP_TYPE: JSON.stringify('web'),
     NODE_ENV: JSON.stringify('production'),
-    WEBSITE_URL: JSON.stringify('http://stemn.com'),
-    API_SERVER: JSON.stringify('http://35.167.249.144'),
+    WEBSITE_URL: JSON.stringify('https://stemn.com'),
+    API_SERVER: JSON.stringify('https://dev.stemn.com'),
   },
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false')),
+}
+
+const chunkIncludes = (targets) => ({ context }) => {
+  return context && context.indexOf('node_modules') >= 0 && targets.find(t => new RegExp('\\\\' + t + '\\\\', 'i').test(context))
 }
 
 module.exports = merge(config, {
@@ -22,13 +30,32 @@ module.exports = merge(config, {
   devtool: 'cheap-module-source-map',
   entry: {
     application: 'production',
-    vendor: ['react', 'react-dom', 'react-redux', 'react-router', 'react-router-redux', 'redux'],
+    vendor: [
+      'axios',
+      'icepick',
+      'moment',
+      'react',
+      'react-dom',
+      'react-helmet',
+      'react-popover',
+      'react-redux',
+      'react-router',
+      'react-router-redux',
+      'redux',
+      'redux-logger',
+      'redux-persist',
+    ],
+  },
+  output: {
+    filename: 'js/[name].[chunkhash].js',
+    chunkFilename: 'js/[id].[chunkhash].js',
+    path: path.resolve(__dirname, '../build/client'),
+    publicPath: '/',
   },
   plugins: [
     // Avoid publishing files when compilation fails
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin(GLOBALS),
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
@@ -46,9 +73,53 @@ module.exports = merge(config, {
       debug: false,
     }),
     new ExtractTextPlugin({
-      filename: 'css/app.css',
+      filename: 'css/app.[chunkhash].css',
       allChunks: true,
     }),
+    new CopyWebpackPlugin([
+      {
+        from: path.join(__dirname, '../src/client/assets/images'),
+        to: 'images',
+      }, {
+        from: path.join(__dirname, '../src/client/assets/static'),
+        to: 'static',
+      },
+    ]),
+
+    // Long term caching - https://webpack.js.org/guides/caching/#deterministic-hashes
+    new ChunkManifestPlugin({
+      filename: 'chunk-manifest.json',
+      manifestVariable: 'webpackManifest',
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest',
+      minChunks: Infinity,
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      children: true,
+      async: true,
+      minChunks: (module, count) => count >= 6,
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      children: true,
+      async: true,
+      minChunks: chunkIncludes(['codemirror']),
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      children: true,
+      async: true,
+      minChunks: chunkIncludes(['markdown-it', 'markdown-it-katex', 'katex', 'markdown-it-emoji', 'htmlparser2', 'ent', 'linkify-it']),
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      children: true,
+      async: true,
+      minChunks: chunkIncludes(['recharts', 'd3-scale', 'd3-shape', 'react-smooth']),
+    }),
+    new WebpackChunkHash(),
+    new webpack.HashedModuleIdsPlugin(),
   ],
   module: {
     noParse: /\.min\.js$/,
@@ -84,7 +155,7 @@ module.exports = merge(config, {
               query: {
                 modules: true,
                 importLoaders: 1,
-                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                localIdentName: '[name]_[local]-[hash:base64:5]',
               },
             },
             'postcss',

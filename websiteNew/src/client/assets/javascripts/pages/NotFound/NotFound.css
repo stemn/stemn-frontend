@@ -4,9 +4,11 @@
   line-height: 1.3em;
   margin-bottom: 10px;
   font-size: 50px;
+  text-align: center;
 }
 
 .root p {
   font-size: 20px;
   line-height: 1.3em;
+  text-align: center;
 }

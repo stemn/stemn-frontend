@@ -5,7 +5,7 @@ import StandardLayout from 'layout/StandardLayout'
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import SubHeader from 'modules/SubHeader'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
-
+import { Helmet } from "react-helmet";
 
 export default class Notifications extends Component {
   render() {
@@ -21,7 +21,10 @@ export default class Notifications extends Component {
 
     return (
       <StandardLayout>
-        <SubHeader title='Notifications'>
+        <Helmet>
+          <title>Notifications</title>
+        </Helmet>
+        <SubHeader title='Notifications' noResponsive>
           <div className="layout-column layout-align-center">
             <Button className='primary' onClick={ markAllRead }>Mark as read</Button>
           </div>

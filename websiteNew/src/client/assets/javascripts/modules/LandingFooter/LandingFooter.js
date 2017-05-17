@@ -20,13 +20,12 @@ class Footer extends Component {
             <Col className="flex">
               <div className={ classes.title }>About</div>
               <div><Link name="landingRoute">Home</Link></div>
-              <div><Link name="flowRoute">Workflow</Link></div>
               <div><Link name="pricingRoute">Pricing</Link></div>
               <div><Link name="openSourceRoute">Open source</Link></div>
             </Col>
             <Col className="flex">
               <div className={ classes.title }>Product</div>
-              <div><Link name="homeRoute">Browse Online</Link></div>
+              <div><Link name="exploreRoute">Explore online</Link></div>
               <div><Link name="downloadRoute">Stemn for Desktop</Link></div>
             </Col>
             <Col className="flex">

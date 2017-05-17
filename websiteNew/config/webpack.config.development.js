@@ -29,6 +29,11 @@ module.exports = merge(config, {
     ],
     vendor: ['react', 'react-dom', 'react-redux', 'react-router', 'react-router-redux', 'redux'],
   },
+  output: {
+    filename: 'js/[name].js',
+    path: path.resolve(__dirname, '../build/client'),
+    publicPath: '/',
+  },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin(GLOBALS),
@@ -41,6 +46,9 @@ module.exports = merge(config, {
         to: 'static',
       },
     ]),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: ['vendor'],
+    }),
   ],
   module: {
     loaders: [
@@ -72,7 +80,7 @@ module.exports = merge(config, {
             query: {
               modules: true,
               importLoaders: 1,
-              localIdentName: '[name]__[local]--[hash:base64:5]',
+              localIdentName: '[name]_[local]-[hash:base64:5]',
             },
           },
           'postcss',

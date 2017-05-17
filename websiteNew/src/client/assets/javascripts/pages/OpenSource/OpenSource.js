@@ -4,7 +4,7 @@ import LandingLayout from 'layout/LandingLayout'
 import HeroBanner from 'modules/HeroBanner'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import { Container } from 'stemn-shared/misc/Layout'
-
+import { Helmet } from "react-helmet";
 import classes from './OpenSource.scss'
 
 export default class OpenSource extends Component {
@@ -15,18 +15,19 @@ export default class OpenSource extends Component {
   render() {
     return (
       <LandingLayout>
+        <Helmet>
+          <title>Greate Engineering is Open</title>
+        </Helmet>
         <HeroBanner style={ { minHeight: '100vh', margin: '0px' } }>
-          <div style={ { maxWidth: '680px' } }>
+          <div style={ { width: '680px' } }>
             <h1>Great engineering is open.</h1>
-            <br />
             <p>Great engineering is the result of constant iteration and relentless refinement. The best ideas grow and expand with the input of others.</p>
             <p>Open engineering is not just about the final result. It is about sharing your process; the hours of missteps and false starts you tore through, the frustration and anguish you pushed beyond, before you arrived at that final iteration. Each of those false starts is a learning experience, a teachable moment to invite others to understand not just your solution; but how you did so.</p>
             <p>Working in the open can be frightening. Exposing your work to critique requires bold effort. But with the collective, collaborative genius, together we can push the boundaries and create better work.</p>
-            <br />
             <h3>Be open. Build together.</h3>
-            <div className="layout-row layout-align-center">
-              <Button style={ { margin: '0 10px'} } className="primary xl" name="loginRoute">Join the movement</Button>
-              <Button style={ { margin: '0 10px'} } className="secondary xl" onClick={ this.twitterShare }>#OpenEngineering</Button>
+            <div className="layout-xs-column layout-row layout-align-center">
+              <Button style={ { margin: '10px'} } className="primary xl" name="loginRoute">Join the movement</Button>
+              <Button style={ { margin: '10px'} } className="secondary xl" onClick={ this.twitterShare }>#OpenEngineering</Button>
             </div>
           </div>
         </HeroBanner>

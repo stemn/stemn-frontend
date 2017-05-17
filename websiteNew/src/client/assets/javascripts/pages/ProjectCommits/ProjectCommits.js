@@ -1,26 +1,24 @@
 import React, { Component } from 'react'
-
 import classes from './ProjectCommits.css'
-
+import classNames from 'classnames'
 import moment from 'moment'
-import { get, groupBy } from 'lodash'
-
-import { Container } from 'stemn-shared/misc/Layout'
+import { get } from 'lodash'
+import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
-import HistoryGraph from 'stemn-shared/misc/Graphs/HistoryGraph'
+import HistoryGraph from 'stemn-shared/misc/History/HistoryGraph'
 import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
 import SubSubHeader from 'modules/SubSubHeader'
 import Pagination from 'stemn-shared/misc/Pagination'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import SearchInput from 'stemn-shared/misc/Search/SearchInput'
-
+import HistoryEmpty from 'stemn-shared/misc/SyncTimeline/HistoryEmpty'
 
 export default class ProjectCommits extends Component {
   changeTypeFilter = (filterType) => {
-    const { setFilter, projectId, filterModel, filter } = this.props
+    const { setFilter, filterCacheKey, filterModel, filter } = this.props
     setFilter({
-      cacheKey: projectId,
+      cacheKey: filterCacheKey,
       filterObject: {
         ...filter.object,
         type: filterType,
@@ -30,9 +28,9 @@ export default class ProjectCommits extends Component {
     })
   }
   changeUserFilter = (userId) => {
-    const { setFilter, projectId, filterModel, filter } = this.props
+    const { setFilter, filterCacheKey, filterModel, filter } = this.props
     setFilter({
-      cacheKey: projectId,
+      cacheKey: filterCacheKey,
       filterObject: {
         ...filter.object,
         user: userId,
@@ -42,29 +40,49 @@ export default class ProjectCommits extends Component {
     })
   }
   changeInput = ({ value: filterString }) => {
-    const { setFilter, projectId, filterModel } = this.props
+    const { setFilter, filterCacheKey, filterModel } = this.props
     setFilter({
-      cacheKey: projectId,
+      cacheKey: filterCacheKey,
       filterString,
       filterModel,
       location: 'replace',
     })
   }
+  clearFilter = () => {
+    const { setFilter, filterCacheKey, filterModel, filterDefaults } = this.props
+    setFilter({
+      cacheKey: filterCacheKey,
+      filterObject: filterDefaults,
+      filterModel,
+      location: 'replace',
+    })
+  }
   renderLoaded() {
-    const { project, syncTimeline, location, page, size, filter } = this.props
-    const noMoreResults = syncTimeline && syncTimeline.data.length < size
+    const { project, syncTimeline, location, page, size, filter, filterIsDefault, board } = this.props
 
-    return (
-      <div>
-        <Container>
+    const noMoreResults = syncTimeline && syncTimeline.data.length < size
+    const hasResults = syncTimeline && syncTimeline.data  && syncTimeline.data.length > 0
+    const projectRouteParams = {
+      projectId: project.data._id,
+    }
+    if (hasResults) {
+      return (
+        <div>
           <div className={ classes.graphPanel }>
-            <HistoryGraph />
+            <HistoryGraph
+              entityType={ filter.object.user ? 'user' : 'project' }
+              entityId={ filter.object.user ? filter.object.user : project.data._id }
+              type={ filter.object.type }
+              parentType={ filter.object.user ? 'project' : undefined }
+              parentId={ filter.object.user ? project.data._id : undefined }
+            />
           </div>
           <InfoPanel>
             <TimelineVertical
               group
               items={ syncTimeline.data }
               type="project"
+              entity={ board }
             />
           </InfoPanel>
           <Pagination
@@ -72,9 +90,17 @@ export default class ProjectCommits extends Component {
             page={ page }
             noMoreResults={ noMoreResults }
           />
-        </Container>
-      </div>
-    )
+        </div>
+      )
+    } else if ( filterIsDefault ) {
+      return <HistoryEmpty projectRouteParams={ projectRouteParams } />
+    } else {
+      return (
+        <InfoPanel className="text-title-5">
+          No timeline events found. <a className="link-primary" onClick={ this.clearFilter }>Reset Filter</a>
+        </InfoPanel>
+      )
+    }
   }
   render() {
     const { project, syncTimeline, filter } = this.props
@@ -88,15 +114,15 @@ export default class ProjectCommits extends Component {
     }))
 
     userFilterOptions.push({
-      name: 'None',
-      value: '',
-      onClick: () => { this.changeUserFilter('') }
+      name: 'Any',
+      value: undefined,
+      onClick: () => { this.changeUserFilter(undefined) }
     })
 
     const typeFilterOptions = [{
-      value: 'all',
+      value: undefined,
       name: 'All',
-      onClick: () => { this.changeTypeFilter('all') },
+      onClick: () => { this.changeTypeFilter(undefined) },
     }, {
       value: 'commits',
       name: 'Commits',
@@ -106,43 +132,61 @@ export default class ProjectCommits extends Component {
       name: 'Revisions',
       onClick: () => { this.changeTypeFilter('revisions') },
     }, {
-      value: 'task-complete',
-      name: 'Task Complete',
-      onClick: () => { this.changeTypeFilter('task-complete') },
-    }]
+      value: 'tasks',
+      name: 'Thread Created',
+      onClick: () => { this.changeTypeFilter('tasks') },
+    }, {
+      value: 'taskEvents',
+      name: 'Thread Events',
+      onClick: () => { this.changeTypeFilter('taskEvents') },
+    }, ]
 
     return (
       <div className={ classes.content }>
         <SubSubHeader className={ classes.subHeader }>
+          <Row className="layout-xs-column layout-gt-xs-row">
+            <Col className="flex-xs flex-sm flex-gt-sm-30 layout-row">
+              <SearchInput
+                className={ classes.search }
+                placeholder="Search History"
+                value={ filter.string }
+                changeAction={ this.changeInput }
+              />
+            </Col>
+            <div className="flex-xs-0 flex-sm-0 flex-gt-sm" />
+            <Col className="layout-row">
+              <PopoverDropdown
+                className="flex-xs"
+                value={ get(filter, ['object', 'user']) }
+                options={ userFilterOptions }
+                style={ { marginRight: '15px'} }
+              >
+                User:&nbsp;
+              </PopoverDropdown>
+              <PopoverDropdown
+                className="flex-xs"
+                value={ filter.object.type }
+                options={ typeFilterOptions }
+              >
+                Type:&nbsp;
+              </PopoverDropdown>
+            </Col>
+          </Row>
+
           <div className="layout-row">
-            <SearchInput
-              placeholder="Search History"
-              value={ filter.string }
-              changeAction={ this.changeInput }
-            />
+
             <div className="flex" />
-            <PopoverDropdown
-              value={ get(filter, ['object', 'user']) }
-              options={ userFilterOptions }
-              style={ { marginRight: '15px'} }
-            >
-              User:&nbsp;
-            </PopoverDropdown>
-            <PopoverDropdown
-              value={ filter.object.type }
-              options={ typeFilterOptions }
-            >
-              Type:&nbsp;
-            </PopoverDropdown>
+
           </div>
         </SubSubHeader>
         <div className={ classes.innerContent }>
           <LoadingOverlay show={ isLoading } linear hideBg noOverlay />
-          { isLoaded
-          ? this.renderLoaded()
-          : null }
+          <Container>
+            { isLoaded
+            ? this.renderLoaded()
+            : null }
+          </Container>
         </div>
-
       </div>
     )
   }

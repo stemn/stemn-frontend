@@ -14,7 +14,7 @@
   border: 1px solid rgba(0, 0, 0, 0.1);
   background: white;
   margin-bottom: 30px;
-  padding: 15px 15px 0;
+  padding: 15px;
 }
 
 .commitPanel {
@@ -24,6 +24,15 @@
   margin-top: 10px;
   margin-bottom: 20px;
 }
+
+.emptyPanel {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: white;
+  text-align: center;
+  padding: 60px 20px;
+  margin-bottom: 30px;
+}
+
 .commit {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 10px;
@@ -47,4 +56,14 @@
 
 .avatar {
   margin-right: 10px;
+}
+
+.search {
+  width: 100%;
+}
+
+@media (max-width: 599px) {
+  .search {
+    margin-bottom: 15px;
+  }
 }
