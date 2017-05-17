@@ -1,1 +1,1 @@
-export default from './ProjectSettingsTasks.container';
+export default from 'stemn-shared/misc/ProjectSettings/TasksSettings'

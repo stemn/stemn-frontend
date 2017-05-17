@@ -148,6 +148,7 @@ export default class ProjectOverview extends Component {
               project={ project }
               projectModel={ entityModel }
               saveProject={ saveProject }
+              isRoot={ !path || path === '' }
             />
           </Container>
         </div>

@@ -1,1 +1,1 @@
-export default from './ProjectSettingsTeam.container';
+export default from 'stemn-shared/misc/ProjectSettings/TeamSettings'

@@ -1,1 +1,1 @@
-export default from './ProjectSettingsPermissions.container';
+export default from 'stemn-shared/misc/ProjectSettings/PermissionsSettings'

@@ -108,7 +108,7 @@ export default class Header extends Component {
           <SiteSearch className={ classes.search } />
           <div className={ classNames(classes.links, 'hide-xs') }>
             { items.map(item => (
-              <Link activeClassName="active" className={ classes.link } name={ item.route }>{ item.label }</Link>
+              <Link key={ item } activeClassName="active" className={ classes.link } name={ item.route }>{ item.label }</Link>
             ))}
           </div>
           <div className="hide-xs flex" />

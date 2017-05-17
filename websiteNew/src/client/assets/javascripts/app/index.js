@@ -10,6 +10,7 @@ import persistConfig from './state/persistConfig'
 import initHttp from './init/initHttp'
 import initRaven from './init/initRaven'
 import initAuth from './init/initAuth'
+import initWebsocket from './init/initWebsocket'
 import { createPersistor } from 'redux-persist'
 import { getLatest } from 'stemn-shared/misc/DesktopReleases/DesktopReleases.actions'
 import { getNotifications } from 'stemn-shared/misc/Notifications/Notifications.actions'
@@ -24,6 +25,7 @@ const initReactAndRedux = (initialState) => {
   initHttp(store)
   initRaven()
   initAuth(store)
+  initWebsocket(store)
 
   // Get the latest desktop revisions
   store.dispatch(getLatest())

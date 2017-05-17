@@ -12,7 +12,7 @@ import httpTransform from 'stemn-shared/redux/middleware/httpTransform/httpTrans
 import toastsError from 'stemn-shared/misc/Toasts/ToastsError.middleware'
 import createLogger from 'redux-logger'
 import auth from 'stemn-shared/misc/Auth/Auth.middleware'
-//import websocket from 'stemn-shared/misc/Websocket/websocket.middleware.js'
+import websocket from 'stemn-shared/misc/Websocket/websocket.middleware.js'
 
 const searchParams = qs.parse(window.location.search.substring(1))
 
@@ -22,7 +22,7 @@ const middleware = [
   throttle,
   httpPackage,
   httpTransform,
-//  websocket,
+  websocket,
   promise(),
   toastsError,
   // If ?debug search param is used, the redux logger is added

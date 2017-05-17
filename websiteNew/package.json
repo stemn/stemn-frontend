@@ -142,7 +142,6 @@
     "react-modal": "1.7.3",
     "react-popover-wrapper": "1.0.0",
     "react-redux": "4.4.5",
-    "react-redux-form": "1.8.2",
     "react-router": "2.7.0",
     "react-router-redux": "4.0.5",
     "react-select": "1.0.0-rc.3",
