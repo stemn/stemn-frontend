@@ -4,7 +4,7 @@ import classNames from 'classnames'
 
 export default class AccordianAnimate extends Component {
   static propTypes = {
-    innerHeight: PropTypes.number.isRequired,
+    itemHeight: PropTypes.number.isRequired,
     duration: PropTypes.number.isRequired,
     items: PropTypes.node,
   }

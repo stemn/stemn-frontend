@@ -15,4 +15,5 @@ export websocketJoinRoom      from './websocketJoinRoom'
 export websocketLeaveRoom     from './websocketLeaveRoom'
 export updateUser             from './updateUser'
 export confirmAuth            from './confirmAuth'
+export requestPasswordReset   from './requestPasswordReset'
 

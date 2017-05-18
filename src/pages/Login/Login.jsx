@@ -44,7 +44,9 @@ export default React.createClass({
                 type="password"
                 placeholder="Password"
               />
-              <div className='layout-row layout-align-end'>
+              <div className='layout-row layout-align-start-center'>
+                <div className='flex-50'>
+                </div>
                 <div className='flex-50 layout-row'>
                   <Button
                     style={ { marginLeft: '5px', marginTop: '5px' } }
@@ -74,7 +76,8 @@ export default React.createClass({
               <LoadingOverlay show={auth.authLoading || auth.userLoading} />
             </form>
             <div className="layout-row text-title-5">
-              <div>Dont have an account? <Link to='/register' className='link-primary'>Register</Link></div>
+              <div className="layout-row flex">Dont have an account?&nbsp;<Link to='/register' className='link-primary'>Register</Link></div>
+              <Link to="/password-lost" className="link-primary">I forgot</Link>
             </div>
           </div>
         </div>

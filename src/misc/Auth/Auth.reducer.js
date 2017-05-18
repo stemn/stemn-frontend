@@ -19,6 +19,13 @@ const initialState = {
     firstname: '',
     lastname: '',
   },
+  passwordLost: {
+    email: '',
+  },  
+  passwordSet: {
+    password1: '',
+    password2: '',
+  },
   forms: {
     // Some forms for temp data
   },

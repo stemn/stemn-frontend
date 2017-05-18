@@ -9,6 +9,7 @@ import Drive from 'stemn-shared/assets/icons/providers/drive.js';
 import Dropbox from 'stemn-shared/assets/icons/providers/dropbox.js';
 import { orderBy } from 'lodash'
 import bookVector from 'stemn-shared/assets/images/pure-vectors/book.svg'
+import { get } from 'lodash'
 
 const getIcon = (provider) => {
   if (provider === 'drive') {
@@ -44,6 +45,7 @@ export default class MyProjectsPanel extends Component {
     const orderedByTime = orderBy(projects.data, 'updated', 'desc')
     const limitedProjects = orderedByTime.slice(0, page * 6)
     const notEnoughResult = page * size >= orderedByTime.length
+    const isLoading = get(projects, 'data.loading', true)
     const hasNoResults = limitedProjects.length === 0
 
     return (
@@ -74,7 +76,7 @@ export default class MyProjectsPanel extends Component {
             { getIcon(project.remote.provider) }
           </Link>
         ))}
-        { hasNoResults &&
+        { hasNoResults && !isLoading &&
           <div className="flex layout-column layout-align-center-center">
             <img src={ bookVector } style={ { width: '60px' } } />
             <div className="text-title-5" style={ { marginTop: '20px' } }>No Projects. <a className="link-primary" onClick={ newProject }>Create one.</a></div>
