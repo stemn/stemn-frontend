@@ -36,7 +36,7 @@ export default React.createClass({
             <div className="layout-row layout-align-start-center">
               <Link to="/login" className="link-primary text-title-5">Back</Link>
               <div className="flex" />
-              <ProgressButton className="primary" onClick={ this.submit }>
+              <ProgressButton className="primary" onClick={ this.submit } disabled={ auth.passwordLost.email.length < 5 }>
                 Submit
               </ProgressButton>
             </div>

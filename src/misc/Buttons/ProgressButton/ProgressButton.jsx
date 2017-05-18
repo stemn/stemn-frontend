@@ -81,9 +81,8 @@ export default React.createClass({
     }, 700)
   },
   render() {
-    const { children, onClick, loading, className, href } = this.props;
+    const { children, onClick, loading, className, href, ...otherProps } = this.props;
     const { status, disabled, drawLoading, drawComplete } = this.state;
-
 
     const Progress = (
       <svg className={classes.progressCircle} width="40" height="40" viewBox="0 0 40 40">
@@ -125,8 +124,8 @@ export default React.createClass({
           {[classes.success] : status == 'success'},
         )}>
         { href
-        ? <a href={href}><button><span>{children}</span></button></a>
-        : <button onClick={() => {if(!disabled){onClick()}}}><span>{children}</span></button>}
+        ? <a href={href}><button { ...otherProps }><span>{children}</span></button></a>
+        : <button onClick={() => {if(!disabled){onClick()}}} { ...otherProps }><span>{children}</span></button>}
         <AnimateSvg draw={drawLoading}>{Progress}</AnimateSvg>
         { getIcon() }
       </div>

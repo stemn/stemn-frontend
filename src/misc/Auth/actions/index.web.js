@@ -16,4 +16,5 @@ export websocketLeaveRoom     from './websocketLeaveRoom'
 export updateUser             from './updateUser'
 export confirmAuth            from './confirmAuth'
 export requestPasswordReset   from './requestPasswordReset'
-
+export passwordUpdate         from './passwordUpdate'
+export getToken               from './getToken'

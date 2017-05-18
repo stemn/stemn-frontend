@@ -13,13 +13,13 @@ export default React.createClass({
     }
     this.props.passwordUpdate({
       newPassword: this.props.auth.passwordSet.password1,
-      resetToken: 'test',
+      resetToken: this.props.resetToken,
     })
   },
   render() {
     const { auth } = this.props;
     const invalid = (auth.passwordSet.password1 != auth.passwordSet.password2) || auth.passwordSet.password1.length < 7
-    
+
     return (
       <div className="flex rel-box">
         <div className={ classNames(classes.background, 'layout-column layout-align-center-center') }>
@@ -31,21 +31,21 @@ export default React.createClass({
                 model="auth.passwordSet.password1"
                 value={ auth.passwordSet.password1 }
                 className="dr-input"
-                type="text" 
+                type="password"
                 placeholder="New Password"
               />             
               <Input
                 model="auth.passwordSet.password2"
                 value={ auth.passwordSet.password2 }
                 className="dr-input"
-                type="text" 
+                type="password"
                 placeholder="Confirm New Password"
               />
             </form>
             <div className="layout-row layout-align-start-center">
-              <Link to="/login" className="link-primary text-title-5">Back</Link>
+              <Link to="/settings" className="link-primary text-title-5">Back</Link>
               <div className="flex" />
-              <ProgressButton className="primary" onClick={ this.submit } disable={ invalid }>
+              <ProgressButton className="primary" onClick={ this.submit } disabled={ invalid }>
                 Submit
               </ProgressButton>
             </div>

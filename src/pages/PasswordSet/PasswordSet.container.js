@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import { passwordUpdate } from 'stemn-shared/misc/Auth/Auth.actions'
 import PasswordSet from './PasswordSet'
 
-const stateToProps = ({ auth }, { params }) => {
+const stateToProps = ({ auth }, { params, location }) => {
   return {
     auth,
+    resetToken: location.query.token,
   }
 }
 

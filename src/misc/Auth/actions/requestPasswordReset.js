@@ -18,7 +18,10 @@
 //    AuthenticationModalService.login(event)
 //}
 
-export default ({ email }) => ({
+import { show as showToast } from 'stemn-shared/misc/Toasts/Toasts.actions.js';
+
+
+export default ({ email }) => (dispatch) => dispatch({
   type: 'AUTH/REQUEST_PASSWORD_RESET',
   http: true,
   payload: {
@@ -28,4 +31,6 @@ export default ({ email }) => ({
       email,
     }
   }
+}).then(({ value }) => {
+  dispatch(showToast({ title: 'Check your email for the password reset link'}));
 })

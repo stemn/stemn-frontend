@@ -17,7 +17,6 @@ export default ({ provider, code }) => (dispatch) => {
         }
       })
     }).then(({ value }) => {
-      console.log(value);
       dispatch(setAuthToken(value.data.token))
       return Promise.all([dispatch(loadUserData()), dispatch(getSettings())])
     })
