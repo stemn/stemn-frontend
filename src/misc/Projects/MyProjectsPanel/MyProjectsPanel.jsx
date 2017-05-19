@@ -45,7 +45,7 @@ export default class MyProjectsPanel extends Component {
     const orderedByTime = orderBy(projects.data, 'updated', 'desc')
     const limitedProjects = orderedByTime.slice(0, page * 6)
     const notEnoughResult = page * size >= orderedByTime.length
-    const isLoading = get(projects, 'data.loading', true)
+    const isLoading = get(projects, 'data.loading')
     const hasNoResults = limitedProjects.length === 0
 
     return (
