@@ -4904,6 +4904,8 @@ if (Driver) {
 	module.exports = function WebSocketBrowserDriver(url) {
 		return new Driver(url);
 	};
+  } else {
+ 	module.exports = undefined;
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
