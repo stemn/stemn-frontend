@@ -69,6 +69,9 @@ import UserOverview                            from 'pages/UserOverview'
 import UserProjects                            from 'pages/UserProjects'
 import UserStars                               from 'pages/UserStars'
 
+import PasswordLost                            from 'stemn-shared/pages/PasswordLost'
+import PasswordSet                             from 'stemn-shared/pages/PasswordSet'
+
 export default () => (
   <Route                                       component={ AppRoot }>
     <Route                                     component={ AppAuthed }>
@@ -94,8 +97,10 @@ export default () => (
     <Route                                     component={ AppUnAuthed }>
       <Route path="login"                      component={ Login } />
       <Route path="register"                   component={ Register } />
+      <Route path="password-lost"              component={ PasswordLost } />
     </Route>
     <Route path="/"                            component={ Home } />
+    <Route path="/password-reset"              component={ PasswordSet } />
     <Route path="/fields/:fieldId"             component={ Field }>
       <IndexRoute                              component={ FieldOverview } />
     </Route>

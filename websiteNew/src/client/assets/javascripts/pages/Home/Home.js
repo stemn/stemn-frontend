@@ -55,14 +55,14 @@ export default class Home extends Component {
           <Row className="layout-xs-column layout-gt-xs-row" style={ { marginTop: '30px' } }>
             <Col className="flex flex-order-xs-1">
               <div className={ classes.panel }>
-                { timeline && timeline.length > 0 &&
+                { timeline && timeline.data && timeline.data.length > 0 &&
                   <TimelineVertical
-                    items={ timeline }
+                    items={ timeline.data }
                     type="feed"
                     group
                   />
                 }
-                { timeline && timeline.length === 0 &&
+                { timeline && timeline.data && timeline.data.length === 0 &&
                   <div className="text-title-5">Your feed is empty. Follow some <Link name="exploreRoute" className="link-primary">projects or users.</Link></div>
                 }
               </div>

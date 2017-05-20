@@ -105,6 +105,7 @@ const config = {
       __DEV__: true,
       'GLOBAL_ENV'                   : {
         APP_TYPE                     : JSON.stringify('desktop'),
+        APP_THREAD                   : JSON.stringify('renderer'),
         NODE_ENV                     : JSON.stringify('development'),
         WEBSITE_URL                  : JSON.stringify('http://localhost:3333'),
         API_SERVER                   : JSON.stringify(process.env.API_SERVER),

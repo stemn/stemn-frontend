@@ -9,7 +9,7 @@ import { get } from 'lodash'
 const stateToProps = ({ syncTimeline, auth }, { location }) => {
   const filterValue = location.query.filter || 'all'
   return {
-    timeline: get(syncTimeline, [filterValue, 'data'], []),
+    timeline: get(syncTimeline, filterValue, {}),
     filterValue,
     isLoggedIn: auth.authToken && auth.user._id,
   }

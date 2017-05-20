@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import classes             from './ProjectFeedPageCommit.css';
-import FileCompare         from 'stemn-shared/misc/FileCompare/FileCompare.jsx';
+import FileCompare         from 'stemn-shared/misc/FileCompare';
 import UserAvatar          from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx';
 import EditorDisplay       from 'stemn-shared/misc/Editor/EditorDisplay.jsx';
 import moment              from 'moment';
@@ -46,7 +46,14 @@ export const ProjectFeedPageCommit = React.createClass({
         </div>
         <div className="flex scroll-box">
           { item.data.items ?
-            groupedRevisions.map(file => <FileCompare project={ project } file={ file } type="collapse" key={ file._id } />)
+            groupedRevisions.map(file => (
+            <FileCompare
+              project={ project }
+              file={ file }
+              type="collapse"
+              key={ file._id }
+            />
+            ))
           : null }
         </div>
       </div>

@@ -21,11 +21,12 @@ import SettingsApplicationPage     from './pages/SettingsPage/SettingsApplicatio
 import HomePage                    from './pages/HomePage/HomePage.jsx';
 import DashboardPage               from './pages/DashboardPage/DashboardPage.jsx';
 import ProjectPage                 from './pages/ProjectPage/ProjectPage.container.js';
-import ProjectFilesPage            from './pages/ProjectPage/ProjectFilesPage/ProjectFilesPage.jsx';
+import ProjectFilesPage            from './pages/ProjectPage/ProjectFilesPage';
 import ProjectSettingsPage         from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.jsx';
-import ProjectSettingsGeneralPage  from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsGeneralPage/ProjectSettingsGeneralPage.jsx';
-import ProjectSettingsTasksPage    from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsTasksPage/ProjectSettingsTasksPage.jsx';
-import ProjectSettingsTeamPage     from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsTeamPage/ProjectSettingsTeamPage.jsx';
+import ProjectSettingsGeneralPage  from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsGeneralPage';
+import ProjectSettingsTasksPage    from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsTasksPage';
+import ProjectSettingsTeamPage     from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsTeamPage';
+import ProjectSettingsPermissionsPage     from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPermissionsPage';
 import ProjectFeedPage             from './pages/ProjectFeedPage/ProjectFeedPage.jsx';
 import ProjectTaskPage             from './pages/ProjectTaskPage/ProjectTaskPage.jsx';
 
@@ -44,6 +45,7 @@ export default (store) => {
             <IndexRoute                              component={ProjectSettingsGeneralPage} />
             <Route path="tasks"                      component={ProjectSettingsTasksPage} />
             <Route path="team"                       component={ProjectSettingsTeamPage} />
+            <Route path="permissions"                component={ProjectSettingsPermissionsPage} />
           </Route>
         </Route>
         <Route   path="/"                            component={HomePage}/>

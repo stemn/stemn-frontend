@@ -1,6 +1,6 @@
 import React                from 'react';
 import i                    from 'icepick';
-import FileCompare          from 'stemn-shared/misc/FileCompare/FileCompare.jsx';
+import FileCompare          from 'stemn-shared/misc/FileCompare';
 
 export default React.createClass({
   render() {
@@ -12,8 +12,8 @@ export default React.createClass({
 
     return (
       <FileCompare
-        project={project.data}
-        file={item}
+        project={ project.data }
+        file={ item }
       />
     )
   }

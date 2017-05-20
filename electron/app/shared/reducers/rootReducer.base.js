@@ -1,6 +1,7 @@
 import auth from 'stemn-shared/misc/Auth/Auth.reducer.js'
 import autoLaunch from 'stemn-shared/desktop/AutoLaunch/AutoLaunch.reducer.js'
 import autoUpdate from 'stemn-shared/desktop/AutoUpdate/AutoUpdate.reducer.js'
+import autosuggest from 'stemn-shared/misc/Autosuggest/Autosuggest.reducer.js'
 import changes from 'stemn-shared/misc/Changes/Changes.reducer.js'
 import comments from 'stemn-shared/misc/Comments/Comments.reducer.js'
 import fileCompare from 'stemn-shared/misc/FileCompare/FileCompare.reducer.js'
@@ -27,6 +28,7 @@ export default {
   auth,
   autoLaunch,
   autoUpdate,
+  autosuggest,
   changes,
   comments,
   fileCompare,

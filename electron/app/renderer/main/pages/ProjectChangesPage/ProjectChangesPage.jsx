@@ -23,7 +23,7 @@ import LoadingOverlay       from 'stemn-shared/misc/Loading/LoadingOverlay/Loadi
 import Timeline             from 'stemn-shared/misc/Timeline/Timeline.jsx';
 import CommitChanges        from 'stemn-shared/misc/Changes/CommitChanges/CommitChanges.jsx';
 import CommitBox            from 'stemn-shared/misc/Changes/CommitBox/CommitBox.jsx'
-import FileCompare          from 'stemn-shared/misc/FileCompare/FileCompare.jsx';
+import FileCompare          from 'stemn-shared/misc/FileCompare';
 import Guide                from 'stemn-shared/misc/Guide/Guide';
 import cloudLocked          from 'stemn-shared/assets/images/pure-vectors/cloud-locked.svg';
 import file                 from 'stemn-shared/assets/images/pure-vectors/file.svg';
@@ -178,9 +178,8 @@ export const Component = React.createClass({
             <div className="layout-column flex">
               { validItemIsSelected
                 ? <FileCompare
-                    compareId={`changes-${project.data._id}-${changes.selected._id}`}
-                    project={project.data}
-                    file={changes.selected}
+                    project={ project.data }
+                    file={ changes.selected }
                   />
                 : (
                 <div className="layout-column layout-align-center-center flex text-title-4 text-center">

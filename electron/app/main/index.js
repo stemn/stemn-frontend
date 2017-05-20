@@ -11,18 +11,16 @@ import { create as createMainWindow }     from './createMainWindow';
 import { create as createMenubarWindow }  from './createMenuBarWindow';
 import { create as createTrayIcon }       from './createTrayIcon.js';
 
-import { 
-  initialise as wsInitialise, 
-  write as wsWrite }            from 'stemn-shared/misc/Websocket/websocket.js';
-import mapWebsocketToRedux      from 'stemn-shared/misc/Websocket/mapWebsocketToRedux'
-import FileCache                from 'stemn-shared/desktop/FileCache/FileCache.js';
-import AutoUpdateInit           from 'stemn-shared/desktop/AutoUpdate/AutoUpdate.init.js';
-import { getProviderPath }      from 'stemn-shared/desktop/System/System.actions.js';
-import configureStore           from '../shared/store/configureStore.main.js';
+import { initialise as initWebsocket } from 'stemn-shared/misc/Websocket/websocket.js';
+import socketEventMap from 'stemn-shared/misc/Websocket/eventMap'
+import FileCache from 'stemn-shared/desktop/FileCache/FileCache.js';
+import AutoUpdateInit from 'stemn-shared/desktop/AutoUpdate/AutoUpdate.init.js';
+import { getProviderPath } from 'stemn-shared/desktop/System/System.actions.js';
+import configureStore from '../shared/store/configureStore.main.js';
 import { getFilteredStoreData } from './json-storage.js';
-import postStoreSetup           from './postStoreSetup.js';
-import initApiServer            from './api/index.js';
-import stringify                from './utils/stringify.js'
+import postStoreSetup from './postStoreSetup.js';
+import initApiServer from './api/index.js';
+import stringify from './utils/stringify.js'
 
 // Actions
 import {
@@ -131,12 +129,9 @@ async function start() {
 
 
   // Initialise the Websocket connection
-  const websocket = wsInitialise(GLOBAL_ENV.WEBSOCKET_SERVER);
+  const websocket = initWebsocket(GLOBAL_ENV.WEBSOCKET_SERVER);
   websocket.on('data', (action) => {
-    const reduxAction = mapWebsocketToRedux(store, action);
-    if(reduxAction){
-      store.dispatch(reduxAction)
-    };
+    socketEventMap(store, action)
   })
 
   // auto-updating

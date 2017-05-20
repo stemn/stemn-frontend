@@ -99,7 +99,7 @@ class Component extends React.Component{
           <div className="footer layout-row">
             <a className="link-primary" href={`https://stemn.com/projects/${project.data._id}`}>View online</a>
             <div className="flex"></div>
-            <Link className="link-grey" to={baseLink+'/settings'}>Change</Link>
+            <Link className="link-grey" to={baseLink+'/settings/permissions'}>Change</Link>
           </div>
         </PopoverDetails>
       : <PopoverDetails>
@@ -112,7 +112,7 @@ class Component extends React.Component{
           <div className="footer layout-row">
             <a className="link-primary" href={`https://stemn.com/projects/${project.data._id}`}>View online</a>
             <div className="flex"></div>
-            <Link className="link-grey" to={baseLink+'/settings'}>Change</Link>
+            <Link className="link-grey" to={baseLink+'/settings/permissions'}>Change</Link>
           </div>
         </PopoverDetails>
     }

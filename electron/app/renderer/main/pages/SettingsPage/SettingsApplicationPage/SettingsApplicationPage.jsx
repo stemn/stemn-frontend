@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 // Container Actions
 import * as SystemActions           from 'stemn-shared/desktop/System/System.actions.js';
-import { clearState }               from 'stemn-shared/misc/State/State.actions.js';
+import { storeChange }              from 'stemn-shared/misc/Store/Store.actions.js';
 import * as ModalActions            from 'stemn-shared/misc/Modal/Modal.actions.js';
 import * as AutoLaunchActions       from 'stemn-shared/desktop/AutoLaunch/AutoLaunch.actions.js';
 import * as AutoUpdateActions       from 'stemn-shared/desktop/AutoUpdate/AutoUpdate.actions.js';
@@ -50,7 +50,7 @@ export const Component = React.createClass({
   confirmReset() {
     this.props.modalActions.showConfirm({
       message: 'This will clear all data and reset the application back to factory settings. This can be useful if some data has been corrupted.',
-      modalConfirm: clearState()
+      modalConfirm: storeChange('', undefined)
     })
   },
   showReleaseModal() {
