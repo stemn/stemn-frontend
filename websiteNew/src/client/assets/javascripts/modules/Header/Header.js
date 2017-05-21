@@ -29,7 +29,7 @@ export default class Header extends Component {
   isLoggedIn() {
     const { auth, logout, newProject, numNotifications } = this.props
     const routeParams = { userId: auth.user._id }
-    
+
     return (
       <div className="layout-row layout-align-start-center">
         <SimpleIconButton
@@ -62,8 +62,8 @@ export default class Header extends Component {
             />
           </a>
           <div className="PopoverMenu">
-            <Link name="userRoute" params={ routeParams }>Your profile</Link>
-            <Link name="userStarsRoute" params={ routeParams }>Your stars</Link>
+            <Link name="userRoute" params={ routeParams }>My profile</Link>
+            <Link name="userStarsRoute" params={ routeParams }>My stars</Link>
             <Link name="settingsRoute">Settings</Link>
             <div className="divider" />
             <a onClick={ logout }>Logout</a>
