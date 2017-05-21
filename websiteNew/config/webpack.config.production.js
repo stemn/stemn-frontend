@@ -17,7 +17,7 @@ const GLOBALS = {
     NODE_ENV: JSON.stringify('production'),
     WEBSITE_URL: JSON.stringify('https://stemn.com'),
     API_SERVER: JSON.stringify('https://dev.stemn.com'),
-    WEBSOCKET_SERVER: JSON.stringify('https://dev.stemn.com:8001'),
+    WEBSOCKET_SERVER: JSON.stringify('wss://dev.stemn.com:8443'),
   },
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false')),
 }
@@ -55,7 +55,7 @@ module.exports = merge(config, {
   },
   plugins: [
     // Avoid publishing files when compilation fails
-    new webpack.NoErrorsPlugin(),
+//    new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin(GLOBALS),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -69,10 +69,10 @@ module.exports = merge(config, {
         comments: false,
       },
     }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false,
-    }),
+//    new webpack.LoaderOptionsPlugin({
+//      minimize: true,
+//      debug: false,
+//    }),
     new ExtractTextPlugin({
       filename: 'css/app.[chunkhash].css',
       allChunks: true,

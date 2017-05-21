@@ -13,7 +13,7 @@ const GLOBALS = {
     NODE_ENV: JSON.stringify('development'),
     WEBSITE_URL: JSON.stringify('http://stemn.com'),
     API_SERVER: JSON.stringify('http://35.167.249.144'),
-    WEBSOCKET_SERVER: JSON.stringify('http://35.167.249.144:8001'),
+    WEBSOCKET_SERVER: JSON.stringify('ws://dev.stemn.com:8443'),
   },
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'true')),
 }
