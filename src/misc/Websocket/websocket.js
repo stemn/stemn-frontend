@@ -10,31 +10,33 @@ export let socket = undefined;
 
 export const initialise = (hostUrl) => {
 
-  socket = primus.connect(hostUrl);
+  // Conntect the websocket
+  socket = primus.connect(hostUrl)
 
-  // Log stuff
+  // Log some stuff if  ?debug=true or environment is development
   if (GLOBAL_ENV.NODE_ENV === 'development' || searchParams.debug) {
-    // Receive
+
+    // Log Receives
     const socketData = (data) => {
       if (GLOBAL_ENV.APP_THREAD === 'electron') {
         console.log(`socket | RECEIVE - ${data.type}`)
       } else {
-        console.groupCollapsed(` socket | RECEIVE      ${data.type}`);
+        console.groupCollapsed(` socket | RECEIVE      ${data.type}`)
         console.log(data)
-        console.groupEnd();
+        console.groupEnd()
       }
     }
     socket.on('data', socketData)
 
-    // Write
+    // Log Writes
     const oldWrite = socket.write.bind(socket);
     socket.write = (data) => {
       if (GLOBAL_ENV.APP_THREAD === 'electron') {
         console.log(`socket | SEND - ${data.type}`)
       } else {
-        console.groupCollapsed(` socket | SEND         ${data.type}`);
+        console.groupCollapsed(` socket | SEND         ${data.type}`)
         console.log(data)
-        console.groupEnd();
+        console.groupEnd()
       }
       return oldWrite(data)
     }
