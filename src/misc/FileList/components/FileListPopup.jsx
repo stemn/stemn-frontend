@@ -48,33 +48,32 @@ export const FileRow = React.createClass({
 
 export const FileListPopup = React.createClass({
   propTypes: propTypesObject,
-  componentWillMount() {
-    this.onMount(this.props)
-  },
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
-  onMount(nextProps, prevProps) {
-    if((!prevProps || !prevProps.isOpen) && nextProps.isOpen && (!nextProps.files || !nextProps.files.loading)){
-      this.getFiles({
-        path     : nextProps.parentfolder.fileId,
-        provider : nextProps.meta.provider,
-        projectId: nextProps.meta.project._id,
-      })
-    }
-  },
-  getFiles({path, provider, projectId}) {
-    if(projectId){
-      this.props.FileListActions.fetchFiles({
-        projectId: projectId,
-        path: path || '',
-      });
-    }
-    else if(['dropbox', 'drive'].includes(provider)){
-      this.props.FileListActions.exploreFolder({
-        provider: provider,
-        folderId: path || '',
-      });
-    }
-  },
+//  componentWillMount() {
+//    this.onMount(this.props)
+//  },
+//  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
+//  onMount(nextProps, prevProps) {
+//    if((!prevProps || !prevProps.isOpen) && nextProps.isOpen && (!nextProps.files || !nextProps.files.loading)){
+//      this.getFiles({
+//        path     : nextProps.parentfolder.fileId,
+//        projectId: nextProps.meta.project._id,
+//      })
+//    }
+//  },
+//  getFiles({path, provider, projectId}) {
+//    if(projectId){
+//      this.props.FileListActions.fetchFiles({
+//        projectId: projectId,
+//        path: path || '',
+//      });
+//    }
+//    else if(['dropbox', 'drive'].includes(provider)){
+//      this.props.FileListActions.exploreFolder({
+//        provider: provider,
+//        folderId: path || '',
+//      });
+//    }
+//  },
 
   render() {
     const { files, parentfolder, activeFolder, dispatch, clickFn } = this.props

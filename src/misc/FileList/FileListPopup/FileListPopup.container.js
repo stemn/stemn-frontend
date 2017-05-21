@@ -24,7 +24,7 @@ const fetchConfigs = [{
     if (props.isOpen) {
       props.getFiles({
         path: props.path,
-        provider: props.provider,
+//        provider: props.provider,
         projectId: props.projectId,
         cacheKey: props.fileListCacheKey,
       })

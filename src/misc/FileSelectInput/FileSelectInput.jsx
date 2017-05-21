@@ -1,15 +1,16 @@
-import React, { PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import React, { PropTypes } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
 // Container Actions
-import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js';
+import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js'
+import fileSelectModalName from 'stemn-shared/misc/FileSelect/FileSelectModal'
 
 import classes from './FileSelectInput.css'
-import classNames from 'classnames';
-import MdFolder from 'react-icons/md/folder';
+import classNames from 'classnames'
+import MdFolder from 'react-icons/md/folder'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
-import { isDriveFileId, isDropboxFileId } from 'stemn-shared/misc/Files/utils';
+import { isDriveFileId, isDropboxFileId } from 'stemn-shared/misc/Files/utils'
 import TextDisplayBox from 'stemn-shared/misc/TextDisplayBox/TextDisplayBox.jsx'
 
 
@@ -24,7 +25,7 @@ const propTypesObject = {
 const FileSelectInput = React.createClass({
   showModal(){
     this.props.ModalActions.showModal({
-      modalType: 'FILE_SELECT',
+      modalType: fileSelectModalName,
       modalProps: {
         projectId: this.props.projectId,
         model: this.props.model,

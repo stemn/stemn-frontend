@@ -1,25 +1,13 @@
-// Container Core
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
-// Container Actions
-import * as FileSelectActions from './FileSelect.actions.js';
-import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
-
-// Component Core
 import React, { PropTypes } from 'react';
 
-// Styles
 import classNames from 'classnames';
 import classes from './FileSelectModal.scss'
 
-// Sub Components
 import FileList from 'stemn-shared/misc/FileList';
 import Button from 'stemn-shared/misc/Buttons/Button/Button';
 import MdDone from 'react-icons/md/done';
 import { isDriveFileId, isDropboxFileId } from 'stemn-shared/misc/Files/utils';
 
-///////////////////////////////// COMPONENT /////////////////////////////////
 
 // Either a projectId or options.explore must be defined
 const propTypesObject = {
@@ -34,13 +22,13 @@ const propTypesObject = {
   }),
 };
 
-export const FileSelectModal = React.createClass({
+export default React.createClass({
   propTypes: propTypesObject,
   componentWillMount() { this.onMount(this.props) },
   componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
   onMount(nextProps, prevProps) {
     if(!nextProps.fileSelect){
-      nextProps.FileSelectActions.init({
+      nextProps.init({
         storeKey: nextProps.storeKey,
         path: nextProps.path
       })
@@ -49,13 +37,13 @@ export const FileSelectModal = React.createClass({
   },
   singleClickFn({file}){
     if(file.type == 'file' || this.props.options.allowFolder && file.type == 'folder'){
-      this.props.FileSelectActions.select({
+      this.props.select({
         storeKey: this.props.storeKey,
         file: file
       })
     }
     else{
-      this.props.FileSelectActions.changePath({
+      this.props.changePath({
         storeKey: this.props.storeKey,
         path: file.fileId
       })
@@ -63,29 +51,29 @@ export const FileSelectModal = React.createClass({
   },
   doubleClickFn({file}){
     if(file.type == 'folder'){
-      this.props.FileSelectActions.changePath({
+      this.props.changePath({
         storeKey: this.props.storeKey,
         path: file.fileId
       })
     }
     else{
-      this.props.FileSelectActions.select({
+      this.props.select({
         storeKey: this.props.storeKey,
         file: file
       })
     }
   },
   crumbClickFn({file}){
-    this.props.FileSelectActions.changePath({
+    this.props.changePath({
       storeKey: this.props.storeKey,
       path: file.fileId
     })
   },
   submit(){
-    this.props.dispatch(storeChange(this.props.model, {
+    this.props.storeChange(this.props.model, {
       fileId : this.props.fileSelect.selected.fileId,
       path   : this.props.fileSelect.selected.path
-    }))
+    })
     this.props.modalConfirm();
   },
   cancel(){
@@ -109,27 +97,27 @@ export const FileSelectModal = React.createClass({
 
     return (
       <div className={ classes.modal }>
-        {fileSelect
-        ? <FileList
-            projectId={projectId}
-            path={activePath}
-            singleClickFn={this.singleClickFn}
-            doubleClickFn={this.doubleClickFn}
-            crumbClickFn={this.crumbClickFn}
-            selected={fileSelect.selected}
-            options={options}
-            contentStyle={{height: '300px', overflowY: 'auto'}}
-          />
-        : null
-        }
+        { fileSelect &&
+          <FileList
+            projectId={ projectId }
+            path={ activePath }
+            singleClickFn={ this.singleClickFn }
+            doubleClickFn={ this.doubleClickFn }
+            crumbClickFn={ this.crumbClickFn }
+            selected={ fileSelect.selected }
+            options={ options }
+            contentStyle={ { height: '300px', overflowY: 'auto' } }
+          /> }
         <div className="modal-footer layout-row layout-align-start-center">
           <div className="flex text-grey-3">
-            {fileSelect && fileSelect.selected && fileSelect.selected.path ? <span>Selected: {fileSelect.selected.path}</span> : null}
+            { fileSelect && fileSelect.selected && fileSelect.selected.path
+              ? <span>Selected: {fileSelect.selected.path}</span>
+              : null }
           </div>
-          <Button style={{marginRight: '10px'}} onClick={this.cancel}>
+          <Button style={ { marginRight: '10px' } } onClick={this.cancel}>
             Cancel
           </Button>
-          <Button className="primary" onClick={this.submit}>
+          <Button className="primary" onClick={ this.submit }>
             Select Folder
           </Button>
         </div>
@@ -137,23 +125,3 @@ export const FileSelectModal = React.createClass({
     );
   }
 });
-
-
-/////////////////////////////////////////////////////////////////////////////
-///////////////////////////////// CONTAINER /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-
-function mapStateToProps({fileSelect}, {storeKey}) {
-  return {
-    fileSelect: fileSelect[storeKey],
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    FileSelectActions: bindActionCreators(FileSelectActions, dispatch),
-    dispatch
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(FileSelectModal);

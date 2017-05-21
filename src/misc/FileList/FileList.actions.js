@@ -54,16 +54,16 @@ export const getSearchResults = ({ projectId, folderId, query, cacheKey }) => ({
 })
 
 export const getFiles = ({ path, provider, projectId, cacheKey }) => (dispatch) => {
-  if (projectId){
-    dispatch(fetchFiles({
-      projectId,
-      path,
-      cacheKey,
-    }))
-  } else if (projectId) {
+  if (provider){
     dispatch(exploreFolder({
       provider,
       folderId: path,
+      cacheKey,
+    }))
+  } else {
+    dispatch(fetchFiles({
+      projectId,
+      path,
       cacheKey,
     }))
   }
