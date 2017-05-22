@@ -4,7 +4,8 @@ import HeroBanner from 'modules/HeroBanner'
 import DownloadButton from 'stemn-shared/misc/DesktopReleases/DownloadButton'
 import { Row, Col, Container } from 'stemn-shared/misc/Layout'
 import screenshot from './screenshot.jpg'
-import screens from './screens.jpg'
+import deviceMockups from './deviceMockups.jpg'
+import historyCombined from './historyCombined.jpg'
 import classes from './Landing.scss'
 import classNames from 'classnames'
 import FileIcon from 'stemn-shared/misc/FileList/components/FileIcon'
@@ -42,12 +43,13 @@ export default class Landing extends Component {
           <Row className={ secionClasses }>
             <Col className="flex-gt-xs-50 lg">
               <div className={ classes.timeline }>
+                <img src={ historyCombined } />
               </div>
             </Col>
             <Col className="flex-gt-xs-50 lg">
               <h4 className="text-title-2">Infinite version history</h4>
-              <p className="text-title-4">All your work is automatically synced as you work.</p>
-              <p className="text-title-4">View any previous versions, complete with comments, with the automatic version control features. Revert your files with a single click.</p>
+              <p className="text-title-4">All your changes are automatically synced as you work.</p>
+              <p className="text-title-4">View any previous versions, complete with comments and commit messages. Compare and revert your files with a single click.</p>
             </Col>
           </Row>
         </Container>
@@ -56,7 +58,7 @@ export default class Landing extends Component {
             <Row className={ secionClasses }>
               <Col className="flex-order-xs-2 flex-xs-100 flex-gt-xs-50 lg">
                 <h4 className="text-title-2">Access your files anywhere</h4>
-                <p className="text-title-4">Whether you’re in the office, in the lab, or on the go, access your files in your browser, from any device.</p>
+                <p className="text-title-4">Whether you’re in the office, in the lab, or on the go, preview your files in your browser, from any device.</p>
                 <p className="text-title-4">Preview hundreds of different file-types directly in your web browser.</p>
                 <div className={ classNames(classes.fileIcons, 'layout-row')}>
                   <FileIcon size={ 50 } type="file" fileType="dxf" />
@@ -68,7 +70,7 @@ export default class Landing extends Component {
                 </div>
               </Col>
               <Col className="flex-order-xs-1 flex-xs-100 flex-gt-xs-50 lg">
-                <img className={ classes.screen } src={ screens } />
+                <img className={ classes.screen } src={ deviceMockups } />
               </Col>
             </Row>
           </Container>

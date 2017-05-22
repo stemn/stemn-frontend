@@ -19,6 +19,7 @@
 
 .screen {
   margin-top: 20px;
+  width: 1000px;
   @media (max-width: 599px) {
     width: 100%;
   }
@@ -33,10 +34,13 @@
     0px 16px 24px 2px rgba(0, 0, 0, 0.098),
     0px 6px 30px 5px rgba(0, 0, 0, 0.084);
   background: white;
-  height: 400px;
   width: 300px;
   border-radius: 4px;
   @media (max-width: 599px) {
+    width: 100%;
+  }
+
+  img {
     width: 100%;
   }
 }

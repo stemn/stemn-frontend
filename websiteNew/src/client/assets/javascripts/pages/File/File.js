@@ -66,7 +66,7 @@ export default class File extends Component {
     const displayFileHeader = ['sideBySide', 'aboveAndBelow'].includes(mode)
 
     return (
-      <div className="layout-column flex" style={ { overflow: 'hidden' } }>
+      <div className="layout-column flex" style={ { overflow: 'hidden', maxHeight: '100vh' } }>
         <Helmet>
           <title>{ `${file.data.project.name} - ${file.data.path}` }</title>
         </Helmet>

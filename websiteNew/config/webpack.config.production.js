@@ -17,7 +17,7 @@ const GLOBALS = {
     NODE_ENV: JSON.stringify('production'),
     WEBSITE_URL: JSON.stringify('https://stemn.com'),
     API_SERVER: JSON.stringify('https://dev.stemn.com'),
-    WEBSOCKET_SERVER: JSON.stringify('wss://dev.stemn.com:8443'),
+    WEBSOCKET_SERVER: JSON.stringify('https://dev.stemn.com:8443'),
   },
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false')),
 }
