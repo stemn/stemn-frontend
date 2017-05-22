@@ -12,6 +12,7 @@ import MdNotifications from 'react-icons/md/notifications'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton'
 import SiteSearch from 'stemn-shared/misc/Search/SiteSearch'
 import HeaderMobileMenu from 'modules/HeaderMobileMenu'
+import BetaBadge from 'modules/BetaBadge'
 import MdMenu from 'react-icons/md/menu'
 
 export default class Header extends Component {
@@ -104,6 +105,7 @@ export default class Header extends Component {
         <Container className={ classNames(classes.inner, 'layout-row layout-align-start-center') }>
           <Link to="/" className={ classes.logo }>
             <img src={ logo } alt="" />
+            <BetaBadge />
           </Link>
           <SiteSearch className={ classes.search } />
           <div className={ classNames(classes.links, 'hide-xs') }>

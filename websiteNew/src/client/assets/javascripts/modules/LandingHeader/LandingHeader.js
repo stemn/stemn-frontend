@@ -14,6 +14,7 @@ import MdNotifications from 'react-icons/md/notifications';
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton';
 import HeaderMobileMenu from 'modules/HeaderMobileMenu';
 import MdMenu from 'react-icons/md/menu'
+import BetaBadge from 'modules/BetaBadge'
 
 export default class LandingHeader extends Component {
   constructor(props) {
@@ -103,6 +104,7 @@ export default class LandingHeader extends Component {
         <Container className={ classNames(classes.inner, 'hide-xs layout-row layout-align-start-center') }>
           <Link to='/landing' className={ classes.logo }>
             <img src={logo} alt=""/>
+            <BetaBadge />
           </Link>
           { items.map(item => (
             <Link key={ item.label } activeClassName="active" className={ classes.link } name={ item.route }>{ item.label }</Link>

@@ -20,8 +20,7 @@ const GLOBALS = {
 
 module.exports = merge(config, {
   debug: true,
-  cache: true,
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'eval-source-map',
   entry: {
     application: [
       'webpack-hot-middleware/client',

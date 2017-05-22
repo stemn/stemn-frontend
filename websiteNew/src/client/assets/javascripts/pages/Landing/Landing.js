@@ -6,6 +6,7 @@ import { Row, Col, Container } from 'stemn-shared/misc/Layout'
 import screenshot from './screenshot.jpg'
 import deviceMockups from './deviceMockups.jpg'
 import historyCombined from './historyCombined.jpg'
+import historyTimeline from './historyTimeline.png'
 import classes from './Landing.scss'
 import classNames from 'classnames'
 import FileIcon from 'stemn-shared/misc/FileList/components/FileIcon'
@@ -78,11 +79,13 @@ export default class Landing extends Component {
         <Container>
           <Row className={ secionClasses }>
             <Col className="flex-xs-100 flex-gt-xs-50 lg">
-
+              <div className={ classes.historyTimeline }>
+                <img src={ historyTimeline } />
+              </div>
             </Col>
             <Col className="flex-xs-100 flex-gt-xs-50 lg">
               <h4 className="text-title-2">No more miscommunication</h4>
-              <p className="text-title-4">Simplify your feedback process by having clients, team members, and stakeholders comment directly on your models.</p>
+              <p className="text-title-4">Simplify your feedback process by team members, clients, and stakeholders comment directly on files.</p>
               <p className="text-title-4">Stay informed of discussions and project milestones as soon as they happen.</p>
             </Col>
           </Row>
