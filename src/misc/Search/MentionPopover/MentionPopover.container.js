@@ -22,7 +22,9 @@ const fetchConfigs = [{
     if (props.query && props.query.length > 0) {
       props.search({
         entityType: props.entityType,
-        value: props.query,
+        criteria: {
+          name: props.query && `/${props.query}/i`
+        },
         cacheKey: props.cacheKey,
       })
     }

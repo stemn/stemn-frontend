@@ -10,18 +10,20 @@ const stateToProps = ({ search, routing }, { page, query, type, size, parentType
   // Add some defaults
   const _type = type || 'project'
   const _page = page || 1
-  const _query = query
   const _size = size || 30
 
-  const cacheKey = `${_type}-${query}-${_page}-${parentType}-${parentId}-${sort}-${JSON.stringify(criteria)}`
+  const criteriaWithQuery = Object.assign({}, criteria, {
+    name: query && `/${query}/i`,
+  })
+
+  const cacheKey = `${_type}-${_page}-${parentType}-${parentId}-${sort}-${JSON.stringify(criteriaWithQuery)}`
   return {
     cacheKey,
-    criteria,
+    criteria: criteriaWithQuery,
     location: routing.locationBeforeTransitions,
     page: _page,
-    query: _query,
+    query: query,
     results: search.data[cacheKey],
-    searchQuery: search.query,
     size: _size,
     sort,
     type: _type,

@@ -9,6 +9,34 @@ import Highlight from 'stemn-shared/misc/Autosuggest/Highlight'
 import Link from 'stemn-shared/misc/Router/Link';
 import { getFileRouteName, getFileRouteParams } from 'stemn-shared/misc/FileList/FileList.utils'
 
+const ClickFile = (props) => {
+  const { link, file, singleClick, doubleClick, className, children } = props
+  if (link) {
+    return (
+      <Link
+        className={ className }
+        onClick={ singleClick }
+        onDoubleClick={ doubleClick }
+        name={ getFileRouteName(file) }
+        params={ getFileRouteParams(file) }
+      >
+        { children }
+      </Link>
+    )
+  } else {
+    return (
+      <a
+        className={ className }
+        onClick={ singleClick }
+        onDoubleClick={ doubleClick }
+      >
+        { children }
+      </a>
+    )
+  }
+}
+
+
 export default class FileRow extends Component {
   static propTypes = {
     singleClick: PropTypes.func,
@@ -35,37 +63,29 @@ export default class FileRow extends Component {
 
     const timeFromNow = moment(file.modified).fromNow();
 
-    const getClickOverlay = () => {
-      if (link) {
-        return (
-          <Link
-            className={ classes.clickOverlay }
-            onClick={ this.singleClick }
-            onDoubleClick={ this.doubleClick }
-            name={ getFileRouteName(file) }
-            params={ getFileRouteParams(file) }
-          />
-        )
-      } else {
-        return (
-          <div
-            className={ classes.clickOverlay }
-            onClick={ this.singleClick }
-            onDoubleClick={ this.doubleClick }
-          />
-        )
-      }
-    }
-
     return (
       <div className={classNames(classes.row, 'layout-row layout-align-start-center', {[classes.active]: isActive})} >
-        { getClickOverlay() }
+        <ClickFile
+          className={ classes.clickOverlay }
+          onClick={ this.singleClick }
+          onDoubleClick={ this.doubleClick }
+          file={ file }
+          link={ link }
+        />
         <FileIcon fileType={file.extension} type={file.type}/>
         <div className="text-ellipsis flex">
-          <Highlight
-            text={ file.name }
-            query={ query }
-          />
+          <ClickFile
+            onClick={ this.singleClick }
+            onDoubleClick={ this.doubleClick }
+            file={ file }
+            link={ link }
+          >
+            <Highlight
+              className={ classes.name }
+              text={ file.name }
+              query={ query }
+            />
+          </ClickFile>
         </div>
         { file.commit && file.commit.summary && file.commit._id
         ? <div className="flex">

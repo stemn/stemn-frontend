@@ -5,6 +5,7 @@ const requireCodemirrorMode = require.context('url-loader?limit=1&name=js/codemi
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx';
 import file from 'stemn-shared/assets/images/pure-vectors/file.svg';
+import { load } from 'stemn-shared/misc/LazyLoading/LazyLoading.utils'
 
 export const Viewer = React.createClass({
   render() {
@@ -26,8 +27,15 @@ export const Viewer = React.createClass({
         const mode = modeInfo ? modeInfo.mode : 'null';
         if(mode && mode != 'null'){
           const modePath = `./${mode}/${mode}.js`
-          requireCodemirrorMode(modePath);
-          editorInstance.setOption("mode", mode);
+          const webpackModePath = requireCodemirrorMode(modePath)
+
+          // Attach codemirror to the window so the mode pack will find it
+          window.CodeMirror = codemirror
+          // Load the mode
+          load([{ src: webpackModePath, }]).then((response) => {
+            // Set the mode after it has loaded
+            editorInstance.setOption('mode', mode)
+          })
         }
       }, 1)
     }

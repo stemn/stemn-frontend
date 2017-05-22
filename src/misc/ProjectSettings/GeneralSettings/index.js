@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
 import { has } from 'lodash';
-import ProjectPermissionsRadio from 'stemn-shared/misc/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea';
 import Input from 'stemn-shared/misc/Input/Input/Input';
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton';

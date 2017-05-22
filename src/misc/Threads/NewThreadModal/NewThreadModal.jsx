@@ -17,8 +17,6 @@ export default class NewThreadModal extends Component {
     const boardId = board.data._id
     const projectId = board.data.project
 
-    console.log(goToTaskRoute);
-
     // Create the new task
     newTask({
       boardId,
@@ -74,7 +72,7 @@ export default class NewThreadModal extends Component {
           <div className={ classNames(classes.titleSection, 'layout-row layout-align-start-center') }>
             <Textarea
               model={ `${boardModel}.newThread.name` }
-              value={ get(board, 'newThread.name') }
+              value={ get(board, 'newThread.name', '') }
               className="text-title-4 input-plain flex"
               placeholder="Untitled Thread"
               autoFocus

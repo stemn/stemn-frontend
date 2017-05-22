@@ -83,18 +83,18 @@ export function deleteEvent({taskId, eventId}){
   }
 }
 
-export function getEvents({taskId}){
-  return {
-    type: 'TASKS/GET_EVENTS',
-    payload: http({
-      method: 'GET',
-      url: `/api/v1/tasks/${taskId}/events`,
-    }),
-    meta: {
-      cacheKey: taskId
-    }
-  }
-}
+//export function getEvents({taskId}){
+//  return {
+//    type: 'TASKS/GET_EVENTS',
+//    payload: http({
+//      method: 'GET',
+//      url: `/api/v1/tasks/${taskId}/events`,
+//    }),
+//    meta: {
+//      cacheKey: taskId
+//    }
+//  }
+//}
 
 export const updateBoard = ({ board }) => ({
   type: 'TASKS/UPDATE_BOARD',
