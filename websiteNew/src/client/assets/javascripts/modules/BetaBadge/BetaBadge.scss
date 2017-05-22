@@ -25,16 +25,14 @@
     background: primary;
     color: white;
     border-radius: 7px;
-    transition: 0.3s ease all;
+    transition: 0.2s ease all;
     font-size: 9px;
     padding: 2px 4px;
     font-weight: bold;
     overflow: hidden;
     span {
-      transition: 0.3s ease all;
+      transition: 0.1s ease all;
       opacity: 0;
     }
-
-
   }
 }

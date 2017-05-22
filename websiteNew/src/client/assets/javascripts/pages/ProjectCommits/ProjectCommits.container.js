@@ -57,7 +57,6 @@ const dispatchToProps = {
 const fetchConfigs = [{
   hasChanged: 'timelineQueryKey',
   onChange: (props) => {
-//    console.log(props.timelineQueryKey);
     props.fetchTimeline({
       entityType: 'project',
       entityId: props.projectId,
@@ -65,6 +64,7 @@ const fetchConfigs = [{
       cacheKey: props.timelineCacheKey,
       criteria: {
         owner: props.filter.object.user,
+        name: props.filter.object.query && `/${props.filter.object.query}/i`
       },
       page: props.page,
       size: props.size,

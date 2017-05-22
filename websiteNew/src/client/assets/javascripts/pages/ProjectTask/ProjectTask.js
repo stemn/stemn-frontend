@@ -246,17 +246,17 @@ export default class ProjectTask extends Component {
               <div className="flex" />
               { canEdit &&
                 <PopoverDropdown
-                  value={ task.data.completed }
-                  model={ `${taskModel}.data.completed` }
+                  value={ task.data.complete }
+                  model={ `${taskModel}.data.complete` }
                   options={ this.dropdownOptions }
                   onChange={ this.updateTask }
                   style={ { margin: '0 15px' } }
                 />
               }
               { !canEdit &&
-                <Tag className={ task.data.completed ? 'warn': 'success' } style={{ margin: '0px'}}>
+                <Tag className={ task.data.complete ? 'warn': 'success' } style={{ margin: '0px'}}>
                   <MdDone size={ 20 } style={ { marginRight: '5px' } }/>
-                  { task.data.completed ? 'THREAD CLOSED': 'THREAD OPEN' }
+                  { task.data.complete ? 'THREAD CLOSED': 'THREAD OPEN' }
                 </Tag>
               }
               { edit &&

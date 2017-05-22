@@ -14,7 +14,7 @@ import confirmAuth from 'stemn-shared/misc/Auth/actions/confirmAuth'
 const filterModel = {
   groups: 'array',
   labels: 'array',
-  users: 'array',
+  user: 'string',
   status: 'string',
   query: 'main',
 }
@@ -93,7 +93,7 @@ const fetchConfigs = [{
       labels: props.filter.object.labels,
       name: props.filter.object.query && `/${props.filter.object.query}/i`,
       complete: parseCompleted(props.filter.object.status),
-      users: props.filter.object.users,
+      users: props.filter.object.user && [ props.filter.object.user ],
     }
 
     props.search({
