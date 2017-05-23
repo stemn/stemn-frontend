@@ -69,7 +69,7 @@ export default class MyProjectsPanel extends Component {
             params={ { projectId: project._id } }
             className={ classes.row + ' layout-row layout-align-start-center'}
           >
-            <PublicPrivateIcon className={ classes.publicIcon } type={ project.permissions && project.permissions.projectType } size={ 20 } />
+            <PublicPrivateIcon className={ classes.publicIcon } private={ project.private } size={ 20 } />
             <div className="text-ellipsis flex">
               { project.name || 'Untitled Project' }
             </div>

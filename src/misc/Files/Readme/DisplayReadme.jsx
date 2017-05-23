@@ -42,7 +42,7 @@ export const DisplayReadme = React.createClass({
           { fileData && fileData.data
           ? <EditorDisplay value={fileData.data} />
           : null }
-          <LoadingOverlay show={fileData && fileData.loading}/>
+          <LoadingOverlay show={ fileData && fileData.loading } size="sm" />
         </div>
       )
     }

@@ -16,6 +16,7 @@ export default class Readme extends Component {
     projectModel: PropTypes.string.isRequired,
     saveProject: PropTypes.func.isRequired,
     isRoot: PropTypes.bool.isRequired, // Is this the readme for the root directory?
+    canEdit: PropTypes.bool.isRequired, // Can the current user edit
   }
   constructor(props) {
     super(props)
@@ -36,7 +37,7 @@ export default class Readme extends Component {
     }), 1)
   }
   render() {
-    const { files, project, projectModel, isRoot, ...otherProps } = this.props
+    const { files, project, projectModel, isRoot, canEdit, ...otherProps } = this.props
     const { editActive } = this.state
     const readmeNames = ['readme.md', 'readme.txt']
     const readmeFile = files.find(item => readmeNames.includes(item.name.toLowerCase()))
@@ -110,8 +111,10 @@ export default class Readme extends Component {
       return getReadmeFileDisplay()
     } else if (readmeTextExists || (editActive && isRoot)) {
       return getReadmeTextDisplay()
-    } else if (true) {
+    } else if (canEdit) {
       return getAddReadmeTextPrompt()
+    } else {
+      return null
     }
 
   }

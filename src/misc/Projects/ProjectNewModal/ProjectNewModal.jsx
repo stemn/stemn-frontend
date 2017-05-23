@@ -10,7 +10,7 @@ import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry'
 
 // Component Core
 import React from 'react';
-import { has, pick } from 'lodash';
+import { has, pick, get } from 'lodash';
 
 // Styles
 import classNames from 'classnames';
@@ -104,8 +104,8 @@ export const Component = React.createClass({
         <div className={classes.panel}>
           <h3>Project Type</h3>
           <ProjectPermissionsRadio
-             model={`${entityModel}.permissions.projectType`}
-             value={has(newProject, 'permissions.projectType') ? newProject.permissions.projectType : ''}
+             model={ `${entityModel}.private` }
+             value={ get(newProject, 'private') }
            />
         </div>
       )

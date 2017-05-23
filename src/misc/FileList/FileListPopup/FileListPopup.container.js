@@ -6,7 +6,6 @@ import { get } from 'lodash'
 import { bindActionCreators } from 'redux'
 
 const stateToProps = ({ fileList }, { projectId, path, provider }) => {
-  console.log({projectId, path, provider});
   const fileListCacheKey = `${projectId}-${path}-${provider}`
   return {
     fileListCacheKey,

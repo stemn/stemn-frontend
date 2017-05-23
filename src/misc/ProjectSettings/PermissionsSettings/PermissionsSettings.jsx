@@ -24,8 +24,8 @@ export default class ProjectSettingsPermissions extends Component {
         <InfoPanel>
           <h3>Project Type</h3>
           <ProjectPermissionsRadio
-            model={ `${projectModel}.data.permissions.projectType` }
-            value={ get(project, 'data.permissions.projectType', '') }
+            model={ `${projectModel}.data.private` }
+            value={ get(project, 'data.private') }
           />
         </InfoPanel>
         <InfoPanel>
