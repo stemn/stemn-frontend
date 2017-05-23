@@ -8,17 +8,29 @@
   bottom: 0;
 
   &:hover {
-    div {
+    .bubble {
       width: 30px;
-    }
-    span {
-      opacity: 1;
+      span {
+        opacity: 1;
+      }
     }
   }
 
-  div {
+  .arrow {
+    width: 0;
+    height: 0;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-right: 8px solid primary;
+    position: absolute;
+    left: 34px;
+    top: 8px;
+    transform: rotate(-42deg);
+  }
+
+  .bubble {
     top: 0;
-    left: 35px;
+    left: 36px;
     position: absolute;
     width: 14px;
     height: 14px;
@@ -30,6 +42,7 @@
     padding: 2px 4px;
     font-weight: bold;
     overflow: hidden;
+    text-transform: capitalize;
     span {
       transition: 0.1s ease all;
       opacity: 0;

@@ -36,7 +36,7 @@ export default class ProjectOverview extends Component {
   }
 
   render() {
-    const { entityModel, project, path, files, isFilePage, saveProject } = this.props
+    const { canEdit, entityModel, project, path, files, isFilePage, saveProject } = this.props
     const options = {
       showMenu: true
     }
@@ -149,6 +149,7 @@ export default class ProjectOverview extends Component {
               projectModel={ entityModel }
               saveProject={ saveProject }
               isRoot={ !path || path === '' }
+              canEdit={ canEdit }
             />
           </Container>
         </div>

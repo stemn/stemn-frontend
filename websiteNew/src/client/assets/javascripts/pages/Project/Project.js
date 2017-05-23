@@ -19,7 +19,7 @@ class Project extends Component {
     const routeParams = { projectId: get(project, 'data._id') }
     const publicIcon = (
       <PublicPrivateIcon
-        type={ get(project, 'data.permissions.projectType', 'public') }
+        private={ get(project, 'data.private') }
         style={ { marginRight: '8px' } }
         size={ 30 }
       />
