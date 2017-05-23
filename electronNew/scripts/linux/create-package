@@ -1,0 +1,17 @@
+#!/bin/bash
+
+name=stemn
+sourceType=dir
+packageType=deb
+repoRoot=../../
+src=app
+targetDir=/opt/
+
+fpm \
+-n $name \
+-s $sourceType \
+-t $packageType \
+-C $repoRoot \
+--prefix $targetDir \
+$src
+

@@ -184,14 +184,13 @@
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webfont-dl": "^0.1.2",
-    "webpack": "^1.13.3",
+    "webpack": "^2.6.0",
     "webpack-dev-middleware": "^1.8.4",
     "webpack-hot-middleware": "^2.10.0"
   },
   "devDependencies": {
     "electron": "1.4.4",
-    "electron-builder": "10.9.2",
-    "primus-webpack-plugin": "0.0.36"
+    "electron-builder": "10.9.2"
   },
   "devEngines": {
     "node": "4.x || 5.x || 6.x",
