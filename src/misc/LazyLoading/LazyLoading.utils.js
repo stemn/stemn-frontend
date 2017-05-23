@@ -63,24 +63,28 @@ export const load = (items) => {
     return promise
   }
 
-  items.forEach((item) => {
-    // If the src is not yet registered, register it
-    if (!resources[item.src]) {
-      const srcSplit = getSrcSplit(item.src)
-      const fileType = item.type || srcSplit[srcSplit.length-1]
+  // If we have some scripts to load, try and load them
+  if (items) {
+    items.forEach((item) => {
+      // If the src is not yet registered, register it
+      if (!resources[item.src]) {
+        const srcSplit = getSrcSplit(item.src)
+        const fileType = item.type || srcSplit[srcSplit.length-1]
 
-      if (fileType === 'js') {
-        promiseArray.push(loadScript(item.src, item.global))
-      } else if (fileType === 'css') {
-        promiseArray.push(loadStyles(item.src))
-      } else {
-        console.error('Unsupported file type')
+        if (fileType === 'js') {
+          promiseArray.push(loadScript(item.src, item.global))
+        } else if (fileType === 'css') {
+          promiseArray.push(loadStyles(item.src))
+        } else {
+          console.error('Unsupported file type')
+        }
+      } else if (resources[item.src] !== true) {
+        // Else, if it is not true, it is loading and the promise is assigned
+        promiseArray.push(resources[item.src])
       }
-    } else if (resources[item.src] !== true) {
-      // Else, if it is not true, it is loading and the promise is assigned
-      promiseArray.push(resources[item.src])
-    }
-  })
+    })
+  }
+
 
   return Promise.all(promiseArray)
 }

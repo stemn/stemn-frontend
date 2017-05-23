@@ -7,7 +7,7 @@ import classes from './PreviewFile.css'
 import PreviewCode from './PreviewCode/PreviewCode'
 import PreviewCadLoader from './PreviewCadLoader'
 import PreviewPdfLoader from './PreviewPdfLoader'
-import PreviewPcb from './PreviewPcb/PreviewPcb'
+import PreviewPcbLoader from './PreviewPcbLoader'
 import PreviewImage from './PreviewImage/PreviewImage'
 import PreviewGoogle from './PreviewGoogle/PreviewGoogle'
 import PreviewGdoc from './PreviewGdoc/PreviewGdoc'
@@ -46,7 +46,7 @@ export const Component = React.createClass({
         )
       } else if (viewerType === 'gerber' || viewerType === 'pcb') {
         return (
-          <PreviewPcb
+          <PreviewPcbLoader
             previewId={ previewId }
             fileMeta={ file }
             fileData={ fileData }

@@ -1,21 +1,4 @@
-import http from 'axios';
-
-export const authenticate = () => {
-  return http({
-    method: 'POST',
-    url: `/api/v1/auth/autodesk`,
-  }).then(function(response){
-    library.accessToken = response.data.token;
-    return response
-  })
-};
-
-export const getViewStatus = (urn64) => {
-  return http({
-    method: 'GET',
-    url: `/api/v1/autodesk/info/${urn64}`,
-  })
-}
+import http from 'axios'
 
 export const isWebGlSupported = (return_context) => {
     if (!!window.WebGLRenderingContext) {

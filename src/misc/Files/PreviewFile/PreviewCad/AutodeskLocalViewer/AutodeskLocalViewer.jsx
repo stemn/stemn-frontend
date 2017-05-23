@@ -1,17 +1,11 @@
-import React from 'react';
-import classes from './AutodeskLocalViewer.css';
-import autodeskViewerUtils from '../PreviewCadViewer.utils.js';
+import React from 'react'
+import classes from './AutodeskLocalViewer.css'
+import autodeskViewerUtils from '../PreviewCadViewer.utils.js'
 import { load } from 'stemn-shared/misc/LazyLoading/LazyLoading.utils'
 
-load([{
-  global: 'Autodesk',
-  src: '/static/other/autodesk/viewer/viewer3D.min.js',
-}, {
-  global: 'THREE',
-  src: '/static/other/autodesk/viewer/three.min.js',
-}, {
-  src: '/static/other/autodesk/viewer/style.min.css',
-}])
+//import 'script-loader!static/other/autodesk/viewer/three.min.js'
+//import 'script-loader!static/other/autodesk/viewer/viewer3D.min.js'
+//import 'static/other/autodesk/viewer/style.min.css
 
 export default React.createClass({
   viewer: null,

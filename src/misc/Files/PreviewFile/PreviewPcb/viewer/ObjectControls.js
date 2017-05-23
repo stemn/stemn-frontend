@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 /**
  * @author Eberhard Graether / http://egraether.com/
  * @note Edited by eddyb to provide object-centered controls instead of camera-centered.
