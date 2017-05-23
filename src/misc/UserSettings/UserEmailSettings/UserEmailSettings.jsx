@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { compact } from 'lodash'
+import { get } from 'lodash'
 
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import Form from 'stemn-shared/misc/Forms/Form'
@@ -74,11 +74,11 @@ export default class UserEmailSettings extends Component {
       <div>
         <h3>Set Primary Email</h3>
         <p>Your primary address is where your emails will be sent.</p>
-        <EmailRow setPrimary={ setPrimaryEmail } type="dropbox" primary={ auth.user.email } email={ auth.user.accounts.dropbox.email } />
-        <EmailRow setPrimary={ setPrimaryEmail } type="google" primary={ auth.user.email } email={ auth.user.accounts.google.email } />
-        <EmailRow setPrimary={ setPrimaryEmail } type="linkedin" primary={ auth.user.email } email={ auth.user.accounts.linkedin.email } />
-        <EmailRow setPrimary={ setPrimaryEmail } type="facebook" primary={ auth.user.email } email={ auth.user.accounts.facebook.email } />
-        <EmailRow setPrimary={ setPrimaryEmail } type="local" primary={ auth.user.email } email={ auth.user.accounts.local.email } />
+        <EmailRow setPrimary={ setPrimaryEmail } type="dropbox" primary={ auth.user.email } email={ get(auth, 'user.accounts.dropbox.email') } />
+        <EmailRow setPrimary={ setPrimaryEmail } type="google" primary={ auth.user.email } email={ get(auth, 'user.accounts.google.email') } />
+        <EmailRow setPrimary={ setPrimaryEmail } type="linkedin" primary={ auth.user.email } email={ get(auth, 'user.accounts.linkedin.email') } />
+        <EmailRow setPrimary={ setPrimaryEmail } type="facebook" primary={ auth.user.email } email={ get(auth, 'user.accounts.facebook.email') } />
+        <EmailRow setPrimary={ setPrimaryEmail } type="local" primary={ auth.user.email } email={ get(auth, 'user.accounts.local.email') } />
         <br />
         <h3>Update email</h3>
         <Form model="auth.forms.newEmail" value={ auth.user.accounts.local.email }>

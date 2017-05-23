@@ -34,7 +34,7 @@ import MdAdd                          from 'react-icons/md/add';
 import ProjectMenu                    from 'stemn-shared/misc/Projects/Project.menu.js';
 import UserAvatar                     from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx';
 
-import ProjectNewModalName from 'stemn-shared/misc/Projects/ProjectNewModal/ProjectNewModal.jsx'
+import ProjectNewModalName from 'stemn-shared/misc/Projects/ProjectNewModal'
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 

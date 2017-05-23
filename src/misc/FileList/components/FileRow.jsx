@@ -10,13 +10,13 @@ import Link from 'stemn-shared/misc/Router/Link';
 import { getFileRouteName, getFileRouteParams } from 'stemn-shared/misc/FileList/FileList.utils'
 
 const ClickFile = (props) => {
-  const { link, file, singleClick, doubleClick, className, children } = props
+  const { link, file, onClick, onDoubleClick, className, children } = props
   if (link) {
     return (
       <Link
         className={ className }
-        onClick={ singleClick }
-        onDoubleClick={ doubleClick }
+        onClick={ onClick }
+        onDoubleClick={ onDoubleClick }
         name={ getFileRouteName(file) }
         params={ getFileRouteParams(file) }
       >
@@ -27,8 +27,8 @@ const ClickFile = (props) => {
     return (
       <a
         className={ className }
-        onClick={ singleClick }
-        onDoubleClick={ doubleClick }
+        onClick={ onClick }
+        onDoubleClick={ onDoubleClick }
       >
         { children }
       </a>
