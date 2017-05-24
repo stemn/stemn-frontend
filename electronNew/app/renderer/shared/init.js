@@ -1,7 +1,7 @@
-import moment             from 'moment';
-import http               from 'axios';
-import initElectronCrash  from 'electronNew/app/shared/reporting/electron-crash/electron-crash.js';
-import initRaven          from 'electronNew/app/shared/reporting/raven/raven.renderer.js';
+import moment from 'moment';
+import http from 'axios';
+import initElectronCrash from 'electronNew/app/shared/reporting/electron-crash/electron-crash.js';
+import initRaven from 'electronNew/app/shared/reporting/raven/raven.renderer.js';
 import 'moment/locale/en-gb';
 import 'stemn-shared/assets/css/index.global.css';
 

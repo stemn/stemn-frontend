@@ -8,30 +8,30 @@ import { get } from 'lodash'
 
 export default React.createClass({
   fileFolderClick({file}){
-    const { project, create } = this.props;
+    const { project, create, pushRoute } = this.props;
     const isFile = file.type == 'file';
     if(isFile){
       create({
-        type         : 'PREVIEW',
-        props        : {
-          fileId     : file.fileId,
-          revisionId : file.revisionId,
-          projectId  : file.project._id
-        }
+        type: 'PREVIEW',
+        props: {
+          fileId: file.fileId,
+          revisionId: file.revisionId,
+          projectId: file.project._id,
+        },
       })
-    }else{
+    } else {
       pushRoute(projectFolderRoute({
         projectId: project.data._id,
-        fileId: file.fileId
+        fileId: file.fileId,
       }))
     }
   },
   render() {
-    const { entityModel, project, path, files, saveProject } = this.props;
+    const { entityModel, project, path, files, saveProject } = this.props
     const options = {
       showMenu: true
     }
-    if(project && project.data && project.data._id){
+    if (project && project.data && project.data._id) {
       return (
         <div className={classes.container+' flex scroll-box'}>
           <FileList
@@ -55,8 +55,7 @@ export default React.createClass({
           />
         </div>
       )
-    }
-    else{
+    } else {
       return null
     }
   }

@@ -52,6 +52,10 @@ module.exports = merge(config, {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin(GLOBALS),
+    new CopyWebpackPlugin([{
+      from: path.join(__dirname, '../app/static'),
+      to: 'static',
+    }]),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
       minChunks: Infinity,

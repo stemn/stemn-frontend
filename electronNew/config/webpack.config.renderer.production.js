@@ -61,8 +61,8 @@ module.exports = merge(config, {
       allChunks: true,
     }),
     new CopyWebpackPlugin([{
-      from: path.join(__dirname, '../app/renderer/assets'),
-      to: 'assets',
+      from: path.join(__dirname, '../app/static'),
+      to: 'static',
     }]),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',

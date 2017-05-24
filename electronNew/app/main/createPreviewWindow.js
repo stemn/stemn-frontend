@@ -2,10 +2,9 @@ import { app, BrowserWindow, Menu, shell, screen } from 'electron';
 import { bindBackForward } from './utils/browserWindowUtils.js'
 import path from 'path';
 import stringify from './utils/stringify.js'
+import getStaticPath from 'get-static-path'
 
-const mainHtml = process.env.NODE_ENV === 'development' 
-               ? path.join(__dirname, '../../app/renderer/assets/html/preview.html')
-               : path.join(__dirname, '../renderer/assets/html/preview.html');
+const mainHtml = getStaticPath('/html/preview.html')
 
 
 export const create = function createWindow({ uri = '/' } = {}) {
@@ -24,7 +23,7 @@ export const create = function createWindow({ uri = '/' } = {}) {
     frame: process.platform == 'darwin' ? true : false
   });
 
-  browserWindow.loadURL(`file://${mainHtml}#${uri}`);
+  browserWindow.loadURL(`${mainHtml}#${uri}`);
   browserWindow.on('closed', () => {
     browserWindow = null;
   });

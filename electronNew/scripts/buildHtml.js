@@ -4,7 +4,7 @@ const Promise = require('bluebird')
 const fs = Promise.promisifyAll(require('fs'))
 
 const instructions = [{
-  path: 'dist/renderer/assets/html/main.html',
+  path: 'dist/static/html/main.html',
   scripts: [
     '../../js/manifest.js',
     '../../js/vendor.js',
@@ -15,7 +15,7 @@ const instructions = [{
     '../../css/main.css',
   ],
 }, {
-  path: 'dist/renderer/assets/html/menubar.html',
+  path: 'dist/static/html/menubar.html',
   scripts: [
     '../../js/manifest.js',
     '../../js/vendor.js',
@@ -26,7 +26,7 @@ const instructions = [{
     '../../css/menubar.css',
   ],
 }, {
-  path: 'dist/renderer/assets/html/preview.html',
+  path: 'dist/static/html/preview.html',
   scripts: [
     '../../js/manifest.js',
     '../../js/vendor.js',

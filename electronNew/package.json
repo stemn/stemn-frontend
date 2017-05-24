@@ -51,7 +51,7 @@
       }
     },
     "start:electron": {
-      "command": "node ./scripts/electron.development.js",
+      "command": "node ./node_modules/webpack/bin/webpack --watch  --config ./config/webpack.config.electron.js  --progress --profile --colors",
       "env": {
         "NODE_ENV": "development",
         "API_SERVER": "https://dev.stemn.com",

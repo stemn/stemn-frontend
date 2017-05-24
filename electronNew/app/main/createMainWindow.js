@@ -4,14 +4,9 @@ import path from 'path';
 import process from 'process';
 import log from 'electron-log';
 import stringify from './utils/stringify.js'
+import getStaticPath from 'get-static-path'
 
-const mainHtml = process.env.NODE_ENV === 'development' 
-               ? path.join(__dirname, '../../app/renderer/assets/html/main.html')
-               : path.join(__dirname, '../renderer/assets/html/main.html');
-
-console.log('-------------------------');
-console.log(mainHtml);
-
+const mainHtml = getStaticPath('/html/main.html')
 
 export const create = function createWindow({ uri = '/' } = {}) {
   let browserWindow = null;
@@ -47,8 +42,7 @@ export const create = function createWindow({ uri = '/' } = {}) {
         shell.openExternal(url);
       }
     }
-
-    browserWindow.loadURL(`file://${mainHtml}#${uri}`);
+    browserWindow.loadURL(`${mainHtml}#${uri}`);
     browserWindow.on('closed', () => {
       browserWindow = null;
     });

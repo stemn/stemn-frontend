@@ -97,7 +97,7 @@ class Component extends React.Component{
             <p>Consider open-sourcing this project or upgrading to Stemn Pro to access additional features such as infinite revision history.</p>
           </div>
           <div className="footer layout-row">
-            <a className="link-primary" href={`https://stemn.com/projects/${project.data._id}`}>View online</a>
+            <a className="link-primary" href={`https://stemn.com/projects/${get(project, 'data._id')}`}>View online</a>
             <div className="flex"></div>
             <Link className="link-grey" to={baseLink+'/settings/permissions'}>Change</Link>
           </div>
@@ -110,7 +110,7 @@ class Component extends React.Component{
             <p>Your data and files will be visible to everyone - only team-members can edit.</p>
           </div>
           <div className="footer layout-row">
-            <a className="link-primary" href={`https://stemn.com/projects/${project.data._id}`}>View online</a>
+            <a className="link-primary" href={`https://stemn.com/projects/${get(project, 'data._id')}`}>View online</a>
             <div className="flex"></div>
             <Link className="link-grey" to={baseLink+'/settings/permissions'}>Change</Link>
           </div>
@@ -132,7 +132,7 @@ class Component extends React.Component{
               <Link activeClassName="active" to={baseLink+'/tasks'}>Tasks</Link>
               { isConnected ? <Link className={['files/:path', 'files'].includes(routeName.path) ? 'active' : ''} to={baseLink+'/files/'}>Files</Link> : null }
             </div>
-            <Popover preferPlace="below" tipSize={6} trigger="click">
+            <Popover preferPlace="below" tipSize={ 6 } trigger="click">
               <SimpleIconButton title="Visibility Settings">
                 <PublicPrivateIcon private={ get(project, 'data.private') } size={ 20 } />
               </SimpleIconButton>

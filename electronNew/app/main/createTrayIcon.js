@@ -1,14 +1,13 @@
 import path from 'path';
 import { Tray, Menu, shell } from 'electron';
 import process from 'process';
+import getStaticPath from 'get-static-path'
 
 // Actions
 import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js';
 import { push } from 'react-router-redux';
 
-const trayIcon = process.env.NODE_ENV === 'development' 
-               ? path.join(__dirname, '../../app/renderer/assets/images/logo.png')
-               : path.join(__dirname, '../renderer/assets/images/logo.png');
+const trayIcon = getStaticPath('/images/logo.png', true)
 
 let appIcon = null;
 

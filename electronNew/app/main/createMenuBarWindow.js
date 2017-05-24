@@ -2,11 +2,9 @@ import { BrowserWindow, screen, Menu, shell } from 'electron';
 import path from 'path';
 import process from 'process';
 import stringify from './utils/stringify.js'
+import getStaticPath from 'get-static-path'
 
-const menuBarHtml = process.env.NODE_ENV === 'development' 
-                  ? path.join(__dirname, '../../app/renderer/assets/html/menubar.html')
-                  : path.join(__dirname, '../renderer/assets/html/menubar.html');
-
+const menuBarHtml = getStaticPath('/html/menubar.html')
 
 const WINDOW_WIDTH = 330;
 //const WINDOW_WIDTH = 600;
@@ -57,7 +55,7 @@ export const create = () => {
   browserWindow.webContents.on('will-navigate', handleRedirect);
   browserWindow.webContents.on('new-window', handleRedirect);
 
-  browserWindow.loadURL(`file://${menuBarHtml}`);
+  browserWindow.loadURL(menuBarHtml);
   browserWindow.on('blur', () => {
     browserWindow.hide();
   });

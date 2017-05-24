@@ -33,9 +33,9 @@ app.use(webpackDevMiddleware(compiler, {
 
 app.use(webpackHotMiddleware(compiler))
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../src/client/assets/index.html'))
-})
+//app.get('*', (req, res) => {
+//  res.sendFile(path.join(__dirname, '../src/client/assets/index.html'))
+//})
 
 app.listen(port, host, (err) => {
   if (err) {
