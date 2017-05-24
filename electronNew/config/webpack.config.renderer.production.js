@@ -64,6 +64,11 @@ module.exports = merge(config, {
       from: path.join(__dirname, '../app/static'),
       to: 'static',
     }]),
+    // Copy the package.json folder. This is used in electron-builder. Not sure why...
+    new CopyWebpackPlugin([{
+      from: path.join(__dirname, '../app/package.json'),
+      to: path.join(__dirname, '../dist/package.json'),
+    }]),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
       minChunks: Infinity,
