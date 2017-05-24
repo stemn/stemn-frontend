@@ -2,9 +2,9 @@ import { app, BrowserWindow, Menu, shell, screen } from 'electron';
 import { bindBackForward } from './utils/browserWindowUtils.js'
 import path from 'path';
 import stringify from './utils/stringify.js'
-import getStaticPath from 'get-static-path'
+import getRootPath from 'get-root-path'
 
-const mainHtml = getStaticPath('/html/preview.html')
+const mainHtml = getRootPath('/static/html/preview.html')
 
 
 export const create = function createWindow({ uri = '/' } = {}) {

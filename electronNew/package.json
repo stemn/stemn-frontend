@@ -1,18 +1,17 @@
 {
-  "name": "stemn-website-new",
-  "description": "A starter project for modern React apps with Redux",
-  "version": "1.1.1",
-  "author": "David Revay <david@stemn.com>",
-  "license": "MIT",
-  "keywords": [],
+  "name": "Stemn",
+  "productName": "Stemn",
+  "version": "0.0.20",
+  "description": "Stemn Desktop: Versioning and project management",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nicksp/redux-webpack-es6-boilerplate.git"
+    "url": "https://github.com/Stemn/Stemn-Desktop"
   },
-  "bugs": "https://github.com/nicksp/redux-webpack-es6-boilerplate/issues",
+  "main": "dist/main/index.js",
   "scripts": {
     "analyse:electron": "webpack-bundle-analyzer ./reports/electron-stats.json",
     "analyse:renderer": "webpack-bundle-analyzer ./reports/renderer-stats.json",
+    "build": "better-npm-run build:electron && better-npm-run build:renderer",
     "build:electron": "better-npm-run build:electron",
     "build:renderer": "better-npm-run build:renderer",
     "postbuild:renderer": "npm run build:html",
@@ -72,6 +71,26 @@
       }
     }
   },
+  "bin": {
+    "electron": "./node_modules/.bin/electron"
+  },
+  "author": {
+    "name": "STEMN Pty Ltd",
+    "email": "desktop@stemn.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "project management",
+    "tracking",
+    "versioning",
+    "engineering",
+    "science"
+  ],
+  "homepage": "https://stemn.com",
+  "bugs": {
+    "url": "https://github.com/Stemn/Stemn-Desktop/issues",
+    "email": "bugs@stemn.com"
+  },
   "dependencies": {
     "asar": "^0.11.0",
     "babel-cli": "6.14.0",
@@ -101,6 +120,7 @@
     "eslint-config-stemn": "git+https://git@github.com/stemn/eslint-config-stemn.git",
     "extract-text-webpack-plugin": "2.0.0-beta.3",
     "file-loader": "0.9.0",
+    "gh-release": "https://github.com/Stemn/gh-release/tarball/master",
     "happypack": "3.0.3",
     "html-webpack-plugin": "2.28.0",
     "http-server": "0.9.0",

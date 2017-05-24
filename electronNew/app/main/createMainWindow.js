@@ -4,9 +4,9 @@ import path from 'path';
 import process from 'process';
 import log from 'electron-log';
 import stringify from './utils/stringify.js'
-import getStaticPath from 'get-static-path'
+import getRootPath from 'get-root-path'
 
-const mainHtml = getStaticPath('/html/main.html')
+const mainHtml = getRootPath('/static/html/main.html')
 
 export const create = function createWindow({ uri = '/' } = {}) {
   let browserWindow = null;

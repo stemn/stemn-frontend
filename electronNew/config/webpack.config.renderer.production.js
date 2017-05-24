@@ -40,7 +40,7 @@ module.exports = merge(config, {
   output: {
     filename: 'js/[name].js',
     path: path.resolve(__dirname, '../dist/renderer'),
-    publicPath: '/',
+    publicPath: '../../', // the path of the root dist relative to the html files (so the html can resolve relative resources)
   },
   plugins: [
     new webpack.DefinePlugin(GLOBALS),

@@ -30,7 +30,7 @@ module.exports = {
       'route-actions' : path.resolve(__dirname, '../app/renderer/main/routeActions.js'),
       'stemn-shared' : path.resolve(__dirname, '../app/node_modules/stemn-frontend-shared/src'),
       'package-json' : path.resolve(__dirname, '../app/package.json'),
-      'get-static-path' : path.resolve(__dirname, '../app/getStaticPath.js'),
+      'get-root-path' : path.resolve(__dirname, '../app/getRootPath.js'),
     },
     extensions: ['.js', '.jsx', '.json', '.scss'],
   },

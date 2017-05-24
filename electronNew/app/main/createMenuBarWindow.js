@@ -2,9 +2,9 @@ import { BrowserWindow, screen, Menu, shell } from 'electron';
 import path from 'path';
 import process from 'process';
 import stringify from './utils/stringify.js'
-import getStaticPath from 'get-static-path'
+import getRootPath from 'get-root-path'
 
-const menuBarHtml = getStaticPath('/html/menubar.html')
+const menuBarHtml = getRootPath('/static/html/menubar.html')
 
 const WINDOW_WIDTH = 330;
 //const WINDOW_WIDTH = 600;
