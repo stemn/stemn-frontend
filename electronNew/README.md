@@ -32,4 +32,4 @@ Releasing depends on 3 repos: 2 public GitHub repos and this private repo. Relea
 5. Monitor CI status at [AppVeyor](https://ci.appveyor.com/project/MrBlenny/stemn-desktop) and [Travis](https://travis-ci.org/Stemn/Stemn-Desktop)
 6. Releases will appear on [GitHub](https://github.com/Stemn/Stemn-Desktop/releases). Test these releases.
 7. Publish the releases on GitHub.
-8. Finally, run `update.sh/bat` in the [Stemn-Updates](https://github.com/Stemn/Stemn-Desktop) repo. This will bump the numbers in `updates.json`
+8. Finally, run `update.sh/bat` in the [Stemn-Updates](https://github.com/Stemn/Stemn-Updates) repo. This will bump the numbers in `updates.json`
