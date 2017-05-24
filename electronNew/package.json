@@ -145,7 +145,6 @@
   },
   "standard": {
     "ignore": [
-      "src/client/assets/static/other",
       "test"
     ]
   },
