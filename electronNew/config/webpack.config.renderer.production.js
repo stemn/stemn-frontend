@@ -57,39 +57,21 @@ module.exports = merge(config, {
       },
     }),
     new ExtractTextPlugin({
-      filename: 'css/app.[chunkhash].css',
+      filename: 'css/[name].css',
       allChunks: true,
     }),
-    new CopyWebpackPlugin([
-      {
-        from: path.join(__dirname, '../app/renderer/assets'),
-        to: 'assets',
-      },
-    ]),
-    // Long term caching - https://webpack.js.org/guides/caching/#deterministic-hashes
-    new ChunkManifestPlugin({
-      filename: 'chunk-manifest.json',
-      manifestVariable: 'webpackManifest',
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-    }),
+    new CopyWebpackPlugin([{
+      from: path.join(__dirname, '../app/renderer/assets'),
+      to: 'assets',
+    }]),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
       minChunks: Infinity,
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      children: true,
-      async: true,
-      minChunks: (module, count) => count >= 6,
+      name: 'vendor',
+      chunks: ['vendor', 'main', 'preview', 'menubar'],
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      children: true,
-      async: true,
-      minChunks: chunkIncludes(['codemirror']),
-    }),
-    new WebpackChunkHash(),
-    new webpack.HashedModuleIdsPlugin(),
   ],
   module: {
     noParse: /\.min\.js$/,

@@ -29,17 +29,17 @@ module.exports = merge(config, {
   devtool: 'source-map',
   entry: {
     main: [
-      'webpack-hot-middleware/client',
+      'webpack-hot-middleware/client?path=http://localhost:3001/__webpack_hmr',
       'react-hot-loader/patch',
       path.resolve(__dirname, '../app/renderer/main/index'),
     ],
     menubar: [
-      'webpack-hot-middleware/client',
+      'webpack-hot-middleware/client?path=http://localhost:3001/__webpack_hmr',
       'react-hot-loader/patch',
       path.resolve(__dirname, '../app/renderer/menubar/index'),
     ],
     preview: [
-      'webpack-hot-middleware/client',
+      'webpack-hot-middleware/client?path=http://localhost:3001/__webpack_hmr',
       'react-hot-loader/patch',
       path.resolve(__dirname, '../app/renderer/preview/index'),
     ],
@@ -47,8 +47,7 @@ module.exports = merge(config, {
   },
   output: {
     filename: 'js/[name].js',
-    path: path.resolve(__dirname, '../dist/renderer'),
-    publicPath: '/',
+    publicPath: 'http://localhost:3001/',
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -61,26 +60,6 @@ module.exports = merge(config, {
       name: 'vendor',
       chunks: ['vendor', 'main', 'preview', 'menubar'],
     }),
-//    new webpack.optimize.CommonsChunkPlugin({
-//      children: true,
-//      async: true,
-//      minChunks: (module, count) => count >= 6,
-//    }),
-//    new webpack.optimize.CommonsChunkPlugin({
-//      children: true,
-//      async: true,
-//      minChunks: chunkIncludes(['codemirror']),
-//    }),
-//    new webpack.optimize.CommonsChunkPlugin({
-//      name: 'commonPreview',
-//      filename: 'js/commonPreview.js',
-//      chunks: ['main', 'preview'],
-//    }),    
-//    new webpack.optimize.CommonsChunkPlugin({
-//      name: 'common',
-//      filename: 'js/common.js',
-//      chunks: ['commonPreview', 'menubar'],
-//    }),
   ],
   module: {
     loaders: [
