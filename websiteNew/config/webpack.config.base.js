@@ -37,7 +37,7 @@ module.exports = {
       'lodash.repeat': path.resolve(__dirname, '../node_modules/lodash/repeat'),
       'lodash.keys': path.resolve(__dirname, '../node_modules/lodash/keys'),
       'lodash.debounce': path.resolve(__dirname, '../node_modules/lodash/debounce'),
-      'get-static-path' : path.resolve(__dirname, '../src/client/getStaticPath.js'),
+      'get-root-path' : path.resolve(__dirname, '../src/client/getRootPath.js'),
     },
     extensions: ['.js', '.jsx', '.json', '.scss'],
   },
