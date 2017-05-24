@@ -19,7 +19,7 @@ const Toast = React.createClass({
     this.startHideTimeout()
   },
   startHideTimeout(){
-    this.hideTimeout = setTimeout(this.closeToast, 5000)
+    this.hideTimeout = setTimeout(this.closeToast, 500000)
   },
   closeToast(){
     this.props.dispatch(ToastsActions.hide({id: this.props.toast.id}))
