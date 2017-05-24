@@ -89,7 +89,7 @@ export const Tasks = React.createClass({
     const tasksTemplate = () => {
       const layout = board && board.layout == 'list' ? 'list' : 'board';
       return (
-        <div className="layout-column flex layout-align-center">
+        <div className="layout-column flex">
           <div className={classes.header + ' layout-row layout-align-start-center'}>
             <div className={classes.search}>
               <Input

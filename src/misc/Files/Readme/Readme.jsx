@@ -37,7 +37,7 @@ export default class Readme extends Component {
     }), 1)
   }
   render() {
-    const { files, project, projectModel, isRoot, canEdit, ...otherProps } = this.props
+    const { files, project, projectModel, isRoot, canEdit, saveProject, ...otherProps } = this.props
     const { editActive } = this.state
     const readmeNames = ['readme.md', 'readme.txt']
     const readmeFile = files.find(item => readmeNames.includes(item.name.toLowerCase()))

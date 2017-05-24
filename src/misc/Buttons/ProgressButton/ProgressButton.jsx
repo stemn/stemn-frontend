@@ -81,7 +81,7 @@ export default React.createClass({
     }, 700)
   },
   render() {
-    const { children, onClick, loading, className, href, ...otherProps } = this.props;
+    const { children, onClick, loading, className, href, error, ...otherProps } = this.props;
     const { status, disabled, drawLoading, drawComplete } = this.state;
 
     const Progress = (
@@ -106,10 +106,10 @@ export default React.createClass({
 
     const getIcon = () => {
       if( status == 'success'){
-        return <AnimateSvg draw={drawComplete}>{Checkmark}</AnimateSvg>
+        return <AnimateSvg draw={ drawComplete }>{ Checkmark }</AnimateSvg>
       }
       else if(status == 'error'){
-        return <AnimateSvg draw={drawComplete}>{Cross}</AnimateSvg>
+        return <AnimateSvg draw={ drawComplete }>{ Cross }</AnimateSvg>
       }
       else{
         return null

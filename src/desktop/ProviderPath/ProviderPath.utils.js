@@ -1,4 +1,3 @@
-import Promise        from 'es6-promise';
 import sql            from 'sql.js';
 import path           from 'path';
 import fs             from 'fs';

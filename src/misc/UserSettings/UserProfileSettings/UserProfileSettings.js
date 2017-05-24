@@ -4,7 +4,7 @@ import classes from './UserProfileSettings.css'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 import { Row, Col } from 'stemn-shared/misc/Layout'
-import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
+import Textarea from 'stemn-shared/misc/Input/Textarea'
 import Upload from 'stemn-shared/misc/Upload/Upload'
 import LocationSearch from 'stemn-shared/misc/Search/LocationSearch'
 
@@ -27,7 +27,7 @@ export default class UserProfileSettings extends Component {
               className="dr-input flex"
               type="text"
               placeholder="First Name"
-              style={{marginRight: '7px'}}
+              style={ { marginRight: '7px' } }
             />
             <Input
               model={`${userModel}.data.profile.lastname`}
@@ -35,7 +35,7 @@ export default class UserProfileSettings extends Component {
               className="dr-input flex"
               type="text"
               placeholder="Last Name"
-              style={{marginLeft: '7px'}}
+              style={ { marginLeft: '7px'} }
             />
           </div>
           <br />

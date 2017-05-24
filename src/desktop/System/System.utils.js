@@ -1,7 +1,6 @@
 import fs from 'fs';
 import os from 'os';
 import pify from 'pify';
-import Promise from 'es6-promise';
 import { shell } from 'electron';
 import querystring from 'querystring';
 

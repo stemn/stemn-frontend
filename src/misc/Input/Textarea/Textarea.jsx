@@ -1,7 +1,7 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from 'react'
+import { connect } from 'react-redux'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
-import Textarea from 'react-textarea-autosize';
+import Textarea from 'react-textarea-autosize'
 
 class Component extends React.Component{
   render(){
@@ -20,4 +20,4 @@ class Component extends React.Component{
   }
 };
 
-export default connect(s => s)(Component);
+export default connect()(Component)

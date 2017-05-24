@@ -13,7 +13,6 @@ The application then uses process.argv to start silently
 
 import { stat } from 'fs';
 import { homedir } from 'os';
-import { Promise } from 'es6-promise';
 import pify from 'pify';
 const statAsync = pify(stat);
 

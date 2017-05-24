@@ -1,5 +1,4 @@
 import React from 'react';
-import Promise from 'es6-promise'
 
 import { isWebGlSupported } from './PreviewCad.utils.js';
 import AutodeskLocalViewer from './AutodeskLocalViewer/AutodeskLocalViewer'

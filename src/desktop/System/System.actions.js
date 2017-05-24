@@ -2,7 +2,6 @@ import * as LocalPathActions from 'stemn-shared/desktop/LocalPath/LocalPath.acti
 import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js';
 import { getFullPath }   from 'stemn-shared/misc/Files/Files.actions.js';
 
-import Promise from 'es6-promise';
 import { shell } from 'electron';
 
 export function getProviderPath() {
