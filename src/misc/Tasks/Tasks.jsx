@@ -66,11 +66,11 @@ export const Tasks = React.createClass({
     const guideTemplate = () => {
       const guideInfo = [{
         title: 'Drag and drop to organize your work',
-        description: 'Organize task cards on a kanban-style board. Add due-dates, labels, file references and collaborate with teammates.',
+        description: 'Organize thread cards on a kanban-style board. Add due-dates, labels, file references and collaborate with teammates.',
         image: cardsColumns,
       },{
-        title: 'Track tasks from beginning to end',
-        description: 'See what your team has worked on. Tasks are linked to files as they are completed. View files before and after the task was completed.',
+        title: 'Track threads from beginning to end',
+        description: 'See what your team has worked on. Threads are linked to files as they are completed. View files before and after the thread was completed.',
         image: cardsStacked,
       }]
       return (
@@ -80,7 +80,7 @@ export const Tasks = React.createClass({
             <Guide data={guideInfo[1]}/>
           </div>
           <div className="layout-row layout-align-center">
-            <Button className="primary lg" onClick={this.getStarted}>Get started with Tasks</Button>
+            <Button className="primary lg" onClick={this.getStarted}>Get started with Threads</Button>
           </div>
         </div>
       )
