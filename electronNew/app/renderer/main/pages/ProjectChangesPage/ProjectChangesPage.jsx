@@ -34,8 +34,8 @@ import Button               from 'stemn-shared/misc/Buttons/Button/Button'
 
 
 const guideInfo = [{
-  title: 'Commit changes and check off tasks',
-  description: 'Package recent file changes into a \'commit\' that describes what has changed. Tag teammates and mark related tasks as complete.',
+  title: 'Commit changes and check-off threads',
+  description: 'Package recent file changes into a \'commit\' that describes what has changed. Tag teammates and mark related threads as complete.',
   image: commitChanges,
 },{
   title: 'Review recent file changes',

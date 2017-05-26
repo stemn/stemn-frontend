@@ -79,3 +79,16 @@
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
+.cta {
+  background: white;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 40px 0 80px 0;
+  p {
+    margin-bottom: 40px;
+  }
+
+  a {
+    margin: 10px;
+    width: 180px;
+  }
+}

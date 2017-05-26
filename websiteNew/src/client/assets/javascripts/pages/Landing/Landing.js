@@ -90,6 +90,29 @@ export default class Landing extends Component {
             </Col>
           </Row>
         </Container>
+        <div className={ classes.cta }>
+          <Container className="layout-column layout-align-center-center text-center">
+            <h4 className="text-title-2">Ready?</h4>
+            <p className="text-title-4">Get started for free. Download the desktop app and sign up.</p>
+
+              { isMobile()
+              ? <Button className={ classes.downloadButton + ' secondary lg'} name="loginRoute">
+                  <MdLock size={ 20 } style={ { marginRight: '10px' } } />
+                  Get Started
+                </Button>
+              : <div className="layout-row layout-xs-column layout-align-center">
+                  <DownloadButton className={ classes.downloadButton + ' secondary lg'} platform="auto" >
+                    Download Now
+                  </DownloadButton>
+                  <Button className={ classes.downloadButton + ' primary lg'} name="loginRoute">
+                    <MdLock size={ 20 } style={ { marginRight: '10px' } } />
+                    Sign up
+                  </Button>
+                </div>
+              }
+
+          </Container>
+        </div>
 
       </LandingLayout>
     )

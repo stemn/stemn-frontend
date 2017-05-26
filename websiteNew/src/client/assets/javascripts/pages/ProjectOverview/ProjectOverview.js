@@ -37,6 +37,8 @@ export default class ProjectOverview extends Component {
 
   render() {
     const { canEdit, entityModel, project, path, files, isFilePage, saveProject } = this.props
+    const isConnected = get(project, 'data.remote.connected', false)
+
     const options = {
       showMenu: true
     }
@@ -133,16 +135,18 @@ export default class ProjectOverview extends Component {
             { !isFilePage 
             ? imageInfoSection 
             : null }
-            <FileList
-              className={ classes.files }
-              projectId={ project.data._id }
-              path={ path || '' }
-              crumbClickFn={ this.clickFileOrFolder }
-              options={ options }
-              crumbPopup
-              search
-              link
-            />
+            { isConnected &&
+              <FileList
+                className={ classes.files }
+                projectId={ project.data._id }
+                path={ path || '' }
+                crumbClickFn={ this.clickFileOrFolder }
+                options={ options }
+                crumbPopup
+                search
+                link
+              />
+            }
             <Readme
               files={ get(files, 'entries', []) }
               project={ project }
