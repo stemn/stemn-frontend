@@ -1,0 +1,111 @@
+#!/usr/bin/env bash
+
+if [ "$(uname)" == 'Darwin' ]; then
+  OS='Mac'
+elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+  OS='Linux'
+elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' ]; then
+  OS='Cygwin'
+else
+  echo "Your platform ($(uname -a)) is not supported."
+  exit 1
+fi
+
+while getopts ":wtfvh-:" opt; do
+  case "$opt" in
+    -)
+      case "${OPTARG}" in
+        wait)
+          WAIT=1
+          ;;
+        help|version)
+          REDIRECT_STDERR=1
+          EXPECT_OUTPUT=1
+          ;;
+        foreground|test)
+          EXPECT_OUTPUT=1
+          ;;
+      esac
+      ;;
+    w)
+      WAIT=1
+      ;;
+    h|v)
+      REDIRECT_STDERR=1
+      EXPECT_OUTPUT=1
+      ;;
+    f|t)
+      EXPECT_OUTPUT=1
+      ;;
+  esac
+done
+
+if [ $REDIRECT_STDERR ]; then
+  exec 2> /dev/null
+fi
+
+if [ $OS == 'Mac' ]; then
+  STEMN_APP_NAME=stemn.app
+
+  if [ -z "${STEMN_PATH}" ]; then
+    # If STEMN_PATH isnt set, check /Applications and then ~/Applications for stemn.app
+    if [ -x "/Applications/$STEMN_APP_NAME" ]; then
+      STEMN_PATH="/Applications"
+    elif [ -x "$HOME/Applications/$STEMN_APP_NAME" ]; then
+      STEMN_PATH="$HOME/Applications"
+    else
+      # We havent found an stemn.app, use spotlight to search for stemn
+      STEMN_PATH="$(mdfind "kMDItemCFBundleIdentifier == 'com.github.stemn'" | grep -v ShipIt | head -1 | xargs -0 dirname)"
+
+      # Exit if stemn can't be found
+      if [ ! -x "$STEMN_PATH/$STEMN_APP_NAME" ]; then
+        echo "Cannot locate stemn.app, it is usually located in /Applications. Set the STEMN_PATH environment variable to the directory containing stemn.app."
+        exit 1
+      fi
+    fi
+  fi
+
+  if [ $EXPECT_OUTPUT ]; then
+    "$STEMN_PATH/$STEMN_APP_NAME/Contents/MacOS/stemn" --executed-from="$(pwd)" --pid=$$ "$@"
+    exit $?
+  else
+    open -a "$STEMN_PATH/$STEMN_APP_NAME" -n --args --executed-from="$(pwd)" --pid=$$ --path-environment="$PATH" "$@"
+  fi
+elif [ $OS == 'Linux' ]; then
+  SCRIPT=$(readlink -f "$0")
+  USR_DIRECTORY=$(readlink -f $(dirname $SCRIPT)/..)
+  STEMN_PATH="/opt/stemn/stemn"
+  STEMN_HOME="${STEMN_HOME:-$HOME/.stemn}"
+
+  mkdir -p "$STEMN_HOME"
+
+  : ${TMPDIR:=/tmp}
+
+  [ -x "$STEMN_PATH" ] || STEMN_PATH="$TMPDIR/stemn-build/stemn/stemn"
+
+  if [ $EXPECT_OUTPUT ]; then
+    "$STEMN_PATH" --executed-from="$(pwd)" --pid=$$ "$@"
+    exit $?
+  else
+    (
+    nohup "$STEMN_PATH" --executed-from="$(pwd)" --pid=$$ "$@" > "$STEMN_HOME/nohup.out" 2>&1
+    if [ $? -ne 0 ]; then
+      cat "$STEMN_HOME/nohup.out"
+      exit $?
+    fi
+    ) &
+  fi
+fi
+
+# Exits this process when stemn is used as $EDITOR
+on_die() {
+  exit 0
+}
+trap 'on_die' SIGQUIT SIGTERM
+
+# If the wait flag is set, don't exit this process until stemn tells it to.
+if [ $WAIT ]; then
+  while true; do
+    sleep 1
+  done
+fi

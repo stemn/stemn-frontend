@@ -1,0 +1,57 @@
+@value primary, height-header, sidebar-bg, sidebar-text-1, sidebar-text-2, sidebar-footer, secondary, sidebar-search-border, sidebar-search-bg, sidebar-search-border, sidebar-search-text from "theme";
+
+.overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.animateOverlay{
+  transition: 0.3s ease opacity;
+  opacity: 0;
+}
+.animateOverlayShow{
+  opacity: 1;
+}
+
+.sidebar{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  width: 250px;
+  background: sidebar-bg;
+  color: sidebar-text-2;
+  transition: 0.3s ease all;
+  transform: translateX(-100%);
+}
+.sidebarShow{
+  transform: translateX(0);
+}
+
+.sidebarSearch{
+  position: relative;
+  margin: 10px;
+}
+.sidebarSearch input{
+  padding: 6px;
+  height: auto;
+  padding-right: 40px;
+  border: 1px solid sidebar-search-border;
+  background: sidebar-search-bg;
+  color: sidebar-search-text !important;
+}
+.sidebarSearch input:focus{
+  border: 1px solid sidebar-search-border;
+}
+.sidebarSearchIcon{
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  bottom: 0;
+  color: sidebar-search-text;
+}
+

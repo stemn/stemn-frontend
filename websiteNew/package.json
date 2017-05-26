@@ -86,6 +86,7 @@
     "redux-slider-monitor": "1.0.7",
     "rimraf": "2.5.4",
     "sass-loader": "4.0.1",
+    "script-loader": "0.7.0",
     "snazzy": "6.0.0",
     "ssh-promise": "2.1.0",
     "standard": "10.0.0",

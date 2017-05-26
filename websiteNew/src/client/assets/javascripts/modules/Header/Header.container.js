@@ -5,7 +5,7 @@ import Header from './Header';
 import { logout } from 'stemn-shared/misc/Auth/Auth.actions.js';
 import { showModal } from 'stemn-shared/misc/Modal/Modal.actions.js';
 
-import ProjectNewModalName from 'stemn-shared/misc/Projects/ProjectNewModal/ProjectNewModal.jsx'
+import ProjectNewModalName from 'stemn-shared/misc/Projects/ProjectNewModal'
 
 const stateToProps = ({ auth, notifications }) => ({
   auth,

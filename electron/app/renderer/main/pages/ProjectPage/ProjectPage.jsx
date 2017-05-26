@@ -8,7 +8,7 @@ import * as SystemActions from 'stemn-shared/desktop/System/System.actions.js';
 // Component Core
 import React from 'react';
 import { Link } from 'react-router';
-import { has } from 'lodash';
+import { has, get } from 'lodash';
 
 // Components
 import Tabs from 'stemn-shared/misc/Tabs/Tabs'
@@ -88,13 +88,13 @@ class Component extends React.Component{
     }
 
     const getVisibilityPopup = () => {
-      return project.data.permissions.projectType == 'public'
+      return get(project, 'data.private')
       ? <PopoverDetails>
-          <div className="header">Public Project</div>
+          <div className="header">Private project</div>
           <div className="body" style={{paddingTop: '5px'}}>
-            <div className="layout-row layout-align-center"><img src={globalVector} style={{height: '80px'}}/></div>
-            <p>Your project data is public - it will be accessible on stemn.com.</p>
-            <p>Your data and files will be visible to everyone - only team-members can edit.</p>
+            <div className="layout-row layout-align-center"><img src={folderLockedVector} style={{height: '80px'}}/></div>
+            <p>Your project data is private - it will not be accessible on stemn.com.</p>
+            <p>Consider open-sourcing this project or upgrading to Stemn Pro to access additional features such as infinite revision history.</p>
           </div>
           <div className="footer layout-row">
             <a className="link-primary" href={`https://stemn.com/projects/${project.data._id}`}>View online</a>
@@ -103,11 +103,11 @@ class Component extends React.Component{
           </div>
         </PopoverDetails>
       : <PopoverDetails>
-          <div className="header">Private project</div>
+          <div className="header">Public Project</div>
           <div className="body" style={{paddingTop: '5px'}}>
-            <div className="layout-row layout-align-center"><img src={folderLockedVector} style={{height: '80px'}}/></div>
-            <p>Your project data is private - it will not be accessible on stemn.com.</p>
-            <p>Consider open-sourcing this project or upgrading to Stemn Pro to access additional features such as infinite revision history.</p>
+            <div className="layout-row layout-align-center"><img src={globalVector} style={{height: '80px'}}/></div>
+            <p>Your project data is public - it will be accessible on stemn.com.</p>
+            <p>Your data and files will be visible to everyone - only team-members can edit.</p>
           </div>
           <div className="footer layout-row">
             <a className="link-primary" href={`https://stemn.com/projects/${project.data._id}`}>View online</a>
@@ -134,11 +134,9 @@ class Component extends React.Component{
             </div>
             <Popover preferPlace="below" tipSize={6} trigger="click">
               <SimpleIconButton title="Visibility Settings">
-                { has(project, 'data.permissions.projectType') && project.data.permissions.projectType == 'public'
-                ? <PublicPrivateIcon type="public" size={ 20 } />
-                : <PublicPrivateIcon type="private" size={ 20 } /> }
+                <PublicPrivateIcon private={ get(project, 'data.private') } size={ 20 } />
               </SimpleIconButton>
-              {has(project, 'data.permissions.projectType') ? getVisibilityPopup() : null}
+              { getVisibilityPopup() }
             </Popover>
             <div className="divider"></div>
             <SimpleIconButton activeClassName="active" to={baseLink+'/settings'} title="Project Settings">

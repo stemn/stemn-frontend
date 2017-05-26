@@ -30,11 +30,10 @@ export default React.createClass({
     const { entityModel, project, path, files, saveProject } = this.props;
     const options = {
       showMenu: true
-    };
+    }
     if(project && project.data && project.data._id){
       return (
         <div className={classes.container+' flex scroll-box'}>
-
           <FileList
             className={ classes.files }
             projectId={ project.data._id }
@@ -46,16 +45,16 @@ export default React.createClass({
             crumbPopup
             search
           />
-
           <Readme
             files={ get(files, 'entries', []) }
             project={ project }
             projectModel={ entityModel }
             saveProject={ saveProject }
             isRoot={ !path || path === '' }
+            canEdit
           />
         </div>
-      );
+      )
     }
     else{
       return null
