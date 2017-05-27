@@ -85,7 +85,6 @@ export const Tasks = React.createClass({
         </div>
       )
     }
-
     const tasksTemplate = () => {
       const layout = board && board.layout == 'list' ? 'list' : 'board';
       return (
@@ -119,7 +118,11 @@ export const Tasks = React.createClass({
               <TasksFilterMenu model={`${boardModel}.searchString`} value={board.searchString}/>
             </Popover>
           </div>
-          <TaskList className={classes.tasks} board={filterBoard(board, tasks, board.searchString)} layout={layout}/>
+          <TaskList
+            className={ classes.tasks }
+            board={ filterBoard(board, tasks, board.searchString) }
+            layout={ layout }
+          />
         </div>
       )
     }
