@@ -35,6 +35,7 @@ export default class EditorNew extends Component {
     hideToolbar: PropTypes.bool,
     change: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
+    autoFocus: PropTypes.bool,
   }
   constructor(props) {
     super(props)
@@ -48,17 +49,20 @@ export default class EditorNew extends Component {
   }
   focus = () => {}
   getCodeMirror = (ref) => {
+    const { autoFocus } = this.props
     if (ref) {
       const codemirror = ref.getCodeMirror()
       this.focus = ref.focus
       this.setState({
         codemirror,
       })
-      this.focus()
+      if (autoFocus) {
+        this.focus()
+      }
     }
   }
   render() {
-    const { model, change, value, hideToolbar, placeholder, ...otherProps } = this.props
+    const { model, change, value, hideToolbar, placeholder, tabIndex, ...otherProps } = this.props
     const { codemirror } = this.state
 
     const options = {
@@ -68,6 +72,7 @@ export default class EditorNew extends Component {
       lineWrapping: true,
       styleSelectedText: true,
       placeholder,
+      tabindex: tabIndex,
     }
 
     return (
