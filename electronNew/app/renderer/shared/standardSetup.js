@@ -40,20 +40,23 @@ export default (store, rendererType) => {
   const oldOnError = window.onerror
   window.onerror = function() {
     if (!exceptionHandler.isOpen) {
-      exceptionHandler.isOpen = true
-      remote.dialog.showMessageBox({
-        title: 'Somthing went wrong',
-        message: `Looks like there is a bug here. This has been sent for analysis.\r\r${JSON.stringify(arguments[0])}`,
-        buttons: ['Try again', 'Restart'],
-      }, (response) => {
-        if (response === 0) {
-          window.history.back()
-          location.reload()
-        } else if (response === 1) {
-          store.dispatch(relaunch())
-        }
-        exceptionHandler.isOpen = false
-      })
+
+//      if (arguments) {
+//        exceptionHandler.isOpen = true
+//        remote.dialog.showMessageBox({
+//          title: 'Somthing went wrong',
+//          message: `Looks like there is a bug here. This has been sent for analysis.\r\r${JSON.stringify(arguments[0])}`,
+//          buttons: ['Try again', 'Restart'],
+//        }, (response) => {
+//          if (response === 0) {
+//            window.history.back()
+//            location.reload()
+//          } else if (response === 1) {
+//            store.dispatch(relaunch())
+//          }
+//          exceptionHandler.isOpen = false
+//        })
+//      }
 
       // Call any previously assigned handler
       if (oldOnError) {

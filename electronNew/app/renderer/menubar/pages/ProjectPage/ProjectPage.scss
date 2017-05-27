@@ -1,0 +1,12 @@
+.commitBox {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.03);
+  transition: height 0.3s ease;
+  height: 60px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  &.open {
+    height: 218px;
+  }
+}

@@ -9,8 +9,10 @@ import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js
 // Component Core
 import React from 'react';
 import { has } from 'lodash';
+
 // Styles
-import classNames from 'classnames';
+import classNames from 'classnames'
+import classes from './ProjectPage.scss'
 
 // Sub Components
 import LoadingOverlay     from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
@@ -43,14 +45,12 @@ export const Component = React.createClass({
       projectId: this.props.project.data._id
     })
   },
-
   toggleAll(value){
     return this.props.changesActions.toggleAll({
       value,
       projectId: this.props.project.data._id
     })
   },
-
   commitFn(){
     this.props.changesActions.commit({
       projectId: this.props.project.data._id,
@@ -94,48 +94,38 @@ export const Component = React.createClass({
 
     const getChangesAndBox = () => {
       if(changes && changes.data){
-        const commitBoxStyles = (changes.summary && changes.summary.length > 0) ? {
-          height: '200px',
-          borderTop: '1px solid rgba(0, 0, 0, 0.1)',
-          background: 'rgba(0, 0, 0, 0.03)',
-          transition: 'height 0.3s ease'
-        } : {
-          height: '60px',
-          borderTop: '1px solid rgba(0, 0, 0, 0.1)',
-          background: 'rgba(0, 0, 0, 0.03)',
-          transition: 'height 0.3s ease'
-        };
+
         return (
           <div className="layout-column flex">
             <CommitChanges
-              changes={changes}
-              project={project.data}
-              toggleAll={this.toggleAll}
-              selectedFileChange={changesActions.selectedFileChange}
-              deselect={this.deselect}
-              refresh={this.refresh}
-              dispatch={dispatch}/>
-            <div style={commitBoxStyles}>
-              <CommitBox
-                entityModel={entityModel}
-                changes={changes}
-                changesActions={changesActions}
-                commitFn={()=>this.commitFn()}
-                project={project.data}/>
-            </div>
+              changes= { changes }
+              project={ project.data }
+              toggleAll={ this.toggleAll }
+              selectedFileChange={ changesActions.selectedFileChange }
+              deselect={ this.deselect }
+              refresh={ this.refresh }
+              dispatch={ dispatch }
+            />
+            <CommitBox
+              className={ classNames(classes.commitBox, {[classes.open] : changes.summary && changes.summary.length > 0 })}
+              entityModel={ entityModel }
+              changes={ changes }
+              changesActions={ changesActions }
+              commitFn={ () => this.commitFn() }
+              project={ project.data }
+            />
           </div>
         )
       }
     }
-
 
     return (
       <div className="layout-column flex">
         <Toolbar menu={true}>
           <div className="flex">{project && project.data && project.data.name ? stringConcat.end(project.data.name, 28) : ''}</div>
         </Toolbar>
-        {getInnerContent()}
-        <LoadingOverlay show={project && project.loading} />
+        { getInnerContent() }
+        <LoadingOverlay show={ project && project.loading } />
       </div>
     )
   }
