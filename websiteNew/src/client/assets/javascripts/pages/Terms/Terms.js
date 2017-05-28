@@ -3,11 +3,15 @@ import StandardLayout from 'layout/StandardLayout';
 
 import classes from 'layout/layout.css';
 import Link from 'stemn-shared/misc/Router/Link'
+import { Helmet } from "react-helmet";
 
 export default class Terms extends Component {
   render() {
     return (
       <StandardLayout contained style={ { marginTop: '30px' } } className={ classes.staticPage }>
+        <Helmet>
+          <title>Terms</title>
+        </Helmet>
         <h1>Terms</h1>
         <p>
           <strong>

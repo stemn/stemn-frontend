@@ -10,6 +10,16 @@ import PanelDescription from 'stemn-shared/misc/Panels/PanelDescription'
 import classNames from 'classnames'
 
 export default class OnboardingDownload extends Component {
+  static propTypes = {
+    completeOnboarding: PropTypes.func.isRequired, // Mark onboarding as complete
+    saveSettings: PropTypes.func.isRequired,       // Save the settings object
+  }
+  componentDidMount() {
+    // Once we get to the page, we mark the user onboarding as complete
+    const { completeOnboarding, saveSettings } = this.props
+    completeOnboarding()
+    setTimeout(() => saveSettings())
+  }
   render() {
     return (
       <PanelDescription

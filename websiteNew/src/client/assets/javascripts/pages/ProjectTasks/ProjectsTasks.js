@@ -39,7 +39,7 @@ export default class ProjectsTasks extends Component {
       cacheKey: filterCacheKey,
       filterObject: {
         ...filter.object,
-        users: [ userId ],
+        user: userId,
       },
       filterModel,
       location: 'replace',
@@ -133,7 +133,7 @@ export default class ProjectsTasks extends Component {
               </PopoverDropdown>
               <PopoverDropdown
                 className="flex-xs"
-                value={ get(filter, ['object', 'users', '0']) }
+                value={ get(filter, ['object', 'user']) }
                 options={ userFilterOptions }
                 style={ { marginRight: '15px'} }
               >

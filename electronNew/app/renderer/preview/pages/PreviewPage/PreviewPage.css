@@ -1,0 +1,26 @@
+.timeline {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.sidebar {
+  background: white;
+  overflow-y: auto;
+  width: 450px;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  flex: 1;
+  padding: 30px;
+}
+
+.preview {
+  background: white;
+}
+
+.sidebarTitle {
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.sidebarTitle:first-child {
+  margin-top: 0;
+}

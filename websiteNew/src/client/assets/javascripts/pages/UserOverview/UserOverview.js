@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 import classes from './UserOverview.css';
 import classNames from 'classnames';
-import { orderBy } from 'lodash';
+import { orderBy, values, sum } from 'lodash';
 import { Row, Col } from 'stemn-shared/misc/Layout'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
 import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical';
@@ -33,8 +33,14 @@ export default class UserOverview extends Component {
     return classes[`s${normaliseValue(value.count)}`];
   }
   render() {
-    const { user, projects, timeline } = this.props;
-    
+    const { user, projects, timeline, history } = this.props;
+    const heatMapData = history && history.data
+      ? history.data.map(item => ({
+          date: item.date,
+          count: sum(values(item.counts))
+        }))
+      : []
+
     const projectsToDisplay = orderBy(projects.data,'updated', 'desc').slice(0, 4);
     return (
       <div>
@@ -58,7 +64,7 @@ export default class UserOverview extends Component {
           <CalendarHeatmap
             numDays={280}
             gutterSize={2}
-            values={ user.commitHistory && user.commitHistory.data ? user.commitHistory.data : [] }
+            values={ heatMapData }
             classForValue={ this.getColorClass }
           />
         </div>

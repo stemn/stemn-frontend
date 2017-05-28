@@ -3,9 +3,9 @@ import classes from './ProjectCommits.css'
 import classNames from 'classnames'
 import moment from 'moment'
 import { get } from 'lodash'
-import { Container } from 'stemn-shared/misc/Layout'
+import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
-import HistoryGraph from 'stemn-shared/misc/Graphs/HistoryGraph'
+import HistoryGraph from 'stemn-shared/misc/History/HistoryGraph'
 import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
 import SubSubHeader from 'modules/SubSubHeader'
@@ -58,24 +58,31 @@ export default class ProjectCommits extends Component {
     })
   }
   renderLoaded() {
-    const { project, syncTimeline, location, page, size, filter, filterIsDefault } = this.props
+    const { project, syncTimeline, location, page, size, filter, filterIsDefault, board } = this.props
+
     const noMoreResults = syncTimeline && syncTimeline.data.length < size
     const hasResults = syncTimeline && syncTimeline.data  && syncTimeline.data.length > 0
     const projectRouteParams = {
       projectId: project.data._id,
     }
-
     if (hasResults) {
       return (
         <div>
           <div className={ classes.graphPanel }>
-            <HistoryGraph />
+            <HistoryGraph
+              entityType={ filter.object.user ? 'user' : 'project' }
+              entityId={ filter.object.user ? filter.object.user : project.data._id }
+              type={ filter.object.type }
+              parentType={ filter.object.user ? 'project' : undefined }
+              parentId={ filter.object.user ? project.data._id : undefined }
+            />
           </div>
           <InfoPanel>
             <TimelineVertical
               group
               items={ syncTimeline.data }
               type="project"
+              entity={ board }
             />
           </InfoPanel>
           <Pagination
@@ -113,9 +120,9 @@ export default class ProjectCommits extends Component {
     })
 
     const typeFilterOptions = [{
-      value: 'all',
+      value: undefined,
       name: 'All',
-      onClick: () => { this.changeTypeFilter('all') },
+      onClick: () => { this.changeTypeFilter(undefined) },
     }, {
       value: 'commits',
       name: 'Commits',
@@ -125,34 +132,51 @@ export default class ProjectCommits extends Component {
       name: 'Revisions',
       onClick: () => { this.changeTypeFilter('revisions') },
     }, {
-      value: 'task-complete',
-      name: 'Task Complete',
-      onClick: () => { this.changeTypeFilter('task-complete') },
-    }]
+      value: 'tasks',
+      name: 'Thread Created',
+      onClick: () => { this.changeTypeFilter('tasks') },
+    }, {
+      value: 'taskEvents',
+      name: 'Thread Events',
+      onClick: () => { this.changeTypeFilter('taskEvents') },
+    }, ]
 
     return (
       <div className={ classes.content }>
         <SubSubHeader className={ classes.subHeader }>
+          <Row className="layout-xs-column layout-gt-xs-row">
+            <Col className="flex-xs flex-sm flex-gt-sm-30 layout-row">
+              <SearchInput
+                className={ classes.search }
+                placeholder="Search History"
+                value={ filter.string }
+                changeAction={ this.changeInput }
+              />
+            </Col>
+            <div className="flex-xs-0 flex-sm-0 flex-gt-sm" />
+            <Col className="layout-row">
+              <PopoverDropdown
+                className="flex-xs"
+                value={ get(filter, ['object', 'user']) }
+                options={ userFilterOptions }
+                style={ { marginRight: '15px'} }
+              >
+                User:&nbsp;
+              </PopoverDropdown>
+              <PopoverDropdown
+                className="flex-xs"
+                value={ filter.object.type }
+                options={ typeFilterOptions }
+              >
+                Type:&nbsp;
+              </PopoverDropdown>
+            </Col>
+          </Row>
+
           <div className="layout-row">
-            <SearchInput
-              placeholder="Search History"
-              value={ filter.string }
-              changeAction={ this.changeInput }
-            />
+
             <div className="flex" />
-            <PopoverDropdown
-              value={ get(filter, ['object', 'user']) }
-              options={ userFilterOptions }
-              style={ { marginRight: '15px'} }
-            >
-              User:&nbsp;
-            </PopoverDropdown>
-            <PopoverDropdown
-              value={ filter.object.type }
-              options={ typeFilterOptions }
-            >
-              Type:&nbsp;
-            </PopoverDropdown>
+
           </div>
         </SubSubHeader>
         <div className={ classes.innerContent }>

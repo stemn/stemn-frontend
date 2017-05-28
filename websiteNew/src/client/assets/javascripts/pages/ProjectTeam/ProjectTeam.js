@@ -5,7 +5,7 @@ import classes from './ProjectTeam.scss'
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import Link from 'stemn-shared/misc/Router/Link'
-import HistoryGraph from 'stemn-shared/misc/Graphs/HistoryGraph'
+import HistoryGraph from 'stemn-shared/misc/History/HistoryGraph'
 import SocialButton from 'stemn-shared/misc/Social/SocialButton'
 
 export default class ProjectTeam extends Component {
@@ -37,13 +37,12 @@ export default class ProjectTeam extends Component {
                           shape="square"
                         />
                       </Link>
-                      <div className="layout-column">
-                        <Link className="link-primary" name="userRoute" params={ userLinkParams }>
+                      <div className="layout-column flex">
+                        <Link className="link-primary text-ellipsis" name="userRoute" params={ userLinkParams }>
                           { user.name }
                         </Link>
-                        <div className={ classes.blurb }>{ user.blurb }</div>
+                        <div className={ classNames(classes.blurb, 'text-ellipsis') }>{ user.blurb }</div>
                       </div>
-                      <div className="flex" />
                       <SocialButton
                         style={ { marginLeft: '10px' } }
                         type="follow"
@@ -53,7 +52,12 @@ export default class ProjectTeam extends Component {
                     </div>
                     <div className={ classes.graph }>
                       <Link name="projectCommitsRoute" params={ historyParams } query={ historyQuery } className="layout-row">
-                        <HistoryGraph />
+                        <HistoryGraph
+                          entityType="user"
+                          entityId={ user._id }
+                          parentType="project"
+                          parentId={ project.data._id}
+                        />
                       </Link>
                     </div>
                   </div>

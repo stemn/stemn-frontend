@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux'
+import { replace } from 'react-router-redux'
 import { bindActionCreators } from 'redux';
 
 const stateToProps = ({ auth }) => ({
@@ -9,7 +9,7 @@ const stateToProps = ({ auth }) => ({
 });
 
 const dispatchToProps = {
-  goHome: () => push('/')
+  goHome: () => replace('/')
 };
 
 @connect(stateToProps, dispatchToProps)

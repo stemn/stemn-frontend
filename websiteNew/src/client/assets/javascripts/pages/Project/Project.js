@@ -1,12 +1,11 @@
 import React, { Component, PropTypes } from 'react'
-
 import classNames from 'classnames'
 import classes from './Project.css'
-
+import { Helmet } from "react-helmet";
 import StandardLayout from 'layout/StandardLayout'
 import Tabs from 'stemn-shared/misc/Tabs/Tabs'
 import { Container } from 'stemn-shared/misc/Layout'
-import { get } from 'lodash'
+import { get, has } from 'lodash'
 import Link from 'stemn-shared/misc/Router/Link'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import SubHeader from 'modules/SubHeader'
@@ -20,7 +19,7 @@ class Project extends Component {
     const routeParams = { projectId: get(project, 'data._id') }
     const publicIcon = (
       <PublicPrivateIcon
-        type={ get(project, 'data.permissions.projectType', 'public') }
+        private={ get(project, 'data.private') }
         style={ { marginRight: '8px' } }
         size={ 30 }
       />
@@ -28,6 +27,9 @@ class Project extends Component {
 
     return (
       <StandardLayout style={ { marginTop: '30px' } } nofooter>
+        <Helmet>
+          { has(project, 'data.name') && <title>{ `${project.data.name}: ${project.data.blurb}` }</title> }
+        </Helmet>
         <SubHeader
           title={ get(project, 'data.name', ' ') || 'Untitled Project' }
           noline
@@ -59,7 +61,7 @@ class Project extends Component {
               activeIf={ { includes: ['projectTasksRoute'] } }
               name="projectTasksRoute" params={ routeParams }
             >
-              { get(project, 'data.numThreads', 0) } Threads
+              Threads
             </Link>
             <IsOwner
               team={ get(project, 'data.team', []) }

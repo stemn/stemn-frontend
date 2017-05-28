@@ -34,13 +34,17 @@ import fields           from 'stemn-shared/misc/Fields/Fields.reducer.js'
 import relatedFields    from 'stemn-shared/misc/RelatedFields/RelatedFields.reducer.js'
 import userSettings     from 'stemn-shared/misc/UserSettings/UserSettings.reducer.js'
 import stringFilter     from 'stemn-shared/misc/StringFilter/StringFilter.reducer.js'
+import history          from 'stemn-shared/misc/History/History.reducer.js'
 
-export default combineReducers({
+import storeReducer     from 'stemn-shared/misc/Store/Store.reducer.js'
+
+const splitReducers = combineReducers({
   auth,
   autosuggest,
   changes,
   codeSplitting,
   comments,
+  history,
   commits,
   fileCompare,
   fileList,
@@ -71,3 +75,10 @@ export default combineReducers({
   userSettings,
   stringFilter,
 })
+
+export default (state, action) => {
+  const isStoreAction = action && action.type && action.type.startsWith('STORE/')
+  return isStoreAction
+    ? storeReducer(state, action)
+    : splitReducers(state, action)
+}

@@ -6,7 +6,7 @@ import { Container } from 'stemn-shared/misc/Layout'
 import Tabs from 'stemn-shared/misc/Tabs/Tabs'
 import Link from 'stemn-shared/misc/Router/Link'
 import { has, get } from 'lodash'
-
+import { Helmet } from "react-helmet";
 import classes from './Field.scss'
 import classNames from 'classnames'
 
@@ -15,6 +15,11 @@ export default class Field extends Component {
     const { field, params, children } = this.props
     return (
       <StandardLayout>
+        <Helmet>
+          { get(field, 'data.name') &&
+            <title>{ field.data.name }</title>
+          }
+        </Helmet>
         <SubHeader title={ get(field, 'data.name', '') }>
         </SubHeader>
         <Container style={ { marginTop: '30px' } }>

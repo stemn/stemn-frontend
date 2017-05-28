@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc';
-
-import { getCommit } from 'stemn-shared/misc/Commits/Commits.actions.js';
-
-import ProjectCommit from './ProjectCommit';
+import { getCommit } from 'stemn-shared/misc/Commits/Commits.actions.js'
+import ProjectCommit from './ProjectCommit'
 
 const stateToProps = ({ projects, commits }, { params }) => {
   const projectId = params.stub;

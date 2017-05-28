@@ -17,25 +17,9 @@ import { actions } from 'react-redux-form';
 
 import NavPill from 'stemn-shared/misc/Buttons/NavPill/NavPill'
 
-/////////////////////////////////////////////////////////////////////////////
-///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-
-//const onMount = (nextProps, prevProps) => {
-//  if(nextProps.project && nextProps.project.data){
-//    if(!prevProps || nextProps.project.data._id !== prevProps.project.data._id){
-//    }
-//  }
-//}
-
 export const Component = React.createClass({
-
-//  // Mounting
-//  componentWillMount() { onMount(this.props) },
-//  componentWillReceiveProps(nextProps) { onMount(nextProps, this.props)},
-
   render() {
-    const { entityModel, project, ProjectsActions, dispatch } = this.props;
+    const { entityModel, project } = this.props;
     const baseLink = project && project.data && project.data._id ? `project/${project.data._id}` : '';
 
     return (
@@ -45,9 +29,10 @@ export const Component = React.createClass({
             <NavPill className="primary" href={`https://stemn.com/projects/${project.data.stub}`}>View project on stemn.com</NavPill>
           </div>
           <div className={classes.panel} style={{padding: '0px'}}>
-            <NavPill to={`${baseLink}/settings`} onlyActiveOnIndex={true}>General Settings</NavPill>
-            <NavPill to={`${baseLink}/settings/tasks`}>Task Settings</NavPill>
-            <NavPill to={`${baseLink}/settings/team`}>Team Settings</NavPill>
+            <NavPill to={`${baseLink}/settings`} onlyActiveOnIndex={true}>General</NavPill>
+            <NavPill to={`${baseLink}/settings/permissions`}>Permissions</NavPill>
+            <NavPill to={`${baseLink}/settings/tasks`}>Threads</NavPill>
+            <NavPill to={`${baseLink}/settings/team`}>Team</NavPill>
           </div>
         </div>
         <div style={{width: '650px'}}>
@@ -59,22 +44,12 @@ export const Component = React.createClass({
 });
 
 
-/////////////////////////////////////////////////////////////////////////////
-///////////////////////////////// CONTAINER /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-
-function mapStateToProps({projects, projectSettings}, otherProps) {
+function mapStateToProps({projects}, otherProps) {
   return {
     project: projects.data[otherProps.params.stub],
     entityModel: `projects.data.${otherProps.params.stub}`
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-    ProjectsActions: bindActionCreators(ProjectsActions, dispatch),
-  }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps)(Component);

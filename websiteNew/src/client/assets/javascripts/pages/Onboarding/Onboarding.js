@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 
 import { ArrowTabs, ArrowTab } from 'stemn-shared/misc/Tabs/ArrowTabs/ArrowTabs.jsx';
 import { Container } from 'stemn-shared/misc/Layout'
-
+import { Helmet } from "react-helmet";
 import classes from './Onboarding.scss'
 import classNames from 'classnames'
 
@@ -12,6 +12,9 @@ export default class Onboarding extends Component {
 
     return (
       <div>
+        <Helmet>
+          <title>Welcome to Stemn</title>
+        </Helmet>
         <div className={ classNames(classes.header, 'layout-row layout-align-start-center') }>
           <Container>
             <ArrowTabs className="layout-row flex">
@@ -30,7 +33,7 @@ export default class Onboarding extends Component {
         <Container className={ classes.content }>
           <div className={ classes.title }>
             <div className="text-title-2">Setup Sync</div>
-            <div className="text-title-4">Nice! You'll have STEMN up and running very soon</div>
+            <div className="text-title-4">Nice! You'll have Stemn up and running very soon</div>
           </div>
           { user && user.dataSize === 'lg' ? children : null }
         </Container>

@@ -1,0 +1,51 @@
+@value primary from "theme";
+
+.badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  &:hover {
+    .bubble {
+      width: 30px;
+      span {
+        opacity: 1;
+      }
+    }
+  }
+
+  .arrow {
+    width: 0;
+    height: 0;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-right: 8px solid primary;
+    position: absolute;
+    left: 34px;
+    top: 8px;
+    transform: rotate(-42deg);
+  }
+
+  .bubble {
+    top: 0;
+    left: 36px;
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: primary;
+    color: white;
+    border-radius: 7px;
+    transition: 0.2s ease all;
+    font-size: 9px;
+    padding: 2px 4px;
+    font-weight: bold;
+    overflow: hidden;
+    text-transform: capitalize;
+    span {
+      transition: 0.1s ease all;
+      opacity: 0;
+    }
+  }
+}

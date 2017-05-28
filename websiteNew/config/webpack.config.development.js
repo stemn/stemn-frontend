@@ -13,14 +13,14 @@ const GLOBALS = {
     NODE_ENV: JSON.stringify('development'),
     WEBSITE_URL: JSON.stringify('http://stemn.com'),
     API_SERVER: JSON.stringify('http://35.167.249.144'),
+    WEBSOCKET_SERVER: JSON.stringify('https://dev.stemn.com:8443'),
   },
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'true')),
 }
 
 module.exports = merge(config, {
   debug: true,
-  cache: true,
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'eval-source-map',
   entry: {
     application: [
       'webpack-hot-middleware/client',
@@ -28,6 +28,11 @@ module.exports = merge(config, {
       'development',
     ],
     vendor: ['react', 'react-dom', 'react-redux', 'react-router', 'react-router-redux', 'redux'],
+  },
+  output: {
+    filename: 'js/[name].js',
+    path: path.resolve(__dirname, '../build/client'),
+    publicPath: '/',
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -41,6 +46,9 @@ module.exports = merge(config, {
         to: 'static',
       },
     ]),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: ['vendor'],
+    }),
   ],
   module: {
     loaders: [
@@ -72,7 +80,7 @@ module.exports = merge(config, {
             query: {
               modules: true,
               importLoaders: 1,
-              localIdentName: '[name]__[local]--[hash:base64:5]',
+              localIdentName: '[name]_[local]-[hash:base64:5]',
             },
           },
           'postcss',

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import StandardLayout from 'layout/StandardLayout'
-
+import { Helmet } from "react-helmet";
 import classes from 'layout/layout.css'
 import Link from 'stemn-shared/misc/Router/Link'
 
@@ -8,6 +8,9 @@ export default class Privacy extends Component {
   render() {
     return (
       <StandardLayout contained style={ { marginTop: '30px' } } className={ classes.staticPage }>
+        <Helmet>
+          <title>Privacy</title>
+        </Helmet>
         <h1>Privacy</h1>
         <h2>General Information</h2>
         <p>We collect the e-mail addresses of those who communicate with us via e-mail, aggregate information on what pages consumers access or visit, and information volunteered by the consumer (such as survey information and/or site registrations). The information we collect is used to improve the content of our Web pages and the quality of our service, and is not shared with or sold to other organisations for commercial purposes, except to provide products or services you've requested, when we have your permission, or under the following circumstances:</p>

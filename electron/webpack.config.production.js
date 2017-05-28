@@ -63,6 +63,7 @@ const config = {
       __DEV__                        : false,
       'GLOBAL_ENV'                   : {
         APP_TYPE                     : JSON.stringify('desktop'),
+        APP_THREAD                   : JSON.stringify('renderer'),
         NODE_ENV                     : JSON.stringify('production'),
         WEBSITE_URL                  : JSON.stringify('https://stemn.com'),
         API_SERVER                   : JSON.stringify(process.env.API_SERVER),

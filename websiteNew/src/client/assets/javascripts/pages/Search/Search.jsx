@@ -6,7 +6,7 @@ import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import Tabs from 'stemn-shared/misc/Tabs/Tabs'
 import Link from 'stemn-shared/misc/Router/Link'
 import SiteSearchResults from 'stemn-shared/misc/Search/SiteSearchResults'
-
+import { Helmet } from "react-helmet";
 import classes from './Search.scss'
 import classNames from 'classnames'
 
@@ -16,7 +16,10 @@ export default class Search extends Component {
 
     return (
       <StandardLayout>
-        <SubHeader>
+        <Helmet>
+          <title>{ `Search: ${location.query.q}` }</title>
+        </Helmet>
+        <SubHeader noResponsive>
           <Tabs noline>
             <Link to="/search" className={ { 'active': !location.query.type } } query={ { q: location.query.q } }>Projects</Link>
             <Link activeClassName="active" to="/search" query={ { q: location.query.q, type: 'thread' } }>Threads</Link>

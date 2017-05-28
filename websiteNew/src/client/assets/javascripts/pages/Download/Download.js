@@ -4,6 +4,7 @@ import HeroBanner from 'modules/HeroBanner'
 import DownloadButton from 'stemn-shared/misc/DesktopReleases/DownloadButton'
 import bytes from 'stemn-shared/utils/filters/bytes.js'
 import { Container } from 'stemn-shared/misc/Layout'
+import { Helmet } from "react-helmet";
 
 import moment from 'moment';
 
@@ -28,6 +29,9 @@ export default class Download extends Component {
     )
     return (
       <LandingLayout>
+        <Helmet>
+          <title>Download Stemn Desktop</title>
+        </Helmet>
         <HeroBanner>
           <h1>Download Stemn Desktop</h1>
           <h3>Collaboration tools for Engineers</h3>

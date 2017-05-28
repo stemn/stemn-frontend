@@ -21,13 +21,13 @@
   background-repeat: no-repeat;
   background-position: center center;
   background-color: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .infoBoxes {
   background: white;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   border-left: 1px solid rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
 }
 
 .infoBoxes > div {
@@ -44,3 +44,4 @@
   color: rgba(0, 0, 0, 0.2);
   margin-right: 15px;
 }
+

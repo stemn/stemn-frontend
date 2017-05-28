@@ -13,7 +13,7 @@ import { get } from 'lodash'
 import MdLocationOn from 'react-icons/md/location-on'
 import MdLink from 'react-icons/md/link'
 import { userRoute } from 'route-actions'
-
+import { Helmet } from "react-helmet";
 
 class User extends Component {
   renderComplete() {
@@ -21,6 +21,9 @@ class User extends Component {
     const showSidebar = location.pathname === userRoute({userId : user.data._id})
     return (
       <div>
+        <Helmet>
+          <title>{ user.data.name }</title>
+        </Helmet>
         <UserNavHeader user={ user } currentUser={ currentUser } />
         <Container>
           <Row className='layout-xs-column layout-gt-xs-row'>

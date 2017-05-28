@@ -11,9 +11,10 @@ class Footer extends Component {
     return (
       <footer className={ classNames(classes.footer) }>
         <Container className={ classNames(classes.inner, 'layout-row', 'layout-align-start-center') }>
-          <div>Stemn © 2017</div>
+          <img src={ logo } className={ classes.logo } />
+
           <div className="flex" />
-          <Link activeClassName="active" name="landingRoute">Stemn Desktop</Link>
+          <Link activeClassName="active" name="landingRoute">Landing</Link>
           <span className="text-interpunct" />
           <Link activeClassName="active" name="termsRoute">Terms</Link>
           <Link activeClassName="active" name="privacyRoute">Privacy</Link>

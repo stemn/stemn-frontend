@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+import { replace } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 
 const stateToProps = ({ auth }) => ({
@@ -9,19 +9,20 @@ const stateToProps = ({ auth }) => ({
 });
 
 const dispatchToProps = {
-  goLogin: () => push('/login')
+  goLogin: () => replace('/login')
 };
 
 @connect(stateToProps, dispatchToProps)
 export default class LoginContainer extends Component {
   componentWillReceiveProps(nextProps) {
-    if (!nextProps.authToken || !nextProps.userId) {
-      nextProps.goLogin();
-    }
+    this.onMount(nextProps)
   }
   componentDidMount() {
-    if (!this.props.authToken || !this.props.userId) {
-      this.props.goLogin();
+    this.onMount(this.props)
+  }
+  onMount = (props) => {
+    if (!props.authToken || !props.userId) {
+      props.goLogin();
     }
   }
   render() {

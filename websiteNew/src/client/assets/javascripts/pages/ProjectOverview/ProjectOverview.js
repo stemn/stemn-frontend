@@ -3,8 +3,8 @@ import classNames from 'classnames'
 import classes from './ProjectOverview.css'
 import { projectRoute, fileRoute, projectFolderRoute } from 'route-actions'
 import moment from 'moment'
-import { has } from 'lodash'
-import FileList from 'stemn-shared/misc/FileList/FileList'
+import { has, get } from 'lodash'
+import FileList from 'stemn-shared/misc/FileList'
 import Readme from 'stemn-shared/misc/Files/Readme/Readme.jsx'
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
@@ -36,7 +36,9 @@ export default class ProjectOverview extends Component {
   }
 
   render() {
-    const { entityModel, project, path, files, isFilePage } = this.props
+    const { canEdit, entityModel, project, path, files, isFilePage, saveProject } = this.props
+    const isConnected = get(project, 'data.remote.connected', false)
+
     const options = {
       showMenu: true
     }
@@ -96,7 +98,7 @@ export default class ProjectOverview extends Component {
       )
 
       return (
-        <div style={{marginBottom: '30px'}}>
+        <div style={ { marginBottom: '30px' } }>
           <SubSubHeader>
             { project.data.blurb.length > 0
             ? <div className={ classes.blurb }>{ project.data.blurb }</div>
@@ -133,25 +135,26 @@ export default class ProjectOverview extends Component {
             { !isFilePage 
             ? imageInfoSection 
             : null }
-            <FileList
-              className={classNames(classes.files)}
-              projectId={project.data._id}
-              path={path || ''}
-              singleClickFn={this.clickFileOrFolder}
-              doubleClickFn={this.clickFileOrFolder}
-              crumbClickFn={this.clickFileOrFolder}
-              options={options}
-              crumbPopup={true}
-            />
-            { files && files.entries
-            ? <Readme
-                className={classes.readme}
-                files={ files.entries }
+            { isConnected &&
+              <FileList
+                className={ classes.files }
+                projectId={ project.data._id }
+                path={ path || '' }
+                crumbClickFn={ this.clickFileOrFolder }
+                options={ options }
+                crumbPopup
+                search
+                link
               />
-            : <div className="text-center text-grey-3" style={{marginTop: '30px'}}>
-                Add a README.md file to this folder to help others understand what is inside.
-              </div>
             }
+            <Readme
+              files={ get(files, 'entries', []) }
+              project={ project }
+              projectModel={ entityModel }
+              saveProject={ saveProject }
+              isRoot={ !path || path === '' }
+              canEdit={ canEdit }
+            />
           </Container>
         </div>
       )
@@ -161,3 +164,10 @@ export default class ProjectOverview extends Component {
     }
   }
 }
+
+//            { files && files.entries
+//            ?
+//            : <div className="text-center text-grey-3" style={ { marginTop: '30px' } }>
+//                Add a README.md file to this folder to help others understand what is inside.
+//              </div>
+//            }
