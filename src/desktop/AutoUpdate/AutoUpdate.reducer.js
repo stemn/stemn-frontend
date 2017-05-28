@@ -1,4 +1,3 @@
-import { modeled } from 'react-redux-form';
 import i from 'icepick';
 
 const initialState    = {
@@ -67,5 +66,5 @@ export default function (state = initialState, action) {
   if (!state.hydrated) {
     state = { ...initialState, ...state, hydrated: true };
   }
-  return modeled(reducer, 'autoUpdate')(state, action)
+  return reducer(state, action)
 }

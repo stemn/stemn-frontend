@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Select from 'react-select';
-import { actions } from 'react-redux-form';
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 
 // Styles
 import classNames from 'classnames';
@@ -10,7 +10,7 @@ import classNames from 'classnames';
 const Component = React.createClass({
   onChangeFn(items){
     const result = items.map(item => this.props.users.find(user => user._id == item.value));
-    this.props.dispatch(actions.change(this.props.model, result));
+    this.props.dispatch(storeChange(this.props.model, result));
     if(this.props.onChange){ this.props.onChange() }
   },
   render(){

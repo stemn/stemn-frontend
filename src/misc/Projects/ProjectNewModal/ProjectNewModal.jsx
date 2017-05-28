@@ -1,22 +1,9 @@
-// Container Core
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import React, { Component } from 'react';
+import { pick, get } from 'lodash';
 
-// Container Actions
-import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js';
-import { actions } from 'react-redux-form';
-import { projectSettingsRoute } from 'route-actions';
-import { push } from 'react-router-redux';
-
-// Component Core
-import React from 'react';
-import { has, pick } from 'lodash';
-
-// Styles
 import classNames from 'classnames';
-import classes from './ProjectNewModal.css';
+import classes from './ProjectNewModal.scss';
 
-// Sub Components
 import Button from 'stemn-shared/misc/Buttons/Button/Button';
 import FileSelectInput from 'stemn-shared/misc/FileSelectInput/FileSelectInput.jsx'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea';
@@ -27,51 +14,49 @@ import ProjectPermissionsRadio from 'stemn-shared/misc/Project/ProjectPermission
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import PanelDescription from 'stemn-shared/misc/Panels/PanelDescription'
 
+export default class ProjectNewModal extends Component {
+  state = {
+    activeTab: 1,
+    linkPending: false
+  }
+  createProject = () => {
+    const { newProject, goToProjectSettings, createProject, linkRemote, modalConfirm, auth } = this.props
+    const newProjectData = pick(newProject, ['private', 'name', 'summary'])
+    createProject(newProjectData).then(({ value }) => {
 
-///////////////////////////////// COMPONENT /////////////////////////////////
-
-export const modalName = 'PROJECT_NEW';
-
-export const Component = React.createClass({
-  getInitialState () {
-    return {
-      activeTab: 1,
-      linkPending: false
-    }
-  },
-  createProject(){
-    this.props.projectsActions.createProject(pick(this.props.newProject, ['permissions', 'name', 'summary'])).then(response => {
       const goToProject = () => {
-        this.props.dispatch(push(projectSettingsRoute({projectId: response.value.data._id})));
-        this.props.modalConfirm();
+        goToProjectSettings({projectId: value.data._id})
+        modalConfirm()
       }
+
+      const canLink = value.data._id && newProject.provider && newProject.root.path && newProject.root.fileId
+
       // Link the provider if we can.
-      if(response.value.data._id && this.props.newProject.provider && this.props.newProject.root.path && this.props.newProject.root.fileId){
-        this.setState({linkPending: true})
-        this.props.projectsActions.linkRemote({
-          projectId : response.value.data._id,
-          provider  : this.props.newProject.provider,
-          path      : this.props.newProject.root.path,
-          id        : this.props.newProject.root.fileId,
-          userId    : this.props.auth.user._id
+      if (canLink) {
+        this.setState({ linkPending: true })
+        linkRemote({
+          projectId : value.data._id,
+          provider : newProject.provider,
+          path : newProject.root.path,
+          id : newProject.root.fileId,
+          userId : auth.user._id
         }).then(()=>{
           // After we have linked, we go to the project
-          this.setState({linkPending: false});
-          goToProject();
+          this.setState({ linkPending: false });
+          goToProject()
         }).catch(() => {
           // If the link fails, we still go to the project
-          this.setState({linkPending: false});
-          goToProject();
+          this.setState({ linkPending: false })
+          goToProject()
         })
+      } else{
+        goToProject()
       }
-      else{
-        goToProject();
-      }
-    });
-  },
-  changeTab(activeTab){
+    })
+  }
+  changeTab = (activeTab) => {
     this.setState({ activeTab: activeTab })
-  },
+  }
   render() {
     const { newProject, entityModel, modalCancel } = this.props;
     const { activeTab, linkPending } = this.state;
@@ -87,7 +72,7 @@ export const Component = React.createClass({
             className="dr-input"
             type="text"
             placeholder="Project Name"
-            autoFocus={true}
+            autoFocus
           />
           <br />
           <Textarea
@@ -96,7 +81,6 @@ export const Component = React.createClass({
              className="dr-input"
              placeholder="Project Summary"
            />
-
         </div>
       )
     }
@@ -106,8 +90,8 @@ export const Component = React.createClass({
         <div className={classes.panel}>
           <h3>Project Type</h3>
           <ProjectPermissionsRadio
-             model={`${entityModel}.permissions.projectType`}
-             value={has(newProject, 'permissions.projectType') ? newProject.permissions.projectType : ''}
+             model={ `${entityModel}.private` }
+             value={ get(newProject, 'private') }
            />
         </div>
       )
@@ -146,8 +130,8 @@ export const Component = React.createClass({
             </PanelDescription>
           </div>
           <div className={classes.modalFooter + ' layout-row layout-align-end'}>
-            <Button style={{marginRight: '10px'}} onClick={button1.onClick}>{button1.text}</Button>
-            <Button className="primary"           onClick={button2.onClick}>{button2.text}</Button>
+            <Button style={{marginRight: '10px'}} onClick={ button1.onClick }>{ button1.text }</Button>
+            <Button className="primary"           onClick={ button2.onClick }>{ button2.text }</Button>
           </div>
         </div>
       )
@@ -222,22 +206,4 @@ export const Component = React.createClass({
       </div>
     )
   }
-});
-
-///////////////////////////////// CONTAINER /////////////////////////////////
-
-function mapStateToProps({auth, projects}) {
-  return {
-    auth,
-    newProject: projects.newProject,
-    entityModel: 'projects.newProject',
-  };
 }
-
-function mapDispatchToProps(dispatch) {
-  return {
-    projectsActions: bindActionCreators(ProjectsActions, dispatch),
-    dispatch
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Component);

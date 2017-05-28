@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { actions } from 'react-redux-form'
 import Popover from 'stemn-shared/misc/Popover'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import classNames from 'classnames'
@@ -14,10 +13,18 @@ export default class PopoverFit extends Component {
   }
   getButtonRef = (ref) => {
     if (ref) {
+      this.buttonRef = ref
+    }
+  }
+  setWidth = () => {
+    if (this.buttonRef) {
       this.setState({
-        minWidth: ref.clientWidth,
+        minWidth: this.buttonRef.clientWidth,
       })
     }
+  }
+  componentWillReceiveProps() {
+    this.setWidth()
   }
   render() {
     const { children, max, style, className, ...otherProps } = this.props

@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
 import EditorNew from './EditorNew'
-import { actions } from 'react-redux-form'
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 
 const stateToProps = () => ({})
 
 const dispatchToProps = {
-  change: actions.change,
+  change: storeChange,
 }
 
 export default connect(stateToProps, dispatchToProps)(EditorNew)

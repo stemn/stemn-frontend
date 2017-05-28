@@ -6,7 +6,7 @@ class IsOwner extends Component {
   static propTypes = {
     ownerId: PropTypes.string,
     team: PropTypes.array,
-    userId: PropTypes.string.isRequired,
+    userId: PropTypes.string,
     children: PropTypes.node.isRequired,
     minRole: PropTypes.string,
   }

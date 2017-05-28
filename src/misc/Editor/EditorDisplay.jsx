@@ -6,7 +6,6 @@ import classes from './EditorDisplay.css'
 import { validateMention } from 'stemn-shared/misc/Mentions/Mentions.utils.js'
 import MentionFromString from 'stemn-shared/misc/Mentions/MentionFromString'
 import htmlToReact from 'html-to-react'
-import hljs from 'highlight.js'
 
 const htmlToReactParser = new htmlToReact.Parser();
 

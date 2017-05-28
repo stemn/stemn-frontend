@@ -41,6 +41,12 @@
   color: #21d370;
 }
 
+.tag:global(.warn){
+  background: rgba(255, 14, 0, 0.1);
+  border-color: rgba(255, 65, 54, 0.1);
+  color: rgba(255, 65, 54, 1);
+}
+
 .close {
   cursor: pointer;
   border-left-width: 1px;

@@ -1,11 +1,11 @@
-import React from 'react';
-
+import React from 'react'
 import codemirror from 'codemirror'
 import 'codemirror/mode/meta.js'
-const requireCodemirrorMode = require.context("codemirror/mode/", true, /\.js$/);
+const requireCodemirrorMode = require.context('url-loader?limit=1&name=js/codemirror/[name].[hash].[ext]!codemirror/mode/', true, /\.js$/);
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx';
 import file from 'stemn-shared/assets/images/pure-vectors/file.svg';
+import { load } from 'stemn-shared/misc/LazyLoading/LazyLoading.utils'
 
 export const Viewer = React.createClass({
   render() {
@@ -27,14 +27,20 @@ export const Viewer = React.createClass({
         const mode = modeInfo ? modeInfo.mode : 'null';
         if(mode && mode != 'null'){
           const modePath = `./${mode}/${mode}.js`
-          requireCodemirrorMode(modePath);
-          editorInstance.setOption("mode", mode);
+          const webpackModePath = requireCodemirrorMode(modePath)
+
+          // Attach codemirror to the window so the mode pack will find it
+          window.CodeMirror = codemirror
+          // Load the mode
+          load([{ src: webpackModePath, }]).then((response) => {
+            // Set the mode after it has loaded
+            editorInstance.setOption('mode', mode)
+          })
         }
       }, 1)
     }
 
     const isMarkdown = false;
-//    const isMarkdown = extension == 'md';
     return (
       <div className="layout-row flex">
         <div className="scroll-box flex" ref="codemirror"></div>
@@ -47,7 +53,7 @@ export const Viewer = React.createClass({
       </div>
     )
   }
-});
+})
 
 
 export default React.createClass({
@@ -75,12 +81,12 @@ export default React.createClass({
         { fileData ? <LoadingOverlay show={fileData.loading} /> : null }
         { fileData && !fileData.data && !fileData.loading
         ? <div className="layout-column layout-align-center-center flex text-center">
-            <img style={{width: '100px'}} src={file}/>
-            <div className="text-title-4" style={{marginBottom: '10px'}}>Nothing to display</div>
+            <img style={ { width: '100px' } } src={ file }/>
+            <div className="text-title-4" style={ { marginBottom: '10px' } }>Nothing to display</div>
             <div className="text-title-5">This file appears to be empty.</div>
           </div>
         : null }
       </div>
     )
   }
-});
+})

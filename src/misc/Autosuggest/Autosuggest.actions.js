@@ -36,7 +36,9 @@ export const loadSuggestions = (cacheKey) => ({ entityType, value }) => {
         params: {
           type: entityType,
           key: 'name',
-          value,
+          criteria: {
+            name: value && `/${value}/i`,
+          },
           size: 10,
           match: 'regex',
         },

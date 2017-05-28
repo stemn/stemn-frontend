@@ -1,23 +1,27 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { actions } from 'react-redux-form';
-import Textarea from 'react-textarea-autosize';
+import React from 'react'
+import { connect } from 'react-redux'
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
+import Textarea from 'react-textarea-autosize'
 
 class Component extends React.Component{
+  getTextareaRef = (ref) => {
+    if (ref) {
+      ref.focus()
+    }
+  }
   render(){
-    const { model, value, dispatch, className, placeholder, style, onChange } = this.props;
+    const { model, dispatch, onChange, ...otherProps } = this.props;
     return (
-      <Textarea style={style}
-        className={className}
-        onChange={(e) => {
-          dispatch(actions.change(model, e));
+      <Textarea
+        ref={ this.getTextareaRef }
+        onChange={(event) => {
+          dispatch(storeChange(model, event.target.value));
           if(onChange){ onChange() };
         }}
-        value={value}
-        placeholder={placeholder}
+        { ...otherProps }
       />
     );
   }
 };
 
-export default connect(s => s)(Component);
+export default connect()(Component)

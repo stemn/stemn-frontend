@@ -1,5 +1,4 @@
 import i from 'icepick'
-import { modeled } from 'react-redux-form'
 
 const initialState = {
   data: {
@@ -12,7 +11,7 @@ const initialState = {
   loading: false,
 }
 
-function reducer(state, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
     case 'USER_SETTINGS/GET_SETTINGS_PENDING': {
       return i.assoc(state, 'loading', true)
@@ -29,8 +28,4 @@ function reducer(state, action) {
     default:
       return state
   }
-}
-
-export default function (state = initialState, action) {
-  return modeled(reducer, 'userSettings')(state, action)
 }

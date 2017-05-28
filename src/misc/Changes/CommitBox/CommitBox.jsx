@@ -34,7 +34,7 @@ import { MentionsInput, Mention } from 'react-mentions';
 
 export const Component = React.createClass({
   render() {
-    const { entityModel, changes, electronWindowsActions, changesActions } = this.props;
+    const { entityModel, changes, electronWindowsActions, changesActions, className } = this.props;
     const noChangesChecked = !some(changes.checked);
     const noSummary = !changes.summary || changes.summary.length < 1;
 
@@ -51,7 +51,7 @@ export const Component = React.createClass({
     }
 
     return (
-      <div style={{padding: '15px'}}>
+      <div style={{padding: '15px'}} className={ className }>
         <Walkthrough preferPlace="right" name="commit.commitSummary">
           <Input
             autoFocus={true}

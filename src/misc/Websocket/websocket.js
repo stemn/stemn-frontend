@@ -1,30 +1,53 @@
-import ws from 'ws';
-import primus from './primus-websockets.js';
+import ws from 'ws'
+import primus from './primus-websockets2.js'
+import qs from 'querystring'
+
+const searchParams = typeof window !== 'undefined'
+  ? qs.parse(window.location.search.substring(1))
+  : {}
 
 export let socket = undefined;
 
 export const initialise = (hostUrl) => {
 
-  socket = primus.connect(hostUrl);
+  // Conntect the websocket
+  socket = primus.connect(hostUrl)
 
-  const socketError = (err) => socket.write({
-    type : 'log',
-    payload : {
-      type : 'error',
-      message : err.message
+  // Log some stuff if  ?debug=true or environment is development
+  if (GLOBAL_ENV.NODE_ENV === 'development' || searchParams.debug) {
+
+    // Log Receives
+    const socketData = (data) => {
+      if (GLOBAL_ENV.APP_THREAD === 'electron') {
+        console.log(`socket | RECEIVE - ${data.type}`)
+      } else {
+        console.groupCollapsed(` socket | RECEIVE      ${data.type}`)
+        console.log(data)
+        console.groupEnd()
+      }
     }
-  });
-  
-  socket.on('error', socketError);
+    socket.on('data', socketData)
 
-  // nonsense
-  const oldWrite = socket.write.bind(socket);
-  socket.write = (data) => {
-//    console.log('WRITING DATA\n', JSON.stringify(data, null, 4));
-    return oldWrite(data);
+    // Log Writes
+    const oldWrite = socket.write.bind(socket);
+    socket.write = (data) => {
+      if (GLOBAL_ENV.APP_THREAD === 'electron') {
+        console.log(`socket | SEND - ${data.type}`)
+      } else {
+        console.groupCollapsed(` socket | SEND         ${data.type}`)
+        console.log(data)
+        console.groupEnd()
+      }
+      return oldWrite(data)
+    }
   }
 
-//  socket.on('data', (data) => console.log('WEBSOCKET RECEIVED DATA:\n', JSON.stringify(data)));
-  
+  socket.write({
+    type: 'ADMIN/ECHO',
+    payload: {
+      test: 'test'
+    }
+  })
+
   return socket;
 }

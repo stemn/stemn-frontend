@@ -74,7 +74,9 @@ class ModalComponent extends Component {
         isOpen
         onRequestClose={ this.onRequestClose }
         className={ classes.modal }
-        overlayClassName={ overlayClassName }>
+        overlayClassName={ overlayClassName }
+        contentLabel={ modal.modalType }
+      >
         { this.renderContent() }
       </Modal>
     );

@@ -1,11 +1,10 @@
 import i from 'icepick'
 import { cloneDeep, has } from 'lodash'
-import { modeled } from 'react-redux-form'
 
 const initialState = {
   data: {},
   projects: {},
-  events: {},
+//  events: {},
   boards: {
     /********************************
     boardId: {
@@ -86,25 +85,24 @@ const mainReducer = (state, action) => {
         loading: false
       })
 
-    case 'TASKS/GET_EVENTS_PENDING':
-      return i.assocIn(state, ['events', action.meta.cacheKey, 'loading'], true)
-    case 'TASKS/GET_EVENTS_REJECTED':
-      return i.assocIn(state, ['events', action.meta.cacheKey, 'loading'], false)
-    case 'TASKS/GET_EVENTS_FULFILLED':
-      return i.assocIn(state, ['events', action.meta.cacheKey], {
-        data: action.payload.data,
-        loading: false
-      })
-    case 'TASKS/NEW_EVENT':
-      return i.updateIn(state, ['events', action.payload.taskId, 'data'], events => {
-        return i.push(events, action.payload.event)
-      })
-
-    case 'TASKS/DELETE_EVENT':
-      return i.updateIn(state, ['events', action.payload.taskId, 'data'], events => {
-        const eventIndex = events.findIndex(event => event._id === action.payload.eventId)
-        return eventIndex !== -1 ? i.splice(events, eventIndex, 1) : events
-      })
+//    case 'TASKS/GET_EVENTS_PENDING':
+//      return i.assocIn(state, ['events', action.meta.cacheKey, 'loading'], true)
+//    case 'TASKS/GET_EVENTS_REJECTED':
+//      return i.assocIn(state, ['events', action.meta.cacheKey, 'loading'], false)
+//    case 'TASKS/GET_EVENTS_FULFILLED':
+//      return i.assocIn(state, ['events', action.meta.cacheKey], {
+//        data: action.payload.data,
+//        loading: false
+//      })
+//    case 'TASKS/NEW_EVENT':
+//      return i.updateIn(state, ['events', action.payload.taskId, 'data'], events => {
+//        return i.push(events, action.payload.event)
+//      })
+//    case 'TASKS/DELETE_EVENT':
+//      return i.updateIn(state, ['events', action.payload.taskId, 'data'], events => {
+//        const eventIndex = events.findIndex(event => event._id === action.payload.eventId)
+//        return eventIndex !== -1 ? i.splice(events, eventIndex, 1) : events
+//      })
 
     case 'TASKS/UPDATE_BOARD_PENDING':
       return i.assocIn(state, ['boards', action.meta.cacheKey, 'savePending'], true)
@@ -226,5 +224,5 @@ export default function (state = initialState, action) {
   if (!state.hydrated) {
     state = { ...initialState, ...state, hydrated: true }
   }
-  return modeled(mainReducer, 'tasks')(state, action)
+  return mainReducer(state, action)
 }

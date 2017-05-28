@@ -1,6 +1,5 @@
 import i from 'icepick';
 
-import { modeled } from 'react-redux-form';
 import { parseMentions, removeExistingMentions, addMentionsToText } from '../Mentions/Mentions.utils.js';
 const initialState = {
   /**************************************
@@ -64,5 +63,5 @@ const mainReducer = (state, action) => {
 
 
 export default function (state = initialState, action) {
-  return modeled(mainReducer, 'changes')(state, action)
+  return mainReducer(state, action)
 }

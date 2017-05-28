@@ -13,6 +13,10 @@ export default (state = initialState, action = {}) => {
         .value();
     case 'CODE_SPLITTING/LOAD_REJECTED':
       return i.assocIn(state, [action.meta.cacheKey, 'loading'], false)
+    case 'CODE_SPLITTING/LOADING':
+      return i.assocIn(state, [action.meta.cacheKey, 'loading'], true)
+    case 'CODE_SPLITTING/COMPLETE':
+      return i.assocIn(state, [action.meta.cacheKey, 'loading'], false)
     default:
       return state;
   }

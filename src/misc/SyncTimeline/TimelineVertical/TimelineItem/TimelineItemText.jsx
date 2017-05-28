@@ -15,18 +15,34 @@ const eventTextMap = {
     }
     if (type === 'file') {
       return (
-        <span>modified this file. </span>
+        <span>
+          {  !item.data.revisionNumber || item.data.revisionNumber === 0
+          ? 'created this file'
+          : `added rev.${item.data.revisionNumber}` }
+        </span>
       )
     } else {
       return (
         <span>
-          { item.data.revisionNumber
+          { !item.data.revisionNumber || item.data.revisionNumber === 0
           ? 'created'
-          : `added revision ${item.data.revisionNumber} to`}
+          : `added revision ${item.data.revisionNumber} to` }
           <Link name="fileRoute" params={ fileRouteParams }>{ item.data.name }</Link>
         </span>
       )
     }
+  },
+  task: (item, type, entity) => {
+    const params = {
+      projectId: item.data.project,
+      taskId: item._id
+    }
+    return (
+      <span>
+        added a new thread:
+        <Link name="taskRoute" params={ params }>{ item.data.name }</Link>
+      </span>
+    )
   },
   commit: (item, type, entity) => {
     const params = {
@@ -90,38 +106,51 @@ const eventTextMap = {
     }
   },
   changedLabels: (item, type, entity) => {
-    if (type === 'task') {
+    console.log(item);
+    if (type === 'task' || type === 'project') {
+      const hasAddedLabels = item.data.addedLabels && item.data.addedLabels.length > 0
+      const hasRemovedLabels = item.data.removedLabels && item.data.removedLabels.length > 0
+      const params = {
+        projectId: entity.data.project,
+        taskId: item.task._id,
+      }
       return (
         <span>
-          { item.data.addedLabels && item.data.addedLabels.length > 0
-            ? <span>
-                added the&nbsp;
-                <TaskLabelDots
-                  labels={item.data.addedLabels}
-                  labelInfo={entity.data.labels}
-                  tag
-                />
-                &nbsp;{ item.data.addedLabels.length == 1 ? 'label' : 'labels' }
-              </span>
-            : null }
-          { item.data.addedLabels && item.data.removedLabels && item.data.addedLabels.length > 0 && item.data.removedLabels.length>0
-            ? <span>&nbsp;and&nbsp;</span>
-            : null }
-          { item.data.removedLabels && item.data.removedLabels.length > 0
-            ? <span>
-                removed the&nbsp;
-                <TaskLabelDots
-                  labels={ item.data.removedLabels }
-                  labelInfo={ entity.data.labels }
-                  tag
-                />
-                &nbsp;{item.data.removedLabels.length == 1 ? 'label' : 'labels'}
-              </span>
-            : null }
+          { hasAddedLabels &&
+            <span>
+              added the&nbsp;
+              <TaskLabelDots
+                labels={ item.data.addedLabels }
+                labelInfo={ entity.data.labels }
+                tag
+              />
+              { pluralise(item.data.addedLabels.length, 'label', true) }
+            </span>
+          }
+          { hasAddedLabels && hasRemovedLabels &&
+            <span>&nbsp;and&nbsp;</span>
+          }
+          { hasRemovedLabels &&
+            <span>
+              removed the&nbsp;
+              <TaskLabelDots
+                labels={ item.data.removedLabels }
+                labelInfo={ entity.data.labels }
+                tag
+              />
+              { pluralise(item.data.removedLabels.length, 'label', true) }
+            </span>
+          }
+          { type === 'project' &&
+            <span>
+              { hasRemovedLabels ? ' from' : ' to' }
+              <Link name="taskRoute" params={ params }>{ item.task.name || 'Untitled Thread'}</Link>
+            </span>
+          }
         </span>
       )
     } else {
-      return <span>Invalid event type</span>
+      return <span>Changed Labels</span>
     }
   },
 }

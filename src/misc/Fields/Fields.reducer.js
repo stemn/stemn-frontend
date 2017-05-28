@@ -1,4 +1,3 @@
-import { modeled } from 'react-redux-form'
 import i from 'icepick'
 
 const initialState = {
@@ -11,7 +10,7 @@ const initialState = {
   newFieldFormPending: false,
 }
 
-const reducer = (state, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case 'FIELDS/GET_FIELD_PENDING':
       return i.assocIn(state, ['data', action.meta.fieldId, 'loading'], true)
@@ -48,5 +47,3 @@ const reducer = (state, action) => {
       return state
   }
 }
-
-export default (state = initialState, action) => modeled(reducer, 'fields')(state, action)

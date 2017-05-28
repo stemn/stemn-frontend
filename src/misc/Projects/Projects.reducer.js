@@ -1,9 +1,16 @@
-import { modeled } from 'react-redux-form'
 import i from 'icepick'
 import { uniqBy } from 'lodash'
 
 const initialState = {
-  data: {},
+  data: {
+    /***********************************
+    [projectId]: {
+      loading: false,
+      data: {},
+      fileStoreForm: {},
+    }
+    ***********************************/
+  },
   activeProject: '',        // The currently active project
   userProjects: {
     /***********************************
@@ -21,9 +28,7 @@ const initialState = {
       fileId: '',
     },
     provider: '',
-    permissions: {
-      projectType: 'public'
-    },
+    private: false,
     savePending: ''
   }
 }
@@ -40,11 +45,11 @@ function reducer(state, action) {
     case 'PROJECTS/GET_PROJECT_REJECTED':
       return i.assocIn(state, ['data', action.meta.projectId, 'loading'], false)
     case 'PROJECTS/GET_PROJECT_FULFILLED':
-      return i.assocIn(state, ['data', action.meta.projectId], {
-        loading: false,
-        dataSize: action.meta.size,
-        data: action.payload.data
-      })
+      return i.chain(state)
+        .assocIn(['data', action.meta.projectId, 'loading'], false)
+        .assocIn(['data', action.meta.projectId, 'dataSize'], action.meta.size)
+        .assocIn(['data', action.meta.projectId, 'data'], action.payload.data)
+        .value()
       
     case 'PROJECTS/ADD_TEAM_MEMBER':
       return i.updateIn(state, ['data', action.payload.projectId, 'data', 'team'], (team) => {
@@ -91,6 +96,7 @@ function reducer(state, action) {
       .assocIn(['data', action.meta.cacheKey, 'linkPending'], false)
       .assocIn(['data', action.meta.cacheKey, 'linkRejected'], false)
       .assocIn(['data', action.meta.cacheKey, 'data', 'remote'], action.payload.data)
+      .assocIn(['data', action.meta.cacheKey, 'fileStoreForm'], action.payload.data)
       .value()
     case 'PROJECTS/LINK_REMOTE_REJECTED':
       return i.chain(state)
@@ -145,5 +151,5 @@ export default function (state = initialState, action) {
   if (!state.hydrated) {
     state = { ...initialState, ...state, hydrated: true }
   }
-  return modeled(reducer, 'projects')(state, action)
+  return reducer(state, action)
 }

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { actions } from 'react-redux-form'
+import { storePush, storeRemove } from 'stemn-shared/misc/Store/Store.actions'
 import { range } from 'lodash'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
@@ -36,11 +36,11 @@ export default class UserExperienceSettings extends Component {
 
   remove = (idx) => {
     const { dispatch, dataModel } = this.props
-    dispatch(actions.remove(dataModel, idx))
+    dispatch(storeRemove(dataModel, idx))
   }
   add = () => {
     const { dispatch, dataModel } = this.props
-    dispatch(actions.push(dataModel, {
+    dispatch(storePush(dataModel, {
       _id: getUuid()
     }))
   }

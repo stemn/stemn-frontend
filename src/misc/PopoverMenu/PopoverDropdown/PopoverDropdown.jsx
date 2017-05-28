@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { actions } from 'react-redux-form'
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import Popover from 'stemn-shared/misc/Popover'
 import PopoverFit from 'stemn-shared/misc/PopoverMenu/PopoverFit'
 import MdExpandMore from 'react-icons/md/expand-more'
@@ -9,7 +9,7 @@ import classNames from 'classnames'
 
 class PopoverDropdown extends Component {
   render() {
-    const { children, options, model, value, dispatch, ...otherProps } = this.props
+    const { children, options, model, value, dispatch, onChange, ...otherProps } = this.props
     const currentOption = options.find(option => option.value === value)
 
     return (
@@ -22,9 +22,18 @@ class PopoverDropdown extends Component {
         </div>
         <div className="PopoverMenu">
           { options.map((option, idx) => {
-            const onClick = model
-              ? () => dispatch(actions.change(model, option.value))
-              : () => option.onClick()
+
+            const onClick = () => {
+              if (model) {
+                dispatch(storeChange(model, option.value))
+              }
+              if (option.onClick) {
+                option.onClick()
+              }
+              if (onChange) {
+                onChange()
+              }
+            }
             return (
               <a
                 key={ option.value || idx }

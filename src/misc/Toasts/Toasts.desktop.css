@@ -2,8 +2,9 @@
 
 .toastContainer {
   position: fixed;
-  bottom: 20px;
-  left: 20px;
+  bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 10000;
 }
 
@@ -12,7 +13,6 @@
   font-size: 13px;
   overflow: hidden;
   transition: all 0.2s ease;
-  border-radius: 3px;
 }
 
 .toastInner {

@@ -28,7 +28,7 @@ export default class AutosuggestWrapped extends Component {
     renderResult: PropTypes.func.isRequired,
     renderNoResult: PropTypes.func, // If true, a no-result will be added to the suggestions list
     clickResult: PropTypes.func.isRequired,
-    clickNoResult: PropTypes.func.isRequired,
+    clickNoResult: PropTypes.func,
   }
     
   onChange = (event, { newValue }) => {

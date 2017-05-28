@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 var RenderGerber = {};
 
 RenderGerber.renderLayer = renderLayer; // function(canvas, g, limits)

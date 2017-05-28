@@ -1,32 +1,42 @@
 import React, { Component, PropTypes } from 'react'
-import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
+import { load } from 'stemn-shared/misc/LazyLoading/LazyLoading.utils'
 
 export default class PreviewCadLoader extends Component {
   static propTypes = {
-    loadCode: PropTypes.func.isRequired,
-    systemImport: PropTypes.func.isRequired,
-    cacheKey: PropTypes.string.isRequired,
+    loadCode: PropTypes.func.isRequired,      // The loadCode function from the container
+    systemImport: PropTypes.func.isRequired,  // The actual system.import
+    cacheKey: PropTypes.string.isRequired,    // The cachekey
+    otherModules: PropTypes.array.isRequired, // This is an array of global modules
   }
   constructor(props) {
     super(props)
     this.state = {
-      loaded: false,
+      mainLoaded: false,
+      otherLoaded: false,
     }
   }
   componentWillMount() {
-    const { loadCode, systemImport, cacheKey } = this.props
+    const { loadCode, systemImport, otherModules, cacheKey } = this.props
     const wrappedSystemImport = systemImport().then((response) => {
-        this.LoadedComponent = response.default
-        this.setState({
-          loaded: true,
-        })
-      });
+      this.LoadedComponent = response.default
+      this.setState({
+        mainLoaded: true,
+      })
+    })
+
+    const otherModulesLoader = load(otherModules).then((response) => {
+      this.setState({
+        otherLoaded: true,
+      })
+    })
 
     loadCode(wrappedSystemImport, cacheKey)
   }
   render() {
     const { loadCode, cacheKey, systemImport, ...otherProps } = this.props
-    const { loaded } = this.state
+    const { mainLoaded, otherLoaded } = this.state
+    const loaded = mainLoaded && otherLoaded
     return (
       <div className="layout-column flex">
         { loaded

@@ -2,7 +2,6 @@
 }
 
 .title {
-  font-weight: bold;
   font-size: 14px;
   margin-right: 10px;
 }
@@ -22,4 +21,7 @@
 }
 .commentsNumber {
   font-size: 14px;
+}
+.taskNumber {
+  color: rgba(0, 0, 0, 0.5);
 }

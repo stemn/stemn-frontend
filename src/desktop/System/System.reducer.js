@@ -1,4 +1,3 @@
-import { modeled } from 'react-redux-form';
 import i from 'icepick';
 
 const initialState = {
@@ -35,5 +34,5 @@ export default function (state = initialState, action) {
   if (!state.hydrated) {
     state = i.chain(initialState).merge(state).assoc('hydrated', true).value();
   }
-  return modeled(reducer, 'system')(state, action)
+  return reducer(state, action)
 }

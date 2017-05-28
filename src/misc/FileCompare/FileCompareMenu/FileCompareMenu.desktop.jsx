@@ -1,32 +1,21 @@
 /**************************************************************************
 We pass in either revisions or file1 + file2.
 **************************************************************************/
-
-// Container Core
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
-// Container Actions
-import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js';
-import * as SystemActions          from 'stemn-shared/desktop/System/System.actions.js';
-import * as ModalActions           from 'stemn-shared/misc/Modal/Modal.actions.js';
-
-// Component Core
-import React from 'react';
-import { getViewerType } from 'stemn-shared/misc/Files/PreviewFile/PreviewFile.utils.js';
-
-// Styles
-import classNames from 'classnames';
-
-// Sub Components
-import Popover              from 'stemn-shared/misc/Popover';
-import PopoverMenuList      from 'stemn-shared/misc/PopoverMenu/PopoverMenuList';
-import SimpleIconButton     from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
-import { getCompareModes, getCompareIcon } from '../FileCompare.utils.js';
-import MdMoreHoriz          from 'react-icons/md/more-horiz';
-import MdOpenInNew          from 'react-icons/md/open-in-new';
-
-///////////////////////////////// COMPONENT /////////////////////////////////
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js'
+import * as SystemActions from 'stemn-shared/desktop/System/System.actions.js'
+import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js'
+import React from 'react'
+import { getViewerType } from 'stemn-shared/misc/Files/PreviewFile/PreviewFile.utils.js'
+import classNames from 'classnames'
+import Popover from 'stemn-shared/misc/Popover'
+import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList'
+import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import { getCompareModes, getCompareIcon } from '../FileCompare.utils.js'
+import downloadModalName from 'stemn-shared/misc/Files/Download/DownloadModal'
+import MdMoreHoriz from 'react-icons/md/more-horiz'
+import MdOpenInNew from 'react-icons/md/open-in-new'
 
 export const Component = React.createClass({
   menu() {
@@ -61,7 +50,7 @@ export const Component = React.createClass({
       label: 'Download File',
       onClick: () => {
         dispatch(ModalActions.showModal({
-          modalType: 'FILE_DOWNLOAD',
+          modalType: downloadModalName,
           modalProps: {
             revisions: revisions,
             file: file1
@@ -130,7 +119,7 @@ export const Component = React.createClass({
           <SimpleIconButton title="Options">
             <MdMoreHoriz size="20px" />
           </SimpleIconButton>
-          <PopoverMenuList menu={this.menu()} />
+          <PopoverMenuList menu={ this.menu() } />
         </Popover>
       </div>
     );

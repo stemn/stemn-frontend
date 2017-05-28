@@ -5,7 +5,7 @@ import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 export default class PanelDescription extends Component {
   static propTypes = {
     title: PropTypes.string,
-    description: PropTypes.description,
+    description: PropTypes.string,
     children: PropTypes.node,
   }
 

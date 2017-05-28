@@ -39,6 +39,12 @@
   outline: none;
 }
 
+.progressButton button[disabled] {
+  opacity: 0.4;
+  background-color: primary !important;
+  cursor: not-allowed;
+}
+
 .progressButton button span {
   -webkit-transition: opacity 0.3s 0.1s;
   transition: opacity 0.3s 0.1s;

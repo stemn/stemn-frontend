@@ -6,23 +6,27 @@ import { search } from 'stemn-shared/misc/Search/Search.actions'
 
 import SiteSearchResults from './SiteSearchResults'
 
-const stateToProps = ({ search, routing }, { page, query, type, size, parentType, parentId }) => {
+const stateToProps = ({ search, routing }, { page, query, type, size, parentType, parentId, sort, criteria }) => {
   // Add some defaults
   const _type = type || 'project'
   const _page = page || 1
-  const _query = query
   const _size = size || 30
 
-  const cacheKey = `${_type}-${query}-${_page}-${parentType}-${parentId}`
+  const criteriaWithQuery = Object.assign({}, criteria, {
+    name: query && `/${query}/i`,
+  })
+
+  const cacheKey = `${_type}-${_page}-${parentType}-${parentId}-${sort}-${JSON.stringify(criteriaWithQuery)}`
   return {
-    query: _query,
-    type: _type,
-    page: _page,
     cacheKey,
-    results: search.data[cacheKey],
-    searchQuery: search.query,
-    size: _size,
+    criteria: criteriaWithQuery,
     location: routing.locationBeforeTransitions,
+    page: _page,
+    query: query,
+    results: search.data[cacheKey],
+    size: _size,
+    sort,
+    type: _type,
   }
 }
 
@@ -34,12 +38,15 @@ const fetchConfigs = [{
   hasChanged: 'cacheKey',
   onChange: (props) => {
     props.search({
+      cacheKey: props.cacheKey,
       entityType: props.type,
-      parentType: props.parentType,
-      parentId: props.parentId,
-      value: props.query,
       page: props.page,
+      parentId: props.parentId,
+      parentType: props.parentType,
+      criteria: props.criteria,
       size: props.size,
+      sort: props.sort,
+      value: props.query,
     })
   }
 }]

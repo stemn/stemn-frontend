@@ -58,7 +58,8 @@ export const getFeed = ({ feedType = 'followed-projects' } = {}) => ({
     method: 'GET',
     url: '/api/v1/feed',
     params: {
-      types: ['commits'],
+      size: 50,
+//      types: ['commits'],
       feedType, // followed-users, followed-projects, followed-all
     },
   }),

@@ -1,13 +1,10 @@
 import React from 'react';
-import Promise from 'es6-promise'
 
 import { isWebGlSupported } from './PreviewCad.utils.js';
-
 import AutodeskLocalViewer from './AutodeskLocalViewer/AutodeskLocalViewer'
-
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import modelLocked    from 'stemn-shared/assets/images/pure-vectors/model-locked.svg';
-import modelGear      from 'stemn-shared/assets/images/pure-vectors/model-gear.svg';
+import modelLocked from 'stemn-shared/assets/images/pure-vectors/model-locked.svg';
+import modelGear from 'stemn-shared/assets/images/pure-vectors/model-gear.svg';
 
 
 export default React.createClass({
@@ -22,8 +19,7 @@ export default React.createClass({
       this.setState({status: 'pending'})
       if(isWebGlSupported()){
         renderFn();
-      }
-      else{
+      } else {
         this.setState({status:'disabled'});
       }
     }
@@ -35,7 +31,7 @@ export default React.createClass({
     const { fileMeta, fileRender } = this.props;
     const { status } = this.state;
     if(fileRender && fileRender.data){
-      return <AutodeskLocalViewer path={fileRender.data} linkKey={fileMeta.fileId} />
+      return <AutodeskLocalViewer path={ fileRender.data } linkKey={ fileMeta.fileId } />
     }
     else if(status == 'disabled'){
       return (

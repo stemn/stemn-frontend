@@ -20,6 +20,11 @@
   line-height: 1.4em;
   font-weight: 300;
 }
+.text-title-6{
+  font-size: 12px;
+  line-height: 1.4em;
+  font-weight: 300;
+}
 .text-primary{
   color: rgb(68, 154, 211);
 }
@@ -42,6 +47,9 @@
 }
 .text-grey-3{
   color: rgba(0,0,0,0.5);
+}
+.text-grey-4{
+  color: rgba(0,0,0,0.6);
 }
 
 .text-center{

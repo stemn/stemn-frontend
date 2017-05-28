@@ -80,7 +80,7 @@ export const getUserProjects = ({ userId }) => ({
       parentId: userId,
       size: 1000,
       published: 'both',
-      select: ['_id', 'picture', 'stub', 'name', 'type', 'remote', 'updated', 'blurb', 'permissions'],
+      select: ['_id', 'picture', 'stub', 'name', 'type', 'remote', 'updated', 'blurb', 'private'],
     },
   }),
   meta: {
@@ -196,13 +196,13 @@ export const confirmLinkRemote = ({ isConnected, id, path, prevProvider, project
   }
 
   if (isConnected) {
-    dispatch(ModalActions.showConfirm({
+    return dispatch(ModalActions.showConfirm({
       message: 'Changing your file store <b>will delete your entire commit and change history.</b> Are you sure you want to do this? There is no going back.',
     })).then(() => {
-      dispatch(linkRemoteProviderDependent())
+      return dispatch(linkRemoteProviderDependent())
     })
   } else {
-    dispatch(linkRemoteProviderDependent())
+    return dispatch(linkRemoteProviderDependent())
   }
 }
 

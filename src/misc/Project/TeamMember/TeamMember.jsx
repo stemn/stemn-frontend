@@ -1,12 +1,12 @@
 import React from 'react';
 
-// Components
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import Popover from 'stemn-shared/misc/Popover';
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
 
-// Styles
+import { get } from 'lodash'
+
 import classNames from 'classnames';
 
 export default class extends React.Component{
@@ -37,12 +37,18 @@ export default class extends React.Component{
       }
     }
 
+    const getPermissions = (role) => {
+      return permissions[role] || permissions.viewer
+    }
+
+    const role = get(item, 'permissions.role')
+
     return (
       <div className="layout-row layout-align-start-center">
         <UserAvatar picture={item.picture} size={40}/>
         <div className="flex" style={{marginLeft: '15px'}}>
-          <div className="text-bold" style={{marginBottom: '5px'}}>{item.name}</div>
-          <div className="text-description-1">{permissions[item.permissions.role].description}</div>
+          <div className="text-bold" style={ { marginBottom: '5px' } }>{item.name}</div>
+          <div className="text-description-1">{ getPermissions().description }</div>
         </div>
 
         {!item.owner
@@ -52,9 +58,9 @@ export default class extends React.Component{
               <MdMoreHoriz size="20px"/>
             </SimpleIconButton>
             <div className="PopoverMenu">
-              <a className={classNames({'active': item.permissions.role == 'admin'})} onClick={()=>changePermissionsFn({userId: item._id, role: 'admin'})}>Set Permission: Admin</a>
-              <a className={classNames({'active': item.permissions.role == 'collaborator'})} onClick={()=>changePermissionsFn({userId: item._id, role: 'collaborator'})}>Set Permission: Collaborator</a>
-              <a className={classNames({'active': item.permissions.role == 'viewer'})} onClick={()=>changePermissionsFn({userId: item._id, role: 'viewer'})}>Set Permission: Viewer</a>
+              <a className={classNames({'active': role === 'admin'})} onClick={()=>changePermissionsFn({userId: item._id, role: 'admin'})}>Set Permission: Admin</a>
+              <a className={classNames({'active': role === 'collaborator'})} onClick={()=>changePermissionsFn({userId: item._id, role: 'collaborator'})}>Set Permission: Collaborator</a>
+              <a className={classNames({'active': role === 'viewer'})} onClick={()=>changePermissionsFn({userId: item._id, role: 'viewer'})}>Set Permission: Viewer</a>
               <div className="divider"></div>
               <a onClick={()=>removeTeamMemberFn({userId: item._id})}>Remove User</a>
               </div>

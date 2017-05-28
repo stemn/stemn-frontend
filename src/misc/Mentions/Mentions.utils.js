@@ -113,7 +113,7 @@ export const mentionTriggers = [{
   type: 'user',
 }, {
   trigger: '#',
-  type: 'thread',
+  type: 'task',
 }]
 
 export const mentionTypeFromWord = (word) => {
@@ -133,14 +133,14 @@ export const getMentionInfo = (mentionType, entityId, display) => {
         userId: entityId,
       }
     },
-    thread: {
+    task: {
       display: `#${display}`,
       route: 'taskRoute',
       params: {
         taskId: entityId,
       }
     },
-    'thread-complete': {
+    'task-complete': {
       display: `#${display} (complete)`,
       route: 'taskRoute',
       params: {

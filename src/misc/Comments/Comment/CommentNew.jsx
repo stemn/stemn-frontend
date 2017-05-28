@@ -16,6 +16,7 @@ import MarkdownButton from 'stemn-shared/misc/Editor/MarkdownButton/MarkdownButt
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton';
 import { ctrlEnterHandler } from 'stemn-shared/misc/Forms/Forms.utils.js'
 import TextSwitch from 'stemn-shared/misc/Animation/TextSwitch'
+import confirmAuth from 'stemn-shared/misc/Auth/actions/confirmAuth'
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -41,9 +42,12 @@ export class CommentNew extends Component {
     })
   }
   clickComment = () => {
-    this.setState({
-      isFocussed: true,
-    })
+    const { dispatch } = this.props
+    dispatch(confirmAuth(() => {
+      this.setState({
+        isFocussed: true,
+      })
+    }))
   }
   componentDidMount(){
     ctrlEnterHandler(this.refs.form, this.submitNewComment)
@@ -110,6 +114,7 @@ function mapStateToProps({ comments, auth }, { taskId }) {
 function mapDispatchToProps(dispatch) {
   return {
     commentsActions: bindActionCreators(CommentsActions, dispatch),
+    dispatch,
   }
 }
 

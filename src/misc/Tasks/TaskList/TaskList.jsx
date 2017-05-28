@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as TasksActions from '../Tasks.actions.js';
 
-//import TaskGroupParent     from './TaskGroup/TaskGroupParent.jsx';
-//import TaskGroupWrapped    from './TaskGroup/TaskGroupWrapped.jsx'
-//import TaskGroup           from './TaskGroup/TaskGroup.jsx'
-//import TaskListItemParent  from './TaskListItem/TaskListItemParent.jsx'
-//import TaskListItemWrapped from './TaskListItem/TaskListItemWrapped.jsx'
-//import TaskListItem        from './TaskListItem/TaskListItem.jsx'
-//import Input from 'stemn-shared/misc/Input/Input/Input';
+import TaskGroupParent     from './TaskGroup/TaskGroupParent.jsx';
+import TaskGroupWrapped    from './TaskGroup/TaskGroupWrapped.jsx'
+import TaskGroup           from './TaskGroup/TaskGroup.jsx'
+import TaskListItemParent  from './TaskListItem/TaskListItemParent.jsx'
+import TaskListItemWrapped from './TaskListItem/TaskListItemWrapped.jsx'
+import TaskListItem        from './TaskListItem/TaskListItem.jsx'
+import Input from 'stemn-shared/misc/Input/Input/Input';
 
 import classNames from 'classnames'
 import classes from './TaskList.css';
@@ -110,40 +110,42 @@ export const TaskList = React.createClass({
     const entityModel = `tasks.boards.${board.data._id}`;
 
     const outerClasses = classNames(className, layout == 'board' ? 'layout-column flex' : 'flex')
-    return null
+    const outerStyles = layout == 'board' ? { overflowX : 'scroll' } : { overflowY : 'scroll' }
     return (
-      <div className={outerClasses} style={layout == 'board' ? {overflowX : 'scroll'} : {overflowY : 'scroll'}}>
-        <TaskGroupParent layout={layout}>
-          {board.data.groups.map((group, groupIndex) =>
+      <div className={ outerClasses } style={ outerStyles }>
+        <TaskGroupParent layout={ layout }>
+          { board.data.groups.map((group, groupIndex) =>
             <TaskGroupWrapped
-              key={group._id}
-              index={groupIndex}
-              id={group._id}
-              item={group}
-              groups={board.data.groups.map((group)=>group._id)}
-              moveGroup={this.moveGroup}
-              layout={layout}>
+              key={ group._id }
+              index={ groupIndex }
+              id={ group._id }
+              item={ group }
+              groups={ board.data.groups.map((group)=>group._id) }
+              moveGroup={ this.moveGroup }
+              layout={ layout }>
               <TaskGroup
-                item={group}
-                layout={layout}
-                entityModel={`${entityModel}.data.groups[${groupIndex}]`}
-                deleteGroup={() => this.deleteGroup(group._id)}
-                updateGroup={() => this.updateGroup(group)}>
+                item={ group }
+                layout={ layout }
+                entityModel={ `${entityModel}.data.groups[${groupIndex}]` }
+                deleteGroup={ () => this.deleteGroup(group._id) }
+                updateGroup={ () => this.updateGroup(group) }
+              >
                 <TaskListItemParent
-                 groupId={group._id}
-                 moveCard={this.moveCard}
+                 groupId={ group._id }
+                 moveCard={ this.moveCard }
                  tasks={group.tasks}
-                 layout={layout}>
-                  {group.tasks ? group.tasks.map((taskId, cardIndex) =>
+                 layout={layout}
+                >
+                  { group.tasks ? group.tasks.map((taskId, cardIndex) =>
                     <TaskListItemWrapped
-                      index={cardIndex}
-                      id={taskId}
-                      key={taskId}
-                      item={taskId}
-                      groupId={group._id}
-                      tasks={group.tasks}
-                      moveCard={this.moveCard}
-                      beginDrag={this.beginDrag}
+                      index={ cardIndex }
+                      id={ taskId }
+                      key={ taskId }
+                      item={ taskId }
+                      groupId={ group ._id }
+                      tasks={ group.tasks }
+                      moveCard={ this.moveCard }
+                      beginDrag={ this.beginDrag }
                       endDrag={this.endDrag}>
                       <TaskListItem item={taskId} draggable={true} layout={layout} />
                     </TaskListItemWrapped>

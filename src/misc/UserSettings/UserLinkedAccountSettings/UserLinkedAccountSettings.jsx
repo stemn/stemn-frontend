@@ -22,13 +22,13 @@ export default class UserLinkedAccountSettings extends Component {
         <LinkAccount
           text="Facebook"
           isLinked={user.accounts.facebook && user.accounts.facebook.id}
-          linkFn={()=>authActions.authenticate('facebook')}
-          unLinkFn={()=>authActions.unlink('facebook')}/>
+          linkFn={()=>authenticate('facebook')}
+          unLinkFn={()=>unlink('facebook')}/>
         <LinkAccount
           text="Linkedin"
           isLinked={user.accounts.linkedin && user.accounts.linkedin.id}
-          linkFn={()=>authActions.authenticate('linkedin')}
-          unLinkFn={()=>authActions.unlink('linkedin')}/>
+          linkFn={()=>authenticate('linkedin')}
+          unLinkFn={()=>unlink('linkedin')}/>
       </div>
     )
   }

@@ -1,15 +1,14 @@
-import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import React from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-// Container Actions
-import { actions } from 'react-redux-form';
-import { remote } from 'electron';
-
-import classNames from 'classnames';
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
+import { remote } from 'electron'
+import classNames from 'classnames'
 import classes from './FileSelectInput.css'
-import MdFolder from 'react-icons/md/folder';
+import MdFolder from 'react-icons/md/folder'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import TextDisplayBox from 'stemn-shared/misc/TextDisplayBox/TextDisplayBox.jsx'
 
 const Component = React.createClass({
   showModal(){
@@ -20,30 +19,33 @@ const Component = React.createClass({
       properties: ['openDirectory']
     }, (files) => {
       if(files && files[0]){
-        this.props.dispatch(actions.change(this.props.model, files[0]))
+        this.props.dispatch(storeChange(this.props.model, files[0]))
       }
     })
   },
   render() {
-    const { model, value, children, placeholder } = this.props;
+    const { model, value, children, placeholder } = this.props
     return (
-      <div className={classes.fileSelectInput + ' layout-row layout-align-start-center'} onClick={this.showModal}>
-        {children}
-        <div className={classNames(classes.text, {[classes.placeholder] : !value}, 'flex')}>{value || placeholder}</div>
+      <TextDisplayBox
+        className={ classes.input }
+        onClick={ this.showModal }
+      >
+        { children }
+        <div className={ classNames(classes.text, {[classes.placeholder] : !value}, 'flex') }>{value || placeholder}</div>
         <SimpleIconButton>
           <MdFolder size="22" />
         </SimpleIconButton>
-      </div>
+      </TextDisplayBox>
     );
   }
 });
 
 function mapStateToProps() {
-  return {};
+  return {}
 }
 
 function mapDispatchToProps(dispatch) {
   return { dispatch }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps, mapDispatchToProps)(Component)

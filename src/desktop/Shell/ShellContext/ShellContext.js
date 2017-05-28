@@ -1,5 +1,4 @@
 import winreg from 'winreg';
-import Promise from 'es6-promise';
 import { values, every } from 'lodash'
 
 const setRegistryKey = ({hive, key, name, value, type}) => {

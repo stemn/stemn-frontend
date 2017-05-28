@@ -1,4 +1,3 @@
-import { modelReducer, formReducer, modeled } from 'react-redux-form';
 import i from 'icepick';
 
 const numBackgrounds = 8;
@@ -19,6 +18,16 @@ const initialState = {
     password: '',
     firstname: '',
     lastname: '',
+  },
+  passwordLost: {
+    email: '',
+  },  
+  passwordSet: {
+    password1: '',
+    password2: '',
+  },
+  forms: {
+    // Some forms for temp data
   },
   background: Math.floor(Math.random() * numBackgrounds) + 1 // We init a random number between 1 and 8 to use as the background
 }
@@ -92,6 +101,10 @@ const mainReducer = (state, action) => {
       return {...state,
         authLoading: false,
       }
+    case 'AUTH/UPDATE_USER':
+      return {...state,
+        user: action.payload.user,
+      }
 
     case 'AUTH/NEXT_BACKGROUND':
       return state.background + 1 <= numBackgrounds
@@ -110,5 +123,5 @@ export default function (state = initialState, action) {
   if (!state.hydrated) {
     state = { ...initialState, ...state, hydrated: true };
   }
-  return modeled(mainReducer, 'auth')(state, action)
+  return mainReducer(state, action)
 }

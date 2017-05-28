@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from  'react-redux'
-import { actions } from 'react-redux-form'
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import classes from './LocationSearch.css'
 
 import Autosuggest from 'stemn-shared/misc/Autosuggest/Autosuggest.container';
@@ -22,7 +22,7 @@ export default class LocationSearch extends Component {
     if (select) {
       select(value)
     } else {
-      dispatch(actions.change(model, value))
+      dispatch(storeChange(model, value))
     }
   }
 

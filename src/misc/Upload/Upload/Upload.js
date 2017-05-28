@@ -12,7 +12,7 @@ export default class Upload extends Component {
     containerClassName: PropTypes.string, // Classes for the container element
     imageClassName: PropTypes.string,     // Classes for the image element
     model: PropTypes.string,              // The model (optional)
-    value: PropTypes.object,              // The initial value
+    value: PropTypes.string,              // The initial value
     onUpload: PropTypes.func,             // Function to be run when the upload is complete
     // From container
     uploadData: PropTypes.object,

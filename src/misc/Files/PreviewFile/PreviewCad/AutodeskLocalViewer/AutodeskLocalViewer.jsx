@@ -1,7 +1,6 @@
-import React from 'react';
-import classes from './AutodeskLocalViewer.css';
-import autodeskViewerUtils from '../PreviewCadViewer.utils.js';
-
+import React from 'react'
+import classes from './AutodeskLocalViewer.css'
+import autodeskViewerUtils from '../PreviewCadViewer.utils.js'
 
 export default React.createClass({
   viewer: null,
@@ -13,7 +12,7 @@ export default React.createClass({
       }
       this.viewer = autodeskViewerUtils.register(this.refs.cadCanvas, nextProps.linkKey);
       const filePath = `${nextProps.path}/1/model.svf`;
-      const filePathWithProtocol = filePath.includes('http://') ? filePath : `file://${filePath}`;
+      const filePathWithProtocol = filePath.startsWith('http') ? filePath : `file://${filePath}`;
       const options = {
         'env' : 'Local',
         'document' : filePathWithProtocol

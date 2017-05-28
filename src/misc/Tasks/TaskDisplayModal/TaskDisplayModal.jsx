@@ -11,7 +11,6 @@ import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js';
 // Component Core
 import React from 'react';
 import moment from 'moment';
-import { actions } from 'react-redux-form';
 import { has }     from 'lodash';
 
 // Styles

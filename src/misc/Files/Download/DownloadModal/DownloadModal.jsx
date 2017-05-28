@@ -1,35 +1,24 @@
-// Container Core
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
-// Container Actions
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry'
 import * as SyncTimelineActions from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js';
-import { actions } from 'react-redux-form';
-
-// Component Core
 import React, { PropTypes } from 'react';
 import moment from 'moment';
 import { orderBy } from 'lodash';
-
-// Styles
 import classNames from 'classnames';
 import classes from './DownloadModal.css'
-
-// Sub Components
 import Button from 'stemn-shared/misc/Buttons/Button/Button';
 import MdDone from 'react-icons/md/done';
 import DownloadFile from '../../DownloadFile/DownloadFile.jsx'
 import Label        from 'stemn-shared/misc/Label/Label.jsx'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
-///////////////////////////////// COMPONENT /////////////////////////////////
-
 const propTypesObject = {
   revisions   : PropTypes.array,                // Standard array of revisions
   file        : PropTypes.object.isRequired,    // File object
-};
+}
 
-export const FileSelectModal = React.createClass({
+export const DownloadModal = React.createClass({
   propTypes: propTypesObject,
   onMount(nextProps, prevProps){
     // If this is a sync file
@@ -40,7 +29,7 @@ export const FileSelectModal = React.createClass({
       })
     }
     // If this is remote file
-    else{
+    else {
       nextProps.syncTimelineActions.fetchTimeline({
         entityType : 'file',
         entityId   : nextProps.file.fileId,
@@ -70,7 +59,7 @@ export const FileSelectModal = React.createClass({
               <div style={{width: '70px'}}>Version {revision.data.revisionNumber}</div>
               <div className="flex text-grey-3">{revision.timestamp ? moment(revision.timestamp).fromNow() : null}</div>
               {index == 0 ? <Label style={{marginRight: '10px'}}>Latest Version</Label> : null}
-              <DownloadFile file={revision.data}>Download</DownloadFile>
+              <DownloadFile file={ revision.data }>Download</DownloadFile>
             </div>
           ))}
         </div>
@@ -81,23 +70,22 @@ export const FileSelectModal = React.createClass({
       </div>
     );
   }
-});
+})
 
-
-
-///////////////////////////////// CONTAINER /////////////////////////////////
-
-function mapStateToProps({syncTimeline}, {file}) {
+function stateToProps({syncTimeline}, {file}) {
   return {
     syncTimeline: syncTimeline[file.fileId],
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function dispatchToProps(dispatch) {
   return {
     syncTimelineActions: bindActionCreators(SyncTimelineActions, dispatch),
     dispatch
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FileSelectModal);
+const modalName = 'FILE_DOWNLOAD'
+const ModalComponent = connect(stateToProps, dispatchToProps)(DownloadModal)
+registerModal(modalName, ModalComponent)
+export default modalName

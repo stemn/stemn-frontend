@@ -1,4 +1,4 @@
-import { actions }           from 'react-redux-form';
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import { show as showToast } from '../Toasts/Toasts.actions.js';
 import { showModal }         from '../Modal/Modal.actions.js';
 import { parseMentions }     from '../Mentions/Mentions.utils.js';
@@ -6,6 +6,7 @@ import { updateTask }        from '../Tasks/Tasks.actions.js';
 import i                     from 'icepick';
 import http                  from 'axios';
 import { get }               from 'lodash';
+import TaskMentionModalName from 'stemn-shared/misc/Mentions/TaskMentionModal'
 
 export function deselect({projectId}) {
   return {
@@ -68,7 +69,7 @@ export function fetchChanges({projectId}) {
 export function mentionTasksModal({projectId, mentions}) {
   return (dispatch) => {
     dispatch(showModal({
-      modalType: 'TASK_COMMIT',
+      modalType: TaskMentionModalName,
       modalProps: {
         projectId: projectId
       },
@@ -134,7 +135,7 @@ export function commit({projectId, summary, description}) {
         // If mentionType: task-complete, we set the task to complete.
         mentions.forEach(mention => {
           if(mention.mentionType == 'task-complete'){
-            dispatch(actions.change(`tasks.data.${mention.entityId}.data.complete`, true));
+            dispatch(storeChange(`tasks.data.${mention.entityId}.data.complete`, true));
           }
         });
         return response

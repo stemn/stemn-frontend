@@ -1,0 +1,11 @@
+.placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.input {
+  padding-left: 0 !important;
+}
+
+.text {
+  margin-left: 10px;
+}

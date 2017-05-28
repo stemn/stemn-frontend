@@ -1,5 +1,4 @@
 import i from 'icepick'
-import { modeled } from 'react-redux-form'
 
 const initialState = {
   /************************************************
@@ -11,7 +10,7 @@ const initialState = {
   ************************************************/
 }
 
-function reducer(state, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
     case 'TIMELINE/SELECT_ITEM':
       return i.assocIn(state, [action.meta.cacheKey, 'selected'], action.payload.selected)
@@ -29,8 +28,4 @@ function reducer(state, action) {
     default:
       return state
   }
-}
-
-export default function (state = initialState, action) {
-  return modeled(reducer, 'syncTimeline')(state, action)
 }

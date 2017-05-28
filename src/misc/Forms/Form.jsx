@@ -8,7 +8,7 @@ section in the store.
 
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { actions } from 'react-redux-form'
+import { storeLoad } from 'stemn-shared/misc/Store/Store.actions'
 import { get } from 'lodash'
 
 
@@ -16,7 +16,7 @@ const stateToProps = () => ({
 })
 
 const dispatchToProps = {
-  load: actions.load,
+  load: storeLoad,
 }
 
 @connect(stateToProps, dispatchToProps)
@@ -24,7 +24,7 @@ export default class Form extends Component {
   static propTypes = {
     load: PropTypes.func.isRequired,
     model: PropTypes.string.isRequired,
-    value: PropTypes.object.isRequired,
+    value: PropTypes.any.isRequired,
   }
   componentWillMount() { 
     this.props.load(this.props.model, this.props.value);

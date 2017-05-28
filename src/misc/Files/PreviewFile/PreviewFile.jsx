@@ -1,14 +1,13 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as FilesActions from '../Files.actions.js'
-import { loadCode } from 'stemn-shared/misc/CodeSplitting/CodeSplitting.actions'
 import React from 'react'
 import classNames from 'classnames'
 import classes from './PreviewFile.css'
 import PreviewCode from './PreviewCode/PreviewCode'
 import PreviewCadLoader from './PreviewCadLoader'
 import PreviewPdfLoader from './PreviewPdfLoader'
-import PreviewPcb from './PreviewPcb/PreviewPcb'
+import PreviewPcbLoader from './PreviewPcbLoader'
 import PreviewImage from './PreviewImage/PreviewImage'
 import PreviewGoogle from './PreviewGoogle/PreviewGoogle'
 import PreviewGdoc from './PreviewGdoc/PreviewGdoc'
@@ -22,7 +21,7 @@ import ErrorMessages from './Messages/Messages.jsx'
 
 export const Component = React.createClass({
   render() {
-    const { file, fileData, fileRender, filesActions, header, event, codeSplitting, loadCode } = this.props;
+    const { file, fileData, fileRender, filesActions, header, event, codeSplitting } = this.props;
     const previewId = `${file.project._id}-${file.fileId}-${file.revisionId}`;
 
     const renderFn = () => {
@@ -47,7 +46,7 @@ export const Component = React.createClass({
         )
       } else if (viewerType === 'gerber' || viewerType === 'pcb') {
         return (
-          <PreviewPcb
+          <PreviewPcbLoader
             previewId={ previewId }
             fileMeta={ file }
             fileData={ fileData }
@@ -145,7 +144,6 @@ function mapStateToProps({files, codeSplitting}, {project, file, event}) {
 function mapDispatchToProps(dispatch) {
   return {
     filesActions: bindActionCreators(FilesActions, dispatch),
-    loadCode: bindActionCreators(loadCode, dispatch),
   }
 }
 

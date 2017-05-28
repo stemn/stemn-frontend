@@ -7,18 +7,18 @@ import classes from './Radio.css'
 
 export default class extends React.Component{
   render(){
-    const { value, model, modelValue, children } = this.props;
+    const { value, model, modelValue, children } = this.props
     return (
-      <div className={classes.radio}>
+      <div className={ classes.radio }>
         <label className="layout-row layout-align-start-center">
           <Input
-            value={value}
+            value={ value }
             type="radio"
-            className={classNames({[classes.checked] : modelValue == value})}
-            model={model}
+            className={ classNames({[classes.checked] : modelValue == value}) }
+            model={ model }
           />
           <span className="layout-column layout-align-center-center"></span>
-          <div className="layout-row layout-align-start-center flex">{children}</div>
+          <div className="layout-row layout-align-start-center flex">{ children }</div>
         </label>
       </div>
     );

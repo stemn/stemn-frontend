@@ -11,8 +11,8 @@
   width: 380px;
   font-size: 13px;
   transition: all 0.2s ease;
-  height: 77px;
   overflow: hidden;
+  max-height: 100px;
 }
 
 @media (max-width: 599px) {
@@ -29,11 +29,14 @@
   border-radius: 3px;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.03), 0 2px 15px rgba(0,0,0,0.15);  line-height: 1.5em;
   margin: 5px 15px 10px 15px;
-  padding: 0 15px;
+  padding: 10px 15px;
+  min-height: 60px;
 }
 
 .icon {
   margin-right: 10px;
+  width: 20px;
+  min-width: 20px;
 }
 
 .close:hover {
@@ -47,21 +50,21 @@
 }
 
 .enter, .appear {
-  transition: height 300ms ease;
-  height: 0px;
+  transition: max-height 300ms ease;
+  max-height: 0px;
 }
 
 .enterActive, .appearActive {
-  height: 77px;
+  max-height: 100px;
 }
 
 .leave {
-  height: 77px;
-  transition: height 300ms ease;
+  max-height: 100px;
+  transition: max-height 300ms ease;
 }
 
 .leaveActive {
-  height: 0px;
+  max-height: 0px;
 }
 
 /*Toast Types*/

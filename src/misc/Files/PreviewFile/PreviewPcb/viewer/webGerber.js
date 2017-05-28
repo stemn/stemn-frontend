@@ -1,11 +1,15 @@
-import webGerberConstants from './constants/webGerberConstants.js';
-import ViewEEPCB from './viewee.js';
-import initGerberParser from './parse/gerber.js';
-//import THR51 from './three.min.js';
-import ObjectControls from './ObjectControls.js';
-import RenderGerber from './render/gerber.js';
+import webGerberConstants from './constants/webGerberConstants.js'
+import ViewEEPCB from './viewee.js'
+import initGerberParser from './parse/gerber.js'
+import THR51 from './three.min.js'
+// Assign THR51 to window
+window.THR51 = THR51
+import ObjectControls from './ObjectControls.js'
+import RenderGerber from './render/gerber.js'
+import _ from 'lodash'
 
 import 'javascript-detect-element-resize'; // addResizeListener && removeResizeListener
+
 
 export default () => {
   var wG = {};

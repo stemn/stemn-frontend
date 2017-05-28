@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { get } from 'lodash'
-import classes from './NewThreadModal.css'
+import classes from './NewThreadModal.scss'
 import classNames from 'classnames'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
@@ -16,8 +16,6 @@ export default class NewThreadModal extends Component {
     const body = get(board, 'newThread.body')
     const boardId = board.data._id
     const projectId = board.data.project
-
-    console.log(goToTaskRoute);
 
     // Create the new task
     newTask({
@@ -68,16 +66,17 @@ export default class NewThreadModal extends Component {
     }))
 
     return (
-      <div style={ { width: '600px'} }>
+      <div className={ classNames(classes.modal, 'layout-column') }>
         <div className={ classes.modalTitle }>Create a new thread</div>
-        <div className={ classes.modalBody }>
+        <div className={ classNames(classes.modalBody, 'flex') }>
           <div className={ classNames(classes.titleSection, 'layout-row layout-align-start-center') }>
             <Textarea
               model={ `${boardModel}.newThread.name` }
-              value={ get(board, 'newThread.name') }
+              value={ get(board, 'newThread.name', '') }
               className="text-title-4 input-plain flex"
               placeholder="Untitled Thread"
               autoFocus
+              tabIndex="1"
             />
             <PopoverDropdown
               options={ groupOptions }
@@ -92,18 +91,22 @@ export default class NewThreadModal extends Component {
               model={ `${boardModel}.newThread.body` }
               value={ get(board, 'newThread.body') }
               placeholder="Thread description"
+              tabIndex="2"
             />
           </div>
         </div>
         <div className="modal-footer-no-line layout-row layout-align-end">
           <Button
             style={ { marginRight: '10px' } }
-            onClick={ modalConfirm }>
+            onClick={ modalConfirm }
+            tabIndex="3"
+          >
             Cancel
           </Button>
           <Button
             className="primary"
             onClick={ this.newThread }
+            tabIndex="4"
           >
             Create
           </Button>

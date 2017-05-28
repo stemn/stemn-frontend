@@ -1,20 +1,11 @@
-// Container Core
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
-// Container Actions
 import * as FilesActions from '../Files.actions.js';
-
-// Component Core
 import React, { PropTypes } from 'react';
 import { omit } from 'lodash';
-
-// Styles
 import classNames from 'classnames';
-
-// Sub Components
-import LoadingOverlay     from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import EditorDisplay      from 'stemn-shared/misc/Editor/EditorDisplay.jsx';
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx';
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -49,9 +40,9 @@ export const DisplayReadme = React.createClass({
       return (
         <div { ...omit(this.props, Object.keys(propTypesObject)) }>
           { fileData && fileData.data
-          ? <EditorDisplay value={fileData.data}/>
+          ? <EditorDisplay value={fileData.data} />
           : null }
-          <LoadingOverlay show={fileData && fileData.loading}/>
+          <LoadingOverlay show={ fileData && fileData.loading } size="sm" />
         </div>
       )
     }

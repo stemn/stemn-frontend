@@ -34,9 +34,7 @@ import MdAdd                          from 'react-icons/md/add';
 import ProjectMenu                    from 'stemn-shared/misc/Projects/Project.menu.js';
 import UserAvatar                     from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx';
 
-import ProjectNewModal, { modalName } from 'stemn-shared/misc/Projects/ProjectNewModal/ProjectNewModal.jsx'
-import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry';
-registerModal(modalName, ProjectNewModal);
+import ProjectNewModalName from 'stemn-shared/misc/Projects/ProjectNewModal'
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -45,7 +43,7 @@ const ProjectWithContext = ContextMenuLayer(projectContextIdentifier, props => p
 
 export const Component = React.createClass({
   showProjectNewModal(){
-    this.props.modalActions.showModal({modalType: modalName,})
+    this.props.modalActions.showModal({modalType: ProjectNewModalName})
   },
   secretSearch(){
     if (this.props.sidebar.searchString.length == 24) {

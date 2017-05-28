@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { actions } from 'react-redux-form';
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import { omit } from 'lodash';
 
 export const Component = React.createClass({
@@ -10,9 +10,16 @@ export const Component = React.createClass({
     }
   },
   onChange(event){
-    const { model, dispatch, type, changeAction } = this.props;
-    const prevValue = this.state.value;
-    let newValue = event.target.value;
+    const { model, dispatch, type, changeAction } = this.props
+    const prevValue = this.state.value
+    let newValue = event.target.value
+
+    // Convert 'true' and 'false' to bool
+    if (newValue === 'true') {
+      newValue = true
+    } else if (newValue === 'false') {
+      newValue = false
+    }
 
     // Toggle if checkbox
     // Value can be: true || false || 'other' || undefined
@@ -21,11 +28,11 @@ export const Component = React.createClass({
       newValue = isFalse ? true : false; // toggle
     }
 
-    if(model){
+    if (model) {
       // If model exists, we dispatch an update
-      this.props.dispatch(actions.change(model, newValue));
+      this.props.dispatch(storeChange(model, newValue));
     }
-    if(changeAction){
+    if (changeAction) {
       // If a changeActions exists, we run it
       changeAction({value: newValue, model})
     }

@@ -5,7 +5,7 @@ import { Link } from 'react-router'
 import { isActive, getRoutePath } from './Link.utils'
 
 const propTypesObject = {
-  children: PropTypes.node.isRequired,    // Child element
+  children: PropTypes.node,               // Child element
   name: PropTypes.string,                 // Router path name, eg -> 'userRoute'
   params: PropTypes.object,               // Query param object
   activeIf: PropTypes.object,             // Object user to determine if the link is active
@@ -37,6 +37,7 @@ const LinkComponent = (props) => {
 
   // Get the path from the route name
   const routePath = getRoutePath(name, params)
+  const routePathIsObject = typeof routePath === 'object'
 
   // Get the route state from the scope
   // We include the scope on the state.meta
@@ -49,14 +50,26 @@ const LinkComponent = (props) => {
     }
   }
 
-  const toWithPath = routePath ? {
-    pathname: routePath,
-    query: query,
-    state: routeState
-  } : {
-    pathname: to,
-    query: query,
-    state: routeState
+  const getToPath = () => {
+    if (routePath && routePathIsObject) {
+      return {
+        pathname: routePath.pathname,
+        query: Object.assign({}, query, routePath.query),
+        state: routeState
+      }
+    } else if (routePath) {
+      return {
+        pathname: routePath,
+        query: query,
+        state: routeState
+      }
+    } else {
+      return {
+        pathname: to,
+        query: query,
+        state: routeState
+      }
+    }
   }
 
   const additionalClickFunction = () => {
@@ -75,7 +88,7 @@ const LinkComponent = (props) => {
 
   return (
     <Link
-       to={ toWithPath }
+       to={ getToPath() }
        className={ allClassNames }
        onClick={ extendedOnClick }
        { ...otherProps }

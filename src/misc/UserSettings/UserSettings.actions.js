@@ -1,3 +1,5 @@
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
+
 export const getSettings = () => ({
   type: 'USER_SETTINGS/GET_SETTINGS',
   http: true,
@@ -16,3 +18,5 @@ export const saveSettings = () => (dispatch, getState) => dispatch({
     data: getState().userSettings.data,
   },
 })
+
+export const completeOnboarding = () => storeChange('userSettings.data.messages.onboarding', false)
