@@ -45,7 +45,7 @@ export default class PreviewPage extends Component {
     } else if(projectId){
       // It is a folder (and is linked to a project) - open the folder
       pushRoute({
-        pathname: `/project/${fileMeta.data.project._id}/files/${file.fileId}`,
+        pathname: `/project/${projectId}/files/${fileId}`,
         state: { meta : { scope: ['main'] } }
       })
       showWindow('main')
@@ -80,7 +80,7 @@ export default class PreviewPage extends Component {
           <FileBreadCrumbs
             className="text-ellipsis no-drag"
             meta={ file.data }
-            link
+            clickFn={ this.clickFileOrFolder }
             popup
           />
           <div className="flex" />
