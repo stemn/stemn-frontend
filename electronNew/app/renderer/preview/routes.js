@@ -1,10 +1,10 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
-import AppRootPage           from './pages/AppRootPage/AppRootPage.jsx';
-import PreviewPage           from './pages/PreviewPage/PreviewPage.jsx';
-import LoginPage             from './pages/LoginPage/LoginPage.jsx';
-import AppAuthedPage         from './pages/AppAuthedPage/AppAuthedPage.jsx';
-import AppUnAuthedPage       from './pages/AppUnAuthedPage/AppUnAuthedPage.jsx';
+import { Route, IndexRoute } from 'react-router'
+import AppRootPage           from './pages/AppRootPage/AppRootPage.jsx'
+import PreviewPage           from './pages/PreviewPage'
+import LoginPage             from './pages/LoginPage/LoginPage.jsx'
+import AppAuthedPage         from './pages/AppAuthedPage/AppAuthedPage.jsx'
+import AppUnAuthedPage       from './pages/AppUnAuthedPage/AppUnAuthedPage.jsx'
 
 export default (store) => {
   return (
