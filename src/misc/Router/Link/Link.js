@@ -39,17 +39,20 @@ const LinkComponent = (props) => {
   const routePath = getRoutePath(name, params)
   const routePathIsObject = typeof routePath === 'object'
 
+  // Get the isExternal bool (if the route object has external:true)
+  const isExternal = routePathIsObject && routePath.external
+
   // Get the route state from the scope
   // We include the scope on the state.meta
   // This state.meta is moved up to the root action object
-  // inside the Router.middleware
-  // this is only used on desktop
+  // inside the Router.middleware (this is only used on desktop)
   const routeState = {
     meta : {
       scope: [scope]
     }
   }
 
+  // Construct the function to get the 'to'
   const getToPath = () => {
     if (routePath && routePathIsObject) {
       return {
@@ -72,6 +75,15 @@ const LinkComponent = (props) => {
     }
   }
 
+  // Construct the function to get the 'href'
+  const getHref = () => {
+    if (routePath.pathname.startsWith('http')) {
+      return routePath.pathname
+    } else {
+      return `${GLOBAL_ENV.WEBSITE_URL}${routePath.pathname}`
+    }
+  }
+
   const additionalClickFunction = () => {
     // Dispatch the show event if required
     if (scope && show) showWindow(scope)
@@ -86,14 +98,25 @@ const LinkComponent = (props) => {
 
   const allClassNames = classNames(className, { 'active': isActive(activeIf, params) })
 
-  return (
-    <Link
-       to={ getToPath() }
-       className={ allClassNames }
-       onClick={ extendedOnClick }
-       { ...otherProps }
-     />
-  )
+  if (isExternal) {
+    return (
+      <a
+         href={ getHref() }
+         className={ allClassNames }
+         onClick={ extendedOnClick }
+         { ...otherProps }
+       />
+    )
+  } else {
+    return (
+      <Link
+         to={ getToPath() }
+         className={ allClassNames }
+         onClick={ extendedOnClick }
+         { ...otherProps }
+       />
+    )
+  }
 }
 
 LinkComponent.propTypes = propTypesObject;

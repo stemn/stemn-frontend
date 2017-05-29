@@ -34,13 +34,37 @@ const eventTextMap = {
   },
   task: (item, type, entity) => {
     const params = {
-      projectId: item.data.project,
+      projectId: item.data.project._id,
       taskId: item._id
+    }
+    if (type === 'feed') {
+      return (
+        <span>
+          added a new thread:
+          <Link name="taskRoute" params={ params }>{ item.data.name }</Link>
+          to
+          <Link name="projectRoute" params={ params }>{ item.data.project.name || 'Untitled Project' }</Link>
+        </span>
+      )
     }
     return (
       <span>
         added a new thread:
         <Link name="taskRoute" params={ params }>{ item.data.name }</Link>
+      </span>
+    )
+  },
+  comment: (item, type, entity) => {
+    const params = {
+      projectId: item.data.project,
+      taskId: item._id
+    }
+    return (
+      <span>
+        commented on
+        <Link name="taskRoute" params={ params }>Thread Link</Link>
+        in
+        <Link name="projectRoute" params={ params }>Project Link</Link>
       </span>
     )
   },

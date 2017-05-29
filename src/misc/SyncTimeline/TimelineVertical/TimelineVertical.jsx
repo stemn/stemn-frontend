@@ -24,7 +24,16 @@ export default class TimelineVertical extends Component {
     entity: PropTypes.object,
   }
   renderItems = (items) => {
-    return items.map(item => <TimelineItem key={ item._id } item={ item } type={ this.props.type } entity={ this.props.entity } />)
+    return items.map((item, idx) => (
+       <TimelineItem
+         key={ item._id }
+         item={ item }
+         type={ this.props.type }
+         entity={ this.props.entity }
+         isFirst={ idx === 0 }
+         isLast={ idx + 1 === items.length }
+        />
+    ))
   }
   render() {
     const { items, type, group, entity, ...otherProps } = this.props

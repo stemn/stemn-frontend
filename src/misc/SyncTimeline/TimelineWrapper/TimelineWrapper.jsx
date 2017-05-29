@@ -12,8 +12,15 @@ export default React.createClass({
       <div className={ classes.item } style={ this.props.style }>
         <div className="layout-row layout-align-start-center">
           <div className={ classes.marker }></div>
-          <div className="layout-row layout-align-start-center">{this.props.children}</div>
+          <div className="layout-column">
+            { this.props.children[0] }
+          </div>
         </div>
+        { this.props.children[1] &&
+          <div className={ classes.extra }>
+            { this.props.children[1] }
+          </div>
+        }
       </div>
     )
   }

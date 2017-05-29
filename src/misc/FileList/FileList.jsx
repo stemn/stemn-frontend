@@ -179,7 +179,11 @@ export default class FileList extends Component {
             itemHeight={ 48 }
             items={ fileRowHistoric }
           >
-            <FlipMove duration={ 300 } enterAnimation="fade" leaveAnimation="fade">
+            <FlipMove
+              duration={ 300 }
+              enterAnimation="fade"
+              leaveAnimation="fade"
+            >
               { fileRowHistoric }
             </FlipMove>
           </AccordianAnimate>

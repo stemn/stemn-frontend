@@ -1,13 +1,13 @@
 @value border1, bg1 from "theme";
 
-.root{
+.root {
   padding: 20px;
   background: white;
   border: 1px solid border1;
   margin-bottom: 15px;
   position: relative;
 }
-.root h3{
+.root h3 {
   margin-top: 0px;
   font-weight: normal;
   color: rgba(0, 0, 0, 0.6);
@@ -15,7 +15,7 @@
   font-size: 12px;
   letter-spacing: 0.05em;
 }
-.root p{
+.root p {
   font-size: 13px;
   color: #939393;
   margin-bottom: 15px;

@@ -1,4 +1,6 @@
-import isUuid from 'stemn-shared/utils/isUuid.js';
+import isUuid from 'stemn-shared/utils/isUuid.js'
+import getUuid from 'stemn-shared/utils/getUuid.js'
+
 
 
 /*
@@ -35,6 +37,13 @@ text = text.match(/
 /g);
 */
 const markdownLinkRegex = /(\[((?:\[[^\]]*\]|[^\[\]])*)\]\([ \t]*()<?((?:\([^)]*\)|[^()\s])*?)>?[ \t]*((['"])(.*?)\6[ \t]*)?\))/g
+
+export const newMention = ({ mentionType, display, entityId }) => ({
+  display,
+  entityId,
+  mentionType,
+  mentionId: getUuid(),
+})
 
 export const validateMention = (href) => {
   // mention should be of the form 'entityId:entityType:mentionId'
@@ -113,7 +122,7 @@ export const mentionTriggers = [{
   type: 'user',
 }, {
   trigger: '#',
-  type: 'thread',
+  type: 'task',
 }]
 
 export const mentionTypeFromWord = (word) => {
@@ -133,14 +142,14 @@ export const getMentionInfo = (mentionType, entityId, display) => {
         userId: entityId,
       }
     },
-    thread: {
+    task: {
       display: `#${display}`,
       route: 'taskRoute',
       params: {
         taskId: entityId,
       }
     },
-    'thread-complete': {
+    'task-complete': {
       display: `#${display} (complete)`,
       route: 'taskRoute',
       params: {

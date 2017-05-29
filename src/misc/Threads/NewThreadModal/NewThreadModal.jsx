@@ -76,6 +76,7 @@ export default class NewThreadModal extends Component {
               className="text-title-4 input-plain flex"
               placeholder="Untitled Thread"
               autoFocus
+              tabIndex="1"
             />
             <PopoverDropdown
               options={ groupOptions }
@@ -90,18 +91,22 @@ export default class NewThreadModal extends Component {
               model={ `${boardModel}.newThread.body` }
               value={ get(board, 'newThread.body') }
               placeholder="Thread description"
+              tabIndex="2"
             />
           </div>
         </div>
         <div className="modal-footer-no-line layout-row layout-align-end">
           <Button
             style={ { marginRight: '10px' } }
-            onClick={ modalConfirm }>
+            onClick={ modalConfirm }
+            tabIndex="3"
+          >
             Cancel
           </Button>
           <Button
             className="primary"
             onClick={ this.newThread }
+            tabIndex="4"
           >
             Create
           </Button>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import classNames from 'classnames';
 import classes from './TaskMentionModal.css';
 import howMany from 'stemn-shared/utils/strings/howMany.js';
@@ -10,46 +10,50 @@ import { filterBoard, getAllTasks } from 'stemn-shared/misc/Tasks/Tasks.utils.js
 import TasksFilterMenu from 'stemn-shared/misc/Tasks/TasksFilterMenu/TasksFilterMenu.jsx';
 import Popover from 'stemn-shared/misc/Popover';
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import { values } from 'lodash'
+import { newMention } from 'stemn-shared/misc/Mentions/Mentions.utils'
 
-export default React.createClass({
+const getMentionsFromObject = (mentionsObject, tasks) => {
+  return Object.keys(mentionsObject).map(taskId => newMention({
+    entityId: taskId,
+    display: tasks[taskId].data.name,
+    mentionType: mentionsObject[taskId] === 'complete' ? 'task-complete' : 'task'
+  })
+)}
 
-  // Mounting
-   onMount(nextProps, prevProps) {
-    if(!nextProps.board || !nextProps.board.data){
-      nextProps.getBoards({projectId: nextProps.projectId})
+const countMentions = (mentions, type) => values(mentions).filter(mentionType => mentionType === type).length
+
+export default class TaskMentionModal extends Component {
+  componentWillMount() {
+    if(!this.props.board || !this.props.board.data){
+      this.props.getBoards({
+        projectId: this.props.projectId
+      })
     }
-  },
-  componentWillMount() { this.onMount(this.props) },
-  submit(){
+  }
+  submit = () => {
+    const { mentions, mentionsModel, tasks } = this.props
     // Get the mentions
-    const mentions = getMentionsFromObject(this.props.mentions, this.props.tasks);
-    // Clear props.mentions;
-    this.props.storeChange(this.props.mentionsModel, {})
-
-    this.props.modalConfirm({mentions});
-  },
-  cancel(){
+    const mentionArray = getMentionsFromObject(mentions, tasks);
+    // Clear mentions
+    this.props.storeChange(mentionsModel, {})
+    // Return the results
+    this.props.modalConfirm({ mentions: mentionArray });
+  }
+  cancel = () => {
     this.props.modalCancel();
-  },
-
-  toggle({type, taskId, mention}){
-    // type == 'complete' || 'related'
-    const toggleField = (type1, type2) => {
-      const value = mention ? !mention[type1] : true;
-      if(value){
-        this.props.storeChange(`${this.props.mentionsModel}.${taskId}.${type1}`, value)
-        this.props.storeChange(`${this.props.mentionsModel}.${taskId}.${type2}`, !value)
-      }
-      else{
-        this.props.storeChange(`${this.props.mentionsModel}.${taskId}.${type1}`, value)
-      }
+  }
+  setMention = ({ status, taskId }) => {
+    const { mentions, storeChange, mentionsModel } = this.props
+    const currentStatus = mentions[taskId]
+    if (status === currentStatus) {
+      storeChange(`${mentionsModel}.${taskId}`, '')
+    } else {
+      storeChange(`${mentionsModel}.${taskId}`, status)
     }
-    return type == 'complete' ? toggleField('complete', 'related') : toggleField('related', 'complete');
-  },
-
+  }
   render() {
     const { tasks, board, mentions, boardModel } = this.props;
-
 
     const getTasks = () => {
       const filteredBoard = filterBoard(board, tasks, board.searchString);
@@ -69,15 +73,16 @@ export default React.createClass({
       else{
         return (
           <div className="flex scroll-box">
-            {filteredBoard.data.groups.map(group => <div>
-              {group.tasks.map(taskId => <TaskRow
-                key={taskId}
-                taskId={taskId}
-                mention={mentions[taskId]}
-                toggleComplete={()=>this.toggle({type: 'complete',taskId, mention: mentions[taskId]})}
-                toggleRelated={()=>this.toggle({type: 'related',taskId, mention: mentions[taskId]})}
-              />
-              )}
+            { filteredBoard.data.groups.map((group, idx) => <div key={ idx }>
+              { group.tasks.map(taskId => (
+                <TaskRow
+                  key={ taskId }
+                  taskId={ taskId }
+                  status={ mentions[taskId] }
+                  toggleComplete={ () => this.setMention({ status: 'complete', taskId }) }
+                  toggleRelated={ () => this.setMention({ status: 'related', taskId }) }
+                /> )
+              ) }
             </div>)}
           </div>
         )
@@ -90,7 +95,7 @@ export default React.createClass({
           Add tasks to a commit:
         </div>
         <div className={classes.header + ' layout-row layout-align-start-center'}>
-          <div className="flex">{howMany({count: filterMentions(mentions, 'complete').length, adj: 'complete'}, {count: filterMentions(mentions, 'related').length, adj: 'related'}, 'task')}</div>
+          <div className="flex">{howMany({count: countMentions(mentions, 'complete'), adj: 'complete'}, {count: countMentions(mentions, 'related'), adj: 'related'}, 'task')}</div>
           <div className={classes.search}>
             <Input
               model={`${boardModel}.searchString`}
@@ -116,23 +121,7 @@ export default React.createClass({
       </div>
     )
   }
-});
-
-function filterMentions(mentions, type){
-  const mentionsArray = mentions ? Object.keys(mentions).map(taskId => mentions[taskId]) : [];
-  // type == 'complete' || 'related'
-  return mentionsArray.length > 0 ? mentionsArray.filter( mention => mention[type]) : []
 }
 
-function getMentionsFromObject(mentionsObject, tasks){
-  const mentions = [];
-  Object.keys(mentionsObject).forEach(taskId => {
-    if(mentionsObject[taskId].complete){
-      mentions.push(newMention({entityId: taskId, display: tasks[taskId].data.name, mentionType: 'task-complete'}))
-    }
-    else if(mentionsObject[taskId].related){
-      mentions.push(newMention({entityId: taskId, display: tasks[taskId].data.name, mentionType: 'task'}))
-    }
-  })
-  return mentions;
-}
+
+

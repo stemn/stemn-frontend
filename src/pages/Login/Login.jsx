@@ -7,7 +7,7 @@ import classes from './Login.css'
 
 // Sub Components
 import Input from 'stemn-shared/misc/Input/Input/Input'
-import { Link } from 'react-router'
+import Link from 'stemn-shared/misc/Router/Link'
 import Button from 'stemn-shared/misc/Buttons/Button/Button.jsx'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
@@ -76,8 +76,8 @@ export default React.createClass({
               <LoadingOverlay show={auth.authLoading || auth.userLoading} />
             </form>
             <div className="layout-row text-title-5">
-              <div className="layout-row flex">Dont have an account?&nbsp;<Link to='/register' className='link-primary'>Register</Link></div>
-              <Link to="/password-lost" className="link-primary">I forgot</Link>
+              <div className="layout-row flex">Dont have an account?&nbsp;<Link name="registerRoute" className='link-primary'>Register</Link></div>
+              <Link name="passwordLostRoute" className="link-primary">I forgot</Link>
             </div>
           </div>
         </div>

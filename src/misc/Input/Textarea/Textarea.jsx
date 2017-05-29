@@ -4,17 +4,21 @@ import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import Textarea from 'react-textarea-autosize'
 
 class Component extends React.Component{
+  getTextareaRef = (ref) => {
+    if (ref) {
+      ref.focus()
+    }
+  }
   render(){
-    const { model, value, dispatch, className, placeholder, style, onChange } = this.props;
+    const { model, dispatch, onChange, ...otherProps } = this.props;
     return (
-      <Textarea style={style }
-        className={ className }
+      <Textarea
+        ref={ this.getTextareaRef }
         onChange={(event) => {
           dispatch(storeChange(model, event.target.value));
           if(onChange){ onChange() };
         }}
-        value={ value }
-        placeholder={ placeholder }
+        { ...otherProps }
       />
     );
   }
