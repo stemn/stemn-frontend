@@ -37,7 +37,7 @@ const eventTextMap = {
       projectId: item.data.project._id,
       taskId: item._id
     }
-    if (type === 'feed') {
+    if (['feed', 'user'].includes(type)) {
       return (
         <span>
           added a new thread:
@@ -130,7 +130,6 @@ const eventTextMap = {
     }
   },
   changedLabels: (item, type, entity) => {
-    console.log(item);
     if (type === 'task' || type === 'project') {
       const hasAddedLabels = item.data.addedLabels && item.data.addedLabels.length > 0
       const hasRemovedLabels = item.data.removedLabels && item.data.removedLabels.length > 0

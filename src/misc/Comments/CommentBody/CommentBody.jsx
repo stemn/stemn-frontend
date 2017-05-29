@@ -15,8 +15,6 @@ export default class Comment extends Component {
     if(!comment || !comment.data){
       return (
         <LoadingAnimation className={classes.comment + ' layout-column'} style={ style }>
-          <LoadingPlaceholder width={ 600 } />
-          <br/>
           <LoadingPlaceholder width={ 200 } />
         </LoadingAnimation>
       )

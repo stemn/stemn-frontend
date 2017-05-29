@@ -18,15 +18,15 @@
 
 .startMarker {
   position: absolute;
-  width: 20px;
+  width: 11px;
   top: 0;
-  left: -10px;
+  left: -6px;
   border-top: 1px solid rgb(232, 232, 232);
 }
 .endMarker {
   position: absolute;
-  width: 20px;
+  width: 11px;
   bottom: 0;
-  left: -10px;
-  border-top: 1px solid rgb(232, 232, 232);
+  left: -6px;
+  border-bottom: 1px solid rgb(232, 232, 232);
 }

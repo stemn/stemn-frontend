@@ -1,0 +1,9 @@
+@value border1, bg1 from "theme";
+
+.root {
+  padding: 20px;
+  background: white;
+  border: 1px solid border1;
+  margin-bottom: 15px;
+  position: relative;
+}
