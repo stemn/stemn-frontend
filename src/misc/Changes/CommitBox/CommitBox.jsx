@@ -79,7 +79,7 @@ export const Component = React.createClass({
               changesActions.mentionTasksModal({projectId: this.props.project._id});
             }}>
               <MdDone size="16" style={{marginRight: '3px', marginBottom: '2px'}}/>
-              Add related tasks
+              Add related threads
             </a>
           </Walkthrough>
           <div className="flex"></div>

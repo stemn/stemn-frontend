@@ -37,6 +37,16 @@ const eventTextMap = {
       projectId: item.data.project,
       taskId: item._id
     }
+    if (type === 'feed') {
+      return (
+        <span>
+          added a new thread:
+          <Link name="taskRoute" params={ params }>{ item.data.name }</Link>
+          to
+          <Link name="projectRoute" params={ params }>{ item.data.project.name || 'Untitled Project' }</Link>
+        </span>
+      )
+    }
     return (
       <span>
         added a new thread:
