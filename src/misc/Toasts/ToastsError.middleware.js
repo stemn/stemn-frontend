@@ -48,7 +48,7 @@ const processLocalError = (store, action) => {
 
 const processServerError = (store, action) => {
   // Get the toast message and error type
-  const { message, type, data } = action.payload.response.data.error
+  const { message, type, data } = action.payload.response.data.error || action.payload.response.data
 
   // Get the message
   let toastMessage
