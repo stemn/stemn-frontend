@@ -38,7 +38,7 @@ export default class Comment extends Component {
     updateComment({ comment: comment.form })
   }
   render() {
-    const { item, comment, entityModel, commentsActions, style } = this.props;
+    const { item, comment, showMeta, children, entityModel, commentsActions, style } = this.props;
 
     if(!comment || !comment.data){
       return (
@@ -65,9 +65,10 @@ export default class Comment extends Component {
     }
 
     const hasReactions = !comment.editActive && comment.data.reactions && comment.data.reactions.length > 0
+    console.log(comment);
 
     return (
-      <div className={classes.comment + ' layout-row'} style={style}>
+      <div className={classes.comment + ' layout-column'} style={style}>
         <div className={classes.commentBody + ' flex'}>
           <div className={classes.commentHeader + ' layout-row layout-align-start-center'}>
             <UserAvatar
@@ -77,26 +78,32 @@ export default class Comment extends Component {
               className={ classes.commentAvatar }
             />
             <b>{ comment.data.owner.name }</b>
+            &nbsp;
+            { showMeta && children }
             <span className={ classes.date }>
-              &nbsp;<b className="text-interpunct"></b> { moment(comment.data.timestamp).fromNow() }
+              &nbsp;- { moment(comment.data.timestamp).fromNow() }
             </span>
             <div className="flex"></div>
-            <ReactionPopup
-              reactions={ comment.data.reactions }
-              preferPlace="above"
-              submitFn={ this.submitReaction }
-            />
-            <IsOwner ownerId={comment.data.owner._id}>
-              <Popover preferPlace="right">
-                <SimpleIconButton style={ { padding: '0 0 0 5px' } }>
-                  <MdMoreHoriz size="20px"/>
-                </SimpleIconButton>
-                <div className="PopoverMenu">
-                  { !comment.editActive && <a onClick={ this.startEdit }>Edit</a> }
-                  <a onClick={ this.confirmDelete }>Delete</a>
-                </div>
-              </Popover>
-            </IsOwner>
+            { !showMeta &&
+              <ReactionPopup
+                reactions={ comment.data.reactions }
+                preferPlace="above"
+                submitFn={ this.submitReaction }
+              />
+            }
+            { !showMeta &&
+              <IsOwner ownerId={comment.data.owner._id}>
+                <Popover preferPlace="right">
+                  <SimpleIconButton style={ { padding: '0 0 0 5px' } }>
+                    <MdMoreHoriz size="20px"/>
+                  </SimpleIconButton>
+                  <div className="PopoverMenu">
+                    { !comment.editActive && <a onClick={ this.startEdit }>Edit</a> }
+                    <a onClick={ this.confirmDelete }>Delete</a>
+                  </div>
+                </Popover>
+              </IsOwner>
+            }
           </div>
           <div className={ classes.commentContent }>
           { comment.editActive

@@ -17,24 +17,34 @@ export default class TimelineItem extends Component {
   static propTypes = {
     type: PropTypes.oneOf(['feed', 'user', 'file', 'task', 'project']),
     item: PropTypes.object,
+    isFirst: PropTypes.bool,
+    isLast: PropTypes.bool,
   }
   render() {
-    const { item, type, entity } = this.props
+    const { item, type, entity, isLast, isFirst } = this.props
     const userRouteParams = { userId: item.user._id }
-    const eventStyles = type === 'task'
-      ? { marginLeft: '60px' }
-      : {}
+
+    const eventStyles = {
+      marginLeft: '30px',
+    }
 
     // If it is a comment, we use the comment component to display
-    if (item.event === 'comment' && type === 'task'){
+    if (item.event === 'comment'){
       return (
-        <Comment commentId={ item.data.comment } />
+        <Comment
+          commentId={ item.data.comment }
+          showMeta={ type !== 'task' }
+        >
+          <span className={ classes.item }>
+            <TimelineItemText item={ item } type={ type } entity={ entity } /> - { moment(item.timestamp).fromNow() }
+          </span>
+        </Comment>
       )
     }
     // Else, we add a text event
     else{
       return (
-        <TimelineWrapper className={ eventStyles }>
+        <TimelineWrapper style={ eventStyles }>
           <div className={ classNames('layout-row layout-align-start-center flex')}>
             <Link name="userRoute" params={ userRouteParams } className={ classes.avatar }>
               <UserAvatar
@@ -53,6 +63,8 @@ export default class TimelineItem extends Component {
               </span>
             </div>
           </div>
+          { isFirst && <div className={ classes.startMarker } /> }
+          { isLast && <div className={ classes.endMarker } /> }
         </TimelineWrapper>
       )
     }

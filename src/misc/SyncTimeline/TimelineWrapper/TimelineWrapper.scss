@@ -1,6 +1,7 @@
 @value primary, border1, bg1 from "theme";
 
 .item{
+  position: relative;
   border-left: 1px solid border1;
   padding: 15px 0;
 

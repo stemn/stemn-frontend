@@ -54,6 +54,20 @@ const eventTextMap = {
       </span>
     )
   },
+  comment: (item, type, entity) => {
+    const params = {
+      projectId: item.data.project,
+      taskId: item._id
+    }
+    return (
+      <span>
+        commented on
+        <Link name="taskRoute" params={ params }>{ item.data.name }</Link>
+        in
+        <Link name="projectRoute" params={ params }>{ item.data.project.name || 'Untitled Project' }</Link>
+      </span>
+    )
+  },
   commit: (item, type, entity) => {
     const params = {
       projectId: item.data.project._id,
