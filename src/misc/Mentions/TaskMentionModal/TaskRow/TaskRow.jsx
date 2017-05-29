@@ -35,7 +35,7 @@ export const Component = React.createClass({
   componentWillMount() { this.onMount(this.props) },
   componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
   render() {
-    const { task, entityModel, toggleComplete, toggleRelated, mention } = this.props;
+    const { task, entityModel, toggleComplete, toggleRelated, status } = this.props;
 
     if(!task || !task.data){
       return (
@@ -50,11 +50,11 @@ export const Component = React.createClass({
       <div className={classes.row + ' layout-row layout-align-start-center'}>
         <div className="flex text-ellipsis">{task.data.name}</div>
         <Button
-           className={classNames('xs', classes.button, {[classes.active] : mention && mention.complete})}
+           className={classNames('xs', classes.button, {[classes.active] : status === 'complete'})}
            title="Mark as Complete"
            onClick={toggleComplete}>Complete</Button>
         <Button
-           className={classNames('xs', classes.button, {[classes.active] : mention && mention.related})}
+           className={classNames('xs', classes.button, {[classes.active] : status === 'related'})}
            title="Mark as related"
            onClick={toggleRelated}>Related</Button>
       </div>

@@ -22,8 +22,9 @@ const mainReducer = (state, action) => {
     case 'CHANGES/MENTION_TASKS':
       return i.updateIn(state, [action.payload.projectId, 'description'], (description) => {
         const existingMentions = parseMentions(description);
-        const uniqueNewMentions = removeExistingMentions(action.payload.mentions, existingMentions);
-        return addMentionsToText(state[action.payload.projectId].description, uniqueNewMentions);
+        const uniqueNewMentions = removeExistingMentions(action.payload.mentions, existingMentions)
+        const textWithMentions = addMentionsToText(state[action.payload.projectId].description, uniqueNewMentions)
+        return textWithMentions
       });
     case 'CHANGES/TOGGLE_ALL_CHANGED_FILES':
       return i.updateIn(state, [action.payload.projectId], (changes) => {

@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import classes from './EditorMentions.css'
 import MentionPopover from 'stemn-shared/misc/Search/MentionPopover'
-import getUuid from 'stemn-shared/utils/getUuid'
-import { getMentionInfo, parseMentions, getMentionString, mentionTypeFromWord } from 'stemn-shared/misc/Mentions/Mentions.utils'
+import { getMentionInfo, parseMentions, getMentionString, mentionTypeFromWord, newMention } from 'stemn-shared/misc/Mentions/Mentions.utils'
 
 // The will split at new line
 const getValueInLineFormat = (value = '') => value.split('\n')
@@ -61,7 +60,7 @@ export default class EditorMentions extends Component {
     if (codemirror) {
       this.getCaretPosition();
       this.checkForMentions(codemirror)
-      this.convertMentions(codemirror)
+      setTimeout(() => this.convertMentions(codemirror))
     }
   }
   convertMentions = (codemirror) => {
@@ -148,12 +147,11 @@ export default class EditorMentions extends Component {
     const { cursorRange } = this.state
 
     // Create the mention object from the result
-    const mention = {
+    const mention = newMention({
       display: result.name,
       entityId: result._id,
       mentionType: this.state.mentionType,
-      mentionId: getUuid(),
-    }
+    })
     const mentionString = `${getMentionString(mention)}`
 
     // Insert mention at cursor

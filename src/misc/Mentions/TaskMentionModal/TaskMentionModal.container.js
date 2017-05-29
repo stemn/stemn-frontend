@@ -7,16 +7,18 @@ import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry'
 import TaskMentionModal from './TaskMentionModal'
 
+import { get } from 'lodash'
 
-function mapStateToProps({ tasks, mentions }, { projectId }) {
+
+function mapStateToProps({ tasks, mentions }, { projectId, cacheKey }) {
   const projectBoards = tasks.projects && tasks.projects[projectId] ? tasks.projects[projectId].boards : null;
   const board = projectBoards ? tasks.boards[projectBoards[0]] : {};
   return {
     tasks: tasks.data,
     board: board,
     boardModel: board && board.data && board.data._id ? `tasks.boards.${board.data._id}` : '',
-    mentions: mentions.tasks[projectId] || {},
-    mentionsModel: `mentions.tasks.${projectId}`,
+    mentions: get(mentions, cacheKey, {}),
+    mentionsModel: `mentions.${cacheKey}`,
   };
 }
 

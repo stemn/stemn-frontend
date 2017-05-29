@@ -71,17 +71,14 @@ export function mentionTasksModal({projectId, mentions}) {
     dispatch(showModal({
       modalType: TaskMentionModalName,
       modalProps: {
-        projectId: projectId
+        projectId: projectId,
+        cacheKey: projectId,
       },
-    })).then(() => {
-      dispatch({
-        type: 'ALIASED',
-        aliased: 'true',
-        payload: {
-          functionAlias: 'ChangesActions.mentionTasks',
-          functionInputs: { projectId, mentions }
-        }
-      })
+    })).then(({ value: { mentions } }) => {
+      dispatch(mentionTasks({
+        projectId,
+        mentions,
+      }))
     })
   }
 }
