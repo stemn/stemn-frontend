@@ -157,6 +157,7 @@ https://github.com/sindresorhus/github-markdown-css/blob/gh-pages/github-markdow
 }
 
 .display p {
+  font-size: 14px;
   margin-top: 0;
   margin-bottom: 10px;
 }
@@ -243,6 +244,7 @@ https://github.com/sindresorhus/github-markdown-css/blob/gh-pages/github-markdow
 .display pre {
   margin-top: 0;
   margin-bottom: 16px;
+  color: inherit;
 }
 
 .display hr {

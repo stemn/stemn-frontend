@@ -6,6 +6,7 @@ import classes from './TimelineItem.css'
 
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import Comment from 'stemn-shared/misc/Comments/Comment'
+import CommentBody from 'stemn-shared/misc/Comments/CommentBody'
 import TimelineWrapper from 'stemn-shared/misc/SyncTimeline/TimelineWrapper'
 import Link from 'stemn-shared/misc/Router/Link'
 import TimelineItemText from './TimelineItemText'
@@ -24,28 +25,24 @@ export default class TimelineItem extends Component {
     const { item, type, entity, isLast, isFirst } = this.props
     const userRouteParams = { userId: item.user._id }
 
-    const eventStyles = {
-      marginLeft: '30px',
-    }
+    const eventStyles = type === 'task' ? { marginLeft: '30px' } : {}
 
     // If it is a comment, we use the comment component to display
-    if (item.event === 'comment'){
+    if (item.event === 'comment' && type === 'task'){
       return (
         <Comment
           commentId={ item.data.comment }
           showMeta={ type !== 'task' }
         >
           <span className={ classes.item }>
-            <TimelineItemText item={ item } type={ type } entity={ entity } /> - { moment(item.timestamp).fromNow() }
+            <TimelineItemText item={ item } type={ type } entity={ entity } />
           </span>
         </Comment>
       )
-    }
-    // Else, we add a text event
-    else{
+    } else {
       return (
         <TimelineWrapper style={ eventStyles }>
-          <div className={ classNames('layout-row layout-align-start-center flex')}>
+          <div className="layout-row layout-align-start-center flex">
             <Link name="userRoute" params={ userRouteParams } className={ classes.avatar }>
               <UserAvatar
                 picture={ item.user.picture }
@@ -62,9 +59,13 @@ export default class TimelineItem extends Component {
                 <TimelineItemText item={ item } type={ type } entity={ entity } /> - { moment(item.timestamp).fromNow() }
               </span>
             </div>
+            { isFirst && <div className={ classes.startMarker } /> }
+            { isLast && <div className={ classes.endMarker } /> }
           </div>
-          { isFirst && <div className={ classes.startMarker } /> }
-          { isLast && <div className={ classes.endMarker } /> }
+          { item.event === 'comment' &&
+            <CommentBody
+              commentId={ item.data.comment }
+            /> }
         </TimelineWrapper>
       )
     }

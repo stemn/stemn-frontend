@@ -42,7 +42,7 @@ export default class Comment extends Component {
 
     if(!comment || !comment.data){
       return (
-        <LoadingAnimation className={classes.comment + ' layout-row'} style={ style }>
+        <LoadingAnimation className={classes.comment + ' layout-column'} style={ style }>
           <div className={classes.commentBody + ' flex'}>
             <div className={classes.commentHeader + ' layout-row layout-align-start-center'}>
               <UserAvatar
@@ -65,7 +65,6 @@ export default class Comment extends Component {
     }
 
     const hasReactions = !comment.editActive && comment.data.reactions && comment.data.reactions.length > 0
-    console.log(comment);
 
     return (
       <div className={classes.comment + ' layout-column'} style={style}>

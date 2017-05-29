@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import classNames from 'classnames';
 import classes from './TaskMentionModal.css';
 import howMany from 'stemn-shared/utils/strings/howMany.js';
@@ -11,15 +11,13 @@ import TasksFilterMenu from 'stemn-shared/misc/Tasks/TasksFilterMenu/TasksFilter
 import Popover from 'stemn-shared/misc/Popover';
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
-export default React.createClass({
-
-  // Mounting
-   onMount(nextProps, prevProps) {
+export default class TaskMentionModal extends Component {
+  onMount(nextProps, prevProps) {
     if(!nextProps.board || !nextProps.board.data){
       nextProps.getBoards({projectId: nextProps.projectId})
     }
-  },
-  componentWillMount() { this.onMount(this.props) },
+  }
+  componentWillMount() { this.onMount(this.props) }
   submit(){
     // Get the mentions
     const mentions = getMentionsFromObject(this.props.mentions, this.props.tasks);
@@ -27,10 +25,10 @@ export default React.createClass({
     this.props.storeChange(this.props.mentionsModel, {})
 
     this.props.modalConfirm({mentions});
-  },
+  }
   cancel(){
     this.props.modalCancel();
-  },
+  }
 
   toggle({type, taskId, mention}){
     // type == 'complete' || 'related'
@@ -45,11 +43,10 @@ export default React.createClass({
       }
     }
     return type == 'complete' ? toggleField('complete', 'related') : toggleField('related', 'complete');
-  },
+  }
 
   render() {
     const { tasks, board, mentions, boardModel } = this.props;
-
 
     const getTasks = () => {
       const filteredBoard = filterBoard(board, tasks, board.searchString);
@@ -116,7 +113,7 @@ export default React.createClass({
       </div>
     )
   }
-});
+}
 
 function filterMentions(mentions, type){
   const mentionsArray = mentions ? Object.keys(mentions).map(taskId => mentions[taskId]) : [];
@@ -127,11 +124,22 @@ function filterMentions(mentions, type){
 function getMentionsFromObject(mentionsObject, tasks){
   const mentions = [];
   Object.keys(mentionsObject).forEach(taskId => {
-    if(mentionsObject[taskId].complete){
-      mentions.push(newMention({entityId: taskId, display: tasks[taskId].data.name, mentionType: 'task-complete'}))
-    }
-    else if(mentionsObject[taskId].related){
-      mentions.push(newMention({entityId: taskId, display: tasks[taskId].data.name, mentionType: 'task'}))
+    if (mentionsObject[taskId].complete){
+      mentions.push(
+        newMention({
+          entityId: taskId,
+          display: tasks[taskId].data.name,
+          mentionType: 'task-complete'
+        })
+      )
+    } else if (mentionsObject[taskId].related){
+      mentions.push(
+        newMention({
+          entityId: taskId,
+          display: tasks[taskId].data.name,
+          mentionType: 'task'
+        })
+      )
     }
   })
   return mentions;
