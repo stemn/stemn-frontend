@@ -98,9 +98,9 @@ export default ({ dispatch }) => {
       <Route                                     component={ AppUnAuthed }>
         <Route path="login"                      getComponent={ getLogin } />
         <Route path="register"                   getComponent={ getRegister } />
-        <Route path="password-lost"              getComponent={ getPasswordLost } />
       </Route>
       <Route path="/"                            getComponent={ getHome } />
+      <Route path="password-lost"                getComponent={ getPasswordLost } />
       <Route path="/password-reset"              getComponent={ getPasswordSet } />
       <Route path="/fields/:fieldId"             getComponent={ getField }>
         <IndexRoute                              getComponent={ getFieldOverview } />

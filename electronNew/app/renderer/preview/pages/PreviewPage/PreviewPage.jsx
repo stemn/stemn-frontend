@@ -75,7 +75,10 @@ export default class PreviewPage extends Component {
     const displayFileHeader = ['sideBySide', 'aboveAndBelow'].includes(mode)
 
     return (
-      <div className="layout-column flex" style={ { overflow: 'hidden', maxHeight: '100vh' } }>
+      <div
+        className="layout-column flex"
+        style={ { overflow: 'hidden', maxHeight: '100vh' } }
+      >
         <Header>
           <FileBreadCrumbs
             className="text-ellipsis no-drag"

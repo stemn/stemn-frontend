@@ -8,9 +8,16 @@ import { get } from 'lodash'
 
 const stateToProps = ({ syncTimeline, auth }, { location }) => {
   const filterValue = location.query.filter || 'all'
+  const page = location.query.page || 1
+  const size = 30
+  const feedCacheKey = `${filterValue}-${page}`
+
   return {
-    timeline: get(syncTimeline, filterValue, {}),
+    timeline: get(syncTimeline, feedCacheKey, {}),
     filterValue,
+    page,
+    size,
+    feedCacheKey,
     isLoggedIn: auth.authToken && auth.user._id,
   }
 }
@@ -22,11 +29,14 @@ const dispatchToProps = {
 }
 
 const fetchConfigs = [{
-  hasChanged: 'filterValue',
+  hasChanged: 'feedCacheKey',
   onChange: (props) => {
     if (props.isLoggedIn) {
       props.getFeed({
         feedType: props.filterValue,
+        page: props.page,
+        size: props.size,
+        cacheKey: props.feedCacheKey,
       })
     }
   }

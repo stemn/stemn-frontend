@@ -97,9 +97,9 @@ export default () => (
     <Route                                     component={ AppUnAuthed }>
       <Route path="login"                      component={ Login } />
       <Route path="register"                   component={ Register } />
-      <Route path="password-lost"              component={ PasswordLost } />
     </Route>
     <Route path="/"                            component={ Home } />
+    <Route path="password-lost"                component={ PasswordLost } />
     <Route path="/password-reset"              component={ PasswordSet } />
     <Route path="/fields/:fieldId"             component={ Field }>
       <IndexRoute                              component={ FieldOverview } />

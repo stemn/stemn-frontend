@@ -13,6 +13,7 @@ export const onboardingDownloadRoute     = ()                        => `/onboar
 export const onboardingSyncRoute         = ()                        => `/onboarding/sync`
 export const openSourceRoute             = ()                        => `/open-source`
 export const organisationRoute           = ({ organisationId })      => `/organisaitons/${organisationId}`
+export const passwordLostRoute           = ()                        => '/password-lost'
 export const pricingRoute                = ()                        => `/pricing`
 export const privacyRoute                = ()                        => `/privacy`
 export const projectCommitsRoute         = ({ projectId })           => `/project/${projectId}/history`
@@ -24,6 +25,7 @@ export const projectSettingsTeamRoute    = ({ projectId })           => `/projec
 export const projectSettingsThreadsRoute = ({ projectId })           => `/project/${projectId}/settings/threads`
 export const projectTasksRoute           = ({ projectId })           => `/project/${projectId}/threads`
 export const projectTeamRoute            = ({ projectId })           => `/project/${projectId}/team`
+export const registerRoute               = ()                        => '/register'
 export const securityRoute               = ()                        => `/security`
 export const settingsRoute               = ()                        => `/settings`
 export const taskEditRoute               = ({ taskId, projectId })   => `/project/${projectId}/threads/${taskId}/edit`

@@ -7,9 +7,13 @@ import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import MyProjectsPanel from 'stemn-shared/misc/Projects/MyProjectsPanel'
 import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
+import Pagination from 'stemn-shared/misc/Pagination'
 import Link from 'stemn-shared/misc/Router/Link'
 import classes from './Home.css'
+import classNames from 'classnames'
 import { Helmet } from "react-helmet"
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
+
 
 export default class Home extends Component {
   filterOptions = [{
@@ -36,7 +40,11 @@ export default class Home extends Component {
     },
   })
   render() {
-    const { timeline, push, filterValue } = this.props
+    const { timeline, push, filterValue, location, page, size } = this.props
+
+    const hasResults = timeline && timeline.data && timeline.data.length > 0
+    const hasNoResults = timeline && timeline.data && timeline.data.length === 0
+    const noMoreResults = timeline && timeline.data && timeline.data.length < size
 
     return (
       <StandardLayout>
@@ -54,18 +62,26 @@ export default class Home extends Component {
         <Container>
           <Row className="layout-xs-column layout-gt-xs-row" style={ { marginTop: '30px' } }>
             <Col className="flex flex-order-xs-1">
-              <div className={ classes.panel }>
-                { timeline && timeline.data && timeline.data.length > 0 &&
+              <div className={ classNames(classes.panel, 'rel-box') }>
+                <LoadingOverlay show={ timeline.loading } linear hideBg noOverlay />
+                { hasResults &&
                   <TimelineVertical
                     items={ timeline.data }
                     type="feed"
                     group
                   />
                 }
-                { timeline && timeline.data && timeline.data.length === 0 &&
+                { hasNoResults &&
                   <div className="text-title-5">Your feed is empty. Follow some <Link name="exploreRoute" className="link-primary">projects or users.</Link></div>
                 }
               </div>
+              { hasResults &&
+                <Pagination
+                  path={ location.pathname }
+                  page={ page }
+                  noMoreResults={ noMoreResults }
+                />
+              }
             </Col>
             <Col className="flex-gt-xs-30 flex-order-xs-0">
               <MyProjectsPanel />

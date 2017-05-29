@@ -14,7 +14,7 @@ const GLOBALS = {
     APP_TYPE: JSON.stringify('desktop'),
     ELECTRON_CRASH_REPORT_SERVER: JSON.stringify(process.env.ELECTRON_CRASH_REPORT_SERVER),
     NODE_ENV: JSON.stringify('development'),
-    WEBSITE_URL: JSON.stringify('http://stemn.com'),
+    WEBSITE_URL: JSON.stringify('https://dev.stemn.com'),
     WEBSOCKET_SERVER: JSON.stringify(process.env.WEBSOCKET_SERVER),
   },
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'true')),
