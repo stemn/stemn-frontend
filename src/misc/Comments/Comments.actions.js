@@ -1,5 +1,6 @@
 import http from 'axios';
 import * as TasksActions from '../Tasks/Tasks.actions.js';
+import { addEvent, deleteEvent } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
 
 export function getComment({commentId}) {
   return {
@@ -17,8 +18,8 @@ export function getComment({commentId}) {
   }
 }
 
-export function newComment({ comment }) {
-  return (dispatch) => {
+export function newComment({ comment, timelineCacheKey }) {
+  return (dispatch, getState) => {
     if(comment && comment.body && comment.body.length > 0){
       return dispatch({
         type: 'COMMENTS/NEW_COMMENT',
@@ -30,13 +31,20 @@ export function newComment({ comment }) {
         meta: {
           taskId: comment.task
         }
-      }).then(response => {
-        return dispatch(TasksActions.newEvent({
-          taskId: comment.task,
+      }).then(({ value }) => {
+        const currentUser = getState().auth.user
+        return dispatch(addEvent({
+          cacheKey: timelineCacheKey,
           event: {
             event: 'comment',
+            timestamp: value.data.timestamp,
+            user: {
+              name: currentUser.name,
+              _id: currentUser._id,
+              picture: currentUser.picture,
+            },
             data: {
-              comment: response.value.data._id
+              comment: value.data._id
             }
           }
         }))
@@ -118,7 +126,7 @@ export function finishEdit({commentId}) {
   }
 }
 
-export function deleteComment({comment}) {
+export function deleteComment({ comment, timelineCacheKey }) {
   return (dispatch, getState) => {
     dispatch({
       type: 'COMMENTS/DELETE',
@@ -132,10 +140,11 @@ export function deleteComment({comment}) {
       }
     }).then(response => {
       // Get the eventId of the comment
-      const event = getState().tasks.events[comment.task].data.find(event => event.comment == comment._id);
-      if(event){
-        dispatch(TasksActions.deleteEvent({
-          taskId: comment.task,
+      console.log(getState().syncTimeline[timelineCacheKey]);
+      const event = getState().syncTimeline[timelineCacheKey].data.find(event => event.data.comment === comment._id);
+      if (event) {
+        dispatch(deleteEvent({
+          cacheKey: timelineCacheKey,
           eventId: event._id
         }))
       }

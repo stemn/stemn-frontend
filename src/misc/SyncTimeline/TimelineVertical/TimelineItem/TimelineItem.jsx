@@ -10,9 +10,6 @@ import CommentBody from 'stemn-shared/misc/Comments/CommentBody'
 import TimelineWrapper from 'stemn-shared/misc/SyncTimeline/TimelineWrapper'
 import Link from 'stemn-shared/misc/Router/Link'
 import TimelineItemText from './TimelineItemText'
-// import TaskTimelinePanel   from '../TaskTimelinePanel/TaskTimelinePanel.jsx'
-
-
 
 export default class TimelineItem extends Component {
   static propTypes = {
@@ -22,7 +19,7 @@ export default class TimelineItem extends Component {
     isLast: PropTypes.bool,
   }
   render() {
-    const { item, type, entity, isLast, isFirst } = this.props
+    const { item, type, entity, isLast, isFirst, timelineCacheKey } = this.props
     const userRouteParams = { userId: item.user._id }
 
     const eventStyles = type === 'task' ? { marginLeft: '30px' } : {}
@@ -32,6 +29,7 @@ export default class TimelineItem extends Component {
       return (
         <Comment
           commentId={ item.data.comment }
+          timelineCacheKey={ timelineCacheKey }
           showMeta={ type !== 'task' }
         >
           <span className={ classes.item }>

@@ -30,11 +30,13 @@ export class CommentNew extends Component {
     }
   }
   submitNewComment = () => {
+    const { timelineCacheKey } = this.props
     this.props.commentsActions.newComment({
       comment: {
         task: this.props.taskId,
         body: this.props.newComment.body
-      }
+      },
+      timelineCacheKey,
     }).then(() => {
       this.setState({
         isFocussed: false,

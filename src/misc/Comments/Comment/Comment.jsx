@@ -18,8 +18,11 @@ import Form from 'stemn-shared/misc/Forms/Form'
 
 export default class Comment extends Component {
   confirmDelete = () => {
-    const { showConfirm, deleteComment, comment } = this.props
-    showConfirm().then(() => deleteComment({ comment: comment.data }))
+    const { showConfirm, deleteComment, comment, timelineCacheKey } = this.props
+    showConfirm().then(() => deleteComment({
+      comment: comment.data,
+      timelineCacheKey,
+    }))
   }
   submitReaction = (reactionType) => {
     const { commentId, toggleReaction } = this.props

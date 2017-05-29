@@ -81,7 +81,7 @@ export const Component = React.createClass({
     this.props.modalConfirm();
   },
   render() {
-    const { taskId, task, board, entityModel, project, modalCancel } = this.props;
+    const { taskId, task, board, entityModel, project, timelineCacheKey, modalCancel } = this.props;
 
     const getMain = () => {
       const menu = [{
@@ -125,7 +125,10 @@ export const Component = React.createClass({
 
           </div>
           <div className={classes.newComment}>
-            <CommentNew taskId={taskId} />
+            <CommentNew
+              taskId={taskId}
+              timelineCacheKey={ timelineCacheKey }
+            />
           </div>
         </div>
       )
@@ -204,12 +207,14 @@ function mapStateToProps({ tasks, projects }, {taskId}) {
   const board         = has(task,  'data.board')   ? tasks.boards[task.data.board]     : {};
   const project       = has(board, 'data.project') ? projects.data[board.data.project] : {};
   const boardModel    = has(task,  'data.board')   ? `tasks.boards.${task.data.board}` : '';
+  const timelineCacheKey = taskId
   return {
     task,
     entityModel: `tasks.data.${taskId}`,
     board,
     boardModel,
-    project
+    project,
+    timelineCacheKey,
   };
 }
 

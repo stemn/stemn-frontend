@@ -1,4 +1,5 @@
 import http from 'axios';
+import getUuid from 'stemn-shared/utils/getUuid.js';
 
 export function deselect({ projectId }) {
   return {
@@ -46,10 +47,35 @@ export function fetchTimeline({ entityType, entityId, provider, types, cacheKey,
     },
     throttle: {
       time: 500,
-      endpoint:  `$fetch-timeline/${entityType}`
+      endpoint:  `fetch-timeline/${entityType}`
     },
   }
 }
+
+export const addEvent = ({ cacheKey, event }) => {
+  const eventObject = {
+    ...event,
+    _id: getUuid(),
+  }
+  return {
+    type: 'TIMELINE/ADD_EVENT',
+    payload: {
+      event: eventObject,
+      cacheKey
+    },
+  }
+}
+
+export const deleteEvent = ({ cacheKey, eventId }) => {
+  return {
+    type: 'TIMELINE/DELETE_EVENT',
+    payload: {
+      cacheKey,
+      eventId
+    }
+  }
+}
+
 
 export const getFeed = ({ feedType, page, size, cacheKey }) => ({
   // This will get the feed for all items the current user is interested in

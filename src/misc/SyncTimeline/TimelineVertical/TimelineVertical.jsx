@@ -22,6 +22,7 @@ export default class TimelineVertical extends Component {
     items: PropTypes.array,
     group: PropTypes.bool,
     entity: PropTypes.object,
+    timelineCacheKey: PropTypes.string,
   }
   renderItems = (items) => {
     return items.map((item, idx) => (
@@ -32,11 +33,12 @@ export default class TimelineVertical extends Component {
          entity={ this.props.entity }
          isFirst={ idx === 0 }
          isLast={ idx + 1 === items.length }
+         timelineCacheKey={ this.props.timelineCacheKey }
         />
     ))
   }
   render() {
-    const { items, type, group, entity, ...otherProps } = this.props
+    const { items, type, group, entity, timelineCacheKey, ...otherProps } = this.props
 
     if (!items || items.length === 0) return <div className="text-title-5">Timeline empty</div>
 
