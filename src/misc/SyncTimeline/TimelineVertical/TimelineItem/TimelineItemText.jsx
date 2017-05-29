@@ -59,14 +59,22 @@ const eventTextMap = {
       projectId: item.data.project,
       taskId: item._id
     }
-    return (
-      <span>
-        commented on
-        <Link name="taskRoute" params={ params }>Thread Link</Link>
-        in
-        <Link name="projectRoute" params={ params }>Project Link</Link>
-      </span>
-    )
+    if (['feed', 'user'].includes(type)) {
+      return (
+        <span>
+          commented on
+          <Link name="taskRoute" params={ params }>Thread Link</Link>
+          in
+          <Link name="projectRoute" params={ params }>Project Link</Link>
+        </span>
+      )
+    }
+      return (
+        <span>
+          commented on
+          <Link name="taskRoute" params={ params }>Thread Link</Link>
+        </span>
+      )
   },
   commit: (item, type, entity) => {
     const params = {

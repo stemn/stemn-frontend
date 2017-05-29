@@ -392,6 +392,11 @@ https://github.com/sindresorhus/github-markdown-css/blob/gh-pages/github-markdow
   max-width: 100%;
   box-sizing: content-box;
   background-color: #fff;
+
+  &:first-child {
+    margin: 0 auto;
+    display: block;
+  }
 }
 
 .display code {
