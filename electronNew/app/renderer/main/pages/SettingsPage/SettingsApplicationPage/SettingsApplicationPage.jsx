@@ -25,7 +25,7 @@ import FileSelectInputElectron from 'stemn-shared/misc/FileSelectInput/FileSelec
 import Checkbox           from 'stemn-shared/misc/Input/Checkbox/Checkbox';
 import SimpleTable        from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable.jsx';
 import Banner             from 'stemn-shared/misc/Banner/Banner.jsx'
-import releaseNotesModalName from 'stemn-shared/misc/Modal/modals/ReleaseNotesModal'
+import releaseNotesModalName from 'stemn-shared/misc/Modal/ReleaseNotesModal'
 
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
