@@ -127,8 +127,6 @@ const eventTextMap = {
           closeModals
           name="commitRoute"
           params={ params }
-          scope="main"
-          show
         >
           &nbsp;{ item.data.summary }
         </Link>

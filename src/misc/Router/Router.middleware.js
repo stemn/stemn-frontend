@@ -21,6 +21,7 @@ const routerFix = store => next => action => {
 //  if(action.type == '@@router/LOCATION_CHANGE'){
 //    store.dispatch(modalActions.closeAll())
 //  }
+
   return next(action);
 };
 

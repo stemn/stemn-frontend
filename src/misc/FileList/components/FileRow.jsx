@@ -92,8 +92,6 @@ export default class FileRow extends Component {
             <Link
               name='commitRoute'
               params={ { projectId: file.project._id, commitId: file.commit._id } }
-              show
-              scope="main"
               className={ classNames(classes.commit, classes.clickable, 'link-primary text-ellipsis') }
             >
             {file.commit.summary}

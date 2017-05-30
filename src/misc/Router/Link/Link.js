@@ -9,10 +9,6 @@ const propTypesObject = {
   name: PropTypes.string,                 // Router path name, eg -> 'userRoute'
   params: PropTypes.object,               // Query param object
   activeIf: PropTypes.object,             // Object user to determine if the link is active
-  // Options used for the desktop app
-  scope: PropTypes.string,                // The renderer window to change, eg -> 'main' || 'menubar'
-  show: PropTypes.bool,                   // Should the window show/focus?
-  closeModals: PropTypes.bool,            // Should all the modals close?
   // Functions used in desktop
   closeAll: PropTypes.func,
   showWindow: PropTypes.func,
@@ -27,9 +23,9 @@ const LinkComponent = (props) => {
     onClick,
     params,
     query,
-    scope,
     show,
     to,
+    // Container functions
     closeAll,
     showWindow,
     ...otherProps
@@ -42,35 +38,30 @@ const LinkComponent = (props) => {
   // Get the isExternal bool (if the route object has external:true)
   const isExternal = routePathIsObject && routePath.external
 
-  // Get the route state from the scope
-  // We include the scope on the state.meta
-  // This state.meta is moved up to the root action object
-  // inside the Router.middleware (this is only used on desktop)
-  const routeState = {
-    meta : {
-      scope: [scope]
-    }
-  }
-
   // Construct the function to get the 'to'
   const getToPath = () => {
     if (routePath && routePathIsObject) {
       return {
         pathname: routePath.pathname,
         query: Object.assign({}, query, routePath.query),
-        state: routeState
+        // We include the scope on the state.meta
+        // This state.meta is moved up to the root action object
+        // inside the Router.middleware (this is only used on desktop)
+        state: {
+          meta: {
+            scope: [ routePath.scope ]
+          }
+        }
       }
     } else if (routePath) {
       return {
         pathname: routePath,
         query: query,
-        state: routeState
       }
     } else {
       return {
         pathname: to,
         query: query,
-        state: routeState
       }
     }
   }
@@ -86,9 +77,9 @@ const LinkComponent = (props) => {
 
   const additionalClickFunction = () => {
     // Dispatch the show event if required
-    if (scope && show) showWindow(scope)
+    if (routePath.scope && routePath.show) showWindow(routePath.scope)
     // dispatch the closeModals
-    if (closeModals) closeAll()
+    if (routePath.closeModals) closeAll()
   }
 
   const extendedOnClick = () => {
