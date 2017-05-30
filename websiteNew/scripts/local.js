@@ -20,7 +20,7 @@ compiler.apply(new DashboardPlugin())
 //})
 
 const host = process.env.HOST || 'localhost'
-const port = process.env.PORT || 3001
+const port = process.env.PORT || 3002
 
 function log() {
   arguments[0] = '\nWebpack: ' + arguments[0]
