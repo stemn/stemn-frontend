@@ -13,7 +13,7 @@ const initialState = {
     }
     *******************************/
   },
-  tasks: {}
+  threads: {}
 }
 
 const mainReducer = (state, action) => {
@@ -36,12 +36,12 @@ const mainReducer = (state, action) => {
 
 
     case 'COMMENTS/NEW_COMMENT_PENDING':
-      return i.assocIn(state, ['tasks', action.meta.taskId, 'newComment', 'savePending'], true)
+      return i.assocIn(state, ['threads', action.meta.threadId, 'newComment', 'savePending'], true)
     case 'COMMENTS/NEW_COMMENT_REJECTED':
-      return i.assocIn(state, ['tasks', action.meta.taskId, 'newComment', 'savePending'], false)
+      return i.assocIn(state, ['threads', action.meta.threadId, 'newComment', 'savePending'], false)
     case 'COMMENTS/NEW_COMMENT_FULFILLED':
       return i.chain(state)
-        .assocIn(['tasks', action.meta.taskId, 'newComment'], {}) // Reset the newComment objected
+        .assocIn(['threads', action.meta.threadId, 'newComment'], {}) // Reset the newComment objected
         .assocIn(['data', action.payload.data._id, 'data'], action.payload.data) // Put the comment in the store
         .value();
 

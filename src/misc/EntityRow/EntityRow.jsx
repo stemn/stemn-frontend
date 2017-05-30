@@ -16,11 +16,11 @@ const getRouteNameAndParams = (data) => {
         projectId: data._id,
       },
     }
-  } else if (data.entityType === 'task') {
+  } else if (data.entityType === 'thread') {
     return {
-      name: 'taskRoute',
+      name: 'threadRoute',
       params: {
-        taskId: data._id,
+        threadId: data._id,
       },
     }
   } else if (data.entityType === 'commit') {

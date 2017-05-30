@@ -2,11 +2,11 @@ import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import { show as showToast } from '../Toasts/Toasts.actions.js';
 import { showModal }         from '../Modal/Modal.actions.js';
 import { parseMentions }     from '../Mentions/Mentions.utils.js';
-import { updateTask }        from '../Tasks/Tasks.actions.js';
+import { updateThread }        from '../Threads/Threads.actions.js';
 import i                     from 'icepick';
 import http                  from 'axios';
 import { get }               from 'lodash';
-import TaskMentionModalName from 'stemn-shared/misc/Mentions/TaskMentionModal'
+import ThreadMentionModalName from 'stemn-shared/misc/Mentions/ThreadMentionModal'
 
 export function deselect({projectId}) {
   return {
@@ -66,16 +66,16 @@ export function fetchChanges({projectId}) {
 //  }
 //}
 
-export function mentionTasksModal({projectId, mentions}) {
+export function mentionThreadsModal({projectId, mentions}) {
   return (dispatch) => {
     dispatch(showModal({
-      modalType: TaskMentionModalName,
+      modalType: ThreadMentionModalName,
       modalProps: {
         projectId: projectId,
         cacheKey: projectId,
       },
     })).then(({ value: { mentions } }) => {
-      dispatch(mentionTasks({
+      dispatch(mentionThreads({
         projectId,
         mentions,
       }))
@@ -83,9 +83,9 @@ export function mentionTasksModal({projectId, mentions}) {
   }
 }
 
-export function mentionTasks({projectId, mentions}) {
+export function mentionThreads({projectId, mentions}) {
   return {
-    type:'CHANGES/MENTION_TASKS',
+    type:'CHANGES/MENTION_THREADS',
     payload: {
       projectId,
       mentions
@@ -129,10 +129,10 @@ export function commit({projectId, summary, description}) {
         }))
         // Get the mentions
         const mentions = parseMentions(response.data.description);
-        // If mentionType: task-complete, we set the task to complete.
+        // If mentionType: thread-complete, we set the thread to complete.
         mentions.forEach(mention => {
-          if(mention.mentionType == 'task-complete'){
-            dispatch(storeChange(`tasks.data.${mention.entityId}.data.complete`, true));
+          if(mention.mentionType == 'thread-complete'){
+            dispatch(storeChange(`threads.data.${mention.entityId}.data.complete`, true));
           }
         });
         return response

@@ -18,7 +18,7 @@ const getCalendarText = (time) => (moment(time).calendar().split(' at'))[0]
 
 export default class TimelineVertical extends Component {
   static propTypes = {
-    type: PropTypes.oneOf(['feed', 'user', 'file', 'task', 'project']),
+    type: PropTypes.oneOf(['feed', 'user', 'file', 'thread', 'project']),
     items: PropTypes.array,
     group: PropTypes.bool,
     entity: PropTypes.object,

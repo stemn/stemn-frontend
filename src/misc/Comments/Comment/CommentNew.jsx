@@ -33,7 +33,7 @@ export class CommentNew extends Component {
     const { timelineCacheKey } = this.props
     this.props.commentsActions.newComment({
       comment: {
-        task: this.props.taskId,
+        thread: this.props.threadId,
         body: this.props.newComment.body
       },
       timelineCacheKey,
@@ -105,11 +105,11 @@ export class CommentNew extends Component {
 ///////////////////////////////// CONTAINER /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({ comments, auth }, { taskId }) {
+function mapStateToProps({ comments, auth }, { threadId }) {
   return {
     auth,
-    entityModel: `comments.tasks.${taskId}.newComment`,
-    newComment: comments.tasks[taskId] ? comments.tasks[taskId].newComment : {},
+    entityModel: `comments.threads.${threadId}.newComment`,
+    newComment: comments.threads[threadId] ? comments.threads[threadId].newComment : {},
   };
 }
 

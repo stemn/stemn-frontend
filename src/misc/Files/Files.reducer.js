@@ -10,7 +10,7 @@ const initialState = {
   fileAssemblyParents : {},
   pathToId            : {},
   downloadProgress    : {},
-  relatedTasks        : {},
+  relatedThreads        : {},
   websocketRooms      : []
 };
 
@@ -93,12 +93,12 @@ function reducer(state, action) {
         loading: false
       });
 
-    case 'FILES/GET_RELATED_TASKS_PENDING' :
-      return i.assocIn(state, ['relatedTasks', action.meta.fileId, 'loading'], true)
-    case 'FILES/GET_RELATED_TASKS_REJECTED' :
-      return i.assocIn(state, ['relatedTasks', action.meta.fileId, 'loading'], false)
-    case 'FILES/GET_RELATED_TASKS_FULFILLED' :
-      return i.assocIn(state, ['relatedTasks', action.meta.fileId], {
+    case 'FILES/GET_RELATED_THREADS_PENDING' :
+      return i.assocIn(state, ['relatedThreads', action.meta.fileId, 'loading'], true)
+    case 'FILES/GET_RELATED_THREADS_REJECTED' :
+      return i.assocIn(state, ['relatedThreads', action.meta.fileId, 'loading'], false)
+    case 'FILES/GET_RELATED_THREADS_FULFILLED' :
+      return i.assocIn(state, ['relatedThreads', action.meta.fileId], {
         data: action.payload.data,
         loading: false
       })

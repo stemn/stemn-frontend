@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import Link from 'stemn-shared/misc/Router/Link'
-import TaskLabelDots from 'stemn-shared/misc/Tasks/TaskLabelDots/TaskLabelDots.jsx'
+import ThreadLabelDots from 'stemn-shared/misc/Threads/ThreadLabelDots/ThreadLabelDots.jsx'
 import pluralise from 'stemn-shared/utils/strings/pluralise'
 
 const eventTextMap = {
-  uncompleted: (item, type, entity) => <span>re-opened this task</span>,
-  addAsignee: (item, type, entity) => <span>was assigned to this task</span>,
+  uncompleted: (item, type, entity) => <span>re-opened this thread</span>,
+  addAsignee: (item, type, entity) => <span>was assigned to this thread</span>,
   removeAsignee : (item, type, entity) => <span>was removed from assignees</span>,
   revision: (item, type, entity) => {
     const fileRouteParams = {
@@ -32,16 +32,16 @@ const eventTextMap = {
       )
     }
   },
-  task: (item, type, entity) => {
+  thread: (item, type, entity) => {
     const params = {
       projectId: item.data.project._id,
-      taskId: item._id
+      threadId: item._id
     }
     if (['feed', 'user'].includes(type)) {
       return (
         <span>
           added a new thread:
-          <Link name="taskRoute" params={ params }>{ item.data.name }</Link>
+          <Link name="threadRoute" params={ params }>{ item.data.name }</Link>
           to
           <Link name="projectRoute" params={ params }>{ item.data.project.name || 'Untitled Project' }</Link>
         </span>
@@ -50,20 +50,20 @@ const eventTextMap = {
     return (
       <span>
         added a new thread:
-        <Link name="taskRoute" params={ params }>{ item.data.name }</Link>
+        <Link name="threadRoute" params={ params }>{ item.data.name }</Link>
       </span>
     )
   },
   comment: (item, type, entity) => {
     const params = {
       projectId: item.data.project,
-      taskId: item._id
+      threadId: item._id
     }
     if (['feed', 'user'].includes(type)) {
       return (
         <span>
           commented on
-          <Link name="taskRoute" params={ params }>Thread Link</Link>
+          <Link name="threadRoute" params={ params }>Thread Link</Link>
           in
           <Link name="projectRoute" params={ params }>Project Link</Link>
         </span>
@@ -72,7 +72,7 @@ const eventTextMap = {
       return (
         <span>
           commented on
-          <Link name="taskRoute" params={ params }>Thread Link</Link>
+          <Link name="threadRoute" params={ params }>Thread Link</Link>
         </span>
       )
   },
@@ -105,7 +105,7 @@ const eventTextMap = {
           containing { pluralise(item.data.items.length, 'revision') }
         </span>
       )
-    } else if (type === 'task') {
+    } else if (type === 'thread') {
       return (
         <span>
           referenced this thread in commit
@@ -136,19 +136,19 @@ const eventTextMap = {
     }
   },
   changedLabels: (item, type, entity) => {
-    if (type === 'task' || type === 'project') {
+    if (type === 'thread' || type === 'project') {
       const hasAddedLabels = item.data.addedLabels && item.data.addedLabels.length > 0
       const hasRemovedLabels = item.data.removedLabels && item.data.removedLabels.length > 0
       const params = {
         projectId: entity.data.project,
-        taskId: item.task._id,
+        threadId: item.thread._id,
       }
       return (
         <span>
           { hasAddedLabels &&
             <span>
               added the&nbsp;
-              <TaskLabelDots
+              <ThreadLabelDots
                 labels={ item.data.addedLabels }
                 labelInfo={ entity.data.labels }
                 tag
@@ -162,7 +162,7 @@ const eventTextMap = {
           { hasRemovedLabels &&
             <span>
               removed the&nbsp;
-              <TaskLabelDots
+              <ThreadLabelDots
                 labels={ item.data.removedLabels }
                 labelInfo={ entity.data.labels }
                 tag
@@ -173,7 +173,7 @@ const eventTextMap = {
           { type === 'project' &&
             <span>
               { hasRemovedLabels ? ' from' : ' to' }
-              <Link name="taskRoute" params={ params }>{ item.task.name || 'Untitled Thread'}</Link>
+              <Link name="threadRoute" params={ params }>{ item.thread.name || 'Untitled Thread'}</Link>
             </span>
           }
         </span>
@@ -186,7 +186,7 @@ const eventTextMap = {
 
 export default class TimelineItemText extends Component {
   static propTypes = {
-    type: PropTypes.oneOf(['feed', 'user', 'file', 'task', 'project']),
+    type: PropTypes.oneOf(['feed', 'user', 'file', 'thread', 'project']),
     item: PropTypes.object,
     entity: PropTypes.object,
   }

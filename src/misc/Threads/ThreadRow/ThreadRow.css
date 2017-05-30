@@ -1,0 +1,27 @@
+.row {
+}
+
+.title {
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.meta {
+  margin-top: 5px;
+}
+
+.asignees {
+  margin-left: 12px;
+}
+.commentsIcon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+  margin-left: 15px;
+}
+.commentsNumber {
+  font-size: 14px;
+}
+.threadNumber {
+  color: rgba(0, 0, 0, 0.5);
+}

@@ -8,7 +8,7 @@ import AssemblyPartNotFound   from 'stemn-shared/misc/Files/PreviewFile/Messages
 import PreviewExpired         from 'stemn-shared/misc/Files/PreviewFile/Messages/PreviewExpired/PreviewExpiredModal.jsx'
 import ProviderAccessError    from './modals/ProviderAccessErrorModal.jsx'
 import ProviderAccessRevoked  from './modals/ProviderAccessRevokedModal.jsx'
-import TaskLabelsEditModal    from 'stemn-shared/misc/Tasks/TaskLabelsEditModal/TaskLabelsEditModal.jsx'
+import ThreadLabelsEditModal    from 'stemn-shared/misc/Threads/ThreadLabelsEditModal/ThreadLabelsEditModal.jsx'
 
 const modalRegistry = {
   'BETA'                    : BetaModal,
@@ -20,7 +20,7 @@ const modalRegistry = {
   'PREVIEW_EXPIRED'         : PreviewExpired,
   'PROVIDER_ACCESS_ERROR'   : ProviderAccessError,
   'PROVIDER_ACCESS_REVOKED' : ProviderAccessRevoked,
-  'TASK_LABELS'             : TaskLabelsEditModal,
+  'THREAD_LABELS'             : ThreadLabelsEditModal,
 };
 
 export const registerModal = (modalType, component) => {

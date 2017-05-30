@@ -13,7 +13,7 @@ import TimelineItemText from './TimelineItemText'
 
 export default class TimelineItem extends Component {
   static propTypes = {
-    type: PropTypes.oneOf(['feed', 'user', 'file', 'task', 'project']),
+    type: PropTypes.oneOf(['feed', 'user', 'file', 'thread', 'project']),
     item: PropTypes.object,
     isFirst: PropTypes.bool,
     isLast: PropTypes.bool,
@@ -22,15 +22,15 @@ export default class TimelineItem extends Component {
     const { item, type, entity, isLast, isFirst, timelineCacheKey } = this.props
     const userRouteParams = { userId: item.user._id }
 
-    const eventStyles = type === 'task' ? { marginLeft: '30px' } : {}
+    const eventStyles = type === 'thread' ? { marginLeft: '30px' } : {}
 
     // If it is a comment, we use the comment component to display
-    if (item.event === 'comment' && type === 'task'){
+    if (item.event === 'comment' && type === 'thread'){
       return (
         <Comment
           commentId={ item.data.comment }
           timelineCacheKey={ timelineCacheKey }
-          showMeta={ type !== 'task' }
+          showMeta={ type !== 'thread' }
         >
           <span className={ classes.item }>
             <TimelineItemText item={ item } type={ type } entity={ entity } />

@@ -27,7 +27,7 @@ export default class HistoryGraph extends Component {
       date: item.date,
       Commits: item.counts ? item.counts.commit : undefined,
       Revisions: item.counts ? item.counts.revision : undefined,
-      Threads: item.counts ? item.counts.task : undefined,
+      Threads: item.counts ? item.counts.thread : undefined,
     }))
 
     return (

@@ -2,21 +2,21 @@ import { connect } from 'react-redux'
 import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import NewThreadModal from './NewThreadModal'
-import { newTask } from 'stemn-shared/misc/Tasks/Tasks.actions'
+import { newThread } from 'stemn-shared/misc/Threads/Threads.actions'
 import { newComment } from 'stemn-shared/misc/Comments/Comments.actions'
-import { taskRoute } from 'route-actions'
+import { threadRoute } from 'route-actions'
 import { push } from 'react-router-redux'
 
-const stateToProps = ({ tasks }, { boardId }) => ({
-  board: tasks.boards[boardId],
-  boardModel: `tasks.boards.${boardId}`,
+const stateToProps = ({ threads }, { boardId }) => ({
+  board: threads.boards[boardId],
+  boardModel: `threads.boards.${boardId}`,
 })
 
 const dispatchToProps = {
-  newTask,
+  newThread,
   newComment,
   change: storeChange,
-  goToTaskRoute: ({ taskId, projectId }) => push(taskRoute({ taskId, projectId })),
+  goToThreadRoute: ({ threadId, projectId }) => push(threadRoute({ threadId, projectId })),
 }
 
 const modalName = 'THREAD_NEW'

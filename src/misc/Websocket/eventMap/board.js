@@ -1,4 +1,4 @@
-import { getBoard, getGroup, getTask } from 'stemn-shared/misc/Tasks/Tasks.actions.js'
+import { getBoard, getGroup, getThread } from 'stemn-shared/misc/Threads/Threads.actions.js'
 import { getComment } from 'stemn-shared/misc/Comments/Comments.actions.js'
 
 export default (store, action) => {
@@ -14,10 +14,10 @@ export default (store, action) => {
       return dispatch(getBoard({ boardId : action.payload.boardId }))
     case 'BOARD/GROUPS_UPDATED':
       return action.payload.groups.map((groupId) => dispatch(getGroup({ groupId, boardId : action.payload.boardId })))
-    case 'BOARD/TASKS_UPDATED':
-      return action.payload.tasks.map((taskId) => dispatch(getTask({ taskId })))
+    case 'BOARD/THREADS_UPDATED':
+      return action.payload.threads.map((threadId) => dispatch(getThread({ threadId })))
     case 'BOARD/TASK_COMPLETED_UPDATED':
-      return dispatch(getTask({ taskId : action.payload.taskId }))
+      return dispatch(getThread({ threadId : action.payload.threadId }))
     case 'BOARD/COMMENTS_UPDATED':
       return action.payload.comments.map((commentId) => dispatch(getComment({ commentId })))
   }

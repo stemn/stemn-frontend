@@ -10,38 +10,38 @@ import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 
 export default class NewThreadModal extends Component {
   newThread = () => {
-    const { newTask, newComment, modalConfirm, change, board, boardModel, goToTaskRoute } = this.props;
+    const { newThread, newComment, modalConfirm, change, board, boardModel, goToThreadRoute } = this.props;
     const group = get(board, 'newThread.group', board.data.groups[0]._id)
     const name = get(board, 'newThread.name')
     const body = get(board, 'newThread.body')
     const boardId = board.data._id
     const projectId = board.data.project
 
-    // Create the new task
-    newTask({
+    // Create the new thread
+    newThread({
       boardId,
-      task: {
+      thread: {
         name,
         group,
         boardId,
       },
     }).then((response) => {
-      // After the task is created,
+      // After the thread is created,
       // create a comment if there is a body.
       // Close the modal when complete
-      const taskId = response.value.data._id
+      const threadId = response.value.data._id
       if (body && body.length > 1) {
         newComment({
           comment: {
-            task: taskId,
+            thread: threadId,
             body,
           }
         }).then(() => {
           // Clear the data and close the modal
           change(`${boardModel}.newThread`, {})
           modalConfirm()
-          goToTaskRoute({
-            taskId,
+          goToThreadRoute({
+            threadId,
             projectId,
           })
         })
@@ -49,8 +49,8 @@ export default class NewThreadModal extends Component {
         // Clear the data and close the modal
         change(`${boardModel}.newThread`, {})
         modalConfirm()
-        goToTaskRoute({
-          taskId,
+        goToThreadRoute({
+          threadId,
           projectId,
         })
       }

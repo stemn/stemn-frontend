@@ -1,5 +1,5 @@
 import http from 'axios';
-import * as TasksActions from '../Tasks/Tasks.actions.js';
+import * as ThreadsActions from '../Threads/Threads.actions.js';
 import { addEvent, deleteEvent } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
 
 export function getComment({commentId}) {
@@ -24,12 +24,12 @@ export function newComment({ comment, timelineCacheKey }) {
       return dispatch({
         type: 'COMMENTS/NEW_COMMENT',
         payload: http({
-          url: `/api/v1/tasks/${comment.task}/comments`,
+          url: `/api/v1/threads/${comment.thread}/comments`,
           method: 'POST',
           data: comment
         }),
         meta: {
-          taskId: comment.task
+          threadId: comment.thread
         }
       }).then(({ value }) => {
         const currentUser = getState().auth.user
@@ -136,7 +136,7 @@ export function deleteComment({ comment, timelineCacheKey }) {
       }),
       meta: {
         commentId: comment._id,
-        taskId: comment.task
+        threadId: comment.thread
       }
     }).then(response => {
       // Get the eventId of the comment

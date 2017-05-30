@@ -4,12 +4,12 @@ This middleware is used to throttle actions
 
 The action should contain a throttle object such as:
 
-export function getTask({taskId}) {
+export function getThread({threadId}) {
   return {
-    type: 'TASKS/GET_TASK',
+    type: 'THREADS/GET_TASK',
     throttle: {
       time: 1000,                                   Time period (ms) to throttle to
-      endpoint:  `TASKS/UPDATE_TASK-${task._id}`    Unique endpoint (used to store the timeout in the timeouts object)
+      endpoint:  `THREADS/UPDATE_TASK-${thread._id}`    Unique endpoint (used to store the timeout in the timeouts object)
     },
     payload: {
 

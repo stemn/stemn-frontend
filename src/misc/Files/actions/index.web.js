@@ -4,7 +4,7 @@ export getAssemblyParts    from './getAssemblyParts';
 export getFile             from './getFile';
 export getFileProgress     from './getFileProgress';
 export getMeta             from './getMeta';
-export getRelatedTasks     from './getRelatedTasks';
+export getRelatedThreads     from './getRelatedThreads';
 export renderFile          from './renderFile';
 export renderFileError     from './renderFileError';
 export renderFileProgress  from './renderFileProgress';

@@ -73,10 +73,10 @@ export const Component = React.createClass({
           <MarkdownButton className={ classes.markdownButton } />
         </div>
         <div className="layout-row layout-align-start-center">
-          <Walkthrough preferPlace="above" name="commit.commitTasks">
+          <Walkthrough preferPlace="above" name="commit.commitThreads">
             <a className="link-primary" onClick={()=> {
               electronWindowsActions.show('main');
-              changesActions.mentionTasksModal({projectId: this.props.project._id});
+              changesActions.mentionThreadsModal({projectId: this.props.project._id});
             }}>
               <MdDone size="16" style={{marginRight: '3px', marginBottom: '2px'}}/>
               Add related threads

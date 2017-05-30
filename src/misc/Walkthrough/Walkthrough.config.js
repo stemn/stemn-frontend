@@ -28,12 +28,12 @@ const data = {
           </div>
         )
       },
-      commitTasks : {
+      commitThreads : {
         content: (
           <div>
-            <p>Next you can add 'related tasks' to the commit.</p>
-            <p>This allows you and your team see all the work related to a task in one place.</p>
-            <p className="text-grey-3"><small>Tasks are added using the 'Tasks' tab at the top of the page.</small></p>
+            <p>Next you can add 'related threads' to the commit.</p>
+            <p>This allows you and your team see all the work related to a thread in one place.</p>
+            <p className="text-grey-3"><small>Threads are added using the 'Threads' tab at the top of the page.</small></p>
           </div>
         )
       },
@@ -41,13 +41,13 @@ const data = {
         content: (
           <div>
             <p>Finally, you can now save your commit.</p>
-            <p>Once saved, your commit will appear in the 'timeline' and will be linked to any related tasks.</p>
-            <p className="text-grey-3"><small>You should commit files multiple times each day. This will allow you to keep a good history of what work you have done and what tasks have been completed.</small></p>
+            <p>Once saved, your commit will appear in the 'timeline' and will be linked to any related threads.</p>
+            <p className="text-grey-3"><small>You should commit files multiple times each day. This will allow you to keep a good history of what work you have done and what threads have been completed.</small></p>
           </div>
         )
       }
     },
-    order: ['commit.commitIntro', 'commit.commitCheckbox', 'commit.commitSummary', 'commit.commitTasks', 'commit.commitSubmit']
+    order: ['commit.commitIntro', 'commit.commitCheckbox', 'commit.commitSummary', 'commit.commitThreads', 'commit.commitSubmit']
   }
 }
 

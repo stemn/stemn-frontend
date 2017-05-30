@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
 import MentionFromString from './MentionFromString'
 import { showModal } from 'stemn-shared/misc/Modal/Modal.actions.js'
-import taskDisplayModalName from 'stemn-shared/misc/Tasks/TaskDisplayModal'
+import threadDisplayModalName from 'stemn-shared/misc/Threads/ThreadDisplayModal'
 
 const stateToProps = () => ({})
 
 const dispatchToProps = {
-  showTaskModal: (modalProps) => showModal({
-    modalType: taskDisplayModalName,
+  showThreadModal: (modalProps) => showModal({
+    modalType: threadDisplayModalName,
     limit: 1,
     modalProps,
   }),

@@ -11,7 +11,7 @@ display: 'David Revay'
 href: '47db55af7f3423801742e228:user:cb4e8fac7fe980b5da295624' (entityId, mentionType, mentionId )
 
 When using this component on desktop, a container is used
-to pass in 'showTaskModal'.
+to pass in 'showThreadModal'.
 
 *******************************************************/
 export default class MentionFromString extends Component {
@@ -19,23 +19,23 @@ export default class MentionFromString extends Component {
     href: PropTypes.string.isRequired,
     display: PropTypes.string.isRequired,
     // From the container (only if desktop)
-    showTaskModal: PropTypes.func,
+    showThreadModal: PropTypes.func,
   }
   render() {
-    const { href, display, showTaskModal } = this.props
+    const { href, display, showThreadModal } = this.props
     const [ entityId, mentionType, mentionId ] = href.split(':')
 
     const mentionInfo = getMentionInfo(mentionType, entityId, display)
 
     if (mentionInfo) {
-//      // If this is a task and we are desktop
-//      if (mentionType === 'task' || mentionType === 'task-complete' && GLOBAL_ENV.APP_TYPE === 'desktop') {
-//        const showTask = () => showTaskModal({
-//          taskId: entityId
+//      // If this is a thread and we are desktop
+//      if (mentionType === 'thread' || mentionType === 'thread-complete' && GLOBAL_ENV.APP_TYPE === 'desktop') {
+//        const showThread = () => showThreadModal({
+//          threadId: entityId
 //        })
 //        return (
 //          <a
-//            onClick={ showTask }
+//            onClick={ showThread }
 //          >
 //            { mentionInfo.display }
 //          </a>

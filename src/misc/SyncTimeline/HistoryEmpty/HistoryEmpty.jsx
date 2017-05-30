@@ -18,7 +18,7 @@ export default class HistoryEmpty extends Component{
         { isPublic
           ? <div className="text-title-5">Unfortunately, there is nothing here yet.</div>
           : <div className="text-title-5">
-              <Link className="link-primary" name="projectTasksRoute"  params={ projectRouteParams }>Create a thread</Link>
+              <Link className="link-primary" name="projectThreadsRoute"  params={ projectRouteParams }>Create a thread</Link>
               &nbsp;or link a&nbsp;
               <Link className="link-primary" name="projectSettingsRoute" params={ projectRouteParams }>cloud file store</Link>
               &nbsp;to get started.

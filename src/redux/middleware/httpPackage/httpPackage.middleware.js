@@ -7,17 +7,17 @@ api/v1/entityType?ids[]=12345678901234567890?ids[]=12345678901234567890?ids[]=12
 
 The action should contain a httpPackage object such as:
 
-export function getTask({taskId}) {
+export function getThread({threadId}) {
   return {
-    type: 'TASKS/GET_TASK',
+    type: 'THREADS/GET_TASK',
     httpPackage: {
-      url: `/api/v1/tasks`,  The Api endpoint
+      url: `/api/v1/threads`,  The Api endpoint
       method: 'GET',                                          Http method, this should probably be GET
       staticParams: {                                         Parameters common to all packaged requests
         select : 'name picture blurb'
       }
       params: {                                               Params to be packaged together
-        'ids[]' : taskId
+        'ids[]' : threadId
       }
     }
   }

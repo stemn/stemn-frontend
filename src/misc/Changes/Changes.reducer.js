@@ -19,7 +19,7 @@ const mainReducer = (state, action) => {
       return i.assocIn(state, [action.payload.projectId, 'selected'], {})
     case 'CHANGES/SELECTED_FILE_CHANGE':
       return i.assocIn(state, [action.payload.projectId, 'selected'], action.payload.selected)
-    case 'CHANGES/MENTION_TASKS':
+    case 'CHANGES/MENTION_THREADS':
       return i.updateIn(state, [action.payload.projectId, 'description'], (description) => {
         const existingMentions = parseMentions(description);
         const uniqueNewMentions = removeExistingMentions(action.payload.mentions, existingMentions)
