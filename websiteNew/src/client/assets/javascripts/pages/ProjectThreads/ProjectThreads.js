@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import classNames from 'classnames'
-import classes from './ProjectsTasks.css'
+import classes from './ProjectThreads.css'
 import { Row, Col, Container } from 'stemn-shared/misc/Layout'
 import SubSubHeader from 'modules/SubSubHeader'
-import TaskList from 'stemn-shared/misc/Tasks/TaskList/TaskList.jsx'
-import TaskRow from 'stemn-shared/misc/Tasks/TaskRow'
+import ThreadList from 'stemn-shared/misc/Threads/ThreadList/ThreadList.jsx'
+import ThreadRow from 'stemn-shared/misc/Threads/ThreadRow'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import Pagination from 'stemn-shared/misc/Pagination'
 import MdExpandMore from 'react-icons/md/expand-more'
 import SearchInput from 'stemn-shared/misc/Search/SearchInput'
 import Popover from 'stemn-shared/misc/Popover'
-import LabelSelect from 'stemn-shared/misc/Tasks/LabelSelect/LabelSelect'
-import GroupSelect from 'stemn-shared/misc/Tasks/GroupSelect'
+import LabelSelect from 'stemn-shared/misc/Threads/LabelSelect/LabelSelect'
+import GroupSelect from 'stemn-shared/misc/Threads/GroupSelect'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import { get } from 'lodash'
-import TasksEmpty from 'stemn-shared/misc/Tasks/TasksEmpty'
+import ThreadsEmpty from 'stemn-shared/misc/Threads/ThreadsEmpty'
 
-export default class ProjectsTasks extends Component {
+export default class ProjectThreads extends Component {
   showNewThreadModal = () => {
     this.props.showNewThreadModal({
       boardId: this.props.board.data._id,
@@ -175,7 +175,7 @@ export default class ProjectsTasks extends Component {
                     <div className={ classes.threadsPanel }>
                       { hasResults
                       ? threads.data.map(task => (
-                         <TaskRow
+                         <ThreadRow
                            board={ board }
                            taskId={ task._id }
                            className={ classes.thread }
@@ -188,7 +188,7 @@ export default class ProjectsTasks extends Component {
                     <Pagination path={ location.pathname } page={ page } noMoreResults={ noMoreResults }/>
                   </Col>
                 </Row>
-              : !isLoading && <TasksEmpty /> }
+              : !isLoading && <ThreadsEmpty /> }
             </Container>
           : null }
 

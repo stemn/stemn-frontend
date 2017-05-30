@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { get, omitBy, isEqual } from 'lodash'
-import { getBoards } from 'stemn-shared/misc/Tasks/Tasks.actions'
-import ProjectsTasks from './ProjectsTasks'
+import { getBoards } from 'stemn-shared/misc/Threads/Threads.actions'
+import ProjectThreads from './ProjectThreads'
 import { setFilter } from 'stemn-shared/misc/StringFilter/StringFilter.actions'
 import { createFilterString, getFilter } from 'stemn-shared/misc/StringFilter/StringFilter.utils'
 import newThreadModalName from 'stemn-shared/misc/Threads/NewThreadModal'
@@ -111,10 +111,10 @@ const fetchConfigs = [{
 
 @connect(stateToProps, dispatchToProps)
 @fetchDataHoc(fetchConfigs)
-export default class ProjectsTasksContainer extends Component {
+export default class ProjectThreadsContainer extends Component {
   render() {
     return (
-      <ProjectsTasks {...this.props} />
+      <ProjectThreads {...this.props} />
     );
   }
 }

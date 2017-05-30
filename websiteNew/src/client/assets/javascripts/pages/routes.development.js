@@ -45,10 +45,10 @@ import ProjectSettings                         from 'pages/ProjectSettings'
 import ProjectSettingsGeneral                  from 'pages/ProjectSettingsGeneral'
 import ProjectSettingsPermissions              from 'pages/ProjectSettingsPermissions'
 import ProjectSettingsTags                     from 'pages/ProjectSettingsTags'
-import ProjectSettingsTasks                    from 'pages/ProjectSettingsTasks'
+import ProjectSettingsThreads                    from 'pages/ProjectSettingsThreads'
 import ProjectSettingsTeam                     from 'pages/ProjectSettingsTeam'
-import ProjectTask                             from 'pages/ProjectTask'
-import ProjectTasks                            from 'pages/ProjectTasks'
+import ProjectThread                             from 'pages/ProjectThread'
+import ProjectThreads                            from 'pages/ProjectThreads'
 import ProjectTeam                             from 'pages/ProjectTeam'
 import Register                                from 'pages/Register'
 import Search                                  from 'pages/Search'
@@ -119,15 +119,15 @@ export default () => (
       <IndexRoute                              component={ ProjectOverview } />
       <Route path="team"                       component={ ProjectTeam } />
       <Route path="files/:path"                component={ ProjectOverview } />
-      <Route path="threads"                    component={ ProjectTasks } />
-      <Route path="threads/:taskId"            component={ ProjectTask } />
-      <Route path="threads/:taskId/edit"       component={ ProjectTask } />
+      <Route path="threads"                    component={ ProjectThreads } />
+      <Route path="threads/:taskId"            component={ ProjectThread } />
+      <Route path="threads/:taskId/edit"       component={ ProjectThread } />
       <Route path="history"                    component={ ProjectCommits } />
       <Route path="history/:commitId"          component={ ProjectCommit } />
       <Route path="settings"                   component={ ProjectSettings }>
         <IndexRoute                            component={ ProjectSettingsGeneral } />
         <Route path="permissions"              component={ ProjectSettingsPermissions } />
-        <Route path="threads"                  component={ ProjectSettingsTasks } />
+        <Route path="threads"                  component={ ProjectSettingsThreads } />
         <Route path="team"                     component={ ProjectSettingsTeam } />
         <Route path="tags"                     component={ ProjectSettingsTags } />
       </Route>

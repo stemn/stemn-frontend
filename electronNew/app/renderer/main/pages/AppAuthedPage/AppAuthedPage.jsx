@@ -14,6 +14,7 @@ import { showModal } from 'stemn-shared/misc/Modal/Modal.actions.js';
 // Sub Components
 import TitleBar from 'stemn-shared/misc/TitleBar/TitleBar';
 import Sidebar  from 'stemn-shared/misc/Sidebar/Sidebar.jsx';
+import betaModalName from 'stemn-shared/misc/Modal/BetaModal'
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -31,7 +32,7 @@ export const Component = React.createClass({
     // If the user is not in the beta... Pop the beta modal.
     if (this.props.auth.user && this.props.auth.user._id && !this.props.auth.user.beta) {
       this.props.dispatch(showModal({
-        modalType: 'BETA',
+        modalType: betaModalName,
         modalOptions: {
           noClickClose: true,
         },

@@ -56,7 +56,7 @@ export default class File extends Component {
     return isSelected({ item, selected1, selected2, mode })
   }
   render() {
-    const { compare: { mode, selected1, selected2 }, file, timeline, relatedTasks } = this.props
+    const { compare: { mode, selected1, selected2 }, file, timeline, relatedThreads } = this.props
     const { isOpen } = this.state
     const items = orderItemsByTime(mode, selected1, selected2)
     const file1 = get(items, [0, 'data' ])

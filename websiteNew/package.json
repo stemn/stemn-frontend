@@ -29,6 +29,7 @@
     "build:html": "node ./scripts/buildHtml.js",
     "prestart": "npm run clean:build",
     "start": "webpack-dashboard -c cyan -- node ./scripts/development.js",
+    "start:log": "node ./scripts/development.js",
     "local": "webpack-dashboard -c cyan -- node ./scripts/local.js",
     "prebuild": "npm run clean:build",
     "build": "cross-env NODE_ENV=production node ./scripts/production.js",

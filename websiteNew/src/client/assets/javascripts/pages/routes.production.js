@@ -46,10 +46,10 @@ export default ({ dispatch }) => {
   const getProjectSettingsGeneral                = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectSettingsGeneral'), cb)
   const getProjectSettingsPermissions            = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectSettingsPermissions'), cb)
   const getProjectSettingsTags                   = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectSettingsTags'), cb)
-  const getProjectSettingsTasks                  = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectSettingsTasks'), cb)
+  const getProjectSettingsThreads                  = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectSettingsThreads'), cb)
   const getProjectSettingsTeam                   = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectSettingsTeam'), cb)
-  const getProjectTask                           = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectTask'), cb)
-  const getProjectTasks                          = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectTasks'), cb)
+  const getProjectThread                           = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectThread'), cb)
+  const getProjectThreads                          = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectThreads'), cb)
   const getProjectTeam                           = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectTeam'), cb)
   const getRegister                              = (loc, cb) => getRoute(dispatch, System.import('pages/Register'), cb)
   const getSearch                                = (loc, cb) => getRoute(dispatch, System.import('pages/Search'), cb)
@@ -120,15 +120,15 @@ export default ({ dispatch }) => {
         <IndexRoute                              getComponent={ getProjectOverview } />
         <Route path="team"                       getComponent={ getProjectTeam } />
         <Route path="files/:path"                getComponent={ getProjectOverview } />
-        <Route path="threads"                    getComponent={ getProjectTasks } />
-        <Route path="threads/:taskId"            getComponent={ getProjectTask } />
-        <Route path="threads/:taskId/edit"       getComponent={ getProjectTask } />
+        <Route path="threads"                    getComponent={ getProjectThreads } />
+        <Route path="threads/:taskId"            getComponent={ getProjectThread } />
+        <Route path="threads/:taskId/edit"       getComponent={ getProjectThread } />
         <Route path="history"                    getComponent={ getProjectCommits } />
         <Route path="history/:commitId"          getComponent={ getProjectCommit } />
         <Route path="settings"                   getComponent={ getProjectSettings }>
           <IndexRoute                            getComponent={ getProjectSettingsGeneral } />
           <Route path="permissions"              getComponent={ getProjectSettingsPermissions } />
-          <Route path="threads"                  getComponent={ getProjectSettingsTasks } />
+          <Route path="threads"                  getComponent={ getProjectSettingsThreads } />
           <Route path="team"                     getComponent={ getProjectSettingsTeam } />
           <Route path="tags"                     getComponent={ getProjectSettingsTags } />
         </Route>
