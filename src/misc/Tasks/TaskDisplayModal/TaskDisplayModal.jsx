@@ -1,13 +1,3 @@
-// Container Core
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry'
-
-// Container Actions
-import * as TasksActions from '../Tasks.actions.js';
-import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js';
-import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js';
-
 // Component Core
 import React from 'react';
 import moment from 'moment';
@@ -34,8 +24,7 @@ import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOver
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
-export const Component = React.createClass({
-
+export default React.createClass({
   // Mounting
   componentWillMount() { this.onMount(this.props) },
   componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
@@ -199,35 +188,3 @@ export const Component = React.createClass({
     )
   }
 });
-
-///////////////////////////////// CONTAINER /////////////////////////////////
-
-function mapStateToProps({ tasks, projects }, {taskId}) {
-  const task          = tasks.data[taskId];
-  const board         = has(task,  'data.board')   ? tasks.boards[task.data.board]     : {};
-  const project       = has(board, 'data.project') ? projects.data[board.data.project] : {};
-  const boardModel    = has(task,  'data.board')   ? `tasks.boards.${task.data.board}` : '';
-  const timelineCacheKey = taskId
-  return {
-    task,
-    entityModel: `tasks.data.${taskId}`,
-    board,
-    boardModel,
-    project,
-    timelineCacheKey,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    TasksActions: bindActionCreators(TasksActions, dispatch),
-    ModalActions: bindActionCreators(ModalActions, dispatch),
-    projectsActions: bindActionCreators(ProjectsActions, dispatch),
-    dispatch
-  }
-}
-
-const modalName = 'TASK'
-const ModalComponent = connect(mapStateToProps, mapDispatchToProps)(Component);
-registerModal(modalName, ModalComponent)
-export default modalName

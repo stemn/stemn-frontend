@@ -28,6 +28,7 @@ const LinkComponent = (props) => {
     // Container functions
     closeAll,
     showWindow,
+    dispatch,
     ...otherProps
   } = props
 
@@ -80,6 +81,10 @@ const LinkComponent = (props) => {
     if (routePath.scope && routePath.show) showWindow(routePath.scope)
     // dispatch the closeModals
     if (routePath.closeModals) closeAll()
+
+    if (routePath.clickDispatch) {
+      dispatch(routePath.clickDispatch)
+    }
   }
 
   const extendedOnClick = () => {
@@ -92,21 +97,32 @@ const LinkComponent = (props) => {
   if (isExternal) {
     return (
       <a
-         href={ getHref() }
-         className={ allClassNames }
-         onClick={ extendedOnClick }
-         { ...otherProps }
-       />
+        href={ getHref() }
+        className={ allClassNames }
+        onClick={ extendedOnClick }
+        { ...otherProps }
+      />
     )
   } else {
+    const toPath = getToPath()
+    if (toPath && toPath.pathname) {
+      return (
+        <Link
+          to={ getToPath() }
+          className={ allClassNames }
+          onClick={ extendedOnClick }
+          { ...otherProps }
+        />
+      )
+    } else {
     return (
-      <Link
-         to={ getToPath() }
-         className={ allClassNames }
-         onClick={ extendedOnClick }
-         { ...otherProps }
-       />
+      <a
+        className={ allClassNames }
+        onClick={ extendedOnClick }
+        { ...otherProps }
+      />
     )
+    }
   }
 }
 

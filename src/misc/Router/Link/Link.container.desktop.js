@@ -5,9 +5,10 @@ import Link from './Link'
 
 const stateToProps = () => ({})
 
-const dispatchToProps = {
-  showWindow,
-  closeAll,
-}
+const dispatchToProps = (dispatch) => ({
+  showWindow: () => dispatch(showWindow),
+  closeAll: () => dispatch(closeAll),
+  dispatch,
+})
 
 export default connect(stateToProps, dispatchToProps)(Link)

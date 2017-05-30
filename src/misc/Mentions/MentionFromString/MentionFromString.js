@@ -28,20 +28,28 @@ export default class MentionFromString extends Component {
     const mentionInfo = getMentionInfo(mentionType, entityId, display)
 
     if (mentionInfo) {
-      // If this is a task and we are desktop
-      if (mentionType === 'task' || mentionType === 'task-complete' && GLOBAL_ENV.APP_TYPE === 'desktop') {
-        const showTask = () => showTaskModal({
-          taskId: entityId
-        })
-        return (
-          <a
-            href=""
-            onClick={ showTask }
-          >
-            { mentionInfo.display }
-          </a>
-        )
-      } else {
+//      // If this is a task and we are desktop
+//      if (mentionType === 'task' || mentionType === 'task-complete' && GLOBAL_ENV.APP_TYPE === 'desktop') {
+//        const showTask = () => showTaskModal({
+//          taskId: entityId
+//        })
+//        return (
+//          <a
+//            onClick={ showTask }
+//          >
+//            { mentionInfo.display }
+//          </a>
+//        )
+//      } else {
+//        return (
+//          <Link
+//            name={ mentionInfo.route }
+//            params={ mentionInfo.params }
+//          >
+//            { mentionInfo.display }
+//          </Link>
+//        )
+//      }
         return (
           <Link
             name={ mentionInfo.route }
@@ -50,7 +58,6 @@ export default class MentionFromString extends Component {
             { mentionInfo.display }
           </Link>
         )
-      }
     } else {
       return null
     }

@@ -54,7 +54,7 @@ export const TaskListItem = React.createClass({
   },
   showModal(){
     this.props.ModalActions.showModal({
-      modalType: 'TASK',
+      modalType: 'TASK_DISPLAY',
       limit: 1,
       modalProps: {
         taskId: this.props.item
