@@ -20,11 +20,6 @@
   line-height: 1.4em;
   font-weight: 300;
 }
-.text-title-6{
-  font-size: 12px;
-  line-height: 1.4em;
-  font-weight: 300;
-}
 .text-primary{
   color: rgb(68, 154, 211);
 }
@@ -48,14 +43,9 @@
 .text-grey-3{
   color: rgba(0,0,0,0.5);
 }
-.text-grey-4{
-  color: rgba(0,0,0,0.6);
-}
-
 .text-center{
   text-align: center;
 }
-
 .link-primary{
   color: rgb(68, 154, 211);
 }
@@ -68,13 +58,11 @@
 .link-grey:hover{
   color: rgba(0, 0, 0, 0.5);
 }
-
 .text-ellipsis{
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis
 }
-
 .text-mini-caps{
   text-transform: uppercase;
   font-size: 12px;
@@ -85,22 +73,20 @@
 .text-blokk{
   font-family: blokk;
 }
-
 .text-interpunct::before{
     content: '\00B7';
     padding: 0 3px;
 }
 
-
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: rgba(0, 0, 0, 0.3);
+  color: rgb(150, 150, 150);
 }
 ::-moz-placeholder { /* Firefox 19+ */
-  color: rgba(0, 0, 0, 0.3);
+  color: rgb(150, 150, 150);
 }
 :-ms-input-placeholder { /* IE 10+ */
-  color: rgba(0, 0, 0, 0.3);
+  color: rgb(150, 150, 150);
 }
 :-moz-placeholder { /* Firefox 18- */
-  color: rgba(0, 0, 0, 0.3);
+  color: rgb(150, 150, 150);
 }
