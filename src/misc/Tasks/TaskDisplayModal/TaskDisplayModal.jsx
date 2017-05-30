@@ -1,13 +1,10 @@
-// Component Core
 import React from 'react';
 import moment from 'moment';
 import { has }     from 'lodash';
 
-// Styles
 import classNames from 'classnames';
 import classes from './TaskDisplayModal.css';
 
-// Sub Components
 import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox';
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx';
 import LabelSelect from 'stemn-shared/misc/Tasks/LabelSelect/LabelSelect.jsx';
@@ -20,39 +17,17 @@ import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList';
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMoreHoriz from 'react-icons/md/more-horiz';
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-
-
-///////////////////////////////// COMPONENT /////////////////////////////////
+import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
+import TaskTimelineEmpty from 'stemn-shared/misc/Tasks/TaskTimelineEmpty'
 
 export default React.createClass({
-  // Mounting
-  componentWillMount() { this.onMount(this.props) },
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
-  onMount (nextProps, prevProps) {
-    console.log(nextProps);
-    // If we don't yet have the task (and it is not loading)
-    if(!nextProps.task || !nextProps.task.data && !nextProps.task.loading){
-      nextProps.TasksActions.getTask({taskId: nextProps.taskId});
-    }    
-    // If we don't yet have the board (and it is not loading) and we have the task (so we know what project we need)
-    if(has(nextProps, 'task.data.board') && 
-      (!nextProps.board || !nextProps.board.data && !nextProps.board.loading)){
-      nextProps.TasksActions.getBoard({boardId: nextProps.task.data.board});
-    }    
-    // If we don't yet have the project (and it is not loading) and we have the task (so we know what project we need)
-    if(has(nextProps, 'task.data.project._id') && 
-      (!nextProps.project || !nextProps.project.data && !nextProps.project.loading)){
-      nextProps.projectsActions.getProject({projectId: nextProps.task.data.project._id});
-    }
-  },
-
   showLabelEditModal(){
-    this.props.TasksActions.showLabelEditModal({
+    this.props.showLabelEditModal({
       boardId: this.props.task.data.board
     })
   },
   toggleComplete(model, value){
-    this.props.TasksActions.toggleComplete({
+    this.props.toggleComplete({
       taskId: this.props.task.data._id,
       model,
       value
@@ -60,17 +35,17 @@ export default React.createClass({
     this.updateTask();
   },
   updateTask(){
-    setTimeout(()=>this.props.TasksActions.updateTask({task: this.props.task.data}), 1);
+    setTimeout(()=>this.props.updateTask({task: this.props.task.data}), 1);
   },
   deleteTask(){
-    this.props.TasksActions.deleteTask({
+    this.props.deleteTask({
       taskId: this.props.task.data._id,
       boardId: this.props.task.data.board,
     });
     this.props.modalConfirm();
   },
   render() {
-    const { taskId, task, board, entityModel, project, timelineCacheKey, modalCancel } = this.props;
+    const { taskId, task, board, entityModel, project, timeline, timelineCacheKey, modalCancel } = this.props;
 
     const getMain = () => {
       const menu = [{
@@ -110,12 +85,23 @@ export default React.createClass({
               Created {moment(task.data.created).fromNow()} <b className="text-interpunct"></b> By <a className="link-primary">{task.data.owner.name}</a>
             </div>
           </div>
-          <div className={classes.timeline + ' flex scroll-box'}>
-
+          <div className={classes.timeline + ' layout-column flex scroll-box'}>
+            { timeline && timeline.length > 0 &&
+              <TimelineVertical
+                className={ classes.timeline }
+                items={ timeline }
+                timelineCacheKey={ timelineCacheKey }
+                entity={ board }
+                type="task"
+              />
+            }
+            { timeline && timeline.length == 0 &&
+              <TaskTimelineEmpty className="flex" />
+            }
           </div>
-          <div className={classes.newComment}>
+          <div className={ classes.newComment }>
             <CommentNew
-              taskId={taskId}
+              taskId={ taskId }
               timelineCacheKey={ timelineCacheKey }
             />
           </div>

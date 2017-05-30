@@ -14,6 +14,7 @@ export default class PopoverFit extends Component {
   getButtonRef = (ref) => {
     if (ref) {
       this.buttonRef = ref
+      this.setWidth()
     }
   }
   setWidth = () => {
