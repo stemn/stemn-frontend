@@ -4,7 +4,7 @@ import { show as showToast } from '../Toasts/Toasts.actions.js';
 import { showModal, showConfirm } from '../Modal/Modal.actions.js';
 import { get }               from 'lodash';
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
-
+import threadLabelsEditModalName from 'stemn-shared/misc/Threads/ThreadLabelsEditModal'
 
 export function newThread({ boardId, thread }) {
   return (dispatch, getState) => {
@@ -335,7 +335,7 @@ export function deleteGroup({boardId, groupId}) {
 export function showLabelEditModal({boardId}) {
   return (dispatch) => {
     dispatch(showModal({
-      modalType: 'TASK_LABELS',
+      modalType: threadLabelsEditModalName,
       modalProps: {
         boardId
       },

@@ -1,15 +1,15 @@
-import React from 'react';
-
-import modelLocked    from 'stemn-shared/assets/images/pure-vectors/model-locked.svg';
-import { connect } from 'react-redux';
-import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js';
+import React from 'react'
+import modelLocked from 'stemn-shared/assets/images/pure-vectors/model-locked.svg'
+import { connect } from 'react-redux'
+import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js'
+import assemblyPartNotFoundModalName from 'stemn-shared/misc/Files/PreviewFile/Messages/AssemblyPartNotFound/AssemblyPartNotFoundModal'
 
 export const AssemblyPartNotFound = React.createClass({
   render() {
     const { dispatch, parts } = this.props;
 
     const openModal = () => {
-      dispatch(ModalActions.showModal({modalType: 'ASSEMBLY_PART_NOT_FOUND', modalProps: {parts: parts}}))
+      dispatch(ModalActions.showModal({modalType: assemblyPartNotFoundModalName, modalProps: {parts: parts}}))
     }
     return (
       <div className="layout-column layout-align-center-center flex text-center">

@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'stemn-shared/misc/Router/Link';
+import Link from 'stemn-shared/misc/Router/Link'
 import classNames from 'classnames';
 import classes from './SimpleIconButton.css'
 
@@ -11,7 +11,7 @@ export default class extends React.Component{
       'disabled': disabled,
     })
 
-    if(this.props.to || this.props.name){
+    if (this.props.to || this.props.name) {
       return (
         <Link
           className={ allClasses }
@@ -20,8 +20,7 @@ export default class extends React.Component{
           { children }
         </Link>
       );
-    }
-    else{
+    } else{
       return (
         <button
           className={ allClasses }

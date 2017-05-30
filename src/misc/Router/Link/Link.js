@@ -115,13 +115,13 @@ const LinkComponent = (props) => {
         />
       )
     } else {
-    return (
-      <a
-        className={ allClassNames }
-        onClick={ extendedOnClick }
-        { ...otherProps }
-      />
-    )
+      return (
+        <a
+          className={ allClassNames }
+          onClick={ extendedOnClick }
+          { ...otherProps }
+        />
+      )
     }
   }
 }

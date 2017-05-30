@@ -1,5 +1,6 @@
 import getUuid from 'stemn-shared/utils/getUuid.js'
 import { promises } from './ModalPromises'
+import confirmModalName from 'stemn-shared/misc/Modal/ConfirmModal'
 
 class DeferredPromise {
   constructor() {
@@ -39,7 +40,7 @@ export const showModal = ({ modalType, modalProps, modalOptions, limit, scope } 
 
 export const showConfirm = ({ title, message, confirmValue, confirmPlaceholder } = {}) => {
   return showModal({
-    modalType: 'CONFIRM',
+    modalType: confirmModalName,
     modalProps: {
       title,
       message,

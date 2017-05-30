@@ -4,6 +4,8 @@ import { getFullPath }   from 'stemn-shared/misc/Files/Files.actions.js';
 
 import { shell } from 'electron';
 
+import errorModalName from 'stemn-shared/misc/Modal/ErrorModal'
+
 export function getProviderPath() {
   return (dispatch, getState) => {
     dispatch({
@@ -57,7 +59,7 @@ export function openFile({location, path, projectId, provider}) {
 
     const showErrorDialog = ({path}) => {
       dispatch(ModalActions.showModal({
-        modalType: 'ERROR',
+        modalType: errorModalName,
         modalProps: {
           title: 'File could not be found',
           body: `Could not locate the file/folder:<div class="dr-input text-ellipsis" style="margin: 15px 0">${path}</div>You should double-check this file exists on your computer. Additionally, make sure you have not disabled syncing of this file/folder using Dropbox/Drive's selective-sync feature.`

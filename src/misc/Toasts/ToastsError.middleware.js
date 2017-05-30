@@ -2,6 +2,11 @@ import { showModal }          from 'stemn-shared/misc/Modal/Modal.actions.js'
 import { show as toastShow }  from 'stemn-shared/misc/Toasts/Toasts.actions.js'
 import { has }                from 'lodash'
 
+
+import connectionModalName from 'stemn-shared/misc/Modal/ConnectionModal'
+import providerAccessRevokedModalName from 'stemn-shared/misc/Modal/ProviderAccessRevokedModal'
+import providerAccessErrorModalName from 'stemn-shared/misc/Modal/ProviderAccessErrorModal'
+
 /*********************************************************************
 This middleware will add an error modal/toast when possible.
 
@@ -21,11 +26,11 @@ this will be displayed instead of the standard toast.
 const errorMap = {
   GOOGLE_CONNECTION_ERROR: {
     displayType: 'modal',
-    modalType: 'PROVIDER_ACCESS_ERROR',
+    modalType: providerAccessErrorModalName,
   },
   DRIVE_ACCESS_REVOKED: {
     displayType: 'modal',
-    modalType: 'PROVIDER_ACCESS_REVOKED',
+    modalType: providerAccessRevokedModalName,
   },
   LINK_FOLDER_CONFLICT: {
     displayType: 'toast',
@@ -39,7 +44,7 @@ const processLocalError = (store, action) => {
   // Local errors are electron only
   if (action.payload.errno === 'ENETUNREACH') {
     store.dispatch(showModal({
-      modalType: 'CONNECTION',
+      modalType: connectionModalName,
       modalProps: action.payload.data,
       limit: 1,
     }))

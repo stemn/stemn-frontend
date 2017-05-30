@@ -25,6 +25,7 @@ import ThreadLabelDots from 'stemn-shared/misc/Threads/ThreadLabelDots/ThreadLab
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea';
 import UserSelect from 'stemn-shared/misc/Users/UserSelect/UserSelect.jsx';
 import DueDate from 'stemn-shared/misc/Threads/ThreadDueDate'
+import threadDisplayModalName from 'stemn-shared/misc/Threads/ThreadDisplayModal'
 
 
 export const ThreadListItem = React.createClass({
@@ -54,7 +55,7 @@ export const ThreadListItem = React.createClass({
   },
   showModal(){
     this.props.ModalActions.showModal({
-      modalType: 'TASK_DISPLAY',
+      modalType: threadDisplayModalName,
       limit: 1,
       modalProps: {
         threadId: this.props.item

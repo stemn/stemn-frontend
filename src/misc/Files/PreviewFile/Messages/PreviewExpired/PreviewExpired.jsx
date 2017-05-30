@@ -3,13 +3,14 @@ import React from 'react';
 import expired from 'stemn-shared/assets/images/pure-vectors/expired.svg';
 import { connect } from 'react-redux';
 import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js';
+import previewExpiredModalName from 'stemn-shared/misc/Files/PreviewFile/Messages/PreviewExpired/PreviewExpiredModal'
 
 export const PreviewExpired = React.createClass({
   render() {
     const { provider, dispatch } = this.props;
 
     const openModal = () => {
-      dispatch(ModalActions.showModal({modalType: 'PREVIEW_EXPIRED', modalProps: {provider: provider}}))
+      dispatch(ModalActions.showModal({modalType: previewExpiredModalName, modalProps: {provider: provider}}))
     }
     return (
       <div className="layout-column layout-align-center-center flex text-center">
