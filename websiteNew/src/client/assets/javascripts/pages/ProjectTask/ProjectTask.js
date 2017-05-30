@@ -179,7 +179,7 @@ export default class ProjectTask extends Component {
     )
   }
   render() {
-    const { task, project, board, taskModel, taskId, timeline, location, currentUser } = this.props
+    const { task, project, board, taskModel, taskId, timeline, timelineCacheKey, location, currentUser } = this.props
 
     if (task && task.data && board && board.data && project && project.data ) {
       const group = board.data.groups.find(group => group._id === task.data.group)
@@ -286,6 +286,7 @@ export default class ProjectTask extends Component {
                   <TimelineVertical
                     className={ classes.timeline }
                     items={ timeline }
+                    timelineCacheKey={ timelineCacheKey }
                     entity={ board }
                     type="task"
                   />
@@ -295,6 +296,7 @@ export default class ProjectTask extends Component {
                 }
                 <CommentNew
                   taskId={ taskId }
+                  timelineCacheKey={ timelineCacheKey }
                 />
               </Col>
               { edit

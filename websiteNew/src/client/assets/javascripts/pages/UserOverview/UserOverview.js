@@ -4,10 +4,13 @@ import classes from './UserOverview.css';
 import classNames from 'classnames';
 import { orderBy, values, sum } from 'lodash';
 import { Row, Col } from 'stemn-shared/misc/Layout'
-import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
+import Panel from 'stemn-shared/misc/Panels/Panel';
 import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical';
 import ProjectRow from 'stemn-shared/misc/Projects/ProjectRow'
 import CalendarHeatmap from 'react-calendar-heatmap';
+import Pagination from 'stemn-shared/misc/Pagination'
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
+
 
 const normaliseValue = (value) => {
   if ( value === 0) {
@@ -33,7 +36,9 @@ export default class UserOverview extends Component {
     return classes[`s${normaliseValue(value.count)}`];
   }
   render() {
-    const { user, projects, timeline, history } = this.props;
+    const { user, projects, timeline, history, location, page, size } = this.props;
+    const noMoreResults =  timeline && timeline.data && timeline.data.length < size
+
     const heatMapData = history && history.data
       ? history.data.map(item => ({
           date: item.date,
@@ -72,13 +77,21 @@ export default class UserOverview extends Component {
         <br/>
         <div className='text-mini-caps'>Timeline</div>
         <br/>
-        <InfoPanel>
-          <TimelineVertical
-            group
-            items={ timeline }
-            type="user"
-          />
-        </InfoPanel>
+        <Panel>
+          <LoadingOverlay show={ timeline.loading } linear hideBg noOverlay />
+          { timeline.data &&
+            <TimelineVertical
+              group
+              items={ timeline.data }
+              type="user"
+            />
+          }
+        </Panel>
+        <Pagination
+          path={ location.pathname }
+          page={ page }
+          noMoreResults={ noMoreResults }
+        />
         <br />
         <br />
       </div>

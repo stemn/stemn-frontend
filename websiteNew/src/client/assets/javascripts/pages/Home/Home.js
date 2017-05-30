@@ -3,7 +3,7 @@ import StandardLayout from 'layout/StandardLayout'
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import SubHeader from 'modules/SubHeader'
-import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
+import Panel from 'stemn-shared/misc/Panels/Panel'
 import MyProjectsPanel from 'stemn-shared/misc/Projects/MyProjectsPanel'
 import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
@@ -62,7 +62,7 @@ export default class Home extends Component {
         <Container>
           <Row className="layout-xs-column layout-gt-xs-row" style={ { marginTop: '30px' } }>
             <Col className="flex flex-order-xs-1">
-              <div className={ classNames(classes.panel, 'rel-box') }>
+              <Panel>
                 <LoadingOverlay show={ timeline.loading } linear hideBg noOverlay />
                 { hasResults &&
                   <TimelineVertical
@@ -74,7 +74,7 @@ export default class Home extends Component {
                 { hasNoResults &&
                   <div className="text-title-5">Your feed is empty. Follow some <Link name="exploreRoute" className="link-primary">projects or users.</Link></div>
                 }
-              </div>
+              </Panel>
               { hasResults &&
                 <Pagination
                   path={ location.pathname }

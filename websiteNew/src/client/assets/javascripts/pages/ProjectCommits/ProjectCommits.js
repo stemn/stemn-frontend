@@ -7,7 +7,7 @@ import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import HistoryGraph from 'stemn-shared/misc/History/HistoryGraph'
 import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
-import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
+import Panel from 'stemn-shared/misc/Panels/Panel';
 import SubSubHeader from 'modules/SubSubHeader'
 import Pagination from 'stemn-shared/misc/Pagination'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
@@ -77,14 +77,14 @@ export default class ProjectCommits extends Component {
               parentId={ filter.object.user ? project.data._id : undefined }
             />
           </div>
-          <InfoPanel>
+          <Panel>
             <TimelineVertical
               group
               items={ syncTimeline.data }
               type="project"
               entity={ board }
             />
-          </InfoPanel>
+          </Panel>
           <Pagination
             path={ location.pathname }
             page={ page }
@@ -96,9 +96,9 @@ export default class ProjectCommits extends Component {
       return <HistoryEmpty projectRouteParams={ projectRouteParams } />
     } else {
       return (
-        <InfoPanel className="text-title-5">
+        <Panel className="text-title-5">
           No timeline events found. <a className="link-primary" onClick={ this.clearFilter }>Reset Filter</a>
-        </InfoPanel>
+        </Panel>
       )
     }
   }

@@ -21,9 +21,11 @@ const forwardToRenderer = store => next => action => {
     openWindows[0].webContents.send('redux-action', rendererAction)
   }
 
-  if(action.meta && action.meta.scope.includes('menubar') || action.meta && action.meta.scope.includes('main')){
+  // If the scope is menubar or main, we close
+  if (action.meta && action.meta.scope.includes('menubar') || action.meta && action.meta.scope.includes('main')) {
     return
   }
+
   return next(action);
 };
 

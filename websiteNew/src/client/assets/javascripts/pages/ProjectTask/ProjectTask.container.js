@@ -28,6 +28,7 @@ const stateToProps = ({ tasks, projects, syncTimeline, auth }, { params }) => {
     board,
     taskModel: `tasks.data.${taskId}`,
     timeline: get(syncTimeline, [taskId, 'data'], []),
+    timelineCacheKey: taskId,
     currentUser: auth.user,
   };
 }
