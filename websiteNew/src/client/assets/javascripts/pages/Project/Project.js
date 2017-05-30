@@ -44,8 +44,8 @@ class Project extends Component {
               Overview
             </Link>
             <Link
-              activeIf={ { includes: ['projectTasksRoute'] } }
-              name="projectTasksRoute" params={ routeParams }
+              activeIf={ { includes: ['projectThreadsRoute'] } }
+              name="projectThreadsRoute" params={ routeParams }
             >
               Threads
             </Link>

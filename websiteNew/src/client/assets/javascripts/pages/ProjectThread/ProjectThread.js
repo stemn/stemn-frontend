@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import classes from './ProjectTask.css'
+import classes from './ProjectThread.css'
 import classNames from 'classnames'
 import { Row, Col, Container } from 'stemn-shared/misc/Layout'
 import SubSubHeader from 'modules/SubSubHeader'
@@ -13,23 +13,23 @@ import CommentNew from 'stemn-shared/misc/Comments/Comment/CommentNew.jsx'
 import MdDone from 'react-icons/md/done'
 import MdAdd from 'react-icons/md/add'
 import MdAccessTime from 'react-icons/md/access-time'
-import TaskLabelDots from 'stemn-shared/misc/Tasks/TaskLabelDots/TaskLabelDots.jsx'
+import ThreadLabelDots from 'stemn-shared/misc/Threads/ThreadLabelDots/ThreadLabelDots.jsx'
 import Link from 'stemn-shared/misc/Router/Link'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import Input from 'stemn-shared/misc/Input/Input/Input'
-import LabelSelect from 'stemn-shared/misc/Tasks/LabelSelect/LabelSelect'
-import TaskTimelineEmpty from 'stemn-shared/misc/Tasks/TaskTimelineEmpty'
+import LabelSelect from 'stemn-shared/misc/Threads/LabelSelect/LabelSelect'
+import ThreadTimelineEmpty from 'stemn-shared/misc/Threads/ThreadTimelineEmpty'
 import { Breadcrumbs, Crumb } from 'stemn-shared/misc/Breadcrumbs'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton'
-import DueDate from 'stemn-shared/misc/Tasks/TaskDueDate'
+import DueDate from 'stemn-shared/misc/Threads/ThreadDueDate'
 import { permissionsIsMin } from 'stemn-shared/misc/Auth/Auth.utils'
 import { get, has } from 'lodash'
 import { Helmet } from "react-helmet"
 
-export default class ProjectTask extends Component {
-  updateTask = () => {
-    setTimeout(() => this.props.updateTask({
+export default class ProjectThread extends Component {
+  updateThread = () => {
+    setTimeout(() => this.props.updateThread({
       task: this.props.task.data
     }), 1);
   }
@@ -69,7 +69,7 @@ export default class ProjectTask extends Component {
           </SimpleIconButton>
           <PopoverDropdown
             options={ groupOptions }
-            onChange={ this.updateTask }
+            onChange={ this.updateThread }
             value={ task.data.group }
             model={ `${taskModel}.data.group` }
             style={ { width: '100%' } }
@@ -81,7 +81,7 @@ export default class ProjectTask extends Component {
           <div className="text-mini-caps">Due Date</div>
            <DatePicker
             model={ `${taskModel}.data.due` }
-            onChange={ this.updateTask }
+            onChange={ this.updateThread }
             value={ task.data.due }
           />
         </div>
@@ -98,7 +98,7 @@ export default class ProjectTask extends Component {
           <LabelSelect
             model={ `${taskModel}.data.labels` }
             value={ task.data.labels }
-            onChange={ this.updateTask }
+            onChange={ this.updateThread }
             labelInfo={ board.data.labels }
           />
         </div>
@@ -114,7 +114,7 @@ export default class ProjectTask extends Component {
           </SimpleIconButton>
           <UserSelect
             model={ `${taskModel}.data.users` }
-            onChange={ this.updateTask }
+            onChange={ this.updateThread }
             value={ task.data.users }
             users={ project.data.team }
           />
@@ -144,11 +144,11 @@ export default class ProjectTask extends Component {
         { task.data.labels && task.data.labels.length > 0 &&
         <div className={ classes.panel }>
           <div className="text-mini-caps">Labels</div>
-          <TaskLabelDots
+          <ThreadLabelDots
             labels={ task.data.labels }
             labelInfo={ board.data.labels }
             tag
-            name="projectTasksRoute"
+            name="projectThreadsRoute"
             params={ taskRouteParams }
             link
           />
@@ -205,8 +205,8 @@ export default class ProjectTask extends Component {
           }
           <SubSubHeader>
           <Breadcrumbs>
-            <Crumb name="projectTasksRoute" params={ { projectId: project.data._id } } text="Threads" />
-            <Crumb name="projectTasksRoute" params={ { projectId: project.data._id } } query={ { groups: [ group._id ]} } text={ group.name } />
+            <Crumb name="projectThreadsRoute" params={ { projectId: project.data._id } } text="Threads" />
+            <Crumb name="projectThreadsRoute" params={ { projectId: project.data._id } } query={ { groups: [ group._id ]} } text={ group.name } />
             <Crumb text={ task.data.name || 'Untitled Thread' } />
           </Breadcrumbs>
           <br />
@@ -247,7 +247,7 @@ export default class ProjectTask extends Component {
                   value={ task.data.complete }
                   model={ `${taskModel}.data.complete` }
                   options={ this.dropdownOptions }
-                  onChange={ this.updateTask }
+                  onChange={ this.updateThread }
                   style={ { margin: '0 15px' } }
                 />
               }
@@ -290,7 +290,7 @@ export default class ProjectTask extends Component {
                   />
                 }
                 { timeline && timeline.length == 0 &&
-                  <TaskTimelineEmpty className={ classNames('flex-gt-xs', classes.empty) } />
+                  <ThreadTimelineEmpty className={ classNames('flex-gt-xs', classes.empty) } />
                 }
                 <CommentNew
                   taskId={ taskId }

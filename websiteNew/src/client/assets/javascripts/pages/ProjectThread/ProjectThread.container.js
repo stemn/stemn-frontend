@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { get } from 'lodash'
-import ProjectTask from './ProjectTask'
+import ProjectThread from './ProjectThread'
 
 import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
-import { 
-  getBoard, 
-  getBoards, 
-  getTask, 
-  updateTask,
-} from 'stemn-shared/misc/Tasks/Tasks.actions'
+import {
+  getBoard,
+  getBoards,
+  getThread,
+  updateThread,
+} from 'stemn-shared/misc/Threads/Threads.actions'
 
 const stateToProps = ({ tasks, projects, syncTimeline, auth }, { params }) => {
   const taskId = params.taskId;
@@ -36,15 +36,15 @@ const stateToProps = ({ tasks, projects, syncTimeline, auth }, { params }) => {
 const dispatchToProps = {
   getBoard,
   getBoards,
-  getTask,
-  updateTask,
+  getThread,
+  updateThread,
   fetchTimeline,
 };
 
 const fetchConfigs = [{
   hasChanged: 'taskId',
   onChange: (props) => {
-    props.getTask({
+    props.getThread({
       taskId: props.taskId
     })
   }
@@ -67,10 +67,10 @@ const fetchConfigs = [{
 
 @connect(stateToProps, dispatchToProps)
 @fetchDataHoc(fetchConfigs)
-export default class ProjectTaskContainer extends Component {
+export default class ProjectThreadContainer extends Component {
   render() {
     return (
-      <ProjectTask {...this.props} />
+      <ProjectThread {...this.props} />
     );
   }
 }

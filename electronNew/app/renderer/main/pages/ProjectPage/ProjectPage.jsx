@@ -139,8 +139,8 @@ class Component extends React.Component{
               { getVisibilityPopup() }
             </Popover>
             <div className="divider"></div>
-            <SimpleIconButton activeClassName="active" to={baseLink+'/settings'} title="Project Settings">
-              <MdSettings size={20}/>
+            <SimpleIconButton activeClassName="active" to={ baseLink+'/settings' } title="Project Settings">
+              <MdSettings size={20} />
             </SimpleIconButton>
             <div className="divider"></div>
           </Header>

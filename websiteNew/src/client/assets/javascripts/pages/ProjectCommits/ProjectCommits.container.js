@@ -6,7 +6,7 @@ import ProjectCommits from './ProjectCommits'
 import { setFilter } from 'stemn-shared/misc/StringFilter/StringFilter.actions'
 import { createFilterString, getFilter } from 'stemn-shared/misc/StringFilter/StringFilter.utils'
 import { get, isEqual } from 'lodash'
-import { getBoards } from 'stemn-shared/misc/Tasks/Tasks.actions'
+import { getBoards } from 'stemn-shared/misc/Threads/Threads.actions'
 
 
 const stateToProps = ({ projects, syncTimeline, stringFilter, tasks }, { params, location }) => {

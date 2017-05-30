@@ -23,13 +23,13 @@ export const projectRoute                = ({ projectId })                     =
 export const projectSettingsRoute        = ({ projectId })                     => `/project/${projectId}/settings`
 export const projectSettingsTeamRoute    = ({ projectId })                     => `/project/${projectId}/settings/team`
 export const projectSettingsThreadsRoute = ({ projectId })                     => `/project/${projectId}/settings/threads`
-export const projectTasksRoute           = ({ projectId })                     => `/project/${projectId}/threads`
+export const projectThreadsRoute         = ({ projectId })                     => `/project/${projectId}/threads`
 export const projectTeamRoute            = ({ projectId })                     => `/project/${projectId}/team`
 export const registerRoute               = ()                                  => '/register'
 export const securityRoute               = ()                                  => `/security`
 export const settingsRoute               = ()                                  => `/settings`
-export const taskEditRoute               = ({ taskId, projectId })             => `/project/${projectId}/threads/${taskId}/edit`
-export const taskRoute                   = ({ taskId, projectId })             => `/project/${projectId}/threads/${taskId}`
+export const threadEditRoute             = ({ threadId, projectId })           => `/project/${projectId}/threads/${threadId}/edit`
+export const threadRoute                 = ({ threadId, projectId })           => `/project/${projectId}/threads/${threadId}`
 export const termsRoute                  = ()                                  => `/terms`
 export const userDetailsRoute            = ({ userId })                        => `/users/${userId}/details`
 export const userFollowersRoute          = ({ userId })                        => `/users/${userId}/followers`
