@@ -25,9 +25,7 @@ import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleI
 import DueDate from 'stemn-shared/misc/Tasks/TaskDueDate'
 import { permissionsIsMin } from 'stemn-shared/misc/Auth/Auth.utils'
 import { get, has } from 'lodash'
-import { Helmet } from "react-helmet";
-
-
+import { Helmet } from "react-helmet"
 
 export default class ProjectTask extends Component {
   updateTask = () => {

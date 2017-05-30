@@ -1,3 +1,14 @@
+import { showModal } from 'stemn-shared/misc/Modal/Modal.actions.js'
+import taskDisplayModalName from 'stemn-shared/misc/Tasks/TaskDisplayModal'
+
+const showTaskModal = ({ taskId }) => showModal({
+  modalType: taskDisplayModalName,
+  limit: 1,
+  modalProps: {
+    taskId
+  }
+})
+
 export const commitRoute                 = ({ commitId, projectId })           => ({ scope: 'main', show: true, pathname: `/project/${projectId}/feed?item=${commitId}`})
 export const contactRoute                = ()                                  => `/contact`
 export const downloadRoute               = ()                                  => `/download`
@@ -29,7 +40,7 @@ export const registerRoute               = ()                                  =
 export const securityRoute               = ()                                  => ({ external: true, pathname: `/security`})
 export const settingsRoute               = ()                                  => ({ external: true, pathname: `/settings`})
 export const taskEditRoute               = ({ taskId, projectId })             => `/project/${projectId}/threads/${taskId}/edit`
-export const taskRoute                   = ({ taskId, projectId })             => `/project/${projectId}/threads/${taskId}`
+export const taskRoute                   = ({ taskId, projectId })             => ({ scope: 'main', show: true, clickDispatch: showTaskModal({ taskId })})
 export const termsRoute                  = ()                                  => ({ external: true, pathname: `/terms`})
 export const userDetailsRoute            = ({ userId })                        => ({ external: true, pathname: `/users/${userId}/details`})
 export const userFollowersRoute          = ({ userId })                        => ({ external: true, pathname: `/users/${userId}/followers`})
