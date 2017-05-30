@@ -64,7 +64,7 @@ class Component extends React.Component{
       onClick: () => {}
     },{
       label: 'Delete Projects',
-      onClick: this.deleteTask
+      onClick: this.deleteThread
     }];
 
     const missingClientBanner = () => {
@@ -129,7 +129,7 @@ class Component extends React.Component{
             <div className={classes.tabs + ' flex layout-row layout-align-start-center'}>
               <Link activeClassName="active" to={baseLink} onlyActiveOnIndex={true}>Changes</Link>
               { isConnected ? <Link activeClassName="active" to={baseLink+'/feed'}>History</Link> : null }
-              <Link activeClassName="active" to={baseLink+'/tasks'}>Threads</Link>
+              <Link activeClassName="active" to={baseLink+'/threads'}>Threads</Link>
               { isConnected ? <Link className={['files/:path', 'files'].includes(routeName.path) ? 'active' : ''} to={baseLink+'/files/'}>Files</Link> : null }
             </div>
             <Popover preferPlace="below" tipSize={ 6 } trigger="click">

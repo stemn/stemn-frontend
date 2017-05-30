@@ -1,11 +1,11 @@
 import { showModal } from 'stemn-shared/misc/Modal/Modal.actions.js'
-import taskDisplayModalName from 'stemn-shared/misc/Tasks/TaskDisplayModal'
+import threadDisplayModalName from 'stemn-shared/misc/Threads/ThreadDisplayModal'
 
-const showTaskModal = ({ taskId }) => showModal({
-  modalType: taskDisplayModalName,
+const showThreadModal = ({ threadId }) => showModal({
+  modalType: threadDisplayModalName,
   limit: 1,
   modalProps: {
-    taskId
+    threadId
   }
 })
 
@@ -34,13 +34,13 @@ export const projectRoute                = ({ projectId })                     =
 export const projectSettingsRoute        = ({ projectId })                     => `/project/${projectId}/settings`
 export const projectSettingsTeamRoute    = ({ projectId })                     => `/project/${projectId}/settings/team`
 export const projectSettingsThreadsRoute = ({ projectId })                     => `/project/${projectId}/settings/threads`
-export const projectTasksRoute           = ({ projectId })                     => `/project/${projectId}/threads`
+export const projectThreadsRoute           = ({ projectId })                     => `/project/${projectId}/threads`
 export const projectTeamRoute            = ({ projectId })                     => `/project/${projectId}/team`
 export const registerRoute               = ()                                  => ({ external: true, pathname: '/register'})
 export const securityRoute               = ()                                  => ({ external: true, pathname: `/security`})
 export const settingsRoute               = ()                                  => ({ external: true, pathname: `/settings`})
-export const taskEditRoute               = ({ taskId, projectId })             => `/project/${projectId}/threads/${taskId}/edit`
-export const taskRoute                   = ({ taskId, projectId })             => ({ scope: 'main', show: true, clickDispatch: showTaskModal({ taskId })})
+export const threadEditRoute               = ({ threadId, projectId })             => `/project/${projectId}/threads/${threadId}/edit`
+export const threadRoute                   = ({ threadId, projectId })             => ({ scope: 'main', show: true, clickDispatch: showThreadModal({ threadId })})
 export const termsRoute                  = ()                                  => ({ external: true, pathname: `/terms`})
 export const userDetailsRoute            = ({ userId })                        => ({ external: true, pathname: `/users/${userId}/details`})
 export const userFollowersRoute          = ({ userId })                        => ({ external: true, pathname: `/users/${userId}/followers`})

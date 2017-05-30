@@ -19,7 +19,7 @@ export const dataToStoreKeyMap = [
   ['projects', 'activeProject'],
   ['projects', 'data'],
   ['projects', 'userProjects'],
-  ['tasks','boards', '*', 'layout'],
+  ['threads','boards', '*', 'layout'],
   ['files', 'fileAssemblyParts'],     // All assembly-part mappings
   ['files', 'fileAssemblies'],        // All part-assembly mappings
   ['files', 'fileMeta'],              // All file meta

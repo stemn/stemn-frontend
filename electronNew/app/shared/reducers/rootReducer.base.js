@@ -17,7 +17,7 @@ import search from 'stemn-shared/misc/Search/Search.reducer.js'
 import sidebar from 'stemn-shared/misc/Sidebar/Sidebar.reducer.js'
 import syncTimeline from 'stemn-shared/misc/SyncTimeline/SyncTimeline.reducer.js'
 import system from 'stemn-shared/desktop/System/System.reducer.js'
-import tasks from 'stemn-shared/misc/Tasks/Tasks.reducer.js'
+import threads from 'stemn-shared/misc/Threads/Threads.reducer.js'
 import toasts from 'stemn-shared/misc/Toasts/Toasts.reducer.js'
 import togglePanel from 'stemn-shared/misc/TogglePanel/TogglePanel.reducer.js'
 import upload from 'stemn-shared/misc/Upload/Upload.reducer.js'
@@ -44,7 +44,7 @@ export default {
   sidebar,
   syncTimeline,
   system,
-  tasks,
+  threads,
   toasts,
   togglePanel,
   upload,

@@ -28,7 +28,7 @@ export const Component = React.createClass({
           <div className={classes.panel} style={{padding: '0px'}}>
             <NavPill to={`${baseLink}/settings`} onlyActiveOnIndex={true}>General</NavPill>
             <NavPill to={`${baseLink}/settings/permissions`}>Permissions</NavPill>
-            <NavPill to={`${baseLink}/settings/tasks`}>Threads</NavPill>
+            <NavPill to={`${baseLink}/settings/threads`}>Threads</NavPill>
             <NavPill to={`${baseLink}/settings/team`}>Team</NavPill>
           </div>
         </div>

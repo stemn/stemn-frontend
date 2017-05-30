@@ -18,7 +18,7 @@ import Header       from 'stemn-shared/misc/Header/Header.jsx'
 import DragResize   from 'stemn-shared/misc/DragResize/DragResize.jsx';
 import Calendar     from 'stemn-shared/misc/Calendar/Calendar.jsx';
 import Tabs         from 'stemn-shared/misc/Tabs/Tabs';
-import Tasks        from 'stemn-shared/misc/Tasks/Tasks.jsx'
+import Threads        from 'stemn-shared/misc/Threads/Threads.jsx'
 
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// COMPONENT /////////////////////////////////
@@ -38,13 +38,13 @@ export const Component = React.createClass({
           <div className="flex" style={{padding: '50px'}}>
             <div className="layout-row layout-align-center">
               <Tabs size="lg">
-                <Link activeClassName="active" to='/dashboard'>My Tasks</Link>
+                <Link activeClassName="active" to='/dashboard'>My Threads</Link>
                 <Link activeClassName="active" to='/feed'>Activity</Link>
               </Tabs>
             </div>
             <br />
             <br />
-            <Tasks/>
+            <Threads/>
           </div>
           <DragResize side="left" width="450" widthRange={[0, 600]} className="layout-column">
             <div className={classes.sidebarRight + ' layout-column flex'}>

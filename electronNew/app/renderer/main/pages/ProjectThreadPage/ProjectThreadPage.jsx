@@ -12,7 +12,7 @@ import classNames from 'classnames';
 
 // Sub Components
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import Tasks          from 'stemn-shared/misc/Tasks/Tasks.jsx'
+import Threads          from 'stemn-shared/misc/Threads/Threads.jsx'
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -20,14 +20,14 @@ export const Component = React.createClass({
   render() {
     const { project, entityModel } = this.props;
     return (
-      <Tasks projectId={project.data._id} />
+      <Threads projectId={project.data._id} />
     )
   }
 });
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps({tasks, projects}, {params}) {
+function mapStateToProps({threads, projects}, {params}) {
   const project = projects.data[params.stub];
   return {
     project: project,

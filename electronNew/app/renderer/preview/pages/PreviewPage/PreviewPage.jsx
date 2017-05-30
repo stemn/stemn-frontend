@@ -66,7 +66,7 @@ export default class PreviewPage extends Component {
     return isSelected({ item, selected1, selected2, mode })
   }
   render() {
-    const { compare: { mode, selected1, selected2 }, file, timeline, relatedTasks } = this.props
+    const { compare: { mode, selected1, selected2 }, file, timeline, relatedThreads } = this.props
     const items = orderItemsByTime(mode, selected1, selected2)
     const file1 = get(items, [0, 'data' ])
     const file2 = get(items, [1, 'data' ])

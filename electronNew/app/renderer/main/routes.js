@@ -24,11 +24,11 @@ import ProjectPage                 from './pages/ProjectPage/ProjectPage.contain
 import ProjectFilesPage            from './pages/ProjectPage/ProjectFilesPage';
 import ProjectSettingsPage         from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.jsx';
 import ProjectSettingsGeneralPage  from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsGeneralPage';
-import ProjectSettingsTasksPage    from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsTasksPage';
+import ProjectSettingsThreadsPage    from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsThreadsPage';
 import ProjectSettingsTeamPage     from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsTeamPage';
 import ProjectSettingsPermissionsPage     from './pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPermissionsPage';
 import ProjectFeedPage             from './pages/ProjectFeedPage/ProjectFeedPage.jsx';
-import ProjectTaskPage             from './pages/ProjectTaskPage/ProjectTaskPage.jsx';
+import ProjectThreadPage             from './pages/ProjectThreadPage/ProjectThreadPage.jsx';
 
 export default (store) => {
   return (
@@ -37,13 +37,13 @@ export default (store) => {
         <Route   path="/project/:stub"               component={ProjectPage}>
           <IndexRoute                                component={ProjectChangesPage} />
           <Route path="feed"                         component={ProjectFeedPage}/>
-          <Route path="tasks"                        component={ProjectTaskPage}/>
+          <Route path="threads"                        component={ProjectThreadPage}/>
           <Route path="files"                        component={ProjectFilesPage}/>
           <Route path="files/"                       component={ProjectFilesPage}/>
           <Route path="files/:path"                  component={ProjectFilesPage}/>
           <Route path="settings"                     component={ProjectSettingsPage}>
             <IndexRoute                              component={ProjectSettingsGeneralPage} />
-            <Route path="tasks"                      component={ProjectSettingsTasksPage} />
+            <Route path="threads"                      component={ProjectSettingsThreadsPage} />
             <Route path="team"                       component={ProjectSettingsTeamPage} />
             <Route path="permissions"                component={ProjectSettingsPermissionsPage} />
           </Route>

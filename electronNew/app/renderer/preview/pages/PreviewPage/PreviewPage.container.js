@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
-import { getMeta, getRelatedTasks } from 'stemn-shared/misc/Files/Files.actions.js'
+import { getMeta, getRelatedThreads } from 'stemn-shared/misc/Files/Files.actions.js'
 import { show as showWindow } from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js';
 import { push as pushRoute } from 'react-router-redux'
 import { initCompare, changeMode, select } from 'stemn-shared/misc/FileCompare/FileCompare.actions'
@@ -23,7 +23,7 @@ const stateToProps = ({ files, fileCompare, syncTimeline }, { params, location }
     projectId,
     revisonId: revisionId || '',
     timeline: get(syncTimeline, cacheKey, {}),
-    relatedTasks: files.relatedTasks[fileId],
+    relatedThreads: files.relatedThreads[fileId],
   }
 };
 
@@ -31,7 +31,7 @@ const dispatchToProps = {
   changeMode,
   fetchTimeline,
   getMeta,
-  getRelatedTasks,
+  getRelatedThreads,
   initCompare,
   pushRoute,
   select,
@@ -47,7 +47,7 @@ const fetchConfigs = [{
       projectId: props.projectId,
       cacheKey: props.cacheKey,
     })
-    props.getRelatedTasks({
+    props.getRelatedThreads({
       fileId: props.fileId,
       projectId: props.projectId,
     })

@@ -58,7 +58,7 @@ export const Component = React.createClass({
           projectId  : nextProps.fileMeta.data.project._id,
           fileId     : nextProps.fileMeta.data.fileId,
         })
-        nextProps.filesActions.getRelatedTasks({
+        nextProps.filesActions.getRelatedThreads({
           fileId     : nextProps.fileMeta.data.fileId,
           projectId  : nextProps.fileMeta.data.project._id
         })
@@ -139,12 +139,12 @@ export const Component = React.createClass({
       console.log('Not linked to project - open folder');
     }
   },
-  clickTag(task){
-    this.props.dispatch(ModalActions.showModal({modalType: 'TASK', limit: 1, modalProps: { taskId: task._id }}));
+  clickTag(thread){
+    this.props.dispatch(ModalActions.showModal({modalType: 'TASK', limit: 1, modalProps: { threadId: thread._id }}));
     this.props.dispatch(ElectronWindowsActions.show('main'))
   },
   render() {
-    const { fileMeta, syncTimeline, relatedTasks } = this.props;
+    const { fileMeta, syncTimeline, relatedThreads } = this.props;
     const { mode, selected1, selected2 } = this.state;
     const hasFileMeta = fileMeta && fileMeta.data;
     const isPartOfProject = hasFileMeta && fileMeta.data.project && fileMeta.data.project._id;
@@ -198,10 +198,10 @@ export const Component = React.createClass({
                 </SimpleTable>
               : null }
               { hasFileMeta ? <AssemblyParts fileMeta={fileMeta} clickFn={this.clickCrumb}/> : null }
-              { relatedTasks && relatedTasks.data && relatedTasks.data.length > 0
+              { relatedThreads && relatedThreads.data && relatedThreads.data.length > 0
               ? <div>
-                  <SectionTitle style={{margin: '30px 0 15px'}}>Related Tasks</SectionTitle>
-                  {orderBy(relatedTasks.data, ['complete']).map(task => <Tag key={task._id} text={task.name} onClick={() => this.clickTag(task)} />)}
+                  <SectionTitle style={{margin: '30px 0 15px'}}>Related Threads</SectionTitle>
+                  {orderBy(relatedThreads.data, ['complete']).map(thread => <Tag key={thread._id} text={thread.name} onClick={() => this.clickTag(thread)} />)}
                 </div>
               : null }
               <SectionTitle style={{margin: '30px 0'}}>Timeline</SectionTitle>
@@ -225,7 +225,7 @@ function mapStateToProps({ syncTimeline, files }, { fileMeta }) {
   const hasFileId = fileMeta && fileMeta.data && fileMeta.data.fileId;
   return {
     syncTimeline: hasFileId ? syncTimeline[fileMeta.data.fileId] : [],
-    relatedTasks: hasFileId ? files.relatedTasks[fileMeta.data.fileId] : []
+    relatedThreads: hasFileId ? files.relatedThreads[fileMeta.data.fileId] : []
   };
 }
 
