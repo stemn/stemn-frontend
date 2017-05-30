@@ -44,11 +44,10 @@ class Project extends Component {
               Overview
             </Link>
             <Link
-              activeIf={ { includes: ['projectTeamRoute'] } }
-              name="projectTeamRoute"
-              params={ routeParams }
+              activeIf={ { includes: ['projectTasksRoute'] } }
+              name="projectTasksRoute" params={ routeParams }
             >
-              Team
+              Threads
             </Link>
             <Link
               activeIf={ { includes: ['projectCommitsRoute'] } }
@@ -58,10 +57,11 @@ class Project extends Component {
               History
             </Link>
             <Link
-              activeIf={ { includes: ['projectTasksRoute'] } }
-              name="projectTasksRoute" params={ routeParams }
+              activeIf={ { includes: ['projectTeamRoute'] } }
+              name="projectTeamRoute"
+              params={ routeParams }
             >
-              Threads
+              Team
             </Link>
             <IsOwner
               team={ get(project, 'data.team', []) }
