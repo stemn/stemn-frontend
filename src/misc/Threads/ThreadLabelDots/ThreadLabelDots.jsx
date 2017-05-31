@@ -17,6 +17,7 @@ export default React.createClass({
             const tagStyle = {
               color: info.color,
               border: `1px solid ${info.color}`,
+              backgroundColor: !tag ? info.color : 'transparent',
             }
             const tagBgStyle = {
               background: info.color,

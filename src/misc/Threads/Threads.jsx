@@ -19,7 +19,7 @@ import Input                from 'stemn-shared/misc/Input/Input/Input';
 import ThreadsFilterMenu      from './ThreadsFilterMenu/ThreadsFilterMenu.jsx';
 import ThreadList             from './ThreadList/ThreadList.jsx';
 import Button               from 'stemn-shared/misc/Buttons/Button/Button'
-import MdSearch             from 'react-icons/md/search';
+import SearchInput from 'stemn-shared/misc/Search/SearchInput'
 import Popover              from 'stemn-shared/misc/Popover';
 import Guide                from 'stemn-shared/misc/Guide/Guide';
 import cardsColumns         from './graphics/cards-columns.svg';
@@ -90,16 +90,13 @@ export const Threads = React.createClass({
       return (
         <div className="layout-column flex">
           <div className={classes.header + ' layout-row layout-align-start-center'}>
-            <div className={classes.search}>
-              <Input
-                model={`${boardModel}.searchString`}
-                value={board.searchString}
-                className="dr-input text-ellipsis"
-                type="text"
-                placeholder="Search threads"
-              />
-              <MdSearch size="25"/>
-            </div>
+            <SearchInput
+              model={`${boardModel}.searchString`}
+              value={ board.searchString }
+              className={ classes.search }
+              type="text"
+              placeholder="Search threads"
+            />
             <div className="flex"></div>
             <Popover preferPlace="below">
               <Button style={{marginLeft: '10px'}} className="white">Layout</Button>

@@ -19,8 +19,8 @@ const eventTextMap = {
     if (groupItem) {
       return (
         <span>
-          { `Revision ${item.data.revisionNumber}:` }
-          <Link name="fileRoute" params={ params }>{ middleConcat(item.data.name, 30, 0.6) }</Link>
+          <Link name="fileRoute" params={ params }>{ middleConcat(item.data.name, 40, 0.6) }</Link>
+          { `(Revision ${item.data.revisionNumber})` }
         </span>
       )
     } else if (groupTitle) {
@@ -35,7 +35,7 @@ const eventTextMap = {
         <span>
           {  !item.data.revisionNumber || item.data.revisionNumber === 0
           ? 'created this file'
-          : `added rev.${item.data.revisionNumber}` }
+          : `added revision ${item.data.revisionNumber}` }
         </span>
       )
     } else {
@@ -58,8 +58,8 @@ const eventTextMap = {
     if (groupItem) {
       return (
         <span>
-          { `Thread ${item.data.threadNumber}:` }
-          <Link name="threadRoute" params={ params }>{ middleConcat(item.data.name, 30, 0.6) }</Link>
+          <Link name="threadRoute" params={ params }>{ middleConcat(item.data.name, 40, 0.6) }</Link>
+          { `(Task ${item.data.threadNumber})` }
         </span>
       )
     } else if (groupTitle) {

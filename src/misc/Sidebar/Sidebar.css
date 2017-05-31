@@ -20,6 +20,7 @@
   position: relative;
   margin: 0 20px 10px;
 }
+
 .sidebarSearch input{
   padding: 14px;
   height: auto;
@@ -28,9 +29,11 @@
   background: sidebar-search-bg;
   color: sidebar-search-text !important;
 }
+
 .sidebarSearch input:focus{
   border: 1px solid sidebar-search-border;
 }
+
 .sidebarSearchIcon{
   position: absolute;
   right: 8px;
@@ -38,13 +41,16 @@
   bottom: 0;
   color: sidebar-search-text;
 }
+
 .sideBarIcon{
-  color: sidebar-text-2;
-  padding: 0;
+  color: sidebar-text-2 !important;
+  padding: 0 !important;
 }
+
 .sideBarIcon:hover{
-  color: sidebar-text-1;
+  color: sidebar-text-1 !important;
 }
+
 .footer{
   border: 1px solid black;
 }

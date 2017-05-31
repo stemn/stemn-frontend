@@ -16,6 +16,8 @@ import { Link }            from 'react-router';
 import { every }           from 'lodash';
 
 
+//              <StringFilterMenu filter={eventFilter} model={queryModel} value={query}/>
+//              <div className="divider"></div>
 const eventFilter = [{
   text: 'Filter: Revisions',
   value: 'event:revision',
@@ -61,8 +63,6 @@ export default React.createClass({
               <MdMoreHoriz size="20px" />
             </SimpleIconButton>
             <div className="PopoverMenu">
-              <StringFilterMenu filter={eventFilter} model={queryModel} value={query}/>
-              <div className="divider"></div>
               <a onClick={refresh}>Refresh</a>
             </div>
           </Popover>
