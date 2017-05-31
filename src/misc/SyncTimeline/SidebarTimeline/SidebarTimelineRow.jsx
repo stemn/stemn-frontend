@@ -43,7 +43,7 @@ export default React.createClass({
             <div className={styles.inner + ' flex layout-row layout-align-start-center'} onClick={this.props.clickFn}>
               <UserAvatar picture={this.props.item.user.picture} name={this.props.item.user.name} size="40"/>
               <div className={styles.text + ' flex text-ellipsis'}>
-                <b>{this.props.item.data.summary}</b>
+                <b>{this.props.item.data.name}</b>
                 <div style={{marginTop: '5px'}}>{timeFromNow} by {this.props.item.user.name}</div>
               </div>
             </div>

@@ -19,7 +19,7 @@ export function newThread({ projectId, thread }) {
     type: 'THREADS/NEW_TASK',
     payload: http({
       method: 'POST',
-      url: `/api/v1/boards/${projectId}/threads`,
+      url: `/api/v1/projects/${projectId}/threads`,
       data: Object.assign({}, threadDefault, thread)
     }),
     meta: {

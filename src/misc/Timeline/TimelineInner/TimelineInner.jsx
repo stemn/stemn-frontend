@@ -20,7 +20,7 @@ const EventMap = {
           size={ 40 }
         />
         <div className="flex">
-          <b>Commit: { stringConcat.end(item.data.summary, 25) }</b>
+          <b>Commit: { stringConcat.end(item.data.name, 25) }</b>
           <div className="text-grey-3">{ timeFromNow } by { item.user.name }</div>
         </div>
       </div>

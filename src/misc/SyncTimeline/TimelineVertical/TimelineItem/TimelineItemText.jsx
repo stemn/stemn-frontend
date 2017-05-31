@@ -121,14 +121,14 @@ const eventTextMap = {
       return (
         <span>
           added this file to commit:
-          <Link name="commitRoute" params={ params }>{ item.data.summary }</Link>
+          <Link name="commitRoute" params={ params }>{ item.data.name }</Link>
         </span>
       )
     } else if (type === 'feed') {
       return (
         <span>
           added a commit
-          <Link name="commitRoute" params={ params }>{ item.data.summary }</Link>
+          <Link name="commitRoute" params={ params }>{ item.data.name }</Link>
           to
           <Link name="projectRoute" params={ params }>{ item.data.project.name || 'Untitled Project' }</Link>
         </span>
@@ -137,7 +137,7 @@ const eventTextMap = {
       return (
         <span>
           added a commit
-          <Link name="commitRoute" params={ params }>{ item.data.summary }</Link>
+          <Link name="commitRoute" params={ params }>{ item.data.name }</Link>
           containing { pluralise(item.data.items.length, 'revision') }
         </span>
       )
@@ -145,7 +145,7 @@ const eventTextMap = {
       return (
         <span>
           referenced this thread in commit
-          <Link name="commitRoute" params={ params }>{ item.data.summary }</Link>
+          <Link name="commitRoute" params={ params }>{ item.data.name }</Link>
         </span>
       )
     }

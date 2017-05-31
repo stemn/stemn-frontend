@@ -7,8 +7,8 @@ const initialState = {
     data: { changesData },
     selected: { the Selected Change},
     loading: true || false,
-    summary: 'commit summary',
-    description: 'commit description'
+    name: 'commit summary',
+    body: 'commit body'
   }
   **************************************/
 }
@@ -20,10 +20,10 @@ const mainReducer = (state, action) => {
     case 'CHANGES/SELECTED_FILE_CHANGE':
       return i.assocIn(state, [action.payload.projectId, 'selected'], action.payload.selected)
     case 'CHANGES/MENTION_THREADS':
-      return i.updateIn(state, [action.payload.projectId, 'description'], (description) => {
-        const existingMentions = parseMentions(description);
+      return i.updateIn(state, [action.payload.projectId, 'body'], (body) => {
+        const existingMentions = parseMentions(body);
         const uniqueNewMentions = removeExistingMentions(action.payload.mentions, existingMentions)
-        const textWithMentions = addMentionsToText(state[action.payload.projectId].description, uniqueNewMentions)
+        const textWithMentions = addMentionsToText(state[action.payload.projectId].body, uniqueNewMentions)
         return textWithMentions
       });
     case 'CHANGES/TOGGLE_ALL_CHANGED_FILES':
@@ -50,8 +50,8 @@ const mainReducer = (state, action) => {
       const remainingRevisions = state[action.meta.cacheKey].data.filter((item)=>!idsToRemove.includes(item._id));
       return i.merge(state, {
         [action.meta.cacheKey] : {
-          summary: '',
-          description : '',
+          name: '',
+          body : '',
           data: remainingRevisions,
           checked: {}
         }

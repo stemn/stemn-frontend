@@ -36,7 +36,7 @@ export const Component = React.createClass({
   render() {
     const { entityModel, changes, electronWindowsActions, changesActions, className } = this.props;
     const noChangesChecked = !some(changes.checked);
-    const noSummary = !changes.summary || changes.summary.length < 1;
+    const noSummary = !changes.name || changes.name.length < 1;
 
     const getMessage = () => {
       if(noSummary){
@@ -55,8 +55,8 @@ export const Component = React.createClass({
         <Walkthrough preferPlace="right" name="commit.commitSummary">
           <Input
             autoFocus={true}
-            model={`changes.${this.props.project._id}.summary`}
-            value={changes.summary}
+            model={`changes.${this.props.project._id}.name`}
+            value={changes.name}
             className={classes.input}
             type="text"
             placeholder="Summary"
@@ -65,8 +65,8 @@ export const Component = React.createClass({
         <div className="rel-box">
           <Editor
             placeholder="Detailed description"
-            model={ `${entityModel}.description` }
-            value={ changes.description }
+            model={ `${entityModel}.body` }
+            value={ changes.body }
             hideToolbar
             className={ classes.description }
           />

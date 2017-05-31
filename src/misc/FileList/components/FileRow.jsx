@@ -87,14 +87,14 @@ export default class FileRow extends Component {
             />
           </ClickFile>
         </div>
-        { file.commit && file.commit.summary && file.commit._id
+        { file.commit && file.commit.name && file.commit._id
         ? <div className="flex">
             <Link
               name='commitRoute'
               params={ { projectId: file.project._id, commitId: file.commit._id } }
               className={ classNames(classes.commit, classes.clickable, 'link-primary text-ellipsis') }
             >
-            {file.commit.summary}
+            {file.commit.name}
             </Link>
           </div>
         : null }

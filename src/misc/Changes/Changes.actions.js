@@ -93,7 +93,7 @@ export function mentionThreads({projectId, mentions}) {
   }
 }
 
-export function commit({projectId, summary, description}) {
+export function commit({projectId, name, body}) {
   return (dispatch, getState) => {
     const changes = getState().changes[projectId];
 
@@ -107,8 +107,8 @@ export function commit({projectId, summary, description}) {
         url: `/api/v1/sync/commit/${projectId}`,
         data: {
           revisions,
-          summary,
-          description,
+          name,
+          body,
         }
       }).then((response)=>{
         dispatch(showToast({
@@ -128,7 +128,7 @@ export function commit({projectId, summary, description}) {
           }]
         }))
         // Get the mentions
-        const mentions = parseMentions(response.data.description);
+        const mentions = parseMentions(response.data.body);
         // If mentionType: thread-complete, we set the thread to complete.
         mentions.forEach(mention => {
           if(mention.mentionType == 'thread-complete'){

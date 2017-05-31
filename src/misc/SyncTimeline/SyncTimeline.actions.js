@@ -52,6 +52,25 @@ export function fetchTimeline({ entityType, entityId, provider, types, cacheKey,
   }
 }
 
+export function getCount({ entityType, entityId, types, cacheKey }) {
+  return {
+    type: 'TIMELINE/FETCH_TIMELINE',
+    payload: http({
+      method: 'GET',
+      url: '/api/v1/timeline',
+      params: {
+        entityType,
+        entityId,
+        types,
+        count: true,
+      },
+    }),
+    meta: {
+      cacheKey,
+    },
+  }
+}
+
 export const addEvent = ({ cacheKey, event }) => {
   const eventObject = {
     ...event,
