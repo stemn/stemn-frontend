@@ -132,13 +132,13 @@ export default class ProjectCommits extends Component {
       name: 'Revisions',
       onClick: () => { this.changeTypeFilter('revisions') },
     }, {
-      value: 'tasks',
+      value: 'threads',
       name: 'Thread Created',
-      onClick: () => { this.changeTypeFilter('tasks') },
+      onClick: () => { this.changeTypeFilter('threads') },
     }, {
-      value: 'taskEvents',
+      value: 'threadEvents',
       name: 'Thread Events',
-      onClick: () => { this.changeTypeFilter('taskEvents') },
+      onClick: () => { this.changeTypeFilter('threadEvents') },
     }, ]
 
     return (

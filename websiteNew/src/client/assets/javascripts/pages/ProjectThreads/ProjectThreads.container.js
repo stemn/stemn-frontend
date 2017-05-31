@@ -19,21 +19,21 @@ const filterModel = {
   query: 'main',
 }
 
-const stateToProps = ({ projects, tasks, search, stringFilter }, { params, location }) => {
+const stateToProps = ({ projects, threads, search, stringFilter }, { params, location }) => {
   const projectId = params.stub
   const project = projects.data[projectId]
-  const boardId = get(tasks, ['projects', projectId, 'boards', '0'])
-  const board = get(tasks, ['boards', boardId])
+  const boardId = get(threads, ['projects', projectId, 'boards', '0'])
+  const board = get(threads, ['boards', boardId])
 
   const page = location.query.page || 1
   const size = 30
 
   const filterDefaults = {}
-  const filterCacheKey = `tasks-${projectId}`
+  const filterCacheKey = `threads-${projectId}`
   const filter = stringFilter[filterCacheKey] || getFilter(filterDefaults, filterModel, location.query)
   const filterIsDefault = isEqual(filterDefaults, filter.object)
 
-  const searchCacheKey = `tasks-${projectId}-${page}`
+  const searchCacheKey = `threads-${projectId}-${page}`
   const searchQueryKey = `${params.stub}-${page}-${JSON.stringify(filter.object)}`
 
   return {
@@ -44,7 +44,7 @@ const stateToProps = ({ projects, tasks, search, stringFilter }, { params, locat
     project,
     boardId,
     board,
-    boardModel: `tasks.boards.${boardId}`,
+    boardModel: `threads.boards.${boardId}`,
     searchQueryKey,
     searchCacheKey,
     filter,
@@ -97,7 +97,7 @@ const fetchConfigs = [{
     }
 
     props.search({
-      entityType: 'task',
+      entityType: 'thread',
       parentType: 'project',
       parentId: props.projectId,
       select: ['_id'],

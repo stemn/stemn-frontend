@@ -103,5 +103,5 @@ export default class UserOverview extends Component {
 //        <div className='text-mini-caps'>Contribution Activity</div>
 //        <br/>
 //        <div className={ classes.panel }>
-//          The contribution timeline will go here. Similar to the tasks page...
+//          The contribution timeline will go here. Similar to the threads page...
 //        </div>

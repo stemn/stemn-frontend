@@ -120,8 +120,8 @@ export default () => (
       <Route path="team"                       component={ ProjectTeam } />
       <Route path="files/:path"                component={ ProjectOverview } />
       <Route path="threads"                    component={ ProjectThreads } />
-      <Route path="threads/:taskId"            component={ ProjectThread } />
-      <Route path="threads/:taskId/edit"       component={ ProjectThread } />
+      <Route path="threads/:threadId"            component={ ProjectThread } />
+      <Route path="threads/:threadId/edit"       component={ ProjectThread } />
       <Route path="history"                    component={ ProjectCommits } />
       <Route path="history/:commitId"          component={ ProjectCommit } />
       <Route path="settings"                   component={ ProjectSettings }>

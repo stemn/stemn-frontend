@@ -30,7 +30,7 @@ import { Helmet } from "react-helmet"
 export default class ProjectThread extends Component {
   updateThread = () => {
     setTimeout(() => this.props.updateThread({
-      task: this.props.task.data
+      thread: this.props.thread.data
     }), 1);
   }
   dropdownOptions = [{
@@ -41,8 +41,8 @@ export default class ProjectThread extends Component {
     name: 'Status: Closed',
   }]
   sidebarEdit = () => {
-    const { task, project, board, taskModel } = this.props
-    const group = board.data.groups.find(group => group._id === task.data.group)
+    const { thread, project, board, threadModel } = this.props
+    const group = board.data.groups.find(group => group._id === thread.data.group)
 
     const groupOptions = board.data.groups.map(group => ({
       value: group._id,
@@ -70,8 +70,8 @@ export default class ProjectThread extends Component {
           <PopoverDropdown
             options={ groupOptions }
             onChange={ this.updateThread }
-            value={ task.data.group }
-            model={ `${taskModel}.data.group` }
+            value={ thread.data.group }
+            model={ `${threadModel}.data.group` }
             style={ { width: '100%' } }
           >
             Group:&nbsp;
@@ -80,9 +80,9 @@ export default class ProjectThread extends Component {
         <div className={ classes.panel }>
           <div className="text-mini-caps">Due Date</div>
            <DatePicker
-            model={ `${taskModel}.data.due` }
+            model={ `${threadModel}.data.due` }
             onChange={ this.updateThread }
-            value={ task.data.due }
+            value={ thread.data.due }
           />
         </div>
         <div className={ classes.panel }>
@@ -96,8 +96,8 @@ export default class ProjectThread extends Component {
             <MdAdd size={ 16 }/>
           </SimpleIconButton>
           <LabelSelect
-            model={ `${taskModel}.data.labels` }
-            value={ task.data.labels }
+            model={ `${threadModel}.data.labels` }
+            value={ thread.data.labels }
             onChange={ this.updateThread }
             labelInfo={ board.data.labels }
           />
@@ -113,9 +113,9 @@ export default class ProjectThread extends Component {
             <MdAdd size={ 16 }/>
           </SimpleIconButton>
           <UserSelect
-            model={ `${taskModel}.data.users` }
+            model={ `${threadModel}.data.users` }
             onChange={ this.updateThread }
-            value={ task.data.users }
+            value={ thread.data.users }
             users={ project.data.team }
           />
         </div>
@@ -123,10 +123,10 @@ export default class ProjectThread extends Component {
     )
   }
   sidebarNonEdit = () => {
-    const { task, board } = this.props
-    const group = board.data.groups.find(group => group._id === task.data.group)
+    const { thread, board } = this.props
+    const group = board.data.groups.find(group => group._id === thread.data.group)
 
-    const taskRouteParams = {
+    const threadRouteParams = {
       projectId: board.data.project,
     }
 
@@ -136,27 +136,27 @@ export default class ProjectThread extends Component {
           <div className="text-mini-caps">Group</div>
           { group.name }
         </div>
-        { task.data.due &&
+        { thread.data.due &&
         <div className={ classes.panel }>
           <div className="text-mini-caps">Due Date</div>
-          <DueDate due={ task.data.due } />
+          <DueDate due={ thread.data.due } />
         </div> }
-        { task.data.labels && task.data.labels.length > 0 &&
+        { thread.data.labels && thread.data.labels.length > 0 &&
         <div className={ classes.panel }>
           <div className="text-mini-caps">Labels</div>
           <ThreadLabelDots
-            labels={ task.data.labels }
+            labels={ thread.data.labels }
             labelInfo={ board.data.labels }
             tag
             name="projectThreadsRoute"
-            params={ taskRouteParams }
+            params={ threadRouteParams }
             link
           />
         </div> }
-        { task.data.users.length >= 0 &&
+        { thread.data.users.length >= 0 &&
         <div className={ classes.panel }>
           <div className="text-mini-caps">Assignees</div>
-          { task.data.users.map(user => (
+          { thread.data.users.map(user => (
             <Link
               name="userRoute"
               params={ { userId: user._id } }
@@ -177,20 +177,20 @@ export default class ProjectThread extends Component {
     )
   }
   render() {
-    const { task, project, board, taskModel, taskId, timeline, timelineCacheKey, location, currentUser } = this.props
+    const { thread, project, board, threadModel, threadId, timeline, timelineCacheKey, location, currentUser } = this.props
 
-    if (task && task.data && board && board.data && project && project.data ) {
-      const group = board.data.groups.find(group => group._id === task.data.group)
+    if (thread && thread.data && board && board.data && project && project.data ) {
+      const group = board.data.groups.find(group => group._id === thread.data.group)
 
       const userRouteParams = {
-        userId: task.data.owner._id
+        userId: thread.data.owner._id
       }
-      const taskRouteParams = {
+      const threadRouteParams = {
         projectId: project.data._id,
-        taskId: task.data._id,
+        threadId: thread.data._id,
       }
 
-      const isOwner = task.data.owner._id === currentUser._id
+      const isOwner = thread.data.owner._id === currentUser._id
       const currentUserRole = get(project.data.team.find(member => member._id === currentUser._id), 'permissions.role')
       const isAdmin = currentUserRole && permissionsIsMin(currentUserRole, 'admin')
       const canEdit = isOwner || isAdmin
@@ -198,30 +198,30 @@ export default class ProjectThread extends Component {
 
       return (
         <div>
-          { has(task, 'data.name') &&
+          { has(thread, 'data.name') &&
             <Helmet>
-              <title>{ `Thread: ${task.data.name} by ${task.data.owner.name}` }</title>
+              <title>{ `Thread: ${thread.data.name} by ${thread.data.owner.name}` }</title>
             </Helmet>
           }
           <SubSubHeader>
           <Breadcrumbs>
             <Crumb name="projectThreadsRoute" params={ { projectId: project.data._id } } text="Threads" />
             <Crumb name="projectThreadsRoute" params={ { projectId: project.data._id } } query={ { groups: [ group._id ]} } text={ group.name } />
-            <Crumb text={ task.data.name || 'Untitled Thread' } />
+            <Crumb text={ thread.data.name || 'Untitled Thread' } />
           </Breadcrumbs>
           <br />
             <h2 className={ classes.title }>
               { edit
               ? <Input
-                  model={ `${taskModel}.data.name` }
+                  model={ `${threadModel}.data.name` }
                   className="input-plain"
                   placeholder="Thread Title"
-                  value={ task.data.name }
+                  value={ thread.data.name }
                 />
-              : <span>{ task.data.name || 'Untitled Thread'}</span> }
+              : <span>{ thread.data.name || 'Untitled Thread'}</span> }
               { edit
               ? null
-              : <span className={ classes.number }>&nbsp;{ task.data.taskNumber ? `#T${task.data.taskNumber}` : null }</span> }
+              : <span className={ classes.number }>&nbsp;{ thread.data.threadNumber ? `#T${thread.data.threadNumber}` : null }</span> }
             </h2>
             <div className="layout-row layout-align-start-center">
               <div className={ classNames('layout-row layout-align-start-center', classes.meta) }>
@@ -232,36 +232,36 @@ export default class ProjectThread extends Component {
                 >
                   <UserAvatar
                     className={ classes.avatar }
-                    name={ task.data.owner.name }
-                    picture={ task.data.owner.picture }
+                    name={ thread.data.owner.name }
+                    picture={ thread.data.owner.picture }
                     size={ 20 }
                     shape='square'
                   />
-                  <b>{ task.data.owner.name }</b>
+                  <b>{ thread.data.owner.name }</b>
                 </Link>
-                <div>&nbsp;created this thread { moment(task.data.created).fromNow() }.</div>
+                <div>&nbsp;created this thread { moment(thread.data.created).fromNow() }.</div>
               </div>
               <div className="flex" />
               { canEdit &&
                 <PopoverDropdown
-                  value={ task.data.complete }
-                  model={ `${taskModel}.data.complete` }
+                  value={ thread.data.complete }
+                  model={ `${threadModel}.data.complete` }
                   options={ this.dropdownOptions }
                   onChange={ this.updateThread }
                   style={ { margin: '0 15px' } }
                 />
               }
               { !canEdit &&
-                <Tag className={ task.data.complete ? 'warn': 'success' } style={{ margin: '0px'}}>
+                <Tag className={ thread.data.complete ? 'warn': 'success' } style={{ margin: '0px'}}>
                   <MdDone size={ 20 } style={ { marginRight: '5px' } }/>
-                  { task.data.complete ? 'THREAD CLOSED': 'THREAD OPEN' }
+                  { thread.data.complete ? 'THREAD CLOSED': 'THREAD OPEN' }
                 </Tag>
               }
               { edit &&
                 <Button
                   className="primary"
-                  name="taskRoute"
-                  params={ taskRouteParams }
+                  name="threadRoute"
+                  params={ threadRouteParams }
                 >
                   Save
                 </Button>
@@ -269,8 +269,8 @@ export default class ProjectThread extends Component {
               { !edit && canEdit &&
                 <Button
                   className="primary"
-                  name="taskEditRoute"
-                  params={ taskRouteParams }
+                  name="threadEditRoute"
+                  params={ threadRouteParams }
                 >
                   Edit
                 </Button>
@@ -286,14 +286,14 @@ export default class ProjectThread extends Component {
                     items={ timeline }
                     timelineCacheKey={ timelineCacheKey }
                     entity={ board }
-                    type="task"
+                    type="thread"
                   />
                 }
                 { timeline && timeline.length == 0 &&
                   <ThreadTimelineEmpty className={ classNames('flex-gt-xs', classes.empty) } />
                 }
                 <CommentNew
-                  taskId={ taskId }
+                  threadId={ threadId }
                   timelineCacheKey={ timelineCacheKey }
                 />
               </Col>
@@ -315,7 +315,7 @@ export default class ProjectThread extends Component {
 
 //              <Tag className="primary">
 //                <MdAccessTime size={ 20 } style={ { marginRight: '5px' } }/>
-//                {`Due ${ moment(task.data.due).fromNow() }`}
+//                {`Due ${ moment(thread.data.due).fromNow() }`}
 //              </Tag>
 
 //

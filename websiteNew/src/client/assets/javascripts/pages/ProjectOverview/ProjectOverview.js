@@ -131,7 +131,7 @@ export default class ProjectOverview extends Component {
               </div>
             </div>
           </SubSubHeader>
-          <Container style={ { marginTop: '30px' } }>
+          <Container style={ { margin: '30px auto' } }>
             { !isFilePage 
             ? imageInfoSection 
             : null }

@@ -121,8 +121,8 @@ export default ({ dispatch }) => {
         <Route path="team"                       getComponent={ getProjectTeam } />
         <Route path="files/:path"                getComponent={ getProjectOverview } />
         <Route path="threads"                    getComponent={ getProjectThreads } />
-        <Route path="threads/:taskId"            getComponent={ getProjectThread } />
-        <Route path="threads/:taskId/edit"       getComponent={ getProjectThread } />
+        <Route path="threads/:threadId"            getComponent={ getProjectThread } />
+        <Route path="threads/:threadId/edit"       getComponent={ getProjectThread } />
         <Route path="history"                    getComponent={ getProjectCommits } />
         <Route path="history/:commitId"          getComponent={ getProjectCommit } />
         <Route path="settings"                   getComponent={ getProjectSettings }>

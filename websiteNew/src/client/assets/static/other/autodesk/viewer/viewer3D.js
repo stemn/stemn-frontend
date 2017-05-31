@@ -51042,7 +51042,7 @@ avs.GaussianPass = GaussianPass;
          *   @param {MaterialManager} matman
          *   @returns {Number} remaining frame time
          *
-         *  Note: If other tasks call q.renderSome() or q.reset() on the modelQueue while the shadow-map update is in progress,
+         *  Note: If other threads call q.renderSome() or q.reset() on the modelQueue while the shadow-map update is in progress,
          *        the shadow map update has to be restarted. */
         this.continueUpdate = function(modelQueue, frameRemaining, matman) {
 

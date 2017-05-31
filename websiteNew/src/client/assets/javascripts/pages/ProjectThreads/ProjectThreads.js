@@ -174,10 +174,10 @@ export default class ProjectThreads extends Component {
                   <Col className="flex">
                     <div className={ classes.threadsPanel }>
                       { hasResults
-                      ? threads.data.map(task => (
+                      ? threads.data.map(thread => (
                          <ThreadRow
                            board={ board }
-                           taskId={ task._id }
+                           threadId={ thread._id }
                            className={ classes.thread }
                          />
                       ))

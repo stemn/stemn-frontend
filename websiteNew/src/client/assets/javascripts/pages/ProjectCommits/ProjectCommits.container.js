@@ -9,7 +9,7 @@ import { get, isEqual } from 'lodash'
 import { getBoards } from 'stemn-shared/misc/Threads/Threads.actions'
 
 
-const stateToProps = ({ projects, syncTimeline, stringFilter, tasks }, { params, location }) => {
+const stateToProps = ({ projects, syncTimeline, stringFilter, threads }, { params, location }) => {
   const page = location.query.page || 1
   const projectId = params.stub
   const size = 30
@@ -28,8 +28,8 @@ const stateToProps = ({ projects, syncTimeline, stringFilter, tasks }, { params,
   const timelineCacheKey = `${params.stub}-${filter.object.type}-${page}`
   const timelineQueryKey = `${params.stub}-${page}-${JSON.stringify(filter.object)}`
 
-  const boardId = get(tasks, ['projects', projectId, 'boards', '0'])
-  const board = get(tasks, ['boards', boardId])
+  const boardId = get(threads, ['projects', projectId, 'boards', '0'])
+  const board = get(threads, ['boards', boardId])
 
   return {
     project: projects.data[params.stub],

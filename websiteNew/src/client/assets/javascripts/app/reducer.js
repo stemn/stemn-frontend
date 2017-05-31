@@ -21,7 +21,7 @@ import projects         from 'stemn-shared/misc/Projects/Projects.reducer.js'
 import search           from 'stemn-shared/misc/Search/Search.reducer.js'
 import sidebar          from 'stemn-shared/misc/Sidebar/Sidebar.reducer.js'
 import syncTimeline     from 'stemn-shared/misc/SyncTimeline/SyncTimeline.reducer.js'
-import tasks            from 'stemn-shared/misc/Threads/Threads.reducer.js'
+import threads            from 'stemn-shared/misc/Threads/Threads.reducer.js'
 import toasts           from 'stemn-shared/misc/Toasts/Toasts.reducer.js'
 import togglePanel      from 'stemn-shared/misc/TogglePanel/TogglePanel.reducer.js'
 import upload           from 'stemn-shared/misc/Upload/Upload.reducer.js'
@@ -62,7 +62,7 @@ const splitReducers = combineReducers({
   search,
   sidebar,
   syncTimeline,
-  tasks,
+  threads,
   toasts,
   togglePanel,
   upload,

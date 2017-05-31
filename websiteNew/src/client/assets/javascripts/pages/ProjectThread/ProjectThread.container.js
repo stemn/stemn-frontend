@@ -12,23 +12,23 @@ import {
   updateThread,
 } from 'stemn-shared/misc/Threads/Threads.actions'
 
-const stateToProps = ({ tasks, projects, syncTimeline, auth }, { params }) => {
-  const taskId = params.taskId;
-  const task = tasks.data[taskId]
+const stateToProps = ({ threads, projects, syncTimeline, auth }, { params }) => {
+  const threadId = params.threadId;
+  const thread = threads.data[threadId]
   const projectId = params.stub
   const project = projects.data[projectId]
-  const boardId = get(tasks, ['projects', projectId, 'boards', '0'])
-  const board = get(tasks, ['boards', boardId])
+  const boardId = get(threads, ['projects', projectId, 'boards', '0'])
+  const board = get(threads, ['boards', boardId])
   return {
-    taskId,
-    task,
+    threadId,
+    thread,
     projectId,
     project,
     boardId,
     board,
-    taskModel: `tasks.data.${taskId}`,
-    timeline: get(syncTimeline, [taskId, 'data'], []),
-    timelineCacheKey: taskId,
+    threadModel: `threads.data.${threadId}`,
+    timeline: get(syncTimeline, [threadId, 'data'], []),
+    timelineCacheKey: threadId,
     currentUser: auth.user,
   };
 }
@@ -42,10 +42,10 @@ const dispatchToProps = {
 };
 
 const fetchConfigs = [{
-  hasChanged: 'taskId',
+  hasChanged: 'threadId',
   onChange: (props) => {
     props.getThread({
-      taskId: props.taskId
+      threadId: props.threadId
     })
   }
 }, {
@@ -56,11 +56,11 @@ const fetchConfigs = [{
     })
   }
 }, {
-  hasChanged: 'taskId',
+  hasChanged: 'threadId',
   onChange: (props) => {
     props.fetchTimeline({
-      entityId: props.taskId,
-      entityType: 'task',
+      entityId: props.threadId,
+      entityType: 'thread',
     })
   }
 }]
