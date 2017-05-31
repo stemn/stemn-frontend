@@ -77,7 +77,7 @@ export const ThreadList = React.createClass({
   newThread(event, groupId){
     event.preventDefault();
     this.props.ThreadsActions.newThread({
-      boardId: this.props.board.data._id,
+      projectId: this.props.board.data.project,
       thread: {
         name: this.props.board.newThreadString[groupId],
         group: groupId,

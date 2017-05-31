@@ -15,7 +15,7 @@ export default class ThreadRow extends Component {
   render() {
     const { board, thread, className } = this.props
 
-    if (thread && thread.data) {
+    if (thread && thread.data && board && board.data && board.data.groups) {
 
       const threadRouteParams = {
         threadId: thread.data._id,
@@ -38,7 +38,7 @@ export default class ThreadRow extends Component {
               </Link>
             </div>
             <div className={ classes.meta }>
-              { group.name && <span className="text-grey-2">{ group.name }</span> }
+              { group && group.name && <span className="text-grey-2">{ group.name }</span> }
               { thread.data.due && <span className="text-interpunct" /> }
               { thread.data.due && <DueDate due={ thread.data.due } /> }
             </div>

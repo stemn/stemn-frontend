@@ -6,7 +6,7 @@ import { get }               from 'lodash';
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import threadLabelsEditModalName from 'stemn-shared/misc/Threads/ThreadLabelsEditModal'
 
-export function newThread({ boardId, thread }) {
+export function newThread({ projectId, thread }) {
   return (dispatch, getState) => {
    const threadDefault = {
     users: [{
@@ -19,11 +19,11 @@ export function newThread({ boardId, thread }) {
     type: 'THREADS/NEW_TASK',
     payload: http({
       method: 'POST',
-      url: `/api/v1/boards/${boardId}/threads`,
+      url: `/api/v1/boards/${projectId}/threads`,
       data: Object.assign({}, threadDefault, thread)
     }),
     meta: {
-      cacheKey: boardId
+      cacheKey: projectId
     }
   })
  }

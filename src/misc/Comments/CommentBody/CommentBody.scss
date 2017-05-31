@@ -3,5 +3,8 @@
   border-radius: 3px;
   padding: 15px;
   border: 1px solid rgba(0, 0, 0, 0.03);
-  margin-left: 35px;
+  margin-left: 50px;
+  @media (max-width: 599px) {
+    margin-left: 0px;
+  }
 }

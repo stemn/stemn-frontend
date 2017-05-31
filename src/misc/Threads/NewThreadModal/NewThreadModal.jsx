@@ -19,7 +19,7 @@ export default class NewThreadModal extends Component {
 
     // Create the new thread
     newThread({
-      boardId,
+      projectId,
       thread: {
         name,
         group,

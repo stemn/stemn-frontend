@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Link from 'stemn-shared/misc/Router/Link'
 import ThreadLabelDots from 'stemn-shared/misc/Threads/ThreadLabelDots/ThreadLabelDots.jsx'
 import pluralise from 'stemn-shared/utils/strings/pluralise'
+import { get } from 'lodash'
 
 const eventTextMap = {
   uncompleted: (item, type, entity) => <span>re-opened this thread</span>,
@@ -115,24 +116,54 @@ const eventTextMap = {
     }
   },
   completed: (item, type, entity) => {
-    if (item.data.summary) {
-      const params = {
-        projectId: item.data.project._id,
-        commitId: item.commit._id
-      };
-      return <span>
-        marked this as complete in commit
-        <Link
-          className="link-primary"
-          closeModals
-          name="commitRoute"
-          params={ params }
-        >
-          &nbsp;{ item.data.summary }
-        </Link>
-      </span>
+    const params = {
+      projectId: item.data.project._id,
+      commitId: get(item, 'data.commit._id'),
+      threadId: get(item, 'data.thread._id'),
+    }
+    if (type === 'thread') {
+      if (item.data.summary) {
+        return <span>
+          marked this as complete in commit
+          <Link
+            className="link-primary"
+            closeModals
+            name="commitRoute"
+            params={ params }
+          >
+            { item.data.summary }
+          </Link>
+        </span>
+      } else {
+        return <span>marked this as complete</span>
+      }
     } else {
-      return <span>marked this as complete</span>
+      return (
+        <span>
+          marked the thread
+          <Link
+            className="link-primary"
+            closeModals
+            name="threadRoute"
+            params={ params }
+          >
+            { get(item, 'data.thread.name') }
+          </Link>
+          { get(item, 'data.commmit._id') &&
+            <span>
+              as complete in commit
+              <Link
+                className="link-primary"
+                closeModals
+                name="commitRoute"
+                params={ params }
+              >
+                { item.data.commit.summary }
+              </Link>
+            </span>
+          }
+        </span>
+      )
     }
   },
   changedLabels: (item, type, entity) => {
