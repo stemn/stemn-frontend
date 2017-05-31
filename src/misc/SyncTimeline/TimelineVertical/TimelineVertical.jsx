@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
-import { groupBy, orderBy } from 'lodash'
+import { get, groupBy, orderBy } from 'lodash'
 import TimelineItem from './TimelineItem/TimelineItem'
 import classes from './TimelineVertical.css'
 
@@ -20,8 +20,9 @@ const eventsToGroup = ['revision', 'thread']
 const groupByIdential = (data) => data.reduce((accum, currentItem, idx) => {
   const prevItem = data[idx - 1] || {}
   const isIdenticalToPrev = prevItem.event === currentItem.event
+  const isInSameProject = get(prevItem, 'data.project._id') && get(prevItem, 'data.project._id') === get(currentItem, 'data.project._id')
   const isGroupable = eventsToGroup.includes(currentItem.event)
-  if (isIdenticalToPrev && isGroupable) {
+  if (isIdenticalToPrev && isInSameProject && isGroupable) {
     const indexInGroupedArray = accum.length - 1
     const itemInGroupedArray = accum[indexInGroupedArray]
     const prevItemIsGroup = itemInGroupedArray.eventsGrouped

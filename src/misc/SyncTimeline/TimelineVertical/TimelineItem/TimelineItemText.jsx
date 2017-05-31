@@ -6,7 +6,7 @@ import { get } from 'lodash'
 import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
 
 const eventTextMap = {
-  uncompleted: (item, type, entity) => <span>re-opened this thread</span>,
+  uncompleted: (item, type, entity) => <span>opened this thread</span>,
   addAsignee: (item, type, entity) => <span>was assigned to this thread</span>,
   removeAsignee : (item, type, entity) => <span>was removed from assignees</span>,
   revision: (item, type, entity, groupItem, groupTitle) => {
@@ -44,7 +44,9 @@ const eventTextMap = {
           { !item.data.revisionNumber || item.data.revisionNumber === 0
           ? 'created'
           : `added revision ${item.data.revisionNumber} to` }
-
+          <Link name="fileRoute" params={ params }>{ middleConcat(item.data.name, 40, 0.6) }</Link>
+          in
+          <Link name="projectRoute" params={ params }>{ project.name }</Link>
         </span>
       )
     }
@@ -150,21 +152,21 @@ const eventTextMap = {
   },
   completed: (item, type, entity) => {
     const params = {
-      projectId: item.data.project._id,
+      projectId: get(item, 'data.project._id'),
       commitId: get(item, 'data.commit._id'),
-      threadId: get(item, 'data.thread._id'),
+      threadId: get(item, 'data.thread_id'),
     }
     if (type === 'thread') {
-      if (item.data.summary) {
+      if (item.data.commit.summary) {
         return <span>
-          marked this as complete in commit
+          marked this as closed in commit
           <Link
             className="link-primary"
             closeModals
             name="commitRoute"
             params={ params }
           >
-            { item.data.summary }
+            { item.data.commit.summary }
           </Link>
         </span>
       } else {
@@ -173,7 +175,7 @@ const eventTextMap = {
     } else {
       return (
         <span>
-          marked the thread
+          closed the thread
           <Link
             className="link-primary"
             closeModals
@@ -184,7 +186,7 @@ const eventTextMap = {
           </Link>
           { get(item, 'data.commmit._id') &&
             <span>
-              as complete in commit
+              in commit
               <Link
                 className="link-primary"
                 closeModals

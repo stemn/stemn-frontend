@@ -2,7 +2,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 // Container Actions
-import * as CommentsActions from 'stemn-shared/misc/Comments/Comments.actions.js';
+import { newComment } from 'stemn-shared/misc/Comments/Comments.actions.js';
 // Component Core
 import React, { Component } from 'react';
 import moment from 'moment';
@@ -31,7 +31,7 @@ export class CommentNew extends Component {
   }
   submitNewComment = () => {
     const { timelineCacheKey } = this.props
-    this.props.commentsActions.newComment({
+    this.props.newCommentAction({
       comment: {
         thread: this.props.threadId,
         body: this.props.newComment.body
@@ -44,12 +44,11 @@ export class CommentNew extends Component {
     })
   }
   clickComment = () => {
-    const { dispatch } = this.props
-    dispatch(confirmAuth(() => {
+    this.props.confirmAuth(() => {
       this.setState({
         isFocussed: true,
       })
-    }))
+    }, true)
   }
   componentDidMount(){
     ctrlEnterHandler(this.refs.form, this.submitNewComment)
@@ -113,11 +112,9 @@ function mapStateToProps({ comments, auth }, { threadId }) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    commentsActions: bindActionCreators(CommentsActions, dispatch),
-    dispatch,
-  }
+const mapDispatchToProps = {
+  newCommentAction: newComment,
+  confirmAuth,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentNew);

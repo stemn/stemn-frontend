@@ -5,6 +5,8 @@ import React from 'react';
 import classNames from 'classnames';
 import classes from './TimelineWrapper.scss';
 
+import { some } from 'lodash'
+
 
 export default React.createClass({
   render() {
@@ -16,9 +18,9 @@ export default React.createClass({
             { this.props.children[0] }
           </div>
         </div>
-        { this.props.children[1] &&
+        { this.props.children[1] && this.props.children[1].props.children && some(this.props.children[1].props.children) &&
           <div className={ classes.extra }>
-            { this.props.children.map((child, idx) => idx === 0 ? null : child ) }
+            { this.props.children[1] }
           </div>
         }
       </div>

@@ -86,7 +86,7 @@ export const getFeed = ({ feedType, page, size, cacheKey }) => ({
     params: {
       size,
       page,
-//      types: ['commits'],
+      types: ['commits', 'threads', 'threadEvents', 'changes'],
       feedType, // followed-users, followed-projects, followed-all
     },
   }),

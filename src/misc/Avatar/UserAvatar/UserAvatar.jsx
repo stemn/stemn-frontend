@@ -8,7 +8,6 @@ const colours = [
 ];
 
 export default React.createClass({
-  default: '/assets/images/default/user-1.png',
   render() {
     // display: 'contain' (Default: 'cover')
     const { style, shape, size, className, picture, title, name, display } = this.props;
@@ -27,8 +26,12 @@ export default React.createClass({
       : 'thumb';
 
     if(picture){
+      const pictureIsExternal = picture.startsWith('http')
+      const pictureUrl = pictureIsExternal
+        ? picture
+        : `${GLOBAL_ENV.API_SERVER}${picture}?size=${resizeType}&crop=${display === 'contain' ? 'false' : 'true'}`
       const pictureStyles = { 
-        backgroundImage: `url(${GLOBAL_ENV.API_SERVER}${picture || this.default}?size=${resizeType}&crop=${display === 'contain' ? 'false' : 'true'})` 
+        backgroundImage: `url(${pictureUrl})`
       };
       return (
         <div className={ classNames(display === 'cover' ? classes.cover : classes.contain, className) }
