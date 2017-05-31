@@ -7,7 +7,7 @@ import * as SystemActions from 'stemn-shared/desktop/System/System.actions.js';
 
 // Component Core
 import React from 'react';
-import { Link } from 'react-router';
+import Link from 'stemn-shared/misc/Router/Link'
 import { has, get } from 'lodash';
 
 // Components
@@ -97,7 +97,7 @@ class Component extends React.Component{
             <p>Consider open-sourcing this project or upgrading to Stemn Pro to access additional features such as infinite revision history.</p>
           </div>
           <div className="footer layout-row">
-            <a className="link-primary" href={`https://stemn.com/projects/${get(project, 'data._id')}`}>View online</a>
+            <Link className="link-primary" name="webProjectRoute" params={ { projectId: get(project, 'data._id')} }>View online</Link>
             <div className="flex"></div>
             <Link className="link-grey" to={baseLink+'/settings/permissions'}>Change</Link>
           </div>
@@ -110,7 +110,7 @@ class Component extends React.Component{
             <p>Your data and files will be visible to everyone - only team-members can edit.</p>
           </div>
           <div className="footer layout-row">
-            <a className="link-primary" href={`https://stemn.com/projects/${get(project, 'data._id')}`}>View online</a>
+            <Link className="link-primary" name="webProjectRoute" params={ { projectId: get(project, 'data._id')} }>View online</Link>
             <div className="flex"></div>
             <Link className="link-grey" to={baseLink+'/settings/permissions'}>Change</Link>
           </div>

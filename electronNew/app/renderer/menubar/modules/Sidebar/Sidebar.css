@@ -36,6 +36,7 @@
   position: relative;
   margin: 10px;
 }
+
 .sidebarSearch input{
   padding: 6px;
   height: auto;
@@ -44,9 +45,11 @@
   background: sidebar-search-bg;
   color: sidebar-search-text !important;
 }
+
 .sidebarSearch input:focus{
   border: 1px solid sidebar-search-border;
 }
+
 .sidebarSearchIcon{
   position: absolute;
   right: 4px;

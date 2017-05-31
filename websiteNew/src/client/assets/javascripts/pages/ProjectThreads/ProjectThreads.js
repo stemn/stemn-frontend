@@ -17,6 +17,8 @@ import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import { get } from 'lodash'
 import ThreadsEmpty from 'stemn-shared/misc/Threads/ThreadsEmpty'
+import FlipMove from 'react-flip-move';
+import AccordianAnimate from 'stemn-shared/misc/Animation/AccordianAnimate'
 
 export default class ProjectThreads extends Component {
   showNewThreadModal = () => {
@@ -174,13 +176,25 @@ export default class ProjectThreads extends Component {
                   <Col className="flex">
                     <div className={ classes.threadsPanel }>
                       { hasResults
-                      ? threads.data.map(thread => (
-                         <ThreadRow
-                           board={ board }
-                           threadId={ thread._id }
-                           className={ classes.thread }
-                         />
-                      ))
+                      ? <AccordianAnimate
+                          duration={ 300 }
+                          itemHeight={ 66 }
+                          items={ threads.data }
+                        >
+                          <FlipMove
+                            duration={ 300 }
+                            enterAnimation="fade"
+                            leaveAnimation="fade"
+                          >
+                            { threads.data.map(thread => (
+                               <ThreadRow
+                                 board={ board }
+                                 threadId={ thread._id }
+                                 className={ classes.thread }
+                               />
+                            ))}
+                          </FlipMove>
+                        </AccordianAnimate>
                       : <div className={ classNames('text-title-5', classes.noResult) }>
                           No Results. <a className="link-primary"  onClick={ this.clearFilter }>Clear Filter</a>
                         </div> }

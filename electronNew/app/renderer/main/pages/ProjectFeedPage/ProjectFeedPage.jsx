@@ -50,6 +50,8 @@ export const Component = React.createClass({
     if(nextProps.project && nextProps.project.data && nextProps.project.data.remote.connected){
       if(!prevProps || nextProps.project.data._id !== prevProps.project.data._id){
         nextProps.syncTimelineActions.fetchTimeline({
+          types: ['commits'],
+          size: 100,
           entityType: 'project',
           entityId: nextProps.project.data._id,
         })
@@ -80,6 +82,8 @@ export const Component = React.createClass({
 
   refresh(){
     this.props.syncTimelineActions.fetchTimeline({
+      types: ['commits'],
+      size: 100,
       entityType: 'project',
       entityId: this.props.project.data._id,
     })

@@ -47,3 +47,6 @@ export const userFollowingRoute          = ({ userId })                        =
 export const userProjectsRoute           = ({ userId })                        => ({ external: true, pathname: `/users/${userId}/projects`})
 export const userRoute                   = ({ userId })                        => ({ external: true, pathname: `/users/${userId}/`})
 export const userStarsRoute              = ({ userId })                        => ({ external: true, pathname: `/users/${userId}/stars`})
+
+export const webCommitRoute              = ({ commitId, projectId })           => ({ external: true, pathname: `/project/${projectId}/history/${commitId}` })
+export const webProjectRoute             = ({ projectId })                     => ({ external: true, pathname: `/project/${projectId}` })
