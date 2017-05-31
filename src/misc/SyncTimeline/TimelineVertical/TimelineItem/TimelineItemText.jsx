@@ -34,8 +34,9 @@ const eventTextMap = {
     }
   },
   thread: (item, type, entity) => {
+    const project = get(item, 'data.project', {})
     const params = {
-      projectId: item.data.project._id,
+      projectId: project._id,
       threadId: item._id
     }
     if (['feed', 'user'].includes(type)) {
@@ -44,7 +45,7 @@ const eventTextMap = {
           added a new thread:
           <Link name="threadRoute" params={ params }>{ item.data.name }</Link>
           to
-          <Link name="projectRoute" params={ params }>{ item.data.project.name || 'Untitled Project' }</Link>
+          <Link name="projectRoute" params={ params }>{ project.name || 'Untitled Project' }</Link>
         </span>
       )
     }
@@ -56,24 +57,26 @@ const eventTextMap = {
     )
   },
   comment: (item, type, entity) => {
+    const thread = get(item, 'data.thread', {})
+    const project = get(item, 'data.project', {})
     const params = {
-      projectId: item.data.project,
-      threadId: item._id
+      projectId: project._id,
+      threadId: thread._id,
     }
     if (['feed', 'user'].includes(type)) {
       return (
         <span>
           commented on
-          <Link name="threadRoute" params={ params }>Thread Link</Link>
+          <Link name="threadRoute" params={ params }>{ thread.name }</Link>
           in
-          <Link name="projectRoute" params={ params }>Project Link</Link>
+          <Link name="projectRoute" params={ params }>{ project.name }</Link>
         </span>
       )
     }
       return (
         <span>
           commented on
-          <Link name="threadRoute" params={ params }>Thread Link</Link>
+          <Link name="threadRoute" params={ params }>{ thread.name }</Link>
         </span>
       )
   },
