@@ -154,10 +154,10 @@ const eventTextMap = {
     const params = {
       projectId: get(item, 'data.project._id'),
       commitId: get(item, 'data.commit._id'),
-      threadId: get(item, 'data.thread_id'),
+      threadId: get(item, 'data._id'),
     }
     if (type === 'thread') {
-      if (item.data.commit.summary) {
+      if (item.data.commit.name) {
         return <span>
           marked this as closed in commit
           <Link
@@ -166,7 +166,7 @@ const eventTextMap = {
             name="commitRoute"
             params={ params }
           >
-            { item.data.commit.summary }
+            { item.data.commit.name }
           </Link>
         </span>
       } else {
@@ -182,7 +182,7 @@ const eventTextMap = {
             name="threadRoute"
             params={ params }
           >
-            { get(item, 'data.thread.name') }
+            { get(item, 'data.name', 'Untitled Thread') }
           </Link>
           { get(item, 'data.commmit._id') &&
             <span>
@@ -193,7 +193,7 @@ const eventTextMap = {
                 name="commitRoute"
                 params={ params }
               >
-                { item.data.commit.summary }
+                { item.data.commit.name }
               </Link>
             </span>
           }

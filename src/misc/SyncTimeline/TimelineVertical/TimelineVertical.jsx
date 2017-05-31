@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
-import { get, groupBy, orderBy } from 'lodash'
+import { sum, get, groupBy, orderBy } from 'lodash'
 import TimelineItem from './TimelineItem/TimelineItem'
 import classes from './TimelineVertical.css'
 
@@ -52,6 +52,8 @@ const groupByIdential = (data) => data.reduce((accum, currentItem, idx) => {
 
 const getCalendarText = (time) => (moment(time).calendar().split(' at'))[0]
 
+const getNumberOfGroupedItems = (dayGroups) => sum(dayGroups.map((dayGroup) => dayGroup.items.length))
+
 export default class TimelineVertical extends Component {
   static propTypes = {
     type: PropTypes.oneOf(['feed', 'user', 'file', 'thread', 'project']),
@@ -60,7 +62,9 @@ export default class TimelineVertical extends Component {
     entity: PropTypes.object,
     timelineCacheKey: PropTypes.string,
   }
-  renderItems = (items) => {
+  renderItems = (items, forceExpand) => {
+    // We force the group to be expanded if there are
+    // only a few groups to display on the page
     return items.map((item, idx) => (
       <TimelineItem
         key={ item._id }
@@ -70,6 +74,7 @@ export default class TimelineVertical extends Component {
         isFirst={ idx === 0 }
         isLast={ idx + 1 === items.length }
         timelineCacheKey={ this.props.timelineCacheKey }
+        forceExpand={ forceExpand }
       />
     ))
   }
@@ -80,19 +85,28 @@ export default class TimelineVertical extends Component {
 
     if (group) {
       const groupedByDay = groupByDay(items)
+      const groupedByDayAndEvent = groupedByDay.map((group) => ({
+        ...group,
+        items: groupByIdential(group.items)
+      }))
+
+      const numberOfGroupedItems = getNumberOfGroupedItems(groupedByDayAndEvent)
+      // We force all the groups to be expanded if there are fewer than 15 timeline items.
+      const forceExpand = numberOfGroupedItems < 15
+
       return (
         <div { ...otherProps }>
-          { groupedByDay.map((group) => (
+          { groupedByDayAndEvent.map((group) => (
             <div className={ classes.group } key={ group.date }>
               <div className={ classes.groupTitle + ' text-mini-caps' }>{ getCalendarText(group.items[0].timestamp) }</div>
-              { this.renderItems(groupByIdential(group.items)) }
+              { this.renderItems(group.items, forceExpand) }
             </div>
           ))}
         </div>
       )
     } else {
       const orderedItems = orderBy(items, 'timestamp', 'desc')
-      return <div>{ this.renderItems(orderedItems) }</div>
+      return <div>{ this.renderItems(orderedItems, false) }</div>
     }
   }
 }

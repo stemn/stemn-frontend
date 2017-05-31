@@ -29,11 +29,12 @@ export default class TimelineItem extends Component {
     })
   }
   render() {
-    const { item, type, entity, isLast, isFirst, timelineCacheKey } = this.props
+    const { item, type, entity, isLast, isFirst, timelineCacheKey, forceExpand } = this.props
     const userRouteParams = { userId: item.user._id }
 
     const eventStyles = type === 'thread' ? { marginLeft: '30px' } : {}
     const { expanded } = this.state
+    const isExpanded = expanded || forceExpand
 
     // If it is a comment, we use the comment component to display
     if (item.event === 'comment' && type === 'thread'){
@@ -78,12 +79,12 @@ export default class TimelineItem extends Component {
               /> }
             { item.eventsGrouped && item.eventsGrouped.length > 0 &&
               <div className={ classes.group }>
-                { item.eventsGrouped.slice(0, expanded ? 100 : groupLimit).map((event) => (
+                { item.eventsGrouped.slice(0, isExpanded ? 100 : groupLimit).map((event) => (
                   <div className={ classes.item }>
                     <TimelineItemText className={ classes.item } item={ event } type={ type } entity={ entity } groupItem />
                   </div>
                 )) }
-                { !expanded && item.eventsGrouped.length > groupLimit &&
+                { !isExpanded && item.eventsGrouped.length > groupLimit &&
                   <div className={ classes.item }><a className="link-primary" onClick={ this.expand }>More...</a></div>
                 }
               </div>
