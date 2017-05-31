@@ -60,10 +60,21 @@ export default class TimelineItem extends Component {
             { isFirst && <div className={ classes.startMarker } /> }
             { isLast && <div className={ classes.endMarker } /> }
           </div>
-          { item.event === 'comment' &&
-            <CommentBody
-              commentId={ item.data.comment }
-            /> }
+          <div>
+            { item.event === 'comment' &&
+              <CommentBody
+                commentId={ item.data.comment }
+              /> }
+            { item.eventsGrouped &&
+              <div className={ classes.group }>
+                { item.eventsGrouped.map((event) => (
+                  <div className={ classes.item }>
+                    <TimelineItemText className={ classes.item } item={ event } type={ type } entity={ entity } groupItem />
+                  </div>
+                )) }
+              </div>
+            }
+          </div>
         </TimelineWrapper>
       )
     }

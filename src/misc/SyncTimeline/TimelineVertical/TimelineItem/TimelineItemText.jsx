@@ -3,18 +3,34 @@ import Link from 'stemn-shared/misc/Router/Link'
 import ThreadLabelDots from 'stemn-shared/misc/Threads/ThreadLabelDots/ThreadLabelDots.jsx'
 import pluralise from 'stemn-shared/utils/strings/pluralise'
 import { get } from 'lodash'
+import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
 
 const eventTextMap = {
   uncompleted: (item, type, entity) => <span>re-opened this thread</span>,
   addAsignee: (item, type, entity) => <span>was assigned to this thread</span>,
   removeAsignee : (item, type, entity) => <span>was removed from assignees</span>,
-  revision: (item, type, entity) => {
-    const fileRouteParams = {
-      projectId: item.data.project._id,
+  revision: (item, type, entity, groupItem, groupTitle) => {
+    const project = get(item, 'data.project', {})
+    const params = {
+      projectId: project._id,
       fileId: item.data.fileId,
       revisionId: item.data.revisionId,
     }
-    if (type === 'file') {
+    if (groupItem) {
+      return (
+        <span>
+          { `Revision ${item.data.revisionNumber}:` }
+          <Link name="fileRoute" params={ params }>{ middleConcat(item.data.name, 30, 0.6) }</Link>
+        </span>
+      )
+    } else if (groupTitle) {
+      return (
+        <span>
+          {`added ${item.eventsGrouped.length} revisions to` }
+          <Link name="projectRoute" params={ params }>{ project.name }</Link>
+        </span>
+      )
+    } else if (type === 'file') {
       return (
         <span>
           {  !item.data.revisionNumber || item.data.revisionNumber === 0
@@ -28,18 +44,32 @@ const eventTextMap = {
           { !item.data.revisionNumber || item.data.revisionNumber === 0
           ? 'created'
           : `added revision ${item.data.revisionNumber} to` }
-          <Link name="fileRoute" params={ fileRouteParams }>{ item.data.name }</Link>
+
         </span>
       )
     }
   },
-  thread: (item, type, entity) => {
+  thread: (item, type, entity, groupItem, groupTitle) => {
     const project = get(item, 'data.project', {})
     const params = {
       projectId: project._id,
       threadId: item._id
     }
-    if (['feed', 'user'].includes(type)) {
+    if (groupItem) {
+      return (
+        <span>
+          { `Thread ${item.data.threadNumber}:` }
+          <Link name="threadRoute" params={ params }>{ middleConcat(item.data.name, 30, 0.6) }</Link>
+        </span>
+      )
+    } else if (groupTitle) {
+      return (
+        <span>
+          {`added ${item.eventsGrouped.length} new threads to` }
+          <Link name="projectRoute" params={ params }>{ project.name }</Link>
+        </span>
+      )
+    } else if (['feed', 'user'].includes(type)) {
       return (
         <span>
           added a new thread:
@@ -223,11 +253,13 @@ export default class TimelineItemText extends Component {
     type: PropTypes.oneOf(['feed', 'user', 'file', 'thread', 'project']),
     item: PropTypes.object,
     entity: PropTypes.object,
+    groupItem: PropTypes.bool,
   }
   render() {
-    const { item, type, entity } = this.props
+    const { item, type, entity, groupItem } = this.props
+    const groupTitle = item.eventsGrouped
     return eventTextMap[item.event]
-      ? eventTextMap[item.event](item, type, entity)
+      ? eventTextMap[item.event](item, type, entity, groupItem, groupTitle)
       : <span>Unknown Event Type: { item.event }</span>
   }
 };

@@ -30,3 +30,11 @@
   left: -6px;
   border-bottom: 1px solid rgb(232, 232, 232);
 }
+
+.group > div {
+  margin-bottom: 3px;
+  margin-left: 55px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis
+}

@@ -14,6 +14,41 @@ const groupByDay = (data) => {
   return groupedArrayOrdered
 }
 
+// This will group events by type. It will produce an array of grouped events
+// [event, event, event, { eventsGrouped: [ event, event ] }]
+const eventsToGroup = ['revision', 'thread']
+const groupByIdential = (data) => data.reduce((accum, currentItem, idx) => {
+  const prevItem = data[idx - 1] || {}
+  const isIdenticalToPrev = prevItem.event === currentItem.event
+  const isGroupable = eventsToGroup.includes(currentItem.event)
+  if (isIdenticalToPrev && isGroupable) {
+    const indexInGroupedArray = accum.length - 1
+    const itemInGroupedArray = accum[indexInGroupedArray]
+    const prevItemIsGroup = itemInGroupedArray.eventsGrouped
+
+    // If the previous item in the grouped array is a group.
+    // We add this item to the group. Otherwise we init the group
+    accum[indexInGroupedArray] = prevItemIsGroup
+      ? {
+          ...itemInGroupedArray,
+          eventsGrouped: [
+            ...itemInGroupedArray.eventsGrouped,
+            currentItem,
+          ]
+        }
+     : {
+        ...itemInGroupedArray,
+        eventsGrouped: [
+          prevItem,
+          currentItem,
+        ]
+      }
+  } else {
+    accum.push(currentItem)
+  }
+  return accum
+}, [])
+
 const getCalendarText = (time) => (moment(time).calendar().split(' at'))[0]
 
 export default class TimelineVertical extends Component {
@@ -26,15 +61,15 @@ export default class TimelineVertical extends Component {
   }
   renderItems = (items) => {
     return items.map((item, idx) => (
-       <TimelineItem
-         key={ item._id }
-         item={ item }
-         type={ this.props.type }
-         entity={ this.props.entity }
-         isFirst={ idx === 0 }
-         isLast={ idx + 1 === items.length }
-         timelineCacheKey={ this.props.timelineCacheKey }
-        />
+      <TimelineItem
+        key={ item._id }
+        item={ item }
+        type={ this.props.type }
+        entity={ this.props.entity }
+        isFirst={ idx === 0 }
+        isLast={ idx + 1 === items.length }
+        timelineCacheKey={ this.props.timelineCacheKey }
+      />
     ))
   }
   render() {
@@ -49,7 +84,7 @@ export default class TimelineVertical extends Component {
           { groupedByDay.map((group) => (
             <div className={ classes.group } key={ group.date }>
               <div className={ classes.groupTitle + ' text-mini-caps' }>{ getCalendarText(group.items[0].timestamp) }</div>
-              { this.renderItems(group.items) }
+              { this.renderItems(groupByIdential(group.items)) }
             </div>
           ))}
         </div>

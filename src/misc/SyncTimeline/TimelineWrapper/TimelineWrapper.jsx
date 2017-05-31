@@ -18,7 +18,7 @@ export default React.createClass({
         </div>
         { this.props.children[1] &&
           <div className={ classes.extra }>
-            { this.props.children[1] }
+            { this.props.children.map((child, idx) => idx === 0 ? null : child ) }
           </div>
         }
       </div>
