@@ -63,8 +63,8 @@ export default class Header extends Component {
             />
           </a>
           <div className="PopoverMenu">
-            <Link name="userRoute" params={ routeParams }>My profile</Link>
-            <Link name="userStarsRoute" params={ routeParams }>My stars</Link>
+            <Link name="userRoute" params={ routeParams }>My Profile</Link>
+            <Link name="userStarsRoute" params={ routeParams }>My Stars</Link>
             <Link name="settingsRoute">Settings</Link>
             <div className="divider" />
             <a onClick={ logout }>Logout</a>
