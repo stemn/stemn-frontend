@@ -12,7 +12,7 @@ import { getBoards } from 'stemn-shared/misc/Threads/Threads.actions'
 const stateToProps = ({ projects, syncTimeline, stringFilter, threads }, { params, location }) => {
   const page = location.query.page || 1
   const projectId = params.stub
-  const size = 30
+  const size = 60
 
   // Setup the filter
   const filterModel = {

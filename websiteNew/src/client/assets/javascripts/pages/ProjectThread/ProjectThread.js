@@ -158,6 +158,7 @@ export default class ProjectThread extends Component {
           <div className="text-mini-caps">Assignees</div>
           { thread.data.users.map(user => (
             <Link
+              key={ user._id }
               name="userRoute"
               params={ { userId: user._id } }
               className="layout-row layout-align-start-center"

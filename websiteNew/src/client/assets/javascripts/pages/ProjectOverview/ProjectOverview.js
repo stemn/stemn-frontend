@@ -17,6 +17,7 @@ import MdLocationOn from 'react-icons/md/location-on'
 import MdPeople from 'react-icons/md/people'
 import MdAccount from 'react-icons/md/account-balance'
 import MdAccessTime from 'react-icons/md/access-time'
+import MdCompareArrows from 'react-icons/md/compare-arrows'
 
 export default class ProjectOverview extends Component {
   clickFileOrFolder = ({ file }) => {
@@ -36,7 +37,7 @@ export default class ProjectOverview extends Component {
   }
 
   render() {
-    const { canEdit, entityModel, project, path, files, isFilePage, saveProject } = this.props
+    const { canEdit, entityModel, project, changesCount, path, files, isFilePage, saveProject } = this.props
     const isConnected = get(project, 'data.remote.connected', false)
 
     const options = {
@@ -76,6 +77,12 @@ export default class ProjectOverview extends Component {
                 <a className="flex text-ellipsis" href={ licenseInfo.url } target="_blank">{ licenseInfo.name }</a>
               </div>
               : null
+            }
+            { changesCount &&
+              <div className='flex layout-row layout-align-start-center'>
+                <MdCompareArrows />
+                { changesCount } uncommited changes
+              </div>
             }
           </div>
         </Col>

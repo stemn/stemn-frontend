@@ -22,10 +22,10 @@ export default class Landing extends Component {
     return (
       <LandingLayout>
         <Helmet>
-          <title>Stemn: Seamless Version Control and Thread Tracking</title>
+          <title>Stemn: Seamless Version Control and Task Tracking</title>
         </Helmet>
         <HeroBanner className={ classes.banner }>
-          <h1>Seamless Version Control and Thread Tracking</h1>
+          <h1>Seamless Version Control and Task Tracking</h1>
           <h3>A unified workflow for modern engineers</h3>
           { isMobile()
           ? <Button className={ classes.downloadButton + ' secondary lg'} name="loginRoute">

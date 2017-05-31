@@ -9,7 +9,7 @@ import { get } from 'lodash'
 const stateToProps = ({ syncTimeline, auth }, { location }) => {
   const filterValue = location.query.filter || 'all'
   const page = location.query.page || 1
-  const size = 30
+  const size = 60
   const feedCacheKey = `${filterValue}-${page}`
 
   return {
