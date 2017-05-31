@@ -23,7 +23,7 @@ export default class NewThreadModal extends Component {
       thread: {
         name,
         group,
-        boardId,
+        board: boardId,
       },
     }).then((response) => {
       // After the thread is created,

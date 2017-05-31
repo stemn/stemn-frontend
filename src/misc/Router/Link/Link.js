@@ -78,11 +78,11 @@ const LinkComponent = (props) => {
 
   const additionalClickFunction = () => {
     // Dispatch the show event if required
-    if (routePath.scope && routePath.show) showWindow(routePath.scope)
+    if (routePath && routePath.scope && routePath.show) showWindow(routePath.scope)
     // dispatch the closeModals
-    if (routePath.closeModals) closeAll()
+    if (routePath && routePath.closeModals) closeAll()
 
-    if (routePath.clickDispatch) {
+    if (routePath && routePath.clickDispatch) {
       dispatch(routePath.clickDispatch)
     }
   }

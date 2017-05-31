@@ -81,7 +81,7 @@ export const ThreadList = React.createClass({
       thread: {
         name: this.props.board.newThreadString[groupId],
         group: groupId,
-        boardId: this.props.board.data._id
+        board: this.props.board.data._id
       },
     })
   },
