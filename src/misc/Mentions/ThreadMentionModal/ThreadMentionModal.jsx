@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import classes from './ThreadMentionModal.css';
 import howMany from 'stemn-shared/utils/strings/howMany.js';
-import Input from 'stemn-shared/misc/Input/Input/Input';
+import SearchInput from 'stemn-shared/misc/Search/SearchInput'
 import Button from 'stemn-shared/misc/Buttons/Button/Button';
 import ThreadRow from './ThreadRow/ThreadRow.jsx';
-import MdSearch from 'react-icons/md/search';
 import { filterBoard, getAllThreads } from 'stemn-shared/misc/Threads/Threads.utils.js';
-import ThreadsFilterMenu from 'stemn-shared/misc/Threads/ThreadsFilterMenu/ThreadsFilterMenu.jsx';
+import ThreadFilterMenu from 'stemn-shared/misc/Threads/ThreadFilters/ThreadFilterMenu';
 import Popover from 'stemn-shared/misc/Popover';
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import { values } from 'lodash'
 import { newMention } from 'stemn-shared/misc/Mentions/Mentions.utils'
+import MdFilterList from 'react-icons/md/filter-list';
+import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 
 const getMentionsFromObject = (mentionsObject, threads) => {
   return Object.keys(mentionsObject).map(threadId => newMention({
@@ -52,11 +53,19 @@ export default class ThreadMentionModal extends Component {
       storeChange(`${mentionsModel}.${threadId}`, status)
     }
   }
+  changeInput = ({ value: filterString }) => {
+    const { setFilter, filterCacheKey, filterModel } = this.props
+    setFilter({
+      cacheKey: filterCacheKey,
+      filterString,
+      filterModel,
+    })
+  }
   render() {
-    const { threads, board, mentions, boardModel } = this.props;
+    const { threads, auth, board, mentions, boardModel, filter, filterModel, filterCacheKey, setFilter } = this.props;
 
     const getThreads = () => {
-      const filteredBoard = filterBoard(board, threads, board.searchString);
+      const filteredBoard = filterBoard(board, threads, filter.object);
       const numThreads = getAllThreads(board.data.groups).length;
       const numFilteredThreads = getAllThreads(filteredBoard.data.groups).length;
 
@@ -96,18 +105,25 @@ export default class ThreadMentionModal extends Component {
         </div>
         <div className={classes.header + ' layout-row layout-align-start-center'}>
           <div className="flex">{howMany({count: countMentions(mentions, 'complete'), adj: 'complete'}, {count: countMentions(mentions, 'related'), adj: 'related'}, 'thread')}</div>
-          <div className={classes.search}>
-            <Input
-              model={`${boardModel}.searchString`}
-              value={board.searchString}
-              className="dr-input"
-              placeholder="Search threads"
-            />
-            <Popover preferPlace="right" trigger="hoverDelay">
-              <MdSearch size="20"/>
-              <div><ThreadsFilterMenu model={`${boardModel}.searchString`} value={board.searchString}/></div>
-            </Popover>
-          </div>
+          <SearchInput
+            className={ classes.search }
+            changeAction={ this.changeInput }
+            value={ filter.string }
+            type="text"
+            placeholder="Search threads"
+          />
+          <Popover preferPlace="right" trigger="hoverDelay">
+            <SimpleIconButton><MdFilterList size="20" /></SimpleIconButton>
+            <div>
+              <ThreadFilterMenu
+                auth={ auth }
+                filter={ filter }
+                filterModel={ filterModel }
+                filterCacheKey={ filterCacheKey }
+                setFilter={ setFilter }
+              />
+            </div>
+          </Popover>
         </div>
         <div className="layout-column flex rel-box">
           <LoadingOverlay show={!board || !board.data} />

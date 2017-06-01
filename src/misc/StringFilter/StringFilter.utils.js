@@ -54,7 +54,7 @@ function replaceWord(fullString, word, newWord){
 }
 
 // New functions
-export const createFilterString = (filterObject = [], filterModel) => {
+export const createFilterString = (filterObject = {}, filterModel) => {
   let filterString = ''
   Object.keys(filterObject).forEach((key) => {
     const value = filterObject[key]

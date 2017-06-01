@@ -1,15 +1,51 @@
 import i from 'icepick';
-import { every, escapeRegExp } from 'lodash';
+import { every, escapeRegExp, difference } from 'lodash';
 
-export const filterBoard = (board, threads, searchString) => {
-  // This will filter the board by the the search string
-  const queryStringArray = searchString ? searchString.split(' ') : [];
-  return i.updateIn(board, ['data', 'groups'], groups =>
-    filterGroups({groups, threads, filterFn: (thread) => {
-      return thread && thread.data ? every(queryStringArray, queryString => queryByString(thread, queryString)) : true;
-    }})
-  )
-};
+const isThreadPartOfFilter = (thread, filterObject) => {
+  const threadData = thread && thread.data
+  if (!threadData) return true // Return true if we don't have data for this task
+  /****************************************************
+  This is the main query function. It takes in a filter object
+  and will return true of the thread matches the filter object
+
+  supports:
+    groups: 'array',
+    labels: 'array',
+    user: 'string',
+    status: 'string',
+    query: 'main',
+
+  ****************************************************/
+  const groupsValid = filterObject.groups && filterObject.groups.length > 0
+    ? filterObject.groups.includes(threadData.group)
+    : true
+  const labelsValid = filterObject.labels && filterObject.labels.length > 0
+    ? difference(filterObject.labels, threadData.labels).length === 0
+    : true
+  const userValid = filterObject.user
+    ? threadData.users.find(user => user._id === filterObject.user)
+    : true
+  const statusValid = filterObject.status
+    ? ((filterObject.status === 'open' && !threadData.complete) || (filterObject.status === 'closed' && threadData.complete))
+    : true
+  const queryValid = filterObject.query && filterObject.query.length > 0
+    ? new RegExp(escapeRegExp(filterObject.query), 'i').test(threadData.name)
+    : true
+
+  return groupsValid && labelsValid && userValid && statusValid && queryValid
+}
+
+export const filterBoard = (board, threads, filterObject = {}) => {
+  return i.updateIn(board, ['data', 'groups'], (groups) => {
+    // For each group...
+    return groups.map((group) => {
+      return i.updateIn(group, ['threads'], (threadIds) => {
+        // Filter the items in the group.
+        return threadIds.filter(threadId => isThreadPartOfFilter(threads[threadId], filterObject))
+      })
+    })
+  })
+}
 
 export const getAllThreads = (boardGroups) =>{
   let threads = [];
@@ -17,35 +53,3 @@ export const getAllThreads = (boardGroups) =>{
   return threads;
 };
 
-function queryByString(item, queryString){
-  /****************************************************
-  This is the main query function. It takes in a string
-  and will filter the thread by this string in some way
-  ****************************************************/
-  if     (queryString == 'is:complete' || queryString == 'is:!complete'){
-    return item.data.complete
-  }
-  else if(queryString == 'is:incomplete'){
-    return !item.data.complete
-  }
-  // Assignee Query
-  else if(queryString.startsWith('assignee:')){
-    const assignee = queryString.replace('assignee:', '');
-    return item.data.users.find(user => user.stub == assignee);
-  }
-  // Filter by the string itself (case independent)
-  else if(queryString && queryString.length > 0){
-    return new RegExp(escapeRegExp(queryString), 'i').test(item.data.name)
-  }
-  else{
-    return true;
-  }
-}
-
-function filterGroups({groups, threads, filterFn}){
-  return groups ? groups.map(group => {
-    return i.updateIn(group, ['threads'], threadIds => {
-      return threadIds.filter(threadId => filterFn(threads[threadId]))
-    })
-  }) : [];
-}

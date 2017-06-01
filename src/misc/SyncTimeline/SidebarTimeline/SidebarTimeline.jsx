@@ -11,13 +11,10 @@ import MdMoreHoriz         from 'react-icons/md/more-horiz';
 import Popover             from 'stemn-shared/misc/Popover';
 import SidebarTimelineRow  from './SidebarTimelineRow'
 import SimpleIconButton    from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
-import StringFilterMenu    from 'stemn-shared/misc/StringFilter/StringFilterMenu.jsx';
 import { Link }            from 'react-router';
 import { every }           from 'lodash';
 
 
-//              <StringFilterMenu filter={eventFilter} model={queryModel} value={query}/>
-//              <div className="divider"></div>
 const eventFilter = [{
   text: 'Filter: Revisions',
   value: 'event:revision',

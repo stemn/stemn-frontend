@@ -14,15 +14,4 @@
 }
 .search{
   width: 200px;
-  position: relative;
-}
-.search svg{
-  position: absolute;
-  top: 6px;
-  right: 5px;
-  color: rgba(0, 0, 0, 0.3);
-}
-.search input{
-  height: 30px;
-  padding-right: 30px
 }
