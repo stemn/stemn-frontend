@@ -13,12 +13,13 @@ import Popover from 'stemn-shared/misc/Popover'
 import LabelSelect from 'stemn-shared/misc/Threads/LabelSelect/LabelSelect'
 import GroupSelect from 'stemn-shared/misc/Threads/GroupSelect'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
-import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import { get } from 'lodash'
 import ThreadsEmpty from 'stemn-shared/misc/Threads/ThreadsEmpty'
 import FlipMove from 'react-flip-move';
 import AccordianAnimate from 'stemn-shared/misc/Animation/AccordianAnimate'
+import ThreadFilterUser from 'stemn-shared/misc/Threads/ThreadFilters/ThreadFilterUser'
+import ThreadFilterStatus from 'stemn-shared/misc/Threads/ThreadFilters/ThreadFilterStatus'
 
 export default class ProjectThreads extends Component {
   showNewThreadModal = () => {
@@ -31,30 +32,6 @@ export default class ProjectThreads extends Component {
     setFilter({
       cacheKey: filterCacheKey,
       filterString,
-      filterModel,
-      location: 'replace',
-    })
-  }
-  changeUserFilter = (userId) => {
-    const { setFilter, filterCacheKey, filterModel, filter } = this.props
-    setFilter({
-      cacheKey: filterCacheKey,
-      filterObject: {
-        ...filter.object,
-        user: userId,
-      },
-      filterModel,
-      location: 'replace',
-    })
-  }
-  changeOpenFilter = (status) => {
-    const { setFilter, filterCacheKey, filterModel, filter } = this.props
-    setFilter({
-      cacheKey: filterCacheKey,
-      filterObject: {
-        ...filter.object,
-        status,
-      },
       filterModel,
       location: 'replace',
     })
@@ -80,22 +57,23 @@ export default class ProjectThreads extends Component {
     })
   }
   render() {
-    const { project, board, threads, location, filter, boardModel, showNewThreadModal, page, size, filterStorePath, filterIsDefault } = this.props
+    const { project, board, threads, location, filter, boardModel, showNewThreadModal, page, size, filterStorePath, filterIsDefault, setFilter, filterCacheKey, filterModel } = this.props
     const noMoreResults = threads && threads.data && threads.data.length < size
     const isLoading = !threads || threads.loading
     const isLoaded = threads && threads.data && board && board.data
     const hasResults = threads && threads.data  && threads.data.length > 0
 
-    const userFilterOptions = project.data.team.map(user => ({
-      name: user.name,
-      value: user._id,
-      onClick: () => { this.changeUserFilter(user._id) }
-    }))
-    userFilterOptions.push({
-      name: 'Any',
-      value: undefined,
-      onClick: () => { this.changeUserFilter(undefined) }
-    })
+    const userFilterOptions = [
+      ...get(project, 'data.team', []).map(user => ({
+        name: user.name,
+        value: user._id,
+        onClick: () => { this.changeUserFilter(user._id) }
+      })),{
+        name: 'Any',
+        value: undefined,
+        onClick: () => { this.changeUserFilter(undefined) }
+      }
+    ]
 
     const openFilterOptions = [{
       value: undefined,
@@ -125,22 +103,23 @@ export default class ProjectThreads extends Component {
             </Col>
             <div className="flex-xs-0 flex-sm-0 flex-gt-sm" />
             <Col className="layout-row">
-              <PopoverDropdown
+              <ThreadFilterUser
                 className="flex-xs"
-                value={ get(filter, ['object', 'status']) }
-                options={ openFilterOptions }
+                filter={ filter }
+                filterModel={ filterModel }
+                filterCacheKey={ filterCacheKey }
+                setFilter={ setFilter }
+                project={ project }
                 style={ { marginRight: '15px'} }
-              >
-                Status:&nbsp;
-              </PopoverDropdown>
-              <PopoverDropdown
+              />
+              <ThreadFilterStatus
                 className="flex-xs"
-                value={ get(filter, ['object', 'user']) }
-                options={ userFilterOptions }
+                filter={ filter }
+                filterModel={ filterModel }
+                filterCacheKey={ filterCacheKey }
+                setFilter={ setFilter }
                 style={ { marginRight: '15px'} }
-              >
-                Asignee:&nbsp;
-              </PopoverDropdown>
+              />
               <Button className="primary flex-xs" onClick={ this.showNewThreadModal }>
                 New Thread
               </Button>

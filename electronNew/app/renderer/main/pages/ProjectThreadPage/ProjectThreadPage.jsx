@@ -12,7 +12,7 @@ import classNames from 'classnames';
 
 // Sub Components
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import Threads          from 'stemn-shared/misc/Threads/Threads.jsx'
+import ThreadsDisplay from 'stemn-shared/misc/Threads/ThreadsDisplay'
 
 ///////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -20,7 +20,7 @@ export const Component = React.createClass({
   render() {
     const { project, entityModel } = this.props;
     return (
-      <Threads projectId={project.data._id} />
+      <ThreadsDisplay projectId={ project.data._id } />
     )
   }
 });

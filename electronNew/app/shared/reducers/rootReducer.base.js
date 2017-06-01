@@ -15,6 +15,7 @@ import modals from 'stemn-shared/misc/Modal/Modal.reducer.js'
 import projects from 'stemn-shared/misc/Projects/Projects.reducer.js'
 import search from 'stemn-shared/misc/Search/Search.reducer.js'
 import sidebar from 'stemn-shared/misc/Sidebar/Sidebar.reducer.js'
+import stringFilter from 'stemn-shared/misc/StringFilter/StringFilter.reducer.js'
 import syncTimeline from 'stemn-shared/misc/SyncTimeline/SyncTimeline.reducer.js'
 import system from 'stemn-shared/desktop/System/System.reducer.js'
 import threads from 'stemn-shared/misc/Threads/Threads.reducer.js'
@@ -42,6 +43,7 @@ export default {
   projects,
   search,
   sidebar,
+  stringFilter,
   syncTimeline,
   system,
   threads,
@@ -50,4 +52,4 @@ export default {
   upload,
   users,
   walkthrough,
-};
+}

@@ -4,7 +4,7 @@ import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
 import ProjectCommits from './ProjectCommits'
 import { setFilter } from 'stemn-shared/misc/StringFilter/StringFilter.actions'
-import { createFilterString, getFilter } from 'stemn-shared/misc/StringFilter/StringFilter.utils'
+import { getFilter } from 'stemn-shared/misc/StringFilter/StringFilter.utils'
 import { get, isEqual } from 'lodash'
 import { getBoards } from 'stemn-shared/misc/Threads/Threads.actions'
 
