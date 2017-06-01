@@ -22,6 +22,7 @@
   height: 100%;
   overflow: auto;
   position: relative;
+  margin-bottom: -10px; /* Bottom margin to hide scrollbar */
 }
 .inner > a {
   min-height: 37px;

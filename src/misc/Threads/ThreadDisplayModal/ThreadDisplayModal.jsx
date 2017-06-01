@@ -85,7 +85,7 @@ export default React.createClass({
               Created {moment(thread.data.created).fromNow()} <b className="text-interpunct"></b> By <a className="link-primary">{thread.data.owner.name}</a>
             </div>
           </div>
-          <div className={classes.timeline + ' layout-column flex scroll-box'}>
+          <div className={classes.timeline + ' layout-column flex'}>
             { timeline && timeline.length > 0 &&
               <TimelineVertical
                 className={ classes.timeline }

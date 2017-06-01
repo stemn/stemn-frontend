@@ -1,6 +1,7 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry'
+import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 
 import { getThread, getBoard, showLabelEditModal, updateThread, toggleComplete, deleteThread } from '../Threads.actions.js'
 import { getProject } from 'stemn-shared/misc/Projects/Projects.actions.js'
@@ -44,26 +45,16 @@ const fetchConfigs = [{
     props.getThread({
       threadId: props.threadId
     })
-  }
-}, {
-  hasChanged: 'threadId',
-  onChange: (props) => {
-    props.getBoard({
-      boardId: props.thread.data.board
-    })
-  }
-}, {
-  hasChanged: 'threadId',
-  onChange: (props) => {
     props.fetchTimeline({
       entityId: props.threadId,
       entityType: 'thread',
     })
-  }
-}, {
-  hasChanged: 'threadId',
-  onChange: (props) => {
-    if (!has(project, 'data')) {
+    if (!has(props, 'board.data')) {
+      props.getBoard({
+        boardId: props.thread.data.board
+      })
+    }
+    if (!has(props, 'project.data')) {
       props.getProject({
         projectId: props.thread.data.project._id,
       })
@@ -72,7 +63,8 @@ const fetchConfigs = [{
 }]
 
 export default (modalName) => {
-  const ModalComponent = connect(mapStateToProps, mapDispatchToProps)(ThreadDisplayModal)
-  registerModal(modalName, ModalComponent)
+  const withFetchData = fetchDataHoc(fetchConfigs)(ThreadDisplayModal)
+  const withRedux = connect(mapStateToProps, mapDispatchToProps)(withFetchData)
+  registerModal(modalName, withRedux)
   return modalName
 }

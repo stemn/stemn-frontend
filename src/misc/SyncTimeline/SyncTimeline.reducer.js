@@ -29,7 +29,7 @@ export default (state = initialState, action) => {
 
     case 'TIMELINE/ADD_EVENT':
       return i.updateIn(state, [action.payload.cacheKey, 'data'], (events) => {
-        return i.push(events, action.payload.event)
+        return i.push(events || [], action.payload.event)
       })
     case 'TIMELINE/DELETE_EVENT':
       return i.updateIn(state, [action.payload.cacheKey, 'data'], (events) => {

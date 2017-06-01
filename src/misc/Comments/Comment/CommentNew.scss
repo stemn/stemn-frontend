@@ -1,8 +1,5 @@
 @value primary, border1, bg1, grey-3 from "theme";
 
-.comment{
-  position: relative;
-}
 .commentAvatar{
   margin-right: 10px
 }
@@ -11,12 +8,13 @@
   border: 1px solid border1;
   line-height: 1.5em;
 }
+.commentBodyHidden {
+  max-height: 58px;
+  overflow: hidden;
+}
 .commentHeader{
   background: white;
   padding: 15px 20px;
-}
-.date{
-  color: grey-3;
 }
 .commentContent{
   margin: 20px;
@@ -27,18 +25,13 @@
   padding: 6px 20px;
   border-top: 1px dashed rgba(0, 0, 0, 0.2);
 }
-.reactions {
-  padding: 0 20px 15px;
+.commentNew {
+  position: relative;
 }
-.comment:first-child{
-  margin-top: 15px;
+.commentNew .commentBody {
+  transition: 0.3s ease all;
+  cursor: text;
 }
-.comment:last-child{
-  margin-bottom: 15px;
-}
-.comment + .comment:before{
-  content: ' ';
-  height: 15px;
-  border-left: 1px solid rgb(232, 232, 232);
-  margin-left: 30px;
+.commentNew .commentBody:hover {
+  border: 1px solid rgba(0, 0, 0, 0.4);
 }

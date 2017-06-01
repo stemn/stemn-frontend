@@ -105,7 +105,9 @@ export default class TimelineVertical extends Component {
         </div>
       )
     } else {
-      const orderedItems = orderBy(items, 'timestamp', 'desc')
+      // Items are ordered with most recent at bottom (thread)
+      // otherwise, most recent up top.
+      const orderedItems = orderBy(items, 'timestamp', type === 'thread' ? 'asc' : 'desc')
       return <div>{ this.renderItems(orderedItems, false) }</div>
     }
   }
