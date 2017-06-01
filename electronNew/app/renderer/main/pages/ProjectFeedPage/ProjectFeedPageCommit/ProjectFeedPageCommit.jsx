@@ -30,9 +30,9 @@ export const ProjectFeedPageCommit = React.createClass({
     return (
       <div className="layout-column flex">
         <div className={ classes.commitInfo }>
-          <h3 className={ classes.title }>{ item.data.summary }</h3>
+          <h3 className={ classes.title }>{ item.data.name }</h3>
           <div className={ classes.description }>
-            <EditorDisplay value={ item.data.description } />
+            <EditorDisplay value={ item.data.body } />
           </div>
           <div className="layout-row layout-align-start-center">
             <UserAvatar

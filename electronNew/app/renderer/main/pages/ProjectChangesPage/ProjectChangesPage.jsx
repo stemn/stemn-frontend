@@ -74,10 +74,12 @@ export const Component = React.createClass({
       // And the project has changed
       if(!prevProps || nextProps.project.data._id !== prevProps.project.data._id){
         nextProps.changesActions.fetchChanges({projectId: nextProps.project.data._id});
-//        nextProps.syncTimelineActions.fetchTimeline({
-//          entityType: 'project',
-//          entityId: nextProps.project.data._id
-//        });
+        nextProps.syncTimelineActions.fetchTimeline({
+          types: ['commits'],
+          size: 100,
+          entityType: 'project',
+          entityId: nextProps.project.data._id,
+        });
       }
     }
   },
@@ -95,8 +97,8 @@ export const Component = React.createClass({
   commitFn(){
     this.props.changesActions.commit({
       projectId: this.props.project.data._id,
-      summary: this.props.changes.summary,
-      description: this.props.changes.description
+      name: this.props.changes.name,
+      body: this.props.changes.body
     })
   },
   deselect(){

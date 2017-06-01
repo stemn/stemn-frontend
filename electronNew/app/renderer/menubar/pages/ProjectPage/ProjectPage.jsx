@@ -54,8 +54,8 @@ export const Component = React.createClass({
   commitFn(){
     this.props.changesActions.commit({
       projectId: this.props.project.data._id,
-      summary: this.props.changes.summary,
-      description: this.props.changes.description
+      name: this.props.changes.name,
+      body: this.props.changes.body
     })
   },
   deselect(){
@@ -107,7 +107,7 @@ export const Component = React.createClass({
               dispatch={ dispatch }
             />
             <CommitBox
-              className={ classNames(classes.commitBox, {[classes.open] : changes.summary && changes.summary.length > 0 })}
+              className={ classNames(classes.commitBox, {[classes.open] : changes.name && changes.name.length > 0 })}
               entityModel={ entityModel }
               changes={ changes }
               changesActions={ changesActions }
@@ -122,7 +122,7 @@ export const Component = React.createClass({
     return (
       <div className="layout-column flex">
         <Toolbar menu={true}>
-          <div className="flex">{project && project.data && project.data.name ? stringConcat.end(project.data.name, 28) : ''}</div>
+          <div className="flex">{project && project.data && project.data.name ? stringConcat.end(project.data.name || 'Untitled Project', 28) : ''}</div>
         </Toolbar>
         { getInnerContent() }
         <LoadingOverlay show={ project && project.loading } />

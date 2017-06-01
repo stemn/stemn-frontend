@@ -23,11 +23,11 @@ export default class ProjectCommit extends Component {
           <Breadcrumbs>
             <Crumb name="projectCommitsRoute" params={ { projectId: project.data._id } } text="History" />
             <Crumb name="projectCommitsRoute" params={ { projectId: project.data._id } } query={ { type: 'commits' } } text="Commits" />
-            <Crumb text={ commit.data.summary } />
+            <Crumb text={ commit.data.name } />
           </Breadcrumbs>
           <br />
           <h2 className={ classes.title }>
-            <span>{ commit.data.summary }</span>
+            <span>{ commit.data.name }</span>
             <span className={ classes.number }>&nbsp;#C{ commit.data.commitNumber }</span>
           </h2>
           <div className={ classes.blurb }>
