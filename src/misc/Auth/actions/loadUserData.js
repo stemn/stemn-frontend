@@ -1,5 +1,5 @@
 import { getUserProjects } from 'stemn-shared/misc/Projects/Projects.actions.js';
-import websocketJoinRoom from './websocketJoinRoom';
+import { joinRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
 import http from 'axios';
 
 export default () => {
@@ -12,7 +12,10 @@ export default () => {
       })
     }).then(response => {
       dispatch(getUserProjects({userId: response.value.data._id}))
-      dispatch(websocketJoinRoom({userId: response.value.data._id}))
+      dispatch(joinRoom({
+        type: 'user',
+        room: response.value.data._id
+      }))
     }).catch(error => {
 //      dispatch(logout())
     })

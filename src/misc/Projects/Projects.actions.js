@@ -3,6 +3,7 @@ import { homeRoute } from 'route-actions'
 import { push } from 'react-router-redux'
 import { shouldDownload } from '../../redux/utils'
 import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js'
+import { joinRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
 
 const fields = {
   sm: ['name', 'picture', 'stub'],
@@ -22,11 +23,17 @@ export const setActiveProject = ({ projectId }) => (dispatch, getState) => {
     })
 
     if (activeProject) {
-      dispatch(websocketLeaveProject({ projectId: activeProject }))
+      dispatch(joinRoom({
+        room: activeProject,
+        type: 'project',
+      }))
     }
   }
 
-  dispatch(websocketJoinProject({ projectId }))
+  dispatch(joinRoom({
+    room: projectId,
+    type: 'project,'
+  }))
 }
 
 export const getProject = ({ projectId, size = 'lg', force }) => (dispatch, getState) => {
@@ -258,27 +265,3 @@ export const unlinkRemote = ({ projectId, prevProvider }) => {
     })
   }
 }
-
-export const websocketJoinProject = ({ projectId }) => ({
-  type: 'PROJECTS/WEBSOCKET_JOIN_PROJECT',
-  websocket: true,
-  payload: {
-    type: 'ROOM/JOIN',
-    payload: {
-      room: projectId,
-      type: 'project'
-    }
-  }
-})
-
-export const websocketLeaveProject = ({ projectId }) => ({
-  type: 'PROJECTS/WEBSOCKET_LEAVE_PROJECT',
-  websocket: true,
-  payload: {
-    type: 'ROOM/LEAVE',
-    payload: {
-      room: projectId,
-      type: 'project'
-    }
-  }
-})

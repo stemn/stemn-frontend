@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as ThreadsActions from '../Threads.actions.js';
+import { moveGroup, moveThread, beginDrag, endDrag, newThread, newGroup, deleteGroupConfirm, updateGroup } from '../Threads.actions.js';
+import { joinRoom, leaveRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
 
 import ThreadGroupParent     from './ThreadGroup/ThreadGroupParent.jsx';
 import ThreadGroupWrapped    from './ThreadGroup/ThreadGroupWrapped.jsx'
@@ -32,19 +32,21 @@ export const NewItem = React.createClass({
 
 export const ThreadList = React.createClass({
   componentWillMount(){
-    this.props.ThreadsActions.websocketJoinBoard({
-      boardId: this.props.board.data._id
+    this.props.joinRoom({
+      room: this.props.board.data._id,
+      type: 'board',
     })
   },
 
   componentWillUnmount(){
-    this.props.ThreadsActions.websocketLeaveBoard({
-      boardId: this.props.board.data._id
+    this.props.leaveRoom({
+      room: this.props.board.data._id,
+      type: 'board',
     })
   },
 
   moveGroup({group, destinationGroup, after, save}) {
-    this.props.ThreadsActions.moveGroup({
+    this.props.moveGroup({
       boardId: this.props.board.data._id,
       group,
       destinationGroup,
@@ -53,7 +55,7 @@ export const ThreadList = React.createClass({
     })
   },
   moveCard({thread, destinationThread, destinationGroup, after, save}) {
-    this.props.ThreadsActions.moveThread({
+    this.props.moveThread({
       boardId: this.props.board.data._id,
       thread,
       destinationThread,
@@ -63,20 +65,20 @@ export const ThreadList = React.createClass({
     })
   },
   beginDrag(threadId) {
-    this.props.ThreadsActions.beginDrag({
+    this.props.beginDrag({
       boardId: this.props.board.data._id,
       threadId,
     })
   },
   endDrag(threadId) {
-    this.props.ThreadsActions.endDrag({
+    this.props.endDrag({
       boardId: this.props.board.data._id,
       threadId,
     })
   },
   newThread(event, groupId){
     event.preventDefault();
-    this.props.ThreadsActions.newThread({
+    this.props.newThread({
       projectId: this.props.board.data.project,
       thread: {
         name: this.props.board.newThreadString[groupId],
@@ -87,7 +89,7 @@ export const ThreadList = React.createClass({
   },
   newGroup(event){
     event.preventDefault();
-    this.props.ThreadsActions.newGroup({
+    this.props.newGroup({
       boardId: this.props.board.data._id,
       group: {
         name: this.props.board.newGroupString
@@ -95,13 +97,13 @@ export const ThreadList = React.createClass({
     })
   },
   deleteGroup(groupId){
-    this.props.ThreadsActions.deleteGroupConfirm({
+    this.props.deleteGroupConfirm({
       boardId: this.props.board.data._id,
       groupId: groupId
     })
   },
   updateGroup(group){
-    this.props.ThreadsActions.updateGroup({
+    this.props.updateGroup({
       group: group
     })
   },
@@ -186,10 +188,16 @@ function mapStateToProps() {
   return {}
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    ThreadsActions: bindActionCreators(ThreadsActions, dispatch)
-  }
+const mapDispatchToProps =  {
+  joinRoom,
+  moveGroup,
+  moveThread,
+  beginDrag,
+  endDrag,
+  newThread,
+  newGroup,
+  deleteGroupConfirm,
+  updateGroup,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ThreadList)

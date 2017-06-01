@@ -1,4 +1,3 @@
-import websocketJoinFile from './websocketJoinFile.js'
 import getUuid from 'stemn-shared/utils/getUuid.js'
 import http from 'axios'
 

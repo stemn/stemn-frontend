@@ -8,7 +8,5 @@ export getRelatedThreads     from './getRelatedThreads';
 export renderFile          from './renderFile';
 export renderFileError     from './renderFileError';
 export renderFileProgress  from './renderFileProgress';
-export websocketJoinFile   from './websocketJoinFile';
-export websocketLeaveFile  from './websocketLeaveFile';
 
 export renderFileDownload  from './renderFileDownload.web';

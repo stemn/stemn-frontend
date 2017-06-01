@@ -8,8 +8,6 @@ export getRelatedThreads     from './getRelatedThreads';
 export renderFile          from './renderFile';
 export renderFileError     from './renderFileError';
 export renderFileProgress  from './renderFileProgress';
-export websocketJoinFile   from './websocketJoinFile';
-export websocketLeaveFile  from './websocketLeaveFile';
 
 export getFullPath         from './getFullPath.desktop';
 export getMetaFromPath     from './getMetaFromPath.desktop';

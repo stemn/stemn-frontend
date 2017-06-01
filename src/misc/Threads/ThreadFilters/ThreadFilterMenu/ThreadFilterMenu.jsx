@@ -34,12 +34,42 @@ export default class ThreadFilterMenu extends Component {
     const { auth, filter } = this.props;
     return (
       <div className="PopoverMenu">
-        <Item setFilter={ this.setFilter } filterObject={ filter.object } objKey="status" value={ 'open'  }>Status: Open</Item>
-        <Item setFilter={ this.setFilter } filterObject={ filter.object } objKey="status" value={ 'closed'  }>Status: Closed</Item>
-        <Item setFilter={ this.setFilter } filterObject={ filter.object } objKey="status" value={ undefined }>Status: All</Item>
+        <Item
+          setFilter={ this.setFilter }
+          filterObject={ filter.object }
+          objKey="status"
+          value={ 'open' }>
+          Status: Open
+        </Item>
+        <Item
+          setFilter={ this.setFilter }
+          filterObject={ filter.object }
+          objKey="status"
+          value={ 'closed' }>
+          Status: Closed
+        </Item>
+        <Item
+          setFilter={ this.setFilter }
+          filterObject={ filter.object }
+          objKey="status"
+          value={ undefined }>
+          Status: All
+        </Item>
         <div className="divider" />
-        <Item setFilter={ this.setFilter } filterObject={ filter.object } objKey="user" value={ auth.user._id }>My Threads</Item>
-        <Item setFilter={ this.setFilter } filterObject={ filter.object } objKey="user" value={ undefined }>All Threads</Item>
+        <Item
+          setFilter={ this.setFilter }
+          filterObject={ filter.object }
+          objKey="user"
+          value={ auth.user._id }>
+          My Threads
+        </Item>
+        <Item
+          setFilter={ this.setFilter }
+          filterObject={ filter.object }
+          objKey="user"
+          value={ undefined }>
+          All Threads
+        </Item>
       </div>
     )
   }

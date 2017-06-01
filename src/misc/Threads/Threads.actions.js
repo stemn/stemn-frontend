@@ -353,30 +353,3 @@ export function changeLayout({boardId, layout}) {
   }
 }
 
-export function websocketJoinBoard({boardId}) {
-  return {
-    type: 'THREADS/WEBSOCKET_JOIN_BOARD',
-    websocket: true,
-    payload: {
-      type : 'ROOM/JOIN',
-      payload : {
-        room : boardId,
-        type : 'board'
-      }
-    }
-  };
-}
-export function websocketLeaveBoard({boardId}) {
-  return {
-    type: 'THREADS/WEBSOCKET_LEAVE_BOARD',
-    websocket: true,
-    payload: {
-      type : 'ROOM/LEAVE',
-      payload : {
-        room : boardId,
-        type : 'board'
-      }
-    }
-  };
-}
-

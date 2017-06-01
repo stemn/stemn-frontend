@@ -11,7 +11,6 @@ const initialState = {
   pathToId            : {},
   downloadProgress    : {},
   relatedThreads        : {},
-  websocketRooms      : []
 };
 
 function reducer(state, action) {
@@ -121,14 +120,6 @@ function reducer(state, action) {
 
     case 'FILES/DOWNLOAD_PROGRESS' :
       return i.assocIn(state, ['downloadProgress', action.payload.cacheKey], action.payload.progress)
-
-    case 'FILES/WEBSOCKET_JOIN_FILE' :
-      return i.updateIn(state, ['websocketRooms'], websocketRooms => i.push(websocketRooms, action.payload.payload.room))
-    case 'FILES/WEBSOCKET_LEAVE_FILE' :
-      return i.updateIn(state, ['websocketRooms'], websocketRooms => {
-        const index = websocketRooms.findIndex(room => room == action.payload.payload.room);
-        return index != -1 ? i.splice(websocketRooms, index, 1) : websocketRooms;
-      })
 
     default:
         return state;

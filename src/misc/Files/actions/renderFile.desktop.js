@@ -1,10 +1,16 @@
-import websocketJoinFile from './websocketJoinFile.js';
+import { joinRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
 
 export default ({projectId, fileId, revisionId, provider, timestamp}) => {
   const cacheKey = timestamp ? `${fileId}-${revisionId}-${timestamp}` : `${fileId}-${revisionId}`;
   // The cache key is used as the renderId/roomId
 
   return (dispatch) => {
+    // Join the websocket room
+    dispatch(joinRoom({
+      room: cacheKey,
+      type: 'render'
+    }))
+
     dispatch({
       type: 'FILES/RENDER_FILE',
       aliased: true,
@@ -28,9 +34,6 @@ export default ({projectId, fileId, revisionId, provider, timestamp}) => {
         cacheKey
       }
     });
-
-    // Join the websocket room
-    dispatch(websocketJoinFile({renderId: cacheKey}))
   }
 }
 
