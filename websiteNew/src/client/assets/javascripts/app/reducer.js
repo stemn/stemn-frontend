@@ -21,7 +21,7 @@ import projects         from 'stemn-shared/misc/Projects/Projects.reducer.js'
 import search           from 'stemn-shared/misc/Search/Search.reducer.js'
 import sidebar          from 'stemn-shared/misc/Sidebar/Sidebar.reducer.js'
 import syncTimeline     from 'stemn-shared/misc/SyncTimeline/SyncTimeline.reducer.js'
-import threads            from 'stemn-shared/misc/Threads/Threads.reducer.js'
+import threads          from 'stemn-shared/misc/Threads/Threads.reducer.js'
 import toasts           from 'stemn-shared/misc/Toasts/Toasts.reducer.js'
 import togglePanel      from 'stemn-shared/misc/TogglePanel/TogglePanel.reducer.js'
 import upload           from 'stemn-shared/misc/Upload/Upload.reducer.js'
@@ -35,6 +35,7 @@ import relatedFields    from 'stemn-shared/misc/RelatedFields/RelatedFields.redu
 import userSettings     from 'stemn-shared/misc/UserSettings/UserSettings.reducer.js'
 import stringFilter     from 'stemn-shared/misc/StringFilter/StringFilter.reducer.js'
 import history          from 'stemn-shared/misc/History/History.reducer.js'
+import websocket        from 'stemn-shared/misc/Websocket/Websocket.reducer.js'
 
 import storeReducer     from 'stemn-shared/misc/Store/Store.reducer.js'
 
@@ -74,6 +75,7 @@ const splitReducers = combineReducers({
   desktopReleases,
   userSettings,
   stringFilter,
+  websocket,
 })
 
 export default (state, action) => {

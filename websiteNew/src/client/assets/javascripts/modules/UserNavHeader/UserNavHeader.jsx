@@ -23,7 +23,7 @@ export default class UserNavHeader extends Component {
           <Link activeClassName="active" params={ routeParams } name="userRoute" onlyActiveOnIndex>Overview</Link>
           <Link activeClassName="active" params={ routeParams } name="userDetailsRoute">Details</Link>
           <Link activeClassName="active" params={ routeParams } name="userProjectsRoute">{ pluralise(user.data.numProjects, 'Project') }</Link>
-          <Link activeClassName="active" params={ routeParams } name="userStarsRoute">{ pluralise(user.data.likes, 'Star') }</Link>
+          <Link activeClassName="active" params={ routeParams } name="userStarsRoute">{ pluralise(user.data.numLikes, 'Star') }</Link>
           <Link activeClassName="active" params={ routeParams } name="userFollowersRoute">{ pluralise(user.data.numFollowers, 'Follower') }</Link>
           <Link activeClassName="active" params={ routeParams } name="userFollowingRoute">{ user.data.numFollowing } Following</Link>
           { isCurrentUser

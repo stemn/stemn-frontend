@@ -130,8 +130,8 @@ export default class ProjectOverview extends Component {
                 />
                 <SocialButton
                   type="like"
-                  numberModel={`${entityModel}.data.likes`}
-                  number={ project.data.likes }
+                  numberModel={`${entityModel}.data.numLikes`}
+                  number={ project.data.numLikes }
                   entityType="project"
                   entityId={ project.data._id }
                 />
