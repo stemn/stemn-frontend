@@ -1,1 +1,1 @@
-export default from './NotificationItem';
+export default from './NotificationItem'

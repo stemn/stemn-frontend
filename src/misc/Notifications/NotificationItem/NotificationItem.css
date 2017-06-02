@@ -12,6 +12,11 @@
   margin-left: 15px;
 }
 
+.text {
+  color: rgba(0, 0, 0, 0.6);
+  line-height: 1.4em;
+}
+
 .meta {
   color: rgba(0, 0, 0, 0.3);
   font-size: 12px;
