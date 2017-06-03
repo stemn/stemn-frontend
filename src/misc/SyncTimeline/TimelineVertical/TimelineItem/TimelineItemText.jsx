@@ -157,7 +157,7 @@ const eventTextMap = {
       threadId: get(item, 'data._id'),
     }
     if (type === 'thread') {
-      if (item.data.commit.name) {
+      if (get(item, 'data.commit.name')) {
         return <span>
           marked this as closed in commit
           <Link
