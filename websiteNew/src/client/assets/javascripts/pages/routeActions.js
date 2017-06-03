@@ -35,5 +35,5 @@ export const userDetailsRoute            = ({ userId })                        =
 export const userFollowersRoute          = ({ userId })                        => `/users/${userId}/followers`
 export const userFollowingRoute          = ({ userId })                        => `/users/${userId}/following`
 export const userProjectsRoute           = ({ userId })                        => `/users/${userId}/projects`
-export const userRoute                   = ({ userId })                        => `/users/${userId}/`
+export const userRoute                   = ({ userId })                        => `/users/${userId}`
 export const userStarsRoute              = ({ userId })                        => `/users/${userId}/stars`

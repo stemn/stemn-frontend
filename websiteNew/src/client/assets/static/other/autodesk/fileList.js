@@ -21,11 +21,16 @@
 
 // config.BaseEndPoint
 var viewer =[
-	'viewer3D.min.js',
 	'viewer3D.js',
+	'viewer3D.min.js',
+	'style.css',
 	'style.min.css',
+	'three.js',
 	'three.min.js',
+	'lmvworker.js',
 	'lmvworker.min.js',
+    'wgs.js',
+    'wgs.min.js',
 ] ;
 
 // res/environments/
@@ -113,7 +118,7 @@ locales =locales.reduce (
 ) ;
 
 //-
-module.exports = viewer
+module.exports =viewer
 	.concat (environments)
 	.concat (textures)
 	.concat (locales) ;
