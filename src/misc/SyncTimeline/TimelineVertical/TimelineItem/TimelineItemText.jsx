@@ -114,7 +114,7 @@ const eventTextMap = {
   },
   commit: (item, type, entity) => {
     const params = {
-      projectId: item.data.project._id,
+      projectId: get(item, 'data.project._id'),
       commitId: item._id
     }
     if (type === 'file') {
@@ -206,7 +206,7 @@ const eventTextMap = {
       const hasAddedLabels = item.data.addedLabels && item.data.addedLabels.length > 0
       const hasRemovedLabels = item.data.removedLabels && item.data.removedLabels.length > 0
       const params = {
-        projectId: entity.data.project,
+        projectId: get(entity, 'data.project'),
         threadId: item.thread._id,
       }
       return (

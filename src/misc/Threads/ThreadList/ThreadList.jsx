@@ -190,6 +190,7 @@ function mapStateToProps() {
 
 const mapDispatchToProps =  {
   joinRoom,
+  leaveRoom,
   moveGroup,
   moveThread,
   beginDrag,

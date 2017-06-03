@@ -41,11 +41,17 @@ export default class EditorNew extends Component {
     super(props)
     this.state = {
       codemirror: null,
+      value: props.value,
     }
   }
-  updateValue = (newValue) => {
+  onChange = (newValue) => {
     const { model, change } = this.props
+    // Update the redux value
     change(model, newValue)
+    // Update internal value
+    this.setState({
+      value: newValue
+    })
   }
   focus = () => {}
   getCodeMirror = (ref) => {
@@ -61,8 +67,17 @@ export default class EditorNew extends Component {
       }
     }
   }
+  componentWillReceiveProps(nextProps) {
+    // Update the internal state if it differs from the redux state
+    if( nextProps.value != this.state.value) {
+      this.setState({
+        value: nextProps.value
+      })
+    }
+  }
   render() {
-    const { model, change, value, hideToolbar, placeholder, tabIndex, ...otherProps } = this.props
+    const { model, change, hideToolbar, placeholder, tabIndex, ...otherProps } = this.props
+    const { value } = this.state
     const { codemirror } = this.state
 
     const options = {
@@ -85,7 +100,7 @@ export default class EditorNew extends Component {
           ref={ this.getCodeMirror }
           className={ classes.editor }
           value={ value }
-          onChange={ this.updateValue }
+          onChange={ this.onChange }
           options={ options }
         />
         { codemirror
