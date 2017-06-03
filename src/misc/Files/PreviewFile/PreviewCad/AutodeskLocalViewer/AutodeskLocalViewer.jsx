@@ -1,8 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import classes from './AutodeskLocalViewer.css'
 import autodeskViewerUtils from '../PreviewCadViewer.utils.js'
 
-export default React.createClass({
+const AutodeskLocalViewer = React.createClass({
   viewer: null,
   onMount (nextProps, prevProps) {
     if(!prevProps || nextProps.path != prevProps.path){
@@ -15,11 +16,21 @@ export default React.createClass({
       const filePathWithProtocol = filePath.startsWith('http') ? filePath : `file://${filePath}`;
       const options = {
         'env' : 'Local',
-        'document' : filePathWithProtocol
+        'document' : filePathWithProtocol,
+        // Headers for the svf requests (only required for the website)
+        // This feature is a modification of the Autodesk source code
+        // It will break whenever the source is updated.
+        // There is a readme in the autodesk viewer folder explaining the changes
+
+        // NOTE: there is some risk that the bearer token will be sent to Autodesk?
+		svfHeaders: {
+          'Authorization' : `bearer ${nextProps.auth.authToken}`,
+		},
       };
       Autodesk.Viewing.Initializer(options, () => {
         this.viewer.start(options.document, options);
       });
+
     }
   },
   componentDidMount() { this.onMount(this.props) },
@@ -30,4 +41,6 @@ export default React.createClass({
   render() {
     return <div className={classes.preview + ' flex rel-box'} ref="cadCanvas"><div className={classes.scrollOverlay}></div></div>
   }
-});
+})
+
+export default connect(({ auth }) => ({ auth }))(AutodeskLocalViewer)

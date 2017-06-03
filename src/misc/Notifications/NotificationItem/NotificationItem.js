@@ -16,6 +16,8 @@ export default class NotificationItem extends Component {
 
     const markRead = () => markAsRead(notification._id)
     const templateSplit = notification.template.split('$$')
+    // templateSplit will contain a '' in the array everywhere we
+    // need to insert a notificationLink
     let entityNumber = -1
 
     return (

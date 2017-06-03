@@ -4,12 +4,12 @@ import getRootPath from 'get-root-path'
 
 const otherModules = [{
   global: 'Autodesk',
-  src: getRootPath('/static/other/autodesk/viewer/viewer3D.min.js'),
+  src: getRootPath('/static/other/autodesk/viewer-2-13/viewer3D.min.js'),
 }, {
   global: 'THREE',
-  src: getRootPath('/static/other/autodesk/viewer/three.min.js'),
+  src: getRootPath('/static/other/autodesk/viewer-2-13/three.min.js'),
 }, {
-  src: getRootPath('/static/other/autodesk/viewer/style.min.css'),
+  src: getRootPath('/static/other/autodesk/viewer-2-13/style.min.css'),
 }]
 const systemImport = () => System.import('../PreviewCad/PreviewCad')
 
