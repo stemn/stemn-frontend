@@ -1,7 +1,7 @@
 import { showModal } from 'stemn-shared/misc/Modal/Modal.actions.js'
 
 const showThreadModal = ({ threadId }) => showModal({
-  modalType: require('stemn-shared/misc/Threads/ThreadDisplayModal'),
+  modalType: require('stemn-shared/misc/Threads/ThreadDisplayModal').default,
   limit: 1,
   modalProps: {
     threadId,
@@ -45,7 +45,7 @@ export const userDetailsRoute            = ({ userId })                        =
 export const userFollowersRoute          = ({ userId })                        => ({ external: true, pathname: `/users/${userId}/followers`})
 export const userFollowingRoute          = ({ userId })                        => ({ external: true, pathname: `/users/${userId}/following`})
 export const userProjectsRoute           = ({ userId })                        => ({ external: true, pathname: `/users/${userId}/projects`})
-export const userRoute                   = ({ userId })                        => ({ external: true, pathname: `/users/${userId}/`})
+export const userRoute                   = ({ userId })                        => ({ external: true, pathname: `/users/${userId}`})
 export const userStarsRoute              = ({ userId })                        => ({ external: true, pathname: `/users/${userId}/stars`})
 
 export const webCommitRoute              = ({ commitId, projectId })           => ({ external: true, pathname: `/project/${projectId}/history/${commitId}` })
