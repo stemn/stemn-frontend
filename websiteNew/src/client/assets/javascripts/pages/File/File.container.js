@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
-import { getMeta, getRelatedThreads } from 'stemn-shared/misc/Files/Files.actions.js'
+import { getMeta } from 'stemn-shared/misc/Files/Files.actions.js'
 import { push as pushRoute } from 'react-router-redux'
 import { initCompare, changeMode, select } from 'stemn-shared/misc/FileCompare/FileCompare.actions'
 import { get } from 'lodash'
@@ -10,6 +10,7 @@ import File from './File'
 
 const stateToProps = ({ files, fileCompare, syncTimeline }, { params, location }) => {
   const { projectId, fileId } = params
+//  console.log(params);
   const revisionId = location.query.revision
   const cacheKey = `${fileId}-${revisionId}`
   return {
@@ -20,7 +21,6 @@ const stateToProps = ({ files, fileCompare, syncTimeline }, { params, location }
     projectId,
     revisonId: revisionId || '',
     timeline: get(syncTimeline, cacheKey, {}),
-    relatedThreads: files.relatedThreads[fileId],
   }
 };
 
@@ -28,7 +28,6 @@ const dispatchToProps = {
   changeMode,
   fetchTimeline,
   getMeta,
-  getRelatedThreads,
   initCompare,
   pushRoute,
   select,
@@ -42,10 +41,6 @@ const fetchConfigs = [{
       revisionId: props.revisionId,
       projectId: props.projectId,
       cacheKey: props.cacheKey,
-    })
-    props.getRelatedThreads({
-      fileId: props.fileId,
-      projectId: props.projectId,
     })
     props.fetchTimeline({
       entityType: 'file',
