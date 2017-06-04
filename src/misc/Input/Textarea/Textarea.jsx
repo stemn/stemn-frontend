@@ -19,23 +19,23 @@ class Component extends React.Component {
     }
   }
   getTextareaRef = (ref) => {
-    if (ref) {
+    if (ref && this.props.autoFocus) {
       ref.focus()
     }
   }
   onChange = (event) => {
     const { dispatch, model, onChange } = this.props
     const newValue = event.target.value
-    // Update the redux value
-    dispatch(storeChange(model, newValue));
     // We update our internal state
     this.setState({
       value: newValue
     })
+    // Update the redux value
+    dispatch(storeChange(model, newValue))
     if (onChange) { onChange() }
   }
   render(){
-    const { model, dispatch, onChange, ...otherProps } = this.props
+    const { model, dispatch, onChange, value: valueExternal, ...otherProps } = this.props
     const { value } = this.state
     return (
       <Textarea

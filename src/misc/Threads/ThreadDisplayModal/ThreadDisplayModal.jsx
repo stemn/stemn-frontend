@@ -26,7 +26,7 @@ export default React.createClass({
       boardId: this.props.thread.data.board
     })
   },
-  toggleComplete(model, value){
+  toggleComplete({model, value}){
     this.props.toggleComplete({
       threadId: this.props.thread.data._id,
       model,

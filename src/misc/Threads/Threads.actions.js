@@ -267,7 +267,7 @@ export function moveGroup({boardId, group, destinationGroup, after, save}) {
 export function toggleComplete({threadId, model, value}) {
   return (dispatch) => {
     dispatch(showToast({
-      title: `This thread was marked ${value ? 'complete' : 'incomplete'}.`,
+      title: `This thread was marked as ${value ? 'closed' : 'open'}.`,
       actions: [{
         text: 'Undo',
         action: {
