@@ -9,3 +9,10 @@
 .text {
   margin-left: 10px;
 }
+
+.newFolderIcon {
+  position: absolute;
+  right: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+}

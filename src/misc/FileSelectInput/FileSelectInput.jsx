@@ -5,10 +5,12 @@ import { connect } from 'react-redux'
 // Container Actions
 import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js'
 import fileSelectModalName from 'stemn-shared/misc/FileSelect/FileSelectModal'
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 
 import classes from './FileSelectInput.css'
 import classNames from 'classnames'
 import MdFolder from 'react-icons/md/folder'
+import MdNewFolder from 'react-icons/md/create-new-folder'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import { isDriveFileId, isDropboxFileId } from 'stemn-shared/misc/Files/utils'
 import TextDisplayBox from 'stemn-shared/misc/TextDisplayBox/TextDisplayBox.jsx'
@@ -39,6 +41,13 @@ const FileSelectInput = React.createClass({
       },
     })
   },
+  clearValue() {
+    const { storeChange, model } = this.props
+    storeChange(model, {
+      path: undefined,
+      fileId: undefined,
+    })
+  },
   render() {
     const { provider, model, value, disabled } = this.props;
 
@@ -56,18 +65,37 @@ const FileSelectInput = React.createClass({
 
     const path = validatePath(value.path, value.fileId, provider);
 
+    const getInnerText = () => {
+      if (path) {
+        return <span><span style={ { textTransform: 'capitalize' } }>{ provider }/</span>{ path }</span>
+      } else if (value.path === 'undefined' && value.fileId === 'undefined') {
+        return `A new folder will be created in your ${provider}`
+      } else {
+        return 'Select the project folder'
+      }
+    }
+
     return (
-      <TextDisplayBox
-        disabled={disabled}
-        onClick={()=>{if(!disabled){this.showModal()}}}
-      >
-        <div className='flex'>
-          {path ? <span><span style={{textTransform: 'capitalize'}}>{provider}/</span>{path}</span> : 'Select the project folder'}
-        </div>
-        <SimpleIconButton>
-          <MdFolder size="22" />
+      <div className="rel-box">
+        <TextDisplayBox
+          disabled={disabled}
+          onClick={()=>{if(!disabled){this.showModal()}}}
+        >
+          <div className='flex'>
+            { getInnerText }
+          </div>
+          <SimpleIconButton title="Select folder">
+            <MdFolder size="22" />
+          </SimpleIconButton>
+        </TextDisplayBox>
+        <SimpleIconButton
+          className={ classes.newFolderIcon }
+          onClick={ this.clearValue }
+          title="New Folder"
+        >
+          <MdNewFolder size="22" />
         </SimpleIconButton>
-      </TextDisplayBox>
+      </div>
     );
   }
 });
@@ -80,6 +108,7 @@ function mapStateToProps() {
 function mapDispatchToProps(dispatch) {
   return {
     ModalActions: bindActionCreators(ModalActions, dispatch),
+    storeChange: bindActionCreators(storeChange, dispatch),
   }
 }
 

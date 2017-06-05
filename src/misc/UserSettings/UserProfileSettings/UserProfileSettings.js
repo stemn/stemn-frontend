@@ -41,8 +41,8 @@ export default class UserProfileSettings extends Component {
           <br />
           <h3>Blurb</h3>
           <Textarea
-            model={ `${userModel}.data.profile.blurb` }
-            value={ user.data.profile.blurb }
+            model={ `${userModel}.data.blurb` }
+            value={ user.data.blurb }
             className="dr-input"
             type="text"
           />

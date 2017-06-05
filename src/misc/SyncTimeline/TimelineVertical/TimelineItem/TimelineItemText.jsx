@@ -6,7 +6,28 @@ import { get, has } from 'lodash'
 import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
 
 const eventTextMap = {
-  uncompleted: (item, type, entity) => <span>opened this thread</span>,
+  uncompleted: (item, type, entity) => {
+    const project = get(item, 'data.project')
+    const commit = get(item, 'data.commit')
+    const thread = get(item, 'data.thread')
+
+    const params = {
+      projectId: project._id,
+      threadId: thread._id,
+    }
+    if (type === 'thread') {
+      return <span>re-opened this thread</span>
+    } else {
+      return (
+        <span>
+          re-opened the thread
+          <Link name="threadRoute" params={ params }>{ thread.name }</Link>
+          in
+          <Link name="projectRoute" params={ params }>{ project.name }</Link>
+        </span>
+      )
+    }
+  },
   addAsignee: (item, type, entity) => <span>was assigned to this thread</span>,
   removeAsignee : (item, type, entity) => <span>was removed from assignees</span>,
   revision: (item, type, entity, groupItem, groupTitle) => {
@@ -162,7 +183,6 @@ const eventTextMap = {
           marked this as closed in commit
           <Link
             className="link-primary"
-            closeModals
             name="commitRoute"
             params={ params }
           >
@@ -170,7 +190,7 @@ const eventTextMap = {
           </Link>
         </span>
       } else {
-        return <span>marked this as complete</span>
+        return <span>marked this as closed</span>
       }
     } else {
       return (
@@ -178,7 +198,6 @@ const eventTextMap = {
           closed the thread
           <Link
             className="link-primary"
-            closeModals
             name="threadRoute"
             params={ params }
           >
@@ -189,11 +208,22 @@ const eventTextMap = {
               in commit
               <Link
                 className="link-primary"
-                closeModals
                 name="commitRoute"
                 params={ params }
               >
                 { item.data.commit.name }
+              </Link>
+            </span>
+          }
+          { get(item, 'data.project._id') &&
+            <span>
+              in project
+              <Link
+                className="link-primary"
+                name="projectRoute"
+                params={ params }
+              >
+                { item.data.project.name }
               </Link>
             </span>
           }
