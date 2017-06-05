@@ -13,6 +13,7 @@ import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
 import CommentNew from 'stemn-shared/misc/Comments/Comment/CommentNew.jsx'
 import MdDone from 'react-icons/md/done'
 import MdAdd from 'react-icons/md/add'
+import MdMoreHoriz from 'react-icons/md/more-horiz';
 import MdAccessTime from 'react-icons/md/access-time'
 import ThreadLabelDots from 'stemn-shared/misc/Threads/ThreadLabelDots/ThreadLabelDots.jsx'
 import Link from 'stemn-shared/misc/Router/Link'
@@ -189,78 +190,83 @@ export default class ProjectThread extends Component {
               <title>{ `Thread: ${thread.data.name} by ${thread.data.owner.name}` }</title>
             </Helmet>
           }
-          <SubSubHeader>
-          <Breadcrumbs>
-            <Crumb name="projectThreadsRoute" params={ { projectId: project.data._id } } text="Threads" />
-            <Crumb name="projectThreadsRoute" params={ { projectId: project.data._id } } query={ { groups: [ group._id ]} } text={ group.name } />
-            <Crumb text={ thread.data.name || 'Untitled Thread' } />
-          </Breadcrumbs>
-          <br />
-            <h2 className={ classes.title }>
-              { edit
-              ? <Input
-                  model={ `${threadModel}.data.name` }
-                  className="input-plain"
-                  placeholder="Thread Title"
-                  value={ thread.data.name }
-                />
-              : <span>{ thread.data.name || 'Untitled Thread'}</span> }
-              { edit
-              ? null
-              : <span className={ classes.number }>&nbsp;{ thread.data.threadNumber ? `#T${thread.data.threadNumber}` : null }</span> }
-            </h2>
-            <div className="layout-row layout-align-start-center">
-              <div className={ classNames('layout-row layout-align-start-center', classes.meta) }>
-                <Link
-                  name="userRoute"
-                  params={ userRouteParams }
-                  className="layout-row layout-align-start-center"
-                >
-                  <UserAvatar
-                    className={ classes.avatar }
-                    name={ thread.data.owner.name }
-                    picture={ thread.data.owner.picture }
-                    size={ 20 }
-                    shape='square'
+        <SubSubHeader>
+          <div className="rel-box">
+            <Breadcrumbs>
+              <Crumb name="projectThreadsRoute" params={ { projectId: project.data._id } } text="Threads" />
+              <Crumb name="projectThreadsRoute" params={ { projectId: project.data._id } } query={ { groups: [ group._id ]} } text={ group.name } />
+              <Crumb text={ thread.data.name || 'Untitled Thread' } />
+            </Breadcrumbs>
+            <SimpleIconButton className={ classes.settingsButton }>
+              <MdMoreHoriz size={ 20 } />
+            </SimpleIconButton>
+            <br />
+              <h2 className={ classes.title }>
+                { edit
+                ? <Input
+                    model={ `${threadModel}.data.name` }
+                    className="input-plain"
+                    placeholder="Thread Title"
+                    value={ thread.data.name }
                   />
-                  <b>{ thread.data.owner.name }</b>
-                </Link>
-                <div>&nbsp;created this thread { moment(thread.data.created).fromNow() }.</div>
+                : <span>{ thread.data.name || 'Untitled Thread'}</span> }
+                { edit
+                ? null
+                : <span className={ classes.number }>&nbsp;{ thread.data.threadNumber ? `#T${thread.data.threadNumber}` : null }</span> }
+              </h2>
+              <div className="layout-row layout-align-start-center">
+                <div className={ classNames('layout-row layout-align-start-center', classes.meta) }>
+                  <Link
+                    name="userRoute"
+                    params={ userRouteParams }
+                    className="layout-row layout-align-start-center"
+                  >
+                    <UserAvatar
+                      className={ classes.avatar }
+                      name={ thread.data.owner.name }
+                      picture={ thread.data.owner.picture }
+                      size={ 20 }
+                      shape='square'
+                    />
+                    <b>{ thread.data.owner.name }</b>
+                  </Link>
+                  <div>&nbsp;created this thread { moment(thread.data.created).fromNow() }.</div>
+                </div>
+                <div className="flex" />
+                { canEdit &&
+                  <PopoverDropdown
+                    value={ thread.data.complete }
+                    model={ `${threadModel}.data.complete` }
+                    options={ this.dropdownOptions }
+                    onChange={ this.updateThread }
+                    style={ { margin: '0 15px' } }
+                  />
+                }
+                { !canEdit &&
+                  <Tag className={ thread.data.complete ? 'warn': 'success' } style={{ margin: '0px'}}>
+                    <MdDone size={ 20 } style={ { marginRight: '5px' } }/>
+                    { thread.data.complete ? 'THREAD CLOSED': 'THREAD OPEN' }
+                  </Tag>
+                }
+                { edit &&
+                  <Button
+                    className="primary"
+                    name="threadRoute"
+                    params={ threadRouteParams }
+                  >
+                    Save
+                  </Button>
+                }
+                { !edit && canEdit &&
+                  <Button
+                    className="primary"
+                    name="threadEditRoute"
+                    params={ threadRouteParams }
+                  >
+                    Edit
+                  </Button>
+                }
               </div>
-              <div className="flex" />
-              { canEdit &&
-                <PopoverDropdown
-                  value={ thread.data.complete }
-                  model={ `${threadModel}.data.complete` }
-                  options={ this.dropdownOptions }
-                  onChange={ this.updateThread }
-                  style={ { margin: '0 15px' } }
-                />
-              }
-              { !canEdit &&
-                <Tag className={ thread.data.complete ? 'warn': 'success' } style={{ margin: '0px'}}>
-                  <MdDone size={ 20 } style={ { marginRight: '5px' } }/>
-                  { thread.data.complete ? 'THREAD CLOSED': 'THREAD OPEN' }
-                </Tag>
-              }
-              { edit &&
-                <Button
-                  className="primary"
-                  name="threadRoute"
-                  params={ threadRouteParams }
-                >
-                  Save
-                </Button>
-              }
-              { !edit && canEdit &&
-                <Button
-                  className="primary"
-                  name="threadEditRoute"
-                  params={ threadRouteParams }
-                >
-                  Edit
-                </Button>
-              }
             </div>
           </SubSubHeader>
           <Container style={ { marginTop: '30px', marginBottom: '60px' } }>
