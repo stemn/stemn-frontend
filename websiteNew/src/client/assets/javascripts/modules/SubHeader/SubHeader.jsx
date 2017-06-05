@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import classes from './SubHeader.css'
 import classNames from 'classnames'
 
+import Link from 'stemn-shared/misc/Router/Link'
 import { Container } from 'stemn-shared/misc/Layout'
 
 export default class SubHeader extends Component {
@@ -16,7 +17,7 @@ export default class SubHeader extends Component {
   }
 
   render() {
-    const { title, children, noline, icon, style, noResponsive } = this.props
+    const { title, children, noline, icon, style, noResponsive, name, params } = this.props
     const borderStyle = noline ? {} : { borderBottom: '1px solid rgba(0, 0, 0, 0.1)' }
     const responsiveClasses = noResponsive
       ? 'layout-row'
@@ -27,7 +28,10 @@ export default class SubHeader extends Component {
         <Container className={classNames(classes.headerInner, responsiveClasses)}>
           <h1 className={ classNames(classes.title, 'layout-row layout-align-start-center') }>
             { icon }
-            { title }
+            { name
+              ? <Link name={ name } params={ params }>{ title }</Link>
+              : title
+            }
           </h1>
           { title && <div className="flex"></div> }
           { children }

@@ -32,6 +32,8 @@ class Project extends Component {
         </Helmet>
         <SubHeader
           title={ get(project, 'data.name', ' ') || 'Untitled Project' }
+          name="projectRoute"
+          params={ routeParams }
           noline
           icon={ publicIcon }
         >

@@ -18,7 +18,7 @@ export default class UserNavHeader extends Component {
     const routeParams = { userId: user.data._id }
 
     return (
-      <SubHeader title={ user.data.name } style={ { marginBottom: '30px' } }>
+      <SubHeader title={ `${user.data.profile.firstname} ${user.data.profile.lastname}` } style={ { marginBottom: '30px' } }>
         <Tabs noline>
           <Link activeClassName="active" params={ routeParams } name="userRoute" onlyActiveOnIndex>Overview</Link>
           <Link activeClassName="active" params={ routeParams } name="userDetailsRoute">Details</Link>
