@@ -131,7 +131,14 @@ export default class Comment extends Component {
               </div>
             </div>
           : ''}
-          { hasReactions && <div className={ classes.reactions }><Reactions reactions={ comment.data.reactions } /></div> }
+          { hasReactions &&
+            <div className={ classes.reactions }>
+              <Reactions
+                reactions={ comment.data.reactions }
+                submitFn={ this.submitReaction }
+              />
+            </div>
+          }
         </div>
       </div>
     )

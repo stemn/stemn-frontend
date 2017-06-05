@@ -10,15 +10,15 @@ import Link from 'stemn-shared/misc/Router/Link'
 
 export default React.createClass({
   render(){
-    const { reactions } = this.props;
+    const { reactions, submitFn } = this.props;
     const groupedReactions = reactions && reactions.length > 0 ? groupAndOrderReactions(reactions, options) : [];
     return (
       <span>
         { groupedReactions.map(reaction => (
           <Popover key={reaction.type}
             preferPlace="below"
-            trigger="click">
-            <a className={ classes.icon }>
+            trigger="hoverDelay">
+            <a className={ classes.icon } onClick={ () => submitFn(reaction.type) }>
               { reaction.icon }
               <span>{ reaction.list.length }</span>
             </a>

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Link from 'stemn-shared/misc/Router/Link'
 import ThreadLabelDots from 'stemn-shared/misc/Threads/ThreadLabelDots/ThreadLabelDots.jsx'
 import pluralise from 'stemn-shared/utils/strings/pluralise'
-import { get } from 'lodash'
+import { get, has } from 'lodash'
 import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
 
 const eventTextMap = {
@@ -182,7 +182,7 @@ const eventTextMap = {
             name="threadRoute"
             params={ params }
           >
-            { get(item, 'data.name', 'Untitled Thread') }
+            { get(item, 'data.thread.name', 'Untitled Thread') }
           </Link>
           { get(item, 'data.commmit._id') &&
             <span>
@@ -203,11 +203,11 @@ const eventTextMap = {
   },
   changedLabels: (item, type, entity) => {
     if (type === 'thread' || type === 'project') {
-      const hasAddedLabels = item.data.addedLabels && item.data.addedLabels.length > 0
-      const hasRemovedLabels = item.data.removedLabels && item.data.removedLabels.length > 0
+      const hasAddedLabels = has(item, 'data.addedLabels') && item.data.addedLabels.length > 0
+      const hasRemovedLabels = has(item, 'data.removedLabels') && item.data.removedLabels.length > 0
       const params = {
         projectId: get(entity, 'data.project'),
-        threadId: item.thread._id,
+        threadId: get(item, 'data.thread._id'),
       }
       return (
         <span>
@@ -239,7 +239,7 @@ const eventTextMap = {
           { type === 'project' &&
             <span>
               { hasRemovedLabels ? ' from' : ' to' }
-              <Link name="threadRoute" params={ params }>{ item.thread.name || 'Untitled Thread'}</Link>
+              <Link name="threadRoute" params={ params }>{ get(item, 'data.thread.name', 'Untitled Thread') }</Link>
             </span>
           }
         </span>
