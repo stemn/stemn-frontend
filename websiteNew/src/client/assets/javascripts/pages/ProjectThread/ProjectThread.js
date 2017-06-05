@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import classes from './ProjectThread.css'
+import classes from './ProjectThread.scss'
 import classNames from 'classnames'
 import { Row, Col, Container } from 'stemn-shared/misc/Layout'
 import SubSubHeader from 'modules/SubSubHeader'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import Tag from 'stemn-shared/misc/Tags/Tag'
 import DatePicker from 'stemn-shared/misc/Calendar/DatePicker/DatePicker'
+import UserMinimalRow from 'stemn-shared/misc/Users/UserMinimalRow'
 import UserSelect from 'stemn-shared/misc/Users/UserSelect/UserSelect.jsx'
 import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
 import CommentNew from 'stemn-shared/misc/Comments/Comment/CommentNew.jsx'
@@ -156,23 +157,7 @@ export default class ProjectThread extends Component {
         { thread.data.users.length >= 0 &&
         <div className={ classes.panel }>
           <div className="text-mini-caps">Assignees</div>
-          { thread.data.users.map(user => (
-            <Link
-              key={ user._id }
-              name="userRoute"
-              params={ { userId: user._id } }
-              className="layout-row layout-align-start-center"
-            >
-              <UserAvatar
-                className={ classes.avatar }
-                name={ user.name }
-                picture={ user.picture }
-                size={ 20 }
-                shape='square'
-              />
-              <b style={{fontSize: '12px'}}>{ user.name }</b>
-            </Link>
-          ))}
+          { thread.data.users.map(user => <UserMinimalRow user={ user }/> )}
         </div> }
       </Col>
     )
