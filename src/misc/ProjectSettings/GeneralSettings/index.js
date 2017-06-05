@@ -36,8 +36,8 @@ export default class GeneralSettings extends Component {
             <br />
             <h3>Summary</h3>
             <Textarea
-              model={`${entityModel}.data.summary`}
-              value={project.data.summary}
+              model={`${entityModel}.data.blurb`}
+              value={project.data.blurb}
               className="dr-input"
             />
             <br />

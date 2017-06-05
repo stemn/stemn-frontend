@@ -1,0 +1,10 @@
+.user {
+  display: block;
+  margin-bottom: 10px;
+  &:last-child {
+    margin-bottom: 0px;
+  }
+  .avatar {
+    margin-right: 10px;
+  }
+}

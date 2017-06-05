@@ -9,14 +9,24 @@ import classNames from 'classnames'
 
 class PopoverDropdown extends Component {
   render() {
-    const { children, options, model, value, dispatch, onChange, ...otherProps } = this.props
+    const { children, options, model, value, dispatch, onChange, empty, ...otherProps } = this.props
     const currentOption = options.find(option => option.value === value)
+
+    const getInnerText = () => {
+      if (currentOption && currentOption.name) {
+        return currentOption.name
+      } else if (empty) {
+        return null
+      } else {
+        return 'none'
+      }
+    }
 
     return (
       <PopoverFit { ...otherProps }>
         <div className="layout-row layout-align-start-center flex">
           { children }
-          { currentOption && currentOption.name ? currentOption.name : 'none' }
+          { getInnerText() }
           <div className="flex" />
           <MdExpandMore style={ { marginLeft: '5px' } } size={ 15 } />
         </div>

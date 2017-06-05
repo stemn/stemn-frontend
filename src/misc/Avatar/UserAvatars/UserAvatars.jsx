@@ -4,7 +4,7 @@ import UserAvatar from '../UserAvatar/UserAvatar.jsx';
 
 export default React.createClass({
   render() {
-    const { users, limit, shape, size } = this.props;
+    const { users, limit, shape, size, className } = this.props;
 
     const moreStyles = {
       display: 'inline-block',
@@ -23,7 +23,7 @@ export default React.createClass({
       const usersToShow   = users.length > limit ? users.slice(0, limit - 1) : users;
       const usersNotShown = users.length > limit ? users.slice(limit - 1, users.length) : [];
       return (
-        <div>
+        <div className={ className }>
           {usersToShow.map( (user, index) =>
             <UserAvatar
               shape={ shape }

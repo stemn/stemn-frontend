@@ -29,7 +29,7 @@ export default class ProjectNewModal extends Component {
         modalConfirm()
       }
 
-      const canLink = value.data._id && newProject.provider && newProject.root.path && newProject.root.fileId
+      const canLink = value.data._id && newProject.provider && newProject.root
 
       // Link the provider if we can.
       if (canLink) {

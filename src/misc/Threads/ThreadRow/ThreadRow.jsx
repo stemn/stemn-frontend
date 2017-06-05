@@ -56,6 +56,7 @@ export default class ThreadRow extends Component {
           </div>
           <div className={ classes.asignees }>
             <UserAvatars
+              className="layout-row"
               users={ thread.data.users }
               limit={ 3 }
               shape="square"

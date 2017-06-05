@@ -31,7 +31,7 @@ export default class NotificationItem extends Component {
         <div className="flex">
           <div className={ classNames(classes.text, 'text-ellipsis') }>
             { templateSplit.map((item, idx) => {
-              if (item.length === 0) {
+              if (item === '') {
                 // We iterate the entity number whenever we find an empty item
                 // in our split template array
                 entityNumber = entityNumber + 1

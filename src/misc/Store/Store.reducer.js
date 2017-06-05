@@ -10,7 +10,7 @@ export default (state = {}, action = {}) => {
     case 'STORE/PUSH':
       return i.updateIn(state, toPath(action.payload.model), (item) => i.push(item || [], action.payload.item))
     case 'STORE/REMOVE':
-      return i.updateIn(state, toPath(action.payload.model), (item) => i.splice(item, action.payload.index))
+      return i.updateIn(state, toPath(action.payload.model), (item) => i.splice(item, action.payload.index, 1))
     default:
       return state
   }

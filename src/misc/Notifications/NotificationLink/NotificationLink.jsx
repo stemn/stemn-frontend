@@ -25,7 +25,7 @@ export default class NotificationLink extends Component {
     if (entity) {
       return (
         <Link className="link-primary" name={ getRouteNameFromEntity(entity.entityType) } params={ entity }>
-          { entity.display }
+          { entity.display || 'untitled' }
         </Link>
       )
     } else {

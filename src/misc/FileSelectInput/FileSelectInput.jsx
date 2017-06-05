@@ -68,7 +68,7 @@ const FileSelectInput = React.createClass({
     const getInnerText = () => {
       if (path) {
         return <span><span style={ { textTransform: 'capitalize' } }>{ provider }/</span>{ path }</span>
-      } else if (value.path === 'undefined' && value.fileId === 'undefined') {
+      } else if (value.path === undefined && value.fileId === undefined) {
         return `A new folder will be created in your ${provider}`
       } else {
         return 'Select the project folder'
@@ -76,26 +76,25 @@ const FileSelectInput = React.createClass({
     }
 
     return (
-      <div className="rel-box">
         <TextDisplayBox
-          disabled={disabled}
-          onClick={()=>{if(!disabled){this.showModal()}}}
+          disabled={ disabled }
         >
-          <div className='flex'>
-            { getInnerText }
+          <div className="layout-row flex layout-align-start-center" onClick={()=>{if(!disabled){this.showModal()}}}>
+            <div className="flex">
+              { getInnerText() }
+            </div>
+            <SimpleIconButton title="Select folder">
+              <MdFolder size="22" />
+            </SimpleIconButton>
           </div>
-          <SimpleIconButton title="Select folder">
-            <MdFolder size="22" />
+          <SimpleIconButton
+            className={ classes.newFolderIcon }
+            onClick={ this.clearValue }
+            title="New Folder"
+          >
+            <MdNewFolder size="22" />
           </SimpleIconButton>
         </TextDisplayBox>
-        <SimpleIconButton
-          className={ classes.newFolderIcon }
-          onClick={ this.clearValue }
-          title="New Folder"
-        >
-          <MdNewFolder size="22" />
-        </SimpleIconButton>
-      </div>
     );
   }
 });
