@@ -1,11 +1,14 @@
-export const getUserFollowers = ({ userId, size, page = 1 }) => ({
+export const getUserFollowers = ({ userId, page = 1, size }) => ({
   type: 'USER_FOLLOWERS/GET_FOLLOWERS',
   http: true,
   payload: {
     method: 'GET',
-    url: `/api/v1/users/${userId}/follows`,
+    url: 'api/v1/social',
     params: {
-      type: 'user',
+      parentType: 'user',
+      parentId: userId,
+      socialType: 'follow',
+      childType: 'user',
       size,
       page
     }

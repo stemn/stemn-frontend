@@ -10,7 +10,10 @@ import classNames from 'classnames'
 class PopoverDropdown extends Component {
   render() {
     const { children, options, model, value, dispatch, onChange, empty, ...otherProps } = this.props
-    const currentOption = options.find(option => option.value === value)
+
+    const isActive = (option) => value === option.value || (!value && !option.value)
+
+    const currentOption = options.find(isActive)
 
     const getInnerText = () => {
       if (currentOption && currentOption.name) {
@@ -44,11 +47,12 @@ class PopoverDropdown extends Component {
                 onChange()
               }
             }
+
             return (
               <a
                 key={ option.value || idx }
                 onClick={ onClick }
-                className={ classNames({ 'active' : value === option.value }) }
+                className={ classNames({ 'active' : isActive(option) }) }
               >
                 { option.name }
               </a>

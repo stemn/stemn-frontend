@@ -16,6 +16,7 @@ import Walkthrough from 'stemn-shared/misc/Walkthrough/Walkthrough.jsx'
 // Functions
 import { groupRevisions } from 'stemn-shared/misc/Timeline/Timeline.utils.js'
 import { getToggleAllStatus } from '../Changes.utils.js'
+import { has, get } from 'lodash'
 
 // Styles
 import styles from './CommitChanges.css';
@@ -27,8 +28,10 @@ const FileChangeRowContext = ContextMenuLayer(contextIdentifier, (props) => prop
 export default React.createClass({
   render(){
     const { changes, project, toggleAll, refresh, selectedFileChange, deselect, loading, dispatch } = this.props;
+    // Group changes by fileId
     const groupedChanges = groupRevisions(changes.data);
-    const allChecked     = getToggleAllStatus(groupedChanges, changes.checked);
+    const allChecked = getToggleAllStatus(groupedChanges, changes.checked);
+
 //    ,{
 //      label: 'Filter: All Changes',
 //    },{
@@ -42,38 +45,51 @@ export default React.createClass({
     return (
       <div className="layout-column flex">
         <div className="layout-column flex">
-          <Walkthrough name="commit.commitIntro" preferPlace="right">
+          <Walkthrough
+            name="commit.commitIntro"
+            preferPlace="right"
+          >
             <FileChangeTitleRow
-              text={groupedChanges.length + ' file changes'}
-              checkbox={true}
-              value={allChecked}
-              changeAction={toggleAll}>
+              text={ `${groupedChanges.length} file changes` }
+              value={ allChecked }
+              changeAction={ toggleAll }
+              checkbox
+            >
               <Popover preferPlace="below">
                 <SimpleIconButton title="Filter changes">
-                  <MdMoreHoriz size="20px" />
+                  <MdMoreHoriz size={ 20 } />
                 </SimpleIconButton>
-                <PopoverMenuList menu={filterMenu}/>
+                <PopoverMenuList menu={ filterMenu } />
               </Popover>
             </FileChangeTitleRow>
           </Walkthrough>
-          {groupedChanges.length > 0
+          { groupedChanges.length > 0
             ? <div className="scroll-box layout-column flex">
-                {groupedChanges.map((item, idx)=><FileChangeRowContext key={item._id}
-                  item={item}
-                  text={item.data.path}
-                  clickFn={()=>{selectedFileChange({projectId: project._id, selected: item})}}
-                  isActive={changes.selected ? item._id == changes.selected._id : false}
-                  model={`changes.${project._id}.checked.${item.data.fileId}`}
-                  value={changes.checked ? changes.checked[item.data.fileId] : false}
-                  status={item.data.state}
-                  />)}
+                { groupedChanges.map((item, idx) => (
+                  <FileChangeRowContext
+                    key={ item._id }
+                    item={ item }
+                    text={ item.data.path }
+                    clickFn={ () => selectedFileChange({projectId: project._id, selected: item}) }
+                    isActive={ changes.selected ? item._id == changes.selected._id : false }
+                    model={ `changes.${project._id}.checked.${item.data.fileId}` }
+                    value={ get(changes, ['checked', item.data.fileId], false) }
+                    status={ item.data.state }
+                  />
+                  ))}
                 <div className="flex" onClick={deselect} style={{minHeight: '60px'}}></div>
               </div>
-          : <div className="layout-column layout-align-center-center text-title-4 flex">No Changes</div>}
-
+            : <div className="layout-column layout-align-center-center text-title-4 flex">No Changes</div> }
         </div>
-        <LoadingOverlay show={loading} linear={true} hideBg={true} />
-        <ContextMenu identifier={contextIdentifier} menu={FileChangeMenu(dispatch)}/>
+        <LoadingOverlay
+          show={ loading }
+          linear
+          hideBg
+        />
+        <ContextMenu
+          identifier={ contextIdentifier }
+          menu={ FileChangeMenu(dispatch) }
+        />
       </div>
     )
   }

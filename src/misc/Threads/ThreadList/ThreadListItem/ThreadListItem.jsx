@@ -102,7 +102,7 @@ export const ThreadListItem = React.createClass({
         <div className={classNames({[classes.isDragging]: thread.isDragging && draggable})}>
           <div className={classNames(classes.listItem, 'layout-row flex layout-align-start-center')}>
             <Checkbox
-              title={thread.data.complete ? 'Mark as incomplete' : 'Mark as complete'}
+              title={thread.data.complete ? 'Mark as open' : 'Mark as closed'}
               model={`${entityModel}.data.complete`}
               value={thread.data.complete}
               changeAction={this.toggleComplete}
@@ -123,7 +123,7 @@ export const ThreadListItem = React.createClass({
               : null
             }
             <div className={classes.listUser + ' layout-row layout-align-start-center text-ellipsis'}>
-              <UserAvatars users={thread.data.users} limit={3}/>
+              <UserAvatars className="layout-row" users={thread.data.users} limit={3}/>
             </div>
             <div className={classes.listDate}>
               { !thread.data.complete ? <DueDate due={thread.data.due}/> : null }
@@ -142,7 +142,7 @@ export const ThreadListItem = React.createClass({
         <div className={classNames(classes.card, 'layout-column flex')}>
           <div className={classes.cardBody + ' layout-row'}>
             <Checkbox
-              title={thread.data.complete ? 'Mark as incomplete' : 'Mark as complete'}
+              title={thread.data.complete ? 'Mark as open' : 'Mark as closed'}
               model={`${entityModel}.data.complete`}
               value={thread.data.complete}
               changeAction={this.toggleComplete}
@@ -159,7 +159,7 @@ export const ThreadListItem = React.createClass({
                 placeholder="Thread description"
               />
             </div>
-            <UserAvatars users={thread.data.users} limit={2}/>
+            <UserAvatars className="layout-row" users={thread.data.users} limit={2}/>
           </div>
           <div className={classes.cardFooter + ' layout-row layout-align-start-center'} onClick={this.showModal}>
             <div className="flex layout-row layout-align-start-center">

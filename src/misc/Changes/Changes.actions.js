@@ -16,7 +16,7 @@ export function deselect({projectId}) {
     }
   }
 }
-export function selectedFileChange({projectId, selected}) {
+export function selectedFileChange({ projectId, selected }) {
   return {
     type: 'CHANGES/SELECTED_FILE_CHANGE',
     payload: {
@@ -27,6 +27,7 @@ export function selectedFileChange({projectId, selected}) {
 }
 
 export function toggleAll({projectId, value}) {
+  console.log(value);
   return (dispatch, getState) => {
     dispatch({
       type: 'CHANGES/TOGGLE_ALL_CHANGED_FILES',

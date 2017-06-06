@@ -51,8 +51,8 @@ export const Component = React.createClass({
         <div className="flex text-ellipsis">{thread.data.name}</div>
         <Button
            className={classNames('xs', classes.button, {[classes.active] : status === 'complete'})}
-           title="Mark as Complete"
-           onClick={toggleComplete}>Complete</Button>
+           title="Mark as closed"
+           onClick={toggleComplete}>Close</Button>
         <Button
            className={classNames('xs', classes.button, {[classes.active] : status === 'related'})}
            title="Mark as related"

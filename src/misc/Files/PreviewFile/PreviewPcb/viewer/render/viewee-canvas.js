@@ -1,6 +1,6 @@
 import ViewEERenderer from './viewee-generic.js'
 import webGerberConstants from '../constants/webGerberConstants.js';
-
+import { forEach } from 'lodash'
 
 (function (root, factory) {
     if (typeof define === "function" && define.amd) {
@@ -64,7 +64,7 @@ import webGerberConstants from '../constants/webGerberConstants.js';
 		var layerCtx = this.getScope (ctx, {name: layer.name});
 		var board = this.board;
 		var layerHoles = board.plainHoles || [];
-        _.forEach(layerHoles, function(hole){
+        forEach(layerHoles, function(hole){
             ctx.globalCompositeOperation = 'xor';
             ctx.beginPath();
             ctx.arc(hole.x, hole.y, hole.drill/2, 0, 2 * Math.PI, false);
@@ -202,7 +202,7 @@ import webGerberConstants from '../constants/webGerberConstants.js';
 
 		var layerWires = this.board.plainWires[layer.number] || [];
         ctx.beginPath();
-        _.forEach(layerWires, function(wire){
+        forEach(layerWires, function(wire){
             if(wire.radius){
                 ctx.arc(wire.x, wire.y, wire.radius, wire.start, wire.start + (wire.curve / 180) * Math.PI);
             }

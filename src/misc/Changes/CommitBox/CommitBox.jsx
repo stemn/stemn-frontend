@@ -62,7 +62,7 @@ export const Component = React.createClass({
             placeholder="Summary"
           />
         </Walkthrough>
-        <div className="rel-box">
+        <div className={ classes.descriptionContainer }>
           <Editor
             placeholder="Detailed description"
             model={ `${entityModel}.body` }

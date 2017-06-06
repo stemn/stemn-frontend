@@ -49,12 +49,10 @@ export default React.createClass({
 
     const getMain = () => {
       const menu = [{
-        label: 'Refresh',
-        onClick: () => {}
-      },{
         label: 'Delete Thread',
         onClick: this.deleteThread
-      }];
+      }]
+
       return (
         <div className="layout-column flex">
           <div className={classes.header}>
@@ -78,7 +76,7 @@ export default React.createClass({
                 <SimpleIconButton>
                   <MdMoreHoriz size="20px"/>
                 </SimpleIconButton>
-                <PopoverMenuList menu={menu}/>
+                <PopoverMenuList menu={ menu } />
               </Popover>
             </div>
             <div className="text-grey-3" style={{padding: '15px 0 20px'}}>

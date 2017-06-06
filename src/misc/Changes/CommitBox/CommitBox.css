@@ -10,9 +10,9 @@
   outline: none;
   border: 1px solid rgba(0, 0, 0, 0.4);
 }
-
-.description {
-  margin-bottom: 10px;
+.descriptionContainer {
+  position: relative;
+  padding-bottom: 10px;
 }
 .description :global(.CodeMirror-sizer) {
   min-height: 80px !important;
@@ -27,6 +27,6 @@
 
 .markdownButton {
   position: absolute;
-  bottom: 2px;
+  bottom: 12px;
   right: 5px;
 }

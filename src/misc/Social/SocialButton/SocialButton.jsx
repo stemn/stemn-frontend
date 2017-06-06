@@ -45,16 +45,32 @@ export default class SocialButton extends Component {
   }
 
   componentWillMount = () => {
-    const { checkStatus, entityId, type } = this.props
-    checkStatus(entityId, type);
+    const { checkStatus, entityId, entityType, type } = this.props
+    checkStatus({
+      entityId,
+      entityType,
+      type,
+    });
   }
 
   toggle = () => {
-    const { status, type, remove, add, number, numberModel, entityId } = this.props
+    const { status, type, remove, add, number, numberModel, entityId, entityType } = this.props
     if (status) {
-      remove({ entityId, type, number, numberModel })
+      remove({
+        entityId,
+        entityType,
+        type,
+        number,
+        numberModel
+      })
     } else {
-      add({ entityId, type, number, numberModel })
+      add({
+        entityId,
+        entityType,
+        type,
+        number,
+        numberModel
+      })
     }
   }
 

@@ -1,6 +1,6 @@
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 
-export const checkStatus = (entityId, type) => (dispatch, getState) => {
+export const checkStatus = ({ entityId, entityType, type }) => (dispatch, getState) => {
   const userId = getState().auth.user._id
   if (userId) {
     dispatch({
@@ -24,7 +24,7 @@ export const checkStatus = (entityId, type) => (dispatch, getState) => {
   }
 }
 
-export const add = ({ entityId, type, number, numberModel }) => (dispatch, getState) => {
+export const add = ({ entityId, entityType, type, number, numberModel }) => (dispatch, getState) => {
   dispatch({
     // type = 'like' || 'follow'
     type: 'SOCIAL/ADD',
@@ -32,7 +32,12 @@ export const add = ({ entityId, type, number, numberModel }) => (dispatch, getSt
     http: true,
     payload: {
       method: 'PUT',
-      url: `/api/v1/users/${getState().auth.user._id}/${type}s/${entityId}`,
+      url: '/api/v1/social',
+      params: {
+        parentType: entityType,
+        parentId: entityId,
+        socialType: type,
+      },
     },
     meta: {
       entityId,
@@ -44,14 +49,19 @@ export const add = ({ entityId, type, number, numberModel }) => (dispatch, getSt
   }
 }
 
-export const remove = ({ entityId, type, number, numberModel }) => (dispatch, getState) => {
+export const remove = ({ entityId, entityType, type, number, numberModel }) => (dispatch, getState) => {
   dispatch({
     type: 'SOCIAL/REMOVE',
     auth: true,
     http: true,
     payload: {
       method: 'DELETE',
-      url: `/api/v1/users/${getState().auth.user._id}/${type}s/${entityId}`,
+      url: '/api/v1/social',
+      params: {
+        parentType: entityType,
+        parentId: entityId,
+        socialType: type,
+      },
     },
     meta: {
       entityId,
