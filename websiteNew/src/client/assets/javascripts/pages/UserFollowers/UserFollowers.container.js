@@ -11,10 +11,10 @@ const stateToProps = (state, { params, location }) => {
   const size = 30
   const userId = params.stub
   const page = parseInt(location.query.page || 1)
-  const followers = get(state, `userFollowers.${userId}.${page}`)
+  const items = get(state, `userFollowers.${userId}.${page}`)
 
   return {
-    followers,
+    items,
     page,
     pageId: `${userId}-${page}`,
     size,
