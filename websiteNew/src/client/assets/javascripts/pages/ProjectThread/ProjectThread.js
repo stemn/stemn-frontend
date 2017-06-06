@@ -25,9 +25,12 @@ import ThreadTimelineEmpty from 'stemn-shared/misc/Threads/ThreadTimelineEmpty'
 import { Breadcrumbs, Crumb } from 'stemn-shared/misc/Breadcrumbs'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton'
 import DueDate from 'stemn-shared/misc/Threads/ThreadDueDate'
+import Popover from 'stemn-shared/misc/Popover'
+import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList'
 import { permissionsIsMin } from 'stemn-shared/misc/Auth/Auth.utils'
 import { get, has } from 'lodash'
 import { Helmet } from "react-helmet"
+
 
 export default class ProjectThread extends Component {
   updateThread = () => {
@@ -36,11 +39,21 @@ export default class ProjectThread extends Component {
     }), 1);
   }
   dropdownOptions = [{
-    value: undefined,
+    value: false,
     name: 'Status: Open',
   }, {
     value: true,
     name: 'Status: Closed',
+  }]
+  menu = [{
+    label: 'Delete Thread',
+    onClick: () => {
+      const { deleteThread, thread } = this.props
+      deleteThread({
+        threadId: thread.data._id,
+        boardId: thread.data.board,
+      })
+    }
   }]
   sidebarEdit = () => {
     const { thread, project, board, threadModel } = this.props
@@ -197,9 +210,12 @@ export default class ProjectThread extends Component {
               <Crumb name="projectThreadsRoute" params={ { projectId: project.data._id } } query={ { groups: [ group._id ]} } text={ group.name } />
               <Crumb text={ thread.data.name || 'Untitled Thread' } />
             </Breadcrumbs>
-            <SimpleIconButton className={ classes.settingsButton }>
-              <MdMoreHoriz size={ 20 } />
-            </SimpleIconButton>
+            <Popover preferPlace="below">
+              <SimpleIconButton className={ classes.settingsButton }>
+                <MdMoreHoriz size="20px"/>
+              </SimpleIconButton>
+              <PopoverMenuList menu={ this.menu } />
+            </Popover>
             <br />
               <h2 className={ classes.title }>
                 { edit

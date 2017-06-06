@@ -1,22 +1,17 @@
-// Container Core
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-// Container Actions
 import * as ChangesActions from 'stemn-shared/misc/Changes/Changes.actions.js';
 import * as SyncTimelineActions from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js';
 import * as WalkthroughActions from 'stemn-shared/misc/Walkthrough/Walkthrough.actions.js';
 
-// Component Core
 import React from 'react';
 
 import i from 'icepick';
 import { has, some } from 'lodash';
 
-// Styles
 import classNames from 'classnames';
 
-// Sub Components
 import { Link }             from 'react-router';
 import ContentSidebar       from 'stemn-shared/misc/ContentSidebar';
 import LoadingOverlay       from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
@@ -233,10 +228,10 @@ function mapStateToProps({changes, projects, syncTimeline}, {params}) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    changesActions      : bindActionCreators(ChangesActions, dispatch),
-    syncTimelineActions : bindActionCreators(SyncTimelineActions, dispatch),
-    walkthroughActions  : bindActionCreators(WalkthroughActions, dispatch),
-    dispatch            : dispatch
+    changesActions: bindActionCreators(ChangesActions, dispatch),
+    syncTimelineActions: bindActionCreators(SyncTimelineActions, dispatch),
+    walkthroughActions: bindActionCreators(WalkthroughActions, dispatch),
+    dispatch,
   }
 }
 

@@ -6,6 +6,7 @@ import ProjectThread from './ProjectThread'
 
 import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
 import {
+  deleteThread,
   getBoard,
   getBoards,
   getThread,
@@ -39,6 +40,7 @@ const dispatchToProps = {
   getThread,
   updateThread,
   fetchTimeline,
+  deleteThread,
 };
 
 const fetchConfigs = [{

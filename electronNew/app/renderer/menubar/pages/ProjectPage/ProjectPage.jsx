@@ -1,20 +1,15 @@
-// Container Core
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-// Container Actions
 import * as ChangesActions  from 'stemn-shared/misc/Changes/Changes.actions.js';
 import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js';
 
-// Component Core
 import React from 'react';
 import { has } from 'lodash';
 
-// Styles
 import classNames from 'classnames'
 import classes from './ProjectPage.scss'
 
-// Sub Components
 import LoadingOverlay     from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import CommitChanges      from 'stemn-shared/misc/Changes/CommitChanges/CommitChanges.jsx';
 import CommitBox          from 'stemn-shared/misc/Changes/CommitBox/CommitBox.jsx'
@@ -45,7 +40,7 @@ export const Component = React.createClass({
       projectId: this.props.project.data._id
     })
   },
-  toggleAll(value){
+  toggleAll({value}){
     return this.props.changesActions.toggleAll({
       value,
       projectId: this.props.project.data._id
@@ -121,7 +116,7 @@ export const Component = React.createClass({
 
     return (
       <div className="layout-column flex">
-        <Toolbar menu={true}>
+        <Toolbar menu={ true }>
           <div className="flex">{project && project.data && project.data.name ? stringConcat.end(project.data.name || 'Untitled Project', 28) : ''}</div>
         </Toolbar>
         { getInnerContent() }

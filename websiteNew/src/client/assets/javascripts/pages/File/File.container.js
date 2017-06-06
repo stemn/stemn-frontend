@@ -44,6 +44,7 @@ const fetchConfigs = [{
     })
     props.fetchTimeline({
       entityType: 'file',
+      types: ['commits', 'changes'],
       entityId: props.fileId,
       cacheKey: props.cacheKey,
     })
