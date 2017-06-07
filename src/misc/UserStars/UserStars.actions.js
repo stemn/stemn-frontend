@@ -3,11 +3,13 @@ export const getUserStars = ({ userId, page = 1, size }) => ({
   http: true,
   payload: {
     method: 'GET',
-    url: `/api/v1/users/${userId}/likes`,
+    url: 'api/v1/social',
     params: {
-      type: 'user',
-      page,
+      childType: 'user',
+      childId: userId,
+      socialType: 'like',
       size,
+      page,
     }
   },
   meta: {

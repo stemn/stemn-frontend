@@ -3,9 +3,12 @@ export const getUserFollowing = ({ userId, page = 1, size }) => ({
   http: true,
   payload: {
     method: 'GET',
-    url: `/api/v1/users/${userId}/following`,
+    url: 'api/v1/social',
     params: {
-      type: 'user',
+      parentType: 'user',
+      childType: 'user',
+      childId: userId,
+      socialType: 'follow',
       size,
       page,
     }

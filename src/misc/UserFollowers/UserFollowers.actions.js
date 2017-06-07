@@ -8,9 +8,8 @@ export const getUserFollowers = ({ userId, page = 1, size }) => ({
       parentType: 'user',
       parentId: userId,
       socialType: 'follow',
-      childType: 'user',
       size,
-      page
+      page,
     }
   },
   meta: {

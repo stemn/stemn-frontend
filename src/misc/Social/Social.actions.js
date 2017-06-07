@@ -33,7 +33,7 @@ export const add = ({ entityId, entityType, type, number, numberModel }) => (dis
     payload: {
       method: 'PUT',
       url: '/api/v1/social',
-      params: {
+      data: {
         parentType: entityType,
         parentId: entityId,
         socialType: type,

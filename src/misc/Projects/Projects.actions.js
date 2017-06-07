@@ -76,7 +76,7 @@ export const createProject = (project) => (dispatch, getState) => dispatch({
   },
 })
 
-export const getUserProjects = ({ userId }) => ({
+export const getUserProjects = ({ userId }) => (dispatch, getState) => dispatch({
   type: 'PROJECTS/GET_USER_PROJECTS',
   payload: http({
     url: `/api/v1/search`,
@@ -88,6 +88,9 @@ export const getUserProjects = ({ userId }) => ({
       size: 1000,
       published: 'both',
       select: ['_id', 'picture', 'stub', 'name', 'type', 'remote', 'updated', 'blurb', 'private'],
+      criteria: {
+        private: getState().auth.user._id === userId ? 'all' : false, // Get private project is the user is us.
+      },
     },
   }),
   meta: {
