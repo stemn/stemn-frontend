@@ -9,7 +9,8 @@ import { getFileRouteName, getFileRouteParams } from 'stemn-shared/misc/FileList
 
 export default class FileBreadCrumbs extends Component {
   static defaultProps = {
-    popup: false
+    popup: false,
+    clickFn: () => {}
   }
   static propTypes = {
     popup: PropTypes.bool,
