@@ -79,10 +79,9 @@ export const Component = React.createClass({
     }
 
     const getInnerContent = () => {
-      if(project && project.data.remote.connected){
+      if (has(project, 'data.remote.connected')) {
         return getChangesAndBox();
-      }
-      else{
+      } else{
         return projectNotConnected()
       }
     }

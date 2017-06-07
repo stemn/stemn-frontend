@@ -30,7 +30,10 @@ export const create = () => {
     frame: false,
     alwaysOnTop: true,
     resizable: false,
-    skipTaskbar: true
+    skipTaskbar: true,
+    webPreferences: {
+      webSecurity: false, // TODO. Investiage security implications. This is needed for cross origin autodesk requests.
+    },
   });
 
   if (process.env.NODE_ENV === 'development') {
