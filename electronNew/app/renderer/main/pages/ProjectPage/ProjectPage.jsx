@@ -93,7 +93,7 @@ class Component extends React.Component{
           <div className="header">Private project</div>
           <div className="body" style={{paddingTop: '5px'}}>
             <div className="layout-row layout-align-center"><img src={folderLockedVector} style={{height: '80px'}}/></div>
-            <p>Your project data is private - it will not be accessible on stemn.com.</p>
+            <p>Your project data is private - it will not be publicly accessible on stemn.com.</p>
             <p>Consider open-sourcing this project or upgrading to Stemn Pro to access additional features such as infinite revision history.</p>
           </div>
           <div className="footer layout-row">
