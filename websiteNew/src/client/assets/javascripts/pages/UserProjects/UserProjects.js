@@ -9,6 +9,8 @@ export default class UserProjects extends Component {
     const { projects } = this.props
     return (
       <div>
+        <div className='text-mini-caps'>Projects</div>
+        <br />
         { orderBy(projects.data, 'updated', 'desc').map((project) => (
           <ProjectRow
             size="wide"

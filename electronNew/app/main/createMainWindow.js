@@ -32,7 +32,10 @@ export const create = function createWindow({ uri = '/' } = {}) {
       height: primarySize.height * sizeRatio,
       minWidth: 500,
       minHeight: 500,
-      frame: process.platform == 'darwin' ? true : false
+      frame: process.platform == 'darwin' ? true : false,
+      webPreferences: {
+        webSecurity: false, // TODO. Investiage security implications. This is needed for cross origin autodesk requests.
+      },
     });
 
 

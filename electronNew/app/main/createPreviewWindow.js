@@ -20,7 +20,10 @@ export const create = function createWindow({ uri = '/' } = {}) {
     height: primarySize.height * sizeRatio,
     minWidth: 1000,
     minHeight: 600,
-    frame: process.platform == 'darwin' ? true : false
+    frame: process.platform == 'darwin' ? true : false,
+    webPreferences: {
+      webSecurity: false, // TODO. Investiage security implications. This is needed for cross origin autodesk requests.
+    },
   });
 
   browserWindow.loadURL(`${mainHtml}#${uri}`);

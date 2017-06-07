@@ -12,7 +12,7 @@ export default class UserStars extends Component {
 
     return (
       <div>
-        <div className='text-mini-caps'>Project { user.data.profile.firstname } Starred</div>
+        <div className='text-mini-caps'>Projects { user.data.profile.firstname } Starred</div>
         <br/>
         <div className={ classes.panel }>
           { items && items.data
