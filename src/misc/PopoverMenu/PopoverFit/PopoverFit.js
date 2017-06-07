@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Popover from 'stemn-shared/misc/Popover'
-import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import classNames from 'classnames'
 
 export default class PopoverFit extends Component {
@@ -11,16 +10,16 @@ export default class PopoverFit extends Component {
       minWidth: 0,
     }
   }
-  getButtonRef = (ref) => {
+  getTriggerRef = (ref) => {
     if (ref) {
-      this.buttonRef = ref
+      this.triggerRef = ref
       this.setWidth()
     }
   }
   setWidth = () => {
-    if (this.buttonRef) {
+    if (this.triggerRef) {
       this.setState({
-        minWidth: this.buttonRef.clientWidth,
+        minWidth: this.triggerRef.clientWidth,
       })
     }
   }
@@ -28,7 +27,7 @@ export default class PopoverFit extends Component {
     this.setWidth()
   }
   render() {
-    const { children, max, style, className, ...otherProps } = this.props
+    const { children, max, style, ...otherProps } = this.props
     const { minWidth } = this.state
 
     const popoverStyle = {
@@ -38,9 +37,9 @@ export default class PopoverFit extends Component {
 
     return (
       <Popover preferPlace="below" tipSize={ 1 }  { ...otherProps }>
-        <Button className={ classNames('light', className) } style={ style } buttonRef={ this.getButtonRef }>
+        <div ref={ this.getTriggerRef }>
           { children[0] }
-        </Button>
+        </div>
         <div style={ popoverStyle }>
           { children[1] }
         </div>

@@ -10,6 +10,7 @@ import Calendar from '../Calendar.jsx'
 import PopoverFit from 'stemn-shared/misc/PopoverMenu/PopoverFit'
 import MdExpandMore from 'react-icons/md/expand-more'
 import MdClose from 'react-icons/md/close'
+import Button from 'stemn-shared/misc/Buttons/Button/Button'
 
 export const Component = React.createClass({
   getInitialState() {
@@ -27,7 +28,7 @@ export const Component = React.createClass({
   },
   render() {
     const { viewDate, calendarIsOpen } = this.state;
-    const { model, value, dispatch, onChange, ...otherProps } = this.props;
+    const { model, value, dispatch, onChange, className, style, ...otherProps } = this.props;
     const valueDate = value ? moment(value) : '';
     const currentTime = moment();
 
@@ -76,13 +77,13 @@ export const Component = React.createClass({
     )
     return (
       <PopoverFit max disableClickClose { ...otherProps } style={ { width: '100%' } }>
-        <div className="layout-row layout-align-start-center flex">
+        <Button className={ classNames('layout-row layout-align-start-center flex rel-box', className) } style={ style }>
           { valueDate ? valueDate.calendar() : 'Select a due date' }
           <div className="flex" />
           { valueDate &&
             <MdClose onClick={ () => this.selectDate() } style={ { marginLeft: '5px' } } size={ 12 } /> }
           <MdExpandMore style={ { marginLeft: '5px' } } size={ 15 } />
-        </div>
+        </Button>
         { content }
       </PopoverFit>
     )

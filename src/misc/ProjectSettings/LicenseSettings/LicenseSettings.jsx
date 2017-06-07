@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import Select from 'stemn-shared/misc/Input/Select'
+import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import { licenseData } from 'stemn-shared/misc/Licenses/Licenses.data'
 
 const options = licenseData.map(item => ({
-  label: item.name,
+  name: item.name,
   value: item.type,
 }))
 
@@ -26,10 +26,12 @@ export default class LicenseSettings extends Component {
       <div>
         <h3>Copyright License</h3>
         <p>Protect your work by selecting an appropriate license.</p>
-        <Select
+        <PopoverDropdown
           value={ value }
           model={ model }
           options={ options }
+          className="input"
+          style={ { width: '100%' } }
         />
         { licenseInfo && licenseInfo.description
         ? <p>{ licenseInfo.description } { getLink() }</p>

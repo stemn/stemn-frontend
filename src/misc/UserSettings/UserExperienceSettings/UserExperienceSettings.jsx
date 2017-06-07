@@ -5,7 +5,7 @@ import { range } from 'lodash'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
 import { Row, Col } from 'stemn-shared/misc/Layout'
-import Select from 'stemn-shared/misc/Input/Select'
+import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox'
 import FilledIconButton from 'stemn-shared/misc/Buttons/FilledIconButton'
 import classes from './UserExperienceSettings.css'
@@ -29,8 +29,8 @@ export default class UserExperienceSettings extends Component {
   constructor(props) {
     super(props)
     this.dateRange = range(1940, 2025).map(year => ({
+      name: year,
       value: year,
-      label: year,
     }))
   }
 
@@ -128,10 +128,10 @@ export default class UserExperienceSettings extends Component {
                   <h3>Time Period</h3>
                   <Row className="sm layout-row layout-align-start-center">
                     <Col className="sm">
-                      <Select
+                      <PopoverDropdown
                         model={ `${itemModel}.startDate.year` }
                         value={ item.startDate && item.startDate.year }
-                        className={ classes.dateInput }
+                        className={ classNames(classes.dateInput, 'input') }
                         options={ this.dateRange }
                         placeholder="Start Year"
                       />
@@ -139,10 +139,10 @@ export default class UserExperienceSettings extends Component {
                     { !item.isCurrent && <Col className="sm">to</Col> }
                     { !item.isCurrent &&
                       <Col className="sm">
-                        <Select
+                        <PopoverDropdown
                           model={ `${itemModel}.endDate.year` }
                           value={ item.endDate && item.endDate.year }
-                          className={ classes.dateInput }
+                          className={ classNames(classes.dateInput, 'input') }
                           options={ this.dateRange }
                           placeholder="End Year"
                         />

@@ -1,30 +1,16 @@
-// Container Core
-import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
-// Container Actions
-import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js';
-import * as AuthActions from 'stemn-shared/misc/Auth/Auth.actions.js';
-
-// Component
-import Select from 'react-select';
-import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { authenticate } from 'stemn-shared/misc/Auth/Auth.actions.js'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
-
-// Styles
+import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import classNames from 'classnames';
 
-/////////////////////////////////////////////////////////////////////////////
-///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-
-const Component = React.createClass({
-  onChangeFn(selectedProvider){
+class ProjectLinkRemote extends Component {
+  onChange = ({ isAuthed, authType, value }) => {
+    const { model, storeChange, authenticate } = this.props
     // If the selected provider is not authed, auth it
-    if(!selectedProvider.isAuthed(this.props.auth.user.accounts)){
-      this.props.AuthActions.authenticate(selectedProvider.authType)
+    if (!isAuthed) {
+      authenticate(authType)
 //      .then((response) => {
 //        // TODO: NEED TO FIX THIS SHIT. TOO MUCH WINE TO UNDERSTAND HOW
 //        this.props.dispatch(storeChange(this.props.model, selectedProvider.value));
@@ -35,64 +21,69 @@ const Component = React.createClass({
 //      });
     }
     // Else, we update the model straight away
-    else{
-      this.props.dispatch(storeChange(this.props.model, selectedProvider.value));
+    else {
+      storeChange(model, value)
     }
-  },
+  }
   render(){
-    const {model, value, dispatch, auth} = this.props
+    const { model, value, dispatch, auth } = this.props
 
-    var options = [
+    const options = [
       {
         value: 'dropbox',
-        label: 'Dropbox',
-        authType: 'dropbox',
-        isAuthed: (accounts) => accounts.dropbox && accounts.dropbox.id
+        name: 'Dropbox',
+        onClick: () => {
+          const accounts = auth.user.accounts
+          const isAuthed = accounts.dropbox && accounts.dropbox.id
+          this.onChange({
+            isAuthed,
+            authType: 'dropbox',
+            value: 'dropbox',
+          })
+        }
       }, {
         value: 'drive',
-        label: 'Drive',
-        authType: 'google',
-        isAuthed: (accounts) => accounts.google && accounts.google.refreshToken
-      },{
+        name: 'Drive',
+        onClick: () => {
+          const accounts = auth.user.accounts
+          const isAuthed = accounts.google && accounts.google.refreshToken
+          this.onChange({
+            isAuthed,
+            authType: 'google',
+            value: 'drive',
+          })
+        }
+      }, {
         value: undefined,
-        label: 'None',
-        authType: '',
-        isAuthed: (accounts) => true
+        name: 'None',
+        onClick: () => {
+          this.onChange({
+            isAuthed: true,
+            value: undefined,
+          })
+        }
       }
-    ];
+    ]
 
     return (
-      <div className="rel-box">
-        <LoadingOverlay show={auth.authLoading} linear={true} hideBg={true}/>
-        <Select
-          name="form-field-name"
-          value={value}
-          options={options}
-          onChange={this.onChangeFn}
-          clearable={false}
-        />
-      </div>
-    );
-  }
-});
-
-/////////////////////////////////////////////////////////////////////////////
-///////////////////////////////// CONTAINER /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-
-function mapStateToProps({auth}, {}) {
-  return {
-    auth
-  };
-}
-
-
-function mapDispatchToProps(dispatch) {
-  return {
-    ProjectsActions: bindActionCreators(ProjectsActions, dispatch),
-    AuthActions: bindActionCreators(AuthActions, dispatch),
-    dispatch: dispatch
+      <PopoverDropdown
+        value={ value }
+        options={ options }
+        style={ { width: '100%' } }
+        className="input"
+        loading={ auth.authLoading }
+      />
+    )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+const mapStateToProps = ({auth}, {}) => ({
+  auth,
+})
+
+const mapDispatchToProps = {
+  authenticate,
+  storeChange,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectLinkRemote);
