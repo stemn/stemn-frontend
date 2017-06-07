@@ -38,7 +38,7 @@ export default class ThreadFilterUser extends Component {
     ]
     return (
       <PopoverDropdown
-        className={ className }
+        classname="light"
         style={ style }
         value={ get(filter, ['object', 'user']) }
         options={ userFilterOptions }

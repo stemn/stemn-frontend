@@ -80,6 +80,7 @@ export default class NewThreadModal extends Component {
             />
             <PopoverDropdown
               options={ groupOptions }
+              classname="light"
               value={ get(board, 'newThread.group', board.data.groups[0]._id) }
               model={ `${boardModel}.newThread.group` }
             >

@@ -69,7 +69,8 @@ class ProjectLinkRemote extends Component {
       <PopoverDropdown
         value={ value }
         options={ options }
-        style={ { width: '100%', marginBottom: '15px' } }
+        style={ { width: '100%' } }
+        className="input"
         loading={ auth.authLoading }
       />
     )

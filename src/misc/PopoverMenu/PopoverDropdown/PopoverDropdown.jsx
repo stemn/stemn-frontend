@@ -9,9 +9,14 @@ import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOver
 import classNames from 'classnames'
 import classes from './PopoverDropdown.css'
 
+
+//        <Button className={ classNames('light', className) } style={ style } buttonRef={ this.getButtonRef }>
+//          { children[0] }
+//        </Button>
+
 class PopoverDropdown extends Component {
   render() {
-    const { children, options, model, value, dispatch, onChange, empty, loading, ...otherProps } = this.props
+    const { children, options, model, value, dispatch, onChange, empty, loading, className, placeholder, style, ...otherProps } = this.props
 
     const isActive = (option) => value === option.value || (!value && !option.value)
 
@@ -23,20 +28,20 @@ class PopoverDropdown extends Component {
       } else if (empty) {
         return null
       } else {
-        return 'none'
+        return placeholder || 'none'
       }
     }
 
     return (
       <PopoverFit { ...otherProps }>
-        <div className="layout-row layout-align-start-center flex rel-box">
+        <Button className={ classNames('layout-row layout-align-start-center flex rel-box light', className) } style={ style }>
           <LoadingOverlay className={ classes.loading } show={ loading } linear hideBg />
           { children }
           { getInnerText() }
           <div className="flex" />
           <MdExpandMore style={ { marginLeft: '5px' } } size={ 15 } />
-        </div>
-        <div className="PopoverMenu">
+        </Button>
+        <div className="PopoverMenu" style={ { maxHeight: '300px' } }>
           { options.map((option, idx) => {
 
             const onClick = () => {

@@ -47,6 +47,7 @@ const Component = React.createClass({
       <div>
         <PopoverDropdown
           options={ userOptionsWithEmpty }
+          classname="light"
           style={ { width: '100%', marginBottom: '15px' } }
           empty
         >
