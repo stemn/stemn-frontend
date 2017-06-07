@@ -44,6 +44,7 @@ export default class File extends Component {
     }
   }
   onSelect = (file) => {
+    console.log(file);
     const { select, cacheKey, compare: { mode, lastSelected } } = this.props
     select({ file, mode, lastSelected, cacheKey })
   }

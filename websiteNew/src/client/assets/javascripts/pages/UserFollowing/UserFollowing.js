@@ -5,19 +5,22 @@ import Pagination from 'stemn-shared/misc/Pagination'
 import UserRow from 'stemn-shared/misc/Users/UserRow'
 
 export default class UserFollowing extends Component {
-
   render() {
-    const { user, following, page, size, location } = this.props
-    const noMoreResults = following && following.data && following.data.length < size
+    const { user, items, page, size, location } = this.props
+    const noMoreResults = items && items.data && items.data.length < size
 
     return (
       <div>
         <div className='text-mini-caps'>People who follow { user.data.profile.firstname }</div>
         <br/>
         <div className={ classes.panel }>
-          { following && following.data
-          ? following.data.map((userId) => (
-            <UserRow key={ userId } userId={ userId } className={ classes.user } />
+          { items && items.data
+          ? items.data.map((userId) => (
+            <UserRow
+              key={ userId }
+              userId={ userId }
+              className={ classes.user }
+            />
           ))
           : null }
         </div>

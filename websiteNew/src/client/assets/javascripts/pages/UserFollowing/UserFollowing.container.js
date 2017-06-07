@@ -11,11 +11,10 @@ const stateToProps = (state, { params, location }) => {
   const size = 30
   const userId = params.stub
   const page = parseInt(location.query.page || 1)
-
-  const following = get(state, `userFollowing.${userId}.${page}`);
+  const items = get(state, `userFollowing.${userId}.${page}`);
 
   return {
-    following,
+    items,
     page,
     pageId: `${userId}-${page}`,
     size,
