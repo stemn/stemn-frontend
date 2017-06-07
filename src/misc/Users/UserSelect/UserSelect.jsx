@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Select from 'react-select';
 import { storeRemove,  storePush } from 'stemn-shared/misc/Store/Store.actions'
 import UserMinimalRow from 'stemn-shared/misc/Users/UserMinimalRow'
 import MdClose from 'react-icons/md/close'
@@ -66,12 +65,3 @@ const Component = React.createClass({
 });
 
 export default connect()(Component);
-//
-//        <Select
-//          name='form-field-name'
-//          value={ mappedValue }
-//          options={ userOptions }
-//          onChange={ this.onChange }
-//          clearable={ false }
-//          multi={ true }
-//        />

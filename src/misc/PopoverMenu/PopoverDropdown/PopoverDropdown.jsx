@@ -5,11 +5,13 @@ import Popover from 'stemn-shared/misc/Popover'
 import PopoverFit from 'stemn-shared/misc/PopoverMenu/PopoverFit'
 import MdExpandMore from 'react-icons/md/expand-more'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 import classNames from 'classnames'
+import classes from './PopoverDropdown.css'
 
 class PopoverDropdown extends Component {
   render() {
-    const { children, options, model, value, dispatch, onChange, empty, ...otherProps } = this.props
+    const { children, options, model, value, dispatch, onChange, empty, loading, ...otherProps } = this.props
 
     const isActive = (option) => value === option.value || (!value && !option.value)
 
@@ -27,7 +29,8 @@ class PopoverDropdown extends Component {
 
     return (
       <PopoverFit { ...otherProps }>
-        <div className="layout-row layout-align-start-center flex">
+        <div className="layout-row layout-align-start-center flex rel-box">
+          <LoadingOverlay className={ classes.loading } show={ loading } linear hideBg />
           { children }
           { getInnerText() }
           <div className="flex" />
