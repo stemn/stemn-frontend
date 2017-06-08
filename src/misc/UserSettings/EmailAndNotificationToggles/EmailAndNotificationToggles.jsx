@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { getToggleData, emailToggles, notificationToggles } from './EmailAndNotificationToggles.utils'
+import { getToggleData, emailToggles, websiteToggles } from './EmailAndNotificationToggles.utils'
 import Toggle from 'stemn-shared/misc/Input/Toggle/Toggle'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import classes from './EmailAndNotificationToggles.css'
@@ -114,7 +114,7 @@ class ToggleGroup extends Component {
 
 export default class EmailAndNotificationToggles extends Component {
   static propTypes = {
-    type: PropTypes.oneOf(['emails', 'notifications']).isRequired,
+    type: PropTypes.oneOf(['mail', 'notifications']).isRequired,
     toggleValues: PropTypes.object.isRequired,
     toggleModel: PropTypes.string.isRequired,
     saveSettings: PropTypes.func.isRequired,
@@ -122,9 +122,9 @@ export default class EmailAndNotificationToggles extends Component {
   }
   render () {
     const { toggleValues, toggleModel, change, type, saveSettings } = this.props
-    const toggles = type === 'emails'
+    const toggles = type === 'mail'
       ? emailToggles
-      : notificationToggles
+      : websiteToggles
 
     return (
       <div>
