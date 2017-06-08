@@ -7,6 +7,8 @@ git push
 echo "-------------------- Copying dist to releases repo --------------------"
 cd ../../stemn-desktop
 git pull
+rm -rf ./dist
+rm -rf ./build
 cp -r ../stemn-frontend/electronNew/dist .
 cp -r ../stemn-frontend/electronNew/build .
 cp -r ../stemn-frontend/electronNew/package.json .
