@@ -27,10 +27,10 @@ import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleI
 import DueDate from 'stemn-shared/misc/Threads/ThreadDueDate'
 import Popover from 'stemn-shared/misc/Popover'
 import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList'
+import SocialButton from 'stemn-shared/misc/Social/SocialButton'
 import { permissionsIsMin } from 'stemn-shared/misc/Auth/Auth.utils'
 import { get, has } from 'lodash'
 import { Helmet } from "react-helmet"
-
 
 export default class ProjectThread extends Component {
   updateThread = () => {
@@ -249,6 +249,12 @@ export default class ProjectThread extends Component {
                   <div>&nbsp;created this thread { moment(thread.data.created).fromNow() }.</div>
                 </div>
                 <div className="flex" />
+                <SocialButton
+                  type="follow"
+                  entityType="thread"
+                  entityId={ thread.data._id }
+                  style={ { marginLeft: '15px' } }
+                />
                 { canEdit &&
                   <PopoverDropdown
                     value={ thread.data.complete }

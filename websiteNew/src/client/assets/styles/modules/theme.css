@@ -1,5 +1,13 @@
-@value primary: rgb(68, 154, 211);
-@value primary-2: rgb(64, 129, 173);
+/*@value primary: rgb(68, 154, 211);*/
+/*@value primary-2: rgb(64, 129, 173);*/
+@value primary: #4484d3;
+@value primary-2: #3777c6;
+
+/*@value primary-bg: linear-gradient(to bottom right, #447bd3, #449ad3);*/
+/*@value primary-bg-hover: linear-gradient(to bottom right, #3d71c3, #3e86b5);*/
+@value primary-bg: #4484d3;
+@value primary-bg-hover: #3777c6;
+
 @value primaryLight1: rgba(0, 152, 255, 0.08);
 @value primaryLight2: rgba(0, 152, 255, 0.12);
 

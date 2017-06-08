@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { has } from 'lodash'
 
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import UserNameSettings from 'stemn-shared/misc/UserSettings/UserNameSettings'
@@ -6,6 +7,7 @@ import UserEmailSettings from 'stemn-shared/misc/UserSettings/UserEmailSettings'
 import UserLinkedAccountSettings from 'stemn-shared/misc/UserSettings/UserLinkedAccountSettings'
 import UserCloudProviderSettings from 'stemn-shared/misc/UserSettings/UserCloudProviderSettings'
 import UserBetaSettings from 'stemn-shared/misc/UserSettings/UserBetaSettings'
+import UserPasswordSettings from 'stemn-shared/misc/UserSettings/UserPasswordSettings'
 
 export default class SettingsAccount extends Component {
   static propTypes = {
@@ -14,9 +16,10 @@ export default class SettingsAccount extends Component {
     unlink: PropTypes.func.isRequired,
     setPrimaryEmail: PropTypes.func.isRequired,
     saveUser: PropTypes.func.isRequired,
+    passwordUpdate: PropTypes.func.isRequired,
   }
   render() {
-    const { auth, authenticate, unlink, setPrimaryEmail, saveUser } = this.props
+    const { auth, authenticate, unlink, setPrimaryEmail, saveUser, passwordUpdate } = this.props
     return (
       <div>
         <InfoPanel>
@@ -40,10 +43,19 @@ export default class SettingsAccount extends Component {
             saveUser={ saveUser }
           />
         </InfoPanel>
+        { has(auth, 'user.accounts.local.email') &&
+          <InfoPanel>
+            <UserPasswordSettings
+              auth={ auth }
+              passwordUpdate={ passwordUpdate }
+            />
+          </InfoPanel>
+        }
       </div>
     )
   }
 }
+
 //        <InfoPanel>
 //          <UserNameSettings
 //            username={ user.stub }

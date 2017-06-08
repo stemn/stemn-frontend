@@ -48,7 +48,12 @@ class User extends Component {
                 { get(user, 'data.profile.socialLinks.website') &&
                   <div className={ classes.iconInfo}>
                     <MdLink size={20} />
-                    { user.data.profile.socialLinks.website }
+                    <a
+                      href={ user.data.profile.socialLinks.website.startsWith('http') ? user.data.profile.socialLinks.website : `http://${user.data.profile.socialLinks.website}` }
+                      target="_blank"
+                    >
+                      { user.data.profile.socialLinks.website }
+                    </a>
                   </div>
                 }
                 <div className="layout-row layout-align-center">
