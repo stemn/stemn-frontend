@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
-import { getMeta, getRelatedThreads } from 'stemn-shared/misc/Files/Files.actions.js'
+import { getMeta, getMetaFromPath } from 'stemn-shared/misc/Files/Files.actions.js'
 import { show as showWindow } from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js';
 import { push as pushRoute } from 'react-router-redux'
 import { initCompare, changeMode, select } from 'stemn-shared/misc/FileCompare/FileCompare.actions'
@@ -11,19 +11,22 @@ import cloudMagnify  from 'stemn-shared/assets/images/pure-vectors/cloud-magnify
 import PreviewPage from './PreviewPage'
 
 const stateToProps = ({ files, fileCompare, syncTimeline }, { params, location }) => {
-  let { localPath, revisionId, fileId, projectId } = location.query;
-  fileId = fileId || (files.pathToId[localPath] ? files.pathToId[localPath].data : '');
-
+  const { localPath, revisionId, fileId, projectId } = location.query
+  const cacheKeyWithLocal = `${localPath}-${fileId}-${revisionId}`
+  // We use the standard cacheKey also so the data
+  // is accesible in place where we don't use localPath
   const cacheKey = `${fileId}-${revisionId}`
+  
   return {
+    localPath,
     cacheKey,
+    cacheKeyWithLocal,
     fileId,
     compare: get(fileCompare, cacheKey, {}),
-    file: files.fileMeta[cacheKey],
+    file: files.fileMeta[cacheKeyWithLocal],
     projectId,
     revisonId: revisionId || '',
     timeline: get(syncTimeline, cacheKey, {}),
-    relatedThreads: files.relatedThreads[fileId],
   }
 };
 
@@ -31,36 +34,40 @@ const dispatchToProps = {
   changeMode,
   fetchTimeline,
   getMeta,
-  getRelatedThreads,
   initCompare,
   pushRoute,
   select,
   showWindow,
+  getMetaFromPath,
 };
 
 const fetchConfigs = [{
-  hasChanged: 'cacheKey',
+  hasChanged: 'cacheKeyWithLocal',
   onChange: (props) => {
-    props.getMeta({
-      fileId: props.fileId,
-      revisionId: props.revisionId,
-      projectId: props.projectId,
-      cacheKey: props.cacheKey,
-    })
-    props.getRelatedThreads({
-      fileId: props.fileId,
-      projectId: props.projectId,
-    })
-    props.fetchTimeline({
-      entityType: 'file',
-      entityId: props.fileId,
-      cacheKey: props.cacheKey,
-    })
+    // If we have localPath, we use that to look up fileId, projectId etc
+    if (props.localPath) {
+      props.getMetaFromPath({
+        path: props.localPath,
+        cacheKey: props.cacheKeyWithLocal,
+      })
+    } else {
+      props.getMeta({
+        fileId: props.fileId,
+        revisionId: props.revisionId,
+        projectId: props.projectId,
+        cacheKey: props.cacheKeyWithLocal,
+      })
+    }
   }
 },{
   hasChanged: 'file.data.fileId',
   onChange: (props) => {
     if (get(props, 'file.data.fileId')) {
+      props.fetchTimeline({
+        entityType: 'file',
+        entityId: props.file.data.fileId,
+        cacheKey: props.cacheKey,
+      })
       props.initCompare({
         cacheKey: props.cacheKey,
         file: props.file,
@@ -68,6 +75,7 @@ const fetchConfigs = [{
     }
   }
 }]
+
 
 @connect(stateToProps, dispatchToProps)
 @fetchDataHoc(fetchConfigs)
