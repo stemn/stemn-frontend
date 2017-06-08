@@ -1,4 +1,4 @@
-@value primary from "theme";
+@value primary-bg, primary from "theme";
 
 .toggle:global(.disabled) {
   pointer-events: none;
@@ -45,7 +45,7 @@
   display: none;
 }
 .toggle input:global(.checked) + label {
-  background: primary;
+  background: primary-bg;
 }
 .toggle input:global(.checked) + label:after {
   left: 50%;

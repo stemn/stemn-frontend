@@ -1,4 +1,4 @@
-@value primary, secondary, bg1, border1 from "theme";
+@value primary-bg, secondary, bg1, border1 from "theme";
 
 .timelineRow{
   border-bottom: 1px solid border1;
@@ -12,7 +12,7 @@
 }
 
 .timelineRow.active{
-  background: primary !important;
+  background: primary-bg !important;
   color: white;
 }
 .timelineRow:hover{

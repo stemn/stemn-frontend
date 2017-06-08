@@ -21,7 +21,7 @@
   font-weight: 300;
 }
 .text-primary{
-  color: rgb(68, 154, 211);
+  color: #4484d3;
 }
 .text-subtitle-1{
   line-height: 1.6em;
@@ -47,10 +47,10 @@
   text-align: center;
 }
 .link-primary{
-  color: rgb(68, 154, 211);
+  color: #4484d3;
 }
 .link-primary:hover{
-  color: rgb(64, 129, 173)
+  color: #3777c6;
 }
 .link-grey{
   color: rgba(0, 0, 0, 0.3);

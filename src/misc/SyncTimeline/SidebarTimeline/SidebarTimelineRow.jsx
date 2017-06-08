@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import moment from 'moment';
 
 import { groupRevisions } from 'stemn-shared/misc/Timeline/Timeline.utils.js'
+import pluralise from 'stemn-shared/utils/strings/pluralise'
 
 import TogglerExpand from 'stemn-shared/misc/Toggler/TogglerExpand/TogglerExpand.jsx';
 import UserAvatar    from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx';
@@ -30,8 +31,8 @@ export default React.createClass({
             <div key={file._id}
               className={classNames(styles.timelineRow, styles.inner, 'layout-row', {[styles.active]: this.props.isActive})}
               onClick={this.props.clickFn}>
-              <div className="flex">{file.data.path}</div>
-              <div>{file.revisions.length} revisions</div>
+              <div className="flex text-ellipsis">{file.data.path}</div>
+              <div>{pluralise(file.revisions.length, 'revision')}</div>
             </div>
             )
           })

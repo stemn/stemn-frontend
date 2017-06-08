@@ -1,4 +1,4 @@
-@value primary, border1, bg1 from "theme";
+@value primary-bg, border1, bg1 from "theme";
 
 .row {
   border-bottom: 1px solid border1;
@@ -31,7 +31,7 @@
 }
 .active {
   color: white !important;
-  background: primary !important;
+  background: primary-bg !important;
 }
 
 .size {

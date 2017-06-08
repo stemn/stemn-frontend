@@ -24,7 +24,7 @@
 }
 
 .react-context-menu-link.active, .react-context-menu-link:hover{
-  background: rgb(68, 154, 211);
+  background: #4484d3;
   color: white;
 }
 .react-context-menu-item.divider{

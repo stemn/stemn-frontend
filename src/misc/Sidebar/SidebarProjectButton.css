@@ -1,4 +1,4 @@
-@value primary, secondary from "theme";
+@value primary-bg, secondary from "theme";
 
 .sidebarButton{
   display: block;
@@ -24,7 +24,7 @@
   bottom: 0;
   top: 0;
   width: 4px;
-  background: primary;
+  background: primary-bg;
 }
 .sidebarButton .text{
   padding-left: 10px;

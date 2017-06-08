@@ -1,4 +1,4 @@
-@value primary, bg1, border1, success, grey-2, warn from "theme";
+@value primary, primary-bg, bg1, border1, success, grey-2, warn from "theme";
 
 .fileChangeRow {
   border-bottom: 1px solid border1;
@@ -16,7 +16,7 @@
   background: bg1;
 }
 .active {
-  background: primary !important;
+  background: primary-bg !important;
   color: white;
 }
 .active .checkbox{

@@ -1,4 +1,4 @@
-@value primary, border1, bg1 from "theme";
+@value primary, primary-bg, border1, bg1 from "theme";
 
 .calendar {
   width: 100%;
@@ -81,7 +81,7 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  background: primary;
+  background: primary-bg;
   border-radius: 50%;
 
   transform: translate(-50%, -50%);

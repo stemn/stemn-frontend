@@ -1,4 +1,4 @@
-@value primary, border1, primaryLight1, primaryLight2, border1, bg1 from "theme";
+@value primary-bg, border1, primaryLight1, primaryLight2, border1, bg1 from "theme";
 
 .button {
   border: none;
@@ -16,7 +16,7 @@
 }
 
 .button:global(.primary) {
-  background: primary;
+  background: primary-bg;
   color: white;
 }
 

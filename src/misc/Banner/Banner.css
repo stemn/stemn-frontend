@@ -1,8 +1,8 @@
-@value primary from "theme";
+@value primary-bg from "theme";
 
 .banner{
   padding: 15px;
-  background: primary;
+  background: primary-bg;
   color: white;
   line-height: 1.4em;
 }

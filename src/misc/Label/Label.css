@@ -1,4 +1,4 @@
-@value border2, border1, bg1 from "theme";
+@value primary-bg, border2, border1, bg1 from "theme";
 
 .label{
   cursor: default;
@@ -6,7 +6,7 @@
   padding: 6px;
   line-height: 1;
   color: white;
-  background: rgb(68, 154, 211);
+  background: primary-bg;
   border-radius: 3px;
   text-transform: capitalize;
 }

@@ -1,4 +1,4 @@
-@value primary, border1, bg1, timeline-main, timeline-bg from "theme";
+@value primary-bg, border1, bg1, timeline-main, timeline-bg from "theme";
 
 /*
 .dots.small .dot{
@@ -57,7 +57,7 @@
 }
 
 .dot.active{
-  background: primary;
+  background: primary-bg;
 }
 .dot:first-child{
   margin-left: 0;

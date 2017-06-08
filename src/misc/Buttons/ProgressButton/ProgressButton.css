@@ -1,4 +1,4 @@
-@value primary, primary-2, warn, warn-2 from "theme";
+@value primary-bg, primary-bg-hover, primary, primary-2, warn, warn-2 from "theme";
 
 .progressButton {
   position: relative;
@@ -17,13 +17,15 @@
 }
 
 .progressButton button {
+  cursor: pointer;
   display: block;
   margin: 0 auto;
   padding: 0;
   width: 100%;
   height: 40px;
   border: 1px solid primary;
-  background: primary;
+/*  background: primary;*/
+  background: primary-bg;
 /*  color: primary;*/
   color: #fff;
   -webkit-tap-highlight-color: transparent;
@@ -32,7 +34,8 @@
 }
 
 .progressButton button:hover {
-  background-color: primary-2;
+  background-color: primary-bg-hover;
+/*  background-color: primary-2;*/
 }
 
 .progressButton button:focus {
@@ -43,6 +46,7 @@
   opacity: 0.4;
   background-color: primary !important;
   cursor: not-allowed;
+  pointer-events: none;
 }
 
 .progressButton button span {

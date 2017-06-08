@@ -1,4 +1,4 @@
-@value primary, primary-2, border1, secondary from "theme";
+@value primary-bg, primary-bg-hover, primary, border1, secondary from "theme";
 
 .button{
   display: block;
@@ -29,16 +29,16 @@
   bottom: 0;
   top: 0;
   width: 2px;
-  background: primary;
+  background: primary-bg;
 }
 .button:global(.active) {
   color: primary;
 }
 
 .button:global(.primary){
-  background: primary;
+  background: primary-bg;
   color: white;
 }
 .button:global(.primary):hover{
-  background: primary-2;
+  background: primary-bg-hover;
 }

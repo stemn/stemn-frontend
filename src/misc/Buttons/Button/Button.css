@@ -1,4 +1,4 @@
-@value primary, primary-2, secondary, secondary-2, warn, warn-2, grey-3, bg1, linkedin, linkedin-dark, facebook, facebook-dark from 'theme';
+@value primary-bg, primary-bg-hover, primary, primary-2, secondary, secondary-2, warn, warn-2, grey-3, bg1, linkedin, linkedin-dark, facebook, facebook-dark from 'theme';
 
 .button {
   border: none;
@@ -20,6 +20,7 @@
 .button[disabled]{
   opacity: 0.4;
   cursor: not-allowed;
+  pointer-events: none;
 }
 
 .button:global(.lg) {
@@ -66,18 +67,18 @@
 }
 
 .button:global(.primary){
-  background: primary;
+  background: primary-bg;
   border: 1px solid primary;
   color: white;
 }
 .button:global(.primary):hover{
-  background: primary-2;
+  background: primary-bg-hover;
 }
 .button:global(.primary) circle{
   stroke: white;
 }
 .button:global(.primary) :global(.overlay){
-  background: primary;
+  background: primary-bg;
 }
 
 .button:global(.input){
