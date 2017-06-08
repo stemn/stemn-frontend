@@ -48,11 +48,12 @@ const Component = React.createClass({
         <PopoverDropdown
           options={ userOptionsWithEmpty }
           classname="light"
-          style={ { width: '100%', marginBottom: '15px' } }
+          style={ { width: '100%' } }
           empty
         >
           Select Assignees
         </PopoverDropdown>
+        <br />
         { value.map((user, idx) => (
           <UserMinimalRow user={ user } noLink>
             <a onClick={ () => this.remove(idx) }>

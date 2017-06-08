@@ -30,19 +30,23 @@ export const loadSuggestions = (cacheKey) => ({ entityType, value }) => {
   } else {
     return {
       type: 'AUTO_SUGGEST/GET_SUGGESTIONS',
-      payload: http({
+      http: true,
+      payload: {
         url: '/api/v1/search',
         method: 'GET',
         params: {
           type: entityType,
-          key: 'name',
           criteria: {
             name: value && `/${value}/i`,
           },
           size: 10,
           match: 'regex',
         },
-      }),
+      },
+      throttle: {
+        time: 500,
+        endpoint: `autosuggest-${entityType}`
+      },
       meta: {
         cacheKey,
       },

@@ -5,6 +5,7 @@ const numBackgrounds = 8;
 const initialState = {
   authLoading: false,
   userLoading: false,
+  emailUpdatePending: false,
   authToken: null,
 
   projects: {
@@ -25,6 +26,7 @@ const initialState = {
   passwordSet: {
     password1: '',
     password2: '',
+    oldPassword: '',
   },
   forms: {
     // Some forms for temp data
@@ -87,6 +89,19 @@ const mainReducer = (state, action) => {
     case 'AUTH/LOGIN_REJECTED':
       return {...state,
         authLoading: false,
+      }
+
+    case 'AUTH/UPDATE_EMAIL_PENDING':
+      return {...state,
+        emailUpdatePending: true
+      }
+    case 'AUTH/UPDATE_EMAIL_FULFILLED':
+      return {...state,
+        emailUpdatePending: false,
+      }
+    case 'AUTH/UPDATE_EMAIL_REJECTED':
+      return {...state,
+        emailUpdatePending: false,
       }
 
     case 'AUTH/REGISTER_PENDING':

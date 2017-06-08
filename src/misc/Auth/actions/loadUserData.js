@@ -1,6 +1,7 @@
 import { getUserProjects } from 'stemn-shared/misc/Projects/Projects.actions.js';
 import { joinRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
 import http from 'axios';
+import logout from './logout'
 
 export default () => {
   return (dispatch) => {
@@ -16,8 +17,11 @@ export default () => {
         type: 'user',
         room: response.value.data._id
       }))
-    }).catch(error => {
-//      dispatch(logout())
+    }).catch((error) => {
+      if (error.toString().includes(401)) {
+        // If 401, we logout
+        dispatch(logout())
+      }
     })
   }
 }

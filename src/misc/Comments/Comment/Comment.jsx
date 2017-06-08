@@ -41,12 +41,12 @@ export default class Comment extends Component {
     updateComment({ comment: comment.form })
   }
   render() {
-    const { item, comment, showMeta, children, entityModel, commentsActions, style } = this.props;
+    const { commentId, comment, showMeta, children, entityModel, commentsActions, style } = this.props;
 
     if(!comment || !comment.data){
       return (
         <LoadingAnimation className={classes.comment + ' layout-column'} style={ style }>
-          <div className={classes.commentBody + ' flex'}>
+          <div id={ commentId } className={classes.commentBody + ' flex'}>
             <div className={classes.commentHeader + ' layout-row layout-align-start-center'}>
               <UserAvatar
                 size={ 25 }
@@ -70,7 +70,7 @@ export default class Comment extends Component {
     const hasReactions = !comment.editActive && comment.data.reactions && comment.data.reactions.length > 0
 
     return (
-      <div className={classes.comment + ' layout-column'} style={style}>
+      <div id={ commentId } className={classes.comment + ' layout-column'} style={style}>
         <div className={classes.commentBody + ' flex'}>
           <div className={classes.commentHeader + ' layout-row layout-align-start-center'}>
             <UserAvatar
