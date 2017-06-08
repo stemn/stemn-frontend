@@ -39,19 +39,21 @@ export const create = function createWindow({ uri = '/' } = {}) {
     });
 
 
-    function handleRedirect(e, url) {
+    // Handle Redirects
+    const handleRedirect = (e, url) => {
       if (url !== browserWindow.webContents.getURL()) {
-        e.preventDefault();
-        shell.openExternal(url);
+        e.preventDefault()
+        shell.openExternal(url)
       }
     }
+    browserWindow.webContents.on('will-navigate', handleRedirect)
+    browserWindow.webContents.on('new-window', handleRedirect)
+    
     browserWindow.loadURL(`${mainHtml}#${uri}`);
     browserWindow.on('closed', () => {
       browserWindow = null;
     });
 
-    browserWindow.webContents.on('will-navigate', handleRedirect);
-    browserWindow.webContents.on('new-window', handleRedirect);
     bindBackForward(browserWindow);
 
     if (process.env.NODE_ENV === 'development') {

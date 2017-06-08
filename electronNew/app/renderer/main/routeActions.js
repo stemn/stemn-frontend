@@ -50,3 +50,5 @@ export const userStarsRoute              = ({ userId })                        =
 
 export const webCommitRoute              = ({ commitId, projectId })           => ({ external: true, pathname: `/project/${projectId}/history/${commitId}` })
 export const webProjectRoute             = ({ projectId })                     => ({ external: true, pathname: `/project/${projectId}` })
+export const webFileRoute                = ({ projectId, fileId, revisionId }) => ({ external: true, pathname: `/files/${projectId}/${fileId}`, query: { revision: revisionId } })
+

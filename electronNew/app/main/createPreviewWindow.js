@@ -32,7 +32,15 @@ export const create = function createWindow({ uri = '/' } = {}) {
   });
   bindBackForward(browserWindow);
 
-
+  // Handle Redirects
+  const handleRedirect = (e, url) => {
+    if (url !== browserWindow.webContents.getURL()) {
+      e.preventDefault()
+      shell.openExternal(url)
+    }
+  }
+  browserWindow.webContents.on('will-navigate', handleRedirect)
+  browserWindow.webContents.on('new-window', handleRedirect)
 
   if (process.env.NODE_ENV === 'development') {
     browserWindow.openDevTools();

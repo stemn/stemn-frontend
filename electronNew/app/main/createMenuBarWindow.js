@@ -48,15 +48,15 @@ export const create = () => {
     });
   }
 
-  function handleRedirect(e, url) {
+  // Handle Redirects
+  const handleRedirect = (e, url) => {
     if (url !== browserWindow.webContents.getURL()) {
-      e.preventDefault();
-      shell.openExternal(url);
+      e.preventDefault()
+      shell.openExternal(url)
     }
   }
-
-  browserWindow.webContents.on('will-navigate', handleRedirect);
-  browserWindow.webContents.on('new-window', handleRedirect);
+  browserWindow.webContents.on('will-navigate', handleRedirect)
+  browserWindow.webContents.on('new-window', handleRedirect)
 
   browserWindow.loadURL(menuBarHtml);
   browserWindow.on('blur', () => {
