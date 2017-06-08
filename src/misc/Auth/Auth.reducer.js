@@ -6,6 +6,7 @@ const initialState = {
   authLoading: false,
   userLoading: false,
   emailUpdatePending: false,
+  updatePasswordPending: false,
   authToken: null,
 
   projects: {
@@ -102,6 +103,25 @@ const mainReducer = (state, action) => {
     case 'AUTH/UPDATE_EMAIL_REJECTED':
       return {...state,
         emailUpdatePending: false,
+      }
+
+    case 'AUTH/PASSWORD_UPDATE_PENDING':
+      return {...state,
+        updatePasswordPending: true
+      }
+    case 'AUTH/PASSWORD_UPDATE_FULFILLED':
+      return {...state,
+        updatePasswordPending: false,
+        authToken: action.payload.data.token,
+        passwordSet: {
+          password1: '',
+          password2: '',
+          oldPassword: '',
+        },
+      }
+    case 'AUTH/PASSWORD_UPDATE_REJECTED':
+      return {...state,
+        updatePasswordPending: false,
       }
 
     case 'AUTH/REGISTER_PENDING':

@@ -14,6 +14,7 @@ export default React.createClass({
     this.props.passwordUpdate({
       newPassword: this.props.auth.passwordSet.password1,
       resetToken: this.props.resetToken,
+      redirect: true,
     })
   },
   render() {
@@ -45,7 +46,7 @@ export default React.createClass({
             <div className="layout-row layout-align-start-center">
               <Link to="/settings" className="link-primary text-title-5">Back</Link>
               <div className="flex" />
-              <ProgressButton className="primary" onClick={ this.submit } disabled={ invalid }>
+              <ProgressButton className="primary" onClick={ this.submit } disabled={ invalid } loading={ auth.updatePasswordPending }>
                 Submit
               </ProgressButton>
             </div>

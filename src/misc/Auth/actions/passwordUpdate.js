@@ -1,9 +1,9 @@
 import { show as showToast } from 'stemn-shared/misc/Toasts/Toasts.actions.js'
 import { replace } from 'react-router-redux'
-import logout from './logout'
+//import logout from './logout'
 
 // Either oldPassword or resetToken is required
-export default ({ oldPassword, newPassword, resetToken }) => (dispatch) => dispatch({
+export default ({ oldPassword, newPassword, resetToken, redirect }) => (dispatch) => dispatch({
   type: 'AUTH/PASSWORD_UPDATE',
   http: true,
   payload: {
@@ -17,6 +17,8 @@ export default ({ oldPassword, newPassword, resetToken }) => (dispatch) => dispa
   }
 }).then(() => {
   dispatch(showToast({ title: 'Great, your password has been updated.' }))
-  dispatch(logout('/'))
-//  dispatch(replace('/'))
+  if (redirect) {
+    dispatch(replace('/'))
+  }
+//  dispatch(logout('/'))
 })

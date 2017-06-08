@@ -2,7 +2,6 @@ import { showModal }          from 'stemn-shared/misc/Modal/Modal.actions.js'
 import { show as toastShow }  from 'stemn-shared/misc/Toasts/Toasts.actions.js'
 import { has }                from 'lodash'
 
-
 import connectionModalName from 'stemn-shared/misc/Modal/ConnectionModal'
 import providerAccessRevokedModalName from 'stemn-shared/misc/Modal/ProviderAccessRevokedModal'
 import providerAccessErrorModalName from 'stemn-shared/misc/Modal/ProviderAccessErrorModal'

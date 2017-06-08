@@ -53,6 +53,7 @@ export default class UserPasswordSettings extends Component {
         <div className='layout-row layout-align-end'>
           <ProgressButton
             className="primary"
+            loading={ auth.updatePasswordPending }
             onClick={ this.submit }
             disabled={ invalid }
           >
