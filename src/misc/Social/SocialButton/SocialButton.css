@@ -13,6 +13,7 @@
   background: bg1;
   color: rgba(0, 0, 0, 0.6);
   border: 1px solid border1;
+  min-height: 33px;
 }
 
 .button:global(.primary) {
@@ -25,15 +26,18 @@
   font-size: 14px;
 }
 
+.button > div {
+  transition: 0.3s ease all;
+}
 .button > div:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(0, 0, 0, 0.03);
 }
 
 .main {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 6px;
+  padding: 8px;
 }
 
 .main svg {
@@ -46,7 +50,7 @@
   align-items: center;
   justify-content: center;
   color: rgba(0, 0, 0, 0.3);
-  min-width: 25px;
+  min-width: 30px;
   padding: 0 3px;
   border-left: 1px solid border1;
 }

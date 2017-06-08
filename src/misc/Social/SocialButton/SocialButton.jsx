@@ -7,7 +7,7 @@ import MdStarBorder from 'react-icons/md/star-border'
 import MdBookmark from 'react-icons/md/bookmark'
 import MdBookmarkBorder from 'react-icons/md/bookmark-outline'
 
-const getIcon = (type, status) => {
+const getIcon = (type, entityType, status) => {
   if (type === 'like') {
     return status
       ? <MdStar />
@@ -19,15 +19,29 @@ const getIcon = (type, status) => {
   }
 }
 
-const getText = (type, status) => {
+const getText = (type, entityType, status) => {
   if (type === 'like') {
     return status
       ? 'Starred'
       : 'Star'
+  } else if (type === 'follow' && entityType === 'thread') {
+    return status
+      ? 'Subscribed'
+      : 'Subscribe'
   } else if (type === 'follow') {
     return status
       ? 'Following'
       : 'Follow'
+  }
+}
+
+const getTooltip = (type, entityType, status) => {
+  if (type === 'like') {
+    return ;
+  } else if (type === 'follow' && entityType === 'thread') {
+    return 'Subscribe to notifications'
+  } else if (type === 'follow') {
+    return ''
   }
 }
 
@@ -90,9 +104,9 @@ export default class SocialButton extends Component {
     } = this.props
     return (
       <div className={ classNames(classes.button, className) } { ...otherProps }>
-        <div className={ classNames(classes.main) } onClick={ this.toggle }>
-          { getIcon(type, status) }
-          { getText(type, status) }
+        <div className={ classNames(classes.main) } onClick={ this.toggle } title={ getTooltip(type, entityType, status) }>
+          { getIcon(type, entityType, status) }
+          { getText(type, entityType, status) }
         </div>
         { number && numberModel
         ? <div className={ classes.count }>

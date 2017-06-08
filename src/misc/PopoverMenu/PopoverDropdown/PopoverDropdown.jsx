@@ -39,7 +39,7 @@ class PopoverDropdown extends Component {
           { children }
           { getInnerText() }
           <div className="flex" />
-          <MdExpandMore style={ { marginLeft: '5px' } } size={ 15 } />
+          <MdExpandMore style={ { marginLeft: '5px' } } size={ 13 } />
         </Button>
         <div className="PopoverMenu" style={ { maxHeight: '300px' } }>
           { options.map((option, idx) => {
