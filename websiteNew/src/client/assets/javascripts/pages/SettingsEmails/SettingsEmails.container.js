@@ -4,8 +4,8 @@ import { getSettings, saveSettings } from 'stemn-shared/misc/UserSettings/UserSe
 import SettingsEmails from './SettingsEmails';
 
 const stateToProps = ({ userSettings }) => ({
-  toggleValues: userSettings.data.emails,
-  toggleModel: 'userSettings.data.emails'
+  toggleValues: userSettings.data.mail,
+  toggleModel: 'userSettings.data.mail'
 })
 
 const dispatchToProps = {
