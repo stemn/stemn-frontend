@@ -11,13 +11,33 @@ import { showModal } from 'stemn-shared/misc/Modal/Modal.actions'
 import { search } from 'stemn-shared/misc/Search/Search.actions'
 import confirmAuth from 'stemn-shared/misc/Auth/actions/confirmAuth'
 
+import isUuid from 'stemn-shared/utils/isUuid.js'
+
 const filterModel = {
-  groups: 'array',
-  labels: 'array',
-  user: 'string',
-  status: 'string',
-  query: 'main',
+  groups: {
+    type: 'array',
+    validation: isUuid,
+    transform: (value) => 'group name',
+  },
+  labels: {
+    type: 'array',
+    validation: isUuid,
+    transform: (value) => 'label name',
+  },
+  user: {
+    type: 'string',
+    validation: isUuid,
+  },
+  status: {
+    type: 'string',
+    validation: () => true,
+  },
+  query: {
+    type: 'main',
+    validation: () => true,
+  },
 }
+
 
 const stateToProps = ({ projects, threads, search, stringFilter }, { params, location }) => {
   const projectId = params.stub
@@ -35,6 +55,7 @@ const stateToProps = ({ projects, threads, search, stringFilter }, { params, loc
 
   const searchCacheKey = `threads-${projectId}-${page}`
   const searchQueryKey = `${params.stub}-${page}-${JSON.stringify(filter.object)}`
+
 
   return {
     page,

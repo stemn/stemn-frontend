@@ -78,11 +78,12 @@ export default class ProjectOverview extends Component {
               </div>
               : null
             }
-            { changesCount &&
+            { changesCount && changesCount > 0 ?
               <div className='flex layout-row layout-align-start-center'>
                 <MdCompareArrows />
                 { changesCount } uncommited changes
               </div>
+              : null
             }
           </div>
         </Col>

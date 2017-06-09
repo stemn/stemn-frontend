@@ -16,10 +16,17 @@ const stateToProps = ({ projects, syncTimeline, stringFilter, threads }, { param
 
   // Setup the filter
   const filterModel = {
-    type: 'string',
-    user: 'string',
-    query: 'main',
+    type: {
+      type: 'string',
+    },
+    user: {
+      type: 'string',
+    },
+    query: {
+      type: 'main',
+    },
   }
+
   const filterDefaults = {}
   const filterCacheKey = `history-${projectId}`
   const filter = stringFilter[filterCacheKey] || getFilter(filterDefaults, filterModel, location.query)

@@ -62,6 +62,7 @@ const fetchConfigs = [{
   onChange: (props) => {
     props.fetchTimeline({
       entityId: props.threadId,
+      size: 500,
       entityType: 'thread',
     })
   }

@@ -98,6 +98,7 @@ export default class ProjectThreads extends Component {
                 className={ classes.search }
                 placeholder="Search Threads"
                 value={ filter.string }
+                filterModel={ filterModel }
                 changeAction={ this.changeInput }
               />
             </Col>
