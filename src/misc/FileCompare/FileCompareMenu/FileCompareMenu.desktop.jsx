@@ -62,9 +62,9 @@ export const Component = React.createClass({
     const viewOnline = {
       label: 'View File Online',
       onClick: () => dispatch(SystemActions.openExternal({
-        url          : `${GLOBAL_ENV.WEBSITE_URL}/test/${file1.project._id}/${file1.fileId}`,
-        params       : {
-          revisionId : file1.revisionId
+        url: `${GLOBAL_ENV.WEBSITE_URL}/files/${file1.project._id}/${file1.fileId}`,
+        params: {
+          revision: file1.revisionId
         }
       }))
     }

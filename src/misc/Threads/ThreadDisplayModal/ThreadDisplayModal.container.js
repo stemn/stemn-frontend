@@ -48,6 +48,7 @@ const fetchConfigs = [{
     props.fetchTimeline({
       entityId: props.threadId,
       entityType: 'thread',
+      size: 500,
     })
     if (!has(props, 'board.data')) {
       props.getBoard({

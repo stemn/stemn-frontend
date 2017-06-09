@@ -14,19 +14,24 @@ const AutodeskLocalViewer = React.createClass({
       this.viewer = autodeskViewerUtils.register(this.refs.cadCanvas, nextProps.linkKey);
       const filePath = `${nextProps.path}/1/model.svf`;
       const filePathWithProtocol = filePath.startsWith('http') ? filePath : `file://${filePath}`;
+
+
       const options = {
-        'env' : 'Local',
-        'document' : filePathWithProtocol,
+        env: 'Local',
+        document: filePathWithProtocol,
+        svfHeaders: {},
+      }
+
+      if (nextProps.auth.authToken) {
         // Headers for the svf requests (only required for the website)
         // This feature is a modification of the Autodesk source code
         // It will break whenever the source is updated.
         // There is a readme in the autodesk viewer folder explaining the changes
 
         // NOTE: there is some risk that the bearer token will be sent to Autodesk?
-		svfHeaders: {
-          'Authorization' : `bearer ${nextProps.auth.authToken}`,
-		},
-      };
+        options.svfHeaders.Authorization = `bearer ${nextProps.auth.authToken}`
+      }
+
       Autodesk.Viewing.Initializer(options, () => {
         this.viewer.start(options.document, options);
       });

@@ -7,11 +7,21 @@ import { get, has } from 'lodash'
 import ThreadsDisplay from './ThreadsDisplay'
 
 const filterModel = {
-  groups: 'array',
-  labels: 'array',
-  user: 'string',
-  status: 'string',
-  query: 'main',
+  groups: {
+    type: 'array',
+  },
+  labels: {
+    type: 'array',
+  },
+  user: {
+    type: 'string',
+  },
+  status: {
+    type: 'string',
+  },
+  query: {
+    type: 'main',
+  },
 }
 
 const mapStateToProps = ({ threads, projects, stringFilter }, { projectId }) => {

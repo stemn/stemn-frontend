@@ -104,7 +104,7 @@ export default class ThreadMentionModal extends Component {
           Add threads to a commit:
         </div>
         <div className={classes.header + ' layout-row layout-align-start-center'}>
-          <div className="flex">{howMany({count: countMentions(mentions, 'complete'), adj: 'complete'}, {count: countMentions(mentions, 'related'), adj: 'related'}, 'thread')}</div>
+          <div className="flex">{howMany({count: countMentions(mentions, 'complete'), adj: 'closed'}, {count: countMentions(mentions, 'related'), adj: 'related'}, 'thread')}</div>
           <SearchInput
             className={ classes.search }
             changeAction={ this.changeInput }

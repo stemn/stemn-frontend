@@ -4,10 +4,13 @@ import { load } from 'stemn-shared/misc/LazyLoading/LazyLoading.utils'
 
 export default class PreviewCadLoader extends Component {
   static propTypes = {
-    loadCode: PropTypes.func.isRequired,      // The loadCode function from the container
-    systemImport: PropTypes.func.isRequired,  // The actual system.import
+    systemImport: PropTypes.func,             // The actual system.import
     cacheKey: PropTypes.string.isRequired,    // The cachekey
-    otherModules: PropTypes.array.isRequired, // This is an array of global modules
+    otherModules: PropTypes.array,            // This is an array of global modules
+    loadCode: PropTypes.func.isRequired,      // The loadCode function from the container
+  }
+  static defaultProps = {
+    otherModules: [],
   }
   constructor(props) {
     super(props)

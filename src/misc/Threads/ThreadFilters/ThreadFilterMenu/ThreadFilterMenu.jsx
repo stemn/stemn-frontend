@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import { isFilterActive, addFilter } from 'stemn-shared/misc/StringFilter/StringFilter.utils.js';
 import classNames from 'classnames';
 
 const Item = ({ setFilter, objKey, value, filterObject, children }) => (

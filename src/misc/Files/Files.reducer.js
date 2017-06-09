@@ -112,7 +112,7 @@ function reducer(state, action) {
         data: action.payload.data.fileId,
         loading: false
       })
-      .assocIn(['fileMeta', `${action.payload.data.fileId}`], {
+      .assocIn(['fileMeta', action.meta.cacheKey], {
         data: action.payload.data,
         loading: false
       })

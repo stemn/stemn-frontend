@@ -1,4 +1,4 @@
-export default ({ path }) => {
+export default ({ path, cacheKey }) => {
   return (dispatch, getState) => {
     const providerPaths = getState().system.providerPath;
     const provider = Object.keys(providerPaths).find(provider => path.startsWith(providerPaths[provider]));
@@ -13,7 +13,7 @@ export default ({ path }) => {
           url: `/api/v1/remote/pathToId/${provider}/${pathNoSlash}`,
         },
         meta: {
-          cacheKey: path
+          cacheKey,
         }
       })
     }

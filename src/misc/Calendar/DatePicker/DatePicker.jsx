@@ -77,7 +77,7 @@ export const Component = React.createClass({
     )
     return (
       <PopoverFit max disableClickClose { ...otherProps } style={ { width: '100%' } }>
-        <Button className={ classNames('layout-row layout-align-start-center flex rel-box', className) } style={ style }>
+        <Button className={ classNames('layout-row layout-align-start-center flex rel-box light', className) } style={ { width: '100%' } }>
           { valueDate ? valueDate.calendar() : 'Select a due date' }
           <div className="flex" />
           { valueDate &&
