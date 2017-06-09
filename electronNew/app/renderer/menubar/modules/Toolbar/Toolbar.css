@@ -1,10 +1,18 @@
 @value primary-bg, border1 from "theme";
 
-.toolbar{
-  padding: 3px 5px;
+.toolbar {
   border-bottom: 1px solid border1;
   font-size: 12px;
-/*  color: rgba(0, 0, 0, 0.8);*/
   background: primary-bg;
   color: white;
+  height: 40px;
+}
+
+.toolbar button {
+  height: 40px;
+  width: 40px;
+  transition: 0.3s ease all;
+}
+.toolbar button:hover {
+  background: rgba(0, 0, 0, 0.1);
 }

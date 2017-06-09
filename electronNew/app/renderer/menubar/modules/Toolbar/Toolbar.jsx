@@ -36,13 +36,13 @@ export const Component = React.createClass({
       label: 'Preferences',
       onClick: () => dispatch(push({
         pathname: '/settings/application',
-        state: {meta : {scope: ['main']}}
+        state: { meta : { scope: ['main'] } }
       }))
     },{
       label: 'Account Settings',
       onClick: () => dispatch(push({
         pathname: '/settings/account',
-        state: {meta : {scope: ['main']}}
+        state: { meta : { scope: ['main'] } }
       }))
     },{
       label: 'Quit Stemn',
@@ -75,7 +75,7 @@ export const Component = React.createClass({
             color="white">
             <MdMoreHoriz size="20px" />
           </SimpleIconButton>
-          <PopoverMenuList menu={menuItems} />
+          <PopoverMenuList menu={ menuItems } />
         </Popover>
       </div>
     );

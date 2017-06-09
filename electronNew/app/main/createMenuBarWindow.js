@@ -7,7 +7,6 @@ import getRootPath from 'get-root-path'
 const menuBarHtml = getRootPath('/static/html/menubar.html')
 
 const WINDOW_WIDTH = 330;
-//const WINDOW_WIDTH = 600;
 const WINDOW_HEIGHT = 450;
 const HORIZ_PADDING = 15;
 const VERT_PADDING = 30;

@@ -118,8 +118,10 @@ export const Component = React.createClass({
         <Toolbar menu={ true }>
           <div className="flex">{project && project.data && project.data.name ? stringConcat.end(project.data.name || 'Untitled Project', 28) : ''}</div>
         </Toolbar>
-        { getInnerContent() }
-        <LoadingOverlay show={ project && project.loading } />
+        <div className="layout-column flex rel-box">
+          { getInnerContent() }
+          <LoadingOverlay show={ project && project.loading } />
+        </div>
       </div>
     )
   }
