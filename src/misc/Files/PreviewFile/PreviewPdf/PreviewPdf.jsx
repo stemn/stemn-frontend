@@ -19,16 +19,22 @@ const PDF = React.createClass({
   onMount(nextProps, prevProps) {
     // If the previewId changes, download a new file
     if(!prevProps || nextProps.previewId !== prevProps.previewId){
-      // Get the file data
-      nextProps.downloadFn({
-        projectId    : nextProps.fileMeta.project._id,
-        provider     : nextProps.fileMeta.provider,
-        fileId       : nextProps.fileMeta.fileId,
-        revisionId   : nextProps.fileMeta.revisionId,
-        responseType : 'path'
-      })
-      if(nextProps.fileData && nextProps.fileData.data){
-        PDFJS.getDocument(nextProps.fileData.data).then((pdf) => {
+      if (GLOBAL_ENV.APP_TYPE == 'desktop') {
+        // Get the file data
+        nextProps.downloadFn({
+          projectId    : nextProps.fileMeta.project._id,
+          provider     : nextProps.fileMeta.provider,
+          fileId       : nextProps.fileMeta.fileId,
+          revisionId   : nextProps.fileMeta.revisionId,
+          responseType : 'path'
+        })
+        if (nextProps.fileData && nextProps.fileData.data) {
+          PDFJS.getDocument(nextProps.fileData.data).then((pdf) => {
+            this.setState({ pdf })
+          })
+        }
+      } else {
+        PDFJS.getDocument(getDownloadUrl(nextProps.fileMeta)).then((pdf) => {
           this.setState({ pdf })
         })
       }

@@ -1,12 +1,13 @@
-@value primary-bg, border2, border1, bg1 from "theme";
+@value primary, border2, border1, bg1 from "theme";
 
 .label{
   cursor: default;
   display: inline-block;
-  padding: 6px;
+  padding: 5px;
+  font-size: 11px;
   line-height: 1;
-  color: white;
-  background: primary-bg;
+  color: primary;
+  border: 1px solid primary;
   border-radius: 3px;
   text-transform: capitalize;
 }

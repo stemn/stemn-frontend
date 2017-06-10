@@ -64,7 +64,7 @@ export default class TimelineItem extends Component {
             <div>
               { type === 'user'
                 ? null
-                : <b>{ item.user.name }&nbsp;</b> }
+                : <Link className="bold" name="userRoute" params={ userRouteParams }>{ item.user.name }&nbsp;</Link> }
               <span className={ classes.item }>
                 <TimelineItemText item={ item } type={ type } entity={ entity } /> - { moment(item.timestamp).fromNow() }
               </span>

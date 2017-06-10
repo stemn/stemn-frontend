@@ -5,6 +5,23 @@ import { showModal, showConfirm } from '../Modal/Modal.actions.js';
 import { get }               from 'lodash';
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import threadLabelsEditModalName from 'stemn-shared/misc/Threads/ThreadLabelsEditModal'
+import { addEvent, deleteEvent } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
+
+//        return dispatch(addEvent({
+//          cacheKey: timelineCacheKey,
+//          event: {
+//            event: 'comment',
+//            timestamp: value.data.timestamp,
+//            user: {
+//              name: currentUser.name,
+//              _id: currentUser._id,
+//              picture: currentUser.picture,
+//            },
+//            data: {
+//              comment: value.data._id
+//            }
+//          }
+//        }))
 
 export function newThread({ projectId, thread }) {
   return (dispatch, getState) => {
@@ -109,8 +126,8 @@ export function getThread({threadId}) {
   }
 }
 
-export function updateThread({thread}) {
-  return {
+export const updateThread = ({ thread }) => (dispatch, getState) => {
+  return dispatch({
     type: 'THREADS/UPDATE_TASK',
     http: true,
     throttle: {
@@ -125,7 +142,7 @@ export function updateThread({thread}) {
     meta: {
       cacheKey: thread._id
     }
-  }
+  })
 }
 
 export function getGroup({boardId, groupId}) {

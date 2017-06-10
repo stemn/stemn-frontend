@@ -48,7 +48,7 @@ export default class extends React.Component{
         <UserAvatar picture={item.picture} size={40}/>
         <div className="flex" style={{marginLeft: '15px'}}>
           <div className="text-bold" style={ { marginBottom: '5px' } }>{item.name}</div>
-          <div className="text-description-1">{ getPermissions().description }</div>
+          <div className="text-description-1">{ getPermissions(role).description }</div>
         </div>
 
         {!item.owner

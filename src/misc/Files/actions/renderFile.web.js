@@ -9,18 +9,34 @@ export default ({projectId, fileId, revisionId, provider, timestamp}) => (dispat
     type: 'render'
   }))
   // The cache key is used as the renderId/roomId
+//  dispatch({
+//    type: 'FILES/RENDER_FILE',
+//    http: true,
+//    payload: {
+//      url: projectId
+//        ? `/api/v1/sync/render/${projectId}/${fileId}`
+//        : `/api/v1/remote/render/${provider}/${fileId}`,
+//      params: {
+//        revisionId,
+//        timestamp,
+//        roomId: cacheKey
+//      },
+//    },
+//    meta: {
+//      cacheKey,
+//    }
+//  })
   dispatch({
     type: 'FILES/RENDER_FILE',
-    http: true,
+    websocket: true,
     payload: {
-      url: projectId
-        ? `/api/v1/sync/render/${projectId}/${fileId}`
-        : `/api/v1/remote/render/${provider}/${fileId}`,
-      params: {
-        revisionId,
-        timestamp,
-        roomId: cacheKey
-      },
+      type: 'RENDER/RENDER_FILE',
+      payload: {
+         fileId,
+         revisionId,
+         timestamp,
+         roomId: cacheKey,
+      }
     },
     meta: {
       cacheKey,

@@ -51,5 +51,4 @@ export const getAllThreads = (boardGroups) =>{
   let threads = [];
   boardGroups.forEach(group => threads = threads.concat(group.threads))
   return threads;
-};
-
+}
