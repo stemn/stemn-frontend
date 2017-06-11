@@ -52,7 +52,7 @@ export default class AutosuggestWrapped extends Component {
   
   renderSuggestion = (suggestion, { query }) => {
     if (suggestion.noResult) {
-      return this.props.renderNoResult(suggestion, { query })
+      return this.props.renderNoResult ? this.props.renderNoResult(suggestion, { query }) : <div>No Result</div>
     } else {
       return this.props.renderResult(suggestion, { query })
     }
