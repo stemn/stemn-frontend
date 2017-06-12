@@ -11,9 +11,8 @@ import MdMoreHoriz         from 'react-icons/md/more-horiz';
 import Popover             from 'stemn-shared/misc/Popover';
 import SidebarTimelineRow  from './SidebarTimelineRow'
 import SimpleIconButton    from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
-import { Link }            from 'react-router';
+import Link from 'stemn-shared/misc/Router/Link';
 import { every }           from 'lodash';
-
 
 const eventFilter = [{
   text: 'Filter: Revisions',
@@ -25,8 +24,6 @@ const eventFilter = [{
   text: 'Filter: All',
   value: ''
 }];
-
-///////////////////////////////// COMPONENT /////////////////////////////////
 
 export default React.createClass({
   filterItems(items, fullQuery){
@@ -49,7 +46,10 @@ export default React.createClass({
     }
   },
   render() {
-    const { selected, items, loading, onSelect, query, queryModel, refresh, deselect, toChanges } = this.props;
+    const { projectId, items, loading, query, queryModel, refresh } = this.props;
+    const routeParams = {
+      projectId,
+    }
 
     const filteredItems = this.filterItems(items, query);
     return (
@@ -67,21 +67,19 @@ export default React.createClass({
         {
           filteredItems && filteredItems.length > 0
           ? (
-          <div className="scroll-box layout-column flex">
-            <div>
-               {filteredItems.map(item=>
-                <SidebarTimelineRow
-                  item={item}
-                  key={item._id}
-                  isActive={item._id == selected}
-                  clickFn={()=>onSelect(item)}
-                />
-              )}
+            <div className="scroll-box layout-column flex">
+              <div>
+                 {filteredItems.map(item=>
+                  <SidebarTimelineRow
+                    item={item}
+                    key={item._id}
+                  />
+                )}
+              </div>
+              <Link name="projectCommitsRoute" params={ routeParams } className="flex" style={{minHeight: '60px'}}></Link>
             </div>
-            <div className="flex" onClick={deselect} style={{minHeight: '60px'}}></div>
-          </div>
           )
-          : <div className="layout-column layout-align-center-center text-title-4 flex">Your commits will show here.<br/><Link className="link-primary" to={toChanges}>Create your first commit.</Link></div>
+          : <div className="layout-column layout-align-center-center text-title-4 flex">Your commits will show here.<br/><Link className="link-primary" name="projectChangesRoute" params={ routeParams }>Create your first commit.</Link></div>
         }
         <LoadingOverlay show={loading} linear={true} hideBg={true} />
       </div>

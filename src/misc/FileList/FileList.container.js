@@ -32,7 +32,7 @@ const fetchConfigs = [{
 }, {
   hasChanged: 'fileList.query',
   onChange: (props) => {
-    if (props.fileList.query && props.fileList.query.length > 1) {
+    if (props.fileList.query && props.fileList.query.length > 0) {
       props.getSearchResults({
         folderId: props.path,
         query: props.fileList.query,

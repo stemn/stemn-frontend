@@ -114,6 +114,7 @@ export default class FileList extends Component {
           singleClick={ singleClickFn }
           doubleClick={ doubleClickFn }
           isActive= {selected && selected.fileId == file.fileId }
+          showPath
         />
       ))
     } else if (isLoading === false){

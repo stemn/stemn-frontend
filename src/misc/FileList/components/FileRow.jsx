@@ -45,6 +45,7 @@ export default class FileRow extends Component {
     query: PropTypes.string,
     isActive: PropTypes.bool,
     link: PropTypes.bool,
+    showPath: PropTypes.bool,
   }
   singleClick = () => {
     const { singleClick, file } = this.props
@@ -59,7 +60,7 @@ export default class FileRow extends Component {
     }
   }
   render() {
-    const { isActive, file, query, link } = this.props;
+    const { isActive, file, query, link, showPath } = this.props;
 
     const timeFromNow = moment(file.modified).fromNow();
 
@@ -82,7 +83,7 @@ export default class FileRow extends Component {
           >
             <Highlight
               className={ classes.name }
-              text={ file.name }
+              text={ showPath ? ( file.path || file.name ) : file.name }
               query={ query }
             />
           </ClickFile>
@@ -94,7 +95,7 @@ export default class FileRow extends Component {
               params={ { projectId: file.project._id, commitId: file.commit._id } }
               className={ classNames(classes.commit, classes.clickable, 'link-primary text-ellipsis') }
             >
-            {file.commit.name}
+            { file.commit.name }
             </Link>
           </div>
         : null }

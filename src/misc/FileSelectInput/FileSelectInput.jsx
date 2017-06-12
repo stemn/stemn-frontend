@@ -32,7 +32,9 @@ const FileSelectInput = React.createClass({
         projectId: this.props.projectId,
         model: this.props.model,
         path: this.props.value.fileId,
-        storeKey: this.props.model, // We use the model as the storekey
+        storeKey: `${this.props.model}-${this.props.provider}`,
+        // We use the model + provider as the storekey.
+        // This means items from the last provider don't show in the modal.
         options: {
           allowFolder : true,
           foldersOnly : true,

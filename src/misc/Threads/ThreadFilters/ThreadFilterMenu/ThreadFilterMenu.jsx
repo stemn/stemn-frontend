@@ -4,7 +4,7 @@ import classNames from 'classnames';
 const Item = ({ setFilter, objKey, value, filterObject, children }) => (
   <a
     onClick={ () => setFilter({ [objKey]: value }) }
-    className={ filterObject[objKey] === value ? 'active' : '' }
+    className={ filterObject && filterObject[objKey] === value ? 'active' : '' }
   >
     { children }
   </a>

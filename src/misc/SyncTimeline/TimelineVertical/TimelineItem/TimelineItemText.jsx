@@ -134,31 +134,33 @@ const eventTextMap = {
       )
   },
   commit: (item, type, entity) => {
+    const commit = get(item, 'data.commit', {})
+    const project = get(item, 'data.project', {})
     const params = {
-      projectId: get(item, 'data.project._id'),
-      commitId: item._id
+      projectId: project._id,
+      commitId: commit._id
     }
     if (type === 'file') {
       return (
         <span>
           added this file to commit:
-          <Link name="commitRoute" params={ params }>{ item.data.name }</Link>
+          <Link name="commitRoute" params={ params }>{ commit.name }</Link>
         </span>
       )
     } else if (type === 'feed') {
       return (
         <span>
           added a commit
-          <Link name="commitRoute" params={ params }>{ item.data.name }</Link>
+          <Link name="commitRoute" params={ params }>{ commit.name }</Link>
           to
-          <Link name="projectRoute" params={ params }>{ item.data.project.name || 'Untitled Project' }</Link>
+          <Link name="projectRoute" params={ params }>{ project.name || 'Untitled Project' }</Link>
         </span>
       )
     } else if (type === 'project' || type === 'user') {
       return (
         <span>
           added a commit
-          <Link name="commitRoute" params={ params }>{ item.data.name }</Link>
+          <Link name="commitRoute" params={ params }>{ commit.name }</Link>
           containing { pluralise(item.data.items.length, 'revision') }
         </span>
       )
@@ -166,7 +168,7 @@ const eventTextMap = {
       return (
         <span>
           referenced this thread in commit
-          <Link name="commitRoute" params={ params }>{ item.data.name }</Link>
+          <Link name="commitRoute" params={ params }>{ commit.name }</Link>
         </span>
       )
     }
