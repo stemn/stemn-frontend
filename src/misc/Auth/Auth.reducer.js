@@ -69,11 +69,17 @@ const mainReducer = (state, action) => {
       }
     case 'AUTH/POST_AUTHENTICATE_FULFILLED':
       return {...state,
+        authToken: action.payload.data.token,
         authLoading: false
       }
     case 'AUTH/POST_AUTHENTICATE_REJECTED':
       return {...state,
         authLoading: false
+      }
+
+    case 'AUTH/GET_TOKEN_FULFILLED':
+      return {...state,
+        authToken: action.payload.data.token,
       }
 
     case 'AUTH/UNLINK_FULFILLED':
@@ -86,6 +92,7 @@ const mainReducer = (state, action) => {
     case 'AUTH/LOGIN_FULFILLED':
       return {...state,
         authLoading: false,
+        authToken: action.payload.data.token,
       }
     case 'AUTH/LOGIN_REJECTED':
       return {...state,
@@ -131,6 +138,7 @@ const mainReducer = (state, action) => {
     case 'AUTH/REGISTER_FULFILLED':
       return {...state,
         authLoading: false,
+        authToken: action.payload.data.token,
       }
     case 'AUTH/REGISTER_REJECTED':
       return {...state,

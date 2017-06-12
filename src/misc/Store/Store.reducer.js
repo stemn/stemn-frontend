@@ -1,10 +1,12 @@
 import i from 'icepick'
-import { toPath } from 'lodash'
+import { toPath, mapValues } from 'lodash'
 
 export default (state = {}, action = {}) => {
   switch (action.type) {
     case 'STORE/CHANGE':
-      return i.assocIn(state, toPath(action.payload.model), action.payload.value)
+      return action.payload.model.length > 0
+        ? i.assocIn(state, toPath(action.payload.model), action.payload.value)
+        : undefined
     case 'STORE/LOAD':
       return i.assocIn(state, toPath(action.payload.model), action.payload.value)
     case 'STORE/PUSH':

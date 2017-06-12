@@ -1,4 +1,3 @@
-import setAuthToken from './setAuthToken'
 import loadUserData from './loadUserData'
 import { getSettings } from 'stemn-shared/misc/UserSettings/UserSettings.actions.js'
 
@@ -14,6 +13,5 @@ export default (token) => (dispatch) => dispatch({
     }
   }
 }).then(({ value }) => {
-    dispatch(setAuthToken(value.data.token))
-    return Promise.all([dispatch(loadUserData()), dispatch(getSettings())])
+  setTimeout(() => Promise.all([dispatch(loadUserData()), dispatch(getSettings())]), 1)
 })

@@ -1,8 +1,6 @@
-import http from 'axios';
 import loadUserData from './loadUserData';
-import setAuthToken from './setAuthToken';
 import { getSettings } from 'stemn-shared/misc/UserSettings/UserSettings.actions.js'
-
+import http from 'axios'
 
 export default ({email, password}) => {
   return (dispatch) => {
@@ -13,12 +11,11 @@ export default ({email, password}) => {
         method: 'POST',
         data: {
           email,
-          password
+          password,
         }
       })
     }).then(({ value })=>{
-      dispatch(setAuthToken(value.data.token))
-      return Promise.all([dispatch(loadUserData()), dispatch(getSettings())])
+      setTimeout(() => Promise.all([dispatch(loadUserData()), dispatch(getSettings())]), 1)
     })
   }
 }

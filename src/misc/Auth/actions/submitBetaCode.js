@@ -15,8 +15,7 @@ export default (code) => {
         }
       })
     }).then(response => {
-      dispatch(loadUserData());
-      dispatch(getSettings());
+      setTimeout(() => Promise.all([dispatch(loadUserData()), dispatch(getSettings())]), 1)
       dispatch(showToast({ title: `Beta access granted. Welcome to the Stemn Desktop Beta!`}));
     })
   }
