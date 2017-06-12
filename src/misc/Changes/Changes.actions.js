@@ -7,6 +7,7 @@ import i                     from 'icepick';
 import http                  from 'axios';
 import { get }               from 'lodash';
 import ThreadMentionModalName from 'stemn-shared/misc/Mentions/ThreadMentionModal'
+import { filterSelectedChangesByPossible } from './Changes.utils.js'
 
 export function deselect({projectId}) {
   return {
@@ -27,7 +28,6 @@ export function selectedFileChange({ projectId, selected }) {
 }
 
 export function toggleAll({projectId, value}) {
-  console.log(value);
   return (dispatch, getState) => {
     dispatch({
       type: 'CHANGES/TOGGLE_ALL_CHANGED_FILES',
@@ -96,10 +96,11 @@ export function mentionThreads({projectId, mentions}) {
 
 export function commit({projectId, name, body}) {
   return (dispatch, getState) => {
-    const changes = getState().changes[projectId];
+    const changes = getState().changes[projectId]
+    const possibledSelected = filterSelectedChangesByPossible(changes.data, changes.checked)
 
     // Get the revisions from the selected files
-    const revisions = changes.data.filter(item => changes.checked[item.data.fileId]).map((item)=>item._id);
+    const revisions = changes.data.filter((item) => possibledSelected[item.data.fileId]).map((item) => item._id);
 
     dispatch({
       type: 'CHANGES/COMMIT',

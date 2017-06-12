@@ -15,7 +15,7 @@ import Walkthrough from 'stemn-shared/misc/Walkthrough/Walkthrough.jsx'
 
 // Functions
 import { groupRevisions } from 'stemn-shared/misc/Timeline/Timeline.utils.js'
-import { getToggleAllStatus } from '../Changes.utils.js'
+import { getToggleAllStatus, filterSelectedChangesByPossible } from '../Changes.utils.js'
 import { has, get } from 'lodash'
 
 // Styles
@@ -30,13 +30,9 @@ export default React.createClass({
     const { changes, project, toggleAll, refresh, selectedFileChange, deselect, loading, dispatch } = this.props;
     // Group changes by fileId
     const groupedChanges = groupRevisions(changes.data);
-    const allChecked = getToggleAllStatus(groupedChanges, changes.checked);
+    const possibleGroupedChanges = filterSelectedChangesByPossible(groupedChanges, changes.checked)
+    const allChecked = getToggleAllStatus(groupedChanges, possibleGroupedChanges)
 
-//    ,{
-//      label: 'Filter: All Changes',
-//    },{
-//      label: 'Filter: My Changes',
-//    },
     const filterMenu = [{
       label: 'Refresh',
       onClick: refresh
