@@ -1,7 +1,4 @@
-import getUuid from 'stemn-shared/utils/getUuid.js'
-import http from 'axios'
-
-export default ({projectId, fileId, revisionId, provider, timestamp}) => {
+export default ({ projectId, fileId, revisionId, provider, timestamp }) => {
   // When we are on web (and we know the render is complete)
   // we set the render path to the store instead of downloading it.
   const cacheKey = timestamp ? `${fileId}-${revisionId}-${timestamp}` : `${fileId}-${revisionId}`;

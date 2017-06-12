@@ -81,26 +81,22 @@ This will check if a file exists in the cache, if it
 does, we return it. Otherwise we download it, save it
 and then return it.
 
-This also supports passing in a 'renderUrl' which will
-be queried before the download progresses.
 *******************************************************/
-export const get = ({key, url, params, name, responseType, extract, onProgressAction, renderUrl}) => {
+export const get = ({ key, url, params, name, responseType, extract, onProgressAction }) => {
 
   // This will process and return the result based on the 'responseType' indicated
   const processResult = (response) => {
     // Return either the file data or the file path
     // depending on the 'responseType'
-    if(responseType == 'path'){
+    if (responseType == 'path') {
       const filePath = path.join(folderPath, fileCache[key].name);
       return { data: filePath }
-    }
-    else{
+    } else {
       return fsPromise.readFile(path.join(folderPath, fileCache[key].name)).then(response => {
-        if(responseType == 'json'){
+        if (responseType == 'json') {
           // Return string
           return { data: response.toString() }
-        }
-        else{
+        } else {
           // Default: Return ArrayBuffer
           return { data: response }
         }
@@ -108,21 +104,8 @@ export const get = ({key, url, params, name, responseType, extract, onProgressAc
     }
   }
 
-  const getFile = () => {
-    // If there is a render url, we check the render.status, otherwise we just download directly
-    if(!renderUrl){
-      return downloadToDiskAndSave({key, url, params, name, extract, onProgressAction}).then(processResult)
-    }
-    else{
-      return http({url: renderUrl, params}).then(response => {
-        // If render.status is pending, we do not download the file, we just submit a render request
-        // The file download will be handled by websocket
-        return response && response.data && response.data.status == 'pending'
-        ? response
-        : downloadToDiskAndSave({key, url, params, name, extract, onProgressAction}).then(processResult)
-      })
-    }
-  }
+  const getFile = () => downloadToDiskAndSave({key, url, params, name, extract, onProgressAction})
+    .then(processResult)
 
   // If we have a cache entry, get the file
   return fileCache[key]

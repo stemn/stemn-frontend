@@ -30,20 +30,20 @@ function reducer(state, action) {
     case 'FILES/GET_FILE_PROGRESS':
       return i.assocIn(state, ['fileData', action.meta.cacheKey, 'percentage'], action.payload.percentage)
 
-    case 'FILES/RENDER_FILE_PENDING' :
-      return i.assocIn(state, ['fileRenders', action.meta.cacheKey, 'loading'], true)
-    case 'FILES/RENDER_FILE_REJECTED' :
-      return i.assocIn(state, ['fileRenders', action.meta.cacheKey], {
-        error: action.payload.response.data.error,
-        loading: false
-      })
-    case 'FILES/RENDER_FILE_FULFILLED' :
-      const isRenderRequest = action.payload.data && action.payload.data.status;
-      // If this was a render request, we do nothing - we wait for the websocket event to trigger the download
-      return isRenderRequest ? state : i.assocIn(state, ['fileRenders', action.meta.cacheKey], {
-        data: action.payload.data,
-        loading: false
-      })
+//    case 'FILES/RENDER_FILE_PENDING' :
+//      return i.assocIn(state, ['fileRenders', action.meta.cacheKey, 'loading'], true)
+//    case 'FILES/RENDER_FILE_REJECTED' :
+//      return i.assocIn(state, ['fileRenders', action.meta.cacheKey], {
+//        error: action.payload.response.data.error,
+//        loading: false
+//      })
+//    case 'FILES/RENDER_FILE_FULFILLED' :
+//      const isRenderRequest = action.payload.data && action.payload.data.status;
+//      // If this was a render request, we do nothing - we wait for the websocket event to trigger the download
+//      return isRenderRequest ? state : i.assocIn(state, ['fileRenders', action.meta.cacheKey], {
+//        data: action.payload.data,
+//        loading: false
+//      })
     case 'FILES/RENDER_FILE_DOWNLOAD_PENDING' :
       return i.assocIn(state, ['fileRenders', action.meta.cacheKey, 'loading'], true)
     case 'FILES/RENDER_FILE_DOWNLOAD_REJECTED' :

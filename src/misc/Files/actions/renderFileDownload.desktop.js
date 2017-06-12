@@ -1,4 +1,4 @@
-export default ({projectId, fileId, revisionId, provider, timestamp}) => {
+export default ({ projectId, fileId, revisionId, provider, timestamp }) => {
   const cacheKey = timestamp ? `${fileId}-${revisionId}-${timestamp}` : `${fileId}-${revisionId}`;
   return {
     type: 'FILES/RENDER_FILE_DOWNLOAD',
