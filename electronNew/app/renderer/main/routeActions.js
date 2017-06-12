@@ -8,7 +8,7 @@ const showThreadModal = ({ threadId }) => showModal({
   },
 })
 
-export const commitRoute                 = ({ commitId, projectId })           => ({ scope: 'main', show: true, pathname: `/project/${projectId}/feed?item=${commitId}`})
+export const commitRoute                 = ({ commitId, projectId })           => ({ scope: 'main', show: true, pathname: `/project/${projectId}/feed/commit/${commitId}`})
 export const contactRoute                = ()                                  => ({ external: true, pathname: `/contact` })
 export const downloadRoute               = ()                                  => ({ external: true, pathname: `/download` })
 export const exploreRoute                = ()                                  => ({ external: true, pathname: `/explore` })
@@ -26,7 +26,8 @@ export const organisationRoute           = ({ organisationId })                =
 export const passwordLostRoute           = ()                                  => ({ external: true, pathname: '/password-lost' })
 export const pricingRoute                = ()                                  => ({ external: true, pathname: `/pricing` })
 export const privacyRoute                = ()                                  => ({ external: true, pathname: `/privacy` })
-export const projectCommitsRoute         = ({ projectId })                     => `/project/${projectId}/history`
+export const projectChangesRoute         = ({ projectId })                     => `/project/${projectId}/changes`
+export const projectCommitsRoute         = ({ projectId })                     => `/project/${projectId}/feed`
 export const projectFilesRoute           = ({ projectId })                     => `/project/${projectId}/files`
 export const projectFolderRoute          = ({ projectId, fileId })             => `/project/${projectId}/files/${fileId || ''}`
 export const projectRoute                = ({ projectId })                     => `/project/${projectId}`

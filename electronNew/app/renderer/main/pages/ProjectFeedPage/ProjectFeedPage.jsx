@@ -20,28 +20,8 @@ import SidebarTimeline          from 'stemn-shared/misc/SyncTimeline/SidebarTime
 import ContentSidebar           from 'stemn-shared/misc/ContentSidebar';
 import Guide                    from 'stemn-shared/misc/Guide/Guide';
 import Button                   from 'stemn-shared/misc/Buttons/Button/Button'
-import ProjectFeedPageCommit    from './ProjectFeedPageCommit/ProjectFeedPageCommit.jsx'
-import ProjectFeedPageRevision  from './ProjectFeedPageRevision/ProjectFeedPageRevision.jsx'
-import timeline                 from 'stemn-shared/assets/images/pure-vectors/timeline.svg';
+import timelineImg              from 'stemn-shared/assets/images/pure-vectors/timeline.svg';
 import cloudProviders           from 'stemn-shared/assets/images/illustrations/cloud-providers.svg'
-
-
-///////////////////////////////// COMPONENT /////////////////////////////////
-
-const eventComponentMap = {
-  commit   : (item, project) => (<ProjectFeedPageCommit item={item} project={project}/>),
-  revision : (item, project) => (<ProjectFeedPageRevision item={item} project={project}/>),
-}
-
-const getEventComponent = (item, project) => {
-  return item && item.event && eventComponentMap[item.event]
-    ? eventComponentMap[item.event](item, project)
-    : (
-    <div className="layout-column layout-align-center-center flex text-title-4 text-center">
-      <img src={timeline} style={{width: '100px'}}/>
-      <div>No commit selected.</div>
-    </div>)
-};
 
 export const Component = React.createClass({
 
@@ -57,28 +37,9 @@ export const Component = React.createClass({
         })
       }
     }
-    if(has(nextProps, 'location.query.item')){
-      if(!has(prevProps, 'location.query.item') || nextProps.location.query.item != prevProps.location.query.item){
-        const itemFromQueryParams = this.props.timeline.data.find(item => item._id == nextProps.location.query.item);
-        if (itemFromQueryParams) {this.selectTimelineItem(itemFromQueryParams)}
-      }
-    }
   },
   componentWillMount() { this.onMount(this.props) },
   componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
-
-  selectTimelineItem(item){
-    this.props.syncTimelineActions.selectTimelineItem({
-      projectId: this.props.project.data._id,
-      selected : item
-    })
-  },
-
-  deselect(){
-    this.props.syncTimelineActions.deselect({
-      projectId: this.props.project.data._id
-    })
-  },
 
   refresh(){
     this.props.syncTimelineActions.fetchTimeline({
@@ -90,7 +51,7 @@ export const Component = React.createClass({
   },
 
   render(){
-    const { timeline, timelineModel, project, location } = this.props;
+    const { timeline, timelineModel, project, location, children } = this.props;
     const baseLink = `project/${project && project.data ? project.data._id : ''}`
 
     if(project.data.remote.connected){
@@ -100,20 +61,23 @@ export const Component = React.createClass({
             <div className="layout-column">
               <ContentSidebar className="flex">
                 <SidebarTimeline
-                  items={timeline && timeline.data ? timeline.data : []}
-                  selected={timeline && timeline.selected ? timeline.selected._id : ''}
-                  onSelect={this.selectTimelineItem}
-                  loading={timeline && timeline.loading}
-                  query={timeline && timeline.query ? timeline.query : ''}
-                  queryModel={`${timelineModel}.query`}
-                  refresh={this.refresh}
-                  deselect={this.deselect}
-                  toChanges={baseLink}
+                  items={ timeline && timeline.data ? timeline.data : [] }
+                  loading={ timeline && timeline.loading }
+                  query={ timeline && timeline.query ? timeline.query : '' }
+                  queryModel={ `${timelineModel}.query` }
+                  refresh={ this.refresh }
+                  projectId={ project.data._id }
                 />
               </ContentSidebar>
             </div>
             <div className="layout-column flex">
-              {getEventComponent(timeline && timeline.selected ? timeline.selected : '', project)}
+              { children
+                ? children
+                : <div className="layout-column layout-align-center-center flex text-title-4 text-center">
+                    <img src={ timelineImg } style={ { width: '100px' } }/>
+                    <div>No commit selected.</div>
+                  </div>
+              }
             </div>
           </div>
         </div>
@@ -136,8 +100,6 @@ export const Component = React.createClass({
     }
   }
 })
-
-///////////////////////////////// CONTAINER /////////////////////////////////
 
 function mapStateToProps({syncTimeline, projects}, {params}) {
   const project = projects.data[params.stub];
