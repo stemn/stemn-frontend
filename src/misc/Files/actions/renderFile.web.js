@@ -32,10 +32,11 @@ export default ({projectId, fileId, revisionId, provider, timestamp}) => (dispat
     payload: {
       type: 'RENDER/RENDER_FILE',
       payload: {
-         fileId,
-         revisionId,
-         timestamp,
-         roomId: cacheKey,
+        fileId,
+        revisionId,
+        timestamp,
+        projectId,
+        roomId: cacheKey,
       }
     },
     meta: {

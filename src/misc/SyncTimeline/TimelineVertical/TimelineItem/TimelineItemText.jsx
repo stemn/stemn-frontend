@@ -175,7 +175,7 @@ const eventTextMap = {
     const params = {
       projectId: get(item, 'data.project._id'),
       commitId: get(item, 'data.commit._id'),
-      threadId: get(item, 'data._id'),
+      threadId: get(item, 'data.thread._id'),
     }
     if (type === 'thread') {
       if (get(item, 'data.commit.name')) {

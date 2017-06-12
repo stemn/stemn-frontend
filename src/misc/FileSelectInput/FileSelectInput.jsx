@@ -68,7 +68,7 @@ const FileSelectInput = React.createClass({
     const getInnerText = () => {
       if (path) {
         return <span><span style={ { textTransform: 'capitalize' } }>{ provider }/</span>{ path }</span>
-      } else if (value.path === undefined && value.fileId === undefined) {
+      } else if (value.path === undefined && value.fileId === undefined && provider) {
         return `A new folder will be created in your ${provider}`
       } else {
         return 'Select the project folder'

@@ -47,5 +47,4 @@ export default React.createClass({
       </span>
     );
   }
-});
-
+})

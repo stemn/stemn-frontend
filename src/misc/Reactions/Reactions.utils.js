@@ -30,7 +30,7 @@ function groupReactions(reactions){
       }
     }
     else{
-      groupedReactions[reaction.type] = groupedReactions[reaction.type].list.push(reaction)
+      groupedReactions[reaction.type].list.push(reaction)
     }
   })
   return groupedReactions
