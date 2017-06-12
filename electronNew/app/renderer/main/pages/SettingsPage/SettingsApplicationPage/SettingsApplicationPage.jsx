@@ -3,12 +3,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Container Actions
-import * as SystemActions           from 'stemn-shared/desktop/System/System.actions.js';
-import { storeChange }              from 'stemn-shared/misc/Store/Store.actions.js';
-import * as ModalActions            from 'stemn-shared/misc/Modal/Modal.actions.js';
-import * as AutoLaunchActions       from 'stemn-shared/desktop/AutoLaunch/AutoLaunch.actions.js';
-import * as AutoUpdateActions       from 'stemn-shared/desktop/AutoUpdate/AutoUpdate.actions.js';
-import * as ElectronWindowsActions  from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js';
+import { getProviderPath } from 'stemn-shared/desktop/System/System.actions.js';
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions.js';
+import { showConfirm, showModal } from 'stemn-shared/misc/Modal/Modal.actions.js';
+import { getStatus, toggle } from 'stemn-shared/desktop/AutoLaunch/AutoLaunch.actions.js';
+import { installUpdate, checkForUpdates } from 'stemn-shared/desktop/AutoUpdate/AutoUpdate.actions.js';
+import { relaunch } from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js';
 
 // Component Core
 import React from 'react';
@@ -45,21 +45,21 @@ const toggleStyle = {
 
 export const Component = React.createClass({
   componentDidMount() {
-    this.props.autoLaunchActions.getStatus();
+    this.props.getStatus();
   },
   confirmReset() {
-    this.props.modalActions.showConfirm({
+    const { storeChange, showConfirm } = this.props
+    showConfirm({
       message: 'This will clear all data and reset the application back to factory settings. This can be useful if some data has been corrupted.',
-      modalConfirm: storeChange('', undefined)
-    })
+    }).then(() => storeChange('', undefined))
   },
   showReleaseModal() {
-    this.props.modalActions.showModal({
+    this.props.showModal({
       modalType: releaseNotesModalName
     })
   },
   render() {
-    const { system, autoLaunch, autoUpdate, autoLaunchActions, autoUpdateActions, systemActions, electronWindowsActions } = this.props;
+    const { system, autoLaunch, autoUpdate, getProviderPath, relaunch, toggle, installUpdate, checkForUpdates } = this.props;
 
 
     const autoUpdateMessage = () => {
@@ -67,18 +67,18 @@ export const Component = React.createClass({
         return <span>Checking for update...</span>
       }
       else if(autoUpdate.updateDownloaded){
-        return <span>Download complete. <a style={{marginLeft: '20px'}} className="link-primary" onClick={autoUpdateActions.installUpdate}>Update and restart</a></span>
+        return <span>Download complete. <a style={{marginLeft: '20px'}} className="link-primary" onClick={installUpdate}>Update and restart</a></span>
       }
       else if(autoUpdate.updateAvailable){
         return <span>Downloading update...</span>
       }
       else if(autoUpdate.updateNotAvailable){
-        return <span>You are up-to-date.<a style={{marginLeft: '20px'}} className="link-primary" onClick={autoUpdateActions.checkForUpdates}>Check again</a></span>
+        return <span>You are up-to-date.<a style={{marginLeft: '20px'}} className="link-primary" onClick={checkForUpdates}>Check again</a></span>
       }
       else{
         return (
           <span>
-            <a className="link-primary" onClick={autoUpdateActions.checkForUpdates}>Check for updates</a>
+            <a className="link-primary" onClick={checkForUpdates}>Check for updates</a>
             { autoUpdate.updateError ? <span style={{marginLeft: '20px'}}>Error: {autoUpdate.updateError}</span> : null }
           </span>
         )
@@ -91,7 +91,7 @@ export const Component = React.createClass({
         <div className={classes.panel}>
           <h3>Cloud Providers</h3>
           <p>Stemn Desktop relies on Dropbox and Drive to track changes to your files. You should have the desktop client for at least one of these installed.</p>
-          <p><a className="link-primary" onClick={systemActions.getProviderPath}>Locate providers automatically</a></p>
+          <p><a className="link-primary" onClick={getProviderPath}>Locate providers automatically</a></p>
           <div style={{marginBottom: '10px'}}>
             <FileSelectInputElectron
               title="Select Dropbox Location"
@@ -115,7 +115,7 @@ export const Component = React.createClass({
           <h3>Other options</h3>
           <div className="layout-row layout-align-start-center">
             <p className="flex" style={toggleStyle}>Start Stemn Desktop on system startup.</p>
-            <Toggle changeAction={autoLaunchActions.toggle} value={autoLaunch.status}/>
+            <Toggle changeAction={toggle} value={autoLaunch.status}/>
           </div>
           <div className="layout-row layout-align-start-center">
             <p className="flex" style={toggleStyle}>Help improve Stemn by sending usage data.</p>
@@ -126,7 +126,7 @@ export const Component = React.createClass({
             <Toggle model="system.settings.autoUpdate" value={system.settings.autoUpdate}/>
           </div>
           <div className="layout-row layout-align-start-center">
-            <p className="flex" style={toggleStyle} title="Debug mode will cause info to be logged in the debug console. Press F11 or Ctrl+Shift+I to open the console.">Debug mode (requires <a className="link-primary" onClick={electronWindowsActions.relaunch}>restart</a>)</p>
+            <p className="flex" style={toggleStyle} title="Debug mode will cause info to be logged in the debug console. Press F11 or Ctrl+Shift+I to open the console.">Debug mode (requires <a className="link-primary" onClick={relaunch}>restart</a>)</p>
             <Toggle model="system.settings.debug" value={system.settings.debug}/>
           </div>
         </div>
@@ -179,14 +179,26 @@ function mapStateToProps({users, system, autoLaunch, autoUpdate}, {params}) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    systemActions: bindActionCreators(SystemActions, dispatch),
-    modalActions: bindActionCreators(ModalActions, dispatch),
-    autoLaunchActions: bindActionCreators(AutoLaunchActions, dispatch),
-    autoUpdateActions: bindActionCreators(AutoUpdateActions, dispatch),
-    electronWindowsActions: bindActionCreators(ElectronWindowsActions, dispatch),
-  }
+const mapDispatchToProps = {
+  getProviderPath,
+  showConfirm,
+  showModal,
+  toggle,
+  getStatus,
+  installUpdate,
+  checkForUpdates,
+  relaunch,
+  storeChange,
 }
+
+//function mapDispatchToProps(dispatch) {
+//  return {
+//    systemActions: bindActionCreators(SystemActions, dispatch),
+//    modalActions: bindActionCreators(ModalActions, dispatch),
+//    autoLaunchActions: bindActionCreators(AutoLaunchActions, dispatch),
+//    autoUpdateActions: bindActionCreators(AutoUpdateActions, dispatch),
+//    electronWindowsActions: bindActionCreators(ElectronWindowsActions, dispatch),
+//  }
+//}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);

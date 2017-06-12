@@ -1,12 +1,12 @@
 ## Development
 
 ### Install
-
-First, clone the repo via git and install dependencies:
-
-```bash
-$ npm install
-```
+1. Clone this repo.
+2. Clone the `stemn-frontend-shared` repo.
+3. `cd` into `stemn-frontend-shared` and run `npm link stemn-frontend-shared` to initiate the npm link.
+4. `cd` into `stemn-frontend/electronNew` and run `npm install`
+5. `cd` into `stemn-frontend/electronNew/app` and run `npm install`
+6. `cd` into `stemn-frontend/electronNew/app` and run `npm link stemn-frontend-shared`
 
 ### Run
 
