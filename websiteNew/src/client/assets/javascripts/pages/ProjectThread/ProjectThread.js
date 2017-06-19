@@ -276,7 +276,7 @@ export default class ProjectThread extends Component {
                     { edit
                     ? <Button
                         className="primary"
-                        name="threadRoute"
+                        name="projectThreadRoute"
                         params={ threadRouteParams }
                       >
                         Save

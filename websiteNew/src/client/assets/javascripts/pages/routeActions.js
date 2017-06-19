@@ -24,12 +24,13 @@ export const projectSettingsRoute        = ({ projectId })                     =
 export const projectSettingsTeamRoute    = ({ projectId })                     => `/project/${projectId}/settings/team`
 export const projectSettingsThreadsRoute = ({ projectId })                     => `/project/${projectId}/settings/threads`
 export const projectThreadsRoute         = ({ projectId })                     => `/project/${projectId}/threads`
+export const projectThreadRoute          = ({ threadId, projectId })           => `/project/${projectId}/threads/${threadId}`
 export const projectTeamRoute            = ({ projectId })                     => `/project/${projectId}/team`
 export const registerRoute               = ()                                  => '/register'
 export const securityRoute               = ()                                  => `/security`
 export const settingsRoute               = ()                                  => `/settings`
 export const threadEditRoute             = ({ threadId, projectId })           => `/project/${projectId}/threads/${threadId}/edit`
-export const threadRoute                 = ({ threadId, projectId })           => `/project/${projectId}/threads/${threadId}`
+export const threadRoute                 = ({ threadId })                      => `/thread/${threadId}`
 export const termsRoute                  = ()                                  => `/terms`
 export const userDetailsRoute            = ({ userId })                        => `/users/${userId}/details`
 export const userFollowersRoute          = ({ userId })                        => `/users/${userId}/followers`

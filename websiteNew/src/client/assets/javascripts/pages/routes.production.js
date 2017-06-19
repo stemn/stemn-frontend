@@ -46,11 +46,12 @@ export default ({ dispatch }) => {
   const getProjectSettingsGeneral                = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectSettingsGeneral'), cb)
   const getProjectSettingsPermissions            = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectSettingsPermissions'), cb)
   const getProjectSettingsTags                   = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectSettingsTags'), cb)
-  const getProjectSettingsThreads                  = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectSettingsThreads'), cb)
+  const getProjectSettingsThreads                = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectSettingsThreads'), cb)
   const getProjectSettingsTeam                   = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectSettingsTeam'), cb)
-  const getProjectThread                           = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectThread'), cb)
-  const getProjectThreads                          = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectThreads'), cb)
+  const getProjectThread                         = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectThread'), cb)
+  const getProjectThreads                        = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectThreads'), cb)
   const getProjectTeam                           = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectTeam'), cb)
+  const getThread                                = (loc, cb) => getRoute(dispatch, System.import('pages/Thread'), cb)
   const getRegister                              = (loc, cb) => getRoute(dispatch, System.import('pages/Register'), cb)
   const getSearch                                = (loc, cb) => getRoute(dispatch, System.import('pages/Search'), cb)
   const getSecurity                              = (loc, cb) => getRoute(dispatch, System.import('pages/Security'), cb)
@@ -116,13 +117,14 @@ export default ({ dispatch }) => {
       <Route path="/search"                      getComponent={ getSearch } />
       <Route path="/security"                    getComponent={ getSecurity } />
       <Route path="/terms"                       getComponent={ getTerms } />
+      <Route path="thread/:threadId"             getComponent={ getThread } />
       <Route path="project/:stub"                getComponent={ getProject }>
         <IndexRoute                              getComponent={ getProjectOverview } />
         <Route path="team"                       getComponent={ getProjectTeam } />
         <Route path="files/:path"                getComponent={ getProjectOverview } />
         <Route path="threads"                    getComponent={ getProjectThreads } />
-        <Route path="threads/:threadId"            getComponent={ getProjectThread } />
-        <Route path="threads/:threadId/edit"       getComponent={ getProjectThread } />
+        <Route path="threads/:threadId"          getComponent={ getProjectThread } />
+        <Route path="threads/:threadId/edit"     getComponent={ getProjectThread } />
         <Route path="history"                    getComponent={ getProjectCommits } />
         <Route path="history/:commitId"          getComponent={ getProjectCommit } />
         <Route path="settings"                   getComponent={ getProjectSettings }>

@@ -45,10 +45,11 @@ import ProjectSettings                         from 'pages/ProjectSettings'
 import ProjectSettingsGeneral                  from 'pages/ProjectSettingsGeneral'
 import ProjectSettingsPermissions              from 'pages/ProjectSettingsPermissions'
 import ProjectSettingsTags                     from 'pages/ProjectSettingsTags'
-import ProjectSettingsThreads                    from 'pages/ProjectSettingsThreads'
+import ProjectSettingsThreads                  from 'pages/ProjectSettingsThreads'
 import ProjectSettingsTeam                     from 'pages/ProjectSettingsTeam'
-import ProjectThread                             from 'pages/ProjectThread'
-import ProjectThreads                            from 'pages/ProjectThreads'
+import ProjectThread                           from 'pages/ProjectThread'
+import Thread                                  from 'pages/Thread'
+import ProjectThreads                          from 'pages/ProjectThreads'
 import ProjectTeam                             from 'pages/ProjectTeam'
 import Register                                from 'pages/Register'
 import Search                                  from 'pages/Search'
@@ -115,13 +116,14 @@ export default () => (
     <Route path="/search"                      component={ Search } />
     <Route path="/security"                    component={ Security } />
     <Route path="/terms"                       component={ Terms } />
+    <Route path="thread/:threadId"             component={ Thread } />
     <Route path="project/:stub"                component={ Project }>
       <IndexRoute                              component={ ProjectOverview } />
       <Route path="team"                       component={ ProjectTeam } />
       <Route path="files/:path"                component={ ProjectOverview } />
       <Route path="threads"                    component={ ProjectThreads } />
-      <Route path="threads/:threadId"            component={ ProjectThread } />
-      <Route path="threads/:threadId/edit"       component={ ProjectThread } />
+      <Route path="threads/:threadId"          component={ ProjectThread } />
+      <Route path="threads/:threadId/edit"     component={ ProjectThread } />
       <Route path="history"                    component={ ProjectCommits } />
       <Route path="history/:commitId"          component={ ProjectCommit } />
       <Route path="settings"                   component={ ProjectSettings }>
