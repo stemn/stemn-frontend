@@ -34,7 +34,7 @@ class PopoverDropdown extends Component {
 
     return (
       <PopoverFit { ...otherProps }>
-        <Button className={ classNames('layout-row layout-align-start-center flex rel-box light', className) } style={ style }>
+        <Button className={ classNames('layout-row layout-align-start-center rel-box light', className) } style={ style }>
           <LoadingOverlay className={ classes.loading } show={ loading } linear hideBg />
           { children }
           { getInnerText() }

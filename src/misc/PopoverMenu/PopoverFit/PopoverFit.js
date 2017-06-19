@@ -11,7 +11,9 @@ export default class PopoverFit extends Component {
     }
   }
   getTriggerRef = (ref) => {
-    if (ref) {
+    // If we have ref.props - this is a react component
+    // the childRef prop should be implemented for react components
+    if (ref && !ref.props) {
       this.triggerRef = ref
       this.setWidth()
     }
@@ -34,12 +36,19 @@ export default class PopoverFit extends Component {
       minWidth: `${minWidth}px`,
       maxWidth: max ? `${minWidth}px` : 'inherit',
     }
-
+    
+    const triggerWithRefProp = (element) => {
+      // This will add the ref prop to the trigger element
+      const newProps = {
+        childRef: this.getTriggerRef, // This childRef prop should be implemented if the child is a component
+        ref: this.getTriggerRef,
+      }
+      return React.cloneElement(element, newProps);
+    }    
+    
     return (
       <Popover preferPlace="below" tipSize={ 1 }  { ...otherProps }>
-        <div ref={ this.getTriggerRef }>
-          { children[0] }
-        </div>
+        { triggerWithRefProp(children[0]) }
         <div style={ popoverStyle }>
           { children[1] }
         </div>
@@ -47,3 +56,6 @@ export default class PopoverFit extends Component {
     )
   }
 }
+
+//        <div ref={ this.getTriggerRef } className="layout-row flex">
+//        </div>

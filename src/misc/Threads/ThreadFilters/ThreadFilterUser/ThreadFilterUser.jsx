@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import classNames from 'classnames'
 import { get } from 'lodash'
 
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
@@ -38,7 +39,7 @@ export default class ThreadFilterUser extends Component {
     ]
     return (
       <PopoverDropdown
-        classname="light"
+        className={ classNames('light', className) }
         style={ style }
         value={ get(filter, ['object', 'user']) }
         options={ userFilterOptions }

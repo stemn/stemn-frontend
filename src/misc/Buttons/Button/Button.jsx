@@ -6,24 +6,24 @@ import classes from './Button.css'
 
 export default class extends React.Component{
   render() {
-    const { className, name, href, children, buttonRef, ...otherProps } = this.props
+    const { className, name, href, children, childRef, ...otherProps } = this.props
 
     if (name) {
       return (
-        <Link ref={ buttonRef } className={classNames(classes.button, className)} name={ name } { ...otherProps }>
+        <Link ref={ childRef } className={classNames(classes.button, className)} name={ name } { ...otherProps }>
           { children }
         </Link>
       )
     }
     else if (href) {
       return (
-        <a ref={ buttonRef } className={classNames(classes.button, className)} href={ href } { ...otherProps }>
+        <a ref={ childRef } className={classNames(classes.button, className)} href={ href } { ...otherProps }>
           { children }
         </a>
       );
     } else {
       return (
-        <button ref={ buttonRef } className={classNames(classes.button, className)} { ...otherProps }>
+        <button ref={ childRef } className={classNames(classes.button, className)} { ...otherProps }>
           { children }
         </button>
       );
