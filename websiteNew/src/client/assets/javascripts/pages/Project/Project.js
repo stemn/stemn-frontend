@@ -20,7 +20,7 @@ class Project extends Component {
     const publicIcon = (
       <PublicPrivateIcon
         private={ get(project, 'data.private') }
-        style={ { marginRight: '8px' } }
+        style={ { marginRight: '8px',  minWidth: '30px' } }
         size={ 30 }
       />
     )

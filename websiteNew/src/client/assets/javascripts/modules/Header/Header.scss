@@ -31,7 +31,7 @@
   background: primary;
   width: 12px;
   height: 12px;
-  font-size: 10px;
+  font-size: 9px;
   border-radius: 50%;
   position: absolute;
   display: flex;
@@ -40,6 +40,13 @@
   top: 0;
   right: 2px;
 }
+
+.badgeLarge {
+  width: 14px;
+  height: 14px;
+  font-size: 8px;
+}
+
 .links {
   margin-left: 10px;
 }

@@ -216,7 +216,7 @@ export default class ProjectThread extends Component {
               </SimpleIconButton>
               <PopoverMenuList menu={ this.menu } />
             </Popover>
-            <br />
+              <br />
               <h2 className={ classes.title }>
                 { edit
                 ? <Input
@@ -230,8 +230,8 @@ export default class ProjectThread extends Component {
                 ? null
                 : <span className={ classes.number }>&nbsp;{ thread.data.threadNumber ? `#T${thread.data.threadNumber}` : null }</span> }
               </h2>
-              <div className="layout-row layout-align-start-center">
-                <div className={ classNames('layout-row layout-align-start-center', classes.meta) }>
+              <Row className="sm layout-xs-column layout-gt-xs-row">
+                <Col className={ classNames('sm layout-row layout-align-start-center', classes.meta) }>
                   <Link
                     name="userRoute"
                     params={ userRouteParams }
@@ -247,48 +247,51 @@ export default class ProjectThread extends Component {
                     <b>{ thread.data.owner.name }</b>
                   </Link>
                   <div>&nbsp;created this thread { moment(thread.data.created).fromNow() }.</div>
-                </div>
+                </Col>
                 <div className="flex" />
-                <SocialButton
-                  type="follow"
-                  entityType="thread"
-                  entityId={ thread.data._id }
-                  style={ { marginLeft: '15px' } }
-                />
-                { canEdit &&
-                  <PopoverDropdown
-                    value={ thread.data.complete }
-                    model={ `${threadModel}.data.complete` }
-                    options={ this.dropdownOptions }
-                    onChange={ this.updateThread }
-                    style={ { margin: '0 15px' } }
+                <Col className={ classNames('sm layout-row', classes.buttonRow) }>
+                  <SocialButton
+                    className="flex-xs"
+                    type="follow"
+                    entityType="thread"
+                    entityId={ thread.data._id }
                   />
+                  { canEdit
+                  ? <PopoverDropdown
+                      className="flex-xs"
+                      value={ thread.data.complete }
+                      model={ `${threadModel}.data.complete` }
+                      options={ this.dropdownOptions }
+                      onChange={ this.updateThread }
+                      style={ { marginLeft: '15px' } }
+                    />
+                  : <Tag className={ classNames(!thread.data.complete ? 'warn': 'success', 'flex-xs') } style={{ margin: '0px', marginLeft: '15px'}}>
+                      <MdDone size={ 20 } style={ { marginRight: '5px' } }/>
+                      { thread.data.complete ? 'Thread Closed': 'Thread Open' }
+                    </Tag>
+                  }
+                </Col>
+                { canEdit &&
+                  <Col className="sm layout-column">
+                    { edit
+                    ? <Button
+                        className="primary"
+                        name="threadRoute"
+                        params={ threadRouteParams }
+                      >
+                        Save
+                      </Button>
+                    : <Button
+                        className="primary"
+                        name="threadEditRoute"
+                        params={ threadRouteParams }
+                      >
+                        Edit
+                      </Button>
+                    }
+                  </Col>
                 }
-                { !canEdit &&
-                  <Tag className={ thread.data.complete ? 'warn': 'success' } style={{ margin: '0px'}}>
-                    <MdDone size={ 20 } style={ { marginRight: '5px' } }/>
-                    { thread.data.complete ? 'THREAD CLOSED': 'THREAD OPEN' }
-                  </Tag>
-                }
-                { edit &&
-                  <Button
-                    className="primary"
-                    name="threadRoute"
-                    params={ threadRouteParams }
-                  >
-                    Save
-                  </Button>
-                }
-                { !edit && canEdit &&
-                  <Button
-                    className="primary"
-                    name="threadEditRoute"
-                    params={ threadRouteParams }
-                  >
-                    Edit
-                  </Button>
-                }
-              </div>
+              </Row>
             </div>
           </SubSubHeader>
           <Container style={ { marginTop: '30px', marginBottom: '60px' } }>

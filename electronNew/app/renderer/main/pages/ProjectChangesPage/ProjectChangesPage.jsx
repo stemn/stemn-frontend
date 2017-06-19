@@ -150,6 +150,7 @@ export const Component = React.createClass({
                 <div className="layout-column flex">
                   {changes && changes.data
                   ? <CommitChanges
+                      initialSync={ !project.data.remote.lastSynced }
                       changes={changes}
                       project={project.data}
                       toggleAll={this.toggleAll}

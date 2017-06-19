@@ -36,6 +36,7 @@ export default React.createClass({
         <div className={classes.container+' flex scroll-box'}>
           <FileList
             className={ classes.files }
+            initialSync={ !project.data.remote.lastSynced }
             projectId={ project.data._id }
             path={ path || '' }
             singleClickFn={ this.fileFolderClick }

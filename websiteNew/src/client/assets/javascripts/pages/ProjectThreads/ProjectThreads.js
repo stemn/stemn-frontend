@@ -92,8 +92,8 @@ export default class ProjectThreads extends Component {
     return (
       <div>
         <SubSubHeader>
-          <Row className="layout-xs-column layout-gt-xs-row">
-            <Col className="flex-xs flex-sm flex-gt-sm-30 layout-row">
+          <Row className="sm layout-xs-column layout-gt-xs-row">
+            <Col className="sm flex-xs flex-sm flex-gt-sm-30 layout-row">
               <SearchInput
                 className={ classes.search }
                 placeholder="Search Threads"
@@ -103,7 +103,7 @@ export default class ProjectThreads extends Component {
               />
             </Col>
             <div className="flex-xs-0 flex-sm-0 flex-gt-sm" />
-            <Col className="layout-row">
+            <Col className={ classNames('sm layout-row', classes.filterRow) }>
               <ThreadFilterUser
                 className="flex-xs"
                 filter={ filter }
@@ -111,7 +111,7 @@ export default class ProjectThreads extends Component {
                 filterCacheKey={ filterCacheKey }
                 setFilter={ setFilter }
                 project={ project }
-                style={ { marginRight: '15px'} }
+                style={ { marginRight: '15px' } }
               />
               <ThreadFilterStatus
                 className="flex-xs"
@@ -119,8 +119,9 @@ export default class ProjectThreads extends Component {
                 filterModel={ filterModel }
                 filterCacheKey={ filterCacheKey }
                 setFilter={ setFilter }
-                style={ { marginRight: '15px'} }
               />
+            </Col>
+            <Col className="sm layout-row">
               <Button className="primary flex-xs" onClick={ this.showNewThreadModal }>
                 New Thread
               </Button>

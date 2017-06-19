@@ -34,7 +34,9 @@ export default class SubHeader extends Component {
             }
           </h1>
           { title && <div className="flex"></div> }
-          { children }
+          <div className="layout-row">
+            { children }
+          </div>
         </Container>
       </div>
     )

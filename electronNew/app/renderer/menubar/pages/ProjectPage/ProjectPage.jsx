@@ -92,6 +92,7 @@ export const Component = React.createClass({
         return (
           <div className="layout-column flex">
             <CommitChanges
+              initialSync={ !project.data.remote.lastSynced }
               changes= { changes }
               project={ project.data }
               toggleAll={ this.toggleAll }

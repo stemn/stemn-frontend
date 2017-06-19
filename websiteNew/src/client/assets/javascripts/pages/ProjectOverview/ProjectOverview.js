@@ -146,6 +146,7 @@ export default class ProjectOverview extends Component {
             { isConnected &&
               <FileList
                 className={ classes.files }
+                initialSync={ !project.data.remote.lastSynced }
                 projectId={ project.data._id }
                 path={ path || '' }
                 crumbClickFn={ this.clickFileOrFolder }

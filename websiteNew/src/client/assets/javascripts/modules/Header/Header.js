@@ -46,7 +46,7 @@ export default class Header extends Component {
           className="rel-box"
         >
           <MdNotifications size={ 22 } />
-          { numNotifications > 0 && <div className={ classes.badge }>{ numNotifications }</div> }
+          { numNotifications > 0 && <div className={ classNames(classes.badge, { [classes.badgeLarge] : numNotifications >= 10}) }>{ numNotifications }</div> }
         </SimpleIconButton>
         <Popover
           offset={ 13 }

@@ -1,3 +1,10 @@
+## Install
+1. Clone this repo.
+2. Clone the `stemn-frontend-shared` repo.
+3. `cd` into `stemn-frontend-shared` and run `npm link stemn-frontend-shared` to initiate the npm link.
+4. `cd` into `stemn-frontend/websiteNew` and run `npm install`
+6. `cd` into `stemn-frontend/websiteNew` and run `npm link stemn-frontend-shared`
+
 ## Development
 
 There are two ways in which you can build and run the web app:

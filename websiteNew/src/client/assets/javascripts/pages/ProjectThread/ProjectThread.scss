@@ -60,3 +60,13 @@
   right: 0;
   top: 0;
 }
+
+.buttonRow {
+  @media (max-width: 599px) {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+}

@@ -81,6 +81,6 @@ const splitReducers = combineReducers({
 export default (state, action) => {
   const isStoreAction = action && action.type && action.type.startsWith('STORE/')
   return isStoreAction
-    ? storeReducer(state, action)
+    ? splitReducers(storeReducer(state, action), action) // This is fed into the split reducers so defaults can init if the keys are cleared
     : splitReducers(state, action)
 }

@@ -26,7 +26,7 @@ export const organisationRoute           = ({ organisationId })                =
 export const passwordLostRoute           = ()                                  => ({ external: true, pathname: '/password-lost' })
 export const pricingRoute                = ()                                  => ({ external: true, pathname: `/pricing` })
 export const privacyRoute                = ()                                  => ({ external: true, pathname: `/privacy` })
-export const projectChangesRoute         = ({ projectId })                     => `/project/${projectId}/changes`
+export const projectChangesRoute         = ({ projectId })                     => `/project/${projectId}`
 export const projectCommitsRoute         = ({ projectId })                     => `/project/${projectId}/feed`
 export const projectFilesRoute           = ({ projectId })                     => `/project/${projectId}/files`
 export const projectFolderRoute          = ({ projectId, fileId })             => `/project/${projectId}/files/${fileId || ''}`
