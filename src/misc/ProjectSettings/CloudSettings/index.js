@@ -15,7 +15,7 @@ export default class CloudSettings extends Component {
   renderFormInner() {
     const { projectModel, project, confirmLinkRemote } = this.props
     return (
-      <div>
+      <div className="layout-column">
         <h3>Cloud Storage Folder</h3>
         <p>Select your project's cloud storage folder. STEMN will track all changes to files in this folder.</p>
         <ProjectLinkRemote

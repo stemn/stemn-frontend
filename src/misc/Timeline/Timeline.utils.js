@@ -1,4 +1,4 @@
-import { groupBy, values, sortBy } from 'lodash';
+import { groupBy, values, sortBy, orderBy } from 'lodash';
 
 export const groupRevisions = (revisions) => {
   // Group revisions by FileId - add the other revisions to an array
@@ -6,3 +6,8 @@ export const groupRevisions = (revisions) => {
   // Sort by path - items not in folders should appear first
   return sortBy(grouped, [(item) => item.data.path.split('/').length == 1 ? 1 : 2, 'data.path'])
 }
+
+export const orderByTime = (items) => orderBy(items, [
+  (item) => item.data.revisionNumber,
+  (item) => (new Date(item.timestamp)).getTime(),
+], ['asc', 'asc']);

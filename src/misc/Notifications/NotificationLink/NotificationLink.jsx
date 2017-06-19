@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react'
 import Link from 'stemn-shared/misc/Router/Link'
 
 const entityToRouteMap = {
-  thread: 'threadRoute',
+  thread: 'projectThreadRoute',
   project: 'projectRoute',
   user: 'userRoute',
   commit: 'commitRoute',
-  comment: 'threadRoute',
+  comment: 'projectThreadRoute',
 }
 
 const getRouteNameFromEntity = (entity) => {

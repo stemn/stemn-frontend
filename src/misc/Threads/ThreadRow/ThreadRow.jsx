@@ -30,7 +30,7 @@ export default class ThreadRow extends Component {
             <div>
               <Link
                 className={ classes.title }
-                name="threadRoute"
+                name="projectThreadRoute"
                 params={ threadRouteParams }
               >
                 { thread.data.name }

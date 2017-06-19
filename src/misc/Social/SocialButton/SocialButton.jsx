@@ -103,7 +103,6 @@ export default class SocialButton extends Component {
       ...otherProps,
     } = this.props
     
-    console.log( !!number && numberModel);
     return (
       <div className={ classNames(classes.button, className) } { ...otherProps }>
         <div className={ classNames(classes.main) } onClick={ this.toggle } title={ getTooltip(type, entityType, status) }>

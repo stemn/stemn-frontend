@@ -21,7 +21,7 @@ const eventTextMap = {
       return (
         <span>
           re-opened the thread
-          <Link name="threadRoute" params={ params }>{ thread.name }</Link>
+          <Link name="projectThreadRoute" params={ params }>{ thread.name }</Link>
           in
           <Link name="projectRoute" params={ params }>{ project.name }</Link>
         </span>
@@ -81,7 +81,7 @@ const eventTextMap = {
     if (groupItem) {
       return (
         <span>
-          <Link name="threadRoute" params={ params }>{ middleConcat(item.data.name, 40, 0.6) }</Link>
+          <Link name="projectThreadRoute" params={ params }>{ middleConcat(item.data.name, 40, 0.6) }</Link>
           { `(Task ${item.data.threadNumber})` }
         </span>
       )
@@ -96,7 +96,7 @@ const eventTextMap = {
       return (
         <span>
           added a new thread:
-          <Link name="threadRoute" params={ params }>{ item.data.name }</Link>
+          <Link name="projectThreadRoute" params={ params }>{ item.data.name }</Link>
           to
           <Link name="projectRoute" params={ params }>{ project.name || 'Untitled Project' }</Link>
         </span>
@@ -105,7 +105,7 @@ const eventTextMap = {
     return (
       <span>
         added a new thread:
-        <Link name="threadRoute" params={ params }>{ item.data.name }</Link>
+        <Link name="projectThreadRoute" params={ params }>{ item.data.name }</Link>
       </span>
     )
   },
@@ -120,7 +120,7 @@ const eventTextMap = {
       return (
         <span>
           commented on
-          <Link name="threadRoute" params={ params }>{ thread.name }</Link>
+          <Link name="projectThreadRoute" params={ params }>{ thread.name }</Link>
           in
           <Link name="projectRoute" params={ params }>{ project.name }</Link>
         </span>
@@ -129,10 +129,25 @@ const eventTextMap = {
       return (
         <span>
           commented on
-          <Link name="threadRoute" params={ params }>{ thread.name }</Link>
+          <Link name="projectThreadRoute" params={ params }>{ thread.name }</Link>
         </span>
       )
-  },
+  },  
+//  mention: (item, type, entity) => {
+//    const thread = get(item, 'data.thread', {})
+//    const project = get(item, 'data.project', {})
+//    const commit = get(item, 'data.commit', {})
+//    const comment = get(item, 'data.comment', {})
+//    
+//    if (commit._id) {
+//      return (
+//        <span>
+//          mentioned
+//          <Link name="commitRoute" params={ params }>{ commit.name }</Link>
+//        </span>
+//      )
+//    }
+//  },
   commit: (item, type, entity) => {
     const commit = get(item, 'data.commit', {})
     const project = get(item, 'data.project', {})
@@ -200,7 +215,7 @@ const eventTextMap = {
           closed the thread
           <Link
             className="link-primary"
-            name="threadRoute"
+            name="projectThreadRoute"
             params={ params }
           >
             { get(item, 'data.thread.name', 'Untitled Thread') }
@@ -271,7 +286,7 @@ const eventTextMap = {
           { type === 'project' &&
             <span>
               { hasRemovedLabels ? ' from' : ' to' }
-              <Link name="threadRoute" params={ params }>{ get(item, 'data.thread.name', 'Untitled Thread') }</Link>
+              <Link name="projectThreadRoute" params={ params }>{ get(item, 'data.thread.name', 'Untitled Thread') }</Link>
             </span>
           }
         </span>

@@ -28,28 +28,6 @@ export default class MentionFromString extends Component {
     const mentionInfo = getMentionInfo(mentionType, entityId, display)
 
     if (mentionInfo) {
-//      // If this is a thread and we are desktop
-//      if (mentionType === 'thread' || mentionType === 'thread-complete' && GLOBAL_ENV.APP_TYPE === 'desktop') {
-//        const showThread = () => showThreadModal({
-//          threadId: entityId
-//        })
-//        return (
-//          <a
-//            onClick={ showThread }
-//          >
-//            { mentionInfo.display }
-//          </a>
-//        )
-//      } else {
-//        return (
-//          <Link
-//            name={ mentionInfo.route }
-//            params={ mentionInfo.params }
-//          >
-//            { mentionInfo.display }
-//          </Link>
-//        )
-//      }
         return (
           <Link
             name={ mentionInfo.route }

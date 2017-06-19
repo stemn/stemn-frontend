@@ -4,7 +4,8 @@ import React, { PropTypes } from 'react';
 // Styles
 import classNames from 'classnames';
 import styles from './Timeline.css';
-import { orderBy } from 'lodash';
+
+import { orderByTime } from './Timeline.utils'
 
 // Sub Components
 import MoreDots from './MoreDots/MoreDots.jsx';
@@ -72,7 +73,7 @@ const Component = React.createClass({
     const moreRight = page > 0;
 
     // Order the items by the timestamp
-    const itemsOrdered = orderBy(items, item => (new Date(item.timestamp)).getTime(), 'asc');
+    const itemsOrdered = orderByTime(items)
 
     return (
       <div className={classNames(styles.timeline, className, {[styles.small]: size == 'sm'})} style={style}>

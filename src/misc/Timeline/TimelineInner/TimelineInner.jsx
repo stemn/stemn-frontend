@@ -1,7 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import classes from './TimelineInner.css'
-import { orderBy } from 'lodash'
+import { orderByTime } from '../Timeline.utils'
 import moment from 'moment'
 import Popover from 'stemn-shared/misc/Popover'
 import * as stringConcat from 'stemn-shared/utils/stringConcat'
@@ -75,7 +75,7 @@ const Component = React.createClass({
     const Items = items.map((item, index)=> {
       if(item.event == 'commit'){
         // Order the items by the timestamp
-        const subItemsOrdered = orderBy(item.data.items, subItem => (new Date(subItem.timestamp)).getTime(), 'asc');
+        const subItemsOrdered = orderByTime(item.data.items);
         return (
           <Popover preferPlace={preferPlace || 'below'} trigger="hoverSingleDelay" tipSize={6}>
             <div key={item._id}  className={classNames(classes.dotGroup, 'layout-row layout-align-center-center')}>
