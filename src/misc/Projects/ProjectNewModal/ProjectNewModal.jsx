@@ -99,7 +99,7 @@ export default class ProjectNewModal extends Component {
 
     const fileStoreTemplate = () => {
       return (
-        <div className={classes.panel + ' rel-box'}>
+        <div className={classes.panel + ' rel-box layout-column'}>
           <h3>Cloud Storage Folder</h3>
           <p>Select your project's cloud store location.</p>
           <ProjectLinkRemote

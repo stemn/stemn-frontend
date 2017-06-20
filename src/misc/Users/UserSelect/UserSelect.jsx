@@ -44,7 +44,7 @@ const Component = React.createClass({
       : userOptions
 
     return (
-      <div>
+      <div className="layout-column">
         <PopoverDropdown
           options={ userOptionsWithEmpty }
           classname="light"

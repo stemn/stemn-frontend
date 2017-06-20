@@ -295,6 +295,21 @@ const eventTextMap = {
       return <span>Changed Labels</span>
     }
   },
+  movedGroups: (item, type, entity) => {
+    const group1 = entity.data.groups.find(group => group._id === item.data.movedGroups[0])
+    const group2 = entity.data.groups.find(group => group._id === item.data.movedGroups[1])
+    const params = {
+      projectId: entity.data.project._id
+    }
+    return (
+      <span>
+        moved this thread from
+        <Link name="projectThreadsRoute" params={ params } query={ { groups: [ group1._id ] } }>{ group1.name }</Link>
+        to
+        <Link name="projectThreadsRoute" params={ params } query={ { groups: [ group2._id ] } }>{ group2.name }</Link>
+      </span>
+    )
+  },
 }
 
 export default class TimelineItemText extends Component {

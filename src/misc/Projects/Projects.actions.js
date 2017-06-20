@@ -32,7 +32,7 @@ export const setActiveProject = ({ projectId }) => (dispatch, getState) => {
 
   dispatch(joinRoom({
     room: projectId,
-    type: 'project,'
+    type: 'project',
   }))
 }
 
