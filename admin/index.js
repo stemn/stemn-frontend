@@ -23,14 +23,16 @@ const ghToken = '98f982b11affb9771a7671f79f6bde4673da67cb'
 //  })
 //}
 
+let usersAlreadyAdded = []
 
-const recursive = (page, per_page, func) => {
+const recursive = (page, per_page, func, page_limit) => {
   let result = []
   
   const processResponse = (response) => {
     result = result.concat(response)
     const enoughResults = response.length == per_page
-    if (enoughResults) {
+    const lessThanLimit = page + 1 < page_limit // A page limit is added because github doesn't like us querying for than 10*100 pages
+    if (enoughResults && lessThanLimit) {
       page++
       return func(page, per_page).then(processResponse)
     } else {
@@ -50,13 +52,13 @@ const getFiles = (page, per_page) => {
       Authorization: `token ${ghToken}`
     },
     params: {
-      q: 'sldprt filename:gitignore',
+      q: 'solidworks extension:md',
       sort:'stars',
       order:'desc',
       page,
       per_page,
     }
-  }).then(response => response.data.items)
+  }).then(response => response.data.items).catch(console.error)
 }
 
 
@@ -93,9 +95,9 @@ const getUserEmail = (user, page = 1) => {
   }).catch(console.error)
 }
 //
-recursive(1, 100, getFiles).then(files => {
-  console.log(`${files.length} File Results`);
-  return Promise.all(files.map((file) => {
+recursive(1, 100, getFiles, 10).then(files => {
+  const uniquedByOwner = uniqBy(files, file => file.repository.owner.login)
+  return Promise.all(uniquedByOwner.map((file) => {
     return getUserEmail(file.repository.owner.login).then((emails) => {
       return {
         file: file.path,
