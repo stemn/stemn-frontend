@@ -1,0 +1,676 @@
+[
+  {
+    "file": ".gitignore",
+    "repo": "necrophonic/3d-printing-objects",
+    "emails": [
+      {
+        "name": "James Gardiner",
+        "email": "james@jgardiner.co.uk"
+      },
+      {
+        "name": "J Gregory",
+        "email": "john@johngregory.me.uk"
+      },
+      {
+        "name": "Eleanor Deal",
+        "email": "eleanor.deal@gmail.com"
+      },
+      {
+        "name": "tundish",
+        "email": "tundish@thuswise.org"
+      },
+      {
+        "name": "tundish",
+        "email": "tundish@gigeconomy.org.uk"
+      },
+      {
+        "name": "Warren Bailey",
+        "email": "warren@warrenbailey.net"
+      },
+      {
+        "name": "Gavin Edwards",
+        "email": "gavin.edwards@ons.gsi.gov.uk"
+      },
+      {
+        "name": "Adam Mann",
+        "email": "manny160389@hotmail.com"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "Jimbles/3DModels",
+    "emails": [
+      {
+        "name": "Jimbles",
+        "email": "j.avery.10@ucl.ac.uk"
+      },
+      {
+        "name": "Thomas Dowrick",
+        "email": "tdowrick@gmail.com"
+      },
+      {
+        "name": "Mayo Faulkner",
+        "email": "mayo.faulkner@ucl.ac.uk"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "Nishida-Lab/nachi_cad",
+    "emails": [
+      {
+        "name": "shimoe",
+        "email": "shimoewithranobe@gmail.com"
+      },
+      {
+        "name": "YamaCIR-KIT",
+        "email": "httperror@404-notfound.jp"
+      },
+      {
+        "name": "nakaomasato",
+        "email": "o104090m@mail.kyutech.jp"
+      },
+      {
+        "name": "calm0815",
+        "email": "ku_skyline_wa@yahoo.co.jp"
+      },
+      {
+        "name": "RyodoTanaka",
+        "email": "k104073r@mail.kyutech.jp"
+      },
+      {
+        "name": "NishidaTakeshiLab",
+        "email": "nishidatakeshilab@gmail.com"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "chili-epfl/3d-print-objects",
+    "emails": [
+      {
+        "name": "lfaucon",
+        "email": "lpfaucon@gmail.com"
+      },
+      {
+        "name": "Stian Håklev",
+        "email": "shaklev@gmail.com"
+      },
+      {
+        "name": "Louis Faucon",
+        "email": "lfaucon@users.noreply.github.com"
+      },
+      {
+        "name": "Anthony Perritano",
+        "email": "aperritano@users.noreply.github.com"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "ginge/Hector",
+    "emails": [
+      {
+        "name": "Barry Carter",
+        "email": "barry.carter@gmail.com"
+      },
+      {
+        "name": "simon",
+        "email": "simon@simons-Air.fritz.box"
+      },
+      {
+        "name": "m0n1s",
+        "email": "simon@simons-MacBook-Air.local"
+      },
+      {
+        "name": "Bogdan Olar",
+        "email": "olar.bogdan.dev@gmail.com"
+      },
+      {
+        "name": "Bogdan Olar",
+        "email": "BogdanOlar@users.noreply.github.com"
+      },
+      {
+        "name": "Joshua Wise",
+        "email": "joshua@joshuawise.com"
+      },
+      {
+        "name": "m0n1s",
+        "email": "simon@priskon.de"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "chili-epfl/altium-libs",
+    "emails": [
+      {
+        "name": "lfaucon",
+        "email": "lpfaucon@gmail.com"
+      },
+      {
+        "name": "Stian Håklev",
+        "email": "shaklev@gmail.com"
+      },
+      {
+        "name": "Louis Faucon",
+        "email": "lfaucon@users.noreply.github.com"
+      },
+      {
+        "name": "Anthony Perritano",
+        "email": "aperritano@users.noreply.github.com"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "issus/CNC-Dust-Collection",
+    "emails": [
+      {
+        "name": "Mark",
+        "email": "markh@rris.com.au"
+      }
+    ]
+  },
+  {
+    "file": "case/.gitignore",
+    "repo": "cillian64/portfire",
+    "emails": [
+      {
+        "name": "Adam Greig",
+        "email": "adam@adamgreig.com"
+      },
+      {
+        "name": "Russ Garrett",
+        "email": "russ@garrett.co.uk"
+      },
+      {
+        "name": "David Turner",
+        "email": "cillian64@googlemail.com"
+      },
+      {
+        "name": "David Turner",
+        "email": "david.w.turner@cl.cam.ac.uk"
+      }
+    ]
+  },
+  {
+    "file": "software/ros/misc/models/valter/swmodel/.gitignore",
+    "repo": "wercool/valter",
+    "emails": [
+      {
+        "name": "maska",
+        "email": "maska@indigoros"
+      },
+      {
+        "name": "maska",
+        "email": "maska@mail.ru"
+      },
+      {
+        "name": "Master",
+        "email": "valtertherobot@gmail.com"
+      },
+      {
+        "name": "Alexey",
+        "email": "maskame@gmail.com"
+      }
+    ]
+  },
+  {
+    "file": "software/ros/misc/models/valter/swmodel/manipulator/.gitignore",
+    "repo": "wercool/valter",
+    "emails": [
+      {
+        "name": "maska",
+        "email": "maska@indigoros"
+      },
+      {
+        "name": "maska",
+        "email": "maska@mail.ru"
+      },
+      {
+        "name": "Master",
+        "email": "valtertherobot@gmail.com"
+      },
+      {
+        "name": "Alexey",
+        "email": "maskame@gmail.com"
+      }
+    ]
+  },
+  {
+    "file": "software/ros/misc/models/valter/swmodel/wheel.support/.gitignore",
+    "repo": "wercool/valter",
+    "emails": [
+      {
+        "name": "maska",
+        "email": "maska@indigoros"
+      },
+      {
+        "name": "maska",
+        "email": "maska@mail.ru"
+      },
+      {
+        "name": "Master",
+        "email": "valtertherobot@gmail.com"
+      },
+      {
+        "name": "Alexey",
+        "email": "maskame@gmail.com"
+      }
+    ]
+  },
+  {
+    "file": "software/ros/misc/models/valter/swmodel/wheel/.gitignore",
+    "repo": "wercool/valter",
+    "emails": [
+      {
+        "name": "maska",
+        "email": "maska@indigoros"
+      },
+      {
+        "name": "maska",
+        "email": "maska@mail.ru"
+      },
+      {
+        "name": "Master",
+        "email": "valtertherobot@gmail.com"
+      },
+      {
+        "name": "Alexey",
+        "email": "maskame@gmail.com"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "OPSORO/Ono2",
+    "emails": [
+      {
+        "name": "Sander Vervaeke",
+        "email": "sander_vervaeke@outlook.be"
+      },
+      {
+        "name": "Auguste | Laptop",
+        "email": "wijaugust@gmail.com"
+      },
+      {
+        "name": "Cesar",
+        "email": "anonymous@gitbook.com"
+      },
+      {
+        "name": "Jeroen Dellaert",
+        "email": "jeroendellaert@hotmail.com"
+      },
+      {
+        "name": "joffreymahieu",
+        "email": "joffrey-mahieu@hotmail.com"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "lab11/IntelEdisonGateway",
+    "emails": [
+      {
+        "name": "theomil",
+        "email": "thmiller917@gmail.com"
+      },
+      {
+        "name": "Antonio Iannopollo",
+        "email": "ianno@users.noreply.github.com"
+      },
+      {
+        "name": "Antonio Iannopollo",
+        "email": "antonio@berkeley.edu"
+      },
+      {
+        "name": "Joshua Adkuins",
+        "email": "adkins@berkeley.edu"
+      },
+      {
+        "name": "Josh Adkins",
+        "email": "adkinsjd@umich.edu"
+      },
+      {
+        "name": "Brad",
+        "email": "bradjc5@gmail.com"
+      },
+      {
+        "name": "Pat Pannuto",
+        "email": "pat.pannuto@gmail.com"
+      },
+      {
+        "name": "Neal Jackson",
+        "email": "nealjack@umich.edu"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "BCN3D/Flowy-Oven",
+    "emails": [
+      {
+        "name": "AlejandroGarcia92",
+        "email": "agarciamoreno@fundaciocim.org"
+      },
+      {
+        "name": "Guillem",
+        "email": "guillemavila@gmail.com"
+      },
+      {
+        "name": "Eloi Pardo",
+        "email": "eloipr94@gmail.com"
+      },
+      {
+        "name": "kitusmark",
+        "email": "electronicslab@icloud.com"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "eric-wieser/2.12-robot",
+    "emails": [
+      {
+        "name": "Eric Wieser",
+        "email": "wieser.eric@gmail.com"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "NWChen/RainbowPi",
+    "emails": [
+      {
+        "name": "Neil Chen",
+        "email": "neilwchen@gmail.com"
+      },
+      {
+        "name": "Neil",
+        "email": "neil.chen@columbia.edu"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "lab11/torch",
+    "emails": [
+      {
+        "name": "theomil",
+        "email": "thmiller917@gmail.com"
+      },
+      {
+        "name": "Antonio Iannopollo",
+        "email": "ianno@users.noreply.github.com"
+      },
+      {
+        "name": "Antonio Iannopollo",
+        "email": "antonio@berkeley.edu"
+      },
+      {
+        "name": "Joshua Adkuins",
+        "email": "adkins@berkeley.edu"
+      },
+      {
+        "name": "Josh Adkins",
+        "email": "adkinsjd@umich.edu"
+      },
+      {
+        "name": "Brad",
+        "email": "bradjc5@gmail.com"
+      },
+      {
+        "name": "Pat Pannuto",
+        "email": "pat.pannuto@gmail.com"
+      },
+      {
+        "name": "Neal Jackson",
+        "email": "nealjack@umich.edu"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "truhlikfredy/lampbotDrawings",
+    "emails": [
+      {
+        "name": "Anton Krug",
+        "email": "antonkrug@gmail.com"
+      },
+      {
+        "name": "Anton Krug",
+        "email": "truhlikfredy@users.noreply.github.com"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "drew-gross/ThreesAI",
+    "emails": [
+      {
+        "name": "Drew Gross",
+        "email": "drew.a.gross@gmail.com"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "urbanlab/polluscope",
+    "emails": [
+      {
+        "name": "jkancel971",
+        "email": "justin.kancel@insa-lyon.fr"
+      },
+      {
+        "name": "kevinvennitti",
+        "email": "kevin.vennitti@gmail.com"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "NWChen/Robot-Arm",
+    "emails": [
+      {
+        "name": "Neil Chen",
+        "email": "neilwchen@gmail.com"
+      },
+      {
+        "name": "Neil",
+        "email": "neil.chen@columbia.edu"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "Aaron2Ti/pps",
+    "emails": [
+      {
+        "name": "Aaron Tian",
+        "email": "Aaron2Ti@users.noreply.github.com"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "davidabrahams/poe-lab-2",
+    "emails": [
+      {
+        "name": "David Abrahams",
+        "email": "david.abrahams@students.olin.edu"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "s-light/TI_FDC1004_Breakout",
+    "emails": [
+      {
+        "name": "s-light",
+        "email": "github@s-light.eu"
+      },
+      {
+        "name": "Martin Kaltenbrunner",
+        "email": "modin@yuri.at"
+      },
+      {
+        "name": "Camille Hodoul",
+        "email": "chodoul@1egal2.com"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "Badg/SolidworksUtils",
+    "emails": [
+      {
+        "name": "Nick Badger",
+        "email": "badg@nickbadger.com"
+      },
+      {
+        "name": "Nick Badger",
+        "email": "Badg@users.noreply.github.com"
+      },
+      {
+        "name": "Nick Badger",
+        "email": "nbadger1@gmail.com"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "Badg/roboMEP-mech",
+    "emails": [
+      {
+        "name": "Nick Badger",
+        "email": "badg@nickbadger.com"
+      },
+      {
+        "name": "Nick Badger",
+        "email": "Badg@users.noreply.github.com"
+      },
+      {
+        "name": "Nick Badger",
+        "email": "nbadger1@gmail.com"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "Badg/robomow12-mech",
+    "emails": [
+      {
+        "name": "Nick Badger",
+        "email": "badg@nickbadger.com"
+      },
+      {
+        "name": "Nick Badger",
+        "email": "Badg@users.noreply.github.com"
+      },
+      {
+        "name": "Nick Badger",
+        "email": "nbadger1@gmail.com"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "issus/AnthonyWebbPNP-ForWaterJet",
+    "emails": [
+      {
+        "name": "Mark",
+        "email": "markh@rris.com.au"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "Texas-Aerial-Robotics/IARC-repository-",
+    "emails": [
+      {
+        "name": "Mark Loveland",
+        "email": "markloveland@utexas.edu"
+      },
+      {
+        "name": "umer936",
+        "email": "umer936@gmail.com"
+      },
+      {
+        "name": "ericjohnson97",
+        "email": "eric.emj.johnson@gmail.com"
+      },
+      {
+        "name": "CJLane26",
+        "email": "cameronlane@utexas.edu"
+      },
+      {
+        "name": "Ethan Starr",
+        "email": "ethanstarr@verizon.net"
+      },
+      {
+        "name": "colin-lewis-ut",
+        "email": "colin.lewis@utexas.edu"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "jaydcarlson/efm8bb1-breakout",
+    "emails": [
+      {
+        "name": "Jay Carlson",
+        "email": "jcarlson@unl.edu"
+      },
+      {
+        "name": "Jay Carlson",
+        "email": "jay.d.carlson@gmail.com"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "Kreyl/Salem",
+    "emails": [
+      {
+        "name": "Kreyl",
+        "email": "laystoll@yandex.ru"
+      }
+    ]
+  },
+  {
+    "file": ".gitignore",
+    "repo": "CURG/graspit_handop",
+    "emails": [
+      {
+        "name": "BoyuanChen",
+        "email": "bc2699@columbia.edu"
+      },
+      {
+        "name": "David Watkins",
+        "email": "djrival7@gmail.com"
+      },
+      {
+        "name": "iretiayo",
+        "email": "iretibob@gmail.com"
+      },
+      {
+        "name": "Jake Varley",
+        "email": "jakevarley@gmail.com"
+      },
+      {
+        "name": "jon-weisz",
+        "email": "jweisz@cs.columbia.edu"
+      },
+      {
+        "name": "jvarley",
+        "email": "armuser@quemoy.(none)"
+      },
+      {
+        "name": "davidwatkins",
+        "email": "davidw@tkins.me"
+      }
+    ]
+  }
+]
