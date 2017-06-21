@@ -8,6 +8,6 @@ export const groupRevisions = (revisions) => {
 }
 
 export const orderByTime = (items) => orderBy(items, [
-  (item) => item.data.revisionNumber,
   (item) => (new Date(item.timestamp)).getTime(),
-], ['asc', 'asc']);
+  (item) => item.data.revisionNumber,
+], ['desc', 'desc']);

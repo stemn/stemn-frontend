@@ -142,6 +142,7 @@ export function deleteComment({ comment, timelineCacheKey }) {
       // Get the eventId of the comment
       console.log(getState().syncTimeline[timelineCacheKey]);
       const event = getState().syncTimeline[timelineCacheKey].data.find(event => event.data.comment === comment._id);
+      console.log({event});
       if (event) {
         dispatch(deleteEvent({
           cacheKey: timelineCacheKey,

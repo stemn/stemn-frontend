@@ -44,7 +44,7 @@ export const add = ({ entityId, entityType, type, number, numberModel }) => (dis
       type,
     },
   })
-  if (number && numberModel) {
+  if (numberModel) {
     dispatch(storeChange(numberModel, number + 1))
   }
 }

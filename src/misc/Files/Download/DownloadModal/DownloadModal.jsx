@@ -1,51 +1,52 @@
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry'
-import * as SyncTimelineActions from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js';
 import React, { PropTypes } from 'react';
+
 import moment from 'moment';
 import { orderBy } from 'lodash';
+import { orderByTime } from 'stemn-shared/misc/Timeline/Timeline.utils'
+import { getRevisions } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.utils'
+
 import classNames from 'classnames';
 import classes from './DownloadModal.css'
+
 import Button from 'stemn-shared/misc/Buttons/Button/Button';
 import MdDone from 'react-icons/md/done';
 import DownloadFile from '../../DownloadFile/DownloadFile.jsx'
-import Label        from 'stemn-shared/misc/Label/Label.jsx'
+import Label from 'stemn-shared/misc/Label/Label.jsx'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
 
 const propTypesObject = {
-  revisions   : PropTypes.array,                // Standard array of revisions
-  file        : PropTypes.object.isRequired,    // File object
+//  revisions: PropTypes.array,                // Standard array of revisions
+  file: PropTypes.object.isRequired,    // File object
 }
 
-export const DownloadModal = React.createClass({
+export default React.createClass({
   propTypes: propTypesObject,
-  onMount(nextProps, prevProps){
-    // If this is a sync file
-    if(nextProps.file.project && nextProps.file.project._id){
-      nextProps.syncTimelineActions.fetchTimeline({
-        entityType : 'file',
-        entityId   : nextProps.file.fileId,
+  componentWillMount() { 
+    const { file, fetchTimeline } = this.props
+    if (file.project && file.project._id) {
+      // If this is a sync file
+      fetchTimeline({
+        entityType: 'file',
+        entityId: file.fileId,
+        cacheKey: file.fileId,
       })
-    }
-    // If this is remote file
-    else {
-      nextProps.syncTimelineActions.fetchTimeline({
-        entityType : 'file',
-        entityId   : nextProps.file.fileId,
-        provider   : nextProps.file.provider,
+    } else {
+      // If this is remote file
+      fetchTimeline({
+        entityType: 'file',
+        entityId: file.fileId,
+        provider: file.provider,
+        cacheKey: file.fileId,
       })
     }
   },
-  componentWillMount() { this.onMount(this.props) },
   render() {
-    const { modalCancel, modalConfirm } = this.props;
-    const { revisions, syncTimeline } = this.props;
+    const { syncTimeline, modalCancel, modalConfirm } = this.props;
 
-    const orderByTime = (items) => orderBy(items, item => (new Date(item.timestamp)).getTime(), 'desc');
-    const filterByRevision = (items) => items.filter(item => item.event == 'revision');
-
-    const allRevisions = syncTimeline && syncTimeline.data ? orderByTime(filterByRevision(syncTimeline.data)) : [];
+    const allRevisions = syncTimeline && syncTimeline.data 
+      ? orderByTime(getRevisions(syncTimeline.data)) 
+      : []
+    
     return (
       <div className={classes.modal + ' layout-column'}>
         <div className="modal-title">Download previous versions</div>
@@ -72,20 +73,3 @@ export const DownloadModal = React.createClass({
   }
 })
 
-function stateToProps({syncTimeline}, {file}) {
-  return {
-    syncTimeline: syncTimeline[file.fileId],
-  };
-}
-
-function dispatchToProps(dispatch) {
-  return {
-    syncTimelineActions: bindActionCreators(SyncTimelineActions, dispatch),
-    dispatch
-  }
-}
-
-const modalName = 'FILE_DOWNLOAD'
-const ModalComponent = connect(stateToProps, dispatchToProps)(DownloadModal)
-registerModal(modalName, ModalComponent)
-export default modalName

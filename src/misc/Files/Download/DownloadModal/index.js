@@ -1,1 +1,1 @@
-export default from './DownloadModal'
+export default from './DownloadModal.container'

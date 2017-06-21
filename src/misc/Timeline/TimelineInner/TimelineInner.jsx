@@ -75,7 +75,8 @@ const Component = React.createClass({
     const Items = items.map((item, index)=> {
       if(item.event == 'commit'){
         // Order the items by the timestamp
-        const subItemsOrdered = orderByTime(item.data.items);
+        const subItemsOrdered = orderByTime(item.data.items).reverse();
+        // These are reversed because they go left to right (not right to left like the other items)
         return (
           <Popover preferPlace={preferPlace || 'below'} trigger="hoverSingleDelay" tipSize={6}>
             <div key={item._id}  className={classNames(classes.dotGroup, 'layout-row layout-align-center-center')}>

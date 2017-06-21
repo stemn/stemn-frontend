@@ -133,21 +133,42 @@ const eventTextMap = {
         </span>
       )
   },  
-//  mention: (item, type, entity) => {
-//    const thread = get(item, 'data.thread', {})
-//    const project = get(item, 'data.project', {})
-//    const commit = get(item, 'data.commit', {})
-//    const comment = get(item, 'data.comment', {})
-//    
-//    if (commit._id) {
-//      return (
-//        <span>
-//          mentioned
-//          <Link name="commitRoute" params={ params }>{ commit.name }</Link>
-//        </span>
-//      )
-//    }
-//  },
+  mention: (item, type, entity) => {    
+    const locationCommit = get(item, 'data.mentionLocation.commit', {})
+    const locationProject = get(item, 'data.mentionLocation.project', {})
+    const locationComment = get(item, 'data.mentionLocation.comment', {})
+    const locationThread = get(item, 'data.mentionLocation.thread', {})
+    
+    const locationParams = {
+      projectId: locationProject._id,
+      commitId: locationCommit._id,
+      threadId: locationThread._id,
+      commentId: locationComment._id,
+    }
+
+    const mentionedUser = get(item, 'data.mention.user.name')
+    const mentionedItemString = mentionedUser ? mentionedUser : 'this thread'
+
+    if (locationCommit._id) {
+      return (
+        <span>
+          mentioned { mentionedItemString } in
+          <Link name="commitRoute" params={ locationParams }>{ locationCommit.name }</Link>
+        </span>
+      )
+    } else if (locationThread._id) {
+      return (
+        <span>
+          mentioned { mentionedItemString } in
+          <Link name="projectThreadRoute" params={ locationParams }>{ locationThread.name }</Link>
+        </span>
+      )
+    } else {
+      return <span>Invalid mention format</span>
+    }
+  },
+    
+
   commit: (item, type, entity) => {
     const commit = get(item, 'data.commit', {})
     const project = get(item, 'data.project', {})
@@ -295,11 +316,11 @@ const eventTextMap = {
       return <span>Changed Labels</span>
     }
   },
-  movedGroups: (item, type, entity) => {
+  movedGroup: (item, type, entity) => {
     const group1 = entity.data.groups.find(group => group._id === item.data.movedGroups[0])
     const group2 = entity.data.groups.find(group => group._id === item.data.movedGroups[1])
     const params = {
-      projectId: entity.data.project._id
+      projectId: entity.data.project
     }
     return (
       <span>
