@@ -1,10 +1,10 @@
 import React from 'react';
 import PDFJS from 'pdfjs-dist/build/pdf.combined.js'
+import { get } from 'lodash'
 
 import Viewer from './PreviewPdfViewer.jsx'
 import classes from './PreviewPdf.css';
 import ScrollZoom from 'stemn-shared/misc/Scroll/ScrollZoom/ScrollZoom.jsx';
-import { getDownloadUrl } from '../../utils';
 
 // Link to the workerSrc bundle (See example here https://github.com/mozilla/pdf.js/blob/master/examples/webpack/main.js)
 PDFJS.PDFJS.workerSrc = process.env.HOT ? 'http://localhost:3001/dist/pdfWorker/index.js' : '../../pdfWorker/index.js';
@@ -18,26 +18,21 @@ const PDF = React.createClass({
   componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
   onMount(nextProps, prevProps) {
     // If the previewId changes, download a new file
-    if(!prevProps || nextProps.previewId !== prevProps.previewId){
-      if (GLOBAL_ENV.APP_TYPE == 'desktop') {
-        // Get the file data
-        nextProps.downloadFn({
-          projectId    : nextProps.fileMeta.project._id,
-          provider     : nextProps.fileMeta.provider,
-          fileId       : nextProps.fileMeta.fileId,
-          revisionId   : nextProps.fileMeta.revisionId,
-          responseType : 'path'
-        })
-        if (nextProps.fileData && nextProps.fileData.data) {
-          PDFJS.getDocument(nextProps.fileData.data).then((pdf) => {
-            this.setState({ pdf })
-          })
-        }
-      } else {
-        PDFJS.getDocument(getDownloadUrl(nextProps.fileMeta)).then((pdf) => {
-          this.setState({ pdf })
-        })
-      }
+    if (!prevProps || nextProps.previewId !== prevProps.previewId) {
+      // Get the file data
+      nextProps.downloadFn({
+        projectId    : nextProps.fileMeta.project._id,
+        provider     : nextProps.fileMeta.provider,
+        fileId       : nextProps.fileMeta.fileId,
+        revisionId   : nextProps.fileMeta.revisionId,
+        responseType : 'path'
+      })
+    }
+
+    if (get(nextProps, 'fileData.data') !==  get(prevProps, 'fileData.data')) {
+      PDFJS.getDocument(nextProps.fileData.data).then((pdf) => {
+        this.setState({ pdf })
+      })
     }
   },
 

@@ -1,8 +1,8 @@
-import { remote } from 'electron
+import { remote } from 'electron'
 import http from 'axios'
 import fs from 'fs'
 import downloadProgress from './downloadProgress'
-import getFullPath from './getFullPath'
+import getFullPath from './getFullPath.desktop'
 
 const saveFile = ({ fileUrl, filePath, onProgress }) => {
   const getDestination = (defaultPath) => {
