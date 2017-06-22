@@ -210,12 +210,14 @@ export default class ProjectThread extends Component {
               <Crumb name="projectThreadsRoute" params={ { projectId: project.data._id } } query={ { groups: [ group._id ]} } text={ group.name } />
               <Crumb text={ thread.data.name || 'Untitled Thread' } />
             </Breadcrumbs>
-            <Popover preferPlace="below">
-              <SimpleIconButton className={ classes.settingsButton }>
-                <MdMoreHoriz size="20px"/>
-              </SimpleIconButton>
-              <PopoverMenuList menu={ this.menu } />
-            </Popover>
+            { canEdit &&
+              <Popover preferPlace="below">
+                <SimpleIconButton className={ classes.settingsButton }>
+                  <MdMoreHoriz size="20px"/>
+                </SimpleIconButton>
+                <PopoverMenuList menu={ this.menu } />
+              </Popover>
+            }
               <br />
               <h2 className={ classes.title }>
                 { edit
@@ -278,6 +280,7 @@ export default class ProjectThread extends Component {
                         className="primary"
                         name="projectThreadRoute"
                         params={ threadRouteParams }
+                        onClick={ this.updateThread }
                       >
                         Save
                       </Button>
@@ -326,17 +329,4 @@ export default class ProjectThread extends Component {
     }
   }
 }
-
-
-
-
-//              <Tag className="primary">
-//                <MdAccessTime size={ 20 } style={ { marginRight: '5px' } }/>
-//                {`Due ${ moment(thread.data.due).fromNow() }`}
-//              </Tag>
-
-//
-//                <div className={ classes.panel }>
-//                  <div className="text-mini-caps">Related Files</div>
-//                </div>
 

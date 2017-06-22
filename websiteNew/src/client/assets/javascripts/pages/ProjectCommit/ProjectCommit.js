@@ -31,7 +31,7 @@ export default class ProjectCommit extends Component {
             <span className={ classes.number }>&nbsp;#C{ commit.data.commitNumber }</span>
           </h2>
           <div className={ classes.blurb }>
-            <EditorDisplay value={ commit.data.description } />
+            <EditorDisplay value={ commit.data.body } />
           </div>
           <div className={ classNames('layout-row layout-align-start-center', classes.meta)}>
             <UserAvatar

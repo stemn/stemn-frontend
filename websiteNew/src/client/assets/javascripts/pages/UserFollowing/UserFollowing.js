@@ -11,7 +11,7 @@ export default class UserFollowing extends Component {
 
     return (
       <div>
-        <div className='text-mini-caps'>People who follow { user.data.profile.firstname }</div>
+        <div className='text-mini-caps'>People who { user.data.profile.firstname } follows</div>
         <br/>
         <div className={ classes.panel }>
           { items && items.data
