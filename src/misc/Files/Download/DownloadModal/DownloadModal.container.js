@@ -19,5 +19,3 @@ const modalName = 'FILE_DOWNLOAD'
 const ModalComponent = connect(stateToProps, dispatchToProps)(DownloadModal)
 registerModal(modalName, ModalComponent)
 export default modalName
-
-
