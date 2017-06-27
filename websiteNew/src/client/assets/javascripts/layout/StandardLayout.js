@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Header from 'modules/Header';
 import Footer from 'modules/Footer';
+import ScrollToTop from 'stemn-shared/misc/Scroll/ScrollToTop'
 
 import classNames from 'classnames';
 import { Container } from 'stemn-shared/misc/Layout';
@@ -24,6 +25,7 @@ class StandardLayout extends Component {
     return (
       <div className={ classNames(standardClasses) } { ...otherProps }>
         <Header />
+        <ScrollToTop />
         <div className="flex layout-column">
            { this.renderInner(children, contained, style, className) }
         </div>
