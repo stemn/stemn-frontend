@@ -1,6 +1,7 @@
 import http from 'axios';
 import * as ThreadsActions from '../Threads/Threads.actions.js';
 import { addEvent, deleteEvent } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
+import confirmAuth from 'stemn-shared/misc/Auth/actions/confirmAuth'
 
 export function getComment({commentId}) {
   return {
@@ -53,42 +54,39 @@ export function newComment({ comment, timelineCacheKey }) {
   }
 }
 
-export function toggleReaction({commentId, reactionType}) {
-  return (dispatch, getState) => {
-    const reactions = getState().comments.data[commentId].data.reactions;
-    const userId = getState().auth.user._id;
-    const reactionExists = reactions.find(reaction => reaction.owner._id == userId && reaction.type == reactionType);
+export const toggleReaction = ({commentId, reactionType}) => confirmAuth((dispatch, getState) => {
+  const reactions = getState().comments.data[commentId].data.reactions;
+  const userId = getState().auth.user._id;
+  const reactionExists = reactions.find(reaction => reaction.owner._id == userId && reaction.type == reactionType);
 
-    if(reactionExists){
-      dispatch(deleteReaction({commentId, reactionType}))
-    }
-    else{
-      dispatch(newReaction({commentId, reactionType}))
-    }
+  if(reactionExists){
+    dispatch(deleteReaction({commentId, reactionType}))
   }
-}
-
-export function newReaction({commentId, reactionType}) {
-  return (dispatch) => {
-
-    const reaction = {
-      type: reactionType
-    };
-
-    dispatch({
-      type: 'COMMENTS/NEW_REACTION',
-      http: true,
-      payload: {
-        url: `/api/v1/comments/${commentId}/reaction`,
-        method: 'POST',
-        data: reaction
-      },
-      meta: {
-        commentId,
-      }
-    })
+  else{
+    dispatch(newReaction({commentId, reactionType}))
   }
-}
+})
+
+export const newReaction = ({commentId, reactionType}) => confirmAuth((dispatch) => {
+
+  const reaction = {
+    type: reactionType
+  };
+
+  dispatch({
+    type: 'COMMENTS/NEW_REACTION',
+    http: true,
+    payload: {
+      url: `/api/v1/comments/${commentId}/reaction`,
+      method: 'POST',
+      data: reaction
+    },
+    meta: {
+      commentId,
+    }
+  })
+})
+
 
 export function deleteReaction({commentId, reactionType}) {
   return (dispatch, getState) => {

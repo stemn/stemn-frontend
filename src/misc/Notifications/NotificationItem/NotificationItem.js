@@ -40,6 +40,7 @@ export default class NotificationItem extends Component {
                 return <span key={ idx }>{ item }</span>
               }
             }) }
+            .
           </div>
           <div className={ classes.meta }>
             { moment(notification.timestamp).fromNow() }

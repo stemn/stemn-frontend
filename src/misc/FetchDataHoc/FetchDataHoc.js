@@ -1,14 +1,25 @@
-import React, { Component } from 'react';
-import { get } from 'lodash';
+import React, { Component } from 'react'
+import { get } from 'lodash'
+
+//const filterMountConfig = (config) => config.filter(item => !item.unmount)
+const filterUnMountConfig = (config) => config.filter(item => item.unmount)
 
 const fetchDataHoc = (configs) => (WrappedComponent) => {
   return class fetchData extends Component {
+    // Mount
     componentDidMount() {
-      this.mount(this.props, {}, true);
+      this.mount(this.props, {}, true)
     }
     componentWillReceiveProps(nextProps) {
-      this.mount(nextProps, this.props, false);
+      this.mount(nextProps, this.props, false)
     }
+    // Unmount
+    componentWillUnmount() {
+      // Note, we set firstRun to true because this is the last run so we want to process
+      // all unmount events
+      filterUnMountConfig(configs).forEach(config => this.processConfig({}, this.props, true, config))
+    }
+    // Utils
     determineHasChanged = (nextProps, prevProps, firstRun, config) => {
       if (firstRun) {
         // If it is first run, it has changed
@@ -22,14 +33,15 @@ const fetchDataHoc = (configs) => (WrappedComponent) => {
         return config.hasChanged(nextProps, prevProps);
       }
     }
+    processConfig = (nextProps, prevProps, firstRun, config) => {
+      // This will process the config if it has changed
+      const hasChanged = this.determineHasChanged(nextProps, prevProps, firstRun, config);
+      if (hasChanged) {
+        config.onChange(nextProps, prevProps);
+      }
+    }
     mount = (nextProps, prevProps, firstRun) => {
-      const processConfig = (config) => {
-        const hasChanged = this.determineHasChanged(nextProps, prevProps, firstRun, config);
-        if (hasChanged) {
-          config.onChange(nextProps);
-        }
-      };
-      configs.forEach(processConfig);
+      configs.forEach(config => this.processConfig(nextProps, prevProps, firstRun, config))
     }
     render() {
       return (
