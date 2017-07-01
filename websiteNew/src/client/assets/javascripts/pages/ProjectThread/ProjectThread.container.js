@@ -4,6 +4,7 @@ import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { get } from 'lodash'
 import ProjectThread from './ProjectThread'
 
+import { joinRoom, leaveRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
 import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
 import {
   deleteThread,
@@ -41,6 +42,8 @@ const dispatchToProps = {
   updateThread,
   fetchTimeline,
   deleteThread,
+  joinRoom,
+  leaveRoom,
 };
 
 const fetchConfigs = [{
@@ -65,6 +68,23 @@ const fetchConfigs = [{
       size: 500,
       entityType: 'thread',
     })
+    props.joinRoom({
+      type: 'thread',
+      room: props.threadId,
+    })
+  }
+}, {
+  // Leave the thread room on unmount/change
+  unmount: true,
+  hasChanged: 'threadId',
+  onChange: (nextProps, prevProps) => {
+    // We leave the prevRoom if there is a prev threadId
+    if (prevProps.leaveRoom && prevProps.threadId) {
+      prevProps.leaveRoom({
+        type: 'thread',
+        room: prevProps.threadId,
+      })
+    }
   }
 }]
 
