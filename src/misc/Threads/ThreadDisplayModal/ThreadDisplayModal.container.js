@@ -6,6 +6,7 @@ import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { getThread, getBoard, showLabelEditModal, updateThread, toggleComplete, deleteThread } from '../Threads.actions.js'
 import { getProject } from 'stemn-shared/misc/Projects/Projects.actions.js'
 import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
+import { joinRoom, leaveRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
 
 import { has, get } from 'lodash'
 
@@ -37,6 +38,8 @@ const mapDispatchToProps = {
   toggleComplete,
   deleteThread,
   fetchTimeline,
+  joinRoom,
+  leaveRoom,
 }
 
 const fetchConfigs = [{
@@ -50,6 +53,10 @@ const fetchConfigs = [{
       entityType: 'thread',
       size: 500,
     })
+    props.joinRoom({
+      type: 'thread',
+      room: props.threadId,
+    })
     if (!has(props, 'board.data')) {
       props.getBoard({
         boardId: props.thread.data.board
@@ -58,6 +65,19 @@ const fetchConfigs = [{
     if (!has(props, 'project.data')) {
       props.getProject({
         projectId: props.thread.data.project._id,
+      })
+    }
+  }
+}, {
+  // Leave the thread room on unmount/change
+  unmount: true,
+  hasChanged: 'threadId',
+  onChange: (nextProps, prevProps) => {
+    // We leave the prevRoom if there is a prev threadId
+    if (prevProps.leaveRoom && prevProps.threadId) {
+      prevProps.leaveRoom({
+        type: 'thread',
+        room: prevProps.threadId,
       })
     }
   }

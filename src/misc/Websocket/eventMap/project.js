@@ -5,11 +5,11 @@ import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actio
 export default (store, action) => {
   const { dispatch, getState } = store
 
-  if (action.payload.actioner === getState().auth.user._id){
-    return undefined
-  }
-
-  // Actions that we DON'T process if user is the actioner
+//  if (action.payload.actioner === getState().auth.user._id){
+//    return undefined
+//  }
+//
+//  // Actions that we DON'T process if user is the actioner
   switch (action.type) {
     case 'PROJECT/ADDED_TO_PROJECT':
       return dispatch(getUserProjects({ userId : getState().auth.user._id }))
