@@ -20,7 +20,7 @@ export default React.createClass({
         <SimpleIconButton style={{padding: '0'}}>
           <MdInsertEmoticon size="20px" />
         </SimpleIconButton>
-        <div className="PopoverMenu">
+        <div className="PopoverMenu" style={ { padding: '5px' } }>
           {options.map(option => <span
             title={option.type}
             onClick={()=>submitFn(option.type)}

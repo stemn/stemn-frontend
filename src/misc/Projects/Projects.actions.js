@@ -187,21 +187,21 @@ export const removeField = ({ projectId, fieldId }) => ({
 export const confirmLinkRemote = ({ isConnected, id, path, prevProvider, project, projectId, provider, userId }) => (dispatch) => {
 
   const linkRemoteProviderDependent = () => {
-    if (!provider) {
-      return unlinkRemote({
+    if (!provider && prevProvider) {
+      return dispatch(unlinkRemote({
         prevProvider,
         projectId,
         userId
-      })
-    } else {
-      return linkRemote({
+      }))
+    } else if (provider) {
+      return dispatch(linkRemote({
         id,
         path,
         prevProvider,
         projectId,
         provider,
         userId
-      })
+      }))
     }
   }
 
@@ -209,10 +209,10 @@ export const confirmLinkRemote = ({ isConnected, id, path, prevProvider, project
     return dispatch(ModalActions.showConfirm({
       message: 'Changing your file store <b>will delete your entire commit and change history.</b> Are you sure you want to do this? There is no going back.',
     })).then(() => {
-      return dispatch(linkRemoteProviderDependent())
+      return linkRemoteProviderDependent()
     })
   } else {
-    return dispatch(linkRemoteProviderDependent())
+    return linkRemoteProviderDependent()
   }
 }
 

@@ -73,7 +73,7 @@ export default React.createClass({
         </div>
       )
     } else {
-      return <div>Error</div>
+      return null
     }
 //    else {
 //      return (
