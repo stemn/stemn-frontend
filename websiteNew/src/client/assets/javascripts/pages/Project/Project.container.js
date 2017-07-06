@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { getProject } from 'stemn-shared/misc/Projects/Projects.actions'
-import { getCount } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
+import { joinRoom, leaveRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
 import Project from './Project'
 
 const stateToProps = ({ projects }, { params, location }) => ({
@@ -14,16 +14,35 @@ const stateToProps = ({ projects }, { params, location }) => ({
 
 const dispatchToProps = {
   getProject,
+  joinRoom,
+  leaveRoom,
 }
 
 const fetchConfigs = [{
-  hasChanged: 'params.stub',
+  hasChanged: 'projectId',
   onChange: (props) => {
     props.getProject({
       projectId: props.projectId,
       size: 'lg',
       force: true,
+    })   
+    props.joinRoom({
+      room: props.projectId,
+      type: 'project',
     })
+  }
+}, {
+  // Leave the project room on unmount/change
+  unmount: true,
+  hasChanged: 'projectId',
+  onChange: (nextProps, prevProps) => {
+    // We leave the prevRoom if there is a prev threadId
+    if (prevProps.leaveRoom && prevProps.projectId) {
+      prevProps.leaveRoom({
+        type: 'project',
+        room: prevProps.projectId,
+      })
+    }
   }
 }]
 
