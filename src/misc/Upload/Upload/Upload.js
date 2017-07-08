@@ -75,7 +75,7 @@ export default class Upload extends Component {
               <div
                 key={ index }
                 className={ imageClasses }
-                style={ { backgroundImage: `url(${file.path ? `https://stemn.com${file.path}` : file.preview})`} }>
+                style={ { backgroundImage: `url(${file.path ? `https://dev.stemn.com${file.path}` : file.preview})`} }>
                 { !uploadData.loading
                 ? this.renderOverlay()
                 : null }
@@ -89,7 +89,7 @@ export default class Upload extends Component {
             ))
             : <div
                 className={ imageClasses }
-                style={ value ? { backgroundImage: `url(https://stemn.com${value})` } : {} }
+                style={ value ? { backgroundImage: `url(https://dev.stemn.com${value})` } : {} }
               >
                 { this.renderOverlay() }
               </div>
