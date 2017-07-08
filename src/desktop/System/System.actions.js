@@ -1,10 +1,9 @@
-import * as LocalPathActions from 'stemn-shared/desktop/LocalPath/LocalPath.actions.js';
-import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js';
-import { getFullPath }   from 'stemn-shared/misc/Files/Files.actions.js';
-
-import { shell } from 'electron';
-
+import * as LocalPathActions from 'stemn-shared/desktop/LocalPath/LocalPath.actions.js'
+import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js'
+import { getFullPath }   from 'stemn-shared/misc/Files/Files.actions.js'
+import { shell } from 'electron'
 import errorModalName from 'stemn-shared/misc/Modal/ErrorModal'
+import { normaliseSlashes } from 'stemn-shared/desktop/System/System.utils'
 
 export function getProviderPath() {
   return (dispatch, getState) => {
@@ -68,25 +67,26 @@ export function openFile({location, path, projectId, provider}) {
     }
 
     const open = (fullPath) => {
-      if(location){
-        const success = shell.showItemInFolder(fullPath);
-        if(!success){showErrorDialog({path: fullPath})};
+      const fullPathNormalised = normaliseSlashes(fullPath)
+      if (location) {
+        const success = shell.showItemInFolder(fullPathNormalised);
+        if(!success){showErrorDialog({path: fullPathNormalised})};
         return dispatch({
           type: 'SYSTEM/OPEN_FILE_LOCATION',
-          payload: { path: fullPath }
+          payload: { path: fullPathNormalised }
         })
-      }else{
-        const success = shell.openItem(fullPath);
-        if(!success){showErrorDialog({path: fullPath})};
+      } else {
+        const success = shell.openItem(fullPathNormalised);
+        if(!success){showErrorDialog({path: fullPathNormalised})};
         dispatch({
           type: 'SYSTEM/OPEN_FILE',
-          payload: { path: fullPath }
+          payload: { path: fullPathNormalised }
         })
       }
     };
 
-    const storeState = getState();
-    return dispatch(getFullPath({path, projectId, provider})).then(fullPath => {
+    const storeState = getState()
+    return dispatch(getFullPath({path, projectId, provider})).then((fullPath) => {
       return open(fullPath)
     })
   }

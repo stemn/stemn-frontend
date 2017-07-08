@@ -3,6 +3,7 @@ import os from 'os';
 import pify from 'pify';
 import { shell } from 'electron';
 import querystring from 'querystring';
+import process from 'process'
 
 export const getInstallStatus = () => {
   if(process.platform == 'linux'){
@@ -22,3 +23,10 @@ export const openExternal = ({url, params}) => {
   const stringParams = querystring.stringify(params);
   shell.openExternal(stringParams ? url+'?'+stringParams : url)
 }
+
+// Normalise paths for linux/windows bases operating systems
+// so they use the right kind of slash
+export const normaliseSlashes = (path) => process.platform === 'win32'
+  ? path.replace('/', '\\')
+  : path.replace('\\', '/')
+
