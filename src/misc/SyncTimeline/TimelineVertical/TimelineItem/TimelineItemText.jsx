@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Link from 'stemn-shared/misc/Router/Link'
 import ThreadLabelDots from 'stemn-shared/misc/Threads/ThreadLabelDots/ThreadLabelDots.jsx'
+import UserNameFromId from 'stemn-shared/misc/Users/UserNameFromId'
 import pluralise from 'stemn-shared/utils/strings/pluralise'
 import { get, has } from 'lodash'
 import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
@@ -28,8 +29,16 @@ const eventTextMap = {
       )
     }
   },
-  addAsignee: (item, type, entity) => <span>was assigned to this thread</span>,
-  removeAsignee : (item, type, entity) => <span>was removed from assignees</span>,
+  addedUsers: (item, type, entity) => {
+    return (
+      <span>assigned<UserNameFromId userId={ item.data.addedUsers[0] }/>to this thread.</span>
+    )
+  },
+  removedUsers: (item, type, entity) => {
+    return (
+      <span>unassigned<UserNameFromId userId={ item.data.removedUsers[0] }/>from this thread.</span>
+    )
+  },
   revision: (item, type, entity, groupItem, groupTitle) => {
     const project = get(item, 'data.project', {})
     const params = {

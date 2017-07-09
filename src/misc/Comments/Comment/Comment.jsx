@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import classNames from 'classnames';
 import classes from './Comment.css';
+import Link from 'stemn-shared/misc/Router/Link'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import Editor from 'stemn-shared/misc/Editor/EditorNew';
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'
@@ -73,13 +74,15 @@ export default class Comment extends Component {
       <div id={ commentId } className={classes.comment + ' layout-column'} style={style}>
         <div className={classes.commentBody + ' flex'}>
           <div className={classes.commentHeader + ' layout-row layout-align-start-center'}>
-            <UserAvatar
-              picture={ comment.data.owner.picture }
-              size={ 25 }
-              shape="square"
-              className={ classes.commentAvatar }
-            />
-            <b>{ comment.data.owner.name }</b>
+            <Link name="userRoute" params={ { userId: comment.data.owner._id } }>
+              <UserAvatar
+                picture={ comment.data.owner.picture }
+                size={ 25 }
+                shape="square"
+                className={ classes.commentAvatar }
+              />
+              <b>{ comment.data.owner.name }</b>
+            </Link>
             &nbsp;
             { showMeta && children }
             <span className={ classes.date }>

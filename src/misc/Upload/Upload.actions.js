@@ -1,7 +1,6 @@
-import http from 'axios';
+import http from 'axios'
 
-
-export function upload({cacheKey, files}) {
+export function upload({ cacheKey, files }) {
   return (dispatch) => {
     // Create the data object
     let data = new FormData();
@@ -34,7 +33,7 @@ export const reset = ({ cacheKey }) => ({
   }
 })
 
-export function progress({percentage, cacheKey}) {
+export function progress({ percentage, cacheKey }) {
   return {
     type: 'UPLOAD/PROGRESS',
     payload: {
