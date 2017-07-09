@@ -223,7 +223,7 @@ export default class ProjectThread extends Component {
                 { edit
                 ? <Input
                     model={ `${threadModel}.data.name` }
-                    className="input-plain"
+                    className="dr-input"
                     placeholder="Thread Title"
                     value={ thread.data.name }
                   />
