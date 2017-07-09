@@ -78,7 +78,7 @@ class User extends Component {
   render() {
     const { user, children } = this.props
 
-    const isLoaded = user && user.data
+    const isLoaded = user && user.data && user.dataSize === 'lg'
 
     return (
       <StandardLayout>
