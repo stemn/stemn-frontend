@@ -48,7 +48,9 @@ const stateToProps = ({ projects, threads, search, stringFilter }, { params, loc
   const page = location.query.page || 1
   const size = 30
 
-  const filterDefaults = {}
+  const filterDefaults = {
+    status: 'open',
+  }
   const filterCacheKey = `threads-${projectId}`
   const filter = stringFilter[filterCacheKey] || getFilter(filterDefaults, filterModel, location.query)
   const filterIsDefault = isEqual(filterDefaults, filter.object)

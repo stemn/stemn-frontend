@@ -11,6 +11,7 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import Tag from 'stemn-shared/misc/Tags/Tag'
 import SocialButton from 'stemn-shared/misc/Social/SocialButton'
 import SubSubHeader from 'modules/SubSubHeader'
+import UserAvatars from 'stemn-shared/misc/Avatar/UserAvatars/UserAvatars.jsx'
 import Link from 'stemn-shared/misc/Router/Link'
 import { licenseData } from 'stemn-shared/misc/Licenses/Licenses.data'
 import MdLocationOn from 'react-icons/md/location-on'
@@ -52,17 +53,17 @@ export default class ProjectOverview extends Component {
       const infoBoxes = (
         <Col className={ classNames(project.data.picture ? 'flex flex-gt-xs-33' : 'flex') }>
           <div className={ classNames(project.data.picture ? 'layout-column' : 'layout-xs-column layout-gt-xs-row', classes.infoBoxes)}>
+            <div className='flex layout-row layout-align-start-center' style={ { padding: '15px 20px' } }>
+              <MdPeople />
+              Team
+              <div className="flex" />
+              <Link name="projectTeamRoute" params={ projectRouteParams }>
+                <UserAvatars className="layout-row" shape="square" size={ 30 } users={ project.data.team } limit={ 5 } />
+              </Link>
+            </div>
             <div className='flex layout-row layout-align-start-center'>
               <MdAccessTime />
               Updated { moment(project.data.updated).fromNow() }
-            </div>
-            <div className='flex layout-row layout-align-start-center'>
-              <MdPeople />
-              <Link name="projectTeamRoute" params={ projectRouteParams }>
-                { project.data.team.length === 1
-                ? `${project.data.team.length} team member`
-                : `${project.data.team.length} team members` }
-              </Link>
             </div>
             { has(project, 'data.location[0].name')
               ? <div className='flex layout-row layout-align-start-center'>
