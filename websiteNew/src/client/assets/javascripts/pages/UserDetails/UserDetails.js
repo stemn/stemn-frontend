@@ -96,30 +96,53 @@ class ExperienceItem extends Component {
 
 export default class UserDetails extends Component {
   render() {
-    const { user } = this.props;
+    const { user } = this.props
+    const hasExperience = user.data.profile.profileDetails.experience && user.data.profile.profileDetails.experience.length > 0
+    const hasEducation = user.data.profile.profileDetails.education && user.data.profile.profileDetails.education.length > 0
+    const hasAbout = user.data.profile.profileDetails.summary.length > 0
+    
     return (
       <div>
-        <div className='text-mini-caps'>About</div>
-        <br />
-        <InfoPanel>
-          <p className={ classes.summary }>{ user.data.profile.profileDetails.summary }</p>
-        </InfoPanel>
-        <br />
-        <div className='text-mini-caps'>Education</div>
-        <br />
-        <InfoPanel>
-          { user.data.profile.profileDetails.education.map((item) => (
-            <EducationItem key={ item._id } item={ item } />
-          ))}
-        </InfoPanel>        
-        <br />
-        <div className='text-mini-caps'>Experience</div>
-        <br />
-        <InfoPanel>
-          { user.data.profile.profileDetails.experience.map((item) => (
-            <ExperienceItem key={ item._id } item={ item } />
-          ))}
-        </InfoPanel>
+        { hasAbout && ( 
+          <div>
+            <div className='text-mini-caps'>About</div>
+            <br />
+            <InfoPanel>
+              <p className={ classes.summary }>{ user.data.profile.profileDetails.summary }</p>
+            </InfoPanel>
+            <br />
+          </div>
+        )}
+        { hasEducation && (
+          <div>
+            <div className='text-mini-caps'>Education</div>
+            <br />
+            <InfoPanel>
+              { user.data.profile.profileDetails.education.map((item) => (
+                <EducationItem key={ item._id } item={ item } />
+              ))}
+            </InfoPanel>        
+            <br />
+          </div>
+        )}
+        { hasExperience && (
+          <div>
+            <div className='text-mini-caps'>Experience</div>
+            <br />
+            <InfoPanel>
+              { user.data.profile.profileDetails.experience.map((item) => (
+                <ExperienceItem key={ item._id } item={ item } />
+              ))}
+            </InfoPanel>
+          </div>
+        )}
+        
+        { !hasAbout && !hasExperience && !hasEducation && (
+          <div className="text-title-5">
+            { user.data.profile.firstname } has no profile details
+          </div>
+        )}
+
       </div>
     )
   }
