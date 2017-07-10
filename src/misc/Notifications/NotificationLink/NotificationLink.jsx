@@ -21,11 +21,11 @@ const getRouteNameFromEntity = (entity) => {
 
 export default class NotificationLink extends Component {
   render () {
-    const { entity } = this.props
+    const { entity, children } = this.props
     if (entity) {
       return (
         <Link className="link-primary" name={ getRouteNameFromEntity(entity.entityType) } params={ entity }>
-          { entity.display || 'untitled' }
+          { children }
         </Link>
       )
     } else {

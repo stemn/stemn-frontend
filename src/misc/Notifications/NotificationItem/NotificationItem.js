@@ -21,7 +21,7 @@ export default class NotificationItem extends Component {
     let entityNumber = -1
 
     return (
-      <div className={ classNames(classes.notification, 'layout-row layout-align-start-center') }>
+      <div className={ classNames(classes.notification, 'layout-row layout-align-start-start') }>
         <UserAvatar
           className={ classes.avatar1 }
           picture={ notification.picture1 }
@@ -29,13 +29,17 @@ export default class NotificationItem extends Component {
           shape="square"
         />
         <div className="flex">
-          <div className={ classNames(classes.text, 'text-ellipsis') }>
+          <div className={ classNames(classes.text) }>
             { templateSplit.map((item, idx) => {
               if (item === '') {
                 // We iterate the entity number whenever we find an empty item
                 // in our split template array
                 entityNumber = entityNumber + 1
-                return <NotificationLink key={ idx } entity={ notification.entities[entityNumber] } />
+                return (
+                  <NotificationLink key={ idx } entity={ notification.entities[entityNumber] }>
+                    { notification.entities[entityNumber].display || 'untitled' }
+                  </NotificationLink>
+                )
               } else {
                 return <span key={ idx }>{ item }</span>
               }
@@ -47,12 +51,14 @@ export default class NotificationItem extends Component {
           </div>
         </div>
         { notification.picture2
-        ? <UserAvatar
-            className={ classes.avatar2 }
-            picture={ notification.picture2 }
-            size="33"
-            shape="square"
-          />
+        ? <NotificationLink entity={ notification.entities[1] }>
+            <UserAvatar
+              className={ classes.avatar2 }
+              picture={ notification.picture2 }
+              size="33"
+              shape="square"
+            />
+          </NotificationLink>
         : null }
         <a className={ classNames(classes.mark, {[classes.markRead] : notification.read}) } onClick={ markRead }>
           <MdDone size={ 24 } />

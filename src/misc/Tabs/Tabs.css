@@ -20,7 +20,8 @@
 
 .inner{
   height: 100%;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
   position: relative;
   margin-bottom: -10px; /* Bottom margin to hide scrollbar */
 }

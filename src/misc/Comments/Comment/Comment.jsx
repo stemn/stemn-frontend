@@ -81,11 +81,13 @@ export default class Comment extends Component {
                 shape="square"
                 className={ classes.commentAvatar }
               />
-              <b>{ comment.data.owner.name }</b>
+            </Link>
+            <Link name="userRoute" params={ { userId: comment.data.owner._id } }>
+              <b className="text-ellipsis">{ comment.data.owner.name }</b>
             </Link>
             &nbsp;
             { showMeta && children }
-            <span className={ classes.date }>
+            <span className={ classNames(classes.date, 'text-ellipsis') }>
               &nbsp;- { moment(comment.data.timestamp).fromNow() }
             </span>
             <div className="flex"></div>

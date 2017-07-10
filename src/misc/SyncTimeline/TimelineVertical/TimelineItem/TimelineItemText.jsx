@@ -31,12 +31,12 @@ const eventTextMap = {
   },
   addedUsers: (item, type, entity) => {
     return (
-      <span>assigned<UserNameFromId userId={ item.data.addedUsers[0] }/>to this thread.</span>
+      <span>assigned<UserNameFromId userId={ item.data.addedUsers[0] }/>to this thread</span>
     )
   },
   removedUsers: (item, type, entity) => {
     return (
-      <span>unassigned<UserNameFromId userId={ item.data.removedUsers[0] }/>from this thread.</span>
+      <span>unassigned<UserNameFromId userId={ item.data.removedUsers[0] }/>from this thread</span>
     )
   },
   revision: (item, type, entity, groupItem, groupTitle) => {

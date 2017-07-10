@@ -7,7 +7,6 @@
   overflow-y: hidden;
 }
 
-
 ::-webkit-scrollbar{
 	width: 4px;
 	height: 4px;
@@ -16,6 +15,7 @@
 ::-webkit-scrollbar-thumb{
 	background-color: rgba(0, 0, 0, 0.1);
 }
+
 .scroll-dark ::-webkit-scrollbar{
   width: 4px;
   height: 4px;

@@ -27,20 +27,20 @@ export default class ThreadRow extends Component {
       return (
         <div className={ classNames('layout-row layout-align-start-center', classes.row, className) }>
           <div className="layout-column flex">
-            <div>
-              <Link
-                className={ classes.title }
-                name="projectThreadRoute"
-                params={ threadRouteParams }
-              >
-                { thread.data.name }
-                { thread.data.threadNumber && <span className={ classes.threadNumber }>&nbsp;#T{ thread.data.threadNumber }</span> }
-              </Link>
-            </div>
+            <Link
+              className={ classNames(classes.title, 'text-ellipsis') }
+              name="projectThreadRoute"
+              params={ threadRouteParams }
+            >
+              { thread.data.name }
+              { thread.data.threadNumber && <span className={ classes.threadNumber }>&nbsp;#T{ thread.data.threadNumber }</span> }
+            </Link>
             <div className={ classes.meta }>
               { group && group.name && <span className="text-grey-2">{ group.name }</span> }
               { thread.data.due && <span className="text-interpunct" /> }
-              { thread.data.due && <DueDate due={ thread.data.due } /> }
+              { thread.data.due && <DueDate due={ thread.data.due } /> }              
+              { <span className="text-interpunct" /> }
+              { <span>{ thread.data.complete ? 'Closed' : 'Open' }</span> }
             </div>
           </div>
           <div>

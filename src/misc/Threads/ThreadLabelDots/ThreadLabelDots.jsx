@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import classes from './ThreadLabelDots.css'
+import classes from './ThreadLabelDots.scss'
 import Link from 'stemn-shared/misc/Router/Link'
 
 export default React.createClass({
