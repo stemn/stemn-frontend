@@ -176,8 +176,6 @@ const eventTextMap = {
       return <span>Invalid mention format</span>
     }
   },
-    
-
   commit: (item, type, entity) => {
     const commit = get(item, 'data.commit', {})
     const project = get(item, 'data.project', {})
