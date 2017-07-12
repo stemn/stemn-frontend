@@ -1,6 +1,7 @@
 // Container Core
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { get } from 'lodash'
 
 // Container Actions
 import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js';
@@ -23,7 +24,7 @@ export const Component = React.createClass({
       <div className={classes.container+' layout-row flex scroll-box'}>
         <div style={{width: '250px', marginRight: '15px'}}>
           <div className={classes.panel} style={{padding: '0px'}}>
-            <NavPill className="primary" href={`https://stemn.com/projects/${project.data.stub}`}>View project on stemn.com</NavPill>
+            <NavPill className="primary" name="webProjectRoute" params={ { projectId: get(project, 'data._id')} }>View project on stemn.com</NavPill>
           </div>
           <div className={classes.panel} style={{padding: '0px'}}>
             <NavPill to={`${baseLink}/settings`} onlyActiveOnIndex={true}>General</NavPill>

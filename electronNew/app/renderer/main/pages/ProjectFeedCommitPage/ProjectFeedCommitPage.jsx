@@ -41,7 +41,6 @@ export default class ProjectFeedPageCommit extends Component {
             <div className="flex" />
             <div className={ classes.links }>
               <Link className="link-primary" name="webCommitRoute" params={ params }>View Online</Link>
-              <a className="link-primary" onClick={ toggleMultiple }>Toggle All</a>
             </div>
           </div>
         </div>
@@ -61,3 +60,4 @@ export default class ProjectFeedPageCommit extends Component {
     )
   }
 }
+//              <a className="link-primary" onClick={ toggleMultiple }>Toggle All</a>
