@@ -11,6 +11,12 @@
   "dependencies": {
     "axios": "^0.16.2",
     "bluebird": "^3.5.0",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "lodash.compact": "^3.0.1",
+    "lodash.flatten": "^4.4.0",
+    "lodash.groupby": "^4.6.0",
+    "lodash.uniqwith": "^4.5.0",
+    "object-to-string": "^1.0.0",
+    "range": "0.0.3"
   }
 }
