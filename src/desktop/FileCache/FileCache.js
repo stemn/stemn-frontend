@@ -90,7 +90,7 @@ export const get = ({ key, url, params, name, responseType, extract, onProgressA
     // depending on the 'responseType'
     if (responseType == 'path') {
       const filePath = path.join(folderPath, fileCache[key].name);
-      return { data: filePath }
+      return { data: `file://${filePath}` }
     } else {
       return fsPromise.readFile(path.join(folderPath, fileCache[key].name)).then(response => {
         if (responseType == 'json') {
