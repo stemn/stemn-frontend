@@ -59,7 +59,7 @@ export default class Landing extends Component {
             <Row className={ secionClasses }>
               <Col className="flex-order-xs-2 flex-xs-100 flex-gt-xs-50 lg">
                 <h4 className="text-title-2">Access your files anywhere</h4>
-                <p className="text-title-4">Whether you’re in the office, in the lab, or on the go, preview your files in your browser, from any device.</p>
+                <p className="text-title-4">Whether you’re in the office, in the lab, or on the go, preview your files in your browser or any device.</p>
                 <p className="text-title-4">Preview hundreds of different file-types directly in your web browser.</p>
                 <div className={ classNames(classes.fileIcons, 'layout-row')}>
                   <FileIcon size={ 50 } type="file" fileType="dxf" />
@@ -85,8 +85,8 @@ export default class Landing extends Component {
             </Col>
             <Col className="flex-xs-100 flex-gt-xs-50 lg">
               <h4 className="text-title-2">No more miscommunication</h4>
-              <p className="text-title-4">Simplify your feedback process by team members, clients, and stakeholders comment directly on files.</p>
-              <p className="text-title-4">Stay informed of discussions and project milestones as soon as they happen.</p>
+              <p className="text-title-4">Simplify your communication between team members, clients, and stakeholders by commenting directly on files.</p>
+              <p className="text-title-4">Stay informed of discussions and project events as soon as they happen.</p>
             </Col>
           </Row>
         </Container>
@@ -118,4 +118,3 @@ export default class Landing extends Component {
     )
   }
 }
-

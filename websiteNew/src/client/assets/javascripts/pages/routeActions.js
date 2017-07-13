@@ -1,5 +1,4 @@
 export const commitRoute                 = ({ commitId, projectId })           => `/project/${projectId}/history/${commitId}`
-export const contactRoute                = ()                                  => `/contact`
 export const downloadRoute               = ()                                  => `/download`
 export const exploreRoute                = ()                                  => `/explore`
 export const fieldRoute                  = ({ fieldId })                       => `/fields/${fieldId}`
