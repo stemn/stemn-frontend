@@ -18,7 +18,7 @@ import AccordianAnimate from 'stemn-shared/misc/Animation/AccordianAnimate'
 import ChildrenHistory from 'stemn-shared/misc/Animation/ChildrenHistory'
 import FileSyncUnderway from 'stemn-shared/misc/FileList/FileSyncUnderway'
 
-        
+
 const contextIdentifier = 'FileListCm';
 const FileRowContext = GLOBAL_ENV.APP_TYPE === 'web'
   ? FileRow
@@ -79,7 +79,7 @@ export default class FileList extends Component {
     const filesFiltered = options.foldersOnly
       ? filesNormal.filter(file => file.type === 'folder')
       : filesNormal
-    const filesOrdered  = orderBy(filesFiltered, ['type', 'name'], ['desc', 'asc'])
+    const filesOrdered  = orderBy(filesFiltered, ['type', ({name}) => name.toLowerCase()], ['desc', 'asc'])
 
     if (filesOrdered && filesOrdered.length > 0) {
       return filesOrdered.map(file => (
@@ -106,7 +106,7 @@ export default class FileList extends Component {
     const filesFiltered = options.foldersOnly
       ? filesNormal.filter(file => file.type === 'folder')
       : filesNormal
-    const filesOrdered  = orderBy(filesFiltered, ['type', 'name'], ['desc', 'asc'])
+    const filesOrdered  = orderBy(filesFiltered, ['type', ({name}) => name.toLowerCase()], ['desc', 'asc'])
 
     if (filesOrdered && filesOrdered.length > 0) {
       return filesOrdered.map(file => (
@@ -134,13 +134,13 @@ export default class FileList extends Component {
     const fileRowChildren = get(fileList, 'query', '').length > 0
       ? this.renderSearchResults(isLoading)
       : this.renderResults(isLoading)
-    
+
     const fileRowHistoryShouldUpdate = !isLoading
     const fileRowHistoric = this.fileRowHistory.get(fileRowChildren, fileRowHistoryShouldUpdate)
-        
+
     return (
       <div { ...otherProps }>
-        { isInitialSync 
+        { isInitialSync
         ? <div className="rel-box">
             <LoadingOverlay
               show={ isLoading }
@@ -212,7 +212,7 @@ export default class FileList extends Component {
                 />
               : null }
             </div>
-          </div> }        
+          </div> }
       </div>
     )
   }

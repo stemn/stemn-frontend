@@ -13,7 +13,7 @@ const AutodeskLocalViewer = React.createClass({
       }
       this.viewer = autodeskViewerUtils.register(this.refs.cadCanvas, nextProps.linkKey);
       const filePath = `${nextProps.path}/1/model.svf`;
-      const filePathWithProtocol = filePath.startsWith('http') ? filePath : `file://${filePath}`;
+      const filePathWithProtocol = filePath.startsWith('http') ? filePath : `${filePath}`;
 
 
       const options = {
