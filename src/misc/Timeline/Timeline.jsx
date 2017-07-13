@@ -73,7 +73,7 @@ const Component = React.createClass({
     const moreRight = page > 0;
 
     // Order the items by the timestamp
-    const itemsOrdered = orderByTime(items)
+    const itemsOrdered = orderByTime(items).reverse()
 
     return (
       <div className={classNames(styles.timeline, className, {[styles.small]: size == 'sm'})} style={style}>
