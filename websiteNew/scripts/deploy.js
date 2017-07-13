@@ -30,17 +30,6 @@ const config = {
   commitMessage: 'automated deployment',
 }
 
-const ssh = new SSH({
-  host: config.ssh.host,
-  username: config.ssh.username,
-  privateKey: config.ssh.key,
-})
-
-const pullDist = () => ssh.exec(`
-  cd ~/repositories/${config.repo.name};
-  git pull;
-`)
-
 const pushDist = () => {
   const commands1 = [
     `cd ../../${config.repo.name}`,
@@ -81,5 +70,4 @@ const log = (result) => {
 removeExisting()
 .then(copyDist)
 .then(pushDist)
-.then(pullDist)
 .catch(console.error)
