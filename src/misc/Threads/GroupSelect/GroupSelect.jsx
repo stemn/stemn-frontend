@@ -31,6 +31,7 @@ class LabelSelectRow extends Component {
       >
         <div style={ { paddingLeft: '5px'} }>
           { item.name }
+          <span className="text-grey-3" style={ { marginLeft: '10px' } }>({ item.numThreads })</span>
         </div>
       </CheckboxAlt>
     )

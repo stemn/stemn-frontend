@@ -2,6 +2,7 @@
 
 .crumbs{
   color: grey-3;
+  line-height: 1.4em;
 }
 .crumbs a{
   color: primary;

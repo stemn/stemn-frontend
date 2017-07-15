@@ -77,6 +77,7 @@ export default class Comment extends Component {
             <Link name="userRoute" params={ { userId: comment.data.owner._id } }>
               <UserAvatar
                 picture={ comment.data.owner.picture }
+                name={ comment.data.owner.name }
                 size={ 25 }
                 shape="square"
                 className={ classes.commentAvatar }

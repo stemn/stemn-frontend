@@ -327,11 +327,15 @@ const eventTextMap = {
     const group1 = entity.data.groups.find(group => group._id === item.data.movedGroups[0])
     const group2 = entity.data.groups.find(group => group._id === item.data.movedGroups[1])
     const params = {
-      projectId: entity.data.project
+      projectId: get(item, 'data.project._id'),
+      threadId: get(item, 'data.thread._id'),
     }
+    const thread = type === 'thread' ? ' this thread ' : <Link name="projectThreadRoute" params={ params }>{ get(item, 'data.thread.name') }</Link>
     return (
       <span>
-        moved this thread from
+        moved
+        { thread }
+        from
         <Link name="projectThreadsRoute" params={ params } query={ { groups: [ group1._id ] } }>{ group1.name }</Link>
         to
         <Link name="projectThreadsRoute" params={ params } query={ { groups: [ group2._id ] } }>{ group2.name }</Link>
