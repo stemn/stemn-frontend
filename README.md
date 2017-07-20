@@ -20,4 +20,3 @@
 
 ### eslint config
 The package.json contains a link to stemns eslint settings. These are in the `stemn-eslint` repo which is shared between projects.
-
