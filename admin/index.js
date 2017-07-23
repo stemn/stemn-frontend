@@ -26,10 +26,10 @@ module.exports = (opts) => {
     //    console.log(response.data.items);
     //  })
     //}
-console.log(opts)
+
     const options = {
       created: `${opts.from} .. ${opts.to}`,
-      q: `filename:${opts.filename}`,
+      q: opts.q,
       // sort:'stars',
       // order:'desc'
     }
