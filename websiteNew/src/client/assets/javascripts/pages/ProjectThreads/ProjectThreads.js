@@ -186,10 +186,7 @@ export default class ProjectThreads extends Component {
               : !isLoading && <ThreadsEmpty /> }
             </Container>
           : null }
-
         </div>
-
-
       </div>
     )
   }

@@ -20,7 +20,7 @@ export default class Download extends Component {
         <div className="text-title-5" style={{ marginBottom: '15px' }}>
           <div>{ latest.version } - released { moment(latest[platform].updated_at).calendar() }</div>
           <div>Size - { bytes(latest[platform].size) }</div>
-          <a className="link-primary">Release Notes</a>
+          <a className="link-primary" href={ `https://github.com/stemn/Stemn-Desktop/releases/tag/${latest.version}` } target="_blank">Release Notes</a>
         </div>
         <DownloadButton className="secondary lg" platform={ platform }>
           Download

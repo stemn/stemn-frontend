@@ -30,8 +30,8 @@ class User extends Component {
             <Col className={ classNames(classes.sidebar, 'flex-gt-xs-30', {[ classes.showSidebar] : showSidebar } )}>
               <UserAvatar
                 name={ user.data.name }
-                picture={ user.data.picture }
-                shape='square'
+                picture={ get(user, 'data.profile.picture') }
+                shape="square"
                 size={ 270 }
                 className={ classes.avatar }
               />
