@@ -22,4 +22,5 @@ There are two ways in which you can build and run the web app:
 
 Make sure the **stemn-website-live** repo is cloned and in `../../stemn-website-live`
 `npm run build`. This will build the minified dist for production use.
-`npm run deploy`. This will copy the dist to the stemn-website-live repo where it will then be pushed and pulled on the server. (see `./scripts/deploy.js`)
+`npm run deploy`. This will copy the dist to the stemn-website-live repo.
+`npm run release`. Inside the `stemn-website-server` repo

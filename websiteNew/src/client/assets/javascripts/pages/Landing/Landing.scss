@@ -10,11 +10,20 @@
 .screenshot {
   position: relative;
 }
+
 .screenshot img {
   box-shadow: 0px 20px 100px 0px rgba(0, 0, 0, 0.4);
   width: 100%;
   border-radius: 4px;
   background: #f4f4f4;
+}
+
+.screenshotCad {
+  position: absolute;
+  left: 41%;
+  right: 0;
+  top: 9%;
+  bottom: 5%;
 }
 
 .screen {

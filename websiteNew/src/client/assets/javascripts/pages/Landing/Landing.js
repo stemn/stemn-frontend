@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import LandingLayout from 'layout/LandingLayout'
 import HeroBanner from 'modules/HeroBanner'
+import PreviewCadLoader from 'stemn-shared/misc/Files/PreviewFile/PreviewCadLoader'
 import DownloadButton from 'stemn-shared/misc/DesktopReleases/DownloadButton'
 import { Row, Col, Container } from 'stemn-shared/misc/Layout'
 import screenshot from './screenshot.jpg'
@@ -16,8 +17,16 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import MdLock from 'react-icons/md/input'
 
 export default class Landing extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      showPreview: window.screen.width > 500,
+    }
+  }
   render() {
+    const { showPreview } = this.state
     const { latest } = this.props
+    
     const secionClasses = classNames(classes.section, 'layout-xs-column layout-gt-xs-row layout-align-gt-xs-start-center lg')
     return (
       <LandingLayout>
@@ -37,7 +46,16 @@ export default class Landing extends Component {
             </DownloadButton>
           }
           <div className={ classes.screenshot }>
-           <img src={screenshot}/>
+            <img src={ screenshot } />
+            { showPreview && 
+              <div className={ classNames(classes.screenshotCad, 'layout-column') }>
+                <PreviewCadLoader
+                  fileMeta={ { fileId: 'arduino' } }
+                  renderFn={ () => {} }
+                  fileRender={ { data: 'https://dev.stemn.com/api/v1/sync/downloadRenderFile/595c9a90891a7600ba39b6d8/595c9aaa3fccf200ba2568c7/595c9aaa3fccf200ba2568c6' } } 
+                />
+              </div>
+            }
           </div>
         </HeroBanner>
         <Container>

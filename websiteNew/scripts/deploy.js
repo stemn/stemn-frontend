@@ -1,7 +1,5 @@
 const Promise = require('bluebird')
 const fs = Promise.promisifyAll(require('fs-extra'))
-const path = require('path')
-const SSH = require('ssh-promise')
 const exec = require('child-process-promise').exec
 const rimrafAsync = Promise.promisify(require('rimraf'))
 /*********************************************************
@@ -21,11 +19,6 @@ const joinCommands = commands => commands.join(' && ')
 const config = {
   repo: {
     name: 'stemn-website-live',
-  },
-  ssh: {
-    host: '35.167.249.144',
-    username: 'ubuntu',
-    key: fs.readFileSync(path.join('../../stemn-api/aws/keys', 'stemn.prv')),
   },
   commitMessage: 'automated deployment',
 }
