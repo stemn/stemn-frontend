@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import capitalizeFirstLetter from 'stemn-shared/utils/strings/capitalizeFirstLetter'
 
 // Components
 import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox';
@@ -48,8 +49,6 @@ export default React.createClass({
         return styles.modified
       }
     }
-
-    const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
     // Template
     return (

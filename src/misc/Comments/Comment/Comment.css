@@ -10,6 +10,7 @@
   background: white;
   border: 1px solid border1;
   line-height: 1.5em;
+  position: relative;
 }
 .commentHeader{
   background: white;

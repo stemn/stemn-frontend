@@ -137,6 +137,8 @@ export default class FileList extends Component {
 
     const fileRowHistoryShouldUpdate = !isLoading
     const fileRowHistoric = this.fileRowHistory.get(fileRowChildren, fileRowHistoryShouldUpdate)
+    
+    const provider = get(fileList, 'search.[0].provider') || get(fileList, 'entries.[0].provider')
 
     return (
       <div { ...otherProps }>
@@ -208,7 +210,7 @@ export default class FileList extends Component {
               { options.showMenu
               ? <ContextMenu
                   identifier={ contextIdentifier }
-                  menu={ FileListMenu(dispatch) }
+                  menu={ FileListMenu(dispatch, provider) }
                 />
               : null }
             </div>

@@ -68,7 +68,7 @@ export default class NewThreadModal extends Component {
     return (
       <div className={ classNames(classes.modal, 'layout-column') }>
         <div className={ classes.modalTitle }>Create a new thread</div>
-        <div className={ classNames(classes.modalBody, 'flex') }>
+        <div className={ classNames(classes.modalBody, 'flex layout-column') }>
           <div className={ classNames(classes.titleSection, 'layout-row layout-align-start-center') }>
             <Textarea
               model={ `${boardModel}.newThread.name` }

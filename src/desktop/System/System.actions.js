@@ -86,8 +86,7 @@ export function openFile({location, path, projectId, provider}) {
     };
 
     const storeState = getState()
-    return dispatch(getFullPath({path, projectId, provider})).then((fullPath) => {
-      return open(fullPath)
-    })
+    return dispatch(getFullPath({ path, projectId, provider }))
+      .then(open)
   }
 }

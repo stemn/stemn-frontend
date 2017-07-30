@@ -1,8 +1,9 @@
 import * as SystemActions    from 'stemn-shared/desktop/System/System.actions.js';
 import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js';
 import { projectFolderRoute }      from 'route-actions';
+import capitalizeFirstLetter from 'stemn-shared/utils/strings/capitalizeFirstLetter'
 
-export default (dispatch) => {
+export default (dispatch, provider) => {
   return [{
     label: 'Open Preview Window',
     isHidden: item => item.type != 'file',
@@ -45,6 +46,12 @@ export default (dispatch) => {
       path      : item.path,
       projectId : item.project._id,
       provider  : item.provider
+    }))
+  },{
+    divider: true,
+    label: `Open on ${capitalizeFirstLetter(provider)}`,
+    onClick: item => dispatch(SystemActions.openExternal({
+      url: item.url,
     }))
   }];
 }

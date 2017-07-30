@@ -15,7 +15,7 @@ body {
   overflow-x: hidden;
   font-size: 12px;
   padding: 0px !important;
-  line-height: 1.2em;
+  line-height: 1.25;
 
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none;   /* Chrome/Safari/Opera */

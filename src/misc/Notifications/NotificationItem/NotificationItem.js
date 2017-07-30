@@ -24,6 +24,7 @@ export default class NotificationItem extends Component {
       <div className={ classNames(classes.notification, 'layout-row layout-align-start-start') }>
         <UserAvatar
           className={ classes.avatar1 }
+          name={ notification.entities[0].display } 
           picture={ notification.picture1 }
           size="33"
           shape="square"

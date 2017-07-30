@@ -7,7 +7,7 @@ import process from 'process'
 
 export const getInstallStatus = () => {
   if(process.platform == 'linux'){
-    return pify(fs.stat)(`${os.homedir()}/.local/share/applications/appimagekit-STEMN.desktop`)
+    return pify(fs.stat)(`${os.homedir()}/.local/share/applications/appimagekit-stemn.desktop`)
     .then(() => true)
     .catch(() => false);
   }
@@ -19,7 +19,7 @@ export const getInstallStatus = () => {
   }
 }
 
-export const openExternal = ({url, params}) => {
+export const openExternal = ({ url, params }) => {
   const stringParams = querystring.stringify(params);
   shell.openExternal(stringParams ? url+'?'+stringParams : url)
 }
@@ -27,6 +27,6 @@ export const openExternal = ({url, params}) => {
 // Normalise paths for linux/windows bases operating systems
 // so they use the right kind of slash
 export const normaliseSlashes = (path) => process.platform === 'win32'
-  ? path.replace('/', '\\')
-  : path.replace('\\', '/')
+  ? path.replace(/\//g, '\\')
+  : path.replace(/\\/g, '/')
 

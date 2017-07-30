@@ -30,10 +30,8 @@ export default React.createClass({
   render() {
     const { fileMeta, fileRender } = this.props;
     const { status } = this.state;
-    if(fileRender && fileRender.data){
-      return <AutodeskLocalViewer path={ fileRender.data } linkKey={ fileMeta.fileId } />
-    }
-    else if(status == 'disabled'){
+            
+    if (status == 'disabled') {
       return (
         <div className="layout-column layout-align-center-center flex text-center">
           <img style={{width: '100px'}} src={modelLocked}/>
@@ -41,8 +39,9 @@ export default React.createClass({
           <div className="text-title-5">Visit <a className="link-primary" href="http://get.webgl.org/" target="_blank">webgl.org</a> for more.</div>
         </div>
       )
-    }
-    else{
+    } else if(fileRender && fileRender.data){
+      return <AutodeskLocalViewer path={ fileRender.data } linkKey={ fileMeta.fileId } />
+    } else{
       return <div className="rel-box flex"><LoadingOverlay show={true}>{ fileRender && fileRender.status ? fileRender.status : 'Rendering file...' }</LoadingOverlay></div>
     }
   }
