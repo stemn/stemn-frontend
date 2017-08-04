@@ -7,7 +7,7 @@ Promise.each(range(1, 6), (number) => {
     return query({
         from: `2017-${number}-01`,
         to: `2017-${number + 1}-01`,
-        q: 'filename:sldasm'
+        q: '"OpenPathsFromPolyTree and ClosedPathsFromPolyTree" in file'
     });
 }).then(() => {
     console.log("DONE");
