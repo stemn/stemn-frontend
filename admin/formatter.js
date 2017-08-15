@@ -10,7 +10,7 @@ const readdir = Promise.promisify(fs.readdir);
 const readFile = Promise.promisify(fs.readFile);
 
 return readdir('.').then((files) => {
-    const filenames = files.filter((filename) => filename.endsWith('sldasm.json'));
+    const filenames = files.filter((filename) => filename.includes('because'));
     return Promise.map(filenames, (filename) => {
         return readFile(`./${filename}`, 'utf-8').then((content) => JSON.parse(content.toString()));
     });

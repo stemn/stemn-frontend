@@ -30,7 +30,7 @@ export default class Pricing extends Component {
             <div className="text-mini-caps">All Prices in USD</div>
           </div>
           <div className={ classes.changePlan + ' layout-column layout-align-center-center'}>
-            <h3 className="text-title-2">Plans coming soon</h3>
+            <h3 className="text-title-2"><a href="mailto:sales@stemn.com">Contact sales@stemn.com to begin.</a></h3>
             <h4 className="text-title-4">
               While in Beta, all users will have access to the <b>Stemn Beta</b> plan offering free public & private projects.<br />
               Other plans will come into effect after the Beta is finished.
