@@ -38,7 +38,7 @@ export const viewerFileTypes = {
       'eps', 'ps', 'ai',
       'ttf', 'xps',
      ],
-    image: ['png', 'jpg', 'jpeg', 'gif', 'svg', 'bmp', 'ico'],
+    image: ['png', 'jpg', 'jpeg', 'gif', 'svg', 'bmp', 'ico', 'svg'],
     pdf: ['pdf'],
 //            pcb      : ['brd', 'pcb', 'kicad_pcb'],
   },
