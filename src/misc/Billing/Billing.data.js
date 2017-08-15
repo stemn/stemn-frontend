@@ -6,9 +6,10 @@ export const pricingTableData = [{
   features: [
     'Personal Account',
     'Unlimited public projects',
+    'One private project',
   ],
 }, {
-  price: 7,
+  price: 129,
   period: 'Per Month',
   type: 'Solo',
   description: 'Ideal for personal projects',
@@ -18,26 +19,29 @@ export const pricingTableData = [{
     'Unlimited private projects',
   ],
 }, {
-  price: 15,
+  price: 299,
   period: 'Per User / Month',
   type: 'Team',
-  description: 'Great for growing teams',
+  description: 'Great for consultancy',
   features: [
-    'Personal Account',
+    'Team Account',
     'Unlimited public projects',
     'Unlimited private projects',
-    'Unlimited collaborators',
+    'External Collaborators',
+    'Business Support',
   ],
 }, {
-  price: 30,
+  price: 999,
   period: 'Per User / Month',
-  type: 'Organisation',
-  description: 'Perfect for larger teams',
+  type: 'Enterprise',
+  description: 'Scalable, Secure, On-Premise',
   features: [
     'Organisation Account',
-    'Unlimited public projects',
-    'Unlimited private projects',
-    'Unlimited collaborators',
+    'On-Premise File Storage',
+    'Extended Version History',
+    'Uptime SLAs',
+    'Auditing and Compliance',
+    'Premium Support',
   ],
 }]
 
