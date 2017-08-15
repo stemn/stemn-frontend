@@ -89,7 +89,7 @@ export default class FileRow extends Component {
           </ClickFile>
         </div>
         { file.commit && file.commit.name && file.commit._id
-        ? <div className="flex">
+        ? <div className="flex layout-row">
             <Link
               name='commitRoute'
               params={ { projectId: file.project._id, commitId: file.commit._id } }
