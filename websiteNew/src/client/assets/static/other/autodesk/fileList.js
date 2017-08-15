@@ -94,7 +94,14 @@ var textures =[
 	'centerMarker_X.png',
 	'radial-fade-grid.png'
 ] ;
-textures =textures.map (function (elt) { return ('res/textures/' + elt) ; }) ;
+textures =textures.map (function (elt) { return ('res/textures/' + elt) ; }) 
+
+var extensions =[
+  'FirstPerson'
+]
+
+extensions =extensions.map (function (elt) { return ('extensions/' + elt + '/' + elt + '.min.js') ; }) 
+
 
 // res/locales
 var locales =[ 'cs', 'de', 'en', 'es', 'fr', 'it', 'ja', 'ko', 'pl', 'pt-BR', 'ru', 'tr', 'zh-HANS', 'zh-HANT' ] ;
@@ -121,4 +128,5 @@ locales =locales.reduce (
 module.exports =viewer
 	.concat (environments)
 	.concat (textures)
-	.concat (locales) ;
+	.concat (locales)
+	.concat (extensions) ;

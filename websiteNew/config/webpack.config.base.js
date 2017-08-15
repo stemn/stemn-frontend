@@ -88,7 +88,7 @@ module.exports = {
         },
       },
       {
-        test: /\.(png|jpg|jpeg|gif|svg)$/,
+        test: /\.(png|jpg|jpeg|gif|svg|mp4)$/,
         exclude: [
           path.resolve(__dirname, '../node_modules/stemn-frontend-shared/src/misc/FileList/filetype'),
         ],

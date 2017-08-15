@@ -23,7 +23,6 @@ export default class Search extends Component {
           <Tabs noline>
             <Link to="/search" className={ { 'active': !location.query.type } } query={ { q: location.query.q } }>Projects</Link>
             <Link activeClassName="active" to="/search" query={ { q: location.query.q, type: 'thread' } }>Threads</Link>
-            <Link activeClassName="active" to="/search" query={ { q: location.query.q, type: 'commit' } }>Commits</Link>
             <Link activeClassName="active" to="/search" query={ { q: location.query.q, type: 'user' } }>People</Link>
             <Link activeClassName="active" to="/search" query={ { q: location.query.q, type: 'field' } }>Fields</Link>
           </Tabs>
@@ -46,3 +45,5 @@ export default class Search extends Component {
     )
   }
 }
+
+//            <Link activeClassName="active" to="/search" query={ { q: location.query.q, type: 'commit' } }>Commits</Link>

@@ -24,6 +24,12 @@
   right: 0;
   top: 9%;
   bottom: 5%;
+  overflow: hidden;
+  video {
+    margin-top: -1px;
+    margin-left: -1px;
+    width: 101%;
+  }
 }
 
 .screen {

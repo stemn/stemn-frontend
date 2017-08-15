@@ -15,6 +15,7 @@ import { Helmet } from "react-helmet";
 import isMobile from 'stemn-shared/utils/agent/isMobile'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import MdLock from 'react-icons/md/input'
+import vidDemo from 'static/video/demo.mp4'
 
 export default class Landing extends Component {
   constructor(props) {
@@ -47,15 +48,11 @@ export default class Landing extends Component {
           }
           <div className={ classes.screenshot }>
             <img src={ screenshot } />
-            { showPreview && 
-              <div className={ classNames(classes.screenshotCad, 'layout-column') }>
-                <PreviewCadLoader
-                  fileMeta={ { fileId: 'arduino' } }
-                  renderFn={ () => {} }
-                  fileRender={ { data: 'https://dev.stemn.com/api/v1/sync/downloadRenderFile/595c9a90891a7600ba39b6d8/595c9aaa3fccf200ba2568c7/595c9aaa3fccf200ba2568c6' } } 
-                />
-              </div>
-            }
+            <div className={ classNames(classes.screenshotCad, 'layout-column') }>
+              <video muted autoPlay loop>
+                <source src={ vidDemo } type="video/mp4" />
+              </video>
+            </div>
           </div>
         </HeroBanner>
         <Container>
@@ -136,3 +133,14 @@ export default class Landing extends Component {
     )
   }
 }
+//
+//            { showPreview &&
+//              <div className={ classNames(classes.screenshotCad, 'layout-column') }>
+//                <PreviewCadLoader
+//                  fileMeta={ { fileId: 'arduino' } }
+//                  renderFn={ () => {} }
+//                  fileRender={ { data: 'https://dev.stemn.com/api/v1/sync/downloadRenderFile/595c9a90891a7600ba39b6d8/595c9aaa3fccf200ba2568c7/595c9aaa3fccf200ba2568c6' } }
+//                />
+//
+//              </div>
+//            }

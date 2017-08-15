@@ -110,7 +110,7 @@ export default class LandingHeader extends Component {
             <Link key={ item.label } activeClassName="active" className={ classes.link } name={ item.route }>{ item.label }</Link>
           ))}
           <div className="flex" />
-          { auth.user._id
+          { auth.user._id && auth.authToken
           ? this.isLoggedIn()
           : this.isLoggedOut() }
         </Container>
@@ -120,7 +120,7 @@ export default class LandingHeader extends Component {
             <img src={logo} alt=""/>
           </Link>
           <div className="flex" />
-          { auth.user._id
+          { auth.user._id && auth.authToken
           ? this.isLoggedIn()
           : this.isLoggedOut() }
           <SimpleIconButton
