@@ -201,6 +201,9 @@
         }
       ]
     },
+    "linux": {
+      "category": "Development;Engineering;"
+    },
     "directories": {
       "app": "./dist/",
       "output": "./release/"
