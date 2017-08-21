@@ -6,7 +6,7 @@ import Link from 'stemn-shared/misc/Router/Link'
 export default React.createClass({
   render() {
     // tag = true || false
-    const { labels, labelInfo, tag, oneline, link, name, params } = this.props
+    const { labels, labelInfo, tag, oneline, link, name, params, responsive } = this.props
 
     return (
       <span className={ classNames({[classes.tagsOneline]: oneline }) }>
@@ -22,12 +22,17 @@ export default React.createClass({
             const tagBgStyle = {
               background: info.color,
             }
+            const threadLabelClasses = classNames({
+              [classes.tag]: tag,
+              [classes.dot]: !tag,
+              [classes.responsive]: responsive
+            })
 
             if (link) {
               return (
                 <Link
                   key={ labelId }
-                  className={ classNames({[classes.tag] : tag}, {[classes.dot] : !tag}) }
+                  className={ threadLabelClasses }
                   style={ tagStyle }
                   title={ !tag ? info.name : '' }
                   name={ name }
@@ -42,7 +47,7 @@ export default React.createClass({
               return (
                 <span
                   key={ labelId }
-                  className={ classNames({[classes.tag] : tag}, {[classes.dot] : !tag}) }
+                  className={ threadLabelClasses }
                   style={ tagStyle }
                   title={ !tag ? info.name : '' }
                 >

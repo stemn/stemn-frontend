@@ -96,8 +96,9 @@ export default class EditorMentions extends Component {
     const cursor = codemirror.getCursor()
     // Get the content up to the cursor
     const valueUpToCursor = codemirror.getLine(cursor.line)
+    
     // Get the word just before the cursor
-    const wordsSplit = valueUpToCursor.split(' ')
+    const wordsSplit = valueUpToCursor.substring(0, cursor.ch).split(' ')
     const lastWord = wordsSplit[wordsSplit.length - 1]
 
     // We get the mention type from the word (if it begins with a valid trigger)

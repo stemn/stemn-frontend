@@ -249,7 +249,8 @@ function parseStandard(text, name){
                         function applyArgs(m) {
                             m = m.replace(/\$(\d+)/g, function(s, n) {
                                 return +args[n-1] || 0;
-                            }).toLowerCase(), repl = true;
+                            }).toLowerCase()
+                            var repl = true;
                             while(repl == true)
                                 repl = false, m = m.replace(/([\d.]+)x([\d.]+)/g, function(s, a, b) {return repl = true, a*b});
                             repl = true;

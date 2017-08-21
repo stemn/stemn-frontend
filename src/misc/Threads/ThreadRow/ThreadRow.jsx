@@ -49,6 +49,7 @@ export default class ThreadRow extends Component {
               labelInfo={ board.data.labels }
               name="projectThreadsRoute"
               params={ threadRouteParams }
+              responsive
               oneline
               tag
               link

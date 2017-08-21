@@ -19,14 +19,17 @@
   margin-top: 2px;
   margin-bottom: 2px;
   cursor: default;
-  @media (max-width: 599px) {
-    text-indent: -9999px;  
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50% !important;
-    margin-right: 5px !important;
-    overflow: hidden;
+  
+  &.responsive {
+    @media (max-width: 599px) {
+      text-indent: -9999px;  
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50% !important;
+      margin-right: 5px !important;
+      overflow: hidden;
+    }
   }
 }
 a.tag {

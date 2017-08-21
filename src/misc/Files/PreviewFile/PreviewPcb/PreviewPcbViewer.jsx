@@ -55,7 +55,7 @@ export default class PreviewPcbViewer extends Component {
       }
     }
     else{
-      previewer.type = 'other';
+//      previewer.type = 'other';
     }
   }
   flip = (status) => {
@@ -74,11 +74,11 @@ function errorMessages(layers){
   // Pop Error messages and remove bad layers
   forEachRight(layers, function(layer, index){
     if(layer.error){
-      toast(layer.error);
+//      toast(layer.error);
       layers.splice(index, 1);
     }
     else if(layer.isGerber && layer.cmds.length === 0){
-      toast('Could not parse file.');
+//      toast('Could not parse file.');
       layers.splice(index, 1);
     }
   });
