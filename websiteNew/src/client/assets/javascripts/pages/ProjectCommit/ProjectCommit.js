@@ -10,6 +10,7 @@ import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import FileCompare from 'stemn-shared/misc/FileCompare'
 import SubSubHeader from 'modules/SubSubHeader'
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'
+import Link from 'stemn-shared/misc/Router/Link'
 
 export default class ProjectCommit extends Component {
   renderLoaded() {
@@ -34,15 +35,25 @@ export default class ProjectCommit extends Component {
             <EditorDisplay value={ commit.data.body } />
           </div>
           <div className={ classNames('layout-row layout-align-start-center', classes.meta)}>
-            <UserAvatar
-              className={ classes.avatar }
-              name={ commit.user.name }
-              picture={ commit.user.picture }
-              size={ 20 }
-              shape='square'
-            />
+            <Link
+              name="userRoute"
+              params={ { userId: commit.user._id } }
+            >
+              <UserAvatar
+                className={ classes.avatar }
+                name={ commit.user.name }
+                picture={ commit.user.picture }
+                size={ 20 }
+                shape='square'
+              />
+            </Link>
             <div className="text-ellipsis">
-              <b>{ commit.user.name }</b>
+              <Link
+                name="userRoute"
+                params={ { userId: commit.user._id } }
+              >
+                <b>{ commit.user.name }</b>
+              </Link>
               &nbsp;commited { groupedRevisions.length } files containing a total of { commit.data.items.length } revisions.
             </div>
           </div>

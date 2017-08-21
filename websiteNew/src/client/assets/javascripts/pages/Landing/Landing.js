@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import LandingLayout from 'layout/LandingLayout'
 import HeroBanner from 'modules/HeroBanner'
-import PreviewCadLoader from 'stemn-shared/misc/Files/PreviewFile/PreviewCadLoader'
 import DownloadButton from 'stemn-shared/misc/DesktopReleases/DownloadButton'
 import { Row, Col, Container } from 'stemn-shared/misc/Layout'
 import screenshot from './screenshot.jpg'
@@ -11,11 +10,12 @@ import historyTimeline from './historyTimeline.png'
 import classes from './Landing.scss'
 import classNames from 'classnames'
 import FileIcon from 'stemn-shared/misc/FileList/components/FileIcon'
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet'
 import isMobile from 'stemn-shared/utils/agent/isMobile'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import MdLock from 'react-icons/md/input'
 import vidDemo from 'static/video/demo.mp4'
+import Link from 'stemn-shared/misc/Router/Link'
 
 export default class Landing extends Component {
   constructor(props) {
@@ -46,14 +46,18 @@ export default class Landing extends Component {
               Download Now
             </DownloadButton>
           }
-          <div className={ classes.screenshot }>
+          <Link
+            className={ classes.screenshot }
+            name="fileRoute"
+            params={ { projectId: '595c9a90891a7600ba39b6d8', fileId: '595c9aaa3fccf200ba2568c7' } }
+          >
             <img src={ screenshot } />
             <div className={ classNames(classes.screenshotCad, 'layout-column') }>
               <video muted autoPlay loop>
                 <source src={ vidDemo } type="video/mp4" />
               </video>
             </div>
-          </div>
+          </Link>
         </HeroBanner>
         <Container>
           <Row className={ secionClasses }>

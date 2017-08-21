@@ -31,6 +31,7 @@ import SocialButton from 'stemn-shared/misc/Social/SocialButton'
 import { permissionsIsMin } from 'stemn-shared/misc/Auth/Auth.utils'
 import { get, has } from 'lodash'
 import { Helmet } from "react-helmet"
+import { projectThreadsRoute } from 'route-actions'
 
 export default class ProjectThread extends Component {
   updateThread = () => {
@@ -48,11 +49,12 @@ export default class ProjectThread extends Component {
   menu = [{
     label: 'Delete Thread',
     onClick: () => {
-      const { deleteThread, thread } = this.props
+      const { deleteThread, thread, project, pushRoute } = this.props
       deleteThread({
         threadId: thread.data._id,
         boardId: thread.data.board,
       })
+      .then(() => pushRoute(projectThreadsRoute({projectId: project.data._id})))
     }
   }]
   sidebarEdit = () => {

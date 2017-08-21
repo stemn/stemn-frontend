@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { get } from 'lodash'
 import ProjectThread from './ProjectThread'
+import { push as pushRoute } from 'react-router-redux'
 
 import { joinRoom, leaveRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
 import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
@@ -44,6 +45,7 @@ const dispatchToProps = {
   deleteThread,
   joinRoom,
   leaveRoom,
+  pushRoute,
 };
 
 const fetchConfigs = [{
