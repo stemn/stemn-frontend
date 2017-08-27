@@ -13,7 +13,7 @@ export default class PreviewPcbViewer extends Component {
   componentDidMount() { this.onMount(this.props) }
   componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)}
   onMount = (nextProps, prevProps) => {
-    if(!prevProps || (nextProps.data != prevProps.data && nextProps.name != prevProps.name)){
+    if(!prevProps || (nextProps.layers != prevProps.layers)){
       setTimeout(this.init(nextProps), 1); // Timeout so refs can init
     }
   }
@@ -21,36 +21,31 @@ export default class PreviewPcbViewer extends Component {
     deregister(this.viewerInstance);
   }
   init = (props) => {
-    const { data, name } = props;
+    const { layers } = props;
 
     // Deregister any existing viewers
     if(this.viewerInstance){
       deregister(this.viewerInstance);
     }
 
-    const file = {
-      name: name,
-      data: data
-    };
-
     this.viewerInstance = register();
-    const layers = [file].map(this.viewerInstance.parse);
-    errorMessages(layers);
+    const parsedLayers = layers.map(this.viewerInstance.parse);
+    errorMessages(parsedLayers);
 
     // If we still have layers, display them
-    if(layers.length > 0){
+    if(parsedLayers.length > 0){
       // Push on the back layer if it is a pcb/brd file
-      if(!layers[0].isGerber){
-        layers[0].side = 2;
-        var backLayer = clone(layers[0], true);
+      if(!parsedLayers[0].isGerber){
+        parsedLayers[0].side = 2;
+        var backLayer = clone(parsedLayers[0], true);
         backLayer.boardFlipped = true;
         backLayer.side = 1;
-        layers.push(backLayer);
+        parsedLayers.push(backLayer);
       }
 
-      this.viewerInstance.init(layers, this.refs.canvas, activeInstances);
+      this.viewerInstance.init(parsedLayers, this.refs.canvas, activeInstances);
       // Flip the board if we only have bottom layers
-      if(!find(layers, 'side', 2)){
+      if(!find(parsedLayers, 'side', 2)){
         this.flip(true);
       }
     }

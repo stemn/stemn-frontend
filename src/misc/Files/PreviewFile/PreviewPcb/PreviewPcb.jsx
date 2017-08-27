@@ -10,22 +10,42 @@ export default class PreviewPcb extends Component {
     this.onMount(nextProps, this.props)
   }
   onMount = (nextProps, prevProps) => {
-    if (!nextProps.fileData) {
-      nextProps.downloadFn({
-        projectId : nextProps.fileMeta.project._id,
-        fileId : nextProps.fileMeta.fileId,
-        revisionId : nextProps.fileMeta.revisionId,
-        provider : nextProps.fileMeta.provider,
-      })
+    const { fileMeta, fileData, downloadFn } = nextProps
+
+    const download = file => downloadFn({
+      projectId: file.project._id,
+      fileId: file.fileId,
+      revisionId: file.revisionId,
+      provider: file.provider,
+    })
+
+    if (!fileData) {
+      if (fileMeta.parts) {
+        // We fetch the data for each subpart
+        fileMeta.parts.forEach(download)
+      } else {
+        download(fileMeta)
+      }
     }
   }
   render() {
     const { fileData, fileMeta } = this.props
     const isLoading = !(fileData && fileData.data)
+
+    const layers = fileMeta.parts
+    ? fileMeta.parts.map((item, idx) => ({
+      data: fileData[idx].data,
+      name: item.name,
+    }))
+    : [{
+      data: fileData.data,
+      name: fileMeta.name,
+    }]
+
     return (
       <div className="rel-box flex layout-column">
         <LoadingOverlay show={ isLoading } />
-        { !isLoading && <PreviewPcbViewer data={ fileData.data } name={ fileMeta.name } /> }
+        { !isLoading && <PreviewPcbViewer layers={ layers } /> }
       </div>
     )
   }

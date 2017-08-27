@@ -21,7 +21,7 @@ import ErrorMessages from './Messages/Messages.jsx'
 
 export const Component = React.createClass({
   render() {
-    const { file, fileData, fileRender, filesActions, header, event, codeSplitting } = this.props;
+    const { file, fileData, fileRender, filesActions, header, event } = this.props;
     const previewId = `${file.project._id}-${file.fileId}-${file.revisionId}`;
 
     const renderFn = () => {
@@ -130,15 +130,24 @@ export const Component = React.createClass({
 
 ///////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps({files, codeSplitting}, {project, file, event}) {
-  const cacheKey = event && event.timestamp && isAssembly(file.extension)
-                 ? `${file.fileId}-${file.revisionId}-${event.timestamp}`
-                 : `${file.fileId}-${file.revisionId}`;
-  return {
-    fileData: files.fileData[cacheKey],
-    fileRender: files.fileRenders[cacheKey],
-    codeSplitting
-  };
+function mapStateToProps({ files }, { project, file, event }) {
+  // If the file has sub-parts, it is a gerber assembly - we need to fetch multiple files
+  if (file.parts) {
+    const fileData = file.parts.map(file => files.fileData[`${file.fileId}-${file.revisionId}`])
+    return {
+      fileData,
+    }
+  } else {
+    const cacheKey = event && event.timestamp && isAssembly(file.extension)
+       ? `${file.fileId}-${file.revisionId}-${event.timestamp}`
+       : `${file.fileId}-${file.revisionId}`;
+
+    const fileData = files.fileData[cacheKey]
+    return {
+      fileData,
+      fileRender: files.fileRenders[cacheKey],
+    };
+  }
 }
 
 function mapDispatchToProps(dispatch) {
