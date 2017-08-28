@@ -100,6 +100,7 @@ export default class FileRow extends Component {
           </div>
         : null }
         <div className={ classNames(classes.label, 'hide-xs') }>
+          { file.parts && <Label title="Virtual File">Virtual File</Label> }
           { file.revisionNumber > 1 &&
             <Label title={file.revisionNumber + ' revisions'}>{file.revisionNumber} Revisions</Label>
           }

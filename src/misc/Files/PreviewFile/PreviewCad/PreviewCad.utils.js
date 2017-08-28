@@ -1,4 +1,4 @@
-import http from 'axios'
+import { viewerFileTypes } from '../PreviewFile.utils'
 
 export const isWebGlSupported = (return_context) => {
     if (!!window.WebGLRenderingContext) {
@@ -30,4 +30,8 @@ export const isWebGlSupported = (return_context) => {
 export const isAssembly = (fileType) => {
   const assemblyFileTypes = ['sldasm', 'catproduct', 'iam'];
   return assemblyFileTypes.includes(fileType.toLowerCase())
+}
+
+export const isCad = (fileType) => {
+  return viewerFileTypes.general.autodesk.includes(fileType)
 }

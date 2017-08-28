@@ -4,7 +4,7 @@ import classes              from './AssemblyParts.css';
 import { connect }          from 'react-redux';
 import { orderBy }          from 'lodash';
 import moment               from 'moment';
-import { isAssembly }       from '../PreviewCad.utils.js';
+import { isAssembly, isCad }       from '../PreviewCad.utils.js';
 import {
   getAssemblyParts,
   getAssemblyParents
@@ -41,11 +41,13 @@ export const AssemblyParts = React.createClass({
           revisionId : nextProps.fileMeta.data.revisionId,
         }))
       }
-      nextProps.dispatch(getAssemblyParents({
-        fileId     : nextProps.fileMeta.data.fileId,
-        projectId  : nextProps.fileMeta.data.project._id,
-        revisionId : nextProps.fileMeta.data.revisionId,
-      }))
+      if (isCad(nextProps.fileMeta.data.extension)) {
+        nextProps.dispatch(getAssemblyParents({
+          fileId     : nextProps.fileMeta.data.fileId,
+          projectId  : nextProps.fileMeta.data.project._id,
+          revisionId : nextProps.fileMeta.data.revisionId,
+        }))
+      }
     }
   },
   componentDidMount() { this.onMount(this.props) },

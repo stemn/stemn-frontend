@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { get, every } from 'lodash'
 import PreviewPcbViewer from './PreviewPcbViewer'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay'
 
@@ -19,7 +20,11 @@ export default class PreviewPcb extends Component {
       provider: file.provider,
     })
 
-    if (!fileData) {
+    const hasNoData = fileData && fileData.constructor === Array
+      ? !fileData[0]
+      : !fileData
+
+    if (hasNoData) {
       if (fileMeta.parts) {
         // We fetch the data for each subpart
         fileMeta.parts.forEach(download)
@@ -30,15 +35,18 @@ export default class PreviewPcb extends Component {
   }
   render() {
     const { fileData, fileMeta } = this.props
-    const isLoading = !(fileData && fileData.data)
+
+    const isLoading = fileData && fileData.constructor === Array
+      ? !every(fileData, item => item && item.loading === false)
+      : get(fileData, ['loading'], true)
 
     const layers = fileMeta.parts
     ? fileMeta.parts.map((item, idx) => ({
-      data: fileData[idx].data,
+      data: get(fileData, [idx, 'data']),
       name: item.name,
     }))
     : [{
-      data: fileData.data,
+      data: fileData && fileData.data,
       name: fileMeta.name,
     }]
 
