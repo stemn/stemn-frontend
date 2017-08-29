@@ -35,7 +35,7 @@ export const Component = React.createClass({
     }
 
     const getPreview = () => {
-      const viewerType = getViewerType(file.extension, file.provider)
+      const viewerType = getViewerType(file.name, file.provider)
       
       if (fileData && fileData.error || fileRender && fileRender.error) {
         return (

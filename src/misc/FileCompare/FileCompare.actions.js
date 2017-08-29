@@ -1,4 +1,3 @@
-import { getViewerType } from 'stemn-shared/misc/Files/PreviewFile/PreviewFile.utils.js';
 import { get } from 'lodash'
 
 export const initCompare = ({ file, cacheKey }) => ({

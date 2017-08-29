@@ -97,8 +97,8 @@ export default () => {
   }
 
   function destroy(){
-    window.removeResizeListener(wG.domParent, reposition);
     if(wG.domParent){
+      window.removeResizeListener(wG.domParent, reposition);
       while (wG.domParent.hasChildNodes()) {
         wG.domParent.removeChild(wG.domParent.lastChild);
       }

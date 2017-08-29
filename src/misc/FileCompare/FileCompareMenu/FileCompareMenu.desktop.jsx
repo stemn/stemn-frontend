@@ -86,7 +86,7 @@ export const Component = React.createClass({
 
     if(!file1){return null};
 
-    const previewType  = getViewerType(file1.extension, file1.provider);
+    const previewType  = getViewerType(file1.name, file1.provider);
     const compareModes = getCompareModes(previewType, previewType);
     const CompareIcon  = getCompareIcon(mode);
 

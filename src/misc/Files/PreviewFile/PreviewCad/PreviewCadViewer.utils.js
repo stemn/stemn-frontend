@@ -54,7 +54,9 @@ function register(viewerEl, linkKey){
     // Remove the event listeners
     instance.removeEventListener(window.Autodesk.Viewing.CAMERA_CHANGE_EVENT, onMove);
     // Remove the resize listener
-    window.removeResizeListener(viewerEl, onResize);
+    if (viewerEl) {
+      window.removeResizeListener(viewerEl, onResize);
+    }
 
     // Call the Autodesk finish function
     instance.finish();

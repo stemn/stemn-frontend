@@ -1,7 +1,8 @@
-import { forEach, clone } from 'lodash';
-import i from 'icepick';
-import codemirror from 'codemirror';
-import 'codemirror/mode/meta.js';
+import { forEach, clone } from 'lodash'
+import i from 'icepick'
+import codemirror from 'codemirror'
+import 'codemirror/mode/meta.js'
+import whatGerber from 'whats-that-gerber'
 
 const getCodeMirrorExts = () => {
   var codeExts = [];
@@ -15,17 +16,7 @@ const getCodeMirrorExts = () => {
 
 export const viewerFileTypes = {
   general: {
-    gerber: ['gerber', // Virtual gerber type
-      'drl', 'drd',
-      'out', 'outline',
-      'gbl', 'sol',
-      'gbs', 'sts',
-      'gbp', 'crs',
-      'gbo', 'pls',
-      'gtl', 'cmp',
-      'gts', 'stc',
-      'gtp', 'crc',
-      'gto', 'plc'],
+    gerber: ['gerber'],
     pcb: ['brd', 'pcb', 'kicad_pcb'],
     image: ['png', 'jpg', 'jpeg', 'gif', 'svg', 'bmp', 'ico'],
     code: getCodeMirrorExts(),
@@ -51,21 +42,27 @@ export const viewerFileTypes = {
   },
 }
 
-export const getViewerType = (fileType, provider) => {
+export const getViewerType = (fileName, provider) => {
+  const extension = fileName.split('.').pop()
+
   const providers = ['dropbox', 'drive'];
-  if(!providers.includes(provider)){
+  if (!providers.includes(provider)) {
     console.error('Invalid provider type:', provider);
     return
   }
-  const generalFileTypes  = viewerFileTypes.general;
-  const providerFileTypes = viewerFileTypes[provider];
+  const generalFileTypes = viewerFileTypes.general
+  const providerFileTypes = viewerFileTypes[provider]
 
   // This merge resolver concats arrays.
-  const mergeResolver     = (targetVal, sourceVal) => Array.isArray(targetVal) && sourceVal ? targetVal.concat(sourceVal) : sourceVal;
-  const mergedFileTypes   = i.merge(generalFileTypes, providerFileTypes, mergeResolver);
+  const mergeResolver = (targetVal, sourceVal) => Array.isArray(targetVal) && sourceVal ? targetVal.concat(sourceVal) : sourceVal;
+  const mergedFileTypes = i.merge(generalFileTypes, providerFileTypes, mergeResolver);
 
-  // Get the viewer type
-  const fileTypeLower     = fileType ? fileType.toLowerCase() : '';
-  const viewerType        = Object.keys(mergedFileTypes).find(viewerType => mergedFileTypes[viewerType].includes(fileTypeLower))
-  return viewerType || 'other'
+  if (whatGerber(fileName)) {
+    return 'gerber'
+  } else {
+    // Get the viewer type
+    const extensionLower = extension ? extension.toLowerCase() : '';
+    const viewerType = Object.keys(mergedFileTypes).find(viewerType => mergedFileTypes[viewerType].includes(extensionLower))
+    return viewerType || 'other'
+  }
 }

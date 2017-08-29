@@ -1,3 +1,5 @@
+import whatGerber from 'whats-that-gerber'
+
 export default () => {
   return {
     parse,
@@ -5,74 +7,63 @@ export default () => {
   }
 };
 
-///////////////////////////////////////////////
-
-var index = {
-    BOTTOM   : 1,
-    TOP      : 2,
-    BOARD    : 0,
-    COPPER   : 1,
-    SOLDER   : 2,
-    PASTE    : 3,
-    SILK     : 4,
-    OUTLINE  : 5
+const index = {
+  BOTTOM: 1,
+  TOP: 2,
+  BOARD: 0,
+  COPPER: 1,
+  SOLDER: 2,
+  PASTE: 3,
+  SILK: 4,
+  OUTLINE: 5,
 };
 
-var layerNames = {};
+const layerTypes = {
+  tcu: [index.TOP, index.COPPER],
+  tsm: [index.TOP, index.SOLDER],
+  tss: [index.TOP, index.SILK],
+  tsp: [index.TOP, index.PASTE],
+  bcu: [index.BOTTOM, index.COPPER],
+  bsm: [index.BOTTOM, index.SOLDER],
+  bss: [index.BOTTOM, index.SILK],
+  bsp: [index.BOTTOM, index.PASTE],
+  out: [index.BOTTOM|index.TOP, index.OUTLINE],
+  drl: [index.BOTTOM|index.TOP, index.BOARD],
+  // icu: [index.TOP, index.COPPER], // Inner Copper
+}
+
+const layerNames = {};
 layerNames[''] = 'No layer';
-layerNames[index.BOTTOM+''+index.COPPER]                = 'Bottom copper';
-layerNames[index.BOTTOM+''+index.SOLDER]                = 'Bottom solder mask';
-layerNames[index.BOTTOM+''+index.PASTE]                 = 'Bottom solder paste';
-layerNames[index.BOTTOM+''+index.SILK]                  = 'Bottom silk-screen';
-layerNames[index.TOP+''+index.COPPER]                   = 'Top copper';
-layerNames[index.TOP+''+index.SOLDER]                   = 'Top solder mask';
-layerNames[index.TOP+''+index.PASTE]                    = 'Top solder paste';
-layerNames[index.TOP+''+index.SILK]                     = 'Top silk-screen';
-layerNames[(index.TOP|index.BOTTOM)+''+index.BOARD]     = 'Drill';
-layerNames[(index.TOP|index.BOTTOM)+''+index.OUTLINE]   = 'Outline';
+layerNames[index.BOTTOM+''+index.COPPER] = 'Bottom copper';
+layerNames[index.BOTTOM+''+index.SOLDER] = 'Bottom solder mask';
+layerNames[index.BOTTOM+''+index.PASTE] = 'Bottom solder paste';
+layerNames[index.BOTTOM+''+index.SILK] = 'Bottom silk-screen';
+layerNames[index.TOP+''+index.COPPER] = 'Top copper';
+layerNames[index.TOP+''+index.SOLDER] = 'Top solder mask';
+layerNames[index.TOP+''+index.PASTE] = 'Top solder paste';
+layerNames[index.TOP+''+index.SILK] = 'Top silk-screen';
+layerNames[(index.TOP|index.BOTTOM)+''+index.BOARD] = 'Drill';
+layerNames[(index.TOP|index.BOTTOM)+''+index.OUTLINE] = 'Outline';
 
-
-function guessLayer(f) {
-    f = f.toLowerCase();
-    if(f.match(/\.drl|\.drd|\.txt/))
-        return [index.BOTTOM|index.TOP, index.BOARD];
-    if(f.match(/\.out|outline/))
-        return [index.BOTTOM|index.TOP, index.OUTLINE];
-    if(f.match(/\.gbl|\.sol/) || f.match(/bot/) && f.match(/copper|signal/))
-        return [index.BOTTOM, index.COPPER];
-    if(f.match(/\.gbs|\.sts/) || f.match(/bot/) && f.match(/s(?:old(?:er|)|)ma?(?:sk|ks)/))
-        return [index.BOTTOM, index.SOLDER];
-    if(f.match(/\.gbp|\.crs/) || f.match(/bot/) && f.match(/pas/))
-        return [index.BOTTOM, index.PASTE];
-    if(f.match(/\.gbo|\.pls/) || f.match(/bot/) && f.match(/si?lk/))
-        return [index.BOTTOM, index.SILK];
-    if(f.match(/\.gtl|\.cmp/) || f.match(/top/) && f.match(/copper|signal/))
-        return [index.TOP, index.COPPER];
-    if(f.match(/\.gts|\.stc/) || f.match(/top/) && f.match(/s(?:old(?:er|)|)ma?(?:sk|ks)/))
-        return [index.TOP, index.SOLDER];
-    if(f.match(/\.gtp|\.crc/) || f.match(/top/) && f.match(/pas/))
-        return [index.TOP, index.PASTE];
-    if(f.match(/\.gto|\.plc/) || f.match(/top/) && f.match(/si?lk/))
-        return [index.TOP, index.SILK];
-};
 
 function parse(text, name){
-    var g;
-    if(text.match(/^[\s%]*M48/)){
-        g = parseDrill(text, parseStandard);
-    }
-    else{
-        g = parseStandard(text, parseStandard);
-    }
-    var guess   = guessLayer(name);
-    g.side      = guess[0];
-    g.type      = guess[1];
-    g.layerType = layerNames[g.side+''+g.type];
-    g.name      = name;
-    g.isGerber  = true;
-    g.bounds    = getBounds(g);
+  let g
+  const layerType = whatGerber(name)
+  const [side, type] = layerTypes[layerType]
 
-    return g;
+  if (layerType === 'drl') { // text.match(/^[\s%]*M48/)
+    g = parseDrill(text, parseStandard)
+  }
+  else{
+    g = parseStandard(text, parseStandard)
+  }
+  g.side = side
+  g.type = type
+  g.layerType = layerNames[g.side+''+g.type]
+  g.name = name
+  g.isGerber = true
+  g.bounds = getBounds(g)
+  return g
 };
 
 function getBounds(g, r){
