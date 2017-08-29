@@ -99,7 +99,8 @@
     "webpack-dashboard": "0.1.8",
     "webpack-dev-middleware": "1.6.1",
     "webpack-hot-middleware": "2.12.2",
-    "webpack-merge": "0.14.1"
+    "webpack-merge": "0.14.1",
+    "whats-that-gerber": "git+https://git@github.com/stemn/whats-that-gerber.git"
   },
   "dependencies": {
     "autoprefixer": "6.4.1",
