@@ -2,6 +2,11 @@
 
 Anyone can get the [Stemn Website](https://dev.stemn.com/) running locally and develop new features. The entire frontend is open-source!
 
+## Prerequisites
+
+* Git
+* Node
+
 ## Install
 
 1. Clone this repo.
