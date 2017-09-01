@@ -1,4 +1,6 @@
-Anyone can get the Stemn Website running locally and develop new features. The entire frontend is open-source!
+# Stemn Website
+
+Anyone can get the [Stemn Website](https://dev.stemn.com/) running locally and develop new features. The entire frontend is open-source!
 
 ## Install
 
@@ -21,7 +23,8 @@ There are two ways in which you can build and run the web app:
 
   The last command will boot up HTTP server on `3000` port and serve `build/client` directory in a default browser
 
-### Deploy
+## Deploy
+
 Note:
 Only members of the Stemn Team can deploy - open source devs will need to submit a PR.
 
