@@ -1,29 +1,39 @@
-## Development
+# Stemn Website
+
+Anyone can get the Stemn Desktop App running locally and develop new features. The entire frontend is open-source!
 
 ### Install
-1. Clone this repo.
-2. Clone the `stemn-frontend-shared` repo.
-3. `cd` into `stemn-frontend-shared` and run `npm link stemn-frontend-shared` to initiate the npm link.
-4. `cd` into `stemn-frontend/electronNew` and run `npm install`
-5. `cd` into `stemn-frontend/electronNew/app` and run `npm install`
-6. `cd` into `stemn-frontend/electronNew/app` and run `npm link stemn-frontend-shared`
+1. Make sure you have `git` and `node` installed.
+2. Clone this repo.
+3. Clone the [`stemn-frontend-shared`](https://github.com/stemn/stemn-frontend-shared) repo.
+4. `cd` into `stemn-frontend-shared` and run `npm link stemn-frontend-shared` to initiate the npm link.
+5. `cd` into `stemn-frontend/electronNew` and run `npm install`
+6. `cd` into `stemn-frontend/electronNew/app` and run `npm install`
+7. `cd` into `stemn-frontend/electronNew/app` and run `npm link stemn-frontend-shared`
 
-### Run
+## Development
 
-Run this two commands __simultaneously__ in different console tabs.
+Run these two commands __simultaneously__ in different console tabs.
 
 ```bash
 $ npm run start:electron  - This will start the electron build server
 $ npm run start:renderer  - This will start the renderer build server
 ```
 
-Then
+Then, in a 3rd terminal, start electron
 ```bash
 $ npm run electron
 ```
 
-### Release
-Releasing depends on 3 repos: 2 public GitHub repos and this private repo. Releases are compile in the cloud by AppVeyor and TravisCI.
+## Deploy
+
+Note:
+Only members of the Stemn Team can deploy - open source devs will need to submit a PR.
+
+Releasing depends on 3 different repos.
+Releases are compiled in the cloud by AppVeyor and TravisCI.
+
+People with access should:
 
 1. Bump the version in the `package.json` AND `app/package.json`
 2. Build the app using `npm run build` - make sure it works using `npm run electron`
