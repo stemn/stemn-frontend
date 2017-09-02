@@ -8,6 +8,6 @@ All of Stemn's frontend code is opensource here on GitHub. It is split between t
 ## Stemn Website (websiteNew)
 [Instructions](https://github.com/stemn/stemn-frontend/blob/master/websiteNew/README.md) for building the [website](https://dev.stemn.com)
 
-## Ignore
+### Stuff to ignore
 Both the `electron` and `website` folders should be ignored. 
 This is all old code that should probably be deleted but hasn't...
