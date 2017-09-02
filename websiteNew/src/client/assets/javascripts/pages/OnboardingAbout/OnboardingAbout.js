@@ -15,7 +15,7 @@ export default class OnboardingAbout extends Component {
   componentWillUnmount() {
     // Save user when we navigate
     this.props.saveUser({
-      user: this.props.user.data
+      user: this.props.user.data,
     })
   }
   render() {
@@ -23,7 +23,8 @@ export default class OnboardingAbout extends Component {
     return (
       <PanelDescription 
         title="About You"
-        description="Add some basic account info. You'll be able to add more details later.">
+        description="Add some basic account info. You'll be able to add more details later."
+      >
         <InfoPanel>
           <h3>Want to get a head start</h3>
           <p>Import your profile from Linkedin. This will automatically fill out your profile picture, education and experience.</p>
@@ -41,8 +42,8 @@ export default class OnboardingAbout extends Component {
             />
             <p className="flex layout-column layout-align-center-center">
               { user.data.profile.picture
-              ? 'Looking good!'
-              : 'Upload a profile picture' }
+                ? 'Looking good!'
+                : 'Upload a profile picture' }
             </p>
           </div>
         </InfoPanel>

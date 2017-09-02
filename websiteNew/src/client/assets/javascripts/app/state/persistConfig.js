@@ -1,14 +1,14 @@
-import { pick } from 'lodash';
+import { pick } from 'lodash'
 
-const authKeysToPersist = [ 'authToken', 'user' ];
-const persistFn = (state) => pick(state, authKeysToPersist);
+const authKeysToPersist = ['authToken', 'user']
+const persistFn = state => pick(state, authKeysToPersist)
 
 const transform = {
   in: persistFn,
-  out: persistFn
+  out: persistFn,
 }
 
 export default {
-  whitelist: [ 'auth' ],
-  transforms: [ transform ]
+  whitelist: ['auth'],
+  transforms: [transform],
 }

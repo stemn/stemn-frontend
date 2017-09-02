@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 
-import { ArrowTabs, ArrowTab } from 'stemn-shared/misc/Tabs/ArrowTabs/ArrowTabs.jsx';
+import { ArrowTabs, ArrowTab } from 'stemn-shared/misc/Tabs/ArrowTabs/ArrowTabs.jsx'
 import { Container } from 'stemn-shared/misc/Layout'
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet'
 import classes from './Onboarding.scss'
 import classNames from 'classnames'
 

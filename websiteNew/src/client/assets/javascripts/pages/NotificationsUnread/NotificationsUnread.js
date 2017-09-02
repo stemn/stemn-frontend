@@ -6,13 +6,13 @@ export default class NotificationsUnread extends Component {
   render() {
     const { notifications, markAsRead } = this.props
     const unreadNotifications = notifications && notifications.data
-      ? notifications.data.filter((notification) => !notification.read)
+      ? notifications.data.filter(notification => !notification.read)
       : []
 
     return (
       <div>
         { unreadNotifications.length > 0
-          ? unreadNotifications.map((notification) => (
+          ? unreadNotifications.map(notification => (
             <NotificationItem
               key={ notification._id }
               notification={ notification }

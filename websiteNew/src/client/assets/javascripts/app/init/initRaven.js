@@ -1,5 +1,5 @@
-import { SENTRY_URL } from '../config';
+import { SENTRY_URL } from '../config'
 
 export default () => {
-  window.Raven && Raven.config(SENTRY_URL).install();
+  window.Raven && Raven.config(SENTRY_URL).install()
 }

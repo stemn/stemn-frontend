@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import classNames from 'classnames'
 import classes from './Project.css'
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet'
 import StandardLayout from 'layout/StandardLayout'
 import Tabs from 'stemn-shared/misc/Tabs/Tabs'
 import { Container } from 'stemn-shared/misc/Layout'
@@ -13,7 +13,6 @@ import IsOwner from 'stemn-shared/misc/Auth/IsOwner'
 import PublicPrivateIcon from 'stemn-shared/misc/Icons/PublicPrivateIcon'
 
 class Project extends Component {
-
   render() {
     const { children, project, pathname, currentUser } = this.props
     const routeParams = { projectId: get(project, 'data._id') }

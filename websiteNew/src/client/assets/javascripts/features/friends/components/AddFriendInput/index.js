@@ -1,1 +1,1 @@
-export { default } from './AddFriendInput';
+export { default } from './AddFriendInput'

@@ -12,7 +12,7 @@ export default class NotificationsUnread extends Component {
     return (
       <div>
         { allNotifications.length > 0
-          ? allNotifications.map((notification) => (
+          ? allNotifications.map(notification => (
             <NotificationItem
               key={ notification._id }
               notification={ notification }

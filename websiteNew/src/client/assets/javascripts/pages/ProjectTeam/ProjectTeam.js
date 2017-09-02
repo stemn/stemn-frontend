@@ -56,7 +56,7 @@ export default class ProjectTeam extends Component {
                           entityType="user"
                           entityId={ user._id }
                           parentType="project"
-                          parentId={ project.data._id}
+                          parentId={ project.data._id }
                         />
                       </Link>
                     </div>

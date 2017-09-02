@@ -3,7 +3,7 @@ import { getSettings } from 'stemn-shared/misc/UserSettings/UserSettings.actions
 
 export default (store) => {
   // Load the user data
-  const { auth } = store.getState();
+  const { auth } = store.getState()
   if (auth.authToken) {
     store.dispatch(loadUserData())
     store.dispatch(getSettings())

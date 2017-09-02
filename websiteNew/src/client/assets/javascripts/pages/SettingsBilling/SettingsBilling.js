@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
-import SimpleTable from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable';
+import SimpleTable from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable'
 import Link from 'stemn-shared/misc/Router/Link'
 import PlansRadios from 'stemn-shared/misc/Billing/PlansRadios'
 import classes from './SettingsBilling.css'
@@ -16,7 +16,7 @@ class SettingsBilling extends Component {
             <tr><td>Plan</td><td><b>Stemn Beta</b>, unlimited public and private projects (while in beta).</td></tr>
             <tr><td>Payment</td><td>No payment method on file.</td></tr>
           </SimpleTable>
-          <div className={ classes.divider }/>
+          <div className={ classes.divider } />
           <PlansRadios />
         </InfoPanel>
         <InfoPanel>

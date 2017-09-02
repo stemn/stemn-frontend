@@ -6,7 +6,7 @@ import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import Tabs from 'stemn-shared/misc/Tabs/Tabs'
 import Link from 'stemn-shared/misc/Router/Link'
 import SiteSearchResults from 'stemn-shared/misc/Search/SiteSearchResults'
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet'
 import classes from './Search.scss'
 import classNames from 'classnames'
 
@@ -21,7 +21,7 @@ export default class Search extends Component {
         </Helmet>
         <SubHeader noResponsive>
           <Tabs noline>
-            <Link to="/search" className={ { 'active': !location.query.type } } query={ { q: location.query.q } }>Projects</Link>
+            <Link to="/search" className={ { active: !location.query.type } } query={ { q: location.query.q } }>Projects</Link>
             <Link activeClassName="active" to="/search" query={ { q: location.query.q, type: 'thread' } }>Threads</Link>
             <Link activeClassName="active" to="/search" query={ { q: location.query.q, type: 'user' } }>People</Link>
             <Link activeClassName="active" to="/search" query={ { q: location.query.q, type: 'field' } }>Fields</Link>
@@ -37,8 +37,7 @@ export default class Search extends Component {
                 size={ 30 }
               />
             </Col>            
-            <Col className="flex-30">
-            </Col>
+            <Col className="flex-30" />
           </Row>
         </Container>
       </StandardLayout>

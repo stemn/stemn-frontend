@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react';
-import StandardLayout from 'layout/StandardLayout';
+import React, { Component, PropTypes } from 'react'
+import StandardLayout from 'layout/StandardLayout'
 
-import classes from 'layout/layout.css';
+import classes from 'layout/layout.css'
 import Link from 'stemn-shared/misc/Router/Link'
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet'
 
 export default class Terms extends Component {
   render() {
@@ -18,7 +18,7 @@ export default class Terms extends Component {
           By using the stemn.com web site ("Service"), or any services of STEMN PTY. LTD. ("STEMN"), you are agreeing to be bound by the following terms and conditions ("Terms of Service").
           </strong>
         </p>
-        <br/>
+        <br />
         <p>
           IF YOU ARE ENTERING INTO THIS AGREEMENT ON BEHALF OF A COMPANY OR OTHER LEGAL ENTITY, YOU REPRESENT THAT YOU HAVE THE AUTHORITY TO BIND SUCH ENTITY, ITS AFFILIATES AND ALL USERS WHO ACCESS OUR SERVICES THROUGH YOUR ACCOUNT TO THESE TERMS AND CONDITIONS, IN WHICH CASE THE TERMS "YOU" OR "YOUR" SHALL REFER TO SUCH ENTITY, ITS AFFILIATES AND USERS ASSOCIATED WITH IT. IF YOU DO NOT HAVE SUCH AUTHORITY, OR IF YOU DO NOT AGREE WITH THESE TERMS AND CONDITIONS, YOU MUST NOT ACCEPT THIS AGREEMENT AND MAY NOT USE THE SERVICES.
         </p>
@@ -77,8 +77,8 @@ export default class Terms extends Component {
           <li>The failure of STEMN to exercise or enforce any right or provision of the Terms of Service shall not constitute a waiver of such right or provision. The Terms of Service constitutes the entire agreement between you and STEMN and govern your use of the Service, superseding any prior agreements between you and STEMN (including, but not limited to, any prior versions of the Terms of Service). You agree that these Terms of Service and Your use of the Service are governed under California law.</li>
           <li>Questions about the Terms of Service should be sent to <a href="mailto:sue@stemn.com">sue@stemn.com</a>.</li>
         </ol>
-        <br/>
-        <br/>
+        <br />
+        <br />
         <small>Last Updated: 20 April 2015</small>
       </StandardLayout>
     )

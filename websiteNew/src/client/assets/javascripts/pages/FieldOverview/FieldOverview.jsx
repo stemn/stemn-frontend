@@ -20,7 +20,7 @@ export default class FieldOverview extends Component {
         </Col>
         <Col className="flex-gt-xs-30">
           <div className="text-mini-caps" style={ { marginBottom: '10px' } }>Related Fields</div>
-          <RelatedList fieldId={ field.data._id } limit={ 20 }/>
+          <RelatedList fieldId={ field.data._id } limit={ 20 } />
         </Col>
       </Row>
     )

@@ -1,8 +1,8 @@
-import React, { Component, PropTypes } from 'react';
-import classes from './Footer.css';
-import classNames from 'classnames';
+import React, { Component, PropTypes } from 'react'
+import classes from './Footer.css'
+import classNames from 'classnames'
 
-import { Container, Row, Col } from 'stemn-shared/misc/Layout';
+import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import Link from 'stemn-shared/misc/Router/Link'
 import logo from '../LandingFooter/logo.png'
 
@@ -25,4 +25,4 @@ class Footer extends Component {
   }
 }
 
-export default Footer;
+export default Footer

@@ -38,11 +38,11 @@ export default class Landing extends Component {
           <h1>Seamless Version Control and Task Tracking</h1>
           <h3>A unified workflow for modern engineers</h3>
           { isMobile()
-          ? <Button className={ classes.downloadButton + ' secondary lg'} name="loginRoute">
+            ? <Button className={ `${classes.downloadButton} secondary lg` } name="loginRoute">
               <MdLock size={ 20 } style={ { marginRight: '10px' } } />
               Get Started
             </Button>
-          : <DownloadButton className={ classes.downloadButton + ' secondary lg'} platform="auto" >
+            : <DownloadButton className={ `${classes.downloadButton} secondary lg` } platform="auto" >
               Download Now
             </DownloadButton>
           }
@@ -80,7 +80,7 @@ export default class Landing extends Component {
                 <h4 className="text-title-2">Access your files anywhere</h4>
                 <p className="text-title-4">Whether you’re in the office, in the lab, or on the go, preview your files in your browser or any device.</p>
                 <p className="text-title-4">Preview hundreds of different file-types directly in your web browser.</p>
-                <div className={ classNames(classes.fileIcons, 'layout-row')}>
+                <div className={ classNames(classes.fileIcons, 'layout-row') }>
                   <FileIcon size={ 50 } type="file" fileType="dxf" />
                   <FileIcon size={ 50 } type="file" fileType="dwg" />
                   <FileIcon size={ 50 } type="file" fileType="tex" />
@@ -114,21 +114,21 @@ export default class Landing extends Component {
             <h4 className="text-title-2">Ready?</h4>
             <p className="text-title-4">Get started for free. Download the desktop app and sign up.</p>
 
-              { isMobile()
-              ? <Button className={ classes.downloadButton + ' secondary lg'} name="loginRoute">
-                  <MdLock size={ 20 } style={ { marginRight: '10px' } } />
+            { isMobile()
+              ? <Button className={ `${classes.downloadButton} secondary lg` } name="loginRoute">
+                <MdLock size={ 20 } style={ { marginRight: '10px' } } />
                   Get Started
-                </Button>
+              </Button>
               : <div className="layout-row layout-xs-column layout-align-center">
-                  <DownloadButton className={ classes.downloadButton + ' secondary lg'} platform="auto" >
+                <DownloadButton className={ `${classes.downloadButton} secondary lg` } platform="auto" >
                     Download Now
-                  </DownloadButton>
-                  <Button className={ classes.downloadButton + ' primary lg'} name="loginRoute">
-                    <MdLock size={ 20 } style={ { marginRight: '10px' } } />
+                </DownloadButton>
+                <Button className={ `${classes.downloadButton} primary lg` } name="loginRoute">
+                  <MdLock size={ 20 } style={ { marginRight: '10px' } } />
                     Sign up
-                  </Button>
-                </div>
-              }
+                </Button>
+              </div>
+            }
 
           </Container>
         </div>

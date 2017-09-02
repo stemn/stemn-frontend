@@ -1,5 +1,5 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import rootReducer from '../reducer';
+import { createStore, applyMiddleware, compose } from 'redux'
+import rootReducer from '../reducer'
 import qs from 'querystring'
 
 import { routerMiddleware } from 'react-router-redux'
@@ -33,7 +33,7 @@ const middleware = [
 ]
 
 const enhancer = compose(
-  applyMiddleware(...middleware)
+  applyMiddleware(...middleware),
 )(createStore)
 
 export default function configureStore(initialState) {

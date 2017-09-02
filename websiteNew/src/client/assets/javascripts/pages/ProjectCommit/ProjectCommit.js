@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import classNames from 'classnames';
+import classNames from 'classnames'
 import classes from './ProjectCommit.css'
 
 import { groupRevisions }  from 'stemn-shared/misc/Timeline/Timeline.utils.js'
@@ -14,9 +14,9 @@ import Link from 'stemn-shared/misc/Router/Link'
 
 export default class ProjectCommit extends Component {
   renderLoaded() {
-    const { commit: { data: commit }, project } = this.props;
+    const { commit: { data: commit }, project } = this.props
     
-    const groupedRevisions = groupRevisions(commit.data.items);
+    const groupedRevisions = groupRevisions(commit.data.items)
 
     return (
       <div>
@@ -34,7 +34,7 @@ export default class ProjectCommit extends Component {
           <div className={ classes.blurb }>
             <EditorDisplay value={ commit.data.body } />
           </div>
-          <div className={ classNames('layout-row layout-align-start-center', classes.meta)}>
+          <div className={ classNames('layout-row layout-align-start-center', classes.meta) }>
             <Link
               name="userRoute"
               params={ { userId: commit.user._id } }
@@ -44,7 +44,7 @@ export default class ProjectCommit extends Component {
                 name={ commit.user.name }
                 picture={ commit.user.picture }
                 size={ 20 }
-                shape='square'
+                shape="square"
               />
             </Link>
             <div className="text-ellipsis">
@@ -59,7 +59,7 @@ export default class ProjectCommit extends Component {
           </div>
         </SubSubHeader>
         <Container className={ classes.files }>
-          <div className='text-mini-caps'>Files updated:</div>
+          <div className="text-mini-caps">Files updated:</div>
           { groupedRevisions.map((file, index) => (
             <FileCompare 
               className={ classes.file }
@@ -69,18 +69,18 @@ export default class ProjectCommit extends Component {
               isOpen={ index === 0 }
               key={ file._id }
             />
-           ))}
+          ))}
         </Container>
       </div>
-    );
+    )
   }
   render() {
-    const { commit } = this.props;
+    const { commit } = this.props
     return (
       <div className={ classes.content }>
         { commit && commit.data 
-        ? this.renderLoaded()
-        : null }
+          ? this.renderLoaded()
+          : null }
       </div>
     )
   }

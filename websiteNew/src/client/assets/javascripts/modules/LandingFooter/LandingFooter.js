@@ -1,8 +1,8 @@
-import React, { Component, PropTypes } from 'react';
-import classes from './LandingFooter.css';
-import classNames from 'classnames';
+import React, { Component, PropTypes } from 'react'
+import classes from './LandingFooter.css'
+import classNames from 'classnames'
 
-import { Container, Row, Col } from 'stemn-shared/misc/Layout';
+import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import Link from 'stemn-shared/misc/Router/Link'
 import logo from './logo.png'
 
@@ -15,8 +15,7 @@ class Footer extends Component {
             <Col className="flex hide-xs">
               <img className={ classes.logo } src={ logo } />
             </Col>
-            <Col className="flex hide-xs hide-sm">
-            </Col>
+            <Col className="flex hide-xs hide-sm" />
             <Col className="flex">
               <div className={ classes.title }>About</div>
               <div><Link name="landingRoute">Home</Link></div>
@@ -47,4 +46,4 @@ class Footer extends Component {
   }
 }
 
-export default Footer;
+export default Footer

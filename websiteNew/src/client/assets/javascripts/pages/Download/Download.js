@@ -4,20 +4,20 @@ import HeroBanner from 'modules/HeroBanner'
 import DownloadButton from 'stemn-shared/misc/DesktopReleases/DownloadButton'
 import bytes from 'stemn-shared/utils/filters/bytes.js'
 import { Container } from 'stemn-shared/misc/Layout'
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet'
 
-import moment from 'moment';
+import moment from 'moment'
 
 import classes from './Download.scss'
 
 export default class Download extends Component {
   render() {
-    const { latest } = this.props;
+    const { latest } = this.props
 
-    const getPlatformSection = (platform) => (
+    const getPlatformSection = platform => (
       <div className={ classes.platform }>
-        <h3 className="text-title-4">Stemn Desktop for <span style={{textTransform: 'capitalize'}}>{ platform }</span></h3>
-        <div className="text-title-5" style={{ marginBottom: '15px' }}>
+        <h3 className="text-title-4">Stemn Desktop for <span style={ { textTransform: 'capitalize' } }>{ platform }</span></h3>
+        <div className="text-title-5" style={ { marginBottom: '15px' } }>
           <div>{ latest.version } - released { moment(latest[platform].updated_at).calendar() }</div>
           <div>Size - { bytes(latest[platform].size) }</div>
           <a className="link-primary" href={ `https://github.com/stemn/Stemn-Desktop/releases/tag/${latest.version}` } target="_blank">Release Notes</a>
@@ -37,12 +37,12 @@ export default class Download extends Component {
           <h3>Collaboration tools for Engineers</h3>
         </HeroBanner>
         { latest && latest.version
-        ? <Container>
+          ? <Container>
             { getPlatformSection('windows') }
             { getPlatformSection('mac') }
             { getPlatformSection('linux') }
           </Container>
-        : null }
+          : null }
       </LandingLayout>
     )
   }

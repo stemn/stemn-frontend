@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import StandardLayout from 'layout/StandardLayout'
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet'
 import classes from 'layout/layout.css'
 import Link from 'stemn-shared/misc/Router/Link'
 
@@ -32,8 +32,8 @@ export default class Privacy extends Component {
         <p>STEMN may periodically update this policy. We will notify you about significant changes in the way we treat personal information by sending a notice to the primary email address specified in your STEMN primary account holder account or by placing a prominent notice on our site.</p>
         <h2>Questions</h2>
         <p>Any questions about this Privacy Policy should be addressed to <a href="mailto:sue@stemn.com">sue@stemn.com</a>.</p>
-        <br/>
-        <br/>
+        <br />
+        <br />
         <small>Last Updated: 11 March 2015</small>
       </StandardLayout>
     )

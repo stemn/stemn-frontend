@@ -1,11 +1,11 @@
-/*****************************************************************
+/** ***************************************************************
 
 IMPORTANT!
 Any changes made here must be made in routes.production
 These files should be almost identical. They should only differ by
 which routes are async.
 
-*****************************************************************/
+**************************************************************** */
 
 import React                                   from 'react'
 import { Route, IndexRoute, Redirect }         from 'react-router'

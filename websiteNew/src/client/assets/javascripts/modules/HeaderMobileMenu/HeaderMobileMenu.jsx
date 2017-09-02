@@ -8,12 +8,12 @@ export default class HeaderMobileMenu extends Component {
     const { items, isOpen } = this.props
     const linkHeight = 33
     const mobileLinkStyle = {
-      height: `${linkHeight}px`
+      height: `${linkHeight}px`,
     }
-    const padding = 20;
+    const padding = 20
     const mobileLinksStyle = isOpen
       ? {
-        height: linkHeight * items.length + padding
+        height: linkHeight * items.length + padding,
       }
       : {}
 

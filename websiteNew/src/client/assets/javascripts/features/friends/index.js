@@ -5,5 +5,5 @@ export {
   default,
   actionCreators,
   selector,
-  NAME
-} from './friends';
+  NAME,
+} from './friends'

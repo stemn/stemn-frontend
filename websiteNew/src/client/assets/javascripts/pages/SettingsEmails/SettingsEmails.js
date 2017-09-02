@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 import EmailAndNotificationToggles from 'stemn-shared/misc/UserSettings/EmailAndNotificationToggles'
 
 class SettingsEmails extends Component {

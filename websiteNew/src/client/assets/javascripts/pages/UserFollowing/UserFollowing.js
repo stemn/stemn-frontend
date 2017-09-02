@@ -11,20 +11,20 @@ export default class UserFollowing extends Component {
 
     return (
       <div>
-        <div className='text-mini-caps'>People who { user.data.profile.firstname } follows</div>
-        <br/>
+        <div className="text-mini-caps">People who { user.data.profile.firstname } follows</div>
+        <br />
         <div className={ classes.panel }>
           { items && items.data
-          ? items.data.map((userId) => (
-            <UserRow
-              key={ userId }
-              userId={ userId }
-              className={ classes.user }
-            />
-          ))
-          : null }
+            ? items.data.map(userId => (
+              <UserRow
+                key={ userId }
+                userId={ userId }
+                className={ classes.user }
+              />
+            ))
+            : null }
         </div>
-        <Pagination path={ location.pathname } page={ page } noMoreResults={ noMoreResults }/>
+        <Pagination path={ location.pathname } page={ page } noMoreResults={ noMoreResults } />
       </div>
     )
   }

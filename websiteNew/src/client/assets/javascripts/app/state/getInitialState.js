@@ -1,6 +1,6 @@
 import { getStoredState } from 'redux-persist'
 
-export default (persistConfig) => new Promise((resolve, reject) => {
+export default persistConfig => new Promise((resolve, reject) => {
   getStoredState(persistConfig, (err, initialState) => {
     // Return the initialState     
     if (initialState) {
@@ -9,4 +9,4 @@ export default (persistConfig) => new Promise((resolve, reject) => {
       reject(err)
     }
   })
-});
+})

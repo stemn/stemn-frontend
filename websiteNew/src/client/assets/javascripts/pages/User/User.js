@@ -13,12 +13,12 @@ import { get } from 'lodash'
 import MdLocationOn from 'react-icons/md/location-on'
 import MdLink from 'react-icons/md/link'
 import { userRoute } from 'route-actions'
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet'
 
 class User extends Component {
   renderComplete() {
     const { user, children, currentUser, location } = this.props
-    const showSidebar = location.pathname === userRoute({userId : user.data._id})
+    const showSidebar = location.pathname === userRoute({ userId: user.data._id })
     return (
       <div>
         <Helmet>
@@ -26,8 +26,8 @@ class User extends Component {
         </Helmet>
         <UserNavHeader user={ user } currentUser={ currentUser } />
         <Container>
-          <Row className='layout-xs-column layout-gt-xs-row'>
-            <Col className={ classNames(classes.sidebar, 'flex-gt-xs-30', {[ classes.showSidebar] : showSidebar } )}>
+          <Row className="layout-xs-column layout-gt-xs-row">
+            <Col className={ classNames(classes.sidebar, 'flex-gt-xs-30', { [classes.showSidebar]: showSidebar }) }>
               <UserAvatar
                 name={ user.data.name }
                 picture={ get(user, 'data.profile.picture') }
@@ -40,14 +40,14 @@ class User extends Component {
                 <h3 className={ classes.blurb }>{ user.data.blurb }</h3>
                 <hr />
                 { get(user, 'data.profile.location[0].name') &&
-                  <div className={ classes.iconInfo}>
-                    <MdLocationOn size={20} />
+                  <div className={ classes.iconInfo }>
+                    <MdLocationOn size={ 20 } />
                     { user.data.profile.location[0].name }
                   </div>
                 }
                 { get(user, 'data.profile.socialLinks.website') &&
-                  <div className={ classes.iconInfo}>
-                    <MdLink size={20} />
+                  <div className={ classes.iconInfo }>
+                    <MdLink size={ 20 } />
                     <a
                       href={ user.data.profile.socialLinks.website.startsWith('http') ? user.data.profile.socialLinks.website : `http://${user.data.profile.socialLinks.website}` }
                       target="_blank"
@@ -67,7 +67,7 @@ class User extends Component {
                 </div>
               </div>
             </Col>
-            <Col className='flex'>
+            <Col className="flex">
               { children }
             </Col>
           </Row>
@@ -82,10 +82,10 @@ class User extends Component {
 
     return (
       <StandardLayout>
-        <LoadingOverlay show={ !isLoaded } hideBg/>
+        <LoadingOverlay show={ !isLoaded } hideBg />
         { isLoaded
-        ? this.renderComplete()
-        : null }
+          ? this.renderComplete()
+          : null }
       </StandardLayout>
     )
   }

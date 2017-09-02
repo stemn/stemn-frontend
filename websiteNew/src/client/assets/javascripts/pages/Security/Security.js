@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react';
-import StandardLayout from 'layout/StandardLayout';
-import { Helmet } from "react-helmet";
-import classes from 'layout/layout.css';
+import React, { Component, PropTypes } from 'react'
+import StandardLayout from 'layout/StandardLayout'
+import { Helmet } from 'react-helmet'
+import classes from 'layout/layout.css'
 import Link from 'stemn-shared/misc/Router/Link'
 
 export default class Security extends Component {
@@ -37,8 +37,8 @@ export default class Security extends Component {
         <p>All passwords are filtered from all our logs and are one-way encrypted in the database using <span>bcrypt</span>. Login information is always sent over SSL.</p>
         <h2>Contact Us</h2>
         <p>Have a question, concern, or comment about STEMN security? Please contact <a href="mailto:security@stemn.com">security@stemn.com</a>.</p>
-        <br/>
-        <br/>
+        <br />
+        <br />
         <small>Last Updated: 14 March 2015</small>
       </StandardLayout>
     )
