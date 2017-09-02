@@ -37,3 +37,4 @@ export const userFollowingRoute          = ({ userId })                        =
 export const userProjectsRoute           = ({ userId })                        => `/users/${userId}/projects`
 export const userRoute                   = ({ userId })                        => `/users/${userId}`
 export const userStarsRoute              = ({ userId })                        => `/users/${userId}/stars`
+export const notFound                    = ()                                  => `/404`

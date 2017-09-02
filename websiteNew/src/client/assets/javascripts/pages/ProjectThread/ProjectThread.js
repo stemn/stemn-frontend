@@ -31,7 +31,7 @@ import SocialButton from 'stemn-shared/misc/Social/SocialButton'
 import { permissionsIsMin } from 'stemn-shared/misc/Auth/Auth.utils'
 import { get, has } from 'lodash'
 import { Helmet } from "react-helmet"
-import { projectThreadsRoute } from 'route-actions'
+import { projectThreadsRoute, notFound } from 'route-actions'
 
 export default class ProjectThread extends Component {
   updateThread = () => {
@@ -59,6 +59,7 @@ export default class ProjectThread extends Component {
   }]
   sidebarEdit = () => {
     const { thread, project, board, threadModel } = this.props
+    
     const group = board.data.groups.find(group => group._id === thread.data.group)
 
     const groupOptions = board.data.groups.map(group => ({
@@ -179,7 +180,11 @@ export default class ProjectThread extends Component {
     )
   }
   render() {
-    const { thread, project, board, threadModel, threadId, timeline, timelineCacheKey, location, currentUser } = this.props
+    const { thread, project, board, threadModel, threadId, timeline, timelineCacheKey, location, currentUser, replaceRoute } = this.props
+        
+    if (thread && thread.error) {
+      replaceRoute(notFound())
+    }
 
     if (thread && thread.data && board && board.data && project && project.data ) {
       const group = board.data.groups.find(group => group._id === thread.data.group)
