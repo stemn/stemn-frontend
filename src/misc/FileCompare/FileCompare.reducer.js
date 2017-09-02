@@ -30,8 +30,8 @@ export default (state = initialState, action = {}) => {
     case 'FILE_COMPARE/CHANGE_MODE':
       return i.merge(state, {
         [action.meta.cacheKey]: {
-          mode: action.payload.mode
-        }
+          mode: action.payload.mode,
+        },
       })
     default:
       return state

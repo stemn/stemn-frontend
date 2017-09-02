@@ -1,15 +1,15 @@
-import React from 'react';
+import React from 'react'
 
 // Styles
-import styles from './NavButton.css';
-import classNames from 'classnames';
+import styles from './NavButton.css'
+import classNames from 'classnames'
 
 export default (props) => {
   const buttonClasses = classNames({
-    [styles.navButton] : true,
-    [styles.active]    : props.isActive,
+    [styles.navButton]: true,
+    [styles.active]: props.isActive,
   })
   return (
-    <button className={buttonClasses}>{props.children}</button>
+    <button className={ buttonClasses }>{props.children}</button>
   )
 }

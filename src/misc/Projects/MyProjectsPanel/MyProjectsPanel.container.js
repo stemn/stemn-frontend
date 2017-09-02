@@ -12,7 +12,7 @@ const stateToProps = ({ projects, auth }) => ({
 
 const dispatchToProps = {
   getUserProjects,
-  newProject: () => showModal({ modalType: ProjectNewModalName })
+  newProject: () => showModal({ modalType: ProjectNewModalName }),
 }
 
 export default connect(stateToProps, dispatchToProps)(MyProjectsPanel)

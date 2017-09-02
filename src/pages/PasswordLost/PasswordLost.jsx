@@ -1,10 +1,10 @@
-import React from 'react';
-import classNames from 'classnames';
+import React from 'react'
+import classNames from 'classnames'
 import classes from '../Login/Login.css'
-import { Link } from 'react-router';
-import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton';
-import Input from 'stemn-shared/misc/Input/Input/Input';
-import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import { Link } from 'react-router'
+import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
+import Input from 'stemn-shared/misc/Input/Input/Input'
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
 export default React.createClass({
   submit(event) {
@@ -16,12 +16,12 @@ export default React.createClass({
     })
   },
   render() {
-    const { authenticate, auth } = this.props;
+    const { authenticate, auth } = this.props
     
     return (
       <div className="flex rel-box">
         <div className={ classNames(classes.background, 'layout-column layout-align-center-center') }>
-          <div className={ classNames(classes.panel, 'layout-column', 'layout-align-space-between') } style={ { height: '250px'} }>
+          <div className={ classNames(classes.panel, 'layout-column', 'layout-align-space-between') } style={ { height: '250px' } }>
             <div className="text-title-3">Get password reset link</div>
             <form onSubmit={ this.submit }>
               <br />
@@ -44,5 +44,5 @@ export default React.createClass({
         </div>
       </div>
     )
-  }
-});
+  },
+})

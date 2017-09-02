@@ -1,26 +1,27 @@
-import React from 'react';
+import React from 'react'
 
-import classNames from 'classnames';
-import classes from '../Tag/Tag.css';
+import classNames from 'classnames'
+import classes from '../Tag/Tag.css'
 
-import { middle as middleConcat } from 'stemn-shared/utils/stringConcat';
+import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
 
-import MdClose from 'react-icons/md/close';
+import MdClose from 'react-icons/md/close'
 
 export default React.createClass({
   render() {
-    const { text, className, onClick, ...otherProps } = this.props;
+    const { text, className, onClick, ...otherProps } = this.props
     return (
       <div className={ classNames(classes.tag, classes.edit, className) } { ...otherProps }>
         <div className={ classes.tagInner }>
           { middleConcat(text, 30) }
         </div>
         <div 
-         className={ classNames(classes.close, 'layout-column layout-align-center-center') }
-         onClick={ onClick }>
+          className={ classNames(classes.close, 'layout-column layout-align-center-center') }
+          onClick={ onClick }
+        >
           <MdClose size={ 12 } />
         </div>
       </div>
     )
-  }
-});
+  },
+})

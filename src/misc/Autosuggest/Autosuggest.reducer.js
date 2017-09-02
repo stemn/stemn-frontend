@@ -1,4 +1,4 @@
-import i from 'icepick';
+import i from 'icepick'
 
 const initialState = {
   // someKey: {
@@ -6,7 +6,7 @@ const initialState = {
   //   suggestions: [],
   //   isLoading: false
   // }
-};
+}
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -26,6 +26,6 @@ export default (state = initialState, action = {}) => {
         .value()
 
     default:
-      return state;
+      return state
   }
 }

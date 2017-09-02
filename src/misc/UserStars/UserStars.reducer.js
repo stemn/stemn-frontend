@@ -1,7 +1,7 @@
 import i from 'icepick'
 
 const initialState = {
-/*********************************************
+/** *******************************************
 This reducer store paginated star data for
 every user.
 
@@ -10,7 +10,7 @@ every user.
     2: [projectId, projectId]
   }
 
-*********************************************/
+******************************************** */
 }
 
 export default (state = initialState, action = {}) => {
@@ -22,7 +22,7 @@ export default (state = initialState, action = {}) => {
     case 'USER_STARS/GET_STARS_FULFILLED':
       return i.assocIn(state, [action.meta.userId, action.meta.page], {
         loading: false,
-        data: action.payload.data
+        data: action.payload.data,
       })
 
     default:

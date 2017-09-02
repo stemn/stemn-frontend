@@ -13,10 +13,10 @@ import { has, get } from 'lodash'
 import ThreadDisplayModal from './ThreadDisplayModal'
 
 const mapStateToProps = ({ syncTimeline, threads, projects }, { threadId }) => {
-  const thread          = threads.data[threadId];
-  const board         = has(thread,  'data.board')   ? threads.boards[thread.data.board]     : {};
-  const project       = has(board, 'data.project') ? projects.data[board.data.project] : {};
-  const boardModel    = has(thread,  'data.board')   ? `threads.boards.${thread.data.board}` : '';
+  const thread          = threads.data[threadId]
+  const board         = has(thread,  'data.board')   ? threads.boards[thread.data.board]     : {}
+  const project       = has(board, 'data.project') ? projects.data[board.data.project] : {}
+  const boardModel    = has(thread,  'data.board')   ? `threads.boards.${thread.data.board}` : ''
   const timelineCacheKey = threadId
   return {
     thread,
@@ -26,7 +26,7 @@ const mapStateToProps = ({ syncTimeline, threads, projects }, { threadId }) => {
     project,
     timeline: get(syncTimeline, [threadId, 'data'], []),
     timelineCacheKey,
-  };
+  }
 }
 
 const mapDispatchToProps = {
@@ -46,7 +46,7 @@ const fetchConfigs = [{
   hasChanged: 'threadId',
   onChange: (props) => {
     props.getThread({
-      threadId: props.threadId
+      threadId: props.threadId,
     })
     props.fetchTimeline({
       entityId: props.threadId,
@@ -59,7 +59,7 @@ const fetchConfigs = [{
     })
     if (!has(props, 'board.data')) {
       props.getBoard({
-        boardId: props.thread.data.board
+        boardId: props.thread.data.board,
       })
     }
     if (!has(props, 'project.data')) {
@@ -67,7 +67,7 @@ const fetchConfigs = [{
         projectId: props.thread.data.project._id,
       })
     }
-  }
+  },
 }, {
   // Leave the thread room on unmount/change
   unmount: true,
@@ -80,7 +80,7 @@ const fetchConfigs = [{
         room: prevProps.threadId,
       })
     }
-  }
+  },
 }]
 
 export default (modalName) => {

@@ -1,19 +1,19 @@
 // Component Core
-import React from 'react';
-import { connect } from 'react-redux';
+import React from 'react'
+import { connect } from 'react-redux'
 
 // Styles
-import classNames from 'classnames';
-import classes from './ColorSelect.css';
+import classNames from 'classnames'
+import classes from './ColorSelect.css'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
-import MdMoreHoriz from 'react-icons/md/more-horiz';
+import MdMoreHoriz from 'react-icons/md/more-horiz'
 
 
 const Component = React.createClass({
   render() {
-    const { dispatch, model, value } = this.props;
+    const { dispatch, model, value } = this.props
 
     const niceColors = [
       '#001F3F',
@@ -35,20 +35,20 @@ const Component = React.createClass({
     ]
 
     return (
-      <div className={classes.sampleOuter + ' layout-row layout-wrap'}>
-          {
-            niceColors.map(color =>
-              <div
-                key={ color }
-                onClick={ () => dispatch(storeChange(model, color)) }
-                className={ classes.sampleSwatch }
-                style={ { background: color } }
-              />
-            )
-          }
+      <div className={ `${classes.sampleOuter} layout-row layout-wrap` }>
+        {
+          niceColors.map(color =>
+            <div
+              key={ color }
+              onClick={ () => dispatch(storeChange(model, color)) }
+              className={ classes.sampleSwatch }
+              style={ { background: color } }
+            />,
+          )
+        }
       </div>
     )
-  }
-});
+  },
+})
 
-export default connect()(Component);
+export default connect()(Component)

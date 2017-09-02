@@ -13,7 +13,7 @@ const stateToProps = ({ fileList }, { projectId, path, provider }) => {
   }
 }
 
-const dispatchToProps = (dispatch) => ({
+const dispatchToProps = dispatch => ({
   getFiles: bindActionCreators(getFiles, dispatch),
   getSearchResults: bindActionCreators(getSearchResults, dispatch),
   dispatch,

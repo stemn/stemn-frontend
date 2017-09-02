@@ -1,7 +1,7 @@
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import { get, pick, findKey } from 'lodash'
 
-//export const isFilterActive = (filterArray, filterString, searchString) =>{
+// export const isFilterActive = (filterArray, filterString, searchString) =>{
 //  if(filterString == ''){
 //    // If none of the other keys in this filter are active, set this one to active
 //    return filterArray.findIndex(filterObject => filterObject.value != '' ? stringContainsWord(searchString, filterObject.value) : false) == -1;
@@ -10,9 +10,9 @@ import { get, pick, findKey } from 'lodash'
 //    // Check if the search string contains the filterString
 //    return stringContainsWord(searchString, filterString)
 //  }
-//};
+// };
 //
-//export const addFilter = ({dispatch, model, value, filterArray, filterString}) => {
+// export const addFilter = ({dispatch, model, value, filterArray, filterString}) => {
 //  /****************************************************
 //  This will add the filterString to the model. It will
 //  remove the strings in the filter Array which are not
@@ -44,14 +44,14 @@ import { get, pick, findKey } from 'lodash'
 //    newSearchString = filterString;
 //  }
 //  dispatch(storeChange(model, newSearchString))
-//};
+// };
 //
-//function stringContainsWord(fullString, word){
+// function stringContainsWord(fullString, word){
 //  return fullString && fullString.length > 0 ? fullString.match(new RegExp('(^|\\s+)'+word+'(\\s+|$)')) : false;
-//}
-//function replaceWord(fullString, word, newWord){
+// }
+// function replaceWord(fullString, word, newWord){
 //  return fullString && fullString.length > 0 ? fullString.replace(new RegExp('(^|\\s+)'+word), newWord) : fullString;
-//}
+// }
 
 // New functions
 export const createFilterString = (filterObject = {}, filterModel) => {
@@ -62,7 +62,7 @@ export const createFilterString = (filterObject = {}, filterModel) => {
 
     // If there is no value,
     // or if is an array with no value, stop
-    if (!value || value.length === 0 || ( value && value.join && value.join().length ===0 ) ) {
+    if (!value || value.length === 0 || (value && value.join && value.join().length === 0)) {
       return
     }
 
@@ -108,7 +108,7 @@ export const parseObject = (object = {}, filterModel) => {
     if (cases[type]) {
       cases[type]()
     } else {
-      console.info('Valid filter model not found for:', key, type);
+      console.info('Valid filter model not found for:', key, type)
     }
   })
   return newObject
@@ -144,7 +144,7 @@ export const parseFilterStringWithPositions = (filterString, filterModel) => {
   const allItemsWithPosition = allItems.reduce((accum, item, idx) => {
     // We get idx where the last item ended. We add 1 to account for the space
     const prevTo = get(accum, [idx - 1, 'to', 'ch'], -1) + 1
-    const [ key, value ] = item.split(':')
+    const [key, value] = item.split(':')
     accum.push({
       key,
       value,
@@ -156,7 +156,7 @@ export const parseFilterStringWithPositions = (filterString, filterModel) => {
       to: {
         line: 0,
         ch: prevTo + (item.length === 0 ? 1 : item.length),
-      }
+      },
     })
     return accum
   }, [])
@@ -167,10 +167,9 @@ export const parseFilterStringWithPositions = (filterString, filterModel) => {
     if (validationFn) {
       // If we find a validation function on the filterModel, use it
       return validationFn(item.value)
-    } else {
-      // Othwerwise, this is an invalid item
-      return false
-    }
+    } 
+    // Othwerwise, this is an invalid item
+    return false
   })
 
   // Transform the value
@@ -178,7 +177,7 @@ export const parseFilterStringWithPositions = (filterString, filterModel) => {
     const transformFn = get(filterModel, [item.key, 'transform'])
     return {
       ...item,
-      transformedValue: transformFn ? transformFn(item.value) : item.value
+      transformedValue: transformFn ? transformFn(item.value) : item.value,
     }
   })
 

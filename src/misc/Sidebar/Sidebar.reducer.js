@@ -7,12 +7,12 @@ const initialState = {
 const mainReducer = (state, action) => {
   switch (action.type) {
     case 'SIDEBAR/TOGGLE_SIDEBAR':
-      return {...state,
-        show: action.payload || !state.show
+      return { ...state,
+        show: action.payload || !state.show,
       }
     case 'SIDEBAR/TOGGLE_MENUBAR_SIDEBAR':
-      return {...state,
-        showMenubar: action.payload || !state.showMenubar
+      return { ...state,
+        showMenubar: action.payload || !state.showMenubar,
       }
     default:
       return state

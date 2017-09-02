@@ -5,16 +5,16 @@ import webGerber from './viewer/webGerber.js'
 export const activeInstances = []
 
 export const register = () => {
-  var id = getUuid()
-  var instance = webGerber()
+  const id = getUuid()
+  const instance = webGerber()
   instance.id = id
   activeInstances.push(instance)
   return instance
 }
 
 export const deregister = (instance) => {
-  if(instance){
-    instance.destroy();
-    activeInstances.splice(findIndex(activeInstances, 'id', instance.id),1);
+  if (instance) {
+    instance.destroy()
+    activeInstances.splice(findIndex(activeInstances, 'id', instance.id), 1)
   }
 }

@@ -1,30 +1,30 @@
 // Component Core
-import React from 'react';
+import React from 'react'
 
 // Styles
-import classNames from 'classnames';
+import classNames from 'classnames'
 import classes from '../Login/Login.css'
 
 // Sub Components
-import { Link } from 'react-router';
-import Button from 'stemn-shared/misc/Buttons/Button/Button.jsx';
-import Input from 'stemn-shared/misc/Input/Input/Input';
-import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import { Link } from 'react-router'
+import Button from 'stemn-shared/misc/Buttons/Button/Button.jsx'
+import Input from 'stemn-shared/misc/Input/Input/Input'
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
-///////////////////////////////// COMPONENT /////////////////////////////////
+// /////////////////////////////// COMPONENT /////////////////////////////////
 
 export default React.createClass({
   submit(event) {
-    event.preventDefault();
+    event.preventDefault()
     this.props.register({
       email: this.props.auth.login.email,
       password: this.props.auth.login.password,
       firstname: this.props.auth.login.firstname,
-      lastname: this.props.auth.login.lastname
+      lastname: this.props.auth.login.lastname,
     })
   },
   render() {
-    const { authenticate, auth } = this.props;
+    const { authenticate, auth } = this.props
     
     return (
       <div className="flex rel-box">
@@ -36,16 +36,16 @@ export default React.createClass({
               <div className="layout-row">
                 <Input
                   model="auth.login.firstname"
-                  value={auth.login.firstname}
+                  value={ auth.login.firstname }
                   className="dr-input"
-                  style={{marginRight: '5px'}}
+                  style={ { marginRight: '5px' } }
                   type="text" placeholder="First name"
                 />
                 <Input
                   model="auth.login.lastname"
-                  value={auth.login.lastname}
+                  value={ auth.login.lastname }
                   className="dr-input"
-                  style={{marginLeft: '5px'}}
+                  style={ { marginLeft: '5px' } }
                   type="text" placeholder="Last Name"
                 />
               </div>
@@ -68,25 +68,28 @@ export default React.createClass({
                   <Button
                     style={ { marginLeft: '5px' } }
                     className="primary flex"
-                    type="submit">
+                    type="submit"
+                  >
                     Register
                   </Button>
-                  </div>
-               </div>
-              <div className={classes.textDivider}><div>OR</div></div>
-              <div className='layout-row'>
+                </div>
+              </div>
+              <div className={ classes.textDivider }><div>OR</div></div>
+              <div className="layout-row">
                 <Button
-                  onClick={() => authenticate('linkedin')}
+                  onClick={ () => authenticate('linkedin') }
                   style={ { marginRight: '5px' } }
-                  className='flex linkedin'
-                  type='button'>
+                  className="flex linkedin"
+                  type="button"
+                >
                   Linkedin
                 </Button>
                 <Button
-                  onClick={() => authenticate('facebook')}
+                  onClick={ () => authenticate('facebook') }
                   style={ { marginLeft: '5px' } }
-                  className='flex facebook'
-                  type='button'>
+                  className="flex facebook"
+                  type="button"
+                >
                   Facebook
                 </Button>
               </div>
@@ -99,6 +102,6 @@ export default React.createClass({
         </div>
       </div>
     )
-  }
-});
+  },
+})
 

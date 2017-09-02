@@ -4,9 +4,9 @@ export const show = ({ type, title, body }) => ({
     functionAlias: 'NotificationsUtils.show',
     functionInputs: {
       title,
-      body
-    }
-  }
+      body,
+    },
+  },
 })
 
 export const getNotifications = () => (dispatch, getState) => {
@@ -16,20 +16,20 @@ export const getNotifications = () => (dispatch, getState) => {
       http: true,
       payload: {
         url: '/api/v1/notifications',
-        method: 'GET'
-      }
+        method: 'GET',
+      },
     })
   }
 }
 
-export const markAsRead = (notificationId) => ({
+export const markAsRead = notificationId => ({
   type: 'NOTIFICATIONS/MARK_AS_READ',
   http: true,
   payload: {
     url: `/api/v1/notifications/${notificationId}`,
-    method: 'PUT'
+    method: 'PUT',
   },
   meta: {
-    notificationId
-  }
+    notificationId,
+  },
 })

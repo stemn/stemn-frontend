@@ -7,9 +7,9 @@ export default (number, thing, noNumber) => {
   // Special Cases
   if (thing === 'People') {
     if (number === 1) {
-      end = `Person`
+      end = 'Person'
     } else {
-      end = `People`
+      end = 'People'
     }
     return noNumber ? end : `${number} ${end}`
   }
@@ -17,12 +17,10 @@ export default (number, thing, noNumber) => {
   const lastLetter = thing[thing.length]
   if (number === 1) {
     end = thing
+  } else if (lastLetter === 'y') {
+    end = `${thing.substring(0, thing.length - 1)}ies`
   } else {
-    if (lastLetter === 'y') {
-      end = `${thing.substring(0, thing.length - 1)}ies`
-    } else {
-      end = `${thing}s`
-    }
+    end = `${thing}s`
   }
   return noNumber ? end : `${number} ${end}`
 }

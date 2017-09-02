@@ -2,14 +2,12 @@ import { oauthCreds } from '../Auth.config.js'
 import querystring from 'querystring'
 import sendAuthToken from './sendAuthToken'
 
-const getPosition = (w, h) => {
-  return {
-    left: (screen.width / 2) - (w / 2),
-    top: (screen.height / 2) - (h / 2)
-  }
-}
+const getPosition = (w, h) => ({
+  left: (screen.width / 2) - (w / 2),
+  top: (screen.height / 2) - (h / 2),
+})
 
-const popOauth = (url) => new Promise((resolve, reject) => {
+const popOauth = url => new Promise((resolve, reject) => {
   const interval = 500
   const width = 780
   const height = 410
@@ -39,19 +37,17 @@ const popOauth = (url) => new Promise((resolve, reject) => {
   signinWin.focus()
 })
 
-export default (provider) => (dispatch) => {
+export default provider => (dispatch) => {
   if (oauthCreds[provider]) {
     const url = `${oauthCreds[provider].url}?${querystring.stringify(oauthCreds[provider].params)}`
 
     return dispatch({
       type: 'AUTH/AUTHENTICATE',
-      payload: popOauth(url)
+      payload: popOauth(url),
     })
-    .then(({ value: { code } }) => {
-      return dispatch(sendAuthToken({
+      .then(({ value: { code } }) => dispatch(sendAuthToken({
         provider,
-        code
-      }))
-    })
+        code,
+      })))
   }
 }

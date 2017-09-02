@@ -1,15 +1,15 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from 'react'
+import { connect } from 'react-redux'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
-import { omit } from 'lodash';
+import { omit } from 'lodash'
 
 export const Component = React.createClass({
-  getInitialState () {
+  getInitialState() {
     return {
       value: this.props.value,
     }
   },
-  onChange(event){
+  onChange(event) {
     const { model, dispatch, type, changeAction } = this.props
     const prevValue = this.state.value
     let newValue = event.target.value
@@ -23,38 +23,38 @@ export const Component = React.createClass({
 
     // Toggle if checkbox
     // Value can be: true || false || 'other' || undefined
-    if(type == 'checkbox'){
-      const isFalse = prevValue === 'false' || prevValue === false || prevValue === undefined;
-      newValue = isFalse ? true : false; // toggle
+    if (type == 'checkbox') {
+      const isFalse = prevValue === 'false' || prevValue === false || prevValue === undefined
+      newValue = !!isFalse // toggle
     }
 
     if (model) {
       // If model exists, we dispatch an update
-      this.props.dispatch(storeChange(model, newValue));
+      this.props.dispatch(storeChange(model, newValue))
     }
     if (changeAction) {
       // If a changeActions exists, we run it
-      changeAction({value: newValue, model})
+      changeAction({ value: newValue, model })
     }
     // We update our internal state
-    this.setState({value: newValue});
+    this.setState({ value: newValue })
   },
   componentWillReceiveProps(nextProps) {
     // Update the internal state if it differs from the redux state
-    if(nextProps.value != this.state.value){
+    if (nextProps.value != this.state.value) {
       this.setState({ value: nextProps.value })
     }
   },
-  componentDidMount(){
-    if(this.props.autoFocus){
-      setTimeout(() => this.refs.input.focus(), 1);
+  componentDidMount() {
+    if (this.props.autoFocus) {
+      setTimeout(() => this.refs.input.focus(), 1)
     }
   },
   render() {
-    const otherProps = omit(this.props, ['dispatch', 'model', 'value', 'changeAction']);
-    const { value } = this.state;
-    return <input ref="input" {...otherProps} onChange={this.onChange} value={value}/>
-  }
-});
+    const otherProps = omit(this.props, ['dispatch', 'model', 'value', 'changeAction'])
+    const { value } = this.state
+    return <input ref="input" { ...otherProps } onChange={ this.onChange } value={ value } />
+  },
+})
 
-export default connect()(Component);
+export default connect()(Component)

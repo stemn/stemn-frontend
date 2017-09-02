@@ -1,7 +1,7 @@
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-import { getBoards } from 'stemn-shared/misc/Threads/Threads.actions.js';
+import { getBoards } from 'stemn-shared/misc/Threads/Threads.actions.js'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import { setFilter } from 'stemn-shared/misc/StringFilter/StringFilter.actions'
 
@@ -29,8 +29,8 @@ const filterModel = {
 }
 
 function mapStateToProps({ auth, threads, mentions, stringFilter }, { projectId, cacheKey }) {
-  const projectBoards = threads.projects && threads.projects[projectId] ? threads.projects[projectId].boards : null;
-  const board = projectBoards ? threads.boards[projectBoards[0]] : {};
+  const projectBoards = threads.projects && threads.projects[projectId] ? threads.projects[projectId].boards : null
+  const board = projectBoards ? threads.boards[projectBoards[0]] : {}
 
   const filterCacheKey = `threads-${projectId}`
   const filter = get(stringFilter, filterCacheKey, {})
@@ -41,11 +41,11 @@ function mapStateToProps({ auth, threads, mentions, stringFilter }, { projectId,
     filterModel,
     filterCacheKey,
     threads: threads.data,
-    board: board,
+    board,
     boardModel: board && board.data && board.data._id ? `threads.boards.${board.data._id}` : '',
     mentions: get(mentions, cacheKey, {}),
     mentionsModel: `mentions.${cacheKey}`,
-  };
+  }
 }
 
 const mapDispatchToProps = {

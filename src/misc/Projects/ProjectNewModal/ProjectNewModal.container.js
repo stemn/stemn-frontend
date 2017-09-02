@@ -5,15 +5,13 @@ import { createProject, linkRemote } from 'stemn-shared/misc/Projects/Projects.a
 import { push } from 'react-router-redux'
 
 import ProjectNewModal from './ProjectNewModal'
-import { projectSettingsRoute } from 'route-actions';
+import { projectSettingsRoute } from 'route-actions'
 
-const mapStateToProps = ({ auth, projects }) => {
-  return {
-    auth,
-    newProject: projects.newProject,
-    entityModel: 'projects.newProject',
-  }
-}
+const mapStateToProps = ({ auth, projects }) => ({
+  auth,
+  newProject: projects.newProject,
+  entityModel: 'projects.newProject',
+})
 
 const mapDispatchToProps = {
   goToProjectSettings: ({ projectId }) => push(projectSettingsRoute({ projectId })),

@@ -3,8 +3,8 @@ export function enable() {
     type: 'SHELL_CONTEXT/ENABLE',
     aliased: true,
     payload: {
-      functionAlias : 'ShellContextUtils.enable',
-    }
+      functionAlias: 'ShellContextUtils.enable',
+    },
   }
 }
 export function disable() {
@@ -12,8 +12,8 @@ export function disable() {
     type: 'SHELL_CONTEXT/DISABLE',
     aliased: true,
     payload: {
-      functionAlias : 'ShellContextUtils.disable',
-    }
+      functionAlias: 'ShellContextUtils.disable',
+    },
   }
 }
 export function isEnabled() {
@@ -21,8 +21,8 @@ export function isEnabled() {
     type: 'SHELL_CONTEXT/IS_ENABLED',
     aliased: true,
     payload: {
-      functionAlias : 'ShellContextUtils.isEnabled',
-    }
+      functionAlias: 'ShellContextUtils.isEnabled',
+    },
   }
 }
 export function updateConfig(config) {
@@ -30,8 +30,8 @@ export function updateConfig(config) {
     type: 'SHELL_CONTEXT/UPDATE_CONFIG',
     aliased: true,
     payload: {
-      functionAlias  : 'ShellContextUtils.updateConfig',
-      functionInputs : config
-    }
+      functionAlias: 'ShellContextUtils.updateConfig',
+      functionInputs: config,
+    },
   }
 }

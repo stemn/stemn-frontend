@@ -1,4 +1,4 @@
-/***************************************************************************************************
+/** *************************************************************************************************
 
 This middleware is used to confirm a user is authed
 
@@ -9,13 +9,13 @@ action = ({
 
 When auth, true is found - the action will only run if it the user is authed
 
-***************************************************************************************************/
+************************************************************************************************** */
 
 import { get } from 'lodash'
 import i from 'icepick'
 import { push } from 'react-router-redux'
 
-export default store => next => action => {
+export default store => next => (action) => {
   if (get(action, ['auth'])) {
     const isAuthed = store.getState().auth.user._id && store.getState().auth.authToken
     if (isAuthed) {

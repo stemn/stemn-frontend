@@ -5,13 +5,13 @@ import classNames from 'classnames'
 
 export default class PricingTable extends Component {
   render() {
-    const { important, data } = this.props;
+    const { important, data } = this.props
     return (
       <div className={ classNames('flex', 'flex-sm-50 layout-column', classes.table, { [classes.important]: important }) }>
         <div className={ classes.price }>
           { typeof data.price === 'number'
-          ? `$${data.price}`
-          : data.price }
+            ? `$${data.price}`
+            : data.price }
         </div>
         <div className={ classes.period }>
           { data.period }

@@ -12,5 +12,5 @@ export const getRelatedFields = ({ page = 1, size = 10, fieldId }) => ({
   },
   meta: {
     fieldId,
-  }
+  },
 })

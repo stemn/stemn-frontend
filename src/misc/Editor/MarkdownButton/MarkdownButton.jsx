@@ -1,8 +1,8 @@
 
-import React from 'react';
-import classNames from 'classnames';
-import classes from './MarkdownButton.css';
-import Markdown from 'stemn-shared/assets/icons/editor/markdown.js';
+import React from 'react'
+import classNames from 'classnames'
+import classes from './MarkdownButton.css'
+import Markdown from 'stemn-shared/assets/icons/editor/markdown.js'
 
 export default React.createClass({
   render() {
@@ -16,9 +16,9 @@ export default React.createClass({
       >
         <Markdown size="25" />
         { children
-        ? <span style={ { paddingLeft: '5px' } }>{ children }</span>
-        : null }
+          ? <span style={ { paddingLeft: '5px' } }>{ children }</span>
+          : null }
       </a>
-    );
-  }
-});
+    )
+  },
+})

@@ -1,8 +1,8 @@
-import i from 'icepick';
+import i from 'icepick'
 
 const initialState = {
   data: {
-    /*******************************
+    /** *****************************
     [commentId] : {
       loading,
       editActive,
@@ -11,9 +11,9 @@ const initialState = {
       data: main comment data,
       form,
     }
-    *******************************/
+    ****************************** */
   },
-  threads: {}
+  threads: {},
 }
 
 const mainReducer = (state, action) => {
@@ -25,7 +25,7 @@ const mainReducer = (state, action) => {
     case 'COMMENTS/GET_COMMENT_FULFILLED':
       return i.assocIn(state, ['data', action.meta.commentId], {
         loading: false,
-        data: action.payload.data
+        data: action.payload.data,
       })
 
 
@@ -43,7 +43,7 @@ const mainReducer = (state, action) => {
       return i.chain(state)
         .assocIn(['threads', action.meta.threadId, 'newComment'], {}) // Reset the newComment objected
         .assocIn(['data', action.payload.data._id, 'data'], action.payload.data) // Put the comment in the store
-        .value();
+        .value()
 
     case 'COMMENTS/DELETE_PENDING':
       return i.assocIn(state, ['data', action.meta.commentId, 'deletePending'], true)
@@ -59,22 +59,20 @@ const mainReducer = (state, action) => {
     case 'COMMENTS/UPDATE_FULFILLED':
       return i.assocIn(state, ['data', action.meta.commentId], {
         data: action.payload.data,
-        savePending: false
+        savePending: false,
       })
 
     case 'COMMENTS/NEW_REACTION_FULFILLED':
       return i.updateIn(state, ['data', action.meta.commentId, 'data', 'reactions'], reactions => i.push(reactions, action.payload.data))
     case 'COMMENTS/DELETE_REACTION_FULFILLED':
-      return i.updateIn(state, ['data', action.meta.commentId, 'data', 'reactions'], reactions => {
-        const index = reactions.findIndex(reaction => reaction.type == action.meta.reactionType && reaction.owner._id == action.meta.userId);
-        return index == -1 ? reactions : i.splice(reactions, index, 1);
+      return i.updateIn(state, ['data', action.meta.commentId, 'data', 'reactions'], (reactions) => {
+        const index = reactions.findIndex(reaction => reaction.type == action.meta.reactionType && reaction.owner._id == action.meta.userId)
+        return index == -1 ? reactions : i.splice(reactions, index, 1)
       })
 
 
-
-
     default:
-      return state;
+      return state
   }
 }
 

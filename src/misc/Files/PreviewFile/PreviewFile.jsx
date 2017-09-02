@@ -17,21 +17,21 @@ import { isAssembly } from './PreviewCad/PreviewCad.utils.js'
 import DownloadFile from '../DownloadFile/DownloadFile.jsx'
 import ErrorMessages from './Messages/Messages.jsx'
 
-///////////////////////////////// COMPONENT /////////////////////////////////
+// /////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
   render() {
-    const { file, fileData, fileRender, filesActions, header, event } = this.props;
-    const previewId = `${file.project._id}-${file.fileId}-${file.revisionId}`;
+    const { file, fileData, fileRender, filesActions, header, event } = this.props
+    const previewId = `${file.project._id}-${file.fileId}-${file.revisionId}`
 
     const renderFn = () => {
       filesActions.renderFile({
-        projectId  : file.project._id,
-        fileId     : file.fileId,
-        revisionId : file.revisionId,
-        provider   : file.provider,
-        timestamp  : event && isAssembly(file.extension) ? event.timestamp : ''
-      });
+        projectId: file.project._id,
+        fileId: file.fileId,
+        revisionId: file.revisionId,
+        provider: file.provider,
+        timestamp: event && isAssembly(file.extension) ? event.timestamp : '',
+      })
     }
 
     const getPreview = () => {
@@ -103,32 +103,31 @@ export const Component = React.createClass({
             downloadFn={ filesActions.getFile }
           />
         )
-      } else {
-        return (
-          <div className="layout-column layout-align-center-center flex">
-            <img src={laptopSpanner} style={{width: '100px'}}/>
-            <div className="text-title-5 text-center" style={{marginTop: '10px'}}>Cannot preview this file type.</div>
-          </div>
-        )
-      }
+      } 
+      return (
+        <div className="layout-column layout-align-center-center flex">
+          <img src={ laptopSpanner } style={ { width: '100px' } } />
+          <div className="text-title-5 text-center" style={ { marginTop: '10px' } }>Cannot preview this file type.</div>
+        </div>
+      )
     }
     return (
       <div className="layout-column flex rel-box">
         { header
-        ? <div className={classes.header + ' layout-row layout-align-start-center rel-box'}>
+          ? <div className={ `${classes.header} layout-row layout-align-start-center rel-box` }>
             <div>Version: {file.revisionNumber}</div>
-            <div className="flex"></div>
-            <DownloadFile file={file} title={`Download Version ${file.revisionNumber} of this file.`}>Download</DownloadFile>
+            <div className="flex" />
+            <DownloadFile file={ file } title={ `Download Version ${file.revisionNumber} of this file.` }>Download</DownloadFile>
           </div>
-        : null }
+          : null }
         { getPreview() }
       </div>
-    );
-  }
-});
+    )
+  },
+})
 
 
-///////////////////////////////// CONTAINER /////////////////////////////////
+// /////////////////////////////// CONTAINER /////////////////////////////////
 
 function mapStateToProps({ files }, { project, file, event }) {
   // If the file has sub-parts, it is a gerber assembly - we need to fetch multiple files
@@ -137,16 +136,15 @@ function mapStateToProps({ files }, { project, file, event }) {
     return {
       fileData,
     }
-  } else {
-    const cacheKey = event && event.timestamp && isAssembly(file.extension)
-       ? `${file.fileId}-${file.revisionId}-${event.timestamp}`
-       : `${file.fileId}-${file.revisionId}`;
+  } 
+  const cacheKey = event && event.timestamp && isAssembly(file.extension)
+    ? `${file.fileId}-${file.revisionId}-${event.timestamp}`
+    : `${file.fileId}-${file.revisionId}`
 
-    const fileData = files.fileData[cacheKey]
-    return {
-      fileData,
-      fileRender: files.fileRenders[cacheKey],
-    };
+  const fileData = files.fileData[cacheKey]
+  return {
+    fileData,
+    fileRender: files.fileRenders[cacheKey],
   }
 }
 
@@ -156,4 +154,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps, mapDispatchToProps)(Component)

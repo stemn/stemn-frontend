@@ -4,14 +4,14 @@ import classNames from 'classnames'
 
 import moment from 'moment'
 
-import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx';
+import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import MdDone from 'react-icons/md/done'
 import Link from 'stemn-shared/misc/Router/Link'
 import { getNotificationText } from 'stemn-shared/misc/Notifications/Notifications.utils'
 import NotificationLink from 'stemn-shared/misc/Notifications/NotificationLink'
 
 export default class NotificationItem extends Component {
-  render () {
+  render() {
     const { notification, markAsRead } = this.props
 
     const markRead = () => markAsRead(notification._id)
@@ -35,15 +35,14 @@ export default class NotificationItem extends Component {
               if (item === '') {
                 // We iterate the entity number whenever we find an empty item
                 // in our split template array
-                entityNumber = entityNumber + 1
+                entityNumber += 1
                 return (
                   <NotificationLink key={ idx } entity={ notification.entities[entityNumber] }>
                     { notification.entities[entityNumber].display || 'untitled' }
                   </NotificationLink>
                 )
-              } else {
-                return <span key={ idx }>{ item }</span>
-              }
+              } 
+              return <span key={ idx }>{ item }</span>
             }) }
             .
           </div>
@@ -52,7 +51,7 @@ export default class NotificationItem extends Component {
           </div>
         </div>
         { notification.picture2
-        ? <NotificationLink entity={ notification.entities[1] }>
+          ? <NotificationLink entity={ notification.entities[1] }>
             <UserAvatar
               className={ classes.avatar2 }
               picture={ notification.picture2 }
@@ -60,8 +59,8 @@ export default class NotificationItem extends Component {
               shape="square"
             />
           </NotificationLink>
-        : null }
-        <a className={ classNames(classes.mark, {[classes.markRead] : notification.read}) } onClick={ markRead }>
+          : null }
+        <a className={ classNames(classes.mark, { [classes.markRead]: notification.read }) } onClick={ markRead }>
           <MdDone size={ 24 } />
         </a>
 

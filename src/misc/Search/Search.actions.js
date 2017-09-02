@@ -4,12 +4,12 @@ export const search = ({ entityType, value, size, page, parentType, parentId, cr
   type: 'SEARCH/SEARCH',
   http: true,
   payload: {
-    url: `/api/v1/search`,
+    url: '/api/v1/search',
     method: 'GET',
     params: {
       type: entityType,
       key: 'name',
-      value: value,
+      value,
       size,
       page,
       parentType,
@@ -25,16 +25,16 @@ export const search = ({ entityType, value, size, page, parentType, parentId, cr
   },
   throttle: {
     time: 500,
-    endpoint: `SEARCH/${entityType}`
+    endpoint: `SEARCH/${entityType}`,
   },
 })
 
 export const setQuery = ({ value }) => (dispatch, getState) => {
   dispatch({
     type: 'SEARCH/SET_QUERY',
-    payload: value
+    payload: value,
   })
-  const currentLocation = getState().routing.locationBeforeTransitions;
+  const currentLocation = getState().routing.locationBeforeTransitions
   if (currentLocation.pathname === '/search') {
     dispatch(replace({
       pathname: '/search',
@@ -42,7 +42,7 @@ export const setQuery = ({ value }) => (dispatch, getState) => {
         q: value,
         type: currentLocation.query.type,
         page: 1,
-      }
+      },
     }))
   }
 }

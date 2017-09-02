@@ -1,8 +1,8 @@
-import iterator from './iterator';
-import json from './json';
-import jsonAggregator from './jsonAggregator';
-import status from './status';
-import text from './text';
+import iterator from './iterator'
+import json from './json'
+import jsonAggregator from './jsonAggregator'
+import status from './status'
+import text from './text'
 
 export {
   iterator,
@@ -10,4 +10,4 @@ export {
   jsonAggregator,
   status,
   text,
-};
+}

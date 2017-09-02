@@ -7,10 +7,10 @@ import { showModal } from 'stemn-shared/misc/Modal/Modal.actions'
 const stateToProps = () => ({})
 
 const dispatchToProps = {
-  showNewFieldModal: (modalProps) => showModal({
+  showNewFieldModal: modalProps => showModal({
     modalType: newFieldModalName,
     modalProps,
-  })
+  }),
 }
 
 export default connect(stateToProps, dispatchToProps)(FieldSearch)

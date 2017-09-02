@@ -1,36 +1,36 @@
 // Container Core
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
 // Container Actions
-import * as AuthActions from 'stemn-shared/misc/Auth/Auth.actions.js';
+import * as AuthActions from 'stemn-shared/misc/Auth/Auth.actions.js'
 
 // Component Core
-import React from 'react';
-import Button from 'stemn-shared/misc/Buttons/Button/Button';
-import { Link } from 'react-router';
+import React from 'react'
+import Button from 'stemn-shared/misc/Buttons/Button/Button'
+import { Link } from 'react-router'
 
 // Styles
-import classNames from 'classnames';
+import classNames from 'classnames'
 
 const Component = React.createClass({
-  render: function() {
+  render() {
     const {
       owner, auth, authActions,
-      modalCancel, modalConfirm
-    } = this.props;
+      modalCancel, modalConfirm,
+    } = this.props
 
-    const isCurrentUser = owner._id == auth.user._id;
+    const isCurrentUser = owner._id == auth.user._id
 
     return (
-      <div style={{width: '500px'}}>
+      <div style={ { width: '500px' } }>
         <div className="modal-title">Access to Google Drive has been revoked</div>
-        <div className="modal-body" style={{lineHeight: '1.4em'}}>
+        <div className="modal-body" style={ { lineHeight: '1.4em' } }>
           { isCurrentUser
-          ? <div>
+            ? <div>
               <p>Stemn's access to your Google Drive has been revoked. To fix this, please re-authenticate with Google.</p>
             </div>
-          : <div>
+            : <div>
               <p>This project is connected to <b>{owner.name}'s</b> Google Drive.</p>
               <p>Access to this drive has been revoked. {owner.name.split(' ')[0]} must re-authenticate with Drive for Stemn to work properly. Please contact them and instruct them to re-connect their Stemn account to Google.</p>
             </div>
@@ -39,26 +39,26 @@ const Component = React.createClass({
         <div className="modal-footer-no-line layout-row layout-align-end">
           <Button onClick={ modalCancel }>Cancel</Button>
           { isCurrentUser
-          ? <Button
-              style={{marginLeft: '10px'}}
+            ? <Button
+              style={ { marginLeft: '10px' } }
               className="primary"
-              onClick={() => {authActions.authenticate('google'); modalConfirm()}}
+              onClick={ () => { authActions.authenticate('google'); modalConfirm() } }
             >
               Authenticate
             </Button>
-          : null }
+            : null }
         </div>
       </div>
     )
-  }
-});
+  },
+})
 
-////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////
 
 function mapStateToProps({ auth }) {
   return {
-    auth
-  };
+    auth,
+  }
 }
 
 function mapDispatchToProps(dispatch) {
@@ -68,4 +68,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps, mapDispatchToProps)(Component)

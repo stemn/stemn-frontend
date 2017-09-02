@@ -1,66 +1,64 @@
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import * as FilesActions from '../Files.actions.js';
-import React, { PropTypes } from 'react';
-import { omit } from 'lodash';
-import classNames from 'classnames';
-import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as FilesActions from '../Files.actions.js'
+import React, { PropTypes } from 'react'
+import { omit } from 'lodash'
+import classNames from 'classnames'
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
+import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'
 
-///////////////////////////////// COMPONENT /////////////////////////////////
+// /////////////////////////////// COMPONENT /////////////////////////////////
 
 const propTypesObject = {
-  file         : PropTypes.object,
-  fileData     : PropTypes.object,
-  cacheKey     : PropTypes.string,
-  filesActions : PropTypes.object,
-};
+  file: PropTypes.object,
+  fileData: PropTypes.object,
+  cacheKey: PropTypes.string,
+  filesActions: PropTypes.object,
+}
 
 export const DisplayReadme = React.createClass({
   propTypes: propTypesObject,
   componentWillMount() { this.onMount(this.props) },
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) },
   onMount(nextProps, prevProps) {
     // If the previewId changes, download a new file
-    if(!prevProps || nextProps.cacheKey !== prevProps.cacheKey){
+    if (!prevProps || nextProps.cacheKey !== prevProps.cacheKey) {
       // If we don't already have the file, get it
-      if(!nextProps.fileData){
+      if (!nextProps.fileData) {
         nextProps.filesActions.getFile({
-          projectId  : nextProps.file.project._id,
-          fileId     : nextProps.file.fileId,
-          revisionId : nextProps.file.revisionId,
-          provider   : nextProps.file.provider
+          projectId: nextProps.file.project._id,
+          fileId: nextProps.file.fileId,
+          revisionId: nextProps.file.revisionId,
+          provider: nextProps.file.provider,
         })
       }
     }
   },
   render() {
-    const { file, fileData } = this.props;
-    if(fileData && fileData.loading || fileData && fileData.data){
+    const { file, fileData } = this.props
+    if (fileData && fileData.loading || fileData && fileData.data) {
       return (
         <div { ...omit(this.props, Object.keys(propTypesObject)) }>
           { fileData && fileData.data
-          ? <EditorDisplay value={fileData.data} />
-          : null }
+            ? <EditorDisplay value={ fileData.data } />
+            : null }
           <LoadingOverlay show={ fileData && fileData.loading } size="sm" />
         </div>
       )
     }
-    else{
-      return <div>This file is empty.</div>
-    }
+    
+    return <div>This file is empty.</div>
+  },
+})
 
-  }
-});
+// /////////////////////////////// CONTAINER /////////////////////////////////
 
-///////////////////////////////// CONTAINER /////////////////////////////////
-
-function mapStateToProps({files}, {project, file}) {
-  const cacheKey = `${file.fileId}-${file.revisionId}`;
+function mapStateToProps({ files }, { project, file }) {
+  const cacheKey = `${file.fileId}-${file.revisionId}`
   return {
-    cacheKey  : cacheKey,
-    fileData  : files.fileData[cacheKey],
-  };
+    cacheKey,
+    fileData: files.fileData[cacheKey],
+  }
 }
 
 function mapDispatchToProps(dispatch) {
@@ -69,4 +67,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DisplayReadme);
+export default connect(mapStateToProps, mapDispatchToProps)(DisplayReadme)

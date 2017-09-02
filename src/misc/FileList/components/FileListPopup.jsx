@@ -1,79 +1,79 @@
 // Container Core
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
 // Container Actions
-import * as FileListActions from '../FileList.actions.js';
+import * as FileListActions from '../FileList.actions.js'
 
 // Component Core
-import React, { PropTypes } from 'react';
-import { orderBy, omit } from 'lodash';
+import React, { PropTypes } from 'react'
+import { orderBy, omit } from 'lodash'
 
 // Styles
-import classNames from 'classnames';
+import classNames from 'classnames'
 import classes from './FileListPopup.css'
 
 // Sub Components
-import LoadingOverlay   from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import MdRefresh        from 'react-icons/md/refresh';
-import MdHome           from 'react-icons/md/home';
+import LoadingOverlay   from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
+import MdRefresh        from 'react-icons/md/refresh'
+import MdHome           from 'react-icons/md/home'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import FileIcon         from './FileIcon'
 
-///////////////////////////////// COMPONENT /////////////////////////////////
+// /////////////////////////////// COMPONENT /////////////////////////////////
 
 const propTypesObject = {
-  meta            : PropTypes.object.isRequired,
-  parentfolder    : PropTypes.object.isRequired,
-  activeFolder    : PropTypes.object.isRequired,
-  isOpen          : PropTypes.bool,  // From the popover component
-  clickFn         : PropTypes.func,
-  files           : PropTypes.object,
-  FileListActions : PropTypes.object,      // Actions
-  dispatch        : PropTypes.func,        // Actions
-};
+  meta: PropTypes.object.isRequired,
+  parentfolder: PropTypes.object.isRequired,
+  activeFolder: PropTypes.object.isRequired,
+  isOpen: PropTypes.bool,  // From the popover component
+  clickFn: PropTypes.func,
+  files: PropTypes.object,
+  FileListActions: PropTypes.object,      // Actions
+  dispatch: PropTypes.func,        // Actions
+}
 
 
 export const FileRow = React.createClass({
   render() {
-    const { file, isActive, clickFn } = this.props;
+    const { file, isActive, clickFn } = this.props
     return (
-      <div className={classNames(classes.file, {[classes.active] : isActive}, 'layout-row layout-align-start-center')} onClick={()=>clickFn({file})}>
-        <FileIcon fileType={file.extension} type={file.type} size={20}/>
+      <div className={ classNames(classes.file, { [classes.active]: isActive }, 'layout-row layout-align-start-center') } onClick={ () => clickFn({ file }) }>
+        <FileIcon fileType={ file.extension } type={ file.type } size={ 20 } />
         <div className="text-ellipsis">{file.name}</div>
       </div>
-    );
-  }
-});
+    )
+  },
+})
 
 export const FileListPopup = React.createClass({
   propTypes: propTypesObject,
-//  componentWillMount() {
-//    this.onMount(this.props)
-//  },
-//  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
-//  onMount(nextProps, prevProps) {
-//    if((!prevProps || !prevProps.isOpen) && nextProps.isOpen && (!nextProps.files || !nextProps.files.loading)){
-//      this.getFiles({
-//        path     : nextProps.parentfolder.fileId,
-//        projectId: nextProps.meta.project._id,
-//      })
-//    }
-//  },
-//  getFiles({path, provider, projectId}) {
-//    if(projectId){
-//      this.props.FileListActions.fetchFiles({
-//        projectId: projectId,
-//        path: path || '',
-//      });
-//    }
-//    else if(['dropbox', 'drive'].includes(provider)){
-//      this.props.FileListActions.exploreFolder({
-//        provider: provider,
-//        folderId: path || '',
-//      });
-//    }
-//  },
+  //  componentWillMount() {
+  //    this.onMount(this.props)
+  //  },
+  //  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
+  //  onMount(nextProps, prevProps) {
+  //    if((!prevProps || !prevProps.isOpen) && nextProps.isOpen && (!nextProps.files || !nextProps.files.loading)){
+  //      this.getFiles({
+  //        path     : nextProps.parentfolder.fileId,
+  //        projectId: nextProps.meta.project._id,
+  //      })
+  //    }
+  //  },
+  //  getFiles({path, provider, projectId}) {
+  //    if(projectId){
+  //      this.props.FileListActions.fetchFiles({
+  //        projectId: projectId,
+  //        path: path || '',
+  //      });
+  //    }
+  //    else if(['dropbox', 'drive'].includes(provider)){
+  //      this.props.FileListActions.exploreFolder({
+  //        provider: provider,
+  //        folderId: path || '',
+  //      });
+  //    }
+  //  },
 
   render() {
     const { files, parentfolder, activeFolder, dispatch, clickFn } = this.props
@@ -83,47 +83,47 @@ export const FileListPopup = React.createClass({
     const foldersOnly  = filesOrdered.filter(file => file.type == 'folder')
 
     return (
-      <div { ...omit(this.props, Object.keys(propTypesObject)) } className={classes.popup}>
-        <LoadingOverlay show={isLoading} linear={true} noOverlay />
+      <div { ...omit(this.props, Object.keys(propTypesObject)) } className={ classes.popup }>
+        <LoadingOverlay show={ isLoading } linear noOverlay />
         { foldersOnly && foldersOnly.map(file => (
-            <FileRow
-              key={file._id}
-              file={file}
-              isActive={file.fileId == activeFolder.fileId}
-              clickFn={clickFn}
-            />
-          ))
+          <FileRow
+            key={ file._id }
+            file={ file }
+            isActive={ file.fileId == activeFolder.fileId }
+            clickFn={ clickFn }
+          />
+        ))
         }
-        { foldersOnly && filesOnly && <div className={classes.divider} /> }
+        { foldersOnly && filesOnly && <div className={ classes.divider } /> }
         { filesOnly && filesOnly.map(file => (
-            <FileRow
-              key={file._id}
-              file={file}
-              isActive={file.fileId == activeFolder.fileId}
-              clickFn={clickFn}
-            />
-          ))
+          <FileRow
+            key={ file._id }
+            file={ file }
+            isActive={ file.fileId == activeFolder.fileId }
+            clickFn={ clickFn }
+          />
+        ))
         }
       </div>
-    );
-  }
-});
+    )
+  },
+})
 
 
-///////////////////////////////// CONTAINER /////////////////////////////////
+// /////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps({fileList}, {parentfolder, meta}) {
-  const cacheString = meta.project._id  ?  `${meta.project._id}-${parentfolder.fileId || ''}` : `${meta.provider}-${parentfolder.fileId || ''}`;
+function mapStateToProps({ fileList }, { parentfolder, meta }) {
+  const cacheString = meta.project._id  ?  `${meta.project._id}-${parentfolder.fileId || ''}` : `${meta.provider}-${parentfolder.fileId || ''}`
   return {
-    files: fileList[cacheString]
-  };
+    files: fileList[cacheString],
+  }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     FileListActions: bindActionCreators(FileListActions, dispatch),
-    dispatch
+    dispatch,
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FileListPopup);
+export default connect(mapStateToProps, mapDispatchToProps)(FileListPopup)

@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import comments from 'stemn-shared/assets/images/pure-vectors/comments.svg'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 
-export default class ThreadTimelineEmpty extends Component{
+export default class ThreadTimelineEmpty extends Component {
   render() {
     const { className } = this.props
     return (

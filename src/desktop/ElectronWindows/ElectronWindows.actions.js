@@ -1,11 +1,11 @@
-export function create({type, props}) {
+export function create({ type, props }) {
   return {
     type: 'ELECTRON_WINDOWS/CREATE',
     aliased: true,
     payload: {
       functionAlias: 'ElectronWindowsUtils.create',
-      functionInputs: { type, props }
-    }
+      functionInputs: { type, props },
+    },
   }
 }
 
@@ -15,8 +15,8 @@ export function show(window) {
     aliased: true,
     payload: {
       functionAlias: 'ElectronWindowsUtils.show',
-      functionInputs: { window }
-    }
+      functionInputs: { window },
+    },
   }
 }
 
@@ -26,8 +26,8 @@ export function hide(window) {
     aliased: true,
     payload: {
       functionAlias: 'ElectronWindowsUtils.hide',
-      functionInputs: { window }
-    }
+      functionInputs: { window },
+    },
   }
 }
 
@@ -37,7 +37,7 @@ export function quit() {
     aliased: true,
     payload: {
       functionAlias: 'ElectronWindowsUtils.quit',
-    }
+    },
   }
 }
 
@@ -46,7 +46,7 @@ export function relaunch() {
     type: 'ELECTRON_WINDOWS/RELAUNCH',
     aliased: true,
     payload: {
-      functionAlias: 'ElectronWindowsUtils.relaunch'
-    }
+      functionAlias: 'ElectronWindowsUtils.relaunch',
+    },
   }
 }

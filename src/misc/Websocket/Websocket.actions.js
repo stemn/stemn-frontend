@@ -13,13 +13,13 @@ export const joinRoom = ({ room, type }) => (dispatch, getState) => {
         payload: {
           room,
           type,
-        }
+        },
       },
       meta: {
         roomKey,
         room,
         type,
-      }
+      },
     })
   }
 }
@@ -37,13 +37,13 @@ export const leaveRoom = ({ room, type }) => (dispatch, getState) => {
         payload: {
           room,
           type,
-        }
+        },
       },
       meta: {
         roomKey,
         room,
         type,
-      }
+      },
     })
   }
 }

@@ -1,16 +1,16 @@
-export default ({fileId, revisionId, error}) => {
+export default ({ fileId, revisionId, error }) => {
   const cacheKey = `${fileId}-${revisionId}`
   return {
     type: 'FILES/RENDER_FILE_REJECTED',
     payload: {
       response: {
         data: {
-          error: error
-        }
-      }
+          error,
+        },
+      },
     },
     meta: {
-      cacheKey
-    }
+      cacheKey,
+    },
   }
 }

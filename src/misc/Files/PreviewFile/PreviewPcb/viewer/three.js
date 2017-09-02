@@ -1,3 +1,4 @@
+/* eslint-disable */
 /**
  * @author mrdoob / http://mrdoob.com/
  */

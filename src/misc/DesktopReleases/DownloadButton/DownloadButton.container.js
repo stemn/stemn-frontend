@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import DownloadButton from './DownloadButton'
 
 const stateToProps = ({ desktopReleases }) => ({
-  latest: desktopReleases.latest
+  latest: desktopReleases.latest,
 })
 
 const dispatchToProps = {

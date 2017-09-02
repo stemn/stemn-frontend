@@ -1,29 +1,28 @@
-import React from 'react';
+import React from 'react'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import classNames from 'classnames'
 
 // Styles
-import styles from './Toggle.css';
+import styles from './Toggle.css'
 
 export default React.createClass({
-  render(){
-    const { value, model, title, className, disabled, changeAction} = this.props;
+  render() {
+    const { value, model, title, className, disabled, changeAction } = this.props
 
     const getStatusClass = () => {
       if (value === 'semi') {
         return 'semi'
       } else if (value) {
         return 'checked'
-      } else {
-        return ''
-      }
+      } 
+      return ''
     }
 
-    const id = Math.random().toString(36).substring(7);
+    const id = Math.random().toString(36).substring(7)
     return (
       <div
         title={ title }
-        className={ classNames(className, styles.toggle, { 'disabled': disabled }) }
+        className={ classNames(className, styles.toggle, { disabled }) }
       >
         <Input
           type="checkbox"
@@ -33,8 +32,8 @@ export default React.createClass({
           className={ getStatusClass() }
           id={ id }
         />
-        <label htmlFor={id}></label>
+        <label htmlFor={ id } />
       </div>
     )
-  }
-});
+  },
+})

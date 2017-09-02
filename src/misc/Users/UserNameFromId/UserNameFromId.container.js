@@ -10,7 +10,7 @@ const stateToProps = ({ users }, { userId }) => ({
 })
 
 const dispatchToProps = {
-  getUser
+  getUser,
 }
 
 const fetchConfigs = [{
@@ -18,9 +18,9 @@ const fetchConfigs = [{
   onChange: (props) => {
     props.getUser({
       userId: props.userId,
-      size: 'sm'
+      size: 'sm',
     })
-  }
+  },
 }]
 
 const withFetchData = fetchDataHoc(fetchConfigs)(UserNameFromId)

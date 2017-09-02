@@ -1,12 +1,12 @@
-export function activate({name}) {
+export function activate({ name }) {
   return {
     type: 'WALKTHROUGH/ACTIVATE',
-    payload: {name},
+    payload: { name },
   }
 }
-export function deactivate({name}) {
+export function deactivate({ name }) {
   return {
     type: 'WALKTHROUGH/DEACTIVATE',
-    payload: {name},
+    payload: { name },
   }
 }

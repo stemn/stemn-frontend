@@ -27,17 +27,16 @@ export default class UserMinimalRow extends Component {
           { inner }
         </div>
       )
-    } else {
-      return (
-        <Link
-          key={ user._id }
-          name="userRoute"
-          params={ { userId: user._id } }
-          className={ classes.user }
-        >
-          { inner }
-        </Link>
-      )
-    }
+    } 
+    return (
+      <Link
+        key={ user._id }
+        name="userRoute"
+        params={ { userId: user._id } }
+        className={ classes.user }
+      >
+        { inner }
+      </Link>
+    )
   }
 }

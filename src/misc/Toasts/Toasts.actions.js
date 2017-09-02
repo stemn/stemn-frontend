@@ -1,6 +1,6 @@
-import getUuid from 'stemn-shared/utils/getUuid.js';
+import getUuid from 'stemn-shared/utils/getUuid.js'
 
-export function show({type, title, options, actions, confirm, reject}) {
+export function show({ type, title, options, actions, confirm, reject }) {
   return {
     type: 'TOAST/SHOW',
     payload: {
@@ -10,16 +10,16 @@ export function show({type, title, options, actions, confirm, reject}) {
       options,
       actions,
       confirm,
-      reject
-    }
-  };
+      reject,
+    },
+  }
 }
 
-export function hide({id}){
+export function hide({ id }) {
   return {
     type: 'TOAST/HIDE',
     payload: {
       id,
-    }
-  };
+    },
+  }
 }

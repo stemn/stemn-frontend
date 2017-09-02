@@ -1,6 +1,4 @@
-export default () => {
-  return {
-    type: 'AUTH/NEXT_BACKGROUND',
-    payload: {}
-  };
-}
+export default () => ({
+  type: 'AUTH/NEXT_BACKGROUND',
+  payload: {},
+})

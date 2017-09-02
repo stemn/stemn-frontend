@@ -8,18 +8,18 @@ import Input from 'stemn-shared/misc/Input/Input/Input'
 
 export default class SiteSearch extends Component {
   render() {
-    const { query, setQuery, push, className } = this.props;
+    const { query, setQuery, push, className } = this.props
     const route = {
       pathname: '/search',
       query: {
-        q: query
-      }
+        q: query,
+      },
     }
 
     const onSubmit = (event) => {
       event.preventDefault()
       if (location.pathname.includes('search')) {
-        return
+        
       } else {
         push(route)
       }
@@ -34,7 +34,7 @@ export default class SiteSearch extends Component {
           changeAction={ setQuery }
         />
         <Link to={ route }>
-          <MdSearch className={ classes.icon } size={ 20 }/>
+          <MdSearch className={ classes.icon } size={ 20 } />
         </Link>
       </form>
     )

@@ -1,4 +1,4 @@
-/***************************************************************************************************
+/** *************************************************************************************************
 
 This middleware is used to throttle actions
 
@@ -17,25 +17,24 @@ export function getThread({threadId}) {
   }
 }
 
-***************************************************************************************************/
+************************************************************************************************** */
 
-import i from 'icepick';
-const timeouts = {};
+import i from 'icepick'
+const timeouts = {}
 
-export default store => next => action => {
-  if(action && action.throttle && action.throttle.endpoint && action.throttle.time){
-    const { endpoint, time } = action.throttle;
+export default store => next => (action) => {
+  if (action && action.throttle && action.throttle.endpoint && action.throttle.time) {
+    const { endpoint, time } = action.throttle
 
-    if(timeouts[endpoint]){                                           // If the timeout exists:
+    if (timeouts[endpoint]) {                                           // If the timeout exists:
       clearTimeout(timeouts[endpoint])                                // Clear the timeout
     }
 
-    timeouts[endpoint] = setTimeout(()=>{                             // Create the timeout
-      const newAction = i.assocIn(action, ['throttle'], undefined);   // Create the new action
+    timeouts[endpoint] = setTimeout(() => {                             // Create the timeout
+      const newAction = i.assocIn(action, ['throttle'], undefined)   // Create the new action
       next(newAction)                                                 // Dispatch the action
     }, time)
+  } else {
+    return next(action)
   }
-  else{
-    return next(action);
-  }
-};
+}

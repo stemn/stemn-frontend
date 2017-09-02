@@ -19,12 +19,12 @@ export const setFilter = ({ cacheKey, location, filterString, filterModel, filte
   if (location === 'push') {
     dispatch(replace({
       pathname,
-      query: object
+      query: object,
     }))
   } else if (location === 'replace') {
     dispatch(push({
       pathname,
-      query: object
+      query: object,
     }))
   }
 }

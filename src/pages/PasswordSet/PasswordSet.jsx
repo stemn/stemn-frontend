@@ -1,10 +1,10 @@
-import React from 'react';
-import classNames from 'classnames';
+import React from 'react'
+import classNames from 'classnames'
 import classes from '../Login/Login.css'
-import { Link } from 'react-router';
-import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton';
-import Input from 'stemn-shared/misc/Input/Input/Input';
-import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import { Link } from 'react-router'
+import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
+import Input from 'stemn-shared/misc/Input/Input/Input'
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
 export default React.createClass({
   submit(event) {
@@ -18,7 +18,7 @@ export default React.createClass({
     })
   },
   render() {
-    const { auth } = this.props;
+    const { auth } = this.props
     const invalid = (auth.passwordSet.password1 != auth.passwordSet.password2) || auth.passwordSet.password1.length < 7
 
     return (
@@ -54,5 +54,5 @@ export default React.createClass({
         </div>
       </div>
     )
-  }
-});
+  },
+})

@@ -1,15 +1,15 @@
-export function toggle({value}) {
+export function toggle({ value }) {
   return {
     type: 'AUTO_LAUNCH/TOGGLE',
     payload: {},
     meta: {
-      status: value
-    }
+      status: value,
+    },
   }
 }
 export function getStatus() {
   return {
     type: 'AUTO_LAUNCH/GET_STATUS',
-    payload: {}
+    payload: {},
   }
 }

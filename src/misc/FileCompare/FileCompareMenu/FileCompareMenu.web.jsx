@@ -1,6 +1,6 @@
-/**************************************************************************
+/** ************************************************************************
 We pass in either revisions or file1 + file2.
-**************************************************************************/
+************************************************************************* */
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import React from 'react'
@@ -17,7 +17,7 @@ import downloadModalName from 'stemn-shared/misc/Files/Download/DownloadModal'
 
 export const Component = React.createClass({
   renderMenu() {
-    const { file1, revisions, dispatch } = this.props;
+    const { file1, revisions, dispatch } = this.props
     const downloadFile = {
       label: 'Download File',
       onClick: () => {
@@ -31,12 +31,12 @@ export const Component = React.createClass({
         }))
       },
     }
-    return [ downloadFile ]
+    return [downloadFile]
   },
-  render(){
-    const { enablePreview, mode, changeMode, revisions, file1, file2, dispatch } = this.props;
+  render() {
+    const { enablePreview, mode, changeMode, revisions, file1, file2, dispatch } = this.props
 
-    if (!file1){ return null }
+    if (!file1) { return null }
 
     const previewType = getViewerType(file1.name, file1.provider)
     const compareModes = getCompareModes(previewType, previewType)
@@ -51,10 +51,10 @@ export const Component = React.createClass({
               <CompareIcon size={ 20 } />
             </SimpleIconButton>
             <div className="PopoverMenu">
-              { compareModes.map(item =>(
+              { compareModes.map(item => (
                 <a
-                  key={item.value}
-                  className={ classNames({ 'active': mode === item.value }) }
+                  key={ item.value }
+                  className={ classNames({ active: mode === item.value }) }
                   onClick={ () => changeMode(item.value, revisions) }
                 >
                   Compare: { item.text }
@@ -74,15 +74,15 @@ export const Component = React.createClass({
           >
             <MdOpenInNew size={ 23 } />
           </SimpleIconButton> }
-          <Popover preferPlace="below" offset={ 9 }>
-            <SimpleIconButton title="Options">
-              <MdMoreHoriz size="20px" />
-            </SimpleIconButton>
-            <PopoverMenuList menu={ this.renderMenu() } />
-          </Popover>
+        <Popover preferPlace="below" offset={ 9 }>
+          <SimpleIconButton title="Options">
+            <MdMoreHoriz size="20px" />
+          </SimpleIconButton>
+          <PopoverMenuList menu={ this.renderMenu() } />
+        </Popover>
       </div>
     )
-  }
+  },
 })
 
 
@@ -92,9 +92,9 @@ function mapStateToProps() {
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch
+    dispatch,
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps, mapDispatchToProps)(Component)
 

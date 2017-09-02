@@ -13,7 +13,7 @@ const otherModules = [{
 }]
 const systemImport = () => System.import('../PreviewCad/PreviewCad')
 
-export default (props) => (
+export default props => (
   <LoadSplitCode
     cacheKey="PreviewCad"
     systemImport={ systemImport }

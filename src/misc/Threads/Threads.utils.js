@@ -1,10 +1,10 @@
-import i from 'icepick';
-import { every, escapeRegExp, difference } from 'lodash';
+import i from 'icepick'
+import { every, escapeRegExp, difference } from 'lodash'
 
 const isThreadPartOfFilter = (thread, filterObject) => {
   const threadData = thread && thread.data
   if (!threadData) return true // Return true if we don't have data for this task
-  /****************************************************
+  /** **************************************************
   This is the main query function. It takes in a filter object
   and will return true of the thread matches the filter object
 
@@ -15,7 +15,7 @@ const isThreadPartOfFilter = (thread, filterObject) => {
     status: 'string',
     query: 'main',
 
-  ****************************************************/
+  *************************************************** */
   const groupsValid = filterObject.groups && filterObject.groups.length > 0
     ? filterObject.groups.includes(threadData.group)
     : true
@@ -35,20 +35,16 @@ const isThreadPartOfFilter = (thread, filterObject) => {
   return groupsValid && labelsValid && userValid && statusValid && queryValid
 }
 
-export const filterBoard = (board, threads, filterObject = {}) => {
-  return i.updateIn(board, ['data', 'groups'], (groups) => {
-    // For each group...
-    return groups.map((group) => {
-      return i.updateIn(group, ['threads'], (threadIds) => {
-        // Filter the items in the group.
-        return threadIds.filter(threadId => isThreadPartOfFilter(threads[threadId], filterObject))
-      })
-    })
-  })
-}
+export const filterBoard = (board, threads, filterObject = {}) => i.updateIn(board, ['data', 'groups'], groups => 
+  // For each group...
+  groups.map(group => i.updateIn(group, ['threads'], threadIds => 
+    // Filter the items in the group.
+    threadIds.filter(threadId => isThreadPartOfFilter(threads[threadId], filterObject)),
+  )),
+)
 
-export const getAllThreads = (boardGroups) =>{
-  let threads = [];
+export const getAllThreads = (boardGroups) => {
+  let threads = []
   boardGroups.forEach(group => threads = threads.concat(group.threads))
-  return threads;
+  return threads
 }

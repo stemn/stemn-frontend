@@ -1,58 +1,61 @@
 // Component Core
-import React from 'react';
-import { connect } from 'react-redux';
+import React from 'react'
+import { connect } from 'react-redux'
 
-import { requestBetaCode, submitBetaCode } from 'stemn-shared/misc/Auth/Auth.actions.js';
+import { requestBetaCode, submitBetaCode } from 'stemn-shared/misc/Auth/Auth.actions.js'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 
 // Styles
-import classNames from 'classnames';
+import classNames from 'classnames'
 
 const Component = React.createClass({
-  getInitialState () {
+  getInitialState() {
     return { value: '' }
   },
-  onChange(event){
-    this.setState({value: event.target.value});
+  onChange(event) {
+    this.setState({ value: event.target.value })
   },
   submitCode() {
     this.props.dispatch(submitBetaCode(this.state.value)).then(() => {
-      this.props.modalConfirm();
+      this.props.modalConfirm()
     })
   },
   submitRequest() {
-    this.props.dispatch(requestBetaCode());
+    this.props.dispatch(requestBetaCode())
   },
-  render: function() {
-    const { value } = this.state;
+  render() {
+    const { value } = this.state
 
     return (
-      <div style={{width: '400px'}}>
+      <div style={ { width: '400px' } }>
         <div className="modal-title">Request Beta Access</div>
-        <div className="modal-body" style={{lineHeight: '1.4em'}}>
+        <div className="modal-body" style={ { lineHeight: '1.4em' } }>
           You have not yet been granted access to Stemn Desktop Beta. Please enter your access code or submit an access code request.
           <input
-             type="text"
-             style={{marginTop: '15px'}}
-             className="dr-input"
-             placeholder="Beta Access Code"
-             onChange={this.onChange}
-            />
+            type="text"
+            style={ { marginTop: '15px' } }
+            className="dr-input"
+            placeholder="Beta Access Code"
+            onChange={ this.onChange }
+          />
         </div>
         <div className="modal-footer-no-line layout-row layout-align-end">
-          <Button style={{marginRight: '10px'}}
-            onClick={this.submitRequest}>
+          <Button
+            style={ { marginRight: '10px' } }
+            onClick={ this.submitRequest }
+          >
             Request Code
           </Button>
           <Button
             className="primary"
-            onClick={this.submitCode}>
+            onClick={ this.submitCode }
+          >
             Submit Code
           </Button>
         </div>
       </div>
     )
-  }
-});
+  },
+})
 
 export default connect()(Component)

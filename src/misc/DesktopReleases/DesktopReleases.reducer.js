@@ -6,7 +6,7 @@ const initialState = {
     windows: {},
     linux: {},
     mac: {},
-  }
+  },
 }
 
 export default (state = initialState, action = {}) => {

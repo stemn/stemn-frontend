@@ -29,7 +29,7 @@ export const select = ({ file, mode, lastSelected, cacheKey }) => ({
   },
 })
 
-export const changeMode = ({ mode, cacheKey} ) => {
+export const changeMode = ({ mode, cacheKey }) => 
   //    let { selected1, selected2 } = this.state;
 //    // If a second file is not selected - we select one if possible
 //    if(!selected2){
@@ -38,13 +38,13 @@ export const changeMode = ({ mode, cacheKey} ) => {
 //      else if(revisions[revisionIndex + 1]){selected2 = revisions[revisionIndex + 1];}
 //    }
 //    this.setState({mode, selected2})
-  return {
+  ({
     type: 'FILE_COMPARE/CHANGE_MODE',
     payload: {
-      mode
+      mode,
     },
     meta: {
-      cacheKey
-    }
-  };
-}
+      cacheKey,
+    },
+  })
+

@@ -1,13 +1,13 @@
 import { joinRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
 
-export default ({projectId, fileId, revisionId, provider, timestamp}) => (dispatch) => {
+export default ({ projectId, fileId, revisionId, provider, timestamp }) => (dispatch) => {
   // The cache key is used as the renderId/roomId
   const cacheKey = timestamp ? `${fileId}-${revisionId}-${timestamp}` : `${fileId}-${revisionId}`
 
   // Join the websocket room
   dispatch(joinRoom({
     room: cacheKey,
-    type: 'render'
+    type: 'render',
   }))
 
   dispatch({
@@ -21,11 +21,11 @@ export default ({projectId, fileId, revisionId, provider, timestamp}) => (dispat
         timestamp,
         projectId,
         roomId: cacheKey,
-      }
+      },
     },
     meta: {
       cacheKey,
-    }
+    },
   })
 }
 

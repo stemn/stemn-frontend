@@ -4,7 +4,6 @@ const initialState = {}
 
 export default function (state = initialState, action) {
   switch (action.type) {
-
     case 'RELATED_FIELDS/GET_RELATED_FIELDS_PENDING': {
       return i.assocIn(state, [action.meta.fieldId, 'loading'], true)
     }

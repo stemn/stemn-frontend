@@ -12,7 +12,7 @@ export default (state = initialState, action) => {
       return i.assocIn(state, [action.meta.userId], {
         loading: false,
         dataSize: action.meta.size,
-        data: action.payload.data
+        data: action.payload.data,
       })
 
     case 'USERS/SAVE_USER_PENDING':

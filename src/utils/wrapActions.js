@@ -1,6 +1,6 @@
-//import _ from 'lodash';
+// import _ from 'lodash';
 //
-//export default (functions, standardInput) => {
+// export default (functions, standardInput) => {
 //  return _.map(functions, (item)=>{
 //    if(_.isFunction(item)){
 //      return (input1)=>{
@@ -9,4 +9,4 @@
 //      }
 //    }
 //  })
-//}
+// }

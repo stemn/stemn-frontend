@@ -12,7 +12,7 @@ const propTypesObject = {
   // Functions used in desktop
   closeAll: PropTypes.func,
   showWindow: PropTypes.func,
-};
+}
 
 const LinkComponent = (props) => {
   const {
@@ -50,20 +50,19 @@ const LinkComponent = (props) => {
         // inside the Router.middleware (this is only used on desktop)
         state: {
           meta: {
-            scope: [ routePath.scope ]
-          }
-        }
+            scope: [routePath.scope],
+          },
+        },
       }
     } else if (routePath) {
       return {
         pathname: routePath,
-        query: query,
+        query,
       }
-    } else {
-      return {
-        pathname: to,
-        query: query,
-      }
+    } 
+    return {
+      pathname: to,
+      query,
     }
   }
 
@@ -71,9 +70,8 @@ const LinkComponent = (props) => {
   const getHref = () => {
     if (routePath.pathname.startsWith('http')) {
       return routePath.pathname
-    } else {
-      return `${GLOBAL_ENV.WEBSITE_URL}${routePath.pathname}`
-    }
+    } 
+    return `${GLOBAL_ENV.WEBSITE_URL}${routePath.pathname}`
   }
 
   const additionalClickFunction = () => {
@@ -92,7 +90,7 @@ const LinkComponent = (props) => {
     if (onClick) onClick()
   }
 
-  const allClassNames = classNames(className, { 'active': isActive(activeIf, params) })
+  const allClassNames = classNames(className, { active: isActive(activeIf, params) })
 
   if (isExternal) {
     return (
@@ -103,29 +101,27 @@ const LinkComponent = (props) => {
         { ...otherProps }
       />
     )
-  } else {
-    const toPath = getToPath()
-    if (toPath && toPath.pathname) {
-      return (
-        <Link
-          to={ getToPath() }
-          className={ allClassNames }
-          onClick={ extendedOnClick }
-          { ...otherProps }
-        />
-      )
-    } else {
-      return (
-        <a
-          className={ allClassNames }
-          onClick={ extendedOnClick }
-          { ...otherProps }
-        />
-      )
-    }
-  }
+  } 
+  const toPath = getToPath()
+  if (toPath && toPath.pathname) {
+    return (
+      <Link
+        to={ getToPath() }
+        className={ allClassNames }
+        onClick={ extendedOnClick }
+        { ...otherProps }
+      />
+    )
+  } 
+  return (
+    <a
+      className={ allClassNames }
+      onClick={ extendedOnClick }
+      { ...otherProps }
+    />
+  )
 }
 
-LinkComponent.propTypes = propTypesObject;
+LinkComponent.propTypes = propTypesObject
 
-export default LinkComponent;
+export default LinkComponent

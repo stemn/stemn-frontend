@@ -12,73 +12,73 @@ const classes = GLOBAL_ENV.APP_TYPE === 'web'
 
 const Toast = React.createClass({
   hideTimeout: null,
-  mouseEnter(){
-    clearTimeout(this.hideTimeout);
+  mouseEnter() {
+    clearTimeout(this.hideTimeout)
   },
-  mouseLeave(){
+  mouseLeave() {
     this.startHideTimeout()
   },
-  startHideTimeout(){
+  startHideTimeout() {
     this.hideTimeout = setTimeout(this.closeToast, 5000)
   },
-  closeToast(){
-    this.props.dispatch(ToastsActions.hide({id: this.props.toast.id}))
+  closeToast() {
+    this.props.dispatch(ToastsActions.hide({ id: this.props.toast.id }))
   },
   render() {
-    const { toast, dispatch } = this.props;
-    if(!this.hideTimeout){this.startHideTimeout()}
+    const { toast, dispatch } = this.props
+    if (!this.hideTimeout) { this.startHideTimeout() }
 
     const getIcon = () => {
       if (toast.type == 'error') {
         return <MdError size={ 20 } className={ classes.icon } />
-      } else{
-        return null
-      }
+      } 
+      return null
     }
 
     const processAction = (action) => {
-      if(action){
+      if (action) {
         dispatch(action)
       }
     }
 
     const getActions = () => {
-      if(toast.actions && toast.actions.length){
+      if (toast.actions && toast.actions.length) {
         return (
           <span>
-          {toast.actions.map((action, index) =>
-            <a key={index}
-            onClick={()=>{processAction(action.action); this.closeToast()}}
-            className="link-primary">
-            &nbsp;&nbsp;{action.text}
-            </a>
-          )}
+            {toast.actions.map((action, index) =>
+              <a
+                key={ index }
+                onClick={ () => { processAction(action.action); this.closeToast() } }
+                className="link-primary"
+              >
+                {action.text}
+              </a>,
+            )}
           </span>
         )
       }
-      else{
-        return null
-      }
+      
+      return null
     }
 
     return (
-      <div className={classNames(classes.toast, 'layout-row', { [classes.error] : toast.type=='error' })} onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
-        <div className={classes.toastInner + ' flex layout-row layout-align-start-center'}>
+      <div className={ classNames(classes.toast, 'layout-row', { [classes.error]: toast.type == 'error' }) } onMouseEnter={ this.mouseEnter } onMouseLeave={ this.mouseLeave }>
+        <div className={ `${classes.toastInner} flex layout-row layout-align-start-center` }>
           {getIcon()}
           {toast.title}
           {getActions()}
-          <div className="flex"></div>
-          <a className={classes.close} onClick={this.closeToast}><MdClose size="20" /></a>
+          <div className="flex" />
+          <a className={ classes.close } onClick={ this.closeToast }><MdClose size="20" /></a>
         </div>
       </div>
     )
-  }
-});
+  },
+})
 
 
 export const Component = React.createClass({
   render() {
-    const { toasts, dispatch } = this.props;
+    const { toasts, dispatch } = this.props
 
     const transitionName = {
       enter: classes.enter,
@@ -86,36 +86,35 @@ export const Component = React.createClass({
       leave: classes.leave,
       leaveActive: classes.leaveActive,
       appear: classes.appear,
-      appearActive: classes.appearActive
+      appearActive: classes.appearActive,
     }
 
     const hasToasts = toasts && toasts.stack && toasts.stack.length > 0
 
     return (
-      <div className={classes.toastContainer}>
+      <div className={ classes.toastContainer }>
         <ReactCSSTransitionGroup
           transitionName={ transitionName }
-          transitionAppear={ true }
+          transitionAppear
           transitionAppearTimeout={ 300 }
           transitionEnterTimeout={ 300 }
           transitionLeaveTimeout={ 300 }
         >
           { hasToasts
-            ? toasts.stack.map(toast => <Toast key={toast.id} toast={toast} dispatch={dispatch}></Toast>)
+            ? toasts.stack.map(toast => <Toast key={ toast.id } toast={ toast } dispatch={ dispatch } />)
             : null
           }
         </ReactCSSTransitionGroup>
       </div>
-    );
+    )
+  },
+})
 
-  }
-});
 
-
-function mapStateToProps({toasts}) {
+function mapStateToProps({ toasts }) {
   return {
-    toasts
+    toasts,
   }
 }
 
-export default connect(mapStateToProps)(Component);
+export default connect(mapStateToProps)(Component)

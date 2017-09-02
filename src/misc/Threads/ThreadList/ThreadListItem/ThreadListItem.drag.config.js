@@ -1,37 +1,37 @@
-import { findDOMNode } from 'react-dom';
-import { throttle } from 'lodash';
+import { findDOMNode } from 'react-dom'
+import { throttle } from 'lodash'
 
-let throttleModelUpdate = throttle((throttledFn)=>throttledFn(), 100, {
-  leading:true,
-  trailing:false
-});
+const throttleModelUpdate = throttle(throttledFn => throttledFn(), 100, {
+  leading: true,
+  trailing: false,
+})
 
-let endDragProps = {};
-let beginDragProps = {};
+let endDragProps = {}
+const beginDragProps = {}
 
 export const cardHover = (props, monitor, component) => {
-  const dragIndex = monitor.getItem().index;
-  const dragId = monitor.getItem().id;
+  const dragIndex = monitor.getItem().index
+  const dragId = monitor.getItem().id
 
-  const hoverIndex = props.index;
-  const hoverId = props.id;
+  const hoverIndex = props.index
+  const hoverId = props.id
 
   // Don't replace items with themselves
   if (dragId === hoverId) {
-    return;
+    return
   }
 
   // Determine rectangle on screen
-  const hoverBoundingRect = findDOMNode(component).getBoundingClientRect();
+  const hoverBoundingRect = findDOMNode(component).getBoundingClientRect()
 
   // Get vertical middle
-  const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+  const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
 
   // Determine mouse position
-  const clientOffset = monitor.getClientOffset();
+  const clientOffset = monitor.getClientOffset()
 
   // Get pixels to the top
-  const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+  const hoverClientY = clientOffset.y - hoverBoundingRect.top
 
   // Only perform the move when the mouse has crossed half of the items height
   // When dragging downwards, only move when the cursor is below 50%
@@ -39,58 +39,57 @@ export const cardHover = (props, monitor, component) => {
 
   // Dragging downwards
   if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-    return;
+    return
   }
 
   // Dragging upwards
   if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-    return;
+    return
   }
 
   // Time to actually perform the action
-   throttleModelUpdate(()=>{
+  throttleModelUpdate(() => {
+    endDragProps.id = props.id
+    endDragProps.index = props.index
+    endDragProps.groupId = props.groupId
+    // If the dragged item index is less than the destination index, we set it to after
+    const dragIndexInGroup = props.threads.findIndex(threadId => threadId == beginDragProps.id)
+    endDragProps.after = dragIndexInGroup != -1 ? dragIndexInGroup < endDragProps.index : false
 
-     endDragProps.id = props.id;
-     endDragProps.index = props.index;
-     endDragProps.groupId = props.groupId;
-     // If the dragged item index is less than the destination index, we set it to after
-     const dragIndexInGroup = props.threads.findIndex(threadId => threadId == beginDragProps.id);
-     endDragProps.after = dragIndexInGroup != -1 ? dragIndexInGroup < endDragProps.index : false;
-
-     props.moveCard({
-       thread: dragId,
-       destinationThread: hoverId,
-       destinationGroup: props.groupId,
-     });
+    props.moveCard({
+      thread: dragId,
+      destinationThread: hoverId,
+      destinationGroup: props.groupId,
+    })
   })
 
   // Note: we're mutating the monitor item here!
   // Generally it's better to avoid mutations,
   // but it's good here for the sake of performance
   // to avoid expensive index searches.
-   monitor.getItem().index = hoverIndex;
+  monitor.getItem().index = hoverIndex
 }
 
 export const cardDrop = (props, monitor, component) => {}
 
 export const beginDrag = (props, monitor, component) => {
-  props.beginDrag(props.id);
+  props.beginDrag(props.id)
 
-  beginDragProps.id = props.id;
-  beginDragProps.index = props.index;
-  beginDragProps.groupId = props.groupId;
+  beginDragProps.id = props.id
+  beginDragProps.index = props.index
+  beginDragProps.groupId = props.groupId
 
-  endDragProps = {};
+  endDragProps = {}
   return {
     id: props.id,
     groupId: props.groupId,
     index: props.index,
-    threads: props.threads
+    threads: props.threads,
   }
 }
 
 export const endDrag = (props, monitor) => {
-  if(endDragProps.groupId && (beginDragProps.groupId != endDragProps.groupId || beginDragProps.index != endDragProps.index)){
+  if (endDragProps.groupId && (beginDragProps.groupId != endDragProps.groupId || beginDragProps.index != endDragProps.index)) {
     // We have done a real move, save
     props.moveCard({
       thread: beginDragProps.id,
@@ -98,17 +97,16 @@ export const endDrag = (props, monitor) => {
       destinationGroup: endDragProps.groupId,
       after: endDragProps.after,
       save: true,
-    });
+    })
   }
-  props.endDrag(beginDragProps.id);
+  props.endDrag(beginDragProps.id)
 }
 
 export const emptyHover = (props, monitor) => {
-  throttleModelUpdate(()=>{
-
-    endDragProps.id = undefined;
-    endDragProps.index = 0;
-    endDragProps.groupId = props.groupId;
+  throttleModelUpdate(() => {
+    endDragProps.id = undefined
+    endDragProps.index = 0
+    endDragProps.groupId = props.groupId
 
     props.moveCard({
       thread: monitor.getItem().id,

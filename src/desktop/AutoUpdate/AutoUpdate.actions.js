@@ -1,29 +1,29 @@
-import { showConfirm } from 'stemn-shared/misc/Modal/Modal.actions.js';
+import { showConfirm } from 'stemn-shared/misc/Modal/Modal.actions.js'
 
-export function currentVersion({version}) {
+export function currentVersion({ version }) {
   return {
     type: 'AUTO_UPDATE/CURRENT_VERSION',
-    payload: { version }
-  };
+    payload: { version },
+  }
 }
 export function checkForUpdates() {
   return {
     type: 'AUTO_UPDATE/CHECK_FOR_UPDATES',
     aliased: true,
     payload: {
-      functionAlias : 'AutoUpdateUtils.checkForUpdates',
-    }
-  };
+      functionAlias: 'AutoUpdateUtils.checkForUpdates',
+    },
+  }
 }
 
 export function updateAvailable() {
   return {
     type: 'AUTO_UPDATE/UPDATE_AVAILABLE',
-    payload: {}
-  };
+    payload: {},
+  }
 }
 
-export function updateDownloaded({update, version, platform, readme}) {
+export function updateDownloaded({ update, version, platform, readme }) {
   return (dispatch) => {
     dispatch({
       type: 'AUTO_UPDATE/UPDATE_DOWNLOADED',
@@ -43,7 +43,7 @@ export function updateDownloaded({update, version, platform, readme}) {
         aliased: true,
         payload: {
           functionAlias: 'AutoUpdateUtils.installUpdates',
-        }
+        },
       })
     })
   }
@@ -55,7 +55,7 @@ export function installUpdate() {
     aliased: true,
     payload: {
       functionAlias: 'AutoUpdateUtils.installUpdates',
-    }
+    },
   }
 }
 
@@ -64,12 +64,12 @@ export function updateError(error) {
     type: 'AUTO_UPDATE/UPDATE_ERROR',
     error: true,
     payload: error.message,
-  };
+  }
 }
 
 export function updateNotAvailable() {
   return {
     type: 'AUTO_UPDATE/UPDATE_NOT_AVAILABLE',
-    payload: {}
-  };
+    payload: {},
+  }
 }

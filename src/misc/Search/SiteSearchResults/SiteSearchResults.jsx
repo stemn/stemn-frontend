@@ -16,9 +16,9 @@ export default class SiteSearchResults extends Component {
     if (display === 'tag') {
       return (
         <div>
-          { results && results.data && results.data.map((result) => (
-            <Link key={ result._id } name="fieldRoute" params={{ fieldId: result.stub }}>
-              <Tag className="primary" text={ result.name } style={ { marginBottom: '6px' } }/>
+          { results && results.data && results.data.map(result => (
+            <Link key={ result._id } name="fieldRoute" params={ { fieldId: result.stub } }>
+              <Tag className="primary" text={ result.name } style={ { marginBottom: '6px' } } />
             </Link>
           ))}
         </div>
@@ -26,13 +26,13 @@ export default class SiteSearchResults extends Component {
     }
     return (
       <div>
-        <div className={ classes.results + ' layout-column'} style={ !results || !results.data ? { minHeight: '100vh' } : {}  }>
+        <div className={ `${classes.results} layout-column` } style={ !results || !results.data ? { minHeight: '100vh' } : {}  }>
           <LoadingOverlay
             show={ !results || results.loading }
             linear
             noOverlay
           />
-          { results && results.data && results.data.map((result) => (
+          { results && results.data && results.data.map(result => (
             <EntityRow
               key={ result._id }
               data={ result }

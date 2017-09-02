@@ -8,6 +8,5 @@ export default class UserName extends Component {
     return (
       <Link name="userRoute" params={ { userId: get(user, 'data._id') } }>{ get(user, 'data.name') }</Link>
     )
-
   }
 }

@@ -9,7 +9,7 @@ export const getLatest = () => ({
     method: 'GET',
     url: `https://api.github.com/repos/${repoOwner}/${repoName}/releases/latest`,
     headers: {
-      Authorization: null
-    }
-  })
+      Authorization: null,
+    },
+  }),
 })

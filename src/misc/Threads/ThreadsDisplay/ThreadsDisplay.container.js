@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
-import { getBoards, changeLayout }from '../Threads.actions.js'
+import { getBoards, changeLayout } from '../Threads.actions.js'
 import { setFilter } from 'stemn-shared/misc/StringFilter/StringFilter.actions'
 
 import { get, has } from 'lodash'
@@ -56,7 +56,7 @@ const fetchConfigs = [{
   hasChanged: 'projectId',
   onChange: (props) => {
     props.getBoards({
-      projectId: props.projectId
+      projectId: props.projectId,
     })
   },
 }]

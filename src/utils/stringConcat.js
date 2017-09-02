@@ -1,39 +1,37 @@
-export const end = (string, chars) => {
-  return string.length >= chars ? string.substring(0, chars)+'...' : string
-}
+export const end = (string, chars) => (string.length >= chars ? `${string.substring(0, chars)}...` : string)
 
 // This will concat a string in the middle (or the position described by the ratio)
 export const middle = (string, chars, ratio) => {
-  ratio = ratio || 0.5;
+  ratio = ratio || 0.5
 
 
   if (string && string.length > chars) {
     // Get all the spaces in the string
-    const indices   = getWordBreaks(string);
-    const startIndex = closest( chars * ratio, indices);
-    const endIndex   = closest( string.length - chars * (1-ratio), indices)
+    const indices   = getWordBreaks(string)
+    const startIndex = closest(chars * ratio, indices)
+    const endIndex   = closest(string.length - chars * (1 - ratio), indices)
 
-    return string.substr(0, startIndex) + ' ...' + string.substr(endIndex, string.length);
+    return `${string.substr(0, startIndex)} ...${string.substr(endIndex, string.length)}`
   }
-  return string;
+  return string
 }
 
-function closest (num, arr) {
-  var curr = arr[0];
-  var diff = Math.abs (num - curr);
-  for (var val = 0; val < arr.length; val++) {
-    var newdiff = Math.abs (num - arr[val]);
+function closest(num, arr) {
+  let curr = arr[0]
+  let diff = Math.abs(num - curr)
+  for (let val = 0; val < arr.length; val++) {
+    const newdiff = Math.abs(num - arr[val])
     if (newdiff < diff) {
-      diff = newdiff;
-      curr = arr[val];
+      diff = newdiff
+      curr = arr[val]
     }
   }
-  return curr;
+  return curr
 }
 
-function getWordBreaks (string){
+function getWordBreaks(string) {
   return string.split('').reduce((accumulator, currentLetter, currentIndex) => {
-    if([' ', '/', '-', '_'].includes(currentLetter)){
+    if ([' ', '/', '-', '_'].includes(currentLetter)) {
       accumulator.push(currentIndex)
     }
     return accumulator

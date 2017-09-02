@@ -1,45 +1,45 @@
-export function init({storeKey, path}) {
+export function init({ storeKey, path }) {
   return {
     type: 'FILE_SELECT/INIT',
     payload: {
-      path
+      path,
     },
     meta: {
-      storeKey
-    }
-  };
+      storeKey,
+    },
+  }
 }
 
-export function select({storeKey, file}) {
+export function select({ storeKey, file }) {
   return {
     type: 'FILE_SELECT/SELECT',
     payload: {
-      file
+      file,
     },
     meta: {
-      storeKey
-    }
-  };
+      storeKey,
+    },
+  }
 }
 
-export function deselect({storeKey}) {
+export function deselect({ storeKey }) {
   return {
     type: 'FILE_SELECT/DESELECT',
     payload: {},
     meta: {
-      storeKey
-    }
-  };
+      storeKey,
+    },
+  }
 }
 
-export function changePath({storeKey, path}) {
+export function changePath({ storeKey, path }) {
   return {
     type: 'FILE_SELECT/CHANGE_PATH',
     payload: {
-      path
+      path,
     },
     meta: {
-      storeKey
-    }
-  };
+      storeKey,
+    },
+  }
 }

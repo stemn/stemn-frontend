@@ -1,4 +1,4 @@
 
-export const uploadImage = () => (dispatch) => dispatch({
+export const uploadImage = () => dispatch => dispatch({
 
 })

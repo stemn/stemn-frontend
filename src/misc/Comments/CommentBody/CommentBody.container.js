@@ -5,7 +5,7 @@ import { getComment } from 'stemn-shared/misc/Comments/Comments.actions.js'
 
 const stateToProps = ({ comments }, { commentId }) => ({
   comment: comments.data[commentId],
-  entityModel: `comments.data.${commentId}`
+  entityModel: `comments.data.${commentId}`,
 })
 
 const dispatchToProps = {

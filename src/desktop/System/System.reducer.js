@@ -1,4 +1,4 @@
-import i from 'icepick';
+import i from 'icepick'
 
 const initialState = {
   installed: false,
@@ -12,7 +12,7 @@ const initialState = {
     autoUpdate: true,
     debug: false,
   },
-};
+}
 
 function reducer(state, action) {
   switch (action.type) {
@@ -26,13 +26,13 @@ function reducer(state, action) {
       return i.assoc(state, 'installed', action.payload)
     }
     default:
-      return state;
+      return state
   }
 }
 
 export default function (state = initialState, action) {
   if (!state.hydrated) {
-    state = i.chain(initialState).merge(state).assoc('hydrated', true).value();
+    state = i.chain(initialState).merge(state).assoc('hydrated', true).value()
   }
   return reducer(state, action)
 }

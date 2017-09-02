@@ -5,7 +5,7 @@ import Popover from 'stemn-shared/misc/Popover'
 import PopoverFit from 'stemn-shared/misc/PopoverMenu/PopoverFit'
 import MdExpandMore from 'react-icons/md/expand-more'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
-import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import classNames from 'classnames'
 import classes from './PopoverDropdown.css'
 
@@ -18,7 +18,7 @@ class PopoverDropdown extends Component {
   render() {
     const { children, options, model, value, dispatch, onChange, empty, loading, className, placeholder, style, ...otherProps } = this.props
 
-    const isActive = (option) => value === option.value || (!value && !option.value)
+    const isActive = option => value === option.value || (!value && !option.value)
 
     const currentOption = options.find(isActive)
 
@@ -27,9 +27,8 @@ class PopoverDropdown extends Component {
         return currentOption.name
       } else if (empty) {
         return null
-      } else {
-        return placeholder || 'none'
-      }
+      } 
+      return placeholder || 'none'
     }
 
     return (
@@ -43,7 +42,6 @@ class PopoverDropdown extends Component {
         </Button>
         <div className="PopoverMenu" style={ { maxHeight: '300px' } }>
           { options.map((option, idx) => {
-
             const onClick = () => {
               if (model) {
                 dispatch(storeChange(model, option.value))
@@ -60,7 +58,7 @@ class PopoverDropdown extends Component {
               <a
                 key={ option.value || idx }
                 onClick={ onClick }
-                className={ classNames({ 'active' : isActive(option) }) }
+                className={ classNames({ active: isActive(option) }) }
               >
                 { option.name }
               </a>

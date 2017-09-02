@@ -1,20 +1,20 @@
 
-import React from 'react';
+import React from 'react'
 
 // Components
-import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox';
+import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox'
 import Walkthrough from 'stemn-shared/misc/Walkthrough/Walkthrough.jsx'
 
 // Styles
-import styles from './FileChangeTitleRow.css';
+import styles from './FileChangeTitleRow.css'
 
 export default React.createClass({
-  render(){
-    const { model, value, checkbox, changeAction, children, text } = this.props;
+  render() {
+    const { model, value, checkbox, changeAction, children, text } = this.props
     return (
-      <div className={styles.fileChangeTitleRow + ' layout-row layout-align-start-center'}>
+      <div className={ `${styles.fileChangeTitleRow} layout-row layout-align-start-center` }>
         { checkbox
-        ? <Walkthrough name="commit.commitCheckbox" preferPlace="right">
+          ? <Walkthrough name="commit.commitCheckbox" preferPlace="right">
             <Checkbox
               className="text-primary"
               model={ model }
@@ -23,11 +23,11 @@ export default React.createClass({
               title="Toggle all"
             />
           </Walkthrough>
-        : null}
-        <span className={styles.text + ' flex text-ellipsis'}>{text}</span>
-        <div className="flex"></div>
+          : null}
+        <span className={ `${styles.text} flex text-ellipsis` }>{text}</span>
+        <div className="flex" />
         {children}
       </div>
     )
-  }
-});
+  },
+})

@@ -5,10 +5,10 @@ export default (store, action) => {
 
   switch (action.type) {
     case 'FILES/FILES_UPDATED':
-      return action.payload.files.map((fileId) => dispatch(fetchTimeline({
-          entityType: 'project',
-          provider: action.payload.provider,
-          entityId: fileId,
+      return action.payload.files.map(fileId => dispatch(fetchTimeline({
+        entityType: 'project',
+        provider: action.payload.provider,
+        entityId: fileId,
       })))
   }
 }

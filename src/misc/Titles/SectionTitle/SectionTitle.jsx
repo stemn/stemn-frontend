@@ -1,19 +1,19 @@
 // Component Core
-import React from 'react';
+import React from 'react'
 
 // Styles
-import classNames from 'classnames';
-import classes from './SectionTitle.css';
+import classNames from 'classnames'
+import classes from './SectionTitle.css'
 
-///////////////////////////////// COMPONENT /////////////////////////////////
+// /////////////////////////////// COMPONENT /////////////////////////////////
 
 export default React.createClass({
   render() {
-    const { children, style, className } = this.props;
+    const { children, style, className } = this.props
     return (
-      <div className={classNames(classes.section, 'layout-row', className)} style={style}>
-        <div className={classes.text}>{children}</div>
+      <div className={ classNames(classes.section, 'layout-row', className) } style={ style }>
+        <div className={ classes.text }>{children}</div>
       </div>
     )
-  }
-});
+  },
+})

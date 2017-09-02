@@ -6,16 +6,14 @@ const searchParams = typeof window !== 'undefined'
   ? qs.parse(window.location.search.substring(1))
   : {}
 
-export let socket = undefined;
+export let socket
 
 export const initialise = (hostUrl) => {
-
   // Conntect the websocket
   socket = primus.connect(hostUrl)
 
   // Log some stuff if  ?debug=true or environment is development
   if (GLOBAL_ENV.NODE_ENV === 'development' || searchParams.debug) {
-
     // Log Receives
     const socketData = (data) => {
       if (GLOBAL_ENV.APP_THREAD === 'electron') {
@@ -29,7 +27,7 @@ export const initialise = (hostUrl) => {
     socket.on('data', socketData)
 
     // Log Writes
-    const oldWrite = socket.write.bind(socket);
+    const oldWrite = socket.write.bind(socket)
     socket.write = (data) => {
       if (GLOBAL_ENV.APP_THREAD === 'electron') {
         console.log(`socket | SEND - ${data.type}`)
@@ -45,9 +43,9 @@ export const initialise = (hostUrl) => {
   socket.write({
     type: 'ADMIN/ECHO',
     payload: {
-      test: 'test'
-    }
+      test: 'test',
+    },
   })
 
-  return socket;
+  return socket
 }

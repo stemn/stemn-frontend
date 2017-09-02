@@ -11,10 +11,10 @@ export const getUserFollowing = ({ userId, page = 1, size }) => ({
       socialType: 'follow',
       size,
       page,
-    }
+    },
   },
   meta: {
     userId,
-    page
-  }
+    page,
+  },
 })

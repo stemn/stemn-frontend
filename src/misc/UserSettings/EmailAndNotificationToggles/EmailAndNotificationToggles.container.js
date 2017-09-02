@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
-import EmailAndNotificationToggles from './EmailAndNotificationToggles';
+import EmailAndNotificationToggles from './EmailAndNotificationToggles'
 
 const stateToProps = () => ({})
 

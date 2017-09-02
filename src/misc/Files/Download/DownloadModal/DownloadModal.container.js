@@ -5,11 +5,9 @@ import DownloadModal from './DownloadModal'
 
 import { get } from 'lodash'
 
-const stateToProps = ({ syncTimeline }, { file }) => {
-  return {
-    syncTimeline: get(syncTimeline, [file.fileId], {}),
-  };
-}
+const stateToProps = ({ syncTimeline }, { file }) => ({
+  syncTimeline: get(syncTimeline, [file.fileId], {}),
+})
 
 const dispatchToProps = {
   fetchTimeline,

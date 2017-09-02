@@ -1,7 +1,7 @@
 import i from 'icepick'
 
 const initialState = {
-/*********************************************
+/** *******************************************
 This reducer store paginated follower data for
 every user.
 
@@ -10,7 +10,7 @@ every user.
     2: [followingUserId, followingUserId]
   }
 
-*********************************************/
+******************************************** */
 }
 
 export default (state = initialState, action = {}) => {
@@ -22,7 +22,7 @@ export default (state = initialState, action = {}) => {
     case 'USER_FOLLOWING/GET_FOLLOWING_FULFILLED':
       return i.assocIn(state, [action.meta.userId, action.meta.page], {
         loading: false,
-        data: action.payload.data
+        data: action.payload.data,
       })
 
     default:

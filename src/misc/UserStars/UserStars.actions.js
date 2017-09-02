@@ -10,10 +10,10 @@ export const getUserStars = ({ userId, page = 1, size }) => ({
       socialType: 'like',
       size,
       page,
-    }
+    },
   },
   meta: {
     userId,
     page,
-  }
+  },
 })

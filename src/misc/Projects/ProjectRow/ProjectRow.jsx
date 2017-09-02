@@ -7,7 +7,7 @@ import LoadingPlaceholder from 'stemn-shared/misc/Loading/LoadingPlaceholder'
 import LoadingAnimation from 'stemn-shared/misc/Loading/LoadingAnimation'
 
 class Project extends Component {
-  render () {
+  render() {
     const { project, className, size } = this.props
 
     if (project && project.data) {
@@ -19,36 +19,36 @@ class Project extends Component {
             <Link
               className={ classNames('link-primary', classes.title) }
               name="projectRoute"
-              params={ { projectId } }>
+              params={ { projectId } }
+            >
               { name || 'Untitled Project' }
             </Link>
             <div className={ classNames('flex', classes.blurb) }>{ blurb }</div>
             <div className={ classes.meta }>{ moment(updated).fromNow() }</div>
           </div>
           { size === 'wide' && picture
-          ? <Link name="projectRoute" params={ { projectId } }>
+            ? <Link name="projectRoute" params={ { projectId } }>
               <img
                 className={ classes.picture }
-                src={`${GLOBAL_ENV.API_SERVER}${picture}?size=feed-sm&crop=true`}
+                src={ `${GLOBAL_ENV.API_SERVER}${picture}?size=feed-sm&crop=true` }
               />
             </Link>
-          : null }
+            : null }
         </div>
       )
-    } else {
-      return (
-        <LoadingAnimation className={ classNames(classes.project, 'layout-row', className) } >
-          <div className="layout-column flex">
-            <LoadingPlaceholder width={ 200 } className={ classes.title }/>
-            <div className={ classes.blurb }>
-              <LoadingPlaceholder width={ 320 } style={ { marginBottom: '5px' } } />
-              <LoadingPlaceholder width={ 300 } />
-            </div>
-            <LoadingPlaceholder width={ 200 } className={ classes.meta } />
+    } 
+    return (
+      <LoadingAnimation className={ classNames(classes.project, 'layout-row', className) } >
+        <div className="layout-column flex">
+          <LoadingPlaceholder width={ 200 } className={ classes.title } />
+          <div className={ classes.blurb }>
+            <LoadingPlaceholder width={ 320 } style={ { marginBottom: '5px' } } />
+            <LoadingPlaceholder width={ 300 } />
           </div>
-        </LoadingAnimation>
-      )
-    }
+          <LoadingPlaceholder width={ 200 } className={ classes.meta } />
+        </div>
+      </LoadingAnimation>
+    )
   }
 }
 

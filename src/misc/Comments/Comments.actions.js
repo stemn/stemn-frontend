@@ -1,37 +1,37 @@
-import http from 'axios';
-import * as ThreadsActions from '../Threads/Threads.actions.js';
+import http from 'axios'
+import * as ThreadsActions from '../Threads/Threads.actions.js'
 import { addEvent, deleteEvent } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
 import confirmAuth from 'stemn-shared/misc/Auth/actions/confirmAuth'
 
-export function getComment({commentId}) {
+export function getComment({ commentId }) {
   return {
     type: 'COMMENTS/GET_COMMENT',
     httpPackage: {
-      url: `/api/v1/comments`,
+      url: '/api/v1/comments',
       method: 'GET',
       params: {
-        'ids' : commentId
-      }
+        ids: commentId,
+      },
     },
     meta: {
-      commentId
+      commentId,
     },
   }
 }
 
 export function newComment({ comment, timelineCacheKey }) {
   return (dispatch, getState) => {
-    if(comment && comment.body && comment.body.length > 0){
+    if (comment && comment.body && comment.body.length > 0) {
       return dispatch({
         type: 'COMMENTS/NEW_COMMENT',
         payload: http({
           url: `/api/v1/threads/${comment.thread}/comments`,
           method: 'POST',
-          data: comment
+          data: comment,
         }),
         meta: {
-          threadId: comment.thread
-        }
+          threadId: comment.thread,
+        },
       }).then(({ value }) => {
         const currentUser = getState().auth.user
         return dispatch(addEvent({
@@ -45,33 +45,31 @@ export function newComment({ comment, timelineCacheKey }) {
               picture: currentUser.picture,
             },
             data: {
-              comment: value.data._id
-            }
-          }
+              comment: value.data._id,
+            },
+          },
         }))
       })
     }
   }
 }
 
-export const toggleReaction = ({commentId, reactionType}) => confirmAuth((dispatch, getState) => {
-  const reactions = getState().comments.data[commentId].data.reactions;
-  const userId = getState().auth.user._id;
-  const reactionExists = reactions.find(reaction => reaction.owner._id == userId && reaction.type == reactionType);
+export const toggleReaction = ({ commentId, reactionType }) => confirmAuth((dispatch, getState) => {
+  const reactions = getState().comments.data[commentId].data.reactions
+  const userId = getState().auth.user._id
+  const reactionExists = reactions.find(reaction => reaction.owner._id == userId && reaction.type == reactionType)
 
-  if(reactionExists){
-    dispatch(deleteReaction({commentId, reactionType}))
-  }
-  else{
-    dispatch(newReaction({commentId, reactionType}))
+  if (reactionExists) {
+    dispatch(deleteReaction({ commentId, reactionType }))
+  } else {
+    dispatch(newReaction({ commentId, reactionType }))
   }
 })
 
-export const newReaction = ({commentId, reactionType}) => confirmAuth((dispatch) => {
-
+export const newReaction = ({ commentId, reactionType }) => confirmAuth((dispatch) => {
   const reaction = {
-    type: reactionType
-  };
+    type: reactionType,
+  }
 
   dispatch({
     type: 'COMMENTS/NEW_REACTION',
@@ -79,16 +77,16 @@ export const newReaction = ({commentId, reactionType}) => confirmAuth((dispatch)
     payload: {
       url: `/api/v1/comments/${commentId}/reaction`,
       method: 'POST',
-      data: reaction
+      data: reaction,
     },
     meta: {
       commentId,
-    }
+    },
   })
 })
 
 
-export function deleteReaction({commentId, reactionType}) {
+export function deleteReaction({ commentId, reactionType }) {
   return (dispatch, getState) => {
     dispatch({
       type: 'COMMENTS/DELETE_REACTION',
@@ -100,27 +98,27 @@ export function deleteReaction({commentId, reactionType}) {
       meta: {
         commentId,
         reactionType,
-        userId: getState().auth.user._id
-      }
+        userId: getState().auth.user._id,
+      },
     })
   }
 }
 
-export function startEdit({commentId}) {
+export function startEdit({ commentId }) {
   return {
     type: 'COMMENTS/START_EDIT',
     payload: {
-      commentId
-    }
+      commentId,
+    },
   }
 }
 
-export function finishEdit({commentId}) {
+export function finishEdit({ commentId }) {
   return {
     type: 'COMMENTS/FINISH_EDIT',
     payload: {
-      commentId
-    }
+      commentId,
+    },
   }
 }
 
@@ -130,21 +128,21 @@ export function deleteComment({ comment, timelineCacheKey }) {
       type: 'COMMENTS/DELETE',
       payload: http({
         url: `/api/v1/comments/${comment._id}`,
-        method: 'DELETE'
+        method: 'DELETE',
       }),
       meta: {
         commentId: comment._id,
-        threadId: comment.thread
-      }
-    }).then(response => {
+        threadId: comment.thread,
+      },
+    }).then((response) => {
       // Get the eventId of the comment
-      console.log(getState().syncTimeline[timelineCacheKey]);
-      const event = getState().syncTimeline[timelineCacheKey].data.find(event => event.data.comment === comment._id);
-      console.log({event});
+      console.log(getState().syncTimeline[timelineCacheKey])
+      const event = getState().syncTimeline[timelineCacheKey].data.find(event => event.data.comment === comment._id)
+      console.log({ event })
       if (event) {
         dispatch(deleteEvent({
           cacheKey: timelineCacheKey,
-          eventId: event._id
+          eventId: event._id,
         }))
       }
     })
@@ -152,17 +150,17 @@ export function deleteComment({ comment, timelineCacheKey }) {
 }
 
 
-export function updateComment({comment}) {
+export function updateComment({ comment }) {
   return {
     type: 'COMMENTS/UPDATE',
     http: true,
     payload: {
       url: `/api/v1/comments/${comment._id}`,
       method: 'PUT',
-      data: comment
+      data: comment,
     },
     meta: {
-      commentId: comment._id
-    }
+      commentId: comment._id,
+    },
   }
 }

@@ -16,7 +16,6 @@ export default class ThreadRow extends Component {
     const { board, thread, className } = this.props
 
     if (thread && thread.data && board && board.data && board.data.groups) {
-
       const threadRouteParams = {
         threadId: thread.data._id,
         projectId: board.data.project,

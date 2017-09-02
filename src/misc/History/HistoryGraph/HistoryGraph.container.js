@@ -35,7 +35,7 @@ const fetchConfigs = [{
       cacheKey: props.historyCacheKey,
       from: props.from.format(),
       to: props.to.format(),
-      types: props.type ? [ props.type ] : undefined,
+      types: props.type ? [props.type] : undefined,
     })
   },
 }]

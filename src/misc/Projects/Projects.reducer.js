@@ -3,22 +3,22 @@ import { uniqBy } from 'lodash'
 
 const initialState = {
   data: {
-    /***********************************
+    /** *********************************
     [projectId]: {
       loading: false,
       data: {},
       fileStoreForm: {},
     }
-    ***********************************/
+    ********************************** */
   },
   activeProject: '',        // The currently active project
   userProjects: {
-    /***********************************
+    /** *********************************
     [userId]: {
       loading: false,
       data: [],
     }
-    ***********************************/
+    ********************************** */
   },
   newProject: {
     summary: '',
@@ -29,15 +29,15 @@ const initialState = {
     },
     provider: '',
     private: false,
-    savePending: ''
-  }
+    savePending: '',
+  },
 }
 
 function reducer(state, action) {
   switch (action.type) {
     case 'PROJECTS/SET_ACTIVE_PROJECT':
-      return {...state,
-        activeProject: action.payload.projectId
+      return { ...state,
+        activeProject: action.payload.projectId,
       }
     
     case 'PROJECTS/GET_PROJECT_PENDING':
@@ -53,31 +53,25 @@ function reducer(state, action) {
       
     case 'PROJECTS/ADD_TEAM_MEMBER':
       return i.updateIn(state, ['data', action.payload.projectId, 'data', 'team'], (team) => {
-        const modifiedUser = Object.assign({}, action.payload.user, {permissions: {role: 'admin'}})
+        const modifiedUser = Object.assign({}, action.payload.user, { permissions: { role: 'admin' } })
         return i.push(team, modifiedUser)
       })
     case 'PROJECTS/REMOVE_TEAM_MEMBER':
-      return i.updateIn(state, ['data', action.payload.projectId, 'data', 'team'], (team) => {
-        return team.filter(user => user._id != action.payload.userId)
-      })
+      return i.updateIn(state, ['data', action.payload.projectId, 'data', 'team'], team => team.filter(user => user._id != action.payload.userId))
     case 'PROJECTS/CHANGE_USER_PERMISSIONS':
       return i.updateIn(state, ['data', action.payload.projectId, 'data', 'team'], (team) => {
-        const index = team.findIndex((user)=>user._id == action.payload.userId)
+        const index = team.findIndex(user => user._id == action.payload.userId)
         return [
           ...team.slice(0, index),
           i.assocIn(team[index], ['permissions', 'role'], action.payload.role),
-          ...team.slice(index + 1)
+          ...team.slice(index + 1),
         ]
       })
 
     case 'PROJECTS/ADD_FIELD':
-      return i.updateIn(state, ['data', action.payload.projectId, 'data', 'fields'], (fields) => {
-        return uniqBy(i.push(fields, action.payload.field), '_id')
-      })
+      return i.updateIn(state, ['data', action.payload.projectId, 'data', 'fields'], fields => uniqBy(i.push(fields, action.payload.field), '_id'))
     case 'PROJECTS/REMOVE_FIELD':
-      return i.updateIn(state, ['data', action.payload.projectId, 'data', 'fields'], (fields) => {
-        return fields.filter(field => field._id != action.payload.fieldId)
-      })
+      return i.updateIn(state, ['data', action.payload.projectId, 'data', 'fields'], fields => fields.filter(field => field._id != action.payload.fieldId))
 
     case 'PROJECTS/SET_LIKED':
       return i.assocIn(state, ['data', action.payload.projectId, 'data', 'liked'], true)
@@ -88,21 +82,21 @@ function reducer(state, action) {
 
     case 'PROJECTS/LINK_REMOTE_PENDING':
       return i.chain(state)
-      .assocIn(['data', action.meta.cacheKey, 'linkPending'], true)
-      .assocIn(['data', action.meta.cacheKey, 'linkRejected'], false)
-      .value()
+        .assocIn(['data', action.meta.cacheKey, 'linkPending'], true)
+        .assocIn(['data', action.meta.cacheKey, 'linkRejected'], false)
+        .value()
     case 'PROJECTS/LINK_REMOTE_FULFILLED':
       return i.chain(state)
-      .assocIn(['data', action.meta.cacheKey, 'linkPending'], false)
-      .assocIn(['data', action.meta.cacheKey, 'linkRejected'], false)
-      .assocIn(['data', action.meta.cacheKey, 'data', 'remote'], action.payload.data)
-      .assocIn(['data', action.meta.cacheKey, 'fileStoreForm'], action.payload.data)
-      .value()
+        .assocIn(['data', action.meta.cacheKey, 'linkPending'], false)
+        .assocIn(['data', action.meta.cacheKey, 'linkRejected'], false)
+        .assocIn(['data', action.meta.cacheKey, 'data', 'remote'], action.payload.data)
+        .assocIn(['data', action.meta.cacheKey, 'fileStoreForm'], action.payload.data)
+        .value()
     case 'PROJECTS/LINK_REMOTE_REJECTED':
       return i.chain(state)
-      .assocIn(['data', action.meta.cacheKey, 'linkPending'], false)
-      .assocIn(['data', action.meta.cacheKey, 'linkRejected'], true)
-      .value()
+        .assocIn(['data', action.meta.cacheKey, 'linkPending'], false)
+        .assocIn(['data', action.meta.cacheKey, 'linkRejected'], true)
+        .value()
 
 
     case 'PROJECTS/GET_USER_PROJECTS_PENDING':
@@ -121,11 +115,11 @@ function reducer(state, action) {
       return i.assocIn(state, ['newProject', 'savePending'], false)
     case 'PROJECTS/CREATE_PROJECT_FULFILLED':
       return i.chain(state)
-      .assoc('newProject', initialState.newProject)        // Clear the newProject object
-      .updateIn(['userProjects', action.meta.userId, 'data'], (projects) => {  // Push the new project onto the userProjects array
-        return i.push(projects, action.payload.data)
-      })
-      .value()
+        .assoc('newProject', initialState.newProject)        // Clear the newProject object
+        .updateIn(['userProjects', action.meta.userId, 'data'], projects =>   // Push the new project onto the userProjects array
+          i.push(projects, action.payload.data),
+        )
+        .value()
 
     case 'PROJECTS/SAVE_PROJECT_PENDING':
       return i.assocIn(state, ['data', action.meta.projectId, 'savePending'], true)
@@ -136,14 +130,14 @@ function reducer(state, action) {
 
     case 'PROJECTS/DELETE_PROJECT_FULFILLED':
       return i.chain(state)
-      .assocIn(['data', action.meta.projectId], undefined) // Delete the project from the main store
-      .updateIn(['userProjects', action.meta.userId, 'data'], (projects) => {  // Delete it from the userProjects list
-        const projectIndex = projects.findIndex( project => project._id == action.meta.projectId)
-        return i.splice(projects, projectIndex, 1)
-      })
-      .value()
+        .assocIn(['data', action.meta.projectId], undefined) // Delete the project from the main store
+        .updateIn(['userProjects', action.meta.userId, 'data'], (projects) => {  // Delete it from the userProjects list
+          const projectIndex = projects.findIndex(project => project._id == action.meta.projectId)
+          return i.splice(projects, projectIndex, 1)
+        })
+        .value()
     default:
-        return state
+      return state
   }
 }
 

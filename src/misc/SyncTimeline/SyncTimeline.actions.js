@@ -1,28 +1,28 @@
-import http from 'axios';
-import getUuid from 'stemn-shared/utils/getUuid.js';
+import http from 'axios'
+import getUuid from 'stemn-shared/utils/getUuid.js'
 
 export function deselect({ projectId }) {
   return {
-    type:'TIMELINE/DESELECT_ITEM',
+    type: 'TIMELINE/DESELECT_ITEM',
     payload: {
       projectId,
     },
     meta: {
-      cacheKey: projectId
-    }
+      cacheKey: projectId,
+    },
   }
 }
 
 export function selectTimelineItem({ projectId, selected }) {
   return {
-    type:'TIMELINE/SELECT_ITEM',
+    type: 'TIMELINE/SELECT_ITEM',
     payload: {
       projectId,
-      selected
+      selected,
     },
     meta: {
-      cacheKey: projectId
-    }
+      cacheKey: projectId,
+    },
   }
 }
 
@@ -47,7 +47,7 @@ export function fetchTimeline({ entityType, entityId, provider, types, cacheKey,
     },
     throttle: {
       time: 500,
-      endpoint:  `fetch-timeline/${entityType}`
+      endpoint: `fetch-timeline/${entityType}`,
     },
   }
 }
@@ -80,20 +80,18 @@ export const addEvent = ({ cacheKey, event }) => {
     type: 'TIMELINE/ADD_EVENT',
     payload: {
       event: eventObject,
-      cacheKey
+      cacheKey,
     },
   }
 }
 
-export const deleteEvent = ({ cacheKey, eventId }) => {
-  return {
-    type: 'TIMELINE/DELETE_EVENT',
-    payload: {
-      cacheKey,
-      eventId
-    }
-  }
-}
+export const deleteEvent = ({ cacheKey, eventId }) => ({
+  type: 'TIMELINE/DELETE_EVENT',
+  payload: {
+    cacheKey,
+    eventId,
+  },
+})
 
 
 export const getFeed = ({ feedType, page, size, cacheKey }) => ({

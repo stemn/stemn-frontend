@@ -18,10 +18,10 @@ const fetchConfigs = [{
     props.getRelatedFields({
       fieldId: props.fieldId,
     })
-  }
+  },
 }]
 
 const withFetchData = fetchDataHoc(fetchConfigs)(RelatedList)
-const withRedux = connect(stateToProps, dispatchToProps)(withFetchData);
+const withRedux = connect(stateToProps, dispatchToProps)(withFetchData)
 
-export default withRedux;
+export default withRedux

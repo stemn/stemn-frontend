@@ -1,9 +1,7 @@
-export default (cacheKey, progress) => {
-  return {
-    type: 'FILES/DOWNLOAD_PROGRESS',
-    payload: {
-      progress,
-      cacheKey
-    }
-  }
-}
+export default (cacheKey, progress) => ({
+  type: 'FILES/DOWNLOAD_PROGRESS',
+  payload: {
+    progress,
+    cacheKey,
+  },
+})

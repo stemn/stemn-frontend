@@ -12,19 +12,19 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button.jsx'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
 export default React.createClass({
-  submit (event) {
+  submit(event) {
     event.preventDefault()
     this.props.login({
       email: this.props.auth.login.email,
-      password: this.props.auth.login.password
+      password: this.props.auth.login.password,
     })
   },
 
-  render () {
+  render() {
     const { authenticate, auth } = this.props
 
     return (
-      <div className='flex rel-box'>
+      <div className="flex rel-box">
         <div className={ classNames(classes.background, 'layout-column layout-align-center-center') }>
           <div className={ classNames(classes.panel, 'layout-column', 'layout-align-space-between') }>
             <div className="text-title-3">Sign In</div>
@@ -44,44 +44,46 @@ export default React.createClass({
                 type="password"
                 placeholder="Password"
               />
-              <div className='layout-row layout-align-start-center'>
-                <div className='flex-50'>
-                </div>
-                <div className='flex-50 layout-row'>
+              <div className="layout-row layout-align-start-center">
+                <div className="flex-50" />
+                <div className="flex-50 layout-row">
                   <Button
                     style={ { marginLeft: '5px', marginTop: '5px' } }
-                    className='primary flex'
-                    type='submit'>
+                    className="primary flex"
+                    type="submit"
+                  >
                     Sign In
                   </Button>
                 </div>
               </div>
-              <div className={classes.textDivider}><div>OR</div></div>
-              <div className='layout-row'>
+              <div className={ classes.textDivider }><div>OR</div></div>
+              <div className="layout-row">
                 <Button
-                  onClick={() => authenticate('linkedin')}
+                  onClick={ () => authenticate('linkedin') }
                   style={ { marginRight: '5px' } }
-                  className='flex linkedin'
-                  type='button'>
+                  className="flex linkedin"
+                  type="button"
+                >
                   Linkedin
                 </Button>
                 <Button
-                  onClick={() => authenticate('facebook')}
+                  onClick={ () => authenticate('facebook') }
                   style={ { marginLeft: '5px' } }
-                  className='flex facebook'
-                  type='button'>
+                  className="flex facebook"
+                  type="button"
+                >
                   Facebook
                 </Button>
               </div>
-              <LoadingOverlay show={auth.authLoading || auth.userLoading} />
+              <LoadingOverlay show={ auth.authLoading || auth.userLoading } />
             </form>
             <div className="layout-row text-title-5">
-              <div className="layout-row flex">Dont have an account?&nbsp;<Link name="registerRoute" className='link-primary'>Register</Link></div>
+              <div className="layout-row flex">Dont have an account?&nbsp;<Link name="registerRoute" className="link-primary">Register</Link></div>
               <Link name="passwordLostRoute" className="link-primary">I forgot</Link>
             </div>
           </div>
         </div>
       </div>
     )
-  }
+  },
 })

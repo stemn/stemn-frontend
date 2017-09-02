@@ -7,7 +7,7 @@ export default ({ projectId, fileId, revisionId, provider, timestamp }) => (disp
   // Join the websocket room
   dispatch(joinRoom({
     room: cacheKey,
-    type: 'render'
+    type: 'render',
   }))
 
   dispatch({
@@ -21,11 +21,11 @@ export default ({ projectId, fileId, revisionId, provider, timestamp }) => (disp
         timestamp,
         projectId,
         roomId: cacheKey,
-      }
+      },
     },
     meta: {
       cacheKey,
-    }
+    },
   })
 }
 
@@ -53,4 +53,4 @@ export default ({ projectId, fileId, revisionId, provider, timestamp }) => (disp
 //      }
 //    });
 
-//`http://35.167.249.144/api/v1/sync/downloadRenderFile/${projectId}/${fileId}/${revisionId}`
+// `http://35.167.249.144/api/v1/sync/downloadRenderFile/${projectId}/${fileId}/${revisionId}`

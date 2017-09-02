@@ -1,50 +1,47 @@
 export const options = [{
   type: 'up',
-  icon: '👍'
-},{
+  icon: '👍',
+}, {
   type: 'down',
-  icon: '👎'
-},{
+  icon: '👎',
+}, {
   type: 'party',
-  icon: '🎉'
-},{
+  icon: '🎉',
+}, {
   type: 'heart',
-  icon: '❤️'
-},{
+  icon: '❤️',
+}, {
   type: 'confused',
-  icon: '😕'
+  icon: '😕',
 }]
 
-export const groupAndOrderReactions = (reactions, options) => {
-  return orderReactions(groupReactions(reactions), options)
-}
+export const groupAndOrderReactions = (reactions, options) => orderReactions(groupReactions(reactions), options)
 
-//////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////
 
-function groupReactions(reactions){
-  const groupedReactions = {};
-  reactions.forEach(reaction => {
-    if(!groupedReactions[reaction.type] || !groupedReactions[reaction.type].list){
+function groupReactions(reactions) {
+  const groupedReactions = {}
+  reactions.forEach((reaction) => {
+    if (!groupedReactions[reaction.type] || !groupedReactions[reaction.type].list) {
       groupedReactions[reaction.type] = {
-        list: [reaction]
+        list: [reaction],
       }
-    }
-    else{
+    } else {
       groupedReactions[reaction.type].list.push(reaction)
     }
   })
   return groupedReactions
 }
 
-function orderReactions(groupedReactions, options){
+function orderReactions(groupedReactions, options) {
   // Orders reactions by the options array
-  const orderedReactions = [];
-  options.forEach(option => {
-    if(groupedReactions[option.type] && groupedReactions[option.type].list && groupedReactions[option.type].list.length > 0){
+  const orderedReactions = []
+  options.forEach((option) => {
+    if (groupedReactions[option.type] && groupedReactions[option.type].list && groupedReactions[option.type].list.length > 0) {
       orderedReactions.push({
         type: option.type,
         icon: option.icon,
-        list: groupedReactions[option.type].list
+        list: groupedReactions[option.type].list,
       })
     }
   })

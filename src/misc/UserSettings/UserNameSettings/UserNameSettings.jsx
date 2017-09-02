@@ -8,7 +8,7 @@ export default class UserNameSettings extends Component {
 //    updateUsername: PropTypes.func.isRequired,
 //    username: PropTypes.string.isRequired,
 //  }
-  render () {
+  render() {
     const { updateUsername, username, usernameModel } = this.props
     return (
       <div>
@@ -17,16 +17,17 @@ export default class UserNameSettings extends Component {
         <Input
           model={ usernameModel }
           value={ username }
-          className='dr-input'
-          type='text'
-          placeholder='Username'
+          className="dr-input"
+          type="text"
+          placeholder="Username"
         />
         <br />
 
-        <div className='layout-row layout-align-end'>
+        <div className="layout-row layout-align-end">
           <ProgressButton
-            className='primary'
-            onClick={ updateUsername }>
+            className="primary"
+            onClick={ updateUsername }
+          >
             Update Username
           </ProgressButton>
         </div>

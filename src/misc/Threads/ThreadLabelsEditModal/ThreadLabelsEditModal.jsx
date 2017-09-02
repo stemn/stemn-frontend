@@ -1,77 +1,78 @@
 // Container Core
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
 // Container Actions
-import * as ThreadsActions from '../Threads.actions.js';
+import * as ThreadsActions from '../Threads.actions.js'
 
 // Component Core
-import React from 'react';
-import moment from 'moment';
-import { get, has } from 'lodash';
+import React from 'react'
+import moment from 'moment'
+import { get, has } from 'lodash'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 
 // Styles
-import classNames from 'classnames';
+import classNames from 'classnames'
 
 // Sub Components
 import ThreadLabelsEdit from '../ThreadLabelsEdit/ThreadLabelsEdit.jsx'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 
-/////////////////////////////////////////////////////////////////////////////
-///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////////////////////////
+// /////////////////////////////// COMPONENT /////////////////////////////////
+// ///////////////////////////////////////////////////////////////////////////
 
 export const Component = React.createClass({
   componentWillMount() {
-    if(has(this.props, 'board.data.labels')){
-      this.props.dispatch(storeChange(`${this.props.boardModel}.forms.labels`, this.props.board.data.labels));
+    if (has(this.props, 'board.data.labels')) {
+      this.props.dispatch(storeChange(`${this.props.boardModel}.forms.labels`, this.props.board.data.labels))
     }
   },
   submit() {
-    this.props.dispatch(storeChange(`${this.props.boardModel}.data.labels`, this.props.board.forms.labels));
-    setTimeout(()=>{
-      this.props.threadsActions.updateBoard({board: this.props.board.data}).then( response => {
-        this.props.modalConfirm();
-      });
+    this.props.dispatch(storeChange(`${this.props.boardModel}.data.labels`, this.props.board.forms.labels))
+    setTimeout(() => {
+      this.props.threadsActions.updateBoard({ board: this.props.board.data }).then((response) => {
+        this.props.modalConfirm()
+      })
     })
   },
   render() {
     const {
       boardModel, board,
-      modalCancel, modalConfirm
-    } = this.props;
+      modalCancel, modalConfirm,
+    } = this.props
 
     return (
-      <div style={{width: '500px'}}>
+      <div style={ { width: '500px' } }>
         <div className="modal-title">Edit Labels</div>
-        <div className="modal-body" style={{maxHeight: '400px', overflowY: 'auto'}}>
+        <div className="modal-body" style={ { maxHeight: '400px', overflowY: 'auto' } }>
           { has(board, 'forms.labels')
-          ? <ThreadLabelsEdit model={`${boardModel}.forms.labels`} value={board.forms.labels} />
-          : null}
+            ? <ThreadLabelsEdit model={ `${boardModel}.forms.labels` } value={ board.forms.labels } />
+            : null}
         </div>
         <div className="modal-footer-no-line layout-row layout-align-end">
-          <Button style={{marginRight: '10px'}} onClick={ modalCancel }>Cancel</Button>
-          <Button className="primary"
-            onClick={this.submit}
-            loading={board.savePending}
+          <Button style={ { marginRight: '10px' } } onClick={ modalCancel }>Cancel</Button>
+          <Button
+            className="primary"
+            onClick={ this.submit }
+            loading={ board.savePending }
           >Update Labels</Button>
         </div>
       </div>
     )
-  }
-});
+  },
+})
 
-/////////////////////////////////////////////////////////////////////////////
-///////////////////////////////// CONTAINER /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////////////////////////
+// /////////////////////////////// CONTAINER /////////////////////////////////
+// ///////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps(state, { boardId }) {
-  const boardModel = `threads.boards.${boardId}`;
+  const boardModel = `threads.boards.${boardId}`
   return {
     board: get(state, boardModel), // Get the value from the model
-    boardModel
-  };
+    boardModel,
+  }
 }
 
 function mapDispatchToProps(dispatch) {
@@ -81,4 +82,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps, mapDispatchToProps)(Component)

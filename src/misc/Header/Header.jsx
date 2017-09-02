@@ -1,49 +1,48 @@
 // Container Core
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
 // Container Actions
-import { toggleSidebar } from 'stemn-shared/misc/Sidebar/Sidebar.actions.js';
+import { toggleSidebar } from 'stemn-shared/misc/Sidebar/Sidebar.actions.js'
 
 // Component Core
-import React from 'react';
+import React from 'react'
 
 // Styles
-import classNames from 'classnames';
-import classes from './Header.css';
+import classNames from 'classnames'
+import classes from './Header.css'
 
 // Sub Components
-import MdMenu from 'react-icons/md/menu';
+import MdMenu from 'react-icons/md/menu'
 
-///////////////////////////////// COMPONENT /////////////////////////////////
+// /////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
   render() {
-    const { dispatch, children, sidebar } = this.props;
-    const styles = this.props.absolute ? {position: 'absolute'} : this.props.style;
+    const { dispatch, children, sidebar } = this.props
+    const styles = this.props.absolute ? { position: 'absolute' } : this.props.style
     return (
-      <div className={classes.toolbar + ' layout-row layout-align-start-center rel-box'} style={styles}>
-        <div className={classes.dragger}></div>
-        <div className={classes.inner + ' layout-row layout-align-start-center flex'}>
-          {!sidebar.show ? <a onClick={() => dispatch(toggleSidebar())} style={{marginRight: '15px'}}><MdMenu size="25"/></a> : ''}
+      <div className={ `${classes.toolbar} layout-row layout-align-start-center rel-box` } style={ styles }>
+        <div className={ classes.dragger } />
+        <div className={ `${classes.inner} layout-row layout-align-start-center flex` }>
+          {!sidebar.show ? <a onClick={ () => dispatch(toggleSidebar()) } style={ { marginRight: '15px' } }><MdMenu size="25" /></a> : ''}
           {children}
         </div>
       </div>
-    );
-  }
-});
+    )
+  },
+})
 
-///////////////////////////////// CONTAINER /////////////////////////////////
+// /////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps({ header, auth, sidebar }, {location}) {
+function mapStateToProps({ header, auth, sidebar }, { location }) {
   return {
     header,
     auth,
     sidebar,
-    location
-  };
+    location,
+  }
 }
 
 
-
-export default connect(mapStateToProps)(Component);
+export default connect(mapStateToProps)(Component)

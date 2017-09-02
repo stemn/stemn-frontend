@@ -6,7 +6,7 @@ import Link from './Link'
 
 const stateToProps = () => ({})
 
-const dispatchToProps = (dispatch) => ({
+const dispatchToProps = dispatch => ({
   showWindow: () => dispatch(showWindow),
   closeAll: () => dispatch(closeAll),
   dispatch,

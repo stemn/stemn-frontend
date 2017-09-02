@@ -4,7 +4,7 @@ import updateUser from 'stemn-shared/misc/Auth/actions/updateUser'
 const fields = {
   sm: ['name', 'picture', 'stub'],
   md: ['name', 'picture', 'stub', 'blurb'],
-  lg: ['*']
+  lg: ['*'],
 }
 
 export const getUser = ({ userId, size = 'lg', force }) => (dispatch, getState) => {
@@ -21,16 +21,16 @@ export const getUser = ({ userId, size = 'lg', force }) => (dispatch, getState) 
         url: '/api/v1/users',
         method: 'GET',
         staticParams: {
-          select: fields[size]
+          select: fields[size],
         },
         params: {
-          ids: userId
-        }
+          ids: userId,
+        },
       },
       meta: {
         userId,
-        size
-      }
+        size,
+      },
     })
   }
 }

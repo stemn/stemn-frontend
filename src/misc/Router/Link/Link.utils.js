@@ -2,7 +2,7 @@ import * as routeActions from 'route-actions'
 import { some } from 'lodash'
 
 export const isActive = (activeIf, params) => {
-  let result = false
+  const result = false
 
   const checkPathIs = () => {
     if (activeIf && activeIf.is) {
@@ -23,8 +23,7 @@ export const getRoutePath = (routeName, routeParams) => {
   if (routeName) {
     if (routeActions[routeName]) {
       return routeActions[routeName](routeParams)
-    } else {
-      console.error('Route note found:', routeName)
-    }
+    } 
+    console.error('Route note found:', routeName)
   }
 }

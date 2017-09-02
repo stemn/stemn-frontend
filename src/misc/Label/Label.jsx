@@ -1,20 +1,20 @@
 // Component Core
-import React from 'react';
-import { middle as middleConcat } from 'stemn-shared/utils/stringConcat';
-import { omit } from 'lodash';
+import React from 'react'
+import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
+import { omit } from 'lodash'
 
 // Styles
-import classes from './Label.css';
+import classes from './Label.css'
 
-///////////////////////////////// COMPONENT /////////////////////////////////
+// /////////////////////////////// COMPONENT /////////////////////////////////
 
 export default React.createClass({
   render() {
-    const { children } = this.props;
+    const { children } = this.props
     return (
-      <span className={classes.label} { ...omit(this.props, ['children']) } >
+      <span className={ classes.label } { ...omit(this.props, ['children']) } >
         {children}
       </span>
     )
-  }
-});
+  },
+})

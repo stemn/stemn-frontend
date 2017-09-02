@@ -1,6 +1,6 @@
-/**************************************************************************
+/** ************************************************************************
 We pass in either revisions or file1 + file2.
-**************************************************************************/
+************************************************************************* */
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js'
@@ -19,7 +19,7 @@ import MdOpenInNew from 'react-icons/md/open-in-new'
 
 export const Component = React.createClass({
   menu() {
-    const { file1, revisions, dispatch, isChange } = this.props;
+    const { file1, revisions, dispatch, isChange } = this.props
     const discardChanges = {
       label: 'Discard Changes',
       onClick: () => {
@@ -31,7 +31,7 @@ export const Component = React.createClass({
         dispatch(SystemActions.openFile({
           path: file1.path,
           projectId: file1.project._id,
-          provider: file1.provider
+          provider: file1.provider,
         }))
       },
     }
@@ -42,7 +42,7 @@ export const Component = React.createClass({
           location: true,
           path: file1.path,
           projectId: file1.project._id,
-          provider: file1.provider
+          provider: file1.provider,
         }))
       },
     }
@@ -52,10 +52,10 @@ export const Component = React.createClass({
         dispatch(ModalActions.showModal({
           modalType: downloadModalName,
           modalProps: {
-            revisions: revisions,
-            file: file1
+            revisions,
+            file: file1,
           },
-          scope: 'local'
+          scope: 'local',
         }))
       },
     }
@@ -64,56 +64,58 @@ export const Component = React.createClass({
       onClick: () => dispatch(SystemActions.openExternal({
         url: `${GLOBAL_ENV.WEBSITE_URL}/files/${file1.project._id}/${file1.fileId}`,
         params: {
-          revision: file1.revisionId
-        }
-      }))
+          revision: file1.revisionId,
+        },
+      })),
     }
     return isChange ? [discardChanges, openFile, openFolder] : [openFile, openFolder, downloadFile, viewOnline]
   },
-  preview(){
-    const { file1, dispatch } = this.props;
+  preview() {
+    const { file1, dispatch } = this.props
     dispatch(ElectronWindowsActions.create({
       type: 'PREVIEW',
       props: {
         fileId: file1.fileId,
         revisionId: file1.revisionId,
-        projectId: file1.project._id
-      }
+        projectId: file1.project._id,
+      },
     }))
   },
-  render(){
-    const { enablePreview, mode, changeMode, revisions, file1, file2, dispatch } = this.props;
+  render() {
+    const { enablePreview, mode, changeMode, revisions, file1, file2, dispatch } = this.props
 
-    if(!file1){return null};
+    if (!file1) { return null }
 
-    const previewType  = getViewerType(file1.name, file1.provider);
-    const compareModes = getCompareModes(previewType, previewType);
-    const CompareIcon  = getCompareIcon(mode);
+    const previewType  = getViewerType(file1.name, file1.provider)
+    const compareModes = getCompareModes(previewType, previewType)
+    const CompareIcon  = getCompareIcon(mode)
 
     return (
       <div>
         {
           revisions && revisions.length > 1 || file1 && file2 ?
-          <Popover preferPlace="below">
-            <SimpleIconButton title="Compare">
-              <CompareIcon size="20px" />
-            </SimpleIconButton>
-            <div className="PopoverMenu">
-              {compareModes.map(item=><a key={item.value}
-              className={classNames({'active': mode == item.value})}
-              onClick={()=>changeMode(item.value, revisions)}>
+            <Popover preferPlace="below">
+              <SimpleIconButton title="Compare">
+                <CompareIcon size="20px" />
+              </SimpleIconButton>
+              <div className="PopoverMenu">
+                {compareModes.map(item => <a
+                  key={ item.value }
+                  className={ classNames({ active: mode == item.value }) }
+                  onClick={ () => changeMode(item.value, revisions) }
+                >
                 Compare: {item.text}
-              </a>)}
-            </div>
-          </Popover>
-          : null
+                </a>)}
+              </div>
+            </Popover>
+            : null
         }
         {
           enablePreview ?
-          <SimpleIconButton title="Open popout preview" onClick={this.preview}>
-            <MdOpenInNew size="20px" />
-          </SimpleIconButton>
-          : null
+            <SimpleIconButton title="Open popout preview" onClick={ this.preview }>
+              <MdOpenInNew size="20px" />
+            </SimpleIconButton>
+            : null
         }
         <Popover preferPlace="below">
           <SimpleIconButton title="Options">
@@ -122,22 +124,22 @@ export const Component = React.createClass({
           <PopoverMenuList menu={ this.menu() } />
         </Popover>
       </div>
-    );
-  }
-});
+    )
+  },
+})
 
-///////////////////////////////// CONTAINER /////////////////////////////////
+// /////////////////////////////// CONTAINER /////////////////////////////////
 
 function mapStateToProps() {
-  return {};
+  return {}
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     electronWindowsActions: bindActionCreators(ElectronWindowsActions, dispatch),
-    dispatch
+    dispatch,
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps, mapDispatchToProps)(Component)
 

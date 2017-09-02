@@ -11,14 +11,14 @@ import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleI
 import TextDisplayBox from 'stemn-shared/misc/TextDisplayBox/TextDisplayBox.jsx'
 
 const Component = React.createClass({
-  showModal(){
+  showModal() {
     remote.dialog.showOpenDialog(null, {
       title: this.props.title,
       defaultPath: this.props.value,
       buttonLabel: 'Select Folder',
-      properties: ['openDirectory']
+      properties: ['openDirectory'],
     }, (files) => {
-      if(files && files[0]){
+      if (files && files[0]) {
         this.props.dispatch(storeChange(this.props.model, files[0]))
       }
     })
@@ -31,14 +31,14 @@ const Component = React.createClass({
         onClick={ this.showModal }
       >
         { children }
-        <div className={ classNames(classes.text, {[classes.placeholder] : !value}, 'flex') }>{value || placeholder}</div>
+        <div className={ classNames(classes.text, { [classes.placeholder]: !value }, 'flex') }>{value || placeholder}</div>
         <SimpleIconButton>
           <MdFolder size="22" />
         </SimpleIconButton>
       </TextDisplayBox>
-    );
-  }
-});
+    )
+  },
+})
 
 function mapStateToProps() {
   return {}

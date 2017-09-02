@@ -1,10 +1,9 @@
-import updater from 'electron-simple-updater';
+import updater from 'electron-simple-updater'
 
 export const checkForUpdates = () => {
-  updater.checkForUpdates();
+  updater.checkForUpdates()
   return ''
 }
 export const installUpdates = () => {
-  updater.quitAndInstall();
-  return
+  updater.quitAndInstall()
 }

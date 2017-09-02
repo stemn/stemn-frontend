@@ -1,33 +1,33 @@
-import React from 'react';
-import { DragLayer } from 'react-dnd';
+import React from 'react'
+import { DragLayer } from 'react-dnd'
 
-import ThreadGroup from './ThreadGroup.jsx';
-import ThreadListItem from '../ThreadListItem/ThreadListItem.jsx';
+import ThreadGroup from './ThreadGroup.jsx'
+import ThreadListItem from '../ThreadListItem/ThreadListItem.jsx'
 
-var layerStyles = {
+const layerStyles = {
   position: 'fixed',
   pointerEvents: 'none',
   zIndex: 100,
   left: 0,
   top: 0,
   width: '100%',
-  height: '100%'
-};
+  height: '100%',
+}
 
 function getItemStyles(props) {
-  var currentOffset = props.currentOffset;
+  const currentOffset = props.currentOffset
   if (!currentOffset) {
     return {
-      display: 'none'
-    };
+      display: 'none',
+    }
   }
-  var x = currentOffset.x;
-  var y = currentOffset.y;
-  var transform = 'translate(' + x + 'px, ' + y + 'px)';
+  const x = currentOffset.x
+  const y = currentOffset.y
+  const transform = `translate(${x}px, ${y}px)`
   return {
-    transform: transform,
-    WebkitTransform: transform
-  };
+    transform,
+    WebkitTransform: transform,
+  }
 }
 
 function collect(monitor) {
@@ -35,26 +35,26 @@ function collect(monitor) {
     item: monitor.getItem(),
     itemType: monitor.getItemType(),
     currentOffset: monitor.getSourceClientOffset(),
-    isDragging: monitor.isDragging()
-  };
+    isDragging: monitor.isDragging(),
+  }
 }
 
-var CustomDragLayer = React.createClass({
+const CustomDragLayer = React.createClass({
   propTypes: {
     item: React.PropTypes.object,
     itemType: React.PropTypes.string,
     currentOffset: React.PropTypes.shape({
       x: React.PropTypes.number.isRequired,
-      y: React.PropTypes.number.isRequired
+      y: React.PropTypes.number.isRequired,
     }),
-    isDragging: React.PropTypes.bool.isRequired
+    isDragging: React.PropTypes.bool.isRequired,
   },
 
-  renderItem: function (type, item) {
+  renderItem(type, item) {
     switch (type) {
       case 'card':
         return (
-          <ThreadListItem draggable={false} item={{_id: item.id}}/>
+          <ThreadListItem draggable={ false } item={ { _id: item.id } } />
         )
       case 'group':
         return (
@@ -63,21 +63,21 @@ var CustomDragLayer = React.createClass({
     }
   },
 
-  render: function () {
-    var item = this.props.item;
-    var itemType = this.props.itemType;
-    var isDragging = this.props.isDragging;
+  render() {
+    const item = this.props.item
+    const itemType = this.props.itemType
+    const isDragging = this.props.isDragging
     if (!isDragging) {
-      return null;
+      return null
     }
     return (
-      <div style={layerStyles}>
-        <div style={getItemStyles(this.props)}>
+      <div style={ layerStyles }>
+        <div style={ getItemStyles(this.props) }>
           {this.renderItem(itemType, item)}
         </div>
       </div>
-    );
-  }
-});
+    )
+  },
+})
 
-module.exports = DragLayer(collect)(CustomDragLayer);
+module.exports = DragLayer(collect)(CustomDragLayer)

@@ -21,11 +21,11 @@ const propTypesObject = {
   provider: PropTypes.string.isRequired,    // 'dropbox' || 'drive' - The provider
   model: PropTypes.string.isRequired,       // The model to assign the selected file
   value: PropTypes.object.isRequired,       // The value of the selected file: { path, fileId }
-  disabled: PropTypes.bool                  // Should we disable the input
-};
+  disabled: PropTypes.bool,                  // Should we disable the input
+}
 
 const FileSelectInput = React.createClass({
-  showModal(){
+  showModal() {
     this.props.ModalActions.showModal({
       modalType: fileSelectModalName,
       modalProps: {
@@ -36,9 +36,9 @@ const FileSelectInput = React.createClass({
         // We use the model + provider as the storekey.
         // This means items from the last provider don't show in the modal.
         options: {
-          allowFolder : true,
-          foldersOnly : true,
-          explore     : this.props.provider
+          allowFolder: true,
+          foldersOnly: true,
+          explore: this.props.provider,
         },
       },
     })
@@ -51,59 +51,56 @@ const FileSelectInput = React.createClass({
     })
   },
   render() {
-    const { provider, model, value, disabled } = this.props;
+    const { provider, model, value, disabled } = this.props
 
     const validatePath = (path, fileId, provider) => {
-      if(provider == 'drive'){
-        return isDriveFileId(fileId) ? path : '';
+      if (provider == 'drive') {
+        return isDriveFileId(fileId) ? path : ''
+      } else if (provider == 'dropbox') {
+        return isDropboxFileId(fileId) ? path : ''
       }
-      else if(provider == 'dropbox'){
-        return isDropboxFileId(fileId) ? path : '';
-      }
-      else{
-        return ''
-      }
+      
+      return ''
     }
 
-    const path = validatePath(value.path, value.fileId, provider);
+    const path = validatePath(value.path, value.fileId, provider)
 
     const getInnerText = () => {
       if (path) {
         return <span><span style={ { textTransform: 'capitalize' } }>{ provider }/</span>{ path }</span>
       } else if (value.path === undefined && value.fileId === undefined && provider) {
         return `A new folder will be created in your ${provider}`
-      } else {
-        return 'Select the project folder'
-      }
+      } 
+      return 'Select the project folder'
     }
 
     return (
-        <TextDisplayBox
-          disabled={ disabled }
-        >
-          <div className="layout-row flex layout-align-start-center" onClick={()=>{if(!disabled){this.showModal()}}}>
-            <div className="flex">
-              { getInnerText() }
-            </div>
-            <SimpleIconButton title="Select folder">
-              <MdFolder size="22" />
-            </SimpleIconButton>
+      <TextDisplayBox
+        disabled={ disabled }
+      >
+        <div className="layout-row flex layout-align-start-center" onClick={ () => { if (!disabled) { this.showModal() } } }>
+          <div className="flex">
+            { getInnerText() }
           </div>
-          <SimpleIconButton
-            className={ classes.newFolderIcon }
-            onClick={ this.clearValue }
-            title="New Folder"
-          >
-            <MdNewFolder size="22" />
+          <SimpleIconButton title="Select folder">
+            <MdFolder size="22" />
           </SimpleIconButton>
-        </TextDisplayBox>
-    );
-  }
-});
+        </div>
+        <SimpleIconButton
+          className={ classes.newFolderIcon }
+          onClick={ this.clearValue }
+          title="New Folder"
+        >
+          <MdNewFolder size="22" />
+        </SimpleIconButton>
+      </TextDisplayBox>
+    )
+  },
+})
 
 
 function mapStateToProps() {
-  return {};
+  return {}
 }
 
 function mapDispatchToProps(dispatch) {
@@ -113,6 +110,6 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-FileSelectInput.propTypes = propTypesObject;
+FileSelectInput.propTypes = propTypesObject
 
-export default connect(mapStateToProps, mapDispatchToProps)(FileSelectInput);
+export default connect(mapStateToProps, mapDispatchToProps)(FileSelectInput)

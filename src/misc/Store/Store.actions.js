@@ -3,7 +3,7 @@ export const storeChange = (model, value) => ({
   payload: {
     model,
     value,
-  }
+  },
 })
 
 export const storeLoad = (model, value) => ({
@@ -11,7 +11,7 @@ export const storeLoad = (model, value) => ({
   payload: {
     model,
     value,
-  }
+  },
 })
 
 export const storePush = (model, item) => ({
@@ -19,14 +19,14 @@ export const storePush = (model, item) => ({
   payload: {
     model,
     item,
-  }
+  },
 })
 
-export const storeToggle = (model) => ({
+export const storeToggle = model => ({
   type: 'STORE/TOGGLE',
   payload: {
     model,
-  }
+  },
 })
 
 export const storeRemove = (model, index) => ({
@@ -34,5 +34,5 @@ export const storeRemove = (model, index) => ({
   payload: {
     model,
     index,
-  }
+  },
 })

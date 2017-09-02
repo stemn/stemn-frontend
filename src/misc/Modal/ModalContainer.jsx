@@ -3,14 +3,14 @@ import React, { PropTypes } from 'react'
 import Modal from './Modal.jsx'
 
 const propTypesObject = {
-  types : PropTypes.array,     // Array of modalTypes that can be displayed such as : ['FILE_DOWNLOAD'] (If not supplied, all modals will be dislayed)
+  types: PropTypes.array,     // Array of modalTypes that can be displayed such as : ['FILE_DOWNLOAD'] (If not supplied, all modals will be dislayed)
   modals: PropTypes.object,    // Modals object
 }
 
 export const ModalContainer = React.createClass({
   propTypes: propTypesObject,
   render() {
-    const { modals, types, dispatch, ...otherProps } = this.props;
+    const { modals, types, dispatch, ...otherProps } = this.props
     const stack = modals.stack
       ? modals.stack
       : []
@@ -19,25 +19,23 @@ export const ModalContainer = React.createClass({
       : stack
     const modalIsOpen = filteredStack.length > 0
 
-    const getModals = () => {
-      return modalIsOpen
+    const getModals = () => (modalIsOpen
       ? <div>
-          { filteredStack.map(modal => modal
-            ? <Modal key={modal.modalId} modal={modal}></Modal>
-            : '') }
-        </div>
-      : null
-    }
+        { filteredStack.map(modal => (modal
+          ? <Modal key={ modal.modalId } modal={ modal } />
+          : '')) }
+      </div>
+      : null)
 
     return (
       <div { ...otherProps }>
-        { getModals () }
+        { getModals() }
       </div>
     )
-  }
+  },
 })
 
-function mapStateToProps({modals}) {
+function mapStateToProps({ modals }) {
   return {
     modals,
   }

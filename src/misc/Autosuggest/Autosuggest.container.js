@@ -19,12 +19,10 @@ function mapStateToProps({ autosuggest }, { cacheKey, initialValue }) {
   }
 }
 
-const dispatchToProps = (dispatch, { cacheKey }) => {
-  return bindActionCreators({
-    clearSuggestions: clearSuggestions(cacheKey),
-    updateInputValue: updateInputValue(cacheKey),
-    loadSuggestions: loadSuggestions(cacheKey),
-  }, dispatch)
-}
+const dispatchToProps = (dispatch, { cacheKey }) => bindActionCreators({
+  clearSuggestions: clearSuggestions(cacheKey),
+  updateInputValue: updateInputValue(cacheKey),
+  loadSuggestions: loadSuggestions(cacheKey),
+}, dispatch)
 
-export default connect(mapStateToProps, dispatchToProps)(Component);
+export default connect(mapStateToProps, dispatchToProps)(Component)

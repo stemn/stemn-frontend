@@ -1,20 +1,20 @@
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
-import { show as showToast } from '../Toasts/Toasts.actions.js';
-import { showModal }         from '../Modal/Modal.actions.js';
-import { parseMentions }     from '../Mentions/Mentions.utils.js';
-import { updateThread }        from '../Threads/Threads.actions.js';
-import i                     from 'icepick';
-import http                  from 'axios';
-import { get }               from 'lodash';
+import { show as showToast } from '../Toasts/Toasts.actions.js'
+import { showModal }         from '../Modal/Modal.actions.js'
+import { parseMentions }     from '../Mentions/Mentions.utils.js'
+import { updateThread }        from '../Threads/Threads.actions.js'
+import i                     from 'icepick'
+import http                  from 'axios'
+import { get }               from 'lodash'
 import ThreadMentionModalName from 'stemn-shared/misc/Mentions/ThreadMentionModal'
 import { filterSelectedChangesByPossible } from './Changes.utils.js'
 
-export function deselect({projectId}) {
+export function deselect({ projectId }) {
   return {
     type: 'CHANGES/DESELECT_FILE_CHANGE',
     payload: {
       projectId,
-    }
+    },
   }
 }
 export function selectedFileChange({ projectId, selected }) {
@@ -22,25 +22,25 @@ export function selectedFileChange({ projectId, selected }) {
     type: 'CHANGES/SELECTED_FILE_CHANGE',
     payload: {
       projectId,
-      selected
-    }
+      selected,
+    },
   }
 }
 
-export function toggleAll({projectId, value}) {
+export function toggleAll({ projectId, value }) {
   return (dispatch, getState) => {
     dispatch({
       type: 'CHANGES/TOGGLE_ALL_CHANGED_FILES',
-      payload: {projectId, value}
+      payload: { projectId, value },
     })
-  };
+  }
 }
 
 
-export function fetchChanges({projectId}) {
+export function fetchChanges({ projectId }) {
   return (dispatch) => {
     dispatch({
-      type:'CHANGES/FETCH_CHANGES',
+      type: 'CHANGES/FETCH_CHANGES',
       http: true,
       payload: {
         method: 'GET',
@@ -50,13 +50,13 @@ export function fetchChanges({projectId}) {
         },
       },
       meta: {
-        projectId
-      }
+        projectId,
+      },
     })
   }
 }
 
-//export function pullChanges({projectId}) {
+// export function pullChanges({projectId}) {
 //  return {
 //    type:'CHANGES/PULL_REMOTE_CHANGES',
 //    http: true,
@@ -65,14 +65,14 @@ export function fetchChanges({projectId}) {
 //      url: `/api/v1/sync/pullRemoteChanges/${projectId}`,
 //    }
 //  }
-//}
+// }
 
-export function mentionThreadsModal({projectId, mentions}) {
+export function mentionThreadsModal({ projectId, mentions }) {
   return (dispatch) => {
     dispatch(showModal({
       modalType: ThreadMentionModalName,
       modalProps: {
-        projectId: projectId,
+        projectId,
         cacheKey: projectId,
       },
     })).then(({ value: { mentions } }) => {
@@ -84,23 +84,23 @@ export function mentionThreadsModal({projectId, mentions}) {
   }
 }
 
-export function mentionThreads({projectId, mentions}) {
+export function mentionThreads({ projectId, mentions }) {
   return {
-    type:'CHANGES/MENTION_THREADS',
+    type: 'CHANGES/MENTION_THREADS',
     payload: {
       projectId,
-      mentions
-    }
+      mentions,
+    },
   }
 }
 
-export function commit({projectId, name, body}) {
+export function commit({ projectId, name, body }) {
   return (dispatch, getState) => {
     const changes = getState().changes[projectId]
     const possibledSelected = filterSelectedChangesByPossible(changes.data, changes.checked)
 
     // Get the revisions from the selected files
-    const revisions = changes.data.filter((item) => possibledSelected[item.data.fileId]).map((item) => item._id);
+    const revisions = changes.data.filter(item => possibledSelected[item.data.fileId]).map(item => item._id)
 
     dispatch({
       type: 'CHANGES/COMMIT',
@@ -111,8 +111,8 @@ export function commit({projectId, name, body}) {
           revisions,
           name,
           body,
-        }
-      }).then((response)=>{
+        },
+      }).then((response) => {
         dispatch(showToast({
           title: `${response.data.files.length} files commited`,
           actions: [{
@@ -123,39 +123,39 @@ export function commit({projectId, name, body}) {
                 functionAlias: 'ChangesActions.deleteCommit',
                 functionInputs: {
                   commitId: response.data._id,
-                  projectId
-                }
-              }
-            }
-          }]
+                  projectId,
+                },
+              },
+            },
+          }],
         }))
         // Get the mentions
-        const mentions = parseMentions(response.data.body);
+        const mentions = parseMentions(response.data.body)
         // If mentionType: thread-complete, we set the thread to complete.
-        mentions.forEach(mention => {
-          if(mention.mentionType == 'thread-complete'){
-            dispatch(storeChange(`threads.data.${mention.entityId}.data.complete`, true));
+        mentions.forEach((mention) => {
+          if (mention.mentionType == 'thread-complete') {
+            dispatch(storeChange(`threads.data.${mention.entityId}.data.complete`, true))
           }
-        });
+        })
         return response
       }),
       meta: {
-        cacheKey: projectId
-      }
+        cacheKey: projectId,
+      },
     })
   }
 }
 
-export function deleteCommit({commitId, projectId}) {
+export function deleteCommit({ commitId, projectId }) {
   return (dispatch) => {
     dispatch({
       type: 'CHANGES/DELETE_COMMIT',
       payload: http({
         method: 'DELETE',
         url: `/api/v1/commits/${commitId}`,
-      }).then(response => {
-        dispatch(fetchChanges({projectId}))
-      })
+      }).then((response) => {
+        dispatch(fetchChanges({ projectId }))
+      }),
     })
   }
 }

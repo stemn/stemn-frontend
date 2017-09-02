@@ -7,7 +7,7 @@ import { createField } from 'stemn-shared/misc/Fields/Fields.actions'
 const stateToProps = ({ fields }) => ({
   newFieldForm: fields.newFieldForm,
   newFieldFormModel: 'fields.newFieldForm',
-  newFieldFormPending: fields.newFieldFormPending
+  newFieldFormPending: fields.newFieldFormPending,
 })
 
 const dispatchToProps = {

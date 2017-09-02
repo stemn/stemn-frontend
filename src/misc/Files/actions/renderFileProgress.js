@@ -1,12 +1,12 @@
-export default ({renderId, message}) => {
-  const cacheKey = renderId;
+export default ({ renderId, message }) => {
+  const cacheKey = renderId
   return {
     type: 'FILES/RENDER_FILE_PROGRESS',
     payload: {
-      message
+      message,
     },
     meta: {
-      cacheKey
-    }
+      cacheKey,
+    },
   }
 }

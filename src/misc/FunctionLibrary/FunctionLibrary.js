@@ -1,4 +1,4 @@
-import * as ProjectsActions       from 'stemn-shared/misc/Projects/Projects.actions.js';
+import * as ProjectsActions       from 'stemn-shared/misc/Projects/Projects.actions.js'
 import * as ThreadsActions          from 'stemn-shared/misc/Threads/Threads.actions.js'
 import * as ChangesActions        from 'stemn-shared/misc/Changes/Changes.actions.js'
 import * as CommentsActions       from 'stemn-shared/misc/Comments/Comments.actions.js'
@@ -34,24 +34,22 @@ export const addModule = (moduleName, functions) => {
 }
 
 export const getFunction = (path) => {
-  const [moduleName, functionName] = path.split('.');
+  const [moduleName, functionName] = path.split('.')
 
   // We are getting the module only
-  if(!functionName){
-    if(library[moduleName]){
+  if (!functionName) {
+    if (library[moduleName]) {
       return library[moduleName]
     }
-    else{
-      console.error(`Module: ${moduleName} could not be found.`);
-    }
+    
+    console.error(`Module: ${moduleName} could not be found.`)
   }
   // We are getting a function
-  else{
-    if(library[moduleName] && library[moduleName][functionName]){
+  else {
+    if (library[moduleName] && library[moduleName][functionName]) {
       return library[moduleName][functionName]
     }
-    else{
-      console.error(`Function: ${moduleName}.${functionName} could not be found.`);
-    }
+    
+    console.error(`Function: ${moduleName}.${functionName} could not be found.`)
   }
 }

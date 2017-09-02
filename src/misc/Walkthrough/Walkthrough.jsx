@@ -1,96 +1,97 @@
 // Container Core
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
 // Container Actions
-import * as WalkthroughActions from './Walkthrough.actions.js';
+import * as WalkthroughActions from './Walkthrough.actions.js'
 
 // Component Core
-import React, { PropTypes } from 'react';
-import { omit } from 'lodash';
-import { getStepData } from './Walkthrough.config.js';
+import React, { PropTypes } from 'react'
+import { omit } from 'lodash'
+import { getStepData } from './Walkthrough.config.js'
 
 // Styles
-import classNames from 'classnames';
-import classes from './Walkthrough.css';
+import classNames from 'classnames'
+import classes from './Walkthrough.css'
 
-import Popover from 'stemn-shared/misc/Popover';
+import Popover from 'stemn-shared/misc/Popover'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
-import MdClose from 'react-icons/md/close';
+import MdClose from 'react-icons/md/close'
 
 const WalkthroughPropTypes = {
-  children  : PropTypes.node,      // Child element
-  name      : PropTypes.string,    //
+  children: PropTypes.node,      // Child element
+  name: PropTypes.string,    //
 }
-///////////////////////////////// COMPONENT /////////////////////////////////
+// /////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Walkthrough = React.createClass({
   propTypes: WalkthroughPropTypes,
   render() {
-    const { children, name } = this.props;
-    const { walkthroughActions, walkthrough } = this.props;
-    const isActive = walkthrough.active.includes(name);
-    const data     = getStepData(name);
+    const { children, name } = this.props
+    const { walkthroughActions, walkthrough } = this.props
+    const isActive = walkthrough.active.includes(name)
+    const data     = getStepData(name)
 
     const getNext = (stepName, steps) => {
-      const currentIndex = steps.indexOf(stepName);
-      return currentIndex != -1 && currentIndex + 1 < steps.length ? steps[currentIndex + 1] : undefined;
+      const currentIndex = steps.indexOf(stepName)
+      return currentIndex != -1 && currentIndex + 1 < steps.length ? steps[currentIndex + 1] : undefined
     }
     const getPrev = (stepName, steps) => {
-      const currentIndex = steps.indexOf(stepName);
-      return currentIndex != -1 && currentIndex -1 >= 0 ? steps[currentIndex - 1] : undefined;
+      const currentIndex = steps.indexOf(stepName)
+      return currentIndex != -1 && currentIndex - 1 >= 0 ? steps[currentIndex - 1] : undefined
     }
 
-    const nextStep = getNext(name, data.steps);
-    const prevStep = getPrev(name, data.steps);
+    const nextStep = getNext(name, data.steps)
+    const prevStep = getPrev(name, data.steps)
 
     const next = () => {
-      walkthroughActions.deactivate({name})
+      walkthroughActions.deactivate({ name })
       walkthroughActions.activate({
-        name: nextStep
+        name: nextStep,
       })
     }
 
     const prev = () => {
-      walkthroughActions.deactivate({name})
+      walkthroughActions.deactivate({ name })
       walkthroughActions.activate({
-        name: prevStep
+        name: prevStep,
       })
     }
     const close = () => {
-      walkthroughActions.deactivate({name})
+      walkthroughActions.deactivate({ name })
     }
 
     return (
-      <Popover { ...omit(this.props, Object.keys(WalkthroughPropTypes))}
-        open={isActive}
+      <Popover
+        { ...omit(this.props, Object.keys(WalkthroughPropTypes)) }
+        open={ isActive }
         trigger="none"
-        tipSize={6}
-        >
-        {children || <div></div>}
-        <div className={classes.walkthrough}>
-          <SimpleIconButton style={{position : 'absolute', top: '2px', right: '4px'}} onClick={close}>
-            <MdClose size="10"/>
+        tipSize={ 6 }
+      >
+        {children || <div />}
+        <div className={ classes.walkthrough }>
+          <SimpleIconButton style={ { position: 'absolute', top: '2px', right: '4px' } } onClick={ close }>
+            <MdClose size="10" />
           </SimpleIconButton>
           {data.step.content}
-          <div style={{marginTop: '12px'}}>
+          <div style={ { marginTop: '12px' } }>
             { nextStep
-            ? <a className="link-primary" onClick={next}>Next</a>
-            : <a className="link-primary" onClick={close}>Finish</a> }
+              ? <a className="link-primary" onClick={ next }>Next</a>
+              : <a className="link-primary" onClick={ close }>Finish</a> }
             { prevStep
-            ? <a className="link-grey" style={{marginLeft: '10px'}} onClick={prev}>Previous</a>
-            : null }
+              ? <a className="link-grey" style={ { marginLeft: '10px' } } onClick={ prev }>Previous</a>
+              : null }
           </div>
         </div>
       </Popover>
     )
-  }
-});
+  },
+})
 
-///////////////////////////////// CONTAINER /////////////////////////////////
+// /////////////////////////////// CONTAINER /////////////////////////////////
 
-function mapStateToProps({walkthrough}) {
-  return { walkthrough };
+function mapStateToProps({ walkthrough }) {
+  return { walkthrough }
 }
 
 function mapDispatchToProps(dispatch) {
@@ -99,4 +100,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Walkthrough);
+export default connect(mapStateToProps, mapDispatchToProps)(Walkthrough)

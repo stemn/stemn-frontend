@@ -10,9 +10,9 @@ export default (state = {}, action = {}) => {
     case 'STORE/LOAD':
       return i.assocIn(state, toPath(action.payload.model), action.payload.value)
     case 'STORE/PUSH':
-      return i.updateIn(state, toPath(action.payload.model), (item) => i.push(item || [], action.payload.item))
+      return i.updateIn(state, toPath(action.payload.model), item => i.push(item || [], action.payload.item))
     case 'STORE/REMOVE':
-      return i.updateIn(state, toPath(action.payload.model), (item) => i.splice(item, action.payload.index, 1))
+      return i.updateIn(state, toPath(action.payload.model), item => i.splice(item, action.payload.index, 1))
     default:
       return state
   }

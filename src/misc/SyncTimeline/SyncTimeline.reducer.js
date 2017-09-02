@@ -1,13 +1,13 @@
 import i from 'icepick'
 
 const initialState = {
-  /************************************************
+  /** **********************************************
   [ cacheKey ] : {
     loading: false,
     selected: {},
     data: [ array of data ]
   }
-  ************************************************/
+  *********************************************** */
 }
 
 export default (state = initialState, action) => {
@@ -28,9 +28,7 @@ export default (state = initialState, action) => {
         .value()
 
     case 'TIMELINE/ADD_EVENT':
-      return i.updateIn(state, [action.payload.cacheKey, 'data'], (events) => {
-        return i.push(events || [], action.payload.event)
-      })
+      return i.updateIn(state, [action.payload.cacheKey, 'data'], events => i.push(events || [], action.payload.event))
     case 'TIMELINE/DELETE_EVENT':
       return i.updateIn(state, [action.payload.cacheKey, 'data'], (events) => {
         const eventIndex = events.findIndex(event => event._id === action.payload.eventId)

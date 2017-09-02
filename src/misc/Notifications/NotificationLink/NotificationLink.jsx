@@ -13,14 +13,13 @@ const getRouteNameFromEntity = (entity) => {
   const routeName = entityToRouteMap[entity]
   if (routeName) {
     return routeName
-  } else {
-    console.error('Route name not found for entity: ', entity)
-    return undefined
-  }
+  } 
+  console.error('Route name not found for entity: ', entity)
+  return undefined
 }
 
 export default class NotificationLink extends Component {
-  render () {
+  render() {
     const { entity, children } = this.props
     if (entity) {
       return (
@@ -28,8 +27,7 @@ export default class NotificationLink extends Component {
           { children }
         </Link>
       )
-    } else {
-      return null
-    }
+    } 
+    return null
   }
 }

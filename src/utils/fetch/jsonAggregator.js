@@ -1,5 +1,5 @@
 export default function jsonAggregator(responses) {
-  const aggregated = [].concat(...responses);
+  const aggregated = [].concat(...responses)
 
-  return aggregated;
+  return aggregated
 }

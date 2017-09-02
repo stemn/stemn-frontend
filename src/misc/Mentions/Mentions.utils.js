@@ -2,7 +2,6 @@ import isUuid from 'stemn-shared/utils/isUuid.js'
 import getUuid from 'stemn-shared/utils/getUuid.js'
 
 
-
 /*
 text = text.match(/
     (                           // wrap whole match in $1
@@ -49,37 +48,33 @@ export const validateMention = (href) => {
   // mention should be of the form 'entityId:entityType:mentionId'
   // Example: '47db55af7f3423801742e228:user:cb4e8fac7fe980b5da295624'
   // Boths ids should be 24 characters.
-  const hrefSplit = href.split(':');
-  if(hrefSplit.length == 3){
-    const [entityId, mentionType, mentionId] = hrefSplit;
-    if(isUuid(entityId) && isUuid(mentionId)){
+  const hrefSplit = href.split(':')
+  if (hrefSplit.length == 3) {
+    const [entityId, mentionType, mentionId] = hrefSplit
+    if (isUuid(entityId) && isUuid(mentionId)) {
       return true
     }
-    else{
-      return false
-    }
-  }
-  else{
+    
     return false
   }
+  
+  return false
 }
 
-export const getMentionString = (mention) => {
-  return `[${mention.display}](${mention.entityId}:${mention.mentionType}:${mention.mentionId})`
-}
+export const getMentionString = mention => `[${mention.display}](${mention.entityId}:${mention.mentionType}:${mention.mentionId})`
 
 export const parseMentions = (text) => {
   // Get all the markdown links from the raw text
-  const mentionsRaw = text ? text.match(markdownLinkRegex) : [];
+  const mentionsRaw = text ? text.match(markdownLinkRegex) : []
 
   // Validate the mentions
-  const mentions = [];
-  if(mentionsRaw && mentionsRaw.length > 0){
-    mentionsRaw.forEach(mention => {
+  const mentions = []
+  if (mentionsRaw && mentionsRaw.length > 0) {
+    mentionsRaw.forEach((mention) => {
       const infoString = mention.split('(')[1].split(')')[0] // Get the info (from between the standard brackets)
       if (validateMention(infoString)) {
         const display = mention.split('[')[1].split(']')[0]    // Get the name (from between the square brackets)
-        const [ entityId, mentionType, mentionId ] = infoString.split(':')
+        const [entityId, mentionType, mentionId] = infoString.split(':')
         const index = text.indexOf(mention)
         mentions.push({
           raw: mention,
@@ -95,7 +90,7 @@ export const parseMentions = (text) => {
       }
     })
   }
-  return mentions;
+  return mentions
 }
 
 
@@ -103,14 +98,14 @@ export const removeExistingMentions = (newMentions, existingMentions) => {
   // Create an array of existing mention entity Ids
   const existingMentionEntityIds = existingMentions.map(mention => mention.entityId)
   // Make sure new mentions do not already exist
-  return newMentions && newMentions.length > 0 ? newMentions.filter((mention) => existingMentionEntityIds.indexOf(mention.entityId) == -1) : newMentions;
+  return newMentions && newMentions.length > 0 ? newMentions.filter(mention => existingMentionEntityIds.indexOf(mention.entityId) == -1) : newMentions
 }
 
 export const addMentionsToText = (text, mentions) => {
   // The will add all the mentions to the end of the text block
-  let textNew = text || '';
-  if(mentions && mentions.length > 0){
-    mentions.forEach(mention => {
+  let textNew = text || ''
+  if (mentions && mentions.length > 0) {
+    mentions.forEach((mention) => {
       textNew = textNew.concat(`${textNew.length > 0 ? ' ' : ''}${getMentionString(mention)}`)
     })
   }
@@ -140,27 +135,26 @@ export const getMentionInfo = (mentionType, entityId, display) => {
       route: 'userRoute',
       params: {
         userId: entityId,
-      }
+      },
     },
     thread: {
       display: `#${display}`,
       route: 'threadRoute',
       params: {
         threadId: entityId,
-      }
+      },
     },
     'thread-complete': {
       display: `#${display} (complete)`,
       route: 'threadRoute',
       params: {
         threadId: entityId,
-      }
+      },
     },
   }
-  const mentionInfo = mentionTypes[mentionType];
+  const mentionInfo = mentionTypes[mentionType]
   if (mentionInfo) {
     return mentionInfo
-  } else {
-    console.error('Invalid mention type', mentionType);
-  }
+  } 
+  console.error('Invalid mention type', mentionType)
 }

@@ -1,87 +1,85 @@
-import winreg from 'winreg';
+import winreg from 'winreg'
 import { values, every } from 'lodash'
 
-const setRegistryKey = ({hive, key, name, value, type}) => {
-  return new Promise((resolve, reject) => {
-    const regKey = new winreg({ hive, key });
-    regKey.set(name, type, value, err =>
-      err == null
+const setRegistryKey = ({ hive, key, name, value, type }) => new Promise((resolve, reject) => {
+  const regKey = new winreg({ hive, key })
+  regKey.set(name, type, value, err =>
+    (err == null
       ? resolve()
-      : reject(err)
-    );
-  });
-}
+      : reject(err)),
+  )
+})
 
-const removeRegistryKey = ({hive, key, name}) => {
-  return new Promise((resolve, reject) => {
-    const regKey = new winreg({ hive, key });
-    regKey.remove(name, err =>
-      err == null
+const removeRegistryKey = ({ hive, key, name }) => new Promise((resolve, reject) => {
+  const regKey = new winreg({ hive, key })
+  regKey.remove(name, err =>
+    (err == null
       ? resolve()
-      : reject(err)
-    );
-  });
-}
+      : reject(err)),
+  )
+})
 
-const getRegistryKey = ({hive, key, name, value}) => {
-  return new Promise((resolve, reject) => {
-    const regKey = new winreg({ hive, key });
-    regKey.get(name, (err, item) =>
-      err == null
+const getRegistryKey = ({ hive, key, name, value }) => new Promise((resolve, reject) => {
+  const regKey = new winreg({ hive, key })
+  regKey.get(name, (err, item) =>
+    (err == null
       ? resolve(item.value == value)
-      : reject(err)
-    );
-  });
-}
+      : reject(err)),
+  )
+})
 
-const getKeys = ({folders, title, appName, appPath}) => {
-  const folderToEnableString = folders.reduce((fullString, path, index) => `${index == 0 ? '' : `${fullString} OR `}(${path})`, '');
-  const hive = 'HKCU';
+const getKeys = ({ folders, title, appName, appPath }) => {
+  const folderToEnableString = folders.reduce((fullString, path, index) => `${index == 0 ? '' : `${fullString} OR `}(${path})`, '')
+  const hive = 'HKCU'
   const type = 'REG_SZ'
   const regKeysObect = {
-    folders : {
+    folders: {
       key: `\\Software\\Classes\\*\\shell\\${appName}`,
       name: 'AppliesTo',
       value: folderToEnableString,
-      hive, type
+      hive,
+      type,
     },
     icon: {
       key: `\\Software\\Classes\\*\\shell\\${appName}`,
       name: 'Icon',
       value: `${appPath},0`,
-      hive, type
+      hive,
+      type,
     },
     title: {
       key: `\\Software\\Classes\\*\\shell\\${appName}`,
       name: '',
       value: title,
-      hive, type
+      hive,
+      type,
     },
     command: {
       key: `\\Software\\Classes\\*\\shell\\${appName}\\command`,
       name: '',
       value: `${appPath} --path "%1"`,
-      hive, type
-    }
+      hive,
+      type,
+    },
   }
-  return values(regKeysObect);
+  return values(regKeysObect)
 }
 
 export const init = (config) => {
-  /*******************************************************
+  /** *****************************************************
   config: {folders, title, appName, appPath}
-  *******************************************************/
-  let regKeys = getKeys(config);
+  ****************************************************** */
+  let regKeys = getKeys(config)
 
   const updateConfig = (newConfig) => {
     const mergedConfig = Object.assign({}, config, newConfig)
-    regKeys = getKeys(mergedConfig);
+    regKeys = getKeys(mergedConfig)
   }
 
   return {
-    updateConfig : updateConfig,
-    isEnabled    : () => { return Promise.all(regKeys.map(getRegistryKey)).then(every)},
-    enable       : () => { return Promise.all(regKeys.map(setRegistryKey)) },
-    disable      : () => { return Promise.all(regKeys.map(removeRegistryKey)) }
+    updateConfig,
+    isEnabled: () => Promise.all(regKeys.map(getRegistryKey)).then(every),
+    enable: () => Promise.all(regKeys.map(setRegistryKey)),
+    disable: () => Promise.all(regKeys.map(removeRegistryKey)),
   }
 }

@@ -1,26 +1,26 @@
 // Component Core
-import React from 'react';
-import classes from './Smooch.css';
-import classNames from 'classnames';
-import Smooch from 'smooch';
-import { init as initSmooch } from './Smooch.utils.js';
-import comments      from 'stemn-shared/assets/images/pure-vectors/comments.svg';
+import React from 'react'
+import classes from './Smooch.css'
+import classNames from 'classnames'
+import Smooch from 'smooch'
+import { init as initSmooch } from './Smooch.utils.js'
+import comments      from 'stemn-shared/assets/images/pure-vectors/comments.svg'
 
-///////////////////////////////// COMPONENT /////////////////////////////////
+// /////////////////////////////// COMPONENT /////////////////////////////////
 
 export default React.createClass({
-  componentWillMount () {
-    initSmooch();
+  componentWillMount() {
+    initSmooch()
   },
   render() {
-    const { text, style } = this.props;
+    const { text, style } = this.props
     return (
-      <a className={classNames(classes.icon, 'layout-column', 'layout-align-center-center')} onClick={Smooch.open}>
-        <img src={comments} />
+      <a className={ classNames(classes.icon, 'layout-column', 'layout-align-center-center') } onClick={ Smooch.open }>
+        <img src={ comments } />
       </a>
     )
-  }
-});
+  },
+})
 
 
 //            $timeout(setupSmooch, 2000);

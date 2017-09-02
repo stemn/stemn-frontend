@@ -1,9 +1,9 @@
-import i from 'icepick';
-export const name = 'autoLaunch';
+import i from 'icepick'
+export const name = 'autoLaunch'
 
 const initialState = {
-  status: false
-};
+  status: false,
+}
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {

@@ -6,7 +6,7 @@ import connectionModalName from 'stemn-shared/misc/Modal/ConnectionModal'
 import providerAccessRevokedModalName from 'stemn-shared/misc/Modal/ProviderAccessRevokedModal'
 import providerAccessErrorModalName from 'stemn-shared/misc/Modal/ProviderAccessErrorModal'
 
-/*********************************************************************
+/** *******************************************************************
 This middleware will add an error modal/toast when possible.
 
 We can process server errors of 3 types:
@@ -19,7 +19,7 @@ We can process server errors of 3 types:
 
 If we find a special toast or modal in errorMap[action.payload.errror.type]
 this will be displayed instead of the standard toast.
-*********************************************************************/
+******************************************************************** */
 
 // The errors which will pop special modal/toast
 const errorMap = {
@@ -93,7 +93,7 @@ const processServerError = (store, action) => {
   }
 }
 
-const middleware = (store) => (next) => (action) => {
+const middleware = store => next => (action) => {
   if (action.type && action.type.endsWith('_REJECTED')) {
     if (has(action, 'payload.errno')) {
       processLocalError(store, action)

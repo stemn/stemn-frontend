@@ -1,38 +1,38 @@
 import http from 'axios'
 
-export function fetchFiles({projectId, path, options, cacheKey}) {
+export function fetchFiles({ projectId, path, options, cacheKey }) {
   return {
     type: 'FILE_LIST/FETCH_FILES',
     http: true,
     payload: {
       method: 'GET',
-      url: `/api/v1/sync/listFolder/${projectId}/${path}`
+      url: `/api/v1/sync/listFolder/${projectId}/${path}`,
     },
     meta: {
       cacheKey,
     },
     throttle: {
       time: 500,
-      endpoint:  `${projectId}/${path}`
+      endpoint: `${projectId}/${path}`,
     },
-  };
+  }
 }
 
-export function exploreFolder({folderId, provider, cacheKey }) {
+export function exploreFolder({ folderId, provider, cacheKey }) {
   return {
     type: 'FILE_LIST/EXPLORE_FOLDER',
     payload: http({
       method: 'GET',
-      url: `/api/v1/remote/explore/${provider}/${folderId}`
+      url: `/api/v1/remote/explore/${provider}/${folderId}`,
     }),
     meta: {
       cacheKey,
     },
     throttle: {
       time: 500,
-      endpoint: `${provider}/${folderId}`
+      endpoint: `${provider}/${folderId}`,
     },
-  };
+  }
 }
 
 export const getSearchResults = ({ projectId, folderId, query, cacheKey }) => ({
@@ -45,7 +45,7 @@ export const getSearchResults = ({ projectId, folderId, query, cacheKey }) => ({
     },
   },
   meta: {
-    cacheKey
+    cacheKey,
   },
   throttle: {
     time: 500,
@@ -54,7 +54,7 @@ export const getSearchResults = ({ projectId, folderId, query, cacheKey }) => ({
 })
 
 export const getFiles = ({ path, provider, projectId, cacheKey }) => (dispatch) => {
-  if (provider){
+  if (provider) {
     dispatch(exploreFolder({
       provider,
       folderId: path,

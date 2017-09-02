@@ -1,9 +1,9 @@
-//import { remote } from 'electron';
-//const { Menu, MenuItem } = remote;
-//import React from 'react';
+// import { remote } from 'electron';
+// const { Menu, MenuItem } = remote;
+// import React from 'react';
 //
 //
-//export default React.createClass({
+// export default React.createClass({
 //  render() {
 //    const menu = new Menu();
 //    menu.append(new MenuItem({label: 'Edit'}))
@@ -25,4 +25,4 @@
 //      <button onClick={showMenu}>Menu</button>
 //    );
 //  }
-//});
+// });

@@ -1,4 +1,4 @@
-import classes from './Row.css';
-import BaseComponent from '../../BaseComponent';
+import classes from './Row.css'
+import BaseComponent from '../../BaseComponent'
 
-export default BaseComponent(classes.root);
+export default BaseComponent(classes.root)

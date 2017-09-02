@@ -13,7 +13,7 @@ import { showConfirm } from 'stemn-shared/misc/Modal/Modal.actions.js'
 
 const stateToProps = ({ comments }, { commentId }) => ({
   comment: comments.data[commentId],
-  entityModel: `comments.data.${commentId}`
+  entityModel: `comments.data.${commentId}`,
 })
 
 const dispatchToProps = {

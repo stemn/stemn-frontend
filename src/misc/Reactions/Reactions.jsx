@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import classNames from 'classnames'
 import classes from './Reactions.css'
 import Popover from 'stemn-shared/misc/Popover'
@@ -9,15 +9,17 @@ import { options, groupAndOrderReactions } from './Reactions.utils.js'
 import Link from 'stemn-shared/misc/Router/Link'
 
 export default React.createClass({
-  render(){
-    const { reactions, submitFn } = this.props;
-    const groupedReactions = reactions && reactions.length > 0 ? groupAndOrderReactions(reactions, options) : [];
+  render() {
+    const { reactions, submitFn } = this.props
+    const groupedReactions = reactions && reactions.length > 0 ? groupAndOrderReactions(reactions, options) : []
     return (
       <span>
         { groupedReactions.map(reaction => (
-          <Popover key={reaction.type}
+          <Popover
+            key={ reaction.type }
             preferPlace="below"
-            trigger="hoverDelay">
+            trigger="hoverDelay"
+          >
             <a className={ classes.icon } onClick={ () => submitFn(reaction.type) }>
               { reaction.icon }
               <span>{ reaction.list.length }</span>
@@ -45,6 +47,6 @@ export default React.createClass({
           </Popover>
         )) }
       </span>
-    );
-  }
+    )
+  },
 })

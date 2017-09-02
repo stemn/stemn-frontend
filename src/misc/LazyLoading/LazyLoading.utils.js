@@ -6,9 +6,8 @@ const getSrcSplit = (src) => {
   const queryParamsIndex = src.indexOf('?')
   if (queryParamsIndex > 0) {
     return src.substring(0, src.indexOf('?')).split('.')
-  } else {
-    return src.split('.')
-  }
+  } 
+  return src.split('.')
 }
 
 export const load = (items) => {
@@ -24,7 +23,7 @@ export const load = (items) => {
       linkTag.href = srcUrl
       linkTag.rel = 'stylesheet'
       linkTag.type = 'text/css'
-      linkTag.onreadystatechange = function() {
+      linkTag.onreadystatechange = function () {
         if (this.readyState === 'complete') {
           callback()
         }
@@ -51,7 +50,7 @@ export const load = (items) => {
       scriptTag.type = 'text/javascript'
       scriptTag.async = true
       scriptTag.src = srcUrl
-      scriptTag.onreadystatechange = function() {
+      scriptTag.onreadystatechange = function () {
         if (this.readyState === 'complete') {
           callback()
         }
@@ -69,7 +68,7 @@ export const load = (items) => {
       // If the src is not yet registered, register it
       if (!resources[item.src]) {
         const srcSplit = getSrcSplit(item.src)
-        const fileType = item.type || srcSplit[srcSplit.length-1]
+        const fileType = item.type || srcSplit[srcSplit.length - 1]
 
         if (fileType === 'js') {
           promiseArray.push(loadScript(item.src, item.global))
