@@ -78,7 +78,10 @@ const mainReducer = (state, action) => {
     case 'THREADS/GET_TASK_PENDING':
       return i.assocIn(state, ['data', action.meta.cacheKey, 'loading'], true)
     case 'THREADS/GET_TASK_REJECTED':
-      return i.assocIn(state, ['data', action.meta.cacheKey, 'loading'], false)
+      return i.assocIn(state, ['data', action.meta.cacheKey], {
+        error: action.payload.data.error,
+        loading: false,
+      })
     case 'THREADS/GET_TASK_FULFILLED':
       return i.assocIn(state, ['data', action.meta.cacheKey], {
         data: action.payload.data,

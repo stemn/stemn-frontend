@@ -8,6 +8,7 @@ import UserAvatars from 'stemn-shared/misc/Avatar/UserAvatars/UserAvatars.jsx'
 import DueDate from 'stemn-shared/misc/Threads/ThreadDueDate'
 import LoadingPlaceholder from 'stemn-shared/misc/Loading/LoadingPlaceholder'
 import LoadingAnimation from 'stemn-shared/misc/Loading/LoadingAnimation'
+import pluralise from 'stemn-shared/utils/strings/pluralise'
 
 const getGroupInfo = (groupId, groups) => groups.find(group => group._id == groupId)
 
@@ -37,9 +38,11 @@ export default class ThreadRow extends Component {
             <div className={ classes.meta }>
               { group && group.name && <span className="text-grey-2">{ group.name }</span> }
               { thread.data.due && <span className="text-interpunct" /> }
-              { thread.data.due && <DueDate due={ thread.data.due } /> }              
+              { thread.data.due && <DueDate due={ thread.data.due } /> }
               { <span className="text-interpunct" /> }
               { <span>{ thread.data.complete ? 'Closed' : 'Open' }</span> }
+              <span className="text-interpunct" />
+              { pluralise(thread.data.numComments, 'Comment') }
             </div>
           </div>
           <div>
