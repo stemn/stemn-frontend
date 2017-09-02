@@ -1,5 +1,13 @@
-# stemn-frontend
+# Stemn Frontend
 
-This repository requires you to clone and link the shared files in the [stemn-frontend-shared](https://github.com/stemn/stemn-frontend-shared) repository.
+All of Stemn's frontend code is opensource here on GitHub. It is split between this repo and the [stemn-frontend-shared](https://github.com/stemn/stemn-frontend-shared) repository.
 
-Check the README.md files in the [websiteNew](https://github.com/stemn/stemn-frontend/tree/master/websiteNew) and [electronNew](https://github.com/stemn/stemn-frontend/tree/master/electronNew) folders to get up and running with the website and app.
+## Stemn Desktop (electronNew)
+[Instructions](https://github.com/stemn/stemn-frontend/blob/master/electronNew/README.md) for building the [desktop app](https://github.com/stemn/Stemn-Desktop)
+
+## Stemn Website (websiteNew)
+[Instructions](https://github.com/stemn/stemn-frontend/blob/master/websiteNew/README.md) for building the [website](https://dev.stemn.com)
+
+### Stuff to ignore
+Both the `electron` and `website` folders should be ignored. 
+This is all old code that should probably be deleted but hasn't...
