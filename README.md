@@ -1,22 +1,8 @@
 ## Usage
 
-### Babel and Webpack Setup
-* Make sure there is a babel-loader (that includes `stemn-frontend-shared`) in the main webpack.config:
-```
-  {
-    test      : /(\.js|\.jsx)$/,
-    loader    : 'babel',
-    include: [
-      path.resolve(__dirname, './app/node_modules/stemn-frontend-shared')
-    ]
-  }
-```
-* Add the following webpack aliases ( for 'stemn-shared', 'theme', and 'route-actions') to the webpack.config. Such as:
-```
-  'theme'            : path.resolve(__dirname, './src/theme.css'),
-  'route-actions'    : path.resolve(__dirname, './src/routeActions.js'),
-  'stemn-shared'     : path.resolve(__dirname, './node_modules/stemn-frontend-shared/src'),
-```
+This is code shared between Stemns two products:
 
-### eslint config
-The package.json contains a link to stemns eslint settings. These are in the `stemn-eslint` repo which is shared between projects.
+* Stemn desktop ([stemn/stemn-frontend/electronNew](https://github.com/stemn/stemn-frontend/tree/master/electronNew)) 
+* Stemn website ([stemn/stemn-frontend/websiteNew](https://github.com/stemn/stemn-frontend/tree/master/websiteNew))
+
+If you want to work on either of these projects, you'll need this repo. There are instructions in the `websiteNew` and `electronNew` readmes.
