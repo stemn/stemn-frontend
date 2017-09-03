@@ -37,15 +37,15 @@ module.exports = {
       'lodash.repeat': path.resolve(__dirname, '../node_modules/lodash/repeat'),
       'lodash.keys': path.resolve(__dirname, '../node_modules/lodash/keys'),
       'lodash.debounce': path.resolve(__dirname, '../node_modules/lodash/debounce'),
-      'get-root-path' : path.resolve(__dirname, '../src/client/getRootPath.js'),
+      'get-root-path': path.resolve(__dirname, '../src/client/getRootPath.js'),
     },
     extensions: ['.js', '.jsx', '.json', '.scss'],
   },
   plugins: [
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/), // http://stackoverflow.com/questions/25384360/how-to-prevent-moment-js-from-loading-locales-with-webpack
-    new webpack.IgnorePlugin(/vertx/),                                 // Ignore vertx so ES6 promise works: https://github.com/stefanpenner/es6-promise/issues/100
+    new webpack.IgnorePlugin(/vertx|bufferutil|utf-8-validate/),       // Ignore vertx so ES6 promise works: https://github.com/stefanpenner/es6-promise/issues/100
     new webpack.ProvidePlugin({
-      fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',  // fetch API
+      fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch', // fetch API
     }),
     new HappyPack({
       threads: 4,

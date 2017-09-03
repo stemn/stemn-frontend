@@ -19462,13 +19462,16 @@ avp.createWorkerWithIntercept = function() {
 
         var cbId = registerWorkerCallback(onObjectTreeRead, onObjectTreeError);
 
+		var options = this.model.loader.options
+
         var xfer = { "operation":WORKER_LOAD_PROPERTYDB,
                      "dbPath": this.dbPath,
                      "sharedDbPath": this.sharedDbPath,
                      "propertydb" : this.dbFiles,
                      "fragToDbId": this.svf && this.svf.fragments.fragId2dbId, //the 1:1 mapping of fragment to dbId we got from the SVF or the 1:many we built on the fly for f2d
                      "fragBoxes" : this.svf && this.svf.fragments.boxes, //needed to precompute bounding box hierarchy for explode function (and possibly others)
-                     cbId: cbId,
+                     headers: options.svfHeaders,
+					 cbId: cbId,
                      queryParams : this.queryParams
                     };
 
@@ -21306,6 +21309,7 @@ SvfLoader.prototype.loadSvfCB = function(path, options, onSuccess, onError, onWo
         bvhOptions : options.bvhOptions || {isWeakDevice : av.isMobileDevice()},
         applyScaling: options.applyScaling,
         loadInstanceTree: options.loadInstanceTree,
+		headers: options.svfHeaders, 
         max_pf_files: 0
     };
 
@@ -21671,6 +21675,7 @@ SvfLoader.prototype.loadGeometryPackOnDemand = function (packId, inMemory) {
                  "packId": parseInt(packId), /* mesh IDs treat the pack file id as integer to save on storage in the per-fragment arrays */
                  "workerId": workerId,
                  "packNormals": this.options.packNormals,
+				 "headers": this.options.svfHeaders,
                  "createWireframe" : this.options.createWireframe,
                  "skipAssetCallback": true,
                  "queryParams" : this.queryParams,
@@ -21822,6 +21827,7 @@ SvfLoader.prototype.loadGeometryPack = function (packId, path) {
                  "packId": parseInt(packId), /* mesh IDs treat the pack file id as integer to save on storage in the per-fragment arrays */
                  "workerId": workerId,
                  "createWireframe" : this.options.createWireframe,
+				 "headers": this.options.svfHeaders,
                  "packNormals": this.options.packNormals,
                  "queryParams" : this.queryParams };
 

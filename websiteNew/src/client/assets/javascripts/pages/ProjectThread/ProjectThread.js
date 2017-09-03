@@ -174,7 +174,7 @@ export default class ProjectThread extends Component {
         { thread.data.users.length >= 0 &&
         <div className={ classes.panel }>
           <div className="text-mini-caps">Assignees</div>
-          { thread.data.users.map(user => <UserMinimalRow user={ user }/> )}
+          { thread.data.users.map(user => <UserMinimalRow key={ user._id } user={ user }/> )}
         </div> }
       </Col>
     )
