@@ -14,3 +14,9 @@
   width: 18px;
   height: 18px;
 }
+
+.sep {
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  margin-left: 5px;
+  padding-left: 10px;
+}

@@ -79,8 +79,8 @@ export default class TimelineItem extends Component {
               /> }
             { item.eventsGrouped && item.eventsGrouped.length > 0 &&
               <div className={ classes.group }>
-                { item.eventsGrouped.slice(0, isExpanded ? 100 : groupLimit).map((event) => (
-                  <div className={ classes.item }>
+                { item.eventsGrouped.slice(0, isExpanded ? 100 : groupLimit).map((event, idx) => (
+                  <div key={ idx } className={ classes.item }>
                     <TimelineItemText className={ classes.item } item={ event } type={ type } entity={ entity } groupItem />
                   </div>
                 )) }

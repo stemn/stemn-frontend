@@ -2,12 +2,16 @@
 
 .editor {
   pre{
-    font-family: Open Sans;
+    font-family: Open Sans !important;
     padding: 0px;
     color: rgba(0, 0, 0, 0.9);
     line-height: 1.6em;
   }
 
+  :global(.CodeMirror) {
+    font-family: Open Sans !important;
+    min-height: 20px;
+  }
   :global(.CodeMirror-selected) {
     background-color: highlight-color;
   }

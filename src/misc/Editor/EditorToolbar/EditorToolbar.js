@@ -4,6 +4,7 @@ import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleI
 import MdFormatItalic from 'react-icons/md/format-italic'
 import MdFormatBold from 'react-icons/md/format-bold'
 import MdLink from 'react-icons/md/link'
+import MdVisibility from 'react-icons/md/visibility'
 import MdFormatListBulleted from 'react-icons/md/format-list-bulleted'
 import MdInsertPhoto from 'react-icons/md/insert-photo'
 import MdTextFields from 'react-icons/md/text-fields'
@@ -105,6 +106,12 @@ export default class EditorToolbar extends Component {
     this.cursorWrap(cursorRange, (content) => `$${ content || 'write latex math here'}$`)
     this.cursorSet(cursorRange, 0, 1)
   }
+  preview = () => {
+    const { showPreviewModal, codemirror } = this.props
+    showPreviewModal({
+      text: codemirror.getValue(),
+    })
+  }
   buttons = [{
     title: 'Heading',
     onClick: () => this.heading(3),
@@ -164,6 +171,11 @@ export default class EditorToolbar extends Component {
       label: 'Inline Equation',
       onClick: this.mathInline,
     },]
+  },{
+    sep: true,
+    title: 'Preview',
+    onClick: this.preview,
+    icon:  <MdVisibility />,
   }]
   render() {
     const { hide } = this.props
@@ -172,6 +184,7 @@ export default class EditorToolbar extends Component {
         <div className={ classes.toolbar }>
           { this.buttons.map(button => !button.menu
           ? <SimpleIconButton
+              className={ button.sep ? classes.sep : '' }
               key={ button.title }
               onClick={ button.onClick }
               title={ button.title }
@@ -184,6 +197,7 @@ export default class EditorToolbar extends Component {
               preferPlace="below"
             >
               <SimpleIconButton
+                className={ button.sep ? classes.sep : '' }
                 onClick={ button.onClick }
                 title={ button.title }
               >
