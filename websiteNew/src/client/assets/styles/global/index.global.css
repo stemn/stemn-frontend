@@ -1,5 +1,5 @@
 @import "~normalize.css/normalize.css";
-@import './layout.css';
+@import '~stemn-frontend-shared/src/assets/css/layout/layout.scss';
 @import './page.css';
 @import '~stemn-frontend-shared/src/assets/css/links.css';
 @import '~stemn-frontend-shared/src/assets/css/useful.css';
