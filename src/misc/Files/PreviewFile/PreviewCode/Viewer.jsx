@@ -4,6 +4,7 @@ import 'codemirror/mode/meta.js'
 const requireCodemirrorMode = require.context('url-loader?limit=1&name=js/codemirror/[name].[hash].[ext]!codemirror/mode/', true, /\.js$/)
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'
 import { load } from 'stemn-shared/misc/LazyLoading/LazyLoading.utils'
+import Container from 'stemn-shared/misc/Layout/Container'
 
 export default class Viewer extends Component {
   getCodemirrorRef = (ref) => {
@@ -44,7 +45,9 @@ export default class Viewer extends Component {
       <div className="layout-row flex">
         { previewMarkdown &&
             <div className="scroll-box flex" style={ { padding: '30px' } }>
-              <EditorDisplay value={ data } />
+              <Container>
+                <EditorDisplay value={ data } />
+              </Container>
             </div>
         }
         { !previewMarkdown &&
