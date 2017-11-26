@@ -37,10 +37,11 @@ export default class LandingHeader extends Component {
     window.removeEventListener('scroll', this.handleScroll)
   }
   handleScroll = () => {
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
     const { atTop } = this.state
-    if (atTop && document.body.scrollTop !== 0) {
+    if (atTop && scrollTop !== 0) {
       this.setState({ atTop: false })
-    } else if (!atTop && document.body.scrollTop === 0) {
+    } else if (!atTop && scrollTop === 0) {
       this.setState({ atTop: true })
     }
   }
