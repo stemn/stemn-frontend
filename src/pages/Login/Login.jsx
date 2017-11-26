@@ -1,5 +1,5 @@
 // Component Core
-import React from 'react'
+import React, { Component } from 'react'
 
 // Styles
 import classNames from 'classnames'
@@ -11,15 +11,14 @@ import Link from 'stemn-shared/misc/Router/Link'
 import Button from 'stemn-shared/misc/Buttons/Button/Button.jsx'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
-export default React.createClass({
+export default class Login extends Component {
   submit(event) {
     event.preventDefault()
     this.props.login({
       email: this.props.auth.login.email,
       password: this.props.auth.login.password,
     })
-  },
-
+  }
   render() {
     const { authenticate, auth } = this.props
 
@@ -85,5 +84,5 @@ export default React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}

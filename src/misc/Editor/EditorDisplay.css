@@ -366,7 +366,6 @@ https://github.com/sindresorhus/github-markdown-css/blob/gh-pages/github-markdow
 }
 
 .display table {
-  display: block;
   width: 100%;
   overflow: auto;
 }
@@ -383,6 +382,7 @@ https://github.com/sindresorhus/github-markdown-css/blob/gh-pages/github-markdow
 
 .display table tr {
   background-color: #fff;
+  text-align: left;
   border-top: 1px solid #c6cbd1;
 }
 

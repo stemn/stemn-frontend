@@ -44,12 +44,12 @@ export const newMention = ({ mentionType, display, entityId }) => ({
   mentionId: getUuid(),
 })
 
-export const validateMention = (href) => {
+export const validateMention = (href = '') => {
   // mention should be of the form 'entityId:entityType:mentionId'
   // Example: '47db55af7f3423801742e228:user:cb4e8fac7fe980b5da295624'
   // Boths ids should be 24 characters.
   const hrefSplit = href.split(':')
-  if (hrefSplit.length == 3) {
+  if (hrefSplit.length === 3) {
     const [entityId, mentionType, mentionId] = hrefSplit
     if (isUuid(entityId) && isUuid(mentionId)) {
       return true

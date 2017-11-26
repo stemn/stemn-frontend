@@ -35,6 +35,5 @@
     "react-addons-css-transition-group": "^15.2.1",
     "react-dnd-html5-backend": "^2.3.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
