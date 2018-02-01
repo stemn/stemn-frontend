@@ -2,6 +2,14 @@ const rootDomain = GLOBAL_ENV.APP_TYPE === 'web'
   ? window.location.origin
   : 'http://localhost:49554'
 
+const googleClientId = GLOBAL_ENV.NODE_ENV === 'production'
+  ? '502305750839-8m9aian8ka9qb6j64t3dtjs2nq96tdae.apps.googleusercontent.com'
+  : '502305750839-aq4jo6l15tkb1phi2gpr5hod274444m4.apps.googleusercontent.com'
+
+
+const dropboxClientId = GLOBAL_ENV.NODE_ENV === 'production'
+  ? '0wgo11dn573805b'
+  : '18uu4ynw3cp92oi'
 
 export const oauthCreds = {
   facebook: {
@@ -20,7 +28,7 @@ export const oauthCreds = {
       redirect_uri: `${rootDomain}/api/auth/google`,
       response_type: 'code',
       prompt: 'consent', // forces request of refresh token
-      client_id: '502305750839-8m9aian8ka9qb6j64t3dtjs2nq96tdae.apps.googleusercontent.com',
+      client_id: googleClientId,
       scope: 'openid profile email https://www.googleapis.com/auth/drive',
     },
   },
@@ -41,7 +49,7 @@ export const oauthCreds = {
       force_reapprove: true,
       redirect_uri: `${rootDomain}/api/auth/dropbox`,
       response_type: 'code',
-      client_id: '0wgo11dn573805b',
+      client_id: dropboxClientId,
     },
   },
 }
