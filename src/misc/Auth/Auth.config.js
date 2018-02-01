@@ -6,7 +6,6 @@ const googleClientId = GLOBAL_ENV.NODE_ENV === 'production'
   ? '502305750839-8m9aian8ka9qb6j64t3dtjs2nq96tdae.apps.googleusercontent.com'
   : '502305750839-aq4jo6l15tkb1phi2gpr5hod274444m4.apps.googleusercontent.com'
 
-
 const dropboxClientId = GLOBAL_ENV.NODE_ENV === 'production'
   ? '0wgo11dn573805b'
   : '18uu4ynw3cp92oi'
