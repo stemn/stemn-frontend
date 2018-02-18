@@ -138,13 +138,15 @@ export default class ProjectOverview extends Component {
                   entityType="project"
                   entityId={ project.data._id }
                 />
-                <SocialButton
-                  type="clone"
-                  numberModel={`${entityModel}.data.numClones`}
-                  number={ project.data.numClones }
-                  entityType="project"
-                  entityId={ project.data._id }
-                />
+                { !canEdit && (
+                  <SocialButton
+                    type="clone"
+                    numberModel={`${entityModel}.data.numClones`}
+                    number={ project.data.numClones }
+                    entityType="project"
+                    entityId={ project.data._id }
+                  />
+                )}
               </div>
             </div>
           </SubSubHeader>
