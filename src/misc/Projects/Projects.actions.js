@@ -258,3 +258,18 @@ export const unlinkRemote = ({ projectId, prevProvider }) => (dispatch) => {
     },
   })
 }
+
+export const createClonedProject = ({ projectId, provider, isPrivate, name }) => dispatch => 
+  // Clone the project
+  dispatch({
+    type: 'SOCIAL/CLONE',
+    payload: http({
+      method: 'POST',
+      url: `/api/v1/sync/clone/${projectId}`,
+      data: {
+        name,
+        provider,
+        private: isPrivate,
+      },
+    }),
+  })

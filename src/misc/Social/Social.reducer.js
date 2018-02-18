@@ -3,6 +3,7 @@ import i from 'icepick'
 const initialState = {
   like: {},
   follow: {},
+  clone: {},
 }
 
 export default (state = initialState, action = {}) => {

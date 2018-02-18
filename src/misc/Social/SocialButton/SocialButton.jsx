@@ -6,6 +6,7 @@ import MdStar from 'react-icons/md/star'
 import MdStarBorder from 'react-icons/md/star-border'
 import MdBookmark from 'react-icons/md/bookmark'
 import MdBookmarkBorder from 'react-icons/md/bookmark-outline'
+import MdContentCopy from 'react-icons/md/content-copy'
 
 const getIcon = (type, entityType, status) => {
   if (type === 'like') {
@@ -16,6 +17,10 @@ const getIcon = (type, entityType, status) => {
     return status
       ? <MdBookmark />
       : <MdBookmarkBorder />
+  } else if (type === 'clone') {
+    return status
+      ? <MdContentCopy />
+      : <MdContentCopy />
   }
 }
 
@@ -32,6 +37,10 @@ const getText = (type, entityType, status) => {
     return status
       ? 'Following'
       : 'Follow'
+  } else if (type === 'clone') {
+    return status
+      ? 'Cloned'
+      : 'Clone'
   }
 }
 
@@ -42,6 +51,8 @@ const getTooltip = (type, entityType, status) => {
     return 'Subscribe to notifications'
   } else if (type === 'follow') {
     return ''
+  } else if (type === 'clone') {
+    return 'Copies this project into your dropbox/drive'
   }
 }
 
@@ -54,7 +65,7 @@ export default class SocialButton extends Component {
     entityType: PropTypes.string.isRequired,
     number: PropTypes.number,               // Count - i.e. numLikes or numFollows
     numberModel: PropTypes.string,          // The model of the count - used to iterate it
-    type: PropTypes.oneOf(['follow', 'like']).isRequired,
+    type: PropTypes.oneOf(['follow', 'like', 'clone']).isRequired,
     status: PropTypes.bool.isRequired,
   }
 
