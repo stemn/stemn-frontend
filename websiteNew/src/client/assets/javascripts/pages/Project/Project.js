@@ -58,6 +58,13 @@ class Project extends Component {
               History
             </Link>
             <Link
+              activeIf={ { includes: ['projectPipelinesRoute'] } }
+              name="projectPipelinesRoute"
+              params={ routeParams }
+            >
+              Pipelines
+            </Link>
+            <Link
               activeIf={ { includes: ['projectTeamRoute'] } }
               name="projectTeamRoute"
               params={ routeParams }

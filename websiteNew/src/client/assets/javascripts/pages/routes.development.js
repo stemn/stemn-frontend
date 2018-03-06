@@ -41,6 +41,7 @@ import Project                                 from 'pages/Project'
 import ProjectCommit                           from 'pages/ProjectCommit'
 import ProjectCommits                          from 'pages/ProjectCommits'
 import ProjectOverview                         from 'pages/ProjectOverview'
+import ProjectPipelines                        from 'pages/ProjectPipelines'
 import ProjectSettings                         from 'pages/ProjectSettings'
 import ProjectSettingsGeneral                  from 'pages/ProjectSettingsGeneral'
 import ProjectSettingsPermissions              from 'pages/ProjectSettingsPermissions'
@@ -125,6 +126,7 @@ export default () => (
       <Route path="threads/:threadId"          component={ ProjectThread } />
       <Route path="threads/:threadId/edit"     component={ ProjectThread } />
       <Route path="history"                    component={ ProjectCommits } />
+      <Route path="pipelines"                  component={ ProjectPipelines } />
       <Route path="history/:commitId"          component={ ProjectCommit } />
       <Route path="settings"                   component={ ProjectSettings }>
         <IndexRoute                            component={ ProjectSettingsGeneral } />

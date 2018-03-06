@@ -16,6 +16,7 @@ export const passwordLostRoute           = ()                                  =
 export const pricingRoute                = ()                                  => '/pricing'
 export const privacyRoute                = ()                                  => '/privacy'
 export const projectCommitsRoute         = ({ projectId })                     => `/project/${projectId}/history`
+export const projectPipelinesRoute       = ({ projectId })                     => `/project/${projectId}/pipelines`
 export const projectFilesRoute           = ({ projectId })                     => `/project/${projectId}/files`
 export const projectFolderRoute          = ({ projectId, fileId })             => `/project/${projectId}/files/${fileId || ''}`
 export const projectRoute                = ({ projectId })                     => `/project/${projectId}`
@@ -37,4 +38,4 @@ export const userFollowingRoute          = ({ userId })                        =
 export const userProjectsRoute           = ({ userId })                        => `/users/${userId}/projects`
 export const userRoute                   = ({ userId })                        => `/users/${userId}`
 export const userStarsRoute              = ({ userId })                        => `/users/${userId}/stars`
-export const notFound                    = ()                                  => `/404`
+export const notFound                    = ()                                  => '/404'
