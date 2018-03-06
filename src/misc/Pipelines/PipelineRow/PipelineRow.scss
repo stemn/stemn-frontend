@@ -1,0 +1,22 @@
+.row {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 7px;
+  cursor: default;
+  position: relative;
+  line-height: 1.4em;
+  height: 48px;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.title {
+  font-size: 14px;
+  margin-right: 10px;
+  line-height: 1.4em;
+}
+
+.number {
+  color: rgba(0, 0, 0, 0.5);
+}
