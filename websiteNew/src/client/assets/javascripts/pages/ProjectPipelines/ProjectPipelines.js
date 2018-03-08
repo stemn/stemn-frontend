@@ -11,6 +11,7 @@ import Pagination from 'stemn-shared/misc/Pagination'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import SearchInput from 'stemn-shared/misc/Search/SearchInput'
 import HistoryEmpty from 'stemn-shared/misc/SyncTimeline/HistoryEmpty'
+import PipelineList from 'stemn-shared/misc/Pipelines/PipelineList'
 
 export default class ProjectPipelines extends Component {
   changeTypeFilter = (filterType) => {
@@ -66,15 +67,7 @@ export default class ProjectPipelines extends Component {
     if (hasResults) {
       return (
         <div>
-          <Panel>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-          </Panel>
+          <PipelineList />
           <Pagination
             path={ location.pathname }
             page={ page }
