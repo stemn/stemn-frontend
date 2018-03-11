@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import classNames from 'classnames'
-import classes from './PipelineRow.css'
+import classes from './PipelineRow.scss'
 import Label from 'stemn-shared/misc/Label/Label'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 
