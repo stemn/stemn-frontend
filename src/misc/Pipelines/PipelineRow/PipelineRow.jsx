@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 
 import classNames from 'classnames'
 import classes from './PipelineRow.scss'
-import Label from 'stemn-shared/misc/Label/Label'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
+import PipelineMiniMap from '../PipelineMiniMap'
 
 export default class PipelineRow extends Component {
   render() {
@@ -17,7 +17,7 @@ export default class PipelineRow extends Component {
         />
         <div className={ classes.title }>Build and email STL files <span className={ classes.number }>#P1234</span></div>
         <div className="flex" />
-        <Label>Passed</Label>
+        <PipelineMiniMap />
       </div>
     )
   }

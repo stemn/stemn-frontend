@@ -45,7 +45,7 @@ const Menu = React.createClass({
     // Item - the thing that will be passed into menuitem.onclick
     return (
       <div className="PopoverMenu" { ...otherProps }>
-        {menu.map(menuItem => <MenuItem key={ menuItem.label } menuItem={ menuItem } item={ item } />)}
+        {menu.map(menuItem => <MenuItem key={ menuItem.key || menuItem.label } menuItem={ menuItem } item={ item } />)}
       </div>
     )
   },

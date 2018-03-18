@@ -1,0 +1,22 @@
+.outer {
+  > div {
+    margin-left: 5px;
+    position: relative;
+    &::before {
+      content: '';
+      display: inline-block;
+      border-top: 1px solid;
+      width: 6px;
+      background: black;
+      position: absolute;
+      left: -6px;
+      top: 50%;
+    }
+    &:first-child {
+      margin-left: 0px;
+      &::before {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+.outer {
+  
+}
+
+.stage {
+  width: 300px;
+  padding: 0 29px;
+  &:last-child {
+    padding-right: 0px;
+  }
+  &:first-child {
+    padding-left: 0px;
+  }
+}
+
+.step {
+  width: 100%;
+  background: white;
+  border-radius: 20px;
+  height: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0px 8px;
+  margin-bottom: 20px;
+  position: relative;
+}

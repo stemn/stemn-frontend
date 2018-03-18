@@ -12,7 +12,7 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button.jsx'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
 export default class Login extends Component {
-  submit(event) {
+  submit = (event) => {
     event.preventDefault()
     this.props.login({
       email: this.props.auth.login.email,
