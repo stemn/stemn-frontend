@@ -36,6 +36,7 @@ import userSettings     from 'stemn-shared/misc/UserSettings/UserSettings.reduce
 import stringFilter     from 'stemn-shared/misc/StringFilter/StringFilter.reducer.js'
 import history          from 'stemn-shared/misc/History/History.reducer.js'
 import websocket        from 'stemn-shared/misc/Websocket/Websocket.reducer.js'
+import pipelines        from 'stemn-shared/misc/Pipelines/Pipelines.reducer.js'
 
 import storeReducer     from 'stemn-shared/misc/Store/Store.reducer.js'
 
@@ -76,6 +77,7 @@ const splitReducers = combineReducers({
   userSettings,
   stringFilter,
   websocket,
+  pipelines,
 })
 
 export default (state, action) => {

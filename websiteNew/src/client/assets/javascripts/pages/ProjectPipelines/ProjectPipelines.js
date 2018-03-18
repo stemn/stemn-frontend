@@ -64,7 +64,7 @@ export default class ProjectPipelines extends Component {
     const projectRouteParams = {
       projectId: project.data._id,
     }
-    if (hasResults) {
+    if (true) { // TODO: Change back to hasResults
       return (
         <div>
           <PipelineList />

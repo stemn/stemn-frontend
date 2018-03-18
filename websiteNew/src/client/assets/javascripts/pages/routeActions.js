@@ -17,6 +17,8 @@ export const pricingRoute                = ()                                  =
 export const privacyRoute                = ()                                  => '/privacy'
 export const projectCommitsRoute         = ({ projectId })                     => `/project/${projectId}/history`
 export const projectPipelinesRoute       = ({ projectId })                     => `/project/${projectId}/pipelines`
+export const projectPipelineRoute        = ({ projectId, pipelineId })         => `/project/${projectId}/pipelines/${pipelineId}/`
+export const projectPipelineStepRoute    = ({ projectId, pipelineId, stepId }) => `/project/${projectId}/pipelines/${pipelineId}/steps/${stepId}`
 export const projectFilesRoute           = ({ projectId })                     => `/project/${projectId}/files`
 export const projectFolderRoute          = ({ projectId, fileId })             => `/project/${projectId}/files/${fileId || ''}`
 export const projectRoute                = ({ projectId })                     => `/project/${projectId}`
