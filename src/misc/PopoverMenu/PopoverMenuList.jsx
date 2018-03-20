@@ -1,54 +1,53 @@
 import React from 'react'
 import classNames from 'classnames'
 import Popover from 'stemn-shared/misc/Popover/Popover'
+import Link from 'stemn-shared/misc/Router/Link'
+import { pick } from 'lodash'
 
-const MenuItem = React.createClass({
-  render() {
-    const { menuItem, item } = this.props
-    const el = null
+const MenuItem = (props) => {
+  const { menuItem, item } = props
 
-    if (!menuItem.isHidden || !menuItem.isHidden(item)) {
-      if (menuItem.submenu) {
-        return (
-          <Popover preferPlace="right" trigger="hoverDelay" tipSize={ 0 } offset={ 0 }>
-            <div>
-              <a
-                onClick={ () => menuItem.onClick(item) }
-                className={ classNames({ divider: menuItem.divider }, 'submenu') }
-              >
-                {menuItem.label}
-              </a>
-            </div>
-            <div><Menu menu={ menuItem.submenu } /></div>
-          </Popover>
-        )
-      }
-      
+  if (!menuItem.isHidden || !menuItem.isHidden(item)) {
+    if (menuItem.submenu) {
       return (
-        <a
-          onClick={ () => menuItem.onClick(item) }
-          className={ classNames({ divider: menuItem.divider }) }
-        >
-          {menuItem.label}
-        </a>
+        <Popover preferPlace="right" trigger="hoverDelay" tipSize={ 0 } offset={ 0 }>
+          <div>
+            <Link
+              onClick={ () => menuItem.onClick && menuItem.onClick(item) }
+              className={ classNames({ divider: menuItem.divider }, 'submenu') }
+              { ...pick(menuItem, ['name', 'params', 'query']) }
+            >
+              {menuItem.label}
+            </Link>
+          </div>
+          <div><Menu menu={ menuItem.submenu } /></div>
+        </Popover>
       )
     }
     
-    return null
-  },
-})
-
-const Menu = React.createClass({
-  render() {
-    const { menu, item, ...otherProps } = this.props
-    // Menu - standard menu object
-    // Item - the thing that will be passed into menuitem.onclick
     return (
-      <div className="PopoverMenu" { ...otherProps }>
-        {menu.map(menuItem => <MenuItem key={ menuItem.key || menuItem.label } menuItem={ menuItem } item={ item } />)}
-      </div>
+      <Link
+        onClick={ () => menuItem.onClick && menuItem.onClick(item) }
+        className={ classNames({ divider: menuItem.divider }) }
+        { ...pick(menuItem, ['name', 'params', 'query']) }
+      >
+        {menuItem.label}
+      </Link>
     )
-  },
-})
+  }
+  
+  return null
+}
+
+const Menu = (props) => {
+  const { menu, item, ...otherProps } = props
+  // Menu - standard menu object
+  // Item - the thing that will be passed into menuitem.onclick
+  return (
+    <div className="PopoverMenu" { ...otherProps }>
+      {menu.map(menuItem => <MenuItem key={ menuItem.key || menuItem.label } menuItem={ menuItem } item={ item } />)}
+    </div>
+  )
+}
 
 export default Menu

@@ -4,9 +4,12 @@ import classNames from 'classnames'
 import classes from './PipelineRow.scss'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import PipelineMiniMap from '../PipelineMiniMap'
+import Link from 'stemn-shared/misc/Router/Link'
+import { pipeline } from '../Pipeline.data'
 
 export default class PipelineRow extends Component {
   render() {
+    const { project: { _id: projectId }, _id: pipelineId } = pipeline
     return (
       <div className={ classNames(classes.row, 'layout-row layout-align-start-center') }>
         <UserAvatar
@@ -15,7 +18,13 @@ export default class PipelineRow extends Component {
           size={ 25 }
           shape="square"
         />
-        <div className={ classes.title }>Build and email STL files <span className={ classes.number }>#P1234</span></div>
+        <Link
+          name="projectPipelineRoute"
+          params={ { projectId, pipelineId } }
+          className={ classes.title }
+        >
+          Build and email STL files <span className={ classes.number }>#P1234</span>
+        </Link>
         <div className="flex" />
         <PipelineMiniMap />
       </div>

@@ -5,45 +5,7 @@ import classes from './PipelineMiniMap.scss'
 import PipelineIcon from '../PipelineIcon'
 import Popover from 'stemn-shared/misc/Popover/Popover'
 import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList'
-
-const stages = [{
-  status: 'success',
-  steps: [{
-    status: 'success',
-  }],
-}, {
-  status: 'running',
-  steps: [{
-    status: 'running',
-  }],
-}, {
-  status: 'error',
-  steps: [{
-    status: 'error',
-  }],
-}, {
-  status: 'pending',
-  steps: [{
-    status: 'pending',
-  }, {
-    status: 'pending',
-  }],
-}, {
-  status: 'pending',
-  steps: [{
-    status: 'pending',
-    name: 'name here',
-  }, {
-    status: 'pending',
-    name: 'name here 2',
-  }, {
-    status: 'pending',
-    name: 'name here 3',
-  }, {
-    status: 'pending',
-    name: 'name here 4',
-  }],
-}]
+import { pipeline } from '../Pipeline.data'
 
 const PopupRowItem = ({ status, name }) => (
   <span className="layout-row layout-align-start-center">
@@ -54,18 +16,24 @@ const PopupRowItem = ({ status, name }) => (
 
 export default class PipelineMiniMap extends Component {
   render() {
+    const { _id: pipelineId, stages, project: { _id: projectId } } = pipeline
     return (
       <div className={ cn('layout-row', classes.outer) }>
-        { stages.map((stage, idx) => {
-          const menu = stage.steps.map((step, stepIdx) => ({ 
-            key: stepIdx,
+        { stages.map((stage) => {
+          const menu = stage.steps.map(step => ({ 
+            key: step._id,
             label: <PopupRowItem status={ step.status } name={ step.name } />,
-            onClick: () => {},
+            name: 'projectPipelineStepRoute',
+            params: {
+              projectId,
+              pipelineId,
+              stepId: step._id,
+            },
           }))
           
           return (
             <Popover
-              key={ idx }
+              key={ stage._id }
               trigger="hoverDelay"
               preferPlace="below"
             >
