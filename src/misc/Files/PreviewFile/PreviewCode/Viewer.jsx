@@ -8,7 +8,7 @@ import Container from 'stemn-shared/misc/Layout/Container'
 
 export default class Viewer extends Component {
   getCodemirrorRef = (ref) => {
-    const { data, extension } = this.props
+    const { data, extension, hideNumbers } = this.props
     
     if (ref && extension) {
       this.codemirrorRef = ref
@@ -19,7 +19,7 @@ export default class Viewer extends Component {
         readOnly: true,
         dragDrop: false,
         lineWrapping: true,
-        lineNumbers: true,
+        lineNumbers: !hideNumbers,
       })
       // Get Mode
       const modeInfo = codemirror.findModeByExtension(extension)

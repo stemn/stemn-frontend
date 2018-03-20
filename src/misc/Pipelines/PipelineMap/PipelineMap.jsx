@@ -14,25 +14,27 @@ export default class PipelineMap extends Component {
       <div className={ cn('layout-row', classes.outer) }>
         { pipeline.stages.map((stage, idx) => (
           <div key={ stage._id } className={ classes.stage }>
-            <div>{stage.name}</div>
+            <div className="text-ellipsis">{stage.name}</div>
             <br />
             <div>
               { stage.steps.map((step, stepIdx) => (
-                <Link
-                  key={ step._id }
-                  className={ cn('layout-row layout-align-start-center', classes.step) }
-                  name="projectPipelineStepRoute"
-                  params={ {
-                    projectId,
-                    pipelineId,
-                    stepId: step._id,
-                  } }
-                >
-                  { idx !== 0 && <PipelineMapCurve side="left" connectTo={ stepIdx } /> }
-                  <PipelineIcon status={ step.status } style={ { marginRight: '10px' } } /> 
-                  { step.name }
+                <div key={ step._id } className={ classes.step }>
+                  <Link
+                    className={ cn('layout-row layout-align-start-center') }
+                    name="projectPipelineStepRoute"
+                    params={ {
+                      projectId,
+                      pipelineId,
+                      stepId: step._id,
+                    } }
+                    title={ step.name }
+                  >
+                    <PipelineIcon status={ step.status } style={ { marginRight: '10px' } } /> 
+                    <span className="flex text-ellipsis">{ step.name }</span>
+                  </Link>
                   { idx !== pipeline.stages.length - 1 && <PipelineMapCurve side="right" connectTo={ stepIdx }  /> }
-                </Link>
+                  { idx !== 0 && <PipelineMapCurve side="left" connectTo={ stepIdx } /> }
+                </div>
               ))}
             </div>
           </div>

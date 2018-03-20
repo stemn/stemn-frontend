@@ -55,6 +55,15 @@ const stages = [{
     name: 'Send slack notification',
     status: 'pending',
   }],
+}, {
+  _id: 'agsp01gasm0fas90j9psgampo',
+  name: 'Complete renders',
+  status: 'pending',
+  steps: [{
+    _id: 'step-id-avs1bsasb',
+    name: 'Send email',
+    status: 'pending',
+  }],
 }]
 
 export const pipeline = {
