@@ -9,6 +9,7 @@ import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import SubSubHeader from 'modules/SubSubHeader'
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'
 import Link from 'stemn-shared/misc/Router/Link'
+import PipelineConsole from 'stemn-shared/misc/Pipelines/PipelineConsole'
 
 export default class ProjectPipelineStep extends Component {
   renderLoaded() {
@@ -56,7 +57,11 @@ export default class ProjectPipelineStep extends Component {
             </div>
           </div>
         </SubSubHeader>
-        <Container />
+        <Container>
+          <br />
+          <br />
+          <PipelineConsole /> 
+        </Container>
       </div>
     )
   }
