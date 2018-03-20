@@ -18,7 +18,7 @@ export default class ProjectCommit extends Component {
       <div>
         <SubSubHeader>
           <Breadcrumbs>
-            <Crumb name="projectCommitsRoute" params={ { projectId: project.data._id } } text="Pipelines" />
+            <Crumb name="projectPipelinesRoute" params={ { projectId: project.data._id } } text="Pipelines" />
             <Crumb text={ pipeline.name } />
           </Breadcrumbs>
           <br />
