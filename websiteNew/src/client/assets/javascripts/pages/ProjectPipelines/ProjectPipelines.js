@@ -57,17 +57,20 @@ export default class ProjectPipelines extends Component {
     })
   }
   renderLoaded() {
-    const { project, syncTimeline, location, page, size, filter, filterIsDefault, board } = this.props
+    const { project, pipelines, location, page, size, filter, filterIsDefault, board } = this.props
 
-    const noMoreResults = syncTimeline && syncTimeline.data.length < size
-    const hasResults = syncTimeline && syncTimeline.data  && syncTimeline.data.length > 0
+    const noMoreResults = pipelines && pipelines.data.length < size
+    const hasResults = pipelines && pipelines.data  && pipelines.data.length > 0
     const projectRouteParams = {
       projectId: project.data._id,
     }
-    if (true) { // TODO: Change back to hasResults
+
+    if (hasResults) {
       return (
         <div>
-          <PipelineList />
+          <PipelineList
+             pipelines={ pipelines.data } 
+          />
           <Pagination
             path={ location.pathname }
             page={ page }
@@ -86,9 +89,9 @@ export default class ProjectPipelines extends Component {
     }
   }
   render() {
-    const { project, syncTimeline, filter } = this.props
-    const isLoaded = syncTimeline && syncTimeline.data
-    const isLoading = !syncTimeline || syncTimeline.loading
+    const { project, pipelines, filter } = this.props
+    const isLoaded = pipelines && pipelines.data
+    const isLoading = !pipelines || pipelines.loading
 
     const userFilterOptions = project.data.team.map(user => ({
       name: user.name,

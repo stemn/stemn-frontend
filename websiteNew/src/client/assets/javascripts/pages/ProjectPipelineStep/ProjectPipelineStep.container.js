@@ -6,25 +6,15 @@ import ProjectPipelineStep from './ProjectPipelineStep'
 
 const stateToProps = ({ projects, pipelines }, { params }) => {
   const projectId = params.stub;
-  const piplineId = params.piplineId;
+  const pipelineId = params.pipelineId;
   const project = projects.data[projectId];
-  // const pipeline = pipelines.pipelines[piplineId];
+  const pipeline = pipelines.pipelineData[pipelineId];
 
   return {
     project,
     projectId,
-    piplineId,
-    pipeline: {
-      data: {
-        name: 'Build CAD files and send them!',
-        pipelineNumber: 32,
-        user: {
-          id: 'asfasffas',
-          name: 'David Revay',
-        }
-      },
-      loading: false,
-    },
+    pipelineId,
+    pipeline,
   };
 }
 

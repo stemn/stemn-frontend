@@ -17,6 +17,9 @@ export default class ProjectPipelineStep extends Component {
     const step = {
       name: 'step name',
     }
+    if (!pipeline) {
+      return null
+    }
     return (
       <div>
         <SubSubHeader>
@@ -53,7 +56,7 @@ export default class ProjectPipelineStep extends Component {
               >
                 <b>{ pipeline.user.name }</b>
               </Link>
-              &nbsp;triggered this pipline 3.2 hours ago.
+              &nbsp;triggered this pipeline 3.2 hours ago.
             </div>
           </div>
         </SubSubHeader>
