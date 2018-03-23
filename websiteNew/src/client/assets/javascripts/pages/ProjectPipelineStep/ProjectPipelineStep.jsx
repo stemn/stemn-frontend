@@ -30,8 +30,8 @@ export default class ProjectPipelineStep extends Component {
           </Breadcrumbs>
           <br />
           <h2 className={ classes.title }>
-            <span>{ pipeline.name }</span>
-            <span className={ classes.number }>&nbsp;#P{ pipeline.pipelineNumber }</span>
+            <span>{ step.name }</span>
+            <span className={ classes.number }>&nbsp;#S{ step.stepNumber }</span>
           </h2>
           <div className={ classes.blurb }>
             <EditorDisplay value={ pipeline.body } />

@@ -12,6 +12,7 @@ import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import SearchInput from 'stemn-shared/misc/Search/SearchInput'
 import HistoryEmpty from 'stemn-shared/misc/SyncTimeline/HistoryEmpty'
 import PipelineList from 'stemn-shared/misc/Pipelines/PipelineList'
+import HistoryGraph from 'stemn-shared/misc/History/HistoryGraph'
 
 export default class ProjectPipelines extends Component {
   changeTypeFilter = (filterType) => {
@@ -68,6 +69,15 @@ export default class ProjectPipelines extends Component {
     if (hasResults) {
       return (
         <div>
+          <div className={classes.graphPanel}>
+            <HistoryGraph
+              entityType={ filter.object.user ? 'user' : 'project' }
+              entityId={ filter.object.user ? filter.object.user : project.data._id }
+              type={ filter.object.type }
+              parentType={ filter.object.user ? 'project' : undefined }
+              parentId={ filter.object.user ? project.data._id : undefined }
+            />
+          </div>
           <PipelineList
              pipelines={ pipelines.data } 
           />

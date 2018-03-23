@@ -60,3 +60,10 @@
     margin-bottom: 15px;
   }
 }
+
+.graphPanel {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: white;
+  margin-bottom: 30px;
+  padding: 15px;
+}
