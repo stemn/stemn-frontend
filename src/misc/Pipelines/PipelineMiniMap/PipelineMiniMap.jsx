@@ -5,7 +5,6 @@ import classes from './PipelineMiniMap.scss'
 import PipelineIcon from '../PipelineIcon'
 import Popover from 'stemn-shared/misc/Popover/Popover'
 import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList'
-import { pipeline } from '../Pipeline.data'
 
 const PopupRowItem = ({ status, name }) => (
   <span className="layout-row layout-align-start-center">
@@ -16,6 +15,7 @@ const PopupRowItem = ({ status, name }) => (
 
 export default class PipelineMiniMap extends Component {
   render() {
+    const { pipeline } = this.props
     const { _id: pipelineId, stages, project: { _id: projectId } } = pipeline
     return (
       <div className={ cn('layout-row', classes.outer) }>

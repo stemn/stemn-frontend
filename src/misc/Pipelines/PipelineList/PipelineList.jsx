@@ -6,21 +6,10 @@ import PipelineRow from '../PipelineRow'
 
 export default class PipelineList extends Component {
   render() {
+    const { pipelines } = this.props
     return (
       <div className={ classes.outer }>
-        <PipelineRow />
-        <PipelineRow />
-        <PipelineRow />
-        <PipelineRow />
-        <PipelineRow />
-        <PipelineRow />
-        <PipelineRow />
-        <PipelineRow />
-        <PipelineRow />
-        <PipelineRow />
-        <PipelineRow />
-        <PipelineRow />
-        <PipelineRow />
+        { pipelines.map(pipelineId => <PipelineRow key={ pipelineId } pipelineId={ pipelineId } />)}
       </div>
     )
   }

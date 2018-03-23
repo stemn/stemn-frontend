@@ -1,1 +1,1 @@
-export default from './PipelineRow'
+export default from './PipelineRow.container'

@@ -67,10 +67,14 @@ const stages = [{
 }]
 
 export const pipeline = {
-  _id: 'piplineid123',
+  _id: 'pipelineid123',
   name: 'Some pipeline namn',
   project: {
     _id: '5a88ff3f236712000f83bbd8',
+  },
+  user: {
+    _id: 'asfsaffsa',
+    name: 'David Revay',
   },
   stages,
 }

@@ -5,10 +5,10 @@ import classes from './PipelineMap.scss'
 import PipelineIcon from '../PipelineIcon'
 import Link from 'stemn-shared/misc/Router/Link'
 import PipelineMapCurve from './PipelineMapCurve'
-import { pipeline } from '../Pipeline.data'
 
 export default class PipelineMap extends Component {
   render() {
+    const { pipeline } = this.props
     const { _id: pipelineId, project: { _id: projectId } } = pipeline
     return (
       <div className={ cn('layout-row', classes.outer) }>
