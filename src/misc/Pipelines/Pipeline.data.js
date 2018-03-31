@@ -1,80 +1,94 @@
-
-const stages = [{
-  _id: 'agsp0gasmpsgampo',
-  name: 'Build CAD Files',
-  status: 'success',
-  steps: [{
-    _id: 'step-id-agsoinhaosgn',
-    name: 'Build CAD files',
-    status: 'success',
-  }, {
-    _id: 'step-id-hipomnjasf0j',
-    name: 'Build other CAD files',
-    status: 'success',
-  }],
-}, {
-  _id: 'agsp0gasmpsg12125ampo',
-  name: 'Build STL Files',
-  status: 'running',
-  steps: [{
-    _id: 'step-id-opganasogin',
-    name: 'Build STLs',
-    status: 'running',
-  }],
-}, {
-  _id: 'agsp1241250gasmpsg125ampo',
-  name: 'Produce Renders',
-  status: 'error',
-  steps: [{
-    _id: 'step-id-asng1q2sg',
-    name: 'Render',
-    status: 'error',
-  }, {
-    _id: 'step-id-bagtsgsa',
-    name: 'Render',
-    status: 'pending',
-  }],
-}, {
-  _id: 'agsp0gasm0fas90j9psgampo',
-  name: 'Email renders',
-  status: 'pending',
-  steps: [{
-    _id: 'step-id-avsbsasb',
-    name: 'Send email',
-    status: 'pending',
-  }, {
-    _id: 'step-id-gagsgsa',
-    name: 'Send slack notification',
-    status: 'pending',
-  }, {
-    _id: 'step-id-afssaffsafsa',
-    name: 'Send slack notification',
-    status: 'pending',
-  }, {
-    _id: 'step-id-asfafs',
-    name: 'Send slack notification',
-    status: 'pending',
-  }],
-}, {
-  _id: 'agsp01gasm0fas90j9psgampo',
-  name: 'Complete renders',
-  status: 'pending',
-  steps: [{
-    _id: 'step-id-avs1bsasb',
-    name: 'Send email',
-    status: 'pending',
-  }],
-}]
-
 export const pipeline = {
-  _id: 'pipelineid123',
-  name: 'Some pipeline namn',
+  _id: '5ab30cf335c1cd0042ea667d',
   project: {
     _id: '5a88ff3f236712000f83bbd8',
   },
+  fileId: '5ab30cf235c1cd0042ea6677',
+  revisionId: '5ab30cf235c1cd0042ea6676',
+  root: '30f8f192-c1a7-4223-b881-446e97fd9fbe',
+  event: 'revision',
+  name: 'Generate parametric resin mould',
+  status: 'pending',
   user: {
-    _id: 'asfsaffsa',
+    _id: '547db55af7f342380174e228',
     name: 'David Revay',
+    picture: '/uploads/2b4ae5ac-e869-4a7d-8b99-4de21d852a8a.jpg',
   },
-  stages,
+  config: {
+    triggers: [
+      {
+        type: 'revision',
+        files: 'resin-mould.py'
+      }
+    ],
+    stages: [
+      {
+        steps: [
+          {
+            command: [
+              'build',
+              '--in_spec',
+              '/pipeline/resin-mould.py',
+              '--format',
+              'STEP'
+            ],
+            outputFiles: [
+              'cqobject*'
+            ],
+            inputFiles: [
+              'resin-mould.py'
+            ],
+            image: 'dcowden/cadquery:latest',
+            label: 'STEP'
+          }
+        ],
+        label: 'convert'
+      },
+      {
+        steps: [
+          {
+            inputFiles: [
+              'cqobject*'
+            ],
+            image: 'stemn/upload:latest',
+            label: 'stemn'
+          }
+        ],
+        label: 'upload'
+      }
+    ]
+  },
+  stages: [
+    {
+      _id: '5ab30cf335c1cd0042ea6679',
+      name: 'convert',
+      status: 'running',
+      steps: [{
+        _id: '5ab450710741c3005e4cda54',
+        stage: '5ab30cf335c1cd0042ea6679',
+        name: 'to STEP',
+        status: 'running'
+      }, {
+        _id: '5ab450710741c3005e4cea22',
+        stage: '5ab30cf335c1cd0042ea6679',
+        name: 'to STL',
+        status: 'pending'
+      }]
+    },
+    {
+      _id: '5ab30cf335c1cd0042ea667a',
+      name: 'upload',
+      status: 'pending',
+      steps: [{
+        _id: '5ab450710741c3005e4cda0f',
+        stage: '5ab30cf335c1cd0042ea667a',
+        name: 'to Stemn',
+        status: 'pending'
+      }]
+    }
+  ],
+  outputFiles: [],
+  inputRevisions: [
+    '5ab30cf235c1cd0042ea6676'
+  ],
 }

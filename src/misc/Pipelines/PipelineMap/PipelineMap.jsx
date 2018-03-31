@@ -11,7 +11,7 @@ export default class PipelineMap extends Component {
     const { pipeline } = this.props
     const { _id: pipelineId, project: { _id: projectId } } = pipeline
     return (
-      <div className={ cn('layout-row', classes.outer) }>
+      <div className={ cn('layout-row flex', classes.outer) }>
         { pipeline.stages.map((stage, idx) => (
           <div key={ stage._id } className={ classes.stage }>
             <div className="text-ellipsis">{stage.name}</div>

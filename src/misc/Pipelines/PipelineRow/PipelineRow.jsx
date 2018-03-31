@@ -22,7 +22,7 @@ export default class PipelineRow extends Component {
         <Link
           name="projectPipelineRoute"
           params={ { projectId, pipelineId } }
-          className={ classes.title }
+          className={ classNames(classes.title, 'text-ellipsis') }
         >
           Build and email STL files <span className={ classes.number }>#P1234</span>
         </Link>
