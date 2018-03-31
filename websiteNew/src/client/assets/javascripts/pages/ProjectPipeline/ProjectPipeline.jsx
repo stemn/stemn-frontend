@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 
 import classNames from 'classnames'
-import classes from './ProjectPipeline.css'
+import classes from './ProjectPipeline.scss'
 
 import { Breadcrumbs, Crumb } from 'stemn-shared/misc/Breadcrumbs'
-import { Container } from 'stemn-shared/misc/Layout'
+import Button from 'stemn-shared/misc/Buttons/Button/Button'
+import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import SubSubHeader from 'modules/SubSubHeader'
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'
 import PipelineMap from 'stemn-shared/misc/Pipelines/PipelineMap'
 import Link from 'stemn-shared/misc/Router/Link'
+import moment from 'moment'
 
 export default class ProjectCommit extends Component {
   renderLoaded() {
@@ -17,6 +19,10 @@ export default class ProjectCommit extends Component {
 
     if (!pipeline) {
       return null
+    }
+
+    const userRouteParams = {
+      userId: pipeline.user._id
     }
 
     return (
@@ -31,32 +37,33 @@ export default class ProjectCommit extends Component {
             <span>{ pipeline.name }</span>
             <span className={ classes.number }>&nbsp;#P{ pipeline.pipelineNumber }</span>
           </h2>
-          <div className={ classes.blurb }>
-            <EditorDisplay value={ pipeline.body } />
-          </div>
-          <div className={ classNames('layout-row layout-align-start-center', classes.meta) }>
-            <Link
-              name="userRoute"
-              params={ { userId: pipeline.user._id } }
-            >
-              <UserAvatar
-                className={ classes.avatar }
-                name={ pipeline.user.name }
-                picture={ pipeline.user.picture }
-                size={ 20 }
-                shape="square"
-              />
-            </Link>
-            <div className="text-ellipsis">
+          <Row className="sm layout-xs-column layout-gt-xs-row">
+            <Col className={ classNames('sm layout-row layout-align-start-center', classes.meta) }>
               <Link
                 name="userRoute"
-                params={ { userId: pipeline.user._id } }
+                params={ userRouteParams }
+                className="layout-row layout-align-start-center"
               >
-                <b>{ pipeline.user.name }</b>
+                <UserAvatar
+                  className={ classes.avatar }
+                  name={ pipeline.user.name }
+                  picture={ pipeline.user.picture }
+                  size={ 20 }
+                  shape='square'
+                />
+                <b className="text-ellipsis">{ pipeline.user.name }</b>
               </Link>
-              &nbsp;triggered this pipeline 3.2 hours ago.
-            </div>
-          </div>
+              <div className="text-ellipsis">&nbsp;manually triggered this pipeline { moment(pipeline.created).fromNow() }.</div>
+            </Col>
+            <div className="flex" />
+            <Col className={ classNames('sm layout-column', classes.buttonRow) }>
+              <Button
+                className="primary"
+              >
+                Rerun Pipeline
+              </Button>
+            </Col>
+          </Row>
         </SubSubHeader>
         <Container>
           <br />

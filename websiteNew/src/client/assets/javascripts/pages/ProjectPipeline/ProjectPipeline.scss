@@ -4,11 +4,6 @@
   color: rgba(0, 0, 0, 0.8);
 }
 
-.blurb {
-  color: rgba(0, 0, 0, 0.6);
-  margin-bottom: 15px;
-}
-
 .number {
   color: rgba(0, 0, 0, 0.3);
 }
@@ -20,4 +15,14 @@
 
 .avatar {
   margin-right: 10px;
+}
+
+.buttonRow {
+  @media (max-width: 599px) {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
 }
