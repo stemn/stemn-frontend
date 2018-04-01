@@ -30,7 +30,16 @@ const reducer = (state, action) => {
     case 'PIPELINES/GET_PIPELINE_FULFILLED':
       return i.chain(state)
         .assocIn(['pipelineData', action.meta.cacheKey, 'loading'], false)
-        .assocIn(['pipelineData', action.meta.cacheKey, 'data'], action.payload.data)
+        .assocIn(['pipelineData', action.meta.cacheKey, 'data'], {
+          ...action.payload.data,
+          user: {
+            _id: 'abc',
+            name: 'David Revay'
+          },
+          project: {
+            _id: '5a88ff3f236712000f83bbd8'
+          }
+        })
         .value()
 
     case 'PIPELINES/GET_STEP_PENDING':

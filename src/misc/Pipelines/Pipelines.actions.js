@@ -1,10 +1,13 @@
+import http from 'axios'
 import { pipeline } from './Pipeline.data'
+import { joinRoom, leaveRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
 
 export const getPipeline = ({ pipelineId }) => ({
   type: 'PIPELINES/GET_PIPELINE',
-  payload: new Promise(resolve => resolve({
-    data: pipeline,
-  })),
+  payload: http({
+    method: 'GET',
+    url: `/api/v1/pipelines/${pipelineId}`,
+  }),
   meta: {
     cacheKey: pipelineId,
   },
@@ -23,12 +26,29 @@ export const getPipelines = ({ cacheKey }) => ({
   },
 })
 
-export const getStep = ({ cacheKey }) => ({
+export const getStep = ({ stepId }) => ({
   type: 'PIPELINES/GET_STEP',
   payload: new Promise(resolve => resolve({
     data: pipeline.stages[0].steps[0],
   })),
-  meta: {
-    cacheKey,
-  },
+})
+
+export const joinPipelineRoom = ({ pipelineId }) => joinRoom({
+  room: pipelineId,
+  type: 'pipeline',
+})
+
+export const leavePipelineRoom = ({ pipelineId }) => leaveRoom({
+  room: pipelineId,
+  type: 'pipeline',
+})
+
+export const joinStepRoom = ({ stepId }) => joinRoom({
+  room: stepId,
+  type: 'step',
+})
+
+export const leaveStepRoom = ({ stepId }) => leaveRoom({
+  room: stepId,
+  type: 'step',
 })
