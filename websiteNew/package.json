@@ -105,6 +105,7 @@
     "whats-that-gerber": "git+https://git@github.com/stemn/whats-that-gerber.git"
   },
   "dependencies": {
+    "ansi-to-react": "2.0.6",
     "autoprefixer": "6.4.1",
     "autosuggest-highlight": "2.1.1",
     "axios": "0.15.3",

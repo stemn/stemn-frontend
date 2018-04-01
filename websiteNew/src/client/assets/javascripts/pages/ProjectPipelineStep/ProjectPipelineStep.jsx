@@ -9,17 +9,16 @@ import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import SubSubHeader from 'modules/SubSubHeader'
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'
 import Link from 'stemn-shared/misc/Router/Link'
-import PipelineConsole from 'stemn-shared/misc/Pipelines/PipelineConsole'
+import Terminal from 'stemn-shared/misc/Terminal/Terminal'
 
 export default class ProjectPipelineStep extends Component {
   renderLoaded() {
-    const { pipeline: { data: pipeline }, project } = this.props
-    const step = {
-      name: 'step name',
-    }
-    if (!pipeline) {
+    const { pipeline: { data: pipeline }, project, step } = this.props
+
+    if (!pipeline || !step) {
       return null
     }
+
     return (
       <div>
         <SubSubHeader>
@@ -63,7 +62,7 @@ export default class ProjectPipelineStep extends Component {
         <Container>
           <br />
           <br />
-          <PipelineConsole /> 
+          <Terminal pipelineId={ pipeline._id } stepId={ step._id } /> 
         </Container>
       </div>
     )

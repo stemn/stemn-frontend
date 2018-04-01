@@ -49,11 +49,11 @@ export default class ProjectCommit extends Component {
                   name={ pipeline.user.name }
                   picture={ pipeline.user.picture }
                   size={ 20 }
-                  shape='square'
+                  shape="square"
                 />
                 <b className="text-ellipsis">{ pipeline.user.name }</b>
               </Link>
-              <div className="text-ellipsis">&nbsp;manually triggered this pipeline { moment(pipeline.created).fromNow() }.</div>
+              <div className="text-ellipsis">&nbsp;manually triggered this pipeline { moment(pipeline.started).fromNow() }.</div>
             </Col>
             <div className="flex" />
             <Col className={ classNames('sm layout-column', classes.buttonRow) }>

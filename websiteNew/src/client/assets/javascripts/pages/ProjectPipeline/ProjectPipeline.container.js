@@ -28,7 +28,7 @@ const dispatchToProps = {
 const fetchConfigs = [{
   hasChanged: 'pipelineId',
   onChange: ({ getPipeline, pipelineId, replace }) => getPipeline({ pipelineId })
-    .catch(() => replace(notFound()))
+    // .catch(() => replace(notFound()))
 }];
 
 @connect(stateToProps, dispatchToProps)
