@@ -9,6 +9,7 @@ export const pipeline = {
   event: 'revision',
   name: 'Generate parametric resin mould',
   status: 'pending',
+  pipelineNumber: '43',
   user: {
     _id: '547db55af7f342380174e228',
     name: 'David Revay',

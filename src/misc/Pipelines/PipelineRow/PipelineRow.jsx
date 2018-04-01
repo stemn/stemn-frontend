@@ -15,7 +15,8 @@ export default class PipelineRow extends Component {
       <div className={ classNames(classes.row, 'layout-row layout-align-start-center') }>
         <UserAvatar
           style={ { marginRight: '10px' } }
-          name="David Revay"
+          name={ pipeline.data.user.name }
+          picture={ pipeline.data.user.picture }
           size={ 25 }
           shape="square"
         />
@@ -24,7 +25,7 @@ export default class PipelineRow extends Component {
           params={ { projectId, pipelineId } }
           className={ classNames(classes.title, 'text-ellipsis') }
         >
-          Build and email STL files <span className={ classes.number }>#P1234</span>
+          {pipeline.data.name} <span className={ classes.number }>#P{pipeline.data.pipelineNumber}</span>
         </Link>
         <div className="flex" />
         <PipelineMiniMap pipeline={ pipeline.data }  />

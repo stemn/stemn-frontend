@@ -43,7 +43,7 @@ export const getProject = ({ projectId, size = 'lg', force }) => (dispatch, getS
     ? project.dataSize
     : undefined
 
-  if (shouldDownload(size, existingSize) || force) {
+  // if (shouldDownload(size, existingSize) || force) {
     return dispatch({
       type: 'PROJECTS/GET_PROJECT',
       httpPackage: {
@@ -61,7 +61,7 @@ export const getProject = ({ projectId, size = 'lg', force }) => (dispatch, getS
         size,
       },
     })
-  }
+  // }
 }
 
 export const createProject = project => (dispatch, getState) => dispatch({
