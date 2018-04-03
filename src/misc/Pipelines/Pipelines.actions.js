@@ -13,14 +13,12 @@ export const getPipeline = ({ pipelineId }) => ({
   },
 })
 
-export const getPipelines = ({ cacheKey }) => ({
+export const getPipelines = ({ projectId, cacheKey }) => ({
   type: 'PIPELINES/GET_PIPELINES',
-  payload: new Promise(resolve => resolve({
-    data: [pipeline, {
-      ...pipeline,
-      _id: 'some-other-id',
-    }],
-  })),
+  payload: http({
+    method: 'GET',
+    url: `/api/v1/projects/${projectId}/pipelines`,
+  }),
   meta: {
     cacheKey,
   },
@@ -28,9 +26,10 @@ export const getPipelines = ({ cacheKey }) => ({
 
 export const getStep = ({ stepId }) => ({
   type: 'PIPELINES/GET_STEP',
-  payload: new Promise(resolve => resolve({
-    data: pipeline.stages[0].steps[0],
-  })),
+  payload: http({
+    method: 'GET',
+    url: `/api/v1/steps/${stepId}`,
+  }),
 })
 
 export const joinPipelineRoom = ({ pipelineId }) => joinRoom({

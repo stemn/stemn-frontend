@@ -15,21 +15,26 @@ const PopupRowItem = ({ status, name }) => (
 
 export default class PipelineMiniMap extends Component {
   render() {
-    const { pipeline } = this.props
+    const { pipeline, stepData } = this.props
     const { _id: pipelineId, stages, project: { _id: projectId } } = pipeline
     return (
       <div className={ cn('layout-row', classes.outer) }>
         { stages.map((stage) => {
-          const menu = stage.steps.map(step => ({ 
-            key: step._id,
-            label: <PopupRowItem status={ step.status } name={ step.name } />,
-            name: 'projectPipelineStepRoute',
-            params: {
-              projectId,
-              pipelineId,
-              stepId: step._id,
-            },
-          }))
+          const menu = stage.steps.map((stepId) => {
+            const step = stepData[stepId] && stepData[stepId].data
+              ? stepData[stepId].data
+              : {}
+            return { 
+              key: stepId,
+              label: <PopupRowItem status={ step.status } name={ step.name } />,
+              name: 'projectPipelineStepRoute',
+              params: {
+                projectId,
+                pipelineId,
+                stepId,
+              },
+            }
+          })
           
           return (
             <Popover

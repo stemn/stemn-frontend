@@ -1,1 +1,1 @@
-export default from './PipelineMap'
+export default from './PipelineMap.container'

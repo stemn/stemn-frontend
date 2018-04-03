@@ -1,5 +1,5 @@
 import i from 'icepick'
-import { keyBy } from 'lodash'
+import { flow, flatMap, map, keyBy } from 'lodash/fp'
 
 const initialState = {
   pipelines: {},
@@ -17,10 +17,37 @@ const reducer = (state, action) => {
       return i.chain(state)
         .assocIn(['pipelines', action.meta.cacheKey, 'loading'], false)
         .assocIn(['pipelines', action.meta.cacheKey, 'data'], action.payload.data.map(item => item._id))
-        .updateIn(['pipelineData'], data => i.merge(data, keyBy(action.payload.data.map(item => ({
-          loading: false,
-          data: item,
-        })), 'data._id')))
+        .updateIn(['pipelineData'], data => i.merge(data, flow(
+          map(item => ({
+            loading: false,
+            data: {
+              ...item,
+              stages: map(stage => ({
+                ...stage,
+                steps: map('_id', stage.steps),
+              }), item.stages),
+              project: {
+                _id: '5ab63ec82cea660019476793',
+              },
+              pipelineNumber: '43',
+              user: {
+                _id: '547db55af7f342380174e228',
+                name: 'David Revay',
+                picture: '/uploads/2b4ae5ac-e869-4a7d-8b99-4de21d852a8a.jpg',
+              },
+            },          
+          })),
+          keyBy('data._id'),
+        )(action.payload.data)))
+        .updateIn(['stepData'], data => i.merge(data, flow(
+          flatMap('stages'),
+          flatMap('steps'),
+          map(item => ({
+            loading: false,
+            data: item,
+          })),
+          keyBy('data._id'),
+        )(action.payload.data)))
         .value()
 
     case 'PIPELINES/GET_PIPELINE_PENDING':
@@ -34,11 +61,11 @@ const reducer = (state, action) => {
           ...action.payload.data,
           user: {
             _id: 'abc',
-            name: 'David Revay'
+            name: 'David Revay',
           },
           project: {
-            _id: '5a88ff3f236712000f83bbd8'
-          }
+            _id: '5a88ff3f236712000f83bbd8',
+          },
         })
         .value()
 

@@ -8,7 +8,7 @@ import PipelineMapCurve from './PipelineMapCurve'
 
 export default class PipelineMap extends Component {
   render() {
-    const { pipeline } = this.props
+    const { pipeline, stepData } = this.props
     const { _id: pipelineId, project: { _id: projectId } } = pipeline
     return (
       <div className={ cn('layout-row flex', classes.outer) }>
@@ -17,25 +17,31 @@ export default class PipelineMap extends Component {
             <div className="text-ellipsis">{stage.name}</div>
             <br />
             <div>
-              { stage.steps.map((step, stepIdx) => (
-                <div key={ step._id } className={ classes.step }>
-                  <Link
-                    className={ cn('layout-row layout-align-start-center') }
-                    name="projectPipelineStepRoute"
-                    params={ {
-                      projectId,
-                      pipelineId,
-                      stepId: step._id,
-                    } }
-                    title={ step.name }
-                  >
-                    <PipelineIcon status={ step.status } style={ { marginRight: '10px' } } /> 
-                    <span className="flex text-ellipsis">{ step.name }</span>
-                  </Link>
-                  { idx !== pipeline.stages.length - 1 && <PipelineMapCurve side="right" connectTo={ stepIdx }  /> }
-                  { idx !== 0 && <PipelineMapCurve side="left" connectTo={ stepIdx } /> }
-                </div>
-              ))}
+              { stage.steps.map((stepId, stepIdx) => {
+                const step = stepData[stepId] && stepData[stepId].data
+                  ? stepData[stepId].data
+                  : {}
+                  
+                return (
+                  <div key={ step._id } className={ classes.step }>
+                    <Link
+                      className={ cn('layout-row layout-align-start-center') }
+                      name="projectPipelineStepRoute"
+                      params={ {
+                        projectId,
+                        pipelineId,
+                        stepId: step._id,
+                      } }
+                      title={ step.name }
+                    >
+                      <PipelineIcon status={ step.status } style={ { marginRight: '10px' } } /> 
+                      <span className="flex text-ellipsis">{ step.name }</span>
+                    </Link>
+                    { idx !== pipeline.stages.length - 1 && <PipelineMapCurve side="right" connectTo={ stepIdx }  /> }
+                    { idx !== 0 && <PipelineMapCurve side="left" connectTo={ stepIdx } /> }
+                  </div>
+                )
+              })}
             </div>
           </div>
         ))}
