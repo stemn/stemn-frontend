@@ -55,19 +55,20 @@ const dispatchToProps = {
 }
 
 const fetchConfigs = [{
-  hasChanged: 'queryKey',
+  hasChanged: 'projectId',
   onChange: (props) => {
     props.getPipelines({
       projectId: props.projectId,
-      types: props.filter.object.type ? [ props.filter.object.type ] : undefined,
       cacheKey: props.cacheKey,
-      criteria: {
-        owner: props.filter.object.user,
-        name: props.filter.object.query && `/${props.filter.object.query}/i`
-      },
-      page: props.page,
-      size: props.size,
     })
+    // types: props.filter.object.type ? [ props.filter.object.type ] : undefined,
+    // cacheKey: props.cacheKey,
+    // criteria: {
+    //   owner: props.filter.object.user,
+    //   name: props.filter.object.query && `/${props.filter.object.query}/i`
+    // },
+    // page: props.page,
+    // size: props.size,
   }
 }]
 

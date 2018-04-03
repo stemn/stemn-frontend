@@ -69,7 +69,7 @@ export default class ProjectPipelines extends Component {
     if (hasResults) {
       return (
         <div>
-          <div className={classes.graphPanel}>
+          {/* <div className={classes.graphPanel}>
             <HistoryGraph
               entityType={ filter.object.user ? 'user' : 'project' }
               entityId={ filter.object.user ? filter.object.user : project.data._id }
@@ -77,7 +77,7 @@ export default class ProjectPipelines extends Component {
               parentType={ filter.object.user ? 'project' : undefined }
               parentId={ filter.object.user ? project.data._id : undefined }
             />
-          </div>
+          </div> */}
           <PipelineList
              pipelines={ pipelines.data } 
           />
