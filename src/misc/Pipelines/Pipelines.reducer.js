@@ -7,6 +7,43 @@ const initialState = {
   stepData: {},
 }
 
+const replacePipelineStepsWithIds = pipeline => ({
+  ...pipeline,
+  stages: map(stage => ({
+    ...stage,
+    steps: map('_id', stage.steps),
+  }), pipeline.stages),
+})
+
+const extractSteps = flow(
+  flatMap('stages'),
+  flatMap('steps'),
+  map(item => ({
+    loading: false,
+    data: item,
+  })),
+  keyBy('data._id'),
+)
+
+const extractPipelines = flow(
+  map(item => ({
+    loading: false,
+    data: {
+      ...replacePipelineStepsWithIds(item),
+      project: {
+        _id: '5ab63ec82cea660019476793',
+      },
+      pipelineNumber: '43',
+      user: {
+        _id: '547db55af7f342380174e228',
+        name: 'David Revay',
+        picture: '/uploads/2b4ae5ac-e869-4a7d-8b99-4de21d852a8a.jpg',
+      },
+    },          
+  })),
+  keyBy('data._id'),
+)
+
 const reducer = (state, action) => {
   switch (action.type) { 
     case 'PIPELINES/GET_PIPELINES_PENDING':
@@ -17,37 +54,8 @@ const reducer = (state, action) => {
       return i.chain(state)
         .assocIn(['pipelines', action.meta.cacheKey, 'loading'], false)
         .assocIn(['pipelines', action.meta.cacheKey, 'data'], action.payload.data.map(item => item._id))
-        .updateIn(['pipelineData'], data => i.merge(data, flow(
-          map(item => ({
-            loading: false,
-            data: {
-              ...item,
-              stages: map(stage => ({
-                ...stage,
-                steps: map('_id', stage.steps),
-              }), item.stages),
-              project: {
-                _id: '5ab63ec82cea660019476793',
-              },
-              pipelineNumber: '43',
-              user: {
-                _id: '547db55af7f342380174e228',
-                name: 'David Revay',
-                picture: '/uploads/2b4ae5ac-e869-4a7d-8b99-4de21d852a8a.jpg',
-              },
-            },          
-          })),
-          keyBy('data._id'),
-        )(action.payload.data)))
-        .updateIn(['stepData'], data => i.merge(data, flow(
-          flatMap('stages'),
-          flatMap('steps'),
-          map(item => ({
-            loading: false,
-            data: item,
-          })),
-          keyBy('data._id'),
-        )(action.payload.data)))
+        .updateIn(['pipelineData'], data => i.merge(data, extractPipelines(action.payload.data)))
+        .updateIn(['stepData'], data => i.merge(data, extractSteps(action.payload.data)))
         .value()
 
     case 'PIPELINES/GET_PIPELINE_PENDING':
@@ -56,17 +64,8 @@ const reducer = (state, action) => {
       return i.assocIn(state, ['pipelineData', action.meta.cacheKey, 'loading'], false)
     case 'PIPELINES/GET_PIPELINE_FULFILLED':
       return i.chain(state)
-        .assocIn(['pipelineData', action.meta.cacheKey, 'loading'], false)
-        .assocIn(['pipelineData', action.meta.cacheKey, 'data'], {
-          ...action.payload.data,
-          user: {
-            _id: 'abc',
-            name: 'David Revay',
-          },
-          project: {
-            _id: '5a88ff3f236712000f83bbd8',
-          },
-        })
+        .updateIn(['pipelineData'], data => i.merge(data, extractPipelines([action.payload.data])))
+        .updateIn(['stepData'], data => i.merge(data, extractSteps([action.payload.data])))
         .value()
 
     case 'PIPELINES/GET_STEP_PENDING':
@@ -75,8 +74,8 @@ const reducer = (state, action) => {
       return i.assocIn(state, ['stepData', action.meta.cacheKey, 'loading'], false)
     case 'PIPELINES/GET_STEP_FULFILLED':
       return i.chain(state)
-        .assocIn(['stepData', action.meta.cacheKey, 'loading'], false)
-        .assocIn(['stepData', action.meta.cacheKey, 'data'], action.payload.data)
+        .assocIn(['stepData', action.payload.data._id, 'loading'], false)
+        .assocIn(['stepData', action.payload.data._id, 'data'], action.payload.data)
         .value()
 
     default:

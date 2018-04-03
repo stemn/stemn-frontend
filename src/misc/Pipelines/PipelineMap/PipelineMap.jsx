@@ -23,14 +23,14 @@ export default class PipelineMap extends Component {
                   : {}
                   
                 return (
-                  <div key={ step._id } className={ classes.step }>
+                  <div key={ stepId } className={ classes.step }>
                     <Link
                       className={ cn('layout-row layout-align-start-center') }
                       name="projectPipelineStepRoute"
                       params={ {
                         projectId,
                         pipelineId,
-                        stepId: step._id,
+                        stepId,
                       } }
                       title={ step.name }
                     >
