@@ -1,17 +1,12 @@
 import React, { Component } from 'react'
 
-import classNames from 'classnames'
 import classes from './ProjectPipeline.scss'
-
 import { Breadcrumbs, Crumb } from 'stemn-shared/misc/Breadcrumbs'
-import Button from 'stemn-shared/misc/Buttons/Button/Button'
-import { Container, Row, Col } from 'stemn-shared/misc/Layout'
-import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
+import { Container } from 'stemn-shared/misc/Layout'
 import SubSubHeader from 'modules/SubSubHeader'
-import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'
 import PipelineMap from 'stemn-shared/misc/Pipelines/PipelineMap'
-import Link from 'stemn-shared/misc/Router/Link'
-import moment from 'moment'
+import PipelineIcon from 'stemn-shared/misc/Pipelines/PipelineIcon'
+import ProjectPipelineMeta from './ProjectPipelineMeta'
 
 export default class ProjectCommit extends Component {
   renderLoaded() {
@@ -19,10 +14,6 @@ export default class ProjectCommit extends Component {
 
     if (!pipeline) {
       return null
-    }
-
-    const userRouteParams = {
-      userId: pipeline.user._id
     }
 
     return (
@@ -34,36 +25,11 @@ export default class ProjectCommit extends Component {
           </Breadcrumbs>
           <br />
           <h2 className={ classes.title }>
+            <PipelineIcon status={ pipeline.status } />
             <span>{ pipeline.name }</span>
             <span className={ classes.number }>&nbsp;#P{ pipeline.pipelineNumber }</span>
           </h2>
-          <Row className="sm layout-xs-column layout-gt-xs-row">
-            <Col className={ classNames('sm layout-row layout-align-start-center', classes.meta) }>
-              <Link
-                name="userRoute"
-                params={ userRouteParams }
-                className="layout-row layout-align-start-center"
-              >
-                <UserAvatar
-                  className={ classes.avatar }
-                  name={ pipeline.user.name }
-                  picture={ pipeline.user.picture }
-                  size={ 20 }
-                  shape="square"
-                />
-                <b className="text-ellipsis">{ pipeline.user.name }</b>
-              </Link>
-              <div className="text-ellipsis">&nbsp;manually triggered this pipeline { moment(pipeline.started).fromNow() }.</div>
-            </Col>
-            <div className="flex" />
-            <Col className={ classNames('sm layout-column', classes.buttonRow) }>
-              <Button
-                className="primary"
-              >
-                Rerun Pipeline
-              </Button>
-            </Col>
-          </Row>
+          <ProjectPipelineMeta pipeline={ pipeline } />
         </SubSubHeader>
         <Container>
           <br />
