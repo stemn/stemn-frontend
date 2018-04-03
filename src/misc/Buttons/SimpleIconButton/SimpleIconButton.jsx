@@ -5,9 +5,9 @@ import classes from './SimpleIconButton.css'
 
 export default class extends React.Component {
   render() {
-    const { children, className, color, disabled, ...otherProps } = this.props
+    const { children, className, color, disabled, href, ...otherProps } = this.props
     const allClasses = classNames(classes.button, className, {
-      [classes.white]: color == 'white',
+      [classes.white]: color === 'white',
       disabled,
     })
 
@@ -21,6 +21,17 @@ export default class extends React.Component {
         </Link>
       )
     } 
+    if (this.props.href) {
+      return (
+        <a
+          className={ allClasses }
+          href={ href }
+          { ...otherProps }
+        >
+          { children }
+        </a>
+      )
+    }
     return (
       <button
         className={ allClasses }

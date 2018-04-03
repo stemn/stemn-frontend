@@ -8,7 +8,7 @@ import MdPlay from 'react-icons/md/play-arrow'
 import MdClose from 'react-icons/md/close'
 import MdStop from 'react-icons/md/stop'
 
-export default class pipelineIcon extends Component {
+export default class PipelineIcon extends Component {
   render() {
     const { status, ...otherProps } = this.props
     if (status === 'success') {
