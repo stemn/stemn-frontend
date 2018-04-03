@@ -13,7 +13,7 @@ import Terminal from 'stemn-shared/misc/Terminal/Terminal'
 
 export default class ProjectPipelineStep extends Component {
   renderLoaded() {
-    const { pipeline: { data: pipeline }, project, step } = this.props
+    const { pipeline: { data: pipeline }, project, step, stepId } = this.props
 
     if (!pipeline || !step) {
       return null
@@ -62,7 +62,7 @@ export default class ProjectPipelineStep extends Component {
         <Container>
           <br />
           <br />
-          <Terminal pipelineId={ pipeline._id } stepId={ step._id } /> 
+          <Terminal pipelineId={ pipeline._id } stepId={ stepId } /> 
         </Container>
       </div>
     )
