@@ -10,7 +10,7 @@ import SubSubHeader from 'modules/SubSubHeader'
 import Pagination from 'stemn-shared/misc/Pagination'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import SearchInput from 'stemn-shared/misc/Search/SearchInput'
-import HistoryEmpty from 'stemn-shared/misc/SyncTimeline/HistoryEmpty'
+import PipelinesEmpty from 'stemn-shared/misc/Pipelines/PipelinesEmpty'
 import PipelineList from 'stemn-shared/misc/Pipelines/PipelineList'
 import HistoryGraph from 'stemn-shared/misc/History/HistoryGraph'
 
@@ -88,8 +88,8 @@ export default class ProjectPipelines extends Component {
           />
         </div>
       )
-    } else if ( filterIsDefault ) {
-      return <HistoryEmpty projectRouteParams={ projectRouteParams } />
+    } else if (filterIsDefault) {
+      return <PipelinesEmpty projectRouteParams={ projectRouteParams } />
     } else {
       return (
         <Panel className="text-title-5">

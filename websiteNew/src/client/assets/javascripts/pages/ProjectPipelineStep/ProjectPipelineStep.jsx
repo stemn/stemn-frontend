@@ -6,13 +6,13 @@ import { Container } from 'stemn-shared/misc/Layout'
 import SubSubHeader from 'modules/SubSubHeader'
 import Terminal from 'stemn-shared/misc/Terminal/Terminal'
 import PipelineIcon from 'stemn-shared/misc/Pipelines/PipelineIcon'
-import ProjectPipelineMeta from '../ProjectPipeline/ProjectPipelineMeta'
+import ProjectPipelineMeta from '../ProjectPipeline/ProjectPipelineMeta.container'
 
 export default class ProjectPipelineStep extends Component {
   renderLoaded() {
-    const { pipeline: { data: pipeline }, project, step, stepId } = this.props
+    const { pipeline, project, step, stepId } = this.props
 
-    if (!pipeline || !step || !step.data) {
+    if (!pipeline || !pipeline.data || !step || !step.data) {
       return null
     }
 
@@ -21,7 +21,7 @@ export default class ProjectPipelineStep extends Component {
         <SubSubHeader>
           <Breadcrumbs>
             <Crumb name="projectPipelinesRoute" params={ { projectId: project.data._id } } text="Pipelines" />
-            <Crumb name="projectPipelineRoute" params={ { projectId: project.data._id, pipelineId: pipeline._id } } text={ pipeline.name } />
+            <Crumb name="projectPipelineRoute" params={ { projectId: project.data._id, pipelineId: pipeline.data._id } } text={ pipeline.data.name } />
             <Crumb text={ step.data.name } />
           </Breadcrumbs>
           <br />
@@ -35,7 +35,7 @@ export default class ProjectPipelineStep extends Component {
         <Container>
           <br />
           <br />
-          <Terminal pipelineId={ pipeline._id } stepId={ stepId } /> 
+          <Terminal pipelineId={ pipeline.data._id } stepId={ stepId } /> 
         </Container>
       </div>
     )

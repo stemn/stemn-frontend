@@ -6,13 +6,13 @@ import { Container } from 'stemn-shared/misc/Layout'
 import SubSubHeader from 'modules/SubSubHeader'
 import PipelineMap from 'stemn-shared/misc/Pipelines/PipelineMap'
 import PipelineIcon from 'stemn-shared/misc/Pipelines/PipelineIcon'
-import ProjectPipelineMeta from './ProjectPipelineMeta'
+import ProjectPipelineMeta from './ProjectPipelineMeta.container'
 
 export default class ProjectCommit extends Component {
   renderLoaded() {
-    const { pipeline: { data: pipeline }, project } = this.props    
+    const { pipeline, project } = this.props    
 
-    if (!pipeline) {
+    if (!pipeline || !pipeline.data) {
       return null
     }
 
@@ -21,20 +21,20 @@ export default class ProjectCommit extends Component {
         <SubSubHeader>
           <Breadcrumbs>
             <Crumb name="projectPipelinesRoute" params={ { projectId: project.data._id } } text="Pipelines" />
-            <Crumb text={ pipeline.name } />
+            <Crumb text={ pipeline.data.name } />
           </Breadcrumbs>
           <br />
           <h2 className={ classes.title }>
-            <PipelineIcon status={ pipeline.status } />
-            <span>{ pipeline.name }</span>
-            <span className={ classes.number }>&nbsp;#P{ pipeline.pipelineNumber }</span>
+            <PipelineIcon status={ pipeline.data.status } />
+            <span>{ pipeline.data.name }</span>
+            <span className={ classes.number }>&nbsp;#P{ pipeline.data.pipelineNumber }</span>
           </h2>
           <ProjectPipelineMeta pipeline={ pipeline } />
         </SubSubHeader>
         <Container>
           <br />
           <br />
-          <PipelineMap pipeline={ pipeline } />
+          <PipelineMap pipeline={ pipeline.data } />
         </Container>
       </div>
     )

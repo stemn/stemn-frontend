@@ -9,15 +9,15 @@ import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import Link from 'stemn-shared/misc/Router/Link'
 import moment from 'moment'
 
-export default ({ pipeline }) => {
+export default ({ pipeline, rerunPipeline }) => {
   const userRouteParams = {
-    userId: pipeline.user._id,
+    userId: pipeline.data.user._id,
   }
 
   const fileParams = {
-    projectId: pipeline.project._id,
-    fileId: pipeline.fileId,
-    revisionId: pipeline.revisionId,
+    projectId: pipeline.data.project._id,
+    fileId: pipeline.data.fileId,
+    revisionId: pipeline.data.revisionId,
   }
   
   return (
@@ -30,14 +30,14 @@ export default ({ pipeline }) => {
         >
           <UserAvatar
             className={ classes.avatar }
-            name={ pipeline.user.name }
-            picture={ pipeline.user.picture }
+            name={ pipeline.data.user.name }
+            picture={ pipeline.data.user.picture }
             size={ 20 }
             shape="square"
           />
-          <b className="text-ellipsis">{ pipeline.user.name }</b>
+          <b className="text-ellipsis">{ pipeline.data.user.name }</b>
         </Link>
-        <div className="text-ellipsis">&nbsp;manually triggered this pipeline { moment(pipeline.started).fromNow() }.</div>
+        <div className="text-ellipsis">&nbsp;manually triggered this pipeline { moment(pipeline.data.started).fromNow() }.</div>
       </Col>
       <div className="flex" />
       <Col className={ classNames('sm layout-row', classes.buttonRow) }>
@@ -50,6 +50,8 @@ export default ({ pipeline }) => {
             Configuration
         </Button>
         <Button
+          disabled={ pipeline.rerunPending }
+          onClick={ () => rerunPipeline({ pipelineId: pipeline.data._id }) }
           className="primary flex-xs"
         >
             Rerun Pipeline
