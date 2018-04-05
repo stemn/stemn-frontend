@@ -4,7 +4,7 @@ import { getLines } from '../Terminal.actions'
 
 const stateToProps = ({ terminal: { lines } }, { stepId, pipelineId }) => ({
   lines: lines[stepId],
-  rawPath: `${GLOBAL_ENV.API_SERVER}/api/v1/pipelines/${pipelineId}/steps/${stepId}/logs`,
+  rawPath: `${GLOBAL_ENV.API_SERVER}/api/v1/pipelines/${pipelineId}/steps/${stepId}/logs.txt`,
 })
 
 const dispatchToProps = {

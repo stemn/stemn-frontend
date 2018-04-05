@@ -1,5 +1,5 @@
 import { addLines } from 'stemn-shared/misc/Terminal/Terminal.actions'
-import { getPipeline, getStep } from 'stemn-shared/misc/Pipelines/Pipelines.actions'
+import { getPipeline, getStep, getLastPipelines } from 'stemn-shared/misc/Pipelines/Pipelines.actions'
 
 export default (store, action) => {
   const { dispatch } = store
@@ -20,6 +20,9 @@ export default (store, action) => {
       return dispatch(getPipeline({
         pipelineId: action.payload.pipelineId,
       }))
+
+    case 'PIPELINE/PIPELINE_CREATED':
+      return dispatch(getLastPipelines())
 
     default:
       return undefined

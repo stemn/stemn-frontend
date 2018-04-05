@@ -17,7 +17,9 @@ export default class PipelineIcon extends Component {
       return <div className={ cn(s.outer, s.running) } { ...otherProps }><MdPlay size={ 16 } /></div>
     } else if (status === 'pending') {
       return <div className={ cn(s.outer, s.pending) } { ...otherProps }><MdStop size={ 16 } /></div>
-    } else if (status === 'error') {
+    } else if (status === 'skipped') {
+      return <div className={ cn(s.outer, s.pending) } { ...otherProps }><MdStop  size={ 16 } /></div>
+    } else if (status === 'failed') {
       return <div className={ cn(s.outer, s.error) } { ...otherProps }><MdClose  size={ 16 } /></div>
     }
     return null

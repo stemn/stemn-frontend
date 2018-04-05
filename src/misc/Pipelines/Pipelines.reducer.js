@@ -2,8 +2,20 @@ import i from 'icepick'
 import { flow, flatMap, map, keyBy } from 'lodash/fp'
 
 const initialState = {
+  lastPipelinesRequest: {
+    cacheKey: undefined,
+    projectId: undefined,
+  },
   pipelines: {},
-  pipelineData: {},
+  pipelineData: {
+    /*
+      [pipelineId]: {
+        data: {},
+        loading: boolean,
+        rerunPending: boolean,
+      }
+    */
+  },
   stepData: {},
 }
 
@@ -28,18 +40,7 @@ const extractSteps = flow(
 const extractPipelines = flow(
   map(item => ({
     loading: false,
-    data: {
-      ...replacePipelineStepsWithIds(item),
-      project: {
-        _id: '5ab63ec82cea660019476793',
-      },
-      pipelineNumber: '43',
-      user: {
-        _id: '547db55af7f342380174e228',
-        name: 'David Revay',
-        picture: '/uploads/2b4ae5ac-e869-4a7d-8b99-4de21d852a8a.jpg',
-      },
-    },          
+    data: replacePipelineStepsWithIds(item),          
   })),
   keyBy('data._id'),
 )
@@ -47,7 +48,13 @@ const extractPipelines = flow(
 const reducer = (state, action) => {
   switch (action.type) { 
     case 'PIPELINES/GET_PIPELINES_PENDING':
-      return i.assocIn(state, ['pipelines', action.meta.cacheKey, 'loading'], true)
+      return i.chain(state)
+        .assocIn(['pipelines', action.meta.cacheKey, 'loading'], true)
+        .assocIn(['lastPipelinesRequest'], {
+          cacheKey: action.meta.cacheKey,
+          projectId: action.meta.projectId,
+        })
+        .value()
     case 'PIPELINES/GET_PIPELINES_REJECTED':
       return i.assocIn(state, ['pipelines', action.meta.cacheKey, 'loading'], false)
     case 'PIPELINES/GET_PIPELINES_FULFILLED':
@@ -67,6 +74,13 @@ const reducer = (state, action) => {
         .updateIn(['pipelineData'], data => i.merge(data, extractPipelines([action.payload.data])))
         .updateIn(['stepData'], data => i.merge(data, extractSteps([action.payload.data])))
         .value()
+        
+    case 'PIPELINES/RERUN_PIPELINE_PENDING':
+      return i.assocIn(state, ['pipelineData', action.meta.pipelineId, 'rerunPending'], true)
+    case 'PIPELINES/RERUN_PIPELINE_REJECTED':
+      return i.assocIn(state, ['pipelineData', action.meta.pipelineId, 'rerunPending'], false)
+    case 'PPIPELINES/RERUN_PIPELINE_FULFILLED':
+      return i.assocIn(state, ['pipelineData', action.meta.pipelineId, 'rerunPending'], false)
 
     case 'PIPELINES/GET_STEP_PENDING':
       return i.assocIn(state, ['stepData', action.meta.cacheKey, 'loading'], true)
