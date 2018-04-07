@@ -33,7 +33,7 @@ export default class ThreadRow extends Component {
               { pipeline.data.name }
               { pipeline.data.pipelineNumber && <span className={ classes.pipelineNumber }>&nbsp;#P{ pipeline.data.pipelineNumber }</span> }
             </Link>
-            <div className={ classes.meta }>
+            <div className={ classNames(classes.meta, 'text-ellipsis') }>
               { pipeline.data.start && <span>Triggered {moment(pipeline.data.start).fromNow()}</span> }
               { pipeline.data.start && <span className="text-interpunct" /> }
               { pipeline.data.end && <span className="text-grey-2">Duration: { diffTimes(pipeline.data.start, pipeline.data.end) }</span> }
