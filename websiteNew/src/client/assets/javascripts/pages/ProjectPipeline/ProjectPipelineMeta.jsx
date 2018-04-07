@@ -11,7 +11,7 @@ import moment from 'moment'
 
 export default ({ pipeline, rerunPipeline }) => {
   const userRouteParams = {
-    userId: pipeline.data.user._id,
+    userId: pipeline.data.owner._id,
   }
 
   const fileParams = {
@@ -30,12 +30,12 @@ export default ({ pipeline, rerunPipeline }) => {
         >
           <UserAvatar
             className={ classes.avatar }
-            name={ pipeline.data.user.name }
-            picture={ pipeline.data.user.picture }
+            name={ pipeline.data.owner.name }
+            picture={ pipeline.data.owner.picture }
             size={ 20 }
             shape="square"
           />
-          <b className="text-ellipsis">{ pipeline.data.user.name }</b>
+          <b className="text-ellipsis">{ pipeline.data.owner.name }</b>
         </Link>
         <div className="text-ellipsis">&nbsp;manually triggered this pipeline { moment(pipeline.data.started).fromNow() }.</div>
       </Col>
