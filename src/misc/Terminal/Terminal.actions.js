@@ -15,7 +15,7 @@ export const getLines = ({ pipelineId, stepId }) => ({
   payload: http({
     method: 'GET',
     url: `/api/v1/pipelines/${pipelineId}/steps/${stepId}/logs`,
-  }),
+  }).catch(() => true), // Catch error so toast does not show on 404
   meta: {
     stepId,
   },

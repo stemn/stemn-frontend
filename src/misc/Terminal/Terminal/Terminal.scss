@@ -1,7 +1,9 @@
 .outer {
   background-color: #222;
+  position: relative;
   color: white;
   margin-bottom: 30px;
+  min-height: 150px;
   cursor: default;
 
   .header {
@@ -14,7 +16,7 @@
   }
   
   code {
-    padding: 2px 10px;
+    padding: 2px 15px;
     display: block;
     white-space: pre-line;
     transition: 0.2s ease all;

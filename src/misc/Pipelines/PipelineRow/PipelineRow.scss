@@ -1,11 +1,36 @@
-.row {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 7px;
-  cursor: default;
-  position: relative;
-  line-height: 1.4em;
-  height: 48px;
+// .row {
+//   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+//   padding: 7px 15px;
+//   cursor: default;
+//   position: relative;
+//   line-height: 1.4em;
+//   height: 48px;
 
+//   &:last-child {
+//     border-bottom: none;
+//   }
+// }
+
+// .meta {
+//   font-size: 12px;
+//   margin: 0 10px;
+//   color: rgba(0, 0, 0, 0.5);
+// }
+
+// .title {
+//   font-size: 14px;
+//   margin-right: 10px;
+//   line-height: 1.4em;
+// }
+
+// .number {
+//   color: rgba(0, 0, 0, 0.5);
+// }
+
+.row {
+  height: 66px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 15px;
   &:last-child {
     border-bottom: none;
   }
@@ -17,6 +42,14 @@
   line-height: 1.4em;
 }
 
-.number {
+.meta {
+  margin-top: 5px;
+}
+
+.asignees {
+  margin-left: 12px;
+}
+
+.pipelineNumber {
   color: rgba(0, 0, 0, 0.5);
 }
