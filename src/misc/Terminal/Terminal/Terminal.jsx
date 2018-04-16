@@ -35,14 +35,14 @@ export default class Terminal extends Component {
           >
             <MdDown size={ 22 } />
           </SimpleIconButton>
-          <SimpleIconButton
+          {/* <SimpleIconButton
             color="white"
             title="Raw Logs"
             target="_blank"
             href={ rawPath }
           >
             <MdCode size={ 22 } />
-          </SimpleIconButton>
+          </SimpleIconButton> */}
         </div>
         <div className={ classes.body }>
           { lines && lines.map(line => (

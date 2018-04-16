@@ -40,7 +40,7 @@ export const getLastPipelines = () => (dispatch, getState) => {
 export const rerunPipeline = ({ pipelineId }) => dispatch => dispatch({
   type: 'PIPELINES/RERUN_PIPELINE',
   payload: http({
-    method: 'GET',
+    method: 'POST',
     url: `/api/v1/pipelines/${pipelineId}/restart`,    
     query: {
       populate: true,
