@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import classes from './ProjectPipelines.css'
 import classNames from 'classnames'
 import moment from 'moment'
-import { get } from 'lodash'
+import { get, range } from 'lodash'
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import Panel from 'stemn-shared/misc/Panels/Panel';
@@ -57,29 +57,26 @@ export default class ProjectPipelines extends Component {
       location: 'replace',
     })
   }
-  renderLoaded() {
-    const { project, pipelines, location, page, size, filter, filterIsDefault, board } = this.props
+  renderInner() {
+    const { projectId, pipelines, location, page, size, filter, filterIsDefault, board } = this.props
 
-    const noMoreResults = pipelines && pipelines.data.length < size
+    const isLoaded = pipelines && pipelines.data
+    const isLoading = !pipelines || pipelines.loading
+    const noMoreResults = pipelines && pipelines.data && pipelines.data.length < size
     const hasResults = pipelines && pipelines.data  && pipelines.data.length > 0
-    const projectRouteParams = {
-      projectId: project.data._id,
-    }
+    const projectRouteParams = { projectId }
 
-    if (hasResults) {
+    if (isLoading || hasResults) {
       return (
         <div>
-          {/* <div className={classes.graphPanel}>
-            <HistoryGraph
-              entityType={ filter.object.user ? 'user' : 'project' }
-              entityId={ filter.object.user ? filter.object.user : project.data._id }
-              type={ filter.object.type }
-              parentType={ filter.object.user ? 'project' : undefined }
-              parentId={ filter.object.user ? project.data._id : undefined }
-            />
-          </div> */}
+          <LoadingOverlay 
+            show={ isLoading }
+            linear
+            hideBg
+            noOverlay
+          />
           <PipelineList
-             pipelines={ pipelines.data } 
+             pipelines={ isLoaded ? pipelines.data : range(8) }
           />
           <Pagination
             path={ location.pathname }
@@ -100,10 +97,9 @@ export default class ProjectPipelines extends Component {
   }
   render() {
     const { project, pipelines, filter } = this.props
-    const isLoaded = pipelines && pipelines.data
-    const isLoading = !pipelines || pipelines.loading
+    const team = get(project, 'data.team', [])
 
-    const userFilterOptions = project.data.team.map(user => ({
+    const userFilterOptions = team.map(user => ({
       name: user.name,
       value: user._id,
       onClick: () => { this.changeUserFilter(user._id) }
@@ -176,11 +172,8 @@ export default class ProjectPipelines extends Component {
           </div>
         </SubSubHeader>
         <div className={ classes.innerContent }>
-          <LoadingOverlay show={ isLoading } linear hideBg noOverlay />
           <Container>
-            { isLoaded
-            ? this.renderLoaded()
-            : null }
+            { this.renderInner() }
           </Container>
         </div>
       </div>

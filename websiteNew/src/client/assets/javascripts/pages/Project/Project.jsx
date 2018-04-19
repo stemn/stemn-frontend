@@ -1,20 +1,16 @@
-import React, { Component, PropTypes } from 'react'
-import classNames from 'classnames'
-import classes from './Project.css'
+import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
 import StandardLayout from 'layout/StandardLayout'
 import Tabs from 'stemn-shared/misc/Tabs/Tabs'
-import { Container } from 'stemn-shared/misc/Layout'
 import { get, has } from 'lodash'
 import Link from 'stemn-shared/misc/Router/Link'
-import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import SubHeader from 'modules/SubHeader'
 import IsOwner from 'stemn-shared/misc/Auth/IsOwner'
 import PublicPrivateIcon from 'stemn-shared/misc/Icons/PublicPrivateIcon'
 
 class Project extends Component {
   render() {
-    const { children, project, pathname, currentUser } = this.props
+    const { children, project } = this.props
     const routeParams = { projectId: get(project, 'data._id') }
     const publicIcon = (
       <PublicPrivateIcon
@@ -86,10 +82,7 @@ class Project extends Component {
           </Tabs>
         </SubHeader>
         <div className="flex layout-column">
-          { project && project.data && project.dataSize === 'lg'
-            ? children
-            : null
-          }
+          { children }
         </div>
       </StandardLayout>
     )

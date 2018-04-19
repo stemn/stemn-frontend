@@ -58,23 +58,22 @@ export default class ProjectCommits extends Component {
     })
   }
   renderLoaded() {
-    const { project, syncTimeline, location, page, size, filter, filterIsDefault, board } = this.props
+    const { project, syncTimeline, location, page, projectId, size, filter, filterIsDefault, board } = this.props
 
     const noMoreResults = syncTimeline && syncTimeline.data.length < size
     const hasResults = syncTimeline && syncTimeline.data  && syncTimeline.data.length > 0
-    const projectRouteParams = {
-      projectId: project.data._id,
-    }
+    const projectRouteParams = { projectId }
+    
     if (hasResults) {
       return (
         <div>
           <div className={ classes.graphPanel }>
             <HistoryGraph
               entityType={ filter.object.user ? 'user' : 'project' }
-              entityId={ filter.object.user ? filter.object.user : project.data._id }
+              entityId={ filter.object.user ? filter.object.user : projectId }
               type={ filter.object.type }
               parentType={ filter.object.user ? 'project' : undefined }
-              parentId={ filter.object.user ? project.data._id : undefined }
+              parentId={ filter.object.user ? projectId : undefined }
             />
           </div>
           <Panel>
@@ -106,8 +105,9 @@ export default class ProjectCommits extends Component {
     const { project, syncTimeline, filter } = this.props
     const isLoaded = syncTimeline && syncTimeline.data
     const isLoading = !syncTimeline || syncTimeline.loading
+    const team = get(project, 'data.team', [])
 
-    const userFilterOptions = project.data.team.map(user => ({
+    const userFilterOptions = team.map(user => ({
       name: user.name,
       value: user._id,
       onClick: () => { this.changeUserFilter(user._id) }

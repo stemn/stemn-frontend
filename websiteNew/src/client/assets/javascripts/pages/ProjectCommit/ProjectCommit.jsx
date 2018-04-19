@@ -14,35 +14,35 @@ import Link from 'stemn-shared/misc/Router/Link'
 
 export default class ProjectCommit extends Component {
   renderLoaded() {
-    const { commit: { data: commit }, project } = this.props
+    const { commit: { data: commit }, project, projectId } = this.props
     
-    const groupedRevisions = groupRevisions(commit.data.items)
+    const groupedRevisions = groupRevisions(commit.revisions.map(revision => ({ data: revision })))
 
     return (
       <div>
         <SubSubHeader>
           <Breadcrumbs>
-            <Crumb name="projectCommitsRoute" params={ { projectId: project.data._id } } text="History" />
-            <Crumb name="projectCommitsRoute" params={ { projectId: project.data._id } } query={ { type: 'commits' } } text="Commits" />
-            <Crumb text={ commit.data.name } />
+            <Crumb name="projectCommitsRoute" params={ { projectId } } text="History" />
+            <Crumb name="projectCommitsRoute" params={ { projectId } } query={ { type: 'commits' } } text="Commits" />
+            <Crumb text={ commit.name } />
           </Breadcrumbs>
           <br />
           <h2 className={ classes.title }>
-            <span>{ commit.data.name }</span>
-            <span className={ classes.number }>&nbsp;#C{ commit.data.commitNumber }</span>
+            <span>{ commit.name }</span>
+            <span className={ classes.number }>&nbsp;#C{ commit.commitNumber }</span>
           </h2>
           <div className={ classes.blurb }>
-            <EditorDisplay value={ commit.data.body } />
+            <EditorDisplay value={ commit.body } />
           </div>
           <div className={ classNames('layout-row layout-align-start-center', classes.meta) }>
             <Link
               name="userRoute"
-              params={ { userId: commit.user._id } }
+              params={ { userId: commit.owner._id } }
             >
               <UserAvatar
                 className={ classes.avatar }
-                name={ commit.user.name }
-                picture={ commit.user.picture }
+                name={ commit.owner.name }
+                picture={ commit.owner.picture }
                 size={ 20 }
                 shape="square"
               />
@@ -50,11 +50,11 @@ export default class ProjectCommit extends Component {
             <div className="text-ellipsis">
               <Link
                 name="userRoute"
-                params={ { userId: commit.user._id } }
+                params={ { userId: commit.owner._id } }
               >
-                <b>{ commit.user.name }</b>
+                <b>{ commit.owner.name }</b>
               </Link>
-              &nbsp;commited { groupedRevisions.length } files containing a total of { commit.data.items.length } revisions.
+              &nbsp;commited { groupedRevisions.length } files containing a total of { commit.revisions.length } revisions.
             </div>
           </div>
         </SubSubHeader>

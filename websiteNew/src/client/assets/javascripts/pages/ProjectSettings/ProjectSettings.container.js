@@ -10,6 +10,7 @@ const stateToProps = ({ projects }, { params, location }) => {
   const entityModel = `projects.data.${projectId}`;
 
   return {
+    projectId,
     project,
     entityModel,
     path,

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { get } from 'lodash'
 
 import classNames from 'classnames'
 import classes from './ProjectTeam.scss'
@@ -11,11 +12,12 @@ import SocialButton from 'stemn-shared/misc/Social/SocialButton'
 export default class ProjectTeam extends Component {
   render() {
     const { project } = this.props
+    const team = get(project, 'data.team', [])
     return (
       <div className={ classes.content }>
         <Container>
           <Row className="layout-row layout-wrap">
-            { project.data.team.map((user) => {
+            { team.map((user) => {
               const userLinkParams = { userId: user._id }
               const historyParams = {
                 projectId: project.data._id,
