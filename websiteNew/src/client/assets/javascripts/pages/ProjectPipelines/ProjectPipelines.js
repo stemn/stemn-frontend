@@ -69,12 +69,6 @@ export default class ProjectPipelines extends Component {
     if (isLoading || hasResults) {
       return (
         <div>
-          <LoadingOverlay 
-            show={ isLoading }
-            linear
-            hideBg
-            noOverlay
-          />
           <PipelineList
              pipelines={ isLoaded ? pipelines.data : range(8) }
           />

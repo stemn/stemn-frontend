@@ -180,7 +180,6 @@ export default class ProjectCommits extends Component {
           </div>
         </SubSubHeader>
         <div className={ classes.innerContent }>
-          <LoadingOverlay show={ isLoading } linear hideBg noOverlay />
           <Container>
             { isLoaded
             ? this.renderLoaded()
