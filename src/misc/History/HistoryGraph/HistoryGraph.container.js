@@ -10,10 +10,12 @@ const stateToProps = ({ history }, { entityType, entityId, parentType, parentId,
   const historyCacheKey = `${entityType}-${entityId}-${parentType}-${parentId}-${type}`
   const to = moment()
   const from = to.clone().subtract(20, 'days')
+  const data = get(history, [historyCacheKey, 'data'], [])
 
   return {
-    data: fillRange(from, to, 'date')(get(history, [historyCacheKey, 'data'], [])),
+    data: fillRange(from, to, 'date')(data),
     loading: get(history, [historyCacheKey, 'loading'], true),
+    hasLoaded: data.length > 0,
     historyCacheKey,
     from,
     to,
