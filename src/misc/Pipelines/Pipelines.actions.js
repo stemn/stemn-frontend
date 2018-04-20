@@ -45,7 +45,7 @@ export const rerunPipeline = ({ pipelineId }) => dispatch => dispatch({
     query: {
       populate: true,
     },
-  }).then(newPipeline => dispatch(push(projectPipelineRoute({
+  }).then(({ data: newPipeline }) => dispatch(push(projectPipelineRoute({
     projectId: newPipeline.project._id,
     pipelineId: newPipeline._id,
   })))),
