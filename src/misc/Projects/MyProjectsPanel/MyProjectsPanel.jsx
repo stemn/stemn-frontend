@@ -5,21 +5,10 @@ import classes from './MyProjectsPanel.scss'
 import classNames from 'classnames'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import Link from 'stemn-shared/misc/Router/Link'
-import Drive from 'stemn-shared/assets/icons/providers/drive.js';
-import Dropbox from 'stemn-shared/assets/icons/providers/dropbox.js';
 import { orderBy } from 'lodash'
 import bookVector from 'stemn-shared/assets/images/pure-vectors/book.svg'
 import { get } from 'lodash'
-
-const getIcon = (provider) => {
-  if (provider === 'drive') {
-    return <Drive className={ classes.providerIcon } />
-  } else if (provider === 'dropbox') {
-    return <Dropbox className={ classes.providerIcon } />
-  } else {
-    return <div className={ classes.providerIcon } />
-  }
-}
+import ProviderIcon from 'stemn-shared/misc/Icons/ProviderIcon'
 
 export default class MyProjectsPanel extends Component {
   constructor(props) {
@@ -73,7 +62,7 @@ export default class MyProjectsPanel extends Component {
             <div className="text-ellipsis flex">
               { project.name || 'Untitled Project' }
             </div>
-            { getIcon(project.remote.provider) }
+            <ProviderIcon provider={ project.remote.provider } className={ classes.providerIcon }/>
           </Link>
         ))}
         { hasNoResults && !isLoading &&

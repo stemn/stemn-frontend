@@ -7,12 +7,7 @@ import UserAvatars from 'stemn-shared/misc/Avatar/UserAvatars/UserAvatars.jsx'
 import LoadingPlaceholder from 'stemn-shared/misc/Loading/LoadingPlaceholder'
 import LoadingAnimation from 'stemn-shared/misc/Loading/LoadingAnimation'
 import PipelineMiniMap from '../PipelineMiniMap'
-
-const prefixZero = num => (num < 10 ? `0${num}` : num)
-const diffTimes = (start, end) => {
-  const duration = moment.duration(moment(end).diff(moment(start)))
-  return `${prefixZero(duration.minutes())}:${prefixZero(duration.seconds())}s`
-}
+import { diffTimes } from 'stemn-shared/misc/Date/Date.utils'
 
 export default class ThreadRow extends Component {
   render() {
