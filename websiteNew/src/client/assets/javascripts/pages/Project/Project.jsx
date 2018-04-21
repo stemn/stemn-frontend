@@ -20,15 +20,24 @@ class Project extends Component {
       />
     )
 
+    const team = get(project, 'data.team', [])
+    const owner = team.find(member => member.owner)
+    
+    const title = (
+      <span>
+        { owner && owner.name && <Link name="projectRoute" params={ routeParams }>{owner.name}</Link> }
+        { owner && owner.name && ' / '}
+        { project && project.data && <Link name="projectRoute" params={ routeParams }>{project.data.name}</Link> }
+      </span>
+    )
+
     return (
       <StandardLayout style={ { marginTop: '30px' } } nofooter>
         <Helmet>
           { has(project, 'data.name') && <title>{ `${project.data.name}: ${project.data.blurb}` }</title> }
         </Helmet>
         <SubHeader
-          title={ get(project, 'data.name', ' ') || 'Untitled Project' }
-          name="projectRoute"
-          params={ routeParams }
+          title={ title }
           noline
           icon={ publicIcon }
         >

@@ -5,12 +5,14 @@ import { Breadcrumbs, Crumb } from 'stemn-shared/misc/Breadcrumbs'
 import { Container } from 'stemn-shared/misc/Layout'
 import SubSubHeader from 'modules/SubSubHeader'
 import Terminal from 'stemn-shared/misc/Terminal/Terminal'
-import PipelineIcon from 'stemn-shared/misc/Pipelines/PipelineIcon'
 import ProjectPipelineMeta from '../ProjectPipeline/ProjectPipelineMeta.container'
+import BannerBar from 'stemn-shared/misc/BannerBar'
+import SimpleTable from 'stemn-shared/misc/Tables/SimpleTable'
+import { diffTimes } from 'stemn-shared/misc/Date/Date.utils'
 
 export default class ProjectPipelineStep extends Component {
   renderLoaded() {
-    const { pipeline, project, step, stepId } = this.props
+    const { pipeline, step, stepId, projectId } = this.props
 
     if (!pipeline || !pipeline.data || !step || !step.data) {
       return null
@@ -20,13 +22,12 @@ export default class ProjectPipelineStep extends Component {
       <div>
         <SubSubHeader>
           <Breadcrumbs>
-            <Crumb name="projectPipelinesRoute" params={ { projectId: project.data._id } } text="Pipelines" />
-            <Crumb name="projectPipelineRoute" params={ { projectId: project.data._id, pipelineId: pipeline.data._id } } text={ pipeline.data.name } />
+            <Crumb name="projectPipelinesRoute" params={ { projectId } } text="Pipelines" />
+            <Crumb name="projectPipelineRoute" params={ { projectId, pipelineId: pipeline.data._id } } text={ pipeline.data.name } />
             <Crumb text={ step.data.name } />
           </Breadcrumbs>
           <br />
           <h2 className={ classes.title }>
-            <PipelineIcon status={ step.data.status } />
             <span>{ step.data.name }</span>
             <span className={ classes.number }>&nbsp;#S{ step.data.stepNumber }</span>
           </h2>
@@ -34,6 +35,14 @@ export default class ProjectPipelineStep extends Component {
         </SubSubHeader>
         <Container>
           <br />
+          <BannerBar type="success">
+            <SimpleTable>
+              <tr><td>Image:</td><td>{ step.data.image }</td></tr>
+              <tr><td>Duration:</td><td>{ diffTimes(pipeline.data.start, pipeline.data.end || new Date())}</td></tr>
+              <tr><td>Status:</td><td>{ step.data.status }</td></tr>
+              <tr><td>Command:</td><td>{ step.data.command }</td></tr>
+            </SimpleTable>
+          </BannerBar>
           <br />
           <Terminal pipelineId={ pipeline.data._id } stepId={ stepId } /> 
         </Container>

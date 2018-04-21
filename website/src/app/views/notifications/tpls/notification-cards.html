@@ -1,9 +1,0 @@
-    <div class="card-z1 m-b-15" layout="row" ng-repeat="notification in query.results">
-        <a class="m-r-15" ng-href="{{notification.link1}}">
-           <div class="avatar-square-cover avatar-md" style="background-image:url({{notification.picture1 || '/assets/images/default/user-1.png'}}?size=thumb-lg&crop=true)"></div>
-        </a>
-        <a flex ng-href="{{notification.link2 || notification.link1}}" layout="column">
-            <div flex><strong>{{notification.name1}}</strong> {{notification.text}} <strong>{{notification.name2}}<span ng-if="notification.name2">.</span></strong></div>
-            <div class="text-lightgrey text-right" am-time-ago="::notification.timestamp"></div>
-        </a>
-    </div>

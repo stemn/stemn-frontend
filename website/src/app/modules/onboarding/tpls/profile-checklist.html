@@ -1,8 +1,0 @@
-<div class="checklist" ng-if="incomplete.status">
-    <div class="item" ng-repeat="item in checklist" ng-class="{'complete':checklistItems[item].complete}" layout="row" layout-align="start center">
-        <md-icon md-svg-icon="done"></md-icon>
-        <div flex>
-            <a ng-href="{{checklistItems[item].href}}" ng-click="checklistItems[item].click($event)">{{checklistItems[item].text}}</a>
-        </div>
-    </div>
-</div>

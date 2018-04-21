@@ -1,4 +1,0 @@
-<span ng-repeat="member in team | limitTo: limit"><span ng-if="$last && team.length <= limit && $index != 0">&nbsp;and&nbsp;</span><span ng-hide="$first || ($last && team.length <= limit)">,&nbsp;</span><a popup popup-content="<card card-type='user' card-id='{{member._id}}'></card>" ng-href="users/{{member.stub}}">&nbsp;{{member.name}}</a></span>
-<span ng-if="team.length>limit">
-    and {{team.length-limit}} more.
-</span>

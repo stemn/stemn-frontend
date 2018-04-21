@@ -1,8 +1,0 @@
-<div class="vertical-nav {{menu[activeIndex].color}}">
-    <div ng-repeat="item in menu" du-scrollspy="{{item.id}}" offset="{{halfWindowHeight}}">
-        <a ng-href="#{{item.id}}" du-smooth-scroll offset="0">
-            <div class="dot"></div>
-            <div class="tooltip">{{item.name}}</div>
-        </a>
-    </div>
-</div>

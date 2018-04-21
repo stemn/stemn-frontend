@@ -1,8 +1,0 @@
-<div flex class="revision-dots text-center" ng-show="fileMeta.revisions.length>1">
-    <span ng-repeat="revision in fileMeta.revisions">
-        <a class="revision-dot" ng-class="{'active' : revision.rev == fileMeta.rev}" ng-click="revisionChange('fileMeta', revision)"></a>
-        <popup class="tooltip-menu" popup-side="top" popup-position="center" popup-padding="0 0 11px 0" layout="column">
-            <a class="md-subhead">Version {{revision.revDecimal}} - {{revision.client_modified | amTimeAgo}}</a>
-        </popup>
-    </span>
-</div>

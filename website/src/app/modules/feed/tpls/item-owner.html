@@ -1,9 +1,0 @@
-<div class="item-owner" layout="row">
-    <div class="image">
-        <user-image         src="::avatar" image-id="{{::ownerId}}" image-stub="{{::ownerStub}}" ng-if="type=='user'"></user-image>
-        <organisation-image src="::avatar" image-id="{{::ownerId}}" image-stub="{{::ownerStub}}" ng-if="type=='organisation'"></organisation-image>
-        <project-image      src="::avatar" image-id="{{::ownerId}}" image-stub="{{::ownerStub}}" ng-if="type=='project'"></project-image>
-    </div>
-    <div class="ellipsis-container" flex ng-transclude>
-    </div>
-</div>
