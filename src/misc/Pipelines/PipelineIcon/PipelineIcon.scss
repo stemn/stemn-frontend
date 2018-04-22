@@ -1,7 +1,6 @@
 @value warn from 'theme';
 
 .outer {
-  border-radius: 50%;
   width: 25px;
   height: 25px;
   border: 1px solid black;
@@ -11,24 +10,24 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
 
-  &.success {
-    color: #bbe8bb;
-    border-color: #bbe8bb;
-  }
+.success {
+  color: #bbe8bb;
+  border-color: #bbe8bb;
+}
 
-  &.running {
-    color: #f5dbab;
-    border-color: #f5dbab;
-  }
+.running {
+  color: #f5dbab;
+  border-color: #f5dbab;
+}
 
-  &.pending {
-    color: #d9d9d9;
-    border-color: #d9d9d9;
-  }
+.pending {
+  color: #d9d9d9;
+  border-color: #d9d9d9;
+}
 
-  &.error {
-    color: warn;
-    border-color: warn;
-  }
+.error {
+  color: warn;
+  border-color: warn;
 }

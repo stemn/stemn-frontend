@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 
 import cn from 'classnames'
 import classes from './PipelineMap.scss'
-import PipelineIcon from '../PipelineIcon'
+import PipelineIcon, { getStatusClass } from '../PipelineIcon'
 import Link from 'stemn-shared/misc/Router/Link'
 import PipelineMapCurve from './PipelineMapCurve'
+
 
 export default class PipelineMap extends Component {
   render() {
@@ -25,7 +26,7 @@ export default class PipelineMap extends Component {
                 return (
                   <div key={ stepId } className={ classes.step }>
                     <Link
-                      className={ cn('layout-row layout-align-start-center') }
+                      className={ cn('layout-row layout-align-start-center', getStatusClass(step.status)) }
                       name="projectPipelineStepRoute"
                       params={ {
                         projectId,
@@ -35,7 +36,7 @@ export default class PipelineMap extends Component {
                       title={ step.name }
                     >
                       <PipelineIcon status={ step.status } style={ { marginRight: '10px' } } /> 
-                      <span className="flex text-ellipsis">{ step.name }</span>
+                      <span className="flex text-ellipsis">{ step.name } #S{ step.stepNumber }</span>
                     </Link>
                     { idx !== pipeline.stages.length - 1 && <PipelineMapCurve side="right" connectTo={ stepIdx }  /> }
                     { idx !== 0 && <PipelineMapCurve side="left" connectTo={ stepIdx } /> }

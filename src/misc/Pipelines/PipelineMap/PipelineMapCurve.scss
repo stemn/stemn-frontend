@@ -2,64 +2,47 @@
   position: absolute;
   bottom: 50%;
   &.left {
-    left: -30px;
+    left: -60px;
   }
   &.right {
-    right: -30px;
+    right: -60px;
   }
   > div {
-    width: 15px;
-    height: 30px;
+    width: 30px;
   }
 }
 
 .horizLeft {
   border-top: 1px solid #e2e2e2;
   height: 0px !important;
-  width: 30px !important;
+  width: 31px !important;
 }
 
 .horizRight {
   border-top: 1px solid #e2e2e2;
-  height: 0px !important;
-  width: 30px !important;
-}
-
-.topRight {
-  border-left: 1px solid #e2e2e2;
-  border-top: 1px solid #e2e2e2;
-  border-radius: 14px 0;
-  margin-left: 14px;
-}
-
-.topLeft {
-  border-right: 1px solid #e2e2e2;
-  border-top: 1px solid #e2e2e2;
-  border-radius: 0 14px 0;
+  height: 0px;
 }
 
 .bottomLeft {
   border-left: 1px solid #e2e2e2;
   border-bottom: 1px solid #e2e2e2;
-  border-radius: 0 0 0 14px;
-  margin-left: 14px;
+  margin-left: 30px;
 }
 
 .bottomRight {
   border-right: 1px solid #e2e2e2;
   border-bottom: 1px solid #e2e2e2;
-  border-radius: 14px 0;
-  margin-right: 15px;
+  margin-right: 30px;
 }
 
 .vertLeft {
-  height: 50px !important;
+  height: 60px;
   border-left: 1px solid #e2e2e2;
-  margin-left: 14px;
+  margin-left: 30px;
 }
 
 .vertRight {
-  height: 50px !important;
+  height: 60px;
   border-right: 1px solid #e2e2e2;
-  margin-right: 15px;
+  margin-right: 30px;
 }

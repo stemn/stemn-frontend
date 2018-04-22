@@ -20,9 +20,15 @@
   
   a {
     background: white;
-    border-radius: 20px;
     height: 40px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid;
     padding: 0px 15px 0 8px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.01);
+    }
   }
 }
+
+

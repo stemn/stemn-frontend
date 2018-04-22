@@ -10,6 +10,14 @@ import PipelineMiniMap from '../PipelineMiniMap'
 import { diffTimes } from 'stemn-shared/misc/Date/Date.utils'
 
 export default class ThreadRow extends Component {
+  // Force fresh every second so timer updates
+  refreshInterval = null
+  componentDidMount() {
+    this.refreshInterval = setInterval(() => this.forceUpdate(), 1000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.refreshInterval)    
+  }
   render() {
     const { pipeline, className } = this.props
 
@@ -33,7 +41,7 @@ export default class ThreadRow extends Component {
             <div className={ classNames(classes.meta, 'text-ellipsis') }>
               { pipeline.data.start && <span>Triggered {moment(pipeline.data.start).fromNow()}</span> }
               { pipeline.data.start && <span className="text-interpunct" /> }
-              { pipeline.data.end && <span className="text-grey-2">Duration: { diffTimes(pipeline.data.start, pipeline.data.end || new Date()) }</span> }
+              { pipeline.data.start && <span className="text-grey-2">Duration: { diffTimes(pipeline.data.start, pipeline.data.end || new Date()) }</span> }
             </div>
           </div>
           <PipelineMiniMap pipeline={ pipeline.data }  />

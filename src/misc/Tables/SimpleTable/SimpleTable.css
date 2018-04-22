@@ -10,6 +10,9 @@
   color: rgba(0, 0, 0, 0.4);
   padding-right: 10px;
 }
+.table a {
+  text-decoration: underline;
+}
 .table a:hover{
   opacity: 0.8;
 }
