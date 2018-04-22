@@ -37,7 +37,7 @@ export default ({ pipeline, rerunPipeline }) => {
           />
           <b className="text-ellipsis">{ pipeline.data.owner.name }</b>
         </Link>
-        <div className="text-ellipsis">&nbsp;manually triggered this pipeline { moment(pipeline.data.started).fromNow() }.</div>
+        <div className="text-ellipsis">&nbsp;triggered this pipeline { moment(pipeline.data.start).fromNow() }.</div>
       </Col>
       <div className="flex" />
       <Col className={ classNames('sm layout-row', classes.buttonRow) }>

@@ -7,29 +7,41 @@ import Link from 'stemn-shared/misc/Router/Link'
 import SubHeader from 'modules/SubHeader'
 import IsOwner from 'stemn-shared/misc/Auth/IsOwner'
 import PublicPrivateIcon from 'stemn-shared/misc/Icons/PublicPrivateIcon'
+import ProviderIcon from 'stemn-shared/misc/Icons/ProviderIcon'
+import MdContentCopy from 'react-icons/md/content-copy'
 
 class Project extends Component {
   render() {
     const { children, project } = this.props
     const routeParams = { projectId: get(project, 'data._id') }
-    const publicIcon = (
-      <PublicPrivateIcon
-        private={ get(project, 'data.private') }
-        style={ { marginRight: '8px',  minWidth: '30px' } }
-        size={ 30 }
-      />
-    )
-
-    const team = get(project, 'data.team', [])
-    const owner = team.find(member => member.owner)
     
-    const title = (
-      <span>
-        { owner && owner.name && <Link name="projectRoute" params={ routeParams }>{owner.name}</Link> }
-        { owner && owner.name && ' / '}
+    const title = [
+      <div key="text">
         { project && project.data && <Link name="projectRoute" params={ routeParams }>{project.data.name}</Link> }
-      </span>
-    )
+      </div>,
+      <div
+        key="public-icon"
+        title={ get(project, 'data.private') ? 'Private Project' : 'Public Project' }
+      >
+        <PublicPrivateIcon
+          private={ get(project, 'data.private') }
+          style={ { marginLeft: '10px' } }
+          noColor
+        />
+      </div>,
+      // <MdContentCopy 
+      //   style={ { marginLeft: '10px' } }
+      // />,
+      <div           
+        key="provider-icon"
+        title={ `Files stored in ${get(project, 'data.remote.provider')}` }
+      >
+        <ProviderIcon 
+          style={ { marginLeft: '10px' } }
+          provider={ get(project, 'data.remote.provider') }
+        />
+      </div>,
+    ]
 
     return (
       <StandardLayout style={ { marginTop: '30px' } } nofooter>
@@ -39,7 +51,6 @@ class Project extends Component {
         <SubHeader
           title={ title }
           noline
-          icon={ publicIcon }
         >
           <Tabs noline>
             <Link

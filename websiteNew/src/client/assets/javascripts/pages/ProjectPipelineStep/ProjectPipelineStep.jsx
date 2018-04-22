@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import moment from 'moment'
 import classes from './ProjectPipelineStep.scss'
 import { Breadcrumbs, Crumb } from 'stemn-shared/misc/Breadcrumbs'
 import { Container } from 'stemn-shared/misc/Layout'
@@ -9,8 +9,27 @@ import ProjectPipelineMeta from '../ProjectPipeline/ProjectPipelineMeta.containe
 import BannerBar from 'stemn-shared/misc/BannerBar'
 import SimpleTable from 'stemn-shared/misc/Tables/SimpleTable'
 import { diffTimes } from 'stemn-shared/misc/Date/Date.utils'
+import Link from 'stemn-shared/misc/Router/Link'
+
+const getImageUrl = (imageName) => {
+  const splitName = imageName.split('/')
+  if (splitName.length === 1) {
+    return `https://hub.docker.com/_/${imageName}/` 
+  } else if (splitName.length === 2) {
+    return `https://hub.docker.com/r/${imageName}/`                   
+  }
+  return imageName
+}
 
 export default class ProjectPipelineStep extends Component {
+  // Force fresh every second so timer updates
+  refreshInterval = null
+  componentDidMount() {
+    this.refreshInterval = setInterval(() => this.forceUpdate(), 1000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.refreshInterval)    
+  }
   renderLoaded() {
     const { pipeline, step, stepId, projectId } = this.props
 
@@ -34,16 +53,38 @@ export default class ProjectPipelineStep extends Component {
           <ProjectPipelineMeta pipeline={ pipeline } />
         </SubSubHeader>
         <Container>
-          <br />
-          <BannerBar type="success">
-            <SimpleTable>
-              <tr><td>Image:</td><td>{ step.data.image }</td></tr>
-              <tr><td>Duration:</td><td>{ diffTimes(pipeline.data.start, pipeline.data.end || new Date())}</td></tr>
-              <tr><td>Status:</td><td>{ step.data.status }</td></tr>
-              <tr><td>Command:</td><td>{ step.data.command }</td></tr>
-            </SimpleTable>
+          <BannerBar style={ { margin: '20px 0' } }>
+            <div className="layout-gt-xs-row layout-xs-column">
+              <div className="flex">
+                <SimpleTable >
+                  <tr><td>Status:</td><td style={ { textTransform: 'capitalize' } }>{ step.data.status }</td></tr>
+                  { step.data.start && <tr><td>Start:</td><td>{ moment(step.data.start).fromNow() }</td></tr> }
+                  { step.data.start && <tr><td>Duration:</td><td>{ diffTimes(step.data.start, step.data.end || new Date())}</td></tr> }
+                  <tr>
+                    <td>Pipeline:</td>
+                    <td>
+                      <Link name="projectPipelineRoute" params={ { projectId, pipelineId: pipeline.data._id } }>#P{ pipeline.data.pipelineNumber }</Link>
+                    </td>
+                  </tr>
+                </SimpleTable>
+              </div>
+              <div className="flex hide-xs">
+                <SimpleTable>
+                  <tr>  
+                    <td>Image:</td>
+                    <td><a href={ getImageUrl(step.data.image) } target="blank">{ step.data.image }</a></td>
+                  </tr>
+                  { step.data.command && <tr>
+                    <td>Command:</td>
+                    <td>{ Array.isArray(step.data.command) 
+                      ? step.data.command.map(command => <code className={ classes.code }>{command}</code>) 
+                      : <code className={ classes.code }>{step.data.command}</code>
+                    }</td>
+                  </tr> }
+                </SimpleTable>
+              </div>
+            </div>
           </BannerBar>
-          <br />
           <Terminal pipelineId={ pipeline.data._id } stepId={ stepId } /> 
         </Container>
       </div>
