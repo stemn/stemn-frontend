@@ -3,13 +3,15 @@ import React, { Component } from 'react'
 import classNames from 'classnames'
 import classes from './ProjectPipeline.scss'
 
+import { get } from 'lodash'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import { Row, Col } from 'stemn-shared/misc/Layout'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import Link from 'stemn-shared/misc/Router/Link'
 import moment from 'moment'
+import IsOwner from 'stemn-shared/misc/Auth/IsOwner'
 
-export default ({ pipeline, rerunPipeline }) => {
+export default ({ pipeline, project, rerunPipeline }) => {
   const userRouteParams = {
     userId: pipeline.data.owner._id,
   }
@@ -49,13 +51,18 @@ export default ({ pipeline, rerunPipeline }) => {
         >
             Configuration
         </Button>
-        <Button
-          disabled={ pipeline.rerunPending }
-          onClick={ () => rerunPipeline({ pipelineId: pipeline.data._id }) }
-          className="primary flex-xs"
+        <IsOwner
+          team={ get(project, 'data.team', []) }
+          minRole="admin"
         >
-            Rerun Pipeline
-        </Button>
+          <Button
+            disabled={ pipeline.rerunPending }
+            onClick={ () => rerunPipeline({ pipelineId: pipeline.data._id }) }
+            className="primary flex-xs"
+          >
+              Rerun Pipeline
+          </Button>
+        </IsOwner>
       </Col>
     </Row>
     

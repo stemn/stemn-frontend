@@ -20,7 +20,7 @@ export default class ProjectCommit extends Component {
     clearInterval(this.refreshInterval)    
   }
   renderLoaded() {
-    const { pipeline, projectId } = this.props    
+    const { pipeline, project, projectId } = this.props    
 
     if (!pipeline || !pipeline.data) {
       return null
@@ -38,7 +38,7 @@ export default class ProjectCommit extends Component {
             <span>{ pipeline.data.name }</span>
             <span className={ classes.number }>&nbsp;#P{ pipeline.data.pipelineNumber }</span>
           </h2>
-          <ProjectPipelineMeta pipeline={ pipeline } />
+          <ProjectPipelineMeta pipeline={ pipeline } project={ project } />
         </SubSubHeader>
         <Container>
           <BannerBar style={ { margin: '20px 0' } }>

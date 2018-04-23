@@ -31,7 +31,7 @@ export default class ProjectPipelineStep extends Component {
     clearInterval(this.refreshInterval)    
   }
   renderLoaded() {
-    const { pipeline, step, stepId, projectId } = this.props
+    const { pipeline, step, stepId, projectId, project } = this.props
 
     if (!pipeline || !pipeline.data || !step || !step.data) {
       return null
@@ -50,7 +50,7 @@ export default class ProjectPipelineStep extends Component {
             <span>{ step.data.name }</span>
             <span className={ classes.number }>&nbsp;#S{ step.data.stepNumber }</span>
           </h2>
-          <ProjectPipelineMeta pipeline={ pipeline } />
+          <ProjectPipelineMeta pipeline={ pipeline } project={ project } />
         </SubSubHeader>
         <Container>
           <BannerBar style={ { margin: '20px 0' } }>
