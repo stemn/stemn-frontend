@@ -42,6 +42,9 @@ export default ({ dispatch }) => {
   const getProjectCommit                         = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectCommit'), cb)
   const getProjectCommits                        = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectCommits'), cb)
   const getProjectOverview                       = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectOverview'), cb)
+  const getProjectPipeline                       = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectPipeline'), cb)
+  const getProjectPipelineStep                   = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectPipelineStep'), cb)
+  const getProjectPipelines                      = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectPipelines'), cb)
   const getProjectSettings                       = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectSettings'), cb)
   const getProjectSettingsGeneral                = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectSettingsGeneral'), cb)
   const getProjectSettingsPermissions            = (loc, cb) => getRoute(dispatch, System.import('pages/ProjectSettingsPermissions'), cb)
@@ -127,6 +130,9 @@ export default ({ dispatch }) => {
         <Route path="threads/:threadId/edit"     getComponent={ getProjectThread } />
         <Route path="history"                    getComponent={ getProjectCommits } />
         <Route path="history/:commitId"          getComponent={ getProjectCommit } />
+        <Route path="pipelines"                  getComponent={ getProjectPipelines } />
+        <Route path="pipelines/:pipelineId"      getComponent={ getProjectPipeline } />
+        <Route path="pipelines/:pipelineId/steps/:stepId" getComponent={ getProjectPipelineStep } />
         <Route path="settings"                   getComponent={ getProjectSettings }>
           <IndexRoute                            getComponent={ getProjectSettingsGeneral } />
           <Route path="permissions"              getComponent={ getProjectSettingsPermissions } />

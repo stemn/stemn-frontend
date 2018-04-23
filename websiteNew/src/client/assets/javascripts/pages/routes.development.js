@@ -128,10 +128,10 @@ export default () => (
       <Route path="threads/:threadId"          component={ ProjectThread } />
       <Route path="threads/:threadId/edit"     component={ ProjectThread } />
       <Route path="history"                    component={ ProjectCommits } />
+      <Route path="history/:commitId"          component={ ProjectCommit } />
       <Route path="pipelines"                  component={ ProjectPipelines } />
       <Route path="pipelines/:pipelineId"       component={ ProjectPipeline } />
       <Route path="pipelines/:pipelineId/steps/:stepId" component={ ProjectPipelineStep } />
-      <Route path="history/:commitId"          component={ ProjectCommit } />
       <Route path="settings"                   component={ ProjectSettings }>
         <IndexRoute                            component={ ProjectSettingsGeneral } />
         <Route path="permissions"              component={ ProjectSettingsPermissions } />
