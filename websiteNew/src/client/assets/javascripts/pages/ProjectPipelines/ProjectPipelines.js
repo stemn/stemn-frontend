@@ -24,7 +24,7 @@ export default class ProjectPipelines extends Component {
         type: filterType,
       },
       filterModel,
-      location: 'push',
+      location: 'replace',
     })
   }
   changeUserFilter = (userId) => {
@@ -93,21 +93,21 @@ export default class ProjectPipelines extends Component {
     const { project, pipelines, filter } = this.props
     const team = get(project, 'data.team', [])
 
-    const userFilterOptions = team.map(user => ({
-      name: user.name,
-      value: user._id,
-      onClick: () => { this.changeUserFilter(user._id) }
-    }))
-
-    userFilterOptions.push({
-      name: 'Any',
-      value: undefined,
-      onClick: () => { this.changeUserFilter(undefined) }
-    })
+    const userFilterOptions = [
+      ...team.map(user => ({
+        name: user.name,
+        value: user._id,
+        onClick: () => { this.changeUserFilter(user._id) }
+      })), {
+        name: 'Any',
+        value: undefined,
+        onClick: () => { this.changeUserFilter(undefined) }
+      }
+    ]
 
     const typeFilterOptions = [{
       value: undefined,
-      name: 'All',
+      name: 'Any',
       onClick: () => { this.changeTypeFilter(undefined) },
     }, {
       value: 'pending',
@@ -125,7 +125,7 @@ export default class ProjectPipelines extends Component {
       value: 'failed',
       name: 'Failed',
       onClick: () => { this.changeTypeFilter('failed') },
-    }, ]
+    }]
 
     return (
       <div className={ classes.content }>
