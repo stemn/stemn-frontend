@@ -8,24 +8,28 @@ export const getPipeline = ({ pipelineId }) => ({
   payload: http({
     method: 'GET',
     url: `/api/v1/pipelines/${pipelineId}`,
-    query: {
-      populate: true,
-    },
   }),
   meta: {
     cacheKey: pipelineId,
   },
 })
 
-export const getPipelines = ({ projectId, cacheKey }) => ({
+export const getPipelines = ({ projectId, cacheKey, page, size, criteria }) => ({
   type: 'PIPELINES/GET_PIPELINES',
-  payload: http({
+  http: true,
+  payload: {
     method: 'GET',
     url: `/api/v1/projects/${projectId}/pipelines`,
-    query: {
-      populate: true,
+    params: {
+      page,
+      size,
+      criteria,
     },
-  }),
+  },
+  throttle: {
+    time: 500,
+    endpoint: 'get-pipelines',
+  },
   meta: {
     cacheKey,
     projectId,
@@ -42,9 +46,6 @@ export const rerunPipeline = ({ pipelineId }) => dispatch => dispatch({
   payload: http({
     method: 'POST',
     url: `/api/v1/pipelines/${pipelineId}/restart`,    
-    query: {
-      populate: true,
-    },
   }).then(({ data: newPipeline }) => dispatch(push(projectPipelineRoute({
     projectId: newPipeline.project._id,
     pipelineId: newPipeline._id,
