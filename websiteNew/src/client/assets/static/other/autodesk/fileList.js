@@ -20,113 +20,112 @@
 //
 
 // config.BaseEndPoint
-var viewer =[
-	'viewer3D.js',
-	'viewer3D.min.js',
-	'style.css',
-	'style.min.css',
-	'three.js',
-	'three.min.js',
-	'lmvworker.js',
-	'lmvworker.min.js',
-    'wgs.js',
-    'wgs.min.js',
-] ;
+const viewer = [
+  'viewer3D.js',
+  'viewer3D.min.js',
+  'style.css',
+  'style.min.css',
+  'three.js',
+  'three.min.js',
+  'lmvworker.js',
+  'lmvworker.min.js',
+  'wgs.js',
+  'wgs.min.js',
+] 
 
 // res/environments/
-var environments =[
-	'CoolLight_irr.logluv.dds',
-	'CoolLight_mipdrop.logluv.dds',
-	'DarkSky_irr.logluv.dds',
-	'DarkSky_mipdrop.logluv.dds',
-	'GreyRoom_irr.logluv.dds',
-	'GreyRoom_mipdrop.logluv.dds',
-	'GridLight_irr.logluv.dds',
-	'GridLight_mipdrop.logluv.dds',
-	'IDViz_irr.logluv.dds',
-	'IDViz_mipdrop.logluv.dds',
-	'InfinityPool_irr.logluv.dds',
-	'InfinityPool_mipdrop.logluv.dds',
-	'PhotoBooth_irr.logluv.dds',
-	'PhotoBooth_mipdrop.logluv.dds',
-	'Plaza_irr.logluv.dds',
-	'Plaza_mipdrop.logluv.dds',
-	'Reflection_irr.logluv.dds',
-	'Reflection_mipdrop.logluv.dds',
-	'RimHighlights_irr.logluv.dds',
-	'RimHighlights_mipdrop.logluv.dds',
-	'SharpHighlights_irr.logluv.dds',
-	'SharpHighlights_mipdrop.logluv.dds',
-	'SnowField_irr.logluv.dds',
-	'SnowField_mipdrop.logluv.dds',
-	'SoftLight_irr.logluv.dds',
-	'SoftLight_mipdrop.logluv.dds',
-	'TranquilityBlue_irr.logluv.dds',
-	'TranquilityBlue_mipdrop.logluv.dds',
-	'WarmLight_irr.logluv.dds',
-	'WarmLight_mipdrop.logluv.dds',
-	'boardwalk_irr.logluv.dds',
-	'boardwalk_mipdrop.logluv.dds',
-	'crossroads_irr.logluv.dds',
-	'crossroads_mipdrop.logluv.dds',
-	'field_irr.logluv.dds',
-	'field_mipdrop.logluv.dds',
-	'glacier_irr.logluv.dds',
-	'glacier_mipdrop.logluv.dds',
-	'riverbank_irr.logluv.dds',
-	'riverbank_mipdrop.logluv.dds',
-	'seaport_irr.logluv.dds',
-	'seaport_mipdrop.logluv.dds'
-] ;
-environments =environments.map (function (elt) { return ('res/environments/' + elt) ; }) ;
+let environments = [
+  'CoolLight_irr.logluv.dds',
+  'CoolLight_mipdrop.logluv.dds',
+  'DarkSky_irr.logluv.dds',
+  'DarkSky_mipdrop.logluv.dds',
+  'GreyRoom_irr.logluv.dds',
+  'GreyRoom_mipdrop.logluv.dds',
+  'GridLight_irr.logluv.dds',
+  'GridLight_mipdrop.logluv.dds',
+  'IDViz_irr.logluv.dds',
+  'IDViz_mipdrop.logluv.dds',
+  'InfinityPool_irr.logluv.dds',
+  'InfinityPool_mipdrop.logluv.dds',
+  'PhotoBooth_irr.logluv.dds',
+  'PhotoBooth_mipdrop.logluv.dds',
+  'Plaza_irr.logluv.dds',
+  'Plaza_mipdrop.logluv.dds',
+  'Reflection_irr.logluv.dds',
+  'Reflection_mipdrop.logluv.dds',
+  'RimHighlights_irr.logluv.dds',
+  'RimHighlights_mipdrop.logluv.dds',
+  'SharpHighlights_irr.logluv.dds',
+  'SharpHighlights_mipdrop.logluv.dds',
+  'SnowField_irr.logluv.dds',
+  'SnowField_mipdrop.logluv.dds',
+  'SoftLight_irr.logluv.dds',
+  'SoftLight_mipdrop.logluv.dds',
+  'TranquilityBlue_irr.logluv.dds',
+  'TranquilityBlue_mipdrop.logluv.dds',
+  'WarmLight_irr.logluv.dds',
+  'WarmLight_mipdrop.logluv.dds',
+  'boardwalk_irr.logluv.dds',
+  'boardwalk_mipdrop.logluv.dds',
+  'crossroads_irr.logluv.dds',
+  'crossroads_mipdrop.logluv.dds',
+  'field_irr.logluv.dds',
+  'field_mipdrop.logluv.dds',
+  'glacier_irr.logluv.dds',
+  'glacier_mipdrop.logluv.dds',
+  'riverbank_irr.logluv.dds',
+  'riverbank_mipdrop.logluv.dds',
+  'seaport_irr.logluv.dds',
+  'seaport_mipdrop.logluv.dds',
+] 
+environments = environments.map(elt => (`res/environments/${elt}`)) 
 
 // res/textures/
-var textures =[
-	'VCarrows.png',
-	'VCarrowsS0.png',
-	'VCarrowsS1.png',
-	'VCcontext.png',
-	'VCcontextS.png',
-	'VCedge1.png',
-	'VChome.png',
-	'VChomeS.png',
-	'cardinalPoint.png',
-	'centerMarker_X.png',
-	'radial-fade-grid.png'
-] ;
-textures =textures.map (function (elt) { return ('res/textures/' + elt) ; }) 
+let textures = [
+  'VCarrows.png',
+  'VCarrowsS0.png',
+  'VCarrowsS1.png',
+  'VCcontext.png',
+  'VCcontextS.png',
+  'VCedge1.png',
+  'VChome.png',
+  'VChomeS.png',
+  'cardinalPoint.png',
+  'centerMarker_X.png',
+  'radial-fade-grid.png',
+] 
+textures = textures.map(elt => (`res/textures/${elt}`)) 
 
-var extensions =[
-  'FirstPerson'
-]
-
-extensions =extensions.map (function (elt) { return ('extensions/' + elt + '/' + elt + '.min.js') ; }) 
-
+const extensions = [
+  'extensions/FirstPerson/FirstPerson.min.js',
+  'extensions/Section/Section.min.js',
+  'extensions/Section/Section.min.css',
+  'extensions/Measure/Measure.min.js',
+  'extensions/Measure/Measure.min.css',
+  'extensions/Hyperlink/Hyperlink.min.js',
+  'extensions/Hyperlink/Hyperlink.min.css',
+] 
 
 // res/locales
-var locales =[ 'cs', 'de', 'en', 'es', 'fr', 'it', 'ja', 'ko', 'pl', 'pt-BR', 'ru', 'tr', 'zh-HANS', 'zh-HANT' ] ;
+let locales = ['cs', 'de', 'en', 'es', 'fr', 'it', 'ja', 'ko', 'pl', 'pt-BR', 'ru', 'tr', 'zh-HANS', 'zh-HANT'] 
 // res/locales/[locales]/
-var localesJson =[
-	'allstrings.json',
-	//'VCcross.dds',
-	//'VCcross.png',
-	'VCcrossRGBA8small.dds'
-] ;
+const localesJson = [
+  'allstrings.json',
+  // 'VCcross.dds',
+  // 'VCcross.png',
+  'VCcrossRGBA8small.dds',
+] 
 
-locales =locales.reduce (
-	function (prev, elt, index, arr) {
-		return (prev.concat (
-			localesJson.map (function (elt2) {
-				return ('res/locales/' + elt + '/' + elt2) ;
-			})
-		)) ;
-	},
-	[]
-) ;
+locales = locales.reduce(
+  (prev, elt, index, arr) => (prev.concat(
+    localesJson.map(elt2 => (`res/locales/${elt}/${elt2}`)),
+  )),
+  [],
+) 
 
 //-
-module.exports =viewer
-	.concat (environments)
-	.concat (textures)
-	.concat (locales)
-	.concat (extensions) ;
+module.exports = viewer
+  .concat(environments)
+  .concat(textures)
+  .concat(locales)
+  .concat(extensions) 
