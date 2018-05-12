@@ -17,20 +17,18 @@ class AutodeskLocalViewer extends Component {
       const options = {
         env: 'Local',
         document: filePathWithProtocol,
-        svfHeaders: {},
       }
       
       if (nextProps.auth.authToken) {
-        Autodesk.Viewing.endpoint.HTTP_REQUEST_HEADERS = {
-          Authorization: `bearer ${nextProps.auth.authToken}`,
-        }
         // Headers for the svf requests (only required for the website)
         // This feature is a modification of the Autodesk source code
         // It will break whenever the source is updated.
         // There is a readme in the autodesk viewer folder explaining the changes
-
+        
         // NOTE: there is some risk that the bearer token will be sent to Autodesk?
-        options.svfHeaders.Authorization = `bearer ${nextProps.auth.authToken}`
+        Autodesk.Viewing.endpoint.HTTP_REQUEST_HEADERS = {
+          Authorization: `bearer ${nextProps.auth.authToken}`,
+        }
       }
 
       Autodesk.Viewing.Initializer(options, () => {
