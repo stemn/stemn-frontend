@@ -1,14 +1,13 @@
-const viewerFileList = require('./fileList.js');
-const http = require('axios');
-const fs = require('fs');
-const mkdirp = require('mkdirp');
+const viewerFileList = require('./fileList.js')
+const http = require('axios')
+const fs = require('fs')
+const mkdirp = require('mkdirp')
 
 // Config - Change this as required
-const version = 'v2.16'
-const outputFolder = 'viewer-2-16'
+const version = 'v4.1.0'
+const outputFolder = 'viewer-4-1-0'
 
-const downloadAndSave = ({url, dest, onProgress}) => {
-  return new Promise((resolve, reject) => {
+const downloadAndSave = ({ url, dest, onProgress }) => new Promise((resolve, reject) => {
     http({
       url          : url,
       responseType : 'stream'
@@ -30,13 +29,12 @@ const downloadAndSave = ({url, dest, onProgress}) => {
         stream.pipe(file);
       })
     })
-  })
-};
+  });
 
 Promise.all(viewerFileList.map(item => downloadAndSave({
-  url  : `https://developer.api.autodesk.com/viewingservice/v1/viewers/${item}?v=${version}`,
-  dest : `./${outputFolder}/${item}`
-}))).then(response => {
-  console.log('Download complete');
+  url: `https://developer.api.autodesk.com/viewingservice/v1/viewers/${item}?v=${version}`,
+  dest: `./${outputFolder}/${item}`,
+}))).then((response) => {
+  console.log('Download complete')
 })
 
