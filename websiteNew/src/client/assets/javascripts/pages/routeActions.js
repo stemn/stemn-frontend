@@ -41,3 +41,6 @@ export const userProjectsRoute           = ({ userId })                        =
 export const userRoute                   = ({ userId })                        => `/users/${userId}`
 export const userStarsRoute              = ({ userId })                        => `/users/${userId}/stars`
 export const notFound                    = ()                                  => '/404'
+export const help                        = ()                                  => ({ external: true, pathname: 'https://help.stemn.com' })
+export const helpAutomationPipelines     = ()                                  => ({ external: true, pathname: 'https://help.stemn.com/automation-pipelines' })
+

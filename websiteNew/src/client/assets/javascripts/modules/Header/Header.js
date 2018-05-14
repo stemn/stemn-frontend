@@ -14,6 +14,7 @@ import SiteSearch from 'stemn-shared/misc/Search/SiteSearch'
 import HeaderMobileMenu from 'modules/HeaderMobileMenu'
 import BetaBadge from 'modules/BetaBadge'
 import MdMenu from 'react-icons/md/menu'
+import IconHelp from 'stemn-shared/misc/Icons/Help'
 
 export default class Header extends Component {
   constructor(props) {
@@ -42,11 +43,17 @@ export default class Header extends Component {
         <SimpleIconButton
           title="Notifications"
           to="/notifications"
-          style={ { marginRight: '10px' } }
           className="rel-box"
         >
           <MdNotifications size={ 22 } />
           { numNotifications > 0 && <div className={ classNames(classes.badge, { [classes.badgeLarge] : numNotifications >= 10}) }>{ numNotifications }</div> }
+        </SimpleIconButton>
+        <SimpleIconButton
+          className="hide-xs"
+          title="Help"
+          name="help"
+        >
+          <IconHelp size={ 25 } />
         </SimpleIconButton>
         <Popover
           offset={ 13 }
@@ -56,6 +63,7 @@ export default class Header extends Component {
         >
           <a>
             <Avatar
+              style={ { marginLeft: '10px' } }
               shape="square"
               size={ 30 }
               name={ auth.user.name }
