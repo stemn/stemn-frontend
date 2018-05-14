@@ -18,8 +18,8 @@ export default class PipelinesEmpty extends Component {
         { isPublic
           ? <div className="text-title-5">Unfortunately, there is nothing here yet.</div>
           : <div className="text-title-5">
-              No piplines have been triggered.&nbsp;
-            <Link className="link-primary" name="help/automation-pipelines">Learn more.</Link>
+              No pipleines have been triggered.&nbsp;
+            <Link className="link-primary" name="helpAutomationPipelines">Learn more.</Link>
           </div>
         }
       </InfoPanel>

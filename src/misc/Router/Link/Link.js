@@ -96,6 +96,8 @@ const LinkComponent = (props) => {
     return (
       <a
         href={ getHref() }
+        target="_blank"
+        rel="noopener noreferrer"
         className={ allClassNames }
         onClick={ extendedOnClick }
         { ...otherProps }
