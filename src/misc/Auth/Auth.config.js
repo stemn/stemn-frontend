@@ -44,7 +44,7 @@ export const oauthCreds = {
       response_type: 'code',
       redirect_uri: `${rootDomain}/api/auth/linkedin`,
       client_id: '75gm1u1gda1xoe',
-      scope: ['r_fullprofile', 'r_emailaddress'],
+      scope: ['r_basicprofile', 'r_emailaddress'],
     },
   },
   dropbox: {
