@@ -1,3 +1,4 @@
 {
-  "extends": "stemn",
+  "parser": "babel-eslint",
+  "extends": "stemn"
 }

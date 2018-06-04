@@ -1,1 +1,7 @@
-src/assets/*
+stemn-frontend-website/dist/*
+stemn-frontend-website/node_modules/*
+stemn-frontend-desktop/dist/*
+stemn-frontend-desktop/node_modules/*
+stemn-frontend-admin/dist/*
+stemn-frontend-admin/node_modules/*
+node_modules
