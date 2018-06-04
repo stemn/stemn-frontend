@@ -3,6 +3,7 @@ import files from './files'
 import project from './project'
 import render from './render'
 import thread from './thread'
+import pipeline from './pipeline'
 
 export default (store, action) => {
   board(store, action)
@@ -10,4 +11,5 @@ export default (store, action) => {
   project(store, action)
   render(store, action)
   thread(store, action)
+  pipeline(store, action)
 }

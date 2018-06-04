@@ -1,0 +1,15 @@
+@value primary-bg, warn, success from "theme";
+
+.banner {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: white;
+  padding: 15px;
+}
+
+.warn {
+  border-left: 6px solid warn;
+}
+
+.success {
+  border-left: 6px solid success;
+}

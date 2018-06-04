@@ -1,8 +1,7 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import classes from './ThreadRow.css'
 import classNames from 'classnames'
 import Link from 'stemn-shared/misc/Router/Link'
-import MdChatBubble from 'react-icons/md/chat-bubble-outline'
 import ThreadLabelDots from 'stemn-shared/misc/Threads/ThreadLabelDots/ThreadLabelDots.jsx'
 import UserAvatars from 'stemn-shared/misc/Avatar/UserAvatars/UserAvatars.jsx'
 import DueDate from 'stemn-shared/misc/Threads/ThreadDueDate'
@@ -88,8 +87,3 @@ export default class ThreadRow extends Component {
     )
   }
 }
-
-//          <MdChatBubble className={ classes.commentsIcon } />
-//          <div className={ classes.commentsNumber }>
-//            { thread.data.numComments || 0 }
-//          </div>

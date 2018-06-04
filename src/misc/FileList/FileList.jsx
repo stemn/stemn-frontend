@@ -49,7 +49,6 @@ const propTypesObject = {
   fileList         : PropTypes.object,           // Store
 };
 
-
 export default class FileList extends Component {
   static propTypes = propTypesObject
   refresh = () => {

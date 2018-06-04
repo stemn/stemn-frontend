@@ -21,7 +21,7 @@ export default class HistoryGraph extends Component {
     return moment(date).format('Do MMM YYYY')
   }
   render() {
-    const { data, loading, history } = this.props
+    const { data, loading, history, hasLoaded } = this.props
 
     const dataFormatted = data.map(item => ({
       date: item.date,
@@ -32,7 +32,11 @@ export default class HistoryGraph extends Component {
 
     return (
       <div className="rel-box" style={{width: '100%', height: '100%' }}>
-        <LoadingOverlay show={ loading } size="sm" background="rgba(255, 255, 255, 0.8)" />
+        <LoadingOverlay 
+          show={ loading && !hasLoaded } 
+          size="sm" 
+          background="rgba(255, 255, 255, 0.8)" 
+        />
         <div style={ { marginBottom: '-10px' } }>
           <ResponsiveContainer width="100%" height={ 150 }>
             <AreaChart data={ dataFormatted }>

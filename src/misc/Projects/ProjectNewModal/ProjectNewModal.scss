@@ -8,8 +8,10 @@
   padding: 30px;
   background: bg1;
   overflow-y: auto;
+  flex: 1;
 }
 .modalFooter{
+  min-height: 56px;
   border-top: 1px solid border1;
   padding: 10px;
 }

@@ -1,20 +1,14 @@
-// Component Core
 import React from 'react'
-
-// Styles
 import classes from './SimpleTable.css'
+import cn from 'classnames'
 
-// /////////////////////////////// COMPONENT /////////////////////////////////
-
-export default React.createClass({
-  render() {
-    const { children } = this.props
-    return (
-      <table className={ classes.table }>
-        <tbody>
-          {children}
-        </tbody>
-      </table>
-    )
-  },
-})
+export default (props) => {
+  const { children, className, ...otherProps } = props
+  return (
+    <table className={ cn(classes.table, className) } { ...otherProps }>
+      <tbody>
+        {children}
+      </tbody>
+    </table>
+  )
+}

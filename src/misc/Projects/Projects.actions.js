@@ -43,7 +43,7 @@ export const getProject = ({ projectId, size = 'lg', force }) => (dispatch, getS
     ? project.dataSize
     : undefined
 
-  if (shouldDownload(size, existingSize) || force) {
+  // if (shouldDownload(size, existingSize) || force) {
     return dispatch({
       type: 'PROJECTS/GET_PROJECT',
       httpPackage: {
@@ -61,7 +61,7 @@ export const getProject = ({ projectId, size = 'lg', force }) => (dispatch, getS
         size,
       },
     })
-  }
+  // }
 }
 
 export const createProject = project => (dispatch, getState) => dispatch({
@@ -258,3 +258,18 @@ export const unlinkRemote = ({ projectId, prevProvider }) => (dispatch) => {
     },
   })
 }
+
+export const createClonedProject = ({ projectId, provider, isPrivate, name }) => dispatch => 
+  // Clone the project
+  dispatch({
+    type: 'SOCIAL/CLONE',
+    payload: http({
+      method: 'POST',
+      url: `/api/v1/sync/clone/${projectId}`,
+      data: {
+        name,
+        provider,
+        private: isPrivate,
+      },
+    }),
+  })

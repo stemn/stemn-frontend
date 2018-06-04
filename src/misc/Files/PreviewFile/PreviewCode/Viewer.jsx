@@ -6,9 +6,18 @@ import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'
 import { load } from 'stemn-shared/misc/LazyLoading/LazyLoading.utils'
 import Container from 'stemn-shared/misc/Layout/Container'
 
+// Add a special case for pipeline files.
+// These should be treated as yaml
+const transformExtension = (extension) => {
+  if (extension === 'pipeline') {
+    return 'yaml'
+  }
+  return extension
+}
+
 export default class Viewer extends Component {
   getCodemirrorRef = (ref) => {
-    const { data, extension } = this.props
+    const { data, extension, hideNumbers } = this.props
     
     if (ref && extension) {
       this.codemirrorRef = ref
@@ -19,10 +28,11 @@ export default class Viewer extends Component {
         readOnly: true,
         dragDrop: false,
         lineWrapping: true,
-        lineNumbers: true,
+        lineNumbers: !hideNumbers,
       })
       // Get Mode
-      const modeInfo = codemirror.findModeByExtension(extension)
+      const transformedExtension = transformExtension(extension)
+      const modeInfo = codemirror.findModeByExtension(transformedExtension)
       const mode = modeInfo ? modeInfo.mode : 'null'
       if (mode && mode != 'null') {
         const modePath = `./${mode}/${mode}.js`

@@ -5,7 +5,7 @@ import 'codemirror/mode/meta.js'
 import whatGerber from 'whats-that-gerber'
 
 const getCodeMirrorExts = () => {
-  let codeExts = []
+  let codeExts = ['pipeline']
   forEach(codemirror.modeInfo, (mode) => {
     if (mode.ext) {
       codeExts = codeExts.concat(mode.ext)

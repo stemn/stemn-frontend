@@ -31,6 +31,11 @@ const initialState = {
     private: false,
     savePending: '',
   },
+  cloneProject: {
+    name: '',
+    provider: '',
+    private: false,
+  },
 }
 
 function reducer(state, action) {

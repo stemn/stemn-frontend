@@ -1,0 +1,48 @@
+.line {
+  position: absolute;
+  bottom: 50%;
+  &.left {
+    left: -60px;
+  }
+  &.right {
+    right: -60px;
+  }
+  > div {
+    width: 30px;
+  }
+}
+
+.horizLeft {
+  border-top: 1px solid #e2e2e2;
+  height: 0px !important;
+  width: 31px !important;
+}
+
+.horizRight {
+  border-top: 1px solid #e2e2e2;
+  height: 0px;
+}
+
+.bottomLeft {
+  border-left: 1px solid #e2e2e2;
+  border-bottom: 1px solid #e2e2e2;
+  margin-left: 30px;
+}
+
+.bottomRight {
+  border-right: 1px solid #e2e2e2;
+  border-bottom: 1px solid #e2e2e2;
+  margin-right: 30px;
+}
+
+.vertLeft {
+  height: 60px;
+  border-left: 1px solid #e2e2e2;
+  margin-left: 30px;
+}
+
+.vertRight {
+  height: 60px;
+  border-right: 1px solid #e2e2e2;
+  margin-right: 30px;
+}
