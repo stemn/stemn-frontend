@@ -1,0 +1,48 @@
+@value border1, highlight-color, highlight-text-color from "theme";
+
+input {
+  line-height: 1.3em;
+}
+.dr-input {
+  height: 36px;
+  padding: 10px;
+  display: block;
+  width: 100%;
+  border: 1px solid border1;
+  resize: none;
+  background: white;
+  overflow: hidden;
+
+  -webkit-user-select: text;
+}
+.dr-input:global(.active) {
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+.dr-input:focus {
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.input-plain{
+  width: 100%;
+  outline: none;
+  border: none;
+  padding: 0px;
+  resize: none;
+  background: transparent;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
+textarea.input-plain {
+  overflow: hidden;
+}
+
+::selection {
+  background: highlight-color;
+  color: highlight-text-color;
+}
+::-moz-selection {
+  background: highlight-color;
+  color: highlight-text-color;
+}

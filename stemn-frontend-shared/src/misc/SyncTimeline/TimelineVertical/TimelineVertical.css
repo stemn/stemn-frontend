@@ -1,0 +1,10 @@
+.groupTitle {
+  margin-bottom: 10px;
+}
+.group {
+  margin-bottom: 30px;
+}
+
+.group:last-child {
+  margin-bottom: 0px;
+}

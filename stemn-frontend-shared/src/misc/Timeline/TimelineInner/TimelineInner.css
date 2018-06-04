@@ -1,0 +1,79 @@
+@value primary-bg, border1, bg1, timeline-main, timeline-bg from "theme";
+
+/*
+.dots.small .dot{
+  height: 13px;
+  width: 13px;
+}
+.dots.small .dot.active{
+  height: 16px;
+  width: 16px;
+  margin-left: 0;
+}
+*/
+
+.dots{
+  transition: 0.6s cubic-bezier(0.69, 0.01, 0.17, 0.99) transform;
+  height: 100%;
+  white-space: nowrap;
+  max-width: inherit;
+  position: absolute;
+  right: 0;
+}
+
+.dotGroup{
+  border: 2px solid timeline-main;
+  background: timeline-bg;
+  border-radius: 13px;
+  padding: 5px;
+  transition: 0.3s ease all;
+  margin-left: 30px;
+}
+.dotGroup:hover{
+  background: #ebebeb;
+}
+
+.dotGroup .dot{
+  border-color: transparent;
+  height: 12px;
+  width: 12px;
+  min-width: 12px;
+  margin-left: 5px;
+}
+
+.dot{
+  border-radius: 50%;
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  min-width: 16px;
+  transition: 0.1s ease all;
+  background: timeline-main;
+  margin-left: 30px;
+  color: timeline-bg;
+  font-size: 9px;
+  font-weight: bold;
+  border: 2px solid timeline-bg;
+}
+
+.dot.active{
+  background: primary-bg;
+}
+.dot:first-child{
+  margin-left: 0;
+}
+
+
+
+.popup{
+  padding: 8px;
+}
+.popup b{
+  display: inline-block;
+  margin-bottom: 5px;
+}
+.popupImage{
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
+}

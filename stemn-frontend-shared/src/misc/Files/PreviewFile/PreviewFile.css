@@ -1,0 +1,7 @@
+@value primary, border1, bg1 from "theme";
+
+.header{
+  border-bottom: 1px solid border1;
+  padding: 0 10px;
+  height: 30px;
+}

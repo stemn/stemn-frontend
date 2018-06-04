@@ -1,0 +1,12 @@
+@value border1 from "theme";
+
+.row{
+  height: 36px;
+  border: 1px solid border1;
+  margin-bottom: 10px;
+  padding: 0 10px;
+  cursor: default;
+}
+.row:hover{
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}

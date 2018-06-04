@@ -1,0 +1,10 @@
+.wrapperList{
+  height: 40px;
+}
+.wrapperBoard{
+  position: absolute;
+  top: 45px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

@@ -1,0 +1,29 @@
+.row {
+  font-size: 13px;
+  color: #939393;
+  line-height: 1.6em;
+  padding: 6px 20px 6px 15px;
+  transition: 0.2s ease all;
+
+  &:hover{
+    color: rgba(0, 0, 0, 0.8);
+  }
+  .publicIcon {
+    margin-right: 10px;
+  }
+  .providerIcon {
+    margin-left: 10px;
+    width: 15px;
+    height: 15px;
+    color: rgba(0, 0, 0, 0.3);
+  }
+}
+
+.panel {
+  padding: 0px !important;
+  padding-bottom: 10px !important;
+  min-height: 200px;
+  h3 {
+    padding: 20px 20px 0 20px !important;
+  }
+}

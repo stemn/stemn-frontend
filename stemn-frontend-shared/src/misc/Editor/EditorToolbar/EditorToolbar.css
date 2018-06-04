@@ -1,0 +1,22 @@
+@value primary from "theme";
+
+.toolbar {
+  background: white;
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  margin-top: 10px;
+  margin-right: 10px;
+  z-index: 10;
+}
+
+.toolbar svg {
+  width: 18px;
+  height: 18px;
+}
+
+.sep {
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  margin-left: 5px;
+  padding-left: 10px;
+}

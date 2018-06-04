@@ -1,0 +1,32 @@
+.loading{
+  -webkit-animation: pulse 1s linear;
+  animation: pulse 1s linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  font-family: blokk;
+  color: rgba(0, 0, 0, 0.2);
+}
+
+@keyframes pulse {
+	0% {
+		opacity: 0.5
+	}
+	50% {
+		opacity: 1
+	}
+	100% {
+		opacity: 0.5
+	}
+}
+
+@-webkit-keyframes pulse {
+	0% {
+		opacity: 0.5
+	}
+	50% {
+		opacity: 1
+	}
+	100% {
+		opacity: 0.5
+	}
+}

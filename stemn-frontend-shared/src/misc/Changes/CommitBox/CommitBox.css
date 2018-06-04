@@ -1,0 +1,32 @@
+.input {
+  padding: 7px;
+  line-height: 1.4em;
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.input:focus {
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+.descriptionContainer {
+  position: relative;
+  padding-bottom: 10px;
+}
+.description :global(.CodeMirror-sizer) {
+  min-height: 80px !important;
+  padding: 8px !important;
+}
+.description :global(.CodeMirror) {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.description :global(.CodeMirror-focused){
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.markdownButton {
+  position: absolute;
+  bottom: 12px;
+  right: 5px;
+}

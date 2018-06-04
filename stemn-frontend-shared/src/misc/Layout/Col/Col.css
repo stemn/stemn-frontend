@@ -1,0 +1,12 @@
+.root {
+  padding: 0 15px;
+}
+
+.root:global(.sm) {
+  padding: 0 7px;
+}
+
+.root:global(.lg) {
+  padding: 0 30px;
+}
+

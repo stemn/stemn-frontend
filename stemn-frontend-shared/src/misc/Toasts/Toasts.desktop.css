@@ -1,0 +1,57 @@
+@value primary, border1, warn from "theme";
+
+.toastContainer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+}
+
+.toast {
+  background: white;
+  font-size: 13px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.toastInner {
+  border-top: 1px solid border1;
+  padding: 0 15px;
+  height: 60px;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.close:hover {
+  opacity: 0.6
+}
+.close {
+  transition: opacity 0.2s ease;
+  opacity: 0;
+}
+
+.enter, .appear {
+  transition: height 300ms ease;
+  height: 0px;
+}
+
+.enterActive, .appearActive {
+  height: 60px;
+}
+
+.leave {
+  height: 60px;
+  transition: height 300ms ease;
+}
+
+.leaveActive {
+  height: 0px;
+}
+
+/*Toast Types*/
+.error{
+  color: warn;
+}

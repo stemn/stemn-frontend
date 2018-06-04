@@ -1,0 +1,15 @@
+@value border1, bg1 from "theme";
+
+.breadcrumbs{
+  border-bottom: 1px solid border1;
+  background: bg1;
+  padding: 10px 15px;
+}
+
+.modal {
+  width: 600px;
+
+  @media (max-width: 599px) {
+    width: 90vw;
+  }
+}

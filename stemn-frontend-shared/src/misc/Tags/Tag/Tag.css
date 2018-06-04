@@ -1,0 +1,56 @@
+@value primary, border2, primaryLight1, primaryLight2, border1, bg1 from "theme";
+
+.tag{
+  border-color: border1;
+  border-width: 1px;
+  border-style: solid;
+  
+  color: rgba(0, 0, 0, 0.6);
+  transition: 0.2s ease;
+  display: inline-flex;
+  
+  margin-right: 8px;
+}
+
+.tagInner {
+  padding: 5px 10px;
+}
+
+.tag:global(.lg) .tagInner{
+  padding: 7px 12px;
+}
+
+.tag:hover{
+  border-color: border2;
+}
+
+.tag:global(.primary){
+  background: primaryLight1;
+  border-color: primaryLight2;
+  color: primary;
+}
+
+.tag:hover:global(.primary){
+  background: primaryLight2;
+  border-color: primaryLight2;
+}
+
+.tag:global(.success){
+  background: #e3f9ed;
+  border-color: rgba(33, 211, 112, 0.2);
+  color: #21d370;
+}
+
+.tag:global(.warn){
+  background: rgba(255, 14, 0, 0.1);
+  border-color: rgba(255, 65, 54, 0.1);
+  color: rgba(255, 65, 54, 1);
+}
+
+.close {
+  cursor: pointer;
+  border-left-width: 1px;
+  border-left-style: solid;
+  border-color: inherit;
+  width: 26px;
+}

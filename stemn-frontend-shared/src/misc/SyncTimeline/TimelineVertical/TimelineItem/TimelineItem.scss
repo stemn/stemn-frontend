@@ -1,0 +1,46 @@
+@value primary, primary-2 from "theme";
+
+.item {
+  line-height: 1.4em;
+  color: rgba(0, 0, 0, 0.5);
+}
+.item a {
+  color: primary;
+  margin: 0 4px;
+}
+.item a:hover {
+  color: primary-2;
+}
+.avatar {
+  margin-right: 10px;
+  display: inline-block
+}
+
+.startMarker {
+  position: absolute;
+  width: 11px;
+  top: 0;
+  left: -6px;
+  border-top: 1px solid rgb(232, 232, 232);
+  @media (max-width: 599px) {
+    display: none;
+  }
+}
+.endMarker {
+  position: absolute;
+  width: 11px;
+  bottom: 0;
+  left: -6px;
+  border-bottom: 1px solid rgb(232, 232, 232);
+  @media (max-width: 599px) {
+    display: none;
+  }
+}
+
+.group > div {
+  margin-bottom: 5px;
+  margin-left: 55px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis
+}

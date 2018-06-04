@@ -1,0 +1,53 @@
+@value primary-bg, border1, bg1 from "theme";
+
+.row {
+  border-bottom: 1px solid border1;
+  padding: 7px;
+  cursor: default;
+  position: relative;
+  line-height: 1.4em;
+  height: 48px;
+}
+.name {
+  z-index: 1;
+  position: relative;
+}
+.clickOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.clickable {
+  position: relative;
+  z-index: 1;
+}
+.row:last-child {
+  border-bottom: none;
+}
+.row:hover {
+  background: bg1;
+}
+.active {
+  color: white !important;
+  background: primary-bg !important;
+}
+
+.size {
+  width: 60px;
+  text-align: right;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.date {
+  width: 111px;
+  text-align: right;
+  margin-left: 10px;
+}
+.commit {
+}
+.label {
+  margin-left: 10px;
+  width: 90px;
+}

@@ -1,0 +1,34 @@
+.outer {
+  overflow-x: auto;
+}
+
+.stage {
+  width: 250px;
+  padding: 0 29px;
+  &:last-child {
+    padding-right: 0px;
+  }
+  &:first-child {
+    padding-left: 0px;
+  }
+}
+
+.step {
+  width: 100%;
+  margin-bottom: 20px;
+  position: relative;
+  
+  a {
+    background: white;
+    height: 40px;
+    border: 1px solid;
+    padding: 0px 15px 0 8px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.01);
+    }
+  }
+}
+
+

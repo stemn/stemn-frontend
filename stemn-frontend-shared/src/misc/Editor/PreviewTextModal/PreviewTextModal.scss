@@ -1,0 +1,14 @@
+.modal {
+  width: 600px;
+  min-height: 400px;
+  @media (max-width: 599px) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: white;
+    width: auto;
+    height: auto;
+  }
+}

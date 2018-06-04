@@ -1,0 +1,20 @@
+@value primary-bg, secondary, bg1, border1 from "theme";
+
+.timelineRow{
+  border-bottom: 1px solid border1;
+  cursor: default;
+}
+.text{
+  padding-left: 10px;
+}
+.inner{
+  padding: 8px;
+}
+
+.timelineRow.active{
+  background: primary-bg !important;
+  color: white;
+}
+.timelineRow:hover{
+  background: bg1;
+}

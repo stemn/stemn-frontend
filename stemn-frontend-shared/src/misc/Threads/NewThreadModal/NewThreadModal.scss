@@ -1,0 +1,31 @@
+.modal {
+  width: 600px;
+  height: 400px;
+  @media (max-width: 599px) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: white;
+    width: auto;
+    height: auto;
+  }
+}
+.modalTitle {
+  background: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.titleSection {
+  padding: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.bodySection {
+  min-height: 200px;
+  padding: 40px 20px 20px;
+  position: relative;
+  overflow-y: auto;
+}

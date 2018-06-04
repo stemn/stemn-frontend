@@ -1,0 +1,26 @@
+.container {
+  min-height: 100px;
+}
+
+.image {
+  background-color: rgba(0, 0, 0, 0.00);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+}
+
+.overlay {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.1);
+  color: white;
+  cursor: pointer;
+}

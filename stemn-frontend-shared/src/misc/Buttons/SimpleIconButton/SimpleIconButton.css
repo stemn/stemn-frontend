@@ -1,0 +1,35 @@
+@value border1, bg1 from "theme";
+
+.button{
+  background: none;
+  border: none;
+  color: rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  transition: 0.3s ease all;
+  line-height: 1em;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+.button:focus {
+  outline: none;
+}
+.button:hover {
+  color: rgba(0, 0, 0, 0.6);
+}
+.button:global(.active) {
+  background: bg1;
+  color: rgba(0, 0, 0, 0.6);
+  border: 1px solid border1;
+}
+
+.white{
+  color: rgba(255, 255, 255, 0.8);
+}
+.white:hover{
+  color: rgba(255, 255, 255, 1);
+}
+
+.button:global(.disabled) {
+  pointer-events: none;
+  opacity: 0.4;
+}

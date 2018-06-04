@@ -1,0 +1,15 @@
+@value bg1, border1 from "theme";
+
+.header{
+  padding: 30px;
+  border-bottom: 1px solid border1;
+  background: bg1;
+}
+
+.search{
+  width: 400px;
+}
+
+.threads{
+  padding: 15px;
+}

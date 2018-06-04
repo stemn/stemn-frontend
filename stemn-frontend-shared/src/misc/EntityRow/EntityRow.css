@@ -1,0 +1,23 @@
+.row {}
+
+.link {
+  display: flex;
+  margin-bottom: 5px;
+  line-height: 1.4em;
+}
+
+.blurb {
+  color: rgba(0, 0, 0, 0.5);
+  line-height: 1.4em;
+}
+
+.highlight {
+  font-weight: bold;
+}
+
+.avatar {
+  margin-right: 10px;
+}
+.socialButton {
+  margin-left: 10px;
+}
