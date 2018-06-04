@@ -1,7 +1,0 @@
-<div class="preview-squares" layout="row">
-    <organisation-icon ng-repeat="item in organisations | limitTo: 3" item-id="{{item._id}}"></organisation-icon>
-    <a class="more" ng-click="newOrganisation($event)">
-        <md-icon md-svg-icon="add"></md-icon>
-        <md-tooltip md-direction="top" md-autohide="true">Add organisation</md-tooltip>
-    </a>
-</div>

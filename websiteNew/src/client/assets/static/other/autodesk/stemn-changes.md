@@ -1,3 +1,5 @@
+## Depricated - New viewer have 'Autodesk.Viewing.endpoint.HTTP_REQUEST_HEADERS'
+
 A few changes has been made to allow the bearer token to be added to requests for svf data...
 
 ## Changes

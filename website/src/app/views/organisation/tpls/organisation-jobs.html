@@ -1,5 +1,0 @@
-<div ng-if="showEdit" class="well m-b-30" layout="column" layout-gt-sm="row" layout-align="start center">
-    <p flex>As an administrator of <b>{{organisation.name}}</b>, you advertise job openings for free!</p>
-    <md-button class="md-accent md-raised md-flat md-cornered md-md" ng-click="newJob($event)">Create a job listing</md-button>
-</div>
-<job-rows size="12" parent-type="organisation" parent-id="{{organisation._id}}" class="m-b-60" query="jobQuery"></job-rows>

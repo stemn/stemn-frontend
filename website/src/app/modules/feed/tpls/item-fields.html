@@ -1,4 +1,0 @@
-<span ng-repeat="field in fields | limitTo: limit"><span ng-show="$last && fields.length <= limit && $index != 0">&nbsp;and&nbsp;</span><span ng-hide="$first || ($last && fields.length <= limit)">,&nbsp;</span><a ui-sref="{{field.sref}}" class="text-green">{{field.name}}</a></span>
-<span ng-show="fields.length>limit">
-    and {{fields.length-limit}} more.
-</span>

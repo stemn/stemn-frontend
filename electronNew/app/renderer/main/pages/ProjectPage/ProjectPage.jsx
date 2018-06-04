@@ -23,8 +23,8 @@ import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList';
 import PopoverDetails from 'stemn-shared/misc/PopoverMenu/PopoverDetails';
 import ProjectMenu from 'stemn-shared/misc/Projects/Project.menu.js';
 import PublicPrivateIcon from 'stemn-shared/misc/Icons/PublicPrivateIcon'
-import folderLockedVector   from 'stemn-shared/assets/images/pure-vectors/folder-locked.svg';
-import globalVector   from 'stemn-shared/assets/images/pure-vectors/global.svg';
+import folderLockedVector  from 'stemn-shared/assets/images/pure-vectors/folder-locked.svg';
+import globalVector  from 'stemn-shared/assets/images/pure-vectors/global.svg';
 
 // Styles
 import classNames from 'classnames';

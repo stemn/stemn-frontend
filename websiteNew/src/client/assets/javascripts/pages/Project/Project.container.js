@@ -5,6 +5,8 @@ import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { getProject } from 'stemn-shared/misc/Projects/Projects.actions'
 import { joinRoom, leaveRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
 import Project from './Project'
+import { notFound } from 'route-actions'
+import { replace } from 'react-router-redux';
 
 const stateToProps = ({ projects }, { params, location }) => ({
   projectId: params.stub,
@@ -16,6 +18,7 @@ const dispatchToProps = {
   getProject,
   joinRoom,
   leaveRoom,
+  replace,
 }
 
 const fetchConfigs = [{
@@ -25,7 +28,7 @@ const fetchConfigs = [{
       projectId: props.projectId,
       size: 'lg',
       force: true,
-    })   
+    }).catch(() => props.replace(notFound()))
     props.joinRoom({
       room: props.projectId,
       type: 'project',

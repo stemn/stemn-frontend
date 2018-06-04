@@ -1,8 +1,0 @@
-<div class="collapsed-section" ng-style="sectionStyles">
-    <ng-transclude></ng-transclude>
-    <div class="white-fader" ng-hide="openStatus || disabled"></div>
-</div>
-<div ng-hide="disabled" layout="column">
-    <a ng-show="!openStatus" ng-click="openStatus = true"  class="text-green m-v-10">{{verb || 'See'}} more...</a>
-    <a ng-show=" openStatus" ng-click="openStatus = false" class="text-green m-v-10">{{verb || 'See'}} less...</a>
-</div>

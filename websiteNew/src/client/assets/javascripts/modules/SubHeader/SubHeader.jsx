@@ -8,16 +8,14 @@ import { Container } from 'stemn-shared/misc/Layout'
 
 export default class SubHeader extends Component {
   static propTypes = {
-    title: PropTypes.string,
     children: PropTypes.node,
     noline: PropTypes.bool,
     style: PropTypes.object,
-    icon: PropTypes.node,
     noResponsive: PropTypes.bool,
   }
 
   render() {
-    const { title, children, noline, icon, style, noResponsive, name, params } = this.props
+    const { title, children, noline, style, noResponsive, params } = this.props
     const borderStyle = noline ? {} : { borderBottom: '1px solid rgba(0, 0, 0, 0.1)' }
     const responsiveClasses = noResponsive
       ? 'layout-row'
@@ -27,11 +25,7 @@ export default class SubHeader extends Component {
       <div className={ classes.header } style={ Object.assign({}, borderStyle, style) }>
         <Container className={classNames(classes.headerInner, responsiveClasses)}>
           <h1 className={ classNames(classes.title, 'layout-row layout-align-start-center') }>
-            { icon }
-            { name
-              ? <Link name={ name } params={ params }>{ title }</Link>
-              : title
-            }
+            { title }
           </h1>
           { title && <div className="flex"></div> }
           <div className="layout-row">
