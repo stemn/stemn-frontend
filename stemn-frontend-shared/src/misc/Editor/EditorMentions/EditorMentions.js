@@ -21,7 +21,7 @@ const findAllMentionsPositions = (value = '') => {
       to: {
         line: index,
         ch: mention.index.to,
-      }
+      },
     }))
   })
   return allMentions
@@ -58,7 +58,7 @@ export default class EditorMentions extends Component {
   componentWillReceiveProps() {
     const { codemirror } = this.props
     if (codemirror) {
-      this.getCaretPosition();
+      this.getCaretPosition()
       this.checkForMentions(codemirror)
       setTimeout(() => this.convertMentions(codemirror))
     }
@@ -115,7 +115,7 @@ export default class EditorMentions extends Component {
         to: {
           line: cursor.line,
           ch: cursor.ch,
-        }
+        },
       }
       // Mark the text of the partial mention
       codemirror.markText(cursorRange.from, cursorRange.to, {
@@ -132,7 +132,7 @@ export default class EditorMentions extends Component {
       // If we don't have a mention
       // Remove all mentionUnderway marks
       const allMarks = codemirror.getAllMarks()
-      allMarks.forEach(mark => {
+      allMarks.forEach((mark) => {
         if (mark.className ===  classes.mentionUnderway) {
           mark.clear()
         }

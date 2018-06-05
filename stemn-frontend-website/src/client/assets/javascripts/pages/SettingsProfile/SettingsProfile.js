@@ -27,8 +27,8 @@ export default class SettingsProfile extends Component {
         <InfoPanel>
           <h3>Detailed Summary</h3>
           <Textarea
-            model={`${entityModel}.data.profile.profileDetails.summary`}
-            value={user.data.profile.profileDetails.summary}
+            model={ `${entityModel}.data.profile.profileDetails.summary` }
+            value={ user.data.profile.profileDetails.summary }
             className="dr-input"
             type="text"
             placeholder="Detailed summary"
@@ -36,8 +36,9 @@ export default class SettingsProfile extends Component {
           <br />
           <ProgressButton
             className="primary"
-            loading={user.savePending}
-            onClick={this.saveUser}>
+            loading={ user.savePending }
+            onClick={ this.saveUser }
+          >
             Save Profile
           </ProgressButton>
         </InfoPanel>

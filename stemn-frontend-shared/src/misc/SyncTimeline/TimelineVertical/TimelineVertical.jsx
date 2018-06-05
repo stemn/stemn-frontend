@@ -17,7 +17,7 @@ const groupByDay = (data) => {
 // This will group events by type. It will produce an array of grouped events
 // [event, event, event, { eventsGrouped: [ event, event ] }]
 const eventsToGroup = ['revision', 'thread']
-const groupByIdential = (data) => data.reduce((accum, currentItem, idx) => {
+const groupByIdential = data => data.reduce((accum, currentItem, idx) => {
   const prevItem = data[idx - 1] || {}
   const isIdenticalToPrev = prevItem.event === currentItem.event
   const isInSameProject = get(prevItem, 'data.project._id') && get(prevItem, 'data.project._id') === get(currentItem, 'data.project._id')
@@ -31,18 +31,18 @@ const groupByIdential = (data) => data.reduce((accum, currentItem, idx) => {
     // We add this item to the group. Otherwise we init the group
     accum[indexInGroupedArray] = prevItemIsGroup
       ? {
-          ...itemInGroupedArray,
-          eventsGrouped: [
-            ...itemInGroupedArray.eventsGrouped,
-            currentItem,
-          ]
-        }
-     : {
+        ...itemInGroupedArray,
+        eventsGrouped: [
+          ...itemInGroupedArray.eventsGrouped,
+          currentItem,
+        ],
+      }
+      : {
         ...itemInGroupedArray,
         eventsGrouped: [
           prevItem,
           currentItem,
-        ]
+        ],
       }
   } else {
     accum.push(currentItem)
@@ -50,9 +50,9 @@ const groupByIdential = (data) => data.reduce((accum, currentItem, idx) => {
   return accum
 }, [])
 
-const getCalendarText = (time) => (moment(time).calendar().split(' at'))[0]
+const getCalendarText = time => (moment(time).calendar().split(' at'))[0]
 
-const getNumberOfGroupedItems = (dayGroups) => sum(dayGroups.map((dayGroup) => dayGroup.items.length))
+const getNumberOfGroupedItems = dayGroups => sum(dayGroups.map(dayGroup => dayGroup.items.length))
 
 export default class TimelineVertical extends Component {
   static propTypes = {
@@ -62,10 +62,10 @@ export default class TimelineVertical extends Component {
     entity: PropTypes.object,
     timelineCacheKey: PropTypes.string,
   }
-  renderItems = (items, forceExpand) => {
+  renderItems = (items, forceExpand) => 
     // We force the group to be expanded if there are
     // only a few groups to display on the page
-    return items.map((item, idx) => (
+    items.map((item, idx) => (
       <TimelineItem
         key={ item._id }
         item={ item }
@@ -77,7 +77,7 @@ export default class TimelineVertical extends Component {
         forceExpand={ forceExpand }
       />
     ))
-  }
+  
   render() {
     const { items, type, group, entity, timelineCacheKey, ...otherProps } = this.props
 
@@ -85,9 +85,9 @@ export default class TimelineVertical extends Component {
 
     if (group) {
       const groupedByDay = groupByDay(items)
-      const groupedByDayAndEvent = groupedByDay.map((group) => ({
+      const groupedByDayAndEvent = groupedByDay.map(group => ({
         ...group,
-        items: groupByIdential(group.items)
+        items: groupByIdential(group.items),
       }))
 
       const numberOfGroupedItems = getNumberOfGroupedItems(groupedByDayAndEvent)
@@ -96,19 +96,18 @@ export default class TimelineVertical extends Component {
 
       return (
         <div { ...otherProps }>
-          { groupedByDayAndEvent.map((group) => (
+          { groupedByDayAndEvent.map(group => (
             <div className={ classes.group } key={ group.date }>
-              <div className={ classes.groupTitle + ' text-mini-caps' }>{ getCalendarText(group.items[0].timestamp) }</div>
+              <div className={ `${classes.groupTitle} text-mini-caps` }>{ getCalendarText(group.items[0].timestamp) }</div>
               { this.renderItems(group.items, forceExpand) }
             </div>
           ))}
         </div>
       )
-    } else {
-      // Items are ordered with most recent at bottom (thread)
-      // otherwise, most recent up top.
-      const orderedItems = orderBy(items, 'timestamp', type === 'thread' ? 'asc' : 'desc')
-      return <div>{ this.renderItems(orderedItems, false) }</div>
-    }
+    } 
+    // Items are ordered with most recent at bottom (thread)
+    // otherwise, most recent up top.
+    const orderedItems = orderBy(items, 'timestamp', type === 'thread' ? 'asc' : 'desc')
+    return <div>{ this.renderItems(orderedItems, false) }</div>
   }
 }

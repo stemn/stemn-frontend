@@ -31,12 +31,10 @@ export default class NewFieldModal extends Component {
       blurb,
     }
     return (
-      <div style={ { width: '600px'} }>
+      <div style={ { width: '600px' } }>
         <div className={ classes.modalTitle }>Create a new field</div>
         <div className={ classes.modalBody }>
-          <Form model={ newFieldFormModel } value={ initValue }>
-
-          </Form>
+          <Form model={ newFieldFormModel } value={ initValue } />
           <div className={ classNames(classes.titleSection, 'layout-row layout-align-start-center') }>
             <Textarea
               model={ `${newFieldFormModel}.name` }
@@ -59,7 +57,8 @@ export default class NewFieldModal extends Component {
         <div className="modal-footer-no-line layout-row layout-align-end">
           <Button
             style={ { marginRight: '10px' } }
-            onClick={ modalCancel }>
+            onClick={ modalCancel }
+          >
             Cancel
           </Button>
           <Button

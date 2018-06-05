@@ -7,7 +7,7 @@ import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import HistoryGraph from 'stemn-shared/misc/History/HistoryGraph'
 import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
-import Panel from 'stemn-shared/misc/Panels/Panel';
+import Panel from 'stemn-shared/misc/Panels/Panel'
 import SubSubHeader from 'modules/SubSubHeader'
 import Pagination from 'stemn-shared/misc/Pagination'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
@@ -91,15 +91,14 @@ export default class ProjectCommits extends Component {
           />
         </div>
       )
-    } else if ( filterIsDefault ) {
+    } else if (filterIsDefault) {
       return <HistoryEmpty projectRouteParams={ projectRouteParams } />
-    } else {
-      return (
-        <Panel className="text-title-5">
+    } 
+    return (
+      <Panel className="text-title-5">
           No timeline events found. <a className="link-primary" onClick={ this.clearFilter }>Reset Filter</a>
-        </Panel>
-      )
-    }
+      </Panel>
+    )
   }
   render() {
     const { project, syncTimeline, filter } = this.props
@@ -110,13 +109,13 @@ export default class ProjectCommits extends Component {
     const userFilterOptions = team.map(user => ({
       name: user.name,
       value: user._id,
-      onClick: () => { this.changeUserFilter(user._id) }
+      onClick: () => { this.changeUserFilter(user._id) },
     }))
 
     userFilterOptions.push({
       name: 'Any',
       value: undefined,
-      onClick: () => { this.changeUserFilter(undefined) }
+      onClick: () => { this.changeUserFilter(undefined) },
     })
 
     const typeFilterOptions = [{
@@ -139,7 +138,7 @@ export default class ProjectCommits extends Component {
       value: 'threadEvents',
       name: 'Thread Events',
       onClick: () => { this.changeTypeFilter('threadEvents') },
-    }, ]
+    }]
 
     return (
       <div className={ classes.content }>
@@ -159,7 +158,7 @@ export default class ProjectCommits extends Component {
                 className="flex-xs"
                 value={ get(filter, ['object', 'user']) }
                 options={ userFilterOptions }
-                style={ { marginRight: '15px'} }
+                style={ { marginRight: '15px' } }
               >
                 User:&nbsp;
               </PopoverDropdown>
@@ -182,8 +181,8 @@ export default class ProjectCommits extends Component {
         <div className={ classes.innerContent }>
           <Container>
             { isLoaded
-            ? this.renderLoaded()
-            : null }
+              ? this.renderLoaded()
+              : null }
           </Container>
         </div>
       </div>

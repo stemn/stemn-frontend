@@ -15,7 +15,7 @@ export default class UserPasswordSettings extends Component {
       oldPassword: auth.passwordSet.oldPassword,
     })
   }
-  render () {
+  render() {
     const { auth } = this.props
     const invalid = (auth.passwordSet.password1 != auth.passwordSet.password2) || auth.passwordSet.password1.length < 7
 
@@ -50,7 +50,7 @@ export default class UserPasswordSettings extends Component {
           id="user_new_password_confirm"
         />
         <br />
-        <div className='layout-row layout-align-end'>
+        <div className="layout-row layout-align-end">
           <ProgressButton
             className="primary"
             loading={ auth.updatePasswordPending }

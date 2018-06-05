@@ -5,25 +5,25 @@ import { getNotifications, markAsRead } from 'stemn-shared/misc/Notifications/No
 import Notifications from './Notifications'
 
 const stateToProps = ({ notifications }) => ({
-  notifications
+  notifications,
 })
 
 const dispatchToProps = {
   getNotifications,
-  markAsRead
+  markAsRead,
 }
 
 const fetchConfigs = [{
   hasChanged: 'location.pathname',
   onChange: (props) => {
     props.getNotifications()
-  }
+  },
 }]
 
 @connect(stateToProps, dispatchToProps)
 @fetchDataHoc(fetchConfigs)
 export default class NotificationsContainer extends Component {
   render() {
-    return <Notifications {...this.props} />
+    return <Notifications { ...this.props } />
   }
 }

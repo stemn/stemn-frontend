@@ -12,7 +12,7 @@ const dispatchToProps = {
 export default class LandingContainer extends Component {
   render() {
     return (
-      <Landing {...this.props} />
-    );
+      <Landing { ...this.props } />
+    )
   }
 }

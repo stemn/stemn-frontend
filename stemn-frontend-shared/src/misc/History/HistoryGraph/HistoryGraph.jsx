@@ -14,12 +14,8 @@ const demoData = [
 ]
 
 export default class HistoryGraph extends Component {
-  tickFormatter = (tick) => {
-    return moment(tick).format('DD MMM')
-  }
-  tooltipLabelFormatter = (date) => {
-    return moment(date).format('Do MMM YYYY')
-  }
+  tickFormatter = tick => moment(tick).format('DD MMM')
+  tooltipLabelFormatter = date => moment(date).format('Do MMM YYYY')
   render() {
     const { data, loading, history, hasLoaded } = this.props
 
@@ -31,7 +27,7 @@ export default class HistoryGraph extends Component {
     }))
 
     return (
-      <div className="rel-box" style={{width: '100%', height: '100%' }}>
+      <div className="rel-box" style={ { width: '100%', height: '100%' } }>
         <LoadingOverlay 
           show={ loading && !hasLoaded } 
           size="sm" 
@@ -75,7 +71,7 @@ export default class HistoryGraph extends Component {
               />
               <Tooltip
                 labelFormatter={ this.tooltipLabelFormatter }
-                itemStyle= { { color: 'rgba(0, 0, 0, 0.5)', marginTop: '3px' } }
+                itemStyle={ { color: 'rgba(0, 0, 0, 0.5)', marginTop: '3px' } }
               />
             </AreaChart>
           </ResponsiveContainer>

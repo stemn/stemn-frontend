@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
-import { get } from 'lodash';
+import { get } from 'lodash'
 
 import { getUserStars } from 'stemn-shared/misc/UserStars/UserStars.actions.js'
 
@@ -11,7 +11,7 @@ const stateToProps = (state, { params, location }) => {
   const size = 30
   const userId = params.stub
   const page = parseInt(location.query.page || 1)
-  const items = get(state, `userStars.${userId}.${page}`);
+  const items = get(state, `userStars.${userId}.${page}`)
 
   return {
     items,
@@ -24,7 +24,7 @@ const stateToProps = (state, { params, location }) => {
 }
 
 const dispatchToProps = {
-  getUserStars
+  getUserStars,
 }
 
 const fetchConfigs = [{
@@ -33,9 +33,9 @@ const fetchConfigs = [{
     props.getUserStars({
       userId: props.userId,
       page: props.page,
-      size: props.size
+      size: props.size,
     })
-  }
+  },
 }]
 
 
@@ -44,7 +44,7 @@ const fetchConfigs = [{
 export default class UserStarsContainer extends Component {
   render() {
     return (
-      <UserStars {...this.props} />
+      <UserStars { ...this.props } />
     )
   }
 }

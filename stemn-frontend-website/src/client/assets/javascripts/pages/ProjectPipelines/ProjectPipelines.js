@@ -5,7 +5,7 @@ import moment from 'moment'
 import { get, range } from 'lodash'
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
-import Panel from 'stemn-shared/misc/Panels/Panel';
+import Panel from 'stemn-shared/misc/Panels/Panel'
 import SubSubHeader from 'modules/SubSubHeader'
 import Pagination from 'stemn-shared/misc/Pagination'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
@@ -70,7 +70,7 @@ export default class ProjectPipelines extends Component {
       return (
         <div>
           <PipelineList
-             pipelines={ isLoaded ? pipelines.data : range(8) }
+            pipelines={ isLoaded ? pipelines.data : range(8) }
           />
           <Pagination
             path={ location.pathname }
@@ -81,13 +81,12 @@ export default class ProjectPipelines extends Component {
       )
     } else if (filterIsDefault) {
       return <PipelinesEmpty projectRouteParams={ projectRouteParams } />
-    } else {
-      return (
-        <Panel className="text-title-5">
+    } 
+    return (
+      <Panel className="text-title-5">
           No timeline events found. <a className="link-primary" onClick={ this.clearFilter }>Reset Filter</a>
-        </Panel>
-      )
-    }
+      </Panel>
+    )
   }
   render() {
     const { project, pipelines, filter } = this.props
@@ -97,12 +96,12 @@ export default class ProjectPipelines extends Component {
       ...team.map(user => ({
         name: user.name,
         value: user._id,
-        onClick: () => { this.changeUserFilter(user._id) }
+        onClick: () => { this.changeUserFilter(user._id) },
       })), {
         name: 'Any',
         value: undefined,
-        onClick: () => { this.changeUserFilter(undefined) }
-      }
+        onClick: () => { this.changeUserFilter(undefined) },
+      },
     ]
 
     const typeFilterOptions = [{
@@ -145,7 +144,7 @@ export default class ProjectPipelines extends Component {
                 className="flex-xs"
                 value={ get(filter, ['object', 'user']) }
                 options={ userFilterOptions }
-                style={ { marginRight: '15px'} }
+                style={ { marginRight: '15px' } }
               >
                 User:&nbsp;
               </PopoverDropdown>

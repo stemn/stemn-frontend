@@ -68,7 +68,7 @@ const fetchConfigs = [{
       page: props.page,
       size: props.size,
     })
-  }
+  },
 }]
 
 @connect(stateToProps, dispatchToProps)
@@ -76,7 +76,7 @@ const fetchConfigs = [{
 export default class ProjectPipelinesContainer extends Component {
   render() {
     return (
-      <ProjectPipelines {...this.props} />
-    );
+      <ProjectPipelines { ...this.props } />
+    )
   }
 }

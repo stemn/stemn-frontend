@@ -7,7 +7,7 @@ import SiteSearchResults from 'stemn-shared/misc/Search/SiteSearchResults'
 import classes from './Explore.scss'
 import SubHeader from 'modules/SubHeader'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet'
 export default class Explore extends Component {
   orderOptions = [{
     value: 'views',

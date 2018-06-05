@@ -16,7 +16,7 @@ import {
 } from 'stemn-shared/misc/Threads/Threads.actions'
 
 const stateToProps = ({ threads, projects, syncTimeline, auth }, { params }) => {
-  const threadId = params.threadId;
+  const threadId = params.threadId
   const thread = threads.data[threadId]
   const projectId = params.stub
   const project = projects.data[projectId]
@@ -33,7 +33,7 @@ const stateToProps = ({ threads, projects, syncTimeline, auth }, { params }) => 
     timeline: get(syncTimeline, [threadId, 'data'], []),
     timelineCacheKey: threadId,
     currentUser: auth.user,
-  };
+  }
 }
 
 const dispatchToProps = {
@@ -47,22 +47,22 @@ const dispatchToProps = {
   leaveRoom,
   pushRoute,
   replaceRoute,
-};
+}
 
 const fetchConfigs = [{
   hasChanged: 'threadId',
   onChange: (props) => {
     props.getThread({
-      threadId: props.threadId
+      threadId: props.threadId,
     })
-  }
+  },
 }, {
   hasChanged: 'projectId',
   onChange: (props) => {
     props.getBoards({
-      projectId: props.projectId
+      projectId: props.projectId,
     })
-  }
+  },
 }, {
   hasChanged: 'threadId',
   onChange: (props) => {
@@ -75,7 +75,7 @@ const fetchConfigs = [{
       type: 'thread',
       room: props.threadId,
     })
-  }
+  },
 }, {
   // Leave the thread room on unmount/change
   unmount: true,
@@ -88,7 +88,7 @@ const fetchConfigs = [{
         room: prevProps.threadId,
       })
     }
-  }
+  },
 }]
 
 @connect(stateToProps, dispatchToProps)
@@ -96,7 +96,7 @@ const fetchConfigs = [{
 export default class ProjectThreadContainer extends Component {
   render() {
     return (
-      <ProjectThread {...this.props} />
-    );
+      <ProjectThread { ...this.props } />
+    )
   }
 }

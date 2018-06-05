@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { authenticate } from 'stemn-shared/misc/Auth/Auth.actions.js'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
-import classNames from 'classnames';
+import classNames from 'classnames'
 
 class ProjectLinkRemote extends Component {
   onChange = ({ isAuthed, authType, value }) => {
@@ -11,21 +11,21 @@ class ProjectLinkRemote extends Component {
     // If the selected provider is not authed, auth it
     if (!isAuthed) {
       authenticate(authType)
-//      .then((response) => {
-//        // TODO: NEED TO FIX THIS SHIT. TOO MUCH WINE TO UNDERSTAND HOW
-//        this.props.dispatch(storeChange(this.props.model, selectedProvider.value));
-//        console.log(response);
-//      })
-//      .catch((response) => {
-//         console.log(response);
-//      });
+      //      .then((response) => {
+      //        // TODO: NEED TO FIX THIS SHIT. TOO MUCH WINE TO UNDERSTAND HOW
+      //        this.props.dispatch(storeChange(this.props.model, selectedProvider.value));
+      //        console.log(response);
+      //      })
+      //      .catch((response) => {
+      //         console.log(response);
+      //      });
     }
     // Else, we update the model straight away
     else {
       storeChange(model, value)
     }
   }
-  render(){
+  render() {
     const { model, value, dispatch, auth } = this.props
 
     const options = [
@@ -40,7 +40,7 @@ class ProjectLinkRemote extends Component {
             authType: 'dropbox',
             value: 'dropbox',
           })
-        }
+        },
       }, {
         value: 'drive',
         name: 'Drive',
@@ -52,7 +52,7 @@ class ProjectLinkRemote extends Component {
             authType: 'google',
             value: 'drive',
           })
-        }
+        },
       }, {
         value: undefined,
         name: 'None',
@@ -61,8 +61,8 @@ class ProjectLinkRemote extends Component {
             isAuthed: true,
             value: undefined,
           })
-        }
-      }
+        },
+      },
     ]
 
     return (
@@ -77,7 +77,7 @@ class ProjectLinkRemote extends Component {
   }
 }
 
-const mapStateToProps = ({auth}, {}) => ({
+const mapStateToProps = ({ auth }, {}) => ({
   auth,
 })
 
@@ -86,4 +86,4 @@ const mapDispatchToProps = {
   storeChange,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectLinkRemote);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectLinkRemote)

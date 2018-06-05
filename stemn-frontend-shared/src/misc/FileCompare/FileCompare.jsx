@@ -15,7 +15,7 @@ export default class FileCompare extends Component {
     project: PropTypes.object.isRequired,
     file: PropTypes.object.isRequired,
     isOpen: PropTypes.bool,                           // Is it open ( to be used with collapse )
-    type: PropTypes.oneOf([ 'collapse', undefined ]),
+    type: PropTypes.oneOf(['collapse', undefined]),
   }
   onSelect = (file) => {
     const { select, syncTimelineCacheKey, compare: { mode, lastSelected } } = this.props
@@ -45,86 +45,82 @@ export default class FileCompare extends Component {
   render() {
     const { compare: { mode, selected1, selected2 }, file, project, togglePanelCacheKey, type, className } = this.props
     const items = orderItemsByTime(mode, selected1, selected2)
-    const file1 = get(items, [0, 'data' ])
-    const file2 = get(items, [1, 'data' ])
+    const file1 = get(items, [0, 'data'])
+    const file2 = get(items, [1, 'data'])
 
-    const collapseTemplate = () => {
-      return (
-        <div className={ className }>
-          <TogglePanel cacheKey={ togglePanelCacheKey }>
-            <div className="text-ellipsis text-grey-4">{ file.data.path }</div>
-            <FileCompareMenu
-              file1={ file1 }
-              file2={ file2 }
-              revisions={ file.revisions }
-              mode={ mode }
-              changeMode={ this.changeMode }
-              enablePreview
-            />
-            <DragResize
-              side="bottom"
-              height="500"
-              heightRange={[0, 1000]}
-              className="layout-column flex"
-            >
-              <FileCompareInner
-                project={ project.data }
-                event={ selected1 }
-                file1={ file1 }
-                file2={ file2 }
-                mode= {mode }
-              />
-              { file.revisions.length > 1
-                ? <Timeline
-                  className={ classes.timeline }
-                  size="sm"
-                  onSelect={ this.onSelect }
-                  isSelected={ this.isSelected }
-                  items={ file.revisions }
-                  preferPlace="above"
-                />
-                : null }
-            </DragResize>
-          </TogglePanel>
-        </div>
-      )
-    }
-
-    const standardTemplate = () => {
-      return (
-        <div className={ classNames('layout-column flex', className) }>
-          <div className={ classes.header + ' layout-row layout-align-start-center' }>
-            <div className="flex">{ file.data.path }</div>
-            <FileCompareMenu
-              file1={ file1 }
-              file2={ file2 }
-              revisions={ file.revisions }
-              mode={ mode }
-              changeMode={ this.changeMode }
-              enablePreview
-            />
-          </div>
-          <div className="layout-column flex">
+    const collapseTemplate = () => (
+      <div className={ className }>
+        <TogglePanel cacheKey={ togglePanelCacheKey }>
+          <div className="text-ellipsis text-grey-4">{ file.data.path }</div>
+          <FileCompareMenu
+            file1={ file1 }
+            file2={ file2 }
+            revisions={ file.revisions }
+            mode={ mode }
+            changeMode={ this.changeMode }
+            enablePreview
+          />
+          <DragResize
+            side="bottom"
+            height="500"
+            heightRange={ [0, 1000] }
+            className="layout-column flex"
+          >
             <FileCompareInner
-              project={ project }
+              project={ project.data }
               event={ selected1 }
               file1={ file1 }
               file2={ file2 }
               mode={ mode }
-              header={ ['sideBySide', 'aboveAndBelow'].includes(mode) }
             />
-          </div>
-          <Timeline
-            className={classes.timeline}
-            size="sm"
-            onSelect={ this.onSelect }
-            isSelected={ this.isSelected }
-            items={ file.revisions }
-            preferPlace="above"
+            { file.revisions.length > 1
+              ? <Timeline
+                className={ classes.timeline }
+                size="sm"
+                onSelect={ this.onSelect }
+                isSelected={ this.isSelected }
+                items={ file.revisions }
+                preferPlace="above"
+              />
+              : null }
+          </DragResize>
+        </TogglePanel>
+      </div>
+    )
+
+    const standardTemplate = () => (
+      <div className={ classNames('layout-column flex', className) }>
+        <div className={ `${classes.header} layout-row layout-align-start-center` }>
+          <div className="flex">{ file.data.path }</div>
+          <FileCompareMenu
+            file1={ file1 }
+            file2={ file2 }
+            revisions={ file.revisions }
+            mode={ mode }
+            changeMode={ this.changeMode }
+            enablePreview
           />
         </div>
-      )
-    }
+        <div className="layout-column flex">
+          <FileCompareInner
+            project={ project }
+            event={ selected1 }
+            file1={ file1 }
+            file2={ file2 }
+            mode={ mode }
+            header={ ['sideBySide', 'aboveAndBelow'].includes(mode) }
+          />
+        </div>
+        <Timeline
+          className={ classes.timeline }
+          size="sm"
+          onSelect={ this.onSelect }
+          isSelected={ this.isSelected }
+          items={ file.revisions }
+          preferPlace="above"
+        />
+      </div>
+    )
 
     if (!file1) {
       return null

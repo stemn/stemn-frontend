@@ -19,8 +19,8 @@ export const pipeline = {
     triggers: [
       {
         type: 'revision',
-        files: 'resin-mould.py'
-      }
+        files: 'resin-mould.py',
+      },
     ],
     stages: [
       {
@@ -31,33 +31,33 @@ export const pipeline = {
               '--in_spec',
               '/pipeline/resin-mould.py',
               '--format',
-              'STEP'
+              'STEP',
             ],
             outputFiles: [
-              'cqobject*'
+              'cqobject*',
             ],
             inputFiles: [
-              'resin-mould.py'
+              'resin-mould.py',
             ],
             image: 'dcowden/cadquery:latest',
-            label: 'STEP'
-          }
+            label: 'STEP',
+          },
         ],
-        label: 'convert'
+        label: 'convert',
       },
       {
         steps: [
           {
             inputFiles: [
-              'cqobject*'
+              'cqobject*',
             ],
             image: 'stemn/upload:latest',
-            label: 'stemn'
-          }
+            label: 'stemn',
+          },
         ],
-        label: 'upload'
-      }
-    ]
+        label: 'upload',
+      },
+    ],
   },
   stages: [
     {
@@ -68,13 +68,13 @@ export const pipeline = {
         _id: '5ab450710741c3005e4cda54',
         stage: '5ab30cf335c1cd0042ea6679',
         name: 'to STEP',
-        status: 'running'
+        status: 'running',
       }, {
         _id: '5ab450710741c3005e4cea22',
         stage: '5ab30cf335c1cd0042ea6679',
         name: 'to STL',
-        status: 'pending'
-      }]
+        status: 'pending',
+      }],
     },
     {
       _id: '5ab30cf335c1cd0042ea667a',
@@ -84,12 +84,12 @@ export const pipeline = {
         _id: '5ab450710741c3005e4cda0f',
         stage: '5ab30cf335c1cd0042ea667a',
         name: 'to Stemn',
-        status: 'pending'
-      }]
-    }
+        status: 'pending',
+      }],
+    },
   ],
   outputFiles: [],
   inputRevisions: [
-    '5ab30cf235c1cd0042ea6676'
+    '5ab30cf235c1cd0042ea6676',
   ],
 }

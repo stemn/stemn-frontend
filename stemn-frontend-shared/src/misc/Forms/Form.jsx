@@ -1,10 +1,10 @@
-/**************************************************
+/** ************************************************
 This component will take in a model and value and
 set the value to the store when the component mounts.
 
 This is useful for initialising a new form data
 section in the store.
-**************************************************/
+************************************************* */
 
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
@@ -27,7 +27,7 @@ export default class Form extends Component {
     value: PropTypes.any.isRequired,
   }
   componentWillMount() { 
-    this.props.load(this.props.model, this.props.value);
+    this.props.load(this.props.model, this.props.value)
   }
   render() {
     const { children } = this.props

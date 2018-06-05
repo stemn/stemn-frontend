@@ -43,7 +43,7 @@ export default class PopoverFit extends Component {
         childRef: this.getTriggerRef, // This childRef prop should be implemented if the child is a component
         ref: this.getTriggerRef,
       }
-      return React.cloneElement(element, newProps);
+      return React.cloneElement(element, newProps)
     }    
     
     return (

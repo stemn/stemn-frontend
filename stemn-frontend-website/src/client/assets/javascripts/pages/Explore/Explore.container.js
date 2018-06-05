@@ -14,7 +14,7 @@ const dispatchToProps = {
 export default class ExploreContainer extends Component {
   render() {
     return (
-      <Explore {...this.props} />
+      <Explore { ...this.props } />
     )
   }
 }

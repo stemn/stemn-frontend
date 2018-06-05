@@ -67,23 +67,23 @@ const fetchConfigs = [{
     props.fetchTimeline({
       entityType: 'project',
       entityId: props.projectId,
-      types: props.filter.object.type ? [ props.filter.object.type ] : undefined,
+      types: props.filter.object.type ? [props.filter.object.type] : undefined,
       cacheKey: props.timelineCacheKey,
       criteria: {
         owner: props.filter.object.user,
-        name: props.filter.object.query && `/${props.filter.object.query}/i`
+        name: props.filter.object.query && `/${props.filter.object.query}/i`,
       },
       page: props.page,
       size: props.size,
     })
-  }
-},{
+  },
+}, {
   hasChanged: 'projectId',
   onChange: (props) => {
     props.getBoards({
       projectId: props.projectId,
     })
-  }
+  },
 }]
 
 @connect(stateToProps, dispatchToProps)
@@ -91,7 +91,7 @@ const fetchConfigs = [{
 export default class ProjectCommitsContainer extends Component {
   render() {
     return (
-      <ProjectCommits {...this.props} />
-    );
+      <ProjectCommits { ...this.props } />
+    )
   }
 }

@@ -12,21 +12,21 @@ const stateToProps = ({ threads }, { params }) => {
   return {
     threadId,
     thread,
-  };
+  }
 }
 
 const dispatchToProps = {
   getThread,
   replace, 
-};
+}
 
 const fetchConfigs = [{
   hasChanged: 'threadId',
   onChange: (props) => {
     props.getThread({
-      threadId: props.threadId
+      threadId: props.threadId,
     })
-  }
+  },
 }, {
   hasChanged: 'thread',
   onChange: (props) => {
@@ -37,7 +37,7 @@ const fetchConfigs = [{
         projectId: props.thread.data.project._id,
       }))
     }
-  }
+  },
 }]
 
 @connect(stateToProps, dispatchToProps)
@@ -46,6 +46,6 @@ export default class ThreadContainer extends Component {
   render() {
     return (
       <LoadingOverlay show />
-    );
+    )
   }
 }

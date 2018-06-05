@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import RegisterPage from 'stemn-shared/pages/Register/Register';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import RegisterPage from 'stemn-shared/pages/Register/Register'
 import LandingLayout from 'layout/LandingLayout'
-import { Helmet } from "react-helmet";
-import { nextBackground, authenticate, register } from 'stemn-shared/misc/Auth/Auth.actions.js';
+import { Helmet } from 'react-helmet'
+import { nextBackground, authenticate, register } from 'stemn-shared/misc/Auth/Auth.actions.js'
 
 const stateToProps = ({ auth }) => ({
-  auth
-});
+  auth,
+})
 
 const dispatchToProps = {
   nextBackground,
   authenticate,
-  register
-};
+  register,
+}
 
 @connect(stateToProps, dispatchToProps)
 export default class LoginContainer extends Component {
@@ -23,8 +23,8 @@ export default class LoginContainer extends Component {
         <Helmet>
           <title>Register</title>
         </Helmet>
-        <RegisterPage {...this.props} />
+        <RegisterPage { ...this.props } />
       </LandingLayout>
-    );
+    )
   }
 }

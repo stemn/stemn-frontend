@@ -14,7 +14,7 @@ class Component extends React.Component {
     // Update the internal state if it differs from the redux state
     if (nextProps.value != this.state.value) {
       this.setState({
-        value: nextProps.value
+        value: nextProps.value,
       })
     }
   }
@@ -28,13 +28,13 @@ class Component extends React.Component {
     const newValue = event.target.value
     // We update our internal state
     this.setState({
-      value: newValue
+      value: newValue,
     })
     // Update the redux value
     dispatch(storeChange(model, newValue))
     if (onChange) { onChange() }
   }
-  render(){
+  render() {
     const { model, dispatch, onChange, value: valueExternal, ...otherProps } = this.props
     const { value } = this.state
     return (
@@ -44,8 +44,8 @@ class Component extends React.Component {
         value={ value }
         { ...otherProps }
       />
-    );
+    )
   }
-};
+}
 
 export default connect()(Component)

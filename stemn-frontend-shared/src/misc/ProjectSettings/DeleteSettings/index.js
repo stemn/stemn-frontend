@@ -1,13 +1,13 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton';
+import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 
 export default class GeneralSettings extends Component {
   static propTypes = {
     deleteProject: PropTypes.func.isRequired,
   }
   render() {
-    const { deleteProject } = this.props;
+    const { deleteProject } = this.props
     return (
       <div>
         <h3>Delete Project</h3>
@@ -15,7 +15,8 @@ export default class GeneralSettings extends Component {
         <div className="layout-row layout-align-end">
           <ProgressButton 
             className="warn"
-            onClick={ deleteProject }>
+            onClick={ deleteProject }
+          >
             Delete Project
           </ProgressButton>
         </div>

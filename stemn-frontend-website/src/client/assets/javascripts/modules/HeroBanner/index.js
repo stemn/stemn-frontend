@@ -1,1 +1,1 @@
-export default from './HeroBanner';
+export default from './HeroBanner'

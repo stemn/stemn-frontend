@@ -26,14 +26,12 @@ export default class ProjectOverview extends Component {
     const { pushRoute } = this.props
     const projectId = this.props.project.data._id
 
-    if(file.type == 'file'){
-      pushRoute(fileRoute({fileId, projectId, revisionId}))
-    }
-    else if(file.type == 'folder'){
-      pushRoute(projectFolderRoute({fileId, projectId}))
-    }
-    else if(projectId){
-      pushRoute(projectRoute({projectId}))
+    if (file.type == 'file') {
+      pushRoute(fileRoute({ fileId, projectId, revisionId }))
+    } else if (file.type == 'folder') {
+      pushRoute(projectFolderRoute({ fileId, projectId }))
+    } else if (projectId) {
+      pushRoute(projectRoute({ projectId }))
     }
   }
 
@@ -42,18 +40,17 @@ export default class ProjectOverview extends Component {
     const isConnected = get(project, 'data.remote.connected', false)
 
     const options = {
-      showMenu: true
+      showMenu: true,
     }
 
-    if(project && project.data && project.data._id){
-      
+    if (project && project.data && project.data._id) {
       const licenseInfo = licenseData.find(license => license.type == project.data.license)
       const projectRouteParams = { projectId: project.data._id }
 
       const infoBoxes = (
         <Col className={ classNames(project.data.picture ? 'flex flex-gt-xs-33' : 'flex') }>
-          <div className={ classNames(project.data.picture ? 'layout-column' : 'layout-xs-column layout-gt-xs-row', classes.infoBoxes)}>
-            <div className='flex layout-row layout-align-start-center' style={ { padding: '15px 20px' } }>
+          <div className={ classNames(project.data.picture ? 'layout-column' : 'layout-xs-column layout-gt-xs-row', classes.infoBoxes) }>
+            <div className="flex layout-row layout-align-start-center" style={ { padding: '15px 20px' } }>
               <MdPeople />
               Team
               <div className="flex" />
@@ -61,26 +58,26 @@ export default class ProjectOverview extends Component {
                 <UserAvatars className="layout-row" shape="square" size={ 30 } users={ project.data.team } limit={ 5 } />
               </Link>
             </div>
-            <div className='flex layout-row layout-align-start-center'>
+            <div className="flex layout-row layout-align-start-center">
               <MdAccessTime />
               Updated { moment(project.data.updated).fromNow() }
             </div>
             { has(project, 'data.location[0].name')
-              ? <div className='flex layout-row layout-align-start-center'>
-                  <MdLocationOn />
-                  <div className="text-ellipsis flex">{ project.data.location[0].name }</div>
-                </div>
+              ? <div className="flex layout-row layout-align-start-center">
+                <MdLocationOn />
+                <div className="text-ellipsis flex">{ project.data.location[0].name }</div>
+              </div>
               : null
             }
             { licenseInfo
-              ? <div className='flex layout-row layout-align-start-center'>
+              ? <div className="flex layout-row layout-align-start-center">
                 <MdAccount />
                 <a className="flex text-ellipsis" href={ licenseInfo.url } target="_blank">{ licenseInfo.name }</a>
               </div>
               : null
             }
             { changesCount && changesCount > 0 ?
-              <div className='flex layout-row layout-align-start-center'>
+              <div className="flex layout-row layout-align-start-center">
                 <MdCompareArrows />
                 { changesCount } uncommited changes
               </div>
@@ -93,7 +90,7 @@ export default class ProjectOverview extends Component {
       const imageBlock = (
         <Col className="flex">
           <div 
-            style={ { backgroundImage: `url(${GLOBAL_ENV.API_SERVER}${project.data.picture})`} }
+            style={ { backgroundImage: `url(${GLOBAL_ENV.API_SERVER}${project.data.picture})` } }
             className={ classes.image  }
           />
         </Col>
@@ -110,12 +107,12 @@ export default class ProjectOverview extends Component {
         <div style={ { marginBottom: '30px' } }>
           <SubSubHeader>
             { project.data.blurb.length > 0
-            ? <div className={ classes.blurb }>{ project.data.blurb }</div>
-            : null }
+              ? <div className={ classes.blurb }>{ project.data.blurb }</div>
+              : null }
             <div className="layout-xs-column layout-gt-xs-row layout-align-gt-xs-start-center">
               <div className={ classes.tags }>
-                { project.data.fields.map((field) => (
-                  <Link key={ field._id } name="fieldRoute" params={{ fieldId: field.stub }}>
+                { project.data.fields.map(field => (
+                  <Link key={ field._id } name="fieldRoute" params={ { fieldId: field.stub } }>
                     <Tag className="primary" text={ field.name } style={ { marginBottom: '6px' } } />
                   </Link>
                 ))}
@@ -123,16 +120,16 @@ export default class ProjectOverview extends Component {
               <div className="flex" />
               <div className="layout-row" style={ { marginBottom: '6px' } }>
                 <SocialButton
-                  style={{marginRight: '10px'}}
+                  style={ { marginRight: '10px' } }
                   type="follow"
-                  numberModel={`${entityModel}.data.numFollowers`}
+                  numberModel={ `${entityModel}.data.numFollowers` }
                   number={ project.data.numFollowers }
                   entityType="project"
                   entityId={ project.data._id }
                 />
                 <SocialButton
                   type="like"
-                  numberModel={`${entityModel}.data.numLikes`}
+                  numberModel={ `${entityModel}.data.numLikes` }
                   number={ project.data.numLikes }
                   entityType="project"
                   entityId={ project.data._id }
@@ -142,8 +139,8 @@ export default class ProjectOverview extends Component {
           </SubSubHeader>
           <Container style={ { margin: '30px auto' } }>
             { !isFilePage 
-            ? imageInfoSection 
-            : null }
+              ? imageInfoSection 
+              : null }
             { isConnected &&
               <FileList
                 className={ classes.files }
@@ -169,9 +166,8 @@ export default class ProjectOverview extends Component {
         </div>
       )
     }
-    else{
-      return null
-    }
+    
+    return null
   }
 }
 

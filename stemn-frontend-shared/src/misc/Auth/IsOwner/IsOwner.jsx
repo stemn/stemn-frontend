@@ -29,8 +29,8 @@ class IsOwner extends Component {
   }
 }
 
-const mapStateToProps = ({auth}) => ({
+const mapStateToProps = ({ auth }) => ({
   userId: auth.user._id,
 })
 
-export default connect(mapStateToProps)(IsOwner);
+export default connect(mapStateToProps)(IsOwner)

@@ -5,7 +5,7 @@ import { authenticate, unlink } from 'stemn-shared/misc/Auth/Auth.actions'
 import OnboardingSync from './OnboardingSync'
 
 const stateToProps = ({ auth }) => ({
-  user: auth.user
+  user: auth.user,
 })
 
 const dispatchToProps = {
@@ -17,7 +17,7 @@ const dispatchToProps = {
 export default class OnboardingSyncContainer extends Component {
   render() {
     return (
-      <OnboardingSync {...this.props} />
-    );
+      <OnboardingSync { ...this.props } />
+    )
   }
 }

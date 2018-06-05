@@ -1,1 +1,1 @@
-export default from './UserNavHeader';
+export default from './UserNavHeader'

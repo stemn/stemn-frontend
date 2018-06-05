@@ -12,7 +12,7 @@ import { getFileRouteName, getFileRouteParams } from 'stemn-shared/misc/FileList
 
 const FileRow = (props) => {
   const { file, isActive, clickFn, link } = props
-  const rowClasses = classNames(classes.file, {[classes.active] : isActive}, 'layout-row layout-align-start-center')
+  const rowClasses = classNames(classes.file, { [classes.active]: isActive }, 'layout-row layout-align-start-center')
   if (link) {
     return (
       <Link
@@ -25,17 +25,16 @@ const FileRow = (props) => {
         <div className="text-ellipsis">{ file.name }</div>
       </Link>
     )
-  } else {
-    return (
-      <div
-        className={ rowClasses }
-        onClick={ () => clickFn({ file }) }
-      >
-        <FileIcon fileType={ file.extension } type={ file.type } size={ 20 } />
-        <div className="text-ellipsis">{ file.name }</div>
-      </div>
-    )
-  }
+  } 
+  return (
+    <div
+      className={ rowClasses }
+      onClick={ () => clickFn({ file }) }
+    >
+      <FileIcon fileType={ file.extension } type={ file.type } size={ 20 } />
+      <div className="text-ellipsis">{ file.name }</div>
+    </div>
+  )
 }
 
 const propTypesObject = {
@@ -62,30 +61,30 @@ export default class FileListPopup extends Component {
     const foldersOnly  = filesOrdered.filter(file => file.type == 'folder')
 
     return (
-      <div { ...omit(this.props, Object.keys(propTypesObject)) } className={classes.popup}>
+      <div { ...omit(this.props, Object.keys(propTypesObject)) } className={ classes.popup }>
         <LoadingOverlay show={ isLoading } linear noOverlay />
         { foldersOnly && foldersOnly.map(file => (
-            <FileRow
-              key={ file._id }
-              file={ file }
-              isActive={ file.fileId == activeFile }
-              clickFn={ clickFn }
-              link={ link }
-            />
-          ))
+          <FileRow
+            key={ file._id }
+            file={ file }
+            isActive={ file.fileId == activeFile }
+            clickFn={ clickFn }
+            link={ link }
+          />
+        ))
         }
-        { foldersOnly && filesOnly && <div className={classes.divider} /> }
+        { foldersOnly && filesOnly && <div className={ classes.divider } /> }
         { filesOnly && filesOnly.map(file => (
-            <FileRow
-              key={ file._id }
-              file={ file }
-              isActive={ file.fileId == activeFile }
-              clickFn={ clickFn }
-              link={ link }
-            />
-          ))
+          <FileRow
+            key={ file._id }
+            file={ file }
+            isActive={ file.fileId == activeFile }
+            clickFn={ clickFn }
+            link={ link }
+          />
+        ))
         }
       </div>
-    );
+    )
   }
 }

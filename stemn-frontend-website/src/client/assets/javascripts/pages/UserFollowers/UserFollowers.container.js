@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
-import { get } from 'lodash';
+import { get } from 'lodash'
 
 import { getUserFollowers } from 'stemn-shared/misc/UserFollowers/UserFollowers.actions.js'
 
@@ -24,7 +24,7 @@ const stateToProps = (state, { params, location }) => {
 }
 
 const dispatchToProps = {
-  getUserFollowers
+  getUserFollowers,
 }
 
 const fetchConfigs = [{
@@ -33,9 +33,9 @@ const fetchConfigs = [{
     props.getUserFollowers({
       userId: props.userId,
       page: props.page,
-      size: props.size
+      size: props.size,
     })
-  }
+  },
 }]
 
 @connect(stateToProps, dispatchToProps)

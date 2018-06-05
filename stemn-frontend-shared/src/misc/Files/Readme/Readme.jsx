@@ -75,14 +75,14 @@ export default class Readme extends Component {
           title="Edit Readme"
           onClick={ this.toggleEdit }
         >
-          <MdModeEdit size={ 18 }/>
+          <MdModeEdit size={ 18 } />
         </SimpleIconButton>
         { editActive
-        ? <Editor
+          ? <Editor
             value={ project.data.readme }
             model={ `${projectModel}.data.readme` }
           />
-        : <EditorDisplay value={ project.data.readme } /> }
+          : <EditorDisplay value={ project.data.readme } /> }
         { editActive &&
           <div className="layout-row layout-align-end" style={ { marginTop: '15px' } }>
             <ProgressButton
@@ -113,9 +113,7 @@ export default class Readme extends Component {
       return getReadmeTextDisplay()
     } else if (canEdit) {
       return getAddReadmeTextPrompt()
-    } else {
-      return null
-    }
-
+    } 
+    return null
   }
 }

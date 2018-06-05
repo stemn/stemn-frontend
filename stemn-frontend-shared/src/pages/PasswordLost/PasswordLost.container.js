@@ -3,11 +3,9 @@ import { connect } from 'react-redux'
 import { requestPasswordReset } from 'stemn-shared/misc/Auth/Auth.actions'
 import PasswordLost from './PasswordLost'
 
-const stateToProps = ({ auth }, { params }) => {
-  return {
-    auth,
-  }
-}
+const stateToProps = ({ auth }, { params }) => ({
+  auth,
+})
 
 const dispatchToProps = {
   requestPasswordReset,
@@ -17,7 +15,7 @@ const dispatchToProps = {
 export default class PasswordLostContainer extends Component {
   render() {
     return (
-      <PasswordLost {...this.props} />
-    );
+      <PasswordLost { ...this.props } />
+    )
   }
 }

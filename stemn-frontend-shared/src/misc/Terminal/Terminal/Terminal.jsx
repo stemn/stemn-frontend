@@ -16,7 +16,7 @@ export default class Terminal extends Component {
     })
   }
   scrollToEnd = () => {
-    window.scrollTo(0, document.body.scrollHeight);
+    window.scrollTo(0, document.body.scrollHeight)
   }
   render() {
     const { lines, rawPath, loading, hasLoadedBefore } = this.props
@@ -46,8 +46,8 @@ export default class Terminal extends Component {
         </div>
         <div className={ classes.body }>
           { lines && lines.map(line => (
-              <Ansi key={ line.number }>{ line.data }</Ansi>
-            ))
+            <Ansi key={ line.number }>{ line.data }</Ansi>
+          ))
           }
           { (!lines || lines.length === 0) && hasLoadedBefore && <code>No terminal logs found 😞</code>}
         </div>

@@ -10,7 +10,7 @@ import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton.jsx'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 
-//import Upload from 'stemn-shared/misc/Upload/Upload'
+// import Upload from 'stemn-shared/misc/Upload/Upload'
 
 export default class SettingsProfileDetails extends Component {
   saveUser = () => {

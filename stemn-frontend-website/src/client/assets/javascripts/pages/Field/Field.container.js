@@ -15,7 +15,7 @@ const stateToProps = ({ fields }, { params }) => {
 }
 
 const dispatchToProps = {
-  getField
+  getField,
 }
 
 const fetchConfigs = [{
@@ -24,7 +24,7 @@ const fetchConfigs = [{
     props.getField({
       fieldId: props.fieldId,
     })
-  }
+  },
 }]
 
 @connect(stateToProps, dispatchToProps)
@@ -32,7 +32,7 @@ const fetchConfigs = [{
 export default class SearchContainer extends Component {
   render() {
     return (
-      <Field {...this.props} />
+      <Field { ...this.props } />
     )
   }
 }

@@ -14,7 +14,7 @@ export default class UserProfileSettings extends Component {
     userModel: PropTypes.string.isRequired,
     saveUser: PropTypes.func.isRequired,
   }
-  render () {
+  render() {
     const { user, userModel, saveUser } = this.props
     return (
       <Row className="layout-xs-column layout-sm-column layout-gt-sm-row">
@@ -22,7 +22,7 @@ export default class UserProfileSettings extends Component {
           <h3>First and Last Name</h3>
           <div className="layout-row">
             <Input
-              model={`${userModel}.data.profile.firstname`}
+              model={ `${userModel}.data.profile.firstname` }
               value={ user.data.profile.firstname }
               className="dr-input flex"
               type="text"
@@ -30,12 +30,12 @@ export default class UserProfileSettings extends Component {
               style={ { marginRight: '7px' } }
             />
             <Input
-              model={`${userModel}.data.profile.lastname`}
+              model={ `${userModel}.data.profile.lastname` }
               value={ user.data.profile.lastname }
               className="dr-input flex"
               type="text"
               placeholder="Last Name"
-              style={ { marginLeft: '7px'} }
+              style={ { marginLeft: '7px' } }
             />
           </div>
           <br />
@@ -49,8 +49,8 @@ export default class UserProfileSettings extends Component {
           <br />
           <h3>Website</h3>
           <Input
-            model={`${userModel}.data.profile.socialLinks.website`}
-            value={user.data.profile.socialLinks.website}
+            model={ `${userModel}.data.profile.socialLinks.website` }
+            value={ user.data.profile.socialLinks.website }
             className="dr-input flex"
             type="text"
           />
@@ -65,11 +65,12 @@ export default class UserProfileSettings extends Component {
           <ProgressButton
             className="primary"
             loading={ user.savePending }
-            onClick={ saveUser }>
+            onClick={ saveUser }
+          >
             Save Profile
           </ProgressButton>
         </Col>
-        <Col className={ classNames(classes.avatarCol, 'flex-order-sm-0 flex-order-xs-0' ) }>
+        <Col className={ classNames(classes.avatarCol, 'flex-order-sm-0 flex-order-xs-0') }>
           <h3>Profile Picture</h3>
           <Upload
             containerClassName={ classes.container }
@@ -83,5 +84,4 @@ export default class UserProfileSettings extends Component {
     )
   }
 }
-     
 

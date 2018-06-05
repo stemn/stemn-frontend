@@ -1,1 +1,1 @@
-export default from './ProjectTeam.container';
+export default from './ProjectTeam.container'

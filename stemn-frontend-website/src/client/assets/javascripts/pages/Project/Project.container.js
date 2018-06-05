@@ -6,7 +6,7 @@ import { getProject } from 'stemn-shared/misc/Projects/Projects.actions'
 import { joinRoom, leaveRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
 import Project from './Project'
 import { notFound } from 'route-actions'
-import { replace } from 'react-router-redux';
+import { replace } from 'react-router-redux'
 
 const stateToProps = ({ projects }, { params, location }) => ({
   projectId: params.stub,
@@ -33,7 +33,7 @@ const fetchConfigs = [{
       room: props.projectId,
       type: 'project',
     })
-  }
+  },
 }, {
   // Leave the project room on unmount/change
   unmount: true,
@@ -46,14 +46,14 @@ const fetchConfigs = [{
         room: prevProps.projectId,
       })
     }
-  }
+  },
 }]
 
 @connect(stateToProps, dispatchToProps)
 @fetchDataHoc(fetchConfigs)
 class ProjectContainer extends Component {
   render() {
-    return <Project {...this.props} />
+    return <Project { ...this.props } />
   }
 }
 

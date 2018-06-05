@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
-import { bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux'
 import { push as pushRoute } from 'react-router-redux'
 import { saveProject } from 'stemn-shared/misc/Projects/Projects.actions'
-import ProjectOverview from './ProjectOverview';
+import ProjectOverview from './ProjectOverview'
 import { getCanEdit } from 'stemn-shared/misc/Auth/Auth.utils'
 import { get } from 'lodash'
 import { getCount } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
 
 const stateToProps = ({ projects, projectSettings, fileList, auth, syncTimeline }, { params, location, provider }) => {
-  const projectId = params.stub;
-  const path = params.path || '';
+  const projectId = params.stub
+  const path = params.path || ''
   const project = projects.data[projectId]
-  const entityModel = `projects.data.${projectId}`;
+  const entityModel = `projects.data.${projectId}`
   const fileListCacheKey = `${projectId}-${path}-${provider}`
   const files = fileList[fileListCacheKey]
   const canEdit = getCanEdit(auth.user, get(project, 'data.owner'), get(project, 'data.team'), 'admin')
@@ -29,7 +29,7 @@ const stateToProps = ({ projects, projectSettings, fileList, auth, syncTimeline 
     files,
     isFilePage: location.pathname.includes('/files/'),
     canEdit,
-  };
+  }
 }
 
 const dispatchToProps = {
@@ -47,7 +47,7 @@ const fetchConfigs = [{
       types: ['changes'],
       cacheKey: props.changesCountCacheKey,
     })
-  }
+  },
 }]
 
 @connect(stateToProps, dispatchToProps)
@@ -55,7 +55,7 @@ const fetchConfigs = [{
 export default class LoginContainer extends Component {
   render() {
     return (
-      <ProjectOverview {...this.props} />
-    );
+      <ProjectOverview { ...this.props } />
+    )
   }
 }

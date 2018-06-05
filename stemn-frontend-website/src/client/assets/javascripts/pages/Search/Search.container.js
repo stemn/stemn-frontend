@@ -3,9 +3,7 @@ import { connect } from 'react-redux'
 
 import Search from './Search'
 
-const stateToProps = () => {
-  return {}
-}
+const stateToProps = () => ({})
 
 const dispatchToProps = {
 }
@@ -14,7 +12,7 @@ const dispatchToProps = {
 export default class SearchContainer extends Component {
   render() {
     return (
-      <Search {...this.props} />
+      <Search { ...this.props } />
     )
   }
 }

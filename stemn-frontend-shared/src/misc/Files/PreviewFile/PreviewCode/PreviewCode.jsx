@@ -24,7 +24,7 @@ export default class PreviewCode extends Component {
     const { fileData, fileMeta, previewMarkdown } = this.props
     return (
       <div className="layout-column flex">
-        { fileData && fileData.data ? <Viewer extension={ fileMeta.extension } data={ fileData.data } previewMarkdown={previewMarkdown} /> : '' }
+        { fileData && fileData.data ? <Viewer extension={ fileMeta.extension } data={ fileData.data } previewMarkdown={ previewMarkdown } /> : '' }
         { fileData ? <LoadingOverlay show={ fileData.loading } /> : null }
         { fileData && !fileData.data && !fileData.loading
           ? <div className="layout-column layout-align-center-center flex text-center">

@@ -46,7 +46,7 @@ export default class Header extends Component {
           className="rel-box"
         >
           <MdNotifications size={ 22 } />
-          { numNotifications > 0 && <div className={ classNames(classes.badge, { [classes.badgeLarge] : numNotifications >= 10}) }>{ numNotifications }</div> }
+          { numNotifications > 0 && <div className={ classNames(classes.badge, { [classes.badgeLarge]: numNotifications >= 10 }) }>{ numNotifications }</div> }
         </SimpleIconButton>
         <SimpleIconButton
           className="hide-xs"
@@ -80,12 +80,11 @@ export default class Header extends Component {
         </Popover>
       </div>
     )
-
   }
   isLoggedOut() {
     return (
-      <div className='layout-row layout-align-start-center' style={ { paddingLeft: '15px' } }>
-        <Link to={ loginRoute() } className='link-primary'>Sign in</Link>
+      <div className="layout-row layout-align-start-center" style={ { paddingLeft: '15px' } }>
+        <Link to={ loginRoute() } className="link-primary">Sign in</Link>
       </div>
     )
   }
@@ -100,10 +99,10 @@ export default class Header extends Component {
     const itemsMobile = [{
       route: 'exploreRoute',
       label: 'Explore',
-    },{
+    }, {
       route: 'openSourceRoute',
       label: 'Open source',
-    },{
+    }, {
       route: 'pricingRoute',
       label: 'Pricing',
     }]
@@ -123,8 +122,8 @@ export default class Header extends Component {
           </div>
           <div className="hide-xs flex" />
           { auth.user._id
-          ? this.isLoggedIn()
-          : this.isLoggedOut() }
+            ? this.isLoggedIn()
+            : this.isLoggedOut() }
           <SimpleIconButton
             className={ classNames('hide-gt-xs', classes.menuButton) }
             onClick={ this.toggleOpen }

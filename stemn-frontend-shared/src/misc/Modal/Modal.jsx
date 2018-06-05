@@ -1,31 +1,31 @@
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import i from 'icepick';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import i from 'icepick'
 
-import { hideModal, resolveModal, rejectModal } from './Modal.actions.js';
+import { hideModal, resolveModal, rejectModal } from './Modal.actions.js'
 
-import React, { Component } from 'react';
-import Modal from 'react-modal';
+import React, { Component } from 'react'
+import Modal from 'react-modal'
 
 import classes from './Modal.css'
 
-import { getModal } from './ModalRegistry';
+import { getModal } from './ModalRegistry'
 
 
-///////////////////////////////// COMPONENT /////////////////////////////////
+// /////////////////////////////// COMPONENT /////////////////////////////////
 
 class ModalComponent extends Component {
   renderContent() {
     // Get the modal from the modal registry and add the modal props.
-    const { modal } = this.props;
+    const { modal } = this.props
 
     let template = null
     if (modal.modalType) {
-      const ModalTemplate = getModal(modal.modalType);
+      const ModalTemplate = getModal(modal.modalType)
       if (ModalTemplate) {
         const additionalProps = {
           modalCancel: this.modalCancel,
-          modalConfirm: this.modalConfirm
+          modalConfirm: this.modalConfirm,
         }
         const allProps = Object.assign({}, modal.modalProps, additionalProps)
         template = <ModalTemplate { ...allProps } />
@@ -36,7 +36,7 @@ class ModalComponent extends Component {
   }
 
   modalCancel = (data = {}) => {
-    const { modalId } = this.props.modal;
+    const { modalId } = this.props.modal
     // If the data is an object, string, number or boolean. Resolve
     // This is used to ignore mouse click events
     if (['Object', 'String', 'Number', 'Boolean'].includes(data.constructor.name)) {
@@ -47,7 +47,7 @@ class ModalComponent extends Component {
     this.props.hideModal({ modalId })
   }
   modalConfirm = (data = {}) => {
-    const { modalId } = this.props.modal;
+    const { modalId } = this.props.modal
     // If the data is an object, string, number or boolean. Resolve
     // This is used to ignore mouse click events
     if (['Object', 'String', 'Number', 'Boolean'].includes(data.constructor.name)) {
@@ -58,16 +58,16 @@ class ModalComponent extends Component {
     this.props.hideModal({ modalId })
   }
   onRequestClose = () => {
-    const { modal } = this.props;
+    const { modal } = this.props
     if (modal.modalOptions && modal.modalOptions.noClickClose) {
-      return
+      
     } else {
       this.modalCancel()
     }
   }
   render() {
-    const { modal } = this.props;
-    const overlayClassName = classes.overlay+ ' layout-column layout-align-center-center';
+    const { modal } = this.props
+    const overlayClassName = `${classes.overlay} layout-column layout-align-center-center`
 
     return (
       <Modal
@@ -79,16 +79,15 @@ class ModalComponent extends Component {
       >
         { this.renderContent() }
       </Modal>
-    );
+    )
   }
-};
+}
 
 
-
-///////////////////////////////// CONTAINER /////////////////////////////////
+// /////////////////////////////// CONTAINER /////////////////////////////////
 
 function mapStateToProps() {
-  return {};
+  return {}
 }
 
 const mapDispatchToProps = {
@@ -97,4 +96,4 @@ const mapDispatchToProps = {
   rejectModal,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModalComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(ModalComponent)

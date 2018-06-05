@@ -46,7 +46,7 @@ const getText = (type, entityType, status) => {
 
 const getTooltip = (type, entityType, status) => {
   if (type === 'like') {
-    return ;
+    
   } else if (type === 'follow' && entityType === 'thread') {
     return 'Subscribe to notifications'
   } else if (type === 'follow') {
@@ -75,7 +75,7 @@ export default class SocialButton extends Component {
       entityId,
       entityType,
       type,
-    });
+    })
   }
 
   toggle = () => {
@@ -86,7 +86,7 @@ export default class SocialButton extends Component {
         entityType,
         type,
         number,
-        numberModel
+        numberModel,
       })
     } else {
       add({
@@ -94,7 +94,7 @@ export default class SocialButton extends Component {
         entityType,
         type,
         number,
-        numberModel
+        numberModel,
       })
     }
   }
@@ -111,7 +111,7 @@ export default class SocialButton extends Component {
       remove,
       status,
       type,
-      ...otherProps,
+      ...otherProps
     } = this.props
     
     return (
@@ -121,10 +121,10 @@ export default class SocialButton extends Component {
           { getText(type, entityType, status) }
         </div>
         { !(number === undefined) && numberModel
-        ? <div className={ classes.count }>
+          ? <div className={ classes.count }>
             { number }
           </div>
-        : null }
+          : null }
       </div>
     )
   }

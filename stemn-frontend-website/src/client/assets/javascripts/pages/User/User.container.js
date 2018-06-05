@@ -24,22 +24,22 @@ const fetchConfigs = [{
   onChange: (props) => {
     props.getUser({
       userId: props.params.stub,
-      force: true
+      force: true,
     })
-  }
-},{
+  },
+}, {
   hasChanged: 'params.stub',
   onChange: (props) => {
     props.getUserProjects({ userId: props.params.stub })
-  }
-},]
+  },
+}]
 
 @connect(stateToProps, dispatchToProps)
 @fetchDataHoc(fetchConfigs)
 export default class UserContainer extends Component {
   render() {
     return (
-      <User {...this.props} />
+      <User { ...this.props } />
     )
   }
 }

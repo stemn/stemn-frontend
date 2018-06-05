@@ -1,1 +1,1 @@
-export default from './ProjectPipeline.container';
+export default from './ProjectPipeline.container'

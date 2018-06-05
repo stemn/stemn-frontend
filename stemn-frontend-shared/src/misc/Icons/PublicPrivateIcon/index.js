@@ -1,1 +1,1 @@
-export default from './PublicPrivateIcon';
+export default from './PublicPrivateIcon'

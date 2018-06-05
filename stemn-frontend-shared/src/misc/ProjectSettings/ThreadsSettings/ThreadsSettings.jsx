@@ -1,11 +1,11 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton';
+import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 import ThreadLabelsEdit from 'stemn-shared/misc/Threads/ThreadLabelsEdit/ThreadLabelsEdit.jsx'
 import ThreadGroupsEdit from 'stemn-shared/misc/Threads/ThreadGroupsEdit'
 import Form from 'stemn-shared/misc/Forms/Form'
 import { has } from 'lodash'
-import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
+import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 
 export default class ThreadsSettings extends Component {
   static propTypes = {
@@ -30,7 +30,7 @@ export default class ThreadsSettings extends Component {
   render() {
     const { boardModel, board } = this.props
     if (board && board.data) {
-      return(
+      return (
         <div>
           <InfoPanel>
             <h3>Thread Groups</h3>
@@ -47,18 +47,18 @@ export default class ThreadsSettings extends Component {
             </Form>
           </InfoPanel>
           <div className="layout-row">
-            <div className="flex"></div>
+            <div className="flex" />
             <ProgressButton
               className="primary"
               onClick={ this.updateBoard }
-              loading={ board.savePending }>
+              loading={ board.savePending }
+            >
               Save
             </ProgressButton>
           </div>
         </div>
       )
-    } else {
-      return null
-    }
+    } 
+    return null
   }
 }

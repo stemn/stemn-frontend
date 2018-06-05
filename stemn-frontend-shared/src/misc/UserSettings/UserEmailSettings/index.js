@@ -1,1 +1,1 @@
-export default from './UserEmailSettings';
+export default from './UserEmailSettings'

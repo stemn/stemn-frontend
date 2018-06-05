@@ -8,18 +8,18 @@ import { saveUser } from 'stemn-shared/misc/Users/Users.actions'
 const stateToProps = ({ users, auth }) => ({
   user: users[auth.user._id],
   currentUser: auth.user,
-  entityModel: `users.${auth.user._id}`
+  entityModel: `users.${auth.user._id}`,
 })
 
 const dispatchToProps = {
-  saveUser
+  saveUser,
 }
 
 @connect(stateToProps, dispatchToProps)
 export default class SettingsProfileContainer extends Component {
   render() {
     return (
-      <SettingsProfile {...this.props} />
-    );
+      <SettingsProfile { ...this.props } />
+    )
   }
 }

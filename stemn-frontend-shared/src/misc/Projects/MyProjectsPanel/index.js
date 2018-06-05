@@ -1,1 +1,1 @@
-export default from './MyProjectsPanel.container';
+export default from './MyProjectsPanel.container'

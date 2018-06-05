@@ -9,13 +9,13 @@ import RouteLoading from 'stemn-shared/misc/CodeSplitting/RouteLoading'
 const stateToProps = ({ auth, userSettings }) => ({
   isLoggedIn: auth.authToken && auth.user._id,
   userSettingsMessages: userSettings.data.messages || {},
-});
+})
 
 const dispatchToProps = {
   goLanding: () => replace('/landing'),
   goOnboarding: () => replace('/onboarding'),
   getToken,
-};
+}
 
 @connect(stateToProps, dispatchToProps)
 export default class LoginContainer extends Component {

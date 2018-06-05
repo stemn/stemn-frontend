@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { has, omit, orderBy, get } from 'lodash'
-import classNames from 'classnames';
+import classNames from 'classnames'
 import classes from './FileList.css'
 import FileBreadCrumbs from './components/FileBreadCrumbs'
 import FileRow from './components/FileRow'
@@ -10,44 +10,44 @@ import MdHome from 'react-icons/md/home'
 import MdSearch from 'react-icons/md/search'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import SearchInput from 'stemn-shared/misc/Search/SearchInput'
-import { ContextMenuLayer } from "react-contextmenu"
+import { ContextMenuLayer } from 'react-contextmenu'
 import ContextMenu from 'stemn-shared/misc/ContextMenu/ContextMenu.jsx'
 import FileListMenu from './FileList.menu.js'
-import FlipMove from 'react-flip-move';
+import FlipMove from 'react-flip-move'
 import AccordianAnimate from 'stemn-shared/misc/Animation/AccordianAnimate'
 import ChildrenHistory from 'stemn-shared/misc/Animation/ChildrenHistory'
 import FileSyncUnderway from 'stemn-shared/misc/FileList/FileSyncUnderway'
 
 
-const contextIdentifier = 'FileListCm';
+const contextIdentifier = 'FileListCm'
 const FileRowContext = GLOBAL_ENV.APP_TYPE === 'web'
   ? FileRow
   : ContextMenuLayer(contextIdentifier, props => props.file)(FileRow)
 
 
-///////////////////////////////// COMPONENT /////////////////////////////////
+// /////////////////////////////// COMPONENT /////////////////////////////////
 
 const propTypesObject = {
-  projectId       : PropTypes.string,             // Optional: The project id (this is used if we are not exploring a provider)
-  path            : PropTypes.string,             // The current fileId: This folder will be opened when the modal inits.
-  singleClickFn   : PropTypes.func,               // When a file is single clicked
-  doubleClickFn   : PropTypes.func,               // When a file is double clicked
-  crumbClickFn    : PropTypes.func,               // When a crumb is clicked
-  selected        : PropTypes.object,             // The currently selected file
-  contentStyle    : PropTypes.object,             // Styles for the content section
-  initialSync     : React.PropTypes.bool,         // Optional: True if this is the initial project sync (general uses !project.remote.lastSynced)
-  crumbPopup      : React.PropTypes.bool,         // Optional: Should we show a popup on the crumbs?
-  search          : React.PropTypes.bool,         // Optional: Should search be enabled
-  link            : React.PropTypes.bool,         // Optional: Should each row be a link with href
-  options         : React.PropTypes.shape({
-    allowFolder   : React.PropTypes.bool,
-    foldersOnly   : React.PropTypes.bool,
-    showMenu      : React.PropTypes.bool,
-    explore       : React.PropTypes.string,       // Optional: 'dropbox' || 'drive' - The provider
+  projectId: PropTypes.string,             // Optional: The project id (this is used if we are not exploring a provider)
+  path: PropTypes.string,             // The current fileId: This folder will be opened when the modal inits.
+  singleClickFn: PropTypes.func,               // When a file is single clicked
+  doubleClickFn: PropTypes.func,               // When a file is double clicked
+  crumbClickFn: PropTypes.func,               // When a crumb is clicked
+  selected: PropTypes.object,             // The currently selected file
+  contentStyle: PropTypes.object,             // Styles for the content section
+  initialSync: React.PropTypes.bool,         // Optional: True if this is the initial project sync (general uses !project.remote.lastSynced)
+  crumbPopup: React.PropTypes.bool,         // Optional: Should we show a popup on the crumbs?
+  search: React.PropTypes.bool,         // Optional: Should search be enabled
+  link: React.PropTypes.bool,         // Optional: Should each row be a link with href
+  options: React.PropTypes.shape({
+    allowFolder: React.PropTypes.bool,
+    foldersOnly: React.PropTypes.bool,
+    showMenu: React.PropTypes.bool,
+    explore: React.PropTypes.string,       // Optional: 'dropbox' || 'drive' - The provider
   }),
-  dispatch        : PropTypes.func,               // Actions
-  fileList         : PropTypes.object,           // Store
-};
+  dispatch: PropTypes.func,               // Actions
+  fileList: PropTypes.object,           // Store
+}
 
 export default class FileList extends Component {
   static propTypes = propTypesObject
@@ -67,9 +67,9 @@ export default class FileList extends Component {
       file: {
         fileId: '',
         project: {
-          _id: projectId
-        }
-      }
+          _id: projectId,
+        },
+      },
     })
   }
   renderResults = (isLoading) => {
@@ -78,7 +78,7 @@ export default class FileList extends Component {
     const filesFiltered = options.foldersOnly
       ? filesNormal.filter(file => file.type === 'folder')
       : filesNormal
-    const filesOrdered  = orderBy(filesFiltered, ['type', ({name}) => name.toLowerCase()], ['desc', 'asc'])
+    const filesOrdered  = orderBy(filesFiltered, ['type', ({ name }) => name.toLowerCase()], ['desc', 'asc'])
 
     if (filesOrdered && filesOrdered.length > 0) {
       return filesOrdered.map(file => (
@@ -87,11 +87,11 @@ export default class FileList extends Component {
           file={ file }
           singleClick={ singleClickFn }
           doubleClick={ doubleClickFn }
-          isActive= {selected && selected.fileId == file.fileId }
+          isActive={ selected && selected.fileId == file.fileId }
           link={ link }
         />
       ))
-    } else if (isLoading === false){
+    } else if (isLoading === false) {
       return <div className="text-title-5" style={ { padding: '15px' } }>No results</div>
     }
     return null
@@ -105,7 +105,7 @@ export default class FileList extends Component {
     const filesFiltered = options.foldersOnly
       ? filesNormal.filter(file => file.type === 'folder')
       : filesNormal
-    const filesOrdered  = orderBy(filesFiltered, ['type', ({name}) => name.toLowerCase()], ['desc', 'asc'])
+    const filesOrdered  = orderBy(filesFiltered, ['type', ({ name }) => name.toLowerCase()], ['desc', 'asc'])
 
     if (filesOrdered && filesOrdered.length > 0) {
       return filesOrdered.map(file => (
@@ -115,19 +115,19 @@ export default class FileList extends Component {
           file={ file }
           singleClick={ singleClickFn }
           doubleClick={ doubleClickFn }
-          isActive= {selected && selected.fileId == file.fileId }
+          isActive={ selected && selected.fileId == file.fileId }
           showPath
         />
       ))
-    } else if (isLoading === false){
+    } else if (isLoading === false) {
       return <div className="text-title-5" style={ { padding: '15px' } }>No results</div>
     }
     return null
   }
   render() {
-    const { fileList, fileListCacheKey, getFiles, getSearchResults, link, initialSync, search, contentStyle, singleClickFn, doubleClickFn, crumbClickFn, selected, options, path, projectId, crumbPopup, dispatch, ...otherProps } = this.props;
+    const { fileList, fileListCacheKey, getFiles, getSearchResults, link, initialSync, search, contentStyle, singleClickFn, doubleClickFn, crumbClickFn, selected, options, path, projectId, crumbPopup, dispatch, ...otherProps } = this.props
 
-    const isLoading = !fileList || fileList.loading;
+    const isLoading = !fileList || fileList.loading
     const isInitialSync = !get(fileList, 'folder') && initialSync
 
     const fileRowChildren = get(fileList, 'query', '').length > 0
@@ -142,7 +142,7 @@ export default class FileList extends Component {
     return (
       <div { ...otherProps }>
         { isInitialSync
-        ? <div className="rel-box">
+          ? <div className="rel-box">
             <LoadingOverlay
               show={ isLoading }
               linear
@@ -153,8 +153,8 @@ export default class FileList extends Component {
               refresh={ this.refresh }
             />
           </div>
-        : <div>
-            <div className={classes.breadcrumbs + ' layout-row layout-align-start-center'}>
+          : <div>
+            <div className={ `${classes.breadcrumbs} layout-row layout-align-start-center` }>
               <FileBreadCrumbs
                 className="flex"
                 meta={ get(fileList, 'folder', {}) }
@@ -174,13 +174,13 @@ export default class FileList extends Component {
                 <MdRefresh size={ 22 } />
               </SimpleIconButton>
               { search
-              ? <SearchInput
+                ? <SearchInput
                   value={ fileList.query }
                   model={ `fileList.${fileListCacheKey}.query` }
                   className={ classNames(classes.search, 'hide-xs') }
                   placeholder="Search Files"
                 />
-              : null }
+                : null }
 
             </div>
             <div
@@ -207,11 +207,11 @@ export default class FileList extends Component {
                 </FlipMove>
               </AccordianAnimate>
               { options.showMenu
-              ? <ContextMenu
+                ? <ContextMenu
                   identifier={ contextIdentifier }
                   menu={ FileListMenu(dispatch, provider) }
                 />
-              : null }
+                : null }
             </div>
           </div> }
       </div>

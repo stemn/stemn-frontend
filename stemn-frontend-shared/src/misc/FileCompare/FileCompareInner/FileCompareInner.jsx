@@ -5,7 +5,7 @@ import classes from './FileCompareInner.css'
 import PreviewFile from 'stemn-shared/misc/Files/PreviewFile/PreviewFile.jsx'
 import FileCompareSlider from './FileCompareSlider/FileCompareSlider.jsx'
 
-///////////////////////////////// COMPONENT /////////////////////////////////
+// /////////////////////////////// COMPONENT /////////////////////////////////
 
 export default class FileCompareInner extends Component {
   constructor(props) {
@@ -16,7 +16,7 @@ export default class FileCompareInner extends Component {
     }
   }
   updateDimensions = () => {
-    if(this.refs.container){
+    if (this.refs.container) {
       this.setState({ width: this.refs.container.offsetWidth })
     }
   }
@@ -29,11 +29,11 @@ export default class FileCompareInner extends Component {
   componentWillUnmount() {
     window.removeResizeListener(this.refs.container, this.updateDimensions)
   }
-  sliderChange = (position) =>{
-    this.setState({ position: position });
+  sliderChange = (position) => {
+    this.setState({ position })
   }
   changeFn = (event) => {
-    this.setState({ position: event.target.value });
+    this.setState({ position: event.target.value })
   }
   render() {
     const { project, file1, file2, event, compareId, mode, header } = this.props
@@ -60,35 +60,33 @@ export default class FileCompareInner extends Component {
     }
 
     const overylayStyles = mode === 'slider' && this.refs.container
-      ? { width: width + 'px' }
+      ? { width: `${width}px` }
       : {}
 
-    const filePreview1 = () => {
-      return (
+    const filePreview1 = () => (
+      <div
+        className={ `${classes.preview1} flex layout-column` }
+        style={ preview2Style[mode] }
+      >
         <div
-          className={ classes.preview1 + ' flex layout-column' }
-          style={preview2Style[mode]}
+          className="layout-column flex"
+          style={ overylayStyles }
         >
-          <div
-            className="layout-column flex"
-            style={ overylayStyles }
-          >
-            { file2 &&
-              <PreviewFile
-                project={ project }
-                file={ file2 }
-                event={ event }
-                header={ header }
-              /> }
-          </div>
+          { file2 &&
+          <PreviewFile
+            project={ project }
+            file={ file2 }
+            event={ event }
+            header={ header }
+          /> }
         </div>
-      )
-    }
+      </div>
+    )
 
     const filePreview2 = () => {
-      if(file1){
+      if (file1) {
         return (
-          <div className={classes.preview2 + ' flex layout-column'}>
+          <div className={ `${classes.preview2} flex layout-column` }>
             { file1 &&
               <PreviewFile
                 project={ project }
@@ -103,7 +101,7 @@ export default class FileCompareInner extends Component {
 
     return (
       <div className="layout-column flex">
-        <div className={classNames('flex', 'rel-box', 'scroll-box', compareModeClasses[mode], classes[mode])} ref="container">
+        <div className={ classNames('flex', 'rel-box', 'scroll-box', compareModeClasses[mode], classes[mode]) } ref="container">
           { filePreview1() }
           { mode === 'slider' &&
             <FileCompareSlider
@@ -114,7 +112,7 @@ export default class FileCompareInner extends Component {
           { filePreview2() }
         </div>
         { mode === 'onion' &&
-          <div className={classes.rangeSlider+ ' layout-row'}>
+          <div className={ `${classes.rangeSlider} layout-row` }>
             <input
               className="flex"
               type="range"

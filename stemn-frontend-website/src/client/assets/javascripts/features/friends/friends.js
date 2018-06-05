@@ -1,18 +1,18 @@
 // @flow
 
-import { createStructuredSelector } from 'reselect';
-import assign from 'lodash/assign';
+import { createStructuredSelector } from 'reselect'
+import assign from 'lodash/assign'
 
 // Action Types
 
 // Define types in the form of 'npm-module-or-myapp/feature-name/ACTION_TYPE_NAME'
-const ADD_FRIEND = 'redux-app/friends/ADD_FRIEND';
-const STAR_FRIEND = 'redux-app/friends/STAR_FRIEND';
-const DELETE_FRIEND = 'redux-app/friends/DELETE_FRIEND';
+const ADD_FRIEND = 'redux-app/friends/ADD_FRIEND'
+const STAR_FRIEND = 'redux-app/friends/STAR_FRIEND'
+const DELETE_FRIEND = 'redux-app/friends/DELETE_FRIEND'
 
 // This will be used in our root reducer and selectors
 
-export const NAME = 'friends';
+export const NAME = 'friends'
 
 // Define the initial state for `friends` module
 
@@ -21,26 +21,26 @@ const initialState = {
   friendsById: [
     {
       id: 0,
-      name: 'Notorious B.I.G.'
+      name: 'Notorious B.I.G.',
     },
     {
       id: 1,
-      name: 'Tupac Shakur'
+      name: 'Tupac Shakur',
     },
     {
       id: 2,
-      name: 'Dr. Dre'
+      name: 'Dr. Dre',
     },
     {
       id: 3,
-      name: 'Big Pun'
+      name: 'Big Pun',
     },
     {
       id: 4,
-      name: 'Rakim'
-    }
-  ]
-};
+      name: 'Rakim',
+    },
+  ],
+}
 
 // Reducer
 
@@ -59,8 +59,8 @@ const initialState = {
 export default function reducer(state: State = initialState, action: any = {}): State {
   switch (action.type) {
     case ADD_FRIEND: {
-      const len = state.friends.length ? state.friends.length : 1;
-      const newId = (state.friends[len - 1] + 1) || 0;
+      const len = state.friends.length ? state.friends.length : 1
+      const newId = (state.friends[len - 1] + 1) || 0
       return {
         ...state,
         friends: state.friends.concat(newId),
@@ -68,35 +68,35 @@ export default function reducer(state: State = initialState, action: any = {}): 
           ...state.friendsById,
           {
             id: newId,
-            name: action.name
-          }
-        ]
-      };
+            name: action.name,
+          },
+        ],
+      }
     }
 
     case DELETE_FRIEND:
       return {
         ...state,
-        friends: state.friends.filter((id) => id !== action.id),
-        friendsById: state.friendsById.filter((friend) => friend.id !== action.id)
-      };
+        friends: state.friends.filter(id => id !== action.id),
+        friendsById: state.friendsById.filter(friend => friend.id !== action.id),
+      }
 
     case STAR_FRIEND:
       return {
         ...state,
         friendsById: state.friendsById.map((friend) => {
           if (friend.id !== action.id) {
-            return friend;
+            return friend
           }
 
           return assign({}, friend, {
-            starred: !friend.starred
-          });
-        })
-      };
+            starred: !friend.starred,
+          })
+        }),
+      }
 
     default:
-      return state;
+      return state
   }
 }
 
@@ -105,8 +105,8 @@ export default function reducer(state: State = initialState, action: any = {}): 
 function addFriend(name: string) {
   return {
     type: ADD_FRIEND,
-    name
-  };
+    name,
+  }
 }
 
 // or in a form of arrow function
@@ -119,27 +119,27 @@ function addFriend(name: string) {
 function deleteFriend(id: number) {
   return {
     type: DELETE_FRIEND,
-    id
-  };
+    id,
+  }
 }
 
 function starFriend(id: number) {
   return {
     type: STAR_FRIEND,
-    id
-  };
+    id,
+  }
 }
 
 // Selectors
 
-const friends = (state) => state[NAME];
+const friends = state => state[NAME]
 
 export const selector = createStructuredSelector({
-  friends
-});
+  friends,
+})
 
 export const actionCreators = {
   addFriend,
   deleteFriend,
-  starFriend
-};
+  starFriend,
+}

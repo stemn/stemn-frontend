@@ -1,11 +1,11 @@
-import { bindActionCreators } from 'redux';
-import ReactDOM from 'react-dom';
-import { connect } from 'react-redux';
-import { saveFile } from '../Files.actions.js';
-import React, { Component } from 'react';
-import classNames from 'classnames';
-import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-import { getDownloadUrl } from '../utils';
+import { bindActionCreators } from 'redux'
+import ReactDOM from 'react-dom'
+import { connect } from 'react-redux'
+import { saveFile } from '../Files.actions.js'
+import React, { Component } from 'react'
+import classNames from 'classnames'
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
+import { getDownloadUrl } from '../utils'
 
 class DownloadFile extends Component {
   saveFile = () => {
@@ -48,11 +48,11 @@ class DownloadFile extends Component {
   }
 }
 
-function mapStateToProps({files}, {file}) {
-  const fileUrl = getDownloadUrl(file);
+function mapStateToProps({ files }, { file }) {
+  const fileUrl = getDownloadUrl(file)
   return {
     fileUrl,
-    progress: files.downloadProgress[fileUrl]
+    progress: files.downloadProgress[fileUrl],
   }
 }
 

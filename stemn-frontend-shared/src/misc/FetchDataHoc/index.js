@@ -1,1 +1,1 @@
-export default from './FetchDataHoc';
+export default from './FetchDataHoc'

@@ -1,1 +1,1 @@
-export default from './ProjectThread.container';
+export default from './ProjectThread.container'

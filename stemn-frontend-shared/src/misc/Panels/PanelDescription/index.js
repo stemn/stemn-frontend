@@ -1,1 +1,1 @@
-export default from './PanelDescription';
+export default from './PanelDescription'

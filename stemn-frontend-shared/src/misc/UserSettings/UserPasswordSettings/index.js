@@ -1,1 +1,1 @@
-export default from './UserPasswordSettings';
+export default from './UserPasswordSettings'

@@ -10,12 +10,11 @@ import AppleIcon from 'stemn-shared/assets/icons/os/apple'
 
 const getIcon = (platform, size) => {
   if (platform === 'mac') {
-    return <AppleIcon className={ classes.icon } size={ size }/>
+    return <AppleIcon className={ classes.icon } size={ size } />
   } else if (platform === 'linux') {
-    return <LinuxIcon className={ classes.icon } size={ size }/>
-  } else {
-    return <WindowsIcon className={ classes.icon } size={ size }/>
-  }
+    return <LinuxIcon className={ classes.icon } size={ size } />
+  } 
+  return <WindowsIcon className={ classes.icon } size={ size } />
 }
 
 const determinePlatform = () => {
@@ -26,10 +25,9 @@ const determinePlatform = () => {
     return 'windows'
   } else if (platform.includes('LINUX')) {
     return 'linux'
-  } else {
-    console.error('Unknown Platform', platform)
-    return 'windows'
-  }
+  } 
+  console.error('Unknown Platform', platform)
+  return 'windows'
 }
 
 export default class DownloadButton extends Component {

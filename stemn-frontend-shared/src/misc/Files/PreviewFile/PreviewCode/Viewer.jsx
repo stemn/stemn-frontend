@@ -54,14 +54,14 @@ export default class Viewer extends Component {
     return (
       <div className="layout-row flex">
         { previewMarkdown &&
-            <div className="scroll-box flex" style={ { padding: '30px' } }>
-              <Container>
-                <EditorDisplay value={ data } />
-              </Container>
-            </div>
+        <div className="scroll-box flex" style={ { padding: '30px' } }>
+          <Container>
+            <EditorDisplay value={ data } />
+          </Container>
+        </div>
         }
         { !previewMarkdown &&
-            <div className="scroll-box flex" ref={ this.getCodemirrorRef } />
+        <div className="scroll-box flex" ref={ this.getCodemirrorRef } />
         }
       </div>
     )

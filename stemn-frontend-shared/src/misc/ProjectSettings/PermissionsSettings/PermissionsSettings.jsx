@@ -12,9 +12,9 @@ export default class ProjectSettingsPermissions extends Component {
     projectModel: PropTypes.string.isRequired,
   }
 
-  saveProject = () =>{
+  saveProject = () => {
     this.props.saveProject({
-      project: this.props.project.data
+      project: this.props.project.data,
     })
   }
   render() {

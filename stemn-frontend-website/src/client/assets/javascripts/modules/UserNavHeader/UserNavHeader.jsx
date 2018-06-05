@@ -8,13 +8,13 @@ import pluralise from 'stemn-shared/utils/strings/pluralise'
 export default class UserNavHeader extends Component {
   static propTypes = {
     currentUser: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired,
   }
 
   render() {
     const { user, currentUser } = this.props
 
-    const isCurrentUser = user.data._id === currentUser._id;
+    const isCurrentUser = user.data._id === currentUser._id
     const routeParams = { userId: user.data._id }
     
     const hasExperience = user.data.profile.profileDetails.experience && user.data.profile.profileDetails.experience.length > 0
@@ -32,8 +32,8 @@ export default class UserNavHeader extends Component {
           <Link activeClassName="active" params={ routeParams } name="userFollowersRoute">{ pluralise(user.data.numFollowers, 'Follower') }</Link>
           <Link activeClassName="active" params={ routeParams } name="userFollowingRoute">{ user.data.numFollowing } Following</Link>
           { isCurrentUser
-          ? <Link activeClassName='active' name="settingsRoute">Settings</Link>
-          : null }
+            ? <Link activeClassName="active" name="settingsRoute">Settings</Link>
+            : null }
         </Tabs>
       </SubHeader>
     )

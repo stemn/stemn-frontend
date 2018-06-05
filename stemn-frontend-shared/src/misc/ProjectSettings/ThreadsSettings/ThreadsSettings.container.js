@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { get } from 'lodash'
-import ThreadsSettings from './ThreadsSettings';
+import ThreadsSettings from './ThreadsSettings'
 
 import { getBoards, updateBoard } from 'stemn-shared/misc/Threads/Threads.actions'
 
@@ -16,22 +16,22 @@ const stateToProps = ({ threads, projects }, { params }) => {
     project,
     boardId,
     board,
-    boardModel: `threads.boards.${boardId}`
-  };
+    boardModel: `threads.boards.${boardId}`,
+  }
 }
 
 const dispatchToProps = {
   updateBoard,
   getBoards,
-};
+}
 
 const fetchConfigs = [{
   hasChanged: 'projectId',
   onChange: (props) => {
     props.getBoards({
-      projectId: props.projectId
+      projectId: props.projectId,
     })
-  }
+  },
 }]
 
 @connect(stateToProps, dispatchToProps)
@@ -39,7 +39,7 @@ const fetchConfigs = [{
 export default class ProjectSettingsThreadsContainer extends Component {
   render() {
     return (
-      <ThreadsSettings {...this.props} />
-    );
+      <ThreadsSettings { ...this.props } />
+    )
   }
 }

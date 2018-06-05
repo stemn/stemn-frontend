@@ -17,12 +17,12 @@ const filterModel = {
   groups: {
     type: 'array',
     validation: isUuid,
-    transform: (value) => 'group name',
+    transform: value => 'group name',
   },
   labels: {
     type: 'array',
     validation: isUuid,
-    transform: (value) => 'label name',
+    transform: value => 'label name',
   },
   user: {
     type: 'string',
@@ -81,12 +81,12 @@ const stateToProps = ({ projects, threads, search, stringFilter }, { params, loc
 
 const dispatchToProps = {
   getBoards,
-  showNewThreadModal: (modalProps) => confirmAuth(() => showModal({
+  showNewThreadModal: modalProps => confirmAuth(() => showModal({
     modalType: newThreadModalName,
-    modalProps: modalProps,
+    modalProps,
     modalOptions: {
       noClickClose: true,
-    }
+    },
   })),
   setFilter,
   search,
@@ -96,10 +96,10 @@ const fetchConfigs = [{
   hasChanged: 'projectId',
   onChange: (props) => {
     props.getBoards({
-      projectId: props.projectId
+      projectId: props.projectId,
     })
-  }
-},{
+  },
+}, {
   hasChanged: 'searchQueryKey',
   onChange: (props) => {
     const parseCompleted = (status) => {
@@ -116,7 +116,7 @@ const fetchConfigs = [{
       labels: props.filter.object.labels,
       name: props.filter.object.query && `/${props.filter.object.query}/i`,
       complete: parseCompleted(props.filter.object.status),
-      users: props.filter.object.user && [ props.filter.object.user ],
+      users: props.filter.object.user && [props.filter.object.user],
     }
 
     props.search({
@@ -129,7 +129,7 @@ const fetchConfigs = [{
       size: props.size,
       page: props.page,
     })
-  }
+  },
 }]
 
 @connect(stateToProps, dispatchToProps)
@@ -137,7 +137,7 @@ const fetchConfigs = [{
 export default class ProjectThreadsContainer extends Component {
   render() {
     return (
-      <ProjectThreads {...this.props} />
-    );
+      <ProjectThreads { ...this.props } />
+    )
   }
 }

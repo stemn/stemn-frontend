@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { getSettings, saveSettings } from 'stemn-shared/misc/UserSettings/UserSettings.actions'
-import SettingsEmails from './SettingsEmails';
+import SettingsEmails from './SettingsEmails'
 
 const stateToProps = ({ userSettings }) => ({
   toggleValues: userSettings.data.mail,
-  toggleModel: 'userSettings.data.mail'
+  toggleModel: 'userSettings.data.mail',
 })
 
 const dispatchToProps = {
@@ -17,7 +17,7 @@ const dispatchToProps = {
 export default class SettingsEmailsContainer extends Component {
   render() {
     return (
-      <SettingsEmails {...this.props} />
-    );
+      <SettingsEmails { ...this.props } />
+    )
   }
 }

@@ -4,7 +4,7 @@ import classNames from 'classnames'
 
 export default class LoadingPlaceholder extends Component {
   static defaultProps = {
-    width: 200
+    width: 200,
   }
   render() {
     const { width, className, style } = this.props

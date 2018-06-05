@@ -43,67 +43,67 @@ export default class EditorToolbar extends Component {
   upload = () => {
     this.props.showUploadModal().then(({ value }) => {
       const cursorRange = this.getCursor()
-      this.cursorWrap(cursorRange, (content) => `\n ![${ content || 'alt text' }](${ value.url })`)
+      this.cursorWrap(cursorRange, content => `\n ![${content || 'alt text'}](${value.url})`)
       this.cursorSet(cursorRange, 1, 0)
     })
   }
   bold = () => {
     const cursorRange = this.getCursor()
-    this.cursorWrap(cursorRange, (content) => `**${content}**`)
+    this.cursorWrap(cursorRange, content => `**${content}**`)
     this.cursorSet(cursorRange, 0, 2)
   }
   heading = (level = 1) => {
     const cursorRange = this.getCursor()
     if (cursorRange.from.ch === 0) {
       // If we are at the start of a line, wrap
-      this.cursorWrap(cursorRange, (content) => `${repeat('#', level)} ${content}`)
+      this.cursorWrap(cursorRange, content => `${repeat('#', level)} ${content}`)
       this.cursorSet(cursorRange, 0, level + 1)
     } else {
       // Else, make a new line and then wrap
-      this.cursorWrap(cursorRange, (content) => `\n${repeat('#', level)} ${content}`)
+      this.cursorWrap(cursorRange, content => `\n${repeat('#', level)} ${content}`)
       this.cursorSet(cursorRange, 1, level + 1)
     }
   }
   italic = () => {
     const cursorRange = this.getCursor()
-    this.cursorWrap(cursorRange, (content) => `*${content}*`)
+    this.cursorWrap(cursorRange, content => `*${content}*`)
     this.cursorSet(cursorRange, 0, 1)
   }
   bullet = () => {
     const cursorRange = this.getCursor()
     if (cursorRange.from.ch === 0) {
       // If we are at the start of a line, wrap
-      this.cursorWrap(cursorRange, (content) => `* ${content}`)
+      this.cursorWrap(cursorRange, content => `* ${content}`)
       this.cursorSet(cursorRange, 0, 2)
     } else {
       // Else, make a new line and then wrap
-      this.cursorWrap(cursorRange, (content) => `\n* ${content}`)
+      this.cursorWrap(cursorRange, content => `\n* ${content}`)
       this.cursorSet(cursorRange, 1, 2)
     }
   }
   link = () => {
     const cursorRange = this.getCursor()
-    this.cursorWrap(cursorRange, (content) => `[${ content || 'text' }](url)`)
+    this.cursorWrap(cursorRange, content => `[${content || 'text'}](url)`)
     this.cursorSet(cursorRange, 0, 1)
   }
   code = () => {
     const cursorRange = this.getCursor()
-    this.cursorWrap(cursorRange, (content) => `\`\`\`\n${ content } \n\`\`\``)
+    this.cursorWrap(cursorRange, content => `\`\`\`\n${content} \n\`\`\``)
     this.cursorSet(cursorRange, 1, 0)
   }
   codeInline = () => {
     const cursorRange = this.getCursor()
-    this.cursorWrap(cursorRange, (content) => `\`${ content }\``)
+    this.cursorWrap(cursorRange, content => `\`${content}\``)
     this.cursorSet(cursorRange, 0, 1)
   }
   math = () => {
     const cursorRange = this.getCursor()
-    this.cursorWrap(cursorRange, (content) => `$$\n${ content || 'write latex math here' }\n$$`)
+    this.cursorWrap(cursorRange, content => `$$\n${content || 'write latex math here'}\n$$`)
     this.cursorSet(cursorRange, 1, 0)
   }
   mathInline = () => {
     const cursorRange = this.getCursor()
-    this.cursorWrap(cursorRange, (content) => `$${ content || 'write latex math here'}$`)
+    this.cursorWrap(cursorRange, content => `$${content || 'write latex math here'}$`)
     this.cursorSet(cursorRange, 0, 1)
   }
   preview = () => {
@@ -119,71 +119,71 @@ export default class EditorToolbar extends Component {
     menu: [{
       label: 'Heading 1 (#)',
       onClick: () => this.heading(1),
-    },{
+    }, {
       label: 'Heading 2 (##)',
       onClick: () => this.heading(2),
-    },{
+    }, {
       label: 'Heading 3 (###)',
       onClick: () => this.heading(3),
-    },{
+    }, {
       label: 'Heading 4 (####)',
       onClick: () => this.heading(4),
     }],
-  },{
+  }, {
     title: 'Bold',
     onClick: this.bold,
     icon: <MdFormatBold />,
-  },{
+  }, {
     title: 'Italic',
     onClick: this.italic,
     icon: <MdFormatItalic />,
-  },{
+  }, {
     title: 'List',
     onClick: this.bullet,
     icon: <MdFormatListBulleted />,
-  },{
+  }, {
     title: 'Image',
     onClick: this.upload,
     icon: <MdInsertPhoto />,
-  },{
+  }, {
     title: 'Link',
     onClick: this.link,
-    icon:  <MdLink />,
-  },{
+    icon: <MdLink />,
+  }, {
     title: 'Code',
     onClick: this.code,
-    icon:  <MdCode />,
+    icon: <MdCode />,
     menu: [{
       label: 'Code Block',
       onClick: this.code,
-    },{
+    }, {
       label: 'Inline Code',
       onClick: this.codeInline,
-    },]
-  },{
+    }],
+  }, {
     title: 'Equation',
     onClick: this.math,
-    icon:  <MathIcon />,
+    icon: <MathIcon />,
     menu: [{
       label: 'Block Equation',
       onClick: this.math,
-    },{
+    }, {
       label: 'Inline Equation',
       onClick: this.mathInline,
-    },]
-  },{
+    }],
+  }, {
     sep: true,
     title: 'Preview',
     onClick: this.preview,
-    icon:  <MdVisibility />,
+    icon: <MdVisibility />,
   }]
   render() {
     const { hide } = this.props
     if (!hide) {
       return (
         <div className={ classes.toolbar }>
-          { this.buttons.map(button => !button.menu
-          ? <SimpleIconButton
+          { this.buttons.map(button => (!button.menu
+            ? <SimpleIconButton
               className={ button.sep ? classes.sep : '' }
               key={ button.title }
               onClick={ button.onClick }
@@ -191,7 +191,7 @@ export default class EditorToolbar extends Component {
             >
               { button.icon }
             </SimpleIconButton>
-          : <Popover
+            : <Popover
               key={ button.title }
               trigger="hoverDelay"
               preferPlace="below"
@@ -203,13 +203,12 @@ export default class EditorToolbar extends Component {
               >
                 { button.icon }
               </SimpleIconButton>
-              <PopoverMenuList menu={ button.menu }/>
-            </Popover>
+              <PopoverMenuList menu={ button.menu } />
+            </Popover>),
           )}
         </div>
       )
-    } else {
-      return null
-    }
+    } 
+    return null
   }
 }

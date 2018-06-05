@@ -12,7 +12,7 @@ const stateToProps = ({ users, auth }) => ({
 })
 
 const dispatchToProps = {
-  getUser
+  getUser,
 }
 
 const fetchConfigs = [{
@@ -20,9 +20,9 @@ const fetchConfigs = [{
   onChange: (props) => {
     props.getUser({
       userId: props.currentUser._id,
-      force: true
+      force: true,
     })
-  }
+  },
 }]
 
 @connect(stateToProps, dispatchToProps)
@@ -30,10 +30,8 @@ const fetchConfigs = [{
 export default class OnboardingContainer extends Component {
   render() {
     return (
-      <Onboarding {...this.props} />
+      <Onboarding { ...this.props } />
     )
   }
 }
-
-
 

@@ -22,7 +22,7 @@ const dispatchToProps = {
 export default class ProjectSettingsPermissionsContainer extends Component {
   render() {
     return (
-      <PermissionsSettings {...this.props} />
+      <PermissionsSettings { ...this.props } />
     )
   }
 }

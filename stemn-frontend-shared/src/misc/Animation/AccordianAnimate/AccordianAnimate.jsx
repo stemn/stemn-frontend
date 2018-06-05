@@ -16,9 +16,8 @@ export default class AccordianAnimate extends Component {
       if (childItems) {
         const childItemsLength = childItems.length
         return childItemsLength === undefined ? 1 : childItemsLength
-      } else {
-        return 0
-      }
+      } 
+      return 0
     }
     
     const numChildren = getNumChildren()
@@ -30,7 +29,7 @@ export default class AccordianAnimate extends Component {
     }
         
     return (
-      <div style={ { ...style, ...containerStyle} } {  ...otherProps }>
+      <div style={ { ...style, ...containerStyle } } {  ...otherProps }>
         { children }
       </div>
     )

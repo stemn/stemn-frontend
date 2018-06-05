@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton';
+import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 import TeamMember from 'stemn-shared/misc/Project/TeamMember/TeamMember.jsx'
 import UserSearch from 'stemn-shared/misc/Search/UserSearch'
-import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
+import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 
 export default class GeneralSettings extends Component {
   static propTypes = {
@@ -14,33 +14,33 @@ export default class GeneralSettings extends Component {
     saveProject: PropTypes.func.isRequired,
   }
   select = (selection) => {
-    if(!this.props.project.data.team.find((item)=>item._id == selection._id)){
+    if (!this.props.project.data.team.find(item => item._id == selection._id)) {
       this.props.addTeamMember({
         projectId: this.props.project.data._id,
-        user: selection
+        user: selection,
       })
     }
   }
-  changeUserPermissions = ({role, userId}) => {
+  changeUserPermissions = ({ role, userId }) => {
     this.props.changeUserPermissions({
       role,
       userId,
       projectId: this.props.project.data._id,
     })
   }
-  removeTeamMember = ({userId}) => {
+  removeTeamMember = ({ userId }) => {
     this.props.removeTeamMember({
       userId,
       projectId: this.props.project.data._id,
     })
   }
-  saveProject = () =>{
+  saveProject = () => {
     this.props.saveProject({
-      project: this.props.project.data
+      project: this.props.project.data,
     })
   }
   render() {
-    const { project } = this.props;
+    const { project } = this.props
     
     return (
       <InfoPanel>
@@ -51,21 +51,21 @@ export default class GeneralSettings extends Component {
           select={ this.select } 
         />
         <br />
-        { project.data.team.map((item) => (
-          <div style={{marginBottom: '15px'}}  key={item._id}>
+        { project.data.team.map(item => (
+          <div style={ { marginBottom: '15px' } }  key={ item._id }>
             <TeamMember
-              item={item}
+              item={ item }
               changePermissionsFn={ this.changeUserPermissions }
               removeTeamMemberFn={ this.removeTeamMember }
             />
-          </div>)
+          </div>),
         )}
         <br />
         <div className="layout-row layout-align-end">
           <ProgressButton
-           className="primary"
-           onClick={ this.saveProject }
-           loading={ project.savePending }
+            className="primary"
+            onClick={ this.saveProject }
+            loading={ project.savePending }
           >
             Update Team
           </ProgressButton>

@@ -39,7 +39,7 @@ const fetchConfigs = [{
         cacheKey: props.feedCacheKey,
       })
     }
-  }
+  },
 }]
 
 @connect(stateToProps, dispatchToProps)
@@ -48,10 +48,9 @@ export default class HomeContainer extends Component {
   render() {
     const { isLoggedIn } = this.props
     if (isLoggedIn) {
-      return <Home {...this.props} />
-    } else {
-      return null
-    }
+      return <Home { ...this.props } />
+    } 
+    return null
   }
 }
 

@@ -1,1 +1,1 @@
-export default from './File.container';
+export default from './File.container'

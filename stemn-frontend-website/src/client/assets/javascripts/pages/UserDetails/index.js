@@ -1,1 +1,1 @@
-export default from './UserDetails.container';
+export default from './UserDetails.container'

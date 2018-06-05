@@ -1,1 +1,1 @@
-export default from './SiteSearch.container';
+export default from './SiteSearch.container'

@@ -11,7 +11,7 @@ import Pagination from 'stemn-shared/misc/Pagination'
 import Link from 'stemn-shared/misc/Router/Link'
 import classes from './Home.css'
 import classNames from 'classnames'
-import { Helmet } from "react-helmet"
+import { Helmet } from 'react-helmet'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
 
@@ -92,8 +92,6 @@ export default class Home extends Component {
     )
   }
 }
-
-
 
 
 //              <InfoPanel>

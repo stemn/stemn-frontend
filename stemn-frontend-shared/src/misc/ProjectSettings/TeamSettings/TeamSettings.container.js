@@ -5,13 +5,13 @@ import {
   addTeamMember,
   changeUserPermissions,
   removeTeamMember,
-  saveProject
+  saveProject,
 } from 'stemn-shared/misc/Projects/Projects.actions'
 
 import TeamSettings from './TeamSettings'
 
 const stateToProps = ({ projects }, { params }) => {
-  const projectId   = params.stub;
+  const projectId   = params.stub
   const project     = projects.data[projectId]
 
   return {
@@ -30,7 +30,7 @@ const dispatchToProps = {
 export default class ProjectSettingsTeamContainer extends Component {
   render() {
     return (
-      <TeamSettings {...this.props} />
-    );
+      <TeamSettings { ...this.props } />
+    )
   }
 }

@@ -43,8 +43,8 @@ export default class PreviewCadLoader extends Component {
     return (
       <div className="layout-column flex">
         { loaded
-        ? <this.LoadedComponent { ...otherProps } />
-        : null }
+          ? <this.LoadedComponent { ...otherProps } />
+          : null }
         <LoadingOverlay show={ !loaded } />
       </div>
     )

@@ -13,7 +13,7 @@ const stateToProps = ({ search }, { entityType, query, page, parentType, parentI
 }
 
 const dispatchToProps = {
-  search
+  search,
 }
 
 const fetchConfigs = [{
@@ -23,12 +23,12 @@ const fetchConfigs = [{
       props.search({
         entityType: props.entityType,
         criteria: {
-          name: props.query && `/${props.query}/i`
+          name: props.query && `/${props.query}/i`,
         },
         cacheKey: props.cacheKey,
       })
     }
-  }
+  },
 }]
 
 @connect(stateToProps, dispatchToProps)

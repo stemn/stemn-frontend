@@ -10,20 +10,20 @@ import MdSearch from 'react-icons/md/search'
 
 import { parseFilterStringWithPositions } from 'stemn-shared/misc/StringFilter/StringFilter.utils'
 
-//const findQueryStrings = (value = '', filterModel) => {
+// const findQueryStrings = (value = '', filterModel) => {
 //  console.log(value, filterModel);
 //  return []
-////  return [{
-////    from: {
-////      line: 0,
-////      ch: 0,
-////    },
-////    to: {
-////      line: 0,
-////      ch: 10,
-////    },
-////  }]
-//}
+// //  return [{
+// //    from: {
+// //      line: 0,
+// //      ch: 0,
+// //    },
+// //    to: {
+// //      line: 0,
+// //      ch: 10,
+// //    },
+// //  }]
+// }
 
 export default class EditorNew extends Component {
   static propTypes = {
@@ -42,10 +42,10 @@ export default class EditorNew extends Component {
   onChange = (newValue) => {
     const { model, change } = this.props
     // Update the redux value
-//     change(model, newValue)
+    //     change(model, newValue)
     // Update internal value
     this.setState({
-      value: newValue
+      value: newValue,
     })
   }
   getCodeMirror = (ref) => {
@@ -79,10 +79,10 @@ export default class EditorNew extends Component {
   }
   componentWillReceiveProps(nextProps) {
     // Update the internal state if it differs from the redux state
-//    this.convertQueryStrings(codemirror)
-    if( nextProps.value != this.state.value) {
+    //    this.convertQueryStrings(codemirror)
+    if (nextProps.value != this.state.value) {
       this.setState({
-        value: nextProps.value
+        value: nextProps.value,
       })
     }
   }

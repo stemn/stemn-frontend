@@ -10,7 +10,7 @@ import { getFileRouteName, getFileRouteParams } from 'stemn-shared/misc/FileList
 export default class FileBreadCrumbs extends Component {
   static defaultProps = {
     popup: false,
-    clickFn: () => {}
+    clickFn: () => {},
   }
   static propTypes = {
     popup: PropTypes.bool,
@@ -32,34 +32,35 @@ export default class FileBreadCrumbs extends Component {
               _id: meta.project._id,
             },
             type: 'folder',
-          }))
-          ,{
+          })),
+          {
             name: meta.name,
             fileId: meta.fileId,
             project: {
               _id: meta.project._id,
             },
             type: 'file',
-          }
+          },
         ]
         return parentsExtended.map((folder, idx) => {
           const isLastChild = idx == parentsExtended.length - 1
           const parentfolder = parentsExtended[idx - 1]
           const clickableText = link
-            ? <Link
-                onClick={ () => clickFn({file: folder}) }
-                name={ getFileRouteName(folder) }
-                params={ getFileRouteParams(folder) }
-              >
-                { middleConcat(folder.name, 30, 0.8) }
-              </Link>
-            : <a onClick={ () => clickFn({file: folder}) }>{ middleConcat(folder.name, 30, 0.8) }</a>
+            ? (<Link
+              onClick={ () => clickFn({ file: folder }) }
+              name={ getFileRouteName(folder) }
+              params={ getFileRouteParams(folder) }
+            >
+              { middleConcat(folder.name, 30, 0.8) }
+            </Link>)
+            : <a onClick={ () => clickFn({ file: folder }) }>{ middleConcat(folder.name, 30, 0.8) }</a>
           
           const plainText = <span>{ middleConcat(folder.name, 30, 0.8) }</span>
 
           const getPopoverCrumb = () => (
             <span key={ idx }>
-              <Popover trigger="hoverDelay"
+              <Popover
+                trigger="hoverDelay"
                 preferPlace="below"
                 tipSize={ 6 }
                 inheritIsOpen
@@ -86,20 +87,19 @@ export default class FileBreadCrumbs extends Component {
             </span>
           )
           return parentfolder && popup && idx != 0
-            ? getPopoverCrumb ()
+            ? getPopoverCrumb()
             : getPlainCrumb()
         })
       } else if (meta.name) {
         return <span>{ middleConcat(meta.name, 30, 0.8) }</span>
-      } else {
-        return <span>. . .</span>
-      }
+      } 
+      return <span>. . .</span>
     }
 
     return (
       <div className={ classNames(classes.crumbs, className) }>
         { displayCrumbs() }
       </div>
-    );
+    )
   }
 }

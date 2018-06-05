@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import classNames from 'classnames';
+import classNames from 'classnames'
 
 const Item = ({ setFilter, objKey, value, filterObject, children }) => (
   <a
@@ -30,28 +30,31 @@ export default class ThreadFilterMenu extends Component {
     })
   }
   render() {
-    const { auth, filter } = this.props;
+    const { auth, filter } = this.props
     return (
       <div className="PopoverMenu">
         <Item
           setFilter={ this.setFilter }
           filterObject={ filter.object }
           objKey="status"
-          value={ 'open' }>
+          value={ 'open' }
+        >
           Status: Open
         </Item>
         <Item
           setFilter={ this.setFilter }
           filterObject={ filter.object }
           objKey="status"
-          value={ 'closed' }>
+          value={ 'closed' }
+        >
           Status: Closed
         </Item>
         <Item
           setFilter={ this.setFilter }
           filterObject={ filter.object }
           objKey="status"
-          value={ undefined }>
+          value={ undefined }
+        >
           Status: All
         </Item>
         <div className="divider" />
@@ -59,14 +62,16 @@ export default class ThreadFilterMenu extends Component {
           setFilter={ this.setFilter }
           filterObject={ filter.object }
           objKey="user"
-          value={ auth.user._id }>
+          value={ auth.user._id }
+        >
           My Threads
         </Item>
         <Item
           setFilter={ this.setFilter }
           filterObject={ filter.object }
           objKey="user"
-          value={ undefined }>
+          value={ undefined }
+        >
           All Threads
         </Item>
       </div>

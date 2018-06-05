@@ -12,28 +12,24 @@ export default class FieldSearch extends Component {
     showNewFieldModal: PropTypes.func.isRequired,
   }
 
-  renderResult = (suggestion, { query }) => {
-    return (
-      <div className="layout-row layout-align-start-center">
-        <Highlight text={ suggestion.name } query={ query } hightlightClass={ classes.highlight }/>
-      </div>
-    )
-  }
+  renderResult = (suggestion, { query }) => (
+    <div className="layout-row layout-align-start-center">
+      <Highlight text={ suggestion.name } query={ query } hightlightClass={ classes.highlight } />
+    </div>
+  )
 
-  renderNoResult = (suggestion, { query }) => {
-    return (
-      <div>
+  renderNoResult = (suggestion, { query }) => (
+    <div>
         Create field: <b>{ query }</b>
-      </div>
-    )
-  }
+    </div>
+  )
 
   clickNoResult = (result) => {
     console.log('click no result', result)
     this.props.showNewFieldModal({
       name: result.query,
     }).then(({ value }) => {
-      console.log({ value });
+      console.log({ value })
       this.props.clickResult(value)
     })
   }
@@ -51,6 +47,6 @@ export default class FieldSearch extends Component {
         renderNoResult={ this.renderNoResult }
         entityType="field"
       />
-    );
+    )
   }
 }

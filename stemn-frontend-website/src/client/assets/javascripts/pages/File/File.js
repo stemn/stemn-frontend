@@ -19,7 +19,7 @@ import FileCompareMenu from 'stemn-shared/misc/FileCompare/FileCompareMenu'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton'
 import MdMenu from 'react-icons/md/menu'
 import MdClose from 'react-icons/md/close'
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet'
 
 export default class File extends Component {
   constructor(props) {
@@ -34,17 +34,17 @@ export default class File extends Component {
     })
   }
   clickFileOrFolder = ({ file }) => {
-    const { fileId, revisionId } = file;
-    const { pushRoute } = this.props;
-    const projectId = this.props.file.data.project._id;
+    const { fileId, revisionId } = file
+    const { pushRoute } = this.props
+    const projectId = this.props.file.data.project._id
     if (file.type == 'file') {
-      pushRoute(fileRoute({fileId, projectId, revisionId}));
-    } else if (projectId){
-      pushRoute(projectRoute({projectId}));
+      pushRoute(fileRoute({ fileId, projectId, revisionId }))
+    } else if (projectId) {
+      pushRoute(projectRoute({ projectId }))
     }
   }
   onSelect = (file) => {
-    console.log(file);
+    console.log(file)
     const { select, cacheKey, compare: { mode, lastSelected } } = this.props
     select({ file, mode, lastSelected, cacheKey })
   }
@@ -60,8 +60,8 @@ export default class File extends Component {
     const { compare: { mode, selected1, selected2 }, file, timeline } = this.props
     const { isOpen } = this.state
     const items = orderItemsByTime(mode, selected1, selected2)
-    const file1 = get(items, [0, 'data' ])
-    const file2 = get(items, [1, 'data' ])
+    const file1 = get(items, [0, 'data'])
+    const file2 = get(items, [1, 'data'])
     const timelineData = get(timeline, 'data', [])
     const revisions = getRevisions(timelineData)
     const displayFileHeader = ['sideBySide', 'aboveAndBelow'].includes(mode)
@@ -95,7 +95,7 @@ export default class File extends Component {
           </SimpleIconButton>
         </div>
         <div className="layout-row flex rel-box">
-          <div className={ classNames(classes.preview, 'layout-column flex')}>
+          <div className={ classNames(classes.preview, 'layout-column flex') }>
             <FileCompareInner
               className="layout-column flex"
               project={ file.data.project }
@@ -112,7 +112,7 @@ export default class File extends Component {
               preferPlace="above"
             />
           </div>
-          <aside className={ classNames(classes.sidebar, { [ classes.isOpen ]: isOpen }) }>
+          <aside className={ classNames(classes.sidebar, { [classes.isOpen]: isOpen }) }>
             <SectionTitle className={ classes.sidebarTitle }>Meta</SectionTitle>
             <SimpleTable>
               <tr><td>Name</td><td>{file.data.name}</td></tr>

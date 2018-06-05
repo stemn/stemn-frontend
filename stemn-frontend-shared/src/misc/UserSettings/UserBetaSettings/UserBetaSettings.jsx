@@ -6,7 +6,7 @@ export default class UserBetaSettings extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
   }
-  render () {
+  render() {
     const { user } = this.props
     return (
       <div>

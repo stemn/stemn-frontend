@@ -22,7 +22,7 @@ const stateToProps = ({ search, routing }, { page, query, type, size, parentType
     criteria: criteriaWithQuery,
     location: routing.locationBeforeTransitions,
     page: _page,
-    query: query,
+    query,
     results: search.data[cacheKey],
     size: _size,
     sort,
@@ -31,7 +31,7 @@ const stateToProps = ({ search, routing }, { page, query, type, size, parentType
 }
 
 const dispatchToProps = {
-  search
+  search,
 }
 
 const fetchConfigs = [{
@@ -48,7 +48,7 @@ const fetchConfigs = [{
       sort: props.sort,
       value: props.query,
     })
-  }
+  },
 }]
 
 @connect(stateToProps, dispatchToProps)

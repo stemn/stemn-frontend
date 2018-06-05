@@ -1,4 +1,4 @@
-const { APP_TYPE, NODE_ENV } = GLOBAL_ENV;
+const { APP_TYPE, NODE_ENV } = GLOBAL_ENV
 
 const rootDomain = APP_TYPE === 'web'
   ? window.location.origin

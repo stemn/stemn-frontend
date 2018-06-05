@@ -10,10 +10,10 @@ export default class UserLinkedAccountSettings extends Component {
     authenticate: PropTypes.func.isRequired,
     unlink: PropTypes.func.isRequired,
   }
-  render () {
+  render() {
     const { user, authenticate, unlink } = this.props
 
-    const accountTypes = Object.keys(user.accounts);
+    const accountTypes = Object.keys(user.accounts)
 
     return (
       <div>
@@ -21,14 +21,16 @@ export default class UserLinkedAccountSettings extends Component {
         <p>By linking social accounts you'll be able to login to STEMN using Facebook and LinkedIn. We never post to your social networks.</p>
         <LinkAccount
           text="Facebook"
-          isLinked={user.accounts.facebook && user.accounts.facebook.id}
-          linkFn={()=>authenticate('facebook')}
-          unLinkFn={()=>unlink('facebook')}/>
+          isLinked={ user.accounts.facebook && user.accounts.facebook.id }
+          linkFn={ () => authenticate('facebook') }
+          unLinkFn={ () => unlink('facebook') }
+        />
         <LinkAccount
           text="Linkedin"
-          isLinked={user.accounts.linkedin && user.accounts.linkedin.id}
-          linkFn={()=>authenticate('linkedin')}
-          unLinkFn={()=>unlink('linkedin')}/>
+          isLinked={ user.accounts.linkedin && user.accounts.linkedin.id }
+          linkFn={ () => authenticate('linkedin') }
+          unLinkFn={ () => unlink('linkedin') }
+        />
       </div>
     )
   }

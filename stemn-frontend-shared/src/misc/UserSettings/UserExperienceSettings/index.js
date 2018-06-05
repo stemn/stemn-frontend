@@ -1,1 +1,1 @@
-export default from './UserExperienceSettings';
+export default from './UserExperienceSettings'

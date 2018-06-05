@@ -1,1 +1,1 @@
-export default from './NavPillContainer';
+export default from './NavPillContainer'

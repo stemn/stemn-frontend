@@ -5,11 +5,11 @@ import { getUser } from 'stemn-shared/misc/Users/Users.actions'
 import EntityRow from 'stemn-shared/misc/EntityRow'
 
 const stateToProps = ({ users }, { userId }) => ({
-  user: users[userId]
+  user: users[userId],
 })
 
 const dispatchToProps = {
-  getUser
+  getUser,
 }
 
 const fetchConfigs = [{
@@ -17,23 +17,23 @@ const fetchConfigs = [{
   onChange: (props) => {
     props.getUser({
       userId: props.userId,
-      size: 'md'
+      size: 'md',
     })
-  }
+  },
 }]
 
 @connect(stateToProps, dispatchToProps)
 @fetchDataHoc(fetchConfigs)
 export default class UserRowContainer extends Component {
   static defaultProps = {
-    user: {}
+    user: {},
   }
   render() {
     const { user, ...otherProps } = this.props
-    return <EntityRow
+    return (<EntityRow
       data={ user.data }
       loading={ user.loading }
       { ...otherProps }
-    />
+    />)
   }
 }

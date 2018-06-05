@@ -1,1 +1,1 @@
-export default from './Footer.container';
+export default from './Footer.container'

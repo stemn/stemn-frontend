@@ -41,7 +41,7 @@ export default class UserExperienceSettings extends Component {
   add = () => {
     const { dispatch, dataModel } = this.props
     dispatch(storePush(dataModel, {
-      _id: getUuid()
+      _id: getUuid(),
     }))
   }
   render() {
@@ -86,30 +86,29 @@ export default class UserExperienceSettings extends Component {
                     </Col>
                   </Row>
                 )
-              } else {
-                return (
-                  <Row className="sm layout-row">
-                    <Col className="sm flex-50">
-                      <h3>Position</h3>
-                      <Input
-                        className="dr-input"
-                        model={ `${itemModel}.position` }
-                        value={ item.position }
-                        placeholder="eg: Mechanical Design Engineer "
-                      />
-                    </Col>
-                    <Col className="sm flex-50">
-                      <h3>Company</h3>
-                      <Input
-                        className="dr-input"
-                        model={ `${itemModel}.company` }
-                        value={ item.company }
-                        placeholder="eg: SpaceX"
-                      />
-                    </Col>
-                  </Row>
-                )
-              }
+              } 
+              return (
+                <Row className="sm layout-row">
+                  <Col className="sm flex-50">
+                    <h3>Position</h3>
+                    <Input
+                      className="dr-input"
+                      model={ `${itemModel}.position` }
+                      value={ item.position }
+                      placeholder="eg: Mechanical Design Engineer "
+                    />
+                  </Col>
+                  <Col className="sm flex-50">
+                    <h3>Company</h3>
+                    <Input
+                      className="dr-input"
+                      model={ `${itemModel}.company` }
+                      value={ item.company }
+                      placeholder="eg: SpaceX"
+                    />
+                  </Col>
+                </Row>
+              )
             }
 
             return (

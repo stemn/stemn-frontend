@@ -7,7 +7,7 @@ import { Container } from 'stemn-shared/misc/Layout'
 
 export default class SubHeader extends Component {
   static propTypes = {
-    children: PropTypes.node
+    children: PropTypes.node,
   }
 
   render() {
@@ -15,7 +15,7 @@ export default class SubHeader extends Component {
     return (
       <div className={ classNames(classes.header, className) } { ...otherProps }>
         <Container>
-          <div className={ classes.headerBorder }/>
+          <div className={ classes.headerBorder } />
           { children }
         </Container>
       </div>

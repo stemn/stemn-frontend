@@ -13,7 +13,7 @@ export default class ThreadRow extends Component {
   // Force fresh every second so timer updates
   refreshInterval = null
   componentDidMount() {
-    this.refreshInterval = setInterval(() => this.forceUpdate(), 1000);
+    this.refreshInterval = setInterval(() => this.forceUpdate(), 1000)
   }
   componentWillUnmount() {
     clearInterval(this.refreshInterval)    

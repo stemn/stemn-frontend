@@ -1,3 +1,1 @@
-module.exports = (staticPath) => {
-  return `${location.origin}${staticPath}`
-}
+module.exports = staticPath => `${location.origin}${staticPath}`

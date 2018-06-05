@@ -11,19 +11,19 @@ export default class UserEmailSettings extends Component {
   }
   addEmail = () => {
     const { saveUser, setPrimaryEmail, auth } = this.props
-//    saveUser({
-//      user: {
-//        _id: auth.user._id,
-//        accounts: {
-//          local: {
-//            email: auth.forms.newEmail,
-//          }
-//        }
-//      }
-//    })
+    //    saveUser({
+    //      user: {
+    //        _id: auth.user._id,
+    //        accounts: {
+    //          local: {
+    //            email: auth.forms.newEmail,
+    //          }
+    //        }
+    //      }
+    //    })
     setPrimaryEmail(auth.forms.newEmail)
   }
-  render () {
+  render() {
     const { auth } = this.props
     const primary = auth.user.email
 
@@ -44,11 +44,12 @@ export default class UserEmailSettings extends Component {
           }
         </Form>
         <br />
-        <div className='layout-row layout-align-end'>
+        <div className="layout-row layout-align-end">
           <ProgressButton
             loading={ auth.emailUpdatePending }
-            className='primary'
-            onClick={ this.addEmail }>
+            className="primary"
+            onClick={ this.addEmail }
+          >
             Update Email
           </ProgressButton>
         </div>

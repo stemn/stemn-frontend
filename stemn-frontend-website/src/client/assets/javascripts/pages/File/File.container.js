@@ -10,7 +10,7 @@ import File from './File'
 
 const stateToProps = ({ files, fileCompare, syncTimeline }, { params, location }) => {
   const { projectId, fileId } = params
-//  console.log(params);
+  //  console.log(params);
   const revisionId = location.query.revision
   const cacheKey = `${fileId}-${revisionId}`
   return {
@@ -22,7 +22,7 @@ const stateToProps = ({ files, fileCompare, syncTimeline }, { params, location }
     revisonId: revisionId || '',
     timeline: get(syncTimeline, cacheKey, {}),
   }
-};
+}
 
 const dispatchToProps = {
   changeMode,
@@ -31,7 +31,7 @@ const dispatchToProps = {
   initCompare,
   pushRoute,
   select,
-};
+}
 
 const fetchConfigs = [{
   hasChanged: 'cacheKey',
@@ -48,8 +48,8 @@ const fetchConfigs = [{
       entityId: props.fileId,
       cacheKey: props.cacheKey,
     })
-  }
-},{
+  },
+}, {
   hasChanged: 'file.data.fileId',
   onChange: (props) => {
     if (get(props, 'file.data.fileId')) {
@@ -58,17 +58,17 @@ const fetchConfigs = [{
         file: props.file,
       })
     }
-  }
+  },
 }]
 
 @connect(stateToProps, dispatchToProps)
 @fetchDataHoc(fetchConfigs)
 export default class FileContainer extends Component {
   render() {
-    const { file } = this.props;
+    const { file } = this.props
     
     return file && file.data
-      ? <File {...this.props} />
+      ? <File { ...this.props } />
       : null
   }
 }

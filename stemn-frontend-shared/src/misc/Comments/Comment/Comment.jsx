@@ -1,17 +1,17 @@
-import { bindActionCreators } from 'redux';
-import React, { Component } from 'react';
-import moment from 'moment';
-import classNames from 'classnames';
-import classes from './Comment.css';
+import { bindActionCreators } from 'redux'
+import React, { Component } from 'react'
+import moment from 'moment'
+import classNames from 'classnames'
+import classes from './Comment.css'
 import Link from 'stemn-shared/misc/Router/Link'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
-import Editor from 'stemn-shared/misc/Editor/EditorNew';
+import Editor from 'stemn-shared/misc/Editor/EditorNew'
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'
 import ReactionPopup from 'stemn-shared/misc/Reactions/ReactionPopup.jsx'
 import Reactions from 'stemn-shared/misc/Reactions/Reactions.jsx'
 import Popover from 'stemn-shared/misc/Popover'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
-import MdMoreHoriz from 'react-icons/md/more-horiz';
+import MdMoreHoriz from 'react-icons/md/more-horiz'
 import IsOwner from 'stemn-shared/misc/Auth/IsOwner/IsOwner.jsx'
 import LoadingPlaceholder from 'stemn-shared/misc/Loading/LoadingPlaceholder'
 import LoadingAnimation from 'stemn-shared/misc/Loading/LoadingAnimation'
@@ -27,7 +27,7 @@ export default class Comment extends Component {
   }
   submitReaction = (reactionType) => {
     const { commentId, toggleReaction } = this.props
-    toggleReaction({ commentId, reactionType, })
+    toggleReaction({ commentId, reactionType })
   }
   startEdit = () => {
     const { startEdit, comment } = this.props
@@ -42,25 +42,25 @@ export default class Comment extends Component {
     updateComment({ comment: comment.form })
   }
   render() {
-    const { commentId, comment, showMeta, children, entityModel, commentsActions, style } = this.props;
+    const { commentId, comment, showMeta, children, entityModel, commentsActions, style } = this.props
 
-    if(!comment || !comment.data){
+    if (!comment || !comment.data) {
       return (
-        <LoadingAnimation className={classes.comment + ' layout-column'} style={ style }>
-          <div id={ commentId } className={classes.commentBody + ' flex'}>
-            <div className={classes.commentHeader + ' layout-row layout-align-start-center'}>
+        <LoadingAnimation className={ `${classes.comment} layout-column` } style={ style }>
+          <div id={ commentId } className={ `${classes.commentBody} flex` }>
+            <div className={ `${classes.commentHeader} layout-row layout-align-start-center` }>
               <UserAvatar
                 size={ 25 }
                 shape="square"
                 className={ classes.commentAvatar }
               />
-              <LoadingPlaceholder width={ 200 } className={ classes.link }/>
+              <LoadingPlaceholder width={ 200 } className={ classes.link } />
             </div>
             <div className={ classes.commentContent }>
               <LoadingPlaceholder width={ 600 } />
-              <br/>
+              <br />
               <LoadingPlaceholder width={ 300 } />
-              <br/>
+              <br />
               <LoadingPlaceholder width={ 400 } />
             </div>
           </div>
@@ -71,9 +71,9 @@ export default class Comment extends Component {
     const hasReactions = !comment.editActive && comment.data.reactions && comment.data.reactions.length > 0
 
     return (
-      <div id={ commentId } className={classes.comment + ' layout-column'} style={style}>
-        <div className={classes.commentBody + ' flex'}>
-          <div className={classes.commentHeader + ' layout-row layout-align-start-center'}>
+      <div id={ commentId } className={ `${classes.comment} layout-column` } style={ style }>
+        <div className={ `${classes.commentBody} flex` }>
+          <div className={ `${classes.commentHeader} layout-row layout-align-start-center` }>
             <Link name="userRoute" params={ { userId: comment.data.owner._id } }>
               <UserAvatar
                 picture={ comment.data.owner.picture }
@@ -91,7 +91,7 @@ export default class Comment extends Component {
             <span className={ classNames(classes.date, 'text-ellipsis') }>
               &nbsp;- { moment(comment.data.timestamp).fromNow() }
             </span>
-            <div className="flex"></div>
+            <div className="flex" />
             { !showMeta &&
               <ReactionPopup
                 reactions={ comment.data.reactions }
@@ -100,10 +100,10 @@ export default class Comment extends Component {
               />
             }
             { !showMeta &&
-              <IsOwner ownerId={comment.data.owner._id}>
+              <IsOwner ownerId={ comment.data.owner._id }>
                 <Popover preferPlace="right">
                   <SimpleIconButton style={ { padding: '0 0 0 5px' } }>
-                    <MdMoreHoriz size="20px"/>
+                    <MdMoreHoriz size="20px" />
                   </SimpleIconButton>
                   <div className="PopoverMenu">
                     { !comment.editActive && <a onClick={ this.startEdit }>Edit</a> }
@@ -114,29 +114,29 @@ export default class Comment extends Component {
             }
           </div>
           <div className={ classes.commentContent }>
-          { comment.editActive
-          ? <Form
-              model={ `${entityModel}.form` }
-              value={ comment.data }
-            >
-              { comment.form
-              ? <Editor
-                  model={ `${entityModel}.form.body` }
-                  value={ comment.form.body }
-                />
-              : null }
-            </Form>
-          : <EditorDisplay value={comment.data.body} /> }
+            { comment.editActive
+              ? <Form
+                model={ `${entityModel}.form` }
+                value={ comment.data }
+              >
+                { comment.form
+                  ? <Editor
+                    model={ `${entityModel}.form.body` }
+                    value={ comment.form.body }
+                  />
+                  : null }
+              </Form>
+              : <EditorDisplay value={ comment.data.body } /> }
           </div>
           {comment.editActive ?
-            <div className={classes.commentFooter}>
+            <div className={ classes.commentFooter }>
               <div>
                 <a className="link-primary" onClick={ this.finishEdit }>Cancel</a>
-                &nbsp;<b className="text-interpunct text-grey-3"></b>&nbsp;
+                &nbsp;<b className="text-interpunct text-grey-3" />&nbsp;
                 <a className="link-primary" onClick={ this.updateComment }>Save</a>
               </div>
             </div>
-          : ''}
+            : ''}
           { hasReactions &&
             <div className={ classes.reactions }>
               <Reactions

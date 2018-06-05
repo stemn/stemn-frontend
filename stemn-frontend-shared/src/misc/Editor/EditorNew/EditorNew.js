@@ -17,13 +17,13 @@ codemirrorLib.defineMode('markdownWithLatex', (config) => {
     open: '$$',
     close: '$$',
     mode: codemirrorLib.getMode(config, 'text/x-latex'),
-    delimStyle: "delimit"
+    delimStyle: 'delimit',
   }
   const latex$ = {
     open: '$',
     close: '$',
     mode: codemirrorLib.getMode(config, 'text/x-latex'),
-    delimStyle: "delimit"
+    delimStyle: 'delimit',
   }
   return codemirrorLib.multiplexingMode(baseMode, latex$$, latex$)
 })
@@ -50,7 +50,7 @@ export default class EditorNew extends Component {
     change(model, newValue)
     // Update internal value
     this.setState({
-      value: newValue
+      value: newValue,
     })
   }
   focus = () => {}
@@ -69,9 +69,9 @@ export default class EditorNew extends Component {
   }
   componentWillReceiveProps(nextProps) {
     // Update the internal state if it differs from the redux state
-    if( nextProps.value != this.state.value) {
+    if (nextProps.value != this.state.value) {
       this.setState({
-        value: nextProps.value
+        value: nextProps.value,
       })
     }
   }
@@ -104,11 +104,11 @@ export default class EditorNew extends Component {
           options={ options }
         />
         { codemirror
-        ? <EditorMentions
+          ? <EditorMentions
             codemirror={ codemirror }
             value={ value }
           />
-        : null }
+          : null }
       </div>
     )
   }

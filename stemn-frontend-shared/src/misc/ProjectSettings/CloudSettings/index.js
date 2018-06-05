@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import { has } from 'lodash';
-import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton';
+import { has } from 'lodash'
+import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 import FileSelectInput from 'stemn-shared/misc/FileSelectInput/FileSelectInput.jsx'
 import ProjectLinkRemote from 'stemn-shared/misc/Project/ProjectLinkRemote/ProjectLinkRemote.jsx'
 import Form from 'stemn-shared/misc/Forms/Form'
@@ -19,7 +19,7 @@ export default class CloudSettings extends Component {
         <h3>Cloud Storage Folder</h3>
         <p>Select your project's cloud storage folder. STEMN will track all changes to files in this folder.</p>
         <ProjectLinkRemote
-          model={`${projectModel}.fileStoreForm.provider`}
+          model={ `${projectModel}.fileStoreForm.provider` }
           value={ project.fileStoreForm.provider }
         />
         <br />
@@ -53,8 +53,8 @@ export default class CloudSettings extends Component {
         value={ project.data.remote }
       >
         { project.fileStoreForm
-        ? this.renderFormInner()
-        : null }
+          ? this.renderFormInner()
+          : null }
       </Form>
     )
   }

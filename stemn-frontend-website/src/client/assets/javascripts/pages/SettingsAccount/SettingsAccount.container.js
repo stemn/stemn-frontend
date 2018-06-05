@@ -20,7 +20,7 @@ const dispatchToProps = {
 export default class SettingsAccountContainer extends Component {
   render() {
     return (
-      <SettingsAccount {...this.props} />
+      <SettingsAccount { ...this.props } />
     )
   }
 }

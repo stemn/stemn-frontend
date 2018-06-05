@@ -37,7 +37,7 @@ export default class TimelineItem extends Component {
     const isExpanded = expanded || forceExpand
 
     // If it is a comment, we use the comment component to display
-    if (item.event === 'comment' && type === 'thread'){
+    if (item.event === 'comment' && type === 'thread') {
       return (
         <Comment
           commentId={ item.data.comment }
@@ -49,49 +49,48 @@ export default class TimelineItem extends Component {
           </span>
         </Comment>
       )
-    } else {
-      return (
-        <TimelineWrapper style={ eventStyles }>
-          <div className="layout-row layout-align-start-center flex">
-            <Link name="userRoute" params={ userRouteParams } className={ classes.avatar }>
-              <UserAvatar
-                picture={ item.user.picture }
-                size={ 25 }
-                shape="square"
-                name={ item.user.name }
-              />
-            </Link>
-            <div>
-              { type === 'user'
-                ? null
-                : <Link className="bold" name="userRoute" params={ userRouteParams }>{ item.user.name }&nbsp;</Link> }
-              <span className={ classes.item }>
-                <TimelineItemText item={ item } type={ type } entity={ entity } /> - { moment(item.timestamp).fromNow() }
-              </span>
-            </div>
-            { isFirst && <div className={ classes.startMarker } /> }
-            { isLast && <div className={ classes.endMarker } /> }
-          </div>
+    } 
+    return (
+      <TimelineWrapper style={ eventStyles }>
+        <div className="layout-row layout-align-start-center flex">
+          <Link name="userRoute" params={ userRouteParams } className={ classes.avatar }>
+            <UserAvatar
+              picture={ item.user.picture }
+              size={ 25 }
+              shape="square"
+              name={ item.user.name }
+            />
+          </Link>
           <div>
-            { item.event === 'comment' && type !== 'thread' &&
-              <CommentBody
-                commentId={ item.data.comment }
-              /> }
-            { item.eventsGrouped && item.eventsGrouped.length > 0 &&
-              <div className={ classes.group }>
-                { item.eventsGrouped.slice(0, isExpanded ? 100 : groupLimit).map((event, idx) => (
-                  <div key={ idx } className={ classes.item }>
-                    <TimelineItemText className={ classes.item } item={ event } type={ type } entity={ entity } groupItem />
-                  </div>
-                )) }
-                { !isExpanded && item.eventsGrouped.length > groupLimit &&
-                  <div className={ classes.item }><a className="link-primary" onClick={ this.expand }>More...</a></div>
-                }
+            { type === 'user'
+              ? null
+              : <Link className="bold" name="userRoute" params={ userRouteParams }>{ item.user.name }&nbsp;</Link> }
+            <span className={ classes.item }>
+              <TimelineItemText item={ item } type={ type } entity={ entity } /> - { moment(item.timestamp).fromNow() }
+            </span>
+          </div>
+          { isFirst && <div className={ classes.startMarker } /> }
+          { isLast && <div className={ classes.endMarker } /> }
+        </div>
+        <div>
+          { item.event === 'comment' && type !== 'thread' &&
+          <CommentBody
+            commentId={ item.data.comment }
+          /> }
+          { item.eventsGrouped && item.eventsGrouped.length > 0 &&
+          <div className={ classes.group }>
+            { item.eventsGrouped.slice(0, isExpanded ? 100 : groupLimit).map((event, idx) => (
+              <div key={ idx } className={ classes.item }>
+                <TimelineItemText className={ classes.item } item={ event } type={ type } entity={ entity } groupItem />
               </div>
+            )) }
+            { !isExpanded && item.eventsGrouped.length > groupLimit &&
+            <div className={ classes.item }><a className="link-primary" onClick={ this.expand }>More...</a></div>
             }
           </div>
-        </TimelineWrapper>
-      )
-    }
+          }
+        </div>
+      </TimelineWrapper>
+    )
   }
-};
+}

@@ -41,14 +41,14 @@ export default class PreviewPcb extends Component {
       : get(fileData, ['loading'], true)
 
     const layers = fileMeta.parts
-    ? fileMeta.parts.map((item, idx) => ({
-      data: get(fileData, [idx, 'data']),
-      name: item.name,
-    }))
-    : [{
-      data: fileData && fileData.data,
-      name: fileMeta.name,
-    }]
+      ? fileMeta.parts.map((item, idx) => ({
+        data: get(fileData, [idx, 'data']),
+        name: item.name,
+      }))
+      : [{
+        data: fileData && fileData.data,
+        name: fileMeta.name,
+      }]
 
     return (
       <div className="rel-box flex layout-column">

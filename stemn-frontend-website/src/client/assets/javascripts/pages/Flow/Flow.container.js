@@ -12,7 +12,7 @@ const dispatchToProps = {
 export default class FlowContainer extends Component {
   render() {
     return (
-      <Flow {...this.props} />
-    );
+      <Flow { ...this.props } />
+    )
   }
 }

@@ -1,1 +1,1 @@
-export default from './LandingHeader.container';
+export default from './LandingHeader.container'

@@ -15,7 +15,7 @@ const dispatchToProps = {
 export default class OnboardingDownloadContainer extends Component {
   render() {
     return (
-      <OnboardingDownload {...this.props} />
-    );
+      <OnboardingDownload { ...this.props } />
+    )
   }
 }

@@ -5,12 +5,12 @@ import classNames from 'classnames'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
 import Input from 'stemn-shared/misc/Input/Input/Input'
-import Editor from 'stemn-shared/misc/Editor/EditorNew';
+import Editor from 'stemn-shared/misc/Editor/EditorNew'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 
 export default class NewThreadModal extends Component {
   newThread = () => {
-    const { newThread, newComment, modalConfirm, change, board, boardModel, goToThreadRoute } = this.props;
+    const { newThread, newComment, modalConfirm, change, board, boardModel, goToThreadRoute } = this.props
     const group = get(board, 'newThread.group', board.data.groups[0]._id)
     const name = get(board, 'newThread.name')
     const body = get(board, 'newThread.body')
@@ -35,7 +35,7 @@ export default class NewThreadModal extends Component {
           comment: {
             thread: threadId,
             body,
-          }
+          },
         }).then(() => {
           // Clear the data and close the modal
           change(`${boardModel}.newThread`, {})
@@ -55,7 +55,6 @@ export default class NewThreadModal extends Component {
         })
       }
     })
-
   }
   render() {
     const { modalConfirm, board, boardModel } = this.props

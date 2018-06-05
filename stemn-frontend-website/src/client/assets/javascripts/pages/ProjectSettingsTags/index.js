@@ -1,1 +1,1 @@
-export default from './ProjectSettingsTags.container';
+export default from './ProjectSettingsTags.container'

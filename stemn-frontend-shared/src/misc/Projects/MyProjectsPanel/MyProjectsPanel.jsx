@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
 import PublicPrivateIcon from 'stemn-shared/misc/Icons/PublicPrivateIcon'
 import classes from './MyProjectsPanel.scss'
@@ -14,17 +14,17 @@ export default class MyProjectsPanel extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      page: 1
+      page: 1,
     }
   }
   componentWillMount() {
     this.props.getUserProjects({
-      userId: this.props.user._id
+      userId: this.props.user._id,
     })
   }
   more = () => {
     this.setState({
-      page: this.state.page + 1
+      page: this.state.page + 1,
     })
   }
   render() {
@@ -51,18 +51,18 @@ export default class MyProjectsPanel extends Component {
             </a>
           </h3>
         }
-        { !hasNoResults && limitedProjects.map((project) => (
+        { !hasNoResults && limitedProjects.map(project => (
           <Link
             key={ project._id }
             name="projectRoute"
             params={ { projectId: project._id } }
-            className={ classes.row + ' layout-row layout-align-start-center'}
+            className={ `${classes.row} layout-row layout-align-start-center` }
           >
             <PublicPrivateIcon className={ classes.publicIcon } private={ project.private } size={ 20 } />
             <div className="text-ellipsis flex">
               { project.name || 'Untitled Project' }
             </div>
-            <ProviderIcon provider={ project.remote.provider } className={ classes.providerIcon }/>
+            <ProviderIcon provider={ project.remote.provider } className={ classes.providerIcon } />
           </Link>
         ))}
         { hasNoResults && !isLoading &&

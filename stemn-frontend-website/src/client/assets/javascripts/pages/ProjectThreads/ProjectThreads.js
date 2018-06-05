@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import classNames from 'classnames'
 import classes from './ProjectThreads.css'
 import { Row, Col, Container } from 'stemn-shared/misc/Layout'
@@ -16,7 +16,7 @@ import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import { get } from 'lodash'
 import ThreadsEmpty from 'stemn-shared/misc/Threads/ThreadsEmpty'
-import FlipMove from 'react-flip-move';
+import FlipMove from 'react-flip-move'
 import AccordianAnimate from 'stemn-shared/misc/Animation/AccordianAnimate'
 import ThreadFilterUser from 'stemn-shared/misc/Threads/ThreadFilters/ThreadFilterUser'
 import ThreadFilterStatus from 'stemn-shared/misc/Threads/ThreadFilters/ThreadFilterStatus'
@@ -67,12 +67,12 @@ export default class ProjectThreads extends Component {
       ...get(project, 'data.team', []).map(user => ({
         name: user.name,
         value: user._id,
-        onClick: () => { this.changeUserFilter(user._id) }
-      })),{
+        onClick: () => { this.changeUserFilter(user._id) },
+      })), {
         name: 'Any',
         value: undefined,
-        onClick: () => { this.changeUserFilter(undefined) }
-      }
+        onClick: () => { this.changeUserFilter(undefined) },
+      },
     ]
 
     const openFilterOptions = [{
@@ -131,9 +131,9 @@ export default class ProjectThreads extends Component {
         <div className={ classes.content }>
           <LoadingOverlay show={ isLoading } linear hideBg noOverlay />
           { isLoaded
-          ? <Container>
+            ? <Container>
               { (!filterIsDefault) || (filterIsDefault && hasResults)
-              ? <Row className="layout-xs-column layout-gt-xs-row">
+                ? <Row className="layout-xs-column layout-gt-xs-row">
                   <Col className="flex-xs-100 flex-gt-xs-30">
                     <div className={ classes.panel }>
                       <h3 className="text-mini-caps">Groups</h3>
@@ -157,7 +157,7 @@ export default class ProjectThreads extends Component {
                   <Col className="flex">
                     <div className={ classes.threadsPanel }>
                       { hasResults
-                      ? <AccordianAnimate
+                        ? <AccordianAnimate
                           duration={ 300 }
                           itemHeight={ 66 }
                           items={ threads.data }
@@ -168,24 +168,24 @@ export default class ProjectThreads extends Component {
                             leaveAnimation="fade"
                           >
                             { threads.data.map(thread => (
-                               <ThreadRow
-                                 board={ board }
-                                 threadId={ thread._id }
-                                 className={ classes.thread }
-                               />
+                              <ThreadRow
+                                board={ board }
+                                threadId={ thread._id }
+                                className={ classes.thread }
+                              />
                             ))}
                           </FlipMove>
                         </AccordianAnimate>
-                      : <div className={ classNames('text-title-5', classes.noResult) }>
+                        : <div className={ classNames('text-title-5', classes.noResult) }>
                           No Results. <a className="link-primary"  onClick={ this.clearFilter }>Clear Filter</a>
                         </div> }
                     </div>
-                    <Pagination path={ location.pathname } page={ page } noMoreResults={ noMoreResults }/>
+                    <Pagination path={ location.pathname } page={ page } noMoreResults={ noMoreResults } />
                   </Col>
                 </Row>
-              : !isLoading && <ThreadsEmpty /> }
+                : !isLoading && <ThreadsEmpty /> }
             </Container>
-          : null }
+            : null }
         </div>
       </div>
     )

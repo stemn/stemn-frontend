@@ -5,12 +5,12 @@ import { bindActionCreators } from 'redux'
 
 const stateToProps = ({ auth }) => ({
   authToken: auth.authToken,
-  userId: auth.user._id
-});
+  userId: auth.user._id,
+})
 
 const dispatchToProps = {
-  goLogin: () => replace('/login')
-};
+  goLogin: () => replace('/login'),
+}
 
 @connect(stateToProps, dispatchToProps)
 export default class LoginContainer extends Component {
@@ -22,10 +22,10 @@ export default class LoginContainer extends Component {
   }
   onMount = (props) => {
     if (!props.authToken || !props.userId) {
-      props.goLogin();
+      props.goLogin()
     }
   }
   render() {
-    return this.props.children;
+    return this.props.children
   }
 }

@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import { has } from 'lodash';
-import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea';
-import Input from 'stemn-shared/misc/Input/Input/Input';
-import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton';
+import { has } from 'lodash'
+import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
+import Input from 'stemn-shared/misc/Input/Input/Input'
+import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 import { Row, Col } from 'stemn-shared/misc/Layout'
 import Upload from 'stemn-shared/misc/Upload/Upload'
 import classes from './GeneralSettings.css'
@@ -17,7 +17,7 @@ export default class GeneralSettings extends Component {
   }
   saveProject = () => {
     this.props.saveProject({
-      project: this.props.project.data
+      project: this.props.project.data,
     })
   }
   render() {
@@ -28,16 +28,16 @@ export default class GeneralSettings extends Component {
           <Col className="flex-order-xs-2 flex">
             <h3>Project name</h3>
             <Input
-              model={`${entityModel}.data.name`}
-              value={project.data.name}
+              model={ `${entityModel}.data.name` }
+              value={ project.data.name }
               className="dr-input"
               type="text"
             />
             <br />
             <h3>Summary</h3>
             <Textarea
-              model={`${entityModel}.data.blurb`}
-              value={project.data.blurb}
+              model={ `${entityModel}.data.blurb` }
+              value={ project.data.blurb }
               className="dr-input"
             />
             <br />

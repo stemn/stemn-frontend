@@ -115,14 +115,14 @@ const resolveRequest = (endpoint, dispatch) => {
     method: samplePackage.method,
     params,
   })
-    .then((response) => {
+    .then(response => 
       // Dispatch the fulfilled actions
-      return dispatchActions({ actions, dispatch, response, suffix: suffixes.fulfilled, endpoint })
-    })   
-    .catch((response) => {
+      dispatchActions({ actions, dispatch, response, suffix: suffixes.fulfilled, endpoint }),
+    )   
+    .catch(response => 
       // Dispatch the rejected actions
-      return dispatchActions({ actions, dispatch, response, suffix: suffixes.rejected, endpoint })
-    })
+      dispatchActions({ actions, dispatch, response, suffix: suffixes.rejected, endpoint }),
+    )
 }
 
 

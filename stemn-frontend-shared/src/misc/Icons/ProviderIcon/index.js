@@ -1,1 +1,1 @@
-export default from './ProviderIcon';
+export default from './ProviderIcon'

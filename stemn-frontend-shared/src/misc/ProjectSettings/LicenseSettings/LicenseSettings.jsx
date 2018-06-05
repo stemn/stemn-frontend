@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import { licenseData } from 'stemn-shared/misc/Licenses/Licenses.data'
 
@@ -34,11 +34,10 @@ export default class LicenseSettings extends Component {
           style={ { width: '100%' } }
         />
         { licenseInfo && licenseInfo.description
-        ? <p>{ licenseInfo.description } { getLink() }</p>
-        : null }
+          ? <p>{ licenseInfo.description } { getLink() }</p>
+          : null }
       </div>
     )
   }
 }
-
 

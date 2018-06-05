@@ -4,13 +4,13 @@ import LandingLayout from 'layout/LandingLayout'
 import HeroBanner from 'modules/HeroBanner'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import { Container } from 'stemn-shared/misc/Layout'
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet'
 import classes from './OpenSource.scss'
 
 export default class OpenSource extends Component {
   twitterShare = () => {
     const href = 'https://twitter.com/home?status=Great engineering is open. @Stem_Network makes @OpenEngineering easy with Dropbox and Drive integration.'
-    window.open(href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0')
+    window.open(href, 'mywin', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0')
   }
   render() {
     return (
@@ -26,8 +26,8 @@ export default class OpenSource extends Component {
             <p>Working in the open can be frightening. Exposing your work to critique requires bold effort. But with the collective, collaborative genius, together we can push the boundaries and create better work.</p>
             <h3>Be open. Build together.</h3>
             <div className="layout-xs-column layout-row layout-align-center">
-              <Button style={ { margin: '10px'} } className="primary xl" name="loginRoute">Join the movement</Button>
-              <Button style={ { margin: '10px'} } className="secondary xl" onClick={ this.twitterShare }>#OpenEngineering</Button>
+              <Button style={ { margin: '10px' } } className="primary xl" name="loginRoute">Join the movement</Button>
+              <Button style={ { margin: '10px' } } className="secondary xl" onClick={ this.twitterShare }>#OpenEngineering</Button>
             </div>
           </div>
         </HeroBanner>

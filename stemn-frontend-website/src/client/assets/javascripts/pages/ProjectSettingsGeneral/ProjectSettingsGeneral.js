@@ -1,13 +1,13 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import GeneralSettings from 'stemn-shared/misc/ProjectSettings/GeneralSettings';
-import CloudSettings from 'stemn-shared/misc/ProjectSettings/CloudSettings';
-import DeleteSettings from 'stemn-shared/misc/ProjectSettings/DeleteSettings';
-import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
+import GeneralSettings from 'stemn-shared/misc/ProjectSettings/GeneralSettings'
+import CloudSettings from 'stemn-shared/misc/ProjectSettings/CloudSettings'
+import DeleteSettings from 'stemn-shared/misc/ProjectSettings/DeleteSettings'
+import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 
 class ProjectSettingsGeneral extends Component {
   confirmLinkRemote = () => {
-    const { project, auth } = this.props;
+    const { project, auth } = this.props
     this.props.confirmLinkRemote({
       userId: auth.user._id,
       isConnected: project.data.remote.connected,
@@ -21,11 +21,11 @@ class ProjectSettingsGeneral extends Component {
   confirmDeleteProject = () => {
     this.props.confirmDeleteProject({
       projectId: this.props.project.data._id,
-      name: this.props.project.data.name
+      name: this.props.project.data.name,
     })
   }
   render() {
-    const { project, projectModel, saveProject, removeField, addField } = this.props;
+    const { project, projectModel, saveProject, removeField, addField } = this.props
     return (
       <div>
         <InfoPanel>
@@ -52,4 +52,4 @@ class ProjectSettingsGeneral extends Component {
   }
 }
 
-export default ProjectSettingsGeneral;
+export default ProjectSettingsGeneral

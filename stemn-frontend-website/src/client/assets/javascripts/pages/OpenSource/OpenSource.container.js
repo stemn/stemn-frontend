@@ -12,7 +12,7 @@ const dispatchToProps = {
 export default class OpenSourceContainer extends Component {
   render() {
     return (
-      <OpenSource {...this.props} />
-    );
+      <OpenSource { ...this.props } />
+    )
   }
 }

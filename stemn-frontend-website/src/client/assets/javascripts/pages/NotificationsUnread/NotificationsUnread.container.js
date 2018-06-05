@@ -7,11 +7,11 @@ import NotificationsUnread from './NotificationsUnread'
 import { markAsRead } from 'stemn-shared/misc/Notifications/Notifications.actions'
 
 const stateToProps = ({ notifications }) => ({
-  notifications
+  notifications,
 })
 
 const dispatchToProps = {
-  markAsRead
+  markAsRead,
 }
 
 const fetchConfigs = []
@@ -20,6 +20,6 @@ const fetchConfigs = []
 @fetchDataHoc(fetchConfigs)
 export default class NotificationsUnreadContainer extends Component {
   render() {
-    return <NotificationsUnread {...this.props} />
+    return <NotificationsUnread { ...this.props } />
   }
 }

@@ -44,23 +44,23 @@ export const getProject = ({ projectId, size = 'lg', force }) => (dispatch, getS
     : undefined
 
   // if (shouldDownload(size, existingSize) || force) {
-    return dispatch({
-      type: 'PROJECTS/GET_PROJECT',
-      httpPackage: {
-        url: '/api/v1/projects',
-        method: 'GET',
-        staticParams: {
-          select: fields[size],
-        },
-        params: {
-          ids: projectId,
-        },
+  return dispatch({
+    type: 'PROJECTS/GET_PROJECT',
+    httpPackage: {
+      url: '/api/v1/projects',
+      method: 'GET',
+      staticParams: {
+        select: fields[size],
       },
-      meta: {
-        projectId,
-        size,
+      params: {
+        ids: projectId,
       },
-    })
+    },
+    meta: {
+      projectId,
+      size,
+    },
+  })
   // }
 }
 

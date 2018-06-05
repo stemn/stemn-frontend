@@ -1,10 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 import { connect } from  'react-redux'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import classes from './LocationSearch.css'
 
-import Autosuggest from 'stemn-shared/misc/Autosuggest/Autosuggest.container';
-import Highlight from 'stemn-shared/misc/Autosuggest/Highlight';
+import Autosuggest from 'stemn-shared/misc/Autosuggest/Autosuggest.container'
+import Highlight from 'stemn-shared/misc/Autosuggest/Highlight'
 
 @connect()
 export default class LocationSearch extends Component {
@@ -26,18 +26,16 @@ export default class LocationSearch extends Component {
     }
   }
 
-  renderResult = (suggestion, { query }) => {
-    return (
-      <div className="layout-row layout-align-start-center">
-        <div style={ { marginLeft: '10px' } } className="flex">
-          <Highlight text={ suggestion.name } query={ query } hightlightClass={ classes.highlight }/>
-        </div>
+  renderResult = (suggestion, { query }) => (
+    <div className="layout-row layout-align-start-center">
+      <div style={ { marginLeft: '10px' } } className="flex">
+        <Highlight text={ suggestion.name } query={ query } hightlightClass={ classes.highlight } />
       </div>
-    );
-  }
+    </div>
+  )
 
   render() {
-    const { value, cacheKey } = this.props;
+    const { value, cacheKey } = this.props
 
     return (
       <Autosuggest
@@ -48,6 +46,6 @@ export default class LocationSearch extends Component {
         entityType="location"
         setValue
       />
-    );
+    )
   }
 }

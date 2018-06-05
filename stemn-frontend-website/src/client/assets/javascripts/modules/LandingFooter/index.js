@@ -1,1 +1,1 @@
-export default from './LandingFooter';
+export default from './LandingFooter'

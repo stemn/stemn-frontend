@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton';
-import TagEdit from 'stemn-shared/misc/Tags/TagEdit';
+import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
+import TagEdit from 'stemn-shared/misc/Tags/TagEdit'
 import FieldSearch from 'stemn-shared/misc/Search/FieldSearch'
 
 export default class GeneralSettings extends Component {
@@ -14,23 +14,23 @@ export default class GeneralSettings extends Component {
   }
   saveProject = () => {
     this.props.saveProject({
-      project: this.props.project.data
+      project: this.props.project.data,
     })
   }
   selectField = (field) => {
     this.props.addField({
       projectId: this.props.project.data._id,
-      field
+      field,
     })
   }  
   removeField = (fieldId) => {
     this.props.removeField({
       projectId: this.props.project.data._id,
-      fieldId
+      fieldId,
     })
   }
   render() {
-    const { entityModel, project, saveProject } = this.props;
+    const { entityModel, project, saveProject } = this.props
     return (
       <div>
         <h3>Field Tags</h3>
@@ -41,13 +41,13 @@ export default class GeneralSettings extends Component {
         />
         <br />
         <div>
-          { project.data.fields.map((field) => (
+          { project.data.fields.map(field => (
             <TagEdit 
               key={ field._id }
               text={ field.name }
-              className='primary'
+              className="primary"
               style={ { marginBottom: '6px' } }
-              onClick={ () => this.removeField(field._id)}
+              onClick={ () => this.removeField(field._id) }
             />
           ))}
         </div>

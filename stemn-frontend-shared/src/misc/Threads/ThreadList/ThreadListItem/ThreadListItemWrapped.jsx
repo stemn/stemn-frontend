@@ -1,26 +1,26 @@
-import React, { Component, PropTypes } from 'react';
-import { cardHover, cardDrop, beginDrag, endDrag } from './ThreadListItem.drag.config.js';
-import { DragSource, DropTarget } from 'react-dnd';
+import React, { Component, PropTypes } from 'react'
+import { cardHover, cardDrop, beginDrag, endDrag } from './ThreadListItem.drag.config.js'
+import { DragSource, DropTarget } from 'react-dnd'
 const ItemTypes = {
-  CARD: 'card'
+  CARD: 'card',
 }
 const cardSource = {
   beginDrag,
-  endDrag
-};
+  endDrag,
+}
 
 const cardTarget = {
   hover: cardHover,
   drop: cardDrop,
-};
+}
 
 @DropTarget(ItemTypes.CARD, cardTarget, connect => ({
-  connectDropTarget: connect.dropTarget()
+  connectDropTarget: connect.dropTarget(),
 }))
 @DragSource(ItemTypes.CARD, cardSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
   connectDragPreview: connect.dragPreview(),
-  isDragging: monitor.isDragging()
+  isDragging: monitor.isDragging(),
 }))
 export default class ThreadListItemWrapped extends Component {
   static propTypes = {
@@ -32,17 +32,17 @@ export default class ThreadListItemWrapped extends Component {
     item: PropTypes.string.isRequired,
     moveCard: PropTypes.func.isRequired,
     beginDrag: PropTypes.func.isRequired,
-    endDrag: PropTypes.func.isRequired
+    endDrag: PropTypes.func.isRequired,
   };
 
   render() {
-    const { isDragging, connectDragSource, connectDropTarget, children, id } = this.props;
+    const { isDragging, connectDragSource, connectDropTarget, children, id } = this.props
     return connectDragSource(connectDropTarget(
-      <div key={id}>
+      <div key={ id }>
         {children}
-      </div>
-    ));
+      </div>,
+    ))
   }
 }
 
-//style={{transform: 'translate3d(0,0,0)'}}
+// style={{transform: 'translate3d(0,0,0)'}}

@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton';
-import TagEdit from 'stemn-shared/misc/Tags/TagEdit';
+import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
+import TagEdit from 'stemn-shared/misc/Tags/TagEdit'
 import OrganisationSearch from 'stemn-shared/misc/Search/OrganisationSearch'
 
 export default class OrganisationSettings extends Component {
@@ -13,23 +13,23 @@ export default class OrganisationSettings extends Component {
   }
   saveProject = () => {
     this.props.saveProject({
-      project: this.props.project.data
+      project: this.props.project.data,
     })
   }
   addOrganisation = (organisation) => {
     this.props.addOrganisation({
       projectId: this.props.project.data._id,
-      organisation
+      organisation,
     })
   }  
   removeOrganisation = (organisationId) => {
     this.props.removeOrganisation({
       projectId: this.props.project.data._id,
-      organisationId
+      organisationId,
     })
   }
   render() {
-    const { project, saveProject } = this.props;
+    const { project, saveProject } = this.props
     return (
       <div>
         <h3>Organisation Tags</h3>
@@ -40,12 +40,12 @@ export default class OrganisationSettings extends Component {
         />
         <br />
         <div>
-          { project.data.organisations.map((organisation) => (
+          { project.data.organisations.map(organisation => (
             <TagEdit 
               key={ organisation._id }
               text={ organisation.name }
-              className='primary'
-              onClick={ () => this.removeOrganisation(organisation._id)}
+              className="primary"
+              onClick={ () => this.removeOrganisation(organisation._id) }
             />
           ))}
         </div>

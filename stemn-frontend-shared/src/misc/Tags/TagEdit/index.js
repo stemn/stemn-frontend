@@ -1,1 +1,1 @@
-export default from './TagEdit.jsx';
+export default from './TagEdit.jsx'

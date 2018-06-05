@@ -1,1 +1,1 @@
-export default from './UserLinkedAccountSettings';
+export default from './UserLinkedAccountSettings'

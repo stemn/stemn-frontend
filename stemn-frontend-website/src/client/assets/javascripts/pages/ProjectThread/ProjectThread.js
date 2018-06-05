@@ -13,7 +13,7 @@ import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
 import CommentNew from 'stemn-shared/misc/Comments/Comment/CommentNew.jsx'
 import MdDone from 'react-icons/md/done'
 import MdAdd from 'react-icons/md/add'
-import MdMoreHoriz from 'react-icons/md/more-horiz';
+import MdMoreHoriz from 'react-icons/md/more-horiz'
 import MdAccessTime from 'react-icons/md/access-time'
 import ThreadLabelDots from 'stemn-shared/misc/Threads/ThreadLabelDots/ThreadLabelDots.jsx'
 import Link from 'stemn-shared/misc/Router/Link'
@@ -30,14 +30,14 @@ import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList'
 import SocialButton from 'stemn-shared/misc/Social/SocialButton'
 import { permissionsIsMin } from 'stemn-shared/misc/Auth/Auth.utils'
 import { get, has } from 'lodash'
-import { Helmet } from "react-helmet"
+import { Helmet } from 'react-helmet'
 import { projectThreadsRoute, notFound } from 'route-actions'
 
 export default class ProjectThread extends Component {
   updateThread = () => {
     setTimeout(() => this.props.updateThread({
-      thread: this.props.thread.data
-    }), 1);
+      thread: this.props.thread.data,
+    }), 1)
   }
   dropdownOptions = [{
     value: false,
@@ -54,8 +54,8 @@ export default class ProjectThread extends Component {
         threadId: thread.data._id,
         boardId: thread.data.board,
       })
-      .then(() => pushRoute(projectThreadsRoute({projectId: project.data._id})))
-    }
+        .then(() => pushRoute(projectThreadsRoute({ projectId: project.data._id })))
+    },
   }]
   sidebarEdit = () => {
     const { thread, project, board, threadModel } = this.props
@@ -83,7 +83,7 @@ export default class ProjectThread extends Component {
             className={ classes.miniButton }
             title="Group Settings"
           >
-            <MdAdd size={ 16 }/>
+            <MdAdd size={ 16 } />
           </SimpleIconButton>
           <PopoverDropdown
             options={ groupOptions }
@@ -97,7 +97,7 @@ export default class ProjectThread extends Component {
         </div>
         <div className={ classes.panel }>
           <div className="text-mini-caps">Due Date</div>
-           <DatePicker
+          <DatePicker
             model={ `${threadModel}.data.due` }
             onChange={ this.updateThread }
             value={ thread.data.due }
@@ -111,7 +111,7 @@ export default class ProjectThread extends Component {
             className={ classes.miniButton }
             title="Group Settings"
           >
-            <MdAdd size={ 16 }/>
+            <MdAdd size={ 16 } />
           </SimpleIconButton>
           <LabelSelect
             model={ `${threadModel}.data.labels` }
@@ -128,7 +128,7 @@ export default class ProjectThread extends Component {
             className={ classes.miniButton }
             title="Group Settings"
           >
-            <MdAdd size={ 16 }/>
+            <MdAdd size={ 16 } />
           </SimpleIconButton>
           <UserSelect
             model={ `${threadModel}.data.users` }
@@ -174,7 +174,7 @@ export default class ProjectThread extends Component {
         { thread.data.users.length >= 0 &&
         <div className={ classes.panel }>
           <div className="text-mini-caps">Assignees</div>
-          { thread.data.users.map(user => <UserMinimalRow key={ user._id } user={ user }/> )}
+          { thread.data.users.map(user => <UserMinimalRow key={ user._id } user={ user } />)}
         </div> }
       </Col>
     )
@@ -186,11 +186,11 @@ export default class ProjectThread extends Component {
       replaceRoute(notFound())
     }
 
-    if (thread && thread.data && board && board.data && project && project.data ) {
+    if (thread && thread.data && board && board.data && project && project.data) {
       const group = board.data.groups.find(group => group._id === thread.data.group)
 
       const userRouteParams = {
-        userId: thread.data.owner._id
+        userId: thread.data.owner._id,
       }
       const threadRouteParams = {
         projectId: project.data._id,
@@ -210,34 +210,34 @@ export default class ProjectThread extends Component {
               <title>{ `Thread: ${thread.data.name} by ${thread.data.owner.name}` }</title>
             </Helmet>
           }
-        <SubSubHeader>
-          <div className="rel-box">
-            <Breadcrumbs>
-              <Crumb name="projectThreadsRoute" params={ { projectId: project.data._id } } text="Threads" />
-              <Crumb name="projectThreadsRoute" params={ { projectId: project.data._id } } query={ { groups: [ group._id ]} } text={ group.name } />
-              <Crumb text={ thread.data.name || 'Untitled Thread' } />
-            </Breadcrumbs>
-            { canEdit &&
+          <SubSubHeader>
+            <div className="rel-box">
+              <Breadcrumbs>
+                <Crumb name="projectThreadsRoute" params={ { projectId: project.data._id } } text="Threads" />
+                <Crumb name="projectThreadsRoute" params={ { projectId: project.data._id } } query={ { groups: [group._id] } } text={ group.name } />
+                <Crumb text={ thread.data.name || 'Untitled Thread' } />
+              </Breadcrumbs>
+              { canEdit &&
               <Popover preferPlace="below">
                 <SimpleIconButton className={ classes.settingsButton }>
-                  <MdMoreHoriz size="20px"/>
+                  <MdMoreHoriz size="20px" />
                 </SimpleIconButton>
                 <PopoverMenuList menu={ this.menu } />
               </Popover>
-            }
+              }
               <br />
               <h2 className={ classes.title }>
                 { edit
-                ? <Input
+                  ? <Input
                     model={ `${threadModel}.data.name` }
                     className="dr-input"
                     placeholder="Thread Title"
                     value={ thread.data.name }
                   />
-                : <span>{ thread.data.name || 'Untitled Thread'}</span> }
+                  : <span>{ thread.data.name || 'Untitled Thread'}</span> }
                 { edit
-                ? null
-                : <span className={ classes.number }>&nbsp;{ thread.data.threadNumber ? `#T${thread.data.threadNumber}` : null }</span> }
+                  ? null
+                  : <span className={ classes.number }>&nbsp;{ thread.data.threadNumber ? `#T${thread.data.threadNumber}` : null }</span> }
               </h2>
               <Row className="sm layout-xs-column layout-gt-xs-row">
                 <Col className={ classNames('sm layout-row layout-align-start-center', classes.meta) }>
@@ -251,7 +251,7 @@ export default class ProjectThread extends Component {
                       name={ thread.data.owner.name }
                       picture={ thread.data.owner.picture }
                       size={ 20 }
-                      shape='square'
+                      shape="square"
                     />
                     <b>{ thread.data.owner.name }</b>
                   </Link>
@@ -266,7 +266,7 @@ export default class ProjectThread extends Component {
                     entityId={ thread.data._id }
                   />
                   { canEdit
-                  ? <PopoverDropdown
+                    ? <PopoverDropdown
                       className="flex-xs"
                       value={ thread.data.complete }
                       model={ `${threadModel}.data.complete` }
@@ -274,32 +274,32 @@ export default class ProjectThread extends Component {
                       onChange={ this.updateThread }
                       style={ { marginLeft: '15px' } }
                     />
-                  : <Tag className={ classNames(!thread.data.complete ? 'warn': 'success', 'flex-xs') } style={{ margin: '0px', marginLeft: '15px'}}>
-                      <MdDone size={ 20 } style={ { marginRight: '5px' } }/>
-                      { thread.data.complete ? 'Thread Closed': 'Thread Open' }
+                    : <Tag className={ classNames(!thread.data.complete ? 'warn' : 'success', 'flex-xs') } style={ { margin: '0px', marginLeft: '15px' } }>
+                      <MdDone size={ 20 } style={ { marginRight: '5px' } } />
+                      { thread.data.complete ? 'Thread Closed' : 'Thread Open' }
                     </Tag>
                   }
                 </Col>
                 { canEdit &&
-                  <Col className="sm layout-column">
-                    { edit
+                <Col className="sm layout-column">
+                  { edit
                     ? <Button
-                        className="primary"
-                        name="projectThreadRoute"
-                        params={ threadRouteParams }
-                        onClick={ this.updateThread }
-                      >
+                      className="primary"
+                      name="projectThreadRoute"
+                      params={ threadRouteParams }
+                      onClick={ this.updateThread }
+                    >
                         Save
-                      </Button>
+                    </Button>
                     : <Button
-                        className="primary"
-                        name="threadEditRoute"
-                        params={ threadRouteParams }
-                      >
+                      className="primary"
+                      name="threadEditRoute"
+                      params={ threadRouteParams }
+                    >
                         Edit
-                      </Button>
-                    }
-                  </Col>
+                    </Button>
+                  }
+                </Col>
                 }
               </Row>
             </div>
@@ -325,15 +325,14 @@ export default class ProjectThread extends Component {
                 />
               </Col>
               { edit
-              ? this.sidebarEdit()
-              : this.sidebarNonEdit() }
+                ? this.sidebarEdit()
+                : this.sidebarNonEdit() }
             </Row>
           </Container>
         </div>
       )
-    } else {
-      return null
-    }
+    } 
+    return null
   }
 }
 
