@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "lint": "./node_modules/.bin/eslint  --ext .jsx --ext .js ./",
+    "lint": "eslint stemn-frontend-website/src/ --ext .jsx --ext .js",
     "lint:fix": "npm run lint -- --fix",
     "install:all": "sh ./scripts/install.sh"
   },
