@@ -10,9 +10,9 @@
   "main": "dist/main/index.js",
   "scripts": {
     "install:link": "sh ./scripts/install.sh",
+    "deploy": "sh ./scripts/deploy.sh",
     "analyse:electron": "webpack-bundle-analyzer ./reports/electron-stats.json",
     "analyse:renderer": "webpack-bundle-analyzer ./reports/renderer-stats.json",
-    "deploy": "node ./scripts/exec ./scripts/deploy.sh",
     "prebuild": "rimraf dist",
     "build": "npm run build:electron && npm run build:renderer",
     "build:electron": "better-npm-run build:electron",

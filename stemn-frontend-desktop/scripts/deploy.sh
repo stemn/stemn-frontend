@@ -1,23 +1,20 @@
-#!/bin/bash
-echo "-------------------- Pushing source to private repo --------------------"
+# Run this script from the `stemn-frontend-desktop` folder
+echo "-------------------- Pushing source to this repo ----------------------"
 git config --global core.safecrlf false
 git add .
 git commit -m 'release'
 git push
-echo "-------------------- Copying dist to releases repo --------------------"
+echo "------------------- Copy dist to stemn-desktop repo -------------------"
 cd ../../stemn-desktop
 git pull
 rm -rf ./dist
 rm -rf ./build
-cp -r ../stemn-frontend/electronNew/dist .
-cp -r ../stemn-frontend/electronNew/build .
-cp -r ../stemn-frontend/electronNew/package.json .
-echo "---------------------- Pushing releases to repo -----------------------"
+cp -r ../stemn-frontend/stemn-frontend-website/dist .
+cp -r ../stemn-frontend/stemn-frontend-website/build .
+cp -r ../stemn-frontend/stemn-frontend-website/package.json .
+echo "-------------- Commit changes to the stemn-desktop repo ---------------"
 git config --global core.safecrlf false
 git add .
 git commit -am 'release'
 git push
-# xdg-open https://github.com/Stemn/Stemn-Desktop/releases
-# xdg-open https://travis-ci.org/Stemn/Stemn-Desktop
-# xdg-open https://ci.appveyor.com/project/MrBlenny/stemn-desktop
 echo "------------------- Push, complete. CI is building --------------------"

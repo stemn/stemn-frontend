@@ -4,7 +4,7 @@ import { create as createPreview } from 'electronNew/app/main/createPreviewWindo
 import querystring from 'querystring'
 
 export const create = ({ type, props }) => {
-  if (type == 'PREVIEW') {
+  if (type === 'PREVIEW') {
     const queryParams = querystring.stringify(props)
     createPreview({ uri: queryParams ? `?${queryParams}` : '' })
   } else {

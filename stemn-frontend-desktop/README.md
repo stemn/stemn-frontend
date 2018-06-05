@@ -31,7 +31,7 @@ People with access should:
 1. Bump the version in the `package.json` AND `app/package.json`
 2. Build the app using `npm run build` - make sure it works using `npm run electron`
 3. Create a new tag on [GitHub](https://github.com/Stemn/Stemn-Desktop/releases)
-4. Run the `release.sh/bat`. This will build the dist, copy into the release repo and push it up to the CI servers.
+4. `npm run deploy`. This will copy the dist, copy into the release repo and push it up to the CI servers.
 5. Monitor CI status at [AppVeyor](https://ci.appveyor.com/project/MrBlenny/stemn-desktop) and [Travis](https://travis-ci.org/Stemn/Stemn-Desktop)
 6. Releases will appear on [GitHub](https://github.com/Stemn/Stemn-Desktop/releases). Test these releases.
 7. Publish the releases on GitHub.
