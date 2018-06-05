@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "lint": "./node_modules/.bin/eslint  --ext .jsx --ext .js ./",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "install:all": "sh ./scripts/install.sh"
   },
   "repository": {
     "type": "git",
