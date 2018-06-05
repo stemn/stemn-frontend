@@ -1,8 +1,12 @@
+# Stemn Frontend Shared
+
+This code is shared between `stemn-frontend-website` and `stemn-frontend-desktop`. It is designed to be installed as a dependency in these projects using `npm link`.
+
 ## Usage
 
-This is code shared between Stemns two products:
+* `npm link` in the root of this folder.
+* `cd ../stemn-frontend-desktop && npm link stemn-frontend-shared` to install it in the desktop project
+* `cd ../stemn-frontend-website && npm link stemn-frontend-shared` to install it in the desktop project
 
-* Stemn desktop ([stemn/stemn-frontend/electronNew](https://github.com/stemn/stemn-frontend/tree/master/electronNew)) 
-* Stemn website ([stemn/stemn-frontend/websiteNew](https://github.com/stemn/stemn-frontend/tree/master/websiteNew))
-
-If you want to work on either of these projects, you'll need this repo. There are instructions in the `websiteNew` and `electronNew` readmes.
+### Note
+* Mark dependencies as `peerDependencies`. These should be installed in the parent project to prevent duplication.
