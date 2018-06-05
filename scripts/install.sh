@@ -1,3 +1,6 @@
+# Install root deps
+npm install
+
 # cd into a package so our following commands line up :)
 cd ./stemn-frontend-desktop
 
