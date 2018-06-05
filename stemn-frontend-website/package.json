@@ -1,29 +1,8 @@
 {
-  "name": "stemn-website-new",
-  "description": "A starter project for modern React apps with Redux",
+  "name": "stemn-frontend-website",
   "version": "1.1.1",
   "author": "David Revay <david@stemn.com>",
   "license": "MIT",
-  "keywords": [
-    "react",
-    "redux",
-    "es6",
-    "hmr",
-    "hot",
-    "babel",
-    "webpack",
-    "sentry",
-    "architecture",
-    "webpack-dev-middleware",
-    "webpack-hot-middleware",
-    "boilerplate",
-    "starter"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/nicksp/redux-webpack-es6-boilerplate.git"
-  },
-  "bugs": "https://github.com/nicksp/redux-webpack-es6-boilerplate/issues",
   "scripts": {
     "clean:build": "rimraf build",
     "build:html": "node ./scripts/buildHtml.js",
@@ -37,8 +16,6 @@
     "analyse:graph": "webpack-bundle-analyzer ./reports/stats.json",
     "postbuild": "npm run build:html",
     "build:serve": "http-server build/client -p 3000 --cors -o -c10",
-    "lint": "./node_modules/.bin/eslint  --ext .jsx --ext .js ./src/client/assets/javascripts",
-    "lint:fix": "./node_modules/.bin/eslint  --ext .jsx --ext .js --fix ./src/client/assets/javascripts",
     "test": "mocha --compilers js:babel-core/register,css:./test/unit/cssNullCompiler.js --require ./test/unit/testHelper.js --recursive ./test/unit",
     "test:watch": "npm run test -- --watch",
     "tunnel": "lt --port 3000",

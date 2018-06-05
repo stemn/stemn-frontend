@@ -1,7 +1,8 @@
 {
   "name": "stemn-frontend",
   "version": "1.0.0",
-  "main": "index.js",
+  "author": "David Revay <david@stemn.com>",
+  "license": "MIT",
   "scripts": {
     "lint": "eslint stemn-frontend-website/src/ stemn-frontend-shared/src/ stemn-frontend-desktop/app/ --ext .jsx --ext .js",
     "lint:shared": "eslint stemn-frontend-shared/src/ --ext .jsx --ext .js",
@@ -14,8 +15,6 @@
     "type": "git",
     "url": "git+https://github.com/stemn/stemn-frontend.git"
   },
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/stemn/stemn-frontend/issues"
   },

@@ -1,10 +1,8 @@
 {
   "name": "stemn-frontend-shared",
   "version": "1.0.0",
-  "scripts": {
-  },
-  "author": "",
-  "license": "ISC",
+  "author": "David Revay <david@stemn.com>",
+  "license": "MIT",
   "peerDependencies": {
     "javascript-detect-element-resize": "^0.5.3",
     "react-waypoint": "^4.0.4",
