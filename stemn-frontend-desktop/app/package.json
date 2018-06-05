@@ -101,6 +101,7 @@
     "url-loader": "^0.5.7",
     "webpack-hot-middleware": "^2.18.0",
     "winreg": "^1.2.2",
-    "ws": "^3.0.0"
+    "ws": "^3.0.0",
+    "whats-that-gerber": "git+https://git@github.com/stemn/whats-that-gerber.git"
   }
 }
