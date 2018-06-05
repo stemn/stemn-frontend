@@ -9,6 +9,7 @@
   },
   "main": "dist/main/index.js",
   "scripts": {
+    "install:link": "sh ./scripts/install.sh",
     "analyse:electron": "webpack-bundle-analyzer ./reports/electron-stats.json",
     "analyse:renderer": "webpack-bundle-analyzer ./reports/renderer-stats.json",
     "deploy": "node ./scripts/exec ./scripts/deploy.sh",

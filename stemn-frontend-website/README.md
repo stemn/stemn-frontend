@@ -5,8 +5,7 @@ Anyone can get the [Stemn Website](https://stemn.com/) running locally and devel
 ## Install
 1. Make sure you have `git` and `node` installed.
 2. Clone the parent repo: `stemn-frontend`.
-3. `cd` into `stemn-frontend-shared` and run `npm link` to initiate the npm link.
-4. `cd` into `stemn-frontend-website` and run `npm install` and then `npm link stemn-frontend-shared`
+3. `cd` into this folder (stemn-frontend-website) and run `npm run install:link`
 
 ## Build Development
 * `npm start` to build the src

@@ -4,6 +4,7 @@
   "author": "David Revay <david@stemn.com>",
   "license": "MIT",
   "scripts": {
+    "install:link": "sh ./scripts/install.sh",
     "clean:build": "rimraf build",
     "build:html": "node ./scripts/buildHtml.js",
     "prestart": "npm run clean:build",

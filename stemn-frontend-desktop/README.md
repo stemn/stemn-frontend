@@ -5,9 +5,7 @@ Anyone can get the [Stemn Desktop App](https://stemn.com/download) running local
 ### Install
 1. Make sure you have `git` and `node` installed.
 2. Clone the parent repo: `stemn-frontend`.
-3. `cd` into `stemn-frontend-shared` and run `npm link` to initiate the npm link.
-4. `cd` into `stemn-frontend-desktop` and run `npm install`
-5. `cd` into `stemn-frontend-desktop/app` and run `npm install` and then `npm link stemn-frontend-shared`
+3. `cd` into this folder (stemn-frontend-desktop) and run `npm run install:link`
 
 ## Build Development
 
