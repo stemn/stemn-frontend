@@ -1,19 +1,19 @@
-import { connect } from 'react-redux';
-import LoginPage from 'stemn-shared/pages/Login/Login';
+import { connect } from 'react-redux'
+import LoginPage from 'stemn-shared/pages/Login/Login'
 
 import {
   nextBackground,
   authenticate,
-  login } from 'stemn-shared/misc/Auth/Auth.actions.js';
+  login } from 'stemn-shared/misc/Auth/Auth.actions.js'
 
 function mapStateToProps({ auth }) {
-  return { auth };
+  return { auth }
 }
 
 const mapDispatchToProps = {
   nextBackground,
   authenticate,
-  login
+  login,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)

@@ -9,7 +9,7 @@ export default function getRootReducer() {
     routing,
   }
 
-  const splitReducers = combineReducers({ ...reducers});
+  const splitReducers = combineReducers({ ...reducers })
   return (state, action) => {
     const isStoreAction = action && action.type && action.type.startsWith('STORE/')
     return isStoreAction

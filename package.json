@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint stemn-frontend-website/src/ stemn-frontend-shared/src/ --ext .jsx --ext .js",
+    "lint": "eslint stemn-frontend-website/src/ stemn-frontend-shared/src/ stemn-frontend-desktop/app/ --ext .jsx --ext .js",
+    "lint:shared": "eslint stemn-frontend-shared/src/ --ext .jsx --ext .js",
+    "lint:desktop": "eslint stemn-frontend-desktop/app/ --ext .jsx --ext .js",
+    "lint:website": "eslint stemn-frontend-website/src/ --ext .jsx --ext .js",
     "lint:fix": "npm run lint -- --fix",
     "install:all": "sh ./scripts/install.sh"
   },

@@ -22,17 +22,17 @@ import Header from 'stemn-shared/misc/Header/Header.jsx'
 
 export default class PreviewPage extends Component {
   clickFileOrFolder = ({ file }) => {
-//    const { pushRoute } = this.props;
-//    const projectId = this.props.file.data.project._id;
-//    if (file.type == 'file') {
-//      pushRoute(fileRoute({fileId, projectId, revisionId}));
-//    } else if (projectId){
-//      pushRoute(projectRoute({projectId}));
-//    }
+    //    const { pushRoute } = this.props;
+    //    const projectId = this.props.file.data.project._id;
+    //    if (file.type == 'file') {
+    //      pushRoute(fileRoute({fileId, projectId, revisionId}));
+    //    } else if (projectId){
+    //      pushRoute(projectRoute({projectId}));
+    //    }
 
     const { fileId, revisionId, project: { _id: projectId } } = file
     const { pushRoute, showWindow } = this.props
-    if (file.type == 'file'){
+    if (file.type == 'file') {
       // It is a file - open the file
       pushRoute({
         pathname: '/',
@@ -40,17 +40,17 @@ export default class PreviewPage extends Component {
           fileId,
           revisionId,
           projectId,
-        }
+        },
       })
-    } else if(projectId){
+    } else if (projectId) {
       // It is a folder (and is linked to a project) - open the folder
       pushRoute({
         pathname: `/project/${projectId}/files/${fileId}`,
-        state: { meta : { scope: ['main'] } }
+        state: { meta: { scope: ['main'] } },
       })
       showWindow('main')
-    } else{
-      console.log('Not linked to project - open folder');
+    } else {
+      console.log('Not linked to project - open folder')
     }
   }
   onSelect = (file) => {
@@ -68,8 +68,8 @@ export default class PreviewPage extends Component {
   render() {
     const { compare: { mode, selected1, selected2 }, file, timeline, relatedThreads } = this.props
     const items = orderItemsByTime(mode, selected1, selected2)
-    const file1 = get(items, [0, 'data' ])
-    const file2 = get(items, [1, 'data' ])
+    const file1 = get(items, [0, 'data'])
+    const file2 = get(items, [1, 'data'])
     const timelineData = get(timeline, 'data', [])
     const revisions = getRevisions(timelineData)
     const displayFileHeader = ['sideBySide', 'aboveAndBelow'].includes(mode)
@@ -97,7 +97,7 @@ export default class PreviewPage extends Component {
           <div className="divider" />
         </Header>
         <div className="layout-row flex rel-box">
-          <div className={ classNames(classes.preview, 'layout-column flex')}>
+          <div className={ classNames(classes.preview, 'layout-column flex') }>
             <FileCompareInner
               className="layout-column flex"
               project={ file.data.project }
@@ -146,7 +146,7 @@ export default class PreviewPage extends Component {
   }
 }
 
-//export const Component = React.createClass({
+// export const Component = React.createClass({
 //
 //  // Mounting
 //  onMount(nextProps, prevProps){
@@ -194,6 +194,6 @@ export default class PreviewPage extends Component {
 //      </div>
 //    );
 //  }
-//});
+// });
 //
 

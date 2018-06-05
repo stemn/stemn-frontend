@@ -1,2 +1,4 @@
 stemn-frontend-website/src/client/assets/static
 stemn-frontend-shared/src/assets
+stemn-frontend-desktop/app/node_modules
+stemn-frontend-desktop/app/static

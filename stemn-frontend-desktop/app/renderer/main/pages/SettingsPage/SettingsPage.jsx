@@ -1,15 +1,15 @@
 // Container Core
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
 // Container Actions
-import * as UsersActions from 'stemn-shared/misc/Users/Users.actions.js';
+import * as UsersActions from 'stemn-shared/misc/Users/Users.actions.js'
 
 // Component Core
-import React from 'react';
+import React from 'react'
 
 // Styles
-import classNames from 'classnames';
+import classNames from 'classnames'
 import classes from '../ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css'
 
 // Sub Components
@@ -17,53 +17,51 @@ import Header from 'stemn-shared/misc/Header/Header.jsx'
 import NavPill from 'stemn-shared/misc/Buttons/NavPill/NavPill'
 
 
-
-/////////////////////////////////////////////////////////////////////////////
-///////////////////////////////// COMPONENT /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////////////////////////
+// /////////////////////////////// COMPONENT /////////////////////////////////
+// ///////////////////////////////////////////////////////////////////////////
 
 export const Component = React.createClass({
   render() {
-    const { auth } = this.props;
+    const { auth } = this.props
     return (
       <div className="layout-column flex">
         <Header>
           <b>Settings</b>
         </Header>
-        <div className={classes.container+' layout-row flex scroll-box'}>
-          <div style={{width: '250px', marginRight: '15px'}}>
-            <div className={classes.panel} style={{padding: '0px'}}>
+        <div className={ `${classes.container} layout-row flex scroll-box` }>
+          <div style={ { width: '250px', marginRight: '15px' } }>
+            <div className={ classes.panel } style={ { padding: '0px' } }>
               <NavPill className="primary" href="https://dev.stemn.com/settings">More settings: stemn.com</NavPill>
             </div>
-            <div className={classes.panel} style={{padding: '0px'}}>
+            <div className={ classes.panel } style={ { padding: '0px' } }>
               <NavPill to="/settings/application">Application</NavPill>
               { auth.authToken
-              ? <NavPill to="/settings/account">Account</NavPill>
-              : <NavPill to="/login">Login</NavPill> }
+                ? <NavPill to="/settings/account">Account</NavPill>
+                : <NavPill to="/login">Login</NavPill> }
             </div>
           </div>
-          <div style={{width: '650px'}}>
+          <div style={ { width: '650px' } }>
             {this.props.children}
           </div>
         </div>
       </div>
-    );
+    )
+  },
+})
 
-  }
-});
+// ///////////////////////////////////////////////////////////////////////////
+// /////////////////////////////// CONTAINER /////////////////////////////////
+// ///////////////////////////////////////////////////////////////////////////
 
-/////////////////////////////////////////////////////////////////////////////
-///////////////////////////////// CONTAINER /////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-
-function mapStateToProps({auth}, {params}) {
+function mapStateToProps({ auth }, { params }) {
   return {
     auth,
-  };
+  }
 }
 
 function mapDispatchToProps(dispatch) {
   return {}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps, mapDispatchToProps)(Component)

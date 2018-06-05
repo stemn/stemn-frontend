@@ -1,27 +1,27 @@
-import electron from 'electron';
+import electron from 'electron'
 
 // Container Core
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 
 // Component Core
-import React from 'react';
+import React from 'react'
 
 // Sub Components
-import TitleBar from 'stemn-shared/misc/TitleBar/TitleBar';
+import TitleBar from 'stemn-shared/misc/TitleBar/TitleBar'
 
 
-///////////////////////////////// COMPONENT /////////////////////////////////
+// /////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
   componentWillReceiveProps(nextProps, prevProps) {
-    if(nextProps.auth.authToken && nextProps.auth.user._id){
+    if (nextProps.auth.authToken && nextProps.auth.user._id) {
       nextProps.dispatch(push('/'))
     }
   },
   componentDidMount() {
-    if(this.props.auth.authToken && this.props.auth.user._id){
+    if (this.props.auth.authToken && this.props.auth.user._id) {
       this.props.dispatch(push('/'))
     }
   },
@@ -29,22 +29,22 @@ export const Component = React.createClass({
     const { children } = this.props
     return (
       <div className="layout-column flex">
-        <TitleBar theme="light"/>
+        <TitleBar theme="light" />
         {children}
       </div>
     )
-  }
-});
+  },
+})
 
 
-///////////////////////////////// CONTAINER /////////////////////////////////
+// /////////////////////////////// CONTAINER /////////////////////////////////
 
 function mapStateToProps({ auth }) {
-  return { auth };
+  return { auth }
 }
 
 function mapDispatchToProps(dispatch) {
   return { dispatch }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps, mapDispatchToProps)(Component)

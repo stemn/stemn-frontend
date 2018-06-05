@@ -14,7 +14,7 @@ export default class ProjectFeedPageCommit extends Component {
 
     const groupedRevisions = groupRevisions(commit.data.items)
     const toggleMultiple = () => toggleMulti({
-      cacheKeys: groupedRevisions.map(revision => revision.data.fileId+'-'+revision.data.revisionId)
+      cacheKeys: groupedRevisions.map(revision => `${revision.data.fileId}-${revision.data.revisionId}`),
     })
     const params = {
       projectId: commit.data.project._id,
@@ -47,14 +47,14 @@ export default class ProjectFeedPageCommit extends Component {
         <div className="flex scroll-box">
           { commit.data.items ?
             groupedRevisions.map(file => (
-            <FileCompare
-              project={ project }
-              file={ file }
-              type="collapse"
-              key={ file._id }
-            />
+              <FileCompare
+                project={ project }
+                file={ file }
+                type="collapse"
+                key={ file._id }
+              />
             ))
-          : null }
+            : null }
         </div>
       </div>
     )

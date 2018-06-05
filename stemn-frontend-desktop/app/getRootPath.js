@@ -7,9 +7,8 @@ export default (staticPath, filePath) => {
     if (filePath) {
       // filepath will be the path to the file without any protocol
       return `${path.join(__dirname, `../../app${staticPath}`)}`
-    } else {
-      return `http://localhost:3001${staticPath}`
-    }
+    } 
+    return `http://localhost:3001${staticPath}`
   }
 
   // PRODUCTION
@@ -18,9 +17,8 @@ export default (staticPath, filePath) => {
     if (filePath) {
       // filepath will be the path to the file without any protocol
       return `${path.join(__dirname, `../renderer${staticPath}`)}`
-    } else {
-      return `file://${path.join(__dirname, `../renderer${staticPath}`)}`
-    }
+    } 
+    return `file://${path.join(__dirname, `../renderer${staticPath}`)}`
   }
   // If we are in a renderer, root is relative to the html file
   if (GLOBAL_ENV.APP_THREAD === 'renderer') {

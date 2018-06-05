@@ -1,22 +1,22 @@
-import electron from 'electron';
+import electron from 'electron'
 
 // Container Core
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 
 // Component Core
-import React from 'react';
+import React from 'react'
 
 // Actions
-import { showModal } from 'stemn-shared/misc/Modal/Modal.actions.js';
+import { showModal } from 'stemn-shared/misc/Modal/Modal.actions.js'
 
 // Sub Components
-import TitleBar from 'stemn-shared/misc/TitleBar/TitleBar';
-import Sidebar  from 'stemn-shared/misc/Sidebar/Sidebar.jsx';
+import TitleBar from 'stemn-shared/misc/TitleBar/TitleBar'
+import Sidebar  from 'stemn-shared/misc/Sidebar/Sidebar.jsx'
 import betaModalName from 'stemn-shared/misc/Modal/BetaModal'
 
-///////////////////////////////// COMPONENT /////////////////////////////////
+// /////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
   componentWillReceiveProps(nextProps, prevProps) {
@@ -24,47 +24,47 @@ export const Component = React.createClass({
       nextProps.dispatch(push('/login'))
     }
   },
-  componentDidMount(){
+  componentDidMount() {
     if (!this.props.auth.authToken || !this.props.auth.user._id) {
       this.props.dispatch(push('/login'))
     }
 
     // If the user is not in the beta... Pop the beta modal.
-//    if (this.props.auth.user && this.props.auth.user._id && !this.props.auth.user.beta) {
-//      this.props.dispatch(showModal({
-//        modalType: betaModalName,
-//        modalOptions: {
-//          noClickClose: true,
-//        },
-//        limit: 1,
-//      }))
-//    }
+    //    if (this.props.auth.user && this.props.auth.user._id && !this.props.auth.user.beta) {
+    //      this.props.dispatch(showModal({
+    //        modalType: betaModalName,
+    //        modalOptions: {
+    //          noClickClose: true,
+    //        },
+    //        limit: 1,
+    //      }))
+    //    }
   },
   render() {
     const { children } = this.props
     return (
       <div className="layout-row flex">
         <div className="layout-column">
-          <Sidebar params={this.props.params}/>
+          <Sidebar params={ this.props.params } />
         </div>
         <div className="layout-column flex rel-box">
-          <TitleBar theme="dark"/>
+          <TitleBar theme="dark" />
           {children}
         </div>
       </div>
     )
-  }
-});
+  },
+})
 
 
-///////////////////////////////// CONTAINER /////////////////////////////////
+// /////////////////////////////// CONTAINER /////////////////////////////////
 
 function mapStateToProps({ auth }) {
-  return { auth };
+  return { auth }
 }
 
 function mapDispatchToProps(dispatch) {
   return { dispatch }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps, mapDispatchToProps)(Component)

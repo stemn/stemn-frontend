@@ -7,7 +7,7 @@ export default function getRootReducer() {
     ...rootReducer,
   }
 
-  const splitReducers = combineReducers({ ...reducers})
+  const splitReducers = combineReducers({ ...reducers })
   return (state, action) => {
     const isStoreAction = action && action.type && action.type.startsWith('STORE/')
     return isStoreAction

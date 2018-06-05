@@ -57,7 +57,7 @@ const showPreview = (dispatch, localPath) => {
   }
 }
 
-/***********************************************************************************************
+/** *********************************************************************************************
 
 STARTUP FLAGS:
 Hidden mode can be activated using a flag such as "--hidden" in the args:
@@ -71,7 +71,7 @@ Additionally, the local-path to a file can be passed in such as:
 If a file-path is found a preview-window will pop that attempts to display revisions for that
 file.
 
-***********************************************************************************************/
+********************************************************************************************** */
 
 log.info('---------------- Application started ----------------')
 
@@ -151,9 +151,9 @@ async function start() {
   if (args.inputs.path) {
     showPreview(store.dispatch, args.inputs.path)
   }
-//  showPreview(store.dispatch, 'E:\\Dropbox (Platino Properties)\\David Revay Resume.pdf')
-//  showPreview(store.dispatch, 'E:\\Dropbox (Platino Properties)\\Spaceman256.png')
-//  showPreview(store.dispatch, 'E:\\Dropbox (Platino Properties)\\STEMN Projects\\Gear Changes\\httpMiddleware.js')
+  //  showPreview(store.dispatch, 'E:\\Dropbox (Platino Properties)\\David Revay Resume.pdf')
+  //  showPreview(store.dispatch, 'E:\\Dropbox (Platino Properties)\\Spaceman256.png')
+  //  showPreview(store.dispatch, 'E:\\Dropbox (Platino Properties)\\STEMN Projects\\Gear Changes\\httpMiddleware.js')
 
   // Initialise the Websocket connection
   const websocket = initWebsocket(GLOBAL_ENV.WEBSOCKET_SERVER)

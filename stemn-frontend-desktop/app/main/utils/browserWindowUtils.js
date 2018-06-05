@@ -4,8 +4,7 @@ export const bindBackForward = (browserWindow) => {
     // This will only work on Windows?
     if (cmd === 'browser-backward' && browserWindow.webContents.canGoBack()) {
       browserWindow.webContents.goBack()
-    }
-    else if (cmd === 'browser-forward' && browserWindow.webContents.canGoForward()) {
+    } else if (cmd === 'browser-forward' && browserWindow.webContents.canGoForward()) {
       browserWindow.webContents.goForward()
     }
   })

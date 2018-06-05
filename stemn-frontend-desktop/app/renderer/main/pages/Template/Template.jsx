@@ -1,40 +1,38 @@
 // Container Core
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
 // Container Actions
-import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js';
+import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js'
 
 // Component Core
-import React from 'react';
+import React from 'react'
 
 // Styles
-import classNames from 'classnames';
+import classNames from 'classnames'
 
 // Sub Components
 
 
-
-///////////////////////////////// COMPONENT /////////////////////////////////
+// /////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
   render() {
     return (
-      <div></div>
-    );
-  }
-});
+      <div />
+    )
+  },
+})
 
 
+// /////////////////////////////// CONTAINER /////////////////////////////////
 
-///////////////////////////////// CONTAINER /////////////////////////////////
-
-function mapStateToProps({projects, projectSettings}, {params}) {
+function mapStateToProps({ projects, projectSettings }, { params }) {
   return {
     project: projects[params.stub],
-    projectSettings: projectSettings,
-    entityModel: `projects.${params.stub}`
-  };
+    projectSettings,
+    entityModel: `projects.${params.stub}`,
+  }
 }
 
 function mapDispatchToProps(dispatch) {
@@ -43,4 +41,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps, mapDispatchToProps)(Component)

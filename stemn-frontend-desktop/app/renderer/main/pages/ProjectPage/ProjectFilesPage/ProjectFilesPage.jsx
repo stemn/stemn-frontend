@@ -1,16 +1,16 @@
-import React from 'react';
-import classNames from 'classnames';
-import { projectFolderRoute } from 'route-actions';
+import React from 'react'
+import classNames from 'classnames'
+import { projectFolderRoute } from 'route-actions'
 import classes from './ProjectFilesPage.css'
-import FileList from 'stemn-shared/misc/FileList';
-import Readme from 'stemn-shared/misc/Files/Readme/Readme.jsx';
+import FileList from 'stemn-shared/misc/FileList'
+import Readme from 'stemn-shared/misc/Files/Readme/Readme.jsx'
 import { get } from 'lodash'
 
 export default React.createClass({
-  fileFolderClick({file}){
-    const { project, create, pushRoute } = this.props;
-    const isFile = file.type == 'file';
-    if(isFile){
+  fileFolderClick({ file }) {
+    const { project, create, pushRoute } = this.props
+    const isFile = file.type == 'file'
+    if (isFile) {
       create({
         type: 'PREVIEW',
         props: {
@@ -29,11 +29,11 @@ export default React.createClass({
   render() {
     const { entityModel, project, path, files, saveProject } = this.props
     const options = {
-      showMenu: true
+      showMenu: true,
     }
     if (project && project.data && project.data._id) {
       return (
-        <div className={classes.container+' flex scroll-box'}>
+        <div className={ `${classes.container} flex scroll-box` }>
           <FileList
             className={ classes.files }
             initialSync={ !project.data.remote.lastSynced }
@@ -56,8 +56,7 @@ export default React.createClass({
           />
         </div>
       )
-    } else {
-      return null
-    }
-  }
+    } 
+    return null
+  },
 })

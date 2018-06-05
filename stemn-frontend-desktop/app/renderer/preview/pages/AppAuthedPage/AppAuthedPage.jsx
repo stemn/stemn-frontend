@@ -1,33 +1,33 @@
 // Container Core
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 
 // Component Core
-import React from 'react';
+import React from 'react'
 
-///////////////////////////////// COMPONENT /////////////////////////////////
+// /////////////////////////////// COMPONENT /////////////////////////////////
 
 export const Component = React.createClass({
   componentWillReceiveProps(nextProps, prevProps) {
-    if(!nextProps.auth.authToken || !nextProps.auth.user._id){
+    if (!nextProps.auth.authToken || !nextProps.auth.user._id) {
       nextProps.dispatch(push('/login'))
     }
   },
   render() {
     const { children } = this.props
     return children
-  }
-});
+  },
+})
 
 
-///////////////////////////////// CONTAINER /////////////////////////////////
+// /////////////////////////////// CONTAINER /////////////////////////////////
 
 function mapStateToProps({ auth }) {
-  return { auth };
+  return { auth }
 }
 
 function mapDispatchToProps(dispatch) {
   return { dispatch }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps, mapDispatchToProps)(Component)

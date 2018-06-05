@@ -1,4 +1,4 @@
-import { crashReporter } from 'electron';
+import { crashReporter } from 'electron'
 import { version } from '../../../package.json'
 
 export default () => {
@@ -9,7 +9,7 @@ export default () => {
     autoSubmit: true,
     extra: {
       app_version: version,
-      electron_context: process.type // 'renderer' || 'browser'
-    }
+      electron_context: process.type, // 'renderer' || 'browser'
+    },
   })
 }

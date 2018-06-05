@@ -1,50 +1,50 @@
-//// Container Core
-//import { bindActionCreators } from 'redux';
-//import { connect } from 'react-redux';
+// // Container Core
+// import { bindActionCreators } from 'redux';
+// import { connect } from 'react-redux';
 //
-//// Container Actions
+// // Container Actions
 //
-//// Component Core
-//import React from 'react';
+// // Component Core
+// import React from 'react';
 //
-//// Styles
-//import classNames from 'classnames';
+// // Styles
+// import classNames from 'classnames';
 //
-//// Functions
-//import { orderBy, has }        from 'lodash';
-//import moment from 'moment';
-//import { formatBytes } from 'stemn-shared/misc/Files/utils'
+// // Functions
+// import { orderBy, has }        from 'lodash';
+// import moment from 'moment';
+// import { formatBytes } from 'stemn-shared/misc/Files/utils'
 //
-//// Actions
-//import * as FilesActions        from 'stemn-shared/misc/Files/Files.actions.js';
-//import * as SyncTimelineActions from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js';
-//import * as ModalActions        from 'stemn-shared/misc/Modal/Modal.actions.js';
-//import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js';
-//import { push } from 'react-router-redux';
+// // Actions
+// import * as FilesActions        from 'stemn-shared/misc/Files/Files.actions.js';
+// import * as SyncTimelineActions from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js';
+// import * as ModalActions        from 'stemn-shared/misc/Modal/Modal.actions.js';
+// import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js';
+// import { push } from 'react-router-redux';
 //
 //
-//// Sub Components
-//import { orderItemsByTime } from 'stemn-shared/misc/FileCompare/FileCompare.utils.js';
-//import { getRevisions }     from 'stemn-shared/misc/SyncTimeline/SyncTimeline.utils.js';
-//import FileCompareInner     from 'stemn-shared/misc/FileCompare/FileCompareInner/FileCompareInner.jsx';
-//import Timeline             from 'stemn-shared/misc/Timeline/Timeline.jsx';
-//import DragResize           from 'stemn-shared/misc/DragResize/DragResize.jsx';
-//import FileBreadCrumbs      from 'stemn-shared/misc/FileList/components/FileBreadCrumbs.jsx'
-//import FileCompareMenu      from 'stemn-shared/misc/FileCompare/FileCompareMenu';
-//import LoadingOverlay       from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
-//import TimelineVertical     from 'stemn-shared/misc/SyncTimeline/TimelineVertical';
-//import SimpleTable          from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable.jsx';
-//import SectionTitle         from 'stemn-shared/misc/Titles/SectionTitle/SectionTitle.jsx';
-//import AssemblyParts        from 'stemn-shared/misc/Files/PreviewFile/PreviewCad/AssemblyParts/AssemblyParts.jsx'
-//import Tag                  from 'stemn-shared/misc/Tags/Tag';
-//import Header               from 'stemn-shared/misc/Header/Header.jsx'
+// // Sub Components
+// import { orderItemsByTime } from 'stemn-shared/misc/FileCompare/FileCompare.utils.js';
+// import { getRevisions }     from 'stemn-shared/misc/SyncTimeline/SyncTimeline.utils.js';
+// import FileCompareInner     from 'stemn-shared/misc/FileCompare/FileCompareInner/FileCompareInner.jsx';
+// import Timeline             from 'stemn-shared/misc/Timeline/Timeline.jsx';
+// import DragResize           from 'stemn-shared/misc/DragResize/DragResize.jsx';
+// import FileBreadCrumbs      from 'stemn-shared/misc/FileList/components/FileBreadCrumbs.jsx'
+// import FileCompareMenu      from 'stemn-shared/misc/FileCompare/FileCompareMenu';
+// import LoadingOverlay       from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+// import TimelineVertical     from 'stemn-shared/misc/SyncTimeline/TimelineVertical';
+// import SimpleTable          from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable.jsx';
+// import SectionTitle         from 'stemn-shared/misc/Titles/SectionTitle/SectionTitle.jsx';
+// import AssemblyParts        from 'stemn-shared/misc/Files/PreviewFile/PreviewCad/AssemblyParts/AssemblyParts.jsx'
+// import Tag                  from 'stemn-shared/misc/Tags/Tag';
+// import Header               from 'stemn-shared/misc/Header/Header.jsx'
 //
-//// Styles
-//import classes from './PagePreview.css';
+// // Styles
+// import classes from './PagePreview.css';
 //
-/////////////////////////////////// COMPONENT /////////////////////////////////
+// ///////////////////////////////// COMPONENT /////////////////////////////////
 //
-//export const Component = React.createClass({
+// export const Component = React.createClass({
 //  onMount(nextProps, prevProps){
 //    const hasFileMeta    = has(nextProps, 'fileMeta.data');
 //    const string1        = has(prevProps, 'fileMeta.data') ? prevProps.fileMeta.data.fileId + '-' + prevProps.fileMeta.data.revisionId : '';
@@ -216,25 +216,25 @@
 //      </div>
 //    );
 //  }
-//});
+// });
 //
 //
-/////////////////////////////////// CONTAINER /////////////////////////////////
+// ///////////////////////////////// CONTAINER /////////////////////////////////
 //
-//function mapStateToProps({ syncTimeline, files }, { fileMeta }) {
+// function mapStateToProps({ syncTimeline, files }, { fileMeta }) {
 //  const hasFileId = fileMeta && fileMeta.data && fileMeta.data.fileId;
 //  return {
 //    syncTimeline: hasFileId ? syncTimeline[fileMeta.data.fileId] : [],
 //    relatedThreads: hasFileId ? files.relatedThreads[fileMeta.data.fileId] : []
 //  };
-//}
+// }
 //
-//function mapDispatchToProps(dispatch) {
+// function mapDispatchToProps(dispatch) {
 //  return {
 //    syncTimelineActions: bindActionCreators(SyncTimelineActions, dispatch),
 //    filesActions: bindActionCreators(FilesActions, dispatch),
 //    dispatch
 //  }
-//}
+// }
 //
-//export default connect(mapStateToProps, mapDispatchToProps)(Component);
+// export default connect(mapStateToProps, mapDispatchToProps)(Component);

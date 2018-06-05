@@ -1,5 +1,5 @@
-import raven from 'raven-js';
-import { version } from '../../../package.json';
+import raven from 'raven-js'
+import { version } from '../../../package.json'
 import { sentryPublic } from '../../../config.js'
 
 export default () => {
@@ -8,7 +8,7 @@ export default () => {
     environment: process.env.NODE_ENV,
     maxBreadcrumbs: '10',
     ignoreErrors: [
-      /Failed to execute 'attachShader' on 'WebGLRenderingContext/
-    ]
-  }).install();
+      /Failed to execute 'attachShader' on 'WebGLRenderingContext/,
+    ],
+  }).install()
 }

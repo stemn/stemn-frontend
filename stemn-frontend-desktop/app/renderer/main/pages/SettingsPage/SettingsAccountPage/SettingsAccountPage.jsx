@@ -21,55 +21,53 @@ export const Component = React.createClass({
   componentWillMount() {
     this.props.getUser({
       userId: this.props.auth.user._id,
-      force: true
-    });
+      force: true,
+    })
   },
-  saveUser(){
-    this.props.saveUser({user: this.props.user.data});
+  saveUser() {
+    this.props.saveUser({ user: this.props.user.data })
   },
   render() {
-    const { entityModel, user, auth, authenticate, unlink, logout } = this.props;
-    const getInner = () => {
-      return (
-        <div>
-          <div className={ classes.panel }>
-            <UserProfileSettings
-              user={ user }
-              userModel={ entityModel }
-              saveUser={ this.saveUser }
-            />
-          </div>
-          <div className={ classes.panel }>
-            <UserLinkedAccountSettings
-              user={ auth.user }
-              authenticate={ authenticate }
-              unlink={ unlink }
-            />
-          </div>
-          <div className={ classes.panel }>
-            <UserCloudProviderSettings
-              user={ auth.user }
-              authenticate={ authenticate }
-              unlink={ unlink }
-            />
-          </div>
-          <div className={ classes.panel }>
-            <h3>Logout</h3>
-            <p>Logout from this account.</p>
-            <div className="layout-row layout-align-end">
-              <ProgressButton className="warn" onClick={ logout }>Logout</ProgressButton>
-            </div>
+    const { entityModel, user, auth, authenticate, unlink, logout } = this.props
+    const getInner = () => (
+      <div>
+        <div className={ classes.panel }>
+          <UserProfileSettings
+            user={ user }
+            userModel={ entityModel }
+            saveUser={ this.saveUser }
+          />
+        </div>
+        <div className={ classes.panel }>
+          <UserLinkedAccountSettings
+            user={ auth.user }
+            authenticate={ authenticate }
+            unlink={ unlink }
+          />
+        </div>
+        <div className={ classes.panel }>
+          <UserCloudProviderSettings
+            user={ auth.user }
+            authenticate={ authenticate }
+            unlink={ unlink }
+          />
+        </div>
+        <div className={ classes.panel }>
+          <h3>Logout</h3>
+          <p>Logout from this account.</p>
+          <div className="layout-row layout-align-end">
+            <ProgressButton className="warn" onClick={ logout }>Logout</ProgressButton>
           </div>
         </div>
-      )
-    }
-    return (
-      <div className="rel-box" style={ { minHeight: '200px'} }>
-        { auth.user && user && user.data && getInner() }
-        <LoadingOverlay show={auth.authLoading || !user || !user.data} />
       </div>
-    );
-  }
+    )
+    return (
+      <div className="rel-box" style={ { minHeight: '200px' } }>
+        { auth.user && user && user.data && getInner() }
+        <LoadingOverlay show={ auth.authLoading || !user || !user.data } />
+      </div>
+    )
+  },
 })
 
 //          <div className={classes.panel}>
@@ -79,10 +77,10 @@ export const Component = React.createClass({
 //          </div>
 
 
-const mapStateToProps = ({auth, users}, {params}) => ({
+const mapStateToProps = ({ auth, users }, { params }) => ({
   auth,
   user: users[auth.user._id],
-  entityModel: `users.${auth.user._id}`
+  entityModel: `users.${auth.user._id}`,
 })
 
 const mapDispatchToProps = {

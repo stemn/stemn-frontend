@@ -1,4 +1,4 @@
-import { sendAuthToken } from 'stemn-shared/misc/Auth/Auth.actions.js';
+import { sendAuthToken } from 'stemn-shared/misc/Auth/Auth.actions.js'
 
 const pageHtml = `
 <!DOCTYPE html>
@@ -29,37 +29,37 @@ const pageHtml = `
   <script>
     window.top.close();
   </script>
-</html>`;
+</html>`
 
 export const authGoogle = (req, res) => {
   req.store.dispatch(sendAuthToken({
     provider: 'google',
-    code: req.query.code
-  }));
+    code: req.query.code,
+  }))
   res.send(pageHtml)
 }
 
 export const authDropbox = (req, res) => {
-  console.log('req.originalUrl:', req.originalUrl);
+  console.log('req.originalUrl:', req.originalUrl)
   req.store.dispatch(sendAuthToken({
     provider: 'dropbox',
-    code: req.query.code
-  }));
+    code: req.query.code,
+  }))
   res.send(pageHtml)
 }
 
 export const authFacebook = (req, res) => {
   req.store.dispatch(sendAuthToken({
     provider: 'facebook',
-    code: req.query.code
-  }));
+    code: req.query.code,
+  }))
   res.send(pageHtml)
 }
 
 export const authLinkedin = (req, res) => {
   req.store.dispatch(sendAuthToken({
     provider: 'linkedin',
-    code: req.query.code
-  }));
+    code: req.query.code,
+  }))
   res.send(pageHtml)
 }

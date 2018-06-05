@@ -1,6 +1,6 @@
-import { app, BrowserWindow, Menu, shell, screen } from 'electron';
+import { app, BrowserWindow, Menu, shell, screen } from 'electron'
 import { bindBackForward } from './utils/browserWindowUtils.js'
-import path from 'path';
+import path from 'path'
 import stringify from './utils/stringify.js'
 import getRootPath from 'get-root-path'
 
@@ -8,11 +8,11 @@ const mainHtml = getRootPath('/static/html/preview.html')
 
 
 export const create = function createWindow({ uri = '/' } = {}) {
-  const primarySize = screen.getPrimaryDisplay().workAreaSize;
-  const sizeRatio = 0.8;
+  const primarySize = screen.getPrimaryDisplay().workAreaSize
+  const sizeRatio = 0.8
 
   // Create a new stringified state global - this will be parsed in the renderer
-  global.stateStringified = stringify(global.state);
+  global.stateStringified = stringify(global.state)
 
   let browserWindow = new BrowserWindow({
     show: false,
@@ -20,17 +20,17 @@ export const create = function createWindow({ uri = '/' } = {}) {
     height: primarySize.height * sizeRatio,
     minWidth: 1000,
     minHeight: 600,
-    frame: process.platform == 'darwin' ? true : false,
+    frame: process.platform == 'darwin',
     webPreferences: {
       webSecurity: false, // TODO. Investiage security implications. This is needed for cross origin autodesk requests.
     },
-  });
+  })
 
-  browserWindow.loadURL(`${mainHtml}#${uri}`);
+  browserWindow.loadURL(`${mainHtml}#${uri}`)
   browserWindow.on('closed', () => {
-    browserWindow = null;
-  });
-  bindBackForward(browserWindow);
+    browserWindow = null
+  })
+  bindBackForward(browserWindow)
 
   // Handle Redirects
   const handleRedirect = (e, url) => {
@@ -43,33 +43,33 @@ export const create = function createWindow({ uri = '/' } = {}) {
   browserWindow.webContents.on('new-window', handleRedirect)
 
   if (process.env.NODE_ENV === 'development') {
-    browserWindow.openDevTools();
+    browserWindow.openDevTools()
     browserWindow.webContents.on('context-menu', (e, props) => {
-      const { x, y } = props;
+      const { x, y } = props
       Menu.buildFromTemplate([{
         label: 'Inspect element',
         click() {
-          browserWindow.inspectElement(x, y);
-        }
-      }]).popup(browserWindow);
-    });
+          browserWindow.inspectElement(x, y)
+        },
+      }]).popup(browserWindow)
+    })
   }
 
-//  browserWindow.webContents.on('did-finish-load', () => {
-//    browserWindow.show();
-//    browserWindow.focus();
-//  });
+  //  browserWindow.webContents.on('did-finish-load', () => {
+  //    browserWindow.show();
+  //    browserWindow.focus();
+  //  });
 
-  show();
-  browserWindow.setMenu(null);
+  show()
+  browserWindow.setMenu(null)
   
   return {
-    browserWindow: browserWindow,
-    show: show
+    browserWindow,
+    show,
   }
   
-  function show(){
-    browserWindow.show();
-    browserWindow.focus();
+  function show() {
+    browserWindow.show()
+    browserWindow.focus()
   }
 }

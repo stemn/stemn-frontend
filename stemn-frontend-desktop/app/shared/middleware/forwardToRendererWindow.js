@@ -1,7 +1,6 @@
-import electron from 'electron';
+import electron from 'electron'
 
-const forwardToRenderer = store => next => action => {
-
+const forwardToRenderer = store => next => (action) => {
   // change scope to avoid endless-loop
   const rendererAction = {
     ...action,
@@ -9,15 +8,15 @@ const forwardToRenderer = store => next => action => {
       ...action.meta,
       scope: 'local',
     },
-  };
+  }
 
-  const openWindows = electron.remote.BrowserWindow.getAllWindows();
+  const openWindows = electron.remote.BrowserWindow.getAllWindows()
 
-  if(action.meta && action.meta.scope.includes('menubar') && openWindows[1]){
+  if (action.meta && action.meta.scope.includes('menubar') && openWindows[1]) {
     openWindows[1].webContents.send('redux-action', rendererAction)
   }
 
-  if(action.meta && action.meta.scope.includes('main') && openWindows[0]){
+  if (action.meta && action.meta.scope.includes('main') && openWindows[0]) {
     openWindows[0].webContents.send('redux-action', rendererAction)
   }
 
@@ -26,7 +25,7 @@ const forwardToRenderer = store => next => action => {
     return
   }
 
-  return next(action);
-};
+  return next(action)
+}
 
-export default forwardToRenderer;
+export default forwardToRenderer

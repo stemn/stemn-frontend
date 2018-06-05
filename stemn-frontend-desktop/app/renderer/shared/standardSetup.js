@@ -1,23 +1,23 @@
 import { ipcRenderer } from 'electron'
 import { loadUserData } from 'stemn-shared/misc/Auth/Auth.actions.js'
 import { getInstallStatus } from 'stemn-shared/desktop/System/System.actions.js'
-import http from 'axios';
+import http from 'axios'
 import { remote } from 'electron'
 import { relaunch } from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js'
 
 
 export default (store, rendererType) => {
   ipcRenderer.on('redux-action', (event, payload) => {
-    store.dispatch(payload);
-  });
+    store.dispatch(payload)
+  })
 
 
   // Dispatch some initialisation actions
-  const state = store.getState();
+  const state = store.getState()
 
   // Setup the http interceptor
-  http.interceptors.request.use(config => {
-    const token = store.getState().auth.authToken;
+  http.interceptors.request.use((config) => {
+    const token = store.getState().auth.authToken
 
     if (config.headers.Authorization === null) {
       // We set Authorization to null to bypass
@@ -38,25 +38,24 @@ export default (store, rendererType) => {
     isOpen: false,
   }
   const oldOnError = window.onerror
-  window.onerror = function() {
+  window.onerror = function () {
     if (!exceptionHandler.isOpen) {
-
-//      if (arguments) {
-//        exceptionHandler.isOpen = true
-//        remote.dialog.showMessageBox({
-//          title: 'Somthing went wrong',
-//          message: `Looks like there is a bug here. This has been sent for analysis.\r\r${JSON.stringify(arguments[0])}`,
-//          buttons: ['Try again', 'Restart'],
-//        }, (response) => {
-//          if (response === 0) {
-//            window.history.back()
-//            location.reload()
-//          } else if (response === 1) {
-//            store.dispatch(relaunch())
-//          }
-//          exceptionHandler.isOpen = false
-//        })
-//      }
+      //      if (arguments) {
+      //        exceptionHandler.isOpen = true
+      //        remote.dialog.showMessageBox({
+      //          title: 'Somthing went wrong',
+      //          message: `Looks like there is a bug here. This has been sent for analysis.\r\r${JSON.stringify(arguments[0])}`,
+      //          buttons: ['Try again', 'Restart'],
+      //        }, (response) => {
+      //          if (response === 0) {
+      //            window.history.back()
+      //            location.reload()
+      //          } else if (response === 1) {
+      //            store.dispatch(relaunch())
+      //          }
+      //          exceptionHandler.isOpen = false
+      //        })
+      //      }
 
       // Call any previously assigned handler
       if (oldOnError) {

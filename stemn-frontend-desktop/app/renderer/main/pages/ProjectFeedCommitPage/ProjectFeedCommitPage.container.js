@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import ProjectFeedCommitPage from './ProjectFeedCommitPage'
 import { get } from 'lodash'
 
-import { toggleMulti }     from 'stemn-shared/misc/TogglePanel/TogglePanel.actions.js';
+import { toggleMulti }     from 'stemn-shared/misc/TogglePanel/TogglePanel.actions.js'
 
 
 const stateToProps = ({ projects, syncTimeline }, { params }) => {

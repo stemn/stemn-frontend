@@ -1,6 +1,6 @@
-import { BrowserWindow } from 'electron';
+import { BrowserWindow } from 'electron'
 
-const forwardToRenderer = store => next => action => {
+const forwardToRenderer = store => next => (action) => {
   // change scope to avoid endless-loop
   const rendererAction = {
     ...action,
@@ -8,14 +8,14 @@ const forwardToRenderer = store => next => action => {
       ...action.meta,
       scope: 'local',
     },
-  };
+  }
 
-  const openWindows = BrowserWindow.getAllWindows();
+  const openWindows = BrowserWindow.getAllWindows()
   openWindows.forEach(({ webContents }) => {
-    webContents.send('redux-action', rendererAction);
-  });
+    webContents.send('redux-action', rendererAction)
+  })
 
-  return next(action);
-};
+  return next(action)
+}
 
-export default forwardToRenderer;
+export default forwardToRenderer
