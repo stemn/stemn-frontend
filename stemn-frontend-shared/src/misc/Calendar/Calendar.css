@@ -1,0 +1,95 @@
+@value primary, primary-bg, border1, bg1 from "theme";
+
+.calendar {
+  width: 100%;
+  min-width: 350px;
+}
+
+.calendarGrid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.calendarHeader {
+  padding: 0 5px;
+  line-height: 29px;
+  background: bg1;
+  color: rgba(0, 0, 0, 0.6);
+  text-align: center;
+  display: flex;
+  font-size: 13px;
+  justify-content: space-between;
+}
+
+
+.calendarHeader button {
+  font-size: 16px;
+  border: 0;
+  background: transparent;
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+.calendarHeader button:focus{
+  outline: none;
+}
+
+.calendarGridItem {
+  flex: 0 14.28571%;
+  text-align: center;
+  padding: 12px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  color: rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+
+}
+.calendarGridItem span{
+  position: relative;
+}
+
+.calendarGridItem.dayHeader{
+  text-transform: uppercase;
+  font-size: 10px;
+}
+
+.calendarGridItem:global(.prevMonth),
+.calendarGridItem:global(.nextMonth){
+  opacity: 0.3;
+}
+
+.calendarGridItem:global(.current):before{
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  border: 1px solid primary;
+
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+}
+
+.calendarGridItem:global(.selected){
+  color: white;
+}
+.calendarGridItem:global(.selected):before{
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: primary-bg;
+  border-radius: 50%;
+
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+}
+
+.calendarDatepicker{
+  min-width: 0px;
+}
+

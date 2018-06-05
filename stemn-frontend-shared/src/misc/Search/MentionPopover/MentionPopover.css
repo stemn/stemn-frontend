@@ -1,0 +1,14 @@
+.caret {
+  position: fixed;
+  height: 15px;
+  width: 1px;
+}
+
+.popover {
+  min-height: 40px;
+  overflow-y: auto;
+  max-height: 200px;
+}
+.highlight {
+  font-weight: bold;
+}

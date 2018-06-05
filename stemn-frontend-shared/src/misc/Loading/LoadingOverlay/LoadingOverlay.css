@@ -1,0 +1,38 @@
+.loadingOverlay{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 10;
+}
+.bgWhite{
+  background: white;
+}
+.loaderContainer{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.text{
+  font-size: 15px;
+  font-weight: 300;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.enter, .appear{
+  transition: all 300ms ease;
+  opacity: 0;
+}
+.enterActive, .appearActive{
+  opacity: 1;
+}
+.leave{
+  opacity: 1;
+  transition: all 300ms ease;
+}
+.leaveActive{
+  opacity: 0;
+}

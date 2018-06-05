@@ -1,13 +1,15 @@
 # Stemn Frontend
 
-All of Stemn's frontend code is opensource here on GitHub. It is split between this repo and the [stemn-frontend-shared](https://github.com/stemn/stemn-frontend-shared) repository.
+This repo contains all of stemn's frontend code.
 
-## Stemn Desktop (electronNew)
-[Instructions](https://github.com/stemn/stemn-frontend/blob/master/electronNew/README.md) for building the [desktop app](https://github.com/stemn/Stemn-Desktop)
+## Packages
 
-## Stemn Website (websiteNew)
-[Instructions](https://github.com/stemn/stemn-frontend/blob/master/websiteNew/README.md) for building the [website](https://dev.stemn.com)
+* [stemn-frontend-admin](./stemn-frontend-admin) This is a placeholder - ignore this.
+* [stemn-frontend-desktop](./stemn-frontend-desktop) Source code for the Stemn desktop app
+* [stemn-frontend-website](./stemn-frontend-website) Source code for the Stemn website
+* [stemn-frontend-shared](./stemn-frontend-shared) Code shared between `stemn-frontend-website` and `stemn-frontend-desktop`
 
-### Stuff to ignore
-Both the `electron` and `website` folders should be ignored. 
-This is all old code that should probably be deleted but hasn't...
+## Usage
+
+* `npm run install:all` to install dependencies for all child packages and link the shared code.
+* `cd` into `stemn-frontend-website` or `stemn-frontend-desktop` and read the readme.

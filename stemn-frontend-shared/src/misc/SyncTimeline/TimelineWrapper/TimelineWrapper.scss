@@ -1,0 +1,30 @@
+@value primary, border1, bg1 from "theme";
+
+.item{
+  position: relative;
+  border-left: 1px solid border1;
+  padding: 15px 0;
+
+  @media (max-width: 599px) {
+    border-left: none;
+  }
+}
+.marker{
+  width: 12px;
+  min-width: 12px;
+  height: 12px;
+  border: 1px solid border1;
+  border-radius: 50%;
+  margin-left: -6px;
+  margin-right: 13px;
+  background: white;
+
+  @media (max-width: 599px) {
+    display: none;
+  }
+
+}
+
+.extra {
+  margin-top: 15px;
+}

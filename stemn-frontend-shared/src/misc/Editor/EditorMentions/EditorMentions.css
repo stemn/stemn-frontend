@@ -1,0 +1,8 @@
+@value primary from "theme";
+
+.mention {
+  color: primary;
+}
+.mentionUnderway {
+  color: primary;
+}

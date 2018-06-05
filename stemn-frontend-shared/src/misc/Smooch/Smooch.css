@@ -1,0 +1,41 @@
+@value primary, border1, border2, bg1 from "theme";
+
+.icon{
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: red;
+  transition: 0.3s ease;
+  border: border1 1px solid;
+  background: white;
+}
+.icon:hover{
+  border: border2 1px solid;
+}
+.icon img{
+  width: 50px;
+  height: 50px
+}
+
+.hideIcon{
+  transform: translateY(100px)
+}
+:global(#sk-holder #sk-container){
+  right: 15px
+}
+:global(#sk-holder .sk-tab-display.sk-appear){
+  bottom: 15px;
+  transform: translateY(0)
+}
+:global(#sk-holder .sk-tab-display){
+  transform: translateY(50px)
+}
+:global(.sk-logo){
+  display: none;
+}
+:global(#sk-holder .image-upload input){
+  display: none;
+}

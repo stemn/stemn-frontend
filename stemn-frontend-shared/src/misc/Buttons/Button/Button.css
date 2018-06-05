@@ -1,0 +1,125 @@
+@value primary-bg, primary-bg-hover, primary, primary-2, secondary, secondary-2, warn, warn-2, grey-3, bg1, linkedin, linkedin-dark, facebook, facebook-dark from 'theme';
+
+.button {
+  border: none;
+  outline: none;
+  background: none;
+  padding: 10px 12px;
+  min-width: 80px;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  line-height: 1em;
+  text-align: center;
+}
+
+.button[disabled]{
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.button:global(.lg) {
+  padding: 15px 20px;
+  font-size: 14px;
+}
+.button:global(.xl) {
+  padding: 20px 25px;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  border-radius: 3px;
+}
+
+.button:global(.sm) {
+  padding: 7px 5px;
+}
+.button:global(.xs) {
+  padding: 5px;
+  font-size: 11px;
+  min-width: 0px;
+}
+
+.button:focus{
+  outline: none;
+}
+
+.button:hover{
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.button:global(.white){
+  background: white;
+}
+.button:global(.white):hover{
+  background: rgba(0, 0, 0, 0.1);
+}
+.button:global(.light){
+  background: bg1;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.6);
+}
+.button:global(.light):hover{
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.button:global(.primary){
+  background: primary-bg;
+  border: 1px solid primary;
+  color: white;
+}
+.button:global(.primary):hover{
+  background: primary-bg-hover;
+}
+.button:global(.primary) circle{
+  stroke: white;
+}
+.button:global(.primary) :global(.overlay){
+  background: primary-bg;
+}
+
+.button:global(.input){
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.7);
+}
+.button:global(.input):hover{
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.button:global(.warn){
+  background: warn;
+  color: white;
+}
+.button:global(.warn):hover{
+  background: warn-2;
+}
+
+.button:global(.secondary){
+  background: rgb(28, 30, 34);
+  color: white;
+}
+.button:global(.secondary):hover{
+  background: black;
+}
+
+.button:global(.linkedin){
+  background: linkedin;
+  color: white;
+}
+.button:global(.linkedin):hover{
+  background: linkedin-dark;
+}
+
+.button:global(.facebook){
+  background: facebook;
+  color: white;
+}
+.button:global(.facebook):hover{
+  background: facebook-dark;
+}

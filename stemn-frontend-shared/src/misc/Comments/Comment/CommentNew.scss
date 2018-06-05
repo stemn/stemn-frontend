@@ -1,0 +1,37 @@
+@value primary, border1, bg1, grey-3 from "theme";
+
+.commentAvatar{
+  margin-right: 10px
+}
+.commentBody {
+  background: white;
+  border: 1px solid border1;
+  line-height: 1.5em;
+}
+.commentBodyHidden {
+  max-height: 58px;
+  overflow: hidden;
+}
+.commentHeader{
+  background: white;
+  padding: 15px 20px;
+}
+.commentContent{
+  margin: 20px;
+  margin-top: 0px;
+  overflow: hidden;
+}
+.commentFooter{
+  padding: 6px 20px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.2);
+}
+.commentNew {
+  position: relative;
+}
+.commentNew .commentBody {
+  transition: 0.3s ease all;
+  cursor: text;
+}
+.commentNew .commentBody:hover {
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}

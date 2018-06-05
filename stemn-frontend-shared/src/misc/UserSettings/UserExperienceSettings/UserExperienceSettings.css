@@ -1,0 +1,14 @@
+.dateInput {
+  width: 120px;
+}
+
+.panel {
+  margin-bottom: 30px;
+}
+.closeButton {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background-color: rgb(244, 67, 54);
+  transform: translate(50%, -50%);
+}

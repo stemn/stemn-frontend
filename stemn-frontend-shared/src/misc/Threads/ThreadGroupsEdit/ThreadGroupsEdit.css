@@ -1,0 +1,16 @@
+.row {
+  padding: 5px 0;
+}
+
+.name {
+  margin-right: 5px;
+}
+
+.threadCount {
+  width: 92px;
+  margin-left: 5px;
+  margin-right: 5px;
+  text-align: center;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.5);
+}

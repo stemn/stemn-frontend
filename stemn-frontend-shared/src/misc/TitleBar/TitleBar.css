@@ -1,0 +1,118 @@
+@value height-header, width-header-buttons from "theme";
+
+.buttons{
+  height: height-header;
+  width: width-header-buttons;
+  margin-right: 10px;
+}
+.button{
+  background: none;
+  border: none;
+  color: rgba(0, 0, 0, 0.2);
+  padding: 3px;
+  border-radius: 50%;
+  transition: 0.3s ease all;
+  line-height: 1em;
+  cursor: pointer;
+  border-radius: 0px;
+}
+.button:hover {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.bar{
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  left: 45px;
+  height: 20px;
+}
+.dragger{
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+  cursor: default;
+}
+.close:hover{
+  background: rgb(232,17,35);
+  color: white;
+}
+
+.light .button{
+  color: rgba(255, 255, 255, 0.8);
+}
+.light .button:hover{
+  color: white;
+}
+/*
+.windowsButton{
+  width: 46px;
+  height: 32px;
+  line-height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  fill: rgba(0, 0, 0, 0.4);
+  transition: 0.2s ease all;
+}
+.windowsButton:hover{
+  background: rgba(0, 0, 0, 0.05);
+  fill: black;
+}
+
+.darwinButton{
+  -webkit-user-select: none;
+  -webkit-app-region: no-drag;
+  cursor: default;
+  box-sizing: border-box;
+  width: 12px;
+  height: 12px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 50%;
+  margin-top: 1px;
+  margin-left: 4px;
+  margin-right: 4px;
+  line-height: 0;
+  background-color: rgb(221, 221, 221);
+  border-color: rgb(208, 208, 208);
+}
+.darwinButtons svg{
+  opacity: 0;
+}
+.darwinButtons:hover svg{
+  opacity: 1;
+}
+.darwinClose{
+  background-color: rgb(255, 95, 87);
+  border-color: rgb(226, 70, 63);
+}
+.darwinMinimise{
+  background-color: rgb(255, 189, 46);
+  border-color: rgb(255, 161, 22);
+}
+.darwinMaximise{
+  background-color: rgb(40, 201, 64);
+  border-color: rgb(18, 172, 40);
+}
+*/
+/*
+.windowsButton svg{
+  width: 10px;
+  height: 10px;
+}
+*/
+
+/*
+.light .windowsButton{
+  fill: rgba(255, 255, 255, 0.6);
+}
+.light .windowsButton:hover{
+  fill: rgba(255, 255, 255, 1);
+}
+
+.windowsClose:hover{
+  background: rgb(232,17,35);
+  fill: white;
+}
+*/

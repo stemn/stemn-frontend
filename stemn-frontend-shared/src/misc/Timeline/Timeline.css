@@ -1,0 +1,32 @@
+@value primary, border1, timeline-main, timeline-bg from "theme";
+
+.timeline.small{
+  padding: 20px 15px;
+}
+.timeline.small .line{
+  height: 1px;
+}
+
+.timeline{
+  padding: 30px 30px;
+  background: timeline-bg;
+  color: white;
+  border-bottom: 1px solid border1;
+}
+
+.line{
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: timeline-main;
+  position: relative;
+}
+
+.dotsOverflow{
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  top: -20px;
+  bottom: -20px;
+  overflow: hidden;
+}

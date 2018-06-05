@@ -1,0 +1,64 @@
+@value primary, border1, grey-3 from "theme";
+
+.tabs {
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  min-height: 37px;
+}
+.tabs:after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid border1;
+}
+.noLine:after{
+  border-bottom: none;
+}
+
+.inner{
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  position: relative;
+  margin-bottom: -10px; /* Bottom margin to hide scrollbar */
+}
+.inner > a {
+  min-height: 37px;
+  color: grey-3;
+  position: relative;
+  padding: 10px 0;
+  margin-right: 25px;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+.inner > a:last-child {
+  margin-right: 0;
+}
+
+.inner > a:global(.active), .inner > a:hover {
+    color: primary;
+}
+.inner > a:global(.active):after{
+    opacity: 1;
+}
+.inner > a:after {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  right: 0;
+  border-bottom: 2px solid primary;
+  opacity: 0;
+  transition: 0.2s opacity ease;
+  z-index: 1;
+}
+
+.tabsLg .inner > a{
+  font-size: 13px;
+  padding: 10px 25px 15px;
+  margin-right: 0px;
+}

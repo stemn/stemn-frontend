@@ -1,0 +1,68 @@
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 5px;
+  cursor: default;
+}
+
+.tag {
+  display: inline-block;
+  position: relative;
+  padding: 5px;
+  border-radius: 3px;
+  color: white;
+  line-height: 1em;
+  margin-right: 5px;
+  font-size: 10px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  cursor: default;
+  
+  &.responsive {
+    @media (max-width: 599px) {
+      text-indent: -9999px;  
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50% !important;
+      margin-right: 5px !important;
+      overflow: hidden;
+    }
+  }
+}
+a.tag {
+  cursor: pointer;
+}
+a .tagBg:hover {
+  opacity: 0.25
+}
+
+.tagBg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0.15;
+  transition: 0.3s ease all;
+}
+
+.tagsOneline .tag {
+  margin: 0px;
+  border-radius: 0px;
+  border-left-style: none !important;
+  @media (max-width: 599px) {
+    border-left-style: solid !important;
+  }
+}
+.tagsOneline .tag:first-child {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-left-style: solid !important;
+}
+.tagsOneline .tag:last-child {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
