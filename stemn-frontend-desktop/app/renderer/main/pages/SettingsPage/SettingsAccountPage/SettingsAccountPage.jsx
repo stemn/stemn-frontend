@@ -6,7 +6,7 @@ import { unlink, logout, authenticate } from 'stemn-shared/misc/Auth/Auth.action
 import React from 'react'
 
 import classNames from 'classnames'
-import classes from 'electronNew/app/renderer/main/pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css'
+import classes from 'stemn-frontend-desktop/app/renderer/main/pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css'
 
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton.jsx'
 import LinkAccount from 'stemn-shared/misc/Settings/LinkAccount/LinkAccount.jsx'

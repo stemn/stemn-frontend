@@ -70,7 +70,7 @@
     "react-dnd": "^2.1.4",
     "react-dnd-html5-backend": "^2.1.2",
     "react-dnd-touch-backend": "^0.3.2",
-    "react-dom": "^15.4.1",
+    "react-dom": "^15.3.1",
     "react-dropzone": "^3.5.3",
     "react-flip-move": "^2.4.2",
     "react-hot-loader": "^3.0.0-beta.6",
@@ -100,8 +100,8 @@
     "unzipper": "^0.7.2",
     "url-loader": "^0.5.7",
     "webpack-hot-middleware": "^2.18.0",
+    "whats-that-gerber": "^3.0.0",
     "winreg": "^1.2.2",
-    "ws": "^3.0.0",
-    "whats-that-gerber": "git+https://git@github.com/stemn/whats-that-gerber.git"
+    "ws": "^3.0.0"
   }
 }

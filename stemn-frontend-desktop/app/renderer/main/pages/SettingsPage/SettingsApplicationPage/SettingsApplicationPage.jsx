@@ -15,7 +15,7 @@ import React from 'react'
 
 // Styles
 import classNames from 'classnames'
-import classes from 'electronNew/app/renderer/main/pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css'
+import classes from 'stemn-frontend-desktop/app/renderer/main/pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css'
 
 // Sub Components
 import { Link } from 'react-router'

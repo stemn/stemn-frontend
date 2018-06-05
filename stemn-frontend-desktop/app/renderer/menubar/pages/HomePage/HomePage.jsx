@@ -3,7 +3,7 @@ import React from 'react'
 // Components
 import book   from 'stemn-shared/assets/images/pure-vectors/book.svg'
 import MdOpenInNew from 'react-icons/md/open-in-new'
-import Toolbar         from 'electronNew/app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
+import Toolbar         from 'stemn-frontend-desktop/app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
 
 export default class extends React.Component {
   render() {

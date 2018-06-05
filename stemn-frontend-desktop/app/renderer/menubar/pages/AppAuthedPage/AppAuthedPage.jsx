@@ -8,7 +8,7 @@ import React from 'react'
 import { has } from 'lodash'
 
 // Sub Components
-import Sidebar            from 'electronNew/app/renderer/menubar/modules/Sidebar/Sidebar.jsx'
+import Sidebar            from 'stemn-frontend-desktop/app/renderer/menubar/modules/Sidebar/Sidebar.jsx'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
