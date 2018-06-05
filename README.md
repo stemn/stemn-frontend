@@ -13,3 +13,7 @@ This repo contains all of stemn's frontend code.
 
 * `npm run install:all` to install dependencies for all child packages and link the shared code.
 * `cd` into `stemn-frontend-website` or `stemn-frontend-desktop` and read the readme.
+
+## Open Source Contributions
+
+If you want to contribute a feature, please contact us 😊
