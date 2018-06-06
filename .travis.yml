@@ -4,16 +4,16 @@ node_js:
 
 stages:
   - install
-  - build-website
+  - build
   - deploy
 
 jobs:
   include:
     - stage: install
       script: npm run install:all
-    - stage: build-website
+    - stage: build
       script: cd ./stemn-frontend-website && npm run build 
-    - stage: build-desktop
+    - stage: build
       script: cd ./stemn-frontend-desktop && npm run build 
     - stage: deploy
       if: branch = master
