@@ -28,7 +28,7 @@ module.exports = merge(config, {
   debug: false,
   devtool: 'cheap-module-source-map',
   entry: {
-    application: 'production',
+    application: 'client/',
     vendor: [
       'axios',
       'icepick',
@@ -72,10 +72,10 @@ module.exports = merge(config, {
     }),
     new CopyWebpackPlugin([
       {
-        from: path.join(__dirname, '../src/client/assets/images'),
+        from: path.join(__dirname, '../src/client/images'),
         to: 'images',
       }, {
-        from: path.join(__dirname, '../src/client/assets/static'),
+        from: path.join(__dirname, '../src/client/static'),
         to: 'static',
       },
     ]),
@@ -122,7 +122,7 @@ module.exports = merge(config, {
       {
         test: /\.(css|scss)$/,
         include: [
-          path.resolve(__dirname, '../src/client/assets/styles/global'),
+          path.resolve(__dirname, '../src/client/styles/global'),
         ],
         loader: ExtractTextPlugin.extract({
           fallbackLoader: 'style',
@@ -137,8 +137,7 @@ module.exports = merge(config, {
       {
         test: /\.(css|scss)$/,
         include: [
-          path.resolve(__dirname, '../src/client/assets/javascripts'),
-          path.resolve(__dirname, '../src/client/assets/styles/modules'),
+          path.resolve(__dirname, '../src/client'),
           path.resolve(__dirname, '../node_modules/stemn-frontend-shared'),
         ],
         loader: ExtractTextPlugin.extract({

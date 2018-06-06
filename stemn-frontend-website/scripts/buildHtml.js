@@ -3,7 +3,7 @@
  * This is useful for our built production code.
  */
 
-const colors = require('colors')
+require('colors')
 const cheerio = require('cheerio')
 const Promise = require('bluebird')
 const fs = Promise.promisifyAll(require('fs'))
@@ -12,7 +12,6 @@ const _ = require('lodash')
 const readCss = fs.readdirAsync('build/client/css')
 const readJs = fs.readdirAsync('build/client/js')
 const readManifest = fs.readFileAsync('build/client/chunk-manifest.json')
-//const readManifest = fs.readdirAsync('build/client/js')
 
 Promise.all([readCss, readJs, readManifest]).then(([cssFiles, jsFiles, manifestFile]) => {
   // Get the vendor and app bundle file names

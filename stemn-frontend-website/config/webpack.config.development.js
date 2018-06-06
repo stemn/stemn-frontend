@@ -39,10 +39,10 @@ module.exports = merge(config, {
     new webpack.DefinePlugin(GLOBALS),
     new CopyWebpackPlugin([
       {
-        from: path.join(__dirname, '../src/client/assets/images'),
+        from: path.join(__dirname, '../src/images'),
         to: 'images',
       }, {
-        from: path.join(__dirname, '../src/client/assets/static'),
+        from: path.join(__dirname, '../src/static'),
         to: 'static',
       },
     ]),
@@ -56,7 +56,7 @@ module.exports = merge(config, {
       {
         test: /\.(css|scss)$/,
         include: [
-          path.resolve(__dirname, '../src/client/assets/styles/global'),
+          path.resolve(__dirname, '../src/client/styles/global'),
         ],
         loaders: [
           'style',
@@ -69,8 +69,7 @@ module.exports = merge(config, {
       {
         test: /\.(css|scss)$/,
         include: [
-          path.resolve(__dirname, '../src/client/assets/javascripts'),
-          path.resolve(__dirname, '../src/client/assets/styles/modules'),
+          path.resolve(__dirname, '../src/client'),
           path.resolve(__dirname, '../node_modules/stemn-frontend-shared'),
         ],
         loaders: [

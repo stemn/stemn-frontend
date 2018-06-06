@@ -22,14 +22,13 @@ module.exports = {
     symlinks: false,
     modules: [
       path.join(__dirname, '../src'),
-      path.join(__dirname, '../src/client/assets'),
-      path.join(__dirname, '../src/client/assets/javascripts'),
+      path.join(__dirname, '../src/client'),
       'node_modules',
     ],
     alias: {
       'stemn-shared': path.resolve(__dirname, '../node_modules/stemn-frontend-shared/src'),
-      theme: path.resolve(__dirname, '../src/client/assets/styles/modules/theme.css'),
-      'route-actions': path.resolve(__dirname, '../src/client/assets/javascripts/pages/routeActions.js'),
+      theme: path.resolve(__dirname, '../src/client/styles/modules/theme.css'),
+      'route-actions': path.resolve(__dirname, '../src/client/pages/routeActions.js'),
       'lodash.get': path.resolve(__dirname, '../node_modules/lodash/get'),
       'lodash.assign': path.resolve(__dirname, '../node_modules/lodash/assign'),
       'lodash.throttle': path.resolve(__dirname, '../node_modules/lodash/throttle'),
@@ -66,7 +65,8 @@ module.exports = {
       {
         test: /\.jsx?$/,
         include: [
-          path.resolve(__dirname, '../src/client/assets/javascripts'),
+          path.resolve(__dirname, '../src/client'),
+          path.resolve(__dirname, '../src/server'),
           path.resolve(__dirname, '../node_modules/stemn-frontend-shared'),
           path.resolve(__dirname, '../node_modules/react-icons'),
           path.resolve(__dirname, '../node_modules/react-popover-wrapper'),
