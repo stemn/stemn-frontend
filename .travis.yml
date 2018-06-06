@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - "8"
+
+script:
+  - npm run install:all
+  - cd ./stemn-frontend-website && npm run build
+
+cache:
+  directories:
+    - "node_modules"
+    - "./stemn-frontend-desktop/node_modules"
+    - "./stemn-frontend-website/node_modules"
