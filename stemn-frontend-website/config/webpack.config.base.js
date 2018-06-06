@@ -21,7 +21,7 @@ module.exports = {
   resolve: {
     symlinks: false,
     modules: [
-      path.join(__dirname, '../src/client/scripts'),
+      path.join(__dirname, '../src'),
       path.join(__dirname, '../src/client/assets'),
       path.join(__dirname, '../src/client/assets/javascripts'),
       'node_modules',

@@ -93,6 +93,7 @@
     "codemirror": "5.25.0",
     "css-vendor": "0.3.8",
     "es6-promise": "4.1.0",
+    "expres": "0.0.5",
     "express": "4.14.0",
     "fs-extra": "3.0.1",
     "highlight.js": "9.10.0",

@@ -6,7 +6,6 @@ const config = require('./webpack.config.base')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const WebpackChunkHash = require('webpack-chunk-hash')
 const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin')
-const HashModuleId = require('./plugins/HashModuleId')
 
 const GLOBALS = {
   'process.env': {
@@ -16,15 +15,14 @@ const GLOBALS = {
     APP_TYPE: JSON.stringify('web'),
     NODE_ENV: JSON.stringify('production'),
     WEBSITE_URL: JSON.stringify('https://stemn.com'),
-    API_SERVER: JSON.stringify('https://dev.stemn.com'),
-    WEBSOCKET_SERVER: JSON.stringify('https://dev.stemn.com:8443'),
+    API_SERVER: JSON.stringify('https://stemn.com'),
+    WEBSOCKET_SERVER: JSON.stringify('https://stemn.com:8443'),
   },
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false')),
 }
 
-const chunkIncludes = (targets) => ({ context }) => {
-  return context && context.indexOf('node_modules') >= 0 && targets.find(t => new RegExp('\\\\' + t + '\\\\', 'i').test(context))
-}
+const chunkIncludes = targets => ({ context }) => context && context.indexOf('node_modules') >= 0 
+  && targets.find(t => new RegExp(`\\\\${t}\\\\`, 'i').test(context))
 
 module.exports = merge(config, {
   debug: false,
@@ -55,7 +53,6 @@ module.exports = merge(config, {
   },
   plugins: [
     // Avoid publishing files when compilation fails
-//    new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin(GLOBALS),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -69,10 +66,6 @@ module.exports = merge(config, {
         comments: false,
       },
     }),
-//    new webpack.LoaderOptionsPlugin({
-//      minimize: true,
-//      debug: false,
-//    }),
     new ExtractTextPlugin({
       filename: 'css/app.[chunkhash].css',
       allChunks: true,

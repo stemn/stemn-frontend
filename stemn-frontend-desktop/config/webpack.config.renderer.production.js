@@ -4,9 +4,6 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const config = require('./webpack.config.base')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const WebpackChunkHash = require('webpack-chunk-hash')
-const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin')
-const HashModuleId = require('./plugins/HashModuleId')
 
 const GLOBALS = {
 //  'process.env': {

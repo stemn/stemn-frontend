@@ -16,6 +16,10 @@ import { createPersistor } from 'redux-persist'
 import { getLatest } from 'stemn-shared/misc/DesktopReleases/DesktopReleases.actions'
 import { getNotifications } from 'stemn-shared/misc/Notifications/Notifications.actions'
 
+if (GLOBAL_ENV.NODE_ENV === 'production') {
+  window.Raven = require('raven-js')
+}
+
 const initReactAndRedux = (initialState) => {
   const store = configureStore(initialState)
   createPersistor(store, persistConfig)
