@@ -8,7 +8,23 @@
     "transform-runtime",
     "transform-decorators-legacy",
     "react-hot-loader/babel",
-    "lodash"
+    "lodash",
+    ["module-resolver", {
+      "root": ["./src", "./src/client", "node_modules"],
+      "alias": {
+        "stemn-shared": "./node_modules/stemn-frontend-shared/src",
+        "theme": "./src/client/styles/modules/theme.css",
+        "route-actions": "./src/client/pages/routeActions.js",
+        "lodash.get": "./node_modules/lodash/get",
+        "lodash.assign": "./node_modules/lodash/assign",
+        "lodash.throttle": "./node_modules/lodash/throttle",
+        "lodash.topath": "./node_modules/lodash/topath",
+        "lodash.repeat": "./node_modules/lodash/repeat",
+        "lodash.keys": "./node_modules/lodash/keys",
+        "lodash.debounce": "./node_modules/lodash/debounce",
+        "get-root-path": "./src/client/getRootPath.js"
+      }
+    }]
   ],
   "env": {
     "production": {
@@ -16,3 +32,4 @@
     }
   }
 }
+
