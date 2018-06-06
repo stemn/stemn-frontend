@@ -2,33 +2,54 @@ import Express from 'express'
 import React from 'react'
 import { Provider } from 'react-redux'
 import { renderToString } from 'react-dom/server'
+import { match, RouterContext } from 'react-router'
 import configureStore from '../client/app/store/configureStore'
+import routes from '../client/pages/routes.ssr'
 
 const app = Express()
 const port = 3000
 
-const renderFullPage = (html, preloadedState) => { 
-
+const getRouteType = (error, redirectLocation, renderProps) => {
+  if (error) {
+    return 'error'
+  } else if (redirectLocation) {
+    return 'redirect'
+  } else if (renderProps) {
+    return 'prerender'
+  }
+  return 'missing'
 }
 
-const handleRender = (req, res) => {
-  // Create a new Redux store instance
-  const store = configureStore({})
+const renderFullPage = (renderProps) => {
+  const store = configureStore()
 
   // Render the component to a string
   const html = renderToString(
     <Provider store={ store }>
-      <div>
-        Here we are
-      </div>
+      <RouterContext { ...renderProps } />
     </Provider>,
   )
 
-  // Grab the initial state from our Redux store
-  const preloadedState = store.getState()
+  console.log(html)
 
-  // Send the rendered page back to the client
-  res.send(renderFullPage(html, preloadedState))
+  // const preloadedState = store.getState()
+
+  return html
+}
+
+const handleRender = (req, res) => {
+  match({ routes: routes(), location: req.url }, (error, redirect, renderProps) => {
+    switch (getRouteType(error, redirect, renderProps)) {
+      case 'error':
+        return res.status(500).send(error)
+      case 'prerender':
+        return res.status(200).send(renderFullPage(renderProps))
+      case 'redirect':
+        return res.redirect(302, redirect.pathname + redirect.search)
+      default:
+        return res.status(200).send(renderFullPage(renderProps))
+    }
+  })
 }
 
 app.use('/static', Express.static('static'))

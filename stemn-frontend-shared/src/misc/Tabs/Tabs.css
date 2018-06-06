@@ -1,4 +1,4 @@
-@value primary, border1, grey-3 from "theme";
+@value primary, border1, grey-3 from "theme.css";
 
 .tabs {
   white-space: nowrap;

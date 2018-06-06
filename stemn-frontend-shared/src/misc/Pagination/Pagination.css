@@ -1,4 +1,4 @@
-@value primary, bg1 from "theme";
+@value primary, bg1 from "theme.css";
 
 .button {
   margin-top: 10px;

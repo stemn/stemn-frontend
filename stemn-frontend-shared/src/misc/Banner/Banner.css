@@ -1,4 +1,4 @@
-@value primary-bg from "theme";
+@value primary-bg from "theme.css";
 
 .banner{
   padding: 15px;

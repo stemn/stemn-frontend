@@ -13,7 +13,6 @@ const GLOBALS = {
     WEBSITE_URL: JSON.stringify('http://stemn.com'),
     WEBSOCKET_SERVER: JSON.stringify(process.env.WEBSOCKET_SERVER),
   },
-  __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'true')),
 }
 
 module.exports = merge(config, {

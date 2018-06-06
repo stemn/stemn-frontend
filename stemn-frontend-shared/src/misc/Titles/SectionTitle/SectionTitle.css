@@ -1,4 +1,4 @@
-@value secondary, border1, bg1 from "theme";
+@value secondary, border1, bg1 from "theme.css";
 
 .section{
   border-bottom: 1px solid border1

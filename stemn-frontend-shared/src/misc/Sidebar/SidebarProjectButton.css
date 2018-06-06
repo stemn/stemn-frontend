@@ -1,4 +1,4 @@
-@value primary-bg, secondary from "theme";
+@value primary-bg, secondary from "theme.css";
 
 .sidebarButton{
   display: block;

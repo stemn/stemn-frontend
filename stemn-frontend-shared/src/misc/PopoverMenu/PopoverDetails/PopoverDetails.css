@@ -1,4 +1,4 @@
-@value border1, primary-bg from "theme";
+@value border1, primary-bg from "theme.css";
 
 .body{
   width: 250px

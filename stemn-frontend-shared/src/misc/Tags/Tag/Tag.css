@@ -1,4 +1,4 @@
-@value primary, border2, primaryLight1, primaryLight2, border1, bg1 from "theme";
+@value primary, border2, primaryLight1, primaryLight2, border1, bg1 from "theme.css";
 
 .tag{
   border-color: border1;

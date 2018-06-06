@@ -18,7 +18,6 @@ const GLOBALS = {
     WEBSITE_URL: JSON.stringify('https://dev.stemn.com'),
     WEBSOCKET_SERVER: JSON.stringify(process.env.WEBSOCKET_SERVER),
   },
-  __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false')),
 }
 
 const chunkIncludes = (targets) => ({ context }) => {

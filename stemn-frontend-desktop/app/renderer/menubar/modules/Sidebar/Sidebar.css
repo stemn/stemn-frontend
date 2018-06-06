@@ -1,4 +1,4 @@
-@value primary, height-header, sidebar-bg, sidebar-text-1, sidebar-text-2, sidebar-footer, secondary, sidebar-search-border, sidebar-search-bg, sidebar-search-border, sidebar-search-text from "theme";
+@value primary, height-header, sidebar-bg, sidebar-text-1, sidebar-text-2, sidebar-footer, secondary, sidebar-search-border, sidebar-search-bg, sidebar-search-border, sidebar-search-text from "theme.css";
 
 .overlay{
   position: absolute;

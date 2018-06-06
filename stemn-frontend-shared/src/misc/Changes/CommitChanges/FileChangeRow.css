@@ -1,4 +1,4 @@
-@value primary, primary-bg, bg1, border1, success, grey-2, warn from "theme";
+@value primary, primary-bg, bg1, border1, success, grey-2, warn from "theme.css";
 
 .fileChangeRow {
   border-bottom: 1px solid border1;

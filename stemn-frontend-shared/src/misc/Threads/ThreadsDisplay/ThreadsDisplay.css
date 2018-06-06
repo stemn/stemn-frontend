@@ -1,4 +1,4 @@
-@value bg1, border1 from "theme";
+@value bg1, border1 from "theme.css";
 
 .header{
   padding: 30px;

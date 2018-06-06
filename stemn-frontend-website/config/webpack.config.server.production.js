@@ -8,9 +8,10 @@ const getGlobalEnv = require('./getGlobalEnv')
 const GLOBALS = getGlobalEnv('production')
 
 module.exports = merge(config, {
+  target: 'node',
   devtool: 'cheap-module-source-map',
   entry: {
-    application: 'server/index.jsx',
+    index: 'server/index.jsx',
   },
   output: {
     path: path.resolve(__dirname, '../build/server'),
@@ -18,6 +19,15 @@ module.exports = merge(config, {
   },
   plugins: [
     new webpack.DefinePlugin(GLOBALS),
+    new ExtractTextPlugin({
+      filename: 'styles.css',
+      allChunks: true,
+    }),
+    new webpack.ProvidePlugin({
+      window: 'server/mocks/window',
+      document: 'server/mocks/document',
+      navigator: 'server/mocks/navigator',
+    }),
   ],
   module: {
     noParse: /\.min\.js$/,

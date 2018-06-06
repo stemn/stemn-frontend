@@ -1,5 +1,5 @@
 
-@value primary from "theme";
+@value primary from "theme.css";
 
 .progress {
     position: relative;

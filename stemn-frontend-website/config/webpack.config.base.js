@@ -4,9 +4,15 @@ const webpack = require('webpack')
 const autoprefixer = require('autoprefixer')
 const HappyPack = require('happypack')
 
-
 module.exports = {
   resolve: {
+    symlinks: false,
+    modules: [
+      path.join(__dirname, '../src'),
+      path.join(__dirname, '../src/client'),
+      'node_modules',
+    ],
+    extensions: ['.js', '.jsx', '.json', '.scss'],
   },
   plugins: [
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/), // http://stackoverflow.com/questions/25384360/how-to-prevent-moment-js-from-loading-locales-with-webpack

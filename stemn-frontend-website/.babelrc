@@ -13,7 +13,6 @@
       "root": ["./src", "./src/client", "node_modules"],
       "alias": {
         "stemn-shared": "./node_modules/stemn-frontend-shared/src",
-        "theme": "./src/client/styles/modules/theme.css",
         "route-actions": "./src/client/pages/routeActions.js",
         "lodash.get": "./node_modules/lodash/get",
         "lodash.assign": "./node_modules/lodash/assign",
@@ -28,7 +27,10 @@
   ],
   "env": {
     "production": {
-      "plugins": ["transform-react-remove-prop-types", "transform-react-constant-elements"]
+      "plugins": [
+        "transform-react-remove-prop-types", 
+        "transform-react-constant-elements"
+      ]
     }
   }
 }

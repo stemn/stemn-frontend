@@ -1,4 +1,4 @@
-@value primary-bg, primary-bg-hover, primary, primary-2, warn, warn-2 from "theme";
+@value primary-bg, primary-bg-hover, primary, primary-2, warn, warn-2 from "theme.css";
 
 .progressButton {
   position: relative;

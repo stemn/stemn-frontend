@@ -1,4 +1,4 @@
-@value primary, border1 from "theme";
+@value primary, border1 from "theme.css";
 
 .fileChangeTitleRow{
   border-bottom: 1px solid;
