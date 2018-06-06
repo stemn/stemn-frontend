@@ -1,5 +1,7 @@
 # Stemn Frontend
 
+[![Build Status](https://travis-ci.org/stemn/stemn-frontend.svg?branch=master)](https://travis-ci.org/stemn/stemn-frontend)
+
 This repo contains all of stemn's frontend code.
 
 ## Packages
