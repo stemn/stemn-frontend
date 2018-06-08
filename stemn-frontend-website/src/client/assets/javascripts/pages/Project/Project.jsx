@@ -14,6 +14,7 @@ class Project extends Component {
   render() {
     const { children, project } = this.props
     const routeParams = { projectId: get(project, 'data._id') }
+    const isClone = get(project, 'data.clone.source')
     
     const title = [
       <div key="text">
@@ -29,9 +30,18 @@ class Project extends Component {
           noColor
         />
       </div>,
-      // <MdContentCopy 
-      //   style={ { marginLeft: '10px' } }
-      // />,
+      ...(isClone 
+        ? [<Link
+          name="projectRoute"
+          params={ { projectId: project.data.clone.source } }
+          key="clone-icon"
+          title="Cloned Project. View Original."
+        >
+          <MdContentCopy
+            style={ { marginLeft: '10px' } }
+          />
+        </Link>] 
+        : []),
       <div           
         key="provider-icon"
         title={ `Files stored in ${get(project, 'data.remote.provider')}` }
