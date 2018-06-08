@@ -7,4 +7,4 @@ rm -rf ./src/client
 cp -R ../build/client ./src/client
 git add .
 git commit -m "Automated Deployment"
-git push
+git push origin master
