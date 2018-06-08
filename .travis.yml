@@ -16,6 +16,9 @@ jobs:
     - stage: build
       script: cd ./stemn-frontend-desktop && npm run build 
     - stage: deploy
+      skip-cleanup: true
+      github-token: $GITHUB_TOKEN
+      keep-history: true
       if: branch = master
       script: cd ./stemn-frontend-website && npm run deploy:ci
 
