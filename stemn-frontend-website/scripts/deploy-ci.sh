@@ -5,5 +5,5 @@ cd ./stemn-website-server
 rm -rf ./src/client
 cp -R ../build/client ./src/client
 git add .
-git commit -m "Automated Deployment"
+git commit -m "Automated Deployment: $TRAVIS_BUILD_NUMBER"
 git push origin master
