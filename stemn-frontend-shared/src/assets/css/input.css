@@ -1,4 +1,4 @@
-@value border1, highlight-color, highlight-text-color from "theme";
+@value border1, highlight-color, highlight-text-color from "theme.css";
 
 input {
   line-height: 1.3em;

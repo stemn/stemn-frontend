@@ -1,4 +1,4 @@
-@value primary, border2, border1, bg1 from "theme";
+@value primary, border2, border1, bg1 from "theme.css";
 
 .label{
   cursor: default;

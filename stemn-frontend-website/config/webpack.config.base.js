@@ -4,41 +4,14 @@ const webpack = require('webpack')
 const autoprefixer = require('autoprefixer')
 const HappyPack = require('happypack')
 
-const babelLoaderQuery = {
-  presets: [
-    'babel-preset-es2015',
-    'babel-preset-react',
-    'babel-preset-stage-0',
-  ].map(require.resolve),
-  plugins: [
-    'babel-plugin-transform-decorators-legacy',
-    'babel-plugin-lodash',
-    'react-hot-loader/babel',
-  ].map(require.resolve),
-}
-
 module.exports = {
   resolve: {
     symlinks: false,
     modules: [
-      path.join(__dirname, '../src/client/scripts'),
-      path.join(__dirname, '../src/client/assets'),
-      path.join(__dirname, '../src/client/assets/javascripts'),
+      path.join(__dirname, '../src'),
+      path.join(__dirname, '../src/client'),
       'node_modules',
     ],
-    alias: {
-      'stemn-shared': path.resolve(__dirname, '../node_modules/stemn-frontend-shared/src'),
-      theme: path.resolve(__dirname, '../src/client/assets/styles/modules/theme.css'),
-      'route-actions': path.resolve(__dirname, '../src/client/assets/javascripts/pages/routeActions.js'),
-      'lodash.get': path.resolve(__dirname, '../node_modules/lodash/get'),
-      'lodash.assign': path.resolve(__dirname, '../node_modules/lodash/assign'),
-      'lodash.throttle': path.resolve(__dirname, '../node_modules/lodash/throttle'),
-      'lodash.topath': path.resolve(__dirname, '../node_modules/lodash/topath'),
-      'lodash.repeat': path.resolve(__dirname, '../node_modules/lodash/repeat'),
-      'lodash.keys': path.resolve(__dirname, '../node_modules/lodash/keys'),
-      'lodash.debounce': path.resolve(__dirname, '../node_modules/lodash/debounce'),
-      'get-root-path': path.resolve(__dirname, '../src/client/getRootPath.js'),
-    },
     extensions: ['.js', '.jsx', '.json', '.scss'],
   },
   plugins: [
@@ -49,10 +22,7 @@ module.exports = {
     }),
     new HappyPack({
       threads: 4,
-      loaders: [{
-        path: 'babel',
-        query: babelLoaderQuery,
-      }],
+      loaders: ['babel'],
     }),
   ],
   module: {
@@ -66,7 +36,8 @@ module.exports = {
       {
         test: /\.jsx?$/,
         include: [
-          path.resolve(__dirname, '../src/client/assets/javascripts'),
+          path.resolve(__dirname, '../src/client'),
+          path.resolve(__dirname, '../src/server'),
           path.resolve(__dirname, '../node_modules/stemn-frontend-shared'),
           path.resolve(__dirname, '../node_modules/react-icons'),
           path.resolve(__dirname, '../node_modules/react-popover-wrapper'),
@@ -98,7 +69,6 @@ module.exports = {
           name: 'images/[name].[ext]?[hash]',
         },
       },
-
       // Fonts
       {
         test: /\.(woff|woff2|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,

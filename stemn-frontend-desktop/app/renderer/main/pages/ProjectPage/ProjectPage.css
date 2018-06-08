@@ -1,4 +1,4 @@
-@value primary, secondary, border1, bg1, height-header from "theme";
+@value primary, secondary, border1, bg1, height-header from "theme.css";
 /*
 .title{
   font-size: 16px;

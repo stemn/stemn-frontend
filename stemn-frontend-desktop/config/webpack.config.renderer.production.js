@@ -4,9 +4,6 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const config = require('./webpack.config.base')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const WebpackChunkHash = require('webpack-chunk-hash')
-const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin')
-const HashModuleId = require('./plugins/HashModuleId')
 
 const GLOBALS = {
 //  'process.env': {
@@ -21,7 +18,6 @@ const GLOBALS = {
     WEBSITE_URL: JSON.stringify('https://dev.stemn.com'),
     WEBSOCKET_SERVER: JSON.stringify(process.env.WEBSOCKET_SERVER),
   },
-  __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false')),
 }
 
 const chunkIncludes = (targets) => ({ context }) => {

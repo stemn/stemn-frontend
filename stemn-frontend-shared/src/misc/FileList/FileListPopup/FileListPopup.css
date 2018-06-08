@@ -1,4 +1,4 @@
-@value primary, primary-2, border1 from "theme";
+@value primary, primary-2, border1 from "theme.css";
 
 .file{
   padding: 8px;

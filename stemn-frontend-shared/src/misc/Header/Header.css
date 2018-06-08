@@ -1,4 +1,4 @@
-@value border1, height-header, width-header-buttons from "theme";
+@value border1, height-header, width-header-buttons from "theme.css";
 
 .toolbar{
   padding: 0 15px;

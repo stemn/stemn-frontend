@@ -1,4 +1,4 @@
-@value primary-bg, primary from "theme";
+@value primary-bg, primary from "theme.css";
 
 :global(.Popover-body)  {
   display: inline-flex;

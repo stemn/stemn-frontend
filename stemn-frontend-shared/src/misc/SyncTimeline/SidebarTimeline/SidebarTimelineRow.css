@@ -1,4 +1,4 @@
-@value primary-bg, secondary, bg1, border1 from "theme";
+@value primary-bg, secondary, bg1, border1 from "theme.css";
 
 .timelineRow{
   border-bottom: 1px solid border1;

@@ -1,4 +1,4 @@
-@value primary, secondary from "theme";
+@value primary, secondary from "theme.css";
 
 .loader {
   position: relative;

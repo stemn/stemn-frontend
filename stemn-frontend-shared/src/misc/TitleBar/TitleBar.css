@@ -1,4 +1,4 @@
-@value height-header, width-header-buttons from "theme";
+@value height-header, width-header-buttons from "theme.css";
 
 .buttons{
   height: height-header;

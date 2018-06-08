@@ -1,4 +1,4 @@
-@value primary, border1, bg1 from "theme";
+@value primary, border1, bg1 from "theme.css";
 
 .timeline{
   border: none;

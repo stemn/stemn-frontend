@@ -1,4 +1,4 @@
-@value primary-bg, primary, border1, bg1 from "theme";
+@value primary-bg, primary, border1, bg1 from "theme.css";
 
 .row{
   border-bottom: 1px solid border1;
