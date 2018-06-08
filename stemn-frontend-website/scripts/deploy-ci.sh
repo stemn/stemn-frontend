@@ -1,4 +1,4 @@
-git clone git@github.com:stemn/stemn-website-server.git
+git clone https://${GITHUB_TOKEN}@github.com/stemn/stemn-website-server.git
 git config --global user.email "ci@stemn.com";
 git config --global user.name "Stemn CI"
 cd ./stemn-website-server
