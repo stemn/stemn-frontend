@@ -24,3 +24,4 @@ cache:
     - "node_modules"
     - "./stemn-frontend-desktop/node_modules"
     - "./stemn-frontend-website/node_modules"
+    - "./stemn-frontend-website/build"
