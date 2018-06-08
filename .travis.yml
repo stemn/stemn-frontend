@@ -17,7 +17,7 @@ jobs:
       script: cd ./stemn-frontend-desktop && npm run build 
     - stage: deploy
       if: branch = master
-      script: echo deploy
+      script: cd ./stemn-frontend-desktop && npm run deploy
 
 cache:
   directories:
