@@ -53,7 +53,7 @@ module.exports = merge(config, {
   },
   plugins: [
     // Avoid publishing files when compilation fails
-    // new webpack.NoErrorsPlugin(),
+    new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin(GLOBALS),
     new UglifyJsPlugin({
     }),
