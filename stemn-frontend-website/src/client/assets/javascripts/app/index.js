@@ -1,4 +1,4 @@
-import 'styles/global/index.global.css'
+import 'styles/global/index.global.scss'
 import React from 'react'
 import { render } from 'react-dom'
 import { browserHistory } from 'react-router'
