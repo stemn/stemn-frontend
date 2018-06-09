@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "install:link": "sh ./scripts/install.sh",
+    "link": "sh ./scripts/link.sh",
     "clean:build": "rimraf build",
     "build:html": "node ./scripts/buildHtml.js",
     "prestart": "npm run clean:build",
