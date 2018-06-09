@@ -90,7 +90,13 @@ export default class ProjectCloneModal extends Component {
         </div>
         <div className={ `${classes.modalFooter} layout-row layout-align-end` }>
           <Button style={ { marginRight: '10px' } } onClick={ button1.onClick }>{ button1.text }</Button>
-          <Button className="primary"           onClick={ button2.onClick } disabled={ !cloneProject.provider }>{ button2.text }</Button>
+          <Button 
+            className="primary" 
+            onClick={ button2.onClick } 
+            disabled={ !cloneProject.provider || cloneProject.savePending }
+          >
+            { button2.text }
+          </Button>
         </div>
       </div>
     )

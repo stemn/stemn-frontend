@@ -128,7 +128,6 @@ export default class ProjectOverview extends Component {
                   entityId={ project.data._id }
                 />
                 <SocialButton
-                  style={ { marginRight: '10px' } }
                   type="like"
                   numberModel={ `${entityModel}.data.numLikes` }
                   number={ project.data.numLikes }
@@ -137,6 +136,7 @@ export default class ProjectOverview extends Component {
                 />
                 { !canEdit && (
                   <SocialButton
+                    style={ { marginLeft: '10px' } }
                     type="clone"
                     numberModel={ `${entityModel}.data.numClones` }
                     number={ project.data.numClones }

@@ -35,6 +35,7 @@ const initialState = {
     name: '',
     provider: '',
     private: false,
+    savePending: false,
   },
 }
 
@@ -132,6 +133,13 @@ function reducer(state, action) {
       return i.assocIn(state, ['data', action.meta.projectId, 'savePending'], false)
     case 'PROJECTS/SAVE_PROJECT_REJECTED':
       return i.assocIn(state, ['data', action.meta.projectId, 'savePending'], false)
+
+    case 'PROJECTS/CLONE_PENDING':
+      return i.assocIn(state, ['cloneProject', 'savePending'], true)
+    case 'PROJECTS/CLONE_FULFILLED':
+      return i.assocIn(state, ['cloneProject', 'savePending'], false)
+    case 'PROJECTS/CLONE_REJECTED':
+      return i.assocIn(state, ['cloneProject', 'savePending'], false)
 
     case 'PROJECTS/DELETE_PROJECT_FULFILLED':
       return i.chain(state)

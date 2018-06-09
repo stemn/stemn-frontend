@@ -21,9 +21,4 @@ Anyone can get the [Stemn Website](https://stemn.com/) running locally and devel
 Note:
 Only members of the Stemn Team can deploy - open source devs will need to submit a PR.
 
-People with access should:
-Make sure the **stemn-website-live** repo is cloned and in `../../stemn-website-live`
-
-* `npm run build`. This will build the minified dist for production use.
-* `npm run deploy`. This will copy the dist to the stemn-website-live repo.
-* `npm run release`. Inside the `stemn-website-server` repo
+Any code that is merged into master (and passes CI) will be automatically deployed.

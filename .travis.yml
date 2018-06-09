@@ -17,10 +17,11 @@ jobs:
       script: cd ./stemn-frontend-desktop && npm run build 
     - stage: deploy
       if: branch = master
-      script: echo deploy
+      script: cd ./stemn-frontend-website && npm run deploy:ci
 
 cache:
   directories:
     - "node_modules"
     - "./stemn-frontend-desktop/node_modules"
     - "./stemn-frontend-website/node_modules"
+    - "./stemn-frontend-website/build"
