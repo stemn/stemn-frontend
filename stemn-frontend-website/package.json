@@ -12,7 +12,7 @@
     "start:log": "node ./scripts/development.js",
     "local": "webpack-dashboard -c cyan -- node ./scripts/local.js",
     "prebuild": "npm run clean:build",
-    "build": "cross-env NODE_ENV=production node ./scripts/production.js",
+    "build": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.production.js",
     "analyse": "node ./scripts/analyse.js",
     "analyse:graph": "webpack-bundle-analyzer ./reports/stats.json",
     "postbuild": "npm run build:html",
@@ -143,6 +143,7 @@
     "reselect": "2.5.3",
     "stats-webpack-plugin": "0.6.0",
     "substyle": "2.0.2",
+    "uglifyjs-webpack-plugin": "1.2.5",
     "ws": "2.3.1"
   },
   "standard": {

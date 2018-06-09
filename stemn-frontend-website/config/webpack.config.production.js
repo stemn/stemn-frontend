@@ -6,7 +6,7 @@ const config = require('./webpack.config.base')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const WebpackChunkHash = require('webpack-chunk-hash')
 const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin')
-const HashModuleId = require('./plugins/HashModuleId')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const GLOBALS = {
   'process.env': {
@@ -22,7 +22,7 @@ const GLOBALS = {
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false')),
 }
 
-const chunkIncludes = targets => ({ context }) => context && context.indexOf('node_modules') >= 0 && targets.find(t => new RegExp('\\\\' + t + '\\\\', 'i').test(context))
+const chunkIncludes = targets => ({ context }) => context && context.indexOf('node_modules') >= 0 && targets.find(t => new RegExp(`\\\\${t}\\\\`, 'i').test(context))
 
 module.exports = merge(config, {
   debug: false,
@@ -53,19 +53,9 @@ module.exports = merge(config, {
   },
   plugins: [
     // Avoid publishing files when compilation fails
-    new webpack.NoErrorsPlugin(),
+    // new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin(GLOBALS),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        screw_ie8: true,
-        drop_console: true,
-        drop_debugger: true,
-        dead_code: true,
-      },
-      output: {
-        comments: false,
-      },
+    new UglifyJsPlugin({
     }),
     //    new webpack.LoaderOptionsPlugin({
     //      minimize: true,
