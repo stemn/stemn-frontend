@@ -3,7 +3,7 @@ import SocialButton from './SocialButton'
 import { add, remove, checkStatus } from '../Social.actions'
 
 const stateToProps = ({ social }, { entityId, type }) => ({
-  status: social[type][entityId] || false,
+  status: social[type][entityId] || { status: false },
 })
 
 const dispatchToProps = {

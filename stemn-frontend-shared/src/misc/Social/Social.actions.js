@@ -1,7 +1,9 @@
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import { showModal } from 'stemn-shared/misc/Modal/Modal.actions.js'
 import ProjectCloneModalName from 'stemn-shared/misc/Projects/ProjectCloneModal'
+import { push } from 'react-router-redux'
 import { get } from 'lodash'
+import { projectRoute } from 'route-actions'
 
 export const checkStatus = ({ entityId, entityType, type }) => (dispatch, getState) => {
   const userId = getState().auth.user._id
@@ -64,10 +66,10 @@ export const add = ({ entityId, entityType, type, number, numberModel }) => (dis
   }
 }
 
-export const remove = ({ entityId, entityType, type, number, numberModel }) => (dispatch, getState) => {
+export const remove = ({ entityId, entityType, type, number, numberModel, projectCloneId }) => (dispatch) => {
   if (type === 'clone') {
     // Visit the clone
-    console.log('GO TO CLONE')
+    dispatch(push(projectRoute({ projectId: projectCloneId })))
   } else {
     // Remove the like / follow
     dispatch({

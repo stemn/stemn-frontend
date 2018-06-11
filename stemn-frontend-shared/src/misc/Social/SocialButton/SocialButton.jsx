@@ -79,7 +79,7 @@ export default class SocialButton extends Component {
   }
 
   toggle = () => {
-    const { status, type, remove, add, number, numberModel, entityId, entityType } = this.props
+    const { status: { status, parentId: projectCloneId }, type, remove, add, number, numberModel, entityId, entityType } = this.props
     if (status) {
       remove({
         entityId,
@@ -87,6 +87,7 @@ export default class SocialButton extends Component {
         type,
         number,
         numberModel,
+        projectCloneId,
       })
     } else {
       add({
@@ -109,7 +110,7 @@ export default class SocialButton extends Component {
       number,
       numberModel,
       remove,
-      status,
+      status: { status },
       type,
       ...otherProps
     } = this.props
