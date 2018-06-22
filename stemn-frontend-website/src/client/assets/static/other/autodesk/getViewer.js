@@ -4,8 +4,8 @@ const fs = require('fs')
 const mkdirp = require('mkdirp')
 
 // Config - Change this as required
-const version = 'v4.1.0'
-const outputFolder = 'viewer-4-1-0'
+const version = 'v4.2.2'
+const outputFolder = 'viewer-4-2-2'
 
 const downloadAndSave = ({ url, dest, onProgress }) => new Promise((resolve, reject) => {
   http({
