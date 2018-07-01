@@ -55,6 +55,17 @@ export const rerunPipeline = ({ pipelineId }) => dispatch => dispatch({
   },
 })
 
+export const cancelPipeline = ({ pipelineId }) => ({
+  type: 'PIPELINES/CANCEL_PIPELINE',
+  payload: http({
+    method: 'POST',
+    url: `/api/v1/pipelines/${pipelineId}/cancel`,    
+  }),
+  meta: {
+    pipelineId,
+  },
+})
+
 export const getStep = ({ stepId }) => ({
   type: 'PIPELINES/GET_STEP',
   payload: http({

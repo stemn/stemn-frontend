@@ -11,7 +11,7 @@ import Link from 'stemn-shared/misc/Router/Link'
 import moment from 'moment'
 import IsOwner from 'stemn-shared/misc/Auth/IsOwner'
 
-export default ({ pipeline, project, rerunPipeline }) => {
+export default ({ pipeline, project, rerunPipeline, cancelPipeline }) => {
   const userRouteParams = {
     userId: pipeline.data.owner._id,
   }
@@ -55,13 +55,26 @@ export default ({ pipeline, project, rerunPipeline }) => {
           team={ get(project, 'data.team', []) }
           minRole="admin"
         >
-          <Button
-            disabled={ pipeline.rerunPending }
-            onClick={ () => rerunPipeline({ pipelineId: pipeline.data._id }) }
-            className="primary flex-xs"
-          >
-              Rerun Pipeline
-          </Button>
+          { ['running', 'pending'].includes(pipeline.data.status) 
+            ? (
+              <Button
+                disabled={ pipeline.cancelPending }
+                onClick={ () => cancelPipeline({ pipelineId: pipeline.data._id }) }
+                className="warn flex-xs"
+              >
+                  Cancel Pipeline
+              </Button>
+            ) 
+            : (
+              <Button
+                disabled={ pipeline.rerunPending }
+                onClick={ () => rerunPipeline({ pipelineId: pipeline.data._id }) }
+                className="primary flex-xs"
+              >
+                  Rerun Pipeline
+              </Button>
+            )
+          }
         </IsOwner>
       </Col>
     </Row>

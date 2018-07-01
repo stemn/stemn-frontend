@@ -13,6 +13,7 @@ const initialState = {
         data: {},
         loading: boolean,
         rerunPending: boolean,
+        cancelPending: boolean,
       }
     */
   },
@@ -81,6 +82,13 @@ const reducer = (state, action) => {
       return i.assocIn(state, ['pipelineData', action.meta.pipelineId, 'rerunPending'], false)
     case 'PPIPELINES/RERUN_PIPELINE_FULFILLED':
       return i.assocIn(state, ['pipelineData', action.meta.pipelineId, 'rerunPending'], false)
+      
+    case 'PIPELINES/CANCEL_PIPELINE_PENDING':
+      return i.assocIn(state, ['pipelineData', action.meta.pipelineId, 'cancelPending'], true)
+    case 'PIPELINES/CANCEL_PIPELINE_REJECTED':
+      return i.assocIn(state, ['pipelineData', action.meta.pipelineId, 'cancelPending'], false)
+    case 'PIPELINES/CANCEL_PIPELINE_FULFILLED':
+      return i.assocIn(state, ['pipelineData', action.meta.pipelineId, 'cancelPending'], false)
 
     case 'PIPELINES/GET_STEP_PENDING':
       return i.assocIn(state, ['stepData', action.meta.cacheKey, 'loading'], true)

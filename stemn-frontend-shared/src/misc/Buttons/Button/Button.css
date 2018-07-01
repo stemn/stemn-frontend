@@ -94,6 +94,7 @@
 
 .button:global(.warn){
   background: warn;
+  border: 1px solid warn;
   color: white;
 }
 .button:global(.warn):hover{
