@@ -6,7 +6,7 @@ export default () => {
     companyName: 'Stemn',
     productName: 'Stemn Desktop',
     submitURL: GLOBAL_ENV.ELECTRON_CRASH_REPORT_SERVER,
-    autoSubmit: true,
+    uploadToServer: true,
     extra: {
       app_version: version,
       electron_context: process.type, // 'renderer' || 'browser'

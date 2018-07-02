@@ -18,8 +18,9 @@ import postStoreSetup from './postStoreSetup.js'
 import initApiServer from './api/index.js'
 import stringify from './utils/stringify.js'
 import { create as createWindow } from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js'
+import electronJsonStorage from 'electron-json-storage'
 
-const jsonStorage = pify(require('electron-json-storage'))
+const jsonStorage = pify(electronJsonStorage)
 
 // The windows object is exported so it can be accessed elsewhere
 export const windows = {
@@ -34,7 +35,6 @@ let store = {}
 const getArgs = (argv) => {
   const pathFlagIndex = argv.indexOf('--path')
   const pathIndex = pathFlagIndex !== -1 ? pathFlagIndex + 1 : -1
-  log.info('argv', argv)
   return {
     mode: {
       hidden: argv && argv.includes('--hidden'),
@@ -73,7 +73,7 @@ file.
 
 ********************************************************************************************** */
 
-log.info('---------------- Application started ----------------')
+log.info('Application started')
 
 if (!squirrelStartup) {
   global.state = {} // Ease remote-loading of initial state

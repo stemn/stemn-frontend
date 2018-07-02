@@ -26,7 +26,7 @@ module.exports = merge(config, {
     filename: 'index.js',
   },
   plugins: [
-//    new webpack.BannerPlugin(process.env.NODE_ENV === 'development' ? 'require("source-map-support").install();' : ''),
+    new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin(GLOBALS),
   ],
   target: 'electron-main',
