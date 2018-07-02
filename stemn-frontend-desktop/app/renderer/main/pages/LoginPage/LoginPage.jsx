@@ -4,7 +4,13 @@ import LoginPage from 'stemn-shared/pages/Login/Login'
 import {
   nextBackground,
   authenticate,
-  login } from 'stemn-shared/misc/Auth/Auth.actions.js'
+  login 
+} from 'stemn-shared/misc/Auth/Auth.actions.js'
+console.log({
+  nextBackground,
+  authenticate,
+  login 
+})
 
 function mapStateToProps({ auth }) {
   return { auth }

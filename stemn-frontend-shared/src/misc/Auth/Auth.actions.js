@@ -1,2 +1,1 @@
-import * as actions from './actions'
-module.exports = actions
+export * from './actions'

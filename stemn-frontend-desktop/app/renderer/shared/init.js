@@ -2,7 +2,7 @@ import moment from 'moment'
 import http from 'axios'
 import initRaven from 'stemn-frontend-desktop/app/shared/reporting/raven/raven.renderer.js'
 import 'moment/locale/en-gb'
-// import 'stemn-shared/assets/css/index.global.scss'
+import '../../shared/css/index.global.scss'
 
 // Assign the global_env to process.env
 // GLOBAL_ENV is set in webpack using the definePlugin
