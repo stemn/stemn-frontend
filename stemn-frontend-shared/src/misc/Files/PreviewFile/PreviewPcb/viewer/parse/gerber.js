@@ -1,4 +1,4 @@
-import whatGerber from 'whats-that-gerber'
+import whatGerber from '@stemn/whats-that-gerber'
 
 export default () => ({
   parse,

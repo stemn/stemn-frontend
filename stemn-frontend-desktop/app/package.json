@@ -15,6 +15,7 @@
     "source-map-support": "^0.4.0"
   },
   "dependencies": {
+    "@stemn/whats-that-gerber": "^2.1.2",
     "auto-launch": "^5.0.1",
     "autosuggest-highlight": "^2.1.1",
     "axios": "^0.15.3",

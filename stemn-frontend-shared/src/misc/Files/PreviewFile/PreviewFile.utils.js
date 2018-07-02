@@ -2,7 +2,7 @@ import { forEach, clone } from 'lodash'
 import i from 'icepick'
 import codemirror from 'codemirror'
 import 'codemirror/mode/meta.js'
-import whatGerber from 'whats-that-gerber'
+import whatGerber from '@stemn/whats-that-gerber'
 
 const getCodeMirrorExts = () => {
   let codeExts = ['pipeline', 'adoc', 'csv']
@@ -57,6 +57,7 @@ export const getViewerType = (fileName, provider) => {
   const mergeResolver = (targetVal, sourceVal) => (Array.isArray(targetVal) && sourceVal ? targetVal.concat(sourceVal) : sourceVal)
   const mergedFileTypes = i.merge(generalFileTypes, providerFileTypes, mergeResolver)
 
+  console.log(whatGerber(fileName))
   if (whatGerber(fileName)) {
     return 'gerber'
   } 
