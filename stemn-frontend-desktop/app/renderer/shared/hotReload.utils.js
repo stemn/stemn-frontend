@@ -3,9 +3,8 @@ import React from 'react'
 export const getAppContainer = (rootApp) => {
   if (process.env.NODE_ENV !== 'production') {
     const AppContainer = require('react-hot-loader').AppContainer
-    const Redbox = require('redbox-react')
     return (
-      <AppContainer errorReporter={ Redbox }>
+      <AppContainer>
         { rootApp }
       </AppContainer>
     )

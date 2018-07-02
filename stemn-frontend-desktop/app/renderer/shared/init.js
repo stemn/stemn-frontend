@@ -1,6 +1,5 @@
 import moment from 'moment'
 import http from 'axios'
-import initElectronCrash from 'stemn-frontend-desktop/app/shared/reporting/electron-crash/electron-crash.js'
 import initRaven from 'stemn-frontend-desktop/app/shared/reporting/raven/raven.renderer.js'
 import 'moment/locale/en-gb'
 // import 'stemn-shared/assets/css/index.global.scss'
@@ -12,7 +11,6 @@ if ((typeof GLOBAL_ENV !== 'undefined')) {
 }
 
 // Initialise Reporting
-initElectronCrash()
 initRaven()
 
 moment.locale('en-gb')

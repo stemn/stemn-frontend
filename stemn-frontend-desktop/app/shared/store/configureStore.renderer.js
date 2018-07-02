@@ -13,7 +13,7 @@ import routerFix                from 'stemn-shared/misc/Router/Router.middleware
 export default function configureStore(initialState) {
   const middleware = [
     thunk,
-    promise,
+    promise(),
     routerFix,
     forwardToMain,
     forwardToRendererWindow,
@@ -21,7 +21,7 @@ export default function configureStore(initialState) {
   ]
 
   // If we are in development || we have debug mode on
-  if (process.env.NODE_ENV == 'development' || initialState.system.settings.debug) {
+  if (process.env.NODE_ENV === 'development' || initialState.system.settings.debug) {
     middleware.push(createLogger({
       level: 'info',
       collapsed: true,

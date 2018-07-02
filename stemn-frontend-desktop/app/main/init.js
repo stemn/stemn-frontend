@@ -1,5 +1,4 @@
 import http from 'axios'
-import initElectronCrash from '../shared/reporting/electron-crash/electron-crash.js'
 import initRaven from '../shared/reporting/raven/raven.main.js'
 
 // Assign the global_env to process.env
@@ -9,7 +8,6 @@ if ((typeof GLOBAL_ENV !== 'undefined')) {
 }
 
 // Initialise Reporting
-initElectronCrash()
 initRaven()
 
 http.defaults.baseURL = `${GLOBAL_ENV.API_SERVER}/`
