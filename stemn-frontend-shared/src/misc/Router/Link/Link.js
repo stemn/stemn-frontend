@@ -124,6 +124,6 @@ const LinkComponent = (props) => {
   )
 }
 
-LinkComponent.propTypes = propTypesObject
+// LinkComponent.propTypes = propTypesObject
 
 export default LinkComponent
