@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-
 import classes from './User.css'
 import classNames from 'classnames'
-
 import StandardLayout from 'layout/StandardLayout'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import { Row, Col, Container } from 'stemn-shared/misc/Layout'

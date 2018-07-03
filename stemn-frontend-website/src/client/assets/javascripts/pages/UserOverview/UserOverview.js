@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-
 import classes from './UserOverview.css'
-import classNames from 'classnames'
 import { orderBy, values, sum } from 'lodash'
 import { Row, Col } from 'stemn-shared/misc/Layout'
 import Panel from 'stemn-shared/misc/Panels/Panel'
@@ -10,7 +8,7 @@ import ProjectRow from 'stemn-shared/misc/Projects/ProjectRow'
 import CalendarHeatmap from 'react-calendar-heatmap'
 import Pagination from 'stemn-shared/misc/Pagination'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
-
+import moment from 'moment'
 
 const normaliseValue = (value) => {
   if (value === 0) {
@@ -26,6 +24,9 @@ const normaliseValue = (value) => {
   } 
   return 5
 }
+
+const startDate = moment()
+const endDate = startDate.subtract(1, 'year')
 
 export default class UserOverview extends Component {
   getColorClass = (value) => {
@@ -66,7 +67,8 @@ export default class UserOverview extends Component {
         <br />
         <div className={ classes.panel }>
           <CalendarHeatmap
-            numDays={ 280 }
+            startDate={ startDate }
+            endDate={ endDate }
             gutterSize={ 2 }
             values={ heatMapData }
             classForValue={ this.getColorClass }
