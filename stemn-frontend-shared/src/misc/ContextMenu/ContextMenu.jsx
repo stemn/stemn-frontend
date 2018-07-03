@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import { ContextMenu, MenuItem, SubMenu } from 'react-contextmenu'
+import { ContextMenu, MenuItem, SubMenu, connectMenu } from 'react-contextmenu'
 import './ContextMenu.global.css'
 
 class AdvancedMenuItem extends React.Component {
@@ -9,7 +9,13 @@ class AdvancedMenuItem extends React.Component {
     if (menuItem.subMenu) {
       return (
         <SubMenu title={ menuItem.label }>
-          {menuItem.subMenu.map(subItem => <AdvancedMenuItem key={ subItem.label } menuItem={ subItem } item={ item } />)}
+          { menuItem.subMenu.map(subItem => (
+            <AdvancedMenuItem 
+              key={ subItem.label } 
+              menuItem={ subItem } 
+              item={ item } 
+            />
+          )) }
         </SubMenu>
       )
     }
@@ -17,6 +23,7 @@ class AdvancedMenuItem extends React.Component {
     const attributes = {
       className: classNames({ divider: menuItem.divider }),
     }
+
     return !menuItem.isHidden || !menuItem.isHidden(item)
       ? (
         <MenuItem
@@ -31,14 +38,21 @@ class AdvancedMenuItem extends React.Component {
   }
 }
 
+@connectMenu()
 export default class Menu extends React.Component {
-  static displayName = 'Menu';
-
   render() {
-    const { menu, identifier, item } = this.props
+    const { menu, identifier, trigger } = this.props
     return (
-      <ContextMenu identifier={ identifier }>
-        {menu ? menu.map(menuItem => <AdvancedMenuItem key={ menuItem.label } menuItem={ menuItem } item={ item } />) : null}
+      <ContextMenu id={ identifier }>
+        { menu && trigger
+          ? menu.map(menuItem => (
+            <AdvancedMenuItem 
+              key={ menuItem.label } 
+              menuItem={ menuItem } 
+              item={ trigger.item } 
+            />
+          )) 
+          : null }
       </ContextMenu>
     )
   }

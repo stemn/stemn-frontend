@@ -60,6 +60,7 @@ export default class CommitChanges extends React.Component {
               ? <div className="scroll-box layout-column flex">
                 { groupedChanges.map((item) => (
                   <ContextMenuTrigger 
+                    item={ item }
                     id={ contextIdentifier }
                     key={ item._id }
                   >

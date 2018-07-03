@@ -25,8 +25,8 @@ const normaliseValue = (value) => {
   return 5
 }
 
-const startDate = moment()
-const endDate = startDate.subtract(1, 'year')
+const startDate = moment().subtract(0.8, 'year').toDate()
+const endDate = moment().toDate()
 
 export default class UserOverview extends Component {
   getColorClass = (value) => {

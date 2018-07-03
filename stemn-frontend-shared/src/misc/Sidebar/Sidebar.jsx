@@ -104,6 +104,7 @@ export class Component extends React.Component {
                 <ContextMenuTrigger
                   id={ projectContextIdentifier }
                   key={ item._id }
+                  item={ item }
                 >
                   <SidebarProjectButton
                     item={ item }

@@ -24,7 +24,7 @@ const contextIdentifier = 'FileListCm'
 const FileRowContext = GLOBAL_ENV.APP_TYPE === 'web'
   ? FileRow
   : (props) => (
-    <ContextMenuTrigger id={ contextIdentifier }>
+    <ContextMenuTrigger id={ contextIdentifier } item={ props.file } data="test">
       <FileRow { ...props } />
     </ContextMenuTrigger>
   )
