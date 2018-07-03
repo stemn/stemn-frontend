@@ -1,7 +1,5 @@
 import React from 'react'
 
-// Styles
-import classNames from 'classnames'
 import classes from './Reactions.css'
 
 import Popover from 'stemn-shared/misc/Popover'

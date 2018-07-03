@@ -1,5 +1,3 @@
-// Container Core
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 // Container Actions
@@ -9,8 +7,6 @@ import React from 'react'
 import { Link } from 'react-router'
 import moment from 'moment'
 
-// Styles
-import classNames from 'classnames'
 import classes from './DashboardPage.css'
 
 // Sub Components

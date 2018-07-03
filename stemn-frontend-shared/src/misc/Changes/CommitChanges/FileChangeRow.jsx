@@ -4,7 +4,6 @@ import capitalizeFirstLetter from 'stemn-shared/utils/strings/capitalizeFirstLet
 
 // Components
 import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox'
-import TogglerExpand from 'stemn-shared/misc/Toggler/TogglerExpand/TogglerExpand.jsx'
 import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
 
 import Add from 'stemn-shared/assets/icons/changes/add.js'

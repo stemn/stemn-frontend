@@ -1,5 +1,3 @@
-// Container Core
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 // Container Actions
@@ -8,8 +6,6 @@ import { toggleSidebar } from 'stemn-shared/misc/Sidebar/Sidebar.actions.js'
 // Component Core
 import React from 'react'
 
-// Styles
-import classNames from 'classnames'
 import classes from './Header.css'
 
 // Sub Components

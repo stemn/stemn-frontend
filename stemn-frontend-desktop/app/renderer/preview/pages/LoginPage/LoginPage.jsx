@@ -1,5 +1,3 @@
-// Container Core
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 // Component Core
@@ -8,11 +6,6 @@ import React from 'react'
 // Actions
 import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js'
 
-// Styles
-import classNames from 'classnames'
-
-// Sub Components
-import Toolbar from 'stemn-frontend-desktop/app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
 import cloudProject   from 'stemn-shared/assets/images/pure-vectors/cloud-project.svg'
 import Button  from 'stemn-shared/misc/Buttons/Button/Button.jsx'
 

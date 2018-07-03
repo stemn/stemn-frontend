@@ -1,16 +1,9 @@
-// Container Core
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { get } from 'lodash'
-
-// Container Actions
-import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js'
 
 // Component Core
 import React from 'react'
 
-// Styles
-import classNames from 'classnames'
 import classes from './ProjectSettingsPage.css'
 
 import NavPill from 'stemn-shared/misc/Buttons/NavPill/NavPill'

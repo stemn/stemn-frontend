@@ -1,5 +1,4 @@
 import http from 'axios'
-import * as ThreadsActions from '../Threads/Threads.actions.js'
 import { addEvent, deleteEvent } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
 import confirmAuth from 'stemn-shared/misc/Auth/actions/confirmAuth'
 

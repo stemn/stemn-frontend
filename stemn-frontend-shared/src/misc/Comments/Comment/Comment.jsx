@@ -1,4 +1,3 @@
-import { bindActionCreators } from 'redux'
 import React, { Component } from 'react'
 import moment from 'moment'
 import classNames from 'classnames'

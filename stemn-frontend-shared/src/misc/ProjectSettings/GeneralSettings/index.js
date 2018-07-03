@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { has } from 'lodash'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'

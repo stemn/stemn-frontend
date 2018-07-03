@@ -1,8 +1,6 @@
 // Component Core
 import React from 'react'
 
-// Styles
-import classNames from 'classnames'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 
 class Component extends React.Component {

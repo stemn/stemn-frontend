@@ -1,7 +1,6 @@
 import React from 'react'
 import Radio from 'stemn-shared/misc/Input/Radio/Radio.jsx'
 import PublicPrivateIcon from 'stemn-shared/misc/Icons/PublicPrivateIcon'
-import classNames from 'classnames'
 
 export default class ProjectPermissionsRadio extends React.Component {
   render() {

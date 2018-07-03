@@ -1,12 +1,10 @@
 import React from 'react'
 import moment from 'moment'
-import { has }     from 'lodash'
 
 import classNames from 'classnames'
 import classes from './ThreadDisplayModal.css'
 
 import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox'
-import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import LabelSelect from 'stemn-shared/misc/Threads/LabelSelect/LabelSelect.jsx'
 import UserSelect from 'stemn-shared/misc/Users/UserSelect/UserSelect.jsx'
 import DatePicker from 'stemn-shared/misc/Calendar/DatePicker/DatePicker.jsx'

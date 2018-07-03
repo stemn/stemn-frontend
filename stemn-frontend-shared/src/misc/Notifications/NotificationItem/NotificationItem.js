@@ -6,8 +6,6 @@ import moment from 'moment'
 
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import MdDone from 'react-icons/md/done'
-import Link from 'stemn-shared/misc/Router/Link'
-import { getNotificationText } from 'stemn-shared/misc/Notifications/Notifications.utils'
 import NotificationLink from 'stemn-shared/misc/Notifications/NotificationLink'
 
 export default class NotificationItem extends Component {

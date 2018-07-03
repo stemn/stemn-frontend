@@ -1,5 +1,4 @@
 import i from 'icepick'
-import { uniq } from 'lodash'
 
 const initialState = {
   hydrated: false,

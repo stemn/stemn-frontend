@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
-import { pick, get } from 'lodash'
+import { get } from 'lodash';
 
-import classNames from 'classnames'
 import classes from '../ProjectNewModal/ProjectNewModal.scss'
 
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
-import FileSelectInput from 'stemn-shared/misc/FileSelectInput/FileSelectInput.jsx'
-import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import ProjectLinkRemote from 'stemn-shared/misc/Project/ProjectLinkRemote/ProjectLinkRemote.jsx'
 import { ArrowTabs, ArrowTab } from 'stemn-shared/misc/Tabs/ArrowTabs/ArrowTabs.jsx'

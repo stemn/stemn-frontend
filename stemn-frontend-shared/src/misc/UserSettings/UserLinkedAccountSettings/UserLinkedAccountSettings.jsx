@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Input from 'stemn-shared/misc/Input/Input/Input'
-import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 import LinkAccount from 'stemn-shared/misc/Settings/LinkAccount/LinkAccount'
 
 export default class UserLinkedAccountSettings extends Component {

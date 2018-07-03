@@ -2,13 +2,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-// Styles
-import classNames from 'classnames'
 import classes from './ColorSelect.css'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
-
-import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
-import MdMoreHoriz from 'react-icons/md/more-horiz'
 
 
 class Component extends React.Component {

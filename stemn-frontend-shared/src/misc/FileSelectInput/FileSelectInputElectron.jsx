@@ -1,5 +1,4 @@
 import React from 'react'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'

@@ -4,7 +4,6 @@ import classes from './NewThreadModal.scss'
 import classNames from 'classnames'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
-import Input from 'stemn-shared/misc/Input/Input/Input'
 import Editor from 'stemn-shared/misc/Editor/EditorNew'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 

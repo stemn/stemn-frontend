@@ -8,9 +8,6 @@ import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js
 // Component Core
 import React from 'react'
 
-// Styles
-import classNames from 'classnames'
-
 // Sub Components
 
 

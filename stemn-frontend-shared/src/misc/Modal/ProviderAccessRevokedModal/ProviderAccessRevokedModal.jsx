@@ -8,10 +8,6 @@ import * as AuthActions from 'stemn-shared/misc/Auth/Auth.actions.js'
 // Component Core
 import React from 'react'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
-import { Link } from 'react-router'
-
-// Styles
-import classNames from 'classnames'
 
 class Component extends React.Component {
   render() {

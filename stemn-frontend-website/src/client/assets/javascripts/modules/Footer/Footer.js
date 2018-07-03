@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import classes from './Footer.css'
 import classNames from 'classnames'
 
-import { Container, Row, Col } from 'stemn-shared/misc/Layout'
+import { Container } from 'stemn-shared/misc/Layout';
 import Link from 'stemn-shared/misc/Router/Link'
 import logo from '../LandingFooter/logo.png'
 

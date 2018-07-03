@@ -1,11 +1,8 @@
-// Container Core
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 // Container Actions
 import { newComment } from 'stemn-shared/misc/Comments/Comments.actions.js'
 // Component Core
 import React, { Component } from 'react'
-import moment from 'moment'
 // Styles
 import classNames from 'classnames'
 import classes from './CommentNew.scss'

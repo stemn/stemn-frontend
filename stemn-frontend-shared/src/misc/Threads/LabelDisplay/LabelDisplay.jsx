@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classes from './LabelDisplay.css'
 import classNames from 'classnames'
-import Link from 'stemn-shared/misc/Router/Link'
 
 export default class LabelDisplay extends Component {
   static propTypes = {

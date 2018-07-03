@@ -1,9 +1,7 @@
-import { bindActionCreators } from 'redux'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 import { saveFile } from '../Files.actions.js'
 import React, { Component } from 'react'
-import classNames from 'classnames'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import { getDownloadUrl } from '../utils'
 

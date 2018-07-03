@@ -1,7 +1,6 @@
 import React from 'react'
 import http from 'axios'
 import { version } from 'package-json'
-import classNames from 'classnames'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'

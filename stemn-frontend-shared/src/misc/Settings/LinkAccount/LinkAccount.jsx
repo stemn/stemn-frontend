@@ -1,7 +1,5 @@
 import React from 'react'
 
-import classNames from 'classnames'
-
 import Popover from 'stemn-shared/misc/Popover'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdDone from 'react-icons/md/done'

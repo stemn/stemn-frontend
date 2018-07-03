@@ -5,14 +5,10 @@ import { unlink, logout, authenticate } from 'stemn-shared/misc/Auth/Auth.action
 
 import React from 'react'
 
-import classNames from 'classnames'
 import classes from 'stemn-frontend-desktop/app/renderer/main/pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css'
 
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton.jsx'
-import LinkAccount from 'stemn-shared/misc/Settings/LinkAccount/LinkAccount.jsx'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
-import Input from 'stemn-shared/misc/Input/Input/Input'
-import TextDisplayBox from 'stemn-shared/misc/TextDisplayBox/TextDisplayBox.jsx'
 import UserProfileSettings from 'stemn-shared/misc/UserSettings/UserProfileSettings'
 import UserLinkedAccountSettings from 'stemn-shared/misc/UserSettings/UserLinkedAccountSettings'
 import UserCloudProviderSettings from 'stemn-shared/misc/UserSettings/UserCloudProviderSettings'

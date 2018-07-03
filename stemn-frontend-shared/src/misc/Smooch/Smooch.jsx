@@ -2,7 +2,6 @@
 import React from 'react'
 import classes from './Smooch.css'
 import classNames from 'classnames'
-import Smooch from 'smooch'
 import { init as initSmooch } from './Smooch.utils.js'
 import comments      from 'stemn-shared/assets/images/pure-vectors/comments.svg'
 

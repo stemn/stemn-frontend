@@ -1,15 +1,8 @@
-// Container Core
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-
-// Container Actions
-import * as UsersActions from 'stemn-shared/misc/Users/Users.actions.js'
 
 // Component Core
 import React from 'react'
 
-// Styles
-import classNames from 'classnames'
 import classes from '../ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css'
 
 // Sub Components

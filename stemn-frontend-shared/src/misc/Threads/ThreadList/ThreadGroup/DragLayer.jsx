@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { DragLayer } from 'react-dnd'
 import PropTypes from 'prop-types'
-import ThreadGroup from './ThreadGroup.jsx'
 import ThreadListItem from '../ThreadListItem/ThreadListItem.jsx'
 
 const layerStyles = {

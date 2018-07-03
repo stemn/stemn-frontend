@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import { filterBoard, getAllThreads } from '../Threads.utils.js'
-import { has, get } from 'lodash'
+import { has } from 'lodash';
 
-import classNames from 'classnames'
 import classes from './ThreadsDisplay.css'
 
 import ThreadList from '../ThreadList/ThreadList.jsx'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import SearchInput from 'stemn-shared/misc/Search/SearchInput'
-import Popover from 'stemn-shared/misc/Popover'
 import Guide from 'stemn-shared/misc/Guide/Guide'
 import cardsColumns from '../graphics/cards-columns.svg'
 import cardsStacked from '../graphics/cards-stacked.svg'

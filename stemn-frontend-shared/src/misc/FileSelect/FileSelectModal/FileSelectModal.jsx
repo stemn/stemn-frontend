@@ -1,11 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 import classes from './FileSelectModal.scss'
 
 import FileList from 'stemn-shared/misc/FileList'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
-import MdDone from 'react-icons/md/done'
 import { isDriveFileId, isDropboxFileId } from 'stemn-shared/misc/Files/utils'
 
 

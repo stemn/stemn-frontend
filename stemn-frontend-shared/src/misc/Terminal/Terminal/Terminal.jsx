@@ -3,7 +3,6 @@ import classes from './Terminal.scss'
 import classNames from 'classnames'
 import Ansi from 'ansi-to-react'
 import MdDown from 'react-icons/md/arrow-downward'
-import MdCode from 'react-icons/md/code'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 

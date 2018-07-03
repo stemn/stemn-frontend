@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-import classNames from 'classnames'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton.jsx'

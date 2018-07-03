@@ -1,5 +1,3 @@
-// Container Core
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 // Container Actions
@@ -7,11 +5,6 @@ import { connect } from 'react-redux'
 // Component Core
 import React from 'react'
 
-// Styles
-import classNames from 'classnames'
-
-// Sub Components
-import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import ThreadsDisplay from 'stemn-shared/misc/Threads/ThreadsDisplay'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////

@@ -11,8 +11,6 @@ import PropTypes from 'prop-types'
 import { omit } from 'lodash'
 import { getStepData } from './Walkthrough.config.js'
 
-// Styles
-import classNames from 'classnames'
 import classes from './Walkthrough.css'
 
 import Popover from 'stemn-shared/misc/Popover'

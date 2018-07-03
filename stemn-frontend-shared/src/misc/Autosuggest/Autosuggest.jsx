@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Autosuggest from 'react-autosuggest'
-import Highlight from './Highlight'
 import LoadingLinear from 'stemn-shared/misc/Loading/LoadingLinear/LoadingLinear'
 import classes from './Autosuggest.css'
 

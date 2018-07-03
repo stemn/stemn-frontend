@@ -1,12 +1,7 @@
 // Component Core
 import React from 'react'
 
-import Button from 'stemn-shared/misc/Buttons/Button/Button'
-
 import MagnifyInternet   from 'stemn-shared/assets/images/pure-vectors/magnify-internet.svg'
-
-// Styles
-import classNames from 'classnames'
 
 class Component extends React.Component {
   render() {

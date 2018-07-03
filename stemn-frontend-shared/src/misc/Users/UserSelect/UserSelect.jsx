@@ -6,8 +6,6 @@ import UserMinimalRow from 'stemn-shared/misc/Users/UserMinimalRow'
 import MdClose from 'react-icons/md/close'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 
-import classNames from 'classnames'
-
 class Component extends React.Component {
   remove = (idx) => {
     const { dispatch, model, onChange } = this.props

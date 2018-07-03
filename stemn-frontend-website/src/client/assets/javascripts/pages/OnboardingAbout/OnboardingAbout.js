@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
-import { Container, Col, Row } from 'stemn-shared/misc/Layout'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import PanelDescription from 'stemn-shared/misc/Panels/PanelDescription'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
-import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import Upload from 'stemn-shared/misc/Upload/Upload'
 import classes from './OnboardingAbout.scss'
-import classNames from 'classnames'
 
 export default class OnboardingAbout extends Component {
   componentWillUnmount() {

@@ -4,7 +4,6 @@ import classes from '../Login/Login.css'
 import { Link } from 'react-router'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 import Input from 'stemn-shared/misc/Input/Input/Input'
-import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
 export default class PasswordLost extends React.Component {
   submit = (event) => {

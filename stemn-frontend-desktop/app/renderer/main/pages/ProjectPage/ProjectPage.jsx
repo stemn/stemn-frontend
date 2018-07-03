@@ -9,10 +9,8 @@ import * as SystemActions from 'stemn-shared/desktop/System/System.actions.js'
 import React from 'react'
 import PropTypes from 'prop-types'
 import Link from 'stemn-shared/misc/Router/Link'
-import { has, get } from 'lodash'
+import { get } from 'lodash';
 
-// Components
-import Tabs from 'stemn-shared/misc/Tabs/Tabs'
 import Header from 'stemn-shared/misc/Header/Header.jsx'
 import Banner from 'stemn-shared/misc/Banner/Banner.jsx'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
@@ -27,8 +25,6 @@ import PublicPrivateIcon from 'stemn-shared/misc/Icons/PublicPrivateIcon'
 import folderLockedVector  from 'stemn-shared/assets/images/pure-vectors/folder-locked.svg'
 import globalVector  from 'stemn-shared/assets/images/pure-vectors/global.svg'
 
-// Styles
-import classNames from 'classnames'
 import classes from './ProjectPage.css'
 
 class Component extends React.Component {

@@ -4,7 +4,6 @@ import { isWebGlSupported } from './PreviewCad.utils.js'
 import AutodeskLocalViewer from './AutodeskLocalViewer/AutodeskLocalViewer'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import modelLocked from 'stemn-shared/assets/images/pure-vectors/model-locked.svg'
-import modelGear from 'stemn-shared/assets/images/pure-vectors/model-gear.svg'
 
 
 export default class PreviewCad extends React.Component {

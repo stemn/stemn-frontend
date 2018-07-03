@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import StandardLayout from 'layout/StandardLayout'
 import { Helmet } from 'react-helmet'
 import classes from 'layout/layout.css'
-import Link from 'stemn-shared/misc/Router/Link'
 
 export default class Security extends Component {
   render() {

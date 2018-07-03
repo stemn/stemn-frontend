@@ -5,9 +5,6 @@ import { connect } from 'react-redux'
 import { requestBetaCode, submitBetaCode } from 'stemn-shared/misc/Auth/Auth.actions.js'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 
-// Styles
-import classNames from 'classnames'
-
 class Component extends React.Component {
   state = { value: '' };
 

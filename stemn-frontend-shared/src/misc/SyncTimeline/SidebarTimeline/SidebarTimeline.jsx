@@ -1,9 +1,6 @@
 // Component Core
 import React from 'react'
 
-// Styles
-import classNames from 'classnames'
-
 // Sub Components
 import FileChangeTitleRow  from 'stemn-shared/misc/Changes/CommitChanges/FileChangeTitleRow'
 import LoadingOverlay      from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'

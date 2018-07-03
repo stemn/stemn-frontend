@@ -1,4 +1,7 @@
 {
   "parser": "babel-eslint",
-  "extends": "stemn"
+  "extends": "stemn",
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js"] }]
+  }
 }

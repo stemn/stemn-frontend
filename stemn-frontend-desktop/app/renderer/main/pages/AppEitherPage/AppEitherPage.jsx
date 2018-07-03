@@ -1,9 +1,4 @@
-import electron from 'electron'
-
-// Container Core
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
 
 // Component Core
 import React from 'react'

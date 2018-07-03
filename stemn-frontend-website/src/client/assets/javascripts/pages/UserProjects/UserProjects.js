@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { orderBy } from 'lodash'
 import classes from './UserProjects.css'
-import classNames from 'classnames'
 import ProjectRow from 'stemn-shared/misc/Projects/ProjectRow'
 
 export default class UserProjects extends Component {

@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { storeRemove, storePush } from 'stemn-shared/misc/Store/Store.actions'
 
 import CheckboxAlt from 'stemn-shared/misc/Input/CheckboxAlt/CheckboxAlt.jsx'
-import classes from './GroupSelect.css'
 
 class LabelSelectRow extends Component {
   onChange = () => {

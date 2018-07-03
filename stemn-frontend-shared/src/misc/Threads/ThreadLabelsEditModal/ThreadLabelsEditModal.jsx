@@ -7,12 +7,8 @@ import * as ThreadsActions from '../Threads.actions.js'
 
 // Component Core
 import React from 'react'
-import moment from 'moment'
 import { get, has } from 'lodash'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
-
-// Styles
-import classNames from 'classnames'
 
 // Sub Components
 import ThreadLabelsEdit from '../ThreadLabelsEdit/ThreadLabelsEdit.jsx'

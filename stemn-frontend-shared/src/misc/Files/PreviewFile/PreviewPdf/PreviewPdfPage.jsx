@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classes from './PreviewPdf.css'
-import PDFJS from 'pdfjs-dist'
 import PDFJSUtils from 'pdfjs-dist/web/pdf_viewer.js'
 import Waypoint from 'react-waypoint'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'

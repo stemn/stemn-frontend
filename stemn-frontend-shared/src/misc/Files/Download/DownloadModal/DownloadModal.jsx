@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import { orderBy } from 'lodash'
 import { orderByTime } from 'stemn-shared/misc/Timeline/Timeline.utils'
 import { getRevisions } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.utils'
 
@@ -9,7 +8,6 @@ import classNames from 'classnames'
 import classes from './DownloadModal.css'
 
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
-import MdDone from 'react-icons/md/done'
 import DownloadFile from '../../DownloadFile/DownloadFile.jsx'
 import Label from 'stemn-shared/misc/Label/Label.jsx'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import markdownIt from 'markdown-it'
 import pluginEmoji from 'markdown-it-emoji'
 import pluginKatex from 'markdown-it-katex'

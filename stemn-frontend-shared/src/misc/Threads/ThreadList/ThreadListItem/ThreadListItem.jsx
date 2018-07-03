@@ -23,7 +23,6 @@ import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleI
 import MdOpenInNew from 'react-icons/md/open-in-new'
 import ThreadLabelDots from 'stemn-shared/misc/Threads/ThreadLabelDots/ThreadLabelDots.jsx'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
-import UserSelect from 'stemn-shared/misc/Users/UserSelect/UserSelect.jsx'
 import DueDate from 'stemn-shared/misc/Threads/ThreadDueDate'
 import threadDisplayModalName from 'stemn-shared/misc/Threads/ThreadDisplayModal'
 

@@ -16,9 +16,6 @@ import classes from './FileListPopup.css'
 
 // Sub Components
 import LoadingOverlay   from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
-import MdRefresh        from 'react-icons/md/refresh'
-import MdHome           from 'react-icons/md/home'
-import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import FileIcon         from './FileIcon'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////

@@ -4,7 +4,6 @@ import * as FilesActions from '../Files.actions.js'
 import React from 'react'
 import PropTypes from 'prop-types'
 import { omit } from 'lodash'
-import classNames from 'classnames'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'
 

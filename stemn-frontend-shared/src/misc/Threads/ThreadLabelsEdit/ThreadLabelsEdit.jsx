@@ -2,7 +2,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import getUuid from 'stemn-shared/utils/getUuid.js'
-import classNames from 'classnames'
 import classes from './ThreadLabelsEdit.css'
 import { storeRemove, storePush } from 'stemn-shared/misc/Store/Store.actions'
 import { showConfirm } from 'stemn-shared/misc/Modal/Modal.actions.js'

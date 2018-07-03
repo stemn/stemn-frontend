@@ -1,6 +1,5 @@
 // Component Core
 import React from 'react'
-import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
 import { omit } from 'lodash'
 
 // Styles

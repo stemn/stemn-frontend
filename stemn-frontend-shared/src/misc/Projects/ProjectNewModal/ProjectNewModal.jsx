@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { pick, get } from 'lodash'
 
-import classNames from 'classnames'
 import classes from './ProjectNewModal.scss'
 
 import Button from 'stemn-shared/misc/Buttons/Button/Button'

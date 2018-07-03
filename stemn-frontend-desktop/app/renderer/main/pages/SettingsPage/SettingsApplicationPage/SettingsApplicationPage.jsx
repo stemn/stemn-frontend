@@ -1,5 +1,3 @@
-// Container Core
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 // Container Actions
@@ -13,16 +11,11 @@ import { relaunch } from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.a
 // Component Core
 import React from 'react'
 
-// Styles
-import classNames from 'classnames'
 import classes from 'stemn-frontend-desktop/app/renderer/main/pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css'
 
-// Sub Components
-import { Link } from 'react-router'
 import Toggle             from 'stemn-shared/misc/Input/Toggle/Toggle'
 import ProgressButton     from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton.jsx'
 import FileSelectInputElectron from 'stemn-shared/misc/FileSelectInput/FileSelectInputElectron.jsx'
-import Checkbox           from 'stemn-shared/misc/Input/Checkbox/Checkbox'
 import SimpleTable        from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable.jsx'
 import Banner             from 'stemn-shared/misc/Banner/Banner.jsx'
 import releaseNotesModalName from 'stemn-shared/misc/Modal/ReleaseNotesModal'

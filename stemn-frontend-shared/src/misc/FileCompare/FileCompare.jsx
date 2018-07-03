@@ -8,7 +8,7 @@ import DragResize from 'stemn-shared/misc/DragResize/DragResize.jsx'
 import FileCompareMenu from 'stemn-shared/misc/FileCompare/FileCompareMenu'
 import FileCompareInner from 'stemn-shared/misc/FileCompare/FileCompareInner/FileCompareInner.jsx'
 import Timeline from 'stemn-shared/misc/Timeline/Timeline.jsx'
-import { orderBy, has, get } from 'lodash'
+import { get } from 'lodash';
 
 export default class FileCompare extends Component {
   static propTypes = {

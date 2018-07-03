@@ -1,7 +1,5 @@
 import React from 'react'
 
-// Styles
-import classNames from 'classnames'
 import styles from './CompareFiles.css'
 
 export default class CompareFiles extends React.Component {

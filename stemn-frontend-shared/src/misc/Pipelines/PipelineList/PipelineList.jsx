@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-import classNames from 'classnames'
 import classes from './PipelineList.css'
 import PipelineRow from '../PipelineRow'
 

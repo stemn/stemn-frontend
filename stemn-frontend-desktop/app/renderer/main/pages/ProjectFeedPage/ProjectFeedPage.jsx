@@ -8,14 +8,7 @@ import * as SyncTimelineActions from 'stemn-shared/misc/SyncTimeline/SyncTimelin
 // Component Core
 import React from 'react'
 
-// Styles
-import classNames from 'classnames'
-import feedPageStyles from './ProjectFeedPage.css'
-
-// Sub Components
-import { has }                  from 'lodash'
 import { Link }                 from 'react-router'
-import Timeline                 from 'stemn-shared/misc/Timeline/Timeline.jsx'
 import SidebarTimeline          from 'stemn-shared/misc/SyncTimeline/SidebarTimeline/SidebarTimeline.jsx'
 import ContentSidebar           from 'stemn-shared/misc/ContentSidebar'
 import Guide                    from 'stemn-shared/misc/Guide/Guide'

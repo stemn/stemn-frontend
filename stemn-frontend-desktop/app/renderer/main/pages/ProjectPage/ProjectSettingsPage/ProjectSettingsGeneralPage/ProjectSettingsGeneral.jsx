@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import GeneralSettings from 'stemn-shared/misc/ProjectSettings/GeneralSettings'
 import CloudSettings from 'stemn-shared/misc/ProjectSettings/CloudSettings'
 import DeleteSettings from 'stemn-shared/misc/ProjectSettings/DeleteSettings'

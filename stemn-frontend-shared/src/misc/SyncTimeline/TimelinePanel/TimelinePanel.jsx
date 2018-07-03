@@ -1,14 +1,9 @@
 // Component Core
 import React from 'react'
-import moment from 'moment'
-
-// Styles
-import classNames from 'classnames'
 import classes from './TimelinePanel.css'
 
 // Sub Components
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
-import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 
 export default class TimelinePanel extends React.Component {
   render() {

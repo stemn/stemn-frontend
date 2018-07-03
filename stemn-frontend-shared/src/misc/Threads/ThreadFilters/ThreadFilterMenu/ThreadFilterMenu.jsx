@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 
 const Item = ({ setFilter, objKey, value, filterObject, children }) => (
   <a

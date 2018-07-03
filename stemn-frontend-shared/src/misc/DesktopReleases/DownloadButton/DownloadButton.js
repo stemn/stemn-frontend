@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
-import classNames from 'classnames'
 import classes from './DownloadButton.css'
 
 import WindowsIcon from 'stemn-shared/assets/icons/os/windows'

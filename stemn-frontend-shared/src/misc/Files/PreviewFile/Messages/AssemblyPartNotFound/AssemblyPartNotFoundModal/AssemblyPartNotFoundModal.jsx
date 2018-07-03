@@ -1,7 +1,5 @@
 import React from 'react'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
-import StandardTable from 'stemn-shared/misc/Tables/StandardTable/StandardTable.jsx'
-import classNames from 'classnames'
 
 class Component extends React.Component {
   render() {

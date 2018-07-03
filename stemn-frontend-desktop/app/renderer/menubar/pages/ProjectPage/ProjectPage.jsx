@@ -14,7 +14,6 @@ import LoadingOverlay     from 'stemn-shared/misc/Loading/LoadingOverlay/Loading
 import CommitChanges      from 'stemn-shared/misc/Changes/CommitChanges/CommitChanges.jsx'
 import CommitBox          from 'stemn-shared/misc/Changes/CommitBox/CommitBox.jsx'
 import Toolbar            from 'stemn-frontend-desktop/app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
-import MdOpenInNew        from 'react-icons/md/open-in-new'
 import { Link }           from 'react-router'
 import cloudLocked        from 'stemn-shared/assets/images/pure-vectors/cloud-locked.svg'
 

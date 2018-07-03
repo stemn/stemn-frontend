@@ -3,9 +3,6 @@ import React from 'react'
 
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 
-// Styles
-import classNames from 'classnames'
-
 class Component extends React.Component {
   state = {
     value: '',

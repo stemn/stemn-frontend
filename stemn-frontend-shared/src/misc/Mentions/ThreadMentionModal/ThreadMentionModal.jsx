@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import classNames from 'classnames'
 import classes from './ThreadMentionModal.css'
 import howMany from 'stemn-shared/utils/strings/howMany.js'
 import SearchInput from 'stemn-shared/misc/Search/SearchInput'

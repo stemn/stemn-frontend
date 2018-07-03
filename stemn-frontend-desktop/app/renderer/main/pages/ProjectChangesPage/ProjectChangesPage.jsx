@@ -7,20 +7,15 @@ import * as WalkthroughActions from 'stemn-shared/misc/Walkthrough/Walkthrough.a
 
 import React from 'react'
 
-import i from 'icepick'
 import { has, some } from 'lodash'
-
-import classNames from 'classnames'
 
 import { Link }             from 'react-router'
 import ContentSidebar       from 'stemn-shared/misc/ContentSidebar'
 import LoadingOverlay       from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
-import Timeline             from 'stemn-shared/misc/Timeline/Timeline.jsx'
 import CommitChanges        from 'stemn-shared/misc/Changes/CommitChanges/CommitChanges.jsx'
 import CommitBox            from 'stemn-shared/misc/Changes/CommitBox/CommitBox.jsx'
 import FileCompare          from 'stemn-shared/misc/FileCompare'
 import Guide                from 'stemn-shared/misc/Guide/Guide'
-import cloudLocked          from 'stemn-shared/assets/images/pure-vectors/cloud-locked.svg'
 import file                 from 'stemn-shared/assets/images/pure-vectors/file.svg'
 import commitChanges        from './commit-changes.svg'
 import compareFile          from './compare-file.svg'

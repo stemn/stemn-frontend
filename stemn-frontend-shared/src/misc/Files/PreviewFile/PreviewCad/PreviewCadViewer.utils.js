@@ -1,5 +1,4 @@
 import getUuid from 'stemn-shared/utils/getUuid.js'
-import { forEach } from 'lodash'
 import 'javascript-detect-element-resize' // addResizeListener && removeResizeListener
 
 const filter       = { viewport: true }

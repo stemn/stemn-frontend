@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import classes from './Crumb.scss'
 import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'

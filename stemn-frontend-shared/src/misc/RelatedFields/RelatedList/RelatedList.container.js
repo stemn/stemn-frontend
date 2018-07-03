@@ -1,4 +1,3 @@
-import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import RelatedList from './RelatedList'
 import { getRelatedFields } from 'stemn-shared/misc/RelatedFields/RelatedFields.actions'
