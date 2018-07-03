@@ -11,7 +11,9 @@ export default class UploadModal extends Component {
     this.props.reset({ cacheKey: uploadId })
   }
   render() {
-    const { modalCancel, reset } = this.props
+    const {
+      modalCancel
+    } = this.props
     return (
       <div style={ { width: '600px' } }>
         <div className="modal-title">Upload a file</div>

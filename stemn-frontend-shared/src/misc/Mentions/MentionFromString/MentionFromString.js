@@ -23,7 +23,10 @@ export default class MentionFromString extends Component {
     showThreadModal: PropTypes.func,
   }
   render() {
-    const { href, display, showThreadModal } = this.props
+    const {
+      href,
+      display
+    } = this.props
     const [entityId, mentionType, mentionId] = href.split(':')
 
     const mentionInfo = getMentionInfo(mentionType, entityId, display)

@@ -37,7 +37,13 @@ export default class Home extends Component {
     },
   })
   render() {
-    const { timeline, push, filterValue, location, page, size } = this.props
+    const {
+      timeline,
+      filterValue,
+      location,
+      page,
+      size
+    } = this.props
 
     const hasResults = timeline && timeline.data && timeline.data.length > 0
     const hasNoResults = timeline && timeline.data && timeline.data.length === 0

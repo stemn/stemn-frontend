@@ -55,7 +55,13 @@ export default class Upload extends Component {
   )
 
   render() {
-    const { uploadData, style, containerClassName, imageClassName, model, value } = this.props
+    const {
+      uploadData,
+      style,
+      containerClassName,
+      imageClassName,
+      value
+    } = this.props
 
     const containerClasses = classNames(classes.container, containerClassName)
     const imageClasses = classNames(classes.image, imageClassName)

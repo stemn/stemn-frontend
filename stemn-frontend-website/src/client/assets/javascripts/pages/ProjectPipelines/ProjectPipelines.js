@@ -54,7 +54,14 @@ export default class ProjectPipelines extends Component {
     })
   }
   renderInner() {
-    const { projectId, pipelines, location, page, size, filter, filterIsDefault, board } = this.props
+    const {
+      projectId,
+      pipelines,
+      location,
+      page,
+      size,
+      filterIsDefault
+    } = this.props
 
     const isLoaded = pipelines && pipelines.data
     const isLoading = !pipelines || pipelines.loading
@@ -85,7 +92,10 @@ export default class ProjectPipelines extends Component {
     )
   }
   render() {
-    const { project, pipelines, filter } = this.props
+    const {
+      project,
+      filter
+    } = this.props
     const team = get(project, 'data.team', [])
 
     const userFilterOptions = [

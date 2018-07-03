@@ -53,7 +53,11 @@ class FileSelectInput extends React.Component {
   };
 
   render() {
-    const { provider, model, value, disabled } = this.props
+    const {
+      provider,
+      value,
+      disabled
+    } = this.props
 
     const validatePath = (path, fileId, provider) => {
       if (provider == 'drive') {

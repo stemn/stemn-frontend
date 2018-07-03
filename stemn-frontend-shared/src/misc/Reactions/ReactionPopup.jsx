@@ -11,7 +11,9 @@ import { options } from './Reactions.utils.js'
 
 export default class ReactionPopup extends React.Component {
   render() {
-    const { submitFn, reactions } = this.props
+    const {
+      submitFn
+    } = this.props
 
     return (
       <Popover preferPlace={ this.props.preferPlace }>

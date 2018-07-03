@@ -9,7 +9,11 @@ export class Component extends React.Component {
   };
 
   onChange = (event) => {
-    const { model, dispatch, type, changeAction } = this.props
+    const {
+      model,
+      type,
+      changeAction
+    } = this.props
     const prevValue = this.state.value
     let newValue = event.target.value
 

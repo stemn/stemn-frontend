@@ -6,7 +6,9 @@ import { Link } from 'react-router'
 
 class Component extends React.Component {
   render() {
-    const { title, message, modalCancel, modalConfirm } = this.props
+    const {
+      modalConfirm
+    } = this.props
     return (
       <div style={ { width: '500px' } }>
         <div className="modal-title">Google Authentication Error</div>

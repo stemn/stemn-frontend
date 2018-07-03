@@ -84,7 +84,14 @@ export class Component extends React.Component {
   };
 
   render() {
-    const { enablePreview, mode, changeMode, revisions, file1, file2, dispatch } = this.props
+    const {
+      enablePreview,
+      mode,
+      changeMode,
+      revisions,
+      file1,
+      file2
+    } = this.props
 
     if (!file1) { return null }
 

@@ -36,7 +36,14 @@ export default class FileCompareInner extends Component {
     this.setState({ position: event.target.value })
   }
   render() {
-    const { project, file1, file2, event, compareId, mode, header } = this.props
+    const {
+      project,
+      file1,
+      file2,
+      event,
+      mode,
+      header
+    } = this.props
     const { width, position } = this.state
     
     const compareModeClasses = {

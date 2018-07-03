@@ -37,7 +37,9 @@ export class DisplayReadme extends React.Component {
   };
 
   render() {
-    const { file, fileData } = this.props
+    const {
+      fileData
+    } = this.props
     if (fileData && fileData.loading || fileData && fileData.data) {
       return (
         <div { ...omit(this.props, Object.keys(propTypesObject)) }>

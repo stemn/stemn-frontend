@@ -39,7 +39,6 @@ export default class EditorNew extends Component {
     }
   }
   onChange = (newValue) => {
-    const { model, change } = this.props
     // Update the redux value
     //     change(model, newValue)
     // Update internal value
@@ -88,7 +87,6 @@ export default class EditorNew extends Component {
   render() {
     const { model, change, placeholder, className, tabIndex, ...otherProps } = this.props
     const { value } = this.state
-    const { codemirror } = this.state
 
     const options = {
       lineNumbers: false,

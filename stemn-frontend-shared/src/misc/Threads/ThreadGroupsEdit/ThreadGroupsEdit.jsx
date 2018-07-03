@@ -52,7 +52,10 @@ class ThreadGroupsEdit extends Component {
   }
 
   render() {
-    const { model, value, props } = this.props
+    const {
+      model,
+      value
+    } = this.props
 
     return (
       <div>

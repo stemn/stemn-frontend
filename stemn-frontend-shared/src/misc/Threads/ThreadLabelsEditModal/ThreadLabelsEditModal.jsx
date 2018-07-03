@@ -36,8 +36,9 @@ export class Component extends React.Component {
 
   render() {
     const {
-      boardModel, board,
-      modalCancel, modalConfirm,
+      boardModel,
+      board,
+      modalCancel
     } = this.props
 
     return (

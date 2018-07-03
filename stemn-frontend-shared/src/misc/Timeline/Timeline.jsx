@@ -71,7 +71,6 @@ class Component extends React.Component {
   render() {
     const { items, selected, isSelected, onSelect, preferPlace, style, className, size } = this.props
     const { page, numPages } = this.state
-    const numberToShow = 15
     const moreLeft  = numPages - 1 > page
     const moreRight = page > 0
 

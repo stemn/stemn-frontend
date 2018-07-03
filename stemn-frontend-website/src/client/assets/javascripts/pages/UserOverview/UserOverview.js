@@ -36,7 +36,14 @@ export default class UserOverview extends Component {
     return classes[`s${normaliseValue(value.count)}`]
   }
   render() {
-    const { user, projects, timeline, history, location, page, size } = this.props
+    const {
+      projects,
+      timeline,
+      history,
+      location,
+      page,
+      size
+    } = this.props
     const noMoreResults =  timeline && timeline.data && timeline.data.length < size
 
     const heatMapData = history && history.data

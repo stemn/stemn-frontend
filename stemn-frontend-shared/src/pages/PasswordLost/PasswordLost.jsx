@@ -16,7 +16,9 @@ export default class PasswordLost extends React.Component {
   };
 
   render() {
-    const { authenticate, auth } = this.props
+    const {
+      auth
+    } = this.props
     
     return (
       <div className="flex rel-box">

@@ -53,7 +53,20 @@ export default class ProjectThreads extends Component {
     })
   }
   render() {
-    const { project, board, threads, location, filter, boardModel, showNewThreadModal, page, size, filterStorePath, filterIsDefault, setFilter, filterCacheKey, filterModel } = this.props
+    const {
+      project,
+      board,
+      threads,
+      location,
+      filter,
+      page,
+      size,
+      filterStorePath,
+      filterIsDefault,
+      setFilter,
+      filterCacheKey,
+      filterModel
+    } = this.props
     const noMoreResults = threads && threads.data && threads.data.length < size
     const isLoading = !threads || threads.loading
     const isLoaded = threads && threads.data && board && board.data

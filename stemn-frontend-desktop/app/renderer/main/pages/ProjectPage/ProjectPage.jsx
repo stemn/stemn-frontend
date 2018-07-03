@@ -44,7 +44,13 @@ class Component extends React.Component {
     }
   }
   render() {
-    const { project, system, children, systemActions, params, dispatch } = this.props
+    const {
+      project,
+      system,
+      children,
+      systemActions,
+      dispatch
+    } = this.props
     const baseLink       = `project/${project && project.data ? project.data._id : ''}`
     const isLoading      = !project || !project.data
     const isConnected    = project && project.data && project.data.remote && project.data.remote.provider

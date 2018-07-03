@@ -29,7 +29,9 @@ export default class OrganisationSettings extends Component {
     })
   }
   render() {
-    const { project, saveProject } = this.props
+    const {
+      project
+    } = this.props
     return (
       <div>
         <h3>Organisation Tags</h3>

@@ -25,7 +25,11 @@ class ProjectSettingsGeneral extends Component {
     })
   }
   render() {
-    const { project, projectModel, saveProject, removeField, addField } = this.props
+    const {
+      project,
+      projectModel,
+      saveProject
+    } = this.props
     return (
       <div>
         <InfoPanel>

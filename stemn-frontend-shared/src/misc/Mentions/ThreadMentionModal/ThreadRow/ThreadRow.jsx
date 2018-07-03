@@ -32,7 +32,12 @@ export class Component extends React.Component {
   componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
 
   render() {
-    const { thread, entityModel, toggleComplete, toggleRelated, status } = this.props
+    const {
+      thread,
+      toggleComplete,
+      toggleRelated,
+      status
+    } = this.props
 
     if (!thread || !thread.data) {
       return (

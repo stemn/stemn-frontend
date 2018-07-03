@@ -24,7 +24,11 @@ class Component extends React.Component {
   };
 
   render() {
-    const { model, value, children, placeholder } = this.props
+    const {
+      value,
+      children,
+      placeholder
+    } = this.props
     return (
       <TextDisplayBox
         className={ classes.input }

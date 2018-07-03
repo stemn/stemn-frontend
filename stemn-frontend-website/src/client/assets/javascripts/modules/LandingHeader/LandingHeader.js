@@ -41,7 +41,9 @@ export default class LandingHeader extends Component {
     }
   }
   isLoggedIn() {
-    const { auth, logout, newProject } = this.props
+    const {
+      auth
+    } = this.props
     const routeParams = { userId: auth.user._id }
 
     return (
@@ -71,7 +73,9 @@ export default class LandingHeader extends Component {
   }
   render() {
     const { atTop, isOpen } = this.state
-    const { auth, logout, newProject } = this.props
+    const {
+      auth
+    } = this.props
     const allClasses = classNames(
       classes.header,
       'layout-xs-column layout-align-xs-center layout-gt-xs-row layout-gt-xs-align-start-center',

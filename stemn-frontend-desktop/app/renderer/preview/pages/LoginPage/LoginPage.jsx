@@ -18,7 +18,9 @@ import Button  from 'stemn-shared/misc/Buttons/Button/Button.jsx'
 
 export class Component extends React.Component {
   render() {
-    const { AuthActions, auth, dispatch } = this.props
+    const {
+      dispatch
+    } = this.props
     return (
       <div className="flex layout-column layout-align-center-center text-center">
         <div style={ { maxWidth: '300px' } }>

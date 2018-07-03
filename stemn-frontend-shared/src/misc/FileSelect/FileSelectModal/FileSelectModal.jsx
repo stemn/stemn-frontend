@@ -82,7 +82,11 @@ export default class FileSelectModal extends React.Component {
   };
 
   render() {
-    const { projectId, path, fileSelect, options } = this.props
+    const {
+      projectId,
+      fileSelect,
+      options
+    } = this.props
 
     const validatePath = (path, provider) => {
       if (provider == 'drive') {

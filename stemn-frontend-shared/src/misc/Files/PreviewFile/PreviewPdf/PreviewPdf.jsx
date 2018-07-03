@@ -61,7 +61,6 @@ class PDF extends React.Component {
   };
 
   render() {
-    const { fileMeta, fileData } = this.props
     const { pdf, scale } = this.state
 
     return (

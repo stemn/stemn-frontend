@@ -8,7 +8,10 @@ import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 
 class Component extends React.Component {
   render() {
-    const { dispatch, model, value } = this.props
+    const {
+      dispatch,
+      model
+    } = this.props
 
     const niceColors = [
       '#001F3F',

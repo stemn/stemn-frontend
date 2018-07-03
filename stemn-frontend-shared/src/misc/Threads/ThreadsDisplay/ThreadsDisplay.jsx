@@ -38,7 +38,16 @@ export default class ThreadsDisplay extends Component {
     })
   }
   render() {
-    const { threads, board, boardModel, project, filter, filterModel, filterCacheKey, setFilter, projectBoards } = this.props
+    const {
+      threads,
+      board,
+      project,
+      filter,
+      filterModel,
+      filterCacheKey,
+      setFilter,
+      projectBoards
+    } = this.props
     const { hideGuide } = this.state
 
     const layoutOptions = [{

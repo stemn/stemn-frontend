@@ -110,8 +110,14 @@ class Page extends React.Component {
   };
 
   render() {
-    const { pdf, scale, index } = this.props
-    const { width, height, status, page } = this.state
+    const {
+      scale
+    } = this.props
+    const {
+      width,
+      height,
+      status
+    } = this.state
 
     const sizeStyles = {
       width: width * scale,

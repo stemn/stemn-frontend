@@ -23,8 +23,6 @@ class Component extends React.Component {
   };
 
   render() {
-    const { value } = this.state
-
     return (
       <div style={ { width: '400px' } }>
         <div className="modal-title">Request Beta Access</div>

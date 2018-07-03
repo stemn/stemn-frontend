@@ -11,7 +11,10 @@ export default class UserEmailSettings extends Component {
     saveUser: PropTypes.func.isRequired,
   }
   addEmail = () => {
-    const { saveUser, setPrimaryEmail, auth } = this.props
+    const {
+      setPrimaryEmail,
+      auth
+    } = this.props
     //    saveUser({
     //      user: {
     //        _id: auth.user._id,

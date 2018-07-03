@@ -5,7 +5,11 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button'
 
 class Component extends React.Component {
   render() {
-    const { title, body, modalCancel, modalConfirm } = this.props
+    const {
+      title,
+      body,
+      modalConfirm
+    } = this.props
 
     return (
       <div style={ { width: '500px' } }>

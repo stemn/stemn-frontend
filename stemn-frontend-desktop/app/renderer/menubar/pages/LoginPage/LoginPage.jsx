@@ -20,7 +20,9 @@ import Button  from 'stemn-shared/misc/Buttons/Button/Button.jsx'
 
 export class Component extends React.Component {
   render() {
-    const { AuthActions, auth, dispatch } = this.props
+    const {
+      dispatch
+    } = this.props
     return (
       <div className="layout-column flex">
         <Toolbar />

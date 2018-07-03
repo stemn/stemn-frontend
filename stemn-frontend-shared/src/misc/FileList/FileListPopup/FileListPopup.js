@@ -52,7 +52,12 @@ const propTypesObject = {
 export default class FileListPopup extends Component {
   static propTypes = propTypesObject
   render() {
-    const { link, fileList, parentfolder, activeFile, clickFn } = this.props
+    const {
+      link,
+      fileList,
+      activeFile,
+      clickFn
+    } = this.props
     const isLoading    = !fileList || fileList.loading
     const filesOrdered = fileList && fileList.entries ? orderBy(fileList.entries, 'name') : []
     const filesOnly    = filesOrdered.filter(file => file.type == 'file')

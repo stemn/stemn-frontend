@@ -44,7 +44,12 @@ export class Component extends React.Component {
   };
 
   render() {
-    const { timeline, timelineModel, project, location, children } = this.props
+    const {
+      timeline,
+      timelineModel,
+      project,
+      children
+    } = this.props
     const baseLink = `project/${project && project.data ? project.data._id : ''}`
 
     if (project.data.remote.connected) {

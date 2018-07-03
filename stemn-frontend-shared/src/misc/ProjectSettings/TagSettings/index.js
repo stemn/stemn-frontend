@@ -30,7 +30,9 @@ export default class GeneralSettings extends Component {
     })
   }
   render() {
-    const { entityModel, project, saveProject } = this.props
+    const {
+      project
+    } = this.props
     return (
       <div>
         <h3>Field Tags</h3>

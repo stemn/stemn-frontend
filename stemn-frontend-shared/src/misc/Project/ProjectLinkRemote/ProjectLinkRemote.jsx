@@ -25,7 +25,10 @@ class ProjectLinkRemote extends Component {
     }
   }
   render() {
-    const { model, value, dispatch, auth } = this.props
+    const {
+      value,
+      auth
+    } = this.props
 
     const options = [
       {

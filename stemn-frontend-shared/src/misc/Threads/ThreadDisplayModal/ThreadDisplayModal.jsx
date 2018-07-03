@@ -47,7 +47,15 @@ export default class ThreadDisplayModal extends React.Component {
   };
 
   render() {
-    const { threadId, thread, board, entityModel, project, timeline, timelineCacheKey, modalCancel } = this.props
+    const {
+      threadId,
+      thread,
+      board,
+      entityModel,
+      project,
+      timeline,
+      timelineCacheKey
+    } = this.props
 
     const getMain = () => {
       const menu = [{

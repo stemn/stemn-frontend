@@ -13,7 +13,6 @@ export default class Smooch extends React.Component {
   }
 
   render() {
-    const { text, style } = this.props
     return (
       <a className={ classNames(classes.icon, 'layout-column', 'layout-align-center-center') } onClick={ Smooch.open }>
         <img src={ comments } />

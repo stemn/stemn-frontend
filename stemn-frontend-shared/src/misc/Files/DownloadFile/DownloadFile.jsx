@@ -27,7 +27,11 @@ class DownloadFile extends Component {
     }
   }
   render() {
-    const { children, title, file, fileUrl, progress } = this.props
+    const {
+      children,
+      title,
+      progress
+    } = this.props
     return (
       <a
         ref={ this.getAnchorRef }

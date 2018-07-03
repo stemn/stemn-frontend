@@ -43,7 +43,13 @@ export default class SidebarTimeline extends React.Component {
   };
 
   render() {
-    const { projectId, items, loading, query, queryModel, refresh } = this.props
+    const {
+      projectId,
+      items,
+      loading,
+      query,
+      refresh
+    } = this.props
     const routeParams = {
       projectId,
     }

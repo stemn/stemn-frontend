@@ -19,7 +19,10 @@ export default class ProjectSettingsPermissions extends Component {
     })
   }
   render() {
-    const { project, projectModel, saveProject } = this.props
+    const {
+      project,
+      projectModel
+    } = this.props
     return (
       <div>
         <InfoPanel>

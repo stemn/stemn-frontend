@@ -55,7 +55,16 @@ export default class ProjectCommits extends Component {
     })
   }
   renderLoaded() {
-    const { project, syncTimeline, location, page, projectId, size, filter, filterIsDefault, board } = this.props
+    const {
+      syncTimeline,
+      location,
+      page,
+      projectId,
+      size,
+      filter,
+      filterIsDefault,
+      board
+    } = this.props
 
     const noMoreResults = syncTimeline && syncTimeline.data.length < size
     const hasResults = syncTimeline && syncTimeline.data  && syncTimeline.data.length > 0

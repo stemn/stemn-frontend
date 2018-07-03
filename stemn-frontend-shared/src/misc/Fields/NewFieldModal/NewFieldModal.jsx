@@ -26,7 +26,14 @@ export default class NewFieldModal extends Component {
     })
   }
   render() {
-    const { newFieldForm, newFieldFormModel, newFieldFormPending, modalConfirm, modalCancel, name, blurb } = this.props
+    const {
+      newFieldForm,
+      newFieldFormModel,
+      newFieldFormPending,
+      modalCancel,
+      name,
+      blurb
+    } = this.props
     const initValue = {
       name,
       blurb,

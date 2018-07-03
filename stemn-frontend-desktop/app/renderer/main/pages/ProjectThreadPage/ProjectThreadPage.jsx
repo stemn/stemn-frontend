@@ -11,7 +11,9 @@ import ThreadsDisplay from 'stemn-shared/misc/Threads/ThreadsDisplay'
 
 export class Component extends React.Component {
   render() {
-    const { project, entityModel } = this.props
+    const {
+      project
+    } = this.props
     return (
       <ThreadsDisplay projectId={ project.data._id } />
     )

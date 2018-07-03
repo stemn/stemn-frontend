@@ -51,7 +51,11 @@ export class CommentNew extends Component {
     ctrlEnterHandler(this.refs.form, this.submitNewComment)
   }
   render() {
-    const { auth, newComment, entityModel, commentsActions } = this.props
+    const {
+      auth,
+      newComment,
+      entityModel
+    } = this.props
     const { isFocussed } = this.state
 
     return (

@@ -5,7 +5,6 @@ import MagnifyInternet   from 'stemn-shared/assets/images/pure-vectors/magnify-i
 
 class Component extends React.Component {
   render() {
-    const { title, message, modalCancel, modalConfirm } = this.props
     return (
       <div style={ { width: '100vw', padding: '30px' } }>
         <div className="modal-body" style={ { lineHeight: '1.4em' } }>

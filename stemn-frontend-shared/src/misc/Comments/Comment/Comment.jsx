@@ -41,7 +41,14 @@ export default class Comment extends Component {
     updateComment({ comment: comment.form })
   }
   render() {
-    const { commentId, comment, showMeta, children, entityModel, commentsActions, style } = this.props
+    const {
+      commentId,
+      comment,
+      showMeta,
+      children,
+      entityModel,
+      style
+    } = this.props
 
     if (!comment || !comment.data) {
       return (

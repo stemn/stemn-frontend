@@ -74,7 +74,9 @@ class User extends Component {
     )
   }
   render() {
-    const { user, children } = this.props
+    const {
+      user
+    } = this.props
 
     const isLoaded = user && user.data && user.dataSize === 'lg'
 

@@ -66,7 +66,13 @@ export class ThreadListItem extends React.Component {
   };
 
   render() {
-    const { thread, entityModel, draggable, layout, board, project } = this.props
+    const {
+      thread,
+      entityModel,
+      draggable,
+      layout,
+      board
+    } = this.props
     if (!thread || !thread.data) {
       if (layout == 'list') {
         return (

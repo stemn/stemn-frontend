@@ -15,7 +15,14 @@ import styles from './FileChangeRow.css'
 
 export default class FileChangeRow extends React.Component {
   render() {
-    const { item, model, value, text, clickFn, isActive, status } = this.props
+    const {
+      model,
+      value,
+      text,
+      clickFn,
+      isActive,
+      status
+    } = this.props
     // status == 'created' || 'modified' || 'deleted'
 
     // Classes

@@ -48,7 +48,10 @@ class ThreadLabelsEdit extends Component {
     }
   }
   render() {
-    const { model, value, dispatch } = this.props
+    const {
+      model,
+      value
+    } = this.props
 
     return (
       <div>

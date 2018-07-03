@@ -18,7 +18,11 @@ export default class Terminal extends Component {
     window.scrollTo(0, document.body.scrollHeight)
   }
   render() {
-    const { lines, rawPath, loading, hasLoadedBefore } = this.props
+    const {
+      lines,
+      loading,
+      hasLoadedBefore
+    } = this.props
     return (
       <div className={ classes.outer }>
         <LoadingOverlay

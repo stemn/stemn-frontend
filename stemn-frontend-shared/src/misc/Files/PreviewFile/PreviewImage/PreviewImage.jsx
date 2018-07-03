@@ -53,7 +53,9 @@ export default class PreviewImage extends React.Component {
   };
 
   render() {
-    const { fileMeta, fileData } = this.props
+    const {
+      fileData
+    } = this.props
     const { scale, naturalWidth, naturalHeight } = this.state
     const sizeStyles = {
       width: naturalWidth  * scale,

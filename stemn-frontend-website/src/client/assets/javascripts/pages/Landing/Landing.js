@@ -25,9 +25,6 @@ export default class Landing extends Component {
     }
   }
   render() {
-    const { showPreview } = this.state
-    const { latest } = this.props
-    
     const secionClasses = classNames(classes.section, 'layout-xs-column layout-gt-xs-row layout-align-gt-xs-start-center lg')
     return (
       <LandingLayout>

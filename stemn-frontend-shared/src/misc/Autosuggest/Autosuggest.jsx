@@ -79,7 +79,13 @@ export default class AutosuggestWrapped extends Component {
   }
 
   render() {
-    const { value, suggestions, placeholder, clearSuggestions, withNoResult, isLoading } = this.props
+    const {
+      value,
+      suggestions,
+      placeholder,
+      clearSuggestions,
+      isLoading
+    } = this.props
 
     const inputProps = {
       placeholder,

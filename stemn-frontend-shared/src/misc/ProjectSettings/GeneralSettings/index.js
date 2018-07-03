@@ -20,7 +20,10 @@ export default class GeneralSettings extends Component {
     })
   }
   render() {
-    const { entityModel, project, saveProject } = this.props
+    const {
+      entityModel,
+      project
+    } = this.props
     return (
       <div>
         <Row className="layout-xs-column layout-gt-xs-row">
