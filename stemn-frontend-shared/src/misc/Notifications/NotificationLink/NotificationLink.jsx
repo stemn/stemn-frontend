@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import Link from 'stemn-shared/misc/Router/Link'
 
 const entityToRouteMap = {

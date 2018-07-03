@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import classes from './HeaderMobileMenu.css'
 import classNames from 'classnames'
 import Link from 'stemn-shared/misc/Router/Link'

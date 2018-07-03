@@ -1,5 +1,6 @@
 import jq from 'jquery';
 import React from 'react';
+import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-addons-test-utils';
 import jsdom from 'jsdom';
@@ -30,7 +31,7 @@ function renderComponent(ComponentClass, props = {}, state = {}) {
 }
 
 function mockHistory(component) {
-  component.childContextTypes = { history: React.PropTypes.object };
+  component.childContextTypes = { history: PropTypes.object };
   component.prototype.getChildContext = () => ({ history: createHistory() });
 }
 

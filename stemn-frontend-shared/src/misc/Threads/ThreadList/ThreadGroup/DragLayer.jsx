@@ -1,6 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { DragLayer } from 'react-dnd'
-
+import PropTypes from 'prop-types'
 import ThreadGroup from './ThreadGroup.jsx'
 import ThreadListItem from '../ThreadListItem/ThreadListItem.jsx'
 
@@ -41,13 +42,13 @@ function collect(monitor) {
 
 const CustomDragLayer = React.createClass({
   propTypes: {
-    item: React.PropTypes.object,
-    itemType: React.PropTypes.string,
-    currentOffset: React.PropTypes.shape({
-      x: React.PropTypes.number.isRequired,
-      y: React.PropTypes.number.isRequired,
+    item: PropTypes.object,
+    itemType: PropTypes.string,
+    currentOffset: PropTypes.shape({
+      x: PropTypes.number.isRequired,
+      y: PropTypes.number.isRequired,
     }),
-    isDragging: React.PropTypes.bool.isRequired,
+    isDragging: PropTypes.bool.isRequired,
   },
 
   renderItem(type, item) {

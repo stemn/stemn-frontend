@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { cardHover, cardDrop, beginDrag, endDrag } from './ThreadListItem.drag.config.js'
 import { DragSource, DropTarget } from 'react-dnd'
 const ItemTypes = {

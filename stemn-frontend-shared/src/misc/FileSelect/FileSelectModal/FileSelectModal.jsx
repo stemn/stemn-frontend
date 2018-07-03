@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react'
-
+import React from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import classes from './FileSelectModal.scss'
 
@@ -15,10 +15,10 @@ const propTypesObject = {
   path: PropTypes.string,               // The current fileId: This folder will be opened when the modal inits.
   model: PropTypes.string,               // The { fileId, path } will be assigned to this model on confirm
   storeKey: PropTypes.string.isRequired,    // The store key (to be used in the redicer)
-  options: React.PropTypes.shape({
-    allowFolder: React.PropTypes.bool,
-    foldersOnly: React.PropTypes.bool,
-    explore: React.PropTypes.string,         // Optional: 'dropbox' || 'drive' - The provider
+  options: PropTypes.shape({
+    allowFolder: PropTypes.bool,
+    foldersOnly: PropTypes.bool,
+    explore: PropTypes.string,         // Optional: 'dropbox' || 'drive' - The provider
   }),
 }
 

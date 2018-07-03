@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 import TeamMember from 'stemn-shared/misc/Project/TeamMember/TeamMember.jsx'
 import UserSearch from 'stemn-shared/misc/Search/UserSearch'

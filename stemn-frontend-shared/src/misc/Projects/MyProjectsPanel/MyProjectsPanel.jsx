@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 
 import PublicPrivateIcon from 'stemn-shared/misc/Icons/PublicPrivateIcon'
 import classes from './MyProjectsPanel.scss'

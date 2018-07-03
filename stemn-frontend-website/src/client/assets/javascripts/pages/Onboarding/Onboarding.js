@@ -1,5 +1,4 @@
-import React, { Component, PropTypes } from 'react'
-
+import React, { Component } from 'react'
 import { ArrowTabs, ArrowTab } from 'stemn-shared/misc/Tabs/ArrowTabs/ArrowTabs.jsx'
 import { Container } from 'stemn-shared/misc/Layout'
 import { Helmet } from 'react-helmet'

@@ -1,9 +1,7 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import classes from './LandingHeader.scss'
 import classNames from 'classnames'
-
 import { loginRoute } from 'route-actions'
-
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import Avatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import Popover from 'stemn-shared/misc/Popover'

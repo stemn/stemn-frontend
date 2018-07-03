@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { getToggleData, emailToggles, websiteToggles } from './EmailAndNotificationToggles.utils'
 import Toggle from 'stemn-shared/misc/Input/Toggle/Toggle'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'

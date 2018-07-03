@@ -6,7 +6,8 @@ import { connect } from 'react-redux'
 import * as FileListActions from '../FileList.actions.js'
 
 // Component Core
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { orderBy, omit } from 'lodash'
 
 // Styles

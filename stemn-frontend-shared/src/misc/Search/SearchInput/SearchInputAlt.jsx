@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import CodeMirror from 'react-codemirror'
 import classes from './SearchInput.css'
 import classNames from 'classnames'

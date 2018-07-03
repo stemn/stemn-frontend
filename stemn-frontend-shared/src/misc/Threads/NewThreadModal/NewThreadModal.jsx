@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { get } from 'lodash'
 import classes from './NewThreadModal.scss'
 import classNames from 'classnames'

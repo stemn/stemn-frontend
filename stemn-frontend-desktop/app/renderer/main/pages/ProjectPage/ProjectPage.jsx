@@ -7,6 +7,7 @@ import * as SystemActions from 'stemn-shared/desktop/System/System.actions.js'
 
 // Component Core
 import React from 'react'
+import PropTypes from 'prop-types'
 import Link from 'stemn-shared/misc/Router/Link'
 import { has, get } from 'lodash'
 
@@ -158,7 +159,7 @@ class Component extends React.Component {
 
 
 Component.childContextTypes = {
-  project: React.PropTypes.object,
+  project: PropTypes.object,
 }
 
 // /////////////////////////////// CONTAINER /////////////////////////////////

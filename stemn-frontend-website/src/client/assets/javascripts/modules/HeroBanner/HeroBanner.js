@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import classes from './HeroBanner.scss'
 import classNames from 'classnames'
 import { Container } from 'stemn-shared/misc/Layout'

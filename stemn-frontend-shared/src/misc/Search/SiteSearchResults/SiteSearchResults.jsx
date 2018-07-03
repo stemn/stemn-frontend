@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { get } from 'lodash'
 import classes from './SiteSearchResults.css'
 import EntityRow from 'stemn-shared/misc/EntityRow'

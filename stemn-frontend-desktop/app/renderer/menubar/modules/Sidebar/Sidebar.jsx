@@ -7,7 +7,7 @@ import { toggleMenubarSidebar } from 'stemn-shared/misc/Sidebar/Sidebar.actions.
 
 // Component Core
 import React from 'react'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import ReactCSSTransitionGroup from 'react-transition-group'
 import { escapeRegExp, orderBy } from 'lodash'
 
 // Styles

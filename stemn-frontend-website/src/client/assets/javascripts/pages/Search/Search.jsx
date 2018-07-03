@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 
 import SubHeader from 'modules/SubHeader'
 import StandardLayout from 'layout/StandardLayout'

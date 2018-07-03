@@ -1,6 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import classes from './PreviewPdf.css'
-
 import PDFJS from 'pdfjs-dist'
 import PDFJSUtils from 'pdfjs-dist/web/pdf_viewer.js'
 import Waypoint from 'react-waypoint'
@@ -130,7 +130,7 @@ const Page = React.createClass({
 })
 
 Page.propTypes = {
-  index: React.PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
 }
 
 export default Page

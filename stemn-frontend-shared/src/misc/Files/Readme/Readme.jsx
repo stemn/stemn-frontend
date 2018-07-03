@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import DisplayReadme from './DisplayReadme.jsx'
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'

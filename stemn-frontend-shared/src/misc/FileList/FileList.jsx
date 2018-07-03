@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { has, omit, orderBy, get } from 'lodash'
 import classNames from 'classnames'
 import classes from './FileList.css'
@@ -35,15 +36,15 @@ const propTypesObject = {
   crumbClickFn: PropTypes.func,               // When a crumb is clicked
   selected: PropTypes.object,             // The currently selected file
   contentStyle: PropTypes.object,             // Styles for the content section
-  initialSync: React.PropTypes.bool,         // Optional: True if this is the initial project sync (general uses !project.remote.lastSynced)
-  crumbPopup: React.PropTypes.bool,         // Optional: Should we show a popup on the crumbs?
-  search: React.PropTypes.bool,         // Optional: Should search be enabled
-  link: React.PropTypes.bool,         // Optional: Should each row be a link with href
-  options: React.PropTypes.shape({
-    allowFolder: React.PropTypes.bool,
-    foldersOnly: React.PropTypes.bool,
-    showMenu: React.PropTypes.bool,
-    explore: React.PropTypes.string,       // Optional: 'dropbox' || 'drive' - The provider
+  initialSync: PropTypes.bool,         // Optional: True if this is the initial project sync (general uses !project.remote.lastSynced)
+  crumbPopup: PropTypes.bool,         // Optional: Should we show a popup on the crumbs?
+  search: PropTypes.bool,         // Optional: Should search be enabled
+  link: PropTypes.bool,         // Optional: Should each row be a link with href
+  options: PropTypes.shape({
+    allowFolder: PropTypes.bool,
+    foldersOnly: PropTypes.bool,
+    showMenu: PropTypes.bool,
+    explore: PropTypes.string,       // Optional: 'dropbox' || 'drive' - The provider
   }),
   dispatch: PropTypes.func,               // Actions
   fileList: PropTypes.object,           // Store

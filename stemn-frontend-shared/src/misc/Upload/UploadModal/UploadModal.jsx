@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import classes from './UploadModal.css'
 import classNames from 'classnames'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'

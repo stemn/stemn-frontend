@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 
 export default class PanelDescription extends Component {

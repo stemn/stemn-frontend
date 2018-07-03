@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react'
-
+import React from 'react'
+import PropTypes from 'prop-types'
 import moment from 'moment'
 import { orderBy } from 'lodash'
 import { orderByTime } from 'stemn-shared/misc/Timeline/Timeline.utils'

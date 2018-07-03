@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 import ThreadLabelsEdit from 'stemn-shared/misc/Threads/ThreadLabelsEdit/ThreadLabelsEdit.jsx'
 import ThreadGroupsEdit from 'stemn-shared/misc/Threads/ThreadGroupsEdit'

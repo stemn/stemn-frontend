@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Link from 'stemn-shared/misc/Router/Link'
 import { getMentionInfo } from 'stemn-shared/misc/Mentions/Mentions.utils'
 

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 
 import NotificationItem from 'stemn-shared/misc/Notifications/NotificationItem/NotificationItem'
 

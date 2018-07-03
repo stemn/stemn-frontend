@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 
 import TagSettings from 'stemn-shared/misc/ProjectSettings/TagSettings'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'

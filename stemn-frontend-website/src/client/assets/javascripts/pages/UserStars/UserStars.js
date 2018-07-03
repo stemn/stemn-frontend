@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { orderBy } from 'lodash'
 import classes from './UserStars.css'
 import classNames from 'classnames'

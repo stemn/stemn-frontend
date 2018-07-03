@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { has } from 'lodash'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 import FileSelectInput from 'stemn-shared/misc/FileSelectInput/FileSelectInput.jsx'

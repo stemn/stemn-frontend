@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { upload } from '../Upload.actions.js'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'

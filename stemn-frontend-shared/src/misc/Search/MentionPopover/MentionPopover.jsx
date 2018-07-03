@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import classes from './MentionPopover.css'
 import Popover from 'stemn-shared/misc/Popover'
 import Highlight from 'stemn-shared/misc/Autosuggest/Highlight'

@@ -6,7 +6,8 @@ import { connect } from 'react-redux'
 import * as WalkthroughActions from './Walkthrough.actions.js'
 
 // Component Core
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { omit } from 'lodash'
 import { getStepData } from './Walkthrough.config.js'
 

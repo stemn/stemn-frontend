@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import classes from './SiteSearch.css'
 import classNames from 'classnames'
 import MdSearch from 'react-icons/md/search'

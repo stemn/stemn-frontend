@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 
 import classNames from 'classnames'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'

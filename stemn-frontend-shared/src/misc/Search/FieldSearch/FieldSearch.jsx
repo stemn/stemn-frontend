@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import classes from './FieldSearch.css'
 import Autosuggest from 'stemn-shared/misc/Autosuggest/Autosuggest.container'
 import Highlight from 'stemn-shared/misc/Autosuggest/Highlight'

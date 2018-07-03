@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import ReactCSSTransitionGroup from 'react-transition-group'
 import * as ToastsActions from './Toasts.actions.js'
 import React from 'react'
 import MdError from 'react-icons/md/error'

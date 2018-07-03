@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import classes from './BetaBadge.scss'
 import classNames from 'classnames'
 

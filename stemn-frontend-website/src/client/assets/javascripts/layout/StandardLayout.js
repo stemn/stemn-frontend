@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import Header from 'modules/Header'
 import Footer from 'modules/Footer'
 import ScrollToTop from 'stemn-shared/misc/Scroll/ScrollToTop'

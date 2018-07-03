@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { has } from 'lodash'
-
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import UserNameSettings from 'stemn-shared/misc/UserSettings/UserNameSettings'
 import UserEmailSettings from 'stemn-shared/misc/UserSettings/UserEmailSettings'

@@ -1,7 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import PDFJS from 'pdfjs-dist/build/pdf.combined.js'
 import { get } from 'lodash'
-
 import Viewer from './PreviewPdfViewer.jsx'
 import classes from './PreviewPdf.css'
 import ScrollZoom from 'stemn-shared/misc/Scroll/ScrollZoom/ScrollZoom.jsx'
@@ -76,8 +76,8 @@ const PDF = React.createClass({
 PDF.propTypes = propTypesObject
 
 PDF.childContextTypes = {
-  pdf: React.PropTypes.object,
-  scale: React.PropTypes.number,
+  pdf: PropTypes.object,
+  scale: PropTypes.number,
 }
 
 export default PDF

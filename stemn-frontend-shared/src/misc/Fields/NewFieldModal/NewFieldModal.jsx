@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import classes from './NewFieldModal.css'
 import classNames from 'classnames'
 import Form from 'stemn-shared/misc/Forms/Form'
