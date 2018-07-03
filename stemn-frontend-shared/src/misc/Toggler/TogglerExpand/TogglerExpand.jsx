@@ -6,7 +6,7 @@ import MdChevronRight from 'react-icons/md/chevron-right'
 import classes from './TogglerExpand.css'
 import classNames from 'classnames'
 
-export default class extends React.Component {
+export default class TogglerExpand extends React.Component {
   render() {
     const { children, onClick, isActive } = this.props
     return (

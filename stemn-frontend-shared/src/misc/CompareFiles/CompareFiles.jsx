@@ -4,7 +4,7 @@ import React from 'react'
 import classNames from 'classnames'
 import styles from './CompareFiles.css'
 
-export default class extends React.Component {
+export default class CompareFiles extends React.Component {
   render() {
     return (
       <div className="layout-row">

@@ -3,7 +3,7 @@ import PreviewExpired       from './PreviewExpired/PreviewExpired.jsx'
 import AssemblyPartNotFound from './AssemblyPartNotFound/AssemblyPartNotFound.jsx'
 import File404              from './File404/File404.jsx'
 
-export default class extends React.Component {
+export default class Messages extends React.Component {
   render() {
     const { error, fileMeta } = this.props
 

@@ -25,7 +25,7 @@ const eventFilter = [{
   value: '',
 }]
 
-export default class extends React.Component {
+export default class SidebarTimeline extends React.Component {
   filterItems = (items, fullQuery) => {
     const fullQueryArray = fullQuery ? fullQuery.split(' ') : []
     return items.filter(item => every(fullQueryArray, queryString => this.queryByString(item, queryString)))

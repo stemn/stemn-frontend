@@ -1,7 +1,5 @@
 import React from 'react'
-import { ContextMenuLayer } from 'react-contextmenu'
-
-// Components
+import { ContextMenuTrigger } from 'react-contextmenu'
 import FileChangeRow from './FileChangeRow'
 import FileChangeTitleRow from './FileChangeTitleRow'
 import FileChangeMenu from './FileChange.menu.js'
@@ -13,20 +11,14 @@ import MdMoreHoriz from 'react-icons/md/more-horiz'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import Walkthrough from 'stemn-shared/misc/Walkthrough/Walkthrough.jsx'
 import FileSyncUnderway from 'stemn-shared/misc/FileList/FileSyncUnderway'
-
-// Functions
 import { groupRevisions } from 'stemn-shared/misc/Timeline/Timeline.utils.js'
 import { getToggleAllStatus, filterSelectedChangesByPossible } from '../Changes.utils.js'
 import { has, get } from 'lodash'
-
-// Styles
-import styles from './CommitChanges.css'
+import './CommitChanges.css'
 
 const contextIdentifier = 'FileChangeCm'
-const FileChangeRowContext = ContextMenuLayer(contextIdentifier, props => props.item)(FileChangeRow)
 
-
-export default class extends React.Component {
+export default class CommitChanges extends React.Component {
   render() {
     const { changes, project, toggleAll, refresh, selectedFileChange, deselect, loading, dispatch, initialSync } = this.props
     const isInitialSync = initialSync && changes.data.length == 0
@@ -66,24 +58,27 @@ export default class extends React.Component {
             </Walkthrough>
             { groupedChanges.length > 0
               ? <div className="scroll-box layout-column flex">
-                { groupedChanges.map((item, idx) => (
-                  <FileChangeRowContext
+                { groupedChanges.map((item) => (
+                  <ContextMenuTrigger 
+                    id={ contextIdentifier }
                     key={ item._id }
-                    item={ item }
-                    text={ item.data.path }
-                    clickFn={ () => selectedFileChange({ projectId: project._id, selected: item }) }
-                    isActive={ changes.selected ? item._id == changes.selected._id : false }
-                    model={ `changes.${project._id}.checked.${item.data.fileId}` }
-                    value={ get(changes, ['checked', item.data.fileId], false) }
-                    status={ item.data.state }
-                  />
+                  >
+                    <FileChangeRow
+                      item={ item }
+                      text={ item.data.path }
+                      clickFn={ () => selectedFileChange({ projectId: project._id, selected: item }) }
+                      isActive={ changes.selected ? item._id == changes.selected._id : false }
+                      model={ `changes.${project._id}.checked.${item.data.fileId}` }
+                      value={ get(changes, ['checked', item.data.fileId], false) }
+                      status={ item.data.state }
+                    />
+                  </ContextMenuTrigger>
                 ))}
                 <div className="flex" onClick={ deselect } style={ { minHeight: '60px' } } />
               </div>
               : <div className="layout-column layout-align-center-center text-title-4 flex">No Changes</div> }
           </div>
         }
-        
         <LoadingOverlay
           show={ loading }
           linear

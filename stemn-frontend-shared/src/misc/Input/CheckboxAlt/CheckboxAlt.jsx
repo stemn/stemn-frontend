@@ -11,7 +11,7 @@ props: {
   tickOnly: true (default: false)   -> this will hide the bg color
 }
 ******************************* */
-export default class extends React.Component {
+export default class CheckboxAlt extends React.Component {
   render() {
     const { status, onChange } = this.props
     const id = Math.random().toString(36).substring(7)

@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import { ContextMenu, MenuItem, SubMenu, connect } from 'react-contextmenu'
+import { ContextMenu, MenuItem, SubMenu } from 'react-contextmenu'
 import './ContextMenu.global.css'
 
 class AdvancedMenuItem extends React.Component {
@@ -31,7 +31,7 @@ class AdvancedMenuItem extends React.Component {
   }
 }
 
-class Menu extends React.Component {
+export default class Menu extends React.Component {
   static displayName = 'Menu';
 
   render() {
@@ -43,5 +43,3 @@ class Menu extends React.Component {
     )
   }
 }
-
-export default connect(Menu)

@@ -11,7 +11,7 @@ import MdInsertEmoticon from 'react-icons/md/insert-emoticon'
 import { options } from './Reactions.utils.js'
 
 
-export default class extends React.Component {
+export default class ReactionPopup extends React.Component {
   render() {
     const { submitFn, reactions } = this.props
 

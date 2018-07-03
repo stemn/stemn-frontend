@@ -2,7 +2,7 @@ import React from 'react'
 
 import classNames from 'classnames'
 
-export default class extends React.Component {
+export default class AnimateShow extends React.Component {
   state = {
     showContent: this.props.show,
   };

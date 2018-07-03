@@ -4,7 +4,7 @@ import Link from 'stemn-shared/misc/Router/Link'
 import classNames from 'classnames'
 import classes from './Button.css'
 
-export default class extends React.Component {
+export default class Button extends React.Component {
   render() {
     const { className, name, href, children, childRef, ...otherProps } = this.props
 

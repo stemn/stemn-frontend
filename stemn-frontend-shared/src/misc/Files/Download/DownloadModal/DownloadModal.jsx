@@ -19,7 +19,7 @@ const propTypesObject = {
   file: PropTypes.object.isRequired,    // File object
 }
 
-export default class extends React.Component {
+export default class DownloadModal extends React.Component {
   static propTypes = propTypesObject;
 
   componentWillMount() { 

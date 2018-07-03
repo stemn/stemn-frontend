@@ -22,7 +22,7 @@ const propTypesObject = {
   }),
 }
 
-export default class extends React.Component {
+export default class FileSelectModal extends React.Component {
   static propTypes = propTypesObject;
   componentWillMount() { this.onMount(this.props) }
   componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }

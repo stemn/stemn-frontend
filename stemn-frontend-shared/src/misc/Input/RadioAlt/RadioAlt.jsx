@@ -10,7 +10,7 @@ import classNames from 'classnames'
 
 ******************************************** */
 
-export default class extends React.Component {
+export default class RadioAlt extends React.Component {
   render() {
     const { value, model, className, changeAction, children } = this.props
     const statusClass = value === true ? 'checked' : ''

@@ -3,7 +3,7 @@ import Link from 'stemn-shared/misc/Router/Link'
 import classNames from 'classnames'
 import classes from './SimpleIconButton.css'
 
-export default class extends React.Component {
+export default class SimpleIconButton extends React.Component {
   render() {
     const { children, className, color, disabled, href, ...otherProps } = this.props
     const allClasses = classNames(classes.button, className, {

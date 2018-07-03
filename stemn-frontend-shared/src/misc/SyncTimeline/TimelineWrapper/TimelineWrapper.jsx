@@ -1,14 +1,8 @@
-// Component Core
 import React from 'react'
-
-// Styles
-import classNames from 'classnames'
 import classes from './TimelineWrapper.scss'
-
 import { some } from 'lodash'
 
-
-export default class extends React.Component {
+export default class TimelineWrapper extends React.Component {
   render() {
     return (
       <div className={ classes.item } style={ this.props.style }>

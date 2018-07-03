@@ -15,7 +15,7 @@ import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton'
 import MdClose from 'react-icons/md/close'
 import MdAdd from 'react-icons/md/add'
-import FlipMove from 'react-flip-move'
+import FlipMove from 'react-flip-move/dist/react-flip-move.js'
 import getUuid from 'stemn-shared/utils/getUuid.js'
 
 @connect()

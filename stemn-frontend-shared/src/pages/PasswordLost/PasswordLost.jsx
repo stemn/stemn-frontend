@@ -6,7 +6,7 @@ import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressBut
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
-export default class extends React.Component {
+export default class PasswordLost extends React.Component {
   submit = (event) => {
     if (event && event.preventDefault) {
       event.preventDefault()

@@ -1,12 +1,9 @@
-// Component Core
 import React from 'react'
 import classNames from 'classnames'
 import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
-
-// Styles
 import classes from './Tag.css'
 
-export default class extends React.Component {
+export default class Tag extends React.Component {
   render() {
     const { text, className, children, ...otherProps } = this.props
     return (

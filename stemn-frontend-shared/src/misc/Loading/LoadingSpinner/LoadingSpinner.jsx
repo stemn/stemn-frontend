@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import classNames from 'classnames'
 import classes from './LoadingSpinner.css'
 
-export default class extends Component {
+export default class LoadingSpinner extends Component {
   render() {
     const { size, progress } = this.props
 

@@ -1,18 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
-import Popover from 'stemn-shared/misc/Popover'
 import PopoverFit from 'stemn-shared/misc/PopoverMenu/PopoverFit'
 import MdExpandMore from 'react-icons/md/expand-more'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import classNames from 'classnames'
 import classes from './PopoverDropdown.css'
-
-
-//        <Button className={ classNames('light', className) } style={ style } buttonRef={ this.getButtonRef }>
-//          { children[0] }
-//        </Button>
 
 class PopoverDropdown extends Component {
   render() {

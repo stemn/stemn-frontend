@@ -5,7 +5,7 @@ import classNames from 'classnames'
 // Styles
 import styles from './Toggle.css'
 
-export default class extends React.Component {
+export default class Toggle extends React.Component {
   render() {
     const { value, model, title, className, disabled, changeAction } = this.props
 

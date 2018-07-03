@@ -4,7 +4,7 @@ const fileTypeIcons = require.context('../filetype', true)
 // Styles
 import classNames from 'classnames'
 
-export default class extends React.Component {
+export default class FileIcon extends React.Component {
   static defaultProps = {
     size: 30,
   };

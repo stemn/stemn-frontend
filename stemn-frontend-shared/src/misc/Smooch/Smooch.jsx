@@ -8,7 +8,7 @@ import comments      from 'stemn-shared/assets/images/pure-vectors/comments.svg'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
-export default class extends React.Component {
+export default class Smooch extends React.Component {
   componentWillMount() {
     initSmooch()
   }

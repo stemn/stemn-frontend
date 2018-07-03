@@ -1,8 +1,7 @@
 import React                from 'react'
-import i                    from 'icepick'
 import FileCompare          from 'stemn-shared/misc/FileCompare'
 
-export default class extends React.Component {
+export default class ProjectFeedPageRevision extends React.Component {
   render() {
     const { project, item } = this.props
 

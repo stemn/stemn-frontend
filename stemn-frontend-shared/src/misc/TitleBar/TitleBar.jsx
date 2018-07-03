@@ -10,7 +10,7 @@ import MaximiseIcon from './icons/maximise.js'
 import CloseIcon from './icons/close.js'
 import MinimiseIcon from './icons/minimise.js'
 
-export default class extends React.Component {
+export default class TitleBar extends React.Component {
   constructor(props) {
     super(props);
     const window = electron.remote.getCurrentWindow()

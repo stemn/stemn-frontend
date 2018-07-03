@@ -1,11 +1,8 @@
-import React, { PropTypes, Component } from 'react'
-import ReactCSSTransitionGroup from 'react-transition-group'
-
-// Components
+import React from 'react'
+import PropTypes from 'prop-types'
+import { CSSTransitionGroup } from 'react-transition-group'
 import LoadingSpinner from 'stemn-shared/misc/Loading/LoadingSpinner/LoadingSpinner'
 import LoadingLinear  from 'stemn-shared/misc/Loading/LoadingLinear/LoadingLinear.jsx'
-
-// Styles
 import classes from './LoadingOverlay.css'
 import classNames from 'classnames'
 
@@ -22,12 +19,8 @@ const propTypesObject = {
 }
 
 
-export default class extends React.Component {
+export default class LoadingOverlay extends React.Component {
   static propTypes = propTypesObject;
-
-  state = {
-    loading: false,
-  };
 
   componentWillReceiveProps(nextProps) {
     const prevProps = this.props
@@ -51,7 +44,6 @@ export default class extends React.Component {
 
   render() {
     const { size, show, children, style, linear, hideBg, noOverlay, background, progress } = this.props
-    const { loading } = this.state
 
     const transitionName = {
       enter: classes.enter,
@@ -74,7 +66,7 @@ export default class extends React.Component {
     const allStyles = Object.assign({}, backgroundStyles, noOverlayStyles, style)
 
     return (
-      <ReactCSSTransitionGroup
+      <CSSTransitionGroup
         transitionName={ transitionName }
         transitionAppear
         transitionAppearTimeout={ 300 }
@@ -92,7 +84,7 @@ export default class extends React.Component {
             }
           </div>
           : null }
-      </ReactCSSTransitionGroup>
+      </CSSTransitionGroup>
     )
   }
 }

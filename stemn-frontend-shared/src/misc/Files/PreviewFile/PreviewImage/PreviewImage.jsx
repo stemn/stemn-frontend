@@ -5,7 +5,7 @@ import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOver
 import ScrollZoom     from 'stemn-shared/misc/Scroll/ScrollZoom/ScrollZoom.jsx'
 import { getDownloadUrl } from 'stemn-shared/misc/Files/utils'
 
-export default class extends React.Component {
+export default class PreviewImage extends React.Component {
   state = {
     scale: 1,
     naturalWidth: 0,

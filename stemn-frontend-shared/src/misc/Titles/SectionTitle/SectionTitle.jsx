@@ -7,7 +7,7 @@ import classes from './SectionTitle.css'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
-export default class extends React.Component {
+export default class SectionTitle extends React.Component {
   render() {
     const { children, style, className } = this.props
     return (

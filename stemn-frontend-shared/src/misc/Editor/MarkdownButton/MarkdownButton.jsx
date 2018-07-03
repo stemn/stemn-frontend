@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import classes from './MarkdownButton.css'
 import Markdown from 'stemn-shared/assets/icons/editor/markdown.js'
 
-export default class extends React.Component {
+export default class MarkdownButton extends React.Component {
   render() {
     const { children, style, className } = this.props
     return (

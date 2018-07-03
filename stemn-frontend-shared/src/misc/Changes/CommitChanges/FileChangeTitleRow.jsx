@@ -8,7 +8,7 @@ import Walkthrough from 'stemn-shared/misc/Walkthrough/Walkthrough.jsx'
 // Styles
 import styles from './FileChangeTitleRow.css'
 
-export default class extends React.Component {
+export default class FileChangeTitleRow extends React.Component {
   render() {
     const { model, value, checkbox, changeAction, children, text } = this.props
     return (

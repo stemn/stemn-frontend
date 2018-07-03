@@ -9,7 +9,7 @@ import { get } from 'lodash'
 
 import classNames from 'classnames'
 
-export default class extends React.Component {
+export default class TeamMember extends React.Component {
   render() {
     const { changePermissionsFn, removeTeamMemberFn, item } = this.props
 

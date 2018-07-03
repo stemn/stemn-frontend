@@ -23,7 +23,7 @@ export class AnimateSvg extends React.Component {
   }
 }
 
-export default class extends React.Component {
+export default class Progressbutton extends React.Component {
   state = {
     status: '',
     disabled: false,

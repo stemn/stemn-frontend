@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { PropTypes } from 'prop-types'
 import classNames from 'classnames'
 import classes from './SocialButton.css'
 import MdStar from 'react-icons/md/star'

@@ -10,7 +10,7 @@ import UserAvatar    from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import Link from 'stemn-shared/misc/Router/Link'
 import styles from './SidebarTimelineRow.css'
 
-export default class extends React.Component {
+export default class SidebarTimelineRow extends React.Component {
   state = {
     isOpen: false,
   };

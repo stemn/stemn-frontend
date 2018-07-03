@@ -5,7 +5,7 @@ import book   from 'stemn-shared/assets/images/pure-vectors/book.svg'
 import MdOpenInNew from 'react-icons/md/open-in-new'
 import Toolbar         from 'stemn-frontend-desktop/app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
 
-export default class extends React.Component {
+export default class HomePage extends React.Component {
   render() {
     return (
       <div className="flex layout-column">

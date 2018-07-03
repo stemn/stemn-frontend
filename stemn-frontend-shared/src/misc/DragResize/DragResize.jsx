@@ -74,7 +74,7 @@ class DraggerComponent extends React.Component {
 
 const Dragger = clickDrag(DraggerComponent, { touch: true })
 
-export default class extends React.Component {
+export default class DragResize extends React.Component {
   constructor(props) {
     super(props);
     if (props.width) {

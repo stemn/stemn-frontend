@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class extends React.Component {
+export default class PreviewGdoc extends React.Component {
   render() {
     const { fileMeta } = this.props
     return (

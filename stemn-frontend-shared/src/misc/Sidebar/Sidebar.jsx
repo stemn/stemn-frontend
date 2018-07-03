@@ -1,27 +1,19 @@
-// Container Core
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-
-// Container Actions
 import * as SidebarActions            from 'stemn-shared/misc/Sidebar/Sidebar.actions.js'
 import * as AuthActions               from 'stemn-shared/misc/Auth/Auth.actions.js'
 import * as ProjectsActions           from 'stemn-shared/misc/Projects/Projects.actions.js'
 import * as ModalActions              from 'stemn-shared/misc/Modal/Modal.actions.js'
 import * as SystemActions             from 'stemn-shared/desktop/System/System.actions.js'
 import { push } from 'react-router-redux'
-
-// Component Core
 import React from 'react'
 import { escapeRegExp, orderBy }      from 'lodash'
-
-// Styles
 import classNames                     from 'classnames'
 import styles                         from './Sidebar.css'
 import userStyles                     from './SidebarAvatar.css'
-// Sub Components 
 import DragResize                     from 'stemn-shared/misc/DragResize/DragResize.jsx'
 import { Link }                       from 'react-router'
-import { ContextMenuLayer }           from 'react-contextmenu'
+import { ContextMenuTrigger }         from 'react-contextmenu'
 import Popover                        from 'stemn-shared/misc/Popover'
 import Input                          from 'stemn-shared/misc/Input/Input/Input'
 import ContextMenu                    from 'stemn-shared/misc/ContextMenu/ContextMenu.jsx'
@@ -33,13 +25,9 @@ import MdSettings                     from 'react-icons/md/settings'
 import MdAdd                          from 'react-icons/md/add'
 import ProjectMenu                    from 'stemn-shared/misc/Projects/Project.menu.js'
 import UserAvatar                     from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
-
 import ProjectNewModalName from 'stemn-shared/misc/Projects/ProjectNewModal'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
-
-const projectContextIdentifier = 'ProjectContextIdentifier'
-const ProjectWithContext = ContextMenuLayer(projectContextIdentifier, props => props.item)(SidebarProjectButton)
 
 export class Component extends React.Component {
   showProjectNewModal = () => {
@@ -113,12 +101,16 @@ export class Component extends React.Component {
                 ? <div style={ { padding: '10px 15px 5px', opacity: '0.7' } }>My Projects</div>
                 : null }
               { filteredProjectsOrdered.map((item, idx) =>
-                <ProjectWithContext
+                <ContextMenuTrigger
+                  id={ projectContextIdentifier }
                   key={ item._id }
-                  item={ item }
-                  isActive={ item._id === this.props.params.stub }
-                  to={ `/project/${item._id}` }
-                />,
+                >
+                  <SidebarProjectButton
+                    item={ item }
+                    isActive={ item._id === this.props.params.stub }
+                    to={ `/project/${item._id}` }
+                  />
+                </ContextMenuTrigger>
               )}
               <ContextMenu
                 identifier={ projectContextIdentifier }

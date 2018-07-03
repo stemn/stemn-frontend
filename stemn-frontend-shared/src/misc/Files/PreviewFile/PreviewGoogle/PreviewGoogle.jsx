@@ -1,7 +1,7 @@
 import React from 'react'
 import { getDownloadUrl } from '../../utils'
 
-export default class extends React.Component {
+export default class PreviewGoogle extends React.Component {
   render() {
     const { fileMeta } = this.props
     return (

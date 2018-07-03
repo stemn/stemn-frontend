@@ -11,10 +11,10 @@ import MdHome from 'react-icons/md/home'
 import MdSearch from 'react-icons/md/search'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import SearchInput from 'stemn-shared/misc/Search/SearchInput'
-import { ContextMenuLayer } from 'react-contextmenu'
+import { ContextMenuTrigger } from 'react-contextmenu'
 import ContextMenu from 'stemn-shared/misc/ContextMenu/ContextMenu.jsx'
 import FileListMenu from './FileList.menu.js'
-import FlipMove from 'react-flip-move'
+import FlipMove from 'react-flip-move/dist/react-flip-move.js'
 import AccordianAnimate from 'stemn-shared/misc/Animation/AccordianAnimate'
 import ChildrenHistory from 'stemn-shared/misc/Animation/ChildrenHistory'
 import FileSyncUnderway from 'stemn-shared/misc/FileList/FileSyncUnderway'
@@ -23,7 +23,11 @@ import FileSyncUnderway from 'stemn-shared/misc/FileList/FileSyncUnderway'
 const contextIdentifier = 'FileListCm'
 const FileRowContext = GLOBAL_ENV.APP_TYPE === 'web'
   ? FileRow
-  : ContextMenuLayer(contextIdentifier, props => props.file)(FileRow)
+  : (props) => (
+    <ContextMenuTrigger id={ contextIdentifier }>
+      <FileRow { ...props } />
+    </ContextMenuTrigger>
+  )
 
 
 // /////////////////////////////// COMPONENT /////////////////////////////////

@@ -1,19 +1,12 @@
-// Component Core
 import React from 'react'
-
-// Styles
 import classNames from 'classnames'
 import classes from '../Login/Login.css'
-
-// Sub Components
 import { Link } from 'react-router'
 import Button from 'stemn-shared/misc/Buttons/Button/Button.jsx'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
-// /////////////////////////////// COMPONENT /////////////////////////////////
-
-export default class extends React.Component {
+export default class Register extends React.Component {
   submit = (event) => {
     event.preventDefault()
     this.props.register({

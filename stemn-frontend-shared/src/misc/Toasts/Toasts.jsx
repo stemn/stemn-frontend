@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import ReactCSSTransitionGroup from 'react-transition-group'
+import { CSSTransitionGroup } from 'react-transition-group'
 import * as ToastsActions from './Toasts.actions.js'
 import React from 'react'
 import MdError from 'react-icons/md/error'
@@ -98,7 +98,7 @@ export class Component extends React.Component {
 
     return (
       <div className={ classes.toastContainer }>
-        <ReactCSSTransitionGroup
+        <CSSTransitionGroup
           transitionName={ transitionName }
           transitionAppear
           transitionAppearTimeout={ 300 }
@@ -109,7 +109,7 @@ export class Component extends React.Component {
             ? toasts.stack.map(toast => <Toast key={ toast.id } toast={ toast } dispatch={ dispatch } />)
             : null
           }
-        </ReactCSSTransitionGroup>
+        </CSSTransitionGroup>
       </div>
     )
   }

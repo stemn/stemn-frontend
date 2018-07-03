@@ -2,7 +2,7 @@ import React from 'react'
 
 import UserAvatar from '../UserAvatar/UserAvatar.jsx'
 
-export default class extends React.Component {
+export default class UserAvatars extends React.Component {
   render() {
     const { users, limit, shape, size, className } = this.props
 

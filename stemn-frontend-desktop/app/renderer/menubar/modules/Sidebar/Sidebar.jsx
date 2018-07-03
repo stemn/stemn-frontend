@@ -1,28 +1,13 @@
-// Container Core
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-
-// Container Actions
 import { toggleMenubarSidebar } from 'stemn-shared/misc/Sidebar/Sidebar.actions.js'
-
-// Component Core
 import React from 'react'
-import ReactCSSTransitionGroup from 'react-transition-group'
 import { escapeRegExp, orderBy } from 'lodash'
-
-// Styles
 import classNames from 'classnames'
 import classes from './Sidebar.css'
-
-
-// Sub Components
 import AnimateShow from 'stemn-shared/misc/AnimateShow/AnimateShow.jsx'
 import SidebarProjectButton from 'stemn-shared/misc/Sidebar/SidebarProjectButton.jsx'
 import MdSearch from 'react-icons/md/search'
 import Input from 'stemn-shared/misc/Input/Input/Input'
-
-
-// /////////////////////////////// COMPONENT /////////////////////////////////
 
 export class Component extends React.Component {
   render() {

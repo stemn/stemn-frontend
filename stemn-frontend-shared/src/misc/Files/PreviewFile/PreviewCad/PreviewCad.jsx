@@ -7,7 +7,7 @@ import modelLocked from 'stemn-shared/assets/images/pure-vectors/model-locked.sv
 import modelGear from 'stemn-shared/assets/images/pure-vectors/model-gear.svg'
 
 
-export default class extends React.Component {
+export default class PreviewCad extends React.Component {
   state = {
     status: 'pending',
   };

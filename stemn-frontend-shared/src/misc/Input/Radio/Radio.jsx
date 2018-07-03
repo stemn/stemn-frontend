@@ -5,7 +5,7 @@ import Input from 'stemn-shared/misc/Input/Input/Input'
 import classNames from 'classnames'
 import classes from './Radio.css'
 
-export default class extends React.Component {
+export default class Radio extends React.Component {
   render() {
     const { value, model, modelValue, children } = this.props
     return (

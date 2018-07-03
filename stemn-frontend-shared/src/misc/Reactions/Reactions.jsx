@@ -2,13 +2,11 @@ import React from 'react'
 import classNames from 'classnames'
 import classes from './Reactions.css'
 import Popover from 'stemn-shared/misc/Popover'
-import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
-import MdInsertEmoticon from 'react-icons/md/insert-emoticon'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import { options, groupAndOrderReactions } from './Reactions.utils.js'
 import Link from 'stemn-shared/misc/Router/Link'
 
-export default class extends React.Component {
+export default class Reactions extends React.Component {
   render() {
     const { reactions, submitFn } = this.props
     const groupedReactions = reactions && reactions.length > 0 ? groupAndOrderReactions(reactions, options) : []

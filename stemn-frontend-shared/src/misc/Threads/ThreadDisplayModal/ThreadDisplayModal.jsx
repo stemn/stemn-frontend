@@ -20,7 +20,7 @@ import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOver
 import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
 import ThreadTimelineEmpty from 'stemn-shared/misc/Threads/ThreadTimelineEmpty'
 
-export default class extends React.Component {
+export default class ThreadDisplayModal extends React.Component {
   showLabelEditModal = () => {
     this.props.showLabelEditModal({
       boardId: this.props.thread.data.board,

@@ -4,7 +4,7 @@ import classNames from 'classnames'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
-export default class extends React.Component {
+export default class TextDisplayBox extends React.Component {
   render() {
     const { className, disabled, children, ...otherProps } = this.props
     return (

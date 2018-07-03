@@ -5,7 +5,7 @@ import Link from 'stemn-shared/misc/Router/Link'
 import classNames from 'classnames'
 import classes from './NavPill.css'
 
-export default class extends React.Component {
+export default class NavPill extends React.Component {
   render() {
     return (
       <Link 

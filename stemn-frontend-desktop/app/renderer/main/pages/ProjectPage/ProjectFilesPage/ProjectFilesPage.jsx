@@ -1,12 +1,11 @@
 import React from 'react'
-import classNames from 'classnames'
 import { projectFolderRoute } from 'route-actions'
 import classes from './ProjectFilesPage.css'
 import FileList from 'stemn-shared/misc/FileList'
 import Readme from 'stemn-shared/misc/Files/Readme/Readme.jsx'
 import { get } from 'lodash'
 
-export default class extends React.Component {
+export default class ProjectFilesPage extends React.Component {
   fileFolderClick = ({ file }) => {
     const { project, create, pushRoute } = this.props
     const isFile = file.type == 'file'

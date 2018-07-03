@@ -7,7 +7,7 @@ import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
 
 import MdClose from 'react-icons/md/close'
 
-export default class extends React.Component {
+export default class TagEdit extends React.Component {
   render() {
     const { text, className, onClick, ...otherProps } = this.props
     return (
