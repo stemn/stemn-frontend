@@ -13,7 +13,7 @@ export default class UserEmailSettings extends Component {
   addEmail = () => {
     const {
       setPrimaryEmail,
-      auth
+      auth,
     } = this.props
     //    saveUser({
     //      user: {

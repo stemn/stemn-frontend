@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import classes from './LandingHeader.scss'
 import classNames from 'classnames'
 import { loginRoute } from 'route-actions'
-import { Container } from 'stemn-shared/misc/Layout';
+import { Container } from 'stemn-shared/misc/Layout'
 import Avatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import Link from 'stemn-shared/misc/Router/Link'
 import logo from 'images/logo80x80none.png'
@@ -42,7 +42,7 @@ export default class LandingHeader extends Component {
   }
   isLoggedIn() {
     const {
-      auth
+      auth,
     } = this.props
     const routeParams = { userId: auth.user._id }
 
@@ -74,7 +74,7 @@ export default class LandingHeader extends Component {
   render() {
     const { atTop, isOpen } = this.state
     const {
-      auth
+      auth,
     } = this.props
     const allClasses = classNames(
       classes.header,

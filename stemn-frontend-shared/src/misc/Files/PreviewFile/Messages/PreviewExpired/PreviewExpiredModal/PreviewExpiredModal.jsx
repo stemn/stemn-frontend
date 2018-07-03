@@ -6,7 +6,7 @@ import StandardTable from 'stemn-shared/misc/Tables/StandardTable/StandardTable.
 class Component extends React.Component {
   render() {
     const {
-      modalConfirm
+      modalConfirm,
     } = this.props
     const { provider } = this.props
     const providerText = provider == 'drive' ? 'Google Drive' : 'Dropbox'

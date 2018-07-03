@@ -54,7 +54,7 @@ export class CommentNew extends Component {
     const {
       auth,
       newComment,
-      entityModel
+      entityModel,
     } = this.props
     const { isFocussed } = this.state
 

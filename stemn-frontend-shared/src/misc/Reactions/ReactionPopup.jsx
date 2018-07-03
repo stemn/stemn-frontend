@@ -12,7 +12,7 @@ import { options } from './Reactions.utils.js'
 export default class ReactionPopup extends React.Component {
   render() {
     const {
-      submitFn
+      submitFn,
     } = this.props
 
     return (

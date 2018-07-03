@@ -21,7 +21,7 @@ export default class Terminal extends Component {
     const {
       lines,
       loading,
-      hasLoadedBefore
+      hasLoadedBefore,
     } = this.props
     return (
       <div className={ classes.outer }>

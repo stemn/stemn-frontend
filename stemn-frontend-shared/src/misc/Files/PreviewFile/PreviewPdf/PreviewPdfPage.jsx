@@ -111,12 +111,12 @@ class Page extends React.Component {
 
   render() {
     const {
-      scale
+      scale,
     } = this.props
     const {
       width,
       height,
-      status
+      status,
     } = this.state
 
     const sizeStyles = {

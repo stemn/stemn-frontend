@@ -38,7 +38,7 @@ export class Component extends React.Component {
     const {
       boardModel,
       board,
-      modalCancel
+      modalCancel,
     } = this.props
 
     return (

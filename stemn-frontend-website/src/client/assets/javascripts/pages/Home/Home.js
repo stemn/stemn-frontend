@@ -42,7 +42,7 @@ export default class Home extends Component {
       filterValue,
       location,
       page,
-      size
+      size,
     } = this.props
 
     const hasResults = timeline && timeline.data && timeline.data.length > 0

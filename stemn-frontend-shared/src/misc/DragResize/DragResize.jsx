@@ -76,13 +76,11 @@ const Dragger = clickDrag(DraggerComponent, { touch: true })
 
 export default class DragResize extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     if (props.width) {
-      this.state = { width: parseInt(props.width) };
-      return;
+      this.state = { width: parseInt(props.width) }
     } else if (props.height) {
-      this.state = { height: parseInt(props.height) };
-      return;
+      this.state = { height: parseInt(props.height) }
     }
   }
 

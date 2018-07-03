@@ -32,7 +32,7 @@ export default class NewFieldModal extends Component {
       newFieldFormPending,
       modalCancel,
       name,
-      blurb
+      blurb,
     } = this.props
     const initValue = {
       name,

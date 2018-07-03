@@ -5,6 +5,7 @@ import StandardLayout from 'layout/StandardLayout'
 import UserNavHeader from 'modules/UserNavHeader'
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import { Helmet } from 'react-helmet'
+
 class Settings extends Component {
   render() {
     const { children, user, currentUser } = this.props

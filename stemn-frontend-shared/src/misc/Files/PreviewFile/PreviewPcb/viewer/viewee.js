@@ -1,3 +1,4 @@
+/* eslint-disable */
 import EagleXMLParser from './parse/eagle.js'
 import KicadNewParser from './parse/kicad_pcb_parser.js'
 import ViewEECanvasRenderer from './render/viewee-canvas.js';

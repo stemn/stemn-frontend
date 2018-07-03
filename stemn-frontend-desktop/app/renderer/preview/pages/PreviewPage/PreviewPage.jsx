@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import classes from './PreviewPage.css'
 
 import { orderItemsByTime, isSelected } from 'stemn-shared/misc/FileCompare/FileCompare.utils.js'
-import { get } from 'lodash';
+import { get } from 'lodash'
 import { formatBytes } from 'stemn-shared/misc/Files/utils'
 import { getRevisions } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.utils.js'
 import moment from 'moment'
@@ -68,7 +68,7 @@ export default class PreviewPage extends Component {
     const {
       compare: { mode, selected1, selected2 },
       file,
-      timeline
+      timeline,
     } = this.props
     const items = orderItemsByTime(mode, selected1, selected2)
     const file1 = get(items, [0, 'data'])

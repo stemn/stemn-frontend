@@ -50,7 +50,7 @@ class ThreadLabelsEdit extends Component {
   render() {
     const {
       model,
-      value
+      value,
     } = this.props
 
     return (

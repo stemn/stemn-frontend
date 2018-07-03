@@ -2,7 +2,7 @@ import { renderFileDownload, renderFileError, renderFileProgress } from 'stemn-s
 
 export default (store, action) => {
   const {
-    dispatch
+    dispatch,
   } = store
 
   switch (action.type) {

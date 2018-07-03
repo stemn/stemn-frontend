@@ -9,7 +9,7 @@ import * as SystemActions from 'stemn-shared/desktop/System/System.actions.js'
 import React from 'react'
 import PropTypes from 'prop-types'
 import Link from 'stemn-shared/misc/Router/Link'
-import { get } from 'lodash';
+import { get } from 'lodash'
 
 import Header from 'stemn-shared/misc/Header/Header.jsx'
 import Banner from 'stemn-shared/misc/Banner/Banner.jsx'
@@ -49,7 +49,7 @@ class Component extends React.Component {
       system,
       children,
       systemActions,
-      dispatch
+      dispatch,
     } = this.props
     const baseLink       = `project/${project && project.data ? project.data._id : ''}`
     const isLoading      = !project || !project.data

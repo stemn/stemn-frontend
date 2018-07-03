@@ -20,7 +20,7 @@ export default class HistoryGraph extends Component {
     const {
       data,
       loading,
-      hasLoaded
+      hasLoaded,
     } = this.props
 
     const dataFormatted = data.map(item => ({

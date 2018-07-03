@@ -48,7 +48,7 @@ export class Component extends React.Component {
       timeline,
       timelineModel,
       project,
-      children
+      children,
     } = this.props
     const baseLink = `project/${project && project.data ? project.data._id : ''}`
 

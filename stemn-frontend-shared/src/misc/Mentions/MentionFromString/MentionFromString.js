@@ -25,7 +25,7 @@ export default class MentionFromString extends Component {
   render() {
     const {
       href,
-      display
+      display,
     } = this.props
     const [entityId, mentionType, mentionId] = href.split(':')
 

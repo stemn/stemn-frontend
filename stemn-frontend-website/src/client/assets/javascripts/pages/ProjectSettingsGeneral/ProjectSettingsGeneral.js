@@ -28,7 +28,7 @@ class ProjectSettingsGeneral extends Component {
     const {
       project,
       projectModel,
-      saveProject
+      saveProject,
     } = this.props
     return (
       <div>

@@ -56,7 +56,7 @@ export default class FileListPopup extends Component {
       link,
       fileList,
       activeFile,
-      clickFn
+      clickFn,
     } = this.props
     const isLoading    = !fileList || fileList.loading
     const filesOrdered = fileList && fileList.entries ? orderBy(fileList.entries, 'name') : []

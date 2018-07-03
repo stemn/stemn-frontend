@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { orderBy, get } from 'lodash';
+import { orderBy, get } from 'lodash'
 import classNames from 'classnames'
 import classes from './FileList.css'
 import FileBreadCrumbs from './components/FileBreadCrumbs'
@@ -22,7 +22,7 @@ import FileSyncUnderway from 'stemn-shared/misc/FileList/FileSyncUnderway'
 const contextIdentifier = 'FileListCm'
 const FileRowContext = GLOBAL_ENV.APP_TYPE === 'web'
   ? FileRow
-  : (props) => (
+  : props => (
     <ContextMenuTrigger id={ contextIdentifier } item={ props.file } data="test">
       <FileRow { ...props } />
     </ContextMenuTrigger>

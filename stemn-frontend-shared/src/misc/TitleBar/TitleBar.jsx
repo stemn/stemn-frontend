@@ -12,12 +12,12 @@ import MinimiseIcon from './icons/minimise.js'
 
 export default class TitleBar extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     const window = electron.remote.getCurrentWindow()
 
     this.state = {
       isMaximised: window.isMaximized(),
-    };
+    }
   }
 
   render() {

@@ -85,7 +85,7 @@ export default class FileSelectModal extends React.Component {
     const {
       projectId,
       fileSelect,
-      options
+      options,
     } = this.props
 
     const validatePath = (path, provider) => {

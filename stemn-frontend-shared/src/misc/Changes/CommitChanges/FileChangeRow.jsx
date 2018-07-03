@@ -21,7 +21,7 @@ export default class FileChangeRow extends React.Component {
       text,
       clickFn,
       isActive,
-      status
+      status,
     } = this.props
     // status == 'created' || 'modified' || 'deleted'
 

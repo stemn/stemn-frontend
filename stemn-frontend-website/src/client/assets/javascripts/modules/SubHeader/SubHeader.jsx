@@ -19,7 +19,7 @@ export default class SubHeader extends Component {
       children,
       noline,
       style,
-      noResponsive
+      noResponsive,
     } = this.props
     const borderStyle = noline ? {} : { borderBottom: '1px solid rgba(0, 0, 0, 0.1)' }
     const responsiveClasses = noResponsive

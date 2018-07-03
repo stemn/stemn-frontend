@@ -14,7 +14,7 @@ export default class PreviewCad extends React.Component {
   onMount = (nextProps, prevProps) => {
     if (!prevProps || nextProps.fileMeta != prevProps.fileMeta) {
       const {
-        renderFn
+        renderFn,
       } = nextProps
       this.setState({ status: 'pending' })
       if (isWebGlSupported()) {

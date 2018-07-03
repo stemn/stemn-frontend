@@ -48,7 +48,7 @@ export default class SidebarTimeline extends React.Component {
       items,
       loading,
       query,
-      refresh
+      refresh,
     } = this.props
     const routeParams = {
       projectId,

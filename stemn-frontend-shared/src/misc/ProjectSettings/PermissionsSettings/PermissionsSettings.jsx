@@ -21,7 +21,7 @@ export default class ProjectSettingsPermissions extends Component {
   render() {
     const {
       project,
-      projectModel
+      projectModel,
     } = this.props
     return (
       <div>

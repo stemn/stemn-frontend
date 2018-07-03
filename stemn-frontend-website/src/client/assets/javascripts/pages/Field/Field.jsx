@@ -9,7 +9,7 @@ export default class Field extends Component {
   render() {
     const {
       field,
-      children
+      children,
     } = this.props
     return (
       <StandardLayout>

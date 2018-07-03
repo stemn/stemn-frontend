@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { filterBoard, getAllThreads } from '../Threads.utils.js'
-import { has } from 'lodash';
+import { has } from 'lodash'
 
 import classes from './ThreadsDisplay.css'
 
@@ -46,7 +46,7 @@ export default class ThreadsDisplay extends Component {
       filterModel,
       filterCacheKey,
       setFilter,
-      projectBoards
+      projectBoards,
     } = this.props
     const { hideGuide } = this.state
 

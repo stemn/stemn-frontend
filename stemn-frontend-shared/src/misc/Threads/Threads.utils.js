@@ -1,5 +1,5 @@
 import i from 'icepick'
-import { escapeRegExp, difference } from 'lodash';
+import { escapeRegExp, difference } from 'lodash'
 
 const isThreadPartOfFilter = (thread, filterObject) => {
   const threadData = thread && thread.data

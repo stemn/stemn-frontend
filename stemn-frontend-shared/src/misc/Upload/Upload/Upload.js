@@ -60,7 +60,7 @@ export default class Upload extends Component {
       style,
       containerClassName,
       imageClassName,
-      value
+      value,
     } = this.props
 
     const containerClasses = classNames(classes.container, containerClassName)

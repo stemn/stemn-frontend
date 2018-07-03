@@ -22,7 +22,7 @@ export default class GeneralSettings extends Component {
   render() {
     const {
       entityModel,
-      project
+      project,
     } = this.props
     return (
       <div>

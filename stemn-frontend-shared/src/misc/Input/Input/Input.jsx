@@ -12,7 +12,7 @@ export class Component extends React.Component {
     const {
       model,
       type,
-      changeAction
+      changeAction,
     } = this.props
     const prevValue = this.state.value
     let newValue = event.target.value

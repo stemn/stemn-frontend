@@ -1,8 +1,10 @@
+/* eslint-disable */
+
 import whatGerber from '@stemn/whats-that-gerber'
 
 export default () => ({
   parse,
-  getBounds,
+  getBounds
 })
 
 const index = {

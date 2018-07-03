@@ -7,7 +7,7 @@ import { Link } from 'react-router'
 class Component extends React.Component {
   render() {
     const {
-      modalConfirm
+      modalConfirm,
     } = this.props
     return (
       <div style={ { width: '500px' } }>

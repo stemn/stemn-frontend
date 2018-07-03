@@ -10,7 +10,7 @@ class Component extends React.Component {
   render() {
     const {
       dispatch,
-      model
+      model,
     } = this.props
 
     const niceColors = [

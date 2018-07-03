@@ -8,7 +8,7 @@ class Component extends React.Component {
     const {
       title,
       body,
-      modalConfirm
+      modalConfirm,
     } = this.props
 
     return (

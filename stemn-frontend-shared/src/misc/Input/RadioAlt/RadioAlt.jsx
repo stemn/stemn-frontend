@@ -16,7 +16,7 @@ export default class RadioAlt extends React.Component {
       value,
       model,
       className,
-      children
+      children,
     } = this.props
     const statusClass = value === true ? 'checked' : ''
     return (

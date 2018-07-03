@@ -42,7 +42,7 @@ export default class FileCompareInner extends Component {
       file2,
       event,
       mode,
-      header
+      header,
     } = this.props
     const { width, position } = this.state
     

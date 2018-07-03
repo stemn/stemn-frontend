@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { clone, forEachRight, find } from 'lodash';
+import { clone, forEachRight, find } from 'lodash'
 import { deregister, register, activeInstances } from './PreviewPcb.utils'
 
 import classes from './PreviewPcb.css'

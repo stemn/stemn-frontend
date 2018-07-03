@@ -43,7 +43,7 @@ export default class DownloadModal extends React.Component {
   render() {
     const {
       syncTimeline,
-      modalCancel
+      modalCancel,
     } = this.props
 
     const allRevisions = syncTimeline && syncTimeline.data 

@@ -27,7 +27,7 @@ class Component extends React.Component {
     const {
       value,
       children,
-      placeholder
+      placeholder,
     } = this.props
     return (
       <TextDisplayBox

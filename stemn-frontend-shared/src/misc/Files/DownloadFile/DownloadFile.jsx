@@ -30,7 +30,7 @@ class DownloadFile extends Component {
     const {
       children,
       title,
-      progress
+      progress,
     } = this.props
     return (
       <a

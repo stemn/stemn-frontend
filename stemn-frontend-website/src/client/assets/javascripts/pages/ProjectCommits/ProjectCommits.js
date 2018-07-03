@@ -63,7 +63,7 @@ export default class ProjectCommits extends Component {
       size,
       filter,
       filterIsDefault,
-      board
+      board,
     } = this.props
 
     const noMoreResults = syncTimeline && syncTimeline.data.length < size

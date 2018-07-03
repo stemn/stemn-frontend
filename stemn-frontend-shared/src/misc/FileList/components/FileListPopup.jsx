@@ -78,7 +78,7 @@ export class FileListPopup extends React.Component {
     const {
       files,
       activeFolder,
-      clickFn
+      clickFn,
     } = this.props
     const isLoading    = !files || files.loading
     const filesOrdered = files && files.entries ? orderBy(files.entries, 'name') : []

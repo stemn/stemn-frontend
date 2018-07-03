@@ -16,7 +16,7 @@ export default class ThreadsSettings extends Component {
   updateBoard = () => {
     const {
       board,
-      updateBoard
+      updateBoard,
     } = this.props
 
     // Get the new board data

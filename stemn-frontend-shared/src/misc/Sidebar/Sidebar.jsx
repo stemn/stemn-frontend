@@ -111,7 +111,7 @@ export class Component extends React.Component {
                     isActive={ item._id === this.props.params.stub }
                     to={ `/project/${item._id}` }
                   />
-                </ContextMenuTrigger>
+                </ContextMenuTrigger>,
               )}
               <ContextMenu
                 identifier={ projectContextIdentifier }

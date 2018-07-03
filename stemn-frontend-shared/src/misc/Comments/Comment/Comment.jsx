@@ -47,7 +47,7 @@ export default class Comment extends Component {
       showMeta,
       children,
       entityModel,
-      style
+      style,
     } = this.props
 
     if (!comment || !comment.data) {

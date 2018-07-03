@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import classes from './Header.scss'
 import classNames from 'classnames'
 import { loginRoute } from 'route-actions'
-import { Container } from 'stemn-shared/misc/Layout';
+import { Container } from 'stemn-shared/misc/Layout'
 import Avatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import Popover from 'stemn-shared/misc/Popover'
 import Link from 'stemn-shared/misc/Router/Link'

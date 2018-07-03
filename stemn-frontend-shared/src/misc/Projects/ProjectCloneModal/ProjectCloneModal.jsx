@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { get } from 'lodash';
+import { get } from 'lodash'
 
 import classes from '../ProjectNewModal/ProjectNewModal.scss'
 

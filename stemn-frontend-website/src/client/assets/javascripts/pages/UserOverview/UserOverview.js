@@ -42,7 +42,7 @@ export default class UserOverview extends Component {
       history,
       location,
       page,
-      size
+      size,
     } = this.props
     const noMoreResults =  timeline && timeline.data && timeline.data.length < size
 

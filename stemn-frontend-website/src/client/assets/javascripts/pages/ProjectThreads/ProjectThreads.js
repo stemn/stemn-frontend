@@ -65,7 +65,7 @@ export default class ProjectThreads extends Component {
       filterIsDefault,
       setFilter,
       filterCacheKey,
-      filterModel
+      filterModel,
     } = this.props
     const noMoreResults = threads && threads.data && threads.data.length < size
     const isLoading = !threads || threads.loading

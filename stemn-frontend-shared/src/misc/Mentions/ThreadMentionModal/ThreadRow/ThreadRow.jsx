@@ -36,7 +36,7 @@ export class Component extends React.Component {
       thread,
       toggleComplete,
       toggleRelated,
-      status
+      status,
     } = this.props
 
     if (!thread || !thread.data) {

@@ -17,7 +17,7 @@ export default class PasswordLost extends React.Component {
 
   render() {
     const {
-      auth
+      auth,
     } = this.props
     
     return (

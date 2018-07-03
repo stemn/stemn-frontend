@@ -30,7 +30,7 @@ export default class OrganisationSettings extends Component {
   }
   render() {
     const {
-      project
+      project,
     } = this.props
     return (
       <div>

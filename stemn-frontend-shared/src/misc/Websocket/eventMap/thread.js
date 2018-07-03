@@ -4,7 +4,7 @@ import { getThread } from 'stemn-shared/misc/Threads/Threads.actions'
 
 export default (store, action) => {
   const {
-    dispatch
+    dispatch,
   } = store
 
   switch (action.type) {

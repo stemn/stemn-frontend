@@ -2,7 +2,7 @@ import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actio
 
 export default (store, action) => {
   const {
-    dispatch
+    dispatch,
   } = store
 
   switch (action.type) {

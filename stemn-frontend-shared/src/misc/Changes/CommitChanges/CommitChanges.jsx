@@ -13,7 +13,7 @@ import Walkthrough from 'stemn-shared/misc/Walkthrough/Walkthrough.jsx'
 import FileSyncUnderway from 'stemn-shared/misc/FileList/FileSyncUnderway'
 import { groupRevisions } from 'stemn-shared/misc/Timeline/Timeline.utils.js'
 import { getToggleAllStatus, filterSelectedChangesByPossible } from '../Changes.utils.js'
-import { get } from 'lodash';
+import { get } from 'lodash'
 import './CommitChanges.css'
 
 const contextIdentifier = 'FileChangeCm'
@@ -58,7 +58,7 @@ export default class CommitChanges extends React.Component {
             </Walkthrough>
             { groupedChanges.length > 0
               ? <div className="scroll-box layout-column flex">
-                { groupedChanges.map((item) => (
+                { groupedChanges.map(item => (
                   <ContextMenuTrigger 
                     item={ item }
                     id={ contextIdentifier }

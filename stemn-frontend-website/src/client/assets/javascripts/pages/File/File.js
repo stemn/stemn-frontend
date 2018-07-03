@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import classes from './File.scss'
 import { projectRoute, fileRoute } from 'route-actions'
 import { orderItemsByTime, isSelected } from 'stemn-shared/misc/FileCompare/FileCompare.utils.js'
-import { get } from 'lodash';
+import { get } from 'lodash'
 import { formatBytes } from 'stemn-shared/misc/Files/utils'
 import { getRevisions } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.utils.js'
 import moment from 'moment'

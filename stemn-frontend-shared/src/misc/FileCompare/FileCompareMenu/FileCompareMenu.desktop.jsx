@@ -90,7 +90,7 @@ export class Component extends React.Component {
       changeMode,
       revisions,
       file1,
-      file2
+      file2,
     } = this.props
 
     if (!file1) { return null }

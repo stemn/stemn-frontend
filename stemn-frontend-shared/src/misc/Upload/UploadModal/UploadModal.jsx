@@ -12,7 +12,7 @@ export default class UploadModal extends Component {
   }
   render() {
     const {
-      modalCancel
+      modalCancel,
     } = this.props
     return (
       <div style={ { width: '600px' } }>

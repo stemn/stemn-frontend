@@ -60,7 +60,7 @@ export default class ProjectPipelines extends Component {
       location,
       page,
       size,
-      filterIsDefault
+      filterIsDefault,
     } = this.props
 
     const isLoaded = pipelines && pipelines.data
@@ -94,7 +94,7 @@ export default class ProjectPipelines extends Component {
   render() {
     const {
       project,
-      filter
+      filter,
     } = this.props
     const team = get(project, 'data.team', [])
 

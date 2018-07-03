@@ -19,7 +19,7 @@ class LabelSelectRow extends Component {
   render() {
     const {
       item,
-      value
+      value,
     } = this.props
     const status = value ? value.includes(item._id) : false
 

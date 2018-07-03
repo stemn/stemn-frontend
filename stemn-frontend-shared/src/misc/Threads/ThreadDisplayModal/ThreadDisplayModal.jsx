@@ -54,7 +54,7 @@ export default class ThreadDisplayModal extends React.Component {
       entityModel,
       project,
       timeline,
-      timelineCacheKey
+      timelineCacheKey,
     } = this.props
 
     const getMain = () => {

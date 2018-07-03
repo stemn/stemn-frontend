@@ -27,7 +27,7 @@ class ProjectLinkRemote extends Component {
   render() {
     const {
       value,
-      auth
+      auth,
     } = this.props
 
     const options = [

@@ -21,7 +21,7 @@ import Button  from 'stemn-shared/misc/Buttons/Button/Button.jsx'
 export class Component extends React.Component {
   render() {
     const {
-      dispatch
+      dispatch,
     } = this.props
     return (
       <div className="layout-column flex">

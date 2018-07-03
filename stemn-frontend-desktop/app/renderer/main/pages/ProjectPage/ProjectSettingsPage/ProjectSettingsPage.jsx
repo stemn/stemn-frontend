@@ -11,7 +11,7 @@ import NavPill from 'stemn-shared/misc/Buttons/NavPill/NavPill'
 export class Component extends React.Component {
   render() {
     const {
-      project
+      project,
     } = this.props
     const baseLink = project && project.data && project.data._id ? `project/${project.data._id}` : ''
 

@@ -31,7 +31,7 @@ export default class GeneralSettings extends Component {
   }
   render() {
     const {
-      project
+      project,
     } = this.props
     return (
       <div>

@@ -42,12 +42,10 @@ export class Component extends React.Component {
     })
   };
 
-  toggleAll = ({ value }) => {
-    return this.props.changesActions.toggleAll({
-      value,
-      projectId: this.props.project.data._id,
-    })
-  };
+  toggleAll = ({ value }) => this.props.changesActions.toggleAll({
+    value,
+    projectId: this.props.project.data._id,
+  });
 
   commitFn = () => {
     this.props.changesActions.commit({
