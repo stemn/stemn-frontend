@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js'
 import previewExpiredModalName from 'stemn-shared/misc/Files/PreviewFile/Messages/PreviewExpired/PreviewExpiredModal'
 
-export const PreviewExpired = React.createClass({
+export class PreviewExpired extends React.Component {
   render() {
     const { provider, dispatch } = this.props
 
@@ -21,7 +21,7 @@ export const PreviewExpired = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 export default connect()(PreviewExpired)

@@ -11,7 +11,7 @@ import MdInsertEmoticon from 'react-icons/md/insert-emoticon'
 import { options } from './Reactions.utils.js'
 
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     const { submitFn, reactions } = this.props
 
@@ -32,5 +32,5 @@ export default React.createClass({
         </div>
       </Popover>
     )
-  },
-})
+  }
+}

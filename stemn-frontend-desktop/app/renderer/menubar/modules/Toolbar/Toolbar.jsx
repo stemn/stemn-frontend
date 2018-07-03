@@ -24,7 +24,7 @@ import MdOpenInNew          from 'react-icons/md/open-in-new'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
-export const Component = React.createClass({
+export class Component extends React.Component {
   render() {
     const { menu, children, dispatch } = this.props
 
@@ -83,8 +83,8 @@ export const Component = React.createClass({
         </Popover>
       </div>
     )
-  },
-})
+  }
+}
 
 // /////////////////////////////// CONTAINER /////////////////////////////////
 

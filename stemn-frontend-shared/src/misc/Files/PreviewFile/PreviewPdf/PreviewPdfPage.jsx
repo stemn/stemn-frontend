@@ -6,15 +6,14 @@ import PDFJSUtils from 'pdfjs-dist/web/pdf_viewer.js'
 import Waypoint from 'react-waypoint'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
-const Page = React.createClass({
-  getInitialState() {
-    return {
-      status: 'loading',
-      page: undefined,
-      width: 0,
-      height: 0,
-    }
-  },
+class Page extends React.Component {
+  state = {
+    status: 'loading',
+    page: undefined,
+    width: 0,
+    height: 0,
+  };
+
   componentWillReceiveProps(nextProps) {
     const prevProps = this.props
     if (prevProps.pdf != nextProps.pdf) {
@@ -23,18 +22,23 @@ const Page = React.createClass({
     if (prevProps.scale != nextProps.scale) {
       this.scale(nextProps.scale)
     }
-  },
+  }
+
   componentDidMount() {
     this._initPage(this.props)
-  },
+  }
+
   componentWillUnmount() {
     this.clearTimeouts()
-  },
-  renderTimeout: null,
-  clearTimeouts() {
+  }
+
+  renderTimeout = null;
+
+  clearTimeouts = () => {
     clearTimeout(this.renderTimeout)
-  },
-  _initPage(props) {
+  };
+
+  _initPage = (props) => {
     const { scale, index, pdf } = this.props
     const { page } = this.state
     if (!page) {
@@ -51,22 +55,26 @@ const Page = React.createClass({
         this._enterPage()
       })
     }
-  },
-  _enterPage() {
+  };
+
+  _enterPage = () => {
     const { status, page } = this.state
     if (status == 'loading' && page) {
       this._renderPage(page)
     }
-  },
-  scale(scale) {
+  };
+
+  scale = (scale) => {
     //    if(this.state.page){
     //      this._renderPage(this.state.page)
     //    }
-  },
-  context: undefined,
-  viewport: undefined,
-  textLayer: undefined,
-  _renderPage(page) {
+  };
+
+  context = undefined;
+  viewport = undefined;
+  textLayer = undefined;
+
+  _renderPage = (page) => {
     const { scale, index } = this.props
     this.viewport = page.getViewport(scale)
     const { width, height } = this.viewport
@@ -100,8 +108,7 @@ const Page = React.createClass({
       this.textLayer.setTextContent(textContent)
       this.textLayer.render()
     })
-  },
-
+  };
 
   render() {
     const { pdf, scale, index } = this.props
@@ -126,8 +133,8 @@ const Page = React.createClass({
         <div ref="text" className={ classes.textLayer } style={ textStyles } />
       </div>
     )
-  },
-})
+  }
+}
 
 Page.propTypes = {
   index: PropTypes.number.isRequired,

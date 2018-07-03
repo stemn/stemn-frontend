@@ -13,7 +13,7 @@ import { Link } from 'react-router'
 // Styles
 import classNames from 'classnames'
 
-const Component = React.createClass({
+class Component extends React.Component {
   render() {
     const {
       owner, auth, authActions,
@@ -50,8 +50,8 @@ const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 // //////////////////////////////////////////////////////////////
 

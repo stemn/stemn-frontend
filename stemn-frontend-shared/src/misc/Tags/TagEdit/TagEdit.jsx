@@ -7,7 +7,7 @@ import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
 
 import MdClose from 'react-icons/md/close'
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     const { text, className, onClick, ...otherProps } = this.props
     return (
@@ -23,5 +23,5 @@ export default React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}

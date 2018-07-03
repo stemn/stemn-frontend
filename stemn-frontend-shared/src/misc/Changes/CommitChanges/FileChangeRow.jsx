@@ -14,7 +14,7 @@ import Change from 'stemn-shared/assets/icons/changes/change.js'
 // Styles
 import styles from './FileChangeRow.css'
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     const { item, model, value, text, clickFn, isActive, status } = this.props
     // status == 'created' || 'modified' || 'deleted'
@@ -60,5 +60,5 @@ export default React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}

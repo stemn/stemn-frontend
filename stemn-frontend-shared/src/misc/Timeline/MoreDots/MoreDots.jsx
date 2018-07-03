@@ -4,7 +4,7 @@ import React from 'react'
 import classNames from 'classnames'
 import classes from './MoreDots.css'
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     return (
       <div className={ classNames(classes.moreDots, 'layout-row', { [classes.right]: this.props.side == 'right' }) }>
@@ -13,5 +13,5 @@ export default React.createClass({
         <div />
       </div>
     )
-  },
-})
+  }
+}

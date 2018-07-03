@@ -8,7 +8,7 @@ import classes from './TimelineWrapper.scss'
 import { some } from 'lodash'
 
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     return (
       <div className={ classes.item } style={ this.props.style }>
@@ -25,5 +25,5 @@ export default React.createClass({
         }
       </div>
     )
-  },
-})
+  }
+}

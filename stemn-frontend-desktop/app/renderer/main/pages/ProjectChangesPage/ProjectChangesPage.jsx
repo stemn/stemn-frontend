@@ -51,19 +51,20 @@ const CommitBoxStyles = {
   background: 'rgba(0, 0, 0, 0.03)',
 }
 
-export const Component = React.createClass({
-  getInitialState() {
-    return {
-      hideGuide: false,
-    }
-  },
-  getStarted() {
+export class Component extends React.Component {
+  state = {
+    hideGuide: false,
+  };
+
+  getStarted = () => {
     this.props.walkthroughActions.activate({ name: 'commit.commitIntro' })
     this.setState({ hideGuide: true })
-  },
-  componentWillMount() { this.onMount(this.props) },
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) },
-  onMount(nextProps, prevProps) {
+  };
+
+  componentWillMount() { this.onMount(this.props) }
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+
+  onMount = (nextProps, prevProps) => {
     // If the project is connected to a remote
     if (has(nextProps, 'project.data.remote.connected') && nextProps.project.data.remote.connected) {
       // And the project has changed
@@ -77,30 +78,35 @@ export const Component = React.createClass({
         })
       }
     }
-  },
-  refresh() {
+  };
+
+  refresh = () => {
     this.props.changesActions.fetchChanges({
       projectId: this.props.project.data._id,
     })
-  },
-  toggleAll({ value }) {
+  };
+
+  toggleAll = ({ value }) => {
     return this.props.changesActions.toggleAll({
       value,
       projectId: this.props.project.data._id,
     })
-  },
-  commitFn() {
+  };
+
+  commitFn = () => {
     this.props.changesActions.commit({
       projectId: this.props.project.data._id,
       name: this.props.changes.name,
       body: this.props.changes.body,
     })
-  },
-  deselect() {
+  };
+
+  deselect = () => {
     this.props.changesActions.deselect({
       projectId: this.props.project.data._id,
     })
-  },
+  };
+
   render() {
     const { changes, timeline, project, changesActions, entityModel, dispatch } = this.props
     const { hideGuide } = this.state
@@ -206,8 +212,8 @@ export const Component = React.createClass({
         {!isLoading ? getTemplate() : null}
       </div>
     )
-  },
-})
+  }
+}
 
 
 // /////////////////////////////// CONTAINER /////////////////////////////////

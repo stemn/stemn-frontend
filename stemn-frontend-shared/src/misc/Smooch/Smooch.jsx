@@ -8,10 +8,11 @@ import comments      from 'stemn-shared/assets/images/pure-vectors/comments.svg'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
-export default React.createClass({
+export default class extends React.Component {
   componentWillMount() {
     initSmooch()
-  },
+  }
+
   render() {
     const { text, style } = this.props
     return (
@@ -19,8 +20,8 @@ export default React.createClass({
         <img src={ comments } />
       </a>
     )
-  },
-})
+  }
+}
 
 
 //            $timeout(setupSmooch, 2000);

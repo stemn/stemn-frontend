@@ -41,15 +41,17 @@ import ProjectNewModalName from 'stemn-shared/misc/Projects/ProjectNewModal'
 const projectContextIdentifier = 'ProjectContextIdentifier'
 const ProjectWithContext = ContextMenuLayer(projectContextIdentifier, props => props.item)(SidebarProjectButton)
 
-export const Component = React.createClass({
-  showProjectNewModal() {
+export class Component extends React.Component {
+  showProjectNewModal = () => {
     this.props.modalActions.showModal({ modalType: ProjectNewModalName })
-  },
-  secretSearch() {
+  };
+
+  secretSearch = () => {
     if (this.props.sidebar.searchString.length == 24) {
       this.props.dispatch(push(`/project/${this.props.sidebar.searchString}`))
     }
-  },
+  };
+
   render() {
     const { projectsActions, projects, auth, dispatch } = this.props
     const sidebarStyle = classNames('layout-column', 'flex', 'rel-box', styles.sidebar)
@@ -156,8 +158,8 @@ export const Component = React.createClass({
         </div>
       </DragResize>
     )
-  },
-})
+  }
+}
 
 //              <div className="text-grey-3" style={{padding: '10px 15px 5px'}}>Other Projects</div>
 //              <SidebarProjectButton  item={{name: 'Demo Project'}} icon="tutorial" />

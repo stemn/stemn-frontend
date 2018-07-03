@@ -17,8 +17,8 @@ import downloadModalName from 'stemn-shared/misc/Files/Download/DownloadModal'
 import MdMoreHoriz from 'react-icons/md/more-horiz'
 import MdOpenInNew from 'react-icons/md/open-in-new'
 
-export const Component = React.createClass({
-  menu() {
+export class Component extends React.Component {
+  menu = () => {
     const { file1, revisions, dispatch, isChange } = this.props
     const discardChanges = {
       label: 'Discard Changes',
@@ -69,8 +69,9 @@ export const Component = React.createClass({
       })),
     }
     return isChange ? [discardChanges, openFile, openFolder] : [openFile, openFolder, downloadFile, viewOnline]
-  },
-  preview() {
+  };
+
+  preview = () => {
     const { file1, dispatch } = this.props
     dispatch(ElectronWindowsActions.create({
       type: 'PREVIEW',
@@ -80,7 +81,8 @@ export const Component = React.createClass({
         projectId: file1.project._id,
       },
     }))
-  },
+  };
+
   render() {
     const { enablePreview, mode, changeMode, revisions, file1, file2, dispatch } = this.props
 
@@ -125,8 +127,8 @@ export const Component = React.createClass({
         </Popover>
       </div>
     )
-  },
-})
+  }
+}
 
 // /////////////////////////////// CONTAINER /////////////////////////////////
 

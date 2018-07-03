@@ -21,8 +21,8 @@ import cloudLocked        from 'stemn-shared/assets/images/pure-vectors/cloud-lo
 
 import * as stringConcat  from 'stemn-shared/utils/stringConcat'
 
-export const Component = React.createClass({
-  onMount(nextProps, prevProps) {
+export class Component extends React.Component {
+  onMount = (nextProps, prevProps) => {
     // If project has changed
     if (!prevProps || nextProps.projectId != prevProps.projectId) {
       // Set the project to active
@@ -32,32 +32,38 @@ export const Component = React.createClass({
         nextProps.changesActions.fetchChanges({ projectId: nextProps.projectId })
       }
     }
-  },
-  componentWillMount() { this.onMount(this.props) },
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) },
-  refresh() {
+  };
+
+  componentWillMount() { this.onMount(this.props) }
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+
+  refresh = () => {
     this.props.changesActions.fetchChanges({
       projectId: this.props.project.data._id,
     })
-  },
-  toggleAll({ value }) {
+  };
+
+  toggleAll = ({ value }) => {
     return this.props.changesActions.toggleAll({
       value,
       projectId: this.props.project.data._id,
     })
-  },
-  commitFn() {
+  };
+
+  commitFn = () => {
     this.props.changesActions.commit({
       projectId: this.props.project.data._id,
       name: this.props.changes.name,
       body: this.props.changes.body,
     })
-  },
-  deselect() {
+  };
+
+  deselect = () => {
     this.props.changesActions.deselect({
       projectId: this.props.project.data._id,
     })
-  },
+  };
+
   render() {
     const { changes, project, changesActions, entityModel, projectId, dispatch } = this.props
 
@@ -121,8 +127,8 @@ export const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 // /////////////////////////////// CONTAINER /////////////////////////////////
 

@@ -6,7 +6,7 @@ import MdChevronRight from 'react-icons/md/chevron-right'
 import classes from './TogglerExpand.css'
 import classNames from 'classnames'
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     const { children, onClick, isActive } = this.props
     return (
@@ -15,5 +15,5 @@ export default React.createClass({
         <MdChevronRight size="18" />
       </div>
     )
-  },
-})
+  }
+}

@@ -4,7 +4,7 @@ import React from 'react'
 import classNames from 'classnames'
 import classes from './Banner.css'
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     const { children, type, style } = this.props
     return (
@@ -12,5 +12,5 @@ export default React.createClass({
         {children}
       </div>
     )
-  },
-})
+  }
+}

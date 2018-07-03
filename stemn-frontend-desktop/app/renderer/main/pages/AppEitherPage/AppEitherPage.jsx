@@ -14,7 +14,7 @@ import Sidebar  from 'stemn-shared/misc/Sidebar/Sidebar.jsx'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
-export const Component = React.createClass({
+export class Component extends React.Component {
   render() {
     const { children, auth } = this.props
     const isAuthed = auth.authToken && auth.user._id
@@ -30,8 +30,8 @@ export const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 
 // /////////////////////////////// CONTAINER /////////////////////////////////

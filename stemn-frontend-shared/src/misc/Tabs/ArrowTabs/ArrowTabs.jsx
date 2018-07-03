@@ -21,8 +21,9 @@ const arrowTabPropTypes = {
   params: PropTypes.object,               // Link params
 }
 
-export const ArrowTabs = React.createClass({
-  propTypes: arrowTabsPropTypes,
+export class ArrowTabs extends React.Component {
+  static propTypes = arrowTabsPropTypes;
+
   render() {
     const { children, className } = this.props
     return (
@@ -33,12 +34,13 @@ export const ArrowTabs = React.createClass({
         {children}
       </div>
     )
-  },
-})
+  }
+}
 
-export const ArrowTab = React.createClass({
-  propTypes: arrowTabPropTypes,
-  renderLinkEl() {
+export class ArrowTab extends React.Component {
+  static propTypes = arrowTabPropTypes;
+
+  renderLinkEl = () => {
     const { children, isActive, arrow, name, ...otherProps } = this.props
 
     const linkClasses = classNames(classes.tab, { active: isActive })
@@ -55,7 +57,8 @@ export const ArrowTab = React.createClass({
         { children }
       </a>
     )
-  },
+  };
+
   render() {
     const { arrow } = this.props
 
@@ -68,5 +71,5 @@ export const ArrowTab = React.createClass({
       </div>
 
     )
-  },
-})
+  }
+}

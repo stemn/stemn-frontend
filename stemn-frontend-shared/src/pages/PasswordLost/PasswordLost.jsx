@@ -6,15 +6,16 @@ import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressBut
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
-export default React.createClass({
-  submit(event) {
+export default class extends React.Component {
+  submit = (event) => {
     if (event && event.preventDefault) {
       event.preventDefault()
     }
     this.props.requestPasswordReset({
       email: this.props.auth.passwordLost.email,
     })
-  },
+  };
+
   render() {
     const { authenticate, auth } = this.props
     
@@ -44,5 +45,5 @@ export default React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}

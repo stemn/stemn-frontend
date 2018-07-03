@@ -43,21 +43,24 @@ const toggleStyle = {
 }
 
 
-export const Component = React.createClass({
+export class Component extends React.Component {
   componentDidMount() {
     this.props.getStatus()
-  },
-  confirmReset() {
+  }
+
+  confirmReset = () => {
     const { storeChange, showConfirm } = this.props
     showConfirm({
       message: 'This will clear all data and reset the application back to factory settings. This can be useful if some data has been corrupted.',
     }).then(() => storeChange('', undefined))
-  },
-  showReleaseModal() {
+  };
+
+  showReleaseModal = () => {
     this.props.showModal({
       modalType: releaseNotesModalName,
     })
-  },
+  };
+
   render() {
     const { system, autoLaunch, autoUpdate, getProviderPath, relaunch, toggle, installUpdate, checkForUpdates } = this.props
 
@@ -162,8 +165,8 @@ export const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 
 // /////////////////////////////// CONTAINER /////////////////////////////////

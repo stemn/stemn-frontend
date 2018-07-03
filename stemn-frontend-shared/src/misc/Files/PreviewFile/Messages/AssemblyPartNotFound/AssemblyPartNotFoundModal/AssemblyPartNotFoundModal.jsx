@@ -3,7 +3,7 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import StandardTable from 'stemn-shared/misc/Tables/StandardTable/StandardTable.jsx'
 import classNames from 'classnames'
 
-const Component = React.createClass({
+class Component extends React.Component {
   render() {
     const { modalCancel, modalConfirm } = this.props
     const { parts } = this.props
@@ -26,7 +26,7 @@ const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 export default Component

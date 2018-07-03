@@ -22,13 +22,13 @@ const propTypesObject = {
 }
 
 
-export default React.createClass({
-  propTypes: propTypesObject,
-  getInitialState() {
-    return {
-      loading: false,
-    }
-  },
+export default class extends React.Component {
+  static propTypes = propTypesObject;
+
+  state = {
+    loading: false,
+  };
+
   componentWillReceiveProps(nextProps) {
     const prevProps = this.props
     // If we just began loading:
@@ -39,13 +39,16 @@ export default React.createClass({
     else if (prevProps && prevProps.show && !nextProps.show) {
       this.endLoading()
     }
-  },
-  startLoading() {
+  }
+
+  startLoading = () => {
     //    console.log('start-loading');
-  },
-  endLoading() {
+  };
+
+  endLoading = () => {
     //    console.log('end-loading');
-  },
+  };
+
   render() {
     const { size, show, children, style, linear, hideBg, noOverlay, background, progress } = this.props
     const { loading } = this.state
@@ -91,6 +94,6 @@ export default React.createClass({
           : null }
       </ReactCSSTransitionGroup>
     )
-  },
-})
+  }
+}
 

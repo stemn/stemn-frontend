@@ -8,21 +8,23 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button'
 // Styles
 import classNames from 'classnames'
 
-const Component = React.createClass({
-  getInitialState() {
-    return { value: '' }
-  },
-  onChange(event) {
+class Component extends React.Component {
+  state = { value: '' };
+
+  onChange = (event) => {
     this.setState({ value: event.target.value })
-  },
-  submitCode() {
+  };
+
+  submitCode = () => {
     this.props.dispatch(submitBetaCode(this.state.value)).then(() => {
       this.props.modalConfirm()
     })
-  },
-  submitRequest() {
+  };
+
+  submitRequest = () => {
     this.props.dispatch(requestBetaCode())
-  },
+  };
+
   render() {
     const { value } = this.state
 
@@ -55,7 +57,7 @@ const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 export default connect()(Component)

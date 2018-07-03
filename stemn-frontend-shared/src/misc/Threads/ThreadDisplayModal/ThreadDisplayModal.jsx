@@ -20,30 +20,34 @@ import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOver
 import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
 import ThreadTimelineEmpty from 'stemn-shared/misc/Threads/ThreadTimelineEmpty'
 
-export default React.createClass({
-  showLabelEditModal() {
+export default class extends React.Component {
+  showLabelEditModal = () => {
     this.props.showLabelEditModal({
       boardId: this.props.thread.data.board,
     })
-  },
-  toggleComplete({ model, value }) {
+  };
+
+  toggleComplete = ({ model, value }) => {
     this.props.toggleComplete({
       threadId: this.props.thread.data._id,
       model,
       value,
     })
     this.updateThread()
-  },
-  updateThread() {
+  };
+
+  updateThread = () => {
     setTimeout(() => this.props.updateThread({ thread: this.props.thread.data }), 1)
-  },
-  deleteThread() {
+  };
+
+  deleteThread = () => {
     this.props.deleteThread({
       threadId: this.props.thread.data._id,
       boardId: this.props.thread.data.board,
     })
     this.props.modalConfirm()
-  },
+  };
+
   render() {
     const { threadId, thread, board, entityModel, project, timeline, timelineCacheKey, modalCancel } = this.props
 
@@ -170,5 +174,5 @@ export default React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}

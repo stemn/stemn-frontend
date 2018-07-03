@@ -4,7 +4,7 @@ import React from 'react'
 import classNames from 'classnames'
 // import classes from './banner.css';
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     const { data } = this.props
     return (
@@ -14,5 +14,5 @@ export default React.createClass({
         <div className="text-title-5">{data.description}</div>
       </div>
     )
-  },
-})
+  }
+}

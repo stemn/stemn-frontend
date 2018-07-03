@@ -25,8 +25,9 @@ const WalkthroughPropTypes = {
 }
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
-export const Walkthrough = React.createClass({
-  propTypes: WalkthroughPropTypes,
+export class Walkthrough extends React.Component {
+  static propTypes = WalkthroughPropTypes;
+
   render() {
     const { children, name } = this.props
     const { walkthroughActions, walkthrough } = this.props
@@ -86,8 +87,8 @@ export const Walkthrough = React.createClass({
         </div>
       </Popover>
     )
-  },
-})
+  }
+}
 
 // /////////////////////////////// CONTAINER /////////////////////////////////
 

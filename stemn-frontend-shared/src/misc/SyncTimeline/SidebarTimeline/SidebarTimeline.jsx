@@ -25,12 +25,13 @@ const eventFilter = [{
   value: '',
 }]
 
-export default React.createClass({
-  filterItems(items, fullQuery) {
+export default class extends React.Component {
+  filterItems = (items, fullQuery) => {
     const fullQueryArray = fullQuery ? fullQuery.split(' ') : []
     return items.filter(item => every(fullQueryArray, queryString => this.queryByString(item, queryString)))
-  },
-  queryByString(item, queryString) {
+  };
+
+  queryByString = (item, queryString) => {
     if     (queryString == 'event:revision') {
       return item.event == 'revision'
     } else if (queryString == 'event:commit') {
@@ -42,7 +43,8 @@ export default React.createClass({
     }
     
     return true
-  },
+  };
+
   render() {
     const { projectId, items, loading, query, queryModel, refresh } = this.props
     const routeParams = {
@@ -82,5 +84,5 @@ export default React.createClass({
         <LoadingOverlay show={ loading } linear hideBg />
       </div>
     )
-  },
-})
+  }
+}

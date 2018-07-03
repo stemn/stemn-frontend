@@ -6,15 +6,15 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button'
 // Styles
 import classNames from 'classnames'
 
-const Component = React.createClass({
-  getInitialState() {
-    return {
-      value: '',
-    }
-  },
-  onChange(event) {
+class Component extends React.Component {
+  state = {
+    value: '',
+  };
+
+  onChange = (event) => {
     this.setState({ value: event.target.value })
-  },
+  };
+
   render() {
     const {
       title, message,
@@ -51,7 +51,7 @@ const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 export default Component

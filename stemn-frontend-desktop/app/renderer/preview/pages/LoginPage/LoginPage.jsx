@@ -23,7 +23,7 @@ import Button  from 'stemn-shared/misc/Buttons/Button/Button.jsx'
 // event.sender.send('tray-removed')
 // trayIcon.destroy()
 
-export const Component = React.createClass({
+export class Component extends React.Component {
   render() {
     const { AuthActions, auth, dispatch } = this.props
     return (
@@ -36,8 +36,8 @@ export const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 
 // /////////////////////////////// CONTAINER /////////////////////////////////

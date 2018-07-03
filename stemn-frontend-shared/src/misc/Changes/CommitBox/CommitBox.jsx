@@ -32,7 +32,7 @@ import { MentionsInput, Mention } from 'react-mentions'
 // ///////////////////////////////////////////////////////////////////////////
 
 
-export const Component = React.createClass({
+export class Component extends React.Component {
   render() {
     const { entityModel, changes, electronWindowsActions, changesActions, className } = this.props
     const noChangesChecked = !some(changes.checked)
@@ -96,8 +96,8 @@ export const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 
 // ///////////////////////////////////////////////////////////////////////////

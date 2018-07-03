@@ -28,9 +28,9 @@ import DueDate from 'stemn-shared/misc/Threads/ThreadDueDate'
 import threadDisplayModalName from 'stemn-shared/misc/Threads/ThreadDisplayModal'
 
 
-export const ThreadListItem = React.createClass({
+export class ThreadListItem extends React.Component {
   // Mounting
-  onMount(nextProps, prevProps) {
+  onMount = (nextProps, prevProps) => {
     if (!prevProps || prevProps.item != nextProps.item) {
       if (!nextProps.thread || !nextProps.thread.data) {
         nextProps.ThreadsActions.getThread({
@@ -38,22 +38,25 @@ export const ThreadListItem = React.createClass({
         })
       }
     }
-  },
-  componentWillMount() { this.onMount(this.props) },
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) },
+  };
 
-  updateThread() {
+  componentWillMount() { this.onMount(this.props) }
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+
+  updateThread = () => {
     setTimeout(() => this.props.ThreadsActions.updateThread({ thread: this.props.thread.data }), 1)
-  },
-  toggleComplete({ model, value }) {
+  };
+
+  toggleComplete = ({ model, value }) => {
     this.props.ThreadsActions.toggleComplete({
       threadId: this.props.thread.data._id,
       model,
       value,
     })
     this.updateThread()
-  },
-  showModal() {
+  };
+
+  showModal = () => {
     this.props.ModalActions.showModal({
       modalType: threadDisplayModalName,
       limit: 1,
@@ -61,7 +64,8 @@ export const ThreadListItem = React.createClass({
         threadId: this.props.item,
       },
     })
-  },
+  };
+
   render() {
     const { thread, entityModel, draggable, layout, board, project } = this.props
     if (!thread || !thread.data) {
@@ -176,8 +180,8 @@ export const ThreadListItem = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 
 // /////////////////////////////// CONTAINER /////////////////////////////////

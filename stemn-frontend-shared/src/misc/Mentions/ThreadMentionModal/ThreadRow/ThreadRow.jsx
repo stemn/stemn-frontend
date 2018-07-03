@@ -21,9 +21,9 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
-export const Component = React.createClass({
+export class Component extends React.Component {
   // Mounting
-  onMount(nextProps, prevProps) {
+  onMount = (nextProps, prevProps) => {
     if (!prevProps || prevProps.threadId != nextProps.threadId) {
       if (!nextProps.thread || !nextProps.thread.data) {
         nextProps.dispatch(ThreadsActions.getThread({
@@ -31,9 +31,11 @@ export const Component = React.createClass({
         }))
       }
     }
-  },
-  componentWillMount() { this.onMount(this.props) },
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) },
+  };
+
+  componentWillMount() { this.onMount(this.props) }
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+
   render() {
     const { thread, entityModel, toggleComplete, toggleRelated, status } = this.props
 
@@ -61,8 +63,8 @@ export const Component = React.createClass({
         >Related</Button>
       </div>
     )
-  },
-})
+  }
+}
 
 // /////////////////////////////// CONTAINER /////////////////////////////////
 

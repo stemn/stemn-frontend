@@ -8,8 +8,9 @@ const propTypesObject = {
   modals: PropTypes.object,    // Modals object
 }
 
-export const ModalContainer = React.createClass({
-  propTypes: propTypesObject,
+export class ModalContainer extends React.Component {
+  static propTypes = propTypesObject;
+
   render() {
     const { modals, types, dispatch, ...otherProps } = this.props
     const stack = modals.stack
@@ -33,8 +34,8 @@ export const ModalContainer = React.createClass({
         { getModals() }
       </div>
     )
-  },
-})
+  }
+}
 
 function mapStateToProps({ modals }) {
   return {

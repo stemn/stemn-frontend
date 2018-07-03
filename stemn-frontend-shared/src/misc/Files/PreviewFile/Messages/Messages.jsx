@@ -3,7 +3,7 @@ import PreviewExpired       from './PreviewExpired/PreviewExpired.jsx'
 import AssemblyPartNotFound from './AssemblyPartNotFound/AssemblyPartNotFound.jsx'
 import File404              from './File404/File404.jsx'
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     const { error, fileMeta } = this.props
 
@@ -23,5 +23,5 @@ export default React.createClass({
         <div className="text-title-5">{error.message}</div>
       </div>
     )
-  },
-})
+  }
+}

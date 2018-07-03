@@ -6,7 +6,7 @@ import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
 // Styles
 import classes from './Tag.css'
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     const { text, className, children, ...otherProps } = this.props
     return (
@@ -17,5 +17,5 @@ export default React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}

@@ -13,10 +13,16 @@ const propTypesObject = {
 //  src: React.PropTypes.string.isRequired
 }
 
-const PDF = React.createClass({
-  componentWillMount() { this.onMount(this.props) },
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) },
-  onMount(nextProps, prevProps) {
+class PDF extends React.Component {
+  state = {
+    pdf: null,
+    scale: 1,
+  };
+
+  componentWillMount() { this.onMount(this.props) }
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+
+  onMount = (nextProps, prevProps) => {
     // If the previewId changes, download a new file
     if (!prevProps || nextProps.previewId !== prevProps.previewId) {
       // Get the file data
@@ -34,21 +40,16 @@ const PDF = React.createClass({
         this.setState({ pdf })
       })
     }
-  },
+  };
 
-  getInitialState() {
-    return {
-      pdf: null,
-      scale: 1,
-    }
-  },
   getChildContext() {
     return {
       pdf: this.state.pdf,
       scale: this.state.scale,
     }
-  },
-  zoom(direction) {
+  }
+
+  zoom = (direction) => {
     let newValue = 0
     if (direction == 'in') {
       newValue = Math.round((this.state.scale * 1.1) * 100) / 100
@@ -57,7 +58,8 @@ const PDF = React.createClass({
       newValue = newValue > 0 ? newValue : this.state.scale
     }
     this.setState({ scale: newValue })
-  },
+  };
+
   render() {
     const { fileMeta, fileData } = this.props
     const { pdf, scale } = this.state
@@ -69,8 +71,8 @@ const PDF = React.createClass({
         </ScrollZoom>
       </div>
     )
-  },
-})
+  }
+}
 
 
 PDF.propTypes = propTypesObject

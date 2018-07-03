@@ -25,8 +25,8 @@ const propTypesObject = {
   disabled: PropTypes.bool,                  // Should we disable the input
 }
 
-const FileSelectInput = React.createClass({
-  showModal() {
+class FileSelectInput extends React.Component {
+  showModal = () => {
     this.props.ModalActions.showModal({
       modalType: fileSelectModalName,
       modalProps: {
@@ -43,14 +43,16 @@ const FileSelectInput = React.createClass({
         },
       },
     })
-  },
-  clearValue() {
+  };
+
+  clearValue = () => {
     const { storeChange, model } = this.props
     storeChange(model, {
       path: undefined,
       fileId: undefined,
     })
-  },
+  };
+
   render() {
     const { provider, model, value, disabled } = this.props
 
@@ -96,8 +98,8 @@ const FileSelectInput = React.createClass({
         </SimpleIconButton>
       </TextDisplayBox>
     )
-  },
-})
+  }
+}
 
 
 function mapStateToProps() {

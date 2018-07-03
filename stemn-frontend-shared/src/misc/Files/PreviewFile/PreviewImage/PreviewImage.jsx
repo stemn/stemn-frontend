@@ -5,17 +5,17 @@ import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOver
 import ScrollZoom     from 'stemn-shared/misc/Scroll/ScrollZoom/ScrollZoom.jsx'
 import { getDownloadUrl } from 'stemn-shared/misc/Files/utils'
 
-export default React.createClass({
-  getInitialState() {
-    return {
-      scale: 1,
-      naturalWidth: 0,
-      naturalHeight: 0,
-    }
-  },
-  componentWillMount() { this.onMount(this.props) },
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) },
-  onMount(nextProps, prevProps) {
+export default class extends React.Component {
+  state = {
+    scale: 1,
+    naturalWidth: 0,
+    naturalHeight: 0,
+  };
+
+  componentWillMount() { this.onMount(this.props) }
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+
+  onMount = (nextProps, prevProps) => {
     // If the previewId changes, download a new file
     if (!prevProps || nextProps.previewId !== prevProps.previewId) {
       nextProps.downloadFn({
@@ -26,8 +26,9 @@ export default React.createClass({
         responseType: 'path',
       })
     }
-  },
-  onLoad() {
+  };
+
+  onLoad = () => {
     setTimeout(() => {
       const [containerWidth, containerHeight] = [this.refs.container.offsetWidth, this.refs.container.offsetHeight]
       const { naturalWidth, naturalHeight }     = this.refs.image
@@ -40,8 +41,9 @@ export default React.createClass({
         naturalHeight,
       })
     }, 1)
-  },
-  zoom(direction) {
+  };
+
+  zoom = (direction) => {
     let newValue = 0
     if (direction == 'in') {
       newValue = Math.round((this.state.scale * 1.1) * 100) / 100
@@ -50,7 +52,8 @@ export default React.createClass({
       newValue = newValue > 0 ? newValue : this.state.scale
     }
     this.setState({ scale: newValue })
-  },
+  };
+
   render() {
     const { fileMeta, fileData } = this.props
     const { scale, naturalWidth, naturalHeight } = this.state
@@ -78,5 +81,5 @@ export default React.createClass({
         <LoadingOverlay show={ isLoading } />
       </div>
     )
-  },
-})
+  }
+}

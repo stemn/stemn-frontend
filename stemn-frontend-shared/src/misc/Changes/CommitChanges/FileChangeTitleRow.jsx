@@ -8,7 +8,7 @@ import Walkthrough from 'stemn-shared/misc/Walkthrough/Walkthrough.jsx'
 // Styles
 import styles from './FileChangeTitleRow.css'
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     const { model, value, checkbox, changeAction, children, text } = this.props
     return (
@@ -29,5 +29,5 @@ export default React.createClass({
         {children}
       </div>
     )
-  },
-})
+  }
+}

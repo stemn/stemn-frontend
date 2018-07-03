@@ -7,7 +7,7 @@ import classes from './SectionTitle.css'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     const { children, style, className } = this.props
     return (
@@ -15,5 +15,5 @@ export default React.createClass({
         <div className={ classes.text }>{children}</div>
       </div>
     )
-  },
-})
+  }
+}

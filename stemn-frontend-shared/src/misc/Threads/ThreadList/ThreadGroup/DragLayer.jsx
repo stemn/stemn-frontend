@@ -40,8 +40,8 @@ function collect(monitor) {
   }
 }
 
-const CustomDragLayer = React.createClass({
-  propTypes: {
+class CustomDragLayer extends React.Component {
+  static propTypes = {
     item: PropTypes.object,
     itemType: PropTypes.string,
     currentOffset: PropTypes.shape({
@@ -49,9 +49,9 @@ const CustomDragLayer = React.createClass({
       y: PropTypes.number.isRequired,
     }),
     isDragging: PropTypes.bool.isRequired,
-  },
+  };
 
-  renderItem(type, item) {
+  renderItem = (type, item) => {
     switch (type) {
       case 'card':
         return (
@@ -62,7 +62,7 @@ const CustomDragLayer = React.createClass({
           <div>asfasfafs aafsafasf fsasafsaf</div>
         )
     }
-  },
+  };
 
   render() {
     const item = this.props.item
@@ -78,7 +78,7 @@ const CustomDragLayer = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 module.exports = DragLayer(collect)(CustomDragLayer)

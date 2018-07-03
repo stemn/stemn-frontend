@@ -18,7 +18,7 @@ const propTypesObject = {
   clickFn: PropTypes.func.isRequired,      // clickFn(part) - Run when a part is clicked
 }
 
-export const Row = React.createClass({
+export class Row extends React.Component {
   render() {
     const { file, clickFn } = this.props
     const timeFromNow = moment(file.modified).fromNow()
@@ -28,12 +28,13 @@ export const Row = React.createClass({
         <div className={ classes.time }>{timeFromNow}</div>
       </a>
     )
-  },
-})
+  }
+}
 
-export const AssemblyParts = React.createClass({
-  propTypes: propTypesObject,
-  onMount(nextProps, prevProps) {
+export class AssemblyParts extends React.Component {
+  static propTypes = propTypesObject;
+
+  onMount = (nextProps, prevProps) => {
     if (!prevProps || nextProps.fileMeta != prevProps.fileMeta && nextProps.fileMeta.data) {
       if (isAssembly(nextProps.fileMeta.data.extension)) {
         nextProps.dispatch(getAssemblyParts({
@@ -50,9 +51,11 @@ export const AssemblyParts = React.createClass({
         }))
       }
     }
-  },
-  componentDidMount() { this.onMount(this.props) },
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) },
+  };
+
+  componentDidMount() { this.onMount(this.props) }
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+
   render() {
     const { parts, assemblies, clickFn } = this.props
 
@@ -86,8 +89,8 @@ export const AssemblyParts = React.createClass({
     }
     
     return null
-  },
-})
+  }
+}
 
 const mapStateToProps = ({ files }, { fileMeta }) => {
   const cacheKey = `${fileMeta.data.fileId}-${fileMeta.data.revisionId}`

@@ -17,16 +17,18 @@ import UserProfileSettings from 'stemn-shared/misc/UserSettings/UserProfileSetti
 import UserLinkedAccountSettings from 'stemn-shared/misc/UserSettings/UserLinkedAccountSettings'
 import UserCloudProviderSettings from 'stemn-shared/misc/UserSettings/UserCloudProviderSettings'
 
-export const Component = React.createClass({
+export class Component extends React.Component {
   componentWillMount() {
     this.props.getUser({
       userId: this.props.auth.user._id,
       force: true,
     })
-  },
-  saveUser() {
+  }
+
+  saveUser = () => {
     this.props.saveUser({ user: this.props.user.data })
-  },
+  };
+
   render() {
     const { entityModel, user, auth, authenticate, unlink, logout } = this.props
     const getInner = () => (
@@ -67,8 +69,8 @@ export const Component = React.createClass({
         <LoadingOverlay show={ auth.authLoading || !user || !user.data } />
       </div>
     )
-  },
-})
+  }
+}
 
 //          <div className={classes.panel}>
 //            <h3>Beta</h3>

@@ -22,20 +22,22 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button'
 // /////////////////////////////// COMPONENT /////////////////////////////////
 // ///////////////////////////////////////////////////////////////////////////
 
-export const Component = React.createClass({
+export class Component extends React.Component {
   componentWillMount() {
     if (has(this.props, 'board.data.labels')) {
       this.props.dispatch(storeChange(`${this.props.boardModel}.forms.labels`, this.props.board.data.labels))
     }
-  },
-  submit() {
+  }
+
+  submit = () => {
     this.props.dispatch(storeChange(`${this.props.boardModel}.data.labels`, this.props.board.forms.labels))
     setTimeout(() => {
       this.props.threadsActions.updateBoard({ board: this.props.board.data }).then((response) => {
         this.props.modalConfirm()
       })
     })
-  },
+  };
+
   render() {
     const {
       boardModel, board,
@@ -60,8 +62,8 @@ export const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 // ///////////////////////////////////////////////////////////////////////////
 // /////////////////////////////// CONTAINER /////////////////////////////////

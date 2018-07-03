@@ -2,7 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import classes from './PopoverDetails.css'
 
-const PopoverDetails = React.createClass({
+class PopoverDetails extends React.Component {
   render() {
     const { children } = this.props
     return (
@@ -10,7 +10,7 @@ const PopoverDetails = React.createClass({
         {children}
       </div>
     )
-  },
-})
+  }
+}
 
 export default PopoverDetails

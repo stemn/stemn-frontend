@@ -17,11 +17,12 @@ const propTypesObject = {
   filesActions: PropTypes.object,
 }
 
-export const DisplayReadme = React.createClass({
-  propTypes: propTypesObject,
-  componentWillMount() { this.onMount(this.props) },
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) },
-  onMount(nextProps, prevProps) {
+export class DisplayReadme extends React.Component {
+  static propTypes = propTypesObject;
+  componentWillMount() { this.onMount(this.props) }
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+
+  onMount = (nextProps, prevProps) => {
     // If the previewId changes, download a new file
     if (!prevProps || nextProps.cacheKey !== prevProps.cacheKey) {
       // If we don't already have the file, get it
@@ -34,7 +35,8 @@ export const DisplayReadme = React.createClass({
         })
       }
     }
-  },
+  };
+
   render() {
     const { file, fileData } = this.props
     if (fileData && fileData.loading || fileData && fileData.data) {
@@ -49,8 +51,8 @@ export const DisplayReadme = React.createClass({
     }
     
     return <div>This file is empty.</div>
-  },
-})
+  }
+}
 
 // /////////////////////////////// CONTAINER /////////////////////////////////
 

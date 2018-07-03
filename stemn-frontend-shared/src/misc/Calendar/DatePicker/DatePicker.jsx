@@ -12,20 +12,21 @@ import MdExpandMore from 'react-icons/md/expand-more'
 import MdClose from 'react-icons/md/close'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 
-export const Component = React.createClass({
-  getInitialState() {
-    return {
-      viewDate: moment(),
-      calendarIsOpen: false,
-    }
-  },
-  toggleCalendar(openStatus) {
+export class Component extends React.Component {
+  state = {
+    viewDate: moment(),
+    calendarIsOpen: false,
+  };
+
+  toggleCalendar = (openStatus) => {
     this.setState({ calendarIsOpen: openStatus === undefined ? !this.state.calendarIsOpen : openStatus })
-  },
-  selectDate(date) {
+  };
+
+  selectDate = (date) => {
     this.props.dispatch(storeChange(this.props.model, date ? date.format() : ''))
     if (this.props.onChange) { this.props.onChange() }
-  },
+  };
+
   render() {
     const { viewDate, calendarIsOpen } = this.state
     const { model, value, dispatch, onChange, className, style, ...otherProps } = this.props
@@ -87,8 +88,8 @@ export const Component = React.createClass({
         { content }
       </PopoverFit>
     )
-  },
-})
+  }
+}
 
 
 export default connect()(Component)

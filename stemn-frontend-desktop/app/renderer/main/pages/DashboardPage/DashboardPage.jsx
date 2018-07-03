@@ -23,12 +23,11 @@ import Tabs         from 'stemn-shared/misc/Tabs/Tabs'
 // /////////////////////////////// COMPONENT /////////////////////////////////
 // ///////////////////////////////////////////////////////////////////////////
 
-export const Component = React.createClass({
-  getInitialState() {
-    return {
-      date: moment(),
-    }
-  },
+export class Component extends React.Component {
+  state = {
+    date: moment(),
+  };
+
   render() {
     return (
       <div className="layout-column flex rel-box">
@@ -60,8 +59,8 @@ export const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 // ///////////////////////////////////////////////////////////////////////////
 // /////////////////////////////// CONTAINER /////////////////////////////////

@@ -51,7 +51,7 @@ const PopupContent = (item) => {
   return PopupInner ? PopupInner(item) : 'Unknown event type'
 }
 
-const Dot = React.createClass({
+class Dot extends React.Component {
   render() {
     const { isSelected, selected, onSelect, item, preferPlace } = this.props
     const dotClasses = classNames(classes.dot, { [classes.active]: isSelected ? isSelected(item) : selected == item._id })
@@ -64,10 +64,10 @@ const Dot = React.createClass({
         </Popover>
       </a>
     )
-  },
-})
+  }
+}
 
-const Component = React.createClass({
+class Component extends React.Component {
   render() {
     const { items, selected, isSelected, page, onSelect, preferPlace, size, refInner } = this.props
     const translation = `translateX(${page * 100}%)`
@@ -116,7 +116,7 @@ const Component = React.createClass({
         { Items }
       </div>
     )
-  },
-})
+  }
+}
 
 export default Component

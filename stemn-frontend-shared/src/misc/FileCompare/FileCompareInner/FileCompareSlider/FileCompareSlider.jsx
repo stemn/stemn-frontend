@@ -7,13 +7,11 @@ import classes from './FileCompareSlider.css'
 import clickDrag from 'react-clickdrag'
 
 
-const Component = React.createClass({
-  getInitialState() {
-    return {
-      active: false,
-      lastEventId: '',
-    }
-  },
+class Component extends React.Component {
+  state = {
+    active: false,
+    lastEventId: '',
+  };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.dataDrag.isMoving && nextProps.dataDrag.id && nextProps.dataDrag.id != this.state.lastEventId) {
@@ -28,15 +26,15 @@ const Component = React.createClass({
     } else {
       this.setState({ active: false })
     }
-  },
+  }
 
   render() {
     const translation = `${this.props.position}%`
     return (
       <div className={ classNames(classes.slider, { [classes.active]: this.state.active }) } style={ { left: translation } } />
     )
-  },
-})
+  }
+}
 
 
 export default clickDrag(Component, { touch: true })

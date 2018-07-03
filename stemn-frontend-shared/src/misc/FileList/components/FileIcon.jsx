@@ -4,12 +4,11 @@ const fileTypeIcons = require.context('../filetype', true)
 // Styles
 import classNames from 'classnames'
 
-export default React.createClass({
-  getDefaultProps() {
-    return {
-      size: 30,
-    }
-  },
+export default class extends React.Component {
+  static defaultProps = {
+    size: 30,
+  };
+
   render() {
     let fileType
     let isOther = false
@@ -56,5 +55,5 @@ export default React.createClass({
         {isOther ? <span style={ textStyle }>{fileType}</span> : null}
       </div>
     )
-  },
-})
+  }
+}

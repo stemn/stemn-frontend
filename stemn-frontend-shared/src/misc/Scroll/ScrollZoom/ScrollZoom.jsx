@@ -8,16 +8,18 @@ const propTypesObject = {
   zoomOut: PropTypes.func.isRequired,      // Zoom function - This is run once on each scroll
 }
 
-const ScrollZoom = React.createClass({
+class ScrollZoom extends React.Component {
   componentDidMount() {
     this.refs.container.addEventListener('DOMMouseScroll', this.handleMouseWheel)
     this.refs.container.addEventListener('mousewheel',     this.handleMouseWheel)
-  },
+  }
+
   componentWillUnmount() {
     this.refs.container.removeEventListener('DOMMouseScroll', this.handleMouseWheel)
     this.refs.container.removeEventListener('mousewheel',     this.handleMouseWheel)
-  },
-  handleMouseWheel(evt) {
+  }
+
+  handleMouseWheel = (evt) => {
     if (evt.ctrlKey) {
       if (evt.wheelDelta < 0) { // Zoom Out
         if (this.props.zoomOut) this.props.zoomOut()
@@ -27,7 +29,8 @@ const ScrollZoom = React.createClass({
       // Only zoom the pages, not the entire viewer.
       evt.preventDefault()
     }
-  },
+  };
+
   render() {
     const { children } = this.props
 
@@ -36,7 +39,7 @@ const ScrollZoom = React.createClass({
         {children}
       </div>
     )
-  },
-})
+  }
+}
 
 export default ScrollZoom

@@ -10,7 +10,7 @@ import classNames from 'classnames'
 
 ******************************************** */
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     const { value, model, className, changeAction, children } = this.props
     const statusClass = value === true ? 'checked' : ''
@@ -30,5 +30,5 @@ export default React.createClass({
         </label>
       </div>
     )
-  },
-})
+  }
+}

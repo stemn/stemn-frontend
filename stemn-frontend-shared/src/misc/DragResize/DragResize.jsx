@@ -7,13 +7,11 @@ import classNames from 'classnames'
 import classes from './DragResize.css'
 
 
-const DraggerComponent = React.createClass({
-  getInitialState() {
-    return {
-      lastEventId: null,
-      active: false,
-    }
-  },
+class DraggerComponent extends React.Component {
+  state = {
+    lastEventId: null,
+    active: false,
+  };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.dataDrag.isMoving && nextProps.dataDrag.id && nextProps.dataDrag.id != this.state.lastEventId) {
@@ -30,7 +28,7 @@ const DraggerComponent = React.createClass({
     } else {
       this.setState({ active: false })
     }
-  },
+  }
 
   render() {
     const styles = {
@@ -71,19 +69,22 @@ const DraggerComponent = React.createClass({
     return (
       <div className={ classes.dragger } style={ styles[this.props.side] } />
     )
-  },
-})
+  }
+}
 
 const Dragger = clickDrag(DraggerComponent, { touch: true })
 
-export default React.createClass({
-  getInitialState() {
-    if (this.props.width) {
-      return { width: parseInt(this.props.width) }
-    } else if (this.props.height) {
-      return { height: parseInt(this.props.height) }
+export default class extends React.Component {
+  constructor(props) {
+    super(props);
+    if (props.width) {
+      this.state = { width: parseInt(props.width) };
+      return;
+    } else if (props.height) {
+      this.state = { height: parseInt(props.height) };
+      return;
     }
-  },
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.animateHide != this.props.animateHide) {
@@ -94,9 +95,9 @@ export default React.createClass({
       }
       setTimeout(() => this.setState({ animate: false }), 300)
     }
-  },
+  }
 
-  drag(change) {
+  drag = (change) => {
     const { widthRange, heightRange } = this.props
     if (change.deltaX) {
       let width = parseInt(this.state.width) + change.deltaX
@@ -111,7 +112,8 @@ export default React.createClass({
       }
       this.setState({ height })
     }
-  },
+  };
+
   render() {
     const style = {
       width: `${this.state.width}px`,
@@ -124,5 +126,5 @@ export default React.createClass({
         <Dragger changeFn={ this.drag } side={ this.props.side } />
       </div>
     )
-  },
-})
+  }
+}

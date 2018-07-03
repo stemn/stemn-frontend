@@ -12,7 +12,7 @@ Works as either a 2-state checkbox or 3-state.
 states: true || false || 'other';
 ******************************************** */
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     const { value, model, title, circle, className, changeAction } = this.props
     const id = Math.random().toString(36).substring(7)
@@ -33,5 +33,5 @@ export default React.createClass({
         <label htmlFor={ id } />
       </div>
     )
-  },
-})
+  }
+}

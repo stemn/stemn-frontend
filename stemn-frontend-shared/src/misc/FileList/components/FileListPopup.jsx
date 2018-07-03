@@ -35,7 +35,7 @@ const propTypesObject = {
 }
 
 
-export const FileRow = React.createClass({
+export class FileRow extends React.Component {
   render() {
     const { file, isActive, clickFn } = this.props
     return (
@@ -44,11 +44,12 @@ export const FileRow = React.createClass({
         <div className="text-ellipsis">{file.name}</div>
       </div>
     )
-  },
-})
+  }
+}
 
-export const FileListPopup = React.createClass({
-  propTypes: propTypesObject,
+export class FileListPopup extends React.Component {
+  static propTypes = propTypesObject;
+
   //  componentWillMount() {
   //    this.onMount(this.props)
   //  },
@@ -107,8 +108,8 @@ export const FileListPopup = React.createClass({
         }
       </div>
     )
-  },
-})
+  }
+}
 
 
 // /////////////////////////////// CONTAINER /////////////////////////////////

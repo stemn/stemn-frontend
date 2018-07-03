@@ -5,7 +5,7 @@ import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js'
 import assemblyPartNotFoundModalName from 'stemn-shared/misc/Files/PreviewFile/Messages/AssemblyPartNotFound/AssemblyPartNotFoundModal'
 import classes from './AssemblyPartNotFound.scss'
 
-export const AssemblyPartNotFound = React.createClass({
+export class AssemblyPartNotFound extends React.Component {
   render() {
     const { dispatch, parts } = this.props
 
@@ -26,8 +26,8 @@ export const AssemblyPartNotFound = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 export default connect()(AssemblyPartNotFound)
 

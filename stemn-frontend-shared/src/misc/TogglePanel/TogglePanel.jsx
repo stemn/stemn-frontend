@@ -18,16 +18,18 @@ import { toggle } from './TogglePanel.actions.js'
 import styles from './TogglePanel.css'
 import MdChevronRight from 'react-icons/md/chevron-right'
 
-export const TogglePanel = React.createClass({
-  propTypes: {
+export class TogglePanel extends React.Component {
+  static propTypes = {
     cacheKey: PropTypes.string.isRequired,  // Some cache key string (used as the key in the 'togglePanel' store)
-  },
-  toggle(toState) {
+  };
+
+  toggle = (toState) => {
     this.props.dispatch(toggle({
       cacheKey: this.props.cacheKey,
       value: toState,
     }))
-  },
+  };
+
   render() {
     const { toggleState, className } = this.props
     const getContent = () => {
@@ -51,8 +53,8 @@ export const TogglePanel = React.createClass({
         {getContent()}
       </div>
     )
-  },
-})
+  }
+}
 
 const mapStateToProps = ({ togglePanel }, { cacheKey }) => ({
   toggleState: togglePanel[cacheKey],

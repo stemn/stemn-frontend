@@ -12,17 +12,19 @@ import Sidebar            from 'stemn-frontend-desktop/app/renderer/menubar/modu
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
-export const Component = React.createClass({
-  onMount(nextProps, prevProps) {
+export class Component extends React.Component {
+  onMount = (nextProps, prevProps) => {
     if (!nextProps.auth.authToken || !nextProps.auth.user._id) {
       nextProps.dispatch(push('/login'))
     }
     if (!has(nextProps, 'params.stub') || nextProps.activeProject != nextProps.params.stub) {
       nextProps.dispatch(push(`/project/${nextProps.activeProject}`))
     }
-  },
-  componentWillMount() { this.onMount(this.props) },
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) },
+  };
+
+  componentWillMount() { this.onMount(this.props) }
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+
   render() {
     const { children } = this.props
 
@@ -32,8 +34,8 @@ export const Component = React.createClass({
         <Sidebar />
       </div>
     )
-  },
-})
+  }
+}
 
 
 // /////////////////////////////// CONTAINER /////////////////////////////////

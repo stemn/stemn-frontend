@@ -30,33 +30,35 @@ const propTypesObject = {
   className: PropTypes.string,
 }
 
-const Component = React.createClass({
-  getInitialState() {
-    return {
-      page: 0,
-      numPages: 1,
-    }
-  },
-  scroll(direction) {
+class Component extends React.Component {
+  state = {
+    page: 0,
+    numPages: 1,
+  };
+
+  scroll = (direction) => {
     if (direction == 'left') {
       this.setState({ page: this.state.page + 1 })
     } else if (direction == 'right' && this.state.page > 0) {
       this.setState({ page: this.state.page - 1 })
     }
-  },
-  getRefInner(ref) {
+  };
+
+  getRefInner = (ref) => {
     if (ref) {
       this.refInner = ref
       this.tryGetPages()
     }
-  },
-  getRefOuter(ref) {
+  };
+
+  getRefOuter = (ref) => {
     if (ref) {
       this.refOuter = ref
       this.tryGetPages()
     }
-  },
-  tryGetPages() {
+  };
+
+  tryGetPages = () => {
     // If we have both refs, we can get the number of pages.
     if (this.refOuter && this.refInner) {
       const contentWidth = this.refInner.offsetWidth
@@ -64,7 +66,8 @@ const Component = React.createClass({
       const numPages = Math.ceil(contentWidth / containerWidth)
       this.setState({ numPages })
     }
-  },
+  };
+
   render() {
     const { items, selected, isSelected, onSelect, preferPlace, style, className, size } = this.props
     const { page, numPages } = this.state
@@ -101,8 +104,8 @@ const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 
 Component.propTypes = propTypesObject

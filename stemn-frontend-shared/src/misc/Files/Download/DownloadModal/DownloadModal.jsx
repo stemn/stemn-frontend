@@ -19,8 +19,9 @@ const propTypesObject = {
   file: PropTypes.object.isRequired,    // File object
 }
 
-export default React.createClass({
-  propTypes: propTypesObject,
+export default class extends React.Component {
+  static propTypes = propTypesObject;
+
   componentWillMount() { 
     const { file, fetchTimeline } = this.props
     if (file.project && file.project._id) {
@@ -39,7 +40,8 @@ export default React.createClass({
         cacheKey: file.fileId,
       })
     }
-  },
+  }
+
   render() {
     const { syncTimeline, modalCancel, modalConfirm } = this.props
 
@@ -70,5 +72,5 @@ export default React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}

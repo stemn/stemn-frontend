@@ -26,7 +26,7 @@ const contextIdentifier = 'FileChangeCm'
 const FileChangeRowContext = ContextMenuLayer(contextIdentifier, props => props.item)(FileChangeRow)
 
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     const { changes, project, toggleAll, refresh, selectedFileChange, deselect, loading, dispatch, initialSync } = this.props
     const isInitialSync = initialSync && changes.data.length == 0
@@ -95,5 +95,5 @@ export default React.createClass({
         />
       </div>
     )
-  },
-})
+  }
+}

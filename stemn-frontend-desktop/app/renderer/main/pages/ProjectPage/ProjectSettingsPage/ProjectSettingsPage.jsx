@@ -15,7 +15,7 @@ import classes from './ProjectSettingsPage.css'
 
 import NavPill from 'stemn-shared/misc/Buttons/NavPill/NavPill'
 
-export const Component = React.createClass({
+export class Component extends React.Component {
   render() {
     const { entityModel, project } = this.props
     const baseLink = project && project.data && project.data._id ? `project/${project.data._id}` : ''
@@ -38,8 +38,8 @@ export const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 
 function mapStateToProps({ projects }, otherProps) {

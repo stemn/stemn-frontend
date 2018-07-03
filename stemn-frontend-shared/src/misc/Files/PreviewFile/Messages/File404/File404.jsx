@@ -2,7 +2,7 @@ import React from 'react'
 
 import file from 'stemn-shared/assets/images/pure-vectors/file.svg'
 
-export const File404 = React.createClass({
+export class File404 extends React.Component {
   render() {
     return (
       <div className="layout-column layout-align-center-center flex text-center">
@@ -13,7 +13,7 @@ export const File404 = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 export default File404

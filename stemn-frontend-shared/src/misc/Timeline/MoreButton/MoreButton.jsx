@@ -7,7 +7,7 @@ import classes from './MoreButton.css'
 import MdChevronRight from 'react-icons/md/chevron-right'
 
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     return (
       <a
@@ -18,5 +18,5 @@ export default React.createClass({
         <MdChevronRight size="15" />
       </a>
     )
-  },
-})
+  }
+}

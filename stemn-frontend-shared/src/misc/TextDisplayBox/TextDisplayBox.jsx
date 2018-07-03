@@ -4,7 +4,7 @@ import classNames from 'classnames'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     const { className, disabled, children, ...otherProps } = this.props
     return (
@@ -12,5 +12,5 @@ export default React.createClass({
         { children }
       </div>
     )
-  },
-})
+  }
+}

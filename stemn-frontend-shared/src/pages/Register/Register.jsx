@@ -13,8 +13,8 @@ import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOver
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
-export default React.createClass({
-  submit(event) {
+export default class extends React.Component {
+  submit = (event) => {
     event.preventDefault()
     this.props.register({
       email: this.props.auth.login.email,
@@ -22,7 +22,8 @@ export default React.createClass({
       firstname: this.props.auth.login.firstname,
       lastname: this.props.auth.login.lastname,
     })
-  },
+  };
+
   render() {
     const { authenticate, auth } = this.props
     
@@ -102,6 +103,6 @@ export default React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 

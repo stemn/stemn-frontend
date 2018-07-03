@@ -5,7 +5,7 @@ import React from 'react'
 import classNames from 'classnames'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 
-const Component = React.createClass({
+class Component extends React.Component {
   render() {
     const { title, body, modalCancel, modalConfirm } = this.props
 
@@ -18,7 +18,7 @@ const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 export default Component

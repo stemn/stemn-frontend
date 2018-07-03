@@ -2,7 +2,7 @@ import React                from 'react'
 import i                    from 'icepick'
 import FileCompare          from 'stemn-shared/misc/FileCompare'
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     const { project, item } = this.props
 
@@ -16,5 +16,5 @@ export default React.createClass({
         file={ item }
       />
     )
-  },
-})
+  }
+}

@@ -17,7 +17,7 @@ import MdMenu from 'react-icons/md/menu'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
-export const Component = React.createClass({
+export class Component extends React.Component {
   render() {
     const { dispatch, children, sidebar } = this.props
     const styles = this.props.absolute ? { position: 'absolute' } : this.props.style
@@ -30,8 +30,8 @@ export const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 // /////////////////////////////// CONTAINER /////////////////////////////////
 

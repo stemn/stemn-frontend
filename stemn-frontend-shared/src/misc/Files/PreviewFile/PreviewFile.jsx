@@ -19,7 +19,7 @@ import ErrorMessages from './Messages/Messages.jsx'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
-export const Component = React.createClass({
+export class Component extends React.Component {
   render() {
     const { file, fileData, fileRender, filesActions, header, event } = this.props
     const previewId = `${file.project._id}-${file.fileId}-${file.revisionId}`
@@ -123,8 +123,8 @@ export const Component = React.createClass({
         { getPreview() }
       </div>
     )
-  },
-})
+  }
+}
 
 
 // /////////////////////////////// CONTAINER /////////////////////////////////

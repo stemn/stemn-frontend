@@ -7,13 +7,12 @@ import modelLocked from 'stemn-shared/assets/images/pure-vectors/model-locked.sv
 import modelGear from 'stemn-shared/assets/images/pure-vectors/model-gear.svg'
 
 
-export default React.createClass({
-  getInitialState() {
-    return {
-      status: 'pending',
-    }
-  },
-  onMount(nextProps, prevProps) {
+export default class extends React.Component {
+  state = {
+    status: 'pending',
+  };
+
+  onMount = (nextProps, prevProps) => {
     if (!prevProps || nextProps.fileMeta != prevProps.fileMeta) {
       const { fileMeta, fileRender, renderFn } = nextProps
       this.setState({ status: 'pending' })
@@ -23,9 +22,10 @@ export default React.createClass({
         this.setState({ status: 'disabled' })
       }
     }
-  },
-  componentDidMount() { this.onMount(this.props) },
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) },
+  };
+
+  componentDidMount() { this.onMount(this.props) }
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
 
   render() {
     const { fileMeta, fileRender } = this.props
@@ -43,5 +43,5 @@ export default React.createClass({
       return <AutodeskLocalViewer path={ fileRender.data } linkKey={ fileMeta.fileId } />
     } 
     return <div className="rel-box flex"><LoadingOverlay show>{ fileRender && fileRender.status ? fileRender.status : 'Rendering file...' }</LoadingOverlay></div>
-  },
-})
+  }
+}

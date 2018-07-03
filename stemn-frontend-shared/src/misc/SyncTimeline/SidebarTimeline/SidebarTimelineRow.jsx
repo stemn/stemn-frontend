@@ -10,15 +10,15 @@ import UserAvatar    from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import Link from 'stemn-shared/misc/Router/Link'
 import styles from './SidebarTimelineRow.css'
 
-export default React.createClass({
-  getInitialState() {
-    return {
-      isOpen: false,
-    }
-  },
-  toggle(toState) {
+export default class extends React.Component {
+  state = {
+    isOpen: false,
+  };
+
+  toggle = (toState) => {
     this.setState({ isOpen: toState === null ? !this.state.isOpen : toState })
-  },
+  };
+
   render() {
     const { item } = this.props
     const { isOpen } = this.state
@@ -86,5 +86,5 @@ export default React.createClass({
     //        </div>
     //      )
     //    }
-  },
-})
+  }
+}

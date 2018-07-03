@@ -10,7 +10,7 @@ import classes from './TimelinePanel.css'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     const { item, children, style } = this.props
 
@@ -26,5 +26,5 @@ export default React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}

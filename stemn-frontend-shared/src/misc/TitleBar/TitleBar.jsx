@@ -10,13 +10,16 @@ import MaximiseIcon from './icons/maximise.js'
 import CloseIcon from './icons/close.js'
 import MinimiseIcon from './icons/minimise.js'
 
-export default React.createClass({
-  getInitialState() {
+export default class extends React.Component {
+  constructor(props) {
+    super(props);
     const window = electron.remote.getCurrentWindow()
-    return {
+
+    this.state = {
       isMaximised: window.isMaximized(),
-    }
-  },
+    };
+  }
+
   render() {
     const window = electron.remote.getCurrentWindow()
 
@@ -71,5 +74,5 @@ export default React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}

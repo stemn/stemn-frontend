@@ -5,7 +5,7 @@ import classNames from 'classnames'
 // Styles
 import styles from './Toggle.css'
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     const { value, model, title, className, disabled, changeAction } = this.props
 
@@ -35,5 +35,5 @@ export default React.createClass({
         <label htmlFor={ id } />
       </div>
     )
-  },
-})
+  }
+}

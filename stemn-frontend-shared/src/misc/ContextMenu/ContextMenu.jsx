@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { ContextMenu, MenuItem, SubMenu, connect } from 'react-contextmenu'
 import './ContextMenu.global.css'
 
-const AdvancedMenuItem = React.createClass({
+class AdvancedMenuItem extends React.Component {
   render() {
     const { menuItem, item } = this.props
     if (menuItem.subMenu) {
@@ -28,11 +28,12 @@ const AdvancedMenuItem = React.createClass({
         </MenuItem>
       )
       : null
-  },
-})
+  }
+}
 
-const Menu = React.createClass({
-  displayName: 'Menu',
+class Menu extends React.Component {
+  static displayName = 'Menu';
+
   render() {
     const { menu, identifier, item } = this.props
     return (
@@ -40,7 +41,7 @@ const Menu = React.createClass({
         {menu ? menu.map(menuItem => <AdvancedMenuItem key={ menuItem.label } menuItem={ menuItem } item={ item } />) : null}
       </ContextMenu>
     )
-  },
-})
+  }
+}
 
 export default connect(Menu)

@@ -8,14 +8,15 @@ import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 
 import classNames from 'classnames'
 
-const Component = React.createClass({
-  remove(idx) {
+class Component extends React.Component {
+  remove = (idx) => {
     const { dispatch, model, onChange } = this.props
     dispatch(storeRemove(model, idx))
     if (onChange) {
       onChange()
     }
-  },
+  };
+
   render() {
     const { model, value, users, dispatch, onChange } = this.props
     const valueIds = value.map(val => val._id)
@@ -61,7 +62,7 @@ const Component = React.createClass({
         ))}
       </div>
     )
-  },
-})
+  }
+}
 
 export default connect()(Component)

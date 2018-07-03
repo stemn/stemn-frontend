@@ -7,7 +7,7 @@ const colours = [
   '#A5D6A7', '#00C853', '#64DD17', '#E6EE9C', '#AEEA00', '#FFD600', '#FFAB00', '#FF6D00', '#FFAB91', '#DD2600', '#455A64', '#263238',
 ]
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     // display: 'contain' (Default: 'cover')
     const { style, shape, size, className, picture, title, name, display } = this.props
@@ -65,5 +65,5 @@ export default React.createClass({
         {name ? initials : ''}
       </div>
     )
-  },
-})
+  }
+}

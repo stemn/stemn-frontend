@@ -24,7 +24,7 @@ import Input from 'stemn-shared/misc/Input/Input/Input'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
-export const Component = React.createClass({
+export class Component extends React.Component {
   render() {
     const { projects, sidebar, dispatch } = this.props
 
@@ -61,8 +61,8 @@ export const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 // /////////////////////////////// CONTAINER /////////////////////////////////
 

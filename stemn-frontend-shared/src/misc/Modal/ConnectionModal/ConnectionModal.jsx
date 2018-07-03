@@ -8,7 +8,7 @@ import MagnifyInternet   from 'stemn-shared/assets/images/pure-vectors/magnify-i
 // Styles
 import classNames from 'classnames'
 
-const Component = React.createClass({
+class Component extends React.Component {
   render() {
     const { title, message, modalCancel, modalConfirm } = this.props
     return (
@@ -22,7 +22,7 @@ const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 export default Component

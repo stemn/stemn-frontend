@@ -11,7 +11,7 @@ import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleI
 import MdMoreHoriz from 'react-icons/md/more-horiz'
 
 
-const Component = React.createClass({
+class Component extends React.Component {
   render() {
     const { dispatch, model, value } = this.props
 
@@ -48,7 +48,7 @@ const Component = React.createClass({
         }
       </div>
     )
-  },
-})
+  }
+}
 
 export default connect()(Component)

@@ -10,20 +10,25 @@ const classes = GLOBAL_ENV.APP_TYPE === 'web'
   ? require('./Toasts.web.css')
   : require('./Toasts.desktop.css')
 
-const Toast = React.createClass({
-  hideTimeout: null,
-  mouseEnter() {
+class Toast extends React.Component {
+  hideTimeout = null;
+
+  mouseEnter = () => {
     clearTimeout(this.hideTimeout)
-  },
-  mouseLeave() {
+  };
+
+  mouseLeave = () => {
     this.startHideTimeout()
-  },
-  startHideTimeout() {
+  };
+
+  startHideTimeout = () => {
     this.hideTimeout = setTimeout(this.closeToast, 5000)
-  },
-  closeToast() {
+  };
+
+  closeToast = () => {
     this.props.dispatch(ToastsActions.hide({ id: this.props.toast.id }))
-  },
+  };
+
   render() {
     const { toast, dispatch } = this.props
     if (!this.hideTimeout) { this.startHideTimeout() }
@@ -72,11 +77,11 @@ const Toast = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 
-export const Component = React.createClass({
+export class Component extends React.Component {
   render() {
     const { toasts, dispatch } = this.props
 
@@ -107,8 +112,8 @@ export const Component = React.createClass({
         </ReactCSSTransitionGroup>
       </div>
     )
-  },
-})
+  }
+}
 
 
 function mapStateToProps({ toasts }) {

@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import classes from './ThreadLabelDots.scss'
 import Link from 'stemn-shared/misc/Router/Link'
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     // tag = true || false
     const { labels, labelInfo, tag, oneline, link, name, params, responsive } = this.props
@@ -60,5 +60,5 @@ export default React.createClass({
           }) : null}
       </span>
     )
-  },
-})
+  }
+}

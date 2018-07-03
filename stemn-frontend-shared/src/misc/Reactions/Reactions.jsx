@@ -8,7 +8,7 @@ import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import { options, groupAndOrderReactions } from './Reactions.utils.js'
 import Link from 'stemn-shared/misc/Router/Link'
 
-export default React.createClass({
+export default class extends React.Component {
   render() {
     const { reactions, submitFn } = this.props
     const groupedReactions = reactions && reactions.length > 0 ? groupAndOrderReactions(reactions, options) : []
@@ -48,5 +48,5 @@ export default React.createClass({
         )) }
       </span>
     )
-  },
-})
+  }
+}

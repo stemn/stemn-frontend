@@ -5,8 +5,9 @@ import classNames from 'classnames'
 import classes from './ProgressButton.css'
 
 
-export const AnimateSvg = React.createClass({
-  svgEl: '',
+export class AnimateSvg extends React.Component {
+  svgEl = '';
+
   render() {
     const { children, draw } = this.props
     const newProps = {
@@ -19,18 +20,17 @@ export const AnimateSvg = React.createClass({
       this.svgEl.draw(draw)
     }
     return React.cloneElement(children, newProps)
-  },
-})
+  }
+}
 
-export default React.createClass({
-  getInitialState() {
-    return {
-      status: '',
-      disabled: false,
-      drawLoading: 0,
-      drawSuccess: 0,
-    }
-  },
+export default class extends React.Component {
+  state = {
+    status: '',
+    disabled: false,
+    drawLoading: 0,
+    drawSuccess: 0,
+  };
+
   componentWillReceiveProps(nextProps) {
     const prevProps = this.props
 
@@ -42,21 +42,25 @@ export default React.createClass({
     else if (prevProps && prevProps.loading && !nextProps.loading) {
       this.loadingComplete()
     }
-  },
-  partialLoadTimeout: null,
-  completeTimeout: null,
-  completeIconTimeout: null,
-  resetTimeout: null,
-  clearTimeouts() {
+  }
+
+  partialLoadTimeout = null;
+  completeTimeout = null;
+  completeIconTimeout = null;
+  resetTimeout = null;
+
+  clearTimeouts = () => {
     clearTimeout(this.partialLoadTimeout)
     clearTimeout(this.completeTimeout)
     clearTimeout(this.completeIconTimeout)
     clearTimeout(this.resetTimeout)
-  },
+  };
+
   componentWillUnmount() {
     this.clearTimeouts()
-  },
-  startLoading() {
+  }
+
+  startLoading = () => {
     this.clearTimeouts()
     this.setState({
       status: 'loading',
@@ -65,8 +69,9 @@ export default React.createClass({
       drawComplete: 0,
     })
     this.partialLoadTimeout = setTimeout(() => { this.setState({ drawLoading: 0.7 }) }, 100)
-  },
-  loadingComplete() {
+  };
+
+  loadingComplete = () => {
     this.clearTimeouts()
     this.setState({ drawLoading: 1 })
 
@@ -79,7 +84,8 @@ export default React.createClass({
         this.setState({ status: '', disabled: false, drawLoading: 0 })
       }, 2000)
     }, 700)
-  },
+  };
+
   render() {
     const { children, onClick, loading, className, href, error, ...otherProps } = this.props
     const { status, disabled, drawLoading, drawComplete } = this.state
@@ -130,8 +136,8 @@ export default React.createClass({
         { getIcon() }
       </div>
     )
-  },
-})
+  }
+}
 
 
 // //////////////////////////////////////////////////////////

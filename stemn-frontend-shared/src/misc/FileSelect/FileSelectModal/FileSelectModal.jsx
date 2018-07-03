@@ -22,19 +22,21 @@ const propTypesObject = {
   }),
 }
 
-export default React.createClass({
-  propTypes: propTypesObject,
-  componentWillMount() { this.onMount(this.props) },
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) },
-  onMount(nextProps, prevProps) {
+export default class extends React.Component {
+  static propTypes = propTypesObject;
+  componentWillMount() { this.onMount(this.props) }
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+
+  onMount = (nextProps, prevProps) => {
     if (!nextProps.fileSelect) {
       nextProps.init({
         storeKey: nextProps.storeKey,
         path: nextProps.path,
       })
     }
-  },
-  singleClickFn({ file }) {
+  };
+
+  singleClickFn = ({ file }) => {
     if (file.type == 'file' || this.props.options.allowFolder && file.type == 'folder') {
       this.props.select({
         storeKey: this.props.storeKey,
@@ -46,8 +48,9 @@ export default React.createClass({
         path: file.fileId,
       })
     }
-  },
-  doubleClickFn({ file }) {
+  };
+
+  doubleClickFn = ({ file }) => {
     if (file.type == 'folder') {
       this.props.changePath({
         storeKey: this.props.storeKey,
@@ -59,23 +62,27 @@ export default React.createClass({
         file,
       })
     }
-  },
-  crumbClickFn({ file }) {
+  };
+
+  crumbClickFn = ({ file }) => {
     this.props.changePath({
       storeKey: this.props.storeKey,
       path: file.fileId,
     })
-  },
-  submit() {
+  };
+
+  submit = () => {
     this.props.storeChange(this.props.model, {
       fileId: this.props.fileSelect.selected.fileId,
       path: this.props.fileSelect.selected.path,
     })
     this.props.modalConfirm()
-  },
-  cancel() {
+  };
+
+  cancel = () => {
     this.props.modalCancel()
-  },
+  };
+
   render() {
     const { projectId, path, fileSelect, options } = this.props
 
@@ -118,5 +125,5 @@ export default React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
