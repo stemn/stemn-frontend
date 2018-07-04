@@ -2,19 +2,21 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
 import classes from './Upload.css'
-import Dropzone from 'react-dropzone'
+import dropzone from 'react-dropzone'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import MdFileUpload from 'react-icons/md/file-upload'
+
+const Dropzone = dropzone.default
 
 export default class Upload extends Component {
   static propTypes = {
     uploadId: PropTypes.string.isRequired, // The id of this uploader (used as cache key)
-    style: PropTypes.object,              // Styles
-    containerClassName: PropTypes.string, // Classes for the container element
-    imageClassName: PropTypes.string,     // Classes for the image element
-    model: PropTypes.string,              // The model (optional)
-    value: PropTypes.string,              // The initial value
-    onUpload: PropTypes.func,             // Function to be run when the upload is complete
+    style: PropTypes.object,               // Styles
+    containerClassName: PropTypes.string,  // Classes for the container element
+    imageClassName: PropTypes.string,      // Classes for the image element
+    model: PropTypes.string,               // The model (optional)
+    value: PropTypes.string,               // The initial value
+    onUpload: PropTypes.func,              // Function to be run when the upload is complete
     // From container
     uploadData: PropTypes.object,
     upload: PropTypes.func.isRequired,
@@ -44,10 +46,6 @@ export default class Upload extends Component {
     })
   }
 
-  onOpenClick = () => {
-    this.refs.dropzone.open()
-  }
-
   renderOverlay = () => (
     <div className={ cn('layout-column layout-align-center-center', classes.overlay) }>
       <MdFileUpload size={ 30 } />
@@ -63,13 +61,11 @@ export default class Upload extends Component {
       value,
     } = this.props
 
-    const containerClasses = cn(classes.container, containerClassName)
     const imageClasses = cn(classes.image, imageClassName)
 
     return (
       <div style={ style } className={ containerClassName }>
         <Dropzone
-          ref="dropzone"
           onDrop={ this.onDrop }
           activeStyle={ this.dropActiveStyle }
           disableClick={ false }

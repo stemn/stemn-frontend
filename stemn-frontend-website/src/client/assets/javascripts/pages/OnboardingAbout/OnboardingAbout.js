@@ -14,17 +14,17 @@ export default class OnboardingAbout extends Component {
     })
   }
   render() {
-    const { user, userModel, confirmLinkedinImport } = this.props
+    const { user, userModel } = this.props
     return (
       <PanelDescription 
         title="About You"
         description="Add some basic account info. You'll be able to add more details later."
       >
-        <InfoPanel>
+        {/* <InfoPanel>
           <h3>Want to get a head start</h3>
           <p>Import your profile from Linkedin. This will automatically fill out your profile picture, education and experience.</p>
           <Button onClick={ confirmLinkedinImport } className="linkedin">Import from Linkedin</Button>
-        </InfoPanel>
+        </InfoPanel> */}
         <InfoPanel>
           <h3>Profile Photo</h3>
           <div className="layout-row">
