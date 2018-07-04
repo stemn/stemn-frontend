@@ -17,7 +17,6 @@ const GLOBALS = {
     APP_TYPE: JSON.stringify('web'),
     NODE_ENV: JSON.stringify('production'),
   }, getStemnEnv(process.env.STEMN_ENV)),
-  },
 }
 
 const chunkIncludes = targets => ({ context }) => context && context.indexOf('node_modules') >= 0 && targets.find(t => new RegExp(`\\\\${t}\\\\`, 'i').test(context))
