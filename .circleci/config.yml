@@ -1,7 +1,7 @@
 defaults: &defaults
     working_directory: ~/stemn-frontend
     docker:
-      - image: circleci/node:7.10
+      - image: circleci/node:9.6
 
 version: 2
 jobs:
