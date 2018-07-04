@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import classes from './ProjectRow.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 import moment from 'moment'
 import Link from 'stemn-shared/misc/Router/Link'
 import LoadingPlaceholder from 'stemn-shared/misc/Loading/LoadingPlaceholder'
@@ -14,16 +14,16 @@ class Project extends Component {
       const { _id: projectId, name, blurb, picture, updated } = project.data
 
       return (
-        <div className={ classNames(classes.project, 'layout-row', className) } >
+        <div className={ cn(classes.project, 'layout-row', className) } >
           <div className="layout-column flex">
             <Link
-              className={ classNames('link-primary', classes.title) }
+              className={ cn('link-primary', classes.title) }
               name="projectRoute"
               params={ { projectId } }
             >
               { name || 'Untitled Project' }
             </Link>
-            <div className={ classNames('flex', classes.blurb) }>{ blurb }</div>
+            <div className={ cn('flex', classes.blurb) }>{ blurb }</div>
             <div className={ classes.meta }>{ moment(updated).fromNow() }</div>
           </div>
           { size === 'wide' && picture
@@ -38,7 +38,7 @@ class Project extends Component {
       )
     } 
     return (
-      <LoadingAnimation className={ classNames(classes.project, 'layout-row', className) } >
+      <LoadingAnimation className={ cn(classes.project, 'layout-row', className) } >
         <div className="layout-column flex">
           <LoadingPlaceholder width={ 200 } className={ classes.title } />
           <div className={ classes.blurb }>

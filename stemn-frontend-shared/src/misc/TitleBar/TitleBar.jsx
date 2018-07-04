@@ -4,7 +4,7 @@ import process from 'process'
 
 // Styles
 import styles from './TitleBar.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 
 import MaximiseIcon from './icons/maximise.js'
 import CloseIcon from './icons/close.js'
@@ -53,24 +53,24 @@ export default class TitleBar extends React.Component {
     if (process.platform === 'darwin') {
       return null
       //      return (
-      //        <div className={classNames(styles.bar, 'layout-row', { [styles.light] : this.props.theme === 'light'})}>
-      //          <div className={classNames(styles.dragger, 'flex')}></div>
+      //        <div className={cn(styles.bar, 'layout-row', { [styles.light] : this.props.theme === 'light'})}>
+      //          <div className={cn(styles.dragger, 'flex')}></div>
       //          <div className={styles.darwinButtons + ' layout-row layout-align-start-center'}>
-      //            <div className={classNames(styles.darwinButton, styles.darwinClose)}>{MacClose}</div>
-      //            <div className={classNames(styles.darwinButton, styles.darwinMinimise)}>{MacMinimise}</div>
-      //            <div className={classNames(styles.darwinButton, styles.darwinMaximise)}>{this.state.isMaximised ? MacMaximised : MacMaximise}</div>
+      //            <div className={cn(styles.darwinButton, styles.darwinClose)}>{MacClose}</div>
+      //            <div className={cn(styles.darwinButton, styles.darwinMinimise)}>{MacMinimise}</div>
+      //            <div className={cn(styles.darwinButton, styles.darwinMaximise)}>{this.state.isMaximised ? MacMaximised : MacMaximise}</div>
       //          </div>
       //        </div>
       //      )
     }
     
     return (
-      <div className={ classNames(styles.bar, 'layout-row', { [styles.light]: this.props.theme === 'light' }) }>
-        <div className={ classNames(styles.dragger, 'flex') } />
+      <div className={ cn(styles.bar, 'layout-row', { [styles.light]: this.props.theme === 'light' }) }>
+        <div className={ cn(styles.dragger, 'flex') } />
         <div className={ `layout-row layout-align-end-center ${styles.buttons}` }>
           <a className={ styles.button } title="Minimise" onClick={ minimise }><MinimiseIcon size={ 24 } /></a>
           <a className={ styles.button } title="Maximise" onClick={ toggleMaximise }><MaximiseIcon size={ 24 } /></a>
-          <a className={ classNames(styles.button, styles.close) } title="Close"    onClick={ close }><CloseIcon size={ 24 } /></a>
+          <a className={ cn(styles.button, styles.close) } title="Close"    onClick={ close }><CloseIcon size={ 24 } /></a>
         </div>
       </div>
     )

@@ -4,7 +4,7 @@ import moment from 'moment'
 import { orderByTime } from 'stemn-shared/misc/Timeline/Timeline.utils'
 import { getRevisions } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.utils'
 
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './DownloadModal.css'
 
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
@@ -59,7 +59,7 @@ export default class DownloadModal extends React.Component {
         <div className="modal-body flex scroll-box rel-box" style={ { padding: '0' } }>
           <LoadingOverlay show={ syncTimeline && syncTimeline.loading } linear hideBg />
           {allRevisions.map((revision, index) => (
-            <div className={ classNames(classes.row, 'layout-row layout-align-start-center') } key={ revision._id }>
+            <div className={ cn(classes.row, 'layout-row layout-align-start-center') } key={ revision._id }>
               <div style={ { width: '70px' } }>Version {revision.data.revisionNumber}</div>
               <div className="flex text-grey-3">{revision.timestamp ? moment(revision.timestamp).fromNow() : null}</div>
               {index === 0 ? <Label style={ { marginRight: '10px' } }>Latest Version</Label> : null}

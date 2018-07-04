@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import classes from './Header.scss'
-import classNames from 'classnames'
+import cn from 'classnames'
 import { loginRoute } from 'route-actions'
 import { Container } from 'stemn-shared/misc/Layout'
 import Avatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
@@ -46,7 +46,7 @@ export default class Header extends Component {
           className="rel-box"
         >
           <MdNotifications size={ 22 } />
-          { numNotifications > 0 && <div className={ classNames(classes.badge, { [classes.badgeLarge]: numNotifications >= 10 }) }>{ numNotifications }</div> }
+          { numNotifications > 0 && <div className={ cn(classes.badge, { [classes.badgeLarge]: numNotifications >= 10 }) }>{ numNotifications }</div> }
         </SimpleIconButton>
         <SimpleIconButton
           className="hide-xs"
@@ -107,15 +107,15 @@ export default class Header extends Component {
       label: 'Pricing',
     }]
     return (
-      <header className={ classNames(classes.header, 'layout-column') }>
+      <header className={ cn(classes.header, 'layout-column') }>
         <HeaderMobileMenu items={ itemsMobile } isOpen={ isOpen } />
-        <Container className={ classNames(classes.inner, 'layout-row layout-align-start-center') }>
+        <Container className={ cn(classes.inner, 'layout-row layout-align-start-center') }>
           <Link to="/" className={ classes.logo }>
             <img src={ logo } alt="" />
             <BetaBadge />
           </Link>
           <SiteSearch className={ classes.search } />
-          <div className={ classNames(classes.links, 'hide-xs') }>
+          <div className={ cn(classes.links, 'hide-xs') }>
             { items.map(item => (
               <Link key={ item } activeClassName="active" className={ classes.link } name={ item.route }>{ item.label }</Link>
             ))}
@@ -125,7 +125,7 @@ export default class Header extends Component {
             ? this.isLoggedIn()
             : this.isLoggedOut() }
           <SimpleIconButton
-            className={ classNames('hide-gt-xs', classes.menuButton) }
+            className={ cn('hide-gt-xs', classes.menuButton) }
             onClick={ this.toggleOpen }
           >
             <MdMenu size={ 25 } />

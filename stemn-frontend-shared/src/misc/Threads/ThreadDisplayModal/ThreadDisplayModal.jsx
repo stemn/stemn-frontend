@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './ThreadDisplayModal.css'
 
 import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox'
@@ -168,7 +168,7 @@ export default class ThreadDisplayModal extends React.Component {
     )
 
     return (
-      <div className={ classNames(classes.threadDisplayModal, 'layout-column') }>
+      <div className={ cn(classes.threadDisplayModal, 'layout-column') }>
         <div className="layout-row flex">
           <div className="flex-70 layout-column rel-box">
             <LoadingOverlay show={ !thread || !thread.data || !project || !project.data } />

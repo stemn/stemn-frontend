@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './ProjectThreads.css'
 import { Row, Col, Container } from 'stemn-shared/misc/Layout'
 import SubSubHeader from 'modules/SubSubHeader'
@@ -112,7 +112,7 @@ export default class ProjectThreads extends Component {
               />
             </Col>
             <div className="flex-xs-0 flex-sm-0 flex-gt-sm" />
-            <Col className={ classNames('sm layout-row', classes.filterRow) }>
+            <Col className={ cn('sm layout-row', classes.filterRow) }>
               <ThreadFilterUser
                 className="flex-xs"
                 filter={ filter }
@@ -185,7 +185,7 @@ export default class ProjectThreads extends Component {
                             ))}
                           </FlipMove>
                         </AccordianAnimate>
-                        : <div className={ classNames('text-title-5', classes.noResult) }>
+                        : <div className={ cn('text-title-5', classes.noResult) }>
                           No Results. <a className="link-primary"  onClick={ this.clearFilter }>Clear Filter</a>
                         </div> }
                     </div>

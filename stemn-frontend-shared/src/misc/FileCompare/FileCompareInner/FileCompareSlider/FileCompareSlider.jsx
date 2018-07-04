@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Styles
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './FileCompareSlider.css'
 
 import clickDrag from 'react-clickdrag'
@@ -31,7 +31,7 @@ class Component extends React.Component {
   render() {
     const translation = `${this.props.position}%`
     return (
-      <div className={ classNames(classes.slider, { [classes.active]: this.state.active }) } style={ { left: translation } } />
+      <div className={ cn(classes.slider, { [classes.active]: this.state.active }) } style={ { left: translation } } />
     )
   }
 }

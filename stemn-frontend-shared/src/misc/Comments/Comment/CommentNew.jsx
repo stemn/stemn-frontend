@@ -4,7 +4,7 @@ import { newComment } from 'stemn-shared/misc/Comments/Comments.actions.js'
 // Component Core
 import React, { Component } from 'react'
 // Styles
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './CommentNew.scss'
 // Sub Components
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
@@ -59,8 +59,8 @@ export class CommentNew extends Component {
     const { isFocussed } = this.state
 
     return (
-      <div className={ classNames(classes.commentNew, 'layout-row') } onClick={ this.clickComment }>
-        <div ref="form" className={ classNames(classes.commentBody, { [classes.commentBodyHidden]: !isFocussed }, 'flex') }>
+      <div className={ cn(classes.commentNew, 'layout-row') } onClick={ this.clickComment }>
+        <div ref="form" className={ cn(classes.commentBody, { [classes.commentBodyHidden]: !isFocussed }, 'flex') }>
           <div className={ `${classes.commentHeader} layout-row layout-align-start-center` }>
             <UserAvatar
               picture={ auth.user.picture }

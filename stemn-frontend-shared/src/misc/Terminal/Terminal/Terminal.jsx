@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import classes from './Terminal.scss'
-import classNames from 'classnames'
+import cn from 'classnames'
 import Ansi from 'ansi-to-react'
 import MdDown from 'react-icons/md/arrow-downward'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
@@ -30,7 +30,7 @@ export default class Terminal extends Component {
           linear
           hideBg
         />
-        <div className={ classNames(classes.header, 'layout-row layout-align-end') }>
+        <div className={ cn(classes.header, 'layout-row layout-align-end') }>
           <SimpleIconButton
             color="white"
             title="Scroll to Bottom"

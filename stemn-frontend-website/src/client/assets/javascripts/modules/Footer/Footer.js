@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import classes from './Footer.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 
 import { Container } from 'stemn-shared/misc/Layout'
 import Link from 'stemn-shared/misc/Router/Link'
@@ -9,8 +9,8 @@ import logo from '../LandingFooter/logo.png'
 class Footer extends Component {
   render() {
     return (
-      <footer className={ classNames(classes.footer) }>
-        <Container className={ classNames(classes.inner, 'layout-row', 'layout-align-start-center') }>
+      <footer className={ cn(classes.footer) }>
+        <Container className={ cn(classes.inner, 'layout-row', 'layout-align-start-center') }>
           <img src={ logo } className={ classes.logo } />
 
           <div className="flex" />

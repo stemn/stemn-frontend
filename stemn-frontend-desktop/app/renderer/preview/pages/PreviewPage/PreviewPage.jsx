@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './PreviewPage.css'
 
 import { orderItemsByTime, isSelected } from 'stemn-shared/misc/FileCompare/FileCompare.utils.js'
@@ -100,7 +100,7 @@ export default class PreviewPage extends Component {
           <div className="divider" />
         </Header>
         <div className="layout-row flex rel-box">
-          <div className={ classNames(classes.preview, 'layout-column flex') }>
+          <div className={ cn(classes.preview, 'layout-column flex') }>
             <FileCompareInner
               className="layout-column flex"
               project={ file.data.project }

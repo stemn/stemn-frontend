@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
+import cn from 'classnames'
 import { Link } from 'react-router'
 
 import { isActive, getRoutePath } from './Link.utils'
@@ -91,7 +91,7 @@ const LinkComponent = (props) => {
     if (onClick) onClick()
   }
 
-  const allClassNames = classNames(className, { active: isActive(activeIf, params) })
+  const allClassNames = cn(className, { active: isActive(activeIf, params) })
 
   if (isExternal) {
     return (

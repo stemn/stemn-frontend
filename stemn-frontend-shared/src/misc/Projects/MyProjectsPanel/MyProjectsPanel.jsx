@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import PublicPrivateIcon from 'stemn-shared/misc/Icons/PublicPrivateIcon'
 import classes from './MyProjectsPanel.scss'
-import classNames from 'classnames'
+import cn from 'classnames'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import Link from 'stemn-shared/misc/Router/Link'
 import { orderBy } from 'lodash'
@@ -38,7 +38,7 @@ export default class MyProjectsPanel extends Component {
     const hasNoResults = limitedProjects.length === 0
 
     return (
-      <InfoPanel className={ classNames(classes.panel, 'layout-column') }>
+      <InfoPanel className={ cn(classes.panel, 'layout-column') }>
         { !hasNoResults &&
           <h3 className="layout-row">
             <div className="flex">My Projects</div>

@@ -7,7 +7,7 @@ import React from 'react'
 import * as ThreadsActions from 'stemn-shared/misc/Threads/Threads.actions.js'
 
 // Styles
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './ThreadRow.css'
 import loadingClasses from 'stemn-shared/misc/Loading/LoadingPlaceholders/LoadingPlaceholders.css'
 
@@ -41,10 +41,10 @@ export class Component extends React.Component {
 
     if (!thread || !thread.data) {
       return (
-        <div className={ classNames(classes.row, loadingClasses.loading, 'layout-row', 'layout-align-start-center') }>
+        <div className={ cn(classes.row, loadingClasses.loading, 'layout-row', 'layout-align-start-center') }>
           <div className="flex text-ellipsis">The thread namelongword goes here</div>
-          <Button className={ classNames('xs', classes.button) } style={ { width: '60px' } }>&nbsp;</Button>
-          <Button className={ classNames('xs', classes.button) } style={ { width: '60px' } }>&nbsp;</Button>
+          <Button className={ cn('xs', classes.button) } style={ { width: '60px' } }>&nbsp;</Button>
+          <Button className={ cn('xs', classes.button) } style={ { width: '60px' } }>&nbsp;</Button>
         </div>
       )
     }
@@ -52,12 +52,12 @@ export class Component extends React.Component {
       <div className={ `${classes.row} layout-row layout-align-start-center` }>
         <div className="flex text-ellipsis">{thread.data.name}</div>
         <Button
-          className={ classNames('xs', classes.button, { [classes.active]: status === 'complete' }) }
+          className={ cn('xs', classes.button, { [classes.active]: status === 'complete' }) }
           title="Mark as closed"
           onClick={ toggleComplete }
         >Close</Button>
         <Button
-          className={ classNames('xs', classes.button, { [classes.active]: status === 'related' }) }
+          className={ cn('xs', classes.button, { [classes.active]: status === 'related' }) }
           title="Mark as related"
           onClick={ toggleRelated }
         >Related</Button>

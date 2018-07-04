@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { orderBy, omit } from 'lodash'
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './FileListPopup.css'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import FileIcon from 'stemn-shared/misc/FileList/components/FileIcon'
@@ -10,7 +10,7 @@ import { getFileRouteName, getFileRouteParams } from 'stemn-shared/misc/FileList
 
 const FileRow = (props) => {
   const { file, isActive, clickFn, link } = props
-  const rowClasses = classNames(classes.file, { [classes.active]: isActive }, 'layout-row layout-align-start-center')
+  const rowClasses = cn(classes.file, { [classes.active]: isActive }, 'layout-row layout-align-start-center')
   if (link) {
     return (
       <Link

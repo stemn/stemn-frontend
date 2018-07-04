@@ -4,7 +4,7 @@ import moment from 'moment'
 import { connect } from 'react-redux'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './DatePicker.css'
 import Calendar from '../Calendar.jsx'
 import PopoverFit from 'stemn-shared/misc/PopoverMenu/PopoverFit'
@@ -71,14 +71,14 @@ export class Component extends React.Component {
               <div className={ classes.fixedOptionTime }>{ option.value.calendar() }</div>
             </a>),
           )}
-        <a onClick={ () => this.toggleCalendar() } className={ classNames(classes.fixedOption, classes.divider, 'layout-row layout-align-start-center') }>
+        <a onClick={ () => this.toggleCalendar() } className={ cn(classes.fixedOption, classes.divider, 'layout-row layout-align-start-center') }>
           <div className="flex">{calendarIsOpen ? 'Simple selector...' : 'Other...'}</div>
         </a>
       </div>
     )
     return (
       <PopoverFit max disableClickClose { ...otherProps } style={ { width: '100%' } }>
-        <Button className={ classNames('layout-row layout-align-start-center flex rel-box light', className) } style={ { width: '100%' } }>
+        <Button className={ cn('layout-row layout-align-start-center flex rel-box light', className) } style={ { width: '100%' } }>
           { valueDate ? valueDate.calendar() : 'Select a due date' }
           <div className="flex" />
           { valueDate &&

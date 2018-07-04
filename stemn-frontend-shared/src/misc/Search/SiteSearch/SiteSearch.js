@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import classes from './SiteSearch.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 import MdSearch from 'react-icons/md/search'
 import { Link } from 'react-router'
 
@@ -26,7 +26,7 @@ export default class SiteSearch extends Component {
     }
 
     return (
-      <form className={ classNames('layout-row layout-align-start-center', classes.search, className) } name="siteSearch" onSubmit={ onSubmit }>
+      <form className={ cn('layout-row layout-align-start-center', classes.search, className) } name="siteSearch" onSubmit={ onSubmit }>
         <Input
           className="flex"
           placeholder="Search"

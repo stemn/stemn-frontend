@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './FileBreadCrumbs.css'
 import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
 import Popover from 'stemn-shared/misc/Popover'
@@ -98,7 +98,7 @@ export default class FileBreadCrumbs extends Component {
     }
 
     return (
-      <div className={ classNames(classes.crumbs, className) }>
+      <div className={ cn(classes.crumbs, className) }>
         { displayCrumbs() }
       </div>
     )

@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Styles
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './ProgressButton.css'
 
 
@@ -122,7 +122,7 @@ export default class Progressbutton extends React.Component {
 
     return (
       <div
-        className={ classNames(
+        className={ cn(
           classes.progressButton, className,
           { [classes.loading]: status === 'loading' },
           { [classes.error]: status === 'error' },

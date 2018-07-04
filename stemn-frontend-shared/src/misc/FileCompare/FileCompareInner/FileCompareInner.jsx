@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import 'javascript-detect-element-resize' // addResizeListener && removeResizeListener
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './FileCompareInner.css'
 import PreviewFile from 'stemn-shared/misc/Files/PreviewFile/PreviewFile.jsx'
 import FileCompareSlider from './FileCompareSlider/FileCompareSlider.jsx'
@@ -108,7 +108,7 @@ export default class FileCompareInner extends Component {
 
     return (
       <div className="layout-column flex">
-        <div className={ classNames('flex', 'rel-box', 'scroll-box', compareModeClasses[mode], classes[mode]) } ref="container">
+        <div className={ cn('flex', 'rel-box', 'scroll-box', compareModeClasses[mode], classes[mode]) } ref="container">
           { filePreview1() }
           { mode === 'slider' &&
             <FileCompareSlider

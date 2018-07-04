@@ -1,5 +1,5 @@
 import React from 'react'
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './Reactions.css'
 import Popover from 'stemn-shared/misc/Popover'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
@@ -27,7 +27,7 @@ export default class Reactions extends React.Component {
                 <Link
                   name="userRoute"
                   params={ { userId: userReaction.owner._id } }
-                  className={ classNames(classes.listPopoverRow) }
+                  className={ cn(classes.listPopoverRow) }
                   key={ userReaction.owner._id }
                 >
                   <UserAvatar

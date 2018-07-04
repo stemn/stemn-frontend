@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import CodeMirror from 'react-codemirror'
 import classes from './SearchInput.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 import 'codemirror/addon/display/placeholder'
 import 'codemirror/addon/selection/mark-selection'
 import MdSearch from 'react-icons/md/search'
@@ -97,7 +97,7 @@ export default class EditorNew extends Component {
     }
 
     return (
-      <div className={ classNames(classes.search, 'layout-row layout-align-start-center', className) } { ...otherProps }>
+      <div className={ cn(classes.search, 'layout-row layout-align-start-center', className) } { ...otherProps }>
         <CodeMirror
           ref={ this.getCodeMirror }
           className={ classes.search }

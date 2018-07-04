@@ -3,7 +3,7 @@ import React from 'react'
 import clickDrag from 'react-clickdrag'
 
 // Styles
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './DragResize.css'
 
 
@@ -119,7 +119,7 @@ export default class DragResize extends React.Component {
       transition: this.state.animate ? '0.3s ease all' : 'none',
     }
     return (
-      <div style={ style } className={ classNames(classes.box, this.props.className) }>
+      <div style={ style } className={ cn(classes.box, this.props.className) }>
         {this.props.children}
         <Dragger changeFn={ this.drag } side={ this.props.side } />
       </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import classes from './LandingHeader.scss'
-import classNames from 'classnames'
+import cn from 'classnames'
 import { loginRoute } from 'route-actions'
 import { Container } from 'stemn-shared/misc/Layout'
 import Avatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
@@ -47,7 +47,7 @@ export default class LandingHeader extends Component {
     const routeParams = { userId: auth.user._id }
 
     return (
-      <Link to="/" className={ classNames('layout-row layout-align-start-center', classes.specialLink) }>
+      <Link to="/" className={ cn('layout-row layout-align-start-center', classes.specialLink) }>
         <div>Dashboard</div>
         <Avatar
           shape="square"
@@ -62,7 +62,7 @@ export default class LandingHeader extends Component {
     if (window.location.pathname !== '/login') {
       return (
         <div className="layout-row layout-align-start-center">
-          <Link to={ loginRoute() } className={ classNames('layout-row layout-align-start-center', classes.specialLink) }>
+          <Link to={ loginRoute() } className={ cn('layout-row layout-align-start-center', classes.specialLink) }>
             <div>Sign in</div>
           </Link>
         </div>
@@ -76,7 +76,7 @@ export default class LandingHeader extends Component {
     const {
       auth,
     } = this.props
-    const allClasses = classNames(
+    const allClasses = cn(
       classes.header,
       'layout-xs-column layout-align-xs-center layout-gt-xs-row layout-gt-xs-align-start-center',
       { [classes.headerFilled]: !atTop || isOpen },
@@ -100,7 +100,7 @@ export default class LandingHeader extends Component {
 
     return (
       <header className={ allClasses }>
-        <Container className={ classNames(classes.inner, 'hide-xs layout-row layout-align-start-center') }>
+        <Container className={ cn(classes.inner, 'hide-xs layout-row layout-align-start-center') }>
           <Link to="/landing" className={ classes.logo }>
             <img src={ logo } alt="" />
             <BetaBadge />
@@ -114,7 +114,7 @@ export default class LandingHeader extends Component {
             : this.isLoggedOut() }
         </Container>
         <HeaderMobileMenu items={ items } isOpen={ isOpen } />
-        <Container className={ classNames(classes.inner, 'hide-gt-xs layout-row layout-align-start-center') }>
+        <Container className={ cn(classes.inner, 'hide-gt-xs layout-row layout-align-start-center') }>
           <Link to="/landing" className={ classes.logo }>
             <img src={ logo } alt="" />
           </Link>
@@ -123,7 +123,7 @@ export default class LandingHeader extends Component {
             ? this.isLoggedIn()
             : this.isLoggedOut() }
           <SimpleIconButton
-            className={ classNames('hide-gt-xs', classes.menuButton) }
+            className={ cn('hide-gt-xs', classes.menuButton) }
             onClick={ this.toggleOpen }
           >
             <MdMenu size={ 25 } />

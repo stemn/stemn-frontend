@@ -7,7 +7,7 @@ import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js
 import React from 'react'
 import { has } from 'lodash'
 
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './ProjectPage.scss'
 
 import LoadingOverlay     from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
@@ -101,7 +101,7 @@ export class Component extends React.Component {
               dispatch={ dispatch }
             />
             <CommitBox
-              className={ classNames(classes.commitBox, { [classes.open]: changes.name && changes.name.length > 0 }) }
+              className={ cn(classes.commitBox, { [classes.open]: changes.name && changes.name.length > 0 }) }
               entityModel={ entityModel }
               changes={ changes }
               changesActions={ changesActions }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './FileRow.css'
 import bytes from 'stemn-shared/utils/filters/bytes.js'
 import FileIcon from './FileIcon'
@@ -65,7 +65,7 @@ export default class FileRow extends Component {
     const timeFromNow = moment(file.modified).fromNow()
 
     return (
-      <div className={ classNames(classes.row, 'layout-row layout-align-start-center', { [classes.active]: isActive }) } >
+      <div className={ cn(classes.row, 'layout-row layout-align-start-center', { [classes.active]: isActive }) } >
         <ClickFile
           className={ classes.clickOverlay }
           onClick={ this.singleClick }
@@ -93,19 +93,19 @@ export default class FileRow extends Component {
             <Link
               name="commitRoute"
               params={ { projectId: file.project._id, commitId: file.commit._id } }
-              className={ classNames(classes.commit, classes.clickable, 'link-primary text-ellipsis') }
+              className={ cn(classes.commit, classes.clickable, 'link-primary text-ellipsis') }
             >
               { file.commit.name }
             </Link>
           </div>
           : null }
-        <div className={ classNames(classes.label, 'hide-xs') }>
+        <div className={ cn(classes.label, 'hide-xs') }>
           { file.parts && <Label title="Virtual Assembly">Virtual Assembly</Label> }
           { file.revisionNumber > 1 &&
             <Label title={ `${file.revisionNumber} revisions` }>{file.revisionNumber} Revisions</Label>
           }
         </div>
-        <div className={ classNames(classes.date, 'hide-xs') }>{file.modified ? timeFromNow : ''}</div>
+        <div className={ cn(classes.date, 'hide-xs') }>{file.modified ? timeFromNow : ''}</div>
         <div className={ classes.size }>{bytes(file.size)}</div>
       </div>
     )

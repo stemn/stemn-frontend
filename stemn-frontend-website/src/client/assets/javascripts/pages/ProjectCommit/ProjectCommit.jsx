@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './ProjectCommit.css'
 
 import { groupRevisions }  from 'stemn-shared/misc/Timeline/Timeline.utils.js'
@@ -34,7 +34,7 @@ export default class ProjectCommit extends Component {
           <div className={ classes.blurb }>
             <EditorDisplay value={ commit.body } />
           </div>
-          <div className={ classNames('layout-row layout-align-start-center', classes.meta) }>
+          <div className={ cn('layout-row layout-align-start-center', classes.meta) }>
             <Link
               name="userRoute"
               params={ { userId: commit.owner._id } }

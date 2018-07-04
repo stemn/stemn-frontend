@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import classes from './LoadingPlaceholder.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 
 export default class LoadingPlaceholder extends Component {
   static defaultProps = {
@@ -13,7 +13,7 @@ export default class LoadingPlaceholder extends Component {
     }
     return (
       <div
-        className={ classNames(classes.placeholder, className) }
+        className={ cn(classes.placeholder, className) }
         style={ Object.assign({}, sizeStyles, style) }
       >
         &nbsp;

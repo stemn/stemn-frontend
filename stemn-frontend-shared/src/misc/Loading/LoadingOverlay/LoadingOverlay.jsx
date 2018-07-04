@@ -4,7 +4,7 @@ import { CSSTransitionGroup } from 'react-transition-group'
 import LoadingSpinner from 'stemn-shared/misc/Loading/LoadingSpinner/LoadingSpinner'
 import LoadingLinear  from 'stemn-shared/misc/Loading/LoadingLinear/LoadingLinear.jsx'
 import classes from './LoadingOverlay.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 
 const propTypesObject = {
   size: PropTypes.string,               // 'sm' || 'lg' - Changes the size of the spinner
@@ -74,7 +74,7 @@ export default class LoadingOverlay extends React.Component {
         transitionLeaveTimeout={ 300 }
       >
         { show
-          ? <div className={ classNames(classes.loadingOverlay, hideBg ? '' : classes.bgWhite) } style={ allStyles }>
+          ? <div className={ cn(classes.loadingOverlay, hideBg ? '' : classes.bgWhite) } style={ allStyles }>
             { linear
               ? <LoadingLinear />
               : <div className={ classes.loaderContainer }>

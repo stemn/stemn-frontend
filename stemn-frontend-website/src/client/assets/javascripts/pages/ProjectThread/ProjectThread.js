@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import classes from './ProjectThread.scss'
-import classNames from 'classnames'
+import cn from 'classnames'
 import { Row, Col, Container } from 'stemn-shared/misc/Layout'
 import SubSubHeader from 'modules/SubSubHeader'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
@@ -239,7 +239,7 @@ export default class ProjectThread extends Component {
                   : <span className={ classes.number }>&nbsp;{ thread.data.threadNumber ? `#T${thread.data.threadNumber}` : null }</span> }
               </h2>
               <Row className="sm layout-xs-column layout-gt-xs-row">
-                <Col className={ classNames('sm layout-row layout-align-start-center', classes.meta) }>
+                <Col className={ cn('sm layout-row layout-align-start-center', classes.meta) }>
                   <Link
                     name="userRoute"
                     params={ userRouteParams }
@@ -257,7 +257,7 @@ export default class ProjectThread extends Component {
                   <div>&nbsp;created this thread { moment(thread.data.created).fromNow() }.</div>
                 </Col>
                 <div className="flex" />
-                <Col className={ classNames('sm layout-row', classes.buttonRow) }>
+                <Col className={ cn('sm layout-row', classes.buttonRow) }>
                   <SocialButton
                     className="flex-xs"
                     type="follow"
@@ -273,7 +273,7 @@ export default class ProjectThread extends Component {
                       onChange={ this.updateThread }
                       style={ { marginLeft: '15px' } }
                     />
-                    : <Tag className={ classNames(!thread.data.complete ? 'warn' : 'success', 'flex-xs') } style={ { margin: '0px', marginLeft: '15px' } }>
+                    : <Tag className={ cn(!thread.data.complete ? 'warn' : 'success', 'flex-xs') } style={ { margin: '0px', marginLeft: '15px' } }>
                       <MdDone size={ 20 } style={ { marginRight: '5px' } } />
                       { thread.data.complete ? 'Thread Closed' : 'Thread Open' }
                     </Tag>
@@ -316,7 +316,7 @@ export default class ProjectThread extends Component {
                   />
                 }
                 { timeline && timeline.length == 0 &&
-                  <ThreadTimelineEmpty className={ classNames('flex-gt-xs', classes.empty) } />
+                  <ThreadTimelineEmpty className={ cn('flex-gt-xs', classes.empty) } />
                 }
                 <CommentNew
                   threadId={ threadId }

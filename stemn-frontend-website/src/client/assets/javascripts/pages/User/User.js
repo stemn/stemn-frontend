@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import classes from './User.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 import StandardLayout from 'layout/StandardLayout'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import { Row, Col, Container } from 'stemn-shared/misc/Layout'
@@ -25,7 +25,7 @@ class User extends Component {
         <UserNavHeader user={ user } currentUser={ currentUser } />
         <Container>
           <Row className="layout-xs-column layout-gt-xs-row">
-            <Col className={ classNames(classes.sidebar, 'flex-gt-xs-30', { [classes.showSidebar]: showSidebar }) }>
+            <Col className={ cn(classes.sidebar, 'flex-gt-xs-30', { [classes.showSidebar]: showSidebar }) }>
               <UserAvatar
                 name={ user.data.name }
                 picture={ get(user, 'data.profile.picture') }

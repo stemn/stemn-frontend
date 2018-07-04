@@ -1,7 +1,7 @@
 // Component Core
 import React from 'react'
 import classes from './Smooch.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 import { init as initSmooch } from './Smooch.utils.js'
 import comments      from 'stemn-shared/assets/images/pure-vectors/comments.svg'
 
@@ -14,7 +14,7 @@ export default class Smooch extends React.Component {
 
   render() {
     return (
-      <a className={ classNames(classes.icon, 'layout-column', 'layout-align-center-center') } onClick={ Smooch.open }>
+      <a className={ cn(classes.icon, 'layout-column', 'layout-align-center-center') } onClick={ Smooch.open }>
         <img src={ comments } />
       </a>
     )

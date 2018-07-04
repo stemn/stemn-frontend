@@ -7,7 +7,7 @@ import MdMoreHoriz from 'react-icons/md/more-horiz'
 
 import { get } from 'lodash'
 
-import classNames from 'classnames'
+import cn from 'classnames'
 
 export default class TeamMember extends React.Component {
   render() {
@@ -56,9 +56,9 @@ export default class TeamMember extends React.Component {
               <MdMoreHoriz size="20px" />
             </SimpleIconButton>
               <div className="PopoverMenu">
-              <a className={ classNames({ active: role === 'admin' }) } onClick={ () => changePermissionsFn({ userId: item._id, role: 'admin' }) }>Set Permission: Admin</a>
-              <a className={ classNames({ active: role === 'collaborator' }) } onClick={ () => changePermissionsFn({ userId: item._id, role: 'collaborator' }) }>Set Permission: Collaborator</a>
-              <a className={ classNames({ active: role === 'viewer' }) } onClick={ () => changePermissionsFn({ userId: item._id, role: 'viewer' }) }>Set Permission: Viewer</a>
+              <a className={ cn({ active: role === 'admin' }) } onClick={ () => changePermissionsFn({ userId: item._id, role: 'admin' }) }>Set Permission: Admin</a>
+              <a className={ cn({ active: role === 'collaborator' }) } onClick={ () => changePermissionsFn({ userId: item._id, role: 'collaborator' }) }>Set Permission: Collaborator</a>
+              <a className={ cn({ active: role === 'viewer' }) } onClick={ () => changePermissionsFn({ userId: item._id, role: 'viewer' }) }>Set Permission: Viewer</a>
               <div className="divider" />
               <a onClick={ () => removeTeamMemberFn({ userId: item._id }) }>Remove User</a>
             </div>

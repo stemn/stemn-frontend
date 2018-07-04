@@ -9,7 +9,7 @@ import { toggleMenubarSidebar } from 'stemn-shared/misc/Sidebar/Sidebar.actions.
 import React from 'react'
 
 // Styles
-import classNames from 'classnames'
+import cn from 'classnames'
 import toolbarStyles from './Toolbar.css'
 
 // Sub Components
@@ -50,7 +50,7 @@ export class Component extends React.Component {
 
     const textStyle = menu ? { marginLeft: '5px' } : {}
     return (
-      <div className={ classNames(toolbarStyles.toolbar, 'layout-row layout-align-start-center') }>
+      <div className={ cn(toolbarStyles.toolbar, 'layout-row layout-align-start-center') }>
         { menu
           ? <SimpleIconButton
             color="white"

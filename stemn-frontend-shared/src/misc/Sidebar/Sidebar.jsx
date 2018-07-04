@@ -8,7 +8,7 @@ import * as SystemActions             from 'stemn-shared/desktop/System/System.a
 import { push } from 'react-router-redux'
 import React from 'react'
 import { escapeRegExp, orderBy }      from 'lodash'
-import classNames                     from 'classnames'
+import cn                     from 'classnames'
 import styles                         from './Sidebar.css'
 import userStyles                     from './SidebarAvatar.css'
 import DragResize                     from 'stemn-shared/misc/DragResize/DragResize.jsx'
@@ -42,7 +42,7 @@ export class Component extends React.Component {
 
   render() {
     const { projectsActions, projects, auth, dispatch } = this.props
-    const sidebarStyle = classNames('layout-column', 'flex', 'rel-box', styles.sidebar)
+    const sidebarStyle = cn('layout-column', 'flex', 'rel-box', styles.sidebar)
     const nameRegex = new RegExp(escapeRegExp(this.props.sidebar.searchString), 'i')
     const filteredProjects = projects && projects.data
       ? projects.data.filter(project => nameRegex.test(project.name))

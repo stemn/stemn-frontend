@@ -1,5 +1,5 @@
 import React from 'react'
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './TimelineInner.css'
 import { orderByTime } from '../Timeline.utils'
 import moment from 'moment'
@@ -11,7 +11,7 @@ const EventMap = {
   commit: (item) => {
     const timeFromNow = moment(item.timestamp).fromNow()
     return (
-      <div className={ classNames(classes.popup, 'layout-row layout-align-start-center') }>
+      <div className={ cn(classes.popup, 'layout-row layout-align-start-center') }>
         <UserAvatar
           className={ classes.popupImage }
           picture={ item.user.picture }
@@ -29,7 +29,7 @@ const EventMap = {
   revision: (item) => {
     const timeFromNow = moment(item.timestamp).fromNow()
     return (
-      <div className={ classNames(classes.popup, 'layout-row layout-align-start-center') }>
+      <div className={ cn(classes.popup, 'layout-row layout-align-start-center') }>
         <UserAvatar
           className={ classes.popupImage }
           picture={ item.user.picture }
@@ -54,7 +54,7 @@ const PopupContent = (item) => {
 class Dot extends React.Component {
   render() {
     const { isSelected, selected, onSelect, item, preferPlace } = this.props
-    const dotClasses = classNames(classes.dot, { [classes.active]: isSelected ? isSelected(item) : selected === item._id })
+    const dotClasses = cn(classes.dot, { [classes.active]: isSelected ? isSelected(item) : selected === item._id })
     return (
     // If the isSelected function is provided, we use this to determine if the item is active
       <a className={ dotClasses } onClick={ () => onSelect(item) }>
@@ -80,7 +80,7 @@ class Component extends React.Component {
         // These are reversed because they go left to right (not right to left like the other items)
         return (
           <Popover preferPlace={ preferPlace || 'below' } trigger="hoverSingleDelay" tipSize={ 6 }>
-            <div key={ item._id }  className={ classNames(classes.dotGroup, 'layout-row layout-align-center-center') }>
+            <div key={ item._id }  className={ cn(classes.dotGroup, 'layout-row layout-align-center-center') }>
               { subItemsOrdered.map(subItem => (
                 <Dot
                   key={ subItem._id }
@@ -110,7 +110,7 @@ class Component extends React.Component {
     })
   
     
-    const containerClasses = classNames('layout-row layout-align-end-center', classes.dots, { [classes.small]: size === 'sm' })
+    const containerClasses = cn('layout-row layout-align-end-center', classes.dots, { [classes.small]: size === 'sm' })
     return (
       <div ref={ refInner } className={ containerClasses } style={ { transform: translation } }>
         { Items }

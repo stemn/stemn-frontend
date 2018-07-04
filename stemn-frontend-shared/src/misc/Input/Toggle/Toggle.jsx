@@ -1,6 +1,6 @@
 import React from 'react'
 import Input from 'stemn-shared/misc/Input/Input/Input'
-import classNames from 'classnames'
+import cn from 'classnames'
 
 // Styles
 import styles from './Toggle.css'
@@ -22,7 +22,7 @@ export default class Toggle extends React.Component {
     return (
       <div
         title={ title }
-        className={ classNames(className, styles.toggle, { disabled }) }
+        className={ cn(className, styles.toggle, { disabled }) }
       >
         <Input
           type="checkbox"

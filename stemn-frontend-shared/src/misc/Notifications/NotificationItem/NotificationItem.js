@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import classes from './NotificationItem.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 
 import moment from 'moment'
 
@@ -19,7 +19,7 @@ export default class NotificationItem extends Component {
     let entityNumber = -1
 
     return (
-      <div className={ classNames(classes.notification, 'layout-row layout-align-start-start') }>
+      <div className={ cn(classes.notification, 'layout-row layout-align-start-start') }>
         <UserAvatar
           className={ classes.avatar1 }
           name={ notification.entities[0].display } 
@@ -28,7 +28,7 @@ export default class NotificationItem extends Component {
           shape="square"
         />
         <div className="flex">
-          <div className={ classNames(classes.text) }>
+          <div className={ cn(classes.text) }>
             { templateSplit.map((item, idx) => {
               if (item === '') {
                 // We iterate the entity number whenever we find an empty item
@@ -58,7 +58,7 @@ export default class NotificationItem extends Component {
             />
           </NotificationLink>
           : null }
-        <a className={ classNames(classes.mark, { [classes.markRead]: notification.read }) } onClick={ markRead }>
+        <a className={ cn(classes.mark, { [classes.markRead]: notification.read }) } onClick={ markRead }>
           <MdDone size={ 24 } />
         </a>
 

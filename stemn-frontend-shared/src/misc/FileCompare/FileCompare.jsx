@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './FileCompare.css'
 import { orderItemsByTime, isSelected } from 'stemn-shared/misc/FileCompare/FileCompare.utils.js'
 import TogglePanel from 'stemn-shared/misc/TogglePanel/TogglePanel.jsx'
@@ -90,7 +90,7 @@ export default class FileCompare extends Component {
     )
 
     const standardTemplate = () => (
-      <div className={ classNames('layout-column flex', className) }>
+      <div className={ cn('layout-column flex', className) }>
         <div className={ `${classes.header} layout-row layout-align-start-center` }>
           <div className="flex">{ file.data.path }</div>
           <FileCompareMenu

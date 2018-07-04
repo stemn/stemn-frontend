@@ -1,5 +1,5 @@
 import React from 'react'
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './UserAvatar.css'
 
 const colours = [
@@ -35,7 +35,7 @@ export default class UserAvatar extends React.Component {
       }
       return (
         <div
-          className={ classNames(display === 'cover' ? classes.cover : classes.contain, className) }
+          className={ cn(display === 'cover' ? classes.cover : classes.contain, className) }
           title={ title }
           style={ Object.assign({}, actualStyles, pictureStyles) }
         />
@@ -61,7 +61,7 @@ export default class UserAvatar extends React.Component {
     }
 
     return (
-      <div className={ classNames(className, 'layout-column layout-align-center-center') } title={ title } style={ Object.assign({}, actualStyles, colorStyles) }>
+      <div className={ cn(className, 'layout-column layout-align-center-center') } title={ title } style={ Object.assign({}, actualStyles, colorStyles) }>
         {name ? initials : ''}
       </div>
     )

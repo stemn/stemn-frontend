@@ -1,5 +1,5 @@
 import React from 'react'
-import classNames from 'classnames'
+import cn from 'classnames'
 import { ContextMenu, MenuItem, SubMenu, connectMenu } from 'react-contextmenu'
 import './ContextMenu.global.css'
 
@@ -21,7 +21,7 @@ class AdvancedMenuItem extends React.Component {
     }
       
     const attributes = {
-      className: classNames({ divider: menuItem.divider }),
+      className: cn({ divider: menuItem.divider }),
     }
 
     return !menuItem.isHidden || !menuItem.isHidden(item)

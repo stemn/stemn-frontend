@@ -1,5 +1,5 @@
 import React from 'react'
-import classNames from 'classnames'
+import cn from 'classnames'
 import capitalizeFirstLetter from 'stemn-shared/utils/strings/capitalizeFirstLetter'
 
 // Components
@@ -26,7 +26,7 @@ export default class FileChangeRow extends React.Component {
     // status === 'created' || 'modified' || 'deleted'
 
     // Classes
-    const rowClasses = classNames({
+    const rowClasses = cn({
       [styles.fileChangeRow]: true,
       [styles.active]: isActive,
       'layout-row': true,
@@ -61,7 +61,7 @@ export default class FileChangeRow extends React.Component {
         <div className={ `${styles.text} flex text-ellipsis layout-row` } onClick={ clickFn }>
           <div className="flex" title={ text }>{middleConcat(text, 60, 0.5)}</div>
         </div>
-        <div className={ classNames(styles.icon, getClass(status), 'layout-column layout-align-center-center') } title={ capitalizeFirstLetter(status) }>
+        <div className={ cn(styles.icon, getClass(status), 'layout-column layout-align-center-center') } title={ capitalizeFirstLetter(status) }>
           {getIcon(status)}
         </div>
       </div>

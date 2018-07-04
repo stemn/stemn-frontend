@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './Comment.css'
 import Link from 'stemn-shared/misc/Router/Link'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
@@ -94,7 +94,7 @@ export default class Comment extends Component {
             </Link>
             &nbsp;
             { showMeta && children }
-            <span className={ classNames(classes.date, 'text-ellipsis') }>
+            <span className={ cn(classes.date, 'text-ellipsis') }>
               &nbsp;- { moment(comment.data.timestamp).fromNow() }
             </span>
             <div className="flex" />

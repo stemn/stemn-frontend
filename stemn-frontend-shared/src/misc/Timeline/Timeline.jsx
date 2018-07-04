@@ -3,7 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 // Styles
-import classNames from 'classnames'
+import cn from 'classnames'
 import styles from './Timeline.css'
 
 import { orderByTime } from './Timeline.utils'
@@ -78,7 +78,7 @@ class Component extends React.Component {
     const itemsOrdered = orderByTime(items).reverse()
 
     return (
-      <div className={ classNames(styles.timeline, className, { [styles.small]: size === 'sm' }) } style={ style }>
+      <div className={ cn(styles.timeline, className, { [styles.small]: size === 'sm' }) } style={ style }>
         <div className="rel-box">
           <div className={ styles.line }>
             {moreLeft  ? <MoreButton title="Older events" onClick={ () => this.scroll('left') } side="left" /> : ''}

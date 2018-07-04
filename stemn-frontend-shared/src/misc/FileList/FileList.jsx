@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { orderBy, get } from 'lodash'
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './FileList.css'
 import FileBreadCrumbs from './components/FileBreadCrumbs'
 import FileRow from './components/FileRow'
@@ -181,7 +181,7 @@ export default class FileList extends Component {
                 ? <SearchInput
                   value={ fileList.query }
                   model={ `fileList.${fileListCacheKey}.query` }
-                  className={ classNames(classes.search, 'hide-xs') }
+                  className={ cn(classes.search, 'hide-xs') }
                   placeholder="Search Files"
                 />
                 : null }

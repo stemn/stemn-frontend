@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { toggleMenubarSidebar } from 'stemn-shared/misc/Sidebar/Sidebar.actions.js'
 import React from 'react'
 import { escapeRegExp, orderBy } from 'lodash'
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './Sidebar.css'
 import AnimateShow from 'stemn-shared/misc/AnimateShow/AnimateShow.jsx'
 import SidebarProjectButton from 'stemn-shared/misc/Sidebar/SidebarProjectButton.jsx'
@@ -27,7 +27,7 @@ export class Component extends React.Component {
         <AnimateShow show={ sidebar.showMenubar } animation={ classes.animateOverlay } animationShow={ classes.animateOverlayShow }>
           <div className={ classes.overlay } onClick={ () => dispatch(toggleMenubarSidebar(false)) } />
         </AnimateShow>
-        <div className={ classNames(classes.sidebar, 'layout-column', { [classes.sidebarShow]: sidebar.showMenubar }) }>
+        <div className={ cn(classes.sidebar, 'layout-column', { [classes.sidebarShow]: sidebar.showMenubar }) }>
           <div className={ classes.sidebarSearch }>
             <Input
               model="sidebar.searchString"

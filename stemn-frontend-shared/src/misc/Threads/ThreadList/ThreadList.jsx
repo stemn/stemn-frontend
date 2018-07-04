@@ -11,7 +11,7 @@ import ThreadListItemWrapped from './ThreadListItem/ThreadListItemWrapped.jsx'
 import ThreadListItem        from './ThreadListItem/ThreadListItem.jsx'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './ThreadList.css'
 
 export class NewItem extends React.Component {
@@ -119,7 +119,7 @@ export class ThreadList extends React.Component {
     const { board, layout, className } = this.props
     const entityModel = `threads.boards.${board.data._id}`
 
-    const outerClasses = classNames(className, layout === 'board' ? 'layout-column flex' : 'flex')
+    const outerClasses = cn(className, layout === 'board' ? 'layout-column flex' : 'flex')
     const outerStyles = layout === 'board' ? { overflowX: 'scroll' } : { overflowY: 'scroll' }
     return (
       <div className={ outerClasses } style={ outerStyles }>

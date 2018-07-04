@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classes from './SubHeader.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 
 import { Container } from 'stemn-shared/misc/Layout'
 
@@ -28,8 +28,8 @@ export default class SubHeader extends Component {
 
     return (
       <div className={ classes.header } style={ Object.assign({}, borderStyle, style) }>
-        <Container className={ classNames(classes.headerInner, responsiveClasses) }>
-          <h1 className={ classNames(classes.title, 'layout-row layout-align-start-center') }>
+        <Container className={ cn(classes.headerInner, responsiveClasses) }>
+          <h1 className={ cn(classes.title, 'layout-row layout-align-start-center') }>
             { title }
           </h1>
           { title && <div className="flex" /> }

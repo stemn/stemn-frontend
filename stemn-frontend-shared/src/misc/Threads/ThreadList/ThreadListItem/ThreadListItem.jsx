@@ -11,7 +11,7 @@ import React from 'react'
 import { has } from 'lodash'
 
 // Styles
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './ThreadListItem.css'
 import loadingClasses from 'stemn-shared/misc/Loading/LoadingPlaceholders/LoadingPlaceholders.css'
 
@@ -77,7 +77,7 @@ export class ThreadListItem extends React.Component {
       if (layout === 'list') {
         return (
           <div className={ loadingClasses.loading }>
-            <div className={ classNames(classes.listItem, 'layout-row flex layout-align-start-center') }>
+            <div className={ cn(classes.listItem, 'layout-row flex layout-align-start-center') }>
               <Checkbox
                 className="text-primary"
                 circle
@@ -96,7 +96,7 @@ export class ThreadListItem extends React.Component {
       }
       
       return (
-        <div className={ classNames(classes.card, loadingClasses.loading, 'layout-column flex') }>
+        <div className={ cn(classes.card, loadingClasses.loading, 'layout-column flex') }>
           <div className={ `${classes.cardBody} layout-row` }>
             <Checkbox className="text-primary" circle />
             <div className={ `${classes.cardText} flex` }>Some placeholder hidden with blokk font</div>
@@ -108,8 +108,8 @@ export class ThreadListItem extends React.Component {
     }
     if (layout === 'list') {
       return (
-        <div className={ classNames({ [classes.isDragging]: thread.isDragging && draggable }) }>
-          <div className={ classNames(classes.listItem, 'layout-row flex layout-align-start-center') }>
+        <div className={ cn({ [classes.isDragging]: thread.isDragging && draggable }) }>
+          <div className={ cn(classes.listItem, 'layout-row flex layout-align-start-center') }>
             <Checkbox
               title={ thread.data.complete ? 'Mark as open' : 'Mark as closed' }
               model={ `${entityModel}.data.complete` }
@@ -149,7 +149,7 @@ export class ThreadListItem extends React.Component {
     }
     
     return (
-      <div className={ classNames(classes.card, 'layout-column flex') }>
+      <div className={ cn(classes.card, 'layout-column flex') }>
         <div className={ `${classes.cardBody} layout-row` }>
           <Checkbox
             title={ thread.data.complete ? 'Mark as open' : 'Mark as closed' }

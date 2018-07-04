@@ -1,7 +1,7 @@
 import React from 'react'
 import { get } from 'lodash'
 
-import classNames from 'classnames'
+import cn from 'classnames'
 import styles from './SidebarProjectButton.css'
 
 import { Link } from 'react-router'
@@ -37,7 +37,7 @@ export default (props) => {
     if (to) {
       return (
         <Link
-          className={ classNames(styles.sidebarButton) }
+          className={ cn(styles.sidebarButton) }
           activeClassName="active"
           key={ key }
           to={ to }
@@ -49,7 +49,7 @@ export default (props) => {
     } 
     return (
       <a
-        className={ classNames(styles.sidebarButton) }
+        className={ cn(styles.sidebarButton) }
         key={ key }
         onClick={ () => { if (clickFn) { clickFn() } } }
       >

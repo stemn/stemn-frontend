@@ -1,6 +1,6 @@
 import React from 'react'
 
-import classNames from 'classnames'
+import cn from 'classnames'
 
 export default class AnimateShow extends React.Component {
   state = {
@@ -22,7 +22,7 @@ export default class AnimateShow extends React.Component {
       }
     }
     return (
-      <div className={ classNames(this.props.animation, { [this.props.animationShow]: this.props.show }) }>
+      <div className={ cn(this.props.animation, { [this.props.animationShow]: this.props.show }) }>
         {getInner()}
       </div>
     )

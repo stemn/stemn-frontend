@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import { remote } from 'electron'
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './FileSelectInput.css'
 import MdFolder from 'react-icons/md/folder'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
@@ -35,7 +35,7 @@ class Component extends React.Component {
         onClick={ this.showModal }
       >
         { children }
-        <div className={ classNames(classes.text, { [classes.placeholder]: !value }, 'flex') }>{value || placeholder}</div>
+        <div className={ cn(classes.text, { [classes.placeholder]: !value }, 'flex') }>{value || placeholder}</div>
         <SimpleIconButton>
           <MdFolder size="22" />
         </SimpleIconButton>

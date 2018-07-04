@@ -11,7 +11,7 @@ import PropTypes from 'prop-types'
 import { orderBy, omit } from 'lodash'
 
 // Styles
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './FileListPopup.css'
 
 // Sub Components
@@ -36,7 +36,7 @@ export class FileRow extends React.Component {
   render() {
     const { file, isActive, clickFn } = this.props
     return (
-      <div className={ classNames(classes.file, { [classes.active]: isActive }, 'layout-row layout-align-start-center') } onClick={ () => clickFn({ file }) }>
+      <div className={ cn(classes.file, { [classes.active]: isActive }, 'layout-row layout-align-start-center') } onClick={ () => clickFn({ file }) }>
         <FileIcon fileType={ file.extension } type={ file.type } size={ 20 } />
         <div className="text-ellipsis">{file.name}</div>
       </div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './ProjectOverview.css'
 import { projectRoute, fileRoute, projectFolderRoute } from 'route-actions'
 import moment from 'moment'
@@ -47,8 +47,8 @@ export default class ProjectOverview extends Component {
       const projectRouteParams = { projectId: project.data._id }
 
       const infoBoxes = (
-        <Col className={ classNames(project.data.picture ? 'flex flex-gt-xs-33' : 'flex') }>
-          <div className={ classNames(project.data.picture ? 'layout-column' : 'layout-xs-column layout-gt-xs-row', classes.infoBoxes) }>
+        <Col className={ cn(project.data.picture ? 'flex flex-gt-xs-33' : 'flex') }>
+          <div className={ cn(project.data.picture ? 'layout-column' : 'layout-xs-column layout-gt-xs-row', classes.infoBoxes) }>
             <div className="flex layout-row layout-align-start-center" style={ { padding: '15px 20px' } }>
               <MdPeople />
               Team

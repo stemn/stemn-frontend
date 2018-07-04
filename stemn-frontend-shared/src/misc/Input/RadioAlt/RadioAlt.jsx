@@ -4,7 +4,7 @@ import MdDone from 'react-icons/md/done'
 
 // Styles
 import classes from './RadioAlt.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 
 /** *******************************************
 
@@ -20,7 +20,7 @@ export default class RadioAlt extends React.Component {
     } = this.props
     const statusClass = value === true ? 'checked' : ''
     return (
-      <div className={ classNames(classes.radio, className) }>
+      <div className={ cn(classes.radio, className) }>
         <label>
           <Input
             value={ value }

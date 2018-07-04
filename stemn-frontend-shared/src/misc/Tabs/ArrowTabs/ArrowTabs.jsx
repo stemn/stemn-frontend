@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { omit } from 'lodash'
 
 // Styles
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './ArrowTabs.css'
 import MdChrevronRight from 'react-icons/md/chevron-right'
 import Link from 'stemn-shared/misc/Router/Link'
@@ -29,7 +29,7 @@ export class ArrowTabs extends React.Component {
     return (
       <div
         { ...omit(this.props, Object.keys(arrowTabsPropTypes)) }
-        className={ classNames(classes.tabs, className) }
+        className={ cn(classes.tabs, className) }
       >
         {children}
       </div>
@@ -43,7 +43,7 @@ export class ArrowTab extends React.Component {
   renderLinkEl = () => {
     const { children, isActive, arrow, name, ...otherProps } = this.props
 
-    const linkClasses = classNames(classes.tab, { active: isActive })
+    const linkClasses = cn(classes.tab, { active: isActive })
 
     if (name) {
       return (

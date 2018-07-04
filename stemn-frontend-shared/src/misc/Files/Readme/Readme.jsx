@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
+import cn from 'classnames'
 import DisplayReadme from './DisplayReadme.jsx'
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'
 import Editor from 'stemn-shared/misc/Editor/EditorNew'
@@ -98,7 +98,7 @@ export default class Readme extends Component {
     
     
     const getAddReadmeTextPrompt = () => (
-      <div className={ classNames('layout-column layout-align-center-center', classes.readme) }>
+      <div className={ cn('layout-column layout-align-center-center', classes.readme) }>
         <div className="text-title-5">
           { isRoot
             ? <a className="text-primary" onClick={ this.toggleEdit }>Add a readme</a>

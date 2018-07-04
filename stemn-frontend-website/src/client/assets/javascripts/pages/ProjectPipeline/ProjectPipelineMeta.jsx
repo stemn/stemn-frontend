@@ -1,6 +1,6 @@
 import React from 'react'
 
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './ProjectPipeline.scss'
 
 import { get } from 'lodash'
@@ -24,7 +24,7 @@ export default ({ pipeline, project, rerunPipeline, cancelPipeline }) => {
   
   return (
     <Row className="sm layout-xs-column layout-gt-xs-row">
-      <Col className={ classNames('sm layout-row layout-align-start-center', classes.meta) }>
+      <Col className={ cn('sm layout-row layout-align-start-center', classes.meta) }>
         <Link
           name="userRoute"
           params={ userRouteParams }
@@ -42,7 +42,7 @@ export default ({ pipeline, project, rerunPipeline, cancelPipeline }) => {
         <div className="text-ellipsis">&nbsp;triggered this pipeline { moment(pipeline.data.start).fromNow() }.</div>
       </Col>
       <div className="flex" />
-      <Col className={ classNames('sm layout-row', classes.buttonRow) }>
+      <Col className={ cn('sm layout-row', classes.buttonRow) }>
         <Button
           name="fileRoute"
           params={ fileParams }

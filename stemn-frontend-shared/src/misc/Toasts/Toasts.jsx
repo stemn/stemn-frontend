@@ -4,7 +4,7 @@ import * as ToastsActions from './Toasts.actions.js'
 import React from 'react'
 import MdError from 'react-icons/md/error'
 import MdClose from 'react-icons/md/close'
-import classNames from 'classnames'
+import cn from 'classnames'
 
 const classes = GLOBAL_ENV.APP_TYPE === 'web'
   ? require('./Toasts.web.css')
@@ -67,7 +67,7 @@ class Toast extends React.Component {
     }
 
     return (
-      <div className={ classNames(classes.toast, 'layout-row', { [classes.error]: toast.type === 'error' }) } onMouseEnter={ this.mouseEnter } onMouseLeave={ this.mouseLeave }>
+      <div className={ cn(classes.toast, 'layout-row', { [classes.error]: toast.type === 'error' }) } onMouseEnter={ this.mouseEnter } onMouseLeave={ this.mouseLeave }>
         <div className={ `${classes.toastInner} flex layout-row layout-align-start-center` }>
           {getIcon()}
           {toast.title}

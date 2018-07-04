@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './Upload.css'
 import Dropzone from 'react-dropzone'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
@@ -49,7 +49,7 @@ export default class Upload extends Component {
   }
 
   renderOverlay = () => (
-    <div className={ classNames('layout-column layout-align-center-center', classes.overlay) }>
+    <div className={ cn('layout-column layout-align-center-center', classes.overlay) }>
       <MdFileUpload size={ 30 } />
     </div>
   )
@@ -63,8 +63,8 @@ export default class Upload extends Component {
       value,
     } = this.props
 
-    const containerClasses = classNames(classes.container, containerClassName)
-    const imageClasses = classNames(classes.image, imageClassName)
+    const containerClasses = cn(classes.container, containerClassName)
+    const imageClasses = cn(classes.image, imageClassName)
 
     return (
       <div style={ style } className={ containerClassName }>

@@ -1,5 +1,5 @@
 import React from 'react'
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from '../Login/Login.css'
 import { Link } from 'react-router'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
@@ -22,8 +22,8 @@ export default class PasswordLost extends React.Component {
     
     return (
       <div className="flex rel-box">
-        <div className={ classNames(classes.background, 'layout-column layout-align-center-center') }>
-          <div className={ classNames(classes.panel, 'layout-column', 'layout-align-space-between') } style={ { height: '250px' } }>
+        <div className={ cn(classes.background, 'layout-column layout-align-center-center') }>
+          <div className={ cn(classes.panel, 'layout-column', 'layout-align-space-between') } style={ { height: '250px' } }>
             <div className="text-title-3">Get password reset link</div>
             <form onSubmit={ this.submit }>
               <br />
