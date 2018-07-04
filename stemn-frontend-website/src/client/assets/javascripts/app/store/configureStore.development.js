@@ -12,6 +12,7 @@ import toastsError from 'stemn-shared/misc/Toasts/ToastsError.middleware'
 import auth from 'stemn-shared/misc/Auth/Auth.middleware'
 import websocket from 'stemn-shared/misc/Websocket/websocket.middleware.js'
 import rootReducer from '../reducer'
+import { identity } from 'lodash'
 
 const middlewares = [
   thunk,
@@ -35,7 +36,7 @@ const getDebugSessionKey = function () {
 
 const enhancer = compose(
   applyMiddleware(...middlewares),
-  window.devToolsExtension ? window.devToolsExtension() : undefined,
+  window.devToolsExtension ? window.devToolsExtension() : identity,
   // Optional. Lets you write ?debug_session=<key> in address bar to persist debug sessions
   persistState(getDebugSessionKey()),
 )
