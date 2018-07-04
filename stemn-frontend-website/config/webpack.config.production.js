@@ -13,10 +13,10 @@ const GLOBALS = {
   'process.env': {
     NODE_ENV: JSON.stringify('production'),
   },
-  GLOBAL_ENV: {
+  GLOBAL_ENV: Object.assign({
     APP_TYPE: JSON.stringify('web'),
     NODE_ENV: JSON.stringify('production'),
-    ...getStemnEnv(process.env.STEMN_ENV),
+  }, getStemnEnv(process.env.STEMN_ENV)),
   },
 }
 
