@@ -14,8 +14,8 @@
     "serve:wait": "npm run serve & wait-on http://localhost:3000",
     "deploy": "sh ./scripts/deploy.sh",
     "deploy:ci": "sh ./scripts/deploy-ci.sh",
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run --record"
+    "cypress:open": "npx cypress open",
+    "cypress:run": "npx cypress run --record"
   },
   "devDependencies": {
     "babel-cli": "6.14.0",

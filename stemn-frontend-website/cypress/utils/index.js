@@ -1,2 +1,2 @@
-export const inputByPh = ph => `input[placeholder='${ph}']`
-export const textareaByPh = ph => `textarea[placeholder='${ph}']`
+export const elByPh = (el, placeholder) => `${el}[placeholder='${placeholder}']`
+export const elByTitle = (el, title) => `${el}[title='${title}']`
