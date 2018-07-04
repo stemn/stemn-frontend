@@ -1,0 +1,11 @@
+{
+  "env": {
+    "node": true,
+    "mocha": true,
+    "cypress/globals": true
+  },
+  "plugins": ["cypress"],
+  "rules": {
+    "no-unused-expressions": 0
+  }
+}
