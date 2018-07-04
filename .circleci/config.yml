@@ -68,7 +68,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/stemn-frontend
-      - run: cd stemn-frontend-website; npm run build;
+      - run: cd stemn-frontend-website; sudo npm run link:shared; npm run build;
       - persist_to_workspace:
           root: ~/stemn-frontend
           paths: 
@@ -80,7 +80,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/stemn-frontend
-      - run: cd stemn-frontend-desktop; npm run build;
+      - run: cd stemn-frontend-desktop; sudo npm run link:shared; npm run build;
       - persist_to_workspace:
           root: ~/stemn-frontend
           paths: 
@@ -105,7 +105,7 @@ jobs:
       - attach_workspace:
           at: ~/stemn-frontend
       - run: npm i wait-on -g;
-      - run: cd stemn-frontend-website; npm run build:serve & wait-on http://localhost:44300; yarn cypress:run;
+      - run: cd stemn-frontend-website; npm run build:serve:wait; yarn cypress:run;
 
   deploy_website:
     <<: *defaults

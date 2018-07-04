@@ -18,6 +18,7 @@
     "analyse:graph": "webpack-bundle-analyzer ./reports/stats.json",
     "postbuild": "npm run build:html",
     "build:serve": "http-server build/client -p 3000 --cors -o -c10",
+    "build:serve:wait": "npm run build:serve && wait-on http://localhost:3000",
     "deploy": "sh ./scripts/deploy.sh",
     "deploy:ci": "sh ./scripts/deploy-ci.sh",
     "cypress:open": "cypress open",
@@ -146,6 +147,7 @@
     "stats-webpack-plugin": "0.6.0",
     "substyle": "2.0.2",
     "uglifyjs-webpack-plugin": "1.2.5",
+    "wait-on": "2.1.0",
     "ws": "2.3.1"
   },
   "standard": {
