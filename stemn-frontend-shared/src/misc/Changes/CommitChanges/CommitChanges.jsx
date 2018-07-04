@@ -21,7 +21,7 @@ const contextIdentifier = 'FileChangeCm'
 export default class CommitChanges extends React.Component {
   render() {
     const { changes, project, toggleAll, refresh, selectedFileChange, deselect, loading, dispatch, initialSync } = this.props
-    const isInitialSync = initialSync && changes.data.length == 0
+    const isInitialSync = initialSync && changes.data.length === 0
     
     // Group changes by fileId
     const groupedChanges = groupRevisions(changes.data)
@@ -68,7 +68,7 @@ export default class CommitChanges extends React.Component {
                       item={ item }
                       text={ item.data.path }
                       clickFn={ () => selectedFileChange({ projectId: project._id, selected: item }) }
-                      isActive={ changes.selected ? item._id == changes.selected._id : false }
+                      isActive={ changes.selected ? item._id === changes.selected._id : false }
                       model={ `changes.${project._id}.checked.${item.data.fileId}` }
                       value={ get(changes, ['checked', item.data.fileId], false) }
                       status={ item.data.state }

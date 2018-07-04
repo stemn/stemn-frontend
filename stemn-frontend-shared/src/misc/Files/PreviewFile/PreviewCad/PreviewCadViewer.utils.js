@@ -28,7 +28,7 @@ function register(viewerEl, linkKey) {
   let lastState = {}
   const onMove = (event) => {
     // Get the instances linked to this one (not including this one)
-    const linkedInstances = library.activeInstances.filter(item => item.linkKey == linkKey && item.id != id)
+    const linkedInstances = library.activeInstances.filter(item => item.linkKey === linkKey && item.id !== id)
     // If we have 1 or more linked instance
     if (linkedInstances.length >= 1 && instance.viewerState) {
       // Get the new state
@@ -48,7 +48,7 @@ function register(viewerEl, linkKey) {
 
   const deregister = () => {
     // Remove ithe instance from the activeInstances array
-    const instanceIndex = library.activeInstances.findIndex(item => item.id == instance.id)
+    const instanceIndex = library.activeInstances.findIndex(item => item.id === instance.id)
     library.activeInstances.splice(instanceIndex, 1)
     // Remove the event listeners
     instance.removeEventListener(window.Autodesk.Viewing.CAMERA_CHANGE_EVENT, onMove)

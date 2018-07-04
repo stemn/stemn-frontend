@@ -56,7 +56,7 @@ export function newComment({ comment, timelineCacheKey }) {
 export const toggleReaction = ({ commentId, reactionType }) => confirmAuth((dispatch, getState) => {
   const reactions = getState().comments.data[commentId].data.reactions
   const userId = getState().auth.user._id
-  const reactionExists = reactions.find(reaction => reaction.owner._id == userId && reaction.type == reactionType)
+  const reactionExists = reactions.find(reaction => reaction.owner._id === userId && reaction.type === reactionType)
 
   if (reactionExists) {
     dispatch(deleteReaction({ commentId, reactionType }))

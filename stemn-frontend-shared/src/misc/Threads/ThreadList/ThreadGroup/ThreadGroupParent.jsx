@@ -12,7 +12,7 @@ export default class ThreadGroupParent extends React.Component {
         enterAnimation="none"
         leaveAnimation="none"
         duration={ 200 }
-        className={ layout == 'list' ? 'layout-column flex' : 'layout-row flex' }
+        className={ layout === 'list' ? 'layout-column flex' : 'layout-row flex' }
       >
         {children}
       </FlipMove>

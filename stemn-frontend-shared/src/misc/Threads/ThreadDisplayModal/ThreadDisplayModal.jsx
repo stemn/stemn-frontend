@@ -105,7 +105,7 @@ export default class ThreadDisplayModal extends React.Component {
                 type="thread"
               />
             }
-            { timeline && timeline.length == 0 &&
+            { timeline && timeline.length === 0 &&
               <ThreadTimelineEmpty className="flex" />
             }
           </div>

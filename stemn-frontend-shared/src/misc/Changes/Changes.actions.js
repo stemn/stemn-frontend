@@ -130,7 +130,7 @@ export function commit({ projectId, name, body }) {
         const mentions = parseMentions(response.data.body)
         // If mentionType: thread-complete, we set the thread to complete.
         mentions.forEach((mention) => {
-          if (mention.mentionType == 'thread-complete') {
+          if (mention.mentionType === 'thread-complete') {
             dispatch(storeChange(`threads.data.${mention.entityId}.data.complete`, true))
           }
         })

@@ -8,7 +8,7 @@ export default class AnimateShow extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.show == false) {
+    if (nextProps.show === false) {
       setTimeout(() => this.setState({ showContent: false }), 300)
     } else {
       this.setState({ showContent: true })

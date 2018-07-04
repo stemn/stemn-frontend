@@ -97,7 +97,7 @@ export const removeExistingMentions = (newMentions, existingMentions) => {
   // Create an array of existing mention entity Ids
   const existingMentionEntityIds = existingMentions.map(mention => mention.entityId)
   // Make sure new mentions do not already exist
-  return newMentions && newMentions.length > 0 ? newMentions.filter(mention => existingMentionEntityIds.indexOf(mention.entityId) == -1) : newMentions
+  return newMentions && newMentions.length > 0 ? newMentions.filter(mention => existingMentionEntityIds.indexOf(mention.entityId) === -1) : newMentions
 }
 
 export const addMentionsToText = (text, mentions) => {

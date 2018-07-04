@@ -23,7 +23,7 @@ export default class SidebarTimelineRow extends React.Component {
     const { item } = this.props
     const { isOpen } = this.state
     const timeFromNow = moment(item.timestamp).fromNow()
-    if (item.event == 'commit') {
+    if (item.event === 'commit') {
       const groupedRevisions = groupRevisions(item.data.items)
 
       const routeParams = {

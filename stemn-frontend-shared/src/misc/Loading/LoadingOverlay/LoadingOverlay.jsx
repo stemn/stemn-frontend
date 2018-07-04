@@ -13,7 +13,7 @@ const propTypesObject = {
   style: PropTypes.object,               // Styles object
   linear: PropTypes.bool,                 // Change the spinner to a linear bar
   hideBg: PropTypes.bool,                 // Make the bg transparent
-  noOverlay: PropTypes.bool,                 // Makes the overlay just at the top (for use with the linear == true)
+  noOverlay: PropTypes.bool,                 // Makes the overlay just at the top (for use with the linear === true)
   background: PropTypes.string,               // Custom background colour
   progress: PropTypes.number,               // Progress percentage - makes the spinner determinate
 }

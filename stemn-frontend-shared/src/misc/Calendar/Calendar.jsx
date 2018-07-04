@@ -33,20 +33,20 @@ export default class Calendar extends Component {
     const calendarObject = createDateObjects(viewDate, weekOffset)
 
     calendarObject.forEach((item) => {
-      if (selectedDate && item.day.format('YYYY-MM-DD') == selectedDate.format('YYYY-MM-DD')) {
+      if (selectedDate && item.day.format('YYYY-MM-DD') === selectedDate.format('YYYY-MM-DD')) {
         item.classNames = item.classNames ? `${item.classNames} selected` : 'selected'
       }
-      if (item.day.format('YYYY-MM-DD') == moment().format('YYYY-MM-DD')) {
+      if (item.day.format('YYYY-MM-DD') === moment().format('YYYY-MM-DD')) {
         item.classNames = item.classNames ? `${item.classNames} current` : 'current'
       }
     })
 
 
     return (
-      <div className={ classNames(className, classes.calendar, { [classes.calendarDatepicker]: type == 'datepicker' }) }>
+      <div className={ classNames(className, classes.calendar, { [classes.calendarDatepicker]: type === 'datepicker' }) }>
 
         {
-          type == 'datepicker'
+          type === 'datepicker'
             ?
               <div className={ classes.calendarHeader }>
               <button onClick={ onPrevMonth }>&laquo;</button>

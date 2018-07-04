@@ -35,7 +35,7 @@ export class Component extends React.Component {
   };
 
   secretSearch = () => {
-    if (this.props.sidebar.searchString.length == 24) {
+    if (this.props.sidebar.searchString.length === 24) {
       this.props.dispatch(push(`/project/${this.props.sidebar.searchString}`))
     }
   };
@@ -91,7 +91,7 @@ export class Component extends React.Component {
               />
             </div>
             <div className="scroll-box flex">
-              { projects && projects.data && projects.data.length == 0
+              { projects && projects.data && projects.data.length === 0
                 ? <SidebarProjectButton
                   item={ { name: 'Create a project' } }
                   clickFn={ this.showProjectNewModal }

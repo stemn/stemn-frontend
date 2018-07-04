@@ -34,7 +34,7 @@ class Toast extends React.Component {
     if (!this.hideTimeout) { this.startHideTimeout() }
 
     const getIcon = () => {
-      if (toast.type == 'error') {
+      if (toast.type === 'error') {
         return <MdError size={ 20 } className={ classes.icon } />
       } 
       return null
@@ -67,7 +67,7 @@ class Toast extends React.Component {
     }
 
     return (
-      <div className={ classNames(classes.toast, 'layout-row', { [classes.error]: toast.type == 'error' }) } onMouseEnter={ this.mouseEnter } onMouseLeave={ this.mouseLeave }>
+      <div className={ classNames(classes.toast, 'layout-row', { [classes.error]: toast.type === 'error' }) } onMouseEnter={ this.mouseEnter } onMouseLeave={ this.mouseLeave }>
         <div className={ `${classes.toastInner} flex layout-row layout-align-start-center` }>
           {getIcon()}
           {toast.title}

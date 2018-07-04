@@ -54,7 +54,7 @@ const PopupContent = (item) => {
 class Dot extends React.Component {
   render() {
     const { isSelected, selected, onSelect, item, preferPlace } = this.props
-    const dotClasses = classNames(classes.dot, { [classes.active]: isSelected ? isSelected(item) : selected == item._id })
+    const dotClasses = classNames(classes.dot, { [classes.active]: isSelected ? isSelected(item) : selected === item._id })
     return (
     // If the isSelected function is provided, we use this to determine if the item is active
       <a className={ dotClasses } onClick={ () => onSelect(item) }>
@@ -73,7 +73,7 @@ class Component extends React.Component {
     const translation = `translateX(${page * 100}%)`
     
     const Items = items.map((item, index) => {
-      if (item.event == 'commit') {
+      if (item.event === 'commit') {
         // Order the items by the timestamp
         const subItemsOrdered = orderByTime(item.data.items).reverse()
 
@@ -110,7 +110,7 @@ class Component extends React.Component {
     })
   
     
-    const containerClasses = classNames('layout-row layout-align-end-center', classes.dots, { [classes.small]: size == 'sm' })
+    const containerClasses = classNames('layout-row layout-align-end-center', classes.dots, { [classes.small]: size === 'sm' })
     return (
       <div ref={ refInner } className={ containerClasses } style={ { transform: translation } }>
         { Items }

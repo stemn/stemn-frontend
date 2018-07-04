@@ -9,7 +9,7 @@ class Component extends React.Component {
       modalConfirm,
     } = this.props
     const { provider } = this.props
-    const providerText = provider == 'drive' ? 'Google Drive' : 'Dropbox'
+    const providerText = provider === 'drive' ? 'Google Drive' : 'Dropbox'
     return (
       <div style={ { width: '600px' } }>
         <div className="modal-title">
@@ -27,7 +27,7 @@ class Component extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {provider == 'drive'
+              {provider === 'drive'
                 ? <tr>
                   <td>Google Drive</td>
                   <td>30 days</td>

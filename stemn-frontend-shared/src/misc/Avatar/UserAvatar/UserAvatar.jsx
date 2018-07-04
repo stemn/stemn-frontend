@@ -12,7 +12,7 @@ export default class UserAvatar extends React.Component {
     // display: 'contain' (Default: 'cover')
     const { style, shape, size, className, picture, title, name, display } = this.props
     const styles = {
-      borderRadius: shape == 'square' ? '3px' : '50%',
+      borderRadius: shape === 'square' ? '3px' : '50%',
       width: `${size}px` || '30px',
       height: `${size}px` || '30px',
       minHeight: `${size}px` || '30px',

@@ -14,7 +14,7 @@ export default class GeneralSettings extends Component {
     saveProject: PropTypes.func.isRequired,
   }
   select = (selection) => {
-    if (!this.props.project.data.team.find(item => item._id == selection._id)) {
+    if (!this.props.project.data.team.find(item => item._id === selection._id)) {
       this.props.addTeamMember({
         projectId: this.props.project.data._id,
         user: selection,

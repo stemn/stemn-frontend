@@ -10,7 +10,7 @@ export default class SelectList extends React.Component {
     return (
       <div className={ styles.selectList }>
         {this.props.children.map(child =>
-          <div className={ classNames(styles.selectItem, 'layout-row layout-align-start-center', { [styles.selectItemActive]: child.props.value == this.props.value }) }>
+          <div className={ classNames(styles.selectItem, 'layout-row layout-align-start-center', { [styles.selectItemActive]: child.props.value === this.props.value }) }>
             <div className="flex">{child}</div>
             <div className={ styles.selectIcon }><MdDone size="16" /></div>
           </div>,

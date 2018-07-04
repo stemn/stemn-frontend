@@ -84,7 +84,7 @@ export default class ThreadsDisplay extends Component {
       )
     }
     const threadsTemplate = () => {
-      const layout = board && board.layout == 'list' ? 'list' : 'board'
+      const layout = board && board.layout === 'list' ? 'list' : 'board'
       return (
         <div className="layout-column flex">
           <div className={ `${classes.header} layout-row layout-align-start-center` }>
@@ -130,7 +130,7 @@ export default class ThreadsDisplay extends Component {
 
     const getTemplate = () => {
       const numThreads = has(board, 'data.groups') ? getAllThreads(board.data.groups).length : ''
-      if (numThreads == 0 && !hideGuide) {
+      if (numThreads === 0 && !hideGuide) {
         return guideTemplate()
       } else if (has(board, 'data.groups')) {
         return threadsTemplate()

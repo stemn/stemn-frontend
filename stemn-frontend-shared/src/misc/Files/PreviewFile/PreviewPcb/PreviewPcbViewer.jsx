@@ -13,7 +13,7 @@ export default class PreviewPcbViewer extends Component {
   componentDidMount() { this.onMount(this.props) }
   componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
   onMount = (nextProps, prevProps) => {
-    if (!prevProps || (nextProps.layers != prevProps.layers)) {
+    if (!prevProps || (nextProps.layers !== prevProps.layers)) {
       setTimeout(this.init(nextProps), 1) // Timeout so refs can init
     }
   }

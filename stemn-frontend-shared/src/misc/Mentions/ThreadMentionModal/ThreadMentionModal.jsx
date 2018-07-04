@@ -67,10 +67,10 @@ export default class ThreadMentionModal extends Component {
       const numThreads = getAllThreads(board.data.groups).length
       const numFilteredThreads = getAllThreads(filteredBoard.data.groups).length
 
-      if (numThreads == 0 || numFilteredThreads == 0) {
+      if (numThreads === 0 || numFilteredThreads === 0) {
         return (
           <div className="flex layout-column layout-align-center-center text-center">
-            {numThreads == 0
+            {numThreads === 0
               ? <div style={ { width: '100%' } }>This project has no threads. Add some.</div>
               : <div style={ { width: '100%' } }>No results, <a className="text-primary" onClick={ () => this.props.storeChange(`${boardModel}.searchString`, '') }>clear search filter.</a></div>
             }

@@ -29,10 +29,10 @@ export default class SidebarTimeline extends React.Component {
   };
 
   queryByString = (item, queryString) => {
-    if     (queryString == 'event:revision') {
-      return item.event == 'revision'
-    } else if (queryString == 'event:commit') {
-      return item.event == 'commit'
+    if     (queryString === 'event:revision') {
+      return item.event === 'revision'
+    } else if (queryString === 'event:commit') {
+      return item.event === 'commit'
     }
     // Filter by the string itself (case independent)
     else if (queryString && queryString.length > 0) {

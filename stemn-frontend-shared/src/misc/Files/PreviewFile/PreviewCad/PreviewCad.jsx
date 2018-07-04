@@ -12,7 +12,7 @@ export default class PreviewCad extends React.Component {
   };
 
   onMount = (nextProps, prevProps) => {
-    if (!prevProps || nextProps.fileMeta != prevProps.fileMeta) {
+    if (!prevProps || nextProps.fileMeta !== prevProps.fileMeta) {
       const {
         renderFn,
       } = nextProps
@@ -32,7 +32,7 @@ export default class PreviewCad extends React.Component {
     const { fileMeta, fileRender } = this.props
     const { status } = this.state
             
-    if (status == 'disabled') {
+    if (status === 'disabled') {
       return (
         <div className="layout-column layout-align-center-center flex text-center">
           <img style={ { width: '100px' } } src={ modelLocked } />

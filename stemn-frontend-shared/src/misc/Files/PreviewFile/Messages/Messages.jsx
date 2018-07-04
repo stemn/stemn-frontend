@@ -7,14 +7,14 @@ export default class Messages extends React.Component {
   render() {
     const { error, fileMeta } = this.props
 
-    if (error.type == 'REVISION_NOT_FOUND') {
+    if (error.type === 'REVISION_NOT_FOUND') {
       return <PreviewExpired provider={ fileMeta.provider } />
-    } else if (error.type == 'ASSEMBLY_PART_NOT_FOUND') {
+    } else if (error.type === 'ASSEMBLY_PART_NOT_FOUND') {
       return <AssemblyPartNotFound parts={ error.data.parts } />
     }
     // This 404 is a special case
     // This is produced in the fileCache - it is a wierd structure because it is stream related
-    else if (error.statusCode == 404) {
+    else if (error.statusCode === 404) {
       return <File404 />
     }
     

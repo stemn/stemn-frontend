@@ -43,7 +43,7 @@ export default class PreviewImage extends React.Component {
 
   zoom = (direction) => {
     let newValue = 0
-    if (direction == 'in') {
+    if (direction === 'in') {
       newValue = Math.round((this.state.scale * 1.1) * 100) / 100
     } else {
       newValue = Math.round((this.state.scale * 0.9) * 100) / 100

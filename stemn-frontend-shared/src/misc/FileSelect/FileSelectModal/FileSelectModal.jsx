@@ -35,7 +35,7 @@ export default class FileSelectModal extends React.Component {
   };
 
   singleClickFn = ({ file }) => {
-    if (file.type == 'file' || this.props.options.allowFolder && file.type == 'folder') {
+    if (file.type === 'file' || this.props.options.allowFolder && file.type === 'folder') {
       this.props.select({
         storeKey: this.props.storeKey,
         file,
@@ -49,7 +49,7 @@ export default class FileSelectModal extends React.Component {
   };
 
   doubleClickFn = ({ file }) => {
-    if (file.type == 'folder') {
+    if (file.type === 'folder') {
       this.props.changePath({
         storeKey: this.props.storeKey,
         path: file.fileId,
@@ -89,9 +89,9 @@ export default class FileSelectModal extends React.Component {
     } = this.props
 
     const validatePath = (path, provider) => {
-      if (provider == 'drive') {
+      if (provider === 'drive') {
         return isDriveFileId(path) ? path : ''
-      } else if (provider == 'dropbox') {
+      } else if (provider === 'dropbox') {
         return isDropboxFileId(path) ? path : ''
       }
       

@@ -60,9 +60,9 @@ class FileSelectInput extends React.Component {
     } = this.props
 
     const validatePath = (path, fileId, provider) => {
-      if (provider == 'drive') {
+      if (provider === 'drive') {
         return isDriveFileId(fileId) ? path : ''
-      } else if (provider == 'dropbox') {
+      } else if (provider === 'dropbox') {
         return isDropboxFileId(fileId) ? path : ''
       }
       

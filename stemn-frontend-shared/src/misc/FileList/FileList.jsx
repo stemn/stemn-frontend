@@ -91,7 +91,7 @@ export default class FileList extends Component {
           file={ file }
           singleClick={ singleClickFn }
           doubleClick={ doubleClickFn }
-          isActive={ selected && selected.fileId == file.fileId }
+          isActive={ selected && selected.fileId === file.fileId }
           link={ link }
         />
       ))
@@ -119,7 +119,7 @@ export default class FileList extends Component {
           file={ file }
           singleClick={ singleClickFn }
           doubleClick={ doubleClickFn }
-          isActive={ selected && selected.fileId == file.fileId }
+          isActive={ selected && selected.fileId === file.fileId }
           showPath
         />
       ))

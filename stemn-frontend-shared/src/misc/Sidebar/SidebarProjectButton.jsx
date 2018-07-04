@@ -15,13 +15,13 @@ export default (props) => {
   const { item, key, to, clickFn, icon } = props
 
   const getIcon = (provider) => {
-    if (provider == 'dropbox') {
+    if (provider === 'dropbox') {
       return <Dropbox size={ 14 } />
-    } else if (provider == 'drive') {
+    } else if (provider === 'drive') {
       return <Drive size={ 14 } />
     }
     
-    return <img src={ icon == 'tutorial' ? tutorial : book } style={ iconStyle } />
+    return <img src={ icon === 'tutorial' ? tutorial : book } style={ iconStyle } />
   }
 
   const inner = (
@@ -60,4 +60,4 @@ export default (props) => {
   return null
 }
 
-// <img src={props.icon == 'tutorial' ? tutorial : book} style={iconStyle}/>
+// <img src={props.icon === 'tutorial' ? tutorial : book} style={iconStyle}/>

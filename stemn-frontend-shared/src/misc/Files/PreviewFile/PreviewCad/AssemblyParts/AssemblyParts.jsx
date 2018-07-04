@@ -35,7 +35,7 @@ export class AssemblyParts extends React.Component {
   static propTypes = propTypesObject;
 
   onMount = (nextProps, prevProps) => {
-    if (!prevProps || nextProps.fileMeta != prevProps.fileMeta && nextProps.fileMeta.data) {
+    if (!prevProps || nextProps.fileMeta !== prevProps.fileMeta && nextProps.fileMeta.data) {
       if (isAssembly(nextProps.fileMeta.data.extension)) {
         nextProps.dispatch(getAssemblyParts({
           fileId: nextProps.fileMeta.data.fileId,

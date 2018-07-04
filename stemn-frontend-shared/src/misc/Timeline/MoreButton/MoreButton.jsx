@@ -13,7 +13,7 @@ export default class MoreButtons extends React.Component {
       <a
         title={ this.props.title }
         onClick={ this.props.onClick }
-        className={ classNames(classes.moreButton, { [classes.moreButtonRight]: this.props.side == 'right' }, { [classes.moreButtonLeft]: this.props.side == 'left' }) }
+        className={ classNames(classes.moreButton, { [classes.moreButtonRight]: this.props.side === 'right' }, { [classes.moreButtonLeft]: this.props.side === 'left' }) }
       >
         <MdChevronRight size="15" />
       </a>

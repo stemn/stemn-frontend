@@ -12,7 +12,7 @@ export default class ThreadLabelDots extends React.Component {
       <span className={ classNames({ [classes.tagsOneline]: oneline }) }>
         { labels && labelInfo
           ? labels.map((labelId) => {
-            const info = labelInfo.find(label => label._id == labelId)
+            const info = labelInfo.find(label => label._id === labelId)
             if (info) {
               const tagStyle = {
                 color: info.color,

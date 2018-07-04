@@ -19,7 +19,7 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button'
 export class Component extends React.Component {
   // Mounting
   onMount = (nextProps, prevProps) => {
-    if (!prevProps || prevProps.threadId != nextProps.threadId) {
+    if (!prevProps || prevProps.threadId !== nextProps.threadId) {
       if (!nextProps.thread || !nextProps.thread.data) {
         nextProps.dispatch(ThreadsActions.getThread({
           threadId: nextProps.threadId,

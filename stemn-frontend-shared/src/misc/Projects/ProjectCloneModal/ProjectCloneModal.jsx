@@ -99,7 +99,7 @@ export default class ProjectCloneModal extends Component {
     )
 
     const getTab = () => {
-      if (activeTab == 1) {
+      if (activeTab === 1) {
         return tabTemplate({
           title: 'Clone Project',
           blurb: 'This will copy all the files associated with this project into your dropbox or google drive. A clone project will also appear on your profile.',

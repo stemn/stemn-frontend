@@ -119,8 +119,8 @@ export class ThreadList extends React.Component {
     const { board, layout, className } = this.props
     const entityModel = `threads.boards.${board.data._id}`
 
-    const outerClasses = classNames(className, layout == 'board' ? 'layout-column flex' : 'flex')
-    const outerStyles = layout == 'board' ? { overflowX: 'scroll' } : { overflowY: 'scroll' }
+    const outerClasses = classNames(className, layout === 'board' ? 'layout-column flex' : 'flex')
+    const outerStyles = layout === 'board' ? { overflowX: 'scroll' } : { overflowY: 'scroll' }
     return (
       <div className={ outerClasses } style={ outerStyles }>
         <ThreadGroupParent layout={ layout }>
@@ -163,12 +163,12 @@ export class ThreadList extends React.Component {
                     </ThreadListItemWrapped>,
                   ) : ''}
                   <NewItem
-                    style={ layout == 'list' ? { marginLeft: '60px', zIndex: '1', position: 'relative' } : { zIndex: '1', position: 'relative' } }
+                    style={ layout === 'list' ? { marginLeft: '60px', zIndex: '1', position: 'relative' } : { zIndex: '1', position: 'relative' } }
                     model={ `${entityModel}.newThreadString.${group._id}` }
                     value={ board.newThreadString ? board.newThreadString[group._id] : '' }
                     placeholder="New Thread"
                     submitFn={ event => this.newThread(event, group._id) }
-                    box={ layout == 'board' }
+                    box={ layout === 'board' }
                   />
                 </ThreadListItemParent>
               </ThreadGroup>
@@ -182,7 +182,7 @@ export class ThreadList extends React.Component {
                 value={ board.newGroupString }
                 placeholder="New Group"
                 submitFn={ this.newGroup }
-                box={ layout == 'board' }
+                box={ layout === 'board' }
               />
             </ThreadGroup>
           </div>

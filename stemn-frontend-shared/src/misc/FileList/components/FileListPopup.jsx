@@ -82,8 +82,8 @@ export class FileListPopup extends React.Component {
     } = this.props
     const isLoading    = !files || files.loading
     const filesOrdered = files && files.entries ? orderBy(files.entries, 'name') : []
-    const filesOnly    = filesOrdered.filter(file => file.type == 'file')
-    const foldersOnly  = filesOrdered.filter(file => file.type == 'folder')
+    const filesOnly    = filesOrdered.filter(file => file.type === 'file')
+    const foldersOnly  = filesOrdered.filter(file => file.type === 'folder')
 
     return (
       <div { ...omit(this.props, Object.keys(propTypesObject)) } className={ classes.popup }>
@@ -92,7 +92,7 @@ export class FileListPopup extends React.Component {
           <FileRow
             key={ file._id }
             file={ file }
-            isActive={ file.fileId == activeFolder.fileId }
+            isActive={ file.fileId === activeFolder.fileId }
             clickFn={ clickFn }
           />
         ))
@@ -102,7 +102,7 @@ export class FileListPopup extends React.Component {
           <FileRow
             key={ file._id }
             file={ file }
-            isActive={ file.fileId == activeFolder.fileId }
+            isActive={ file.fileId === activeFolder.fileId }
             clickFn={ clickFn }
           />
         ))

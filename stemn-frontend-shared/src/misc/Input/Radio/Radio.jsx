@@ -14,7 +14,7 @@ export default class Radio extends React.Component {
           <Input
             value={ value }
             type="radio"
-            className={ classNames({ [classes.checked]: modelValue == value }) }
+            className={ classNames({ [classes.checked]: modelValue === value }) }
             model={ model }
           />
           <span className="layout-column layout-align-center-center" />

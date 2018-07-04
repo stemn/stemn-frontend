@@ -34,11 +34,11 @@ export class Walkthrough extends React.Component {
 
     const getNext = (stepName, steps) => {
       const currentIndex = steps.indexOf(stepName)
-      return currentIndex != -1 && currentIndex + 1 < steps.length ? steps[currentIndex + 1] : undefined
+      return currentIndex !== -1 && currentIndex + 1 < steps.length ? steps[currentIndex + 1] : undefined
     }
     const getPrev = (stepName, steps) => {
       const currentIndex = steps.indexOf(stepName)
-      return currentIndex != -1 && currentIndex - 1 >= 0 ? steps[currentIndex - 1] : undefined
+      return currentIndex !== -1 && currentIndex - 1 >= 0 ? steps[currentIndex - 1] : undefined
     }
 
     const nextStep = getNext(name, data.steps)

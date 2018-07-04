@@ -9,7 +9,7 @@ import LoadingPlaceholder from 'stemn-shared/misc/Loading/LoadingPlaceholder'
 import LoadingAnimation from 'stemn-shared/misc/Loading/LoadingAnimation'
 import pluralise from 'stemn-shared/utils/strings/pluralise'
 
-const getGroupInfo = (groupId, groups) => groups.find(group => group._id == groupId)
+const getGroupInfo = (groupId, groups) => groups.find(group => group._id === groupId)
 
 export default class ThreadRow extends Component {
   render() {

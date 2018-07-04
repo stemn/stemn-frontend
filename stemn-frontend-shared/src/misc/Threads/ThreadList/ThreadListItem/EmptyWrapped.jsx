@@ -23,7 +23,7 @@ export default class EmptyWrapped extends Component {
   render() {
     const { item, connectDropTarget, groupId, style, layout } = this.props
     return connectDropTarget(
-      <div className={ layout == 'board' ? classes.wrapperBoard : classes.wrapperList } />,
+      <div className={ layout === 'board' ? classes.wrapperBoard : classes.wrapperList } />,
     )
   }
 }

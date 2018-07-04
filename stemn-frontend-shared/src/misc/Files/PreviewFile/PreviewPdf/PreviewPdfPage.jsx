@@ -15,10 +15,10 @@ class Page extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const prevProps = this.props
-    if (prevProps.pdf != nextProps.pdf) {
+    if (prevProps.pdf !== nextProps.pdf) {
       this._initPage(nextProps)
     }
-    if (prevProps.scale != nextProps.scale) {
+    if (prevProps.scale !== nextProps.scale) {
       this.scale(nextProps.scale)
     }
   }
@@ -58,7 +58,7 @@ class Page extends React.Component {
 
   _enterPage = () => {
     const { status, page } = this.state
-    if (status == 'loading' && page) {
+    if (status === 'loading' && page) {
       this._renderPage(page)
     }
   };
@@ -130,7 +130,7 @@ class Page extends React.Component {
 
     return (
       <div className={ `${classes.page} ${status}` } style={ sizeStyles }>
-        <LoadingOverlay show={ status == 'loading' } />
+        <LoadingOverlay show={ status === 'loading' } />
         <Waypoint onEnter={ this._enterPage } />
         <div style={ sizeStyles }>
           <canvas ref="canvas" style={ sizeStyles } />

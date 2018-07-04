@@ -23,7 +23,7 @@ export default class FileChangeRow extends React.Component {
       isActive,
       status,
     } = this.props
-    // status == 'created' || 'modified' || 'deleted'
+    // status === 'created' || 'modified' || 'deleted'
 
     // Classes
     const rowClasses = classNames({
@@ -34,18 +34,18 @@ export default class FileChangeRow extends React.Component {
     })
 
     const getIcon = (status) => {
-      if (status == 'deleted') {
+      if (status === 'deleted') {
         return <Remove size={ 8 } />
-      } else if (status == 'created') {
+      } else if (status === 'created') {
         return <Add size={ 8 } />
       }
       // modified
       return <Change size={ 8 } />
     }
     const getClass = (status) => {
-      if (status == 'deleted') {
+      if (status === 'deleted') {
         return styles.deleted
-      } else if (status == 'created') {
+      } else if (status === 'created') {
         return styles.created
       }
       // modified

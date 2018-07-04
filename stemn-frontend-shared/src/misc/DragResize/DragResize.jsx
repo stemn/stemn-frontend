@@ -14,15 +14,15 @@ class DraggerComponent extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.dataDrag.isMoving && nextProps.dataDrag.id && nextProps.dataDrag.id != this.state.lastEventId) {
+    if (nextProps.dataDrag.isMoving && nextProps.dataDrag.id && nextProps.dataDrag.id !== this.state.lastEventId) {
       this.setState({ active: true, lastEventId: nextProps.dataDrag.id })
-      if (nextProps.side == 'left' || nextProps.side == 'right') {
+      if (nextProps.side === 'left' || nextProps.side === 'right') {
         this.props.changeFn({
-          deltaX: nextProps.side == 'right' ? nextProps.dataDrag.deltaX : -nextProps.dataDrag.deltaX,
+          deltaX: nextProps.side === 'right' ? nextProps.dataDrag.deltaX : -nextProps.dataDrag.deltaX,
         })
       } else {
         this.props.changeFn({
-          deltaY: nextProps.side == 'bottom' ? nextProps.dataDrag.deltaY : -nextProps.dataDrag.deltaY,
+          deltaY: nextProps.side === 'bottom' ? nextProps.dataDrag.deltaY : -nextProps.dataDrag.deltaY,
         })
       }
     } else {
@@ -85,7 +85,7 @@ export default class DragResize extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.animateHide != this.props.animateHide) {
+    if (nextProps.animateHide !== this.props.animateHide) {
       if (nextProps.width) {
         this.setState({ width: nextProps.animateHide ? '0' : nextProps.width, animate: true })
       } else {

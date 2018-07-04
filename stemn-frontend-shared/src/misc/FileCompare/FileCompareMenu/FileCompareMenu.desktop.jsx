@@ -110,7 +110,7 @@ export class Component extends React.Component {
               <div className="PopoverMenu">
                 {compareModes.map(item => <a
                   key={ item.value }
-                  className={ classNames({ active: mode == item.value }) }
+                  className={ classNames({ active: mode === item.value }) }
                   onClick={ () => changeMode(item.value, revisions) }
                 >
                 Compare: {item.text}

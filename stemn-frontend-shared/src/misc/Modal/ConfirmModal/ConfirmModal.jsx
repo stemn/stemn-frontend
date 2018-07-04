@@ -40,7 +40,7 @@ class Component extends React.Component {
           <Button style={ { marginRight: '10px' } } onClick={ modalCancel }>Cancel</Button>
           <Button
             className="warn"
-            disabled={ confirmValue && value.toLowerCase() != confirmValue.toLowerCase() }
+            disabled={ confirmValue && value.toLowerCase() !== confirmValue.toLowerCase() }
             onClick={ modalConfirm }
           >
             Confirm

@@ -9,7 +9,7 @@ export default class FileIcon extends React.Component {
   render() {
     let fileType
     let isOther = false
-    if (this.props.type == 'file') {
+    if (this.props.type === 'file') {
       if (this.props.fileType) {
         fileType = this.props.fileType.toLowerCase()
       } else {

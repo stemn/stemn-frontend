@@ -16,7 +16,7 @@ class Component extends React.Component {
       modalCancel, modalConfirm,
     } = this.props
 
-    const isCurrentUser = owner._id == auth.user._id
+    const isCurrentUser = owner._id === auth.user._id
 
     return (
       <div style={ { width: '500px' } }>

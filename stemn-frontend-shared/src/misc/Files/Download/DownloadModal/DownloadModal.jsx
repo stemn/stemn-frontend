@@ -62,7 +62,7 @@ export default class DownloadModal extends React.Component {
             <div className={ classNames(classes.row, 'layout-row layout-align-start-center') } key={ revision._id }>
               <div style={ { width: '70px' } }>Version {revision.data.revisionNumber}</div>
               <div className="flex text-grey-3">{revision.timestamp ? moment(revision.timestamp).fromNow() : null}</div>
-              {index == 0 ? <Label style={ { marginRight: '10px' } }>Latest Version</Label> : null}
+              {index === 0 ? <Label style={ { marginRight: '10px' } }>Latest Version</Label> : null}
               <DownloadFile file={ revision.data }>Download</DownloadFile>
             </div>
           ))}

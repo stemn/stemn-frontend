@@ -26,7 +26,7 @@ export class Component extends React.Component {
 
     // Toggle if checkbox
     // Value can be: true || false || 'other' || undefined
-    if (type == 'checkbox') {
+    if (type === 'checkbox') {
       const isFalse = prevValue === 'false' || prevValue === false || prevValue === undefined
       newValue = !!isFalse // toggle
     }
@@ -45,7 +45,7 @@ export class Component extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     // Update the internal state if it differs from the redux state
-    if (nextProps.value != this.state.value) {
+    if (nextProps.value !== this.state.value) {
       this.setState({ value: nextProps.value })
     }
   }

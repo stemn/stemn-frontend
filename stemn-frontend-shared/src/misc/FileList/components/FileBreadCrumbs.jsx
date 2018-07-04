@@ -44,7 +44,7 @@ export default class FileBreadCrumbs extends Component {
           },
         ]
         return parentsExtended.map((folder, idx) => {
-          const isLastChild = idx == parentsExtended.length - 1
+          const isLastChild = idx === parentsExtended.length - 1
           const parentfolder = parentsExtended[idx - 1]
           const clickableText = link
             ? (<Link
@@ -87,7 +87,7 @@ export default class FileBreadCrumbs extends Component {
               { !isLastChild && <span> / </span> }
             </span>
           )
-          return parentfolder && popup && idx != 0
+          return parentfolder && popup && idx !== 0
             ? getPopoverCrumb()
             : getPlainCrumb()
         })

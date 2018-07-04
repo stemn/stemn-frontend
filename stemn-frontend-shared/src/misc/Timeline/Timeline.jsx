@@ -37,9 +37,9 @@ class Component extends React.Component {
   };
 
   scroll = (direction) => {
-    if (direction == 'left') {
+    if (direction === 'left') {
       this.setState({ page: this.state.page + 1 })
-    } else if (direction == 'right' && this.state.page > 0) {
+    } else if (direction === 'right' && this.state.page > 0) {
       this.setState({ page: this.state.page - 1 })
     }
   };
@@ -78,7 +78,7 @@ class Component extends React.Component {
     const itemsOrdered = orderByTime(items).reverse()
 
     return (
-      <div className={ classNames(styles.timeline, className, { [styles.small]: size == 'sm' }) } style={ style }>
+      <div className={ classNames(styles.timeline, className, { [styles.small]: size === 'sm' }) } style={ style }>
         <div className="rel-box">
           <div className={ styles.line }>
             {moreLeft  ? <MoreButton title="Older events" onClick={ () => this.scroll('left') } side="left" /> : ''}

@@ -13,13 +13,13 @@ This behavior requires the 'forwardToRendererWindow' middleware.
 import { closeAll } from 'stemn-shared/misc/Modal/Modal.actions.js'
 
 const routerFix = store => next => (action) => {
-  if (action.type == '@@router/LOCATION_CHANGE' && action.payload.state && action.payload.state.meta) { // muteable
+  if (action.type === '@@router/LOCATION_CHANGE' && action.payload.state && action.payload.state.meta) { // muteable
     action.meta = action.payload.state.meta
     delete action.payload.state.meta
   }
 
   // Close modals
-  if (action.type == '@@router/LOCATION_CHANGE') {
+  if (action.type === '@@router/LOCATION_CHANGE') {
     store.dispatch(closeAll())
   }
 

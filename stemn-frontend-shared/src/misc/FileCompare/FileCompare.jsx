@@ -126,7 +126,7 @@ export default class FileCompare extends Component {
     if (!file1) {
       return null
     }
-    return type == 'collapse'
+    return type === 'collapse'
       ? collapseTemplate()
       : standardTemplate()
   }

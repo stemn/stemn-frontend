@@ -14,7 +14,7 @@ class Component extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.dataDrag.isMoving && nextProps.dataDrag.id && nextProps.dataDrag.id != this.state.lastEventId) {
+    if (nextProps.dataDrag.isMoving && nextProps.dataDrag.id && nextProps.dataDrag.id !== this.state.lastEventId) {
       const containerWidth = this.props.container.offsetWidth
       const prevPositionPx = nextProps.position / 100 * containerWidth
       let newPositionPx  = prevPositionPx + nextProps.dataDrag.deltaX

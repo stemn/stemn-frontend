@@ -15,9 +15,9 @@ export default class LoadingSpinner extends Component {
     const progressStyle = isProgress ? { strokeDasharray: `${total * progress}, 200` } : {}
 
     const getTransformStyle = () => {
-      if (size == 'xs') {
+      if (size === 'xs') {
         return { transform: 'scale(0.2)' }
-      } else if (size == 'sm') {
+      } else if (size === 'sm') {
         return { transform: 'scale(0.5)' }
       }
     }

@@ -30,7 +30,7 @@ import threadDisplayModalName from 'stemn-shared/misc/Threads/ThreadDisplayModal
 export class ThreadListItem extends React.Component {
   // Mounting
   onMount = (nextProps, prevProps) => {
-    if (!prevProps || prevProps.item != nextProps.item) {
+    if (!prevProps || prevProps.item !== nextProps.item) {
       if (!nextProps.thread || !nextProps.thread.data) {
         nextProps.ThreadsActions.getThread({
           threadId: nextProps.item,
@@ -74,7 +74,7 @@ export class ThreadListItem extends React.Component {
       board,
     } = this.props
     if (!thread || !thread.data) {
-      if (layout == 'list') {
+      if (layout === 'list') {
         return (
           <div className={ loadingClasses.loading }>
             <div className={ classNames(classes.listItem, 'layout-row flex layout-align-start-center') }>
@@ -106,7 +106,7 @@ export class ThreadListItem extends React.Component {
         </div>
       )
     }
-    if (layout == 'list') {
+    if (layout === 'list') {
       return (
         <div className={ classNames({ [classes.isDragging]: thread.isDragging && draggable }) }>
           <div className={ classNames(classes.listItem, 'layout-row flex layout-align-start-center') }>

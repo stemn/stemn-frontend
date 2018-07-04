@@ -111,9 +111,9 @@ export default class Progressbutton extends React.Component {
     )
 
     const getIcon = () => {
-      if (status == 'success') {
+      if (status === 'success') {
         return <AnimateSvg draw={ drawComplete }>{ Checkmark }</AnimateSvg>
-      } else if (status == 'error') {
+      } else if (status === 'error') {
         return <AnimateSvg draw={ drawComplete }>{ Cross }</AnimateSvg>
       }
       
@@ -124,9 +124,9 @@ export default class Progressbutton extends React.Component {
       <div
         className={ classNames(
           classes.progressButton, className,
-          { [classes.loading]: status == 'loading' },
-          { [classes.error]: status == 'error' },
-          { [classes.success]: status == 'success' },
+          { [classes.loading]: status === 'loading' },
+          { [classes.error]: status === 'error' },
+          { [classes.success]: status === 'success' },
         ) }
       >
         { href
