@@ -111,7 +111,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/stemn-frontend
-      - run: cd stemn-frontend-website; npm run serve:wait; yarn cypress:run;
+      - run: cd stemn-frontend-website; npm run serve:wait; $(npm bin)/cypress run --record;
 
   deploy_website:
     <<: *defaults
