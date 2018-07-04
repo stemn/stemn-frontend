@@ -40,7 +40,7 @@ export default class Register extends React.Component {
                   value={ auth.login.lastname }
                   className="dr-input"
                   style={ { marginLeft: '5px' } }
-                  type="text" placeholder="Last Name"
+                  type="text" placeholder="Last name"
                 />
               </div>
               <Input

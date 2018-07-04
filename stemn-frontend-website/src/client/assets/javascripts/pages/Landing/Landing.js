@@ -120,7 +120,7 @@ export default class Landing extends Component {
                 <DownloadButton className={ `${classes.downloadButton} secondary lg` } platform="auto" >
                     Download Now
                 </DownloadButton>
-                <Button className={ `${classes.downloadButton} primary lg` } name="loginRoute">
+                <Button className={ `${classes.downloadButton} primary lg` } name="registerRoute">
                   <MdLock size={ 20 } style={ { marginRight: '10px' } } />
                     Sign up
                 </Button>
