@@ -50,7 +50,7 @@ export const validateMention = (href = '') => {
   // Boths ids should be 24 characters.
   const hrefSplit = href.split(':')
   if (hrefSplit.length === 3) {
-    if ( && ) {
+    if (isUuid(entityId) && isUuid(mentionId)) {
       return true
     }
 
