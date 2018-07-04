@@ -68,7 +68,14 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/stemn-frontend
+      - restore_cache:
+          keys:
+          - website-happypack
       - run: cd stemn-frontend-website; sudo npm run link:shared; npm run build;
+      - save_cache:
+          paths:
+            - ./stemn-frontend-website/.happypack
+          key: website-happypack
       - persist_to_workspace:
           root: ~/stemn-frontend
           paths: 
