@@ -21,9 +21,9 @@ compiler.apply(new DashboardPlugin())
 const host = process.env.HOST || 'localhost'
 const port = process.env.PORT || 3000
 
-function log() {
-  arguments[0] = `\nWebpack: ${arguments[0]}`
-  console.log(...arguments)
+function log(...args) {
+  args[0] = `\nWebpack: ${args[0]}`
+  console.log(...args)
 }
 
 app.use(webpackDevMiddleware(compiler, {

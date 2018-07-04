@@ -1,4 +1,5 @@
-const url = 'http://localhost:44300'
+const url = 'http://localhost:3000'
+
 describe('Home Page', () => {
   it('Should load', () => {
     cy.visit(url)

@@ -110,7 +110,6 @@ module.exports = merge(config, {
     new webpack.HashedModuleIdsPlugin(),
   ],
   module: {
-    noParse: /\.min\.js$/,
     loaders: [
       // Globals
       {
