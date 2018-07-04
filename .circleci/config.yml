@@ -29,7 +29,7 @@ jobs:
       - restore_cache:
           keys:
           - deps-{{ checksum "./stemn-frontend-website/package-lock.json" }}
-      - run: cd stemn-frontend-website; npm run install:link;
+      - run: cd stemn-frontend-website; sudo npm run install:link;
       - save_cache:
           paths:
             - stemn-frontend-website/node_modules
@@ -47,7 +47,7 @@ jobs:
           keys:
           - deps-{{ checksum "./stemn-frontend-desktop/package-lock.json" }}
           - deps-{{ checksum "./stemn-frontend-desktop/app/package-lock.json" }}
-      - run: cd stemn-frontend-desktop; npm run install:link;
+      - run: cd stemn-frontend-desktop; sudo npm run install:link;
       - save_cache:
           paths:
             - stemn-frontend-desktop/node_modules
