@@ -7,6 +7,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const WebpackChunkHash = require('webpack-chunk-hash')
 const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const getStemnEnv = require('./getStemnEnv')
 
 const GLOBALS = {
   'process.env': {
@@ -15,11 +16,8 @@ const GLOBALS = {
   GLOBAL_ENV: {
     APP_TYPE: JSON.stringify('web'),
     NODE_ENV: JSON.stringify('production'),
-    WEBSITE_URL: JSON.stringify('https://stemn.com'),
-    API_SERVER: JSON.stringify('https://dev.stemn.com'),
-    WEBSOCKET_SERVER: JSON.stringify('https://dev.stemn.com:8443'),
+    ...getStemnEnv(process.env.STEMN_ENV),
   },
-  __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false')),
 }
 
 const chunkIncludes = targets => ({ context }) => context && context.indexOf('node_modules') >= 0 && targets.find(t => new RegExp(`\\\\${t}\\\\`, 'i').test(context))

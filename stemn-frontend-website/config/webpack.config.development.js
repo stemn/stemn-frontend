@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const config = require('./webpack.config.base')
 const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const getStemnEnv = require('./getStemnEnv')
 
 const GLOBALS = {
   'process.env': {
@@ -11,11 +12,8 @@ const GLOBALS = {
   GLOBAL_ENV: {
     APP_TYPE: JSON.stringify('web'),
     NODE_ENV: JSON.stringify('development'),
-    WEBSITE_URL: JSON.stringify('https://dev.stemn.com'),
-    API_SERVER: JSON.stringify('https://dev.stemn.com'),
-    WEBSOCKET_SERVER: JSON.stringify('https://dev.stemn.com:8443'),
+    ...getStemnEnv(process.env.STEMN_ENV),
   },
-  __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'true')),
 }
 
 module.exports = merge(config, {
