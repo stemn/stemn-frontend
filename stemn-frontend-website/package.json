@@ -11,7 +11,7 @@
     "analyse": "node ./scripts/analyse.js",
     "analyse:graph": "webpack-bundle-analyzer ./reports/stats.json",
     "serve": "node ./build/server/index.js",
-    "serve:wait": "npm run serve && wait-on http://localhost:3000",
+    "serve:wait": "npm run serve & wait-on http://localhost:3000",
     "deploy": "sh ./scripts/deploy.sh",
     "deploy:ci": "sh ./scripts/deploy-ci.sh",
     "cypress:open": "cypress open",
