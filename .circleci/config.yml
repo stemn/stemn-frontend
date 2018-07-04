@@ -104,7 +104,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/stemn-frontend
-      - run: cd stemn-frontend-website; npm run build:serve:wait; yarn cypress:run;
+      - run: cd stemn-frontend-website; npm run serve:wait; yarn cypress:run;
 
   deploy_website:
     <<: *defaults
@@ -121,9 +121,9 @@ workflows:
       - install_root
       - install_website
       - install_desktop
-      - lint:
-          requires:
-            - install_root
+      # - lint:
+      #     requires:
+      #       - install_root
       - build_website:
           requires:
             - install_website
