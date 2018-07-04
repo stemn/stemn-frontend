@@ -36,7 +36,6 @@ module.exports = merge(config, {
       'react',
       'react-dom',
       'react-helmet',
-      'react-popover',
       'react-redux',
       'react-router',
       'react-router-redux',

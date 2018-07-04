@@ -6,11 +6,11 @@
   "scripts": {
     "install:link": "sh ./scripts/install.sh",
     "link:shared": "sh ./scripts/link-shared.sh",
-    "start": "node ./scripts/development.js",
+    "dev": "node ./scripts/development.js",
     "build": "sh ./scripts/build.sh",
     "analyse": "node ./scripts/analyse.js",
     "analyse:graph": "webpack-bundle-analyzer ./reports/stats.json",
-    "serve": "node ./src/server/index.js",
+    "serve": "node ./build/server/index.js",
     "serve:wait": "npm run serve && wait-on http://localhost:3000",
     "deploy": "sh ./scripts/deploy.sh",
     "deploy:ci": "sh ./scripts/deploy-ci.sh",
