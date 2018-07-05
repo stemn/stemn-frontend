@@ -154,8 +154,13 @@ workflows:
   build_and_test:
     jobs:
       - install_root
-      - install_website
-      - install_desktop
+      - install_website:
+          requires:
+            - install_root
+
+      - install_desktop:
+          requires:
+            - install_root
       # - lint:
       #     requires:
       #       - install_root
