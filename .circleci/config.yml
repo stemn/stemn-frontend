@@ -147,7 +147,7 @@ jobs:
 
       - run:
           name: Build and deploy
-          command: sudo sh ./.circleci/deploy_frontend_website.sh
+          command: sh ./.circleci/deploy_frontend_website.sh
             
 workflows:
   version: 2
