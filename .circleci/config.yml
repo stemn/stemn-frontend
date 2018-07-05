@@ -44,14 +44,14 @@ jobs:
       - save_cache:
           paths:
             - stemn-frontend-website/node_modules
-            - ~/.npm
-            - ~/.cache
           key: deps-{{ checksum "./stemn-frontend-website/package-lock.json" }}
       - persist_to_workspace:
           root: ~/stemn-frontend
           paths: 
             - ./stemn-frontend-website/node_modules/*
-
+            - ~/.npm
+            - ~/.cache
+            
   install_desktop:
     <<: *defaults
     steps:
