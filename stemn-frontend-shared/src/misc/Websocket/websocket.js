@@ -39,12 +39,5 @@ export const initialise = (hostUrl) => {
     }
   }
 
-  socket.write({
-    type: 'ADMIN/ECHO',
-    payload: {
-      test: 'test',
-    },
-  })
-
   return socket
 }

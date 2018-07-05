@@ -81,7 +81,13 @@ jobs:
       - restore_cache:
           keys:
           - website-happypack
-      - run: cd stemn-frontend-website; sudo npm run link:shared; export A=$CIRCLE_BRANCH; npm run build;
+      - run:
+          name: Build webpack
+          command: |
+            cd stemn-frontend-website; 
+            sudo npm run link:shared; 
+            export STEMN_ENV=$CIRCLE_BRANCH; 
+            npm run build;
       - save_cache:
           paths:
             - ./stemn-frontend-website/.happypack
@@ -147,7 +153,7 @@ jobs:
 
       - run:
           name: Build and deploy
-          command: sudo sh ./.circleci/deploy_frontend_website.sh
+          command: sh ./.circleci/deploy_frontend_website.sh
             
 workflows:
   version: 2
@@ -172,12 +178,12 @@ workflows:
       - build_desktop:
           requires:
             - install_desktop
-      - test_website_e2e:
-          requires:
-            - build_website
+      # - test_website_e2e:
+      #     requires:
+      #       - build_website
       - deploy_website:
           requires: 
-            - test_website_e2e
+            - build_website
           filters:
             branches:
               only: 
