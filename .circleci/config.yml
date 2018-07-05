@@ -40,7 +40,6 @@ jobs:
           keys:
           - deps-{{ checksum "./stemn-frontend-website/package-lock.json" }}
       - run: cd stemn-frontend-website; sudo npm run install:link;
-      - run: cd stemn-frontend-website; npm i cypress;
       - save_cache:
           paths:
             - stemn-frontend-website/node_modules
@@ -49,9 +48,7 @@ jobs:
           root: ~/stemn-frontend
           paths: 
             - ./stemn-frontend-website/node_modules/*
-            - ~/.npm
-            - ~/.cache
-            
+
   install_desktop:
     <<: *defaults
     steps:
@@ -124,6 +121,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/stemn-frontend
+      - run: cd stemn-frontend-website; npm i cypress;
       - run: cd stemn-frontend-website; npm run serve:wait; $(npm bin)/cypress run;
 
   deploy_website:
