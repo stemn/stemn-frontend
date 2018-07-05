@@ -172,12 +172,12 @@ workflows:
       - build_desktop:
           requires:
             - install_desktop
-      - test_website_e2e:
-          requires:
-            - build_website
+      # - test_website_e2e:
+      #     requires:
+      #       - build_website
       - deploy_website:
           requires: 
-            - test_website_e2e
+            - build_website
           filters:
             branches:
               only: 
