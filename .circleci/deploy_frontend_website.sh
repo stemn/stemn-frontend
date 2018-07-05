@@ -19,6 +19,6 @@ docker build -t "${IMAGE}":latest .
 docker push "${IMAGE}:$TAG"
 docker push "${IMAGE}:latest"
 
-kubectl set image deployment/website-server website-server="${IMAGE}:$TAG"  
+kubectl set image deployment/website website="${IMAGE}:$TAG"  
 
 echo ---------------------------
