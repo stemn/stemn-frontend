@@ -82,12 +82,12 @@ jobs:
           keys:
           - website-happypack
       - run:
-        name: Build webpack
-        command: |
-          cd stemn-frontend-website; 
-          sudo npm run link:shared; 
-          export STEMN_ENV=$CIRCLE_BRANCH; 
-          npm run build;
+          name: Build webpack
+          command: |
+            cd stemn-frontend-website; 
+            sudo npm run link:shared; 
+            export STEMN_ENV=$CIRCLE_BRANCH; 
+            npm run build;
       - save_cache:
           paths:
             - ./stemn-frontend-website/.happypack
