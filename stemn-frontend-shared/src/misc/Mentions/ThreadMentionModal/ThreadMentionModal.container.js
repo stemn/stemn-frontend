@@ -1,4 +1,3 @@
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { getBoards } from 'stemn-shared/misc/Threads/Threads.actions.js'

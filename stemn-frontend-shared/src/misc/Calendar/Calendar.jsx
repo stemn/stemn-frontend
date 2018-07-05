@@ -1,8 +1,9 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import moment from 'moment'
 import createDateObjects from './createDateObjects'
 
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './Calendar.css'
 
 export default class Calendar extends Component {
@@ -32,20 +33,20 @@ export default class Calendar extends Component {
     const calendarObject = createDateObjects(viewDate, weekOffset)
 
     calendarObject.forEach((item) => {
-      if (selectedDate && item.day.format('YYYY-MM-DD') == selectedDate.format('YYYY-MM-DD')) {
-        item.classNames = item.classNames ? `${item.classNames} selected` : 'selected'
+      if (selectedDate && item.day.format('YYYY-MM-DD') === selectedDate.format('YYYY-MM-DD')) {
+        item.cn = item.cn ? `${item.cn} selected` : 'selected'
       }
-      if (item.day.format('YYYY-MM-DD') == moment().format('YYYY-MM-DD')) {
-        item.classNames = item.classNames ? `${item.classNames} current` : 'current'
+      if (item.day.format('YYYY-MM-DD') === moment().format('YYYY-MM-DD')) {
+        item.cn = item.cn ? `${item.cn} current` : 'current'
       }
     })
 
 
     return (
-      <div className={ classNames(className, classes.calendar, { [classes.calendarDatepicker]: type == 'datepicker' }) }>
+      <div className={ cn(className, classes.calendar, { [classes.calendarDatepicker]: type === 'datepicker' }) }>
 
         {
-          type == 'datepicker'
+          type === 'datepicker'
             ?
               <div className={ classes.calendarHeader }>
               <button onClick={ onPrevMonth }>&laquo;</button>
@@ -57,14 +58,14 @@ export default class Calendar extends Component {
         }
         <div className={ classes.calendarGrid }>
           {days.map(day =>
-            <div key={ day } className={ classNames(classes.calendarGridItem, classes.dayHeader) }>
+            <div key={ day } className={ cn(classes.calendarGridItem, classes.dayHeader) }>
               {day}
             </div>,
           )}
           {calendarObject.map((day, i) =>
             <div
               key={ `day-${i}` }
-              className={ classNames(day.classNames, classes.calendarGridItem) }
+              className={ cn(day.cn, classes.calendarGridItem) }
               onClick={ e => onPickDate(day.day) }
             >
               <span>{renderDay(day.day)}</span>

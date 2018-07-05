@@ -1,5 +1,3 @@
-// Container Core
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 // Component Core
@@ -7,9 +5,6 @@ import React from 'react'
 
 // Actions
 import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js'
-
-// Styles
-import classNames from 'classnames'
 
 // Sub Components
 import Toolbar from 'stemn-frontend-desktop/app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
@@ -22,10 +17,12 @@ import Button  from 'stemn-shared/misc/Buttons/Button/Button.jsx'
 
 // event.sender.send('tray-removed')
 // trayIcon.destroy()
-        
-export const Component = React.createClass({
+
+export class Component extends React.Component {
   render() {
-    const { AuthActions, auth, dispatch } = this.props
+    const {
+      dispatch,
+    } = this.props
     return (
       <div className="layout-column flex">
         <Toolbar />
@@ -53,8 +50,8 @@ export const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 
 // /////////////////////////////// CONTAINER /////////////////////////////////

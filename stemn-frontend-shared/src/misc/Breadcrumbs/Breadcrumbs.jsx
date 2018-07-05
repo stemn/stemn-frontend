@@ -1,6 +1,4 @@
-import React, { Component, PropTypes } from 'react'
-import classNames from 'classnames'
-import classes from './Breadcrumbs.css'
+import React, { Component } from 'react'
 
 export default class Breadcrumbs extends Component {
   render() {

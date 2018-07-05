@@ -2,7 +2,7 @@ import React from 'react'
 
 import UserAvatar from '../UserAvatar/UserAvatar.jsx'
 
-export default React.createClass({
+export default class UserAvatars extends React.Component {
   render() {
     const { users, limit, shape, size, className } = this.props
 
@@ -43,5 +43,5 @@ export default React.createClass({
     }
     
     return null
-  },
-})
+  }
+}

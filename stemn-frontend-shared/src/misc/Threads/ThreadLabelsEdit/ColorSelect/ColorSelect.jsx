@@ -2,18 +2,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-// Styles
-import classNames from 'classnames'
 import classes from './ColorSelect.css'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 
-import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
-import MdMoreHoriz from 'react-icons/md/more-horiz'
 
-
-const Component = React.createClass({
+class Component extends React.Component {
   render() {
-    const { dispatch, model, value } = this.props
+    const {
+      dispatch,
+      model,
+    } = this.props
 
     const niceColors = [
       '#001F3F',
@@ -48,7 +46,7 @@ const Component = React.createClass({
         }
       </div>
     )
-  },
-})
+  }
+}
 
 export default connect()(Component)

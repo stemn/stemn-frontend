@@ -1,6 +1,5 @@
 // Component Core
 import React from 'react'
-import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
 import { omit } from 'lodash'
 
 // Styles
@@ -8,7 +7,7 @@ import classes from './Label.css'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
-export default React.createClass({
+export default class Label extends React.Component {
   render() {
     const { children } = this.props
     return (
@@ -16,5 +15,5 @@ export default React.createClass({
         {children}
       </span>
     )
-  },
-})
+  }
+}

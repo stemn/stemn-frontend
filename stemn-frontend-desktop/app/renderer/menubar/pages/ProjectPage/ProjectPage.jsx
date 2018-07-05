@@ -7,22 +7,21 @@ import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js
 import React from 'react'
 import { has } from 'lodash'
 
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './ProjectPage.scss'
 
 import LoadingOverlay     from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import CommitChanges      from 'stemn-shared/misc/Changes/CommitChanges/CommitChanges.jsx'
 import CommitBox          from 'stemn-shared/misc/Changes/CommitBox/CommitBox.jsx'
 import Toolbar            from 'stemn-frontend-desktop/app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
-import MdOpenInNew        from 'react-icons/md/open-in-new'
 import { Link }           from 'react-router'
 import cloudLocked        from 'stemn-shared/assets/images/pure-vectors/cloud-locked.svg'
 
 
 import * as stringConcat  from 'stemn-shared/utils/stringConcat'
 
-export const Component = React.createClass({
-  onMount(nextProps, prevProps) {
+export class Component extends React.Component {
+  onMount = (nextProps, prevProps) => {
     // If project has changed
     if (!prevProps || nextProps.projectId != prevProps.projectId) {
       // Set the project to active
@@ -32,32 +31,36 @@ export const Component = React.createClass({
         nextProps.changesActions.fetchChanges({ projectId: nextProps.projectId })
       }
     }
-  },
-  componentWillMount() { this.onMount(this.props) },
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) },
-  refresh() {
+  };
+
+  componentWillMount() { this.onMount(this.props) }
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+
+  refresh = () => {
     this.props.changesActions.fetchChanges({
       projectId: this.props.project.data._id,
     })
-  },
-  toggleAll({ value }) {
-    return this.props.changesActions.toggleAll({
-      value,
-      projectId: this.props.project.data._id,
-    })
-  },
-  commitFn() {
+  };
+
+  toggleAll = ({ value }) => this.props.changesActions.toggleAll({
+    value,
+    projectId: this.props.project.data._id,
+  });
+
+  commitFn = () => {
     this.props.changesActions.commit({
       projectId: this.props.project.data._id,
       name: this.props.changes.name,
       body: this.props.changes.body,
     })
-  },
-  deselect() {
+  };
+
+  deselect = () => {
     this.props.changesActions.deselect({
       projectId: this.props.project.data._id,
     })
-  },
+  };
+
   render() {
     const { changes, project, changesActions, entityModel, projectId, dispatch } = this.props
 
@@ -98,7 +101,7 @@ export const Component = React.createClass({
               dispatch={ dispatch }
             />
             <CommitBox
-              className={ classNames(classes.commitBox, { [classes.open]: changes.name && changes.name.length > 0 }) }
+              className={ cn(classes.commitBox, { [classes.open]: changes.name && changes.name.length > 0 }) }
               entityModel={ entityModel }
               changes={ changes }
               changesActions={ changesActions }
@@ -121,8 +124,8 @@ export const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 // /////////////////////////////// CONTAINER /////////////////////////////////
 

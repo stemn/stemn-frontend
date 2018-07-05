@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import classes from './EmptyWrapped.css'
 
 import { emptyHover } from './ThreadListItem.drag.config.js'
@@ -22,7 +23,7 @@ export default class EmptyWrapped extends Component {
   render() {
     const { item, connectDropTarget, groupId, style, layout } = this.props
     return connectDropTarget(
-      <div className={ layout == 'board' ? classes.wrapperBoard : classes.wrapperList } />,
+      <div className={ layout === 'board' ? classes.wrapperBoard : classes.wrapperList } />,
     )
   }
 }

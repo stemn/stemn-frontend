@@ -1,7 +1,7 @@
 import React from 'react'
 import MdDone from 'react-icons/md/done'
 // Styles
-import classNames from 'classnames'
+import cn from 'classnames'
 import styles from './SelectList.css'
 
 export default class SelectList extends React.Component {
@@ -10,7 +10,7 @@ export default class SelectList extends React.Component {
     return (
       <div className={ styles.selectList }>
         {this.props.children.map(child =>
-          <div className={ classNames(styles.selectItem, 'layout-row layout-align-start-center', { [styles.selectItemActive]: child.props.value == this.props.value }) }>
+          <div className={ cn(styles.selectItem, 'layout-row layout-align-start-center', { [styles.selectItemActive]: child.props.value === this.props.value }) }>
             <div className="flex">{child}</div>
             <div className={ styles.selectIcon }><MdDone size="16" /></div>
           </div>,

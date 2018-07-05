@@ -1,7 +1,7 @@
 export const getFileRouteName = (file) => {
   if (file.type === 'file') {
     return 'fileRoute'
-  } else if (file.type == 'folder') {
+  } else if (file.type === 'folder') {
     return 'projectFolderRoute'
   } 
   return 'projectRoute'

@@ -33,7 +33,7 @@ export const changeMode = ({ mode, cacheKey }) =>
   //    let { selected1, selected2 } = this.state;
 //    // If a second file is not selected - we select one if possible
 //    if(!selected2){
-//      const revisionIndex = revisions.findIndex(revision => revision.data.fileId == selected1.data.fileId && revision.data.revisionId == selected1.data.revisionId);
+//      const revisionIndex = revisions.findIndex(revision => revision.data.fileId === selected1.data.fileId && revision.data.revisionId === selected1.data.revisionId);
 //      if(revisions[revisionIndex - 1]){selected2 = revisions[revisionIndex - 1];}
 //      else if(revisions[revisionIndex + 1]){selected2 = revisions[revisionIndex + 1];}
 //    }

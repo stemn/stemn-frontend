@@ -7,20 +7,15 @@ import * as WalkthroughActions from 'stemn-shared/misc/Walkthrough/Walkthrough.a
 
 import React from 'react'
 
-import i from 'icepick'
 import { has, some } from 'lodash'
-
-import classNames from 'classnames'
 
 import { Link }             from 'react-router'
 import ContentSidebar       from 'stemn-shared/misc/ContentSidebar'
 import LoadingOverlay       from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
-import Timeline             from 'stemn-shared/misc/Timeline/Timeline.jsx'
 import CommitChanges        from 'stemn-shared/misc/Changes/CommitChanges/CommitChanges.jsx'
 import CommitBox            from 'stemn-shared/misc/Changes/CommitBox/CommitBox.jsx'
 import FileCompare          from 'stemn-shared/misc/FileCompare'
 import Guide                from 'stemn-shared/misc/Guide/Guide'
-import cloudLocked          from 'stemn-shared/assets/images/pure-vectors/cloud-locked.svg'
 import file                 from 'stemn-shared/assets/images/pure-vectors/file.svg'
 import commitChanges        from './commit-changes.svg'
 import compareFile          from './compare-file.svg'
@@ -51,19 +46,20 @@ const CommitBoxStyles = {
   background: 'rgba(0, 0, 0, 0.03)',
 }
 
-export const Component = React.createClass({
-  getInitialState() {
-    return {
-      hideGuide: false,
-    }
-  },
-  getStarted() {
+export class Component extends React.Component {
+  state = {
+    hideGuide: false,
+  };
+
+  getStarted = () => {
     this.props.walkthroughActions.activate({ name: 'commit.commitIntro' })
     this.setState({ hideGuide: true })
-  },
-  componentWillMount() { this.onMount(this.props) },
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) },
-  onMount(nextProps, prevProps) {
+  };
+
+  componentWillMount() { this.onMount(this.props) }
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+
+  onMount = (nextProps, prevProps) => {
     // If the project is connected to a remote
     if (has(nextProps, 'project.data.remote.connected') && nextProps.project.data.remote.connected) {
       // And the project has changed
@@ -77,30 +73,33 @@ export const Component = React.createClass({
         })
       }
     }
-  },
-  refresh() {
+  };
+
+  refresh = () => {
     this.props.changesActions.fetchChanges({
       projectId: this.props.project.data._id,
     })
-  },
-  toggleAll({ value }) {
-    return this.props.changesActions.toggleAll({
-      value,
-      projectId: this.props.project.data._id,
-    })
-  },
-  commitFn() {
+  };
+
+  toggleAll = ({ value }) => this.props.changesActions.toggleAll({
+    value,
+    projectId: this.props.project.data._id,
+  });
+
+  commitFn = () => {
     this.props.changesActions.commit({
       projectId: this.props.project.data._id,
       name: this.props.changes.name,
       body: this.props.changes.body,
     })
-  },
-  deselect() {
+  };
+
+  deselect = () => {
     this.props.changesActions.deselect({
       projectId: this.props.project.data._id,
     })
-  },
+  };
+
   render() {
     const { changes, timeline, project, changesActions, entityModel, dispatch } = this.props
     const { hideGuide } = this.state
@@ -206,8 +205,8 @@ export const Component = React.createClass({
         {!isLoading ? getTemplate() : null}
       </div>
     )
-  },
-})
+  }
+}
 
 
 // /////////////////////////////// CONTAINER /////////////////////////////////

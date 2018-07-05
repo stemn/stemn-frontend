@@ -1,6 +1,7 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import classes from './NewFieldModal.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 import Form from 'stemn-shared/misc/Forms/Form'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
@@ -25,7 +26,14 @@ export default class NewFieldModal extends Component {
     })
   }
   render() {
-    const { newFieldForm, newFieldFormModel, newFieldFormPending, modalConfirm, modalCancel, name, blurb } = this.props
+    const {
+      newFieldForm,
+      newFieldFormModel,
+      newFieldFormPending,
+      modalCancel,
+      name,
+      blurb,
+    } = this.props
     const initValue = {
       name,
       blurb,
@@ -35,7 +43,7 @@ export default class NewFieldModal extends Component {
         <div className={ classes.modalTitle }>Create a new field</div>
         <div className={ classes.modalBody }>
           <Form model={ newFieldFormModel } value={ initValue } />
-          <div className={ classNames(classes.titleSection, 'layout-row layout-align-start-center') }>
+          <div className={ cn(classes.titleSection, 'layout-row layout-align-start-center') }>
             <Textarea
               model={ `${newFieldFormModel}.name` }
               value={ newFieldForm.name }

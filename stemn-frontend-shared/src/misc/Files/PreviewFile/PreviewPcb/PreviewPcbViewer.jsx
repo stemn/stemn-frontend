@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { clone, forEachRight, find, has } from 'lodash'
+import { clone, forEachRight, find } from 'lodash'
 import { deregister, register, activeInstances } from './PreviewPcb.utils'
 
 import classes from './PreviewPcb.css'
@@ -13,7 +13,7 @@ export default class PreviewPcbViewer extends Component {
   componentDidMount() { this.onMount(this.props) }
   componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
   onMount = (nextProps, prevProps) => {
-    if (!prevProps || (nextProps.layers != prevProps.layers)) {
+    if (!prevProps || (nextProps.layers !== prevProps.layers)) {
       setTimeout(this.init(nextProps), 1) // Timeout so refs can init
     }
   }

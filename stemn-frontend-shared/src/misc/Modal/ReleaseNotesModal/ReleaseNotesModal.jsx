@@ -1,18 +1,16 @@
 import React from 'react'
 import http from 'axios'
 import { version } from 'package-json'
-import classNames from 'classnames'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
-export default React.createClass({
-  getInitialState() {
-    return {
-      releaseNotes: '',
-      loading: true,
-    }
-  },
+export default class ReleaseNotesModal extends React.Component {
+  state = {
+    releaseNotes: '',
+    loading: true,
+  };
+
   componentWillMount() {
     http({
       url: `https://api.github.com/repos/stemn/stemn-desktop/releases/tags/v${version}`,
@@ -30,7 +28,8 @@ export default React.createClass({
         loading: false,
       })
     })
-  },
+  }
+
   render() {
     const { modalConfirm } = this.props
     const { loading, releaseNotes } = this.state
@@ -49,5 +48,5 @@ export default React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}

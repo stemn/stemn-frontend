@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { pick, get } from 'lodash'
 
-import classNames from 'classnames'
 import classes from './ProjectNewModal.scss'
 
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
@@ -129,7 +128,7 @@ export default class ProjectNewModal extends Component {
     )
 
     const getTab = () => {
-      if (activeTab == 1) {
+      if (activeTab === 1) {
         return tabTemplate({
           title: 'Create Project',
           blurb: 'Enter general display details such as project name and blurb. Remember to set a blurb if you want to open-source your project.',
@@ -148,7 +147,7 @@ export default class ProjectNewModal extends Component {
             onClick: () => this.changeTab(2),
           },
         })
-      } else if (activeTab == 2) {
+      } else if (activeTab === 2) {
         return tabTemplate({
           title: 'File Store',
           blurb: 'Connect a cloud provider (Dropbox or Drive). This will give you access to version control and collaboration features.',

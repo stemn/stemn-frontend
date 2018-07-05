@@ -1,10 +1,9 @@
-import React, { Component, PropTypes } from 'react'
-import classNames from 'classnames'
+import React, { Component } from 'react'
+import cn from 'classnames'
 import classes from './PreviewPage.css'
 
-import { projectRoute, fileRoute } from 'route-actions'
 import { orderItemsByTime, isSelected } from 'stemn-shared/misc/FileCompare/FileCompare.utils.js'
-import { orderBy, has, get } from 'lodash'
+import { get } from 'lodash'
 import { formatBytes } from 'stemn-shared/misc/Files/utils'
 import { getRevisions } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.utils.js'
 import moment from 'moment'
@@ -66,7 +65,11 @@ export default class PreviewPage extends Component {
     return isSelected({ item, selected1, selected2, mode })
   }
   render() {
-    const { compare: { mode, selected1, selected2 }, file, timeline, relatedThreads } = this.props
+    const {
+      compare: { mode, selected1, selected2 },
+      file,
+      timeline,
+    } = this.props
     const items = orderItemsByTime(mode, selected1, selected2)
     const file1 = get(items, [0, 'data'])
     const file2 = get(items, [1, 'data'])
@@ -97,7 +100,7 @@ export default class PreviewPage extends Component {
           <div className="divider" />
         </Header>
         <div className="layout-row flex rel-box">
-          <div className={ classNames(classes.preview, 'layout-column flex') }>
+          <div className={ cn(classes.preview, 'layout-column flex') }>
             <FileCompareInner
               className="layout-column flex"
               project={ file.data.project }

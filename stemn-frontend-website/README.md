@@ -8,7 +8,7 @@ Anyone can get the [Stemn Website](https://stemn.com/) running locally and devel
 3. `cd` into this folder (stemn-frontend-website) and run `npm run install:link`
 
 ## Build Development
-* `npm start` to build the src
+* `npm run dev` to build the src
 * Open [http://localhost:3000/](http://localhost:3000/)
 
 ## Build Production

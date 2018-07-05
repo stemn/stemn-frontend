@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import Popover from 'stemn-shared/misc/Popover'
-import classNames from 'classnames'
 
 export default class PopoverFit extends Component {
   constructor(props) {

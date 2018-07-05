@@ -1,7 +1,6 @@
 import http from 'axios'
 import { homeRoute } from 'route-actions'
 import { push } from 'react-router-redux'
-import { shouldDownload } from '../../redux/utils'
 import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js'
 import { joinRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
 

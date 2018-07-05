@@ -1,5 +1,4 @@
-import React, { Component, PropTypes } from 'react'
-
+import React, { Component } from 'react'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 

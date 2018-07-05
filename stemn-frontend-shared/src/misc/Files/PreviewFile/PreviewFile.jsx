@@ -2,7 +2,6 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as FilesActions from '../Files.actions.js'
 import React from 'react'
-import classNames from 'classnames'
 import classes from './PreviewFile.css'
 import PreviewCode from './PreviewCode'
 import PreviewCadLoader from './PreviewCadLoader'
@@ -19,7 +18,7 @@ import ErrorMessages from './Messages/Messages.jsx'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
-export const Component = React.createClass({
+export class Component extends React.Component {
   render() {
     const { file, fileData, fileRender, filesActions, header, event } = this.props
     const previewId = `${file.project._id}-${file.fileId}-${file.revisionId}`
@@ -123,8 +122,8 @@ export const Component = React.createClass({
         { getPreview() }
       </div>
     )
-  },
-})
+  }
+}
 
 
 // /////////////////////////////// CONTAINER /////////////////////////////////

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { get } from 'lodash'
 
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './ProjectTeam.scss'
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
@@ -29,7 +29,7 @@ export default class ProjectTeam extends Component {
               return (
                 <Col key={ user._id } className="flex-xs-100 flex-gt-xs-50">
                   <div className={ classes.userPanel }>
-                    <div className={ classNames('layout-row layout-align-start-center', classes.header) }>
+                    <div className={ cn('layout-row layout-align-start-center', classes.header) }>
                       <Link name="userRoute" params={ userLinkParams }>
                         <UserAvatar
                           picture={ user.picture }
@@ -43,7 +43,7 @@ export default class ProjectTeam extends Component {
                         <Link className="link-primary text-ellipsis" name="userRoute" params={ userLinkParams }>
                           { user.name }
                         </Link>
-                        <div className={ classNames(classes.blurb, 'text-ellipsis') }>{ user.blurb }</div>
+                        <div className={ cn(classes.blurb, 'text-ellipsis') }>{ user.blurb }</div>
                       </div>
                       <SocialButton
                         style={ { marginLeft: '10px' } }

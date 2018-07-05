@@ -17,7 +17,11 @@ export default class HistoryGraph extends Component {
   tickFormatter = tick => moment(tick).format('DD MMM')
   tooltipLabelFormatter = date => moment(date).format('Do MMM YYYY')
   render() {
-    const { data, loading, history, hasLoaded } = this.props
+    const {
+      data,
+      loading,
+      hasLoaded,
+    } = this.props
 
     const dataFormatted = data.map(item => ({
       date: item.date,

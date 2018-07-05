@@ -4,9 +4,8 @@ We pass in either revisions or file1 + file2.
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import { getViewerType } from 'stemn-shared/misc/Files/PreviewFile/PreviewFile.utils.js'
-import classNames from 'classnames'
+import cn from 'classnames'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
-import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import { getCompareModes, getCompareIcon } from '../FileCompare.utils.js'
 import Popover from 'stemn-shared/misc/Popover'
 import MdMoreHoriz from 'react-icons/md/more-horiz'
@@ -63,7 +62,7 @@ export class FileCompareMenu extends Component {
               { compareModes.map(item => (
                 <a
                   key={ item.value }
-                  className={ classNames({ active: mode === item.value }) }
+                  className={ cn({ active: mode === item.value }) }
                   onClick={ () => changeMode(item.value, revisions) }
                 >
                   Compare: { item.text }

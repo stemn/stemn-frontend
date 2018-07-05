@@ -1,7 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-import { orderBy } from 'lodash'
+import React, { Component } from 'react'
 import classes from './UserStars.css'
-import classNames from 'classnames'
 import Pagination from 'stemn-shared/misc/Pagination'
 import ProjectRow from 'stemn-shared/misc/Projects/ProjectRow'
 

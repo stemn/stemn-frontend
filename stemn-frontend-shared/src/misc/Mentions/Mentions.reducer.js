@@ -1,5 +1,3 @@
-import i from 'icepick'
-
 const initialState = {
 }
 

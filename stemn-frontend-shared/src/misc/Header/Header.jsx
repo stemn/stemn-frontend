@@ -1,5 +1,3 @@
-// Container Core
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 // Container Actions
@@ -8,8 +6,6 @@ import { toggleSidebar } from 'stemn-shared/misc/Sidebar/Sidebar.actions.js'
 // Component Core
 import React from 'react'
 
-// Styles
-import classNames from 'classnames'
 import classes from './Header.css'
 
 // Sub Components
@@ -17,7 +13,7 @@ import MdMenu from 'react-icons/md/menu'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
-export const Component = React.createClass({
+export class Component extends React.Component {
   render() {
     const { dispatch, children, sidebar } = this.props
     const styles = this.props.absolute ? { position: 'absolute' } : this.props.style
@@ -30,8 +26,8 @@ export const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 // /////////////////////////////// CONTAINER /////////////////////////////////
 

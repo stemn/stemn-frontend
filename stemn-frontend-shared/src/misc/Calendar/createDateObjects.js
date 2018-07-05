@@ -9,7 +9,7 @@ export default function createDateObjects(date, weekOffset = 0) {
 
   const prevMonthDays = range(0, diff).map(n => ({
     day: startOfMonth.clone().subtract(diff - n, 'days'),
-    classNames: 'prevMonth',
+    cn: 'prevMonth',
   }))
 
 
@@ -20,7 +20,7 @@ export default function createDateObjects(date, weekOffset = 0) {
   const daysAdded = prevMonthDays.length + currentMonthDays.length - 1
   const nextMonthDays = takeWhile(range(1, 7), n => (daysAdded + n) % 7 !== 0).map(n => ({
     day: last(currentMonthDays).day.clone().add(n, 'days'),
-    classNames: 'nextMonth',
+    cn: 'nextMonth',
   }))
 
   return [...prevMonthDays, ...currentMonthDays, ...nextMonthDays]

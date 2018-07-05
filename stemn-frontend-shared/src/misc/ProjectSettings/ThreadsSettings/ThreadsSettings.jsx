@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 import ThreadLabelsEdit from 'stemn-shared/misc/Threads/ThreadLabelsEdit/ThreadLabelsEdit.jsx'
 import ThreadGroupsEdit from 'stemn-shared/misc/Threads/ThreadGroupsEdit'
@@ -14,7 +14,10 @@ export default class ThreadsSettings extends Component {
     updateBoard: PropTypes.func.isRequired,
   }
   updateBoard = () => {
-    const { board, boardModel, updateBoard } = this.props
+    const {
+      board,
+      updateBoard,
+    } = this.props
 
     // Get the new board data
     // We filter out the empty threads and groups

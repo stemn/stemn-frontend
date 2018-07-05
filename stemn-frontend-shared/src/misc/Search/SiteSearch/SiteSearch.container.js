@@ -1,4 +1,3 @@
-import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import SiteSearch from './SiteSearch'
 import { setQuery } from 'stemn-shared/misc/Search/Search.actions'

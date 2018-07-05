@@ -8,7 +8,7 @@
 // import React from 'react';
 //
 // // Styles
-// import classNames from 'classnames';
+// import cn from 'classnames';
 //
 // // Functions
 // import { orderBy, has }        from 'lodash';

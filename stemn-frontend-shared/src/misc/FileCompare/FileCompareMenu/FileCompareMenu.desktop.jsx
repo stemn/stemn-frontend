@@ -8,7 +8,7 @@ import * as SystemActions from 'stemn-shared/desktop/System/System.actions.js'
 import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js'
 import React from 'react'
 import { getViewerType } from 'stemn-shared/misc/Files/PreviewFile/PreviewFile.utils.js'
-import classNames from 'classnames'
+import cn from 'classnames'
 import Popover from 'stemn-shared/misc/Popover'
 import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
@@ -17,8 +17,8 @@ import downloadModalName from 'stemn-shared/misc/Files/Download/DownloadModal'
 import MdMoreHoriz from 'react-icons/md/more-horiz'
 import MdOpenInNew from 'react-icons/md/open-in-new'
 
-export const Component = React.createClass({
-  menu() {
+export class Component extends React.Component {
+  menu = () => {
     const { file1, revisions, dispatch, isChange } = this.props
     const discardChanges = {
       label: 'Discard Changes',
@@ -69,8 +69,9 @@ export const Component = React.createClass({
       })),
     }
     return isChange ? [discardChanges, openFile, openFolder] : [openFile, openFolder, downloadFile, viewOnline]
-  },
-  preview() {
+  };
+
+  preview = () => {
     const { file1, dispatch } = this.props
     dispatch(ElectronWindowsActions.create({
       type: 'PREVIEW',
@@ -80,9 +81,17 @@ export const Component = React.createClass({
         projectId: file1.project._id,
       },
     }))
-  },
+  };
+
   render() {
-    const { enablePreview, mode, changeMode, revisions, file1, file2, dispatch } = this.props
+    const {
+      enablePreview,
+      mode,
+      changeMode,
+      revisions,
+      file1,
+      file2,
+    } = this.props
 
     if (!file1) { return null }
 
@@ -101,7 +110,7 @@ export const Component = React.createClass({
               <div className="PopoverMenu">
                 {compareModes.map(item => <a
                   key={ item.value }
-                  className={ classNames({ active: mode == item.value }) }
+                  className={ cn({ active: mode === item.value }) }
                   onClick={ () => changeMode(item.value, revisions) }
                 >
                 Compare: {item.text}
@@ -125,8 +134,8 @@ export const Component = React.createClass({
         </Popover>
       </div>
     )
-  },
-})
+  }
+}
 
 // /////////////////////////////// CONTAINER /////////////////////////////////
 

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 
 import SubHeader from 'modules/SubHeader'
 import StandardLayout from 'layout/StandardLayout'
@@ -8,7 +8,6 @@ import Link from 'stemn-shared/misc/Router/Link'
 import SiteSearchResults from 'stemn-shared/misc/Search/SiteSearchResults'
 import { Helmet } from 'react-helmet'
 import classes from './Search.scss'
-import classNames from 'classnames'
 
 export default class Search extends Component {
   render() {

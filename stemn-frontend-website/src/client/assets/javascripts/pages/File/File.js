@@ -1,14 +1,13 @@
-import React, { Component, PropTypes } from 'react'
-import classNames from 'classnames'
+import React, { Component } from 'react'
+import cn from 'classnames'
 import classes from './File.scss'
 import { projectRoute, fileRoute } from 'route-actions'
 import { orderItemsByTime, isSelected } from 'stemn-shared/misc/FileCompare/FileCompare.utils.js'
-import { orderBy, has, get } from 'lodash'
+import { get } from 'lodash'
 import { formatBytes } from 'stemn-shared/misc/Files/utils'
 import { getRevisions } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.utils.js'
 import moment from 'moment'
 import AssemblyParts from 'stemn-shared/misc/Files/PreviewFile/PreviewCad/AssemblyParts/AssemblyParts'
-import DragResize from 'stemn-shared/misc/DragResize/DragResize'
 import FileBreadCrumbs from 'stemn-shared/misc/FileList/components/FileBreadCrumbs'
 import SectionTitle from 'stemn-shared/misc/Titles/SectionTitle/SectionTitle'
 import SimpleTable from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable'
@@ -95,7 +94,7 @@ export default class File extends Component {
           </SimpleIconButton>
         </div>
         <div className="layout-row flex rel-box">
-          <div className={ classNames(classes.preview, 'layout-column flex') }>
+          <div className={ cn(classes.preview, 'layout-column flex') }>
             <FileCompareInner
               className="layout-column flex"
               project={ file.data.project }
@@ -112,7 +111,7 @@ export default class File extends Component {
               preferPlace="above"
             />
           </div>
-          <aside className={ classNames(classes.sidebar, { [classes.isOpen]: isOpen }) }>
+          <aside className={ cn(classes.sidebar, { [classes.isOpen]: isOpen }) }>
             <SectionTitle className={ classes.sidebarTitle }>Meta</SectionTitle>
             <SimpleTable>
               <tr><td>Name</td><td>{file.data.name}</td></tr>

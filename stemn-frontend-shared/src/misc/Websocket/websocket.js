@@ -1,4 +1,3 @@
-import ws from 'ws'
 import primus from './primus-websockets2.js'
 import qs from 'querystring'
 

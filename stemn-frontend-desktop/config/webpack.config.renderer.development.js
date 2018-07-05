@@ -17,12 +17,9 @@ const GLOBALS = {
     WEBSITE_URL: JSON.stringify('https://dev.stemn.com'),
     WEBSOCKET_SERVER: JSON.stringify(process.env.WEBSOCKET_SERVER),
   },
-  __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'true')),
 }
 
-const chunkIncludes = (targets) => ({ context }) => {
-  return context && context.indexOf('node_modules') >= 0 && targets.find(t => new RegExp('\\\\' + t + '\\\\', 'i').test(context))
-}
+const chunkIncludes = targets => ({ context }) => context && context.indexOf('node_modules') >= 0 && targets.find(t => new RegExp('\\\\' + t + '\\\\', 'i').test(context))
 
 module.exports = merge(config, {
   debug: true,

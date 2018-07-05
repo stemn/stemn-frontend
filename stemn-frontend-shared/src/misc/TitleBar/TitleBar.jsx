@@ -4,19 +4,22 @@ import process from 'process'
 
 // Styles
 import styles from './TitleBar.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 
 import MaximiseIcon from './icons/maximise.js'
 import CloseIcon from './icons/close.js'
 import MinimiseIcon from './icons/minimise.js'
 
-export default React.createClass({
-  getInitialState() {
+export default class TitleBar extends React.Component {
+  constructor(props) {
+    super(props)
     const window = electron.remote.getCurrentWindow()
-    return {
+
+    this.state = {
       isMaximised: window.isMaximized(),
     }
-  },
+  }
+
   render() {
     const window = electron.remote.getCurrentWindow()
 
@@ -47,29 +50,29 @@ export default React.createClass({
     //    const MacMaximised = (<svg x="0px" y="0px" viewBox="0 0 10 10"><path fill="#006400" d="M5,10c0,0 0,-2.744 0,-4.167c0,-0.221 -0.088,-0.433 -0.244,-0.589c-0.156,-0.156 -0.368,-0.244 -0.589,-0.244c-1.423,0 -4.167,0 -4.167,0l5,5Z"></path><path fill="#006400" d="M5,0c0,0 0,2.744 0,4.167c0,0.221 0.088,0.433 0.244,0.589c0.156,0.156 0.368,0.244 0.589,0.244c1.423,0 4.167,0 4.167,0l-5,-5Z"></path></svg>)
     //    const MacMaximise = (<svg x="0px" y="0px" viewBox="0 0 10 10"><path fill="#006400" d="M2,3c0,0 0,2.744 0,4.167c0,0.221 0.088,0.433 0.244,0.589c0.156,0.156 0.368,0.244 0.589,0.244c1.423,0 4.167,0 4.167,0l-5,-5Z"></path><path fill="#006400" d="M8,7c0,0 0,-2.744 0,-4.167c0,-0.221 -0.088,-0.433 -0.244,-0.589c-0.156,-0.156 -0.368,-0.244 -0.589,-0.244c-1.423,0 -4.167,0 -4.167,0l5,5Z"></path></svg>)
 
-    if (process.platform == 'darwin') {
+    if (process.platform === 'darwin') {
       return null
       //      return (
-      //        <div className={classNames(styles.bar, 'layout-row', { [styles.light] : this.props.theme == 'light'})}>
-      //          <div className={classNames(styles.dragger, 'flex')}></div>
+      //        <div className={cn(styles.bar, 'layout-row', { [styles.light] : this.props.theme === 'light'})}>
+      //          <div className={cn(styles.dragger, 'flex')}></div>
       //          <div className={styles.darwinButtons + ' layout-row layout-align-start-center'}>
-      //            <div className={classNames(styles.darwinButton, styles.darwinClose)}>{MacClose}</div>
-      //            <div className={classNames(styles.darwinButton, styles.darwinMinimise)}>{MacMinimise}</div>
-      //            <div className={classNames(styles.darwinButton, styles.darwinMaximise)}>{this.state.isMaximised ? MacMaximised : MacMaximise}</div>
+      //            <div className={cn(styles.darwinButton, styles.darwinClose)}>{MacClose}</div>
+      //            <div className={cn(styles.darwinButton, styles.darwinMinimise)}>{MacMinimise}</div>
+      //            <div className={cn(styles.darwinButton, styles.darwinMaximise)}>{this.state.isMaximised ? MacMaximised : MacMaximise}</div>
       //          </div>
       //        </div>
       //      )
     }
     
     return (
-      <div className={ classNames(styles.bar, 'layout-row', { [styles.light]: this.props.theme == 'light' }) }>
-        <div className={ classNames(styles.dragger, 'flex') } />
+      <div className={ cn(styles.bar, 'layout-row', { [styles.light]: this.props.theme === 'light' }) }>
+        <div className={ cn(styles.dragger, 'flex') } />
         <div className={ `layout-row layout-align-end-center ${styles.buttons}` }>
           <a className={ styles.button } title="Minimise" onClick={ minimise }><MinimiseIcon size={ 24 } /></a>
           <a className={ styles.button } title="Maximise" onClick={ toggleMaximise }><MaximiseIcon size={ 24 } /></a>
-          <a className={ classNames(styles.button, styles.close) } title="Close"    onClick={ close }><CloseIcon size={ 24 } /></a>
+          <a className={ cn(styles.button, styles.close) } title="Close"    onClick={ close }><CloseIcon size={ 24 } /></a>
         </div>
       </div>
     )
-  },
-})
+  }
+}

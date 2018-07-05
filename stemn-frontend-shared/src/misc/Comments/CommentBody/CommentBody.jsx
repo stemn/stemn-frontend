@@ -1,7 +1,5 @@
-import { bindActionCreators } from 'redux'
 import React, { Component } from 'react'
 
-import classNames from 'classnames'
 import classes from './CommentBody.scss'
 
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'

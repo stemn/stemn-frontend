@@ -3,24 +3,20 @@ const webpack = require('webpack')
 const config = require('./webpack.config.base')
 const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const getStemnEnv = require('./getStemnEnv')
 
 const GLOBALS = {
   'process.env': {
     NODE_ENV: JSON.stringify('development'),
   },
-  GLOBAL_ENV: {
+  GLOBAL_ENV: Object.assign({
     APP_TYPE: JSON.stringify('web'),
     NODE_ENV: JSON.stringify('development'),
-    WEBSITE_URL: JSON.stringify('https://dev.stemn.com'),
-    API_SERVER: JSON.stringify('https://dev.stemn.com'),
-    WEBSOCKET_SERVER: JSON.stringify('https://dev.stemn.com:8443'),
-  },
-  __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'true')),
+  }, getStemnEnv(process.env.STEMN_ENV)),
 }
 
 module.exports = merge(config, {
-  debug: true,
-  devtool: 'eval-source-map',
+  devtool: 'cheap-module-source-map',
   entry: {
     application: [
       'webpack-hot-middleware/client',

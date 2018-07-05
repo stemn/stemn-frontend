@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import classes from './ProjectPipelines.css'
-import classNames from 'classnames'
-import moment from 'moment'
 import { get, range } from 'lodash'
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'
-import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import Panel from 'stemn-shared/misc/Panels/Panel'
 import SubSubHeader from 'modules/SubSubHeader'
 import Pagination from 'stemn-shared/misc/Pagination'
@@ -12,7 +9,6 @@ import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import SearchInput from 'stemn-shared/misc/Search/SearchInput'
 import PipelinesEmpty from 'stemn-shared/misc/Pipelines/PipelinesEmpty'
 import PipelineList from 'stemn-shared/misc/Pipelines/PipelineList'
-import HistoryGraph from 'stemn-shared/misc/History/HistoryGraph'
 
 export default class ProjectPipelines extends Component {
   changeTypeFilter = (filterType) => {
@@ -58,7 +54,14 @@ export default class ProjectPipelines extends Component {
     })
   }
   renderInner() {
-    const { projectId, pipelines, location, page, size, filter, filterIsDefault, board } = this.props
+    const {
+      projectId,
+      pipelines,
+      location,
+      page,
+      size,
+      filterIsDefault,
+    } = this.props
 
     const isLoaded = pipelines && pipelines.data
     const isLoading = !pipelines || pipelines.loading
@@ -89,7 +92,10 @@ export default class ProjectPipelines extends Component {
     )
   }
   render() {
-    const { project, pipelines, filter } = this.props
+    const {
+      project,
+      filter,
+    } = this.props
     const team = get(project, 'data.team', [])
 
     const userFilterOptions = [

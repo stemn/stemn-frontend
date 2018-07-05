@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classNames from 'classnames'
+import cn from 'classnames'
 import timelineVector from 'stemn-shared/assets/images/pure-vectors/timeline.svg'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import Link from 'stemn-shared/misc/Router/Link'
@@ -9,7 +9,7 @@ export default class PipelinesEmpty extends Component {
     const { className, isPublic } = this.props
     return (
       <InfoPanel
-        className={ classNames('layout-column layout-align-center-center text-center', className) }
+        className={ cn('layout-column layout-align-center-center text-center', className) }
         style={ { padding: '60px 20px' } }
       >
         <img src={ timelineVector } style={ { width: '80px' } } />

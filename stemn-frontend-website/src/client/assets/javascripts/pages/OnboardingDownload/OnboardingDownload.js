@@ -1,13 +1,10 @@
-import React, { Component, PropTypes } from 'react'
-
-import { Container, Col, Row } from 'stemn-shared/misc/Layout'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import DownloadButton from 'stemn-shared/misc/DesktopReleases/DownloadButton'
 import Link from 'stemn-shared/misc/Router/Link'
 import PanelDescription from 'stemn-shared/misc/Panels/PanelDescription'
-
-import classNames from 'classnames'
 
 export default class OnboardingDownload extends Component {
   static propTypes = {

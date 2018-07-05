@@ -3,7 +3,6 @@ import React from 'react'
 import { render } from 'react-dom'
 import { browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
-
 import Root from './Root'
 import configureStore from './store/configureStore'
 import getInitialState from './state/getInitialState'
@@ -15,6 +14,7 @@ import initWebsocket from './init/initWebsocket'
 import { createPersistor } from 'redux-persist'
 import { getLatest } from 'stemn-shared/misc/DesktopReleases/DesktopReleases.actions'
 import { getNotifications } from 'stemn-shared/misc/Notifications/Notifications.actions'
+
 
 const initReactAndRedux = (initialState) => {
   const store = configureStore(initialState)

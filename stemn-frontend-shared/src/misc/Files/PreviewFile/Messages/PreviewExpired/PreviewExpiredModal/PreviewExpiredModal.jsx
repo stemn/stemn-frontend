@@ -2,13 +2,14 @@
 import React from 'react'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import StandardTable from 'stemn-shared/misc/Tables/StandardTable/StandardTable.jsx'
-import classNames from 'classnames'
 
-const Component = React.createClass({
+class Component extends React.Component {
   render() {
-    const { modalCancel, modalConfirm } = this.props
+    const {
+      modalConfirm,
+    } = this.props
     const { provider } = this.props
-    const providerText = provider == 'drive' ? 'Google Drive' : 'Dropbox'
+    const providerText = provider === 'drive' ? 'Google Drive' : 'Dropbox'
     return (
       <div style={ { width: '600px' } }>
         <div className="modal-title">
@@ -26,7 +27,7 @@ const Component = React.createClass({
               </tr>
             </thead>
             <tbody>
-              {provider == 'drive'
+              {provider === 'drive'
                 ? <tr>
                   <td>Google Drive</td>
                   <td>30 days</td>
@@ -72,7 +73,7 @@ const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 export default Component

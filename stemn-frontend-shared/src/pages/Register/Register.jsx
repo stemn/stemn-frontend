@@ -1,20 +1,13 @@
-// Component Core
 import React from 'react'
-
-// Styles
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from '../Login/Login.css'
-
-// Sub Components
 import { Link } from 'react-router'
 import Button from 'stemn-shared/misc/Buttons/Button/Button.jsx'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
-// /////////////////////////////// COMPONENT /////////////////////////////////
-
-export default React.createClass({
-  submit(event) {
+export default class Register extends React.Component {
+  submit = (event) => {
     event.preventDefault()
     this.props.register({
       email: this.props.auth.login.email,
@@ -22,14 +15,15 @@ export default React.createClass({
       firstname: this.props.auth.login.firstname,
       lastname: this.props.auth.login.lastname,
     })
-  },
+  };
+
   render() {
     const { authenticate, auth } = this.props
     
     return (
       <div className="flex rel-box">
-        <div className={ classNames(classes.background, 'layout-column layout-align-center-center') }>
-          <div className={ classNames(classes.panel, 'layout-column', 'layout-align-space-between') }>
+        <div className={ cn(classes.background, 'layout-column layout-align-center-center') }>
+          <div className={ cn(classes.panel, 'layout-column', 'layout-align-space-between') }>
             <div className="text-title-3">Register</div>
             <form onSubmit={ this.submit }>
               <br />
@@ -46,7 +40,7 @@ export default React.createClass({
                   value={ auth.login.lastname }
                   className="dr-input"
                   style={ { marginLeft: '5px' } }
-                  type="text" placeholder="Last Name"
+                  type="text" placeholder="Last name"
                 />
               </div>
               <Input
@@ -102,6 +96,6 @@ export default React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 

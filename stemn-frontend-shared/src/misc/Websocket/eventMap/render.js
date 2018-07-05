@@ -1,7 +1,9 @@
 import { renderFileDownload, renderFileError, renderFileProgress } from 'stemn-shared/misc/Files/Files.actions.js'
 
 export default (store, action) => {
-  const { dispatch, getState } = store
+  const {
+    dispatch,
+  } = store
 
   switch (action.type) {
     //    case 'RENDER/RENDER_COMPLETE':

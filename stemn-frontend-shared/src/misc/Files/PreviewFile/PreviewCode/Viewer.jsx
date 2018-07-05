@@ -34,7 +34,7 @@ export default class Viewer extends Component {
       const transformedExtension = transformExtension(extension)
       const modeInfo = codemirror.findModeByExtension(transformedExtension)
       const mode = modeInfo ? modeInfo.mode : 'null'
-      if (mode && mode != 'null') {
+      if (mode && mode !== 'null') {
         const modePath = `./${mode}/${mode}.js`
         const webpackModePath = requireCodemirrorMode(modePath)
 

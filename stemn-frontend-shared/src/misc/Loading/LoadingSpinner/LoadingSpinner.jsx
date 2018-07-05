@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
 // Styles
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './LoadingSpinner.css'
 
-export default class extends Component {
+export default class LoadingSpinner extends Component {
   render() {
     const { size, progress } = this.props
 
@@ -15,9 +15,9 @@ export default class extends Component {
     const progressStyle = isProgress ? { strokeDasharray: `${total * progress}, 200` } : {}
 
     const getTransformStyle = () => {
-      if (size == 'xs') {
+      if (size === 'xs') {
         return { transform: 'scale(0.2)' }
-      } else if (size == 'sm') {
+      } else if (size === 'sm') {
         return { transform: 'scale(0.5)' }
       }
     }
@@ -25,7 +25,7 @@ export default class extends Component {
     const transformStyle = getTransformStyle()
 
     return (
-      <div className={ classNames(classes.loader, isProgress ? classes.progress : classes.animate) } style={ transformStyle }>
+      <div className={ cn(classes.loader, isProgress ? classes.progress : classes.animate) } style={ transformStyle }>
         <svg className={ classes.circular } viewBox={ `${width / 2} ${width / 2} ${width} ${width}` }>
           <circle className={ classes.path } cx={ width } cy={ width } r={ width / 2 - 5 } fill="none" strokeWidth="2" strokeMiterlimit="10" style={ progressStyle } />
         </svg>

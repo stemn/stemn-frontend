@@ -2,10 +2,10 @@ import React from 'react'
 
 // Styles
 import styles from './NavButton.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 
 export default (props) => {
-  const buttonClasses = classNames({
+  const buttonClasses = cn({
     [styles.navButton]: true,
     [styles.active]: props.isActive,
   })

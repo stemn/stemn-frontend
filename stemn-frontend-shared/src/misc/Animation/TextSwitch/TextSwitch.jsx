@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-import classNames from 'classnames'
 import classes from './TextSwitch.css'
 
 export default class TextSwitch extends Component {
