@@ -3,6 +3,15 @@ defaults: &defaults
     docker:
       - image: circleci/node:7.10
 
+authenticate: &authenticate
+    run:
+      name: Authenticate Container
+      command: |
+        cd ~
+        echo $CREDENTIALS > gcloud-service-key.json && \
+        gcloud auth activate-service-account --key-file=gcloud-service-key.json && \
+        gcloud --quiet auth configure-docker 
+
 version: 2
 jobs:
   install_root:
@@ -115,13 +124,30 @@ jobs:
       - run: cd stemn-frontend-website; npm run serve:wait; $(npm bin)/cypress run;
 
   deploy_website:
-    <<: *defaults
+
+    working_directory: ~/stemn-frontend
+
+    docker:
+      - image: gcr.io/stemnapp/stemn-gcloud:latest
+        auth:
+          username: _json_key
+          password: $CREDENTIALS
+
     steps:
+      - *authenticate
+
+      - setup_remote_docker:
+          docker_layer_caching: true
+
       - checkout
+
       - attach_workspace:
           at: ~/stemn-frontend
-      - run: cd stemn-frontend-website; npm run deploy:ci;
 
+      - run:
+          name: Build and deploy
+          command: sh ~/.circleci/deploy_frontend_website.sh
+            
 workflows:
   version: 2
   build_and_test:
@@ -138,15 +164,17 @@ workflows:
       - build_desktop:
           requires:
             - install_desktop
-      - test_website_e2e:
+      # - test_website_e2e:
+      #     requires:
+      #       - build_website
+      - deploy_website:
           requires:
             - build_website
-      - deploy_website:
           filters:
             branches:
               only: 
-                - master
+                - production
                 - staging
-          requires: 
-            - test_website_e2e
+          # requires: 
+          #   - test_website_e2e
 
