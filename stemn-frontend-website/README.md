@@ -2,6 +2,12 @@
 
 Anyone can get the [Stemn Website](https://stemn.com/) running locally and develop new features. The entire frontend is open-source!
 
+### Table of Contents
+
+1. [Development](#development)
+2. [Branches](#branches)
+3. [Contributing](#contributing)
+
 ## Development
 
 ### Install
@@ -22,12 +28,19 @@ Anyone can get the [Stemn Website](https://stemn.com/) running locally and devel
 
 ### Deploy
 
-Note:
 Any code that is merged into the `production` or `staging` branches (and passes CI) will be automatically deployed.
 
 ## Branches
 
 This project has 2 main branches:
 
-* `staging` - this will be deployed to staging.stemn.com
-* `production` - this will be deployed to stemn.com
+* `staging` - staging.stemn.com
+* `production` - stemn.com
+
+## Contributing
+
+* Fork this repo
+* Follow the __Development__ guide above
+* Submit a MR targeting the `staging` branch
+* Make sure the CI pipeline is passing
+* We will review and merge ASAP
