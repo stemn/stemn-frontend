@@ -178,10 +178,8 @@ workflows:
           requires:
             - build_website
       - deploy_website:
-        requires: 
-          - test_website_e2e
-          requires:
-            - build_website
+          requires: 
+            - test_website_e2e
           filters:
             branches:
               only: 
