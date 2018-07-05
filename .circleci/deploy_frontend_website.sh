@@ -12,13 +12,14 @@ echo "${CIRCLE_BRANCH} - Update Website"
 cd ~/stemn-frontend/stemn-frontend-website
 
 IMAGE="gcr.io/stemnapp/${CIRCLE_BRANCH}/stemn-website-server"
+TAG=${CIRCLE_BUILD_NUM}
 
-docker build -t "${IMAGE}:${CIRCLE_BUILD_NUM}" .
+docker build -t "${IMAGE}:${TAG}" .
 docker build -t "${IMAGE}":latest .
 
-docker push "${IMAGE}:$TAG"
+docker push "${IMAGE}:${TAG}"
 docker push "${IMAGE}:latest"
 
-kubectl set image deployment/website-server website-server="${IMAGE}:$TAG"  
+kubectl set image deployment/website-server website-server="${IMAGE}:${TAG}"  
 
 echo ---------------------------
