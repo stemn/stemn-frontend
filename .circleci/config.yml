@@ -84,7 +84,7 @@ jobs:
       - restore_cache:
           keys:
           - website-happypack
-      - run: cd stemn-frontend-website; sudo npm run link:shared; npm run build;
+      - run: cd stemn-frontend-website; sudo npm run link:shared; export STEMN_ENV=$CIRCLE_BRANCH; npm run build;
       - save_cache:
           paths:
             - ./stemn-frontend-website/.happypack
