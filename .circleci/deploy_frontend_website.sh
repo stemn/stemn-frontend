@@ -9,7 +9,7 @@ fi
 
 echo "${CIRCLE_BRANCH} - Update Website"
 
-cd ~/stemn-frontend
+cd ~/stemn-frontend/stemn-frontend-website
 
 IMAGE="gcr.io/stemnapp/${CIRCLE_BRANCH}/stemn-website-server"
 
