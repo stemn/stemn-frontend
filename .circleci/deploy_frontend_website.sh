@@ -1,6 +1,7 @@
 
 if [ "$CIRCLE_BRANCH" == "production" ]
 then 
+  echo hello 
   # gcloud container clusters get-credentials stemn-beta-2018-07-01-12-09-50 --zone us-west1-c --project stemnapp
 else
   gcloud container clusters get-credentials staging-development --zone us-east1-b --project stemnapp

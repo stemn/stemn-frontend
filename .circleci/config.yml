@@ -161,12 +161,14 @@ workflows:
       - install_desktop:
           requires:
             - install_root
+
       # - lint:
       #     requires:
       #       - install_root
       - build_website:
           requires:
             - install_website
+
       - build_desktop:
           requires:
             - install_desktop
@@ -174,6 +176,8 @@ workflows:
       #     requires:
       #       - build_website
       - deploy_website:
+        # requires: 
+        #   - test_website_e2e
           requires:
             - build_website
           filters:
@@ -181,6 +185,5 @@ workflows:
               only: 
                 - production
                 - staging
-          # requires: 
-          #   - test_website_e2e
+          
 
