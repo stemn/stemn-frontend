@@ -23,9 +23,12 @@ jobs:
           keys:
           - deps-{{ checksum "./package-lock.json" }}
       - run: npm i
+      - run: npm i cypress
       - save_cache:
           paths:
             - node_modules
+            - ~/.npm
+            - ~/.cache
           key: deps-{{ checksum "./package-lock.json" }}
       - persist_to_workspace:
           root: ~/stemn-frontend
@@ -39,7 +42,6 @@ jobs:
       - restore_cache:
           keys:
           - deps-{{ checksum "./stemn-frontend-website/package-lock.json" }}
-      - run: cd stemn-frontend-website; npm i cypress;
       - run: cd stemn-frontend-website; sudo npm run install:link;
       - save_cache:
           paths:
@@ -172,12 +174,12 @@ workflows:
       - build_desktop:
           requires:
             - install_desktop
-      # - test_website_e2e:
-      #     requires:
-      #       - build_website
+      - test_website_e2e:
+          requires:
+            - build_website
       - deploy_website:
-        # requires: 
-        #   - test_website_e2e
+        requires: 
+          - test_website_e2e
           requires:
             - build_website
           filters:
