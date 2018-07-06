@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classNames from 'classnames'
+import cn from 'classnames'
 import comments from 'stemn-shared/assets/images/pure-vectors/comments.svg'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 
@@ -8,7 +8,7 @@ export default class ThreadTimelineEmpty extends Component {
     const { className } = this.props
     return (
       <InfoPanel
-        className={ classNames('layout-column layout-align-center-center text-center', className) }
+        className={ cn('layout-column layout-align-center-center text-center', className) }
         style={ { padding: '60px 20px' } }
       >
         <img src={ comments } style={ { width: '80px' } } />

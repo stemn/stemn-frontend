@@ -2,18 +2,18 @@
 import React from 'react'
 
 // Styles
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './SectionTitle.css'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
-export default React.createClass({
+export default class SectionTitle extends React.Component {
   render() {
     const { children, style, className } = this.props
     return (
-      <div className={ classNames(classes.section, 'layout-row', className) } style={ style }>
+      <div className={ cn(classes.section, 'layout-row', className) } style={ style }>
         <div className={ classes.text }>{children}</div>
       </div>
     )
-  },
-})
+  }
+}

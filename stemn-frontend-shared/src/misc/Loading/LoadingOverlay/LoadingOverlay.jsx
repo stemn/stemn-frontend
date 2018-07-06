@@ -1,13 +1,10 @@
-import React, { PropTypes, Component } from 'react'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-
-// Components
+import React from 'react'
+import PropTypes from 'prop-types'
+import { CSSTransitionGroup } from 'react-transition-group'
 import LoadingSpinner from 'stemn-shared/misc/Loading/LoadingSpinner/LoadingSpinner'
 import LoadingLinear  from 'stemn-shared/misc/Loading/LoadingLinear/LoadingLinear.jsx'
-
-// Styles
 import classes from './LoadingOverlay.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 
 const propTypesObject = {
   size: PropTypes.string,               // 'sm' || 'lg' - Changes the size of the spinner
@@ -16,19 +13,15 @@ const propTypesObject = {
   style: PropTypes.object,               // Styles object
   linear: PropTypes.bool,                 // Change the spinner to a linear bar
   hideBg: PropTypes.bool,                 // Make the bg transparent
-  noOverlay: PropTypes.bool,                 // Makes the overlay just at the top (for use with the linear == true)
+  noOverlay: PropTypes.bool,                 // Makes the overlay just at the top (for use with the linear === true)
   background: PropTypes.string,               // Custom background colour
   progress: PropTypes.number,               // Progress percentage - makes the spinner determinate
 }
 
 
-export default React.createClass({
-  propTypes: propTypesObject,
-  getInitialState() {
-    return {
-      loading: false,
-    }
-  },
+export default class LoadingOverlay extends React.Component {
+  static propTypes = propTypesObject;
+
   componentWillReceiveProps(nextProps) {
     const prevProps = this.props
     // If we just began loading:
@@ -39,16 +32,18 @@ export default React.createClass({
     else if (prevProps && prevProps.show && !nextProps.show) {
       this.endLoading()
     }
-  },
-  startLoading() {
+  }
+
+  startLoading = () => {
     //    console.log('start-loading');
-  },
-  endLoading() {
+  };
+
+  endLoading = () => {
     //    console.log('end-loading');
-  },
+  };
+
   render() {
     const { size, show, children, style, linear, hideBg, noOverlay, background, progress } = this.props
-    const { loading } = this.state
 
     const transitionName = {
       enter: classes.enter,
@@ -71,7 +66,7 @@ export default React.createClass({
     const allStyles = Object.assign({}, backgroundStyles, noOverlayStyles, style)
 
     return (
-      <ReactCSSTransitionGroup
+      <CSSTransitionGroup
         transitionName={ transitionName }
         transitionAppear
         transitionAppearTimeout={ 300 }
@@ -79,7 +74,7 @@ export default React.createClass({
         transitionLeaveTimeout={ 300 }
       >
         { show
-          ? <div className={ classNames(classes.loadingOverlay, hideBg ? '' : classes.bgWhite) } style={ allStyles }>
+          ? <div className={ cn(classes.loadingOverlay, hideBg ? '' : classes.bgWhite) } style={ allStyles }>
             { linear
               ? <LoadingLinear />
               : <div className={ classes.loaderContainer }>
@@ -89,8 +84,8 @@ export default React.createClass({
             }
           </div>
           : null }
-      </ReactCSSTransitionGroup>
+      </CSSTransitionGroup>
     )
-  },
-})
+  }
+}
 

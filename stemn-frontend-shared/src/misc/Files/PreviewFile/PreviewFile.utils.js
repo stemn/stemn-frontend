@@ -1,4 +1,4 @@
-import { forEach, clone } from 'lodash'
+import { forEach } from 'lodash'
 import i from 'icepick'
 import codemirror from 'codemirror'
 import 'codemirror/mode/meta.js'

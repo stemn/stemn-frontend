@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import EntityRow from 'stemn-shared/misc/EntityRow'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton'

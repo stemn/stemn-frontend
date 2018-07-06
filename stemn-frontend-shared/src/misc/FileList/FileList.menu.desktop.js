@@ -5,7 +5,7 @@ import capitalizeFirstLetter from 'stemn-shared/utils/strings/capitalizeFirstLet
 
 export default (dispatch, provider) => [{
   label: 'Open Preview Window',
-  isHidden: item => item.type != 'file',
+  isHidden: item => item.type !== 'file',
   onClick: item => dispatch(ElectronWindowsActions.create({
     type: 'PREVIEW',
     props: {
@@ -16,7 +16,7 @@ export default (dispatch, provider) => [{
   })),
 }, {
   label: 'Open File',
-  isHidden: item => item.type != 'file',
+  isHidden: item => item.type !== 'file',
   onClick: item => dispatch(SystemActions.openFile({
     path: item.path,
     projectId: item.project._id,
@@ -24,7 +24,7 @@ export default (dispatch, provider) => [{
   })),
 }, {
   label: 'Open Containing Folder',
-  isHidden: item => item.type != 'file',
+  isHidden: item => item.type !== 'file',
   onClick: item => dispatch(SystemActions.openFile({
     location: true,
     path: item.path,
@@ -33,14 +33,14 @@ export default (dispatch, provider) => [{
   })),
 }, {
   label: 'Open Folder',
-  isHidden: item => item.type == 'file',
+  isHidden: item => item.type === 'file',
   onClick: item => dispatch(projectFolderRoute({
     projectId: item.project._id,
     fileId: item.fileId,
   })),
 }, {
   label: 'Open in File Explorer',
-  isHidden: item => item.type == 'file',
+  isHidden: item => item.type === 'file',
   onClick: item => dispatch(SystemActions.openFile({
     path: item.path,
     projectId: item.project._id,

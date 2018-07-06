@@ -1,14 +1,8 @@
 import React from 'react'
-
-// Components
 import Header from 'stemn-shared/misc/Header/Header.jsx'
 import book   from 'stemn-shared/assets/images/pure-vectors/book.svg'
 
-// Styles
-import classNames from 'classnames'
-
-
-export default class extends React.Component {
+export default class HomePage extends React.Component {
   render() {
     return (
       <div className="layout-column flex rel-box">

@@ -1,0 +1,193 @@
+defaults: &defaults
+    working_directory: ~/stemn-frontend
+    docker:
+      - image: circleci/node:7.10
+
+
+authenticate: &authenticate
+    run:
+      name: Authenticate Container
+      command: |
+        cd ~
+        echo $CREDENTIALS > gcloud-service-key.json && \
+        gcloud auth activate-service-account --key-file=gcloud-service-key.json && \
+        gcloud --quiet auth configure-docker 
+
+version: 2
+jobs:
+  install_root:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - deps-{{ checksum "./package-lock.json" }}
+      - run: npm i
+      - save_cache:
+          paths:
+            - node_modules
+          key: deps-{{ checksum "./package-lock.json" }}
+      - persist_to_workspace:
+          root: ~/stemn-frontend
+          paths: 
+            - ./node_modules/*
+            
+  install_website:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - deps-{{ checksum "./stemn-frontend-website/package-lock.json" }}
+      - run: cd stemn-frontend-website; sudo npm run install:link;
+      - save_cache:
+          paths:
+            - stemn-frontend-website/node_modules
+          key: deps-{{ checksum "./stemn-frontend-website/package-lock.json" }}
+      - persist_to_workspace:
+          root: ~/stemn-frontend
+          paths: 
+            - ./stemn-frontend-website/node_modules/*
+
+  install_desktop:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - deps-{{ checksum "./stemn-frontend-desktop/package-lock.json" }}
+          - deps-{{ checksum "./stemn-frontend-desktop/app/package-lock.json" }}
+      - run: cd stemn-frontend-desktop; sudo npm run install:link;
+      - save_cache:
+          paths:
+            - stemn-frontend-desktop/node_modules
+          key: deps-{{ checksum "./stemn-frontend-desktop/package-lock.json" }}
+      - save_cache:
+          paths:
+            - stemn-frontend-desktop/app/node_modules
+          key: deps-{{ checksum "./stemn-frontend-desktop/app/package-lock.json" }}
+      - persist_to_workspace:
+          root: ~/stemn-frontend
+          paths: 
+            - ./stemn-frontend-desktop/node_modules/*
+            - ./stemn-frontend-desktop/app/node_modules/*
+
+  build_website:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/stemn-frontend
+      - restore_cache:
+          keys:
+          - website-happypack
+      - run:
+          name: Build webpack
+          command: |
+            cd stemn-frontend-website; 
+            sudo npm run link:shared; 
+            export STEMN_ENV=$CIRCLE_BRANCH; 
+            npm run build;
+      - save_cache:
+          paths:
+            - ./stemn-frontend-website/.happypack
+          key: website-happypack
+      - persist_to_workspace:
+          root: ~/stemn-frontend
+          paths: 
+            - ./stemn-frontend-website/build/*
+
+  build_desktop:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/stemn-frontend
+      - run: cd stemn-frontend-desktop; sudo npm run link:shared; npm run build;
+      - persist_to_workspace:
+          root: ~/stemn-frontend
+          paths: 
+            - ./stemn-frontend-desktop/dist/*
+
+  lint:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/stemn-frontend
+      - run: npm run lint;
+
+  test_website_e2e:
+    working_directory: ~/stemn-frontend
+    docker:
+      - image: cypress/base:6
+        environment:
+          TERM: xterm
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/stemn-frontend
+      - run: cd stemn-frontend-website; npm i cypress;
+      - run: cd stemn-frontend-website; npm run serve:wait; $(npm bin)/cypress run;
+
+  deploy_website:
+
+    working_directory: ~/stemn-frontend
+
+    docker:
+      - image: gcr.io/stemnapp/stemn-gcloud:latest
+        auth:
+          username: _json_key
+          password: $CREDENTIALS
+
+    steps:
+      - *authenticate
+
+      - setup_remote_docker:
+          docker_layer_caching: true
+
+      - checkout
+
+      - attach_workspace:
+          at: ~/stemn-frontend
+
+      - run:
+          name: Build and deploy
+          command: sh ./.circleci/deploy_frontend_website.sh
+            
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - install_root
+      - install_website:
+          requires:
+            - install_root
+
+      - install_desktop:
+          requires:
+            - install_root
+
+      # - lint:
+      #     requires:
+      #       - install_root
+      - build_website:
+          requires:
+            - install_website
+
+      - build_desktop:
+          requires:
+            - install_desktop
+      # - test_website_e2e:
+      #     requires:
+      #       - build_website
+      - deploy_website:
+          requires: 
+            - build_website
+          filters:
+            branches:
+              only: 
+                - production
+                - staging
+          
+

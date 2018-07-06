@@ -1,12 +1,10 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { has } from 'lodash'
-
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
-import UserNameSettings from 'stemn-shared/misc/UserSettings/UserNameSettings'
 import UserEmailSettings from 'stemn-shared/misc/UserSettings/UserEmailSettings'
 import UserLinkedAccountSettings from 'stemn-shared/misc/UserSettings/UserLinkedAccountSettings'
 import UserCloudProviderSettings from 'stemn-shared/misc/UserSettings/UserCloudProviderSettings'
-import UserBetaSettings from 'stemn-shared/misc/UserSettings/UserBetaSettings'
 import UserPasswordSettings from 'stemn-shared/misc/UserSettings/UserPasswordSettings'
 
 export default class SettingsAccount extends Component {

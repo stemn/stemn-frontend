@@ -6,9 +6,9 @@ export const getRevisions = (syncTimeline) => {
   const result = []
   
   syncTimeline.forEach((item) => {
-    if (item.event == 'revision') {
+    if (item.event === 'revision') {
       result.push(item)
-    } else if (item.event == 'commit') {
+    } else if (item.event === 'commit') {
       item.data.items.forEach((subItem) => {
         result.push(subItem)
       })

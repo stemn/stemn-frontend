@@ -1,6 +1,7 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import classes from './EntityRow.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 import Highlight from 'stemn-shared/misc/Autosuggest/Highlight'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import Link from 'stemn-shared/misc/Router/Link'
@@ -62,7 +63,7 @@ export default class EntityRow extends Component {
 
     if (loading || !data._id) {
       return (
-        <LoadingAnimation className={ classNames('layout-row layout-align-start-center', classes.row, className) } >
+        <LoadingAnimation className={ cn('layout-row layout-align-start-center', classes.row, className) } >
           <UserAvatar size={ 40 } shape="square" className={ classes.avatar } />
           <div className="flex">
             <LoadingPlaceholder width={ 200 } className={ classes.link } />
@@ -72,7 +73,7 @@ export default class EntityRow extends Component {
       )
     } 
     return (
-      <div className={ classNames('layout-row layout-align-start-center', classes.row, className) } >
+      <div className={ cn('layout-row layout-align-start-center', classes.row, className) } >
         <UserAvatar
           size={ 40 }
           shape="square"
@@ -81,7 +82,7 @@ export default class EntityRow extends Component {
           className={ classes.avatar }
         />
         <div className="flex">
-          <Link className={ classNames(classes.link, 'link-primary') } name={ route.name } params={ route.params }>
+          <Link className={ cn(classes.link, 'link-primary') } name={ route.name } params={ route.params }>
             <Highlight
               className="text-ellipsis"
               text={ data.name || 'Untitled' }

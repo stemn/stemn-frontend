@@ -1,35 +1,40 @@
 import { connect } from 'react-redux'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import { CSSTransitionGroup } from 'react-transition-group'
 import * as ToastsActions from './Toasts.actions.js'
 import React from 'react'
 import MdError from 'react-icons/md/error'
 import MdClose from 'react-icons/md/close'
-import classNames from 'classnames'
+import cn from 'classnames'
 
 const classes = GLOBAL_ENV.APP_TYPE === 'web'
   ? require('./Toasts.web.css')
   : require('./Toasts.desktop.css')
 
-const Toast = React.createClass({
-  hideTimeout: null,
-  mouseEnter() {
+class Toast extends React.Component {
+  hideTimeout = null;
+
+  mouseEnter = () => {
     clearTimeout(this.hideTimeout)
-  },
-  mouseLeave() {
+  };
+
+  mouseLeave = () => {
     this.startHideTimeout()
-  },
-  startHideTimeout() {
+  };
+
+  startHideTimeout = () => {
     this.hideTimeout = setTimeout(this.closeToast, 5000)
-  },
-  closeToast() {
+  };
+
+  closeToast = () => {
     this.props.dispatch(ToastsActions.hide({ id: this.props.toast.id }))
-  },
+  };
+
   render() {
     const { toast, dispatch } = this.props
     if (!this.hideTimeout) { this.startHideTimeout() }
 
     const getIcon = () => {
-      if (toast.type == 'error') {
+      if (toast.type === 'error') {
         return <MdError size={ 20 } className={ classes.icon } />
       } 
       return null
@@ -62,7 +67,7 @@ const Toast = React.createClass({
     }
 
     return (
-      <div className={ classNames(classes.toast, 'layout-row', { [classes.error]: toast.type == 'error' }) } onMouseEnter={ this.mouseEnter } onMouseLeave={ this.mouseLeave }>
+      <div className={ cn(classes.toast, 'layout-row', { [classes.error]: toast.type === 'error' }) } onMouseEnter={ this.mouseEnter } onMouseLeave={ this.mouseLeave }>
         <div className={ `${classes.toastInner} flex layout-row layout-align-start-center` }>
           {getIcon()}
           {toast.title}
@@ -72,11 +77,11 @@ const Toast = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 
-export const Component = React.createClass({
+export class Component extends React.Component {
   render() {
     const { toasts, dispatch } = this.props
 
@@ -93,7 +98,7 @@ export const Component = React.createClass({
 
     return (
       <div className={ classes.toastContainer }>
-        <ReactCSSTransitionGroup
+        <CSSTransitionGroup
           transitionName={ transitionName }
           transitionAppear
           transitionAppearTimeout={ 300 }
@@ -104,11 +109,11 @@ export const Component = React.createClass({
             ? toasts.stack.map(toast => <Toast key={ toast.id } toast={ toast } dispatch={ dispatch } />)
             : null
           }
-        </ReactCSSTransitionGroup>
+        </CSSTransitionGroup>
       </div>
     )
-  },
-})
+  }
+}
 
 
 function mapStateToProps({ toasts }) {

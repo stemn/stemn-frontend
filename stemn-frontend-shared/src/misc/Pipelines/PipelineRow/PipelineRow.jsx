@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import classes from './PipelineRow.scss'
-import classNames from 'classnames'
+import cn from 'classnames'
 import Link from 'stemn-shared/misc/Router/Link'
 import UserAvatars from 'stemn-shared/misc/Avatar/UserAvatars/UserAvatars.jsx'
 import LoadingPlaceholder from 'stemn-shared/misc/Loading/LoadingPlaceholder'
@@ -28,17 +28,17 @@ export default class ThreadRow extends Component {
       }
 
       return (
-        <div className={ classNames('layout-row layout-align-start-center', classes.row, className) }>
+        <div className={ cn('layout-row layout-align-start-center', classes.row, className) }>
           <div className="layout-column flex">
             <Link
-              className={ classNames(classes.title, 'text-ellipsis') }
+              className={ cn(classes.title, 'text-ellipsis') }
               name="projectPipelineRoute"
               params={ pipelineRouteParams }
             >
               { pipeline.data.name }
               { pipeline.data.pipelineNumber && <span className={ classes.pipelineNumber }>&nbsp;#P{ pipeline.data.pipelineNumber }</span> }
             </Link>
-            <div className={ classNames(classes.meta, 'text-ellipsis') }>
+            <div className={ cn(classes.meta, 'text-ellipsis') }>
               { pipeline.data.start && <span>Triggered {moment(pipeline.data.start).fromNow()}</span> }
               { pipeline.data.start && <span className="text-interpunct" /> }
               { pipeline.data.start && <span className="text-grey-2">Duration: { diffTimes(pipeline.data.start, pipeline.data.end || new Date()) }</span> }
@@ -58,12 +58,12 @@ export default class ThreadRow extends Component {
     }
 
     return (
-      <LoadingAnimation className={ classNames('layout-row layout-align-start-center', classes.row, className) }>
+      <LoadingAnimation className={ cn('layout-row layout-align-start-center', classes.row, className) }>
         <div className="layout-column flex">
           <div>
             <LoadingPlaceholder width={ 300 } className={ classes.title } />
           </div>
-          <div className={ classNames(classes.meta, 'layout-row') }>
+          <div className={ cn(classes.meta, 'layout-row') }>
             <LoadingPlaceholder width={ 50 } />
             <LoadingPlaceholder width={ 50 } style={ { marginLeft: '5px' } } />
           </div>

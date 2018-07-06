@@ -1,7 +1,5 @@
 import React from 'react'
 
-import classNames from 'classnames'
-
 import Popover from 'stemn-shared/misc/Popover'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdDone from 'react-icons/md/done'
@@ -10,7 +8,7 @@ import MdMoreHoriz from 'react-icons/md/more-horiz'
 
 import classes from './LinkAccount.css'
 
-export default class extends React.Component {
+export default class LinkAccount extends React.Component {
   render() {
     return (
       <div className={ `${classes.row} layout-row layout-align-start-center` }>

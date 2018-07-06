@@ -4,18 +4,23 @@ import MdDone from 'react-icons/md/done'
 
 // Styles
 import classes from './RadioAlt.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 
 /** *******************************************
 
 ******************************************** */
 
-export default React.createClass({
+export default class RadioAlt extends React.Component {
   render() {
-    const { value, model, className, changeAction, children } = this.props
+    const {
+      value,
+      model,
+      className,
+      children,
+    } = this.props
     const statusClass = value === true ? 'checked' : ''
     return (
-      <div className={ classNames(classes.radio, className) }>
+      <div className={ cn(classes.radio, className) }>
         <label>
           <Input
             value={ value }
@@ -30,5 +35,5 @@ export default React.createClass({
         </label>
       </div>
     )
-  },
-})
+  }
+}

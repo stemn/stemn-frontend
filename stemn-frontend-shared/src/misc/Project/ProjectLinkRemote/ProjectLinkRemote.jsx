@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { authenticate } from 'stemn-shared/misc/Auth/Auth.actions.js'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
-import classNames from 'classnames'
 
 class ProjectLinkRemote extends Component {
   onChange = ({ isAuthed, authType, value }) => {
@@ -26,7 +25,10 @@ class ProjectLinkRemote extends Component {
     }
   }
   render() {
-    const { model, value, dispatch, auth } = this.props
+    const {
+      value,
+      auth,
+    } = this.props
 
     const options = [
       {

@@ -1,5 +1,3 @@
-// Container Core
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 // Component Core
@@ -8,11 +6,6 @@ import React from 'react'
 // Actions
 import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js'
 
-// Styles
-import classNames from 'classnames'
-
-// Sub Components
-import Toolbar from 'stemn-frontend-desktop/app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
 import cloudProject   from 'stemn-shared/assets/images/pure-vectors/cloud-project.svg'
 import Button  from 'stemn-shared/misc/Buttons/Button/Button.jsx'
 
@@ -23,9 +16,11 @@ import Button  from 'stemn-shared/misc/Buttons/Button/Button.jsx'
 // event.sender.send('tray-removed')
 // trayIcon.destroy()
 
-export const Component = React.createClass({
+export class Component extends React.Component {
   render() {
-    const { AuthActions, auth, dispatch } = this.props
+    const {
+      dispatch,
+    } = this.props
     return (
       <div className="flex layout-column layout-align-center-center text-center">
         <div style={ { maxWidth: '300px' } }>
@@ -36,8 +31,8 @@ export const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 
 // /////////////////////////////// CONTAINER /////////////////////////////////

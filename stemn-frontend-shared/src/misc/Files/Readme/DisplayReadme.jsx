@@ -1,9 +1,9 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as FilesActions from '../Files.actions.js'
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { omit } from 'lodash'
-import classNames from 'classnames'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'
 
@@ -16,11 +16,12 @@ const propTypesObject = {
   filesActions: PropTypes.object,
 }
 
-export const DisplayReadme = React.createClass({
-  propTypes: propTypesObject,
-  componentWillMount() { this.onMount(this.props) },
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) },
-  onMount(nextProps, prevProps) {
+export class DisplayReadme extends React.Component {
+  static propTypes = propTypesObject;
+  componentWillMount() { this.onMount(this.props) }
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+
+  onMount = (nextProps, prevProps) => {
     // If the previewId changes, download a new file
     if (!prevProps || nextProps.cacheKey !== prevProps.cacheKey) {
       // If we don't already have the file, get it
@@ -33,9 +34,12 @@ export const DisplayReadme = React.createClass({
         })
       }
     }
-  },
+  };
+
   render() {
-    const { file, fileData } = this.props
+    const {
+      fileData,
+    } = this.props
     if (fileData && fileData.loading || fileData && fileData.data) {
       return (
         <div { ...omit(this.props, Object.keys(propTypesObject)) }>
@@ -48,8 +52,8 @@ export const DisplayReadme = React.createClass({
     }
     
     return <div>This file is empty.</div>
-  },
-})
+  }
+}
 
 // /////////////////////////////// CONTAINER /////////////////////////////////
 

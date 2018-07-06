@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
-import { pick, get } from 'lodash'
+import { get } from 'lodash'
 
-import classNames from 'classnames'
 import classes from '../ProjectNewModal/ProjectNewModal.scss'
 
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
-import FileSelectInput from 'stemn-shared/misc/FileSelectInput/FileSelectInput.jsx'
-import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import ProjectLinkRemote from 'stemn-shared/misc/Project/ProjectLinkRemote/ProjectLinkRemote.jsx'
 import { ArrowTabs, ArrowTab } from 'stemn-shared/misc/Tabs/ArrowTabs/ArrowTabs.jsx'
@@ -102,7 +99,7 @@ export default class ProjectCloneModal extends Component {
     )
 
     const getTab = () => {
-      if (activeTab == 1) {
+      if (activeTab === 1) {
         return tabTemplate({
           title: 'Clone Project',
           blurb: 'This will copy all the files associated with this project into your dropbox or google drive. A clone project will also appear on your profile.',

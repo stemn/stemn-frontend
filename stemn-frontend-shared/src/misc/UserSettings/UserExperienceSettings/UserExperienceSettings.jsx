@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { storePush, storeRemove } from 'stemn-shared/misc/Store/Store.actions'
 import { range } from 'lodash'
@@ -9,12 +10,12 @@ import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox'
 import FilledIconButton from 'stemn-shared/misc/Buttons/FilledIconButton'
 import classes from './UserExperienceSettings.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton'
 import MdClose from 'react-icons/md/close'
 import MdAdd from 'react-icons/md/add'
-import FlipMove from 'react-flip-move'
+import FlipMove from 'react-flip-move/dist/react-flip-move.js'
 import getUuid from 'stemn-shared/utils/getUuid.js'
 
 @connect()
@@ -118,7 +119,7 @@ export default class UserExperienceSettings extends Component {
                 >
                   <FilledIconButton
                     onClick={ () => this.remove(idx) }
-                    className={ classNames(classes.closeButton, 'warn') }
+                    className={ cn(classes.closeButton, 'warn') }
                   >
                     <MdClose size={ 20 } />
                   </FilledIconButton>
@@ -130,7 +131,7 @@ export default class UserExperienceSettings extends Component {
                       <PopoverDropdown
                         model={ `${itemModel}.startDate.year` }
                         value={ item.startDate && item.startDate.year }
-                        className={ classNames(classes.dateInput, 'input') }
+                        className={ cn(classes.dateInput, 'input') }
                         options={ this.dateRange }
                         placeholder="Start Year"
                       />
@@ -141,7 +142,7 @@ export default class UserExperienceSettings extends Component {
                         <PopoverDropdown
                           model={ `${itemModel}.endDate.year` }
                           value={ item.endDate && item.endDate.year }
-                          className={ classNames(classes.dateInput, 'input') }
+                          className={ cn(classes.dateInput, 'input') }
                           options={ this.dateRange }
                           placeholder="End Year"
                         />

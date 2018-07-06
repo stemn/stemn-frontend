@@ -54,7 +54,7 @@ export const getCompareModes = (previewerType1, previewerType2) => {
 }
 
 export const orderItemsByTime = (mode, item1, item2) => {
-  if (mode == 'single' || !item2) {
+  if (mode === 'single' || !item2) {
     return [item1]
   } 
   return orderBy([item1, item2], item => (new Date(item.timestamp)).getTime(), 'desc')

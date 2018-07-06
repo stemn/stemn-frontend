@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react'
-
-import classNames from 'classnames'
+import React, { Component } from 'react'
+import { PropTypes } from 'prop-types'
+import cn from 'classnames'
 import classes from './SocialButton.css'
 import MdStar from 'react-icons/md/star'
 import MdStarBorder from 'react-icons/md/star-border'
@@ -116,8 +116,8 @@ export default class SocialButton extends Component {
     } = this.props
     
     return (
-      <div className={ classNames(classes.button, className) } { ...otherProps }>
-        <div className={ classNames(classes.main) } onClick={ this.toggle } title={ getTooltip(type, entityType, status) }>
+      <div className={ cn(classes.button, className) } { ...otherProps }>
+        <div className={ cn(classes.main) } onClick={ this.toggle } title={ getTooltip(type, entityType, status) }>
           { getIcon(type, entityType, status) }
           { getText(type, entityType, status) }
         </div>

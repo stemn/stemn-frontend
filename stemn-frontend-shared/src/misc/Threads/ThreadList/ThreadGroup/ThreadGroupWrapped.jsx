@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { DragSource, DropTarget } from 'react-dnd'
 import { findDOMNode } from 'react-dom'
 
@@ -21,7 +22,7 @@ const cardSource = {
 
   endDrag(props) {
     // If the group has moved, save it
-    if (endDragProps.index && beginDragProps.index != endDragProps.index) {
+    if (endDragProps.index && beginDragProps.index !== endDragProps.index) {
       props.moveGroup({
         group: beginDragProps.id,
         destinationGroup: endDragProps.id,
@@ -44,7 +45,7 @@ const cardTarget = {
     const hoverBoundingRect = findDOMNode(component).getBoundingClientRect()
     const clientOffset = monitor.getClientOffset() // Determine mouse position
 
-    if (props.layout == 'list') {
+    if (props.layout === 'list') {
       const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2 // Get vertical middle
       const hoverClientY = clientOffset.y - hoverBoundingRect.top // Get pixels to the top
       // Only perform the move when the mouse has crossed half of the items height
@@ -65,8 +66,8 @@ const cardTarget = {
     endDragProps.id = props.id
     endDragProps.index = props.index
     // If the dragged item index is less than the destination index, we set it to after
-    const dragIndexInGroup = props.groups.findIndex(groupId => groupId == beginDragProps.id)
-    endDragProps.after = dragIndexInGroup != -1 ? dragIndexInGroup < endDragProps.index : false
+    const dragIndexInGroup = props.groups.findIndex(groupId => groupId === beginDragProps.id)
+    endDragProps.after = dragIndexInGroup !== -1 ? dragIndexInGroup < endDragProps.index : false
 
     // Time to actually perform the action
     props.moveGroup({

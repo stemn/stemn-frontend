@@ -1,10 +1,10 @@
 import React from 'react'
-import classNames from 'classnames'
+import cn from 'classnames'
 
 const BaseComponent = rootClass => (props) => {
   const { className, children, ...otherProps } = props
   return (
-    <div className={ classNames(rootClass, className) } { ...otherProps }>
+    <div className={ cn(rootClass, className) } { ...otherProps }>
       { props.children }
     </div>
   )

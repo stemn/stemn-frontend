@@ -1,5 +1,3 @@
-// Container Core
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 // Container Actions
@@ -11,7 +9,7 @@ import { toggleMenubarSidebar } from 'stemn-shared/misc/Sidebar/Sidebar.actions.
 import React from 'react'
 
 // Styles
-import classNames from 'classnames'
+import cn from 'classnames'
 import toolbarStyles from './Toolbar.css'
 
 // Sub Components
@@ -24,7 +22,7 @@ import MdOpenInNew          from 'react-icons/md/open-in-new'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
-export const Component = React.createClass({
+export class Component extends React.Component {
   render() {
     const { menu, children, dispatch } = this.props
 
@@ -52,7 +50,7 @@ export const Component = React.createClass({
 
     const textStyle = menu ? { marginLeft: '5px' } : {}
     return (
-      <div className={ classNames(toolbarStyles.toolbar, 'layout-row layout-align-start-center') }>
+      <div className={ cn(toolbarStyles.toolbar, 'layout-row layout-align-start-center') }>
         { menu
           ? <SimpleIconButton
             color="white"
@@ -83,8 +81,8 @@ export const Component = React.createClass({
         </Popover>
       </div>
     )
-  },
-})
+  }
+}
 
 // /////////////////////////////// CONTAINER /////////////////////////////////
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import classNames from 'classnames'
 import classes from './ThreadMentionModal.css'
 import howMany from 'stemn-shared/utils/strings/howMany.js'
 import SearchInput from 'stemn-shared/misc/Search/SearchInput'
@@ -68,10 +67,10 @@ export default class ThreadMentionModal extends Component {
       const numThreads = getAllThreads(board.data.groups).length
       const numFilteredThreads = getAllThreads(filteredBoard.data.groups).length
 
-      if (numThreads == 0 || numFilteredThreads == 0) {
+      if (numThreads === 0 || numFilteredThreads === 0) {
         return (
           <div className="flex layout-column layout-align-center-center text-center">
-            {numThreads == 0
+            {numThreads === 0
               ? <div style={ { width: '100%' } }>This project has no threads. Add some.</div>
               : <div style={ { width: '100%' } }>No results, <a className="text-primary" onClick={ () => this.props.storeChange(`${boardModel}.searchString`, '') }>clear search filter.</a></div>
             }

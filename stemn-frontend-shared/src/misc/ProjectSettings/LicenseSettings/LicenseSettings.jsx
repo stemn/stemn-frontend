@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import { licenseData } from 'stemn-shared/misc/Licenses/Licenses.data'
 

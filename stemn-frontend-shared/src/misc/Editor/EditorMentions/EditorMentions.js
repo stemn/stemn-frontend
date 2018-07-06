@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import classes from './EditorMentions.css'
 import MentionPopover from 'stemn-shared/misc/Search/MentionPopover'
 import { getMentionInfo, parseMentions, getMentionString, mentionTypeFromWord, newMention } from 'stemn-shared/misc/Mentions/Mentions.utils'

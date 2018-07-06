@@ -1,5 +1,3 @@
-// Container Core
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 // Container Actions
@@ -9,8 +7,6 @@ import React from 'react'
 import { Link } from 'react-router'
 import moment from 'moment'
 
-// Styles
-import classNames from 'classnames'
 import classes from './DashboardPage.css'
 
 // Sub Components
@@ -23,12 +19,11 @@ import Tabs         from 'stemn-shared/misc/Tabs/Tabs'
 // /////////////////////////////// COMPONENT /////////////////////////////////
 // ///////////////////////////////////////////////////////////////////////////
 
-export const Component = React.createClass({
-  getInitialState() {
-    return {
-      date: moment(),
-    }
-  },
+export class Component extends React.Component {
+  state = {
+    date: moment(),
+  };
+
   render() {
     return (
       <div className="layout-column flex rel-box">
@@ -60,8 +55,8 @@ export const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 // ///////////////////////////////////////////////////////////////////////////
 // /////////////////////////////// CONTAINER /////////////////////////////////

@@ -1,12 +1,12 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import classes from './LoadingAnimation.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 
 export default class LoadingAnimation extends Component {
   render() {
     const { children, className } = this.props
     return (
-      <div className={ classNames(classes.animation, className) }>
+      <div className={ cn(classes.animation, className) }>
         { children }
       </div>
     )

@@ -3,34 +3,32 @@ import React from 'react'
 import clickDrag from 'react-clickdrag'
 
 // Styles
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './DragResize.css'
 
 
-const DraggerComponent = React.createClass({
-  getInitialState() {
-    return {
-      lastEventId: null,
-      active: false,
-    }
-  },
+class DraggerComponent extends React.Component {
+  state = {
+    lastEventId: null,
+    active: false,
+  };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.dataDrag.isMoving && nextProps.dataDrag.id && nextProps.dataDrag.id != this.state.lastEventId) {
+    if (nextProps.dataDrag.isMoving && nextProps.dataDrag.id && nextProps.dataDrag.id !== this.state.lastEventId) {
       this.setState({ active: true, lastEventId: nextProps.dataDrag.id })
-      if (nextProps.side == 'left' || nextProps.side == 'right') {
+      if (nextProps.side === 'left' || nextProps.side === 'right') {
         this.props.changeFn({
-          deltaX: nextProps.side == 'right' ? nextProps.dataDrag.deltaX : -nextProps.dataDrag.deltaX,
+          deltaX: nextProps.side === 'right' ? nextProps.dataDrag.deltaX : -nextProps.dataDrag.deltaX,
         })
       } else {
         this.props.changeFn({
-          deltaY: nextProps.side == 'bottom' ? nextProps.dataDrag.deltaY : -nextProps.dataDrag.deltaY,
+          deltaY: nextProps.side === 'bottom' ? nextProps.dataDrag.deltaY : -nextProps.dataDrag.deltaY,
         })
       }
     } else {
       this.setState({ active: false })
     }
-  },
+  }
 
   render() {
     const styles = {
@@ -71,22 +69,23 @@ const DraggerComponent = React.createClass({
     return (
       <div className={ classes.dragger } style={ styles[this.props.side] } />
     )
-  },
-})
+  }
+}
 
 const Dragger = clickDrag(DraggerComponent, { touch: true })
 
-export default React.createClass({
-  getInitialState() {
-    if (this.props.width) {
-      return { width: parseInt(this.props.width) }
-    } else if (this.props.height) {
-      return { height: parseInt(this.props.height) }
+export default class DragResize extends React.Component {
+  constructor(props) {
+    super(props)
+    if (props.width) {
+      this.state = { width: parseInt(props.width) }
+    } else if (props.height) {
+      this.state = { height: parseInt(props.height) }
     }
-  },
+  }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.animateHide != this.props.animateHide) {
+    if (nextProps.animateHide !== this.props.animateHide) {
       if (nextProps.width) {
         this.setState({ width: nextProps.animateHide ? '0' : nextProps.width, animate: true })
       } else {
@@ -94,9 +93,9 @@ export default React.createClass({
       }
       setTimeout(() => this.setState({ animate: false }), 300)
     }
-  },
+  }
 
-  drag(change) {
+  drag = (change) => {
     const { widthRange, heightRange } = this.props
     if (change.deltaX) {
       let width = parseInt(this.state.width) + change.deltaX
@@ -111,7 +110,8 @@ export default React.createClass({
       }
       this.setState({ height })
     }
-  },
+  };
+
   render() {
     const style = {
       width: `${this.state.width}px`,
@@ -119,10 +119,10 @@ export default React.createClass({
       transition: this.state.animate ? '0.3s ease all' : 'none',
     }
     return (
-      <div style={ style } className={ classNames(classes.box, this.props.className) }>
+      <div style={ style } className={ cn(classes.box, this.props.className) }>
         {this.props.children}
         <Dragger changeFn={ this.drag } side={ this.props.side } />
       </div>
     )
-  },
-})
+  }
+}

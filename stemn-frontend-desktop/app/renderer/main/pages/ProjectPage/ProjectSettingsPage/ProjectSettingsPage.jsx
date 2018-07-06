@@ -1,23 +1,18 @@
-// Container Core
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { get } from 'lodash'
-
-// Container Actions
-import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js'
 
 // Component Core
 import React from 'react'
 
-// Styles
-import classNames from 'classnames'
 import classes from './ProjectSettingsPage.css'
 
 import NavPill from 'stemn-shared/misc/Buttons/NavPill/NavPill'
 
-export const Component = React.createClass({
+export class Component extends React.Component {
   render() {
-    const { entityModel, project } = this.props
+    const {
+      project,
+    } = this.props
     const baseLink = project && project.data && project.data._id ? `project/${project.data._id}` : ''
 
     return (
@@ -38,8 +33,8 @@ export const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 
 function mapStateToProps({ projects }, otherProps) {

@@ -1,15 +1,10 @@
-import React, { Component, PropTypes } from 'react'
-
-import { Container, Col, Row } from 'stemn-shared/misc/Layout'
+import React, { Component } from 'react'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import PanelDescription from 'stemn-shared/misc/Panels/PanelDescription'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
-import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import Upload from 'stemn-shared/misc/Upload/Upload'
-
 import classes from './OnboardingAbout.scss'
-import classNames from 'classnames'
 
 export default class OnboardingAbout extends Component {
   componentWillUnmount() {
@@ -19,17 +14,17 @@ export default class OnboardingAbout extends Component {
     })
   }
   render() {
-    const { user, userModel, confirmLinkedinImport } = this.props
+    const { user, userModel } = this.props
     return (
       <PanelDescription 
         title="About You"
         description="Add some basic account info. You'll be able to add more details later."
       >
-        <InfoPanel>
+        {/* <InfoPanel>
           <h3>Want to get a head start</h3>
           <p>Import your profile from Linkedin. This will automatically fill out your profile picture, education and experience.</p>
           <Button onClick={ confirmLinkedinImport } className="linkedin">Import from Linkedin</Button>
-        </InfoPanel>
+        </InfoPanel> */}
         <InfoPanel>
           <h3>Profile Photo</h3>
           <div className="layout-row">

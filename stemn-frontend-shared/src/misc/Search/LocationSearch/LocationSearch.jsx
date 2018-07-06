@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from  'react-redux'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import classes from './LocationSearch.css'

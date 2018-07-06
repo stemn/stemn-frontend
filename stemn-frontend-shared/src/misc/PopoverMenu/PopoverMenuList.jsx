@@ -1,5 +1,5 @@
 import React from 'react'
-import classNames from 'classnames'
+import cn from 'classnames'
 import Popover from 'stemn-shared/misc/Popover/Popover'
 import Link from 'stemn-shared/misc/Router/Link'
 import { pick } from 'lodash'
@@ -14,7 +14,7 @@ const MenuItem = (props) => {
           <div>
             <Link
               onClick={ () => menuItem.onClick && menuItem.onClick(item) }
-              className={ classNames({ divider: menuItem.divider }, 'submenu') }
+              className={ cn({ divider: menuItem.divider }, 'submenu') }
               { ...pick(menuItem, ['name', 'params', 'query']) }
             >
               {menuItem.label}
@@ -28,7 +28,7 @@ const MenuItem = (props) => {
     return (
       <Link
         onClick={ () => menuItem.onClick && menuItem.onClick(item) }
-        className={ classNames({ divider: menuItem.divider }) }
+        className={ cn({ divider: menuItem.divider }) }
         { ...pick(menuItem, ['name', 'params', 'query']) }
       >
         {menuItem.label}

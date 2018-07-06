@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import moment from 'moment'
 import { sum, get, groupBy, orderBy } from 'lodash'
 import TimelineItem from './TimelineItem/TimelineItem'

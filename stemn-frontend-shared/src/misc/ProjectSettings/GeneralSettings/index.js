@@ -1,6 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-
-import { has } from 'lodash'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
@@ -21,7 +20,10 @@ export default class GeneralSettings extends Component {
     })
   }
   render() {
-    const { entityModel, project, saveProject } = this.props
+    const {
+      entityModel,
+      project,
+    } = this.props
     return (
       <div>
         <Row className="layout-xs-column layout-gt-xs-row">

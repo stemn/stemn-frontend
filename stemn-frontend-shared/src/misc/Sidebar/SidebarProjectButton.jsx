@@ -1,7 +1,7 @@
 import React from 'react'
 import { get } from 'lodash'
 
-import classNames from 'classnames'
+import cn from 'classnames'
 import styles from './SidebarProjectButton.css'
 
 import { Link } from 'react-router'
@@ -15,13 +15,13 @@ export default (props) => {
   const { item, key, to, clickFn, icon } = props
 
   const getIcon = (provider) => {
-    if (provider == 'dropbox') {
+    if (provider === 'dropbox') {
       return <Dropbox size={ 14 } />
-    } else if (provider == 'drive') {
+    } else if (provider === 'drive') {
       return <Drive size={ 14 } />
     }
     
-    return <img src={ icon == 'tutorial' ? tutorial : book } style={ iconStyle } />
+    return <img src={ icon === 'tutorial' ? tutorial : book } style={ iconStyle } />
   }
 
   const inner = (
@@ -37,7 +37,7 @@ export default (props) => {
     if (to) {
       return (
         <Link
-          className={ classNames(styles.sidebarButton) }
+          className={ cn(styles.sidebarButton) }
           activeClassName="active"
           key={ key }
           to={ to }
@@ -49,7 +49,7 @@ export default (props) => {
     } 
     return (
       <a
-        className={ classNames(styles.sidebarButton) }
+        className={ cn(styles.sidebarButton) }
         key={ key }
         onClick={ () => { if (clickFn) { clickFn() } } }
       >
@@ -60,4 +60,4 @@ export default (props) => {
   return null
 }
 
-// <img src={props.icon == 'tutorial' ? tutorial : book} style={iconStyle}/>
+// <img src={props.icon === 'tutorial' ? tutorial : book} style={iconStyle}/>

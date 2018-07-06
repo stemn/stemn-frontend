@@ -1,11 +1,10 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import CodeMirror from 'react-codemirror'
 import classes from './SearchInput.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 import 'codemirror/addon/display/placeholder'
 import 'codemirror/addon/selection/mark-selection'
-import EditorMentions from 'stemn-shared/misc/Editor/EditorMentions'
-import codemirrorLib from 'codemirror'
 import MdSearch from 'react-icons/md/search'
 
 import { parseFilterStringWithPositions } from 'stemn-shared/misc/StringFilter/StringFilter.utils'
@@ -40,7 +39,6 @@ export default class EditorNew extends Component {
     }
   }
   onChange = (newValue) => {
-    const { model, change } = this.props
     // Update the redux value
     //     change(model, newValue)
     // Update internal value
@@ -80,7 +78,7 @@ export default class EditorNew extends Component {
   componentWillReceiveProps(nextProps) {
     // Update the internal state if it differs from the redux state
     //    this.convertQueryStrings(codemirror)
-    if (nextProps.value != this.state.value) {
+    if (nextProps.value !== this.state.value) {
       this.setState({
         value: nextProps.value,
       })
@@ -89,7 +87,6 @@ export default class EditorNew extends Component {
   render() {
     const { model, change, placeholder, className, tabIndex, ...otherProps } = this.props
     const { value } = this.state
-    const { codemirror } = this.state
 
     const options = {
       lineNumbers: false,
@@ -100,7 +97,7 @@ export default class EditorNew extends Component {
     }
 
     return (
-      <div className={ classNames(classes.search, 'layout-row layout-align-start-center', className) } { ...otherProps }>
+      <div className={ cn(classes.search, 'layout-row layout-align-start-center', className) } { ...otherProps }>
         <CodeMirror
           ref={ this.getCodeMirror }
           className={ classes.search }

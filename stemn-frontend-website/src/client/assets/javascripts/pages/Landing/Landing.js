@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import LandingLayout from 'layout/LandingLayout'
 import HeroBanner from 'modules/HeroBanner'
 import DownloadButton from 'stemn-shared/misc/DesktopReleases/DownloadButton'
@@ -8,7 +8,7 @@ import deviceMockups from './deviceMockups.jpg'
 import historyCombined from './historyCombined.jpg'
 import historyTimeline from './historyTimeline.png'
 import classes from './Landing.scss'
-import classNames from 'classnames'
+import cn from 'classnames'
 import FileIcon from 'stemn-shared/misc/FileList/components/FileIcon'
 import { Helmet } from 'react-helmet'
 import isMobile from 'stemn-shared/utils/agent/isMobile'
@@ -25,10 +25,7 @@ export default class Landing extends Component {
     }
   }
   render() {
-    const { showPreview } = this.state
-    const { latest } = this.props
-    
-    const secionClasses = classNames(classes.section, 'layout-xs-column layout-gt-xs-row layout-align-gt-xs-start-center lg')
+    const secionClasses = cn(classes.section, 'layout-xs-column layout-gt-xs-row layout-align-gt-xs-start-center lg')
     return (
       <LandingLayout>
         <Helmet>
@@ -52,7 +49,7 @@ export default class Landing extends Component {
             params={ { projectId: '595c9a90891a7600ba39b6d8', fileId: '595c9aaa3fccf200ba2568c7' } }
           >
             <img src={ screenshot } />
-            <div className={ classNames(classes.screenshotCad, 'layout-column') }>
+            <div className={ cn(classes.screenshotCad, 'layout-column') }>
               <video muted autoPlay loop>
                 <source src={ vidDemo } type="video/mp4" />
               </video>
@@ -80,7 +77,7 @@ export default class Landing extends Component {
                 <h4 className="text-title-2">Access your files anywhere</h4>
                 <p className="text-title-4">Whether you’re in the office, in the lab, or on the go, preview your files in your browser or any device.</p>
                 <p className="text-title-4">Preview hundreds of different file-types directly in your web browser.</p>
-                <div className={ classNames(classes.fileIcons, 'layout-row') }>
+                <div className={ cn(classes.fileIcons, 'layout-row') }>
                   <FileIcon size={ 50 } type="file" fileType="dxf" />
                   <FileIcon size={ 50 } type="file" fileType="dwg" />
                   <FileIcon size={ 50 } type="file" fileType="tex" />
@@ -123,7 +120,7 @@ export default class Landing extends Component {
                 <DownloadButton className={ `${classes.downloadButton} secondary lg` } platform="auto" >
                     Download Now
                 </DownloadButton>
-                <Button className={ `${classes.downloadButton} primary lg` } name="loginRoute">
+                <Button className={ `${classes.downloadButton} primary lg` } name="registerRoute">
                   <MdLock size={ 20 } style={ { marginRight: '10px' } } />
                     Sign up
                 </Button>
@@ -139,7 +136,7 @@ export default class Landing extends Component {
 }
 //
 //            { showPreview &&
-//              <div className={ classNames(classes.screenshotCad, 'layout-column') }>
+//              <div className={ cn(classes.screenshotCad, 'layout-column') }>
 //                <PreviewCadLoader
 //                  fileMeta={ { fileId: 'arduino' } }
 //                  renderFn={ () => {} }

@@ -1,4 +1,3 @@
-import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import MyProjectsPanel from './MyProjectsPanel'
 import { getUserProjects } from 'stemn-shared/misc/Projects/Projects.actions.js'

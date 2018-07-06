@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 import TagEdit from 'stemn-shared/misc/Tags/TagEdit'
 import OrganisationSearch from 'stemn-shared/misc/Search/OrganisationSearch'
@@ -29,7 +29,9 @@ export default class OrganisationSettings extends Component {
     })
   }
   render() {
-    const { project, saveProject } = this.props
+    const {
+      project,
+    } = this.props
     return (
       <div>
         <h3>Organisation Tags</h3>

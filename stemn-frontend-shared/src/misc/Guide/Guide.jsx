@@ -1,10 +1,8 @@
 import React from 'react'
 
-// Styles
-import classNames from 'classnames'
 // import classes from './banner.css';
 
-export default React.createClass({
+export default class Guide extends React.Component {
   render() {
     const { data } = this.props
     return (
@@ -14,5 +12,5 @@ export default React.createClass({
         <div className="text-title-5">{data.description}</div>
       </div>
     )
-  },
-})
+  }
+}

@@ -1,9 +1,10 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { getToggleData, emailToggles, websiteToggles } from './EmailAndNotificationToggles.utils'
 import Toggle from 'stemn-shared/misc/Input/Toggle/Toggle'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import classes from './EmailAndNotificationToggles.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 import { uniq } from 'lodash'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import MdMoreHoriz from 'react-icons/md/more-horiz'
@@ -63,7 +64,7 @@ class ToggleGroup extends Component {
 
     return (
       <InfoPanel className={ classes.panel }>
-        <div className={ classNames(classes.parentRow, 'layout-row layout-align-start-center')  }>
+        <div className={ cn(classes.parentRow, 'layout-row layout-align-start-center')  }>
           <div className="flex">
             <h3>{ group.title }</h3>
             <p>{ group.description }</p>
@@ -71,7 +72,7 @@ class ToggleGroup extends Component {
           <div className="layout-xs-column layout-gt-xs-row layout-align-xs-center layout-align-gt-xs-start-center">
             <SimpleIconButton
               disabled={ groupToggleValue === 'semi' }
-              className={ classNames(classes.iconButton, { [classes.iconButtonOpen]: isOpen }) }
+              className={ cn(classes.iconButton, { [classes.iconButtonOpen]: isOpen }) }
               onClick={ this.togglePanelOpen }
             >
               <MdMoreHoriz size={ 25 } />
@@ -89,7 +90,7 @@ class ToggleGroup extends Component {
             const toggle = getToggleData(toggleName)
             return (
               <div
-                className={ classNames(classes.childRow, 'layout-row layout-align-start-center') }
+                className={ cn(classes.childRow, 'layout-row layout-align-start-center') }
                 key={ toggleName }
               >
                 <div className="flex">
@@ -97,7 +98,7 @@ class ToggleGroup extends Component {
                   <p>{ toggle.description }</p>
                 </div>
                 <Toggle
-                  className={ classNames(classes.miniToggle, classes.toggle) }
+                  className={ cn(classes.miniToggle, classes.toggle) }
                   model={ `${toggleModel}.${toggleName}` }
                   value={ toggleValues[toggleName] }
                   changeAction={ this.saveSettings }

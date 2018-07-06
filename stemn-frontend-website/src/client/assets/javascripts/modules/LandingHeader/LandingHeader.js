@@ -1,16 +1,11 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import classes from './LandingHeader.scss'
-import classNames from 'classnames'
-
+import cn from 'classnames'
 import { loginRoute } from 'route-actions'
-
-import { Container, Row, Col } from 'stemn-shared/misc/Layout'
+import { Container } from 'stemn-shared/misc/Layout'
 import Avatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
-import Popover from 'stemn-shared/misc/Popover'
 import Link from 'stemn-shared/misc/Router/Link'
 import logo from 'images/logo80x80none.png'
-import MdAdd from 'react-icons/md/add'
-import MdNotifications from 'react-icons/md/notifications'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton'
 import HeaderMobileMenu from 'modules/HeaderMobileMenu'
 import MdMenu from 'react-icons/md/menu'
@@ -46,11 +41,13 @@ export default class LandingHeader extends Component {
     }
   }
   isLoggedIn() {
-    const { auth, logout, newProject } = this.props
+    const {
+      auth,
+    } = this.props
     const routeParams = { userId: auth.user._id }
 
     return (
-      <Link to="/" className={ classNames('layout-row layout-align-start-center', classes.specialLink) }>
+      <Link to="/" className={ cn('layout-row layout-align-start-center', classes.specialLink) }>
         <div>Dashboard</div>
         <Avatar
           shape="square"
@@ -65,7 +62,7 @@ export default class LandingHeader extends Component {
     if (window.location.pathname !== '/login') {
       return (
         <div className="layout-row layout-align-start-center">
-          <Link to={ loginRoute() } className={ classNames('layout-row layout-align-start-center', classes.specialLink) }>
+          <Link to={ loginRoute() } className={ cn('layout-row layout-align-start-center', classes.specialLink) }>
             <div>Sign in</div>
           </Link>
         </div>
@@ -76,8 +73,10 @@ export default class LandingHeader extends Component {
   }
   render() {
     const { atTop, isOpen } = this.state
-    const { auth, logout, newProject } = this.props
-    const allClasses = classNames(
+    const {
+      auth,
+    } = this.props
+    const allClasses = cn(
       classes.header,
       'layout-xs-column layout-align-xs-center layout-gt-xs-row layout-gt-xs-align-start-center',
       { [classes.headerFilled]: !atTop || isOpen },
@@ -101,7 +100,7 @@ export default class LandingHeader extends Component {
 
     return (
       <header className={ allClasses }>
-        <Container className={ classNames(classes.inner, 'hide-xs layout-row layout-align-start-center') }>
+        <Container className={ cn(classes.inner, 'hide-xs layout-row layout-align-start-center') }>
           <Link to="/landing" className={ classes.logo }>
             <img src={ logo } alt="" />
             <BetaBadge />
@@ -115,7 +114,7 @@ export default class LandingHeader extends Component {
             : this.isLoggedOut() }
         </Container>
         <HeaderMobileMenu items={ items } isOpen={ isOpen } />
-        <Container className={ classNames(classes.inner, 'hide-gt-xs layout-row layout-align-start-center') }>
+        <Container className={ cn(classes.inner, 'hide-gt-xs layout-row layout-align-start-center') }>
           <Link to="/landing" className={ classes.logo }>
             <img src={ logo } alt="" />
           </Link>
@@ -124,7 +123,7 @@ export default class LandingHeader extends Component {
             ? this.isLoggedIn()
             : this.isLoggedOut() }
           <SimpleIconButton
-            className={ classNames('hide-gt-xs', classes.menuButton) }
+            className={ cn('hide-gt-xs', classes.menuButton) }
             onClick={ this.toggleOpen }
           >
             <MdMenu size={ 25 } />

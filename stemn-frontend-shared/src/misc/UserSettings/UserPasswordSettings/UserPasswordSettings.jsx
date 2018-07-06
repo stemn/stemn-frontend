@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Input from 'stemn-shared/misc/Input/Input/Input'
-import Form from 'stemn-shared/misc/Forms/Form'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 
 export default class UserPasswordSettings extends Component {
@@ -17,7 +17,7 @@ export default class UserPasswordSettings extends Component {
   }
   render() {
     const { auth } = this.props
-    const invalid = (auth.passwordSet.password1 != auth.passwordSet.password2) || auth.passwordSet.password1.length < 7
+    const invalid = (auth.passwordSet.password1 !== auth.passwordSet.password2) || auth.passwordSet.password1.length < 7
 
     return (
       <div>

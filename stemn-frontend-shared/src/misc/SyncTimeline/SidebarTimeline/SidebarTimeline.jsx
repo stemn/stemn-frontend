@@ -1,9 +1,6 @@
 // Component Core
 import React from 'react'
 
-// Styles
-import classNames from 'classnames'
-
 // Sub Components
 import FileChangeTitleRow  from 'stemn-shared/misc/Changes/CommitChanges/FileChangeTitleRow'
 import LoadingOverlay      from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
@@ -25,16 +22,17 @@ const eventFilter = [{
   value: '',
 }]
 
-export default React.createClass({
-  filterItems(items, fullQuery) {
+export default class SidebarTimeline extends React.Component {
+  filterItems = (items, fullQuery) => {
     const fullQueryArray = fullQuery ? fullQuery.split(' ') : []
     return items.filter(item => every(fullQueryArray, queryString => this.queryByString(item, queryString)))
-  },
-  queryByString(item, queryString) {
-    if     (queryString == 'event:revision') {
-      return item.event == 'revision'
-    } else if (queryString == 'event:commit') {
-      return item.event == 'commit'
+  };
+
+  queryByString = (item, queryString) => {
+    if     (queryString === 'event:revision') {
+      return item.event === 'revision'
+    } else if (queryString === 'event:commit') {
+      return item.event === 'commit'
     }
     // Filter by the string itself (case independent)
     else if (queryString && queryString.length > 0) {
@@ -42,9 +40,16 @@ export default React.createClass({
     }
     
     return true
-  },
+  };
+
   render() {
-    const { projectId, items, loading, query, queryModel, refresh } = this.props
+    const {
+      projectId,
+      items,
+      loading,
+      query,
+      refresh,
+    } = this.props
     const routeParams = {
       projectId,
     }
@@ -82,5 +87,5 @@ export default React.createClass({
         <LoadingOverlay show={ loading } linear hideBg />
       </div>
     )
-  },
-})
+  }
+}

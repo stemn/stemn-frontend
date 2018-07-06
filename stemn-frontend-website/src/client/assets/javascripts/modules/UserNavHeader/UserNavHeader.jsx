@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import SubHeader from 'modules/SubHeader'
 import Tabs from 'stemn-shared/misc/Tabs/Tabs'
 import Link from 'stemn-shared/misc/Router/Link'

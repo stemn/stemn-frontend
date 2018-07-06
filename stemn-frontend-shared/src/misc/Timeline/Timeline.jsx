@@ -1,8 +1,9 @@
 // Component Core
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
 // Styles
-import classNames from 'classnames'
+import cn from 'classnames'
 import styles from './Timeline.css'
 
 import { orderByTime } from './Timeline.utils'
@@ -29,33 +30,35 @@ const propTypesObject = {
   className: PropTypes.string,
 }
 
-const Component = React.createClass({
-  getInitialState() {
-    return {
-      page: 0,
-      numPages: 1,
-    }
-  },
-  scroll(direction) {
-    if (direction == 'left') {
+class Component extends React.Component {
+  state = {
+    page: 0,
+    numPages: 1,
+  };
+
+  scroll = (direction) => {
+    if (direction === 'left') {
       this.setState({ page: this.state.page + 1 })
-    } else if (direction == 'right' && this.state.page > 0) {
+    } else if (direction === 'right' && this.state.page > 0) {
       this.setState({ page: this.state.page - 1 })
     }
-  },
-  getRefInner(ref) {
+  };
+
+  getRefInner = (ref) => {
     if (ref) {
       this.refInner = ref
       this.tryGetPages()
     }
-  },
-  getRefOuter(ref) {
+  };
+
+  getRefOuter = (ref) => {
     if (ref) {
       this.refOuter = ref
       this.tryGetPages()
     }
-  },
-  tryGetPages() {
+  };
+
+  tryGetPages = () => {
     // If we have both refs, we can get the number of pages.
     if (this.refOuter && this.refInner) {
       const contentWidth = this.refInner.offsetWidth
@@ -63,11 +66,11 @@ const Component = React.createClass({
       const numPages = Math.ceil(contentWidth / containerWidth)
       this.setState({ numPages })
     }
-  },
+  };
+
   render() {
     const { items, selected, isSelected, onSelect, preferPlace, style, className, size } = this.props
     const { page, numPages } = this.state
-    const numberToShow = 15
     const moreLeft  = numPages - 1 > page
     const moreRight = page > 0
 
@@ -75,7 +78,7 @@ const Component = React.createClass({
     const itemsOrdered = orderByTime(items).reverse()
 
     return (
-      <div className={ classNames(styles.timeline, className, { [styles.small]: size == 'sm' }) } style={ style }>
+      <div className={ cn(styles.timeline, className, { [styles.small]: size === 'sm' }) } style={ style }>
         <div className="rel-box">
           <div className={ styles.line }>
             {moreLeft  ? <MoreButton title="Older events" onClick={ () => this.scroll('left') } side="left" /> : ''}
@@ -100,8 +103,8 @@ const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 
 Component.propTypes = propTypesObject

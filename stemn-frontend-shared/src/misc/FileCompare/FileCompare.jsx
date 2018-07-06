@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react'
-import classNames from 'classnames'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import cn from 'classnames'
 import classes from './FileCompare.css'
 import { orderItemsByTime, isSelected } from 'stemn-shared/misc/FileCompare/FileCompare.utils.js'
 import TogglePanel from 'stemn-shared/misc/TogglePanel/TogglePanel.jsx'
@@ -7,7 +8,7 @@ import DragResize from 'stemn-shared/misc/DragResize/DragResize.jsx'
 import FileCompareMenu from 'stemn-shared/misc/FileCompare/FileCompareMenu'
 import FileCompareInner from 'stemn-shared/misc/FileCompare/FileCompareInner/FileCompareInner.jsx'
 import Timeline from 'stemn-shared/misc/Timeline/Timeline.jsx'
-import { orderBy, has, get } from 'lodash'
+import { get } from 'lodash'
 
 export default class FileCompare extends Component {
   static propTypes = {
@@ -89,7 +90,7 @@ export default class FileCompare extends Component {
     )
 
     const standardTemplate = () => (
-      <div className={ classNames('layout-column flex', className) }>
+      <div className={ cn('layout-column flex', className) }>
         <div className={ `${classes.header} layout-row layout-align-start-center` }>
           <div className="flex">{ file.data.path }</div>
           <FileCompareMenu
@@ -125,7 +126,7 @@ export default class FileCompare extends Component {
     if (!file1) {
       return null
     }
-    return type == 'collapse'
+    return type === 'collapse'
       ? collapseTemplate()
       : standardTemplate()
   }

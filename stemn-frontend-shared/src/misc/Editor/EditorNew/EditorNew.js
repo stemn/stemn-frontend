@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import CodeMirror from 'react-codemirror'
 import classes from './EditorNew.scss'
 import 'codemirror/mode/markdown/markdown'
@@ -69,7 +70,7 @@ export default class EditorNew extends Component {
   }
   componentWillReceiveProps(nextProps) {
     // Update the internal state if it differs from the redux state
-    if (nextProps.value != this.state.value) {
+    if (nextProps.value !== this.state.value) {
       this.setState({
         value: nextProps.value,
       })

@@ -1,10 +1,11 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import NavPill from 'stemn-shared/misc/Buttons/NavPill/NavPill'
 import NavPillContainer from 'stemn-shared/misc/Buttons/NavPillContainer'
 import StandardLayout from 'layout/StandardLayout'
 import UserNavHeader from 'modules/UserNavHeader'
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import { Helmet } from 'react-helmet'
+
 class Settings extends Component {
   render() {
     const { children, user, currentUser } = this.props

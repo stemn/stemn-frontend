@@ -1,18 +1,18 @@
 import React from 'react'
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './ThreadLabelDots.scss'
 import Link from 'stemn-shared/misc/Router/Link'
 
-export default React.createClass({
+export default class ThreadLabelDots extends React.Component {
   render() {
     // tag = true || false
     const { labels, labelInfo, tag, oneline, link, name, params, responsive } = this.props
 
     return (
-      <span className={ classNames({ [classes.tagsOneline]: oneline }) }>
+      <span className={ cn({ [classes.tagsOneline]: oneline }) }>
         { labels && labelInfo
           ? labels.map((labelId) => {
-            const info = labelInfo.find(label => label._id == labelId)
+            const info = labelInfo.find(label => label._id === labelId)
             if (info) {
               const tagStyle = {
                 color: info.color,
@@ -22,7 +22,7 @@ export default React.createClass({
               const tagBgStyle = {
                 background: info.color,
               }
-              const threadLabelClasses = classNames({
+              const threadLabelClasses = cn({
                 [classes.tag]: tag,
                 [classes.dot]: !tag,
                 [classes.responsive]: responsive,
@@ -60,5 +60,5 @@ export default React.createClass({
           }) : null}
       </span>
     )
-  },
-})
+  }
+}

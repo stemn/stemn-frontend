@@ -1,10 +1,9 @@
-import React, { Component, PropTypes } from 'react'
-
+import React, { Component } from 'react'
 import { ArrowTabs, ArrowTab } from 'stemn-shared/misc/Tabs/ArrowTabs/ArrowTabs.jsx'
 import { Container } from 'stemn-shared/misc/Layout'
 import { Helmet } from 'react-helmet'
 import classes from './Onboarding.scss'
-import classNames from 'classnames'
+import cn from 'classnames'
 
 export default class Onboarding extends Component {
   render() {
@@ -15,7 +14,7 @@ export default class Onboarding extends Component {
         <Helmet>
           <title>Welcome to Stemn</title>
         </Helmet>
-        <div className={ classNames(classes.header, 'layout-row layout-align-start-center') }>
+        <div className={ cn(classes.header, 'layout-row layout-align-start-center') }>
           <Container>
             <ArrowTabs className="layout-row flex">
               <ArrowTab activeClassName="active" arrow name="onboardingAboutRoute" onlyActiveOnIndex>

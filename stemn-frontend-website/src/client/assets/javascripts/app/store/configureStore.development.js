@@ -1,7 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import { persistState } from 'redux-devtools'
-
-// Middleware
 import thunk from 'redux-thunk'
 import promise from 'redux-promise-middleware'
 import throttle from 'stemn-shared/redux/middleware/throttle/throttle.middleware.js'
@@ -13,17 +11,8 @@ import { browserHistory } from 'react-router'
 import toastsError from 'stemn-shared/misc/Toasts/ToastsError.middleware'
 import auth from 'stemn-shared/misc/Auth/Auth.middleware'
 import websocket from 'stemn-shared/misc/Websocket/websocket.middleware.js'
-
-// Other
 import rootReducer from '../reducer'
-import DevTools from '../../modules/DevTools'
-
-/**
- * Entirely optional.
- * This tiny library adds some functionality to your DevTools,
- * by logging actions/state to your console. Used in conjunction
- * with your standard DevTools monitor gives you great flexibility.
- */
+import { identity } from 'lodash'
 
 const middlewares = [
   thunk,
@@ -47,7 +36,7 @@ const getDebugSessionKey = function () {
 
 const enhancer = compose(
   applyMiddleware(...middlewares),
-  window.devToolsExtension ? window.devToolsExtension() : DevTools.instrument(),
+  window.devToolsExtension ? window.devToolsExtension() : identity,
   // Optional. Lets you write ?debug_session=<key> in address bar to persist debug sessions
   persistState(getDebugSessionKey()),
 )

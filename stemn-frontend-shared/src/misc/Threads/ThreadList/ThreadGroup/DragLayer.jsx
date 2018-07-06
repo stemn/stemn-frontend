@@ -1,7 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { DragLayer } from 'react-dnd'
-
-import ThreadGroup from './ThreadGroup.jsx'
+import PropTypes from 'prop-types'
 import ThreadListItem from '../ThreadListItem/ThreadListItem.jsx'
 
 const layerStyles = {
@@ -39,18 +39,18 @@ function collect(monitor) {
   }
 }
 
-const CustomDragLayer = React.createClass({
-  propTypes: {
-    item: React.PropTypes.object,
-    itemType: React.PropTypes.string,
-    currentOffset: React.PropTypes.shape({
-      x: React.PropTypes.number.isRequired,
-      y: React.PropTypes.number.isRequired,
+class CustomDragLayer extends React.Component {
+  static propTypes = {
+    item: PropTypes.object,
+    itemType: PropTypes.string,
+    currentOffset: PropTypes.shape({
+      x: PropTypes.number.isRequired,
+      y: PropTypes.number.isRequired,
     }),
-    isDragging: React.PropTypes.bool.isRequired,
-  },
+    isDragging: PropTypes.bool.isRequired,
+  };
 
-  renderItem(type, item) {
+  renderItem = (type, item) => {
     switch (type) {
       case 'card':
         return (
@@ -61,7 +61,7 @@ const CustomDragLayer = React.createClass({
           <div>asfasfafs aafsafasf fsasafsaf</div>
         )
     }
-  },
+  };
 
   render() {
     const item = this.props.item
@@ -77,7 +77,7 @@ const CustomDragLayer = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 module.exports = DragLayer(collect)(CustomDragLayer)

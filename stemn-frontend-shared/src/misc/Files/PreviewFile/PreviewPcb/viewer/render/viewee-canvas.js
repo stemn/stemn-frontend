@@ -1,3 +1,4 @@
+/* eslint-disable */
 import ViewEERenderer from './viewee-generic.js'
 import webGerberConstants from '../constants/webGerberConstants.js'
 import { forEach } from 'lodash'

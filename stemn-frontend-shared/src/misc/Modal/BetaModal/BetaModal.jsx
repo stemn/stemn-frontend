@@ -5,27 +5,24 @@ import { connect } from 'react-redux'
 import { requestBetaCode, submitBetaCode } from 'stemn-shared/misc/Auth/Auth.actions.js'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 
-// Styles
-import classNames from 'classnames'
+class Component extends React.Component {
+  state = { value: '' };
 
-const Component = React.createClass({
-  getInitialState() {
-    return { value: '' }
-  },
-  onChange(event) {
+  onChange = (event) => {
     this.setState({ value: event.target.value })
-  },
-  submitCode() {
+  };
+
+  submitCode = () => {
     this.props.dispatch(submitBetaCode(this.state.value)).then(() => {
       this.props.modalConfirm()
     })
-  },
-  submitRequest() {
-    this.props.dispatch(requestBetaCode())
-  },
-  render() {
-    const { value } = this.state
+  };
 
+  submitRequest = () => {
+    this.props.dispatch(requestBetaCode())
+  };
+
+  render() {
     return (
       <div style={ { width: '400px' } }>
         <div className="modal-title">Request Beta Access</div>
@@ -55,7 +52,7 @@ const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 export default connect()(Component)

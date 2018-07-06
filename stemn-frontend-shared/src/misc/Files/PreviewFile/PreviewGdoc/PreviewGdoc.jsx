@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 
-export default React.createClass({
+export default class PreviewGdoc extends React.Component {
   render() {
     const { fileMeta } = this.props
     return (
@@ -8,5 +8,5 @@ export default React.createClass({
         <iframe className="flex" src={ fileMeta.url } style={ { border: 'none' } } />
       </div>
     )
-  },
-})
+  }
+}

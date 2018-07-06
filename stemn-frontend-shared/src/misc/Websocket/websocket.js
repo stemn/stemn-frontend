@@ -1,4 +1,3 @@
-import ws from 'ws'
 import primus from './primus-websockets2.js'
 import qs from 'querystring'
 
@@ -39,13 +38,6 @@ export const initialise = (hostUrl) => {
       return oldWrite(data)
     }
   }
-
-  socket.write({
-    type: 'ADMIN/ECHO',
-    payload: {
-      test: 'test',
-    },
-  })
 
   return socket
 }

@@ -1,5 +1,3 @@
-// Container Core
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 
@@ -10,17 +8,18 @@ import React from 'react'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
-export const Component = React.createClass({
+export class Component extends React.Component {
   componentWillReceiveProps(nextProps, prevProps) {
     if (nextProps.auth.authToken && nextProps.auth.user._id) {
       nextProps.dispatch(push('/'))
     }
-  },
+  }
+
   render() {
     const { children } = this.props
     return children
-  },
-})
+  }
+}
 
 
 // /////////////////////////////// CONTAINER /////////////////////////////////

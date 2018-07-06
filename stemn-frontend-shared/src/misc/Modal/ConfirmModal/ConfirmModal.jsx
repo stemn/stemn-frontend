@@ -3,18 +3,15 @@ import React from 'react'
 
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 
-// Styles
-import classNames from 'classnames'
+class Component extends React.Component {
+  state = {
+    value: '',
+  };
 
-const Component = React.createClass({
-  getInitialState() {
-    return {
-      value: '',
-    }
-  },
-  onChange(event) {
+  onChange = (event) => {
     this.setState({ value: event.target.value })
-  },
+  };
+
   render() {
     const {
       title, message,
@@ -43,7 +40,7 @@ const Component = React.createClass({
           <Button style={ { marginRight: '10px' } } onClick={ modalCancel }>Cancel</Button>
           <Button
             className="warn"
-            disabled={ confirmValue && value.toLowerCase() != confirmValue.toLowerCase() }
+            disabled={ confirmValue && value.toLowerCase() !== confirmValue.toLowerCase() }
             onClick={ modalConfirm }
           >
             Confirm
@@ -51,7 +48,7 @@ const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 export default Component

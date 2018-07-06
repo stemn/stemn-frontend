@@ -1,12 +1,10 @@
 import React from 'react'
 import moment from 'moment'
-import { has }     from 'lodash'
 
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './ThreadDisplayModal.css'
 
 import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox'
-import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import LabelSelect from 'stemn-shared/misc/Threads/LabelSelect/LabelSelect.jsx'
 import UserSelect from 'stemn-shared/misc/Users/UserSelect/UserSelect.jsx'
 import DatePicker from 'stemn-shared/misc/Calendar/DatePicker/DatePicker.jsx'
@@ -20,32 +18,44 @@ import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOver
 import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
 import ThreadTimelineEmpty from 'stemn-shared/misc/Threads/ThreadTimelineEmpty'
 
-export default React.createClass({
-  showLabelEditModal() {
+export default class ThreadDisplayModal extends React.Component {
+  showLabelEditModal = () => {
     this.props.showLabelEditModal({
       boardId: this.props.thread.data.board,
     })
-  },
-  toggleComplete({ model, value }) {
+  };
+
+  toggleComplete = ({ model, value }) => {
     this.props.toggleComplete({
       threadId: this.props.thread.data._id,
       model,
       value,
     })
     this.updateThread()
-  },
-  updateThread() {
+  };
+
+  updateThread = () => {
     setTimeout(() => this.props.updateThread({ thread: this.props.thread.data }), 1)
-  },
-  deleteThread() {
+  };
+
+  deleteThread = () => {
     this.props.deleteThread({
       threadId: this.props.thread.data._id,
       boardId: this.props.thread.data.board,
     })
     this.props.modalConfirm()
-  },
+  };
+
   render() {
-    const { threadId, thread, board, entityModel, project, timeline, timelineCacheKey, modalCancel } = this.props
+    const {
+      threadId,
+      thread,
+      board,
+      entityModel,
+      project,
+      timeline,
+      timelineCacheKey,
+    } = this.props
 
     const getMain = () => {
       const menu = [{
@@ -95,7 +105,7 @@ export default React.createClass({
                 type="thread"
               />
             }
-            { timeline && timeline.length == 0 &&
+            { timeline && timeline.length === 0 &&
               <ThreadTimelineEmpty className="flex" />
             }
           </div>
@@ -158,7 +168,7 @@ export default React.createClass({
     )
 
     return (
-      <div className={ classNames(classes.threadDisplayModal, 'layout-column') }>
+      <div className={ cn(classes.threadDisplayModal, 'layout-column') }>
         <div className="layout-row flex">
           <div className="flex-70 layout-column rel-box">
             <LoadingOverlay show={ !thread || !thread.data || !project || !project.data } />
@@ -170,5 +180,5 @@ export default React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}

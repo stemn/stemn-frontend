@@ -1,5 +1,5 @@
 import React from 'react'
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './UserAvatar.css'
 
 const colours = [
@@ -7,12 +7,12 @@ const colours = [
   '#A5D6A7', '#00C853', '#64DD17', '#E6EE9C', '#AEEA00', '#FFD600', '#FFAB00', '#FF6D00', '#FFAB91', '#DD2600', '#455A64', '#263238',
 ]
 
-export default React.createClass({
+export default class UserAvatar extends React.Component {
   render() {
     // display: 'contain' (Default: 'cover')
     const { style, shape, size, className, picture, title, name, display } = this.props
     const styles = {
-      borderRadius: shape == 'square' ? '3px' : '50%',
+      borderRadius: shape === 'square' ? '3px' : '50%',
       width: `${size}px` || '30px',
       height: `${size}px` || '30px',
       minHeight: `${size}px` || '30px',
@@ -35,7 +35,7 @@ export default React.createClass({
       }
       return (
         <div
-          className={ classNames(display === 'cover' ? classes.cover : classes.contain, className) }
+          className={ cn(display === 'cover' ? classes.cover : classes.contain, className) }
           title={ title }
           style={ Object.assign({}, actualStyles, pictureStyles) }
         />
@@ -61,9 +61,9 @@ export default React.createClass({
     }
 
     return (
-      <div className={ classNames(className, 'layout-column layout-align-center-center') } title={ title } style={ Object.assign({}, actualStyles, colorStyles) }>
+      <div className={ cn(className, 'layout-column layout-align-center-center') } title={ title } style={ Object.assign({}, actualStyles, colorStyles) }>
         {name ? initials : ''}
       </div>
     )
-  },
-})
+  }
+}

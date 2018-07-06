@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import ModalContainer from 'stemn-shared/misc/Modal/ModalContainer.jsx'
 import TitleBar from 'stemn-shared/misc/TitleBar/TitleBar'
 

@@ -1,9 +1,6 @@
-import React, { Component, PropTypes } from 'react'
-
-import Input from 'stemn-shared/misc/Input/Input/Input'
-import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import LinkAccount from 'stemn-shared/misc/Settings/LinkAccount/LinkAccount'
-import TextDisplayBox from 'stemn-shared/misc/TextDisplayBox/TextDisplayBox.jsx'
 
 export default class UserCloudProviderSettings extends Component {
   static propTypes = {

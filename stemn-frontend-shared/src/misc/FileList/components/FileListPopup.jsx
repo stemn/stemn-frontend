@@ -6,18 +6,16 @@ import { connect } from 'react-redux'
 import * as FileListActions from '../FileList.actions.js'
 
 // Component Core
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { orderBy, omit } from 'lodash'
 
 // Styles
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './FileListPopup.css'
 
 // Sub Components
 import LoadingOverlay   from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
-import MdRefresh        from 'react-icons/md/refresh'
-import MdHome           from 'react-icons/md/home'
-import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import FileIcon         from './FileIcon'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
@@ -34,20 +32,21 @@ const propTypesObject = {
 }
 
 
-export const FileRow = React.createClass({
+export class FileRow extends React.Component {
   render() {
     const { file, isActive, clickFn } = this.props
     return (
-      <div className={ classNames(classes.file, { [classes.active]: isActive }, 'layout-row layout-align-start-center') } onClick={ () => clickFn({ file }) }>
+      <div className={ cn(classes.file, { [classes.active]: isActive }, 'layout-row layout-align-start-center') } onClick={ () => clickFn({ file }) }>
         <FileIcon fileType={ file.extension } type={ file.type } size={ 20 } />
         <div className="text-ellipsis">{file.name}</div>
       </div>
     )
-  },
-})
+  }
+}
 
-export const FileListPopup = React.createClass({
-  propTypes: propTypesObject,
+export class FileListPopup extends React.Component {
+  static propTypes = propTypesObject;
+
   //  componentWillMount() {
   //    this.onMount(this.props)
   //  },
@@ -76,11 +75,15 @@ export const FileListPopup = React.createClass({
   //  },
 
   render() {
-    const { files, parentfolder, activeFolder, dispatch, clickFn } = this.props
+    const {
+      files,
+      activeFolder,
+      clickFn,
+    } = this.props
     const isLoading    = !files || files.loading
     const filesOrdered = files && files.entries ? orderBy(files.entries, 'name') : []
-    const filesOnly    = filesOrdered.filter(file => file.type == 'file')
-    const foldersOnly  = filesOrdered.filter(file => file.type == 'folder')
+    const filesOnly    = filesOrdered.filter(file => file.type === 'file')
+    const foldersOnly  = filesOrdered.filter(file => file.type === 'folder')
 
     return (
       <div { ...omit(this.props, Object.keys(propTypesObject)) } className={ classes.popup }>
@@ -89,7 +92,7 @@ export const FileListPopup = React.createClass({
           <FileRow
             key={ file._id }
             file={ file }
-            isActive={ file.fileId == activeFolder.fileId }
+            isActive={ file.fileId === activeFolder.fileId }
             clickFn={ clickFn }
           />
         ))
@@ -99,15 +102,15 @@ export const FileListPopup = React.createClass({
           <FileRow
             key={ file._id }
             file={ file }
-            isActive={ file.fileId == activeFolder.fileId }
+            isActive={ file.fileId === activeFolder.fileId }
             clickFn={ clickFn }
           />
         ))
         }
       </div>
     )
-  },
-})
+  }
+}
 
 
 // /////////////////////////////// CONTAINER /////////////////////////////////

@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import AddFriendInput from './AddFriendInput'
 import FriendList from './FriendList'
 import './FriendListApp.scss'

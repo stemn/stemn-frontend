@@ -1,11 +1,9 @@
-import React, { PropTypes } from 'react'
-
-import classNames from 'classnames'
+import React from 'react'
+import PropTypes from 'prop-types'
 import classes from './FileSelectModal.scss'
 
 import FileList from 'stemn-shared/misc/FileList'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
-import MdDone from 'react-icons/md/done'
 import { isDriveFileId, isDropboxFileId } from 'stemn-shared/misc/Files/utils'
 
 
@@ -15,27 +13,29 @@ const propTypesObject = {
   path: PropTypes.string,               // The current fileId: This folder will be opened when the modal inits.
   model: PropTypes.string,               // The { fileId, path } will be assigned to this model on confirm
   storeKey: PropTypes.string.isRequired,    // The store key (to be used in the redicer)
-  options: React.PropTypes.shape({
-    allowFolder: React.PropTypes.bool,
-    foldersOnly: React.PropTypes.bool,
-    explore: React.PropTypes.string,         // Optional: 'dropbox' || 'drive' - The provider
+  options: PropTypes.shape({
+    allowFolder: PropTypes.bool,
+    foldersOnly: PropTypes.bool,
+    explore: PropTypes.string,         // Optional: 'dropbox' || 'drive' - The provider
   }),
 }
 
-export default React.createClass({
-  propTypes: propTypesObject,
-  componentWillMount() { this.onMount(this.props) },
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) },
-  onMount(nextProps, prevProps) {
+export default class FileSelectModal extends React.Component {
+  static propTypes = propTypesObject;
+  componentWillMount() { this.onMount(this.props) }
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+
+  onMount = (nextProps, prevProps) => {
     if (!nextProps.fileSelect) {
       nextProps.init({
         storeKey: nextProps.storeKey,
         path: nextProps.path,
       })
     }
-  },
-  singleClickFn({ file }) {
-    if (file.type == 'file' || this.props.options.allowFolder && file.type == 'folder') {
+  };
+
+  singleClickFn = ({ file }) => {
+    if (file.type === 'file' || this.props.options.allowFolder && file.type === 'folder') {
       this.props.select({
         storeKey: this.props.storeKey,
         file,
@@ -46,9 +46,10 @@ export default React.createClass({
         path: file.fileId,
       })
     }
-  },
-  doubleClickFn({ file }) {
-    if (file.type == 'folder') {
+  };
+
+  doubleClickFn = ({ file }) => {
+    if (file.type === 'folder') {
       this.props.changePath({
         storeKey: this.props.storeKey,
         path: file.fileId,
@@ -59,30 +60,38 @@ export default React.createClass({
         file,
       })
     }
-  },
-  crumbClickFn({ file }) {
+  };
+
+  crumbClickFn = ({ file }) => {
     this.props.changePath({
       storeKey: this.props.storeKey,
       path: file.fileId,
     })
-  },
-  submit() {
+  };
+
+  submit = () => {
     this.props.storeChange(this.props.model, {
       fileId: this.props.fileSelect.selected.fileId,
       path: this.props.fileSelect.selected.path,
     })
     this.props.modalConfirm()
-  },
-  cancel() {
+  };
+
+  cancel = () => {
     this.props.modalCancel()
-  },
+  };
+
   render() {
-    const { projectId, path, fileSelect, options } = this.props
+    const {
+      projectId,
+      fileSelect,
+      options,
+    } = this.props
 
     const validatePath = (path, provider) => {
-      if (provider == 'drive') {
+      if (provider === 'drive') {
         return isDriveFileId(path) ? path : ''
-      } else if (provider == 'dropbox') {
+      } else if (provider === 'dropbox') {
         return isDropboxFileId(path) ? path : ''
       }
       
@@ -118,5 +127,5 @@ export default React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}

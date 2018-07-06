@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
@@ -8,7 +9,6 @@ import fileSelectModalName from 'stemn-shared/misc/FileSelect/FileSelectModal'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 
 import classes from './FileSelectInput.css'
-import classNames from 'classnames'
 import MdFolder from 'react-icons/md/folder'
 import MdNewFolder from 'react-icons/md/create-new-folder'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
@@ -24,8 +24,8 @@ const propTypesObject = {
   disabled: PropTypes.bool,                  // Should we disable the input
 }
 
-const FileSelectInput = React.createClass({
-  showModal() {
+class FileSelectInput extends React.Component {
+  showModal = () => {
     this.props.ModalActions.showModal({
       modalType: fileSelectModalName,
       modalProps: {
@@ -42,21 +42,27 @@ const FileSelectInput = React.createClass({
         },
       },
     })
-  },
-  clearValue() {
+  };
+
+  clearValue = () => {
     const { storeChange, model } = this.props
     storeChange(model, {
       path: undefined,
       fileId: undefined,
     })
-  },
+  };
+
   render() {
-    const { provider, model, value, disabled } = this.props
+    const {
+      provider,
+      value,
+      disabled,
+    } = this.props
 
     const validatePath = (path, fileId, provider) => {
-      if (provider == 'drive') {
+      if (provider === 'drive') {
         return isDriveFileId(fileId) ? path : ''
-      } else if (provider == 'dropbox') {
+      } else if (provider === 'dropbox') {
         return isDropboxFileId(fileId) ? path : ''
       }
       
@@ -95,8 +101,8 @@ const FileSelectInput = React.createClass({
         </SimpleIconButton>
       </TextDisplayBox>
     )
-  },
-})
+  }
+}
 
 
 function mapStateToProps() {

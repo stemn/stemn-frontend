@@ -3,7 +3,6 @@ import FileListPopup from './FileListPopup'
 import { getFiles } from '../FileList.actions.js'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { get } from 'lodash'
-import { bindActionCreators } from 'redux'
 
 const stateToProps = ({ fileList }, { projectId, path, provider }) => {
   const fileListCacheKey = `${projectId}-${path}-${provider}`

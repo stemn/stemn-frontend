@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import { filterBoard, getAllThreads } from '../Threads.utils.js'
-import { has, get } from 'lodash'
+import { has } from 'lodash'
 
-import classNames from 'classnames'
 import classes from './ThreadsDisplay.css'
 
 import ThreadList from '../ThreadList/ThreadList.jsx'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import SearchInput from 'stemn-shared/misc/Search/SearchInput'
-import Popover from 'stemn-shared/misc/Popover'
 import Guide from 'stemn-shared/misc/Guide/Guide'
 import cardsColumns from '../graphics/cards-columns.svg'
 import cardsStacked from '../graphics/cards-stacked.svg'
@@ -40,7 +38,16 @@ export default class ThreadsDisplay extends Component {
     })
   }
   render() {
-    const { threads, board, boardModel, project, filter, filterModel, filterCacheKey, setFilter, projectBoards } = this.props
+    const {
+      threads,
+      board,
+      project,
+      filter,
+      filterModel,
+      filterCacheKey,
+      setFilter,
+      projectBoards,
+    } = this.props
     const { hideGuide } = this.state
 
     const layoutOptions = [{
@@ -77,7 +84,7 @@ export default class ThreadsDisplay extends Component {
       )
     }
     const threadsTemplate = () => {
-      const layout = board && board.layout == 'list' ? 'list' : 'board'
+      const layout = board && board.layout === 'list' ? 'list' : 'board'
       return (
         <div className="layout-column flex">
           <div className={ `${classes.header} layout-row layout-align-start-center` }>
@@ -123,7 +130,7 @@ export default class ThreadsDisplay extends Component {
 
     const getTemplate = () => {
       const numThreads = has(board, 'data.groups') ? getAllThreads(board.data.groups).length : ''
-      if (numThreads == 0 && !hideGuide) {
+      if (numThreads === 0 && !hideGuide) {
         return guideTemplate()
       } else if (has(board, 'data.groups')) {
         return threadsTemplate()

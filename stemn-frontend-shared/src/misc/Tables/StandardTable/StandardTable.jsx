@@ -1,12 +1,7 @@
-// Component Core
 import React from 'react'
-
-// Styles
 import classes from './StandardTable.css'
 
-// /////////////////////////////// COMPONENT /////////////////////////////////
-
-export default React.createClass({
+export default class StandardTable extends React.Component {
   render() {
     const { children } = this.props
     return (
@@ -14,5 +9,5 @@ export default React.createClass({
         {children}
       </table>
     )
-  },
-})
+  }
+}

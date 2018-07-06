@@ -1,20 +1,20 @@
 import React from 'react'
 
-import classNames from 'classnames'
+import cn from 'classnames'
 
-export default React.createClass({
-  getInitialState() {
-    return {
-      showContent: this.props.show,
-    }
-  },
+export default class AnimateShow extends React.Component {
+  state = {
+    showContent: this.props.show,
+  };
+
   componentWillReceiveProps(nextProps) {
-    if (nextProps.show == false) {
+    if (nextProps.show === false) {
       setTimeout(() => this.setState({ showContent: false }), 300)
     } else {
       this.setState({ showContent: true })
     }
-  },
+  }
+
   render() {
     const getInner = () => {
       if (this.state.showContent) {
@@ -22,9 +22,9 @@ export default React.createClass({
       }
     }
     return (
-      <div className={ classNames(this.props.animation, { [this.props.animationShow]: this.props.show }) }>
+      <div className={ cn(this.props.animation, { [this.props.animationShow]: this.props.show }) }>
         {getInner()}
       </div>
     )
-  },
-})
+  }
+}

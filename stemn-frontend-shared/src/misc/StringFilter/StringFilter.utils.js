@@ -1,10 +1,9 @@
-import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import { get, pick, findKey } from 'lodash'
 
 // export const isFilterActive = (filterArray, filterString, searchString) =>{
-//  if(filterString == ''){
+//  if(filterString === ''){
 //    // If none of the other keys in this filter are active, set this one to active
-//    return filterArray.findIndex(filterObject => filterObject.value != '' ? stringContainsWord(searchString, filterObject.value) : false) == -1;
+//    return filterArray.findIndex(filterObject => filterObject.value !== '' ? stringContainsWord(searchString, filterObject.value) : false) === -1;
 //  }
 //  else{
 //    // Check if the search string contains the filterString

@@ -1,8 +1,6 @@
-import React, { Component, PropTypes } from 'react'
-import classNames from 'classnames'
-
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import classes from './Pagination.css'
-
 import MdChevronRight from 'react-icons/md/chevron-right'
 import MdChevronLeft from 'react-icons/md/chevron-left'
 import { Link } from 'react-router'

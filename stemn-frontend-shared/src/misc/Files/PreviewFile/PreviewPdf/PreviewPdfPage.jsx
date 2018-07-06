@@ -1,40 +1,43 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import classes from './PreviewPdf.css'
-
-import PDFJS from 'pdfjs-dist'
 import PDFJSUtils from 'pdfjs-dist/web/pdf_viewer.js'
 import Waypoint from 'react-waypoint'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
-const Page = React.createClass({
-  getInitialState() {
-    return {
-      status: 'loading',
-      page: undefined,
-      width: 0,
-      height: 0,
-    }
-  },
+class Page extends React.Component {
+  state = {
+    status: 'loading',
+    page: undefined,
+    width: 0,
+    height: 0,
+  };
+
   componentWillReceiveProps(nextProps) {
     const prevProps = this.props
-    if (prevProps.pdf != nextProps.pdf) {
+    if (prevProps.pdf !== nextProps.pdf) {
       this._initPage(nextProps)
     }
-    if (prevProps.scale != nextProps.scale) {
+    if (prevProps.scale !== nextProps.scale) {
       this.scale(nextProps.scale)
     }
-  },
+  }
+
   componentDidMount() {
     this._initPage(this.props)
-  },
+  }
+
   componentWillUnmount() {
     this.clearTimeouts()
-  },
-  renderTimeout: null,
-  clearTimeouts() {
+  }
+
+  renderTimeout = null;
+
+  clearTimeouts = () => {
     clearTimeout(this.renderTimeout)
-  },
-  _initPage(props) {
+  };
+
+  _initPage = (props) => {
     const { scale, index, pdf } = this.props
     const { page } = this.state
     if (!page) {
@@ -51,22 +54,26 @@ const Page = React.createClass({
         this._enterPage()
       })
     }
-  },
-  _enterPage() {
+  };
+
+  _enterPage = () => {
     const { status, page } = this.state
-    if (status == 'loading' && page) {
+    if (status === 'loading' && page) {
       this._renderPage(page)
     }
-  },
-  scale(scale) {
+  };
+
+  scale = (scale) => {
     //    if(this.state.page){
     //      this._renderPage(this.state.page)
     //    }
-  },
-  context: undefined,
-  viewport: undefined,
-  textLayer: undefined,
-  _renderPage(page) {
+  };
+
+  context = undefined;
+  viewport = undefined;
+  textLayer = undefined;
+
+  _renderPage = (page) => {
     const { scale, index } = this.props
     this.viewport = page.getViewport(scale)
     const { width, height } = this.viewport
@@ -100,12 +107,17 @@ const Page = React.createClass({
       this.textLayer.setTextContent(textContent)
       this.textLayer.render()
     })
-  },
-
+  };
 
   render() {
-    const { pdf, scale, index } = this.props
-    const { width, height, status, page } = this.state
+    const {
+      scale,
+    } = this.props
+    const {
+      width,
+      height,
+      status,
+    } = this.state
 
     const sizeStyles = {
       width: width * scale,
@@ -118,7 +130,7 @@ const Page = React.createClass({
 
     return (
       <div className={ `${classes.page} ${status}` } style={ sizeStyles }>
-        <LoadingOverlay show={ status == 'loading' } />
+        <LoadingOverlay show={ status === 'loading' } />
         <Waypoint onEnter={ this._enterPage } />
         <div style={ sizeStyles }>
           <canvas ref="canvas" style={ sizeStyles } />
@@ -126,11 +138,11 @@ const Page = React.createClass({
         <div ref="text" className={ classes.textLayer } style={ textStyles } />
       </div>
     )
-  },
-})
+  }
+}
 
 Page.propTypes = {
-  index: React.PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
 }
 
 export default Page

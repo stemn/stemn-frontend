@@ -4,12 +4,11 @@ import React from 'react'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import { Link } from 'react-router'
 
-// Styles
-import classNames from 'classnames'
-
-const Component = React.createClass({
+class Component extends React.Component {
   render() {
-    const { title, message, modalCancel, modalConfirm } = this.props
+    const {
+      modalConfirm,
+    } = this.props
     return (
       <div style={ { width: '500px' } }>
         <div className="modal-title">Google Authentication Error</div>
@@ -25,7 +24,7 @@ const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 export default Component

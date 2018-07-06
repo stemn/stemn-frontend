@@ -6,12 +6,11 @@ import { connect } from 'react-redux'
 import * as WalkthroughActions from './Walkthrough.actions.js'
 
 // Component Core
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { omit } from 'lodash'
 import { getStepData } from './Walkthrough.config.js'
 
-// Styles
-import classNames from 'classnames'
 import classes from './Walkthrough.css'
 
 import Popover from 'stemn-shared/misc/Popover'
@@ -24,8 +23,9 @@ const WalkthroughPropTypes = {
 }
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
-export const Walkthrough = React.createClass({
-  propTypes: WalkthroughPropTypes,
+export class Walkthrough extends React.Component {
+  static propTypes = WalkthroughPropTypes;
+
   render() {
     const { children, name } = this.props
     const { walkthroughActions, walkthrough } = this.props
@@ -34,11 +34,11 @@ export const Walkthrough = React.createClass({
 
     const getNext = (stepName, steps) => {
       const currentIndex = steps.indexOf(stepName)
-      return currentIndex != -1 && currentIndex + 1 < steps.length ? steps[currentIndex + 1] : undefined
+      return currentIndex !== -1 && currentIndex + 1 < steps.length ? steps[currentIndex + 1] : undefined
     }
     const getPrev = (stepName, steps) => {
       const currentIndex = steps.indexOf(stepName)
-      return currentIndex != -1 && currentIndex - 1 >= 0 ? steps[currentIndex - 1] : undefined
+      return currentIndex !== -1 && currentIndex - 1 >= 0 ? steps[currentIndex - 1] : undefined
     }
 
     const nextStep = getNext(name, data.steps)
@@ -85,8 +85,8 @@ export const Walkthrough = React.createClass({
         </div>
       </Popover>
     )
-  },
-})
+  }
+}
 
 // /////////////////////////////// CONTAINER /////////////////////////////////
 

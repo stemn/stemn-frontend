@@ -1,7 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import PDFJS from 'pdfjs-dist/build/pdf.combined.js'
 import { get } from 'lodash'
-
 import Viewer from './PreviewPdfViewer.jsx'
 import classes from './PreviewPdf.css'
 import ScrollZoom from 'stemn-shared/misc/Scroll/ScrollZoom/ScrollZoom.jsx'
@@ -13,10 +13,16 @@ const propTypesObject = {
 //  src: React.PropTypes.string.isRequired
 }
 
-const PDF = React.createClass({
-  componentWillMount() { this.onMount(this.props) },
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) },
-  onMount(nextProps, prevProps) {
+class PDF extends React.Component {
+  state = {
+    pdf: null,
+    scale: 1,
+  };
+
+  componentWillMount() { this.onMount(this.props) }
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+
+  onMount = (nextProps, prevProps) => {
     // If the previewId changes, download a new file
     if (!prevProps || nextProps.previewId !== prevProps.previewId) {
       // Get the file data
@@ -34,32 +40,27 @@ const PDF = React.createClass({
         this.setState({ pdf })
       })
     }
-  },
+  };
 
-  getInitialState() {
-    return {
-      pdf: null,
-      scale: 1,
-    }
-  },
   getChildContext() {
     return {
       pdf: this.state.pdf,
       scale: this.state.scale,
     }
-  },
-  zoom(direction) {
+  }
+
+  zoom = (direction) => {
     let newValue = 0
-    if (direction == 'in') {
+    if (direction === 'in') {
       newValue = Math.round((this.state.scale * 1.1) * 100) / 100
     } else {
       newValue = Math.round((this.state.scale * 0.9) * 100) / 100
       newValue = newValue > 0 ? newValue : this.state.scale
     }
     this.setState({ scale: newValue })
-  },
+  };
+
   render() {
-    const { fileMeta, fileData } = this.props
     const { pdf, scale } = this.state
 
     return (
@@ -69,15 +70,15 @@ const PDF = React.createClass({
         </ScrollZoom>
       </div>
     )
-  },
-})
+  }
+}
 
 
 PDF.propTypes = propTypesObject
 
 PDF.childContextTypes = {
-  pdf: React.PropTypes.object,
-  scale: React.PropTypes.number,
+  pdf: PropTypes.object,
+  scale: PropTypes.number,
 }
 
 export default PDF

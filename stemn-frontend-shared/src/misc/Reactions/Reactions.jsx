@@ -1,14 +1,12 @@
 import React from 'react'
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './Reactions.css'
 import Popover from 'stemn-shared/misc/Popover'
-import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
-import MdInsertEmoticon from 'react-icons/md/insert-emoticon'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import { options, groupAndOrderReactions } from './Reactions.utils.js'
 import Link from 'stemn-shared/misc/Router/Link'
 
-export default React.createClass({
+export default class Reactions extends React.Component {
   render() {
     const { reactions, submitFn } = this.props
     const groupedReactions = reactions && reactions.length > 0 ? groupAndOrderReactions(reactions, options) : []
@@ -29,7 +27,7 @@ export default React.createClass({
                 <Link
                   name="userRoute"
                   params={ { userId: userReaction.owner._id } }
-                  className={ classNames(classes.listPopoverRow) }
+                  className={ cn(classes.listPopoverRow) }
                   key={ userReaction.owner._id }
                 >
                   <UserAvatar
@@ -48,5 +46,5 @@ export default React.createClass({
         )) }
       </span>
     )
-  },
-})
+  }
+}

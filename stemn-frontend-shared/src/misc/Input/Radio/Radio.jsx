@@ -2,10 +2,10 @@ import React from 'react'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 
 // Styles
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './Radio.css'
 
-export default class extends React.Component {
+export default class Radio extends React.Component {
   render() {
     const { value, model, modelValue, children } = this.props
     return (
@@ -14,7 +14,7 @@ export default class extends React.Component {
           <Input
             value={ value }
             type="radio"
-            className={ classNames({ [classes.checked]: modelValue == value }) }
+            className={ cn({ [classes.checked]: modelValue === value }) }
             model={ model }
           />
           <span className="layout-column layout-align-center-center" />

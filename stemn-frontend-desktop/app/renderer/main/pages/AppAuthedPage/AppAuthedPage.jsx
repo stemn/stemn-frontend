@@ -1,29 +1,22 @@
-import electron from 'electron'
-
-// Container Core
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 
 // Component Core
 import React from 'react'
 
-// Actions
-import { showModal } from 'stemn-shared/misc/Modal/Modal.actions.js'
-
 // Sub Components
 import TitleBar from 'stemn-shared/misc/TitleBar/TitleBar'
 import Sidebar  from 'stemn-shared/misc/Sidebar/Sidebar.jsx'
-import betaModalName from 'stemn-shared/misc/Modal/BetaModal'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
-export const Component = React.createClass({
+export class Component extends React.Component {
   componentWillReceiveProps(nextProps, prevProps) {
     if (!nextProps.auth.authToken || !nextProps.auth.user._id) {
       nextProps.dispatch(push('/login'))
     }
-  },
+  }
+
   componentDidMount() {
     if (!this.props.auth.authToken || !this.props.auth.user._id) {
       this.props.dispatch(push('/login'))
@@ -39,7 +32,8 @@ export const Component = React.createClass({
     //        limit: 1,
     //      }))
     //    }
-  },
+  }
+
   render() {
     const { children } = this.props
     return (
@@ -53,8 +47,8 @@ export const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 
 // /////////////////////////////// CONTAINER /////////////////////////////////

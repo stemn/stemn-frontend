@@ -1,6 +1,4 @@
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import i from 'icepick'
 
 import { hideModal, resolveModal, rejectModal } from './Modal.actions.js'
 

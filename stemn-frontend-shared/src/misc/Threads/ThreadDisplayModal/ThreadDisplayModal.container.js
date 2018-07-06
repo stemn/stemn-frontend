@@ -1,4 +1,3 @@
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'

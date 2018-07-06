@@ -2,18 +2,18 @@ const Promise = require('bluebird')
 const fs = Promise.promisifyAll(require('fs'))
 const path = require('path')
 const _ = require('lodash')
-const colors = require('colors')
+require('colors')
 
 // Change the path to your stats.json here
 const pathToStats = '../reports/stats.json'
 
 const toBytes = (bytes, precision = 1) => {
-  if (bytes==='0' || bytes===0 || isNaN(parseFloat(bytes)) || !isFinite(bytes)) {
+  if (bytes === '0' || bytes === 0 || isNaN(parseFloat(bytes)) || !isFinite(bytes)) {
     return '-'
   }
   const units = ['B', 'kB', 'MB', 'GB', 'TB', 'PB']
   const number = Math.floor(Math.log(bytes) / Math.log(1024))
-  return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision) + ' ' + units[number];
+  return `${(bytes / Math.pow(1024, Math.floor(number))).toFixed(precision)} ${units[number]}`
 }
 
 fs.readFileAsync(path.join(__dirname, pathToStats)).then((data) => {
@@ -54,16 +54,13 @@ fs.readFileAsync(path.join(__dirname, pathToStats)).then((data) => {
       })
     })
 
-    const getSize = (items) => {
-      return _.sum(Object.keys(items).map((itemName) => {
-        const item = items[itemName]
-        if (item.baseLevel) {
-          return item.size
-        } else {
-          return getSize(item)
-        }
-      }))
-    }
+    const getSize = items => _.sum(Object.keys(items).map((itemName) => {
+      const item = items[itemName]
+      if (item.baseLevel) {
+        return item.size
+      } 
+      return getSize(item)
+    }))
 
     const spacing = 3
     const logItems = (items = {}, level) => {

@@ -1,17 +1,17 @@
 
 import React from 'react'
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './MarkdownButton.css'
 import Markdown from 'stemn-shared/assets/icons/editor/markdown.js'
 
-export default React.createClass({
+export default class MarkdownButton extends React.Component {
   render() {
     const { children, style, className } = this.props
     return (
       <a
         href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet"
         target="_blank"
-        className={ classNames(className, classes.button) }
+        className={ cn(className, classes.button) }
         style={ style }
       >
         <Markdown size="25" />
@@ -20,5 +20,5 @@ export default React.createClass({
           : null }
       </a>
     )
-  },
-})
+  }
+}

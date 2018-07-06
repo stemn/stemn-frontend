@@ -5,28 +5,26 @@ import { unlink, logout, authenticate } from 'stemn-shared/misc/Auth/Auth.action
 
 import React from 'react'
 
-import classNames from 'classnames'
 import classes from 'stemn-frontend-desktop/app/renderer/main/pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css'
 
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton.jsx'
-import LinkAccount from 'stemn-shared/misc/Settings/LinkAccount/LinkAccount.jsx'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
-import Input from 'stemn-shared/misc/Input/Input/Input'
-import TextDisplayBox from 'stemn-shared/misc/TextDisplayBox/TextDisplayBox.jsx'
 import UserProfileSettings from 'stemn-shared/misc/UserSettings/UserProfileSettings'
 import UserLinkedAccountSettings from 'stemn-shared/misc/UserSettings/UserLinkedAccountSettings'
 import UserCloudProviderSettings from 'stemn-shared/misc/UserSettings/UserCloudProviderSettings'
 
-export const Component = React.createClass({
+export class Component extends React.Component {
   componentWillMount() {
     this.props.getUser({
       userId: this.props.auth.user._id,
       force: true,
     })
-  },
-  saveUser() {
+  }
+
+  saveUser = () => {
     this.props.saveUser({ user: this.props.user.data })
-  },
+  };
+
   render() {
     const { entityModel, user, auth, authenticate, unlink, logout } = this.props
     const getInner = () => (
@@ -67,8 +65,8 @@ export const Component = React.createClass({
         <LoadingOverlay show={ auth.authLoading || !user || !user.data } />
       </div>
     )
-  },
-})
+  }
+}
 
 //          <div className={classes.panel}>
 //            <h3>Beta</h3>

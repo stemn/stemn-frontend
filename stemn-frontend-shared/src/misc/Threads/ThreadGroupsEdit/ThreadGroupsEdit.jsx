@@ -1,8 +1,8 @@
 // Component Core
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import getUuid from 'stemn-shared/utils/getUuid.js'
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './ThreadGroupsEdit.css'
 import { storeRemove, storePush } from 'stemn-shared/misc/Store/Store.actions'
 import { showConfirm } from 'stemn-shared/misc/Modal/Modal.actions.js'
@@ -52,7 +52,10 @@ class ThreadGroupsEdit extends Component {
   }
 
   render() {
-    const { model, value, props } = this.props
+    const {
+      model,
+      value,
+    } = this.props
 
     return (
       <div>
@@ -67,7 +70,7 @@ class ThreadGroupsEdit extends Component {
                 placeholder="Group Name"
               />
             </div>
-            <div className={ classNames('dr-input', classes.threadCount) }>
+            <div className={ cn('dr-input', classes.threadCount) }>
               { pluralise(group.threads.length, 'Thread') }
             </div>
             <Popover preferPlace="right">

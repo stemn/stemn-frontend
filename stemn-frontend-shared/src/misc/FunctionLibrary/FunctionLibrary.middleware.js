@@ -23,7 +23,7 @@ export default store => next => (action) => {
 
 
 function dispatchAction(store, action, aliasedResult) {
-  if (action.type == 'FILES/RENDER_FILE') {
+  if (action.type === 'FILES/RENDER_FILE') {
     //    console.log({aliasedResult});
     aliasedResult.then(response => 
       //      console.log({response});
@@ -36,7 +36,7 @@ function dispatchAction(store, action, aliasedResult) {
     store.dispatch(aliasedResult)
   }
   // If the initial action has a type (that is not ALIASED), we use the aliasedResult as the payload.
-  else if (action.type && action.type != 'ALIASED') {
+  else if (action.type && action.type !== 'ALIASED') {
     const updatedAction = Object.assign({}, action, {
       payload: aliasedResult,
       aliased: false, // Set alias to false so we don't loop

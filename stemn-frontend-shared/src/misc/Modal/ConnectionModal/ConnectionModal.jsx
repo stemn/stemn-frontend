@@ -1,16 +1,10 @@
 // Component Core
 import React from 'react'
 
-import Button from 'stemn-shared/misc/Buttons/Button/Button'
-
 import MagnifyInternet   from 'stemn-shared/assets/images/pure-vectors/magnify-internet.svg'
 
-// Styles
-import classNames from 'classnames'
-
-const Component = React.createClass({
+class Component extends React.Component {
   render() {
-    const { title, message, modalCancel, modalConfirm } = this.props
     return (
       <div style={ { width: '100vw', padding: '30px' } }>
         <div className="modal-body" style={ { lineHeight: '1.4em' } }>
@@ -22,7 +16,7 @@ const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 export default Component

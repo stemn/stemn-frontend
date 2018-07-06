@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 
 // Styles
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './Login.css'
 
 // Sub Components
@@ -24,8 +24,8 @@ export default class Login extends Component {
 
     return (
       <div className="flex rel-box">
-        <div className={ classNames(classes.background, 'layout-column layout-align-center-center') }>
-          <div className={ classNames(classes.panel, 'layout-column', 'layout-align-space-between') }>
+        <div className={ cn(classes.background, 'layout-column layout-align-center-center') }>
+          <div className={ cn(classes.panel, 'layout-column', 'layout-align-space-between') }>
             <div className="text-title-3">Sign In</div>
             <form onSubmit={ this.submit }>
               <br />

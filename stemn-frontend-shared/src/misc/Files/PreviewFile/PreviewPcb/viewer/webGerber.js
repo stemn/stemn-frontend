@@ -1,3 +1,4 @@
+/* eslint-disable */
 import webGerberConstants from './constants/webGerberConstants.js'
 import ViewEEPCB from './viewee.js'
 import initGerberParser from './parse/gerber.js'
