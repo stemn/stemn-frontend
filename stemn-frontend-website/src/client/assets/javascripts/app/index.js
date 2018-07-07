@@ -15,6 +15,7 @@ import { createPersistor } from 'redux-persist'
 import { getLatest } from 'stemn-shared/misc/DesktopReleases/DesktopReleases.actions'
 import { getNotifications } from 'stemn-shared/misc/Notifications/Notifications.actions'
 
+import "../utils";
 
 const initReactAndRedux = (initialState) => {
   const store = configureStore(initialState)

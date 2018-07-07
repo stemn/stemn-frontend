@@ -39,7 +39,7 @@ module.exports = {
       'lodash.debounce': path.resolve(__dirname, '../node_modules/lodash/debounce'),
       'get-root-path': path.resolve(__dirname, '../src/client/getRootPath.js'),
     },
-    extensions: ['.js', '.jsx', '.json', '.scss'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.scss'],
   },
   plugins: [
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/), // http://stackoverflow.com/questions/25384360/how-to-prevent-moment-js-from-loading-locales-with-webpack
@@ -61,6 +61,10 @@ module.exports = {
       {
         test: /\.json$/,
         loader: 'json-loader',
+      },
+      {
+        test: /.ts(x)?$/,
+        loader: 'ts-loader'
       },
       // JavaScript / ES6
       {
