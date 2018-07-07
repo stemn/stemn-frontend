@@ -15,6 +15,7 @@ import { getViewerType } from './PreviewFile.utils.js'
 import { isAssembly } from './PreviewCad/PreviewCad.utils.js'
 import DownloadFile from '../DownloadFile/DownloadFile.jsx'
 import ErrorMessages from './Messages/Messages.jsx'
+import { PipelineGraph } from 'stemn-shared/misc/Pipelines/PipelineGraph'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -35,6 +36,8 @@ export class Component extends React.Component {
 
     const getPreview = () => {
       const viewerType = getViewerType(file.name, file.provider)
+
+      return <PipelineGraph />
       
       if (fileData && fileData.error || fileRender && fileRender.error) {
         return (

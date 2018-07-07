@@ -64,7 +64,7 @@ module.exports = {
       },
       {
         test: /.ts(x)?$/,
-        loader: 'ts-loader'
+        loader: 'ts-loader',
       },
       // JavaScript / ES6
       {
