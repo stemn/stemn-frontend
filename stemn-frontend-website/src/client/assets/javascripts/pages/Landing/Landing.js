@@ -16,6 +16,7 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import MdLock from 'react-icons/md/input'
 import vidDemo from 'static/video/demo.mp4'
 import Link from 'stemn-shared/misc/Router/Link'
+import { JsonSchemaForm } from '../../modules/JsonSchemaForm'
 
 export default class Landing extends Component {
   constructor(props) {
@@ -43,6 +44,7 @@ export default class Landing extends Component {
               Download Now
             </DownloadButton>
           }
+          <JsonSchemaForm />
           <Link
             className={ classes.screenshot }
             name="fileRoute"
