@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import codemirror from 'codemirror'
 import 'codemirror/mode/meta.js'
-const requireCodemirrorMode = require.context('url-loader?limit=1&name=js/codemirror/[name].[hash].[ext]!codemirror/mode/', true, /\.js$/)
+// const requireCodemirrorMode = require.context('url-loader?limit=1&name=js/codemirror/[name].[hash].[ext]!codemirror/mode/', true, /\.js$/)
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'
-import { load } from 'stemn-shared/misc/LazyLoading/LazyLoading.utils'
+// import { load } from 'stemn-shared/misc/LazyLoading/LazyLoading.utils'
 import Container from 'stemn-shared/misc/Layout/Container'
 
 // Add a special case for pipeline files.
@@ -36,15 +36,15 @@ export default class Viewer extends Component {
       const mode = modeInfo ? modeInfo.mode : 'null'
       if (mode && mode !== 'null') {
         const modePath = `./${mode}/${mode}.js`
-        const webpackModePath = requireCodemirrorMode(modePath)
+        // const webpackModePath = requireCodemirrorMode(modePath)
 
         // Attach codemirror to the window so the mode pack will find it
         window.CodeMirror = codemirror
         // Load the mode
-        load([{ src: webpackModePath }]).then(() => {
-          // Set the mode after it has loaded
-          editorInstance.setOption('mode', mode)
-        })
+        // load([{ src: webpackModePath }]).then(() => {
+        //   // Set the mode after it has loaded
+        //   editorInstance.setOption('mode', mode)
+        // })
       }
     }
   }

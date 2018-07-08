@@ -13,5 +13,9 @@
             "es2017",
             "dom"
         ],
+        "baseUrl": "./",
+        "paths": {
+            "stemn-shared": ["./stemn-shared"]
+        }
     }
 }

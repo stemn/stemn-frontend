@@ -129,7 +129,7 @@ module.exports = merge(config, {
         include: [
           path.resolve(__dirname, '../src/client/assets/javascripts'),
           path.resolve(__dirname, '../src/client/assets/styles/modules'),
-          path.resolve(__dirname, '../node_modules/stemn-frontend-shared'),
+          path.resolve(__dirname, '../../stemn-frontend-shared'),
         ],
         loader: ExtractTextPlugin.extract({
           fallbackLoader: 'style',
