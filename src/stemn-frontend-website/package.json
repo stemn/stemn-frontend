@@ -1,0 +1,30 @@
+{
+  "name": "stemn-frontend-website",
+  "version": "1.1.1",
+  "author": "David Revay <david@stemn.com>",
+  "license": "MIT",
+  "scripts": {
+    "install:link": "sh ./scripts/install.sh",
+    "link:shared": "sh ./scripts/link-shared.sh",
+    "dev": "node ./scripts/development.js",
+    "build": "sh ./scripts/build.sh",
+    "analyse": "node ./scripts/analyse.js",
+    "analyse:graph": "webpack-bundle-analyzer ./reports/stats.json",
+    "serve": "node ./build/server/index.js",
+    "serve:wait": "npm run serve & wait-on http://localhost:3000",
+    "deploy": "sh ./scripts/deploy.sh",
+    "deploy:ci": "sh ./scripts/deploy-ci.sh",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run --record"
+  },
+  "devDependencies": {
+  },
+  "dependencies": {
+  },
+  "standard": {
+    "ignore": [
+      "src/client/assets/static/other",
+      "test"
+    ]
+  }
+}

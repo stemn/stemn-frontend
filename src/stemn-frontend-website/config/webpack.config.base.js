@@ -1,5 +1,5 @@
 // Common Webpack configuration used by webpack.config.development and webpack.config.production
-const path = require('path')
+const { resolve } = require('path')
 const webpack = require('webpack')
 const autoprefixer = require('autoprefixer')
 const HappyPack = require('happypack')
@@ -21,23 +21,24 @@ module.exports = {
   resolve: {
     symlinks: false,
     modules: [
-      path.join(__dirname, '../src/client/scripts'),
-      path.join(__dirname, '../src/client/assets'),
-      path.join(__dirname, '../src/client/assets/javascripts'),
-      'node_modules',
+      resolve(__dirname, '../src/client/scripts'),
+      resolve(__dirname, '../src/client/assets'),
+      resolve(__dirname, '../src/client/assets/javascripts'),
+      resolve(__dirname, '../node_modules'),
+      resolve(__dirname, '../../../node_modules'),
     ],
     alias: {
-      'stemn-shared': path.resolve(__dirname, '../node_modules/stemn-frontend-shared/src'),
-      theme: path.resolve(__dirname, '../src/client/assets/styles/modules/theme.css'),
-      'route-actions': path.resolve(__dirname, '../src/client/assets/javascripts/pages/routeActions.js'),
-      'lodash.get': path.resolve(__dirname, '../node_modules/lodash/get'),
-      'lodash.assign': path.resolve(__dirname, '../node_modules/lodash/assign'),
-      'lodash.throttle': path.resolve(__dirname, '../node_modules/lodash/throttle'),
-      'lodash.topath': path.resolve(__dirname, '../node_modules/lodash/topath'),
-      'lodash.repeat': path.resolve(__dirname, '../node_modules/lodash/repeat'),
-      'lodash.keys': path.resolve(__dirname, '../node_modules/lodash/keys'),
-      'lodash.debounce': path.resolve(__dirname, '../node_modules/lodash/debounce'),
-      'get-root-path': path.resolve(__dirname, '../src/client/getRootPath.js'),
+      'stemn-shared': resolve(__dirname, '../../stemn-frontend-shared/src'),
+      theme: resolve(__dirname, '../src/client/assets/styles/modules/theme.css'),
+      'route-actions': resolve(__dirname, '../src/client/assets/javascripts/pages/routeActions.js'),
+      'lodash.get': resolve(__dirname, '../../../node_modules/lodash/get'),
+      'lodash.assign': resolve(__dirname, '../../../node_modules/lodash/assign'),
+      'lodash.throttle': resolve(__dirname, '../../../node_modules/lodash/throttle'),
+      'lodash.topath': resolve(__dirname, '../../../node_modules/lodash/topath'),
+      'lodash.repeat': resolve(__dirname, '../../../node_modules/lodash/repeat'),
+      'lodash.keys': resolve(__dirname, '../../../node_modules/lodash/keys'),
+      'lodash.debounce': resolve(__dirname, '../../../node_modules/lodash/debounce'),
+      'get-root-path': resolve(__dirname, '../src/client/getRootPath.js'),
     },
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.scss'],
   },
@@ -64,16 +65,16 @@ module.exports = {
       },
       {
         test: /.ts(x)?$/,
-        loader: 'ts-loader'
+        loader: 'ts-loader',
       },
       // JavaScript / ES6
       {
         test: /\.jsx?$/,
         include: [
-          path.resolve(__dirname, '../src/client/assets/javascripts'),
-          path.resolve(__dirname, '../node_modules/stemn-frontend-shared'),
-          path.resolve(__dirname, '../node_modules/react-icons'),
-          path.resolve(__dirname, '../node_modules/react-popover-wrapper'),
+          resolve(__dirname, '../src/client/assets/javascripts'),
+          resolve(__dirname, '../../stemn-frontend-shared'),
+          resolve(__dirname, '../../../node_modules/react-icons'),
+          resolve(__dirname, '../../../node_modules/react-popover-wrapper'),
         ],
         loader: 'happypack/loader',
       },
@@ -83,7 +84,7 @@ module.exports = {
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/,
         include: [
-          path.resolve(__dirname, '../node_modules/stemn-frontend-shared/src/misc/FileList/filetype'),
+          resolve(__dirname, '../../stemn-frontend-shared/src/misc/FileList/filetype'),
         ],
         loader: 'url',
         query: {
@@ -94,7 +95,7 @@ module.exports = {
       {
         test: /\.(png|jpg|jpeg|gif|svg|mp4)$/,
         exclude: [
-          path.resolve(__dirname, '../node_modules/stemn-frontend-shared/src/misc/FileList/filetype'),
+          resolve(__dirname, '../../stemn-frontend-shared/src/misc/FileList/filetype'),
         ],
         loader: 'url',
         query: {
