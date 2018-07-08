@@ -15,7 +15,9 @@
     "deploy": "sh ./scripts/deploy.sh",
     "deploy:ci": "sh ./scripts/deploy-ci.sh",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run --record"
+    "cypress:run": "cypress run --record",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "devDependencies": {
     "babel-cli": "6.14.0",
@@ -77,10 +79,17 @@
     "webpack-dashboard": "0.1.8",
     "webpack-dev-middleware": "1.6.1",
     "webpack-hot-middleware": "2.12.2",
-    "webpack-merge": "0.14.1"
+    "webpack-merge": "0.14.1",
+    "@storybook/react": "^3.4.8",
+    "@storybook/addon-actions": "^3.4.8",
+    "@storybook/addon-links": "^3.4.8",
+    "@storybook/addons": "^3.4.8"
   },
   "dependencies": {
     "@stemn/whats-that-gerber": "2.1.2",
+    "@types/react": "16.4.6",
+    "@types/react-dom": "16.0.6",
+    "@types/react-jsonschema-form": "1.0.6",
     "ansi-to-react": "3.2.0",
     "autoprefixer": "6.4.1",
     "autosuggest-highlight": "2.1.1",
@@ -122,6 +131,7 @@
     "react-helmet": "5.2.0",
     "react-hot-loader": "3.0.0-beta.6",
     "react-icons": "2.2.7",
+    "react-jsonschema-form": "1.0.3",
     "react-modal": "3.4.5",
     "react-popover-wrapper": "2.1.0",
     "react-redux": "5.0.7",
