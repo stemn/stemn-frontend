@@ -5,3 +5,5 @@ declare module '*.scss' {
   const classNames: IClassNames;
   export = classNames;
 }
+
+declare module 'stemn-frontend-shared/src/misc/Input/Input/Input'
