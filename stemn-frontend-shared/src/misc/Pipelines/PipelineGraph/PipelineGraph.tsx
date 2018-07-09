@@ -4,6 +4,8 @@ import { PipelineGraphStepFactory, PipelineGraphStepModel } from './PipelineGrap
 import { PipelineGraphDroplayer } from './PipelineGraphDroplayer';
 import { pipelineToModel } from './utils'
 import { IPipelineConfig } from './types'
+import * as cn from 'classnames'
+import * as s from './PipelineGraph.scss'
 // import { PipelineGraphPortModel } from './PipelineGraphPort'
 
 export interface PipelineGraphProps {
@@ -47,8 +49,13 @@ export class PipelineGraph extends React.Component<PipelineGraphProps, PipelineG
 					diagramEngine={ diagramEngine } 
 				>
 					<DiagramWidget 
-						className="flex" 
+						className={ cn('flex', s.diagram )} 
 						diagramEngine={ diagramEngine } 
+						allowLooseLinks={ false }
+            className={ s.flow }
+            maxNumberPointsPerLink={ 0 }
+            // smartRouting
+            deleteKeys={ [46] } // Delete
 					/>
 				</PipelineGraphDroplayer>
 			</div>
