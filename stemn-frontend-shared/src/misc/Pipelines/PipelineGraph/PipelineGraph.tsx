@@ -1,10 +1,10 @@
-import { DiagramEngine,	DiagramModel, DiagramWidget } from 'mrblenny-storm-react-diagrams'
 import * as React from 'react'
+import * as cn from 'classnames'
+import { DiagramEngine,	DiagramModel, DiagramWidget } from 'mrblenny-storm-react-diagrams'
 import { PipelineGraphStepFactory, PipelineGraphStepModel } from './PipelineGraphStep'
 import { PipelineGraphDroplayer } from './PipelineGraphDroplayer';
 import { pipelineToModel } from './utils'
 import { IPipelineConfig } from './types'
-import * as cn from 'classnames'
 import * as s from './PipelineGraph.scss'
 // import { PipelineGraphPortModel } from './PipelineGraphPort'
 
@@ -52,7 +52,6 @@ export class PipelineGraph extends React.Component<PipelineGraphProps, PipelineG
 						className={ cn('flex', s.diagram )} 
 						diagramEngine={ diagramEngine } 
 						allowLooseLinks={ false }
-            className={ s.flow }
             maxNumberPointsPerLink={ 0 }
             // smartRouting
             deleteKeys={ [46] } // Delete

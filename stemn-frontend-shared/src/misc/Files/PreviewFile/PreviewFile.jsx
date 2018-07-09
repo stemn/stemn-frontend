@@ -16,6 +16,7 @@ import { isAssembly } from './PreviewCad/PreviewCad.utils.js'
 import DownloadFile from '../DownloadFile/DownloadFile.jsx'
 import ErrorMessages from './Messages/Messages.jsx'
 import { PipelineGraph } from 'stemn-shared/misc/Pipelines/PipelineGraph'
+import { pipelineConfigFixture } from 'stemn-shared/misc/Pipelines/PipelineGraph/fixtures'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -37,7 +38,7 @@ export class Component extends React.Component {
     const getPreview = () => {
       const viewerType = getViewerType(file.name, file.provider)
 
-      return <PipelineGraph />
+      return <PipelineGraph pipeline={ pipelineConfigFixture } />
       
       if (fileData && fileData.error || fileRender && fileRender.error) {
         return (
