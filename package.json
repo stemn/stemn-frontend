@@ -24,5 +24,13 @@
     "eslint": "4.5.0",
     "eslint-config-stemn": "git+https://git@github.com/stemn/eslint-config-stemn.git",
     "eslint-plugin-cypress": "^2.0.1"
+  },
+  "dependencies": {
+    "@types/classnames": "^2.2.4",
+    "@types/lodash": "^4.14.110",
+    "@types/react": "^16.4.6",
+    "@types/react-dom": "^16.0.6",
+    "classnames": "^2.2.6",
+    "mrblenny-storm-react-diagrams": "^5.2.1"
   }
 }
