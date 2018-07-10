@@ -50,12 +50,12 @@ export interface IPipelineConfigStepBase {
      * Input Ports
      * This describes the values of the possible input ports
      */
-    in?: any[],
+    in: any[],
     /**
      * Output Ports
      * This describes the values of the possible output ports
      */
-    out?: any[],
+    out: any[],
   },
   /** 
    * Files 
@@ -66,7 +66,7 @@ export interface IPipelineConfigStepBase {
    * X-Y Position
    * The x-y position of the step relative to the top left corner. Display purposes only.
    */
-  position?: {
+  position: {
     x: number,
     y: number,
   },

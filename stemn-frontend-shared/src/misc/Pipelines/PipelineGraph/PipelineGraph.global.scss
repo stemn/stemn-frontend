@@ -1,23 +1,24 @@
 @import "~mrblenny-storm-react-diagrams/src/sass/main.scss";
 
-// .srd-node--selected > div {
-//   border-color: zGreen !important;
-// }
 
-// .srd-default-link--path-selected {
-//   stroke: zGreen !important;
-// }
+.srd-node--selected > div {
+  border-color: green !important;
+}
 
-// .srd-default-link--point-selected {
-//   fill: zGreen;
-//   stroke-dasharray: 4,4;
-// }
+.srd-default-link--path-selected {
+  stroke: green !important;
+}
 
-// .srd-port:hover, .srd-port.selected {
-//   background: zGreen;
-// }
+.srd-default-link--point-selected {
+  fill: green;
+  stroke-dasharray: 4,4;
+}
 
-// .srd-default-link path {
-//   stroke: zGreen;
-//   stroke-linecap: square;
-// }
+.srd-port:hover, .srd-port.selected {
+  background: green;
+}
+
+.srd-default-link path {
+  stroke: green;
+  stroke-linecap: square;
+}

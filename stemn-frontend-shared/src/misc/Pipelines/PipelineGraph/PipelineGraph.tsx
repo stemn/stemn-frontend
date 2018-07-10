@@ -3,11 +3,11 @@ import * as cn from 'classnames'
 import { DiagramEngine,	DiagramModel, DiagramWidget } from 'mrblenny-storm-react-diagrams'
 import { PipelineGraphStepFactory, PipelineGraphStepModel } from './PipelineGraphStep'
 import { PipelineGraphDroplayer } from './PipelineGraphDroplayer';
-import { pipelineToModel } from './utils'
+import { deserializePipeline } from './utils'
 import { IPipelineConfig } from './types'
 import './PipelineGraph.global.scss'
 import * as s from './PipelineGraph.scss'
-// import { PipelineGraphPortModel } from './PipelineGraphPort'
+import { PipelineGraphPortModel, PipelineGraphPortFactory } from './PipelineGraphPort';
 
 export interface PipelineGraphProps {
 	pipeline: IPipelineConfig
@@ -26,10 +26,12 @@ export class PipelineGraph extends React.Component<PipelineGraphProps, PipelineG
 	
 		const diagramEngine = new DiagramEngine()
     diagramEngine.installDefaultFactories()
+		diagramEngine.registerPortFactory(new PipelineGraphPortFactory('input', () => new PipelineGraphPortModel('input')))
+    diagramEngine.registerPortFactory(new PipelineGraphPortFactory('output', () => new PipelineGraphPortModel('output')))
 		diagramEngine.registerNodeFactory(new PipelineGraphStepFactory('some_type'))
 		diagramEngine.registerNodeFactory(new PipelineGraphStepFactory('some_other_type'))
 
-		const model = pipelineToModel(pipeline, diagramEngine)
+		const model = deserializePipeline(pipeline, diagramEngine)
 		diagramEngine.setDiagramModel(model)
 
     this.state = {

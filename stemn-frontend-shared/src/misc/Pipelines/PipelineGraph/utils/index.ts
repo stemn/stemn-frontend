@@ -1,1 +1,1 @@
-export * from './pipelineToModel'
+export * from './deserializePipeline'

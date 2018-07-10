@@ -1,4 +1,4 @@
-import { NodeModel } from 'mrblenny-storm-react-diagrams'
+import { NodeModel, DiagramEngine } from 'mrblenny-storm-react-diagrams'
 // import { PipelineGraphPortModel } from "../PipelineGraphPort";
 
 export class PipelineGraphStepModel extends NodeModel {
@@ -8,5 +8,13 @@ export class PipelineGraphStepModel extends NodeModel {
 		// this.addPort(new PipelineGraphPortModel("left"));
 		// this.addPort(new PipelineGraphPortModel("bottom"));
 		// this.addPort(new PipelineGraphPortModel("right"));
+	}
+	serialize() {
+		return super.serialize()
+	}
+
+	deSerialize(data: any, engine: DiagramEngine) {
+		console.log(data)
+		super.deSerialize(data, engine);
 	}
 }

@@ -31,8 +31,10 @@
     "@types/ramda": "^0.25.34",
     "@types/react": "^16.4.6",
     "@types/react-dom": "^16.0.6",
+    "@types/uuid": "^3.4.3",
     "classnames": "^2.2.6",
     "mrblenny-storm-react-diagrams": "^5.2.1",
-    "ramda": "^0.25.0"
+    "ramda": "^0.25.0",
+    "uuid": "^3.3.2"
   }
 }
