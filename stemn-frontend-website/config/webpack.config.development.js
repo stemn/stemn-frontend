@@ -50,10 +50,7 @@ module.exports = merge(config, {
     loaders: [
       // Globals
       {
-        test: /\.(css|scss)$/,
-        include: [
-          path.resolve(__dirname, '../src/client/assets/styles/global'),
-        ],
+        test: /\.global\.(css|scss)$/,
         loaders: [
           'style',
           'css',
@@ -63,7 +60,7 @@ module.exports = merge(config, {
       },
       // CSS Modules
       {
-        test: /\.(css|scss)$/,
+        test: /^((?!\.global).)*\.(css|scss)$/,
         include: [
           path.resolve(__dirname, '../src/client/assets/javascripts'),
           path.resolve(__dirname, '../src/client/assets/styles/modules'),

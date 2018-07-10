@@ -28,9 +28,11 @@
   "dependencies": {
     "@types/classnames": "^2.2.4",
     "@types/lodash": "^4.14.110",
+    "@types/ramda": "^0.25.34",
     "@types/react": "^16.4.6",
     "@types/react-dom": "^16.0.6",
     "classnames": "^2.2.6",
-    "mrblenny-storm-react-diagrams": "^5.2.1"
+    "mrblenny-storm-react-diagrams": "^5.2.1",
+    "ramda": "^0.25.0"
   }
 }

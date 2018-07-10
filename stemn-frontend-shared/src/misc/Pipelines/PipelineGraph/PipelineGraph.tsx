@@ -5,6 +5,7 @@ import { PipelineGraphStepFactory, PipelineGraphStepModel } from './PipelineGrap
 import { PipelineGraphDroplayer } from './PipelineGraphDroplayer';
 import { pipelineToModel } from './utils'
 import { IPipelineConfig } from './types'
+import './PipelineGraph.global.scss'
 import * as s from './PipelineGraph.scss'
 // import { PipelineGraphPortModel } from './PipelineGraphPort'
 
@@ -25,7 +26,8 @@ export class PipelineGraph extends React.Component<PipelineGraphProps, PipelineG
 	
 		const diagramEngine = new DiagramEngine()
     diagramEngine.installDefaultFactories()
-		diagramEngine.registerNodeFactory(new PipelineGraphStepFactory('trigger'))
+		diagramEngine.registerNodeFactory(new PipelineGraphStepFactory('some_type'))
+		diagramEngine.registerNodeFactory(new PipelineGraphStepFactory('some_other_type'))
 
 		const model = pipelineToModel(pipeline, diagramEngine)
 		diagramEngine.setDiagramModel(model)
