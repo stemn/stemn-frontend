@@ -10,7 +10,7 @@ export const ErrorListTemplate = ({ errors }: { errors: AjvError[] }) => {
 
   return (
     <div style={{ marginBottom: '20px' }}>
-      {/* { errors } */}
+      { errors }
     </div>
   );
 }

@@ -81,6 +81,7 @@
   },
   "dependencies": {
     "@stemn/whats-that-gerber": "2.1.2",
+    "@types/lodash": "4.14.111",
     "@types/react": "16.4.6",
     "@types/react-dom": "16.0.6",
     "@types/react-jsonschema-form": "1.0.6",

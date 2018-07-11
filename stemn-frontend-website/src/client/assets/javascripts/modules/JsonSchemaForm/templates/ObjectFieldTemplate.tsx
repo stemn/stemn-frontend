@@ -1,25 +1,23 @@
 import * as React from 'react';
 import { ObjectFieldTemplateProps } from 'react-jsonschema-form';
+import { getLabelText } from '../utils'
 
 export const ObjectFieldTemplate = (props : ObjectFieldTemplateProps) => {
 
+  const { title, description, properties } = props;
 
   return (
-    <div style={ true ? {} : {
-      border: '100px solid rgba(100,0,0,0.05)',
-    }}>
+    <div>
+      { !description && !title ? null : (
+        <div>
+          <h4>{ getLabelText(title, false) }</h4>
+          <p> { description } </p>
+        </div>
+      )}
 
-      { props.title }
-
-      { props.description }
-
-      { props.properties.map((component, idx) => (
-          <div
-            key={ idx }
-            className="col-lg-2 col-md-4 col-sm-6 col-xs-12">
-            {component.content}
-          </div>
-        ))}
+      <div>
+        {properties.map((element) => element.content)}
+      </div>
 
     </div>
   );

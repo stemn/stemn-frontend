@@ -11,8 +11,6 @@ export default class UserLinkedAccountSettings extends Component {
   render() {
     const { user, authenticate, unlink } = this.props
 
-    const accountTypes = Object.keys(user.accounts)
-
     return (
       <div>
         <h3>Login</h3>
