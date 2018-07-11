@@ -17,8 +17,8 @@ const addIdsToPipeline = (pipeline: IPipelineConfig) => ({
   steps: mapObjIndexed(step => ({
     ...step,
     ports: {
-      in: step.ports.in.map(value => ({ id: uuid(), value })),
-      out: step.ports.out.map(value => ({ id: uuid(), value })),
+      in: step.ports.in.map((value, idx) => ({ id: idx, value })),
+      out: step.ports.out.map((value, idx) => ({ id: idx, value })),
     },
   }), pipeline.steps)
 })
@@ -62,7 +62,7 @@ const deserializeLinks = (pipeline: IPipelineConfigWithIds): ISerializedDiagram[
  */
 const deserializePort = (type: string, stepId: string) => (port: { id: string, value: string }) => ({
   id: port.id,
-  name: port.id,
+  name: port.value,
   type: type,
   parentNode: stepId,
   selected: false,

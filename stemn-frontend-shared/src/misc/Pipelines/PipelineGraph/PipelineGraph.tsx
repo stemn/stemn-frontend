@@ -41,6 +41,8 @@ export class PipelineGraph extends React.Component<PipelineGraphProps, PipelineG
 	render() {
 		const { diagramEngine, diagramModel } = this.state
 
+		console.log(serializePipeline(diagramModel, 'name'))
+		
 		return (
 			<div className="layout-column flex">
 			  <PipelineGraphDroplayer

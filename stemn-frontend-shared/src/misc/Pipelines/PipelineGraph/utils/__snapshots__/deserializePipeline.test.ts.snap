@@ -5,14 +5,14 @@ DiagramModel {
   "gridSize": 0,
   "id": "diagram",
   "links": Object {
-    "f9938468-d5fa-4f57-b4d8-4a3a4439800e": DefaultLinkModel {
+    "db1e3028-841e-46da-9277-65fb610e4e3f": DefaultLinkModel {
       "color": undefined,
       "curvyness": undefined,
       "extras": Object {},
-      "id": "f9938468-d5fa-4f57-b4d8-4a3a4439800e",
+      "id": "db1e3028-841e-46da-9277-65fb610e4e3f",
       "labels": Array [],
       "listeners": Object {
-        "77539a7d-9879-4182-94c1-96e8ec2c26f3": Object {
+        "6e8abe5a-bfd2-4e63-975d-663c1d7db637": Object {
           "entityRemoved": [Function],
         },
       },
@@ -20,7 +20,7 @@ DiagramModel {
       "parent": [Circular],
       "points": Array [
         PointModel {
-          "id": "2ceb02e2-0951-44d9-a463-4405e66f930e",
+          "id": "99d76301-cc64-4e00-a40c-00d8512fda38",
           "listeners": Object {},
           "locked": false,
           "parent": [Circular],
@@ -30,7 +30,7 @@ DiagramModel {
           "y": 0,
         },
         PointModel {
-          "id": "03addf19-6ff9-4d4d-8445-bd7f3e953dda",
+          "id": "b48e77ba-0aa1-44f8-be4d-ca63385801e3",
           "listeners": Object {},
           "locked": false,
           "parent": [Circular],
@@ -42,37 +42,37 @@ DiagramModel {
       ],
       "selected": false,
       "sourcePort": PipelineGraphPortModel {
-        "id": "5a27e94e-d61a-4496-8019-9349b319ed58",
+        "id": 0,
         "links": Object {
-          "f9938468-d5fa-4f57-b4d8-4a3a4439800e": [Circular],
+          "db1e3028-841e-46da-9277-65fb610e4e3f": [Circular],
         },
         "listeners": Object {},
         "locked": false,
         "maximumLinks": 1,
-        "name": "5a27e94e-d61a-4496-8019-9349b319ed58",
+        "name": "in",
         "parent": PipelineGraphStepModel {
           "extras": Object {},
           "id": "some_step",
           "listeners": Object {
-            "2fff6db7-3fe2-486b-b8e6-4326de33d4ee": Object {
+            "44a4cfbc-f853-4d9d-816d-645fa927cf66": Object {
               "entityRemoved": [Function],
             },
           },
           "locked": false,
           "parent": [Circular],
           "ports": Object {
-            "5a27e94e-d61a-4496-8019-9349b319ed58": [Circular],
-            "dd3bc6f2-058d-4167-bc9f-97152a5b8d63": PipelineGraphPortModel {
-              "id": "dd3bc6f2-058d-4167-bc9f-97152a5b8d63",
+            "in": [Circular],
+            "out": PipelineGraphPortModel {
+              "id": 0,
               "links": Object {},
               "listeners": Object {},
               "locked": false,
               "maximumLinks": 1,
-              "name": "dd3bc6f2-058d-4167-bc9f-97152a5b8d63",
+              "name": "out",
               "parent": [Circular],
-              "position": "input",
+              "position": "output",
               "selected": false,
-              "type": "input",
+              "type": "output",
             },
           },
           "selected": false,
@@ -80,38 +80,38 @@ DiagramModel {
           "x": 50,
           "y": 50,
         },
-        "position": "output",
+        "position": "input",
         "selected": false,
-        "type": "output",
+        "type": "input",
       },
       "targetPort": PipelineGraphPortModel {
-        "id": "2a94d89f-2a9b-4f5f-85e2-e5cbdc83b5fe",
+        "id": 0,
         "links": Object {
-          "f9938468-d5fa-4f57-b4d8-4a3a4439800e": [Circular],
+          "db1e3028-841e-46da-9277-65fb610e4e3f": [Circular],
         },
         "listeners": Object {},
         "locked": false,
         "maximumLinks": 1,
-        "name": "2a94d89f-2a9b-4f5f-85e2-e5cbdc83b5fe",
+        "name": "in",
         "parent": PipelineGraphStepModel {
           "extras": Object {},
           "id": "some_other_step",
           "listeners": Object {
-            "042b22da-610a-479a-95ed-c8c772836e4f": Object {
+            "bd7c3bf3-050a-43a8-a5b8-6cc16d527339": Object {
               "entityRemoved": [Function],
             },
           },
           "locked": false,
           "parent": [Circular],
           "ports": Object {
-            "2a94d89f-2a9b-4f5f-85e2-e5cbdc83b5fe": [Circular],
-            "d6e930cd-c1bf-4b5a-8cc6-96a854a12bbb": PipelineGraphPortModel {
-              "id": "d6e930cd-c1bf-4b5a-8cc6-96a854a12bbb",
+            "in": [Circular],
+            "out": PipelineGraphPortModel {
+              "id": 0,
               "links": Object {},
               "listeners": Object {},
               "locked": false,
               "maximumLinks": 1,
-              "name": "d6e930cd-c1bf-4b5a-8cc6-96a854a12bbb",
+              "name": "out",
               "parent": [Circular],
               "position": "output",
               "selected": false,
@@ -138,24 +138,24 @@ DiagramModel {
       "extras": Object {},
       "id": "some_other_step",
       "listeners": Object {
-        "042b22da-610a-479a-95ed-c8c772836e4f": Object {
+        "bd7c3bf3-050a-43a8-a5b8-6cc16d527339": Object {
           "entityRemoved": [Function],
         },
       },
       "locked": false,
       "parent": [Circular],
       "ports": Object {
-        "2a94d89f-2a9b-4f5f-85e2-e5cbdc83b5fe": PipelineGraphPortModel {
-          "id": "2a94d89f-2a9b-4f5f-85e2-e5cbdc83b5fe",
+        "in": PipelineGraphPortModel {
+          "id": 0,
           "links": Object {
-            "f9938468-d5fa-4f57-b4d8-4a3a4439800e": DefaultLinkModel {
+            "db1e3028-841e-46da-9277-65fb610e4e3f": DefaultLinkModel {
               "color": undefined,
               "curvyness": undefined,
               "extras": Object {},
-              "id": "f9938468-d5fa-4f57-b4d8-4a3a4439800e",
+              "id": "db1e3028-841e-46da-9277-65fb610e4e3f",
               "labels": Array [],
               "listeners": Object {
-                "77539a7d-9879-4182-94c1-96e8ec2c26f3": Object {
+                "6e8abe5a-bfd2-4e63-975d-663c1d7db637": Object {
                   "entityRemoved": [Function],
                 },
               },
@@ -163,7 +163,7 @@ DiagramModel {
               "parent": [Circular],
               "points": Array [
                 PointModel {
-                  "id": "2ceb02e2-0951-44d9-a463-4405e66f930e",
+                  "id": "99d76301-cc64-4e00-a40c-00d8512fda38",
                   "listeners": Object {},
                   "locked": false,
                   "parent": [Circular],
@@ -173,7 +173,7 @@ DiagramModel {
                   "y": 0,
                 },
                 PointModel {
-                  "id": "03addf19-6ff9-4d4d-8445-bd7f3e953dda",
+                  "id": "b48e77ba-0aa1-44f8-be4d-ca63385801e3",
                   "listeners": Object {},
                   "locked": false,
                   "parent": [Circular],
@@ -185,37 +185,37 @@ DiagramModel {
               ],
               "selected": false,
               "sourcePort": PipelineGraphPortModel {
-                "id": "5a27e94e-d61a-4496-8019-9349b319ed58",
+                "id": 0,
                 "links": Object {
-                  "f9938468-d5fa-4f57-b4d8-4a3a4439800e": [Circular],
+                  "db1e3028-841e-46da-9277-65fb610e4e3f": [Circular],
                 },
                 "listeners": Object {},
                 "locked": false,
                 "maximumLinks": 1,
-                "name": "5a27e94e-d61a-4496-8019-9349b319ed58",
+                "name": "in",
                 "parent": PipelineGraphStepModel {
                   "extras": Object {},
                   "id": "some_step",
                   "listeners": Object {
-                    "2fff6db7-3fe2-486b-b8e6-4326de33d4ee": Object {
+                    "44a4cfbc-f853-4d9d-816d-645fa927cf66": Object {
                       "entityRemoved": [Function],
                     },
                   },
                   "locked": false,
                   "parent": [Circular],
                   "ports": Object {
-                    "5a27e94e-d61a-4496-8019-9349b319ed58": [Circular],
-                    "dd3bc6f2-058d-4167-bc9f-97152a5b8d63": PipelineGraphPortModel {
-                      "id": "dd3bc6f2-058d-4167-bc9f-97152a5b8d63",
+                    "in": [Circular],
+                    "out": PipelineGraphPortModel {
+                      "id": 0,
                       "links": Object {},
                       "listeners": Object {},
                       "locked": false,
                       "maximumLinks": 1,
-                      "name": "dd3bc6f2-058d-4167-bc9f-97152a5b8d63",
+                      "name": "out",
                       "parent": [Circular],
-                      "position": "input",
+                      "position": "output",
                       "selected": false,
-                      "type": "input",
+                      "type": "output",
                     },
                   },
                   "selected": false,
@@ -223,9 +223,9 @@ DiagramModel {
                   "x": 50,
                   "y": 50,
                 },
-                "position": "output",
+                "position": "input",
                 "selected": false,
-                "type": "output",
+                "type": "input",
               },
               "targetPort": [Circular],
               "type": "default",
@@ -235,19 +235,19 @@ DiagramModel {
           "listeners": Object {},
           "locked": false,
           "maximumLinks": 1,
-          "name": "2a94d89f-2a9b-4f5f-85e2-e5cbdc83b5fe",
+          "name": "in",
           "parent": [Circular],
           "position": "input",
           "selected": false,
           "type": "input",
         },
-        "d6e930cd-c1bf-4b5a-8cc6-96a854a12bbb": PipelineGraphPortModel {
-          "id": "d6e930cd-c1bf-4b5a-8cc6-96a854a12bbb",
+        "out": PipelineGraphPortModel {
+          "id": 0,
           "links": Object {},
           "listeners": Object {},
           "locked": false,
           "maximumLinks": 1,
-          "name": "d6e930cd-c1bf-4b5a-8cc6-96a854a12bbb",
+          "name": "out",
           "parent": [Circular],
           "position": "output",
           "selected": false,
@@ -263,24 +263,24 @@ DiagramModel {
       "extras": Object {},
       "id": "some_step",
       "listeners": Object {
-        "2fff6db7-3fe2-486b-b8e6-4326de33d4ee": Object {
+        "44a4cfbc-f853-4d9d-816d-645fa927cf66": Object {
           "entityRemoved": [Function],
         },
       },
       "locked": false,
       "parent": [Circular],
       "ports": Object {
-        "5a27e94e-d61a-4496-8019-9349b319ed58": PipelineGraphPortModel {
-          "id": "5a27e94e-d61a-4496-8019-9349b319ed58",
+        "in": PipelineGraphPortModel {
+          "id": 0,
           "links": Object {
-            "f9938468-d5fa-4f57-b4d8-4a3a4439800e": DefaultLinkModel {
+            "db1e3028-841e-46da-9277-65fb610e4e3f": DefaultLinkModel {
               "color": undefined,
               "curvyness": undefined,
               "extras": Object {},
-              "id": "f9938468-d5fa-4f57-b4d8-4a3a4439800e",
+              "id": "db1e3028-841e-46da-9277-65fb610e4e3f",
               "labels": Array [],
               "listeners": Object {
-                "77539a7d-9879-4182-94c1-96e8ec2c26f3": Object {
+                "6e8abe5a-bfd2-4e63-975d-663c1d7db637": Object {
                   "entityRemoved": [Function],
                 },
               },
@@ -288,7 +288,7 @@ DiagramModel {
               "parent": [Circular],
               "points": Array [
                 PointModel {
-                  "id": "2ceb02e2-0951-44d9-a463-4405e66f930e",
+                  "id": "99d76301-cc64-4e00-a40c-00d8512fda38",
                   "listeners": Object {},
                   "locked": false,
                   "parent": [Circular],
@@ -298,7 +298,7 @@ DiagramModel {
                   "y": 0,
                 },
                 PointModel {
-                  "id": "03addf19-6ff9-4d4d-8445-bd7f3e953dda",
+                  "id": "b48e77ba-0aa1-44f8-be4d-ca63385801e3",
                   "listeners": Object {},
                   "locked": false,
                   "parent": [Circular],
@@ -311,33 +311,33 @@ DiagramModel {
               "selected": false,
               "sourcePort": [Circular],
               "targetPort": PipelineGraphPortModel {
-                "id": "2a94d89f-2a9b-4f5f-85e2-e5cbdc83b5fe",
+                "id": 0,
                 "links": Object {
-                  "f9938468-d5fa-4f57-b4d8-4a3a4439800e": [Circular],
+                  "db1e3028-841e-46da-9277-65fb610e4e3f": [Circular],
                 },
                 "listeners": Object {},
                 "locked": false,
                 "maximumLinks": 1,
-                "name": "2a94d89f-2a9b-4f5f-85e2-e5cbdc83b5fe",
+                "name": "in",
                 "parent": PipelineGraphStepModel {
                   "extras": Object {},
                   "id": "some_other_step",
                   "listeners": Object {
-                    "042b22da-610a-479a-95ed-c8c772836e4f": Object {
+                    "bd7c3bf3-050a-43a8-a5b8-6cc16d527339": Object {
                       "entityRemoved": [Function],
                     },
                   },
                   "locked": false,
                   "parent": [Circular],
                   "ports": Object {
-                    "2a94d89f-2a9b-4f5f-85e2-e5cbdc83b5fe": [Circular],
-                    "d6e930cd-c1bf-4b5a-8cc6-96a854a12bbb": PipelineGraphPortModel {
-                      "id": "d6e930cd-c1bf-4b5a-8cc6-96a854a12bbb",
+                    "in": [Circular],
+                    "out": PipelineGraphPortModel {
+                      "id": 0,
                       "links": Object {},
                       "listeners": Object {},
                       "locked": false,
                       "maximumLinks": 1,
-                      "name": "d6e930cd-c1bf-4b5a-8cc6-96a854a12bbb",
+                      "name": "out",
                       "parent": [Circular],
                       "position": "output",
                       "selected": false,
@@ -360,23 +360,23 @@ DiagramModel {
           "listeners": Object {},
           "locked": false,
           "maximumLinks": 1,
-          "name": "5a27e94e-d61a-4496-8019-9349b319ed58",
-          "parent": [Circular],
-          "position": "output",
-          "selected": false,
-          "type": "output",
-        },
-        "dd3bc6f2-058d-4167-bc9f-97152a5b8d63": PipelineGraphPortModel {
-          "id": "dd3bc6f2-058d-4167-bc9f-97152a5b8d63",
-          "links": Object {},
-          "listeners": Object {},
-          "locked": false,
-          "maximumLinks": 1,
-          "name": "dd3bc6f2-058d-4167-bc9f-97152a5b8d63",
+          "name": "in",
           "parent": [Circular],
           "position": "input",
           "selected": false,
           "type": "input",
+        },
+        "out": PipelineGraphPortModel {
+          "id": 0,
+          "links": Object {},
+          "listeners": Object {},
+          "locked": false,
+          "maximumLinks": 1,
+          "name": "out",
+          "parent": [Circular],
+          "position": "output",
+          "selected": false,
+          "type": "output",
         },
       },
       "selected": false,
