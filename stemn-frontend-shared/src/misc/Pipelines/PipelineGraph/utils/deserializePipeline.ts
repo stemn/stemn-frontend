@@ -77,7 +77,10 @@ const deserializeNodes = (pipeline: IPipelineConfigWithIds) => {
     x: get(step, 'position.x', 50),
     y: get(step, 'position.y', 50),
     type: step.type,
-    extras: {},
+    extras: {
+      config: step.config,
+      command: step.command,
+    },
     selected: false,
     ports: values(mapObjIndexed(deserializePort(stepId), step.ports)),
   }), pipeline.steps)

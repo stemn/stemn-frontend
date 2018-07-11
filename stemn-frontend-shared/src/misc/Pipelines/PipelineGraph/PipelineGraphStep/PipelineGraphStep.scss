@@ -1,6 +1,16 @@
 .step {
   background: white;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  padding: 30px;
   width: 200px;
+}
+
+.title {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 10px;
+}
+
+.body {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
 }

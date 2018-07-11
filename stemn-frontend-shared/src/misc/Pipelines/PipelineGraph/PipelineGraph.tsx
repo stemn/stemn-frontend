@@ -3,13 +3,14 @@ import * as cn from 'classnames'
 import { DiagramEngine,	DiagramModel, DiagramWidget } from 'mrblenny-storm-react-diagrams'
 import { PipelineGraphStepModel } from './PipelineGraphStep'
 import { PipelineGraphDroplayer } from './PipelineGraphDroplayer';
-import { deserializePipeline, serializePipeline, createDiagramEngine } from './utils'
-import { IPipelineConfig } from './types'
+import { deserializePipeline, createDiagramEngine } from './utils'
+import { safeLoad } from 'js-yaml'
 import './PipelineGraph.global.scss'
 import * as s from './PipelineGraph.scss'
 
 export interface PipelineGraphProps {
-	pipeline: IPipelineConfig
+	pipelineConfig: string,
+	readOnly: boolean,
 }
 
 export interface PipelineGraphState {
@@ -21,11 +22,12 @@ export interface PipelineGraphState {
 export class PipelineGraph extends React.Component<PipelineGraphProps, PipelineGraphState> {
 	constructor(props: PipelineGraphProps) {
 		super(props)
-		const { pipeline } = this.props
+		const { pipelineConfig } = this.props
 	
 		const diagramEngine = createDiagramEngine()
+		const pipelineConfigJson = safeLoad(pipelineConfig)
 
-		const diagramModel = deserializePipeline(pipeline, diagramEngine)
+		const diagramModel = deserializePipeline(pipelineConfigJson, diagramEngine)
 		diagramEngine.setDiagramModel(diagramModel)
 
     this.state = {
@@ -39,9 +41,10 @@ export class PipelineGraph extends React.Component<PipelineGraphProps, PipelineG
 	}
 	selectNode = (node: PipelineGraphStepModel) => this.setState({ selected: node })
 	render() {
+		const { readOnly } = this.props
 		const { diagramEngine, diagramModel } = this.state
 
-		console.log(serializePipeline(diagramModel, 'name'))
+		diagramModel.setLocked(readOnly);
 		
 		return (
 			<div className="layout-column flex">

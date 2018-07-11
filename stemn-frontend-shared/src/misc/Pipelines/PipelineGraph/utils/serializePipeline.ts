@@ -20,6 +20,8 @@ const serializeNodes = (model: ISerializedDiagram): IPipelineConfig['steps'] => 
       y: node.y,
     },
     type: node.type,
+    config: node.extras.config,
+    command: node.extras.command,
     ports: serializePorts(node.ports),
   }), nodesById)
 }
