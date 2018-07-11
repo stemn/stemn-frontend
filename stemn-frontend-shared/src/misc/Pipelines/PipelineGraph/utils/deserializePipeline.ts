@@ -59,6 +59,7 @@ const deserializePort = (stepId: string) => (port: IPipelineConfigStepPort, port
     id: portId,
     name: portId,
     type: port.type,
+    value: port.value,
     parentNode: stepId,
     selected: false,
     links: [],
@@ -104,10 +105,14 @@ export const deserializePipeline = (pipeline: IPipelineConfig, diagramEngine: Di
     links: deserializeLinks(pipelineWithIds),
     nodes: deserializeNodes(pipelineWithIds),
   }
+
+  console.log(diagram)
   
   // Convert it to the model
   const model = new DiagramModel()
   model.deSerializeDiagram(diagram, diagramEngine)
+
+  console.log(model)
 
   return model
 }

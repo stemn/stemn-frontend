@@ -1,11 +1,15 @@
-import { LinkModel, PortModel, DefaultLinkModel } from 'mrblenny-storm-react-diagrams'
+import { LinkModel, PortModel, DefaultLinkModel, DiagramEngine } from 'mrblenny-storm-react-diagrams'
 
 export class PipelineGraphPortModel extends PortModel {
-	position: string | "top" | "bottom" | "left" | "right";
+	value?: string;
 
 	constructor(pos: string = "top") {
 		super(pos, "diamond");
-		this.position = pos;
+	}
+
+	deSerialize(data: any, engine: DiagramEngine) {
+		super.deSerialize(data, engine)
+		this.value = data.value
 	}
 
 	createLinkModel(): LinkModel {
