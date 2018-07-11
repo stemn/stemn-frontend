@@ -6,11 +6,12 @@ export const Email = (props: WidgetProps & FieldTemplateProps) => {
 
   return (
     <Input
-      model={ `` }
-      value={ '' }
+      required={props.required}
+      value={props.value}
       className="dr-input flex"
       type="email"
-      placeholder={ props.description || 'example@email.com' }
+      placeholder="example@email.com"
+      onChange={(event : any) => props.onChange(event.target.value)}
     />
   );
 };
