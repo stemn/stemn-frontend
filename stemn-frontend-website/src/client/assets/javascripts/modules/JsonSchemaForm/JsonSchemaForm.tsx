@@ -31,7 +31,8 @@ export class JsonSchemaForm<T> extends React.Component <FormProps<T>> {
 
     return (
       <InfoPanel>
-        <Form schema={schema}
+        <Form
+          schema={schema}
           onSubmit={ this.onSubmit }
           showErrorList={true}
           { ...templates }
