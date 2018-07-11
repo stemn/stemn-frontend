@@ -6,6 +6,7 @@
         "strict": true,
         "pretty": true,
         "noUnusedLocals": true,
+        "noImplicitAny": false,
         "jsx": "react",
         "lib": [
             "es2015",
@@ -15,7 +16,7 @@
         ],
         "baseUrl": "./",
         "paths": {
-            "stemn-shared": ["./stemn-shared"]
+            "stemn-shared/*": ["stemn-frontend-shared/src/*"]
         }
     },
     "include": [

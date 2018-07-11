@@ -10,13 +10,12 @@ import PreviewPcbLoader from './PreviewPcbLoader'
 import PreviewImage from './PreviewImage/PreviewImage'
 import PreviewGoogle from './PreviewGoogle/PreviewGoogle'
 import PreviewGdoc from './PreviewGdoc/PreviewGdoc'
+import { PreviewPipeline } from './PreviewPipeline'
 import laptopSpanner from 'stemn-shared/assets/images/pure-vectors/laptop-spanner.svg'
 import { getViewerType } from './PreviewFile.utils.js'
 import { isAssembly } from './PreviewCad/PreviewCad.utils.js'
 import DownloadFile from '../DownloadFile/DownloadFile.jsx'
 import ErrorMessages from './Messages/Messages.jsx'
-import { PipelineGraph } from 'stemn-shared/misc/Pipelines/PipelineGraph'
-import { pipelineConfigFixture } from 'stemn-shared/misc/Pipelines/PipelineGraph/fixtures'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -37,14 +36,21 @@ export class Component extends React.Component {
 
     const getPreview = () => {
       const viewerType = getViewerType(file.name, file.provider)
-
-      return <PipelineGraph pipeline={ pipelineConfigFixture } />
       
       if (fileData && fileData.error || fileRender && fileRender.error) {
         return (
           <ErrorMessages
             error={ fileData && fileData.error ? fileData.error : fileRender.error }
             fileMeta={ file }
+          />
+        )
+      } else if (viewerType === 'pipeline') {
+        return (
+          <PreviewPipeline 
+            previewId={ previewId }
+            fileMeta={ file } 
+            fileData={ fileData } 
+            downloadFn={ filesActions.getFile } 
           />
         )
       } else if (viewerType === 'gerber' || viewerType === 'pcb') {
