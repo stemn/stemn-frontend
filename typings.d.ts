@@ -13,5 +13,5 @@ declare module '*.svg' {
 
 declare module '*.jsx' {
   const jsx: any;
-  export = jsx;
+  export default jsx;
 }

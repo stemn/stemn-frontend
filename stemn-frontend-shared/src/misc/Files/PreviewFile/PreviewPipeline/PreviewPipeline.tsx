@@ -1,7 +1,8 @@
 import * as React from 'react'
-import * as LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import file from 'stemn-shared/assets/images/pure-vectors/file.svg'
 import { PipelineGraph } from 'stemn-shared/misc/Pipelines/PipelineGraph'
+import { safeLoad } from 'js-yaml'
 
 export interface IPreviewPipelineProps {
   fileData?: {
@@ -13,7 +14,7 @@ export interface IPreviewPipelineProps {
   previewId: string,
 }
 
-export default class PreviewPipeline extends React.Component<IPreviewPipelineProps> {
+export class PreviewPipeline extends React.Component<IPreviewPipelineProps> {
   componentWillMount() { this.onMount(this.props) }
   componentWillReceiveProps(nextProps: IPreviewPipelineProps) { this.onMount(nextProps, this.props) }
   onMount = (nextProps: IPreviewPipelineProps, prevProps?: IPreviewPipelineProps) => {
@@ -34,7 +35,7 @@ export default class PreviewPipeline extends React.Component<IPreviewPipelinePro
     const { fileData } = this.props
     return (
       <div className="layout-column flex">
-        { fileData && fileData.data ? <PipelineGraph pipeline={ fileData.data } /> : '' }
+        { fileData && fileData.data ? <PipelineGraph pipeline={ safeLoad(fileData.data) } /> : '' }
         { fileData ? <LoadingOverlay show={ fileData.loading } /> : null }
         { fileData && !fileData.data && !fileData.loading
           ? <div className="layout-column layout-align-center-center flex text-center">

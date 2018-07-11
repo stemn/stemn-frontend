@@ -39,6 +39,7 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "identity-obj-proxy": "^3.0.0",
+    "js-yaml": "^3.12.0",
     "mrblenny-storm-react-diagrams": "^5.2.1",
     "ramda": "^0.25.0",
     "react": "^16.4.1",
