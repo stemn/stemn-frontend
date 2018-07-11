@@ -1,39 +1,39 @@
 export const schema: any = {
     "$schema": "http://json-schema.org/draft-06/schema#",
     "properties": {
-        "emailTest": {
+        "email_test": {
             "type": "string",
             "format": "email"
         },
-        "uriTest": {
+        "uri_test": {
             "type": "string",
             "format": "uri"
         },
-        "dataTest": {
+        "data_test": {
             "type": "string",
             "format": "data-url"
         },
-        "dateTest": {
+        "date_test": {
             "type": "string",
             "format": "date"
         },
-        "dateTimeTest": {
+        "dateTime_test": {
             "type": "string",
             "format": "date-time"
         },
-        "passwordField": {
+        "password_Field": {
             "type": "string",
             "format": "password"
         },
-        "textAreaField": {
+        "textArea_Field": {
             "type": "string",
             "format": "textarea"
         },
-        "colorField": {
+        "color_Field": {
             "type": "string",
             "format": "color"
         },
-        "radioSelect": {
+        "multiple_Select": {
             "minItems": 2,
             "title": "A multiple-choice list",
             "type": "array",
@@ -42,7 +42,7 @@ export const schema: any = {
                 "enum": ["foo", "bar", "fuzz", "qux"],
             },
         },
-        "multipleSelect": {
+        "radio_select": {
             "title": "checkbox Example",
             "enum": ["v1", "v2", "v3"]
         },

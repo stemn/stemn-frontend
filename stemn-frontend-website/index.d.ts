@@ -15,3 +15,8 @@ declare module 'stemn-shared/misc/Input/Input/Input'
 declare module 'stemn-shared/misc/Calendar/DatePicker/DatePicker'
 declare module 'stemn-shared/misc/Input/Textarea/Textarea'
 declare module 'stemn-shared/misc/Upload/Upload'
+declare module 'stemn-shared/misc/Input/Radio/Radio'
+declare module 'stemn-shared/misc/Buttons/FilledIconButton'
+
+declare module 'react-icons/md/close'
+declare module 'react-icons/md/add'

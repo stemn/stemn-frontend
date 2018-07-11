@@ -3,7 +3,7 @@ import { FieldTemplateProps, WidgetProps } from 'react-jsonschema-form';
 
 import DatePicker from 'stemn-shared/misc/Calendar/DatePicker/DatePicker'
 
-export const Date = (props: WidgetProps & FieldTemplateProps) => {
+export const DateWidget = (props: WidgetProps & FieldTemplateProps) => {
 
   return (
     <DatePicker

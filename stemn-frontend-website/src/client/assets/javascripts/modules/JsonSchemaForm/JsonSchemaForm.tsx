@@ -7,7 +7,7 @@ import { ObjectFieldTemplate } from './templates/ObjectFieldTemplate';
 import { ErrorListTemplate } from './templates/ErrorListTemplate';
 import { schema } from './exampleSchema';
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
-import { Text, Email, Password, Uri, Date, TextArea, File } from './widgets';
+import * as widgets from './widgets';
 
 export class JsonSchemaForm<T> extends React.Component <FormProps<T>> {
 
@@ -20,29 +20,21 @@ export class JsonSchemaForm<T> extends React.Component <FormProps<T>> {
   }
 
   render () {
-    const widgets : any = {
-      // DescriptionField: null,
-      // TitleField: null,
-      // CheckboxWidget: null,
-      TextWidget: Text,
-      EmailWidget: Email,
-      PasswordWidget: Password,
-      URLWidget: Uri,
-      DateWidget: Date,
-      // TextareaWidget: TextArea
-      FileWidget: File
+
+    const templates = {
+      ArrayFieldTemplate,
+      FieldTemplate,
+      ObjectFieldTemplate,
+      ErrorList: ErrorListTemplate,
+      widgets: widgets as any,
     };
 
     return (
       <InfoPanel>
         <Form schema={schema}
-          FieldTemplate={FieldTemplate}
-          ArrayFieldTemplate={ArrayFieldTemplate}
-          ObjectFieldTemplate={ObjectFieldTemplate}
-          showErrorList={true}
-          ErrorList={ErrorListTemplate}
           onSubmit={ this.onSubmit }
-          widgets={ widgets }
+          showErrorList={true}
+          { ...templates }
         >
           <p> Required fields are denoted by '*' </p>
 

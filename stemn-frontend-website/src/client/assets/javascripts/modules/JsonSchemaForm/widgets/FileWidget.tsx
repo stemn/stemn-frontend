@@ -3,7 +3,7 @@ import { FieldTemplateProps, WidgetProps } from 'react-jsonschema-form';
 
 import Upload from 'stemn-shared/misc/Upload/Upload'
 
-export const File = (props: WidgetProps & FieldTemplateProps) => {
+export const FileWidget = (props: WidgetProps & FieldTemplateProps) => {
 
   return (
     <Upload

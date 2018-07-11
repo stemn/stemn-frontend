@@ -2,16 +2,14 @@ import * as React from 'react';
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import { FieldTemplateProps, WidgetProps } from 'react-jsonschema-form';
 
-export const Uri = (props: WidgetProps & FieldTemplateProps) => {
-
-  const initial = 'https://';
+export const PasswordWidget = (props: WidgetProps & FieldTemplateProps) => {
 
   return (
     <Input
       required={props.required}
-      value={props.value || initial}
+      value={props.value}
       className="dr-input flex"
-      type="uri"
+      type="password"
       onChange={(event : any) => props.onChange(event.target.value)}
     />
   );

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FieldTemplateProps, WidgetProps } from 'react-jsonschema-form';
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
 
-export const TextArea = (props: WidgetProps & FieldTemplateProps) => {
+export const TextAreaWidget = (props: WidgetProps & FieldTemplateProps) => {
 
   return (
     <Textarea
