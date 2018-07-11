@@ -10,8 +10,12 @@ export const pipelineConfigFixture: IPipelineConfig = {
       },
       type: 'some_type',
       ports: {
-        in: ['in'],
-        out: ['out'],
+        in: {
+          type: 'input',
+        },
+        out: {
+          type: 'output',
+        }
       }
     },
     some_other_step: {
@@ -21,13 +25,17 @@ export const pipelineConfigFixture: IPipelineConfig = {
         y: 200,
       },
       ports: {
-        in: ['in'],
-        out: ['out'],
+        in: {
+          type: 'input',
+        },
+        out: {
+          type: 'output',
+        }
       }
     }
   },
   links: [{
-    from: 'some_step.ports.out[0]',
-    to: 'some_other_step.ports.in[0]',
+    from: 'some_step.ports.in',
+    to: 'some_other_step.ports.out',
   }]
 }

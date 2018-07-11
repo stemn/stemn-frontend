@@ -38,12 +38,13 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
+    "identity-obj-proxy": "^3.0.0",
     "mrblenny-storm-react-diagrams": "^5.2.1",
     "ramda": "^0.25.0",
     "react": "^16.4.1",
+    "rxjs": "^6.2.1",
     "typescript": "^2.9.2",
-    "uuid": "^3.3.2",
-    "identity-obj-proxy": "^3.0.0"
+    "uuid": "^3.3.2"
   },
   "jest": {
     "transform": {

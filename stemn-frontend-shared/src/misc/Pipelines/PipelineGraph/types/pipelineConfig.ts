@@ -26,6 +26,10 @@
  * - upload revision
  */
 
+export interface IPipelineConfigStepPort {
+  type: string,
+  value?: any,
+}
 export interface IPipelineConfigStepBase {
   /**
    * Step Type
@@ -44,18 +48,10 @@ export interface IPipelineConfigStepBase {
   command?: string | string[],
   /**
    * Ports
+   * This describes the values of the possible input/output ports
    */
   ports: {
-    /**
-     * Input Ports
-     * This describes the values of the possible input ports
-     */
-    in: any[],
-    /**
-     * Output Ports
-     * This describes the values of the possible output ports
-     */
-    out: any[],
+    [portId: string]: IPipelineConfigStepPort,
   },
   /** 
    * Files 
@@ -81,12 +77,12 @@ export interface IPipelineConfigLink {
   /**
    * From port
    * Links must go from an output port to an input port
-   * @pattern: .*?\.ports\.out\..*
+   * @pattern: .*?\.ports\..*
    */
   from: string;
   /**
    * To port
-   * @pattern: .*?\.ports\.in\..*
+   * @pattern: .*?\.ports\..*
    */
   to: string;
 }

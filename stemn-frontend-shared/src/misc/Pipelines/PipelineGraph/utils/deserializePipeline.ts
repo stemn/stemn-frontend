@@ -1,5 +1,5 @@
 import { DiagramModel, DiagramEngine } from 'mrblenny-storm-react-diagrams'
-import { IPipelineConfig } from '../types'
+import { IPipelineConfig, IPipelineConfigStepPort } from '../types'
 import { mapObjIndexed, values } from 'ramda'
 import { get } from 'lodash'
 import * as uuid from 'uuid/v4'
@@ -8,19 +8,12 @@ type ISerializedDiagram = ReturnType<DiagramModel['serializeDiagram']>
 type IPipelineConfigWithIds = ReturnType<typeof addIdsToPipeline>
 
 /**
- * This will add uuids to the links and ports.
+ * This will add uuids to the links.
  * This is requried so we can convert to the storm-react-diagrams type
  */
 const addIdsToPipeline = (pipeline: IPipelineConfig) => ({
   ...pipeline,
   links: pipeline.links.map((link) => ({ id: uuid(), ...link })),
-  steps: mapObjIndexed(step => ({
-    ...step,
-    ports: {
-      in: step.ports.in.map((value, idx) => ({ id: idx, value })),
-      out: step.ports.out.map((value, idx) => ({ id: idx, value })),
-    },
-  }), pipeline.steps)
 })
 
 /**
@@ -39,16 +32,17 @@ const emptyPoint = () => ({
  * Deserialize the links
  */
 const deserializeLinks = (pipeline: IPipelineConfigWithIds): ISerializedDiagram['links'] => pipeline.links.map(link => {
-  const sourcePort = get(pipeline.steps, link.from, {}) as { id: string }
-  const targetPort = get(pipeline.steps, link.to, {}) as { id: string }
+  const fromSplit = link.from.split('.')
+  const toSplit = link.to.split('.')
+
   return {
     id: link.id,
     type: 'default',
     selected: false,
-    source: link.from.split('.')[0],
-    sourcePort: sourcePort.id,
-    target: link.to.split('.')[0],
-    targetPort: targetPort.id,
+    source: fromSplit[0],
+    sourcePort: fromSplit[fromSplit.length - 1],
+    target: toSplit[0],
+    targetPort: toSplit[toSplit.length - 1],
     points: [emptyPoint(), emptyPoint()],
     labels: [],
     extras: {},
@@ -60,15 +54,17 @@ const deserializeLinks = (pipeline: IPipelineConfigWithIds): ISerializedDiagram[
  * Deserializes a port
  * Links are auto calculated
  */
-const deserializePort = (type: string, stepId: string) => (port: { id: string | number, value: string }) => ({
-  id: `${port.id}`,
-  name: port.value,
-  type: type,
-  parentNode: stepId,
-  selected: false,
-  links: [],
-  maximumLinks: 1,
-})
+const deserializePort = (stepId: string) => (port: IPipelineConfigStepPort, portId: string) => {
+  return {
+    id: portId,
+    name: portId,
+    type: port.type,
+    parentNode: stepId,
+    selected: false,
+    links: [],
+    maximumLinks: 1,
+  }
+}
 
 /**
  * Deserializes the nodes
@@ -82,10 +78,7 @@ const deserializeNodes = (pipeline: IPipelineConfigWithIds) => {
     type: step.type,
     extras: {},
     selected: false,
-    ports: [
-      ...step.ports.in.map(deserializePort('input', stepId)), 
-      ...step.ports.out.map(deserializePort('output', stepId))
-    ],
+    ports: values(mapObjIndexed(deserializePort(stepId), step.ports)),
   }), pipeline.steps)
 
   const nodes: ISerializedDiagram['nodes'] = values(nodesObject)
