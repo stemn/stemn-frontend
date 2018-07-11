@@ -37,7 +37,7 @@ export class PreviewPipeline extends React.Component<IPreviewPipelineProps> {
         { fileData && fileData.data ? (
           <PipelineGraph 
             pipelineConfig={ fileData.data } 
-            readOnly={ true }
+            readOnly={ false }
           />
         ) : '' }
         { fileData ? <LoadingOverlay show={ fileData.loading } /> : null }

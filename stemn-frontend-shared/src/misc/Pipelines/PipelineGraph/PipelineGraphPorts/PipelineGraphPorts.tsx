@@ -25,17 +25,3 @@ export class PipelineGraphPorts extends React.PureComponent<IPipelineGraphPortsP
     )
   }
 }
-
-
-
-// import * as React from 'react'
-// import { PortWidget } from 'mrblenny-storm-react-diagrams'
-// import s from './CustomNodeWidget.scss'
-// import { nodes } from '../../Flow.data'
-// import { values, flow, filter, map, find, isEmpty } from 'lodash/fp'
-// import IconExpandMore from 'components/Icons/ExpandMore'
-// import sLay from 'styles/modules/layout.scss'
-// import cn from 'classnames'
-// import sText from 'components/Text/Text.scss'
-
-// const showPorts = (node, type, nodeInfo) => 

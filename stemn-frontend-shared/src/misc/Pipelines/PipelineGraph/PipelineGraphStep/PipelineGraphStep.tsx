@@ -22,8 +22,7 @@ const mapTableRows = pipe(
 export class PipelineGraphStep extends React.Component<PipelineGraphStepProps> {
 	render() {
 		const { node } = this.props
-		// const inputPorts = filter()
-		console.log(mapTableRows(node.extras.config))
+
 		return (
 			<div>
 				<PipelineGraphPorts type="input" node={ node } />

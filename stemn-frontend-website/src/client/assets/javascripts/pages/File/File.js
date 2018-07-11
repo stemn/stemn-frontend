@@ -16,6 +16,7 @@ import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
 import FileCompareInner from 'stemn-shared/misc/FileCompare/FileCompareInner/FileCompareInner'
 import FileCompareMenu from 'stemn-shared/misc/FileCompare/FileCompareMenu'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton'
+import { PipelineGraphSidebar } from 'stemn-shared/misc/Pipelines/PipelineGraph'
 import MdMenu from 'react-icons/md/menu'
 import MdClose from 'react-icons/md/close'
 import { Helmet } from 'react-helmet'
@@ -112,6 +113,7 @@ export default class File extends Component {
             />
           </div>
           <aside className={ cn(classes.sidebar, { [classes.isOpen]: isOpen }) }>
+            <PipelineGraphSidebar />
             <SectionTitle className={ classes.sidebarTitle }>Meta</SectionTitle>
             <SimpleTable>
               <tr><td>Name</td><td>{file.data.name}</td></tr>
