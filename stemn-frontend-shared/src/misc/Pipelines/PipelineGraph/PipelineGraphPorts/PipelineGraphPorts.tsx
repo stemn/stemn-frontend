@@ -18,7 +18,7 @@ export class PipelineGraphPorts extends React.PureComponent<IPipelineGraphPortsP
         { pipe(
             values,
             filter((port: PortModel) => port.type === type) as any,
-            map((port: PortModel) => <PipelineGraphPort port={ port } node={ node }/>),
+            map((port: PortModel) => <PipelineGraphPort key={ port.id } port={ port } node={ node }/>),
           )(node.ports) 
         }
       </div>
