@@ -1,13 +1,12 @@
 import * as React from 'react'
 import * as cn from 'classnames'
 import { DiagramEngine,	DiagramModel, DiagramWidget } from 'mrblenny-storm-react-diagrams'
-import { PipelineGraphStepFactory, PipelineGraphStepModel } from './PipelineGraphStep'
+import { PipelineGraphStepModel } from './PipelineGraphStep'
 import { PipelineGraphDroplayer } from './PipelineGraphDroplayer';
-import { deserializePipeline } from './utils'
+import { deserializePipeline, serializePipeline, createDiagramEngine } from './utils'
 import { IPipelineConfig } from './types'
 import './PipelineGraph.global.scss'
 import * as s from './PipelineGraph.scss'
-import { PipelineGraphPortModel, PipelineGraphPortFactory } from './PipelineGraphPort';
 
 export interface PipelineGraphProps {
 	pipeline: IPipelineConfig
@@ -15,7 +14,7 @@ export interface PipelineGraphProps {
 
 export interface PipelineGraphState {
 	diagramEngine: DiagramEngine,
-	model: DiagramModel,
+	diagramModel: DiagramModel,
 	selected?: PipelineGraphStepModel,
 }
 
@@ -24,28 +23,24 @@ export class PipelineGraph extends React.Component<PipelineGraphProps, PipelineG
 		super(props)
 		const { pipeline } = this.props
 	
-		const diagramEngine = new DiagramEngine()
-    diagramEngine.installDefaultFactories()
-		diagramEngine.registerPortFactory(new PipelineGraphPortFactory('input', () => new PipelineGraphPortModel('input')))
-    diagramEngine.registerPortFactory(new PipelineGraphPortFactory('output', () => new PipelineGraphPortModel('output')))
-		diagramEngine.registerNodeFactory(new PipelineGraphStepFactory('some_type'))
-		diagramEngine.registerNodeFactory(new PipelineGraphStepFactory('some_other_type'))
+		const diagramEngine = createDiagramEngine()
 
-		const model = deserializePipeline(pipeline, diagramEngine)
-		diagramEngine.setDiagramModel(model)
+		const diagramModel = deserializePipeline(pipeline, diagramEngine)
+		diagramEngine.setDiagramModel(diagramModel)
 
     this.state = {
       diagramEngine,
-      model,
+      diagramModel,
     }
 	}
 	addNode = (node: PipelineGraphStepModel) => {
-		this.state.model.addNode(node)
+		this.state.diagramModel.addNode(node)
     this.selectNode(node)
 	}
 	selectNode = (node: PipelineGraphStepModel) => this.setState({ selected: node })
 	render() {
-		const { diagramEngine } = this.state
+		const { diagramEngine, diagramModel } = this.state
+
 		return (
 			<div className="layout-column flex">
 			  <PipelineGraphDroplayer
@@ -57,7 +52,7 @@ export class PipelineGraph extends React.Component<PipelineGraphProps, PipelineG
 						diagramEngine={ diagramEngine } 
 						allowLooseLinks={ false }
             maxNumberPointsPerLink={ 0 }
-            // smartRouting
+            smartRouting
             deleteKeys={ [46] } // Delete
 					/>
 				</PipelineGraphDroplayer>

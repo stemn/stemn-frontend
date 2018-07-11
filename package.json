@@ -9,6 +9,7 @@
     "lint:desktop": "eslint stemn-frontend-desktop/app/ --ext .jsx --ext .js",
     "lint:website": "eslint stemn-frontend-website/src/ --ext .jsx --ext .js",
     "lint:fix": "npm run lint -- --fix",
+    "test": "jest",
     "install:all": "sh ./scripts/install.sh"
   },
   "repository": {
@@ -20,21 +21,45 @@
   },
   "homepage": "https://github.com/stemn/stemn-frontend#readme",
   "devDependencies": {
-    "babel-eslint": "7.2.3",
-    "eslint": "4.5.0",
-    "eslint-config-stemn": "git+https://git@github.com/stemn/eslint-config-stemn.git",
-    "eslint-plugin-cypress": "^2.0.1"
-  },
-  "dependencies": {
     "@types/classnames": "^2.2.4",
+    "@types/jest": "^23.1.5",
     "@types/lodash": "^4.14.110",
     "@types/ramda": "^0.25.34",
     "@types/react": "^16.4.6",
     "@types/react-dom": "^16.0.6",
     "@types/uuid": "^3.4.3",
+    "babel-eslint": "7.2.3",
+    "jest": "^23.4.0",
+    "ts-jest": "^23.0.0",
+    "eslint": "4.5.0",
+    "eslint-config-stemn": "git+https://git@github.com/stemn/eslint-config-stemn.git",
+    "eslint-plugin-cypress": "^2.0.1"
+  },
+  "dependencies": {
     "classnames": "^2.2.6",
     "mrblenny-storm-react-diagrams": "^5.2.1",
     "ramda": "^0.25.0",
-    "uuid": "^3.3.2"
+    "react": "^16.4.1",
+    "typescript": "^2.9.2",
+    "uuid": "^3.3.2",
+    "identity-obj-proxy": "^3.0.0"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+    }
   }
 }
