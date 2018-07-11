@@ -3,3 +3,5 @@ export * from './Email';
 export * from './Password';
 export * from './Uri';
 export * from './Date';
+export * from './TextArea';
+export * from './File'

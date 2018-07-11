@@ -7,7 +7,7 @@ import { ObjectFieldTemplate } from './templates/ObjectFieldTemplate';
 import { ErrorListTemplate } from './templates/ErrorListTemplate';
 import { schema } from './exampleSchema';
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
-import { Text, Email, Password, Uri, Date } from './widgets';
+import { Text, Email, Password, Uri, Date, TextArea, File } from './widgets';
 
 export class JsonSchemaForm<T> extends React.Component <FormProps<T>> {
 
@@ -28,7 +28,9 @@ export class JsonSchemaForm<T> extends React.Component <FormProps<T>> {
       EmailWidget: Email,
       PasswordWidget: Password,
       URLWidget: Uri,
-      DateWidget: Date
+      DateWidget: Date,
+      // TextareaWidget: TextArea
+      FileWidget: File
     };
 
     return (

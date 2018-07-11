@@ -7,7 +7,7 @@ export const Date = (props: WidgetProps & FieldTemplateProps) => {
 
   return (
     <DatePicker
-      model={ props.value }
+      // model={  }
       onChange={(event : any) => props.onChange(event.target.value)}
       value={ props.value }
     />
