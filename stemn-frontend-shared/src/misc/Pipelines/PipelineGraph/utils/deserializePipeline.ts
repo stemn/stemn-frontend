@@ -7,58 +7,6 @@ import * as uuid from 'uuid/v4'
 type ISerializedDiagram = ReturnType<DiagramModel['serializeDiagram']>
 type IPipelineConfigWithIds = ReturnType<typeof addIdsToPipeline>
 
-const emptyPoint = () => ({
-  type: 'default',
-  selected: false,
-  id: uuid(),
-  y: 0,
-  x: 0
-})
-
-const pipelineToDiagramLinks = (pipeline: IPipelineConfigWithIds): ISerializedDiagram['links'] => pipeline.links.map(link => {
-  const sourcePort = get(pipeline.steps, link.from, {}) as { id: string }
-  const targetPort = get(pipeline.steps, link.to, {}) as { id: string }
-  return {
-    id: link.id,
-    type: 'default',
-    selected: false,
-    source: link.from.split('.')[0],
-    sourcePort: sourcePort.id,
-    target: link.to.split('.')[0],
-    targetPort: targetPort.id,
-    points: [emptyPoint(), emptyPoint()],
-    labels: [],
-    extras: {},
-  }
-})
-
-/**
- * Converts the nodes to diagram node format
- */
-const pipelineToDiagramNodes = (pipeline: IPipelineConfigWithIds) => {
-  const nodesObject = mapObjIndexed((step, stepId: string) => ({
-    id: stepId,
-    x: get(step, 'position.x', 50),
-    y: get(step, 'position.y', 50),
-    type: step.type,
-    extras: {},
-    selected: false,
-    ports: [...step.ports.in, ...step.ports.out]
-      .map(port => ({
-        id: port.id,
-        name: port.id,
-        type: 'input',
-        parentNode: stepId,
-        selected: false,
-        links: [],
-        maximumLinks: 1,
-      })),
-  }), pipeline.steps)
-
-  const nodes: ISerializedDiagram['nodes'] = values(nodesObject)
-  return nodes
-}
-
 /**
  * This will add uuids to the links and ports.
  * This is requried so we can convert to the storm-react-diagrams type
@@ -76,29 +24,96 @@ const addIdsToPipeline = (pipeline: IPipelineConfig) => ({
 })
 
 /**
+ * Create an empty point. The diagram engine will add a real x-y coord
+ */
+const emptyPoint = () => ({
+  type: 'default',
+  selected: false,
+  id: uuid(),
+  y: 0,
+  x: 0
+})
+
+
+/**
+ * Deserialize the links
+ */
+const deserializeLinks = (pipeline: IPipelineConfigWithIds): ISerializedDiagram['links'] => pipeline.links.map(link => {
+  const sourcePort = get(pipeline.steps, link.from, {}) as { id: string }
+  const targetPort = get(pipeline.steps, link.to, {}) as { id: string }
+  return {
+    id: link.id,
+    type: 'default',
+    selected: false,
+    source: link.from.split('.')[0],
+    sourcePort: sourcePort.id,
+    target: link.to.split('.')[0],
+    targetPort: targetPort.id,
+    points: [emptyPoint(), emptyPoint()],
+    labels: [],
+    extras: {},
+  }
+})
+
+/**
+ * Deserializes a port
+ * Links are auto calculated
+ */
+const deserializePort = (type: string, stepId: string) => (port: { id: string, value: string }) => ({
+  id: port.id,
+  name: port.id,
+  type: type,
+  parentNode: stepId,
+  selected: false,
+  links: [],
+  maximumLinks: 1,
+})
+
+/**
+ * Deserializes the nodes
+ * Converts the steps to nodes and deserializes the ports
+ */
+const deserializeNodes = (pipeline: IPipelineConfigWithIds) => {
+  const nodesObject = mapObjIndexed((step, stepId: string) => ({
+    id: stepId,
+    x: get(step, 'position.x', 50),
+    y: get(step, 'position.y', 50),
+    type: step.type,
+    extras: {},
+    selected: false,
+    ports: [
+      ...step.ports.in.map(deserializePort('input', stepId)), 
+      ...step.ports.out.map(deserializePort('output', stepId))
+    ],
+  }), pipeline.steps)
+
+  const nodes: ISerializedDiagram['nodes'] = values(nodesObject)
+  return nodes
+}
+
+/**
  * Converts the pipeline config to a storm-react-diagrams diagram model
+ * We do not use the model deserialize because we need both links and node data to deserialize either
  */
 export const deserializePipeline = (pipeline: IPipelineConfig, diagramEngine: DiagramEngine) => {
 
   // Add ids to the ports and links
   const pipelineWithIds = addIdsToPipeline(pipeline)
   
-  // Get the serialised diagram
-  const diagramSerialised: ISerializedDiagram = {
+  // Get the serialized diagram
+  const diagram: ISerializedDiagram = {
     id: 'diagram',
     offsetX: 0,
     offsetY: 0,
     zoom: 100,
     gridSize: 0,
-    links: pipelineToDiagramLinks(pipelineWithIds),
-    nodes: pipelineToDiagramNodes(pipelineWithIds),
+    links: deserializeLinks(pipelineWithIds),
+    nodes: deserializeNodes(pipelineWithIds),
   }
-
-  console.log(diagramSerialised)
   
   // Convert it to the model
   const model = new DiagramModel()
-  model.deSerializeDiagram(diagramSerialised, diagramEngine)
+  model.deSerializeDiagram(diagram, diagramEngine)
 
   return model
 }

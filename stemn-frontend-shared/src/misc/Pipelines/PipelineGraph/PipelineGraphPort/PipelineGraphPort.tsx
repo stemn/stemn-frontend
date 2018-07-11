@@ -19,7 +19,7 @@ export class PipelineGraphPort extends React.PureComponent<IPipelineGraphPortPro
         node={ node } 
         extraProps={ { 
           title: 'some title',
-          children: 'P',
+          children: '',
         } }
       />
     )
