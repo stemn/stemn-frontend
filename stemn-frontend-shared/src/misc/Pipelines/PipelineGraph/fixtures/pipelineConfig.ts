@@ -30,12 +30,15 @@ export const pipelineConfigFixture: IPipelineConfig = {
         },
         out: {
           type: 'output',
+        },
+        out2: {
+          type: 'output',
         }
       }
     }
   },
   links: [{
-    from: 'some_step.ports.in',
-    to: 'some_other_step.ports.out',
+    from: 'some_step.ports.out',
+    to: 'some_other_step.ports.in',
   }]
 }

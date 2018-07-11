@@ -46,7 +46,7 @@ const deserializeLinks = (pipeline: IPipelineConfigWithIds): ISerializedDiagram[
     points: [emptyPoint(), emptyPoint()],
     labels: [],
     extras: {},
-    width: 3
+    width: 2
   }
 })
 

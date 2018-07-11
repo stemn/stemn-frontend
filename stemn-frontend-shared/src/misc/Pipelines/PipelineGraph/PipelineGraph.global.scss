@@ -2,23 +2,23 @@
 
 
 .srd-node--selected > div {
-  border-color: green !important;
+  border-color: #4484d3 !important;
 }
 
 .srd-default-link--path-selected {
-  stroke: green !important;
+  stroke: #4484d3 !important;
 }
 
 .srd-default-link--point-selected {
-  fill: green;
+  fill: #4484d3;
   stroke-dasharray: 4,4;
 }
 
 .srd-port:hover, .srd-port.selected {
-  background: green;
+  background: #4484d3;
 }
 
 .srd-default-link path {
-  stroke: green;
+  stroke: #4484d3;
   stroke-linecap: square;
 }
