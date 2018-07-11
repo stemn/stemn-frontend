@@ -60,8 +60,8 @@ const deserializeLinks = (pipeline: IPipelineConfigWithIds): ISerializedDiagram[
  * Deserializes a port
  * Links are auto calculated
  */
-const deserializePort = (type: string, stepId: string) => (port: { id: string, value: string }) => ({
-  id: port.id,
+const deserializePort = (type: string, stepId: string) => (port: { id: string | number, value: string }) => ({
+  id: `${port.id}`,
   name: port.value,
   type: type,
   parentNode: stepId,
