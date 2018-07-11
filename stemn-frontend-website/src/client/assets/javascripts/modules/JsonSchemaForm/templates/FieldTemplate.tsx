@@ -21,9 +21,9 @@ export const FieldTemplate = (props : FieldTemplateProps) => {
         margin: '5px 10px',
       }}>
 
-        <h3 style={ { marginTop: '10px' } }> { label } { required ? '*' : '' } </h3>
+        <h3 style={ { marginTop: '10px', padding: '0px' } }> { label } { required ? '*' : '' } </h3>
 
-        {/* <p> { description } </p> */}
+        <p> { description } </p>
 
         {/* {isRoot ? children :
            <Input
