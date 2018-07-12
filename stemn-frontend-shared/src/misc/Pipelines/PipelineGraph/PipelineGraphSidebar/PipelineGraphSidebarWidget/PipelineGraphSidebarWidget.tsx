@@ -8,7 +8,7 @@ export const PipelineGraphSidebarWidget = () => {
       className={ cn(s.sidebarWidget, 'layout-column', 'layout-align-center-center') }
       draggable
       onDragStart={ (event) => {
-        event.dataTransfer.setData('storm-diagram-node', JSON.stringify({ type: 'test' }))
+        event.dataTransfer.setData('storm-diagram-node', JSON.stringify({ nodeType: 'some_type' }))
       } }
     >
       Woo

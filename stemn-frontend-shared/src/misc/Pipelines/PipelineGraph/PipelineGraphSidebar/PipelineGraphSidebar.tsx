@@ -14,7 +14,7 @@ export class PipelineGraphSidebar extends React.PureComponent<IPipelineGraphSide
       <div>
         <SectionTitle className={ s.sidebarTitle } style={{ marginTop: '0px'}}>Triggers</SectionTitle>
         <Row className="layout-row layout-wrap sm">
-          {[1,2,3,4,5,6].map((item) => <Col className="sm" key={ item }><PipelineGraphSidebarWidget /></Col>)}
+          {[1,2,3].map((item) => <Col className="sm" key={ item }><PipelineGraphSidebarWidget /></Col>)}
         </Row>
         <SectionTitle className={ s.sidebarTitle }>Conditions</SectionTitle>
         <Row className="layout-row layout-wrap sm">
@@ -22,7 +22,7 @@ export class PipelineGraphSidebar extends React.PureComponent<IPipelineGraphSide
         </Row>
         <SectionTitle className={ s.sidebarTitle }>Actions</SectionTitle>
         <Row className="layout-row layout-wrap sm">
-          {[1,2,3,4,5,6].map((item) => <Col className="sm" key={ item }><PipelineGraphSidebarWidget /></Col>)}
+          {[1,2,3,4,5,6,7,8,9,10,11,12,13,14].map((item) => <Col className="sm" key={ item }><PipelineGraphSidebarWidget /></Col>)}
         </Row>
       </div>
     )

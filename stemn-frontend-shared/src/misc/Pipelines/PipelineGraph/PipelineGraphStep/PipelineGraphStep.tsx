@@ -13,9 +13,10 @@ export interface PipelineGraphStepProps {
 }
 
 const mapTableRows = pipe(
-	mapObjIndexed((val: string, key) => <tr key={ key }>
-		<div>{ prettyKey(key) }</div><div className="text-ellipsis">{ val }</div>
-	</tr>),
+	mapObjIndexed((val: string, key) => 
+		<tr key={ key }>
+			<div>{ prettyKey(key) }</div><div className="text-ellipsis">{ val }</div>
+		</tr>),
 	values
 )
 
