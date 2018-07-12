@@ -10,7 +10,6 @@ import File from './File'
 
 const stateToProps = ({ files, fileCompare, syncTimeline }, { params, location }) => {
   const { projectId, fileId } = params
-  //  console.log(params);
   const revisionId = location.query.revision
   const cacheKey = `${fileId}-${revisionId}`
   return {

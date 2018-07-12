@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-import 'javascript-detect-element-resize' // addResizeListener && removeResizeListener
+import 'javascript-detect-element-resize'
 import cn from 'classnames'
 import classes from './FileCompareInner.css'
 import PreviewFile from 'stemn-shared/misc/Files/PreviewFile/PreviewFile.jsx'
 import FileCompareSlider from './FileCompareSlider/FileCompareSlider.jsx'
-
-// /////////////////////////////// COMPONENT /////////////////////////////////
 
 export default class FileCompareInner extends Component {
   constructor(props) {
@@ -37,6 +35,7 @@ export default class FileCompareInner extends Component {
   }
   render() {
     const {
+      editActive,
       project,
       file1,
       file2,
@@ -100,6 +99,7 @@ export default class FileCompareInner extends Component {
                 file={ file1 }
                 event={ event }
                 header={ header }
+                editActive={ editActive }
               /> }
           </div>
         )

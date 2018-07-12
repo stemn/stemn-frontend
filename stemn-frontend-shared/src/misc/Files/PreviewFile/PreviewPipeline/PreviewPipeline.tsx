@@ -11,6 +11,7 @@ export interface IPreviewPipelineProps {
   fileMeta?: any,
   downloadFn: any,
   previewId: string,
+  editActive: boolean,
 }
 
 export class PreviewPipeline extends React.Component<IPreviewPipelineProps> {
@@ -31,13 +32,13 @@ export class PreviewPipeline extends React.Component<IPreviewPipelineProps> {
     }
   }
   render() {
-    const { fileData } = this.props
+    const { fileData, editActive } = this.props
     return (
       <div className="layout-column flex">
         { fileData && fileData.data ? (
           <PipelineGraph 
             pipelineConfig={ fileData.data } 
-            readOnly={ false }
+            readOnly={ !editActive }
           />
         ) : '' }
         { fileData ? <LoadingOverlay show={ fileData.loading } /> : null }

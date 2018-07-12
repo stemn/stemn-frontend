@@ -21,7 +21,7 @@ import ErrorMessages from './Messages/Messages.jsx'
 
 export class Component extends React.Component {
   render() {
-    const { file, fileData, fileRender, filesActions, header, event } = this.props
+    const { file, fileData, fileRender, filesActions, header, event, editActive } = this.props
     const previewId = `${file.project._id}-${file.fileId}-${file.revisionId}`
 
     const renderFn = () => {
@@ -46,7 +46,8 @@ export class Component extends React.Component {
         )
       } else if (viewerType === 'pipeline') {
         return (
-          <PreviewPipeline 
+          <PreviewPipeline
+            editActive={ editActive }
             previewId={ previewId }
             fileMeta={ file } 
             fileData={ fileData } 
