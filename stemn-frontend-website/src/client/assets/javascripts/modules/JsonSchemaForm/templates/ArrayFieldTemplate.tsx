@@ -7,8 +7,6 @@ import FilledIconButton from 'stemn-shared/misc/Buttons/FilledIconButton'
 
 export const ArrayFieldTemplate = (props: ArrayFieldTemplateProps) => {
 
-  console.log({add: props.canAdd})
-
   return (
     <div>
       {props.items.map((component, idx) => {

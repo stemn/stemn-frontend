@@ -2,20 +2,13 @@ import * as React from 'react';
 import { FieldTemplateProps } from 'react-jsonschema-form';
 
 export const FieldTemplate = (props : FieldTemplateProps) => {
-  const { classNames, label, required, description, rawErrors, rawHelp, rawDescription, children, schema } = props;
+  const { classNames, label, required, description, rawErrors, rawHelp, children } = props;
 
-  const isRoot = props.id === 'root';
-
-  const hideDescription = schema.type === 'object';
-  const helperText = getHelperText(
-    rawErrors,
-    rawHelp,
-    hideDescription ? '' : rawDescription,
-  );
+  const helperText = getHelperText(rawErrors, rawHelp);
 
   return (
     <div className={classNames}>
-      <div style={isRoot ? {} : {
+      <div style={props.id === 'root' ? {} : {
         background: 'rgba(0,0,0,0)',
         borderBottom: '1px solid rgba(0,0,0,0.05)',
         margin: '5px 10px',
@@ -24,15 +17,6 @@ export const FieldTemplate = (props : FieldTemplateProps) => {
         <h3 style={ { marginTop: '10px', padding: '0px' } }> { label } { required ? '*' : '' } </h3>
 
         <p> { description } </p>
-
-        {/* {isRoot ? children :
-           <Input
-           model={ `` }
-           value={ '' }
-           className="dr-input flex"
-           type="text"
-           placeholder={ description }
-         />} */}
 
         { children }
 
@@ -49,12 +33,9 @@ export const FieldTemplate = (props : FieldTemplateProps) => {
   );
 }
 
-const getHelperText = (errors: string[], help: string, description: string) => {
-  if (errors) {
-    return errors;
-  } else if (help) {
-    return [help];
-  } else if (description) {
-    return [description];
-  }
+const getHelperText = (errors: string[], help: string) => {
+  if (errors) return errors;
+  if (help) return [help];
+
+  return '';
 };

@@ -27,6 +27,10 @@ export const schema: any = {
                     "format": "color",
                     "default": "#151ce6"
                 },
+                "password_Field": {
+                    "type": "string",
+                    "format": "password"
+                },
                 "data_test": {
                     "type": "string",
                     "format": "data-url"
@@ -38,11 +42,7 @@ export const schema: any = {
                 "dateTime_test": {
                     "type": "string",
                     "format": "date-time"
-                },
-                "password_Field": {
-                    "type": "string",
-                    "format": "password"
-                },
+                }
             }
         },
         "boolean": {
@@ -50,9 +50,32 @@ export const schema: any = {
             "title": "Boolean fields",
             "properties": {
               "default": {
-                "type": "boolean",
+                "type": "array",
                 "title": "checkbox",
-                "description": "This is the checkbox-description"
+                "description": "This is the checkbox-description",
+                "items": {
+                    "type": 'object',
+                    "properties": {
+                    "text": {
+                        "description": 'Location name.',
+                        "type": 'boolean',
+                    },
+                    "checkbox": {
+                        "description": 'Is Click an collect?',
+                        "type": 'boolean',
+                    },
+                    },
+                },
+              },
+              "thisIsADropdownField": {
+                "description": 'Location type.',
+                "enum": [
+                  'Drop Shipper',
+                  'Headquarters',
+                  'Store',
+                  'Warehouse',
+                ],
+                "type": 'string',
               },
               "radio": {
                 "type": "boolean",

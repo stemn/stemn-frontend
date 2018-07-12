@@ -7,10 +7,9 @@ export const TextAreaWidget = (props: WidgetProps & FieldTemplateProps) => {
 
   return (
     <Textarea
-      model={ props.value }
       value={ props.value }
       className="text-title-4 input-plain flex"
-      autoFocus
+      onChange={(event : any) => props.onChange(event.target.value)}
     />
   );
 };
