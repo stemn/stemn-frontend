@@ -5,6 +5,8 @@ import { PipelineGraphPorts } from '../PipelineGraphPorts'
 import SimpleTable from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable.jsx'
 import { mapObjIndexed, values, pipe } from 'ramda'
 import { lowerCase, capitalize, flow } from 'lodash/fp'
+import PiplineIcon from '../../PipelineIcon'
+import * as cn from 'classnames'
 
 const prettyKey = flow(lowerCase, capitalize)
 
@@ -28,7 +30,10 @@ export class PipelineGraphStep extends React.Component<PipelineGraphStepProps> {
 			<div>
 				<PipelineGraphPorts type="input" node={ node } />
 				<div className={ s.step }>
-					<div className={ s.title }>{ node.type }</div>
+					<div className={ cn(s.title, 'layout-row layout-align-start-center') }>
+						<div className="flex">{ node.type }</div>
+						<PiplineIcon status="running" />
+					</div>
 					<div className={ s.body }>
 						{ node.extras && node.extras.config && (
 							<SimpleTable flex>{ mapTableRows(node.extras.config) }</SimpleTable>

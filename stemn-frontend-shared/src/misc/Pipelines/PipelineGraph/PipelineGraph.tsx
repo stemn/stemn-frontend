@@ -11,6 +11,7 @@ import * as s from './PipelineGraph.scss'
 export interface PipelineGraphProps {
 	pipelineConfig: string,
 	readOnly: boolean,
+	className?: string,
 }
 
 export interface PipelineGraphState {
@@ -25,7 +26,9 @@ export class PipelineGraph extends React.Component<PipelineGraphProps, PipelineG
 		const { pipelineConfig } = this.props
 	
 		const diagramEngine = createDiagramEngine()
-		const pipelineConfigJson = safeLoad(pipelineConfig)
+		const pipelineConfigJson = typeof pipelineConfig === 'object' 
+			? pipelineConfig 
+			: safeLoad(pipelineConfig)
 
 		const diagramModel = deserializePipeline(pipelineConfigJson, diagramEngine)
 		diagramEngine.setDiagramModel(diagramModel)
@@ -41,19 +44,19 @@ export class PipelineGraph extends React.Component<PipelineGraphProps, PipelineG
 	}
 	selectNode = (node: PipelineGraphStepModel) => this.setState({ selected: node })
 	render() {
-		const { readOnly } = this.props
+		const { readOnly, pipelineConfig, className, ...otherProps } = this.props
 		const { diagramEngine, diagramModel } = this.state
 
 		diagramModel.setLocked(readOnly);
 		
 		return (
-			<div className="layout-column flex">
+			<div className={ cn('layout-column flex', className) } { ...otherProps }>
 			  <PipelineGraphDroplayer
 					addNode={ this.addNode }
 					diagramEngine={ diagramEngine } 
 				>
 					<DiagramWidget 
-						className={ cn('flex', s.diagram )} 
+						className={ cn('flex', s.diagram, { [s.edit]: !readOnly } )} 
 						diagramEngine={ diagramEngine } 
 						allowLooseLinks={ false }
             maxNumberPointsPerLink={ 0 }

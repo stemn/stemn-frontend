@@ -11,12 +11,12 @@ declare module '*.svg' {
   export default svg;
 }
 
-declare module '*.jsx' {
-  const jsx: any;
-  export default jsx;
-}
+// declare module '*.jsx' {
+//   const jsx: any;
+//   export default jsx;
+// }
 
-declare module '*.js' {
-  const js: any;
-  export = js;
-}
+// declare module '*.js' {
+//   const js: any;
+//   export = js;
+// }
