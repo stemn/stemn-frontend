@@ -32,7 +32,7 @@ export class JsonSchemaForm<T> extends React.Component <FormProps<T>> {
       <InfoPanel>
         <Form
           schema={schema}
-          onSubmit={ () => {}}
+          onSubmit={ this.onSubmit }
           showErrorList={true}
           liveValidate
           noHtml5Validate
@@ -42,9 +42,9 @@ export class JsonSchemaForm<T> extends React.Component <FormProps<T>> {
 
           <ProgressButton
             type='submit'
-            className="primary hidden"
+            className="primary"
             loading={ false }
-            onClick={this.onSubmit}
+            onClick={() => {}}
           >
             Submit
           </ProgressButton>

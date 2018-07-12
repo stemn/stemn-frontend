@@ -24,8 +24,6 @@ export const SelectWidget = (props: WidgetProps & FieldTemplateProps) => {
       className="input"
       style={ { width: '100%' } }
       onChange={(option : any) => props.onChange(option.value)}
-      type="input"
-      dispatch={() => {}}
     />
   );
 };
