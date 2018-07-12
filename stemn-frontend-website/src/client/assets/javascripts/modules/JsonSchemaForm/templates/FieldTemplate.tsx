@@ -16,7 +16,7 @@ export const FieldTemplate = (props : FieldTemplateProps) => {
 
         <h3 style={ { marginTop: '10px', padding: '0px' } }> { label } { required ? '*' : '' } </h3>
 
-        <p> { description } </p>
+        {/* <p> { description } </p> */}
 
         { children }
 
