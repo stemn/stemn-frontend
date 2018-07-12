@@ -11,7 +11,9 @@ import * as widgets from './widgets';
 
 export class JsonSchemaForm<T> extends React.Component <FormProps<T>> {
 
-  onSubmit = ({ formData }: { formData: any }) => {
+  onSubmit = (formData : any) => {
+
+    console.log(this.props)
     console.log({ formData })
     console.log('submitting')
   }
@@ -30,17 +32,19 @@ export class JsonSchemaForm<T> extends React.Component <FormProps<T>> {
       <InfoPanel>
         <Form
           schema={schema}
-          onSubmit={ this.onSubmit }
+          onSubmit={ () => {}}
           showErrorList={true}
+          liveValidate
+          noHtml5Validate
           { ...templates }
         >
           <p> Required fields are denoted by '*' </p>
 
           <ProgressButton
             type='submit'
-            className="primary"
+            className="primary hidden"
             loading={ false }
-            onClick={ () => {} }
+            onClick={this.onSubmit}
           >
             Submit
           </ProgressButton>
