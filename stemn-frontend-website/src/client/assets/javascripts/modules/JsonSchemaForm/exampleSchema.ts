@@ -7,11 +7,10 @@ export const schema: any = {
             "properties": {
                 "default": {
                     "type": "string",
-                    "title": "text input (default)"
                 },
                 "textarea": {
                     "type": "string",
-                    "title": "textarea"
+                    "format": "textarea"
                 },
                 "email_test": {
                     "type": "string",
@@ -22,8 +21,8 @@ export const schema: any = {
                     "format": "uri"
                 },
                 "color": {
-                    "type": "string",
                     "title": "color picker",
+                    "type": "string",
                     "format": "color",
                     "default": "#151ce6"
                 },
@@ -49,24 +48,24 @@ export const schema: any = {
             "type": "object",
             "title": "Boolean fields",
             "properties": {
-              "default": {
-                "type": "array",
-                "title": "checkbox",
-                "description": "This is the checkbox-description",
-                "items": {
-                    "type": 'object',
-                    "properties": {
-                    "text": {
-                        "description": 'Location name.',
-                        "type": 'boolean',
-                    },
-                    "checkbox": {
-                        "description": 'Is Click an collect?',
-                        "type": 'boolean',
-                    },
-                    },
-                },
-              },
+            //   "default": {
+            //     "type": "array",
+            //     "title": "checkbox",
+            //     "description": "This is the checkbox-description",
+            //     "items": {
+            //         "type": 'object',
+            //         "properties": {
+            //         "text": {
+            //             "description": 'Location name.',
+            //             "type": 'boolean',
+            //         },
+            //         "checkbox": {
+            //             "description": 'Is Click an collect?',
+            //             "type": 'boolean',
+            //         },
+            //         },
+            //     },
+            //   },
               "thisIsADropdownField": {
                 "description": 'Location type.',
                 "enum": [
