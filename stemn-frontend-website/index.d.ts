@@ -20,6 +20,7 @@ declare module 'stemn-shared/misc/Buttons/FilledIconButton'
 declare module 'stemn-shared/misc/Input/Checkbox/Checkbox'
 declare module 'stemn-shared/misc/Calendar/Calendar'
 declare module 'stemn-shared/misc/Calendar/Date/Date'
+declare module 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 
 declare module 'react-icons/md/close'
 declare module 'react-icons/md/add'

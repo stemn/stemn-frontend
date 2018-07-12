@@ -6,3 +6,4 @@ export * from './URLWidget';
 export * from './TextareaWidget';
 // export * from './FileWidget';
 // export * from './CheckboxWidget';
+export * from './SelectWidget';

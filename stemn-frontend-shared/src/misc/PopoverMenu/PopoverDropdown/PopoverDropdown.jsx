@@ -21,7 +21,7 @@ class PopoverDropdown extends Component {
         return currentOption.name
       } else if (empty) {
         return null
-      } 
+      }
       return placeholder || 'none'
     }
 
@@ -44,7 +44,7 @@ class PopoverDropdown extends Component {
                 option.onClick()
               }
               if (onChange) {
-                onChange()
+                onChange(option)
               }
             }
 
