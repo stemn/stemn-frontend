@@ -11,14 +11,6 @@ import * as widgets from './widgets';
 
 export class JsonSchemaForm<T> extends React.Component <FormProps<T>> {
 
-  isLoading = false;
-
-  componentWillMount () {}
-
-  onChange =(data: any) => {
-    console.log(data);
-  }
-
   onSubmit = ({ formData }: { formData: any }) => {
     console.log({ formData })
     console.log('submitting')
@@ -38,7 +30,6 @@ export class JsonSchemaForm<T> extends React.Component <FormProps<T>> {
       <InfoPanel>
         <Form
           schema={schema}
-          onChange={this.onChange}
           onSubmit={ this.onSubmit }
           showErrorList={true}
           { ...templates }
