@@ -8,16 +8,17 @@ import { PipelineGraphStepModel } from '../PipelineGraphStep'
 export interface IPipelineGraphPortProps {
   node: PipelineGraphStepModel,
   port: PortModel,
+  isSelected: boolean,
 }
 
 export class PipelineGraphPort extends React.PureComponent<IPipelineGraphPortProps> {
   render() {
-    const { node, port } = this.props
+    const { node, port, isSelected } = this.props
     return (
       <div className={ cn(s.portOuter, port.type === 'input' ? s.input : s.output) }>
         <div className={ s.line } />
         <PortWidget 
-          className={ s.port }
+          className={ cn(s.port, {[s.selected]: isSelected}) }
           name={ port.name } 
           node={ node } 
           extraProps={ { 

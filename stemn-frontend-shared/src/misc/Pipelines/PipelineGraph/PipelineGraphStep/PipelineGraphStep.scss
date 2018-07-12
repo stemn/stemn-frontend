@@ -1,7 +1,19 @@
+.outer {
+  transition: 0.3s ease all;
+}
+
+.selected {
+  transform: translateY(-2px);
+  .step{
+    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.05);
+  }
+}
+
 .step {
   background: white;
   border: 1px solid rgba(0, 0, 0, 0.2);
   width: 200px;
+  transition: 0.3s ease all;
 }
 
 .title {

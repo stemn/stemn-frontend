@@ -93,14 +93,14 @@ const deserializeNodes = (pipeline: IPipelineConfigWithIds) => {
  * Converts the pipeline config to a storm-react-diagrams diagram model
  * We do not use the model deserialize because we need both links and node data to deserialize either
  */
-export const deserializePipeline = (pipeline: IPipelineConfig, diagramEngine: DiagramEngine) => {
+export const deserializePipeline = (diagramId: string, pipeline: IPipelineConfig, diagramEngine: DiagramEngine) => {
 
   // Add ids to the ports and links
   const pipelineWithIds = addIdsToPipeline(pipeline)
   
   // Get the serialized diagram
   const diagram: ISerializedDiagram = {
-    id: 'diagram',
+    id: diagramId,
     offsetX: 0,
     offsetY: 0,
     zoom: 100,

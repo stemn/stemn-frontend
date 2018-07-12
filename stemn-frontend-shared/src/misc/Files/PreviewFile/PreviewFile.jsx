@@ -48,7 +48,7 @@ export class Component extends React.Component {
         return (
           <PreviewPipeline
             editActive={ editActive }
-            previewId={ previewId }
+            previewId={ `${file.fileId}-${file.revisionId}` } // This previewId should match the one used in the Pipeline Graph sidebar
             fileMeta={ file } 
             fileData={ fileData } 
             downloadFn={ filesActions.getFile } 

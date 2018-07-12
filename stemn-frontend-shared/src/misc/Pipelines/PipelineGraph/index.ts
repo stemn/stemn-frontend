@@ -1,2 +1,2 @@
-export * from './PipelineGraph'
+export * from './PipelineGraph.container'
 export * from './PipelineGraphSidebar'

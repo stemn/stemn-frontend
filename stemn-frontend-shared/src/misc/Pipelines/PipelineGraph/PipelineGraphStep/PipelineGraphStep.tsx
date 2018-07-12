@@ -22,13 +22,13 @@ const mapTableRows = pipe(
 	values
 )
 
-export class PipelineGraphStep extends React.Component<PipelineGraphStepProps> {
+export class PipelineGraphStepComponent extends React.Component<PipelineGraphStepProps> {
 	render() {
-		const { node } = this.props
+		const { node, isSelected } = this.props
 
 		return (
-			<div>
-				<PipelineGraphPorts type="input" node={ node } />
+			<div className={ cn(s.outer, {[s.selected]: isSelected}) }>
+				<PipelineGraphPorts type="input" node={ node } isSelected={ isSelected } />
 				<div className={ s.step }>
 					<div className={ cn(s.title, 'layout-row layout-align-start-center') }>
 						<div className="flex">{ node.type }</div>
@@ -45,7 +45,7 @@ export class PipelineGraphStep extends React.Component<PipelineGraphStepProps> {
 						}
 					</div>
 				</div>
-				<PipelineGraphPorts type="output" node={ node } />
+				<PipelineGraphPorts type="output" node={ node } isSelected={ isSelected } />
 			</div>
 		);
 	}

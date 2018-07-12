@@ -2,26 +2,38 @@ import * as React from 'react'
 import * as cn from 'classnames'
 import { DiagramEngine } from 'mrblenny-storm-react-diagrams'
 import { PipelineGraphStepModel } from '../PipelineGraphStep'
+import { addStep as addStepType } from '../PipelineGraph.actions'
 
 export interface IPipelineGraphDroplayerProps {
+  diagramId: string,
   children: JSX.Element,
-  addNode: (node: PipelineGraphStepModel) => any,
+  addStep: typeof addStep,
   diagramEngine: DiagramEngine,
 }
 
 export class PipelineGraphDroplayer extends React.PureComponent<IPipelineGraphDroplayerProps> {
   render() {
-    const { addNode, diagramEngine, children } = this.props
+    const { addStep, diagramEngine, children, diagramId } = this.props
     return (
       <div
         className={ cn('flex', 'layout-column') }
         onDrop={ (event) => {
           const data = JSON.parse(event.dataTransfer.getData('storm-diagram-node'))
-          const node = new PipelineGraphStepModel(data.nodeType)
           const points = diagramEngine.getRelativeMousePoint(event)
-          node.x = points.x
-          node.y = points.y
-          addNode(node)
+
+          addStep({
+            diagramId,
+            stepId: 'some_thingo',
+            step: {
+              type: data.nodeType,
+              position: {
+                x: points.x,
+                y: points.y,
+              },
+              ports: {}
+            }
+          })
+          
         } }
         onDragOver={ (event) => {
           event.preventDefault()

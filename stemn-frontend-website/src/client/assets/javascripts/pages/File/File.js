@@ -116,7 +116,7 @@ export default class File extends Component {
           </div>
           <aside className={ cn(classes.sidebar, { [classes.isOpen]: isOpen }) }>
             { editActive 
-              ? <PipelineGraphSidebar /> 
+              ? <PipelineGraphSidebar diagramId={ cacheKey } /> 
               : (
                 <div>
                   <SectionTitle className={ classes.sidebarTitle }>Meta</SectionTitle>

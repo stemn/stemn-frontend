@@ -1,1 +1,1 @@
-export * from './PipelineGraphSidebar'
+export * from './PipelineGraphSidebar.container'

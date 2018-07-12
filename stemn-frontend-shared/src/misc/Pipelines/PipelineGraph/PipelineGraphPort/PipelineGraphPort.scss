@@ -10,6 +10,7 @@
   width: 20px !important;
   height: 20px !important;
   border-radius: 50%;
+  transition: 0.3s ease all;
 }
 
 .line {
@@ -19,4 +20,8 @@
 
 .input {
   flex-direction: column-reverse;
+}
+
+.selected {
+  box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.05);
 }

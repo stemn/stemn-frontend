@@ -32,11 +32,12 @@ export class PreviewPipeline extends React.Component<IPreviewPipelineProps> {
     }
   }
   render() {
-    const { fileData, editActive } = this.props
+    const { fileData, editActive, previewId } = this.props
     return (
       <div className="layout-column flex">
         { fileData && fileData.data ? (
-          <PipelineGraph 
+          <PipelineGraph
+            diagramId={ previewId }
             pipelineConfig={ fileData.data } 
             readOnly={ !editActive }
           />
