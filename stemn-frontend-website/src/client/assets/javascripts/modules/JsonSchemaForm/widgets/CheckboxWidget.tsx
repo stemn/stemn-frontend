@@ -12,6 +12,7 @@ export const CheckboxWidget = (props: WidgetProps & FieldTemplateProps) => {
   return (
     <div style={{ borderBottom: '1px solid black', }}>
       <Checkbox
+        required={props.required}
         value={ value }
         title={ value ? 'Deselect change' : 'Select change' }
         onChange={(event : any) => props.onChange(event.target.value)}

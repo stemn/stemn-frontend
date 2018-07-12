@@ -7,6 +7,7 @@ export const FileWidget = (props: WidgetProps & FieldTemplateProps) => {
 
   return (
     <Upload
+      required={props.required}
       // containerClassName={ classes.container }
       // imageClassName={ classes.image }
       // uploadId={ uploadId }

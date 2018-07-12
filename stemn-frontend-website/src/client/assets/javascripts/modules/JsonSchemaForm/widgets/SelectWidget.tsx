@@ -19,6 +19,7 @@ export const SelectWidget = (props: WidgetProps & FieldTemplateProps) => {
 
   return (
     <PopoverDropdown
+      required={props.required}
       value={ props.value }
       options={ options }
       className="input"
