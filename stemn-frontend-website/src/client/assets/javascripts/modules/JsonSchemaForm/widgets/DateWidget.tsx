@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { FieldTemplateProps, WidgetProps } from 'react-jsonschema-form';
-import * as moment from 'moment';
+// import * as moment from 'moment';
 
 import Date from 'stemn-shared/misc/Calendar/Date/Date'
 
 export const DateWidget = (props: WidgetProps & FieldTemplateProps) => {
 
-  const initial : moment.Moment = props.value || moment();
+  // const initial : moment.Moment = props.value || moment();
 
   console.log({ props })
   return (

@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { FieldTemplateProps, WidgetProps } from 'react-jsonschema-form'
-import Radio from 'stemn-shared/misc/Input/Radio/Radio'
+// import Radio from 'stemn-shared/misc/Input/Radio/Radio'
 import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox'
 
 export const CheckboxWidget = (props: WidgetProps & FieldTemplateProps) => {
@@ -20,11 +20,3 @@ export const CheckboxWidget = (props: WidgetProps & FieldTemplateProps) => {
     </div>
   );
 };
-
-// <Radio
-//   model={ '' }
-//   value={ true }
-//   modelValue={ props.value }
-// >
-//   <p> { props.displayLabel || props.label } </p>
-// </Radio>

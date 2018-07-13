@@ -46,7 +46,7 @@ export class JsonSchemaForm<T> extends React.Component<FormProps<T> & ISchemaFor
         this.setState({ isLoading: false });
         return response;
       })
-      .catch((error: any) => {
+      .catch(() => {
         this.setState({ isLoading: false });
       });
   }

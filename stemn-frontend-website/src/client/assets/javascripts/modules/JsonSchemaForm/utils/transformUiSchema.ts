@@ -58,7 +58,9 @@ export const fixFormatFields = (formats : any, schema : JSONSchema6, uiSchema : 
         // recurse through the object
         traverse(subObject[key], uiSchema, newPath)
       }
-    } else if (object.hasOwnProperty('format') && formats.includes(object.format)) {
+    }
+
+    if (object.hasOwnProperty('format') && formats.includes(object.format)) {
 
       // build the schema object
       const ref = buildNestedObject(path, uiSchema)
@@ -68,6 +70,18 @@ export const fixFormatFields = (formats : any, schema : JSONSchema6, uiSchema : 
 
       // remove the key from the original object
       delete object.format
+    }
+
+    if (object.hasOwnProperty('help')) {
+
+      // build the schema object
+      const ref = buildNestedObject(path, uiSchema)
+
+      // change the widget for that object so that it displays as wanted
+      ref['ui:help'] = object.help
+
+      // remove the key from the original object
+      delete object.help
     }
   }
 

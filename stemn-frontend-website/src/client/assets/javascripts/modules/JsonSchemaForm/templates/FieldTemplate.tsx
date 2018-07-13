@@ -2,9 +2,7 @@ import * as React from 'react';
 import { FieldTemplateProps } from 'react-jsonschema-form';
 
 export const FieldTemplate = (props : FieldTemplateProps) => {
-  const { classNames, label, required, description, errors, rawErrors, rawHelp, children } = props;
-
-  const helperText = getHelperText(rawErrors, rawHelp);
+  const { id, classNames, label, required, rawErrors, help, children } = props;
 
   return (
     <div className={classNames}>
@@ -16,26 +14,18 @@ export const FieldTemplate = (props : FieldTemplateProps) => {
 
         <h3 style={ { marginTop: '10px', padding: '0px' } }> { label } { required ? '*' : '' } </h3>
 
-        {/* <p> { description } </p> */}
-
         { children }
 
-        { helperText && (
-          <p>
-            {helperText.map((text, index) =>
-              <p key={index}>{text}</p>,
-            )}
-          </p>
-        )}
+        { help }
+
+        { rawErrors && rawErrors.map((error, idx) => {
+            return (
+              <p key={`${id}.${idx}`} style={ { color: 'red' } }> {error}</p>
+            )
+          })
+        }
 
       </div>
     </div>
   );
 }
-
-const getHelperText = (errors: string[], help: string) => {
-  if (errors) return errors;
-  if (help) return [help];
-
-  return '';
-};

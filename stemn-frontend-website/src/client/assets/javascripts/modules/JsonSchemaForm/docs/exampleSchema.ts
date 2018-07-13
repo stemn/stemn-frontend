@@ -18,7 +18,6 @@ export const schema: any = {
                 "emailField": {
                     "type": "string",
                     "title": "email",
-                    "minLength": 8,
                     "format": "email"
                 },
                 "uri_test": {
@@ -34,7 +33,8 @@ export const schema: any = {
                 "password_Field": {
                     "type": "string",
                     "minLength": 8,
-                    "format": "password" // this would usually break the validation
+                    "format": "password", // this would usually break the validation
+                    "help": "some help message"
                 },
                 "data_test": {
                     "type": "string",
