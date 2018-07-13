@@ -1,9 +1,13 @@
 import { connect } from 'react-redux'
 import { PipelineGraphComponent } from './PipelineGraph'
 import { initialiseModel, addStep, selectStep } from './PipelineGraph.actions'
+import { IPipelineGraphStoreState } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraph.reducer'
 
-const stateToProps = ({ pipelineGraph }, { diagramId }) => ({
-  diagram: pipelineGraph[diagramId] || {},
+const stateToProps = (
+  { pipelineGraph }: { pipelineGraph: IPipelineGraphStoreState }, 
+  { diagramId }: { diagramId: string }
+) => ({
+  diagram: pipelineGraph[diagramId],
 })
 
 const dispatchToProps = {

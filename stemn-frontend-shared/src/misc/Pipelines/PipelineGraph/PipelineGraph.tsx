@@ -12,22 +12,27 @@ import {
 	addStep as addStepType,
 	selectStep as selectStepType,
 } from './PipelineGraph.actions'
-import { isEqual, forEach, values } from 'lodash'
+import { isEqual, forEach, values, get } from 'lodash'
+import { IPipelineConfig } from 'stemn-shared/misc/Pipelines/PipelineGraph/types'
 
 export interface PipelineGraphProps {
 	diagramId: string,
 	pipelineConfig: string,
 	readOnly: boolean,
 	className?: string,
+	diagram: {
+		selectedStep: string;
+    model: IPipelineConfig;
+	},
+	style?: object,
 	initialiseModel: typeof initialiseModelType,
 	addStep: typeof addStepType,
-	selectStep: typeof selectStep,
-	style?: object,
+	selectStep: typeof selectStepType,
 }
 
 export interface PipelineGraphState {
 	diagramEngine: DiagramEngine,
-	diagramModel: DiagramModel,
+	diagramModel?: DiagramModel,
 	selected?: PipelineGraphStepModel,
 }
 
@@ -49,14 +54,14 @@ export class PipelineGraphComponent extends React.Component<PipelineGraphProps, 
 	}
 	componentWillReceiveProps(nextProps: PipelineGraphProps) {
 		const { diagramEngine } = this.state
-
+		const nextModel = get(nextProps, 'diagram.model')
+		const currentModel = get(this.props, 'diagram.model')
 		// Update the diagram model if the pipeline changes
-		if (!isEqual(nextProps.diagram.model, this.props.diagram.model)) {
-			const diagramModel = deserializePipeline(nextProps.diagramId, nextProps.diagram.model, diagramEngine)
+		if (!isEqual(nextModel, currentModel)) {
+			const diagramModel = deserializePipeline(nextProps.diagramId, nextModel, diagramEngine)
 			diagramEngine.setDiagramModel(diagramModel)
 			this.setState({ diagramModel })
 		}
-
 	}
   addListeners = (model) => {
     forEach(model.nodes, (item) => {
@@ -82,11 +87,13 @@ export class PipelineGraphComponent extends React.Component<PipelineGraphProps, 
   }
 	onEntityRemoved = () => this.props.selectStep({ diagramId: this.props.diagramId, stepId: undefined })
 	updateReduxState = (action: BaseAction) => {
-		const model = serializePipeline(this.props.diagramModel, 'test')
-		this.props.initialiseModel({ diagramId, model })
+		if (this.state.diagramModel) {
+			const model = serializePipeline(this.state.diagramModel, 'test')
+			this.props.initialiseModel({ diagramId: this.props.diagramId, model })
+		}
 	}
 	render() {
-		const { readOnly, pipelineConfig, className, style, addStep, diagramId, diagram } = this.props
+		const { readOnly, className, style, addStep, diagramId } = this.props
 		const { diagramEngine, diagramModel } = this.state
 		
 		if (!diagramModel) {
