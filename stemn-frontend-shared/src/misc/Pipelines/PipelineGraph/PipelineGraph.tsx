@@ -1,9 +1,9 @@
 import * as React from 'react'
 import * as cn from 'classnames'
-import { DiagramEngine,	DiagramModel, DiagramWidget } from 'mrblenny-storm-react-diagrams'
+import { DiagramEngine,	DiagramModel, DiagramWidget, BaseAction } from 'mrblenny-storm-react-diagrams'
 import { PipelineGraphStepModel } from './PipelineGraphStep'
 import { PipelineGraphDroplayer } from './PipelineGraphDroplayer';
-import { deserializePipeline, createDiagramEngine } from './utils'
+import { deserializePipeline, serializePipeline, createDiagramEngine } from './utils'
 import { safeLoad } from 'js-yaml'
 import './PipelineGraph.global.scss'
 import * as s from './PipelineGraph.scss'
@@ -80,7 +80,11 @@ export class PipelineGraphComponent extends React.Component<PipelineGraphProps, 
       this.props.selectStep({ diagramId: this.props.diagramId, stepId: undefined })
     }
   }
-  onEntityRemoved = () => this.props.selectStep({ diagramId: this.props.diagramId, stepId: undefined })
+	onEntityRemoved = () => this.props.selectStep({ diagramId: this.props.diagramId, stepId: undefined })
+	updateReduxState = (action: BaseAction) => {
+		const model = serializePipeline(this.props.diagramModel, 'test')
+		this.props.initialiseModel({ diagramId, model })
+	}
 	render() {
 		const { readOnly, pipelineConfig, className, style, addStep, diagramId, diagram } = this.props
 		const { diagramEngine, diagramModel } = this.state
@@ -105,7 +109,8 @@ export class PipelineGraphComponent extends React.Component<PipelineGraphProps, 
 						allowLooseLinks={ false }
             maxNumberPointsPerLink={ 0 }
             smartRouting
-            deleteKeys={ [46] } // Delete
+						deleteKeys={ [46] } // Delete
+						actionStoppedFiring={ this.updateReduxState }
 					/>
 				</PipelineGraphDroplayer>
 			</div>
