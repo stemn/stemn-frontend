@@ -3,6 +3,7 @@
     "@stemn/tslint-config"
   ],
   "rules": {
-    "no-implicit-dependencies": [true, "dev"]
+    "no-implicit-dependencies": [false, "dev"],
+    "semicolon": [true, "never"],
   }
 }

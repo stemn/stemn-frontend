@@ -1,15 +1,16 @@
 import * as i from 'icepick'
+import { IPipelineConfig } from 'stemn-shared/misc/Pipelines/PipelineGraph/types'
 
-const initialState = {
-  /*
-    [diagramId]: {
-      selectedStep: string,
-      model: {},
-    }
-  */
+export interface IPipelineGraphStoreState {
+  [diagramId: string]: {
+    selectedStep: string,
+    model: IPipelineConfig,
+  }
 }
 
-const reducer = (state, action) => {
+const initialState: IPipelineGraphStoreState = {}
+
+export default (state: IPipelineGraphStoreState = initialState, action) => {
   switch (action.type) { 
     case 'PIPELINE_DIAGRAM/INITIALISE_MODEL': 
       return i.assocIn(state, [action.payload.diagramId, 'model'], action.payload.model)
@@ -23,11 +24,4 @@ const reducer = (state, action) => {
     default:
       return state
   }
-}
-
-export default (state = initialState, action) => {
-  if (!state.hydrated) {
-    state = { ...initialState, ...state, hydrated: true }
-  }
-  return reducer(state, action)
 }

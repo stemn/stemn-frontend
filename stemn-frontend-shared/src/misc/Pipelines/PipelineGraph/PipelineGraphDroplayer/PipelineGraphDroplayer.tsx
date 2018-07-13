@@ -1,13 +1,12 @@
 import * as React from 'react'
 import * as cn from 'classnames'
 import { DiagramEngine } from 'mrblenny-storm-react-diagrams'
-import { PipelineGraphStepModel } from '../PipelineGraphStep'
 import { addStep as addStepType } from '../PipelineGraph.actions'
 
 export interface IPipelineGraphDroplayerProps {
   diagramId: string,
   children: JSX.Element,
-  addStep: typeof addStep,
+  addStep: typeof addStepType,
   diagramEngine: DiagramEngine,
 }
 

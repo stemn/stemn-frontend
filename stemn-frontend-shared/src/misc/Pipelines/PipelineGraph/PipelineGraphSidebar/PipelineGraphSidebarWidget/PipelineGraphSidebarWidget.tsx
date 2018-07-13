@@ -1,5 +1,5 @@
-import * as React from 'react'
 import * as cn from 'classnames'
+import * as React from 'react'
 import * as s from './PipelineGraphSidebarWidget.scss'
 
 export const PipelineGraphSidebarWidget = () => {
