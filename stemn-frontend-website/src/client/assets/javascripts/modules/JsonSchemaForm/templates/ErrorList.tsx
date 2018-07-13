@@ -3,15 +3,20 @@ import { AjvError } from 'react-jsonschema-form';
 
 export const ErrorList = ({ errors }: { errors: AjvError[] }) => {
 
-  console.log(errors)
-  const isErrors = errors && errors.length > 0;
+  return null;
 
-  if (!isErrors) return null;
+  // console.log({errors})
+  // const isErrors = errors && errors.length > 0;
 
-  return (
-    <div style={{ marginBottom: '20px' }}>
-      {/* { alert(errors) }
-      hello */}
-    </div>
-  );
+  // if (!isErrors) return null;
+
+  // return (
+  //   <div style={{ marginBottom: '20px' }}>
+  //     {/* {errors.map((error: any) => {
+  //       return (
+  //         <p> { error.message } </p>
+  //       );
+  //     })} */}
+  //   </div>
+  // );
 }

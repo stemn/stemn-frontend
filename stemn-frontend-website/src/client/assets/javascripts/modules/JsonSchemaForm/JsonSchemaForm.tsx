@@ -1,72 +1,109 @@
 import * as React from 'react';
+import { JSONSchema6 } from 'json-schema';
 import Form, { FormProps } from 'react-jsonschema-form';
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 import * as templates from './templates';
-import { schema } from './exampleSchema';
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import * as widgets from './widgets';
 
-import { set } from 'lodash';
+import { set, cloneDeep, assign } from 'lodash';
 import { flow, replace } from 'lodash/fp';
 
-export class JsonSchemaForm<T> extends React.Component <FormProps<T>> {
+export class JsonSchemaForm<T> extends React.Component<FormProps<T>> {
 
   state = {
-    isLoading: false
+    isLoading: false,
+    schema: {},
+    uiSchema: {}
   }
 
-  form: any;
+  componentWillMount() {
+    this.generateUiSchema(this.props.schema, this.props.uiSchema);
+  }
 
-  fillFormErrors = (validationErrors: object[]) => {
+  // read the readme in the docs folder
+  generateUiSchema = (schema: JSONSchema6, uiSchema: any = {}) => {
 
-    if (!validationErrors) {
-      console.error('Errors has not been found');
-      return;
+    const unsupportedFormats = ["password", "textarea"];
+    const newSchema: JSONSchema6 = cloneDeep(schema);
+    const newUiSchema: any = cloneDeep(uiSchema);
+
+    /**
+     * builds a nested object given a '.' separated path, returns a reference to the last object
+     * IE,
+     *
+     * path = string.hello
+     *
+     * will create the object
+     * {
+     *  string: {
+     *    hello: {
+     *
+     *    }
+     *   }
+     * }
+     *
+     * the returned reference would be to the hello object
+     */
+    const buildObject = (path: string, object: any) : any => {
+
+      const subObjects = path.split('.')
+
+      let currentRef = object;
+      for (let key of subObjects) {
+
+        if (!currentRef[key]) {
+          currentRef[key] = {}
+        }
+
+        currentRef = currentRef[key]
+      }
+
+      return currentRef;
     }
 
-    const errorSchema = {};
+    const traverse = (object: any, uiSchema: any, path: string = '') => {
 
-    validationErrors.forEach((error: any) => {
+      if (!object) return;
 
-      const errorPath = flow(
-        replace('/body/data/', ''), // Replace body with nothing
-        replace(/\//g, '.'), // Replace slashes with dots
-        (path: string) => `${path}.__errors`, // Append __errors to the end
-      )(error.source.pointer);
+      if (object.hasOwnProperty('properties')) {
 
-      set(errorSchema, errorPath, [error.detail]);
+        const subObject = object.properties;
 
+        const keys = Object.keys(subObject);
+
+        for (let key of keys) {
+
+          const newPath = path === '' ? key : `${path}.${key}`
+
+          // recurse through the object
+          traverse(subObject[key], uiSchema, newPath)
+        }
+      } else if (object.hasOwnProperty('format') && unsupportedFormats.includes(object.format)) {
+
+        // build the schema object
+        const ref = buildObject(path, uiSchema)
+
+        ref['ui:widget'] = object.format
+        delete object.format
+      }
+    }
+
+    traverse(newSchema, newUiSchema);
+
+    this.setState({
+      schema: newSchema,
+      uiSchema: newUiSchema
     });
-
-    const errors = validationErrors.map((error: any) => ({ stack: error.detail }));
-    this.form.setState({ errorSchema, errors });
   }
 
-  onSubmit = ({ formData }: { formData: any }) => {
+  onSubmit = (params: any) => {
 
+    // console.log({params})
     console.log('submit')
-
-    // this.setState({ isLoading: true });
-    // this.form.setState({ errors: [], errorSchema: {} });
-
-    // return this.props.onSubmit(formData)
-    //   .then((response: any) => {
-
-    //     this.setState({ isLoading: false });
-    //     this.form.setState({ errors: [], errorSchema: {} });
-
-    //     return response;
-    //   })
-    //   .catch((error: any) => {
-
-    //     this.setState({ formData, isLoading: false });
-    //     this.fillFormErrors(error.response.data.errors);
-
-    //   });
-
   }
 
-  render () {
+  render() {
 
     const configs = {
       ...templates,
@@ -76,19 +113,21 @@ export class JsonSchemaForm<T> extends React.Component <FormProps<T>> {
     return (
       <InfoPanel>
         <Form
-          schema={schema}
-          onSubmit={ this.onSubmit }
-          liveValidate
+          schema={this.state.schema}
+          uiSchema={this.state.uiSchema}
+          onSubmit={this.onSubmit}
+          showErrorList={true}
+          liveValidate={true}
           noHtml5Validate
-          { ...configs }
+          {...configs}
         >
           <p> Required fields are denoted by '*' </p>
 
           <ProgressButton
             type='submit'
             className="primary"
-            loading={ this.state.isLoading }
-            onClick={() => {}}
+            loading={this.state.isLoading}
+            onClick={() => { }}
           >
             Submit
           </ProgressButton>

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FieldTemplateProps } from 'react-jsonschema-form';
 
 export const FieldTemplate = (props : FieldTemplateProps) => {
-  const { classNames, label, required, description, rawErrors, rawHelp, children } = props;
+  const { classNames, label, required, description, errors, rawErrors, rawHelp, children } = props;
 
   const helperText = getHelperText(rawErrors, rawHelp);
 

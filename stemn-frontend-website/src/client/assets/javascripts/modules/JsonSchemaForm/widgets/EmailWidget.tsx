@@ -7,7 +7,7 @@ export const EmailWidget = (props: WidgetProps & FieldTemplateProps) => {
   return (
     <Input
       required={props.required}
-      value={props.value}
+      value={props.value || ''}
       className="dr-input flex"
       type="email"
       placeholder="example@email.com"

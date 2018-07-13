@@ -1,19 +1,24 @@
 export const schema: any = {
     "$schema": "http://json-schema.org/draft-06/schema#",
+    "title": "Hmm",
+    "type": "object",
+    "required": [],
     "properties": {
         "string": {
+            "title": "fields",
             "type": "object",
-            "title": "String field",
             "properties": {
-                "default": {
+                "normal": {
                     "type": "string",
                 },
                 "textarea": {
                     "type": "string",
-                    "format": "textarea"
+                    "format": "textarea" // usually this would break validation
                 },
-                "email_test": {
+                "emailField": {
                     "type": "string",
+                    "title": "email",
+                    "minLength": 8,
                     "format": "email"
                 },
                 "uri_test": {
@@ -28,7 +33,8 @@ export const schema: any = {
                 },
                 "password_Field": {
                     "type": "string",
-                    "format": "password"
+                    "minLength": 8,
+                    "format": "password" // this would usually break the validation
                 },
                 "data_test": {
                     "type": "string",
@@ -42,30 +48,13 @@ export const schema: any = {
                     "type": "string",
                     "format": "date-time"
                 }
-            }
+            },
+            "required": ["password_Field"]
         },
         "boolean": {
             "type": "object",
             "title": "Boolean fields",
             "properties": {
-            //   "default": {
-            //     "type": "array",
-            //     "title": "checkbox",
-            //     "description": "This is the checkbox-description",
-            //     "items": {
-            //         "type": 'object',
-            //         "properties": {
-            //         "text": {
-            //             "description": 'Location name.',
-            //             "type": 'boolean',
-            //         },
-            //         "checkbox": {
-            //             "description": 'Is Click an collect?',
-            //             "type": 'boolean',
-            //         },
-            //         },
-            //     },
-            //   },
               "thisIsADropdownField": {
                 "description": 'Location type.',
                 "enum": [
@@ -99,9 +88,48 @@ export const schema: any = {
               "Foo",
               "Bar"
             ]
-          }
+          },
+    }
+}
 
+// the old style of formatting
+export const schema2 : any = {
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    title: "schema2",
+    type: "object",
+    required: [],
+    properties: {
+        sub: {
+            title: "subObject",
+            type: "object",
+            properties: {
+                email: {
+                    title: "I am the title of this email thingo",
+                    type: "string",
+                    format: "email"
+                },
+                password: {
+                    type: "string",
+                },
+                textarea: {
+                    title: "this is a textarea",
+                    type: "string"
+                }
+            }
+        }
+    }
+}
+
+export const uiSchema2 : any = {
+    sub: {
+        textarea: {
+            "ui:widget": "textarea",
+            "ui:options": {
+                "rows": 5
+            }
+        },
+        password: {
+            "ui:widget": "password"
+        }
     },
-    "type": "object",
-    "required": []
 }
