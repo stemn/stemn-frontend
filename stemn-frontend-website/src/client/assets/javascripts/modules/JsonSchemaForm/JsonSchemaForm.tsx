@@ -3,7 +3,7 @@ import { JSONSchema6 } from 'json-schema';
 import Form, { FormProps, ISubmitEvent } from 'react-jsonschema-form';
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 import * as templates from './templates';
-import { fixFormatFields } from './utils/transformUiSchema'
+import { fixFormatFields, transformErrors } from './utils'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import * as widgets from './widgets';
 
@@ -63,6 +63,7 @@ export class JsonSchemaForm<T> extends React.Component<FormProps<T> & ISchemaFor
         <Form
           schema={this.state.schema}
           uiSchema={this.state.uiSchema}
+          transformErrors={transformErrors}
           onSubmit={this.onSubmit}
           showErrorList={true}
           liveValidate={true}
