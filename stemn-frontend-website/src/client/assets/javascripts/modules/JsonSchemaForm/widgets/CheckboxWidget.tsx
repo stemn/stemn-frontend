@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import { FieldTemplateProps, WidgetProps } from 'react-jsonschema-form'
-// import Radio from 'stemn-shared/misc/Input/Radio/Radio'
 import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox'
 
 export const CheckboxWidget = (props: WidgetProps & FieldTemplateProps) => {
@@ -15,7 +14,7 @@ export const CheckboxWidget = (props: WidgetProps & FieldTemplateProps) => {
         required={props.required}
         value={ value }
         title={ value ? 'Deselect change' : 'Select change' }
-        onChange={(event : any) => props.onChange(event.target.value)}
+        onChange={(event : React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)}
       />
     </div>
   );

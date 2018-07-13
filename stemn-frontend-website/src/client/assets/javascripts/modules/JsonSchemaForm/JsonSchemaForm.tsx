@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { JSONSchema6 } from 'json-schema';
 import Form, { FormProps, ISubmitEvent } from 'react-jsonschema-form';
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 import * as templates from './templates';
@@ -11,7 +10,6 @@ export interface ISchemaFormProps<T> {
   onSubmit: (e: ISubmitEvent<T>) => any;
 }
 
-
 export class JsonSchemaForm<T> extends React.Component<FormProps<T> & ISchemaFormProps<T>> {
 
   state = {
@@ -21,15 +19,8 @@ export class JsonSchemaForm<T> extends React.Component<FormProps<T> & ISchemaFor
   }
 
   componentWillMount() {
-    this.generateUiSchema(this.props.schema, this.props.uiSchema);
-  }
 
-  // read the readme in the docs folder
-  generateUiSchema = (schema: JSONSchema6, uiSchema: any = {}) => {
-
-    const unsupported = ["password", "textarea"];
-
-    const { newSchema, newUiSchema } = fixFormatFields(unsupported, schema, uiSchema)
+    const { newSchema, newUiSchema } = fixFormatFields(this.props.schema, this.props.uiSchema)
 
     this.setState({
       schema: newSchema,

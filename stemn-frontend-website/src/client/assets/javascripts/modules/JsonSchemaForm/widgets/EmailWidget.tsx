@@ -11,7 +11,7 @@ export const EmailWidget = (props: WidgetProps & FieldTemplateProps) => {
       className="dr-input flex"
       type="email"
       placeholder="example@email.com"
-      onChange={(event : any) => props.onChange(event.target.value)}
+      onChange={(event : React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)}
     />
   );
 };

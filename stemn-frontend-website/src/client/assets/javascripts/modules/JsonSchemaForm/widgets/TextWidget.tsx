@@ -9,7 +9,7 @@ export const TextWidget = (props: WidgetProps & FieldTemplateProps) => {
       value={props.value}
       className="dr-input flex"
       type="text"
-      onChange={(event : any) => props.onChange(event.target.value)}
+      onChange={(event : React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)}
     />
   );
 };

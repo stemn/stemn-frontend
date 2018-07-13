@@ -12,7 +12,7 @@ export const URLWidget = (props: WidgetProps & FieldTemplateProps) => {
       value={props.value || initial}
       className="dr-input flex"
       type="uri"
-      onChange={(event : any) => props.onChange(event.target.value)}
+      onChange={(event : React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)}
     />
   );
 };

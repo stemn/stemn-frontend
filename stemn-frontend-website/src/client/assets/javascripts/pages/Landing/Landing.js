@@ -17,7 +17,7 @@ import MdLock from 'react-icons/md/input'
 import vidDemo from 'static/video/demo.mp4'
 import Link from 'stemn-shared/misc/Router/Link'
 
-import { schema } from '../../modules/JsonSchemaForm/docs/exampleSchema'
+import { schema } from '../../modules/JsonSchemaForm/exampleSchema'
 import { JsonSchemaForm } from '../../modules/JsonSchemaForm'
 
 export default class Landing extends Component {
@@ -80,7 +80,7 @@ export default class Landing extends Component {
               <Col className="flex-order-xs-2 flex-xs-100 flex-gt-xs-50 lg">
                 <JsonSchemaForm
                   schema={ schema }
-                  onSubmit={ (form) => { console.log({ form }) } }
+                  onSubmit={ () => new Promise() }
                 />
                 <h4 className="text-title-2">Access your files anywhere</h4>
                 <p className="text-title-4">Whether you’re in the office, in the lab, or on the go, preview your files in your browser or any device.</p>

@@ -14,7 +14,6 @@ export const DateWidget = (props: WidgetProps & FieldTemplateProps) => {
     <Date
       required={props.required}
       model={ '' }
-      onChange={ () => {} }
       value={ '' }
     />
 

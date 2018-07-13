@@ -1,5 +1,7 @@
-import { JSONSchema6 } from 'json-schema';
-import { cloneDeep } from 'lodash';
+import { JSONSchema6 } from 'json-schema'
+import { cloneDeep } from 'lodash'
+
+const formats = ["password", "textarea"]
 
 /**
   * builds a nested object given a '.' separated path, returns a reference to the last object
@@ -35,21 +37,20 @@ const buildNestedObject = (path: string, object: any): any => {
   return currentRef;
 }
 
+export const fixFormatFields = (schema : JSONSchema6, uiSchema : any = {}) => {
 
-export const fixFormatFields = (formats : any, schema : JSONSchema6, uiSchema : any) => {
-
-  const newSchema: JSONSchema6 = cloneDeep(schema);
-  const newUiSchema: any = cloneDeep(uiSchema);
+  const newSchema: JSONSchema6 = cloneDeep(schema)
+  const newUiSchema: any = cloneDeep(uiSchema)
 
   const traverse = (object: any, uiSchema: any, path: string = '') => {
 
-    if (!object) return;
+    if (!object) return
 
     if (object.hasOwnProperty('properties')) {
 
-      const subObject = object.properties;
+      const subObject = object.properties
 
-      const keys = Object.keys(subObject);
+      const keys = Object.keys(subObject)
 
       for (let key of keys) {
 
@@ -60,10 +61,10 @@ export const fixFormatFields = (formats : any, schema : JSONSchema6, uiSchema : 
       }
     }
 
-    if (object.hasOwnProperty('format') && formats.includes(object.format)) {
+    // build the schema object
+    const ref = buildNestedObject(path, uiSchema)
 
-      // build the schema object
-      const ref = buildNestedObject(path, uiSchema)
+    if (object.hasOwnProperty('format') && formats.includes(object.format)) {
 
       // change the widget for that object so that it displays as wanted
       ref['ui:widget'] = object.format
@@ -74,13 +75,7 @@ export const fixFormatFields = (formats : any, schema : JSONSchema6, uiSchema : 
 
     if (object.hasOwnProperty('help')) {
 
-      // build the schema object
-      const ref = buildNestedObject(path, uiSchema)
-
-      // change the widget for that object so that it displays as wanted
       ref['ui:help'] = object.help
-
-      // remove the key from the original object
       delete object.help
     }
   }
