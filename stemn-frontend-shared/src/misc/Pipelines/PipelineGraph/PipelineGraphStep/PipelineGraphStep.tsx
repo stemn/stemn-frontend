@@ -7,28 +7,34 @@ import PiplineIcon from '../../PipelineIcon'
 import { PipelineGraphPorts } from '../PipelineGraphPorts'
 import { PipelineGraphStepModel } from './'
 import * as s from './PipelineGraphStep.scss'
+import { selectStep as selectStepType } from '../PipelineGraph.actions'
 
 const prettyKey = flow(lowerCase, capitalize)
 
 export interface IPipelineGraphStepProps {
 	node: PipelineGraphStepModel,
 	isSelected: boolean,
+	selectStep: typeof selectStepType,
 }
 
 const mapTableRows = pipe(
   mapObjIndexed((val: string, key) =>
-    <tr key={ key }>
+    <div key={ key }>
       <div>{ prettyKey(key) }</div><div className='text-ellipsis'>{ val }</div>
-    </tr>),
+    </div>),
   values,
 )
 
 export class PipelineGraphStepComponent extends React.Component<IPipelineGraphStepProps> {
   public render () {
-    const { node, isSelected } = this.props
+    const { node, isSelected, selectStep } = this.props
+    const diagramId = node.parent.id
 
     return (
-      <div className={ cn(s.outer, { [s.selected]: isSelected }) }>
+      <div 
+        className={ cn(s.outer, { [s.selected]: isSelected }) }
+        onClick={ () => selectStep({ diagramId, stepId: node.id }) }
+      >
         <PipelineGraphPorts type='input' node={ node } isSelected={ isSelected } />
         <div className={ s.step }>
           <div className={ cn(s.title, 'layout-row layout-align-start-center') }>

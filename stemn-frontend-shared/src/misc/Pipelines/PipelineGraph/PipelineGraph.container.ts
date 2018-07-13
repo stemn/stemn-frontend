@@ -7,7 +7,7 @@ const stateToProps = (
   { pipelineGraph }: { pipelineGraph: IPipelineGraphStoreState }, 
   { diagramId }: { diagramId: string }
 ) => ({
-  diagram: pipelineGraph[diagramId],
+  diagram: pipelineGraph.diagrams[diagramId],
 })
 
 const dispatchToProps = {

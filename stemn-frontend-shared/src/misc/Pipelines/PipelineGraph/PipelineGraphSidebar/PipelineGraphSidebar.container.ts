@@ -7,9 +7,9 @@ const stateToProps = (
   { pipelineGraph }: { pipelineGraph: IPipelineGraphStoreState }, 
   { diagramId }: { diagramId: string }
 ) => {
-  const diagram = pipelineGraph[diagramId] || {}
+  const diagram = pipelineGraph.diagrams[diagramId] || {}
   return {
-    diagram: pipelineGraph[diagramId] || {},
+    diagram,
     selectedStep: get(diagram, ['model', 'steps', diagram.selectedStep]),
   }
 }

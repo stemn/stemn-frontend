@@ -1,18 +1,22 @@
 import * as React from 'react'
 import * as cn from 'classnames'
 import { DiagramEngine } from 'mrblenny-storm-react-diagrams'
-import { addStep as addStepType } from '../PipelineGraph.actions'
+import { 
+  addStep as addStepType,
+  selectStep as selectStepType,
+} from '../PipelineGraph.actions'
 
 export interface IPipelineGraphDroplayerProps {
   diagramId: string,
   children: JSX.Element,
   addStep: typeof addStepType,
+  selectStep: typeof selectStepType,
   diagramEngine: DiagramEngine,
 }
 
 export class PipelineGraphDroplayer extends React.PureComponent<IPipelineGraphDroplayerProps> {
   render() {
-    const { addStep, diagramEngine, children, diagramId } = this.props
+    const { addStep, diagramEngine, children, diagramId, selectStep } = this.props
     return (
       <div
         className={ cn('flex', 'layout-column') }
@@ -38,6 +42,17 @@ export class PipelineGraphDroplayer extends React.PureComponent<IPipelineGraphDr
           event.preventDefault()
         } }
       >
+        {/* <div 
+          onClick={ () => selectStep({ diagramId, stepId: undefined })}
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            bottom: 0,
+            top: 0,
+            zIndex: 1,
+          }}
+        /> */}
         { children }
       </div>
     )

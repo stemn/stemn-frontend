@@ -93,7 +93,7 @@ export class PipelineGraphComponent extends React.Component<PipelineGraphProps, 
 		}
 	}
 	render() {
-		const { readOnly, className, style, addStep, diagramId } = this.props
+		const { readOnly, className, style, addStep, selectStep, diagramId } = this.props
 		const { diagramEngine, diagramModel } = this.state
 		
 		if (!diagramModel) {
@@ -108,6 +108,7 @@ export class PipelineGraphComponent extends React.Component<PipelineGraphProps, 
 			  <PipelineGraphDroplayer
 					diagramId={ diagramId }
 					addStep={ addStep }
+					selectStep={ selectStep }
 					diagramEngine={ diagramEngine } 
 				>
 					<DiagramWidget 
