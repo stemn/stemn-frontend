@@ -16,7 +16,7 @@ export interface IPipelineGraphDroplayerProps {
 
 export class PipelineGraphDroplayer extends React.PureComponent<IPipelineGraphDroplayerProps> {
   render() {
-    const { addStep, diagramEngine, children, diagramId, selectStep } = this.props
+    const { addStep, diagramEngine, children, diagramId } = this.props
     return (
       <div
         className={ cn('flex', 'layout-column') }

@@ -7,7 +7,7 @@ export interface IPipelineGraphStoreState {
       selectedStep: string,
       model: IPipelineConfig,
     }
-  }
+  },
 }
 
 const initialState: IPipelineGraphStoreState = {
