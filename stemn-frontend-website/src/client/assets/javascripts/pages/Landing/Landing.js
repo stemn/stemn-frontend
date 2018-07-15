@@ -17,8 +17,8 @@ import MdLock from 'react-icons/md/input'
 import vidDemo from 'static/video/demo.mp4'
 import Link from 'stemn-shared/misc/Router/Link'
 
-import { schema } from '../../modules/JsonSchemaForm/exampleSchema'
-import { JsonSchemaForm } from '../../modules/JsonSchemaForm'
+import { schema } from         'stemn-shared/misc/JsonSchemaForm/exampleSchema'
+import { JsonSchemaForm } from 'stemn-shared/misc/JsonSchemaForm'
 
 export default class Landing extends Component {
   constructor(props) {
@@ -62,6 +62,9 @@ export default class Landing extends Component {
         </HeroBanner>
         <Container>
           <Row className={ secionClasses }>
+            <JsonSchemaForm
+              schema={ schema }
+            />
             <Col className="flex-gt-xs-50 lg">
               <div className={ classes.timeline }>
                 <img src={ historyCombined } />
@@ -78,10 +81,6 @@ export default class Landing extends Component {
           <Container>
             <Row className={ secionClasses }>
               <Col className="flex-order-xs-2 flex-xs-100 flex-gt-xs-50 lg">
-                <JsonSchemaForm
-                  schema={ schema }
-                  // onSubmit={ () => new Promise() }
-                />
                 <h4 className="text-title-2">Access your files anywhere</h4>
                 <p className="text-title-4">Whether you’re in the office, in the lab, or on the go, preview your files in your browser or any device.</p>
                 <p className="text-title-4">Preview hundreds of different file-types directly in your web browser.</p>

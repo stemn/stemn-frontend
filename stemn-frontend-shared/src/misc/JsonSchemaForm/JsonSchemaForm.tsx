@@ -1,9 +1,9 @@
 import * as React from 'react';
 import Form, { FormProps, ISubmitEvent } from 'react-jsonschema-form';
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
+import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import * as templates from './templates';
 import { fixFormatFields, transformErrors } from './utils'
-import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import * as widgets from './widgets';
 
 export interface ISchemaFormProps<T> {
