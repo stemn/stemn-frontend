@@ -9,7 +9,7 @@ export const CheckboxWidget = (props: WidgetProps & FieldTemplateProps) => {
   const { schema, value } = props
 
   return (
-    <div style={ {margin: '10px'}}>
+    <div style={{ margin: '10px' }}>
       <Checkbox
         title={ 'Default title' }
         value={ value || false }

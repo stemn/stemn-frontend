@@ -2,7 +2,7 @@ import * as React from 'react'
 import { FieldTemplateProps } from 'react-jsonschema-form'
 import { CSSTransitionGroup } from 'react-transition-group'
 import * as cn from 'classnames'
-import * as s from './FieldTemplate.scss'
+import * as s from '../JsonSchemaForm.scss'
 
 export const FieldTemplate = (props : FieldTemplateProps) => {
   const { id, classNames, label, required, rawErrors, rawHelp, children } = props;
@@ -32,11 +32,7 @@ export const FieldTemplate = (props : FieldTemplateProps) => {
         <h3 className={cn(s.main, s.header, {[s.warn] : hasErrors })}> { header } </h3>
       </CSSTransitionGroup>
 
-      <CSSTransitionGroup { ...errorTransition }>
-        <div className={cn(s.main, s.header, {[s.errorBox] : hasErrors })}>
-          { children }
-        </div>
-      </CSSTransitionGroup>
+      { children }
 
       <CSSTransitionGroup { ...errorTransition } >
         { hasErrors

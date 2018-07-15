@@ -30,6 +30,11 @@ export const schema: any = {
                     "format": "color",
                     "default": "#151ce6"
                 },
+                "color_required": {
+                    "title": "color picker",
+                    "type": "string",
+                    "format": "color",
+                },
                 "password_Field": {
                     "type": "string",
                     "minLength": 8,
@@ -40,54 +45,69 @@ export const schema: any = {
                     "type": "string",
                     "format": "data-url"
                 },
+                "data_test_required": {
+                    "type": "string",
+                    "format": "data-url"
+                },
                 "date_test": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "date_test_required": {
                     "type": "string",
                     "format": "date"
                 },
                 "dateTime_test": {
                     "type": "string",
                     "format": "date-time"
+                },
+                "dateTime_test_required": {
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
-            "required": ["password_Field"]
+            "required": ["password_Field", "date_test_required", "dateTime_test_required", "data_test_required", "color_required"]
         },
         "boolean": {
             "type": "object",
             "title": "Boolean fields",
             "properties": {
-              "thisIsADropdownField": {
-                "description": 'Location type.',
-                "enum": [
-                  'Drop Shipper',
-                  'Headquarters',
-                  'Store',
-                  'Warehouse',
-                ],
-                "type": 'string',
-              },
-              "radio": {
-                "type": "boolean",
-                "title": "radio buttons",
-                "description": "This is the radio-description"
-              },
-              "select": {
-                "type": "boolean",
-                "title": "select box",
-                "description": "This is the select-description"
-              }
-            }
-          },
-          "selectWidgetOptions": {
-            "title": "Custom select widget with options",
-            "type": "string",
-            "enum": [
-              "foo",
-              "bar"
-            ],
-            "enumNames": [
-              "Foo",
-              "Bar"
-            ]
-          },
+                "selectWidgetOptions": {
+                    "title": "Custom select widget with options",
+                    "type": "string",
+                    "enum": [
+                        "foo",
+                        "bar"
+                    ],
+                    "enumNames": [
+                        "Foo",
+                        "Bar"
+                    ]
+                },
+                "selectWidgetOptions_required": {
+                    "title": "Custom select widget with options",
+                    "type": "string",
+                    "enum": [
+                        "foo",
+                        "bar"
+                    ],
+                    "enumNames": [
+                        "Foo",
+                        "Bar"
+                    ]
+                },
+                "radio": {
+                    "type": "boolean",
+                    "title": "radio buttons",
+                    "description": "This is the radio-description"
+                },
+                "radio_required": {
+                    "type": "boolean",
+                    "title": "radio buttons",
+                    "description": "This is the radio-description"
+                }
+            },
+            "required": ["radio_required", "selectWidgetOptions_required"]
+        }
     }
 }

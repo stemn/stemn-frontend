@@ -1,2 +1,2 @@
-export * from './transformUiSchema'
+export * from './TransformUiSchema'
 export * from './transformErrors'
