@@ -3,7 +3,7 @@ import { capitalize, flow, lowerCase } from 'lodash/fp'
 import { mapObjIndexed, pipe, values } from 'ramda'
 import * as React from 'react'
 import SimpleTable from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable.jsx'
-import PiplineIcon from '../../PipelineIcon'
+// import PiplineIcon from '../../PipelineIcon'
 import { PipelineGraphPorts } from '../PipelineGraphPorts'
 import { PipelineGraphStepModel } from './'
 import * as s from './PipelineGraphStep.scss'
@@ -39,7 +39,7 @@ export class PipelineGraphStepComponent extends React.Component<IPipelineGraphSt
         <div className={ s.step }>
           <div className={ cn(s.title, 'layout-row layout-align-start-center') }>
             <div className='flex'>{ node.type }</div>
-            <PiplineIcon status='running' />
+            {/* <PiplineIcon status='running' /> */}
           </div>
           <div className={ s.body }>
             { node.extras && node.extras.config && (
