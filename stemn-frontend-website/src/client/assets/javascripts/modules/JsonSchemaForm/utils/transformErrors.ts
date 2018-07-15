@@ -2,7 +2,7 @@ import { AjvError } from 'react-jsonschema-form';
 
 const messages : any = {
   email: 'Please enter a valid email',
-  limit: (length : number) => `The minimum length required is ${length}`,
+  limit: (length : number) => `Minimum length required is ${length}`,
   required: 'This is a required field'
 }
 
