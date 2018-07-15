@@ -1,0 +1,42 @@
+@value warn from 'theme';
+
+.main {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.header {
+  padding: 0px;
+  &.warn {
+    font-weight: bold;
+    color: warn;
+  }
+}
+
+.message {
+  font-size: 11px;
+  margin-top: 5px;
+}
+
+.error {
+  color: warn;
+}
+
+.errorBox {
+  border: 1px solid warn;
+}
+
+.enter, .appear{
+  transition: all 300ms ease;
+  opacity: 0;
+}
+.enterActive, .appearActive{
+  opacity: 1;
+}
+.leave{
+  opacity: 1;
+  transition: all 300ms ease;
+}
+.leaveActive{
+  opacity: 0;
+}

@@ -17,6 +17,9 @@ import MdLock from 'react-icons/md/input'
 import vidDemo from 'static/video/demo.mp4'
 import Link from 'stemn-shared/misc/Router/Link'
 
+import { schema } from         'stemn-shared/misc/JsonSchemaForm/exampleSchema'
+import { JsonSchemaForm } from 'stemn-shared/misc/JsonSchemaForm'
+
 export default class Landing extends Component {
   constructor(props) {
     super(props)
@@ -43,6 +46,7 @@ export default class Landing extends Component {
               Download Now
             </DownloadButton>
           }
+
           <Link
             className={ classes.screenshot }
             name="fileRoute"
@@ -58,6 +62,9 @@ export default class Landing extends Component {
         </HeroBanner>
         <Container>
           <Row className={ secionClasses }>
+            <JsonSchemaForm
+              schema={ schema }
+            />
             <Col className="flex-gt-xs-50 lg">
               <div className={ classes.timeline }>
                 <img src={ historyCombined } />

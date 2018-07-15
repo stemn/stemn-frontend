@@ -14,7 +14,7 @@ states: true || false || 'other';
 
 export default class Checkbox extends React.Component {
   render() {
-    const { value, model, title, circle, className, changeAction } = this.props
+    const { value, model, title, circle, className, changeAction, ...otherProps } = this.props
     const id = Math.random().toString(36).substring(7)
     const statusClass = value === 'other' ? 'semi' : (value === true ? 'checked' : '')
     return (
@@ -29,6 +29,7 @@ export default class Checkbox extends React.Component {
           model={ model }
           value={ value }
           changeAction={ changeAction }
+          { ...otherProps }
         />
         <label htmlFor={ id } />
       </div>

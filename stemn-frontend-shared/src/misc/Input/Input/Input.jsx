@@ -59,7 +59,7 @@ export class Component extends React.Component {
   render() {
     const otherProps = omit(this.props, ['dispatch', 'model', 'value', 'changeAction'])
     const { value } = this.state
-    return <input ref="input" { ...otherProps } onChange={ this.onChange } value={ value } />
+    return <input ref="input" onChange={ this.onChange } value={ value } { ...otherProps } />
   }
 }
 
