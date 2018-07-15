@@ -6,8 +6,6 @@
 }
 
 .header {
-  margin-top: 10px;
-  margin-bottom: 5px;
   padding: 0px;
   &.warn {
     font-weight: bold;
@@ -15,10 +13,17 @@
   }
 }
 
-.error {
+.message {
   font-size: 11px;
+  margin-top: 5px;
+}
+
+.error {
   color: warn;
-  margin-bottom: 5px;
+}
+
+.errorBox {
+  border: 1px solid warn;
 }
 
 .enter, .appear{

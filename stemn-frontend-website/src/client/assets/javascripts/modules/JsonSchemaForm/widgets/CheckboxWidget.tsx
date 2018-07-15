@@ -6,16 +6,19 @@ import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox'
 
 export const CheckboxWidget = (props: WidgetProps & FieldTemplateProps) => {
 
-  const value = !!props.value;
+  const { schema, value } = props
 
   return (
-    <div style={{ borderBottom: '1px solid black', }}>
+    <div style={ {margin: '10px'}}>
       <Checkbox
-        required={props.required}
-        value={ value }
-        title={ value ? 'Deselect change' : 'Select change' }
-        onChange={(event : React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)}
+        title={ 'Default title' }
+        value={ value || false }
+        onChange={() => {
+          const newValue = !props.value
+          props.onChange(newValue)
+        }}
       />
+      <span> { schema.description || schema.title } </span>
     </div>
   );
 };
