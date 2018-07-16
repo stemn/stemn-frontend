@@ -1,11 +1,11 @@
 import { DiagramModel } from 'mrblenny-storm-react-diagrams'
-import { IPipelineConfig } from '../types'
 import { indexBy, mapObjIndexed } from 'ramda'
+import { IPipelineConfig } from '../types'
 
 type ISerializedDiagram = ReturnType<DiagramModel['serializeDiagram']>
 
 const serializePorts = (ports: any[]) => {
-  const portsIndexed = indexBy(item => item.id, ports)
+  const portsIndexed = indexBy((item) => item.id, ports)
   return mapObjIndexed((port) => ({
     type: port.type,
     value: port.value,
@@ -13,8 +13,8 @@ const serializePorts = (ports: any[]) => {
 }
 
 const serializeNodes = (model: ISerializedDiagram): IPipelineConfig['steps'] => {
-  const nodesById = indexBy(item => item.id, model.nodes)
-  return mapObjIndexed(node => ({
+  const nodesById = indexBy((item) => item.id, model.nodes)
+  return mapObjIndexed((node) => ({
     position: {
       x: node.x,
       y: node.y,
@@ -26,7 +26,7 @@ const serializeNodes = (model: ISerializedDiagram): IPipelineConfig['steps'] => 
   }), nodesById)
 }
 
-const serializeLinks = (model: ISerializedDiagram): IPipelineConfig['links'] => model.links.map(link => ({
+const serializeLinks = (model: ISerializedDiagram): IPipelineConfig['links'] => model.links.map((link) => ({
   from: `${link.source}.ports.${link.sourcePort}`,
   to: `${link.target}.ports.${link.targetPort}`,
 }))

@@ -4,6 +4,6 @@
   ],
   "rules": {
     "no-implicit-dependencies": [false, "dev"],
-    "semicolon": [true, "never"],
+    "semicolon": [true, "never"]
   }
 }

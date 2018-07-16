@@ -1,8 +1,8 @@
-import { DiagramModel, DiagramEngine } from 'mrblenny-storm-react-diagrams'
-import { IPipelineConfig, IPipelineConfigStepPort } from '../types'
-import { mapObjIndexed, values } from 'ramda'
 import { get } from 'lodash'
+import { DiagramEngine, DiagramModel } from 'mrblenny-storm-react-diagrams'
+import { mapObjIndexed, values } from 'ramda'
 import * as uuid from 'uuid/v4'
+import { IPipelineConfig, IPipelineConfigStepPort } from '../types'
 
 type ISerializedDiagram = ReturnType<DiagramModel['serializeDiagram']>
 type IPipelineConfigWithIds = ReturnType<typeof addIdsToPipeline>
@@ -24,14 +24,13 @@ const emptyPoint = () => ({
   selected: false,
   id: uuid(),
   y: 0,
-  x: 0
+  x: 0,
 })
-
 
 /**
  * Deserialize the links
  */
-const deserializeLinks = (pipeline: IPipelineConfigWithIds): ISerializedDiagram['links'] => pipeline.links.map(link => {
+const deserializeLinks = (pipeline: IPipelineConfigWithIds): ISerializedDiagram['links'] => pipeline.links.map((link) => {
   const fromSplit = link.from.split('.')
   const toSplit = link.to.split('.')
 
@@ -46,7 +45,7 @@ const deserializeLinks = (pipeline: IPipelineConfigWithIds): ISerializedDiagram[
     points: [emptyPoint(), emptyPoint()],
     labels: [],
     extras: {},
-    width: 2
+    width: 2,
   }
 })
 
@@ -97,7 +96,7 @@ export const deserializePipeline = (diagramId: string, pipeline: IPipelineConfig
 
   // Add ids to the ports and links
   const pipelineWithIds = addIdsToPipeline(pipeline)
-  
+
   // Get the serialized diagram
   const diagram: ISerializedDiagram = {
     id: diagramId,
@@ -108,7 +107,7 @@ export const deserializePipeline = (diagramId: string, pipeline: IPipelineConfig
     links: deserializeLinks(pipelineWithIds),
     nodes: deserializeNodes(pipelineWithIds),
   }
-  
+
   // Convert it to the model
   const model = new DiagramModel()
   model.deSerializeDiagram(diagram, diagramEngine)
