@@ -1,10 +1,15 @@
 import * as React from 'react'
-import { Col, Row } from 'stemn-shared/misc/Layout/index.js'
-import SectionTitle from 'stemn-shared/misc/Titles/SectionTitle/SectionTitle.jsx'
-import * as s from './PipelineGraphSidebar.scss'
-import { PipelineGraphSidebarWidget } from './PipelineGraphSidebarWidget'
-import { IPipelineConfigStepBase } from '../types'
 import Input from 'stemn-shared/misc/Input/Input/Input'
+import { JsonSchemaForm } from 'stemn-shared/misc/JsonSchemaForm'
+import { schema } from 'stemn-shared/misc/JsonSchemaForm/exampleSchema'
+import { Col, Row } from 'stemn-shared/misc/Layout/index.js'
+import {
+  PipelineGraphSidebarWidget,
+} from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphSidebar/PipelineGraphSidebarWidget'
+import { IPipelineConfigStepBase } from 'stemn-shared/misc/Pipelines/PipelineGraph/types'
+import SectionTitle from 'stemn-shared/misc/Titles/SectionTitle/SectionTitle.jsx'
+
+import * as s from './PipelineGraphSidebar.scss'
 
 export interface IPipelineGraphSidebarProps {
   diagramId: string,
@@ -20,13 +25,17 @@ export class PipelineGraphSidebarComponent extends React.PureComponent<IPipeline
         <div>
           <SectionTitle className={ s.sidebarTitle } style={{ marginTop: '0px' }}>Edit Node</SectionTitle>
           { selectedStep.type }
+          <JsonSchemaForm
+            schema={ schema }
+            onSubmit={ (data) => data }
+          />
         </div>
       )
     } else {
       return (
         <div>
           <SectionTitle className={ s.sidebarTitle } style={{ marginTop: '0px' }}>Name</SectionTitle>
-          <Input className="dr-input" model="test" />
+          <Input className='dr-input' model='test' />
           <SectionTitle className={ s.sidebarTitle }>Triggers</SectionTitle>
           <Row className='layout-row layout-wrap sm'>
             {[1,2,3].map((item) => <Col className='sm' key={ item }><PipelineGraphSidebarWidget /></Col>)}

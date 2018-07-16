@@ -1,11 +1,11 @@
 import { get } from 'lodash'
 import { connect } from 'react-redux'
-import { PipelineGraphSidebarComponent } from './PipelineGraphSidebar'
 import { IPipelineGraphStoreState } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraph.reducer'
+import { PipelineGraphSidebarComponent } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphSidebar/PipelineGraphSidebar'
 
 const stateToProps = (
-  { pipelineGraph }: { pipelineGraph: IPipelineGraphStoreState }, 
-  { diagramId }: { diagramId: string }
+  { pipelineGraph }: { pipelineGraph: IPipelineGraphStoreState },
+  { diagramId }: { diagramId: string },
 ) => {
   const diagram = pipelineGraph.diagrams[diagramId] || {}
   return {

@@ -21,13 +21,13 @@ class PopoverDropdown extends Component {
         return currentOption.name
       } else if (empty) {
         return null
-      } 
+      }
       return placeholder || 'none'
     }
 
     return (
       <PopoverFit { ...otherProps }>
-        <Button className={ cn('layout-row layout-align-start-center rel-box light', className) } style={ style }>
+        <Button className={ cn('layout-row layout-align-start-center rel-box light', className) } style={ style } type="button">
           <LoadingOverlay className={ classes.loading } show={ loading } linear hideBg />
           { children }
           { getInnerText() }
@@ -44,7 +44,7 @@ class PopoverDropdown extends Component {
                 option.onClick()
               }
               if (onChange) {
-                onChange()
+                onChange(option)
               }
             }
 

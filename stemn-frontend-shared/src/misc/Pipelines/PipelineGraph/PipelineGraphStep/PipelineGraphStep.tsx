@@ -2,19 +2,19 @@ import * as cn from 'classnames'
 import { capitalize, flow, lowerCase } from 'lodash/fp'
 import { mapObjIndexed, pipe, values } from 'ramda'
 import * as React from 'react'
-import SimpleTable from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable.jsx'
+import { selectStep as selectStepType } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraph.actions'
 // import PiplineIcon from '../../PipelineIcon'
-import { PipelineGraphPorts } from '../PipelineGraphPorts'
-import { PipelineGraphStepModel } from './'
+import { PipelineGraphPorts } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphPorts'
+import { PipelineGraphStepModel } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphStep'
+import SimpleTable from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable.jsx'
 import * as s from './PipelineGraphStep.scss'
-import { selectStep as selectStepType } from '../PipelineGraph.actions'
 
 const prettyKey = flow(lowerCase, capitalize)
 
 export interface IPipelineGraphStepProps {
-	node: PipelineGraphStepModel,
-	isSelected: boolean,
-	selectStep: typeof selectStepType,
+  node: PipelineGraphStepModel,
+  isSelected: boolean,
+  selectStep: typeof selectStepType,
 }
 
 const mapTableRows = pipe(
@@ -31,7 +31,7 @@ export class PipelineGraphStepComponent extends React.Component<IPipelineGraphSt
     const diagramId = node.parent.id
 
     return (
-      <div 
+      <div
         className={ cn(s.outer, { [s.selected]: isSelected }) }
         onClick={ () => selectStep({ diagramId, stepId: node.id }) }
       >

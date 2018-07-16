@@ -1,5 +1,5 @@
-import { deserializePipeline, serializePipeline, createDiagramEngine } from './'
-import { pipelineConfigFixture } from '../fixtures'
+import { pipelineConfigFixture } from 'stemn-shared/misc/Pipelines/PipelineGraph/fixtures'
+import { createDiagramEngine, deserializePipeline, serializePipeline } from 'stemn-shared/misc/Pipelines/PipelineGraph/utils'
 
 describe('deserializePipeline', () => {
   it('can deserialize and reserialize a pipeline', () => {

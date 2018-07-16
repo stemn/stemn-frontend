@@ -1,12 +1,12 @@
 import { connect } from 'react-redux'
-import { PipelineGraphStepComponent } from './PipelineGraphStep'
+import { selectStep } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraph.actions'
 import { IPipelineGraphStoreState } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraph.reducer'
+import { PipelineGraphStepComponent } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphStep/PipelineGraphStep'
 import { PipelineGraphStepModel } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphStep/PipelineGraphStep.model'
-import { selectStep } from '../PipelineGraph.actions'
 
 const stateToProps = (
-  { pipelineGraph }: { pipelineGraph: IPipelineGraphStoreState }, 
-  { node }: { node: PipelineGraphStepModel}
+  { pipelineGraph }: { pipelineGraph: IPipelineGraphStoreState },
+  { node }: { node: PipelineGraphStepModel },
 ) => ({
   isSelected: pipelineGraph.diagrams[node.parent.id].selectedStep === node.id,
 })

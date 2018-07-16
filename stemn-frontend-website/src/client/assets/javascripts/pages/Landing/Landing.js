@@ -43,6 +43,7 @@ export default class Landing extends Component {
               Download Now
             </DownloadButton>
           }
+
           <Link
             className={ classes.screenshot }
             name="fileRoute"

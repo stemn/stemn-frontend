@@ -6,7 +6,7 @@ export interface IPipelineGraphStoreState {
     [diagramId: string]: {
       selectedStep: string,
       model: IPipelineConfig,
-    }
+    },
   },
 }
 
@@ -15,8 +15,8 @@ const initialState: IPipelineGraphStoreState = {
 }
 
 export default (state: IPipelineGraphStoreState = initialState, action) => {
-  switch (action.type) { 
-    case 'PIPELINE_DIAGRAM/INITIALISE_MODEL': 
+  switch (action.type) {
+    case 'PIPELINE_DIAGRAM/INITIALISE_MODEL':
       return i.assocIn(state, ['diagrams', action.payload.diagramId, 'model'], action.payload.model)
 
     case 'PIPELINE_DIAGRAM/SELECT_STEP':
@@ -24,7 +24,7 @@ export default (state: IPipelineGraphStoreState = initialState, action) => {
 
     case 'PIPELINE_DIAGRAM/ADD_STEP':
       return i.assocIn(state, ['diagrams', action.payload.diagramId, 'model', 'steps', action.payload.stepId], action.payload.step)
-    
+
     default:
       return state
   }

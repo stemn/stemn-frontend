@@ -1,6 +1,6 @@
 import { DiagramModel } from 'mrblenny-storm-react-diagrams'
 import { indexBy, mapObjIndexed } from 'ramda'
-import { IPipelineConfig } from '../types'
+import { IPipelineConfig } from 'stemn-shared/misc/Pipelines/PipelineGraph/types'
 
 type ISerializedDiagram = ReturnType<DiagramModel['serializeDiagram']>
 

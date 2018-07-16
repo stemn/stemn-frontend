@@ -1,4 +1,4 @@
-import { IPipelineConfig } from '../types'
+import { IPipelineConfig } from 'stemn-shared/misc/Pipelines/PipelineGraph/types'
 
 export const pipelineConfigFixture: IPipelineConfig = {
   name: 'Some pipeline',

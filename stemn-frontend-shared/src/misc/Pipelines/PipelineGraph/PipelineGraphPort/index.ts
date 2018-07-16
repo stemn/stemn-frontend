@@ -1,3 +1,3 @@
-export * from './PipelineGraphPort.factory'
-export * from './PipelineGraphPort.model'
-export * from './PipelineGraphPort'
+export * from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphPort/PipelineGraphPort.factory'
+export * from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphPort/PipelineGraphPort.model'
+export * from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphPort/PipelineGraphPort'

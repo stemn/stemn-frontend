@@ -1,1 +1,1 @@
-export * from './PipelineGraphSidebarWidget'
+export * from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphSidebar/PipelineGraphSidebarWidget/PipelineGraphSidebarWidget'

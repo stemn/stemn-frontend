@@ -1,8 +1,8 @@
 import { get } from 'lodash'
 import { DiagramEngine, DiagramModel } from 'mrblenny-storm-react-diagrams'
 import { mapObjIndexed, values } from 'ramda'
+import { IPipelineConfig, IPipelineConfigStepPort } from 'stemn-shared/misc/Pipelines/PipelineGraph/types'
 import * as uuid from 'uuid/v4'
-import { IPipelineConfig, IPipelineConfigStepPort } from '../types'
 
 type ISerializedDiagram = ReturnType<DiagramModel['serializeDiagram']>
 type IPipelineConfigWithIds = ReturnType<typeof addIdsToPipeline>

@@ -1,10 +1,10 @@
-import * as React from 'react'
 import * as cn from 'classnames'
 import { DiagramEngine } from 'mrblenny-storm-react-diagrams'
-import { 
+import * as React from 'react'
+import {
   addStep as addStepType,
   selectStep as selectStepType,
-} from '../PipelineGraph.actions'
+} from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraph.actions'
 
 export interface IPipelineGraphDroplayerProps {
   diagramId: string,
@@ -15,7 +15,7 @@ export interface IPipelineGraphDroplayerProps {
 }
 
 export class PipelineGraphDroplayer extends React.PureComponent<IPipelineGraphDroplayerProps> {
-  render() {
+  public render () {
     const { addStep, diagramEngine, children, diagramId } = this.props
     return (
       <div
@@ -33,16 +33,16 @@ export class PipelineGraphDroplayer extends React.PureComponent<IPipelineGraphDr
                 x: points.x,
                 y: points.y,
               },
-              ports: {}
-            }
+              ports: {},
+            },
           })
-          
+
         } }
         onDragOver={ (event) => {
           event.preventDefault()
         } }
       >
-        {/* <div 
+        {/* <div
           onClick={ () => selectStep({ diagramId, stepId: undefined })}
           style={{
             position: 'absolute',
@@ -56,5 +56,5 @@ export class PipelineGraphDroplayer extends React.PureComponent<IPipelineGraphDr
         { children }
       </div>
     )
-  }  
+  }
 }

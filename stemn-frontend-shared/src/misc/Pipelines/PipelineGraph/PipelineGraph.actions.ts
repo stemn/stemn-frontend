@@ -3,7 +3,7 @@ export const initialiseModel = ({ diagramId, model }) => ({
   payload: {
     diagramId,
     model,
-  }
+  },
 })
 
 export const addStep = ({ diagramId, stepId, step }) => ({
@@ -12,7 +12,7 @@ export const addStep = ({ diagramId, stepId, step }) => ({
     diagramId,
     stepId,
     step,
-  }
+  },
 })
 
 export const selectStep = ({ diagramId, stepId }) => ({
@@ -20,5 +20,5 @@ export const selectStep = ({ diagramId, stepId }) => ({
   payload: {
     diagramId,
     stepId,
-  }
+  },
 })
