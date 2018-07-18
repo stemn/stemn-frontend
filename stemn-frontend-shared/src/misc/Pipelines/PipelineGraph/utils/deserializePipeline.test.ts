@@ -3,7 +3,7 @@ import { createDiagramEngine, deserializePipeline, serializePipeline } from 'ste
 
 describe('deserializePipeline', () => {
   it('can deserialize and reserialize a pipeline', () => {
-    const diagramEngine = createDiagramEngine()
+    const diagramEngine = createDiagramEngine([])
     const diagram = deserializePipeline('diagramId', pipelineConfigFixture, diagramEngine)
     expect(serializePipeline(diagram, pipelineConfigFixture.name))
       .toEqual(pipelineConfigFixture)

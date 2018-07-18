@@ -9,6 +9,7 @@ const stateToProps = (
   { node }: { node: PipelineGraphStepModel },
 ) => ({
   isSelected: pipelineGraph.diagrams[node.parent.id].selectedStep === node.id,
+  stepInfo: pipelineGraph.steps.find((step) => step.type === node.type),
 })
 
 const dispatchToProps = {

@@ -1,20 +1,28 @@
 import * as cn from 'classnames'
 import * as React from 'react'
+import { IStep } from 'stemn-shared/misc/Pipelines/PipelineGraph/types'
 import * as s from './PipelineGraphSidebarWidget.scss'
 
-export const PipelineGraphSidebarWidget = () => {
+export interface IPipelineGraphSidebarWidgetProps {
+  step: IStep,
+}
+
+export const PipelineGraphSidebarWidget = (props: IPipelineGraphSidebarWidgetProps) => {
+  const { step } = props
   return (
     <div className={ cn(s.sidebarWidget, 'layout-column', 'layout-align-center-center') }>
       <div
         className={ cn(s.icon, 'layout-column', 'layout-align-center-center') }
         draggable
         onDragStart={ (event) => {
-          event.dataTransfer.setData('storm-diagram-node', JSON.stringify({ nodeType: 'some_type' }))
+          event.dataTransfer.setData('storm-diagram-node', JSON.stringify({
+            nodeType: step.type,
+          }))
         } }
       >
-        W
+        <step.icon />
       </div>
-      <div>Chron Trigger</div>
+      <div>{ step.name }</div>
     </div>
   )
 }

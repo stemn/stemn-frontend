@@ -12,8 +12,14 @@
   height: 65px;
   margin-bottom: 10px;
   transition: 0.3s ease all;
+
   &:hover {
     box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.15);
     transform: translateY(-2px);
+  }
+
+  svg {
+    width: 30px;
+    height: 30px;
   }
 }

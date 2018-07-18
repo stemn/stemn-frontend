@@ -11,6 +11,7 @@ const stateToProps = (
   return {
     diagram,
     selectedStep: get(diagram, ['model', 'steps', diagram.selectedStep]),
+    steps: pipelineGraph.steps,
   }
 }
 

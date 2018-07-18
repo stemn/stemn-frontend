@@ -10,12 +10,12 @@ import {
 } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraph.actions'
 import { PipelineGraphDroplayer } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphDroplayer'
 import { PipelineGraphStepModel } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphStep'
-import { IPipelineConfig } from 'stemn-shared/misc/Pipelines/PipelineGraph/types'
+import { IPipelineConfig, IStep } from 'stemn-shared/misc/Pipelines/PipelineGraph/types'
 import { createDiagramEngine, deserializePipeline, serializePipeline } from 'stemn-shared/misc/Pipelines/PipelineGraph/utils'
 import './PipelineGraph.global.scss'
 import * as s from './PipelineGraph.scss'
 
-export interface PipelineGraphProps {
+export interface IPipelineGraphProps {
   diagramId: string,
   pipelineConfig: string,
   readOnly: boolean,
@@ -28,20 +28,21 @@ export interface PipelineGraphProps {
   initialiseModel: typeof initialiseModelType,
   addStep: typeof addStepType,
   selectStep: typeof selectStepType,
+  steps: IStep[],
 }
 
-export interface PipelineGraphState {
+export interface IPipelineGraphState {
   diagramEngine: DiagramEngine,
   diagramModel?: DiagramModel,
   selected?: PipelineGraphStepModel,
 }
 
-export class PipelineGraphComponent extends React.Component<PipelineGraphProps, PipelineGraphState> {
-  constructor (props: PipelineGraphProps) {
+export class PipelineGraphComponent extends React.Component<IPipelineGraphProps, IPipelineGraphState> {
+  constructor (props: IPipelineGraphProps) {
     super(props)
-    const { pipelineConfig, initialiseModel, diagramId } = this.props
+    const { pipelineConfig, initialiseModel, diagramId, steps } = this.props
 
-    const diagramEngine = createDiagramEngine()
+    const diagramEngine = createDiagramEngine(steps)
     const pipelineConfigJson = typeof pipelineConfig === 'object'
       ? pipelineConfig
       : safeLoad(pipelineConfig)
@@ -52,7 +53,7 @@ export class PipelineGraphComponent extends React.Component<PipelineGraphProps, 
       diagramEngine,
     }
   }
-  public componentWillReceiveProps (nextProps: PipelineGraphProps) {
+  public componentWillReceiveProps (nextProps: IPipelineGraphProps) {
     const { diagramEngine } = this.state
     const nextModel = get(nextProps, 'diagram.model')
     const currentModel = get(this.props, 'diagram.model')

@@ -1,5 +1,10 @@
 import * as i from 'icepick'
-import { IPipelineConfig } from 'stemn-shared/misc/Pipelines/PipelineGraph/types'
+import { IPipelineConfig, IStep } from 'stemn-shared/misc/Pipelines/PipelineGraph/types'
+
+import IconUpload from 'react-icons/go/cloud-upload'
+import MdCommit from 'react-icons/go/git-commit'
+import MdTime from 'react-icons/md/access-time'
+import MdMenu from 'react-icons/md/menu'
 
 export interface IPipelineGraphStoreState {
   diagrams: {
@@ -8,10 +13,92 @@ export interface IPipelineGraphStoreState {
       model: IPipelineConfig,
     },
   },
+  steps: IStep[],
 }
 
 const initialState: IPipelineGraphStoreState = {
   diagrams: {},
+  steps: [{
+    type: 'stemn/upload',
+    name: 'Upload files',
+    category: 'action',
+    icon: IconUpload,
+  }, {
+    type: 'stemn/file-revision',
+    name: 'File Revision',
+    category: 'trigger',
+    icon: IconUpload,
+  }, {
+    type: 'stemn/file-commit',
+    name: 'File Commit',
+    category: 'trigger',
+    icon: MdCommit,
+  },  {
+    type: 'stemn/webhook-trigger',
+    name: 'Webhook Trigger',
+    category: 'trigger',
+    icon: MdMenu,
+  }, {
+    type: 'stemn/chron',
+    name: 'Time of day',
+    category: 'trigger',
+    icon: MdTime,
+  }, {
+    type: 'stemn/and-condition',
+    name: 'And',
+    category: 'condition',
+    icon: MdMenu,
+  }, {
+    type: 'stemn/throttle-condition',
+    name: 'Throttle',
+    category: 'condition',
+    icon: MdMenu,
+  }, {
+    type: 'stemn/file-is-condition',
+    name: 'File is',
+    category: 'condition',
+    icon: MdMenu,
+  }, {
+    type: 'stemn/email-confirm',
+    name: 'Email Confirm',
+    category: 'condition',
+    icon: MdMenu,
+  }, {
+    type: 'stemn/file-changed',
+    name: 'File changed',
+    category: 'condition',
+    icon: MdMenu,
+  }, {
+    type: 'stemn/send-email',
+    name: 'Send email',
+    category: 'action',
+    icon: MdMenu,
+  }, {
+    type: 'stemn/send-slack',
+    name: 'Send slack',
+    category: 'action',
+    icon: MdMenu,
+  }, {
+    type: 'stemn/convert-file',
+    name: 'Convert file',
+    category: 'action',
+    icon: MdMenu,
+  }, {
+    type: 'stemn/render',
+    name: 'Render CAD model',
+    category: 'action',
+    icon: MdMenu,
+  }, {
+    type: 'stemn/3d-print',
+    name: '3D print',
+    category: 'action',
+    icon: MdMenu,
+  }, {
+    type: 'stemn/convert-cad-query',
+    name: 'Convert CAD query',
+    category: 'action',
+    icon: MdMenu,
+  }],
 }
 
 export default (state: IPipelineGraphStoreState = initialState, action) => {

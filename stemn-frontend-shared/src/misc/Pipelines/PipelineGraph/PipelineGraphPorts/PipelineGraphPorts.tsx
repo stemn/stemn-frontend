@@ -1,3 +1,4 @@
+import * as cn from 'classnames'
 import { PortModel } from 'mrblenny-storm-react-diagrams'
 import { filter, map, pipe, values } from 'ramda'
 import * as React from 'react'
@@ -15,7 +16,7 @@ export class PipelineGraphPorts extends React.PureComponent<IPipelineGraphPortsP
   public render () {
     const { node, type, isSelected } = this.props
     return (
-      <div className={ s.ports }>
+      <div className={ cn(s.ports, type === 'output' ? s.end : '') }>
         { pipe(
             values,
             filter((port: PortModel) => port.type === type) as any,

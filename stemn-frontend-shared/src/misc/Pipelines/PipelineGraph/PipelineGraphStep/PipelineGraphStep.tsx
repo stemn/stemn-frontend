@@ -6,6 +6,7 @@ import { selectStep as selectStepType } from 'stemn-shared/misc/Pipelines/Pipeli
 // import PiplineIcon from '../../PipelineIcon'
 import { PipelineGraphPorts } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphPorts'
 import { PipelineGraphStepModel } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphStep'
+import { IStep } from 'stemn-shared/misc/Pipelines/PipelineGraph/types'
 import SimpleTable from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable.jsx'
 import * as s from './PipelineGraphStep.scss'
 
@@ -13,6 +14,7 @@ const prettyKey = flow(lowerCase, capitalize)
 
 export interface IPipelineGraphStepProps {
   node: PipelineGraphStepModel,
+  stepInfo: IStep,
   isSelected: boolean,
   selectStep: typeof selectStepType,
 }
@@ -27,7 +29,7 @@ const mapTableRows = pipe(
 
 export class PipelineGraphStepComponent extends React.Component<IPipelineGraphStepProps> {
   public render () {
-    const { node, isSelected, selectStep } = this.props
+    const { node, isSelected, selectStep, stepInfo } = this.props
     const diagramId = node.parent.id
 
     return (
@@ -38,6 +40,7 @@ export class PipelineGraphStepComponent extends React.Component<IPipelineGraphSt
         <PipelineGraphPorts type='input' node={ node } isSelected={ isSelected } />
         <div className={ s.step }>
           <div className={ cn(s.title, 'layout-row layout-align-start-center') }>
+            <stepInfo.icon className={ s.icon } />
             <div className='flex'>{ node.type }</div>
             {/* <PiplineIcon status='running' /> */}
           </div>

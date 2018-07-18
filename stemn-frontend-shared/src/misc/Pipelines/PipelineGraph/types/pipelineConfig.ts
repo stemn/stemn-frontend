@@ -4,7 +4,7 @@
  * - file revision
  * - file commit
  * - webhook
- * 
+ *
  * Conditions
  * - and
  * - throttle
@@ -12,7 +12,7 @@
  * - email confirm
  * - slack confirm
  * - file changed
- * 
+ *
  * Actions
  * - send email
  * - send slack notification
@@ -40,7 +40,7 @@ export interface IPipelineConfigStepBase {
    * Generic step configuration
    */
   config?: {
-    [key: string]: string
+    [key: string]: string,
   },
   /**
    * Command to run in the docker container
@@ -53,8 +53,8 @@ export interface IPipelineConfigStepBase {
   ports: {
     [portId: string]: IPipelineConfigStepPort,
   },
-  /** 
-   * Files 
+  /**
+   * Files
    * File Glob selectors for files which will be accessible in this step
    */
   files?: string | string[],
@@ -66,7 +66,7 @@ export interface IPipelineConfigStepBase {
     x: number,
     y: number,
   },
-  /** 
+  /**
    * Allow Failure
    * If true, this step can fail and the pipeline will not cancel. The next step will be run.
    */
@@ -79,12 +79,12 @@ export interface IPipelineConfigLink {
    * Links must go from an output port to an input port
    * @pattern: .*?\.ports\..*
    */
-  from: string;
+  from: string
   /**
    * To port
    * @pattern: .*?\.ports\..*
    */
-  to: string;
+  to: string
 }
 
 export interface IPipelineConfig {
@@ -93,4 +93,11 @@ export interface IPipelineConfig {
     [id: string]: IPipelineConfigStepBase,
   },
   links: IPipelineConfigLink[],
+}
+
+export interface IStep {
+  type: string,
+  name: string,
+  category: string,
+  icon: any,
 }

@@ -9,6 +9,12 @@
   }
 }
 
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
 .step {
   background: white;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -18,7 +24,7 @@
 
 .title {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  padding: 5px 10px 5px 15px;
+  padding: 5px 10px 5px 5px;
 }
 
 .body {
