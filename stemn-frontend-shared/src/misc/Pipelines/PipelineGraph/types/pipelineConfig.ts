@@ -100,4 +100,5 @@ export interface IStep {
   name: string,
   category: string,
   icon: any,
+  schema?: any,
 }

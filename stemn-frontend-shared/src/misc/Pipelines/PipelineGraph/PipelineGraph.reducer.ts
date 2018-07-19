@@ -6,6 +6,21 @@ import MdCommit from 'react-icons/go/git-commit'
 import MdTime from 'react-icons/md/access-time'
 import MdMenu from 'react-icons/md/menu'
 
+const schema = {
+  $schema: 'http://json-schema.org/draft-06/schema#',
+  title: 'Hmm',
+  type: 'object',
+  required: ['email'],
+  properties: {
+    email: {
+      type: 'string',
+    },
+    body: {
+      type: 'string',
+    },
+  },
+}
+
 export interface IPipelineGraphStoreState {
   diagrams: {
     [diagramId: string]: {
@@ -23,6 +38,7 @@ const initialState: IPipelineGraphStoreState = {
     name: 'Upload files',
     category: 'action',
     icon: IconUpload,
+    schema,
   }, {
     type: 'stemn/file-revision',
     name: 'File Revision',
