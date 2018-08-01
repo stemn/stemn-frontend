@@ -128,7 +128,7 @@ jobs:
       - attach_workspace:
           at: ~/stemn-frontend
       - run: cd stemn-frontend-website; npm i cypress;
-      - run: cd stemn-frontend-website; npm run serve:wait; $(npm bin)/cypress run --spec 'cypress/integration/index.js';
+      - run: cd stemn-frontend-website; npm run serve:wait; $(npm bin)/cypress run --record --key 8bbd5d77-97d8-43ff-b823-34255762fcf5;
 
   deploy_website:
 
