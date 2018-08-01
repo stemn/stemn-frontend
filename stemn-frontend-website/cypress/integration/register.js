@@ -1,14 +1,17 @@
-const url = 'http://localhost:3000/register'
+const url = 'http://localhost:3000'
 import { elByPh } from '../utils'
+
+const email = `e2e-tester-${new Date().getTime()}@stemn.com`
+const password = 'tester'
 
 describe('Register and onboard', () => {
   it('Should fill out name, email and password', () => {
-    cy.visit(url)
+    cy.visit(`${url}/register`)
     cy.contains('Register')
     cy.get(elByPh('input', 'First name')).type('E2E')
     cy.get(elByPh('input', 'Last name')).type('Tester')
-    cy.get(elByPh('input', 'Email')).type(`e2e-tester-${new Date().getTime()}@stemn.com`)
-    cy.get(elByPh('input', 'Password')).type('password')
+    cy.get(elByPh('input', 'Email')).type(email)
+    cy.get(elByPh('input', 'Password')).type(password)
     cy.get('button').contains('Register').click()
     cy.location('href').should('include', '/onboarding')
   })
@@ -36,6 +39,17 @@ describe('Register and onboard', () => {
   it('Should have a link to the explore page', () => {
     cy.contains('projects or users.').click()
     cy.location('href').should('include', '/explore')
+  })
+})
+
+describe('Login', () => {
+  it('Should fill out the email and password', () => {
+    cy.visit(`${url}/login`)
+    cy.contains('Sign In')
+    cy.get(elByPh('input', 'Email')).type(email)
+    cy.get(elByPh('input', 'Password')).type(password)
+    cy.get('button').contains('Sign In').click()
+    cy.contains('Dashboard')
   })
 })
 

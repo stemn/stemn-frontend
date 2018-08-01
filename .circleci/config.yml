@@ -128,7 +128,7 @@ jobs:
       - attach_workspace:
           at: ~/stemn-frontend
       - run: cd stemn-frontend-website; npm i cypress;
-      - run: cd stemn-frontend-website; npm run serve:wait; $(npm bin)/cypress run;
+      - run: cd stemn-frontend-website; npm run serve:wait; $(npm bin)/cypress run --spec 'cypress/integration/index.js';
 
   deploy_website:
 
@@ -178,9 +178,9 @@ workflows:
       - build_desktop:
           requires:
             - install_desktop
-      # - test_website_e2e:
-      #     requires:
-      #       - build_website
+      - test_website_e2e:
+          requires:
+            - build_website
       - deploy_website:
           requires: 
             - build_website
