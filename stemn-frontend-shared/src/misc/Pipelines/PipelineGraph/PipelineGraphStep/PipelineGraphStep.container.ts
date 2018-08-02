@@ -4,13 +4,15 @@ import { selectStep } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGr
 import { IPipelineGraphStoreState } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraph.reducer'
 import { IPipelineGraphStepProps, PipelineGraphStepComponent } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphStep/PipelineGraphStep'
 import { PipelineGraphStepModel } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphStep/PipelineGraphStep.model'
+import { IStep } from 'stemn-shared/misc/Pipelines/PipelineGraph/types'
 
 const stateToProps = (
   { pipelineGraph }: { pipelineGraph: IPipelineGraphStoreState },
   { node }: { node: PipelineGraphStepModel },
 ) => ({
   isSelected: pipelineGraph.diagrams[node.parent.id].selectedStep === node.id,
-  stepInfo: pipelineGraph.steps.find((step) => step.type === node.type),
+  stepInfo: pipelineGraph.steps.find((step) => step.type === node.type) as IStep,
+  node,
 })
 
 const dispatchToProps = {

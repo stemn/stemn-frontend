@@ -14,7 +14,7 @@ const prettyKey = flow(lowerCase, capitalize)
 
 export interface IPipelineGraphStepProps {
   node: PipelineGraphStepModel,
-  stepInfo: IStep,
+  stepInfo: IStep | undefined,
   isSelected: boolean,
   selectStep: typeof selectStepType,
 }
@@ -39,7 +39,7 @@ export const PipelineGraphStepComponent = (props: IPipelineGraphStepProps) => {
       <PipelineGraphPorts type='input' node={ node } isSelected={ isSelected } />
       <div className={ s.step }>
         <div className={ cn(s.title, 'layout-row layout-align-start-center') }>
-          <stepInfo.icon className={ s.icon } />
+          { stepInfo && <stepInfo.icon className={ s.icon } /> }
           <div className='flex'>{ node.type }</div>
           {/* <PiplineIcon status='running' /> */}
         </div>
