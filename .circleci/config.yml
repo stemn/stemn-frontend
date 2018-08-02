@@ -116,9 +116,6 @@ jobs:
       - attach_workspace:
           at: ~/stemn-frontend
       - run:
-          name: ES Lint
-          command: npm run lint;
-      - run:
           name: TS Lint
           command: npm run tslint;
 
@@ -168,18 +165,15 @@ workflows:
       - install_website:
           requires:
             - install_root
-
       - install_desktop:
           requires:
             - install_root
-
-      # - lint:
-      #     requires:
-      #       - install_root
+      - lint:
+          requires:
+            - install_root
       - build_website:
           requires:
             - install_website
-
       - build_desktop:
           requires:
             - install_desktop
