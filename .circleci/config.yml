@@ -85,7 +85,7 @@ jobs:
           name: Build webpack
           command: |
             cd stemn-frontend-website; 
-            sudo npm run link:shared; 
+            npm i; 
             export STEMN_ENV=$CIRCLE_BRANCH; 
             npm run build;
       - save_cache:
@@ -103,7 +103,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/stemn-frontend
-      - run: cd stemn-frontend-desktop; npm run build;
+      - run: cd stemn-frontend-desktop; sudo npm run link:shared; npm run build;
       - persist_to_workspace:
           root: ~/stemn-frontend
           paths: 
