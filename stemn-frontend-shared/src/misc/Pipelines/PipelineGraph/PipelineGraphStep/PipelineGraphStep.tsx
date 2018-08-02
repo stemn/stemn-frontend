@@ -27,7 +27,7 @@ const mapTableRows = pipe(
   values,
 )
 
-export class PipelineGraphStepComponent extends React.Component<IPipelineGraphStepProps> {
+export class PipelineGraphStepComponent extends React.PureComponent<IPipelineGraphStepProps> {
   public render () {
     const { node, isSelected, selectStep, stepInfo } = this.props
     const diagramId = node.parent.id
