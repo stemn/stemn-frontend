@@ -6,11 +6,23 @@
         "strict": true,
         "pretty": true,
         "noUnusedLocals": true,
+        "noImplicitAny": false,
+        "jsx": "react",
         "lib": [
             "es2015",
             "es2016",
             "es2017",
             "dom"
-        ]
-    }
+        ],
+        "baseUrl": "./",
+        "paths": {
+            "stemn-shared/*": ["stemn-frontend-shared/src/*"]
+        }
+    },
+    "include": [
+        "typings.d.ts",
+        "stemn-frontend-website",
+        "stemn-frontend-desktop",
+        "stemn-frontend-shared"
+    ]
 }

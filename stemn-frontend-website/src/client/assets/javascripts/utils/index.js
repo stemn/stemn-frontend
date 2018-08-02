@@ -7,5 +7,3 @@ export const pickId = (object) => {
     return object.toString()
   }
 }
-
-export * from './typescripts'

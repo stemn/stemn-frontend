@@ -37,8 +37,8 @@ import stringFilter     from 'stemn-shared/misc/StringFilter/StringFilter.reduce
 import history          from 'stemn-shared/misc/History/History.reducer.js'
 import websocket        from 'stemn-shared/misc/Websocket/Websocket.reducer.js'
 import pipelines        from 'stemn-shared/misc/Pipelines/Pipelines.reducer.js'
+import { pipelineGraphReducer } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraph.reducer.ts'
 import terminal         from 'stemn-shared/misc/Terminal/Terminal.reducer.js'
-
 import storeReducer     from 'stemn-shared/misc/Store/Store.reducer.js'
 
 const splitReducers = combineReducers({
@@ -79,6 +79,7 @@ const splitReducers = combineReducers({
   stringFilter,
   websocket,
   pipelines,
+  pipelineGraph: pipelineGraphReducer,
   terminal,
 })
 

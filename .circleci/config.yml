@@ -115,7 +115,9 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/stemn-frontend
-      - run: npm run lint;
+      - run:
+          name: TS Lint
+          command: npm run tslint;
 
   test_website_e2e:
     working_directory: ~/stemn-frontend
@@ -128,7 +130,7 @@ jobs:
       - attach_workspace:
           at: ~/stemn-frontend
       - run: cd stemn-frontend-website; npm i cypress;
-      - run: cd stemn-frontend-website; npm run serve:wait; $(npm bin)/cypress run;
+      - run: cd stemn-frontend-website; npm run serve:wait; $(npm bin)/cypress run --record --key 8bbd5d77-97d8-43ff-b823-34255762fcf5;
 
   deploy_website:
 
@@ -163,24 +165,21 @@ workflows:
       - install_website:
           requires:
             - install_root
-
       - install_desktop:
           requires:
             - install_root
-
-      # - lint:
-      #     requires:
-      #       - install_root
+      - lint:
+          requires:
+            - install_root
       - build_website:
           requires:
             - install_website
-
       - build_desktop:
           requires:
             - install_desktop
-      # - test_website_e2e:
-      #     requires:
-      #       - build_website
+      - test_website_e2e:
+          requires:
+            - build_website
       - deploy_website:
           requires: 
             - build_website

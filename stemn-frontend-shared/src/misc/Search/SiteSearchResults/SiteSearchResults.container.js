@@ -20,7 +20,7 @@ const stateToProps = ({ search, routing }, { page, query, type, size, parentType
   return {
     cacheKey,
     criteria: criteriaWithQuery,
-    location: routing.locationBeforeTransitions,
+    location: routing.locationBeforeTransitions || {},
     page: _page,
     query,
     results: search.data[cacheKey],

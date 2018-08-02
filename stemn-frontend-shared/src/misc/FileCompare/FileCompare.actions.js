@@ -48,3 +48,11 @@ export const changeMode = ({ mode, cacheKey }) =>
     },
   })
 
+export const editToggle = ({ cacheKey }) => ({
+  type: 'FILE_COMPARE/EDIT_TOGGLE',
+  payload: {},
+  meta: {
+    cacheKey,
+  },
+})
+

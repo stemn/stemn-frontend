@@ -35,12 +35,14 @@ export default class Header extends Component {
     return (
       <div className="layout-row layout-align-start-center">
         <SimpleIconButton
+          data-tag="create-project"
           title="Create new project"
           onClick={ newProject }
         >
           <MdAdd size={ 25 } />
         </SimpleIconButton>
         <SimpleIconButton
+          data-tag="view-notifications"
           title="Notifications"
           to="/notifications"
           className="rel-box"
@@ -49,6 +51,7 @@ export default class Header extends Component {
           { numNotifications > 0 && <div className={ cn(classes.badge, { [classes.badgeLarge]: numNotifications >= 10 }) }>{ numNotifications }</div> }
         </SimpleIconButton>
         <SimpleIconButton
+          data-tag="view-help"
           className="hide-xs"
           title="Help"
           name="help"
@@ -61,7 +64,7 @@ export default class Header extends Component {
           preferPlace="below"
           trigger="click"
         >
-          <a>
+          <a dataTag="avatar-menu">
             <Avatar
               style={ { marginLeft: '10px' } }
               shape="square"

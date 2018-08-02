@@ -1,0 +1,102 @@
+Arguments: 
+  /home/david/.nvs/node/9.6.1/x64/bin/node /home/david/.nvs/default/bin/yarn dev
+
+PATH: 
+  /home/david/.nvs/default/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath_target_87687500:/mnt/c/ProgramData/Oracle/Java/javapath_target_87745593:/mnt/c/Program Files (x86)/Intel/iCLS Client:/mnt/c/Program Files/Intel/iCLS Client:/mnt/c/Windows/System32:/mnt/c/Windows:/mnt/c/Windows/System32/wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/IPT:/mnt/c/Program Files/PuTTY:/mnt/c/Windows/System32/LibreSSL:/mnt/c/Windows/System32/OpenSSH:/mnt/c/Program Files/nodejs:/mnt/c/Users/David/AppData/Local/Microsoft/WindowsApps:/mnt/c/DevTools:/mnt/c/Program Files/Microsoft VS Code/bin:/mnt/c/Users/David/AppData/Roaming/npm
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  9.6.1
+
+Platform: 
+  linux x64
+
+npm manifest: 
+  {
+    "name": "stemn-frontend",
+    "version": "1.0.0",
+    "author": "David Revay <david@stemn.com>",
+    "license": "MIT",
+    "scripts": {
+      "lint": "eslint stemn-frontend-website/src/ stemn-frontend-shared/src/ stemn-frontend-desktop/app/ --ext .jsx --ext .js",
+      "lint:shared": "eslint stemn-frontend-shared/src/ --ext .jsx --ext .js",
+      "lint:desktop": "eslint stemn-frontend-desktop/app/ --ext .jsx --ext .js",
+      "lint:website": "eslint stemn-frontend-website/src/ --ext .jsx --ext .js",
+      "lint:fix": "npm run lint -- --fix",
+      "jest": "jest",
+      "jest:update": "jest --updateSnapshot",
+      "install:all": "sh ./scripts/install.sh"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/stemn/stemn-frontend.git"
+    },
+    "bugs": {
+      "url": "https://github.com/stemn/stemn-frontend/issues"
+    },
+    "homepage": "https://github.com/stemn/stemn-frontend#readme",
+    "devDependencies": {
+      "@types/classnames": "^2.2.4",
+      "@types/jest": "^23.1.5",
+      "@types/lodash": "^4.14.110",
+      "@types/ramda": "^0.25.34",
+      "@types/react": "^16.4.6",
+      "@types/react-dom": "^16.0.6",
+      "@types/uuid": "^3.4.3",
+      "babel-eslint": "7.2.3",
+      "jest": "^23.4.0",
+      "ts-jest": "^23.0.0",
+      "eslint": "4.5.0",
+      "eslint-config-stemn": "git+https://git@github.com/stemn/eslint-config-stemn.git",
+      "eslint-plugin-cypress": "^2.0.1"
+    },
+    "dependencies": {
+      "classnames": "^2.2.6",
+      "identity-obj-proxy": "^3.0.0",
+      "mrblenny-storm-react-diagrams": "^5.2.1",
+      "ramda": "^0.25.0",
+      "react": "^16.4.1",
+      "rxjs": "^6.2.1",
+      "typescript": "^2.9.2",
+      "uuid": "^3.3.2"
+    },
+    "jest": {
+      "transform": {
+        "^.+\\.tsx?$": "ts-jest"
+      },
+      "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+      "moduleFileExtensions": [
+        "ts",
+        "tsx",
+        "js",
+        "jsx",
+        "json",
+        "node"
+      ],
+      "moduleNameMapper": {
+        "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+        "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+      }
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: Command "dev" not found.
+      at new MessageError (/home/david/.nvs/node/9.6.1/x64/lib/node_modules/yarn/lib/cli.js:186:110)
+      at /home/david/.nvs/node/9.6.1/x64/lib/node_modules/yarn/lib/cli.js:87307:17
+      at Generator.next (<anonymous>)
+      at step (/home/david/.nvs/node/9.6.1/x64/lib/node_modules/yarn/lib/cli.js:98:30)
+      at /home/david/.nvs/node/9.6.1/x64/lib/node_modules/yarn/lib/cli.js:116:14
+      at new Promise (<anonymous>)
+      at new F (/home/david/.nvs/node/9.6.1/x64/lib/node_modules/yarn/lib/cli.js:23451:28)
+      at /home/david/.nvs/node/9.6.1/x64/lib/node_modules/yarn/lib/cli.js:95:12
+      at runCommand (/home/david/.nvs/node/9.6.1/x64/lib/node_modules/yarn/lib/cli.js:87312:22)
+      at Object.<anonymous> (/home/david/.nvs/node/9.6.1/x64/lib/node_modules/yarn/lib/cli.js:87412:14)

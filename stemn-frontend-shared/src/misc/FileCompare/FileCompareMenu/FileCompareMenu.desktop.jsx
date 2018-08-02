@@ -1,6 +1,3 @@
-/** ************************************************************************
-We pass in either revisions or file1 + file2.
-************************************************************************* */
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js'

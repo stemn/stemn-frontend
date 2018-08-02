@@ -5,7 +5,7 @@ import 'codemirror/mode/meta.js'
 import whatGerber from '@stemn/whats-that-gerber'
 
 const getCodeMirrorExts = () => {
-  let codeExts = ['pipeline', 'adoc', 'csv']
+  let codeExts = ['adoc', 'csv']
   forEach(codemirror.modeInfo, (mode) => {
     if (mode.ext) {
       codeExts = codeExts.concat(mode.ext)
@@ -16,6 +16,7 @@ const getCodeMirrorExts = () => {
 
 export const viewerFileTypes = {
   general: {
+    pipeline: ['pipeline'],
     gerber: ['gerber'],
     pcb: ['brd', 'pcb', 'kicad_pcb'],
     image: ['png', 'jpg', 'jpeg', 'gif', 'svg', 'bmp', 'ico'],
@@ -57,7 +58,6 @@ export const getViewerType = (fileName, provider) => {
   const mergeResolver = (targetVal, sourceVal) => (Array.isArray(targetVal) && sourceVal ? targetVal.concat(sourceVal) : sourceVal)
   const mergedFileTypes = i.merge(generalFileTypes, providerFileTypes, mergeResolver)
 
-  console.log(whatGerber(fileName))
   if (whatGerber(fileName)) {
     return 'gerber'
   } 

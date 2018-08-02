@@ -16,6 +16,7 @@ import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
 import FileCompareInner from 'stemn-shared/misc/FileCompare/FileCompareInner/FileCompareInner'
 import FileCompareMenu from 'stemn-shared/misc/FileCompare/FileCompareMenu'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton'
+import { PipelineGraphSidebar } from 'stemn-shared/misc/Pipelines/PipelineGraph'
 import MdMenu from 'react-icons/md/menu'
 import MdClose from 'react-icons/md/close'
 import { Helmet } from 'react-helmet'
@@ -43,7 +44,6 @@ export default class File extends Component {
     }
   }
   onSelect = (file) => {
-    console.log(file)
     const { select, cacheKey, compare: { mode, lastSelected } } = this.props
     select({ file, mode, lastSelected, cacheKey })
   }
@@ -56,7 +56,7 @@ export default class File extends Component {
     return isSelected({ item, selected1, selected2, mode })
   }
   render() {
-    const { compare: { mode, selected1, selected2 }, file, timeline } = this.props
+    const { compare: { mode, selected1, selected2, editActive }, file, timeline, cacheKey } = this.props
     const { isOpen } = this.state
     const items = orderItemsByTime(mode, selected1, selected2)
     const file1 = get(items, [0, 'data'])
@@ -79,10 +79,12 @@ export default class File extends Component {
           />
           <div className="flex" />
           <FileCompareMenu
+            cacheKey={ cacheKey }
             file1={ file1 }
             file2={ file2 }
             revisions={ revisions }
             mode={ mode }
+            editActive={ editActive }
             changeMode={ this.changeMode }
           />
           <SimpleIconButton
@@ -101,7 +103,8 @@ export default class File extends Component {
               file1={ file1 }
               file2={ file2 }
               mode={ mode }
-              header={ displayFileHeader } 
+              header={ displayFileHeader }
+              editActive={ editActive }
             />
             <Timeline
               className={ classes.timeline }
@@ -112,23 +115,29 @@ export default class File extends Component {
             />
           </div>
           <aside className={ cn(classes.sidebar, { [classes.isOpen]: isOpen }) }>
-            <SectionTitle className={ classes.sidebarTitle }>Meta</SectionTitle>
-            <SimpleTable>
-              <tr><td>Name</td><td>{file.data.name}</td></tr>
-              <tr><td>Size</td><td>{formatBytes(file.data.size)}</td></tr>
-              <tr><td>Last modified</td><td>{moment(file.data.modified).fromNow()}</td></tr>
-              { revisions.length > 0 &&
-              <tr><td>Revisions</td><td>{revisions.length}</td></tr> }
-            </SimpleTable>
-            <AssemblyParts
-              fileMeta={ file }
-              clickFn={ this.clickFileOrFolder }
-            />
-            <SectionTitle className={ classes.sidebarTitle }>Timeline</SectionTitle>
-            <TimelineVertical
-              items={ timelineData }
-              type="file"
-            />
+            { editActive 
+              ? <PipelineGraphSidebar diagramId={ cacheKey } /> 
+              : (
+                <div>
+                  <SectionTitle className={ classes.sidebarTitle }>Meta</SectionTitle>
+                  <SimpleTable>
+                    <tr><td>Name</td><td>{file.data.name}</td></tr>
+                    <tr><td>Size</td><td>{formatBytes(file.data.size)}</td></tr>
+                    <tr><td>Last modified</td><td>{moment(file.data.modified).fromNow()}</td></tr>
+                    { revisions.length > 0 &&
+                    <tr><td>Revisions</td><td>{revisions.length}</td></tr> }
+                  </SimpleTable>
+                  <AssemblyParts
+                    fileMeta={ file }
+                    clickFn={ this.clickFileOrFolder }
+                  />
+                  <SectionTitle className={ classes.sidebarTitle }>Timeline</SectionTitle>
+                  <TimelineVertical
+                    items={ timelineData }
+                    type="file"
+                  />
+                </div>
+              ) }
           </aside>
         </div>
       </div>

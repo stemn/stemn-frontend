@@ -110,10 +110,7 @@ module.exports = merge(config, {
     loaders: [
       // Globals
       {
-        test: /\.(css|scss)$/,
-        include: [
-          path.resolve(__dirname, '../src/client/assets/styles/global'),
-        ],
+        test: /\.global\.(css|scss)$/,
         loader: ExtractTextPlugin.extract({
           fallbackLoader: 'style',
           loader: [
@@ -125,11 +122,11 @@ module.exports = merge(config, {
       },
       // CSS Modules
       {
-        test: /\.(css|scss)$/,
+        test: /^((?!\.global).)*\.(css|scss)$/,
         include: [
           path.resolve(__dirname, '../src/client/assets/javascripts'),
           path.resolve(__dirname, '../src/client/assets/styles/modules'),
-          path.resolve(__dirname, '../node_modules/stemn-frontend-shared'),
+          path.resolve(__dirname, '../../stemn-frontend-shared'),
         ],
         loader: ExtractTextPlugin.extract({
           fallbackLoader: 'style',
