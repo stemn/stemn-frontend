@@ -1,7 +1,10 @@
 import { connect } from 'react-redux'
 import { selectStep } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraph.actions'
 import { IPipelineGraphStoreState } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraph.reducer'
-import { PipelineGraphStepComponent } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphStep/PipelineGraphStep'
+import {
+  IPipelineGraphStepProps,
+  PipelineGraphStepComponent,
+} from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphStep/PipelineGraphStep'
 import { PipelineGraphStepModel } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphStep/PipelineGraphStep.model'
 
 const stateToProps = (
@@ -16,4 +19,7 @@ const dispatchToProps = {
   selectStep,
 }
 
-export const PipelineGraphStep = connect(stateToProps, dispatchToProps)(PipelineGraphStepComponent)
+export const PipelineGraphStep = connect<IPipelineGraphStepProps>(
+  stateToProps as any,
+  dispatchToProps,
+)(PipelineGraphStepComponent)
