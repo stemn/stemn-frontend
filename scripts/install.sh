@@ -8,4 +8,4 @@ cd ./stemn-frontend-desktop
 cd ../stemn-frontend-desktop && npm run install:link
 
 # Install website deps
-cd ../stemn-frontend-website && npm run install:link
+cd ../stemn-frontend-website && npm i

@@ -11,11 +11,11 @@ const getStemnEnv = require('./getStemnEnv')
 
 const GLOBALS = {
   'process.env': {
-    NODE_ENV: JSON.stringify('production'),
+    NODE_ENV: JSON.stringify('development'),
   },
   GLOBAL_ENV: Object.assign({
     APP_TYPE: JSON.stringify('web'),
-    NODE_ENV: JSON.stringify('production'),
+    NODE_ENV: JSON.stringify('development'),
   }, getStemnEnv(process.env.STEMN_ENV)),
 }
 

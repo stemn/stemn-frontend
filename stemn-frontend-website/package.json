@@ -4,8 +4,6 @@
   "author": "David Revay <david@stemn.com>",
   "license": "MIT",
   "scripts": {
-    "install:link": "sh ./scripts/install.sh",
-    "link:shared": "sh ./scripts/link-shared.sh",
     "dev": "node ./scripts/development.js",
     "build": "sh ./scripts/build.sh",
     "analyse": "node ./scripts/analyse.js",
