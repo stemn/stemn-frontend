@@ -17,7 +17,7 @@ import * as s from './PipelineGraph.scss'
 
 export interface IPipelineGraphProps {
   diagramId: string,
-  pipelineConfig: string,
+  pipelineConfig: string | object,
   readOnly: boolean,
   className?: string,
   diagram: {

@@ -67,7 +67,7 @@ export class JsonSchemaForm<T> extends React.Component<FormProps<T> & ISchemaFor
             type='submit'
             className='primary'
             loading={this.state.isLoading}
-            onClick={() => { }}
+            onClick={() => undefined}
           >
             Submit
           </ProgressButton>

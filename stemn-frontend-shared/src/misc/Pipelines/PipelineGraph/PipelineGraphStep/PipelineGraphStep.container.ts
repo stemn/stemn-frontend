@@ -19,7 +19,7 @@ const dispatchToProps = {
   selectStep,
 }
 
-export const PipelineGraphStep = connect<IPipelineGraphStepProps>(
-  stateToProps as any,
+export const PipelineGraphStep = connect(
+  stateToProps,
   dispatchToProps,
 )(PipelineGraphStepComponent)

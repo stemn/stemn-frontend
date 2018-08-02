@@ -1,6 +1,5 @@
 import * as cn from 'classnames'
-import { PortWidget } from 'mrblenny-storm-react-diagrams'
-import { PortModel } from 'mrblenny-storm-react-diagrams'
+import { PortModel, PortWidget } from 'mrblenny-storm-react-diagrams'
 import * as React from 'react'
 import { PipelineGraphStepModel } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphStep'
 import * as s from './PipelineGraphPort.scss'

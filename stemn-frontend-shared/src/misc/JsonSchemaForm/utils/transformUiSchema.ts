@@ -4,22 +4,23 @@ import { cloneDeep } from 'lodash'
 const formats = ['password', 'textarea']
 
 /**
-  * builds a nested object given a '.' separated path, returns a reference to the last object
-  * IE,
-  *
-  * path = string.hello
-  *
-  * will create the object
-  * {
-  *  string: {
-  *    hello: {
-  *
-  *    }
-  *   }
-  * }
-  *
-  * the returned reference would be to the hello object
-*/
+ * builds a nested object given a '.' separated path, returns a reference to the last object
+ * IE,
+ *
+ * path = string.hello
+ *
+ * will create the object
+ * {
+ *  string: {
+ *    hello: {
+ *
+ *    }
+ *   }
+ * }
+ *
+ * the returned reference would be to the hello object
+ */
+
 const buildNestedObject = (path: string, object: any): any => {
 
   const subObjects = path.split('.')
@@ -42,7 +43,7 @@ export const fixFormatFields = (schema: JSONSchema6, uiSchema: any = {}) => {
   const newSchema: JSONSchema6 = cloneDeep(schema)
   const newUiSchema: any = cloneDeep(uiSchema)
 
-  const traverse = (object: any, uiSchema: any, path: string = '') => {
+  const traverse = (object: any, ui: any, path: string = '') => {
 
     if (!object) { return }
 
@@ -57,12 +58,12 @@ export const fixFormatFields = (schema: JSONSchema6, uiSchema: any = {}) => {
         const newPath = path === '' ? key : `${path}.${key}`
 
         // recurse through the object
-        traverse(subObject[key], uiSchema, newPath)
+        traverse(subObject[key], ui, newPath)
       }
     }
 
     // build the schema object
-    const ref = buildNestedObject(path, uiSchema)
+    const ref = buildNestedObject(path, ui)
 
     if (object.hasOwnProperty('format') && formats.includes(object.format)) {
 

@@ -115,7 +115,12 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/stemn-frontend
-      - run: npm run lint;
+      - run:
+          name: ES Lint
+          command: npm run lint;
+      - run:
+          name: TS Lint
+          command: npm run tslint;
 
   test_website_e2e:
     working_directory: ~/stemn-frontend

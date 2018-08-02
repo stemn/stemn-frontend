@@ -5,10 +5,12 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint stemn-frontend-website/src/ stemn-frontend-shared/src/ stemn-frontend-desktop/app/ --ext .jsx --ext .js",
+    "lint:fix": "npm run lint -- --fix",
+    "tslint": "tslint -p tsconfig.json --project -c tslint.json",
+    "tslint:fix": "npm run tslint -- --fix",
     "lint:shared": "eslint stemn-frontend-shared/src/ --ext .jsx --ext .js",
     "lint:desktop": "eslint stemn-frontend-desktop/app/ --ext .jsx --ext .js",
     "lint:website": "eslint stemn-frontend-website/src/ --ext .jsx --ext .js",
-    "lint:fix": "npm run lint -- --fix",
     "jest": "jest",
     "jest:update": "jest --updateSnapshot",
     "install:all": "sh ./scripts/install.sh"

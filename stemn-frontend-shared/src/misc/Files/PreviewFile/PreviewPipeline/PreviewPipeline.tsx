@@ -1,6 +1,6 @@
 import * as React from 'react'
-import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import file from 'stemn-shared/assets/images/pure-vectors/file.svg'
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import { PipelineGraph } from 'stemn-shared/misc/Pipelines/PipelineGraph'
 
 export interface IPreviewPipelineProps {
@@ -15,9 +15,9 @@ export interface IPreviewPipelineProps {
 }
 
 export class PreviewPipeline extends React.Component<IPreviewPipelineProps> {
-  componentWillMount() { this.onMount(this.props) }
-  componentWillReceiveProps(nextProps: IPreviewPipelineProps) { this.onMount(nextProps, this.props) }
-  onMount = (nextProps: IPreviewPipelineProps, prevProps?: IPreviewPipelineProps) => {
+  public componentWillMount () { this.onMount(this.props) }
+  public componentWillReceiveProps (nextProps: IPreviewPipelineProps) { this.onMount(nextProps, this.props) }
+  public onMount = (nextProps: IPreviewPipelineProps, prevProps?: IPreviewPipelineProps) => {
     // If the previewId changes, download a new file
     if (!prevProps || nextProps.previewId !== prevProps.previewId) {
       // If we don't already have the file, get it
@@ -31,27 +31,26 @@ export class PreviewPipeline extends React.Component<IPreviewPipelineProps> {
       }
     }
   }
-  render() {
+  public render () {
     const { fileData, editActive, previewId } = this.props
     return (
-      <div className="layout-column flex">
+      <div className='layout-column flex'>
         { fileData && fileData.data ? (
           <PipelineGraph
             diagramId={ previewId }
-            pipelineConfig={ fileData.data } 
+            pipelineConfig={ fileData.data }
             readOnly={ !editActive }
           />
         ) : '' }
         { fileData ? <LoadingOverlay show={ fileData.loading } /> : null }
         { fileData && !fileData.data && !fileData.loading
-          ? <div className="layout-column layout-align-center-center flex text-center">
+          ? <div className='layout-column layout-align-center-center flex text-center'>
             <img style={ { width: '100px' } } src={ file } />
-            <div className="text-title-4" style={ { marginBottom: '10px' } }>Nothing to display</div>
-            <div className="text-title-5">This file appears to be empty.</div>
+            <div className='text-title-4' style={ { marginBottom: '10px' } }>Nothing to display</div>
+            <div className='text-title-5'>This file appears to be empty.</div>
           </div>
           : null }
       </div>
     )
   }
 }
-
