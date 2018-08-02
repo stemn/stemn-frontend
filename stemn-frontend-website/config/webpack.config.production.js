@@ -51,8 +51,8 @@ module.exports = merge(config, {
     // Avoid publishing files when compilation fails
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin(GLOBALS),
-    new UglifyJsPlugin({
-    }),
+    // new UglifyJsPlugin({
+    // }),
     //    new webpack.LoaderOptionsPlugin({
     //      minimize: true,
     //      debug: false,
