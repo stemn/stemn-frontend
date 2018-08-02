@@ -103,7 +103,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/stemn-frontend
-      - run: cd stemn-frontend-desktop; sudo npm run link:shared; npm run build;
+      - run: cd stemn-frontend-desktop; npm run build;
       - persist_to_workspace:
           root: ~/stemn-frontend
           paths: 
