@@ -20,6 +20,6 @@ docker build -t "${IMAGE}":latest .
 docker push "${IMAGE}:${TAG}"
 docker push "${IMAGE}:latest"
 
-kubectl set image deployment/website website="${IMAGE}:${TAG}"  
+kubectl set image deployment/website website="${IMAGE}:${TAG}" --namespace staging 
 
 echo ---------------------------
