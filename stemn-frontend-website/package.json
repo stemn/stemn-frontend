@@ -141,7 +141,6 @@
     "stats-webpack-plugin": "0.6.0",
     "substyle": "2.0.2",
     "ts-loader": "3",
-    "typescript": "2.9.2",
     "uglifyjs-webpack-plugin": "1.2.5",
     "wait-on": "2.1.0",
     "ws": "2.3.1"
