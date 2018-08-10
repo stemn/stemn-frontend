@@ -6,7 +6,7 @@ import React from 'react'
 import { has } from 'lodash'
 
 // Sub Components
-import Sidebar            from 'stemn-frontend-desktop/app/renderer/menubar/modules/Sidebar/Sidebar.jsx'
+import Sidebar from '../../../../renderer/menubar/modules/Sidebar/Sidebar'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 

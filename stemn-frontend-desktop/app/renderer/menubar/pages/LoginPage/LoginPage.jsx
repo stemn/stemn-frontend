@@ -7,7 +7,7 @@ import React from 'react'
 import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js'
 
 // Sub Components
-import Toolbar from 'stemn-frontend-desktop/app/renderer/menubar/modules/Toolbar/Toolbar.jsx'
+import Toolbar from '../../../../renderer/menubar/modules/Toolbar/Toolbar.jsx'
 import cloudProject   from 'stemn-shared/assets/images/pure-vectors/cloud-project.svg'
 import Button  from 'stemn-shared/misc/Buttons/Button/Button.jsx'
 

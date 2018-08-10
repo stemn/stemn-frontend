@@ -1,7 +1,7 @@
 import moment from 'moment'
-import http from 'axios'
-import initRaven from 'stemn-frontend-desktop/app/shared/reporting/raven/raven.renderer.js'
 import 'moment/locale/en-gb'
+import http from 'axios'
+import initRaven from '../../shared/reporting/raven/raven.renderer.js'
 import '../../shared/css/index.global.scss'
 
 // Assign the global_env to process.env

@@ -11,7 +11,7 @@ import { relaunch } from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.a
 // Component Core
 import React from 'react'
 
-import classes from 'stemn-frontend-desktop/app/renderer/main/pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css'
+import classes from '../../ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css'
 
 import Toggle             from 'stemn-shared/misc/Input/Toggle/Toggle'
 import ProgressButton     from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton.jsx'

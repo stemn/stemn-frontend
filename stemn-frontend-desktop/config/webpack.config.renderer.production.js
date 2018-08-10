@@ -4,9 +4,6 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const config = require('./webpack.config.base')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const WebpackChunkHash = require('webpack-chunk-hash')
-const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin')
-const HashModuleId = require('./plugins/HashModuleId')
 
 const GLOBALS = {
 //  'process.env': {
@@ -22,8 +19,6 @@ const GLOBALS = {
     WEBSOCKET_SERVER: JSON.stringify(process.env.WEBSOCKET_SERVER),
   },
 }
-
-const chunkIncludes = targets => ({ context }) => context && context.indexOf('node_modules') >= 0 && targets.find(t => new RegExp('\\\\' + t + '\\\\', 'i').test(context))
 
 module.exports = merge(config, {
   debug: false,

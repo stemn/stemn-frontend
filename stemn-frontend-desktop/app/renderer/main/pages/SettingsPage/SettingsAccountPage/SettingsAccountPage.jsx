@@ -1,12 +1,8 @@
 import { connect } from 'react-redux'
-
 import { getUser, saveUser } from 'stemn-shared/misc/Users/Users.actions.js'
 import { unlink, logout, authenticate } from 'stemn-shared/misc/Auth/Auth.actions.js'
-
 import React from 'react'
-
-import classes from 'stemn-frontend-desktop/app/renderer/main/pages/ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css'
-
+import classes from '../../ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton.jsx'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import UserProfileSettings from 'stemn-shared/misc/UserSettings/UserProfileSettings'

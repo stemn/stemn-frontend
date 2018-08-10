@@ -1,30 +1,45 @@
 // Common Webpack configuration used by webpack.config.development and webpack.config.production
-const path = require('path')
+const { join } = require('path')
 const autoprefixer = require('autoprefixer')
 const HappyPack = require('happypack')
+
+const babelLoaderQuery = {
+  presets: [
+    'babel-preset-es2015',
+    'babel-preset-react',
+    'babel-preset-stage-0',
+  ].map(require.resolve),
+  plugins: [
+    'babel-plugin-transform-decorators-legacy',
+    'babel-plugin-lodash',
+    'react-hot-loader/babel',
+  ].map(require.resolve),
+}
 
 module.exports = {
   resolve: {
     symlinks: false,
     modules: [
-      path.join(__dirname, '../app/node_modules'),
-      path.join(__dirname, '../../'),
+      join(__dirname, '../app/node_modules'),
+      join(__dirname, '../../node_modules'),
     ],
     alias: {
-      theme: path.resolve(__dirname, '../app/theme.css'),
-      'route-actions': path.resolve(__dirname, '../app/renderer/main/routeActions.js'),
-      'stemn-shared': path.resolve(__dirname, '../app/node_modules/stemn-frontend-shared/src'),
-      'package-json': path.resolve(__dirname, '../app/package.json'),
-      'get-root-path': path.resolve(__dirname, '../app/getRootPath.js'),
+      'stemn-shared': join(__dirname, '../../stemn-frontend-shared/src'),
+      'stemn-frontend-desktop': join(__dirname, '../'),
+      theme: join(__dirname, '../app/theme.css'),
+      'route-actions': join(__dirname, '../app/renderer/main/routeActions.js'),
+      'package-json': join(__dirname, '../app/package.json'),
+      'get-root-path': join(__dirname, '../app/getRootPath.js'),
     },
-    extensions: ['.js', '.jsx', '.json', '.scss'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.scss'],
   },
   plugins: [
     new HappyPack({
       threads: 4,
       loaders: [{
         path: 'babel',
-      }]
+        query: babelLoaderQuery,
+      }],
     }),
   ],
   module: {
@@ -33,22 +48,31 @@ module.exports = {
       {
         test: /\.json$/,
         loader: 'json-loader',
-      }, {
+      }, 
+      {
+        test: /.ts(x)?$/,
+        loader: 'ts-loader',
+      },
+      // JavaScript / ES6
+      {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'happypack/loader',
       }, {
         test: /\.jsx?$/,
         include: [
-          path.resolve(__dirname, '../app/node_modules/react-icons'),
-          path.resolve(__dirname, '../app/node_modules/stemn-frontend-shared'),
-          path.resolve(__dirname, '../app/node_modules/react-popover-wrapper'),
+          join(__dirname, '../app/node_modules/react-icons'),
+          join(__dirname, '../app/node_modules/react-popover-wrapper'),
         ],
         loader: 'happypack/loader',
-      }, {
+      }, 
+      // Images
+      // Any images inside FileList/filetype should use urls
+      // Small images in other folders will be inlined.
+      {
         test: /\.(png|jpg|jpeg|gif|svg)$/,
         include: [
-          path.resolve(__dirname, '../app/node_modules/stemn-frontend-shared/src/misc/FileList/filetype'),
+          join(__dirname, '../../stemn-frontend-shared/src/misc/FileList/filetype'),
         ],
         loader: 'url',
         query: {
@@ -58,7 +82,7 @@ module.exports = {
       }, {
         test: /\.(png|jpg|jpeg|gif|svg)$/,
         exclude: [
-          path.resolve(__dirname, '../app/node_modules/stemn-frontend-shared/src/misc/FileList/filetype'),
+          join(__dirname, '../../stemn-frontend-shared/src/misc/FileList/filetype'),
         ],
         loader: 'url',
         query: {
