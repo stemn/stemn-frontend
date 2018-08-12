@@ -133,14 +133,22 @@ jobs:
       - run: cd stemn-frontend-website; npm run serve:wait; $(npm bin)/cypress run --record --key 8bbd5d77-97d8-43ff-b823-34255762fcf5;
 
   deploy_website:
-
     working_directory: ~/stemn-frontend
-
     docker:
       - image: gcr.io/stemnapp/stemn-gcloud:latest
         auth:
           username: _json_key
           password: $CREDENTIALS
+    steps:
+      - *authenticate
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - checkout
+      - attach_workspace:
+          at: ~/stemn-frontend
+      - run:
+          name: Build and deploy
+          command: sh ./.circleci/deploy_frontend_website.sh
 
   deploy_desktop:
     <<: *defaults
@@ -152,20 +160,6 @@ jobs:
           name: Copy to 'stemn-desktop' repo
           command: cd stemn-frontend-desktop; npm run deploy;
 
-    steps:
-      - *authenticate
-
-      - setup_remote_docker:
-          docker_layer_caching: true
-
-      - checkout
-
-      - attach_workspace:
-          at: ~/stemn-frontend
-
-      - run:
-          name: Build and deploy
-          command: sh ./.circleci/deploy_frontend_website.sh
 
 workflows:
   version: 2
