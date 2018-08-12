@@ -11,11 +11,11 @@ const getStemnEnv = require('./getStemnEnv')
 
 const GLOBALS = {
   'process.env': {
-    NODE_ENV: JSON.stringify('development'),
+    NODE_ENV: JSON.stringify('production'),
   },
   GLOBAL_ENV: Object.assign({
     APP_TYPE: JSON.stringify('web'),
-    NODE_ENV: JSON.stringify('development'),
+    NODE_ENV: JSON.stringify('production'),
   }, getStemnEnv(process.env.STEMN_ENV)),
 }
 
@@ -51,8 +51,7 @@ module.exports = merge(config, {
     // Avoid publishing files when compilation fails
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin(GLOBALS),
-    // new UglifyJsPlugin({
-    // }),
+    new UglifyJsPlugin({}),
     //    new webpack.LoaderOptionsPlugin({
     //      minimize: true,
     //      debug: false,
