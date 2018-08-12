@@ -17,8 +17,8 @@ const host = process.env.HOST || 'localhost'
 const port = process.env.PORT || 3001
 
 function log() {
-  arguments[0] = '\nWebpack: ' + arguments[0]
-  console.log.apply(console, arguments)
+  arguments[0] = `\nWebpack: ${arguments[0]}`
+  console.log(...arguments)
 }
 
 app.use(webpackDevMiddleware(compiler, {
@@ -33,9 +33,9 @@ app.use(webpackDevMiddleware(compiler, {
 
 app.use(webpackHotMiddleware(compiler))
 
-//app.get('*', (req, res) => {
+// app.get('*', (req, res) => {
 //  res.sendFile(path.join(__dirname, '../src/client/assets/index.html'))
-//})
+// })
 
 app.listen(port, host, (err) => {
   if (err) {
