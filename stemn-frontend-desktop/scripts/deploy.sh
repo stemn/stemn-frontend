@@ -9,9 +9,9 @@ cd ../../stemn-desktop
 git pull
 rm -rf ./dist
 rm -rf ./build
-cp -r ../stemn-frontend/stemn-frontend-website/dist .
-cp -r ../stemn-frontend/stemn-frontend-website/build .
-cp -r ../stemn-frontend/stemn-frontend-website/package.json .
+cp -r ../stemn-frontend/stemn-frontend-desktop/dist .
+cp -r ../stemn-frontend/stemn-frontend-desktop/build .
+cp -r ../stemn-frontend/stemn-frontend-desktop/package.json .
 echo "-------------- Commit changes to the stemn-desktop repo ---------------"
 git config --global core.safecrlf false
 git add .
