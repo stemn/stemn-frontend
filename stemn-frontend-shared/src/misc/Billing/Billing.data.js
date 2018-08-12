@@ -9,7 +9,7 @@ export const pricingTableData = [{
     'One private project',
   ],
 }, {
-  price: 129,
+  price: 21,
   period: 'Per Month',
   type: 'Solo',
   description: 'Ideal for personal projects',
@@ -19,7 +19,7 @@ export const pricingTableData = [{
     'Unlimited private projects',
   ],
 }, {
-  price: 299,
+  price: 49,
   period: 'Per User / Month',
   type: 'Team',
   description: 'Great for consultancy',
@@ -31,7 +31,7 @@ export const pricingTableData = [{
     'Business Support',
   ],
 }, {
-  price: 999,
+  price: 99,
   period: 'Per User / Month',
   type: 'Enterprise',
   description: 'Scalable, Secure, On-Premise',
