@@ -5,7 +5,7 @@ npm install
 cd ./stemn-frontend-desktop
 
 # Install desktop deps
-cd ../stemn-frontend-desktop && npm run install
+cd ../stemn-frontend-desktop && npm run install:all
 
 # Install website deps
 cd ../stemn-frontend-website && npm i
