@@ -142,6 +142,16 @@ jobs:
           username: _json_key
           password: $CREDENTIALS
 
+  deploy_desktop:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/stemn-frontend
+      - run:
+          name: Copy to 'stemn-desktop' repo
+          command: cd stemn-frontend-desktop; npm run deploy;
+
     steps:
       - *authenticate
 
@@ -188,3 +198,7 @@ workflows:
               only:
                 - production
                 - staging
+      - deploy_desktop:
+          type: approval
+          requires:
+           - build_desktop
