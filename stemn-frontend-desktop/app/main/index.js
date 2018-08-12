@@ -83,13 +83,13 @@ if (!squirrelStartup) {
   // Make this a single instance application
   const shouldQuit = app.makeSingleInstance((commandLine, workingDirectory) => {
     const args = getArgs(commandLine)
-    // If the args include input.path
-    // A second instance was started from the explorer context menu
-    // Show the preview window
+    If the args include input.path
+    A second instance was started from the explorer context menu
+    Show the preview window
     if (args.inputs.path) {
       log.info('Preview flags:', args)
       showPreview(store.dispatch, args.inputs.path)
-    } else if (windows.main.show) {
+    } else if (windows.main && windows.main.show) {
       windows.main.show()
     }
   })

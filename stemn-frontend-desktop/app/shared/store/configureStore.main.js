@@ -13,7 +13,7 @@ import httpPackage from 'stemn-shared/redux/middleware/httpPackage/httpPackage.m
 
 export default function configureStore(initialState) {
   const middleware = [
-    thunk,
+    thunk.default,
     functionLibrary,
     throttle,
     httpPackage,

@@ -61,7 +61,7 @@ module.exports = {
       }, {
         test: /\.jsx?$/,
         include: [
-          join(__dirname, '../app/node_modules/react-icons'),
+          join(__dirname, '../../node_modules/react-icons'),
           join(__dirname, '../app/node_modules/react-popover-wrapper'),
         ],
         loader: 'happypack/loader',
