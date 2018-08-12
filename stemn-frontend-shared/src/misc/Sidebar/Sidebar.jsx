@@ -1,14 +1,14 @@
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import { bindActionCreators }         from 'redux'
+import { connect }                    from 'react-redux'
 import * as SidebarActions            from 'stemn-shared/misc/Sidebar/Sidebar.actions.js'
 import * as AuthActions               from 'stemn-shared/misc/Auth/Auth.actions.js'
 import * as ProjectsActions           from 'stemn-shared/misc/Projects/Projects.actions.js'
 import * as ModalActions              from 'stemn-shared/misc/Modal/Modal.actions.js'
 import * as SystemActions             from 'stemn-shared/desktop/System/System.actions.js'
-import { push } from 'react-router-redux'
-import React from 'react'
+import { push }                       from 'react-router-redux'
+import React                          from 'react'
 import { escapeRegExp, orderBy }      from 'lodash'
-import cn                     from 'classnames'
+import cn                             from 'classnames'
 import styles                         from './Sidebar.css'
 import userStyles                     from './SidebarAvatar.css'
 import DragResize                     from 'stemn-shared/misc/DragResize/DragResize.jsx'
@@ -25,9 +25,11 @@ import MdSettings                     from 'react-icons/md/settings'
 import MdAdd                          from 'react-icons/md/add'
 import ProjectMenu                    from 'stemn-shared/misc/Projects/Project.menu.js'
 import UserAvatar                     from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
-import ProjectNewModalName from 'stemn-shared/misc/Projects/ProjectNewModal'
+import ProjectNewModalName            from 'stemn-shared/misc/Projects/ProjectNewModal'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
+
+const projectContextIdentifier = "project"
 
 export class Component extends React.Component {
   showProjectNewModal = () => {

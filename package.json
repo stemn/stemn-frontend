@@ -53,10 +53,15 @@
     "mrblenny-storm-react-diagrams": "^5.2.1",
     "ramda": "^0.25.0",
     "react": "^16.4.1",
+    "react-contextmenu": "^2.9.2",
     "react-icons": "^2.2.7",
     "react-jsonschema-form": "1.0.3",
     "react-redux": "^5.0.7",
+    "react-textarea-autosize": "^6.1.0",
     "react-transition-group": "^1.2.1",
+    "redux-promise-middleware": "^4.2.0",
+    "redux-thunk": "^2.2.0",
+    "ts-loader": "^3.5.0",
     "uuid": "^3.3.2"
   },
   "jest": {

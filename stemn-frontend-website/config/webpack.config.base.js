@@ -70,8 +70,8 @@ module.exports = {
       {
         test: /\.jsx?$/,
         include: [
-          join(__dirname, '../src/client/assets/javascripts'),
           join(__dirname, '../../stemn-frontend-shared'),
+          join(__dirname, '../src/client/assets/javascripts'),
           join(__dirname, '../../node_modules/react-icons'),
           join(__dirname, '../node_modules/react-popover-wrapper'),
         ],
