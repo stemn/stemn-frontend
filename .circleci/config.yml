@@ -1,7 +1,7 @@
 defaults: &defaults
     working_directory: ~/stemn-frontend
     docker:
-      - image: circleci/node:7.10
+      - image: circleci/node:8.11
 
 
 authenticate: &authenticate
@@ -11,7 +11,7 @@ authenticate: &authenticate
         cd ~
         echo $CREDENTIALS > gcloud-service-key.json && \
         gcloud auth activate-service-account --key-file=gcloud-service-key.json && \
-        gcloud --quiet auth configure-docker 
+        gcloud --quiet auth configure-docker
 
 version: 2
 jobs:
@@ -21,32 +21,32 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - node_deps-{{ checksum "./package-lock.json" }}
+          - node_dependencies-{{ checksum "./package-lock.json" }}
       - run: npm i
       - save_cache:
           paths:
             - node_modules
-          key: node_deps-{{ checksum "./package-lock.json" }}
+          key: node_dependencies-{{ checksum "./package-lock.json" }}
       - persist_to_workspace:
           root: ~/stemn-frontend
-          paths: 
+          paths:
             - ./node_modules/*
-            
+
   install_website:
     <<: *defaults
     steps:
       - checkout
       - restore_cache:
           keys:
-          - node_deps-{{ checksum "./stemn-frontend-website/package-lock.json" }}
+          - node_dependencies-{{ checksum "./stemn-frontend-website/package-lock.json" }}
       - run: cd stemn-frontend-website; npm i;
       - save_cache:
           paths:
             - stemn-frontend-website/node_modules
-          key: node_deps-{{ checksum "./stemn-frontend-website/package-lock.json" }}
+          key: node_dependencies-{{ checksum "./stemn-frontend-website/package-lock.json" }}
       - persist_to_workspace:
           root: ~/stemn-frontend
-          paths: 
+          paths:
             - ./stemn-frontend-website/node_modules/*
 
   install_desktop:
@@ -55,20 +55,20 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - node_deps-{{ checksum "./stemn-frontend-desktop/package-lock.json" }}
-          - node_deps-{{ checksum "./stemn-frontend-desktop/app/package-lock.json" }}
+          - node_dependencies-{{ checksum "./stemn-frontend-desktop/package-lock.json" }}
+          - node_dependencies-{{ checksum "./stemn-frontend-desktop/app/package-lock.json" }}
       - run: cd stemn-frontend-desktop; sudo npm run install:link;
       - save_cache:
           paths:
             - stemn-frontend-desktop/node_modules
-          key: node_deps-{{ checksum "./stemn-frontend-desktop/package-lock.json" }}
+          key: node_dependencies-{{ checksum "./stemn-frontend-desktop/package-lock.json" }}
       - save_cache:
           paths:
             - stemn-frontend-desktop/app/node_modules
-          key: node_deps-{{ checksum "./stemn-frontend-desktop/app/package-lock.json" }}
+          key: node_dependencies-{{ checksum "./stemn-frontend-desktop/app/package-lock.json" }}
       - persist_to_workspace:
           root: ~/stemn-frontend
-          paths: 
+          paths:
             - ./stemn-frontend-desktop/node_modules/*
             - ./stemn-frontend-desktop/app/node_modules/*
 
@@ -84,9 +84,9 @@ jobs:
       - run:
           name: Build webpack
           command: |
-            cd stemn-frontend-website; 
-            npm i; 
-            export STEMN_ENV=$CIRCLE_BRANCH; 
+            cd stemn-frontend-website;
+            npm i;
+            export STEMN_ENV=$CIRCLE_BRANCH;
             npm run build;
       - save_cache:
           paths:
@@ -94,7 +94,7 @@ jobs:
           key: website-happypack
       - persist_to_workspace:
           root: ~/stemn-frontend
-          paths: 
+          paths:
             - ./stemn-frontend-website/build/*
 
   build_desktop:
@@ -106,7 +106,7 @@ jobs:
       - run: cd stemn-frontend-desktop; sudo npm run link:shared; npm run build;
       - persist_to_workspace:
           root: ~/stemn-frontend
-          paths: 
+          paths:
             - ./stemn-frontend-desktop/dist/*
 
   lint:
@@ -156,7 +156,7 @@ jobs:
       - run:
           name: Build and deploy
           command: sh ./.circleci/deploy_frontend_website.sh
-            
+
 workflows:
   version: 2
   build_and_test:
@@ -181,12 +181,10 @@ workflows:
           requires:
             - build_website
       - deploy_website:
-          requires: 
+          requires:
             - build_website
           filters:
             branches:
-              only: 
+              only:
                 - production
                 - staging
-          
-
