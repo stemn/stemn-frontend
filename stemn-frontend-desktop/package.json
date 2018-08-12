@@ -15,36 +15,13 @@
     "deploy": "sh ./scripts/deploy.sh",
     "analyse:electron": "webpack-bundle-analyzer ./reports/electron-stats.json",
     "analyse:renderer": "webpack-bundle-analyzer ./reports/renderer-stats.json",
-    "prebuild": "rimraf dist",
-    "build": "npm run build:electron && npm run build:renderer",
-    "build:electron": "better-npm-run build:electron",
-    "build:renderer": "better-npm-run build:renderer",
-    "postbuild:renderer": "npm run build:html",
-    "build:html": "node ./scripts/buildHtml.js",
+    "build": "sh ./scripts/build.sh",
     "start:renderer": "better-npm-run start:renderer",
     "start:electron": "better-npm-run start:electron",
     "electron": "better-npm-run electron",
     "electron:prod": "better-npm-run electron:prod"
   },
   "betterScripts": {
-    "build:electron": {
-      "command": "webpack --config ./config/webpack.config.electron.js",
-      "env": {
-        "NODE_ENV": "production",
-        "API_SERVER": "https://dev.stemn.com",
-        "WEBSOCKET_SERVER": "https://dev.stemn.com:8443",
-        "ELECTRON_CRASH_REPORT_SERVER": "https://dev.stemn.com:2096"
-      }
-    },
-    "build:renderer": {
-      "command": "node ./scripts/renderer.production.js",
-      "env": {
-        "NODE_ENV": "production",
-        "API_SERVER": "https://dev.stemn.com",
-        "WEBSOCKET_SERVER": "https://dev.stemn.com:8443",
-        "ELECTRON_CRASH_REPORT_SERVER": "https://dev.stemn.com:2096"
-      }
-    },
     "start:renderer": {
       "command": "node ./scripts/renderer.development.js",
       "env": {
