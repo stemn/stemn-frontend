@@ -1,4 +1,8 @@
 # Run this script from the `stemn-frontend-desktop` folder
+
+# This will copy the dist to the 'stemn-desktop' repo where it will be compiled 
+# into the executables.
+
 echo "-------------------- Pushing source to this repo ----------------------"
 git config --global core.safecrlf false
 git add .
