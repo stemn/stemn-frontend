@@ -57,7 +57,7 @@ jobs:
           keys:
           - node_dependencies-{{ checksum "./stemn-frontend-desktop/package-lock.json" }}
           - node_dependencies-{{ checksum "./stemn-frontend-desktop/app/package-lock.json" }}
-      - run: cd stemn-frontend-desktop; sudo npm run install:link;
+      - run: cd stemn-frontend-desktop; npm run install;
       - save_cache:
           paths:
             - stemn-frontend-desktop/node_modules
@@ -103,7 +103,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/stemn-frontend
-      - run: cd stemn-frontend-desktop; sudo npm run link:shared; npm run build;
+      - run: cd stemn-frontend-desktop; npm run build;
       - persist_to_workspace:
           root: ~/stemn-frontend
           paths:
