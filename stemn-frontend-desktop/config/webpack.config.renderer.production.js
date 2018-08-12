@@ -4,19 +4,17 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const config = require('./webpack.config.base')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const getStemnEnv = require('./getStemnEnv')
 
 const GLOBALS = {
-//  'process.env': {
-//    NODE_ENV: JSON.stringify('production'),
-//  },
-  GLOBAL_ENV: {
-    API_SERVER: JSON.stringify(process.env.API_SERVER),
+  'process.env': {
+    NODE_ENV: JSON.stringify('production'),
+  },
+  GLOBAL_ENV: {    
     APP_THREAD: JSON.stringify('renderer'),
     APP_TYPE: JSON.stringify('desktop'),
-    ELECTRON_CRASH_REPORT_SERVER: JSON.stringify(process.env.ELECTRON_CRASH_REPORT_SERVER),
     NODE_ENV: JSON.stringify('production'),
-    WEBSITE_URL: JSON.stringify('https://dev.stemn.com'),
-    WEBSOCKET_SERVER: JSON.stringify(process.env.WEBSOCKET_SERVER),
+    ...getStemnEnv(process.env.STEMN_ENV),
   },
 }
 

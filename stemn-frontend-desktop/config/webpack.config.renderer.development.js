@@ -3,19 +3,17 @@ const webpack = require('webpack')
 const config = require('./webpack.config.base')
 const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const getStemnEnv = require('./getStemnEnv')
 
 const GLOBALS = {
-//  'process.env': {
-//    NODE_ENV: JSON.stringify('production'),
-//  },
+  'process.env': {
+    NODE_ENV: JSON.stringify('development'),
+  },
   GLOBAL_ENV: {    
-    API_SERVER: JSON.stringify(process.env.API_SERVER),
     APP_THREAD: JSON.stringify('renderer'),
     APP_TYPE: JSON.stringify('desktop'),
-    ELECTRON_CRASH_REPORT_SERVER: JSON.stringify(process.env.ELECTRON_CRASH_REPORT_SERVER),
     NODE_ENV: JSON.stringify('development'),
-    WEBSITE_URL: JSON.stringify('https://dev.stemn.com'),
-    WEBSOCKET_SERVER: JSON.stringify(process.env.WEBSOCKET_SERVER),
+    ...getStemnEnv(process.env.STEMN_ENV),
   },
 }
 
