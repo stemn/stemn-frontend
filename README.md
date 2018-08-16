@@ -1,6 +1,6 @@
 # Stemn Frontend
 
-[![Build Status](https://travis-ci.org/stemn/stemn-frontend.svg?branch=master)](https://travis-ci.org/stemn/stemn-frontend)
+[![CircleCI](https://circleci.com/gh/stemn/stemn-frontend/tree/staging.svg?style=svg)](https://circleci.com/gh/stemn/stemn-frontend/tree/staging)
 
 This repo contains all of stemn's frontend code.
 
