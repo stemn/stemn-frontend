@@ -186,7 +186,7 @@ workflows:
             - build_website
       - deploy_website:
           requires:
-            - build_website
+            - test_website_e2e
           filters:
             branches:
               only:
