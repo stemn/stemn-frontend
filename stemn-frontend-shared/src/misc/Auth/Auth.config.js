@@ -1,4 +1,4 @@
-const { APP_TYPE, NODE_ENV } = GLOBAL_ENV
+const { APP_TYPE, NODE_ENV, STEMN_ENV } = GLOBAL_ENV
 
 const rootDomain = APP_TYPE === 'web'
   ? window.location.origin
@@ -8,7 +8,7 @@ const dropboxClientId = NODE_ENV === 'production'
   ? '0wgo11dn573805b'
   : '18uu4ynw3cp92oi'
 
-const facebookClientId = NODE_ENV === 'production'
+const facebookClientId = STEMN_ENV === 'production'
   ? '710281375734499'
   : '141869616672007'
 
