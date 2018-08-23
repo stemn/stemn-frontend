@@ -15,7 +15,7 @@
     "analyse:electron": "webpack-bundle-analyzer ./reports/electron-stats.json",
     "analyse:renderer": "webpack-bundle-analyzer ./reports/renderer-stats.json",
     "build": "NODE_ENV=production STEMN_ENV=production sh ./scripts/build.sh",
-    "start:renderer": "NODE_ENV=development STEMN_ENV=staging node ./scripts/renderer.development.js",
+    "start:renderer": "NODE_ENV=development STEMN_ENV=staging node ./scripts/startRenderer.js",
     "start:electron": "NODE_ENV=development STEMN_ENV=staging webpack --watch --config ./config/webpack.config.electron.js",
     "electron": "NODE_ENV=development electron dist/main",
     "electron:prod": "NODE_ENV=production electron dist/main"

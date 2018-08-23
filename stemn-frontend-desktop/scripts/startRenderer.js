@@ -1,5 +1,4 @@
 // Creates a hot reloading development environment
-const path = require('path')
 const express = require('express')
 const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
@@ -16,9 +15,9 @@ compiler.apply(new DashboardPlugin())
 const host = process.env.HOST || 'localhost'
 const port = process.env.PORT || 3001
 
-function log() {
-  arguments[0] = `\nWebpack: ${arguments[0]}`
-  console.log(...arguments)
+const log = (...args) => {
+  args[0] = `\nWebpack: ${args[0]}`
+  console.log(...args)
 }
 
 app.use(webpackDevMiddleware(compiler, {
@@ -32,10 +31,6 @@ app.use(webpackDevMiddleware(compiler, {
 }))
 
 app.use(webpackHotMiddleware(compiler))
-
-// app.get('*', (req, res) => {
-//  res.sendFile(path.join(__dirname, '../src/client/assets/index.html'))
-// })
 
 app.listen(port, host, (err) => {
   if (err) {

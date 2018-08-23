@@ -1,5 +1,4 @@
 require('colors')
-const { mapValues } = require('lodash')
 
 const stemnEnvs = {
   local: {
@@ -29,5 +28,5 @@ module.exports = (stemnEnvType) => {
     console.log('Defaulting to '.red + 'staging'.magenta)
   }
 
-  return mapValues(stemnEnv, val => JSON.stringify(val))
+  return stemnEnv
 }

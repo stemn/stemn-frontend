@@ -4,17 +4,15 @@ const config = require('./webpack.config.base')
 const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const getStemnEnv = require('./getStemnEnv')
+const stringifyEnv = require('./utils/stringifyEnv')
 
 const GLOBALS = {
-  'process.env': {
-    NODE_ENV: JSON.stringify('development'),
-  },
-  GLOBAL_ENV: {    
-    APP_THREAD: JSON.stringify('renderer'),
-    APP_TYPE: JSON.stringify('desktop'),
-    NODE_ENV: JSON.stringify('development'),
+  GLOBAL_ENV: stringifyEnv({    
+    APP_THREAD: 'renderer',
+    APP_TYPE: 'desktop',
+    NODE_ENV: 'development',
     ...getStemnEnv(process.env.STEMN_ENV),
-  },
+  }),
 }
 
 module.exports = merge(config, {

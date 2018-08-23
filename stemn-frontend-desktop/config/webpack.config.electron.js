@@ -3,14 +3,15 @@ const webpack = require('webpack')
 const config = require('./webpack.config.base')
 const path = require('path')
 const getStemnEnv = require('./getStemnEnv')
+const stringifyEnv = require('./utils/stringifyEnv')
 
 const GLOBALS = {
-  GLOBAL_ENV: {
-    APP_THREAD: JSON.stringify('electron'),
-    APP_TYPE: JSON.stringify('desktop'),
-    NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+  GLOBAL_ENV: stringifyEnv({
+    APP_THREAD: 'electron',
+    APP_TYPE: 'desktop',
+    NODE_ENV: process.env.NODE_ENV,
     ...getStemnEnv(process.env.STEMN_ENV),
-  },
+  }),
 }
 
 module.exports = merge(config, {
