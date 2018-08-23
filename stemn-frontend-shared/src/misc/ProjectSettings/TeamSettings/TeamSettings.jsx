@@ -5,7 +5,7 @@ import TeamMember from 'stemn-shared/misc/Project/TeamMember/TeamMember.jsx'
 import UserSearch from 'stemn-shared/misc/Search/UserSearch'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 
-export default class GeneralSettings extends Component {
+export default class TeamSettings extends Component {
   static propTypes = {
     changeUserPermissions: PropTypes.func.isRequired,
     project: PropTypes.object.isRequired,

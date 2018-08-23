@@ -51,8 +51,9 @@ class LabelSelect extends Component {
 
     return (
       <div>
-        { filteredInfo.map(item => (
+        { filteredInfo.map((item, idx) => (
           <LabelSelectRow
+            key={ idx }
             item={ item }
             model={ model }
             value={ value }

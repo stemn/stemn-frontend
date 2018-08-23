@@ -54,6 +54,7 @@
     "ramda": "^0.25.0",
     "react": "^16.4.1",
     "react-contextmenu": "^2.9.2",
+    "react-dropzone": "^4.2.12",
     "react-icons": "^2.2.7",
     "react-jsonschema-form": "1.0.3",
     "react-redux": "^5.0.7",
