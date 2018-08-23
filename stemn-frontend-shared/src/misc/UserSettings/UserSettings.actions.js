@@ -9,11 +9,6 @@ export const getSettings = () => ({
   },
 })
 
-export const togglePreviewMarkdown = () => ({
-  type: 'USER_SETTINGS/TOGGLE_PREVIEW_MARKDOWN',
-  payload: {},
-})
-
 export const saveSettings = () => (dispatch, getState) => dispatch({
   type: 'USER_SETTINGS/SAVE_SETTINGS',
   http: true,

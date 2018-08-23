@@ -11,7 +11,7 @@ import MdOpenInNew from 'react-icons/md/open-in-new'
 import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList'
 import { showModal } from 'stemn-shared/misc/Modal/Modal.actions.js'
 import downloadModalName from 'stemn-shared/misc/Files/Download/DownloadModal'
-import { togglePreviewMarkdown } from 'stemn-shared/misc/UserSettings/UserSettings.actions'
+import { togglePreviewMarkdown } from 'stemn-shared/misc/Files/Files.actions'
 import { editToggle } from '../FileCompare.actions'
 import MdVisibility from 'react-icons/md/visibility'
 import MdCode from 'react-icons/md/code'
@@ -103,7 +103,7 @@ export class FileCompareMenu extends Component {
 }
 
 
-const stateToProps = ({ userSettings: { previewMarkdown } }) => ({
+const stateToProps = ({ files: { previewMarkdown } }) => ({
   previewMarkdown,
 })
 

@@ -8,6 +8,7 @@ export getRelatedThreads   from './getRelatedThreads'
 export renderFile          from './renderFile'
 export renderFileError     from './renderFileError'
 export renderFileProgress  from './renderFileProgress'
+export * from './togglePreviewMarkdown'
 
 export renderFileDownload  from './renderFileDownload.web'
 export saveFile            from './saveFile.web'

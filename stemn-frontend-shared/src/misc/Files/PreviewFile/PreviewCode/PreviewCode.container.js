@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import PreviewCode from './PreviewCode'
 
-const stateToProps = ({ userSettings: { previewMarkdown } }) => ({
+const stateToProps = ({ files: { previewMarkdown } }) => ({
   previewMarkdown,
 })
 

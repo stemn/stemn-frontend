@@ -10,6 +10,7 @@ const initialState = {
   pathToId: {},
   downloadProgress: {},
   relatedThreads: {},
+  previewMarkdown: false,
 }
 
 function reducer(state, action) {
@@ -119,6 +120,10 @@ function reducer(state, action) {
 
     case 'FILES/DOWNLOAD_PROGRESS' :
       return i.assocIn(state, ['downloadProgress', action.payload.cacheKey], action.payload.progress)
+
+    case 'FILES/TOGGLE_PREVIEW_MARKDOWN': {
+      return i.updateIn(state, ['previewMarkdown'], previewMarkdown => !previewMarkdown)
+    }
 
     default:
       return state
