@@ -6,11 +6,6 @@ import {
   authenticate,
   login, 
 } from 'stemn-shared/misc/Auth/Auth.actions.js'
-console.log({
-  nextBackground,
-  authenticate,
-  login, 
-})
 
 function mapStateToProps({ auth }) {
   return { auth }

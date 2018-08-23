@@ -9,7 +9,6 @@ export renderFile          from './renderFile'
 export renderFileError     from './renderFileError'
 export renderFileProgress  from './renderFileProgress'
 export * from './togglePreviewMarkdown'
-
 export getFullPath         from './getFullPath.desktop'
 export getMetaFromPath     from './getMetaFromPath.desktop'
 export renderFileDownload  from './renderFileDownload.desktop'
