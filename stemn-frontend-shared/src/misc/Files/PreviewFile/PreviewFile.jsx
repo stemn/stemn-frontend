@@ -17,8 +17,6 @@ import { isAssembly } from './PreviewCad/PreviewCad.utils.js'
 import DownloadFile from '../DownloadFile/DownloadFile.jsx'
 import ErrorMessages from './Messages/Messages.jsx'
 
-// /////////////////////////////// COMPONENT /////////////////////////////////
-
 export class Component extends React.Component {
   render() {
     const { file, fileData, fileRender, filesActions, header, event, editActive } = this.props

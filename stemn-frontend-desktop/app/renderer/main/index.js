@@ -11,11 +11,6 @@ import { getAppContainer, initHotReload } from '../shared/hotReload.utils'
 
 // Get the DOM elements
 const rootEl = document.getElementById('root')
-const loadingEl = document.getElementById('loading')
-
-// Hide the loading spinner
-loadingEl.style.display = 'none'
-rootEl.style.display = 'flex'
 
 const initialState = JSON.parse(remote.getGlobal('stateStringified'))
 const store = configureStore(initialState)

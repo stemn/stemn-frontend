@@ -1,17 +1,14 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import classes              from './AssemblyParts.css'
-import { connect }          from 'react-redux'
-import { orderBy }          from 'lodash'
-import moment               from 'moment'
-import { isAssembly, isCad }       from '../PreviewCad.utils.js'
-import {
-  getAssemblyParts,
-  getAssemblyParents,
-}                           from '../../../Files.actions.js'
-import SectionTitle         from 'stemn-shared/misc/Titles/SectionTitle/SectionTitle.jsx'
-import LoadingOverlay       from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
+import classes from './AssemblyParts.css'
+import { connect } from 'react-redux'
+import { orderBy } from 'lodash'
+import moment from 'moment'
+import { isAssembly, isCad } from '../PreviewCad.utils.js'
+import { getAssemblyParts, getAssemblyParents } from '../../../Files.actions.js'
+import SectionTitle from 'stemn-shared/misc/Titles/SectionTitle/SectionTitle.jsx'
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
 const propTypesObject = {
   fileMeta: PropTypes.object.isRequired,   // fileMeta for the assembly
@@ -57,7 +54,7 @@ export class AssemblyParts extends React.Component {
   componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
 
   render() {
-    const { parts, assemblies, clickFn } = this.props
+    const { parts, assemblies, clickFn, fileMeta } = this.props
 
     const displayRows = (items, title) => {
       const itemsOrdrered = orderBy(items.data, 'name')
@@ -72,7 +69,7 @@ export class AssemblyParts extends React.Component {
       )
     }
 
-    const hasChildParts       = parts && parts.data && parts.data.length > 0 || (parts && parts.loading)
+    const hasChildParts = parts && parts.data && parts.data.length > 0 || (parts && parts.loading)
     const hasParentAssemblies = assemblies && assemblies.data && assemblies.data.length > 0 || (assemblies && assemblies.loading)
 
     if (hasChildParts || hasParentAssemblies) {
