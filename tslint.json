@@ -6,6 +6,7 @@
     "no-implicit-dependencies": [false, "dev"],
     "ter-max-len": [true, 200],
     "semicolon": [true, "never"],
-    "one-variable-per-declaration": false
+    "one-variable-per-declaration": false,
+    "no-default-export": false // Allow temporarily...
   }
 }
