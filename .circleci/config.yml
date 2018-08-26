@@ -185,6 +185,7 @@ workflows:
           requires:
             - build_website
       - deploy_website:
+          type: approval
           requires:
             - test_website_e2e
           filters:

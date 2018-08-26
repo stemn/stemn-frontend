@@ -23,4 +23,3 @@ If you want to contribute a feature, please contact us 😊
 ## Related Repos
 
 * [stemn-desktop](https://github.com/stemn/Stemn-Desktop) the production releases of the stemn-desktop app (produced from this src)
-* [stemn-website-live](https://github.com/stemn/stemn-website-live) the production version of the stemn website (produced from this src)
