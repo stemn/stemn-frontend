@@ -86,7 +86,7 @@ export const getUserProjects = ({ userId }) => (dispatch, getState) => dispatch(
       parentId: userId,
       size: 1000,
       published: 'both',
-      select: ['_id', 'picture', 'stub', 'name', 'type', 'remote', 'updated', 'blurb', 'private'],
+      select: ['_id', 'picture', 'stub', 'name', 'type', 'remote', 'updated', 'blurb', 'private', 'clone'],
       criteria: {
         private: getState().auth.user._id === userId ? 'all' : false, // Get private project is the user is us.
       },

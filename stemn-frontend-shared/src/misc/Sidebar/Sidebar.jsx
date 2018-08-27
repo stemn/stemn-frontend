@@ -27,8 +27,6 @@ import ProjectMenu                    from 'stemn-shared/misc/Projects/Project.m
 import UserAvatar                     from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import ProjectNewModalName            from 'stemn-shared/misc/Projects/ProjectNewModal'
 
-// /////////////////////////////// COMPONENT /////////////////////////////////
-
 const projectContextIdentifier = "project"
 
 export class Component extends React.Component {
@@ -155,12 +153,6 @@ export class Component extends React.Component {
     )
   }
 }
-
-//              <div className="text-grey-3" style={{padding: '10px 15px 5px'}}>Other Projects</div>
-//              <SidebarProjectButton  item={{name: 'Demo Project'}} icon="tutorial" />
-
-
-// /////////////////////////////// CONTAINER /////////////////////////////////
 
 function mapStateToProps({ sidebar, auth, projects }, { params }) {
   return {

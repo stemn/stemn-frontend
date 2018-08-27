@@ -39,8 +39,6 @@ const notConnectedGuide = [{
   image: cloudProviders,
 }]
 
-// /////////////////////////////// COMPONENT /////////////////////////////////
-
 const CommitBoxStyles = {
   borderTop: '1px solid rgba(0, 0, 0, 0.1)',
   background: 'rgba(0, 0, 0, 0.03)',
@@ -105,6 +103,7 @@ export class Component extends React.Component {
     const { hideGuide } = this.state
 
     const hasCommits = timeline && timeline.data && timeline.data.length > 0
+    
     const isLoading  =
           project  && project.loading  && !project.data   ||
           changes  && changes.loading  && !changes.data   ||
@@ -208,8 +207,6 @@ export class Component extends React.Component {
   }
 }
 
-
-// /////////////////////////////// CONTAINER /////////////////////////////////
 
 function mapStateToProps({ changes, projects, syncTimeline }, { params }) {
   const project = projects.data[params.stub]

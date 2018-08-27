@@ -83,12 +83,14 @@ export class PreviewPage extends React.Component<IPreviewPageProps> {
         style={ { overflow: 'hidden', maxHeight: '100vh' } }
       >
         <Header>
-          <FileBreadCrumbs
-            className='text-ellipsis no-drag'
-            meta={ file.data }
-            clickFn={ this.clickFileOrFolder }
-            popup
-          />
+          { file.data && (
+            <FileBreadCrumbs
+              className='text-ellipsis no-drag'
+              meta={ file.data }
+              clickFn={ this.clickFileOrFolder }
+              popup
+            />
+          )}
           <div className='flex' />
           { file.data && (
             <FileCompareMenu
