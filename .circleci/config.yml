@@ -184,7 +184,7 @@ workflows:
       - test_website_e2e:
           requires:
             - build_website
-      - deploy_website:
+      - deploy_website_approval:
           type: approval
           requires:
             - test_website_e2e
@@ -193,7 +193,13 @@ workflows:
               only:
                 - production
                 - staging
-      - deploy_desktop:
+      - deploy_desktop_approval:
           type: approval
           requires:
            - build_desktop
+      - deploy_website:
+          requires:
+            - deploy_website_approval
+      - deploy_desktop:
+          requires:
+           - deploy_desktop_approval
