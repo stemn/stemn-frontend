@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import classes from './UserStars.css'
 import Pagination from 'stemn-shared/misc/Pagination'
-import ProjectRow from 'stemn-shared/misc/Projects/ProjectRow'
+import { ProjectRowContainer } from 'stemn-shared/misc/Projects/ProjectRow'
 
 export default class UserStars extends Component {
   render() {
@@ -15,7 +15,7 @@ export default class UserStars extends Component {
         <div className={ classes.panel }>
           { items && items.data
             ? items.data.map(projectId => (
-              <ProjectRow
+              <ProjectRowContainer
                 size="wide"
                 key={ projectId }
                 projectId={ projectId }

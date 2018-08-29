@@ -11,7 +11,7 @@ export default class FieldOverview extends Component {
       <Row className="layout-xs-col layout-gt-xs-row">
         <Col className="flex-gt-xs-70">
           <SiteSearchResults
-            page={ parseInt(location.query.page) }
+            page={ parseInt(location.query.page, 10) }
             parentType="field"
             parentId={ field.data._id }
             size={ 30 }

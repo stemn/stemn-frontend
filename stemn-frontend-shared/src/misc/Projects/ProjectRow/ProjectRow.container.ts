@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { getProject } from 'stemn-shared/misc/Projects/Projects.actions'
-import Project from './ProjectRow'
+import { ProjectRow } from './ProjectRow'
 
 const stateToProps = (state, { projectId }) => ({
   project: state.projects.data[projectId],
@@ -22,12 +23,14 @@ const fetchConfigs = [{
   },
 }]
 
-@connect(stateToProps, dispatchToProps)
-@fetchDataHoc(fetchConfigs)
-export default class ProjectContainer extends Component {
-  render() {
-    return (
-      <Project { ...this.props } />
-    )
-  }
+export interface IProjectRowContainerProps {
+  projectId: string,
+  size?: 'wide',
+  className?: string,
+  style?: object,
 }
+
+export const ProjectRowContainer = compose(
+  connect(stateToProps, dispatchToProps),
+  fetchDataHoc(fetchConfigs),
+)(ProjectRow) as React.SFC<IProjectRowContainerProps>

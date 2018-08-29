@@ -1,7 +1,8 @@
 export interface IProject {
-  id: string,
+  _id: string,
   name: string,
   blurb: string,
   location: string[],
   picture: string,
+  updated: string,
 }

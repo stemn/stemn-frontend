@@ -1,13 +1,21 @@
-import React, { Component } from 'react'
 import StandardLayout from 'layout/StandardLayout'
-import { Container, Row, Col } from 'stemn-shared/misc/Layout'
-import SiteSearchResults from 'stemn-shared/misc/Search/SiteSearchResults'
-import classes from './Explore.scss'
 import SubHeader from 'modules/SubHeader'
-import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
+import * as React from 'react'
 import { Helmet } from 'react-helmet'
-export default class Explore extends Component {
-  orderOptions = [{
+import { replace as replaceType } from 'react-router-redux'
+import { Col, Container, Row } from 'stemn-shared/misc/Layout'
+import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
+import { ProjectRowContainer } from 'stemn-shared/misc/Projects/ProjectRow'
+import SiteSearchResults from 'stemn-shared/misc/Search/SiteSearchResults'
+import * as classes from './Explore.scss'
+
+export interface IExploreProps {
+  replace: typeof replaceType,
+  location: any,
+}
+
+export default class Explore extends React.Component<IExploreProps> {
+  public orderOptions = [{
     value: 'views',
     name: 'Views',
     onClick: () => this.updateOrder('views'),
@@ -24,13 +32,7 @@ export default class Explore extends Component {
     name: 'Updated',
     onClick: () => this.updateOrder(undefined),
   }]
-  updateOrder = sort => this.props.replace({
-    pathname: window.location.pathname,
-    query: {
-      sort,
-    },
-  })
-  connectedOptions = [{
+  public connectedOptions = [{
     value: 'any',
     name: 'Any',
     onClick: () => this.updateConnected('any'),
@@ -43,13 +45,19 @@ export default class Explore extends Component {
     name: 'Disconnected',
     onClick: () => this.updateConnected('disconnected'),
   }]
-  updateConnected = store => this.props.replace({
+  public updateOrder = (sort) => this.props.replace({
+    pathname: window.location.pathname,
+    query: {
+      sort,
+    },
+  })
+  public updateConnected = (store) => this.props.replace({
     pathname: window.location.pathname,
     query: {
       store,
     },
   })
-  render() {
+  public render () {
     const { location } = this.props
 
     const getCriteria = () => {
@@ -67,8 +75,8 @@ export default class Explore extends Component {
         <Helmet>
           <title>Explore</title>
         </Helmet>
-        <SubHeader title="Explore" noResponsive>
-          <div className="layout-row layout-align-center-center">
+        <SubHeader title='Explore' noResponsive>
+          <div className='layout-row layout-align-center-center'>
             <PopoverDropdown
               style={ { margin: '0 10px' } }
               value={ location.query.store }
@@ -85,21 +93,36 @@ export default class Explore extends Component {
           </div>
         </SubHeader>
         <Container className={ classes.content }>
-          <Row className="layout-xs-col layout-gt-xs-row">
-            <Col className="flex-gt-xs-70">
+          <div className='text-mini-caps' style={ { marginBottom: '10px' } }>Featured Projects</div>
+           <div style={ { marginBottom: '30px' } }>
+            <ProjectRowContainer
+              projectId='5a88fb1a55e8c8000f5912db'
+              className={ classes.project }
+              size='wide'
+            />
+            <ProjectRowContainer
+              projectId='5a88fb1a55e8c8000f5912db'
+              className={ classes.project }
+              size='wide'
+            />
+           </div>
+          <Row className='layout-xs-col layout-gt-xs-row'>
+            <Col className='flex-gt-xs-70'>
+              <div className='text-mini-caps' style={ { marginBottom: '10px' } }>Latest Projects</div>
               <SiteSearchResults
-                type="project"
-                page={ parseInt(location.query.page) }
+                type='project'
+                page={ parseInt(location.query.page, 10) }
                 size={ 30 }
                 sort={ location.query.sort || 'updated' }
                 criteria={ criteria }
               />
             </Col>
-            <Col className="flex-gt-xs-30">
+            <Col className='flex-gt-xs-30'>
+              <div className='text-mini-caps' style={ { marginBottom: '10px' } }>Popular Fields</div>
               <SiteSearchResults
-                display="tag"
-                type="field"
-                page={ parseInt(location.query.page) }
+                display='tag'
+                type='field'
+                page={ parseInt(location.query.page, 10) }
                 size={ 20 }
                 sort={ location.query.sort || 'updated' }
               />
