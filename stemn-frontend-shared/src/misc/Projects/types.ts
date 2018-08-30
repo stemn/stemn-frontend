@@ -6,4 +6,11 @@ export interface IProject {
   picture: string,
   updated: string,
   stub: string,
+  clone?: {
+    source: string,
+  },
+  remote: {
+    provider: string,
+  },
+  private: boolean
 }

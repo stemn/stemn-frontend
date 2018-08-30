@@ -5,8 +5,8 @@ import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js'
 import { joinRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
 
 const fields = {
-  sm: ['name', 'picture', 'stub'],
-  md: ['name', 'picture', 'stub', 'blurb', 'updated'],
+  sm: ['name', 'picture', 'stub', 'clone', 'remote'],
+  md: ['name', 'picture', 'stub', 'clone', 'remote', 'blurb', 'updated'],
   lg: ['*'],
 }
 
