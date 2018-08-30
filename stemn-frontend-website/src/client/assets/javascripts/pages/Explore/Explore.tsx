@@ -3,6 +3,8 @@ import SubHeader from 'modules/SubHeader'
 import * as React from 'react'
 import { Helmet } from 'react-helmet'
 import { replace as replaceType } from 'react-router-redux'
+import { getEntries as getEntriesType } from 'stemn-shared/misc/Contentful/Contentful.actions'
+import { IContentfulContentPageExplore } from 'stemn-shared/misc/Contentful/types'
 import { Col, Container, Row } from 'stemn-shared/misc/Layout'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 // import { ProjectRowContainer } from 'stemn-shared/misc/Projects/ProjectRow'
@@ -12,7 +14,9 @@ import * as classes from './Explore.scss'
 
 export interface IExploreProps {
   replace: typeof replaceType,
+  getEntries: typeof getEntriesType,
   location: any,
+  contentfulPageExplore?: IContentfulContentPageExplore
 }
 
 export default class Explore extends React.Component<IExploreProps> {
@@ -46,6 +50,10 @@ export default class Explore extends React.Component<IExploreProps> {
     name: 'Disconnected',
     onClick: () => this.updateConnected('disconnected'),
   }]
+  public componentDidMount () {
+    const { getEntries } = this.props
+    getEntries({ contentType: 'pageExplore' })
+  }
   public updateOrder = (sort) => this.props.replace({
     pathname: window.location.pathname,
     query: {
@@ -59,7 +67,7 @@ export default class Explore extends React.Component<IExploreProps> {
     },
   })
   public render () {
-    const { location } = this.props
+    const { location, contentfulPageExplore } = this.props
 
     const getCriteria = () => {
       if (location.query.store === undefined) {
@@ -70,6 +78,9 @@ export default class Explore extends React.Component<IExploreProps> {
       return {}
     }
     const criteria = getCriteria()
+
+    const featuredFirst2 = contentfulPageExplore ? contentfulPageExplore.fields.featuredItems.slice(0, 2) : []
+    const featuredRemaining = contentfulPageExplore ? contentfulPageExplore.fields.featuredItems.slice(2) : []
 
     return (
       <StandardLayout>
@@ -96,16 +107,25 @@ export default class Explore extends React.Component<IExploreProps> {
         <Container className={ classes.content }>
           {/* <div className='text-mini-caps' style={ { marginBottom: '10px' } }>Featured Projects</div> */}
           <Row className='layout-xs-col layout-gt-xs-row layout-wrap'>
+           { featuredFirst2.map((item) => (
+              <Col className='flex-gt-xs-33' key={ item.sys.id }>
+                <FeaturedTile
+                  title={ item.fields.title }
+                  description={ item.fields.description }
+                  link={ item.fields.link }
+                  image={ item.fields.image.fields.file.url }
+                />
+              </Col>
+            )) }
             <Col className='flex-gt-xs-33'>
-              <FeaturedTile />
-            </Col>
-            <Col className='flex-gt-xs-33'>
-              <FeaturedTile />
-            </Col>
-            <Col className='flex-gt-xs-33'>
-              <FeaturedTileRow />
-              <FeaturedTileRow />
-              <FeaturedTileRow />
+            { featuredRemaining.map((item) => (
+                <FeaturedTileRow
+                  title={ item.fields.title }
+                  description={ item.fields.description }
+                  link={ item.fields.link }
+                  image={ item.fields.image.fields.file.url }
+                />
+              )) }
             </Col>
           </Row>
            <div style={ { marginBottom: '30px' } }>
@@ -119,7 +139,7 @@ export default class Explore extends React.Component<IExploreProps> {
               className={ classes.project }
               size='wide'
             /> */}
-           </div>
+          </div>
           <Row className='layout-xs-col layout-gt-xs-row'>
             <Col className='flex-gt-xs-66'>
               <div className='text-mini-caps' style={ { marginBottom: '10px' } }>Latest Projects</div>

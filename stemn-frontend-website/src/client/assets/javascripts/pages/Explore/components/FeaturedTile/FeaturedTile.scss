@@ -1,8 +1,13 @@
 .tile {
+  display: block;
   background: white;
   margin-bottom: 10px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   height: 382px;
+  transition: 0.3s ease all;
+  &:hover {
+    transform: translateY(-2px);
+  }
 }
 
 .rowTile {
@@ -10,6 +15,10 @@
   margin-bottom: 10px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   height: 120px;
+  transition: 0.3s ease all;
+  &:hover {
+    transform: translateY(-2px);
+  }
 }
 
 .content {

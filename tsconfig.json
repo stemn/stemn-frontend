@@ -16,7 +16,8 @@
         ],
         "baseUrl": "./",
         "paths": {
-            "stemn-shared/*": ["stemn-frontend-shared/src/*"]
+            "stemn-shared/*": ["stemn-frontend-shared/src/*"],
+            "reducer": ["stemn-frontend-website/src/client/assets/javascripts/app/reducer.ts"],
         }
     },
     "include": [

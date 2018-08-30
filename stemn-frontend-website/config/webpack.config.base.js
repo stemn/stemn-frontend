@@ -3,6 +3,7 @@ const { join } = require('path')
 const webpack = require('webpack')
 const autoprefixer = require('autoprefixer')
 const HappyPack = require('happypack')
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 
 const babelLoaderQuery = {
   presets: [
@@ -40,6 +41,9 @@ module.exports = {
       'get-root-path': join(__dirname, '../src/client/getRootPath.js'),
     },
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.scss'],
+    plugins: [
+      new TsconfigPathsPlugin({ configFile: join(__dirname, '../tsconfig.json') })
+    ]
   },
   plugins: [
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/), // http://stackoverflow.com/questions/25384360/how-to-prevent-moment-js-from-loading-locales-with-webpack

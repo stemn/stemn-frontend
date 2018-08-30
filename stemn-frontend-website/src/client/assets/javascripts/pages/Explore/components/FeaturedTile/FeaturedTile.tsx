@@ -1,27 +1,43 @@
 import * as cn from 'classnames'
 import * as React from 'react'
+import { Link } from 'react-router'
 import * as s from './FeaturedTile.scss'
 
-export const FeaturedTile = () => {
+export interface IFeaturedTileProps {
+  title: string,
+  description: string,
+  link: string,
+  image: string,
+}
+
+const CmsLink = ({ link, children, ...otherProps }: { link: string, children: any, [otherProps: string]: any }) => {
+  if (link.includes('https://stemn.com')) {
+    return <Link to={ link.replace('https://stemn.com', '') } { ...otherProps }>{ children }</Link>
+  } else {
+    return <a href={ link } { ...otherProps } target='_blank'>{ children }</a>
+  }
+}
+
+export const FeaturedTile = ({ title, description, link, image }: IFeaturedTileProps) => {
   return (
-    <div className={ s.tile }>
-      <div className={ s.image } style={{ backgroundImage: 'url(https://assets-cdn.github.com/images/modules/explore/spotlight/marsrover.png)' }}/>
+    <CmsLink className={ s.tile } link={ link }>
+      <div className={ s.image } style={{ backgroundImage:  `url(${image})` }}/>
       <div className={ s.content }>
-        <a className={ cn('link-primary', 'text-title-4') }>Open source Mars rover</a>
-        <div className={ s.blurb }>JPL's Open Source Build it yourself Mars Rover</div>
+        <a className={ cn('link-primary', 'text-title-4') }>{ title }</a>
+        <div className={ s.blurb }>{ description }</div>
       </div>
-    </div>
+    </CmsLink>
   )
 }
 
-export const FeaturedTileRow = () => {
+export const FeaturedTileRow = ({ title, description, link, image }: IFeaturedTileProps) => {
   return (
-    <div className={ cn(s.rowTile, 'layout-row') }>
-      <div className={ s.rowImage } style={{ backgroundImage: 'url(https://assets-cdn.github.com/images/modules/explore/spotlight/marsrover.png)' }}/>
+    <CmsLink className={ cn(s.rowTile, 'layout-row') } link={ link }>
+      <div className={ s.rowImage } style={{ backgroundImage: `url(${image})` }}/>
       <div className={ cn(s.content, 'flex') }>
-        <div className={ cn('link-primary', 'text-title-4') }>Open source Mars rover</div>
-        <div className={ cn(s.blurb, 'text-ellipsis') }>JPL's Open Source Build it yourself Mars Rover</div>
+        <div className={ cn('link-primary', 'text-title-4') }>{ title }</div>
+        <div className={ cn(s.blurb, 'text-ellipsis') }>{ description }</div>
       </div>
-    </div>
+    </CmsLink>
   )
 }
