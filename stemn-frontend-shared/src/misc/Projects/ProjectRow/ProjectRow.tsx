@@ -5,13 +5,14 @@ import LoadingAnimation from 'stemn-shared/misc/Loading/LoadingAnimation'
 import LoadingPlaceholder from 'stemn-shared/misc/Loading/LoadingPlaceholder'
 import { IProject } from 'stemn-shared/misc/Projects/types'
 import * as Link from 'stemn-shared/misc/Router/Link'
-import { IProjectRowContainerProps } from './ProjectRow.container'
 import * as classes from './ProjectRow.scss'
 
-export interface IProjectRowProps extends IProjectRowContainerProps {
+export interface IProjectRowProps {
   project: {
     data?: IProject,
-  }
+  },
+  size?: 'wide',
+  className?: string,
 }
 
 export class ProjectRow extends React.Component<IProjectRowProps> {

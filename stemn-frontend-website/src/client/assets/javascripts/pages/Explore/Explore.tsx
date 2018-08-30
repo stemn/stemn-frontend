@@ -8,7 +8,7 @@ import { IContentfulContentPageExplore } from 'stemn-shared/misc/Contentful/type
 import { Col, Container, Row } from 'stemn-shared/misc/Layout'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 // import { ProjectRowContainer } from 'stemn-shared/misc/Projects/ProjectRow'
-import SiteSearchResults from 'stemn-shared/misc/Search/SiteSearchResults'
+import { SiteSearchResultsContainer } from 'stemn-shared/misc/Search/SiteSearchResults'
 import { FeaturedTile, FeaturedTileRow } from './components/FeaturedTile'
 import * as classes from './Explore.scss'
 
@@ -143,9 +143,10 @@ export default class Explore extends React.Component<IExploreProps> {
           <Row className='layout-xs-col layout-gt-xs-row'>
             <Col className='flex-gt-xs-66'>
               <div className='text-mini-caps' style={ { marginBottom: '10px' } }>Latest Projects</div>
-              <SiteSearchResults
+              <SiteSearchResultsContainer
+                display='projectRow'
                 type='project'
-                page={ parseInt(location.query.page, 10) }
+                page={ parseInt(location.query.page, 10) || 1 }
                 size={ 30 }
                 sort={ location.query.sort || 'updated' }
                 criteria={ criteria }
@@ -153,10 +154,10 @@ export default class Explore extends React.Component<IExploreProps> {
             </Col>
             <Col className='flex-gt-xs-33'>
               <div className='text-mini-caps' style={ { marginBottom: '10px' } }>Popular Fields</div>
-              <SiteSearchResults
+              <SiteSearchResultsContainer
                 display='tag'
                 type='field'
-                page={ parseInt(location.query.page, 10) }
+                page={ parseInt(location.query.page, 10) || 1 }
                 size={ 20 }
                 sort={ location.query.sort || 'updated' }
               />

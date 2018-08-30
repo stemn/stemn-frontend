@@ -5,4 +5,5 @@ export interface IProject {
   location: string[],
   picture: string,
   updated: string,
+  stub: string,
 }

@@ -23,7 +23,7 @@ export const FeaturedTile = ({ title, description, link, image }: IFeaturedTileP
     <CmsLink className={ s.tile } link={ link }>
       <div className={ s.image } style={{ backgroundImage:  `url(${image})` }}/>
       <div className={ s.content }>
-        <a className={ cn('link-primary', 'text-title-4') }>{ title }</a>
+        <a className={ cn('link-primary', s.title) }>{ title }</a>
         <div className={ s.blurb }>{ description }</div>
       </div>
     </CmsLink>
@@ -35,7 +35,7 @@ export const FeaturedTileRow = ({ title, description, link, image }: IFeaturedTi
     <CmsLink className={ cn(s.rowTile, 'layout-row') } link={ link }>
       <div className={ s.rowImage } style={{ backgroundImage: `url(${image})` }}/>
       <div className={ cn(s.content, 'flex') }>
-        <div className={ cn('link-primary', 'text-title-4') }>{ title }</div>
+        <div className={ cn('link-primary', s.title) }>{ title }</div>
         <div className={ cn(s.blurb, 'text-ellipsis') }>{ description }</div>
       </div>
     </CmsLink>
