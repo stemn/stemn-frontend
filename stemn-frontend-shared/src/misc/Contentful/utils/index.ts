@@ -1,3 +1,5 @@
+/* tslint:disable:no-use-before-declare */
+
 import { forOwn, get } from 'lodash'
 
 const transformItem = (item) => (item && item.sys ? {
