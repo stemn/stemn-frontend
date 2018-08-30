@@ -1,0 +1,30 @@
+.projectRow {
+  &.results {
+    border: none;
+    background: none;
+    padding: 0px;
+  }
+  .result {
+    padding: 20px;
+    background: white;
+    margin-bottom: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}
+
+.results {
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: white;
+  min-height: 70px;
+  padding: 20px;
+}
+
+.result {
+  margin-bottom: 30px;
+}
+
+.result:last-child {
+  margin-bottom: 0px;
+}
+

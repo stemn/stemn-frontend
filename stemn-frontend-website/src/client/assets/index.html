@@ -40,23 +40,23 @@
       position: absolute;
       left: 50%;
       top: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%) scale(0.7);
       width: 100px;
     }
-    .page-spinner svg{
-      animation: rotate 2s linear infinite;
+    .page-spinner svg {
+      animation: rotate-spinner 2s linear infinite;
     }
-    .page-spinner circle{
-      animation: dash 1.5s ease-in-out infinite;
+    .page-spinner circle {
+      animation: dash-spinner 1.5s ease-in-out infinite;
       stroke: rgb(68, 154, 211);
       stroke-linecap: round;
     }
-    @keyframes rotate {
+    @keyframes rotate-spinner {
       100% {
         transform: rotate(360deg);
       }
     }
-    @keyframes dash {
+    @keyframes dash-spinner {
       0% {
         stroke-dasharray: 1, 200;
         stroke-dashoffset: 0;

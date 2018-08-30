@@ -50,9 +50,9 @@ const getRouteNameAndParams = (data) => {
 export default class EntityRow extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired, // The Entity's data
-    query: PropTypes.string,  // Search query (used to highlight the name)
-    nofollow: PropTypes.bool, // Should the follow button be hidden
-    children: PropTypes.node, // Children to be displayed in the far right
+    query: PropTypes.string,           // Search query (used to highlight the name)
+    nofollow: PropTypes.bool,          // Should the follow button be hidden
+    children: PropTypes.node,          // Children to be displayed in the far right
   }
   static defaultProps = {
     data: {},

@@ -5,7 +5,7 @@ import StandardLayout from 'layout/StandardLayout'
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import Tabs from 'stemn-shared/misc/Tabs/Tabs'
 import Link from 'stemn-shared/misc/Router/Link'
-import SiteSearchResults from 'stemn-shared/misc/Search/SiteSearchResults'
+import { SiteSearchResultsContainer } from 'stemn-shared/misc/Search/SiteSearchResults'
 import { Helmet } from 'react-helmet'
 import classes from './Search.scss'
 
@@ -29,7 +29,7 @@ export default class Search extends Component {
         <Container className={ classes.content }>
           <Row className="layout-xs-col layout-gt-xs-row">
             <Col className="flex-gt-xs-70">
-              <SiteSearchResults
+              <SiteSearchResultsContainer
                 query={ location.query.q }
                 type={ location.query.type }
                 page={ parseInt(location.query.page) }

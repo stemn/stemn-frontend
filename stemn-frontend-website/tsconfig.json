@@ -1,5 +1,12 @@
 {
     "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "paths": {
+            "stemn-shared/*": ["stemn-frontend-shared/src/*"],
+            "modules/*": ["stemn-frontend-website/src/client/assets/javascripts/modules/*"],
+            "layout/*": ["stemn-frontend-website/src/client/assets/javascripts/layout/*"]
+        }
+    },
     "include": [
         "../typings.d.ts",
         "../stemn-frontend-website",
