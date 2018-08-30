@@ -5,8 +5,9 @@ import { Helmet } from 'react-helmet'
 import { replace as replaceType } from 'react-router-redux'
 import { Col, Container, Row } from 'stemn-shared/misc/Layout'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
-import { ProjectRowContainer } from 'stemn-shared/misc/Projects/ProjectRow'
+// import { ProjectRowContainer } from 'stemn-shared/misc/Projects/ProjectRow'
 import SiteSearchResults from 'stemn-shared/misc/Search/SiteSearchResults'
+import { FeaturedTile, FeaturedTileRow } from './components/FeaturedTile'
 import * as classes from './Explore.scss'
 
 export interface IExploreProps {
@@ -93,9 +94,22 @@ export default class Explore extends React.Component<IExploreProps> {
           </div>
         </SubHeader>
         <Container className={ classes.content }>
-          <div className='text-mini-caps' style={ { marginBottom: '10px' } }>Featured Projects</div>
+          {/* <div className='text-mini-caps' style={ { marginBottom: '10px' } }>Featured Projects</div> */}
+          <Row className='layout-xs-col layout-gt-xs-row layout-wrap'>
+            <Col className='flex-gt-xs-33'>
+              <FeaturedTile />
+            </Col>
+            <Col className='flex-gt-xs-33'>
+              <FeaturedTile />
+            </Col>
+            <Col className='flex-gt-xs-33'>
+              <FeaturedTileRow />
+              <FeaturedTileRow />
+              <FeaturedTileRow />
+            </Col>
+          </Row>
            <div style={ { marginBottom: '30px' } }>
-            <ProjectRowContainer
+            {/* <ProjectRowContainer
               projectId='5a88fb1a55e8c8000f5912db'
               className={ classes.project }
               size='wide'
@@ -104,10 +118,10 @@ export default class Explore extends React.Component<IExploreProps> {
               projectId='5a88fb1a55e8c8000f5912db'
               className={ classes.project }
               size='wide'
-            />
+            /> */}
            </div>
           <Row className='layout-xs-col layout-gt-xs-row'>
-            <Col className='flex-gt-xs-70'>
+            <Col className='flex-gt-xs-66'>
               <div className='text-mini-caps' style={ { marginBottom: '10px' } }>Latest Projects</div>
               <SiteSearchResults
                 type='project'
@@ -117,7 +131,7 @@ export default class Explore extends React.Component<IExploreProps> {
                 criteria={ criteria }
               />
             </Col>
-            <Col className='flex-gt-xs-30'>
+            <Col className='flex-gt-xs-33'>
               <div className='text-mini-caps' style={ { marginBottom: '10px' } }>Popular Fields</div>
               <SiteSearchResults
                 display='tag'
