@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
-import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
-import { getMeta } from 'stemn-shared/misc/Files/Files.actions.js'
-import { push as pushRoute } from 'react-router-redux'
-import { initCompare, changeMode, select } from 'stemn-shared/misc/FileCompare/FileCompare.actions'
 import { get } from 'lodash'
-import File from './File'
+import { connect } from 'react-redux'
+import { push as pushRoute } from 'react-router-redux'
+import { compose } from 'redux'
+import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
+import { changeMode, initCompare, select } from 'stemn-shared/misc/FileCompare/FileCompare.actions'
+import { getMeta } from 'stemn-shared/misc/Files/Files.actions.js'
+import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
+import { FileComponent } from './File'
 
 const stateToProps = ({ files, fileCompare, syncTimeline }, { params, location }) => {
   const { projectId, fileId } = params
@@ -23,7 +23,7 @@ const stateToProps = ({ files, fileCompare, syncTimeline }, { params, location }
   }
 }
 
-const dispatchToProps = {
+export const dispatchToProps = {
   changeMode,
   fetchTimeline,
   getMeta,
@@ -59,15 +59,7 @@ const fetchConfigs = [{
     }
   },
 }]
-
-@connect(stateToProps, dispatchToProps)
-@fetchDataHoc(fetchConfigs)
-export default class FileContainer extends Component {
-  render() {
-    const { file } = this.props
-    
-    return file && file.data
-      ? <File { ...this.props } />
-      : null
-  }
-}
+export default compose(
+  connect(stateToProps, dispatchToProps),
+  fetchDataHoc(fetchConfigs),
+)(FileComponent)

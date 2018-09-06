@@ -79,7 +79,6 @@
     "react-popover-wrapper": "^1.0.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.2.4",
-    "react-router-redux": "^4.0.2",
     "react-select": "^1.0.0-beta14",
     "react-textarea-autosize": "4.0.5",
     "react-virtualized": "^7.2.0",

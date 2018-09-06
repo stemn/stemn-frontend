@@ -121,7 +121,6 @@
     "react-popover-wrapper": "2.1.0",
     "react-redux": "5.0.7",
     "react-router": "3.2.1",
-    "react-router-redux": "4.0.5",
     "react-select": "1.0.0-rc.3",
     "react-smooth": "1.0.0",
     "react-waypoint": "5.2.1",
