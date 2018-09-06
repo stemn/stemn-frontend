@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import classes from './MentionPopover.css'
 import Popover from 'stemn-shared/misc/Popover'
 import Highlight from 'stemn-shared/misc/Autosuggest/Highlight'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay'
-import classNames from 'classnames'
+import cn from 'classnames'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 
 export default class MentionPopover extends Component {
@@ -25,7 +25,7 @@ export default class MentionPopover extends Component {
         offset={ 10 }
       >
         <div className={ classes.caret } style={ caretPositionStyles } />
-        <div className={ classNames('PopoverMenu', classes.popover) }>
+        <div className={ cn('PopoverMenu', classes.popover) }>
           <LoadingOverlay show={ !results || results.loading } linear noOverlay />
           { hasResult && results.data.map(result => (
             <a

@@ -4,7 +4,8 @@ import classes from './ProjectPipeline.scss'
 import { Breadcrumbs, Crumb } from 'stemn-shared/misc/Breadcrumbs'
 import { Container } from 'stemn-shared/misc/Layout'
 import SubSubHeader from 'modules/SubSubHeader'
-import PipelineMap from 'stemn-shared/misc/Pipelines/PipelineMap'
+import { PipelineGraph } from 'stemn-shared/misc/Pipelines/PipelineGraph'
+import { pipelineConfigFixture } from 'stemn-shared/misc/Pipelines/PipelineGraph/fixtures'
 import ProjectPipelineMeta from './ProjectPipelineMeta.container'
 import BannerBar from 'stemn-shared/misc/BannerBar'
 import SimpleTable from 'stemn-shared/misc/Tables/SimpleTable'
@@ -50,7 +51,12 @@ export default class ProjectCommit extends Component {
               }
             </SimpleTable>
           </BannerBar>
-          <PipelineMap pipeline={ pipeline.data } />
+          <PipelineGraph
+            className={ classes.graph }
+            style={ { minHeight: '600px' } }
+            pipelineConfig={ pipelineConfigFixture } 
+            readOnly
+          />
         </Container>
       </div>
     )

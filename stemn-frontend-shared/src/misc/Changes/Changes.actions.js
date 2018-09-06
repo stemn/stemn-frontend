@@ -2,10 +2,7 @@ import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import { show as showToast } from '../Toasts/Toasts.actions.js'
 import { showModal }         from '../Modal/Modal.actions.js'
 import { parseMentions }     from '../Mentions/Mentions.utils.js'
-import { updateThread }        from '../Threads/Threads.actions.js'
-import i                     from 'icepick'
 import http                  from 'axios'
-import { get }               from 'lodash'
 import ThreadMentionModalName from 'stemn-shared/misc/Mentions/ThreadMentionModal'
 import { filterSelectedChangesByPossible } from './Changes.utils.js'
 
@@ -133,7 +130,7 @@ export function commit({ projectId, name, body }) {
         const mentions = parseMentions(response.data.body)
         // If mentionType: thread-complete, we set the thread to complete.
         mentions.forEach((mention) => {
-          if (mention.mentionType == 'thread-complete') {
+          if (mention.mentionType === 'thread-complete') {
             dispatch(storeChange(`threads.data.${mention.entityId}.data.complete`, true))
           }
         })

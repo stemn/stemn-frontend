@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import classes from './ThreadRow.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 import Link from 'stemn-shared/misc/Router/Link'
 import ThreadLabelDots from 'stemn-shared/misc/Threads/ThreadLabelDots/ThreadLabelDots.jsx'
 import UserAvatars from 'stemn-shared/misc/Avatar/UserAvatars/UserAvatars.jsx'
@@ -9,7 +9,7 @@ import LoadingPlaceholder from 'stemn-shared/misc/Loading/LoadingPlaceholder'
 import LoadingAnimation from 'stemn-shared/misc/Loading/LoadingAnimation'
 import pluralise from 'stemn-shared/utils/strings/pluralise'
 
-const getGroupInfo = (groupId, groups) => groups.find(group => group._id == groupId)
+const getGroupInfo = (groupId, groups) => groups.find(group => group._id === groupId)
 
 export default class ThreadRow extends Component {
   render() {
@@ -24,10 +24,10 @@ export default class ThreadRow extends Component {
       const group = getGroupInfo(thread.data.group, board.data.groups)
 
       return (
-        <div className={ classNames('layout-row layout-align-start-center', classes.row, className) }>
+        <div className={ cn('layout-row layout-align-start-center', classes.row, className) }>
           <div className="layout-column flex">
             <Link
-              className={ classNames(classes.title, 'text-ellipsis') }
+              className={ cn(classes.title, 'text-ellipsis') }
               name="projectThreadRoute"
               params={ threadRouteParams }
             >
@@ -68,12 +68,12 @@ export default class ThreadRow extends Component {
       )
     }
     return (
-      <LoadingAnimation className={ classNames('layout-row layout-align-start-center', classes.row, className) }>
+      <LoadingAnimation className={ cn('layout-row layout-align-start-center', classes.row, className) }>
         <div className="layout-column flex">
           <div>
             <LoadingPlaceholder width={ 300 } className={ classes.title } />
           </div>
-          <div className={ classNames(classes.meta, 'layout-row') }>
+          <div className={ cn(classes.meta, 'layout-row') }>
             <LoadingPlaceholder width={ 50 } />
             <LoadingPlaceholder width={ 50 } style={ { marginLeft: '5px' } } />
           </div>

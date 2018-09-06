@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react'
-import classNames from 'classnames'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import cn from 'classnames'
 import classes from './UserProfileSettings.css'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
@@ -70,7 +71,7 @@ export default class UserProfileSettings extends Component {
             Save Profile
           </ProgressButton>
         </Col>
-        <Col className={ classNames(classes.avatarCol, 'flex-order-sm-0 flex-order-xs-0') }>
+        <Col className={ cn(classes.avatarCol, 'flex-order-sm-0 flex-order-xs-0') }>
           <h3>Profile Picture</h3>
           <Upload
             containerClassName={ classes.container }

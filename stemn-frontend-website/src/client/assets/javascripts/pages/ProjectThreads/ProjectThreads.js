@@ -1,22 +1,18 @@
 import React, { Component } from 'react'
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './ProjectThreads.css'
 import { Row, Col, Container } from 'stemn-shared/misc/Layout'
 import SubSubHeader from 'modules/SubSubHeader'
-import ThreadList from 'stemn-shared/misc/Threads/ThreadList/ThreadList.jsx'
 import ThreadRow from 'stemn-shared/misc/Threads/ThreadRow'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import Pagination from 'stemn-shared/misc/Pagination'
-import MdExpandMore from 'react-icons/md/expand-more'
 import SearchInput from 'stemn-shared/misc/Search/SearchInput'
-import Popover from 'stemn-shared/misc/Popover'
 import LabelSelect from 'stemn-shared/misc/Threads/LabelSelect/LabelSelect'
 import GroupSelect from 'stemn-shared/misc/Threads/GroupSelect'
-import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import { get } from 'lodash'
 import ThreadsEmpty from 'stemn-shared/misc/Threads/ThreadsEmpty'
-import FlipMove from 'react-flip-move'
+import FlipMove from 'react-flip-move/dist/react-flip-move.js'
 import AccordianAnimate from 'stemn-shared/misc/Animation/AccordianAnimate'
 import ThreadFilterUser from 'stemn-shared/misc/Threads/ThreadFilters/ThreadFilterUser'
 import ThreadFilterStatus from 'stemn-shared/misc/Threads/ThreadFilters/ThreadFilterStatus'
@@ -57,7 +53,20 @@ export default class ProjectThreads extends Component {
     })
   }
   render() {
-    const { project, board, threads, location, filter, boardModel, showNewThreadModal, page, size, filterStorePath, filterIsDefault, setFilter, filterCacheKey, filterModel } = this.props
+    const {
+      project,
+      board,
+      threads,
+      location,
+      filter,
+      page,
+      size,
+      filterStorePath,
+      filterIsDefault,
+      setFilter,
+      filterCacheKey,
+      filterModel,
+    } = this.props
     const noMoreResults = threads && threads.data && threads.data.length < size
     const isLoading = !threads || threads.loading
     const isLoaded = threads && threads.data && board && board.data
@@ -103,7 +112,7 @@ export default class ProjectThreads extends Component {
               />
             </Col>
             <div className="flex-xs-0 flex-sm-0 flex-gt-sm" />
-            <Col className={ classNames('sm layout-row', classes.filterRow) }>
+            <Col className={ cn('sm layout-row', classes.filterRow) }>
               <ThreadFilterUser
                 className="flex-xs"
                 filter={ filter }
@@ -176,7 +185,7 @@ export default class ProjectThreads extends Component {
                             ))}
                           </FlipMove>
                         </AccordianAnimate>
-                        : <div className={ classNames('text-title-5', classes.noResult) }>
+                        : <div className={ cn('text-title-5', classes.noResult) }>
                           No Results. <a className="link-primary"  onClick={ this.clearFilter }>Clear Filter</a>
                         </div> }
                     </div>

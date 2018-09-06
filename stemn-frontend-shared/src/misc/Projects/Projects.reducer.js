@@ -63,10 +63,10 @@ function reducer(state, action) {
         return i.push(team, modifiedUser)
       })
     case 'PROJECTS/REMOVE_TEAM_MEMBER':
-      return i.updateIn(state, ['data', action.payload.projectId, 'data', 'team'], team => team.filter(user => user._id != action.payload.userId))
+      return i.updateIn(state, ['data', action.payload.projectId, 'data', 'team'], team => team.filter(user => user._id !== action.payload.userId))
     case 'PROJECTS/CHANGE_USER_PERMISSIONS':
       return i.updateIn(state, ['data', action.payload.projectId, 'data', 'team'], (team) => {
-        const index = team.findIndex(user => user._id == action.payload.userId)
+        const index = team.findIndex(user => user._id === action.payload.userId)
         return [
           ...team.slice(0, index),
           i.assocIn(team[index], ['permissions', 'role'], action.payload.role),
@@ -77,7 +77,7 @@ function reducer(state, action) {
     case 'PROJECTS/ADD_FIELD':
       return i.updateIn(state, ['data', action.payload.projectId, 'data', 'fields'], fields => uniqBy(i.push(fields, action.payload.field), '_id'))
     case 'PROJECTS/REMOVE_FIELD':
-      return i.updateIn(state, ['data', action.payload.projectId, 'data', 'fields'], fields => fields.filter(field => field._id != action.payload.fieldId))
+      return i.updateIn(state, ['data', action.payload.projectId, 'data', 'fields'], fields => fields.filter(field => field._id !== action.payload.fieldId))
 
     case 'PROJECTS/SET_LIKED':
       return i.assocIn(state, ['data', action.payload.projectId, 'data', 'liked'], true)
@@ -145,7 +145,7 @@ function reducer(state, action) {
       return i.chain(state)
         .assocIn(['data', action.meta.projectId], undefined) // Delete the project from the main store
         .updateIn(['userProjects', action.meta.userId, 'data'], (projects) => {  // Delete it from the userProjects list
-          const projectIndex = projects.findIndex(project => project._id == action.meta.projectId)
+          const projectIndex = projects.findIndex(project => project._id === action.meta.projectId)
           return i.splice(projects, projectIndex, 1)
         })
         .value()

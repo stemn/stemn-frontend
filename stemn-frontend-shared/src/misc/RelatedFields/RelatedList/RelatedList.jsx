@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Tag from 'stemn-shared/misc/Tags/Tag'
 import Link from 'stemn-shared/misc/Router/Link'
 

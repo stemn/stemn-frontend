@@ -1,13 +1,12 @@
 import http from 'axios'
 import { homeRoute } from 'route-actions'
 import { push } from 'react-router-redux'
-import { shouldDownload } from '../../redux/utils'
 import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js'
 import { joinRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
 
 const fields = {
-  sm: ['name', 'picture', 'stub'],
-  md: ['name', 'picture', 'stub', 'blurb', 'updated'],
+  sm: ['name', 'picture', 'stub', 'clone', 'remote'],
+  md: ['name', 'picture', 'stub', 'clone', 'remote', 'blurb', 'updated'],
   lg: ['*'],
 }
 
@@ -87,7 +86,7 @@ export const getUserProjects = ({ userId }) => (dispatch, getState) => dispatch(
       parentId: userId,
       size: 1000,
       published: 'both',
-      select: ['_id', 'picture', 'stub', 'name', 'type', 'remote', 'updated', 'blurb', 'private'],
+      select: ['_id', 'picture', 'stub', 'name', 'type', 'remote', 'updated', 'blurb', 'private', 'clone'],
       criteria: {
         private: getState().auth.user._id === userId ? 'all' : false, // Get private project is the user is us.
       },

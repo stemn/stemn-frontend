@@ -2,8 +2,6 @@ import * as routeActions from 'route-actions'
 import { some } from 'lodash'
 
 export const isActive = (activeIf, params) => {
-  const result = false
-
   const checkPathIs = () => {
     if (activeIf && activeIf.is) {
       return some(activeIf.is, item => getRoutePath(item, params) === window.location.pathname)

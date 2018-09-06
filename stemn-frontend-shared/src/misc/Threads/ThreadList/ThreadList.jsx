@@ -11,10 +11,10 @@ import ThreadListItemWrapped from './ThreadListItem/ThreadListItemWrapped.jsx'
 import ThreadListItem        from './ThreadListItem/ThreadListItem.jsx'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './ThreadList.css'
 
-export const NewItem = React.createClass({
+export class NewItem extends React.Component {
   render() {
     const { model, value, submitFn, placeholder, box, style } = this.props
     return (
@@ -27,25 +27,25 @@ export const NewItem = React.createClass({
         />
       </form>
     )
-  },
-})
+  }
+}
 
-export const ThreadList = React.createClass({
+export class ThreadList extends React.Component {
   componentWillMount() {
     this.props.joinRoom({
       room: this.props.board.data._id,
       type: 'board',
     })
-  },
+  }
 
   componentWillUnmount() {
     this.props.leaveRoom({
       room: this.props.board.data._id,
       type: 'board',
     })
-  },
+  }
 
-  moveGroup({ group, destinationGroup, after, save }) {
+  moveGroup = ({ group, destinationGroup, after, save }) => {
     this.props.moveGroup({
       boardId: this.props.board.data._id,
       group,
@@ -53,8 +53,9 @@ export const ThreadList = React.createClass({
       after,
       save,
     })
-  },
-  moveCard({ thread, destinationThread, destinationGroup, after, save }) {
+  };
+
+  moveCard = ({ thread, destinationThread, destinationGroup, after, save }) => {
     this.props.moveThread({
       boardId: this.props.board.data._id,
       thread,
@@ -63,20 +64,23 @@ export const ThreadList = React.createClass({
       after,
       save,
     })
-  },
-  beginDrag(threadId) {
+  };
+
+  beginDrag = (threadId) => {
     this.props.beginDrag({
       boardId: this.props.board.data._id,
       threadId,
     })
-  },
-  endDrag(threadId) {
+  };
+
+  endDrag = (threadId) => {
     this.props.endDrag({
       boardId: this.props.board.data._id,
       threadId,
     })
-  },
-  newThread(event, groupId) {
+  };
+
+  newThread = (event, groupId) => {
     event.preventDefault()
     this.props.newThread({
       projectId: this.props.board.data.project,
@@ -86,8 +90,9 @@ export const ThreadList = React.createClass({
         board: this.props.board.data._id,
       },
     })
-  },
-  newGroup(event) {
+  };
+
+  newGroup = (event) => {
     event.preventDefault()
     this.props.newGroup({
       boardId: this.props.board.data._id,
@@ -95,24 +100,27 @@ export const ThreadList = React.createClass({
         name: this.props.board.newGroupString,
       },
     })
-  },
-  deleteGroup(groupId) {
+  };
+
+  deleteGroup = (groupId) => {
     this.props.deleteGroupConfirm({
       boardId: this.props.board.data._id,
       groupId,
     })
-  },
-  updateGroup(group) {
+  };
+
+  updateGroup = (group) => {
     this.props.updateGroup({
       group,
     })
-  },
+  };
+
   render() {
     const { board, layout, className } = this.props
     const entityModel = `threads.boards.${board.data._id}`
 
-    const outerClasses = classNames(className, layout == 'board' ? 'layout-column flex' : 'flex')
-    const outerStyles = layout == 'board' ? { overflowX: 'scroll' } : { overflowY: 'scroll' }
+    const outerClasses = cn(className, layout === 'board' ? 'layout-column flex' : 'flex')
+    const outerStyles = layout === 'board' ? { overflowX: 'scroll' } : { overflowY: 'scroll' }
     return (
       <div className={ outerClasses } style={ outerStyles }>
         <ThreadGroupParent layout={ layout }>
@@ -155,12 +163,12 @@ export const ThreadList = React.createClass({
                     </ThreadListItemWrapped>,
                   ) : ''}
                   <NewItem
-                    style={ layout == 'list' ? { marginLeft: '60px', zIndex: '1', position: 'relative' } : { zIndex: '1', position: 'relative' } }
+                    style={ layout === 'list' ? { marginLeft: '60px', zIndex: '1', position: 'relative' } : { zIndex: '1', position: 'relative' } }
                     model={ `${entityModel}.newThreadString.${group._id}` }
                     value={ board.newThreadString ? board.newThreadString[group._id] : '' }
                     placeholder="New Thread"
                     submitFn={ event => this.newThread(event, group._id) }
-                    box={ layout == 'board' }
+                    box={ layout === 'board' }
                   />
                 </ThreadListItemParent>
               </ThreadGroup>
@@ -174,15 +182,15 @@ export const ThreadList = React.createClass({
                 value={ board.newGroupString }
                 placeholder="New Group"
                 submitFn={ this.newGroup }
-                box={ layout == 'board' }
+                box={ layout === 'board' }
               />
             </ThreadGroup>
           </div>
         </ThreadGroupParent>
       </div>
     )
-  },
-})
+  }
+}
 
 // //////////////////////////////////////////////////////////////////
 

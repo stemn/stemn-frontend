@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import StandardLayout from 'layout/StandardLayout'
 import { Helmet } from 'react-helmet'
 import classes from './NotFound.css'

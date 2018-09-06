@@ -1,15 +1,8 @@
-// Container Core
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-
-// Container Actions
-import * as UsersActions from 'stemn-shared/misc/Users/Users.actions.js'
 
 // Component Core
 import React from 'react'
 
-// Styles
-import classNames from 'classnames'
 import classes from '../ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css'
 
 // Sub Components
@@ -21,7 +14,7 @@ import NavPill from 'stemn-shared/misc/Buttons/NavPill/NavPill'
 // /////////////////////////////// COMPONENT /////////////////////////////////
 // ///////////////////////////////////////////////////////////////////////////
 
-export const Component = React.createClass({
+export class Component extends React.Component {
   render() {
     const { auth } = this.props
     return (
@@ -32,7 +25,7 @@ export const Component = React.createClass({
         <div className={ `${classes.container} layout-row flex scroll-box` }>
           <div style={ { width: '250px', marginRight: '15px' } }>
             <div className={ classes.panel } style={ { padding: '0px' } }>
-              <NavPill className="primary" href="https://dev.stemn.com/settings">More settings: stemn.com</NavPill>
+              <NavPill className="primary" href="https://stemn.com/settings">More settings: stemn.com</NavPill>
             </div>
             <div className={ classes.panel } style={ { padding: '0px' } }>
               <NavPill to="/settings/application">Application</NavPill>
@@ -47,8 +40,8 @@ export const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 // ///////////////////////////////////////////////////////////////////////////
 // /////////////////////////////// CONTAINER /////////////////////////////////

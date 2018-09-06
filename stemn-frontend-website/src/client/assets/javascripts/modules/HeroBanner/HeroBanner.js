@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import classes from './HeroBanner.scss'
-import classNames from 'classnames'
+import cn from 'classnames'
 import { Container } from 'stemn-shared/misc/Layout'
 
 export default class HeroBanner extends Component {
@@ -12,7 +12,7 @@ export default class HeroBanner extends Component {
       ? Object.assign({}, { backgroundImage: `url(${image})` }, style)
       : style
 
-    const allClasses = classNames(classes.banner, 'layout-column', className)
+    const allClasses = cn(classes.banner, 'layout-column', className)
 
     return (
       <section

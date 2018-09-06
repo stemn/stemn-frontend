@@ -1,10 +1,9 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { get } from 'lodash'
 import classes from './NewThreadModal.scss'
-import classNames from 'classnames'
+import cn from 'classnames'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
-import Input from 'stemn-shared/misc/Input/Input/Input'
 import Editor from 'stemn-shared/misc/Editor/EditorNew'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 
@@ -65,10 +64,10 @@ export default class NewThreadModal extends Component {
     }))
 
     return (
-      <div className={ classNames(classes.modal, 'layout-column') }>
+      <div className={ cn(classes.modal, 'layout-column') }>
         <div className={ classes.modalTitle }>Create a new thread</div>
-        <div className={ classNames(classes.modalBody, 'flex layout-column') }>
-          <div className={ classNames(classes.titleSection, 'layout-row layout-align-start-center') }>
+        <div className={ cn(classes.modalBody, 'flex layout-column') }>
+          <div className={ cn(classes.titleSection, 'layout-row layout-align-start-center') }>
             <Textarea
               model={ `${boardModel}.newThread.name` }
               value={ get(board, 'newThread.name', '') }

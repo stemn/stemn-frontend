@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import classes from './Terminal.scss'
-import classNames from 'classnames'
+import cn from 'classnames'
 import Ansi from 'ansi-to-react'
 import MdDown from 'react-icons/md/arrow-downward'
-import MdCode from 'react-icons/md/code'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
@@ -19,7 +18,11 @@ export default class Terminal extends Component {
     window.scrollTo(0, document.body.scrollHeight)
   }
   render() {
-    const { lines, rawPath, loading, hasLoadedBefore } = this.props
+    const {
+      lines,
+      loading,
+      hasLoadedBefore,
+    } = this.props
     return (
       <div className={ classes.outer }>
         <LoadingOverlay
@@ -27,7 +30,7 @@ export default class Terminal extends Component {
           linear
           hideBg
         />
-        <div className={ classNames(classes.header, 'layout-row layout-align-end') }>
+        <div className={ cn(classes.header, 'layout-row layout-align-end') }>
           <SimpleIconButton
             color="white"
             title="Scroll to Bottom"

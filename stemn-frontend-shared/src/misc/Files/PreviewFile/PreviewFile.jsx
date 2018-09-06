@@ -2,7 +2,6 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as FilesActions from '../Files.actions.js'
 import React from 'react'
-import classNames from 'classnames'
 import classes from './PreviewFile.css'
 import PreviewCode from './PreviewCode'
 import PreviewCadLoader from './PreviewCadLoader'
@@ -11,17 +10,16 @@ import PreviewPcbLoader from './PreviewPcbLoader'
 import PreviewImage from './PreviewImage/PreviewImage'
 import PreviewGoogle from './PreviewGoogle/PreviewGoogle'
 import PreviewGdoc from './PreviewGdoc/PreviewGdoc'
+import { PreviewPipeline } from './PreviewPipeline'
 import laptopSpanner from 'stemn-shared/assets/images/pure-vectors/laptop-spanner.svg'
 import { getViewerType } from './PreviewFile.utils.js'
 import { isAssembly } from './PreviewCad/PreviewCad.utils.js'
 import DownloadFile from '../DownloadFile/DownloadFile.jsx'
 import ErrorMessages from './Messages/Messages.jsx'
 
-// /////////////////////////////// COMPONENT /////////////////////////////////
-
-export const Component = React.createClass({
+export class Component extends React.Component {
   render() {
-    const { file, fileData, fileRender, filesActions, header, event } = this.props
+    const { file, fileData, fileRender, filesActions, header, event, editActive } = this.props
     const previewId = `${file.project._id}-${file.fileId}-${file.revisionId}`
 
     const renderFn = () => {
@@ -42,6 +40,16 @@ export const Component = React.createClass({
           <ErrorMessages
             error={ fileData && fileData.error ? fileData.error : fileRender.error }
             fileMeta={ file }
+          />
+        )
+      } else if (viewerType === 'pipeline') {
+        return (
+          <PreviewPipeline
+            editActive={ editActive }
+            previewId={ `${file.fileId}-${file.revisionId}` } // This previewId should match the one used in the Pipeline Graph sidebar
+            fileMeta={ file } 
+            fileData={ fileData } 
+            downloadFn={ filesActions.getFile } 
           />
         )
       } else if (viewerType === 'gerber' || viewerType === 'pcb') {
@@ -123,8 +131,8 @@ export const Component = React.createClass({
         { getPreview() }
       </div>
     )
-  },
-})
+  }
+}
 
 
 // /////////////////////////////// CONTAINER /////////////////////////////////

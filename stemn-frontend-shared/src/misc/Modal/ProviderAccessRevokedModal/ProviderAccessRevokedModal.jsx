@@ -8,19 +8,15 @@ import * as AuthActions from 'stemn-shared/misc/Auth/Auth.actions.js'
 // Component Core
 import React from 'react'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
-import { Link } from 'react-router'
 
-// Styles
-import classNames from 'classnames'
-
-const Component = React.createClass({
+class Component extends React.Component {
   render() {
     const {
       owner, auth, authActions,
       modalCancel, modalConfirm,
     } = this.props
 
-    const isCurrentUser = owner._id == auth.user._id
+    const isCurrentUser = owner._id === auth.user._id
 
     return (
       <div style={ { width: '500px' } }>
@@ -50,8 +46,8 @@ const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 // //////////////////////////////////////////////////////////////
 

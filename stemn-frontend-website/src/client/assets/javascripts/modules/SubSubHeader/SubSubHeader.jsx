@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react'
-
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import classes from './SubSubHeader.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 
 import { Container } from 'stemn-shared/misc/Layout'
 
@@ -13,7 +13,7 @@ export default class SubHeader extends Component {
   render() {
     const { title, children, className, ...otherProps } = this.props
     return (
-      <div className={ classNames(classes.header, className) } { ...otherProps }>
+      <div className={ cn(classes.header, className) } { ...otherProps }>
         <Container>
           <div className={ classes.headerBorder } />
           { children }

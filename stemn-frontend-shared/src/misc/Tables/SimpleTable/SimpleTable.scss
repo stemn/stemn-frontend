@@ -1,0 +1,37 @@
+.table {
+  tr {
+    vertical-align: top;
+  }
+  td {
+    padding-bottom: 2px;
+    padding-top: 2px;
+    padding-left: 0px;
+    &:first-child {
+      color: rgba(0, 0, 0, 0.4);
+      padding-right: 10px;
+    }
+  }
+}
+
+.shared a {
+  text-decoration: underline;
+}
+
+.shared a:hover{
+  opacity: 0.8;
+}
+
+.flexTable {
+  > * {
+    display: flex;
+    > * {
+      padding-bottom: 2px;
+      padding-top: 2px;
+      padding-left: 0px;
+      &:first-child {
+        color: rgba(0, 0, 0, 0.4);
+        padding-right: 10px;
+      }
+    }
+  }
+}

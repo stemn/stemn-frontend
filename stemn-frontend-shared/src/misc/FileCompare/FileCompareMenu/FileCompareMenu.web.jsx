@@ -1,12 +1,9 @@
-/** ************************************************************************
-We pass in either revisions or file1 + file2.
-************************************************************************* */
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import { getViewerType } from 'stemn-shared/misc/Files/PreviewFile/PreviewFile.utils.js'
-import classNames from 'classnames'
+import cn from 'classnames'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
-import Button from 'stemn-shared/misc/Buttons/Button/Button'
+import Button from 'stemn-shared/misc/Buttons/Button/Button.jsx'
 import { getCompareModes, getCompareIcon } from '../FileCompare.utils.js'
 import Popover from 'stemn-shared/misc/Popover'
 import MdMoreHoriz from 'react-icons/md/more-horiz'
@@ -14,7 +11,8 @@ import MdOpenInNew from 'react-icons/md/open-in-new'
 import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList'
 import { showModal } from 'stemn-shared/misc/Modal/Modal.actions.js'
 import downloadModalName from 'stemn-shared/misc/Files/Download/DownloadModal'
-import { togglePreviewMarkdown } from 'stemn-shared/misc/UserSettings/UserSettings.actions'
+import { togglePreviewMarkdown } from 'stemn-shared/misc/Files/Files.actions'
+import { editToggle } from '../FileCompare.actions'
 import MdVisibility from 'react-icons/md/visibility'
 import MdCode from 'react-icons/md/code'
 
@@ -37,7 +35,7 @@ export class FileCompareMenu extends Component {
     return [downloadFile]
   }
   render() {
-    const { enablePreview, mode, changeMode, revisions, file1, file2, previewMarkdown, togglePreviewMarkdown } = this.props
+    const { enablePreview, mode, changeMode, revisions, file1, file2, previewMarkdown, editToggle, togglePreviewMarkdown, cacheKey, editActive } = this.props
 
     if (!file1) { return null }
 
@@ -46,6 +44,7 @@ export class FileCompareMenu extends Component {
     const CompareIcon = getCompareIcon(mode)
     const hasRevisions = revisions && revisions.length > 1 || file1 && file2
     const isMarkdown = file1.extension === 'md'
+    const isPipeline = file1.extension === 'pipeline'
 
     return (
       <div className="layout-row layout-align-start-center">
@@ -63,7 +62,7 @@ export class FileCompareMenu extends Component {
               { compareModes.map(item => (
                 <a
                   key={ item.value }
-                  className={ classNames({ active: mode === item.value }) }
+                  className={ cn({ active: mode === item.value }) }
                   onClick={ () => changeMode(item.value, revisions) }
                 >
                   Compare: { item.text }
@@ -89,19 +88,29 @@ export class FileCompareMenu extends Component {
           </SimpleIconButton>
           <PopoverMenuList menu={ this.renderMenu() } />
         </Popover>
+        { isPipeline && (
+          <Button 
+            className="primary" 
+            style={ { marginLeft: '10px' } } 
+            onClick={ () => editToggle({ cacheKey }) }
+          >
+            { editActive ? 'Save' : 'Edit' }
+          </Button>
+        )} 
       </div>
     )
   }
 }
 
 
-const stateToProps = ({ userSettings: { previewMarkdown } }) => ({
+const stateToProps = ({ files: { previewMarkdown } }) => ({
   previewMarkdown,
 })
 
 const dispatchToProps = {
   togglePreviewMarkdown,
   showModal,
+  editToggle,
 }
 
 export default connect(stateToProps, dispatchToProps)(FileCompareMenu)

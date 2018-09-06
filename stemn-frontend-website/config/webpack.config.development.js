@@ -3,24 +3,20 @@ const webpack = require('webpack')
 const config = require('./webpack.config.base')
 const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const getStemnEnv = require('./getStemnEnv')
 
 const GLOBALS = {
   'process.env': {
     NODE_ENV: JSON.stringify('development'),
   },
-  GLOBAL_ENV: {
+  GLOBAL_ENV: Object.assign({
     APP_TYPE: JSON.stringify('web'),
     NODE_ENV: JSON.stringify('development'),
-    WEBSITE_URL: JSON.stringify('https://dev.stemn.com'),
-    API_SERVER: JSON.stringify('https://dev.stemn.com'),
-    WEBSOCKET_SERVER: JSON.stringify('https://dev.stemn.com:8443'),
-  },
-  __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'true')),
+  }, getStemnEnv(process.env.STEMN_ENV)),
 }
 
 module.exports = merge(config, {
-  debug: true,
-  devtool: 'eval-source-map',
+  devtool: 'cheap-module-source-map',
   entry: {
     application: [
       'webpack-hot-middleware/client',
@@ -54,10 +50,7 @@ module.exports = merge(config, {
     loaders: [
       // Globals
       {
-        test: /\.(css|scss)$/,
-        include: [
-          path.resolve(__dirname, '../src/client/assets/styles/global'),
-        ],
+        test: /\.global\.(css|scss)$/,
         loaders: [
           'style',
           'css',
@@ -67,11 +60,11 @@ module.exports = merge(config, {
       },
       // CSS Modules
       {
-        test: /\.(css|scss)$/,
+        test: /^((?!\.global).)*\.(css|scss)$/,
         include: [
           path.resolve(__dirname, '../src/client/assets/javascripts'),
           path.resolve(__dirname, '../src/client/assets/styles/modules'),
-          path.resolve(__dirname, '../node_modules/stemn-frontend-shared'),
+          path.resolve(__dirname, '../../stemn-frontend-shared'),
         ],
         loaders: [
           'style',

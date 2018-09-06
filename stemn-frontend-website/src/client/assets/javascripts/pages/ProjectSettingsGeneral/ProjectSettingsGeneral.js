@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 
-import GeneralSettings from 'stemn-shared/misc/ProjectSettings/GeneralSettings'
+import { GeneralSettings } from 'stemn-shared/misc/ProjectSettings/GeneralSettings'
 import CloudSettings from 'stemn-shared/misc/ProjectSettings/CloudSettings'
 import DeleteSettings from 'stemn-shared/misc/ProjectSettings/DeleteSettings'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
@@ -25,7 +25,11 @@ class ProjectSettingsGeneral extends Component {
     })
   }
   render() {
-    const { project, projectModel, saveProject, removeField, addField } = this.props
+    const {
+      project,
+      projectModel,
+      saveProject,
+    } = this.props
     return (
       <div>
         <InfoPanel>

@@ -3,19 +3,20 @@ import i from 'icepick'
 const initialState = {
   /*
     [cacheKey] : {
+      editActive: boolean,
       mode,
       selected1,
       selected2,
       lastSelected,
     }
   */
-
 }
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case 'FILE_COMPARE/INIT':
       return i.assoc(state, action.meta.cacheKey, {
+        edit: false,
         mode: action.payload.mode,
         selected1: action.payload.selected1,
         selected2: action.payload.selected2,
@@ -33,6 +34,10 @@ export default (state = initialState, action = {}) => {
           mode: action.payload.mode,
         },
       })
+
+    case 'FILE_COMPARE/EDIT_TOGGLE':
+      return i.updateIn(state, [action.meta.cacheKey, 'editActive'], status => !status)
+
     default:
       return state
   }

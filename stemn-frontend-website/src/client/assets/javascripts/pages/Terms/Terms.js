@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import StandardLayout from 'layout/StandardLayout'
 
 import classes from 'layout/layout.css'

@@ -1,9 +1,8 @@
-import React, { Component, PropTypes } from 'react'
-
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import classes from './SubHeader.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 
-import Link from 'stemn-shared/misc/Router/Link'
 import { Container } from 'stemn-shared/misc/Layout'
 
 export default class SubHeader extends Component {
@@ -15,7 +14,13 @@ export default class SubHeader extends Component {
   }
 
   render() {
-    const { title, children, noline, style, noResponsive, params } = this.props
+    const {
+      title,
+      children,
+      noline,
+      style,
+      noResponsive,
+    } = this.props
     const borderStyle = noline ? {} : { borderBottom: '1px solid rgba(0, 0, 0, 0.1)' }
     const responsiveClasses = noResponsive
       ? 'layout-row'
@@ -23,8 +28,8 @@ export default class SubHeader extends Component {
 
     return (
       <div className={ classes.header } style={ Object.assign({}, borderStyle, style) }>
-        <Container className={ classNames(classes.headerInner, responsiveClasses) }>
-          <h1 className={ classNames(classes.title, 'layout-row layout-align-start-center') }>
+        <Container className={ cn(classes.headerInner, responsiveClasses) }>
+          <h1 className={ cn(classes.title, 'layout-row layout-align-start-center') }>
             { title }
           </h1>
           { title && <div className="flex" /> }

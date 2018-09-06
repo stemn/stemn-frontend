@@ -5,7 +5,7 @@ import { normaliseSlashes } from 'stemn-shared/desktop/System/System.utils'
 
 export default ({ path, projectId, provider }) => (dispatch, getState) => {
   const storeState = getState()
-  const addSlash = path => (path && path[0] != '/' && path[0] != '\\' ? `/${path}` : path)
+  const addSlash = path => (path && path[0] !== '/' && path[0] !== '\\' ? `/${path}` : path)
   return new Promise((resolve, reject) => {
     const computerToProvider = storeState.system.providerPath[provider]
     const projectToFile      = path

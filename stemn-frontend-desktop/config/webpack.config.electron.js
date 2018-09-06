@@ -2,18 +2,16 @@ const merge = require('webpack-merge')
 const webpack = require('webpack')
 const config = require('./webpack.config.base')
 const path = require('path')
+const getStemnEnv = require('./getStemnEnv')
+const stringifyEnv = require('./utils/stringifyEnv')
 
 const GLOBALS = {
-  GLOBAL_ENV: {
-    API_SERVER: JSON.stringify(process.env.API_SERVER),
-    APP_THREAD: JSON.stringify('electron'),
-    APP_TYPE: JSON.stringify('desktop'),
-    ELECTRON_CRASH_REPORT_SERVER: JSON.stringify(process.env.ELECTRON_CRASH_REPORT_SERVER),
-    NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-    WEBSITE_URL: JSON.stringify('http://stemn.com'),
-    WEBSOCKET_SERVER: JSON.stringify(process.env.WEBSOCKET_SERVER),
-  },
-  __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'true')),
+  GLOBAL_ENV: stringifyEnv({
+    APP_THREAD: 'electron',
+    APP_TYPE: 'desktop',
+    NODE_ENV: process.env.NODE_ENV,
+    ...getStemnEnv(process.env.STEMN_ENV),
+  }),
 }
 
 module.exports = merge(config, {

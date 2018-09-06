@@ -1,18 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
-import Popover from 'stemn-shared/misc/Popover'
 import PopoverFit from 'stemn-shared/misc/PopoverMenu/PopoverFit'
 import MdExpandMore from 'react-icons/md/expand-more'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './PopoverDropdown.css'
-
-
-//        <Button className={ classNames('light', className) } style={ style } buttonRef={ this.getButtonRef }>
-//          { children[0] }
-//        </Button>
 
 class PopoverDropdown extends Component {
   render() {
@@ -27,13 +21,13 @@ class PopoverDropdown extends Component {
         return currentOption.name
       } else if (empty) {
         return null
-      } 
+      }
       return placeholder || 'none'
     }
 
     return (
       <PopoverFit { ...otherProps }>
-        <Button className={ classNames('layout-row layout-align-start-center rel-box light', className) } style={ style }>
+        <Button className={ cn('layout-row layout-align-start-center rel-box light', className) } style={ style } type="button">
           <LoadingOverlay className={ classes.loading } show={ loading } linear hideBg />
           { children }
           { getInnerText() }
@@ -50,7 +44,7 @@ class PopoverDropdown extends Component {
                 option.onClick()
               }
               if (onChange) {
-                onChange()
+                onChange(option)
               }
             }
 
@@ -58,7 +52,7 @@ class PopoverDropdown extends Component {
               <a
                 key={ option.value || idx }
                 onClick={ onClick }
-                className={ classNames({ active: isActive(option) }) }
+                className={ cn({ active: isActive(option) }) }
               >
                 { option.name }
               </a>

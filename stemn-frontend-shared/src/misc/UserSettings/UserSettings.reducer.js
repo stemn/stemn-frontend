@@ -9,7 +9,6 @@ const initialState = {
     tips: {},
   },
   loading: false,
-  previewMarkdown: false,
 }
 
 export default (state = initialState, action) => {
@@ -25,9 +24,6 @@ export default (state = initialState, action) => {
         .assoc('loading', false)
         .assoc('data', action.payload.data)
         .value()
-    }
-    case 'USER_SETTINGS/TOGGLE_PREVIEW_MARKDOWN': {
-      return i.updateIn(state, ['previewMarkdown'], previewMarkdown => !previewMarkdown)
     }
     default:
       return state

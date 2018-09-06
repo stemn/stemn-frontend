@@ -11,7 +11,7 @@ import React from 'react'
 import { has } from 'lodash'
 
 // Styles
-import classNames from 'classnames'
+import cn from 'classnames'
 import classes from './ThreadListItem.css'
 import loadingClasses from 'stemn-shared/misc/Loading/LoadingPlaceholders/LoadingPlaceholders.css'
 
@@ -23,37 +23,39 @@ import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleI
 import MdOpenInNew from 'react-icons/md/open-in-new'
 import ThreadLabelDots from 'stemn-shared/misc/Threads/ThreadLabelDots/ThreadLabelDots.jsx'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
-import UserSelect from 'stemn-shared/misc/Users/UserSelect/UserSelect.jsx'
 import DueDate from 'stemn-shared/misc/Threads/ThreadDueDate'
 import threadDisplayModalName from 'stemn-shared/misc/Threads/ThreadDisplayModal'
 
 
-export const ThreadListItem = React.createClass({
+export class ThreadListItem extends React.Component {
   // Mounting
-  onMount(nextProps, prevProps) {
-    if (!prevProps || prevProps.item != nextProps.item) {
+  onMount = (nextProps, prevProps) => {
+    if (!prevProps || prevProps.item !== nextProps.item) {
       if (!nextProps.thread || !nextProps.thread.data) {
         nextProps.ThreadsActions.getThread({
           threadId: nextProps.item,
         })
       }
     }
-  },
-  componentWillMount() { this.onMount(this.props) },
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) },
+  };
 
-  updateThread() {
+  componentWillMount() { this.onMount(this.props) }
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+
+  updateThread = () => {
     setTimeout(() => this.props.ThreadsActions.updateThread({ thread: this.props.thread.data }), 1)
-  },
-  toggleComplete({ model, value }) {
+  };
+
+  toggleComplete = ({ model, value }) => {
     this.props.ThreadsActions.toggleComplete({
       threadId: this.props.thread.data._id,
       model,
       value,
     })
     this.updateThread()
-  },
-  showModal() {
+  };
+
+  showModal = () => {
     this.props.ModalActions.showModal({
       modalType: threadDisplayModalName,
       limit: 1,
@@ -61,14 +63,21 @@ export const ThreadListItem = React.createClass({
         threadId: this.props.item,
       },
     })
-  },
+  };
+
   render() {
-    const { thread, entityModel, draggable, layout, board, project } = this.props
+    const {
+      thread,
+      entityModel,
+      draggable,
+      layout,
+      board,
+    } = this.props
     if (!thread || !thread.data) {
-      if (layout == 'list') {
+      if (layout === 'list') {
         return (
           <div className={ loadingClasses.loading }>
-            <div className={ classNames(classes.listItem, 'layout-row flex layout-align-start-center') }>
+            <div className={ cn(classes.listItem, 'layout-row flex layout-align-start-center') }>
               <Checkbox
                 className="text-primary"
                 circle
@@ -87,7 +96,7 @@ export const ThreadListItem = React.createClass({
       }
       
       return (
-        <div className={ classNames(classes.card, loadingClasses.loading, 'layout-column flex') }>
+        <div className={ cn(classes.card, loadingClasses.loading, 'layout-column flex') }>
           <div className={ `${classes.cardBody} layout-row` }>
             <Checkbox className="text-primary" circle />
             <div className={ `${classes.cardText} flex` }>Some placeholder hidden with blokk font</div>
@@ -97,10 +106,10 @@ export const ThreadListItem = React.createClass({
         </div>
       )
     }
-    if (layout == 'list') {
+    if (layout === 'list') {
       return (
-        <div className={ classNames({ [classes.isDragging]: thread.isDragging && draggable }) }>
-          <div className={ classNames(classes.listItem, 'layout-row flex layout-align-start-center') }>
+        <div className={ cn({ [classes.isDragging]: thread.isDragging && draggable }) }>
+          <div className={ cn(classes.listItem, 'layout-row flex layout-align-start-center') }>
             <Checkbox
               title={ thread.data.complete ? 'Mark as open' : 'Mark as closed' }
               model={ `${entityModel}.data.complete` }
@@ -140,7 +149,7 @@ export const ThreadListItem = React.createClass({
     }
     
     return (
-      <div className={ classNames(classes.card, 'layout-column flex') }>
+      <div className={ cn(classes.card, 'layout-column flex') }>
         <div className={ `${classes.cardBody} layout-row` }>
           <Checkbox
             title={ thread.data.complete ? 'Mark as open' : 'Mark as closed' }
@@ -176,8 +185,8 @@ export const ThreadListItem = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 
 // /////////////////////////////// CONTAINER /////////////////////////////////

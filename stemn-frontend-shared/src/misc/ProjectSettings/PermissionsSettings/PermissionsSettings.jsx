@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { get } from 'lodash'
 import ProjectPermissionsRadio from 'stemn-shared/misc/Project/ProjectPermissionsRadio/ProjectPermissionsRadio'
 import LicenseSettings from 'stemn-shared/misc/ProjectSettings/LicenseSettings'
@@ -18,7 +19,10 @@ export default class ProjectSettingsPermissions extends Component {
     })
   }
   render() {
-    const { project, projectModel, saveProject } = this.props
+    const {
+      project,
+      projectModel,
+    } = this.props
     return (
       <div>
         <InfoPanel>

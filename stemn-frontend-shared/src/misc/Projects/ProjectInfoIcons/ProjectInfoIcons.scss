@@ -1,0 +1,13 @@
+.icons {
+  > * + * {
+    margin-left: 10px;
+  }
+}
+
+.padRight {
+  margin-right: 10px;
+}
+
+.padLeft {
+  margin-left: 10px;
+}

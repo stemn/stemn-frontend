@@ -21,7 +21,7 @@ export function create({ store, windows }) {
 
   let lastClickTime = Date.now()
 
-  appIcon.on('right-click', (event, trayBounds) => {
+  appIcon.on('right-click', (event) => {
     const { auth } = store.getState()
     const contextMenu = Menu.buildFromTemplate([
       {
@@ -64,7 +64,7 @@ export function create({ store, windows }) {
     ])
     appIcon.popUpContextMenu(contextMenu)
   })
-  appIcon.on('click', (event, trayBounds) => {
+  appIcon.on('click', () => {
     const clickTimeout = 200
     if (process.platform === 'linux' && lastClickTime + clickTimeout > Date.now()) {
       windows.main.show() // double click action
@@ -73,7 +73,7 @@ export function create({ store, windows }) {
     }
     lastClickTime = Date.now()
   })
-  appIcon.on('double-click', (event, trayBounds) => {
+  appIcon.on('double-click', () => {
     windows.main.show()
   })
 

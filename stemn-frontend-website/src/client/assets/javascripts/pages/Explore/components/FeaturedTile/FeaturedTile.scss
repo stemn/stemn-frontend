@@ -1,0 +1,49 @@
+.tile {
+  display: block;
+  background: white;
+  margin-bottom: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  height: 382px;
+  transition: 0.3s ease all;
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.rowTile {
+  background: white;
+  margin-bottom: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  height: 120px;
+  transition: 0.3s ease all;
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.content {
+  padding: 20px;
+}
+
+.image {
+  height: 200px;
+  background-size: cover;
+  background-position: center center;
+}
+
+.rowImage {
+  height: 100%;
+  width: 120px;
+  background-size: cover;
+  background-position: center center;
+}
+
+.blurb {
+  color: rgba(0, 0, 0, 0.5);
+  line-height: 1.4em;
+  margin-top: 10px;
+}
+
+.title {
+  font-size: 16px;
+}

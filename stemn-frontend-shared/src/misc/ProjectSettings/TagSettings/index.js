@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 import TagEdit from 'stemn-shared/misc/Tags/TagEdit'
 import FieldSearch from 'stemn-shared/misc/Search/FieldSearch'
@@ -30,7 +30,9 @@ export default class GeneralSettings extends Component {
     })
   }
   render() {
-    const { entityModel, project, saveProject } = this.props
+    const {
+      project,
+    } = this.props
     return (
       <div>
         <h3>Field Tags</h3>

@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import Form from 'stemn-shared/misc/Forms/Form'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
@@ -10,7 +11,10 @@ export default class UserEmailSettings extends Component {
     saveUser: PropTypes.func.isRequired,
   }
   addEmail = () => {
-    const { saveUser, setPrimaryEmail, auth } = this.props
+    const {
+      setPrimaryEmail,
+      auth,
+    } = this.props
     //    saveUser({
     //      user: {
     //        _id: auth.user._id,

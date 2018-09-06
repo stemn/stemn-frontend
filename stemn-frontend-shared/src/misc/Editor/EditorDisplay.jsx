@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import markdownIt from 'markdown-it'
 import pluginEmoji from 'markdown-it-emoji'
 import pluginKatex from 'markdown-it-katex'

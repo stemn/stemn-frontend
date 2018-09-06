@@ -4,28 +4,16 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const config = require('./webpack.config.base')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const WebpackChunkHash = require('webpack-chunk-hash')
-const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin')
-const HashModuleId = require('./plugins/HashModuleId')
+const getStemnEnv = require('./getStemnEnv')
+const stringifyEnv = require('./utils/stringifyEnv')
 
 const GLOBALS = {
-//  'process.env': {
-//    NODE_ENV: JSON.stringify('production'),
-//  },
-  GLOBAL_ENV: {
-    API_SERVER: JSON.stringify(process.env.API_SERVER),
-    APP_THREAD: JSON.stringify('renderer'),
-    APP_TYPE: JSON.stringify('desktop'),
-    ELECTRON_CRASH_REPORT_SERVER: JSON.stringify(process.env.ELECTRON_CRASH_REPORT_SERVER),
-    NODE_ENV: JSON.stringify('production'),
-    WEBSITE_URL: JSON.stringify('https://dev.stemn.com'),
-    WEBSOCKET_SERVER: JSON.stringify(process.env.WEBSOCKET_SERVER),
-  },
-  __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false')),
-}
-
-const chunkIncludes = (targets) => ({ context }) => {
-  return context && context.indexOf('node_modules') >= 0 && targets.find(t => new RegExp('\\\\' + t + '\\\\', 'i').test(context))
+  GLOBAL_ENV: stringifyEnv({    
+    APP_THREAD: 'renderer',
+    APP_TYPE: 'desktop',
+    NODE_ENV: 'production',
+    ...getStemnEnv(process.env.STEMN_ENV),
+  }),
 }
 
 module.exports = merge(config, {

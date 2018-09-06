@@ -1,7 +1,5 @@
 import React from 'react'
 
-// Styles
-import classNames from 'classnames'
 import classes from './Reactions.css'
 
 import Popover from 'stemn-shared/misc/Popover'
@@ -11,9 +9,11 @@ import MdInsertEmoticon from 'react-icons/md/insert-emoticon'
 import { options } from './Reactions.utils.js'
 
 
-export default React.createClass({
+export default class ReactionPopup extends React.Component {
   render() {
-    const { submitFn, reactions } = this.props
+    const {
+      submitFn,
+    } = this.props
 
     return (
       <Popover preferPlace={ this.props.preferPlace }>
@@ -32,5 +32,5 @@ export default React.createClass({
         </div>
       </Popover>
     )
-  },
-})
+  }
+}

@@ -9,18 +9,14 @@ import getRoutes from './routes'
 import standardSetup from '../shared/standardSetup.js'
 import { remote } from 'electron'
 
-function start() {
-  const initialState = JSON.parse(remote.getGlobal('stateStringified'))
-  const store        = configureStore(initialState)
-  const history      = syncHistoryWithStore(hashHistory, store)
-  standardSetup(store)
-  
-  render(
-    <Provider store={ store }>
-      <Router history={ history } routes={ getRoutes(store) } />
-    </Provider>,
-    document.getElementById('root'),
-  )
-}
+const initialState = JSON.parse(remote.getGlobal('stateStringified'))
+const store = configureStore(initialState)
+const history = syncHistoryWithStore(hashHistory, store)
+standardSetup(store)
 
-start()
+render(
+  <Provider store={ store }>
+    <Router history={ history } routes={ getRoutes(store) } />
+  </Provider>,
+  document.getElementById('root'),
+)

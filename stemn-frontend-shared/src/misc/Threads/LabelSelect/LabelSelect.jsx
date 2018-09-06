@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { storeRemove, storePush } from 'stemn-shared/misc/Store/Store.actions'
 
@@ -18,7 +18,10 @@ class LabelSelectRow extends Component {
     if (onChange) { onChange() } // Run the onChange function if required
   }
   render() {
-    const { item, value, onChange } = this.props
+    const {
+      item,
+      value,
+    } = this.props
     const status = value ? value.includes(item._id) : false
 
     return (
@@ -48,8 +51,9 @@ class LabelSelect extends Component {
 
     return (
       <div>
-        { filteredInfo.map(item => (
+        { filteredInfo.map((item, idx) => (
           <LabelSelectRow
+            key={ idx }
             item={ item }
             model={ model }
             value={ value }

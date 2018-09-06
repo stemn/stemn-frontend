@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react'
-import classNames from 'classnames'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import cn from 'classnames'
 import classes from './FileBreadCrumbs.css'
 import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
 import Popover from 'stemn-shared/misc/Popover'
@@ -43,7 +44,7 @@ export default class FileBreadCrumbs extends Component {
           },
         ]
         return parentsExtended.map((folder, idx) => {
-          const isLastChild = idx == parentsExtended.length - 1
+          const isLastChild = idx === parentsExtended.length - 1
           const parentfolder = parentsExtended[idx - 1]
           const clickableText = link
             ? (<Link
@@ -86,7 +87,7 @@ export default class FileBreadCrumbs extends Component {
               { !isLastChild && <span> / </span> }
             </span>
           )
-          return parentfolder && popup && idx != 0
+          return parentfolder && popup && idx !== 0
             ? getPopoverCrumb()
             : getPlainCrumb()
         })
@@ -97,7 +98,7 @@ export default class FileBreadCrumbs extends Component {
     }
 
     return (
-      <div className={ classNames(classes.crumbs, className) }>
+      <div className={ cn(classes.crumbs, className) }>
         { displayCrumbs() }
       </div>
     )

@@ -1,0 +1,11 @@
+.ports {
+  display: flex;
+  > * {
+    margin-right: 3px;
+    margin-left: 3px;
+  }
+}
+
+.end {
+  justify-content: flex-end;
+}

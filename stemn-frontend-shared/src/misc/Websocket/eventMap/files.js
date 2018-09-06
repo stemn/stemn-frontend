@@ -1,7 +1,9 @@
 import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
 
 export default (store, action) => {
-  const { dispatch, getState } = store
+  const {
+    dispatch,
+  } = store
 
   switch (action.type) {
     case 'FILES/FILES_UPDATED':

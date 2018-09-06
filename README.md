@@ -1,6 +1,6 @@
 # Stemn Frontend
 
-[![Build Status](https://travis-ci.org/stemn/stemn-frontend.svg?branch=master)](https://travis-ci.org/stemn/stemn-frontend)
+[![CircleCI](https://circleci.com/gh/stemn/stemn-frontend/tree/staging.svg?style=svg)](https://circleci.com/gh/stemn/stemn-frontend/tree/staging)
 
 This repo contains all of stemn's frontend code.
 
@@ -23,4 +23,3 @@ If you want to contribute a feature, please contact us 😊
 ## Related Repos
 
 * [stemn-desktop](https://github.com/stemn/Stemn-Desktop) the production releases of the stemn-desktop app (produced from this src)
-* [stemn-website-live](https://github.com/stemn/stemn-website-live) the production version of the stemn website (produced from this src)

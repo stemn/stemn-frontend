@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 
-export const Component = React.createClass({
+export class Component extends React.Component {
   render() {
     const { children, model, dispatch } = this.props
     const additionalProps = {
@@ -12,7 +12,7 @@ export const Component = React.createClass({
       },
     }
     return React.cloneElement(children, additionalProps)
-  },
-})
+  }
+}
 
 export default connect()(Component)

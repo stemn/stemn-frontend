@@ -1,20 +1,17 @@
 # Run this script from the `stemn-frontend-desktop` folder
-echo "-------------------- Pushing source to this repo ----------------------"
-git config --global core.safecrlf false
-git add .
-git commit -m 'release'
-git push
-echo "------------------- Copy dist to stemn-desktop repo -------------------"
-cd ../../stemn-desktop
-git pull
+# This will copy the dist to the 'stemn-desktop' repo where it will be compiled 
+# into the executables.
+
+git config --global user.email = "ci@stemn.com"
+git config --global user.name = "Stemn CI"
+cd ../../
+git clone git@github.com:stemn/stemn-desktop.git
+cd stemn-desktop
 rm -rf ./dist
 rm -rf ./build
-cp -r ../stemn-frontend/stemn-frontend-website/dist .
-cp -r ../stemn-frontend/stemn-frontend-website/build .
-cp -r ../stemn-frontend/stemn-frontend-website/package.json .
-echo "-------------- Commit changes to the stemn-desktop repo ---------------"
-git config --global core.safecrlf false
+cp -r ../stemn-frontend/stemn-frontend-desktop/dist .
+cp -r ../stemn-frontend/stemn-frontend-desktop/build .
+cp -r ../stemn-frontend/stemn-frontend-desktop/package.json .
 git add .
-git commit -am 'release'
+git commit -am "Automated Deployment: $CIRCLE_BRANCH $CIRCLE_BUILD_NUM"
 git push
-echo "------------------- Push, complete. CI is building --------------------"

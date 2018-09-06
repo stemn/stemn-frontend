@@ -1,8 +1,8 @@
-import React, { Component, PropTypes } from 'react'
-
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 
-export default class GeneralSettings extends Component {
+export default class DeleteSettings extends Component {
   static propTypes = {
     deleteProject: PropTypes.func.isRequired,
   }

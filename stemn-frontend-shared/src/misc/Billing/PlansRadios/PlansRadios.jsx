@@ -3,7 +3,7 @@ import Radio from 'stemn-shared/misc/Input/Radio/Radio.jsx'
 import { plansData } from 'stemn-shared/misc/Billing/Billing.data'
 import classes from './PlansRadios.css'
 
-export default class extends React.Component {
+export default class PlansRadios extends React.Component {
   render() {
     // const { model, value } = this.props
     const value = 'Stemn Beta'

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ResponsiveContainer, AreaChart, Area, XAxis, CartesianGrid, Tooltip } from 'recharts'
+import { ResponsiveContainer, AreaChart, Area, XAxis, CartesianGrid, Tooltip } from 'recharts/umd/Recharts.js'
 import moment from 'moment'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay'
 
@@ -17,7 +17,11 @@ export default class HistoryGraph extends Component {
   tickFormatter = tick => moment(tick).format('DD MMM')
   tooltipLabelFormatter = date => moment(date).format('Do MMM YYYY')
   render() {
-    const { data, loading, history, hasLoaded } = this.props
+    const {
+      data,
+      loading,
+      hasLoaded,
+    } = this.props
 
     const dataFormatted = data.map(item => ({
       date: item.date,

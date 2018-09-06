@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Col, Row } from 'stemn-shared/misc/Layout'
 
-import SiteSearchResults from 'stemn-shared/misc/Search/SiteSearchResults'
+import { SiteSearchResultsContainer } from 'stemn-shared/misc/Search/SiteSearchResults'
 import RelatedList from 'stemn-shared/misc/RelatedFields/RelatedList'
 
 export default class FieldOverview extends Component {
@@ -10,8 +10,8 @@ export default class FieldOverview extends Component {
     return (
       <Row className="layout-xs-col layout-gt-xs-row">
         <Col className="flex-gt-xs-70">
-          <SiteSearchResults
-            page={ parseInt(location.query.page) }
+          <SiteSearchResultsContainer
+            page={ parseInt(location.query.page, 10) }
             parentType="field"
             parentId={ field.data._id }
             size={ 30 }

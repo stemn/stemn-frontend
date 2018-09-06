@@ -1,23 +1,21 @@
 
-import React, { PropTypes } from 'react'
-import classes              from './AssemblyParts.css'
-import { connect }          from 'react-redux'
-import { orderBy }          from 'lodash'
-import moment               from 'moment'
-import { isAssembly, isCad }       from '../PreviewCad.utils.js'
-import {
-  getAssemblyParts,
-  getAssemblyParents,
-}                           from '../../../Files.actions.js'
-import SectionTitle         from 'stemn-shared/misc/Titles/SectionTitle/SectionTitle.jsx'
-import LoadingOverlay       from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
+import React from 'react'
+import PropTypes from 'prop-types'
+import classes from './AssemblyParts.css'
+import { connect } from 'react-redux'
+import { orderBy } from 'lodash'
+import moment from 'moment'
+import { isAssembly, isCad } from '../PreviewCad.utils.js'
+import { getAssemblyParts, getAssemblyParents } from '../../../Files.actions.js'
+import SectionTitle from 'stemn-shared/misc/Titles/SectionTitle/SectionTitle.jsx'
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
 const propTypesObject = {
   fileMeta: PropTypes.object.isRequired,   // fileMeta for the assembly
   clickFn: PropTypes.func.isRequired,      // clickFn(part) - Run when a part is clicked
 }
 
-export const Row = React.createClass({
+export class Row extends React.Component {
   render() {
     const { file, clickFn } = this.props
     const timeFromNow = moment(file.modified).fromNow()
@@ -27,13 +25,14 @@ export const Row = React.createClass({
         <div className={ classes.time }>{timeFromNow}</div>
       </a>
     )
-  },
-})
+  }
+}
 
-export const AssemblyParts = React.createClass({
-  propTypes: propTypesObject,
-  onMount(nextProps, prevProps) {
-    if (!prevProps || nextProps.fileMeta != prevProps.fileMeta && nextProps.fileMeta.data) {
+export class AssemblyParts extends React.Component {
+  static propTypes = propTypesObject;
+
+  onMount = (nextProps, prevProps) => {
+    if (!prevProps || nextProps.fileMeta !== prevProps.fileMeta && nextProps.fileMeta.data) {
       if (isAssembly(nextProps.fileMeta.data.extension)) {
         nextProps.dispatch(getAssemblyParts({
           fileId: nextProps.fileMeta.data.fileId,
@@ -49,11 +48,13 @@ export const AssemblyParts = React.createClass({
         }))
       }
     }
-  },
-  componentDidMount() { this.onMount(this.props) },
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) },
+  };
+
+  componentDidMount() { this.onMount(this.props) }
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+
   render() {
-    const { parts, assemblies, clickFn } = this.props
+    const { parts, assemblies, clickFn, fileMeta } = this.props
 
     const displayRows = (items, title) => {
       const itemsOrdrered = orderBy(items.data, 'name')
@@ -68,7 +69,7 @@ export const AssemblyParts = React.createClass({
       )
     }
 
-    const hasChildParts       = parts && parts.data && parts.data.length > 0 || (parts && parts.loading)
+    const hasChildParts = parts && parts.data && parts.data.length > 0 || (parts && parts.loading)
     const hasParentAssemblies = assemblies && assemblies.data && assemblies.data.length > 0 || (assemblies && assemblies.loading)
 
     if (hasChildParts || hasParentAssemblies) {
@@ -85,8 +86,8 @@ export const AssemblyParts = React.createClass({
     }
     
     return null
-  },
-})
+  }
+}
 
 const mapStateToProps = ({ files }, { fileMeta }) => {
   const cacheKey = `${fileMeta.data.fileId}-${fileMeta.data.revisionId}`

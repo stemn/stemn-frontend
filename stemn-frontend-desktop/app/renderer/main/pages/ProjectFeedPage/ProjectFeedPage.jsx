@@ -8,14 +8,7 @@ import * as SyncTimelineActions from 'stemn-shared/misc/SyncTimeline/SyncTimelin
 // Component Core
 import React from 'react'
 
-// Styles
-import classNames from 'classnames'
-import feedPageStyles from './ProjectFeedPage.css'
-
-// Sub Components
-import { has }                  from 'lodash'
 import { Link }                 from 'react-router'
-import Timeline                 from 'stemn-shared/misc/Timeline/Timeline.jsx'
 import SidebarTimeline          from 'stemn-shared/misc/SyncTimeline/SidebarTimeline/SidebarTimeline.jsx'
 import ContentSidebar           from 'stemn-shared/misc/ContentSidebar'
 import Guide                    from 'stemn-shared/misc/Guide/Guide'
@@ -23,10 +16,9 @@ import Button                   from 'stemn-shared/misc/Buttons/Button/Button'
 import timelineImg              from 'stemn-shared/assets/images/pure-vectors/timeline.svg'
 import cloudProviders           from 'stemn-shared/assets/images/illustrations/cloud-providers.svg'
 
-export const Component = React.createClass({
-
+export class Component extends React.Component {
   // Mounting
-  onMount(nextProps, prevProps) {
+  onMount = (nextProps, prevProps) => {
     if (nextProps.project && nextProps.project.data && nextProps.project.data.remote.connected) {
       if (!prevProps || nextProps.project.data._id !== prevProps.project.data._id) {
         nextProps.syncTimelineActions.fetchTimeline({
@@ -37,21 +29,27 @@ export const Component = React.createClass({
         })
       }
     }
-  },
-  componentWillMount() { this.onMount(this.props) },
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) },
+  };
 
-  refresh() {
+  componentWillMount() { this.onMount(this.props) }
+  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+
+  refresh = () => {
     this.props.syncTimelineActions.fetchTimeline({
       types: ['commits'],
       size: 100,
       entityType: 'project',
       entityId: this.props.project.data._id,
     })
-  },
+  };
 
   render() {
-    const { timeline, timelineModel, project, location, children } = this.props
+    const {
+      timeline,
+      timelineModel,
+      project,
+      children,
+    } = this.props
     const baseLink = `project/${project && project.data ? project.data._id : ''}`
 
     if (project.data.remote.connected) {
@@ -95,8 +93,8 @@ export const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 function mapStateToProps({ syncTimeline, projects }, { params }) {
   const project = projects.data[params.stub]

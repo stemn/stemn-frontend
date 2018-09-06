@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import tabClasses from './Tabs.css'
 
-import classNames from 'classnames'
+import cn from 'classnames'
 
 export default (props) => {
-  const rootClasses = classNames(tabClasses.tabs, { 
+  const rootClasses = cn(tabClasses.tabs, { 
     [tabClasses.tabsLg]: props.size === 'lg',
     [tabClasses.noLine]: props.noline,
   }, props.className)
-  const innerClasses = classNames('tabs-inner', 'layout-row', tabClasses.inner)
+  const innerClasses = cn('tabs-inner', 'layout-row', tabClasses.inner)
   
   return (
     <div className={ rootClasses } style={ props.style }>

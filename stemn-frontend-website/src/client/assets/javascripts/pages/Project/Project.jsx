@@ -6,51 +6,18 @@ import { get, has } from 'lodash'
 import Link from 'stemn-shared/misc/Router/Link'
 import SubHeader from 'modules/SubHeader'
 import IsOwner from 'stemn-shared/misc/Auth/IsOwner'
-import PublicPrivateIcon from 'stemn-shared/misc/Icons/PublicPrivateIcon'
-import ProviderIcon from 'stemn-shared/misc/Icons/ProviderIcon'
-import MdContentCopy from 'react-icons/md/content-copy'
+import { ProjectInfoIcons } from 'stemn-shared/misc/Projects/ProjectInfoIcons'
 
 class Project extends Component {
   render() {
     const { children, project } = this.props
     const routeParams = { projectId: get(project, 'data._id') }
-    const isClone = get(project, 'data.clone.source')
     
     const title = [
       <div key="text">
         { project && project.data && <Link name="projectRoute" params={ routeParams }>{project.data.name}</Link> }
       </div>,
-      <div
-        key="public-icon"
-        title={ get(project, 'data.private') ? 'Private Project' : 'Public Project' }
-      >
-        <PublicPrivateIcon
-          private={ get(project, 'data.private') }
-          style={ { marginLeft: '10px' } }
-          noColor
-        />
-      </div>,
-      ...(isClone 
-        ? [<Link
-          name="projectRoute"
-          params={ { projectId: project.data.clone.source } }
-          key="clone-icon"
-          title="Cloned Project. View Original."
-        >
-          <MdContentCopy
-            style={ { marginLeft: '10px' } }
-          />
-        </Link>] 
-        : []),
-      <div           
-        key="provider-icon"
-        title={ `Files stored in ${get(project, 'data.remote.provider')}` }
-      >
-        <ProviderIcon 
-          style={ { marginLeft: '10px' } }
-          provider={ get(project, 'data.remote.provider') }
-        />
-      </div>,
+      <ProjectInfoIcons key="icons" project={ project && project.data } padLeft />
     ]
 
     return (

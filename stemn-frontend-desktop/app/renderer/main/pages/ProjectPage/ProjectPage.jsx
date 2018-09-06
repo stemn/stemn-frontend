@@ -7,11 +7,10 @@ import * as SystemActions from 'stemn-shared/desktop/System/System.actions.js'
 
 // Component Core
 import React from 'react'
+import PropTypes from 'prop-types'
 import Link from 'stemn-shared/misc/Router/Link'
-import { has, get } from 'lodash'
+import { get } from 'lodash'
 
-// Components
-import Tabs from 'stemn-shared/misc/Tabs/Tabs'
 import Header from 'stemn-shared/misc/Header/Header.jsx'
 import Banner from 'stemn-shared/misc/Banner/Banner.jsx'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
@@ -26,8 +25,6 @@ import PublicPrivateIcon from 'stemn-shared/misc/Icons/PublicPrivateIcon'
 import folderLockedVector  from 'stemn-shared/assets/images/pure-vectors/folder-locked.svg'
 import globalVector  from 'stemn-shared/assets/images/pure-vectors/global.svg'
 
-// Styles
-import classNames from 'classnames'
 import classes from './ProjectPage.css'
 
 class Component extends React.Component {
@@ -47,7 +44,13 @@ class Component extends React.Component {
     }
   }
   render() {
-    const { project, system, children, systemActions, params, dispatch } = this.props
+    const {
+      project,
+      system,
+      children,
+      systemActions,
+      dispatch,
+    } = this.props
     const baseLink       = `project/${project && project.data ? project.data._id : ''}`
     const isLoading      = !project || !project.data
     const isConnected    = project && project.data && project.data.remote && project.data.remote.provider
@@ -158,7 +161,7 @@ class Component extends React.Component {
 
 
 Component.childContextTypes = {
-  project: React.PropTypes.object,
+  project: PropTypes.object,
 }
 
 // /////////////////////////////// CONTAINER /////////////////////////////////

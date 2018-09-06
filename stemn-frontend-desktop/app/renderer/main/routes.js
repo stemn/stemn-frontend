@@ -45,9 +45,9 @@ export default store => (
           <Route path="permissions"                component={ ProjectSettingsPermissionsPage } />
         </Route>
       </Route>
-      <Route   path="/"                            component={ HomePage } />
-      <Route   path="/dashboard"                   component={ DashboardPage } />
-      <Route   path="/settings"                    component={ SettingsPage }>
+      <Route path="/"                              component={ HomePage } />
+      <Route path="/dashboard"                     component={ DashboardPage } />
+      <Route path="/settings"                      component={ SettingsPage }>
         <Route path="/settings/account"            component={ SettingsAccountPage } />
       </Route>
     </Route>

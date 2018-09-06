@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "target": "es2015",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "strict": true,
+        "pretty": true,
+        "noUnusedLocals": true,
+        "noImplicitAny": false,
+        "experimentalDecorators": true,
+        "jsx": "react",
+        "lib": [
+            "es2015",
+            "es2016",
+            "es2017",
+            "dom"
+        ],
+        "baseUrl": "./",
+        "paths": {
+            "stemn-shared/*": ["stemn-frontend-shared/src/*"],
+            "reducer": ["stemn-frontend-website/src/client/assets/javascripts/app/reducer.ts"],
+        }
+    },
+    "include": [
+        "typings.d.ts",
+        "stemn-frontend-website",
+        "stemn-frontend-desktop",
+        "stemn-frontend-shared"
+    ]
+}

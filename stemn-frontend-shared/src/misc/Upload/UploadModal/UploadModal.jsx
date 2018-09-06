@@ -1,6 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import classes from './UploadModal.css'
-import classNames from 'classnames'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import Upload from 'stemn-shared/misc/Upload/Upload'
 
@@ -12,7 +11,9 @@ export default class UploadModal extends Component {
     this.props.reset({ cacheKey: uploadId })
   }
   render() {
-    const { modalCancel, reset } = this.props
+    const {
+      modalCancel,
+    } = this.props
     return (
       <div style={ { width: '600px' } }>
         <div className="modal-title">Upload a file</div>

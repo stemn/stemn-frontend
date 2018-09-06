@@ -7,19 +7,16 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const WebpackChunkHash = require('webpack-chunk-hash')
 const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const getStemnEnv = require('./getStemnEnv')
 
 const GLOBALS = {
   'process.env': {
     NODE_ENV: JSON.stringify('production'),
   },
-  GLOBAL_ENV: {
+  GLOBAL_ENV: Object.assign({
     APP_TYPE: JSON.stringify('web'),
     NODE_ENV: JSON.stringify('production'),
-    WEBSITE_URL: JSON.stringify('https://stemn.com'),
-    API_SERVER: JSON.stringify('https://dev.stemn.com'),
-    WEBSOCKET_SERVER: JSON.stringify('https://dev.stemn.com:8443'),
-  },
-  __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false')),
+  }, getStemnEnv(process.env.STEMN_ENV)),
 }
 
 const chunkIncludes = targets => ({ context }) => context && context.indexOf('node_modules') >= 0 && targets.find(t => new RegExp(`\\\\${t}\\\\`, 'i').test(context))
@@ -36,7 +33,6 @@ module.exports = merge(config, {
       'react',
       'react-dom',
       'react-helmet',
-      'react-popover',
       'react-redux',
       'react-router',
       'react-router-redux',
@@ -55,8 +51,7 @@ module.exports = merge(config, {
     // Avoid publishing files when compilation fails
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin(GLOBALS),
-    new UglifyJsPlugin({
-    }),
+    new UglifyJsPlugin({}),
     //    new webpack.LoaderOptionsPlugin({
     //      minimize: true,
     //      debug: false,
@@ -111,14 +106,10 @@ module.exports = merge(config, {
     new webpack.HashedModuleIdsPlugin(),
   ],
   module: {
-    noParse: /\.min\.js$/,
     loaders: [
       // Globals
       {
-        test: /\.(css|scss)$/,
-        include: [
-          path.resolve(__dirname, '../src/client/assets/styles/global'),
-        ],
+        test: /\.global\.(css|scss)$/,
         loader: ExtractTextPlugin.extract({
           fallbackLoader: 'style',
           loader: [
@@ -130,11 +121,11 @@ module.exports = merge(config, {
       },
       // CSS Modules
       {
-        test: /\.(css|scss)$/,
+        test: /^((?!\.global).)*\.(css|scss)$/,
         include: [
           path.resolve(__dirname, '../src/client/assets/javascripts'),
           path.resolve(__dirname, '../src/client/assets/styles/modules'),
-          path.resolve(__dirname, '../node_modules/stemn-frontend-shared'),
+          path.resolve(__dirname, '../../stemn-frontend-shared'),
         ],
         loader: ExtractTextPlugin.extract({
           fallbackLoader: 'style',

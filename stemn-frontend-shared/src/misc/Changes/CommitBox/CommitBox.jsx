@@ -8,15 +8,10 @@ import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/El
 
 // Component Core
 import React from 'react'
-import moment from 'moment'
 import { some } from 'lodash'
 
-// Styles
-import classNames from 'classnames'
 import classes from './CommitBox.css'
 
-// Sub Components
-import IconButton from 'stemn-shared/misc/Buttons/IconButton'
 import Button from 'stemn-shared/misc/Buttons/Button/Button.jsx'
 import Editor from 'stemn-shared/misc/Editor/EditorNew'
 import Input from 'stemn-shared/misc/Input/Input/Input'
@@ -24,7 +19,6 @@ import MarkdownButton from 'stemn-shared/misc/Editor/MarkdownButton/MarkdownButt
 import Walkthrough from 'stemn-shared/misc/Walkthrough/Walkthrough.jsx'
 
 import MdDone from 'react-icons/md/done'
-import { MentionsInput, Mention } from 'react-mentions'
 
 
 // ///////////////////////////////////////////////////////////////////////////
@@ -32,7 +26,7 @@ import { MentionsInput, Mention } from 'react-mentions'
 // ///////////////////////////////////////////////////////////////////////////
 
 
-export const Component = React.createClass({
+export class Component extends React.Component {
   render() {
     const { entityModel, changes, electronWindowsActions, changesActions, className } = this.props
     const noChangesChecked = !some(changes.checked)
@@ -96,8 +90,8 @@ export const Component = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
 
 
 // ///////////////////////////////////////////////////////////////////////////
