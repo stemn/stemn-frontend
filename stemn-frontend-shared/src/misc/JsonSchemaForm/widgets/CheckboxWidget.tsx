@@ -10,14 +10,14 @@ export const CheckboxWidget = (props: WidgetProps & FieldTemplateProps) => {
   return (
     <div style={{ margin: '10px' }}>
       <Checkbox
-        title={ 'Default title' }
-        value={ value || false }
+        title={'Default title'}
+        value={value || false}
         onChange={() => {
           const newValue = !props.value
           props.onChange(newValue)
         }}
       />
-      <span> { schema.description || schema.title } </span>
+      <span> {schema.description || schema.title} </span>
     </div>
   )
 }

@@ -48,7 +48,7 @@ const fetchDataHoc = (configs: IFetchDataHocConfig[]) => (WrappedComponent) => c
   }
   public render () {
       return (
-        <WrappedComponent { ...this.props } />
+        <WrappedComponent {...this.props} />
       )
     }
 }

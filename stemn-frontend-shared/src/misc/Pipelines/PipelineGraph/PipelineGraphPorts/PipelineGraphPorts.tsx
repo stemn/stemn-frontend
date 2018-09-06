@@ -16,11 +16,11 @@ export class PipelineGraphPorts extends React.PureComponent<IPipelineGraphPortsP
   public render () {
     const { node, type, isSelected } = this.props
     return (
-      <div className={ cn(s.ports, type === 'output' ? s.end : '') }>
+      <div className={cn(s.ports, type === 'output' ? s.end : '')}>
         { pipe(
             values,
             filter((port: PortModel) => port.type === type) as any,
-            map((port: PortModel) => <PipelineGraphPort key={ port.id } port={ port } node={ node } isSelected={ isSelected } />),
+            map((port: PortModel) => <PipelineGraphPort key={port.id} port={port} node={node} isSelected={isSelected} />),
           )(node.ports)
         }
       </div>

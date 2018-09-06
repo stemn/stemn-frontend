@@ -20,10 +20,10 @@ export const SelectWidget = (props: WidgetProps & FieldTemplateProps) => {
   return (
     <PopoverDropdown
       required={props.required}
-      value={ props.value }
-      options={ options }
+      value={props.value}
+      options={options}
       className='input'
-      style={ { width: '100%' } }
+      style={{ width: '100%' }}
       onChange={(option: any) => props.onChange(option.value)}
     />
   )

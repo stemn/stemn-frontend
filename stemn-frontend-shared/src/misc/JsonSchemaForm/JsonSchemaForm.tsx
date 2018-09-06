@@ -58,7 +58,7 @@ export class JsonSchemaForm<T> extends React.Component<FormProps<T> & ISchemaFor
           onSubmit={this.onSubmit}
           showErrorList={true}
           liveValidate={true}
-          noHtml5Validate
+          noHtml5Validate={true}
           {...configs}
         >
           <p> Required fields are denoted by '*' </p>

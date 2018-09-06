@@ -8,7 +8,7 @@ export class PipelineGraphStepFactory extends AbstractNodeFactory {
   }
 
   public generateReactWidget (diagramEngine: DiagramEngine, node: PipelineGraphStepModel) {
-    return <PipelineGraphStep node={ node } />
+    return <PipelineGraphStep node={node} />
   }
 
   public getNewInstance () {

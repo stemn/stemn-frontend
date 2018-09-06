@@ -7,7 +7,7 @@ export const FileWidget = (props: WidgetProps & FieldTemplateProps) => {
 
   const { classNames } = props
   return (
-    <div className={ classNames }>
+    <div className={classNames}>
       <Upload
         // containerClassName={ classes.container }
         // imageClassName={ classes.image }

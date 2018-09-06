@@ -37,16 +37,16 @@ export class PreviewPipeline extends React.Component<IPreviewPipelineProps> {
       <div className='layout-column flex'>
         { fileData && fileData.data ? (
           <PipelineGraph
-            diagramId={ previewId }
-            pipelineConfig={ fileData.data }
-            readOnly={ !editActive }
+            diagramId={previewId}
+            pipelineConfig={fileData.data}
+            readOnly={!editActive}
           />
         ) : '' }
-        { fileData ? <LoadingOverlay show={ fileData.loading } /> : null }
+        {fileData ? <LoadingOverlay show={fileData.loading} /> : null}
         { fileData && !fileData.data && !fileData.loading
           ? <div className='layout-column layout-align-center-center flex text-center'>
-            <img style={ { width: '100px' } } src={ file } />
-            <div className='text-title-4' style={ { marginBottom: '10px' } }>Nothing to display</div>
+            <img style={{ width: '100px' }} src={file} />
+            <div className='text-title-4' style={{ marginBottom: '10px' }}>Nothing to display</div>
             <div className='text-title-5'>This file appears to be empty.</div>
           </div>
           : null }

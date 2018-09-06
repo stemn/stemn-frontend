@@ -105,21 +105,21 @@ export class PipelineGraphComponent extends React.Component<IPipelineGraphProps,
     diagramModel.setLocked(readOnly)
 
     return (
-      <div className={ cn('layout-column flex', className) } style={ style }>
+      <div className={cn('layout-column flex', className)} style={style}>
         <PipelineGraphDroplayer
-          diagramId={ diagramId }
-          addStep={ addStep }
-          selectStep={ selectStep }
-          diagramEngine={ diagramEngine }
+          diagramId={diagramId}
+          addStep={addStep}
+          selectStep={selectStep}
+          diagramEngine={diagramEngine}
         >
           <DiagramWidget
-            className={ cn('flex', s.diagram, { [s.edit]: !readOnly })}
-            diagramEngine={ diagramEngine }
-            allowLooseLinks={ false }
-            maxNumberPointsPerLink={ 0 }
-            smartRouting
-            deleteKeys={ [46] } // Delete
-            actionStoppedFiring={ this.updateReduxState }
+            className={cn('flex', s.diagram, { [s.edit]: !readOnly })}
+            diagramEngine={diagramEngine}
+            allowLooseLinks={false}
+            maxNumberPointsPerLink={0}
+            smartRouting={true}
+            deleteKeys={[46]} // Delete
+            actionStoppedFiring={this.updateReduxState}
           />
         </PipelineGraphDroplayer>
       </div>

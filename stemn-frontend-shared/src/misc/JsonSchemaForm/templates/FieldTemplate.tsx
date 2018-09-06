@@ -26,23 +26,23 @@ export const FieldTemplate = (props: FieldTemplateProps) => {
   }
 
   return (
-    <div className={ cn(classNames, s.main) }>
+    <div className={cn(classNames, s.main)}>
 
-      <CSSTransitionGroup { ...errorTransition }>
-        <h3 className={cn(s.main, s.header, { [s.warn] : hasErrors })}> { header } </h3>
+      <CSSTransitionGroup {...errorTransition}>
+        <h3 className={cn(s.main, s.header, { [s.warn] : hasErrors })}> {header} </h3>
       </CSSTransitionGroup>
 
-      { children }
+      {children}
 
-      <CSSTransitionGroup { ...errorTransition } >
+      <CSSTransitionGroup {...errorTransition} >
         { hasErrors
-          ? rawErrors.map((error, idx) => (<div key={`${id}.${idx}`} className={ cn(s.message, s.error) }> {error} </div>))
+          ? rawErrors.map((error, idx) => (<div key={`${id}.${idx}`} className={cn(s.message, s.error)}> {error} </div>))
           : null
         }
       </CSSTransitionGroup>
 
-      <div className={ s.message }>
-        { rawHelp }
+      <div className={s.message}>
+        {rawHelp}
       </div>
 
     </div>

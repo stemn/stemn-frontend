@@ -36,8 +36,8 @@ export class SiteSearchResults extends React.Component<ISiteSearchResultsProps> 
       return (
         <div>
           { results && results.data && results.data.map((result) => (
-            <Link key={ result._id } name='fieldRoute' params={ { fieldId: result.stub } }>
-              <Tag className='primary' text={ result.name } style={ { marginBottom: '6px' } } />
+            <Link key={result._id} name='fieldRoute' params={{ fieldId: result.stub }}>
+              <Tag className='primary' text={result.name} style={{ marginBottom: '6px' }} />
             </Link>
           ))}
         </div>
@@ -46,39 +46,39 @@ export class SiteSearchResults extends React.Component<ISiteSearchResultsProps> 
     return (
       <div>
         <div
-          className={ cn(classes.results, 'layout-column', (display === 'projectRow' && !isLoading && hasResults) ? classes.projectRow : '') }
-          style={ !results || !results.data ? { minHeight: '100vh' } : {} }
+          className={cn(classes.results, 'layout-column', (display === 'projectRow' && !isLoading && hasResults) ? classes.projectRow : '')}
+          style={!results || !results.data ? { minHeight: '100vh' } : {}}
         >
           <LoadingOverlay
-            show={ isLoading }
-            linear
-            noOverlay
+            show={isLoading}
+            linear={true}
+            noOverlay={true}
           />
           { display === 'projectRow'
             ? results && results.data && results.data.map((result) => (
               <ProjectRow
-                key={ result._id }
+                key={result._id}
                 size='wide'
-                project={ { data: result } }
-                className={ classes.result }
+                project={{ data: result }}
+                className={classes.result}
               />
             ))
             : results && results.data && results.data.map((result) => (
               <EntityRow
-                key={ result._id }
-                data={ result }
-                query={ query }
-                className={ classes.result }
+                key={result._id}
+                data={result}
+                query={query}
+                className={classes.result}
               />
             ))
           }
-          { noResults && <div className='layout-column flex layout-align-center-center text-title-5'>No Search Results</div> }
+          {noResults && <div className='layout-column flex layout-align-center-center text-title-5'>No Search Results</div>}
         </div>
         <Pagination
-          path={ location.pathname }
-          query={ location.query }
-          page={ page }
-          noMoreResults={ noMoreResults }
+          path={location.pathname}
+          query={location.query}
+          page={page}
+          noMoreResults={noMoreResults}
         />
       </div>
     )

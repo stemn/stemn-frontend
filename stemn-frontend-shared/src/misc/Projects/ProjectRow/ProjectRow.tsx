@@ -25,34 +25,34 @@ export class ProjectRow extends React.Component<IProjectRowProps> {
       const { _id: projectId, name, blurb, picture, updated } = project.data
 
       return (
-        <div className={ cn(classes.project, 'layout-row', className) } >
+        <div className={cn(classes.project, 'layout-row', className)} >
           <div className='layout-column flex'>
-            <div className={ cn('layout-row layout-align-start-center', classes.titleRow)}>
+            <div className={cn('layout-row layout-align-start-center', classes.titleRow)}>
               <Link
-                className={ cn('link-primary', classes.title) }
+                className={cn('link-primary', classes.title)}
                 name='projectRoute'
-                params={ { projectId } }
+                params={{ projectId }}
               >
-                { name || 'Untitled Project' }
+                {name || 'Untitled Project'}
               </Link>
             </div>
-            <div className={ cn('flex', classes.blurb) }>{ blurb }</div>
-            <div className={ cn(classes.meta, 'layout-row', 'layout-align-start-center') }>
-              { project.data && <ProjectInfoIcons project={ project.data } hidePublic padRight /> }
-              { moment(updated).fromNow() }
+            <div className={cn('flex', classes.blurb)}>{blurb}</div>
+            <div className={cn(classes.meta, 'layout-row', 'layout-align-start-center')}>
+              {project.data && <ProjectInfoIcons project={project.data} hidePublic={true} padRight={true} />}
+              {moment(updated).fromNow()}
               <div className='flex' />
               <SocialButton
                 type='follow'
-                entityType={ 'project' }
-                entityId={ projectId }
+                entityType={'project'}
+                entityId={projectId}
               />
             </div>
           </div>
           { size === 'wide' && picture
-            ? <Link name='projectRoute' params={ { projectId } }>
+            ? <Link name='projectRoute' params={{ projectId }}>
               <img
-                className={ classes.picture }
-                src={ `${GLOBAL_ENV.API_SERVER}${picture}?size=feed-sm&crop=true` }
+                className={classes.picture}
+                src={`${GLOBAL_ENV.API_SERVER}${picture}?size=feed-sm&crop=true`}
               />
             </Link>
             : null }
@@ -60,16 +60,16 @@ export class ProjectRow extends React.Component<IProjectRowProps> {
       )
     }
     return (
-      <LoadingAnimation className={ cn(classes.project, 'layout-row', className) } >
+      <LoadingAnimation className={cn(classes.project, 'layout-row', className)} >
         <div className='layout-column flex'>
-          <div className={ classes.titleRow }>
-            <LoadingPlaceholder width={ 200 } className={ classes.title } />
+          <div className={classes.titleRow}>
+            <LoadingPlaceholder width={200} className={classes.title} />
           </div>
-          <div className={ classes.blurb }>
-            <LoadingPlaceholder width={ 320 } style={ { marginBottom: '5px' } } />
-            <LoadingPlaceholder width={ 300 } />
+          <div className={classes.blurb}>
+            <LoadingPlaceholder width={320} style={{ marginBottom: '5px' }} />
+            <LoadingPlaceholder width={300} />
           </div>
-          <LoadingPlaceholder width={ 200 } className={ classes.meta } />
+          <LoadingPlaceholder width={200} className={classes.meta} />
         </div>
       </LoadingAnimation>
     )

@@ -80,47 +80,47 @@ export class PreviewPage extends React.Component<IPreviewPageProps> {
     return (
       <div
         className='layout-column flex'
-        style={ { overflow: 'hidden', maxHeight: '100vh' } }
+        style={{ overflow: 'hidden', maxHeight: '100vh' }}
       >
         <Header>
           { file.data && (
             <FileBreadCrumbs
               className='text-ellipsis no-drag'
-              meta={ file.data }
-              clickFn={ this.clickFileOrFolder }
-              popup
+              meta={file.data}
+              clickFn={this.clickFileOrFolder}
+              popup={true}
             />
           )}
           <div className='flex' />
           { file.data && (
             <FileCompareMenu
-              file1={ file1 }
-              file2={ file2 }
-              revisions={ revisions }
-              mode={ mode }
-              changeMode={ this.changeMode }
+              file1={file1}
+              file2={file2}
+              revisions={revisions}
+              mode={mode}
+              changeMode={this.changeMode}
             />
           )}
           <div className='divider' />
         </Header>
         <div className='layout-row flex rel-box'>
-          <div className={ cn(classes.preview, 'layout-column flex') }>
+          <div className={cn(classes.preview, 'layout-column flex')}>
             { file.data && [
                 <FileCompareInner
                   key='preview'
                   className='layout-column flex'
-                  project={ file.data.project }
-                  file1={ file1 }
-                  file2={ file2 }
-                  mode={ mode }
-                  header={ displayFileHeader }
+                  project={file.data.project}
+                  file1={file1}
+                  file2={file2}
+                  mode={mode}
+                  header={displayFileHeader}
                 />,
                 <Timeline
                   key='timeline'
-                  className={ classes.timeline }
-                  items={ timelineData }
-                  onSelect={ this.onSelect }
-                  isSelected={ this.isSelected }
+                  className={classes.timeline}
+                  items={timelineData}
+                  onSelect={this.onSelect}
+                  isSelected={this.isSelected}
                   preferPlace='above'
                 />,
             ]}
@@ -128,13 +128,13 @@ export class PreviewPage extends React.Component<IPreviewPageProps> {
           <DragResize
             side='left'
             width='450'
-            widthRange={ [0, 450] }
+            widthRange={[0, 450]}
             className='layout-column'
           >
-            <aside className={ classes.sidebar }>
+            <aside className={classes.sidebar}>
               { file.data && (
                 <div>
-                  <SectionTitle className={ classes.sidebarTitle }>Meta</SectionTitle>
+                  <SectionTitle className={classes.sidebarTitle}>Meta</SectionTitle>
                   <SimpleTable>
                     <tr><td>Name</td><td>{file.data.name}</td></tr>
                     <tr><td>Size</td><td>{formatBytes(file.data.size)}</td></tr>
@@ -143,12 +143,12 @@ export class PreviewPage extends React.Component<IPreviewPageProps> {
                     <tr><td>Revisions</td><td>{revisions.length}</td></tr> }
                   </SimpleTable>
                   <AssemblyParts
-                    fileMeta={ file }
-                    clickFn={ this.clickFileOrFolder }
+                    fileMeta={file}
+                    clickFn={this.clickFileOrFolder}
                   />
-                  <SectionTitle className={ classes.sidebarTitle }>Timeline</SectionTitle>
+                  <SectionTitle className={classes.sidebarTitle}>Timeline</SectionTitle>
                   <TimelineVertical
-                    items={ timelineData }
+                    items={timelineData}
                     type='file'
                   />
                 </div>

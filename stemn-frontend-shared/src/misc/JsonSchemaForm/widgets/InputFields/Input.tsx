@@ -8,7 +8,7 @@ export const InputField = (props: WidgetProps & FieldTemplateProps, type: string
       required={props.required}
       value={props.value}
       className='dr-input flex'
-      type={ type }
+      type={type}
       placeholder={placeholder || ''}
       onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)}
     />

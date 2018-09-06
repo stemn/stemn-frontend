@@ -24,12 +24,12 @@ export class PipelineGraphSidebarComponent extends React.PureComponent<IPipeline
       const stepInfo = steps.find((step) => step.type === selectedStep.type)
       return (
         <div>
-          <SectionTitle className={ s.sidebarTitle } style={{ marginTop: '0px' }}>Edit Node</SectionTitle>
-          { selectedStep.type }
+          <SectionTitle className={s.sidebarTitle} style={{ marginTop: '0px' }}>Edit Node</SectionTitle>
+          {selectedStep.type}
           { stepInfo && stepInfo.schema && (
             <JsonSchemaForm
-              schema={ stepInfo.schema }
-              onSubmit={ (data) => data }
+              schema={stepInfo.schema}
+              onSubmit={(data) => data}
             />
           )}
         </div>
@@ -37,34 +37,34 @@ export class PipelineGraphSidebarComponent extends React.PureComponent<IPipeline
     } else {
       return (
         <div>
-          <SectionTitle className={ s.sidebarTitle } style={{ marginTop: '0px' }}>Name</SectionTitle>
+          <SectionTitle className={s.sidebarTitle} style={{ marginTop: '0px' }}>Name</SectionTitle>
           <Input className='dr-input' model='test' />
-          <SectionTitle className={ s.sidebarTitle }>Triggers</SectionTitle>
+          <SectionTitle className={s.sidebarTitle}>Triggers</SectionTitle>
           <Row className='layout-row layout-wrap sm'>
             { steps
               .filter((step) => step.category === 'trigger')
-              .map((step) => <Col className='sm' key={ step.type }><PipelineGraphSidebarWidget step={ step }/></Col>)
+              .map((step) => <Col className='sm' key={step.type}><PipelineGraphSidebarWidget step={step}/></Col>)
             }
           </Row>
-          <SectionTitle className={ s.sidebarTitle }>Conditions</SectionTitle>
+          <SectionTitle className={s.sidebarTitle}>Conditions</SectionTitle>
           <Row className='layout-row layout-wrap sm'>
             { steps
               .filter((step) => step.category === 'condition')
-              .map((step) => <Col className='sm' key={ step.type }><PipelineGraphSidebarWidget step={ step }/></Col>)
+              .map((step) => <Col className='sm' key={step.type}><PipelineGraphSidebarWidget step={step}/></Col>)
             }
           </Row>
-          <SectionTitle className={ s.sidebarTitle }>Actions</SectionTitle>
+          <SectionTitle className={s.sidebarTitle}>Actions</SectionTitle>
           <Row className='layout-row layout-wrap sm'>
             { steps
               .filter((step) => step.category === 'action')
-              .map((step) => <Col className='sm' key={ step.type }><PipelineGraphSidebarWidget step={ step }/></Col>)
+              .map((step) => <Col className='sm' key={step.type}><PipelineGraphSidebarWidget step={step}/></Col>)
             }
           </Row>
-          <SectionTitle className={ s.sidebarTitle }>Custom Step</SectionTitle>
+          <SectionTitle className={s.sidebarTitle}>Custom Step</SectionTitle>
           <Row className='layout-row layout-wrap sm'>
             { steps
               .filter((step) => step.category === 'custom')
-              .map((step) => <Col className='sm' key={ step.type }><PipelineGraphSidebarWidget step={ step }/></Col>)
+              .map((step) => <Col className='sm' key={step.type}><PipelineGraphSidebarWidget step={step}/></Col>)
             }
           </Row>
         </div>

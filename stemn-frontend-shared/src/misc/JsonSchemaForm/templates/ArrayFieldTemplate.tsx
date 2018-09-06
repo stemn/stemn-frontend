@@ -12,16 +12,16 @@ export const ArrayFieldTemplate = (props: ArrayFieldTemplateProps) => {
       {props.items.map((component, idx) => {
         return (
           <div
-            key={ idx }
+            key={idx}
             style={{ position: 'relative' }}
           >
-            { component.children }
+            {component.children}
 
             <FilledIconButton
-              onClick={ component.onDropIndexClick(component.index) }
+              onClick={component.onDropIndexClick(component.index)}
               style={{ position: 'absolute', top: '5px', right: '5px' }}
             >
-              <MdClose size={ 20 } />
+              <MdClose size={20} />
             </FilledIconButton>
           </div>
         )
@@ -34,7 +34,7 @@ export const ArrayFieldTemplate = (props: ArrayFieldTemplateProps) => {
             onClick={props.onAddClick}
             className='primary'
           >
-            <MdAdd size={ 20 } />
+            <MdAdd size={20} />
           </FilledIconButton>
 
         </div>

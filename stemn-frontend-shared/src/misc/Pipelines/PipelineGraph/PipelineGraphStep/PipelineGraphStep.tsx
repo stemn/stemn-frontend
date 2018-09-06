@@ -20,10 +20,11 @@ export interface IPipelineGraphStepProps {
 }
 
 const mapTableRows = pipe(
-  mapObjIndexed((val: string, key) =>
-    <div key={ key }>
-      <div>{ prettyKey(key) }</div><div className='text-ellipsis'>{ val }</div>
-    </div>),
+  mapObjIndexed((val: string, key) => (
+    <div key={key}>
+      <div>{prettyKey(key)}</div><div className='text-ellipsis'>{val}</div>
+    </div>
+  )),
   values,
 )
 
@@ -33,28 +34,28 @@ export const PipelineGraphStepComponent = (props: IPipelineGraphStepProps) => {
 
   return (
     <div
-      className={ cn(s.outer, { [s.selected]: isSelected }) }
-      onClick={ () => selectStep({ diagramId, stepId: node.id }) }
+      className={cn(s.outer, { [s.selected]: isSelected })}
+      onClick={() => selectStep({ diagramId, stepId: node.id })}
     >
-      <PipelineGraphPorts type='input' node={ node } isSelected={ isSelected } />
-      <div className={ s.step }>
-        <div className={ cn(s.title, 'layout-row layout-align-start-center') }>
-          { stepInfo && <stepInfo.icon className={ s.icon } /> }
-          <div className='flex'>{ node.type }</div>
+      <PipelineGraphPorts type='input' node={node} isSelected={isSelected} />
+      <div className={s.step}>
+        <div className={cn(s.title, 'layout-row layout-align-start-center')}>
+          {stepInfo && <stepInfo.icon className={s.icon} />}
+          <div className='flex'>{node.type}</div>
           {/* <PiplineIcon status='running' /> */}
         </div>
-        <div className={ s.body }>
+        <div className={s.body}>
           { node.extras && node.extras.config && (
-            <SimpleTable flex>{ mapTableRows(node.extras.config) }</SimpleTable>
+            <SimpleTable flex={true}>{mapTableRows(node.extras.config)}</SimpleTable>
           )}
           { node.extras && node.extras.command &&
             Array.isArray(node.extras.command)
-            ? node.extras.command.map((item: string, key: string) => <div key={ key }>{ item }</div>)
+            ? node.extras.command.map((item: string, key: string) => <div key={key}>{item}</div>)
             : node.extras.command
           }
         </div>
       </div>
-      <PipelineGraphPorts type='output' node={ node } isSelected={ isSelected } />
+      <PipelineGraphPorts type='output' node={node} isSelected={isSelected} />
     </div>
   )
 }

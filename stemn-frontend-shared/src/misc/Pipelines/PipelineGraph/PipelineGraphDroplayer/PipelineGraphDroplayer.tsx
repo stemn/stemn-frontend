@@ -19,7 +19,7 @@ export class PipelineGraphDroplayer extends React.PureComponent<IPipelineGraphDr
     const { addStep, diagramEngine, children, diagramId } = this.props
     return (
       <div
-        className={ cn('flex', 'layout-column') }
+        className={cn('flex', 'layout-column')}
         onDrop={ (event) => {
           const data = JSON.parse(event.dataTransfer.getData('storm-diagram-node'))
           const points = diagramEngine.getRelativeMousePoint(event)
@@ -53,7 +53,7 @@ export class PipelineGraphDroplayer extends React.PureComponent<IPipelineGraphDr
             zIndex: 1,
           }}
         /> */}
-        { children }
+        {children}
       </div>
     )
   }

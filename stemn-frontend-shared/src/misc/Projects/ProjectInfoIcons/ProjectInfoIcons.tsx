@@ -21,22 +21,22 @@ export const ProjectInfoIcons = ({ project, hidePublic, padLeft, padRight }: IPr
   const cloneSource = get(project, 'clone.source')
 
   return (
-    <div className={ cn('layout-row', 'layout-align-start-center', s.icons, { [s.padRight]: padRight, [s.padLeft]: padLeft })}>
+    <div className={cn('layout-row', 'layout-align-start-center', s.icons, { [s.padRight]: padRight, [s.padLeft]: padLeft })}>
       { !hidePublic && (
         <div
           key='public-icon'
-          title={ project.private ? 'Private Project' : 'Public Project' }
+          title={project.private ? 'Private Project' : 'Public Project'}
         >
           <PublicPrivateIcon
-            private={ project.private }
-            noColor
+            private={project.private}
+            noColor={true}
           />
         </div>
       )}
       { cloneSource && (
         <Link
           name='projectRoute'
-          params={ { projectId: cloneSource } }
+          params={{ projectId: cloneSource }}
           key='clone-icon'
           title='Cloned Project. View Original.'
         >
@@ -46,10 +46,10 @@ export const ProjectInfoIcons = ({ project, hidePublic, padLeft, padRight }: IPr
       )}
       <div
         key='provider-icon'
-        title={ `Files stored in ${project.remote.provider}` }
+        title={`Files stored in ${project.remote.provider}`}
       >
         <ProviderIcon
-          provider={ project.remote.provider }
+          provider={project.remote.provider}
         />
       </div>
     </div>

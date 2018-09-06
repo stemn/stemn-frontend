@@ -14,12 +14,12 @@ export class PipelineGraphPort extends React.PureComponent<IPipelineGraphPortPro
   public render () {
     const { node, port, isSelected } = this.props
     return (
-      <div className={ cn(s.portOuter, port.type === 'input' ? s.input : s.output) }>
-        <div className={ s.line } />
+      <div className={cn(s.portOuter, port.type === 'input' ? s.input : s.output)}>
+        <div className={s.line} />
         <PortWidget
-          className={ cn(s.port, { [s.selected]: isSelected }) }
-          name={ port.name }
-          node={ node }
+          className={cn(s.port, { [s.selected]: isSelected })}
+          name={port.name}
+          node={node}
           extraProps={ {
             title: 'some title',
             children: '',
