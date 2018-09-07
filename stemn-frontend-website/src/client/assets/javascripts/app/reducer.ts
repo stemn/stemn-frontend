@@ -1,5 +1,6 @@
 import { routerReducer as routing } from 'react-router-redux'
 import { combineReducers } from 'redux'
+import { FormState, reducer as formReducer } from 'redux-form'
 import auth from 'stemn-shared/misc/Auth/Auth.reducer.js'
 import autosuggest from 'stemn-shared/misc/Autosuggest/Autosuggest.reducer.js'
 import changes from 'stemn-shared/misc/Changes/Changes.reducer.js'
@@ -44,6 +45,7 @@ import { analyticsReducer } from '../modules/Analytics/Analytics.reducer'
 
 export interface IStoreState {
   contentful: IContentfulState,
+  form: FormState,
 }
 
 export type IGetState = () => IStoreState
@@ -90,6 +92,7 @@ const splitReducers = combineReducers({
   terminal,
   analytics: analyticsReducer,
   contentful: contentfulReducer,
+  form: formReducer,
 })
 
 export default (state, action) => {

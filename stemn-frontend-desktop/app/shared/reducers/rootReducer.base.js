@@ -25,6 +25,7 @@ import upload from 'stemn-shared/misc/Upload/Upload.reducer.js'
 import users from 'stemn-shared/misc/Users/Users.reducer.js'
 import walkthrough from 'stemn-shared/misc/Walkthrough/Walkthrough.reducer.js'
 import websocket from 'stemn-shared/misc/Websocket/Websocket.reducer.js'
+import { reducer as formReducer } from 'redux-form'
 
 export default {
   auth,
@@ -54,4 +55,5 @@ export default {
   users,
   walkthrough,
   websocket,
+  formReducer,
 }

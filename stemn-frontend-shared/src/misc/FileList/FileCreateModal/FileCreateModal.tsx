@@ -9,9 +9,9 @@
 // import * as classes from '../ProjectNewModal/ProjectNewModal.scss'
 import * as cn from 'classnames'
 import * as React from 'react'
+import { Field, Form, InjectedFormProps } from 'redux-form'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton.jsx'
-import Input from 'stemn-shared/misc/Input/Input/Input'
-import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
+import { FormDropdown, FormInput } from 'stemn-shared/misc/Input'
 import Upload from 'stemn-shared/misc/Upload/Upload'
 import * as sLogin from 'stemn-shared/pages/Login/Login.scss'
 import { IFolder } from '../types'
@@ -26,16 +26,18 @@ const options = fileTypes.map((item) => ({
   value: item,
 }))
 
-export interface IFileCreateModalComponentProps {
+export interface IFileCreateModalComponentProps extends InjectedFormProps {
   folder: IFolder,
 }
 
 export class FileCreateModalComponent extends React.Component<IFileCreateModalComponentProps> {
+  public submit = (formData) => {
+    console.log(formData)
+  }
   public render () {
-    const { folder } = this.props
-    console.log(folder)
+    const { handleSubmit } = this.props
     return (
-      <div style={{ width: '600px', padding: '30px' }}>
+      <Form onSubmit={handleSubmit(this.submit)} style={{ width: '600px', padding: '30px' }}>
         <div className={cn('text-mini-caps')} style={{ marginBottom: '10px' }}>Upload a file</div>
         <Upload
           imageClassName={s.image}
@@ -44,25 +46,29 @@ export class FileCreateModalComponent extends React.Component<IFileCreateModalCo
         <div className={sLogin.textDivider}><div>OR</div></div>
         <div className={cn('text-mini-caps')} style={{ marginBottom: '10px' }}>Create a new file</div>
         <div className='layout-row'>
-          <Input
-            model='sidebar.searchString'
+          <Field
+            name='fileName'
+            component={FormInput}
             className='dr-input flex'
             type='text'
             placeholder='File Name'
           />
-          <PopoverDropdown
+          <Field
+            name='fileType'
+            component={FormDropdown}
             options={options}
-            value='pipeline'
-            className='dr-input'
             style={{ width: '90px', borderLeft: 'none' }}
           />
         </div>
         <div className='layout-row layout-align-end' style={{ marginTop: '30px' }}>
-          <ProgressButton className='primary'>
+          <ProgressButton
+            className='primary'
+            type='submit'
+          >
             Create File
           </ProgressButton>
         </div>
-      </div>
+      </Form>
     )
   }
 }

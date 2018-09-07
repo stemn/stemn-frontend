@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/stemn/stemn-frontend#readme",
   "devDependencies": {
+    "@types/redux-form": "^7.4.7",
     "@stemn/tslint-config": "0.0.2",
     "@types/classnames": "^2.2.4",
     "@types/icepick": "^1.3.0",
