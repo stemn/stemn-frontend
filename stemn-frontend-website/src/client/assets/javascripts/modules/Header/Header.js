@@ -64,7 +64,7 @@ export default class Header extends Component {
           preferPlace="below"
           trigger="click"
         >
-          <a dataTag="avatar-menu">
+          <a data-tag="avatar-menu">
             <Avatar
               style={ { marginLeft: '10px' } }
               shape="square"

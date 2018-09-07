@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import FileList from './FileList'
 import { getFiles, getSearchResults } from './FileList.actions.js'
+import { showFileCreateModal } from './FileCreateModal'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { get } from 'lodash'
 import { bindActionCreators } from 'redux'
@@ -16,6 +17,7 @@ const stateToProps = ({ fileList }, { projectId, path, provider }) => {
 const dispatchToProps = dispatch => ({
   getFiles: bindActionCreators(getFiles, dispatch),
   getSearchResults: bindActionCreators(getSearchResults, dispatch),
+  showFileCreateModal: bindActionCreators(showFileCreateModal, dispatch),
   dispatch,
 })
 

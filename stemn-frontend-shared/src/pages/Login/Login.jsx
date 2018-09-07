@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 
 // Styles
 import cn from 'classnames'
-import classes from './Login.css'
+import classes from './Login.scss'
 
 // Sub Components
 import Input from 'stemn-shared/misc/Input/Input/Input'

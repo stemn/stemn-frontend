@@ -8,6 +8,7 @@ import FileRow from './components/FileRow'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import MdRefresh from 'react-icons/md/refresh'
 import MdHome from 'react-icons/md/home'
+import MdCreateNewFolder from 'react-icons/md/create-new-folder'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
 import SearchInput from 'stemn-shared/misc/Search/SearchInput'
 import { ContextMenuTrigger } from 'react-contextmenu'
@@ -129,7 +130,7 @@ export default class FileList extends Component {
     return null
   }
   render() {
-    const { fileList, fileListCacheKey, getFiles, getSearchResults, link, initialSync, search, contentStyle, singleClickFn, doubleClickFn, crumbClickFn, selected, options, path, projectId, crumbPopup, dispatch, ...otherProps } = this.props
+    const { fileList, fileListCacheKey, showFileCreateModal, getFiles, getSearchResults, link, initialSync, search, contentStyle, singleClickFn, doubleClickFn, crumbClickFn, selected, options, path, projectId, crumbPopup, dispatch, ...otherProps } = this.props
 
     const isLoading = !fileList || fileList.loading
     const isInitialSync = !get(fileList, 'folder') && initialSync
@@ -165,6 +166,13 @@ export default class FileList extends Component {
                 clickFn={ crumbClickFn }
                 popup={ crumbPopup }
               />
+              <SimpleIconButton
+                disabled={ !fileList.folder }
+                onClick={ () => showFileCreateModal(fileList.folder) }
+                title="Create / Upload file"
+              >
+                <MdCreateNewFolder size={ 22 } />
+              </SimpleIconButton>
               <SimpleIconButton
                 onClick={ this.goHome }
                 title="Home"

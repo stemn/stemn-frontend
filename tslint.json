@@ -4,6 +4,7 @@
     "tslint-react"
   ],
   "rules": {
+    "no-console": false,
     "no-implicit-dependencies": [false, "dev"],
     "ter-max-len": [true, 200],
     "semicolon": [true, "never"],
