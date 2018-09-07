@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import FileListPopup from './FileListPopup'
-import { getFiles } from '../FileList.actions.js'
+import { getFiles } from '../FileList.actions'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { get } from 'lodash'
 

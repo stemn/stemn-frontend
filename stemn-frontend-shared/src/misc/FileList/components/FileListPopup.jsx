@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 // Container Actions
-import * as FileListActions from '../FileList.actions.js'
+import * as FileListActions from '../FileList.actions'
 
 // Component Core
 import React from 'react'

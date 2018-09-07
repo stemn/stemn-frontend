@@ -11,13 +11,10 @@ import * as cn from 'classnames'
 import * as React from 'react'
 import { Field, Form, InjectedFormProps } from 'redux-form'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton.jsx'
-import { FormDropdown, FormInput } from 'stemn-shared/misc/Input'
-import Upload from 'stemn-shared/misc/Upload/Upload'
+import { FormDropdown, FormInput, FormUpload } from 'stemn-shared/misc/Input'
 import * as sLogin from 'stemn-shared/pages/Login/Login.scss'
 import { IFolder } from '../types'
-import * as s from './FileCreateModal.scss'
-
-const uploadId = 'UploadModal'
+import { dispatchToProps } from './FileCreateModal.container'
 
 const fileTypes = ['pipeline', 'txt', 'md']
 
@@ -28,20 +25,34 @@ const options = fileTypes.map((item) => ({
 
 export interface IFileCreateModalComponentProps extends InjectedFormProps {
   folder: IFolder,
+  uploadFile: typeof dispatchToProps['uploadFile']
+  push: typeof dispatchToProps['push']
+}
+
+interface IFormData {
+  fileName: string,
+  fileType: string,
 }
 
 export class FileCreateModalComponent extends React.Component<IFileCreateModalComponentProps> {
   public submit = (formData) => {
-    console.log(formData)
+    const { uploadFile, folder } = this.props
+    const data = formData as IFormData
+    return uploadFile({
+      projectId: folder.project._id,
+      path: folder.path,
+      file: JSON.stringify(data),
+    })
   }
   public render () {
-    const { handleSubmit } = this.props
+    const { handleSubmit, submitting } = this.props
     return (
       <Form onSubmit={handleSubmit(this.submit)} style={{ width: '600px', padding: '30px' }}>
-        <div className={cn('text-mini-caps')} style={{ marginBottom: '10px' }}>Upload a file</div>
-        <Upload
-          imageClassName={s.image}
-          uploadId={uploadId}
+        <div className={cn('text-mini-caps')} style={{ marginBottom: '10px' }}>Upload files</div>
+        <Field
+          name='file'
+          component={FormUpload}
+          className='dr-input'
         />
         <div className={sLogin.textDivider}><div>OR</div></div>
         <div className={cn('text-mini-caps')} style={{ marginBottom: '10px' }}>Create a new file</div>
@@ -64,6 +75,7 @@ export class FileCreateModalComponent extends React.Component<IFileCreateModalCo
           <ProgressButton
             className='primary'
             type='submit'
+            loading={submitting}
           >
             Create File
           </ProgressButton>

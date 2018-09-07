@@ -1,6 +1,9 @@
 import http from 'axios'
 
-export function fetchFiles({ projectId, path, options, cacheKey }) {
+export const fetchFiles = (
+  { projectId, path, cacheKey }:
+  { projectId: string, path: string, cacheKey: string },
+) => {
   return {
     type: 'FILE_LIST/FETCH_FILES',
     http: true,
@@ -18,7 +21,10 @@ export function fetchFiles({ projectId, path, options, cacheKey }) {
   }
 }
 
-export function exploreFolder({ folderId, provider, cacheKey }) {
+export const exploreFolder = (
+  { folderId, provider, cacheKey }:
+  { folderId: string, provider: string, cacheKey: string },
+) => {
   return {
     type: 'FILE_LIST/EXPLORE_FOLDER',
     payload: http({
@@ -35,7 +41,10 @@ export function exploreFolder({ folderId, provider, cacheKey }) {
   }
 }
 
-export const getSearchResults = ({ projectId, folderId, query, cacheKey }) => ({
+export const getSearchResults = (
+  { projectId, folderId, query, cacheKey }:
+  { projectId: string, folderId: string, query: string, cacheKey: string },
+) => ({
   type: 'FILE_LIST/SEARCH',
   http: true,
   payload: {
@@ -53,7 +62,10 @@ export const getSearchResults = ({ projectId, folderId, query, cacheKey }) => ({
   },
 })
 
-export const getFiles = ({ path, provider, projectId, cacheKey }) => (dispatch) => {
+export const getFiles = (
+  { path, provider, projectId, cacheKey }:
+  { path: string, provider: string, projectId: string, cacheKey: string },
+) => (dispatch) => {
   if (provider) {
     dispatch(exploreFolder({
       provider,
@@ -66,5 +78,18 @@ export const getFiles = ({ path, provider, projectId, cacheKey }) => (dispatch) 
       path,
       cacheKey,
     }))
+  }
+}
+
+export const uploadFile = (
+  { projectId, path, file }:
+  { projectId: string, path: string, file: string },
+) => {
+  return {
+    type: 'FILE_LIST/UPLOAD_FILE',
+    payload: http({
+      method: 'POST',
+      url: `/api/v1/sync/listFolder/${projectId}/${path}`,
+    }),
   }
 }
