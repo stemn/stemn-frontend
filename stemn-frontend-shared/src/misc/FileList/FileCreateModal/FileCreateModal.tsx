@@ -9,12 +9,16 @@
 // import * as classes from '../ProjectNewModal/ProjectNewModal.scss'
 import * as cn from 'classnames'
 import * as React from 'react'
+import { ImageFile } from 'react-dropzone'
 import { Field, Form, InjectedFormProps } from 'redux-form'
-import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton.jsx'
+import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 import { FormDropdown, FormInput, FormUpload } from 'stemn-shared/misc/Input'
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay'
 import * as sLogin from 'stemn-shared/pages/Login/Login.scss'
 import { IFolder } from '../types'
 import { dispatchToProps } from './FileCreateModal.container'
+
+const FormLoadingOverlay = ({ input: { value } }) => <LoadingOverlay show={value}>Uploading files...</LoadingOverlay>
 
 const fileTypes = ['pipeline', 'txt', 'md']
 
@@ -32,6 +36,7 @@ export interface IFileCreateModalComponentProps extends InjectedFormProps {
 interface IFormData {
   fileName: string,
   fileType: string,
+  uploads: ImageFile[]
 }
 
 export class FileCreateModalComponent extends React.Component<IFileCreateModalComponentProps> {
@@ -44,16 +49,20 @@ export class FileCreateModalComponent extends React.Component<IFileCreateModalCo
       file: JSON.stringify(data),
     })
   }
+  public onDrop = (files: ImageFile[]) => {
+    const { change } = this.props
+    change('loading', true)
+  }
   public render () {
     const { handleSubmit, submitting } = this.props
     return (
-      <Form onSubmit={handleSubmit(this.submit)} style={{ width: '600px', padding: '30px' }}>
+      <Form
+        onSubmit={handleSubmit(this.submit)}
+        style={{ width: '600px', padding: '30px', position: 'relative' }}
+      >
+        <Field name='loading' component={FormLoadingOverlay}/>
         <div className={cn('text-mini-caps')} style={{ marginBottom: '10px' }}>Upload files</div>
-        <Field
-          name='file'
-          component={FormUpload}
-          className='dr-input'
-        />
+        <FormUpload input={{ onChange: this.onDrop }}/>
         <div className={sLogin.textDivider}><div>OR</div></div>
         <div className={cn('text-mini-caps')} style={{ marginBottom: '10px' }}>Create a new file</div>
         <div className='layout-row'>
