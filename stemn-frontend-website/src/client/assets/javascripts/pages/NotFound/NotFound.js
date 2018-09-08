@@ -9,7 +9,7 @@ const NotFound = () => (
       <title>404: Page Not Found</title>
     </Helmet>
     <h1>LOST IN SPACE</h1>
-    <p>It looks like the page you were looing for is gone</p>
+    <p>It looks like the page you were looking for is gone</p>
   </StandardLayout>
 )
 

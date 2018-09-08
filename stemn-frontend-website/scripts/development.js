@@ -19,7 +19,7 @@ compiler.apply(new DashboardPlugin())
 //  console.log('stats.json created. Use https://webpack.github.io/analyse to preview.')
 //})
 
-const host = process.env.HOST || 'localhost'
+const host = process.env.HOST || '0.0.0.0'
 const port = process.env.PORT || 3000
 
 function log() {
