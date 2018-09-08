@@ -1,11 +1,8 @@
 # Install root deps
-npm install
-
-# cd into a package so our following commands line up :)
-cd ./stemn-frontend-desktop
-
-# Install desktop deps
-cd ../stemn-frontend-desktop && npm run install:all
+yarn install
 
 # Install website deps
-cd ../stemn-frontend-website && npm i
+yarn --cwd stemn-frontend-desktop install:all
+
+# Install website deps
+yarn --cwd stemn-frontend-website install
