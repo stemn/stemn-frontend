@@ -80,16 +80,3 @@ export const getFiles = (
     }))
   }
 }
-
-export const uploadFile = (
-  { projectId, path, file }:
-  { projectId: string, path: string, file: string },
-) => {
-  return {
-    type: 'FILE_LIST/UPLOAD_FILE',
-    payload: http({
-      method: 'POST',
-      url: `/api/v1/sync/listFolder/${projectId}/${path}`,
-    }),
-  }
-}

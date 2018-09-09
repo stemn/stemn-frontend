@@ -45,8 +45,9 @@ export class FileCreateModalComponent extends React.Component<IFileCreateModalCo
     const data = formData as IFormData
     return uploadFile({
       projectId: folder.project._id,
-      path: folder.path,
-      file: JSON.stringify(data),
+      parent: folder._id,
+      name: `${data.fileName}.${data.fileType}`,
+      file: 'some data',
     })
   }
   public onDrop = (files: ImageFile[]) => {

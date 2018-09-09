@@ -3,7 +3,7 @@ import { push } from 'react-router-redux'
 import { compose } from 'redux'
 import { reduxForm } from 'redux-form'
 import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry'
-import { uploadFile } from '../FileList.actions'
+import { uploadFile } from '../../Files/actions/uploadFile'
 import { FileCreateModalComponent } from './FileCreateModal'
 
 const stateToProps = () => ({})
