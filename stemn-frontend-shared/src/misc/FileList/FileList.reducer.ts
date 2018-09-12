@@ -1,16 +1,22 @@
-import i from 'icepick'
+import * as i from 'icepick'
+import { AnyAction } from 'redux'
+// import * as actions from './FileList.actions'
+import { IFile, IFolder } from './types'
 
-const initialState = {
-  /*
-    [cacheKey] : {
-      entries: [] - Array of entries
-      folder: {} - Info about the folder we are searching
-      query: '' - Search query
-    }
-  */
+export interface IFileListState {
+  [cacheKey: string]: {
+    /** Array of entries */
+    entries: IFile[],
+    /** Info about the folder we are searching */
+    folder: IFolder,
+    /** Search query */
+    query: string,
+  }
 }
 
-export default (state = initialState, action = {}) => {
+const initialState: IFileListState = {}
+
+export const fileListReducer = (state: IFileListState = initialState, action: AnyAction) => {
   switch (action.type) {
     case 'FILE_LIST/FETCH_FILES_PENDING':
       return i.assocIn(state, [action.meta.cacheKey, 'loading'], true)

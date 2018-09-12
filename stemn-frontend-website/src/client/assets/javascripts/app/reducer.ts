@@ -11,7 +11,7 @@ import { contentfulReducer, IContentfulState } from 'stemn-shared/misc/Contentfu
 import desktopReleases from 'stemn-shared/misc/DesktopReleases/DesktopReleases.reducer.js'
 import fields from 'stemn-shared/misc/Fields/Fields.reducer.js'
 import fileCompare from 'stemn-shared/misc/FileCompare/FileCompare.reducer.js'
-import fileList from 'stemn-shared/misc/FileList/FileList.reducer.js'
+import { fileListReducer, IFileListState } from 'stemn-shared/misc/FileList/FileList.reducer'
 import files from 'stemn-shared/misc/Files/Files.reducer.js'
 import fileSelect from 'stemn-shared/misc/FileSelect/FileSelect.reducer.js'
 import header from 'stemn-shared/misc/Header/Header.reducer.js'
@@ -46,6 +46,7 @@ import { analyticsReducer } from '../modules/Analytics/Analytics.reducer'
 export interface IStoreState {
   contentful: IContentfulState,
   form: FormState,
+  fileList: IFileListState,
 }
 
 export type IGetState = () => IStoreState
@@ -59,7 +60,7 @@ const splitReducers = combineReducers({
   history,
   commits,
   fileCompare,
-  fileList,
+  fileList: fileListReducer,
   fileSelect,
   files,
   fields,

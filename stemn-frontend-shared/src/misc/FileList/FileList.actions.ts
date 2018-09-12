@@ -1,5 +1,3 @@
-import http from 'axios'
-
 export const fetchFiles = (
   { projectId, path, cacheKey }:
   { projectId: string, path: string, cacheKey: string },
@@ -27,10 +25,11 @@ export const exploreFolder = (
 ) => {
   return {
     type: 'FILE_LIST/EXPLORE_FOLDER',
-    payload: http({
+    http: true,
+    payload: {
       method: 'GET',
       url: `/api/v1/remote/explore/${provider}/${folderId}`,
-    }),
+    },
     meta: {
       cacheKey,
     },
