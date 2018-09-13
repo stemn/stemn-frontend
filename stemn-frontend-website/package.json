@@ -17,6 +17,7 @@
     "cypress:run": "cypress run --record"
   },
   "devDependencies": {
+    "@bahmutov/add-typescript-to-cypress": "2.0.0",
     "babel-cli": "6.14.0",
     "babel-core": "6.14.0",
     "babel-eslint": "8.1.0",

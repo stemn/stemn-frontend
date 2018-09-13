@@ -3,7 +3,7 @@ import { elByDataTag, elByPh, elByTitle } from '../utils'
 export const createProject = (
   { projectName, projectBlurb, userName }:
   { projectName: string, projectBlurb: string, userName: string },
-  ) => {
+) => {
   describe('Create project', () => {
     it('Should have a create project button', () => {
       cy.get(elByTitle('button', 'Create new project')).click({ force: true })
