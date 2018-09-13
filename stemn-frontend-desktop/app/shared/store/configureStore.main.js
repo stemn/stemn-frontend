@@ -19,7 +19,7 @@ export default function configureStore(initialState) {
     httpPackage,
     httpTransform,
     websocket,
-    promise(),
+    promise.default(),
     autoLaunch,
     toastsError,
     forwardToRenderer,

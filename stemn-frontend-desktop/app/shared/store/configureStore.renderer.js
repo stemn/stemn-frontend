@@ -13,7 +13,7 @@ import routerFix                from 'stemn-shared/misc/Router/Router.middleware
 export default function configureStore(initialState) {
   const middleware = [
     thunk,
-    promise(),
+    promise.default(),
     routerFix,
     forwardToMain,
     forwardToRendererWindow,

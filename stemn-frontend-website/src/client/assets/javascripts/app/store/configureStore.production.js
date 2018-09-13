@@ -23,7 +23,7 @@ const middleware = [
   httpPackage,
   httpTransform,
   websocket,
-  promise(),
+  promise.default(),
   toastsError,
   // If ?debug search param is used, the redux logger is added
   ...(searchParams.debug
