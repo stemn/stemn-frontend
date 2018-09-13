@@ -1,7 +1,9 @@
-const url = 'http://localhost:3000'
 import { elByPh } from '../utils'
 
-export default ({ email, password, firstName, lastName }) => {
+export const register = (
+  { url, email, password, firstName, lastName }:
+  { url: string, email: string, password: string, firstName: string, lastName: string },
+) => {
   describe('Register and onboard', () => {
     it('Should fill out name, email and password', () => {
       cy.visit(`${url}/register`)
@@ -39,7 +41,7 @@ export default ({ email, password, firstName, lastName }) => {
       cy.location('href').should('include', '/explore')
     })
   })
-  
+
   describe('Login', () => {
     it('Should fill out the email and password', () => {
       cy.visit(`${url}/login`)
@@ -50,4 +52,4 @@ export default ({ email, password, firstName, lastName }) => {
       cy.contains('Dashboard')
     })
   })
-}  
+}

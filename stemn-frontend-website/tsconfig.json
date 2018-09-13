@@ -10,7 +10,7 @@
     },
     "include": [
         "../typings.d.ts",
-        "../stemn-frontend-website",
+        "../stemn-frontend-website/src",
         "../stemn-frontend-shared"
     ]
 }
