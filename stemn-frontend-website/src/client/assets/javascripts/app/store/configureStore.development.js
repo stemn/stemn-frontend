@@ -21,7 +21,7 @@ const middlewares = [
   httpPackage,
   httpTransform,
   websocket,
-  promise.default(),
+  promise(),
   toastsError,
   createLogger({ collapsed: true }),
   routerMiddleware(browserHistory),
