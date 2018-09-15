@@ -1,18 +1,20 @@
-import i from 'icepick'
+import * as i from 'icepick'
+import { AnyAction } from 'redux'
+import { IFile } from 'stemn-shared/misc/FileList/types'
 
-const initialState = {
-  /*
-    [cacheKey] : {
-      editActive: boolean,
-      mode,
-      selected1,
-      selected2,
-      lastSelected,
-    }
-  */
+export interface IFileCompareState {
+  [cacheKey: string]: {
+    editActive: boolean,
+    mode: string,
+    selected1: IFile,
+    selected2?: IFile,
+    lastSelected: number,
+  }
 }
 
-export default (state = initialState, action = {}) => {
+const initialState: IFileCompareState = {}
+
+export const fileCompareReducer = (state: IFileCompareState = initialState, action: AnyAction) => {
   switch (action.type) {
     case 'FILE_COMPARE/INIT':
       return i.assoc(state, action.meta.cacheKey, {
@@ -36,7 +38,7 @@ export default (state = initialState, action = {}) => {
       })
 
     case 'FILE_COMPARE/EDIT_TOGGLE':
-      return i.updateIn(state, [action.meta.cacheKey, 'editActive'], status => !status)
+      return i.updateIn(state, [action.meta.cacheKey, 'editActive'], (status) => !status)
 
     default:
       return state

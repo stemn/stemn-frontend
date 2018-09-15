@@ -2,7 +2,11 @@
     "extends": "../tsconfig.json",
     "compilerOptions": {
         "paths": {
-            "stemn-shared/*": ["stemn-frontend-shared/src/*"],
+            "stemn-shared/*": [
+                "stemn-frontend-shared/src/*/index.web.ts",
+                "stemn-frontend-shared/src/*/index.desktop.ts", 
+                "stemn-frontend-shared/src/*"
+            ],
             "modules/*": ["stemn-frontend-website/src/client/assets/javascripts/modules/*"],
             "layout/*": ["stemn-frontend-website/src/client/assets/javascripts/layout/*"],
             "route-actions": ["stemn-frontend-website/src/client/assets/javascripts/pages/routeActions.js"],

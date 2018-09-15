@@ -1,6 +1,50 @@
-import i from 'icepick'
+import * as i from 'icepick'
+import { AnyAction } from 'redux'
+import { IFile } from 'stemn-shared/misc/FileList/types'
 
-const initialState = {
+export interface IFilesState {
+  hydrated: boolean,
+  fileData: {
+    [cacheKey: string]: {
+      data: any,
+      loading: boolean,
+    },
+  },
+  fileRenders: {
+    [cacheKey: string]: {
+      error?: string
+      data?: any,
+      status?: string,
+      loading: boolean,
+    },
+  },
+  fileMeta: {
+    [cacheKey: string]: {
+      data?: IFile,
+      status?: string,
+    },
+  },
+  fileAssemblyParts: {},
+  fileAssemblyParents: {},
+  pathToId: {
+    [path: string]: {
+      data?: string,
+      loading: boolean,
+    },
+  },
+  downloadProgress: {
+    [cacheKey: string]: number,
+  },
+  relatedThreads: {
+    [fileId: string]: {
+      data?: any,
+      loading: boolean,
+    },
+  },
+  previewMarkdown: boolean,
+}
+
+const initialState: IFilesState = {
   hydrated: false,
   fileData: {},
   fileRenders: {},
@@ -13,7 +57,7 @@ const initialState = {
   previewMarkdown: false,
 }
 
-function reducer(state, action) {
+function reducer (state: IFilesState, action: AnyAction) {
   switch (action.type) {
     case 'FILES/GET_FILE_PENDING' :
       return i.assocIn(state, ['fileData', action.meta.cacheKey, 'loading'], true)
@@ -122,7 +166,7 @@ function reducer(state, action) {
       return i.assocIn(state, ['downloadProgress', action.payload.cacheKey], action.payload.progress)
 
     case 'FILES/TOGGLE_PREVIEW_MARKDOWN': {
-      return i.updateIn(state, ['previewMarkdown'], previewMarkdown => !previewMarkdown)
+      return i.updateIn(state, ['previewMarkdown'], (previewMarkdown) => !previewMarkdown)
     }
 
     default:
@@ -130,10 +174,9 @@ function reducer(state, action) {
   }
 }
 
-export default function (state = initialState, action) {
+export const filesReducer = (state: IFilesState = initialState, action: AnyAction) => {
   if (!state.hydrated) {
     state = { ...initialState, ...state, hydrated: true }
   }
   return reducer(state, action)
 }
-

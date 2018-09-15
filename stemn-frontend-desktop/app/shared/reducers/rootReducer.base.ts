@@ -7,9 +7,9 @@ import auth from 'stemn-shared/misc/Auth/Auth.reducer.js'
 import autosuggest from 'stemn-shared/misc/Autosuggest/Autosuggest.reducer.js'
 import changes from 'stemn-shared/misc/Changes/Changes.reducer.js'
 import comments from 'stemn-shared/misc/Comments/Comments.reducer.js'
-import fileCompare from 'stemn-shared/misc/FileCompare/FileCompare.reducer.js'
+import { fileCompareReducer, IFileCompareState } from 'stemn-shared/misc/FileCompare/FileCompare.reducer'
 import { fileListReducer, IFileListState } from 'stemn-shared/misc/FileList/FileList.reducer'
-import files from 'stemn-shared/misc/Files/Files.reducer.js'
+import { filesReducer, IFilesState } from 'stemn-shared/misc/Files/Files.reducer'
 import fileSelect from 'stemn-shared/misc/FileSelect/FileSelect.reducer.js'
 import header from 'stemn-shared/misc/Header/Header.reducer.js'
 import mentions from 'stemn-shared/misc/Mentions/Mentions.reducer.js'
@@ -29,6 +29,8 @@ import websocket from 'stemn-shared/misc/Websocket/Websocket.reducer.js'
 
 export interface IStoreState {
   fileList: IFileListState,
+  fileCompare: IFileCompareState,
+  files: IFilesState
 }
 
 export default {
@@ -38,10 +40,10 @@ export default {
   autosuggest,
   changes,
   comments,
-  fileCompare,
+  fileCompare: fileCompareReducer,
   fileList: fileListReducer,
   fileSelect,
-  files,
+  files: filesReducer,
   header,
   localPath,
   mentions,

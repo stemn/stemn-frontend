@@ -40,10 +40,18 @@ module.exports = {
       'lodash.debounce': join(__dirname, '../../node_modules/lodash/debounce'),
       'get-root-path': join(__dirname, '../src/client/getRootPath.js'),
     },
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.scss'],
+    extensions: [
+      '.web.ts',
+      '.ts', 
+      '.tsx', 
+      '.js', 
+      '.jsx', 
+      '.json', 
+      '.scss',
+    ],
     plugins: [
-      new TsconfigPathsPlugin({ configFile: join(__dirname, '../tsconfig.json') })
-    ]
+      new TsconfigPathsPlugin({ configFile: join(__dirname, '../tsconfig.json') }),
+    ],
   },
   plugins: [
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/), // http://stackoverflow.com/questions/25384360/how-to-prevent-moment-js-from-loading-locales-with-webpack

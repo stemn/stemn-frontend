@@ -31,7 +31,15 @@ module.exports = {
       'package-json': join(__dirname, '../app/package.json'),
       'get-root-path': join(__dirname, '../app/getRootPath.js'),
     },
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.scss'],
+    extensions: [
+      '.desktop.ts',
+      '.ts',
+      '.tsx', 
+      '.js', 
+      '.jsx', 
+      '.json', 
+      '.scss',
+    ],
   },
   plugins: [
     new HappyPack({

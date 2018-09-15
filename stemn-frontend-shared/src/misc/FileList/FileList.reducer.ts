@@ -1,6 +1,5 @@
 import * as i from 'icepick'
 import { AnyAction } from 'redux'
-// import * as actions from './FileList.actions'
 import { IFile, IFolder } from './types'
 
 export interface IFileListState {

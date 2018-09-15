@@ -14,6 +14,8 @@ declare module '*.svg' {
 
 interface GLOBAL_ENV {
   API_SERVER: string,
+  APP_TYPE: 'web' | 'desktop',
+  WEBSITE_URL: string,
 }
 
 declare const GLOBAL_ENV: GLOBAL_ENV
