@@ -4,6 +4,7 @@ export interface IFile {
     timestamp?: string,
   },
   deleted: boolean,
+  extension: string,
   entityType: 'file',
   fileId: string,
   hash: string,

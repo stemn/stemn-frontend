@@ -10,6 +10,7 @@ import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleI
 import { isSelected, orderItemsByTime } from 'stemn-shared/misc/FileCompare/FileCompare.utils.js'
 import FileCompareInner from 'stemn-shared/misc/FileCompare/FileCompareInner/FileCompareInner'
 import FileCompareMenu from 'stemn-shared/misc/FileCompare/FileCompareMenu'
+import { FileEditButton } from 'stemn-shared/misc/FileCompare/FileEditButton'
 import FileBreadCrumbs from 'stemn-shared/misc/FileList/components/FileBreadCrumbs'
 import AssemblyParts from 'stemn-shared/misc/Files/PreviewFile/PreviewCad/AssemblyParts/AssemblyParts'
 import { formatBytes } from 'stemn-shared/misc/Files/utils'
@@ -108,6 +109,13 @@ export class FileComponent extends React.Component<IFileComponentProps, IFileCom
               mode={mode}
               editActive={editActive}
               changeMode={this.changeMode}
+            />
+          )}
+          { file && file.data && (
+            <FileEditButton
+              cacheKey={cacheKey}
+              file1={file1}
+              editActive={editActive}
             />
           )}
           <SimpleIconButton

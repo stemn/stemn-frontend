@@ -131,7 +131,7 @@ export default class Progressbutton extends React.Component {
       >
         { href
           ? <a href={ href }><button { ...otherProps }><span>{children}</span></button></a>
-          : <button onClick={ () => { if (!disabled) { onClick() } } } { ...otherProps }><span>{children}</span></button>}
+          : <button onClick={ () => { if (!disabled && onClick) { onClick() } } } { ...otherProps }><span>{children}</span></button>}
         <AnimateSvg draw={ drawLoading }>{Progress}</AnimateSvg>
         { getIcon() }
       </div>

@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import { getViewerType } from 'stemn-shared/misc/Files/PreviewFile/PreviewFile.utils.js'
 import cn from 'classnames'
 import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
-import Button from 'stemn-shared/misc/Buttons/Button/Button.jsx'
 import { getCompareModes, getCompareIcon } from '../FileCompare.utils.js'
 import Popover from 'stemn-shared/misc/Popover'
 import MdMoreHoriz from 'react-icons/md/more-horiz'
@@ -12,7 +11,6 @@ import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList'
 import { showModal } from 'stemn-shared/misc/Modal/Modal.actions.js'
 import downloadModalName from 'stemn-shared/misc/Files/Download/DownloadModal'
 import { togglePreviewMarkdown } from 'stemn-shared/misc/Files/Files.actions'
-import { editToggle } from '../FileCompare.actions'
 import MdVisibility from 'react-icons/md/visibility'
 import MdCode from 'react-icons/md/code'
 
@@ -35,7 +33,7 @@ export class FileCompareMenu extends Component {
     return [downloadFile]
   }
   render() {
-    const { enablePreview, mode, changeMode, revisions, file1, file2, previewMarkdown, editToggle, togglePreviewMarkdown, cacheKey, editActive } = this.props
+    const { enablePreview, mode, changeMode, revisions, file1, file2, previewMarkdown, togglePreviewMarkdown } = this.props
 
     if (!file1) { return null }
 
@@ -44,7 +42,6 @@ export class FileCompareMenu extends Component {
     const CompareIcon = getCompareIcon(mode)
     const hasRevisions = revisions && revisions.length > 1 || file1 && file2
     const isMarkdown = file1.extension === 'md'
-    const isPipeline = file1.extension === 'pipeline'
 
     return (
       <div className="layout-row layout-align-start-center">
@@ -83,20 +80,11 @@ export class FileCompareMenu extends Component {
             <MdOpenInNew size={ 23 } />
           </SimpleIconButton> }
         <Popover preferPlace="below" offset={ 9 }>
-          <SimpleIconButton title="Options">
+          <SimpleIconButton title="Options" style={ { marginRight: '15px' } }>
             <MdMoreHoriz size="20px" />
           </SimpleIconButton>
           <PopoverMenuList menu={ this.renderMenu() } />
         </Popover>
-        { isPipeline && (
-          <Button 
-            className="primary" 
-            style={ { marginLeft: '10px' } } 
-            onClick={ () => editToggle({ cacheKey }) }
-          >
-            { editActive ? 'Save' : 'Edit' }
-          </Button>
-        )} 
       </div>
     )
   }
@@ -110,7 +98,6 @@ const stateToProps = ({ files: { previewMarkdown } }) => ({
 const dispatchToProps = {
   togglePreviewMarkdown,
   showModal,
-  editToggle,
 }
 
 export default connect(stateToProps, dispatchToProps)(FileCompareMenu)
