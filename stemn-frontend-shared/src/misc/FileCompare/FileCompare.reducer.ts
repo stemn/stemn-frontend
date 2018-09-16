@@ -1,11 +1,12 @@
 import * as i from 'icepick'
 import { AnyAction } from 'redux'
+import { IFileCompareMode } from 'stemn-shared/misc/FileCompare/types'
 import { IFile } from 'stemn-shared/misc/FileList/types'
 
 export interface IFileCompareState {
   [cacheKey: string]: {
     editActive: boolean,
-    mode: string,
+    mode: IFileCompareMode,
     selected1: IFile,
     selected2?: IFile,
     lastSelected: number,

@@ -19,7 +19,9 @@
         "paths": {
             "stemn-shared/*": [
                 "stemn-frontend-shared/src/*/index.web.ts",
+                "stemn-frontend-shared/src/*.web.ts",
                 "stemn-frontend-shared/src/*/index.desktop.ts", 
+                "stemn-frontend-shared/src/*.desktop.ts", 
                 "stemn-frontend-shared/src/*"
             ],
             "reducer": ["stemn-frontend-website/src/client/assets/javascripts/app/reducer.ts"],

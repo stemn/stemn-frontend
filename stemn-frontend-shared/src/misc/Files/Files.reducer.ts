@@ -57,7 +57,7 @@ const initialState: IFilesState = {
   previewMarkdown: false,
 }
 
-function reducer (state: IFilesState, action: AnyAction) {
+function reducer (state: IFilesState, action: AnyAction): IFilesState {
   switch (action.type) {
     case 'FILES/GET_FILE_PENDING' :
       return i.assocIn(state, ['fileData', action.meta.cacheKey, 'loading'], true)

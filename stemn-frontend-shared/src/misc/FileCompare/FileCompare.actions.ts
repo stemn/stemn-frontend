@@ -1,6 +1,11 @@
 import { get } from 'lodash'
+import { IFile } from 'stemn-shared/misc/FileList/types'
+import { IFileCompareMode } from './types'
 
-export const initCompare = ({ file, cacheKey }) => ({
+export const initCompare = (
+  { file, cacheKey }:
+  { file: IFile, cacheKey: string },
+) => ({
   type: 'FILE_COMPARE/INIT',
   payload: {
     selected1: get(file, ['revisions', '0'], file),
@@ -16,7 +21,10 @@ export const initCompare = ({ file, cacheKey }) => ({
   },
 })
 
-export const select = ({ file, mode, lastSelected, cacheKey }) => ({
+export const select = (
+  { file, mode, lastSelected, cacheKey }:
+  { file: IFile, mode: IFileCompareMode, lastSelected: number, cacheKey: string },
+) => ({
   type: 'FILE_COMPARE/SELECT',
   payload: {
     file,
@@ -29,7 +37,10 @@ export const select = ({ file, mode, lastSelected, cacheKey }) => ({
   },
 })
 
-export const changeMode = ({ mode, cacheKey }) => 
+export const changeMode = (
+  { mode, cacheKey }:
+  { mode: IFileCompareMode, cacheKey: string },
+) =>
   //    let { selected1, selected2 } = this.state;
 //    // If a second file is not selected - we select one if possible
 //    if(!selected2){
@@ -48,11 +59,13 @@ export const changeMode = ({ mode, cacheKey }) =>
     },
   })
 
-export const editToggle = ({ cacheKey }) => ({
+export const editToggle = (
+  { cacheKey }:
+  { cacheKey: string },
+) => ({
   type: 'FILE_COMPARE/EDIT_TOGGLE',
   payload: {},
   meta: {
     cacheKey,
   },
 })
-
