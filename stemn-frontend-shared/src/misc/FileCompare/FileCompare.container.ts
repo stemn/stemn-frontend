@@ -1,23 +1,30 @@
 import { connect } from 'react-redux'
-import FileCompare from './FileCompare'
+import { IStoreState } from 'reducer'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
-import { get } from 'lodash'
+import { changeMode, initCompare, select } from 'stemn-shared/misc/FileCompare/FileCompare.actions'
+import { IFile } from 'stemn-shared/misc/FileList/types'
 import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
 import { toggle } from 'stemn-shared/misc/TogglePanel/TogglePanel.actions'
-import { initCompare, changeMode, select } from 'stemn-shared/misc/FileCompare/FileCompare.actions'
+import { FileCompareComponent } from './FileCompare'
 
+export interface IFileCompareContainerProps {
+  file: {
+    data: IFile,
+    revisions: any[],
+  },
+}
 
-const stateToProps = ({ syncTimeline, fileCompare }, { file }) => {
+const stateToProps = ({ syncTimeline, fileCompare }: IStoreState, { file }: IFileCompareContainerProps) => {
   const syncTimelineCacheKey = `${file.data.fileId}`
   const togglePanelCacheKey = `${file.data.fileId}-${file.data.revisionId}`
   return {
-    compare: get(fileCompare, syncTimelineCacheKey, {}),
+    compare: fileCompare[syncTimelineCacheKey] || {},
     syncTimelineCacheKey,
     togglePanelCacheKey,
   }
 }
 
-const dispatchToProps = {
+export const dispatchToProps = {
   fetchTimeline,
   toggle,
   initCompare,
@@ -45,6 +52,6 @@ const fetchConfigs = [{
   },
 }]
 
-const withFetchData = fetchDataHoc(fetchConfigs)(FileCompare)
+const withFetchData = fetchDataHoc(fetchConfigs)(FileCompareComponent)
 const withRedux = connect(stateToProps, dispatchToProps)(withFetchData)
 export default withRedux

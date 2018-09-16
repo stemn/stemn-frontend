@@ -18,7 +18,7 @@ import projects from 'stemn-shared/misc/Projects/Projects.reducer.js'
 import search from 'stemn-shared/misc/Search/Search.reducer.js'
 import sidebar from 'stemn-shared/misc/Sidebar/Sidebar.reducer.js'
 import stringFilter from 'stemn-shared/misc/StringFilter/StringFilter.reducer.js'
-import syncTimeline from 'stemn-shared/misc/SyncTimeline/SyncTimeline.reducer.js'
+import { ISyncTimelineState, syncTimelineReducer } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.reducer.js'
 import threads from 'stemn-shared/misc/Threads/Threads.reducer.js'
 import toasts from 'stemn-shared/misc/Toasts/Toasts.reducer.js'
 import togglePanel from 'stemn-shared/misc/TogglePanel/TogglePanel.reducer.js'
@@ -30,7 +30,8 @@ import websocket from 'stemn-shared/misc/Websocket/Websocket.reducer.js'
 export interface IStoreState {
   fileList: IFileListState,
   fileCompare: IFileCompareState,
-  files: IFilesState
+  files: IFilesState,
+  syncTimeline: ISyncTimelineState,
 }
 
 export default {
@@ -52,7 +53,7 @@ export default {
   search,
   sidebar,
   stringFilter,
-  syncTimeline,
+  syncTimeline: syncTimelineReducer,
   system,
   threads,
   toasts,

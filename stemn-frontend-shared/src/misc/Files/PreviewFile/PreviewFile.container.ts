@@ -1,15 +1,13 @@
 import { connect } from 'react-redux'
 import { IStoreState } from 'reducer'
 import { IFile } from 'stemn-shared/misc/FileList/types'
-import { IProject } from 'stemn-shared/misc/Projects/types'
 import { getFile, renderFile } from '../../Files/Files.actions'
 import { isAssembly } from './PreviewCad/PreviewCad.utils'
 import { PreviewFileComponent } from './PreviewFile'
 
 export interface IPreviewFileContainerProps {
-  project: IProject,
   file: IFile
-  header: boolean,
+  header?: boolean,
   event: any,
   editActive?: boolean,
 }

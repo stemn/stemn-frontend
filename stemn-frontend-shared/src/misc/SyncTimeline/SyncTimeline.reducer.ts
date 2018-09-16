@@ -1,16 +1,19 @@
-import i from 'icepick'
+import * as i from 'icepick'
+import { AnyAction } from 'redux'
 
-const initialState = {
-  /** **********************************************
-  [ cacheKey ] : {
-    loading: false,
-    selected: {},
-    data: [ array of data ]
+export interface ISyncTimelineState {
+  [cacheKey: string ]: {
+    loading: boolean,
+    selected: any,
+    data: any[],
   }
-  *********************************************** */
 }
 
-export default (state = initialState, action) => {
+const initialState: ISyncTimelineState = {
+
+}
+
+export const syncTimelineReducer = (state: ISyncTimelineState = initialState, action: AnyAction) => {
   switch (action.type) {
     case 'TIMELINE/SELECT_ITEM':
       return i.assocIn(state, [action.meta.cacheKey, 'selected'], action.payload.selected)
@@ -28,10 +31,10 @@ export default (state = initialState, action) => {
         .value()
 
     case 'TIMELINE/ADD_EVENT':
-      return i.updateIn(state, [action.payload.cacheKey, 'data'], events => i.push(events || [], action.payload.event))
+      return i.updateIn(state, [action.payload.cacheKey, 'data'], (events: any[]) => i.push(events || [], action.payload.event))
     case 'TIMELINE/DELETE_EVENT':
-      return i.updateIn(state, [action.payload.cacheKey, 'data'], (events) => {
-        const eventIndex = events.findIndex(event => event._id === action.payload.eventId)
+      return i.updateIn(state, [action.payload.cacheKey, 'data'], (events: any[]) => {
+        const eventIndex = events.findIndex((event) => event._id === action.payload.eventId)
         return eventIndex !== -1 ? i.splice(events, eventIndex, 1) : events
       })
 

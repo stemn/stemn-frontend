@@ -3,8 +3,8 @@ import { uniqBy } from 'lodash'
 export const getRevisions = (syncTimeline) => {
   // syncTimeline contains revision and commit events
   // This will look inside commits and create an array of revisions.
-  const result = []
-  
+  const result = [] as any[]
+
   syncTimeline.forEach((item) => {
     if (item.event === 'revision') {
       result.push(item)
@@ -14,6 +14,6 @@ export const getRevisions = (syncTimeline) => {
       })
     }
   })
-  
+
   return uniqBy(result, '_id')
 }

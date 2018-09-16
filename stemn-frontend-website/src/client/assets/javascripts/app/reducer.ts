@@ -28,7 +28,7 @@ import sidebar from 'stemn-shared/misc/Sidebar/Sidebar.reducer.js'
 import social from 'stemn-shared/misc/Social/Social.reducer.js'
 import storeReducer from 'stemn-shared/misc/Store/Store.reducer.js'
 import stringFilter from 'stemn-shared/misc/StringFilter/StringFilter.reducer.js'
-import syncTimeline from 'stemn-shared/misc/SyncTimeline/SyncTimeline.reducer.js'
+import { ISyncTimelineState, syncTimelineReducer } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.reducer.js'
 import terminal from 'stemn-shared/misc/Terminal/Terminal.reducer.js'
 import threads from 'stemn-shared/misc/Threads/Threads.reducer.js'
 import toasts from 'stemn-shared/misc/Toasts/Toasts.reducer.js'
@@ -49,6 +49,7 @@ export interface IStoreState {
   files: IFilesState,
   fileList: IFileListState,
   fileCompare: IFileCompareState,
+  syncTimeline: ISyncTimelineState,
 }
 
 export type IGetState = () => IStoreState
@@ -76,7 +77,7 @@ const splitReducers = combineReducers({
   relatedFields,
   search,
   sidebar,
-  syncTimeline,
+  syncTimeline: syncTimelineReducer,
   threads,
   toasts,
   togglePanel,

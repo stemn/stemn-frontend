@@ -1,7 +1,7 @@
 import http from 'axios'
 import getUuid from 'stemn-shared/utils/getUuid.js'
 
-export function deselect({ projectId }) {
+export const deselect = ({ projectId }) => {
   return {
     type: 'TIMELINE/DESELECT_ITEM',
     payload: {
@@ -13,7 +13,7 @@ export function deselect({ projectId }) {
   }
 }
 
-export function selectTimelineItem({ projectId, selected }) {
+export const selectTimelineItem = ({ projectId, selected }) => {
   return {
     type: 'TIMELINE/SELECT_ITEM',
     payload: {
@@ -26,7 +26,7 @@ export function selectTimelineItem({ projectId, selected }) {
   }
 }
 
-export function fetchTimeline({ entityType, entityId, provider, types, cacheKey, page, size, criteria }) {
+export const fetchTimeline = ({ entityType, entityId, provider, types, cacheKey, page, size, criteria }) => {
 //  `/api/v1/remote/timeline/${provider}`
   return {
     type: 'TIMELINE/FETCH_TIMELINE',
@@ -52,7 +52,7 @@ export function fetchTimeline({ entityType, entityId, provider, types, cacheKey,
   }
 }
 
-export function getCount({ entityType, entityId, types, cacheKey }) {
+export const getCount = ({ entityType, entityId, types, cacheKey }) => {
   return {
     type: 'TIMELINE/FETCH_TIMELINE',
     payload: http({
@@ -92,7 +92,6 @@ export const deleteEvent = ({ cacheKey, eventId }) => ({
     eventId,
   },
 })
-
 
 export const getFeed = ({ feedType, page, size, cacheKey }) => ({
   // This will get the feed for all items the current user is interested in

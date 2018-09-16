@@ -4,20 +4,19 @@ import * as React from 'react'
 import { IFileCompareMode } from 'stemn-shared/misc/FileCompare/types'
 import { IFile } from 'stemn-shared/misc/FileList/types'
 import { PreviewFile } from 'stemn-shared/misc/Files/PreviewFile'
-import { IProject } from 'stemn-shared/misc/Projects/types'
 import * as classes from './FileCompareInner.scss'
 import FileCompareSlider from './FileCompareSlider/FileCompareSlider.jsx'
 
 const windowWithResizeListener = window as any
 
 export interface IFileCompareInnerProps {
-  editActive: boolean,
-  project: IProject,
+  editActive?: boolean,
   file1: IFile,
   file2?: IFile,
-  event: any,
+  event?: any,
   mode: IFileCompareMode,
-  header: boolean
+  header?: boolean,
+  className?: string,
 }
 
 export interface IFileCompareInnerState {
@@ -58,7 +57,6 @@ export class FileCompareInner extends React.Component<IFileCompareInnerProps, IF
   public render () {
     const {
       editActive,
-      project,
       file1,
       file2,
       event,
@@ -102,7 +100,6 @@ export class FileCompareInner extends React.Component<IFileCompareInnerProps, IF
         >
           { file2 &&
             <PreviewFile
-              project={project}
               file={file2}
               event={event}
               header={header}
@@ -118,7 +115,6 @@ export class FileCompareInner extends React.Component<IFileCompareInnerProps, IF
           <div className={`${classes.preview2} flex layout-column`}>
             { file1 &&
               <PreviewFile
-                project={project}
                 file={file1}
                 event={event}
                 header={header}
