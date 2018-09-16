@@ -197,6 +197,11 @@ workflows:
           type: approval
           requires:
            - build_desktop
+          filters:
+            branches:
+              only:
+                - production
+                - staging
       - deploy_website:
           requires:
             - deploy_website_approval

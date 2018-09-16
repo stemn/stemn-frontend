@@ -1,5 +1,6 @@
 import * as whatGerber from '@stemn/whats-that-gerber'
 import * as codemirror from 'codemirror'
+import 'codemirror/mode/meta.js'
 import * as i from 'icepick'
 import { forEach } from 'lodash'
 
