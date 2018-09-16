@@ -39,7 +39,7 @@ export class FileCompareInner extends React.Component<IFileCompareInnerProps, IF
     }
   }
   public componentWillUnmount () {
-    windowWithResizeListener.removeResizeListener(this.refs.container, this.updateDimensions)
+    windowWithResizeListener.removeResizeListener(this.containerRef, this.updateDimensions)
   }
   public sliderChange = (position) => {
     this.setState({ position })
@@ -85,7 +85,7 @@ export class FileCompareInner extends React.Component<IFileCompareInnerProps, IF
       single: {},
     }
 
-    const overylayStyles = mode === 'slider' && this.refs.container
+    const overylayStyles = mode === 'slider' && this.containerRef
       ? { width: `${width}px` }
       : {}
 
@@ -131,7 +131,7 @@ export class FileCompareInner extends React.Component<IFileCompareInnerProps, IF
           {filePreview1()}
           { mode === 'slider' &&
             <FileCompareSlider
-              container={this.refs.container}
+              container={this.containerRef}
               changeFn={this.sliderChange}
               position={this.state.position}
             /> }

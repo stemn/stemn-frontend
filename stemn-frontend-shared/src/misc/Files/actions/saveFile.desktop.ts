@@ -37,7 +37,7 @@ const downloadAndSave = (
       resolve({ size: total })
     })
     stream.pipe(file)
-  })
+  }).catch((error) => reject(error))
 })
 
 const startSave = ({ fileUrl, filePath, onProgress }: IActionSaveFileInput) => {
@@ -64,8 +64,8 @@ export const saveFile = ({ file, fileUrl }) => (dispatch, getState) =>
   })).then((filePath) => {
     // Set progress to zero
     dispatch(downloadProgress(fileUrl, 0))
-    // Start the save provess
-    startSave({
+    // Start the save process
+    return startSave({
       fileUrl,
       filePath,
       onProgress: (progress) => {
