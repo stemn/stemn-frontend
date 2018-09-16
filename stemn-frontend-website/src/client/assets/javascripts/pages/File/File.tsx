@@ -51,6 +51,12 @@ export class FileComponent extends React.Component<IFileComponentProps, IFileCom
       isOpen: !this.state.isOpen,
     })
   }
+  public componentDidMount = () => {
+    document.body.style.overflowY = 'hidden'
+  }
+  public componentWillUnmount = () => {
+    document.body.style.overflowY = 'scroll'
+  }
   public clickFileOrFolder = ({ file }) => {
     const { fileId, revisionId } = file
     const { pushRoute } = this.props
