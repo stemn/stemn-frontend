@@ -1,11 +1,7 @@
 import React from 'react'
-
-// Styles
 import cn from 'classnames'
-import classes from './FileCompareSlider.css'
-
+import classes from './FileCompareSlider.scss'
 import clickDrag from 'react-clickdrag'
-
 
 class Component extends React.Component {
   state = {

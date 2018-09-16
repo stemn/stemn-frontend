@@ -11,11 +11,14 @@ declare module '*.svg' {
   export default svg;
 }
 
-
 interface GLOBAL_ENV {
   API_SERVER: string,
   APP_TYPE: 'web' | 'desktop',
   WEBSITE_URL: string,
 }
-
 declare const GLOBAL_ENV: GLOBAL_ENV
+
+declare module '@stemn/whats-that-gerber' {
+  const lib: (fileName: string) => string;
+  export default lib;
+}

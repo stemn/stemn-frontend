@@ -2,6 +2,7 @@ import * as cn from 'classnames'
 import * as React from 'react'
 import MdEdit from 'react-icons/md/edit'
 import MdSave from 'react-icons/md/save'
+import { getViewerType } from '../../Files/PreviewFile/PreviewFile.utils'
 import { dispatchToProps, IFileEditButtonContainerProps } from './FileEditButton.container'
 import * as s from './FileEditButton.scss'
 
@@ -13,6 +14,7 @@ export class FileEditButtonComponent extends React.Component<IFileEditButtonComp
   public render () {
     const { file1, editToggle, cacheKey, editActive } = this.props
     const isPipeline = file1.extension === 'pipeline'
+    console.log(getViewerType(file1.extension, file1.provider))
 
     if (isPipeline) {
       return (

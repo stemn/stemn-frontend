@@ -2,33 +2,38 @@ import * as i from 'icepick'
 import { AnyAction } from 'redux'
 import { IFile } from 'stemn-shared/misc/FileList/types'
 
+export interface IFileRender {
+  error?: string
+  data?: any,
+  status?: string,
+  loading: boolean,
+}
+
+export interface IFileData {
+  data?: any,
+  error?: string,
+  loading: boolean,
+}
+
 export interface IFilesState {
   hydrated: boolean,
   fileData: {
-    [cacheKey: string]: {
-      data: any,
-      loading: boolean,
-    },
+    [cacheKey: string]: IFileData,
   },
   fileRenders: {
-    [cacheKey: string]: {
-      error?: string
-      data?: any,
-      status?: string,
-      loading: boolean,
-    },
+    [cacheKey: string]: IFileRender,
   },
   fileMeta: {
     [cacheKey: string]: {
-      data?: IFile,
-      status?: string,
+      data ?: IFile,
+      status ?: string,
     },
   },
   fileAssemblyParts: {},
   fileAssemblyParents: {},
   pathToId: {
     [path: string]: {
-      data?: string,
+      data ?: string,
       loading: boolean,
     },
   },
@@ -37,7 +42,7 @@ export interface IFilesState {
   },
   relatedThreads: {
     [fileId: string]: {
-      data?: any,
+      data ?: any,
       loading: boolean,
     },
   },

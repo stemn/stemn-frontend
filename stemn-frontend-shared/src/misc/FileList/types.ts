@@ -23,6 +23,10 @@ export interface IFile {
     name: string,
     path: string,
   }>,
+  parts?: Array<{
+    fileId: string,
+    revisionId: string,
+  }>,
   path: string,
   project: {
     _id: string,

@@ -1,17 +1,15 @@
 import * as React from 'react'
 import file from 'stemn-shared/assets/images/pure-vectors/file.svg'
+import { IFileData } from 'stemn-shared/misc/Files/Files.reducer'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import { PipelineGraph } from 'stemn-shared/misc/Pipelines/PipelineGraph'
 
 export interface IPreviewPipelineProps {
-  fileData?: {
-    data: any,
-    loading: boolean,
-  },
+  fileData?: IFileData,
   fileMeta?: any,
   downloadFn: any,
   previewId: string,
-  editActive: boolean,
+  editActive?: boolean,
 }
 
 export class PreviewPipeline extends React.Component<IPreviewPipelineProps> {
