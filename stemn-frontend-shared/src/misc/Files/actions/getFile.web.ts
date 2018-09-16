@@ -1,6 +1,6 @@
 import http from 'axios'
 
-export default ({ projectId, fileId, revisionId, provider, responseType }) => {
+export const getFile = ({ projectId, fileId, revisionId, provider, responseType }) => {
   const cacheKey = `${fileId}-${revisionId}`
 
   // If the response type is path, we change it to blob and create

@@ -54,6 +54,7 @@
     "typescript": "^3.0.1"
   },
   "dependencies": {
+    "@types/electron": "^1.6.10",
     "@types/react-dropzone": "^4.2.2",
     "axios": "^0.18.0",
     "classnames": "^2.2.6",

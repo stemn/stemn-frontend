@@ -1,4 +1,4 @@
-export default ({ projectId, fileId }) => ({
+export const getRelatedThreads = ({ projectId, fileId }) => ({
   type: 'FILES/GET_RELATED_THREADS',
   http: true,
   payload: {

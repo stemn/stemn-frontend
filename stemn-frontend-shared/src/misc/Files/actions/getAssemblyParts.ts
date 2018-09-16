@@ -1,6 +1,6 @@
 import http from 'axios'
 
-export default ({ projectId, fileId, revisionId, provider }) => {
+export const getAssemblyParts = ({ projectId, fileId, revisionId, provider }) => {
   const cacheKey = `${fileId}-${revisionId}`
   return {
     type: 'FILES/GET_ASSEMBLY_PARTS',

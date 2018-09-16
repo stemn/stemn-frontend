@@ -1,4 +1,4 @@
-export default ({ renderId, message }) => {
+export const renderFileProgress = ({ renderId, message }) => {
   const cacheKey = renderId
   return {
     type: 'FILES/RENDER_FILE_PROGRESS',

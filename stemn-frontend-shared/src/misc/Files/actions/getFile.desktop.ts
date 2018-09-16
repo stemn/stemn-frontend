@@ -1,4 +1,4 @@
-export default({ projectId, fileId, revisionId, provider, responseType }) => {
+export const getFile = ({ projectId, fileId, revisionId, provider, responseType }) => {
   const cacheKey = `${fileId}-${revisionId}`
   return {
     type: 'FILES/GET_FILE',

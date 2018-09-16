@@ -1,4 +1,4 @@
-export default ({ fileId, revisionId, error }) => {
+export const renderFileError = ({ fileId, revisionId, error }) => {
   const cacheKey = `${fileId}-${revisionId}`
   return {
     type: 'FILES/RENDER_FILE_REJECTED',
