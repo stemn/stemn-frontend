@@ -4,7 +4,7 @@ import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 
 import { getThread, getBoard, showLabelEditModal, updateThread, toggleComplete, deleteThread } from '../Threads.actions.js'
 import { getProject } from 'stemn-shared/misc/Projects/Projects.actions.js'
-import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
+import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
 import { joinRoom, leaveRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
 
 import { has, get } from 'lodash'

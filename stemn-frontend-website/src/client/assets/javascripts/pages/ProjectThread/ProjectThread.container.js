@@ -6,7 +6,7 @@ import ProjectThread from './ProjectThread'
 import { push as pushRoute, replace as replaceRoute } from 'react-router-redux'
 
 import { joinRoom, leaveRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
-import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
+import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
 import {
   deleteThread,
   getBoard,

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getFeed } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
+import { getFeed } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import Home from './Home'
 import { push, replace } from 'react-router-redux'

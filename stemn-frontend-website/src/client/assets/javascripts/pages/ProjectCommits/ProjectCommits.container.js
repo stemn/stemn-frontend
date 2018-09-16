@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
-import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
+import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
 import ProjectCommits from './ProjectCommits'
 import { setFilter } from 'stemn-shared/misc/StringFilter/StringFilter.actions'
 import { getFilter } from 'stemn-shared/misc/StringFilter/StringFilter.utils'

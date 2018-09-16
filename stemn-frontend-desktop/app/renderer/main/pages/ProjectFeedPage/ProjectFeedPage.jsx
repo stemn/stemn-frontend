@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 // Container Actions
-import * as SyncTimelineActions from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
+import * as SyncTimelineActions from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
 
 // Component Core
 import React from 'react'

@@ -4,7 +4,7 @@ import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { get } from 'lodash'
 import { getHistory } from 'stemn-shared/misc/History/History.actions'
 import UserOverview from './UserOverview'
-import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
+import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
 
 const stateToProps = ({ users, projects, history, syncTimeline }, { params, location }) => {
   const size = 20

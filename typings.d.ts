@@ -20,5 +20,5 @@ declare const GLOBAL_ENV: GLOBAL_ENV
 
 declare module '@stemn/whats-that-gerber' {
   const lib: (fileName: string) => string;
-  export default lib;
+  export = lib;
 }

@@ -1,4 +1,4 @@
-import whatGerber from '@stemn/whats-that-gerber'
+import * as whatGerber from '@stemn/whats-that-gerber'
 import * as codemirror from 'codemirror'
 import * as i from 'icepick'
 import { forEach } from 'lodash'

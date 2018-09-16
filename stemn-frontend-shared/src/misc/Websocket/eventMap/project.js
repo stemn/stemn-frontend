@@ -1,6 +1,6 @@
 import { getProject, getUserProjects } from 'stemn-shared/misc/Projects/Projects.actions.js'
 import { fetchChanges } from 'stemn-shared/misc/Changes/Changes.actions.js'
-import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
+import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
 
 export default (store, action) => {
   const { dispatch, getState } = store

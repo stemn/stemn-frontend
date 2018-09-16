@@ -11,7 +11,7 @@ import FileBreadCrumbs from 'stemn-shared/misc/FileList/components/FileBreadCrum
 import AssemblyParts from 'stemn-shared/misc/Files/PreviewFile/PreviewCad/AssemblyParts/AssemblyParts'
 import { formatBytes } from 'stemn-shared/misc/Files/utils'
 import Header from 'stemn-shared/misc/Header/Header.jsx'
-import { getRevisions } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.utils.js'
+import { getRevisions } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.utils'
 import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
 import SimpleTable from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable'
 import Timeline from 'stemn-shared/misc/Timeline/Timeline'
@@ -109,7 +109,6 @@ export class PreviewPage extends React.Component<IPreviewPageProps> {
                 <FileCompareInner
                   key='preview'
                   className='layout-column flex'
-                  project={file.data.project}
                   file1={file1}
                   file2={file2}
                   mode={mode}

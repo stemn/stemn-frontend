@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import * as ChangesActions from 'stemn-shared/misc/Changes/Changes.actions.js'
-import * as SyncTimelineActions from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
+import * as SyncTimelineActions from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
 import * as WalkthroughActions from 'stemn-shared/misc/Walkthrough/Walkthrough.actions.js'
 
 import React from 'react'

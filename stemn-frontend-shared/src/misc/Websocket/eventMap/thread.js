@@ -1,4 +1,4 @@
-import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
+import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
 import { getComment } from 'stemn-shared/misc/Comments/Comments.actions'
 import { getThread } from 'stemn-shared/misc/Threads/Threads.actions'
 

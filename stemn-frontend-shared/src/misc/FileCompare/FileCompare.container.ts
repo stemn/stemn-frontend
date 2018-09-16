@@ -3,7 +3,7 @@ import { IStoreState } from 'reducer'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { changeMode, initCompare, select } from 'stemn-shared/misc/FileCompare/FileCompare.actions'
 import { IFile } from 'stemn-shared/misc/FileList/types'
-import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
+import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
 import { toggle } from 'stemn-shared/misc/TogglePanel/TogglePanel.actions'
 import { FileCompareComponent } from './FileCompare'
 
