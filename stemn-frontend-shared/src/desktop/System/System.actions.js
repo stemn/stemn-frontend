@@ -1,6 +1,6 @@
 import * as LocalPathActions from 'stemn-shared/desktop/LocalPath/LocalPath.actions.js'
 import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js'
-import { getFullPath }   from 'stemn-shared/misc/Files/Files.actions.js'
+import { getFullPath }   from 'stemn-shared/misc/Files/Files.actions'
 import { shell } from 'electron'
 import errorModalName from 'stemn-shared/misc/Modal/ErrorModal'
 import { normaliseSlashes } from 'stemn-shared/desktop/System/System.utils'

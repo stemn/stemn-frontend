@@ -5,7 +5,7 @@ import { compose } from 'redux'
 import { show as showWindow } from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js'
 import { default as fetchDataHoc } from 'stemn-shared/misc/FetchDataHoc'
 import { changeMode, initCompare, select } from 'stemn-shared/misc/FileCompare/FileCompare.actions'
-import { getMeta, getMetaFromPath } from 'stemn-shared/misc/Files/Files.actions.js'
+import { getMeta, getMetaFromPath } from 'stemn-shared/misc/Files/actions/index.desktop'
 import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
 import { PreviewPage } from './PreviewPage'
 

@@ -1,4 +1,4 @@
-import { renderFileDownload, renderFileError, renderFileProgress } from 'stemn-shared/misc/Files/Files.actions.js'
+import { renderFileDownload, renderFileError, renderFileProgress } from 'stemn-shared/misc/Files/Files.actions'
 
 export default (store, action) => {
   const {

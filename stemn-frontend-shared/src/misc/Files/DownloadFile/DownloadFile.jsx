@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
-import { saveFile } from '../Files.actions.js'
+import { saveFile } from '../Files.actions'
 import React, { Component } from 'react'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import { getDownloadUrl } from '../utils'

@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as FilesActions from '../Files.actions.js'
+import * as FilesActions from '../Files.actions'
 import React from 'react'
 import PropTypes from 'prop-types'
 import { omit } from 'lodash'

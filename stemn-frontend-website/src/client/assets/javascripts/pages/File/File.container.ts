@@ -4,7 +4,7 @@ import { push as pushRoute } from 'react-router-redux'
 import { compose } from 'redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { changeMode, initCompare, select } from 'stemn-shared/misc/FileCompare/FileCompare.actions'
-import { getMeta } from 'stemn-shared/misc/Files/Files.actions.js'
+import { getMeta } from 'stemn-shared/misc/Files/Files.actions'
 import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions.js'
 import { FileComponent } from './File'
 

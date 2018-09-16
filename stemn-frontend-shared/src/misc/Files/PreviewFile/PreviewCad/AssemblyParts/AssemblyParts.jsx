@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { orderBy } from 'lodash'
 import moment from 'moment'
 import { isAssembly, isCad } from '../PreviewCad.utils.js'
-import { getAssemblyParts, getAssemblyParents } from '../../../Files.actions.js'
+import { getAssemblyParts, getAssemblyParents } from '../../../Files.actions'
 import SectionTitle from 'stemn-shared/misc/Titles/SectionTitle/SectionTitle.jsx'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
