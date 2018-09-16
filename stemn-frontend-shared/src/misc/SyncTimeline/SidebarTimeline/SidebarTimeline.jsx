@@ -7,7 +7,7 @@ import LoadingOverlay      from 'stemn-shared/misc/Loading/LoadingOverlay/Loadin
 import MdMoreHoriz         from 'react-icons/md/more-horiz'
 import Popover             from 'stemn-shared/misc/Popover'
 import SidebarTimelineRow  from './SidebarTimelineRow'
-import SimpleIconButton    from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import { SimpleIconButton }    from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import Link from 'stemn-shared/misc/Router/Link'
 import { every }           from 'lodash'
 

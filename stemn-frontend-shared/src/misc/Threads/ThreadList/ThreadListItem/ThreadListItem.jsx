@@ -19,7 +19,7 @@ import loadingClasses from 'stemn-shared/misc/Loading/LoadingPlaceholders/Loadin
 import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import UserAvatars from 'stemn-shared/misc/Avatar/UserAvatars/UserAvatars.jsx'
-import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import MdOpenInNew from 'react-icons/md/open-in-new'
 import ThreadLabelDots from 'stemn-shared/misc/Threads/ThreadLabelDots/ThreadLabelDots.jsx'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'

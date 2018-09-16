@@ -3,7 +3,7 @@ import React from 'react'
 import classes from './Reactions.css'
 
 import Popover from 'stemn-shared/misc/Popover'
-import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import MdInsertEmoticon from 'react-icons/md/insert-emoticon'
 
 import { options } from './Reactions.utils.js'

@@ -3,7 +3,7 @@ import classes from './Terminal.scss'
 import cn from 'classnames'
 import Ansi from 'ansi-to-react'
 import MdDown from 'react-icons/md/arrow-downward'
-import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
 export default class Terminal extends Component {

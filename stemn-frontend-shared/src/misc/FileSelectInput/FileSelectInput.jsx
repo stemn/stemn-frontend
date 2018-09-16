@@ -11,7 +11,7 @@ import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import classes from './FileSelectInput.css'
 import MdFolder from 'react-icons/md/folder'
 import MdNewFolder from 'react-icons/md/create-new-folder'
-import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import { isDriveFileId, isDropboxFileId } from 'stemn-shared/misc/Files/utils'
 import TextDisplayBox from 'stemn-shared/misc/TextDisplayBox/TextDisplayBox.jsx'
 

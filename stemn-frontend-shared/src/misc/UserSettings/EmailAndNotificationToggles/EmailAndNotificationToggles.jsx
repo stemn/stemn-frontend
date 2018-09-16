@@ -6,7 +6,7 @@ import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import classes from './EmailAndNotificationToggles.css'
 import cn from 'classnames'
 import { uniq } from 'lodash'
-import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import MdMoreHoriz from 'react-icons/md/more-horiz'
 
 class ToggleGroup extends Component {

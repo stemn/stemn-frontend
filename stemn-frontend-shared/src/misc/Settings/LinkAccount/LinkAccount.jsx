@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Popover from 'stemn-shared/misc/Popover'
-import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import MdDone from 'react-icons/md/done'
 import MdLink from 'react-icons/md/link'
 import MdMoreHoriz from 'react-icons/md/more-horiz'

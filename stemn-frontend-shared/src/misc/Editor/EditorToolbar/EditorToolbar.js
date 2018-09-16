@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import classes from './EditorToolbar.css'
-import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton'
+import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import MdFormatItalic from 'react-icons/md/format-italic'
 import MdFormatBold from 'react-icons/md/format-bold'
 import MdLink from 'react-icons/md/link'

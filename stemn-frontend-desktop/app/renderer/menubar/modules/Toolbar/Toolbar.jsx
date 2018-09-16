@@ -15,7 +15,7 @@ import toolbarStyles from './Toolbar.css'
 // Sub Components
 import Popover from 'stemn-shared/misc/Popover'
 import PopoverMenuList      from 'stemn-shared/misc/PopoverMenu/PopoverMenuList'
-import SimpleIconButton     from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import { SimpleIconButton }     from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import MdMenu               from 'react-icons/md/menu'
 import MdMoreHoriz          from 'react-icons/md/more-horiz'
 import MdOpenInNew          from 'react-icons/md/open-in-new'

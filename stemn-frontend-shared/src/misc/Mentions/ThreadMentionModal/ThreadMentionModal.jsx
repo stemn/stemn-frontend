@@ -11,7 +11,7 @@ import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOver
 import { values } from 'lodash'
 import { newMention } from 'stemn-shared/misc/Mentions/Mentions.utils'
 import MdFilterList from 'react-icons/md/filter-list'
-import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 
 const getMentionsFromObject = (mentionsObject, threads) => Object.keys(mentionsObject).map(threadId => newMention({
   entityId: threadId,

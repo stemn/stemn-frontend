@@ -9,7 +9,7 @@ import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOver
 import MdRefresh from 'react-icons/md/refresh'
 import MdHome from 'react-icons/md/home'
 import MdCreateNewFolder from 'react-icons/md/create-new-folder'
-import SimpleIconButton from 'stemn-shared/misc/Buttons/SimpleIconButton/SimpleIconButton.jsx'
+import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import SearchInput from 'stemn-shared/misc/Search/SearchInput'
 import { ContextMenuTrigger } from 'react-contextmenu'
 import ContextMenu from 'stemn-shared/misc/ContextMenu/ContextMenu.jsx'
