@@ -13,6 +13,8 @@ export interface ISimpleIconButtonProps {
   name?: string,
   onClick?: any,
   title?: string,
+  params?: object,
+  style?: object,
 }
 
 export class SimpleIconButton extends React.Component<ISimpleIconButtonProps> {
