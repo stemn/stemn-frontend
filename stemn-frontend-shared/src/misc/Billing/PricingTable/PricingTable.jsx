@@ -7,7 +7,7 @@ export default class PricingTable extends Component {
   render() {
     const { important, data } = this.props
     return (
-      <div className={ cn('flex', 'flex-sm-50 layout-column', classes.table, { [classes.important]: important }) }>
+      <div data-tag="pricingColumn" className={ cn('flex', 'flex-sm-50 layout-column', classes.table, { [classes.important]: important }) }>
         <div className={ classes.price }>
           { typeof data.price === 'number'
             ? `$${data.price}`
