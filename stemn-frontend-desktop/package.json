@@ -80,7 +80,7 @@
     "json-loader": "0.5.4",
     "mime-types": "^2.1.15",
     "mocha": "3.0.2",
-    "node-sass": "4.9.3",
+    "node-sass": "3.8.0",
     "postcss-loader": "0.11.1",
     "react-addons-test-utils": "15.3.1",
     "react-hot-loader": "3.0.0-beta.6",
