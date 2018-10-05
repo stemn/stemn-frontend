@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { IStoreState } from 'stemn-frontend-website/src/client/assets/javascripts/app/reducer'
+import { IStoreState } from 'reducer'
 import { create } from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions'
 import { openExternal, openFile } from 'stemn-shared/desktop/System/System.actions'
 import { togglePreviewMarkdown } from 'stemn-shared/misc/Files/Files.actions'

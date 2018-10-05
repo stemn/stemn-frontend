@@ -1,6 +1,6 @@
 import * as cn from 'classnames'
 import * as React from 'react'
-import Link from 'stemn-shared/misc/Router/Link'
+import * as Link from 'stemn-shared/misc/Router/Link'
 import * as classes from './SimpleIconButton.scss'
 
 export interface ISimpleIconButtonProps {
@@ -35,6 +35,7 @@ export class SimpleIconButton extends React.Component<ISimpleIconButtonProps> {
         </Link>
       )
     }
+
     if (this.props.href) {
       return (
         <a

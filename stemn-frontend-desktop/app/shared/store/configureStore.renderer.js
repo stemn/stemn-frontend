@@ -13,7 +13,7 @@ import routerFix                from 'stemn-shared/misc/Router/Router.middleware
 export default function configureStore(initialState) {
   const middleware = [
     thunk,
-    promise(),
+    promise.default(),
     routerFix,
     forwardToMain,
     forwardToRendererWindow,
@@ -42,8 +42,8 @@ export default function configureStore(initialState) {
   const store       = createStore(rootReducer, initialState, enhancer)
 
   if (!process.env.NODE_ENV && module.hot) {
-    module.hot.accept('../reducers/rootReducer.base.js', () => {
-      store.replaceReducer(require('../reducers/rootReducer.base.js'))
+    module.hot.accept('../reducers/rootReducer.base', () => {
+      store.replaceReducer(require('../reducers/rootReducer.base'))
     })
   }
 

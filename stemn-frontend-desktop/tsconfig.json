@@ -1,17 +1,17 @@
 {
     "extends": "../tsconfig.json",
-    "paths": {
-        "stemn-shared/*": [
-            "stemn-frontend-shared/src/*/index.desktop.ts", 
-            "stemn-frontend-shared/src/*.desktop.ts", 
-            "stemn-frontend-shared/src/*/index.web.ts",
-            "stemn-frontend-shared/src/*.web.ts",
-            "stemn-frontend-shared/src/*"
-        ]
+    "compilerOptions": {
+        "paths": {
+            "stemn-shared/*": [
+                "stemn-frontend-shared/src/*/index.desktop.ts",
+                "stemn-frontend-shared/src/*"
+            ],
+            "reducer": ["stemn-frontend-desktop/app/shared/reducers/rootReducer.base.ts"]
+        }
     },
     "include": [
         "../typings.d.ts",
-        "../stemn-frontend-desktop",
+        "../stemn-frontend-desktop/src",
         "../stemn-frontend-shared"
     ]
 }

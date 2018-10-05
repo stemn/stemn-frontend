@@ -10,6 +10,7 @@
             "modules/*": ["stemn-frontend-website/src/client/assets/javascripts/modules/*"],
             "layout/*": ["stemn-frontend-website/src/client/assets/javascripts/layout/*"],
             "route-actions": ["stemn-frontend-website/src/client/assets/javascripts/pages/routeActions.js"],
+            "reducer": ["stemn-frontend-website/src/client/assets/javascripts/app/reducer.ts"]
         }
     },
     "include": [

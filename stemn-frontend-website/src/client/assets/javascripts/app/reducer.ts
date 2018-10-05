@@ -7,7 +7,6 @@ import changes from 'stemn-shared/misc/Changes/Changes.reducer.js'
 import codeSplitting from 'stemn-shared/misc/CodeSplitting/CodeSplitting.reducer.js'
 import comments from 'stemn-shared/misc/Comments/Comments.reducer.js'
 import commits from 'stemn-shared/misc/Commits/Commits.reducer.js'
-import { contentfulReducer, IContentfulState } from 'stemn-shared/misc/Contentful/Contentful.reducer.ts'
 import desktopReleases from 'stemn-shared/misc/DesktopReleases/DesktopReleases.reducer.js'
 import fields from 'stemn-shared/misc/Fields/Fields.reducer.js'
 import { fileCompareReducer, IFileCompareState } from 'stemn-shared/misc/FileCompare/FileCompare.reducer'
@@ -42,6 +41,7 @@ import userStars from 'stemn-shared/misc/UserStars/UserStars.reducer.js'
 import walkthrough from 'stemn-shared/misc/Walkthrough/Walkthrough.reducer.js'
 import websocket from 'stemn-shared/misc/Websocket/Websocket.reducer.js'
 import { analyticsReducer } from '../modules/Analytics/Analytics.reducer'
+import { contentfulReducer, IContentfulState } from '../modules/Contentful/Contentful.reducer'
 
 export interface IStoreState {
   contentful: IContentfulState,

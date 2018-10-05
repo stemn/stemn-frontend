@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { IStoreState } from 'stemn-frontend-website/src/client/assets/javascripts/app/reducer'
+import { IStoreState } from 'reducer'
 import { togglePreviewMarkdown } from 'stemn-shared/misc/Files/Files.actions'
 import { showModal } from 'stemn-shared/misc/Modal/Modal.actions'
 import { FileCompareMenuComponent } from './FileCompareMenu.web'

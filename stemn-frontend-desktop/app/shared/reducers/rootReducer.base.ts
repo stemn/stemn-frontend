@@ -34,6 +34,8 @@ export interface IStoreState {
   syncTimeline: ISyncTimelineState,
 }
 
+export type IGetState = () => IStoreState
+
 export default {
   auth,
   autoLaunch,

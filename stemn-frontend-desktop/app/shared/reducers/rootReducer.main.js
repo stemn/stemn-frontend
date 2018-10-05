@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import rootReducer from './rootReducer.base.js'
+import rootReducer from './rootReducer.base'
 import storeReducer from 'stemn-shared/misc/Store/Store.reducer.js'
 
 export default function getRootReducer() {

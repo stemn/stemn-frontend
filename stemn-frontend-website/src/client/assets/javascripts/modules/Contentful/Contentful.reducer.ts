@@ -1,6 +1,6 @@
 import * as i from 'icepick'
 import { keyBy } from 'lodash'
-import { IContentfulContentPageExplore } from 'stemn-shared/misc/Contentful/types'
+import { IContentfulContentPageExplore } from 'modules/Contentful/types'
 import { populate, transform } from './utils'
 
 export interface IContentfulState {
