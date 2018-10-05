@@ -16,7 +16,9 @@
     "analyse:renderer": "webpack-bundle-analyzer ./reports/renderer-stats.json",
     "build": "NODE_ENV=production STEMN_ENV=production sh ./scripts/build.sh",
     "start:renderer": "NODE_ENV=development STEMN_ENV=staging node ./scripts/startRenderer.js",
+    "start:renderer:docker": "tmux new -s build-renderer -d yarn start:renderer && sleep infinity",
     "start:electron": "NODE_ENV=development STEMN_ENV=staging webpack --watch --config ./config/webpack.config.electron.js",
+    "start:electron:docker": "tmux new -s build-electron -d yarn start:electron && sleep infinity",
     "electron": "NODE_ENV=development electron dist/main",
     "electron:prod": "NODE_ENV=production electron dist/main"
   },
@@ -80,7 +82,7 @@
     "json-loader": "0.5.4",
     "mime-types": "^2.1.15",
     "mocha": "3.0.2",
-    "node-sass": "3.8.0",
+    "node-sass": "4.9.3",
     "postcss-loader": "0.11.1",
     "react-addons-test-utils": "15.3.1",
     "react-hot-loader": "3.0.0-beta.6",
