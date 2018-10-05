@@ -16,9 +16,7 @@
     "analyse:renderer": "webpack-bundle-analyzer ./reports/renderer-stats.json",
     "build": "NODE_ENV=production STEMN_ENV=production sh ./scripts/build.sh",
     "start:renderer": "NODE_ENV=development STEMN_ENV=staging node ./scripts/startRenderer.js",
-    "start:renderer:docker": "tmux new -s build-renderer -d yarn start:renderer && sleep infinity",
     "start:electron": "NODE_ENV=development STEMN_ENV=staging webpack --watch --config ./config/webpack.config.electron.js",
-    "start:electron:docker": "tmux new -s build-electron -d yarn start:electron && sleep infinity",
     "electron": "NODE_ENV=development electron dist/main",
     "electron:prod": "NODE_ENV=production electron dist/main"
   },
