@@ -6,12 +6,17 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const getStemnEnv = require('./getStemnEnv')
 const stringifyEnv = require('./utils/stringifyEnv')
 
+const {
+  STEMN_ENV = 'staging',
+  HOST = '0.0.0.0',
+} = process.env;
+
 const GLOBALS = {
   GLOBAL_ENV: stringifyEnv({    
     APP_THREAD: 'renderer',
     APP_TYPE: 'desktop',
     NODE_ENV: 'development',
-    ...getStemnEnv(process.env.STEMN_ENV),
+    ...getStemnEnv(STEMN_ENV),
   }),
 }
 
@@ -20,17 +25,17 @@ module.exports = merge(config, {
   devtool: 'source-map',
   entry: {
     main: [
-      'webpack-hot-middleware/client?path=http://localhost:3001/__webpack_hmr',
+      `webpack-hot-middleware/client?path=http://${HOST}:3001/__webpack_hmr`,
       'react-hot-loader/patch',
       path.resolve(__dirname, '../app/renderer/main/index'),
     ],
     menubar: [
-      'webpack-hot-middleware/client?path=http://localhost:3001/__webpack_hmr',
+      `webpack-hot-middleware/client?path=http://${HOST}:3001/__webpack_hmr`,
       'react-hot-loader/patch',
       path.resolve(__dirname, '../app/renderer/menubar/index'),
     ],
     preview: [
-      'webpack-hot-middleware/client?path=http://localhost:3001/__webpack_hmr',
+      `webpack-hot-middleware/client?path=http://${HOST}:3001/__webpack_hmr`,
       'react-hot-loader/patch',
       path.resolve(__dirname, '../app/renderer/preview/index'),
     ],
@@ -38,7 +43,7 @@ module.exports = merge(config, {
   },
   output: {
     filename: 'js/[name].js',
-    publicPath: 'http://localhost:3001/',
+    publicPath: `http://${HOST}:3001/`,
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

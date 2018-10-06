@@ -12,7 +12,7 @@ const compiler = webpack(config)
 // Apply CLI dashboard for your webpack dev server
 compiler.apply(new DashboardPlugin())
 
-const host = process.env.HOST || 'localhost'
+const host = process.env.HOST || '0.0.0.0'
 const port = process.env.PORT || 3001
 
 const log = (...args) => {
