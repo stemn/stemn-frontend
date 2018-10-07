@@ -7,12 +7,17 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const getStemnEnv = require('./getStemnEnv')
 const stringifyEnv = require('./utils/stringifyEnv')
 
+const {
+  STEMN_ENV = 'staging',
+} = process.env;
+
+
 const GLOBALS = {
   GLOBAL_ENV: stringifyEnv({    
     APP_THREAD: 'renderer',
     APP_TYPE: 'desktop',
     NODE_ENV: 'production',
-    ...getStemnEnv(process.env.STEMN_ENV),
+    ...getStemnEnv(STEMN_ENV),
   }),
 }
 

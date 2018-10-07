@@ -15,9 +15,9 @@
     "analyse:electron": "webpack-bundle-analyzer ./reports/electron-stats.json",
     "analyse:renderer": "webpack-bundle-analyzer ./reports/renderer-stats.json",
     "build": "NODE_ENV=production STEMN_ENV=production sh ./scripts/build.sh",
-    "start:renderer": "NODE_ENV=development STEMN_ENV=staging node ./scripts/startRenderer.js",
-    "start:electron": "NODE_ENV=development STEMN_ENV=staging webpack --watch --config ./config/webpack.config.electron.js",
-    "electron": "NODE_ENV=development electron dist/main",
+    "start:renderer": "NODE_ENV=development node ./scripts/startRenderer.js",
+    "start:electron": "NODE_ENV=development webpack --watch --config ./config/webpack.config.electron.js",
+    "electron": "NODE_ENV=development ./node_modules/.bin/electron dist/main",
     "electron:prod": "NODE_ENV=production electron dist/main"
   },
   "bin": {
@@ -66,7 +66,8 @@
     "copy-webpack-plugin": "3.0.1",
     "cross-env": "2.0.1",
     "css-loader": "0.24.0",
-    "electron": "^2.0.7",
+    "electron": "^2.0.9",
+    "electron-builder": "10.9.2",
     "eslint-config-stemn": "git+https://git@github.com/stemn/eslint-config-stemn.git",
     "extract-text-webpack-plugin": "2.0.0-beta.3",
     "file-loader": "0.9.0",
@@ -80,7 +81,7 @@
     "json-loader": "0.5.4",
     "mime-types": "^2.1.15",
     "mocha": "3.0.2",
-    "node-sass": "3.8.0",
+    "node-sass": "4.9.3",
     "postcss-loader": "0.11.1",
     "react-addons-test-utils": "15.3.1",
     "react-hot-loader": "3.0.0-beta.6",
@@ -104,7 +105,6 @@
     "webpack-dashboard": "0.1.8",
     "webpack-dev-middleware": "1.6.1",
     "webpack-hot-middleware": "2.12.2",
-    "electron-builder": "10.9.2",
     "webpack-merge": "0.14.1"
   },
   "standard": {
