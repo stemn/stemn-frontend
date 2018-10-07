@@ -67,6 +67,7 @@
     "cross-env": "2.0.1",
     "css-loader": "0.24.0",
     "electron": "^2.0.9",
+    "electron-builder": "10.9.2",
     "eslint-config-stemn": "git+https://git@github.com/stemn/eslint-config-stemn.git",
     "extract-text-webpack-plugin": "2.0.0-beta.3",
     "file-loader": "0.9.0",
@@ -104,7 +105,6 @@
     "webpack-dashboard": "0.1.8",
     "webpack-dev-middleware": "1.6.1",
     "webpack-hot-middleware": "2.12.2",
-    "electron-builder": "10.9.2",
     "webpack-merge": "0.14.1"
   },
   "standard": {
