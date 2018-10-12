@@ -45,7 +45,7 @@ class Component extends React.Component {
     const { value } = this.state
     return (
       <Textarea
-        ref={ this.getTextareaRef }
+        inputRef={ this.getTextareaRef }
         onChange={ this.onChange }
         value={ value }
         { ...otherProps }

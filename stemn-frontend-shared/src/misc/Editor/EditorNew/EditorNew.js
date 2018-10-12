@@ -54,17 +54,15 @@ export default class EditorNew extends Component {
       value: newValue,
     })
   }
-  focus = () => {}
   getCodeMirror = (ref) => {
     const { autoFocus } = this.props
     if (ref) {
       const codemirror = ref.getCodeMirror()
-      this.focus = ref.focus
       this.setState({
         codemirror,
       })
       if (autoFocus) {
-        this.focus()
+        codemirror.focus()
       }
     }
   }
