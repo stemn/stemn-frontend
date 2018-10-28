@@ -38,7 +38,7 @@ export default class ProjectFilesPage extends React.Component {
             className={ classes.files }
             initialSync={ !project.data.remote.lastSynced }
             projectId={ project.data._id }
-            path={ path || '' }
+            path={ path || project.data.remote.root._id }
             singleClickFn={ this.fileFolderClick }
             doubleClickFn={ this.fileFolderClick }
             crumbClickFn={ this.fileFolderClick }

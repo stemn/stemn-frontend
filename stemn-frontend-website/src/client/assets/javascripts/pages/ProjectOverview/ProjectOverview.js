@@ -155,7 +155,7 @@ export default class ProjectOverview extends Component {
                 className={ classes.files }
                 initialSync={ !project.data.remote.lastSynced }
                 projectId={ project.data._id }
-                path={ path || '' }
+                path={ path || project.data.remote.root._id }
                 crumbClickFn={ this.clickFileOrFolder }
                 options={ options }
                 crumbPopup
