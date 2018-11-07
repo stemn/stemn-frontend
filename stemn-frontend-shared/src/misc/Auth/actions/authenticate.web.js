@@ -1,6 +1,7 @@
-import { oauthCreds } from '../Auth.config.js'
-import querystring from 'querystring'
-import sendAuthToken from './sendAuthToken'
+import querystring from 'querystring';
+
+import { oauthCreds } from '../Auth.config.js';
+import sendAuthToken from './sendAuthToken';
 
 const getPosition = (w, h) => ({
   left: (screen.width / 2) - (w / 2),

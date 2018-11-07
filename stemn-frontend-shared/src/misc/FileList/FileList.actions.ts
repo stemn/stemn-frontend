@@ -28,7 +28,7 @@ export const exploreFolder = (
     http: true,
     payload: {
       method: 'GET',
-      url: `/api/v1/remote/explore/${provider}/${folderId}`,
+      url: `/api/v1/remote/listFolder/${provider}/${folderId}`,
     },
     meta: {
       cacheKey,

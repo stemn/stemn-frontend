@@ -4,17 +4,17 @@ const rootDomain = APP_TYPE === 'web'
   ? window.location.origin
   : 'http://localhost:49554'
 
-const dropboxClientId = STEMN_ENV === 'development'
-  ? '18uu4ynw3cp92oi'
-  : '0wgo11dn573805b';
+const dropboxClientId = STEMN_ENV === 'production'
+  ? '0wgo11dn573805b'
+  : '18uu4ynw3cp92oi';
 
-const facebookClientId = STEMN_ENV === 'development'
-  ? '141869616672007'
-  : '710281375734499'
+const facebookClientId = STEMN_ENV === 'production'
+  ? '710281375734499'
+  : '141869616672007'
 
-const googleClientId = STEMN_ENV === 'development'
-  ? '502305750839-aq4jo6l15tkb1phi2gpr5hod274444m4.apps.googleusercontent.com'
-  : '502305750839-8m9aian8ka9qb6j64t3dtjs2nq96tdae.apps.googleusercontent.com'
+const googleClientId = STEMN_ENV === 'production'
+  ? '502305750839-8m9aian8ka9qb6j64t3dtjs2nq96tdae.apps.googleusercontent.com'
+  : '502305750839-aq4jo6l15tkb1phi2gpr5hod274444m4.apps.googleusercontent.com'
 
 export const oauthCreds = {
   facebook: {
