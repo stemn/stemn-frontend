@@ -1,9 +1,9 @@
-import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
-import { showModal } from 'stemn-shared/misc/Modal/Modal.actions.js'
-import ProjectCloneModalName from 'stemn-shared/misc/Projects/ProjectCloneModal'
-import { push } from 'react-router-redux'
-import { get } from 'lodash'
-import { projectRoute } from 'route-actions'
+import { get } from 'lodash';
+import { push } from 'react-router-redux';
+import { projectRoute } from 'route-actions';
+import { showModal } from 'stemn-shared/misc/Modal/Modal.actions.js';
+import ProjectCloneModalName from 'stemn-shared/misc/Projects/ProjectCloneModal';
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions';
 
 export const checkStatus = ({ entityId, entityType, type }) => (dispatch, getState) => {
   const userId = getState().auth.user._id
@@ -47,7 +47,7 @@ export const add = ({ entityId, entityType, type, number, numberModel }) => (dis
       auth: true,
       http: true,
       payload: {
-        method: 'PUT',
+        method: 'POST',
         url: '/api/v1/social',
         data: {
           parentType: entityType,
