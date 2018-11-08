@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
-
-import { GeneralSettings } from 'stemn-shared/misc/ProjectSettings/GeneralSettings'
-import CloudSettings from 'stemn-shared/misc/ProjectSettings/CloudSettings'
-import DeleteSettings from 'stemn-shared/misc/ProjectSettings/DeleteSettings'
-import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
+import React, { Component } from 'react';
+import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
+import CloudSettings from 'stemn-shared/misc/ProjectSettings/CloudSettings';
+import DeleteSettings from 'stemn-shared/misc/ProjectSettings/DeleteSettings';
+import { GeneralSettings } from 'stemn-shared/misc/ProjectSettings/GeneralSettings';
 
 class ProjectSettingsGeneral extends Component {
   confirmLinkRemote = () => {
@@ -14,8 +13,7 @@ class ProjectSettingsGeneral extends Component {
       projectId: project.data._id,
       provider: project.fileStoreForm.provider,
       prevProvider: project.data.remote.provider,
-      id: project.fileStoreForm.root.fileId,
-      path: project.fileStoreForm.root.path,
+      fileId: project.fileStoreForm.root.fileId,
     })
   }
   confirmDeleteProject = () => {

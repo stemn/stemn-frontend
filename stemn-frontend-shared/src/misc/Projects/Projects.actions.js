@@ -1,8 +1,8 @@
-import http from 'axios'
-import { homeRoute } from 'route-actions'
-import { push } from 'react-router-redux'
-import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js'
-import { joinRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
+import http from 'axios';
+import { push } from 'react-router-redux';
+import { homeRoute } from 'route-actions';
+import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js';
+import { joinRoom } from 'stemn-shared/misc/Websocket/Websocket.actions';
 
 const fields = {
   sm: ['name', 'picture', 'stub', 'clone', 'remote'],
@@ -181,18 +181,16 @@ export const removeField = ({ projectId, fieldId }) => ({
 
 // If the store is connected - we confirm the change
 // Else change straight away.
-export const confirmLinkRemote = ({ isConnected, id, path, prevProvider, project, projectId, provider, userId }) => (dispatch) => {
+export const confirmLinkRemote = ({ isConnected, fileId, prevProvider, projectId, provider, userId }) => (dispatch) => {
   const linkRemoteProviderDependent = () => {
     if (!provider && prevProvider) {
       return dispatch(unlinkRemote({
-        prevProvider,
         projectId,
         userId,
       }))
     } else if (provider) {
       return dispatch(linkRemote({
-        id,
-        path,
+        fileId,
         prevProvider,
         projectId,
         provider,
@@ -209,15 +207,15 @@ export const confirmLinkRemote = ({ isConnected, id, path, prevProvider, project
   return linkRemoteProviderDependent()
 }
 
-export const linkRemote = ({ projectId, provider, path, id, prevProvider, userId }) => (dispatch) => {
+export const linkRemote = ({ projectId, provider, fileId, prevProvider, userId }) => (dispatch) => {
   const link = () => dispatch({
     type: 'PROJECTS/LINK_REMOTE',
     payload: http({
       method: 'PUT',
-      url: `/api/v1/sync/link/${projectId}/${provider}`,
+      url: `/api/v1/sync/link/${projectId}`,
       params: {
-        path,
-        id,
+        fileId,
+        provider,
       },
     }),
     meta: {
@@ -243,12 +241,12 @@ export const linkRemote = ({ projectId, provider, path, id, prevProvider, userId
     : link().then(projectUpdates)
 }
 
-export const unlinkRemote = ({ projectId, prevProvider }) => (dispatch) => {
+export const unlinkRemote = ({ projectId }) => (dispatch) => {
   dispatch({
     type: 'PROJECTS/UNLINK_REMOTE',
     payload: http({
       method: 'DELETE',
-      url: `/api/v1/sync/link/${projectId}/${prevProvider}`,
+      url: `/api/v1/sync/link/${projectId}`,
     }).then((response) => {
       dispatch(getProject({ projectId }))
     }),

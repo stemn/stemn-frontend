@@ -13,7 +13,7 @@ export const pipeline = {
   user: {
     _id: '547db55af7f342380174e228',
     name: 'David Revay',
-    picture: '/uploads/2b4ae5ac-e869-4a7d-8b99-4de21d852a8a.jpg',
+    picture: '/api/v1/uploads/2b4ae5ac-e869-4a7d-8b99-4de21d852a8a.jpg',
   },
   config: {
     triggers: [

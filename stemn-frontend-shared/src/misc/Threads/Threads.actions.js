@@ -1,11 +1,9 @@
-import http                  from 'axios'
-import getUuid               from 'stemn-shared/utils/getUuid.js'
-import { show as showToast } from '../Toasts/Toasts.actions.js'
-import { showModal, showConfirm } from '../Modal/Modal.actions.js'
-import { get }               from 'lodash'
-import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
-import threadLabelsEditModalName from 'stemn-shared/misc/Threads/ThreadLabelsEditModal'
-import { addEvent, deleteEvent } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
+import http from 'axios';
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions';
+import threadLabelsEditModalName from 'stemn-shared/misc/Threads/ThreadLabelsEditModal';
+
+import { showConfirm, showModal } from '../Modal/Modal.actions.js';
+import { show as showToast } from '../Toasts/Toasts.actions.js';
 
 //        return dispatch(addEvent({
 //          cacheKey: timelineCacheKey,
@@ -26,11 +24,7 @@ import { addEvent, deleteEvent } from 'stemn-shared/misc/SyncTimeline/SyncTimeli
 export function newThread({ projectId, thread }) {
   return (dispatch, getState) => {
     const threadDefault = {
-      users: [{
-        _id: getState().auth.user._id,
-        name: getState().auth.user.name,
-        picture: getState().auth.user.picture,
-      }],
+      users: [getState().auth.user._id],
     }
     return dispatch({
       type: 'THREADS/NEW_TASK',
@@ -362,4 +356,3 @@ export function changeLayout({ boardId, layout }) {
     },
   }
 }
-

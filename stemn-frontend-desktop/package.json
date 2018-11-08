@@ -127,7 +127,7 @@
     "asar": true,
     "win": {
       "target": "squirrel",
-      "iconUrl": "https://stemn.com/uploads/85c7df7e-312b-4ed9-b12f-11d6d001a220.png"
+      "iconUrl": "https://stemn.com/api/v1/uploads/85c7df7e-312b-4ed9-b12f-11d6d001a220.png"
     },
     "mac": {
       "category": "public.app-category.productivity",

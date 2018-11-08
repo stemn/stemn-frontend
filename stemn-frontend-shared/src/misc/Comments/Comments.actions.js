@@ -1,6 +1,6 @@
-import http from 'axios'
-import { addEvent, deleteEvent } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
-import confirmAuth from 'stemn-shared/misc/Auth/actions/confirmAuth'
+import http from 'axios';
+import confirmAuth from 'stemn-shared/misc/Auth/actions/confirmAuth';
+import { addEvent, deleteEvent } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions';
 
 export function getComment({ commentId }) {
   return {
@@ -156,7 +156,7 @@ export function updateComment({ comment }) {
     payload: {
       url: `/api/v1/comments/${comment._id}`,
       method: 'PUT',
-      data: comment,
+      data: Object.assign({}, comment, { thread: undefined, owner: undefined }),
     },
     meta: {
       commentId: comment._id,

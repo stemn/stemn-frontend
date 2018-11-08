@@ -1,17 +1,16 @@
-import React, { Component } from 'react'
-import { pick, get } from 'lodash'
+import { get, pick } from 'lodash';
+import React, { Component } from 'react';
+import Button from 'stemn-shared/misc/Buttons/Button/Button';
+import FileSelectInput from 'stemn-shared/misc/FileSelectInput/FileSelectInput.jsx';
+import Input from 'stemn-shared/misc/Input/Input/Input';
+import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea';
+import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx';
+import PanelDescription from 'stemn-shared/misc/Panels/PanelDescription';
+import ProjectLinkRemote from 'stemn-shared/misc/Project/ProjectLinkRemote/ProjectLinkRemote.jsx';
+import ProjectPermissionsRadio from 'stemn-shared/misc/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx';
+import { ArrowTab, ArrowTabs } from 'stemn-shared/misc/Tabs/ArrowTabs/ArrowTabs.jsx';
 
-import classes from './ProjectNewModal.scss'
-
-import Button from 'stemn-shared/misc/Buttons/Button/Button'
-import FileSelectInput from 'stemn-shared/misc/FileSelectInput/FileSelectInput.jsx'
-import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
-import Input from 'stemn-shared/misc/Input/Input/Input'
-import ProjectLinkRemote from 'stemn-shared/misc/Project/ProjectLinkRemote/ProjectLinkRemote.jsx'
-import { ArrowTabs, ArrowTab } from 'stemn-shared/misc/Tabs/ArrowTabs/ArrowTabs.jsx'
-import ProjectPermissionsRadio from 'stemn-shared/misc/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx'
-import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
-import PanelDescription from 'stemn-shared/misc/Panels/PanelDescription'
+import classes from './ProjectNewModal.scss';
 
 export default class ProjectNewModal extends Component {
   state = {
@@ -35,8 +34,7 @@ export default class ProjectNewModal extends Component {
         linkRemote({
           projectId: value.data._id,
           provider: newProject.provider,
-          path: newProject.root.path,
-          id: newProject.root.fileId,
+          fileId: newProject.root.fileId,
           userId: auth.user._id,
         }).then(() => {
           // After we have linked, we go to the project
