@@ -1,20 +1,21 @@
-import * as React from 'react'
-import laptopSpanner from 'stemn-shared/assets/images/pure-vectors/laptop-spanner.svg'
-import { IFileData, IFileRender } from 'stemn-shared/misc/Files/Files.reducer'
-import DownloadFile from '../DownloadFile/DownloadFile.jsx'
-import ErrorMessages from './Messages/Messages.jsx'
-import { isAssembly } from './PreviewCad/PreviewCad.utils.js'
-import PreviewCadLoader from './PreviewCadLoader'
-import PreviewCode from './PreviewCode'
-import { dispatchToProps, IPreviewFileContainerProps } from './PreviewFile.container'
-import * as classes from './PreviewFile.scss'
-import { getViewerType } from './PreviewFile.utils'
-import PreviewGdoc from './PreviewGdoc/PreviewGdoc'
-import PreviewGoogle from './PreviewGoogle/PreviewGoogle'
-import PreviewImage from './PreviewImage/PreviewImage'
-import PreviewPcbLoader from './PreviewPcbLoader'
-import PreviewPdfLoader from './PreviewPdfLoader'
-import { PreviewPipeline } from './PreviewPipeline'
+import * as React from 'react';
+import laptopSpanner from 'stemn-shared/assets/images/pure-vectors/laptop-spanner.svg';
+import { IFileData, IFileRender } from 'stemn-shared/misc/Files/Files.reducer';
+
+import DownloadFile from '../DownloadFile/DownloadFile.jsx';
+import ErrorMessages from './Messages/Messages.jsx';
+import { isAssembly } from './PreviewCad/PreviewCad.utils.js';
+import PreviewCadLoader from './PreviewCadLoader';
+import PreviewCode from './PreviewCode';
+import { dispatchToProps, IPreviewFileContainerProps } from './PreviewFile.container';
+import * as classes from './PreviewFile.scss';
+import { getViewerType } from './PreviewFile.utils';
+import PreviewGdoc from './PreviewGdoc/PreviewGdoc';
+import PreviewGoogle from './PreviewGoogle/PreviewGoogle';
+import PreviewImage from './PreviewImage/PreviewImage';
+import PreviewPcbLoader from './PreviewPcbLoader';
+import PreviewPdfLoader from './PreviewPdfLoader';
+import { PreviewPipeline } from './PreviewPipeline';
 
 export interface IPreviewFileComponentProps extends IPreviewFileContainerProps {
   getFile: typeof dispatchToProps['getFile'],
