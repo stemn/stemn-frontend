@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import classes from './Header.scss'
 import classNames from 'classnames'
-import { loginRoute } from 'route-actions'
+import { loginRoute, registerRoute } from 'route-actions'
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import Avatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import Popover from 'stemn-shared/misc/Popover'
@@ -85,6 +85,7 @@ export default class Header extends Component {
     return (
       <div className="layout-row layout-align-start-center" style={ { paddingLeft: '15px' } }>
         <Link to={ loginRoute() } className="link-primary">Sign in</Link>
+        <Link to={ registerRoute() } className="link-primary">Register</Link>
       </div>
     )
   }
