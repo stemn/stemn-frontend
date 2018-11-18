@@ -1,5 +1,5 @@
-import isUuid from 'stemn-shared/utils/isUuid.js'
-import getUuid from 'stemn-shared/utils/getUuid.js'
+import getUuid from 'stemn-shared/utils/getUuid.js';
+import isUuid from 'stemn-shared/utils/isUuid.js';
 
 
 /*
@@ -50,6 +50,8 @@ export const validateMention = (href = '') => {
   // Boths ids should be 24 characters.
   const hrefSplit = href.split(':')
   if (hrefSplit.length === 3) {
+    const entityId = href[0];
+    const mentionId = href[2];
     if (isUuid(entityId) && isUuid(mentionId)) {
       return true
     }

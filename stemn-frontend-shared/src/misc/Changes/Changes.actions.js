@@ -1,10 +1,11 @@
-import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
-import { show as showToast } from '../Toasts/Toasts.actions.js'
-import { showModal }         from '../Modal/Modal.actions.js'
-import { parseMentions }     from '../Mentions/Mentions.utils.js'
-import http                  from 'axios'
-import ThreadMentionModalName from 'stemn-shared/misc/Mentions/ThreadMentionModal'
-import { filterSelectedChangesByPossible } from './Changes.utils.js'
+import http from 'axios';
+import ThreadMentionModalName from 'stemn-shared/misc/Mentions/ThreadMentionModal';
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions';
+
+import { parseMentions } from '../Mentions/Mentions.utils.js';
+import { showModal } from '../Modal/Modal.actions.js';
+import { show as showToast } from '../Toasts/Toasts.actions.js';
+import { filterSelectedChangesByPossible } from './Changes.utils.js';
 
 export function deselect({ projectId }) {
   return {
@@ -41,8 +42,10 @@ export function fetchChanges({ projectId }) {
       http: true,
       payload: {
         method: 'GET',
-        url: `/api/v1/sync/timeline/${projectId}`,
+        url: '/api/v1/timeline',
         params: {
+          entityId: projectId,
+          entityType: 'project',
           types: ['changes'],
         },
       },
