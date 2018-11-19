@@ -1,13 +1,10 @@
-import http from 'axios'
-
-const repoOwner = 'stemn'
-const repoName = 'Stemn-Desktop'
+import http from 'axios';
 
 export const getLatest = () => ({
   type: 'DESKTOP_RELEASES/GET_LATEST',
   payload: http({
     method: 'GET',
-    url: `https://api.github.com/repos/${repoOwner}/${repoName}/releases/latest`,
+    url: '/api/v1/frontend/latest',
     headers: {
       Authorization: null,
     },
