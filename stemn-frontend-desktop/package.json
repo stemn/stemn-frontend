@@ -1,5 +1,5 @@
 {
-  "name": "Stemn",
+  "name": "stemn-frontend-desktop",
   "productName": "Stemn",
   "version": "0.0.26",
   "description": "Stemn Desktop: Versioning and project management",
@@ -9,12 +9,12 @@
   },
   "main": "dist/main/index.js",
   "scripts": {
-    "install:all": "sh ./scripts/install.sh",
+    "install:all": "scripts/install.sh",
     "install:electron:wsl": "npm uninstall electron && export npm_config_platform=win32 && npm install electron && unset npm_config_platform",
-    "deploy": "sh ./scripts/deploy.sh",
+    "deploy": "scripts/deploy.sh",
     "analyse:electron": "webpack-bundle-analyzer ./reports/electron-stats.json",
     "analyse:renderer": "webpack-bundle-analyzer ./reports/renderer-stats.json",
-    "build": "NODE_ENV=production STEMN_ENV=production sh ./scripts/build.sh",
+    "build": "NODE_ENV=production STEMN_ENV=production scripts/build.sh",
     "start:renderer": "NODE_ENV=development node ./scripts/startRenderer.js",
     "start:electron": "NODE_ENV=development webpack --watch --config ./config/webpack.config.electron.js",
     "electron": "NODE_ENV=development ./node_modules/.bin/electron dist/main",
