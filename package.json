@@ -13,7 +13,7 @@
     "lint:website": "eslint stemn-frontend-website/src/ --ext .jsx --ext .js",
     "jest": "jest",
     "jest:update": "jest --updateSnapshot",
-    "install:all": "npm run install:website && npm run install:desktop",
+    "install:all": "npm run install:website; npm run install:desktop",
     "install:desktop": "scripts/install-desktop.sh",
     "install:website": "scripts/install-website.sh"
   },
