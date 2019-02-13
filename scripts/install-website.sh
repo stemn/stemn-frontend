@@ -1,8 +1,11 @@
 # Install root deps
-npm install --no-save
+npm install --no-save &
 
 # Install website deps
-npm install --prefix stemn-frontend-website --no-save
+npm install --prefix stemn-frontend-website --no-save &
 
 # Install shared deps
-npm install --prefix stemn-frontend-shared --no-save
+npm install --prefix stemn-frontend-shared --no-save &
+
+# Wait for concurrent installs to finish
+wait
