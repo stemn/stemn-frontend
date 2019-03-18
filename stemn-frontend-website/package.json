@@ -5,7 +5,6 @@
   "license": "MIT",
   "scripts": {
     "dev": "node ./scripts/development.js",
-    "dev:docker": "tmux new -d yarn dev && sleep infinity",
     "build": "sh ./scripts/build.sh",
     "analyse": "node ./scripts/analyse.js",
     "analyse:graph": "webpack-bundle-analyzer ./reports/stats.json",
