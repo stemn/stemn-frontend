@@ -1,10 +1,9 @@
-import { app, BrowserWindow, Menu, shell, screen } from 'electron'
-import { bindBackForward } from './utils/browserWindowUtils.js'
-import path from 'path'
-import process from 'process'
-import log from 'electron-log'
-import stringify from './utils/stringify.js'
-import getRootPath from 'get-root-path'
+import { BrowserWindow, Menu, screen, shell } from 'electron';
+import getRootPath from 'get-root-path';
+import process from 'process';
+
+import { bindBackForward } from './utils/browserWindowUtils.js';
+import stringify from './utils/stringify.js';
 
 const mainHtml = getRootPath('/static/html/main.html')
 
@@ -37,6 +36,11 @@ export const create = function createWindow({ uri = '/' } = {}) {
       },
     })
 
+    // If the render process crashes, reload the window
+    browserWindow.webContents.on('crashed', () => {
+      browserWindow.destroy();
+      init();
+    });
 
     // Handle Redirects
     const handleRedirect = (e, url) => {
@@ -79,4 +83,3 @@ export const create = function createWindow({ uri = '/' } = {}) {
     browserWindow.focus()
   }
 }
-

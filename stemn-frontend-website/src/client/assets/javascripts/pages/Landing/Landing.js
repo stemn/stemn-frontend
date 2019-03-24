@@ -1,21 +1,22 @@
-import React, { Component } from 'react'
-import LandingLayout from 'layout/LandingLayout'
-import HeroBanner from 'modules/HeroBanner'
-import DownloadButton from 'stemn-shared/misc/DesktopReleases/DownloadButton'
-import { Row, Col, Container } from 'stemn-shared/misc/Layout'
-import screenshot from './screenshot.jpg'
-import deviceMockups from './deviceMockups.jpg'
-import historyCombined from './historyCombined.jpg'
-import historyTimeline from './historyTimeline.png'
-import classes from './Landing.scss'
-import cn from 'classnames'
-import FileIcon from 'stemn-shared/misc/FileList/components/FileIcon'
-import { Helmet } from 'react-helmet'
-import isMobile from 'stemn-shared/utils/agent/isMobile'
-import Button from 'stemn-shared/misc/Buttons/Button/Button'
-import MdLock from 'react-icons/md/input'
-import vidDemo from 'static/video/demo.mp4'
-import Link from 'stemn-shared/misc/Router/Link'
+import cn from 'classnames';
+import LandingLayout from 'layout/LandingLayout';
+import HeroBanner from 'modules/HeroBanner';
+import React, { Component } from 'react';
+import { Helmet } from 'react-helmet';
+import MdLock from 'react-icons/md/input';
+import vidDemo from 'static/video/demo.mp4';
+import Button from 'stemn-shared/misc/Buttons/Button/Button';
+import DownloadButton from 'stemn-shared/misc/DesktopReleases/DownloadButton';
+import FileIcon from 'stemn-shared/misc/FileList/components/FileIcon';
+import { Col, Container, Row } from 'stemn-shared/misc/Layout';
+import Link from 'stemn-shared/misc/Router/Link';
+import isMobile from 'stemn-shared/utils/agent/isMobile';
+
+import deviceMockups from './deviceMockups.jpg';
+import historyCombined from './historyCombined.jpg';
+import historyTimeline from './historyTimeline.png';
+import classes from './Landing.scss';
+import screenshot from './screenshot.jpg';
 
 export default class Landing extends Component {
   constructor(props) {
