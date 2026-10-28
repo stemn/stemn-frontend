@@ -1,6 +1,6 @@
 import { leaveRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
 import { loginRoute } from 'route-actions'
-import { push } from 'react-router-redux'
+import { push } from 'stemn-shared/routing'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions.js'
 
 export default () => (dispatch, getState) => {

@@ -1,6 +1,6 @@
 import { getEntries } from 'modules/Contentful/Contentful.actions'
 import { connect } from 'react-redux'
-import { replace } from 'react-router-redux'
+import { replace } from 'stemn-shared/routing'
 import { IStoreState } from '../../app/reducer'
 import Explore from './Explore'
 

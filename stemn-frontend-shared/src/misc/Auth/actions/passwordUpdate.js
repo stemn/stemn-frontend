@@ -1,5 +1,5 @@
 import { show as showToast } from 'stemn-shared/misc/Toasts/Toasts.actions.js'
-import { replace } from 'react-router-redux'
+import { replace } from 'stemn-shared/routing'
 // import logout from './logout'
 
 // Either oldPassword or resetToken is required

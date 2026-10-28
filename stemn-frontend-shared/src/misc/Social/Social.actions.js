@@ -1,5 +1,5 @@
 import { get } from 'lodash';
-import { push } from 'react-router-redux';
+import { push } from 'stemn-shared/routing';
 import { projectRoute } from 'route-actions';
 import { showModal } from 'stemn-shared/misc/Modal/Modal.actions.js';
 import ProjectCloneModalName from 'stemn-shared/misc/Projects/ProjectCloneModal';

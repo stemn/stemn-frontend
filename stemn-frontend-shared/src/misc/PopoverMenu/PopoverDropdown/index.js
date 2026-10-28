@@ -1,1 +1,1 @@
-export default from './PopoverDropdown'
+export { default } from './PopoverDropdown'

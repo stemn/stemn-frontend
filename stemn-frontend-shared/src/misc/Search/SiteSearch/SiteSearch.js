@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import classes from './SiteSearch.css'
 import cn from 'classnames'
-import MdSearch from 'react-icons/md/search'
-import { Link } from 'react-router'
+import { MdSearch } from 'react-icons/md'
+import { Link } from 'stemn-shared/routing'
 
 import Input from 'stemn-shared/misc/Input/Input/Input'
 

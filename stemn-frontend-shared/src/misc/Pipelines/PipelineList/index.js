@@ -1,1 +1,1 @@
-export default from './PipelineList'
+export { default } from './PipelineList'

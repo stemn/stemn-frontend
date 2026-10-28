@@ -1,1 +1,1 @@
-export default from './FileSyncUnderway'
+export { default } from './FileSyncUnderway'

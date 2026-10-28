@@ -1,1 +1,1 @@
-export default from './NewThreadModal.container'
+export { default } from './NewThreadModal.container'

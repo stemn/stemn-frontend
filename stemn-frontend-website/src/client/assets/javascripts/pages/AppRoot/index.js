@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { replace } from 'react-router-redux'
+import { replace } from 'stemn-shared/routing'
 import { getToken } from 'stemn-shared/misc/Auth/Auth.actions'
 import ModalContainer from 'stemn-shared/misc/Modal/ModalContainer.jsx'
 import ToastContainer from 'stemn-shared/misc/Toasts/Toasts.jsx'

@@ -1,6 +1,6 @@
 import React from 'react'
 import Input from 'stemn-shared/misc/Input/Input/Input'
-import MdDone from 'react-icons/md/done'
+import { MdDone } from 'react-icons/md'
 
 // Styles
 import classes from './RadioAlt.css'

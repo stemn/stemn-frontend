@@ -1,1 +1,1 @@
-export default from './OrganisationSearch'
+export { default } from './OrganisationSearch'

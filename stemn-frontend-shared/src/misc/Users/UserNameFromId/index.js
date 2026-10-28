@@ -1,1 +1,1 @@
-export default from './UserNameFromId.container'
+export { default } from './UserNameFromId.container'

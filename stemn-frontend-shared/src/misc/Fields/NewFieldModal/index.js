@@ -1,1 +1,1 @@
-export default from './NewFieldModal.container'
+export { default } from './NewFieldModal.container'

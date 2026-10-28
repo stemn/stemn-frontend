@@ -4,7 +4,7 @@ import React from 'react'
 // Sub Components
 import FileChangeTitleRow  from 'stemn-shared/misc/Changes/CommitChanges/FileChangeTitleRow'
 import LoadingOverlay      from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
-import MdMoreHoriz         from 'react-icons/md/more-horiz'
+import { MdMoreHoriz } from 'react-icons/md'
 import Popover             from 'stemn-shared/misc/Popover'
 import SidebarTimelineRow  from './SidebarTimelineRow'
 import { SimpleIconButton }    from 'stemn-shared/misc/Buttons/SimpleIconButton'

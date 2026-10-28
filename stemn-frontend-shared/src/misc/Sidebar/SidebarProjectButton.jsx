@@ -2,11 +2,11 @@ import React from 'react'
 import { get } from 'lodash'
 import cn from 'classnames'
 import styles from './SidebarProjectButton.css'
-import { Link } from 'react-router'
+import { Link } from 'stemn-shared/routing'
 import Drive   from 'stemn-shared/assets/icons/providers/drive.js'
 import Dropbox   from 'stemn-shared/assets/icons/providers/dropbox.js'
-import MdContentCopy from 'react-icons/md/content-copy'
-import MdCloudOff from 'react-icons/md/cloud-off'
+import { MdContentCopy } from 'react-icons/md'
+import { MdCloudOff } from 'react-icons/md'
 
 export default (props) => {
   const iconStyle = { width: '22px', height: '22px' }

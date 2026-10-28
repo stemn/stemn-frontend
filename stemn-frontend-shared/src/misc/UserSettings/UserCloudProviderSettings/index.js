@@ -1,1 +1,1 @@
-export default from './UserCloudProviderSettings'
+export { default } from './UserCloudProviderSettings'

@@ -4,7 +4,7 @@ import React from 'react'
 import cn from 'classnames'
 import classes from './MoreButton.css'
 
-import MdChevronRight from 'react-icons/md/chevron-right'
+import { MdChevronRight } from 'react-icons/md'
 
 
 export default class MoreButtons extends React.Component {

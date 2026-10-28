@@ -10,7 +10,7 @@ import Popover from 'stemn-shared/misc/Popover'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import { values } from 'lodash'
 import { newMention } from 'stemn-shared/misc/Mentions/Mentions.utils'
-import MdFilterList from 'react-icons/md/filter-list'
+import { MdFilterList } from 'react-icons/md'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 
 const getMentionsFromObject = (mentionsObject, threads) => Object.keys(mentionsObject).map(threadId => newMention({

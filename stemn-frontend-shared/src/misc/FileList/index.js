@@ -1,1 +1,1 @@
-export default from './FileList.container'
+export { default } from './FileList.container'

@@ -1,5 +1,5 @@
 import React from 'react';
-import IconBase from 'react-icon-base';
+import IconBase from 'stemn-shared/misc/Icons/IconBase';
 
 export default (props) => {
   return (

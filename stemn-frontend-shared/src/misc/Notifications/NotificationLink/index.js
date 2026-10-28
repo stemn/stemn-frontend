@@ -1,1 +1,1 @@
-export default from './NotificationLink'
+export { default } from './NotificationLink'

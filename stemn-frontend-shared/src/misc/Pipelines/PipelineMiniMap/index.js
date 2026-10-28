@@ -1,1 +1,1 @@
-export default from './PipelineMiniMap.container'
+export { default } from './PipelineMiniMap.container'

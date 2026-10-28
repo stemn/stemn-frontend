@@ -1,1 +1,1 @@
-export default from './TimelineVertical'
+export { default } from './TimelineVertical'

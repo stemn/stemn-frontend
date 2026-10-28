@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry'
 
 import { createProject, linkRemote } from 'stemn-shared/misc/Projects/Projects.actions.js'
-import { push } from 'react-router-redux'
+import { push } from 'stemn-shared/routing'
 
 import ProjectNewModal from './ProjectNewModal'
 import { projectSettingsRoute } from 'route-actions'

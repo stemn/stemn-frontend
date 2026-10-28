@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { storeRemove,  storePush } from 'stemn-shared/misc/Store/Store.actions'
 import UserMinimalRow from 'stemn-shared/misc/Users/UserMinimalRow'
-import MdClose from 'react-icons/md/close'
+import { MdClose } from 'react-icons/md'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 
 class Component extends React.Component {

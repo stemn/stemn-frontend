@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { ArrayFieldTemplateProps } from 'react-jsonschema-form'
 
-import MdAdd from 'react-icons/md/add'
-import MdClose from 'react-icons/md/close'
+import { MdAdd } from 'react-icons/md'
+import { MdClose } from 'react-icons/md'
 import FilledIconButton from 'stemn-shared/misc/Buttons/FilledIconButton'
 
 export const ArrayFieldTemplate = (props: ArrayFieldTemplateProps) => {

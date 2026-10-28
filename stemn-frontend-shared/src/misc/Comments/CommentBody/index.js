@@ -1,1 +1,1 @@
-export default from './CommentBody.container'
+export { default } from './CommentBody.container'

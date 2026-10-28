@@ -5,7 +5,7 @@ import classes from '../Tag/Tag.css'
 
 import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
 
-import MdClose from 'react-icons/md/close'
+import { MdClose } from 'react-icons/md'
 
 export default class TagEdit extends React.Component {
   render() {

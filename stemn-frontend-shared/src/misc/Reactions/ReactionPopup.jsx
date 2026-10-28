@@ -4,7 +4,7 @@ import classes from './Reactions.css'
 
 import Popover from 'stemn-shared/misc/Popover'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
-import MdInsertEmoticon from 'react-icons/md/insert-emoticon'
+import { MdInsertEmoticon } from 'react-icons/md'
 
 import { options } from './Reactions.utils.js'
 

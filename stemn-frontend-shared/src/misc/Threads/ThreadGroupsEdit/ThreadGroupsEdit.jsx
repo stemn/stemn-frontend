@@ -9,7 +9,7 @@ import { showConfirm } from 'stemn-shared/misc/Modal/Modal.actions.js'
 import Popover from 'stemn-shared/misc/Popover'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
-import MdMoreHoriz from 'react-icons/md/more-horiz'
+import { MdMoreHoriz } from 'react-icons/md'
 import pluralise from 'stemn-shared/utils/strings/pluralise'
 
 class ThreadGroupsEdit extends Component {

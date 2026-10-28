@@ -1,1 +1,1 @@
-export default from './GroupSelect'
+export { default } from './GroupSelect'

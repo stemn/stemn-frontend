@@ -1,5 +1,5 @@
 import { createFilterString, parseFilterString } from 'stemn-shared/misc/StringFilter/StringFilter.utils'
-import { push, replace } from 'react-router-redux'
+import { push, replace } from 'stemn-shared/routing'
 
 export const setFilter = ({ cacheKey, location, filterString, filterModel, filterObject }) => (dispatch, getState) => {
   const string = filterString || createFilterString(filterObject, filterModel)

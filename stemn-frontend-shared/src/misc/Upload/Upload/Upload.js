@@ -4,7 +4,7 @@ import cn from 'classnames'
 import classes from './Upload.css'
 import dropzone from 'react-dropzone'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
-import MdFileUpload from 'react-icons/md/file-upload'
+import { MdFileUpload } from 'react-icons/md'
 
 const Dropzone = dropzone.default
 

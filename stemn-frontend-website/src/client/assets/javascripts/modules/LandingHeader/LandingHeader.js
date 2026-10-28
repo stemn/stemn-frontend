@@ -8,7 +8,7 @@ import Link from 'stemn-shared/misc/Router/Link'
 import logo from 'images/logo80x80none.png'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import HeaderMobileMenu from 'modules/HeaderMobileMenu'
-import MdMenu from 'react-icons/md/menu'
+import { MdMenu } from 'react-icons/md'
 import BetaBadge from 'modules/BetaBadge'
 
 export default class LandingHeader extends Component {

@@ -8,8 +8,8 @@ import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOver
 import UserNavHeader from 'modules/UserNavHeader'
 import SocialButton from 'stemn-shared/misc/Social/SocialButton'
 import { get } from 'lodash'
-import MdLocationOn from 'react-icons/md/location-on'
-import MdLink from 'react-icons/md/link'
+import { MdLocationOn } from 'react-icons/md'
+import { MdLink } from 'react-icons/md'
 import { userRoute } from 'route-actions'
 import { Helmet } from 'react-helmet'
 

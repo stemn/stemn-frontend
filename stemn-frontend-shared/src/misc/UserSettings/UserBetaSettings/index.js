@@ -1,1 +1,1 @@
-export default from './UserBetaSettings'
+export { default } from './UserBetaSettings'

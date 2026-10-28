@@ -1,1 +1,1 @@
-export default from './PopoverFit'
+export { default } from './PopoverFit'

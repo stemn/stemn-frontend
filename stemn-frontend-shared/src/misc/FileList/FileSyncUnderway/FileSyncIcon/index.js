@@ -1,1 +1,1 @@
-export default from './FileSyncIcon'
+export { default } from './FileSyncIcon'

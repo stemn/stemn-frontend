@@ -1,1 +1,1 @@
-export default from './LicenseSettings'
+export { default } from './LicenseSettings'

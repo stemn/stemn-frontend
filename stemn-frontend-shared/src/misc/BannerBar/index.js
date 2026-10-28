@@ -1,1 +1,1 @@
-export default from './BannerBar'
+export { default } from './BannerBar'

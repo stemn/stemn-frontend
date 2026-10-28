@@ -1,1 +1,1 @@
-export default from './PreviewPdfLoader'
+export { default } from './PreviewPdfLoader'

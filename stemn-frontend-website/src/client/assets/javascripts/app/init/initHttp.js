@@ -4,11 +4,13 @@ export default (store) => {
   // Setup the http interceptor
   http.interceptors.request.use((config) => {
     const token = store.getState().auth.authToken
+    // axios 1.x: config.headers is an AxiosHeaders instance
+    const authorization = config.headers.get('Authorization')
 
-    if (config.headers.Authorization === null) { // We set Authorization to null to bypass
-      delete config.headers.Authorization
-    } else if (!config.headers.Authorization) {
-      config.headers.Authorization = token ? `bearer ${token}` : ''
+    if (authorization === null) { // We set Authorization to null to bypass
+      config.headers.delete('Authorization')
+    } else if (!authorization) {
+      config.headers.set('Authorization', token ? `bearer ${token}` : '')
     }
     return config
   })

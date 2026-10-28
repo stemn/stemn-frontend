@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+import { push } from 'stemn-shared/routing'
 import { compose } from 'redux'
 import { reduxForm } from 'redux-form'
 import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry'

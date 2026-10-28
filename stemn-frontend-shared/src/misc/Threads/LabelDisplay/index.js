@@ -1,1 +1,1 @@
-export default from './LabelDisplay'
+export { default } from './LabelDisplay'

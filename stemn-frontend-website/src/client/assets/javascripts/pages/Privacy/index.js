@@ -1,1 +1,1 @@
-export default from './Privacy.container'
+export { default } from './Privacy.container'

@@ -1,6 +1,6 @@
 import { get } from 'lodash'
 import { connect } from 'react-redux'
-import { push as pushRoute } from 'react-router-redux'
+import { push as pushRoute } from 'stemn-shared/routing'
 import { compose } from 'redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { changeMode, initCompare, select } from 'stemn-shared/misc/FileCompare/FileCompare.actions'

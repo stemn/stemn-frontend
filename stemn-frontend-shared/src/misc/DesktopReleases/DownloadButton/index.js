@@ -1,1 +1,1 @@
-export default from './DownloadButton.container'
+export { default } from './DownloadButton.container'

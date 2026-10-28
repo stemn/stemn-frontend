@@ -1,1 +1,1 @@
-export default from './PlansRadios'
+export { default } from './PlansRadios'

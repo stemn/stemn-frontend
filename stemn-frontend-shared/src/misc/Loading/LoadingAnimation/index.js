@@ -1,1 +1,1 @@
-export default from './LoadingAnimation'
+export { default } from './LoadingAnimation'

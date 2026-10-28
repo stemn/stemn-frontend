@@ -7,7 +7,7 @@ import classes from './EmailAndNotificationToggles.css'
 import cn from 'classnames'
 import { uniq } from 'lodash'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
-import MdMoreHoriz from 'react-icons/md/more-horiz'
+import { MdMoreHoriz } from 'react-icons/md'
 
 class ToggleGroup extends Component {
   static propTypes = {

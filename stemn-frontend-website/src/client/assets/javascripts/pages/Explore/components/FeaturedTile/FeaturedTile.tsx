@@ -1,6 +1,6 @@
 import * as cn from 'classnames'
 import * as React from 'react'
-import { Link } from 'react-router'
+import { Link } from 'stemn-shared/routing'
 import * as s from './FeaturedTile.scss'
 
 export interface IFeaturedTileProps {

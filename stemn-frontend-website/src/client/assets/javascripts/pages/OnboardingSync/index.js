@@ -1,1 +1,1 @@
-export default from './OnboardingSync.container'
+export { default } from './OnboardingSync.container'

@@ -5,7 +5,7 @@ import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import { remote } from 'electron'
 import cn from 'classnames'
 import classes from './FileSelectInput.css'
-import MdFolder from 'react-icons/md/folder'
+import { MdFolder } from 'react-icons/md'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import TextDisplayBox from 'stemn-shared/misc/TextDisplayBox/TextDisplayBox.jsx'
 

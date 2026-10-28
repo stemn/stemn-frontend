@@ -9,7 +9,7 @@ import React from 'react'
 import classes from './Header.css'
 
 // Sub Components
-import MdMenu from 'react-icons/md/menu'
+import { MdMenu } from 'react-icons/md'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 

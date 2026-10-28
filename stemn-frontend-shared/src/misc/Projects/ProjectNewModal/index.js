@@ -1,1 +1,1 @@
-export default from './ProjectNewModal.container'
+export { default } from './ProjectNewModal.container'

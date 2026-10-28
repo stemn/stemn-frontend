@@ -1,1 +1,1 @@
-export default from './NotificationsUnread.container'
+export { default } from './NotificationsUnread.container'

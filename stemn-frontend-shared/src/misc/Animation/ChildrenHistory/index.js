@@ -1,1 +1,1 @@
-export default from './ChildrenHistory'
+export { default } from './ChildrenHistory'

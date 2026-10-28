@@ -1,1 +1,1 @@
-export default from './LoadingPlaceholder'
+export { default } from './LoadingPlaceholder'

@@ -1,8 +1,7 @@
-
+/* eslint no-console:0 */
 export function logException(ex, context) {
-  Raven.captureException(ex, {
-    extra: context,
-  })
-  /* eslint no-console:0 */
-  window && window.console && console.error && console.error(ex)
+  if (window.Sentry) {
+    window.Sentry.captureException(ex, { extra: context })
+  }
+  console.error(ex, context)
 }

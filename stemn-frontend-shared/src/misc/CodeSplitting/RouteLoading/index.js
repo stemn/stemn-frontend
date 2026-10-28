@@ -1,1 +1,1 @@
-export default from './RouteLoading.container'
+export { default } from './RouteLoading.container'

@@ -1,2 +1,2 @@
 // JavaScript main file
-require('javascripts/app')
+import 'javascripts/app'

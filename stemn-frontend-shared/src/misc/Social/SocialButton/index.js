@@ -1,1 +1,1 @@
-export default from './SocialButton.container'
+export { default } from './SocialButton.container'

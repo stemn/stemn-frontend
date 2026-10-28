@@ -1,1 +1,1 @@
-export default from './EditorNew.container'
+export { default } from './EditorNew.container'

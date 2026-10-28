@@ -5,7 +5,7 @@ import classes from './SearchInput.css'
 import cn from 'classnames'
 import 'codemirror/addon/display/placeholder'
 import 'codemirror/addon/selection/mark-selection'
-import MdSearch from 'react-icons/md/search'
+import { MdSearch } from 'react-icons/md'
 
 import { parseFilterStringWithPositions } from 'stemn-shared/misc/StringFilter/StringFilter.utils'
 

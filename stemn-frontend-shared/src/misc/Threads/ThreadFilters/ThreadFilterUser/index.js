@@ -1,1 +1,1 @@
-export default from './ThreadFilterUser'
+export { default } from './ThreadFilterUser'

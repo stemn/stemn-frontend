@@ -3,7 +3,7 @@ import LandingLayout from 'layout/LandingLayout';
 import HeroBanner from 'modules/HeroBanner';
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-import MdLock from 'react-icons/md/input';
+import { MdInput as MdLock } from 'react-icons/md';
 import vidDemo from 'static/video/demo.mp4';
 import Button from 'stemn-shared/misc/Buttons/Button/Button';
 import DownloadButton from 'stemn-shared/misc/DesktopReleases/DownloadButton';

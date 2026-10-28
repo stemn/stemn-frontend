@@ -1,1 +1,1 @@
-export default from './FileSelectModal.container'
+export { default } from './FileSelectModal.container'

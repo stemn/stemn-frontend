@@ -1,1 +1,1 @@
-export default from './TimelineWrapper'
+export { default } from './TimelineWrapper'

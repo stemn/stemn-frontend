@@ -1,4 +1,4 @@
-import { routerReducer as routing } from 'react-router-redux'
+import { routerReducer as routing } from 'stemn-shared/routing'
 import { combineReducers } from 'redux'
 import { FormState, reducer as formReducer } from 'redux-form'
 import auth from 'stemn-shared/misc/Auth/Auth.reducer.js'

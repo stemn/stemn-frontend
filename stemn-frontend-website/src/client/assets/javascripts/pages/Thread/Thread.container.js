@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { getThread } from 'stemn-shared/misc/Threads/Threads.actions'
-import { replace } from 'react-router-redux'
+import { replace } from 'stemn-shared/routing'
 import { projectThreadRoute } from 'route-actions'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
