@@ -106,7 +106,7 @@ module.exports = ({ mode, styleLoader, refresh = false }) => {
           test: /\.(js|jsx|ts|tsx)$/,
           include: [join(assetsRoot, 'javascripts'), join(root, 'src/client/scripts'), join(sharedRoot, 'src')],
           // The vendored primus client is pre-built browser code
-          exclude: /primus-websockets\d\.js$/,
+          exclude: [/primus-websockets\d\.js$/, /PreviewPcb[\\/]viewer[\\/]three(\.min)?\.js$/],
           use: {
             loader: require.resolve('babel-loader'),
             options: {

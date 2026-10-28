@@ -19,7 +19,7 @@ import { PreviewPipeline } from './PreviewPipeline';
 
 export interface IPreviewFileComponentProps extends IPreviewFileContainerProps {
   getFile: typeof dispatchToProps['getFile'],
-  renderFile: typeof dispatchToProps['renderFile'],
+  renderFile: (...args: Parameters<typeof dispatchToProps['renderFile']>) => void, // thunk, resolved by connect()
   fileData: IFileData,
   fileRender?: IFileRender
 }

@@ -14,7 +14,7 @@ import classes from './Explore.scss'
 
 export interface IExploreProps {
   replace: typeof replaceType,
-  getEntries: typeof getEntriesType,
+  getEntries: (...args: Parameters<typeof getEntriesType>) => Promise<any>, // thunk, resolved by connect()
   location: any,
   contentfulPageExplore?: IContentfulContentPageExplore
 }

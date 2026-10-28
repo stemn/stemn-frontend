@@ -32,7 +32,7 @@ export default class Search extends Component {
               <SiteSearchResultsContainer
                 query={ location.query.q }
                 type={ location.query.type }
-                page={ parseInt(location.query.page) }
+                page={ parseInt(location.query.page, 10) || 1 }
                 size={ 30 }
               />
             </Col>            
