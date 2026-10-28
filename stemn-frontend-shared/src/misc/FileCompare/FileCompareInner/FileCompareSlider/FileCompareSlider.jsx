@@ -9,7 +9,7 @@ class Component extends React.Component {
     lastEventId: '',
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.dataDrag.isMoving && nextProps.dataDrag.id && nextProps.dataDrag.id !== this.state.lastEventId) {
       const containerWidth = this.props.container.offsetWidth
       const prevPositionPx = nextProps.position / 100 * containerWidth

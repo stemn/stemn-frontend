@@ -7,7 +7,7 @@ import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
 export default class Terminal extends Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     const { getLines, pipelineId, stepId } = this.props
     getLines({
       pipelineId,

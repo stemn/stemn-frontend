@@ -17,7 +17,7 @@ export default class MyProjectsPanel extends Component {
       page: 1,
     }
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.props.getUserProjects({
       userId: this.props.user._id,
     })

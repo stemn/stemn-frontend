@@ -39,8 +39,8 @@ export class ThreadListItem extends React.Component {
     }
   };
 
-  componentWillMount() { this.onMount(this.props) }
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+  UNSAFE_componentWillMount() { this.onMount(this.props) }
+  UNSAFE_componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
 
   updateThread = () => {
     setTimeout(() => this.props.ThreadsActions.updateThread({ thread: this.props.thread.data }), 1)

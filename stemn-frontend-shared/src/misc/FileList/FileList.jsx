@@ -101,7 +101,7 @@ export default class FileList extends Component {
     }
     return null
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.fileRowHistory = new ChildrenHistory()
   }
   renderSearchResults = (isLoading) => {

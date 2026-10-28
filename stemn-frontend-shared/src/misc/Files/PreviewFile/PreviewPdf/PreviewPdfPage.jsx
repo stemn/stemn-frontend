@@ -13,7 +13,7 @@ class Page extends React.Component {
     height: 0,
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const prevProps = this.props
     if (prevProps.pdf !== nextProps.pdf) {
       this._initPage(nextProps)
@@ -77,8 +77,8 @@ class Page extends React.Component {
     const { scale, index } = this.props
     this.viewport = page.getViewport(scale)
     const { width, height } = this.viewport
-    const canvas = this.refs.canvas
-    const textEl = this.refs.text
+    const canvas = this.canvasRef
+    const textEl = this.textRef
     this.context = canvas.getContext('2d')
 
     // Create a HDPI canvas
@@ -133,9 +133,9 @@ class Page extends React.Component {
         <LoadingOverlay show={ status === 'loading' } />
         <Waypoint onEnter={ this._enterPage } />
         <div style={ sizeStyles }>
-          <canvas ref="canvas" style={ sizeStyles } />
+          <canvas ref={ (el) => { this.canvasRef = el } } style={ sizeStyles } />
         </div>
-        <div ref="text" className={ classes.textLayer } style={ textStyles } />
+        <div ref={ (el) => { this.textRef = el } } className={ classes.textLayer } style={ textStyles } />
       </div>
     )
   }

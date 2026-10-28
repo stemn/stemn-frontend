@@ -11,7 +11,7 @@ export default class ReleaseNotesModal extends React.Component {
     loading: true,
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     http({
       url: `https://api.github.com/repos/stemn/stemn-desktop/releases/tags/v${version}`,
       headers: {

@@ -22,10 +22,10 @@ class ThreadGroupsEdit extends Component {
       this.props.dispatch(storeRemove(model, index))
     })
   }
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     this.onMount(props)
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.onMount(this.props)
   }
 

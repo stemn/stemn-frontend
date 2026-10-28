@@ -4,7 +4,7 @@ import HeroBanner from 'modules/HeroBanner'
 import DownloadButton from 'stemn-shared/misc/DesktopReleases/DownloadButton'
 import bytes from 'stemn-shared/utils/filters/bytes.js'
 import { Container } from 'stemn-shared/misc/Layout'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 import moment from 'moment'
 

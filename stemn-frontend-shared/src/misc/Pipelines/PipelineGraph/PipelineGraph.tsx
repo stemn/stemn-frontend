@@ -53,7 +53,7 @@ export class PipelineGraphComponent extends React.Component<IPipelineGraphProps,
       diagramEngine,
     }
   }
-  public componentWillReceiveProps (nextProps: IPipelineGraphProps) {
+  public UNSAFE_componentWillReceiveProps (nextProps: IPipelineGraphProps) {
     const { diagramEngine } = this.state
     const nextModel = get(nextProps, 'diagram.model')
     const currentModel = get(this.props, 'diagram.model')

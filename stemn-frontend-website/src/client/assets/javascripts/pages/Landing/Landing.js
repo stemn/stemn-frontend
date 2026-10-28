@@ -2,7 +2,7 @@ import cn from 'classnames';
 import LandingLayout from 'layout/LandingLayout';
 import HeroBanner from 'modules/HeroBanner';
 import React, { Component } from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { MdInput as MdLock } from 'react-icons/md';
 import vidDemo from 'static/video/demo.mp4';
 import Button from 'stemn-shared/misc/Buttons/Button/Button';

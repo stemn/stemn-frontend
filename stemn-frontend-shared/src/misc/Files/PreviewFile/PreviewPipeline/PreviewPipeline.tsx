@@ -13,8 +13,8 @@ export interface IPreviewPipelineProps {
 }
 
 export class PreviewPipeline extends React.Component<IPreviewPipelineProps> {
-  public componentWillMount () { this.onMount(this.props) }
-  public componentWillReceiveProps (nextProps: IPreviewPipelineProps) { this.onMount(nextProps, this.props) }
+  public UNSAFE_componentWillMount () { this.onMount(this.props) }
+  public UNSAFE_componentWillReceiveProps (nextProps: IPreviewPipelineProps) { this.onMount(nextProps, this.props) }
   public onMount = (nextProps: IPreviewPipelineProps, prevProps?: IPreviewPipelineProps) => {
     // If the previewId changes, download a new file
     if (!prevProps || nextProps.previewId !== prevProps.previewId) {

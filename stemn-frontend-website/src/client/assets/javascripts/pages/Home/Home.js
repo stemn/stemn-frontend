@@ -8,7 +8,7 @@ import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import Pagination from 'stemn-shared/misc/Pagination'
 import Link from 'stemn-shared/misc/Router/Link'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
 

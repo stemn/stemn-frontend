@@ -23,7 +23,7 @@ const getMentionsFromObject = (mentionsObject, threads) => Object.keys(mentionsO
 const countMentions = (mentions, type) => values(mentions).filter(mentionType => mentionType === type).length
 
 export default class ThreadMentionModal extends Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (!this.props.board || !this.props.board.data) {
       this.props.getBoards({
         projectId: this.props.projectId,

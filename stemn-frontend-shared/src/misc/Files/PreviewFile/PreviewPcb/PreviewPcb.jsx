@@ -7,7 +7,7 @@ export default class PreviewPcb extends Component {
   componentDidMount() {
     this.onMount(this.props)
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.onMount(nextProps, this.props)
   }
   onMount = (nextProps, prevProps) => {

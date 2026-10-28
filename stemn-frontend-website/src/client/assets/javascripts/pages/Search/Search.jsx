@@ -6,7 +6,7 @@ import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import Tabs from 'stemn-shared/misc/Tabs/Tabs'
 import Link from 'stemn-shared/misc/Router/Link'
 import { SiteSearchResultsContainer } from 'stemn-shared/misc/Search/SiteSearchResults'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import classes from './Search.scss'
 
 export default class Search extends Component {

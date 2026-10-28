@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import EmailAndNotificationToggles from 'stemn-shared/misc/UserSettings/EmailAndNotificationToggles'
 
 class SettingsEmails extends Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.props.getSettings()
   }
   render() {

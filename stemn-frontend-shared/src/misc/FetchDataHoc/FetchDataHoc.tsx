@@ -14,7 +14,7 @@ const fetchDataHoc = (configs: IFetchDataHocConfig[]) => (WrappedComponent) => c
   public componentDidMount () {
     this.mount(this.props, {}, true)
   }
-  public componentWillReceiveProps (nextProps) {
+  public UNSAFE_componentWillReceiveProps (nextProps) {
     this.mount(nextProps, this.props, false)
   }
   // Unmount

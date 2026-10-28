@@ -23,7 +23,7 @@ export default class PopoverFit extends Component {
       })
     }
   }
-  componentWillReceiveProps() {
+  UNSAFE_componentWillReceiveProps() {
     this.setWidth()
   }
   render() {

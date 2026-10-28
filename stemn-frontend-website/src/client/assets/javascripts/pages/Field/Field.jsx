@@ -3,7 +3,7 @@ import SubHeader from 'modules/SubHeader'
 import StandardLayout from 'layout/StandardLayout'
 import { Container } from 'stemn-shared/misc/Layout'
 import { has, get } from 'lodash'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 export default class Field extends Component {
   render() {

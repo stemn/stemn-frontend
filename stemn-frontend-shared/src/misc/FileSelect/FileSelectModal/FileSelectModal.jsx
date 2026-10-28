@@ -22,8 +22,8 @@ const propTypesObject = {
 
 export default class FileSelectModal extends React.Component {
   static propTypes = propTypesObject;
-  componentWillMount() { this.onMount(this.props) }
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+  UNSAFE_componentWillMount() { this.onMount(this.props) }
+  UNSAFE_componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
 
   onMount = (nextProps, prevProps) => {
     if (!nextProps.fileSelect) {

@@ -69,7 +69,7 @@ export default class SocialButton extends Component {
     status: PropTypes.bool.isRequired,
   }
 
-  componentWillMount = () => {
+  UNSAFE_componentWillMount = () => {
     const { checkStatus, entityId, entityType, type } = this.props
     checkStatus({
       entityId,

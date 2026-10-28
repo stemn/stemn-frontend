@@ -55,7 +55,7 @@ export default class EditorMentions extends Component {
     const { codemirror } = this.props
     this.convertMentions(codemirror)
   }
-  componentWillReceiveProps() {
+  UNSAFE_componentWillReceiveProps() {
     const { codemirror } = this.props
     if (codemirror) {
       this.getCaretPosition()

@@ -43,7 +43,7 @@ export class Component extends React.Component {
     this.setState({ value: newValue })
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     // Update the internal state if it differs from the redux state
     if (nextProps.value !== this.state.value) {
       this.setState({ value: nextProps.value })
@@ -52,14 +52,14 @@ export class Component extends React.Component {
 
   componentDidMount() {
     if (this.props.autoFocus) {
-      setTimeout(() => this.refs.input.focus(), 1)
+      setTimeout(() => this.inputRef.focus(), 1)
     }
   }
 
   render() {
     const otherProps = omit(this.props, ['dispatch', 'model', 'value', 'changeAction'])
     const { value } = this.state
-    return <input ref="input" onChange={ this.onChange } value={ value } { ...otherProps } />
+    return <input ref={ (el) => { this.inputRef = el } } onChange={ this.onChange } value={ value } { ...otherProps } />
   }
 }
 

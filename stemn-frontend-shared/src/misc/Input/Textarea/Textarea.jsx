@@ -10,7 +10,7 @@ class Component extends React.Component {
       value: props.value,
     }
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     // Update the internal state if it differs from the redux state
     if (nextProps.value !== this.state.value) {
       this.setState({

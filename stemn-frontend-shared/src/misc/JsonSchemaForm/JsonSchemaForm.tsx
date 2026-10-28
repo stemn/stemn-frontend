@@ -18,7 +18,7 @@ export class JsonSchemaForm<T> extends React.Component<FormProps<T> & ISchemaFor
     uiSchema: {},
   }
 
-  public componentWillMount () {
+  public UNSAFE_componentWillMount () {
 
     const { newSchema, newUiSchema } = fixFormatFields(this.props.schema, this.props.uiSchema)
 

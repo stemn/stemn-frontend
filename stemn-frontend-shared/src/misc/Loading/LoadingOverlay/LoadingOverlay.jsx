@@ -22,7 +22,7 @@ const propTypesObject = {
 export default class LoadingOverlay extends React.Component {
   static propTypes = propTypesObject;
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const prevProps = this.props
     // If we just began loading:
     if (nextProps.show && (!prevProps || !prevProps.show)) {

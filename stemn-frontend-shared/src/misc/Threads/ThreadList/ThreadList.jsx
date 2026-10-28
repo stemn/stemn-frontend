@@ -31,7 +31,7 @@ export class NewItem extends React.Component {
 }
 
 export class ThreadList extends React.Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.props.joinRoom({
       room: this.props.board.data._id,
       type: 'board',

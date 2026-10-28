@@ -20,7 +20,7 @@ export default class PreviewCadLoader extends Component {
       otherLoaded: false,
     }
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     const { loadCode, systemImport, otherModules, cacheKey } = this.props
     const wrappedSystemImport = systemImport().then((response) => {
       this.LoadedComponent = response.default

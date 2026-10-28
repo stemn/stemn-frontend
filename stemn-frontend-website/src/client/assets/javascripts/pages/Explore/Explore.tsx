@@ -3,7 +3,7 @@ import { getEntries as getEntriesType } from 'modules/Contentful/Contentful.acti
 import { IContentfulContentPageExplore } from 'modules/Contentful/types'
 import SubHeader from 'modules/SubHeader'
 import * as React from 'react'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import { replace as replaceType } from 'stemn-shared/routing'
 import { Col, Container, Row } from 'stemn-shared/misc/Layout'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'

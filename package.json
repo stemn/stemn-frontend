@@ -27,17 +27,11 @@
   },
   "homepage": "https://github.com/stemn/stemn-frontend#readme",
   "overrides": {
-    "mrblenny-storm-react-diagrams": {
-      "react": "19.3.1",
-      "react-dom": "19.3.1"
-    },
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
     "redux-form": {
-      "react": "19.3.1",
       "react-redux": "9.3.1",
       "redux": "5.0.1"
-    },
-    "react-waypoint": {
-      "react": "19.3.1"
     }
   }
 }

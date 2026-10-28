@@ -11,7 +11,7 @@ class AutodeskLocalViewer extends Component {
       if (this.viewer && this.viewer.deregister) {
         this.viewer.deregister()
       }
-      this.viewer = autodeskViewerUtils.register(this.refs.cadCanvas, nextProps.linkKey)
+      this.viewer = autodeskViewerUtils.register(this.cadCanvasRef, nextProps.linkKey)
       const filePath = `${nextProps.path}/1/model.svf`
       const filePathWithProtocol = filePath.startsWith('http') ? filePath : `${filePath}`
 
@@ -38,12 +38,12 @@ class AutodeskLocalViewer extends Component {
     }
   }
   componentDidMount() { this.onMount(this.props) }
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+  UNSAFE_componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
   componentWillUnmount() {
     this.viewer.deregister()
   }
   render() {
-    return <div className={ `${classes.preview} flex rel-box` } ref="cadCanvas"><div className={ classes.scrollOverlay } /></div>
+    return <div className={ `${classes.preview} flex rel-box` } ref={ (el) => { this.cadCanvasRef = el } }><div className={ classes.scrollOverlay } /></div>
   }
 }
 

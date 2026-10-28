@@ -1,4 +1,3 @@
-import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 import { saveFile } from '../Files.actions'
 import React, { Component } from 'react'
@@ -8,7 +7,7 @@ import { getDownloadUrl } from '../utils'
 class DownloadFile extends Component {
   saveFile = () => {
     const { file, fileUrl, saveFile } = this.props
-    const anchorEl = ReactDOM.findDOMNode(this.anchorRef)
+    const anchorEl = this.anchorRef
     // If we dont have a href attribute, we run the saveFile function
     // If we do, the click action will have already started downloading via the html5 download api
     // This second method will only work on desktop

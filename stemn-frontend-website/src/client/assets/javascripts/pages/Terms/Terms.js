@@ -3,7 +3,7 @@ import StandardLayout from 'layout/StandardLayout'
 
 import classes from 'layout/layout.css'
 import Link from 'stemn-shared/misc/Router/Link'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 export default class Terms extends Component {
   render() {

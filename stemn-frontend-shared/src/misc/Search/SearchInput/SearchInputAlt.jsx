@@ -75,7 +75,7 @@ export default class EditorNew extends Component {
   componentDidMount() {
     setInterval(this.convertQueryStrings, 1000)
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     // Update the internal state if it differs from the redux state
     //    this.convertQueryStrings(codemirror)
     if (nextProps.value !== this.state.value) {

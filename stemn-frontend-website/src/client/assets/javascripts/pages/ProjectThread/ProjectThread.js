@@ -29,7 +29,7 @@ import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList'
 import SocialButton from 'stemn-shared/misc/Social/SocialButton'
 import { permissionsIsMin } from 'stemn-shared/misc/Auth/Auth.utils'
 import { get, has } from 'lodash'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import { projectThreadsRoute, notFound } from 'route-actions'
 
 export default class ProjectThread extends Component {

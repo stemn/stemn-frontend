@@ -27,7 +27,7 @@ export default class Form extends Component {
     model: PropTypes.string.isRequired,
     value: PropTypes.any.isRequired,
   }
-  componentWillMount() { 
+  UNSAFE_componentWillMount() { 
     this.props.load(this.props.model, this.props.value)
   }
   render() {

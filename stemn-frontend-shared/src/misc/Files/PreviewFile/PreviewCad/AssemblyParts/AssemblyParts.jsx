@@ -51,7 +51,7 @@ export class AssemblyParts extends React.Component {
   };
 
   componentDidMount() { this.onMount(this.props) }
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+  UNSAFE_componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
 
   render() {
     const { parts, assemblies, clickFn, fileMeta } = this.props

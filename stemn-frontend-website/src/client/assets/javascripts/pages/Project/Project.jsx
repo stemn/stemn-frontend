@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import StandardLayout from 'layout/StandardLayout'
 import Tabs from 'stemn-shared/misc/Tabs/Tabs'
 import { get, has } from 'lodash'

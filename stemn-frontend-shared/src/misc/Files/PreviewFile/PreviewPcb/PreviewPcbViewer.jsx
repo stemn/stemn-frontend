@@ -11,7 +11,7 @@ export default class PreviewPcbViewer extends Component {
   }
   viewerInstance = null
   componentDidMount() { this.onMount(this.props) }
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+  UNSAFE_componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
   onMount = (nextProps, prevProps) => {
     if (!prevProps || (nextProps.layers !== prevProps.layers)) {
       setTimeout(this.init(nextProps), 1) // Timeout so refs can init
@@ -43,7 +43,7 @@ export default class PreviewPcbViewer extends Component {
         parsedLayers.push(backLayer)
       }
 
-      this.viewerInstance.init(parsedLayers, this.refs.canvas, activeInstances)
+      this.viewerInstance.init(parsedLayers, this.canvasRef, activeInstances)
       // Flip the board if we only have bottom layers
       if (!find(parsedLayers, 'side', 2)) {
         this.flip(true)
@@ -60,7 +60,7 @@ export default class PreviewPcbViewer extends Component {
     })
   }
   render() {
-    return <div ref="canvas" className={ `${classes.canvas} layout-column flex` } />
+    return <div ref={ (el) => { this.canvasRef = el } } className={ `${classes.canvas} layout-column flex` } />
   }
 }
 

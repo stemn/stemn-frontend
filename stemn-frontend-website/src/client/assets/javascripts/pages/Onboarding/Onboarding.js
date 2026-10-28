@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { ArrowTabs, ArrowTab } from 'stemn-shared/misc/Tabs/ArrowTabs/ArrowTabs.jsx'
 import { Container } from 'stemn-shared/misc/Layout'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import classes from './Onboarding.scss'
 import cn from 'classnames'
 

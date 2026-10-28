@@ -11,10 +11,10 @@ export class AnimateSvg extends React.Component {
   render() {
     const { children, draw } = this.props
     const newProps = {
-      ref: 'svg',
+      ref: (el) => { this.svgRef = el },
     }
-    if (!this.svgEl && this.refs.svg) {
-      this.svgEl = new SVGEl(this.refs.svg)
+    if (!this.svgEl && this.svgRef) {
+      this.svgEl = new SVGEl(this.svgRef)
     }
     if (this.svgEl) {
       this.svgEl.draw(draw)
@@ -31,7 +31,7 @@ export default class Progressbutton extends React.Component {
     drawSuccess: 0,
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const prevProps = this.props
 
     // If we just began loading:

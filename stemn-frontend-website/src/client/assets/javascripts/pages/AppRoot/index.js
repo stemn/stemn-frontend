@@ -39,7 +39,7 @@ export default class LoginContainer extends Component {
       getToken(query.id)
     }
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.goSomewhere(nextProps)
   }
   componentDidMount() {

@@ -4,7 +4,7 @@ import NavPillContainer from 'stemn-shared/misc/Buttons/NavPillContainer'
 import StandardLayout from 'layout/StandardLayout'
 import UserNavHeader from 'modules/UserNavHeader'
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 class Settings extends Component {
   render() {
