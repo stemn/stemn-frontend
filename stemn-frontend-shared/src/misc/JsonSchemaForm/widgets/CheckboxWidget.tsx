@@ -1,5 +1,4 @@
 
-import * as React from 'react'
 import { WidgetProps } from '@rjsf/utils'
 import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox'
 

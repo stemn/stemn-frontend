@@ -1,5 +1,4 @@
 import cn from 'classnames'
-import * as React from 'react'
 import { IStep } from 'stemn-shared/misc/Pipelines/PipelineGraph/types'
 import s from './PipelineGraphSidebarWidget.scss'
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import AutosuggestHighlight from 'autosuggest-highlight'
+import match from 'autosuggest-highlight/match'
+import parse from 'autosuggest-highlight/parse'
 
 export default class Highlight extends Component {
   static propTypes = {
@@ -19,8 +20,8 @@ export default class Highlight extends Component {
   
   render() {
     const { text, query, hightlightClass, ...otherProps } = this.props
-    const matches = AutosuggestHighlight.match(text, query)
-    const parts = AutosuggestHighlight.parse(text, matches)
+    const matches = match(text, query)
+    const parts = parse(text, matches)
     
     return (
       <span { ...otherProps }>

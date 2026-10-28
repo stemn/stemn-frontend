@@ -1,4 +1,3 @@
-import { findDOMNode } from 'react-dom'
 import { throttle } from 'lodash'
 
 const throttleModelUpdate = throttle(throttledFn => throttledFn(), 100, {
@@ -9,7 +8,8 @@ const throttleModelUpdate = throttle(throttledFn => throttledFn(), 100, {
 let endDragProps = {}
 const beginDragProps = {}
 
-export const cardHover = (props, monitor, component) => {
+// `node` is the DOM node of the hovered item
+export const cardHover = (props, monitor, node) => {
   const dragIndex = monitor.getItem().index
   const dragId = monitor.getItem().id
 
@@ -21,8 +21,12 @@ export const cardHover = (props, monitor, component) => {
     return
   }
 
+  if (!node) {
+    return
+  }
+
   // Determine rectangle on screen
-  const hoverBoundingRect = findDOMNode(component).getBoundingClientRect()
+  const hoverBoundingRect = node.getBoundingClientRect()
 
   // Get vertical middle
   const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
@@ -70,9 +74,9 @@ export const cardHover = (props, monitor, component) => {
   monitor.getItem().index = hoverIndex
 }
 
-export const cardDrop = (props, monitor, component) => {}
+export const cardDrop = (props, monitor) => {}
 
-export const beginDrag = (props, monitor, component) => {
+export const beginDrag = (props) => {
   props.beginDrag(props.id)
 
   beginDragProps.id = props.id

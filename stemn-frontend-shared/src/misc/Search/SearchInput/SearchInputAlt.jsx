@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import CodeMirror from 'react-codemirror'
+import CodeMirror from 'stemn-shared/misc/CodeMirror'
 import classes from './SearchInput.css'
 import cn from 'classnames'
 import 'codemirror/addon/display/placeholder'
@@ -73,7 +73,10 @@ export default class EditorNew extends Component {
     }
   }
   componentDidMount() {
-    setInterval(this.convertQueryStrings, 1000)
+    this.convertInterval = setInterval(this.convertQueryStrings, 1000)
+  }
+  componentWillUnmount() {
+    clearInterval(this.convertInterval)
   }
   UNSAFE_componentWillReceiveProps(nextProps) {
     // Update the internal state if it differs from the redux state

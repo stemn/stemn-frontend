@@ -1,29 +1,26 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { useRef } from 'react'
+import { useDrop } from 'react-dnd'
 import classes from './EmptyWrapped.css'
 
 import { emptyHover } from './ThreadListItem.drag.config.js'
-import { DragSource, DropTarget } from 'react-dnd'
 
 const ItemTypes = {
   CARD: 'card',
 }
 
-const cardTarget = {
-  hover: emptyHover,
-}
+export default function EmptyWrapped(props) {
+  const { layout } = props
 
-@DropTarget(ItemTypes.CARD, cardTarget, connect => ({
-  connectDropTarget: connect.dropTarget(),
-}))
-export default class EmptyWrapped extends Component {
-  static propTypes = {
-    connectDropTarget: PropTypes.func.isRequired,
-  };
-  render() {
-    const { item, connectDropTarget, groupId, style, layout } = this.props
-    return connectDropTarget(
-      <div className={ layout === 'board' ? classes.wrapperBoard : classes.wrapperList } />,
-    )
-  }
+  // Keep the latest props available to the (memoized) drop spec
+  const propsRef = useRef(props)
+  propsRef.current = props
+
+  const [, connectDropTarget] = useDrop({
+    accept: ItemTypes.CARD,
+    hover: (item, monitor) => emptyHover(propsRef.current, monitor),
+  })
+
+  return (
+    <div ref={ connectDropTarget } className={ layout === 'board' ? classes.wrapperBoard : classes.wrapperList } />
+  )
 }

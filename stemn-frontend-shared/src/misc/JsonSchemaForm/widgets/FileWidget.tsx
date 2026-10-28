@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { WidgetProps } from '@rjsf/utils'
 
 import Upload from 'stemn-shared/misc/Upload/Upload'

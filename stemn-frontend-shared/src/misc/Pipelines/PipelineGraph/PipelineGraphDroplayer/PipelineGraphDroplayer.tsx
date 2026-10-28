@@ -8,7 +8,7 @@ import {
 
 export interface IPipelineGraphDroplayerProps {
   diagramId: string,
-  children: JSX.Element,
+  children: React.ReactNode,
   addStep: typeof addStepType,
   selectStep: typeof selectStepType,
   diagramEngine: DiagramEngine,

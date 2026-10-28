@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { WidgetProps } from '@rjsf/utils'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 

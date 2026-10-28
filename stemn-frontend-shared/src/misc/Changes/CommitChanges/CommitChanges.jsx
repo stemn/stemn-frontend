@@ -1,5 +1,5 @@
 import React from 'react'
-import { ContextMenuTrigger } from 'react-contextmenu'
+import { ContextMenuTrigger } from 'stemn-shared/misc/ContextMenu/ContextMenu.jsx'
 import FileChangeRow from './FileChangeRow'
 import FileChangeTitleRow from './FileChangeTitleRow'
 import FileChangeMenu from './FileChange.menu.js'

@@ -122,7 +122,7 @@ export default class Popover extends Component {
 
   render() {
     const { preferPlace, trigger, tipSize, offset, inheritIsOpen } = this.props
-    const children = React.Children.toArray(this.props.children)
+    const children = Array.isArray(this.props.children) ? this.props.children : [this.props.children]
     const { isOpen } = this.state
 
     // Get the event bind props

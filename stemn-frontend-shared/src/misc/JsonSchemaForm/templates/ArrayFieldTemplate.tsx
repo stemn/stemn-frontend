@@ -1,5 +1,4 @@
 import { ArrayFieldItemTemplateProps, ArrayFieldTemplateProps } from '@rjsf/utils'
-import * as React from 'react'
 
 import { MdAdd } from 'react-icons/md'
 import { MdClose } from 'react-icons/md'

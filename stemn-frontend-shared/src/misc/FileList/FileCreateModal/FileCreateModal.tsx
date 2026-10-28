@@ -9,7 +9,6 @@
 // import * as classes from '../ProjectNewModal/ProjectNewModal.scss'
 import cn from 'classnames'
 import * as React from 'react'
-import { ImageFile } from 'react-dropzone'
 import { Field, Form, InjectedFormProps } from 'redux-form'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 import { FormDropdown, FormInput, FormUpload } from 'stemn-shared/misc/Input'
@@ -36,7 +35,7 @@ export interface IFileCreateModalComponentProps extends InjectedFormProps {
 interface IFormData {
   fileName: string,
   fileType: string,
-  uploads: ImageFile[]
+  uploads: File[]
 }
 
 export class FileCreateModalComponent extends React.Component<IFileCreateModalComponentProps> {
@@ -50,7 +49,7 @@ export class FileCreateModalComponent extends React.Component<IFileCreateModalCo
       file: 'some data',
     })
   }
-  public onDrop = (files: ImageFile[]) => {
+  public onDrop = (files: File[]) => {
     const { change } = this.props
     change('loading', true)
   }

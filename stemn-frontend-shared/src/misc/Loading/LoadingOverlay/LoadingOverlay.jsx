@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { CSSTransitionGroup } from 'react-transition-group'
+import { CSSTransition } from 'react-transition-group'
 import LoadingSpinner from 'stemn-shared/misc/Loading/LoadingSpinner/LoadingSpinner'
 import LoadingLinear  from 'stemn-shared/misc/Loading/LoadingLinear/LoadingLinear.jsx'
 import classes from './LoadingOverlay.css'
@@ -21,6 +21,8 @@ const propTypesObject = {
 
 export default class LoadingOverlay extends React.Component {
   static propTypes = propTypesObject;
+
+  overlayRef = React.createRef()
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     const prevProps = this.props
@@ -48,8 +50,8 @@ export default class LoadingOverlay extends React.Component {
     const transitionName = {
       enter: classes.enter,
       enterActive: classes.enterActive,
-      leave: classes.leave,
-      leaveActive: classes.leaveActive,
+      exit: classes.leave,
+      exitActive: classes.leaveActive,
       appear: classes.appear,
       appearActive: classes.appearActive,
     }
@@ -66,25 +68,25 @@ export default class LoadingOverlay extends React.Component {
     const allStyles = Object.assign({}, backgroundStyles, noOverlayStyles, style)
 
     return (
-      <CSSTransitionGroup
-        transitionName={ transitionName }
-        transitionAppear
-        transitionAppearTimeout={ 300 }
-        transitionEnterTimeout={ 300 }
-        transitionLeaveTimeout={ 300 }
+      <CSSTransition
+        in={ !!show }
+        nodeRef={ this.overlayRef }
+        classNames={ transitionName }
+        timeout={ 300 }
+        appear
+        mountOnEnter
+        unmountOnExit
       >
-        { show
-          ? <div className={ cn(classes.loadingOverlay, hideBg ? '' : classes.bgWhite) } style={ allStyles }>
-            { linear
-              ? <LoadingLinear />
-              : <div className={ classes.loaderContainer }>
-                <LoadingSpinner size={ size } progress={ progress } />
-                {children ? <div className={ classes.text }>{children}</div> : null}
-              </div>
-            }
-          </div>
-          : null }
-      </CSSTransitionGroup>
+        <div ref={ this.overlayRef } className={ cn(classes.loadingOverlay, hideBg ? '' : classes.bgWhite) } style={ allStyles }>
+          { linear
+            ? <LoadingLinear />
+            : <div className={ classes.loaderContainer }>
+              <LoadingSpinner size={ size } progress={ progress } />
+              {children ? <div className={ classes.text }>{children}</div> : null}
+            </div>
+          }
+        </div>
+      </CSSTransition>
     )
   }
 }

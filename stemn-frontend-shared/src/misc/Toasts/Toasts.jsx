@@ -1,14 +1,24 @@
 import { connect } from 'react-redux'
-import { CSSTransitionGroup } from 'react-transition-group'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import * as ToastsActions from './Toasts.actions.js'
 import React from 'react'
 import { MdError } from 'react-icons/md'
 import { MdClose } from 'react-icons/md'
 import cn from 'classnames'
 
+// css-loader emits ES modules - require() returns { default: classes }
 const classes = GLOBAL_ENV.APP_TYPE === 'web'
-  ? require('./Toasts.web.css')
-  : require('./Toasts.desktop.css')
+  ? require('./Toasts.web.css').default
+  : require('./Toasts.desktop.css').default
+
+const transitionClassNames = {
+  enter: classes.enter,
+  enterActive: classes.enterActive,
+  exit: classes.leave,
+  exitActive: classes.leaveActive,
+  appear: classes.appear,
+  appearActive: classes.appearActive,
+}
 
 class Toast extends React.Component {
   hideTimeout = null;
@@ -24,6 +34,10 @@ class Toast extends React.Component {
   startHideTimeout = () => {
     this.hideTimeout = setTimeout(this.closeToast, 5000)
   };
+
+  componentWillUnmount() {
+    clearTimeout(this.hideTimeout)
+  }
 
   closeToast = () => {
     this.props.dispatch(ToastsActions.hide({ id: this.props.toast.id }))
@@ -67,7 +81,7 @@ class Toast extends React.Component {
     }
 
     return (
-      <div className={ cn(classes.toast, 'layout-row', { [classes.error]: toast.type === 'error' }) } onMouseEnter={ this.mouseEnter } onMouseLeave={ this.mouseLeave }>
+      <div ref={ this.props.nodeRef } className={ cn(classes.toast, 'layout-row', { [classes.error]: toast.type === 'error' }) } onMouseEnter={ this.mouseEnter } onMouseLeave={ this.mouseLeave }>
         <div className={ `${classes.toastInner} flex layout-row layout-align-start-center` }>
           {getIcon()}
           {toast.title}
@@ -80,36 +94,35 @@ class Toast extends React.Component {
   }
 }
 
+// TransitionGroup injects the transition props (in, onExited, ...) into this component
+const ToastTransition = ({ toast, dispatch, ...transitionProps }) => {
+  const nodeRef = React.useRef(null)
+  return (
+    <CSSTransition
+      { ...transitionProps }
+      nodeRef={ nodeRef }
+      classNames={ transitionClassNames }
+      timeout={ 300 }
+    >
+      <Toast nodeRef={ nodeRef } toast={ toast } dispatch={ dispatch } />
+    </CSSTransition>
+  )
+}
 
 export class Component extends React.Component {
   render() {
     const { toasts, dispatch } = this.props
 
-    const transitionName = {
-      enter: classes.enter,
-      enterActive: classes.enterActive,
-      leave: classes.leave,
-      leaveActive: classes.leaveActive,
-      appear: classes.appear,
-      appearActive: classes.appearActive,
-    }
-
     const hasToasts = toasts && toasts.stack && toasts.stack.length > 0
 
     return (
       <div className={ classes.toastContainer }>
-        <CSSTransitionGroup
-          transitionName={ transitionName }
-          transitionAppear
-          transitionAppearTimeout={ 300 }
-          transitionEnterTimeout={ 300 }
-          transitionLeaveTimeout={ 300 }
-        >
+        <TransitionGroup component="span" appear>
           { hasToasts
-            ? toasts.stack.map(toast => <Toast key={ toast.id } toast={ toast } dispatch={ dispatch } />)
+            ? toasts.stack.map(toast => <ToastTransition key={ toast.id } toast={ toast } dispatch={ dispatch } />)
             : null
           }
-        </CSSTransitionGroup>
+        </TransitionGroup>
       </div>
     )
   }
