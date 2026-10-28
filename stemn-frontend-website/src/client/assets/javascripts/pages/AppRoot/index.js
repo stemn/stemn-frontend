@@ -40,7 +40,16 @@ export default class LoginContainer extends Component {
     }
   }
   UNSAFE_componentWillReceiveProps(nextProps) {
-    this.goSomewhere(nextProps)
+    // Only redirect when something relevant changed. Navigations to lazy routes are
+    // async, so redirecting on every update would re-trigger while one is pending.
+    const prev = this.props
+    if (
+      nextProps.isLoggedIn !== prev.isLoggedIn ||
+      nextProps.userSettingsMessages.onboarding !== prev.userSettingsMessages.onboarding ||
+      nextProps.location.pathname !== prev.location.pathname
+    ) {
+      this.goSomewhere(nextProps)
+    }
   }
   componentDidMount() {
     this.goSomewhere(this.props)

@@ -15,7 +15,9 @@ const dispatchToProps = {
 @connect(stateToProps, dispatchToProps)
 export default class LoginContainer extends Component {
   UNSAFE_componentWillReceiveProps(nextProps) {
-    this.onMount(nextProps)
+    if (nextProps.authToken !== this.props.authToken || nextProps.userId !== this.props.userId) {
+      this.onMount(nextProps)
+    }
   }
   componentDidMount() {
     this.onMount(this.props)

@@ -4,6 +4,31 @@ import { toRouterPath } from './query'
 /** Minimal interface of the react-router data router we drive */
 export interface INavigator {
   navigate: (to: any, opts?: any) => any,
+  state?: any,
+}
+
+const toHref = (to: any) => (typeof to === 'string'
+  ? to
+  : `${to.pathname || ''}${to.search || ''}${to.hash || ''}`)
+
+const locationHref = (location: any) => location && `${location.pathname}${location.search || ''}${location.hash || ''}`
+
+/**
+ * react-router v3 navigated synchronously, so components that redirect from
+ * componentWillReceiveProps (e.g. AppUnAuthed -> replace('/')) unmounted straight away.
+ * Data router navigations to lazy routes are async and re-render the current
+ * route while pending, which would re-dispatch the same redirect forever
+ * (each navigate() cancels the previous one). Skip navigations that are
+ * already pending, or replaces to the current location.
+ */
+const isDuplicate = (router: INavigator, to: any, replace: boolean) => {
+  const state = router.state
+  if (!state) return false
+  const href = toHref(to)
+  if (state.navigation && state.navigation.state !== 'idle' && locationHref(state.navigation.location) === href) {
+    return true
+  }
+  return replace && (!state.navigation || state.navigation.state === 'idle') && locationHref(state.location) === href
 }
 
 let currentRouter: INavigator | undefined
@@ -24,6 +49,9 @@ function run({ method, args }: { method: string, args: any[] }) {
     case 'push':
     case 'replace': {
       const { to, state } = toRouterPath(args[0])
+      if (isDuplicate(router, to, method === 'replace')) {
+        return undefined
+      }
       return router.navigate(to, { replace: method === 'replace', state })
     }
     case 'go':

@@ -1,4 +1,5 @@
 import http from 'axios'
+import { legacyParamsSerializer } from 'stemn-shared/utils/legacyParamsSerializer'
 
 export default (store) => {
   // Setup the http interceptor
@@ -15,4 +16,6 @@ export default (store) => {
     return config
   })
   http.defaults.baseURL = `${GLOBAL_ENV.API_SERVER}/`
+  // Keep the axios 0.x query string format the API was written against
+  http.defaults.paramsSerializer = { serialize: legacyParamsSerializer }
 }

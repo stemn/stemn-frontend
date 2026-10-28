@@ -41,6 +41,8 @@ export default ({ dispatch }) => {
 
   return [{
     ...sync(AppRoot),
+    // Rendered while the first (lazy) route chunk loads; the index.html spinner covers it
+    HydrateFallback: () => null,
     children: [{
       ...sync(AppAuthed),
       children: [{
