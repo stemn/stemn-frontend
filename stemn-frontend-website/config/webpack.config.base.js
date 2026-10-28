@@ -108,7 +108,8 @@ module.exports = ({ mode, styleLoader, refresh = false }) => {
               presets: [
                 [require.resolve('@babel/preset-env'), { targets: 'defaults' }],
                 [require.resolve('@babel/preset-react'), { runtime: 'automatic', development: isDev }],
-                require.resolve('@babel/preset-typescript'),
+                // Babel 8 defaults to only removing `import type`; elide unused (type-only) imports like tsc does
+                [require.resolve('@babel/preset-typescript'), { onlyRemoveTypeImports: false }],
               ],
               plugins: [
                 // `@connect(...)` class decorators are used throughout the codebase

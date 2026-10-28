@@ -1,7 +1,7 @@
-import * as cn from 'classnames'
+import cn from 'classnames'
 import * as React from 'react'
 import { IStep } from 'stemn-shared/misc/Pipelines/PipelineGraph/types'
-import * as s from './PipelineGraphSidebarWidget.scss'
+import s from './PipelineGraphSidebarWidget.scss'
 
 export interface IPipelineGraphSidebarWidgetProps {
   step: IStep,

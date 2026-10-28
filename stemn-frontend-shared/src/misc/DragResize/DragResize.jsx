@@ -1,6 +1,6 @@
 
 import React from 'react'
-import clickDrag from 'react-clickdrag'
+import clickDrag from 'stemn-shared/misc/ClickDrag'
 
 // Styles
 import cn from 'classnames'

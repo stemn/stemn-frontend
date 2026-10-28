@@ -1,4 +1,4 @@
-import * as cn from 'classnames'
+import cn from 'classnames'
 import { get } from 'lodash'
 import * as React from 'react'
 import DragResize from 'stemn-shared/misc/DragResize/DragResize'
@@ -9,7 +9,7 @@ import { FileCompareMenu } from 'stemn-shared/misc/FileCompare/FileCompareMenu'
 import Timeline from 'stemn-shared/misc/Timeline/Timeline.jsx'
 import TogglePanel from 'stemn-shared/misc/TogglePanel/TogglePanel.jsx'
 import { dispatchToProps, IFileCompareContainerProps } from './FileCompare.container'
-import * as classes from './FileCompare.scss'
+import classes from './FileCompare.scss'
 
 export interface IFileCompareComponentProps extends IFileCompareContainerProps {
   fetchTimeline: typeof dispatchToProps['fetchTimeline'],

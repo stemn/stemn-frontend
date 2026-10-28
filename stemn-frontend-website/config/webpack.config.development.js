@@ -4,7 +4,7 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 const base = require('./webpack.config.base')
 
 const assetsRoot = join(__dirname, '../src/client/assets')
-const port = Number(process.env.PORT) || 8080
+const port = Number(process.env.PORT) || 8081
 // React Fast Refresh only when running under `webpack serve`
 const refresh = Boolean(process.env.WEBPACK_SERVE)
 

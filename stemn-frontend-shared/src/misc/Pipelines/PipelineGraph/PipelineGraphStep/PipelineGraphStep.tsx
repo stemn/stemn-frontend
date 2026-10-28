@@ -1,4 +1,4 @@
-import * as cn from 'classnames'
+import cn from 'classnames'
 import { capitalize, flow, lowerCase } from 'lodash/fp'
 import { mapObjIndexed, pipe, values } from 'ramda'
 import * as React from 'react'
@@ -8,7 +8,7 @@ import { PipelineGraphPorts } from 'stemn-shared/misc/Pipelines/PipelineGraph/Pi
 import { PipelineGraphStepModel } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphStep'
 import { IStep } from 'stemn-shared/misc/Pipelines/PipelineGraph/types'
 import SimpleTable from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable.jsx'
-import * as s from './PipelineGraphStep.scss'
+import s from './PipelineGraphStep.scss'
 
 const prettyKey = flow(lowerCase, capitalize)
 

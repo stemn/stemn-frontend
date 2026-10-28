@@ -1,6 +1,6 @@
-import * as cn from 'classnames'
+import cn from 'classnames'
 import { get } from 'lodash'
-import * as moment from 'moment'
+import moment from 'moment'
 import * as React from 'react'
 import { Helmet } from 'react-helmet-async'
 import { MdClose } from 'react-icons/md'
@@ -21,7 +21,7 @@ import SimpleTable from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable'
 import Timeline from 'stemn-shared/misc/Timeline/Timeline'
 import SectionTitle from 'stemn-shared/misc/Titles/SectionTitle/SectionTitle'
 import { dispatchToProps } from './File.container'
-import * as classes from './File.scss'
+import classes from './File.scss'
 
 export interface IFileComponentState {
   isOpen: boolean,

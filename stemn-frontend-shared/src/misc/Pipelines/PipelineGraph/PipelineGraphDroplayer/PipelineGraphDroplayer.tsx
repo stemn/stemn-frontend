@@ -1,4 +1,4 @@
-import * as cn from 'classnames'
+import cn from 'classnames'
 import { DiagramEngine } from 'mrblenny-storm-react-diagrams'
 import * as React from 'react'
 import {

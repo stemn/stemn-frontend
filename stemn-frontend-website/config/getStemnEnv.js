@@ -6,7 +6,7 @@ const stemnEnvs = {
   },
   local: {
     API_SERVER: 'http://localhost:3000',
-    WEBSITE_URL: 'http://localhost:8080',
+    WEBSITE_URL: 'http://localhost:8081',
     WEBSOCKET_SERVER: 'http://localhost:8000',
   },
   staging: {

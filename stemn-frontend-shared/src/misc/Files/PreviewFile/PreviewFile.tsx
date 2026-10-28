@@ -8,7 +8,7 @@ import { isAssembly } from './PreviewCad/PreviewCad.utils.js';
 import PreviewCadLoader from './PreviewCadLoader';
 import PreviewCode from './PreviewCode';
 import { dispatchToProps, IPreviewFileContainerProps } from './PreviewFile.container';
-import * as classes from './PreviewFile.scss';
+import classes from './PreviewFile.scss';
 import { getViewerType } from './PreviewFile.utils';
 import PreviewGdoc from './PreviewGdoc/PreviewGdoc';
 import PreviewGoogle from './PreviewGoogle/PreviewGoogle';

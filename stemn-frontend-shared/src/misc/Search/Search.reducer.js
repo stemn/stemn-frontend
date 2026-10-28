@@ -1,9 +1,9 @@
 import i from 'icepick'
-import qs from 'querystring'
+import { parseQuery } from 'stemn-shared/routing/query'
 
 const initialState = {
   query: typeof window !== 'undefined'
-    ? qs.parse(window.location.search.substring(1)).q
+    ? parseQuery(window.location.search).q
     : '',   // If this is used in electron, window.location will not exist.
   data: {
     /** ******************************

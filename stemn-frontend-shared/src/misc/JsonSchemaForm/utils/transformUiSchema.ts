@@ -1,4 +1,4 @@
-import { JSONSchema6 } from 'json-schema'
+import type { RJSFSchema } from '@rjsf/utils'
 import { cloneDeep } from 'lodash'
 
 const formats = ['password', 'textarea']
@@ -38,10 +38,16 @@ const buildNestedObject = (path: string, object: any): any => {
   return currentRef
 }
 
-export const fixFormatFields = (schema: JSONSchema6, uiSchema: any = {}) => {
+export const fixFormatFields = (schema: RJSFSchema, uiSchema: any = {}) => {
 
-  const newSchema: JSONSchema6 = cloneDeep(schema)
+  const newSchema: RJSFSchema = cloneDeep(schema)
   const newUiSchema: any = cloneDeep(uiSchema)
+
+  // Our schemas declare draft-06, which the ajv8 validator does not register by default
+  // (it would throw "no schema with key or ref"). Drop it and validate with ajv's default draft.
+  if (newSchema && typeof newSchema.$schema === 'string' && newSchema.$schema.includes('draft-06')) {
+    delete newSchema.$schema
+  }
 
   const traverse = (object: any, ui: any, path: string = '') => {
 

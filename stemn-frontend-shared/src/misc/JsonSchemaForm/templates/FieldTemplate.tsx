@@ -1,45 +1,68 @@
-import * as cn from 'classnames'
+import { FieldTemplateProps } from '@rjsf/utils'
+import cn from 'classnames'
 import * as React from 'react'
-import { FieldTemplateProps } from 'react-jsonschema-form'
-import { CSSTransitionGroup } from 'react-transition-group'
-import * as s from '../JsonSchemaForm.scss'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
+import s from '../JsonSchemaForm.scss'
+
+const transitionClassNames = {
+  enter: s.enter,
+  enterActive: s.enterActive,
+  exit: s.leave,
+  exitActive: s.leaveActive,
+  appear: s.appear,
+  appearActive: s.appearActive,
+}
+
+const transitionTimeout = 300
+
+/**
+ * Wraps a single element in a CSSTransition with its own nodeRef
+ * (React 19 has no findDOMNode, so react-transition-group needs a ref).
+ * TransitionGroup injects the `in`/`onExited` props into this component.
+ */
+const Fade = ({ children, ...transitionProps }: { children: React.ReactElement<any>, [key: string]: any }) => {
+  const nodeRef = React.useRef<HTMLElement>(null)
+  return (
+    <CSSTransition
+      {...transitionProps}
+      nodeRef={nodeRef}
+      classNames={transitionClassNames}
+      timeout={transitionTimeout}
+    >
+      {React.cloneElement(children, { ref: nodeRef })}
+    </CSSTransition>
+  )
+}
 
 export const FieldTemplate = (props: FieldTemplateProps) => {
-  const { id, classNames, label, required, rawErrors, rawHelp, children } = props
+  const { id, classNames, label, required, rawErrors, rawHelp, children, hidden } = props
+
+  if (hidden) {
+    return <div className='hidden'>{children}</div>
+  }
 
   const header = `${label} ${required ? '*' : ''}`
   const hasErrors = rawErrors && rawErrors.length > 0
 
-  const errorTransition = {
-    transitionName: {
-      enter: s.enter,
-      enterActive: s.enterActive,
-      leave: s.leave,
-      leaveActive: s.leaveActive,
-      appear: s.appear,
-      appearActive: s.appearActive,
-    },
-    transitionAppear: true,
-    transitionAppearTimeout: 300 ,
-    transitionEnterTimeout: 300 ,
-    transitionLeaveTimeout: 300,
-  }
-
   return (
     <div className={cn(classNames, s.main)}>
 
-      <CSSTransitionGroup {...errorTransition}>
+      <Fade in={true} appear={true}>
         <h3 className={cn(s.main, s.header, { [s.warn] : hasErrors })}> {header} </h3>
-      </CSSTransitionGroup>
+      </Fade>
 
       {children}
 
-      <CSSTransitionGroup {...errorTransition} >
+      <TransitionGroup component={null}>
         { hasErrors
-          ? rawErrors.map((error, idx) => (<div key={`${id}.${idx}`} className={cn(s.message, s.error)}> {error} </div>))
+          ? rawErrors.map((error, idx) => (
+            <Fade key={`${id}.${idx}`}>
+              <div className={cn(s.message, s.error)}> {error} </div>
+            </Fade>
+          ))
           : null
         }
-      </CSSTransitionGroup>
+      </TransitionGroup>
 
       <div className={s.message}>
         {rawHelp}

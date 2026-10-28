@@ -1,6 +1,6 @@
-import { FieldTemplateProps, WidgetProps } from 'react-jsonschema-form'
+import { WidgetProps } from '@rjsf/utils'
 import { InputField } from 'stemn-shared/misc/JsonSchemaForm/widgets/InputFields/Input'
 
-export const TextWidget = (props: WidgetProps & FieldTemplateProps) => {
+export const TextWidget = (props: WidgetProps) => {
   return InputField(props, 'text')
 }

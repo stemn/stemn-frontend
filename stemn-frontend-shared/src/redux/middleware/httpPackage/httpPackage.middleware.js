@@ -39,7 +39,7 @@ class DeferredPromise {
 
 import i from 'icepick'
 import http from 'axios'
-import qs from 'querystring'
+import { stringifyQuery } from 'stemn-shared/routing/query'
 
 const requests = {}        // This is where the packages are temporarily stored
 const promises = {}        // This is where the promises are temporarily stored
@@ -141,7 +141,7 @@ export default store => next => (action) => {
     const { dispatch } = store
 
     // unique key by which to identify packaged actions
-    const endpoint = `${url}?${qs.stringify(staticParams)}`
+    const endpoint = `${url}${stringifyQuery(staticParams) || '?'}`
 
     if (!promises.endpont) {
       promises[endpoint] = new DeferredPromise()

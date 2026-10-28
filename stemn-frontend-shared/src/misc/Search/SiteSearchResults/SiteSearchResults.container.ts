@@ -56,4 +56,4 @@ const fetchConfigs = [{
 export const SiteSearchResultsContainer = compose(
   connect(stateToProps, dispatchToProps),
   fetchDataHoc(fetchConfigs),
-)(SiteSearchResults) as React.SFC<ISiteSearchResultsContainerProps>
+)(SiteSearchResults) as React.FC<ISiteSearchResultsContainerProps>

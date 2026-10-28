@@ -1,5 +1,4 @@
 import 'styles/global/index.global.scss'
-import 'katex/dist/katex.min.css'
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter } from 'react-router'

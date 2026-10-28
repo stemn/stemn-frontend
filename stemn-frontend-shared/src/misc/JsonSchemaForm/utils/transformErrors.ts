@@ -1,4 +1,4 @@
-import { AjvError } from 'react-jsonschema-form'
+import { RJSFValidationError } from '@rjsf/utils'
 
 const messages: any = {
   email: 'Please enter a valid email',
@@ -6,16 +6,17 @@ const messages: any = {
   required: 'This is a required field',
 }
 
-export const transformErrors = (errors: AjvError[]): AjvError[] => {
+export const transformErrors = (errors: RJSFValidationError[]): RJSFValidationError[] => {
 
   return errors.map((error) => {
+    const params = error.params || {}
 
-    if (error.params.format) {
-      error.message = messages[error.params.format]
+    if (params.format) {
+      error.message = messages[params.format] || error.message
     }
 
-    if (error.params.limit) {
-      error.message = messages.limit(error.params.limit)
+    if (params.limit) {
+      error.message = messages.limit(params.limit)
     }
 
     if (error.name === 'required') {

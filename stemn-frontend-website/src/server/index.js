@@ -4,7 +4,7 @@ const { resolve } = require('path')
 
 const app = express()
 const root = resolve(__dirname, '../client')
-const port = Number(process.env.PORT) || 8080
+const port = Number(process.env.PORT) || 8081
 
 app.use(morgan('dev'))
 app.get('/api/ping', (req, res) => res.json({}))

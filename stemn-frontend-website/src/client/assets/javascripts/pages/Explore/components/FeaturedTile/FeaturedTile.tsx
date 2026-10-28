@@ -1,7 +1,6 @@
-import * as cn from 'classnames'
-import * as React from 'react'
+import cn from 'classnames'
 import { Link } from 'stemn-shared/routing'
-import * as s from './FeaturedTile.scss'
+import s from './FeaturedTile.scss'
 
 export interface IFeaturedTileProps {
   title: string,

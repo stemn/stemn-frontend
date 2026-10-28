@@ -1,4 +1,4 @@
-import * as cn from 'classnames'
+import cn from 'classnames'
 import { cloneDeep } from 'lodash'
 import * as React from 'react'
 import Dropzone, { ImageFile } from 'react-dropzone'

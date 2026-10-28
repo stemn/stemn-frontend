@@ -1,5 +1,5 @@
-import * as cn from 'classnames'
-import { safeLoad } from 'js-yaml'
+import cn from 'classnames'
+import { load } from 'js-yaml'
 import { forEach, get, isEqual, values } from 'lodash'
 import { BaseAction,	DiagramEngine, DiagramModel, DiagramWidget } from 'mrblenny-storm-react-diagrams'
 import * as React from 'react'
@@ -13,7 +13,7 @@ import { PipelineGraphStepModel } from 'stemn-shared/misc/Pipelines/PipelineGrap
 import { IPipelineConfig, IStep } from 'stemn-shared/misc/Pipelines/PipelineGraph/types'
 import { createDiagramEngine, deserializePipeline, serializePipeline } from 'stemn-shared/misc/Pipelines/PipelineGraph/utils'
 import './PipelineGraph.global.scss'
-import * as s from './PipelineGraph.scss'
+import s from './PipelineGraph.scss'
 
 export interface IPipelineGraphProps {
   diagramId: string,
@@ -45,7 +45,7 @@ export class PipelineGraphComponent extends React.Component<IPipelineGraphProps,
     const diagramEngine = createDiagramEngine(steps)
     const pipelineConfigJson = typeof pipelineConfig === 'object'
       ? pipelineConfig
-      : safeLoad(pipelineConfig)
+      : load(pipelineConfig)
 
     initialiseModel({ diagramId, model: pipelineConfigJson })
 

@@ -1,4 +1,4 @@
-import * as cn from 'classnames'
+import cn from 'classnames'
 import * as React from 'react'
 import { MdCode } from 'react-icons/md'
 import { MdMoreHoriz } from 'react-icons/md'

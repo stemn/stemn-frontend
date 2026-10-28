@@ -14,7 +14,7 @@ import cn from 'classnames'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import { MdClose } from 'react-icons/md'
 import { MdAdd } from 'react-icons/md'
-import FlipMove from 'react-flip-move/dist/react-flip-move.js'
+import FlipMove from 'stemn-shared/misc/FlipMove'
 import getUuid from 'stemn-shared/utils/getUuid.js'
 
 @connect()

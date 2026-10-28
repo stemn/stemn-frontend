@@ -1,13 +1,13 @@
-import * as cn from 'classnames'
-import * as moment from 'moment'
+import cn from 'classnames'
+import moment from 'moment'
 import * as React from 'react'
 import LoadingAnimation from 'stemn-shared/misc/Loading/LoadingAnimation'
 import LoadingPlaceholder from 'stemn-shared/misc/Loading/LoadingPlaceholder'
 import { ProjectInfoIcons } from 'stemn-shared/misc/Projects/ProjectInfoIcons'
 import { IProject } from 'stemn-shared/misc/Projects/types'
-import * as Link from 'stemn-shared/misc/Router/Link'
+import Link from 'stemn-shared/misc/Router/Link'
 import SocialButton from 'stemn-shared/misc/Social/SocialButton'
-import * as classes from './ProjectRow.scss'
+import classes from './ProjectRow.scss'
 
 export interface IProjectRowProps {
   project: {

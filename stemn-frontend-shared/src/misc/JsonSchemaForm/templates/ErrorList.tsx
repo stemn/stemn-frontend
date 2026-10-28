@@ -1,5 +1,5 @@
-import { AjvError } from 'react-jsonschema-form'
+import { ErrorListProps } from '@rjsf/utils'
 
-export const ErrorList = ({ errors }: { errors: AjvError[] }) => {
+export const ErrorList = (props: ErrorListProps) => {
   return null
 }

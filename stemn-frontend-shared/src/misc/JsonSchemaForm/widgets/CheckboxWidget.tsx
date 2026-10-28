@@ -1,9 +1,9 @@
 
 import * as React from 'react'
-import { FieldTemplateProps, WidgetProps } from 'react-jsonschema-form'
+import { WidgetProps } from '@rjsf/utils'
 import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox'
 
-export const CheckboxWidget = (props: WidgetProps & FieldTemplateProps) => {
+export const CheckboxWidget = (props: WidgetProps) => {
 
   const { schema, value } = props
 
