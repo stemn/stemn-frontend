@@ -22,7 +22,7 @@ export const FeaturedTile = ({ title, description, link, image }: IFeaturedTileP
     <CmsLink className={s.tile} link={link}>
       <div className={s.image} style={{ backgroundImage:  `url(${image})` }}/>
       <div className={s.content}>
-        <a className={cn('link-primary', s.title)}>{title}</a>
+        <span className={cn('link-primary', s.title)}>{title}</span>
         <div className={s.blurb}>{description}</div>
       </div>
     </CmsLink>

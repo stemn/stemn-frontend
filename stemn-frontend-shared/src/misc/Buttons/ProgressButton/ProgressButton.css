@@ -1,4 +1,4 @@
-@value primary-bg, primary-bg-hover, primary, primary-2, warn, warn-2 from "theme";
+@value primary-bg, primary-bg-hover, primary, primary-2, warn as themeWarn, warn-2 from "theme";
 
 .progressButton {
   position: relative;
@@ -8,8 +8,8 @@
 }
 
 .progressButton:global(.warn) button{
-  background: warn;
-  border: 1px solid warn;
+  background: themeWarn;
+  border: 1px solid themeWarn;
   color: white;
 }
 .progressButton:global(.warn) button:hover{
@@ -118,8 +118,8 @@
 }
 
 .error.progressButton button {
-  border-color: warn;
-  background-color: warn;
+  border-color: themeWarn;
+  background-color: themeWarn;
 }
 
 .loading.progressButton svg.progressCircle path{

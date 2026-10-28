@@ -1,4 +1,4 @@
-@value primary, primary-2, secondary, secondary-2, warn, warn-2, grey-3, bg1, linkedin, linkedin-dark, facebook, facebook-dark from 'theme';
+@value primary as themePrimary, primary-2, secondary, secondary-2, warn as themeWarn, warn-2, grey-3, bg1, linkedin, linkedin-dark, facebook, facebook-dark from 'theme';
 
 .button {
   border-radius: 50%;
@@ -10,7 +10,7 @@
 }
 
 .button:global(.primary){
-  background: primary;
+  background: themePrimary;
   color: white;
 }
 .button:global(.primary):hover{
@@ -18,7 +18,7 @@
 }
 
 .button:global(.warn){
-  background: warn;
+  background: themeWarn;
   color: white;
 }
 .button:global(.warn):hover{

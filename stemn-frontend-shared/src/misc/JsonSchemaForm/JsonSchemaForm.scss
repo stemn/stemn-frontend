@@ -1,4 +1,4 @@
-@value warn from 'theme';
+@value warn as themeWarn from 'theme';
 
 .main {
   margin-top: 10px;
@@ -9,7 +9,7 @@
   padding: 0px;
   &.warn {
     font-weight: bold;
-    color: warn;
+    color: themeWarn;
   }
 }
 
@@ -19,11 +19,11 @@
 }
 
 .error {
-  color: warn;
+  color: themeWarn;
 }
 
 .errorBox {
-  border: 1px solid warn;
+  border: 1px solid themeWarn;
 }
 
 .enter, .appear{

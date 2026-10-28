@@ -12,14 +12,22 @@ const fileTypeIconsDir = join(sharedRoot, 'src/misc/FileList/filetype')
 // CSS convention (carried over from the webpack 2 config):
 //  - `*.global.(css|scss)` files are always plain global CSS
 //  - every other css/scss file in these directories is a CSS module
-//  - anything else (e.g. node_modules css) is plain global CSS
+//  - anything else (e.g. node_modules css, and the shared global stylesheets in
+//    stemn-shared/assets/css that index.global.scss @imports) is global CSS
+// css-loader resolves every @import as its own module, so the mode must be decided per file.
+// All files still go through css-loader's modules pipeline in `global` mode so that
+// `@value x from "theme"` keeps working in global stylesheets.
 const cssModuleDirs = [
   join(assetsRoot, 'javascripts'),
   join(assetsRoot, 'styles/modules'),
   sharedRoot,
 ].map(dir => dir + sep)
+const globalCssDirs = [
+  join(sharedRoot, 'src/assets/css'),
+].map(dir => dir + sep)
 const isCssModule = resourcePath => !/\.global\.(css|scss)$/.test(resourcePath)
   && cssModuleDirs.some(dir => resourcePath.startsWith(dir))
+  && !globalCssDirs.some(dir => resourcePath.startsWith(dir))
 
 module.exports = ({ mode, styleLoader, refresh = false }) => {
   const isDev = mode === 'development'
@@ -33,7 +41,8 @@ module.exports = ({ mode, styleLoader, refresh = false }) => {
         importLoaders: 2,
         sourceMap: isDev,
         modules: {
-          auto: isCssModule,
+          auto: () => true,
+          mode: resourcePath => (isCssModule(resourcePath) ? 'local' : 'global'),
           localIdentName: '[name]_[local]-[hash:base64:5]',
           namedExport: false,
           exportLocalsConvention: 'as-is',

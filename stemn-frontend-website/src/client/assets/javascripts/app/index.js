@@ -27,7 +27,18 @@ const hideSpinner = () => {
   setTimeout(() => spinnerEl.remove(), 300)
 }
 
-(async () => {
+// API failures surface as rejected redux-promise-middleware promises that callers
+// often don't catch. The rejected actions are already in the store (and toasted),
+// so just log them instead of reporting uncaught exceptions.
+window.addEventListener('unhandledrejection', (event) => {
+  const reason = event.reason
+  if (reason && reason.isAxiosError) {
+    event.preventDefault()
+    console.warn(`API request failed: ${reason.config && reason.config.method} ${reason.config && reason.config.url} - ${reason.message}`)
+  }
+})
+
+;(async () => {
   const store = configureStore()
   // Wait for the persisted auth state (token + user) before anything reads it
   await waitForRehydration(store)
