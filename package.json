@@ -32,6 +32,10 @@
     "redux-form": {
       "react-redux": "9.3.1",
       "redux": "5.0.1"
+    },
+    "katex": "0.19.1",
+    "ansi-to-react": {
+      "linkify-it": "5.0.2"
     }
   }
 }
