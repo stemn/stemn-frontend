@@ -5,7 +5,7 @@ import { getPipelines } from 'stemn-shared/misc/Pipelines/Pipelines.actions'
 import ProjectPipelines from './ProjectPipelines'
 import { setFilter } from 'stemn-shared/misc/StringFilter/StringFilter.actions'
 import { getFilter } from 'stemn-shared/misc/StringFilter/StringFilter.utils'
-import { get, isEqual } from 'lodash'
+import { isEqual } from 'lodash'
 
 const stateToProps = ({ projects, pipelines, stringFilter }, { params, location }) => {
   const page = location.query.page || 1

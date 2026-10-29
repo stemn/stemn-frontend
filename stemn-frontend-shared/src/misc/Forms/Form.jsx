@@ -10,7 +10,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { storeLoad } from 'stemn-shared/misc/Store/Store.actions'
-import { get } from 'lodash'
 
 const stateToProps = () => ({})
 

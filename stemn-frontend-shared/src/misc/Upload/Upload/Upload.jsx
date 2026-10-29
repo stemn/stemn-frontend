@@ -20,9 +20,6 @@ export default class Upload extends Component {
     upload: PropTypes.func.isRequired,
     change: PropTypes.func.isRequired,
   }
-  dropStyle = {
-    minHeight: '50px',
-  }
 
   dropActiveStyle = {
     outline: '4px solid #82c382',

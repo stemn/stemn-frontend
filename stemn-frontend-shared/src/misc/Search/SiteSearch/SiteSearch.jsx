@@ -18,8 +18,7 @@ export default class SiteSearch extends Component {
 
     const onSubmit = (event) => {
       event.preventDefault()
-      if (location.pathname.includes('search')) {
-      } else {
+      if (!location.pathname.includes('search')) {
         push(route)
       }
     }

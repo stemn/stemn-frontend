@@ -83,8 +83,8 @@ class Component extends React.Component {
 
         // These are reversed because they go left to right (not right to left like the other items)
         return (
-          <Popover preferPlace={preferPlace || 'below'} trigger="hoverSingleDelay" tipSize={6}>
-            <div key={item._id} className={cn(classes.dotGroup, 'layout-row layout-align-center-center')}>
+          <Popover key={item._id} preferPlace={preferPlace || 'below'} trigger="hoverSingleDelay" tipSize={6}>
+            <div className={cn(classes.dotGroup, 'layout-row layout-align-center-center')}>
               {subItemsOrdered.map((subItem) => (
                 <Dot
                   key={subItem._id}

@@ -193,9 +193,8 @@ const mainReducer = (state, action) => {
 
 function getLocationIndex(groups, id) {
   // This will return the group and thread index inside the structure object.
-  let groupIndex = null
   let threadIndex = null
-  groupIndex = groups.findIndex((group, groupIndex) => {
+  const groupIndex = groups.findIndex((group, groupIndex) => {
     const foundThreadIndex = group.threads.findIndex((threadId) => threadId === id)
     // If the thread index is found, we return it
     if (foundThreadIndex !== -1) {
@@ -229,10 +228,6 @@ function moveGroup(groups, fromIndex, toIndex) {
   const t = cloneItems.splice(fromIndex, 1)[0]
   cloneItems.splice(toIndex, 0, t)
   return cloneItems
-}
-
-function addItem(keyItems, item) {
-  return [].concat(keyItems, [item])
 }
 
 export default function (state = initialState, action) {

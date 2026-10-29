@@ -16,7 +16,7 @@ export default class SidebarTimelineRow extends React.Component {
   }
 
   toggle = (toState) => {
-    this.setState({ isOpen: toState === null ? !this.state.isOpen : toState })
+    this.setState((state) => ({ isOpen: toState === null ? !state.isOpen : toState }))
   }
 
   render() {

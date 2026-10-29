@@ -43,11 +43,7 @@ export const setActiveProject =
 
 export const getProject =
   ({ projectId, size = 'lg', force }) =>
-  (dispatch, getState) => {
-    const project = getState().projects[projectId]
-
-    const existingSize = project ? project.dataSize : undefined
-
+  (dispatch) => {
     // if (shouldDownload(size, existingSize) || force) {
     return dispatch({
       type: 'PROJECTS/GET_PROJECT',

@@ -1,19 +1,9 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+
 import cn from 'classnames'
 import { Link } from 'stemn-shared/routing'
 
 import { isActive, getRoutePath } from './Link.utils'
-
-const propTypesObject = {
-  children: PropTypes.node, // Child element
-  name: PropTypes.string, // Router path name, eg -> 'userRoute'
-  params: PropTypes.object, // Query param object
-  activeIf: PropTypes.object, // Object user to determine if the link is active
-  // Functions used in desktop
-  closeAll: PropTypes.func,
-  showWindow: PropTypes.func,
-}
 
 const LinkComponent = (props) => {
   const {
@@ -111,7 +101,5 @@ const LinkComponent = (props) => {
   }
   return <a className={allClassNames} onClick={extendedOnClick} {...otherProps} />
 }
-
-// LinkComponent.propTypes = propTypesObject
 
 export default LinkComponent

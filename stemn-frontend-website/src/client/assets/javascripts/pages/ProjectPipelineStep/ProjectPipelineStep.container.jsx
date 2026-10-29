@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { getPipeline, joinStepRoom, leaveStepRoom } from 'stemn-shared/misc/Pipelines/Pipelines.actions'
 import ProjectPipelineStep from './ProjectPipelineStep'
-import { has } from 'lodash'
 
 const stateToProps = ({ projects, pipelines }, { params }) => {
   const projectId = params.stub

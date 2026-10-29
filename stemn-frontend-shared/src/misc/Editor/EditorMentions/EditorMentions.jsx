@@ -80,7 +80,7 @@ export default class EditorMentions extends Component {
         const newMentionEl = document.createElement('span')
         newMentionEl.className = classes.mention
         newMentionEl.innerHTML = `${mentionInfo.display}`
-        const mentionEl = codemirror.markText(mention.from, mention.to, {
+        codemirror.markText(mention.from, mention.to, {
           replacedWith: newMentionEl,
           atomic: true,
         })

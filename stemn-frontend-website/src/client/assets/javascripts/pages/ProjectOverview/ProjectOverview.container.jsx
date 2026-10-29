@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
-import { bindActionCreators } from 'redux'
 import { push as pushRoute } from 'stemn-shared/routing'
 import { saveProject } from 'stemn-shared/misc/Projects/Projects.actions'
 import ProjectOverview from './ProjectOverview'

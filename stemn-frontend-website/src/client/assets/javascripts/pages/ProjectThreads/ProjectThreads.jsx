@@ -72,47 +72,6 @@ export default class ProjectThreads extends Component {
     const isLoaded = threads && threads.data && board && board.data
     const hasResults = threads && threads.data && threads.data.length > 0
 
-    const userFilterOptions = [
-      ...get(project, 'data.team', []).map((user) => ({
-        name: user.name,
-        value: user._id,
-        onClick: () => {
-          this.changeUserFilter(user._id)
-        },
-      })),
-      {
-        name: 'Any',
-        value: undefined,
-        onClick: () => {
-          this.changeUserFilter(undefined)
-        },
-      },
-    ]
-
-    const openFilterOptions = [
-      {
-        value: undefined,
-        name: 'Any',
-        onClick: () => {
-          this.changeOpenFilter(undefined)
-        },
-      },
-      {
-        value: 'open',
-        name: 'Open',
-        onClick: () => {
-          this.changeOpenFilter('open')
-        },
-      },
-      {
-        value: 'closed',
-        name: 'Closed',
-        onClick: () => {
-          this.changeOpenFilter('closed')
-        },
-      },
-    ]
-
     return (
       <div>
         <SubSubHeader>
@@ -184,7 +143,12 @@ export default class ProjectThreads extends Component {
                         <AccordianAnimate duration={300} itemHeight={66} items={threads.data}>
                           <FlipMove duration={300} enterAnimation="fade" leaveAnimation="fade">
                             {threads.data.map((thread) => (
-                              <ThreadRow board={board} threadId={thread._id} className={classes.thread} />
+                              <ThreadRow
+                                key={thread._id}
+                                board={board}
+                                threadId={thread._id}
+                                className={classes.thread}
+                              />
                             ))}
                           </FlipMove>
                         </AccordianAnimate>

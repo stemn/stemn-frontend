@@ -73,7 +73,7 @@ class Page extends React.Component {
   textLayer = undefined
 
   _renderPage = (page) => {
-    const { scale, index } = this.props
+    const { scale } = this.props
     this.viewport = page.getViewport({ scale })
     const { width, height } = this.viewport
     const canvas = this.canvasRef

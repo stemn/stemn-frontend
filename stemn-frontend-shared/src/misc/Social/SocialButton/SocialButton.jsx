@@ -28,6 +28,7 @@ const getText = (type, entityType, status) => {
 
 const getTooltip = (type, entityType, status) => {
   if (type === 'like') {
+    // No tooltip for likes
   } else if (type === 'follow' && entityType === 'thread') {
     return 'Subscribe to notifications'
   } else if (type === 'follow') {

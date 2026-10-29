@@ -37,9 +37,9 @@ class Component extends React.Component {
 
   scroll = (direction) => {
     if (direction === 'left') {
-      this.setState({ page: this.state.page + 1 })
+      this.setState((state) => ({ page: state.page + 1 }))
     } else if (direction === 'right' && this.state.page > 0) {
-      this.setState({ page: this.state.page - 1 })
+      this.setState((state) => ({ page: state.page - 1 }))
     }
   }
 

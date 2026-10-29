@@ -50,7 +50,7 @@ class Component extends React.Component {
         </PopoverDropdown>
         <br />
         {value.map((user, idx) => (
-          <UserMinimalRow user={user} noLink>
+          <UserMinimalRow key={user._id} user={user} noLink>
             <a onClick={() => this.remove(idx)}>
               <MdClose />
             </a>

@@ -102,7 +102,11 @@ export default class ProjectPipelineStep extends Component {
                       <td>Command:</td>
                       <td>
                         {Array.isArray(step.data.command) ? (
-                          step.data.command.map((command) => <code className={classes.code}>{command}</code>)
+                          step.data.command.map((command, index) => (
+                            <code key={index} className={classes.code}>
+                              {command}
+                            </code>
+                          ))
                         ) : (
                           <code className={classes.code}>{step.data.command}</code>
                         )}

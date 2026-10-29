@@ -51,7 +51,7 @@ export const fixFormatFields = (schema: RJSFSchema, uiSchema: any = {}) => {
       return
     }
 
-    if (object.hasOwnProperty('properties')) {
+    if (Object.hasOwn(object, 'properties')) {
       const subObject = object.properties
 
       const keys = Object.keys(subObject)
@@ -67,7 +67,7 @@ export const fixFormatFields = (schema: RJSFSchema, uiSchema: any = {}) => {
     // build the schema object
     const ref = buildNestedObject(path, ui)
 
-    if (object.hasOwnProperty('format') && formats.includes(object.format)) {
+    if (Object.hasOwn(object, 'format') && formats.includes(object.format)) {
       // change the widget for that object so that it displays as wanted
       ref['ui:widget'] = object.format
 
@@ -75,7 +75,7 @@ export const fixFormatFields = (schema: RJSFSchema, uiSchema: any = {}) => {
       delete object.format
     }
 
-    if (object.hasOwnProperty('help')) {
+    if (Object.hasOwn(object, 'help')) {
       ref['ui:help'] = object.help
       delete object.help
     }

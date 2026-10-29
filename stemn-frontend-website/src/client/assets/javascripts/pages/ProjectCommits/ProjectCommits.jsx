@@ -94,7 +94,6 @@ export default class ProjectCommits extends Component {
   render() {
     const { project, syncTimeline, filter } = this.props
     const isLoaded = syncTimeline && syncTimeline.data
-    const isLoading = !syncTimeline || syncTimeline.loading
     const team = get(project, 'data.team', [])
 
     const userFilterOptions = team.map((user) => ({

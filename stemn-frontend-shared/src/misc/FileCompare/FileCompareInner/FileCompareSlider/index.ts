@@ -1,1 +1,1 @@
-export * from './FileCompareSlider'
+export { default } from './FileCompareSlider'

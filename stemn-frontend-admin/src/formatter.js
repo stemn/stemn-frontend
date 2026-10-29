@@ -2,8 +2,6 @@ const Promise = require('bluebird')
 const flatten = require('lodash.flatten')
 const groupby = require('lodash.groupby')
 const compact = require('lodash.compact')
-const uniq = require('lodash.uniqwith')
-const util = require('util')
 const fs = require('fs')
 
 const readdir = Promise.promisify(fs.readdir)

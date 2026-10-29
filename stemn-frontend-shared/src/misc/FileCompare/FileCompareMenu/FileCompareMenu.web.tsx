@@ -43,6 +43,7 @@ export class FileCompareMenuComponent extends React.Component<IFileCompareMenuCo
 
     const previewType = getViewerType(file1.name, file1.provider)
     const compareModes = getCompareModes(previewType, previewType)
+    // eslint-disable-next-line @eslint-react/static-components -- getCompareIcon looks up a module-level icon component by mode; nothing is created during render
     const CompareIcon = getCompareIcon(mode)
     const hasRevisions = (revisions && revisions.length > 1) || (file1 && file2)
     const isMarkdown = file1.extension === 'md'
@@ -57,6 +58,7 @@ export class FileCompareMenuComponent extends React.Component<IFileCompareMenuCo
         {hasRevisions && (
           <Popover preferPlace="below" offset={9}>
             <SimpleIconButton title="Compare">
+              {/* eslint-disable-next-line @eslint-react/static-components -- CompareIcon is a module-level icon component looked up by mode, not created here */}
               <CompareIcon size={20} />
             </SimpleIconButton>
             <div className="PopoverMenu">

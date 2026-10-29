@@ -25,7 +25,7 @@ import Landing from 'pages/Landing'
 
 const sync = (Component) => ({ Component: withRouteProps(Component) })
 
-export default ({ dispatch }) => {
+function createRoutes({ dispatch }) {
   // Lazy (code split) route. Shows the route loading bar if the chunk takes > 1s.
   const lazy = (importPage) => ({
     lazy: () => {
@@ -154,3 +154,5 @@ export default ({ dispatch }) => {
     },
   ]
 }
+
+export default createRoutes

@@ -46,9 +46,9 @@ export class FileComponent extends React.Component<IFileComponentProps, IFileCom
     isOpen: false,
   }
   public toggleOpen = () => {
-    this.setState({
-      isOpen: !this.state.isOpen,
-    })
+    this.setState((state) => ({
+      isOpen: !state.isOpen,
+    }))
   }
   public componentDidMount = () => {
     document.body.style.overflowY = 'hidden'

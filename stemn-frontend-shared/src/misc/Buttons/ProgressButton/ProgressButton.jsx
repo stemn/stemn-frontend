@@ -171,10 +171,9 @@ function SVGEl(el) {
 }
 
 SVGEl.prototype._init = function () {
-  const self = this
   this.paths.forEach((path, i) => {
-    self.pathsArr[i] = path
-    path.style.strokeDasharray = self.lengthsArr[i] = path.getTotalLength()
+    this.pathsArr[i] = path
+    path.style.strokeDasharray = this.lengthsArr[i] = path.getTotalLength()
   })
   // undraw stroke
   this.draw(0)

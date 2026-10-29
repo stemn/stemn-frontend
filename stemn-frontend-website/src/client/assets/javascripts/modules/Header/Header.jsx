@@ -24,9 +24,9 @@ export default class Header extends Component {
     }
   }
   toggleOpen = () => {
-    this.setState({
-      isOpen: !this.state.isOpen,
-    })
+    this.setState((state) => ({
+      isOpen: !state.isOpen,
+    }))
   }
   isLoggedIn() {
     const { auth, logout, newProject, numNotifications } = this.props

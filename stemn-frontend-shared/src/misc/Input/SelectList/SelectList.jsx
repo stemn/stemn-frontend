@@ -6,11 +6,11 @@ import styles from './SelectList.module.css'
 
 export default class SelectList extends React.Component {
   render() {
-    const id = Math.random().toString(36).substring(7)
     return (
       <div className={styles.selectList}>
         {this.props.children.map((child) => (
           <div
+            key={child.props.value}
             className={cn(styles.selectItem, 'layout-row layout-align-start-center', {
               [styles.selectItemActive]: child.props.value === this.props.value,
             })}

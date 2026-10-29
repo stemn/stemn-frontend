@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { getProject } from 'stemn-shared/misc/Projects/Projects.actions'
 import { joinRoom, leaveRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'

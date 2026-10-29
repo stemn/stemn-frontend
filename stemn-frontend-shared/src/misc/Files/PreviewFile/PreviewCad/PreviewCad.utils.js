@@ -2,13 +2,12 @@ import { viewerFileTypes } from '../PreviewFile.utils'
 
 export const isWebGlSupported = (return_context) => {
   if (window.WebGLRenderingContext) {
-    let canvas = document.createElement('canvas'),
-      names = ['webgl', 'experimental-webgl', 'moz-webgl', 'webkit-3d'],
-      context = false
+    const canvas = document.createElement('canvas')
+    const names = ['webgl', 'experimental-webgl', 'moz-webgl', 'webkit-3d']
 
     for (let i = 0; i < 4; i++) {
       try {
-        context = canvas.getContext(names[i])
+        const context = canvas.getContext(names[i])
         if (context && typeof context.getParameter === 'function') {
           // WebGL is enabled
           if (return_context) {

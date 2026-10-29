@@ -10,7 +10,6 @@ import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
 const eventTextMap = {
   uncompleted: (item, type, entity) => {
     const project = get(item, 'data.project')
-    const commit = get(item, 'data.commit')
     const thread = get(item, 'data.thread')
 
     const params = {

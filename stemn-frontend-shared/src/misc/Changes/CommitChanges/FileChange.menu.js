@@ -2,12 +2,6 @@ import * as SystemActions from 'stemn-shared/desktop/System/System.actions.js'
 import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js'
 
 export default (dispatch) => {
-  const discardChanges = {
-    label: 'Discard Changes',
-    onClick: (item) => {
-      console.log(item)
-    },
-  }
   const openFile = {
     label: 'Open File',
     onClick: (item) => {

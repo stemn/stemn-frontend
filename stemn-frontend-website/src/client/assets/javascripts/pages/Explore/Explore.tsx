@@ -124,6 +124,7 @@ export default class Explore extends React.Component<IExploreProps> {
             <Col className="flex-gt-xs-33">
               {featuredRemaining.map((item) => (
                 <FeaturedTileRow
+                  key={item.sys.id}
                   title={item.fields.title}
                   description={item.fields.description}
                   link={item.fields.link}

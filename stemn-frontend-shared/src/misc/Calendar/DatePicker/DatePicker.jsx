@@ -18,7 +18,7 @@ export class Component extends React.Component {
   }
 
   toggleCalendar = (openStatus) => {
-    this.setState({ calendarIsOpen: openStatus === undefined ? !this.state.calendarIsOpen : openStatus })
+    this.setState((state) => ({ calendarIsOpen: openStatus === undefined ? !state.calendarIsOpen : openStatus }))
   }
 
   selectDate = (date) => {

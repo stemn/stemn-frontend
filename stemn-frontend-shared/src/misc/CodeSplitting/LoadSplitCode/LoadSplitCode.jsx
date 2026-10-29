@@ -29,7 +29,7 @@ export default class PreviewCadLoader extends Component {
       })
     })
 
-    const otherModulesLoader = load(otherModules).then((response) => {
+    load(otherModules).then(() => {
       this.setState({
         otherLoaded: true,
       })
@@ -41,9 +41,10 @@ export default class PreviewCadLoader extends Component {
     const { loadCode, cacheKey, systemImport, ...otherProps } = this.props
     const { mainLoaded, otherLoaded } = this.state
     const loaded = mainLoaded && otherLoaded
+    const LoadedComponent = this.LoadedComponent
     return (
       <div className="layout-column flex">
-        {loaded ? <this.LoadedComponent {...otherProps} /> : null}
+        {loaded ? <LoadedComponent {...otherProps} /> : null}
         <LoadingOverlay show={!loaded} />
       </div>
     )

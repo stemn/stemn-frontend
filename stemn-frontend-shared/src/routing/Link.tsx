@@ -14,6 +14,7 @@ export interface ILinkProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchorEl
   activeStyle?: React.CSSProperties
   onlyActiveOnIndex?: boolean
   children?: React.ReactNode
+  ref?: React.Ref<HTMLAnchorElement>
 }
 
 const normalisePath = (path: string = '') => (path.length > 1 ? path.replace(/\/+$/, '') : path)
@@ -33,8 +34,9 @@ const queryIsActive = (linkQuery: Query | undefined, currentQuery: Query) => {
  *  - `activeClassName` / `activeStyle` / `onlyActiveOnIndex`
  *    (active = pathname matches (prefix unless onlyActiveOnIndex) and every link query key matches)
  */
-export const Link = React.forwardRef<HTMLAnchorElement, ILinkProps>((props, ref) => {
+export const Link = (props: ILinkProps) => {
   const {
+    ref,
     to,
     query,
     state,
@@ -79,7 +81,7 @@ export const Link = React.forwardRef<HTMLAnchorElement, ILinkProps>((props, ref)
       {...otherProps}
     />
   )
-})
+}
 
 Link.displayName = 'LegacyLink'
 

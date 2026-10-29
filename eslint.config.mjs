@@ -37,7 +37,12 @@ export default tseslint.config(
   },
   {
     files: sourceFiles,
-    extends: [js.configs.recommended, tseslint.configs.recommended, importX.flatConfigs.recommended, importX.flatConfigs.typescript],
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.recommended,
+      importX.flatConfigs.recommended,
+      importX.flatConfigs.typescript,
+    ],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
@@ -101,7 +106,10 @@ export default tseslint.config(
     rules: {
       'react-refresh/only-export-components': [
         'error',
-        { allowConstantExport: true, extraHOCs: ['connect', 'fetchDataHoc', 'withRouteProps', 'clickDrag', 'DragSource', 'DropTarget'] },
+        {
+          allowConstantExport: true,
+          extraHOCs: ['connect', 'fetchDataHoc', 'withRouteProps', 'clickDrag', 'DragSource', 'DropTarget'],
+        },
       ],
     },
   },
@@ -121,7 +129,12 @@ export default tseslint.config(
     languageOptions: { globals: { ...globals.node } },
   },
   {
-    files: ['**/*.cjs', 'stemn-frontend-website/config/*.js', 'stemn-frontend-website/scripts/*.js', 'stemn-frontend-website/src/server/**/*.js'],
+    files: [
+      '**/*.cjs',
+      'stemn-frontend-website/config/*.js',
+      'stemn-frontend-website/scripts/*.js',
+      'stemn-frontend-website/src/server/**/*.js',
+    ],
     languageOptions: { sourceType: 'commonjs' },
   },
   prettier,

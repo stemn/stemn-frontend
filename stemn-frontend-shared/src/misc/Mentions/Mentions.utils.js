@@ -35,7 +35,7 @@ text = text.match(/
 /g);
 */
 const markdownLinkRegex =
-  /(\[((?:\[[^\]]*\]|[^\[\]])*)\]\([ \t]*()<?((?:\([^)]*\)|[^()\s])*?)>?[ \t]*((['"])(.*?)\6[ \t]*)?\))/g
+  /(\[((?:\[[^\]]*\]|[^[\]])*)\]\([ \t]*()<?((?:\([^)]*\)|[^()\s])*?)>?[ \t]*((['"])(.*?)\6[ \t]*)?\))/g
 
 export const newMention = ({ mentionType, display, entityId }) => ({
   display,

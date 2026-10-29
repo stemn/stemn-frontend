@@ -35,8 +35,8 @@ export const initialise = () => {
           'on',
         ]
         analytics.factory = function (t) {
-          return function () {
-            const e = Array.prototype.slice.call(arguments)
+          return function (...args: any[]) {
+            const e = args
             e.unshift(t)
             analytics.push(e)
             return analytics

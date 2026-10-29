@@ -14,7 +14,7 @@ props: {
 export default class CheckboxAlt extends React.Component {
   render() {
     const { status, onChange } = this.props
-    const id = Math.random().toString(36).substring(7)
+
     return (
       <div className={cn(classes.radio, { [classes.tickOnly]: this.props.tickOnly })}>
         <label className="layout-row layout-align-start-center">

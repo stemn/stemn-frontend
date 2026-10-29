@@ -26,9 +26,9 @@ export default class Readme extends Component {
     }
   }
   toggleEdit = () => {
-    this.setState({
-      editActive: !this.state.editActive,
-    })
+    this.setState((state) => ({
+      editActive: !state.editActive,
+    }))
   }
   save = () => {
     const { saveProject, project } = this.props

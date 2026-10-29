@@ -18,6 +18,7 @@ class ModalComponent extends Component {
 
     let template = null
     if (modal.modalType) {
+      // eslint-disable-next-line @eslint-react/static-components -- getModal looks up a module-level component in the modal registry; nothing is created during render
       const ModalTemplate = getModal(modal.modalType)
       if (ModalTemplate) {
         const additionalProps = {
@@ -25,6 +26,7 @@ class ModalComponent extends Component {
           modalConfirm: this.modalConfirm,
         }
         const allProps = Object.assign({}, modal.modalProps, additionalProps)
+        // eslint-disable-next-line @eslint-react/static-components -- ModalTemplate is a registered module-level component (see above)
         template = <ModalTemplate {...allProps} />
       }
     }
@@ -56,8 +58,7 @@ class ModalComponent extends Component {
   }
   onRequestClose = () => {
     const { modal } = this.props
-    if (modal.modalOptions && modal.modalOptions.noClickClose) {
-    } else {
+    if (!(modal.modalOptions && modal.modalOptions.noClickClose)) {
       this.modalCancel()
     }
   }

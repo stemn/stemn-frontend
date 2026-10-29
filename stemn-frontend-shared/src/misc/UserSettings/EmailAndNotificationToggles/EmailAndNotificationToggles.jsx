@@ -24,9 +24,9 @@ class ToggleGroup extends Component {
     }
   }
   togglePanelOpen = () => {
-    this.setState({
-      isToggledOpen: !this.state.isToggledOpen,
-    })
+    this.setState((state) => ({
+      isToggledOpen: !state.isToggledOpen,
+    }))
   }
   getGroupToggleValue = () => {
     // This will get the toggle status of the parent group.
@@ -117,7 +117,7 @@ export default class EmailAndNotificationToggles extends Component {
 
     return (
       <div>
-        {emailToggles.map((group) => (
+        {toggles.map((group) => (
           <ToggleGroup
             key={group.name}
             toggleValues={toggleValues}

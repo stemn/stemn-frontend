@@ -29,8 +29,12 @@ export interface IFilesState {
       status?: string
     }
   }
-  fileAssemblyParts: {}
-  fileAssemblyParents: {}
+  fileAssemblyParts: {
+    [cacheKey: string]: IFileData
+  }
+  fileAssemblyParents: {
+    [cacheKey: string]: IFileData
+  }
   pathToId: {
     [path: string]: {
       data?: string

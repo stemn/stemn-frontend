@@ -49,17 +49,6 @@ class Component extends React.Component {
       dropbox: 'https://www.dropbox.com/downloading',
     }
 
-    const menu = [
-      {
-        label: 'Project Settings',
-        onClick: () => {},
-      },
-      {
-        label: 'Delete Projects',
-        onClick: this.deleteThread,
-      },
-    ]
-
     const missingClientBanner = () => {
       const provider = project.data.remote.provider
       const capitalize = { textTransform: 'capitalize' }

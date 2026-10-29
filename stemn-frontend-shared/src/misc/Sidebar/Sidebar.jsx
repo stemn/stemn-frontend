@@ -36,7 +36,7 @@ export class Component extends React.Component {
   }
 
   render() {
-    const { projectsActions, projects, auth, dispatch } = this.props
+    const { projects, dispatch } = this.props
     const sidebarStyle = cn('layout-column', 'flex', 'rel-box', styles.sidebar)
     const nameRegex = new RegExp(escapeRegExp(this.props.sidebar.searchString), 'i')
     const filteredProjects =

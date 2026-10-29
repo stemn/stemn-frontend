@@ -19,6 +19,7 @@ export default (store, action) => {
           threadId: action.payload.threadId,
         }),
       )
+      break
     }
     case 'THREAD/COMMENT_UPDATED':
       return dispatch(

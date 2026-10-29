@@ -61,7 +61,7 @@ export class AssemblyParts extends React.Component {
   }
 
   render() {
-    const { parts, assemblies, clickFn, fileMeta } = this.props
+    const { parts, assemblies, clickFn } = this.props
 
     const displayRows = (items, title) => {
       const itemsOrdrered = orderBy(items.data, 'name')

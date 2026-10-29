@@ -65,8 +65,6 @@ export default class ProjectThread extends Component {
   sidebarEdit = () => {
     const { thread, project, board, threadModel } = this.props
 
-    const group = board.data.groups.find((group) => group._id === thread.data.group)
-
     const groupOptions = board.data.groups.map((group) => ({
       value: group._id,
       name: group.name,

@@ -11,21 +11,6 @@ import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import Link from 'stemn-shared/misc/Router/Link'
 import { every } from 'lodash'
 
-const eventFilter = [
-  {
-    text: 'Filter: Revisions',
-    value: 'event:revision',
-  },
-  {
-    text: 'Filter: Commits',
-    value: 'event:commit',
-  },
-  {
-    text: 'Filter: All',
-    value: '',
-  },
-]
-
 export default class SidebarTimeline extends React.Component {
   filterItems = (items, fullQuery) => {
     const fullQueryArray = fullQuery ? fullQuery.split(' ') : []

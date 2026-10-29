@@ -86,9 +86,9 @@ export default async function bootstrap({ createRoutes, loadUser = false }) {
 
   createRoot(document.getElementById('root')).render(
     <Provider store={store}>
-      <IconContext.Provider value={iconContext}>
+      <IconContext value={iconContext}>
         <RouterProvider router={router} />
-      </IconContext.Provider>
+      </IconContext>
     </Provider>,
   )
 

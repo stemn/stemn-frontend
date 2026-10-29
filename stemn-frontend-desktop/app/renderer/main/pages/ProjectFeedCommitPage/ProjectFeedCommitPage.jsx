@@ -9,14 +9,11 @@ import { groupRevisions } from 'stemn-shared/misc/Timeline/Timeline.utils.js'
 
 export default class ProjectFeedPageCommit extends Component {
   render() {
-    const { project, commit, toggleMulti } = this.props
+    const { project, commit } = this.props
     if (!commit) return null
 
     const groupedRevisions = groupRevisions(commit.data.items)
-    const toggleMultiple = () =>
-      toggleMulti({
-        cacheKeys: groupedRevisions.map((revision) => `${revision.data.fileId}-${revision.data.revisionId}`),
-      })
+
     const params = {
       projectId: commit.data.project._id,
       commitId: commit._id,

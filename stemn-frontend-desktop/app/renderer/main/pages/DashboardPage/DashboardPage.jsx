@@ -47,8 +47,8 @@ export class Component extends React.Component {
             <div className={`${classes.sidebarRight} layout-column flex`}>
               <div style={{ marginTop: '15px' }}>
                 <Calendar
-                  onNextMonth={() => this.setState({ date: this.state.date.clone().add(1, 'months') })}
-                  onPrevMonth={() => this.setState({ date: this.state.date.clone().subtract(1, 'months') })}
+                  onNextMonth={() => this.setState((state) => ({ date: state.date.clone().add(1, 'months') }))}
+                  onPrevMonth={() => this.setState((state) => ({ date: state.date.clone().subtract(1, 'months') }))}
                   date={this.state.date}
                   onPickDate={(date) => {
                     this.setState({ date })

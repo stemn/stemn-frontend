@@ -11,9 +11,9 @@ const iconContext = { style: { verticalAlign: 'middle' } }
 const Root = ({ store, router }) => (
   <Provider store={store}>
     <HelmetProvider>
-      <IconContext.Provider value={iconContext}>
+      <IconContext value={iconContext}>
         <RouterProvider router={router} />
-      </IconContext.Provider>
+      </IconContext>
     </HelmetProvider>
   </Provider>
 )

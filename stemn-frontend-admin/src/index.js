@@ -33,8 +33,6 @@ module.exports = (opts) => {
     // order:'desc'
   }
 
-  const usersAlreadyAdded = []
-
   const recursive = (page, per_page, func, page_limit) => {
     let result = []
 

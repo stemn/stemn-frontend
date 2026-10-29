@@ -47,7 +47,7 @@ const mainReducer = (state, action) => {
         .assocIn([action.meta.projectId, 'loading'], false)
         .value()
 
-    case 'CHANGES/COMMIT_FULFILLED':
+    case 'CHANGES/COMMIT_FULFILLED': {
       // POST /sync/commit returns the committed revisions as ids
       const idsToRemove = action.payload.data.revisions.map((item) => (typeof item === 'string' ? item : item._id))
       const remainingRevisions = state[action.meta.cacheKey].data.filter((item) => !idsToRemove.includes(item._id))
@@ -59,6 +59,7 @@ const mainReducer = (state, action) => {
           checked: {},
         },
       })
+    }
     default:
       return state
   }

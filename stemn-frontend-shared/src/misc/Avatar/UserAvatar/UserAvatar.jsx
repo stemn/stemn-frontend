@@ -33,12 +33,14 @@ export default class UserAvatar extends React.Component {
   render() {
     // display: 'contain' (Default: 'cover')
     const { style, shape, size, className, picture, title, name, display } = this.props
+    // no inline size without a size prop (the stylesheet decides)
+    const sizePx = size ? `${size}px` : undefined
     const styles = {
       borderRadius: shape === 'square' ? '3px' : '50%',
-      width: `${size}px` || '30px',
-      height: `${size}px` || '30px',
-      minHeight: `${size}px` || '30px',
-      minWidth: `${size}px` || '30px',
+      width: sizePx,
+      height: sizePx,
+      minHeight: sizePx,
+      minWidth: sizePx,
       backgroundColor: 'rgba(0, 0, 0, 0.03)',
     }
     const actualStyles = Object.assign({}, style, styles)

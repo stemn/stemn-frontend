@@ -48,7 +48,14 @@ class LabelSelect extends Component {
     return (
       <div>
         {groups.map((item) => (
-          <LabelSelectRow item={item} model={model} value={value} onChange={onChange} dispatch={dispatch} />
+          <LabelSelectRow
+            key={item._id}
+            item={item}
+            model={model}
+            value={value}
+            onChange={onChange}
+            dispatch={dispatch}
+          />
         ))}
       </div>
     )

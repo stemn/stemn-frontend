@@ -3,20 +3,7 @@ import React, { Component } from 'react'
 import cn from 'classnames'
 import s from './PipelineIcon.module.scss'
 import { MdDone, MdPlayArrow as MdPlay, MdClose, MdStop, MdPause } from 'react-icons/md'
-
-export const getStatusClass = (status) => {
-  if (status === 'success') {
-    return s.success
-  } else if (status === 'running') {
-    return s.running
-  } else if (status === 'pending') {
-    return s.pending
-  } else if (status === 'skipped') {
-    return s.pending
-  } else if (status === 'failed') {
-    return s.error
-  }
-}
+import { getStatusClass } from './PipelineIcon.utils'
 
 export default class PipelineIcon extends Component {
   render() {

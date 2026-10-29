@@ -22,9 +22,9 @@ export default class MyProjectsPanel extends Component {
     })
   }
   more = () => {
-    this.setState({
-      page: this.state.page + 1,
-    })
+    this.setState((state) => ({
+      page: state.page + 1,
+    }))
   }
   render() {
     const { projects, newProject } = this.props

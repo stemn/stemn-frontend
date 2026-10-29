@@ -21,6 +21,7 @@ class Component extends React.Component {
       <div style={{ width: '400px' }}>
         <div className="modal-title">{title || 'Are you sure you want to do this?'}</div>
         <div className="modal-body" style={{ lineHeight: '1.4em' }}>
+          {/* eslint-disable-next-line @eslint-react/dom-no-dangerously-set-innerhtml -- message is app-authored copy passed to showConfirm (contains <b>/<br/> markup), never user input */}
           <div dangerouslySetInnerHTML={{ __html: message || 'There will be no turning back.' }} />
           {confirmValue ? (
             <input

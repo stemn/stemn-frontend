@@ -22,9 +22,9 @@ export default class LandingHeader extends Component {
     }
   }
   toggleOpen = () => {
-    this.setState({
-      isOpen: !this.state.isOpen,
-    })
+    this.setState((state) => ({
+      isOpen: !state.isOpen,
+    }))
   }
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll)
@@ -44,7 +44,6 @@ export default class LandingHeader extends Component {
   }
   isLoggedIn() {
     const { auth } = this.props
-    const routeParams = { userId: auth.user._id }
 
     return (
       <Link to="/" className={cn('layout-row layout-align-start-center', classes.specialLink)}>
