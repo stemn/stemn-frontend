@@ -12,11 +12,12 @@ const dispatchToProps = {
   logout,
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class FooterContainer extends Component {
+class FooterContainer extends Component {
   render() {
     return (
       <Footer { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(FooterContainer)

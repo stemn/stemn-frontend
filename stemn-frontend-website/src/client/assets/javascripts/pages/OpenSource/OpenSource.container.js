@@ -8,11 +8,12 @@ const stateToProps = () => ({
 const dispatchToProps = {
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class OpenSourceContainer extends Component {
+class OpenSourceContainer extends Component {
   render() {
     return (
       <OpenSource { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(OpenSourceContainer)

@@ -11,11 +11,12 @@ const dispatchToProps = {
   completeOnboarding,
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class OnboardingDownloadContainer extends Component {
+class OnboardingDownloadContainer extends Component {
   render() {
     return (
       <OnboardingDownload { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(OnboardingDownloadContainer)

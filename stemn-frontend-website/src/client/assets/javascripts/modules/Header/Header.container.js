@@ -17,11 +17,12 @@ const dispatchToProps = {
   newProject: () => showModal({ modalType: ProjectNewModalName }),
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class LoginContainer extends Component {
+class LoginContainer extends Component {
   render() {
     return (
       <Header { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(LoginContainer)

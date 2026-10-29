@@ -15,11 +15,12 @@ const dispatchToProps = {
   saveUser,
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class OnboardingAboutContainer extends Component {
+class OnboardingAboutContainer extends Component {
   render() {
     return (
       <OnboardingAbout { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(OnboardingAboutContainer)

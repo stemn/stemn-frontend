@@ -12,11 +12,12 @@ const dispatchToProps = {
   passwordUpdate,
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class PasswordSetContainer extends Component {
+class PasswordSetContainer extends Component {
   render() {
     return (
       <PasswordSet { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(PasswordSetContainer)

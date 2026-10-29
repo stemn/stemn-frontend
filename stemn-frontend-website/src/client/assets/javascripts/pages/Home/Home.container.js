@@ -42,9 +42,7 @@ const fetchConfigs = [{
   },
 }]
 
-@connect(stateToProps, dispatchToProps)
-@fetchDataHoc(fetchConfigs)
-export default class HomeContainer extends Component {
+class HomeContainer extends Component {
   render() {
     const { isLoggedIn } = this.props
     if (isLoggedIn) {
@@ -54,3 +52,4 @@ export default class HomeContainer extends Component {
   }
 }
 
+export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(HomeContainer))

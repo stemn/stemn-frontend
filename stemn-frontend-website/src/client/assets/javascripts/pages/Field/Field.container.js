@@ -27,12 +27,12 @@ const fetchConfigs = [{
   },
 }]
 
-@connect(stateToProps, dispatchToProps)
-@fetchDataHoc(fetchConfigs)
-export default class SearchContainer extends Component {
+class SearchContainer extends Component {
   render() {
     return (
       <Field { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(SearchContainer))

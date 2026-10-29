@@ -16,11 +16,12 @@ const dispatchToProps = {
   passwordUpdate,
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class SettingsAccountContainer extends Component {
+class SettingsAccountContainer extends Component {
   render() {
     return (
       <SettingsAccount { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(SettingsAccountContainer)

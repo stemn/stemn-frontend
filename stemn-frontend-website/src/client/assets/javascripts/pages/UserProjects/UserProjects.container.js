@@ -15,12 +15,12 @@ const dispatchToProps = {}
 
 const fetchConfigs = []
 
-@connect(stateToProps, dispatchToProps)
-@fetchDataHoc(fetchConfigs)
-export default class UserProjectsContainer extends Component {
+class UserProjectsContainer extends Component {
   render() {
     return (
       <UserProjects { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(UserProjectsContainer))

@@ -20,10 +20,10 @@ const fetchConfigs = [{
   },
 }]
 
-@connect(stateToProps, dispatchToProps)
-@fetchDataHoc(fetchConfigs)
-export default class NotificationsContainer extends Component {
+class NotificationsContainer extends Component {
   render() {
     return <Notifications { ...this.props } />
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(NotificationsContainer))

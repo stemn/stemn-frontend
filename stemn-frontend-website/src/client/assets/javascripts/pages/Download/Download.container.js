@@ -11,11 +11,12 @@ const stateToProps = ({ desktopReleases }) => ({
 const dispatchToProps = {
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class DownloadContainer extends Component {
+class DownloadContainer extends Component {
   render() {
     return (
       <Download { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(DownloadContainer)

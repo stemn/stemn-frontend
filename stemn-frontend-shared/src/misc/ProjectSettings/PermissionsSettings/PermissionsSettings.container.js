@@ -18,11 +18,12 @@ const dispatchToProps = {
   saveProject,
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class ProjectSettingsPermissionsContainer extends Component {
+class ProjectSettingsPermissionsContainer extends Component {
   render() {
     return (
       <PermissionsSettings { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(ProjectSettingsPermissionsContainer)

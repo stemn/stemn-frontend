@@ -51,9 +51,7 @@ const fetchConfigs = [{
   },
 }]
 
-@connect(stateToProps, dispatchToProps)
-@fetchDataHoc(fetchConfigs)
-export default class ProjectPipelineStepContainer extends Component {
+class ProjectPipelineStepContainer extends Component {
   render() {
     return (
       <ProjectPipelineStep { ...this.props } />
@@ -61,3 +59,4 @@ export default class ProjectPipelineStepContainer extends Component {
   }
 }
 
+export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(ProjectPipelineStepContainer))

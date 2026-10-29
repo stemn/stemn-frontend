@@ -8,11 +8,12 @@ const stateToProps = () => ({})
 const dispatchToProps = {
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class SearchContainer extends Component {
+class SearchContainer extends Component {
   render() {
     return (
       <Search { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(SearchContainer)

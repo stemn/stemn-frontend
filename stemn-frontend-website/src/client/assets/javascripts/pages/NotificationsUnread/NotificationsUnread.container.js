@@ -16,10 +16,10 @@ const dispatchToProps = {
 
 const fetchConfigs = []
 
-@connect(stateToProps, dispatchToProps)
-@fetchDataHoc(fetchConfigs)
-export default class NotificationsUnreadContainer extends Component {
+class NotificationsUnreadContainer extends Component {
   render() {
     return <NotificationsUnread { ...this.props } />
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(NotificationsUnreadContainer))

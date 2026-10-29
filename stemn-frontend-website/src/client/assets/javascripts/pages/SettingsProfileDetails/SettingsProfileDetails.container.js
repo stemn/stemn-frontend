@@ -15,11 +15,12 @@ const dispatchToProps = {
   saveUser,
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class SettingsProfileDetailsContainer extends Component {
+class SettingsProfileDetailsContainer extends Component {
   render() {
     return (
       <SettingsProfileDetails { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(SettingsProfileDetailsContainer)

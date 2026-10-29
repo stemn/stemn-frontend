@@ -34,12 +34,12 @@ const fetchConfigs = [{
   },
 }]
 
-@connect(stateToProps, dispatchToProps)
-@fetchDataHoc(fetchConfigs)
-export default class ProjectSettingsThreadsContainer extends Component {
+class ProjectSettingsThreadsContainer extends Component {
   render() {
     return (
       <ThreadsSettings { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(ProjectSettingsThreadsContainer))

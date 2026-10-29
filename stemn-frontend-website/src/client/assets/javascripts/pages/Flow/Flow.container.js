@@ -8,11 +8,12 @@ const stateToProps = () => ({
 const dispatchToProps = {
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class FlowContainer extends Component {
+class FlowContainer extends Component {
   render() {
     return (
       <Flow { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(FlowContainer)

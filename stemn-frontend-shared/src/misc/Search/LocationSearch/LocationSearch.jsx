@@ -7,8 +7,7 @@ import classes from './LocationSearch.css'
 import Autosuggest from 'stemn-shared/misc/Autosuggest/Autosuggest.container'
 import Highlight from 'stemn-shared/misc/Autosuggest/Highlight'
 
-@connect()
-export default class LocationSearch extends Component {
+class LocationSearch extends Component {
   static propTypes = {
     select: PropTypes.func,
     cacheKey: PropTypes.string.isRequired,
@@ -50,3 +49,5 @@ export default class LocationSearch extends Component {
     )
   }
 }
+
+export default connect()(LocationSearch)

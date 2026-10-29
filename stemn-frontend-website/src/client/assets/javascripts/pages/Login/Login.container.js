@@ -15,8 +15,7 @@ const dispatchToProps = {
   login,
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class LoginContainer extends Component {
+class LoginContainer extends Component {
   render() {
     return (
       <LandingLayout>
@@ -28,3 +27,5 @@ export default class LoginContainer extends Component {
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(LoginContainer)

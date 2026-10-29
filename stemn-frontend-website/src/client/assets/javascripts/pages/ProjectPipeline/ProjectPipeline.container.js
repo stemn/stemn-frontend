@@ -31,12 +31,12 @@ const fetchConfigs = [{
   // .catch(() => replace(notFound()))
 }]
 
-@connect(stateToProps, dispatchToProps)
-@fetchDataHoc(fetchConfigs)
-export default class ProjectPipelineContainer extends Component {
+class ProjectPipelineContainer extends Component {
   render() {
     return (
       <ProjectPipeline { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(ProjectPipelineContainer))

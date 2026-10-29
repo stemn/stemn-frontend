@@ -13,11 +13,12 @@ const dispatchToProps = {
   saveSettings,
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class SettingsEmailsContainer extends Component {
+class SettingsEmailsContainer extends Component {
   render() {
     return (
       <SettingsEmails { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(SettingsEmailsContainer)

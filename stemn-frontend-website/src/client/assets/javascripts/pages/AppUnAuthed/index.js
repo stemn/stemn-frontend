@@ -12,8 +12,7 @@ const dispatchToProps = {
   goHome: () => replace('/'),
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class LoginContainer extends Component {
+class LoginContainer extends Component {
   UNSAFE_componentWillReceiveProps(nextProps) {
     const authChanged = nextProps.authToken !== this.props.authToken || nextProps.userId !== this.props.userId
     if (authChanged && nextProps.authToken && nextProps.userId) {
@@ -29,3 +28,5 @@ export default class LoginContainer extends Component {
     return this.props.children
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(LoginContainer)

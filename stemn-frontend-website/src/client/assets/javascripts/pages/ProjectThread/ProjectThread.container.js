@@ -91,12 +91,12 @@ const fetchConfigs = [{
   },
 }]
 
-@connect(stateToProps, dispatchToProps)
-@fetchDataHoc(fetchConfigs)
-export default class ProjectThreadContainer extends Component {
+class ProjectThreadContainer extends Component {
   render() {
     return (
       <ProjectThread { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(ProjectThreadContainer))

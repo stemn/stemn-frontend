@@ -40,12 +40,12 @@ const fetchConfigs = [{
   },
 }]
 
-@connect(stateToProps, dispatchToProps)
-@fetchDataHoc(fetchConfigs)
-export default class ThreadContainer extends Component {
+class ThreadContainer extends Component {
   render() {
     return (
       <LoadingOverlay show />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(ThreadContainer))

@@ -21,11 +21,12 @@ const dispatchToProps = {
   addField,
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class ProjectSettingsTagsContainer extends Component {
+class ProjectSettingsTagsContainer extends Component {
   render() {
     return (
       <ProjectSettingsTags { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(ProjectSettingsTagsContainer)

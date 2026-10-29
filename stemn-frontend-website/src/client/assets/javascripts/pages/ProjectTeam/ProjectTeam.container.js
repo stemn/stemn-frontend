@@ -14,11 +14,12 @@ const stateToProps = ({ projects }, { params }) => {
 const dispatchToProps = {
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class ProjectTeamContainer extends Component {
+class ProjectTeamContainer extends Component {
   render() {
     return (
       <ProjectTeam { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(ProjectTeamContainer)

@@ -27,12 +27,12 @@ const fetchConfigs = [{
   onChange: ({ getCommit, commitId }) => getCommit({ commitId }),
 }]
 
-@connect(stateToProps, dispatchToProps)
-@fetchDataHoc(fetchConfigs)
-export default class ProjectCommitContainer extends Component {
+class ProjectCommitContainer extends Component {
   render() {
     return (
       <ProjectCommit { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(ProjectCommitContainer))

@@ -86,12 +86,12 @@ const fetchConfigs = [{
   },
 }]
 
-@connect(stateToProps, dispatchToProps)
-@fetchDataHoc(fetchConfigs)
-export default class ProjectCommitsContainer extends Component {
+class ProjectCommitsContainer extends Component {
   render() {
     return (
       <ProjectCommits { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(ProjectCommitsContainer))

@@ -31,12 +31,12 @@ const fetchConfigs = [{
   },
 }]
 
-@connect(stateToProps, dispatchToProps)
-@fetchDataHoc(fetchConfigs)
-export default class MentionPopoverContainer extends Component {
+class MentionPopoverContainer extends Component {
   render() {
     return (
       <MentionPopover { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(MentionPopoverContainer))

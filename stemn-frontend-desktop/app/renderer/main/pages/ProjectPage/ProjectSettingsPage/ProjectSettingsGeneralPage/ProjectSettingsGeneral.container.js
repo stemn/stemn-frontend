@@ -22,11 +22,12 @@ const dispatchToProps = {
   confirmDeleteProject,
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class ProjectSettingsGeneralContainer extends Component {
+class ProjectSettingsGeneralContainer extends Component {
   render() {
     return (
       <ProjectSettingsGeneral { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(ProjectSettingsGeneralContainer)

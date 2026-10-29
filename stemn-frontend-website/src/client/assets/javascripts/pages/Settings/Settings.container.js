@@ -25,9 +25,7 @@ const fetchConfigs = [{
   },
 }]
 
-@connect(stateToProps, dispatchToProps)
-@fetchDataHoc(fetchConfigs)
-export default class LoginContainer extends Component {
+class LoginContainer extends Component {
   render() {
     const { user } = this.props
     if (user && user.data) {
@@ -38,3 +36,5 @@ export default class LoginContainer extends Component {
     return null
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(LoginContainer))

@@ -11,11 +11,12 @@ const dispatchToProps = {
   requestPasswordReset,
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class PasswordLostContainer extends Component {
+class PasswordLostContainer extends Component {
   render() {
     return (
       <PasswordLost { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(PasswordLostContainer)

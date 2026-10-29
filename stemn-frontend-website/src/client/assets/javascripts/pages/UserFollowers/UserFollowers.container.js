@@ -38,12 +38,12 @@ const fetchConfigs = [{
   },
 }]
 
-@connect(stateToProps, dispatchToProps)
-@fetchDataHoc(fetchConfigs)
-export default class UserFollowersContainer extends Component {
+class UserFollowersContainer extends Component {
   render() {
     return (
       <UserFollowers { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(UserFollowersContainer))

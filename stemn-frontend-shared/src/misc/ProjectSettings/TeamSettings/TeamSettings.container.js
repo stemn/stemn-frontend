@@ -26,11 +26,12 @@ const dispatchToProps = {
   saveProject,
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class ProjectSettingsTeamContainer extends Component {
+class ProjectSettingsTeamContainer extends Component {
   render() {
     return (
       <TeamSettings { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(ProjectSettingsTeamContainer)

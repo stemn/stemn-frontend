@@ -17,8 +17,7 @@ import { MdAdd } from 'react-icons/md'
 import FlipMove from 'stemn-shared/misc/FlipMove'
 import getUuid from 'stemn-shared/utils/getUuid.js'
 
-@connect()
-export default class UserExperienceSettings extends Component {
+class UserExperienceSettings extends Component {
   static propTypes = {
     dataModel: PropTypes.string,
     data: PropTypes.array,
@@ -184,3 +183,5 @@ export default class UserExperienceSettings extends Component {
     )
   }
 }
+
+export default connect()(UserExperienceSettings)

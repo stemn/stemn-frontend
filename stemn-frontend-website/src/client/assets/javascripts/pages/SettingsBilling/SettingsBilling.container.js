@@ -9,11 +9,12 @@ const dispatchToProps = {
 
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class SettingsBillingContainer extends Component {
+class SettingsBillingContainer extends Component {
   render() {
     return (
       <SettingsBilling { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(SettingsBillingContainer)

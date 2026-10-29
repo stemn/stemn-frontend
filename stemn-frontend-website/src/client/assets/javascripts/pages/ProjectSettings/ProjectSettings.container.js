@@ -20,11 +20,12 @@ const stateToProps = ({ projects }, { params, location }) => {
 const dispatchToProps = {
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class ProjectSettingsContainer extends Component {
+class ProjectSettingsContainer extends Component {
   render() {
     return (
       <ProjectSettings { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(ProjectSettingsContainer)

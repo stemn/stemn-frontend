@@ -9,11 +9,12 @@ const stateToProps = ({ auth }) => ({
 const dispatchToProps = {
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class LandingHeaderContainer extends Component {
+class LandingHeaderContainer extends Component {
   render() {
     return (
       <LandingHeader { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(LandingHeaderContainer)

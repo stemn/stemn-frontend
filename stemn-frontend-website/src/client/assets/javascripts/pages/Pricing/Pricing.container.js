@@ -8,11 +8,12 @@ const stateToProps = () => ({
 const dispatchToProps = {
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class PricingContainer extends Component {
+class PricingContainer extends Component {
   render() {
     return (
       <Pricing { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(PricingContainer)

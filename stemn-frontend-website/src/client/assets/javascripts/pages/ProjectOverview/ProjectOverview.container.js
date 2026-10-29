@@ -50,12 +50,12 @@ const fetchConfigs = [{
   },
 }]
 
-@connect(stateToProps, dispatchToProps)
-@fetchDataHoc(fetchConfigs)
-export default class LoginContainer extends Component {
+class LoginContainer extends Component {
   render() {
     return (
       <ProjectOverview { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(LoginContainer))

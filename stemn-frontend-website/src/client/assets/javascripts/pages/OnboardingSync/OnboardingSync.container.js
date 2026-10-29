@@ -13,11 +13,12 @@ const dispatchToProps = {
   unlink,
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class OnboardingSyncContainer extends Component {
+class OnboardingSyncContainer extends Component {
   render() {
     return (
       <OnboardingSync { ...this.props } />
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(OnboardingSyncContainer)

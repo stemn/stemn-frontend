@@ -20,8 +20,7 @@ const dispatchToProps = {
   load: storeLoad,
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class Form extends Component {
+class Form extends Component {
   static propTypes = {
     load: PropTypes.func.isRequired,
     model: PropTypes.string.isRequired,
@@ -39,3 +38,5 @@ export default class Form extends Component {
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(Form)

@@ -17,8 +17,7 @@ const dispatchToProps = {
   getToken,
 }
 
-@connect(stateToProps, dispatchToProps)
-export default class LoginContainer extends Component {
+class LoginContainer extends Component {
   goSomewhere = (nextProps) => {
     const { userSettingsMessages, isLoggedIn, location, goLanding, goOnboarding } = nextProps
     const { pathname } = location
@@ -69,3 +68,5 @@ export default class LoginContainer extends Component {
     )
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(LoginContainer)

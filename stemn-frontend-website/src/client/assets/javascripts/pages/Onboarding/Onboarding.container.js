@@ -25,9 +25,7 @@ const fetchConfigs = [{
   },
 }]
 
-@connect(stateToProps, dispatchToProps)
-@fetchDataHoc(fetchConfigs)
-export default class OnboardingContainer extends Component {
+class OnboardingContainer extends Component {
   render() {
     return (
       <Onboarding { ...this.props } />
@@ -35,3 +33,4 @@ export default class OnboardingContainer extends Component {
   }
 }
 
+export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(OnboardingContainer))
