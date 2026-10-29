@@ -13,6 +13,7 @@ This repo contains all of Stemn's frontend code.
 
 * [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md): how the packages, the runtime (Redux, HTTP, websocket, routing) and the conventions fit together
 * [docs/DECISIONS.md](./docs/DECISIONS.md): decision records of the 2026 modernisation, including the webpack fallback policy
+* [docs/TYPESCRIPT.md](./docs/TYPESCRIPT.md): the incremental TypeScript conversion (strict ratchet, Redux typing conventions, module order)
 
 ## Requirements
 
@@ -31,7 +32,8 @@ npm run build        # website: Vite production build -> stemn-frontend-website/
 npm run serve        # serve the production build on http://localhost:8081 (PORT=... to change)
 npm run dev:webpack  # website: the webpack 5 fallback dev server (same port)
 npm run build:webpack # website: the webpack 5 fallback production build (same output dir)
-npm run typecheck    # tsc --noEmit: website, desktop, e2e (type errors never block the builds)
+npm run typecheck    # tsc --noEmit: website, desktop, e2e + the strict TypeScript ratchet (type errors never block the builds)
+npm run typecheck:strict # only the strict project: the converted modules of tsconfig.strict.json, see docs/TYPESCRIPT.md
 npm run lint         # ESLint (--max-warnings 0) + Prettier check; npm run lint:fix / npm run format fix them
 npm test             # unit tests (Vitest)
 npm run test:e2e     # website end-to-end tests (Playwright) against the local backend, see tests/e2e/README.md

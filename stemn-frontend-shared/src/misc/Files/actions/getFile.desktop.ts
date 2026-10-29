@@ -1,8 +1,11 @@
-export const getFile = ({ projectId, fileId, revisionId = '', provider, responseType }) => {
+import type { GetFile, IGetFileInput } from './types'
+
+/** Downloads through the main process file cache (`FileCache.get`, an aliased action) */
+export const getFile = (({ projectId, fileId, revisionId = '', provider, responseType }: IGetFileInput) => {
   const cacheKey = `${fileId}-${revisionId}`
   return {
-    type: 'FILES/GET_FILE',
-    aliased: true,
+    type: 'FILES/GET_FILE' as const,
+    aliased: true as const,
     payload: {
       functionAlias: 'FileCache.get',
       functionInputs: {
@@ -18,4 +21,4 @@ export const getFile = ({ projectId, fileId, revisionId = '', provider, response
       cacheKey,
     },
   }
-}
+}) satisfies GetFile

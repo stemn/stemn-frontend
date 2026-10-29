@@ -66,7 +66,8 @@ The git tag `webpack5-fallback` marks the last commit that was built with webpac
 
 ### Type checking
 
-* `npm run typecheck` runs `tsc --noEmit` for the app (`tsconfig.json`) and the Vite config (`tsconfig.node.json`).
+* `npm run typecheck` runs `tsc --noEmit` for the app (`tsconfig.json`), the Vite config (`tsconfig.node.json`) and the
+  strict TypeScript ratchet (`tsconfig.strict.json`, see [docs/TYPESCRIPT.md](../docs/TYPESCRIPT.md)).
   Vite (Oxc) only strips types, so type errors never break the build.
 
 ### Layout and conventions

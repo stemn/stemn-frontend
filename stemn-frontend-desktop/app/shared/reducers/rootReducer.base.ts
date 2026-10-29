@@ -2,7 +2,7 @@ import autoLaunch from 'stemn-shared/desktop/AutoLaunch/AutoLaunch.reducer.js'
 import autoUpdate from 'stemn-shared/desktop/AutoUpdate/AutoUpdate.reducer.js'
 import localPath from 'stemn-shared/desktop/LocalPath/LocalPath.reducer.js'
 import system from 'stemn-shared/desktop/System/System.reducer.js'
-import auth from 'stemn-shared/misc/Auth/Auth.reducer.js'
+import auth from 'stemn-shared/misc/Auth/Auth.reducer'
 import autosuggest from 'stemn-shared/misc/Autosuggest/Autosuggest.reducer.js'
 import changes from 'stemn-shared/misc/Changes/Changes.reducer.js'
 import codeSplitting from 'stemn-shared/misc/CodeSplitting/CodeSplitting.reducer.js'
@@ -30,7 +30,7 @@ import upload from 'stemn-shared/misc/Upload/Upload.reducer.js'
 import users from 'stemn-shared/misc/Users/Users.reducer.js'
 import userSettings from 'stemn-shared/misc/UserSettings/UserSettings.reducer.js'
 import walkthrough from 'stemn-shared/misc/Walkthrough/Walkthrough.reducer.js'
-import websocket from 'stemn-shared/misc/Websocket/Websocket.reducer.js'
+import websocket from 'stemn-shared/misc/Websocket/Websocket.reducer'
 
 export interface IStoreState {
   fileList: IFileListState

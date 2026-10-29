@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as SidebarActions from 'stemn-shared/misc/Sidebar/Sidebar.actions.js'
-import * as AuthActions from 'stemn-shared/misc/Auth/Auth.actions.js'
+import * as AuthActions from 'stemn-shared/misc/Auth/Auth.actions'
 import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js'
 import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js'
 import * as SystemActions from 'stemn-shared/desktop/System/System.actions.js'

@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import reducer from './Auth.reducer'
+import reducer, { IAuthState } from './Auth.reducer'
 
 const user = { _id: 'user1', name: 'Ada', accounts: { google: { id: 'g1' }, dropbox: { id: 'd1' } } }
 
-const makeState = (): any => ({
+const makeState = (): IAuthState => ({
   authLoading: false,
   userLoading: false,
   emailUpdatePending: false,

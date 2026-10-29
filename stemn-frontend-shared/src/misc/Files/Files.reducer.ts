@@ -1,19 +1,30 @@
 import { produce } from 'immer'
-import { AnyAction } from 'redux'
+import type { UnknownAction } from 'redux'
 import { IFile } from 'stemn-shared/misc/FileList/types'
 import { setIn } from 'stemn-shared/redux/draft'
+import type { FulfilledAction, HttpLifecycleActions, PendingAction, RejectedAction } from 'stemn-shared/redux/types'
+import type {
+  IDownloadProgressAction,
+  IGetFileProgressAction,
+  IRenderFileErrorAction,
+  IRenderFileProgressAction,
+  IRenderError,
+} from './actions'
 
 export interface IFileRender {
   error?: string
-  data?: any
+  /** The render: a URL (website) or a local path (desktop) */
+  data?: string
   status?: string
   loading: boolean
 }
 
 export interface IFileData {
-  data?: any
+  /** The file content, depending on the request's responseType: text, parsed JSON or a blob URL ('path') */
+  data?: unknown
   error?: string
   loading: boolean
+  percentage?: number
 }
 
 export interface IFilesState {
@@ -28,6 +39,7 @@ export interface IFilesState {
     [cacheKey: string]: {
       data?: IFile
       status?: string
+      loading?: boolean
     }
   }
   fileAssemblyParts: {
@@ -47,12 +59,36 @@ export interface IFilesState {
   }
   relatedThreads: {
     [fileId: string]: {
-      data?: any
+      data?: unknown[]
       loading: boolean
     }
   }
   previewMarkdown: boolean
 }
+
+interface ICacheKeyMeta {
+  cacheKey: string
+}
+
+/** The actions this reducer handles (redux-promise-middleware lifecycles and plain actions) */
+export type FilesAction =
+  | PendingAction<'FILES/GET_FILE', ICacheKeyMeta>
+  | FulfilledAction<'FILES/GET_FILE', { data: unknown }, ICacheKeyMeta>
+  // The reducer stores `payload.data`: an axios error has none (its body is in `response.data`)
+  | RejectedAction<'FILES/GET_FILE', { data?: string }, ICacheKeyMeta>
+  | IGetFileProgressAction
+  | IRenderFileErrorAction
+  | PendingAction<'FILES/RENDER_FILE_DOWNLOAD', ICacheKeyMeta>
+  | FulfilledAction<'FILES/RENDER_FILE_DOWNLOAD', { data: string }, ICacheKeyMeta>
+  | RejectedAction<'FILES/RENDER_FILE_DOWNLOAD', IRenderError, ICacheKeyMeta>
+  | IRenderFileProgressAction
+  | HttpLifecycleActions<'FILES/GET_META', IFile, ICacheKeyMeta>
+  | HttpLifecycleActions<'FILES/GET_ASSEMBLY_PARTS', unknown, ICacheKeyMeta>
+  | HttpLifecycleActions<'FILES/GET_ASSEMBLY_PARENTS', unknown, ICacheKeyMeta>
+  | HttpLifecycleActions<'FILES/GET_RELATED_THREADS', unknown[], { fileId: string }>
+  | HttpLifecycleActions<'FILES/GET_META_FROM_PATH', IFile, ICacheKeyMeta>
+  | IDownloadProgressAction
+  | { type: 'FILES/TOGGLE_PREVIEW_MARKDOWN' }
 
 const initialState: IFilesState = {
   hydrated: false,
@@ -67,7 +103,7 @@ const initialState: IFilesState = {
   previewMarkdown: false,
 }
 
-function reducer(state: IFilesState, action: AnyAction): IFilesState {
+function reducer(state: IFilesState, action: FilesAction): IFilesState {
   switch (action.type) {
     case 'FILES/GET_FILE_PENDING':
       return produce(state, (draft) => {
@@ -228,9 +264,10 @@ function reducer(state: IFilesState, action: AnyAction): IFilesState {
   }
 }
 
-export const filesReducer = (state: IFilesState = initialState, action: AnyAction) => {
+export const filesReducer = (state: IFilesState = initialState, action: FilesAction | UnknownAction): IFilesState => {
   if (!state.hydrated) {
     state = { ...initialState, ...state, hydrated: true }
   }
-  return reducer(state, action)
+  // Every action of the app comes through here; the switch only reads the ones it knows
+  return reducer(state, action as FilesAction)
 }

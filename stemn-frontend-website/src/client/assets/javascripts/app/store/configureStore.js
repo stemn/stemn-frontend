@@ -11,7 +11,7 @@ import httpPackage from 'stemn-shared/redux/middleware/httpPackage/httpPackage.m
 import httpTransform from 'stemn-shared/redux/middleware/httpTransform/httpTransform.middleware.js'
 import toastsError from 'stemn-shared/misc/Toasts/ToastsError.middleware'
 import auth from 'stemn-shared/misc/Auth/Auth.middleware'
-import websocket from 'stemn-shared/misc/Websocket/websocket.middleware.js'
+import websocket from 'stemn-shared/misc/Websocket/websocket.middleware'
 import persistConfig from '../state/persistConfig'
 import rootReducer from '../reducer'
 

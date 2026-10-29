@@ -1,10 +1,11 @@
 import { getFullPath } from './getFullPath.desktop'
+import type { SaveFile } from './types'
 
 /**
  * Save a file revision to disk. The save dialog and the download run in the
  * main process (FileSave.save) - renderers have no file system access.
  */
-export const saveFile =
+export const saveFile: SaveFile =
   ({ file, fileUrl }) =>
   (dispatch) =>
     // First, we get the existing path of the file so we can direct the file save

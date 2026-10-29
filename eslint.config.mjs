@@ -14,8 +14,15 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import { importX } from 'eslint-plugin-import-x'
 import prettier from 'eslint-config-prettier'
 import globals from 'globals'
+import { readFileSync } from 'node:fs'
 
 const sourceFiles = ['**/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}']
+
+// The modules converted to strict TypeScript: the `include` list of tsconfig.strict.json (docs/TYPESCRIPT.md).
+// Folders become `<folder>/**/*.{ts,tsx}` globs. Only whole-line `//` comments are allowed in that file.
+const strictTypeScriptFiles = JSON.parse(
+  readFileSync(new URL('./tsconfig.strict.json', import.meta.url), 'utf8').replace(/^\s*\/\/.*$/gm, ''),
+).include.map((entry) => (/\.[cm]?tsx?$/.test(entry) ? entry : `${entry}/**/*.{ts,tsx}`))
 
 export default tseslint.config(
   {
@@ -136,6 +143,13 @@ export default tseslint.config(
       'stemn-frontend-website/src/server/**/*.js',
     ],
     languageOptions: { sourceType: 'commonjs' },
+  },
+  // Strict TypeScript modules (tsconfig.strict.json): no `any` unless justified with an eslint-disable comment
+  {
+    files: strictTypeScriptFiles,
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'error',
+    },
   },
   prettier,
 )

@@ -7,19 +7,30 @@ import { LegacyLocationDescriptor } from './query'
 export const LOCATION_CHANGE = '@@router/LOCATION_CHANGE'
 export const CALL_HISTORY_METHOD = '@@router/CALL_HISTORY_METHOD'
 
-type Location = string | LegacyLocationDescriptor
+/** A location as the app passes it to push/replace: a path string or a v3 descriptor */
+export type LocationDescriptor = string | LegacyLocationDescriptor
 
-const updateLocation =
-  (method: 'push' | 'replace' | 'go' | 'goBack' | 'goForward') =>
-  (...args: any[]) => ({
-    type: CALL_HISTORY_METHOD,
-    payload: { method, args },
-  })
+/** The history call `routerMiddleware` performs, by method */
+export type HistoryCall =
+  | { method: 'push' | 'replace'; args: [location: LocationDescriptor] }
+  | { method: 'go'; args: [delta: number] }
+  | { method: 'goBack' | 'goForward'; args: [] }
 
-export const push: (location: Location) => any = updateLocation('push')
-export const replace: (location: Location) => any = updateLocation('replace')
-export const go: (delta: number) => any = updateLocation('go')
-export const goBack: () => any = updateLocation('goBack')
-export const goForward: () => any = updateLocation('goForward')
+export interface CallHistoryMethodAction {
+  type: typeof CALL_HISTORY_METHOD
+  payload: HistoryCall
+}
+
+const historyAction = (payload: HistoryCall): CallHistoryMethodAction => ({
+  type: CALL_HISTORY_METHOD,
+  payload,
+})
+
+// Rest parameters: like react-router-redux, every argument passed ends up in `payload.args`
+export const push = (...args: [location: LocationDescriptor]) => historyAction({ method: 'push', args })
+export const replace = (...args: [location: LocationDescriptor]) => historyAction({ method: 'replace', args })
+export const go = (...args: [delta: number]) => historyAction({ method: 'go', args })
+export const goBack = (...args: []) => historyAction({ method: 'goBack', args })
+export const goForward = (...args: []) => historyAction({ method: 'goForward', args })
 
 export const routerActions = { push, replace, go, goBack, goForward }

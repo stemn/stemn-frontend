@@ -1,15 +1,23 @@
-import { CALL_HISTORY_METHOD } from './actions'
+import type { DataRouter, RouterState, To } from 'react-router'
+import { CALL_HISTORY_METHOD, CallHistoryMethodAction, HistoryCall } from './actions'
 import { toRouterPath } from './query'
 
 /** Minimal interface of the react-router data router we drive */
 export interface INavigator {
-  navigate: (to: any, opts?: any) => any
-  state?: any
+  navigate: DataRouter['navigate']
+  state?: Pick<RouterState, 'location' | 'navigation'>
 }
 
-const toHref = (to: any) => (typeof to === 'string' ? to : `${to.pathname || ''}${to.search || ''}${to.hash || ''}`)
+interface IHrefParts {
+  pathname?: string
+  search?: string
+  hash?: string
+}
 
-const locationHref = (location: any) => location && `${location.pathname}${location.search || ''}${location.hash || ''}`
+const toHref = (to: To) => (typeof to === 'string' ? to : `${to.pathname || ''}${to.search || ''}${to.hash || ''}`)
+
+const locationHref = (location: IHrefParts | undefined) =>
+  location && `${location.pathname}${location.search || ''}${location.hash || ''}`
 
 /**
  * react-router v3 navigated synchronously, so components that redirect from
@@ -19,7 +27,7 @@ const locationHref = (location: any) => location && `${location.pathname}${locat
  * (each navigate() cancels the previous one). Skip navigations that are
  * already pending, or replaces to the current location.
  */
-const isDuplicate = (router: INavigator, to: any, replace: boolean) => {
+const isDuplicate = (router: INavigator, to: To, replace: boolean) => {
   const state = router.state
   if (!state) return false
   const href = toHref(to)
@@ -30,7 +38,7 @@ const isDuplicate = (router: INavigator, to: any, replace: boolean) => {
 }
 
 let currentRouter: INavigator | undefined
-const pending: any[] = []
+const pending: HistoryCall[] = []
 
 /** Register the router instance (called once the browser router has been created) */
 export const setRouter = (router: INavigator) => {
@@ -41,19 +49,19 @@ export const setRouter = (router: INavigator) => {
 
 export const getRouter = () => currentRouter
 
-function run({ method, args }: { method: string; args: any[] }) {
+function run(call: HistoryCall) {
   const router = currentRouter as INavigator
-  switch (method) {
+  switch (call.method) {
     case 'push':
     case 'replace': {
-      const { to, state } = toRouterPath(args[0])
-      if (isDuplicate(router, to, method === 'replace')) {
+      const { to, state } = toRouterPath(call.args[0])
+      if (isDuplicate(router, to, call.method === 'replace')) {
         return undefined
       }
-      return router.navigate(to, { replace: method === 'replace', state })
+      return router.navigate(to, { replace: call.method === 'replace', state })
     }
     case 'go':
-      return router.navigate(args[0])
+      return router.navigate(call.args[0])
     case 'goBack':
       return router.navigate(-1)
     case 'goForward':
@@ -62,6 +70,9 @@ function run({ method, args }: { method: string; args: any[] }) {
       return undefined
   }
 }
+
+const isCallHistoryMethod = (action: unknown): action is CallHistoryMethodAction =>
+  !!action && (action as { type?: unknown }).type === CALL_HISTORY_METHOD
 
 /**
  * Replacement for react-router-redux's routerMiddleware(history).
@@ -72,8 +83,8 @@ export const routerMiddleware = (router?: INavigator) => {
   if (router) {
     setRouter(router)
   }
-  return () => (next: any) => (action: any) => {
-    if (!action || action.type !== CALL_HISTORY_METHOD) {
+  return () => (next: (action: unknown) => unknown) => (action: unknown) => {
+    if (!isCallHistoryMethod(action)) {
       return next(action)
     }
     if (currentRouter) {

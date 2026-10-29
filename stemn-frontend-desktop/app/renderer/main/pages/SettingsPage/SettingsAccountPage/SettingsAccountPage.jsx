@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { getUser, saveUser } from 'stemn-shared/misc/Users/Users.actions.js'
-import { unlink, logout, authenticate } from 'stemn-shared/misc/Auth/Auth.actions.js'
+import { unlink, logout, authenticate } from 'stemn-shared/misc/Auth/Auth.actions'
 import React from 'react'
 import classes from '../../ProjectPage/ProjectSettingsPage/ProjectSettingsPage.module.css'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton.jsx'

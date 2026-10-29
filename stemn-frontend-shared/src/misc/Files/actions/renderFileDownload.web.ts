@@ -1,10 +1,12 @@
-export const renderFileDownload = ({ projectId, fileId, revisionId = '', timestamp }) => {
+import type { IRenderFileInput, RenderFileDownload } from './types'
+
+export const renderFileDownload = (({ projectId, fileId, revisionId = '', timestamp }: IRenderFileInput) => {
   // When we are on web (and we know the render is complete)
   // we set the render path to the store instead of downloading it.
   const cacheKey = timestamp ? `${fileId}-${revisionId}-${timestamp}` : `${fileId}-${revisionId}`
   // The cache key is used as the renderId/roomId
   return {
-    type: 'FILES/RENDER_FILE_DOWNLOAD_FULFILLED',
+    type: 'FILES/RENDER_FILE_DOWNLOAD_FULFILLED' as const,
     payload: {
       data: `${GLOBAL_ENV.API_SERVER}/api/v1/sync/downloadRenderFile/${projectId}/${fileId}/${revisionId}`,
     },
@@ -12,4 +14,4 @@ export const renderFileDownload = ({ projectId, fileId, revisionId = '', timesta
       cacheKey,
     },
   }
-}
+}) satisfies RenderFileDownload

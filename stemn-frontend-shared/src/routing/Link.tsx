@@ -1,15 +1,16 @@
-import cn from 'classnames'
+import cn, { type Argument as ClassNameArgument } from 'classnames'
 import React from 'react'
 import { Link as RouterLink, useLocation } from 'react-router'
-import { LegacyLocationDescriptor, parseQuery, Query, toRouterPath } from './query'
+import { LegacyLocationDescriptor, parseQuery, ParsedQuery, Query, toRouterPath } from './query'
 
 export interface ILinkProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'className'> {
   to: string | LegacyLocationDescriptor
   /** react-router v2/v3 style extra query (merged into `to`) */
   query?: Query
-  state?: any
+  state?: unknown
   replace?: boolean
-  className?: any
+  /** Anything classnames accepts */
+  className?: ClassNameArgument
   activeClassName?: string
   activeStyle?: React.CSSProperties
   onlyActiveOnIndex?: boolean
@@ -19,7 +20,7 @@ export interface ILinkProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchorEl
 
 const normalisePath = (path: string = '') => (path.length > 1 ? path.replace(/\/+$/, '') : path)
 
-const queryIsActive = (linkQuery: Query | undefined, currentQuery: Query) => {
+const queryIsActive = (linkQuery: Query | undefined, currentQuery: ParsedQuery) => {
   if (!linkQuery) {
     return true
   }

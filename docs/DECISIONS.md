@@ -71,5 +71,16 @@ Each entry states the context, the decision and its consequences. Newer entries 
 ## ADR-007: Incremental TypeScript
 
 * Status: proposed (PR 5, left open for the founder's review)
-* Decision: enable `allowJs` + `checkJs` incrementally and convert module by module to strict TypeScript, starting with
-  the shared routing, Websocket, Auth and Files modules. PR 5 adds a conversion playbook.
+* Context: most of the code is JavaScript (about 840 JS/JSX files); the TypeScript part is checked with
+  `noImplicitAny: false`, so it guarantees little, and a big-bang conversion would be unreviewable.
+* Decision: convert module by module to strict TypeScript behind a ratchet. `allowJs` is on and `checkJs` off, so JS
+  modules take part in type inference without being checked. `tsconfig.strict.json` lists the converted modules and
+  checks them with `strict` + `noImplicitAny`, once per platform (`.web` / `.desktop` resolution), as part of
+  `npm run typecheck`; ESLint forbids `any` in the same files. A module enters the list when it is converted and never
+  leaves it. PR 5 converts the shared routing, Websocket, Auth and Files (actions, reducer, utils) modules and adds
+  the shared Redux types (`stemn-shared/redux/types.ts`).
+* Consequences: the playbook, the Redux typing conventions and the proposed order for the rest of the code base are in
+  [TYPESCRIPT.md](./TYPESCRIPT.md). Converted modules are strict as soon as they are listed, while the rest keeps
+  building unchanged (type errors never block the builds). Every TS file a listed module imports is checked strictly
+  too, so conversions go leaves first. When everything is listed, `noImplicitAny` moves to the base config,
+  `allowJs` goes, and the legacy ESLint exceptions (ADR-003) are re-enabled.

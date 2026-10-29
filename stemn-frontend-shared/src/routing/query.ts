@@ -3,29 +3,42 @@
  * v3 locations carried a parsed `query` object; modern react-router only has `search`.
  */
 
-export type Query = Record<string, any>
+/** A query to stringify: values are converted with String(), arrays become repeated keys, null/undefined are dropped */
+export type Query = Record<string, unknown>
+
+/** A parsed query string: repeated keys become arrays */
+export type ParsedQuery = Record<string, string | string[]>
 
 export interface LegacyLocationDescriptor {
   pathname?: string
   query?: Query
   search?: string
   hash?: string
-  state?: any
+  state?: unknown
 }
 
 export interface LegacyLocation {
   pathname: string
   search: string
   hash: string
-  state: any
+  state: unknown
   key?: string
   action?: string
-  query: Query
+  query: ParsedQuery
+}
+
+/** The parts of a react-router location toLegacyLocation reads */
+export interface IRouterLocation {
+  pathname: string
+  search?: string
+  hash?: string
+  state?: unknown
+  key?: string
 }
 
 /** Parse `?a=1&b=2&b=3` into `{ a: '1', b: ['2', '3'] }` (same shape as react-router v3) */
-export const parseQuery = (search: string = ''): Query => {
-  const query: Query = {}
+export const parseQuery = (search: string = ''): ParsedQuery => {
+  const query: ParsedQuery = {}
   new URLSearchParams(search).forEach((value, key) => {
     if (key in query) {
       query[key] = ([] as string[]).concat(query[key], value)
@@ -78,7 +91,7 @@ export const toRouterPath = (location: string | LegacyLocationDescriptor) => {
 }
 
 /** Add the v3 `query` (and optionally `action`) to a react-router location */
-export const toLegacyLocation = (location: any, action?: string): LegacyLocation => ({
+export const toLegacyLocation = (location: IRouterLocation, action?: string): LegacyLocation => ({
   pathname: location.pathname,
   search: location.search || '',
   hash: location.hash || '',

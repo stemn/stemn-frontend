@@ -1,5 +1,9 @@
+import type { StemnThunk } from 'stemn-shared/redux/types'
+import type { IDesktopPathState } from './getFullPath.desktop'
+
+/** Finds the file at a local path: the provider is the one whose local folder contains it */
 export const getMetaFromPath =
-  ({ path, cacheKey }) =>
+  ({ path, cacheKey }: { path: string; cacheKey: string }): StemnThunk<void, Pick<IDesktopPathState, 'system'>> =>
   (dispatch, getState) => {
     const providerPaths = getState().system.providerPath
     const provider = Object.keys(providerPaths).find((prov) => path.startsWith(providerPaths[prov]))

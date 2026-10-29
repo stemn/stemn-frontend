@@ -37,6 +37,11 @@ export class Component extends React.Component {
 
 // /////////////////////////////// CONTAINER /////////////////////////////////
 
+/**
+ * `location` is optional (TypeScript callers read this JSDoc through allowJs)
+ * @param {any} state
+ * @param {{ location?: unknown }} ownProps
+ */
 function mapStateToProps({ header, auth, sidebar }, { location }) {
   return {
     header,

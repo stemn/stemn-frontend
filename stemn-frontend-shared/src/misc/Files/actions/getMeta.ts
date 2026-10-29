@@ -1,4 +1,13 @@
-export const getMeta = ({ projectId, fileId, revisionId = '', provider, cacheKey }) => ({
+import type { IHttpAction } from 'stemn-shared/redux/types'
+import type { IFileRevisionInput } from './types'
+
+export const getMeta = ({
+  projectId,
+  fileId,
+  revisionId = '',
+  provider,
+  cacheKey,
+}: IFileRevisionInput & { cacheKey?: string }): IHttpAction<'FILES/GET_META', { cacheKey: string }> => ({
   type: 'FILES/GET_META',
   http: true,
   payload: {

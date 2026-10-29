@@ -51,6 +51,11 @@ export function openExternal({ url, params }) {
   }
 }
 
+/**
+ * Open a project file with the system's default application, or (`location: true`) show it in its folder.
+ * The JSDoc types are read by TypeScript callers (allowJs).
+ * @param {{ location?: boolean, path: string, projectId: string, provider: string }} file
+ */
 export function openFile({ location, path, projectId, provider }) {
   return (dispatch, getState) => {
     const showErrorDialog = ({ path }) => {

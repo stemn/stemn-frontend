@@ -14,7 +14,7 @@ import { RouterProvider } from 'react-router/dom'
 import { IconContext } from 'react-icons'
 import { syncRouterWithStore } from 'stemn-shared/routing'
 import { getBridge } from 'stemn-shared/desktop/bridge'
-import { loadUserData } from 'stemn-shared/misc/Auth/Auth.actions.js'
+import { loadUserData } from 'stemn-shared/misc/Auth/Auth.actions'
 import initHttp from '../../shared/http/initHttp.js'
 import configureStore from '../../shared/store/configureStore.renderer.js'
 

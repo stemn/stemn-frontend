@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 // Container Actions
-import * as AuthActions from 'stemn-shared/misc/Auth/Auth.actions.js'
+import * as AuthActions from 'stemn-shared/misc/Auth/Auth.actions'
 
 // Component Core
 import React from 'react'

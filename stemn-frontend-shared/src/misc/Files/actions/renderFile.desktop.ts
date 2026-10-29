@@ -1,6 +1,7 @@
 import { joinRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
+import type { RenderFile } from './types'
 
-export const renderFile =
+export const renderFile: RenderFile =
   ({ projectId, fileId, revisionId, provider, timestamp }) =>
   (dispatch) => {
     // The cache key is used as the renderId/roomId
