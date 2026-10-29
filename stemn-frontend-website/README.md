@@ -12,7 +12,7 @@ Anyone can get the [Stemn Website](https://stemn.com/) running locally and devel
 
 ### Install
 
-1. Make sure you have `git` and Node.js 22.22+ (`.nvmrc`) installed.
+1. Make sure you have `git` and Node.js 24 (`.nvmrc`; 22.22+ works) installed.
 2. Clone the parent repo: `stemn-frontend`.
 3. Run `npm install` **at the repo root** (npm workspaces – this installs the website and `stemn-frontend-shared`).
 
