@@ -1,0 +1,66 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", ":semanticCommits", "helpers:pinGitHubActionDigestsToSemver"],
+  "baseBranches": ["staging"],
+  "timezone": "Etc/UTC",
+  "schedule": ["before 6am on monday"],
+  "prConcurrentLimit": 5,
+  "rangeStrategy": "pin",
+  "lockFileMaintenance": { "enabled": true, "schedule": ["before 6am on the first day of the month"] },
+  "packageRules": [
+    {
+      "description": "One PR for the lint/format tooling",
+      "matchPackageNames": [
+        "eslint",
+        "@eslint/**",
+        "typescript-eslint",
+        "@eslint-react/**",
+        "eslint-*",
+        "prettier",
+        "globals"
+      ],
+      "groupName": "lint tooling"
+    },
+    {
+      "description": "Vite, its React plugin and Vitest move together",
+      "matchPackageNames": ["vite", "@vitejs/**", "vitest", "@vitest/**", "electron-vite"],
+      "groupName": "vite"
+    },
+    {
+      "description": "Playwright (the browsers come with the package version)",
+      "matchPackageNames": ["@playwright/test", "playwright"],
+      "groupName": "playwright"
+    },
+    {
+      "description": "React and its types",
+      "matchPackageNames": ["react", "react-dom", "@types/react", "@types/react-dom"],
+      "groupName": "react"
+    },
+    {
+      "description": "webpack 5 fallback toolchain: grouped, never auto-merged (kept until it is retired)",
+      "matchPackageNames": [
+        "webpack",
+        "webpack-*",
+        "*-loader",
+        "@babel/**",
+        "html-webpack-plugin",
+        "mini-css-extract-plugin",
+        "css-minimizer-webpack-plugin",
+        "copy-webpack-plugin",
+        "@pmmmwh/react-refresh-webpack-plugin"
+      ],
+      "groupName": "webpack fallback"
+    },
+    {
+      "description": "Patch updates of dev tooling merge themselves when CI is green",
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["patch"],
+      "automerge": true
+    },
+    {
+      "description": "GitHub Actions",
+      "matchManagers": ["github-actions"],
+      "groupName": "github actions"
+    }
+  ]
+}

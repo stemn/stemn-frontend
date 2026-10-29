@@ -1,0 +1,89 @@
+# Reusable end-to-end workflow: starts the Stemn backend (composite action
+# .github/actions/stemn-backend) and runs the website Playwright suite and/or the
+# desktop (Electron) Playwright suite under xvfb. Called by ci.yml; other workflows
+# (e.g. a package-manager migration or another app shell) can call it with
+# `uses: ./.github/workflows/e2e.yml` and `secrets: inherit`.
+name: e2e
+
+on:
+  workflow_call:
+    inputs:
+      backend-ref:
+        description: stemn-backend ref to test against
+        type: string
+        default: staging
+      website:
+        description: Run the website suite (tests/e2e)
+        type: boolean
+        default: true
+      desktop:
+        description: Run the desktop suite (stemn-frontend-desktop/tests)
+        type: boolean
+        default: true
+    secrets:
+      STEMN_BACKEND_DEPLOY_KEY:
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  e2e:
+    name: e2e (backend ${{ inputs.backend-ref }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: ./.github/actions/setup
+        with:
+          electron: ${{ inputs.desktop }}
+
+      - uses: ./.github/actions/stemn-backend
+        with:
+          ssh-key: ${{ secrets.STEMN_BACKEND_DEPLOY_KEY }}
+          ref: ${{ inputs.backend-ref }}
+
+      # Website: production build against the local backend, served by the website's express server
+      - name: Playwright browsers
+        if: inputs.website
+        run: npx playwright install --with-deps chromium
+      - name: Build the website (STEMN_ENV=local)
+        if: inputs.website
+        run: npm run build
+        env:
+          STEMN_ENV: local
+      - name: Website e2e
+        if: inputs.website
+        run: npm run test:e2e
+
+      # Desktop: Electron under a virtual X server
+      - name: Electron runtime libraries + xvfb
+        if: inputs.desktop
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq xvfb libnss3 libgtk-3-0t64 libxss1 libasound2t64 libgbm1 libxshmfence1
+          # The Electron sandbox helper must be setuid root
+          sudo chown root:root node_modules/electron/dist/chrome-sandbox
+          sudo chmod 4755 node_modules/electron/dist/chrome-sandbox
+      - name: Desktop e2e (xvfb)
+        if: inputs.desktop
+        run: xvfb-run --auto-servernum --server-args="-screen 0 1440x900x24" npm run desktop:test:e2e
+
+      - name: Backend logs
+        if: failure()
+        run: tail -n 200 .stemn-backend/local/.run/logs/api.log .stemn-backend/local/.run/logs/websocket.log || true
+      - name: Upload traces, screenshots and videos
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: e2e-results-${{ github.run_attempt }}
+          path: |
+            tests/e2e/test-results
+            tests/e2e/playwright-report
+            stemn-frontend-desktop/qa
+            .stemn-backend/local/.run/logs
+          retention-days: 14
+          if-no-files-found: ignore
