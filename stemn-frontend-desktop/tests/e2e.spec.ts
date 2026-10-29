@@ -107,6 +107,7 @@ test.describe.serial('Stemn Desktop', () => {
       'onAction',
       'platform',
       'shell',
+      'updates',
       'versions',
       'window',
     ])

@@ -1,0 +1,426 @@
+# Stemn Desktop release pipeline (see stemn-frontend-desktop/RELEASING.md).
+#
+#   tag desktop-vX.Y.Z[-beta.N]   test -> build (ubuntu / windows / macos x edition) -> sign when the
+#                                 secrets exist -> publish: DRAFT release vX.Y.Z in stemn/stemn-desktop
+#                                 + installers staged on the object-storage feed(s)
+#   release published             the draft is published in stemn/stemn-desktop, whose forwarder
+#                                 workflow sends repository_dispatch `desktop-release-published`:
+#                                 promote = the feed(s) switch to the new version
+#   workflow_dispatch             promote / rollback by hand, or a dry run
+#   pull_request (release files)  dry run: unsigned builds of every platform + feed verification,
+#                                 nothing is published
+#
+# Nothing here needs a secret to pass: signing, notarisation, the draft release and the feed upload
+# are each skipped (with a notice) when their secrets/variables are absent.
+name: desktop release
+
+on:
+  push:
+    tags: ['desktop-v*']
+  pull_request:
+    paths:
+      - .github/workflows/desktop-release.yml
+      - stemn-frontend-desktop/electron-builder.*
+      - stemn-frontend-desktop/config/**
+      - stemn-frontend-desktop/scripts/release/**
+  repository_dispatch:
+    types: [desktop-release-published]
+  workflow_dispatch:
+    inputs:
+      action:
+        description: dry-run (build, no publish) | promote (switch the feed to a published version) | rollback
+        type: choice
+        options: [dry-run, promote, rollback]
+        default: dry-run
+      version:
+        description: 'promote / rollback: the version (e.g. 1.2.0)'
+        type: string
+        default: ''
+      to:
+        description: 'rollback: the version to go back to (default: the previous release on the feed)'
+        type: string
+        default: ''
+      github:
+        description: 'rollback: also turn the GitHub release back into a draft'
+        type: boolean
+        default: true
+
+concurrency:
+  group: desktop-release-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+env:
+  RELEASES_REPO: stemn/stemn-desktop
+
+jobs:
+  plan:
+    name: plan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      mode: ${{ steps.plan.outputs.mode }}
+      version: ${{ steps.plan.outputs.version }}
+      channel: ${{ steps.plan.outputs.channel }}
+      matrix: ${{ steps.plan.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v7
+      - id: plan
+        name: Mode, version, channel and build matrix
+        env:
+          EVENT: ${{ github.event_name }}
+          INPUT_ACTION: ${{ inputs.action }}
+          INPUT_VERSION: ${{ inputs.version }}
+          PAYLOAD_VERSION: ${{ github.event.client_payload.version || github.event.client_payload.tag }}
+          BUILD_EU: ${{ vars.UPDATES_BUCKET_EU != '' || vars.DESKTOP_BUILD_EU == 'true' }}
+        run: |
+          package_version=$(node -p "require('./stemn-frontend-desktop/package.json').version")
+          case "$EVENT" in
+            push)
+              mode=build
+              version="${GITHUB_REF_NAME#desktop-v}"
+              if [ "$version" != "$package_version" ]; then
+                echo "::error::Tag $GITHUB_REF_NAME does not match stemn-frontend-desktop/package.json ($package_version). Run scripts/release/prepare.mjs first."
+                exit 1
+              fi ;;
+            pull_request) mode=dry-run; version="$package_version" ;;
+            repository_dispatch) mode=promote; version="${PAYLOAD_VERSION#v}" ;;
+            workflow_dispatch) mode="$INPUT_ACTION"; version="${INPUT_VERSION#v}"; version="${version:-$package_version}" ;;
+          esac
+          if ! [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-beta\.[0-9]+)?$ ]]; then
+            echo "::error::Invalid version '$version' (X.Y.Z or X.Y.Z-beta.N)"
+            exit 1
+          fi
+          channel=stable
+          [[ "$version" == *-* ]] && channel=beta
+
+          # Editions: global always; the EU edition once its feed is configured (or forced).
+          # Pull request dry runs build the EU edition on Linux only.
+          oses='[{"os":"linux","runner":"ubuntu-24.04","platform":"linux","targets":"--linux AppImage deb"},
+                 {"os":"windows","runner":"windows-2025","platform":"win","targets":"--win"},
+                 {"os":"macos","runner":"macos-15","platform":"mac","targets":"--mac"}]'
+          matrix=$(jq -c --arg mode "$mode" --argjson eu "$BUILD_EU" '
+            [.[] | . + {edition: "global"}] +
+            (if $mode == "dry-run" then [.[] | select(.os == "linux") | . + {edition: "eu"}]
+             elif $eu then [.[] | . + {edition: "eu"}] else [] end)
+            | {include: .}' <<< "$oses")
+          {
+            echo "mode=$mode"
+            echo "version=$version"
+            echo "channel=$channel"
+            echo "matrix=$matrix"
+          } >> "$GITHUB_OUTPUT"
+          echo "### Stemn Desktop $version ($channel): $mode" >> "$GITHUB_STEP_SUMMARY"
+
+  test:
+    name: test (unit + updater integration)
+    needs: plan
+    if: needs.plan.outputs.mode == 'build' || needs.plan.outputs.mode == 'dry-run'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+        with:
+          electron: true
+      - run: npm test
+      - name: Electron runtime libraries, FUSE (AppImage) + xvfb
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq xvfb libnss3 libgtk-3-0t64 libxss1 libasound2t64 libgbm1 libxshmfence1 libfuse2t64
+      - name: Updater integration test (unsigned AppImage + local feed)
+        run: xvfb-run --auto-servernum --server-args="-screen 0 1440x900x24" npm run desktop:test:updater
+      - name: Upload screenshots and results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: desktop-updater-test-${{ github.run_attempt }}
+          path: |
+            stemn-frontend-desktop/qa/updater-*.png
+            stemn-frontend-desktop/qa/updater-results
+          retention-days: 14
+          if-no-files-found: ignore
+
+  build:
+    name: build (${{ matrix.os }}, ${{ matrix.edition }})
+    needs: [plan, test]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    env:
+      VERSION: ${{ needs.plan.outputs.version }}
+      CHANNEL: ${{ needs.plan.outputs.channel }}
+      STEMN_ENV: production
+      STEMN_EDITION: ${{ matrix.edition }}
+      UPDATES_URL: ${{ matrix.edition == 'eu' && (vars.UPDATES_URL_EU || 'https://updates.stemn.eu/desktop') || vars.UPDATES_URL_GLOBAL }}
+      SENTRY_DSN: ${{ vars.DESKTOP_SENTRY_DSN }}
+      HAS_AZURE_SIGNING: ${{ matrix.os == 'windows' && secrets.AZURE_CLIENT_SECRET != '' && secrets.AZURE_TRUSTED_SIGNING_ENDPOINT != '' }}
+      HAS_MAC_SIGNING: ${{ matrix.os == 'macos' && secrets.CSC_LINK != '' }}
+      HAS_NOTARIZE: ${{ matrix.os == 'macos' && secrets.CSC_LINK != '' && secrets.APPLE_API_KEY_P8 != '' }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+
+      - name: Build (electron-vite)
+        run: npm run desktop:build
+
+      - name: App Store Connect API key (notarisation)
+        if: env.HAS_NOTARIZE == 'true'
+        shell: bash
+        env:
+          APPLE_API_KEY_P8: ${{ secrets.APPLE_API_KEY_P8 }}
+        run: |
+          printf '%s\n' "$APPLE_API_KEY_P8" > "$RUNNER_TEMP/AuthKey.p8"
+          echo "APPLE_API_KEY=$RUNNER_TEMP/AuthKey.p8" >> "$GITHUB_ENV"
+
+      - name: Package (electron-builder, ${{ matrix.targets }})
+        shell: bash
+        working-directory: stemn-frontend-desktop
+        env:
+          # Windows: Azure Trusted Signing (scripts/release/lib/builder-overlay.mjs)
+          AZURE_TENANT_ID: ${{ matrix.os == 'windows' && secrets.AZURE_TENANT_ID || '' }}
+          AZURE_CLIENT_ID: ${{ matrix.os == 'windows' && secrets.AZURE_CLIENT_ID || '' }}
+          AZURE_CLIENT_SECRET: ${{ matrix.os == 'windows' && secrets.AZURE_CLIENT_SECRET || '' }}
+          AZURE_TRUSTED_SIGNING_ENDPOINT: ${{ matrix.os == 'windows' && secrets.AZURE_TRUSTED_SIGNING_ENDPOINT || '' }}
+          AZURE_TRUSTED_SIGNING_ACCOUNT_NAME: ${{ matrix.os == 'windows' && secrets.AZURE_TRUSTED_SIGNING_ACCOUNT_NAME || '' }}
+          AZURE_TRUSTED_SIGNING_CERTIFICATE_PROFILE: ${{ matrix.os == 'windows' && secrets.AZURE_TRUSTED_SIGNING_CERTIFICATE_PROFILE || '' }}
+          AZURE_TRUSTED_SIGNING_PUBLISHER_NAME: ${{ matrix.os == 'windows' && secrets.AZURE_TRUSTED_SIGNING_PUBLISHER_NAME || '' }}
+          # macOS: Developer ID Application certificate + notarisation (scripts/release/notarize.cjs)
+          CSC_LINK: ${{ matrix.os == 'macos' && secrets.CSC_LINK || '' }}
+          CSC_KEY_PASSWORD: ${{ matrix.os == 'macos' && secrets.CSC_KEY_PASSWORD || '' }}
+          CSC_IDENTITY_AUTO_DISCOVERY: ${{ env.HAS_MAC_SIGNING == 'true' }}
+          APPLE_API_KEY_ID: ${{ matrix.os == 'macos' && secrets.APPLE_API_KEY_ID || '' }}
+          APPLE_API_ISSUER: ${{ matrix.os == 'macos' && secrets.APPLE_API_ISSUER || '' }}
+        run: |
+          [ "$HAS_AZURE_SIGNING" = true ] || [ "${{ matrix.os }}" != windows ] || echo "::notice::Windows build is NOT signed (Azure Trusted Signing secrets not set)"
+          [ "$HAS_MAC_SIGNING" = true ] || [ "${{ matrix.os }}" != macos ] || echo "::notice::macOS build is NOT signed (CSC_LINK not set): it cannot auto-update"
+          [ "$HAS_NOTARIZE" = true ] || [ "${{ matrix.os }}" != macos ] || echo "::notice::macOS build is NOT notarised (APPLE_API_KEY_P8 not set)"
+          npx electron-builder --config electron-builder.config.mjs ${{ matrix.targets }} --publish never
+
+      # Signing smoke checks: only when the signing secrets exist
+      - name: Verify the Windows signature (signtool verify)
+        if: env.HAS_AZURE_SIGNING == 'true'
+        shell: pwsh
+        run: |
+          $signtool = Get-ChildItem "C:\Program Files (x86)\Windows Kits\10\bin\*\x64\signtool.exe" | Sort-Object FullName -Descending | Select-Object -First 1
+          foreach ($file in Get-ChildItem stemn-frontend-desktop/release/*.exe) {
+            & $signtool.FullName verify /pa /v $file.FullName
+            if ($LASTEXITCODE -ne 0) { exit 1 }
+          }
+          & $signtool.FullName verify /pa /v stemn-frontend-desktop/release/win-unpacked/Stemn.exe
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+      - name: Verify the macOS signature (codesign)
+        if: env.HAS_MAC_SIGNING == 'true'
+        run: |
+          app=$(ls -d stemn-frontend-desktop/release/mac-universal/*.app)
+          codesign --verify --deep --strict --verbose=2 "$app"
+          codesign -dv --verbose=4 "$app"
+      - name: Verify notarisation (spctl, stapler)
+        if: env.HAS_NOTARIZE == 'true'
+        run: |
+          app=$(ls -d stemn-frontend-desktop/release/mac-universal/*.app)
+          spctl --assess --type execute -vv "$app"
+          xcrun stapler validate "$app"
+
+      - name: Verify the update files (yml -> installers, SHA-512)
+        shell: bash
+        working-directory: stemn-frontend-desktop
+        run: |
+          # GitHub-provider builds always write latest*.yml
+          provider=$(node -p "require('./config/updateFeed.cjs').resolveUpdateFeed(process.env).provider")
+          verify_channel=$CHANNEL
+          [ "$provider" = github ] && verify_channel=stable
+          node scripts/release/verify-feed.mjs release --channel "$verify_channel" --require ${{ matrix.platform }} --version "$VERSION"
+          echo "PROVIDER=$provider" >> "$GITHUB_ENV"
+
+      - name: Collect the artefacts
+        shell: bash
+        run: |
+          out="artifacts/desktop-${{ matrix.os }}-${{ matrix.edition }}"
+          mkdir -p "$out"
+          cd stemn-frontend-desktop/release
+          for file in *.AppImage *.deb *.exe *.dmg *.zip *.blockmap latest*.yml beta*.yml; do
+            [ -f "$file" ] && cp "$file" "../../$out/"
+          done
+          cd ../..
+          printf '{"version":"%s","channel":"%s","edition":"%s","os":"%s","provider":"%s"}\n' \
+            "$VERSION" "$CHANNEL" "${{ matrix.edition }}" "${{ matrix.os }}" "$PROVIDER" > "$out/release.json"
+          ls -la "$out"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: desktop-${{ matrix.os }}-${{ matrix.edition }}
+          path: artifacts/desktop-${{ matrix.os }}-${{ matrix.edition }}
+          retention-days: 30
+          if-no-files-found: error
+          compression-level: 0
+
+  publish:
+    name: publish (draft release + feed staging)
+    needs: [plan, build]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      VERSION: ${{ needs.plan.outputs.version }}
+      CHANNEL: ${{ needs.plan.outputs.channel }}
+      MODE: ${{ needs.plan.outputs.mode }}
+      HAS_RELEASES_TOKEN: ${{ secrets.DESKTOP_RELEASES_TOKEN != '' }}
+      HAS_GPG: ${{ secrets.GPG_PRIVATE_KEY != '' }}
+      HAS_RCLONE: ${{ secrets.UPDATES_RCLONE_CONFIG != '' }}
+      UPDATES_BUCKET_GLOBAL: ${{ vars.UPDATES_BUCKET_GLOBAL }}
+      UPDATES_BUCKET_EU: ${{ vars.UPDATES_BUCKET_EU }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - uses: actions/download-artifact@v7
+        with:
+          pattern: desktop-*-*
+          path: artifacts
+      - name: Stage (verify every build, lay out the GitHub release and the feeds)
+        run: |
+          rm -rf artifacts/desktop-updater-test-*
+          node stemn-frontend-desktop/scripts/release/stage-feed.mjs --artifacts artifacts --out staged
+          node --input-type=module -e "
+            import { readFileSync } from 'node:fs'
+            import { releaseNotesFor } from './stemn-frontend-desktop/config/changelog.mjs'
+            const notes = releaseNotesFor(readFileSync('stemn-frontend-desktop/CHANGELOG.md', 'utf8'), process.env.VERSION)
+            console.log(notes || 'No release notes.')
+            console.log('')
+            console.log('Built from ${{ github.repository }}@${{ github.sha }} (${{ github.ref_name }}).')
+          " > staged/notes.md
+          cat staged/notes.md
+          find staged -type f | sort
+      - name: Sign SHA256SUMS (GPG)
+        if: env.HAS_GPG == 'true'
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+        run: |
+          printf '%s\n' "$GPG_PRIVATE_KEY" | gpg --batch --import
+          gpg --batch --yes --pinentry-mode loopback --passphrase "$GPG_PASSPHRASE" \
+            --armor --detach-sign --output staged/github/SHA256SUMS.asc staged/github/SHA256SUMS
+          gpg --batch --verify staged/github/SHA256SUMS.asc staged/github/SHA256SUMS
+
+      - name: Draft release in ${{ env.RELEASES_REPO }}
+        if: env.MODE == 'build' && env.HAS_RELEASES_TOKEN == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.DESKTOP_RELEASES_TOKEN }}
+        run: |
+          tag="v$VERSION"
+          prerelease=""
+          [ "$CHANNEL" = beta ] && prerelease="--prerelease"
+          if gh release view "$tag" --repo "$RELEASES_REPO" > /dev/null 2>&1; then
+            state=$(gh release view "$tag" --repo "$RELEASES_REPO" --json isDraft -q .isDraft)
+            if [ "$state" != true ]; then
+              echo "::error::$tag is already published in $RELEASES_REPO; bump the version instead of rebuilding it"
+              exit 1
+            fi
+            gh release upload "$tag" staged/github/* --repo "$RELEASES_REPO" --clobber
+            gh release edit "$tag" --repo "$RELEASES_REPO" --notes-file staged/notes.md
+          else
+            gh release create "$tag" staged/github/* --repo "$RELEASES_REPO" --draft $prerelease \
+              --title "Stemn Desktop $VERSION" --notes-file staged/notes.md
+          fi
+          url=$(gh release view "$tag" --repo "$RELEASES_REPO" --json url -q .url)
+          echo "Draft release: $url" >> "$GITHUB_STEP_SUMMARY"
+      - name: No releases token
+        if: env.MODE == 'build' && env.HAS_RELEASES_TOKEN != 'true'
+        run: |
+          echo "::notice::DESKTOP_RELEASES_TOKEN is not set: no draft release was created in $RELEASES_REPO (the artefacts are attached to this run)"
+
+      - name: Stage the installers on the feed bucket(s) (rclone)
+        if: env.MODE == 'build' && env.HAS_RCLONE == 'true' && (env.UPDATES_BUCKET_GLOBAL != '' || env.UPDATES_BUCKET_EU != '')
+        env:
+          RCLONE_CONFIG_CONTENT: ${{ secrets.UPDATES_RCLONE_CONFIG }}
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq rclone
+          printf '%s\n' "$RCLONE_CONFIG_CONTENT" > "$RUNNER_TEMP/rclone.conf"
+          export RCLONE_CONFIG="$RUNNER_TEMP/rclone.conf"
+          for edition in global eu; do
+            root_var="UPDATES_BUCKET_${edition^^}"
+            root="${!root_var}"
+            if [ -n "$root" ] && [ -d "staged/feed/$edition" ]; then
+              # installers next to the channel dirs + releases/<version>/*.yml; the live channel files
+              # only change on promote (when the release is published)
+              rclone copy "staged/feed/$edition" "$root" --checksum --stats-one-line -v
+              echo "Staged $edition feed: $root" >> "$GITHUB_STEP_SUMMARY"
+            fi
+          done
+      - name: No feed bucket
+        if: env.MODE == 'build' && !(env.HAS_RCLONE == 'true' && (env.UPDATES_BUCKET_GLOBAL != '' || env.UPDATES_BUCKET_EU != ''))
+        run: |
+          echo "::notice::UPDATES_RCLONE_CONFIG / UPDATES_BUCKET_* are not configured: the generic feed was not updated"
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: desktop-release-${{ env.VERSION }}
+          path: staged
+          retention-days: 30
+          compression-level: 0
+
+  promote:
+    name: promote (switch the feed to the published release)
+    needs: plan
+    if: needs.plan.outputs.mode == 'promote'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      VERSION: ${{ needs.plan.outputs.version }}
+      UPDATES_BUCKET_GLOBAL: ${{ vars.UPDATES_BUCKET_GLOBAL }}
+      UPDATES_BUCKET_EU: ${{ vars.UPDATES_BUCKET_EU }}
+      UPDATES_URL_GLOBAL: ${{ vars.UPDATES_URL_GLOBAL }}
+      UPDATES_URL_EU: ${{ vars.UPDATES_URL_EU || 'https://updates.stemn.eu/desktop' }}
+      HAS_RCLONE: ${{ secrets.UPDATES_RCLONE_CONFIG != '' }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - name: Promote ${{ env.VERSION }}
+        if: env.HAS_RCLONE == 'true'
+        env:
+          RCLONE_CONFIG_CONTENT: ${{ secrets.UPDATES_RCLONE_CONFIG }}
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq rclone
+          printf '%s\n' "$RCLONE_CONFIG_CONTENT" > "$RUNNER_TEMP/rclone.conf"
+          export RCLONE_CONFIG="$RUNNER_TEMP/rclone.conf"
+          [ -n "$UPDATES_BUCKET_EU" ] || unset UPDATES_URL_EU
+          node stemn-frontend-desktop/scripts/release/promote.mjs "$VERSION"
+      - name: GitHub provider
+        run: |
+          echo "::notice::Apps on the GitHub provider (global edition without UPDATES_URL_GLOBAL) see v$VERSION as soon as it is published in $RELEASES_REPO"
+
+  rollback:
+    name: rollback
+    needs: plan
+    if: needs.plan.outputs.mode == 'rollback'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      VERSION: ${{ needs.plan.outputs.version }}
+      TO: ${{ inputs.to }}
+      UPDATES_BUCKET_GLOBAL: ${{ vars.UPDATES_BUCKET_GLOBAL }}
+      UPDATES_BUCKET_EU: ${{ vars.UPDATES_BUCKET_EU }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - name: Roll back ${{ env.VERSION }}
+        env:
+          RCLONE_CONFIG_CONTENT: ${{ secrets.UPDATES_RCLONE_CONFIG }}
+          GH_TOKEN: ${{ secrets.DESKTOP_RELEASES_TOKEN }}
+          ROLLBACK_GITHUB: ${{ inputs.github }}
+        run: |
+          args=("$VERSION")
+          [ -n "$TO" ] && args+=(--to "$TO")
+          if [ -n "$RCLONE_CONFIG_CONTENT" ]; then
+            sudo apt-get update -qq && sudo apt-get install -y -qq rclone
+            printf '%s\n' "$RCLONE_CONFIG_CONTENT" > "$RUNNER_TEMP/rclone.conf"
+            export RCLONE_CONFIG="$RUNNER_TEMP/rclone.conf"
+          else
+            unset UPDATES_BUCKET_GLOBAL UPDATES_BUCKET_EU
+          fi
+          [ "$ROLLBACK_GITHUB" = true ] && [ -n "$GH_TOKEN" ] && args+=(--github)
+          node stemn-frontend-desktop/scripts/release/rollback.mjs "${args[@]}"

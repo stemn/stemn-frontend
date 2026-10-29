@@ -4,7 +4,7 @@ package-lock.json
 build
 dist
 out
-release
+stemn-frontend-desktop/release
 qa
 test-results
 playwright-report

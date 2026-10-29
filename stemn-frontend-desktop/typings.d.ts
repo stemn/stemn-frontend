@@ -16,6 +16,12 @@ interface GLOBAL_ENV {
   NODE_ENV: 'development' | 'production'
   SENTRY_DSN?: string
   STEMN_ENV?: string
+  /** Desktop edition (config/updateFeed.cjs) */
+  STEMN_EDITION?: 'global' | 'eu'
+  /** Build-time update feed of the edition (config/updateFeed.cjs resolveUpdateFeed) */
+  UPDATE_FEED?:
+    | { edition: 'global' | 'eu'; provider: 'generic'; url: string }
+    | { edition: 'global' | 'eu'; provider: 'github'; owner: string; repo: string }
   WEBSITE_URL: string
   WEBSOCKET_SERVER: string
 }

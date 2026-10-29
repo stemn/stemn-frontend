@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Hardened runtime entitlements of Stemn Desktop (app and helpers, electron-builder.yml mac.entitlements).
+  allow-jit: V8. network.client: the Stemn API / websocket and the update feed.
+  files.user-selected.read-write: the provider folders picked with the native folder dialog.
+  (The network/files keys only take effect in an App Sandbox build; they document the needs.)
+-->
+<plist version="1.0">
+  <dict>
+    <key>com.apple.security.cs.allow-jit</key>
+    <true/>
+    <key>com.apple.security.network.client</key>
+    <true/>
+    <key>com.apple.security.files.user-selected.read-write</key>
+    <true/>
+  </dict>
+</plist>

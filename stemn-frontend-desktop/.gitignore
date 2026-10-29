@@ -4,7 +4,7 @@ node_modules
 # Build output, packaged apps, e2e screenshots / reports
 dist
 out
-release
+/release
 qa
 
 # Logs / OS / env

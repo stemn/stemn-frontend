@@ -43,6 +43,12 @@ const bridge: IStemnDesktopBridge = {
     showItemInFolder: (path) => ipcRenderer.invoke(IPC.SHOW_ITEM_IN_FOLDER, path),
   },
   log: (level, message) => ipcRenderer.send(IPC.LOG, { level, message: String(message) }),
+  updates: {
+    getStatus: () => ipcRenderer.invoke(IPC.UPDATES_STATUS),
+    checkForUpdates: () => ipcRenderer.invoke(IPC.UPDATES_CHECK),
+    downloadUpdate: () => ipcRenderer.invoke(IPC.UPDATES_DOWNLOAD),
+    quitAndInstall: () => ipcRenderer.invoke(IPC.UPDATES_QUIT_AND_INSTALL),
+  },
 }
 
 contextBridge.exposeInMainWorld('stemnDesktop', bridge)

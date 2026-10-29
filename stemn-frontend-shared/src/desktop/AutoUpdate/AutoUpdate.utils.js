@@ -1,20 +1,23 @@
-/* Main process only (called through FunctionLibrary aliases) */
-import { app } from 'electron'
-import electronUpdater from 'electron-updater'
+/* Main process only (called through FunctionLibrary aliases, see AutoUpdate.actions.js) */
 
-const { autoUpdater } = electronUpdater
+/**
+ * The updater lives in stemn-frontend-desktop/app/main/updater; it registers its functions here
+ * when it starts so that the aliased actions reach it.
+ */
+let implementation = null
 
-export const checkForUpdates = () => {
-  // Unpackaged (dev) builds have no app-update.yml, and on Linux only AppImages
-  // can update themselves: report "up to date"
-  if (!app.isPackaged || (process.platform === 'linux' && !process.env.APPIMAGE)) {
-    autoUpdater.emit('update-not-available')
+export const setImplementation = (functions) => {
+  implementation = functions
+}
+
+const call = (name) => () => {
+  if (!implementation) {
+    console.warn(`AutoUpdateUtils.${name}: the updater is not running yet`)
     return ''
   }
-  autoUpdater.checkForUpdates().catch(() => {}) // errors are reported through the 'error' event
-  return ''
+  return implementation[name]()
 }
 
-export const installUpdates = () => {
-  autoUpdater.quitAndInstall()
-}
+export const checkForUpdates = call('checkForUpdates')
+export const downloadUpdate = call('downloadUpdate')
+export const installUpdates = call('installUpdates')
