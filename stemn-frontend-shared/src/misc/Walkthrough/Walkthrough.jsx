@@ -9,7 +9,7 @@ import * as WalkthroughActions from './Walkthrough.actions.js'
 import React from 'react'
 import PropTypes from 'prop-types'
 import { omit } from 'lodash'
-import { getStepData } from './Walkthrough.config.js'
+import { getStepData } from './Walkthrough.config.jsx'
 
 import classes from './Walkthrough.css'
 

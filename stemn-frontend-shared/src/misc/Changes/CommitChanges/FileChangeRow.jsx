@@ -6,9 +6,9 @@ import capitalizeFirstLetter from 'stemn-shared/utils/strings/capitalizeFirstLet
 import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox'
 import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
 
-import Add from 'stemn-shared/assets/icons/changes/add.js'
-import Remove from 'stemn-shared/assets/icons/changes/remove.js'
-import Change from 'stemn-shared/assets/icons/changes/change.js'
+import Add from 'stemn-shared/assets/icons/changes/add.jsx'
+import Remove from 'stemn-shared/assets/icons/changes/remove.jsx'
+import Change from 'stemn-shared/assets/icons/changes/change.jsx'
 
 // Styles
 import styles from './FileChangeRow.css'
