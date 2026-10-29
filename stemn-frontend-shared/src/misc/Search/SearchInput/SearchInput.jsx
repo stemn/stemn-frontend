@@ -1,10 +1,10 @@
 import React from 'react'
 import cn from 'classnames'
-import classes from './SearchInput.css'
+import classes from './SearchInput.module.css'
 import { MdSearch } from 'react-icons/md'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 
-export default (props) => {
+const SearchInput = (props) => {
   const { style, className, ...otherProps } = props
   return (
     <div className={ cn(classes.search, 'layout-row layout-align-start-center', className) } style={ style }>
@@ -16,3 +16,5 @@ export default (props) => {
     </div>
   )
 }
+
+export default SearchInput

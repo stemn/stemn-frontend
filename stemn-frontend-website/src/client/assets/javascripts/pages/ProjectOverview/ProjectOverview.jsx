@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import cn from 'classnames'
-import classes from './ProjectOverview.css'
+import classes from './ProjectOverview.module.css'
 import { projectRoute, fileRoute, projectFolderRoute } from 'route-actions'
 import moment from 'moment'
 import { has, get } from 'lodash'

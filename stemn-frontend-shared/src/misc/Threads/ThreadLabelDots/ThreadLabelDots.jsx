@@ -1,6 +1,6 @@
 import React from 'react'
 import cn from 'classnames'
-import classes from './ThreadLabelDots.scss'
+import classes from './ThreadLabelDots.module.scss'
 import Link from 'stemn-shared/misc/Router/Link'
 
 export default class ThreadLabelDots extends React.Component {

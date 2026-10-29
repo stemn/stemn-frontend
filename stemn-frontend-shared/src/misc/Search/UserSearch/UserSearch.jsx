@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classes from './UserSearch.css'
+import classes from './UserSearch.module.css'
 
 import Autosuggest from 'stemn-shared/misc/Autosuggest/Autosuggest.container'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'

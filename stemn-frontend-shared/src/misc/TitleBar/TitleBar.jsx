@@ -2,7 +2,7 @@ import React from 'react'
 import { getBridge, getPlatform } from 'stemn-shared/desktop/bridge'
 
 // Styles
-import styles from './TitleBar.css'
+import styles from './TitleBar.module.css'
 import cn from 'classnames'
 
 import MaximiseIcon from './icons/maximise.jsx'

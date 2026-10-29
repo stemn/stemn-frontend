@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classes from './LoadingAnimation.css'
+import classes from './LoadingAnimation.module.css'
 import cn from 'classnames'
 
 export default class LoadingAnimation extends Component {

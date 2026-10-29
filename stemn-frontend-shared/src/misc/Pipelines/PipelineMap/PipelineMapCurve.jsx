@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import cn from 'classnames'
-import classes from './PipelineMapCurve.scss'
+import classes from './PipelineMapCurve.module.scss'
 
 export default class PipelineMapCurve extends Component {
   render() {

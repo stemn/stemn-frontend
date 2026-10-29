@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { PropTypes } from 'prop-types'
 import cn from 'classnames'
-import classes from './SocialButton.css'
+import classes from './SocialButton.module.css'
 import { MdStar } from 'react-icons/md'
 import { MdStarBorder } from 'react-icons/md'
 import { MdBookmark } from 'react-icons/md'

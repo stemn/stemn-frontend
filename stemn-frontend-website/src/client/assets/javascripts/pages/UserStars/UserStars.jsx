@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classes from './UserStars.css'
+import classes from './UserStars.module.css'
 import Pagination from 'stemn-shared/misc/Pagination'
 import { ProjectRowContainer } from 'stemn-shared/misc/Projects/ProjectRow'
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classes from './ThreadRow.css'
+import classes from './ThreadRow.module.css'
 import cn from 'classnames'
 import Link from 'stemn-shared/misc/Router/Link'
 import ThreadLabelDots from 'stemn-shared/misc/Threads/ThreadLabelDots/ThreadLabelDots.jsx'

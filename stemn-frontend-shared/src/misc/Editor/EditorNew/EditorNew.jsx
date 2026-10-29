@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import CodeMirror from 'stemn-shared/misc/CodeMirror'
-import classes from './EditorNew.scss'
+import classes from './EditorNew.module.scss'
 import 'codemirror/mode/markdown/markdown'
 import 'codemirror/mode/stex/stex'
 import 'codemirror/addon/mode/multiplex'

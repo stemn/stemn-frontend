@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import StandardLayout from 'layout/StandardLayout'
 import { Helmet } from 'react-helmet-async'
-import classes from 'layout/layout.css'
+import classes from 'layout/layout.module.css'
 
 export default class Security extends Component {
   render() {

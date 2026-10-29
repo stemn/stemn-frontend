@@ -1,6 +1,5 @@
 import React from 'react'
 
-// import classes from './banner.css';
 
 export default class Guide extends React.Component {
   render() {

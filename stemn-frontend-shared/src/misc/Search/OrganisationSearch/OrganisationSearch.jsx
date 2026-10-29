@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classes from './OrganisationSearch.css'
+import classes from './OrganisationSearch.module.css'
 
 import Autosuggest from 'stemn-shared/misc/Autosuggest/Autosuggest.container'
 import Highlight from 'stemn-shared/misc/Autosuggest/Highlight'

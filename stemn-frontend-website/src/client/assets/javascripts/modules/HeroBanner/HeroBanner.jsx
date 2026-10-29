@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classes from './HeroBanner.scss'
+import classes from './HeroBanner.module.scss'
 import cn from 'classnames'
 import { Container } from 'stemn-shared/misc/Layout'
 

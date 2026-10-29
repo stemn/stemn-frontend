@@ -1,14 +1,14 @@
 import React from 'react'
 import { get } from 'lodash'
 import cn from 'classnames'
-import styles from './SidebarProjectButton.css'
+import styles from './SidebarProjectButton.module.css'
 import { Link } from 'stemn-shared/routing'
 import Drive   from 'stemn-shared/assets/icons/providers/drive.jsx'
 import Dropbox   from 'stemn-shared/assets/icons/providers/dropbox.jsx'
 import { MdContentCopy } from 'react-icons/md'
 import { MdCloudOff } from 'react-icons/md'
 
-export default (props) => {
+const SidebarProjectButton = (props) => {
   const iconStyle = { width: '22px', height: '22px' }
   const { item, to, clickFn } = props
 
@@ -57,5 +57,7 @@ export default (props) => {
   } 
   return null
 }
+
+export default SidebarProjectButton
 
 // <img src={props.icon === 'tutorial' ? tutorial : book} style={iconStyle}/>

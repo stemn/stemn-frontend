@@ -1,6 +1,6 @@
 import React from 'react'
 import cn from 'classnames'
-import classes from './Reactions.css'
+import classes from './Reactions.module.css'
 import Popover from 'stemn-shared/misc/Popover'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import { options, groupAndOrderReactions } from './Reactions.utils.js'

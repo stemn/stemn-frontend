@@ -1,5 +1,5 @@
 import React from 'react'
-import styles         from './PreviewImage.css'
+import styles         from './PreviewImage.module.css'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import ScrollZoom     from 'stemn-shared/misc/Scroll/ScrollZoom/ScrollZoom.jsx'
 

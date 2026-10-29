@@ -1,6 +1,6 @@
 import React from 'react'
 import cn from 'classnames'
-import classes from './FileCompareSlider.scss'
+import classes from './FileCompareSlider.module.scss'
 import clickDrag from 'stemn-shared/misc/ClickDrag'
 
 class Component extends React.Component {

@@ -1,6 +1,6 @@
 import React from 'react'
 import cn from 'classnames'
-import classes from '../Login/Login.scss'
+import classes from '../Login/Login.module.scss'
 import { Link } from 'stemn-shared/routing'
 import Button from 'stemn-shared/misc/Buttons/Button/Button.jsx'
 import Input from 'stemn-shared/misc/Input/Input/Input'

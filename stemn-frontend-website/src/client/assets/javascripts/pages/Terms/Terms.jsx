@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import StandardLayout from 'layout/StandardLayout'
 
-import classes from 'layout/layout.css'
+import classes from 'layout/layout.module.css'
 import Link from 'stemn-shared/misc/Router/Link'
 import { Helmet } from 'react-helmet-async'
 

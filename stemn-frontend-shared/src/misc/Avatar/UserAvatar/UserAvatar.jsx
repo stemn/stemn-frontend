@@ -1,6 +1,6 @@
 import React from 'react'
 import cn from 'classnames'
-import classes from './UserAvatar.css'
+import classes from './UserAvatar.module.css'
 
 const colours = [
   '#D50000', '#FF4081', '#CE93D8', '#AA00FF', '#B39DDB', '#6200EA', '#3F51B5', '#1A237E', '#2962FF', '#0091EA', '#00B8D4', '#00BFA5',

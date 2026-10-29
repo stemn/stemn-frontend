@@ -6,7 +6,7 @@ import { MdDone } from 'react-icons/md'
 import { MdLink } from 'react-icons/md'
 import { MdMoreHoriz } from 'react-icons/md'
 
-import classes from './LinkAccount.css'
+import classes from './LinkAccount.module.css'
 
 export default class LinkAccount extends React.Component {
   render() {

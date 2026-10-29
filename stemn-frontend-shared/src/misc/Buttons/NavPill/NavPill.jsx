@@ -3,7 +3,7 @@ import Link from 'stemn-shared/misc/Router/Link'
 
 // Styles
 import cn from 'classnames'
-import classes from './NavPill.css'
+import classes from './NavPill.module.css'
 
 export default class NavPill extends React.Component {
   render() {

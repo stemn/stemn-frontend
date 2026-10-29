@@ -3,7 +3,7 @@ import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import SimpleTable from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable'
 import Link from 'stemn-shared/misc/Router/Link'
 import PlansRadios from 'stemn-shared/misc/Billing/PlansRadios'
-import classes from './SettingsBilling.css'
+import classes from './SettingsBilling.module.css'
 
 class SettingsBilling extends Component {
   render() {

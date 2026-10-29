@@ -24,7 +24,7 @@ import PublicPrivateIcon from 'stemn-shared/misc/Icons/PublicPrivateIcon'
 import folderLockedVector  from 'stemn-shared/assets/images/pure-vectors/folder-locked.svg'
 import globalVector  from 'stemn-shared/assets/images/pure-vectors/global.svg'
 
-import classes from './ProjectPage.css'
+import classes from './ProjectPage.module.css'
 
 class Component extends React.Component {
   UNSAFE_componentWillMount() {

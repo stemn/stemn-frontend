@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classes from './SiteSearch.css'
+import classes from './SiteSearch.module.css'
 import cn from 'classnames'
 import { MdSearch } from 'react-icons/md'
 import { Link } from 'stemn-shared/routing'

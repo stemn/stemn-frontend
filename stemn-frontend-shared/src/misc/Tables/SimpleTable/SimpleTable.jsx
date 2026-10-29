@@ -1,8 +1,8 @@
 import React from 'react'
-import s from './SimpleTable.scss'
+import s from './SimpleTable.module.scss'
 import cn from 'classnames'
 
-export default (props) => {
+const SimpleTable = (props) => {
   const { children, flex, className, ...otherProps } = props
   if (!flex) {
     return (
@@ -20,3 +20,5 @@ export default (props) => {
     )
   }
 }
+
+export default SimpleTable

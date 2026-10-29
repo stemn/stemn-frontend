@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classes from './LandingFooter.css'
+import classes from './LandingFooter.module.css'
 import cn from 'classnames'
 
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'

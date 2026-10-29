@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 
 import cn from 'classnames'
-import classes from './DatePicker.css'
+import classes from './DatePicker.module.css'
 import Calendar from '../Calendar.jsx'
 import PopoverFit from 'stemn-shared/misc/PopoverMenu/PopoverFit'
 import { MdExpandMore } from 'react-icons/md'

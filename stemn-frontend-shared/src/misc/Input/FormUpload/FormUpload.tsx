@@ -3,7 +3,7 @@ import { cloneDeep } from 'lodash'
 import * as React from 'react'
 import Dropzone from 'react-dropzone'
 import { WrappedFieldMetaProps } from 'redux-form'
-import s from './FormUpload.scss'
+import s from './FormUpload.module.scss'
 // import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 // import Upload from 'stemn-shared/misc/Upload/Upload'
 

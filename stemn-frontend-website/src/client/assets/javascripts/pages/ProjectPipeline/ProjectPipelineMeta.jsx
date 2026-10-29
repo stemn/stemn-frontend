@@ -1,7 +1,7 @@
 import React from 'react'
 
 import cn from 'classnames'
-import classes from './ProjectPipeline.scss'
+import classes from './ProjectPipeline.module.scss'
 
 import { get } from 'lodash'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
@@ -11,7 +11,7 @@ import Link from 'stemn-shared/misc/Router/Link'
 import moment from 'moment'
 import IsOwner from 'stemn-shared/misc/Auth/IsOwner'
 
-export default ({ pipeline, project, rerunPipeline, cancelPipeline }) => {
+const ProjectPipelineMeta = ({ pipeline, project, rerunPipeline, cancelPipeline }) => {
   const userRouteParams = {
     userId: pipeline.data.owner._id,
   }
@@ -81,4 +81,6 @@ export default ({ pipeline, project, rerunPipeline, cancelPipeline }) => {
     
   )
 }
+
+export default ProjectPipelineMeta
 

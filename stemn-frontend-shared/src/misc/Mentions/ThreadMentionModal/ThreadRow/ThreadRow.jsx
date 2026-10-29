@@ -8,8 +8,8 @@ import * as ThreadsActions from 'stemn-shared/misc/Threads/Threads.actions.js'
 
 // Styles
 import cn from 'classnames'
-import classes from './ThreadRow.css'
-import loadingClasses from 'stemn-shared/misc/Loading/LoadingPlaceholders/LoadingPlaceholders.css'
+import classes from './ThreadRow.module.css'
+import loadingClasses from 'stemn-shared/misc/Loading/LoadingPlaceholders/LoadingPlaceholders.module.css'
 
 
 import Button from 'stemn-shared/misc/Buttons/Button/Button'

@@ -21,7 +21,7 @@ import SimpleTable from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable'
 import Timeline from 'stemn-shared/misc/Timeline/Timeline'
 import SectionTitle from 'stemn-shared/misc/Titles/SectionTitle/SectionTitle'
 import { dispatchToProps } from './File.container'
-import classes from './File.scss'
+import classes from './File.module.scss'
 
 export interface IFileComponentState {
   isOpen: boolean,

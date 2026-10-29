@@ -1,7 +1,7 @@
 
 import React from 'react'
 import cn from 'classnames'
-import classes from './MarkdownButton.css'
+import classes from './MarkdownButton.module.css'
 import Markdown from 'stemn-shared/assets/icons/editor/markdown.jsx'
 
 export default class MarkdownButton extends React.Component {

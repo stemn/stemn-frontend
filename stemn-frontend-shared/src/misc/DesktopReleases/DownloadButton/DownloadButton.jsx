@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
-import classes from './DownloadButton.css'
+import classes from './DownloadButton.module.css'
 
 import WindowsIcon from 'stemn-shared/assets/icons/os/windows'
 import LinuxIcon from 'stemn-shared/assets/icons/os/linux'

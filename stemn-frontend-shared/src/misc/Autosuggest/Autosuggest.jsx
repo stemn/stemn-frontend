@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Autosuggest from 'react-autosuggest'
 import LoadingLinear from 'stemn-shared/misc/Loading/LoadingLinear/LoadingLinear'
-import classes from './Autosuggest.css'
+import classes from './Autosuggest.module.css'
 
 export default class AutosuggestWrapped extends Component {
   static propTypes = {

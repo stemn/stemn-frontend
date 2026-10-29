@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
-import classes from './Upload.css'
+import classes from './Upload.module.css'
 import Dropzone from 'react-dropzone'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import { MdFileUpload } from 'react-icons/md'

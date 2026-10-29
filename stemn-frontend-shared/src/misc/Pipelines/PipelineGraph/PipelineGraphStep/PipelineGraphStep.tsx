@@ -7,7 +7,7 @@ import { PipelineGraphPorts } from 'stemn-shared/misc/Pipelines/PipelineGraph/Pi
 import { PipelineGraphStepModel } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphStep'
 import { IStep } from 'stemn-shared/misc/Pipelines/PipelineGraph/types'
 import SimpleTable from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable.jsx'
-import s from './PipelineGraphStep.scss'
+import s from './PipelineGraphStep.module.scss'
 
 const prettyKey = flow(lowerCase, capitalize)
 

@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 
 import cn from 'classnames'
-import s from './PipelineIcon.scss'
+import s from './PipelineIcon.module.scss'
 import { MdDone } from 'react-icons/md'
 import { MdPlayArrow as MdPlay } from 'react-icons/md'
 import { MdClose } from 'react-icons/md'

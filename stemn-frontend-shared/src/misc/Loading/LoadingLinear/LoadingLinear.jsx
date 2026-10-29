@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classes from './LoadingLinear.css'
+import classes from './LoadingLinear.module.css'
 import cn from 'classnames'
 
 export default class LoadingLinear extends Component {

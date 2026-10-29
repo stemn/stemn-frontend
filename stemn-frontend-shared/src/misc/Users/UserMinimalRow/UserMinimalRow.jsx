@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import classes from './UserMinimalRow.scss'
+import classes from './UserMinimalRow.module.scss'
 import Link from 'stemn-shared/misc/Router/Link'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 

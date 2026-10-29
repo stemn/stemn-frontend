@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import cn from 'classnames'
-import classes from './PipelineMiniMap.scss'
+import classes from './PipelineMiniMap.module.scss'
 import PipelineIcon from '../PipelineIcon'
 import Popover from 'stemn-shared/misc/Popover/Popover'
 import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList'

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { ArrowTabs, ArrowTab } from 'stemn-shared/misc/Tabs/ArrowTabs/ArrowTabs.jsx'
 import { Container } from 'stemn-shared/misc/Layout'
 import { Helmet } from 'react-helmet-async'
-import classes from './Onboarding.scss'
+import classes from './Onboarding.module.scss'
 import cn from 'classnames'
 
 export default class Onboarding extends Component {

@@ -3,7 +3,7 @@ import Input from 'stemn-shared/misc/Input/Input/Input'
 import { MdDone } from 'react-icons/md'
 
 // Styles
-import classes from './RadioAlt.css'
+import classes from './RadioAlt.module.css'
 import cn from 'classnames'
 
 /** *******************************************

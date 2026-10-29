@@ -5,7 +5,7 @@ import { Container } from 'stemn-shared/misc/Layout'
 import PricingTable from 'stemn-shared/misc/Billing/PricingTable'
 import { pricingTableData } from 'stemn-shared/misc/Billing/Billing.data'
 import { Helmet } from 'react-helmet-async'
-import classes from './Pricing.scss'
+import classes from './Pricing.module.scss'
 import cn from 'classnames'
 
 export default class Pricing extends Component {

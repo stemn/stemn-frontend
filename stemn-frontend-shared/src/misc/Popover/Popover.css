@@ -1,6 +1,6 @@
-@value primary-bg, primary from "theme";
+/* Global stylesheet (class names used by the Popover component and PopoverMenu markup) */
 
-:global(.Popover-body)  {
+.Popover-body  {
   display: inline-flex;
   flex-direction: column;
   background: white;
@@ -9,18 +9,18 @@
   margin-top: -1px;
 }
 
-:global(.Popover-tipShape)  {
+.Popover-tipShape  {
   fill: white;
   stroke-width: 1;
   stroke: rgba(0, 0, 0, 0.12);
 }
 
-:global(.Popover) {
+.Popover {
   z-index: 100;
   transform: translateY(0px) !important;
 }
 
-:global(.PopoverMenu) {
+.PopoverMenu {
   min-width: 160px;
   overflow-y: auto;
   font-size: 12px;
@@ -32,7 +32,7 @@
   outline: none;
 }
 
-:global(.PopoverMenu a) {
+.PopoverMenu a {
   display: flex;
   padding: 8px 15px;
   clear: both;
@@ -45,33 +45,33 @@
   border: 0;
 }
 
-:global(.PopoverMenu a.info) {
+.PopoverMenu a.info {
   cursor: default;
   color: rgba(0, 0, 0, 0.3);
 }
-:global(.PopoverMenu a.info:hover) {
+.PopoverMenu a.info:hover {
   background: inherit;
   color: rgba(0, 0, 0, 0.3);
 }
-:global(.PopoverMenu a.submenu) {
+.PopoverMenu a.submenu {
   padding-right: 27px;
 }
-:global(.PopoverMenu a.submenu:after) {
+.PopoverMenu a.submenu:after {
   content: "\25B6";
   display: inline-block;
   position: absolute;
   right: 7px;
 }
 
-:global(.PopoverMenu .divider) {
+.PopoverMenu .divider {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-:global(.PopoverMenu a.active) {
-  color: primary;
+.PopoverMenu a.active {
+  color: var(--theme-primary);
 }
 
-:global(.PopoverMenu a:hover) {
-  background:  primary-bg;
+.PopoverMenu a:hover {
+  background: var(--theme-primary-bg);
   color: white;
 }

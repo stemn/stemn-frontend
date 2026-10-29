@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classes from './UserFollowers.css'
+import classes from './UserFollowers.module.css'
 import UserRow from 'stemn-shared/misc/Users/UserRow'
 import Pagination from 'stemn-shared/misc/Pagination'
 

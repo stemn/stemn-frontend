@@ -1,6 +1,6 @@
 import React from 'react'
 
-import styles from './CompareFiles.css'
+import styles from './CompareFiles.module.css'
 
 export default class CompareFiles extends React.Component {
   render() {

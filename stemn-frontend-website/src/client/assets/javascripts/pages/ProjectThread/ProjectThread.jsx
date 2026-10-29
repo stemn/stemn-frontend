@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import classes from './ProjectThread.scss'
+import classes from './ProjectThread.module.scss'
 import cn from 'classnames'
 import { Row, Col, Container } from 'stemn-shared/misc/Layout'
 import SubSubHeader from 'modules/SubSubHeader'

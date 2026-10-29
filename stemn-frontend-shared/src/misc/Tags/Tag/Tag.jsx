@@ -1,7 +1,7 @@
 import React from 'react'
 import cn from 'classnames'
 import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
-import classes from './Tag.css'
+import classes from './Tag.module.css'
 
 export default class Tag extends React.Component {
   render() {

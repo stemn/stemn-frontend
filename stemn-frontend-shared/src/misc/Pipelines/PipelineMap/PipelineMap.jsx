@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import cn from 'classnames'
-import classes from './PipelineMap.scss'
+import classes from './PipelineMap.module.scss'
 import PipelineIcon, { getStatusClass } from '../PipelineIcon'
 import Link from 'stemn-shared/misc/Router/Link'
 import PipelineMapCurve from './PipelineMapCurve'

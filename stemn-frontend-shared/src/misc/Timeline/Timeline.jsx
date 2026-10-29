@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 // Styles
 import cn from 'classnames'
-import styles from './Timeline.css'
+import styles from './Timeline.module.css'
 
 import { orderByTime } from './Timeline.utils'
 

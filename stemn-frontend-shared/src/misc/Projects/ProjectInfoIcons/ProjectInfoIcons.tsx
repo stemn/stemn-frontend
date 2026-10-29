@@ -5,7 +5,7 @@ import ProviderIcon from 'stemn-shared/misc/Icons/ProviderIcon'
 import PublicPrivateIcon from 'stemn-shared/misc/Icons/PublicPrivateIcon'
 import { IProject } from 'stemn-shared/misc/Projects/types'
 import Link from 'stemn-shared/misc/Router/Link'
-import s from './ProjectInfoIcons.scss'
+import s from './ProjectInfoIcons.module.scss'
 
 export interface IProjectInfoIconsProps {
   project?: IProject,

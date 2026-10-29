@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
-import classes from './TimelineItem.scss'
+import classes from './TimelineItem.module.scss'
 
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import Comment from 'stemn-shared/misc/Comments/Comment'

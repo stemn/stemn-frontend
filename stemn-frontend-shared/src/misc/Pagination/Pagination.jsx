@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classes from './Pagination.css'
+import classes from './Pagination.module.css'
 import { MdChevronRight } from 'react-icons/md'
 import { MdChevronLeft } from 'react-icons/md'
 import { Link } from 'stemn-shared/routing'

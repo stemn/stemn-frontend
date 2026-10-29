@@ -1,6 +1,6 @@
 import React from 'react'
 import { projectFolderRoute } from 'route-actions'
-import classes from './ProjectFilesPage.css'
+import classes from './ProjectFilesPage.module.css'
 import FileList from 'stemn-shared/misc/FileList'
 import Readme from 'stemn-shared/misc/Files/Readme/Readme.jsx'
 import { get } from 'lodash'

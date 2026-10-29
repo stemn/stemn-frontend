@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classes from './HeaderMobileMenu.css'
+import classes from './HeaderMobileMenu.module.css'
 import cn from 'classnames'
 import Link from 'stemn-shared/misc/Router/Link'
 

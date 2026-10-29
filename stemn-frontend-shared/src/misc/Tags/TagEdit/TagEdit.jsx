@@ -1,7 +1,7 @@
 import React from 'react'
 
 import cn from 'classnames'
-import classes from '../Tag/Tag.css'
+import classes from '../Tag/Tag.module.css'
 
 import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
 

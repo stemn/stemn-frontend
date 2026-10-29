@@ -12,7 +12,7 @@ import ThreadListItem        from './ThreadListItem/ThreadListItem.jsx'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 
 import cn from 'classnames'
-import classes from './ThreadList.css'
+import classes from './ThreadList.module.css'
 
 export class NewItem extends React.Component {
   render() {

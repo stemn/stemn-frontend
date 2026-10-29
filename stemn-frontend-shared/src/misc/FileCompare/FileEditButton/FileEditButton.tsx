@@ -4,7 +4,7 @@ import { MdEdit } from 'react-icons/md'
 import { MdSave } from 'react-icons/md'
 import { getViewerType, IPreviewType } from '../../Files/PreviewFile/PreviewFile.utils'
 import { dispatchToProps, IFileEditButtonContainerProps } from './FileEditButton.container'
-import s from './FileEditButton.scss'
+import s from './FileEditButton.module.scss'
 
 export interface IFileEditButtonComponentProps extends IFileEditButtonContainerProps {
   editToggle: typeof dispatchToProps['editToggle']

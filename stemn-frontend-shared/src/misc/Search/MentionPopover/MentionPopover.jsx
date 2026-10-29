@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classes from './MentionPopover.css'
+import classes from './MentionPopover.module.css'
 import Popover from 'stemn-shared/misc/Popover'
 import Highlight from 'stemn-shared/misc/Autosuggest/Highlight'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay'

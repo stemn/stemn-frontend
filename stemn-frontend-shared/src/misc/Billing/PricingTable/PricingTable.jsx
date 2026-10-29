@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classes from './PricingTable.scss'
+import classes from './PricingTable.module.scss'
 import { MdDone } from 'react-icons/md'
 import cn from 'classnames'
 

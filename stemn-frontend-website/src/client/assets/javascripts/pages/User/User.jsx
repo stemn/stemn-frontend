@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classes from './User.css'
+import classes from './User.module.css'
 import cn from 'classnames'
 import StandardLayout from 'layout/StandardLayout'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'

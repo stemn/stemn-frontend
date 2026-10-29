@@ -9,7 +9,7 @@ import { FileCompareMenu } from 'stemn-shared/misc/FileCompare/FileCompareMenu'
 import Timeline from 'stemn-shared/misc/Timeline/Timeline.jsx'
 import TogglePanel from 'stemn-shared/misc/TogglePanel/TogglePanel.jsx'
 import { dispatchToProps, IFileCompareContainerProps } from './FileCompare.container'
-import classes from './FileCompare.scss'
+import classes from './FileCompare.module.scss'
 
 export interface IFileCompareComponentProps extends IFileCompareContainerProps {
   fetchTimeline: typeof dispatchToProps['fetchTimeline'],

@@ -8,7 +8,7 @@ import pluralise from 'stemn-shared/utils/strings/pluralise'
 import TogglerExpand from 'stemn-shared/misc/Toggler/TogglerExpand/TogglerExpand.jsx'
 import UserAvatar    from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import Link from 'stemn-shared/misc/Router/Link'
-import styles from './SidebarTimelineRow.css'
+import styles from './SidebarTimelineRow.module.css'
 
 export default class SidebarTimelineRow extends React.Component {
   state = {

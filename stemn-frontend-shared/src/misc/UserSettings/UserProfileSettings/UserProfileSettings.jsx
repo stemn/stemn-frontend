@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
-import classes from './UserProfileSettings.css'
+import classes from './UserProfileSettings.module.css'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 import { Row, Col } from 'stemn-shared/misc/Layout'

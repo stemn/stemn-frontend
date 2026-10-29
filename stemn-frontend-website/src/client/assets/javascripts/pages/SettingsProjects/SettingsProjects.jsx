@@ -3,7 +3,7 @@ import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import EntityRow from 'stemn-shared/misc/EntityRow'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import { MdSettings } from 'react-icons/md'
-import classes from './SettingsProjects.css'
+import classes from './SettingsProjects.module.css'
 import { get } from 'lodash'
 
 class SettingsProjects extends Component {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classes from './ProjectPipelines.css'
+import classes from './ProjectPipelines.module.css'
 import { get, range } from 'lodash'
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import Panel from 'stemn-shared/misc/Panels/Panel'

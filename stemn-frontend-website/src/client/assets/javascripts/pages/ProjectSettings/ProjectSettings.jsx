@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import classes from './ProjectSettings.css'
+import classes from './ProjectSettings.module.css'
 
 import NavPill from 'stemn-shared/misc/Buttons/NavPill/NavPill'
 import NavPillContainer from 'stemn-shared/misc/Buttons/NavPillContainer'

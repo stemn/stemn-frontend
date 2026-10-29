@@ -2,7 +2,7 @@ import { FieldTemplateProps } from '@rjsf/utils'
 import cn from 'classnames'
 import * as React from 'react'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
-import s from '../JsonSchemaForm.scss'
+import s from '../JsonSchemaForm.module.scss'
 
 const transitionClassNames = {
   enter: s.enter,

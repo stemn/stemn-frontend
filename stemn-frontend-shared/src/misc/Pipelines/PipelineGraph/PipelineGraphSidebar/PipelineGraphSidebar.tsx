@@ -8,7 +8,7 @@ import {
 import { IPipelineConfigStepBase, IStep } from 'stemn-shared/misc/Pipelines/PipelineGraph/types'
 import SectionTitle from 'stemn-shared/misc/Titles/SectionTitle/SectionTitle.jsx'
 
-import s from './PipelineGraphSidebar.scss'
+import s from './PipelineGraphSidebar.module.scss'
 
 export interface IPipelineGraphSidebarProps {
   diagramId: string,

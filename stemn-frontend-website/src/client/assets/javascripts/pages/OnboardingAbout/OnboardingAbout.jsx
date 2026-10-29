@@ -4,7 +4,7 @@ import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import PanelDescription from 'stemn-shared/misc/Panels/PanelDescription'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
 import Upload from 'stemn-shared/misc/Upload/Upload'
-import classes from './OnboardingAbout.scss'
+import classes from './OnboardingAbout.module.scss'
 
 export default class OnboardingAbout extends Component {
   componentWillUnmount() {

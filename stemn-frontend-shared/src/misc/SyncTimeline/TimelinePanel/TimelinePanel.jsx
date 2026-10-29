@@ -1,6 +1,6 @@
 // Component Core
 import React from 'react'
-import classes from './TimelinePanel.css'
+import classes from './TimelinePanel.module.css'
 
 // Sub Components
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'

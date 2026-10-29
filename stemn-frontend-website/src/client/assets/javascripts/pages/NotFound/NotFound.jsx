@@ -1,7 +1,7 @@
 import React from 'react'
 import StandardLayout from 'layout/StandardLayout'
 import { Helmet } from 'react-helmet-async'
-import classes from './NotFound.css'
+import classes from './NotFound.module.css'
 
 const NotFound = () => (
   <StandardLayout contained className={ `${classes.root} flex layout-column layout-align-center-center` }>

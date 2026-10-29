@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classes from './NotificationItem.css'
+import classes from './NotificationItem.module.css'
 import cn from 'classnames'
 
 import moment from 'moment'

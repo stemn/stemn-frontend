@@ -8,7 +8,7 @@ import { ProjectRow } from 'stemn-shared/misc/Projects/ProjectRow/ProjectRow'
 import { IProject } from 'stemn-shared/misc/Projects/types'
 import Link from 'stemn-shared/misc/Router/Link'
 import Tag from 'stemn-shared/misc/Tags/Tag'
-import classes from './SiteSearchResults.scss'
+import classes from './SiteSearchResults.module.scss'
 
 export interface ISiteSearchResultsProps {
   size: number,

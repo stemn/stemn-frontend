@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from './TimelineWrapper.scss'
+import classes from './TimelineWrapper.module.scss'
 import { some } from 'lodash'
 
 export default class TimelineWrapper extends React.Component {

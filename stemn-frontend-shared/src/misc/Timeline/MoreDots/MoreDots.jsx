@@ -2,7 +2,7 @@ import React from 'react'
 
 // Styles
 import cn from 'classnames'
-import classes from './MoreDots.css'
+import classes from './MoreDots.module.css'
 
 export default class MoreDots extends React.Component {
   render() {

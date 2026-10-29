@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import classes from './FileSelectModal.scss'
+import classes from './FileSelectModal.module.scss'
 
 import FileList from 'stemn-shared/misc/FileList'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'

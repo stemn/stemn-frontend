@@ -3,7 +3,7 @@ import Input from 'stemn-shared/misc/Input/Input/Input'
 
 // Styles
 import cn from 'classnames'
-import classes from './Radio.css'
+import classes from './Radio.module.css'
 
 export default class Radio extends React.Component {
   render() {

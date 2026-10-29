@@ -12,8 +12,8 @@ import { has } from 'lodash'
 
 // Styles
 import cn from 'classnames'
-import classes from './ThreadListItem.css'
-import loadingClasses from 'stemn-shared/misc/Loading/LoadingPlaceholders/LoadingPlaceholders.css'
+import classes from './ThreadListItem.module.css'
+import loadingClasses from 'stemn-shared/misc/Loading/LoadingPlaceholders/LoadingPlaceholders.module.css'
 
 // Sub Components
 import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox'

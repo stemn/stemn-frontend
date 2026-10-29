@@ -6,7 +6,7 @@ import { MdExpandMore } from 'react-icons/md'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import cn from 'classnames'
-import classes from './PopoverDropdown.css'
+import classes from './PopoverDropdown.module.css'
 
 class PopoverDropdown extends Component {
   render() {

@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from './PopoverDetails.css'
+import classes from './PopoverDetails.module.css'
 
 class PopoverDetails extends React.Component {
   render() {

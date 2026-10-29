@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { CSSTransition } from 'react-transition-group'
 import LoadingSpinner from 'stemn-shared/misc/Loading/LoadingSpinner/LoadingSpinner'
 import LoadingLinear  from 'stemn-shared/misc/Loading/LoadingLinear/LoadingLinear.jsx'
-import classes from './LoadingOverlay.css'
+import classes from './LoadingOverlay.module.css'
 import cn from 'classnames'
 
 const propTypesObject = {

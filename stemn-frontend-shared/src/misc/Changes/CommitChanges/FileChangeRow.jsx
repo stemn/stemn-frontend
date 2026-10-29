@@ -11,7 +11,7 @@ import Remove from 'stemn-shared/assets/icons/changes/remove.jsx'
 import Change from 'stemn-shared/assets/icons/changes/change.jsx'
 
 // Styles
-import styles from './FileChangeRow.css'
+import styles from './FileChangeRow.module.css'
 
 export default class FileChangeRow extends React.Component {
   render() {

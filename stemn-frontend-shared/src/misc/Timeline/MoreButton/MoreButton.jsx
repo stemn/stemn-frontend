@@ -2,7 +2,7 @@ import React from 'react'
 
 // Styles
 import cn from 'classnames'
-import classes from './MoreButton.css'
+import classes from './MoreButton.module.css'
 
 import { MdChevronRight } from 'react-icons/md'
 

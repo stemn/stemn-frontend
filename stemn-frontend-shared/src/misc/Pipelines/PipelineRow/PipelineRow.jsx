@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import classes from './PipelineRow.scss'
+import classes from './PipelineRow.module.scss'
 import cn from 'classnames'
 import Link from 'stemn-shared/misc/Router/Link'
 import UserAvatars from 'stemn-shared/misc/Avatar/UserAvatars/UserAvatars.jsx'

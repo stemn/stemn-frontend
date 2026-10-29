@@ -2,7 +2,7 @@ import React from 'react'
 
 // Styles
 import cn from 'classnames'
-import classes from './Banner.css'
+import classes from './Banner.module.css'
 
 export default class Banner extends React.Component {
   render() {

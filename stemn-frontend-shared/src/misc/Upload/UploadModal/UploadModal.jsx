@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classes from './UploadModal.css'
+import classes from './UploadModal.module.css'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import Upload from 'stemn-shared/misc/Upload/Upload'
 

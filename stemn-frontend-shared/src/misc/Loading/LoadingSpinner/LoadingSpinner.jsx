@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 // Styles
 import cn from 'classnames'
-import classes from './LoadingSpinner.css'
+import classes from './LoadingSpinner.module.css'
 
 export default class LoadingSpinner extends Component {
   render() {

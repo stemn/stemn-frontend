@@ -10,7 +10,7 @@ import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 // import { ProjectRowContainer } from 'stemn-shared/misc/Projects/ProjectRow'
 import { SiteSearchResultsContainer } from 'stemn-shared/misc/Search/SiteSearchResults'
 import { FeaturedTile, FeaturedTileRow } from './components/FeaturedTile'
-import classes from './Explore.scss'
+import classes from './Explore.module.scss'
 
 export interface IExploreProps {
   replace: typeof replaceType,

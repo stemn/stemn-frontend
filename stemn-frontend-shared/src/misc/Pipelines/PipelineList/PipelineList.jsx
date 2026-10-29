@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import classes from './PipelineList.css'
+import classes from './PipelineList.module.css'
 import PipelineRow from '../PipelineRow'
 
 export default class PipelineList extends Component {

@@ -2,7 +2,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import classes from './ColorSelect.css'
+import classes from './ColorSelect.module.css'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 
 

@@ -12,7 +12,7 @@ import { orderBy, omit } from 'lodash'
 
 // Styles
 import cn from 'classnames'
-import classes from './FileListPopup.css'
+import classes from './FileListPopup.module.css'
 
 // Sub Components
 import LoadingOverlay   from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'

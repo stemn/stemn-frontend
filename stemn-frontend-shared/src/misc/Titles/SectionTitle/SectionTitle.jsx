@@ -3,7 +3,7 @@ import React from 'react'
 
 // Styles
 import cn from 'classnames'
-import classes from './SectionTitle.css'
+import classes from './SectionTitle.module.css'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 

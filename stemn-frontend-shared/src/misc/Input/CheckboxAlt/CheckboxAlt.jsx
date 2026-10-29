@@ -3,7 +3,7 @@ import { MdDone } from 'react-icons/md'
 
 // Styles
 import cn from 'classnames'
-import classes from './CheckboxAlt.css'
+import classes from './CheckboxAlt.module.css'
 
 /** ******************************
 

@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'stemn-shared/misc/Router/Link'
 // Styles
 import cn from 'classnames'
-import classes from './Button.css'
+import classes from './Button.module.css'
 
 export default class Button extends React.Component {
   render() {

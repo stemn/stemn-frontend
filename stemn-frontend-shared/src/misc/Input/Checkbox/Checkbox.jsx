@@ -2,7 +2,7 @@ import React from 'react'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 
 // Styles
-import classes from './Checkbox.css'
+import classes from './Checkbox.module.css'
 import cn from 'classnames'
 
 /** *******************************************

@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from './TextDisplayBox.css'
+import classes from './TextDisplayBox.module.css'
 import cn from 'classnames'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////

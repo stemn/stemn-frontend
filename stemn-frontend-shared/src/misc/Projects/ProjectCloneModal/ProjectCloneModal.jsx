@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { get } from 'lodash'
 
-import classes from '../ProjectNewModal/ProjectNewModal.scss'
+import classes from '../ProjectNewModal/ProjectNewModal.module.scss'
 
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import Input from 'stemn-shared/misc/Input/Input/Input'

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import cn from 'classnames'
-import classes from './ProjectThreads.css'
+import classes from './ProjectThreads.module.css'
 import { Row, Col, Container } from 'stemn-shared/misc/Layout'
 import SubSubHeader from 'modules/SubSubHeader'
 import ThreadRow from 'stemn-shared/misc/Threads/ThreadRow'

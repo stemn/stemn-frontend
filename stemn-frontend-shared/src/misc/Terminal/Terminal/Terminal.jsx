@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classes from './Terminal.scss'
+import classes from './Terminal.module.scss'
 import cn from 'classnames'
 import Ansi from 'ansi-to-react'
 import { MdArrowDownward as MdDown } from 'react-icons/md'

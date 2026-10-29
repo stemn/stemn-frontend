@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { useDrop } from 'react-dnd'
-import classes from './EmptyWrapped.css'
+import classes from './EmptyWrapped.module.css'
 
 import { emptyHover } from './ThreadListItem.drag.config.js'
 

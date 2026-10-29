@@ -1,10 +1,10 @@
 import React from 'react'
 
-import tabClasses from './Tabs.css'
+import tabClasses from './Tabs.module.css'
 
 import cn from 'classnames'
 
-export default (props) => {
+const Tabs = (props) => {
   const rootClasses = cn(tabClasses.tabs, { 
     [tabClasses.tabsLg]: props.size === 'lg',
     [tabClasses.noLine]: props.noline,
@@ -19,3 +19,5 @@ export default (props) => {
     </div>
   )
 }
+
+export default Tabs

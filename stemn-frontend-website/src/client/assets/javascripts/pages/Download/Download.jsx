@@ -8,7 +8,7 @@ import { Helmet } from 'react-helmet-async'
 
 import moment from 'moment'
 
-import classes from './Download.scss'
+import classes from './Download.module.scss'
 
 export default class Download extends Component {
   render() {

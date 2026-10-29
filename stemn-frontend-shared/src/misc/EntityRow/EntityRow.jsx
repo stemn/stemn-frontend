@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classes from './EntityRow.css'
+import classes from './EntityRow.module.css'
 import cn from 'classnames'
 import Highlight from 'stemn-shared/misc/Autosuggest/Highlight'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'

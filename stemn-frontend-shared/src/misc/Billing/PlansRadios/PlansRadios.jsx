@@ -1,7 +1,7 @@
 import React from 'react'
 import Radio from 'stemn-shared/misc/Input/Radio/Radio.jsx'
 import { plansData } from 'stemn-shared/misc/Billing/Billing.data'
-import classes from './PlansRadios.css'
+import classes from './PlansRadios.module.css'
 
 export default class PlansRadios extends React.Component {
   render() {

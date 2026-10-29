@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classes from './UserOverview.css'
+import classes from './UserOverview.module.css'
 import { orderBy, values, sum } from 'lodash'
 import { Row, Col } from 'stemn-shared/misc/Layout'
 import Panel from 'stemn-shared/misc/Panels/Panel'

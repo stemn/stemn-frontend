@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import classes from './UserDetails.css'
+import classes from './UserDetails.module.css'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import Link from 'stemn-shared/misc/Router/Link'

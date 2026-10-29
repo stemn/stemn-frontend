@@ -3,7 +3,7 @@ import React from 'react'
 import { omit } from 'lodash'
 
 // Styles
-import classes from './Label.css'
+import classes from './Label.module.css'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 

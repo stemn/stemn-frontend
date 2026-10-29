@@ -10,7 +10,7 @@ import ProjectLinkRemote from 'stemn-shared/misc/Project/ProjectLinkRemote/Proje
 import ProjectPermissionsRadio from 'stemn-shared/misc/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx';
 import { ArrowTab, ArrowTabs } from 'stemn-shared/misc/Tabs/ArrowTabs/ArrowTabs.jsx';
 
-import classes from './ProjectNewModal.scss';
+import classes from './ProjectNewModal.module.scss';
 
 export default class ProjectNewModal extends Component {
   state = {

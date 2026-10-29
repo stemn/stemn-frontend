@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classes from './ProjectCommits.css'
+import classes from './ProjectCommits.module.css'
 import { get } from 'lodash'
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import HistoryGraph from 'stemn-shared/misc/History/HistoryGraph'

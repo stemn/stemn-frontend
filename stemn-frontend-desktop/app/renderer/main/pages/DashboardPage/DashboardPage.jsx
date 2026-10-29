@@ -7,7 +7,7 @@ import React from 'react'
 import { Link } from 'stemn-shared/routing'
 import moment from 'moment'
 
-import classes from './DashboardPage.css'
+import classes from './DashboardPage.module.css'
 
 // Sub Components
 import Header       from 'stemn-shared/misc/Header/Header.jsx'

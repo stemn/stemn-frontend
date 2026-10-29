@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classes from './EditorToolbar.css'
+import classes from './EditorToolbar.module.css'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import { MdFormatItalic } from 'react-icons/md'
 import { MdFormatBold } from 'react-icons/md'

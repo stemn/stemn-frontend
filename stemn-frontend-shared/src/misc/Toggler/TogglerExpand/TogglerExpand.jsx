@@ -3,7 +3,7 @@ import React from 'react'
 import { MdChevronRight } from 'react-icons/md'
 
 // Styles
-import classes from './TogglerExpand.css'
+import classes from './TogglerExpand.module.css'
 import cn from 'classnames'
 
 export default class TogglerExpand extends React.Component {

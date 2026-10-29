@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import cn from 'classnames'
-import classes from './ProjectCommit.css'
+import classes from './ProjectCommit.module.css'
 
 import { groupRevisions }  from 'stemn-shared/misc/Timeline/Timeline.utils.js'
 import { Breadcrumbs, Crumb } from 'stemn-shared/misc/Breadcrumbs'

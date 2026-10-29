@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import cn from 'classnames'
-import classes from './Crumb.scss'
+import classes from './Crumb.module.scss'
 import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
 import Link from 'stemn-shared/misc/Router/Link'
 

@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment'
 
 import cn from 'classnames'
-import classes from './ThreadDisplayModal.css'
+import classes from './ThreadDisplayModal.module.css'
 
 import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox'
 import LabelSelect from 'stemn-shared/misc/Threads/LabelSelect/LabelSelect.jsx'

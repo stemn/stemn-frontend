@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classes from './BetaBadge.scss'
+import classes from './BetaBadge.module.scss'
 
 export default class BetaBadge extends Component {
   render() {

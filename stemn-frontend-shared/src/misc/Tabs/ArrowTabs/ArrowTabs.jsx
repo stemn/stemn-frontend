@@ -5,7 +5,7 @@ import { omit } from 'lodash'
 
 // Styles
 import cn from 'classnames'
-import classes from './ArrowTabs.css'
+import classes from './ArrowTabs.module.css'
 import { MdChevronRight as MdChrevronRight } from 'react-icons/md'
 import Link from 'stemn-shared/misc/Router/Link'
 
