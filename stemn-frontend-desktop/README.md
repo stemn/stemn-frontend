@@ -142,7 +142,6 @@ the edit as a new revision; everything after that is the app. Each run adds one 
 icons from `build/` (`icon.ico`, `icon.icns`, `icons/*.png`), the `stemn://` protocol, and a GitHub
 `publish` provider (`Stemn/Stemn-Desktop`) that electron-updater uses for auto updates.
 
-TODO: the old release flow (`scripts/deploy.sh` pushing `dist/` to the `stemn-desktop` repo, AppVeyor and
-Travis building it, `Stemn-Updates/updates.json` for electron-simple-updater) was removed with the old
-toolchain. Releases now need a CI job per OS running `npm run package:<os>` with signing credentials and
-`--publish always` (GitHub token); that pipeline hasn't been set up yet.
+Releases need a CI job per OS running `npm run package:<os>` with signing credentials and `--publish always`
+(GitHub token). That pipeline does not exist yet; the plan is in
+[docs/plans/desktop-auto-update-and-signing.md](../docs/plans/desktop-auto-update-and-signing.md).

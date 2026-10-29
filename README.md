@@ -7,16 +7,21 @@ This repo contains all of Stemn's frontend code.
 * [stemn-frontend-website](./stemn-frontend-website) Source code for the Stemn website
 * [stemn-frontend-shared](./stemn-frontend-shared) Code shared between `stemn-frontend-website` and `stemn-frontend-desktop` (consumed as source through the `stemn-shared/*` alias), plus the build conventions both apps use (`config/`)
 * [stemn-frontend-desktop](./stemn-frontend-desktop) Source code for the Stemn desktop (Electron) app
-* [stemn-frontend-admin](./stemn-frontend-admin) This is a placeholder - ignore this.
+* [tests/e2e](./tests/e2e) Playwright end-to-end tests of the website against a real backend
+
+## Documentation
+
+* [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md): how the packages, the runtime (Redux, HTTP, websocket, routing) and the conventions fit together
+* [docs/DECISIONS.md](./docs/DECISIONS.md): decision records of the 2026 modernisation, including the webpack fallback policy
 
 ## Requirements
 
-* Node.js 22.22+ (see `.nvmrc`; Node 24 works) and npm 10+
+* Node.js 24 (`.nvmrc`, what CI and the Docker image use; 22.22+ works) and npm 10+
 
 ## Usage
 
 The repo root is an [npm workspace](https://docs.npmjs.com/cli/using-npm/workspaces) containing
-`stemn-frontend-shared`, `stemn-frontend-website` and `stemn-frontend-desktop`. There is a single
+`stemn-frontend-shared`, `stemn-frontend-website`, `stemn-frontend-desktop` and `tests/e2e`. There is a single
 `package-lock.json` at the root.
 
 ```sh
