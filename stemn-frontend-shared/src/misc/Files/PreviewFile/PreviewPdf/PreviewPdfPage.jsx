@@ -44,14 +44,17 @@ class Page extends React.Component {
       pdf.getPage(index).then((page) => {
         const viewport = page.getViewport({ scale })
         const { width, height } = viewport
-        this.setState({
-          status: 'loading',
-          page,
-          width,
-          height,
-        })
-        //        this.renderTimeout = setTimeout(this._enterPage, index * 500);
-        this._enterPage()
+        // Render once the page is in state (setState is asynchronous since React 18: calling
+        // _enterPage right after it read the old state and the page sometimes never rendered)
+        this.setState(
+          {
+            status: 'loading',
+            page,
+            width,
+            height,
+          },
+          this._enterPage,
+        )
       })
     }
   }
