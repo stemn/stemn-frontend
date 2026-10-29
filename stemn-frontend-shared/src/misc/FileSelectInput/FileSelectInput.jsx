@@ -9,19 +9,17 @@ import fileSelectModalName from 'stemn-shared/misc/FileSelect/FileSelectModal'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 
 import classes from './FileSelectInput.module.css'
-import { MdFolder } from 'react-icons/md'
-import { MdCreateNewFolder as MdNewFolder } from 'react-icons/md'
+import { MdFolder, MdCreateNewFolder as MdNewFolder } from 'react-icons/md'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import { isDriveFileId, isDropboxFileId } from 'stemn-shared/misc/Files/utils'
 import TextDisplayBox from 'stemn-shared/misc/TextDisplayBox/TextDisplayBox.jsx'
 
-
 const propTypesObject = {
   projectId: PropTypes.string,
-  provider: PropTypes.string.isRequired,    // 'dropbox' || 'drive' - The provider
-  model: PropTypes.string.isRequired,       // The model to assign the selected file
-  value: PropTypes.object.isRequired,       // The value of the selected file: { path, fileId }
-  disabled: PropTypes.bool,                  // Should we disable the input
+  provider: PropTypes.string.isRequired, // 'dropbox' || 'drive' - The provider
+  model: PropTypes.string.isRequired, // The model to assign the selected file
+  value: PropTypes.object.isRequired, // The value of the selected file: { path, fileId }
+  disabled: PropTypes.bool, // Should we disable the input
 }
 
 class FileSelectInput extends React.Component {
@@ -42,7 +40,7 @@ class FileSelectInput extends React.Component {
         },
       },
     })
-  };
+  }
 
   clearValue = () => {
     const { storeChange, model } = this.props
@@ -50,14 +48,10 @@ class FileSelectInput extends React.Component {
       path: undefined,
       fileId: undefined,
     })
-  };
+  }
 
   render() {
-    const {
-      provider,
-      value,
-      disabled,
-    } = this.props
+    const { provider, value, disabled } = this.props
 
     const validatePath = (path, fileId, provider) => {
       if (provider === 'drive') {
@@ -65,7 +59,7 @@ class FileSelectInput extends React.Component {
       } else if (provider === 'dropbox') {
         return isDropboxFileId(fileId) ? path : ''
       }
-      
+
       return ''
     }
 
@@ -73,37 +67,40 @@ class FileSelectInput extends React.Component {
 
     const getInnerText = () => {
       if (path) {
-        return <span><span style={ { textTransform: 'capitalize' } }>{ provider }/</span>{ path }</span>
+        return (
+          <span>
+            <span style={{ textTransform: 'capitalize' }}>{provider}/</span>
+            {path}
+          </span>
+        )
       } else if (value.path === undefined && value.fileId === undefined && provider) {
         return `A new folder will be created in your ${provider}`
-      } 
+      }
       return 'Select the project folder'
     }
 
     return (
-      <TextDisplayBox
-        disabled={ disabled }
-      >
-        <div className="layout-row flex layout-align-start-center" onClick={ () => { if (!disabled) { this.showModal() } } }>
-          <div className="flex">
-            { getInnerText() }
-          </div>
+      <TextDisplayBox disabled={disabled}>
+        <div
+          className="layout-row flex layout-align-start-center"
+          onClick={() => {
+            if (!disabled) {
+              this.showModal()
+            }
+          }}
+        >
+          <div className="flex">{getInnerText()}</div>
           <SimpleIconButton title="Select folder">
             <MdFolder size="22" />
           </SimpleIconButton>
         </div>
-        <SimpleIconButton
-          className={ classes.newFolderIcon }
-          onClick={ this.clearValue }
-          title="New Folder"
-        >
+        <SimpleIconButton className={classes.newFolderIcon} onClick={this.clearValue} title="New Folder">
           <MdNewFolder size="22" />
         </SimpleIconButton>
       </TextDisplayBox>
     )
   }
 }
-
 
 function mapStateToProps() {
   return {}

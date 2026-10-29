@@ -17,15 +17,17 @@ export default class UserPasswordSettings extends Component {
   }
   render() {
     const { auth } = this.props
-    const invalid = (auth.passwordSet.password1 !== auth.passwordSet.password2) || auth.passwordSet.password1.length < 7
+    const invalid = auth.passwordSet.password1 !== auth.passwordSet.password2 || auth.passwordSet.password1.length < 7
 
     return (
       <div>
         <h3>Update your password</h3>
-        <p>Change the password for <b>{ auth.user.accounts.local.email }</b></p>
+        <p>
+          Change the password for <b>{auth.user.accounts.local.email}</b>
+        </p>
         <Input
           model="auth.passwordSet.oldPassword"
-          value={ auth.passwordSet.oldPassword }
+          value={auth.passwordSet.oldPassword}
           className="dr-input"
           type="password"
           placeholder="Old Password"
@@ -34,7 +36,7 @@ export default class UserPasswordSettings extends Component {
         <br />
         <Input
           model="auth.passwordSet.password1"
-          value={ auth.passwordSet.password1 }
+          value={auth.passwordSet.password1}
           className="dr-input"
           type="password"
           placeholder="New Password"
@@ -43,7 +45,7 @@ export default class UserPasswordSettings extends Component {
         <br />
         <Input
           model="auth.passwordSet.password2"
-          value={ auth.passwordSet.password2 }
+          value={auth.passwordSet.password2}
           className="dr-input"
           type="password"
           placeholder="Confirm New Password"
@@ -53,9 +55,9 @@ export default class UserPasswordSettings extends Component {
         <div className="layout-row layout-align-end">
           <ProgressButton
             className="primary"
-            loading={ auth.updatePasswordPending }
-            onClick={ this.submit }
-            disabled={ invalid }
+            loading={auth.updatePasswordPending}
+            onClick={this.submit}
+            disabled={invalid}
           >
             Update
           </ProgressButton>

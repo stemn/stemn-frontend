@@ -1,9 +1,7 @@
 import primus from './primus-websockets2.js'
 import { parseQuery } from 'stemn-shared/routing/query'
 
-const searchParams = typeof window !== 'undefined'
-  ? parseQuery(window.location.search)
-  : {}
+const searchParams = typeof window !== 'undefined' ? parseQuery(window.location.search) : {}
 
 export let socket
 

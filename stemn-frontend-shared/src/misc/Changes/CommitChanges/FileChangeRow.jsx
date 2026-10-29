@@ -15,14 +15,7 @@ import styles from './FileChangeRow.module.css'
 
 export default class FileChangeRow extends React.Component {
   render() {
-    const {
-      model,
-      value,
-      text,
-      clickFn,
-      isActive,
-      status,
-    } = this.props
+    const { model, value, text, clickFn, isActive, status } = this.props
     // status === 'created' || 'modified' || 'deleted'
 
     // Classes
@@ -35,12 +28,12 @@ export default class FileChangeRow extends React.Component {
 
     const getIcon = (status) => {
       if (status === 'deleted') {
-        return <Remove size={ 8 } />
+        return <Remove size={8} />
       } else if (status === 'created') {
-        return <Add size={ 8 } />
+        return <Add size={8} />
       }
       // modified
-      return <Change size={ 8 } />
+      return <Change size={8} />
     }
     const getClass = (status) => {
       if (status === 'deleted') {
@@ -54,14 +47,19 @@ export default class FileChangeRow extends React.Component {
 
     // Template
     return (
-      <div className={ rowClasses }>
-        <div className={ styles.checkbox }>
-          <Checkbox model={ model } value={ value } title={ value ? 'Deselect change' : 'Select change' } />
+      <div className={rowClasses}>
+        <div className={styles.checkbox}>
+          <Checkbox model={model} value={value} title={value ? 'Deselect change' : 'Select change'} />
         </div>
-        <div className={ `${styles.text} flex text-ellipsis layout-row` } onClick={ clickFn }>
-          <div className="flex" title={ text }>{middleConcat(text, 60, 0.5)}</div>
+        <div className={`${styles.text} flex text-ellipsis layout-row`} onClick={clickFn}>
+          <div className="flex" title={text}>
+            {middleConcat(text, 60, 0.5)}
+          </div>
         </div>
-        <div className={ cn(styles.icon, getClass(status), 'layout-column layout-align-center-center') } title={ capitalizeFirstLetter(status) }>
+        <div
+          className={cn(styles.icon, getClass(status), 'layout-column layout-align-center-center')}
+          title={capitalizeFirstLetter(status)}
+        >
           {getIcon(status)}
         </div>
       </div>

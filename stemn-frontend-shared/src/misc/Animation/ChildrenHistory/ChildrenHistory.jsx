@@ -1,6 +1,5 @@
 export default class ChildrenHistory {
-  constructor() {
-  }
+  constructor() {}
   children = []
   get(newChildren, shouldUpdate) {
     if (shouldUpdate) {
@@ -9,4 +8,3 @@ export default class ChildrenHistory {
     return this.children || newChildren
   }
 }
-

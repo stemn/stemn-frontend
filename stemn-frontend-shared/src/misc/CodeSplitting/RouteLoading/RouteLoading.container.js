@@ -6,7 +6,6 @@ const stateToProps = ({ codeSplitting }) => ({
   loading: get(codeSplitting, ['route', 'loading']),
 })
 
-const dispatchToProps = {
-}
+const dispatchToProps = {}
 
 export default connect(stateToProps, dispatchToProps)(RouteLoading)

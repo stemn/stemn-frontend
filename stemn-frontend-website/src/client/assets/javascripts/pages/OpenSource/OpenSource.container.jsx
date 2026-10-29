@@ -2,17 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import OpenSource from './OpenSource'
 
-const stateToProps = () => ({
-})
+const stateToProps = () => ({})
 
-const dispatchToProps = {
-}
+const dispatchToProps = {}
 
 class OpenSourceContainer extends Component {
   render() {
-    return (
-      <OpenSource { ...this.props } />
-    )
+    return <OpenSource {...this.props} />
   }
 }
 

@@ -21,34 +21,19 @@ export default class SettingsAccount extends Component {
     return (
       <div>
         <InfoPanel>
-          <UserLinkedAccountSettings
-            user={ auth.user }
-            authenticate={ authenticate }
-            unlink={ unlink }
-          />
+          <UserLinkedAccountSettings user={auth.user} authenticate={authenticate} unlink={unlink} />
         </InfoPanel>
         <InfoPanel>
-          <UserCloudProviderSettings
-            user={ auth.user }
-            authenticate={ authenticate }
-            unlink={ unlink }
-          />
+          <UserCloudProviderSettings user={auth.user} authenticate={authenticate} unlink={unlink} />
         </InfoPanel>
         <InfoPanel>
-          <UserEmailSettings
-            auth={ auth }
-            setPrimaryEmail={ setPrimaryEmail }
-            saveUser={ saveUser }
-          />
+          <UserEmailSettings auth={auth} setPrimaryEmail={setPrimaryEmail} saveUser={saveUser} />
         </InfoPanel>
-        { has(auth, 'user.accounts.local.email') &&
+        {has(auth, 'user.accounts.local.email') && (
           <InfoPanel>
-            <UserPasswordSettings
-              auth={ auth }
-              passwordUpdate={ passwordUpdate }
-            />
+            <UserPasswordSettings auth={auth} passwordUpdate={passwordUpdate} />
           </InfoPanel>
-        }
+        )}
       </div>
     )
   }

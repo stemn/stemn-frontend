@@ -6,7 +6,11 @@ export default class PreviewGoogle extends React.Component {
     const { fileMeta } = this.props
     return (
       <div className="flex rel-box layout-column">
-        <iframe className="flex" src={ `https://docs.google.com/gview?url=${getDownloadUrl(fileMeta)}&embedded=true` } style={ { border: 'none' } } />
+        <iframe
+          className="flex"
+          src={`https://docs.google.com/gview?url=${getDownloadUrl(fileMeta)}&embedded=true`}
+          style={{ border: 'none' }}
+        />
       </div>
     )
   }

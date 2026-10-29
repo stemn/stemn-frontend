@@ -5,7 +5,7 @@ import cn from 'classnames'
 export default class AnimateShow extends React.Component {
   state = {
     showContent: this.props.show,
-  };
+  }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.show === false) {
@@ -21,10 +21,6 @@ export default class AnimateShow extends React.Component {
         return this.props.children
       }
     }
-    return (
-      <div className={ cn(this.props.animation, { [this.props.animationShow]: this.props.show }) }>
-        {getInner()}
-      </div>
-    )
+    return <div className={cn(this.props.animation, { [this.props.animationShow]: this.props.show })}>{getInner()}</div>
   }
 }

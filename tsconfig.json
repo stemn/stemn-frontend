@@ -15,7 +15,5 @@
     "noEmit": true,
     "pretty": true
   },
-  "include": [
-    "typings.d.ts"
-  ]
+  "include": ["typings.d.ts"]
 }

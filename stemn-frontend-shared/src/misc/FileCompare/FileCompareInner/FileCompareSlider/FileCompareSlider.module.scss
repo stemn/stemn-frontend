@@ -1,6 +1,6 @@
 @value primary from "theme";
 
-.slider{
+.slider {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -13,9 +13,9 @@
   transition: opacity 0.2s ease;
   background: primary;
 }
-.slider:hover{
+.slider:hover {
   opacity: 0.3;
 }
-.active{
+.active {
   opacity: 0.3;
 }

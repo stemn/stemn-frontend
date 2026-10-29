@@ -20,7 +20,11 @@ const MODULE_RE = /\.module\.(css|scss|sass)$/
 /** CSS-module class name for `localName` in the stylesheet `filePath` (absolute, may carry a ?query) */
 function scopedClassName(localName, filePath) {
   const file = filePath.split('?')[0]
-  const base = path.basename(file).replace(MODULE_RE, '').replace(/\.(css|scss|sass)$/, '').replace(/\./g, '-')
+  const base = path
+    .basename(file)
+    .replace(MODULE_RE, '')
+    .replace(/\.(css|scss|sass)$/, '')
+    .replace(/\./g, '-')
   const relative = path.relative(repoRoot, file).split(path.sep).join('/')
   const hash = createHash('sha256').update(`${relative}:${localName}`).digest('base64url').slice(0, 5)
   return `${base}_${localName}-${hash}`

@@ -1,18 +1,18 @@
 @value border1 from "theme";
 
-.titleBar{
+.titleBar {
   padding: 4px 5px;
   height: 36px;
   border-bottom: 1px solid border1;
   cursor: default;
 }
-.toggleIcon{
+.toggleIcon {
   margin-right: 5px;
   transition: 0.1s ease all;
 }
-.toggleIconActive{
+.toggleIconActive {
   transform: rotate(90deg);
 }
-.content{
+.content {
   border-bottom: 1px solid border1;
 }

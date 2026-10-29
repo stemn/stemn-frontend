@@ -1,6 +1,6 @@
-import http from 'axios';
+import http from 'axios'
 
-export default email => ({
+export default (email) => ({
   type: 'AUTH/UPDATE_EMAIL',
   payload: http({
     url: '/api/v1/auth/primary-mail',

@@ -9,7 +9,8 @@ export default (state = initialState, action = {}) => {
     case 'COMMITS/GET_COMMIT_REJECTED':
       return i.assocIn(state, [action.meta.cacheKey, 'loading'], false)
     case 'COMMITS/GET_COMMIT_FULFILLED':
-      return i.chain(state)
+      return i
+        .chain(state)
         .assocIn([action.meta.cacheKey, 'data'], action.payload.data)
         .assocIn([action.meta.cacheKey, 'loading'], false)
         .value()

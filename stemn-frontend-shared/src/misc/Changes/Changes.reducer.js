@@ -1,6 +1,7 @@
 import i from 'icepick'
 
 import { parseMentions, removeExistingMentions, addMentionsToText } from '../Mentions/Mentions.utils.js'
+
 const initialState = {
   /** ************************************
   [projectId] : {
@@ -40,15 +41,16 @@ const mainReducer = (state, action) => {
     case 'CHANGES/FETCH_CHANGES_REJECTED':
       return i.assocIn(state, [action.meta.projectId, 'loading'], false)
     case 'CHANGES/FETCH_CHANGES_FULFILLED':
-      return i.chain(state)
+      return i
+        .chain(state)
         .assocIn([action.meta.projectId, 'data'], action.payload.data)
         .assocIn([action.meta.projectId, 'loading'], false)
         .value()
 
-    case 'CHANGES/COMMIT_FULFILLED':
+    case 'CHANGES/COMMIT_FULFILLED': {
       // POST /sync/commit returns the committed revisions as ids
-      const idsToRemove = action.payload.data.revisions.map(item => (typeof item === 'string' ? item : item._id))
-      const remainingRevisions = state[action.meta.cacheKey].data.filter(item => !idsToRemove.includes(item._id))
+      const idsToRemove = action.payload.data.revisions.map((item) => (typeof item === 'string' ? item : item._id))
+      const remainingRevisions = state[action.meta.cacheKey].data.filter((item) => !idsToRemove.includes(item._id))
       return i.merge(state, {
         [action.meta.cacheKey]: {
           name: '',
@@ -57,11 +59,11 @@ const mainReducer = (state, action) => {
           checked: {},
         },
       })
+    }
     default:
       return state
   }
 }
-
 
 export default function (state = initialState, action) {
   return mainReducer(state, action)

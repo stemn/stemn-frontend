@@ -12,15 +12,15 @@ export default class Comment extends Component {
 
     if (!comment || !comment.data) {
       return (
-        <LoadingAnimation className={ `${classes.comment} layout-column` } style={ style }>
-          <LoadingPlaceholder width={ 200 } />
+        <LoadingAnimation className={`${classes.comment} layout-column`} style={style}>
+          <LoadingPlaceholder width={200} />
         </LoadingAnimation>
       )
     }
 
     return (
-      <div className={ `${classes.comment} layout-column` } style={ style }>
-        <EditorDisplay value={ comment.data.body } />
+      <div className={`${classes.comment} layout-column`} style={style}>
+        <EditorDisplay value={comment.data.body} />
       </div>
     )
   }

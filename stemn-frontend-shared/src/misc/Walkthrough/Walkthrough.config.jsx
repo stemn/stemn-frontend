@@ -7,8 +7,13 @@ const data = {
         content: (
           <div>
             <p>Let's go through the basics of commiting your changes.</p>
-            <p>The 'Changes' tab allows you to inspect recent changes to your files. Click on one of the files in this list to preview.</p>
-            <p className="text-grey-3"><small>Your file changes in Dropbox and Drive are automatically synced to Stemn.</small></p>
+            <p>
+              The 'Changes' tab allows you to inspect recent changes to your files. Click on one of the files in this
+              list to preview.
+            </p>
+            <p className="text-grey-3">
+              <small>Your file changes in Dropbox and Drive are automatically synced to Stemn.</small>
+            </p>
           </div>
         ),
       },
@@ -24,7 +29,10 @@ const data = {
         content: (
           <div>
             <p>It is now time to package these changes into a 'commit'.</p>
-            <p>Add a short 'Summary' and more detailed 'Description' so that the your team (or the future you) knows what changes have been made.</p>
+            <p>
+              Add a short 'Summary' and more detailed 'Description' so that the your team (or the future you) knows what
+              changes have been made.
+            </p>
           </div>
         ),
       },
@@ -33,7 +41,9 @@ const data = {
           <div>
             <p>Next you can add 'related threads' to the commit.</p>
             <p>This allows you and your team see all the work related to a thread in one place.</p>
-            <p className="text-grey-3"><small>Threads are added using the 'Threads' tab at the top of the page.</small></p>
+            <p className="text-grey-3">
+              <small>Threads are added using the 'Threads' tab at the top of the page.</small>
+            </p>
           </div>
         ),
       },
@@ -42,12 +52,23 @@ const data = {
           <div>
             <p>Finally, you can now save your commit.</p>
             <p>Once saved, your commit will appear in the 'timeline' and will be linked to any related threads.</p>
-            <p className="text-grey-3"><small>You should commit files multiple times each day. This will allow you to keep a good history of what work you have done and what threads have been completed.</small></p>
+            <p className="text-grey-3">
+              <small>
+                You should commit files multiple times each day. This will allow you to keep a good history of what work
+                you have done and what threads have been completed.
+              </small>
+            </p>
           </div>
         ),
       },
     },
-    order: ['commit.commitIntro', 'commit.commitCheckbox', 'commit.commitSummary', 'commit.commitThreads', 'commit.commitSubmit'],
+    order: [
+      'commit.commitIntro',
+      'commit.commitCheckbox',
+      'commit.commitSummary',
+      'commit.commitThreads',
+      'commit.commitSubmit',
+    ],
   },
 }
 
@@ -59,6 +80,6 @@ export const getStepData = (fullname) => {
       steps: data[group].order,
     }
   }
-  
+
   console.error('This walkthrough item could not be found.')
 }

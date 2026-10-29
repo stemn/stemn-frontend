@@ -32,62 +32,66 @@ import ProjectFeedPage from './pages/ProjectFeedPage/ProjectFeedPage.jsx'
 import ProjectFeedCommitPage from './pages/ProjectFeedCommitPage'
 import ProjectThreadPage from './pages/ProjectThreadPage/ProjectThreadPage.jsx'
 
-const page = Component => ({ Component: withRouteProps(Component) })
+const page = (Component) => ({ Component: withRouteProps(Component) })
 
-export default () => [{
-  ...page(AppRootPage),
-  children: [{
-    ...page(AppAuthedPage),
-    children: [{
-      path: '/project/:stub',
-      ...page(ProjectPage),
-      children: [
-        { index: true, ...page(ProjectChangesPage) },
-        {
-          path: 'feed',
-          ...page(ProjectFeedPage),
-          children: [
-            { path: 'commit/:commitId', ...page(ProjectFeedCommitPage) },
-          ],
-        },
-        { path: 'threads', ...page(ProjectThreadPage) },
-        { path: 'files', ...page(ProjectFilesPage) },
-        { path: 'files/:path', ...page(ProjectFilesPage) },
-        {
-          path: 'settings',
-          ...page(ProjectSettingsPage),
-          children: [
-            { index: true, ...page(ProjectSettingsGeneralPage) },
-            { path: 'threads', ...page(ProjectSettingsThreadsPage) },
-            { path: 'team', ...page(ProjectSettingsTeamPage) },
-            { path: 'permissions', ...page(ProjectSettingsPermissionsPage) },
-          ],
-        },
-      ],
-    },
-    { path: '/', ...page(HomePage) },
-    { path: '/dashboard', ...page(DashboardPage) },
-    {
-      path: '/settings',
-      ...page(SettingsPage),
-      children: [
-        { path: 'account', ...page(SettingsAccountPage) },
-      ],
-    }],
-  }, {
-    ...page(AppUnAuthedPage),
+export default () => [
+  {
+    ...page(AppRootPage),
     children: [
-      { path: '/login', ...page(LoginPage) },
-      { path: '/register', ...page(RegisterPage) },
+      {
+        ...page(AppAuthedPage),
+        children: [
+          {
+            path: '/project/:stub',
+            ...page(ProjectPage),
+            children: [
+              { index: true, ...page(ProjectChangesPage) },
+              {
+                path: 'feed',
+                ...page(ProjectFeedPage),
+                children: [{ path: 'commit/:commitId', ...page(ProjectFeedCommitPage) }],
+              },
+              { path: 'threads', ...page(ProjectThreadPage) },
+              { path: 'files', ...page(ProjectFilesPage) },
+              { path: 'files/:path', ...page(ProjectFilesPage) },
+              {
+                path: 'settings',
+                ...page(ProjectSettingsPage),
+                children: [
+                  { index: true, ...page(ProjectSettingsGeneralPage) },
+                  { path: 'threads', ...page(ProjectSettingsThreadsPage) },
+                  { path: 'team', ...page(ProjectSettingsTeamPage) },
+                  { path: 'permissions', ...page(ProjectSettingsPermissionsPage) },
+                ],
+              },
+            ],
+          },
+          { path: '/', ...page(HomePage) },
+          { path: '/dashboard', ...page(DashboardPage) },
+          {
+            path: '/settings',
+            ...page(SettingsPage),
+            children: [{ path: 'account', ...page(SettingsAccountPage) }],
+          },
+        ],
+      },
+      {
+        ...page(AppUnAuthedPage),
+        children: [
+          { path: '/login', ...page(LoginPage) },
+          { path: '/register', ...page(RegisterPage) },
+        ],
+      },
+      {
+        ...page(AppEitherPage),
+        children: [
+          {
+            path: '/settings',
+            ...page(SettingsPage),
+            children: [{ path: 'application', ...page(SettingsApplicationPage) }],
+          },
+        ],
+      },
     ],
-  }, {
-    ...page(AppEitherPage),
-    children: [{
-      path: '/settings',
-      ...page(SettingsPage),
-      children: [
-        { path: 'application', ...page(SettingsApplicationPage) },
-      ],
-    }],
-  }],
-}]
+  },
+]

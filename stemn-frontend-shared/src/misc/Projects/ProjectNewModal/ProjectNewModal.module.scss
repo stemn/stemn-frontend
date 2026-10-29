@@ -1,28 +1,28 @@
 @value border1, bg1 from "theme";
 
-.modalTitle{
+.modalTitle {
   padding: 15px;
   border-bottom: 1px solid border1;
 }
-.modalBody{
+.modalBody {
   padding: 30px;
   background: bg1;
   overflow-y: auto;
   flex: 1;
 }
-.modalFooter{
+.modalFooter {
   min-height: 56px;
   border-top: 1px solid border1;
   padding: 10px;
 }
 
-.panel{
+.panel {
   padding: 20px;
   background: white;
   border: 1px solid border1;
   margin-bottom: 15px;
 }
-.panel h3{
+.panel h3 {
   margin-top: 0px;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.4);
@@ -30,14 +30,14 @@
   font-size: 12px;
   letter-spacing: 0.05em;
 }
-.panel p{
+.panel p {
   font-size: 13px;
   color: #939393;
   margin-bottom: 15px;
   line-height: 1.4em;
 }
 
-.stepModal{
+.stepModal {
   max-width: 900px;
   height: 600px;
   @media (max-width: 599px) {

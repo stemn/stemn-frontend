@@ -31,7 +31,7 @@ class LoginContainer extends Component {
     }
   }
   parseGlobalQueryParams = () => {
-    const { location, isLoggedIn, getToken } = this.props
+    const { location, getToken } = this.props
     const { query } = location
     // If we have query.id and we are not logged in, we use the id as an auth token
     if (query.id) {
@@ -57,10 +57,8 @@ class LoginContainer extends Component {
   render() {
     const { children } = this.props
     return (
-      <div className="layout-column flex" style={ { minHeight: '100vh' } }>
-        <div className="layout-column flex">
-          { children }
-        </div>
+      <div className="layout-column flex" style={{ minHeight: '100vh' }}>
+        <div className="layout-column flex">{children}</div>
         <ToastContainer />
         <ModalContainer />
         <RouteLoading />

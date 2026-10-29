@@ -28,33 +28,34 @@ const dispatchToProps = {
   fetchTimeline,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'historyCacheKey',
-  onChange: (props) => {
-    props.getHistory({
-      entityType: 'user',
-      entityId: props.params.stub,
-      cacheKey: props.historyCacheKey,
-    })
+const fetchConfigs = [
+  {
+    hasChanged: 'historyCacheKey',
+    onChange: (props) => {
+      props.getHistory({
+        entityType: 'user',
+        entityId: props.params.stub,
+        cacheKey: props.historyCacheKey,
+      })
+    },
   },
-}, {
-  hasChanged: 'timelineCacheKey',
-  onChange: (props) => {
-    props.fetchTimeline({
-      entityId: props.params.stub,
-      entityType: 'user',
-      size: props.size,
-      page: props.page,
-      cacheKey: props.timelineCacheKey,
-    })
+  {
+    hasChanged: 'timelineCacheKey',
+    onChange: (props) => {
+      props.fetchTimeline({
+        entityId: props.params.stub,
+        entityType: 'user',
+        size: props.size,
+        page: props.page,
+        cacheKey: props.timelineCacheKey,
+      })
+    },
   },
-}]
+]
 
 class UserOverviewContainer extends Component {
   render() {
-    return (
-      <UserOverview { ...this.props } />
-    )
+    return <UserOverview {...this.props} />
   }
 }
 

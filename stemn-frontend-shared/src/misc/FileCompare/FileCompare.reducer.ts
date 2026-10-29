@@ -4,11 +4,11 @@ import { IFileCompareMode } from 'stemn-shared/misc/FileCompare/types'
 import { IFile } from 'stemn-shared/misc/FileList/types'
 
 export interface IFileCompareItem {
-  editActive: boolean,
-  mode: IFileCompareMode,
-  selected1: IFile,
-  selected2?: IFile,
-  lastSelected: number,
+  editActive: boolean
+  mode: IFileCompareMode
+  selected1: IFile
+  selected2?: IFile
+  lastSelected: number
 }
 
 export interface IFileCompareState {
@@ -28,7 +28,8 @@ export const fileCompareReducer = (state: IFileCompareState = initialState, acti
         lastSelected: 1,
       })
     case 'FILE_COMPARE/SELECT':
-      return i.chain(state)
+      return i
+        .chain(state)
         .assocIn([action.meta.cacheKey, `selected${action.payload.selectedKey}`], action.payload.file)
         .assocIn([action.meta.cacheKey, 'lastSelected'], action.payload.selectedKey)
         .value()

@@ -9,19 +9,16 @@ import { MdFileUpload } from 'react-icons/md'
 export default class Upload extends Component {
   static propTypes = {
     uploadId: PropTypes.string.isRequired, // The id of this uploader (used as cache key)
-    style: PropTypes.object,               // Styles
-    containerClassName: PropTypes.string,  // Classes for the container element
-    imageClassName: PropTypes.string,      // Classes for the image element
-    model: PropTypes.string,               // The model (optional)
-    value: PropTypes.string,               // The initial value
-    onUpload: PropTypes.func,              // Function to be run when the upload is complete
+    style: PropTypes.object, // Styles
+    containerClassName: PropTypes.string, // Classes for the container element
+    imageClassName: PropTypes.string, // Classes for the image element
+    model: PropTypes.string, // The model (optional)
+    value: PropTypes.string, // The initial value
+    onUpload: PropTypes.func, // Function to be run when the upload is complete
     // From container
     uploadData: PropTypes.object,
     upload: PropTypes.func.isRequired,
     change: PropTypes.func.isRequired,
-  }
-  dropStyle = {
-    minHeight: '50px',
   }
 
   dropActiveStyle = {
@@ -32,7 +29,7 @@ export default class Upload extends Component {
     const { upload, change, uploadId, onUpload, model } = this.props
     // react-dropzone >= 7 no longer adds `file.preview` - create it ourselves
     // (not revoked: the preview url is kept in the upload store and shown after upload)
-    const files = acceptedFiles.map(file => Object.assign(file, { preview: URL.createObjectURL(file) }))
+    const files = acceptedFiles.map((file) => Object.assign(file, { preview: URL.createObjectURL(file) }))
     upload({
       files,
       cacheKey: uploadId,
@@ -48,60 +45,52 @@ export default class Upload extends Component {
   }
 
   renderOverlay = () => (
-    <div className={ cn('layout-column layout-align-center-center', classes.overlay) }>
-      <MdFileUpload size={ 30 } />
+    <div className={cn('layout-column layout-align-center-center', classes.overlay)}>
+      <MdFileUpload size={30} />
     </div>
   )
 
   render() {
-    const {
-      uploadData,
-      style,
-      containerClassName,
-      imageClassName,
-      value,
-    } = this.props
+    const { uploadData, style, containerClassName, imageClassName, value } = this.props
 
     const imageClasses = cn(classes.image, imageClassName)
 
     return (
-      <div style={ style } className={ containerClassName }>
-        <Dropzone
-          onDrop={ this.onDrop }
-          multiple={ false }
-        >
-          { ({ getRootProps, getInputProps, isDragActive }) => (
-            <div { ...getRootProps({ style: isDragActive ? this.dropActiveStyle : undefined }) }>
-              <input { ...getInputProps() } />
+      <div style={style} className={containerClassName}>
+        <Dropzone onDrop={this.onDrop} multiple={false}>
+          {({ getRootProps, getInputProps, isDragActive }) => (
+            <div {...getRootProps({ style: isDragActive ? this.dropActiveStyle : undefined })}>
+              <input {...getInputProps()} />
               <div className="layout-row layout-align-start-start">
-                { uploadData && uploadData.files && uploadData.files.length > 0
-                  ? uploadData.files.map((file, index) => (
+                {uploadData && uploadData.files && uploadData.files.length > 0 ? (
+                  uploadData.files.map((file, index) => (
                     <div
-                      key={ index }
-                      className={ imageClasses }
-                      style={ { backgroundImage: `url(${file.path ? `${GLOBAL_ENV.API_SERVER}${file.path}` : file.preview})` } }
+                      key={index}
+                      className={imageClasses}
+                      style={{
+                        backgroundImage: `url(${file.path ? `${GLOBAL_ENV.API_SERVER}${file.path}` : file.preview})`,
+                      }}
                     >
-                      { !uploadData.loading
-                        ? this.renderOverlay()
-                        : null }
+                      {!uploadData.loading ? this.renderOverlay() : null}
                       <LoadingOverlay
-                        progress={ uploadData.percentage }
-                        show={ uploadData.loading }
+                        progress={uploadData.percentage}
+                        show={uploadData.loading}
                         size="sm"
                         background="rgba(255, 255, 255, 0.8)"
                       />
                     </div>
                   ))
-                  : <div
-                    className={ imageClasses }
-                    style={ value ? { backgroundImage: `url(${GLOBAL_ENV.API_SERVER}${value})` } : {} }
+                ) : (
+                  <div
+                    className={imageClasses}
+                    style={value ? { backgroundImage: `url(${GLOBAL_ENV.API_SERVER}${value})` } : {}}
                   >
-                    { this.renderOverlay() }
+                    {this.renderOverlay()}
                   </div>
-                }
+                )}
               </div>
             </div>
-          ) }
+          )}
         </Dropzone>
       </div>
     )

@@ -11,39 +11,38 @@ import Link from 'stemn-shared/misc/Router/Link'
 import { Helmet } from 'react-helmet-async'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
-
 export default class Home extends Component {
-  filterOptions = [{
-    value: 'all',
-    name: 'Feed: All',
-    onClick: () => this.pushFilter('all'),
-  }, {
-    value: 'own-projects',
-    name: 'Feed: My Projects',
-    onClick: () => this.pushFilter('own-projects'),
-  }, {
-    value: 'followed-projects',
-    name: 'Feed: Followed Projects',
-    onClick: () => this.pushFilter('followed-projects'),
-  }, {
-    value: 'followed-users',
-    name: 'Feed: Followed Users',
-    onClick: () => this.pushFilter('followed-users'),
-  }]
-  pushFilter = filter => this.props.push({
-    pathname: window.location.pathname,
-    query: {
-      filter,
+  filterOptions = [
+    {
+      value: 'all',
+      name: 'Feed: All',
+      onClick: () => this.pushFilter('all'),
     },
-  })
+    {
+      value: 'own-projects',
+      name: 'Feed: My Projects',
+      onClick: () => this.pushFilter('own-projects'),
+    },
+    {
+      value: 'followed-projects',
+      name: 'Feed: Followed Projects',
+      onClick: () => this.pushFilter('followed-projects'),
+    },
+    {
+      value: 'followed-users',
+      name: 'Feed: Followed Users',
+      onClick: () => this.pushFilter('followed-users'),
+    },
+  ]
+  pushFilter = (filter) =>
+    this.props.push({
+      pathname: window.location.pathname,
+      query: {
+        filter,
+      },
+    })
   render() {
-    const {
-      timeline,
-      filterValue,
-      location,
-      page,
-      size,
-    } = this.props
+    const { timeline, filterValue, location, page, size } = this.props
 
     const hasResults = timeline && timeline.data && timeline.data.length > 0
     const hasNoResults = timeline && timeline.data && timeline.data.length === 0
@@ -56,35 +55,25 @@ export default class Home extends Component {
         </Helmet>
         <SubHeader title="Dashboard" noResponsive>
           <div className="layout-column layout-align-center-center">
-            <PopoverDropdown
-              value={ filterValue }
-              options={ this.filterOptions }
-            />
+            <PopoverDropdown value={filterValue} options={this.filterOptions} />
           </div>
         </SubHeader>
         <Container>
-          <Row className="layout-xs-column layout-gt-xs-row" style={ { marginTop: '30px' } }>
+          <Row className="layout-xs-column layout-gt-xs-row" style={{ marginTop: '30px' }}>
             <Col className="flex flex-order-xs-1">
               <Panel>
-                <LoadingOverlay show={ timeline.loading } linear hideBg noOverlay />
-                { hasResults &&
-                  <TimelineVertical
-                    items={ timeline.data }
-                    type="feed"
-                    group
-                  />
-                }
-                { hasNoResults &&
-                  <div className="text-title-5">Your feed is empty. Follow some <Link name="exploreRoute" className="link-primary">projects or users.</Link></div>
-                }
+                <LoadingOverlay show={timeline.loading} linear hideBg noOverlay />
+                {hasResults && <TimelineVertical items={timeline.data} type="feed" group />}
+                {hasNoResults && (
+                  <div className="text-title-5">
+                    Your feed is empty. Follow some{' '}
+                    <Link name="exploreRoute" className="link-primary">
+                      projects or users.
+                    </Link>
+                  </div>
+                )}
               </Panel>
-              { hasResults &&
-                <Pagination
-                  path={ location.pathname }
-                  page={ page }
-                  noMoreResults={ noMoreResults }
-                />
-              }
+              {hasResults && <Pagination path={location.pathname} page={page} noMoreResults={noMoreResults} />}
             </Col>
             <Col className="flex-gt-xs-30 flex-order-xs-0">
               <MyProjectsPanel />
@@ -95,7 +84,6 @@ export default class Home extends Component {
     )
   }
 }
-
 
 //              <InfoPanel>
 //                <h3>Welcome to Stemn</h3>

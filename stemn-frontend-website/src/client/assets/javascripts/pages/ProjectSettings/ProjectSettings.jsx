@@ -11,25 +11,24 @@ export default class ProjectSettings extends Component {
     const { children, projectId, project } = this.props
     const baseUrl = `/project/${projectId}/settings`
     return (
-      <div className={ classes.content }>
+      <div className={classes.content}>
         <Container>
           <Row className="layout-xs-column layout-gt-xs-row">
             <Col className="flex-gt-xs-30">
               <NavPillContainer>
-                <NavPill to={ baseUrl } onlyActiveOnIndex>General</NavPill>
-                <NavPill to={ `${baseUrl}/permissions` }>Permissions</NavPill>
-                <NavPill to={ `${baseUrl}/tags` }>Tags</NavPill>
-                <NavPill to={ `${baseUrl}/threads` }>Threads</NavPill>
-                <NavPill to={ `${baseUrl}/team` }>Team</NavPill>
+                <NavPill to={baseUrl} onlyActiveOnIndex>
+                  General
+                </NavPill>
+                <NavPill to={`${baseUrl}/permissions`}>Permissions</NavPill>
+                <NavPill to={`${baseUrl}/tags`}>Tags</NavPill>
+                <NavPill to={`${baseUrl}/threads`}>Threads</NavPill>
+                <NavPill to={`${baseUrl}/team`}>Team</NavPill>
               </NavPillContainer>
             </Col>
-            <Col className="flex">
-              { project && project.data && children }
-            </Col>
+            <Col className="flex">{project && project.data && children}</Col>
           </Row>
         </Container>
       </div>
     )
   }
 }
-

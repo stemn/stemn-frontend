@@ -50,8 +50,14 @@ const reportErrorsToMain = (bridge) => {
 const initSentry = () => {
   if (!GLOBAL_ENV.SENTRY_DSN) return
   import('@sentry/browser')
-    .then(Sentry => Sentry.init({ dsn: GLOBAL_ENV.SENTRY_DSN, environment: GLOBAL_ENV.NODE_ENV, release: `stemn-desktop@${GLOBAL_ENV.APP_VERSION}` }))
-    .catch(err => console.error('Failed to load Sentry', err))
+    .then((Sentry) =>
+      Sentry.init({
+        dsn: GLOBAL_ENV.SENTRY_DSN,
+        environment: GLOBAL_ENV.NODE_ENV,
+        release: `stemn-desktop@${GLOBAL_ENV.APP_VERSION}`,
+      }),
+    )
+    .catch((err) => console.error('Failed to load Sentry', err))
 }
 
 /**
@@ -69,7 +75,7 @@ export default async function bootstrap({ createRoutes, loadUser = false }) {
   initHttp(() => store.getState().auth.authToken)
 
   // Actions reduced by the main-process store are replayed here
-  bridge.onAction(action => store.dispatch(action))
+  bridge.onAction((action) => store.dispatch(action))
 
   const router = createHashRouter(createRoutes(store))
   syncRouterWithStore(router, store)
@@ -79,10 +85,10 @@ export default async function bootstrap({ createRoutes, loadUser = false }) {
   }
 
   createRoot(document.getElementById('root')).render(
-    <Provider store={ store }>
-      <IconContext.Provider value={ iconContext }>
-        <RouterProvider router={ router } />
-      </IconContext.Provider>
+    <Provider store={store}>
+      <IconContext value={iconContext}>
+        <RouterProvider router={router} />
+      </IconContext>
     </Provider>,
   )
 

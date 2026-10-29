@@ -27,7 +27,10 @@
 .toastInner {
   background: white;
   border-radius: 3px;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.03), 0 2px 15px rgba(0,0,0,0.15);  line-height: 1.5em;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.03),
+    0 2px 15px rgba(0, 0, 0, 0.15);
+  line-height: 1.5em;
   margin: 5px 15px 10px 15px;
   padding: 10px 15px;
   min-height: 60px;
@@ -40,7 +43,7 @@
 }
 
 .close:hover {
-  opacity: 0.6
+  opacity: 0.6;
 }
 
 .close {
@@ -49,12 +52,14 @@
   opacity: 0;
 }
 
-.enter, .appear {
+.enter,
+.appear {
   transition: max-height 300ms ease;
   max-height: 0px;
 }
 
-.enterActive, .appearActive {
+.enterActive,
+.appearActive {
   max-height: 100px;
 }
 

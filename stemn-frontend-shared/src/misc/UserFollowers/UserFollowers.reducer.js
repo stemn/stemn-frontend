@@ -1,7 +1,7 @@
 import i from 'icepick'
 
 const initialState = {
-/** *******************************************
+  /** *******************************************
 This reducer store paginated follower data for
 every user.
 

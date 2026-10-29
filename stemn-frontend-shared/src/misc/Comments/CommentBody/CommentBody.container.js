@@ -12,14 +12,16 @@ const dispatchToProps = {
   getComment,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'commentId',
-  onChange: (props) => {
-    props.getComment({
-      commentId: props.commentId,
-    })
+const fetchConfigs = [
+  {
+    hasChanged: 'commentId',
+    onChange: (props) => {
+      props.getComment({
+        commentId: props.commentId,
+      })
+    },
   },
-}]
+]
 
 const withFetchData = fetchDataHoc(fetchConfigs)(CommentBody)
 const withRedux = connect(stateToProps, dispatchToProps)(withFetchData)

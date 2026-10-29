@@ -22,20 +22,21 @@ export function create({ store, windows }) {
     return !!(auth.authToken && auth.user && auth.user._id)
   }
 
-  const buildMenu = () => Menu.buildFromTemplate([
-    { label: 'Open Main Window', click: () => windows.main.show() },
-    { label: 'Open Mini Window', click: () => windows.menubar.show({ reposition: true }) },
-    { label: 'Open Website', click: () => shell.openExternal(GLOBAL_ENV.WEBSITE_URL) },
-    { type: 'separator' },
-    { label: 'Preferences', click: () => navigateMain('/settings/application') },
-    {
-      label: 'Account Settings',
-      enabled: isLoggedIn(),
-      click: () => navigateMain('/settings/account'),
-    },
-    { type: 'separator' },
-    { label: 'Quit', click: () => dispatch(ElectronWindowsActions.quit()) },
-  ])
+  const buildMenu = () =>
+    Menu.buildFromTemplate([
+      { label: 'Open Main Window', click: () => windows.main.show() },
+      { label: 'Open Mini Window', click: () => windows.menubar.show({ reposition: true }) },
+      { label: 'Open Website', click: () => shell.openExternal(GLOBAL_ENV.WEBSITE_URL) },
+      { type: 'separator' },
+      { label: 'Preferences', click: () => navigateMain('/settings/application') },
+      {
+        label: 'Account Settings',
+        enabled: isLoggedIn(),
+        click: () => navigateMain('/settings/account'),
+      },
+      { type: 'separator' },
+      { label: 'Quit', click: () => dispatch(ElectronWindowsActions.quit()) },
+    ])
 
   const icon = nativeImage.createFromPath(trayIconPath).resize({ width: 18, height: 18 })
   try {

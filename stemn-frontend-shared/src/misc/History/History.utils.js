@@ -9,7 +9,7 @@ export const fillRange = (from, to, keyName) => (data) => {
 
   // Create the range
   const range = moment.range(from, to)
-  const rangeArray = Array.from(range.by('day', { step: 1 })).map(date => ({
+  const rangeArray = Array.from(range.by('day', { step: 1 })).map((date) => ({
     [keyName]: date.format('YYYY-MM-DD'),
   }))
   const rangeObject = keyBy(rangeArray, keyName)

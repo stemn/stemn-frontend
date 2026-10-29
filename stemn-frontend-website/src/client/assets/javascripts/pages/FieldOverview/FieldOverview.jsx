@@ -11,16 +11,18 @@ export default class FieldOverview extends Component {
       <Row className="layout-xs-col layout-gt-xs-row">
         <Col className="flex-gt-xs-70">
           <SiteSearchResultsContainer
-            page={ parseInt(location.query.page, 10) }
+            page={parseInt(location.query.page, 10)}
             parentType="field"
-            parentId={ field.data._id }
-            size={ 30 }
+            parentId={field.data._id}
+            size={30}
             type="project"
           />
         </Col>
         <Col className="flex-gt-xs-30">
-          <div className="text-mini-caps" style={ { marginBottom: '10px' } }>Related Fields</div>
-          <RelatedList fieldId={ field.data._id } limit={ 20 } />
+          <div className="text-mini-caps" style={{ marginBottom: '10px' }}>
+            Related Fields
+          </div>
+          <RelatedList fieldId={field.data._id} limit={20} />
         </Col>
       </Row>
     )

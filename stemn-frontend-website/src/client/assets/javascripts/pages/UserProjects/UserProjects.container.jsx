@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 
-import { getUserProjects } from 'stemn-shared/misc/Projects/Projects.actions.js'
-
 import UserProjects from './UserProjects'
 
 const stateToProps = ({ users, projects }, { params }) => ({
@@ -17,9 +15,7 @@ const fetchConfigs = []
 
 class UserProjectsContainer extends Component {
   render() {
-    return (
-      <UserProjects { ...this.props } />
-    )
+    return <UserProjects {...this.props} />
   }
 }
 

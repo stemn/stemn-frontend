@@ -1,4 +1,3 @@
-
 input {
   line-height: 1.3em;
 }
@@ -22,7 +21,7 @@ input {
   border: 1px solid rgba(0, 0, 0, 0.4);
 }
 
-.input-plain{
+.input-plain {
   width: 100%;
   outline: none;
   border: none;

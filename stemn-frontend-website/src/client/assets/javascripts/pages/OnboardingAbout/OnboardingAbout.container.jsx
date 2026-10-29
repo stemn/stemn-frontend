@@ -17,9 +17,7 @@ const dispatchToProps = {
 
 class OnboardingAboutContainer extends Component {
   render() {
-    return (
-      <OnboardingAbout { ...this.props } />
-    )
+    return <OnboardingAbout {...this.props} />
   }
 }
 

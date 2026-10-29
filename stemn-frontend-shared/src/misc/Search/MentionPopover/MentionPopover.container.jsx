@@ -16,26 +16,27 @@ const dispatchToProps = {
   search,
 }
 
-const fetchConfigs = [{
-  hasChanged: (nextProps, prevProps) => nextProps.cacheKey !== prevProps.cacheKey || nextProps.query !== prevProps.query,
-  onChange: (props) => {
-    if (props.query && props.query.length > 0) {
-      props.search({
-        entityType: props.entityType,
-        criteria: {
-          name: props.query && `/${props.query}/i`,
-        },
-        cacheKey: props.cacheKey,
-      })
-    }
+const fetchConfigs = [
+  {
+    hasChanged: (nextProps, prevProps) =>
+      nextProps.cacheKey !== prevProps.cacheKey || nextProps.query !== prevProps.query,
+    onChange: (props) => {
+      if (props.query && props.query.length > 0) {
+        props.search({
+          entityType: props.entityType,
+          criteria: {
+            name: props.query && `/${props.query}/i`,
+          },
+          cacheKey: props.cacheKey,
+        })
+      }
+    },
   },
-}]
+]
 
 class MentionPopoverContainer extends Component {
   render() {
-    return (
-      <MentionPopover { ...this.props } />
-    )
+    return <MentionPopover {...this.props} />
   }
 }
 

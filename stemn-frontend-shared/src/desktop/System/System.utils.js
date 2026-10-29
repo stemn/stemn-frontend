@@ -15,7 +15,7 @@ export const getInstallStatus = async () => {
     return true
   }
   const entries = await readdir(join(homedir(), '.local/share/applications')).catch(() => [])
-  return entries.some(entry => /stemn.*\.desktop$/i.test(entry))
+  return entries.some((entry) => /stemn.*\.desktop$/i.test(entry))
 }
 
 export const openExternal = ({ url, params }) => {

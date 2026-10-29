@@ -18,19 +18,19 @@ import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import { MdClose } from 'react-icons/md'
 
 const WalkthroughPropTypes = {
-  children: PropTypes.node,      // Child element
-  name: PropTypes.string,    //
+  children: PropTypes.node, // Child element
+  name: PropTypes.string, //
 }
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
 export class Walkthrough extends React.Component {
-  static propTypes = WalkthroughPropTypes;
+  static propTypes = WalkthroughPropTypes
 
   render() {
     const { children, name } = this.props
     const { walkthroughActions, walkthrough } = this.props
     const isActive = walkthrough.active.includes(name)
-    const data     = getStepData(name)
+    const data = getStepData(name)
 
     const getNext = (stepName, steps) => {
       const currentIndex = steps.indexOf(stepName)
@@ -62,25 +62,28 @@ export class Walkthrough extends React.Component {
     }
 
     return (
-      <Popover
-        { ...omit(this.props, Object.keys(WalkthroughPropTypes)) }
-        open={ isActive }
-        trigger="none"
-        tipSize={ 6 }
-      >
+      <Popover {...omit(this.props, Object.keys(WalkthroughPropTypes))} open={isActive} trigger="none" tipSize={6}>
         {children || <div />}
-        <div className={ classes.walkthrough }>
-          <SimpleIconButton style={ { position: 'absolute', top: '2px', right: '4px' } } onClick={ close }>
+        <div className={classes.walkthrough}>
+          <SimpleIconButton style={{ position: 'absolute', top: '2px', right: '4px' }} onClick={close}>
             <MdClose size="10" />
           </SimpleIconButton>
           {data.step.content}
-          <div style={ { marginTop: '12px' } }>
-            { nextStep
-              ? <a className="link-primary" onClick={ next }>Next</a>
-              : <a className="link-primary" onClick={ close }>Finish</a> }
-            { prevStep
-              ? <a className="link-grey" style={ { marginLeft: '10px' } } onClick={ prev }>Previous</a>
-              : null }
+          <div style={{ marginTop: '12px' }}>
+            {nextStep ? (
+              <a className="link-primary" onClick={next}>
+                Next
+              </a>
+            ) : (
+              <a className="link-primary" onClick={close}>
+                Finish
+              </a>
+            )}
+            {prevStep ? (
+              <a className="link-grey" style={{ marginLeft: '10px' }} onClick={prev}>
+                Previous
+              </a>
+            ) : null}
           </div>
         </div>
       </Popover>

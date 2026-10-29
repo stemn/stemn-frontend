@@ -5,7 +5,8 @@
   font-size: 11px;
   transition: 0.1s ease all;
   cursor: pointer;
-  &.active, &:hover {
+  &.active,
+  &:hover {
     background: rgba(0, 0, 0, 0.03);
   }
 }

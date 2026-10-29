@@ -7,8 +7,8 @@ export default class LoadingLinear extends Component {
     const { type, className, width } = this.props
     const widthStyle = width >= 0 ? { width: `${width}%` } : {}
     return (
-      <div className={ cn(classes.progress, className) }>
-        <div className={ type === 'determinate' ? classes.determinate : classes.indeterminate } style={ widthStyle } />
+      <div className={cn(classes.progress, className)}>
+        <div className={type === 'determinate' ? classes.determinate : classes.indeterminate} style={widthStyle} />
       </div>
     )
   }

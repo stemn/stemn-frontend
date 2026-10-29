@@ -27,50 +27,50 @@
  */
 
 export interface IPipelineConfigStepPort {
-  type: string,
-  value?: any,
+  type: string
+  value?: any
 }
 export interface IPipelineConfigStepBase {
   /**
    * Step Type
    * This should check out the catalogue of steps to find out what to use here
    */
-  type: string,
+  type: string
   /**
    * Generic step configuration
    */
   config?: {
-    [key: string]: string,
-  },
+    [key: string]: string
+  }
   /**
    * Command to run in the docker container
    */
-  command?: string | string[],
+  command?: string | string[]
   /**
    * Ports
    * This describes the values of the possible input/output ports
    */
   ports: {
-    [portId: string]: IPipelineConfigStepPort,
-  },
+    [portId: string]: IPipelineConfigStepPort
+  }
   /**
    * Files
    * File Glob selectors for files which will be accessible in this step
    */
-  files?: string | string[],
+  files?: string | string[]
   /**
    * X-Y Position
    * The x-y position of the step relative to the top left corner. Display purposes only.
    */
   position: {
-    x: number,
-    y: number,
-  },
+    x: number
+    y: number
+  }
   /**
    * Allow Failure
    * If true, this step can fail and the pipeline will not cancel. The next step will be run.
    */
-  allowFailure?: boolean,
+  allowFailure?: boolean
 }
 
 export interface IPipelineConfigLink {
@@ -88,17 +88,17 @@ export interface IPipelineConfigLink {
 }
 
 export interface IPipelineConfig {
-  name: string,
+  name: string
   steps: {
-    [id: string]: IPipelineConfigStepBase,
-  },
-  links: IPipelineConfigLink[],
+    [id: string]: IPipelineConfigStepBase
+  }
+  links: IPipelineConfigLink[]
 }
 
 export interface IStep {
-  type: string,
-  name: string,
-  category: string,
-  icon: any,
-  schema?: any,
+  type: string
+  name: string
+  category: string
+  icon: any
+  schema?: any
 }

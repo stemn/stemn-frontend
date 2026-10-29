@@ -2,11 +2,11 @@ import http from 'axios'
 
 export interface IUploadFileInputs {
   /** Project Id */
-  projectId: string,
+  projectId: string
   /** Parent folder id */
-  parent?: string,
+  parent?: string
   /** File name including extension. eg) some_file.txt */
-  name: string,
+  name: string
   /** File content */
   file?: any
 }

@@ -38,47 +38,47 @@ export default class ThreadsDisplay extends Component {
     })
   }
   render() {
-    const {
-      threads,
-      board,
-      project,
-      filter,
-      filterModel,
-      filterCacheKey,
-      setFilter,
-      projectBoards,
-    } = this.props
+    const { threads, board, project, filter, filterModel, filterCacheKey, setFilter, projectBoards } = this.props
     const { hideGuide } = this.state
 
-    const layoutOptions = [{
-      name: 'List',
-      value: 'list',
-      onClick: () => this.setLayout('list'),
-    }, {
-      name: 'Board',
-      value: 'board',
-      onClick: () => this.setLayout('board'),
-    }]
-
+    const layoutOptions = [
+      {
+        name: 'List',
+        value: 'list',
+        onClick: () => this.setLayout('list'),
+      },
+      {
+        name: 'Board',
+        value: 'board',
+        onClick: () => this.setLayout('board'),
+      },
+    ]
 
     const guideTemplate = () => {
-      const guideInfo = [{
-        title: 'Drag and drop to organize your work',
-        description: 'Organize thread cards on a kanban-style board. Add due-dates, labels, file references and collaborate with teammates.',
-        image: cardsColumns,
-      }, {
-        title: 'Track threads from beginning to end',
-        description: 'See what your team has worked on. Threads are linked to files as they are completed. View files before and after the thread was completed.',
-        image: cardsStacked,
-      }]
+      const guideInfo = [
+        {
+          title: 'Drag and drop to organize your work',
+          description:
+            'Organize thread cards on a kanban-style board. Add due-dates, labels, file references and collaborate with teammates.',
+          image: cardsColumns,
+        },
+        {
+          title: 'Track threads from beginning to end',
+          description:
+            'See what your team has worked on. Threads are linked to files as they are completed. View files before and after the thread was completed.',
+          image: cardsStacked,
+        },
+      ]
       return (
         <div className="layout-column flex layout-align-center">
           <div className="layout-row layout-align-center">
-            <Guide data={ guideInfo[0] } />
-            <Guide data={ guideInfo[1] } />
+            <Guide data={guideInfo[0]} />
+            <Guide data={guideInfo[1]} />
           </div>
           <div className="layout-row layout-align-center">
-            <Button className="primary lg" onClick={ this.getStarted }>Get started with Threads</Button>
+            <Button className="primary lg" onClick={this.getStarted}>
+              Get started with Threads
+            </Button>
           </div>
         </div>
       )
@@ -87,43 +87,35 @@ export default class ThreadsDisplay extends Component {
       const layout = board && board.layout === 'list' ? 'list' : 'board'
       return (
         <div className="layout-column flex">
-          <div className={ `${classes.header} layout-row layout-align-start-center` }>
+          <div className={`${classes.header} layout-row layout-align-start-center`}>
             <SearchInput
-              changeAction={ this.changeInput }
-              value={ filter.string }
-              className={ classes.search }
+              changeAction={this.changeInput}
+              value={filter.string}
+              className={classes.search}
               type="text"
               placeholder="Search threads"
             />
             <div className="flex" />
             <ThreadFilterUser
-              filter={ filter }
-              filterModel={ filterModel }
-              filterCacheKey={ filterCacheKey }
-              setFilter={ setFilter }
-              project={ project }
-              style={ { margin: '0 15px' } }
+              filter={filter}
+              filterModel={filterModel}
+              filterCacheKey={filterCacheKey}
+              setFilter={setFilter}
+              project={project}
+              style={{ margin: '0 15px' }}
             />
             <ThreadFilterStatus
-              filter={ filter }
-              filterModel={ filterModel }
-              filterCacheKey={ filterCacheKey }
-              setFilter={ setFilter }
-              style={ { marginRight: '15px' } }
+              filter={filter}
+              filterModel={filterModel}
+              filterCacheKey={filterCacheKey}
+              setFilter={setFilter}
+              style={{ marginRight: '15px' }}
             />
-            <PopoverDropdown
-              className="primary"
-              value={ layout }
-              options={ layoutOptions }
-            >
+            <PopoverDropdown className="primary" value={layout} options={layoutOptions}>
               Layout:&nbsp;
             </PopoverDropdown>
           </div>
-          <ThreadList
-            className={ classes.threads }
-            board={ filterBoard(board, threads, filter.object) }
-            layout={ layout }
-          />
+          <ThreadList className={classes.threads} board={filterBoard(board, threads, filter.object)} layout={layout} />
         </div>
       )
     }
@@ -135,14 +127,14 @@ export default class ThreadsDisplay extends Component {
       } else if (has(board, 'data.groups')) {
         return threadsTemplate()
       }
-      
+
       return null
     }
 
     const isLoading = !projectBoards || (projectBoards && projectBoards.loading && !has(board, 'data.groups'))
     return (
       <div className="layout-column flex rel-box">
-        <LoadingOverlay show={ isLoading } />
+        <LoadingOverlay show={isLoading} />
         {!isLoading ? getTemplate() : null}
       </div>
     )

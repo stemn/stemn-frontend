@@ -26,7 +26,6 @@ import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
 import DueDate from 'stemn-shared/misc/Threads/ThreadDueDate'
 import threadDisplayModalName from 'stemn-shared/misc/Threads/ThreadDisplayModal'
 
-
 export class ThreadListItem extends React.Component {
   // Mounting
   onMount = (nextProps, prevProps) => {
@@ -37,14 +36,18 @@ export class ThreadListItem extends React.Component {
         })
       }
     }
-  };
+  }
 
-  UNSAFE_componentWillMount() { this.onMount(this.props) }
-  UNSAFE_componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+  UNSAFE_componentWillMount() {
+    this.onMount(this.props)
+  }
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    this.onMount(nextProps, this.props)
+  }
 
   updateThread = () => {
     setTimeout(() => this.props.ThreadsActions.updateThread({ thread: this.props.thread.data }), 1)
-  };
+  }
 
   toggleComplete = ({ model, value }) => {
     this.props.ThreadsActions.toggleComplete({
@@ -53,7 +56,7 @@ export class ThreadListItem extends React.Component {
       value,
     })
     this.updateThread()
-  };
+  }
 
   showModal = () => {
     this.props.ModalActions.showModal({
@@ -63,83 +66,71 @@ export class ThreadListItem extends React.Component {
         threadId: this.props.item,
       },
     })
-  };
+  }
 
   render() {
-    const {
-      thread,
-      entityModel,
-      draggable,
-      layout,
-      board,
-    } = this.props
+    const { thread, entityModel, draggable, layout, board } = this.props
     if (!thread || !thread.data) {
       if (layout === 'list') {
         return (
-          <div className={ loadingClasses.loading }>
-            <div className={ cn(classes.listItem, 'layout-row flex layout-align-start-center') }>
-              <Checkbox
-                className="text-primary"
-                circle
-              />
-              <div className="flex text-ellipsis" style={ { lineHeight: '1.4em' } }>
+          <div className={loadingClasses.loading}>
+            <div className={cn(classes.listItem, 'layout-row flex layout-align-start-center')}>
+              <Checkbox className="text-primary" circle />
+              <div className="flex text-ellipsis" style={{ lineHeight: '1.4em' }}>
                 Some placeholder hidden with blokk font
               </div>
-              <div className={ `${classes.listUser} layout-row layout-align-start-center text-ellipsis` }>
-                <UserAvatars users={ [{}] } limit={ 3 } />
+              <div className={`${classes.listUser} layout-row layout-align-start-center text-ellipsis`}>
+                <UserAvatars users={[{}]} limit={3} />
               </div>
-              <div className={ classes.listDate } />
-              <div className={ `${classes.listActions} text-ellipsis layout-row layout-align-end-center` } />
+              <div className={classes.listDate} />
+              <div className={`${classes.listActions} text-ellipsis layout-row layout-align-end-center`} />
             </div>
           </div>
         )
       }
-      
+
       return (
-        <div className={ cn(classes.card, loadingClasses.loading, 'layout-column flex') }>
-          <div className={ `${classes.cardBody} layout-row` }>
+        <div className={cn(classes.card, loadingClasses.loading, 'layout-column flex')}>
+          <div className={`${classes.cardBody} layout-row`}>
             <Checkbox className="text-primary" circle />
-            <div className={ `${classes.cardText} flex` }>Some placeholder hidden with blokk font</div>
-            <UserAvatars users={ [{}] } />
+            <div className={`${classes.cardText} flex`}>Some placeholder hidden with blokk font</div>
+            <UserAvatars users={[{}]} />
           </div>
-          <div className={ `${classes.cardFooter} layout-row layout-align-start-center` } />
+          <div className={`${classes.cardFooter} layout-row layout-align-start-center`} />
         </div>
       )
     }
     if (layout === 'list') {
       return (
-        <div className={ cn({ [classes.isDragging]: thread.isDragging && draggable }) }>
-          <div className={ cn(classes.listItem, 'layout-row flex layout-align-start-center') }>
+        <div className={cn({ [classes.isDragging]: thread.isDragging && draggable })}>
+          <div className={cn(classes.listItem, 'layout-row flex layout-align-start-center')}>
             <Checkbox
-              title={ thread.data.complete ? 'Mark as open' : 'Mark as closed' }
-              model={ `${entityModel}.data.complete` }
-              value={ thread.data.complete }
-              changeAction={ this.toggleComplete }
+              title={thread.data.complete ? 'Mark as open' : 'Mark as closed'}
+              model={`${entityModel}.data.complete`}
+              value={thread.data.complete}
+              changeAction={this.toggleComplete}
               className="text-primary"
               circle
             />
-            <div className="flex text-ellipsis" style={ { lineHeight: '1.4em' } }>
+            <div className="flex text-ellipsis" style={{ lineHeight: '1.4em' }}>
               <Input
-                model={ `${entityModel}.name` }
-                value={ thread.data.name }
-                onChange={ this.updateThread }
+                model={`${entityModel}.name`}
+                value={thread.data.name}
+                onChange={this.updateThread}
                 className="input-plain"
                 type="text"
-                placeholder="Thread description" 
+                placeholder="Thread description"
               />
             </div>
-            { thread.data.labels && thread.data.labels.length > 0 && board && board.data && board.data.labels ?
-              <ThreadLabelDots labels={ thread.data.labels } labelInfo={ board.data.labels } tag />
-              : null
-            }
-            <div className={ `${classes.listUser} layout-row layout-align-start-center text-ellipsis` }>
-              <UserAvatars className="layout-row" users={ thread.data.users } limit={ 3 } />
+            {thread.data.labels && thread.data.labels.length > 0 && board && board.data && board.data.labels ? (
+              <ThreadLabelDots labels={thread.data.labels} labelInfo={board.data.labels} tag />
+            ) : null}
+            <div className={`${classes.listUser} layout-row layout-align-start-center text-ellipsis`}>
+              <UserAvatars className="layout-row" users={thread.data.users} limit={3} />
             </div>
-            <div className={ classes.listDate }>
-              { !thread.data.complete ? <DueDate due={ thread.data.due } /> : null }
-            </div>
-            <div className={ `${classes.listActions} text-ellipsis layout-row layout-align-end-center` }>
-              <SimpleIconButton onClick={ this.showModal } title="Show Thread">
+            <div className={classes.listDate}>{!thread.data.complete ? <DueDate due={thread.data.due} /> : null}</div>
+            <div className={`${classes.listActions} text-ellipsis layout-row layout-align-end-center`}>
+              <SimpleIconButton onClick={this.showModal} title="Show Thread">
                 <MdOpenInNew size="20px" />
               </SimpleIconButton>
             </div>
@@ -147,38 +138,37 @@ export class ThreadListItem extends React.Component {
         </div>
       )
     }
-    
+
     return (
-      <div className={ cn(classes.card, 'layout-column flex') }>
-        <div className={ `${classes.cardBody} layout-row` }>
+      <div className={cn(classes.card, 'layout-column flex')}>
+        <div className={`${classes.cardBody} layout-row`}>
           <Checkbox
-            title={ thread.data.complete ? 'Mark as open' : 'Mark as closed' }
-            model={ `${entityModel}.data.complete` }
-            value={ thread.data.complete }
-            changeAction={ this.toggleComplete }
+            title={thread.data.complete ? 'Mark as open' : 'Mark as closed'}
+            model={`${entityModel}.data.complete`}
+            value={thread.data.complete}
+            changeAction={this.toggleComplete}
             className="text-primary"
             circle
           />
-          <div className={ `${classes.cardText} flex` }>
+          <div className={`${classes.cardText} flex`}>
             <Textarea
-              onChange={ this.updateThread }
-              model={ `${entityModel}.data.name` }
-              value={ thread.data.name }
+              onChange={this.updateThread}
+              model={`${entityModel}.data.name`}
+              value={thread.data.name}
               className="input-plain"
               type="text"
               placeholder="Thread description"
             />
           </div>
-          <UserAvatars className="layout-row" users={ thread.data.users } limit={ 2 } />
+          <UserAvatars className="layout-row" users={thread.data.users} limit={2} />
         </div>
-        <div className={ `${classes.cardFooter} layout-row layout-align-start-center` } onClick={ this.showModal }>
+        <div className={`${classes.cardFooter} layout-row layout-align-start-center`} onClick={this.showModal}>
           <div className="flex layout-row layout-align-start-center">
-            { thread.data.labels && thread.data.labels.length > 0 && board && board.data && board.data.labels ?
-              <ThreadLabelDots labels={ thread.data.labels } labelInfo={ board.data.labels } />
-              : null
-            }
+            {thread.data.labels && thread.data.labels.length > 0 && board && board.data && board.data.labels ? (
+              <ThreadLabelDots labels={thread.data.labels} labelInfo={board.data.labels} />
+            ) : null}
           </div>
-          <div style={ { padding: '0 5px' } }>{ !thread.data.complete ? <DueDate due={ thread.data.due } /> : null }</div>
+          <div style={{ padding: '0 5px' }}>{!thread.data.complete ? <DueDate due={thread.data.due} /> : null}</div>
           <SimpleIconButton title="Show Thread">
             <MdOpenInNew size="20px" />
           </SimpleIconButton>
@@ -188,14 +178,13 @@ export class ThreadListItem extends React.Component {
   }
 }
 
-
 // /////////////////////////////// CONTAINER /////////////////////////////////
 
 function mapStateToProps({ threads, projects }, { item }) {
-  const thread          = threads.data[item]
-  const board         = has(thread, 'data.board') ? threads.boards[thread.data.board] : {}
-  const boardModel    = has(thread, 'data.board') ? `threads.boards.${thread.data.board}` : ''
-  const project       = has(board, 'data.project') ? projects.data[board.data.project] : {}
+  const thread = threads.data[item]
+  const board = has(thread, 'data.board') ? threads.boards[thread.data.board] : {}
+  const boardModel = has(thread, 'data.board') ? `threads.boards.${thread.data.board}` : ''
+  const project = has(board, 'data.project') ? projects.data[board.data.project] : {}
 
   return {
     thread,

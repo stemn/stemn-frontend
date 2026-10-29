@@ -14,7 +14,7 @@ export default class Onboarding extends Component {
         <Helmet>
           <title>Welcome to Stemn</title>
         </Helmet>
-        <div className={ cn(classes.header, 'layout-row layout-align-start-center') }>
+        <div className={cn(classes.header, 'layout-row layout-align-start-center')}>
           <Container>
             <ArrowTabs className="layout-row flex">
               <ArrowTab activeClassName="active" arrow name="onboardingAboutRoute" onlyActiveOnIndex>
@@ -29,12 +29,12 @@ export default class Onboarding extends Component {
             </ArrowTabs>
           </Container>
         </div>
-        <Container className={ classes.content }>
-          <div className={ classes.title }>
+        <Container className={classes.content}>
+          <div className={classes.title}>
             <div className="text-title-2">Setup Sync</div>
             <div className="text-title-4">Nice! You'll have Stemn up and running very soon</div>
           </div>
-          { user && user.dataSize === 'lg' ? children : null }
+          {user && user.dataSize === 'lg' ? children : null}
         </Container>
       </div>
     )

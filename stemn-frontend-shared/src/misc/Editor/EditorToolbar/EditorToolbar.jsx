@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import classes from './EditorToolbar.module.css'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
-import { MdFormatItalic } from 'react-icons/md'
-import { MdFormatBold } from 'react-icons/md'
-import { MdLink } from 'react-icons/md'
-import { MdVisibility } from 'react-icons/md'
-import { MdFormatListBulleted } from 'react-icons/md'
-import { MdInsertPhoto } from 'react-icons/md'
-import { MdTextFields } from 'react-icons/md'
-import { MdCode } from 'react-icons/md'
+import {
+  MdFormatItalic,
+  MdFormatBold,
+  MdLink,
+  MdVisibility,
+  MdFormatListBulleted,
+  MdInsertPhoto,
+  MdTextFields,
+  MdCode,
+} from 'react-icons/md'
 import MathIcon from 'stemn-shared/assets/icons/editor/math'
 import Popover from 'stemn-shared/misc/Popover/Popover'
 import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList'
@@ -43,67 +45,67 @@ export default class EditorToolbar extends Component {
   upload = () => {
     this.props.showUploadModal().then(({ value }) => {
       const cursorRange = this.getCursor()
-      this.cursorWrap(cursorRange, content => `\n ![${content || 'alt text'}](${value.url})`)
+      this.cursorWrap(cursorRange, (content) => `\n ![${content || 'alt text'}](${value.url})`)
       this.cursorSet(cursorRange, 1, 0)
     })
   }
   bold = () => {
     const cursorRange = this.getCursor()
-    this.cursorWrap(cursorRange, content => `**${content}**`)
+    this.cursorWrap(cursorRange, (content) => `**${content}**`)
     this.cursorSet(cursorRange, 0, 2)
   }
   heading = (level = 1) => {
     const cursorRange = this.getCursor()
     if (cursorRange.from.ch === 0) {
       // If we are at the start of a line, wrap
-      this.cursorWrap(cursorRange, content => `${repeat('#', level)} ${content}`)
+      this.cursorWrap(cursorRange, (content) => `${repeat('#', level)} ${content}`)
       this.cursorSet(cursorRange, 0, level + 1)
     } else {
       // Else, make a new line and then wrap
-      this.cursorWrap(cursorRange, content => `\n${repeat('#', level)} ${content}`)
+      this.cursorWrap(cursorRange, (content) => `\n${repeat('#', level)} ${content}`)
       this.cursorSet(cursorRange, 1, level + 1)
     }
   }
   italic = () => {
     const cursorRange = this.getCursor()
-    this.cursorWrap(cursorRange, content => `*${content}*`)
+    this.cursorWrap(cursorRange, (content) => `*${content}*`)
     this.cursorSet(cursorRange, 0, 1)
   }
   bullet = () => {
     const cursorRange = this.getCursor()
     if (cursorRange.from.ch === 0) {
       // If we are at the start of a line, wrap
-      this.cursorWrap(cursorRange, content => `* ${content}`)
+      this.cursorWrap(cursorRange, (content) => `* ${content}`)
       this.cursorSet(cursorRange, 0, 2)
     } else {
       // Else, make a new line and then wrap
-      this.cursorWrap(cursorRange, content => `\n* ${content}`)
+      this.cursorWrap(cursorRange, (content) => `\n* ${content}`)
       this.cursorSet(cursorRange, 1, 2)
     }
   }
   link = () => {
     const cursorRange = this.getCursor()
-    this.cursorWrap(cursorRange, content => `[${content || 'text'}](url)`)
+    this.cursorWrap(cursorRange, (content) => `[${content || 'text'}](url)`)
     this.cursorSet(cursorRange, 0, 1)
   }
   code = () => {
     const cursorRange = this.getCursor()
-    this.cursorWrap(cursorRange, content => `\`\`\`\n${content} \n\`\`\``)
+    this.cursorWrap(cursorRange, (content) => `\`\`\`\n${content} \n\`\`\``)
     this.cursorSet(cursorRange, 1, 0)
   }
   codeInline = () => {
     const cursorRange = this.getCursor()
-    this.cursorWrap(cursorRange, content => `\`${content}\``)
+    this.cursorWrap(cursorRange, (content) => `\`${content}\``)
     this.cursorSet(cursorRange, 0, 1)
   }
   math = () => {
     const cursorRange = this.getCursor()
-    this.cursorWrap(cursorRange, content => `$$\n${content || 'write latex math here'}\n$$`)
+    this.cursorWrap(cursorRange, (content) => `$$\n${content || 'write latex math here'}\n$$`)
     this.cursorSet(cursorRange, 1, 0)
   }
   mathInline = () => {
     const cursorRange = this.getCursor()
-    this.cursorWrap(cursorRange, content => `$${content || 'write latex math here'}$`)
+    this.cursorWrap(cursorRange, (content) => `$${content || 'write latex math here'}$`)
     this.cursorSet(cursorRange, 0, 1)
   }
   preview = () => {
@@ -112,103 +114,123 @@ export default class EditorToolbar extends Component {
       text: codemirror.getValue(),
     })
   }
-  buttons = [{
-    title: 'Heading',
-    onClick: () => this.heading(3),
-    icon: <MdTextFields />,
-    menu: [{
-      label: 'Heading 1 (#)',
-      onClick: () => this.heading(1),
-    }, {
-      label: 'Heading 2 (##)',
-      onClick: () => this.heading(2),
-    }, {
-      label: 'Heading 3 (###)',
+  buttons = [
+    {
+      title: 'Heading',
       onClick: () => this.heading(3),
-    }, {
-      label: 'Heading 4 (####)',
-      onClick: () => this.heading(4),
-    }],
-  }, {
-    title: 'Bold',
-    onClick: this.bold,
-    icon: <MdFormatBold />,
-  }, {
-    title: 'Italic',
-    onClick: this.italic,
-    icon: <MdFormatItalic />,
-  }, {
-    title: 'List',
-    onClick: this.bullet,
-    icon: <MdFormatListBulleted />,
-  }, {
-    title: 'Image',
-    onClick: this.upload,
-    icon: <MdInsertPhoto />,
-  }, {
-    title: 'Link',
-    onClick: this.link,
-    icon: <MdLink />,
-  }, {
-    title: 'Code',
-    onClick: this.code,
-    icon: <MdCode />,
-    menu: [{
-      label: 'Code Block',
+      icon: <MdTextFields />,
+      menu: [
+        {
+          label: 'Heading 1 (#)',
+          onClick: () => this.heading(1),
+        },
+        {
+          label: 'Heading 2 (##)',
+          onClick: () => this.heading(2),
+        },
+        {
+          label: 'Heading 3 (###)',
+          onClick: () => this.heading(3),
+        },
+        {
+          label: 'Heading 4 (####)',
+          onClick: () => this.heading(4),
+        },
+      ],
+    },
+    {
+      title: 'Bold',
+      onClick: this.bold,
+      icon: <MdFormatBold />,
+    },
+    {
+      title: 'Italic',
+      onClick: this.italic,
+      icon: <MdFormatItalic />,
+    },
+    {
+      title: 'List',
+      onClick: this.bullet,
+      icon: <MdFormatListBulleted />,
+    },
+    {
+      title: 'Image',
+      onClick: this.upload,
+      icon: <MdInsertPhoto />,
+    },
+    {
+      title: 'Link',
+      onClick: this.link,
+      icon: <MdLink />,
+    },
+    {
+      title: 'Code',
       onClick: this.code,
-    }, {
-      label: 'Inline Code',
-      onClick: this.codeInline,
-    }],
-  }, {
-    title: 'Equation',
-    onClick: this.math,
-    icon: <MathIcon />,
-    menu: [{
-      label: 'Block Equation',
+      icon: <MdCode />,
+      menu: [
+        {
+          label: 'Code Block',
+          onClick: this.code,
+        },
+        {
+          label: 'Inline Code',
+          onClick: this.codeInline,
+        },
+      ],
+    },
+    {
+      title: 'Equation',
       onClick: this.math,
-    }, {
-      label: 'Inline Equation',
-      onClick: this.mathInline,
-    }],
-  }, {
-    sep: true,
-    title: 'Preview',
-    onClick: this.preview,
-    icon: <MdVisibility />,
-  }]
+      icon: <MathIcon />,
+      menu: [
+        {
+          label: 'Block Equation',
+          onClick: this.math,
+        },
+        {
+          label: 'Inline Equation',
+          onClick: this.mathInline,
+        },
+      ],
+    },
+    {
+      sep: true,
+      title: 'Preview',
+      onClick: this.preview,
+      icon: <MdVisibility />,
+    },
+  ]
   render() {
     const { hide } = this.props
     if (!hide) {
       return (
-        <div className={ classes.toolbar }>
-          { this.buttons.map(button => (!button.menu
-            ? <SimpleIconButton
-              className={ button.sep ? classes.sep : '' }
-              key={ button.title }
-              onClick={ button.onClick }
-              title={ button.title }
-            >
-              { button.icon }
-            </SimpleIconButton>
-            : <Popover
-              key={ button.title }
-              trigger="hoverDelay"
-              preferPlace="below"
-            >
+        <div className={classes.toolbar}>
+          {this.buttons.map((button) =>
+            !button.menu ? (
               <SimpleIconButton
-                className={ button.sep ? classes.sep : '' }
-                onClick={ button.onClick }
-                title={ button.title }
+                className={button.sep ? classes.sep : ''}
+                key={button.title}
+                onClick={button.onClick}
+                title={button.title}
               >
-                { button.icon }
+                {button.icon}
               </SimpleIconButton>
-              <PopoverMenuList menu={ button.menu } />
-            </Popover>),
+            ) : (
+              <Popover key={button.title} trigger="hoverDelay" preferPlace="below">
+                <SimpleIconButton
+                  className={button.sep ? classes.sep : ''}
+                  onClick={button.onClick}
+                  title={button.title}
+                >
+                  {button.icon}
+                </SimpleIconButton>
+                <PopoverMenuList menu={button.menu} />
+              </Popover>
+            ),
           )}
         </div>
       )
-    } 
+    }
     return null
   }
 }

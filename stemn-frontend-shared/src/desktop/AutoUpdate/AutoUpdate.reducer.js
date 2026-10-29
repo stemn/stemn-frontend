@@ -1,6 +1,6 @@
 import i from 'icepick'
 
-const initialState    = {
+const initialState = {
   currentVersion: null,
 
   checkingForUpdate: false,
@@ -34,7 +34,8 @@ function reducer(state, action) {
     }
     case 'AUTO_UPDATE/UPDATE_DOWNLOADED': {
       const { update, version, platform, readme } = action.payload
-      return i.chain(state)
+      return i
+        .chain(state)
         .assoc('updateDownloaded', true)
         .assoc('release', {
           update,

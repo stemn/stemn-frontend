@@ -22,11 +22,11 @@ export default class FileBreadCrumbs extends Component {
   render() {
     const { meta, clickFn, className, popup, link } = this.props
     const hasParents = meta.parents && meta.parents.length > 0
-    
+
     const displayCrumbs = () => {
       if (hasParents) {
         const parentsExtended = [
-          ...meta.parents.map(parent => ({
+          ...meta.parents.map((parent) => ({
             name: parent.name,
             fileId: parent.fileId,
             project: {
@@ -46,61 +46,51 @@ export default class FileBreadCrumbs extends Component {
         return parentsExtended.map((folder, idx) => {
           const isLastChild = idx === parentsExtended.length - 1
           const parentfolder = parentsExtended[idx - 1]
-          const clickableText = link
-            ? (<Link
-              onClick={ () => clickFn({ file: folder }) }
-              name={ getFileRouteName(folder) }
-              params={ getFileRouteParams(folder) }
+          const clickableText = link ? (
+            <Link
+              onClick={() => clickFn({ file: folder })}
+              name={getFileRouteName(folder)}
+              params={getFileRouteParams(folder)}
             >
-              { middleConcat(folder.name, 30, 0.8) }
-            </Link>)
-            : <a onClick={ () => clickFn({ file: folder }) }>{ middleConcat(folder.name, 30, 0.8) }</a>
-          
-          const plainText = <span>{ middleConcat(folder.name, 30, 0.8) }</span>
+              {middleConcat(folder.name, 30, 0.8)}
+            </Link>
+          ) : (
+            <a onClick={() => clickFn({ file: folder })}>{middleConcat(folder.name, 30, 0.8)}</a>
+          )
+
+          const plainText = <span>{middleConcat(folder.name, 30, 0.8)}</span>
 
           const getPopoverCrumb = () => (
-            <span key={ idx }>
-              <Popover
-                trigger="hoverDelay"
-                preferPlace="below"
-                tipSize={ 6 }
-                inheritIsOpen
-                offset={ 14 }
-              >
-                <span style={ { display: 'inline-block' } }> { !isLastChild ? clickableText : plainText }</span>
+            <span key={idx}>
+              <Popover trigger="hoverDelay" preferPlace="below" tipSize={6} inheritIsOpen offset={14}>
+                <span style={{ display: 'inline-block' }}> {!isLastChild ? clickableText : plainText}</span>
                 <FileListPopup
-                  activeFile={ folder.fileId }
-                  path={ parentfolder.fileId }
-                  provider={ meta.provider }
-                  projectId={ meta.project._id }
-                  clickFn={ clickFn }
-                  link={ link }
+                  activeFile={folder.fileId}
+                  path={parentfolder.fileId}
+                  provider={meta.provider}
+                  projectId={meta.project._id}
+                  clickFn={clickFn}
+                  link={link}
                 />
               </Popover>
-              { !isLastChild && <span> / </span> }
+              {!isLastChild && <span> / </span>}
             </span>
           )
 
           const getPlainCrumb = () => (
-            <span key={ idx }>
-              { !isLastChild ? clickableText : plainText }
-              { !isLastChild && <span> / </span> }
+            <span key={idx}>
+              {!isLastChild ? clickableText : plainText}
+              {!isLastChild && <span> / </span>}
             </span>
           )
-          return parentfolder && popup && idx !== 0
-            ? getPopoverCrumb()
-            : getPlainCrumb()
+          return parentfolder && popup && idx !== 0 ? getPopoverCrumb() : getPlainCrumb()
         })
       } else if (meta.name) {
-        return <span>{ middleConcat(meta.name, 30, 0.8) }</span>
-      } 
+        return <span>{middleConcat(meta.name, 30, 0.8)}</span>
+      }
       return <span>. . .</span>
     }
 
-    return (
-      <div className={ cn(classes.crumbs, className) }>
-        { displayCrumbs() }
-      </div>
-    )
+    return <div className={cn(classes.crumbs, className)}>{displayCrumbs()}</div>
   }
 }

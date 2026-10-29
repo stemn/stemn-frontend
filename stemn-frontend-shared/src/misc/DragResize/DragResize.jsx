@@ -1,4 +1,3 @@
-
 import React from 'react'
 import clickDrag from 'stemn-shared/misc/ClickDrag'
 
@@ -6,12 +5,11 @@ import clickDrag from 'stemn-shared/misc/ClickDrag'
 import cn from 'classnames'
 import classes from './DragResize.module.css'
 
-
 class DraggerComponent extends React.Component {
   state = {
     lastEventId: null,
     active: false,
-  };
+  }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.dataDrag.isMoving && nextProps.dataDrag.id && nextProps.dataDrag.id !== this.state.lastEventId) {
@@ -66,9 +64,7 @@ class DraggerComponent extends React.Component {
       },
     }
 
-    return (
-      <div className={ classes.dragger } style={ styles[this.props.side] } />
-    )
+    return <div className={classes.dragger} style={styles[this.props.side]} />
   }
 }
 
@@ -77,11 +73,13 @@ const Dragger = clickDrag(DraggerComponent, { touch: true })
 export default class DragResize extends React.Component {
   constructor(props) {
     super(props)
+    let initialState = null
     if (props.width) {
-      this.state = { width: parseInt(props.width) }
+      initialState = { width: parseInt(props.width) }
     } else if (props.height) {
-      this.state = { height: parseInt(props.height) }
+      initialState = { height: parseInt(props.height) }
     }
+    this.state = initialState
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
@@ -100,17 +98,25 @@ export default class DragResize extends React.Component {
     if (change.deltaX) {
       let width = parseInt(this.state.width) + change.deltaX
       if (widthRange) {
-        if (width < widthRange[0]) { width = widthRange[0] } else if (width > widthRange[1]) { width = widthRange[1] }
+        if (width < widthRange[0]) {
+          width = widthRange[0]
+        } else if (width > widthRange[1]) {
+          width = widthRange[1]
+        }
       }
       this.setState({ width })
     } else if (change.deltaY) {
       let height = parseInt(this.state.height) + change.deltaY
       if (heightRange) {
-        if (height < heightRange[0]) { height = heightRange[0] } else if (height > heightRange[1]) { height = heightRange[1] }
+        if (height < heightRange[0]) {
+          height = heightRange[0]
+        } else if (height > heightRange[1]) {
+          height = heightRange[1]
+        }
       }
       this.setState({ height })
     }
-  };
+  }
 
   render() {
     const style = {
@@ -119,9 +125,9 @@ export default class DragResize extends React.Component {
       transition: this.state.animate ? '0.3s ease all' : 'none',
     }
     return (
-      <div style={ style } className={ cn(classes.box, this.props.className) }>
+      <div style={style} className={cn(classes.box, this.props.className)}>
         {this.props.children}
-        <Dragger changeFn={ this.drag } side={ this.props.side } />
+        <Dragger changeFn={this.drag} side={this.props.side} />
       </div>
     )
   }

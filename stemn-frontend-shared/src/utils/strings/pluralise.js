@@ -2,7 +2,7 @@ export default (number, thing, noNumber) => {
   // takes in thing(singular)
   // adds an 's' if 0 || > 1, adds 'ies' if ends in 'y'
 
-  let end = ''
+  let end
 
   // Special Cases
   if (thing === 'People') {

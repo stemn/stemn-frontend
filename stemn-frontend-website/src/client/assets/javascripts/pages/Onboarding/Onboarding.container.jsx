@@ -15,21 +15,21 @@ const dispatchToProps = {
   getUser,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'currentUser._id',
-  onChange: (props) => {
-    props.getUser({
-      userId: props.currentUser._id,
-      force: true,
-    })
+const fetchConfigs = [
+  {
+    hasChanged: 'currentUser._id',
+    onChange: (props) => {
+      props.getUser({
+        userId: props.currentUser._id,
+        force: true,
+      })
+    },
   },
-}]
+]
 
 class OnboardingContainer extends Component {
   render() {
-    return (
-      <Onboarding { ...this.props } />
-    )
+    return <Onboarding {...this.props} />
   }
 }
 

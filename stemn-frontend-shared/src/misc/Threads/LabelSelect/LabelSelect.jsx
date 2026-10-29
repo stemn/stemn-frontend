@@ -15,28 +15,24 @@ class LabelSelectRow extends Component {
     } else {
       dispatch(storePush(model, item._id))
     }
-    if (onChange) { onChange() } // Run the onChange function if required
+    if (onChange) {
+      onChange()
+    } // Run the onChange function if required
   }
   render() {
-    const {
-      item,
-      value,
-    } = this.props
+    const { item, value } = this.props
     const status = value ? value.includes(item._id) : false
 
     return (
       <CheckboxAlt
-        status={ status }
-        value={ item._id }
-        onChange={ this.onChange }
+        status={status}
+        value={item._id}
+        onChange={this.onChange}
         className="layout-row layout-align-start-center"
         tickOnly
       >
-        <div
-          className={ classes.swatch }
-          style={ { background: item.color } }
-        />
-        { item.name }
+        <div className={classes.swatch} style={{ background: item.color }} />
+        {item.name}
       </CheckboxAlt>
     )
   }
@@ -47,19 +43,12 @@ class LabelSelect extends Component {
     const { model, value, labelInfo, dispatch, onChange } = this.props
 
     // Filter out online labels with a name and color
-    const filteredInfo = labelInfo.filter(label => label.name && label.color)
+    const filteredInfo = labelInfo.filter((label) => label.name && label.color)
 
     return (
       <div>
-        { filteredInfo.map((item, idx) => (
-          <LabelSelectRow
-            key={ idx }
-            item={ item }
-            model={ model }
-            value={ value }
-            onChange={ onChange }
-            dispatch={ dispatch }
-          />
+        {filteredInfo.map((item, idx) => (
+          <LabelSelectRow key={idx} item={item} model={model} value={value} onChange={onChange} dispatch={dispatch} />
         ))}
       </div>
     )

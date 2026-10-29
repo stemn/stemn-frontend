@@ -23,61 +23,52 @@ export default class UserProfileSettings extends Component {
           <h3>First and Last Name</h3>
           <div className="layout-row">
             <Input
-              model={ `${userModel}.data.profile.firstname` }
-              value={ user.data.profile.firstname }
+              model={`${userModel}.data.profile.firstname`}
+              value={user.data.profile.firstname}
               className="dr-input flex"
               type="text"
               placeholder="First Name"
-              style={ { marginRight: '7px' } }
+              style={{ marginRight: '7px' }}
             />
             <Input
-              model={ `${userModel}.data.profile.lastname` }
-              value={ user.data.profile.lastname }
+              model={`${userModel}.data.profile.lastname`}
+              value={user.data.profile.lastname}
               className="dr-input flex"
               type="text"
               placeholder="Last Name"
-              style={ { marginLeft: '7px' } }
+              style={{ marginLeft: '7px' }}
             />
           </div>
           <br />
           <h3>Blurb</h3>
-          <Textarea
-            model={ `${userModel}.data.blurb` }
-            value={ user.data.blurb }
-            className="dr-input"
-            type="text"
-          />
+          <Textarea model={`${userModel}.data.blurb`} value={user.data.blurb} className="dr-input" type="text" />
           <br />
           <h3>Website</h3>
           <Input
-            model={ `${userModel}.data.profile.socialLinks.website` }
-            value={ user.data.profile.socialLinks.website }
+            model={`${userModel}.data.profile.socialLinks.website`}
+            value={user.data.profile.socialLinks.website}
             className="dr-input flex"
             type="text"
           />
           <br />
           <h3>Location</h3>
           <LocationSearch
-            cacheKey={ user.data._id }
-            model={ `${userModel}.data.profile.location[0]` }
-            value={ user.data.profile.location[0] }
+            cacheKey={user.data._id}
+            model={`${userModel}.data.profile.location[0]`}
+            value={user.data.profile.location[0]}
           />
           <br />
-          <ProgressButton
-            className="primary"
-            loading={ user.savePending }
-            onClick={ saveUser }
-          >
+          <ProgressButton className="primary" loading={user.savePending} onClick={saveUser}>
             Save Profile
           </ProgressButton>
         </Col>
-        <Col className={ cn(classes.avatarCol, 'flex-order-sm-0 flex-order-xs-0') }>
+        <Col className={cn(classes.avatarCol, 'flex-order-sm-0 flex-order-xs-0')}>
           <h3>Profile Picture</h3>
           <Upload
-            containerClassName={ classes.container }
-            imageClassName={ classes.avatar }
-            model={ `${userModel}.data.profile.picture` }
-            value={ user.data.profile.picture }
+            containerClassName={classes.container}
+            imageClassName={classes.avatar}
+            model={`${userModel}.data.profile.picture`}
+            value={user.data.profile.picture}
             uploadId="UserSettingsAvatar"
           />
         </Col>
@@ -85,4 +76,3 @@ export default class UserProfileSettings extends Component {
     )
   }
 }
-

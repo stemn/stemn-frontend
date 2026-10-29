@@ -13,21 +13,23 @@ const dispatchToProps = {
   getProject,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'projectId',
-  onChange: (props) => {
-    props.getProject({
-      projectId: props.projectId,
-      size: 'md',
-    })
+const fetchConfigs = [
+  {
+    hasChanged: 'projectId',
+    onChange: (props) => {
+      props.getProject({
+        projectId: props.projectId,
+        size: 'md',
+      })
+    },
   },
-}]
+]
 
 export interface IProjectRowContainerProps {
-  projectId: string,
-  size?: 'wide',
-  className?: string,
-  style?: object,
+  projectId: string
+  size?: 'wide'
+  className?: string
+  style?: object
 }
 
 export const ProjectRowContainer = compose(

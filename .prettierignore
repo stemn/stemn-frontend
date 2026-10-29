@@ -1,0 +1,21 @@
+# Generated / installed
+node_modules
+package-lock.json
+build
+dist
+out
+release
+qa
+test-results
+playwright-report
+coverage
+
+# Vendored third-party code (kept byte-for-byte)
+stemn-frontend-website/public/static
+stemn-frontend-shared/src/misc/Websocket/primus-websockets2.js
+stemn-frontend-shared/src/misc/Files/PreviewFile/PreviewPcb/viewer
+stemn-frontend-shared/src/misc/FileList/filetype
+stemn-frontend-shared/src/assets/css/codemirror.css
+
+# Prose: not reformatted
+*.md

@@ -10,7 +10,6 @@ import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
 const eventTextMap = {
   uncompleted: (item, type, entity) => {
     const project = get(item, 'data.project')
-    const commit = get(item, 'data.commit')
     const thread = get(item, 'data.thread')
 
     const params = {
@@ -19,21 +18,33 @@ const eventTextMap = {
     }
     if (type === 'thread') {
       return <span>re-opened this thread</span>
-    } 
+    }
     return (
       <span>
-          re-opened the thread
-        <Link name="projectThreadRoute" params={ params }>{ thread.name }</Link>
-          in
-        <Link name="projectRoute" params={ params }>{ project.name }</Link>
+        re-opened the thread
+        <Link name="projectThreadRoute" params={params}>
+          {thread.name}
+        </Link>
+        in
+        <Link name="projectRoute" params={params}>
+          {project.name}
+        </Link>
       </span>
     )
   },
   addedUsers: (item, type, entity) => (
-    <span>assigned<UserNameFromId userId={ item.data.addedUsers[0] } />to this thread</span>
+    <span>
+      assigned
+      <UserNameFromId userId={item.data.addedUsers[0]} />
+      to this thread
+    </span>
   ),
   removedUsers: (item, type, entity) => (
-    <span>unassigned<UserNameFromId userId={ item.data.removedUsers[0] } />from this thread</span>
+    <span>
+      unassigned
+      <UserNameFromId userId={item.data.removedUsers[0]} />
+      from this thread
+    </span>
   ),
   revision: (item, type, entity, groupItem, groupTitle) => {
     const project = get(item, 'data.project', {})
@@ -45,34 +56,42 @@ const eventTextMap = {
     if (groupItem) {
       return (
         <span>
-          <Link name="fileRoute" params={ params }>{ middleConcat(item.data.name, 40, 0.6) }</Link>
-          { `(Revision ${item.data.revisionNumber})` }
+          <Link name="fileRoute" params={params}>
+            {middleConcat(item.data.name, 40, 0.6)}
+          </Link>
+          {`(Revision ${item.data.revisionNumber})`}
         </span>
       )
     } else if (groupTitle) {
       return (
         <span>
-          {`added ${item.eventsGrouped.length} revisions to` }
-          <Link name="projectRoute" params={ params }>{ project.name }</Link>
+          {`added ${item.eventsGrouped.length} revisions to`}
+          <Link name="projectRoute" params={params}>
+            {project.name}
+          </Link>
         </span>
       )
     } else if (type === 'file') {
       return (
         <span>
-          {  !item.data.revisionNumber || item.data.revisionNumber === 0
+          {!item.data.revisionNumber || item.data.revisionNumber === 0
             ? 'created this file'
-            : `added revision ${item.data.revisionNumber}` }
+            : `added revision ${item.data.revisionNumber}`}
         </span>
       )
-    } 
+    }
     return (
       <span>
-        { !item.data.revisionNumber || item.data.revisionNumber === 0
+        {!item.data.revisionNumber || item.data.revisionNumber === 0
           ? 'created'
-          : `added revision ${item.data.revisionNumber} to` }
-        <Link name="fileRoute" params={ params }>{ middleConcat(item.data.name, 40, 0.6) }</Link>
-          in
-        <Link name="projectRoute" params={ params }>{ project.name }</Link>
+          : `added revision ${item.data.revisionNumber} to`}
+        <Link name="fileRoute" params={params}>
+          {middleConcat(item.data.name, 40, 0.6)}
+        </Link>
+        in
+        <Link name="projectRoute" params={params}>
+          {project.name}
+        </Link>
       </span>
     )
   },
@@ -85,31 +104,41 @@ const eventTextMap = {
     if (groupItem) {
       return (
         <span>
-          <Link name="projectThreadRoute" params={ params }>{ middleConcat(item.data.name, 40, 0.6) }</Link>
-          { `(Task ${item.data.threadNumber})` }
+          <Link name="projectThreadRoute" params={params}>
+            {middleConcat(item.data.name, 40, 0.6)}
+          </Link>
+          {`(Task ${item.data.threadNumber})`}
         </span>
       )
     } else if (groupTitle) {
       return (
         <span>
-          {`added ${item.eventsGrouped.length} new threads to` }
-          <Link name="projectRoute" params={ params }>{ project.name }</Link>
+          {`added ${item.eventsGrouped.length} new threads to`}
+          <Link name="projectRoute" params={params}>
+            {project.name}
+          </Link>
         </span>
       )
     } else if (['feed', 'user'].includes(type)) {
       return (
         <span>
           added a new thread:
-          <Link name="projectThreadRoute" params={ params }>{ item.data.name }</Link>
+          <Link name="projectThreadRoute" params={params}>
+            {item.data.name}
+          </Link>
           to
-          <Link name="projectRoute" params={ params }>{ project.name || 'Untitled Project' }</Link>
+          <Link name="projectRoute" params={params}>
+            {project.name || 'Untitled Project'}
+          </Link>
         </span>
       )
     }
     return (
       <span>
         added a new thread:
-        <Link name="projectThreadRoute" params={ params }>{ item.data.name }</Link>
+        <Link name="projectThreadRoute" params={params}>
+          {item.data.name}
+        </Link>
       </span>
     )
   },
@@ -124,25 +153,31 @@ const eventTextMap = {
       return (
         <span>
           commented on
-          <Link name="projectThreadRoute" params={ params }>{ thread.name }</Link>
+          <Link name="projectThreadRoute" params={params}>
+            {thread.name}
+          </Link>
           in
-          <Link name="projectRoute" params={ params }>{ project.name }</Link>
+          <Link name="projectRoute" params={params}>
+            {project.name}
+          </Link>
         </span>
       )
     }
     return (
       <span>
-          commented on
-        <Link name="projectThreadRoute" params={ params }>{ thread.name }</Link>
+        commented on
+        <Link name="projectThreadRoute" params={params}>
+          {thread.name}
+        </Link>
       </span>
     )
-  },  
-  mention: (item, type, entity) => {    
+  },
+  mention: (item, type, entity) => {
     const locationCommit = get(item, 'data.mentionLocation.commit', {})
     const locationProject = get(item, 'data.mentionLocation.project', {})
     const locationComment = get(item, 'data.mentionLocation.comment', {})
     const locationThread = get(item, 'data.mentionLocation.thread', {})
-    
+
     const locationParams = {
       projectId: locationProject._id,
       commitId: locationCommit._id,
@@ -156,18 +191,22 @@ const eventTextMap = {
     if (locationCommit._id) {
       return (
         <span>
-          mentioned { mentionedItemString } in
-          <Link name="commitRoute" params={ locationParams }>{ locationCommit.name }</Link>
+          mentioned {mentionedItemString} in
+          <Link name="commitRoute" params={locationParams}>
+            {locationCommit.name}
+          </Link>
         </span>
       )
     } else if (locationThread._id) {
       return (
         <span>
-          mentioned { mentionedItemString } in
-          <Link name="projectThreadRoute" params={ locationParams }>{ locationThread.name }</Link>
+          mentioned {mentionedItemString} in
+          <Link name="projectThreadRoute" params={locationParams}>
+            {locationThread.name}
+          </Link>
         </span>
       )
-    } 
+    }
     return <span>Invalid mention format</span>
   },
   commit: (item, type, entity) => {
@@ -181,31 +220,41 @@ const eventTextMap = {
       return (
         <span>
           added this file to commit:
-          <Link name="commitRoute" params={ params }>{ commit.name }</Link>
+          <Link name="commitRoute" params={params}>
+            {commit.name}
+          </Link>
         </span>
       )
     } else if (type === 'feed') {
       return (
         <span>
           added a commit
-          <Link name="commitRoute" params={ params }>{ commit.name }</Link>
+          <Link name="commitRoute" params={params}>
+            {commit.name}
+          </Link>
           to
-          <Link name="projectRoute" params={ params }>{ project.name || 'Untitled Project' }</Link>
+          <Link name="projectRoute" params={params}>
+            {project.name || 'Untitled Project'}
+          </Link>
         </span>
       )
     } else if (type === 'project' || type === 'user') {
       return (
         <span>
           added a commit
-          <Link name="commitRoute" params={ params }>{ commit.name }</Link>
-          containing { pluralise(item.data.items.length, 'revision') }
+          <Link name="commitRoute" params={params}>
+            {commit.name}
+          </Link>
+          containing {pluralise(item.data.items.length, 'revision')}
         </span>
       )
     } else if (type === 'thread') {
       return (
         <span>
           referenced this thread in commit
-          <Link name="commitRoute" params={ params }>{ commit.name }</Link>
+          <Link name="commitRoute" params={params}>
+            {commit.name}
+          </Link>
         </span>
       )
     }
@@ -218,53 +267,39 @@ const eventTextMap = {
     }
     if (type === 'thread') {
       if (get(item, 'data.commit.name')) {
-        return (<span>
-          marked this as closed in commit
-          <Link
-            className="link-primary"
-            name="commitRoute"
-            params={ params }
-          >
-            { item.data.commit.name }
-          </Link>
-        </span>)
-      } 
+        return (
+          <span>
+            marked this as closed in commit
+            <Link className="link-primary" name="commitRoute" params={params}>
+              {item.data.commit.name}
+            </Link>
+          </span>
+        )
+      }
       return <span>marked this as closed</span>
-    } 
+    }
     return (
       <span>
-          closed the thread
-        <Link
-          className="link-primary"
-          name="projectThreadRoute"
-          params={ params }
-        >
-          { get(item, 'data.thread.name', 'Untitled Thread') }
+        closed the thread
+        <Link className="link-primary" name="projectThreadRoute" params={params}>
+          {get(item, 'data.thread.name', 'Untitled Thread')}
         </Link>
-        { get(item, 'data.commmit._id') &&
-        <span>
-              in commit
-          <Link
-            className="link-primary"
-            name="commitRoute"
-            params={ params }
-          >
-            { item.data.commit.name }
-          </Link>
-        </span>
-        }
-        { get(item, 'data.project._id') &&
-        <span>
-              in project
-          <Link
-            className="link-primary"
-            name="projectRoute"
-            params={ params }
-          >
-            { item.data.project.name }
-          </Link>
-        </span>
-        }
+        {get(item, 'data.commmit._id') && (
+          <span>
+            in commit
+            <Link className="link-primary" name="commitRoute" params={params}>
+              {item.data.commit.name}
+            </Link>
+          </span>
+        )}
+        {get(item, 'data.project._id') && (
+          <span>
+            in project
+            <Link className="link-primary" name="projectRoute" params={params}>
+              {item.data.project.name}
+            </Link>
+          </span>
+        )}
       </span>
     )
   },
@@ -278,58 +313,61 @@ const eventTextMap = {
       }
       return (
         <span>
-          { hasAddedLabels &&
+          {hasAddedLabels && (
             <span>
               added the&nbsp;
-              <ThreadLabelDots
-                labels={ item.data.addedLabels }
-                labelInfo={ entity.data.labels }
-                tag
-              />
-              { pluralise(item.data.addedLabels.length, 'label', true) }
+              <ThreadLabelDots labels={item.data.addedLabels} labelInfo={entity.data.labels} tag />
+              {pluralise(item.data.addedLabels.length, 'label', true)}
             </span>
-          }
-          { hasAddedLabels && hasRemovedLabels &&
-            <span>&nbsp;and&nbsp;</span>
-          }
-          { hasRemovedLabels &&
+          )}
+          {hasAddedLabels && hasRemovedLabels && <span>&nbsp;and&nbsp;</span>}
+          {hasRemovedLabels && (
             <span>
               removed the&nbsp;
-              <ThreadLabelDots
-                labels={ item.data.removedLabels }
-                labelInfo={ entity.data.labels }
-                tag
-              />
-              { pluralise(item.data.removedLabels.length, 'label', true) }
+              <ThreadLabelDots labels={item.data.removedLabels} labelInfo={entity.data.labels} tag />
+              {pluralise(item.data.removedLabels.length, 'label', true)}
             </span>
-          }
-          { type === 'project' &&
+          )}
+          {type === 'project' && (
             <span>
-              { hasRemovedLabels ? ' from' : ' to' }
-              <Link name="projectThreadRoute" params={ params }>{ get(item, 'data.thread.name', 'Untitled Thread') }</Link>
+              {hasRemovedLabels ? ' from' : ' to'}
+              <Link name="projectThreadRoute" params={params}>
+                {get(item, 'data.thread.name', 'Untitled Thread')}
+              </Link>
             </span>
-          }
+          )}
         </span>
       )
-    } 
+    }
     return <span>Changed Labels</span>
   },
   movedGroup: (item, type, entity) => {
-    const group1 = entity.data.groups.find(group => group._id === item.data.movedGroups[0])
-    const group2 = entity.data.groups.find(group => group._id === item.data.movedGroups[1])
+    const group1 = entity.data.groups.find((group) => group._id === item.data.movedGroups[0])
+    const group2 = entity.data.groups.find((group) => group._id === item.data.movedGroups[1])
     const params = {
       projectId: get(item, 'data.project._id'),
       threadId: get(item, 'data.thread._id'),
     }
-    const thread = type === 'thread' ? ' this thread ' : <Link name="projectThreadRoute" params={ params }>{ get(item, 'data.thread.name') }</Link>
+    const thread =
+      type === 'thread' ? (
+        ' this thread '
+      ) : (
+        <Link name="projectThreadRoute" params={params}>
+          {get(item, 'data.thread.name')}
+        </Link>
+      )
     return (
       <span>
         moved
-        { thread }
+        {thread}
         from
-        <Link name="projectThreadsRoute" params={ params } query={ { groups: [group1._id] } }>{ group1.name }</Link>
+        <Link name="projectThreadsRoute" params={params} query={{ groups: [group1._id] }}>
+          {group1.name}
+        </Link>
         to
-        <Link name="projectThreadsRoute" params={ params } query={ { groups: [group2._id] } }>{ group2.name }</Link>
+        <Link name="projectThreadsRoute" params={params} query={{ groups: [group2._id] }}>
+          {group2.name}
+        </Link>
       </span>
     )
   },
@@ -345,8 +383,10 @@ export default class TimelineItemText extends Component {
   render() {
     const { item, type, entity, groupItem } = this.props
     const groupTitle = item.eventsGrouped
-    return eventTextMap[item.event]
-      ? eventTextMap[item.event](item, type, entity, groupItem, groupTitle)
-      : <span>Unknown Event Type: { item.event }</span>
+    return eventTextMap[item.event] ? (
+      eventTextMap[item.event](item, type, entity, groupItem, groupTitle)
+    ) : (
+      <span>Unknown Event Type: {item.event}</span>
+    )
   }
 }

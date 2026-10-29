@@ -49,13 +49,16 @@ export const launchApp = async ({ userDataDir }: { userDataDir: string }): Promi
   app.process().stdout?.on('data', onOutput)
   app.process().stderr?.on('data', onOutput)
 
-  const watch = (page: Page) => page.on('pageerror', error => pageErrors.push(`${page.url()}: ${error.stack || error.message}`))
+  const watch = (page: Page) =>
+    page.on('pageerror', (error) => pageErrors.push(`${page.url()}: ${error.stack || error.message}`))
   app.windows().forEach(watch)
   app.on('window', watch)
 
   const getWindow = async (name: WindowName) => {
-    await expect.poll(() => app.windows().some(page => page.url().includes(`/${name}/index.html`)), { timeout: 30_000 }).toBe(true)
-    const page = app.windows().find(p => p.url().includes(`/${name}/index.html`))!
+    await expect
+      .poll(() => app.windows().some((page) => page.url().includes(`/${name}/index.html`)), { timeout: 30_000 })
+      .toBe(true)
+    const page = app.windows().find((p) => p.url().includes(`/${name}/index.html`))!
     await page.waitForLoadState('domcontentloaded')
     return page
   }
@@ -70,24 +73,44 @@ export const screenshot = async (page: Page, name: string) => {
 
 /** Navigate a window's hash router */
 export const goto = async (page: Page, hash: string) => {
-  await page.evaluate(h => { window.location.hash = h }, hash)
+  await page.evaluate((h) => {
+    window.location.hash = h
+  }, hash)
 }
 
 /** The renderer redux state of a window (window.__STEMN__ is set by app/renderer/shared/bootstrap.jsx) */
 export const getState = (page: Page) => page.evaluate(() => (window as any).__STEMN__.store.getState())
 
 /** Minimal Stemn API client, used to play the part of the cloud storage sync client */
-export const api = async (method: string, path: string, { token, json, body, query }: { token?: string, json?: any, body?: string | Buffer, query?: Record<string, string> } = {}) => {
+export const api = async (
+  method: string,
+  path: string,
+  {
+    token,
+    json,
+    body,
+    query,
+  }: { token?: string; json?: any; body?: string | Buffer; query?: Record<string, string> } = {},
+) => {
   const url = new URL(`${API}/api/v1${path}`)
   Object.entries(query || {}).forEach(([key, value]) => url.searchParams.set(key, value))
   const headers: Record<string, string> = {}
   if (token) headers.Authorization = `bearer ${token}`
   if (json !== undefined) headers['Content-Type'] = 'application/json'
   if (body !== undefined) headers['Content-Type'] = 'application/octet-stream'
-  const requestBody = json !== undefined ? JSON.stringify(json) : (typeof body === 'string' || body === undefined ? body : new Uint8Array(body))
+  const requestBody =
+    json !== undefined
+      ? JSON.stringify(json)
+      : typeof body === 'string' || body === undefined
+        ? body
+        : new Uint8Array(body)
   const response = await fetch(url, { method, headers, body: requestBody })
   const text = await response.text()
   let data: any = text
-  try { data = JSON.parse(text) } catch { /* not json */ }
+  try {
+    data = JSON.parse(text)
+  } catch {
+    /* not json */
+  }
   return { status: response.status, data }
 }

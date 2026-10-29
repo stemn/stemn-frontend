@@ -7,20 +7,20 @@ import {
 } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraph.actions'
 
 export interface IPipelineGraphDroplayerProps {
-  diagramId: string,
-  children: React.ReactNode,
-  addStep: typeof addStepType,
-  selectStep: typeof selectStepType,
-  diagramEngine: DiagramEngine,
+  diagramId: string
+  children: React.ReactNode
+  addStep: typeof addStepType
+  selectStep: typeof selectStepType
+  diagramEngine: DiagramEngine
 }
 
 export class PipelineGraphDroplayer extends React.PureComponent<IPipelineGraphDroplayerProps> {
-  public render () {
+  public render() {
     const { addStep, diagramEngine, children, diagramId } = this.props
     return (
       <div
         className={cn('flex', 'layout-column')}
-        onDrop={ (event) => {
+        onDrop={(event) => {
           const data = JSON.parse(event.dataTransfer.getData('storm-diagram-node'))
           const points = diagramEngine.getRelativeMousePoint(event)
 
@@ -36,11 +36,10 @@ export class PipelineGraphDroplayer extends React.PureComponent<IPipelineGraphDr
               ports: {},
             },
           })
-
-        } }
-        onDragOver={ (event) => {
+        }}
+        onDragOver={(event) => {
           event.preventDefault()
-        } }
+        }}
       >
         {/* <div
           onClick={ () => selectStep({ diagramId, stepId: undefined })}

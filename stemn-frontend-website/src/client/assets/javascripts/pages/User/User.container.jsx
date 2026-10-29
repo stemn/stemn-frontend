@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { get } from 'lodash'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 
 import { getUserProjects } from 'stemn-shared/misc/Projects/Projects.actions.js'
@@ -19,26 +18,27 @@ const dispatchToProps = {
   getUserProjects,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'params.stub',
-  onChange: (props) => {
-    props.getUser({
-      userId: props.params.stub,
-      force: true,
-    })
+const fetchConfigs = [
+  {
+    hasChanged: 'params.stub',
+    onChange: (props) => {
+      props.getUser({
+        userId: props.params.stub,
+        force: true,
+      })
+    },
   },
-}, {
-  hasChanged: 'params.stub',
-  onChange: (props) => {
-    props.getUserProjects({ userId: props.params.stub })
+  {
+    hasChanged: 'params.stub',
+    onChange: (props) => {
+      props.getUserProjects({ userId: props.params.stub })
+    },
   },
-}]
+]
 
 class UserContainer extends Component {
   render() {
-    return (
-      <User { ...this.props } />
-    )
+    return <User {...this.props} />
   }
 }
 

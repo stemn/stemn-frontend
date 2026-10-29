@@ -1,6 +1,6 @@
 @value timeline-main from "theme";
 
-.moreButton{
+.moreButton {
   width: 18px;
   height: 18px;
   border-radius: 50%;
@@ -14,18 +14,18 @@
   opacity: 0;
   transition: 0.2s ease all;
 }
-.moreButton:hover{
+.moreButton:hover {
   opacity: 1;
 }
-.moreButtonLeft{
+.moreButtonLeft {
   left: 0;
   transform: translate(-50%, -50%);
 }
-.moreButtonRight{
+.moreButtonRight {
   left: auto;
   right: 0;
   transform: translate(50%, -50%);
 }
-.moreButtonLeft svg{
+.moreButtonLeft svg {
   transform: rotate(180deg);
 }

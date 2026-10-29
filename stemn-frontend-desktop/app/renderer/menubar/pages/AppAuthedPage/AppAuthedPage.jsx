@@ -17,13 +17,20 @@ export class Component extends React.Component {
       return
     }
     // Follow the project that is active in the main window
-    if (nextProps.activeProject && (!has(nextProps, 'params.stub') || nextProps.activeProject !== nextProps.params.stub)) {
+    if (
+      nextProps.activeProject &&
+      (!has(nextProps, 'params.stub') || nextProps.activeProject !== nextProps.params.stub)
+    ) {
       nextProps.dispatch(push(`/project/${nextProps.activeProject}`))
     }
-  };
+  }
 
-  UNSAFE_componentWillMount() { this.onMount(this.props) }
-  UNSAFE_componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+  UNSAFE_componentWillMount() {
+    this.onMount(this.props)
+  }
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    this.onMount(nextProps, this.props)
+  }
 
   render() {
     const { children } = this.props
@@ -36,7 +43,6 @@ export class Component extends React.Component {
     )
   }
 }
-
 
 // /////////////////////////////// CONTAINER /////////////////////////////////
 

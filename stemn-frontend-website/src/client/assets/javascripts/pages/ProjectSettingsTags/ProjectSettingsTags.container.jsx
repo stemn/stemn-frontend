@@ -5,8 +5,8 @@ import ProjectSettingsTags from './ProjectSettingsTags'
 import { saveProject, removeField, addField } from 'stemn-shared/misc/Projects/Projects.actions'
 
 const stateToProps = ({ projects }, { params }) => {
-  const projectId   = params.stub
-  const project     = projects.data[projectId]
+  const projectId = params.stub
+  const project = projects.data[projectId]
   const entityModel = `projects.data.${projectId}`
 
   return {
@@ -17,15 +17,13 @@ const stateToProps = ({ projects }, { params }) => {
 
 const dispatchToProps = {
   saveProject,
-  removeField, 
+  removeField,
   addField,
 }
 
 class ProjectSettingsTagsContainer extends Component {
   render() {
-    return (
-      <ProjectSettingsTags { ...this.props } />
-    )
+    return <ProjectSettingsTags {...this.props} />
   }
 }
 

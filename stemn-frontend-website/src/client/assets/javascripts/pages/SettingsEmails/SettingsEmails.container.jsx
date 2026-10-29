@@ -15,9 +15,7 @@ const dispatchToProps = {
 
 class SettingsEmailsContainer extends Component {
   render() {
-    return (
-      <SettingsEmails { ...this.props } />
-    )
+    return <SettingsEmails {...this.props} />
   }
 }
 

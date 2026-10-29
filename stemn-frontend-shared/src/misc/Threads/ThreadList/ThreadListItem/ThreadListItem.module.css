@@ -1,37 +1,37 @@
 @value primary, border1, bg1 from "theme";
 
-.isDragging{
+.isDragging {
   opacity: 0.5;
 }
 
-.listItem{
+.listItem {
   height: 45px;
   background: none;
   transition: 0.2s ease background;
   padding-left: 10px;
   position: relative;
 }
-.listItem:hover{
+.listItem:hover {
   background: bg1;
 }
-.listItem > div{
+.listItem > div {
   padding: 0px 10px;
 }
-.listUser{
+.listUser {
   color: rgba(0, 0, 0, 0.6);
   width: 105px;
 }
-.listItem:hover .listDate{
+.listItem:hover .listDate {
   opacity: 0;
 }
-.listDate{
+.listDate {
   opacity: 1;
   width: 100px;
 }
-.listItem:hover .listActions{
+.listItem:hover .listActions {
   opacity: 1;
 }
-.listActions{
+.listActions {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -39,26 +39,25 @@
   opacity: 0;
 }
 
-
 /* Card */
-.card{
+.card {
   border: 1px solid border1;
   margin-bottom: 15px;
   background: white;
   cursor: default;
 }
-.cardBody{
+.cardBody {
   padding: 15px;
   min-height: 57px;
 }
-.cardFooter{
+.cardFooter {
   padding: 1px 0px 1px 15px;
   border-top: 1px dashed border1;
   cursor: move;
   height: 32px;
   line-height: 1.4em;
 }
-.cardText{
+.cardText {
   margin-left: 4px;
   padding: 0px 10px;
   line-height: 1.4em;

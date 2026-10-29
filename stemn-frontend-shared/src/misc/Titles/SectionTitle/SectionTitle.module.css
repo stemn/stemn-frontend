@@ -1,9 +1,9 @@
 @value secondary, border1, bg1 from "theme";
 
-.section{
-  border-bottom: 1px solid border1
+.section {
+  border-bottom: 1px solid border1;
 }
-.text{
+.text {
   position: relative;
   padding: 10px 0;
   border-bottom: 1px solid secondary;

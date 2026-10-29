@@ -5,7 +5,6 @@ import FileSelectModal from './FileSelectModal'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import { init, changePath, select } from '../FileSelect.actions.js'
 
-
 const stateToProps = ({ fileSelect }, { storeKey }) => ({
   fileSelect: fileSelect[storeKey],
 })

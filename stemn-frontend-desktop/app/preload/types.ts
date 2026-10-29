@@ -1,10 +1,11 @@
 /** The API the preload script exposes to the renderers as `window.stemnDesktop` */
 export interface IStemnDesktopBridge {
   /** process.platform of the host */
-  platform: 'aix' | 'android' | 'darwin' | 'freebsd' | 'haiku' | 'linux' | 'openbsd' | 'sunos' | 'win32' | 'cygwin' | 'netbsd'
-  versions: { electron: string, chrome: string, node: string }
+  platform:
+    'aix' | 'android' | 'darwin' | 'freebsd' | 'haiku' | 'linux' | 'openbsd' | 'sunos' | 'win32' | 'cygwin' | 'netbsd'
+  versions: { electron: string; chrome: string; node: string }
   /** Snapshot of the main-process redux state and the name of this window */
-  getInitialState: () => Promise<{ state: any, windowName: 'main' | 'menubar' | 'preview' | undefined }>
+  getInitialState: () => Promise<{ state: any; windowName: 'main' | 'menubar' | 'preview' | undefined }>
   /** Send a redux action to the main-process store */
   dispatchToMain: (action: any) => void
   /** Send a redux action to another window's store */
@@ -19,7 +20,7 @@ export interface IStemnDesktopBridge {
   }
   dialog: {
     /** Native folder picker. Resolves with the folder path or null if cancelled. */
-    selectDirectory: (options: { title?: string, defaultPath?: string, buttonLabel?: string }) => Promise<string | null>
+    selectDirectory: (options: { title?: string; defaultPath?: string; buttonLabel?: string }) => Promise<string | null>
   }
   shell: {
     openExternal: (url: string) => Promise<void>

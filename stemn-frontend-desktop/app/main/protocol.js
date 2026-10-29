@@ -15,14 +15,17 @@ export const getCacheFolder = () => join(app.getPath('userData'), 'FileCache')
 
 /** Must run before the app is ready */
 export const registerSchemes = () => {
-  protocol.registerSchemesAsPrivileged([{
-    scheme: SCHEME,
-    privileges: { standard: true, secure: true, supportFetchAPI: true, corsEnabled: true, stream: true },
-  }])
+  protocol.registerSchemesAsPrivileged([
+    {
+      scheme: SCHEME,
+      privileges: { standard: true, secure: true, supportFetchAPI: true, corsEnabled: true, stream: true },
+    },
+  ])
 }
 
 /** Url for a path relative to the cache folder */
-export const toCacheUrl = relativePath => `${SCHEME}://cache/${relativePath.split(/[\\/]/).map(encodeURIComponent).join('/')}`
+export const toCacheUrl = (relativePath) =>
+  `${SCHEME}://cache/${relativePath.split(/[\\/]/).map(encodeURIComponent).join('/')}`
 
 export const registerProtocolHandlers = () => {
   protocol.handle(SCHEME, async (request) => {

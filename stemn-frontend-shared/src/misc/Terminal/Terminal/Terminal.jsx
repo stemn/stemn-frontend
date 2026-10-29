@@ -18,25 +18,13 @@ export default class Terminal extends Component {
     window.scrollTo(0, document.body.scrollHeight)
   }
   render() {
-    const {
-      lines,
-      loading,
-      hasLoadedBefore,
-    } = this.props
+    const { lines, loading, hasLoadedBefore } = this.props
     return (
-      <div className={ classes.outer }>
-        <LoadingOverlay
-          show={ loading }
-          linear
-          hideBg
-        />
-        <div className={ cn(classes.header, 'layout-row layout-align-end') }>
-          <SimpleIconButton
-            color="white"
-            title="Scroll to Bottom"
-            onClick={ this.scrollToEnd }
-          >
-            <MdDown size={ 22 } />
+      <div className={classes.outer}>
+        <LoadingOverlay show={loading} linear hideBg />
+        <div className={cn(classes.header, 'layout-row layout-align-end')}>
+          <SimpleIconButton color="white" title="Scroll to Bottom" onClick={this.scrollToEnd}>
+            <MdDown size={22} />
           </SimpleIconButton>
           {/* <SimpleIconButton
             color="white"
@@ -47,12 +35,9 @@ export default class Terminal extends Component {
             <MdCode size={ 22 } />
           </SimpleIconButton> */}
         </div>
-        <div className={ classes.body }>
-          { lines && lines.map(line => (
-            <Ansi key={ line.number }>{ line.data }</Ansi>
-          ))
-          }
-          { (!lines || lines.length === 0) && hasLoadedBefore && <code>No terminal logs found 😞</code>}
+        <div className={classes.body}>
+          {lines && lines.map((line) => <Ansi key={line.number}>{line.data}</Ansi>)}
+          {(!lines || lines.length === 0) && hasLoadedBefore && <code>No terminal logs found 😞</code>}
         </div>
       </div>
     )

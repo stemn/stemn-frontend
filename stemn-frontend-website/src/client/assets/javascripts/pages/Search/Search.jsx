@@ -16,26 +16,34 @@ export default class Search extends Component {
     return (
       <StandardLayout>
         <Helmet>
-          <title>{ `Search: ${location.query.q}` }</title>
+          <title>{`Search: ${location.query.q}`}</title>
         </Helmet>
         <SubHeader noResponsive>
           <Tabs noline>
-            <Link to="/search" className={ { active: !location.query.type } } query={ { q: location.query.q } }>Projects</Link>
-            <Link activeClassName="active" to="/search" query={ { q: location.query.q, type: 'thread' } }>Threads</Link>
-            <Link activeClassName="active" to="/search" query={ { q: location.query.q, type: 'user' } }>People</Link>
-            <Link activeClassName="active" to="/search" query={ { q: location.query.q, type: 'field' } }>Fields</Link>
+            <Link to="/search" className={{ active: !location.query.type }} query={{ q: location.query.q }}>
+              Projects
+            </Link>
+            <Link activeClassName="active" to="/search" query={{ q: location.query.q, type: 'thread' }}>
+              Threads
+            </Link>
+            <Link activeClassName="active" to="/search" query={{ q: location.query.q, type: 'user' }}>
+              People
+            </Link>
+            <Link activeClassName="active" to="/search" query={{ q: location.query.q, type: 'field' }}>
+              Fields
+            </Link>
           </Tabs>
         </SubHeader>
-        <Container className={ classes.content }>
+        <Container className={classes.content}>
           <Row className="layout-xs-col layout-gt-xs-row">
             <Col className="flex-gt-xs-70">
               <SiteSearchResultsContainer
-                query={ location.query.q }
-                type={ location.query.type }
-                page={ parseInt(location.query.page, 10) || 1 }
-                size={ 30 }
+                query={location.query.q}
+                type={location.query.type}
+                page={parseInt(location.query.page, 10) || 1}
+                size={30}
               />
-            </Col>            
+            </Col>
             <Col className="flex-30" />
           </Row>
         </Container>

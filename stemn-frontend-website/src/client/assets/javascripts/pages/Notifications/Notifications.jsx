@@ -12,11 +12,10 @@ export default class Notifications extends Component {
     const { children, notifications, markAsRead } = this.props
 
     const markAllRead = () => {
-      const unreadNotifications = notifications && notifications.data
-        ? notifications.data.filter(notification => !notification.read)
-        : []
+      const unreadNotifications =
+        notifications && notifications.data ? notifications.data.filter((notification) => !notification.read) : []
 
-      unreadNotifications.forEach(notification => markAsRead(notification._id))
+      unreadNotifications.forEach((notification) => markAsRead(notification._id))
     }
 
     return (
@@ -26,20 +25,22 @@ export default class Notifications extends Component {
         </Helmet>
         <SubHeader title="Notifications" noResponsive>
           <div className="layout-column layout-align-center">
-            <Button className="primary" onClick={ markAllRead }>Mark as read</Button>
+            <Button className="primary" onClick={markAllRead}>
+              Mark as read
+            </Button>
           </div>
         </SubHeader>
-        <Container style={ { marginTop: '30px' } }>
+        <Container style={{ marginTop: '30px' }}>
           <Row className="layout-xs-column layout-gt-xs-row">
             <Col className="flex-gt-xs-30">
               <NavPillContainer>
-                <NavPill to="/notifications" onlyActiveOnIndex>Unread</NavPill>
+                <NavPill to="/notifications" onlyActiveOnIndex>
+                  Unread
+                </NavPill>
                 <NavPill to="/notifications/all">All Notifications</NavPill>
               </NavPillContainer>
             </Col>
-            <Col className="flex">
-              { children }
-            </Col>
+            <Col className="flex">{children}</Col>
           </Row>
         </Container>
       </StandardLayout>

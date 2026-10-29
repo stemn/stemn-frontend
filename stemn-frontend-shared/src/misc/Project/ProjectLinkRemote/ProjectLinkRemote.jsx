@@ -25,10 +25,7 @@ class ProjectLinkRemote extends Component {
     }
   }
   render() {
-    const {
-      value,
-      auth,
-    } = this.props
+    const { value, auth } = this.props
 
     const options = [
       {
@@ -43,7 +40,8 @@ class ProjectLinkRemote extends Component {
             value: 'dropbox',
           })
         },
-      }, {
+      },
+      {
         value: 'drive',
         name: 'Drive',
         onClick: () => {
@@ -55,7 +53,8 @@ class ProjectLinkRemote extends Component {
             value: 'drive',
           })
         },
-      }, {
+      },
+      {
         value: undefined,
         name: 'None',
         onClick: () => {
@@ -69,17 +68,17 @@ class ProjectLinkRemote extends Component {
 
     return (
       <PopoverDropdown
-        value={ value }
-        options={ options }
-        style={ { width: '100%' } }
+        value={value}
+        options={options}
+        style={{ width: '100%' }}
         className="input"
-        loading={ auth.authLoading }
+        loading={auth.authLoading}
       />
     )
   }
 }
 
-const mapStateToProps = ({ auth }, {}) => ({
+const mapStateToProps = ({ auth }) => ({
   auth,
 })
 

@@ -17,7 +17,7 @@ Action should be of the form:
 
 import { socket } from './websocket.js'
 
-export default store => next => (action) => {
+export default (store) => (next) => (action) => {
   const token = store.getState().auth.authToken
   if (action && action.websocket && socket && action.payload) {
     socket.write({
@@ -31,6 +31,6 @@ export default store => next => (action) => {
     const modifiedAction = Object.assign({}, action, { websocket: false })
     return next(modifiedAction)
   }
-  
+
   return next(action)
 }

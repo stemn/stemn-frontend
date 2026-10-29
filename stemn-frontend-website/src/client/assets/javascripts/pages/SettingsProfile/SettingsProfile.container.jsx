@@ -17,9 +17,7 @@ const dispatchToProps = {
 
 class SettingsProfileContainer extends Component {
   render() {
-    return (
-      <SettingsProfile { ...this.props } />
-    )
+    return <SettingsProfile {...this.props} />
   }
 }
 

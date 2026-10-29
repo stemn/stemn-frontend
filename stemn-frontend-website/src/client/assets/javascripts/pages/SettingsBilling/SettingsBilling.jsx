@@ -11,12 +11,26 @@ class SettingsBilling extends Component {
       <div>
         <InfoPanel>
           <h3>Billing</h3>
-          <p>Compare all plans <Link name="pricingRoute" className="link-primary">here</Link>. </p>
+          <p>
+            Compare all plans{' '}
+            <Link name="pricingRoute" className="link-primary">
+              here
+            </Link>
+            .{' '}
+          </p>
           <SimpleTable>
-            <tr><td>Plan</td><td><b>Stemn Beta</b>, unlimited public and private projects (while in beta).</td></tr>
-            <tr><td>Payment</td><td>No payment method on file.</td></tr>
+            <tr>
+              <td>Plan</td>
+              <td>
+                <b>Stemn Beta</b>, unlimited public and private projects (while in beta).
+              </td>
+            </tr>
+            <tr>
+              <td>Payment</td>
+              <td>No payment method on file.</td>
+            </tr>
           </SimpleTable>
-          <div className={ classes.divider } />
+          <div className={classes.divider} />
           <PlansRadios />
         </InfoPanel>
         <InfoPanel>

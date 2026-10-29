@@ -12,75 +12,50 @@ class Project extends Component {
   render() {
     const { children, project } = this.props
     const routeParams = { projectId: get(project, 'data._id') }
-    
+
     const title = [
       <div key="text">
-        { project && project.data && <Link name="projectRoute" params={ routeParams }>{project.data.name}</Link> }
+        {project && project.data && (
+          <Link name="projectRoute" params={routeParams}>
+            {project.data.name}
+          </Link>
+        )}
       </div>,
-      <ProjectInfoIcons key="icons" project={ project && project.data } padLeft />
+      <ProjectInfoIcons key="icons" project={project && project.data} padLeft />,
     ]
 
     return (
-      <StandardLayout style={ { marginTop: '30px' } } nofooter>
-        <Helmet>
-          { has(project, 'data.name') && <title>{ `${project.data.name}: ${project.data.blurb}` }</title> }
-        </Helmet>
-        <SubHeader
-          title={ title }
-          noline
-        >
+      <StandardLayout style={{ marginTop: '30px' }} nofooter>
+        <Helmet>{has(project, 'data.name') && <title>{`${project.data.name}: ${project.data.blurb}`}</title>}</Helmet>
+        <SubHeader title={title} noline>
           <Tabs noline>
             <Link
-              activeIf={ { is: ['projectRoute'], includes: ['projectFilesRoute'] } }
+              activeIf={{ is: ['projectRoute'], includes: ['projectFilesRoute'] }}
               name="projectRoute"
-              params={ routeParams }
+              params={routeParams}
             >
               Overview
             </Link>
-            <Link
-              activeIf={ { includes: ['projectThreadsRoute'] } }
-              name="projectThreadsRoute" params={ routeParams }
-            >
+            <Link activeIf={{ includes: ['projectThreadsRoute'] }} name="projectThreadsRoute" params={routeParams}>
               Threads
             </Link>
-            <Link
-              activeIf={ { includes: ['projectCommitsRoute'] } }
-              name="projectCommitsRoute"
-              params={ routeParams }
-            >
+            <Link activeIf={{ includes: ['projectCommitsRoute'] }} name="projectCommitsRoute" params={routeParams}>
               History
             </Link>
-            <Link
-              activeIf={ { includes: ['projectPipelinesRoute'] } }
-              name="projectPipelinesRoute"
-              params={ routeParams }
-            >
+            <Link activeIf={{ includes: ['projectPipelinesRoute'] }} name="projectPipelinesRoute" params={routeParams}>
               Pipelines
             </Link>
-            <Link
-              activeIf={ { includes: ['projectTeamRoute'] } }
-              name="projectTeamRoute"
-              params={ routeParams }
-            >
+            <Link activeIf={{ includes: ['projectTeamRoute'] }} name="projectTeamRoute" params={routeParams}>
               Team
             </Link>
-            <IsOwner
-              team={ get(project, 'data.team', []) }
-              minRole="admin"
-            >
-              <Link
-                activeIf={ { includes: ['projectSettingsRoute'] } }
-                name="projectSettingsRoute"
-                params={ routeParams }
-              >
+            <IsOwner team={get(project, 'data.team', [])} minRole="admin">
+              <Link activeIf={{ includes: ['projectSettingsRoute'] }} name="projectSettingsRoute" params={routeParams}>
                 Settings
               </Link>
             </IsOwner>
           </Tabs>
         </SubHeader>
-        <div className="flex layout-column">
-          { children }
-        </div>
+        <div className="flex layout-column">{children}</div>
       </StandardLayout>
     )
   }

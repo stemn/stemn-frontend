@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from  'react-redux'
+import { connect } from 'react-redux'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import classes from './LocationSearch.module.css'
 
@@ -28,8 +28,8 @@ class LocationSearch extends Component {
 
   renderResult = (suggestion, { query }) => (
     <div className="layout-row layout-align-start-center">
-      <div style={ { marginLeft: '10px' } } className="flex">
-        <Highlight text={ suggestion.name } query={ query } hightlightClass={ classes.highlight } />
+      <div style={{ marginLeft: '10px' }} className="flex">
+        <Highlight text={suggestion.name} query={query} hightlightClass={classes.highlight} />
       </div>
     </div>
   )
@@ -39,10 +39,10 @@ class LocationSearch extends Component {
 
     return (
       <Autosuggest
-        initialValue={ value ? value.name : '' }
-        cacheKey={ `location-search-${cacheKey}` }
-        clickResult={ this.select }
-        renderResult={ this.renderResult }
+        initialValue={value ? value.name : ''}
+        cacheKey={`location-search-${cacheKey}`}
+        clickResult={this.select}
+        renderResult={this.renderResult}
         entityType="location"
         setValue
       />

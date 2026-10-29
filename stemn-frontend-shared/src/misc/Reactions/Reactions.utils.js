@@ -1,19 +1,25 @@
-export const options = [{
-  type: 'up',
-  icon: '👍',
-}, {
-  type: 'down',
-  icon: '👎',
-}, {
-  type: 'party',
-  icon: '🎉',
-}, {
-  type: 'heart',
-  icon: '❤️',
-}, {
-  type: 'confused',
-  icon: '😕',
-}]
+export const options = [
+  {
+    type: 'up',
+    icon: '👍',
+  },
+  {
+    type: 'down',
+    icon: '👎',
+  },
+  {
+    type: 'party',
+    icon: '🎉',
+  },
+  {
+    type: 'heart',
+    icon: '❤️',
+  },
+  {
+    type: 'confused',
+    icon: '😕',
+  },
+]
 
 export const groupAndOrderReactions = (reactions, options) => orderReactions(groupReactions(reactions), options)
 
@@ -37,7 +43,11 @@ function orderReactions(groupedReactions, options) {
   // Orders reactions by the options array
   const orderedReactions = []
   options.forEach((option) => {
-    if (groupedReactions[option.type] && groupedReactions[option.type].list && groupedReactions[option.type].list.length > 0) {
+    if (
+      groupedReactions[option.type] &&
+      groupedReactions[option.type].list &&
+      groupedReactions[option.type].list.length > 0
+    ) {
       orderedReactions.push({
         type: option.type,
         icon: option.icon,

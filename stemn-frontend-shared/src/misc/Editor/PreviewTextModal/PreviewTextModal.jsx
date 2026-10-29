@@ -9,16 +9,13 @@ export default class PreviewTextModal extends Component {
     const { text, modalConfirm } = this.props
 
     return (
-      <div className={ cn(s.modal, 'layout-column') }>
+      <div className={cn(s.modal, 'layout-column')}>
         <div className="modal-title">Preview</div>
         <div className="modal-body flex scroll-box">
-          <EditorDisplay value={ text } />
+          <EditorDisplay value={text} />
         </div>
         <div className="modal-footer layout-row layout-align-end">
-          <Button
-            className="primary"
-            onClick={ modalConfirm }
-          >
+          <Button className="primary" onClick={modalConfirm}>
             Close
           </Button>
         </div>
@@ -26,4 +23,3 @@ export default class PreviewTextModal extends Component {
     )
   }
 }
-

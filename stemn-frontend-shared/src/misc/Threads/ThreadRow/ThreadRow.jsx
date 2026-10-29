@@ -9,7 +9,7 @@ import LoadingPlaceholder from 'stemn-shared/misc/Loading/LoadingPlaceholder'
 import LoadingAnimation from 'stemn-shared/misc/Loading/LoadingAnimation'
 import pluralise from 'stemn-shared/utils/strings/pluralise'
 
-const getGroupInfo = (groupId, groups) => groups.find(group => group._id === groupId)
+const getGroupInfo = (groupId, groups) => groups.find((group) => group._id === groupId)
 
 export default class ThreadRow extends Component {
   render() {
@@ -24,65 +24,54 @@ export default class ThreadRow extends Component {
       const group = getGroupInfo(thread.data.group, board.data.groups)
 
       return (
-        <div className={ cn('layout-row layout-align-start-center', classes.row, className) }>
+        <div className={cn('layout-row layout-align-start-center', classes.row, className)}>
           <div className="layout-column flex">
-            <Link
-              className={ cn(classes.title, 'text-ellipsis') }
-              name="projectThreadRoute"
-              params={ threadRouteParams }
-            >
-              { thread.data.name }
-              { thread.data.threadNumber && <span className={ classes.threadNumber }>&nbsp;#T{ thread.data.threadNumber }</span> }
+            <Link className={cn(classes.title, 'text-ellipsis')} name="projectThreadRoute" params={threadRouteParams}>
+              {thread.data.name}
+              {thread.data.threadNumber && (
+                <span className={classes.threadNumber}>&nbsp;#T{thread.data.threadNumber}</span>
+              )}
             </Link>
-            <div className={ classes.meta }>
-              { group && group.name && <span className="text-grey-2">{ group.name }</span> }
-              { thread.data.due && <span className="text-interpunct" /> }
-              { thread.data.due && <DueDate due={ thread.data.due } /> }
-              { <span className="text-interpunct" /> }
-              { <span>{ thread.data.complete ? 'Closed' : 'Open' }</span> }
+            <div className={classes.meta}>
+              {group && group.name && <span className="text-grey-2">{group.name}</span>}
+              {thread.data.due && <span className="text-interpunct" />}
+              {thread.data.due && <DueDate due={thread.data.due} />}
+              {<span className="text-interpunct" />}
+              {<span>{thread.data.complete ? 'Closed' : 'Open'}</span>}
               <span className="text-interpunct" />
-              { pluralise(thread.data.numComments, 'Comment') }
+              {pluralise(thread.data.numComments, 'Comment')}
             </div>
           </div>
           <div>
             <ThreadLabelDots
-              labels={ thread.data.labels }
-              labelInfo={ board.data.labels }
+              labels={thread.data.labels}
+              labelInfo={board.data.labels}
               name="projectThreadsRoute"
-              params={ threadRouteParams }
+              params={threadRouteParams}
               responsive
               oneline
               tag
               link
             />
           </div>
-          <div className={ classes.asignees }>
-            <UserAvatars
-              className="layout-row"
-              users={ thread.data.users }
-              limit={ 3 }
-              shape="square"
-            />
+          <div className={classes.asignees}>
+            <UserAvatars className="layout-row" users={thread.data.users} limit={3} shape="square" />
           </div>
         </div>
       )
     }
     return (
-      <LoadingAnimation className={ cn('layout-row layout-align-start-center', classes.row, className) }>
+      <LoadingAnimation className={cn('layout-row layout-align-start-center', classes.row, className)}>
         <div className="layout-column flex">
           <div>
-            <LoadingPlaceholder width={ 300 } className={ classes.title } />
+            <LoadingPlaceholder width={300} className={classes.title} />
           </div>
-          <div className={ cn(classes.meta, 'layout-row') }>
-            <LoadingPlaceholder width={ 50 } />
-            <LoadingPlaceholder width={ 50 } style={ { marginLeft: '5px' } } />
+          <div className={cn(classes.meta, 'layout-row')}>
+            <LoadingPlaceholder width={50} />
+            <LoadingPlaceholder width={50} style={{ marginLeft: '5px' }} />
           </div>
         </div>
-        <UserAvatars
-          users={ [{}] }
-          limit={ 3 }
-          shape="square"
-        />
+        <UserAvatars users={[{}]} limit={3} shape="square" />
       </LoadingAnimation>
     )
   }

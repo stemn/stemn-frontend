@@ -8,13 +8,13 @@ import * as SyncTimelineActions from 'stemn-shared/misc/SyncTimeline/SyncTimelin
 // Component Core
 import React from 'react'
 
-import { Link }                 from 'stemn-shared/routing'
-import SidebarTimeline          from 'stemn-shared/misc/SyncTimeline/SidebarTimeline/SidebarTimeline.jsx'
-import ContentSidebar           from 'stemn-shared/misc/ContentSidebar'
-import Guide                    from 'stemn-shared/misc/Guide/Guide'
-import Button                   from 'stemn-shared/misc/Buttons/Button/Button'
-import timelineImg              from 'stemn-shared/assets/images/pure-vectors/timeline.svg'
-import cloudProviders           from 'stemn-shared/assets/images/illustrations/cloud-providers.svg'
+import { Link } from 'stemn-shared/routing'
+import SidebarTimeline from 'stemn-shared/misc/SyncTimeline/SidebarTimeline/SidebarTimeline.jsx'
+import ContentSidebar from 'stemn-shared/misc/ContentSidebar'
+import Guide from 'stemn-shared/misc/Guide/Guide'
+import Button from 'stemn-shared/misc/Buttons/Button/Button'
+import timelineImg from 'stemn-shared/assets/images/pure-vectors/timeline.svg'
+import cloudProviders from 'stemn-shared/assets/images/illustrations/cloud-providers.svg'
 
 export class Component extends React.Component {
   // Mounting
@@ -29,10 +29,14 @@ export class Component extends React.Component {
         })
       }
     }
-  };
+  }
 
-  UNSAFE_componentWillMount() { this.onMount(this.props) }
-  UNSAFE_componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+  UNSAFE_componentWillMount() {
+    this.onMount(this.props)
+  }
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    this.onMount(nextProps, this.props)
+  }
 
   refresh = () => {
     this.props.syncTimelineActions.fetchTimeline({
@@ -41,15 +45,10 @@ export class Component extends React.Component {
       entityType: 'project',
       entityId: this.props.project.data._id,
     })
-  };
+  }
 
   render() {
-    const {
-      timeline,
-      timelineModel,
-      project,
-      children,
-    } = this.props
+    const { timeline, timelineModel, project, children } = this.props
     const baseLink = `/project/${project && project.data ? project.data._id : ''}`
 
     if (project.data.remote.connected) {
@@ -59,37 +58,44 @@ export class Component extends React.Component {
             <div className="layout-column">
               <ContentSidebar className="flex">
                 <SidebarTimeline
-                  items={ timeline && timeline.data ? timeline.data : [] }
-                  loading={ timeline && timeline.loading }
-                  query={ timeline && timeline.query ? timeline.query : '' }
-                  queryModel={ `${timelineModel}.query` }
-                  refresh={ this.refresh }
-                  projectId={ project.data._id }
+                  items={timeline && timeline.data ? timeline.data : []}
+                  loading={timeline && timeline.loading}
+                  query={timeline && timeline.query ? timeline.query : ''}
+                  queryModel={`${timelineModel}.query`}
+                  refresh={this.refresh}
+                  projectId={project.data._id}
                 />
               </ContentSidebar>
             </div>
             <div className="layout-column flex">
-              { children || <div className="layout-column layout-align-center-center flex text-title-4 text-center">
-                <img src={ timelineImg } style={ { width: '100px' } } />
-                <div>No commit selected.</div>
-              </div>
-              }
+              {children || (
+                <div className="layout-column layout-align-center-center flex text-title-4 text-center">
+                  <img src={timelineImg} style={{ width: '100px' }} />
+                  <div>No commit selected.</div>
+                </div>
+              )}
             </div>
           </div>
         </div>
       )
     }
-    
-    const guideInfo = [{
-      title: 'Cloud Storage Not Connected',
-      description: 'Connect this project to your cloud storage folder so STEMN can track changes to your files.',
-      image: cloudProviders,
-    }]
+
+    const guideInfo = [
+      {
+        title: 'Cloud Storage Not Connected',
+        description: 'Connect this project to your cloud storage folder so STEMN can track changes to your files.',
+        image: cloudProviders,
+      },
+    ]
     return (
       <div className="layout-column flex layout-align-center">
-        <div className="layout-row layout-align-center"><Guide data={ guideInfo[0] } /></div>
         <div className="layout-row layout-align-center">
-          <Link to={ `${baseLink}/settings` }><Button className="primary lg">Select Project Folder</Button> </Link>
+          <Guide data={guideInfo[0]} />
+        </div>
+        <div className="layout-row layout-align-center">
+          <Link to={`${baseLink}/settings`}>
+            <Button className="primary lg">Select Project Folder</Button>{' '}
+          </Link>
         </div>
       </div>
     )

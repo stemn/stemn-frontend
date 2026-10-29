@@ -14,25 +14,22 @@ export default class Toggle extends React.Component {
         return 'semi'
       } else if (value) {
         return 'checked'
-      } 
+      }
       return ''
     }
 
     const id = Math.random().toString(36).substring(7)
     return (
-      <div
-        title={ title }
-        className={ cn(className, styles.toggle, { disabled }) }
-      >
+      <div title={title} className={cn(className, styles.toggle, { disabled })}>
         <Input
           type="checkbox"
-          value={ value }
-          model={ model }
-          changeAction={ changeAction }
-          className={ getStatusClass() }
-          id={ id }
+          value={value}
+          model={model}
+          changeAction={changeAction}
+          className={getStatusClass()}
+          id={id}
         />
-        <label htmlFor={ id } />
+        <label htmlFor={id} />
       </div>
     )
   }

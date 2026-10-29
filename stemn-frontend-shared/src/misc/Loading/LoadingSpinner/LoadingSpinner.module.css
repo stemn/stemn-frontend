@@ -11,19 +11,19 @@
   padding-top: 100%;
 }
 
-.animate .circular{
+.animate .circular {
   -webkit-animation: rotate 2s linear infinite;
-          animation: rotate 2s linear infinite;
+  animation: rotate 2s linear infinite;
 }
-.animate .path{
+.animate .path {
   -webkit-animation: dash 1.5s ease-in-out infinite;
-          animation: dash 1.5s ease-in-out infinite;
+  animation: dash 1.5s ease-in-out infinite;
 }
 
-.progress .circular{
+.progress .circular {
   transform: rotate(-90deg);
 }
-.progress .path{
+.progress .path {
   transition: 0.1s ease all;
 }
 
@@ -49,14 +49,14 @@
 @-webkit-keyframes rotate {
   100% {
     -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
 @keyframes rotate {
   100% {
     -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 @-webkit-keyframes dash {

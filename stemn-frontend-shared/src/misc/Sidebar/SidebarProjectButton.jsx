@@ -3,10 +3,9 @@ import { get } from 'lodash'
 import cn from 'classnames'
 import styles from './SidebarProjectButton.module.css'
 import { Link } from 'stemn-shared/routing'
-import Drive   from 'stemn-shared/assets/icons/providers/drive.jsx'
-import Dropbox   from 'stemn-shared/assets/icons/providers/dropbox.jsx'
-import { MdContentCopy } from 'react-icons/md'
-import { MdCloudOff } from 'react-icons/md'
+import Drive from 'stemn-shared/assets/icons/providers/drive.jsx'
+import Dropbox from 'stemn-shared/assets/icons/providers/dropbox.jsx'
+import { MdContentCopy, MdCloudOff } from 'react-icons/md'
 
 const SidebarProjectButton = (props) => {
   const iconStyle = { width: '22px', height: '22px' }
@@ -16,20 +15,24 @@ const SidebarProjectButton = (props) => {
 
   const getIcon = (provider) => {
     if (provider === 'dropbox') {
-      return <Dropbox size={ 14 } />
+      return <Dropbox size={14} />
     } else if (provider === 'drive') {
-      return <Drive size={ 14 } />
+      return <Drive size={14} />
     }
-    return <MdCloudOff size={ 14 } />
+    return <MdCloudOff size={14} />
   }
 
   const inner = (
     <div className="layout-row layout-align-start-center">
-      <div style={ iconStyle } className="layout-column layout-align-center-center">
-        { getIcon(get(item, 'remote.provider')) }
+      <div style={iconStyle} className="layout-column layout-align-center-center">
+        {getIcon(get(item, 'remote.provider'))}
       </div>
-      <div className={ `${styles.text} flex` }>{ item.name }</div>
-      { isClone && <span title="Cloned project"><MdContentCopy /></span> }
+      <div className={`${styles.text} flex`}>{item.name}</div>
+      {isClone && (
+        <span title="Cloned project">
+          <MdContentCopy />
+        </span>
+      )}
     </div>
   )
 
@@ -37,24 +40,32 @@ const SidebarProjectButton = (props) => {
     if (to) {
       return (
         <Link
-          className={ cn(styles.sidebarButton) }
+          className={cn(styles.sidebarButton)}
           activeClassName="active"
-          to={ to }
-          onClick={ () => { if (clickFn) { clickFn() } } }
+          to={to}
+          onClick={() => {
+            if (clickFn) {
+              clickFn()
+            }
+          }}
         >
-          { inner }
+          {inner}
         </Link>
       )
-    } 
+    }
     return (
       <a
-        className={ cn(styles.sidebarButton) }
-        onClick={ () => { if (clickFn) { clickFn() } } }
+        className={cn(styles.sidebarButton)}
+        onClick={() => {
+          if (clickFn) {
+            clickFn()
+          }
+        }}
       >
-        { inner }
+        {inner}
       </a>
     )
-  } 
+  }
   return null
 }
 

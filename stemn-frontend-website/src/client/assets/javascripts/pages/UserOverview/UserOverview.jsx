@@ -21,7 +21,7 @@ const normaliseValue = (value) => {
     return 3
   } else if (value <= 10) {
     return 4
-  } 
+  }
   return 5
 }
 
@@ -36,22 +36,16 @@ export default class UserOverview extends Component {
     return classes[`s${normaliseValue(value.count)}`]
   }
   render() {
-    const {
-      projects,
-      timeline,
-      history,
-      location,
-      page,
-      size,
-    } = this.props
-    const noMoreResults =  timeline && timeline.data && timeline.data.length < size
+    const { projects, timeline, history, location, page, size } = this.props
+    const noMoreResults = timeline && timeline.data && timeline.data.length < size
 
-    const heatMapData = history && history.data
-      ? history.data.map(item => ({
-        date: item.date,
-        count: sum(values(item.counts)),
-      }))
-      : []
+    const heatMapData =
+      history && history.data
+        ? history.data.map((item) => ({
+            date: item.date,
+            count: sum(values(item.counts)),
+          }))
+        : []
 
     const projectsToDisplay = orderBy(projects.data, 'updated', 'desc').slice(0, 4)
     return (
@@ -59,26 +53,22 @@ export default class UserOverview extends Component {
         <div className="text-mini-caps">Recent Projects</div>
         <br />
         <Row className="sm layout-row layout-wrap">
-          { projectsToDisplay.map(project => (
-            <Col key={ project._id } className="sm flex-100 flex-gt-sm-50">
-              <ProjectRowContainer
-                key={ project._id } 
-                projectId={ project._id } 
-                className={ classes.project }
-              />
+          {projectsToDisplay.map((project) => (
+            <Col key={project._id} className="sm flex-100 flex-gt-sm-50">
+              <ProjectRowContainer key={project._id} projectId={project._id} className={classes.project} />
             </Col>
           ))}
         </Row>
         <br />
         <div className="text-mini-caps">Contribution History</div>
         <br />
-        <div className={ classes.panel }>
+        <div className={classes.panel}>
           <CalendarHeatmap
-            startDate={ startDate }
-            endDate={ endDate }
-            gutterSize={ 2 }
-            values={ heatMapData }
-            classForValue={ this.getColorClass }
+            startDate={startDate}
+            endDate={endDate}
+            gutterSize={2}
+            values={heatMapData}
+            classForValue={this.getColorClass}
           />
         </div>
         <br />
@@ -86,20 +76,10 @@ export default class UserOverview extends Component {
         <div className="text-mini-caps">Timeline</div>
         <br />
         <Panel>
-          <LoadingOverlay show={ timeline.loading } linear hideBg noOverlay />
-          { timeline.data &&
-            <TimelineVertical
-              group
-              items={ timeline.data }
-              type="user"
-            />
-          }
+          <LoadingOverlay show={timeline.loading} linear hideBg noOverlay />
+          {timeline.data && <TimelineVertical group items={timeline.data} type="user" />}
         </Panel>
-        <Pagination
-          path={ location.pathname }
-          page={ page }
-          noMoreResults={ noMoreResults }
-        />
+        <Pagination path={location.pathname} page={page} noMoreResults={noMoreResults} />
         <br />
         <br />
       </div>

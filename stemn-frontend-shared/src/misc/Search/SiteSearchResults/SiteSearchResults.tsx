@@ -11,20 +11,20 @@ import Tag from 'stemn-shared/misc/Tags/Tag'
 import classes from './SiteSearchResults.module.scss'
 
 export interface ISiteSearchResultsProps {
-  size: number,
-  type: 'project' | 'user' | 'field',
-  location: any,
-  page: number,
+  size: number
+  type: 'project' | 'user' | 'field'
+  location: any
+  page: number
   results: {
-    data: IProject[],
-    loading: boolean,
-  },
-  display?: 'tag' | 'projectRow',
-  query?: string,
+    data: IProject[]
+    loading: boolean
+  }
+  display?: 'tag' | 'projectRow'
+  query?: string
 }
 
 export class SiteSearchResults extends React.Component<ISiteSearchResultsProps> {
-  public render () {
+  public render() {
     const { results, size, page, location, query, display } = this.props
     const noResults = results && !results.loading && !(get(results, ['data', 'length']) > 0)
     const hasResults = get(results, ['data', 'length']) > 0
@@ -35,51 +35,43 @@ export class SiteSearchResults extends React.Component<ISiteSearchResultsProps> 
     if (display === 'tag') {
       return (
         <div>
-          { results && results.data && results.data.map((result) => (
-            <Link key={result._id} name='fieldRoute' params={{ fieldId: result.stub }}>
-              <Tag className='primary' text={result.name} style={{ marginBottom: '6px' }} />
-            </Link>
-          ))}
+          {results &&
+            results.data &&
+            results.data.map((result) => (
+              <Link key={result._id} name="fieldRoute" params={{ fieldId: result.stub }}>
+                <Tag className="primary" text={result.name} style={{ marginBottom: '6px' }} />
+              </Link>
+            ))}
         </div>
       )
     }
     return (
       <div>
         <div
-          className={cn(classes.results, 'layout-column', (display === 'projectRow' && !isLoading && hasResults) ? classes.projectRow : '')}
+          className={cn(
+            classes.results,
+            'layout-column',
+            display === 'projectRow' && !isLoading && hasResults ? classes.projectRow : '',
+          )}
           style={!results || !results.data ? { minHeight: '100vh' } : {}}
         >
-          <LoadingOverlay
-            show={isLoading}
-            linear={true}
-            noOverlay={true}
-          />
-          { display === 'projectRow'
-            ? results && results.data && results.data.map((result) => (
-              <ProjectRow
-                key={result._id}
-                size='wide'
-                project={{ data: result }}
-                className={classes.result}
-              />
-            ))
-            : results && results.data && results.data.map((result) => (
-              <EntityRow
-                key={result._id}
-                data={result}
-                query={query}
-                className={classes.result}
-              />
-            ))
-          }
-          {noResults && <div className='layout-column flex layout-align-center-center text-title-5'>No Search Results</div>}
+          <LoadingOverlay show={isLoading} linear={true} noOverlay={true} />
+          {display === 'projectRow'
+            ? results &&
+              results.data &&
+              results.data.map((result) => (
+                <ProjectRow key={result._id} size="wide" project={{ data: result }} className={classes.result} />
+              ))
+            : results &&
+              results.data &&
+              results.data.map((result) => (
+                <EntityRow key={result._id} data={result} query={query} className={classes.result} />
+              ))}
+          {noResults && (
+            <div className="layout-column flex layout-align-center-center text-title-5">No Search Results</div>
+          )}
         </div>
-        <Pagination
-          path={location.pathname}
-          query={location.query}
-          page={page}
-          noMoreResults={noMoreResults}
-        />
+        <Pagination path={location.pathname} query={location.query} page={page} noMoreResults={noMoreResults} />
       </div>
     )
   }

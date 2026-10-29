@@ -97,7 +97,7 @@ export default function clickDrag(Component, opts = {}) {
           this.lastX = pt.clientX
           this.lastY = pt.clientY
           eventIdCounter += 1
-          this.setState(state => ({
+          this.setState((state) => ({
             isMoving: true,
             moveDeltaX: pt.clientX - state.mouseDownPositionX,
             moveDeltaY: pt.clientY - state.mouseDownPositionY,
@@ -130,11 +130,11 @@ export default function clickDrag(Component, opts = {}) {
     render() {
       return (
         <div
-          style={ { display: 'contents' } }
-          onMouseDown={ this.onMouseDown }
-          onTouchStart={ touch ? this.onMouseDown : undefined }
+          style={{ display: 'contents' }}
+          onMouseDown={this.onMouseDown}
+          onTouchStart={touch ? this.onMouseDown : undefined}
         >
-          <Component { ...this.props } dataDrag={ this.state } />
+          <Component {...this.props} dataDrag={this.state} />
         </div>
       )
     }

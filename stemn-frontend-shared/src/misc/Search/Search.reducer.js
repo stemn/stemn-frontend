@@ -2,9 +2,7 @@ import i from 'icepick'
 import { parseQuery } from 'stemn-shared/routing/query'
 
 const initialState = {
-  query: typeof window !== 'undefined'
-    ? parseQuery(window.location.search).q
-    : '',   // If this is used in electron, window.location will not exist.
+  query: typeof window !== 'undefined' ? parseQuery(window.location.search).q : '', // If this is used in electron, window.location will not exist.
   data: {
     /** ******************************
     [cacheLey] : {
@@ -27,7 +25,8 @@ export default function (state = initialState, action) {
       return i.assocIn(state, ['data', action.meta.cacheKey, 'loading'], true)
     }
     case 'SEARCH/SEARCH_FULFILLED': {
-      return i.chain(state)
+      return i
+        .chain(state)
         .assocIn(['data', action.meta.cacheKey, 'loading'], false)
         .assocIn(['data', action.meta.cacheKey, 'data'], action.payload.data)
         .value()

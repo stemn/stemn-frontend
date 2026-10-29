@@ -26,25 +26,29 @@ export default class ThreadFilterStatus extends Component {
   }
   render() {
     const { filter, className, style } = this.props
-    const filterOptionsStatus = [{
-      value: undefined,
-      name: 'Any',
-      onClick: () => this.setFilter({ status: undefined }),
-    }, {
-      value: 'open',
-      name: 'Open',
-      onClick: () => this.setFilter({ status: 'open' }),
-    }, {
-      value: 'closed',
-      name: 'Closed',
-      onClick: () => this.setFilter({ status: 'closed' }),
-    }]
+    const filterOptionsStatus = [
+      {
+        value: undefined,
+        name: 'Any',
+        onClick: () => this.setFilter({ status: undefined }),
+      },
+      {
+        value: 'open',
+        name: 'Open',
+        onClick: () => this.setFilter({ status: 'open' }),
+      },
+      {
+        value: 'closed',
+        name: 'Closed',
+        onClick: () => this.setFilter({ status: 'closed' }),
+      },
+    ]
     return (
       <PopoverDropdown
-        className={ cn('light', className) }
-        style={ style }
-        value={ get(filter, ['object', 'status']) }
-        options={ filterOptionsStatus }
+        className={cn('light', className)}
+        style={style}
+        value={get(filter, ['object', 'status'])}
+        options={filterOptionsStatus}
       >
         Status:&nbsp;
       </PopoverDropdown>

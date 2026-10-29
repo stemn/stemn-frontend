@@ -14,7 +14,6 @@
   overflow: hidden;
 }
 
-
 .textLayer {
   position: absolute;
   left: 0;
@@ -22,9 +21,9 @@
   right: 0;
   bottom: 0;
   opacity: 0.2;
-  line-height: 1.0;
+  line-height: 1;
 
-/*  Enable selection (parent may disable it*/
+  /*  Enable selection (parent may disable it*/
   -moz-user-select: text;
   -khtml-user-select: text;
   -webkit-user-select: text;
@@ -39,7 +38,8 @@
   --min-font-size-inv: calc(1 / var(--min-font-size));
 }
 
-.textLayer span, .textLayer br {
+.textLayer span,
+.textLayer br {
   color: transparent;
   position: absolute;
   white-space: pre;
@@ -84,8 +84,12 @@
   background-color: rgb(0, 100, 0);
 }
 
-.textLayer ::selection { background: rgb(0,0,255); }
-.textLayer ::-moz-selection { background: rgb(0,0,255); }
+.textLayer ::selection {
+  background: rgb(0, 0, 255);
+}
+.textLayer ::-moz-selection {
+  background: rgb(0, 0, 255);
+}
 
 .textLayer .endOfContent {
   display: block;

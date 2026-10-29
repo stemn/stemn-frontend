@@ -14,12 +14,14 @@ class Settings extends Component {
         <Helmet>
           <title>Settings</title>
         </Helmet>
-        <UserNavHeader user={ user } currentUser={ currentUser } />
+        <UserNavHeader user={user} currentUser={currentUser} />
         <Container>
           <Row className="layout-xs-column layout-gt-xs-row">
             <Col className="flex-gt-xs-30">
               <NavPillContainer>
-                <NavPill to="/settings" onlyActiveOnIndex>Basic Profile</NavPill>
+                <NavPill to="/settings" onlyActiveOnIndex>
+                  Basic Profile
+                </NavPill>
                 <NavPill to="/settings/details">Experience and Education</NavPill>
               </NavPillContainer>
               <NavPillContainer>
@@ -29,9 +31,7 @@ class Settings extends Component {
                 <NavPill to="/settings/projects">Projects</NavPill>
               </NavPillContainer>
             </Col>
-            <Col className="flex">
-              { children }
-            </Col>
+            <Col className="flex">{children}</Col>
           </Row>
         </Container>
       </StandardLayout>

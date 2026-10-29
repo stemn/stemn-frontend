@@ -58,55 +58,47 @@ export default class NewThreadModal extends Component {
   render() {
     const { modalConfirm, board, boardModel } = this.props
 
-    const groupOptions = board.data.groups.map(group => ({
+    const groupOptions = board.data.groups.map((group) => ({
       value: group._id,
       name: group.name,
     }))
 
     return (
-      <div className={ cn(classes.modal, 'layout-column') }>
-        <div className={ classes.modalTitle }>Create a new thread</div>
-        <div className={ cn(classes.modalBody, 'flex layout-column') }>
-          <div className={ cn(classes.titleSection, 'layout-row layout-align-start-center') }>
+      <div className={cn(classes.modal, 'layout-column')}>
+        <div className={classes.modalTitle}>Create a new thread</div>
+        <div className={cn(classes.modalBody, 'flex layout-column')}>
+          <div className={cn(classes.titleSection, 'layout-row layout-align-start-center')}>
             <Textarea
-              model={ `${boardModel}.newThread.name` }
-              value={ get(board, 'newThread.name', '') }
+              model={`${boardModel}.newThread.name`}
+              value={get(board, 'newThread.name', '')}
               className="text-title-4 input-plain flex"
               placeholder="Untitled Thread"
               autoFocus
               tabIndex="1"
             />
             <PopoverDropdown
-              options={ groupOptions }
+              options={groupOptions}
               classname="light"
-              value={ get(board, 'newThread.group', board.data.groups[0]._id) }
-              model={ `${boardModel}.newThread.group` }
+              value={get(board, 'newThread.group', board.data.groups[0]._id)}
+              model={`${boardModel}.newThread.group`}
             >
               Group:&nbsp;
             </PopoverDropdown>
           </div>
-          <div className={ classes.bodySection }>
+          <div className={classes.bodySection}>
             <Editor
-              model={ `${boardModel}.newThread.body` }
-              value={ get(board, 'newThread.body') }
+              model={`${boardModel}.newThread.body`}
+              value={get(board, 'newThread.body')}
               placeholder="Thread description"
               tabIndex="2"
             />
           </div>
         </div>
         <div className="modal-footer-no-line layout-row layout-align-end">
-          <Button
-            style={ { marginRight: '10px' } }
-            onClick={ modalConfirm }
-            tabIndex="3"
-          >
+          <Button style={{ marginRight: '10px' }} onClick={modalConfirm} tabIndex="3">
             Cancel
           </Button>
-          <Button
-            className="primary"
-            onClick={ this.newThread }
-            tabIndex="4"
-          >
+          <Button className="primary" onClick={this.newThread} tabIndex="4">
             Create
           </Button>
         </div>

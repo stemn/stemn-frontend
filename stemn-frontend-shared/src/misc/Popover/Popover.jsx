@@ -78,22 +78,36 @@ export default class Popover extends Component {
     const events = {
       // Standard hover trigger
       hover: {
-        onMouseEnter: () => { this.toggle(true) },
-        onMouseLeave: () => { this.toggle(false) },
+        onMouseEnter: () => {
+          this.toggle(true)
+        },
+        onMouseLeave: () => {
+          this.toggle(false)
+        },
       },
       // Delay open/close toggle
       hoverDelay: {
-        onMouseEnter: () => { this.toggleDelay(true) },
-        onMouseLeave: () => { this.toggleDelay(false) },
+        onMouseEnter: () => {
+          this.toggleDelay(true)
+        },
+        onMouseLeave: () => {
+          this.toggleDelay(false)
+        },
       },
       // Only trigger on the parent (not sub elements)
       hoverSingleDelay: {
-        onMouseEnter: () => { this.toggleDelay(true) },
-        onMouseOut: () => { this.toggleDelay(false) },
+        onMouseEnter: () => {
+          this.toggleDelay(true)
+        },
+        onMouseOut: () => {
+          this.toggleDelay(false)
+        },
       },
       // Standard click trigger
       click: {
-        onClick: () => { this.toggle(null) },
+        onClick: () => {
+          this.toggle(null)
+        },
         onContextMenu: (e) => {
           e.preventDefault()
           this.toggle(null)
@@ -109,11 +123,17 @@ export default class Popover extends Component {
     const events = {
       hover: {},
       hoverDelay: {
-        onMouseEnter: () => { this.toggleDelay(true) },
-        onMouseLeave: () => { this.toggleDelay(false) },
+        onMouseEnter: () => {
+          this.toggleDelay(true)
+        },
+        onMouseLeave: () => {
+          this.toggleDelay(false)
+        },
       },
       click: {
-        onClick: () => { if (!this.props.disableClickClose) this.toggle(false) },
+        onClick: () => {
+          if (!this.props.disableClickClose) this.toggle(false)
+        },
       },
       none: {},
     }
@@ -130,28 +150,26 @@ export default class Popover extends Component {
     const contentProps = this.getPopoverEventBinds(trigger)
 
     // Add the 'isOpen' prop to the content if 'inheritIsOpen'
-    const contentPropsWithInherit = inheritIsOpen
-      ? { ...contentProps, isOpen }
-      : contentProps
+    const contentPropsWithInherit = inheritIsOpen ? { ...contentProps, isOpen } : contentProps
 
     const contentElement = React.isValidElement(children[1])
       ? React.cloneElement(children[1], contentPropsWithInherit)
-      : (children[1] || '')
+      : children[1] || ''
 
     const triggerElement = React.isValidElement(children[0])
       ? React.cloneElement(children[0], triggerProps)
-      : (children[0] || '')
+      : children[0] || ''
 
     return (
       <PopoverCore
-        isOpen={ isOpen }
-        body={ contentElement }
-        onOuterAction={ this.outerAction }
-        preferPlace={ preferPlace }
-        tipSize={ tipSize }
-        offset={ offset }
+        isOpen={isOpen}
+        body={contentElement}
+        onOuterAction={this.outerAction}
+        preferPlace={preferPlace}
+        tipSize={tipSize}
+        offset={offset}
       >
-        { triggerElement }
+        {triggerElement}
       </PopoverCore>
     )
   }

@@ -1,0 +1,12 @@
+**/node_modules
+**/build
+**/dist
+**/out
+**/release
+**/qa
+**/test-results
+**/playwright-report
+.git
+.github
+.husky
+.stemn-backend

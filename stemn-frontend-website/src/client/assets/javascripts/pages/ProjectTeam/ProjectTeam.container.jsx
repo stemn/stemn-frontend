@@ -11,14 +11,11 @@ const stateToProps = ({ projects }, { params }) => {
   }
 }
 
-const dispatchToProps = {
-}
+const dispatchToProps = {}
 
 class ProjectTeamContainer extends Component {
   render() {
-    return (
-      <ProjectTeam { ...this.props } />
-    )
+    return <ProjectTeam {...this.props} />
   }
 }
 

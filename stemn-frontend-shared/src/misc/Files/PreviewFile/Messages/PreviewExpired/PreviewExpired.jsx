@@ -14,10 +14,18 @@ export class PreviewExpired extends React.Component {
     }
     return (
       <div className="layout-column layout-align-center-center flex text-center">
-        <div style={ { maxWidth: '300px' } }>
-          <img style={ { width: '100px' } } src={ expired } />
-          <div className="text-title-4" style={ { marginBottom: '10px' } }>This revision has expired</div>
-          <div className="text-title-5">We could not find this revision in your <span style={ { textTransform: 'capitalize' } }>{provider || 'provider'}</span>.<br /> <a className="link-primary" onClick={ openModal }>Learn more.</a></div>
+        <div style={{ maxWidth: '300px' }}>
+          <img style={{ width: '100px' }} src={expired} />
+          <div className="text-title-4" style={{ marginBottom: '10px' }}>
+            This revision has expired
+          </div>
+          <div className="text-title-5">
+            We could not find this revision in your{' '}
+            <span style={{ textTransform: 'capitalize' }}>{provider || 'provider'}</span>.<br />{' '}
+            <a className="link-primary" onClick={openModal}>
+              Learn more.
+            </a>
+          </div>
         </div>
       </div>
     )

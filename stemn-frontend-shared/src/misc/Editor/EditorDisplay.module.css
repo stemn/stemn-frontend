@@ -1,6 +1,6 @@
 @value primary, border1, bg1 from "theme";
 
-.mention{
+.mention {
   color: primary;
 }
 
@@ -16,7 +16,7 @@ https://github.com/sindresorhus/github-markdown-css/blob/gh-pages/github-markdow
   font-size: 16px;
   line-height: 1.5;
   word-wrap: break-word;
-  font-family: "Pt Serif";
+  font-family: 'Pt Serif';
   color: rgba(0, 0, 0, 0.8);
 }
 
@@ -58,7 +58,7 @@ https://github.com/sindresorhus/github-markdown-css/blob/gh-pages/github-markdow
   overflow: visible;
 }
 
-.display [type="checkbox"] {
+.display [type='checkbox'] {
   box-sizing: border-box;
   padding: 0;
 }
@@ -97,13 +97,13 @@ https://github.com/sindresorhus/github-markdown-css/blob/gh-pages/github-markdow
 
 .display hr::before {
   display: table;
-  content: "";
+  content: '';
 }
 
 .display hr::after {
   display: table;
   clear: both;
-  content: "";
+  content: '';
 }
 
 .display table {
@@ -190,32 +190,38 @@ https://github.com/sindresorhus/github-markdown-css/blob/gh-pages/github-markdow
 }
 
 .display code {
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
   font-size: 12px;
 }
 
 .display pre {
   margin-top: 0;
   margin-bottom: 0;
-  font: 12px "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font:
+    12px 'SFMono-Regular',
+    Consolas,
+    'Liberation Mono',
+    Menlo,
+    Courier,
+    monospace;
 }
 
 .display::before {
   display: table;
-  content: "";
+  content: '';
 }
 
 .display::after {
   display: table;
   clear: both;
-  content: "";
+  content: '';
 }
 
-.display>div>*:first-child {
+.display > div > *:first-child {
   margin-top: 0 !important;
 }
 
-.display>div>*:last-child {
+.display > div > *:last-child {
   margin-bottom: 0 !important;
 }
 
@@ -263,11 +269,11 @@ https://github.com/sindresorhus/github-markdown-css/blob/gh-pages/github-markdow
   border-left: 0.25em solid #dfe2e5;
 }
 
-.display blockquote>:first-child {
+.display blockquote > :first-child {
   margin-top: 0;
 }
 
-.display blockquote>:last-child {
+.display blockquote > :last-child {
   margin-bottom: 0;
 }
 
@@ -295,7 +301,7 @@ https://github.com/sindresorhus/github-markdown-css/blob/gh-pages/github-markdow
   margin-bottom: 16px;
   font-weight: 600;
   line-height: 1.25;
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
 }
 
 .display h1 {
@@ -340,11 +346,11 @@ https://github.com/sindresorhus/github-markdown-css/blob/gh-pages/github-markdow
   margin-bottom: 0;
 }
 
-.display li>p {
+.display li > p {
   margin-top: 16px;
 }
 
-.display li+li {
+.display li + li {
   margin-top: 0.25em;
 }
 
@@ -407,21 +413,21 @@ https://github.com/sindresorhus/github-markdown-css/blob/gh-pages/github-markdow
   padding-bottom: 0.2em;
   margin: 0;
   font-size: 85%;
-  background-color: rgba(27,31,35,0.05);
+  background-color: rgba(27, 31, 35, 0.05);
   border-radius: 3px;
 }
 
 .display code::before,
 .display code::after {
   letter-spacing: -0.2em;
-  content: "\00a0";
+  content: '\00a0';
 }
 
 .display pre {
   word-wrap: normal;
 }
 
-.display pre>code {
+.display pre > code {
   padding: 0;
   margin: 0;
   font-size: 100%;
@@ -470,7 +476,13 @@ https://github.com/sindresorhus/github-markdown-css/blob/gh-pages/github-markdow
 .display kbd {
   display: inline-block;
   padding: 3px 5px;
-  font: 11px "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font:
+    11px 'SFMono-Regular',
+    Consolas,
+    'Liberation Mono',
+    Menlo,
+    Courier,
+    monospace;
   line-height: 10px;
   color: #444d56;
   vertical-align: middle;
@@ -480,7 +492,6 @@ https://github.com/sindresorhus/github-markdown-css/blob/gh-pages/github-markdow
   border-radius: 3px;
   box-shadow: inset 0 -1px 0 #959da5;
 }
-
 
 .display hr {
   border-bottom-color: #eee;

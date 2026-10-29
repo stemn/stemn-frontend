@@ -11,22 +11,22 @@ export default class UploadModal extends Component {
     this.props.reset({ cacheKey: uploadId })
   }
   render() {
-    const {
-      modalCancel,
-    } = this.props
+    const { modalCancel } = this.props
     return (
-      <div style={ { width: '600px' } }>
+      <div style={{ width: '600px' }}>
         <div className="modal-title">Upload a file</div>
         <div className="modal-body">
           <Upload
-            containerClassName={ classes.container }
-            imageClassName={ classes.image }
-            uploadId={ uploadId }
-            onUpload={ this.onUpload }
+            containerClassName={classes.container}
+            imageClassName={classes.image}
+            uploadId={uploadId}
+            onUpload={this.onUpload}
           />
         </div>
         <div className="modal-footer layout-row layout-align-end">
-          <Button className="primary" onClick={ modalCancel }>Cancel</Button>
+          <Button className="primary" onClick={modalCancel}>
+            Cancel
+          </Button>
         </div>
       </div>
     )

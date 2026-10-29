@@ -28,17 +28,19 @@ export class CommentNew extends Component {
   }
   submitNewComment = () => {
     const { timelineCacheKey } = this.props
-    this.props.newCommentAction({
-      comment: {
-        thread: this.props.threadId,
-        body: this.props.newComment.body,
-      },
-      timelineCacheKey,
-    }).then(() => {
-      this.setState({
-        isFocussed: false,
+    this.props
+      .newCommentAction({
+        comment: {
+          thread: this.props.threadId,
+          body: this.props.newComment.body,
+        },
+        timelineCacheKey,
       })
-    })
+      .then(() => {
+        this.setState({
+          isFocussed: false,
+        })
+      })
   }
   clickComment = () => {
     this.props.confirmAuth(() => {
@@ -51,45 +53,37 @@ export class CommentNew extends Component {
     ctrlEnterHandler(this.formRef, this.submitNewComment)
   }
   render() {
-    const {
-      auth,
-      newComment,
-      entityModel,
-    } = this.props
+    const { auth, newComment, entityModel } = this.props
     const { isFocussed } = this.state
 
     return (
-      <div className={ cn(classes.commentNew, 'layout-row') } onClick={ this.clickComment }>
-        <div ref={ (el) => { this.formRef = el } } className={ cn(classes.commentBody, { [classes.commentBodyHidden]: !isFocussed }, 'flex') }>
-          <div className={ `${classes.commentHeader} layout-row layout-align-start-center` }>
-            <UserAvatar
-              picture={ auth.user.picture }
-              size={ 25 }
-              shape="square"
-              className={ classes.commentAvatar }
-            />
-            <TextSwitch height={ 20 } swap={ isFocussed }>
-              <div><b>New Comment</b></div>
-              <div><b>{ auth.user.name }</b></div>
+      <div className={cn(classes.commentNew, 'layout-row')} onClick={this.clickComment}>
+        <div
+          ref={(el) => {
+            this.formRef = el
+          }}
+          className={cn(classes.commentBody, { [classes.commentBodyHidden]: !isFocussed }, 'flex')}
+        >
+          <div className={`${classes.commentHeader} layout-row layout-align-start-center`}>
+            <UserAvatar picture={auth.user.picture} size={25} shape="square" className={classes.commentAvatar} />
+            <TextSwitch height={20} swap={isFocussed}>
+              <div>
+                <b>New Comment</b>
+              </div>
+              <div>
+                <b>{auth.user.name}</b>
+              </div>
             </TextSwitch>
           </div>
-          <div className={ classes.commentContent }>
-            { isFocussed
-              ? <EditorNew
-                autoFocus={ isFocussed }
-                model={ `${entityModel}.body` }
-                value={ newComment.body }
-              />
-              : null }
+          <div className={classes.commentContent}>
+            {isFocussed ? (
+              <EditorNew autoFocus={isFocussed} model={`${entityModel}.body`} value={newComment.body} />
+            ) : null}
           </div>
-          <div className="layout-row layout-align-start-end" style={ { padding: '0 20px 10px' } }>
+          <div className="layout-row layout-align-start-end" style={{ padding: '0 20px 10px' }}>
             <MarkdownButton>Markdown formatting supported</MarkdownButton>
             <div className="flex" />
-            <ProgressButton
-              className="primary sm"
-              loading={ newComment.savePending }
-              onClick={ this.submitNewComment }
-            >
+            <ProgressButton className="primary sm" loading={newComment.savePending} onClick={this.submitNewComment}>
               Comment
             </ProgressButton>
           </div>
@@ -98,7 +92,6 @@ export class CommentNew extends Component {
     )
   }
 }
-
 
 // ///////////////////////////////////////////////////////////////////////////
 // /////////////////////////////// CONTAINER /////////////////////////////////
@@ -118,4 +111,3 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentNew)
-

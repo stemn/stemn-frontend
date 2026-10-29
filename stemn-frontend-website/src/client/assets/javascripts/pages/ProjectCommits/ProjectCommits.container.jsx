@@ -8,7 +8,6 @@ import { getFilter } from 'stemn-shared/misc/StringFilter/StringFilter.utils'
 import { get, isEqual } from 'lodash'
 import { getBoards } from 'stemn-shared/misc/Threads/Threads.actions'
 
-
 const stateToProps = ({ projects, syncTimeline, stringFilter, threads }, { params, location }) => {
   const page = location.query.page || 1
   const projectId = params.stub
@@ -61,36 +60,37 @@ const dispatchToProps = {
   getBoards,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'timelineQueryKey',
-  onChange: (props) => {
-    props.fetchTimeline({
-      entityType: 'project',
-      entityId: props.projectId,
-      types: props.filter.object.type ? [props.filter.object.type] : undefined,
-      cacheKey: props.timelineCacheKey,
-      criteria: {
-        owner: props.filter.object.user,
-        name: props.filter.object.query && `/${props.filter.object.query}/i`,
-      },
-      page: props.page,
-      size: props.size,
-    })
+const fetchConfigs = [
+  {
+    hasChanged: 'timelineQueryKey',
+    onChange: (props) => {
+      props.fetchTimeline({
+        entityType: 'project',
+        entityId: props.projectId,
+        types: props.filter.object.type ? [props.filter.object.type] : undefined,
+        cacheKey: props.timelineCacheKey,
+        criteria: {
+          owner: props.filter.object.user,
+          name: props.filter.object.query && `/${props.filter.object.query}/i`,
+        },
+        page: props.page,
+        size: props.size,
+      })
+    },
   },
-}, {
-  hasChanged: 'projectId',
-  onChange: (props) => {
-    props.getBoards({
-      projectId: props.projectId,
-    })
+  {
+    hasChanged: 'projectId',
+    onChange: (props) => {
+      props.getBoards({
+        projectId: props.projectId,
+      })
+    },
   },
-}]
+]
 
 class ProjectCommitsContainer extends Component {
   render() {
-    return (
-      <ProjectCommits { ...this.props } />
-    )
+    return <ProjectCommits {...this.props} />
   }
 }
 

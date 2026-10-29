@@ -1,7 +1,6 @@
 import { ArrayFieldItemTemplateProps, ArrayFieldTemplateProps } from '@rjsf/utils'
 
-import { MdAdd } from 'react-icons/md'
-import { MdClose } from 'react-icons/md'
+import { MdAdd, MdClose } from 'react-icons/md'
 import FilledIconButton from 'stemn-shared/misc/Buttons/FilledIconButton'
 
 // rjsf v6 renders each array item through ArrayFieldItemTemplate, so the per-item
@@ -26,24 +25,17 @@ export const ArrayFieldItemTemplate = (props: ArrayFieldItemTemplateProps) => {
 }
 
 export const ArrayFieldTemplate = (props: ArrayFieldTemplateProps) => {
-
   return (
     <div>
       {props.items}
 
       {props.canAdd && (
-
         <div>
-          <FilledIconButton
-            onClick={props.onAddClick}
-            className='primary'
-          >
+          <FilledIconButton onClick={props.onAddClick} className="primary">
             <MdAdd size={20} />
           </FilledIconButton>
-
         </div>
       )}
-
     </div>
   )
 }

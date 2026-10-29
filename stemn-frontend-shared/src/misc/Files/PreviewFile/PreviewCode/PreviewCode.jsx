@@ -4,8 +4,12 @@ import file from 'stemn-shared/assets/images/pure-vectors/file.svg'
 import Viewer from './Viewer'
 
 export default class PreviewCode extends Component {
-  UNSAFE_componentWillMount() { this.onMount(this.props) }
-  UNSAFE_componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+  UNSAFE_componentWillMount() {
+    this.onMount(this.props)
+  }
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    this.onMount(nextProps, this.props)
+  }
   onMount = (nextProps, prevProps) => {
     // If the previewId changes, download a new file
     if (!prevProps || nextProps.previewId !== prevProps.previewId) {
@@ -24,17 +28,22 @@ export default class PreviewCode extends Component {
     const { fileData, fileMeta, previewMarkdown } = this.props
     return (
       <div className="layout-column flex">
-        { fileData && fileData.data ? <Viewer extension={ fileMeta.extension } data={ fileData.data } previewMarkdown={ previewMarkdown } /> : '' }
-        { fileData ? <LoadingOverlay show={ fileData.loading } /> : null }
-        { fileData && !fileData.data && !fileData.loading
-          ? <div className="layout-column layout-align-center-center flex text-center">
-            <img style={ { width: '100px' } } src={ file } />
-            <div className="text-title-4" style={ { marginBottom: '10px' } }>Nothing to display</div>
+        {fileData && fileData.data ? (
+          <Viewer extension={fileMeta.extension} data={fileData.data} previewMarkdown={previewMarkdown} />
+        ) : (
+          ''
+        )}
+        {fileData ? <LoadingOverlay show={fileData.loading} /> : null}
+        {fileData && !fileData.data && !fileData.loading ? (
+          <div className="layout-column layout-align-center-center flex text-center">
+            <img style={{ width: '100px' }} src={file} />
+            <div className="text-title-4" style={{ marginBottom: '10px' }}>
+              Nothing to display
+            </div>
             <div className="text-title-5">This file appears to be empty.</div>
           </div>
-          : null }
+        ) : null}
       </div>
     )
   }
 }
-

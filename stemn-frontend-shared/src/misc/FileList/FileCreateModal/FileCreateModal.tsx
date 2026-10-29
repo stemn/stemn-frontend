@@ -26,14 +26,14 @@ const options = fileTypes.map((item) => ({
 }))
 
 export interface IFileCreateModalComponentProps extends InjectedFormProps {
-  folder: IFolder,
-  uploadFile: typeof dispatchToProps['uploadFile']
-  push: typeof dispatchToProps['push']
+  folder: IFolder
+  uploadFile: (typeof dispatchToProps)['uploadFile']
+  push: (typeof dispatchToProps)['push']
 }
 
 interface IFormData {
-  fileName: string,
-  fileType: string,
+  fileName: string
+  fileType: string
   uploads: File[]
 }
 
@@ -52,39 +52,32 @@ export class FileCreateModalComponent extends React.Component<IFileCreateModalCo
     const { change } = this.props
     change('loading', true)
   }
-  public render () {
+  public render() {
     const { handleSubmit, submitting } = this.props
     return (
-      <Form
-        onSubmit={handleSubmit(this.submit)}
-        style={{ width: '600px', padding: '30px', position: 'relative' }}
-      >
-        <Field name='loading' component={FormLoadingOverlay}/>
-        <div className={cn('text-mini-caps')} style={{ marginBottom: '10px' }}>Upload files</div>
-        <FormUpload input={{ onChange: this.onDrop }}/>
-        <div className={sLogin.textDivider}><div>OR</div></div>
-        <div className={cn('text-mini-caps')} style={{ marginBottom: '10px' }}>Create a new file</div>
-        <div className='layout-row'>
+      <Form onSubmit={handleSubmit(this.submit)} style={{ width: '600px', padding: '30px', position: 'relative' }}>
+        <Field name="loading" component={FormLoadingOverlay} />
+        <div className={cn('text-mini-caps')} style={{ marginBottom: '10px' }}>
+          Upload files
+        </div>
+        <FormUpload input={{ onChange: this.onDrop }} />
+        <div className={sLogin.textDivider}>
+          <div>OR</div>
+        </div>
+        <div className={cn('text-mini-caps')} style={{ marginBottom: '10px' }}>
+          Create a new file
+        </div>
+        <div className="layout-row">
+          <Field name="fileName" component={FormInput} className="dr-input flex" type="text" placeholder="File Name" />
           <Field
-            name='fileName'
-            component={FormInput}
-            className='dr-input flex'
-            type='text'
-            placeholder='File Name'
-          />
-          <Field
-            name='fileType'
+            name="fileType"
             component={FormDropdown}
             options={options}
             style={{ width: '90px', borderLeft: 'none' }}
           />
         </div>
-        <div className='layout-row layout-align-end' style={{ marginTop: '30px' }}>
-          <ProgressButton
-            className='primary'
-            type='submit'
-            loading={submitting}
-          >
+        <div className="layout-row layout-align-end" style={{ marginTop: '30px' }}>
+          <ProgressButton className="primary" type="submit" loading={submitting}>
             Create File
           </ProgressButton>
         </div>

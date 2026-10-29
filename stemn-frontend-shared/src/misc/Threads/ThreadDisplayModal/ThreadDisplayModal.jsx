@@ -23,7 +23,7 @@ export default class ThreadDisplayModal extends React.Component {
     this.props.showLabelEditModal({
       boardId: this.props.thread.data.board,
     })
-  };
+  }
 
   toggleComplete = ({ model, value }) => {
     this.props.toggleComplete({
@@ -32,11 +32,11 @@ export default class ThreadDisplayModal extends React.Component {
       value,
     })
     this.updateThread()
-  };
+  }
 
   updateThread = () => {
     setTimeout(() => this.props.updateThread({ thread: this.props.thread.data }), 1)
-  };
+  }
 
   deleteThread = () => {
     this.props.deleteThread({
@@ -44,41 +44,35 @@ export default class ThreadDisplayModal extends React.Component {
       boardId: this.props.thread.data.board,
     })
     this.props.modalConfirm()
-  };
+  }
 
   render() {
-    const {
-      threadId,
-      thread,
-      board,
-      entityModel,
-      project,
-      timeline,
-      timelineCacheKey,
-    } = this.props
+    const { threadId, thread, board, entityModel, project, timeline, timelineCacheKey } = this.props
 
     const getMain = () => {
-      const menu = [{
-        label: 'Delete Thread',
-        onClick: this.deleteThread,
-      }]
+      const menu = [
+        {
+          label: 'Delete Thread',
+          onClick: this.deleteThread,
+        },
+      ]
 
       return (
         <div className="layout-column flex">
-          <div className={ classes.header }>
+          <div className={classes.header}>
             <div className="layout-row layout-align-start-center">
               <Checkbox
-                model={ `${entityModel}.data.complete` }
-                value={ thread.data.complete }
-                changeAction={ this.toggleComplete }
+                model={`${entityModel}.data.complete`}
+                value={thread.data.complete}
+                changeAction={this.toggleComplete}
                 className="text-primary"
                 circle
               />
-              <div className="text-title-4 flex" style={ { marginLeft: '15px' } }>
+              <div className="text-title-4 flex" style={{ marginLeft: '15px' }}>
                 <Textarea
-                  model={ `${entityModel}.data.name` }
-                  onChange={ this.updateThread }
-                  value={ thread.data.name }
+                  model={`${entityModel}.data.name`}
+                  onChange={this.updateThread}
+                  value={thread.data.name}
                   className="input-plain"
                   type="text"
                   placeholder="Thread description"
@@ -88,93 +82,85 @@ export default class ThreadDisplayModal extends React.Component {
                 <SimpleIconButton>
                   <MdMoreHoriz size="20px" />
                 </SimpleIconButton>
-                <PopoverMenuList menu={ menu } />
+                <PopoverMenuList menu={menu} />
               </Popover>
             </div>
-            <div className="text-grey-3" style={ { padding: '15px 0 20px' } }>
-              Created {moment(thread.data.created).fromNow()} <b className="text-interpunct" /> By <a className="link-primary">{thread.data.owner.name}</a>
+            <div className="text-grey-3" style={{ padding: '15px 0 20px' }}>
+              Created {moment(thread.data.created).fromNow()} <b className="text-interpunct" /> By{' '}
+              <a className="link-primary">{thread.data.owner.name}</a>
             </div>
           </div>
-          <div className={ `${classes.timeline} layout-column flex` }>
-            { timeline && timeline.length > 0 &&
+          <div className={`${classes.timeline} layout-column flex`}>
+            {timeline && timeline.length > 0 && (
               <TimelineVertical
-                className={ classes.timeline }
-                items={ timeline }
-                timelineCacheKey={ timelineCacheKey }
-                entity={ board }
+                className={classes.timeline}
+                items={timeline}
+                timelineCacheKey={timelineCacheKey}
+                entity={board}
                 type="thread"
               />
-            }
-            { timeline && timeline.length === 0 &&
-              <ThreadTimelineEmpty className="flex" />
-            }
+            )}
+            {timeline && timeline.length === 0 && <ThreadTimelineEmpty className="flex" />}
           </div>
-          <div className={ classes.newComment }>
-            <CommentNew
-              threadId={ threadId }
-              timelineCacheKey={ timelineCacheKey }
-            />
+          <div className={classes.newComment}>
+            <CommentNew threadId={threadId} timelineCacheKey={timelineCacheKey} />
           </div>
         </div>
       )
     }
-    
+
     const getSidebar = () => (
       <div className="layout-column flex">
-        <div className={ classes.well }>
-          <div className={ `${classes.settingTitle} text-mini-caps layout-row layout-align-start-center` }>
+        <div className={classes.well}>
+          <div className={`${classes.settingTitle} text-mini-caps layout-row layout-align-start-center`}>
             <div className="flex">Labels</div>
-            <a className={ classes.add } title="Edit labels" onClick={ this.showLabelEditModal }>+</a>
+            <a className={classes.add} title="Edit labels" onClick={this.showLabelEditModal}>
+              +
+            </a>
           </div>
-          <div style={ { maxHeight: '200px', overflowY: 'auto' } }>
-            {board && board.data && board.data.labels
-              ?
-                <LabelSelect
-                model={ `${entityModel}.data.labels` }
-                value={ thread.data.labels }
-                onChange={ this.updateThread }
-                labelInfo={ board.data.labels }
+          <div style={{ maxHeight: '200px', overflowY: 'auto' }}>
+            {board && board.data && board.data.labels ? (
+              <LabelSelect
+                model={`${entityModel}.data.labels`}
+                value={thread.data.labels}
+                onChange={this.updateThread}
+                labelInfo={board.data.labels}
               />
-              : ''
-            }
+            ) : (
+              ''
+            )}
           </div>
         </div>
-        <div className={ classes.well }>
-          <div className={ `${classes.settingTitle} text-mini-caps layout-row layout-align-start-center` }>
+        <div className={classes.well}>
+          <div className={`${classes.settingTitle} text-mini-caps layout-row layout-align-start-center`}>
             <div className="flex">Asignees</div>
           </div>
-          <div style={ { padding: '15px' } }>
+          <div style={{ padding: '15px' }}>
             <UserSelect
-              model={ `${entityModel}.data.users` }
-              onChange={ this.updateThread }
-              value={ thread.data.users }
-              users={ project.data.team }
+              model={`${entityModel}.data.users`}
+              onChange={this.updateThread}
+              value={thread.data.users}
+              users={project.data.team}
             />
           </div>
         </div>
-        <div className={ classes.well }>
-          <div className={ `${classes.settingTitle} text-mini-caps layout-row layout-align-start-center` }>
-              Due Date
-          </div>
-          <div style={ { padding: '15px' } }>
-            <DatePicker
-              model={ `${entityModel}.data.due` }
-              onChange={ this.updateThread }
-              value={ thread.data.due }
-            />
+        <div className={classes.well}>
+          <div className={`${classes.settingTitle} text-mini-caps layout-row layout-align-start-center`}>Due Date</div>
+          <div style={{ padding: '15px' }}>
+            <DatePicker model={`${entityModel}.data.due`} onChange={this.updateThread} value={thread.data.due} />
           </div>
         </div>
       </div>
     )
 
     return (
-      <div className={ cn(classes.threadDisplayModal, 'layout-column') }>
+      <div className={cn(classes.threadDisplayModal, 'layout-column')}>
         <div className="layout-row flex">
           <div className="flex-70 layout-column rel-box">
-            <LoadingOverlay show={ !thread || !thread.data || !project || !project.data } />
+            <LoadingOverlay show={!thread || !thread.data || !project || !project.data} />
             {thread && thread.data && project && project.data ? getMain() : null}
           </div>
-          <div className={ `${classes.sidebar} flex` }>
+          <div className={`${classes.sidebar} flex`}>
             {thread && thread.data && project && project.data ? getSidebar() : null}
           </div>
         </div>

@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [staging, production]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: lint (eslint + prettier)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: npm run lint
+
+  typecheck:
+    name: typecheck
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: npm run typecheck
+
+  unit:
+    name: unit tests (vitest)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: npm test
+
+  build:
+    name: build (${{ matrix.target }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: website-vite
+            command: npm run build
+          - target: website-webpack-fallback
+            command: npm run build:webpack
+          - target: desktop
+            command: npm run desktop:build
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: ${{ matrix.command }}
+
+  docker:
+    name: docker image (website)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - name: Build the website image
+        run: docker build -f stemn-frontend-website/Dockerfile -t stemn-website:ci .
+      - name: Serve it
+        run: |
+          docker run -d --name website -p 8081:8081 stemn-website:ci
+          for i in $(seq 30); do curl -fsS http://localhost:8081/api/ping && break; sleep 1; done
+          curl -fsS http://localhost:8081/explore | grep -q '<div class="layout-column flex" id="app">'
+
+  e2e:
+    name: e2e
+    # The backend is a private repository: its deploy key is not available to pull
+    # requests from forks, so they skip this job.
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    uses: ./.github/workflows/e2e.yml
+    secrets:
+      STEMN_BACKEND_DEPLOY_KEY: ${{ secrets.STEMN_BACKEND_DEPLOY_KEY }}

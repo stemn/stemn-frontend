@@ -14,26 +14,27 @@ class LabelSelectRow extends Component {
     } else {
       dispatch(storePush(model, item._id))
     }
-    if (onChange) { onChange() } // Run the onChange function if required
+    if (onChange) {
+      onChange()
+    } // Run the onChange function if required
   }
   render() {
-    const {
-      item,
-      value,
-    } = this.props
+    const { item, value } = this.props
     const status = value ? value.includes(item._id) : false
 
     return (
       <CheckboxAlt
-        status={ status }
-        value={ item._id }
-        onChange={ this.onChange }
+        status={status}
+        value={item._id}
+        onChange={this.onChange}
         className="layout-row layout-align-start-center"
         tickOnly
       >
-        <div style={ { paddingLeft: '5px' } }>
-          { item.name }
-          <span className="text-grey-3" style={ { marginLeft: '10px' } }>({ item.numThreads })</span>
+        <div style={{ paddingLeft: '5px' }}>
+          {item.name}
+          <span className="text-grey-3" style={{ marginLeft: '10px' }}>
+            ({item.numThreads})
+          </span>
         </div>
       </CheckboxAlt>
     )
@@ -46,13 +47,14 @@ class LabelSelect extends Component {
 
     return (
       <div>
-        { groups.map(item => (
+        {groups.map((item) => (
           <LabelSelectRow
-            item={ item }
-            model={ model }
-            value={ value }
-            onChange={ onChange }
-            dispatch={ dispatch }
+            key={item._id}
+            item={item}
+            model={model}
+            value={value}
+            onChange={onChange}
+            dispatch={dispatch}
           />
         ))}
       </div>

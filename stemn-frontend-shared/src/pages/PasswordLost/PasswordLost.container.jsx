@@ -13,9 +13,7 @@ const dispatchToProps = {
 
 class PasswordLostContainer extends Component {
   render() {
-    return (
-      <PasswordLost { ...this.props } />
-    )
+    return <PasswordLost {...this.props} />
   }
 }
 

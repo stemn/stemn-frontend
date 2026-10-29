@@ -12,22 +12,12 @@ import cn from 'classnames'
 
 export default class RadioAlt extends React.Component {
   render() {
-    const {
-      value,
-      model,
-      className,
-      children,
-    } = this.props
+    const { value, model, className, children } = this.props
     const statusClass = value === true ? 'checked' : ''
     return (
-      <div className={ cn(classes.radio, className) }>
+      <div className={cn(classes.radio, className)}>
         <label>
-          <Input
-            value={ value }
-            type="radio"
-            className={ statusClass }
-            model={ model }
-          />
+          <Input value={value} type="radio" className={statusClass} model={model} />
           <div className="layout-row layout-align-start-center flex">
             <div className="flex">{children}</div>
             <MdDone size="16" />

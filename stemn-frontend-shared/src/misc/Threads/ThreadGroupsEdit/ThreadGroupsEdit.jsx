@@ -14,13 +14,15 @@ import pluralise from 'stemn-shared/utils/strings/pluralise'
 
 class ThreadGroupsEdit extends Component {
   confirmDelete = (model, index) => {
-    this.props.dispatch(
-      showConfirm({
-        message: 'If you delete this label it will be removed from all assigned threads.',
-      }),
-    ).then(() => {
-      this.props.dispatch(storeRemove(model, index))
-    })
+    this.props
+      .dispatch(
+        showConfirm({
+          message: 'If you delete this label it will be removed from all assigned threads.',
+        }),
+      )
+      .then(() => {
+        this.props.dispatch(storeRemove(model, index))
+      })
   }
   UNSAFE_componentWillReceiveProps(props) {
     this.onMount(props)
@@ -33,56 +35,55 @@ class ThreadGroupsEdit extends Component {
     const { model, value, dispatch } = props
     // If it is empty, push on a label
     if (value.length === 0) {
-      dispatch(storePush(model, {
-        _id: getUuid(),
-        color: '',
-        name: '',
-        threads: [],
-      }))
+      dispatch(
+        storePush(model, {
+          _id: getUuid(),
+          color: '',
+          name: '',
+          threads: [],
+        }),
+      )
     }
     // Else, if the name of the last label exists, add another
     else if (value[value.length - 1].name.length >= 1) {
-      dispatch(storePush(model, {
-        _id: getUuid(),
-        color: '',
-        name: '',
-        threads: [],
-      }))
+      dispatch(
+        storePush(model, {
+          _id: getUuid(),
+          color: '',
+          name: '',
+          threads: [],
+        }),
+      )
     }
   }
 
   render() {
-    const {
-      model,
-      value,
-    } = this.props
+    const { model, value } = this.props
 
     return (
       <div>
-        { value.map((group, index) =>
-          <div key={ group._id } className={ `${classes.row} layout-row layout-align-start-center` }>
-            <div className={ `${classes.name} flex` }>
+        {value.map((group, index) => (
+          <div key={group._id} className={`${classes.row} layout-row layout-align-start-center`}>
+            <div className={`${classes.name} flex`}>
               <Input
-                model={ `${model}[${index}].name` }
-                value={ group.name }
+                model={`${model}[${index}].name`}
+                value={group.name}
                 className="dr-input"
                 type="text"
                 placeholder="Group Name"
               />
             </div>
-            <div className={ cn('dr-input', classes.threadCount) }>
-              { pluralise(group.threads.length, 'Thread') }
-            </div>
+            <div className={cn('dr-input', classes.threadCount)}>{pluralise(group.threads.length, 'Thread')}</div>
             <Popover preferPlace="right">
               <SimpleIconButton>
                 <MdMoreHoriz size="20px" />
               </SimpleIconButton>
               <div className="PopoverMenu">
-                <a onClick={ () => this.confirmDelete(model, index) }>Remove Group</a>
+                <a onClick={() => this.confirmDelete(model, index)}>Remove Group</a>
               </div>
             </Popover>
-          </div>,
-        )}
+          </div>
+        ))}
       </div>
     )
   }

@@ -28,22 +28,27 @@ export default class ThreadFilterUser extends Component {
   render() {
     const { project, filter, className, style } = this.props
     const userFilterOptions = [
-      ...get(project, 'data.team', []).map(user => ({
+      ...get(project, 'data.team', []).map((user) => ({
         name: user.name,
         value: user._id,
-        onClick: () => { this.setFilter({ user: user._id }) },
-      })), {
+        onClick: () => {
+          this.setFilter({ user: user._id })
+        },
+      })),
+      {
         name: 'Any',
         value: undefined,
-        onClick: () => { this.setFilter({ user: undefined }) },
+        onClick: () => {
+          this.setFilter({ user: undefined })
+        },
       },
     ]
     return (
       <PopoverDropdown
-        className={ cn('light', className) }
-        style={ style }
-        value={ get(filter, ['object', 'user']) }
-        options={ userFilterOptions }
+        className={cn('light', className)}
+        style={style}
+        value={get(filter, ['object', 'user'])}
+        options={userFilterOptions}
       >
         Asignee:&nbsp;
       </PopoverDropdown>

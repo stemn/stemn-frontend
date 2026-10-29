@@ -1,9 +1,6 @@
 import cn from 'classnames'
 import * as React from 'react'
-import { MdCode } from 'react-icons/md'
-import { MdMoreHoriz } from 'react-icons/md'
-import { MdOpenInNew } from 'react-icons/md'
-import { MdVisibility } from 'react-icons/md'
+import { MdCode, MdMoreHoriz, MdOpenInNew, MdVisibility } from 'react-icons/md'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import { IFileCompareMenu } from 'stemn-shared/misc/FileCompare/FileCompareMenu/types'
 import downloadModalName from 'stemn-shared/misc/Files/Download/DownloadModal'
@@ -14,52 +11,58 @@ import { getCompareIcon, getCompareModes } from '../FileCompare.utils.js'
 import { dispatchToProps } from './FileCompareMenu.container.web'
 
 export interface IFileCompareMenuComponentProps extends IFileCompareMenu {
-  togglePreviewMarkdown: typeof dispatchToProps['togglePreviewMarkdown'],
-  showModal: typeof dispatchToProps['showModal'],
-  previewMarkdown: boolean,
+  togglePreviewMarkdown: (typeof dispatchToProps)['togglePreviewMarkdown']
+  showModal: (typeof dispatchToProps)['showModal']
+  previewMarkdown: boolean
 }
 
 export class FileCompareMenuComponent extends React.Component<IFileCompareMenuComponentProps> {
-  public renderMenu () {
+  public renderMenu() {
     const { file1, revisions, showModal } = this.props
     const downloadFile = {
       label: 'Download File',
-      onClick: () => showModal({
-        modalType: downloadModalName,
-        modalProps: {
-          revisions,
-          file: file1,
-        },
-        scope: 'local',
-      }),
+      onClick: () =>
+        showModal({
+          modalType: downloadModalName,
+          modalProps: {
+            revisions,
+            file: file1,
+          },
+          scope: 'local',
+        }),
     }
     return [downloadFile]
   }
-  public render () {
-    const { enablePreview, mode, changeMode, revisions, file1, file2, previewMarkdown, togglePreviewMarkdown } = this.props
+  public render() {
+    const { enablePreview, mode, changeMode, revisions, file1, file2, previewMarkdown, togglePreviewMarkdown } =
+      this.props
 
-    if (!file1) { return null }
+    if (!file1) {
+      return null
+    }
 
     const previewType = getViewerType(file1.name, file1.provider)
     const compareModes = getCompareModes(previewType, previewType)
+    // eslint-disable-next-line @eslint-react/static-components -- getCompareIcon looks up a module-level icon component by mode; nothing is created during render
     const CompareIcon = getCompareIcon(mode)
-    const hasRevisions = revisions && revisions.length > 1 || file1 && file2
+    const hasRevisions = (revisions && revisions.length > 1) || (file1 && file2)
     const isMarkdown = file1.extension === 'md'
 
     return (
-      <div className='layout-row layout-align-start-center'>
-        { isMarkdown && (
+      <div className="layout-row layout-align-start-center">
+        {isMarkdown && (
           <SimpleIconButton onClick={togglePreviewMarkdown} title={previewMarkdown ? 'Preview Mode' : 'Code Mode'}>
             {!previewMarkdown ? <MdCode size={26} /> : <MdVisibility size={24} />}
           </SimpleIconButton>
         )}
-        { hasRevisions &&
-          <Popover preferPlace='below' offset={9}>
-            <SimpleIconButton title='Compare'>
+        {hasRevisions && (
+          <Popover preferPlace="below" offset={9}>
+            <SimpleIconButton title="Compare">
+              {/* eslint-disable-next-line @eslint-react/static-components -- CompareIcon is a module-level icon component looked up by mode, not created here */}
               <CompareIcon size={20} />
             </SimpleIconButton>
-            <div className='PopoverMenu'>
-              { compareModes.map((item) => (
+            <div className="PopoverMenu">
+              {compareModes.map((item) => (
                 <a
                   key={item.value}
                   className={cn({ active: mode === item.value })}
@@ -69,22 +72,24 @@ export class FileCompareMenuComponent extends React.Component<IFileCompareMenuCo
                 </a>
               ))}
             </div>
-          </Popover> }
-        { enablePreview &&
+          </Popover>
+        )}
+        {enablePreview && (
           <SimpleIconButton
-            title='Open File'
-            name='fileRoute'
-            params={ {
+            title="Open File"
+            name="fileRoute"
+            params={{
               projectId: file1.project._id,
               fileId: file1.fileId,
               revisionId: file1.revisionId,
-            } }
+            }}
           >
             <MdOpenInNew size={23} />
-          </SimpleIconButton> }
-        <Popover preferPlace='below' offset={9}>
-          <SimpleIconButton title='Options' style={{ marginRight: '15px' }}>
-            <MdMoreHoriz size='20px' />
+          </SimpleIconButton>
+        )}
+        <Popover preferPlace="below" offset={9}>
+          <SimpleIconButton title="Options" style={{ marginRight: '15px' }}>
+            <MdMoreHoriz size="20px" />
           </SimpleIconButton>
           <PopoverMenuList menu={this.renderMenu()} />
         </Popover>

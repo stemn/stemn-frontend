@@ -20,7 +20,5 @@ export default function EmptyWrapped(props) {
     hover: (item, monitor) => emptyHover(propsRef.current, monitor),
   })
 
-  return (
-    <div ref={ connectDropTarget } className={ layout === 'board' ? classes.wrapperBoard : classes.wrapperList } />
-  )
+  return <div ref={connectDropTarget} className={layout === 'board' ? classes.wrapperBoard : classes.wrapperList} />
 }

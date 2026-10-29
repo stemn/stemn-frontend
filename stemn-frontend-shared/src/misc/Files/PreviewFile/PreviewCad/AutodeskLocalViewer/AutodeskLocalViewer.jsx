@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import classes from './AutodeskLocalViewer.module.css'
 import autodeskViewerUtils from '../PreviewCadViewer.utils.js'
-import { push } from 'icepick';
 
 class AutodeskLocalViewer extends Component {
   onMount(nextProps, prevProps) {
@@ -19,13 +18,13 @@ class AutodeskLocalViewer extends Component {
         env: 'Local',
         document: filePathWithProtocol,
       }
-      
+
       if (nextProps.auth.authToken) {
         // Headers for the svf requests (only required for the website)
         // This feature is a modification of the Autodesk source code
         // It will break whenever the source is updated.
         // There is a readme in the autodesk viewer folder explaining the changes
-        
+
         // NOTE: there is some risk that the bearer token will be sent to Autodesk?
         Autodesk.Viewing.endpoint.HTTP_REQUEST_HEADERS = {
           Authorization: `bearer ${nextProps.auth.authToken}`,
@@ -37,13 +36,26 @@ class AutodeskLocalViewer extends Component {
       })
     }
   }
-  componentDidMount() { this.onMount(this.props) }
-  UNSAFE_componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+  componentDidMount() {
+    this.onMount(this.props)
+  }
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    this.onMount(nextProps, this.props)
+  }
   componentWillUnmount() {
     this.viewer.deregister()
   }
   render() {
-    return <div className={ `${classes.preview} flex rel-box` } ref={ (el) => { this.cadCanvasRef = el } }><div className={ classes.scrollOverlay } /></div>
+    return (
+      <div
+        className={`${classes.preview} flex rel-box`}
+        ref={(el) => {
+          this.cadCanvasRef = el
+        }}
+      >
+        <div className={classes.scrollOverlay} />
+      </div>
+    )
   }
 }
 

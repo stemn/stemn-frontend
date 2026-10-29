@@ -18,7 +18,7 @@
   text-align: center;
 }
 
-.button[disabled]{
+.button[disabled] {
   opacity: 0.4;
   cursor: not-allowed;
   pointer-events: none;
@@ -44,83 +44,83 @@
   min-width: 0px;
 }
 
-.button:focus{
+.button:focus {
   outline: none;
 }
 
-.button:hover{
+.button:hover {
   background: rgba(0, 0, 0, 0.1);
 }
 
-.button:global(.white){
+.button:global(.white) {
   background: white;
 }
-.button:global(.white):hover{
+.button:global(.white):hover {
   background: rgba(0, 0, 0, 0.1);
 }
-.button:global(.light){
+.button:global(.light) {
   background: bg1;
   border: 1px solid rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.6);
 }
-.button:global(.light):hover{
+.button:global(.light):hover {
   background: rgba(0, 0, 0, 0.05);
 }
 
-.button:global(.primary){
+.button:global(.primary) {
   background: primary-bg;
   border: 1px solid themePrimary;
   color: white;
 }
-.button:global(.primary):hover{
+.button:global(.primary):hover {
   background: primary-bg-hover;
 }
-.button:global(.primary) circle{
+.button:global(.primary) circle {
   stroke: white;
 }
-.button:global(.primary) :global(.overlay){
+.button:global(.primary) :global(.overlay) {
   background: primary-bg;
 }
 
-.button:global(.input){
+.button:global(.input) {
   background: white;
   border: 1px solid rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.7);
 }
-.button:global(.input):hover{
+.button:global(.input):hover {
   background: white;
   border: 1px solid rgba(0, 0, 0, 0.4);
 }
 
-.button:global(.warn){
+.button:global(.warn) {
   background: themeWarn;
   border: 1px solid themeWarn;
   color: white;
 }
-.button:global(.warn):hover{
+.button:global(.warn):hover {
   background: warn-2;
 }
 
-.button:global(.secondary){
+.button:global(.secondary) {
   background: rgb(28, 30, 34);
   color: white;
 }
-.button:global(.secondary):hover{
+.button:global(.secondary):hover {
   background: black;
 }
 
-.button:global(.linkedin){
+.button:global(.linkedin) {
   background: themeLinkedin;
   color: white;
 }
-.button:global(.linkedin):hover{
+.button:global(.linkedin):hover {
   background: linkedin-dark;
 }
 
-.button:global(.facebook){
+.button:global(.facebook) {
   background: themeFacebook;
   color: white;
 }
-.button:global(.facebook):hover{
+.button:global(.facebook):hover {
   background: facebook-dark;
 }

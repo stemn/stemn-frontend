@@ -11,12 +11,8 @@ import ThreadsDisplay from 'stemn-shared/misc/Threads/ThreadsDisplay'
 
 export class Component extends React.Component {
   render() {
-    const {
-      project,
-    } = this.props
-    return (
-      <ThreadsDisplay projectId={ project.data._id } />
-    )
+    const { project } = this.props
+    return <ThreadsDisplay projectId={project.data._id} />
   }
 }
 
@@ -29,7 +25,6 @@ function mapStateToProps({ threads, projects }, { params }) {
     entityModel: `projects.data.${params.stub}`,
   }
 }
-
 
 function mapDispatchToProps(dispatch) {
   return {}

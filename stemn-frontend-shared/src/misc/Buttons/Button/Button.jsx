@@ -10,20 +10,20 @@ export default class Button extends React.Component {
 
     if (name) {
       return (
-        <Link ref={ childRef } className={ cn(classes.button, className) } name={ name } { ...otherProps }>
-          { children }
+        <Link ref={childRef} className={cn(classes.button, className)} name={name} {...otherProps}>
+          {children}
         </Link>
       )
     } else if (href) {
       return (
-        <a ref={ childRef } className={ cn(classes.button, className) } href={ href } { ...otherProps }>
-          { children }
+        <a ref={childRef} className={cn(classes.button, className)} href={href} {...otherProps}>
+          {children}
         </a>
       )
-    } 
+    }
     return (
-      <button ref={ childRef } className={ cn(classes.button, className) } { ...otherProps }>
-        { children }
+      <button ref={childRef} className={cn(classes.button, className)} {...otherProps}>
+        {children}
       </button>
     )
   }

@@ -13,10 +13,10 @@ export default class SubHeader extends Component {
   render() {
     const { title, children, className, ...otherProps } = this.props
     return (
-      <div className={ cn(classes.header, className) } { ...otherProps }>
+      <div className={cn(classes.header, className)} {...otherProps}>
         <Container>
-          <div className={ classes.headerBorder } />
-          { children }
+          <div className={classes.headerBorder} />
+          {children}
         </Container>
       </div>
     )

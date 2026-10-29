@@ -21,7 +21,7 @@
   align-items: center;
 }
 
-.popupIcon{
+.popupIcon {
   font-size: 16px;
   padding: 10px;
   display: inline-block;
@@ -29,6 +29,6 @@
   cursor: pointer;
 }
 
-.popupIcon:hover{
+.popupIcon:hover {
   transform: scale(1.2);
 }

@@ -9,18 +9,18 @@
   transition: 0.2s ease all;
 }
 
-.button:global(.primary){
+.button:global(.primary) {
   background: themePrimary;
   color: white;
 }
-.button:global(.primary):hover{
+.button:global(.primary):hover {
   background: primary-2;
 }
 
-.button:global(.warn){
+.button:global(.warn) {
   background: themeWarn;
   color: white;
 }
-.button:global(.warn):hover{
+.button:global(.warn):hover {
   background: warn-2;
 }

@@ -6,21 +6,21 @@
 export type Query = Record<string, any>
 
 export interface LegacyLocationDescriptor {
-  pathname?: string,
-  query?: Query,
-  search?: string,
-  hash?: string,
-  state?: any,
+  pathname?: string
+  query?: Query
+  search?: string
+  hash?: string
+  state?: any
 }
 
 export interface LegacyLocation {
-  pathname: string,
-  search: string,
-  hash: string,
-  state: any,
-  key?: string,
-  action?: string,
-  query: Query,
+  pathname: string
+  search: string
+  hash: string
+  state: any
+  key?: string
+  action?: string
+  query: Query
 }
 
 /** Parse `?a=1&b=2&b=3` into `{ a: '1', b: ['2', '3'] }` (same shape as react-router v3) */

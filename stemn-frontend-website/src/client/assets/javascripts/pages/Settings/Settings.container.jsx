@@ -15,24 +15,24 @@ const dispatchToProps = {
   getUser,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'currentUser._id',
-  onChange: (props) => {
-    props.getUser({
-      userId: props.currentUser._id,
-      force: true,
-    })
+const fetchConfigs = [
+  {
+    hasChanged: 'currentUser._id',
+    onChange: (props) => {
+      props.getUser({
+        userId: props.currentUser._id,
+        force: true,
+      })
+    },
   },
-}]
+]
 
 class LoginContainer extends Component {
   render() {
     const { user } = this.props
     if (user && user.data) {
-      return (
-        <Settings { ...this.props } />
-      )
-    } 
+      return <Settings {...this.props} />
+    }
     return null
   }
 }

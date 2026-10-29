@@ -4,9 +4,9 @@ import { editToggle } from '../FileCompare.actions'
 import { FileEditButtonComponent } from './FileEditButton'
 
 export interface IFileEditButtonContainerProps {
-  file1: IFile,
-  cacheKey: string,
-  editActive: boolean,
+  file1: IFile
+  cacheKey: string
+  editActive: boolean
 }
 
 const stateToProps = ({ files: { previewMarkdown } }) => ({

@@ -1,4 +1,4 @@
-.loading{
+.loading {
   -webkit-animation: pulse 1s linear;
   animation: pulse 1s linear;
   -webkit-animation-iteration-count: infinite;
@@ -8,25 +8,25 @@
 }
 
 @keyframes pulse {
-	0% {
-		opacity: 0.5
-	}
-	50% {
-		opacity: 1
-	}
-	100% {
-		opacity: 0.5
-	}
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
 }
 
 @-webkit-keyframes pulse {
-	0% {
-		opacity: 0.5
-	}
-	50% {
-		opacity: 1
-	}
-	100% {
-		opacity: 0.5
-	}
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
 }

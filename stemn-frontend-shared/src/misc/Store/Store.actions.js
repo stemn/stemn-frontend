@@ -22,7 +22,7 @@ export const storePush = (model, item) => ({
   },
 })
 
-export const storeToggle = model => ({
+export const storeToggle = (model) => ({
   type: 'STORE/TOGGLE',
   payload: {
     model,

@@ -30,11 +30,13 @@ export default function (store) {
   })
   autoUpdater.on('update-downloaded', (info) => {
     log.info('Update downloaded:', info.version)
-    store.dispatch(updateDownloaded({
-      version: info.version,
-      platform: process.platform,
-      readme: typeof info.releaseNotes === 'string' ? info.releaseNotes : '',
-    }))
+    store.dispatch(
+      updateDownloaded({
+        version: info.version,
+        platform: process.platform,
+        readme: typeof info.releaseNotes === 'string' ? info.releaseNotes : '',
+      }),
+    )
   })
   autoUpdater.on('error', (error) => {
     log.info('Update Error:', error && error.message)

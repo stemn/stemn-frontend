@@ -11,25 +11,25 @@ export default class UserSearch extends Component {
     select: PropTypes.func.isRequired,
     cacheKey: PropTypes.string.isRequired,
   }
-    
+
   renderResult = (suggestion, { query }) => (
     <div className="layout-row layout-align-start-center">
-      <UserAvatar picture={ suggestion.picture } size={ 40 } name={ suggestion.name } />
-      <div style={ { marginLeft: '10px' } } className="flex">
-        <Highlight text={ suggestion.name } query={ query } hightlightClass={ classes.highlight } />
+      <UserAvatar picture={suggestion.picture} size={40} name={suggestion.name} />
+      <div style={{ marginLeft: '10px' }} className="flex">
+        <Highlight text={suggestion.name} query={query} hightlightClass={classes.highlight} />
       </div>
     </div>
   )
 
   render() {
     const { select, cacheKey } = this.props
-    
+
     return (
       <Autosuggest
-        cacheKey={ `user-search-${cacheKey}` }
+        cacheKey={`user-search-${cacheKey}`}
         placeholder="Search for team member"
-        clickResult={ select }
-        renderResult={ this.renderResult }
+        clickResult={select}
+        renderResult={this.renderResult}
         entityType="user"
       />
     )

@@ -4,7 +4,7 @@ export function upload({ cacheKey, files }) {
   return (dispatch) => {
     // Create the data object
     const data = new FormData()
-    files.forEach(file => data.append('file', file))
+    files.forEach((file) => data.append('file', file))
 
     // Submit it
     return dispatch({

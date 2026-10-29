@@ -12,11 +12,7 @@
       "reducer": ["./src/client/assets/javascripts/app/reducer.ts"]
     }
   },
-  "include": [
-    "../typings.d.ts",
-    "./src/client",
-    "../stemn-frontend-shared/src"
-  ],
+  "include": ["../typings.d.ts", "./src/client", "../stemn-frontend-shared/src"],
   "exclude": [
     "../stemn-frontend-shared/src/desktop",
     "../stemn-frontend-shared/src/**/*.desktop.*",

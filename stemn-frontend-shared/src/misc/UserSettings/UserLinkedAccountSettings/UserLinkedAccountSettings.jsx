@@ -14,18 +14,21 @@ export default class UserLinkedAccountSettings extends Component {
     return (
       <div>
         <h3>Login</h3>
-        <p>By linking social accounts you'll be able to login to STEMN using Facebook and LinkedIn. We never post to your social networks.</p>
+        <p>
+          By linking social accounts you'll be able to login to STEMN using Facebook and LinkedIn. We never post to your
+          social networks.
+        </p>
         <LinkAccount
           text="Facebook"
-          isLinked={ user.accounts.facebook && user.accounts.facebook.id }
-          linkFn={ () => authenticate('facebook') }
-          unLinkFn={ () => unlink('facebook') }
+          isLinked={user.accounts.facebook && user.accounts.facebook.id}
+          linkFn={() => authenticate('facebook')}
+          unLinkFn={() => unlink('facebook')}
         />
         <LinkAccount
           text="Linkedin"
-          isLinked={ user.accounts.linkedin && user.accounts.linkedin.id }
-          linkFn={ () => authenticate('linkedin') }
-          unLinkFn={ () => unlink('linkedin') }
+          isLinked={user.accounts.linkedin && user.accounts.linkedin.id}
+          linkFn={() => authenticate('linkedin')}
+          unLinkFn={() => unlink('linkedin')}
         />
       </div>
     )

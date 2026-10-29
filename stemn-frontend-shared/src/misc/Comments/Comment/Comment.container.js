@@ -26,14 +26,16 @@ const dispatchToProps = {
   updateComment,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'commentId',
-  onChange: (props) => {
-    props.getComment({
-      commentId: props.commentId,
-    })
+const fetchConfigs = [
+  {
+    hasChanged: 'commentId',
+    onChange: (props) => {
+      props.getComment({
+        commentId: props.commentId,
+      })
+    },
   },
-}]
+]
 
 const withFetchData = fetchDataHoc(fetchConfigs)(Comment)
 const withRedux = connect(stateToProps, dispatchToProps)(withFetchData)

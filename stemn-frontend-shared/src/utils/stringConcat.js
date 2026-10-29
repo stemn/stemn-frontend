@@ -4,12 +4,11 @@ export const end = (string, chars) => (string.length >= chars ? `${string.substr
 export const middle = (string, chars, ratio) => {
   ratio = ratio || 0.5
 
-
   if (string && string.length > chars) {
     // Get all the spaces in the string
-    const indices   = getWordBreaks(string)
+    const indices = getWordBreaks(string)
     const startIndex = closest(chars * ratio, indices)
-    const endIndex   = closest(string.length - chars * (1 - ratio), indices)
+    const endIndex = closest(string.length - chars * (1 - ratio), indices)
 
     return `${string.substr(0, startIndex)} ...${string.substr(endIndex, string.length)}`
   }

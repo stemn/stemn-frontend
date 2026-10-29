@@ -22,9 +22,9 @@ export default class LandingHeader extends Component {
     }
   }
   toggleOpen = () => {
-    this.setState({
-      isOpen: !this.state.isOpen,
-    })
+    this.setState((state) => ({
+      isOpen: !state.isOpen,
+    }))
   }
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll)
@@ -43,20 +43,12 @@ export default class LandingHeader extends Component {
     }
   }
   isLoggedIn() {
-    const {
-      auth,
-    } = this.props
-    const routeParams = { userId: auth.user._id }
+    const { auth } = this.props
 
     return (
-      <Link to="/" className={ cn('layout-row layout-align-start-center', classes.specialLink) }>
+      <Link to="/" className={cn('layout-row layout-align-start-center', classes.specialLink)}>
         <div>Dashboard</div>
-        <Avatar
-          shape="square"
-          size={ 30 }
-          name={ auth.user.name }
-          picture={ auth.user.picture }
-        />
+        <Avatar shape="square" size={30} name={auth.user.name} picture={auth.user.picture} />
       </Link>
     )
   }
@@ -64,20 +56,18 @@ export default class LandingHeader extends Component {
     if (window.location.pathname !== '/login') {
       return (
         <div className="layout-row layout-align-start-center">
-          <Link to={ loginRoute() } className={ cn('layout-row layout-align-start-center', classes.specialLink) }>
+          <Link to={loginRoute()} className={cn('layout-row layout-align-start-center', classes.specialLink)}>
             <div>Sign in</div>
           </Link>
         </div>
       )
     }
-    
+
     return null
   }
   render() {
     const { atTop, isOpen } = this.state
-    const {
-      auth,
-    } = this.props
+    const { auth } = this.props
     const allClasses = cn(
       classes.header,
       'layout-xs-column layout-align-xs-center layout-gt-xs-row layout-gt-xs-align-start-center',
@@ -86,49 +76,49 @@ export default class LandingHeader extends Component {
 
     //      route: 'flowRoute',
     //      label: 'Workflow',
-    const items = [{
-      route: 'exploreRoute',
-      label: 'Explore',
-    }, {
-      route: 'openSourceRoute',
-      label: 'Open source',
-    }, {
-      route: 'pricingRoute',
-      label: 'Pricing',
-    }, {
-      route: 'downloadRoute',
-      label: 'Download',
-    }]
+    const items = [
+      {
+        route: 'exploreRoute',
+        label: 'Explore',
+      },
+      {
+        route: 'openSourceRoute',
+        label: 'Open source',
+      },
+      {
+        route: 'pricingRoute',
+        label: 'Pricing',
+      },
+      {
+        route: 'downloadRoute',
+        label: 'Download',
+      },
+    ]
 
     return (
-      <header className={ allClasses }>
-        <Container className={ cn(classes.inner, 'hide-xs layout-row layout-align-start-center') }>
-          <Link to="/landing" className={ classes.logo }>
-            <img src={ logo } alt="" />
+      <header className={allClasses}>
+        <Container className={cn(classes.inner, 'hide-xs layout-row layout-align-start-center')}>
+          <Link to="/landing" className={classes.logo}>
+            <img src={logo} alt="" />
             <BetaBadge />
           </Link>
-          { items.map(item => (
-            <Link key={ item.label } activeClassName="active" className={ classes.link } name={ item.route }>{ item.label }</Link>
+          {items.map((item) => (
+            <Link key={item.label} activeClassName="active" className={classes.link} name={item.route}>
+              {item.label}
+            </Link>
           ))}
           <div className="flex" />
-          { auth.user._id && auth.authToken
-            ? this.isLoggedIn()
-            : this.isLoggedOut() }
+          {auth.user._id && auth.authToken ? this.isLoggedIn() : this.isLoggedOut()}
         </Container>
-        <HeaderMobileMenu items={ items } isOpen={ isOpen } />
-        <Container className={ cn(classes.inner, 'hide-gt-xs layout-row layout-align-start-center') }>
-          <Link to="/landing" className={ classes.logo }>
-            <img src={ logo } alt="" />
+        <HeaderMobileMenu items={items} isOpen={isOpen} />
+        <Container className={cn(classes.inner, 'hide-gt-xs layout-row layout-align-start-center')}>
+          <Link to="/landing" className={classes.logo}>
+            <img src={logo} alt="" />
           </Link>
           <div className="flex" />
-          { auth.user._id && auth.authToken
-            ? this.isLoggedIn()
-            : this.isLoggedOut() }
-          <SimpleIconButton
-            className={ cn('hide-gt-xs', classes.menuButton) }
-            onClick={ this.toggleOpen }
-          >
-            <MdMenu size={ 25 } />
+          {auth.user._id && auth.authToken ? this.isLoggedIn() : this.isLoggedOut()}
+          <SimpleIconButton className={cn('hide-gt-xs', classes.menuButton)} onClick={this.toggleOpen}>
+            <MdMenu size={25} />
           </SimpleIconButton>
         </Container>
       </header>

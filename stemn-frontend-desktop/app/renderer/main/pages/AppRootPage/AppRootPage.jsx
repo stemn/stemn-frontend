@@ -3,7 +3,7 @@ import ModalContainer from 'stemn-shared/misc/Modal/ModalContainer.jsx'
 import ToastContainer from 'stemn-shared/misc/Toasts/Toasts.jsx'
 // import Smooch from 'stemn-shared/misc/Smooch/Smooch.jsx'
 
-const AppRootPage = props => (
+const AppRootPage = (props) => (
   <div className="layout-column flex">
     <div className="layout-column flex">{props.children}</div>
     <ModalContainer />

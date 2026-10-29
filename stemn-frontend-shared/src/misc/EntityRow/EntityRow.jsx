@@ -38,7 +38,7 @@ const getRouteNameAndParams = (data) => {
         fieldId: data._id,
       },
     }
-  } 
+  }
   return {
     name: 'userRoute',
     params: {
@@ -50,9 +50,9 @@ const getRouteNameAndParams = (data) => {
 export default class EntityRow extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired, // The Entity's data
-    query: PropTypes.string,           // Search query (used to highlight the name)
-    nofollow: PropTypes.bool,          // Should the follow button be hidden
-    children: PropTypes.node,          // Children to be displayed in the far right
+    query: PropTypes.string, // Search query (used to highlight the name)
+    nofollow: PropTypes.bool, // Should the follow button be hidden
+    children: PropTypes.node, // Children to be displayed in the far right
   }
   static defaultProps = {
     data: {},
@@ -63,44 +63,38 @@ export default class EntityRow extends Component {
 
     if (loading || !data._id) {
       return (
-        <LoadingAnimation className={ cn('layout-row layout-align-start-center', classes.row, className) } >
-          <UserAvatar size={ 40 } shape="square" className={ classes.avatar } />
+        <LoadingAnimation className={cn('layout-row layout-align-start-center', classes.row, className)}>
+          <UserAvatar size={40} shape="square" className={classes.avatar} />
           <div className="flex">
-            <LoadingPlaceholder width={ 200 } className={ classes.link } />
-            <LoadingPlaceholder width={ 300 } className={ classes.blurb } />
+            <LoadingPlaceholder width={200} className={classes.link} />
+            <LoadingPlaceholder width={300} className={classes.blurb} />
           </div>
         </LoadingAnimation>
       )
-    } 
+    }
     return (
-      <div className={ cn('layout-row layout-align-start-center', classes.row, className) } >
-        <UserAvatar
-          size={ 40 }
-          shape="square"
-          name={ data.name }
-          picture={ data.picture }
-          className={ classes.avatar }
-        />
+      <div className={cn('layout-row layout-align-start-center', classes.row, className)}>
+        <UserAvatar size={40} shape="square" name={data.name} picture={data.picture} className={classes.avatar} />
         <div className="flex">
-          <Link className={ cn(classes.link, 'link-primary') } name={ route.name } params={ route.params }>
+          <Link className={cn(classes.link, 'link-primary')} name={route.name} params={route.params}>
             <Highlight
               className="text-ellipsis"
-              text={ data.name || 'Untitled' }
-              query={ query }
-              hightlightClass={ classes.highlight }
+              text={data.name || 'Untitled'}
+              query={query}
+              hightlightClass={classes.highlight}
             />
           </Link>
-          <div className={ `${classes.blurb} text-ellipsis` }>{ data.blurb }</div>
+          <div className={`${classes.blurb} text-ellipsis`}>{data.blurb}</div>
         </div>
-        { nofollow
-          ? null
-          : <SocialButton
-            className={ classes.socialButton }
+        {nofollow ? null : (
+          <SocialButton
+            className={classes.socialButton}
             type="follow"
-            entityType={ data.entityType }
-            entityId={ data._id }
-          /> }
-        { children }
+            entityType={data.entityType}
+            entityId={data._id}
+          />
+        )}
+        {children}
       </div>
     )
   }

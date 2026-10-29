@@ -9,13 +9,13 @@
 // DOM children does not match the number of React children, animation is skipped.
 import React from 'react'
 
-const getKeys = children => React.Children.toArray(children)
-  .filter(React.isValidElement)
-  .map((child, idx) => (child.key != null ? child.key : `__idx_${idx}`))
+const getKeys = (children) =>
+  React.Children.toArray(children)
+    .filter(React.isValidElement)
+    .map((child, idx) => (child.key != null ? child.key : `__idx_${idx}`))
 
-const prefersReducedMotion = () => typeof window !== 'undefined' &&
-  window.matchMedia &&
-  window.matchMedia('(prefers-reduced-motion: reduce)').matches
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 export default class FlipMove extends React.Component {
   static defaultProps = {
@@ -34,7 +34,9 @@ export default class FlipMove extends React.Component {
     const container = this.containerRef.current
     if (!container || container.children.length !== keys.length) return null
     const map = {}
-    keys.forEach((key, idx) => { map[key] = container.children[idx] })
+    keys.forEach((key, idx) => {
+      map[key] = container.children[idx]
+    })
     return map
   }
 
@@ -44,7 +46,9 @@ export default class FlipMove extends React.Component {
     const nodes = this.getNodeMap(prevKeys)
     if (!nodes) return null
     const rects = {}
-    prevKeys.forEach((key) => { rects[key] = nodes[key].getBoundingClientRect() })
+    prevKeys.forEach((key) => {
+      rects[key] = nodes[key].getBoundingClientRect()
+    })
     return { rects }
   }
 

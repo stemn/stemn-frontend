@@ -1,9 +1,9 @@
 @value border1, primary-bg from "theme";
 
-.body{
-  width: 250px
+.body {
+  width: 250px;
 }
-.body :global(.header){
+.body :global(.header) {
   background: primary-bg;
   color: white;
   padding: 12px 15px;
@@ -12,17 +12,18 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
-.body :global(.body){
+.body :global(.body) {
   padding: 15px;
   line-height: 1.5em;
   color: rgba(0, 0, 0, 0.6);
 }
-.body :global(p){
+.body :global(p) {
   margin: 0 0 5px;
-}.body :global(p:last-child){
+}
+.body :global(p:last-child) {
   margin: 0;
 }
-.body :global(.footer){
+.body :global(.footer) {
   border-top: 1px solid border1;
   padding: 12px 15px;
 }

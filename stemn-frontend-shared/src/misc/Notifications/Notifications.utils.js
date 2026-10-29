@@ -21,6 +21,6 @@ const notificationText = {
 export const getNotificationText = (notificationType) => {
   if (notificationText[notificationType]) {
     return notificationText[notificationType]
-  } 
+  }
   console.error(`Notification of type ${notificationType} could not be found`)
 }

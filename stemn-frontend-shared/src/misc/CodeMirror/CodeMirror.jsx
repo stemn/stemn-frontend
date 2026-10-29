@@ -46,7 +46,11 @@ export default class CodeMirror extends React.Component {
     if (!this.codeMirror) return
     const { value, options, preserveScrollPosition } = this.props
 
-    if (value !== undefined && value !== prevProps.value && this.normalizeLineEndings(this.codeMirror.getValue()) !== this.normalizeLineEndings(value)) {
+    if (
+      value !== undefined &&
+      value !== prevProps.value &&
+      this.normalizeLineEndings(this.codeMirror.getValue()) !== this.normalizeLineEndings(value)
+    ) {
       if (preserveScrollPosition) {
         const prevScrollPosition = this.codeMirror.getScrollInfo()
         this.codeMirror.setValue(value)
@@ -114,13 +118,13 @@ export default class CodeMirror extends React.Component {
       this.props.className,
     )
     return (
-      <div className={ editorClassName }>
+      <div className={editorClassName}>
         <textarea
-          ref={ this.textareaRef }
-          name={ this.props.name || this.props.path }
-          defaultValue={ this.props.value }
+          ref={this.textareaRef}
+          name={this.props.name || this.props.path}
+          defaultValue={this.props.value}
           autoComplete="off"
-          autoFocus={ this.props.autoFocus }
+          autoFocus={this.props.autoFocus}
         />
       </div>
     )

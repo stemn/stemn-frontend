@@ -44,12 +44,12 @@ import { analyticsReducer } from '../modules/Analytics/Analytics.reducer'
 import { contentfulReducer, IContentfulState } from '../modules/Contentful/Contentful.reducer'
 
 export interface IStoreState {
-  contentful: IContentfulState,
-  form: FormState,
-  files: IFilesState,
-  fileList: IFileListState,
-  fileCompare: IFileCompareState,
-  syncTimeline: ISyncTimelineState,
+  contentful: IContentfulState
+  form: FormState
+  files: IFilesState
+  fileList: IFileListState
+  fileCompare: IFileCompareState
+  syncTimeline: ISyncTimelineState
 }
 
 export type IGetState = () => IStoreState

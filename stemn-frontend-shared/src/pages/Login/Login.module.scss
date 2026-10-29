@@ -30,27 +30,28 @@
   justify-content: center;
 }
 
-.textDivider{
+.textDivider {
   position: relative;
   padding: 30px 0;
 }
 
-.textDivider:after, .textDivider:before{
+.textDivider:after,
+.textDivider:before {
   content: ' ';
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   width: 45%;
   position: absolute;
 }
 
-.textDivider:before{
+.textDivider:before {
   left: 0;
 }
 
-.textDivider:after{
+.textDivider:after {
   right: 0;
 }
 
-.textDivider div{
+.textDivider div {
   position: absolute;
   left: 50%;
   transform: translate(-50%, -50%);

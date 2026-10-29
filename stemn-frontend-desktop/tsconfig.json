@@ -7,21 +7,13 @@
     // `.desktop.*` files win over the generic ones, like the bundler's resolve.extensions
     "moduleSuffixes": [".desktop", ""],
     "paths": {
-      "stemn-shared/*": [
-        "../stemn-frontend-shared/src/*"
-      ],
+      "stemn-shared/*": ["../stemn-frontend-shared/src/*"],
       "route-actions": ["./app/renderer/main/routeActions.js"],
       "reducer": ["./app/shared/reducers/rootReducer.base.ts"],
       "package-json": ["./package.json"]
     }
   },
-  "include": [
-    "./typings.d.ts",
-    "./app",
-    "./tests",
-    "./electron.vite.config.ts",
-    "../stemn-frontend-shared/src"
-  ],
+  "include": ["./typings.d.ts", "./app", "./tests", "./electron.vite.config.ts", "../stemn-frontend-shared/src"],
   "exclude": [
     "../stemn-frontend-shared/src/**/*.web.*",
     "../stemn-frontend-shared/src/**/*.webpack.*",

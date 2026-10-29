@@ -90,24 +90,16 @@ export default class EditorNew extends Component {
     }
 
     return (
-      <div { ...otherProps }>
-        <EditorToolbar
-          codemirror={ codemirror }
-          hide={ hideToolbar }
-        />
+      <div {...otherProps}>
+        <EditorToolbar codemirror={codemirror} hide={hideToolbar} />
         <CodeMirror
-          ref={ this.getCodeMirror }
-          className={ classes.editor }
-          value={ value }
-          onChange={ this.onChange }
-          options={ options }
+          ref={this.getCodeMirror}
+          className={classes.editor}
+          value={value}
+          onChange={this.onChange}
+          options={options}
         />
-        { codemirror
-          ? <EditorMentions
-            codemirror={ codemirror }
-            value={ value }
-          />
-          : null }
+        {codemirror ? <EditorMentions codemirror={codemirror} value={value} /> : null}
       </div>
     )
   }

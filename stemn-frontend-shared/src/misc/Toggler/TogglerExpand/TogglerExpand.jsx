@@ -10,7 +10,10 @@ export default class TogglerExpand extends React.Component {
   render() {
     const { children, onClick, isActive } = this.props
     return (
-      <div className={ cn(classes.button, 'layout-row', 'layout-align-start-center', { [classes.buttonActive]: isActive }) } onClick={ onClick }>
+      <div
+        className={cn(classes.button, 'layout-row', 'layout-align-start-center', { [classes.buttonActive]: isActive })}
+        onClick={onClick}
+      >
         {children}
         <MdChevronRight size="18" />
       </div>

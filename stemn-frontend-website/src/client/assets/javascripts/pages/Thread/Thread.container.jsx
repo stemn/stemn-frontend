@@ -17,34 +17,37 @@ const stateToProps = ({ threads }, { params }) => {
 
 const dispatchToProps = {
   getThread,
-  replace, 
+  replace,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'threadId',
-  onChange: (props) => {
-    props.getThread({
-      threadId: props.threadId,
-    })
-  },
-}, {
-  hasChanged: 'thread',
-  onChange: (props) => {
-    // This will redirect to the thread project page after we have the project id
-    if (props.thread && props.thread.data) {
-      props.replace(projectThreadRoute({
+const fetchConfigs = [
+  {
+    hasChanged: 'threadId',
+    onChange: (props) => {
+      props.getThread({
         threadId: props.threadId,
-        projectId: props.thread.data.project._id,
-      }))
-    }
+      })
+    },
   },
-}]
+  {
+    hasChanged: 'thread',
+    onChange: (props) => {
+      // This will redirect to the thread project page after we have the project id
+      if (props.thread && props.thread.data) {
+        props.replace(
+          projectThreadRoute({
+            threadId: props.threadId,
+            projectId: props.thread.data.project._id,
+          }),
+        )
+      }
+    },
+  },
+]
 
 class ThreadContainer extends Component {
   render() {
-    return (
-      <LoadingOverlay show />
-    )
+    return <LoadingOverlay show />
   }
 }
 

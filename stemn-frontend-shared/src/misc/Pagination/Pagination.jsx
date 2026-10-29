@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classes from './Pagination.module.css'
-import { MdChevronRight } from 'react-icons/md'
-import { MdChevronLeft } from 'react-icons/md'
+import { MdChevronRight, MdChevronLeft } from 'react-icons/md'
 import { Link } from 'stemn-shared/routing'
-
 
 export default class Pagination extends Component {
   static propTypes = {
@@ -33,19 +31,17 @@ export default class Pagination extends Component {
 
     return (
       <div className="layout-row layout-align-end-center">
-        { page > 1
-          ? <Link to={ routePrev } className={ `${classes.button} layout-column layout-align-center-center` }>
-            <MdChevronLeft size={ 20 } />
+        {page > 1 ? (
+          <Link to={routePrev} className={`${classes.button} layout-column layout-align-center-center`}>
+            <MdChevronLeft size={20} />
           </Link>
-          : null }
-        <div className={ `${classes.indicator} layout-column layout-align-center-center` }>
-          Page: { page }
-        </div>
-        { !noMoreResults
-          ? <Link to={ nextRoute } className={ `${classes.button} layout-column layout-align-center-center` }>
-            <MdChevronRight size={ 20 } />
+        ) : null}
+        <div className={`${classes.indicator} layout-column layout-align-center-center`}>Page: {page}</div>
+        {!noMoreResults ? (
+          <Link to={nextRoute} className={`${classes.button} layout-column layout-align-center-center`}>
+            <MdChevronRight size={20} />
           </Link>
-          : null }
+        ) : null}
       </div>
     )
   }

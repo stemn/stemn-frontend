@@ -11,7 +11,8 @@ export default function (state = initialState, action) {
       return i.assocIn(state, [action.meta.fieldId, 'loading'], true)
     }
     case 'RELATED_FIELDS/GET_RELATED_FIELDS_FULFILLED': {
-      return i.chain(state)
+      return i
+        .chain(state)
         .assocIn([action.meta.fieldId, 'loading'], false)
         .assocIn([action.meta.fieldId, 'data'], action.payload.data)
         .value()

@@ -27,7 +27,7 @@ export const selectTimelineItem = ({ projectId, selected }) => {
 }
 
 export const fetchTimeline = ({ entityType, entityId, provider, types, cacheKey, page, size, criteria }) => {
-//  `/api/v1/remote/timeline/${provider}`
+  //  `/api/v1/remote/timeline/${provider}`
   return {
     type: 'TIMELINE/FETCH_TIMELINE',
     payload: http({

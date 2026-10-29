@@ -5,9 +5,8 @@ import classes from './MyProjectsPanel.module.scss'
 import cn from 'classnames'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import Link from 'stemn-shared/misc/Router/Link'
-import { orderBy } from 'lodash'
+import { orderBy, get } from 'lodash'
 import bookVector from 'stemn-shared/assets/images/pure-vectors/book.svg'
-import { get } from 'lodash'
 import ProviderIcon from 'stemn-shared/misc/Icons/ProviderIcon'
 
 export default class MyProjectsPanel extends Component {
@@ -23,9 +22,9 @@ export default class MyProjectsPanel extends Component {
     })
   }
   more = () => {
-    this.setState({
-      page: this.state.page + 1,
-    })
+    this.setState((state) => ({
+      page: state.page + 1,
+    }))
   }
   render() {
     const { projects, newProject } = this.props
@@ -38,39 +37,39 @@ export default class MyProjectsPanel extends Component {
     const hasNoResults = limitedProjects.length === 0
 
     return (
-      <InfoPanel className={ cn(classes.panel, 'layout-column') }>
-        { !hasNoResults &&
+      <InfoPanel className={cn(classes.panel, 'layout-column')}>
+        {!hasNoResults && (
           <h3 className="layout-row">
             <div className="flex">My Projects</div>
-            <a
-              className="link-primary"
-              disabled={ notEnoughResult }
-              onClick={ this.more }
-            >
+            <a className="link-primary" disabled={notEnoughResult} onClick={this.more}>
               More
             </a>
           </h3>
-        }
-        { !hasNoResults && limitedProjects.map(project => (
-          <Link
-            key={ project._id }
-            name="projectRoute"
-            params={ { projectId: project._id } }
-            className={ `${classes.row} layout-row layout-align-start-center` }
-          >
-            <PublicPrivateIcon className={ classes.publicIcon } private={ project.private } size={ 20 } />
-            <div className="text-ellipsis flex">
-              { project.name || 'Untitled Project' }
-            </div>
-            <ProviderIcon provider={ project.remote.provider } className={ classes.providerIcon } />
-          </Link>
-        ))}
-        { hasNoResults && !isLoading &&
+        )}
+        {!hasNoResults &&
+          limitedProjects.map((project) => (
+            <Link
+              key={project._id}
+              name="projectRoute"
+              params={{ projectId: project._id }}
+              className={`${classes.row} layout-row layout-align-start-center`}
+            >
+              <PublicPrivateIcon className={classes.publicIcon} private={project.private} size={20} />
+              <div className="text-ellipsis flex">{project.name || 'Untitled Project'}</div>
+              <ProviderIcon provider={project.remote.provider} className={classes.providerIcon} />
+            </Link>
+          ))}
+        {hasNoResults && !isLoading && (
           <div className="flex layout-column layout-align-center-center">
-            <img src={ bookVector } style={ { width: '60px' } } />
-            <div className="text-title-5" style={ { marginTop: '20px' } }>No Projects. <a className="link-primary" onClick={ newProject }>Create one.</a></div>
+            <img src={bookVector} style={{ width: '60px' }} />
+            <div className="text-title-5" style={{ marginTop: '20px' }}>
+              No Projects.{' '}
+              <a className="link-primary" onClick={newProject}>
+                Create one.
+              </a>
+            </div>
           </div>
-        }
+        )}
       </InfoPanel>
     )
   }

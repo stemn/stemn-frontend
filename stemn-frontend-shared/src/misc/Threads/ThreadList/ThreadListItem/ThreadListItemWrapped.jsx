@@ -27,13 +27,16 @@ export default function ThreadListItemWrapped(props) {
     drop: (item, monitor) => cardDrop(propsRef.current, monitor),
   })
 
-  const setRef = useCallback((node) => {
-    nodeRef.current = node
-    connectDragSource(connectDropTarget(node))
-  }, [connectDragSource, connectDropTarget])
+  const setRef = useCallback(
+    (node) => {
+      nodeRef.current = node
+      connectDragSource(connectDropTarget(node))
+    },
+    [connectDragSource, connectDropTarget],
+  )
 
   return (
-    <div ref={ setRef } key={ id }>
+    <div ref={setRef} key={id}>
       {children}
     </div>
   )

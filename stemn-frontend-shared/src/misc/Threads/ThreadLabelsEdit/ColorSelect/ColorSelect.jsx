@@ -5,13 +5,9 @@ import { connect } from 'react-redux'
 import classes from './ColorSelect.module.css'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 
-
 class Component extends React.Component {
   render() {
-    const {
-      dispatch,
-      model,
-    } = this.props
+    const { dispatch, model } = this.props
 
     const niceColors = [
       '#001F3F',
@@ -33,17 +29,15 @@ class Component extends React.Component {
     ]
 
     return (
-      <div className={ `${classes.sampleOuter} layout-row layout-wrap` }>
-        {
-          niceColors.map(color =>
-            <div
-              key={ color }
-              onClick={ () => dispatch(storeChange(model, color)) }
-              className={ classes.sampleSwatch }
-              style={ { background: color } }
-            />,
-          )
-        }
+      <div className={`${classes.sampleOuter} layout-row layout-wrap`}>
+        {niceColors.map((color) => (
+          <div
+            key={color}
+            onClick={() => dispatch(storeChange(model, color))}
+            className={classes.sampleSwatch}
+            style={{ background: color }}
+          />
+        ))}
       </div>
     )
   }

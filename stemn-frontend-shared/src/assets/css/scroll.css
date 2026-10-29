@@ -1,9 +1,9 @@
-.scroll-box{
+.scroll-box {
   overflow-y: auto;
   overflow-x: hidden;
 }
 
-.scroll-box-x{
+.scroll-box-x {
   overflow-x: auto;
   overflow-y: hidden;
 }

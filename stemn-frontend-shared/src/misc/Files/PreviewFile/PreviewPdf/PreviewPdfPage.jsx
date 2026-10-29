@@ -11,7 +11,7 @@ class Page extends React.Component {
     page: undefined,
     width: 0,
     height: 0,
-  };
+  }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     const prevProps = this.props
@@ -31,11 +31,11 @@ class Page extends React.Component {
     this.clearTimeouts()
   }
 
-  renderTimeout = null;
+  renderTimeout = null
 
   clearTimeouts = () => {
     clearTimeout(this.renderTimeout)
-  };
+  }
 
   _initPage = (props) => {
     const { scale, index, pdf } = this.props
@@ -44,36 +44,39 @@ class Page extends React.Component {
       pdf.getPage(index).then((page) => {
         const viewport = page.getViewport({ scale })
         const { width, height } = viewport
-        this.setState({
-          status: 'loading',
-          page,
-          width,
-          height,
-        })
-        //        this.renderTimeout = setTimeout(this._enterPage, index * 500);
-        this._enterPage()
+        // Render once the page is in state (setState is asynchronous since React 18: calling
+        // _enterPage right after it read the old state and the page sometimes never rendered)
+        this.setState(
+          {
+            status: 'loading',
+            page,
+            width,
+            height,
+          },
+          this._enterPage,
+        )
       })
     }
-  };
+  }
 
   _enterPage = () => {
     const { status, page } = this.state
     if (status === 'loading' && page) {
       this._renderPage(page)
     }
-  };
+  }
 
   scale = (scale) => {
     //    if(this.state.page){
     //      this._renderPage(this.state.page)
     //    }
-  };
+  }
 
-  viewport = undefined;
-  textLayer = undefined;
+  viewport = undefined
+  textLayer = undefined
 
   _renderPage = (page) => {
-    const { scale, index } = this.props
+    const { scale } = this.props
     this.viewport = page.getViewport({ scale })
     const { width, height } = this.viewport
     const canvas = this.canvasRef
@@ -103,18 +106,12 @@ class Page extends React.Component {
       container: textEl,
       viewport: this.viewport,
     })
-    this.textLayer.render().catch(err => console.error('Failed to render pdf text layer', err))
-  };
+    this.textLayer.render().catch((err) => console.error('Failed to render pdf text layer', err))
+  }
 
   render() {
-    const {
-      scale,
-    } = this.props
-    const {
-      width,
-      height,
-      status,
-    } = this.state
+    const { scale } = this.props
+    const { width, height, status } = this.state
 
     const sizeStyles = {
       width: width * scale,
@@ -126,13 +123,24 @@ class Page extends React.Component {
     }
 
     return (
-      <div className={ `${classes.page} ${status}` } style={ sizeStyles }>
-        <LoadingOverlay show={ status === 'loading' } />
-        <Waypoint onEnter={ this._enterPage } />
-        <div style={ sizeStyles }>
-          <canvas ref={ (el) => { this.canvasRef = el } } style={ sizeStyles } />
+      <div className={`${classes.page} ${status}`} style={sizeStyles}>
+        <LoadingOverlay show={status === 'loading'} />
+        <Waypoint onEnter={this._enterPage} />
+        <div style={sizeStyles}>
+          <canvas
+            ref={(el) => {
+              this.canvasRef = el
+            }}
+            style={sizeStyles}
+          />
         </div>
-        <div ref={ (el) => { this.textRef = el } } className={ classes.textLayer } style={ textStyles } />
+        <div
+          ref={(el) => {
+            this.textRef = el
+          }}
+          className={classes.textLayer}
+          style={textStyles}
+        />
       </div>
     )
   }

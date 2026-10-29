@@ -6,11 +6,12 @@ import threadDisplayModalName from 'stemn-shared/misc/Threads/ThreadDisplayModal
 const stateToProps = () => ({})
 
 const dispatchToProps = {
-  showThreadModal: modalProps => showModal({
-    modalType: threadDisplayModalName,
-    limit: 1,
-    modalProps,
-  }),
+  showThreadModal: (modalProps) =>
+    showModal({
+      modalType: threadDisplayModalName,
+      limit: 1,
+      modalProps,
+    }),
 }
 
 export default connect(stateToProps, dispatchToProps)(MentionFromString)

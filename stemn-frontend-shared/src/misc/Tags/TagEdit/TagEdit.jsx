@@ -11,15 +11,10 @@ export default class TagEdit extends React.Component {
   render() {
     const { text, className, onClick, ...otherProps } = this.props
     return (
-      <div className={ cn(classes.tag, classes.edit, className) } { ...otherProps }>
-        <div className={ classes.tagInner }>
-          { middleConcat(text, 30) }
-        </div>
-        <div 
-          className={ cn(classes.close, 'layout-column layout-align-center-center') }
-          onClick={ onClick }
-        >
-          <MdClose size={ 12 } />
+      <div className={cn(classes.tag, classes.edit, className)} {...otherProps}>
+        <div className={classes.tagInner}>{middleConcat(text, 30)}</div>
+        <div className={cn(classes.close, 'layout-column layout-align-center-center')} onClick={onClick}>
+          <MdClose size={12} />
         </div>
       </div>
     )

@@ -44,6 +44,16 @@ Set `SENTRY_DSN` at build time to enable Sentry error reporting.
 * `npm run build` builds the production bundle with Vite to `build/client` (and copies the express server to `build/server`)
 * `npm run serve` serves this build on [http://localhost:8081/](http://localhost:8081/) (`PORT=...` to change)
 
+### Docker
+
+`Dockerfile` (Node 24, multi-stage): builds the website in the workspace and runs the express server on a slim
+`node:24-alpine` image as the `node` user. Build it from the repository root:
+
+```sh
+docker build -f stemn-frontend-website/Dockerfile --build-arg STEMN_ENV=staging -t stemn-website .
+docker run -p 8081:8081 stemn-website
+```
+
 ### webpack 5 fallback
 
 The previous webpack 5 + Babel toolchain is kept working as a fallback (`config/webpack.config.*.js`) until it is

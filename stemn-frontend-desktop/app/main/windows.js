@@ -36,7 +36,7 @@ export const isAppUrl = (url) => {
 
 const openExternalSafely = (url) => {
   if (/^(https?|mailto):/i.test(url)) {
-    shell.openExternal(url).catch(error => log.warn('openExternal failed', url, error.message))
+    shell.openExternal(url).catch((error) => log.warn('openExternal failed', url, error.message))
   } else {
     log.warn('Blocked opening url', url)
   }
@@ -46,7 +46,9 @@ const openExternalSafely = (url) => {
 export const loadRenderer = (browserWindow, name, hash = '') => {
   const routeHash = hash.replace(/^#/, '')
   if (process.env.ELECTRON_RENDERER_URL) {
-    return browserWindow.loadURL(`${process.env.ELECTRON_RENDERER_URL}/${name}/index.html${routeHash ? `#${routeHash}` : ''}`)
+    return browserWindow.loadURL(
+      `${process.env.ELECTRON_RENDERER_URL}/${name}/index.html${routeHash ? `#${routeHash}` : ''}`,
+    )
   }
   return browserWindow.loadFile(join(rendererRoot, name, 'index.html'), routeHash ? { hash: routeHash } : undefined)
 }
@@ -96,7 +98,7 @@ export const createAppWindow = ({ name, ...options }) => {
     openExternalSafely(url)
     return { action: 'deny' }
   })
-  webContents.on('will-attach-webview', event => event.preventDefault())
+  webContents.on('will-attach-webview', (event) => event.preventDefault())
 
   webContents.on('render-process-gone', (event, details) => {
     log.error(`Renderer of the ${name} window is gone:`, details.reason, details.exitCode)
@@ -125,10 +127,12 @@ export const createAppWindow = ({ name, ...options }) => {
 
   if (isDev) {
     webContents.on('context-menu', (event, { x, y }) => {
-      Menu.buildFromTemplate([{
-        label: 'Inspect element',
-        click: () => webContents.inspectElement(x, y),
-      }]).popup({ window: browserWindow })
+      Menu.buildFromTemplate([
+        {
+          label: 'Inspect element',
+          click: () => webContents.inspectElement(x, y),
+        },
+      ]).popup({ window: browserWindow })
     })
   }
 

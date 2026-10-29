@@ -4,7 +4,7 @@ import fileTypeIcons from './fileTypeIcons'
 export default class FileIcon extends React.Component {
   static defaultProps = {
     size: 30,
-  };
+  }
 
   render() {
     let fileType
@@ -28,7 +28,6 @@ export default class FileIcon extends React.Component {
       src = fileTypeIcons('./other.svg')
     }
 
-
     const imgStyle = {
       width: `${this.props.size}px`,
       height: `${this.props.size}px`,
@@ -45,11 +44,10 @@ export default class FileIcon extends React.Component {
       lineHeight: '1em',
     }
 
-
     return (
-      <div className="rel-box" style={ { marginRight: '10px' } }>
-        <img style={ imgStyle } src={ src } />
-        {isOther ? <span style={ textStyle }>{fileType}</span> : null}
+      <div className="rel-box" style={{ marginRight: '10px' }}>
+        <img style={imgStyle} src={src} />
+        {isOther ? <span style={textStyle}>{fileType}</span> : null}
       </div>
     )
   }

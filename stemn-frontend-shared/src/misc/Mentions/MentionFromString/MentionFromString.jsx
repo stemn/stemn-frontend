@@ -23,24 +23,18 @@ export default class MentionFromString extends Component {
     showThreadModal: PropTypes.func,
   }
   render() {
-    const {
-      href,
-      display,
-    } = this.props
-    const [entityId, mentionType, mentionId] = href.split(':')
+    const { href, display } = this.props
+    const [entityId, mentionType] = href.split(':')
 
     const mentionInfo = getMentionInfo(mentionType, entityId, display)
 
     if (mentionInfo) {
       return (
-        <Link
-          name={ mentionInfo.route }
-          params={ mentionInfo.params }
-        >
-          { mentionInfo.display }
+        <Link name={mentionInfo.route} params={mentionInfo.params}>
+          {mentionInfo.display}
         </Link>
       )
-    } 
+    }
     return null
   }
 }

@@ -1,35 +1,29 @@
 import winreg from 'winreg'
 import { values, every } from 'lodash'
 
-const setRegistryKey = ({ hive, key, name, value, type }) => new Promise((resolve, reject) => {
-  const regKey = new winreg({ hive, key })
-  regKey.set(name, type, value, err =>
-    (err == null
-      ? resolve()
-      : reject(err)),
-  )
-})
+const setRegistryKey = ({ hive, key, name, value, type }) =>
+  new Promise((resolve, reject) => {
+    const regKey = new winreg({ hive, key })
+    regKey.set(name, type, value, (err) => (err == null ? resolve() : reject(err)))
+  })
 
-const removeRegistryKey = ({ hive, key, name }) => new Promise((resolve, reject) => {
-  const regKey = new winreg({ hive, key })
-  regKey.remove(name, err =>
-    (err == null
-      ? resolve()
-      : reject(err)),
-  )
-})
+const removeRegistryKey = ({ hive, key, name }) =>
+  new Promise((resolve, reject) => {
+    const regKey = new winreg({ hive, key })
+    regKey.remove(name, (err) => (err == null ? resolve() : reject(err)))
+  })
 
-const getRegistryKey = ({ hive, key, name, value }) => new Promise((resolve, reject) => {
-  const regKey = new winreg({ hive, key })
-  regKey.get(name, (err, item) =>
-    (err == null
-      ? resolve(item.value == value)
-      : reject(err)),
-  )
-})
+const getRegistryKey = ({ hive, key, name, value }) =>
+  new Promise((resolve, reject) => {
+    const regKey = new winreg({ hive, key })
+    regKey.get(name, (err, item) => (err == null ? resolve(item.value == value) : reject(err)))
+  })
 
 const getKeys = ({ folders, title, appName, appPath }) => {
-  const folderToEnableString = folders.reduce((fullString, path, index) => `${index == 0 ? '' : `${fullString} OR `}(${path})`, '')
+  const folderToEnableString = folders.reduce(
+    (fullString, path, index) => `${index == 0 ? '' : `${fullString} OR `}(${path})`,
+    '',
+  )
   const hive = 'HKCU'
   const type = 'REG_SZ'
   const regKeysObect = {

@@ -26,19 +26,21 @@
 }
 
 .close:hover {
-  opacity: 0.6
+  opacity: 0.6;
 }
 .close {
   transition: opacity 0.2s ease;
   opacity: 0;
 }
 
-.enter, .appear {
+.enter,
+.appear {
   transition: height 300ms ease;
   height: 0px;
 }
 
-.enterActive, .appearActive {
+.enterActive,
+.appearActive {
   height: 60px;
 }
 
@@ -52,6 +54,6 @@
 }
 
 /*Toast Types*/
-.error{
+.error {
   color: warn;
 }

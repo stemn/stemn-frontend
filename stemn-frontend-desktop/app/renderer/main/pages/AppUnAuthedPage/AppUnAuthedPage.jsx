@@ -7,7 +7,6 @@ import React from 'react'
 // Sub Components
 import TitleBar from 'stemn-shared/misc/TitleBar/TitleBar'
 
-
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
 export class Component extends React.Component {
@@ -33,7 +32,6 @@ export class Component extends React.Component {
     )
   }
 }
-
 
 // /////////////////////////////// CONTAINER /////////////////////////////////
 

@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { replace } from 'stemn-shared/routing'
-import { bindActionCreators } from 'redux'
 
 const stateToProps = ({ auth }) => ({
   authToken: auth.authToken,

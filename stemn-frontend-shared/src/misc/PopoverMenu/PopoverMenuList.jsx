@@ -10,32 +10,34 @@ const MenuItem = (props) => {
   if (!menuItem.isHidden || !menuItem.isHidden(item)) {
     if (menuItem.submenu) {
       return (
-        <Popover preferPlace="right" trigger="hoverDelay" tipSize={ 0 } offset={ 0 }>
+        <Popover preferPlace="right" trigger="hoverDelay" tipSize={0} offset={0}>
           <div>
             <Link
-              onClick={ () => menuItem.onClick && menuItem.onClick(item) }
-              className={ cn({ divider: menuItem.divider }, 'submenu') }
-              { ...pick(menuItem, ['name', 'params', 'query']) }
+              onClick={() => menuItem.onClick && menuItem.onClick(item)}
+              className={cn({ divider: menuItem.divider }, 'submenu')}
+              {...pick(menuItem, ['name', 'params', 'query'])}
             >
               {menuItem.label}
             </Link>
           </div>
-          <div><Menu menu={ menuItem.submenu } /></div>
+          <div>
+            <Menu menu={menuItem.submenu} />
+          </div>
         </Popover>
       )
     }
-    
+
     return (
       <Link
-        onClick={ () => menuItem.onClick && menuItem.onClick(item) }
-        className={ cn({ divider: menuItem.divider }) }
-        { ...pick(menuItem, ['name', 'params', 'query']) }
+        onClick={() => menuItem.onClick && menuItem.onClick(item)}
+        className={cn({ divider: menuItem.divider })}
+        {...pick(menuItem, ['name', 'params', 'query'])}
       >
         {menuItem.label}
       </Link>
     )
   }
-  
+
   return null
 }
 
@@ -44,8 +46,10 @@ const Menu = (props) => {
   // Menu - standard menu object
   // Item - the thing that will be passed into menuitem.onclick
   return (
-    <div className="PopoverMenu" { ...otherProps }>
-      {menu.map(menuItem => <MenuItem key={ menuItem.key || menuItem.label } menuItem={ menuItem } item={ item } />)}
+    <div className="PopoverMenu" {...otherProps}>
+      {menu.map((menuItem) => (
+        <MenuItem key={menuItem.key || menuItem.label} menuItem={menuItem} item={item} />
+      ))}
     </div>
   )
 }

@@ -16,7 +16,7 @@ export default class OnboardingAbout extends Component {
   render() {
     const { user, userModel } = this.props
     return (
-      <PanelDescription 
+      <PanelDescription
         title="About You"
         description="Add some basic account info. You'll be able to add more details later."
       >
@@ -29,16 +29,14 @@ export default class OnboardingAbout extends Component {
           <h3>Profile Photo</h3>
           <div className="layout-row">
             <Upload
-              containerClassName={ classes.container }
-              imageClassName={ classes.image }
-              model={ `${userModel}.data.profile.picture` }
-              value={ user.data.profile.picture }
+              containerClassName={classes.container}
+              imageClassName={classes.image}
+              model={`${userModel}.data.profile.picture`}
+              value={user.data.profile.picture}
               uploadId="UserSettingsAvatar"
             />
             <p className="flex layout-column layout-align-center-center">
-              { user.data.profile.picture
-                ? 'Looking good!'
-                : 'Upload a profile picture' }
+              {user.data.profile.picture ? 'Looking good!' : 'Upload a profile picture'}
             </p>
           </div>
         </InfoPanel>
@@ -46,8 +44,8 @@ export default class OnboardingAbout extends Component {
           <h3>Profile Blurb</h3>
           <p>Introduce yourself in 100 characters</p>
           <Textarea
-            model={ `${userModel}.data.profile.blurb` }
-            value={ user.data.profile.blurb }
+            model={`${userModel}.data.profile.blurb`}
+            value={user.data.profile.blurb}
             className="dr-input"
             type="text"
             placeholder="Eg: Structural Engineer @ SpaceX"
@@ -55,7 +53,9 @@ export default class OnboardingAbout extends Component {
         </InfoPanel>
         <br />
         <div className="layout-row layout-align-end">
-          <Button className="lg primary" name="onboardingSyncRoute">Next: Sync Account</Button>
+          <Button className="lg primary" name="onboardingSyncRoute">
+            Next: Sync Account
+          </Button>
         </div>
       </PanelDescription>
     )

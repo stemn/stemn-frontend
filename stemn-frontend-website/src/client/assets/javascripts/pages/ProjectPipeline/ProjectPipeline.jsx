@@ -18,10 +18,10 @@ export default class ProjectCommit extends Component {
     this.refreshInterval = setInterval(() => this.forceUpdate(), 1000)
   }
   componentWillUnmount() {
-    clearInterval(this.refreshInterval)    
+    clearInterval(this.refreshInterval)
   }
   renderLoaded() {
-    const { pipeline, project, projectId } = this.props    
+    const { pipeline, project, projectId } = this.props
 
     if (!pipeline || !pipeline.data) {
       return null
@@ -31,30 +31,39 @@ export default class ProjectCommit extends Component {
       <div>
         <SubSubHeader>
           <Breadcrumbs>
-            <Crumb name="projectPipelinesRoute" params={ { projectId } } text="Pipelines" />
-            <Crumb text={ pipeline.data.name } />
+            <Crumb name="projectPipelinesRoute" params={{ projectId }} text="Pipelines" />
+            <Crumb text={pipeline.data.name} />
           </Breadcrumbs>
           <br />
-          <h2 className={ classes.title }>
-            <span>{ pipeline.data.name }</span>
-            <span className={ classes.number }>&nbsp;#P{ pipeline.data.pipelineNumber }</span>
+          <h2 className={classes.title}>
+            <span>{pipeline.data.name}</span>
+            <span className={classes.number}>&nbsp;#P{pipeline.data.pipelineNumber}</span>
           </h2>
-          <ProjectPipelineMeta pipeline={ pipeline } project={ project } />
+          <ProjectPipelineMeta pipeline={pipeline} project={project} />
         </SubSubHeader>
         <Container>
-          <BannerBar style={ { margin: '20px 0' } }>
+          <BannerBar style={{ margin: '20px 0' }}>
             <SimpleTable>
-              <tr><td>Duration:</td><td>{ diffTimes(pipeline.data.start, pipeline.data.end || new Date())}</td></tr>
-              <tr><td>Status:</td><td style={ { textTransform: 'capitalize' } }>{ pipeline.data.status }</td></tr>
-              { pipeline.data.error && pipeline.data.error.message &&
-                <tr><td>Error</td><td>{ pipeline.data.error.message }</td></tr>
-              }
+              <tr>
+                <td>Duration:</td>
+                <td>{diffTimes(pipeline.data.start, pipeline.data.end || new Date())}</td>
+              </tr>
+              <tr>
+                <td>Status:</td>
+                <td style={{ textTransform: 'capitalize' }}>{pipeline.data.status}</td>
+              </tr>
+              {pipeline.data.error && pipeline.data.error.message && (
+                <tr>
+                  <td>Error</td>
+                  <td>{pipeline.data.error.message}</td>
+                </tr>
+              )}
             </SimpleTable>
           </BannerBar>
           <PipelineGraph
-            className={ classes.graph }
-            style={ { minHeight: '600px' } }
-            pipelineConfig={ pipelineConfigFixture } 
+            className={classes.graph}
+            style={{ minHeight: '600px' }}
+            pipelineConfig={pipelineConfigFixture}
             readOnly
           />
         </Container>
@@ -64,12 +73,6 @@ export default class ProjectCommit extends Component {
   render() {
     const { pipeline } = this.props
 
-    return (
-      <div className={ classes.content }>
-        { pipeline && pipeline.data 
-          ? this.renderLoaded()
-          : null }
-      </div>
-    )
+    return <div className={classes.content}>{pipeline && pipeline.data ? this.renderLoaded() : null}</div>
   }
 }

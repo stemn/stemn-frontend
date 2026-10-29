@@ -23,7 +23,8 @@ export default function configureStore(initialState, { windowName } = {}) {
   ]
 
   // Log actions in development or when debug mode is on
-  const debug = initialState && initialState.system && initialState.system.settings && initialState.system.settings.debug
+  const debug =
+    initialState && initialState.system && initialState.system.settings && initialState.system.settings.debug
   if (process.env.NODE_ENV === 'development' || debug) {
     middleware.push(createLogger({ level: 'info', collapsed: true }))
   }

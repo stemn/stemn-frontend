@@ -1,4 +1,4 @@
-import http from 'axios';
+import http from 'axios'
 
 export const getAssemblyParts = ({ projectId, fileId, revisionId = '', provider }) => {
   const cacheKey = `${fileId}-${revisionId}`

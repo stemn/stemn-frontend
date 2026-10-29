@@ -19,12 +19,14 @@ export default class ProjectFilesPage extends React.Component {
         },
       })
     } else {
-      pushRoute(projectFolderRoute({
-        projectId: project.data._id,
-        fileId: file.fileId,
-      }))
+      pushRoute(
+        projectFolderRoute({
+          projectId: project.data._id,
+          fileId: file.fileId,
+        }),
+      )
     }
-  };
+  }
 
   render() {
     const { entityModel, project, path, files, saveProject } = this.props
@@ -33,30 +35,30 @@ export default class ProjectFilesPage extends React.Component {
     }
     if (project && project.data && project.data._id) {
       return (
-        <div className={ `${classes.container} flex scroll-box` }>
+        <div className={`${classes.container} flex scroll-box`}>
           <FileList
-            className={ classes.files }
-            initialSync={ !project.data.remote.lastSynced }
-            projectId={ project.data._id }
-            path={ path || project.data.remote.root._id }
-            singleClickFn={ this.fileFolderClick }
-            doubleClickFn={ this.fileFolderClick }
-            crumbClickFn={ this.fileFolderClick }
-            options={ options }
+            className={classes.files}
+            initialSync={!project.data.remote.lastSynced}
+            projectId={project.data._id}
+            path={path || project.data.remote.root._id}
+            singleClickFn={this.fileFolderClick}
+            doubleClickFn={this.fileFolderClick}
+            crumbClickFn={this.fileFolderClick}
+            options={options}
             crumbPopup
             search
           />
           <Readme
-            files={ get(files, 'entries', []) }
-            project={ project }
-            projectModel={ entityModel }
-            saveProject={ saveProject }
-            isRoot={ !path || path === '' }
+            files={get(files, 'entries', [])}
+            project={project}
+            projectModel={entityModel}
+            saveProject={saveProject}
+            isRoot={!path || path === ''}
             canEdit
           />
         </div>
       )
-    } 
+    }
     return null
   }
 }

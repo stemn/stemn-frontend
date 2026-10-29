@@ -1,19 +1,9 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+
 import cn from 'classnames'
 import { Link } from 'stemn-shared/routing'
 
 import { isActive, getRoutePath } from './Link.utils'
-
-const propTypesObject = {
-  children: PropTypes.node,               // Child element
-  name: PropTypes.string,                 // Router path name, eg -> 'userRoute'
-  params: PropTypes.object,               // Query param object
-  activeIf: PropTypes.object,             // Object user to determine if the link is active
-  // Functions used in desktop
-  closeAll: PropTypes.func,
-  showWindow: PropTypes.func,
-}
 
 const LinkComponent = (props) => {
   const {
@@ -60,7 +50,7 @@ const LinkComponent = (props) => {
         pathname: routePath,
         query,
       }
-    } 
+    }
     return {
       pathname: to,
       query,
@@ -71,7 +61,7 @@ const LinkComponent = (props) => {
   const getHref = () => {
     if (routePath.pathname.startsWith('http')) {
       return routePath.pathname
-    } 
+    }
     return `${GLOBAL_ENV.WEBSITE_URL}${routePath.pathname}`
   }
 
@@ -96,35 +86,20 @@ const LinkComponent = (props) => {
   if (isExternal) {
     return (
       <a
-        href={ getHref() }
+        href={getHref()}
         target="_blank"
         rel="noopener noreferrer"
-        className={ allClassNames }
-        onClick={ extendedOnClick }
-        { ...otherProps }
+        className={allClassNames}
+        onClick={extendedOnClick}
+        {...otherProps}
       />
     )
-  } 
+  }
   const toPath = getToPath()
   if (toPath && toPath.pathname) {
-    return (
-      <Link
-        to={ getToPath() }
-        className={ allClassNames }
-        onClick={ extendedOnClick }
-        { ...otherProps }
-      />
-    )
-  } 
-  return (
-    <a
-      className={ allClassNames }
-      onClick={ extendedOnClick }
-      { ...otherProps }
-    />
-  )
+    return <Link to={getToPath()} className={allClassNames} onClick={extendedOnClick} {...otherProps} />
+  }
+  return <a className={allClassNames} onClick={extendedOnClick} {...otherProps} />
 }
-
-// LinkComponent.propTypes = propTypesObject
 
 export default LinkComponent

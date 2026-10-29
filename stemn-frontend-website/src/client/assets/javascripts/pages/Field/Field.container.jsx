@@ -18,20 +18,20 @@ const dispatchToProps = {
   getField,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'fieldId',
-  onChange: (props) => {
-    props.getField({
-      fieldId: props.fieldId,
-    })
+const fetchConfigs = [
+  {
+    hasChanged: 'fieldId',
+    onChange: (props) => {
+      props.getField({
+        fieldId: props.fieldId,
+      })
+    },
   },
-}]
+]
 
 class SearchContainer extends Component {
   render() {
-    return (
-      <Field { ...this.props } />
-    )
+    return <Field {...this.props} />
   }
 }
 

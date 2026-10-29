@@ -3,7 +3,7 @@ import { IStep } from 'stemn-shared/misc/Pipelines/PipelineGraph/types'
 import s from './PipelineGraphSidebarWidget.module.scss'
 
 export interface IPipelineGraphSidebarWidgetProps {
-  step: IStep,
+  step: IStep
 }
 
 export const PipelineGraphSidebarWidget = (props: IPipelineGraphSidebarWidgetProps) => {
@@ -13,11 +13,14 @@ export const PipelineGraphSidebarWidget = (props: IPipelineGraphSidebarWidgetPro
       <div
         className={cn(s.icon, 'layout-column', 'layout-align-center-center')}
         draggable={true}
-        onDragStart={ (event) => {
-          event.dataTransfer.setData('storm-diagram-node', JSON.stringify({
-            nodeType: step.type,
-          }))
-        } }
+        onDragStart={(event) => {
+          event.dataTransfer.setData(
+            'storm-diagram-node',
+            JSON.stringify({
+              nodeType: step.type,
+            }),
+          )
+        }}
       >
         <step.icon />
       </div>

@@ -39,9 +39,7 @@ module.exports = merge(base({ mode: 'production', styleLoader: MiniCssExtractPlu
       ignoreOrder: true,
     }),
     new CopyWebpackPlugin({
-      patterns: [
-        { from: join(root, 'public'), to: '.' },
-      ],
+      patterns: [{ from: join(root, 'public'), to: '.' }],
     }),
   ],
 })

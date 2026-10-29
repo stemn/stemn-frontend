@@ -1,31 +1,33 @@
 /* Class names used by @firefox-devtools/react-contextmenu (react-contextmenu v2 API) */
 .react-contextmenu {
-    min-width: 160px;
-    font-size: 12px;
-    color: #373a3c;
-    text-align: left;
-    background-color: #fff;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.1),0 2px 15px rgba(0,0,0,0.1);
-    outline: none;
-    z-index: 1000;
+  min-width: 160px;
+  font-size: 12px;
+  color: #373a3c;
+  text-align: left;
+  background-color: #fff;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.1),
+    0 2px 15px rgba(0, 0, 0, 0.1);
+  outline: none;
+  z-index: 1000;
 }
 .react-contextmenu-item {
-    display: block;
-    width: 100%;
-    padding: 8px 15px;
-    clear: both;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #373a3c;
-    text-align: inherit;
-    white-space: nowrap;
-    background: 0 0;
-    border: 0;
-    cursor: pointer;
-    outline: none;
-    box-sizing: border-box;
+  display: block;
+  width: 100%;
+  padding: 8px 15px;
+  clear: both;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #373a3c;
+  text-align: inherit;
+  white-space: nowrap;
+  background: 0 0;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+  box-sizing: border-box;
 }
 .react-contextmenu-item.react-contextmenu-item--active,
 .react-contextmenu-item.react-contextmenu-item--selected,
@@ -44,12 +46,12 @@
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 .react-contextmenu-submenu > .react-contextmenu-item {
-    position: relative;
-    padding-right: 27px;
+  position: relative;
+  padding-right: 27px;
 }
 .react-contextmenu-submenu > .react-contextmenu-item:after {
-    content: "▶";
-    display: inline-block;
-    position: absolute;
-    right: 7px;
+  content: '▶';
+  display: inline-block;
+  position: absolute;
+  right: 7px;
 }

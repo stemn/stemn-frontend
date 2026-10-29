@@ -12,21 +12,25 @@ import { dispatchToProps, IFileCompareContainerProps } from './FileCompare.conta
 import classes from './FileCompare.module.scss'
 
 export interface IFileCompareComponentProps extends IFileCompareContainerProps {
-  fetchTimeline: typeof dispatchToProps['fetchTimeline'],
-  toggle: typeof dispatchToProps['toggle'],
-  initCompare: typeof dispatchToProps['initCompare'],
-  changeMode: typeof dispatchToProps['changeMode'],
-  select: typeof dispatchToProps['select'],
-  syncTimelineCacheKey: string,
-  togglePanelCacheKey: string,
-  className?: string,
-  type?: 'collapse',
+  fetchTimeline: (typeof dispatchToProps)['fetchTimeline']
+  toggle: (typeof dispatchToProps)['toggle']
+  initCompare: (typeof dispatchToProps)['initCompare']
+  changeMode: (typeof dispatchToProps)['changeMode']
+  select: (typeof dispatchToProps)['select']
+  syncTimelineCacheKey: string
+  togglePanelCacheKey: string
+  className?: string
+  type?: 'collapse'
   compare: IFileCompareItem
 }
 
 export class FileCompareComponent extends React.Component<IFileCompareComponentProps> {
   public onSelect = (file) => {
-    const { select, syncTimelineCacheKey, compare: { mode, lastSelected } } = this.props
+    const {
+      select,
+      syncTimelineCacheKey,
+      compare: { mode, lastSelected },
+    } = this.props
     select({
       file,
       mode,
@@ -42,7 +46,9 @@ export class FileCompareComponent extends React.Component<IFileCompareComponentP
     })
   }
   public isSelected = (item) => {
-    const { compare: { selected1, selected2, mode } } = this.props
+    const {
+      compare: { selected1, selected2, mode },
+    } = this.props
     return isSelected({
       item,
       selected1,
@@ -50,8 +56,14 @@ export class FileCompareComponent extends React.Component<IFileCompareComponentP
       mode,
     })
   }
-  public render () {
-    const { compare: { mode, selected1, selected2 }, file, togglePanelCacheKey, type, className } = this.props
+  public render() {
+    const {
+      compare: { mode, selected1, selected2 },
+      file,
+      togglePanelCacheKey,
+      type,
+      className,
+    } = this.props
     const items = orderItemsByTime(mode, selected1, selected2)
     const file1 = get(items, [0, 'data'])
     const file2 = get(items, [1, 'data'])
@@ -59,7 +71,7 @@ export class FileCompareComponent extends React.Component<IFileCompareComponentP
     const collapseTemplate = () => (
       <div className={className}>
         <TogglePanel cacheKey={togglePanelCacheKey}>
-          <div className='text-ellipsis text-grey-4'>{file.data.path}</div>
+          <div className="text-ellipsis text-grey-4">{file.data.path}</div>
           <FileCompareMenu
             file1={file1}
             file2={file2}
@@ -68,28 +80,18 @@ export class FileCompareComponent extends React.Component<IFileCompareComponentP
             changeMode={this.changeMode}
             enablePreview={true}
           />
-          <DragResize
-            side='bottom'
-            height='500'
-            heightRange={[0, 1000]}
-            className='layout-column flex'
-          >
-            <FileCompareInner
-              event={selected1}
-              file1={file1}
-              file2={file2}
-              mode={mode}
-            />
-            { file.revisions.length > 1
-              ? <Timeline
+          <DragResize side="bottom" height="500" heightRange={[0, 1000]} className="layout-column flex">
+            <FileCompareInner event={selected1} file1={file1} file2={file2} mode={mode} />
+            {file.revisions.length > 1 ? (
+              <Timeline
                 className={classes.timeline}
-                size='sm'
+                size="sm"
                 onSelect={this.onSelect}
                 isSelected={this.isSelected}
                 items={file.revisions}
-                preferPlace='above'
+                preferPlace="above"
               />
-              : null }
+            ) : null}
           </DragResize>
         </TogglePanel>
       </div>
@@ -98,7 +100,7 @@ export class FileCompareComponent extends React.Component<IFileCompareComponentP
     const standardTemplate = () => (
       <div className={cn('layout-column flex', className)}>
         <div className={`${classes.header} layout-row layout-align-start-center`}>
-          <div className='flex'>{file.data.path}</div>
+          <div className="flex">{file.data.path}</div>
           <FileCompareMenu
             file1={file1}
             file2={file2}
@@ -108,7 +110,7 @@ export class FileCompareComponent extends React.Component<IFileCompareComponentP
             enablePreview={true}
           />
         </div>
-        <div className='layout-column flex'>
+        <div className="layout-column flex">
           <FileCompareInner
             event={selected1}
             file1={file1}
@@ -119,11 +121,11 @@ export class FileCompareComponent extends React.Component<IFileCompareComponentP
         </div>
         <Timeline
           className={classes.timeline}
-          size='sm'
+          size="sm"
           onSelect={this.onSelect}
           isSelected={this.isSelected}
           items={file.revisions}
-          preferPlace='above'
+          preferPlace="above"
         />
       </div>
     )
@@ -131,8 +133,6 @@ export class FileCompareComponent extends React.Component<IFileCompareComponentP
     if (!file1) {
       return null
     }
-    return type === 'collapse'
-      ? collapseTemplate()
-      : standardTemplate()
+    return type === 'collapse' ? collapseTemplate() : standardTemplate()
   }
 }

@@ -1,6 +1,6 @@
-import http from 'axios';
-import confirmAuth from 'stemn-shared/misc/Auth/actions/confirmAuth';
-import { addEvent, deleteEvent } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions';
+import http from 'axios'
+import confirmAuth from 'stemn-shared/misc/Auth/actions/confirmAuth'
+import { addEvent, deleteEvent } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
 
 export function getComment({ commentId }) {
   return {
@@ -33,57 +33,60 @@ export function newComment({ comment, timelineCacheKey }) {
         },
       }).then(({ value }) => {
         const currentUser = getState().auth.user
-        return dispatch(addEvent({
-          cacheKey: timelineCacheKey,
-          event: {
-            event: 'comment',
-            timestamp: value.data.timestamp,
-            user: {
-              name: currentUser.name,
-              _id: currentUser._id,
-              picture: currentUser.picture,
+        return dispatch(
+          addEvent({
+            cacheKey: timelineCacheKey,
+            event: {
+              event: 'comment',
+              timestamp: value.data.timestamp,
+              user: {
+                name: currentUser.name,
+                _id: currentUser._id,
+                picture: currentUser.picture,
+              },
+              data: {
+                comment: value.data._id,
+              },
             },
-            data: {
-              comment: value.data._id,
-            },
-          },
-        }))
+          }),
+        )
       })
     }
   }
 }
 
-export const toggleReaction = ({ commentId, reactionType }) => confirmAuth((dispatch, getState) => {
-  const reactions = getState().comments.data[commentId].data.reactions
-  const userId = getState().auth.user._id
-  const reactionExists = reactions.find(reaction => reaction.owner._id === userId && reaction.type === reactionType)
+export const toggleReaction = ({ commentId, reactionType }) =>
+  confirmAuth((dispatch, getState) => {
+    const reactions = getState().comments.data[commentId].data.reactions
+    const userId = getState().auth.user._id
+    const reactionExists = reactions.find((reaction) => reaction.owner._id === userId && reaction.type === reactionType)
 
-  if (reactionExists) {
-    dispatch(deleteReaction({ commentId, reactionType }))
-  } else {
-    dispatch(newReaction({ commentId, reactionType }))
-  }
-})
-
-export const newReaction = ({ commentId, reactionType }) => confirmAuth((dispatch) => {
-  const reaction = {
-    type: reactionType,
-  }
-
-  dispatch({
-    type: 'COMMENTS/NEW_REACTION',
-    http: true,
-    payload: {
-      url: `/api/v1/comments/${commentId}/reaction`,
-      method: 'POST',
-      data: reaction,
-    },
-    meta: {
-      commentId,
-    },
+    if (reactionExists) {
+      dispatch(deleteReaction({ commentId, reactionType }))
+    } else {
+      dispatch(newReaction({ commentId, reactionType }))
+    }
   })
-})
 
+export const newReaction = ({ commentId, reactionType }) =>
+  confirmAuth((dispatch) => {
+    const reaction = {
+      type: reactionType,
+    }
+
+    dispatch({
+      type: 'COMMENTS/NEW_REACTION',
+      http: true,
+      payload: {
+        url: `/api/v1/comments/${commentId}/reaction`,
+        method: 'POST',
+        data: reaction,
+      },
+      meta: {
+        commentId,
+      },
+    })
+  })
 
 export function deleteReaction({ commentId, reactionType }) {
   return (dispatch, getState) => {
@@ -136,18 +139,19 @@ export function deleteComment({ comment, timelineCacheKey }) {
     }).then((response) => {
       // Get the eventId of the comment
       console.log(getState().syncTimeline[timelineCacheKey])
-      const event = getState().syncTimeline[timelineCacheKey].data.find(event => event.data.comment === comment._id)
+      const event = getState().syncTimeline[timelineCacheKey].data.find((event) => event.data.comment === comment._id)
       console.log({ event })
       if (event) {
-        dispatch(deleteEvent({
-          cacheKey: timelineCacheKey,
-          eventId: event._id,
-        }))
+        dispatch(
+          deleteEvent({
+            cacheKey: timelineCacheKey,
+            eventId: event._id,
+          }),
+        )
       }
     })
   }
 }
-
 
 export function updateComment({ comment }) {
   return {

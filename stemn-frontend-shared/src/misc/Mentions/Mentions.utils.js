@@ -1,6 +1,5 @@
-import getUuid from 'stemn-shared/utils/getUuid.js';
-import isUuid from 'stemn-shared/utils/isUuid.js';
-
+import getUuid from 'stemn-shared/utils/getUuid.js'
+import isUuid from 'stemn-shared/utils/isUuid.js'
 
 /*
 text = text.match(/
@@ -35,7 +34,8 @@ text = text.match(/
     )
 /g);
 */
-const markdownLinkRegex = /(\[((?:\[[^\]]*\]|[^\[\]])*)\]\([ \t]*()<?((?:\([^)]*\)|[^()\s])*?)>?[ \t]*((['"])(.*?)\6[ \t]*)?\))/g
+const markdownLinkRegex =
+  /(\[((?:\[[^\]]*\]|[^[\]])*)\]\([ \t]*()<?((?:\([^)]*\)|[^()\s])*?)>?[ \t]*((['"])(.*?)\6[ \t]*)?\))/g
 
 export const newMention = ({ mentionType, display, entityId }) => ({
   display,
@@ -50,19 +50,20 @@ export const validateMention = (href = '') => {
   // Boths ids should be 24 characters.
   const hrefSplit = href.split(':')
   if (hrefSplit.length === 3) {
-    const entityId = href[0];
-    const mentionId = href[2];
+    const entityId = href[0]
+    const mentionId = href[2]
     if (isUuid(entityId) && isUuid(mentionId)) {
       return true
     }
 
     return false
   }
-  
+
   return false
 }
 
-export const getMentionString = mention => `[${mention.display}](${mention.entityId}:${mention.mentionType}:${mention.mentionId})`
+export const getMentionString = (mention) =>
+  `[${mention.display}](${mention.entityId}:${mention.mentionType}:${mention.mentionId})`
 
 export const parseMentions = (text) => {
   // Get all the markdown links from the raw text
@@ -74,7 +75,7 @@ export const parseMentions = (text) => {
     mentionsRaw.forEach((mention) => {
       const infoString = mention.split('(')[1].split(')')[0] // Get the info (from between the standard brackets)
       if (validateMention(infoString)) {
-        const display = mention.split('[')[1].split(']')[0]    // Get the name (from between the square brackets)
+        const display = mention.split('[')[1].split(']')[0] // Get the name (from between the square brackets)
         const [entityId, mentionType, mentionId] = infoString.split(':')
         const index = text.indexOf(mention)
         mentions.push({
@@ -94,12 +95,13 @@ export const parseMentions = (text) => {
   return mentions
 }
 
-
 export const removeExistingMentions = (newMentions, existingMentions) => {
   // Create an array of existing mention entity Ids
-  const existingMentionEntityIds = existingMentions.map(mention => mention.entityId)
+  const existingMentionEntityIds = existingMentions.map((mention) => mention.entityId)
   // Make sure new mentions do not already exist
-  return newMentions && newMentions.length > 0 ? newMentions.filter(mention => existingMentionEntityIds.indexOf(mention.entityId) === -1) : newMentions
+  return newMentions && newMentions.length > 0
+    ? newMentions.filter((mention) => existingMentionEntityIds.indexOf(mention.entityId) === -1)
+    : newMentions
 }
 
 export const addMentionsToText = (text, mentions) => {
@@ -113,20 +115,21 @@ export const addMentionsToText = (text, mentions) => {
   return textNew
 }
 
-export const mentionTriggers = [{
-  trigger: '@',
-  type: 'user',
-}, {
-  trigger: '#',
-  type: 'thread',
-}]
+export const mentionTriggers = [
+  {
+    trigger: '@',
+    type: 'user',
+  },
+  {
+    trigger: '#',
+    type: 'thread',
+  },
+]
 
 export const mentionTypeFromWord = (word) => {
   const firstLetter = word[0]
-  const mentionTriggerInfo = mentionTriggers.find(mention => mention.trigger === firstLetter)
-  return mentionTriggerInfo
-    ? mentionTriggerInfo.type
-    : undefined
+  const mentionTriggerInfo = mentionTriggers.find((mention) => mention.trigger === firstLetter)
+  return mentionTriggerInfo ? mentionTriggerInfo.type : undefined
 }
 
 export const getMentionInfo = (mentionType, entityId, display) => {
@@ -156,6 +159,6 @@ export const getMentionInfo = (mentionType, entityId, display) => {
   const mentionInfo = mentionTypes[mentionType]
   if (mentionInfo) {
     return mentionInfo
-  } 
+  }
   console.error('Invalid mention type', mentionType)
 }

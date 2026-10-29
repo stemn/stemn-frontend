@@ -18,7 +18,7 @@ const fetchConfigs = []
 
 class NotificationsAllContainer extends Component {
   render() {
-    return <NotificationsAll { ...this.props } />
+    return <NotificationsAll {...this.props} />
   }
 }
 

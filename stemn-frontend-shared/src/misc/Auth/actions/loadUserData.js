@@ -10,16 +10,20 @@ export default () => (dispatch) => {
       url: '/api/v1/me',
       method: 'GET',
     }),
-  }).then((response) => {
-    dispatch(getUserProjects({ userId: response.value.data._id }))
-    dispatch(joinRoom({
-      type: 'user',
-      room: response.value.data._id,
-    }))
-  }).catch((error) => {
-    if (error.toString().includes(401)) {
-      // If 401, we logout
-      dispatch(logout())
-    }
   })
+    .then((response) => {
+      dispatch(getUserProjects({ userId: response.value.data._id }))
+      dispatch(
+        joinRoom({
+          type: 'user',
+          room: response.value.data._id,
+        }),
+      )
+    })
+    .catch((error) => {
+      if (error.toString().includes(401)) {
+        // If 401, we logout
+        dispatch(logout())
+      }
+    })
 }

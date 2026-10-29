@@ -26,13 +26,29 @@ npm run build        # website: Vite production build -> stemn-frontend-website/
 npm run serve        # serve the production build on http://localhost:8081 (PORT=... to change)
 npm run dev:webpack  # website: the webpack 5 fallback dev server (same port)
 npm run build:webpack # website: the webpack 5 fallback production build (same output dir)
-npm run typecheck    # tsc --noEmit (type errors never block the builds)
-npm test             # unit tests of every workspace that has them
+npm run typecheck    # tsc --noEmit: website, desktop, e2e (type errors never block the builds)
+npm run lint         # ESLint (--max-warnings 0) + Prettier check; npm run lint:fix / npm run format fix them
+npm test             # unit tests (Vitest)
+npm run test:e2e     # website end-to-end tests (Playwright) against the local backend, see tests/e2e/README.md
 ```
 
 The website talks to the Stemn backend. By default (`STEMN_ENV=local`) it expects the API on
 http://localhost:3000 and the websocket (Primus) server on http://localhost:8000.
 See [stemn-frontend-website/README.md](./stemn-frontend-website/README.md) for the other environments.
+
+A husky pre-commit hook runs ESLint and Prettier on the staged files (lint-staged). `HUSKY=0` skips it.
+
+## Continuous integration
+
+GitHub Actions (`.github/workflows`):
+
+* `ci.yml` on every pull request and on pushes to `staging` / `production`: lint, typecheck, unit tests, builds (website with
+  Vite, website with the webpack fallback, desktop), the website Docker image, and `e2e`.
+* `e2e.yml` (reusable, `workflow_call`): starts the backend (`.github/actions/stemn-backend`: checks out the private
+  `stemn-backend` with a read-only deploy key, `local/start.sh` + `local/seed.sh`), then runs the website Playwright suite and the
+  desktop suite under `xvfb-run`. Traces, screenshots and backend logs are uploaded when it fails.
+* `codeql.yml` (JavaScript/TypeScript code scanning) and `dependency-review.yml` (blocks pull requests that add dependencies with
+  high-severity advisories). Renovate (`renovate.json`) opens grouped dependency updates against `staging`.
 
 ## Running the full stack locally
 

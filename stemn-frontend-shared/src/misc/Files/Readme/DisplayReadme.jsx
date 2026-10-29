@@ -17,9 +17,13 @@ const propTypesObject = {
 }
 
 export class DisplayReadme extends React.Component {
-  static propTypes = propTypesObject;
-  UNSAFE_componentWillMount() { this.onMount(this.props) }
-  UNSAFE_componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+  static propTypes = propTypesObject
+  UNSAFE_componentWillMount() {
+    this.onMount(this.props)
+  }
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    this.onMount(nextProps, this.props)
+  }
 
   onMount = (nextProps, prevProps) => {
     // If the previewId changes, download a new file
@@ -34,23 +38,19 @@ export class DisplayReadme extends React.Component {
         })
       }
     }
-  };
+  }
 
   render() {
-    const {
-      fileData,
-    } = this.props
-    if (fileData && fileData.loading || fileData && fileData.data) {
+    const { fileData } = this.props
+    if ((fileData && fileData.loading) || (fileData && fileData.data)) {
       return (
-        <div { ...omit(this.props, Object.keys(propTypesObject)) }>
-          { fileData && fileData.data
-            ? <EditorDisplay value={ fileData.data } />
-            : null }
-          <LoadingOverlay show={ fileData && fileData.loading } size="sm" />
+        <div {...omit(this.props, Object.keys(propTypesObject))}>
+          {fileData && fileData.data ? <EditorDisplay value={fileData.data} /> : null}
+          <LoadingOverlay show={fileData && fileData.loading} size="sm" />
         </div>
       )
     }
-    
+
     return <div>This file is empty.</div>
   }
 }

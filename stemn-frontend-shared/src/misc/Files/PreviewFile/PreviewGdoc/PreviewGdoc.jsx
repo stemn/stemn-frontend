@@ -5,7 +5,7 @@ export default class PreviewGdoc extends React.Component {
     const { fileMeta } = this.props
     return (
       <div className="flex rel-box layout-column">
-        <iframe className="flex" src={ fileMeta.url } style={ { border: 'none' } } />
+        <iframe className="flex" src={fileMeta.url} style={{ border: 'none' }} />
       </div>
     )
   }

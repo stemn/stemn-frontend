@@ -34,7 +34,9 @@ const stemnEnvs = {
 module.exports = (stemnEnvType) => {
   let stemnEnv = stemnEnvs[stemnEnvType]
   if (!stemnEnv) {
-    console.warn(`Unknown STEMN_ENV "${stemnEnvType}". Use one of ${Object.keys(stemnEnvs).join(', ')}. Defaulting to local.`)
+    console.warn(
+      `Unknown STEMN_ENV "${stemnEnvType}". Use one of ${Object.keys(stemnEnvs).join(', ')}. Defaulting to local.`,
+    )
     stemnEnv = stemnEnvs.local
   }
   return stemnEnv

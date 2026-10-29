@@ -32,34 +32,34 @@ export const dispatchToProps = {
   select,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'cacheKey',
-  onChange: (props) => {
-    props.getMeta({
-      fileId: props.fileId,
-      revisionId: props.revisionId,
-      projectId: props.projectId,
-      cacheKey: props.cacheKey,
-    })
-    props.fetchTimeline({
-      entityType: 'file',
-      types: ['commits', 'changes'],
-      entityId: props.fileId,
-      cacheKey: props.cacheKey,
-    })
-  },
-}, {
-  hasChanged: 'file.data.fileId',
-  onChange: (props) => {
-    if (get(props, 'file.data.fileId')) {
-      props.initCompare({
+const fetchConfigs = [
+  {
+    hasChanged: 'cacheKey',
+    onChange: (props) => {
+      props.getMeta({
+        fileId: props.fileId,
+        revisionId: props.revisionId,
+        projectId: props.projectId,
         cacheKey: props.cacheKey,
-        file: props.file,
       })
-    }
+      props.fetchTimeline({
+        entityType: 'file',
+        types: ['commits', 'changes'],
+        entityId: props.fileId,
+        cacheKey: props.cacheKey,
+      })
+    },
   },
-}]
-export default compose(
-  connect(stateToProps, dispatchToProps),
-  fetchDataHoc(fetchConfigs),
-)(FileComponent)
+  {
+    hasChanged: 'file.data.fileId',
+    onChange: (props) => {
+      if (get(props, 'file.data.fileId')) {
+        props.initCompare({
+          cacheKey: props.cacheKey,
+          file: props.file,
+        })
+      }
+    },
+  },
+]
+export default compose(connect(stateToProps, dispatchToProps), fetchDataHoc(fetchConfigs))(FileComponent)

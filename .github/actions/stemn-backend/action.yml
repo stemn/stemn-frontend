@@ -1,0 +1,59 @@
+name: Stemn backend fixture
+description: >
+  Checks out stemn-backend, starts it the way developers do (local/start.sh: MongoDB 4.4 + Redis 7 in
+  Docker, API on :3000, websocket server on :8000) and seeds the demo data (local/seed.sh: 8 users with
+  password "password123", 14 projects, files, threads, ...). Used by the website and desktop e2e jobs;
+  reusable by any workflow that needs a running backend.
+inputs:
+  ssh-key:
+    description: Read-only deploy key for the private stemn/stemn-backend repository
+    required: true
+  ref:
+    description: stemn-backend branch / tag / sha
+    default: staging
+  path:
+    description: Where to check the backend out (relative to the workspace)
+    default: .stemn-backend
+outputs:
+  api-url:
+    description: API base url
+    value: http://localhost:3000
+  websocket-url:
+    description: Websocket server url
+    value: http://localhost:8000
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v7
+      with:
+        repository: stemn/stemn-backend
+        ref: ${{ inputs.ref }}
+        path: ${{ inputs.path }}
+        ssh-key: ${{ inputs.ssh-key }}
+        persist-credentials: false
+    - name: Cache the backend dependencies and builds
+      uses: actions/cache@v6
+      with:
+        path: |
+          ${{ inputs.path }}/node_modules
+          ${{ inputs.path }}/libraries/*/build
+          ${{ inputs.path }}/services/api/build
+          ${{ inputs.path }}/services/websocket-server/build
+        key: stemn-backend-${{ runner.os }}-${{ hashFiles(format('{0}/package-lock.json', inputs.path)) }}-${{ hashFiles(format('{0}/libraries/**/src/**', inputs.path), format('{0}/services/api/src/**', inputs.path), format('{0}/services/websocket-server/src/**', inputs.path)) }}
+        restore-keys: |
+          stemn-backend-${{ runner.os }}-${{ hashFiles(format('{0}/package-lock.json', inputs.path)) }}-
+    - name: Start (local/start.sh)
+      shell: bash
+      working-directory: ${{ inputs.path }}
+      run: local/start.sh
+    - name: Seed (local/seed.sh)
+      shell: bash
+      working-directory: ${{ inputs.path }}
+      run: local/seed.sh
+    - name: Smoke check
+      shell: bash
+      run: |
+        curl -fsS http://localhost:3000/api/v1/version
+        curl -fsS -o /dev/null http://localhost:8000/primus/primus.js
+        curl -fsS -X POST http://localhost:3000/api/v1/auth/login -H 'Content-Type: application/json' \
+          -d '{"email":"ada.lovelace@stemn.local","password":"password123"}' > /dev/null

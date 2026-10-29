@@ -11,9 +11,9 @@ class SettingsEmails extends Component {
       <div>
         <EmailAndNotificationToggles
           type="mail"
-          toggleValues={ toggleValues }
-          toggleModel={ toggleModel }
-          saveSettings={ saveSettings }
+          toggleValues={toggleValues}
+          toggleModel={toggleModel}
+          saveSettings={saveSettings}
         />
       </div>
     )

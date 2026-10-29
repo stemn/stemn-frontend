@@ -7,24 +7,24 @@ import classes from './FileCompareInner.module.scss'
 import FileCompareSlider from './FileCompareSlider/FileCompareSlider.jsx'
 
 export interface IFileCompareInnerProps {
-  editActive?: boolean,
-  file1: IFile,
-  file2?: IFile,
-  event?: any,
-  mode: IFileCompareMode,
-  header?: boolean,
-  className?: string,
+  editActive?: boolean
+  file1: IFile
+  file2?: IFile
+  event?: any
+  mode: IFileCompareMode
+  header?: boolean
+  className?: string
 }
 
 export interface IFileCompareInnerState {
-  position: number,
-  width: number,
+  position: number
+  width: number
 }
 
 export class FileCompareInner extends React.Component<IFileCompareInnerProps, IFileCompareInnerState> {
   public containerRef?: HTMLDivElement
   public resizeObserver?: ResizeObserver
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       position: 50,
@@ -36,7 +36,7 @@ export class FileCompareInner extends React.Component<IFileCompareInnerProps, IF
       this.setState({ width: this.containerRef.offsetWidth })
     }
   }
-  public componentWillUnmount () {
+  public componentWillUnmount() {
     if (this.resizeObserver) {
       this.resizeObserver.disconnect()
       this.resizeObserver = undefined
@@ -61,15 +61,8 @@ export class FileCompareInner extends React.Component<IFileCompareInnerProps, IF
       this.updateDimensions()
     }
   }
-  public render () {
-    const {
-      editActive,
-      file1,
-      file2,
-      event,
-      mode,
-      header,
-    } = this.props
+  public render() {
+    const { editActive, file1, file2, event, mode, header } = this.props
     const { width, position } = this.state
 
     const compareModeClasses = {
@@ -92,26 +85,12 @@ export class FileCompareInner extends React.Component<IFileCompareInnerProps, IF
       single: {},
     }
 
-    const overylayStyles = mode === 'slider' && this.containerRef
-      ? { width: `${width}px` }
-      : {}
+    const overylayStyles = mode === 'slider' && this.containerRef ? { width: `${width}px` } : {}
 
     const filePreview1 = () => (
-      <div
-        className={`${classes.preview1} flex layout-column`}
-        style={preview2Style[mode]}
-      >
-        <div
-          className='layout-column flex'
-          style={overylayStyles}
-        >
-          { file2 &&
-            <PreviewFile
-              file={file2}
-              event={event}
-              header={header}
-            />
-          }
+      <div className={`${classes.preview1} flex layout-column`} style={preview2Style[mode]}>
+        <div className="layout-column flex" style={overylayStyles}>
+          {file2 && <PreviewFile file={file2} event={event} header={header} />}
         </div>
       </div>
     )
@@ -120,42 +99,41 @@ export class FileCompareInner extends React.Component<IFileCompareInnerProps, IF
       if (file1) {
         return (
           <div className={`${classes.preview2} flex layout-column`}>
-            { file1 &&
-              <PreviewFile
-                file={file1}
-                event={event}
-                header={header}
-                editActive={editActive}
-              /> }
+            {file1 && <PreviewFile file={file1} event={event} header={header} editActive={editActive} />}
           </div>
         )
       }
     }
 
     return (
-      <div className='layout-column flex'>
-        <div className={cn('flex', 'rel-box', 'scroll-box', compareModeClasses[mode], classes[mode])} ref={this.getContainerRef}>
+      <div className="layout-column flex">
+        <div
+          className={cn('flex', 'rel-box', 'scroll-box', compareModeClasses[mode], classes[mode])}
+          ref={this.getContainerRef}
+        >
           {filePreview1()}
-          { mode === 'slider' &&
+          {mode === 'slider' && (
             <FileCompareSlider
               container={this.containerRef}
               changeFn={this.sliderChange}
               position={this.state.position}
-            /> }
+            />
+          )}
           {filePreview2()}
         </div>
-        { mode === 'onion' &&
+        {mode === 'onion' && (
           <div className={`${classes.rangeSlider} layout-row`}>
             <input
-              className='flex'
-              type='range'
-              min='0'
-              max='100'
-              step='0.1'
+              className="flex"
+              type="range"
+              min="0"
+              max="100"
+              step="0.1"
               style={{ cursor: 'move' }}
               onChange={this.changeFn}
             />
-          </div> }
+          </div>
+        )}
       </div>
     )
   }

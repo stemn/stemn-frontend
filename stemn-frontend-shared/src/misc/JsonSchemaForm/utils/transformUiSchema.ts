@@ -22,12 +22,10 @@ const formats = ['password', 'textarea']
  */
 
 const buildNestedObject = (path: string, object: any): any => {
-
   const subObjects = path.split('.')
 
   let currentRef = object
   for (const key of subObjects) {
-
     if (!currentRef[key]) {
       currentRef[key] = {}
     }
@@ -39,7 +37,6 @@ const buildNestedObject = (path: string, object: any): any => {
 }
 
 export const fixFormatFields = (schema: RJSFSchema, uiSchema: any = {}) => {
-
   const newSchema: RJSFSchema = cloneDeep(schema)
   const newUiSchema: any = cloneDeep(uiSchema)
 
@@ -50,17 +47,16 @@ export const fixFormatFields = (schema: RJSFSchema, uiSchema: any = {}) => {
   }
 
   const traverse = (object: any, ui: any, path: string = '') => {
+    if (!object) {
+      return
+    }
 
-    if (!object) { return }
-
-    if (object.hasOwnProperty('properties')) {
-
+    if (Object.hasOwn(object, 'properties')) {
       const subObject = object.properties
 
       const keys = Object.keys(subObject)
 
       for (const key of keys) {
-
         const newPath = path === '' ? key : `${path}.${key}`
 
         // recurse through the object
@@ -71,8 +67,7 @@ export const fixFormatFields = (schema: RJSFSchema, uiSchema: any = {}) => {
     // build the schema object
     const ref = buildNestedObject(path, ui)
 
-    if (object.hasOwnProperty('format') && formats.includes(object.format)) {
-
+    if (Object.hasOwn(object, 'format') && formats.includes(object.format)) {
       // change the widget for that object so that it displays as wanted
       ref['ui:widget'] = object.format
 
@@ -80,8 +75,7 @@ export const fixFormatFields = (schema: RJSFSchema, uiSchema: any = {}) => {
       delete object.format
     }
 
-    if (object.hasOwnProperty('help')) {
-
+    if (Object.hasOwn(object, 'help')) {
       ref['ui:help'] = object.help
       delete object.help
     }

@@ -1,6 +1,6 @@
 @value timeline-bg from "theme";
 
-.moreDots{
+.moreDots {
   position: absolute;
   top: -1px;
   bottom: -1px;
@@ -8,7 +8,7 @@
   width: 20px;
   box-shadow: inset 39px 0px 20px -30px timeline-bg;
 }
-.right{
+.right {
   left: auto;
   right: 0;
   transform: rotate(180deg);

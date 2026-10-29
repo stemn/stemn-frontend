@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { replace } from 'stemn-shared/routing'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { getPipeline } from 'stemn-shared/misc/Pipelines/Pipelines.actions.js'
-import { notFound } from 'route-actions'
 import ProjectPipeline from './ProjectPipeline'
 
 const stateToProps = ({ projects, pipelines }, { params }) => {
@@ -25,17 +24,17 @@ const dispatchToProps = {
   replace,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'pipelineId',
-  onChange: ({ getPipeline, pipelineId, replace }) => getPipeline({ pipelineId }),
-  // .catch(() => replace(notFound()))
-}]
+const fetchConfigs = [
+  {
+    hasChanged: 'pipelineId',
+    onChange: ({ getPipeline, pipelineId, replace }) => getPipeline({ pipelineId }),
+    // .catch(() => replace(notFound()))
+  },
+]
 
 class ProjectPipelineContainer extends Component {
   render() {
-    return (
-      <ProjectPipeline { ...this.props } />
-    )
+    return <ProjectPipeline {...this.props} />
   }
 }
 

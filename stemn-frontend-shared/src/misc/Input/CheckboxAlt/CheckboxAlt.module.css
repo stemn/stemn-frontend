@@ -1,18 +1,16 @@
 @value primary, bg1 from "theme";
 
-
 .tickOnly input:checked + div {
   background: none !important;
   color: inherit !important;
 }
-
 
 .radio input {
   display: none;
 }
 .radio input + div {
   padding: 10px;
-  transition: all 0.1s ease
+  transition: all 0.1s ease;
 }
 
 .radio label:hover input + div {
@@ -23,7 +21,7 @@
   color: white;
 }
 
-.radio svg{
+.radio svg {
   transition: opacity 0.1s ease;
   opacity: 0;
 }
@@ -31,6 +29,6 @@
   opacity: 0.2;
 }
 
-.radio input:checked + div svg{
+.radio input:checked + div svg {
   opacity: 1;
 }

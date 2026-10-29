@@ -11,7 +11,6 @@ import cn from 'classnames'
 import classes from './ThreadRow.module.css'
 import loadingClasses from 'stemn-shared/misc/Loading/LoadingPlaceholders/LoadingPlaceholders.module.css'
 
-
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
@@ -21,46 +20,55 @@ export class Component extends React.Component {
   onMount = (nextProps, prevProps) => {
     if (!prevProps || prevProps.threadId !== nextProps.threadId) {
       if (!nextProps.thread || !nextProps.thread.data) {
-        nextProps.dispatch(ThreadsActions.getThread({
-          threadId: nextProps.threadId,
-        }))
+        nextProps.dispatch(
+          ThreadsActions.getThread({
+            threadId: nextProps.threadId,
+          }),
+        )
       }
     }
-  };
+  }
 
-  UNSAFE_componentWillMount() { this.onMount(this.props) }
-  UNSAFE_componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+  UNSAFE_componentWillMount() {
+    this.onMount(this.props)
+  }
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    this.onMount(nextProps, this.props)
+  }
 
   render() {
-    const {
-      thread,
-      toggleComplete,
-      toggleRelated,
-      status,
-    } = this.props
+    const { thread, toggleComplete, toggleRelated, status } = this.props
 
     if (!thread || !thread.data) {
       return (
-        <div className={ cn(classes.row, loadingClasses.loading, 'layout-row', 'layout-align-start-center') }>
+        <div className={cn(classes.row, loadingClasses.loading, 'layout-row', 'layout-align-start-center')}>
           <div className="flex text-ellipsis">The thread namelongword goes here</div>
-          <Button className={ cn('xs', classes.button) } style={ { width: '60px' } }>&nbsp;</Button>
-          <Button className={ cn('xs', classes.button) } style={ { width: '60px' } }>&nbsp;</Button>
+          <Button className={cn('xs', classes.button)} style={{ width: '60px' }}>
+            &nbsp;
+          </Button>
+          <Button className={cn('xs', classes.button)} style={{ width: '60px' }}>
+            &nbsp;
+          </Button>
         </div>
       )
     }
     return (
-      <div className={ `${classes.row} layout-row layout-align-start-center` }>
+      <div className={`${classes.row} layout-row layout-align-start-center`}>
         <div className="flex text-ellipsis">{thread.data.name}</div>
         <Button
-          className={ cn('xs', classes.button, { [classes.active]: status === 'complete' }) }
+          className={cn('xs', classes.button, { [classes.active]: status === 'complete' })}
           title="Mark as closed"
-          onClick={ toggleComplete }
-        >Close</Button>
+          onClick={toggleComplete}
+        >
+          Close
+        </Button>
         <Button
-          className={ cn('xs', classes.button, { [classes.active]: status === 'related' }) }
+          className={cn('xs', classes.button, { [classes.active]: status === 'related' })}
           title="Mark as related"
-          onClick={ toggleRelated }
-        >Related</Button>
+          onClick={toggleRelated}
+        >
+          Related
+        </Button>
       </div>
     )
   }

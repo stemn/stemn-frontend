@@ -17,12 +17,12 @@ const filterModel = {
   groups: {
     type: 'array',
     validation: isUuid,
-    transform: value => 'group name',
+    transform: (value) => 'group name',
   },
   labels: {
     type: 'array',
     validation: isUuid,
-    transform: value => 'label name',
+    transform: (value) => 'label name',
   },
   user: {
     type: 'string',
@@ -37,7 +37,6 @@ const filterModel = {
     validation: () => true,
   },
 }
-
 
 const stateToProps = ({ projects, threads, search, stringFilter }, { params, location }) => {
   const projectId = params.stub
@@ -57,7 +56,6 @@ const stateToProps = ({ projects, threads, search, stringFilter }, { params, loc
 
   const searchCacheKey = `threads-${projectId}-${page}`
   const searchQueryKey = `${params.stub}-${page}-${JSON.stringify(filter.object)}`
-
 
   return {
     page,
@@ -81,62 +79,66 @@ const stateToProps = ({ projects, threads, search, stringFilter }, { params, loc
 
 const dispatchToProps = {
   getBoards,
-  showNewThreadModal: modalProps => confirmAuth(() => showModal({
-    modalType: newThreadModalName,
-    modalProps,
-    modalOptions: {
-      noClickClose: true,
-    },
-  })),
+  showNewThreadModal: (modalProps) =>
+    confirmAuth(() =>
+      showModal({
+        modalType: newThreadModalName,
+        modalProps,
+        modalOptions: {
+          noClickClose: true,
+        },
+      }),
+    ),
   setFilter,
   search,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'projectId',
-  onChange: (props) => {
-    props.getBoards({
-      projectId: props.projectId,
-    })
+const fetchConfigs = [
+  {
+    hasChanged: 'projectId',
+    onChange: (props) => {
+      props.getBoards({
+        projectId: props.projectId,
+      })
+    },
   },
-}, {
-  hasChanged: 'searchQueryKey',
-  onChange: (props) => {
-    const parseCompleted = (status) => {
-      if (status === 'closed') {
-        return true
-      } else if (status === 'open') {
-        return false
+  {
+    hasChanged: 'searchQueryKey',
+    onChange: (props) => {
+      const parseCompleted = (status) => {
+        if (status === 'closed') {
+          return true
+        } else if (status === 'open') {
+          return false
+        }
+        return undefined
       }
-      return undefined
-    }
-    // Create the criteria object
-    const criteria = {
-      group: props.filter.object.groups,
-      labels: props.filter.object.labels,
-      name: props.filter.object.query && `/${props.filter.object.query}/i`,
-      complete: parseCompleted(props.filter.object.status),
-      users: props.filter.object.user && [props.filter.object.user],
-    }
+      // Create the criteria object
+      const criteria = {
+        group: props.filter.object.groups,
+        labels: props.filter.object.labels,
+        name: props.filter.object.query && `/${props.filter.object.query}/i`,
+        complete: parseCompleted(props.filter.object.status),
+        users: props.filter.object.user && [props.filter.object.user],
+      }
 
-    props.search({
-      entityType: 'thread',
-      parentType: 'project',
-      parentId: props.projectId,
-      select: ['_id'],
-      cacheKey: props.searchCacheKey,
-      criteria: omitBy(criteria, item => item === ''),
-      size: props.size,
-      page: props.page,
-    })
+      props.search({
+        entityType: 'thread',
+        parentType: 'project',
+        parentId: props.projectId,
+        select: ['_id'],
+        cacheKey: props.searchCacheKey,
+        criteria: omitBy(criteria, (item) => item === ''),
+        size: props.size,
+        page: props.page,
+      })
+    },
   },
-}]
+]
 
 class ProjectThreadsContainer extends Component {
   render() {
-    return (
-      <ProjectThreads { ...this.props } />
-    )
+    return <ProjectThreads {...this.props} />
   }
 }
 

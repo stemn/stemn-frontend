@@ -6,14 +6,11 @@ const stateToProps = ({ auth }) => ({
   auth,
 })
 
-const dispatchToProps = {
-}
+const dispatchToProps = {}
 
 class LandingHeaderContainer extends Component {
   render() {
-    return (
-      <LandingHeader { ...this.props } />
-    )
+    return <LandingHeader {...this.props} />
   }
 }
 

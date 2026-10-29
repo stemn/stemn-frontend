@@ -15,9 +15,10 @@ import { initialise as initAnalytics } from '../modules/Analytics'
 import { getLatest } from 'stemn-shared/misc/DesktopReleases/DesktopReleases.actions'
 import { getNotifications } from 'stemn-shared/misc/Notifications/Notifications.actions'
 
-const waitForRehydration = store => new Promise((resolve) => {
-  persistStore(store, null, resolve)
-})
+const waitForRehydration = (store) =>
+  new Promise((resolve) => {
+    persistStore(store, null, resolve)
+  })
 
 const hideSpinner = () => {
   const spinnerEl = document.getElementById('spinner')
@@ -34,7 +35,9 @@ window.addEventListener('unhandledrejection', (event) => {
   const reason = event.reason
   if (reason && reason.isAxiosError) {
     event.preventDefault()
-    console.warn(`API request failed: ${reason.config && reason.config.method} ${reason.config && reason.config.url} - ${reason.message}`)
+    console.warn(
+      `API request failed: ${reason.config && reason.config.method} ${reason.config && reason.config.url} - ${reason.message}`,
+    )
   }
 })
 
@@ -61,6 +64,6 @@ window.addEventListener('unhandledrejection', (event) => {
   setInterval(() => store.dispatch(getNotifications()), 60 * 1000)
 
   // Render react
-  createRoot(document.getElementById('app')).render(<Root store={ store } router={ router } />)
+  createRoot(document.getElementById('app')).render(<Root store={store} router={router} />)
   hideSpinner()
 })()

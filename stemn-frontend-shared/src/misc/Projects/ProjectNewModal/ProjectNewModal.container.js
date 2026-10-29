@@ -23,4 +23,3 @@ const modalName = 'NEW_PROJECT'
 const ModalComponent = connect(mapStateToProps, mapDispatchToProps)(ProjectNewModal)
 registerModal(modalName, ModalComponent)
 export default modalName
-

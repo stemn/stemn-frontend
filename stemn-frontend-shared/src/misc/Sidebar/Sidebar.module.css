@@ -1,6 +1,6 @@
 @value primary, height-header, sidebar-bg, sidebar-text-1, sidebar-text-2, sidebar-footer, secondary, sidebar-search-border, sidebar-search-bg, sidebar-search-border, sidebar-search-text from "theme";
 
-.sidebar{
+.sidebar {
   border-right: 1px solid rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
@@ -10,18 +10,18 @@
   width: 100%;
 }
 
-.sidebarToolbar{
+.sidebarToolbar {
   height: height-header;
   padding: 10px 20px;
 }
 
-.sidebarSearch{
+.sidebarSearch {
   overflow: hidden;
   position: relative;
   margin: 0 20px 10px;
 }
 
-.sidebarSearch input{
+.sidebarSearch input {
   padding: 14px;
   height: auto;
   padding-right: 40px;
@@ -30,11 +30,11 @@
   color: sidebar-search-text !important;
 }
 
-.sidebarSearch input:focus{
+.sidebarSearch input:focus {
   border: 1px solid sidebar-search-border;
 }
 
-.sidebarSearchIcon{
+.sidebarSearchIcon {
   position: absolute;
   right: 8px;
   top: 10px;
@@ -42,15 +42,15 @@
   color: sidebar-search-text;
 }
 
-.sideBarIcon{
+.sideBarIcon {
   color: sidebar-text-2 !important;
   padding: 0 !important;
 }
 
-.sideBarIcon:hover{
+.sideBarIcon:hover {
   color: sidebar-text-1 !important;
 }
 
-.footer{
+.footer {
   border: 1px solid black;
 }

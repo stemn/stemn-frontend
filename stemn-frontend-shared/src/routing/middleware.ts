@@ -3,13 +3,11 @@ import { toRouterPath } from './query'
 
 /** Minimal interface of the react-router data router we drive */
 export interface INavigator {
-  navigate: (to: any, opts?: any) => any,
-  state?: any,
+  navigate: (to: any, opts?: any) => any
+  state?: any
 }
 
-const toHref = (to: any) => (typeof to === 'string'
-  ? to
-  : `${to.pathname || ''}${to.search || ''}${to.hash || ''}`)
+const toHref = (to: any) => (typeof to === 'string' ? to : `${to.pathname || ''}${to.search || ''}${to.hash || ''}`)
 
 const locationHref = (location: any) => location && `${location.pathname}${location.search || ''}${location.hash || ''}`
 
@@ -43,7 +41,7 @@ export const setRouter = (router: INavigator) => {
 
 export const getRouter = () => currentRouter
 
-function run({ method, args }: { method: string, args: any[] }) {
+function run({ method, args }: { method: string; args: any[] }) {
   const router = currentRouter as INavigator
   switch (method) {
     case 'push':

@@ -1,6 +1,6 @@
 @value primary, border2, border1, bg1 from "theme";
 
-.label{
+.label {
   cursor: default;
   display: inline-block;
   padding: 5px;

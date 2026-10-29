@@ -1,6 +1,6 @@
 @value border1 from "theme";
 
-.root { 
+.root {
   margin-bottom: 15px;
   background: rgb(255, 255, 255);
   border: 1px solid border1;

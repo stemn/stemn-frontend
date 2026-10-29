@@ -18,7 +18,7 @@ const fetchConfigs = []
 
 class NotificationsUnreadContainer extends Component {
   render() {
-    return <NotificationsUnread { ...this.props } />
+    return <NotificationsUnread {...this.props} />
   }
 }
 

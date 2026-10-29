@@ -20,7 +20,7 @@ class IsOwner extends Component {
       template = children
     } else if (team) {
       // If we are checking team permissions...
-      const userInfo = team.find(member => member._id === userId)
+      const userInfo = team.find((member) => member._id === userId)
       if (userInfo && userInfo.permissions && permissionsIsMin(userInfo.permissions.role, minRole)) {
         template = children
       }

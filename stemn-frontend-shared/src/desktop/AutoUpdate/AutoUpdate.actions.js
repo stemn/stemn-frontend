@@ -34,10 +34,13 @@ export function updateDownloaded({ update, version, platform, readme }) {
         readme,
       },
     })
-    dispatch(showConfirm({
-      title: 'Install update',
-      message: 'A new update has been downloaded and is ready for installation. Would you like to restart Stemn Desktop now?',
-    })).then(() => {
+    dispatch(
+      showConfirm({
+        title: 'Install update',
+        message:
+          'A new update has been downloaded and is ready for installation. Would you like to restart Stemn Desktop now?',
+      }),
+    ).then(() => {
       dispatch({
         type: 'ALIASED',
         aliased: true,

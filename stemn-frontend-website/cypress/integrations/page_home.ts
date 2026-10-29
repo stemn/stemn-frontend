@@ -1,7 +1,4 @@
-export const pageHome = (
-  { url }:
-  { url: string },
-) => {
+export const pageHome = ({ url }: { url: string }) => {
   describe('Home Page', () => {
     it('Should redirect to landing', () => {
       cy.visit(url)

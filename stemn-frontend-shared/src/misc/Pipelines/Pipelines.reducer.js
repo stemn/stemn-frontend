@@ -20,18 +20,21 @@ const initialState = {
   stepData: {},
 }
 
-const replacePipelineStepsWithIds = pipeline => ({
+const replacePipelineStepsWithIds = (pipeline) => ({
   ...pipeline,
-  stages: map(stage => ({
-    ...stage,
-    steps: map('_id', stage.steps),
-  }), pipeline.stages),
+  stages: map(
+    (stage) => ({
+      ...stage,
+      steps: map('_id', stage.steps),
+    }),
+    pipeline.stages,
+  ),
 })
 
 const extractSteps = flow(
   flatMap('stages'),
   flatMap('steps'),
-  map(item => ({
+  map((item) => ({
     loading: false,
     data: item,
   })),
@@ -39,17 +42,18 @@ const extractSteps = flow(
 )
 
 const extractPipelines = flow(
-  map(item => ({
+  map((item) => ({
     loading: false,
-    data: replacePipelineStepsWithIds(item),          
+    data: replacePipelineStepsWithIds(item),
   })),
   keyBy('data._id'),
 )
 
 const reducer = (state, action) => {
-  switch (action.type) { 
+  switch (action.type) {
     case 'PIPELINES/GET_PIPELINES_PENDING':
-      return i.chain(state)
+      return i
+        .chain(state)
         .assocIn(['pipelines', action.meta.cacheKey, 'loading'], true)
         .assocIn(['lastPipelinesRequest'], {
           cacheKey: action.meta.cacheKey,
@@ -59,11 +63,15 @@ const reducer = (state, action) => {
     case 'PIPELINES/GET_PIPELINES_REJECTED':
       return i.assocIn(state, ['pipelines', action.meta.cacheKey, 'loading'], false)
     case 'PIPELINES/GET_PIPELINES_FULFILLED':
-      return i.chain(state)
+      return i
+        .chain(state)
         .assocIn(['pipelines', action.meta.cacheKey, 'loading'], false)
-        .assocIn(['pipelines', action.meta.cacheKey, 'data'], action.payload.data.map(item => item._id))
-        .updateIn(['pipelineData'], data => i.merge(data, extractPipelines(action.payload.data)))
-        .updateIn(['stepData'], data => i.merge(data, extractSteps(action.payload.data)))
+        .assocIn(
+          ['pipelines', action.meta.cacheKey, 'data'],
+          action.payload.data.map((item) => item._id),
+        )
+        .updateIn(['pipelineData'], (data) => i.merge(data, extractPipelines(action.payload.data)))
+        .updateIn(['stepData'], (data) => i.merge(data, extractSteps(action.payload.data)))
         .value()
 
     case 'PIPELINES/GET_PIPELINE_PENDING':
@@ -71,18 +79,19 @@ const reducer = (state, action) => {
     case 'PIPELINES/GET_PIPELINE_REJECTED':
       return i.assocIn(state, ['pipelineData', action.meta.cacheKey, 'loading'], false)
     case 'PIPELINES/GET_PIPELINE_FULFILLED':
-      return i.chain(state)
-        .updateIn(['pipelineData'], data => i.merge(data, extractPipelines([action.payload.data])))
-        .updateIn(['stepData'], data => i.merge(data, extractSteps([action.payload.data])))
+      return i
+        .chain(state)
+        .updateIn(['pipelineData'], (data) => i.merge(data, extractPipelines([action.payload.data])))
+        .updateIn(['stepData'], (data) => i.merge(data, extractSteps([action.payload.data])))
         .value()
-        
+
     case 'PIPELINES/RERUN_PIPELINE_PENDING':
       return i.assocIn(state, ['pipelineData', action.meta.pipelineId, 'rerunPending'], true)
     case 'PIPELINES/RERUN_PIPELINE_REJECTED':
       return i.assocIn(state, ['pipelineData', action.meta.pipelineId, 'rerunPending'], false)
     case 'PPIPELINES/RERUN_PIPELINE_FULFILLED':
       return i.assocIn(state, ['pipelineData', action.meta.pipelineId, 'rerunPending'], false)
-      
+
     case 'PIPELINES/CANCEL_PIPELINE_PENDING':
       return i.assocIn(state, ['pipelineData', action.meta.pipelineId, 'cancelPending'], true)
     case 'PIPELINES/CANCEL_PIPELINE_REJECTED':
@@ -95,7 +104,8 @@ const reducer = (state, action) => {
     case 'PIPELINES/GET_STEP_REJECTED':
       return i.assocIn(state, ['stepData', action.meta.cacheKey, 'loading'], false)
     case 'PIPELINES/GET_STEP_FULFILLED':
-      return i.chain(state)
+      return i
+        .chain(state)
         .assocIn(['stepData', action.payload.data._id, 'loading'], false)
         .assocIn(['stepData', action.payload.data._id, 'data'], action.payload.data)
         .value()

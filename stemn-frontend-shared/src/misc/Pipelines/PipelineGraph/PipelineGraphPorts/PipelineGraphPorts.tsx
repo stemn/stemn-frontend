@@ -7,22 +7,21 @@ import { PipelineGraphStepModel } from 'stemn-shared/misc/Pipelines/PipelineGrap
 import s from './PipelineGraphPorts.module.scss'
 
 export interface IPipelineGraphPortsProps {
-  node: PipelineGraphStepModel,
-  type: 'input' | 'output',
-  isSelected: boolean,
+  node: PipelineGraphStepModel
+  type: 'input' | 'output'
+  isSelected: boolean
 }
 
 export class PipelineGraphPorts extends React.PureComponent<IPipelineGraphPortsProps> {
-  public render () {
+  public render() {
     const { node, type, isSelected } = this.props
     return (
       <div className={cn(s.ports, type === 'output' ? s.end : '')}>
-        { pipe(
-            values,
-            filter((port: PortModel) => port.type === type) as any,
-            map((port: PortModel) => <PipelineGraphPort key={port.id} port={port} node={node} isSelected={isSelected} />),
-          )(node.ports)
-        }
+        {pipe(
+          values,
+          filter((port: PortModel) => port.type === type) as any,
+          map((port: PortModel) => <PipelineGraphPort key={port.id} port={port} node={node} isSelected={isSelected} />),
+        )(node.ports)}
       </div>
     )
   }
