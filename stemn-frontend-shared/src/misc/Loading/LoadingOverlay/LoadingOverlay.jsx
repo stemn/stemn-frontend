@@ -1,26 +1,11 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { CSSTransition } from 'react-transition-group'
 import LoadingSpinner from 'stemn-shared/misc/Loading/LoadingSpinner/LoadingSpinner'
 import LoadingLinear from 'stemn-shared/misc/Loading/LoadingLinear/LoadingLinear.jsx'
 import classes from './LoadingOverlay.module.css'
 import cn from 'classnames'
 
-const propTypesObject = {
-  size: PropTypes.string, // 'sm' || 'lg' - Changes the size of the spinner
-  show: PropTypes.bool, // Should we show the overlay?
-  children: PropTypes.node, // Text to show under the spinner
-  style: PropTypes.object, // Styles object
-  linear: PropTypes.bool, // Change the spinner to a linear bar
-  hideBg: PropTypes.bool, // Make the bg transparent
-  noOverlay: PropTypes.bool, // Makes the overlay just at the top (for use with the linear === true)
-  background: PropTypes.string, // Custom background colour
-  progress: PropTypes.number, // Progress percentage - makes the spinner determinate
-}
-
 export default class LoadingOverlay extends React.Component {
-  static propTypes = propTypesObject
-
   overlayRef = React.createRef()
 
   UNSAFE_componentWillReceiveProps(nextProps) {

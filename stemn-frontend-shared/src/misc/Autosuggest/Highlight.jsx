@@ -1,17 +1,8 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import match from 'autosuggest-highlight/match'
 import parse from 'autosuggest-highlight/parse'
 
 export default class Highlight extends Component {
-  static propTypes = {
-    // The text to highlight
-    text: PropTypes.string.isRequired,
-    // The query
-    query: PropTypes.string.isRequired,
-    // The class to be applied to the highlighted section
-    hightlightClass: PropTypes.string.isRequired,
-  }
   static defaultProps = {
     text: '',
     query: '',

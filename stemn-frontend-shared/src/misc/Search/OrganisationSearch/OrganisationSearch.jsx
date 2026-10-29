@@ -1,16 +1,10 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import classes from './OrganisationSearch.module.css'
 
 import Autosuggest from 'stemn-shared/misc/Autosuggest/Autosuggest.container'
 import Highlight from 'stemn-shared/misc/Autosuggest/Highlight'
 
 export default class OrganisationSearch extends Component {
-  static propTypes = {
-    select: PropTypes.func.isRequired,
-    cacheKey: PropTypes.string.isRequired,
-  }
-
   getSuggestionValue = () => (suggestion) => suggestion.name
 
   renderResult = (suggestion, { query }) => (

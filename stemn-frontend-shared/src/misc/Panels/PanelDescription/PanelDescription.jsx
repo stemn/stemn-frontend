@@ -1,14 +1,7 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { Row, Col } from 'stemn-shared/misc/Layout'
 
 export default class PanelDescription extends Component {
-  static propTypes = {
-    title: PropTypes.string,
-    description: PropTypes.string,
-    children: PropTypes.node,
-  }
-
   render() {
     const { title, children, description } = this.props
     return (

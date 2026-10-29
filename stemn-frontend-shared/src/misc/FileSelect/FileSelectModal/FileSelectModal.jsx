@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import classes from './FileSelectModal.module.scss'
 
 import FileList from 'stemn-shared/misc/FileList'
@@ -7,20 +6,8 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import { isDriveFileId, isDropboxFileId } from 'stemn-shared/misc/Files/utils'
 
 // Either a projectId or options.explore must be defined
-const propTypesObject = {
-  projectId: PropTypes.string, // Optional: The project id (this is used if we are not exploring a provider)
-  path: PropTypes.string, // The current fileId: This folder will be opened when the modal inits.
-  model: PropTypes.string, // The { fileId, path } will be assigned to this model on confirm
-  storeKey: PropTypes.string.isRequired, // The store key (to be used in the redicer)
-  options: PropTypes.shape({
-    allowFolder: PropTypes.bool,
-    foldersOnly: PropTypes.bool,
-    explore: PropTypes.string, // Optional: 'dropbox' || 'drive' - The provider
-  }),
-}
 
 export default class FileSelectModal extends React.Component {
-  static propTypes = propTypesObject
   UNSAFE_componentWillMount() {
     this.onMount(this.props)
   }

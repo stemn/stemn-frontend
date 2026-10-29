@@ -10,7 +10,6 @@
 ************************************************************* */
 
 import React from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import cn from 'classnames'
 
@@ -19,10 +18,6 @@ import styles from './TogglePanel.module.css'
 import { MdChevronRight } from 'react-icons/md'
 
 export class TogglePanel extends React.Component {
-  static propTypes = {
-    cacheKey: PropTypes.string.isRequired, // Some cache key string (used as the key in the 'togglePanel' store)
-  }
-
   toggle = (toState) => {
     this.props.dispatch(
       toggle({

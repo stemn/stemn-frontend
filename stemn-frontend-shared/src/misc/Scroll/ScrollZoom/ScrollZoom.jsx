@@ -1,12 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { omit } from 'lodash'
 
-const propTypesObject = {
-  children: PropTypes.node.isRequired, // Child element
-  zoomIn: PropTypes.func.isRequired, // Zoom function - This is run once on each scroll
-  zoomOut: PropTypes.func.isRequired, // Zoom function - This is run once on each scroll
-}
+const ownPropKeys = ['children', 'zoomIn', 'zoomOut']
 
 class ScrollZoom extends React.Component {
   componentDidMount() {
@@ -41,7 +36,7 @@ class ScrollZoom extends React.Component {
         ref={(el) => {
           this.containerRef = el
         }}
-        {...omit(this.props, Object.keys(propTypesObject))}
+        {...omit(this.props, ownPropKeys)}
       >
         {children}
       </div>

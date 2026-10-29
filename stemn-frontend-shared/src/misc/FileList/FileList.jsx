@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { orderBy, get } from 'lodash'
 import cn from 'classnames'
 import classes from './FileList.module.css'
@@ -28,30 +27,7 @@ const FileRowContext =
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
-const propTypesObject = {
-  projectId: PropTypes.string, // Optional: The project id (this is used if we are not exploring a provider)
-  path: PropTypes.string, // The current fileId: This folder will be opened when the modal inits.
-  singleClickFn: PropTypes.func, // When a file is single clicked
-  doubleClickFn: PropTypes.func, // When a file is double clicked
-  crumbClickFn: PropTypes.func, // When a crumb is clicked
-  selected: PropTypes.object, // The currently selected file
-  contentStyle: PropTypes.object, // Styles for the content section
-  initialSync: PropTypes.bool, // Optional: True if this is the initial project sync (general uses !project.remote.lastSynced)
-  crumbPopup: PropTypes.bool, // Optional: Should we show a popup on the crumbs?
-  search: PropTypes.bool, // Optional: Should search be enabled
-  link: PropTypes.bool, // Optional: Should each row be a link with href
-  options: PropTypes.shape({
-    allowFolder: PropTypes.bool,
-    foldersOnly: PropTypes.bool,
-    showMenu: PropTypes.bool,
-    explore: PropTypes.string, // Optional: 'dropbox' || 'drive' - The provider
-  }),
-  dispatch: PropTypes.func, // Actions
-  fileList: PropTypes.object, // Store
-}
-
 export default class FileList extends Component {
-  static propTypes = propTypesObject
   refresh = () => {
     const { getFiles, options, path, projectId, fileListCacheKey } = this.props
     getFiles({

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import cn from 'classnames'
 import DisplayReadme from './DisplayReadme.jsx'
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'
@@ -11,14 +10,6 @@ import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressBut
 import Link from 'stemn-shared/misc/Router/Link'
 
 export default class Readme extends Component {
-  static propTypes = {
-    files: PropTypes.array,
-    project: PropTypes.object.isRequired,
-    projectModel: PropTypes.string.isRequired,
-    saveProject: PropTypes.func.isRequired,
-    isRoot: PropTypes.bool.isRequired, // Is this the readme for the root directory?
-    canEdit: PropTypes.bool.isRequired, // Can the current user edit
-  }
   constructor(props) {
     super(props)
     this.state = {

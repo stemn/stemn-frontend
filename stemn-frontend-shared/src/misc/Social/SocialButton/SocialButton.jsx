@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { PropTypes } from 'prop-types'
 import cn from 'classnames'
 import classes from './SocialButton.module.css'
 import { MdStar, MdStarBorder, MdBookmark, MdBookmarkBorder, MdContentCopy } from 'react-icons/md'
@@ -39,18 +38,6 @@ const getTooltip = (type, entityType, status) => {
 }
 
 export default class SocialButton extends Component {
-  static propTypes = {
-    checkStatus: PropTypes.func.isRequired,
-    add: PropTypes.func.isRequired,
-    remove: PropTypes.func.isRequired,
-    entityId: PropTypes.string.isRequired,
-    entityType: PropTypes.string.isRequired,
-    number: PropTypes.number, // Count - i.e. numLikes or numFollows
-    numberModel: PropTypes.string, // The model of the count - used to iterate it
-    type: PropTypes.oneOf(['follow', 'like', 'clone']).isRequired,
-    status: PropTypes.bool.isRequired,
-  }
-
   UNSAFE_componentWillMount = () => {
     const { checkStatus, entityId, entityType, type } = this.props
     checkStatus({

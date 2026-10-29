@@ -3,10 +3,6 @@ import Input from 'stemn-shared/misc/Input/Input/Input'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 
 export default class UserNameSettings extends Component {
-  //  static propTypes = {
-  //    updateUsername: PropTypes.func.isRequired,
-  //    username: PropTypes.string.isRequired,
-  //  }
   render() {
     const { updateUsername, username, usernameModel } = this.props
     return (

@@ -1,15 +1,8 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import { load } from 'stemn-shared/misc/LazyLoading/LazyLoading.utils'
 
 export default class PreviewCadLoader extends Component {
-  static propTypes = {
-    systemImport: PropTypes.func, // The actual system.import
-    cacheKey: PropTypes.string.isRequired, // The cachekey
-    otherModules: PropTypes.array, // This is an array of global modules
-    loadCode: PropTypes.func.isRequired, // The loadCode function from the container
-  }
   static defaultProps = {
     otherModules: [],
   }

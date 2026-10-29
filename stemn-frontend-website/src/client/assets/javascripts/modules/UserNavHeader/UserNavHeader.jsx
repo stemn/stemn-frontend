@@ -1,16 +1,10 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import SubHeader from 'modules/SubHeader'
 import Tabs from 'stemn-shared/misc/Tabs/Tabs'
 import Link from 'stemn-shared/misc/Router/Link'
 import pluralise from 'stemn-shared/utils/strings/pluralise'
 
 export default class UserNavHeader extends Component {
-  static propTypes = {
-    currentUser: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired,
-  }
-
   render() {
     const { user, currentUser } = this.props
 

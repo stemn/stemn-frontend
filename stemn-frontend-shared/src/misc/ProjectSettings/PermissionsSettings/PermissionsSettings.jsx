@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { get } from 'lodash'
 import ProjectPermissionsRadio from 'stemn-shared/misc/Project/ProjectPermissionsRadio/ProjectPermissionsRadio'
 import LicenseSettings from 'stemn-shared/misc/ProjectSettings/LicenseSettings'
@@ -7,12 +6,6 @@ import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 
 export default class ProjectSettingsPermissions extends Component {
-  static propTypes = {
-    saveProject: PropTypes.func.isRequired,
-    project: PropTypes.object.isRequired,
-    projectModel: PropTypes.string.isRequired,
-  }
-
   saveProject = () => {
     this.props.saveProject({
       project: this.props.project.data,

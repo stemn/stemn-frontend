@@ -1,18 +1,10 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import classes from './SubHeader.module.css'
 import cn from 'classnames'
 
 import { Container } from 'stemn-shared/misc/Layout'
 
 export default class SubHeader extends Component {
-  static propTypes = {
-    children: PropTypes.node,
-    noline: PropTypes.bool,
-    style: PropTypes.object,
-    noResponsive: PropTypes.bool,
-  }
-
   render() {
     const { title, children, noline, style, noResponsive } = this.props
     const borderStyle = noline ? {} : { borderBottom: '1px solid rgba(0, 0, 0, 0.1)' }

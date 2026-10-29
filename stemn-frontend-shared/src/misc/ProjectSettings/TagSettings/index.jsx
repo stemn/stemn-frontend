@@ -1,17 +1,9 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 import TagEdit from 'stemn-shared/misc/Tags/TagEdit'
 import FieldSearch from 'stemn-shared/misc/Search/FieldSearch'
 
 export default class GeneralSettings extends Component {
-  static propTypes = {
-    entityModel: PropTypes.string.isRequired,
-    project: PropTypes.object.isRequired,
-    addField: PropTypes.func.isRequired,
-    removeField: PropTypes.func.isRequired,
-    saveProject: PropTypes.func.isRequired,
-  }
   saveProject = () => {
     this.props.saveProject({
       project: this.props.project.data,

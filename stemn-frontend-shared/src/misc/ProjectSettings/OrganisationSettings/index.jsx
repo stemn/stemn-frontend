@@ -1,16 +1,9 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 import TagEdit from 'stemn-shared/misc/Tags/TagEdit'
 import OrganisationSearch from 'stemn-shared/misc/Search/OrganisationSearch'
 
 export default class OrganisationSettings extends Component {
-  static propTypes = {
-    project: PropTypes.object.isRequired,
-    addOrganisation: PropTypes.func.isRequired,
-    removeOrganisation: PropTypes.func.isRequired,
-    saveProject: PropTypes.func.isRequired,
-  }
   saveProject = () => {
     this.props.saveProject({
       project: this.props.project.data,

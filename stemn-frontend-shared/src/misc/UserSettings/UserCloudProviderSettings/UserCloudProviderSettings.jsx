@@ -1,13 +1,7 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import LinkAccount from 'stemn-shared/misc/Settings/LinkAccount/LinkAccount'
 
 export default class UserCloudProviderSettings extends Component {
-  static propTypes = {
-    user: PropTypes.object.isRequired,
-    authenticate: PropTypes.func.isRequired,
-    unlink: PropTypes.func.isRequired,
-  }
   render() {
     const { user, authenticate, unlink } = this.props
     return (

@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import classes from './PreviewPdf.module.css'
 import { TextLayer } from 'pdfjs-dist'
 import Waypoint from 'stemn-shared/misc/Waypoint'
@@ -144,10 +143,6 @@ class Page extends React.Component {
       </div>
     )
   }
-}
-
-Page.propTypes = {
-  index: PropTypes.number.isRequired,
 }
 
 export default Page

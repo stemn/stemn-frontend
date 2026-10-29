@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import moment from 'moment'
 
 import classes from './TimelineItem.module.scss'
@@ -14,12 +13,6 @@ import TimelineItemText from './TimelineItemText'
 const groupLimit = 4
 
 export default class TimelineItem extends Component {
-  static propTypes = {
-    type: PropTypes.oneOf(['feed', 'user', 'file', 'thread', 'project']),
-    item: PropTypes.object,
-    isFirst: PropTypes.bool,
-    isLast: PropTypes.bool,
-  }
   state = {
     expanded: false,
   }

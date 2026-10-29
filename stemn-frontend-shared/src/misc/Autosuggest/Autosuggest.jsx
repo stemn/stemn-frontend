@@ -1,36 +1,9 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import Autosuggest from 'react-autosuggest'
 import LoadingLinear from 'stemn-shared/misc/Loading/LoadingLinear/LoadingLinear'
 import classes from './Autosuggest.module.css'
 
 export default class AutosuggestWrapped extends Component {
-  static propTypes = {
-    // Key used to to link this to the store
-    // This is done in the container
-    cacheKey: PropTypes.string.isRequired,
-    // The placeholder
-    placeholder: PropTypes.string,
-    // Entity type used in API search query
-    entityType: PropTypes.string.isRequired,
-    // The current text in the autosuggest
-    value: PropTypes.string.isRequired,
-    // Array of suggestions
-    suggestions: PropTypes.array.isRequired,
-    // Is the autosuggest loading?
-    isLoading: PropTypes.bool.isRequired,
-    // Should we set the value when we click it (default is to clear)
-    setValue: PropTypes.bool,
-    // Function to update the input
-    updateInputValue: PropTypes.func.isRequired,
-    clearSuggestions: PropTypes.func.isRequired,
-    loadSuggestions: PropTypes.func.isRequired,
-    renderResult: PropTypes.func.isRequired,
-    renderNoResult: PropTypes.func, // If true, a no-result will be added to the suggestions list
-    clickResult: PropTypes.func.isRequired,
-    clickNoResult: PropTypes.func,
-  }
-
   onChange = (event, { newValue }) => {
     if (typeof newValue === 'string') {
       this.props.updateInputValue(newValue)

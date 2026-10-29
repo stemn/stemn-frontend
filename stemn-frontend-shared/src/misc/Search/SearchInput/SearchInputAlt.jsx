@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import CodeMirror from 'stemn-shared/misc/CodeMirror'
 import classes from './SearchInput.module.css'
 import cn from 'classnames'
@@ -25,12 +24,6 @@ import { parseFilterStringWithPositions } from 'stemn-shared/misc/StringFilter/S
 // }
 
 export default class EditorNew extends Component {
-  static propTypes = {
-    model: PropTypes.string,
-    value: PropTypes.string,
-    change: PropTypes.func.isRequired,
-    placeholder: PropTypes.string,
-  }
   constructor(props) {
     super(props)
     this.state = {

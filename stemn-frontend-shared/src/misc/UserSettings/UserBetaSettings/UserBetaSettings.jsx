@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import TextDisplayBox from 'stemn-shared/misc/TextDisplayBox/TextDisplayBox.jsx'
 
 export default class UserBetaSettings extends Component {
-  static propTypes = {
-    user: PropTypes.object.isRequired,
-  }
   render() {
     const { user } = this.props
     return (

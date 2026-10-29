@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import cn from 'classnames'
 import classes from './Upload.module.css'
 import Dropzone from 'react-dropzone'
@@ -7,20 +6,6 @@ import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOver
 import { MdFileUpload } from 'react-icons/md'
 
 export default class Upload extends Component {
-  static propTypes = {
-    uploadId: PropTypes.string.isRequired, // The id of this uploader (used as cache key)
-    style: PropTypes.object, // Styles
-    containerClassName: PropTypes.string, // Classes for the container element
-    imageClassName: PropTypes.string, // Classes for the image element
-    model: PropTypes.string, // The model (optional)
-    value: PropTypes.string, // The initial value
-    onUpload: PropTypes.func, // Function to be run when the upload is complete
-    // From container
-    uploadData: PropTypes.object,
-    upload: PropTypes.func.isRequired,
-    change: PropTypes.func.isRequired,
-  }
-
   dropActiveStyle = {
     outline: '4px solid #82c382',
   }

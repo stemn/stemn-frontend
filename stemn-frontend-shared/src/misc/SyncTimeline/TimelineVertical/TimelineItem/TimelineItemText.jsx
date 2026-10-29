@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import Link from 'stemn-shared/misc/Router/Link'
 import ThreadLabelDots from 'stemn-shared/misc/Threads/ThreadLabelDots/ThreadLabelDots.jsx'
 import UserNameFromId from 'stemn-shared/misc/Users/UserNameFromId'
@@ -374,12 +373,6 @@ const eventTextMap = {
 }
 
 export default class TimelineItemText extends Component {
-  static propTypes = {
-    type: PropTypes.oneOf(['feed', 'user', 'file', 'thread', 'project']),
-    item: PropTypes.object,
-    entity: PropTypes.object,
-    groupItem: PropTypes.bool,
-  }
   render() {
     const { item, type, entity, groupItem } = this.props
     const groupTitle = item.eventsGrouped

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import moment from 'moment'
 import createDateObjects from './createDateObjects'
 
@@ -7,19 +6,6 @@ import cn from 'classnames'
 import classes from './Calendar.module.scss'
 
 export default class Calendar extends Component {
-  static propTypes = {
-    weekOffset: PropTypes.number.isRequired,
-    type: PropTypes.string, // 'datepicker'
-
-    selectedDate: PropTypes.object.isRequired,
-    viewDate: PropTypes.object.isRequired,
-
-    renderDay: PropTypes.func,
-    onNextMonth: PropTypes.func.isRequired,
-    onPrevMonth: PropTypes.func.isRequired,
-    onPickDate: PropTypes.func,
-  }
-
   static defaultProps = {
     weekOffset: 0,
     renderDay: (day) => day.format('YYYY-MM-D'),

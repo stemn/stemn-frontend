@@ -1,14 +1,8 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import Tag from 'stemn-shared/misc/Tags/Tag'
 import Link from 'stemn-shared/misc/Router/Link'
 
 export default class RelatedList extends Component {
-  static propTypes = {
-    fieldId: PropTypes.string.isRequired,
-    limit: PropTypes.number,
-    related: PropTypes.object,
-  }
   static defaultProps = {
     limit: 100,
   }

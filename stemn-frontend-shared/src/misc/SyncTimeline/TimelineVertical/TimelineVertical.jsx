@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import moment from 'moment'
 import { sum, get, groupBy, orderBy } from 'lodash'
 import TimelineItem from './TimelineItem/TimelineItem'
@@ -52,13 +51,6 @@ const getCalendarText = (time) => moment(time).calendar().split(' at')[0]
 const getNumberOfGroupedItems = (dayGroups) => sum(dayGroups.map((dayGroup) => dayGroup.items.length))
 
 export default class TimelineVertical extends Component {
-  static propTypes = {
-    type: PropTypes.oneOf(['feed', 'user', 'file', 'thread', 'project']),
-    items: PropTypes.array,
-    group: PropTypes.bool,
-    entity: PropTypes.object,
-    timelineCacheKey: PropTypes.string,
-  }
   renderItems = (items, forceExpand) =>
     // We force the group to be expanded if there are
     // only a few groups to display on the page

@@ -2,22 +2,15 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as FilesActions from '../Files.actions'
 import React from 'react'
-import PropTypes from 'prop-types'
 import { omit } from 'lodash'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
-const propTypesObject = {
-  file: PropTypes.object,
-  fileData: PropTypes.object,
-  cacheKey: PropTypes.string,
-  filesActions: PropTypes.object,
-}
+const ownPropKeys = ['file', 'fileData', 'cacheKey', 'filesActions']
 
 export class DisplayReadme extends React.Component {
-  static propTypes = propTypesObject
   UNSAFE_componentWillMount() {
     this.onMount(this.props)
   }
@@ -44,7 +37,7 @@ export class DisplayReadme extends React.Component {
     const { fileData } = this.props
     if ((fileData && fileData.loading) || (fileData && fileData.data)) {
       return (
-        <div {...omit(this.props, Object.keys(propTypesObject))}>
+        <div {...omit(this.props, ownPropKeys)}>
           {fileData && fileData.data ? <EditorDisplay value={fileData.data} /> : null}
           <LoadingOverlay show={fileData && fileData.loading} size="sm" />
         </div>

@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import moment from 'moment'
 import { orderByTime } from 'stemn-shared/misc/Timeline/Timeline.utils'
 import { getRevisions } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.utils'
@@ -12,14 +11,7 @@ import DownloadFile from '../../DownloadFile/DownloadFile.jsx'
 import Label from 'stemn-shared/misc/Label/Label.jsx'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
-const propTypesObject = {
-  //  revisions: PropTypes.array,                // Standard array of revisions
-  file: PropTypes.object.isRequired, // File object
-}
-
 export default class DownloadModal extends React.Component {
-  static propTypes = propTypesObject
-
   UNSAFE_componentWillMount() {
     const { file, fetchTimeline } = this.props
     if (file.project && file.project._id) {

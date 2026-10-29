@@ -1,15 +1,10 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import classes from './SubSubHeader.module.css'
 import cn from 'classnames'
 
 import { Container } from 'stemn-shared/misc/Layout'
 
 export default class SubHeader extends Component {
-  static propTypes = {
-    children: PropTypes.node,
-  }
-
   render() {
     const { title, children, className, ...otherProps } = this.props
     return (

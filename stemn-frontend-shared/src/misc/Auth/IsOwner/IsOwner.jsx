@@ -1,16 +1,8 @@
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { permissionsIsMin } from 'stemn-shared/misc/Auth/Auth.utils'
 
 class IsOwner extends Component {
-  static propTypes = {
-    ownerId: PropTypes.string,
-    team: PropTypes.array,
-    userId: PropTypes.string,
-    children: PropTypes.node.isRequired,
-    minRole: PropTypes.string,
-  }
   render() {
     const { userId, minRole, team, ownerId, children } = this.props
     let template = null

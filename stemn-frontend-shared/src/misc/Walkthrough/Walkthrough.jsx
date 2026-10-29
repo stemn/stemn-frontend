@@ -7,7 +7,6 @@ import * as WalkthroughActions from './Walkthrough.actions.js'
 
 // Component Core
 import React from 'react'
-import PropTypes from 'prop-types'
 import { omit } from 'lodash'
 import { getStepData } from './Walkthrough.config.jsx'
 
@@ -17,15 +16,10 @@ import Popover from 'stemn-shared/misc/Popover'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import { MdClose } from 'react-icons/md'
 
-const WalkthroughPropTypes = {
-  children: PropTypes.node, // Child element
-  name: PropTypes.string, //
-}
+const walkthroughOwnPropKeys = ['children', 'name']
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
 export class Walkthrough extends React.Component {
-  static propTypes = WalkthroughPropTypes
-
   render() {
     const { children, name } = this.props
     const { walkthroughActions, walkthrough } = this.props
@@ -62,7 +56,7 @@ export class Walkthrough extends React.Component {
     }
 
     return (
-      <Popover {...omit(this.props, Object.keys(WalkthroughPropTypes))} open={isActive} trigger="none" tipSize={6}>
+      <Popover {...omit(this.props, walkthroughOwnPropKeys)} open={isActive} trigger="none" tipSize={6}>
         {children || <div />}
         <div className={classes.walkthrough}>
           <SimpleIconButton style={{ position: 'absolute', top: '2px', right: '4px' }} onClick={close}>

@@ -1,5 +1,4 @@
 import React, { useCallback, useRef } from 'react'
-import PropTypes from 'prop-types'
 import { useDrag, useDrop } from 'react-dnd'
 
 const ItemTypes = {
@@ -123,11 +122,4 @@ export default function ThreadGroupWrapped(props) {
       {children}
     </div>
   )
-}
-
-ThreadGroupWrapped.propTypes = {
-  index: PropTypes.number.isRequired,
-  item: PropTypes.object.isRequired,
-  moveGroup: PropTypes.func.isRequired,
-  layout: PropTypes.string.isRequired, // Required to determine drag direction, horizontal or veritcal
 }

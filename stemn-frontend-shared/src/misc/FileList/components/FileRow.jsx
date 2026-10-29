@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import moment from 'moment'
 import cn from 'classnames'
 import classes from './FileRow.module.css'
@@ -33,15 +32,6 @@ const ClickFile = (props) => {
 }
 
 export default class FileRow extends Component {
-  static propTypes = {
-    singleClick: PropTypes.func,
-    doubleClick: PropTypes.func,
-    file: PropTypes.object.isRequired,
-    query: PropTypes.string,
-    isActive: PropTypes.bool,
-    link: PropTypes.bool,
-    showPath: PropTypes.bool,
-  }
   singleClick = () => {
     const { singleClick, file } = this.props
     if (singleClick) {
