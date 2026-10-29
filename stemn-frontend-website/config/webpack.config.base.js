@@ -1,37 +1,27 @@
-// Common Webpack configuration used by webpack.config.development and webpack.config.production
-const { join, sep } = require('path')
+// webpack 5 FALLBACK build (npm run dev:webpack / build:webpack). The primary toolchain is Vite
+// (../vite.config.ts); this config follows the same conventions and is kept working until the
+// webpack fallback is retired (see docs/DECISIONS.md).
+// Common configuration used by webpack.config.development and webpack.config.production.
+const { join } = require('path')
+const { readFileSync } = require('fs')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const getStemnEnv = require('./getStemnEnv')
+const { scopedClassName, sassOptions } = require('stemn-frontend-shared/config/styles.cjs')
+const globalEnv = require('./globalEnv')
 
 const root = join(__dirname, '..')
 const sharedRoot = join(root, '../stemn-frontend-shared')
-const assetsRoot = join(root, 'src/client/assets')
+const javascripts = join(root, 'src/client/assets/javascripts')
 const fileTypeIconsDir = join(sharedRoot, 'src/misc/FileList/filetype')
 
-// CSS convention (carried over from the webpack 2 config):
-//  - `*.global.(css|scss)` files are always plain global CSS
-//  - every other css/scss file in these directories is a CSS module
-//  - anything else (e.g. node_modules css, and the shared global stylesheets in
-//    stemn-shared/assets/css that index.global.scss @imports) is global CSS
-// css-loader resolves every @import as its own module, so the mode must be decided per file.
-// All files still go through css-loader's modules pipeline in `global` mode so that
-// `@value x from "theme"` keeps working in global stylesheets.
-const cssModuleDirs = [
-  join(assetsRoot, 'javascripts'),
-  join(assetsRoot, 'styles/modules'),
-  sharedRoot,
-].map(dir => dir + sep)
-const globalCssDirs = [
-  join(sharedRoot, 'src/assets/css'),
-].map(dir => dir + sep)
-const isCssModule = resourcePath => !/\.global\.(css|scss)$/.test(resourcePath)
-  && cssModuleDirs.some(dir => resourcePath.startsWith(dir))
-  && !globalCssDirs.some(dir => resourcePath.startsWith(dir))
+// index.html is Vite's entry html; html-webpack-plugin injects the webpack bundles instead
+// of Vite's module script.
+const htmlTemplate = readFileSync(join(root, 'index.html'), 'utf8')
+  .replace(/\s*<script type="module" src="[^"]*"><\/script>/, '')
 
 module.exports = ({ mode, styleLoader, refresh = false }) => {
   const isDev = mode === 'development'
-  const stemnEnvName = process.env.STEMN_ENV || (isDev ? 'local' : 'production')
+  const env = globalEnv({ mode, isDevServer: Boolean(process.env.WEBPACK_SERVE) })
 
   const styleLoaders = [
     styleLoader,
@@ -40,10 +30,10 @@ module.exports = ({ mode, styleLoader, refresh = false }) => {
       options: {
         importLoaders: 2,
         sourceMap: isDev,
+        // Standard convention: only `*.module.(s)css` files are CSS modules
         modules: {
-          auto: () => true,
-          mode: resourcePath => (isCssModule(resourcePath) ? 'local' : 'global'),
-          localIdentName: '[name]_[local]-[hash:base64:5]',
+          auto: true,
+          getLocalIdent: (context, _localIdentName, localName) => scopedClassName(localName, context.resourcePath),
           namedExport: false,
           exportLocalsConvention: 'as-is',
         },
@@ -61,10 +51,7 @@ module.exports = ({ mode, styleLoader, refresh = false }) => {
     loader: require.resolve('sass-loader'),
     options: {
       api: 'modern-compiler',
-      sassOptions: {
-        quietDeps: true,
-        silenceDeprecations: ['import', 'global-builtin', 'color-functions', 'slash-div', 'legacy-js-api'],
-      },
+      sassOptions,
     },
   }
 
@@ -79,34 +66,26 @@ module.exports = ({ mode, styleLoader, refresh = false }) => {
     },
     resolve: {
       symlinks: false,
-      modules: [
-        join(root, 'src/client/scripts'),
-        assetsRoot,
-        join(assetsRoot, 'javascripts'),
-        // Normal hierarchical lookup (must not be an absolute path, or nested
-        // node_modules versions would be shadowed by the hoisted ones)
-        'node_modules',
-      ],
       alias: {
         'stemn-shared': join(sharedRoot, 'src'),
-        theme: join(assetsRoot, 'styles/modules/theme.css'),
-        'route-actions': join(assetsRoot, 'javascripts/pages/routeActions.js'),
-        reducer: join(assetsRoot, 'javascripts/app/reducer.ts'),
-        'get-root-path': join(root, 'src/client/getRootPath.js'),
-        // Node-only modules referenced by vendored browser code (primus client, gerber parser)
-        ws: false,
-        fs: false,
+        theme$: join(root, 'src/client/assets/styles/modules/theme.module.css'),
+        'route-actions$': join(javascripts, 'pages/routeActions.js'),
+        reducer$: join(javascripts, 'app/reducer.ts'),
+        pages: join(javascripts, 'pages'),
+        modules: join(javascripts, 'modules'),
+        layout: join(javascripts, 'layout'),
       },
-      extensions: ['.web.ts', '.web.tsx', '.web.js', '.web.jsx', '.ts', '.tsx', '.js', '.jsx', '.json', '.scss'],
+      // `.webpack.js`: webpack-only variants of modules that use Vite APIs (import.meta.glob)
+      extensions: ['.webpack.js', '.web.ts', '.web.tsx', '.web.js', '.web.jsx', '.ts', '.tsx', '.js', '.jsx', '.json'],
     },
     module: {
       rules: [
         // JavaScript / TypeScript (app + shared source)
         {
           test: /\.(js|jsx|ts|tsx)$/,
-          include: [join(assetsRoot, 'javascripts'), join(root, 'src/client/scripts'), join(sharedRoot, 'src')],
-          // The vendored primus client is pre-built browser code
-          exclude: [/primus-websockets\d\.js$/, /PreviewPcb[\\/]viewer[\\/]three(\.min)?\.js$/],
+          include: [javascripts, join(sharedRoot, 'src')],
+          // Vendored, pre-built browser code
+          exclude: [/primus-websockets\d\.js$/, /PreviewPcb[\\/]viewer[\\/]three\.js$/],
           use: {
             loader: require.resolve('babel-loader'),
             options: {
@@ -120,15 +99,11 @@ module.exports = ({ mode, styleLoader, refresh = false }) => {
                 // Babel 8 defaults to only removing `import type`; elide unused (type-only) imports like tsc does
                 [require.resolve('@babel/preset-typescript'), { onlyRemoveTypeImports: false }],
               ],
-              plugins: [
-                // `@connect(...)` class decorators are used throughout the codebase
-                [require.resolve('@babel/plugin-proposal-decorators'), { version: 'legacy' }],
-                ...(refresh ? [require.resolve('react-refresh/babel')] : []),
-              ],
+              plugins: refresh ? [require.resolve('react-refresh/babel')] : [],
             },
           },
         },
-        // Styles. See `isCssModule` for which files are CSS modules.
+        // Styles (`*.module.(s)css` are CSS modules, see css-loader `modules.auto`)
         {
           test: /\.css$/,
           use: styleLoaders,
@@ -164,17 +139,10 @@ module.exports = ({ mode, styleLoader, refresh = false }) => {
     plugins: [
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(mode),
-        GLOBAL_ENV: {
-          APP_TYPE: JSON.stringify('web'),
-          NODE_ENV: JSON.stringify(mode),
-          SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
-          ...getStemnEnv(stemnEnvName),
-        },
+        GLOBAL_ENV: Object.fromEntries(Object.entries(env).map(([key, value]) => [key, JSON.stringify(value)])),
       }),
-      // Only bundle the english moment locale
-      new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en/),
       new HtmlWebpackPlugin({
-        template: join(assetsRoot, 'index.html'),
+        templateContent: htmlTemplate,
         scriptLoading: 'defer',
       }),
     ],

@@ -1,3 +1,4 @@
+// webpack 5 fallback, see webpack.config.base.js
 const { join } = require('path')
 const { merge } = require('webpack-merge')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -5,13 +6,12 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const base = require('./webpack.config.base')
 
-const assetsRoot = join(__dirname, '../src/client/assets')
+const root = join(__dirname, '..')
+const entry = { application: join(root, 'src/client/assets/javascripts/app/index.jsx') }
 
 module.exports = merge(base({ mode: 'production', styleLoader: MiniCssExtractPlugin.loader }), {
   devtool: 'source-map',
-  entry: {
-    application: 'production',
-  },
+  entry,
   output: {
     filename: 'js/[name].[contenthash:8].js',
     chunkFilename: 'js/[name].[contenthash:8].js',
@@ -40,8 +40,7 @@ module.exports = merge(base({ mode: 'production', styleLoader: MiniCssExtractPlu
     }),
     new CopyWebpackPlugin({
       patterns: [
-        { from: join(assetsRoot, 'images'), to: 'images' },
-        { from: join(assetsRoot, 'static'), to: 'static' },
+        { from: join(root, 'public'), to: '.' },
       ],
     }),
   ],

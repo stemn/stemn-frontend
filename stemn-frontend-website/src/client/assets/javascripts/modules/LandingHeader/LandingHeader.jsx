@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
-import classes from './LandingHeader.scss'
+import classes from './LandingHeader.module.scss'
 import cn from 'classnames'
 import { loginRoute } from 'route-actions'
 import { Container } from 'stemn-shared/misc/Layout'
 import Avatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import Link from 'stemn-shared/misc/Router/Link'
-import logo from 'images/logo80x80none.png'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import HeaderMobileMenu from 'modules/HeaderMobileMenu'
 import { MdMenu } from 'react-icons/md'
 import BetaBadge from 'modules/BetaBadge'
+
+// public/images (served as-is at /images)
+const logo = '/images/logo80x80none.png'
 
 export default class LandingHeader extends Component {
   constructor(props) {

@@ -20,12 +20,13 @@ All the commands below can be run from the repo root or from this folder.
 
 ### Development server
 
-* `npm run dev` starts webpack-dev-server with React Fast Refresh on [http://localhost:8081/](http://localhost:8081/) (override with `PORT=...`).
+* `npm run dev` starts the Vite 8 dev server with React Fast Refresh on [http://localhost:8081/](http://localhost:8081/) (override with `PORT=...`).
   Port 3000 is used by the API and 8000 by the websocket server.
 
 ### Backend / `STEMN_ENV`
 
-The backend urls are baked in at build time from `STEMN_ENV` (see `config/getStemnEnv.js`):
+The backend urls are baked in at build time from `STEMN_ENV`
+(table in `stemn-frontend-shared/config/stemnEnv.cjs`, applied by `config/globalEnv.js`):
 
 | STEMN_ENV    | API_SERVER                  | WEBSOCKET_SERVER                   | WEBSITE_URL             |
 |--------------|-----------------------------|------------------------------------|-------------------------|
@@ -40,19 +41,49 @@ Set `SENTRY_DSN` at build time to enable Sentry error reporting.
 
 ### Build Production
 
-* `npm run build` builds the production bundle to `build/client` (and copies the express server to `build/server`)
+* `npm run build` builds the production bundle with Vite to `build/client` (and copies the express server to `build/server`)
 * `npm run serve` serves this build on [http://localhost:8081/](http://localhost:8081/) (`PORT=...` to change)
-* `npm run analyse` builds and opens webpack-bundle-analyzer
+
+### webpack 5 fallback
+
+The previous webpack 5 + Babel toolchain is kept working as a fallback (`config/webpack.config.*.js`) until it is
+retired. It builds the same source with the same conventions:
+
+* `npm run dev:webpack` webpack-dev-server with React Fast Refresh on :8081
+* `npm run build:webpack` production build to `build/client` (+ `build/server`)
+
+The git tag `webpack5-fallback` marks the last commit that was built with webpack only.
 
 ### Type checking
 
-* `npm run typecheck` runs `tsc --noEmit`. TypeScript is only type-checked; Babel transpiles it, so type errors never break the build.
+* `npm run typecheck` runs `tsc --noEmit` for the app (`tsconfig.json`) and the Vite config (`tsconfig.node.json`).
+  Vite (Oxc) only strips types, so type errors never break the build.
+
+### Layout and conventions
+
+```
+index.html            Vite entry html (also the webpack fallback's html template)
+vite.config.mts       Vite config
+config/               globalEnv.js (GLOBAL_ENV), webpack 5 fallback configs
+public/               images/ and static/ (fonts, Autodesk viewer, video), served as-is at /images and /static
+src/client/assets/javascripts/   the app (app/index.jsx is the entry)
+src/client/assets/styles/        global stylesheets and the theme (theme.module.css)
+src/server/           express server for the production build
+```
+
+* Imports: `stemn-shared/*` (shared code), `pages/*`, `modules/*`, `layout/*`, `route-actions`, `reducer`, `theme` (in `@value` imports).
+  `.web.*` files win over the generic ones (the desktop app resolves `.desktop.*`), so platform specific modules
+  are plain ES modules picked by the bundler (no runtime `require` switches).
+* JSX lives in `.jsx` / `.tsx` files. Default-exported components are named functions or classes (React Fast Refresh).
+* Styles: `*.module.(s)css` files are CSS modules (`import classes from './Foo.module.scss'`, class names
+  `<File>_<class>-<hash>`); every other stylesheet is global CSS. CSS modules import theme values with
+  `@value primary from "theme"`; global stylesheets use the `--theme-*` custom properties
+  (`stemn-shared/assets/css/theme-variables.css`). Sass is Dart Sass.
 
 ### Stack
 
-webpack 5, Babel 8, React 19, Redux 5 / react-redux 9, react-router 8 (through the compatibility layer in
-`stemn-frontend-shared/src/routing`, which keeps the react-router v3 / react-router-redux APIs the app was written against),
-sass + CSS modules (`*.global.(s)css` files are global, every other style file in the app / shared code is a CSS module).
+Vite 8 (Rolldown, Oxc, React Fast Refresh) with a webpack 5 fallback, React 19, Redux 5 / react-redux 9, react-router 8 (through the
+compatibility layer in `stemn-frontend-shared/src/routing`, which keeps the react-router v3 / react-router-redux APIs the app was written against).
 
 ## Branches
 

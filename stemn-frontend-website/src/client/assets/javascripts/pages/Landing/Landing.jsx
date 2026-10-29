@@ -4,7 +4,6 @@ import HeroBanner from 'modules/HeroBanner';
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { MdInput as MdLock } from 'react-icons/md';
-import vidDemo from 'static/video/demo.mp4';
 import Button from 'stemn-shared/misc/Buttons/Button/Button';
 import DownloadButton from 'stemn-shared/misc/DesktopReleases/DownloadButton';
 import FileIcon from 'stemn-shared/misc/FileList/components/FileIcon';
@@ -15,8 +14,11 @@ import isMobile from 'stemn-shared/utils/agent/isMobile';
 import deviceMockups from './deviceMockups.jpg';
 import historyCombined from './historyCombined.jpg';
 import historyTimeline from './historyTimeline.png';
-import classes from './Landing.scss';
+import classes from './Landing.module.scss';
 import screenshot from './screenshot.jpg';
+
+// public/static (served as-is at /static)
+const vidDemo = '/static/video/demo.mp4'
 
 export default class Landing extends Component {
   constructor(props) {

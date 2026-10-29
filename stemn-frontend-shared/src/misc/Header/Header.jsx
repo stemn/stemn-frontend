@@ -6,7 +6,7 @@ import { toggleSidebar } from 'stemn-shared/misc/Sidebar/Sidebar.actions.js'
 // Component Core
 import React from 'react'
 
-import classes from './Header.css'
+import classes from './Header.module.css'
 
 // Sub Components
 import { MdMenu } from 'react-icons/md'

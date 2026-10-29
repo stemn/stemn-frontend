@@ -1,3 +1,12 @@
+/**
+ * Backend urls for each STEMN_ENV. They are baked into the builds at build time as
+ * GLOBAL_ENV.* (website vite.config.ts / webpack fallback, desktop electron.vite.config.ts).
+ *
+ *   STEMN_ENV=local       API http://localhost:3000, websocket http://localhost:8000
+ *   STEMN_ENV=staging     staging.stemn.com
+ *   STEMN_ENV=production  stemn.com
+ *   STEMN_ENV=custom      $API_SERVER, $WEBSOCKET_SERVER, $WEBSITE_URL
+ */
 const stemnEnvs = {
   custom: {
     API_SERVER: process.env.API_SERVER,
@@ -21,16 +30,14 @@ const stemnEnvs = {
   },
 }
 
-/**
- * Returns the GLOBAL_ENV server urls (JSON stringified, ready for DefinePlugin)
- * for a STEMN_ENV name: custom | local | staging | production
- */
+/** Returns the (raw, not stringified) server urls for a STEMN_ENV name */
 module.exports = (stemnEnvType) => {
   let stemnEnv = stemnEnvs[stemnEnvType]
   if (!stemnEnv) {
     console.warn(`Unknown STEMN_ENV "${stemnEnvType}". Use one of ${Object.keys(stemnEnvs).join(', ')}. Defaulting to local.`)
     stemnEnv = stemnEnvs.local
   }
-  console.log(`STEMN_ENV=${stemnEnvType}: API_SERVER=${stemnEnv.API_SERVER} WEBSOCKET_SERVER=${stemnEnv.WEBSOCKET_SERVER}`)
-  return Object.fromEntries(Object.entries(stemnEnv).map(([key, val]) => [key, JSON.stringify(val)]))
+  return stemnEnv
 }
+
+module.exports.stemnEnvNames = Object.keys(stemnEnvs)

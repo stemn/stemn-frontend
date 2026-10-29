@@ -1,18 +1,7 @@
-// CSS modules (css-loader `namedExport: false`): use `import classes from './x.scss'`
-declare module '*.scss' {
-  const classNames: { readonly [className: string]: string }
-  export default classNames
-}
-
-declare module '*.css' {
-  const classNames: { readonly [className: string]: string }
-  export default classNames
-}
-
-declare module '*.svg' {
-  const svg: any;
-  export default svg;
-}
+/// <reference types="vite/client" />
+// Ambient types for the website and the shared code. vite/client declares the asset
+// imports (`*.module.(s)css` -> class map, `*.css` side effects, `*.svg`/`*.png` urls)
+// and import.meta.glob / import.meta.hot.
 
 interface GLOBAL_ENV {
   API_SERVER: string,
@@ -20,11 +9,12 @@ interface GLOBAL_ENV {
   APP_THREAD?: string,
   NODE_ENV: 'development' | 'production',
   SENTRY_DSN?: string,
+  STEMN_ENV?: string,
   WEBSITE_URL: string,
   WEBSOCKET_SERVER: string,
 }
 
-// Replaced at build time by webpack DefinePlugin
+// Replaced at build time (Vite `define` / webpack DefinePlugin)
 declare const process: { env: { NODE_ENV: 'development' | 'production' } }
 declare const GLOBAL_ENV: GLOBAL_ENV
 

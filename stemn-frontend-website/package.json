@@ -8,11 +8,12 @@
     "node": ">=22.22.0"
   },
   "scripts": {
-    "dev": "webpack serve --config ./config/webpack.config.development.js",
-    "build": "webpack --config ./config/webpack.config.production.js && node ./scripts/copyServer.js",
+    "dev": "vite",
+    "build": "vite build && node ./scripts/copyServer.js",
     "serve": "node ./build/server/index.js",
-    "analyse": "webpack --config ./config/webpack.config.production.js --json=reports/stats.json && webpack-bundle-analyzer ./reports/stats.json ./build/client",
-    "typecheck": "tsc -p ./tsconfig.json --noEmit"
+    "dev:webpack": "webpack serve --config ./config/webpack.config.development.js",
+    "build:webpack": "webpack --config ./config/webpack.config.production.js && node ./scripts/copyServer.js",
+    "typecheck": "tsc -p ./tsconfig.json --noEmit && tsc -p ./tsconfig.node.json --noEmit"
   },
   "dependencies": {
     "@sentry/browser": "11.10.0",
@@ -30,7 +31,6 @@
   },
   "devDependencies": {
     "@babel/core": "8.0.9",
-    "@babel/plugin-proposal-decorators": "8.0.2",
     "@babel/preset-env": "8.0.7",
     "@babel/preset-react": "8.0.1",
     "@babel/preset-typescript": "8.0.7",
@@ -46,6 +46,7 @@
     "@types/react-modal": "3.16.3",
     "@types/react-transition-group": "4.4.12",
     "@types/redux-form": "8.3.11",
+    "@vitejs/plugin-react": "6.1.2",
     "autoprefixer": "10.6.2",
     "babel-loader": "10.1.1",
     "copy-webpack-plugin": "14.0.0",
@@ -61,8 +62,8 @@
     "sass-loader": "17.1.0",
     "style-loader": "4.0.0",
     "typescript": "7.0.2",
+    "vite": "8.3.5",
     "webpack": "5.112.2",
-    "webpack-bundle-analyzer": "5.4.0",
     "webpack-cli": "7.2.3",
     "webpack-dev-server": "6.1.0",
     "webpack-merge": "6.0.1"

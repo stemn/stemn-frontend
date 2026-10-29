@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import classes from './Header.scss'
+import classes from './Header.module.scss'
 import cn from 'classnames'
 import { loginRoute } from 'route-actions'
 import { Container } from 'stemn-shared/misc/Layout'
 import Avatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import Popover from 'stemn-shared/misc/Popover'
 import Link from 'stemn-shared/misc/Router/Link'
-import logo from 'images/logo80x80.png'
 import { MdAdd } from 'react-icons/md'
 import { MdNotifications } from 'react-icons/md'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
@@ -15,6 +14,9 @@ import HeaderMobileMenu from 'modules/HeaderMobileMenu'
 import BetaBadge from 'modules/BetaBadge'
 import { MdMenu } from 'react-icons/md'
 import IconHelp from 'stemn-shared/misc/Icons/Help'
+
+// public/images (served as-is at /images)
+const logo = '/images/logo80x80.png'
 
 export default class Header extends Component {
   constructor(props) {
