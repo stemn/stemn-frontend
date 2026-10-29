@@ -1,6 +1,7 @@
-import * as i from 'icepick'
+import { produce } from 'immer'
 import { AnyAction } from 'redux'
 import { IFile } from 'stemn-shared/misc/FileList/types'
+import { setIn } from 'stemn-shared/redux/draft'
 
 export interface IFileRender {
   error?: string
@@ -69,26 +70,36 @@ const initialState: IFilesState = {
 function reducer(state: IFilesState, action: AnyAction): IFilesState {
   switch (action.type) {
     case 'FILES/GET_FILE_PENDING':
-      return i.assocIn(state, ['fileData', action.meta.cacheKey, 'loading'], true)
+      return produce(state, (draft) => {
+        setIn(draft, ['fileData', action.meta.cacheKey, 'loading'], true)
+      })
     case 'FILES/GET_FILE_REJECTED':
-      return i.assocIn(state, ['fileData', action.meta.cacheKey], {
-        error: action.payload.data,
-        loading: false,
+      return produce(state, (draft) => {
+        setIn(draft, ['fileData', action.meta.cacheKey], {
+          error: action.payload.data,
+          loading: false,
+        })
       })
     case 'FILES/GET_FILE_FULFILLED':
-      return i.assocIn(state, ['fileData', action.meta.cacheKey], {
-        data: action.payload.data,
-        loading: false,
+      return produce(state, (draft) => {
+        setIn(draft, ['fileData', action.meta.cacheKey], {
+          data: action.payload.data,
+          loading: false,
+        })
       })
     case 'FILES/GET_FILE_PROGRESS':
-      return i.assocIn(state, ['fileData', action.meta.cacheKey, 'percentage'], action.payload.percentage)
+      return produce(state, (draft) => {
+        setIn(draft, ['fileData', action.meta.cacheKey, 'percentage'], action.payload.percentage)
+      })
 
     //    case 'FILES/RENDER_FILE_PENDING' :
     //      return i.assocIn(state, ['fileRenders', action.meta.cacheKey, 'loading'], true)
     case 'FILES/RENDER_FILE_REJECTED':
-      return i.assocIn(state, ['fileRenders', action.meta.cacheKey], {
-        error: action.payload.response.data.error,
-        loading: false,
+      return produce(state, (draft) => {
+        setIn(draft, ['fileRenders', action.meta.cacheKey], {
+          error: action.payload.response.data.error,
+          loading: false,
+        })
       })
     //    case 'FILES/RENDER_FILE_FULFILLED' :
     //      const isRenderRequest = action.payload.data && action.payload.data.status;
@@ -98,85 +109,118 @@ function reducer(state: IFilesState, action: AnyAction): IFilesState {
     //        loading: false
     //      })
     case 'FILES/RENDER_FILE_DOWNLOAD_PENDING':
-      return i.assocIn(state, ['fileRenders', action.meta.cacheKey, 'loading'], true)
+      return produce(state, (draft) => {
+        setIn(draft, ['fileRenders', action.meta.cacheKey, 'loading'], true)
+      })
     case 'FILES/RENDER_FILE_DOWNLOAD_REJECTED':
-      return i.assocIn(state, ['fileRenders', action.meta.cacheKey], {
-        error: action.payload.response.data.error,
-        loading: false,
-      })
-    case 'FILES/RENDER_FILE_DOWNLOAD_FULFILLED':
-      return i.assocIn(state, ['fileRenders', action.meta.cacheKey], {
-        data: action.payload.data,
-        loading: false,
-      })
-
-    case 'FILES/RENDER_FILE_PROGRESS':
-      return i.assocIn(state, ['fileRenders', action.meta.cacheKey], {
-        status: action.payload.message,
-      })
-
-    case 'FILES/GET_META_PENDING':
-      return i.assocIn(state, ['fileMeta', action.meta.cacheKey, 'loading'], true)
-    case 'FILES/GET_META_REJECTED':
-      return i.assocIn(state, ['fileMeta', action.meta.cacheKey, 'loading'], false)
-    case 'FILES/GET_META_FULFILLED':
-      return i.assocIn(state, ['fileMeta', action.meta.cacheKey], {
-        data: action.payload.data,
-        loading: false,
-      })
-
-    case 'FILES/GET_ASSEMBLY_PARTS_PENDING':
-      return i.assocIn(state, ['fileAssemblyParts', action.meta.cacheKey, 'loading'], true)
-    case 'FILES/GET_ASSEMBLY_PARTS_REJECTED':
-      return i.assocIn(state, ['fileAssemblyParts', action.meta.cacheKey, 'loading'], false)
-    case 'FILES/GET_ASSEMBLY_PARTS_FULFILLED':
-      return i.assocIn(state, ['fileAssemblyParts', action.meta.cacheKey], {
-        data: action.payload.data,
-        loading: false,
-      })
-
-    case 'FILES/GET_ASSEMBLY_PARENTS_PENDING':
-      return i.assocIn(state, ['fileAssemblyParents', action.meta.cacheKey, 'loading'], true)
-    case 'FILES/GET_ASSEMBLY_PARENTS_REJECTED':
-      return i.assocIn(state, ['fileAssemblyParents', action.meta.cacheKey, 'loading'], false)
-    case 'FILES/GET_ASSEMBLY_PARENTS_FULFILLED':
-      return i.assocIn(state, ['fileAssemblyParents', action.meta.cacheKey], {
-        data: action.payload.data,
-        loading: false,
-      })
-
-    case 'FILES/GET_RELATED_THREADS_PENDING':
-      return i.assocIn(state, ['relatedThreads', action.meta.fileId, 'loading'], true)
-    case 'FILES/GET_RELATED_THREADS_REJECTED':
-      return i.assocIn(state, ['relatedThreads', action.meta.fileId, 'loading'], false)
-    case 'FILES/GET_RELATED_THREADS_FULFILLED':
-      return i.assocIn(state, ['relatedThreads', action.meta.fileId], {
-        data: action.payload.data,
-        loading: false,
-      })
-
-    case 'FILES/GET_META_FROM_PATH_PENDING':
-      return i.assocIn(state, ['pathToId', action.meta.cacheKey, 'loading'], true)
-    case 'FILES/GET_META_FROM_PATH_REJECTED':
-      return i.assocIn(state, ['pathToId', action.meta.cacheKey, 'loading'], false)
-    case 'FILES/GET_META_FROM_PATH_FULFILLED':
-      return i
-        .chain(state)
-        .assocIn(['pathToId', action.meta.cacheKey], {
-          data: action.payload.data.fileId,
+      return produce(state, (draft) => {
+        setIn(draft, ['fileRenders', action.meta.cacheKey], {
+          error: action.payload.response.data.error,
           loading: false,
         })
-        .assocIn(['fileMeta', action.meta.cacheKey], {
+      })
+    case 'FILES/RENDER_FILE_DOWNLOAD_FULFILLED':
+      return produce(state, (draft) => {
+        setIn(draft, ['fileRenders', action.meta.cacheKey], {
           data: action.payload.data,
           loading: false,
         })
-        .value()
+      })
+
+    case 'FILES/RENDER_FILE_PROGRESS':
+      return produce(state, (draft) => {
+        setIn(draft, ['fileRenders', action.meta.cacheKey], {
+          status: action.payload.message,
+        })
+      })
+
+    case 'FILES/GET_META_PENDING':
+      return produce(state, (draft) => {
+        setIn(draft, ['fileMeta', action.meta.cacheKey, 'loading'], true)
+      })
+    case 'FILES/GET_META_REJECTED':
+      return produce(state, (draft) => {
+        setIn(draft, ['fileMeta', action.meta.cacheKey, 'loading'], false)
+      })
+    case 'FILES/GET_META_FULFILLED':
+      return produce(state, (draft) => {
+        setIn(draft, ['fileMeta', action.meta.cacheKey], {
+          data: action.payload.data,
+          loading: false,
+        })
+      })
+
+    case 'FILES/GET_ASSEMBLY_PARTS_PENDING':
+      return produce(state, (draft) => {
+        setIn(draft, ['fileAssemblyParts', action.meta.cacheKey, 'loading'], true)
+      })
+    case 'FILES/GET_ASSEMBLY_PARTS_REJECTED':
+      return produce(state, (draft) => {
+        setIn(draft, ['fileAssemblyParts', action.meta.cacheKey, 'loading'], false)
+      })
+    case 'FILES/GET_ASSEMBLY_PARTS_FULFILLED':
+      return produce(state, (draft) => {
+        setIn(draft, ['fileAssemblyParts', action.meta.cacheKey], {
+          data: action.payload.data,
+          loading: false,
+        })
+      })
+
+    case 'FILES/GET_ASSEMBLY_PARENTS_PENDING':
+      return produce(state, (draft) => {
+        setIn(draft, ['fileAssemblyParents', action.meta.cacheKey, 'loading'], true)
+      })
+    case 'FILES/GET_ASSEMBLY_PARENTS_REJECTED':
+      return produce(state, (draft) => {
+        setIn(draft, ['fileAssemblyParents', action.meta.cacheKey, 'loading'], false)
+      })
+    case 'FILES/GET_ASSEMBLY_PARENTS_FULFILLED':
+      return produce(state, (draft) => {
+        setIn(draft, ['fileAssemblyParents', action.meta.cacheKey], {
+          data: action.payload.data,
+          loading: false,
+        })
+      })
+
+    case 'FILES/GET_RELATED_THREADS_PENDING':
+      return produce(state, (draft) => {
+        setIn(draft, ['relatedThreads', action.meta.fileId, 'loading'], true)
+      })
+    case 'FILES/GET_RELATED_THREADS_REJECTED':
+      return produce(state, (draft) => {
+        setIn(draft, ['relatedThreads', action.meta.fileId, 'loading'], false)
+      })
+    case 'FILES/GET_RELATED_THREADS_FULFILLED':
+      return produce(state, (draft) => {
+        setIn(draft, ['relatedThreads', action.meta.fileId], {
+          data: action.payload.data,
+          loading: false,
+        })
+      })
+
+    case 'FILES/GET_META_FROM_PATH_PENDING':
+      return produce(state, (draft) => {
+        setIn(draft, ['pathToId', action.meta.cacheKey, 'loading'], true)
+      })
+    case 'FILES/GET_META_FROM_PATH_REJECTED':
+      return produce(state, (draft) => {
+        setIn(draft, ['pathToId', action.meta.cacheKey, 'loading'], false)
+      })
+    case 'FILES/GET_META_FROM_PATH_FULFILLED':
+      return produce(state, (draft) => {
+        setIn(draft, ['pathToId', action.meta.cacheKey], { data: action.payload.data.fileId, loading: false })
+        setIn(draft, ['fileMeta', action.meta.cacheKey], { data: action.payload.data, loading: false })
+      })
 
     case 'FILES/DOWNLOAD_PROGRESS':
-      return i.assocIn(state, ['downloadProgress', action.payload.cacheKey], action.payload.progress)
+      return produce(state, (draft) => {
+        setIn(draft, ['downloadProgress', action.payload.cacheKey], action.payload.progress)
+      })
 
     case 'FILES/TOGGLE_PREVIEW_MARKDOWN': {
-      return i.updateIn(state, ['previewMarkdown'], (previewMarkdown) => !previewMarkdown)
+      return produce(state, (draft) => {
+        draft.previewMarkdown = !state.previewMarkdown
+      })
     }
 
     default:

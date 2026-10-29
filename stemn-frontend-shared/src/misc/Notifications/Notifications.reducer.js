@@ -1,4 +1,4 @@
-import i from 'icepick'
+import { produce } from 'immer'
 
 const initialState = {
   data: [],
@@ -7,7 +7,9 @@ const initialState = {
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case 'NOTIFICATIONS/GET_NOTIFICATIONS_FULFILLED':
-      return i.assocIn(state, ['data'], action.payload.data)
+      return produce(state, (draft) => {
+        draft.data = action.payload.data
+      })
 
     case 'NOTIFICATIONS/MARK_AS_READ_PENDING': {
       const notifications = state.data
@@ -20,7 +22,9 @@ export default (state = initialState, action = {}) => {
         notification,
         ...notifications.slice(notificationIndex + 1),
       ]
-      return i.assocIn(state, ['data'], newNotifications)
+      return produce(state, (draft) => {
+        draft.data = newNotifications
+      })
     }
     case 'NOTIFICATIONS/MARK_AS_READ_REJECTED': {
       const notifications = state.data
@@ -33,7 +37,9 @@ export default (state = initialState, action = {}) => {
         notification,
         ...notifications.slice(notificationIndex + 1),
       ]
-      return i.assocIn(state, ['data'], newNotifications)
+      return produce(state, (draft) => {
+        draft.data = newNotifications
+      })
     }
 
     default:

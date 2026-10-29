@@ -1,4 +1,5 @@
-import i from 'icepick'
+import { produce } from 'immer'
+import { setIn } from 'stemn-shared/redux/draft'
 
 const initialState = {
   /** *******************************************
@@ -16,13 +17,19 @@ every user.
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case 'USER_FOLLOWING/GET_FOLLOWING_PENDING':
-      return i.assocIn(state, [action.meta.userId, action.meta.page, 'loading'], true)
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.userId, action.meta.page, 'loading'], true)
+      })
     case 'USER_FOLLOWING/GET_FOLLOWING_REJECTED':
-      return i.assocIn(state, [action.meta.userId, action.meta.page, 'loading'], false)
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.userId, action.meta.page, 'loading'], false)
+      })
     case 'USER_FOLLOWING/GET_FOLLOWING_FULFILLED':
-      return i.assocIn(state, [action.meta.userId, action.meta.page], {
-        loading: false,
-        data: action.payload.data,
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.userId, action.meta.page], {
+          loading: false,
+          data: action.payload.data,
+        })
       })
 
     default:

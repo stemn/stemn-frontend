@@ -1,4 +1,5 @@
-import i from 'icepick'
+import { produce } from 'immer'
+import { setIn } from 'stemn-shared/redux/draft'
 import { parseQuery } from 'stemn-shared/routing/query'
 
 const initialState = {
@@ -16,20 +17,25 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case 'SEARCH/SET_QUERY': {
-      return i.assoc(state, 'query', action.payload)
+      return produce(state, (draft) => {
+        draft.query = action.payload
+      })
     }
     case 'SEARCH/SEARCH_PENDING': {
-      return i.assocIn(state, ['data', action.meta.cacheKey, 'loading'], true)
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.meta.cacheKey, 'loading'], true)
+      })
     }
     case 'SEARCH/SEARCH_REJECTED': {
-      return i.assocIn(state, ['data', action.meta.cacheKey, 'loading'], true)
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.meta.cacheKey, 'loading'], true)
+      })
     }
     case 'SEARCH/SEARCH_FULFILLED': {
-      return i
-        .chain(state)
-        .assocIn(['data', action.meta.cacheKey, 'loading'], false)
-        .assocIn(['data', action.meta.cacheKey, 'data'], action.payload.data)
-        .value()
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.meta.cacheKey, 'loading'], false)
+        setIn(draft, ['data', action.meta.cacheKey, 'data'], action.payload.data)
+      })
     }
 
     default:

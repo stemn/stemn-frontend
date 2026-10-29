@@ -19,8 +19,6 @@ export function getThread({threadId}) {
 
 ************************************************************************************************** */
 
-import i from 'icepick'
-
 const timeouts = {}
 
 export default (store) => (next) => (action) => {
@@ -34,7 +32,7 @@ export default (store) => (next) => (action) => {
 
     timeouts[endpoint] = setTimeout(() => {
       // Create the timeout
-      const newAction = i.assocIn(action, ['throttle'], undefined) // Create the new action
+      const newAction = { ...action, throttle: undefined } // Create the new action
       next(newAction) // Dispatch the action
     }, time)
   } else {

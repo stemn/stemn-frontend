@@ -1,4 +1,5 @@
-import i from 'icepick'
+import { produce } from 'immer'
+import { setIn } from 'stemn-shared/redux/draft'
 
 const initialState = {
   like: {},
@@ -9,19 +10,29 @@ const initialState = {
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case 'SOCIAL/ADD_PENDING':
-      return i.assocIn(state, [action.meta.type, action.meta.entityId, 'status'], true)
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.type, action.meta.entityId, 'status'], true)
+      })
     case 'SOCIAL/ADD_REJECTED':
-      return i.assocIn(state, [action.meta.type, action.meta.entityId, 'status'], false)
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.type, action.meta.entityId, 'status'], false)
+      })
 
     case 'SOCIAL/REMOVE_PENDING':
-      return i.assocIn(state, [action.meta.type, action.meta.entityId, 'status'], false)
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.type, action.meta.entityId, 'status'], false)
+      })
     case 'SOCIAL/REMOVE_REJECTED':
-      return i.assocIn(state, [action.meta.type, action.meta.entityId, 'status'], true)
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.type, action.meta.entityId, 'status'], true)
+      })
 
     case 'SOCIAL/GET_STATUS_FULFILLED':
-      return i.assocIn(state, [action.meta.type, action.meta.entityId], {
-        status: action.payload.data.status,
-        parentId: action.payload.data.parentId,
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.type, action.meta.entityId], {
+          status: action.payload.data.status,
+          parentId: action.payload.data.parentId,
+        })
       })
 
     default:

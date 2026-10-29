@@ -1,4 +1,4 @@
-import i from 'icepick'
+import { produce } from 'immer'
 import { escapeRegExp, difference } from 'lodash'
 
 const isThreadPartOfFilter = (thread, filterObject) => {
@@ -36,15 +36,14 @@ const isThreadPartOfFilter = (thread, filterObject) => {
 }
 
 export const filterBoard = (board, threads, filterObject = {}) =>
-  i.updateIn(board, ['data', 'groups'], (groups) =>
+  produce(board, (draft) => {
     // For each group...
-    groups.map((group) =>
-      i.updateIn(group, ['threads'], (threadIds) =>
-        // Filter the items in the group.
-        threadIds.filter((threadId) => isThreadPartOfFilter(threads[threadId], filterObject)),
-      ),
-    ),
-  )
+    draft.data.groups = board.data.groups.map((group) => ({
+      ...group,
+      // Filter the items in the group.
+      threads: group.threads.filter((threadId) => isThreadPartOfFilter(threads[threadId], filterObject)),
+    }))
+  })
 
 export const getAllThreads = (boardGroups) => {
   let threads = []

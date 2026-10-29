@@ -1,4 +1,5 @@
-import * as i from 'icepick'
+import { produce } from 'immer'
+import { setIn } from 'stemn-shared/redux/draft'
 import { AnyAction } from 'redux'
 import { IFile, IFolder } from './types'
 
@@ -18,39 +19,48 @@ const initialState: IFileListState = {}
 export const fileListReducer = (state: IFileListState = initialState, action: AnyAction) => {
   switch (action.type) {
     case 'FILE_LIST/FETCH_FILES_PENDING':
-      return i.assocIn(state, [action.meta.cacheKey, 'loading'], true)
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.cacheKey, 'loading'], true)
+      })
     case 'FILE_LIST/FETCH_FILES_REJECTED':
-      return i.assocIn(state, [action.meta.cacheKey, 'loading'], false)
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.cacheKey, 'loading'], false)
+      })
     case 'FILE_LIST/FETCH_FILES_FULFILLED':
-      return i
-        .chain(state)
-        .assocIn([action.meta.cacheKey, 'entries'], action.payload.data.entries)
-        .assocIn([action.meta.cacheKey, 'folder'], action.payload.data.folder)
-        .assocIn([action.meta.cacheKey, 'loading'], false)
-        .value()
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.cacheKey, 'entries'], action.payload.data.entries)
+        setIn(draft, [action.meta.cacheKey, 'folder'], action.payload.data.folder)
+        setIn(draft, [action.meta.cacheKey, 'loading'], false)
+      })
 
     case 'FILE_LIST/EXPLORE_FOLDER_PENDING':
-      return i.assocIn(state, [action.meta.cacheKey, 'loading'], true)
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.cacheKey, 'loading'], true)
+      })
     case 'FILE_LIST/EXPLORE_FOLDER_REJECTED':
-      return i.assocIn(state, [action.meta.cacheKey, 'loading'], false)
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.cacheKey, 'loading'], false)
+      })
     case 'FILE_LIST/EXPLORE_FOLDER_FULFILLED':
-      return i
-        .chain(state)
-        .assocIn([action.meta.cacheKey, 'entries'], action.payload.data.entries)
-        .assocIn([action.meta.cacheKey, 'folder'], action.payload.data.folder)
-        .assocIn([action.meta.cacheKey, 'loading'], false)
-        .value()
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.cacheKey, 'entries'], action.payload.data.entries)
+        setIn(draft, [action.meta.cacheKey, 'folder'], action.payload.data.folder)
+        setIn(draft, [action.meta.cacheKey, 'loading'], false)
+      })
 
     case 'FILE_LIST/SEARCH_PENDING':
-      return i.assocIn(state, [action.meta.cacheKey, 'loading'], true)
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.cacheKey, 'loading'], true)
+      })
     case 'FILE_LIST/SEARCH_REJECTED':
-      return i.assocIn(state, [action.meta.cacheKey, 'loading'], false)
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.cacheKey, 'loading'], false)
+      })
     case 'FILE_LIST/SEARCH_FULFILLED':
-      return i
-        .chain(state)
-        .assocIn([action.meta.cacheKey, 'search'], action.payload.data)
-        .assocIn([action.meta.cacheKey, 'loading'], false)
-        .value()
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.cacheKey, 'search'], action.payload.data)
+        setIn(draft, [action.meta.cacheKey, 'loading'], false)
+      })
 
     default:
       return state

@@ -1,4 +1,4 @@
-import i from 'icepick'
+import { produce } from 'immer'
 
 const initialState = {
   active: [],
@@ -7,15 +7,15 @@ const initialState = {
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case 'WALKTHROUGH/ACTIVATE': {
-      return i.updateIn(state, ['active'], (steps) => {
-        const stepIndex = steps.findIndex((step) => step === action.payload.name)
-        return stepIndex === -1 ? i.push(steps, action.payload.name) : steps
+      return produce(state, (draft) => {
+        const stepIndex = draft.active.findIndex((step) => step === action.payload.name)
+        if (stepIndex === -1) draft.active.push(action.payload.name)
       })
     }
     case 'WALKTHROUGH/DEACTIVATE': {
-      return i.updateIn(state, ['active'], (steps) => {
-        const stepIndex = steps.findIndex((step) => step === action.payload.name)
-        return stepIndex !== -1 ? i.splice(steps, stepIndex, 1) : steps
+      return produce(state, (draft) => {
+        const stepIndex = draft.active.findIndex((step) => step === action.payload.name)
+        if (stepIndex !== -1) draft.active.splice(stepIndex, 1)
       })
     }
     default:

@@ -1,5 +1,6 @@
-import * as i from 'icepick'
+import { produce } from 'immer'
 import { keyBy } from 'lodash'
+import { setIn } from 'stemn-shared/redux/draft'
 import { IContentfulContentPageExplore } from 'modules/Contentful/types'
 import { populate, transform } from './utils'
 
@@ -18,7 +19,9 @@ export const contentfulReducer = (state: IContentfulState = initialState, action
       const newAssets = keyBy(assets, 'sys.id')
       // Add the entries and assets to the state
       const entriesAndAssets = { ...newEntries, ...newAssets }
-      return i.assoc(state, action.meta.contentType, populate(entriesAndAssets, items))
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.contentType], populate(entriesAndAssets, items))
+      })
     }
     default:
       return state

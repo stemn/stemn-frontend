@@ -1,4 +1,4 @@
-import i from 'icepick'
+import { produce } from 'immer'
 
 import { getPromise } from './ModalPromises'
 
@@ -9,21 +9,27 @@ const initialState = {
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case 'MODALS/SHOW_MODAL_PENDING':
-      return i.updateIn(state, ['stack'], (stack) => {
-        stack = stack || []
+      return produce(state, (draft) => {
+        if (!draft.stack) draft.stack = []
         const isLimited = action.meta.limit
         const isLessThanLimit = isLimited
-          ? stack.filter((modal) => modal.modalType === action.meta.modalType).length < action.meta.limit
+          ? draft.stack.filter((modal) => modal.modalType === action.meta.modalType).length < action.meta.limit
           : true
-        return isLessThanLimit ? i.push(stack, action.meta) : stack
+        if (isLessThanLimit) draft.stack.push(action.meta)
       })
     case 'MODALS/HIDE_MODAL': {
       const modalIndex = state.stack.findIndex((modal) => modal.modalId === action.payload.modalId)
-      return modalIndex !== -1 ? i.merge(state, { stack: i.splice(state.stack, modalIndex, 1) }) : state
+      return modalIndex !== -1
+        ? produce(state, (draft) => {
+            draft.stack.splice(modalIndex, 1)
+          })
+        : state
     }
 
     case 'MODALS/CLOSE_ALL':
-      return i.assoc(state, 'stack', [])
+      return produce(state, (draft) => {
+        draft.stack = []
+      })
 
     case 'MODALS/RESOLVE': {
       const modalPromise = getPromise(action.payload.modalId)

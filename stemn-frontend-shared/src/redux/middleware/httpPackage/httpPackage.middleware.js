@@ -28,7 +28,6 @@ when the request has been fulfilled
 
 ************************************************************************************************** */
 
-import i from 'icepick'
 import http from 'axios'
 import { stringifyQuery } from 'stemn-shared/routing/query'
 
@@ -84,11 +83,12 @@ const dispatchAction = ({ action, dispatch, response, suffix, endpoint }) => {
     promises[endpoint].resolve()
   }
 
-  const newAction = i.merge(action, {
+  const newAction = {
+    ...action,
     httpPackage: undefined, // Delete the httpPackage key so we don't loop
     type: action.type + modifiedSuffix, // Add the suffix to the action
     payload: response, // Add the response to the payload
-  })
+  }
   dispatch(newAction) // Dispatch the new action
 }
 

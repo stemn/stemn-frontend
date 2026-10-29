@@ -1,7 +1,6 @@
 import whatGerber from '@stemn/whats-that-gerber'
 import * as codemirror from 'codemirror'
 import 'codemirror/mode/meta.js'
-import * as i from 'icepick'
 import { forEach } from 'lodash'
 
 const codemirrorTsOverride = codemirror as any // TODO - Codemirror plugin mutation
@@ -128,11 +127,12 @@ export const getViewerType = (fileName, provider): IPreviewType => {
   const generalFileTypes = viewerFileTypes.general
   const providerFileTypes = viewerFileTypes[provider] || {}
 
-  // This merge resolver concats arrays.
-  const mergeResolver = (targetVal, sourceVal) =>
-    Array.isArray(targetVal) && sourceVal ? targetVal.concat(sourceVal) : sourceVal
-  const mergeTypeOverride = i.merge as any // TODO - Icepick merge TS types are wrong
-  const mergedFileTypes = mergeTypeOverride(generalFileTypes, providerFileTypes, mergeResolver)
+  // Merge the provider file types into the general ones, concatenating the extension arrays.
+  const mergedFileTypes: Record<string, string[]> = { ...generalFileTypes }
+  forEach(providerFileTypes, (extensions: string[], type) => {
+    const generalExtensions = mergedFileTypes[type]
+    mergedFileTypes[type] = Array.isArray(generalExtensions) ? generalExtensions.concat(extensions) : extensions
+  })
 
   if (whatGerber(fileName)) {
     return 'gerber'

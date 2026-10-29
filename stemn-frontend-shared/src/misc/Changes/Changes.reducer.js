@@ -1,4 +1,6 @@
-import i from 'icepick'
+import { produce } from 'immer'
+import { get } from 'lodash'
+import { mergeDeep, setIn } from 'stemn-shared/redux/draft'
 
 import { parseMentions, removeExistingMentions, addMentionsToText } from '../Mentions/Mentions.utils.js'
 
@@ -17,47 +19,60 @@ const initialState = {
 const mainReducer = (state, action) => {
   switch (action.type) {
     case 'CHANGES/DESELECT_FILE_CHANGE':
-      return i.assocIn(state, [action.payload.projectId, 'selected'], {})
+      return produce(state, (draft) => {
+        setIn(draft, [action.payload.projectId, 'selected'], {})
+      })
     case 'CHANGES/SELECTED_FILE_CHANGE':
-      return i.assocIn(state, [action.payload.projectId, 'selected'], action.payload.selected)
-    case 'CHANGES/MENTION_THREADS':
-      return i.updateIn(state, [action.payload.projectId, 'body'], (body) => {
-        const existingMentions = parseMentions(body)
-        const uniqueNewMentions = removeExistingMentions(action.payload.mentions, existingMentions)
-        const textWithMentions = addMentionsToText(state[action.payload.projectId].body, uniqueNewMentions)
-        return textWithMentions
+      return produce(state, (draft) => {
+        setIn(draft, [action.payload.projectId, 'selected'], action.payload.selected)
       })
-    case 'CHANGES/TOGGLE_ALL_CHANGED_FILES':
-      return i.updateIn(state, [action.payload.projectId], (changes) => {
-        const checked = changes.data.reduce((obj, param) => {
-          obj[param.data.fileId] = action.payload.value
-          return obj
-        }, {})
-        return i.assoc(changes, 'checked', checked)
+    case 'CHANGES/MENTION_THREADS': {
+      const body = get(state, [action.payload.projectId, 'body'])
+      const existingMentions = parseMentions(body)
+      const uniqueNewMentions = removeExistingMentions(action.payload.mentions, existingMentions)
+      const textWithMentions = addMentionsToText(state[action.payload.projectId].body, uniqueNewMentions)
+      return produce(state, (draft) => {
+        setIn(draft, [action.payload.projectId, 'body'], textWithMentions)
       })
+    }
+    case 'CHANGES/TOGGLE_ALL_CHANGED_FILES': {
+      const checked = state[action.payload.projectId].data.reduce((obj, param) => {
+        obj[param.data.fileId] = action.payload.value
+        return obj
+      }, {})
+      return produce(state, (draft) => {
+        setIn(draft, [action.payload.projectId, 'checked'], checked)
+      })
+    }
 
     case 'CHANGES/FETCH_CHANGES_PENDING':
-      return i.assocIn(state, [action.meta.projectId, 'loading'], true)
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.projectId, 'loading'], true)
+      })
     case 'CHANGES/FETCH_CHANGES_REJECTED':
-      return i.assocIn(state, [action.meta.projectId, 'loading'], false)
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.projectId, 'loading'], false)
+      })
     case 'CHANGES/FETCH_CHANGES_FULFILLED':
-      return i
-        .chain(state)
-        .assocIn([action.meta.projectId, 'data'], action.payload.data)
-        .assocIn([action.meta.projectId, 'loading'], false)
-        .value()
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.projectId, 'data'], action.payload.data)
+        setIn(draft, [action.meta.projectId, 'loading'], false)
+      })
 
     case 'CHANGES/COMMIT_FULFILLED': {
       // POST /sync/commit returns the committed revisions as ids
       const idsToRemove = action.payload.data.revisions.map((item) => (typeof item === 'string' ? item : item._id))
       const remainingRevisions = state[action.meta.cacheKey].data.filter((item) => !idsToRemove.includes(item._id))
-      return i.merge(state, {
-        [action.meta.cacheKey]: {
-          name: '',
-          body: '',
-          data: remainingRevisions,
-          checked: {},
-        },
+      // Deep merge: an existing `checked` object is kept as is (merging `{}` into it is a no-op)
+      return produce(state, (draft) => {
+        mergeDeep(draft, {
+          [action.meta.cacheKey]: {
+            name: '',
+            body: '',
+            data: remainingRevisions,
+            checked: {},
+          },
+        })
       })
     }
     default:

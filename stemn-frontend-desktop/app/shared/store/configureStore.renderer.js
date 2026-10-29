@@ -1,3 +1,4 @@
+import { setAutoFreeze } from 'immer'
 import { legacy_createStore as createStore, applyMiddleware, compose } from 'redux'
 import { thunk } from 'redux-thunk'
 import promise from 'redux-promise-middleware'
@@ -7,6 +8,9 @@ import routerFix from 'stemn-shared/misc/Router/Router.middleware.js'
 import getRootReducerRenderer from '../reducers/rootReducer.renderer.js'
 import forwardToMain from '../middleware/forwardToMain'
 import createForwardToRendererWindow from '../middleware/forwardToRendererWindow'
+
+// Reducers use immer: freeze the state in development only (matching the previous immutability library)
+setAutoFreeze(process.env.NODE_ENV !== 'production')
 
 /**
  * Renderer store: a replica of the main-process store (see forwardToMain).

@@ -1,4 +1,5 @@
-import i from 'icepick'
+import { produce } from 'immer'
+import { setIn } from 'stemn-shared/redux/draft'
 
 const initialState = {
   data: {}, // fields by id
@@ -13,36 +14,48 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'FIELDS/GET_FIELD_PENDING':
-      return i.assocIn(state, ['data', action.meta.fieldId, 'loading'], true)
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.meta.fieldId, 'loading'], true)
+      })
     case 'FIELDS/GET_FIELD_REJECTED':
-      return i.assocIn(state, ['data', action.meta.fieldId, 'loading'], false)
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.meta.fieldId, 'loading'], false)
+      })
     case 'FIELDS/GET_FIELD_FULFILLED':
-      return i.assocIn(state, ['data', action.meta.fieldId], {
-        loading: false,
-        dataSize: action.meta.size,
-        data: action.payload.data,
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.meta.fieldId], {
+          loading: false,
+          dataSize: action.meta.size,
+          data: action.payload.data,
+        })
       })
 
     case 'FIELDS/CREATE_FIELD_PENDING':
-      return i.assoc(state, 'newFieldFormPending', true)
+      return produce(state, (draft) => {
+        draft.newFieldFormPending = true
+      })
     case 'FIELDS/CREATE_FIELD_REJECTED':
-      return i.assoc(state, 'newFieldFormPending', false)
+      return produce(state, (draft) => {
+        draft.newFieldFormPending = false
+      })
     case 'FIELDS/CREATE_FIELD_FULFILLED':
-      return i
-        .chain(state)
-        .assoc('newFieldFormPending', false)
-        .assoc('newFieldForm', {
-          name: '',
-          blurb: '',
-        })
-        .value()
+      return produce(state, (draft) => {
+        draft.newFieldFormPending = false
+        draft.newFieldForm = { name: '', blurb: '' }
+      })
 
     case 'FIELDS/SAVE_FIELD_PENDING':
-      return i.assocIn(state, ['data', action.meta.fieldId, 'savePending'], true)
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.meta.fieldId, 'savePending'], true)
+      })
     case 'FIELDS/SAVE_FIELD_REJECTED':
-      return i.assocIn(state, ['data', action.meta.fieldId, 'savePending'], false)
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.meta.fieldId, 'savePending'], false)
+      })
     case 'FIELDS/SAVE_FIELD_FULFILLED':
-      return i.assocIn(state, ['data', action.meta.fieldId, 'savePending'], false)
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.meta.fieldId, 'savePending'], false)
+      })
 
     default:
       return state

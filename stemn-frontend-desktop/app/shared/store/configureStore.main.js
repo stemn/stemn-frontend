@@ -1,3 +1,4 @@
+import { setAutoFreeze } from 'immer'
 import { legacy_createStore as createStore, applyMiddleware } from 'redux'
 import { thunk } from 'redux-thunk'
 import promise from 'redux-promise-middleware'
@@ -10,6 +11,9 @@ import websocket from 'stemn-shared/misc/Websocket/websocket.middleware.js'
 import throttle from 'stemn-shared/redux/middleware/throttle/throttle.middleware.js'
 import httpTransform from 'stemn-shared/redux/middleware/httpTransform/httpTransform.middleware.js'
 import httpPackage from 'stemn-shared/redux/middleware/httpPackage/httpPackage.middleware.js'
+
+// Reducers use immer: freeze the state in development only (matching the previous immutability library)
+setAutoFreeze(process.env.NODE_ENV !== 'production')
 
 /**
  * The main-process store is the source of truth. Renderers forward their actions

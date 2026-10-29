@@ -36,7 +36,6 @@
     "@babel/preset-typescript": "8.0.7",
     "@pmmmwh/react-refresh-webpack-plugin": "0.6.3",
     "@types/codemirror": "5.60.18",
-    "@types/icepick": "2.3.3",
     "@types/lodash": "4.17.27",
     "@types/markdown-it": "14.2.0",
     "@types/node": "26.6.6",

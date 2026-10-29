@@ -1,4 +1,5 @@
-import i from 'icepick'
+import { produce } from 'immer'
+import { setIn } from 'stemn-shared/redux/draft'
 
 export const name = 'localPath'
 
@@ -9,11 +10,17 @@ const initialState = {
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case 'LOCAL_PATH/GET_PATH_PENDING':
-      return i.assoc(state, action.meta.projectId, { loading: true })
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.projectId], { loading: true })
+      })
     case 'LOCAL_PATH/GET_PATH_REJECTED':
-      return i.assoc(state, action.meta.projectId, { loading: false })
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.projectId], { loading: false })
+      })
     case 'LOCAL_PATH/GET_PATH_FULFILLED':
-      return i.assoc(state, action.meta.projectId, { loading: false, data: action.payload.data })
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.projectId], { loading: false, data: action.payload.data })
+      })
     default:
       return state
   }
