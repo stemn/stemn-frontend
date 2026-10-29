@@ -1,4 +1,5 @@
-import http from 'axios'
+import http, { type AxiosResponse } from 'axios'
+import type { GetFile, IGetFileInput } from './types'
 
 /**
  * The download endpoints send no Content-Type, so the browser types the blob from its content
@@ -11,21 +12,22 @@ const withSvgType = async (blob: Blob) => {
   return /<svg[\s>]/i.test(head) ? new Blob([blob], { type: 'image/svg+xml' }) : blob
 }
 
-export const getFile = ({ projectId, fileId, revisionId = '', provider, responseType }) => {
+export const getFile = (({ projectId, fileId, revisionId = '', provider, responseType }: IGetFileInput) => {
   const cacheKey = `${fileId}-${revisionId}`
 
   // If the response type is path, we change it to blob and create
   // a filepath in the then statement
   return {
-    type: 'FILES/GET_FILE',
+    type: 'FILES/GET_FILE' as const,
     payload: http({
       url: projectId
         ? `/api/v1/sync/download/${projectId}/${fileId}/${revisionId}`
         : `/api/v1/remote/download/${provider}/${fileId}/${revisionId}`,
       responseType: responseType === 'path' ? 'blob' : responseType,
-    }).then(async (response) => {
+    }).then(async (response: AxiosResponse<unknown>) => {
       if (responseType === 'path') {
-        response.data = window.URL.createObjectURL(await withSvgType(response.data))
+        // 'path' requests are sent with responseType 'blob'
+        response.data = window.URL.createObjectURL(await withSvgType(response.data as Blob))
       }
       return response
     }),
@@ -33,4 +35,4 @@ export const getFile = ({ projectId, fileId, revisionId = '', provider, response
       cacheKey,
     },
   }
-}
+}) satisfies GetFile

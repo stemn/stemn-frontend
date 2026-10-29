@@ -1,12 +1,19 @@
 import { describe, expect, it } from 'vitest'
-import { filesReducer as reducer } from './Files.reducer'
+import type { IFile } from 'stemn-shared/misc/FileList/types'
+import { filesReducer as reducer, IFilesState } from './Files.reducer'
 
-const makeState = (): any => ({
+/** The cache branches the table-driven tests index */
+type Branch = keyof Pick<
+  IFilesState,
+  'fileMeta' | 'fileAssemblyParts' | 'fileAssemblyParents' | 'relatedThreads' | 'pathToId'
+>
+
+const makeState = (): IFilesState => ({
   hydrated: true,
   fileData: { 'file1-rev1': { loading: false, data: 'solid cube' }, other: { loading: false } },
   fileRenders: { 'file1-rev1': { loading: false, data: 'render' }, other: { loading: false } },
   fileMeta: {
-    'file1-rev1': { loading: false, data: { fileId: 'file1', name: 'cube.step' } },
+    'file1-rev1': { loading: false, data: { fileId: 'file1', name: 'cube.step' } as IFile },
     other: { loading: false },
   },
   fileAssemblyParts: { file1: { loading: false, data: [] }, other: { loading: false } },
@@ -17,7 +24,7 @@ const makeState = (): any => ({
   previewMarkdown: false,
 })
 
-const branches = [
+const branches: (keyof IFilesState)[] = [
   'fileData',
   'fileRenders',
   'fileMeta',
@@ -29,7 +36,7 @@ const branches = [
 ]
 
 /** Every top-level branch except `changed` keeps its reference */
-const expectOtherBranchesKept = (next: any, prev: any, changed: string[]) => {
+const expectOtherBranchesKept = (next: IFilesState, prev: IFilesState, changed: string[]) => {
   branches.filter((branch) => !changed.includes(branch)).forEach((branch) => expect(next[branch]).toBe(prev[branch]))
 }
 
@@ -37,7 +44,7 @@ describe('Files reducer', () => {
   const prev = makeState()
 
   it('hydrates a persisted state with the initial keys', () => {
-    const next = reducer({ previewMarkdown: true } as any, { type: 'OTHER' })
+    const next = reducer({ previewMarkdown: true } as IFilesState, { type: 'OTHER' })
     expect(next).toMatchObject({ previewMarkdown: true, fileData: {}, relatedThreads: {}, hydrated: true })
   })
 
@@ -118,7 +125,7 @@ describe('Files reducer', () => {
     expectOtherBranchesKept(next, prev, ['fileRenders'])
   })
 
-  it.each([
+  it.each<[string, Branch, string, string]>([
     ['GET_META', 'fileMeta', 'file1-rev1', 'cacheKey'],
     ['GET_ASSEMBLY_PARTS', 'fileAssemblyParts', 'file1', 'cacheKey'],
     ['GET_ASSEMBLY_PARENTS', 'fileAssemblyParents', 'file1', 'cacheKey'],
@@ -135,7 +142,7 @@ describe('Files reducer', () => {
     expect(reducer(prev, { type: `FILES/${base}_REJECTED`, meta: { [metaKey]: key } })).toBe(prev)
   })
 
-  it.each([
+  it.each<[string, Branch, string]>([
     ['GET_META', 'fileMeta', 'cacheKey'],
     ['GET_ASSEMBLY_PARTS', 'fileAssemblyParts', 'cacheKey'],
     ['GET_ASSEMBLY_PARENTS', 'fileAssemblyParents', 'cacheKey'],

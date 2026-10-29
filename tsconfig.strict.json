@@ -17,6 +17,14 @@
   },
   "include": [
     // Routing compatibility layer (react-router 8 behind the react-router v3 / react-router-redux API)
-    "stemn-frontend-shared/src/routing"
+    "stemn-frontend-shared/src/routing",
+    // Redux conventions: middleware, action and thunk types
+    "stemn-frontend-shared/src/redux/types.ts",
+    // Files: actions, reducer and utils (the PreviewFile / Download / Readme component trees are not converted)
+    "stemn-frontend-shared/src/misc/Files/Files.actions.ts",
+    "stemn-frontend-shared/src/misc/Files/Files.reducer.ts",
+    "stemn-frontend-shared/src/misc/Files/Files.reducer.test.ts",
+    "stemn-frontend-shared/src/misc/Files/actions",
+    "stemn-frontend-shared/src/misc/Files/utils"
   ]
 }

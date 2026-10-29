@@ -1,8 +1,11 @@
-export const renderFileDownload = ({ projectId, fileId, revisionId = '', provider, timestamp }) => {
+import type { IRenderFileInput, RenderFileDownload } from './types'
+
+/** Downloads (and extracts) the render through the main process file cache (`FileCache.get`) */
+export const renderFileDownload = (({ projectId, fileId, revisionId = '', provider, timestamp }: IRenderFileInput) => {
   const cacheKey = timestamp ? `${fileId}-${revisionId}-${timestamp}` : `${fileId}-${revisionId}`
   return {
-    type: 'FILES/RENDER_FILE_DOWNLOAD',
-    aliased: true,
+    type: 'FILES/RENDER_FILE_DOWNLOAD' as const,
+    aliased: true as const,
     payload: {
       functionAlias: 'FileCache.get',
       functionInputs: {
@@ -20,4 +23,4 @@ export const renderFileDownload = ({ projectId, fileId, revisionId = '', provide
       cacheKey,
     },
   }
-}
+}) satisfies RenderFileDownload

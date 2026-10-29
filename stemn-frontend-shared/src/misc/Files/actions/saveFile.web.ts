@@ -1,16 +1,10 @@
 import http from 'axios'
-import { IFile } from 'stemn-shared/misc/FileList/types'
+import type { SaveFile } from './types'
 
-export interface IActionSaveFileInput {
-  file: IFile
-  fileUrl: string
-  anchorEl: HTMLElement
-}
-
-export const saveFile =
-  ({ file, fileUrl, anchorEl }: IActionSaveFileInput) =>
+export const saveFile: SaveFile =
+  ({ file, fileUrl, anchorEl }) =>
   (dispatch, getState) =>
-    http({
+    http<{ token: string }>({
       method: 'GET',
       url: `/api/v1/sync/shareLink/${file.project._id}/${file.fileId}?revisionId=${file.revisionId}`,
     }).then(({ data }) => {
