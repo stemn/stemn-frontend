@@ -2,14 +2,14 @@ import React from 'react'
 import cn from 'classnames'
 import classes from './TimelineInner.module.css'
 import { orderByTime } from '../Timeline.utils'
-import moment from 'moment'
+import { fromNow } from 'stemn-shared/utils/date'
 import Popover from 'stemn-shared/misc/Popover'
 import * as stringConcat from 'stemn-shared/utils/stringConcat'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 
 const EventMap = {
   commit: (item) => {
-    const timeFromNow = moment(item.timestamp).fromNow()
+    const timeFromNow = fromNow(item.timestamp)
     return (
       <div className={cn(classes.popup, 'layout-row layout-align-start-center')}>
         <UserAvatar
@@ -29,7 +29,7 @@ const EventMap = {
     )
   },
   revision: (item) => {
-    const timeFromNow = moment(item.timestamp).fromNow()
+    const timeFromNow = fromNow(item.timestamp)
     return (
       <div className={cn(classes.popup, 'layout-row layout-align-start-center')}>
         <UserAvatar

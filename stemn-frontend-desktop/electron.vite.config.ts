@@ -172,10 +172,6 @@ export default defineConfig(({ command, mode }) => {
         react(),
         cspPlugin(contentSecurityPolicy({ isDev, stemnEnv, devServerOrigin: `http://localhost:${devPort}` })),
       ],
-      optimizeDeps: {
-        // moment locales must share the prebundled moment instance
-        include: ['moment', 'moment/locale/en-gb'],
-      },
       resolve: {
         alias: aliases,
         extensions,

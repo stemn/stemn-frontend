@@ -1,5 +1,5 @@
 import React from 'react'
-import moment from 'moment'
+import { fromNow } from 'stemn-shared/utils/date'
 import { orderByTime } from 'stemn-shared/misc/Timeline/Timeline.utils'
 import { getRevisions } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.utils'
 
@@ -48,7 +48,7 @@ export default class DownloadModal extends React.Component {
           {allRevisions.map((revision, index) => (
             <div className={cn(classes.row, 'layout-row layout-align-start-center')} key={revision._id}>
               <div style={{ width: '70px' }}>Version {revision.data.revisionNumber}</div>
-              <div className="flex text-grey-3">{revision.timestamp ? moment(revision.timestamp).fromNow() : null}</div>
+              <div className="flex text-grey-3">{revision.timestamp ? fromNow(revision.timestamp) : null}</div>
               {index === 0 ? <Label style={{ marginRight: '10px' }}>Latest Version</Label> : null}
               <DownloadFile file={revision.data}>Download</DownloadFile>
             </div>

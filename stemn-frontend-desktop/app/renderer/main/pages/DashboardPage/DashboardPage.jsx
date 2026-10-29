@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 // Component Core
 import React from 'react'
 import { Link } from 'stemn-shared/routing'
-import moment from 'moment'
+import { addMonths, dayjs } from 'stemn-shared/utils/date'
 
 import classes from './DashboardPage.module.css'
 
@@ -21,7 +21,7 @@ import Tabs from 'stemn-shared/misc/Tabs/Tabs'
 
 export class Component extends React.Component {
   state = {
-    date: moment(),
+    date: dayjs(),
   }
 
   render() {
@@ -47,8 +47,8 @@ export class Component extends React.Component {
             <div className={`${classes.sidebarRight} layout-column flex`}>
               <div style={{ marginTop: '15px' }}>
                 <Calendar
-                  onNextMonth={() => this.setState((state) => ({ date: state.date.clone().add(1, 'months') }))}
-                  onPrevMonth={() => this.setState((state) => ({ date: state.date.clone().subtract(1, 'months') }))}
+                  onNextMonth={() => this.setState((state) => ({ date: addMonths(state.date, 1) }))}
+                  onPrevMonth={() => this.setState((state) => ({ date: addMonths(state.date, -1) }))}
                   date={this.state.date}
                   onPickDate={(date) => {
                     this.setState({ date })

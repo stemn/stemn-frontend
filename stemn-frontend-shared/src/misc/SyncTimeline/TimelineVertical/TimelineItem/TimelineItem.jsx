@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import moment from 'moment'
+import { fromNow } from 'stemn-shared/utils/date'
 
 import classes from './TimelineItem.module.scss'
 
@@ -52,7 +52,7 @@ export default class TimelineItem extends Component {
               </Link>
             )}
             <span className={classes.item}>
-              <TimelineItemText item={item} type={type} entity={entity} /> - {moment(item.timestamp).fromNow()}
+              <TimelineItemText item={item} type={type} entity={entity} /> - {fromNow(item.timestamp)}
             </span>
           </div>
           {isFirst && <div className={classes.startMarker} />}

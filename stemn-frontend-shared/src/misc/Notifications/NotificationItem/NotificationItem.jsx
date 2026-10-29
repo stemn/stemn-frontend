@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import classes from './NotificationItem.module.css'
 import cn from 'classnames'
 
-import moment from 'moment'
+import { fromNow } from 'stemn-shared/utils/date'
 
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import { MdDone } from 'react-icons/md'
@@ -44,7 +44,7 @@ export default class NotificationItem extends Component {
             })}
             .
           </div>
-          <div className={classes.meta}>{moment(notification.timestamp).fromNow()}</div>
+          <div className={classes.meta}>{fromNow(notification.timestamp)}</div>
         </div>
         {notification.picture2 ? (
           <NotificationLink entity={notification.entities[1]}>

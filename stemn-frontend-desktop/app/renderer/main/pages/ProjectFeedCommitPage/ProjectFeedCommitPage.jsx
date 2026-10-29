@@ -3,7 +3,7 @@ import classes from './ProjectFeedCommitPage.module.css'
 import FileCompare from 'stemn-shared/misc/FileCompare'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'
-import moment from 'moment'
+import { formatDate } from 'stemn-shared/utils/date'
 import Link from 'stemn-shared/misc/Router/Link'
 import { groupRevisions } from 'stemn-shared/misc/Timeline/Timeline.utils.js'
 
@@ -31,7 +31,7 @@ export default class ProjectFeedPageCommit extends Component {
             <div style={{ marginLeft: '10px' }}>
               {commit.user.name}
               <span className="text-grey-3" style={{ marginLeft: '10px' }}>
-                {moment(commit.timestamp).format('LLLL')}
+                {formatDate(commit.timestamp, 'LLLL')}
               </span>
             </div>
             <div className="flex" />

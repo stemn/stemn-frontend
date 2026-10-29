@@ -6,7 +6,7 @@ import bytes from 'stemn-shared/utils/filters/bytes.js'
 import { Container } from 'stemn-shared/misc/Layout'
 import { Helmet } from 'react-helmet-async'
 
-import moment from 'moment'
+import { calendar } from 'stemn-shared/utils/date'
 
 import classes from './Download.module.scss'
 
@@ -21,7 +21,7 @@ export default class Download extends Component {
         </h3>
         <div className="text-title-5" style={{ marginBottom: '15px' }}>
           <div>
-            {latest.version} - released {moment(latest[platform].updated_at).calendar()}
+            {latest.version} - released {calendar(latest[platform].updated_at)}
           </div>
           <div>Size - {bytes(latest[platform].size)}</div>
           <a

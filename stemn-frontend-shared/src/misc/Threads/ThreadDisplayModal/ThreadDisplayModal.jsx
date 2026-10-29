@@ -1,5 +1,5 @@
 import React from 'react'
-import moment from 'moment'
+import { fromNow } from 'stemn-shared/utils/date'
 
 import cn from 'classnames'
 import classes from './ThreadDisplayModal.module.css'
@@ -86,7 +86,7 @@ export default class ThreadDisplayModal extends React.Component {
               </Popover>
             </div>
             <div className="text-grey-3" style={{ padding: '15px 0 20px' }}>
-              Created {moment(thread.data.created).fromNow()} <b className="text-interpunct" /> By{' '}
+              Created {fromNow(thread.data.created)} <b className="text-interpunct" /> By{' '}
               <a className="link-primary">{thread.data.owner.name}</a>
             </div>
           </div>

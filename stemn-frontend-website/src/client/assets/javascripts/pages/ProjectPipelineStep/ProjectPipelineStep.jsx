@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import moment from 'moment'
+import { fromNow } from 'stemn-shared/utils/date'
 import classes from './ProjectPipelineStep.module.scss'
 import { Breadcrumbs, Crumb } from 'stemn-shared/misc/Breadcrumbs'
 import { Container } from 'stemn-shared/misc/Layout'
@@ -68,7 +68,7 @@ export default class ProjectPipelineStep extends Component {
                   {step.data.start && (
                     <tr>
                       <td>Start:</td>
-                      <td>{moment(step.data.start).fromNow()}</td>
+                      <td>{fromNow(step.data.start)}</td>
                     </tr>
                   )}
                   {step.data.start && (

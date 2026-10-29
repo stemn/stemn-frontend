@@ -1,6 +1,6 @@
 import cn from 'classnames'
 import { get } from 'lodash'
-import moment from 'moment'
+import { fromNow } from 'stemn-shared/utils/date'
 import * as React from 'react'
 import { Helmet } from 'react-helmet-async'
 import { MdClose, MdMenu } from 'react-icons/md'
@@ -167,7 +167,7 @@ export class FileComponent extends React.Component<IFileComponentProps, IFileCom
                   </tr>
                   <tr>
                     <td>Last modified</td>
-                    <td>{moment(file.data.modified).fromNow()}</td>
+                    <td>{fromNow(file.data.modified)}</td>
                   </tr>
                   {revisions.length > 0 && (
                     <tr>

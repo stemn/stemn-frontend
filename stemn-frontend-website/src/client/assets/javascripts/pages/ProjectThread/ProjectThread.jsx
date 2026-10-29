@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import moment from 'moment'
+import { fromNow } from 'stemn-shared/utils/date'
 import classes from './ProjectThread.module.scss'
 import cn from 'classnames'
 import { Row, Col, Container } from 'stemn-shared/misc/Layout'
@@ -276,7 +276,7 @@ export default class ProjectThread extends Component {
                     />
                     <b>{thread.data.owner.name}</b>
                   </Link>
-                  <div>&nbsp;created this thread {moment(thread.data.created).fromNow()}.</div>
+                  <div>&nbsp;created this thread {fromNow(thread.data.created)}.</div>
                 </Col>
                 <div className="flex" />
                 <Col className={cn('sm layout-row', classes.buttonRow)}>

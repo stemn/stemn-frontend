@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import moment from 'moment'
+import { dayjs } from 'stemn-shared/utils/date'
 import createDateObjects from './createDateObjects'
 
 import cn from 'classnames'
@@ -22,7 +22,7 @@ export default class Calendar extends Component {
       if (selectedDate && item.day.format('YYYY-MM-DD') === selectedDate.format('YYYY-MM-DD')) {
         item.cn = item.cn ? `${item.cn} selected` : 'selected'
       }
-      if (item.day.format('YYYY-MM-DD') === moment().format('YYYY-MM-DD')) {
+      if (item.day.format('YYYY-MM-DD') === dayjs().format('YYYY-MM-DD')) {
         item.cn = item.cn ? `${item.cn} current` : 'current'
       }
     })

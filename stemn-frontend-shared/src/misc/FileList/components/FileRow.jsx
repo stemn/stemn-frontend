@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import moment from 'moment'
+import { fromNow } from 'stemn-shared/utils/date'
 import cn from 'classnames'
 import classes from './FileRow.module.css'
 import bytes from 'stemn-shared/utils/filters/bytes.js'
@@ -47,7 +47,7 @@ export default class FileRow extends Component {
   render() {
     const { isActive, file, query, link, showPath } = this.props
 
-    const timeFromNow = moment(file.modified).fromNow()
+    const timeFromNow = fromNow(file.modified)
 
     return (
       <div className={cn(classes.row, 'layout-row layout-align-start-center', { [classes.active]: isActive })}>

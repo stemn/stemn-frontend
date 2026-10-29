@@ -1,6 +1,6 @@
 import React from 'react'
 import cn from 'classnames'
-import moment from 'moment'
+import { fromNow } from 'stemn-shared/utils/date'
 
 import { groupRevisions } from 'stemn-shared/misc/Timeline/Timeline.utils.js'
 import pluralise from 'stemn-shared/utils/strings/pluralise'
@@ -22,7 +22,7 @@ export default class SidebarTimelineRow extends React.Component {
   render() {
     const { item } = this.props
     const { isOpen } = this.state
-    const timeFromNow = moment(item.timestamp).fromNow()
+    const timeFromNow = fromNow(item.timestamp)
     if (item.event === 'commit') {
       const groupedRevisions = groupRevisions(item.data.items)
 

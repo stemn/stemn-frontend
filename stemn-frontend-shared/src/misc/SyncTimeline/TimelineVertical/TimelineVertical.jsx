@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import moment from 'moment'
+import { calendar, formatDate } from 'stemn-shared/utils/date'
 import { sum, get, groupBy, orderBy } from 'lodash'
 import TimelineItem from './TimelineItem/TimelineItem'
 import classes from './TimelineVertical.module.css'
 
 const groupByDay = (data) => {
-  const groupedObject = groupBy(data, (item) => moment(item.timestamp).format('YY/MM/DD'))
+  const groupedObject = groupBy(data, (item) => formatDate(item.timestamp, 'YY/MM/DD'))
   const groupedArray = Object.keys(groupedObject).map((key) => ({
     date: key,
     items: groupedObject[key],
@@ -46,7 +46,7 @@ const groupByIdential = (data) =>
     return accum
   }, [])
 
-const getCalendarText = (time) => moment(time).calendar().split(' at')[0]
+const getCalendarText = (time) => calendar(time).split(' at')[0]
 
 const getNumberOfGroupedItems = (dayGroups) => sum(dayGroups.map((dayGroup) => dayGroup.items.length))
 

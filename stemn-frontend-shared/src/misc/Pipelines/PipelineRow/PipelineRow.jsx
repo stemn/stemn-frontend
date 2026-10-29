@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import moment from 'moment'
+import { fromNow } from 'stemn-shared/utils/date'
 import classes from './PipelineRow.module.scss'
 import cn from 'classnames'
 import Link from 'stemn-shared/misc/Router/Link'
@@ -41,7 +41,7 @@ export default class ThreadRow extends Component {
               )}
             </Link>
             <div className={cn(classes.meta, 'text-ellipsis')}>
-              {pipeline.data.start && <span>Triggered {moment(pipeline.data.start).fromNow()}</span>}
+              {pipeline.data.start && <span>Triggered {fromNow(pipeline.data.start)}</span>}
               {pipeline.data.start && <span className="text-interpunct" />}
               {pipeline.data.start && (
                 <span className="text-grey-2">
