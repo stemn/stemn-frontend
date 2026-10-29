@@ -1,4 +1,4 @@
-export formatBytes     from './formatBytes.js'
-export getDownloadUrl  from './getDownloadUrl.js'
-export isDriveFileId   from './isDriveFileId.js'
-export isDropboxFileId from './isDropboxFileId.js'
+export { default as formatBytes } from './formatBytes.js'
+export { default as getDownloadUrl } from './getDownloadUrl.js'
+export { default as isDriveFileId } from './isDriveFileId.js'
+export { default as isDropboxFileId } from './isDropboxFileId.js'

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 // Component Core
 import React from 'react'
-import { Link } from 'react-router'
+import { Link } from 'stemn-shared/routing'
 import moment from 'moment'
 
 import classes from './DashboardPage.css'

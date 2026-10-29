@@ -1,6 +1,6 @@
 import { get } from 'lodash'
 import { connect } from 'react-redux'
-import { push as pushRoute } from 'react-router-redux'
+import { push as pushRoute } from 'stemn-shared/routing'
 import { compose } from 'redux'
 import { show as showWindow } from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js'
 import { default as fetchDataHoc } from 'stemn-shared/misc/FetchDataHoc'

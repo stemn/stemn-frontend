@@ -97,6 +97,7 @@ class Page extends React.Component {
       transform: [ratio, 0, 0, ratio, 0, 0],
     })
     textEl.replaceChildren()
+    textEl.style.setProperty('--total-scale-factor', String(this.viewport.scale))
     this.textLayer = new TextLayer({
       textContentSource: page.streamTextContent(),
       container: textEl,

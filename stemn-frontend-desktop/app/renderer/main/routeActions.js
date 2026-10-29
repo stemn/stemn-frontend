@@ -1,7 +1,9 @@
 import { showModal } from 'stemn-shared/misc/Modal/Modal.actions.js'
 
+// The modal is referenced by its registered name (see stemn-shared/misc/Threads/ThreadDisplayModal):
+// actions cross the IPC boundary between windows, so they can't carry components.
 const showThreadModal = ({ threadId }) => showModal({
-  modalType: require('stemn-shared/misc/Threads/ThreadDisplayModal').default,
+  modalType: 'TASK_DISPLAY',
   limit: 1,
   modalProps: {
     threadId,

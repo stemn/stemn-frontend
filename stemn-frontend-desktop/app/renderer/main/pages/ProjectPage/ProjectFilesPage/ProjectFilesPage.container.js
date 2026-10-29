@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { push as pushRoute } from 'react-router-redux'
+import { push as pushRoute } from 'stemn-shared/routing'
 import { create } from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js'
 import { projectFolderRoute } from 'route-actions'
 import { saveProject } from 'stemn-shared/misc/Projects/Projects.actions'

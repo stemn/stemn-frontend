@@ -10,7 +10,7 @@ import { MdCloudOff } from 'react-icons/md'
 
 export default (props) => {
   const iconStyle = { width: '22px', height: '22px' }
-  const { item, key, to, clickFn, icon } = props
+  const { item, to, clickFn } = props
 
   const isClone = item.clone && item.clone.source
 
@@ -39,7 +39,6 @@ export default (props) => {
         <Link
           className={ cn(styles.sidebarButton) }
           activeClassName="active"
-          key={ key }
           to={ to }
           onClick={ () => { if (clickFn) { clickFn() } } }
         >
@@ -50,7 +49,6 @@ export default (props) => {
     return (
       <a
         className={ cn(styles.sidebarButton) }
-        key={ key }
         onClick={ () => { if (clickFn) { clickFn() } } }
       >
         { inner }

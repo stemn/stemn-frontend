@@ -1,51 +1,33 @@
-import { createStore, applyMiddleware, compose } from 'redux'
-// import { persistState } from 'redux-devtools';
-import thunk                    from 'redux-thunk'
-import promise                  from 'redux-promise-middleware'
-import createLogger             from 'redux-logger'
-import { hashHistory }          from 'react-router'
-import { routerMiddleware }     from 'react-router-redux'
-import getRootReducerRenderer   from '../reducers/rootReducer.renderer.js'
-import forwardToMain            from '../middleware/forwardToMain'
-import forwardToRendererWindow  from '../middleware/forwardToRendererWindow'
-import routerFix                from 'stemn-shared/misc/Router/Router.middleware.js'
+import { legacy_createStore as createStore, applyMiddleware, compose } from 'redux'
+import { thunk } from 'redux-thunk'
+import promise from 'redux-promise-middleware'
+import { createLogger } from 'redux-logger'
+import { routerMiddleware } from 'stemn-shared/routing'
+import routerFix from 'stemn-shared/misc/Router/Router.middleware.js'
+import getRootReducerRenderer from '../reducers/rootReducer.renderer.js'
+import forwardToMain from '../middleware/forwardToMain'
+import createForwardToRendererWindow from '../middleware/forwardToRendererWindow'
 
-export default function configureStore(initialState) {
+/**
+ * Renderer store: a replica of the main-process store (see forwardToMain).
+ * `windowName` is this window's scope name: 'main' | 'menubar' | 'preview'.
+ */
+export default function configureStore(initialState, { windowName } = {}) {
   const middleware = [
     thunk,
-    promise.default(),
+    promise,
     routerFix,
+    createForwardToRendererWindow(windowName),
     forwardToMain,
-    forwardToRendererWindow,
-    routerMiddleware(hashHistory),
+    routerMiddleware(),
   ]
 
-  // If we are in development || we have debug mode on
-  if (process.env.NODE_ENV === 'development' || initialState.system.settings.debug) {
-    middleware.push(createLogger({
-      level: 'info',
-      collapsed: true,
-    }))
+  // Log actions in development or when debug mode is on
+  const debug = initialState && initialState.system && initialState.system.settings && initialState.system.settings.debug
+  if (process.env.NODE_ENV === 'development' || debug) {
+    middleware.push(createLogger({ level: 'info', collapsed: true }))
   }
 
-  const enhanced = [applyMiddleware(...middleware)]
-
-  enhanced.push(window.devToolsExtension ? window.devToolsExtension() : noop => noop)
-  //    enhanced.push(persistState(
-  //      window.location.href.match(
-  //        /[?&]debug_session=([^&]+)\b/
-  //      )
-  //    ));
-
-  const rootReducer = getRootReducerRenderer()
-  const enhancer    = compose(...enhanced)
-  const store       = createStore(rootReducer, initialState, enhancer)
-
-  if (!process.env.NODE_ENV && module.hot) {
-    module.hot.accept('../reducers/rootReducer.base', () => {
-      store.replaceReducer(require('../reducers/rootReducer.base'))
-    })
-  }
-
-  return store
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+  return createStore(getRootReducerRenderer(), initialState, composeEnhancers(applyMiddleware(...middleware)))
 }

@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 
 // Container Actions
 import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js'
-import { push } from 'react-router-redux'
+import { push } from 'stemn-shared/routing'
 import { toggleMenubarSidebar } from 'stemn-shared/misc/Sidebar/Sidebar.actions.js'
 
 // Component Core
@@ -16,9 +16,9 @@ import toolbarStyles from './Toolbar.css'
 import Popover from 'stemn-shared/misc/Popover'
 import PopoverMenuList      from 'stemn-shared/misc/PopoverMenu/PopoverMenuList'
 import { SimpleIconButton }     from 'stemn-shared/misc/Buttons/SimpleIconButton'
-import MdMenu               from 'react-icons/md/menu'
-import MdMoreHoriz          from 'react-icons/md/more-horiz'
-import MdOpenInNew          from 'react-icons/md/open-in-new'
+import { MdMenu } from 'react-icons/md'
+import { MdMoreHoriz } from 'react-icons/md'
+import { MdOpenInNew } from 'react-icons/md'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 

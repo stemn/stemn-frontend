@@ -7,15 +7,14 @@ import * as SystemActions from 'stemn-shared/desktop/System/System.actions.js'
 
 // Component Core
 import React from 'react'
-import PropTypes from 'prop-types'
 import Link from 'stemn-shared/misc/Router/Link'
 import { get } from 'lodash'
 
 import Header from 'stemn-shared/misc/Header/Header.jsx'
 import Banner from 'stemn-shared/misc/Banner/Banner.jsx'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
-import MdSettings from 'react-icons/md/settings'
-import MdExpandMore from 'react-icons/md/expand-more'
+import { MdSettings } from 'react-icons/md'
+import { MdExpandMore } from 'react-icons/md'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import Popover from 'stemn-shared/misc/Popover'
 import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList'
@@ -28,16 +27,11 @@ import globalVector  from 'stemn-shared/assets/images/pure-vectors/global.svg'
 import classes from './ProjectPage.css'
 
 class Component extends React.Component {
-  getChildContext() {
-    return {
-      project: this.props.project,
-    }
-  }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.props.ProjectsActions.getProject({ projectId: this.props.params.stub })
     this.props.ProjectsActions.setActiveProject({ projectId: this.props.params.stub })
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.params.stub !== this.props.params.stub) {
       this.props.ProjectsActions.getProject({ projectId: nextProps.params.stub })
       this.props.ProjectsActions.setActiveProject({ projectId: nextProps.params.stub })
@@ -51,11 +45,11 @@ class Component extends React.Component {
       systemActions,
       dispatch,
     } = this.props
-    const baseLink       = `project/${project && project.data ? project.data._id : ''}`
+    const baseLink       = `/project/${project && project.data ? project.data._id : ''}`
     const isLoading      = !project || !project.data
     const isConnected    = project && project.data && project.data.remote && project.data.remote.provider
     const hasName        = project && project.data && project.data.name
-    const routeName      = this.props.routes[this.props.routes.length - 1]
+    const isFilesRoute   = /^\/project\/[^/]+\/files(\/|$)/.test(this.props.location.pathname)
 
     const downloadLinks = {
       drive: 'https://tools.google.com/dlpage/drive/index.html',
@@ -130,7 +124,7 @@ class Component extends React.Component {
               <Link activeClassName="active" to={ baseLink } onlyActiveOnIndex>Changes</Link>
               { isConnected ? <Link activeClassName="active" to={ `${baseLink}/feed` }>History</Link> : null }
               <Link activeClassName="active" to={ `${baseLink}/threads` }>Threads</Link>
-              { isConnected ? <Link className={ ['files/:path', 'files'].includes(routeName.path) ? 'active' : '' } to={ `${baseLink}/files/` }>Files</Link> : null }
+              { isConnected ? <Link className={ isFilesRoute ? 'active' : '' } to={ `${baseLink}/files/` }>Files</Link> : null }
             </div>
             <Popover preferPlace="below" tipSize={ 6 } trigger="click">
               <SimpleIconButton title="Visibility Settings">
@@ -159,10 +153,6 @@ class Component extends React.Component {
   }
 }
 
-
-Component.childContextTypes = {
-  project: PropTypes.object,
-}
 
 // /////////////////////////////// CONTAINER /////////////////////////////////
 
