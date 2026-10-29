@@ -22,6 +22,11 @@ a local feed in tests. The EU edition's feed must be hostable on EU infrastructu
 
 ## Design decisions
 
+0. **Releases repository**: `github.com/stemn/stemn-desktop` is the public releases repository
+   (it has held the app's releases since 2018 and installed apps poll it). It carries no source and
+   nothing is committed there by hand: the release workflow in this repository publishes installers
+   and `latest*.yml` manifests to its Releases (cleanup PR stemn/stemn-desktop#31 removes its stale
+   compiled `dist/`, AppVeyor/Travis configs and publish scripts).
 1. **Feed**: electron-updater's `generic` provider pointed at an HTTPS static feed
    (`https://updates.stemn.com/desktop/<channel>/` and `https://updates.stemn.eu/desktop/<channel>/`)
    served from object storage behind Caddy or a CDN. GitHub Releases remain the artefact store and
@@ -68,7 +73,8 @@ a local feed in tests. The EU edition's feed must be hostable on EU infrastructu
 4. CI: `.github/workflows/desktop-release.yml` on tags `desktop-v*`: matrix (ubuntu, windows,
    macos), `npm ci`, `npm run desktop:build`, `electron-builder --publish never`, sign/notarise
    with secrets (`AZURE_*`, `APPLE_API_KEY_*`, `CSC_LINK`/`CSC_KEY_PASSWORD`, `GPG_*`), upload
-   artefacts, then a `publish` job that creates a draft GitHub Release, uploads installers and
+   artefacts, then a `publish` job that creates a draft GitHub Release **in `stemn/stemn-desktop`**
+   (cross-repository token `DESKTOP_RELEASES_TOKEN`), uploads installers and
    `latest*.yml`, and syncs the feed directory to the object-storage bucket(s) with `rclone`
    (`UPDATES_BUCKET_GLOBAL`, `UPDATES_BUCKET_EU`). Draft → the founder publishes the release,
    which flips the feed to the new version (publish job runs on `release: published`).
