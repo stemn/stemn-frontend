@@ -25,7 +25,6 @@ import { api, getState, goto, launchApp, LaunchedApp, screenshot } from './helpe
 
 const EMAIL = 'priya.raman@stemn.local'
 const PASSWORD = 'password123'
-const PROJECT_ID = '6ae28ca000a6d67ef108181f'
 const PROJECT_NAME = 'CubeSat Deployable Solar Array'
 const SYNC_FILE = 'desktop-sync-check.md'
 
@@ -36,6 +35,8 @@ test.describe.serial('Stemn Desktop', () => {
   let main: Page
   let token: string
   let commitName: string
+  // Looked up by name: ids differ between seeded databases (e.g. a fresh one in CI)
+  let PROJECT_ID: string
 
   test.beforeAll(async () => {
     launched = await launchApp({ userDataDir })
@@ -43,6 +44,11 @@ test.describe.serial('Stemn Desktop', () => {
     const login = await api('POST', '/auth/login', { json: { email: EMAIL, password: PASSWORD } })
     expect(login.status).toBe(200)
     token = login.data.token
+    const search = await api('GET', '/search', {
+      query: { type: 'project', key: 'name', value: PROJECT_NAME, match: 'regex', size: '10' },
+    })
+    expect(search.status).toBe(200)
+    PROJECT_ID = search.data.find((project: any) => project.name === PROJECT_NAME)._id
   })
 
   test.afterAll(async () => {
@@ -53,6 +59,16 @@ test.describe.serial('Stemn Desktop', () => {
     const { app, getWindow } = launched
     const menubar = await getWindow('menubar')
 
+    // The main window is shown once its page is ready (slower on a virtual display)
+    await expect
+      .poll(() =>
+        app.evaluate(({ BrowserWindow }) =>
+          BrowserWindow.getAllWindows().some(
+            (win) => win.webContents.getURL().includes('/main/index.html') && win.isVisible(),
+          ),
+        ),
+      )
+      .toBe(true)
     const windows = await app.evaluate(({ BrowserWindow }) =>
       BrowserWindow.getAllWindows().map((win) => {
         const preferences = (win.webContents as any).getLastWebPreferences()
