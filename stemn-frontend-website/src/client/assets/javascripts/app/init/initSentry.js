@@ -9,5 +9,5 @@ export default () => {
       Sentry.init({ dsn: GLOBAL_ENV.SENTRY_DSN, environment: GLOBAL_ENV.NODE_ENV })
       window.Sentry = Sentry
     })
-    .catch(err => console.error('Failed to load Sentry', err))
+    .catch((err) => console.error('Failed to load Sentry', err))
 }

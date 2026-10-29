@@ -48,10 +48,12 @@ const showPreview = (localPath) => {
   log.info('path to show preview', localPath)
   const store = getStore()
   if (store && localPath) {
-    store.dispatch(createWindow({
-      type: 'PREVIEW',
-      props: { localPath },
-    }))
+    store.dispatch(
+      createWindow({
+        type: 'PREVIEW',
+        props: { localPath },
+      }),
+    )
   }
 }
 
@@ -78,8 +80,9 @@ async function start() {
   store.subscribe(() => {
     clearTimeout(saveTimeout)
     saveTimeout = setTimeout(() => {
-      jsonStorage.set('state', getFilteredStoreData(store.getState()))
-        .catch(error => log.error('Could not save the state:', error))
+      jsonStorage
+        .set('state', getFilteredStoreData(store.getState()))
+        .catch((error) => log.error('Could not save the state:', error))
     }, 250)
   })
 
@@ -104,7 +107,7 @@ async function start() {
   // Initialise the Websocket connection
   const websocket = initWebsocket(GLOBAL_ENV.WEBSOCKET_SERVER)
   websocket.on('open', () => log.info('Websocket connected to', GLOBAL_ENV.WEBSOCKET_SERVER))
-  websocket.on('error', error => log.warn('Websocket error:', error && error.message))
+  websocket.on('error', (error) => log.warn('Websocket error:', error && error.message))
   websocket.on('data', (action) => {
     if (process.env.STEMN_LOG_WEBSOCKET || store.getState().system.settings.debug) {
       log.info('Websocket received', action && action.type)
@@ -146,7 +149,8 @@ if (squirrelStartup) {
     if (windows.main) windows.main.show()
   })
 
-  app.whenReady()
+  app
+    .whenReady()
     .then(start)
     .catch((err) => {
       log.error('Startup error:', err)

@@ -16,8 +16,10 @@ const fileTypeIconsDir = join(sharedRoot, 'src/misc/FileList/filetype')
 
 // index.html is Vite's entry html; html-webpack-plugin injects the webpack bundles instead
 // of Vite's module script.
-const htmlTemplate = readFileSync(join(root, 'index.html'), 'utf8')
-  .replace(/\s*<script type="module" src="[^"]*"><\/script>/, '')
+const htmlTemplate = readFileSync(join(root, 'index.html'), 'utf8').replace(
+  /\s*<script type="module" src="[^"]*"><\/script>/,
+  '',
+)
 
 module.exports = ({ mode, styleLoader, refresh = false }) => {
   const isDev = mode === 'development'

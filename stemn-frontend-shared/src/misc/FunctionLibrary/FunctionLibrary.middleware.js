@@ -31,13 +31,15 @@ function dispatchAction(store, action, aliasedResult) {
   return aliasedResult
 }
 
-export default store => next => (action) => {
+export default (store) => (next) => (action) => {
   if (action && action.aliased) {
     const { functionAlias, functionInputs } = action.payload
     const functionFromAlias = getFunction(functionAlias)
     if (functionFromAlias) {
       // If it is an array, pass in the array of params
-      const aliasedResult = Array.isArray(functionInputs) ? functionFromAlias(...functionInputs) : functionFromAlias(functionInputs)
+      const aliasedResult = Array.isArray(functionInputs)
+        ? functionFromAlias(...functionInputs)
+        : functionFromAlias(functionInputs)
       return dispatchAction(store, action, aliasedResult)
     }
     return undefined

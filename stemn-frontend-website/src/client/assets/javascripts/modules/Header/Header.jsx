@@ -36,51 +36,40 @@ export default class Header extends Component {
 
     return (
       <div className="layout-row layout-align-start-center">
-        <SimpleIconButton
-          data-tag="create-project"
-          title="Create new project"
-          onClick={ newProject }
-        >
-          <MdAdd size={ 25 } />
+        <SimpleIconButton data-tag="create-project" title="Create new project" onClick={newProject}>
+          <MdAdd size={25} />
         </SimpleIconButton>
-        <SimpleIconButton
-          data-tag="view-notifications"
-          title="Notifications"
-          to="/notifications"
-          className="rel-box"
-        >
-          <MdNotifications size={ 22 } />
-          { numNotifications > 0 && <div className={ cn(classes.badge, { [classes.badgeLarge]: numNotifications >= 10 }) }>{ numNotifications }</div> }
+        <SimpleIconButton data-tag="view-notifications" title="Notifications" to="/notifications" className="rel-box">
+          <MdNotifications size={22} />
+          {numNotifications > 0 && (
+            <div className={cn(classes.badge, { [classes.badgeLarge]: numNotifications >= 10 })}>
+              {numNotifications}
+            </div>
+          )}
         </SimpleIconButton>
-        <SimpleIconButton
-          data-tag="view-help"
-          className="hide-xs"
-          title="Help"
-          name="help"
-        >
-          <IconHelp size={ 25 } />
+        <SimpleIconButton data-tag="view-help" className="hide-xs" title="Help" name="help">
+          <IconHelp size={25} />
         </SimpleIconButton>
-        <Popover
-          offset={ 13 }
-          tipSize={ 1 }
-          preferPlace="below"
-          trigger="click"
-        >
+        <Popover offset={13} tipSize={1} preferPlace="below" trigger="click">
           <a data-tag="avatar-menu">
             <Avatar
-              style={ { marginLeft: '10px' } }
+              style={{ marginLeft: '10px' }}
               shape="square"
-              size={ 30 }
-              name={ auth.user.name }
-              picture={ auth.user.picture }
+              size={30}
+              name={auth.user.name}
+              picture={auth.user.picture}
             />
           </a>
           <div className="PopoverMenu">
-            <Link name="userRoute" params={ routeParams }>My Profile</Link>
-            <Link name="userStarsRoute" params={ routeParams }>My Stars</Link>
+            <Link name="userRoute" params={routeParams}>
+              My Profile
+            </Link>
+            <Link name="userStarsRoute" params={routeParams}>
+              My Stars
+            </Link>
             <Link name="settingsRoute">Settings</Link>
             <div className="divider" />
-            <a onClick={ logout }>Logout</a>
+            <a onClick={logout}>Logout</a>
           </div>
         </Popover>
       </div>
@@ -88,8 +77,10 @@ export default class Header extends Component {
   }
   isLoggedOut() {
     return (
-      <div className="layout-row layout-align-start-center" style={ { paddingLeft: '15px' } }>
-        <Link to={ loginRoute() } className="link-primary">Sign in</Link>
+      <div className="layout-row layout-align-start-center" style={{ paddingLeft: '15px' }}>
+        <Link to={loginRoute()} className="link-primary">
+          Sign in
+        </Link>
       </div>
     )
   }
@@ -97,43 +88,46 @@ export default class Header extends Component {
     const { auth } = this.props
     const { isOpen } = this.state
 
-    const items = [{
-      route: 'exploreRoute',
-      label: 'Explore',
-    }]
-    const itemsMobile = [{
-      route: 'exploreRoute',
-      label: 'Explore',
-    }, {
-      route: 'openSourceRoute',
-      label: 'Open source',
-    }, {
-      route: 'pricingRoute',
-      label: 'Pricing',
-    }]
+    const items = [
+      {
+        route: 'exploreRoute',
+        label: 'Explore',
+      },
+    ]
+    const itemsMobile = [
+      {
+        route: 'exploreRoute',
+        label: 'Explore',
+      },
+      {
+        route: 'openSourceRoute',
+        label: 'Open source',
+      },
+      {
+        route: 'pricingRoute',
+        label: 'Pricing',
+      },
+    ]
     return (
-      <header className={ cn(classes.header, 'layout-column') }>
-        <HeaderMobileMenu items={ itemsMobile } isOpen={ isOpen } />
-        <Container className={ cn(classes.inner, 'layout-row layout-align-start-center') }>
-          <Link to="/" className={ classes.logo }>
-            <img src={ logo } alt="" />
+      <header className={cn(classes.header, 'layout-column')}>
+        <HeaderMobileMenu items={itemsMobile} isOpen={isOpen} />
+        <Container className={cn(classes.inner, 'layout-row layout-align-start-center')}>
+          <Link to="/" className={classes.logo}>
+            <img src={logo} alt="" />
             <BetaBadge />
           </Link>
-          <SiteSearch className={ classes.search } />
-          <div className={ cn(classes.links, 'hide-xs') }>
-            { items.map(item => (
-              <Link key={ item } activeClassName="active" className={ classes.link } name={ item.route }>{ item.label }</Link>
+          <SiteSearch className={classes.search} />
+          <div className={cn(classes.links, 'hide-xs')}>
+            {items.map((item) => (
+              <Link key={item} activeClassName="active" className={classes.link} name={item.route}>
+                {item.label}
+              </Link>
             ))}
           </div>
           <div className="hide-xs flex" />
-          { auth.user._id
-            ? this.isLoggedIn()
-            : this.isLoggedOut() }
-          <SimpleIconButton
-            className={ cn('hide-gt-xs', classes.menuButton) }
-            onClick={ this.toggleOpen }
-          >
-            <MdMenu size={ 25 } />
+          {auth.user._id ? this.isLoggedIn() : this.isLoggedOut()}
+          <SimpleIconButton className={cn('hide-gt-xs', classes.menuButton)} onClick={this.toggleOpen}>
+            <MdMenu size={25} />
           </SimpleIconButton>
         </Container>
       </header>

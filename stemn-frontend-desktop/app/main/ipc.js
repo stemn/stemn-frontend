@@ -14,15 +14,17 @@ const isTrustedSender = (event) => {
   return isAppUrl(frameUrl)
 }
 
-const guard = handler => (event, ...args) => {
-  if (!isTrustedSender(event)) {
-    log.warn('Rejected IPC message from', event.senderFrame && event.senderFrame.url)
-    throw new Error('Untrusted sender')
+const guard =
+  (handler) =>
+  (event, ...args) => {
+    if (!isTrustedSender(event)) {
+      log.warn('Rejected IPC message from', event.senderFrame && event.senderFrame.url)
+      throw new Error('Untrusted sender')
+    }
+    return handler(event, ...args)
   }
-  return handler(event, ...args)
-}
 
-const scopeLocal = action => ({ ...action, meta: { ...action.meta, scope: 'local' } })
+const scopeLocal = (action) => ({ ...action, meta: { ...action.meta, scope: 'local' } })
 
 /** Send an action straight to the renderer store(s) of a named window */
 export const sendToWindow = (name, action) => {
@@ -40,13 +42,16 @@ export const sendToAllWindows = (action) => {
   })
 }
 
-const isExternalUrl = url => typeof url === 'string' && /^(https?|mailto):/i.test(url)
+const isExternalUrl = (url) => typeof url === 'string' && /^(https?|mailto):/i.test(url)
 
 export const registerIpcHandlers = ({ getStore }) => {
-  ipcMain.handle(IPC.GET_INITIAL_STATE, guard(event => ({
-    state: toIpcSafe(getStore().getState()),
-    windowName: getWindowName(event.sender),
-  })))
+  ipcMain.handle(
+    IPC.GET_INITIAL_STATE,
+    guard((event) => ({
+      state: toIpcSafe(getStore().getState()),
+      windowName: getWindowName(event.sender),
+    })),
+  )
 
   ipcMain.on(IPC.REDUX_ACTION, (event, action) => {
     if (!isTrustedSender(event) || !action || typeof action.type !== 'string') return
@@ -58,55 +63,70 @@ export const registerIpcHandlers = ({ getStore }) => {
     sendToWindow(target, action)
   })
 
-  ipcMain.handle(IPC.WINDOW_COMMAND, guard((event, { command } = {}) => {
-    const browserWindow = BrowserWindow.fromWebContents(event.sender)
-    if (!browserWindow) return false
-    switch (command) {
-      case 'minimize':
-        browserWindow.minimize()
-        break
-      case 'toggleMaximize':
-        if (browserWindow.isMaximized()) browserWindow.unmaximize()
-        else browserWindow.maximize()
-        break
-      case 'close':
-        browserWindow.close()
-        break
-      case 'isMaximized':
-        break
-      default:
-        throw new Error(`Unknown window command: ${command}`)
-    }
-    return browserWindow.isMaximized()
-  }))
+  ipcMain.handle(
+    IPC.WINDOW_COMMAND,
+    guard((event, { command } = {}) => {
+      const browserWindow = BrowserWindow.fromWebContents(event.sender)
+      if (!browserWindow) return false
+      switch (command) {
+        case 'minimize':
+          browserWindow.minimize()
+          break
+        case 'toggleMaximize':
+          if (browserWindow.isMaximized()) browserWindow.unmaximize()
+          else browserWindow.maximize()
+          break
+        case 'close':
+          browserWindow.close()
+          break
+        case 'isMaximized':
+          break
+        default:
+          throw new Error(`Unknown window command: ${command}`)
+      }
+      return browserWindow.isMaximized()
+    }),
+  )
 
-  ipcMain.handle(IPC.SELECT_DIRECTORY, guard(async (event, { title, defaultPath, buttonLabel } = {}) => {
-    const browserWindow = BrowserWindow.fromWebContents(event.sender)
-    const { canceled, filePaths } = await dialog.showOpenDialog(browserWindow, {
-      title,
-      defaultPath: defaultPath || undefined,
-      buttonLabel: buttonLabel || 'Select Folder',
-      properties: ['openDirectory'],
-    })
-    return canceled || !filePaths[0] ? null : filePaths[0]
-  }))
+  ipcMain.handle(
+    IPC.SELECT_DIRECTORY,
+    guard(async (event, { title, defaultPath, buttonLabel } = {}) => {
+      const browserWindow = BrowserWindow.fromWebContents(event.sender)
+      const { canceled, filePaths } = await dialog.showOpenDialog(browserWindow, {
+        title,
+        defaultPath: defaultPath || undefined,
+        buttonLabel: buttonLabel || 'Select Folder',
+        properties: ['openDirectory'],
+      })
+      return canceled || !filePaths[0] ? null : filePaths[0]
+    }),
+  )
 
-  ipcMain.handle(IPC.OPEN_EXTERNAL, guard((event, url) => {
-    if (!isExternalUrl(url)) throw new Error(`Refusing to open ${url}`)
-    return shell.openExternal(url)
-  }))
+  ipcMain.handle(
+    IPC.OPEN_EXTERNAL,
+    guard((event, url) => {
+      if (!isExternalUrl(url)) throw new Error(`Refusing to open ${url}`)
+      return shell.openExternal(url)
+    }),
+  )
 
-  ipcMain.handle(IPC.OPEN_PATH, guard((event, path) => {
-    if (typeof path !== 'string' || !path) return 'No path'
-    if (!existsSync(path)) return `${path} does not exist`
-    return shell.openPath(path)
-  }))
+  ipcMain.handle(
+    IPC.OPEN_PATH,
+    guard((event, path) => {
+      if (typeof path !== 'string' || !path) return 'No path'
+      if (!existsSync(path)) return `${path} does not exist`
+      return shell.openPath(path)
+    }),
+  )
 
-  ipcMain.handle(IPC.SHOW_ITEM_IN_FOLDER, guard((event, path) => {
-    if (typeof path !== 'string' || !existsSync(path)) return false
-    shell.showItemInFolder(path)
-    return true
-  }))
+  ipcMain.handle(
+    IPC.SHOW_ITEM_IN_FOLDER,
+    guard((event, path) => {
+      if (typeof path !== 'string' || !existsSync(path)) return false
+      shell.showItemInFolder(path)
+      return true
+    }),
+  )
 
   ipcMain.on(IPC.LOG, (event, { level, message } = {}) => {
     const windowName = getWindowName(event.sender) || 'unknown'

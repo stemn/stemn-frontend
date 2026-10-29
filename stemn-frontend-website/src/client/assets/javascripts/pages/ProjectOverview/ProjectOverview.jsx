@@ -43,139 +43,139 @@ export default class ProjectOverview extends Component {
     }
 
     if (project && project.data && project.data._id) {
-      const licenseInfo = licenseData.find(license => license.type == project.data.license)
+      const licenseInfo = licenseData.find((license) => license.type == project.data.license)
       const projectRouteParams = { projectId: project.data._id }
 
       const infoBoxes = (
-        <Col className={ cn(project.data.picture ? 'flex flex-gt-xs-33' : 'flex') }>
-          <div className={ cn(project.data.picture ? 'layout-column' : 'layout-xs-column layout-gt-xs-row', classes.infoBoxes) }>
-            <div className="flex layout-row layout-align-start-center" style={ { padding: '15px 20px' } }>
+        <Col className={cn(project.data.picture ? 'flex flex-gt-xs-33' : 'flex')}>
+          <div
+            className={cn(
+              project.data.picture ? 'layout-column' : 'layout-xs-column layout-gt-xs-row',
+              classes.infoBoxes,
+            )}
+          >
+            <div className="flex layout-row layout-align-start-center" style={{ padding: '15px 20px' }}>
               <MdPeople />
               Team
               <div className="flex" />
-              <Link name="projectTeamRoute" params={ projectRouteParams }>
-                <UserAvatars className="layout-row" shape="square" size={ 30 } users={ project.data.team } limit={ 5 } />
+              <Link name="projectTeamRoute" params={projectRouteParams}>
+                <UserAvatars className="layout-row" shape="square" size={30} users={project.data.team} limit={5} />
               </Link>
             </div>
             <div className="flex layout-row layout-align-start-center">
               <MdAccessTime />
-              Updated { moment(project.data.updated).fromNow() }
+              Updated {moment(project.data.updated).fromNow()}
             </div>
-            { has(project, 'data.location[0].name')
-              ? <div className="flex layout-row layout-align-start-center">
+            {has(project, 'data.location[0].name') ? (
+              <div className="flex layout-row layout-align-start-center">
                 <MdLocationOn />
-                <div className="text-ellipsis flex">{ project.data.location[0].name }</div>
+                <div className="text-ellipsis flex">{project.data.location[0].name}</div>
               </div>
-              : null
-            }
-            { licenseInfo
-              ? <div className="flex layout-row layout-align-start-center">
+            ) : null}
+            {licenseInfo ? (
+              <div className="flex layout-row layout-align-start-center">
                 <MdAccount />
-                <a className="flex text-ellipsis" href={ licenseInfo.url } target="_blank">{ licenseInfo.name }</a>
+                <a className="flex text-ellipsis" href={licenseInfo.url} target="_blank">
+                  {licenseInfo.name}
+                </a>
               </div>
-              : null
-            }
-            { changesCount && changesCount > 0 ?
+            ) : null}
+            {changesCount && changesCount > 0 ? (
               <div className="flex layout-row layout-align-start-center">
                 <MdCompareArrows />
-                { changesCount } uncommited changes
+                {changesCount} uncommited changes
               </div>
-              : null
-            }
+            ) : null}
           </div>
         </Col>
       )
-      
+
       const imageBlock = (
         <Col className="flex">
-          <div 
-            style={ { backgroundImage: `url(${GLOBAL_ENV.API_SERVER}${project.data.picture})` } }
-            className={ classes.image  }
+          <div
+            style={{ backgroundImage: `url(${GLOBAL_ENV.API_SERVER}${project.data.picture})` }}
+            className={classes.image}
           />
         </Col>
       )
-      
+
       const imageInfoSection = (
-        <Row className="layout-xs-column layout-gt-xs-row" style={ { marginBottom: '30px' } } >
-          { project.data.picture ? imageBlock : null }
-          { infoBoxes }
+        <Row className="layout-xs-column layout-gt-xs-row" style={{ marginBottom: '30px' }}>
+          {project.data.picture ? imageBlock : null}
+          {infoBoxes}
         </Row>
       )
 
       return (
-        <div style={ { marginBottom: '30px' } }>
+        <div style={{ marginBottom: '30px' }}>
           <SubSubHeader>
-            { project.data.blurb.length > 0
-              ? <div className={ classes.blurb }>{ project.data.blurb }</div>
-              : null }
+            {project.data.blurb.length > 0 ? <div className={classes.blurb}>{project.data.blurb}</div> : null}
             <div className="layout-xs-column layout-gt-xs-row layout-align-gt-xs-start-center">
-              <div className={ classes.tags }>
-                { project.data.fields.map(field => (
-                  <Link key={ field._id } name="fieldRoute" params={ { fieldId: field.stub } }>
-                    <Tag className="primary" text={ field.name } style={ { marginBottom: '6px' } } />
+              <div className={classes.tags}>
+                {project.data.fields.map((field) => (
+                  <Link key={field._id} name="fieldRoute" params={{ fieldId: field.stub }}>
+                    <Tag className="primary" text={field.name} style={{ marginBottom: '6px' }} />
                   </Link>
                 ))}
               </div>
               <div className="flex" />
-              <div className="layout-row" style={ { marginBottom: '6px' } }>
+              <div className="layout-row" style={{ marginBottom: '6px' }}>
                 <SocialButton
-                  style={ { marginRight: '10px' } }
+                  style={{ marginRight: '10px' }}
                   type="follow"
-                  numberModel={ `${entityModel}.data.numFollowers` }
-                  number={ project.data.numFollowers }
+                  numberModel={`${entityModel}.data.numFollowers`}
+                  number={project.data.numFollowers}
                   entityType="project"
-                  entityId={ project.data._id }
+                  entityId={project.data._id}
                 />
                 <SocialButton
                   type="like"
-                  numberModel={ `${entityModel}.data.numLikes` }
-                  number={ project.data.numLikes }
+                  numberModel={`${entityModel}.data.numLikes`}
+                  number={project.data.numLikes}
                   entityType="project"
-                  entityId={ project.data._id }
+                  entityId={project.data._id}
                 />
-                { !canEdit && (
+                {!canEdit && (
                   <SocialButton
-                    style={ { marginLeft: '10px' } }
+                    style={{ marginLeft: '10px' }}
                     type="clone"
-                    numberModel={ `${entityModel}.data.numClones` }
-                    number={ project.data.numClones }
+                    numberModel={`${entityModel}.data.numClones`}
+                    number={project.data.numClones}
                     entityType="project"
-                    entityId={ project.data._id }
+                    entityId={project.data._id}
                   />
                 )}
               </div>
             </div>
           </SubSubHeader>
-          <Container style={ { margin: '30px auto' } }>
-            { !isFilePage 
-              ? imageInfoSection 
-              : null }
-            { isConnected &&
+          <Container style={{ margin: '30px auto' }}>
+            {!isFilePage ? imageInfoSection : null}
+            {isConnected && (
               <FileList
-                className={ classes.files }
-                initialSync={ !project.data.remote.lastSynced }
-                projectId={ project.data._id }
-                path={ path || project.data.remote.root._id }
-                crumbClickFn={ this.clickFileOrFolder }
-                options={ options }
+                className={classes.files}
+                initialSync={!project.data.remote.lastSynced}
+                projectId={project.data._id}
+                path={path || project.data.remote.root._id}
+                crumbClickFn={this.clickFileOrFolder}
+                options={options}
                 crumbPopup
                 search
                 link
               />
-            }
+            )}
             <Readme
-              files={ get(files, 'entries', []) }
-              project={ project }
-              projectModel={ entityModel }
-              saveProject={ saveProject }
-              isRoot={ !path || path === '' }
-              canEdit={ canEdit }
+              files={get(files, 'entries', [])}
+              project={project}
+              projectModel={entityModel}
+              saveProject={saveProject}
+              isRoot={!path || path === ''}
+              canEdit={canEdit}
             />
           </Container>
         </div>
       )
     }
-    
+
     return null
   }
 }

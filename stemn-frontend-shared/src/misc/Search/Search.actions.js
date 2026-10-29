@@ -29,20 +29,24 @@ export const search = ({ entityType, value, size, page, parentType, parentId, cr
   },
 })
 
-export const setQuery = ({ value }) => (dispatch, getState) => {
-  dispatch({
-    type: 'SEARCH/SET_QUERY',
-    payload: value,
-  })
-  const currentLocation = getState().routing.locationBeforeTransitions
-  if (currentLocation.pathname === '/search') {
-    dispatch(replace({
-      pathname: '/search',
-      query: {
-        q: value,
-        type: currentLocation.query.type,
-        page: 1,
-      },
-    }))
+export const setQuery =
+  ({ value }) =>
+  (dispatch, getState) => {
+    dispatch({
+      type: 'SEARCH/SET_QUERY',
+      payload: value,
+    })
+    const currentLocation = getState().routing.locationBeforeTransitions
+    if (currentLocation.pathname === '/search') {
+      dispatch(
+        replace({
+          pathname: '/search',
+          query: {
+            q: value,
+            type: currentLocation.query.type,
+            page: 1,
+          },
+        }),
+      )
+    }
   }
-}

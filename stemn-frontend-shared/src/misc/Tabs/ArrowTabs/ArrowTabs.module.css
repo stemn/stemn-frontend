@@ -1,4 +1,4 @@
-.tabs{
+.tabs {
   margin-left: -10px;
 }
 .tab {
@@ -9,7 +9,8 @@
   font-size: 12px;
   letter-spacing: 0.05em;
 }
-.tab:hover, .tab:global(.active) {
+.tab:hover,
+.tab:global(.active) {
   color: rgba(0, 0, 0, 1);
 }
 .arrow {

@@ -1,44 +1,44 @@
 export interface IContentfulSys {
-  id: string,
-  contentType: string,
+  id: string
+  contentType: string
 }
 
 export interface IContentfulMedia {
-  sys: IContentfulSys,
+  sys: IContentfulSys
   fields: {
-    title: string,
+    title: string
     file: {
-      contentType: string,
+      contentType: string
       details: {
-        size: number,
+        size: number
         image: {
-          width: number,
-          height: number,
-        },
-      },
-      fileName: string,
-      url: string,
-    },
+          width: number
+          height: number
+        }
+      }
+      fileName: string
+      url: string
+    }
   }
 }
 
 export interface IContentfulContentGeneric {
-  fields: any,
+  fields: any
   sys: IContentfulSys
 }
 
 export interface IContentfulContentPageExplore {
-  sys: IContentfulSys,
+  sys: IContentfulSys
   fields: {
-    id: string,
+    id: string
     featuredItems: Array<{
-      sys: IContentfulSys,
+      sys: IContentfulSys
       fields: {
-        title: string,
-        description: string,
-        link: string,
-        image: IContentfulMedia,
-      },
-    }>,
+        title: string
+        description: string
+        link: string
+        image: IContentfulMedia
+      }
+    }>
   }
 }

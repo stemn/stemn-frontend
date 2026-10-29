@@ -15,19 +15,19 @@
  */
 const MAX_DEPTH = 64
 
-const isThenable = value => value && typeof value.then === 'function'
+const isThenable = (value) => value && typeof value.then === 'function'
 
-const axiosErrorToPlain = error => ({
+const axiosErrorToPlain = (error) => ({
   name: error.name,
   message: error.message,
   code: error.code,
   isAxiosError: true,
   response: error.response
     ? {
-      status: error.response.status,
-      statusText: error.response.statusText,
-      data: error.response.data,
-    }
+        status: error.response.status,
+        statusText: error.response.statusText,
+        data: error.response.data,
+      }
     : undefined,
   config: error.config
     ? { url: error.config.url, method: error.config.method, baseURL: error.config.baseURL }
@@ -56,7 +56,7 @@ export const toIpcSafe = (input) => {
     ancestors.push(value)
     let result
     if (Array.isArray(value)) {
-      result = value.map(item => clone(item, depth + 1))
+      result = value.map((item) => clone(item, depth + 1))
     } else {
       result = {}
       Object.keys(value).forEach((key) => {

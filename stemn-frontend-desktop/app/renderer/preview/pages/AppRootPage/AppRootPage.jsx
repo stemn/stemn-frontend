@@ -8,7 +8,7 @@ function App({ children }) {
     <div className="layout-column flex">
       <TitleBar />
       {children}
-      <ModalContainer types={ ['FILE_DOWNLOAD'] } />
+      <ModalContainer types={['FILE_DOWNLOAD']} />
     </div>
   )
 }

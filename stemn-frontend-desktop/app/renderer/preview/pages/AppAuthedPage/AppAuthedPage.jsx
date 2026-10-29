@@ -20,7 +20,6 @@ export class Component extends React.Component {
   }
 }
 
-
 // /////////////////////////////// CONTAINER /////////////////////////////////
 
 function mapStateToProps({ auth }) {

@@ -20,15 +20,10 @@ const transitionTimeout = 300
  * (React 19 has no findDOMNode, so react-transition-group needs a ref).
  * TransitionGroup injects the `in`/`onExited` props into this component.
  */
-const Fade = ({ children, ...transitionProps }: { children: React.ReactElement<any>, [key: string]: any }) => {
+const Fade = ({ children, ...transitionProps }: { children: React.ReactElement<any>; [key: string]: any }) => {
   const nodeRef = React.useRef<HTMLElement>(null)
   return (
-    <CSSTransition
-      {...transitionProps}
-      nodeRef={nodeRef}
-      classNames={transitionClassNames}
-      timeout={transitionTimeout}
-    >
+    <CSSTransition {...transitionProps} nodeRef={nodeRef} classNames={transitionClassNames} timeout={transitionTimeout}>
       {React.cloneElement(children, { ref: nodeRef })}
     </CSSTransition>
   )
@@ -38,7 +33,7 @@ export const FieldTemplate = (props: FieldTemplateProps) => {
   const { id, classNames, label, required, rawErrors, rawHelp, children, hidden } = props
 
   if (hidden) {
-    return <div className='hidden'>{children}</div>
+    return <div className="hidden">{children}</div>
   }
 
   const header = `${label} ${required ? '*' : ''}`
@@ -46,28 +41,23 @@ export const FieldTemplate = (props: FieldTemplateProps) => {
 
   return (
     <div className={cn(classNames, s.main)}>
-
       <Fade in={true} appear={true}>
-        <h3 className={cn(s.main, s.header, { [s.warn] : hasErrors })}> {header} </h3>
+        <h3 className={cn(s.main, s.header, { [s.warn]: hasErrors })}> {header} </h3>
       </Fade>
 
       {children}
 
       <TransitionGroup component={null}>
-        { hasErrors
+        {hasErrors
           ? rawErrors.map((error, idx) => (
-            <Fade key={`${id}.${idx}`}>
-              <div className={cn(s.message, s.error)}> {error} </div>
-            </Fade>
-          ))
-          : null
-        }
+              <Fade key={`${id}.${idx}`}>
+                <div className={cn(s.message, s.error)}> {error} </div>
+              </Fade>
+            ))
+          : null}
       </TransitionGroup>
 
-      <div className={s.message}>
-        {rawHelp}
-      </div>
-
+      <div className={s.message}>{rawHelp}</div>
     </div>
   )
 }

@@ -14,9 +14,9 @@ export default (state = initialState, action = {}) => {
     case 'DESKTOP_RELEASES/GET_LATEST_FULFILLED':
       return i.assoc(state, 'latest', {
         version: action.payload.data.name,
-        windows: action.payload.data.assets.find(asset => asset.name.endsWith('.exe')),
-        linux: action.payload.data.assets.find(asset => asset.name.endsWith('.AppImage')),
-        mac: action.payload.data.assets.find(asset => asset.name.endsWith('.dmg')),
+        windows: action.payload.data.assets.find((asset) => asset.name.endsWith('.exe')),
+        linux: action.payload.data.assets.find((asset) => asset.name.endsWith('.AppImage')),
+        mac: action.payload.data.assets.find((asset) => asset.name.endsWith('.dmg')),
       })
 
     default:

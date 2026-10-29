@@ -15,9 +15,7 @@ const fetchConfigs = []
 
 class UserDetailsContainer extends Component {
   render() {
-    return (
-      <UserDetails { ...this.props } />
-    )
+    return <UserDetails {...this.props} />
   }
 }
 

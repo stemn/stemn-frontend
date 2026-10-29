@@ -100,15 +100,15 @@ export default class EditorNew extends Component {
     }
 
     return (
-      <div className={ cn(classes.search, 'layout-row layout-align-start-center', className) } { ...otherProps }>
+      <div className={cn(classes.search, 'layout-row layout-align-start-center', className)} {...otherProps}>
         <CodeMirror
-          ref={ this.getCodeMirror }
-          className={ classes.search }
-          value={ value }
-          onChange={ this.onChange }
-          options={ options }
+          ref={this.getCodeMirror}
+          className={classes.search}
+          value={value}
+          onChange={this.onChange}
+          options={options}
         />
-        <MdSearch className={ classes.icon } size={ 20 } />
+        <MdSearch className={classes.icon} size={20} />
       </div>
     )
   }

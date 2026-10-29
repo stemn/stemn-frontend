@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 import OnboardingDownload from './OnboardingDownload'
 import { saveSettings, completeOnboarding } from 'stemn-shared/misc/UserSettings/UserSettings.actions'
 
-const stateToProps = () => ({
-})
+const stateToProps = () => ({})
 
 const dispatchToProps = {
   saveSettings,
@@ -13,9 +12,7 @@ const dispatchToProps = {
 
 class OnboardingDownloadContainer extends Component {
   render() {
-    return (
-      <OnboardingDownload { ...this.props } />
-    )
+    return <OnboardingDownload {...this.props} />
   }
 }
 

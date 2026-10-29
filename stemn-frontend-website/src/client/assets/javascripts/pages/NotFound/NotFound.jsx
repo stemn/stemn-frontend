@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async'
 import classes from './NotFound.module.css'
 
 const NotFound = () => (
-  <StandardLayout contained className={ `${classes.root} flex layout-column layout-align-center-center` }>
+  <StandardLayout contained className={`${classes.root} flex layout-column layout-align-center-center`}>
     <Helmet>
       <title>404: Page Not Found</title>
     </Helmet>

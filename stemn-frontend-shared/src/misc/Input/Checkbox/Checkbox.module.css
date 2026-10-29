@@ -53,12 +53,12 @@
 }
 
 /* Circle */
-.checkboxCircle label{
+.checkboxCircle label {
   border-radius: 50%;
   width: 20px;
   height: 20px;
 }
-.checkboxCircle label:after{
+.checkboxCircle label:after {
   border-width: 1px;
   left: 5px;
   top: 5px;

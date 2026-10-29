@@ -40,40 +40,43 @@ const dispatchToProps = {
   getMetaFromPath,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'cacheKeyWithLocal',
-  onChange: (props) => {
-    // If we have localPath, we use that to look up fileId, projectId etc
-    if (props.localPath) {
-      props.getMetaFromPath({
-        path: props.localPath,
-        cacheKey: props.cacheKeyWithLocal,
-      })
-    } else {
-      props.getMeta({
-        fileId: props.fileId,
-        revisionId: props.revisionId,
-        projectId: props.projectId,
-        cacheKey: props.cacheKeyWithLocal,
-      })
-    }
+const fetchConfigs = [
+  {
+    hasChanged: 'cacheKeyWithLocal',
+    onChange: (props) => {
+      // If we have localPath, we use that to look up fileId, projectId etc
+      if (props.localPath) {
+        props.getMetaFromPath({
+          path: props.localPath,
+          cacheKey: props.cacheKeyWithLocal,
+        })
+      } else {
+        props.getMeta({
+          fileId: props.fileId,
+          revisionId: props.revisionId,
+          projectId: props.projectId,
+          cacheKey: props.cacheKeyWithLocal,
+        })
+      }
+    },
   },
-}, {
-  hasChanged: 'file.data.fileId',
-  onChange: (props) => {
-    if (get(props, 'file.data.fileId')) {
-      props.fetchTimeline({
-        entityType: 'file',
-        entityId: props.file.data.fileId,
-        cacheKey: props.cacheKey,
-      })
-      props.initCompare({
-        cacheKey: props.cacheKey,
-        file: props.file,
-      })
-    }
+  {
+    hasChanged: 'file.data.fileId',
+    onChange: (props) => {
+      if (get(props, 'file.data.fileId')) {
+        props.fetchTimeline({
+          entityType: 'file',
+          entityId: props.file.data.fileId,
+          cacheKey: props.cacheKey,
+        })
+        props.initCompare({
+          cacheKey: props.cacheKey,
+          file: props.file,
+        })
+      }
+    },
   },
-}]
+]
 
 // export const PreviewPageContainer = connect(stateToProps, dispatchToProps)(PreviewPage)
 export const PreviewPageContainer = compose(

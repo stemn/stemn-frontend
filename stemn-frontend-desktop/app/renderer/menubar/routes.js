@@ -6,22 +6,25 @@ import ProjectPage from './pages/ProjectPage/ProjectPage.jsx'
 import AppAuthedPage from './pages/AppAuthedPage/AppAuthedPage.jsx'
 import AppUnAuthedPage from './pages/AppUnAuthedPage/AppUnAuthedPage.jsx'
 
-const page = Component => ({ Component: withRouteProps(Component) })
+const page = (Component) => ({ Component: withRouteProps(Component) })
 
 /** Route config of the tray ("menubar") window, see ../main/routes.js */
-export default () => [{
-  path: '/',
-  ...page(AppRootPage),
-  children: [{
-    ...page(AppAuthedPage),
+export default () => [
+  {
+    path: '/',
+    ...page(AppRootPage),
     children: [
-      { index: true, ...page(HomePage) },
-      { path: '/project/:stub', ...page(ProjectPage) },
+      {
+        ...page(AppAuthedPage),
+        children: [
+          { index: true, ...page(HomePage) },
+          { path: '/project/:stub', ...page(ProjectPage) },
+        ],
+      },
+      {
+        ...page(AppUnAuthedPage),
+        children: [{ path: '/login', ...page(LoginPage) }],
+      },
     ],
-  }, {
-    ...page(AppUnAuthedPage),
-    children: [
-      { path: '/login', ...page(LoginPage) },
-    ],
-  }],
-}]
+  },
+]

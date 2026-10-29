@@ -17,25 +17,22 @@ export default class CloudSettings extends Component {
       <div className="layout-column">
         <h3>Cloud Storage Folder</h3>
         <p>Select your project's cloud storage folder. STEMN will track all changes to files in this folder.</p>
-        <ProjectLinkRemote
-          model={ `${projectModel}.fileStoreForm.provider` }
-          value={ project.fileStoreForm.provider }
-        />
+        <ProjectLinkRemote model={`${projectModel}.fileStoreForm.provider`} value={project.fileStoreForm.provider} />
         <br />
         <FileSelectInput
-          projectId={ project.data._id }
-          provider={ project.fileStoreForm.provider }
-          model={ `${projectModel}.fileStoreForm.root` }
-          value={ project.fileStoreForm.root || {} }
-          disabled={ !['drive', 'dropbox'].includes(project.fileStoreForm.provider) }
+          projectId={project.data._id}
+          provider={project.fileStoreForm.provider}
+          model={`${projectModel}.fileStoreForm.root`}
+          value={project.fileStoreForm.root || {}}
+          disabled={!['drive', 'dropbox'].includes(project.fileStoreForm.provider)}
         />
         <br />
         <div className="layout-row layout-align-end">
           <ProgressButton
             className="primary"
-            onClick={ confirmLinkRemote }
-            loading={ project.linkPending }
-            error={ project.linkRejected }
+            onClick={confirmLinkRemote}
+            loading={project.linkPending}
+            error={project.linkRejected}
           >
             Update Folder
           </ProgressButton>
@@ -47,13 +44,8 @@ export default class CloudSettings extends Component {
     const { projectModel, project } = this.props
 
     return (
-      <Form
-        model={ `${projectModel}.fileStoreForm` }
-        value={ project.data.remote }
-      >
-        { project.fileStoreForm
-          ? this.renderFormInner()
-          : null }
+      <Form model={`${projectModel}.fileStoreForm`} value={project.data.remote}>
+        {project.fileStoreForm ? this.renderFormInner() : null}
       </Form>
     )
   }

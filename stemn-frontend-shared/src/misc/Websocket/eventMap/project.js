@@ -18,10 +18,12 @@ export default (store, action) => {
     case 'PROJECT/NEW_CHANGES':
       return dispatch(fetchChanges({ projectId: action.payload.projectId }))
     case 'PROJECT/NEW_COMMITS':
-      dispatch(fetchTimeline({
-        entityType: 'project',
-        entityId: action.payload.projectId,
-      })) // TODO: add commit type to timeline?
+      dispatch(
+        fetchTimeline({
+          entityType: 'project',
+          entityId: action.payload.projectId,
+        }),
+      ) // TODO: add commit type to timeline?
       return dispatch(fetchChanges({ projectId: action.payload.projectId }))
   }
 }

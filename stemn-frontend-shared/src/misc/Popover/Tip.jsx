@@ -19,10 +19,10 @@ const Tip = (props) => {
   return (
     <svg
       className="Popover-tip"
-      width={ isPortrait ? crossLength : mainLength }
-      height={ isPortrait ? mainLength : crossLength }
+      width={isPortrait ? crossLength : mainLength}
+      height={isPortrait ? mainLength : crossLength}
     >
-      <polygon className="Popover-tipShape" points={ points } />
+      <polygon className="Popover-tipShape" points={points} />
     </svg>
   )
 }

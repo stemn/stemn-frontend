@@ -1,11 +1,11 @@
 @value height-header, width-header-buttons from "theme";
 
-.buttons{
+.buttons {
   height: height-header;
   width: width-header-buttons;
   margin-right: 10px;
 }
-.button{
+.button {
   background: none;
   border: none;
   color: rgba(0, 0, 0, 0.2);
@@ -20,7 +20,7 @@
   color: rgba(0, 0, 0, 0.6);
 }
 
-.bar{
+.bar {
   position: absolute;
   z-index: 1000;
   top: 0;
@@ -28,20 +28,20 @@
   left: 45px;
   height: 20px;
 }
-.dragger{
+.dragger {
   -webkit-user-select: none;
   -webkit-app-region: drag;
   cursor: default;
 }
-.close:hover{
-  background: rgb(232,17,35);
+.close:hover {
+  background: rgb(232, 17, 35);
   color: white;
 }
 
-.light .button{
+.light .button {
   color: rgba(255, 255, 255, 0.8);
 }
-.light .button:hover{
+.light .button:hover {
   color: white;
 }
 /*

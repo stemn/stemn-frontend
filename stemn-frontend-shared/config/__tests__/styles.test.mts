@@ -35,21 +35,33 @@ test('stylesheets follow the *.module.(s)css convention under Vite', async () =>
   const root = mkdtempSync(join(tmpdir(), 'stemn-css-'))
   try {
     write(root, 'theme.module.css', '@value primary: rgb(1, 2, 3);\n@value warn: rgb(4, 5, 6);\n')
-    write(root, 'src/Button.module.css', '@value primary from "theme";\n.button { color: primary; }\n.button-big { font-size: 20px; }\n')
+    write(
+      root,
+      'src/Button.module.css',
+      '@value primary from "theme";\n.button { color: primary; }\n.button-big { font-size: 20px; }\n',
+    )
     write(root, 'src/Panel.module.scss', '@value warn from "theme";\n.panel { .title { color: warn; } }\n')
-    write(root, 'src/app.global.scss', ':root { --theme-primary: rgb(1, 2, 3); }\n.layout-row { display: flex; }\n@import "./links.css";\n')
+    write(
+      root,
+      'src/app.global.scss',
+      ':root { --theme-primary: rgb(1, 2, 3); }\n.layout-row { display: flex; }\n@import "./links.css";\n',
+    )
     write(root, 'src/links.css', '.link-primary { color: var(--theme-primary); }\n')
     write(root, 'src/Popover.css', '.Popover { z-index: 100; }\n')
     write(root, 'node_modules/some-lib/style.css', '.lib-class { color: black; }\n')
     write(root, 'node_modules/some-lib/package.json', '{ "name": "some-lib", "version": "1.0.0" }')
-    write(root, 'src/main.js', [
-      "import './app.global.scss'",
-      "import './Popover.css'",
-      "import 'some-lib/style.css'",
-      "import button from './Button.module.css'",
-      "import panel from './Panel.module.scss'",
-      "export const classes = { button: button.button, buttonBig: button['button-big'], title: panel.title }",
-    ].join('\n'))
+    write(
+      root,
+      'src/main.js',
+      [
+        "import './app.global.scss'",
+        "import './Popover.css'",
+        "import 'some-lib/style.css'",
+        "import button from './Button.module.css'",
+        "import panel from './Panel.module.scss'",
+        "export const classes = { button: button.button, buttonBig: button['button-big'], title: panel.title }",
+      ].join('\n'),
+    )
 
     const result = await build({
       root,
@@ -69,8 +81,14 @@ test('stylesheets follow the *.module.(s)css convention under Vite', async () =>
     })
 
     const outputs = (Array.isArray(result) ? result : [result]).flatMap((r: any) => r.output)
-    const css = outputs.filter((o: any) => o.fileName.endsWith('.css')).map((o: any) => o.source).join('\n')
-    const js = outputs.filter((o: any) => o.type === 'chunk').map((o: any) => o.code).join('\n')
+    const css = outputs
+      .filter((o: any) => o.fileName.endsWith('.css'))
+      .map((o: any) => o.source)
+      .join('\n')
+    const js = outputs
+      .filter((o: any) => o.type === 'chunk')
+      .map((o: any) => o.code)
+      .join('\n')
 
     // CSS modules: hashed `<File>_<class>-<hash>`, @value resolved through the alias
     assert.match(css, /\.Button_button-[\w-]{5}\s*\{\s*color: rgb\(1, 2, 3\);/)

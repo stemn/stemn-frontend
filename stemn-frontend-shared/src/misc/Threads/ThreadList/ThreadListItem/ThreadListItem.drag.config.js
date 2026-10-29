@@ -1,6 +1,6 @@
 import { throttle } from 'lodash'
 
-const throttleModelUpdate = throttle(throttledFn => throttledFn(), 100, {
+const throttleModelUpdate = throttle((throttledFn) => throttledFn(), 100, {
   leading: true,
   trailing: false,
 })
@@ -57,7 +57,7 @@ export const cardHover = (props, monitor, node) => {
     endDragProps.index = props.index
     endDragProps.groupId = props.groupId
     // If the dragged item index is less than the destination index, we set it to after
-    const dragIndexInGroup = props.threads.findIndex(threadId => threadId === beginDragProps.id)
+    const dragIndexInGroup = props.threads.findIndex((threadId) => threadId === beginDragProps.id)
     endDragProps.after = dragIndexInGroup !== -1 ? dragIndexInGroup < endDragProps.index : false
 
     props.moveCard({
@@ -93,7 +93,10 @@ export const beginDrag = (props) => {
 }
 
 export const endDrag = (props, monitor) => {
-  if (endDragProps.groupId && (beginDragProps.groupId !== endDragProps.groupId || beginDragProps.index !== endDragProps.index)) {
+  if (
+    endDragProps.groupId &&
+    (beginDragProps.groupId !== endDragProps.groupId || beginDragProps.index !== endDragProps.index)
+  ) {
     // We have done a real move, save
     props.moveCard({
       thread: beginDragProps.id,

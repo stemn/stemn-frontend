@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel';
-import CloudSettings from 'stemn-shared/misc/ProjectSettings/CloudSettings';
-import DeleteSettings from 'stemn-shared/misc/ProjectSettings/DeleteSettings';
-import { GeneralSettings } from 'stemn-shared/misc/ProjectSettings/GeneralSettings';
+import React, { Component } from 'react'
+import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
+import CloudSettings from 'stemn-shared/misc/ProjectSettings/CloudSettings'
+import DeleteSettings from 'stemn-shared/misc/ProjectSettings/DeleteSettings'
+import { GeneralSettings } from 'stemn-shared/misc/ProjectSettings/GeneralSettings'
 
 class ProjectSettingsGeneral extends Component {
   confirmLinkRemote = () => {
@@ -23,31 +23,17 @@ class ProjectSettingsGeneral extends Component {
     })
   }
   render() {
-    const {
-      project,
-      projectModel,
-      saveProject,
-    } = this.props
+    const { project, projectModel, saveProject } = this.props
     return (
       <div>
         <InfoPanel>
-          <GeneralSettings
-            project={ project }
-            entityModel={ projectModel }
-            saveProject={ saveProject }
-          />
+          <GeneralSettings project={project} entityModel={projectModel} saveProject={saveProject} />
         </InfoPanel>
         <InfoPanel>
-          <CloudSettings
-            project={ project }
-            projectModel={ projectModel }
-            confirmLinkRemote={ this.confirmLinkRemote }
-          />
-        </InfoPanel>        
+          <CloudSettings project={project} projectModel={projectModel} confirmLinkRemote={this.confirmLinkRemote} />
+        </InfoPanel>
         <InfoPanel>
-          <DeleteSettings
-            deleteProject={ this.confirmDeleteProject }
-          />
+          <DeleteSettings deleteProject={this.confirmDeleteProject} />
         </InfoPanel>
       </div>
     )

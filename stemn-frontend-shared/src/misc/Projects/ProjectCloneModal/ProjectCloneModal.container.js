@@ -24,4 +24,3 @@ const modalName = 'CLONE_PROJECT'
 const ModalComponent = connect(mapStateToProps, mapDispatchToProps)(ProjectCloneModal)
 registerModal(modalName, ModalComponent)
 export default modalName
-

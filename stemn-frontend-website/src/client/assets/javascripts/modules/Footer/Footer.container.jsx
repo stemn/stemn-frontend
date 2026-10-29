@@ -14,9 +14,7 @@ const dispatchToProps = {
 
 class FooterContainer extends Component {
   render() {
-    return (
-      <Footer { ...this.props } />
-    )
+    return <Footer {...this.props} />
   }
 }
 

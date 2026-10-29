@@ -10,27 +10,24 @@ import { MdChevronRight as MdChrevronRight } from 'react-icons/md'
 import Link from 'stemn-shared/misc/Router/Link'
 
 const arrowTabsPropTypes = {
-  children: PropTypes.node.isRequired,     // Child element
-  className: PropTypes.string,              // Classes
+  children: PropTypes.node.isRequired, // Child element
+  className: PropTypes.string, // Classes
 }
 const arrowTabPropTypes = {
-  children: PropTypes.node.isRequired,      // Child element
-  isActive: PropTypes.bool,                 // Is the tab active?
-  arrow: PropTypes.bool,                 // Should we show the arrow?
-  name: PropTypes.string,               // Link path name
-  params: PropTypes.object,               // Link params
+  children: PropTypes.node.isRequired, // Child element
+  isActive: PropTypes.bool, // Is the tab active?
+  arrow: PropTypes.bool, // Should we show the arrow?
+  name: PropTypes.string, // Link path name
+  params: PropTypes.object, // Link params
 }
 
 export class ArrowTabs extends React.Component {
-  static propTypes = arrowTabsPropTypes;
+  static propTypes = arrowTabsPropTypes
 
   render() {
     const { children, className } = this.props
     return (
-      <div
-        { ...omit(this.props, Object.keys(arrowTabsPropTypes)) }
-        className={ cn(classes.tabs, className) }
-      >
+      <div {...omit(this.props, Object.keys(arrowTabsPropTypes))} className={cn(classes.tabs, className)}>
         {children}
       </div>
     )
@@ -38,7 +35,7 @@ export class ArrowTabs extends React.Component {
 }
 
 export class ArrowTab extends React.Component {
-  static propTypes = arrowTabPropTypes;
+  static propTypes = arrowTabPropTypes
 
   renderLinkEl = () => {
     const { children, isActive, arrow, name, ...otherProps } = this.props
@@ -47,29 +44,26 @@ export class ArrowTab extends React.Component {
 
     if (name) {
       return (
-        <Link className={ linkClasses } name={ name } { ...otherProps }>
-          { children }
+        <Link className={linkClasses} name={name} {...otherProps}>
+          {children}
         </Link>
       )
-    } 
+    }
     return (
-      <a className={ linkClasses } { ...otherProps }>
-        { children }
+      <a className={linkClasses} {...otherProps}>
+        {children}
       </a>
     )
-  };
+  }
 
   render() {
     const { arrow } = this.props
 
     return (
       <div className="layout-row layout-align-start-center">
-        { this.renderLinkEl() }
-        { arrow
-          ? <MdChrevronRight className={ classes.arrow } size={ 22 } />
-          : null }
+        {this.renderLinkEl()}
+        {arrow ? <MdChrevronRight className={classes.arrow} size={22} /> : null}
       </div>
-
     )
   }
 }

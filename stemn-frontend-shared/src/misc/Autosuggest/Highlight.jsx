@@ -17,21 +17,22 @@ export default class Highlight extends Component {
     query: '',
     hightlightClass: 'bold',
   }
-  
+
   render() {
     const { text, query, hightlightClass, ...otherProps } = this.props
     const matches = match(text, query)
     const parts = parse(text, matches)
-    
+
     return (
-      <span { ...otherProps }>
-        { parts.map((part, index) => {
+      <span {...otherProps}>
+        {parts.map((part, index) => {
           const className = part.highlight ? hightlightClass : null
           return (
-            <span className={ className } key={ index }>{part.text}</span>
+            <span className={className} key={index}>
+              {part.text}
+            </span>
           )
-        })
-        }
+        })}
       </span>
     )
   }

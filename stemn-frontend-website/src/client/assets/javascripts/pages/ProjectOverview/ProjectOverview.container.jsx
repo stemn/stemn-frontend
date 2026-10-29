@@ -38,23 +38,23 @@ const dispatchToProps = {
   getCount,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'changesCountCacheKey',
-  onChange: (props) => {
-    props.getCount({
-      entityType: 'project',
-      entityId: props.projectId,
-      types: ['changes'],
-      cacheKey: props.changesCountCacheKey,
-    })
+const fetchConfigs = [
+  {
+    hasChanged: 'changesCountCacheKey',
+    onChange: (props) => {
+      props.getCount({
+        entityType: 'project',
+        entityId: props.projectId,
+        types: ['changes'],
+        cacheKey: props.changesCountCacheKey,
+      })
+    },
   },
-}]
+]
 
 class LoginContainer extends Component {
   render() {
-    return (
-      <ProjectOverview { ...this.props } />
-    )
+    return <ProjectOverview {...this.props} />
   }
 }
 

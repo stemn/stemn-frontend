@@ -8,7 +8,8 @@ export default (store) => {
     // axios 1.x: config.headers is an AxiosHeaders instance
     const authorization = config.headers.get('Authorization')
 
-    if (authorization === null) { // We set Authorization to null to bypass
+    if (authorization === null) {
+      // We set Authorization to null to bypass
       config.headers.delete('Authorization')
     } else if (!authorization) {
       config.headers.set('Authorization', token ? `bearer ${token}` : '')

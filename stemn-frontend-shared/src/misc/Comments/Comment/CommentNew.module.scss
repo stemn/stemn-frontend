@@ -1,7 +1,7 @@
 @value primary, border1, bg1, grey-3 from "theme";
 
-.commentAvatar{
-  margin-right: 10px
+.commentAvatar {
+  margin-right: 10px;
 }
 .commentBody {
   background: white;
@@ -12,15 +12,15 @@
   max-height: 58px;
   overflow: hidden;
 }
-.commentHeader{
+.commentHeader {
   padding: 15px 20px;
 }
-.commentContent{
+.commentContent {
   margin: 20px;
   margin-top: 0px;
   overflow: hidden;
 }
-.commentFooter{
+.commentFooter {
   padding: 6px 20px;
   border-top: 1px dashed rgba(0, 0, 0, 0.2);
 }

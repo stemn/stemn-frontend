@@ -19,12 +19,14 @@ const bridge: IStemnDesktopBridge = {
     node: process.versions.node,
   },
   getInitialState: () => ipcRenderer.invoke(IPC.GET_INITIAL_STATE),
-  dispatchToMain: action => ipcRenderer.send(IPC.REDUX_ACTION, toIpcSafe(action)),
+  dispatchToMain: (action) => ipcRenderer.send(IPC.REDUX_ACTION, toIpcSafe(action)),
   forwardToWindow: (target, action) => ipcRenderer.send(IPC.FORWARD_TO_WINDOW, { target, action: toIpcSafe(action) }),
   onAction: (listener) => {
     const handler = (_event: unknown, action: any) => listener(action)
     ipcRenderer.on(IPC.REDUX_ACTION, handler)
-    return () => { ipcRenderer.removeListener(IPC.REDUX_ACTION, handler) }
+    return () => {
+      ipcRenderer.removeListener(IPC.REDUX_ACTION, handler)
+    }
   },
   window: {
     minimize: () => windowCommand('minimize'),
@@ -33,12 +35,12 @@ const bridge: IStemnDesktopBridge = {
     isMaximized: () => windowCommand('isMaximized'),
   },
   dialog: {
-    selectDirectory: options => ipcRenderer.invoke(IPC.SELECT_DIRECTORY, options || {}),
+    selectDirectory: (options) => ipcRenderer.invoke(IPC.SELECT_DIRECTORY, options || {}),
   },
   shell: {
-    openExternal: url => ipcRenderer.invoke(IPC.OPEN_EXTERNAL, url),
-    openPath: path => ipcRenderer.invoke(IPC.OPEN_PATH, path),
-    showItemInFolder: path => ipcRenderer.invoke(IPC.SHOW_ITEM_IN_FOLDER, path),
+    openExternal: (url) => ipcRenderer.invoke(IPC.OPEN_EXTERNAL, url),
+    openPath: (path) => ipcRenderer.invoke(IPC.OPEN_PATH, path),
+    showItemInFolder: (path) => ipcRenderer.invoke(IPC.SHOW_ITEM_IN_FOLDER, path),
   },
   log: (level, message) => ipcRenderer.send(IPC.LOG, { level, message: String(message) }),
 }

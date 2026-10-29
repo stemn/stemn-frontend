@@ -1,10 +1,10 @@
 @value primary, border1, bg1, grey-3 from "theme";
 
-.comment{
+.comment {
   position: relative;
 }
-.commentAvatar{
-  margin-right: 10px
+.commentAvatar {
+  margin-right: 10px;
 }
 .commentBody {
   background: white;
@@ -12,31 +12,31 @@
   line-height: 1.5em;
   position: relative;
 }
-.commentHeader{
+.commentHeader {
   padding: 15px 20px;
 }
-.date{
+.date {
   color: grey-3;
 }
-.commentContent{
+.commentContent {
   margin: 20px;
   margin-top: 0px;
   overflow: hidden;
 }
-.commentFooter{
+.commentFooter {
   padding: 6px 20px;
   border-top: 1px dashed rgba(0, 0, 0, 0.2);
 }
 .reactions {
   padding: 0 20px 15px;
 }
-.comment:first-child{
+.comment:first-child {
   margin-top: 15px;
 }
-.comment:last-child{
+.comment:last-child {
   margin-bottom: 15px;
 }
-.comment + .comment:before{
+.comment + .comment:before {
   content: ' ';
   height: 15px;
   border-left: 1px solid rgb(232, 232, 232);

@@ -6,14 +6,17 @@ import classes from './MoreButton.module.css'
 
 import { MdChevronRight } from 'react-icons/md'
 
-
 export default class MoreButtons extends React.Component {
   render() {
     return (
       <a
-        title={ this.props.title }
-        onClick={ this.props.onClick }
-        className={ cn(classes.moreButton, { [classes.moreButtonRight]: this.props.side === 'right' }, { [classes.moreButtonLeft]: this.props.side === 'left' }) }
+        title={this.props.title}
+        onClick={this.props.onClick}
+        className={cn(
+          classes.moreButton,
+          { [classes.moreButtonRight]: this.props.side === 'right' },
+          { [classes.moreButtonLeft]: this.props.side === 'left' },
+        )}
       >
         <MdChevronRight size="15" />
       </a>

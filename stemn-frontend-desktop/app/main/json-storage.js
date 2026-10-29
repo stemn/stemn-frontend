@@ -35,19 +35,20 @@ export const dataToStoreKeyMap = [
 ]
 
 /** Pick the persisted parts of the store (see dataToStoreKeyMap) */
-export const getFilteredStoreData = data => dataToStoreKeyMap.reduce((storeObject, keyPath) => {
-  const wildCardIndex = keyPath.indexOf('*')
-  if (wildCardIndex !== -1) {
-    const pathBeforeWildcard = keyPath.slice(0, wildCardIndex)
-    const pathAfterWildcard = keyPath.slice(wildCardIndex + 1)
-    const wildcardData = get(data, pathBeforeWildcard) || {}
-    const dataToSet = {}
-    Object.keys(wildcardData).forEach((key) => {
-      const pathIncludingWildcard = [key].concat(pathAfterWildcard)
-      set(dataToSet, pathIncludingWildcard, get(wildcardData, pathIncludingWildcard))
-    })
-    return set(storeObject, pathBeforeWildcard, dataToSet)
-  }
-  const dataToSet = get(data, keyPath)
-  return dataToSet === undefined ? storeObject : set(storeObject, keyPath, dataToSet)
-}, {})
+export const getFilteredStoreData = (data) =>
+  dataToStoreKeyMap.reduce((storeObject, keyPath) => {
+    const wildCardIndex = keyPath.indexOf('*')
+    if (wildCardIndex !== -1) {
+      const pathBeforeWildcard = keyPath.slice(0, wildCardIndex)
+      const pathAfterWildcard = keyPath.slice(wildCardIndex + 1)
+      const wildcardData = get(data, pathBeforeWildcard) || {}
+      const dataToSet = {}
+      Object.keys(wildcardData).forEach((key) => {
+        const pathIncludingWildcard = [key].concat(pathAfterWildcard)
+        set(dataToSet, pathIncludingWildcard, get(wildcardData, pathIncludingWildcard))
+      })
+      return set(storeObject, pathBeforeWildcard, dataToSet)
+    }
+    const dataToSet = get(data, keyPath)
+    return dataToSet === undefined ? storeObject : set(storeObject, keyPath, dataToSet)
+  }, {})

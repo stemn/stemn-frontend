@@ -28,7 +28,8 @@ export default (state = initialState, action) => {
     case 'FIELDS/CREATE_FIELD_REJECTED':
       return i.assoc(state, 'newFieldFormPending', false)
     case 'FIELDS/CREATE_FIELD_FULFILLED':
-      return i.chain(state)
+      return i
+        .chain(state)
         .assoc('newFieldFormPending', false)
         .assoc('newFieldForm', {
           name: '',

@@ -6,7 +6,7 @@
   overflow: hidden;
   min-height: 37px;
 }
-.tabs:after{
+.tabs:after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -14,11 +14,11 @@
   right: 0;
   border-bottom: 1px solid border1;
 }
-.noLine:after{
+.noLine:after {
   border-bottom: none;
 }
 
-.inner{
+.inner {
   height: 100%;
   overflow-x: auto;
   overflow-y: hidden;
@@ -39,11 +39,12 @@
   margin-right: 0;
 }
 
-.inner > a:global(.active), .inner > a:hover {
-    color: primary;
+.inner > a:global(.active),
+.inner > a:hover {
+  color: primary;
 }
-.inner > a:global(.active):after{
-    opacity: 1;
+.inner > a:global(.active):after {
+  opacity: 1;
 }
 .inner > a:after {
   content: '';
@@ -57,7 +58,7 @@
   z-index: 1;
 }
 
-.tabsLg .inner > a{
+.tabsLg .inner > a {
   font-size: 13px;
   padding: 10px 25px 15px;
   margin-right: 0px;

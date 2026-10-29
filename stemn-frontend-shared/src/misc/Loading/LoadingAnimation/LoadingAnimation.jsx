@@ -5,10 +5,6 @@ import cn from 'classnames'
 export default class LoadingAnimation extends Component {
   render() {
     const { children, className } = this.props
-    return (
-      <div className={ cn(classes.animation, className) }>
-        { children }
-      </div>
-    )
+    return <div className={cn(classes.animation, className)}>{children}</div>
   }
 }

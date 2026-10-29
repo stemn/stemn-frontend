@@ -19,29 +19,29 @@
   background: primary-bg !important;
   color: white;
 }
-.active .checkbox{
+.active .checkbox {
   color: white;
 }
 
-.active .icon{
+.active .icon {
   color: white !important;
 }
-.icon{
+.icon {
   margin-right: 6px;
   border: 1px solid !important;
   border-color: inherit;
   width: 16px;
   height: 16px;
 }
-.icon svg{
+.icon svg {
   color: inherit;
 }
-.icon.created{
+.icon.created {
   color: success;
 }
-.icon.deleted{
+.icon.deleted {
   color: warn;
 }
-.icon.modified{
+.icon.modified {
   color: grey-2;
 }

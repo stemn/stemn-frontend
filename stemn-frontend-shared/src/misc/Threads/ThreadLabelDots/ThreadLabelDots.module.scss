@@ -19,10 +19,10 @@
   margin-top: 2px;
   margin-bottom: 2px;
   cursor: default;
-  
+
   &.responsive {
     @media (max-width: 599px) {
-      text-indent: -9999px;  
+      text-indent: -9999px;
       display: inline-block;
       width: 10px;
       height: 10px;
@@ -36,7 +36,7 @@ a.tag {
   cursor: pointer;
 }
 a .tagBg:hover {
-  opacity: 0.25
+  opacity: 0.25;
 }
 
 .tagBg {

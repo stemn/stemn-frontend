@@ -21,37 +21,42 @@ const dispatchToProps = {
   replace,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'projectId',
-  onChange: (props) => {
-    props.getProject({
-      projectId: props.projectId,
-      size: 'lg',
-      force: true,
-    }).catch(() => props.replace(notFound()))
-    props.joinRoom({
-      room: props.projectId,
-      type: 'project',
-    })
-  },
-}, {
-  // Leave the project room on unmount/change
-  unmount: true,
-  hasChanged: 'projectId',
-  onChange: (nextProps, prevProps) => {
-    // We leave the prevRoom if there is a prev threadId
-    if (prevProps.leaveRoom && prevProps.projectId) {
-      prevProps.leaveRoom({
+const fetchConfigs = [
+  {
+    hasChanged: 'projectId',
+    onChange: (props) => {
+      props
+        .getProject({
+          projectId: props.projectId,
+          size: 'lg',
+          force: true,
+        })
+        .catch(() => props.replace(notFound()))
+      props.joinRoom({
+        room: props.projectId,
         type: 'project',
-        room: prevProps.projectId,
       })
-    }
+    },
   },
-}]
+  {
+    // Leave the project room on unmount/change
+    unmount: true,
+    hasChanged: 'projectId',
+    onChange: (nextProps, prevProps) => {
+      // We leave the prevRoom if there is a prev threadId
+      if (prevProps.leaveRoom && prevProps.projectId) {
+        prevProps.leaveRoom({
+          type: 'project',
+          room: prevProps.projectId,
+        })
+      }
+    },
+  },
+]
 
 class ProjectContainer extends Component {
   render() {
-    return <Project { ...this.props } />
+    return <Project {...this.props} />
   }
 }
 

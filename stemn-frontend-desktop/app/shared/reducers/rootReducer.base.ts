@@ -34,11 +34,11 @@ import walkthrough from 'stemn-shared/misc/Walkthrough/Walkthrough.reducer.js'
 import websocket from 'stemn-shared/misc/Websocket/Websocket.reducer.js'
 
 export interface IStoreState {
-  form: FormState,
-  fileList: IFileListState,
-  fileCompare: IFileCompareState,
-  files: IFilesState,
-  syncTimeline: ISyncTimelineState,
+  form: FormState
+  fileList: IFileListState
+  fileCompare: IFileCompareState
+  files: IFilesState
+  syncTimeline: ISyncTimelineState
 }
 
 export type IGetState = () => IStoreState

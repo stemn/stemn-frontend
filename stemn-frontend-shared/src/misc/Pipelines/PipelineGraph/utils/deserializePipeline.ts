@@ -30,24 +30,25 @@ const emptyPoint = () => ({
 /**
  * Deserialize the links
  */
-const deserializeLinks = (pipeline: IPipelineConfigWithIds): ISerializedDiagram['links'] => pipeline.links.map((link) => {
-  const fromSplit = link.from.split('.')
-  const toSplit = link.to.split('.')
+const deserializeLinks = (pipeline: IPipelineConfigWithIds): ISerializedDiagram['links'] =>
+  pipeline.links.map((link) => {
+    const fromSplit = link.from.split('.')
+    const toSplit = link.to.split('.')
 
-  return {
-    id: link.id,
-    type: 'default',
-    selected: false,
-    source: fromSplit[0],
-    sourcePort: fromSplit[fromSplit.length - 1],
-    target: toSplit[0],
-    targetPort: toSplit[toSplit.length - 1],
-    points: [emptyPoint(), emptyPoint()],
-    labels: [],
-    extras: {},
-    width: 2,
-  }
-})
+    return {
+      id: link.id,
+      type: 'default',
+      selected: false,
+      source: fromSplit[0],
+      sourcePort: fromSplit[fromSplit.length - 1],
+      target: toSplit[0],
+      targetPort: toSplit[toSplit.length - 1],
+      points: [emptyPoint(), emptyPoint()],
+      labels: [],
+      extras: {},
+      width: 2,
+    }
+  })
 
 /**
  * Deserializes a port
@@ -71,18 +72,21 @@ const deserializePort = (stepId: string) => (port: IPipelineConfigStepPort, port
  * Converts the steps to nodes and deserializes the ports
  */
 const deserializeNodes = (pipeline: IPipelineConfigWithIds) => {
-  const nodesObject = mapObjIndexed((step, stepId: string) => ({
-    id: stepId,
-    x: get(step, 'position.x', 50),
-    y: get(step, 'position.y', 50),
-    type: step.type,
-    extras: {
-      config: step.config,
-      command: step.command,
-    },
-    selected: false,
-    ports: values(mapObjIndexed(deserializePort(stepId), step.ports)),
-  }), pipeline.steps)
+  const nodesObject = mapObjIndexed(
+    (step, stepId: string) => ({
+      id: stepId,
+      x: get(step, 'position.x', 50),
+      y: get(step, 'position.y', 50),
+      type: step.type,
+      extras: {
+        config: step.config,
+        command: step.command,
+      },
+      selected: false,
+      ports: values(mapObjIndexed(deserializePort(stepId), step.ports)),
+    }),
+    pipeline.steps,
+  )
 
   const nodes: ISerializedDiagram['nodes'] = values(nodesObject)
   return nodes
@@ -93,7 +97,6 @@ const deserializeNodes = (pipeline: IPipelineConfigWithIds) => {
  * We do not use the model deserialize because we need both links and node data to deserialize either
  */
 export const deserializePipeline = (diagramId: string, pipeline: IPipelineConfig, diagramEngine: DiagramEngine) => {
-
   // Add ids to the ports and links
   const pipelineWithIds = addIdsToPipeline(pipeline)
 

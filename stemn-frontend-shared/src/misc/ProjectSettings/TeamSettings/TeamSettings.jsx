@@ -14,7 +14,7 @@ export default class TeamSettings extends Component {
     saveProject: PropTypes.func.isRequired,
   }
   select = (selection) => {
-    if (!this.props.project.data.team.find(item => item._id === selection._id)) {
+    if (!this.props.project.data.team.find((item) => item._id === selection._id)) {
       this.props.addTeamMember({
         projectId: this.props.project.data._id,
         user: selection,
@@ -41,32 +41,25 @@ export default class TeamSettings extends Component {
   }
   render() {
     const { project } = this.props
-    
+
     return (
       <InfoPanel>
         <h3>Team Members</h3>
         <p>Invite your team to your project. STEMN adds your team members to your shared cloud storage folder.</p>
-        <UserSearch 
-          cacheKey={ project.data._id }
-          select={ this.select } 
-        />
+        <UserSearch cacheKey={project.data._id} select={this.select} />
         <br />
-        { project.data.team.map(item => (
-          <div style={ { marginBottom: '15px' } }  key={ item._id }>
+        {project.data.team.map((item) => (
+          <div style={{ marginBottom: '15px' }} key={item._id}>
             <TeamMember
-              item={ item }
-              changePermissionsFn={ this.changeUserPermissions }
-              removeTeamMemberFn={ this.removeTeamMember }
+              item={item}
+              changePermissionsFn={this.changeUserPermissions}
+              removeTeamMemberFn={this.removeTeamMember}
             />
-          </div>),
-        )}
+          </div>
+        ))}
         <br />
         <div className="layout-row layout-align-end">
-          <ProgressButton
-            className="primary"
-            onClick={ this.saveProject }
-            loading={ project.savePending }
-          >
+          <ProgressButton className="primary" onClick={this.saveProject} loading={project.savePending}>
             Update Team
           </ProgressButton>
         </div>
@@ -74,4 +67,3 @@ export default class TeamSettings extends Component {
     )
   }
 }
-

@@ -29,20 +29,16 @@ function getItemStyles(currentOffset) {
 const renderItem = (type, item) => {
   switch (type) {
     case 'card':
-      return (
-        <ThreadListItem draggable={ false } item={ { _id: item.id } } />
-      )
+      return <ThreadListItem draggable={false} item={{ _id: item.id }} />
     case 'group':
-      return (
-        <div>asfasfafs aafsafasf fsasafsaf</div>
-      )
+      return <div>asfasfafs aafsafasf fsasafsaf</div>
     default:
       return null
   }
 }
 
 export default function CustomDragLayer() {
-  const { item, itemType, currentOffset, isDragging } = useDragLayer(monitor => ({
+  const { item, itemType, currentOffset, isDragging } = useDragLayer((monitor) => ({
     item: monitor.getItem(),
     itemType: monitor.getItemType(),
     currentOffset: monitor.getSourceClientOffset(),
@@ -53,10 +49,8 @@ export default function CustomDragLayer() {
     return null
   }
   return (
-    <div style={ layerStyles }>
-      <div style={ getItemStyles(currentOffset) }>
-        {renderItem(itemType, item)}
-      </div>
+    <div style={layerStyles}>
+      <div style={getItemStyles(currentOffset)}>{renderItem(itemType, item)}</div>
     </div>
   )
 }

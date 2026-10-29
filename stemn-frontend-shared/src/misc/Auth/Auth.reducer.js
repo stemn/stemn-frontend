@@ -23,7 +23,7 @@ const initialState = {
   },
   passwordLost: {
     email: '',
-  },  
+  },
   passwordSet: {
     password1: '',
     password2: '',
@@ -35,89 +35,54 @@ const initialState = {
   background: Math.floor(Math.random() * numBackgrounds) + 1, // We init a random number between 1 and 8 to use as the background
 }
 
-
 const mainReducer = (state, action) => {
   switch (action.type) {
     case 'AUTH/INIT_HTTP_HEADER':
       return state
     case 'AUTH/LOAD_USER_DATA_PENDING':
-      return { ...state,
-        userLoading: true,
-      }
+      return { ...state, userLoading: true }
     case 'AUTH/LOAD_USER_DATA_FULFILLED':
-      return { ...state,
-        userLoading: false,
-        user: action.payload.data,
-      }
+      return { ...state, userLoading: false, user: action.payload.data }
     case 'AUTH/LOAD_USER_DATA_REJECTED':
-      return { ...state,
-        userLoading: false,
-      }
+      return { ...state, userLoading: false }
 
     case 'AUTH/SET_AUTH_TOKEN':
-      return { ...state,
-        authToken: action.payload,
-      }
+      return { ...state, authToken: action.payload }
     case 'AUTH/REMOVE_AUTH_TOKEN':
-      return { ...state,
-        authToken: null,
-      }
+      return { ...state, authToken: null }
 
     case 'AUTH/POST_AUTHENTICATE_PENDING':
-      return { ...state,
-        authLoading: true,
-      }
+      return { ...state, authLoading: true }
     case 'AUTH/POST_AUTHENTICATE_FULFILLED':
-      return { ...state,
-        authToken: action.payload.data.token,
-        authLoading: false,
-      }
+      return { ...state, authToken: action.payload.data.token, authLoading: false }
     case 'AUTH/POST_AUTHENTICATE_REJECTED':
-      return { ...state,
-        authLoading: false,
-      }
+      return { ...state, authLoading: false }
 
     case 'AUTH/GET_TOKEN_FULFILLED':
-      return { ...state,
-        authToken: action.payload.data.token,
-      }
+      return { ...state, authToken: action.payload.data.token }
 
     case 'AUTH/UNLINK_FULFILLED':
       return i.assocIn(state, ['user', 'accounts'], action.payload.data.accounts)
 
     case 'AUTH/LOGIN_PENDING':
-      return { ...state,
-        authLoading: true,
-      }
+      return { ...state, authLoading: true }
     case 'AUTH/LOGIN_FULFILLED':
-      return { ...state,
-        authLoading: false,
-        authToken: action.payload.data.token,
-      }
+      return { ...state, authLoading: false, authToken: action.payload.data.token }
     case 'AUTH/LOGIN_REJECTED':
-      return { ...state,
-        authLoading: false,
-      }
+      return { ...state, authLoading: false }
 
     case 'AUTH/UPDATE_EMAIL_PENDING':
-      return { ...state,
-        emailUpdatePending: true,
-      }
+      return { ...state, emailUpdatePending: true }
     case 'AUTH/UPDATE_EMAIL_FULFILLED':
-      return { ...state,
-        emailUpdatePending: false,
-      }
+      return { ...state, emailUpdatePending: false }
     case 'AUTH/UPDATE_EMAIL_REJECTED':
-      return { ...state,
-        emailUpdatePending: false,
-      }
+      return { ...state, emailUpdatePending: false }
 
     case 'AUTH/PASSWORD_UPDATE_PENDING':
-      return { ...state,
-        updatePasswordPending: true,
-      }
+      return { ...state, updatePasswordPending: true }
     case 'AUTH/PASSWORD_UPDATE_FULFILLED':
-      return { ...state,
+      return {
+        ...state,
         updatePasswordPending: false,
         authToken: action.payload.data.token,
         passwordSet: {
@@ -127,27 +92,16 @@ const mainReducer = (state, action) => {
         },
       }
     case 'AUTH/PASSWORD_UPDATE_REJECTED':
-      return { ...state,
-        updatePasswordPending: false,
-      }
+      return { ...state, updatePasswordPending: false }
 
     case 'AUTH/REGISTER_PENDING':
-      return { ...state,
-        authLoading: true,
-      }
+      return { ...state, authLoading: true }
     case 'AUTH/REGISTER_FULFILLED':
-      return { ...state,
-        authLoading: false,
-        authToken: action.payload.data.token,
-      }
+      return { ...state, authLoading: false, authToken: action.payload.data.token }
     case 'AUTH/REGISTER_REJECTED':
-      return { ...state,
-        authLoading: false,
-      }
+      return { ...state, authLoading: false }
     case 'AUTH/UPDATE_USER':
-      return { ...state,
-        user: action.payload.user,
-      }
+      return { ...state, user: action.payload.user }
 
     case 'AUTH/NEXT_BACKGROUND':
       return state.background + 1 <= numBackgrounds

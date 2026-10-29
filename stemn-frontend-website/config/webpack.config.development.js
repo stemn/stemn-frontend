@@ -21,9 +21,7 @@ module.exports = merge(base({ mode: 'development', styleLoader: require.resolve(
     port,
     hot: true,
     historyApiFallback: true,
-    static: [
-      { directory: join(root, 'public'), publicPath: '/' },
-    ],
+    static: [{ directory: join(root, 'public'), publicPath: '/' }],
     client: {
       overlay: { errors: true, warnings: false, runtimeErrors: false },
     },

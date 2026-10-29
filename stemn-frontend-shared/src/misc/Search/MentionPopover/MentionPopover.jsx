@@ -18,35 +18,23 @@ export default class MentionPopover extends Component {
     const hasResult = results && results.data && results.data.length > 0
 
     return (
-      <Popover
-        open={ showPopover && hasResult }
-        preferPlace="below"
-        tipSize={ 1 }
-        offset={ 10 }
-      >
-        <div className={ classes.caret } style={ caretPositionStyles } />
-        <div className={ cn('PopoverMenu', classes.popover) }>
-          <LoadingOverlay show={ !results || results.loading } linear noOverlay />
-          { hasResult && results.data.map(result => (
-            <a
-              key={ result._id }
-              onClick={ () => addMention(result) }
-              className="layout-row layout-align-start-center"
-            >
-              <UserAvatar
-                picture={ result.picture }
-                name={ result.name }
-                size={ 25 }
-                shape="square"
-                style={ { marginRight: '10px' } }
-              />
-              <Highlight
-                text={ result.name }
-                query={ query }
-                hightlightClass={ classes.highlight }
-              />
-            </a>
-          ))}
+      <Popover open={showPopover && hasResult} preferPlace="below" tipSize={1} offset={10}>
+        <div className={classes.caret} style={caretPositionStyles} />
+        <div className={cn('PopoverMenu', classes.popover)}>
+          <LoadingOverlay show={!results || results.loading} linear noOverlay />
+          {hasResult &&
+            results.data.map((result) => (
+              <a key={result._id} onClick={() => addMention(result)} className="layout-row layout-align-start-center">
+                <UserAvatar
+                  picture={result.picture}
+                  name={result.name}
+                  size={25}
+                  shape="square"
+                  style={{ marginRight: '10px' }}
+                />
+                <Highlight text={result.name} query={query} hightlightClass={classes.highlight} />
+              </a>
+            ))}
         </div>
       </Popover>
     )

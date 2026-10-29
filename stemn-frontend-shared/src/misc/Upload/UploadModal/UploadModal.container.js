@@ -3,8 +3,7 @@ import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry'
 import { reset } from '../Upload.actions'
 import UploadModal from './UploadModal'
 
-const stateToProps = () => ({
-})
+const stateToProps = () => ({})
 
 const dispatchToProps = {
   reset,

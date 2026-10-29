@@ -1,7 +1,12 @@
-export const fetchFiles = (
-  { projectId, path = '', cacheKey }:
-  { projectId: string, path: string, cacheKey: string },
-) => {
+export const fetchFiles = ({
+  projectId,
+  path = '',
+  cacheKey,
+}: {
+  projectId: string
+  path: string
+  cacheKey: string
+}) => {
   return {
     type: 'FILE_LIST/FETCH_FILES',
     http: true,
@@ -19,10 +24,15 @@ export const fetchFiles = (
   }
 }
 
-export const exploreFolder = (
-  { folderId = '', provider, cacheKey }:
-  { folderId: string, provider: string, cacheKey: string },
-) => {
+export const exploreFolder = ({
+  folderId = '',
+  provider,
+  cacheKey,
+}: {
+  folderId: string
+  provider: string
+  cacheKey: string
+}) => {
   return {
     type: 'FILE_LIST/EXPLORE_FOLDER',
     http: true,
@@ -40,10 +50,17 @@ export const exploreFolder = (
   }
 }
 
-export const getSearchResults = (
-  { projectId, folderId, query, cacheKey }:
-  { projectId: string, folderId: string, query: string, cacheKey: string },
-) => ({
+export const getSearchResults = ({
+  projectId,
+  folderId,
+  query,
+  cacheKey,
+}: {
+  projectId: string
+  folderId: string
+  query: string
+  cacheKey: string
+}) => ({
   type: 'FILE_LIST/SEARCH',
   http: true,
   payload: {
@@ -61,21 +78,24 @@ export const getSearchResults = (
   },
 })
 
-export const getFiles = (
-  { path, provider, projectId, cacheKey }:
-  { path: string, provider: string, projectId: string, cacheKey: string },
-) => (dispatch) => {
-  if (provider) {
-    dispatch(exploreFolder({
-      provider,
-      folderId: path,
-      cacheKey,
-    }))
-  } else {
-    dispatch(fetchFiles({
-      projectId,
-      path,
-      cacheKey,
-    }))
+export const getFiles =
+  ({ path, provider, projectId, cacheKey }: { path: string; provider: string; projectId: string; cacheKey: string }) =>
+  (dispatch) => {
+    if (provider) {
+      dispatch(
+        exploreFolder({
+          provider,
+          folderId: path,
+          cacheKey,
+        }),
+      )
+    } else {
+      dispatch(
+        fetchFiles({
+          projectId,
+          path,
+          cacheKey,
+        }),
+      )
+    }
   }
-}

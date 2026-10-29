@@ -14,52 +14,56 @@ import { getCompareIcon, getCompareModes } from '../FileCompare.utils.js'
 import { dispatchToProps } from './FileCompareMenu.container.web'
 
 export interface IFileCompareMenuComponentProps extends IFileCompareMenu {
-  togglePreviewMarkdown: typeof dispatchToProps['togglePreviewMarkdown'],
-  showModal: typeof dispatchToProps['showModal'],
-  previewMarkdown: boolean,
+  togglePreviewMarkdown: (typeof dispatchToProps)['togglePreviewMarkdown']
+  showModal: (typeof dispatchToProps)['showModal']
+  previewMarkdown: boolean
 }
 
 export class FileCompareMenuComponent extends React.Component<IFileCompareMenuComponentProps> {
-  public renderMenu () {
+  public renderMenu() {
     const { file1, revisions, showModal } = this.props
     const downloadFile = {
       label: 'Download File',
-      onClick: () => showModal({
-        modalType: downloadModalName,
-        modalProps: {
-          revisions,
-          file: file1,
-        },
-        scope: 'local',
-      }),
+      onClick: () =>
+        showModal({
+          modalType: downloadModalName,
+          modalProps: {
+            revisions,
+            file: file1,
+          },
+          scope: 'local',
+        }),
     }
     return [downloadFile]
   }
-  public render () {
-    const { enablePreview, mode, changeMode, revisions, file1, file2, previewMarkdown, togglePreviewMarkdown } = this.props
+  public render() {
+    const { enablePreview, mode, changeMode, revisions, file1, file2, previewMarkdown, togglePreviewMarkdown } =
+      this.props
 
-    if (!file1) { return null }
+    if (!file1) {
+      return null
+    }
 
     const previewType = getViewerType(file1.name, file1.provider)
     const compareModes = getCompareModes(previewType, previewType)
     const CompareIcon = getCompareIcon(mode)
-    const hasRevisions = revisions && revisions.length > 1 || file1 && file2
+    const hasRevisions = (revisions && revisions.length > 1) || (file1 && file2)
     const isMarkdown = file1.extension === 'md'
 
     return (
-      <div className='layout-row layout-align-start-center'>
-        { isMarkdown && (
+      <div className="layout-row layout-align-start-center">
+        {isMarkdown && (
           <SimpleIconButton onClick={togglePreviewMarkdown} title={previewMarkdown ? 'Preview Mode' : 'Code Mode'}>
             {!previewMarkdown ? <MdCode size={26} /> : <MdVisibility size={24} />}
           </SimpleIconButton>
         )}
-        { hasRevisions &&
-          <Popover preferPlace='below' offset={9}>
-            <SimpleIconButton title='Compare'>
+        {hasRevisions && (
+          <Popover preferPlace="below" offset={9}>
+            <SimpleIconButton title="Compare">
               <CompareIcon size={20} />
             </SimpleIconButton>
-            <div className='PopoverMenu'>
-              { compareModes.map((item) => (
+            <div className="PopoverMenu">
+              {compareModes.map((item) => (
                 <a
                   key={item.value}
                   className={cn({ active: mode === item.value })}
@@ -69,22 +73,24 @@ export class FileCompareMenuComponent extends React.Component<IFileCompareMenuCo
                 </a>
               ))}
             </div>
-          </Popover> }
-        { enablePreview &&
+          </Popover>
+        )}
+        {enablePreview && (
           <SimpleIconButton
-            title='Open File'
-            name='fileRoute'
-            params={ {
+            title="Open File"
+            name="fileRoute"
+            params={{
               projectId: file1.project._id,
               fileId: file1.fileId,
               revisionId: file1.revisionId,
-            } }
+            }}
           >
             <MdOpenInNew size={23} />
-          </SimpleIconButton> }
-        <Popover preferPlace='below' offset={9}>
-          <SimpleIconButton title='Options' style={{ marginRight: '15px' }}>
-            <MdMoreHoriz size='20px' />
+          </SimpleIconButton>
+        )}
+        <Popover preferPlace="below" offset={9}>
+          <SimpleIconButton title="Options" style={{ marginRight: '15px' }}>
+            <MdMoreHoriz size="20px" />
           </SimpleIconButton>
           <PopoverMenuList menu={this.renderMenu()} />
         </Popover>

@@ -1,27 +1,25 @@
 @value primary, bg1 from "theme";
 
-.selectList{
-
+.selectList {
 }
-.selectItem{
+.selectItem {
   padding: 10px;
-  transition: all 0.1s ease
-
+  transition: all 0.1s ease;
 }
-.selectItem:hover{
+.selectItem:hover {
   background-color: bg1;
 }
-.selectItemActive{
+.selectItemActive {
   background-color: primary !important;
   color: white !important;
 }
-.selectIcon{
+.selectIcon {
   opacity: 0;
-  transition: all 0.1s ease
+  transition: all 0.1s ease;
 }
-.selectItem:hover .selectIcon{
+.selectItem:hover .selectIcon {
   opacity: 1;
 }
-.selectItem.selectItemActive .selectIcon{
+.selectItem.selectItemActive .selectIcon {
   opacity: 1;
 }

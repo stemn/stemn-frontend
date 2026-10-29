@@ -24,17 +24,82 @@ export const viewerFileTypes = {
     image: ['png', 'jpg', 'jpeg', 'gif', 'svg', 'bmp', 'ico'],
     code: getCodeMirrorExts(),
     autodesk: [
-      '3dm', '3ds', 'asm', 'cam360', 'catpart', 'catproduct', 'cgr', 'collaboration', 'dae', 'dgn', 'dlv3', 'dwf', 'dwfx', 'dwg', 'dwt', 'dxf', 'exp',
-      'f3d', 'fbx', 'g', 'gbxml', 'iam', 'idw', 'ifc', 'ige', 'iges', 'igs', 'ipt', 'jt', 'model', 'neu', 'nwc', 'nwd', 'obj', 'prt', 'rcp', 'rvt',
-      'sab', 'sat', 'session', 'skp', 'sldasm', 'sldprt', 'smb', 'smt', 'ste', 'step', 'stl', 'stla', 'stlb', 'stp', 'wire', 'x_b', 'x_t', 'xas', 'xpr',
+      '3dm',
+      '3ds',
+      'asm',
+      'cam360',
+      'catpart',
+      'catproduct',
+      'cgr',
+      'collaboration',
+      'dae',
+      'dgn',
+      'dlv3',
+      'dwf',
+      'dwfx',
+      'dwg',
+      'dwt',
+      'dxf',
+      'exp',
+      'f3d',
+      'fbx',
+      'g',
+      'gbxml',
+      'iam',
+      'idw',
+      'ifc',
+      'ige',
+      'iges',
+      'igs',
+      'ipt',
+      'jt',
+      'model',
+      'neu',
+      'nwc',
+      'nwd',
+      'obj',
+      'prt',
+      'rcp',
+      'rvt',
+      'sab',
+      'sat',
+      'session',
+      'skp',
+      'sldasm',
+      'sldprt',
+      'smb',
+      'smt',
+      'ste',
+      'step',
+      'stl',
+      'stla',
+      'stlb',
+      'stp',
+      'wire',
+      'x_b',
+      'x_t',
+      'xas',
+      'xpr',
     ],
     google: [
-      'webm', 'mpeg4', '3gpp', 'mov', 'avi', 'mpegps', 'wmv', 'flv', // https://gist.github.com/izazueta/4961650
-      'xls', 'xlsx',
+      'webm',
+      'mpeg4',
+      '3gpp',
+      'mov',
+      'avi',
+      'mpegps',
+      'wmv',
+      'flv', // https://gist.github.com/izazueta/4961650
+      'xls',
+      'xlsx',
       'pages',
-      'psd', 'tiff',
-      'eps', 'ps', 'ai',
-      'ttf', 'xps',
+      'psd',
+      'tiff',
+      'eps',
+      'ps',
+      'ai',
+      'ttf',
+      'xps',
     ],
     pdf: ['pdf'],
     //            pcb      : ['brd', 'pcb', 'kicad_pcb'],
@@ -48,7 +113,8 @@ export const viewerFileTypes = {
   },
 }
 
-export type IPreviewType = 'other' | 'gdoc' | 'google' | 'pipeline' | 'gerber' | 'pcb' | 'image' | 'code' | 'autodesk' | 'pdf'
+export type IPreviewType =
+  'other' | 'gdoc' | 'google' | 'pipeline' | 'gerber' | 'pcb' | 'image' | 'code' | 'autodesk' | 'pdf'
 
 export const getViewerType = (fileName, provider): IPreviewType => {
   const extension = fileName.split('.').pop()
@@ -63,7 +129,8 @@ export const getViewerType = (fileName, provider): IPreviewType => {
   const providerFileTypes = viewerFileTypes[provider] || {}
 
   // This merge resolver concats arrays.
-  const mergeResolver = (targetVal, sourceVal) => (Array.isArray(targetVal) && sourceVal ? targetVal.concat(sourceVal) : sourceVal)
+  const mergeResolver = (targetVal, sourceVal) =>
+    Array.isArray(targetVal) && sourceVal ? targetVal.concat(sourceVal) : sourceVal
   const mergeTypeOverride = i.merge as any // TODO - Icepick merge TS types are wrong
   const mergedFileTypes = mergeTypeOverride(generalFileTypes, providerFileTypes, mergeResolver)
 
@@ -72,6 +139,8 @@ export const getViewerType = (fileName, provider): IPreviewType => {
   }
   // Get the viewer type
   const extensionLower = extension ? extension.toLowerCase() : ''
-  const viewerType = Object.keys(mergedFileTypes).find((type) => mergedFileTypes[type].includes(extensionLower)) as IPreviewType
+  const viewerType = Object.keys(mergedFileTypes).find((type) =>
+    mergedFileTypes[type].includes(extensionLower),
+  ) as IPreviewType
   return viewerType || 'other'
 }

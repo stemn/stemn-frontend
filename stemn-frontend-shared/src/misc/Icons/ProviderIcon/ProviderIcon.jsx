@@ -5,12 +5,11 @@ import { MdCloudOff } from 'react-icons/md'
 
 const ProviderIcon = ({ provider, ...otherProps }) => {
   if (provider === 'drive') {
-    return <Drive { ...otherProps } />
+    return <Drive {...otherProps} />
   } else if (provider === 'dropbox') {
-    return <Dropbox { ...otherProps } />
-  } 
-  return <MdCloudOff { ...otherProps } />
+    return <Dropbox {...otherProps} />
+  }
+  return <MdCloudOff {...otherProps} />
 }
 
 export default ProviderIcon
-

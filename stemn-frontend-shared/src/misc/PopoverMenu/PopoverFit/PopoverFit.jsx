@@ -34,7 +34,7 @@ export default class PopoverFit extends Component {
       minWidth: `${minWidth}px`,
       maxWidth: max ? `${minWidth}px` : 'inherit',
     }
-    
+
     const triggerWithRefProp = (element) => {
       // This will add the ref prop to the trigger element
       const newProps = {
@@ -42,14 +42,12 @@ export default class PopoverFit extends Component {
         ref: this.getTriggerRef,
       }
       return React.cloneElement(element, newProps)
-    }    
-    
+    }
+
     return (
-      <Popover preferPlace="below" tipSize={ 1 }  { ...otherProps }>
-        { triggerWithRefProp(children[0]) }
-        <div style={ popoverStyle }>
-          { children[1] }
-        </div>
+      <Popover preferPlace="below" tipSize={1} {...otherProps}>
+        {triggerWithRefProp(children[0])}
+        <div style={popoverStyle}>{children[1]}</div>
       </Popover>
     )
   }

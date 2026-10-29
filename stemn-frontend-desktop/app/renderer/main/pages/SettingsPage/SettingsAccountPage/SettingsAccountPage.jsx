@@ -19,46 +19,36 @@ export class Component extends React.Component {
 
   saveUser = () => {
     this.props.saveUser({ user: this.props.user.data })
-  };
+  }
 
   render() {
     const { entityModel, user, auth, authenticate, unlink, logout } = this.props
     const getInner = () => (
       <div>
-        <div className={ classes.panel }>
-          <UserProfileSettings
-            user={ user }
-            userModel={ entityModel }
-            saveUser={ this.saveUser }
-          />
+        <div className={classes.panel}>
+          <UserProfileSettings user={user} userModel={entityModel} saveUser={this.saveUser} />
         </div>
-        <div className={ classes.panel }>
-          <UserLinkedAccountSettings
-            user={ auth.user }
-            authenticate={ authenticate }
-            unlink={ unlink }
-          />
+        <div className={classes.panel}>
+          <UserLinkedAccountSettings user={auth.user} authenticate={authenticate} unlink={unlink} />
         </div>
-        <div className={ classes.panel }>
-          <UserCloudProviderSettings
-            user={ auth.user }
-            authenticate={ authenticate }
-            unlink={ unlink }
-          />
+        <div className={classes.panel}>
+          <UserCloudProviderSettings user={auth.user} authenticate={authenticate} unlink={unlink} />
         </div>
-        <div className={ classes.panel }>
+        <div className={classes.panel}>
           <h3>Logout</h3>
           <p>Logout from this account.</p>
           <div className="layout-row layout-align-end">
-            <ProgressButton className="warn" onClick={ logout }>Logout</ProgressButton>
+            <ProgressButton className="warn" onClick={logout}>
+              Logout
+            </ProgressButton>
           </div>
         </div>
       </div>
     )
     return (
-      <div className="rel-box" style={ { minHeight: '200px' } }>
-        { auth.user && user && user.data && getInner() }
-        <LoadingOverlay show={ auth.authLoading || !user || !user.data } />
+      <div className="rel-box" style={{ minHeight: '200px' }}>
+        {auth.user && user && user.data && getInner()}
+        <LoadingOverlay show={auth.authLoading || !user || !user.data} />
       </div>
     )
   }
@@ -69,7 +59,6 @@ export class Component extends React.Component {
 //            <p>Invite your friends to the <a className="link-primary" href="https://github.com/Stemn/Stemn-Desktop/releases">Stemn beta</a> using your access code below and get rewarded for each referral. Email <a className="link-primary" href="mailto:rewards@stemn.com">rewards@stemn.com</a> for more info.</p>
 //            <TextDisplayBox>{user.data._id}</TextDisplayBox>
 //          </div>
-
 
 const mapStateToProps = ({ auth, users }, { params }) => ({
   auth,

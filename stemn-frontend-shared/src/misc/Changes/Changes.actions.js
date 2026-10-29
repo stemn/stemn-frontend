@@ -1,11 +1,11 @@
-import http from 'axios';
-import ThreadMentionModalName from 'stemn-shared/misc/Mentions/ThreadMentionModal';
-import { storeChange } from 'stemn-shared/misc/Store/Store.actions';
+import http from 'axios'
+import ThreadMentionModalName from 'stemn-shared/misc/Mentions/ThreadMentionModal'
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 
-import { parseMentions } from '../Mentions/Mentions.utils.js';
-import { showModal } from '../Modal/Modal.actions.js';
-import { show as showToast } from '../Toasts/Toasts.actions.js';
-import { filterSelectedChangesByPossible } from './Changes.utils.js';
+import { parseMentions } from '../Mentions/Mentions.utils.js'
+import { showModal } from '../Modal/Modal.actions.js'
+import { show as showToast } from '../Toasts/Toasts.actions.js'
+import { filterSelectedChangesByPossible } from './Changes.utils.js'
 
 export function deselect({ projectId }) {
   return {
@@ -33,7 +33,6 @@ export function toggleAll({ projectId, value }) {
     })
   }
 }
-
 
 export function fetchChanges({ projectId }) {
   return (dispatch) => {
@@ -69,17 +68,21 @@ export function fetchChanges({ projectId }) {
 
 export function mentionThreadsModal({ projectId, mentions }) {
   return (dispatch) => {
-    dispatch(showModal({
-      modalType: ThreadMentionModalName,
-      modalProps: {
-        projectId,
-        cacheKey: projectId,
-      },
-    })).then(({ value: { mentions } }) => {
-      dispatch(mentionThreads({
-        projectId,
-        mentions,
-      }))
+    dispatch(
+      showModal({
+        modalType: ThreadMentionModalName,
+        modalProps: {
+          projectId,
+          cacheKey: projectId,
+        },
+      }),
+    ).then(({ value: { mentions } }) => {
+      dispatch(
+        mentionThreads({
+          projectId,
+          mentions,
+        }),
+      )
     })
   }
 }
@@ -100,7 +103,7 @@ export function commit({ projectId, name, body }) {
     const possibledSelected = filterSelectedChangesByPossible(changes.data, changes.checked)
 
     // Get the revisions from the selected files
-    const revisions = changes.data.filter(item => possibledSelected[item.data.fileId]).map(item => item._id)
+    const revisions = changes.data.filter((item) => possibledSelected[item.data.fileId]).map((item) => item._id)
 
     dispatch({
       type: 'CHANGES/COMMIT',
@@ -113,22 +116,26 @@ export function commit({ projectId, name, body }) {
           body,
         },
       }).then((response) => {
-        dispatch(showToast({
-          title: `${response.data.files.length} files commited`,
-          actions: [{
-            text: 'Undo',
-            action: {
-              aliased: 'true',
-              payload: {
-                functionAlias: 'ChangesActions.deleteCommit',
-                functionInputs: {
-                  commitId: response.data._id,
-                  projectId,
+        dispatch(
+          showToast({
+            title: `${response.data.files.length} files commited`,
+            actions: [
+              {
+                text: 'Undo',
+                action: {
+                  aliased: 'true',
+                  payload: {
+                    functionAlias: 'ChangesActions.deleteCommit',
+                    functionInputs: {
+                      commitId: response.data._id,
+                      projectId,
+                    },
+                  },
                 },
               },
-            },
-          }],
-        }))
+            ],
+          }),
+        )
         // Get the mentions
         const mentions = parseMentions(response.data.body)
         // If mentionType: thread-complete, we set the thread to complete.

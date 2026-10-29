@@ -1,16 +1,16 @@
 defaults: &defaults
-    working_directory: ~/stemn-frontend
-    docker:
-      - image: circleci/node:10.11
+  working_directory: ~/stemn-frontend
+  docker:
+    - image: circleci/node:10.11
 
 authenticate: &authenticate
-    run:
-      name: Authenticate Container
-      command: |
-        cd ~
-        echo $CREDENTIALS > gcloud-service-key.json && \
-        gcloud auth activate-service-account --key-file=gcloud-service-key.json && \
-        gcloud --quiet auth configure-docker
+  run:
+    name: Authenticate Container
+    command: |
+      cd ~
+      echo $CREDENTIALS > gcloud-service-key.json && \
+      gcloud auth activate-service-account --key-file=gcloud-service-key.json && \
+      gcloud --quiet auth configure-docker
 
 version: 2
 jobs:
@@ -20,7 +20,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - node_dependencies-{{ checksum "./package-lock.json" }}
+            - node_dependencies-{{ checksum "./package-lock.json" }}
       - run: npm i
       - save_cache:
           paths:
@@ -37,7 +37,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - node_dependencies-{{ checksum "./stemn-frontend-website/package-lock.json" }}
+            - node_dependencies-{{ checksum "./stemn-frontend-website/package-lock.json" }}
       - run: cd stemn-frontend-website; npm i;
       - save_cache:
           paths:
@@ -54,8 +54,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - node_dependencies-{{ checksum "./stemn-frontend-desktop/package-lock.json" }}
-          - node_dependencies-{{ checksum "./stemn-frontend-desktop/app/package-lock.json" }}
+            - node_dependencies-{{ checksum "./stemn-frontend-desktop/package-lock.json" }}
+            - node_dependencies-{{ checksum "./stemn-frontend-desktop/app/package-lock.json" }}
       - run: cd stemn-frontend-desktop; npm run install:all;
       - save_cache:
           paths:
@@ -79,7 +79,7 @@ jobs:
           at: ~/stemn-frontend
       - restore_cache:
           keys:
-          - website-happypack
+            - website-happypack
       - run:
           name: Build webpack
           command: |
@@ -159,7 +159,6 @@ jobs:
           name: Copy to 'stemn-desktop' repo
           command: cd stemn-frontend-desktop; npm run deploy;
 
-
 workflows:
   version: 2
   build_and_test:
@@ -195,7 +194,7 @@ workflows:
       - deploy_desktop_approval:
           type: approval
           requires:
-           - build_desktop
+            - build_desktop
           filters:
             branches:
               only:
@@ -206,4 +205,4 @@ workflows:
             - deploy_website_approval
       - deploy_desktop:
           requires:
-           - deploy_desktop_approval
+            - deploy_desktop_approval

@@ -6,14 +6,10 @@ import { omit } from 'lodash'
 export class Component extends React.Component {
   state = {
     value: this.props.value,
-  };
+  }
 
   onChange = (event) => {
-    const {
-      model,
-      type,
-      changeAction,
-    } = this.props
+    const { model, type, changeAction } = this.props
     const prevValue = this.state.value
     let newValue = event.target.value
 
@@ -41,7 +37,7 @@ export class Component extends React.Component {
     }
     // We update our internal state
     this.setState({ value: newValue })
-  };
+  }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     // Update the internal state if it differs from the redux state
@@ -59,7 +55,16 @@ export class Component extends React.Component {
   render() {
     const otherProps = omit(this.props, ['dispatch', 'model', 'value', 'changeAction'])
     const { value } = this.state
-    return <input ref={ (el) => { this.inputRef = el } } onChange={ this.onChange } value={ value } { ...otherProps } />
+    return (
+      <input
+        ref={(el) => {
+          this.inputRef = el
+        }}
+        onChange={this.onChange}
+        value={value}
+        {...otherProps}
+      />
+    )
   }
 }
 

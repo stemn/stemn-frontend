@@ -21,7 +21,7 @@ export default (store) => {
 
   // Only reachable from this machine
   const listener = server.listen(API_PORT, '127.0.0.1')
-  listener.on('error', error => log.warn(`Local API server could not listen on ${API_PORT}:`, error.message))
+  listener.on('error', (error) => log.warn(`Local API server could not listen on ${API_PORT}:`, error.message))
 
   return server
 }

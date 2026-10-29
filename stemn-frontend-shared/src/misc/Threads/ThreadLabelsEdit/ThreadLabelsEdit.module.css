@@ -1,18 +1,18 @@
-.row{
+.row {
   padding: 5px 0;
 }
-.colorSelect{
+.colorSelect {
   width: 145px;
   margin-right: 10px;
   position: relative;
 }
-.colorSelectInput{
+.colorSelectInput {
   padding-left: 38px;
 }
-.name{
+.name {
   margin-right: 5px;
 }
-.swatch{
+.swatch {
   position: absolute;
   left: 10px;
   top: 8px;

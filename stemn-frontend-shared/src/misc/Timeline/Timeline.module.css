@@ -1,20 +1,20 @@
 @value primary, border1, timeline-main, timeline-bg from "theme";
 
-.timeline.small{
+.timeline.small {
   padding: 20px 15px;
 }
-.timeline.small .line{
+.timeline.small .line {
   height: 1px;
 }
 
-.timeline{
+.timeline {
   padding: 30px 30px;
   background: timeline-bg;
   color: white;
   border-bottom: 1px solid border1;
 }
 
-.line{
+.line {
   display: block;
   height: 2px;
   width: 100%;
@@ -22,7 +22,7 @@
   position: relative;
 }
 
-.dotsOverflow{
+.dotsOverflow {
   position: absolute;
   left: 15px;
   right: 15px;

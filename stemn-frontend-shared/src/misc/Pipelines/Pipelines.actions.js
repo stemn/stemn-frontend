@@ -41,25 +41,34 @@ export const getLastPipelines = () => (dispatch, getState) => {
   return projectId && cacheKey && dispatch(getPipelines({ projectId, cacheKey }))
 }
 
-export const rerunPipeline = ({ pipelineId }) => dispatch => dispatch({
-  type: 'PIPELINES/RERUN_PIPELINE',
-  payload: http({
-    method: 'POST',
-    url: `/api/v1/pipelines/${pipelineId}/restart`,    
-  }).then(({ data: newPipeline }) => dispatch(push(projectPipelineRoute({
-    projectId: newPipeline.project._id,
-    pipelineId: newPipeline._id,
-  })))),
-  meta: {
-    pipelineId,
-  },
-})
+export const rerunPipeline =
+  ({ pipelineId }) =>
+  (dispatch) =>
+    dispatch({
+      type: 'PIPELINES/RERUN_PIPELINE',
+      payload: http({
+        method: 'POST',
+        url: `/api/v1/pipelines/${pipelineId}/restart`,
+      }).then(({ data: newPipeline }) =>
+        dispatch(
+          push(
+            projectPipelineRoute({
+              projectId: newPipeline.project._id,
+              pipelineId: newPipeline._id,
+            }),
+          ),
+        ),
+      ),
+      meta: {
+        pipelineId,
+      },
+    })
 
 export const cancelPipeline = ({ pipelineId }) => ({
   type: 'PIPELINES/CANCEL_PIPELINE',
   payload: http({
     method: 'POST',
-    url: `/api/v1/pipelines/${pipelineId}/cancel`,    
+    url: `/api/v1/pipelines/${pipelineId}/cancel`,
   }),
   meta: {
     pipelineId,
@@ -74,22 +83,26 @@ export const getStep = ({ stepId }) => ({
   }),
 })
 
-export const joinPipelineRoom = ({ pipelineId }) => joinRoom({
-  room: pipelineId,
-  type: 'pipeline',
-})
+export const joinPipelineRoom = ({ pipelineId }) =>
+  joinRoom({
+    room: pipelineId,
+    type: 'pipeline',
+  })
 
-export const leavePipelineRoom = ({ pipelineId }) => leaveRoom({
-  room: pipelineId,
-  type: 'pipeline',
-})
+export const leavePipelineRoom = ({ pipelineId }) =>
+  leaveRoom({
+    room: pipelineId,
+    type: 'pipeline',
+  })
 
-export const joinStepRoom = ({ stepId }) => joinRoom({
-  room: stepId,
-  type: 'step',
-})
+export const joinStepRoom = ({ stepId }) =>
+  joinRoom({
+    room: stepId,
+    type: 'step',
+  })
 
-export const leaveStepRoom = ({ stepId }) => leaveRoom({
-  room: stepId,
-  type: 'step',
-})
+export const leaveStepRoom = ({ stepId }) =>
+  leaveRoom({
+    room: stepId,
+    type: 'step',
+  })

@@ -13,16 +13,18 @@ const dispatchToProps = {
   markAsRead,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'location.pathname',
-  onChange: (props) => {
-    props.getNotifications()
+const fetchConfigs = [
+  {
+    hasChanged: 'location.pathname',
+    onChange: (props) => {
+      props.getNotifications()
+    },
   },
-}]
+]
 
 class NotificationsContainer extends Component {
   render() {
-    return <Notifications { ...this.props } />
+    return <Notifications {...this.props} />
   }
 }
 

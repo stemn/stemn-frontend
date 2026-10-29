@@ -1,5 +1,5 @@
-import React                from 'react'
-import FileCompare          from 'stemn-shared/misc/FileCompare'
+import React from 'react'
+import FileCompare from 'stemn-shared/misc/FileCompare'
 
 export default class ProjectFeedPageRevision extends React.Component {
   render() {
@@ -9,11 +9,6 @@ export default class ProjectFeedPageRevision extends React.Component {
     //    ? i.assocIn(item, ['data', 'revisionId'], item.data.previousRevisionId)
     //    : null;
 
-    return (
-      <FileCompare
-        project={ project.data }
-        file={ item }
-      />
-    )
+    return <FileCompare project={project.data} file={item} />
   }
 }

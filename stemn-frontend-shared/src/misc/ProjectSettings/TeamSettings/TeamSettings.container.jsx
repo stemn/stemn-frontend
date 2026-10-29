@@ -11,8 +11,8 @@ import {
 import TeamSettings from './TeamSettings'
 
 const stateToProps = ({ projects }, { params }) => {
-  const projectId   = params.stub
-  const project     = projects.data[projectId]
+  const projectId = params.stub
+  const project = projects.data[projectId]
 
   return {
     project,
@@ -28,9 +28,7 @@ const dispatchToProps = {
 
 class ProjectSettingsTeamContainer extends Component {
   render() {
-    return (
-      <TeamSettings { ...this.props } />
-    )
+    return <TeamSettings {...this.props} />
   }
 }
 

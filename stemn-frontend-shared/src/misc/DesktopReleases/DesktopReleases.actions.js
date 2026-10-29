@@ -1,4 +1,4 @@
-import http from 'axios';
+import http from 'axios'
 
 export const getLatest = () => ({
   type: 'DESKTOP_RELEASES/GET_LATEST',

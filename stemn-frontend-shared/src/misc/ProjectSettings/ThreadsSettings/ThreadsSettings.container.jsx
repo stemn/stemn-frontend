@@ -25,20 +25,20 @@ const dispatchToProps = {
   getBoards,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'projectId',
-  onChange: (props) => {
-    props.getBoards({
-      projectId: props.projectId,
-    })
+const fetchConfigs = [
+  {
+    hasChanged: 'projectId',
+    onChange: (props) => {
+      props.getBoards({
+        projectId: props.projectId,
+      })
+    },
   },
-}]
+]
 
 class ProjectSettingsThreadsContainer extends Component {
   render() {
-    return (
-      <ThreadsSettings { ...this.props } />
-    )
+    return <ThreadsSettings {...this.props} />
   }
 }
 

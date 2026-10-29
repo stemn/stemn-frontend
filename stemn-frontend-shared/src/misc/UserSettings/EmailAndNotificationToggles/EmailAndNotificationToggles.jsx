@@ -32,11 +32,11 @@ class ToggleGroup extends Component {
     // This will get the toggle status of the parent group.
     // true if all true, false if all false, 'semi' if heterogeneous
     const { toggleValues, group } = this.props
-    const groupToggleValues = group.toggles.map(toggleName => toggleValues[toggleName] || false)
+    const groupToggleValues = group.toggles.map((toggleName) => toggleValues[toggleName] || false)
     const uniqueGroupToggleValues = uniq(groupToggleValues)
     if (uniqueGroupToggleValues.length > 1) {
       return 'semi'
-    } 
+    }
     return uniqueGroupToggleValues[0]
   }
   toggleAll = ({ value }) => {
@@ -58,50 +58,41 @@ class ToggleGroup extends Component {
 
     const childRowHeight = 100
     const dividerHeight = 50
-    const panelContentStyle = isOpen
-      ? { maxHeight: `${childRowHeight * group.toggles.length + dividerHeight}px` }
-      : {}
+    const panelContentStyle = isOpen ? { maxHeight: `${childRowHeight * group.toggles.length + dividerHeight}px` } : {}
 
     return (
-      <InfoPanel className={ classes.panel }>
-        <div className={ cn(classes.parentRow, 'layout-row layout-align-start-center')  }>
+      <InfoPanel className={classes.panel}>
+        <div className={cn(classes.parentRow, 'layout-row layout-align-start-center')}>
           <div className="flex">
-            <h3>{ group.title }</h3>
-            <p>{ group.description }</p>
+            <h3>{group.title}</h3>
+            <p>{group.description}</p>
           </div>
           <div className="layout-xs-column layout-gt-xs-row layout-align-xs-center layout-align-gt-xs-start-center">
             <SimpleIconButton
-              disabled={ groupToggleValue === 'semi' }
-              className={ cn(classes.iconButton, { [classes.iconButtonOpen]: isOpen }) }
-              onClick={ this.togglePanelOpen }
+              disabled={groupToggleValue === 'semi'}
+              className={cn(classes.iconButton, { [classes.iconButtonOpen]: isOpen })}
+              onClick={this.togglePanelOpen}
             >
-              <MdMoreHoriz size={ 25 } />
+              <MdMoreHoriz size={25} />
             </SimpleIconButton>
-            <Toggle
-              className={ classes.toggle }
-              changeAction={ this.toggleAll }
-              value={ groupToggleValue }
-            />
+            <Toggle className={classes.toggle} changeAction={this.toggleAll} value={groupToggleValue} />
           </div>
         </div>
-        <div className={ classes.childToggles } style={ panelContentStyle }>
-          <div className={ classes.divider } />
-          { group.toggles.map((toggleName) => {
+        <div className={classes.childToggles} style={panelContentStyle}>
+          <div className={classes.divider} />
+          {group.toggles.map((toggleName) => {
             const toggle = getToggleData(toggleName)
             return (
-              <div
-                className={ cn(classes.childRow, 'layout-row layout-align-start-center') }
-                key={ toggleName }
-              >
+              <div className={cn(classes.childRow, 'layout-row layout-align-start-center')} key={toggleName}>
                 <div className="flex">
-                  <h3>{ toggle.name }</h3>
-                  <p>{ toggle.description }</p>
+                  <h3>{toggle.name}</h3>
+                  <p>{toggle.description}</p>
                 </div>
                 <Toggle
-                  className={ cn(classes.miniToggle, classes.toggle) }
-                  model={ `${toggleModel}.${toggleName}` }
-                  value={ toggleValues[toggleName] }
-                  changeAction={ this.saveSettings }
+                  className={cn(classes.miniToggle, classes.toggle)}
+                  model={`${toggleModel}.${toggleName}`}
+                  value={toggleValues[toggleName]}
+                  changeAction={this.saveSettings}
                 />
               </div>
             )
@@ -122,20 +113,18 @@ export default class EmailAndNotificationToggles extends Component {
   }
   render() {
     const { toggleValues, toggleModel, change, type, saveSettings } = this.props
-    const toggles = type === 'mail'
-      ? emailToggles
-      : websiteToggles
+    const toggles = type === 'mail' ? emailToggles : websiteToggles
 
     return (
       <div>
-        { emailToggles.map(group => (
+        {emailToggles.map((group) => (
           <ToggleGroup
-            key={ group.name }
-            toggleValues={ toggleValues }
-            toggleModel={ toggleModel }
-            group={ group }
-            saveSettings={ saveSettings }
-            change={ change }
+            key={group.name}
+            toggleValues={toggleValues}
+            toggleModel={toggleModel}
+            group={group}
+            saveSettings={saveSettings}
+            change={change}
           />
         ))}
       </div>

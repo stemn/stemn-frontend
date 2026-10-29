@@ -6,8 +6,8 @@ import classes from './FilledIconButton.module.css'
 const FilledIconButton = (props) => {
   const { children, className, ...otherProps } = props
   return (
-    <button className={ cn(classes.button, className) } { ...otherProps }>
-      { children }
+    <button className={cn(classes.button, className)} {...otherProps}>
+      {children}
     </button>
   )
 }

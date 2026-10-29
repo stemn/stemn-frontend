@@ -1,6 +1,6 @@
 @value primary, border1, bg1 from "theme";
 
-.item{
+.item {
   position: relative;
   border-left: 1px solid border1;
   padding: 15px 0;
@@ -9,7 +9,7 @@
     border-left: none;
   }
 }
-.marker{
+.marker {
   width: 12px;
   min-width: 12px;
   height: 12px;
@@ -22,7 +22,6 @@
   @media (max-width: 599px) {
     display: none;
   }
-
 }
 
 .extra {

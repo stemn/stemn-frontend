@@ -5,11 +5,11 @@ import { IFile, IFolder } from './types'
 export interface IFileListState {
   [cacheKey: string]: {
     /** Array of entries */
-    entries: IFile[],
+    entries: IFile[]
     /** Info about the folder we are searching */
-    folder: IFolder,
+    folder: IFolder
     /** Search query */
-    query: string,
+    query: string
   }
 }
 
@@ -22,7 +22,8 @@ export const fileListReducer = (state: IFileListState = initialState, action: An
     case 'FILE_LIST/FETCH_FILES_REJECTED':
       return i.assocIn(state, [action.meta.cacheKey, 'loading'], false)
     case 'FILE_LIST/FETCH_FILES_FULFILLED':
-      return i.chain(state)
+      return i
+        .chain(state)
         .assocIn([action.meta.cacheKey, 'entries'], action.payload.data.entries)
         .assocIn([action.meta.cacheKey, 'folder'], action.payload.data.folder)
         .assocIn([action.meta.cacheKey, 'loading'], false)
@@ -33,7 +34,8 @@ export const fileListReducer = (state: IFileListState = initialState, action: An
     case 'FILE_LIST/EXPLORE_FOLDER_REJECTED':
       return i.assocIn(state, [action.meta.cacheKey, 'loading'], false)
     case 'FILE_LIST/EXPLORE_FOLDER_FULFILLED':
-      return i.chain(state)
+      return i
+        .chain(state)
         .assocIn([action.meta.cacheKey, 'entries'], action.payload.data.entries)
         .assocIn([action.meta.cacheKey, 'folder'], action.payload.data.folder)
         .assocIn([action.meta.cacheKey, 'loading'], false)
@@ -44,7 +46,8 @@ export const fileListReducer = (state: IFileListState = initialState, action: An
     case 'FILE_LIST/SEARCH_REJECTED':
       return i.assocIn(state, [action.meta.cacheKey, 'loading'], false)
     case 'FILE_LIST/SEARCH_FULFILLED':
-      return i.chain(state)
+      return i
+        .chain(state)
         .assocIn([action.meta.cacheKey, 'search'], action.payload.data)
         .assocIn([action.meta.cacheKey, 'loading'], false)
         .value()

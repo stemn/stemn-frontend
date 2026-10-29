@@ -20,17 +20,18 @@
 
 import { show as showToast } from 'stemn-shared/misc/Toasts/Toasts.actions.js'
 
-
-export default ({ email }) => dispatch => dispatch({
-  type: 'AUTH/REQUEST_PASSWORD_RESET',
-  http: true,
-  payload: {
-    method: 'POST',
-    url: '/api/v1/auth/reset-password',
-    data: {
-      email,
-    },
-  },
-}).then(({ value }) => {
-  dispatch(showToast({ title: 'Check your email for the password reset link' }))
-})
+export default ({ email }) =>
+  (dispatch) =>
+    dispatch({
+      type: 'AUTH/REQUEST_PASSWORD_RESET',
+      http: true,
+      payload: {
+        method: 'POST',
+        url: '/api/v1/auth/reset-password',
+        data: {
+          email,
+        },
+      },
+    }).then(({ value }) => {
+      dispatch(showToast({ title: 'Check your email for the password reset link' }))
+    })

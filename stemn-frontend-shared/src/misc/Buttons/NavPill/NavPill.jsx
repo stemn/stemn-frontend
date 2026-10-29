@@ -8,13 +8,13 @@ import classes from './NavPill.module.css'
 export default class NavPill extends React.Component {
   render() {
     return (
-      <Link 
-        className={ cn(classes.button, this.props.className) }
+      <Link
+        className={cn(classes.button, this.props.className)}
         activeClassName="active"
-        to={ this.props.to }
-        onlyActiveOnIndex={ this.props.onlyActiveOnIndex }
-        name={ this.props.name }
-        params={ this.props.params }
+        to={this.props.to}
+        onlyActiveOnIndex={this.props.onlyActiveOnIndex}
+        name={this.props.name}
+        params={this.props.params}
       >
         {this.props.children}
       </Link>

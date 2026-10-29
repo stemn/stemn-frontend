@@ -13,12 +13,12 @@ export default (store, action) => {
     case 'BOARD/BOARD_UPDATED':
       return dispatch(getBoard({ boardId: action.payload.boardId }))
     case 'BOARD/GROUPS_UPDATED':
-      return action.payload.groups.map(groupId => dispatch(getGroup({ groupId, boardId: action.payload.boardId })))
+      return action.payload.groups.map((groupId) => dispatch(getGroup({ groupId, boardId: action.payload.boardId })))
     case 'BOARD/THREADS_UPDATED':
-      return action.payload.threads.map(threadId => dispatch(getThread({ threadId })))
+      return action.payload.threads.map((threadId) => dispatch(getThread({ threadId })))
     case 'BOARD/TASK_COMPLETED_UPDATED':
       return dispatch(getThread({ threadId: action.payload.threadId }))
     case 'BOARD/COMMENTS_UPDATED':
-      return action.payload.comments.map(commentId => dispatch(getComment({ commentId })))
+      return action.payload.comments.map((commentId) => dispatch(getComment({ commentId })))
   }
 }

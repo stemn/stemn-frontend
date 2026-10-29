@@ -6,16 +6,18 @@ import s from './BannerBar.module.scss'
 const BannerBar = (props) => {
   const { children, className, type, ...otherProps } = props
 
-  const c = cn(s.banner, { 
-    [s.warn]: type === 'warn',
-    [s.success]: type === 'success',
-  }, className)
-  
+  const c = cn(
+    s.banner,
+    {
+      [s.warn]: type === 'warn',
+      [s.success]: type === 'success',
+    },
+    className,
+  )
+
   return (
-    <div
-      className={ c } { ...otherProps }
-    >
-      { children }
+    <div className={c} {...otherProps}>
+      {children}
     </div>
   )
 }

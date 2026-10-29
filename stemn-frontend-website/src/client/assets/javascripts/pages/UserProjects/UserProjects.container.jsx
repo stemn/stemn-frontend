@@ -17,9 +17,7 @@ const fetchConfigs = []
 
 class UserProjectsContainer extends Component {
   render() {
-    return (
-      <UserProjects { ...this.props } />
-    )
+    return <UserProjects {...this.props} />
   }
 }
 

@@ -14,36 +14,39 @@ const stateToProps = ({ fileList }, { projectId, path, provider }) => {
   }
 }
 
-const dispatchToProps = dispatch => ({
+const dispatchToProps = (dispatch) => ({
   getFiles: bindActionCreators(getFiles, dispatch),
   getSearchResults: bindActionCreators(getSearchResults, dispatch),
   showFileCreateModal: bindActionCreators(showFileCreateModal, dispatch),
   dispatch,
 })
 
-const fetchConfigs = [{
-  hasChanged: 'path',
-  onChange: (props) => {
-    props.getFiles({
-      path: props.path,
-      provider: props.options.explore,
-      projectId: props.projectId,
-      cacheKey: props.fileListCacheKey,
-    })
-  },
-}, {
-  hasChanged: 'fileList.query',
-  onChange: (props) => {
-    if (props.fileList.query && props.fileList.query.length > 0) {
-      props.getSearchResults({
-        folderId: props.path,
-        query: props.fileList.query,
+const fetchConfigs = [
+  {
+    hasChanged: 'path',
+    onChange: (props) => {
+      props.getFiles({
+        path: props.path,
+        provider: props.options.explore,
         projectId: props.projectId,
         cacheKey: props.fileListCacheKey,
       })
-    }
+    },
   },
-}]
+  {
+    hasChanged: 'fileList.query',
+    onChange: (props) => {
+      if (props.fileList.query && props.fileList.query.length > 0) {
+        props.getSearchResults({
+          folderId: props.path,
+          query: props.fileList.query,
+          projectId: props.projectId,
+          cacheKey: props.fileListCacheKey,
+        })
+      }
+    },
+  },
+]
 
 const withFetchData = fetchDataHoc(fetchConfigs)(FileList)
 const withRedux = connect(stateToProps, dispatchToProps)(withFetchData)

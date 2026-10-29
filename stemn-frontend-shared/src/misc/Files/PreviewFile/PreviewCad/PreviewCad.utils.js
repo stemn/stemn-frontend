@@ -32,4 +32,4 @@ export const isAssembly = (fileType) => {
   return assemblyFileTypes.includes(fileType.toLowerCase())
 }
 
-export const isCad = fileType => viewerFileTypes.general.autodesk.includes(fileType)
+export const isCad = (fileType) => viewerFileTypes.general.autodesk.includes(fileType)

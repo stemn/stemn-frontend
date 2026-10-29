@@ -24,9 +24,7 @@ const dispatchToProps = {
 
 class ProjectSettingsGeneralContainer extends Component {
   render() {
-    return (
-      <ProjectSettingsGeneral { ...this.props } />
-    )
+    return <ProjectSettingsGeneral {...this.props} />
   }
 }
 

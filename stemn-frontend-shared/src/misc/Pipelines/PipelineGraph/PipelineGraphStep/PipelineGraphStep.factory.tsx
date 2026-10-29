@@ -2,15 +2,15 @@ import { AbstractNodeFactory, DiagramEngine } from 'mrblenny-storm-react-diagram
 import { PipelineGraphStep, PipelineGraphStepModel } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphStep'
 
 export class PipelineGraphStepFactory extends AbstractNodeFactory {
-  constructor (nodeType: string) {
+  constructor(nodeType: string) {
     super(nodeType)
   }
 
-  public generateReactWidget (diagramEngine: DiagramEngine, node: PipelineGraphStepModel) {
+  public generateReactWidget(diagramEngine: DiagramEngine, node: PipelineGraphStepModel) {
     return <PipelineGraphStep node={node} />
   }
 
-  public getNewInstance () {
+  public getNewInstance() {
     return new PipelineGraphStepModel('trigger')
   }
 }

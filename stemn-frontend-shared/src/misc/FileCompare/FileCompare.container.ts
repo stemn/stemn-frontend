@@ -9,9 +9,9 @@ import { FileCompareComponent } from './FileCompare'
 
 export interface IFileCompareContainerProps {
   file: {
-    data: IFile,
-    revisions: any[],
-  },
+    data: IFile
+    revisions: any[]
+  }
 }
 
 const stateToProps = ({ syncTimeline, fileCompare }: IStoreState, { file }: IFileCompareContainerProps) => {
@@ -32,25 +32,28 @@ export const dispatchToProps = {
   select,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'syncTimelineCacheKey',
-  onChange: (props) => {
-    props.initCompare({
-      cacheKey: props.syncTimelineCacheKey,
-      file: props.file,
-    })
-  },
-}, {
-  hasChanged: 'togglePanelCacheKey',
-  onChange: (props) => {
-    if (props.isOpen) {
-      props.toggle({
-        cacheKey: props.togglePanelCacheKey,
-        value: true,
+const fetchConfigs = [
+  {
+    hasChanged: 'syncTimelineCacheKey',
+    onChange: (props) => {
+      props.initCompare({
+        cacheKey: props.syncTimelineCacheKey,
+        file: props.file,
       })
-    }
+    },
   },
-}]
+  {
+    hasChanged: 'togglePanelCacheKey',
+    onChange: (props) => {
+      if (props.isOpen) {
+        props.toggle({
+          cacheKey: props.togglePanelCacheKey,
+          value: true,
+        })
+      }
+    },
+  },
+]
 
 const withFetchData = fetchDataHoc(fetchConfigs)(FileCompareComponent)
 const withRedux = connect(stateToProps, dispatchToProps)(withFetchData)

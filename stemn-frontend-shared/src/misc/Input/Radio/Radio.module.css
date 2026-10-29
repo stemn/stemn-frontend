@@ -1,6 +1,6 @@
 @value primary, secondary, border1 from "theme";
 
-.radio{
+.radio {
   padding: 5px 0;
 }
 .radio input {
@@ -22,7 +22,7 @@
 .checked + span:after {
   background: primary;
   border-radius: 50%;
-  content: " ";
+  content: ' ';
   height: 10px;
   width: 10px;
 }

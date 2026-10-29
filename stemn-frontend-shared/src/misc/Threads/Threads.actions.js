@@ -1,10 +1,10 @@
-import http from 'axios';
-import { storeChange } from 'stemn-shared/misc/Store/Store.actions';
-import threadLabelsEditModalName from 'stemn-shared/misc/Threads/ThreadLabelsEditModal';
-import { pickId } from 'stemn-shared/utils/pickId.js';
+import http from 'axios'
+import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
+import threadLabelsEditModalName from 'stemn-shared/misc/Threads/ThreadLabelsEditModal'
+import { pickId } from 'stemn-shared/utils/pickId.js'
 
-import { showConfirm, showModal } from '../Modal/Modal.actions.js';
-import { show as showToast } from '../Toasts/Toasts.actions.js';
+import { showConfirm, showModal } from '../Modal/Modal.actions.js'
+import { show as showToast } from '../Toasts/Toasts.actions.js'
 
 //        return dispatch(addEvent({
 //          cacheKey: timelineCacheKey,
@@ -73,7 +73,6 @@ export function getBoard({ boardId }) {
   }
 }
 
-
 // export function getEvents({threadId}){
 //  return {
 //    type: 'THREADS/GET_EVENTS',
@@ -99,7 +98,6 @@ export const updateBoard = ({ board }) => ({
   },
 })
 
-
 export const editBoard = ({ model, value }) => ({
   type: 'THREADS/EDIT_BOARD',
   payload: board,
@@ -121,27 +119,30 @@ export function getThread({ threadId }) {
   }
 }
 
-export const updateThread = ({ thread }) => (dispatch, getState) => dispatch({
-  type: 'THREADS/UPDATE_TASK',
-  http: true,
-  throttle: {
-    time: 2000,
-    endpoint: `THREADS/UPDATE_TASK-${thread._id}`,
-  },
-  payload: {
-    method: 'PUT',
-    url: `/api/v1/threads/${thread._id}`,
-    data: {
-      ...thread,
-      owner: pickId(thread.owner),
-      project: pickId(thread.project),
-      users: thread.users.map(pickId),
-    },
-  },
-  meta: {
-    cacheKey: thread._id,
-  },
-})
+export const updateThread =
+  ({ thread }) =>
+  (dispatch, getState) =>
+    dispatch({
+      type: 'THREADS/UPDATE_TASK',
+      http: true,
+      throttle: {
+        time: 2000,
+        endpoint: `THREADS/UPDATE_TASK-${thread._id}`,
+      },
+      payload: {
+        method: 'PUT',
+        url: `/api/v1/threads/${thread._id}`,
+        data: {
+          ...thread,
+          owner: pickId(thread.owner),
+          project: pickId(thread.project),
+          users: thread.users.map(pickId),
+        },
+      },
+      meta: {
+        cacheKey: thread._id,
+      },
+    })
 
 export function getGroup({ boardId, groupId }) {
   return {
@@ -189,7 +190,6 @@ export function deleteThread({ boardId, threadId }) {
     },
   }
 }
-
 
 export function moveThread({ boardId, thread, destinationThread, destinationGroup, after, save }) {
   // To move a thread you must have either hoverItem or destinationGroup
@@ -248,7 +248,6 @@ export function endDrag({ boardId, threadId }) {
   }
 }
 
-
 export function moveGroup({ boardId, group, destinationGroup, after, save }) {
   return (dispatch) => {
     if (save) {
@@ -269,7 +268,9 @@ export function moveGroup({ boardId, group, destinationGroup, after, save }) {
       dispatch({
         type: 'THREADS/MOVE_GROUP',
         payload: {
-          group, destinationGroup, boardId,
+          group,
+          destinationGroup,
+          boardId,
         },
       })
     }
@@ -278,20 +279,24 @@ export function moveGroup({ boardId, group, destinationGroup, after, save }) {
 
 export function toggleComplete({ threadId, model, value }) {
   return (dispatch) => {
-    dispatch(showToast({
-      title: `This thread was marked as ${value ? 'closed' : 'open'}.`,
-      actions: [{
-        text: 'Undo',
-        action: {
-          type: 'ALIASED',
-          aliased: true,
-          payload: {
-            functionAlias: 'ThreadsActions.toggleCompleteUndo',
-            functionInputs: { threadId, model, value },
+    dispatch(
+      showToast({
+        title: `This thread was marked as ${value ? 'closed' : 'open'}.`,
+        actions: [
+          {
+            text: 'Undo',
+            action: {
+              type: 'ALIASED',
+              aliased: true,
+              payload: {
+                functionAlias: 'ThreadsActions.toggleCompleteUndo',
+                functionInputs: { threadId, model, value },
+              },
+            },
           },
-        },
-      }],
-    }))
+        ],
+      }),
+    )
   }
 }
 export function toggleCompleteUndo({ threadId, model, value }) {
@@ -322,11 +327,17 @@ export function newGroup({ boardId, group }) {
   }
 }
 
-export const deleteGroupConfirm = ({ boardId, groupId }) => dispatch => dispatch(showConfirm({
-  message: 'Deleting a group is permanent. All threads which belong to this group will be deleted (even archived threads).',
-})).then(() => {
-  dispatch(deleteGroup({ boardId, groupId }))
-})
+export const deleteGroupConfirm =
+  ({ boardId, groupId }) =>
+  (dispatch) =>
+    dispatch(
+      showConfirm({
+        message:
+          'Deleting a group is permanent. All threads which belong to this group will be deleted (even archived threads).',
+      }),
+    ).then(() => {
+      dispatch(deleteGroup({ boardId, groupId }))
+    })
 
 export function deleteGroup({ boardId, groupId }) {
   return {
@@ -344,12 +355,14 @@ export function deleteGroup({ boardId, groupId }) {
 
 export function showLabelEditModal({ boardId }) {
   return (dispatch) => {
-    dispatch(showModal({
-      modalType: threadLabelsEditModalName,
-      modalProps: {
-        boardId,
-      },
-    }))
+    dispatch(
+      showModal({
+        modalType: threadLabelsEditModalName,
+        modalProps: {
+          boardId,
+        },
+      }),
+    )
   }
 }
 

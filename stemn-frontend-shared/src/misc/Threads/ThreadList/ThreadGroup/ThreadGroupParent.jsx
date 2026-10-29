@@ -7,12 +7,12 @@ export default class ThreadGroupParent extends React.Component {
   render() {
     const { children, layout } = this.props
     return (
-      <DndProvider backend={ HTML5Backend }>
+      <DndProvider backend={HTML5Backend}>
         <FlipMove
           enterAnimation="none"
           leaveAnimation="none"
-          duration={ 200 }
-          className={ layout === 'list' ? 'layout-column flex' : 'layout-row flex' }
+          duration={200}
+          className={layout === 'list' ? 'layout-column flex' : 'layout-row flex'}
         >
           {children}
         </FlipMove>

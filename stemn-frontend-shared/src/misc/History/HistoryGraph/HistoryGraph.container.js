@@ -26,21 +26,23 @@ const dispatchToProps = {
   getHistory,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'historyCacheKey',
-  onChange: (props) => {
-    props.getHistory({
-      entityType: props.entityType,
-      entityId: props.entityId,
-      parentType: props.parentType,
-      parentId: props.parentId,
-      cacheKey: props.historyCacheKey,
-      from: props.from.format(),
-      to: props.to.format(),
-      types: props.type ? [props.type] : undefined,
-    })
+const fetchConfigs = [
+  {
+    hasChanged: 'historyCacheKey',
+    onChange: (props) => {
+      props.getHistory({
+        entityType: props.entityType,
+        entityId: props.entityId,
+        parentType: props.parentType,
+        parentId: props.parentId,
+        cacheKey: props.historyCacheKey,
+        from: props.from.format(),
+        to: props.to.format(),
+        types: props.type ? [props.type] : undefined,
+      })
+    },
   },
-}]
+]
 
 const withFetchData = fetchDataHoc(fetchConfigs)(HistoryGraph)
 const withRedux = connect(stateToProps, dispatchToProps)(withFetchData)

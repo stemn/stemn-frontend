@@ -26,24 +26,17 @@ export const ArrayFieldItemTemplate = (props: ArrayFieldItemTemplateProps) => {
 }
 
 export const ArrayFieldTemplate = (props: ArrayFieldTemplateProps) => {
-
   return (
     <div>
       {props.items}
 
       {props.canAdd && (
-
         <div>
-          <FilledIconButton
-            onClick={props.onAddClick}
-            className='primary'
-          >
+          <FilledIconButton onClick={props.onAddClick} className="primary">
             <MdAdd size={20} />
           </FilledIconButton>
-
         </div>
       )}
-
     </div>
   )
 }

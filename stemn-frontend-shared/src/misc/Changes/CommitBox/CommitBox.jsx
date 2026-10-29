@@ -20,11 +20,9 @@ import Walkthrough from 'stemn-shared/misc/Walkthrough/Walkthrough.jsx'
 
 import { MdDone } from 'react-icons/md'
 
-
 // ///////////////////////////////////////////////////////////////////////////
 // /////////////////////////////// COMPONENT /////////////////////////////////
 // ///////////////////////////////////////////////////////////////////////////
-
 
 export class Component extends React.Component {
   render() {
@@ -38,51 +36,52 @@ export class Component extends React.Component {
       } else if (noChangesChecked) {
         return 'You must select at least one change to commit.'
       }
-      
+
       return 'Commit these files.'
     }
 
     return (
-      <div style={ { padding: '15px' } } className={ className }>
+      <div style={{ padding: '15px' }} className={className}>
         <Walkthrough preferPlace="right" name="commit.commitSummary">
           <Input
             autoFocus
-            model={ `changes.${this.props.project._id}.name` }
-            value={ changes.name }
-            className={ classes.input }
+            model={`changes.${this.props.project._id}.name`}
+            value={changes.name}
+            className={classes.input}
             type="text"
             placeholder="Summary"
           />
         </Walkthrough>
-        <div className={ classes.descriptionContainer }>
+        <div className={classes.descriptionContainer}>
           <Editor
             placeholder="Detailed description"
-            model={ `${entityModel}.body` }
-            value={ changes.body }
+            model={`${entityModel}.body`}
+            value={changes.body}
             hideToolbar
-            className={ classes.description }
+            className={classes.description}
           />
-          <MarkdownButton className={ classes.markdownButton } />
+          <MarkdownButton className={classes.markdownButton} />
         </div>
         <div className="layout-row layout-align-start-center">
           <Walkthrough preferPlace="above" name="commit.commitThreads">
             <a
-              className="link-primary" onClick={ () => {
+              className="link-primary"
+              onClick={() => {
                 electronWindowsActions.show('main')
                 changesActions.mentionThreadsModal({ projectId: this.props.project._id })
-              } }
+              }}
             >
-              <MdDone size="16" style={ { marginRight: '3px', marginBottom: '2px' } } />
+              <MdDone size="16" style={{ marginRight: '3px', marginBottom: '2px' }} />
               Add related threads
             </a>
           </Walkthrough>
           <div className="flex" />
           <Walkthrough preferPlace="right" name="commit.commitSubmit">
             <Button
-              onClick={ this.props.commitFn }
+              onClick={this.props.commitFn}
               className="primary"
-              disabled={ noSummary || noChangesChecked }
-              title={ getMessage() }
+              disabled={noSummary || noChangesChecked}
+              title={getMessage()}
             >
               Add Commit
             </Button>
@@ -92,7 +91,6 @@ export class Component extends React.Component {
     )
   }
 }
-
 
 // ///////////////////////////////////////////////////////////////////////////
 // /////////////////////////////// CONTAINER /////////////////////////////////
@@ -111,6 +109,5 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component)
-
 
 //          <IconButton ><MdDone size="22"/>Add Commit Message</IconButton>

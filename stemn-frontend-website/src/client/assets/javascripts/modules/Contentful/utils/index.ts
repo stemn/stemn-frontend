@@ -2,13 +2,16 @@
 
 import { forOwn, get } from 'lodash'
 
-const transformItem = (item) => (item && item.sys ? {
-  fields: transformItemFields(item.fields),
-  sys: {
-    id: item.sys.id,
-    contentType: get(item, 'sys.contentType.sys.id', 'asset'),
-  },
-} : item)
+const transformItem = (item) =>
+  item && item.sys
+    ? {
+        fields: transformItemFields(item.fields),
+        sys: {
+          id: item.sys.id,
+          contentType: get(item, 'sys.contentType.sys.id', 'asset'),
+        },
+      }
+    : item
 
 const transformItemFields = (fields) => {
   // If fields does not exist, we do nothing
@@ -18,9 +21,7 @@ const transformItemFields = (fields) => {
   }
   const transformedFields = {}
   forOwn(fields, (value, key) => {
-    transformedFields[key] = Array.isArray(value)
-      ? value.map((item) => transformItem(item))
-      : transformItem(value)
+    transformedFields[key] = Array.isArray(value) ? value.map((item) => transformItem(item)) : transformItem(value)
   })
   return transformedFields
 }
@@ -39,8 +40,8 @@ const populateEntry = (entriesAndAssets, entry) => {
   // For each field...
   forOwn(entry && entry.fields, (value, key) => {
     entryFields[key] = Array.isArray(value)
-      ? value.map((item) => populateEntryField(entriesAndAssets, item))  // If it is an array, we try populated everything in the array
-      : populateEntryField(entriesAndAssets, value)  // Otherwise we populate as usual
+      ? value.map((item) => populateEntryField(entriesAndAssets, item)) // If it is an array, we try populated everything in the array
+      : populateEntryField(entriesAndAssets, value) // Otherwise we populate as usual
   })
 
   return {

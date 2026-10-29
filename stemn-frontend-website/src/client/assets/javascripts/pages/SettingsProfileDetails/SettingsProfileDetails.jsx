@@ -17,8 +17,8 @@ export default class SettingsProfileDetails extends Component {
         <div className="text-title-3">Experience</div>
         <br />
         <UserExperienceSettings
-          data={ user.data.profile.profileDetails.experience }
-          dataModel={ `${entityModel}.data.profile.profileDetails.experience` }
+          data={user.data.profile.profileDetails.experience}
+          dataModel={`${entityModel}.data.profile.profileDetails.experience`}
           type="experience"
         />
         <br />
@@ -26,8 +26,8 @@ export default class SettingsProfileDetails extends Component {
         <div className="text-title-3">Education</div>
         <br />
         <UserExperienceSettings
-          data={ user.data.profile.profileDetails.education }
-          dataModel={ `${entityModel}.data.profile.profileDetails.education` }
+          data={user.data.profile.profileDetails.education}
+          dataModel={`${entityModel}.data.profile.profileDetails.education`}
           type="education"
         />
       </div>

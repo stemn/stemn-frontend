@@ -19,31 +19,18 @@ export default class ProjectSettingsPermissions extends Component {
     })
   }
   render() {
-    const {
-      project,
-      projectModel,
-    } = this.props
+    const { project, projectModel } = this.props
     return (
       <div>
         <InfoPanel>
           <h3>Project Type</h3>
-          <ProjectPermissionsRadio
-            model={ `${projectModel}.data.private` }
-            value={ get(project, 'data.private') }
-          />
+          <ProjectPermissionsRadio model={`${projectModel}.data.private`} value={get(project, 'data.private')} />
         </InfoPanel>
         <InfoPanel>
-          <LicenseSettings
-            model={ `${projectModel}.data.license` }
-            value={ get(project, 'data.license', '') }
-          />
+          <LicenseSettings model={`${projectModel}.data.license`} value={get(project, 'data.license', '')} />
         </InfoPanel>
         <div className="layout-row layout-align-end">
-          <ProgressButton
-            className="primary"
-            onClick={ this.saveProject }
-            loading={ project.savePending }
-          >
+          <ProgressButton className="primary" onClick={this.saveProject} loading={project.savePending}>
             Save Project
           </ProgressButton>
         </div>

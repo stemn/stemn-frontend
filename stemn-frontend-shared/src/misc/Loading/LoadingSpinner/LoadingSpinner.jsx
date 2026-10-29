@@ -25,9 +25,18 @@ export default class LoadingSpinner extends Component {
     const transformStyle = getTransformStyle()
 
     return (
-      <div className={ cn(classes.loader, isProgress ? classes.progress : classes.animate) } style={ transformStyle }>
-        <svg className={ classes.circular } viewBox={ `${width / 2} ${width / 2} ${width} ${width}` }>
-          <circle className={ classes.path } cx={ width } cy={ width } r={ width / 2 - 5 } fill="none" strokeWidth="2" strokeMiterlimit="10" style={ progressStyle } />
+      <div className={cn(classes.loader, isProgress ? classes.progress : classes.animate)} style={transformStyle}>
+        <svg className={classes.circular} viewBox={`${width / 2} ${width / 2} ${width} ${width}`}>
+          <circle
+            className={classes.path}
+            cx={width}
+            cy={width}
+            r={width / 2 - 5}
+            fill="none"
+            strokeWidth="2"
+            strokeMiterlimit="10"
+            style={progressStyle}
+          />
         </svg>
       </div>
     )

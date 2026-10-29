@@ -19,22 +19,20 @@ export default class SiteSearch extends Component {
     const onSubmit = (event) => {
       event.preventDefault()
       if (location.pathname.includes('search')) {
-        
       } else {
         push(route)
       }
     }
 
     return (
-      <form className={ cn('layout-row layout-align-start-center', classes.search, className) } name="siteSearch" onSubmit={ onSubmit }>
-        <Input
-          className="flex"
-          placeholder="Search"
-          value={ query }
-          changeAction={ setQuery }
-        />
-        <Link to={ route }>
-          <MdSearch className={ classes.icon } size={ 20 } />
+      <form
+        className={cn('layout-row layout-align-start-center', classes.search, className)}
+        name="siteSearch"
+        onSubmit={onSubmit}
+      >
+        <Input className="flex" placeholder="Search" value={query} changeAction={setQuery} />
+        <Link to={route}>
+          <MdSearch className={classes.icon} size={20} />
         </Link>
       </form>
     )

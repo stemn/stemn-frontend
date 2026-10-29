@@ -6,7 +6,7 @@ import React from 'react'
 
 // Sub Components
 import TitleBar from 'stemn-shared/misc/TitleBar/TitleBar'
-import Sidebar  from 'stemn-shared/misc/Sidebar/Sidebar.jsx'
+import Sidebar from 'stemn-shared/misc/Sidebar/Sidebar.jsx'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -39,7 +39,7 @@ export class Component extends React.Component {
     return (
       <div className="layout-row flex">
         <div className="layout-column">
-          <Sidebar params={ this.props.params } />
+          <Sidebar params={this.props.params} />
         </div>
         <div className="layout-column flex rel-box">
           <TitleBar theme="dark" />
@@ -49,7 +49,6 @@ export class Component extends React.Component {
     )
   }
 }
-
 
 // /////////////////////////////// CONTAINER /////////////////////////////////
 

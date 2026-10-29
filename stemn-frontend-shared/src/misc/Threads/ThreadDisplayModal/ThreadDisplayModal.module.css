@@ -1,22 +1,21 @@
 @value primary, border1, bg1 from "theme";
 
-.threadDisplayModal{
+.threadDisplayModal {
   width: 950px;
   height: 650px;
 }
 
-
-.well{
+.well {
   margin-bottom: 15px;
 }
 
-.header{
+.header {
   padding: 15px 15px 0;
   border-bottom: 1px solid rgb(230, 230, 230);
   z-index: 1;
 }
 
-.timeline{
+.timeline {
   overflow-x: hidden;
   overflow-y: overlay;
   background: rgba(0, 0, 0, 0.01);
@@ -24,26 +23,26 @@
   border-bottom: 1px solid rgb(230, 230, 230);
 }
 
-.newComment{
+.newComment {
   background: rgba(0, 0, 0, 0.01);
   padding: 15px 20px;
 }
 
-.sidebar{
+.sidebar {
   background: bg1;
   border-left: 1px solid border1;
 }
 
-.add{
+.add {
   font-size: 14px;
   color: rgba(0, 0, 0, 0.6);
   padding: 5px;
 }
 
-.add:hover{
+.add:hover {
   color: black;
 }
 
-.settingTitle{
+.settingTitle {
   padding: 15px 12px 0px 15px;
 }

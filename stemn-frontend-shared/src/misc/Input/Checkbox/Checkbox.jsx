@@ -16,22 +16,19 @@ export default class Checkbox extends React.Component {
   render() {
     const { value, model, title, circle, className, changeAction, ...otherProps } = this.props
     const id = Math.random().toString(36).substring(7)
-    const statusClass = value === 'other' ? 'semi' : (value === true ? 'checked' : '')
+    const statusClass = value === 'other' ? 'semi' : value === true ? 'checked' : ''
     return (
-      <div
-        title={ title }
-        className={ cn(classes.checkbox, className, { [classes.checkboxCircle]: circle }) }
-      >
+      <div title={title} className={cn(classes.checkbox, className, { [classes.checkboxCircle]: circle })}>
         <Input
           type="checkbox"
-          className={ statusClass }
-          id={ id }
-          model={ model }
-          value={ value }
-          changeAction={ changeAction }
-          { ...otherProps }
+          className={statusClass}
+          id={id}
+          model={model}
+          value={value}
+          changeAction={changeAction}
+          {...otherProps}
         />
-        <label htmlFor={ id } />
+        <label htmlFor={id} />
       </div>
     )
   }

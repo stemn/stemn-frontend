@@ -5,7 +5,7 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
 
 // Only the auth token and the user are persisted
 const authKeysToPersist = ['authToken', 'user']
-const persistFn = state => pick(state, authKeysToPersist)
+const persistFn = (state) => pick(state, authKeysToPersist)
 
 const authTransform = createTransform(persistFn, persistFn, { whitelist: ['auth'] })
 

@@ -49,55 +49,45 @@ export const toggleData = {
   },
   product: {
     name: 'Product Updates',
-    description: "We're proud of every new feature we add to STEMN, and when a new feature is ready for you, we want you to be the first to know.",
+    description:
+      "We're proud of every new feature we add to STEMN, and when a new feature is ready for you, we want you to be the first to know.",
   },
 }
 
-export const getToggleData = name => toggleData[name]
+export const getToggleData = (name) => toggleData[name]
 
-const toggles = [{
-  name: 'Follows',
-  title: 'Follows',
-  description: 'When others follow you.',
-  toggles: [
-    'own-user-follow',
-  ],
-}, {
-  name: 'ProjectEvent',
-  title: 'Your projects',
-  description: "When there's activity on your projects.",
-  toggles: [
-    'added-to-project',
-    'own-project-thread',
-    'own-project-cloned',
-  ],
-}, {
-  name: 'ThreadEvent',
-  title: 'Your threads',
-  description: "When there's activity on your threads.",
-  toggles: [
-    'assigned-thread',
-    'own-thread-comment',
-    'own-thread-closed',
-  ],
-}, {
-  name: 'FollowedThreadEvent',
-  title: 'Threads you follow',
-  description: "When there's activity on a thread you follow.",
-  toggles: [
-    'followed-thread-comment',
-    'followed-thread-closed',
-  ],
-}, {
-  name: 'Mentions',
-  title: 'Mentions',
-  description: 'When others mention you or your creations.',
-  toggles: [
-    'own-user-mention',
-    'own-project-mention',
-    'own-thread-mention',
-  ],
-}]
+const toggles = [
+  {
+    name: 'Follows',
+    title: 'Follows',
+    description: 'When others follow you.',
+    toggles: ['own-user-follow'],
+  },
+  {
+    name: 'ProjectEvent',
+    title: 'Your projects',
+    description: "When there's activity on your projects.",
+    toggles: ['added-to-project', 'own-project-thread', 'own-project-cloned'],
+  },
+  {
+    name: 'ThreadEvent',
+    title: 'Your threads',
+    description: "When there's activity on your threads.",
+    toggles: ['assigned-thread', 'own-thread-comment', 'own-thread-closed'],
+  },
+  {
+    name: 'FollowedThreadEvent',
+    title: 'Threads you follow',
+    description: "When there's activity on a thread you follow.",
+    toggles: ['followed-thread-comment', 'followed-thread-closed'],
+  },
+  {
+    name: 'Mentions',
+    title: 'Mentions',
+    description: 'When others mention you or your creations.',
+    toggles: ['own-user-mention', 'own-project-mention', 'own-thread-mention'],
+  },
+]
 
 export const emailToggles = toggles
 export const websiteToggles = toggles

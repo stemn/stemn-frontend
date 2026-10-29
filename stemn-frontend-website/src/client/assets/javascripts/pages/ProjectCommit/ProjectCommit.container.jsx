@@ -22,16 +22,16 @@ const dispatchToProps = {
   getCommit,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'commitId',
-  onChange: ({ getCommit, commitId }) => getCommit({ commitId }),
-}]
+const fetchConfigs = [
+  {
+    hasChanged: 'commitId',
+    onChange: ({ getCommit, commitId }) => getCommit({ commitId }),
+  },
+]
 
 class ProjectCommitContainer extends Component {
   render() {
-    return (
-      <ProjectCommit { ...this.props } />
-    )
+    return <ProjectCommit {...this.props} />
   }
 }
 

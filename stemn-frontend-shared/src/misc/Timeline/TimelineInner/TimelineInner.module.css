@@ -12,7 +12,7 @@
 }
 */
 
-.dots{
+.dots {
   transition: 0.6s cubic-bezier(0.69, 0.01, 0.17, 0.99) transform;
   height: 100%;
   white-space: nowrap;
@@ -21,7 +21,7 @@
   right: 0;
 }
 
-.dotGroup{
+.dotGroup {
   border: 2px solid timeline-main;
   background: timeline-bg;
   border-radius: 13px;
@@ -29,11 +29,11 @@
   transition: 0.3s ease all;
   margin-left: 30px;
 }
-.dotGroup:hover{
+.dotGroup:hover {
   background: #ebebeb;
 }
 
-.dotGroup .dot{
+.dotGroup .dot {
   border-color: transparent;
   height: 12px;
   width: 12px;
@@ -41,7 +41,7 @@
   margin-left: 5px;
 }
 
-.dot{
+.dot {
   border-radius: 50%;
   display: inline-block;
   height: 16px;
@@ -56,23 +56,21 @@
   border: 2px solid timeline-bg;
 }
 
-.dot.active{
+.dot.active {
   background: primary-bg;
 }
-.dot:first-child{
+.dot:first-child {
   margin-left: 0;
 }
 
-
-
-.popup{
+.popup {
   padding: 8px;
 }
-.popup b{
+.popup b {
   display: inline-block;
   margin-bottom: 5px;
 }
-.popupImage{
+.popupImage {
   margin-right: 10px;
   width: 30px;
   height: 30px;

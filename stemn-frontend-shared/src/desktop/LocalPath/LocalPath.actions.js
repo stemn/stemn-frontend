@@ -1,4 +1,4 @@
-import http from 'axios';
+import http from 'axios'
 
 export function getPath({ projectId, fileId = '' }) {
   return {

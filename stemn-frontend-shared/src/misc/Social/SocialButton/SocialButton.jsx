@@ -10,43 +10,28 @@ import { MdContentCopy } from 'react-icons/md'
 
 const getIcon = (type, entityType, status) => {
   if (type === 'like') {
-    return status
-      ? <MdStar />
-      : <MdStarBorder />
+    return status ? <MdStar /> : <MdStarBorder />
   } else if (type === 'follow') {
-    return status
-      ? <MdBookmark />
-      : <MdBookmarkBorder />
+    return status ? <MdBookmark /> : <MdBookmarkBorder />
   } else if (type === 'clone') {
-    return status
-      ? <MdContentCopy />
-      : <MdContentCopy />
+    return status ? <MdContentCopy /> : <MdContentCopy />
   }
 }
 
 const getText = (type, entityType, status) => {
   if (type === 'like') {
-    return status
-      ? 'Starred'
-      : 'Star'
+    return status ? 'Starred' : 'Star'
   } else if (type === 'follow' && entityType === 'thread') {
-    return status
-      ? 'Subscribed'
-      : 'Subscribe'
+    return status ? 'Subscribed' : 'Subscribe'
   } else if (type === 'follow') {
-    return status
-      ? 'Following'
-      : 'Follow'
+    return status ? 'Following' : 'Follow'
   } else if (type === 'clone') {
-    return status
-      ? 'Cloned'
-      : 'Clone'
+    return status ? 'Cloned' : 'Clone'
   }
 }
 
 const getTooltip = (type, entityType, status) => {
   if (type === 'like') {
-    
   } else if (type === 'follow' && entityType === 'thread') {
     return 'Subscribe to notifications'
   } else if (type === 'follow') {
@@ -63,8 +48,8 @@ export default class SocialButton extends Component {
     remove: PropTypes.func.isRequired,
     entityId: PropTypes.string.isRequired,
     entityType: PropTypes.string.isRequired,
-    number: PropTypes.number,               // Count - i.e. numLikes or numFollows
-    numberModel: PropTypes.string,          // The model of the count - used to iterate it
+    number: PropTypes.number, // Count - i.e. numLikes or numFollows
+    numberModel: PropTypes.string, // The model of the count - used to iterate it
     type: PropTypes.oneOf(['follow', 'like', 'clone']).isRequired,
     status: PropTypes.bool.isRequired,
   }
@@ -79,7 +64,16 @@ export default class SocialButton extends Component {
   }
 
   toggle = () => {
-    const { status: { status, parentId: projectCloneId }, type, remove, add, number, numberModel, entityId, entityType } = this.props
+    const {
+      status: { status, parentId: projectCloneId },
+      type,
+      remove,
+      add,
+      number,
+      numberModel,
+      entityId,
+      entityType,
+    } = this.props
     if (status) {
       remove({
         entityId,
@@ -114,18 +108,14 @@ export default class SocialButton extends Component {
       type,
       ...otherProps
     } = this.props
-    
+
     return (
-      <div className={ cn(classes.button, className) } { ...otherProps }>
-        <div className={ cn(classes.main) } onClick={ this.toggle } title={ getTooltip(type, entityType, status) }>
-          { getIcon(type, entityType, status) }
-          { getText(type, entityType, status) }
+      <div className={cn(classes.button, className)} {...otherProps}>
+        <div className={cn(classes.main)} onClick={this.toggle} title={getTooltip(type, entityType, status)}>
+          {getIcon(type, entityType, status)}
+          {getText(type, entityType, status)}
         </div>
-        { !(number === undefined) && numberModel
-          ? <div className={ classes.count }>
-            { number }
-          </div>
-          : null }
+        {!(number === undefined) && numberModel ? <div className={classes.count}>{number}</div> : null}
       </div>
     )
   }

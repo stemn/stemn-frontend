@@ -18,15 +18,14 @@ export default class RelatedList extends Component {
     if (related && related.data) {
       return (
         <div>
-          { related.data.slice(0, limit).map(field => (
-            <Link key={ field._id } name="fieldRoute" params={ { fieldId: field.stub } }>
-              <Tag className="primary" text={ field.name } style={ { marginBottom: '6px' } } />
+          {related.data.slice(0, limit).map((field) => (
+            <Link key={field._id} name="fieldRoute" params={{ fieldId: field.stub }}>
+              <Tag className="primary" text={field.name} style={{ marginBottom: '6px' }} />
             </Link>
           ))}
-
         </div>
       )
-    } 
+    }
     return null
   }
 }

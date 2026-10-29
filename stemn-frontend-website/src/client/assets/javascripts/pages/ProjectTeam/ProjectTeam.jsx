@@ -14,10 +14,10 @@ export default class ProjectTeam extends Component {
     const { project } = this.props
     const team = get(project, 'data.team', [])
     return (
-      <div className={ classes.content }>
+      <div className={classes.content}>
         <Container>
           <Row className="layout-row layout-wrap">
-            { team.map((user) => {
+            {team.map((user) => {
               const userLinkParams = { userId: user._id }
               const historyParams = {
                 projectId: project.data._id,
@@ -27,38 +27,43 @@ export default class ProjectTeam extends Component {
               }
 
               return (
-                <Col key={ user._id } className="flex-xs-100 flex-gt-xs-50">
-                  <div className={ classes.userPanel }>
-                    <div className={ cn('layout-row layout-align-start-center', classes.header) }>
-                      <Link name="userRoute" params={ userLinkParams }>
+                <Col key={user._id} className="flex-xs-100 flex-gt-xs-50">
+                  <div className={classes.userPanel}>
+                    <div className={cn('layout-row layout-align-start-center', classes.header)}>
+                      <Link name="userRoute" params={userLinkParams}>
                         <UserAvatar
-                          picture={ user.picture }
-                          name={ user.name }
-                          className={ classes.avatar }
-                          size={ 30 }
+                          picture={user.picture}
+                          name={user.name}
+                          className={classes.avatar}
+                          size={30}
                           shape="square"
                         />
                       </Link>
                       <div className="layout-column flex">
-                        <Link className="link-primary text-ellipsis" name="userRoute" params={ userLinkParams }>
-                          { user.name }
+                        <Link className="link-primary text-ellipsis" name="userRoute" params={userLinkParams}>
+                          {user.name}
                         </Link>
-                        <div className={ cn(classes.blurb, 'text-ellipsis') }>{ user.blurb }</div>
+                        <div className={cn(classes.blurb, 'text-ellipsis')}>{user.blurb}</div>
                       </div>
                       <SocialButton
-                        style={ { marginLeft: '10px' } }
+                        style={{ marginLeft: '10px' }}
                         type="follow"
                         entityType="user"
-                        entityId={ user._id }
+                        entityId={user._id}
                       />
                     </div>
-                    <div className={ classes.graph }>
-                      <Link name="projectCommitsRoute" params={ historyParams } query={ historyQuery } className="layout-row">
+                    <div className={classes.graph}>
+                      <Link
+                        name="projectCommitsRoute"
+                        params={historyParams}
+                        query={historyQuery}
+                        className="layout-row"
+                      >
                         <HistoryGraph
                           entityType="user"
-                          entityId={ user._id }
+                          entityId={user._id}
                           parentType="project"
-                          parentId={ project.data._id }
+                          parentId={project.data._id}
                         />
                       </Link>
                     </div>

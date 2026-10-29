@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
 import classes from './EditorMentions.module.css'
 import MentionPopover from 'stemn-shared/misc/Search/MentionPopover'
-import { getMentionInfo, parseMentions, getMentionString, mentionTypeFromWord, newMention } from 'stemn-shared/misc/Mentions/Mentions.utils'
+import {
+  getMentionInfo,
+  parseMentions,
+  getMentionString,
+  mentionTypeFromWord,
+  newMention,
+} from 'stemn-shared/misc/Mentions/Mentions.utils'
 
 // The will split at new line
 const getValueInLineFormat = (value = '') => value.split('\n')
@@ -12,21 +18,22 @@ const findAllMentionsPositions = (value = '') => {
   const mentionsInEachLine = valueInLineFormat.map(parseMentions)
   const allMentions = []
   mentionsInEachLine.forEach((mentions, index) => {
-    mentions.forEach(mention => allMentions.push({
-      ...mention,
-      from: {
-        line: index,
-        ch: mention.index.from,
-      },
-      to: {
-        line: index,
-        ch: mention.index.to,
-      },
-    }))
+    mentions.forEach((mention) =>
+      allMentions.push({
+        ...mention,
+        from: {
+          line: index,
+          ch: mention.index.from,
+        },
+        to: {
+          line: index,
+          ch: mention.index.to,
+        },
+      }),
+    )
   })
   return allMentions
 }
-
 
 export default class EditorMentions extends Component {
   constructor(props) {
@@ -96,7 +103,7 @@ export default class EditorMentions extends Component {
     const cursor = codemirror.getCursor()
     // Get the content up to the cursor
     const valueUpToCursor = codemirror.getLine(cursor.line)
-    
+
     // Get the word just before the cursor
     const wordsSplit = valueUpToCursor.substring(0, cursor.ch).split(' ')
     const lastWord = wordsSplit[wordsSplit.length - 1]
@@ -133,7 +140,7 @@ export default class EditorMentions extends Component {
       // Remove all mentionUnderway marks
       const allMarks = codemirror.getAllMarks()
       allMarks.forEach((mark) => {
-        if (mark.className ===  classes.mentionUnderway) {
+        if (mark.className === classes.mentionUnderway) {
           mark.clear()
         }
       })
@@ -177,12 +184,12 @@ export default class EditorMentions extends Component {
     const { caretPosition, query, showPopover, mentionType } = this.state
     return (
       <MentionPopover
-        cacheKey={ `mentions-${mentionType}` }
-        caretPosition={ caretPosition }
-        addMention={ this.addMention }
-        showPopover={  showPopover }
-        query={ query }
-        entityType={ mentionType }
+        cacheKey={`mentions-${mentionType}`}
+        caretPosition={caretPosition}
+        addMention={this.addMention}
+        showPopover={showPopover}
+        query={query}
+        entityType={mentionType}
       />
     )
   }

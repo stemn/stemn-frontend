@@ -5,7 +5,9 @@ import { create as createPreview } from 'stemn-frontend-desktop/app/main/createP
 
 export const create = ({ type, props }) => {
   if (type === 'PREVIEW') {
-    const queryParams = new URLSearchParams(Object.entries(props || {}).filter(([, value]) => value !== undefined && value !== null)).toString()
+    const queryParams = new URLSearchParams(
+      Object.entries(props || {}).filter(([, value]) => value !== undefined && value !== null),
+    ).toString()
     createPreview({ uri: queryParams ? `/?${queryParams}` : '/' })
   } else {
     console.error('Window could not be created')

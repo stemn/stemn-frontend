@@ -18,10 +18,16 @@ export class Component extends React.Component {
     const { dispatch, children, sidebar } = this.props
     const styles = this.props.absolute ? { position: 'absolute' } : this.props.style
     return (
-      <div className={ `${classes.toolbar} layout-row layout-align-start-center rel-box` } style={ styles }>
-        <div className={ classes.dragger } />
-        <div className={ `${classes.inner} layout-row layout-align-start-center flex` }>
-          {!sidebar.show ? <a onClick={ () => dispatch(toggleSidebar()) } style={ { marginRight: '15px' } }><MdMenu size="25" /></a> : ''}
+      <div className={`${classes.toolbar} layout-row layout-align-start-center rel-box`} style={styles}>
+        <div className={classes.dragger} />
+        <div className={`${classes.inner} layout-row layout-align-start-center flex`}>
+          {!sidebar.show ? (
+            <a onClick={() => dispatch(toggleSidebar())} style={{ marginRight: '15px' }}>
+              <MdMenu size="25" />
+            </a>
+          ) : (
+            ''
+          )}
           {children}
         </div>
       </div>
@@ -39,6 +45,5 @@ function mapStateToProps({ header, auth, sidebar }, { location }) {
     location,
   }
 }
-
 
 export default connect(mapStateToProps)(Component)

@@ -20,7 +20,7 @@ export default (state = initialState, action = {}) => {
 
     case 'UPLOAD/UPLOAD_PENDING':
       return i.assocIn(state, [action.meta.cacheKey], {
-        files: action.meta.files.map(file => ({
+        files: action.meta.files.map((file) => ({
           preview: file.preview,
         })),
         loading: true,
@@ -28,9 +28,7 @@ export default (state = initialState, action = {}) => {
     case 'UPLOAD/UPLOAD_REJECTED':
       return i.assocIn(state, [action.meta.cacheKey], { loading: false })
     case 'UPLOAD/UPLOAD_FULFILLED':
-      return i.chain(state)
-        .assocIn([action.meta.cacheKey, 'loading'], false)
-        .value()
+      return i.chain(state).assocIn([action.meta.cacheKey, 'loading'], false).value()
     default:
       return state
   }

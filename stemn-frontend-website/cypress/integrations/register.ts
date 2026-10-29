@@ -1,9 +1,18 @@
 import { elByPh } from '../utils'
 
-export const register = (
-  { url, email, password, firstName, lastName }:
-  { url: string, email: string, password: string, firstName: string, lastName: string },
-) => {
+export const register = ({
+  url,
+  email,
+  password,
+  firstName,
+  lastName,
+}: {
+  url: string
+  email: string
+  password: string
+  firstName: string
+  lastName: string
+}) => {
   describe('Register and onboard', () => {
     it('Should fill out name, email and password', () => {
       cy.visit(`${url}/register`)
@@ -19,7 +28,7 @@ export const register = (
       cy.location('href').should('include', '/onboarding')
     })
     it('Should fill out profile details', () => {
-      cy.get(elByPh('textarea', 'Eg: Structural Engineer @ SpaceX')).type('I\'m an automated account used for testing')
+      cy.get(elByPh('textarea', 'Eg: Structural Engineer @ SpaceX')).type("I'm an automated account used for testing")
       cy.contains('Next: Sync Account').click()
     })
     it('Should redirect to onboarding/sync', () => {

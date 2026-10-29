@@ -1,6 +1,6 @@
 @value primary, border1, bg1 from "theme";
 
-.close{
+.close {
   padding: 10px;
   z-index: 1;
   position: absolute;
@@ -10,21 +10,21 @@
   color: #999999;
   font-size: 16px;
 }
-.close:hover{
+.close:hover {
   color: black;
 }
 
-.fixedOption{
+.fixedOption {
   padding: 10px 15px;
   transition: 0.2s ease;
 }
-.fixedOption:hover{
+.fixedOption:hover {
   background: bg1;
 }
-.fixedOptionTime{
+.fixedOptionTime {
   color: rgba(0, 0, 0, 0.3);
   font-size: 12px;
 }
-.divider{
+.divider {
   border-top: 1px solid border1;
 }

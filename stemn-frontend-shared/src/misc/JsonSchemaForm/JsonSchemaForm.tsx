@@ -9,15 +9,15 @@ import * as widgets from 'stemn-shared/misc/JsonSchemaForm/widgets'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 
 export interface ISchemaFormProps<T> {
-  schema: RJSFSchema,
-  uiSchema?: UiSchema<T>,
+  schema: RJSFSchema
+  uiSchema?: UiSchema<T>
   onSubmit: (formData: T) => any
 }
 
 export interface ISchemaFormState {
-  isLoading: boolean,
-  schema: RJSFSchema,
-  uiSchema: UiSchema,
+  isLoading: boolean
+  schema: RJSFSchema
+  uiSchema: UiSchema
 }
 
 const formTemplates: FormProps['templates'] = {
@@ -31,8 +31,7 @@ const formTemplates: FormProps['templates'] = {
 const formWidgets = { ...widgets } as FormProps['widgets']
 
 export class JsonSchemaForm<T = any> extends React.Component<ISchemaFormProps<T>, ISchemaFormState> {
-
-  constructor (props: ISchemaFormProps<T>) {
+  constructor(props: ISchemaFormProps<T>) {
     super(props)
 
     const { newSchema, newUiSchema } = fixFormatFields(props.schema, props.uiSchema)
@@ -45,8 +44,7 @@ export class JsonSchemaForm<T = any> extends React.Component<ISchemaFormProps<T>
   }
 
   public onSubmit = ({ formData }: { formData?: T }) => {
-
-    this.setState({ isLoading : true })
+    this.setState({ isLoading: true })
 
     return Promise.resolve(this.props.onSubmit(formData as T))
       .then((response: any) => {
@@ -58,8 +56,7 @@ export class JsonSchemaForm<T = any> extends React.Component<ISchemaFormProps<T>
       })
   }
 
-  public render () {
-
+  public render() {
     return (
       <InfoPanel>
         <Form
@@ -71,20 +68,14 @@ export class JsonSchemaForm<T = any> extends React.Component<ISchemaFormProps<T>
           transformErrors={transformErrors}
           onSubmit={this.onSubmit}
           showErrorList={false}
-          liveValidate='onChange'
+          liveValidate="onChange"
           noHtml5Validate={true}
         >
           <p> Required fields are denoted by '*' </p>
 
-          <ProgressButton
-            type='submit'
-            className='primary'
-            loading={this.state.isLoading}
-            onClick={() => undefined}
-          >
+          <ProgressButton type="submit" className="primary" loading={this.state.isLoading} onClick={() => undefined}>
             Submit
           </ProgressButton>
-
         </Form>
       </InfoPanel>
     )

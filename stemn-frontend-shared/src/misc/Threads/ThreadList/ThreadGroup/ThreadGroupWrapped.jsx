@@ -51,24 +51,31 @@ const cardTarget = {
       const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2 // Get vertical middle
       const hoverClientY = clientOffset.y - hoverBoundingRect.top // Get pixels to the top
       // Only perform the move when the mouse has crossed half of the items height
-      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) { return } // Dragging down
-      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) { return } // Dragging upwards
+      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+        return
+      } // Dragging down
+      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+        return
+      } // Dragging upwards
     }
     // Else this is a board (horizontal drag)
     else {
       const hoverMiddleX = (hoverBoundingRect.right - hoverBoundingRect.left) / 2
       const hoverClientX = clientOffset.x - hoverBoundingRect.left // Get pixels to the left
       // Only perform the move when the mouse has crossed half of the items height
-      if (dragIndex < hoverIndex && hoverClientX < hoverMiddleX) { return } // Dragging left
-      if (dragIndex > hoverIndex && hoverClientX > hoverMiddleX) { return } // Dragging right
+      if (dragIndex < hoverIndex && hoverClientX < hoverMiddleX) {
+        return
+      } // Dragging left
+      if (dragIndex > hoverIndex && hoverClientX > hoverMiddleX) {
+        return
+      } // Dragging right
     }
-
 
     // Set the end params
     endDragProps.id = props.id
     endDragProps.index = props.index
     // If the dragged item index is less than the destination index, we set it to after
-    const dragIndexInGroup = props.groups.findIndex(groupId => groupId === beginDragProps.id)
+    const dragIndexInGroup = props.groups.findIndex((groupId) => groupId === beginDragProps.id)
     endDragProps.after = dragIndexInGroup !== -1 ? dragIndexInGroup < endDragProps.index : false
 
     // Time to actually perform the action
@@ -92,7 +99,7 @@ export default function ThreadGroupWrapped(props) {
     type: ItemTypes.GROUP,
     item: () => cardSource.beginDrag(propsRef.current),
     end: () => cardSource.endDrag(propsRef.current),
-    collect: monitor => ({
+    collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
   })
@@ -102,14 +109,17 @@ export default function ThreadGroupWrapped(props) {
     hover: (item, monitor) => cardTarget.hover(propsRef.current, monitor, nodeRef.current),
   })
 
-  const setRef = useCallback((node) => {
-    nodeRef.current = node
-    connectDragSource(connectDropTarget(node))
-  }, [connectDragSource, connectDropTarget])
+  const setRef = useCallback(
+    (node) => {
+      nodeRef.current = node
+      connectDragSource(connectDropTarget(node))
+    },
+    [connectDragSource, connectDropTarget],
+  )
 
   const outerStyles = isDragging ? { opacity: '0.5' } : { opacity: '1', transform: 'translate3d(0,0,0)' }
   return (
-    <div ref={ setRef } style={ outerStyles } key={ id } className="layout-column rel-box">
+    <div ref={setRef} style={outerStyles} key={id} className="layout-column rel-box">
       {children}
     </div>
   )

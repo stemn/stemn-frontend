@@ -28,26 +28,28 @@ const dispatchToProps = {
   replace,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'feedCacheKey',
-  onChange: (props) => {
-    if (props.isLoggedIn) {
-      props.getFeed({
-        feedType: props.filterValue,
-        page: props.page,
-        size: props.size,
-        cacheKey: props.feedCacheKey,
-      })
-    }
+const fetchConfigs = [
+  {
+    hasChanged: 'feedCacheKey',
+    onChange: (props) => {
+      if (props.isLoggedIn) {
+        props.getFeed({
+          feedType: props.filterValue,
+          page: props.page,
+          size: props.size,
+          cacheKey: props.feedCacheKey,
+        })
+      }
+    },
   },
-}]
+]
 
 class HomeContainer extends Component {
   render() {
     const { isLoggedIn } = this.props
     if (isLoggedIn) {
-      return <Home { ...this.props } />
-    } 
+      return <Home {...this.props} />
+    }
     return null
   }
 }

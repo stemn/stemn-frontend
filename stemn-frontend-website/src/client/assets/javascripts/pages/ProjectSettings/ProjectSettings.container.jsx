@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import ProjectSettings from './ProjectSettings'
 
 const stateToProps = ({ projects }, { params, location }) => {
-  const projectId   = params.stub
-  const path        = params.path || ''
-  const project     = projects.data[projectId]
+  const projectId = params.stub
+  const path = params.path || ''
+  const project = projects.data[projectId]
   const entityModel = `projects.data.${projectId}`
 
   return {
@@ -17,14 +17,11 @@ const stateToProps = ({ projects }, { params, location }) => {
   }
 }
 
-const dispatchToProps = {
-}
+const dispatchToProps = {}
 
 class ProjectSettingsContainer extends Component {
   render() {
-    return (
-      <ProjectSettings { ...this.props } />
-    )
+    return <ProjectSettings {...this.props} />
   }
 }
 

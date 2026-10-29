@@ -1,7 +1,7 @@
 import i from 'icepick'
 
 const initialState = {
-/** *******************************************
+  /** *******************************************
 This reducer store filter state data
   [cacheKey] : {
     string: 'users:david,jackson some_query',

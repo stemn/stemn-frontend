@@ -4,22 +4,22 @@ import { DefaultLinkModel, DiagramEngine, LinkModel, PortModel } from 'mrblenny-
 export class PipelineGraphPortModel extends PortModel {
   public value?: string
 
-  public deSerialize (data: any, engine: DiagramEngine) {
+  public deSerialize(data: any, engine: DiagramEngine) {
     super.deSerialize(data, engine)
     this.value = data.value
   }
 
-  public serialize () {
+  public serialize() {
     return merge(super.serialize(), {
       value: this.value,
     })
   }
 
-  public createLinkModel (): LinkModel {
+  public createLinkModel(): LinkModel {
     return new DefaultLinkModel()
   }
 
-  public canLinkToPort (port: PortModel) {
+  public canLinkToPort(port: PortModel) {
     const ports = [port, this]
     const inputPort = find(ports, ['type', 'input'])
     const outputPort = find(ports, ['type', 'output'])

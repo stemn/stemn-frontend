@@ -9,7 +9,7 @@ export const addLines = ({ lines, stepId }) => ({
     stepId,
   },
 })
-  
+
 export const getLines = ({ pipelineId, stepId }) => ({
   type: 'TERMINAL/GET_LINES',
   payload: http({
@@ -20,4 +20,3 @@ export const getLines = ({ pipelineId, stepId }) => ({
     stepId,
   },
 })
-  

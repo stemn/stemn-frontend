@@ -1,11 +1,11 @@
 @value border1 from "theme";
 
-.commitInfo{
+.commitInfo {
   padding: 10px 20px;
   border-bottom: 1px solid border1;
 }
 
-.description{
+.description {
   margin-bottom: 15px;
 }
 

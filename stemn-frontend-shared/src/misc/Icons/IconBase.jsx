@@ -10,12 +10,12 @@ const IconBase = ({ children, color, size, style, width, height, ...props }) => 
     <svg
       fill="currentColor"
       preserveAspectRatio="xMidYMid meet"
-      height={ height || computedSize }
-      width={ width || computedSize }
-      { ...props }
-      style={ { verticalAlign: 'middle', color, ...style } }
+      height={height || computedSize}
+      width={width || computedSize}
+      {...props}
+      style={{ verticalAlign: 'middle', color, ...style }}
     >
-      { children }
+      {children}
     </svg>
   )
 }

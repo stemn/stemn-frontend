@@ -32,33 +32,41 @@ const pageHtml = `
 </html>`
 
 export const authGoogle = (req, res) => {
-  req.store.dispatch(sendAuthToken({
-    provider: 'google',
-    code: req.query.code,
-  }))
+  req.store.dispatch(
+    sendAuthToken({
+      provider: 'google',
+      code: req.query.code,
+    }),
+  )
   res.send(pageHtml)
 }
 
 export const authDropbox = (req, res) => {
-  req.store.dispatch(sendAuthToken({
-    provider: 'dropbox',
-    code: req.query.code,
-  }))
+  req.store.dispatch(
+    sendAuthToken({
+      provider: 'dropbox',
+      code: req.query.code,
+    }),
+  )
   res.send(pageHtml)
 }
 
 export const authFacebook = (req, res) => {
-  req.store.dispatch(sendAuthToken({
-    provider: 'facebook',
-    code: req.query.code,
-  }))
+  req.store.dispatch(
+    sendAuthToken({
+      provider: 'facebook',
+      code: req.query.code,
+    }),
+  )
   res.send(pageHtml)
 }
 
 export const authLinkedin = (req, res) => {
-  req.store.dispatch(sendAuthToken({
-    provider: 'linkedin',
-    code: req.query.code,
-  }))
+  req.store.dispatch(
+    sendAuthToken({
+      provider: 'linkedin',
+      code: req.query.code,
+    }),
+  )
   res.send(pageHtml)
 }

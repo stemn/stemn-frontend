@@ -2,17 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Privacy from './Privacy'
 
-const stateToProps = () => ({
-})
+const stateToProps = () => ({})
 
-const dispatchToProps = {
-}
+const dispatchToProps = {}
 
 class PrivacyContainer extends Component {
   render() {
-    return (
-      <Privacy { ...this.props } />
-    )
+    return <Privacy {...this.props} />
   }
 }
 

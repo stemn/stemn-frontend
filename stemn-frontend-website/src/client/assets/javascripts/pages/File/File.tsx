@@ -24,22 +24,22 @@ import { dispatchToProps } from './File.container'
 import classes from './File.module.scss'
 
 export interface IFileComponentState {
-  isOpen: boolean,
+  isOpen: boolean
 }
 
 export interface IFileComponentProps {
-  changeMode: typeof dispatchToProps['changeMode'],
-  fetchTimeline: typeof dispatchToProps['fetchTimeline'],
-  getMeta: typeof dispatchToProps['getMeta'],
-  initCompare: typeof dispatchToProps['initCompare'],
-  pushRoute: typeof dispatchToProps['pushRoute'],
-  select: typeof dispatchToProps['select'],
-  cacheKey: string,
-  compare: any,
+  changeMode: (typeof dispatchToProps)['changeMode']
+  fetchTimeline: (typeof dispatchToProps)['fetchTimeline']
+  getMeta: (typeof dispatchToProps)['getMeta']
+  initCompare: (typeof dispatchToProps)['initCompare']
+  pushRoute: (typeof dispatchToProps)['pushRoute']
+  select: (typeof dispatchToProps)['select']
+  cacheKey: string
+  compare: any
   file?: {
-    data?: any,
-  },
-  timeline: any,
+    data?: any
+  }
+  timeline: any
 }
 
 export class FileComponent extends React.Component<IFileComponentProps, IFileComponentState> {
@@ -68,7 +68,11 @@ export class FileComponent extends React.Component<IFileComponentProps, IFileCom
     }
   }
   public onSelect = (file) => {
-    const { select, cacheKey, compare: { mode, lastSelected } } = this.props
+    const {
+      select,
+      cacheKey,
+      compare: { mode, lastSelected },
+    } = this.props
     select({ file, mode, lastSelected, cacheKey })
   }
   public changeMode = (mode) => {
@@ -76,11 +80,18 @@ export class FileComponent extends React.Component<IFileComponentProps, IFileCom
     changeMode({ cacheKey, mode })
   }
   public isSelected = (item) => {
-    const { compare: { selected1, selected2, mode } } = this.props
+    const {
+      compare: { selected1, selected2, mode },
+    } = this.props
     return isSelected({ item, selected1, selected2, mode })
   }
-  public render () {
-    const { compare: { mode, selected1, selected2, editActive }, file, timeline, cacheKey } = this.props
+  public render() {
+    const {
+      compare: { mode, selected1, selected2, editActive },
+      file,
+      timeline,
+      cacheKey,
+    } = this.props
     const { isOpen } = this.state
     const items = orderItemsByTime(mode, selected1, selected2)
     const file1 = get(items, [0, 'data'])
@@ -90,23 +101,16 @@ export class FileComponent extends React.Component<IFileComponentProps, IFileCom
     const displayFileHeader = ['sideBySide', 'aboveAndBelow'].includes(mode)
 
     return (
-      <div className='layout-column flex' style={{ overflow: 'hidden', maxHeight: '100vh' }}>
-        { file && file.data && (
+      <div className="layout-column flex" style={{ overflow: 'hidden', maxHeight: '100vh' }}>
+        {file && file.data && (
           <Helmet>
             <title>{`${file.data.project.name} - ${file.data.path}`}</title>
           </Helmet>
         )}
         <div className={classes.header}>
-          { file && file.data && (
-            <FileBreadCrumbs
-              className='text-ellipsis'
-              meta={file.data}
-              link={true}
-              popup={true}
-            />
-          )}
-          <div className='flex' />
-          { file && file.data && (
+          {file && file.data && <FileBreadCrumbs className="text-ellipsis" meta={file.data} link={true} popup={true} />}
+          <div className="flex" />
+          {file && file.data && (
             <FileCompareMenu
               cacheKey={cacheKey}
               file1={file1}
@@ -117,13 +121,7 @@ export class FileComponent extends React.Component<IFileComponentProps, IFileCom
               changeMode={this.changeMode}
             />
           )}
-          { file1 && (
-            <FileEditButton
-              cacheKey={cacheKey}
-              file1={file1}
-              editActive={editActive}
-            />
-          )}
+          {file1 && <FileEditButton cacheKey={cacheKey} file1={file1} editActive={editActive} />}
           <SimpleIconButton
             className={classes.sidebarButton}
             onClick={this.toggleOpen}
@@ -132,11 +130,11 @@ export class FileComponent extends React.Component<IFileComponentProps, IFileCom
             {isOpen ? <MdClose size={20} /> : <MdMenu size={20} />}
           </SimpleIconButton>
         </div>
-        <div className='layout-row flex rel-box'>
+        <div className="layout-row flex rel-box">
           <div className={cn(classes.preview, 'layout-column flex')}>
             {file && file.data && (
               <FileCompareInner
-                className='layout-column flex'
+                className="layout-column flex"
                 file1={file1}
                 file2={file2}
                 mode={mode}
@@ -150,9 +148,9 @@ export class FileComponent extends React.Component<IFileComponentProps, IFileCom
                 items={timelineData}
                 onSelect={this.onSelect}
                 isSelected={this.isSelected}
-                preferPlace='above'
+                preferPlace="above"
               />
-              )}
+            )}
           </div>
           <aside className={cn(classes.sidebar, { [classes.isOpen]: isOpen })}>
             {editActive && <PipelineGraphSidebar diagramId={cacheKey} />}
@@ -160,21 +158,28 @@ export class FileComponent extends React.Component<IFileComponentProps, IFileCom
               <div>
                 <SectionTitle className={classes.sidebarTitle}>Meta</SectionTitle>
                 <SimpleTable>
-                  <tr><td>Name</td><td>{file.data.name}</td></tr>
-                  <tr><td>Size</td><td>{formatBytes(file.data.size)}</td></tr>
-                  <tr><td>Last modified</td><td>{moment(file.data.modified).fromNow()}</td></tr>
-                  { revisions.length > 0 &&
-                  <tr><td>Revisions</td><td>{revisions.length}</td></tr> }
+                  <tr>
+                    <td>Name</td>
+                    <td>{file.data.name}</td>
+                  </tr>
+                  <tr>
+                    <td>Size</td>
+                    <td>{formatBytes(file.data.size)}</td>
+                  </tr>
+                  <tr>
+                    <td>Last modified</td>
+                    <td>{moment(file.data.modified).fromNow()}</td>
+                  </tr>
+                  {revisions.length > 0 && (
+                    <tr>
+                      <td>Revisions</td>
+                      <td>{revisions.length}</td>
+                    </tr>
+                  )}
                 </SimpleTable>
-                <AssemblyParts
-                  fileMeta={file}
-                  clickFn={this.clickFileOrFolder}
-                />
+                <AssemblyParts fileMeta={file} clickFn={this.clickFileOrFolder} />
                 <SectionTitle className={classes.sidebarTitle}>Timeline</SectionTitle>
-                <TimelineVertical
-                  items={timelineData}
-                  type='file'
-                />
+                <TimelineVertical items={timelineData} type="file" />
               </div>
             )}
           </aside>

@@ -7,10 +7,12 @@ export const InputField = (props: WidgetProps, type: string, placeholder?: strin
     <Input
       required={props.required}
       value={props.value}
-      className='dr-input flex'
+      className="dr-input flex"
       type={type}
       placeholder={placeholder || ''}
-      onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value === '' ? props.options.emptyValue : event.target.value)}
+      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+        props.onChange(event.target.value === '' ? props.options.emptyValue : event.target.value)
+      }
     />
   )
 }

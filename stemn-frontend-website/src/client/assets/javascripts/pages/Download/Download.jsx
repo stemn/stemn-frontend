@@ -14,15 +14,25 @@ export default class Download extends Component {
   render() {
     const { latest } = this.props
 
-    const getPlatformSection = platform => (
-      <div className={ classes.platform }>
-        <h3 className="text-title-4">Stemn Desktop for <span style={ { textTransform: 'capitalize' } }>{ platform }</span></h3>
-        <div className="text-title-5" style={ { marginBottom: '15px' } }>
-          <div>{ latest.version } - released { moment(latest[platform].updated_at).calendar() }</div>
-          <div>Size - { bytes(latest[platform].size) }</div>
-          <a className="link-primary" href={ `https://github.com/stemn/Stemn-Desktop/releases/tag/${latest.version}` } target="_blank">Release Notes</a>
+    const getPlatformSection = (platform) => (
+      <div className={classes.platform}>
+        <h3 className="text-title-4">
+          Stemn Desktop for <span style={{ textTransform: 'capitalize' }}>{platform}</span>
+        </h3>
+        <div className="text-title-5" style={{ marginBottom: '15px' }}>
+          <div>
+            {latest.version} - released {moment(latest[platform].updated_at).calendar()}
+          </div>
+          <div>Size - {bytes(latest[platform].size)}</div>
+          <a
+            className="link-primary"
+            href={`https://github.com/stemn/Stemn-Desktop/releases/tag/${latest.version}`}
+            target="_blank"
+          >
+            Release Notes
+          </a>
         </div>
-        <DownloadButton className="secondary lg" platform={ platform }>
+        <DownloadButton className="secondary lg" platform={platform}>
           Download
         </DownloadButton>
       </div>
@@ -36,13 +46,13 @@ export default class Download extends Component {
           <h1>Download Stemn Desktop</h1>
           <h3>Collaboration tools for Engineers</h3>
         </HeroBanner>
-        { latest && latest.version
-          ? <Container>
-            { getPlatformSection('windows') }
-            { getPlatformSection('mac') }
-            { getPlatformSection('linux') }
+        {latest && latest.version ? (
+          <Container>
+            {getPlatformSection('windows')}
+            {getPlatformSection('mac')}
+            {getPlatformSection('linux')}
           </Container>
-          : null }
+        ) : null}
       </LandingLayout>
     )
   }

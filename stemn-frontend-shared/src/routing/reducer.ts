@@ -2,7 +2,7 @@ import { LOCATION_CHANGE } from './actions'
 import { LegacyLocation } from './query'
 
 export interface IRoutingState {
-  locationBeforeTransitions: LegacyLocation | null,
+  locationBeforeTransitions: LegacyLocation | null
 }
 
 const initialState: IRoutingState = {

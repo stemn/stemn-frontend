@@ -1,5 +1,4 @@
-@import "mrblenny-storm-react-diagrams/src/sass/main.scss";
-
+@import 'mrblenny-storm-react-diagrams/src/sass/main.scss';
 
 .srd-node--selected > div {
   border-color: #4484d3 !important;
@@ -11,10 +10,11 @@
 
 .srd-default-link--point-selected {
   fill: #4484d3;
-  stroke-dasharray: 4,4;
+  stroke-dasharray: 4, 4;
 }
 
-.srd-port:hover, .srd-port.selected {
+.srd-port:hover,
+.srd-port.selected {
   background: #4484d3;
 }
 

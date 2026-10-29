@@ -11,30 +11,25 @@ import TextDisplayBox from 'stemn-shared/misc/TextDisplayBox/TextDisplayBox.jsx'
 
 class Component extends React.Component {
   showModal = () => {
-    getBridge().dialog.selectDirectory({
-      title: this.props.title,
-      defaultPath: this.props.value,
-      buttonLabel: 'Select Folder',
-    }).then((folder) => {
-      if (folder) {
-        this.props.dispatch(storeChange(this.props.model, folder))
-      }
-    })
-  };
+    getBridge()
+      .dialog.selectDirectory({
+        title: this.props.title,
+        defaultPath: this.props.value,
+        buttonLabel: 'Select Folder',
+      })
+      .then((folder) => {
+        if (folder) {
+          this.props.dispatch(storeChange(this.props.model, folder))
+        }
+      })
+  }
 
   render() {
-    const {
-      value,
-      children,
-      placeholder,
-    } = this.props
+    const { value, children, placeholder } = this.props
     return (
-      <TextDisplayBox
-        className={ classes.input }
-        onClick={ this.showModal }
-      >
-        { children }
-        <div className={ cn(classes.text, { [classes.placeholder]: !value }, 'flex') }>{value || placeholder}</div>
+      <TextDisplayBox className={classes.input} onClick={this.showModal}>
+        {children}
+        <div className={cn(classes.text, { [classes.placeholder]: !value }, 'flex')}>{value || placeholder}</div>
         <SimpleIconButton>
           <MdFolder size="22" />
         </SimpleIconButton>

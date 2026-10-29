@@ -10,17 +10,13 @@ import React from 'react'
 
 // Sub Components
 
-
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
 export class Component extends React.Component {
   render() {
-    return (
-      <div />
-    )
+    return <div />
   }
 }
-
 
 // /////////////////////////////// CONTAINER /////////////////////////////////
 

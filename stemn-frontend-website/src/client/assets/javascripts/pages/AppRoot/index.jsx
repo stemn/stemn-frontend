@@ -57,10 +57,8 @@ class LoginContainer extends Component {
   render() {
     const { children } = this.props
     return (
-      <div className="layout-column flex" style={ { minHeight: '100vh' } }>
-        <div className="layout-column flex">
-          { children }
-        </div>
+      <div className="layout-column flex" style={{ minHeight: '100vh' }}>
+        <div className="layout-column flex">{children}</div>
         <ToastContainer />
         <ModalContainer />
         <RouteLoading />

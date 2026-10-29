@@ -7,7 +7,6 @@ const messages: any = {
 }
 
 export const transformErrors = (errors: RJSFValidationError[]): RJSFValidationError[] => {
-
   return errors.map((error) => {
     const params = error.params || {}
 

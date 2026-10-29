@@ -9,7 +9,6 @@ import classes from './Modal.module.css'
 
 import { getModal } from './ModalRegistry'
 
-
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
 class ModalComponent extends Component {
@@ -26,7 +25,7 @@ class ModalComponent extends Component {
           modalConfirm: this.modalConfirm,
         }
         const allProps = Object.assign({}, modal.modalProps, additionalProps)
-        template = <ModalTemplate { ...allProps } />
+        template = <ModalTemplate {...allProps} />
       }
     }
 
@@ -58,7 +57,6 @@ class ModalComponent extends Component {
   onRequestClose = () => {
     const { modal } = this.props
     if (modal.modalOptions && modal.modalOptions.noClickClose) {
-      
     } else {
       this.modalCancel()
     }
@@ -70,17 +68,16 @@ class ModalComponent extends Component {
     return (
       <Modal
         isOpen
-        onRequestClose={ this.onRequestClose }
-        className={ classes.modal }
-        overlayClassName={ overlayClassName }
-        contentLabel={ modal.modalType }
+        onRequestClose={this.onRequestClose}
+        className={classes.modal}
+        overlayClassName={overlayClassName}
+        contentLabel={modal.modalType}
       >
-        { this.renderContent() }
+        {this.renderContent()}
       </Modal>
     )
   }
 }
-
 
 // /////////////////////////////// CONTAINER /////////////////////////////////
 

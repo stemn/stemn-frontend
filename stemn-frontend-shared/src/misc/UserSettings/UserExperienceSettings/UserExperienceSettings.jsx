@@ -27,7 +27,7 @@ class UserExperienceSettings extends Component {
 
   constructor(props) {
     super(props)
-    this.dateRange = range(1940, 2025).map(year => ({
+    this.dateRange = range(1940, 2025).map((year) => ({
       name: year,
       value: year,
     }))
@@ -39,17 +39,19 @@ class UserExperienceSettings extends Component {
   }
   add = () => {
     const { dispatch, dataModel } = this.props
-    dispatch(storePush(dataModel, {
-      _id: getUuid(),
-    }))
+    dispatch(
+      storePush(dataModel, {
+        _id: getUuid(),
+      }),
+    )
   }
   render() {
     const { dataModel, type, data } = this.props
 
     return (
       <div>
-        <FlipMove duration={ 200 } enterAnimation="fade" leaveAnimation="fade">
-          { data.map((item, idx) => {
+        <FlipMove duration={200} enterAnimation="fade" leaveAnimation="fade">
+          {data.map((item, idx) => {
             const itemModel = `${dataModel}.[${idx}]`
 
             const getTopSection = () => {
@@ -60,8 +62,8 @@ class UserExperienceSettings extends Component {
                       <h3>Degree/Certificate Type</h3>
                       <Input
                         className="dr-input"
-                        model={ `${itemModel}.degree` }
-                        value={ item.degree }
+                        model={`${itemModel}.degree`}
+                        value={item.degree}
                         placeholder="eg: Bachelor"
                       />
                     </Col>
@@ -69,8 +71,8 @@ class UserExperienceSettings extends Component {
                       <h3>Field of Study</h3>
                       <Input
                         className="dr-input"
-                        model={ `${itemModel}.fieldOfStudy` }
-                        value={ item.fieldOfStudy }
+                        model={`${itemModel}.fieldOfStudy`}
+                        value={item.fieldOfStudy}
                         placeholder="eg: Mechanical Engineering"
                       />
                     </Col>
@@ -78,22 +80,22 @@ class UserExperienceSettings extends Component {
                       <h3>School/University</h3>
                       <Input
                         className="dr-input"
-                        model={ `${itemModel}.school` }
-                        value={ item.school }
+                        model={`${itemModel}.school`}
+                        value={item.school}
                         placeholder="eg: MIT"
                       />
                     </Col>
                   </Row>
                 )
-              } 
+              }
               return (
                 <Row className="sm layout-row">
                   <Col className="sm flex-50">
                     <h3>Position</h3>
                     <Input
                       className="dr-input"
-                      model={ `${itemModel}.position` }
-                      value={ item.position }
+                      model={`${itemModel}.position`}
+                      value={item.position}
                       placeholder="eg: Mechanical Design Engineer "
                     />
                   </Col>
@@ -101,8 +103,8 @@ class UserExperienceSettings extends Component {
                     <h3>Company</h3>
                     <Input
                       className="dr-input"
-                      model={ `${itemModel}.company` }
-                      value={ item.company }
+                      model={`${itemModel}.company`}
+                      value={item.company}
                       placeholder="eg: SpaceX"
                     />
                   </Col>
@@ -111,72 +113,53 @@ class UserExperienceSettings extends Component {
             }
 
             return (
-              <div  key={ item._id }>
-                <InfoPanel
-                  className={ classes.panel }
-                >
-                  <FilledIconButton
-                    onClick={ () => this.remove(idx) }
-                    className={ cn(classes.closeButton, 'warn') }
-                  >
-                    <MdClose size={ 20 } />
+              <div key={item._id}>
+                <InfoPanel className={classes.panel}>
+                  <FilledIconButton onClick={() => this.remove(idx)} className={cn(classes.closeButton, 'warn')}>
+                    <MdClose size={20} />
                   </FilledIconButton>
-                  { getTopSection() }
+                  {getTopSection()}
                   <br />
                   <h3>Time Period</h3>
                   <Row className="sm layout-row layout-align-start-center">
                     <Col className="sm">
                       <PopoverDropdown
-                        model={ `${itemModel}.startDate.year` }
-                        value={ item.startDate && item.startDate.year }
-                        className={ cn(classes.dateInput, 'input') }
-                        options={ this.dateRange }
+                        model={`${itemModel}.startDate.year`}
+                        value={item.startDate && item.startDate.year}
+                        className={cn(classes.dateInput, 'input')}
+                        options={this.dateRange}
                         placeholder="Start Year"
                       />
                     </Col>
-                    { !item.isCurrent && <Col className="sm">to</Col> }
-                    { !item.isCurrent &&
+                    {!item.isCurrent && <Col className="sm">to</Col>}
+                    {!item.isCurrent && (
                       <Col className="sm">
                         <PopoverDropdown
-                          model={ `${itemModel}.endDate.year` }
-                          value={ item.endDate && item.endDate.year }
-                          className={ cn(classes.dateInput, 'input') }
-                          options={ this.dateRange }
+                          model={`${itemModel}.endDate.year`}
+                          value={item.endDate && item.endDate.year}
+                          className={cn(classes.dateInput, 'input')}
+                          options={this.dateRange}
                           placeholder="End Year"
                         />
                       </Col>
-                    }
-                    { !item.isCurrent &&
-                      <Col className="sm">
-                        or
-                      </Col>
-                    }
+                    )}
+                    {!item.isCurrent && <Col className="sm">or</Col>}
                     <Col className="sm text-primary">
-                      <Checkbox
-                        model={ `${itemModel}.isCurrent` }
-                        value={ item.isCurrent }
-                      />
+                      <Checkbox model={`${itemModel}.isCurrent`} value={item.isCurrent} />
                     </Col>
-                    <Col className="sm">
-                      Current?
-                    </Col>
-
+                    <Col className="sm">Current?</Col>
                   </Row>
                   <br />
                   <h3>Description</h3>
-                  <Textarea
-                    className="dr-input"
-                    model={ `${itemModel}.notes` }
-                    value={ item.notes }
-                  />
+                  <Textarea className="dr-input" model={`${itemModel}.notes`} value={item.notes} />
                 </InfoPanel>
               </div>
             )
           })}
         </FlipMove>
         <div className="layout-row layout-align-center">
-          <FilledIconButton onClick={ this.add } className="primary">
-            <MdAdd size={ 20 } />
+          <FilledIconButton onClick={this.add} className="primary">
+            <MdAdd size={20} />
           </FilledIconButton>
         </div>
       </div>

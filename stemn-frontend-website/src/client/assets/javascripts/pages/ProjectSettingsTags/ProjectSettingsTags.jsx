@@ -7,14 +7,9 @@ class ProjectSettingsTags extends Component {
   render() {
     const { project, saveProject, removeField, addField } = this.props
     return (
-      <div>     
+      <div>
         <InfoPanel>
-          <TagSettings
-            project={ project }
-            addField={ addField }
-            removeField={ removeField }
-            saveProject={ saveProject }
-          />
+          <TagSettings project={project} addField={addField} removeField={removeField} saveProject={saveProject} />
         </InfoPanel>
       </div>
     )

@@ -12,10 +12,7 @@ export default class LoadingPlaceholder extends Component {
       width: `${width}px`,
     }
     return (
-      <div
-        className={ cn(classes.placeholder, className) }
-        style={ Object.assign({}, sizeStyles, style) }
-      >
+      <div className={cn(classes.placeholder, className)} style={Object.assign({}, sizeStyles, style)}>
         &nbsp;
       </div>
     )

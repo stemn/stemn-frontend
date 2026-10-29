@@ -5,7 +5,7 @@
 }
 .radio input + div {
   padding: 10px;
-  transition: all 0.1s ease
+  transition: all 0.1s ease;
 }
 .radio input.checked + div {
   background: primary !important;
@@ -16,7 +16,7 @@
   background-color: bg1;
 }
 
-.radio svg{
+.radio svg {
   transition: opacity 0.1s ease;
   opacity: 0;
 }
@@ -24,6 +24,6 @@
   opacity: 1;
 }
 
-.radio input.checked + div svg{
+.radio input.checked + div svg {
   opacity: 1;
 }

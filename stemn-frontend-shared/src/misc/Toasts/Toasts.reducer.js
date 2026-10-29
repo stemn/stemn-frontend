@@ -12,7 +12,7 @@ export default (state = initialState, action = {}) => {
       })
     }
     case 'TOAST/HIDE': {
-      const index = state.stack.findIndex(toast => toast.id === action.payload.id)
+      const index = state.stack.findIndex((toast) => toast.id === action.payload.id)
       return i.merge(state, {
         stack: i.splice(state.stack, index, 1),
       })

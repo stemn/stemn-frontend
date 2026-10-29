@@ -38,39 +38,39 @@ export default class MyProjectsPanel extends Component {
     const hasNoResults = limitedProjects.length === 0
 
     return (
-      <InfoPanel className={ cn(classes.panel, 'layout-column') }>
-        { !hasNoResults &&
+      <InfoPanel className={cn(classes.panel, 'layout-column')}>
+        {!hasNoResults && (
           <h3 className="layout-row">
             <div className="flex">My Projects</div>
-            <a
-              className="link-primary"
-              disabled={ notEnoughResult }
-              onClick={ this.more }
-            >
+            <a className="link-primary" disabled={notEnoughResult} onClick={this.more}>
               More
             </a>
           </h3>
-        }
-        { !hasNoResults && limitedProjects.map(project => (
-          <Link
-            key={ project._id }
-            name="projectRoute"
-            params={ { projectId: project._id } }
-            className={ `${classes.row} layout-row layout-align-start-center` }
-          >
-            <PublicPrivateIcon className={ classes.publicIcon } private={ project.private } size={ 20 } />
-            <div className="text-ellipsis flex">
-              { project.name || 'Untitled Project' }
-            </div>
-            <ProviderIcon provider={ project.remote.provider } className={ classes.providerIcon } />
-          </Link>
-        ))}
-        { hasNoResults && !isLoading &&
+        )}
+        {!hasNoResults &&
+          limitedProjects.map((project) => (
+            <Link
+              key={project._id}
+              name="projectRoute"
+              params={{ projectId: project._id }}
+              className={`${classes.row} layout-row layout-align-start-center`}
+            >
+              <PublicPrivateIcon className={classes.publicIcon} private={project.private} size={20} />
+              <div className="text-ellipsis flex">{project.name || 'Untitled Project'}</div>
+              <ProviderIcon provider={project.remote.provider} className={classes.providerIcon} />
+            </Link>
+          ))}
+        {hasNoResults && !isLoading && (
           <div className="flex layout-column layout-align-center-center">
-            <img src={ bookVector } style={ { width: '60px' } } />
-            <div className="text-title-5" style={ { marginTop: '20px' } }>No Projects. <a className="link-primary" onClick={ newProject }>Create one.</a></div>
+            <img src={bookVector} style={{ width: '60px' }} />
+            <div className="text-title-5" style={{ marginTop: '20px' }}>
+              No Projects.{' '}
+              <a className="link-primary" onClick={newProject}>
+                Create one.
+              </a>
+            </div>
           </div>
-        }
+        )}
       </InfoPanel>
     )
   }

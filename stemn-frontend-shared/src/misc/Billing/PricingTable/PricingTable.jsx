@@ -7,23 +7,18 @@ export default class PricingTable extends Component {
   render() {
     const { important, data } = this.props
     return (
-      <div className={ cn('flex', 'flex-sm-50 layout-column', classes.table, { [classes.important]: important }) }>
-        <div className={ classes.price }>
-          { typeof data.price === 'number'
-            ? `$${data.price}`
-            : data.price }
-        </div>
-        <div className={ classes.period }>
-          { data.period }
-        </div>
-        <div className={ classes.type }>
-          { data.type }
-        </div>
-        <div className={ classes.description }>
-          { data.description }
-        </div>
+      <div className={cn('flex', 'flex-sm-50 layout-column', classes.table, { [classes.important]: important })}>
+        <div className={classes.price}>{typeof data.price === 'number' ? `$${data.price}` : data.price}</div>
+        <div className={classes.period}>{data.period}</div>
+        <div className={classes.type}>{data.type}</div>
+        <div className={classes.description}>{data.description}</div>
         <ul>
-          { data.features.map((feature, idx) => <li key={ idx }><MdDone />{ feature }</li>)}
+          {data.features.map((feature, idx) => (
+            <li key={idx}>
+              <MdDone />
+              {feature}
+            </li>
+          ))}
         </ul>
       </div>
     )

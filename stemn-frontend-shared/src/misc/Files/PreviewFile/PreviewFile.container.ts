@@ -7,9 +7,9 @@ import { PreviewFileComponent } from './PreviewFile'
 
 export interface IPreviewFileContainerProps {
   file: IFile
-  header?: boolean,
-  event: any,
-  editActive?: boolean,
+  header?: boolean
+  event: any
+  editActive?: boolean
 }
 
 const stateToProps = ({ files }: IStoreState, { file, event }: IPreviewFileContainerProps) => {
@@ -20,9 +20,10 @@ const stateToProps = ({ files }: IStoreState, { file, event }: IPreviewFileConta
       fileData,
     }
   } else {
-    const cacheKey = event && event.timestamp && isAssembly(file.extension)
-      ? `${file.fileId}-${file.revisionId}-${event.timestamp}`
-      : `${file.fileId}-${file.revisionId}`
+    const cacheKey =
+      event && event.timestamp && isAssembly(file.extension)
+        ? `${file.fileId}-${file.revisionId}-${event.timestamp}`
+        : `${file.fileId}-${file.revisionId}`
 
     const fileData = files.fileData[cacheKey]
     const fileRender = files.fileRenders[cacheKey]

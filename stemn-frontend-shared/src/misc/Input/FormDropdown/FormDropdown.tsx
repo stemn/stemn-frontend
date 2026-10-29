@@ -3,12 +3,12 @@ import { WrappedFieldProps } from 'redux-form'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 
 export interface IFormDropdownProps extends WrappedFieldProps {
-  className?: string,
-  style?: object,
-  placeholder?: string,
+  className?: string
+  style?: object
+  placeholder?: string
   options?: Array<{
-    name: string,
-    value: string,
+    name: string
+    value: string
   }>
 }
 
@@ -18,7 +18,7 @@ export interface IFormDropdownProps extends WrappedFieldProps {
 // type?: string,
 
 export class FormDropdown extends React.Component<IFormDropdownProps> {
-  public render () {
+  public render() {
     const { input, className, placeholder, style, options = [] } = this.props
     console.log(this.props)
     return (

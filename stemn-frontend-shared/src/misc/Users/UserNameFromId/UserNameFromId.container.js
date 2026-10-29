@@ -12,15 +12,17 @@ const dispatchToProps = {
   getUser,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'userId',
-  onChange: (props) => {
-    props.getUser({
-      userId: props.userId,
-      size: 'sm',
-    })
+const fetchConfigs = [
+  {
+    hasChanged: 'userId',
+    onChange: (props) => {
+      props.getUser({
+        userId: props.userId,
+        size: 'sm',
+      })
+    },
   },
-}]
+]
 
 const withFetchData = fetchDataHoc(fetchConfigs)(UserNameFromId)
 const withRedux = connect(stateToProps, dispatchToProps)(withFetchData)

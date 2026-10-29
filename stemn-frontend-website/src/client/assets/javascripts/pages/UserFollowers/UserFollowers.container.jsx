@@ -27,22 +27,22 @@ const dispatchToProps = {
   getUserFollowers,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'pageId',
-  onChange: (props) => {
-    props.getUserFollowers({
-      userId: props.userId,
-      page: props.page,
-      size: props.size,
-    })
+const fetchConfigs = [
+  {
+    hasChanged: 'pageId',
+    onChange: (props) => {
+      props.getUserFollowers({
+        userId: props.userId,
+        page: props.page,
+        size: props.size,
+      })
+    },
   },
-}]
+]
 
 class UserFollowersContainer extends Component {
   render() {
-    return (
-      <UserFollowers { ...this.props } />
-    )
+    return <UserFollowers {...this.props} />
   }
 }
 

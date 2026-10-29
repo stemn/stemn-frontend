@@ -11,16 +11,17 @@ import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import { MdMoreHoriz } from 'react-icons/md'
 import ColorSelect from './ColorSelect/ColorSelect.jsx'
 
-
 class ThreadLabelsEdit extends Component {
   confirmDelete(model, index) {
-    this.props.dispatch(
-      showConfirm({
-        message: 'If you delete this label it will be removed from all assigned threads.',
-      }),
-    ).then(() => {
-      this.props.dispatch(storeRemove(model, index))
-    })
+    this.props
+      .dispatch(
+        showConfirm({
+          message: 'If you delete this label it will be removed from all assigned threads.',
+        }),
+      )
+      .then(() => {
+        this.props.dispatch(storeRemove(model, index))
+      })
   }
   UNSAFE_componentWillReceiveProps(props) {
     this.onMount(props)
@@ -32,53 +33,51 @@ class ThreadLabelsEdit extends Component {
     const { dispatch, value, model } = props
     // If it is empty, push on a label
     if (value.length === 0) {
-      dispatch(storePush(model, {
-        _id: getUuid(),
-        color: '',
-        name: '',
-      }))
+      dispatch(
+        storePush(model, {
+          _id: getUuid(),
+          color: '',
+          name: '',
+        }),
+      )
     }
     // Else, if the name of the last label exists, add another
     else if (value[value.length - 1].name.length >= 1) {
-      dispatch(storePush(model, {
-        _id: getUuid(),
-        color: '',
-        name: '',
-      }))
+      dispatch(
+        storePush(model, {
+          _id: getUuid(),
+          color: '',
+          name: '',
+        }),
+      )
     }
   }
   render() {
-    const {
-      model,
-      value,
-    } = this.props
+    const { model, value } = this.props
 
     return (
       <div>
-        { value.map((label, index) =>
-          <div key={ label._id } className={ `${classes.row} layout-row layout-align-start-center` }>
-            <div className={ classes.colorSelect }>
+        {value.map((label, index) => (
+          <div key={label._id} className={`${classes.row} layout-row layout-align-start-center`}>
+            <div className={classes.colorSelect}>
               <Popover preferPlace="above">
-                <label htmlFor={ label._id } className={ classes.swatch } style={ { background: label.color } } />
-                <ColorSelect
-                  model={ `${model}[${index}].color` }
-                  value={ label.color }
-                />
+                <label htmlFor={label._id} className={classes.swatch} style={{ background: label.color }} />
+                <ColorSelect model={`${model}[${index}].color`} value={label.color} />
               </Popover>
               <Input
-                model={ `${model}[${index}].color` }
-                value={ label.color }
-                className={ `${classes.colorSelectInput} dr-input` }
+                model={`${model}[${index}].color`}
+                value={label.color}
+                className={`${classes.colorSelectInput} dr-input`}
                 type="text"
                 placeholder="Color Code"
-                id={ label._id }
+                id={label._id}
               />
             </div>
 
-            <div className={ `${classes.name} flex` }>
+            <div className={`${classes.name} flex`}>
               <Input
-                model={ `${model}[${index}].name` }
-                value={ label.name }
+                model={`${model}[${index}].name`}
+                value={label.name}
                 className="dr-input"
                 type="text"
                 placeholder="Label Name"
@@ -89,11 +88,11 @@ class ThreadLabelsEdit extends Component {
                 <MdMoreHoriz size="20px" />
               </SimpleIconButton>
               <div className="PopoverMenu">
-                <a onClick={ () => this.confirmDelete(model, index) }>Remove Label</a>
+                <a onClick={() => this.confirmDelete(model, index)}>Remove Label</a>
               </div>
             </Popover>
-          </div>,
-        ) }
+          </div>
+        ))}
       </div>
     )
   }

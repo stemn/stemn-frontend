@@ -5,13 +5,13 @@ import { PipelineGraphStepModel } from 'stemn-shared/misc/Pipelines/PipelineGrap
 import s from './PipelineGraphPort.module.scss'
 
 export interface IPipelineGraphPortProps {
-  node: PipelineGraphStepModel,
-  port: PortModel,
-  isSelected: boolean,
+  node: PipelineGraphStepModel
+  port: PortModel
+  isSelected: boolean
 }
 
 export class PipelineGraphPort extends React.PureComponent<IPipelineGraphPortProps> {
-  public render () {
+  public render() {
     const { node, port, isSelected } = this.props
     return (
       <div className={cn(s.portOuter, port.type === 'input' ? s.input : s.output)}>
@@ -20,10 +20,10 @@ export class PipelineGraphPort extends React.PureComponent<IPipelineGraphPortPro
           className={cn(s.port, { [s.selected]: isSelected })}
           name={port.name}
           node={node}
-          extraProps={ {
+          extraProps={{
             title: 'some title',
             children: '',
-          } }
+          }}
         />
       </div>
     )

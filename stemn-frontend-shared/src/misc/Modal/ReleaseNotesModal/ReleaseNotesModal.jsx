@@ -9,7 +9,7 @@ export default class ReleaseNotesModal extends React.Component {
   state = {
     releaseNotes: '',
     loading: true,
-  };
+  }
 
   UNSAFE_componentWillMount() {
     http({
@@ -17,17 +17,19 @@ export default class ReleaseNotesModal extends React.Component {
       headers: {
         Authorization: null,
       },
-    }).then((response) => {
-      this.setState({
-        releaseNotes: `${response.data.body}`,
-        loading: false,
-      })
-    }).catch((response) => {
-      this.setState({
-        releaseNotes: 'Could not find any release notes for this version.',
-        loading: false,
-      })
     })
+      .then((response) => {
+        this.setState({
+          releaseNotes: `${response.data.body}`,
+          loading: false,
+        })
+      })
+      .catch((response) => {
+        this.setState({
+          releaseNotes: 'Could not find any release notes for this version.',
+          loading: false,
+        })
+      })
   }
 
   render() {
@@ -35,16 +37,20 @@ export default class ReleaseNotesModal extends React.Component {
     const { loading, releaseNotes } = this.state
 
     return (
-      <div style={ { width: '600px' } }>
+      <div style={{ width: '600px' }}>
         <div className="modal-title">Version {version}</div>
-        <div className="modal-body rel-box" style={ { minHeight: '200px' } }>
-          <LoadingOverlay show={ loading } />
-          <EditorDisplay value={ releaseNotes } />
+        <div className="modal-body rel-box" style={{ minHeight: '200px' }}>
+          <LoadingOverlay show={loading} />
+          <EditorDisplay value={releaseNotes} />
         </div>
         <div className="modal-footer-no-line layout-row layout-align-start-center">
-          <a href="https://github.com/Stemn/Stemn-Desktop/releases" className="link-primary">View all release notes</a>
+          <a href="https://github.com/Stemn/Stemn-Desktop/releases" className="link-primary">
+            View all release notes
+          </a>
           <div className="flex" />
-          <Button className="primary" onClick={ modalConfirm }>Close</Button>
+          <Button className="primary" onClick={modalConfirm}>
+            Close
+          </Button>
         </div>
       </div>
     )

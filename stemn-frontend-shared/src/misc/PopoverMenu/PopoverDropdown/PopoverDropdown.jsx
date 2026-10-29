@@ -10,9 +10,22 @@ import classes from './PopoverDropdown.module.css'
 
 class PopoverDropdown extends Component {
   render() {
-    const { children, options, model, value, dispatch, onChange, empty, loading, className, placeholder, style, ...otherProps } = this.props
+    const {
+      children,
+      options,
+      model,
+      value,
+      dispatch,
+      onChange,
+      empty,
+      loading,
+      className,
+      placeholder,
+      style,
+      ...otherProps
+    } = this.props
 
-    const isActive = option => value === option.value || (!value && !option.value)
+    const isActive = (option) => value === option.value || (!value && !option.value)
 
     const currentOption = options.find(isActive)
 
@@ -26,16 +39,20 @@ class PopoverDropdown extends Component {
     }
 
     return (
-      <PopoverFit { ...otherProps }>
-        <Button className={ cn('layout-row layout-align-start-center rel-box light', className) } style={ style } type="button">
-          <LoadingOverlay className={ classes.loading } show={ loading } linear hideBg />
-          { children }
-          { getInnerText() }
+      <PopoverFit {...otherProps}>
+        <Button
+          className={cn('layout-row layout-align-start-center rel-box light', className)}
+          style={style}
+          type="button"
+        >
+          <LoadingOverlay className={classes.loading} show={loading} linear hideBg />
+          {children}
+          {getInnerText()}
           <div className="flex" />
-          <MdExpandMore style={ { marginLeft: '5px' } } size={ 13 } />
+          <MdExpandMore style={{ marginLeft: '5px' }} size={13} />
         </Button>
-        <div className="PopoverMenu" style={ { maxHeight: '300px' } }>
-          { options.map((option, idx) => {
+        <div className="PopoverMenu" style={{ maxHeight: '300px' }}>
+          {options.map((option, idx) => {
             const onClick = () => {
               if (model) {
                 dispatch(storeChange(model, option.value))
@@ -49,12 +66,8 @@ class PopoverDropdown extends Component {
             }
 
             return (
-              <a
-                key={ option.value || idx }
-                onClick={ onClick }
-                className={ cn({ active: isActive(option) }) }
-              >
-                { option.name }
+              <a key={option.value || idx} onClick={onClick} className={cn({ active: isActive(option) })}>
+                {option.name}
               </a>
             )
           })}

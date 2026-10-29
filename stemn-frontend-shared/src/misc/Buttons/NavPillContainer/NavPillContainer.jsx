@@ -5,8 +5,8 @@ import classes from './NavPillContainer.module.css'
 const NavPillContainer = (props) => {
   const { className, children, ...otherProps } = props
   return (
-    <div className={ cn(classes.root, className) } { ...otherProps } data-tag="nav-pills">
-      { props.children }
+    <div className={cn(classes.root, className)} {...otherProps} data-tag="nav-pills">
+      {props.children}
     </div>
   )
 }

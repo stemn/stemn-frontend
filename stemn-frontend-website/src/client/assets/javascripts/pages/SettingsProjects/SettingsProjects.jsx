@@ -11,15 +11,15 @@ class SettingsProjects extends Component {
     const { projects } = this.props
     return (
       <div>
-        <InfoPanel style={ { padding: '0px' } }>
-          { get(projects, 'data', []).map(project => (
-            <EntityRow data={ project } key={ project._id } nofollow className={ classes.project }>
+        <InfoPanel style={{ padding: '0px' }}>
+          {get(projects, 'data', []).map((project) => (
+            <EntityRow data={project} key={project._id} nofollow className={classes.project}>
               <SimpleIconButton
                 name="projectSettingsRoute"
-                params={ { projectId: project._id } }
-                style={ { marginLeft: '20px' } }
+                params={{ projectId: project._id }}
+                style={{ marginLeft: '20px' }}
               >
-                <MdSettings size={ 20 } />
+                <MdSettings size={20} />
               </SimpleIconButton>
             </EntityRow>
           ))}

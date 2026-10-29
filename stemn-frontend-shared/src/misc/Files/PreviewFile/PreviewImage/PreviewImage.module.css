@@ -1,11 +1,11 @@
-.image{
-/*
+.image {
+  /*
   max-height: 100%;
   max-width: 100%;
 */
-/*  padding: 15px;*/
+  /*  padding: 15px;*/
 }
-.container{
+.container {
   background: rgba(0, 0, 0, 0.03);
   overflow: auto;
 }

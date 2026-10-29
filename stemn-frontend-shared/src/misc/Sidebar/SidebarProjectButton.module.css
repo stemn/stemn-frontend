@@ -1,6 +1,6 @@
 @value primary-bg, secondary from "theme";
 
-.sidebarButton{
+.sidebarButton {
   display: block;
   width: 100%;
   background: none;
@@ -9,14 +9,14 @@
   padding: 8px 12px;
   line-height: 1.4em;
 }
-.sidebarButton:hover{
+.sidebarButton:hover {
   background: rgba(0, 0, 0, 0.3);
 }
-.sidebarButton:global(.active){
+.sidebarButton:global(.active) {
   background: rgba(0, 0, 0, 0.6);
   position: relative;
 }
-.sidebarButton:global(.active):after{
+.sidebarButton:global(.active):after {
   content: '';
   position: absolute;
   bottom: 0px;
@@ -26,7 +26,7 @@
   width: 4px;
   background: primary-bg;
 }
-.sidebarButton .text{
+.sidebarButton .text {
   padding-left: 10px;
   white-space: nowrap;
   overflow: hidden;

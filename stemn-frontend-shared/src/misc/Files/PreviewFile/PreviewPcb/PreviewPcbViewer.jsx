@@ -10,10 +10,14 @@ export default class PreviewPcbViewer extends Component {
     flipped: null,
   }
   viewerInstance = null
-  componentDidMount() { this.onMount(this.props) }
-  UNSAFE_componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+  componentDidMount() {
+    this.onMount(this.props)
+  }
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    this.onMount(nextProps, this.props)
+  }
   onMount = (nextProps, prevProps) => {
-    if (!prevProps || (nextProps.layers !== prevProps.layers)) {
+    if (!prevProps || nextProps.layers !== prevProps.layers) {
       setTimeout(this.init(nextProps), 1) // Timeout so refs can init
     }
   }
@@ -60,7 +64,14 @@ export default class PreviewPcbViewer extends Component {
     })
   }
   render() {
-    return <div ref={ (el) => { this.canvasRef = el } } className={ `${classes.canvas} layout-column flex` } />
+    return (
+      <div
+        ref={(el) => {
+          this.canvasRef = el
+        }}
+        className={`${classes.canvas} layout-column flex`}
+      />
+    )
   }
 }
 

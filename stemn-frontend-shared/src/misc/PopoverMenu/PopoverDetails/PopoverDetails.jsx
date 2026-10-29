@@ -5,7 +5,7 @@ class PopoverDetails extends React.Component {
   render() {
     const { children } = this.props
     return (
-      <div className={ classes.body } { ...this.props }>
+      <div className={classes.body} {...this.props}>
         {children}
       </div>
     )

@@ -11,7 +11,6 @@ import ProjectPermissionsRadio from 'stemn-shared/misc/Project/ProjectPermission
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import PanelDescription from 'stemn-shared/misc/Panels/PanelDescription'
 
-
 export default class ProjectCloneModal extends Component {
   state = {
     activeTab: 1,
@@ -38,12 +37,12 @@ export default class ProjectCloneModal extends Component {
     const { linkPending, activeTab } = this.state
 
     const namePanelTemplate = () => (
-      <div className={ classes.panel }>
+      <div className={classes.panel}>
         <h3>Name</h3>
         <p>Set your project's name.</p>
         <Input
-          model={ `${entityModel}.name` }
-          value={ cloneProject.name }
+          model={`${entityModel}.name`}
+          value={cloneProject.name}
           className="dr-input"
           type="text"
           placeholder="Project Name"
@@ -53,46 +52,38 @@ export default class ProjectCloneModal extends Component {
     )
 
     const permissionsTemplate = () => (
-      <div className={ classes.panel }>
+      <div className={classes.panel}>
         <h3>Project Type</h3>
-        <ProjectPermissionsRadio
-          model={ `${entityModel}.private` }
-          value={ get(cloneProject, 'private') }
-        />
+        <ProjectPermissionsRadio model={`${entityModel}.private`} value={get(cloneProject, 'private')} />
       </div>
     )
 
     const fileStoreTemplate = () => (
-      <div className={ `${classes.panel} rel-box layout-column` }>
+      <div className={`${classes.panel} rel-box layout-column`}>
         <h3>Cloud Storage Folder</h3>
         <p>Select your project's cloud store location.</p>
-        <ProjectLinkRemote
-          model={ `${entityModel}.provider` }
-          value={ cloneProject.provider }
-        />
-        <LoadingOverlay show={ cloneProject.savePending || linkPending } />
+        <ProjectLinkRemote model={`${entityModel}.provider`} value={cloneProject.provider} />
+        <LoadingOverlay show={cloneProject.savePending || linkPending} />
       </div>
     )
 
-  
     const tabTemplate = ({ title, blurb, body, button1, button2 }) => (
       <div className="layout-column flex">
-        <div className={ `${classes.modalBody} layout-column flex` }>
-          <PanelDescription
-            title={ title }
-            description={ blurb }
-          >
-            { body }
+        <div className={`${classes.modalBody} layout-column flex`}>
+          <PanelDescription title={title} description={blurb}>
+            {body}
           </PanelDescription>
         </div>
-        <div className={ `${classes.modalFooter} layout-row layout-align-end` }>
-          <Button style={ { marginRight: '10px' } } onClick={ button1.onClick }>{ button1.text }</Button>
-          <Button 
-            className="primary" 
-            onClick={ button2.onClick } 
-            disabled={ !cloneProject.provider || cloneProject.savePending }
+        <div className={`${classes.modalFooter} layout-row layout-align-end`}>
+          <Button style={{ marginRight: '10px' }} onClick={button1.onClick}>
+            {button1.text}
+          </Button>
+          <Button
+            className="primary"
+            onClick={button2.onClick}
+            disabled={!cloneProject.provider || cloneProject.savePending}
           >
-            { button2.text }
+            {button2.text}
           </Button>
         </div>
       </div>
@@ -102,7 +93,8 @@ export default class ProjectCloneModal extends Component {
       if (activeTab === 1) {
         return tabTemplate({
           title: 'Clone Project',
-          blurb: 'This will copy all the files associated with this project into your dropbox or google drive. A clone project will also appear on your profile.',
+          blurb:
+            'This will copy all the files associated with this project into your dropbox or google drive. A clone project will also appear on your profile.',
           body: (
             <div>
               {namePanelTemplate()}
@@ -122,29 +114,27 @@ export default class ProjectCloneModal extends Component {
       }
     }
 
-    const tabTitles = [{
-      title: 'Clone Project',
-      arrow: false,
-      onClick: () => {},
-      isActive: () => activeTab === 1,
-    }]
+    const tabTitles = [
+      {
+        title: 'Clone Project',
+        arrow: false,
+        onClick: () => {},
+        isActive: () => activeTab === 1,
+      },
+    ]
 
     return (
-      <div className={ `${classes.stepModal} layout-column` }>
-        <div className={ classes.modalTitle }>
+      <div className={`${classes.stepModal} layout-column`}>
+        <div className={classes.modalTitle}>
           <ArrowTabs className="layout-row flex">
-            { tabTitles.map(tab => <ArrowTab
-              key={ tab.title }
-              arrow={ tab.arrow }
-              onClick={ tab.onClick }
-              isActive={ tab.isActive() }
-            >
-              { tab.title }
-            </ArrowTab>,
-            )}
+            {tabTitles.map((tab) => (
+              <ArrowTab key={tab.title} arrow={tab.arrow} onClick={tab.onClick} isActive={tab.isActive()}>
+                {tab.title}
+              </ArrowTab>
+            ))}
           </ArrowTabs>
         </div>
-        { getTab() }
+        {getTab()}
       </div>
     )
   }

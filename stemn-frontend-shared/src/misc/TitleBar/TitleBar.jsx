@@ -17,9 +17,11 @@ export default class TitleBar extends React.Component {
 
   componentDidMount() {
     this.mounted = true
-    getBridge().window.isMaximized().then((isMaximised) => {
-      if (this.mounted) this.setState({ isMaximised })
-    })
+    getBridge()
+      .window.isMaximized()
+      .then((isMaximised) => {
+        if (this.mounted) this.setState({ isMaximised })
+      })
   }
 
   componentWillUnmount() {
@@ -38,7 +40,7 @@ export default class TitleBar extends React.Component {
     }
 
     const toggleMaximise = () => {
-      windowControls.toggleMaximize().then(isMaximised => this.setState({ isMaximised }))
+      windowControls.toggleMaximize().then((isMaximised) => this.setState({ isMaximised }))
     }
 
     //    const WindowsClose = (<svg x="0px" y="0px" viewBox="0 0 10.2 10.2" data-radium="true"><polygon fill="inherit" points="10.2,0.7 9.5,0 5.1,4.4 0.7,0 0,0.7 4.4,5.1 0,9.5 0.7,10.2 5.1,5.8 9.5,10.2 10.2,9.5 5.8,5.1 "></polygon></svg>)
@@ -63,14 +65,20 @@ export default class TitleBar extends React.Component {
       //        </div>
       //      )
     }
-    
+
     return (
-      <div className={ cn(styles.bar, 'layout-row', { [styles.light]: this.props.theme === 'light' }) }>
-        <div className={ cn(styles.dragger, 'flex') } />
-        <div className={ `layout-row layout-align-end-center ${styles.buttons}` }>
-          <a className={ styles.button } title="Minimise" onClick={ minimise }><MinimiseIcon size={ 24 } /></a>
-          <a className={ styles.button } title="Maximise" onClick={ toggleMaximise }><MaximiseIcon size={ 24 } /></a>
-          <a className={ cn(styles.button, styles.close) } title="Close"    onClick={ close }><CloseIcon size={ 24 } /></a>
+      <div className={cn(styles.bar, 'layout-row', { [styles.light]: this.props.theme === 'light' })}>
+        <div className={cn(styles.dragger, 'flex')} />
+        <div className={`layout-row layout-align-end-center ${styles.buttons}`}>
+          <a className={styles.button} title="Minimise" onClick={minimise}>
+            <MinimiseIcon size={24} />
+          </a>
+          <a className={styles.button} title="Maximise" onClick={toggleMaximise}>
+            <MaximiseIcon size={24} />
+          </a>
+          <a className={cn(styles.button, styles.close)} title="Close" onClick={close}>
+            <CloseIcon size={24} />
+          </a>
         </div>
       </div>
     )

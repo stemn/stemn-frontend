@@ -9,8 +9,6 @@ const stateToProps = ({ fields }, { params }) => {
   }
 }
 
-const dispatchToProps = {
-
-}
+const dispatchToProps = {}
 
 export default connect(stateToProps, dispatchToProps)(FieldOverview)

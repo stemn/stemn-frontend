@@ -21,7 +21,7 @@ export default class OrganisationSettings extends Component {
       projectId: this.props.project.data._id,
       organisation,
     })
-  }  
+  }
   removeOrganisation = (organisationId) => {
     this.props.removeOrganisation({
       projectId: this.props.project.data._id,
@@ -29,34 +29,29 @@ export default class OrganisationSettings extends Component {
     })
   }
   render() {
-    const {
-      project,
-    } = this.props
+    const { project } = this.props
     return (
       <div>
         <h3>Organisation Tags</h3>
-        <p>Tag any organisations associated with this project. This can be a university, company or research institution.</p>
-        <OrganisationSearch 
-          cacheKey={ project.data._id }
-          select={ this.addOrganisation }
-        />
+        <p>
+          Tag any organisations associated with this project. This can be a university, company or research institution.
+        </p>
+        <OrganisationSearch cacheKey={project.data._id} select={this.addOrganisation} />
         <br />
         <div>
-          { project.data.organisations.map(organisation => (
-            <TagEdit 
-              key={ organisation._id }
-              text={ organisation.name }
+          {project.data.organisations.map((organisation) => (
+            <TagEdit
+              key={organisation._id}
+              text={organisation.name}
               className="primary"
-              onClick={ () => this.removeOrganisation(organisation._id) }
+              onClick={() => this.removeOrganisation(organisation._id)}
             />
           ))}
         </div>
         <div className="layout-row layout-align-end">
-          <ProgressButton
-            className="primary"
-            onClick={ this.saveProject }
-            loading={ project.savePending }
-          >Update Project</ProgressButton>
+          <ProgressButton className="primary" onClick={this.saveProject} loading={project.savePending}>
+            Update Project
+          </ProgressButton>
         </div>
       </div>
     )

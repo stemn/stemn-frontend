@@ -21,9 +21,8 @@ const getTrayPosX = (cursorPosition, trayPositionHoriz, primarySize) => {
     : horizBounds.right - WINDOW_WIDTH
 }
 
-const getTrayPosY = (cursorPosition, trayPositionVert) => (trayPositionVert === 'bottom'
-  ? cursorPosition.y - WINDOW_HEIGHT - VERT_PADDING
-  : cursorPosition.y + VERT_PADDING)
+const getTrayPosY = (cursorPosition, trayPositionVert) =>
+  trayPositionVert === 'bottom' ? cursorPosition.y - WINDOW_HEIGHT - VERT_PADDING : cursorPosition.y + VERT_PADDING
 
 /** The small "menubar" window that pops up from the tray icon */
 export const create = () => {

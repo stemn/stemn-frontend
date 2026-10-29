@@ -21,7 +21,7 @@
 .description :global(.CodeMirror) {
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
-.description :global(.CodeMirror-focused){
+.description :global(.CodeMirror-focused) {
   border: 1px solid rgba(0, 0, 0, 0.4);
 }
 

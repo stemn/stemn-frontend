@@ -6,18 +6,18 @@ import { groupRevisions } from 'stemn-shared/misc/Timeline/Timeline.utils.js'
 import pluralise from 'stemn-shared/utils/strings/pluralise'
 
 import TogglerExpand from 'stemn-shared/misc/Toggler/TogglerExpand/TogglerExpand.jsx'
-import UserAvatar    from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
+import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import Link from 'stemn-shared/misc/Router/Link'
 import styles from './SidebarTimelineRow.module.css'
 
 export default class SidebarTimelineRow extends React.Component {
   state = {
     isOpen: false,
-  };
+  }
 
   toggle = (toState) => {
     this.setState({ isOpen: toState === null ? !this.state.isOpen : toState })
-  };
+  }
 
   render() {
     const { item } = this.props
@@ -33,13 +33,13 @@ export default class SidebarTimelineRow extends React.Component {
 
       const getChildRows = () => {
         if (isOpen) {
-          return groupedRevisions.map(file => (
+          return groupedRevisions.map((file) => (
             <Link
               name="commitRoute"
-              params={ routeParams }
-              activeClassName={ styles.active }
-              key={ file._id }
-              className={ cn(styles.timelineRow, styles.inner, 'layout-row') }
+              params={routeParams}
+              activeClassName={styles.active}
+              key={file._id}
+              className={cn(styles.timelineRow, styles.inner, 'layout-row')}
             >
               <div className="flex text-ellipsis">{file.data.path}</div>
               <div>{pluralise(file.revisions.length, 'revision')}</div>
@@ -52,27 +52,29 @@ export default class SidebarTimelineRow extends React.Component {
         <div>
           <Link
             name="commitRoute"
-            params={ routeParams }
-            activeClassName={ styles.active }
-            className={ cn('layout-row', 'layout-align-start-center', styles.timelineRow) }
+            params={routeParams}
+            activeClassName={styles.active}
+            className={cn('layout-row', 'layout-align-start-center', styles.timelineRow)}
           >
-            <div className={ `${styles.inner} flex layout-row layout-align-start-center` }>
-              <UserAvatar picture={ item.user.picture } name={ item.user.name } size="40" />
-              <div className={ `${styles.text} flex text-ellipsis` }>
+            <div className={`${styles.inner} flex layout-row layout-align-start-center`}>
+              <UserAvatar picture={item.user.picture} name={item.user.name} size="40" />
+              <div className={`${styles.text} flex text-ellipsis`}>
                 <b>{item.data.name}</b>
-                <div style={ { marginTop: '5px' } }>{timeFromNow} by {item.user.name}</div>
+                <div style={{ marginTop: '5px' }}>
+                  {timeFromNow} by {item.user.name}
+                </div>
               </div>
             </div>
-            <TogglerExpand isActive={ isOpen } onClick={ () => this.toggle(null) }>
+            <TogglerExpand isActive={isOpen} onClick={() => this.toggle(null)}>
               {groupedRevisions.length}
             </TogglerExpand>
           </Link>
           {getChildRows()}
         </div>
       )
-    } 
+    }
     return null
-    
+
     //    else {
     //      return (
     //        <div className={cn('layout-row', 'layout-align-start-center', styles.timelineRow, {[styles.active]: this.props.isActive})}>

@@ -14,9 +14,9 @@ import Link from 'stemn-shared/misc/Router/Link'
 const getImageUrl = (imageName) => {
   const splitName = imageName.split('/')
   if (splitName.length === 1) {
-    return `https://hub.docker.com/_/${imageName}/` 
+    return `https://hub.docker.com/_/${imageName}/`
   } else if (splitName.length === 2) {
-    return `https://hub.docker.com/r/${imageName}/`                   
+    return `https://hub.docker.com/r/${imageName}/`
   }
   return imageName
 }
@@ -28,7 +28,7 @@ export default class ProjectPipelineStep extends Component {
     this.refreshInterval = setInterval(() => this.forceUpdate(), 1000)
   }
   componentWillUnmount() {
-    clearInterval(this.refreshInterval)    
+    clearInterval(this.refreshInterval)
   }
   renderLoaded() {
     const { pipeline, step, stepId, projectId, project } = this.props
@@ -41,51 +41,79 @@ export default class ProjectPipelineStep extends Component {
       <div>
         <SubSubHeader>
           <Breadcrumbs>
-            <Crumb name="projectPipelinesRoute" params={ { projectId } } text="Pipelines" />
-            <Crumb name="projectPipelineRoute" params={ { projectId, pipelineId: pipeline.data._id } } text={ pipeline.data.name } />
-            <Crumb text={ step.data.name } />
+            <Crumb name="projectPipelinesRoute" params={{ projectId }} text="Pipelines" />
+            <Crumb
+              name="projectPipelineRoute"
+              params={{ projectId, pipelineId: pipeline.data._id }}
+              text={pipeline.data.name}
+            />
+            <Crumb text={step.data.name} />
           </Breadcrumbs>
           <br />
-          <h2 className={ classes.title }>
-            <span>{ step.data.name }</span>
-            <span className={ classes.number }>&nbsp;#S{ step.data.stepNumber }</span>
+          <h2 className={classes.title}>
+            <span>{step.data.name}</span>
+            <span className={classes.number}>&nbsp;#S{step.data.stepNumber}</span>
           </h2>
-          <ProjectPipelineMeta pipeline={ pipeline } project={ project } />
+          <ProjectPipelineMeta pipeline={pipeline} project={project} />
         </SubSubHeader>
         <Container>
-          <BannerBar style={ { margin: '20px 0' } }>
+          <BannerBar style={{ margin: '20px 0' }}>
             <div className="layout-gt-xs-row layout-xs-column">
               <div className="flex">
-                <SimpleTable >
-                  <tr><td>Status:</td><td style={ { textTransform: 'capitalize' } }>{ step.data.status }</td></tr>
-                  { step.data.start && <tr><td>Start:</td><td>{ moment(step.data.start).fromNow() }</td></tr> }
-                  { step.data.start && <tr><td>Duration:</td><td>{ diffTimes(step.data.start, step.data.end || new Date())}</td></tr> }
+                <SimpleTable>
+                  <tr>
+                    <td>Status:</td>
+                    <td style={{ textTransform: 'capitalize' }}>{step.data.status}</td>
+                  </tr>
+                  {step.data.start && (
+                    <tr>
+                      <td>Start:</td>
+                      <td>{moment(step.data.start).fromNow()}</td>
+                    </tr>
+                  )}
+                  {step.data.start && (
+                    <tr>
+                      <td>Duration:</td>
+                      <td>{diffTimes(step.data.start, step.data.end || new Date())}</td>
+                    </tr>
+                  )}
                   <tr>
                     <td>Pipeline:</td>
                     <td>
-                      <Link name="projectPipelineRoute" params={ { projectId, pipelineId: pipeline.data._id } }>#P{ pipeline.data.pipelineNumber }</Link>
+                      <Link name="projectPipelineRoute" params={{ projectId, pipelineId: pipeline.data._id }}>
+                        #P{pipeline.data.pipelineNumber}
+                      </Link>
                     </td>
                   </tr>
                 </SimpleTable>
               </div>
               <div className="flex hide-xs">
                 <SimpleTable>
-                  <tr>  
+                  <tr>
                     <td>Image:</td>
-                    <td><a href={ getImageUrl(step.data.image) } target="blank">{ step.data.image }</a></td>
+                    <td>
+                      <a href={getImageUrl(step.data.image)} target="blank">
+                        {step.data.image}
+                      </a>
+                    </td>
                   </tr>
-                  { step.data.command && <tr>
-                    <td>Command:</td>
-                    <td>{ Array.isArray(step.data.command) 
-                      ? step.data.command.map(command => <code className={ classes.code }>{command}</code>) 
-                      : <code className={ classes.code }>{step.data.command}</code>
-                    }</td>
-                  </tr> }
+                  {step.data.command && (
+                    <tr>
+                      <td>Command:</td>
+                      <td>
+                        {Array.isArray(step.data.command) ? (
+                          step.data.command.map((command) => <code className={classes.code}>{command}</code>)
+                        ) : (
+                          <code className={classes.code}>{step.data.command}</code>
+                        )}
+                      </td>
+                    </tr>
+                  )}
                 </SimpleTable>
               </div>
             </div>
           </BannerBar>
-          <Terminal pipelineId={ pipeline.data._id } stepId={ stepId } /> 
+          <Terminal pipelineId={pipeline.data._id} stepId={stepId} />
         </Container>
       </div>
     )
@@ -93,12 +121,6 @@ export default class ProjectPipelineStep extends Component {
   render() {
     const { pipeline } = this.props
 
-    return (
-      <div className={ classes.content }>
-        { pipeline && pipeline.data 
-          ? this.renderLoaded()
-          : null }
-      </div>
-    )
+    return <div className={classes.content}>{pipeline && pipeline.data ? this.renderLoaded() : null}</div>
   }
 }

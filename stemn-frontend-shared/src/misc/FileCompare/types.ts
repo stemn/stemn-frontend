@@ -1,6 +1,1 @@
-export type IFileCompareMode =
-  'sideBySide' |
-  'aboveAndBelow' |
-  'onion' |
-  'slider' |
-  'single'
+export type IFileCompareMode = 'sideBySide' | 'aboveAndBelow' | 'onion' | 'slider' | 'single'

@@ -16,9 +16,7 @@ export default class Flow extends Component {
           <h1>Understand the Stemn Workflow</h1>
           <h3>A unified workflow for modern engineers</h3>
         </HeroBanner>
-        <Container>
-          Some content
-        </Container>
+        <Container>Some content</Container>
       </LandingLayout>
     )
   }

@@ -50,15 +50,7 @@ class Component extends React.Component {
     // `inputRef` (react-textarea-autosize < 8) is now `ref`; `rows` -> `minRows`
     const { model, dispatch, onChange, value: valueExternal, rows, inputRef, ...otherProps } = this.props
     const { value } = this.state
-    return (
-      <Textarea
-        ref={ this.getTextareaRef }
-        minRows={ rows }
-        onChange={ this.onChange }
-        value={ value }
-        { ...otherProps }
-      />
-    )
+    return <Textarea ref={this.getTextareaRef} minRows={rows} onChange={this.onChange} value={value} {...otherProps} />
   }
 }
 

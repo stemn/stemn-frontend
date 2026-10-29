@@ -16,12 +16,8 @@ export const withRouteProps = <P extends object>(Component: React.ComponentType<
     const outlet = useOutlet()
     const legacyLocation = useMemo(() => toLegacyLocation(location, navigationType), [location, navigationType])
     return (
-      <Component
-        { ...props }
-        location={ legacyLocation }
-        params={ params }
-      >
-        { outlet }
+      <Component {...props} location={legacyLocation} params={params}>
+        {outlet}
       </Component>
     )
   }

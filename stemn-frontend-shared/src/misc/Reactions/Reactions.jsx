@@ -12,38 +12,32 @@ export default class Reactions extends React.Component {
     const groupedReactions = reactions && reactions.length > 0 ? groupAndOrderReactions(reactions, options) : []
     return (
       <span>
-        { groupedReactions.map(reaction => (
-          <Popover
-            key={ reaction.type }
-            preferPlace="below"
-            trigger="hoverDelay"
-          >
-            <a className={ classes.icon } onClick={ () => submitFn(reaction.type) }>
-              { reaction.icon }
-              <span>{ reaction.list.length }</span>
+        {groupedReactions.map((reaction) => (
+          <Popover key={reaction.type} preferPlace="below" trigger="hoverDelay">
+            <a className={classes.icon} onClick={() => submitFn(reaction.type)}>
+              {reaction.icon}
+              <span>{reaction.list.length}</span>
             </a>
             <div className="PopoverMenu">
-              { reaction.list.map(userReaction => (
+              {reaction.list.map((userReaction) => (
                 <Link
                   name="userRoute"
-                  params={ { userId: userReaction.owner._id } }
-                  className={ cn(classes.listPopoverRow) }
-                  key={ userReaction.owner._id }
+                  params={{ userId: userReaction.owner._id }}
+                  className={cn(classes.listPopoverRow)}
+                  key={userReaction.owner._id}
                 >
                   <UserAvatar
-                    name={ userReaction.owner.name }
-                    picture={ userReaction.owner.picture }
-                    size={ 20 }
+                    name={userReaction.owner.name}
+                    picture={userReaction.owner.picture}
+                    size={20}
                     shape="square"
                   />
-                  <div style={ { marginLeft: '10px' } }>
-                    { userReaction.owner.name }
-                  </div>
+                  <div style={{ marginLeft: '10px' }}>{userReaction.owner.name}</div>
                 </Link>
               ))}
             </div>
           </Popover>
-        )) }
+        ))}
       </span>
     )
   }

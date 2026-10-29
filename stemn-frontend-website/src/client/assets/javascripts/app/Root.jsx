@@ -9,10 +9,10 @@ import { IconContext } from 'react-icons'
 const iconContext = { style: { verticalAlign: 'middle' } }
 
 const Root = ({ store, router }) => (
-  <Provider store={ store }>
+  <Provider store={store}>
     <HelmetProvider>
-      <IconContext.Provider value={ iconContext }>
-        <RouterProvider router={ router } />
+      <IconContext.Provider value={iconContext}>
+        <RouterProvider router={router} />
       </IconContext.Provider>
     </HelmetProvider>
   </Provider>

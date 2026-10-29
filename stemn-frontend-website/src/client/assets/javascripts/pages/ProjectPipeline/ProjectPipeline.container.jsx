@@ -25,17 +25,17 @@ const dispatchToProps = {
   replace,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'pipelineId',
-  onChange: ({ getPipeline, pipelineId, replace }) => getPipeline({ pipelineId }),
-  // .catch(() => replace(notFound()))
-}]
+const fetchConfigs = [
+  {
+    hasChanged: 'pipelineId',
+    onChange: ({ getPipeline, pipelineId, replace }) => getPipeline({ pipelineId }),
+    // .catch(() => replace(notFound()))
+  },
+]
 
 class ProjectPipelineContainer extends Component {
   render() {
-    return (
-      <ProjectPipeline { ...this.props } />
-    )
+    return <ProjectPipeline {...this.props} />
   }
 }
 

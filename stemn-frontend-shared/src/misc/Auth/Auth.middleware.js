@@ -15,16 +15,18 @@ import { get } from 'lodash'
 import i from 'icepick'
 import { push } from 'stemn-shared/routing'
 
-export default store => next => (action) => {
+export default (store) => (next) => (action) => {
   if (get(action, ['auth'])) {
     const isAuthed = store.getState().auth.user._id && store.getState().auth.authToken
     if (isAuthed) {
-      const newAction = i.assocIn(action, ['auth'], undefined)    // Create the new action
-      next(newAction)                                             // Dispatch the action
+      const newAction = i.assocIn(action, ['auth'], undefined) // Create the new action
+      next(newAction) // Dispatch the action
     } else {
-      store.dispatch(push({
-        pathname: 'login',
-      }))
+      store.dispatch(
+        push({
+          pathname: 'login',
+        }),
+      )
     }
   } else {
     return next(action)

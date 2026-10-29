@@ -1,6 +1,6 @@
 @value primary-bg, primary-bg-hover, primary as themePrimary, border1, secondary from "theme";
 
-.button{
+.button {
   display: block;
   width: 100%;
   background: none;
@@ -15,13 +15,13 @@
   text-overflow: ellipsis;
   border-bottom: 1px solid border1;
 }
-.button:last-child{
+.button:last-child {
   border-bottom: none;
 }
-.button:hover{
+.button:hover {
   background: rgba(0, 0, 0, 0.05);
 }
-.button:global(.active):after{
+.button:global(.active):after {
   content: '';
   position: absolute;
   bottom: 0px;
@@ -35,10 +35,10 @@
   color: themePrimary;
 }
 
-.button:global(.primary){
+.button:global(.primary) {
   background: primary-bg;
   color: white;
 }
-.button:global(.primary):hover{
+.button:global(.primary):hover {
   background: primary-bg-hover;
 }

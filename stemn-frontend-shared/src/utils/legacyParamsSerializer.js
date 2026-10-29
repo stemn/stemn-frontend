@@ -5,13 +5,14 @@
  *  - Dates are ISO strings, null/undefined values are dropped
  * axios 1.x would instead send `criteria[private]=all`, which the API rejects.
  */
-const encode = val => encodeURIComponent(val)
-  .replace(/%3A/gi, ':')
-  .replace(/%24/g, '$')
-  .replace(/%2C/gi, ',')
-  .replace(/%20/g, '+')
-  .replace(/%5B/gi, '[')
-  .replace(/%5D/gi, ']')
+const encode = (val) =>
+  encodeURIComponent(val)
+    .replace(/%3A/gi, ':')
+    .replace(/%24/g, '$')
+    .replace(/%2C/gi, ',')
+    .replace(/%20/g, '+')
+    .replace(/%5B/gi, '[')
+    .replace(/%5D/gi, ']')
 
 export const legacyParamsSerializer = (params) => {
   if (!params) return ''

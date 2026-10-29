@@ -5,7 +5,6 @@ const stateToProps = ({ desktopReleases }) => ({
   latest: desktopReleases.latest,
 })
 
-const dispatchToProps = {
-}
+const dispatchToProps = {}
 
 export default connect(stateToProps, dispatchToProps)(DownloadButton)

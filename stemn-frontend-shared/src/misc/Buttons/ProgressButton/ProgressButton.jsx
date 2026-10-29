@@ -4,14 +4,15 @@ import React from 'react'
 import cn from 'classnames'
 import classes from './ProgressButton.module.css'
 
-
 export class AnimateSvg extends React.Component {
-  svgEl = '';
+  svgEl = ''
 
   render() {
     const { children, draw } = this.props
     const newProps = {
-      ref: (el) => { this.svgRef = el },
+      ref: (el) => {
+        this.svgRef = el
+      },
     }
     if (!this.svgEl && this.svgRef) {
       this.svgEl = new SVGEl(this.svgRef)
@@ -29,7 +30,7 @@ export default class Progressbutton extends React.Component {
     disabled: false,
     drawLoading: 0,
     drawSuccess: 0,
-  };
+  }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     const prevProps = this.props
@@ -44,17 +45,17 @@ export default class Progressbutton extends React.Component {
     }
   }
 
-  partialLoadTimeout = null;
-  completeTimeout = null;
-  completeIconTimeout = null;
-  resetTimeout = null;
+  partialLoadTimeout = null
+  completeTimeout = null
+  completeIconTimeout = null
+  resetTimeout = null
 
   clearTimeouts = () => {
     clearTimeout(this.partialLoadTimeout)
     clearTimeout(this.completeTimeout)
     clearTimeout(this.completeIconTimeout)
     clearTimeout(this.resetTimeout)
-  };
+  }
 
   componentWillUnmount() {
     this.clearTimeouts()
@@ -68,8 +69,10 @@ export default class Progressbutton extends React.Component {
       drawLoading: 0,
       drawComplete: 0,
     })
-    this.partialLoadTimeout = setTimeout(() => { this.setState({ drawLoading: 0.7 }) }, 100)
-  };
+    this.partialLoadTimeout = setTimeout(() => {
+      this.setState({ drawLoading: 0.7 })
+    }, 100)
+  }
 
   loadingComplete = () => {
     this.clearTimeouts()
@@ -84,25 +87,25 @@ export default class Progressbutton extends React.Component {
         this.setState({ status: '', disabled: false, drawLoading: 0 })
       }, 2000)
     }, 700)
-  };
+  }
 
   render() {
     const { children, onClick, loading, className, href, error, ...otherProps } = this.props
     const { status, disabled, drawLoading, drawComplete } = this.state
 
     const Progress = (
-      <svg className={ classes.progressCircle } width="40" height="40" viewBox="0 0 40 40">
+      <svg className={classes.progressCircle} width="40" height="40" viewBox="0 0 40 40">
         <path d="m1.5,20c0,-10.22099 8.27901,-18.5 18.5,-18.5c10.22099,0 18.5,8.27901 18.5,18.5c0,10.22099 -8.27901,18.5 -18.5,18.5c-10.22099,0 -18.5,-8.27901 -18.5,-18.5z" />
       </svg>
     )
     const Checkmark = (
-      <svg className={ classes.checkmark } width="40" height="40" viewBox="0 0 70 70">
+      <svg className={classes.checkmark} width="40" height="40" viewBox="0 0 70 70">
         <path d="m31.5,46.5l15.3,-23.2" />
         <path d="m31.5,46.5l-8.5,-7.1" />
       </svg>
     )
     const Cross = (
-      <svg className={ classes.cross } width="40" height="40" viewBox="0 0 70 70">
+      <svg className={classes.cross} width="40" height="40" viewBox="0 0 70 70">
         <path d="m35,35l-9.3,-9.3" />
         <path d="m35,35l9.3,9.3" />
         <path d="m35,35l-9.3,9.3" />
@@ -112,33 +115,48 @@ export default class Progressbutton extends React.Component {
 
     const getIcon = () => {
       if (status === 'success') {
-        return <AnimateSvg draw={ drawComplete }>{ Checkmark }</AnimateSvg>
+        return <AnimateSvg draw={drawComplete}>{Checkmark}</AnimateSvg>
       } else if (status === 'error') {
-        return <AnimateSvg draw={ drawComplete }>{ Cross }</AnimateSvg>
+        return <AnimateSvg draw={drawComplete}>{Cross}</AnimateSvg>
       }
-      
+
       return null
     }
 
     return (
       <div
-        className={ cn(
-          classes.progressButton, className,
+        className={cn(
+          classes.progressButton,
+          className,
           { [classes.loading]: status === 'loading' },
           { [classes.error]: status === 'error' },
           { [classes.success]: status === 'success' },
-        ) }
+        )}
       >
-        { href
-          ? <a href={ href }><button { ...otherProps }><span>{children}</span></button></a>
-          : <button onClick={ () => { if (!disabled && onClick) { onClick() } } } { ...otherProps }><span>{children}</span></button>}
-        <AnimateSvg draw={ drawLoading }>{Progress}</AnimateSvg>
-        { getIcon() }
+        {href ? (
+          <a href={href}>
+            <button {...otherProps}>
+              <span>{children}</span>
+            </button>
+          </a>
+        ) : (
+          <button
+            onClick={() => {
+              if (!disabled && onClick) {
+                onClick()
+              }
+            }}
+            {...otherProps}
+          >
+            <span>{children}</span>
+          </button>
+        )}
+        <AnimateSvg draw={drawLoading}>{Progress}</AnimateSvg>
+        {getIcon()}
       </div>
     )
   }
 }
-
 
 // //////////////////////////////////////////////////////////
 

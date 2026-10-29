@@ -8,8 +8,10 @@ export default (actionToRun, noDispatch) => (dispatch, getState) => {
       dispatch(actionToRun(dispatch, getState))
     }
   } else {
-    dispatch(push({
-      pathname: '/login',
-    }))
+    dispatch(
+      push({
+        pathname: '/login',
+      }),
+    )
   }
 }

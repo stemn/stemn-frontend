@@ -1,14 +1,14 @@
 @value border1, bg1 from "theme";
 
-.container{
+.container {
   padding: 20px;
   background: rgba(0, 0, 0, 0.01);
 }
-.files{
+.files {
   border: 1px solid border1;
   background: white;
 }
-.readme{
+.readme {
   border: 1px solid border1;
   padding: 15px 20px;
   min-height: 200px;

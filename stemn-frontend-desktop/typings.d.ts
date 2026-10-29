@@ -9,15 +9,15 @@ declare module '*?asset' {
 }
 
 interface GLOBAL_ENV {
-  API_SERVER: string,
-  APP_TYPE: 'web' | 'desktop',
-  APP_THREAD?: 'electron' | 'renderer',
-  APP_VERSION?: string,
-  NODE_ENV: 'development' | 'production',
-  SENTRY_DSN?: string,
-  STEMN_ENV?: string,
-  WEBSITE_URL: string,
-  WEBSOCKET_SERVER: string,
+  API_SERVER: string
+  APP_TYPE: 'web' | 'desktop'
+  APP_THREAD?: 'electron' | 'renderer'
+  APP_VERSION?: string
+  NODE_ENV: 'development' | 'production'
+  SENTRY_DSN?: string
+  STEMN_ENV?: string
+  WEBSITE_URL: string
+  WEBSOCKET_SERVER: string
 }
 
 // Replaced at build time (electron.vite.config.ts `define`)

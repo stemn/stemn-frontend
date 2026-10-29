@@ -12,15 +12,17 @@ const dispatchToProps = {
   getUser,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'userId',
-  onChange: (props) => {
-    props.getUser({
-      userId: props.userId,
-      size: 'md',
-    })
+const fetchConfigs = [
+  {
+    hasChanged: 'userId',
+    onChange: (props) => {
+      props.getUser({
+        userId: props.userId,
+        size: 'md',
+      })
+    },
   },
-}]
+]
 
 class UserRowContainer extends Component {
   static defaultProps = {
@@ -28,11 +30,7 @@ class UserRowContainer extends Component {
   }
   render() {
     const { user, ...otherProps } = this.props
-    return (<EntityRow
-      data={ user.data }
-      loading={ user.loading }
-      { ...otherProps }
-    />)
+    return <EntityRow data={user.data} loading={user.loading} {...otherProps} />
   }
 }
 

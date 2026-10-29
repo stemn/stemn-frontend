@@ -11,7 +11,7 @@ const stateToProps = ({ projects, pipelines, stringFilter }, { params, location 
   const page = location.query.page || 1
   const projectId = params.stub
   const size = 20
-  
+
   // Setup the filter
   const filterModel = {
     type: {
@@ -24,12 +24,12 @@ const stateToProps = ({ projects, pipelines, stringFilter }, { params, location 
       type: 'main',
     },
   }
-  
+
   const filterDefaults = {}
   const filterCacheKey = `pipeline-${projectId}`
   const filter = stringFilter[filterCacheKey] || getFilter(filterDefaults, filterModel, location.query)
   const filterIsDefault = isEqual(filterDefaults, filter.object)
-  
+
   const cacheKey = `${projectId}-${filter.object.type}-${page}`
   const queryKey = `${projectId}-${page}-${JSON.stringify(filter.object)}`
 
@@ -54,28 +54,28 @@ const dispatchToProps = {
   setFilter,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'queryKey',
-  onChange: (props) => {
-    props.getPipelines({
-      projectId: props.projectId,
-      cacheKey: props.cacheKey,
-      criteria: {
-        owner: props.filter.object.user,
-        name: props.filter.object.query && `/${props.filter.object.query}/i`,
-        status: props.filter.object.type,
-      },
-      page: props.page,
-      size: props.size,
-    })
+const fetchConfigs = [
+  {
+    hasChanged: 'queryKey',
+    onChange: (props) => {
+      props.getPipelines({
+        projectId: props.projectId,
+        cacheKey: props.cacheKey,
+        criteria: {
+          owner: props.filter.object.user,
+          name: props.filter.object.query && `/${props.filter.object.query}/i`,
+          status: props.filter.object.type,
+        },
+        page: props.page,
+        size: props.size,
+      })
+    },
   },
-}]
+]
 
 class ProjectPipelinesContainer extends Component {
   render() {
-    return (
-      <ProjectPipelines { ...this.props } />
-    )
+    return <ProjectPipelines {...this.props} />
   }
 }
 

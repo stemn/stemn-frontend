@@ -37,8 +37,10 @@ export const pipelineConfigFixture: IPipelineConfig = {
       },
     },
   },
-  links: [{
-    from: 'some_step.ports.out',
-    to: 'some_other_step.ports.in',
-  }],
+  links: [
+    {
+      from: 'some_step.ports.out',
+      to: 'some_other_step.ports.in',
+    },
+  ],
 }

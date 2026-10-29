@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 
 const Item = ({ setFilter, objKey, value, filterObject, children }) => (
   <a
-    onClick={ () => setFilter({ [objKey]: value }) }
-    className={ filterObject && filterObject[objKey] === value ? 'active' : '' }
+    onClick={() => setFilter({ [objKey]: value })}
+    className={filterObject && filterObject[objKey] === value ? 'active' : ''}
   >
-    { children }
+    {children}
   </a>
 )
 
@@ -33,45 +33,20 @@ export default class ThreadFilterMenu extends Component {
     const { auth, filter } = this.props
     return (
       <div className="PopoverMenu">
-        <Item
-          setFilter={ this.setFilter }
-          filterObject={ filter.object }
-          objKey="status"
-          value={ 'open' }
-        >
+        <Item setFilter={this.setFilter} filterObject={filter.object} objKey="status" value={'open'}>
           Status: Open
         </Item>
-        <Item
-          setFilter={ this.setFilter }
-          filterObject={ filter.object }
-          objKey="status"
-          value={ 'closed' }
-        >
+        <Item setFilter={this.setFilter} filterObject={filter.object} objKey="status" value={'closed'}>
           Status: Closed
         </Item>
-        <Item
-          setFilter={ this.setFilter }
-          filterObject={ filter.object }
-          objKey="status"
-          value={ undefined }
-        >
+        <Item setFilter={this.setFilter} filterObject={filter.object} objKey="status" value={undefined}>
           Status: All
         </Item>
         <div className="divider" />
-        <Item
-          setFilter={ this.setFilter }
-          filterObject={ filter.object }
-          objKey="user"
-          value={ auth.user._id }
-        >
+        <Item setFilter={this.setFilter} filterObject={filter.object} objKey="user" value={auth.user._id}>
           My Threads
         </Item>
-        <Item
-          setFilter={ this.setFilter }
-          filterObject={ filter.object }
-          objKey="user"
-          value={ undefined }
-        >
+        <Item setFilter={this.setFilter} filterObject={filter.object} objKey="user" value={undefined}>
           All Threads
         </Item>
       </div>

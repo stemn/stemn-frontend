@@ -26,24 +26,11 @@ class DownloadFile extends Component {
     }
   }
   render() {
-    const {
-      children,
-      title,
-      progress,
-    } = this.props
+    const { children, title, progress } = this.props
     return (
-      <a
-        ref={ this.getAnchorRef }
-        className="link-primary"
-        onClick={ this.saveFile }
-        title={ title }
-      >
-        { children }
-        <LoadingOverlay
-          show={ progress && progress > 0 && progress < 100 }
-          linear
-          hideBg
-        />
+      <a ref={this.getAnchorRef} className="link-primary" onClick={this.saveFile} title={title}>
+        {children}
+        <LoadingOverlay show={progress && progress > 0 && progress < 100} linear hideBg />
       </a>
     )
   }

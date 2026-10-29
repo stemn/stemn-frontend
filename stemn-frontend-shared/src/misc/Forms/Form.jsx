@@ -12,9 +12,7 @@ import { connect } from 'react-redux'
 import { storeLoad } from 'stemn-shared/misc/Store/Store.actions'
 import { get } from 'lodash'
 
-
-const stateToProps = () => ({
-})
+const stateToProps = () => ({})
 
 const dispatchToProps = {
   load: storeLoad,
@@ -26,16 +24,12 @@ class Form extends Component {
     model: PropTypes.string.isRequired,
     value: PropTypes.any.isRequired,
   }
-  UNSAFE_componentWillMount() { 
+  UNSAFE_componentWillMount() {
     this.props.load(this.props.model, this.props.value)
   }
   render() {
     const { children } = this.props
-    return (
-      <div>
-        { children }
-      </div>
-    )
+    return <div>{children}</div>
   }
 }
 

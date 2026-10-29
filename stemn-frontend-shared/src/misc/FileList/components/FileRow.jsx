@@ -15,27 +15,22 @@ const ClickFile = (props) => {
   if (link) {
     return (
       <Link
-        className={ className }
-        onClick={ onClick }
-        onDoubleClick={ onDoubleClick }
-        name={ getFileRouteName(file) }
-        params={ getFileRouteParams(file) }
+        className={className}
+        onClick={onClick}
+        onDoubleClick={onDoubleClick}
+        name={getFileRouteName(file)}
+        params={getFileRouteParams(file)}
       >
-        { children }
+        {children}
       </Link>
     )
-  } 
+  }
   return (
-    <a
-      className={ className }
-      onClick={ onClick }
-      onDoubleClick={ onDoubleClick }
-    >
-      { children }
+    <a className={className} onClick={onClick} onDoubleClick={onDoubleClick}>
+      {children}
     </a>
   )
 }
-
 
 export default class FileRow extends Component {
   static propTypes = {
@@ -65,48 +60,39 @@ export default class FileRow extends Component {
     const timeFromNow = moment(file.modified).fromNow()
 
     return (
-      <div className={ cn(classes.row, 'layout-row layout-align-start-center', { [classes.active]: isActive }) } >
+      <div className={cn(classes.row, 'layout-row layout-align-start-center', { [classes.active]: isActive })}>
         <ClickFile
-          className={ classes.clickOverlay }
-          onClick={ this.singleClick }
-          onDoubleClick={ this.doubleClick }
-          file={ file }
-          link={ link }
+          className={classes.clickOverlay}
+          onClick={this.singleClick}
+          onDoubleClick={this.doubleClick}
+          file={file}
+          link={link}
         />
-        <FileIcon fileType={ file.extension } type={ file.type } />
+        <FileIcon fileType={file.extension} type={file.type} />
         <div className="text-ellipsis flex">
-          <ClickFile
-            onClick={ this.singleClick }
-            onDoubleClick={ this.doubleClick }
-            file={ file }
-            link={ link }
-          >
-            <Highlight
-              className={ classes.name }
-              text={ showPath ? (file.path || file.name) : file.name }
-              query={ query }
-            />
+          <ClickFile onClick={this.singleClick} onDoubleClick={this.doubleClick} file={file} link={link}>
+            <Highlight className={classes.name} text={showPath ? file.path || file.name : file.name} query={query} />
           </ClickFile>
         </div>
-        { file.commit && file.commit.name && file.commit._id
-          ? <div className="flex layout-row">
+        {file.commit && file.commit.name && file.commit._id ? (
+          <div className="flex layout-row">
             <Link
               name="commitRoute"
-              params={ { projectId: file.project._id, commitId: file.commit._id } }
-              className={ cn(classes.commit, classes.clickable, 'link-primary text-ellipsis') }
+              params={{ projectId: file.project._id, commitId: file.commit._id }}
+              className={cn(classes.commit, classes.clickable, 'link-primary text-ellipsis')}
             >
-              { file.commit.name }
+              {file.commit.name}
             </Link>
           </div>
-          : null }
-        <div className={ cn(classes.label, 'hide-xs') }>
-          { file.parts && <Label title="Virtual Assembly">Virtual Assembly</Label> }
-          { file.revisionNumber > 1 &&
-            <Label title={ `${file.revisionNumber} revisions` }>{file.revisionNumber} Revisions</Label>
-          }
+        ) : null}
+        <div className={cn(classes.label, 'hide-xs')}>
+          {file.parts && <Label title="Virtual Assembly">Virtual Assembly</Label>}
+          {file.revisionNumber > 1 && (
+            <Label title={`${file.revisionNumber} revisions`}>{file.revisionNumber} Revisions</Label>
+          )}
         </div>
-        <div className={ cn(classes.date, 'hide-xs') }>{file.modified ? timeFromNow : ''}</div>
-        <div className={ classes.size }>{bytes(file.size)}</div>
+        <div className={cn(classes.date, 'hide-xs')}>{file.modified ? timeFromNow : ''}</div>
+        <div className={classes.size}>{bytes(file.size)}</div>
       </div>
     )
   }

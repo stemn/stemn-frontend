@@ -118,7 +118,7 @@ export const parseFilterString = (filterString, filterModel) => {
   const allItems = filterString.split(' ')
 
   // The ones that contain : are filter items
-  const filterItems = allItems.filter(item => item.includes(':'))
+  const filterItems = allItems.filter((item) => item.includes(':'))
 
   // Split the items and create an object
   const filterItemsObject = filterItems.reduce((accum, item) => {
@@ -128,8 +128,8 @@ export const parseFilterString = (filterString, filterModel) => {
   }, {})
 
   // The other items are part of the 'main' filter item
-  const otherItems = allItems.filter(item => !item.includes(':'))
-  const mainFilterItemKey = findKey(filterModel, item => item.type === 'main')
+  const otherItems = allItems.filter((item) => !item.includes(':'))
+  const mainFilterItemKey = findKey(filterModel, (item) => item.type === 'main')
   filterItemsObject[mainFilterItemKey] = otherItems.join(' ')
   const filterObject = parseObject(filterItemsObject, filterModel)
   return filterObject
@@ -166,7 +166,7 @@ export const parseFilterStringWithPositions = (filterString, filterModel) => {
     if (validationFn) {
       // If we find a validation function on the filterModel, use it
       return validationFn(item.value)
-    } 
+    }
     // Othwerwise, this is an invalid item
     return false
   })

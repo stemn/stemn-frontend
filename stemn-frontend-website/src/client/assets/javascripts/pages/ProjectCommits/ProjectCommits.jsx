@@ -55,54 +55,39 @@ export default class ProjectCommits extends Component {
     })
   }
   renderLoaded() {
-    const {
-      syncTimeline,
-      location,
-      page,
-      projectId,
-      size,
-      filter,
-      filterIsDefault,
-      board,
-    } = this.props
+    const { syncTimeline, location, page, projectId, size, filter, filterIsDefault, board } = this.props
 
     const noMoreResults = syncTimeline && syncTimeline.data.length < size
-    const hasResults = syncTimeline && syncTimeline.data  && syncTimeline.data.length > 0
+    const hasResults = syncTimeline && syncTimeline.data && syncTimeline.data.length > 0
     const projectRouteParams = { projectId }
-    
+
     if (hasResults) {
       return (
         <div>
-          <div className={ classes.graphPanel }>
+          <div className={classes.graphPanel}>
             <HistoryGraph
-              entityType={ filter.object.user ? 'user' : 'project' }
-              entityId={ filter.object.user ? filter.object.user : projectId }
-              type={ filter.object.type }
-              parentType={ filter.object.user ? 'project' : undefined }
-              parentId={ filter.object.user ? projectId : undefined }
+              entityType={filter.object.user ? 'user' : 'project'}
+              entityId={filter.object.user ? filter.object.user : projectId}
+              type={filter.object.type}
+              parentType={filter.object.user ? 'project' : undefined}
+              parentId={filter.object.user ? projectId : undefined}
             />
           </div>
           <Panel>
-            <TimelineVertical
-              group
-              items={ syncTimeline.data }
-              type="project"
-              entity={ board }
-            />
+            <TimelineVertical group items={syncTimeline.data} type="project" entity={board} />
           </Panel>
-          <Pagination
-            path={ location.pathname }
-            page={ page }
-            noMoreResults={ noMoreResults }
-          />
+          <Pagination path={location.pathname} page={page} noMoreResults={noMoreResults} />
         </div>
       )
     } else if (filterIsDefault) {
-      return <HistoryEmpty projectRouteParams={ projectRouteParams } />
-    } 
+      return <HistoryEmpty projectRouteParams={projectRouteParams} />
+    }
     return (
       <Panel className="text-title-5">
-          No timeline events found. <a className="link-primary" onClick={ this.clearFilter }>Reset Filter</a>
+        No timeline events found.{' '}
+        <a className="link-primary" onClick={this.clearFilter}>
+          Reset Filter
+        </a>
       </Panel>
     )
   }
@@ -112,84 +97,94 @@ export default class ProjectCommits extends Component {
     const isLoading = !syncTimeline || syncTimeline.loading
     const team = get(project, 'data.team', [])
 
-    const userFilterOptions = team.map(user => ({
+    const userFilterOptions = team.map((user) => ({
       name: user.name,
       value: user._id,
-      onClick: () => { this.changeUserFilter(user._id) },
+      onClick: () => {
+        this.changeUserFilter(user._id)
+      },
     }))
 
     userFilterOptions.push({
       name: 'Any',
       value: undefined,
-      onClick: () => { this.changeUserFilter(undefined) },
+      onClick: () => {
+        this.changeUserFilter(undefined)
+      },
     })
 
-    const typeFilterOptions = [{
-      value: undefined,
-      name: 'All',
-      onClick: () => { this.changeTypeFilter(undefined) },
-    }, {
-      value: 'commits',
-      name: 'Commits',
-      onClick: () => { this.changeTypeFilter('commits') },
-    }, {
-      value: 'revisions',
-      name: 'Revisions',
-      onClick: () => { this.changeTypeFilter('revisions') },
-    }, {
-      value: 'threads',
-      name: 'Thread Created',
-      onClick: () => { this.changeTypeFilter('threads') },
-    }, {
-      value: 'threadEvents',
-      name: 'Thread Events',
-      onClick: () => { this.changeTypeFilter('threadEvents') },
-    }]
+    const typeFilterOptions = [
+      {
+        value: undefined,
+        name: 'All',
+        onClick: () => {
+          this.changeTypeFilter(undefined)
+        },
+      },
+      {
+        value: 'commits',
+        name: 'Commits',
+        onClick: () => {
+          this.changeTypeFilter('commits')
+        },
+      },
+      {
+        value: 'revisions',
+        name: 'Revisions',
+        onClick: () => {
+          this.changeTypeFilter('revisions')
+        },
+      },
+      {
+        value: 'threads',
+        name: 'Thread Created',
+        onClick: () => {
+          this.changeTypeFilter('threads')
+        },
+      },
+      {
+        value: 'threadEvents',
+        name: 'Thread Events',
+        onClick: () => {
+          this.changeTypeFilter('threadEvents')
+        },
+      },
+    ]
 
     return (
-      <div className={ classes.content }>
-        <SubSubHeader className={ classes.subHeader }>
+      <div className={classes.content}>
+        <SubSubHeader className={classes.subHeader}>
           <Row className="layout-xs-column layout-gt-xs-row">
             <Col className="flex-xs flex-sm flex-gt-sm-30 layout-row">
               <SearchInput
-                className={ classes.search }
+                className={classes.search}
                 placeholder="Search History"
-                value={ filter.string }
-                changeAction={ this.changeInput }
+                value={filter.string}
+                changeAction={this.changeInput}
               />
             </Col>
             <div className="flex-xs-0 flex-sm-0 flex-gt-sm" />
             <Col className="layout-row">
               <PopoverDropdown
                 className="flex-xs"
-                value={ get(filter, ['object', 'user']) }
-                options={ userFilterOptions }
-                style={ { marginRight: '15px' } }
+                value={get(filter, ['object', 'user'])}
+                options={userFilterOptions}
+                style={{ marginRight: '15px' }}
               >
                 User:&nbsp;
               </PopoverDropdown>
-              <PopoverDropdown
-                className="flex-xs"
-                value={ filter.object.type }
-                options={ typeFilterOptions }
-              >
+              <PopoverDropdown className="flex-xs" value={filter.object.type} options={typeFilterOptions}>
                 Type:&nbsp;
               </PopoverDropdown>
             </Col>
           </Row>
 
           <div className="layout-row">
-
             <div className="flex" />
-
           </div>
         </SubSubHeader>
-        <div className={ classes.innerContent }>
-          <Container>
-            { isLoaded
-              ? this.renderLoaded()
-              : null }
-          </Container>
+        <div className={classes.innerContent}>
+          <Container>{isLoaded ? this.renderLoaded() : null}</Container>
         </div>
       </div>
     )

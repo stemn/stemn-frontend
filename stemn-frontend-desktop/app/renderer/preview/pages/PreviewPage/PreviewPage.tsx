@@ -19,19 +19,23 @@ import SectionTitle from 'stemn-shared/misc/Titles/SectionTitle/SectionTitle'
 import classes from './PreviewPage.module.scss'
 
 export interface IPreviewPageProps {
-  pushRoute: typeof pushRouteType,
-  showWindow: (name: string) => void,
-  select: any,
-  cacheKey: string,
-  compare: any,
-  changeMode: any,
-  file: any,
-  timeline: any,
+  pushRoute: typeof pushRouteType
+  showWindow: (name: string) => void
+  select: any
+  cacheKey: string
+  compare: any
+  changeMode: any
+  file: any
+  timeline: any
 }
 
 export class PreviewPage extends React.Component<IPreviewPageProps> {
   public clickFileOrFolder = ({ file }) => {
-    const { fileId, revisionId, project: { _id: projectId } } = file
+    const {
+      fileId,
+      revisionId,
+      project: { _id: projectId },
+    } = file
     const { pushRoute, showWindow } = this.props
     if (file.type === 'file') {
       // It is a file - open the file
@@ -53,7 +57,11 @@ export class PreviewPage extends React.Component<IPreviewPageProps> {
     }
   }
   public onSelect = (file) => {
-    const { select, cacheKey, compare: { mode, lastSelected } } = this.props
+    const {
+      select,
+      cacheKey,
+      compare: { mode, lastSelected },
+    } = this.props
     select({ file, mode, lastSelected, cacheKey })
   }
   public changeMode = (mode) => {
@@ -61,10 +69,12 @@ export class PreviewPage extends React.Component<IPreviewPageProps> {
     changeMode({ cacheKey, mode })
   }
   public isSelected = (item) => {
-    const { compare: { selected1, selected2, mode } } = this.props
+    const {
+      compare: { selected1, selected2, mode },
+    } = this.props
     return isSelected({ item, selected1, selected2, mode })
   }
-  public render () {
+  public render() {
     const {
       compare: { mode, selected1, selected2 },
       file,
@@ -78,21 +88,18 @@ export class PreviewPage extends React.Component<IPreviewPageProps> {
     const displayFileHeader = ['sideBySide', 'aboveAndBelow'].includes(mode)
 
     return (
-      <div
-        className='layout-column flex'
-        style={{ overflow: 'hidden', maxHeight: '100vh' }}
-      >
+      <div className="layout-column flex" style={{ overflow: 'hidden', maxHeight: '100vh' }}>
         <Header>
-          { file.data && (
+          {file.data && (
             <FileBreadCrumbs
-              className='text-ellipsis no-drag'
+              className="text-ellipsis no-drag"
               meta={file.data}
               clickFn={this.clickFileOrFolder}
               popup={true}
             />
           )}
-          <div className='flex' />
-          { file.data && (
+          <div className="flex" />
+          {file.data && (
             <FileCompareMenu
               file1={file1}
               file2={file2}
@@ -101,55 +108,57 @@ export class PreviewPage extends React.Component<IPreviewPageProps> {
               changeMode={this.changeMode}
             />
           )}
-          <div className='divider' />
+          <div className="divider" />
         </Header>
-        <div className='layout-row flex rel-box'>
+        <div className="layout-row flex rel-box">
           <div className={cn(classes.preview, 'layout-column flex')}>
-            { file.data && [
-                <FileCompareInner
-                  key='preview'
-                  className='layout-column flex'
-                  file1={file1}
-                  file2={file2}
-                  mode={mode}
-                  header={displayFileHeader}
-                />,
-                <Timeline
-                  key='timeline'
-                  className={classes.timeline}
-                  items={timelineData}
-                  onSelect={this.onSelect}
-                  isSelected={this.isSelected}
-                  preferPlace='above'
-                />,
+            {file.data && [
+              <FileCompareInner
+                key="preview"
+                className="layout-column flex"
+                file1={file1}
+                file2={file2}
+                mode={mode}
+                header={displayFileHeader}
+              />,
+              <Timeline
+                key="timeline"
+                className={classes.timeline}
+                items={timelineData}
+                onSelect={this.onSelect}
+                isSelected={this.isSelected}
+                preferPlace="above"
+              />,
             ]}
           </div>
-          <DragResize
-            side='left'
-            width='450'
-            widthRange={[0, 450]}
-            className='layout-column'
-          >
+          <DragResize side="left" width="450" widthRange={[0, 450]} className="layout-column">
             <aside className={classes.sidebar}>
-              { file.data && (
+              {file.data && (
                 <div>
                   <SectionTitle className={classes.sidebarTitle}>Meta</SectionTitle>
                   <SimpleTable>
-                    <tr><td>Name</td><td>{file.data.name}</td></tr>
-                    <tr><td>Size</td><td>{formatBytes(file.data.size)}</td></tr>
-                    <tr><td>Last modified</td><td>{moment(file.data.modified).fromNow()}</td></tr>
-                    { revisions.length > 0 &&
-                    <tr><td>Revisions</td><td>{revisions.length}</td></tr> }
+                    <tr>
+                      <td>Name</td>
+                      <td>{file.data.name}</td>
+                    </tr>
+                    <tr>
+                      <td>Size</td>
+                      <td>{formatBytes(file.data.size)}</td>
+                    </tr>
+                    <tr>
+                      <td>Last modified</td>
+                      <td>{moment(file.data.modified).fromNow()}</td>
+                    </tr>
+                    {revisions.length > 0 && (
+                      <tr>
+                        <td>Revisions</td>
+                        <td>{revisions.length}</td>
+                      </tr>
+                    )}
                   </SimpleTable>
-                  <AssemblyParts
-                    fileMeta={file}
-                    clickFn={this.clickFileOrFolder}
-                  />
+                  <AssemblyParts fileMeta={file} clickFn={this.clickFileOrFolder} />
                   <SectionTitle className={classes.sidebarTitle}>Timeline</SectionTitle>
-                  <TimelineVertical
-                    items={timelineData}
-                    type='file'
-                  />
+                  <TimelineVertical items={timelineData} type="file" />
                 </div>
               )}
             </aside>

@@ -11,10 +11,7 @@ export default class UserEmailSettings extends Component {
     saveUser: PropTypes.func.isRequired,
   }
   addEmail = () => {
-    const {
-      setPrimaryEmail,
-      auth,
-    } = this.props
+    const { setPrimaryEmail, auth } = this.props
     //    saveUser({
     //      user: {
     //        _id: auth.user._id,
@@ -35,25 +32,21 @@ export default class UserEmailSettings extends Component {
       <div>
         <h3>Set Primary Email</h3>
         <p>Your primary address is where your emails will be sent.</p>
-        <Form model="auth.forms.newEmail" value={ primary }>
-          { !(auth.forms.newEmail === undefined) &&
+        <Form model="auth.forms.newEmail" value={primary}>
+          {!(auth.forms.newEmail === undefined) && (
             <div className="rel-box">
               <Input
                 placeholder="Email account"
                 className="dr-input"
                 model="auth.forms.newEmail"
-                value={ auth.forms.newEmail }
+                value={auth.forms.newEmail}
               />
             </div>
-          }
+          )}
         </Form>
         <br />
         <div className="layout-row layout-align-end">
-          <ProgressButton
-            loading={ auth.emailUpdatePending }
-            className="primary"
-            onClick={ this.addEmail }
-          >
+          <ProgressButton loading={auth.emailUpdatePending} className="primary" onClick={this.addEmail}>
             Update Email
           </ProgressButton>
         </div>

@@ -30,7 +30,7 @@ export default class AutosuggestWrapped extends Component {
     clickResult: PropTypes.func.isRequired,
     clickNoResult: PropTypes.func,
   }
-    
+
   onChange = (event, { newValue }) => {
     if (typeof newValue === 'string') {
       this.props.updateInputValue(newValue)
@@ -49,16 +49,16 @@ export default class AutosuggestWrapped extends Component {
       })
     }
   }
-  
+
   renderSuggestion = (suggestion, { query }) => {
     if (suggestion.noResult) {
       return this.props.renderNoResult ? this.props.renderNoResult(suggestion, { query }) : <div>No Result</div>
-    } 
+    }
     return this.props.renderResult(suggestion, { query })
   }
 
   // This isnt used but is required by the lib
-  getSuggestionValue = () => suggestion => suggestion.name
+  getSuggestionValue = () => (suggestion) => suggestion.name
 
   onSuggestionSelected = (event, { suggestion }) => {
     // If the suggestion is the noResult placeholder...
@@ -66,7 +66,7 @@ export default class AutosuggestWrapped extends Component {
       this.props.clickNoResult(suggestion)
       this.props.clearSuggestions()
       this.props.updateInputValue('')
-    // Else, if it is a normal result
+      // Else, if it is a normal result
     } else {
       this.props.clearSuggestions()
       if (!this.props.setValue) {
@@ -79,42 +79,39 @@ export default class AutosuggestWrapped extends Component {
   }
 
   render() {
-    const {
-      value,
-      suggestions,
-      placeholder,
-      clearSuggestions,
-      isLoading,
-    } = this.props
+    const { value, suggestions, placeholder, clearSuggestions, isLoading } = this.props
 
     const inputProps = {
       placeholder,
       value,
       onChange: this.onChange,
     }
-    
+
     // If withNoResult is true, we add a fake suggestion to the list
     // renderSuggestion should then be used to check for suggestion.noResult
     // and render a different template.
-    const allSuggestions = suggestions && suggestions.length === 0 && !isLoading
-      ? [{
-        noResult: true,
-        query: value,
-      }]
-      : suggestions
+    const allSuggestions =
+      suggestions && suggestions.length === 0 && !isLoading
+        ? [
+            {
+              noResult: true,
+              query: value,
+            },
+          ]
+        : suggestions
 
     return (
-      <div className={ classes.container }>
+      <div className={classes.container}>
         <Autosuggest
-          suggestions={ allSuggestions }
-          onSuggestionsFetchRequested={ this.onSuggestionsFetchRequested }
-          onSuggestionsClearRequested={ clearSuggestions }
-          getSuggestionValue={ this.getSuggestionValue }
-          renderSuggestion={ this.renderSuggestion }
-          onSuggestionSelected={ this.onSuggestionSelected }
-          inputProps={ inputProps }
+          suggestions={allSuggestions}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={clearSuggestions}
+          getSuggestionValue={this.getSuggestionValue}
+          renderSuggestion={this.renderSuggestion}
+          onSuggestionSelected={this.onSuggestionSelected}
+          inputProps={inputProps}
         />
-        { isLoading && <LoadingLinear className={ classes.loadbar } /> }
+        {isLoading && <LoadingLinear className={classes.loadbar} />}
       </div>
     )
   }

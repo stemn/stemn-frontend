@@ -9,7 +9,7 @@ import ProjectNewModalName from 'stemn-shared/misc/Projects/ProjectNewModal'
 
 const stateToProps = ({ auth, notifications }) => ({
   auth,
-  numNotifications: notifications.data.filter(notification => !notification.read).length,
+  numNotifications: notifications.data.filter((notification) => !notification.read).length,
 })
 
 const dispatchToProps = {
@@ -19,9 +19,7 @@ const dispatchToProps = {
 
 class LoginContainer extends Component {
   render() {
-    return (
-      <Header { ...this.props } />
-    )
+    return <Header {...this.props} />
   }
 }
 

@@ -27,23 +27,22 @@ const dispatchToProps = {
   getUserStars,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'pageId',
-  onChange: (props) => {
-    props.getUserStars({
-      userId: props.userId,
-      page: props.page,
-      size: props.size,
-    })
+const fetchConfigs = [
+  {
+    hasChanged: 'pageId',
+    onChange: (props) => {
+      props.getUserStars({
+        userId: props.userId,
+        page: props.page,
+        size: props.size,
+      })
+    },
   },
-}]
-
+]
 
 class UserStarsContainer extends Component {
   render() {
-    return (
-      <UserStars { ...this.props } />
-    )
+    return <UserStars {...this.props} />
   }
 }
 

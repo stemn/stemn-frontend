@@ -8,11 +8,11 @@ export default class LandingLayout extends Component {
   render() {
     const { children, className, ...otherProps } = this.props
     return (
-      <div className="layout-column flex" { ...otherProps }>
+      <div className="layout-column flex" {...otherProps}>
         <LandingHeader />
         <ScrollToTop />
-        <div className="flex" style={ { overflow: 'hidden' } }>
-          { children }
+        <div className="flex" style={{ overflow: 'hidden' }}>
+          {children}
         </div>
         <LandingFooter />
       </div>

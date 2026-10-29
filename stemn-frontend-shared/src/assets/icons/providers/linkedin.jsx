@@ -1,5 +1,5 @@
-import React from 'react';
-import IconBase from 'stemn-shared/misc/Icons/IconBase';
+import React from 'react'
+import IconBase from 'stemn-shared/misc/Icons/IconBase'
 
 const LinkedinIcon = (props) => {
   return (

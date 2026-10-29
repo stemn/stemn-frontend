@@ -176,9 +176,7 @@ export default class PopoverCore extends React.Component {
     this.containerEl.style.left = `${pos.x}px`
 
     let tipCrossPos =
-      Layout.centerOfBoundsFromBounds(zone.flow, 'cross', tb, pos) +
-      scrollSize.cross -
-      this.props.tipSize
+      Layout.centerOfBoundsFromBounds(zone.flow, 'cross', tb, pos) + scrollSize.cross - this.props.tipSize
 
     if (tipCrossPos < dockingEdgeBufferLength) {
       tipCrossPos = dockingEdgeBufferLength
@@ -322,8 +320,12 @@ export default class PopoverCore extends React.Component {
     clearInterval(this.checkLayoutInterval)
     window.removeEventListener('scroll', this.onFrameScrollThrottled, true)
     window.removeEventListener('resize', this.onFrameResizeThrottled)
-    ;[this.onFrameScrollThrottled, this.onFrameResizeThrottled, this.onPopoverResizeThrottled, this.onTargetResizeThrottled]
-      .forEach(fn => fn && fn.cancel())
+    ;[
+      this.onFrameScrollThrottled,
+      this.onFrameResizeThrottled,
+      this.onPopoverResizeThrottled,
+      this.onTargetResizeThrottled,
+    ].forEach((fn) => fn && fn.cancel())
     if (this.popoverResizeObserver) this.popoverResizeObserver.disconnect()
     if (this.targetResizeObserver) this.targetResizeObserver.disconnect()
     this.popoverResizeObserver = undefined
@@ -371,21 +373,21 @@ export default class PopoverCore extends React.Component {
 
     const popover = this.state.exited ? null : (
       <div
-        ref={ this.getContainerNodeRef }
-        className={ `Popover Popover-${standing} ${className}` }
-        style={ { ...coreStyle, ...style } }
+        ref={this.getContainerNodeRef}
+        className={`Popover Popover-${standing} ${className}`}
+        style={{ ...coreStyle, ...style }}
       >
-        <div className="Popover-body">{ this.props.body }</div>
-        <Tip direction={ faces[standing] } size={ tipSize } />
+        <div className="Popover-body">{this.props.body}</div>
+        <Tip direction={faces[standing]} size={tipSize} />
       </div>
     )
 
     return (
       <>
-        <span ref={ this.getTargetWrapperRef } style={ targetStyle }>
-          { this.props.children }
+        <span ref={this.getTargetWrapperRef} style={targetStyle}>
+          {this.props.children}
         </span>
-        { isClient && popover && createPortal(popover, appendTarget || document.body) }
+        {isClient && popover && createPortal(popover, appendTarget || document.body)}
       </>
     )
   }

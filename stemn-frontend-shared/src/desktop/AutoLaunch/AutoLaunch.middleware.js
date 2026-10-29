@@ -25,7 +25,7 @@ const getAutoLaunch = () => {
   return stemnAutoLaunch
 }
 
-export default store => next => (action) => {
+export default (store) => (next) => (action) => {
   if (action.type === 'AUTO_LAUNCH/TOGGLE') {
     const autostart = () => (action.meta.status ? getAutoLaunch().enable() : getAutoLaunch().disable())
     return store.dispatch({

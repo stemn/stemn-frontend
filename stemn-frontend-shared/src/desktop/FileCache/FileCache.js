@@ -38,9 +38,14 @@ const getFolderPath = () => {
 
 // The cache database
 let fileCache = {}
-const loaded = jsonStorage.get('fileCache')
-  .then((response) => { fileCache = response || {} })
-  .catch(() => { fileCache = {} })
+const loaded = jsonStorage
+  .get('fileCache')
+  .then((response) => {
+    fileCache = response || {}
+  })
+  .catch(() => {
+    fileCache = {}
+  })
 
 /** *****************************************************
 Download to Disk and Save.
@@ -94,9 +99,7 @@ export const get = async ({ key, url, params, name, responseType, extract }) => 
   const getFile = () => downloadToDiskAndSave({ key, url, params, name, extract }).then(processResult)
 
   // If we have a cache entry, get the file, else download it
-  return fileCache[key]
-    ? stat(join(getFolderPath(), fileCache[key].name)).then(processResult, getFile)
-    : getFile()
+  return fileCache[key] ? stat(join(getFolderPath(), fileCache[key].name)).then(processResult, getFile) : getFile()
 }
 
 /** This will check if a file is in the cache */
@@ -118,7 +121,7 @@ export const makeSpace = () => {
 }
 
 export const checkSpace = () => {
-  const space = sumBy(values(fileCache), item => parseInt(item.size, 10))
+  const space = sumBy(values(fileCache), (item) => parseInt(item.size, 10))
   if (space >= spaceLimit) {
     makeSpace()
   }

@@ -2,17 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Pricing from './Pricing'
 
-const stateToProps = () => ({
-})
+const stateToProps = () => ({})
 
-const dispatchToProps = {
-}
+const dispatchToProps = {}
 
 class PricingContainer extends Component {
   render() {
-    return (
-      <Pricing { ...this.props } />
-    )
+    return <Pricing {...this.props} />
   }
 }
 

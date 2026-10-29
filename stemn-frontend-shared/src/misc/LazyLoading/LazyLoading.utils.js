@@ -1,12 +1,10 @@
-export const resources = {
-
-}
+export const resources = {}
 
 const getSrcSplit = (src) => {
   const queryParamsIndex = src.indexOf('?')
   if (queryParamsIndex > 0) {
     return src.substring(0, src.indexOf('?')).split('.')
-  } 
+  }
   return src.split('.')
 }
 
@@ -84,7 +82,5 @@ export const load = (items) => {
     })
   }
 
-
   return Promise.all(promiseArray)
 }
-

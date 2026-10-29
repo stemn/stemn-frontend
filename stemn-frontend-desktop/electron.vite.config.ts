@@ -57,7 +57,12 @@ const contentSecurityPolicy = ({ isDev, stemnEnv, devServerOrigin }) => {
   const directives = {
     'default-src': ["'self'"],
     // Vite's dev client and the React Refresh preamble are inline scripts
-    'script-src': ["'self'", "'wasm-unsafe-eval'", 'https://developer.api.autodesk.com', ...(isDev ? ["'unsafe-inline'", devServerOrigin] : [])],
+    'script-src': [
+      "'self'",
+      "'wasm-unsafe-eval'",
+      'https://developer.api.autodesk.com',
+      ...(isDev ? ["'unsafe-inline'", devServerOrigin] : []),
+    ],
     'style-src': ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com', 'https://developer.api.autodesk.com'],
     'font-src': ["'self'", 'data:', 'https://fonts.gstatic.com'],
     'img-src': ["'self'", 'data:', 'blob:', 'stemn-file:', 'https:', ...backend],
@@ -69,16 +74,20 @@ const contentSecurityPolicy = ({ isDev, stemnEnv, devServerOrigin }) => {
     'base-uri': ["'self'"],
     'form-action': ["'none'"],
   }
-  return Object.entries(directives).map(([name, values]) => `${name} ${[...new Set(values)].join(' ')}`).join('; ')
+  return Object.entries(directives)
+    .map(([name, values]) => `${name} ${[...new Set(values)].join(' ')}`)
+    .join('; ')
 }
 
 const cspPlugin = (policy: string) => ({
   name: 'stemn-csp',
-  transformIndexHtml: () => [{
-    tag: 'meta',
-    attrs: { 'http-equiv': 'Content-Security-Policy', content: policy },
-    injectTo: 'head-prepend' as const,
-  }],
+  transformIndexHtml: () => [
+    {
+      tag: 'meta',
+      attrs: { 'http-equiv': 'Content-Security-Policy', content: policy },
+      injectTo: 'head-prepend' as const,
+    },
+  ],
 })
 
 const scssOptions = {
@@ -192,4 +201,3 @@ export default defineConfig(({ command, mode }) => {
     },
   }
 })
-

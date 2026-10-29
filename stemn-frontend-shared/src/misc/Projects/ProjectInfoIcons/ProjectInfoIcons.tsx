@@ -8,48 +8,43 @@ import Link from 'stemn-shared/misc/Router/Link'
 import s from './ProjectInfoIcons.module.scss'
 
 export interface IProjectInfoIconsProps {
-  project?: IProject,
-  hidePublic?: boolean,
-  padRight?: boolean,
-  padLeft?: boolean,
+  project?: IProject
+  hidePublic?: boolean
+  padRight?: boolean
+  padLeft?: boolean
 }
 
 export const ProjectInfoIcons = ({ project, hidePublic, padLeft, padRight }: IProjectInfoIconsProps) => {
-  if (!project) { return null }
+  if (!project) {
+    return null
+  }
 
   const cloneSource = get(project, 'clone.source')
 
   return (
-    <div className={cn('layout-row', 'layout-align-start-center', s.icons, { [s.padRight]: padRight, [s.padLeft]: padLeft })}>
-      { !hidePublic && (
-        <div
-          key='public-icon'
-          title={project.private ? 'Private Project' : 'Public Project'}
-        >
-          <PublicPrivateIcon
-            private={project.private}
-            noColor={true}
-          />
+    <div
+      className={cn('layout-row', 'layout-align-start-center', s.icons, {
+        [s.padRight]: padRight,
+        [s.padLeft]: padLeft,
+      })}
+    >
+      {!hidePublic && (
+        <div key="public-icon" title={project.private ? 'Private Project' : 'Public Project'}>
+          <PublicPrivateIcon private={project.private} noColor={true} />
         </div>
       )}
-      { cloneSource && (
+      {cloneSource && (
         <Link
-          name='projectRoute'
+          name="projectRoute"
           params={{ projectId: cloneSource }}
-          key='clone-icon'
-          title='Cloned Project. View Original.'
+          key="clone-icon"
+          title="Cloned Project. View Original."
         >
-          <MdContentCopy
-          />
+          <MdContentCopy />
         </Link>
       )}
-      <div
-        key='provider-icon'
-        title={`Files stored in ${project.remote.provider}`}
-      >
-        <ProviderIcon
-          provider={project.remote.provider}
-        />
+      <div key="provider-icon" title={`Files stored in ${project.remote.provider}`}>
+        <ProviderIcon provider={project.remote.provider} />
       </div>
     </div>
   )

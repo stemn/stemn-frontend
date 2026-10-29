@@ -1,12 +1,12 @@
 @value primary, primary-2, grey-3 from "theme";
 
-.crumbs{
+.crumbs {
   color: grey-3;
   line-height: 1.4em;
 }
-.crumbs a{
+.crumbs a {
   color: primary;
 }
-.crumbs a:hover{
-  color: primary-2
+.crumbs a:hover {
+  color: primary-2;
 }

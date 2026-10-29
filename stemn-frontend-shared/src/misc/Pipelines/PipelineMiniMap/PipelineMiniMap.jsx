@@ -8,25 +8,27 @@ import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList'
 
 const PopupRowItem = ({ status, name }) => (
   <span className="layout-row layout-align-start-center">
-    <PipelineIcon status={ status } style={ { marginRight: '10px' } } /> 
-    { name }
+    <PipelineIcon status={status} style={{ marginRight: '10px' }} />
+    {name}
   </span>
 )
 
 export default class PipelineMiniMap extends Component {
   render() {
     const { pipeline, stepData } = this.props
-    const { _id: pipelineId, stages, project: { _id: projectId } } = pipeline
+    const {
+      _id: pipelineId,
+      stages,
+      project: { _id: projectId },
+    } = pipeline
     return (
-      <div className={ cn('layout-row', classes.outer) }>
-        { stages.map((stage) => {
+      <div className={cn('layout-row', classes.outer)}>
+        {stages.map((stage) => {
           const menu = stage.steps.map((stepId) => {
-            const step = stepData[stepId] && stepData[stepId].data
-              ? stepData[stepId].data
-              : {}
-            return { 
+            const step = stepData[stepId] && stepData[stepId].data ? stepData[stepId].data : {}
+            return {
               key: stepId,
-              label: <PopupRowItem status={ step.status } name={ step.name } />,
+              label: <PopupRowItem status={step.status} name={step.name} />,
               name: 'projectPipelineStepRoute',
               params: {
                 projectId,
@@ -35,15 +37,11 @@ export default class PipelineMiniMap extends Component {
               },
             }
           })
-          
+
           return (
-            <Popover
-              key={ stage._id }
-              trigger="hoverDelay"
-              preferPlace="below"
-            >
-              <PipelineIcon status={ stage.status } />
-              <PopoverMenuList menu={ menu }  />
+            <Popover key={stage._id} trigger="hoverDelay" preferPlace="below">
+              <PipelineIcon status={stage.status} />
+              <PopoverMenuList menu={menu} />
             </Popover>
           )
         })}

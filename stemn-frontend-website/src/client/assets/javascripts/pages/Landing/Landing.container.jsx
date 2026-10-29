@@ -2,17 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Landing from './Landing'
 
-const stateToProps = () => ({
-})
+const stateToProps = () => ({})
 
-const dispatchToProps = {
-}
+const dispatchToProps = {}
 
 class LandingContainer extends Component {
   render() {
-    return (
-      <Landing { ...this.props } />
-    )
+    return <Landing {...this.props} />
   }
 }
 

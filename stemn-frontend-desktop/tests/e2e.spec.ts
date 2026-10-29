@@ -53,21 +53,23 @@ test.describe.serial('Stemn Desktop', () => {
     const { app, getWindow } = launched
     const menubar = await getWindow('menubar')
 
-    const windows = await app.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows().map((win) => {
-      const preferences = (win.webContents as any).getLastWebPreferences()
-      return {
-        url: win.webContents.getURL(),
-        visible: win.isVisible(),
-        webPreferences: {
-          contextIsolation: preferences.contextIsolation,
-          nodeIntegration: preferences.nodeIntegration,
-          sandbox: preferences.sandbox,
-        },
-      }
-    }))
+    const windows = await app.evaluate(({ BrowserWindow }) =>
+      BrowserWindow.getAllWindows().map((win) => {
+        const preferences = (win.webContents as any).getLastWebPreferences()
+        return {
+          url: win.webContents.getURL(),
+          visible: win.isVisible(),
+          webPreferences: {
+            contextIsolation: preferences.contextIsolation,
+            nodeIntegration: preferences.nodeIntegration,
+            sandbox: preferences.sandbox,
+          },
+        }
+      }),
+    )
     expect(windows).toHaveLength(2)
-    expect(windows.find(w => w.url.includes('/main/index.html'))!.visible).toBe(true)
-    expect(windows.find(w => w.url.includes('/menubar/index.html'))).toBeTruthy()
+    expect(windows.find((w) => w.url.includes('/main/index.html'))!.visible).toBe(true)
+    expect(windows.find((w) => w.url.includes('/menubar/index.html'))).toBeTruthy()
     for (const win of windows) {
       expect(win.webPreferences).toEqual({ contextIsolation: true, nodeIntegration: false, sandbox: true })
     }
@@ -80,7 +82,18 @@ test.describe.serial('Stemn Desktop', () => {
     }))
     expect(globals.require).toBe('undefined')
     expect(globals.process).toBe('undefined')
-    expect(globals.bridge).toEqual(['dialog', 'dispatchToMain', 'forwardToWindow', 'getInitialState', 'log', 'onAction', 'platform', 'shell', 'versions', 'window'])
+    expect(globals.bridge).toEqual([
+      'dialog',
+      'dispatchToMain',
+      'forwardToWindow',
+      'getInitialState',
+      'log',
+      'onAction',
+      'platform',
+      'shell',
+      'versions',
+      'window',
+    ])
 
     await expect(main.getByPlaceholder('Email')).toBeVisible()
     await expect(menubar.locator('text=Connect to STEMN')).toHaveCount(1)
@@ -100,10 +113,12 @@ test.describe.serial('Stemn Desktop', () => {
     expect(state.auth.authToken).toBeTruthy()
 
     // The main-process store is the source of truth: the token is persisted there
-    await expect.poll(() => {
-      const file = join(userDataDir, 'storage/state.json')
-      return existsSync(file) && !!JSON.parse(readFileSync(file, 'utf8')).auth.authToken
-    }).toBe(true)
+    await expect
+      .poll(() => {
+        const file = join(userDataDir, 'storage/state.json')
+        return existsSync(file) && !!JSON.parse(readFileSync(file, 'utf8')).auth.authToken
+      })
+      .toBe(true)
   })
 
   test('shows the seeded projects', async () => {
@@ -116,30 +131,34 @@ test.describe.serial('Stemn Desktop', () => {
 
   test('websocket: connected and receiving project events', async () => {
     const { mainLog } = launched
-    expect(mainLog().some(line => line.includes('Websocket connected to http://localhost:8000'))).toBe(true)
+    expect(mainLog().some((line) => line.includes('Websocket connected to http://localhost:8000'))).toBe(true)
 
     // Opening the project joins its websocket room
     await main.getByText(PROJECT_NAME, { exact: true }).first().click()
     await expect(main.getByText('Changes', { exact: true })).toBeVisible()
-    await expect.poll(async () => {
-      const state = await getState(main)
-      return Object.values(state.websocket.rooms).some((room: any) => room.room === PROJECT_ID && room.status)
-    }).toBe(true)
+    await expect
+      .poll(async () => {
+        const state = await getState(main)
+        return Object.values(state.websocket.rooms).some((room: any) => room.room === PROJECT_ID && room.status)
+      })
+      .toBe(true)
 
     // A project update by someone else is pushed to the app
     const { data: project } = await api('GET', `/projects/${PROJECT_ID}`, { token })
     await main.waitForTimeout(1500) // the room join is confirmed asynchronously by the websocket server
     const put = await api('PUT', `/projects/${PROJECT_ID}`, { token, json: { blurb: project.blurb } })
     expect(put.status).toBe(200)
-    await expect.poll(() => mainLog().some(line => line.includes('Websocket received PROJECT/PROJECT_UPDATED'))).toBe(true)
-    expect(mainLog().filter(line => /websocket error/i.test(line))).toEqual([])
+    await expect
+      .poll(() => mainLog().some((line) => line.includes('Websocket received PROJECT/PROJECT_UPDATED')))
+      .toBe(true)
+    expect(mainLog().filter((line) => /websocket error/i.test(line))).toEqual([])
   })
 
   test('sync: the provider folder is chosen with the native folder picker', async () => {
     const { app } = launched
     // Stand in for the native dialog (the IPC handler in app/main/ipc.js calls dialog.showOpenDialog)
     await app.evaluate(({ dialog }, folder) => {
-      (dialog as any).showOpenDialog = async () => ({ canceled: false, filePaths: [folder] })
+      ;(dialog as any).showOpenDialog = async () => ({ canceled: false, filePaths: [folder] })
     }, syncRoot)
 
     await goto(main, '/settings/application')
@@ -149,7 +168,9 @@ test.describe.serial('Stemn Desktop', () => {
 
     // Reduced by the main-process store, replayed into the window, and persisted
     expect((await getState(main)).system.providerPath.dropbox).toBe(syncRoot)
-    await expect.poll(() => JSON.parse(readFileSync(join(userDataDir, 'storage/state.json'), 'utf8')).system.providerPath.dropbox).toBe(syncRoot)
+    await expect
+      .poll(() => JSON.parse(readFileSync(join(userDataDir, 'storage/state.json'), 'utf8')).system.providerPath.dropbox)
+      .toBe(syncRoot)
     await screenshot(main, '03-settings-provider-folder')
   })
 
@@ -180,7 +201,9 @@ test.describe.serial('Stemn Desktop', () => {
         body: '# Desktop sync check\n\nEdited by the Stemn Desktop end-to-end test.\n',
       })
       expect(created.status).toBe(200)
-      file = (await api('GET', `/sync/listFolder/${PROJECT_ID}`, { token })).data.entries.find((entry: any) => entry.name === SYNC_FILE)
+      file = (await api('GET', `/sync/listFolder/${PROJECT_ID}`, { token })).data.entries.find(
+        (entry: any) => entry.name === SYNC_FILE,
+      )
     }
     const download = await api('GET', `/sync/download/${PROJECT_ID}/${file.fileId}`, { token })
     expect(download.status).toBe(200)
@@ -218,19 +241,27 @@ test.describe.serial('Stemn Desktop', () => {
     await main.getByPlaceholder('Summary').fill(commitName)
     await expect.poll(async () => (await getState(main)).changes[PROJECT_ID].name).toBe(commitName)
     // The description is a CodeMirror editor (its placeholder is a separate element)
-    await main.locator('.CodeMirror', { has: main.locator('.CodeMirror-placeholder', { hasText: 'Detailed description' }) }).click()
+    await main
+      .locator('.CodeMirror', { has: main.locator('.CodeMirror-placeholder', { hasText: 'Detailed description' }) })
+      .click()
     await main.keyboard.type('Committed by the Stemn Desktop e2e test (Electron 45).')
     await main.getByText('Add Commit', { exact: true }).click()
     await expect(main.getByText(/1 files commited/)).toBeVisible()
     await screenshot(main, '06-committed')
 
     // The commit is on the server, with our revision
-    await expect.poll(async () => {
-      const timeline = await api('GET', '/timeline', { token, query: { entityId: PROJECT_ID, entityType: 'project', 'types[]': 'commits', size: '20' } })
-      const commit = Array.isArray(timeline.data) && timeline.data.find((item: any) => item.data && item.data.name === commitName)
-      // only our file was selected, so only its revision(s) are in the commit
-      return commit ? [...new Set(commit.data.items.map((item: any) => item.data.name))] : timeline.status
-    }).toEqual([SYNC_FILE])
+    await expect
+      .poll(async () => {
+        const timeline = await api('GET', '/timeline', {
+          token,
+          query: { entityId: PROJECT_ID, entityType: 'project', 'types[]': 'commits', size: '20' },
+        })
+        const commit =
+          Array.isArray(timeline.data) && timeline.data.find((item: any) => item.data && item.data.name === commitName)
+        // only our file was selected, so only its revision(s) are in the commit
+        return commit ? [...new Set(commit.data.items.map((item: any) => item.data.name))] : timeline.status
+      })
+      .toEqual([SYNC_FILE])
 
     // ...and in the History tab (updated through the NEW_COMMITS websocket event)
     await main.getByText('History', { exact: true }).click()
@@ -251,9 +282,11 @@ test.describe.serial('Stemn Desktop', () => {
     // The file was downloaded by the main process into the FileCache
     const cacheFiles = readdirSync(join(userDataDir, 'FileCache'))
     expect(cacheFiles.length).toBeGreaterThan(0)
-    await app.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()
-      .filter(win => win.webContents.getURL().includes('/preview/'))
-      .forEach(win => win.close()))
+    await app.evaluate(({ BrowserWindow }) =>
+      BrowserWindow.getAllWindows()
+        .filter((win) => win.webContents.getURL().includes('/preview/'))
+        .forEach((win) => win.close()),
+    )
   })
 
   test('preview window: PDF file (served from the cache over stemn-file://)', async () => {
@@ -261,24 +294,32 @@ test.describe.serial('Stemn Desktop', () => {
     await main.locator('a').getByText('deployment-analysis.pdf', { exact: true }).click()
     const preview = await getWindow('preview')
     await expect(preview.locator('canvas').first()).toBeVisible()
-    await expect.poll(() => preview.evaluate(() => {
-      const canvas = document.querySelector('canvas')
-      return canvas ? canvas.width * canvas.height : 0
-    })).toBeGreaterThan(0)
+    await expect
+      .poll(() =>
+        preview.evaluate(() => {
+          const canvas = document.querySelector('canvas')
+          return canvas ? canvas.width * canvas.height : 0
+        }),
+      )
+      .toBeGreaterThan(0)
     // pdf.js rendered the page and its (selectable) text layer
-    await expect(preview.locator('[class*="PreviewPdf_textLayer"] span', { hasText: 'Deployment analysis' })).toHaveCount(1)
+    await expect(
+      preview.locator('[class*="PreviewPdf_textLayer"] span', { hasText: 'Deployment analysis' }),
+    ).toHaveCount(1)
     await preview.waitForTimeout(500)
     await screenshot(preview, '09-preview-pdf')
-    await app.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()
-      .filter(win => win.webContents.getURL().includes('/preview/'))
-      .forEach(win => win.close()))
+    await app.evaluate(({ BrowserWindow }) =>
+      BrowserWindow.getAllWindows()
+        .filter((win) => win.webContents.getURL().includes('/preview/'))
+        .forEach((win) => win.close()),
+    )
   })
 
   test('menubar (tray) window shows the active project changes', async () => {
     const { app, getWindow } = launched
     const menubar = await getWindow('menubar')
     await app.evaluate(({ BrowserWindow }) => {
-      const win = BrowserWindow.getAllWindows().find(w => w.webContents.getURL().includes('/menubar/'))!
+      const win = BrowserWindow.getAllWindows().find((w) => w.webContents.getURL().includes('/menubar/'))!
       win.show()
     })
     await expect(menubar.getByText('CubeSat Deployable Solar Arr...', { exact: true })).toBeVisible()
@@ -295,7 +336,11 @@ test.describe.serial('Stemn Desktop', () => {
   test('no uncaught exceptions in the main process or the renderers', async () => {
     const { mainLog, pageErrors } = launched
     expect(pageErrors).toEqual([])
-    const errors = mainLog().filter(line => /Uncaught exception|\[renderer:\w+\] (Uncaught|Unhandled)|Preload error|Renderer of the \w+ window is gone/.test(line))
+    const errors = mainLog().filter((line) =>
+      /Uncaught exception|\[renderer:\w+\] (Uncaught|Unhandled)|Preload error|Renderer of the \w+ window is gone/.test(
+        line,
+      ),
+    )
     expect(errors).toEqual([])
   })
 })

@@ -1,11 +1,11 @@
-.rel-box{
-    position: relative;
+.rel-box {
+  position: relative;
 }
-.block{
+.block {
   display: block;
 }
 
-.caret{
+.caret {
   border: transparent;
   border-top-color: inherit;
   border-style: solid;

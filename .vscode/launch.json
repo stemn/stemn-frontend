@@ -10,7 +10,7 @@
       "name": "Website",
       "url": "http://localhost:3000",
       "disableNetworkCache": true,
-      "sourceMaps": true,
+      "sourceMaps": true
       // "trace": "verbose",
     }
   ]

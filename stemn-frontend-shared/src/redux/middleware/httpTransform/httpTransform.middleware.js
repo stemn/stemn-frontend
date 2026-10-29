@@ -1,7 +1,7 @@
 import i from 'icepick'
 import http from 'axios'
 
-const transformHttp = store => next => (action) => {
+const transformHttp = (store) => (next) => (action) => {
   // If the action has action.http = true, we wrap the payload in axios.
   let modifiedAction
   if (action && action.http) {

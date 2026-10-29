@@ -70,33 +70,48 @@ export default class ProjectThreads extends Component {
     const noMoreResults = threads && threads.data && threads.data.length < size
     const isLoading = !threads || threads.loading
     const isLoaded = threads && threads.data && board && board.data
-    const hasResults = threads && threads.data  && threads.data.length > 0
+    const hasResults = threads && threads.data && threads.data.length > 0
 
     const userFilterOptions = [
-      ...get(project, 'data.team', []).map(user => ({
+      ...get(project, 'data.team', []).map((user) => ({
         name: user.name,
         value: user._id,
-        onClick: () => { this.changeUserFilter(user._id) },
-      })), {
+        onClick: () => {
+          this.changeUserFilter(user._id)
+        },
+      })),
+      {
         name: 'Any',
         value: undefined,
-        onClick: () => { this.changeUserFilter(undefined) },
+        onClick: () => {
+          this.changeUserFilter(undefined)
+        },
       },
     ]
 
-    const openFilterOptions = [{
-      value: undefined,
-      name: 'Any',
-      onClick: () => { this.changeOpenFilter(undefined) },
-    }, {
-      value: 'open',
-      name: 'Open',
-      onClick: () => { this.changeOpenFilter('open') },
-    }, {
-      value: 'closed',
-      name: 'Closed',
-      onClick: () => { this.changeOpenFilter('closed') },
-    }]
+    const openFilterOptions = [
+      {
+        value: undefined,
+        name: 'Any',
+        onClick: () => {
+          this.changeOpenFilter(undefined)
+        },
+      },
+      {
+        value: 'open',
+        name: 'Open',
+        onClick: () => {
+          this.changeOpenFilter('open')
+        },
+      },
+      {
+        value: 'closed',
+        name: 'Closed',
+        onClick: () => {
+          this.changeOpenFilter('closed')
+        },
+      },
+    ]
 
     return (
       <div>
@@ -104,97 +119,92 @@ export default class ProjectThreads extends Component {
           <Row className="sm layout-xs-column layout-gt-xs-row">
             <Col className="sm flex-xs flex-sm flex-gt-sm-30 layout-row">
               <SearchInput
-                className={ classes.search }
+                className={classes.search}
                 placeholder="Search Threads"
-                value={ filter.string }
-                filterModel={ filterModel }
-                changeAction={ this.changeInput }
+                value={filter.string}
+                filterModel={filterModel}
+                changeAction={this.changeInput}
               />
             </Col>
             <div className="flex-xs-0 flex-sm-0 flex-gt-sm" />
-            <Col className={ cn('sm layout-row', classes.filterRow) }>
+            <Col className={cn('sm layout-row', classes.filterRow)}>
               <ThreadFilterUser
                 className="flex-xs"
-                filter={ filter }
-                filterModel={ filterModel }
-                filterCacheKey={ filterCacheKey }
-                setFilter={ setFilter }
-                project={ project }
-                style={ { marginRight: '15px' } }
+                filter={filter}
+                filterModel={filterModel}
+                filterCacheKey={filterCacheKey}
+                setFilter={setFilter}
+                project={project}
+                style={{ marginRight: '15px' }}
               />
               <ThreadFilterStatus
                 className="flex-xs"
-                filter={ filter }
-                filterModel={ filterModel }
-                filterCacheKey={ filterCacheKey }
-                setFilter={ setFilter }
+                filter={filter}
+                filterModel={filterModel}
+                filterCacheKey={filterCacheKey}
+                setFilter={setFilter}
               />
             </Col>
             <Col className="sm layout-row">
-              <Button className="primary flex-xs" onClick={ this.showNewThreadModal }>
+              <Button className="primary flex-xs" onClick={this.showNewThreadModal}>
                 New Thread
               </Button>
             </Col>
           </Row>
         </SubSubHeader>
-        <div className={ classes.content }>
-          <LoadingOverlay show={ isLoading } linear hideBg noOverlay />
-          { isLoaded
-            ? <Container>
-              { (!filterIsDefault) || (filterIsDefault && hasResults)
-                ? <Row className="layout-xs-column layout-gt-xs-row">
+        <div className={classes.content}>
+          <LoadingOverlay show={isLoading} linear hideBg noOverlay />
+          {isLoaded ? (
+            <Container>
+              {!filterIsDefault || (filterIsDefault && hasResults) ? (
+                <Row className="layout-xs-column layout-gt-xs-row">
                   <Col className="flex-xs-100 flex-gt-xs-30">
-                    <div className={ classes.panel }>
+                    <div className={classes.panel}>
                       <h3 className="text-mini-caps">Groups</h3>
                       <GroupSelect
-                        groups={ board.data.groups }
-                        value={ get(filter, ['object', 'groups']) }
-                        model={ `${filterStorePath}.object.groups` }
-                        onChange={ this.processFilterChange }
+                        groups={board.data.groups}
+                        value={get(filter, ['object', 'groups'])}
+                        model={`${filterStorePath}.object.groups`}
+                        onChange={this.processFilterChange}
                       />
                     </div>
-                    <div className={ classes.panel }>
+                    <div className={classes.panel}>
                       <h3 className="text-mini-caps">Labels</h3>
                       <LabelSelect
-                        labelInfo={ board.data.labels }
-                        value={ get(filter, ['object', 'labels']) }
-                        model={ `${filterStorePath}.object.labels` }
-                        onChange={ this.processFilterChange }
+                        labelInfo={board.data.labels}
+                        value={get(filter, ['object', 'labels'])}
+                        model={`${filterStorePath}.object.labels`}
+                        onChange={this.processFilterChange}
                       />
                     </div>
                   </Col>
                   <Col className="flex">
-                    <div className={ classes.threadsPanel }>
-                      { hasResults
-                        ? <AccordianAnimate
-                          duration={ 300 }
-                          itemHeight={ 66 }
-                          items={ threads.data }
-                        >
-                          <FlipMove
-                            duration={ 300 }
-                            enterAnimation="fade"
-                            leaveAnimation="fade"
-                          >
-                            { threads.data.map(thread => (
-                              <ThreadRow
-                                board={ board }
-                                threadId={ thread._id }
-                                className={ classes.thread }
-                              />
+                    <div className={classes.threadsPanel}>
+                      {hasResults ? (
+                        <AccordianAnimate duration={300} itemHeight={66} items={threads.data}>
+                          <FlipMove duration={300} enterAnimation="fade" leaveAnimation="fade">
+                            {threads.data.map((thread) => (
+                              <ThreadRow board={board} threadId={thread._id} className={classes.thread} />
                             ))}
                           </FlipMove>
                         </AccordianAnimate>
-                        : <div className={ cn('text-title-5', classes.noResult) }>
-                          No Results. <a className="link-primary"  onClick={ this.clearFilter }>Clear Filter</a>
-                        </div> }
+                      ) : (
+                        <div className={cn('text-title-5', classes.noResult)}>
+                          No Results.{' '}
+                          <a className="link-primary" onClick={this.clearFilter}>
+                            Clear Filter
+                          </a>
+                        </div>
+                      )}
                     </div>
-                    <Pagination path={ location.pathname } page={ page } noMoreResults={ noMoreResults } />
+                    <Pagination path={location.pathname} page={page} noMoreResults={noMoreResults} />
                   </Col>
                 </Row>
-                : !isLoading && <ThreadsEmpty /> }
+              ) : (
+                !isLoading && <ThreadsEmpty />
+              )}
             </Container>
-            : null }
+          ) : null}
         </div>
       </div>
     )

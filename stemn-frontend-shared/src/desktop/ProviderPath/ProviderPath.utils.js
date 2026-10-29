@@ -9,7 +9,7 @@ import log from 'electron-log/main'
  * Find the local folder of the Dropbox / Google Drive (legacy Backup and Sync) /
  * OneDrive desktop clients. Stemn maps project files to <provider folder>/<project path>.
  */
-const parseWindowsEnvVariable = path => path.replace(/%([^%]+)%/g, (_, variable) => process.env[variable])
+const parseWindowsEnvVariable = (path) => path.replace(/%([^%]+)%/g, (_, variable) => process.env[variable])
 
 const dbPaths = {
   drive: {
@@ -29,7 +29,7 @@ const dbPaths = {
   },
 }
 
-const notInstalled = name => Object.assign(new Error(`${name} not installed locally`), { code: 'ENOENT' })
+const notInstalled = (name) => Object.assign(new Error(`${name} not installed locally`), { code: 'ENOENT' })
 
 const readIfExists = async (path, options, name) => {
   if (!path) throw notInstalled(name)
@@ -47,7 +47,7 @@ const paths = {
     const { default: initSqlJs } = await import('sql.js/dist/sql-asm.js')
     const SQL = await initSqlJs()
     const db = new SQL.Database(database)
-    const result = db.exec('SELECT * FROM data WHERE entry_key = \'local_sync_root_path\'')
+    const result = db.exec("SELECT * FROM data WHERE entry_key = 'local_sync_root_path'")
     db.close()
     return result[0].values[0][2].replace('\\\\?\\', '') // drive prefixes path with weird characters sometimes
   },
@@ -62,11 +62,11 @@ const paths = {
     const dbPath = dbPaths.onedrive[platform]
     if (!dbPath) throw notInstalled('OneDrive')
     const files = await readdir(dbPath).catch(() => [])
-    const db = files.find(file => /[a-f0-9]{16}.ini/.test(file))
+    const db = files.find((file) => /[a-f0-9]{16}.ini/.test(file))
     if (!db) throw notInstalled('OneDrive')
     const config = ini.parse(await readFile(join(dbPath, db), { encoding: 'utf16le' }))
     return config.library.split(' ')[7].replace(/"/g, '')
   },
 }
 
-export const getPath = provider => paths[provider](getPlatform())
+export const getPath = (provider) => paths[provider](getPlatform())

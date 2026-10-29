@@ -7,23 +7,13 @@ import { Helmet } from 'react-helmet-async'
 
 export default class Field extends Component {
   render() {
-    const {
-      field,
-      children,
-    } = this.props
+    const { field, children } = this.props
     return (
       <StandardLayout>
-        <Helmet>
-          { get(field, 'data.name') &&
-            <title>{ field.data.name }</title>
-          }
-        </Helmet>
-        <SubHeader title={ get(field, 'data.name', '') } />
-        <Container style={ { marginTop: '30px' } }>
-          { has(field, 'data._id') && children }
-        </Container>
+        <Helmet>{get(field, 'data.name') && <title>{field.data.name}</title>}</Helmet>
+        <SubHeader title={get(field, 'data.name', '')} />
+        <Container style={{ marginTop: '30px' }}>{has(field, 'data._id') && children}</Container>
       </StandardLayout>
     )
   }
 }
-

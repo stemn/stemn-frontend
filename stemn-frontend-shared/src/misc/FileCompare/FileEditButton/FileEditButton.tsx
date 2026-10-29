@@ -7,13 +7,13 @@ import { dispatchToProps, IFileEditButtonContainerProps } from './FileEditButton
 import s from './FileEditButton.module.scss'
 
 export interface IFileEditButtonComponentProps extends IFileEditButtonContainerProps {
-  editToggle: typeof dispatchToProps['editToggle']
+  editToggle: (typeof dispatchToProps)['editToggle']
 }
 
 const editabledPreviewTypes: IPreviewType[] = ['pipeline', 'code']
 
 export class FileEditButtonComponent extends React.Component<IFileEditButtonComponentProps> {
-  public render () {
+  public render() {
     const { file1, editToggle, cacheKey, editActive } = this.props
     const isEditabled = editabledPreviewTypes.includes(getViewerType(file1.extension, file1.provider))
 

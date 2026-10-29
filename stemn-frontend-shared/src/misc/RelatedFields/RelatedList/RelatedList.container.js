@@ -11,14 +11,16 @@ const dispatchToProps = {
   getRelatedFields,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'fieldId',
-  onChange: (props) => {
-    props.getRelatedFields({
-      fieldId: props.fieldId,
-    })
+const fetchConfigs = [
+  {
+    hasChanged: 'fieldId',
+    onChange: (props) => {
+      props.getRelatedFields({
+        fieldId: props.fieldId,
+      })
+    },
   },
-}]
+]
 
 const withFetchData = fetchDataHoc(fetchConfigs)(RelatedList)
 const withRedux = connect(stateToProps, dispatchToProps)(withFetchData)

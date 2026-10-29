@@ -12,9 +12,11 @@ export default (store) => {
   // Windows explorer context menu ("View revisions in Stemn") for the Dropbox/Drive folders
   if (process.platform === 'win32') {
     setTimeout(() => {
-      store.dispatch(shellContext.updateConfig({
-        folders: values(store.getState().system.providerPath).filter(Boolean),
-      }))
+      store.dispatch(
+        shellContext.updateConfig({
+          folders: values(store.getState().system.providerPath).filter(Boolean),
+        }),
+      )
       store.dispatch(shellContext.enable())
     }, 1000)
   }

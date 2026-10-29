@@ -9,7 +9,8 @@ export const CALL_HISTORY_METHOD = '@@router/CALL_HISTORY_METHOD'
 
 type Location = string | LegacyLocationDescriptor
 
-const updateLocation = (method: 'push' | 'replace' | 'go' | 'goBack' | 'goForward') =>
+const updateLocation =
+  (method: 'push' | 'replace' | 'go' | 'goBack' | 'goForward') =>
   (...args: any[]) => ({
     type: CALL_HISTORY_METHOD,
     payload: { method, args },

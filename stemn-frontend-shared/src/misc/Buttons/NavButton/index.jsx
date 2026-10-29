@@ -9,9 +9,7 @@ const NavButton = (props) => {
     [styles.navButton]: true,
     [styles.active]: props.isActive,
   })
-  return (
-    <button className={ buttonClasses }>{props.children}</button>
-  )
+  return <button className={buttonClasses}>{props.children}</button>
 }
 
 export default NavButton

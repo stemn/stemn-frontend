@@ -13,22 +13,22 @@ export default class HeaderMobileMenu extends Component {
     const padding = 20
     const mobileLinksStyle = isOpen
       ? {
-        height: linkHeight * items.length + padding,
-      }
+          height: linkHeight * items.length + padding,
+        }
       : {}
 
     return (
-      <div className={ cn(classes.mobileLinks, 'hide-gt-xs') } style={ mobileLinksStyle }>
-        <div className={ classes.inner }>
-          { items.map(item => (
+      <div className={cn(classes.mobileLinks, 'hide-gt-xs')} style={mobileLinksStyle}>
+        <div className={classes.inner}>
+          {items.map((item) => (
             <Link
-              key={ item.label }
+              key={item.label}
               activeClassName="active"
-              className={ cn(classes.mobileLink, 'layout-row layout-align-start-center') }
-              style={ mobileLinkStyle }
-              name={ item.route }
+              className={cn(classes.mobileLink, 'layout-row layout-align-start-center')}
+              style={mobileLinkStyle}
+              name={item.route}
             >
-              { item.label }
+              {item.label}
             </Link>
           ))}
         </div>

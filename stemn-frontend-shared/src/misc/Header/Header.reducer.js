@@ -3,7 +3,8 @@ const initialState = {
     {
       name: 'Changes',
       path: '/',
-    }, {
+    },
+    {
       name: 'History',
       path: '/feed',
     },
@@ -15,12 +16,8 @@ const initialState = {
 
 export default function job(state = initialState, action) {
   switch (action.type) {
-    case 'HEADER/TOGGLE_USER_MENU' :
-      return { ...state,
-        userPopup: { ...state.userPopup,
-          isOpen: action.payload || !state.userPopup.isOpen,
-        },
-      }
+    case 'HEADER/TOGGLE_USER_MENU':
+      return { ...state, userPopup: { ...state.userPopup, isOpen: action.payload || !state.userPopup.isOpen } }
     default:
       return state
   }

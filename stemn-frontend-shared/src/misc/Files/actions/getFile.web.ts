@@ -1,4 +1,4 @@
-import http from 'axios';
+import http from 'axios'
 
 export const getFile = ({ projectId, fileId, revisionId = '', provider, responseType }) => {
   const cacheKey = `${fileId}-${revisionId}`

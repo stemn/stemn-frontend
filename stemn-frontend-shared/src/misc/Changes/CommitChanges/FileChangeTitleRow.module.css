@@ -1,6 +1,6 @@
 @value primary, border1 from "theme";
 
-.fileChangeTitleRow{
+.fileChangeTitleRow {
   border-bottom: 1px solid;
   padding: 10px 6px;
   height: 36px;
@@ -9,7 +9,7 @@
   cursor: default;
   color: border1;
 }
-.text{
+.text {
   color: primary;
   left: 0;
   right: 0;

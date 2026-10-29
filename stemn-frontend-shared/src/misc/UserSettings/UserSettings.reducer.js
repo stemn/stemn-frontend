@@ -20,10 +20,7 @@ export default (state = initialState, action) => {
       return i.assoc(state, 'loading', false)
     }
     case 'USER_SETTINGS/GET_SETTINGS_FULFILLED': {
-      return i.chain(state)
-        .assoc('loading', false)
-        .assoc('data', action.payload.data)
-        .value()
+      return i.chain(state).assoc('loading', false).assoc('data', action.payload.data).value()
     }
     default:
       return state

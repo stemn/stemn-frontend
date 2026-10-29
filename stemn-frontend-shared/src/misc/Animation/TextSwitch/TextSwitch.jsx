@@ -9,16 +9,17 @@ export default class TextSwitch extends Component {
     const outerStyle = {
       height: `${height}px`,
     }
-    const innerStyle = swap ? {
-      transform: `translateY(-${height}px)`,
-    } : {}
+    const innerStyle = swap
+      ? {
+          transform: `translateY(-${height}px)`,
+        }
+      : {}
     return (
-      <div className={ classes.outer } style={ outerStyle }>
-        <div className={ classes.inner } style={ innerStyle }>
-          { children }
+      <div className={classes.outer} style={outerStyle}>
+        <div className={classes.inner} style={innerStyle}>
+          {children}
         </div>
       </div>
     )
   }
 }
-

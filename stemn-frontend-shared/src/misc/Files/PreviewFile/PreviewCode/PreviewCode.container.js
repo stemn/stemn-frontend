@@ -5,8 +5,6 @@ const stateToProps = ({ files: { previewMarkdown } }) => ({
   previewMarkdown,
 })
 
-const dispatchToProps = {
-}
+const dispatchToProps = {}
 
 export default connect(stateToProps, dispatchToProps)(PreviewCode)
-

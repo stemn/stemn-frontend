@@ -13,18 +13,18 @@ const dispatchToProps = {
   getUserProjects,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'currentUser._id',
-  onChange: (props) => {
-    props.getUserProjects({ userId: props.currentUser._id })
+const fetchConfigs = [
+  {
+    hasChanged: 'currentUser._id',
+    onChange: (props) => {
+      props.getUserProjects({ userId: props.currentUser._id })
+    },
   },
-}]
+]
 
 class SettingsProjectsContainer extends Component {
   render() {
-    return (
-      <SettingsProjects { ...this.props } />
-    )
+    return <SettingsProjects {...this.props} />
   }
 }
 

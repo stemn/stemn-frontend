@@ -26,19 +26,9 @@ export const pipeline = {
       {
         steps: [
           {
-            command: [
-              'build',
-              '--in_spec',
-              '/pipeline/resin-mould.py',
-              '--format',
-              'STEP',
-            ],
-            outputFiles: [
-              'cqobject*',
-            ],
-            inputFiles: [
-              'resin-mould.py',
-            ],
+            command: ['build', '--in_spec', '/pipeline/resin-mould.py', '--format', 'STEP'],
+            outputFiles: ['cqobject*'],
+            inputFiles: ['resin-mould.py'],
             image: 'dcowden/cadquery:latest',
             label: 'STEP',
           },
@@ -48,9 +38,7 @@ export const pipeline = {
       {
         steps: [
           {
-            inputFiles: [
-              'cqobject*',
-            ],
+            inputFiles: ['cqobject*'],
             image: 'stemn/upload:latest',
             label: 'stemn',
           },
@@ -64,32 +52,35 @@ export const pipeline = {
       _id: '5ab30cf335c1cd0042ea6679',
       name: 'convert',
       status: 'running',
-      steps: [{
-        _id: '5ab450710741c3005e4cda54',
-        stage: '5ab30cf335c1cd0042ea6679',
-        name: 'to STEP',
-        status: 'running',
-      }, {
-        _id: '5ab450710741c3005e4cea22',
-        stage: '5ab30cf335c1cd0042ea6679',
-        name: 'to STL',
-        status: 'pending',
-      }],
+      steps: [
+        {
+          _id: '5ab450710741c3005e4cda54',
+          stage: '5ab30cf335c1cd0042ea6679',
+          name: 'to STEP',
+          status: 'running',
+        },
+        {
+          _id: '5ab450710741c3005e4cea22',
+          stage: '5ab30cf335c1cd0042ea6679',
+          name: 'to STL',
+          status: 'pending',
+        },
+      ],
     },
     {
       _id: '5ab30cf335c1cd0042ea667a',
       name: 'upload',
       status: 'pending',
-      steps: [{
-        _id: '5ab450710741c3005e4cda0f',
-        stage: '5ab30cf335c1cd0042ea667a',
-        name: 'to Stemn',
-        status: 'pending',
-      }],
+      steps: [
+        {
+          _id: '5ab450710741c3005e4cda0f',
+          stage: '5ab30cf335c1cd0042ea667a',
+          name: 'to Stemn',
+          status: 'pending',
+        },
+      ],
     },
   ],
   outputFiles: [],
-  inputRevisions: [
-    '5ab30cf235c1cd0042ea6676',
-  ],
+  inputRevisions: ['5ab30cf235c1cd0042ea6676'],
 }

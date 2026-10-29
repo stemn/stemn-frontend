@@ -1,6 +1,6 @@
 @value primary, height-header, sidebar-bg, sidebar-text-1, sidebar-text-2, sidebar-footer, secondary, sidebar-search-border, sidebar-search-bg, sidebar-search-border, sidebar-search-text from "theme";
 
-.overlay{
+.overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -9,15 +9,15 @@
   background: rgba(255, 255, 255, 0.8);
 }
 
-.animateOverlay{
+.animateOverlay {
   transition: 0.3s ease opacity;
   opacity: 0;
 }
-.animateOverlayShow{
+.animateOverlayShow {
   opacity: 1;
 }
 
-.sidebar{
+.sidebar {
   position: absolute;
   left: 0;
   bottom: 0;
@@ -28,16 +28,16 @@
   transition: 0.3s ease all;
   transform: translateX(-100%);
 }
-.sidebarShow{
+.sidebarShow {
   transform: translateX(0);
 }
 
-.sidebarSearch{
+.sidebarSearch {
   position: relative;
   margin: 10px;
 }
 
-.sidebarSearch input{
+.sidebarSearch input {
   padding: 6px;
   height: auto;
   padding-right: 40px;
@@ -46,15 +46,14 @@
   color: sidebar-search-text !important;
 }
 
-.sidebarSearch input:focus{
+.sidebarSearch input:focus {
   border: 1px solid sidebar-search-border;
 }
 
-.sidebarSearchIcon{
+.sidebarSearchIcon {
   position: absolute;
   right: 4px;
   top: 4px;
   bottom: 0;
   color: sidebar-search-text;
 }
-

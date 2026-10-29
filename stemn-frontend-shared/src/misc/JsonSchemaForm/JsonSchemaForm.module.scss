@@ -26,17 +26,19 @@
   border: 1px solid themeWarn;
 }
 
-.enter, .appear{
+.enter,
+.appear {
   transition: all 300ms ease;
   opacity: 0;
 }
-.enterActive, .appearActive{
+.enterActive,
+.appearActive {
   opacity: 1;
 }
-.leave{
+.leave {
   opacity: 1;
   transition: all 300ms ease;
 }
-.leaveActive{
+.leaveActive {
   opacity: 0;
 }

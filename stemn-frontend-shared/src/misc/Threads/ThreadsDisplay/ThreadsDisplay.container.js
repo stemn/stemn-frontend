@@ -52,14 +52,16 @@ const mapDispatchToProps = {
   setFilter,
 }
 
-const fetchConfigs = [{
-  hasChanged: 'projectId',
-  onChange: (props) => {
-    props.getBoards({
-      projectId: props.projectId,
-    })
+const fetchConfigs = [
+  {
+    hasChanged: 'projectId',
+    onChange: (props) => {
+      props.getBoards({
+        projectId: props.projectId,
+      })
+    },
   },
-}]
+]
 
 const withFetchData = fetchDataHoc(fetchConfigs)(ThreadsDisplay)
 const withRedux = connect(mapStateToProps, mapDispatchToProps)(withFetchData)

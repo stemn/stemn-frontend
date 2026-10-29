@@ -13,16 +13,15 @@ export default class PreviewPcb extends Component {
   onMount = (nextProps, prevProps) => {
     const { fileMeta, fileData, downloadFn } = nextProps
 
-    const download = file => downloadFn({
-      projectId: file.project._id,
-      fileId: file.fileId,
-      revisionId: file.revisionId,
-      provider: file.provider,
-    })
+    const download = (file) =>
+      downloadFn({
+        projectId: file.project._id,
+        fileId: file.fileId,
+        revisionId: file.revisionId,
+        provider: file.provider,
+      })
 
-    const hasNoData = fileData && fileData.constructor === Array
-      ? !fileData[0]
-      : !fileData
+    const hasNoData = fileData && fileData.constructor === Array ? !fileData[0] : !fileData
 
     if (hasNoData) {
       if (fileMeta.parts) {
@@ -36,24 +35,27 @@ export default class PreviewPcb extends Component {
   render() {
     const { fileData, fileMeta } = this.props
 
-    const isLoading = fileData && fileData.constructor === Array
-      ? !every(fileData, item => item && item.loading === false)
-      : get(fileData, ['loading'], true)
+    const isLoading =
+      fileData && fileData.constructor === Array
+        ? !every(fileData, (item) => item && item.loading === false)
+        : get(fileData, ['loading'], true)
 
     const layers = fileMeta.parts
       ? fileMeta.parts.map((item, idx) => ({
-        data: get(fileData, [idx, 'data']),
-        name: item.name,
-      }))
-      : [{
-        data: fileData && fileData.data,
-        name: fileMeta.name,
-      }]
+          data: get(fileData, [idx, 'data']),
+          name: item.name,
+        }))
+      : [
+          {
+            data: fileData && fileData.data,
+            name: fileMeta.name,
+          },
+        ]
 
     return (
       <div className="rel-box flex layout-column">
-        <LoadingOverlay show={ isLoading } />
-        { !isLoading && <PreviewPcbViewer layers={ layers } /> }
+        <LoadingOverlay show={isLoading} />
+        {!isLoading && <PreviewPcbViewer layers={layers} />}
       </div>
     )
   }

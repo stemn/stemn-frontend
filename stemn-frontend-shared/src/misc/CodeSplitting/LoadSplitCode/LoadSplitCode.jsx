@@ -5,10 +5,10 @@ import { load } from 'stemn-shared/misc/LazyLoading/LazyLoading.utils'
 
 export default class PreviewCadLoader extends Component {
   static propTypes = {
-    systemImport: PropTypes.func,             // The actual system.import
-    cacheKey: PropTypes.string.isRequired,    // The cachekey
-    otherModules: PropTypes.array,            // This is an array of global modules
-    loadCode: PropTypes.func.isRequired,      // The loadCode function from the container
+    systemImport: PropTypes.func, // The actual system.import
+    cacheKey: PropTypes.string.isRequired, // The cachekey
+    otherModules: PropTypes.array, // This is an array of global modules
+    loadCode: PropTypes.func.isRequired, // The loadCode function from the container
   }
   static defaultProps = {
     otherModules: [],
@@ -43,10 +43,8 @@ export default class PreviewCadLoader extends Component {
     const loaded = mainLoaded && otherLoaded
     return (
       <div className="layout-column flex">
-        { loaded
-          ? <this.LoadedComponent { ...otherProps } />
-          : null }
-        <LoadingOverlay show={ !loaded } />
+        {loaded ? <this.LoadedComponent {...otherProps} /> : null}
+        <LoadingOverlay show={!loaded} />
       </div>
     )
   }

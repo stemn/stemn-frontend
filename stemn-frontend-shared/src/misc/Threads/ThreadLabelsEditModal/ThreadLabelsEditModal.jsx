@@ -32,30 +32,26 @@ export class Component extends React.Component {
         this.props.modalConfirm()
       })
     })
-  };
+  }
 
   render() {
-    const {
-      boardModel,
-      board,
-      modalCancel,
-    } = this.props
+    const { boardModel, board, modalCancel } = this.props
 
     return (
-      <div style={ { width: '500px' } }>
+      <div style={{ width: '500px' }}>
         <div className="modal-title">Edit Labels</div>
-        <div className="modal-body" style={ { maxHeight: '400px', overflowY: 'auto' } }>
-          { has(board, 'forms.labels')
-            ? <ThreadLabelsEdit model={ `${boardModel}.forms.labels` } value={ board.forms.labels } />
-            : null}
+        <div className="modal-body" style={{ maxHeight: '400px', overflowY: 'auto' }}>
+          {has(board, 'forms.labels') ? (
+            <ThreadLabelsEdit model={`${boardModel}.forms.labels`} value={board.forms.labels} />
+          ) : null}
         </div>
         <div className="modal-footer-no-line layout-row layout-align-end">
-          <Button style={ { marginRight: '10px' } } onClick={ modalCancel }>Cancel</Button>
-          <Button
-            className="primary"
-            onClick={ this.submit }
-            loading={ board.savePending }
-          >Update Labels</Button>
+          <Button style={{ marginRight: '10px' }} onClick={modalCancel}>
+            Cancel
+          </Button>
+          <Button className="primary" onClick={this.submit} loading={board.savePending}>
+            Update Labels
+          </Button>
         </div>
       </div>
     )

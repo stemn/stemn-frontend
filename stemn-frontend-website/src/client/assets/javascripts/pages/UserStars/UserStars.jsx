@@ -10,21 +10,16 @@ export default class UserStars extends Component {
 
     return (
       <div>
-        <div className="text-mini-caps">Projects { user.data.profile.firstname } Starred</div>
+        <div className="text-mini-caps">Projects {user.data.profile.firstname} Starred</div>
         <br />
-        <div className={ classes.panel }>
-          { items && items.data
-            ? items.data.map(projectId => (
-              <ProjectRowContainer
-                size="wide"
-                key={ projectId }
-                projectId={ projectId }
-                className={ classes.project }
-              />
-            ))
-            : null }
+        <div className={classes.panel}>
+          {items && items.data
+            ? items.data.map((projectId) => (
+                <ProjectRowContainer size="wide" key={projectId} projectId={projectId} className={classes.project} />
+              ))
+            : null}
         </div>
-        <Pagination path={ location.pathname } page={ page } noMoreResults={ noMoreResults } />
+        <Pagination path={location.pathname} page={page} noMoreResults={noMoreResults} />
       </div>
     )
   }

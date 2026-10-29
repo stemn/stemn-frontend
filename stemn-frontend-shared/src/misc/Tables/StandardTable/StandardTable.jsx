@@ -4,10 +4,6 @@ import classes from './StandardTable.module.css'
 export default class StandardTable extends React.Component {
   render() {
     const { children } = this.props
-    return (
-      <table className={ classes.table }>
-        {children}
-      </table>
-    )
+    return <table className={classes.table}>{children}</table>
   }
 }

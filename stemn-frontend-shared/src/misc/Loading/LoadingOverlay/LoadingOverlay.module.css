@@ -1,4 +1,4 @@
-.loadingOverlay{
+.loadingOverlay {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -6,33 +6,35 @@
   bottom: 0px;
   z-index: 10;
 }
-.bgWhite{
+.bgWhite {
   background: white;
 }
-.loaderContainer{
+.loaderContainer {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
 }
-.text{
+.text {
   font-size: 15px;
   font-weight: 300;
   text-align: center;
   margin-top: 15px;
 }
 
-.enter, .appear{
+.enter,
+.appear {
   transition: all 300ms ease;
   opacity: 0;
 }
-.enterActive, .appearActive{
+.enterActive,
+.appearActive {
   opacity: 1;
 }
-.leave{
+.leave {
   opacity: 1;
   transition: all 300ms ease;
 }
-.leaveActive{
+.leaveActive {
   opacity: 0;
 }

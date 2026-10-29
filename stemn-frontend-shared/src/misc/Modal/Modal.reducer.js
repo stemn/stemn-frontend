@@ -13,12 +13,12 @@ export default (state = initialState, action = {}) => {
         stack = stack || []
         const isLimited = action.meta.limit
         const isLessThanLimit = isLimited
-          ? stack.filter(modal => modal.modalType === action.meta.modalType).length < action.meta.limit
+          ? stack.filter((modal) => modal.modalType === action.meta.modalType).length < action.meta.limit
           : true
         return isLessThanLimit ? i.push(stack, action.meta) : stack
       })
     case 'MODALS/HIDE_MODAL':
-      const modalIndex = state.stack.findIndex(modal => modal.modalId === action.payload.modalId)
+      const modalIndex = state.stack.findIndex((modal) => modal.modalId === action.payload.modalId)
       return modalIndex !== -1 ? i.merge(state, { stack: i.splice(state.stack, modalIndex, 1) }) : state
 
     case 'MODALS/CLOSE_ALL':

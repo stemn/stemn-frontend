@@ -1,9 +1,7 @@
-
 import { WidgetProps } from '@rjsf/utils'
 import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox'
 
 export const CheckboxWidget = (props: WidgetProps) => {
-
   const { schema, value } = props
 
   return (

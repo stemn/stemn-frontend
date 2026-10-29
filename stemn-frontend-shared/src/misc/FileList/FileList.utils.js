@@ -3,11 +3,11 @@ export const getFileRouteName = (file) => {
     return 'fileRoute'
   } else if (file.type === 'folder') {
     return 'projectFolderRoute'
-  } 
+  }
   return 'projectRoute'
 }
 
-export const getFileRouteParams = file => ({
+export const getFileRouteParams = (file) => ({
   fileId: file.fileId,
   projectId: file && file.project && file.project._id,
   revisionId: file.revisionId,

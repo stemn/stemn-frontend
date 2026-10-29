@@ -8,14 +8,11 @@ const stateToProps = ({ desktopReleases }) => ({
   latest: desktopReleases.latest,
 })
 
-const dispatchToProps = {
-}
+const dispatchToProps = {}
 
 class DownloadContainer extends Component {
   render() {
-    return (
-      <Download { ...this.props } />
-    )
+    return <Download {...this.props} />
   }
 }
 

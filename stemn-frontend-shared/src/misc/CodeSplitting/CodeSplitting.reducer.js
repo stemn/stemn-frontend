@@ -7,7 +7,8 @@ export default (state = initialState, action = {}) => {
     case 'CODE_SPLITTING/LOAD_PENDING':
       return i.assocIn(state, [action.meta.cacheKey, 'loading'], true)
     case 'CODE_SPLITTING/LOAD_FULFILLED':
-      return i.chain(state)
+      return i
+        .chain(state)
         .assocIn([action.meta.cacheKey, 'loading'], false)
         .assocIn([action.meta.cacheKey, 'loaded'], true)
         .value()

@@ -15,9 +15,7 @@ const dispatchToProps = {
 
 class OnboardingSyncContainer extends Component {
   render() {
-    return (
-      <OnboardingSync { ...this.props } />
-    )
+    return <OnboardingSync {...this.props} />
   }
 }
 

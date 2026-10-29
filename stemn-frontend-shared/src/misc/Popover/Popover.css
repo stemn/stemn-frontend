@@ -1,15 +1,17 @@
 /* Global stylesheet (class names used by the Popover component and PopoverMenu markup) */
 
-.Popover-body  {
+.Popover-body {
   display: inline-flex;
   flex-direction: column;
   background: white;
   z-index: 1;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.1),0 2px 15px rgba(0,0,0,0.1);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.1),
+    0 2px 15px rgba(0, 0, 0, 0.1);
   margin-top: -1px;
 }
 
-.Popover-tipShape  {
+.Popover-tipShape {
   fill: white;
   stroke-width: 1;
   stroke: rgba(0, 0, 0, 0.12);
@@ -57,7 +59,7 @@
   padding-right: 27px;
 }
 .PopoverMenu a.submenu:after {
-  content: "\25B6";
+  content: '\25B6';
   display: inline-block;
   position: absolute;
   right: 7px;

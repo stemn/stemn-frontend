@@ -22,7 +22,7 @@ class LoginContainer extends Component {
         <Helmet>
           <title>Login</title>
         </Helmet>
-        <LoginPage { ...this.props } />
+        <LoginPage {...this.props} />
       </LandingLayout>
     )
   }

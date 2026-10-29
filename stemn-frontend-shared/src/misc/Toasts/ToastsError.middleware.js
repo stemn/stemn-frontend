@@ -1,6 +1,6 @@
-import { showModal }          from 'stemn-shared/misc/Modal/Modal.actions.js'
-import { show as toastShow }  from 'stemn-shared/misc/Toasts/Toasts.actions.js'
-import { has }                from 'lodash'
+import { showModal } from 'stemn-shared/misc/Modal/Modal.actions.js'
+import { show as toastShow } from 'stemn-shared/misc/Toasts/Toasts.actions.js'
+import { has } from 'lodash'
 
 import connectionModalName from 'stemn-shared/misc/Modal/ConnectionModal'
 import providerAccessRevokedModalName from 'stemn-shared/misc/Modal/ProviderAccessRevokedModal'
@@ -33,20 +33,23 @@ const errorMap = {
   },
   LINK_FOLDER_CONFLICT: {
     displayType: 'toast',
-    message: error => (has(error, 'data.project.name')
-      ? `Folder cannot be connect to two STEMN projects. Already connected to: '${error.data.project.name}'.`
-      : error.message),
+    message: (error) =>
+      has(error, 'data.project.name')
+        ? `Folder cannot be connect to two STEMN projects. Already connected to: '${error.data.project.name}'.`
+        : error.message,
   },
 }
 
 const processLocalError = (store, action) => {
   // Local errors are electron only
   if (action.payload.errno === 'ENETUNREACH') {
-    store.dispatch(showModal({
-      modalType: connectionModalName,
-      modalProps: action.payload.data,
-      limit: 1,
-    }))
+    store.dispatch(
+      showModal({
+        modalType: connectionModalName,
+        modalProps: action.payload.data,
+        limit: 1,
+      }),
+    )
   }
 }
 
@@ -59,7 +62,7 @@ const processServerError = (store, action) => {
   if (message && typeof message === 'string') {
     // Type 1
     toastMessage = message
-  } else if (action.payload.response.data.error   && typeof action.payload.response.data.error === 'string') {
+  } else if (action.payload.response.data.error && typeof action.payload.response.data.error === 'string') {
     // Type 2
     toastMessage = action.payload.response.data.error
   } else if (action.payload.response.data.message && typeof action.payload.response.data.message === 'string') {
@@ -73,27 +76,33 @@ const processServerError = (store, action) => {
   // If we find display info in the error map, we show it
   if (errorInfo) {
     if (errorInfo.displayType === 'modal') {
-      store.dispatch(showModal({
-        modalType: errorInfo.modalType,
-        modalProps: data,
-      }))
+      store.dispatch(
+        showModal({
+          modalType: errorInfo.modalType,
+          modalProps: data,
+        }),
+      )
     } else if (errorInfo.displayType === 'toast') {
       toastMessage = errorInfo.message(action.payload.response.data.error)
-      store.dispatch(toastShow({
-        type: 'error',
-        title: toastMessage,
-      }))
+      store.dispatch(
+        toastShow({
+          type: 'error',
+          title: toastMessage,
+        }),
+      )
     }
   } else if (toastMessage) {
     // Else, if there is a message, show the toast
-    store.dispatch(toastShow({
-      type: 'error',
-      title: toastMessage,
-    }))
+    store.dispatch(
+      toastShow({
+        type: 'error',
+        title: toastMessage,
+      }),
+    )
   }
 }
 
-const middleware = store => next => (action) => {
+const middleware = (store) => (next) => (action) => {
   if (action.type && action.type.endsWith('_REJECTED')) {
     if (has(action, 'payload.errno')) {
       processLocalError(store, action)

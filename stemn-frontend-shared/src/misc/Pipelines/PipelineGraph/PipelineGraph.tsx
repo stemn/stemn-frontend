@@ -1,7 +1,7 @@
 import cn from 'classnames'
 import { load } from 'js-yaml'
 import { forEach, get, isEqual, values } from 'lodash'
-import { BaseAction,	DiagramEngine, DiagramModel, DiagramWidget } from 'mrblenny-storm-react-diagrams'
+import { BaseAction, DiagramEngine, DiagramModel, DiagramWidget } from 'mrblenny-storm-react-diagrams'
 import * as React from 'react'
 import {
   addStep as addStepType,
@@ -11,44 +11,48 @@ import {
 import { PipelineGraphDroplayer } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphDroplayer'
 import { PipelineGraphStepModel } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphStep'
 import { IPipelineConfig, IStep } from 'stemn-shared/misc/Pipelines/PipelineGraph/types'
-import { createDiagramEngine, deserializePipeline, serializePipeline } from 'stemn-shared/misc/Pipelines/PipelineGraph/utils'
+import {
+  createDiagramEngine,
+  deserializePipeline,
+  serializePipeline,
+} from 'stemn-shared/misc/Pipelines/PipelineGraph/utils'
 import './PipelineGraph.global.scss'
 import s from './PipelineGraph.module.scss'
 
 export interface IPipelineGraphProps {
-  diagramId: string,
-  pipelineConfig: string | object,
-  readOnly: boolean,
-  className?: string,
+  diagramId: string
+  pipelineConfig: string | object
+  readOnly: boolean
+  className?: string
   diagram: {
-    selectedStep: string;
-    model: IPipelineConfig;
-  },
-  style?: object,
-  initialiseModel: typeof initialiseModelType,
-  addStep: typeof addStepType,
-  selectStep: typeof selectStepType,
-  steps: IStep[],
+    selectedStep: string
+    model: IPipelineConfig
+  }
+  style?: object
+  initialiseModel: typeof initialiseModelType
+  addStep: typeof addStepType
+  selectStep: typeof selectStepType
+  steps: IStep[]
 }
 
 export interface IPipelineGraphState {
-  diagramEngine: DiagramEngine,
-  diagramModel?: DiagramModel,
-  selected?: PipelineGraphStepModel,
+  diagramEngine: DiagramEngine
+  diagramModel?: DiagramModel
+  selected?: PipelineGraphStepModel
 }
 
 export class PipelineGraphComponent extends React.Component<IPipelineGraphProps, IPipelineGraphState> {
-  constructor (props: IPipelineGraphProps) {
+  constructor(props: IPipelineGraphProps) {
     super(props)
     this.state = {
       diagramEngine: createDiagramEngine(props.steps),
     }
   }
-  public componentDidMount () {
+  public componentDidMount() {
     const { pipelineConfig, initialiseModel, diagramId, diagram } = this.props
-    const pipelineConfigJson = (typeof pipelineConfig === 'object'
-      ? pipelineConfig
-      : load(pipelineConfig)) as IPipelineConfig
+    const pipelineConfigJson = (
+      typeof pipelineConfig === 'object' ? pipelineConfig : load(pipelineConfig)
+    ) as IPipelineConfig
 
     // Dispatching from the constructor (during render) is not allowed with React 19 / react-redux 9.
     // If the store already holds this exact model (e.g. remount), no props change will follow, so build it now.
@@ -58,7 +62,7 @@ export class PipelineGraphComponent extends React.Component<IPipelineGraphProps,
       initialiseModel({ diagramId, model: pipelineConfigJson })
     }
   }
-  public UNSAFE_componentWillReceiveProps (nextProps: IPipelineGraphProps) {
+  public UNSAFE_componentWillReceiveProps(nextProps: IPipelineGraphProps) {
     const nextModel = get(nextProps, 'diagram.model')
     const currentModel = get(this.props, 'diagram.model')
     // Update the diagram model if the pipeline changes
@@ -81,7 +85,9 @@ export class PipelineGraphComponent extends React.Component<IPipelineGraphProps,
       }
 
       // Add remove listener
-      const hasRemoveListener = values(item.listeners).some((listener) => listener.entityRemoved === this.onEntityRemoved)
+      const hasRemoveListener = values(item.listeners).some(
+        (listener) => listener.entityRemoved === this.onEntityRemoved,
+      )
       if (!hasRemoveListener) {
         item.addListener({ entityRemoved: this.onEntityRemoved })
       }
@@ -101,7 +107,7 @@ export class PipelineGraphComponent extends React.Component<IPipelineGraphProps,
       this.props.initialiseModel({ diagramId: this.props.diagramId, model })
     }
   }
-  public render () {
+  public render() {
     const { readOnly, className, style, addStep, selectStep, diagramId } = this.props
     const { diagramEngine, diagramModel } = this.state
 

@@ -5,14 +5,11 @@ import Search from './Search'
 
 const stateToProps = () => ({})
 
-const dispatchToProps = {
-}
+const dispatchToProps = {}
 
 class SearchContainer extends Component {
   render() {
-    return (
-      <Search { ...this.props } />
-    )
+    return <Search {...this.props} />
   }
 }
 

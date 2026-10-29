@@ -22,7 +22,7 @@ export const getNotifications = () => (dispatch, getState) => {
   }
 }
 
-export const markAsRead = notificationId => ({
+export const markAsRead = (notificationId) => ({
   type: 'NOTIFICATIONS/MARK_AS_READ',
   http: true,
   payload: {

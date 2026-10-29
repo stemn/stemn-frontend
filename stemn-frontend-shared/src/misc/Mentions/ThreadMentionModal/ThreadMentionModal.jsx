@@ -13,14 +13,16 @@ import { newMention } from 'stemn-shared/misc/Mentions/Mentions.utils'
 import { MdFilterList } from 'react-icons/md'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 
-const getMentionsFromObject = (mentionsObject, threads) => Object.keys(mentionsObject).map(threadId => newMention({
-  entityId: threadId,
-  display: threads[threadId].data.name,
-  mentionType: mentionsObject[threadId] === 'complete' ? 'thread-complete' : 'thread',
-}),
-)
+const getMentionsFromObject = (mentionsObject, threads) =>
+  Object.keys(mentionsObject).map((threadId) =>
+    newMention({
+      entityId: threadId,
+      display: threads[threadId].data.name,
+      mentionType: mentionsObject[threadId] === 'complete' ? 'thread-complete' : 'thread',
+    }),
+  )
 
-const countMentions = (mentions, type) => values(mentions).filter(mentionType => mentionType === type).length
+const countMentions = (mentions, type) => values(mentions).filter((mentionType) => mentionType === type).length
 
 export default class ThreadMentionModal extends Component {
   UNSAFE_componentWillMount() {
@@ -70,69 +72,86 @@ export default class ThreadMentionModal extends Component {
       if (numThreads === 0 || numFilteredThreads === 0) {
         return (
           <div className="flex layout-column layout-align-center-center text-center">
-            {numThreads === 0
-              ? <div style={ { width: '100%' } }>This project has no threads. Add some.</div>
-              : <div style={ { width: '100%' } }>No results, <a className="text-primary" onClick={ () => this.props.storeChange(`${boardModel}.searchString`, '') }>clear search filter.</a></div>
-            }
+            {numThreads === 0 ? (
+              <div style={{ width: '100%' }}>This project has no threads. Add some.</div>
+            ) : (
+              <div style={{ width: '100%' }}>
+                No results,{' '}
+                <a className="text-primary" onClick={() => this.props.storeChange(`${boardModel}.searchString`, '')}>
+                  clear search filter.
+                </a>
+              </div>
+            )}
           </div>
         )
       }
-      
+
       return (
         <div className="flex scroll-box">
-          { filteredBoard.data.groups.map((group, idx) => <div key={ idx }>
-            { group.threads.map(threadId => (
-              <ThreadRow
-                key={ threadId }
-                threadId={ threadId }
-                status={ mentions[threadId] }
-                toggleComplete={ () => this.setMention({ status: 'complete', threadId }) }
-                toggleRelated={ () => this.setMention({ status: 'related', threadId }) }
-              />),
-            ) }
-          </div>)}
+          {filteredBoard.data.groups.map((group, idx) => (
+            <div key={idx}>
+              {group.threads.map((threadId) => (
+                <ThreadRow
+                  key={threadId}
+                  threadId={threadId}
+                  status={mentions[threadId]}
+                  toggleComplete={() => this.setMention({ status: 'complete', threadId })}
+                  toggleRelated={() => this.setMention({ status: 'related', threadId })}
+                />
+              ))}
+            </div>
+          ))}
         </div>
       )
     }
 
     return (
-      <div className={ `${classes.modal} layout-column` }>
-        <div className="modal-title">
-          Add threads to a commit:
-        </div>
-        <div className={ `${classes.header} layout-row layout-align-start-center` }>
-          <div className="flex">{howMany({ count: countMentions(mentions, 'complete'), adj: 'closed' }, { count: countMentions(mentions, 'related'), adj: 'related' }, 'thread')}</div>
+      <div className={`${classes.modal} layout-column`}>
+        <div className="modal-title">Add threads to a commit:</div>
+        <div className={`${classes.header} layout-row layout-align-start-center`}>
+          <div className="flex">
+            {howMany(
+              { count: countMentions(mentions, 'complete'), adj: 'closed' },
+              { count: countMentions(mentions, 'related'), adj: 'related' },
+              'thread',
+            )}
+          </div>
           <SearchInput
-            className={ classes.search }
-            changeAction={ this.changeInput }
-            value={ filter.string }
+            className={classes.search}
+            changeAction={this.changeInput}
+            value={filter.string}
             type="text"
             placeholder="Search threads"
           />
           <Popover preferPlace="right" trigger="hoverDelay">
-            <SimpleIconButton><MdFilterList size="20" /></SimpleIconButton>
+            <SimpleIconButton>
+              <MdFilterList size="20" />
+            </SimpleIconButton>
             <div>
               <ThreadFilterMenu
-                auth={ auth }
-                filter={ filter }
-                filterModel={ filterModel }
-                filterCacheKey={ filterCacheKey }
-                setFilter={ setFilter }
+                auth={auth}
+                filter={filter}
+                filterModel={filterModel}
+                filterCacheKey={filterCacheKey}
+                setFilter={setFilter}
               />
             </div>
           </Popover>
         </div>
         <div className="layout-column flex rel-box">
-          <LoadingOverlay show={ !board || !board.data } />
-          { board && board.data ? getThreads() : null }
+          <LoadingOverlay show={!board || !board.data} />
+          {board && board.data ? getThreads() : null}
         </div>
         <div className="modal-footer layout-row layout-align-start-center">
           <div className="flex text-description-1" />
-          <Button style={ { marginRight: '10px' } } onClick={ this.cancel }>Cancel</Button>
-          <Button className="primary" onClick={ this.submit }>Add Threads</Button>
+          <Button style={{ marginRight: '10px' }} onClick={this.cancel}>
+            Cancel
+          </Button>
+          <Button className="primary" onClick={this.submit}>
+            Add Threads
+          </Button>
         </div>
       </div>
     )
   }
 }
-

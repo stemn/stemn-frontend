@@ -12,7 +12,7 @@ const shellContext = shellContextInit({
   appPath: GLOBAL_ENV.NODE_ENV === 'development' ? `${process.execPath} ${process.cwd()}` : process.execPath,
 })
 
-export const enable       = () => shellContext.enable()
-export const disable      = () => shellContext.disable()
-export const isEnabled    = () => shellContext.isEnabled()
-export const updateConfig = config => shellContext.updateConfig(config)
+export const enable = () => shellContext.enable()
+export const disable = () => shellContext.disable()
+export const isEnabled = () => shellContext.isEnabled()
+export const updateConfig = (config) => shellContext.updateConfig(config)

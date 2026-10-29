@@ -10,15 +10,15 @@ export default class AccordianAnimate extends Component {
   render() {
     const { itemHeight, items, children, style, duration, ...otherProps } = this.props
     const childItems = items || children
-    
+
     const getNumChildren = () => {
       if (childItems) {
         const childItemsLength = childItems.length
         return childItemsLength === undefined ? 1 : childItemsLength
-      } 
+      }
       return 0
     }
-    
+
     const numChildren = getNumChildren()
     const containerHeight = itemHeight * numChildren
     const containerStyle = {
@@ -26,12 +26,11 @@ export default class AccordianAnimate extends Component {
       transition: `${duration}ms ease height`,
       overflow: 'hidden',
     }
-        
+
     return (
-      <div style={ { ...style, ...containerStyle } } {  ...otherProps }>
-        { children }
+      <div style={{ ...style, ...containerStyle }} {...otherProps}>
+        {children}
       </div>
     )
   }
 }
-
