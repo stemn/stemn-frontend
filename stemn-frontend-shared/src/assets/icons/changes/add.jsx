@@ -1,7 +1,7 @@
 import React from 'react';
 import IconBase from 'stemn-shared/misc/Icons/IconBase';
 
-export default (props) => {
+const AddIcon = (props) => {
   return (
     <IconBase viewBox="0 0 24 24" {...props}>
       <rect x="9.075" y="0.114" width="5.851" height="23.771"/>
@@ -9,3 +9,5 @@ export default (props) => {
     </IconBase>
   )
 }
+
+export default AddIcon

@@ -1,7 +1,7 @@
 import React from 'react';
 import IconBase from 'stemn-shared/misc/Icons/IconBase';
 
-export default (props) => {
+const AppleIcon = (props) => {
   return (
     <IconBase viewBox="0 0 24 24" {...props}>
 	<path id="Apple_3_" d="M13.203,2.1c0.84-0.989,2.257-1.719,3.421-1.766c0.153,1.368-0.392,2.735-1.208,3.727
@@ -13,3 +13,5 @@ export default (props) => {
     </IconBase>
   )
 }
+
+export default AppleIcon

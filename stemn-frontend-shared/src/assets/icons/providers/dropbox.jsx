@@ -1,7 +1,7 @@
 import React from 'react';
 import IconBase from 'stemn-shared/misc/Icons/IconBase';
 
-export default (props) => {
+const DropboxIcon = (props) => {
   return (
     <IconBase viewBox="0 0 24 24" {...props}>
 	  <path d="M0.271,12.705c0.649-0.486,1.298-0.969,1.945-1.456
@@ -30,3 +30,5 @@ export default (props) => {
     </IconBase>
   )
 }
+
+export default DropboxIcon

@@ -1,7 +1,7 @@
 import React from 'react';
 import IconBase from 'stemn-shared/misc/Icons/IconBase';
 
-export default (props) => {
+const LinuxIcon = (props) => {
   return (
     <IconBase viewBox="0 0 24 24" {...props}>
 <g transform="translate(-3.3359375,285.2793)">
@@ -85,3 +85,5 @@ export default (props) => {
     </IconBase>
   )
 }
+
+export default LinuxIcon

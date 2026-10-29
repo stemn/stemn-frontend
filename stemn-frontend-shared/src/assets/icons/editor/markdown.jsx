@@ -1,7 +1,7 @@
 import React from 'react';
 import IconBase from 'stemn-shared/misc/Icons/IconBase';
 
-export default (props) => {
+const MarkdownIcon = (props) => {
   return (
     <IconBase viewBox="0 0 24 24" {...props}>
 	  <path d="M22.098,19.16c-6.732,0-13.463,0-20.195,0c-0.021-0.004-0.04-0.01-0.061-0.014
@@ -20,3 +20,5 @@ export default (props) => {
     </IconBase>
   )
 }
+
+export default MarkdownIcon

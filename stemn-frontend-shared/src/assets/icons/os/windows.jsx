@@ -1,7 +1,7 @@
 import React from 'react';
 import IconBase from 'stemn-shared/misc/Icons/IconBase';
 
-export default (props) => {
+const WindowsIcon = (props) => {
   return (
     <IconBase viewBox="0 0 24 24" {...props}>
 	 <path d="M1.164,11.277L1.156,4.226l8.676-1.178v8.229H1.164z M11.277,2.838l11.564-1.683v10.122H11.277V2.838z M22.844,12.723
@@ -9,3 +9,5 @@ export default (props) => {
     </IconBase>
   )
 }
+
+export default WindowsIcon

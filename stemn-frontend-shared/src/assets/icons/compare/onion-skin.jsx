@@ -1,7 +1,7 @@
 import React from 'react';
 import IconBase from 'stemn-shared/misc/Icons/IconBase';
 
-export default (props) => {
+const OnionSkinIcon = (props) => {
   return (
     <IconBase viewBox="0 0 24 24" {...props}>
       <path d="M1.125,1.125v21.75h21.75V1.125H1.125z M20.875,16.501L16.5,20.875h-3.352l7.727-7.724V16.501z M3.125,7.082l3.957-3.957
@@ -11,3 +11,5 @@ export default (props) => {
     </IconBase>
   )
 }
+
+export default OnionSkinIcon

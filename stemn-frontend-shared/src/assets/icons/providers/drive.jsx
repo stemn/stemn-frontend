@@ -1,7 +1,7 @@
 import React from 'react';
 import IconBase from 'stemn-shared/misc/Icons/IconBase';
 
-export default (props) => {
+const DriveIcon = (props) => {
   return (
     <IconBase viewBox="0 0 24 24" {...props}>
 	<path d="M0.234,15.31c0.261-0.441,0.526-0.88,0.783-1.324
@@ -24,3 +24,5 @@ export default (props) => {
     </IconBase>
   )
 }
+
+export default DriveIcon
