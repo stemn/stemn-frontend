@@ -60,6 +60,7 @@
     "electron-updater": "6.8.11",
     "electron-vite": "6.0.0",
     "express": "5.3.0",
+    "express-rate-limit": "8.7.1",
     "ini": "7.0.0",
     "redux-logger": "3.0.6",
     "redux-promise-middleware": "6.2.0",

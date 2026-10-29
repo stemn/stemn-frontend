@@ -1,4 +1,5 @@
 import express from 'express'
+import { rateLimit } from 'express-rate-limit'
 import log from 'electron-log/main'
 import { authGoogle, authDropbox, authFacebook, authLinkedin } from './routes.js'
 
@@ -7,6 +8,9 @@ export const API_PORT = 49554
 
 export default (store) => {
   const server = express()
+
+  // The callbacks are hit once per sign-in; anything more is not a browser redirect
+  server.use(rateLimit({ windowMs: 60_000, limit: 30, standardHeaders: 'draft-8', legacyHeaders: false }))
 
   // attach the store to all requests
   server.use((req, res, next) => {

@@ -9,16 +9,27 @@ export interface IFeaturedTileProps {
   image: string
 }
 
+/** Path of a link to stemn.com itself (rendered as an in-app link), or null for any other site */
+const stemnPath = (link: string) => {
+  try {
+    const url = new URL(link)
+    return url.origin === 'https://stemn.com' ? `${url.pathname}${url.search}${url.hash}` : null
+  } catch {
+    return null
+  }
+}
+
 const CmsLink = ({ link, children, ...otherProps }: { link: string; children: any; [otherProps: string]: any }) => {
-  if (link.includes('https://stemn.com')) {
+  const path = stemnPath(link)
+  if (path !== null) {
     return (
-      <Link to={link.replace('https://stemn.com', '')} {...otherProps}>
+      <Link to={path} {...otherProps}>
         {children}
       </Link>
     )
   } else {
     return (
-      <a href={link} {...otherProps} target="_blank">
+      <a href={link} {...otherProps} target="_blank" rel="noopener noreferrer">
         {children}
       </a>
     )

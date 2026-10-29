@@ -4,7 +4,7 @@ export const getMetaFromPath =
     const providerPaths = getState().system.providerPath
     const provider = Object.keys(providerPaths).find((prov) => path.startsWith(providerPaths[prov]))
     if (provider) {
-      const shortPath = path.replace(providerPaths[provider], '').replace('\\', '/')
+      const shortPath = path.replace(providerPaths[provider], '').replaceAll('\\', '/')
       const pathNoSlash = shortPath[0] === '/' ? shortPath.substring(1) : shortPath
       if (provider && shortPath) {
         dispatch({
