@@ -1,16 +1,15 @@
 /* eslint-disable */
 
+// ES module conversion of the generated UMD bundle: the UMD wrapper below now
+// writes to a local object, exported at the end of the file.
+const primusContext = {};
+
 (function UMDish(name, context, definition, plugins) {
   context[name] = definition.call(context);
   for (var i = 0; i < plugins.length; i++) {
     plugins[i](context[name])
   }
-  if (typeof module !== "undefined" && module.exports) {
-    module.exports = context[name];
-  } else if (typeof define === "function" && define.amd) {
-    define(function reference() { return context[name]; });
-  }
-})("Primus", this || {}, function wrapper() {
+})("Primus", primusContext, function wrapper() {
   var define, module, exports
     , Primus = (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw (f.code="MODULE_NOT_FOUND", f)}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 'use strict';
@@ -24,7 +23,6 @@
  * @api public
  */
 module.exports = function demolish(keys, options) {
-  const ws = require('ws');
 
   var split = /[, ]+/;
 
@@ -3153,12 +3151,6 @@ Primus.prototype.client = function client() {
   var Factory = (function factory() {
     if ('undefined' !== typeof WebSocket) return WebSocket;
     if ('undefined' !== typeof MozWebSocket) return MozWebSocket;
-    // STEMN CHANGES to return ws if none of the above work
-    else return require('ws')
-
-//    STEMN CHANGES - THIS IS COMMENTED OUT BECAUSES WS IS REQUI
-//    try { return Primus.requires('ws'); }
-//    catch (e) {}
 
     return undefined;
   })();
@@ -3318,3 +3310,5 @@ module.exports = Primus;
 [
 
 ]);
+
+export default primusContext.Primus;

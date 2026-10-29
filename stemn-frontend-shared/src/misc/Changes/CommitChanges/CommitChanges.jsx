@@ -14,7 +14,6 @@ import FileSyncUnderway from 'stemn-shared/misc/FileList/FileSyncUnderway'
 import { groupRevisions } from 'stemn-shared/misc/Timeline/Timeline.utils.js'
 import { getToggleAllStatus, filterSelectedChangesByPossible } from '../Changes.utils.js'
 import { get } from 'lodash'
-import './CommitChanges.css'
 
 const contextIdentifier = 'FileChangeCm'
 
