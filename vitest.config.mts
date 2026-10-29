@@ -9,10 +9,17 @@ import { defineConfig } from 'vitest/config'
 
 const root = import.meta.dirname
 const sharedSrc = join(root, 'stemn-frontend-shared/src')
+const javascripts = join(root, 'stemn-frontend-website/src/client/assets/javascripts')
 
 export default defineConfig({
   resolve: {
-    alias: [{ find: /^stemn-shared(?=\/|$)/, replacement: sharedSrc }],
+    // the website's aliases (stemn-frontend-website/vite.config.mts)
+    alias: [
+      { find: /^stemn-shared(?=\/|$)/, replacement: sharedSrc },
+      { find: /^route-actions$/, replacement: join(javascripts, 'pages/routeActions.js') },
+      { find: /^reducer$/, replacement: join(javascripts, 'app/reducer.ts') },
+      { find: /^(pages|modules|layout)\//, replacement: `${javascripts}/$1/` },
+    ],
     extensions: ['.web.ts', '.web.tsx', '.web.js', '.web.jsx', '.mjs', '.ts', '.tsx', '.js', '.jsx', '.json'],
   },
   define: {

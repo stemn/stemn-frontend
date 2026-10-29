@@ -1,7 +1,6 @@
+import loadSession from './loadSession'
 import http from 'axios'
-import { loadUserData } from './'
 import { show as showToast } from '../../Toasts/Toasts.actions.js'
-import { getSettings } from 'stemn-shared/misc/UserSettings/UserSettings.actions.js'
 
 export default (code) => (dispatch) =>
   dispatch({
@@ -14,6 +13,6 @@ export default (code) => (dispatch) =>
       },
     }),
   }).then((response) => {
-    setTimeout(() => Promise.all([dispatch(loadUserData()), dispatch(getSettings())]), 1)
+    dispatch(loadSession())
     dispatch(showToast({ title: 'Beta access granted. Welcome to the Stemn Desktop Beta!' }))
   })
