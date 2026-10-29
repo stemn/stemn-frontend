@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from './StandardTable.css'
+import classes from './StandardTable.module.css'
 
 export default class StandardTable extends React.Component {
   render() {

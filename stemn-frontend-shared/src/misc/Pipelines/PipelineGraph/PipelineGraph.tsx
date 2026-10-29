@@ -13,7 +13,7 @@ import { PipelineGraphStepModel } from 'stemn-shared/misc/Pipelines/PipelineGrap
 import { IPipelineConfig, IStep } from 'stemn-shared/misc/Pipelines/PipelineGraph/types'
 import { createDiagramEngine, deserializePipeline, serializePipeline } from 'stemn-shared/misc/Pipelines/PipelineGraph/utils'
 import './PipelineGraph.global.scss'
-import s from './PipelineGraph.scss'
+import s from './PipelineGraph.module.scss'
 
 export interface IPipelineGraphProps {
   diagramId: string,

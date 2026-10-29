@@ -4,7 +4,7 @@ import { get } from 'lodash'
 // Component Core
 import React from 'react'
 
-import classes from './ProjectSettingsPage.css'
+import classes from './ProjectSettingsPage.module.css'
 
 import NavPill from 'stemn-shared/misc/Buttons/NavPill/NavPill'
 

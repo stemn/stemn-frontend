@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classes from './LoadingPlaceholder.css'
+import classes from './LoadingPlaceholder.module.css'
 import cn from 'classnames'
 
 export default class LoadingPlaceholder extends Component {

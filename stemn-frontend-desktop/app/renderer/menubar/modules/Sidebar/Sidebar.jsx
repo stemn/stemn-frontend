@@ -3,7 +3,7 @@ import { toggleMenubarSidebar } from 'stemn-shared/misc/Sidebar/Sidebar.actions.
 import React from 'react'
 import { escapeRegExp, orderBy } from 'lodash'
 import cn from 'classnames'
-import classes from './Sidebar.css'
+import classes from './Sidebar.module.css'
 import AnimateShow from 'stemn-shared/misc/AnimateShow/AnimateShow.jsx'
 import SidebarProjectButton from 'stemn-shared/misc/Sidebar/SidebarProjectButton.jsx'
 import { MdSearch } from 'react-icons/md'

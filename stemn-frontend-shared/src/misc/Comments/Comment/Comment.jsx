@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import cn from 'classnames'
-import classes from './Comment.css'
+import classes from './Comment.module.css'
 import Link from 'stemn-shared/misc/Router/Link'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import Editor from 'stemn-shared/misc/Editor/EditorNew'

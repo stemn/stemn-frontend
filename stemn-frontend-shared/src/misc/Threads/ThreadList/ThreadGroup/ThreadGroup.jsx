@@ -5,7 +5,7 @@ import Popover from 'stemn-shared/misc/Popover'
 import { MdMoreHoriz } from 'react-icons/md'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 
-import classes from './ThreadGroup.css'
+import classes from './ThreadGroup.module.css'
 export default class ThreadGroup extends React.Component {
   render() {
     const { item, children, layout, entityModel, deleteGroup, updateGroup, simpleGroup } = this.props

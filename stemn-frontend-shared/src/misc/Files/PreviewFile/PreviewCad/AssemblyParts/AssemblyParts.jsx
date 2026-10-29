@@ -1,7 +1,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import classes from './AssemblyParts.css'
+import classes from './AssemblyParts.module.css'
 import { connect } from 'react-redux'
 import { orderBy } from 'lodash'
 import moment from 'moment'

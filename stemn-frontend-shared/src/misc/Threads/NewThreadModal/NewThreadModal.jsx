@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { get } from 'lodash'
-import classes from './NewThreadModal.scss'
+import classes from './NewThreadModal.module.scss'
 import cn from 'classnames'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'

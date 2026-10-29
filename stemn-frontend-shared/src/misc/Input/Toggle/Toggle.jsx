@@ -3,7 +3,7 @@ import Input from 'stemn-shared/misc/Input/Input/Input'
 import cn from 'classnames'
 
 // Styles
-import styles from './Toggle.css'
+import styles from './Toggle.module.css'
 
 export default class Toggle extends React.Component {
   render() {

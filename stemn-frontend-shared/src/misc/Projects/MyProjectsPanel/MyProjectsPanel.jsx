@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import PublicPrivateIcon from 'stemn-shared/misc/Icons/PublicPrivateIcon'
-import classes from './MyProjectsPanel.scss'
+import classes from './MyProjectsPanel.module.scss'
 import cn from 'classnames'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import Link from 'stemn-shared/misc/Router/Link'

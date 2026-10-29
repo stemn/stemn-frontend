@@ -2,7 +2,7 @@ import React from 'react'
 import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist'
 import { get } from 'lodash'
 import Viewer from './PreviewPdfViewer.jsx'
-import classes from './PreviewPdf.css'
+import classes from './PreviewPdf.module.css'
 import ScrollZoom from 'stemn-shared/misc/Scroll/ScrollZoom/ScrollZoom.jsx'
 
 // The pdf.js worker is emitted by webpack as a separate asset

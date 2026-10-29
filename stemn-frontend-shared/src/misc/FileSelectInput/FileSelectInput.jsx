@@ -8,7 +8,7 @@ import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js'
 import fileSelectModalName from 'stemn-shared/misc/FileSelect/FileSelectModal'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 
-import classes from './FileSelectInput.css'
+import classes from './FileSelectInput.module.css'
 import { MdFolder } from 'react-icons/md'
 import { MdCreateNewFolder as MdNewFolder } from 'react-icons/md'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'

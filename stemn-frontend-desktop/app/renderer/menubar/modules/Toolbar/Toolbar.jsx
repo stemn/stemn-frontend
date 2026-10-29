@@ -10,7 +10,7 @@ import React from 'react'
 
 // Styles
 import cn from 'classnames'
-import toolbarStyles from './Toolbar.css'
+import toolbarStyles from './Toolbar.module.css'
 
 // Sub Components
 import Popover from 'stemn-shared/misc/Popover'

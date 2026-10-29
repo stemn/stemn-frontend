@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { isEqual } from 'lodash'
-import styles from './autoUpdater.css'
+import styles from './autoUpdater.module.css'
 
 class AutoUpdater extends Component {
   static propTypes = {

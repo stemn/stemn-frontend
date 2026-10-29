@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classes from './NewFieldModal.css'
+import classes from './NewFieldModal.module.css'
 import cn from 'classnames'
 import Form from 'stemn-shared/misc/Forms/Form'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'

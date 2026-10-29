@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import classes from './PreviewPdf.css'
+import classes from './PreviewPdf.module.css'
 import { TextLayer } from 'pdfjs-dist'
 import Waypoint from 'stemn-shared/misc/Waypoint'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'

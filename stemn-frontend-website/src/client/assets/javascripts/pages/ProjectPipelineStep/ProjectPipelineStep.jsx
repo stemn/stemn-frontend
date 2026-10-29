@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import classes from './ProjectPipelineStep.scss'
+import classes from './ProjectPipelineStep.module.scss'
 import { Breadcrumbs, Crumb } from 'stemn-shared/misc/Breadcrumbs'
 import { Container } from 'stemn-shared/misc/Layout'
 import SubSubHeader from 'modules/SubSubHeader'

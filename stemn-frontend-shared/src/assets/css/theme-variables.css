@@ -1,0 +1,13 @@
+/*
+ * Theme values as CSS custom properties, for the global stylesheets in this folder.
+ * CSS modules keep using `@value <name> from "theme"` (theme.module.css of the app).
+ * Keep these in sync with the website and desktop theme.module.css.
+ */
+:root {
+  --theme-primary: #4484d3;
+  --theme-primary-bg: #4484d3;
+  --theme-border1: rgba(0, 0, 0, 0.1);
+  --theme-bg1: rgba(0, 0, 0, 0.03);
+  --theme-highlight-color: rgb(56, 161, 230);
+  --theme-highlight-text-color: rgb(255, 255, 255);
+}

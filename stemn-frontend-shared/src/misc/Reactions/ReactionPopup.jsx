@@ -1,6 +1,6 @@
 import React from 'react'
 
-import classes from './Reactions.css'
+import classes from './Reactions.module.css'
 
 import Popover from 'stemn-shared/misc/Popover'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'

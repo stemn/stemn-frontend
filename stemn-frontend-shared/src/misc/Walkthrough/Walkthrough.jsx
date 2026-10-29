@@ -9,9 +9,9 @@ import * as WalkthroughActions from './Walkthrough.actions.js'
 import React from 'react'
 import PropTypes from 'prop-types'
 import { omit } from 'lodash'
-import { getStepData } from './Walkthrough.config.js'
+import { getStepData } from './Walkthrough.config.jsx'
 
-import classes from './Walkthrough.css'
+import classes from './Walkthrough.module.css'
 
 import Popover from 'stemn-shared/misc/Popover'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'

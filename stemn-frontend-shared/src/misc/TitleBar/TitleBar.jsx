@@ -2,12 +2,12 @@ import React from 'react'
 import { getBridge, getPlatform } from 'stemn-shared/desktop/bridge'
 
 // Styles
-import styles from './TitleBar.css'
+import styles from './TitleBar.module.css'
 import cn from 'classnames'
 
-import MaximiseIcon from './icons/maximise.js'
-import CloseIcon from './icons/close.js'
-import MinimiseIcon from './icons/minimise.js'
+import MaximiseIcon from './icons/maximise.jsx'
+import CloseIcon from './icons/close.jsx'
+import MinimiseIcon from './icons/minimise.jsx'
 
 /** Frameless-window title bar (Windows/Linux). Window controls go through the preload bridge. */
 export default class TitleBar extends React.Component {

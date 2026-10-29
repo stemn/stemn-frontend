@@ -1,6 +1,6 @@
 import cn from 'classnames'
 import { IStep } from 'stemn-shared/misc/Pipelines/PipelineGraph/types'
-import s from './PipelineGraphSidebarWidget.scss'
+import s from './PipelineGraphSidebarWidget.module.scss'
 
 export interface IPipelineGraphSidebarWidgetProps {
   step: IStep,

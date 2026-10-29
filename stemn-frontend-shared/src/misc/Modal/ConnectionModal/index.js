@@ -1,4 +1,5 @@
-const modalName = 'CONNECTION'
-export default GLOBAL_ENV.APP_THREAD === 'electron'
-  ? modalName
-  : require('./ConnectionModal.container').default(modalName)
+import registerConnectionModal from './ConnectionModal.container'
+
+// Registers the modal component and exports its name. The Electron main process
+// resolves index.electron.js instead (the name only, no React components).
+export default registerConnectionModal('CONNECTION')

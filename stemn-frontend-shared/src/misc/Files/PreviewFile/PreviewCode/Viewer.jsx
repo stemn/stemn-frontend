@@ -1,19 +1,7 @@
 import React, { Component } from 'react'
 import codemirror from 'codemirror'
-import 'codemirror/mode/meta.js'
-// const requireCodemirrorMode = require.context('url-loader?limit=1&name=js/codemirror/[name].[hash].[ext]!codemirror/mode/', true, /\.js$/)
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'
-// import { load } from 'stemn-shared/misc/LazyLoading/LazyLoading.utils'
 import Container from 'stemn-shared/misc/Layout/Container'
-
-// Add a special case for pipeline files.
-// These should be treated as yaml
-const transformExtension = (extension) => {
-  if (extension === 'pipeline') {
-    return 'yaml'
-  }
-  return extension
-}
 
 export default class Viewer extends Component {
   getCodemirrorRef = (ref) => {
@@ -22,7 +10,9 @@ export default class Viewer extends Component {
     if (ref && extension) {
       this.codemirrorRef = ref
       this.codemirrorRef.innerHTML = ''
-      const editorInstance = codemirror(this.codemirrorRef, {
+      // Plain text: CodeMirror mode packs (syntax highlighting) were never loaded since
+      // the webpack 2 lazy loader was removed. See the follow-ups in docs.
+      codemirror(this.codemirrorRef, {
         value: data,
         indentWithTabs: true,
         readOnly: true,
@@ -30,22 +20,6 @@ export default class Viewer extends Component {
         lineWrapping: true,
         lineNumbers: !hideNumbers,
       })
-      // Get Mode
-      const transformedExtension = transformExtension(extension)
-      const modeInfo = codemirror.findModeByExtension(transformedExtension)
-      const mode = modeInfo ? modeInfo.mode : 'null'
-      if (mode && mode !== 'null') {
-        const modePath = `./${mode}/${mode}.js`
-        // const webpackModePath = requireCodemirrorMode(modePath)
-
-        // Attach codemirror to the window so the mode pack will find it
-        window.CodeMirror = codemirror
-        // Load the mode
-        // load([{ src: webpackModePath }]).then(() => {
-        //   // Set the mode after it has loaded
-        //   editorInstance.setOption('mode', mode)
-        // })
-      }
     }
   }
   render() {

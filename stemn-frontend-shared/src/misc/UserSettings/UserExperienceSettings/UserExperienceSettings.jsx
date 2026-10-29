@@ -9,7 +9,7 @@ import { Row, Col } from 'stemn-shared/misc/Layout'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox'
 import FilledIconButton from 'stemn-shared/misc/Buttons/FilledIconButton'
-import classes from './UserExperienceSettings.css'
+import classes from './UserExperienceSettings.module.css'
 import cn from 'classnames'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import { MdClose } from 'react-icons/md'
@@ -17,8 +17,7 @@ import { MdAdd } from 'react-icons/md'
 import FlipMove from 'stemn-shared/misc/FlipMove'
 import getUuid from 'stemn-shared/utils/getUuid.js'
 
-@connect()
-export default class UserExperienceSettings extends Component {
+class UserExperienceSettings extends Component {
   static propTypes = {
     dataModel: PropTypes.string,
     data: PropTypes.array,
@@ -184,3 +183,5 @@ export default class UserExperienceSettings extends Component {
     )
   }
 }
+
+export default connect()(UserExperienceSettings)

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { filterBoard, getAllThreads } from '../Threads.utils.js'
 import { has } from 'lodash'
 
-import classes from './ThreadsDisplay.css'
+import classes from './ThreadsDisplay.module.css'
 
 import ThreadList from '../ThreadList/ThreadList.jsx'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'

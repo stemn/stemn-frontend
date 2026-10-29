@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import classes from './ProjectFeedCommitPage.css'
+import classes from './ProjectFeedCommitPage.module.css'
 import FileCompare from 'stemn-shared/misc/FileCompare'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'

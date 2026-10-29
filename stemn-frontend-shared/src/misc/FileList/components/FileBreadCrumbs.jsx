@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
-import classes from './FileBreadCrumbs.css'
+import classes from './FileBreadCrumbs.module.css'
 import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
 import Popover from 'stemn-shared/misc/Popover'
 import FileListPopup from 'stemn-shared/misc/FileList/FileListPopup'

@@ -2,7 +2,7 @@ import React from 'react'
 import { MdDone } from 'react-icons/md'
 // Styles
 import cn from 'classnames'
-import styles from './SelectList.css'
+import styles from './SelectList.module.css'
 
 export default class SelectList extends React.Component {
   render() {

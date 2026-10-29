@@ -5,7 +5,7 @@ This repo contains all of Stemn's frontend code.
 ## Packages
 
 * [stemn-frontend-website](./stemn-frontend-website) Source code for the Stemn website
-* [stemn-frontend-shared](./stemn-frontend-shared) Code shared between `stemn-frontend-website` and `stemn-frontend-desktop` (consumed as source through the `stemn-shared/*` webpack alias)
+* [stemn-frontend-shared](./stemn-frontend-shared) Code shared between `stemn-frontend-website` and `stemn-frontend-desktop` (consumed as source through the `stemn-shared/*` alias), plus the build conventions both apps use (`config/`)
 * [stemn-frontend-desktop](./stemn-frontend-desktop) Source code for the Stemn desktop (Electron) app
 * [stemn-frontend-admin](./stemn-frontend-admin) This is a placeholder - ignore this.
 
@@ -21,10 +21,12 @@ The repo root is an [npm workspace](https://docs.npmjs.com/cli/using-npm/workspa
 
 ```sh
 npm install          # install everything (run at the repo root)
-npm run dev          # website dev server with HMR on http://localhost:8081
-npm run build        # production build -> stemn-frontend-website/build
+npm run dev          # website: Vite dev server with React Fast Refresh on http://localhost:8081
+npm run build        # website: Vite production build -> stemn-frontend-website/build
 npm run serve        # serve the production build on http://localhost:8081 (PORT=... to change)
-npm run typecheck    # tsc --noEmit (type errors never block the webpack build)
+npm run dev:webpack  # website: the webpack 5 fallback dev server (same port)
+npm run build:webpack # website: the webpack 5 fallback production build (same output dir)
+npm run typecheck    # tsc --noEmit (type errors never block the builds)
 npm test             # unit tests of every workspace that has them
 ```
 
@@ -61,7 +63,6 @@ npm run desktop:dev        # main + preload in watch mode, renderer dev server w
 npm run desktop:build      # production build -> stemn-frontend-desktop/dist (STEMN_ENV=production unless set)
 npm run desktop:start      # run the built app
 npm run desktop:package    # Linux AppImage + unpacked dir -> stemn-frontend-desktop/release
-npm run desktop:test       # build-tooling unit tests
 npm run desktop:test:e2e   # Playwright + Electron end-to-end test against the local backend (needs a display)
 npm run desktop:typecheck
 ```

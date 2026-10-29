@@ -22,9 +22,7 @@ const fetchConfigs = [{
   },
 }]
 
-@connect(stateToProps, dispatchToProps)
-@fetchDataHoc(fetchConfigs)
-export default class UserRowContainer extends Component {
+class UserRowContainer extends Component {
   static defaultProps = {
     user: {},
   }
@@ -37,3 +35,5 @@ export default class UserRowContainer extends Component {
     />)
   }
 }
+
+export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(UserRowContainer))

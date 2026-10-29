@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classes from './LabelDisplay.css'
+import classes from './LabelDisplay.module.css'
 import cn from 'classnames'
 
 export default class LabelDisplay extends Component {

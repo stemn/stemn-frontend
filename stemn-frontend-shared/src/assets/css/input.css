@@ -1,4 +1,3 @@
-@value border1, highlight-color, highlight-text-color from "theme";
 
 input {
   line-height: 1.3em;
@@ -8,14 +7,14 @@ input {
   padding: 10px;
   display: block;
   width: 100%;
-  border: 1px solid border1;
+  border: 1px solid var(--theme-border1);
   resize: none;
   background: white;
   overflow: hidden;
 
   -webkit-user-select: text;
 }
-.dr-input:global(.active) {
+.dr-input.active {
   border: 1px solid rgba(0, 0, 0, 0.4);
 }
 .dr-input:focus {
@@ -39,10 +38,10 @@ textarea.input-plain {
 }
 
 ::selection {
-  background: highlight-color;
-  color: highlight-text-color;
+  background: var(--theme-highlight-color);
+  color: var(--theme-highlight-text-color);
 }
 ::-moz-selection {
-  background: highlight-color;
-  color: highlight-text-color;
+  background: var(--theme-highlight-color);
+  color: var(--theme-highlight-text-color);
 }

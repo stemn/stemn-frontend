@@ -7,7 +7,7 @@ import Tabs from 'stemn-shared/misc/Tabs/Tabs'
 import Link from 'stemn-shared/misc/Router/Link'
 import { SiteSearchResultsContainer } from 'stemn-shared/misc/Search/SiteSearchResults'
 import { Helmet } from 'react-helmet-async'
-import classes from './Search.scss'
+import classes from './Search.module.scss'
 
 export default class Search extends Component {
   render() {

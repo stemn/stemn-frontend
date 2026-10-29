@@ -3,7 +3,7 @@ import modelLocked from 'stemn-shared/assets/images/pure-vectors/model-locked.sv
 import { connect } from 'react-redux'
 import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js'
 import assemblyPartNotFoundModalName from 'stemn-shared/misc/Files/PreviewFile/Messages/AssemblyPartNotFound/AssemblyPartNotFoundModal'
-import classes from './AssemblyPartNotFound.scss'
+import classes from './AssemblyPartNotFound.module.scss'
 
 export class AssemblyPartNotFound extends React.Component {
   render() {

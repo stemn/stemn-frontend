@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classes from './SubHeader.css'
+import classes from './SubHeader.module.css'
 import cn from 'classnames'
 
 import { Container } from 'stemn-shared/misc/Layout'

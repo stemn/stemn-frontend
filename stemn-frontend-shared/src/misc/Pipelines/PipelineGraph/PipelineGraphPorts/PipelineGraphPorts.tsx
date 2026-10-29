@@ -4,7 +4,7 @@ import { filter, map, pipe, values } from 'ramda'
 import * as React from 'react'
 import { PipelineGraphPort } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphPort'
 import { PipelineGraphStepModel } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphStep'
-import s from './PipelineGraphPorts.scss'
+import s from './PipelineGraphPorts.module.scss'
 
 export interface IPipelineGraphPortsProps {
   node: PipelineGraphStepModel,

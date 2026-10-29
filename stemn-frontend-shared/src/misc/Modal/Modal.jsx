@@ -5,7 +5,7 @@ import { hideModal, resolveModal, rejectModal } from './Modal.actions.js'
 import React, { Component } from 'react'
 import Modal from 'react-modal'
 
-import classes from './Modal.css'
+import classes from './Modal.module.css'
 
 import { getModal } from './ModalRegistry'
 

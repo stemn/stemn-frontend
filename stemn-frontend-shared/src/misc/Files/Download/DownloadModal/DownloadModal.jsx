@@ -5,7 +5,7 @@ import { orderByTime } from 'stemn-shared/misc/Timeline/Timeline.utils'
 import { getRevisions } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.utils'
 
 import cn from 'classnames'
-import classes from './DownloadModal.css'
+import classes from './DownloadModal.module.css'
 
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import DownloadFile from '../../DownloadFile/DownloadFile.jsx'

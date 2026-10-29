@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import classes from './AutodeskLocalViewer.css'
+import classes from './AutodeskLocalViewer.module.css'
 import autodeskViewerUtils from '../PreviewCadViewer.utils.js'
 import { push } from 'icepick';
 

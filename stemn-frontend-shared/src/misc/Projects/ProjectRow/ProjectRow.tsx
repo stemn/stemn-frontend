@@ -7,7 +7,7 @@ import { ProjectInfoIcons } from 'stemn-shared/misc/Projects/ProjectInfoIcons'
 import { IProject } from 'stemn-shared/misc/Projects/types'
 import Link from 'stemn-shared/misc/Router/Link'
 import SocialButton from 'stemn-shared/misc/Social/SocialButton'
-import classes from './ProjectRow.scss'
+import classes from './ProjectRow.module.scss'
 
 export interface IProjectRowProps {
   project: {

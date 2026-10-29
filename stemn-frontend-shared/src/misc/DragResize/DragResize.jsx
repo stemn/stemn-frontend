@@ -4,7 +4,7 @@ import clickDrag from 'stemn-shared/misc/ClickDrag'
 
 // Styles
 import cn from 'classnames'
-import classes from './DragResize.css'
+import classes from './DragResize.module.css'
 
 
 class DraggerComponent extends React.Component {

@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { clone, forEachRight, find } from 'lodash'
 import { deregister, register, activeInstances } from './PreviewPcb.utils'
 
-import classes from './PreviewPcb.css'
+import classes from './PreviewPcb.module.css'
 
 export default class PreviewPcbViewer extends Component {
   state = {

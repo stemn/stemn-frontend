@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 // Component Core
 import React from 'react'
 
-import classes from '../ProjectPage/ProjectSettingsPage/ProjectSettingsPage.css'
+import classes from '../ProjectPage/ProjectSettingsPage/ProjectSettingsPage.module.css'
 
 // Sub Components
 import Header from 'stemn-shared/misc/Header/Header.jsx'

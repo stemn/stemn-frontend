@@ -5,11 +5,8 @@ import React from 'react'
 import { MdError } from 'react-icons/md'
 import { MdClose } from 'react-icons/md'
 import cn from 'classnames'
-
-// css-loader emits ES modules - require() returns { default: classes }
-const classes = GLOBAL_ENV.APP_TYPE === 'web'
-  ? require('./Toasts.web.css').default
-  : require('./Toasts.desktop.css').default
+// Toasts.styles.web.js / Toasts.styles.desktop.js (platform extension resolution)
+import classes from './Toasts.styles'
 
 const transitionClassNames = {
   enter: classes.enter,

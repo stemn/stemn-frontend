@@ -1,9 +1,9 @@
 import React from 'react'
 
 import cn from 'classnames'
-import s from './BannerBar.scss'
+import s from './BannerBar.module.scss'
 
-export default (props) => {
+const BannerBar = (props) => {
   const { children, className, type, ...otherProps } = props
 
   const c = cn(s.banner, { 
@@ -19,3 +19,5 @@ export default (props) => {
     </div>
   )
 }
+
+export default BannerBar

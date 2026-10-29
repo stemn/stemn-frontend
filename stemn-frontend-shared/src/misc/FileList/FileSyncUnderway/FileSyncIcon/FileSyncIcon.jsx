@@ -1,8 +1,8 @@
 import React from 'react'
 import IconBase from 'stemn-shared/misc/Icons/IconBase'
-import classes from './FileSyncIcon.scss'
+import classes from './FileSyncIcon.module.scss'
 
-export default props => (
+const FileSyncIcon = props => (
   <IconBase viewBox="0 0 150 150" { ...props }>
     <g>
       <g className={ classes.orbit }>
@@ -84,3 +84,5 @@ export default props => (
   </IconBase>
 
 )
+
+export default FileSyncIcon

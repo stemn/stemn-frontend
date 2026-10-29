@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import classes from './CommentBody.scss'
+import classes from './CommentBody.module.scss'
 
 import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'
 import LoadingPlaceholder from 'stemn-shared/misc/Loading/LoadingPlaceholder'

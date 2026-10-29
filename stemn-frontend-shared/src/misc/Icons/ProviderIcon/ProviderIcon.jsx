@@ -1,9 +1,9 @@
 import React from 'react'
-import Drive from 'stemn-shared/assets/icons/providers/drive.js'
-import Dropbox from 'stemn-shared/assets/icons/providers/dropbox.js'
+import Drive from 'stemn-shared/assets/icons/providers/drive.jsx'
+import Dropbox from 'stemn-shared/assets/icons/providers/dropbox.jsx'
 import { MdCloudOff } from 'react-icons/md'
 
-export default ({ provider, ...otherProps }) => {
+const ProviderIcon = ({ provider, ...otherProps }) => {
   if (provider === 'drive') {
     return <Drive { ...otherProps } />
   } else if (provider === 'dropbox') {
@@ -11,4 +11,6 @@ export default ({ provider, ...otherProps }) => {
   } 
   return <MdCloudOff { ...otherProps } />
 }
+
+export default ProviderIcon
 

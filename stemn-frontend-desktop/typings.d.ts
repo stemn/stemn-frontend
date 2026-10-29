@@ -1,19 +1,7 @@
+/// <reference types="vite/client" />
 // Ambient types for the desktop app (the website's ../typings.d.ts declares a
 // browser-only `process`, which clashes with @types/node used by main/preload).
-declare module '*.scss' {
-  const classNames: { readonly [className: string]: string }
-  export default classNames
-}
-
-declare module '*.css' {
-  const classNames: { readonly [className: string]: string }
-  export default classNames
-}
-
-declare module '*.svg' {
-  const svg: any
-  export default svg
-}
+// vite/client declares the asset imports (`*.module.(s)css`, `*.css`, `*.svg`, ...).
 
 declare module '*?asset' {
   const path: string

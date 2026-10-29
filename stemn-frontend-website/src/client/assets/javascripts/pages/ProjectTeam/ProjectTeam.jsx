@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { get } from 'lodash'
 
 import cn from 'classnames'
-import classes from './ProjectTeam.scss'
+import classes from './ProjectTeam.module.scss'
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import Link from 'stemn-shared/misc/Router/Link'

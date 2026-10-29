@@ -41,17 +41,12 @@
     "package:dir": "npm run build && electron-builder --dir",
     "package:win": "npm run build && electron-builder --win",
     "package:mac": "npm run build && electron-builder --mac",
-    "test": "node --test config/__tests__/*.test.mts",
     "test:e2e": "playwright test --config tests/playwright.config.ts",
     "typecheck": "tsc -p ./tsconfig.json --noEmit",
     "package:check": "node scripts/check-builder-config.mjs"
   },
   "devDependencies": {
-    "@babel/core": "8.0.9",
-    "@babel/plugin-proposal-decorators": "8.0.2",
-    "@babel/plugin-transform-react-jsx": "8.0.1",
     "@playwright/test": "1.64.1",
-    "@rolldown/plugin-babel": "0.3.0",
     "@sentry/browser": "11.10.0",
     "@types/node": "26.6.6",
     "@vitejs/plugin-react": "6.1.2",

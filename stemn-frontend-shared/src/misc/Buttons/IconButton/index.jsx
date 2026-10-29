@@ -1,9 +1,9 @@
 import React from 'react'
 
 // Styles
-import styles from './IconButton.css'
+import styles from './IconButton.module.css'
 
-export default props => 
+const IconButton = props => 
   // Template
   (
     <div onClick={ props.onClick } className={ `${styles.buttonWrapper} layout-row layout-align-start-center` }>
@@ -13,4 +13,6 @@ export default props =>
       <label className={ styles.label }>{props.children[1]}</label>
     </div>
   )
+
+export default IconButton
 

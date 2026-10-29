@@ -8,7 +8,7 @@ import React from 'react'
 import { has } from 'lodash'
 
 import cn from 'classnames'
-import classes from './ProjectPage.scss'
+import classes from './ProjectPage.module.scss'
 
 import LoadingOverlay     from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import CommitChanges      from 'stemn-shared/misc/Changes/CommitChanges/CommitChanges.jsx'

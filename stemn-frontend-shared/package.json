@@ -4,7 +4,10 @@
   "private": true,
   "author": "David Revay <david@stemn.com>",
   "license": "MIT",
-  "description": "Code shared between stemn-frontend-website and stemn-frontend-desktop. Consumed as source via the `stemn-shared` webpack alias.",
+  "description": "Code shared between stemn-frontend-website and stemn-frontend-desktop. Consumed as source via the `stemn-shared` alias; config/ holds the build conventions both apps use.",
+  "scripts": {
+    "test": "node --test config/__tests__/*.test.mts"
+  },
   "dependencies": {
     "@firefox-devtools/react-contextmenu": "5.2.4",
     "@rjsf/core": "6.11.0",

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import CodeMirror from 'stemn-shared/misc/CodeMirror'
-import classes from './SearchInput.css'
+import classes from './SearchInput.module.css'
 import cn from 'classnames'
 import 'codemirror/addon/display/placeholder'
 import 'codemirror/addon/selection/mark-selection'

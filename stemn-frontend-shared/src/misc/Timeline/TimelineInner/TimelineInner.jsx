@@ -1,6 +1,6 @@
 import React from 'react'
 import cn from 'classnames'
-import classes from './TimelineInner.css'
+import classes from './TimelineInner.module.css'
 import { orderByTime } from '../Timeline.utils'
 import moment from 'moment'
 import Popover from 'stemn-shared/misc/Popover'

@@ -4,7 +4,7 @@ import moment from 'moment'
 import createDateObjects from './createDateObjects'
 
 import cn from 'classnames'
-import classes from './Calendar.scss'
+import classes from './Calendar.module.scss'
 
 export default class Calendar extends Component {
   static propTypes = {

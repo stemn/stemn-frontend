@@ -3,7 +3,7 @@ import * as React from 'react'
 import { IFileCompareMode } from 'stemn-shared/misc/FileCompare/types'
 import { IFile } from 'stemn-shared/misc/FileList/types'
 import { PreviewFile } from 'stemn-shared/misc/Files/PreviewFile'
-import classes from './FileCompareInner.scss'
+import classes from './FileCompareInner.module.scss'
 import FileCompareSlider from './FileCompareSlider/FileCompareSlider.jsx'
 
 export interface IFileCompareInnerProps {

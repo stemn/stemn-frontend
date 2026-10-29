@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from  'react-redux'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
-import classes from './LocationSearch.css'
+import classes from './LocationSearch.module.css'
 
 import Autosuggest from 'stemn-shared/misc/Autosuggest/Autosuggest.container'
 import Highlight from 'stemn-shared/misc/Autosuggest/Highlight'
 
-@connect()
-export default class LocationSearch extends Component {
+class LocationSearch extends Component {
   static propTypes = {
     select: PropTypes.func,
     cacheKey: PropTypes.string.isRequired,
@@ -50,3 +49,5 @@ export default class LocationSearch extends Component {
     )
   }
 }
+
+export default connect()(LocationSearch)

@@ -1,9 +1,9 @@
 import React from 'react'
 
 import cn from 'classnames'
-import classes from './FilledIconButton.css'
+import classes from './FilledIconButton.module.css'
 
-export default (props) => {
+const FilledIconButton = (props) => {
   const { children, className, ...otherProps } = props
   return (
     <button className={ cn(classes.button, className) } { ...otherProps }>
@@ -11,3 +11,5 @@ export default (props) => {
     </button>
   )
 }
+
+export default FilledIconButton

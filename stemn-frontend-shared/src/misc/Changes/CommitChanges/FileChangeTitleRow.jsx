@@ -6,7 +6,7 @@ import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox'
 import Walkthrough from 'stemn-shared/misc/Walkthrough/Walkthrough.jsx'
 
 // Styles
-import styles from './FileChangeTitleRow.css'
+import styles from './FileChangeTitleRow.module.css'
 
 export default class FileChangeTitleRow extends React.Component {
   render() {

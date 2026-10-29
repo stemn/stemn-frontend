@@ -15,7 +15,7 @@ import { connect } from 'react-redux'
 import cn from 'classnames'
 
 import { toggle } from './TogglePanel.actions.js'
-import styles from './TogglePanel.css'
+import styles from './TogglePanel.module.css'
 import { MdChevronRight } from 'react-icons/md'
 
 export class TogglePanel extends React.Component {

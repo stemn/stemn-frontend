@@ -1,4 +1,5 @@
-const modalName = 'PROVIDER_ACCESS_REVOKED'
-export default GLOBAL_ENV.APP_THREAD === 'electron'
-  ? modalName
-  : require('./ProviderAccessRevokedModal.container').default(modalName)
+import registerProviderAccessRevokedModal from './ProviderAccessRevokedModal.container'
+
+// Registers the modal component and exports its name. The Electron main process
+// resolves index.electron.js instead (the name only, no React components).
+export default registerProviderAccessRevokedModal('PROVIDER_ACCESS_REVOKED')

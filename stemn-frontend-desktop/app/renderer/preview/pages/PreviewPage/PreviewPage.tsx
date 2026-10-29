@@ -16,7 +16,7 @@ import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
 import SimpleTable from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable'
 import Timeline from 'stemn-shared/misc/Timeline/Timeline'
 import SectionTitle from 'stemn-shared/misc/Titles/SectionTitle/SectionTitle'
-import classes from './PreviewPage.scss'
+import classes from './PreviewPage.module.scss'
 
 export interface IPreviewPageProps {
   pushRoute: typeof pushRouteType,

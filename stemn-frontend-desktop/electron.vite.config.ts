@@ -5,74 +5,45 @@
  *   preload   app/preload/index.ts     -> dist/preload/index.js  (sandboxed preload, CommonJS, bundled)
  *   renderer  app/renderer/{main,menubar,preview}/index.html -> dist/renderer/<name>/index.html
  *
- * The main and renderer bundles share the website conventions:
- *   - `stemn-shared/*` aliases the shared source, `.desktop.*` files win over the generic ones
- *   - every non-global stylesheet is a CSS module (see config/vite-plugin-stemn-css-modules.mts)
- *   - legacy `@connect()` decorators, JSX in `.js` files and the shared code's
- *     `GLOBAL_ENV.APP_TYPE` / `APP_THREAD` platform switches are compiled by Babel
- *     (see config/babel-plugin-stemn-platform.mts)
+ * The main and renderer bundles share the website conventions (stemn-frontend-website/vite.config.mts):
+ *   - `stemn-shared/*` aliases the shared source, `.desktop.*` files win over the generic ones;
+ *     the main process additionally prefers `.electron.*` (e.g. the shared modals' index.electron.js,
+ *     which export the modal name without pulling React components into the main process)
+ *   - `*.module.(s)css` files are CSS modules, every other stylesheet is global
+ *     (class names and Sass options: stemn-frontend-shared/config/styles.cjs)
+ *   - plain ES modules + JSX in `.jsx`/`.tsx`: Vite's Oxc transform, no Babel
  *
  * GLOBAL_ENV (APP_TYPE 'desktop', APP_THREAD 'electron' in main / 'renderer' in the
  * windows, NODE_ENV, API_SERVER, WEBSOCKET_SERVER, WEBSITE_URL) is baked in at build
  * time. STEMN_ENV picks the backend: `local` by default for `dev`, `production` for builds.
  */
-import { join, sep } from 'node:path'
+import { join } from 'node:path'
 import { createRequire } from 'node:module'
 import { defineConfig } from 'electron-vite'
 import react from '@vitejs/plugin-react'
-import babel from '@rolldown/plugin-babel'
 import autoprefixer from 'autoprefixer'
 import type { DeprecationOrId } from 'sass'
-import stemnCssModules from './config/vite-plugin-stemn-css-modules.mts'
-import stemnPlatformPlugin from './config/babel-plugin-stemn-platform.mts'
 
 const require = createRequire(import.meta.url)
-const getStemnEnv = require('./config/getStemnEnv.js')
+const getStemnEnv = require('stemn-frontend-shared/config/stemnEnv.cjs')
+const { scopedClassName, sassOptions } = require('stemn-frontend-shared/config/styles.cjs')
 
 const root = __dirname
 const appRoot = join(root, 'app')
 const sharedRoot = join(root, '../stemn-frontend-shared/src')
 
-const desktopExtensions = ['.desktop.ts', '.desktop.tsx', '.desktop.js', '.desktop.jsx']
-const extensions = [...desktopExtensions, '.mjs', '.ts', '.tsx', '.js', '.jsx', '.json', '.scss']
+const platformExtensions = (platform: string) => ['.ts', '.tsx', '.js', '.jsx'].map((ext) => `.${platform}${ext}`)
+const extensions = [...platformExtensions('desktop'), '.mjs', '.ts', '.tsx', '.js', '.jsx', '.json']
+const mainExtensions = [...platformExtensions('electron'), ...extensions]
 
-const aliases = (extra: Record<string, string> = {}) => [
-  // webpack-style `~module` imports in stylesheets. The alias plugin only applies
-  // the first matching entry, so `~stemn-shared` needs its own absolute entry.
-  { find: /^~?stemn-shared(?=\/|$)/, replacement: sharedRoot },
-  { find: /^~(?=[^/])/, replacement: '' },
+const aliases = [
+  { find: /^stemn-shared(?=\/|$)/, replacement: sharedRoot },
   { find: /^stemn-frontend-desktop(?=\/|$)/, replacement: root },
-  { find: /^theme$/, replacement: join(appRoot, 'theme.css') },
+  { find: /^theme$/, replacement: join(appRoot, 'theme.module.css') },
   { find: /^route-actions$/, replacement: join(appRoot, 'renderer/main/routeActions.js') },
   { find: /^reducer$/, replacement: join(appRoot, 'shared/reducers/rootReducer.base.ts') },
   { find: /^package-json$/, replacement: join(root, 'package.json') },
-  ...Object.entries(extra).map(([find, replacement]) => ({ find: new RegExp(`^${find}$`), replacement })),
 ]
-
-// Vendored, pre-built code that must not go through Babel
-const babelExclude = [
-  /[\\/]node_modules[\\/]/,
-  /primus-[\w.-]+\.js$/,
-  /PreviewPcb[\\/]viewer[\\/]three(\.min)?\.js$/,
-]
-
-const babelPlugin = (env: Record<string, string>, { jsxDev }: { jsxDev: boolean }) => babel({
-  include: [/\.[jt]sx?$/],
-  exclude: babelExclude,
-  plugins: [
-    [stemnPlatformPlugin, { env }],
-    // `@connect(...)` class decorators are used throughout the codebase
-    [require.resolve('@babel/plugin-proposal-decorators'), { version: 'legacy' }],
-  ],
-  overrides: [{
-    // (`test` is a standard Babel override option, missing from the plugin's types)
-    // JSX in plain `.js` files: Vite's Oxc transform only parses JSX in .jsx/.tsx,
-    // so Babel compiles it here (Oxc still adds React Refresh to these modules)
-    test: /\.js$/,
-    parserOpts: { plugins: ['jsx'] },
-    plugins: [[require.resolve('@babel/plugin-transform-react-jsx'), { runtime: 'automatic', development: jsxDev }]],
-  } as Record<string, unknown>],
-})
 
 /**
  * Content-Security-Policy for the renderer pages. The windows load our own bundle
@@ -111,10 +82,7 @@ const cspPlugin = (policy: string) => ({
 })
 
 const scssOptions = {
-  scss: {
-    quietDeps: true,
-    silenceDeprecations: ['import', 'global-builtin', 'color-functions', 'slash-div', 'legacy-js-api'] as DeprecationOrId[],
-  },
+  scss: { ...sassOptions, silenceDeprecations: sassOptions.silenceDeprecations as DeprecationOrId[] },
 }
 
 export default defineConfig(({ command, mode }) => {
@@ -148,12 +116,8 @@ export default defineConfig(({ command, mode }) => {
     }
   }
 
-  const cssModulesPlugin = stemnCssModules({
-    include: [appRoot, sharedRoot],
-    globalDirs: [join(sharedRoot, 'assets/css') + sep],
-  })
-
   const css = {
+    modules: { generateScopedName: scopedClassName },
     preprocessorOptions: scssOptions,
     postcss: { plugins: [autoprefixer()] },
     devSourcemap: true,
@@ -161,17 +125,9 @@ export default defineConfig(({ command, mode }) => {
 
   return {
     main: {
-      plugins: [
-        babelPlugin({ APP_TYPE: 'desktop', APP_THREAD: 'electron' }, { jsxDev: false }),
-        cssModulesPlugin,
-      ],
       resolve: {
-        alias: aliases({
-          // The vendored primus client only needs `ws` when there is no global
-          // WebSocket; Electron's Node (24) has one.
-          ws: join(root, 'config/shims/ws.cjs'),
-        }),
-        extensions,
+        alias: aliases,
+        extensions: mainExtensions,
       },
       define: define('electron'),
       css,
@@ -204,19 +160,15 @@ export default defineConfig(({ command, mode }) => {
       root: join(appRoot, 'renderer'),
       publicDir: join(appRoot, 'static'),
       plugins: [
-        babelPlugin({ APP_TYPE: 'desktop', APP_THREAD: 'renderer' }, { jsxDev: isDev }),
         react(),
-        cssModulesPlugin,
         cspPlugin(contentSecurityPolicy({ isDev, stemnEnv, devServerOrigin: `http://localhost:${devPort}` })),
       ],
       optimizeDeps: {
         // moment locales must share the prebundled moment instance
         include: ['moment', 'moment/locale/en-gb'],
-        // the dependency scanner parses the app source: it has JSX in .js files
-        rolldownOptions: { moduleTypes: { '.js': 'jsx' } },
       },
       resolve: {
-        alias: aliases(),
+        alias: aliases,
         extensions,
       },
       define: define('renderer'),

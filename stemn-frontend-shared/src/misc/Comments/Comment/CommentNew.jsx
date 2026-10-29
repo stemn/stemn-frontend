@@ -5,7 +5,7 @@ import { newComment } from 'stemn-shared/misc/Comments/Comments.actions.js'
 import React, { Component } from 'react'
 // Styles
 import cn from 'classnames'
-import classes from './CommentNew.scss'
+import classes from './CommentNew.module.scss'
 // Sub Components
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import EditorNew from 'stemn-shared/misc/Editor/EditorNew'

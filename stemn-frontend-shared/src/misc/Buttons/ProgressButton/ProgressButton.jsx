@@ -2,7 +2,7 @@ import React from 'react'
 
 // Styles
 import cn from 'classnames'
-import classes from './ProgressButton.css'
+import classes from './ProgressButton.module.css'
 
 
 export class AnimateSvg extends React.Component {

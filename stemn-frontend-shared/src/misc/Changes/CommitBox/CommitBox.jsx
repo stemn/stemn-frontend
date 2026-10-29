@@ -10,7 +10,7 @@ import * as ElectronWindowsActions from 'stemn-shared/desktop/ElectronWindows/El
 import React from 'react'
 import { some } from 'lodash'
 
-import classes from './CommitBox.css'
+import classes from './CommitBox.module.css'
 
 import Button from 'stemn-shared/misc/Buttons/Button/Button.jsx'
 import Editor from 'stemn-shared/misc/Editor/EditorNew'

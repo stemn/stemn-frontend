@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import { sum, get, groupBy, orderBy } from 'lodash'
 import TimelineItem from './TimelineItem/TimelineItem'
-import classes from './TimelineVertical.css'
+import classes from './TimelineVertical.module.css'
 
 const groupByDay = (data) => {
   const groupedObject = groupBy(data, item => moment(item.timestamp).format('YY/MM/DD'))
