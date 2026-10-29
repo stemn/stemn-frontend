@@ -69,6 +69,8 @@ Shared code lives in `stemn-frontend-shared/src/misc/<Feature>/` (components, `*
 * **Components**: JSX only in `.jsx`/`.tsx`. Default exports are named components or HOC compositions
   (`export default connect(...)(Component)`), so React Fast Refresh works.
 * **Imports**: `stemn-shared/*`; on the website also `pages/*`, `modules/*`, `layout/*`, `route-actions`, `reducer`.
+* **TypeScript**: JavaScript is being converted module by module; converted modules are listed in `tsconfig.strict.json`
+  and the store conventions are typed in `stemn-shared/redux/types.ts`. See [TYPESCRIPT.md](./TYPESCRIPT.md).
 
 ## Quality gates
 

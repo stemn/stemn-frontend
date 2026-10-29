@@ -37,7 +37,7 @@ Run them from this folder, or from the repo root with the `desktop:` prefix (`np
 | `npm run package:win` / `package:mac` | Windows NSIS installer / macOS dmg+zip. Run them on that OS (Windows from Linux needs wine). |
 | `npm run package:check` | Validates `electron-builder.yml` for all platforms without building. |
 | `npm run test:e2e` | End-to-end test with Playwright driving Electron against the local backend (see below). |
-| `npm run typecheck` | `tsc --noEmit` for the app, the shared desktop code, the tests and the build config. |
+| `npm run typecheck` | `tsc --noEmit` for the app, the shared desktop code, the tests and the build config, then the strict TypeScript ratchet (`tsconfig.strict.json`, see ../docs/TYPESCRIPT.md). |
 
 `dev`, `build` and `start` go through `scripts/electron-vite.mjs`, which removes `ELECTRON_RUN_AS_NODE`
 from the environment: some tools (editor terminals that are themselves Electron apps) export it, and it
