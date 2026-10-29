@@ -35,7 +35,7 @@ class PDF extends React.Component {
     }
 
     if (get(nextProps, 'fileData.data') !==  get(prevProps, 'fileData.data')) {
-      getDocument(nextProps.fileData.data).promise
+      getDocument({ url: nextProps.fileData.data }).promise // pdf.js >= 6 requires an options object
         .then((pdf) => {
           this.setState({ pdf })
         })
