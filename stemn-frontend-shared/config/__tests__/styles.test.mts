@@ -4,9 +4,9 @@
  *    `@value x from "theme"` resolved through the alias
  *  - every other stylesheet is global: names untouched, side-effect imports kept
  *  - node_modules css is global
- * Run with `npm test` in stemn-frontend-shared (node --test).
+ * Run with `npm test` (Vitest).
  */
-import { test } from 'node:test'
+import { test } from 'vitest'
 import assert from 'node:assert/strict'
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
