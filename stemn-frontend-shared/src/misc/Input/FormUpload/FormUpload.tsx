@@ -2,7 +2,7 @@ import cn from 'classnames'
 import { cloneDeep } from 'lodash'
 import * as React from 'react'
 import Dropzone from 'react-dropzone'
-import { WrappedFieldMetaProps } from 'redux-form'
+import { IFieldMetaProps } from '../FormField'
 import s from './FormUpload.module.scss'
 // import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 // import Upload from 'stemn-shared/misc/Upload/Upload'
@@ -16,7 +16,7 @@ export interface IFormUploadProps {
     onBlur?: any
     onChange: (files: File[]) => void
   }
-  meta?: WrappedFieldMetaProps
+  meta?: IFieldMetaProps
 }
 
 export class FormUpload extends React.Component<IFormUploadProps> {
