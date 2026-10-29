@@ -16,7 +16,7 @@ export const getFullPath =
           computerToProvider + addSlash(storeState[localPathModuleName][projectId].data) + addSlash(projectToFile)
         resolve(normaliseSlashes(completePath))
       } else {
-        dispatch(getPath({ provider, projectId }))
+        dispatch(getPath({ projectId }))
           .then((response) => {
             const completePath = computerToProvider + addSlash(response.value.data) + addSlash(projectToFile)
             resolve(normaliseSlashes(completePath))

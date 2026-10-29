@@ -24,6 +24,7 @@
     "lint:fix": "eslint . --fix && prettier --write .",
     "format": "prettier --write .",
     "typecheck": "npm run typecheck --workspace stemn-frontend-website && npm run typecheck --workspace stemn-frontend-desktop && tsc -p tests/e2e/tsconfig.json --noEmit",
+    "typecheck:strict": "npm run typecheck:strict --workspace stemn-frontend-website && npm run typecheck:strict --workspace stemn-frontend-desktop",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "npm test --workspace stemn-e2e",

@@ -13,7 +13,8 @@
     "serve": "node ./build/server/index.js",
     "dev:webpack": "webpack serve --config ./config/webpack.config.development.js",
     "build:webpack": "webpack --config ./config/webpack.config.production.js && node ./scripts/copyServer.js",
-    "typecheck": "tsc -p ./tsconfig.json --noEmit && tsc -p ./tsconfig.node.json --noEmit"
+    "typecheck": "tsc -p ./tsconfig.json --noEmit && tsc -p ./tsconfig.node.json --noEmit && npm run typecheck:strict",
+    "typecheck:strict": "tsc -p ./tsconfig.strict.json --noEmit"
   },
   "dependencies": {
     "@sentry/browser": "11.10.0",

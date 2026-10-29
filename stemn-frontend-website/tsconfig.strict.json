@@ -1,0 +1,10 @@
+{
+  // The strict ratchet (../tsconfig.strict.json) resolved like the website: `.web.*` first, website aliases.
+  "extends": ["./tsconfig.json", "../tsconfig.strict.json"],
+  "files": ["../typings.d.ts"],
+  "exclude": [
+    "../stemn-frontend-shared/src/desktop",
+    "../stemn-frontend-shared/src/**/*.desktop.*",
+    "../stemn-frontend-shared/src/**/*.electron.*"
+  ]
+}

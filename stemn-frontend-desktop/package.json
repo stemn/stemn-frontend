@@ -42,7 +42,8 @@
     "package:win": "npm run build && electron-builder --win",
     "package:mac": "npm run build && electron-builder --mac",
     "test:e2e": "playwright test --config tests/playwright.config.ts",
-    "typecheck": "tsc -p ./tsconfig.json --noEmit",
+    "typecheck": "tsc -p ./tsconfig.json --noEmit && npm run typecheck:strict",
+    "typecheck:strict": "tsc -p ./tsconfig.strict.json --noEmit",
     "package:check": "node scripts/check-builder-config.mjs"
   },
   "devDependencies": {

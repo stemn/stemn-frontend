@@ -6,7 +6,12 @@
     "jsx": "react-jsx",
     "lib": ["es2023", "dom", "dom.iterable"],
     "strict": true,
+    // The legacy code base is not noImplicitAny-clean; converted modules are held to it by tsconfig.strict.json
     "noImplicitAny": false,
+    // JavaScript modules take part in type inference (TS files importing them get their inferred types),
+    // but they are not type-checked themselves. See docs/TYPESCRIPT.md
+    "allowJs": true,
+    "checkJs": false,
     "noUnusedLocals": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

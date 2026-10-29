@@ -1,0 +1,6 @@
+{
+  // The strict ratchet (../tsconfig.strict.json) resolved like the desktop renderers: `.desktop.*` first.
+  "extends": ["./tsconfig.json", "../tsconfig.strict.json"],
+  "files": ["./typings.d.ts"],
+  "exclude": ["../stemn-frontend-shared/src/**/*.web.*", "../stemn-frontend-shared/src/**/*.webpack.*"]
+}

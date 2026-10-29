@@ -1,0 +1,22 @@
+{
+  // The TypeScript ratchet (docs/TYPESCRIPT.md, ADR-007).
+  //
+  // Modules listed in `include` are converted to strict TypeScript and must stay that way: they are
+  // type-checked with `noImplicitAny` on top of `strict`. It runs once per platform, so the `.web.*`
+  // and `.desktop.*` variants are both checked with the right module resolution:
+  //   stemn-frontend-website/tsconfig.strict.json and stemn-frontend-desktop/tsconfig.strict.json
+  // (`npm run typecheck:strict`, part of `npm run typecheck` and CI).
+  //
+  // Add a module (folder or file, with its tests) here once it is converted; never remove one.
+  // Every TypeScript file the listed modules import is checked with these settings too, so convert
+  // dependencies first (JavaScript dependencies are fine: checkJs stays off).
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitAny": true
+  },
+  "include": [
+    // Routing compatibility layer (react-router 8 behind the react-router v3 / react-router-redux API)
+    "stemn-frontend-shared/src/routing"
+  ]
+}
