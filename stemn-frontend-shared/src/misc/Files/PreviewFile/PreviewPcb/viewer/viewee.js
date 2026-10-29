@@ -1,7 +1,8 @@
 /* eslint-disable */
-import EagleXMLParser from './parse/eagle.js'
-import KicadNewParser from './parse/kicad_pcb_parser.js'
-import ViewEECanvasRenderer from './render/viewee-canvas.js';
+// UMD module: kept as CommonJS (requires) so the UMD export below works under webpack 5
+const EagleXMLParser = require('./parse/eagle.js')
+const KicadNewParser = require('./parse/kicad_pcb_parser.js')
+const ViewEECanvasRenderer = require('./render/viewee-canvas.js');
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {

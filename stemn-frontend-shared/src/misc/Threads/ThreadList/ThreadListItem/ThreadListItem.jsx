@@ -20,7 +20,7 @@ import Checkbox from 'stemn-shared/misc/Input/Checkbox/Checkbox'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import UserAvatars from 'stemn-shared/misc/Avatar/UserAvatars/UserAvatars.jsx'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
-import MdOpenInNew from 'react-icons/md/open-in-new'
+import { MdOpenInNew } from 'react-icons/md'
 import ThreadLabelDots from 'stemn-shared/misc/Threads/ThreadLabelDots/ThreadLabelDots.jsx'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
 import DueDate from 'stemn-shared/misc/Threads/ThreadDueDate'
@@ -39,8 +39,8 @@ export class ThreadListItem extends React.Component {
     }
   };
 
-  componentWillMount() { this.onMount(this.props) }
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+  UNSAFE_componentWillMount() { this.onMount(this.props) }
+  UNSAFE_componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
 
   updateThread = () => {
     setTimeout(() => this.props.ThreadsActions.updateThread({ thread: this.props.thread.data }), 1)

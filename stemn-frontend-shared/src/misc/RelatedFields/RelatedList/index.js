@@ -1,1 +1,1 @@
-export default from './RelatedList.container'
+export { default } from './RelatedList.container'

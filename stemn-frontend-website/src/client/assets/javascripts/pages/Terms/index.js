@@ -1,1 +1,1 @@
-export default from './Terms.container'
+export { default } from './Terms.container'

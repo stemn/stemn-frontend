@@ -1,4 +1,5 @@
-.react-context-menu{
+/* Class names used by @firefox-devtools/react-contextmenu (react-contextmenu v2 API) */
+.react-contextmenu {
     min-width: 160px;
     font-size: 12px;
     color: #373a3c;
@@ -8,9 +9,10 @@
     background-clip: padding-box;
     box-shadow: 0 0 0 1px rgba(0,0,0,0.1),0 2px 15px rgba(0,0,0,0.1);
     outline: none;
+    z-index: 1000;
 }
-.react-context-menu-link{
-    display: inline-block;
+.react-contextmenu-item {
+    display: block;
     width: 100%;
     padding: 8px 15px;
     clear: both;
@@ -21,19 +23,31 @@
     white-space: nowrap;
     background: 0 0;
     border: 0;
+    cursor: pointer;
+    outline: none;
+    box-sizing: border-box;
 }
-
-.react-context-menu-link.active, .react-context-menu-link:hover{
+.react-contextmenu-item.react-contextmenu-item--active,
+.react-contextmenu-item.react-contextmenu-item--selected,
+.react-contextmenu-item:hover {
   background: #4484d3;
   color: white;
 }
-.react-context-menu-item.divider{
+/* The submenu wrapper also carries the item class - don't double up the styles */
+.react-contextmenu-item.react-contextmenu-submenu {
+  padding: 0;
+  background: none;
+  color: inherit;
+}
+.react-contextmenu-item.divider,
+.react-contextmenu-item--divider {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
-.react-context-menu-item.submenu > a{
+.react-contextmenu-submenu > .react-contextmenu-item {
+    position: relative;
     padding-right: 27px;
 }
-.react-context-menu-item.submenu > a:after{
+.react-contextmenu-submenu > .react-contextmenu-item:after {
     content: "▶";
     display: inline-block;
     position: absolute;

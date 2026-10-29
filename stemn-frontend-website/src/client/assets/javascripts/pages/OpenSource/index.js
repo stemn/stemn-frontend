@@ -1,1 +1,1 @@
-export default from './OpenSource.container'
+export { default } from './OpenSource.container'

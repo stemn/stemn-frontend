@@ -1,1 +1,1 @@
-export default from './Thread.container.js'
+export { default } from './Thread.container.js'

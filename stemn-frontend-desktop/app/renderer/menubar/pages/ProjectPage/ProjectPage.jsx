@@ -14,7 +14,7 @@ import LoadingOverlay     from 'stemn-shared/misc/Loading/LoadingOverlay/Loading
 import CommitChanges      from 'stemn-shared/misc/Changes/CommitChanges/CommitChanges.jsx'
 import CommitBox          from 'stemn-shared/misc/Changes/CommitBox/CommitBox.jsx'
 import Toolbar            from '../../../../renderer/menubar/modules/Toolbar/Toolbar.jsx'
-import { Link }           from 'react-router'
+import { Link }           from 'stemn-shared/routing'
 import cloudLocked        from 'stemn-shared/assets/images/pure-vectors/cloud-locked.svg'
 
 
@@ -33,8 +33,8 @@ export class Component extends React.Component {
     }
   };
 
-  componentWillMount() { this.onMount(this.props) }
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+  UNSAFE_componentWillMount() { this.onMount(this.props) }
+  UNSAFE_componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
 
   refresh = () => {
     this.props.changesActions.fetchChanges({

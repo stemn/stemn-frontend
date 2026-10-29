@@ -32,16 +32,32 @@
   user-select: text;
 }
 
-.textLayer > div {
+.textLayer {
+  /* pdf.js 6 text layer: font sizes and positions are relative to --total-scale-factor (set in PreviewPdfPage) */
+  --min-font-size: 1;
+  --text-scale-factor: calc(var(--total-scale-factor) * var(--min-font-size));
+  --min-font-size-inv: calc(1 / var(--min-font-size));
+}
+
+.textLayer span, .textLayer br {
   color: transparent;
   position: absolute;
   white-space: pre;
   cursor: text;
-  -webkit-transform-origin: 0% 0%;
-  -moz-transform-origin: 0% 0%;
-  -o-transform-origin: 0% 0%;
-  -ms-transform-origin: 0% 0%;
   transform-origin: 0% 0%;
+}
+
+.textLayer > :not(:global(.markedContent)),
+.textLayer :global(.markedContent) span:not(:global(.markedContent)) {
+  --font-height: 0;
+  font-size: calc(var(--text-scale-factor) * var(--font-height));
+  --scale-x: 1;
+  --rotate: 0deg;
+  transform: rotate(var(--rotate)) scaleX(var(--scale-x)) scale(var(--min-font-size-inv));
+}
+
+.textLayer :global(.markedContent) {
+  display: contents;
 }
 
 .textLayer .highlight {

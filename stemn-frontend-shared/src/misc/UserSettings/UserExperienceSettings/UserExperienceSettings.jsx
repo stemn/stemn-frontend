@@ -12,9 +12,9 @@ import FilledIconButton from 'stemn-shared/misc/Buttons/FilledIconButton'
 import classes from './UserExperienceSettings.css'
 import cn from 'classnames'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
-import MdClose from 'react-icons/md/close'
-import MdAdd from 'react-icons/md/add'
-import FlipMove from 'react-flip-move/dist/react-flip-move.js'
+import { MdClose } from 'react-icons/md'
+import { MdAdd } from 'react-icons/md'
+import FlipMove from 'stemn-shared/misc/FlipMove'
 import getUuid from 'stemn-shared/utils/getUuid.js'
 
 @connect()

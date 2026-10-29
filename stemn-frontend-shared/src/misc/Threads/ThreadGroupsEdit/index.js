@@ -1,1 +1,1 @@
-export default from './ThreadGroupsEdit'
+export { default } from './ThreadGroupsEdit'

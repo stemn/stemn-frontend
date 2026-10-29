@@ -2,15 +2,15 @@ import React from 'react'
 import { get } from 'lodash'
 import cn from 'classnames'
 import styles from './SidebarProjectButton.css'
-import { Link } from 'react-router'
+import { Link } from 'stemn-shared/routing'
 import Drive   from 'stemn-shared/assets/icons/providers/drive.js'
 import Dropbox   from 'stemn-shared/assets/icons/providers/dropbox.js'
-import MdContentCopy from 'react-icons/md/content-copy'
-import MdCloudOff from 'react-icons/md/cloud-off'
+import { MdContentCopy } from 'react-icons/md'
+import { MdCloudOff } from 'react-icons/md'
 
 export default (props) => {
   const iconStyle = { width: '22px', height: '22px' }
-  const { item, key, to, clickFn, icon } = props
+  const { item, to, clickFn } = props
 
   const isClone = item.clone && item.clone.source
 
@@ -39,7 +39,6 @@ export default (props) => {
         <Link
           className={ cn(styles.sidebarButton) }
           activeClassName="active"
-          key={ key }
           to={ to }
           onClick={ () => { if (clickFn) { clickFn() } } }
         >
@@ -50,7 +49,6 @@ export default (props) => {
     return (
       <a
         className={ cn(styles.sidebarButton) }
-        key={ key }
         onClick={ () => { if (clickFn) { clickFn() } } }
       >
         { inner }

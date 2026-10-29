@@ -2,7 +2,7 @@
 import React from 'react'
 
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
-import { Link } from 'react-router'
+import { Link } from 'stemn-shared/routing'
 
 class Component extends React.Component {
   render() {

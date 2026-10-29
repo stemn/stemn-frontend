@@ -1,1 +1,1 @@
-export default from './EmailAndNotificationToggles.container'
+export { default } from './EmailAndNotificationToggles.container'

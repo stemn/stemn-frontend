@@ -47,10 +47,10 @@ export class FileRow extends React.Component {
 export class FileListPopup extends React.Component {
   static propTypes = propTypesObject;
 
-  //  componentWillMount() {
+  //  UNSAFE_componentWillMount() {
   //    this.onMount(this.props)
   //  },
-  //  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
+  //  UNSAFE_componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props)},
   //  onMount(nextProps, prevProps) {
   //    if((!prevProps || !prevProps.isOpen) && nextProps.isOpen && (!nextProps.files || !nextProps.files.loading)){
   //      this.getFiles({

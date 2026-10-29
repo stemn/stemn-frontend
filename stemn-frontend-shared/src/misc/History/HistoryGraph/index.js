@@ -1,1 +1,1 @@
-export default from './HistoryGraph.container'
+export { default } from './HistoryGraph.container'

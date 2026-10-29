@@ -1,13 +1,10 @@
-import * as cn from 'classnames'
-import 'javascript-detect-element-resize'
+import cn from 'classnames'
 import * as React from 'react'
 import { IFileCompareMode } from 'stemn-shared/misc/FileCompare/types'
 import { IFile } from 'stemn-shared/misc/FileList/types'
 import { PreviewFile } from 'stemn-shared/misc/Files/PreviewFile'
-import * as classes from './FileCompareInner.scss'
+import classes from './FileCompareInner.scss'
 import FileCompareSlider from './FileCompareSlider/FileCompareSlider.jsx'
-
-const windowWithResizeListener = window as any
 
 export interface IFileCompareInnerProps {
   editActive?: boolean,
@@ -26,6 +23,7 @@ export interface IFileCompareInnerState {
 
 export class FileCompareInner extends React.Component<IFileCompareInnerProps, IFileCompareInnerState> {
   public containerRef?: HTMLDivElement
+  public resizeObserver?: ResizeObserver
   constructor (props) {
     super(props)
     this.state = {
@@ -39,7 +37,10 @@ export class FileCompareInner extends React.Component<IFileCompareInnerProps, IF
     }
   }
   public componentWillUnmount () {
-    windowWithResizeListener.removeResizeListener(this.containerRef, this.updateDimensions)
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect()
+      this.resizeObserver = undefined
+    }
   }
   public sliderChange = (position) => {
     this.setState({ position })
@@ -48,9 +49,15 @@ export class FileCompareInner extends React.Component<IFileCompareInnerProps, IF
     this.setState({ position: event.target.value })
   }
   public getContainerRef = (ref: HTMLDivElement) => {
-    if (ref) {
+    if (ref && ref !== this.containerRef) {
       this.containerRef = ref
-      windowWithResizeListener.addResizeListener(this.containerRef, this.updateDimensions)
+      if (this.resizeObserver) {
+        this.resizeObserver.disconnect()
+      }
+      if (typeof ResizeObserver !== 'undefined') {
+        this.resizeObserver = new ResizeObserver(this.updateDimensions)
+        this.resizeObserver.observe(ref)
+      }
       this.updateDimensions()
     }
   }

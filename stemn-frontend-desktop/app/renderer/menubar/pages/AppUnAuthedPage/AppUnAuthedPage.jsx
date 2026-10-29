@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+import { push } from 'stemn-shared/routing'
 
 // Component Core
 import React from 'react'
@@ -9,7 +9,7 @@ import React from 'react'
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
 export class Component extends React.Component {
-  componentWillReceiveProps(nextProps, prevProps) {
+  UNSAFE_componentWillReceiveProps(nextProps, prevProps) {
     if (nextProps.auth.authToken && nextProps.auth.user._id) {
       nextProps.dispatch(push('/'))
     }

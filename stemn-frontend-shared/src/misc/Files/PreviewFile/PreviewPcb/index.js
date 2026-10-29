@@ -1,1 +1,1 @@
-export default from './PreviewPcb'
+export { default } from './PreviewPcb'

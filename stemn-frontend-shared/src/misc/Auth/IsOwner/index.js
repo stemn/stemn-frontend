@@ -1,1 +1,1 @@
-export default from './IsOwner'
+export { default } from './IsOwner'

@@ -1,1 +1,1 @@
-export default from './FieldOverview.container'
+export { default } from './FieldOverview.container'

@@ -6,7 +6,7 @@ import EditorDisplay from 'stemn-shared/misc/Editor/EditorDisplay.jsx'
 import Editor from 'stemn-shared/misc/Editor/EditorNew'
 import classes from './Readme.scss'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
-import MdModeEdit from 'react-icons/md/mode-edit'
+import { MdModeEdit } from 'react-icons/md'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 import Link from 'stemn-shared/misc/Router/Link'
 

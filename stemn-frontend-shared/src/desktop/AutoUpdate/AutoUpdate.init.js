@@ -1,8 +1,7 @@
-import os from 'os'
-
-import updater from 'electron-simple-updater'
+/* Main process only */
+import electronUpdater from 'electron-updater'
+import log from 'electron-log/main'
 import { version } from 'package-json'
-import log from 'electron-log'
 
 import {
   currentVersion,
@@ -13,32 +12,35 @@ import {
   updateNotAvailable,
 } from './AutoUpdate.actions.js'
 
-updater.init({
-  url: 'https://raw.githubusercontent.com/Stemn/Stemn-Updates/master/updates.json',
-  checkUpdateOnStart: false,
-  version,
-  logger: {
-    info(text) { log.info(text) },
-    warn(text) { log.warn(text) },
-  },
-})
-
+/**
+ * Auto update through electron-updater. The update feed is the `publish`
+ * provider in electron-builder.yml (GitHub releases of Stemn/Stemn-Desktop);
+ * electron-builder writes it into the packaged app as app-update.yml.
+ */
 export default function (store) {
+  const { autoUpdater } = electronUpdater
+  autoUpdater.logger = log
+  autoUpdater.autoDownload = true
+
   log.info('Current version:', version)
   store.dispatch(currentVersion({ version }))
 
-  updater.on('update-available', () => {
+  autoUpdater.on('update-available', () => {
     store.dispatch(updateAvailable())
   })
-  updater.on('update-downloaded', (event) => {
-    log.info('Update downloaded:', event)
-    store.dispatch(updateDownloaded(event))
+  autoUpdater.on('update-downloaded', (info) => {
+    log.info('Update downloaded:', info.version)
+    store.dispatch(updateDownloaded({
+      version: info.version,
+      platform: process.platform,
+      readme: typeof info.releaseNotes === 'string' ? info.releaseNotes : '',
+    }))
   })
-  updater.on('error', (error) => {
-    log.info('Update Error:', error)
+  autoUpdater.on('error', (error) => {
+    log.info('Update Error:', error && error.message)
     setTimeout(() => store.dispatch(updateError(error)), 1)
   })
-  updater.on('update-not-available', () => {
+  autoUpdater.on('update-not-available', () => {
     store.dispatch(updateNotAvailable())
   })
 

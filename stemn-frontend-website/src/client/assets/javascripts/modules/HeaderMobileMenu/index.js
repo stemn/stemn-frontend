@@ -1,1 +1,1 @@
-export default from './HeaderMobileMenu'
+export { default } from './HeaderMobileMenu'

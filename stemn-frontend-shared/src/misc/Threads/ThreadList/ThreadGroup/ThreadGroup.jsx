@@ -2,7 +2,7 @@ import React from 'react'
 import cn from 'classnames'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import Popover from 'stemn-shared/misc/Popover'
-import MdMoreHoriz from 'react-icons/md/more-horiz'
+import { MdMoreHoriz } from 'react-icons/md'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 
 import classes from './ThreadGroup.css'

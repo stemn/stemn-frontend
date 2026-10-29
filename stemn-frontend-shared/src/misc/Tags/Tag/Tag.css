@@ -1,4 +1,4 @@
-@value primary, border2, primaryLight1, primaryLight2, border1, bg1 from "theme";
+@value primary as themePrimary, border2, primaryLight1, primaryLight2, border1, bg1 from "theme";
 
 .tag{
   border-color: border1;
@@ -27,7 +27,7 @@
 .tag:global(.primary){
   background: primaryLight1;
   border-color: primaryLight2;
-  color: primary;
+  color: themePrimary;
 }
 
 .tag:hover:global(.primary){

@@ -20,7 +20,7 @@ const propTypesObject = {
 export default class DownloadModal extends React.Component {
   static propTypes = propTypesObject;
 
-  componentWillMount() { 
+  UNSAFE_componentWillMount() { 
     const { file, fetchTimeline } = this.props
     if (file.project && file.project._id) {
       // If this is a sync file

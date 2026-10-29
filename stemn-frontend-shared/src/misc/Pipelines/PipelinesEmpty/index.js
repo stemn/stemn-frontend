@@ -1,1 +1,1 @@
-export default from './PipelinesEmpty'
+export { default } from './PipelinesEmpty'

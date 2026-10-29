@@ -6,15 +6,15 @@ import classes from './FileList.css'
 import FileBreadCrumbs from './components/FileBreadCrumbs'
 import FileRow from './components/FileRow'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
-import MdRefresh from 'react-icons/md/refresh'
-import MdHome from 'react-icons/md/home'
-import MdCreateNewFolder from 'react-icons/md/create-new-folder'
+import { MdRefresh } from 'react-icons/md'
+import { MdHome } from 'react-icons/md'
+import { MdCreateNewFolder } from 'react-icons/md'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import SearchInput from 'stemn-shared/misc/Search/SearchInput'
-import { ContextMenuTrigger } from 'react-contextmenu'
+import { ContextMenuTrigger } from 'stemn-shared/misc/ContextMenu/ContextMenu.jsx'
 import ContextMenu from 'stemn-shared/misc/ContextMenu/ContextMenu.jsx'
 import FileListMenu from './FileList.menu.js'
-import FlipMove from 'react-flip-move/dist/react-flip-move.js'
+import FlipMove from 'stemn-shared/misc/FlipMove'
 import AccordianAnimate from 'stemn-shared/misc/Animation/AccordianAnimate'
 import ChildrenHistory from 'stemn-shared/misc/Animation/ChildrenHistory'
 import FileSyncUnderway from 'stemn-shared/misc/FileList/FileSyncUnderway'
@@ -101,7 +101,7 @@ export default class FileList extends Component {
     }
     return null
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.fileRowHistory = new ChildrenHistory()
   }
   renderSearchResults = (isLoading) => {

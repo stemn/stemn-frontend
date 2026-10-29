@@ -8,8 +8,8 @@ import cn from 'classnames'
 import classes from './DatePicker.css'
 import Calendar from '../Calendar.jsx'
 import PopoverFit from 'stemn-shared/misc/PopoverMenu/PopoverFit'
-import MdExpandMore from 'react-icons/md/expand-more'
-import MdClose from 'react-icons/md/close'
+import { MdExpandMore } from 'react-icons/md'
+import { MdClose } from 'react-icons/md'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 
 export class Component extends React.Component {

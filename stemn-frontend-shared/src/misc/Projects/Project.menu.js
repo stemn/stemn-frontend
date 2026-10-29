@@ -1,7 +1,7 @@
 import { confirmDeleteProject } from 'stemn-shared/misc/Projects/Projects.actions.js'
 import * as SystemActions from 'stemn-shared/desktop/System/System.actions.js'
 import { projectSettingsRoute } from 'route-actions'
-import { push } from 'react-router-redux'
+import { push } from 'stemn-shared/routing'
 
 export default dispatch => [{
   label: 'Open Folder',

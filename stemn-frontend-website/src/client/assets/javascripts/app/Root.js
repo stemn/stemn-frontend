@@ -1,19 +1,26 @@
 import React from 'react'
-import { Provider } from 'react-redux'
-import { Router } from 'react-router'
-import routes from '../pages/routes'
 import PropTypes from 'prop-types'
-import { hot } from 'react-hot-loader'
+import { Provider } from 'react-redux'
+import { RouterProvider } from 'react-router/dom'
+import { HelmetProvider } from 'react-helmet-async'
+import { IconContext } from 'react-icons'
 
-const Root = ({ store, history }) => (
+// react-icons v2 rendered every icon with vertical-align: middle
+const iconContext = { style: { verticalAlign: 'middle' } }
+
+const Root = ({ store, router }) => (
   <Provider store={ store }>
-    <Router history={ history } routes={ routes(store) } />
+    <HelmetProvider>
+      <IconContext.Provider value={ iconContext }>
+        <RouterProvider router={ router } />
+      </IconContext.Provider>
+    </HelmetProvider>
   </Provider>
 )
 
 Root.propTypes = {
-  history: PropTypes.object.isRequired,
+  router: PropTypes.object.isRequired,
   store: PropTypes.object.isRequired,
 }
 
-export default hot(module)(Root)
+export default Root

@@ -2,9 +2,9 @@ import React from 'react'
 
 import Popover from 'stemn-shared/misc/Popover'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
-import MdDone from 'react-icons/md/done'
-import MdLink from 'react-icons/md/link'
-import MdMoreHoriz from 'react-icons/md/more-horiz'
+import { MdDone } from 'react-icons/md'
+import { MdLink } from 'react-icons/md'
+import { MdMoreHoriz } from 'react-icons/md'
 
 import classes from './LinkAccount.css'
 

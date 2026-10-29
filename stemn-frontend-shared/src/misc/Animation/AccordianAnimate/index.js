@@ -1,1 +1,1 @@
-export default from './AccordianAnimate'
+export { default } from './AccordianAnimate'

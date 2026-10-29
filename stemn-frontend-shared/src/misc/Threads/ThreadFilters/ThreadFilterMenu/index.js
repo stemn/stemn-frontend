@@ -1,1 +1,1 @@
-export default from './ThreadFilterMenu'
+export { default } from './ThreadFilterMenu'

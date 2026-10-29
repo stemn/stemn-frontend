@@ -1,21 +1,40 @@
 {
-    "extends": "../tsconfig.json",
-    "compilerOptions": {
-        "paths": {
-            "stemn-shared/*": [
-                "stemn-frontend-shared/src/*/index.web.ts",
-                "stemn-frontend-shared/src/*/index.desktop.ts", 
-                "stemn-frontend-shared/src/*"
-            ],
-            "modules/*": ["stemn-frontend-website/src/client/assets/javascripts/modules/*"],
-            "layout/*": ["stemn-frontend-website/src/client/assets/javascripts/layout/*"],
-            "route-actions": ["stemn-frontend-website/src/client/assets/javascripts/pages/routeActions.js"],
-            "reducer": ["stemn-frontend-website/src/client/assets/javascripts/app/reducer.ts"]
-        }
-    },
-    "include": [
-        "../typings.d.ts",
-        "../stemn-frontend-website/src",
-        "../stemn-frontend-shared"
-    ]
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "stemn-shared/*": [
+        "../stemn-frontend-shared/src/*/index.web.ts",
+        "../stemn-frontend-shared/src/*/index.ts",
+        "../stemn-frontend-shared/src/*"
+      ],
+      "modules/*": [
+        "./src/client/assets/javascripts/modules/*"
+      ],
+      "layout/*": [
+        "./src/client/assets/javascripts/layout/*"
+      ],
+      "pages/*": [
+        "./src/client/assets/javascripts/pages/*"
+      ],
+      "route-actions": [
+        "./src/client/assets/javascripts/pages/routeActions.js"
+      ],
+      "reducer": [
+        "./src/client/assets/javascripts/app/reducer.ts"
+      ]
+    }
+  },
+  "include": [
+    "../typings.d.ts",
+    "./src/client",
+    "../stemn-frontend-shared/src"
+  ],
+  "exclude": [
+    "../stemn-frontend-shared/src/desktop",
+    "../stemn-frontend-shared/src/**/*.desktop.*",
+    "./src/client/assets/static",
+    "../stemn-frontend-shared/src/**/*.test.ts",
+    "../stemn-frontend-shared/src/**/*.test.tsx",
+    "./src/**/*.test.ts"
+  ]
 }

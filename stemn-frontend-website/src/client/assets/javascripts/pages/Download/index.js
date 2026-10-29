@@ -1,1 +1,1 @@
-export default from './Download.container'
+export { default } from './Download.container'

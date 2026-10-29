@@ -1,9 +1,9 @@
 
 import * as React from 'react'
-import { FieldTemplateProps, WidgetProps } from 'react-jsonschema-form'
+import { WidgetProps } from '@rjsf/utils'
 import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
 
-export const TextareaWidget = (props: WidgetProps & FieldTemplateProps) => {
+export const TextareaWidget = (props: WidgetProps) => {
 
   return (
     <Textarea
@@ -11,7 +11,7 @@ export const TextareaWidget = (props: WidgetProps & FieldTemplateProps) => {
       value={props.value}
       className='dr-input flex'
       type='text'
-      onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value)}
+      onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange(event.target.value === '' ? props.options.emptyValue : event.target.value)}
     />
   )
 }

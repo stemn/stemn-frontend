@@ -6,7 +6,7 @@ import { omit } from 'lodash'
 // Styles
 import cn from 'classnames'
 import classes from './ArrowTabs.css'
-import MdChrevronRight from 'react-icons/md/chevron-right'
+import { MdChevronRight as MdChrevronRight } from 'react-icons/md'
 import Link from 'stemn-shared/misc/Router/Link'
 
 const arrowTabsPropTypes = {

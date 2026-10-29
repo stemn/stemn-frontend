@@ -5,7 +5,7 @@ import cn from 'classnames'
 import moment from 'moment'
 
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
-import MdDone from 'react-icons/md/done'
+import { MdDone } from 'react-icons/md'
 import NotificationLink from 'stemn-shared/misc/Notifications/NotificationLink'
 
 export default class NotificationItem extends Component {

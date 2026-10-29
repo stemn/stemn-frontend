@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classes from './Pagination.css'
-import MdChevronRight from 'react-icons/md/chevron-right'
-import MdChevronLeft from 'react-icons/md/chevron-left'
-import { Link } from 'react-router'
+import { MdChevronRight } from 'react-icons/md'
+import { MdChevronLeft } from 'react-icons/md'
+import { Link } from 'stemn-shared/routing'
 
 
 export default class Pagination extends Component {

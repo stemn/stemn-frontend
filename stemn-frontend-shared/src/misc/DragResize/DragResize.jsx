@@ -1,6 +1,6 @@
 
 import React from 'react'
-import clickDrag from 'react-clickdrag'
+import clickDrag from 'stemn-shared/misc/ClickDrag'
 
 // Styles
 import cn from 'classnames'
@@ -13,7 +13,7 @@ class DraggerComponent extends React.Component {
     active: false,
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.dataDrag.isMoving && nextProps.dataDrag.id && nextProps.dataDrag.id !== this.state.lastEventId) {
       this.setState({ active: true, lastEventId: nextProps.dataDrag.id })
       if (nextProps.side === 'left' || nextProps.side === 'right') {
@@ -84,7 +84,7 @@ export default class DragResize extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.animateHide !== this.props.animateHide) {
       if (nextProps.width) {
         this.setState({ width: nextProps.animateHide ? '0' : nextProps.width, animate: true })

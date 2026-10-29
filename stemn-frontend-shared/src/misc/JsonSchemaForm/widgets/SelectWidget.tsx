@@ -1,5 +1,4 @@
-import * as React from 'react'
-import { FieldTemplateProps, WidgetProps } from 'react-jsonschema-form'
+import { WidgetProps } from '@rjsf/utils'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 
 export interface ISelectWidgetOptions {
@@ -9,7 +8,7 @@ export interface ISelectWidgetOptions {
   }>
 }
 
-export const SelectWidget = (props: WidgetProps & FieldTemplateProps) => {
+export const SelectWidget = (props: WidgetProps) => {
 
   const propOptions = props.options as ISelectWidgetOptions
   const options = propOptions.enumOptions.map((option: any) => ({

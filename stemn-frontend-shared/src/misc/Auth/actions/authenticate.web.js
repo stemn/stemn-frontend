@@ -1,4 +1,4 @@
-import querystring from 'querystring';
+import { parseQuery, stringifyQuery } from 'stemn-shared/routing/query'
 
 import { oauthCreds } from '../Auth.config.js';
 import sendAuthToken from './sendAuthToken';
@@ -23,7 +23,7 @@ const popOauth = url => new Promise((resolve, reject) => {
       ? signinWin.location.search.substr(1)
       : ''
 
-    const queryParams = querystring.parse(query)
+    const queryParams = parseQuery(query)
     if (queryParams.code) {
       resolve(queryParams)
       signinWin.close()
@@ -40,7 +40,7 @@ const popOauth = url => new Promise((resolve, reject) => {
 
 export default provider => (dispatch) => {
   if (oauthCreds[provider]) {
-    const url = `${oauthCreds[provider].url}?${querystring.stringify(oauthCreds[provider].params)}`
+    const url = `${oauthCreds[provider].url}${stringifyQuery(oauthCreds[provider].params)}`
 
     return dispatch({
       type: 'AUTH/AUTHENTICATE',

@@ -4,8 +4,8 @@ import file from 'stemn-shared/assets/images/pure-vectors/file.svg'
 import Viewer from './Viewer'
 
 export default class PreviewCode extends Component {
-  componentWillMount() { this.onMount(this.props) }
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+  UNSAFE_componentWillMount() { this.onMount(this.props) }
+  UNSAFE_componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
   onMount = (nextProps, prevProps) => {
     // If the previewId changes, download a new file
     if (!prevProps || nextProps.previewId !== prevProps.previewId) {

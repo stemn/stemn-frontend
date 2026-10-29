@@ -1,1 +1,1 @@
-export default from './Flow.container'
+export { default } from './Flow.container'

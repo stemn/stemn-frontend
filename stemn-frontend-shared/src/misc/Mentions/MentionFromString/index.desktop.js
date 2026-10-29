@@ -1,1 +1,1 @@
-export default from './MentionFromString.container'
+export { default } from './MentionFromString.container'

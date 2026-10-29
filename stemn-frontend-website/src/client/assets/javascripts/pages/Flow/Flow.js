@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import LandingLayout from 'layout/LandingLayout'
 import HeroBanner from 'modules/HeroBanner'
 import { Container } from 'stemn-shared/misc/Layout'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 export default class Flow extends Component {
   render() {

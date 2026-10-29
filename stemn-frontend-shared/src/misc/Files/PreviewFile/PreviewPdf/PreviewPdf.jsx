@@ -1,13 +1,12 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import PDFJS from 'pdfjs-dist/build/pdf.combined.js'
+import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist'
 import { get } from 'lodash'
 import Viewer from './PreviewPdfViewer.jsx'
 import classes from './PreviewPdf.css'
 import ScrollZoom from 'stemn-shared/misc/Scroll/ScrollZoom/ScrollZoom.jsx'
 
-// Link to the workerSrc bundle (See example here https://github.com/mozilla/pdf.js/blob/master/examples/webpack/main.js)
-PDFJS.PDFJS.workerSrc = process.env.HOT ? 'http://localhost:3001/dist/pdfWorker/index.js' : '../../pdfWorker/index.js'
+// The pdf.js worker is emitted by webpack as a separate asset
+GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url).toString()
 
 const propTypesObject = {
 //  src: React.PropTypes.string.isRequired
@@ -19,8 +18,8 @@ class PDF extends React.Component {
     scale: 1,
   };
 
-  componentWillMount() { this.onMount(this.props) }
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+  UNSAFE_componentWillMount() { this.onMount(this.props) }
+  UNSAFE_componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
 
   onMount = (nextProps, prevProps) => {
     // If the previewId changes, download a new file
@@ -36,18 +35,13 @@ class PDF extends React.Component {
     }
 
     if (get(nextProps, 'fileData.data') !==  get(prevProps, 'fileData.data')) {
-      PDFJS.getDocument(nextProps.fileData.data).then((pdf) => {
-        this.setState({ pdf })
-      })
+      getDocument({ url: nextProps.fileData.data }).promise // pdf.js >= 6 requires an options object
+        .then((pdf) => {
+          this.setState({ pdf })
+        })
+        .catch(err => console.error('Failed to load pdf', err))
     }
   };
-
-  getChildContext() {
-    return {
-      pdf: this.state.pdf,
-      scale: this.state.scale,
-    }
-  }
 
   zoom = (direction) => {
     let newValue = 0
@@ -75,10 +69,5 @@ class PDF extends React.Component {
 
 
 PDF.propTypes = propTypesObject
-
-PDF.childContextTypes = {
-  pdf: PropTypes.object,
-  scale: PropTypes.number,
-}
 
 export default PDF

@@ -9,7 +9,7 @@ import ObjectControls from './ObjectControls.js'
 import RenderGerber from './render/gerber.js'
 import _ from 'lodash'
 
-import 'javascript-detect-element-resize' // addResizeListener && removeResizeListener
+import { addResizeListener, removeResizeListener } from 'stemn-shared/utils/resizeListener'
 
 
 export default () => {
@@ -98,7 +98,7 @@ export default () => {
 
   function destroy() {
     if (wG.domParent) {
-      window.removeResizeListener(wG.domParent, reposition)
+      removeResizeListener(wG.domParent, reposition)
       while (wG.domParent.hasChildNodes()) {
         wG.domParent.removeChild(wG.domParent.lastChild)
       }
@@ -215,7 +215,7 @@ export default () => {
     wG.boardControls.eye    = wG.camera.position.clone().subSelf(wG.board.position)
 
     // Resize handler.
-    window.addResizeListener(wG.domParent, reposition)
+    addResizeListener(wG.domParent, reposition)
     setTimeout(reposition, 1)
 
     // Add element to DOM

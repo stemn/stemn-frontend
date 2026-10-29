@@ -13,7 +13,7 @@ When auth, true is found - the action will only run if it the user is authed
 
 import { get } from 'lodash'
 import i from 'icepick'
-import { push } from 'react-router-redux'
+import { push } from 'stemn-shared/routing'
 
 export default store => next => (action) => {
   if (get(action, ['auth'])) {

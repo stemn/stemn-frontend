@@ -1,5 +1,5 @@
 import getUuid from 'stemn-shared/utils/getUuid.js'
-import 'javascript-detect-element-resize' // addResizeListener && removeResizeListener
+import { addResizeListener, removeResizeListener } from 'stemn-shared/utils/resizeListener'
 
 const filter       = { viewport: true }
 
@@ -22,7 +22,7 @@ function register(viewerEl, linkKey) {
   }
 
   // Add the resize listener
-  window.addResizeListener(viewerEl, onResize)
+  addResizeListener(viewerEl, onResize)
 
   // Create the onMove function that will be used to sync instances
   let lastState = {}
@@ -54,7 +54,7 @@ function register(viewerEl, linkKey) {
     instance.removeEventListener(window.Autodesk.Viewing.CAMERA_CHANGE_EVENT, onMove)
     // Remove the resize listener
     if (viewerEl) {
-      window.removeResizeListener(viewerEl, onResize)
+      removeResizeListener(viewerEl, onResize)
     }
 
     // Call the Autodesk finish function

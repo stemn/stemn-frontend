@@ -1,10 +1,10 @@
-import * as cn from 'classnames'
+import cn from 'classnames'
 import * as React from 'react'
-import MdEdit from 'react-icons/md/edit'
-import MdSave from 'react-icons/md/save'
+import { MdEdit } from 'react-icons/md'
+import { MdSave } from 'react-icons/md'
 import { getViewerType, IPreviewType } from '../../Files/PreviewFile/PreviewFile.utils'
 import { dispatchToProps, IFileEditButtonContainerProps } from './FileEditButton.container'
-import * as s from './FileEditButton.scss'
+import s from './FileEditButton.scss'
 
 export interface IFileEditButtonComponentProps extends IFileEditButtonContainerProps {
   editToggle: typeof dispatchToProps['editToggle']

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { replace } from 'react-router-redux'
+import { replace } from 'stemn-shared/routing'
 import { getToken } from 'stemn-shared/misc/Auth/Auth.actions'
 import ModalContainer from 'stemn-shared/misc/Modal/ModalContainer.jsx'
 import ToastContainer from 'stemn-shared/misc/Toasts/Toasts.jsx'
@@ -39,8 +39,17 @@ export default class LoginContainer extends Component {
       getToken(query.id)
     }
   }
-  componentWillReceiveProps(nextProps) {
-    this.goSomewhere(nextProps)
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    // Only redirect when something relevant changed. Navigations to lazy routes are
+    // async, so redirecting on every update would re-trigger while one is pending.
+    const prev = this.props
+    if (
+      nextProps.isLoggedIn !== prev.isLoggedIn ||
+      nextProps.userSettingsMessages.onboarding !== prev.userSettingsMessages.onboarding ||
+      nextProps.location.pathname !== prev.location.pathname
+    ) {
+      this.goSomewhere(nextProps)
+    }
   }
   componentDidMount() {
     this.goSomewhere(this.props)

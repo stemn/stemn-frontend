@@ -1,5 +1,5 @@
 import http from 'axios';
-import { push } from 'react-router-redux';
+import { push } from 'stemn-shared/routing';
 import { homeRoute } from 'route-actions';
 import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js';
 import { joinRoom } from 'stemn-shared/misc/Websocket/Websocket.actions';

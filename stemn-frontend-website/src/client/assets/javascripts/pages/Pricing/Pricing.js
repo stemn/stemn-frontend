@@ -4,7 +4,7 @@ import HeroBanner from 'modules/HeroBanner'
 import { Container } from 'stemn-shared/misc/Layout'
 import PricingTable from 'stemn-shared/misc/Billing/PricingTable'
 import { pricingTableData } from 'stemn-shared/misc/Billing/Billing.data'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import classes from './Pricing.scss'
 import cn from 'classnames'
 

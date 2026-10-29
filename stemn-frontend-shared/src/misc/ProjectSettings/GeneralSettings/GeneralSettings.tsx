@@ -6,7 +6,7 @@ import { Col, Row } from 'stemn-shared/misc/Layout'
 import LocationSearch from 'stemn-shared/misc/Search/LocationSearch'
 import Upload from 'stemn-shared/misc/Upload/Upload'
 import { IProject } from '../../Projects/types'
-import * as classes from './GeneralSettings.scss'
+import classes from './GeneralSettings.scss'
 
 export interface IGeneralSettingsProps {
   entityModel: string,

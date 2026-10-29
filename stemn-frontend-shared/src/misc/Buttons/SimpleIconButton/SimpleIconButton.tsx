@@ -1,7 +1,7 @@
-import * as cn from 'classnames'
+import cn from 'classnames'
 import * as React from 'react'
-import * as Link from 'stemn-shared/misc/Router/Link'
-import * as classes from './SimpleIconButton.scss'
+import Link from 'stemn-shared/misc/Router/Link'
+import classes from './SimpleIconButton.scss'
 
 export interface ISimpleIconButtonProps {
   children: any,

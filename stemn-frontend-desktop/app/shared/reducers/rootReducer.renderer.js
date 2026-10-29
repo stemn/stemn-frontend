@@ -1,15 +1,10 @@
 import { combineReducers } from 'redux'
-import { routerReducer as routing } from 'react-router-redux'
-import rootReducer from './rootReducer.base'
+import { routerReducer as routing } from 'stemn-shared/routing'
 import storeReducer from 'stemn-shared/misc/Store/Store.reducer.js'
+import rootReducer from './rootReducer.base'
 
 export default function getRootReducer() {
-  const reducers = {
-    ...rootReducer,
-    routing,
-  }
-
-  const splitReducers = combineReducers({ ...reducers })
+  const splitReducers = combineReducers({ ...rootReducer, routing })
   return (state, action) => {
     const isStoreAction = action && action.type && action.type.startsWith('STORE/')
     return isStoreAction

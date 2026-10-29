@@ -1,1 +1,1 @@
-export default from './PasswordLost.container'
+export { default } from './PasswordLost.container'

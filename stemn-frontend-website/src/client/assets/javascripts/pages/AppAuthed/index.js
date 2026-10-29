@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { replace } from 'react-router-redux'
+import { replace } from 'stemn-shared/routing'
 import { bindActionCreators } from 'redux'
 
 const stateToProps = ({ auth }) => ({
@@ -14,8 +14,10 @@ const dispatchToProps = {
 
 @connect(stateToProps, dispatchToProps)
 export default class LoginContainer extends Component {
-  componentWillReceiveProps(nextProps) {
-    this.onMount(nextProps)
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.authToken !== this.props.authToken || nextProps.userId !== this.props.userId) {
+      this.onMount(nextProps)
+    }
   }
   componentDidMount() {
     this.onMount(this.props)

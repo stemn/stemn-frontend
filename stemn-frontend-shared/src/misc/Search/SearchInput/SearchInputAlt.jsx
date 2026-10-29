@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import CodeMirror from 'react-codemirror'
+import CodeMirror from 'stemn-shared/misc/CodeMirror'
 import classes from './SearchInput.css'
 import cn from 'classnames'
 import 'codemirror/addon/display/placeholder'
 import 'codemirror/addon/selection/mark-selection'
-import MdSearch from 'react-icons/md/search'
+import { MdSearch } from 'react-icons/md'
 
 import { parseFilterStringWithPositions } from 'stemn-shared/misc/StringFilter/StringFilter.utils'
 
@@ -73,9 +73,12 @@ export default class EditorNew extends Component {
     }
   }
   componentDidMount() {
-    setInterval(this.convertQueryStrings, 1000)
+    this.convertInterval = setInterval(this.convertQueryStrings, 1000)
   }
-  componentWillReceiveProps(nextProps) {
+  componentWillUnmount() {
+    clearInterval(this.convertInterval)
+  }
+  UNSAFE_componentWillReceiveProps(nextProps) {
     // Update the internal state if it differs from the redux state
     //    this.convertQueryStrings(codemirror)
     if (nextProps.value !== this.state.value) {

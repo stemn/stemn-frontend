@@ -3,7 +3,7 @@ import React from 'react'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar.jsx'
 import Popover from 'stemn-shared/misc/Popover'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
-import MdMoreHoriz from 'react-icons/md/more-horiz'
+import { MdMoreHoriz } from 'react-icons/md'
 
 import { get } from 'lodash'
 

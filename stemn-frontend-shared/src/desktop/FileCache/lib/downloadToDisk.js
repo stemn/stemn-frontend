@@ -1,49 +1,36 @@
+import { createWriteStream } from 'node:fs'
+import { unlink } from 'node:fs/promises'
 import { Extract as unzip } from 'unzipper'
-import fs                   from 'fs'
-import http                 from 'axios'
+import http from 'axios'
 
-// This will download and save a file to the dest
+// This will download and save a file to the dest (or extract a zip into the dest folder)
 export default ({ url, params, dest, onProgress, extract }) => new Promise((resolve, reject) => {
   http({
     url,
     params,
     responseType: 'stream',
   }).then((response) => {
-    const stream     = response.data
-    const file       = extract
+    const stream = response.data
+    const file = extract
       ? unzip({ path: dest })
-      : fs.createWriteStream(dest)
-    const total      = response.headers['content-length']
-    let progress     = 0
-    let progressPerc = 0
+      : createWriteStream(dest)
+    const total = response.headers['content-length']
+    let progress = 0
     stream.on('data', (chunk) => {
-      progress    += chunk.length
-      progressPerc = parseInt((progress / total) * 100)
-      if (onProgress) { onProgress(progressPerc) }
+      progress += chunk.length
+      if (onProgress && total) { onProgress(Math.round((progress / total) * 100)) }
     })
-    stream.on('error', (response) => {
-      fs.unlink(dest) // Delete the file async. (But we don't check the result)
-      reject(response)
+    stream.on('error', (error) => {
+      unlink(dest).catch(() => {}) // Delete the partial file
+      reject(error)
     })
 
-    // unzip event uses close, but all others use end
-    if (extract) {
-      file.on('close', (response) => {
-        resolve({
-          size: total,
-          dest,
-        })
-      })
-    } else {
-      stream.on('end', (response) => {
-        resolve({
-          size: total,
-          dest,
-        })
-      })
-    }
+    const done = () => resolve({ size: total || progress, dest })
+    // unzip emits close, write streams emit finish once the data is flushed
+    file.on(extract ? 'close' : 'finish', done)
+    file.on('error', reject)
     stream.pipe(file)
   }).catch((error) => {
-    reject(error.response)
+    reject(error.response || error)
   })
 })

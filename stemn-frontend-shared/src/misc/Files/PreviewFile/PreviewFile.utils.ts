@@ -1,4 +1,4 @@
-import * as whatGerber from '@stemn/whats-that-gerber'
+import whatGerber from '@stemn/whats-that-gerber'
 import * as codemirror from 'codemirror'
 import 'codemirror/mode/meta.js'
 import * as i from 'icepick'
@@ -53,13 +53,14 @@ export type IPreviewType = 'other' | 'gdoc' | 'google' | 'pipeline' | 'gerber' |
 export const getViewerType = (fileName, provider): IPreviewType => {
   const extension = fileName.split('.').pop()
 
-  const providers = ['dropbox', 'drive']
+  // 'stemn' is the built-in storage provider; it has no provider-specific viewers
+  const providers = ['dropbox', 'drive', 'stemn']
   if (!providers.includes(provider)) {
     console.error('Invalid provider type:', provider)
     return 'other'
   }
   const generalFileTypes = viewerFileTypes.general
-  const providerFileTypes = viewerFileTypes[provider]
+  const providerFileTypes = viewerFileTypes[provider] || {}
 
   // This merge resolver concats arrays.
   const mergeResolver = (targetVal, sourceVal) => (Array.isArray(targetVal) && sourceVal ? targetVal.concat(sourceVal) : sourceVal)

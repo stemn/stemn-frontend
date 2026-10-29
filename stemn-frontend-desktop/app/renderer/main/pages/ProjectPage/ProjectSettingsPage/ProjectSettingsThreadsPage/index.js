@@ -1,1 +1,1 @@
-export default from 'stemn-shared/misc/ProjectSettings/ThreadsSettings'
+export { default } from 'stemn-shared/misc/ProjectSettings/ThreadsSettings'

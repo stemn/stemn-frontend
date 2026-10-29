@@ -1,1 +1,1 @@
-export default from './ThreadDueDate'
+export { default } from './ThreadDueDate'

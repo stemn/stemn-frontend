@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- The Content-Security-Policy meta tag is injected at build time (see electron.vite.config.ts) -->
+    <title>Preview File</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700,700italic" type="text/css">
+    <style>
+      html { box-sizing: border-box; }
+      *, *:before, *:after { box-sizing: inherit; }
+    </style>
+  </head>
+  <body style="margin: 0px; height: 100vh; overflow: hidden; display: flex; flex-direction: column;">
+    <div style="flex: 1; display: flex; flex-direction: column;" id="root">
+      <!-- Placeholder replaced when React mounts -->
+      <div style="height: 50px; border-bottom: 1px solid rgba(0, 0, 0, 0.1); -webkit-user-select: none; -webkit-app-region: drag; cursor: default;"></div>
+      <div style="flex: 1; display: flex;">
+        <div style="flex: 1; display: flex; flex-direction: column;">
+          <div style="flex: 1;"></div>
+          <div style="height: 64px; background: rgb(248, 248, 248); border-top: 1px solid rgba(0, 0, 0, 0.1);"></div>
+        </div>
+        <div style="border-left: 1px solid rgba(0, 0, 0, 0.1); width: 450px;"></div>
+      </div>
+    </div>
+    <script type="module" src="./index.js"></script>
+  </body>
+</html>

@@ -1,1 +1,1 @@
-export default from './ProjectFeedCommitPage.container'
+export { default } from './ProjectFeedCommitPage.container'

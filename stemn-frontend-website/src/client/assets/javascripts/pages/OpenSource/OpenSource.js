@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import LandingLayout from 'layout/LandingLayout'
 import HeroBanner from 'modules/HeroBanner'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 export default class OpenSource extends Component {
   twitterShare = () => {

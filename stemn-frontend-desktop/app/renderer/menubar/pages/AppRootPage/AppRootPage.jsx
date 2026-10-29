@@ -10,7 +10,7 @@ function App({ children }) {
 }
 
 App.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.node,
 }
 
 export default App

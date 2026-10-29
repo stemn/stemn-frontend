@@ -1,8 +1,7 @@
 
-import * as React from 'react'
-import { FieldTemplateProps, WidgetProps } from 'react-jsonschema-form'
+import { WidgetProps } from '@rjsf/utils'
 
-export const RadioWidget = (props: WidgetProps & FieldTemplateProps) => {
+export const RadioWidget = (props: WidgetProps) => {
 
   return (
     <div />

@@ -1,6 +1,6 @@
 
 import React from 'react'
-import Icon from 'react-icon-base'
+import Icon from 'stemn-shared/misc/Icons/IconBase'
 
 export default props => (
   <Icon viewBox="0 0 24 24" { ...props }>

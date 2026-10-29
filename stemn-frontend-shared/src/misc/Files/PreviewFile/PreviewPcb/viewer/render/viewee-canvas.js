@@ -1,7 +1,8 @@
 /* eslint-disable */
-import ViewEERenderer from './viewee-generic.js'
-import webGerberConstants from '../constants/webGerberConstants.js'
-import { forEach } from 'lodash'
+// UMD module: kept as CommonJS (requires) so the UMD export below works under webpack 5
+const ViewEERenderer = require('./viewee-generic.js')
+const webGerberConstants = require('../constants/webGerberConstants.js').default
+const { forEach } = require('lodash');
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {

@@ -1,1 +1,1 @@
-export default from './TeamSettings.container'
+export { default } from './TeamSettings.container'

@@ -9,7 +9,7 @@ import React from 'react'
 
 import { has, some } from 'lodash'
 
-import { Link }             from 'react-router'
+import { Link }             from 'stemn-shared/routing'
 import ContentSidebar       from 'stemn-shared/misc/ContentSidebar'
 import LoadingOverlay       from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import CommitChanges        from 'stemn-shared/misc/Changes/CommitChanges/CommitChanges.jsx'
@@ -54,8 +54,8 @@ export class Component extends React.Component {
     this.setState({ hideGuide: true })
   };
 
-  componentWillMount() { this.onMount(this.props) }
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+  UNSAFE_componentWillMount() { this.onMount(this.props) }
+  UNSAFE_componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
 
   onMount = (nextProps, prevProps) => {
     // If the project is connected to a remote
@@ -111,7 +111,7 @@ export class Component extends React.Component {
 
 
     const projectNotConnectedTemplate = () => {
-      const baseLink = `project/${project.data._id}`
+      const baseLink = `/project/${project.data._id}`
       return (
         <div className="layout-column flex layout-align-center">
           <div className="layout-row layout-align-center">

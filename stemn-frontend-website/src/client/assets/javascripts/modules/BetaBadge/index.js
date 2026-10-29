@@ -1,1 +1,1 @@
-export default from './BetaBadge'
+export { default } from './BetaBadge'

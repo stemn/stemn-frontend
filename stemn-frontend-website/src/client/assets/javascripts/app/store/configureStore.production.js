@@ -1,20 +1,19 @@
-import { createStore, applyMiddleware, compose } from 'redux'
-import rootReducer from '../reducer'
-import qs from 'querystring'
-
-import { routerMiddleware } from 'react-router-redux'
-import { browserHistory } from 'react-router'
-import thunk from 'redux-thunk'
+import { legacy_createStore as createStore, applyMiddleware } from 'redux'
+import { thunk } from 'redux-thunk'
 import promise from 'redux-promise-middleware'
+import { createLogger } from 'redux-logger'
+import { persistReducer } from 'redux-persist'
+import { routerMiddleware } from 'stemn-shared/routing'
 import throttle from 'stemn-shared/redux/middleware/throttle/throttle.middleware.js'
 import httpPackage from 'stemn-shared/redux/middleware/httpPackage/httpPackage.middleware.js'
 import httpTransform from 'stemn-shared/redux/middleware/httpTransform/httpTransform.middleware.js'
 import toastsError from 'stemn-shared/misc/Toasts/ToastsError.middleware'
-import createLogger from 'redux-logger'
 import auth from 'stemn-shared/misc/Auth/Auth.middleware'
 import websocket from 'stemn-shared/misc/Websocket/websocket.middleware.js'
+import persistConfig from '../state/persistConfig'
+import rootReducer from '../reducer'
 
-const searchParams = qs.parse(window.location.search.substring(1))
+const searchParams = new URLSearchParams(window.location.search)
 
 const middleware = [
   thunk,
@@ -23,20 +22,19 @@ const middleware = [
   httpPackage,
   httpTransform,
   websocket,
-  promise.default(),
+  promise,
   toastsError,
   // If ?debug search param is used, the redux logger is added
-  ...(searchParams.debug
+  ...(searchParams.get('debug')
     ? [createLogger({ collapsed: true })]
     : []),
-  routerMiddleware(browserHistory),
+  routerMiddleware(),
 ]
 
-const enhancer = compose(
-  applyMiddleware(...middleware),
-)(createStore)
-
 export default function configureStore(initialState) {
-  const store = enhancer(rootReducer, initialState)
-  return store
+  return createStore(
+    persistReducer(persistConfig, rootReducer),
+    initialState,
+    applyMiddleware(...middleware),
+  )
 }

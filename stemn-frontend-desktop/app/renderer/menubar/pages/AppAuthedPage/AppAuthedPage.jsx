@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+import { push } from 'stemn-shared/routing'
 
 // Component Core
 import React from 'react'
@@ -14,14 +14,16 @@ export class Component extends React.Component {
   onMount = (nextProps, prevProps) => {
     if (!nextProps.auth.authToken || !nextProps.auth.user._id) {
       nextProps.dispatch(push('/login'))
+      return
     }
-    if (!has(nextProps, 'params.stub') || nextProps.activeProject != nextProps.params.stub) {
+    // Follow the project that is active in the main window
+    if (nextProps.activeProject && (!has(nextProps, 'params.stub') || nextProps.activeProject !== nextProps.params.stub)) {
       nextProps.dispatch(push(`/project/${nextProps.activeProject}`))
     }
   };
 
-  componentWillMount() { this.onMount(this.props) }
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+  UNSAFE_componentWillMount() { this.onMount(this.props) }
+  UNSAFE_componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
 
   render() {
     const { children } = this.props

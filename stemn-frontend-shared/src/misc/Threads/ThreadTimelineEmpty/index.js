@@ -1,1 +1,1 @@
-export default from './ThreadTimelineEmpty'
+export { default } from './ThreadTimelineEmpty'

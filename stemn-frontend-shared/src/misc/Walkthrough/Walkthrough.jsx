@@ -15,7 +15,7 @@ import classes from './Walkthrough.css'
 
 import Popover from 'stemn-shared/misc/Popover'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
-import MdClose from 'react-icons/md/close'
+import { MdClose } from 'react-icons/md'
 
 const WalkthroughPropTypes = {
   children: PropTypes.node,      // Child element

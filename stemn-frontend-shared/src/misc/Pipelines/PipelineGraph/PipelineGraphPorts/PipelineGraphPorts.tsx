@@ -1,10 +1,10 @@
-import * as cn from 'classnames'
+import cn from 'classnames'
 import { PortModel } from 'mrblenny-storm-react-diagrams'
 import { filter, map, pipe, values } from 'ramda'
 import * as React from 'react'
 import { PipelineGraphPort } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphPort'
 import { PipelineGraphStepModel } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraphStep'
-import * as s from './PipelineGraphPorts.scss'
+import s from './PipelineGraphPorts.scss'
 
 export interface IPipelineGraphPortsProps {
   node: PipelineGraphStepModel,

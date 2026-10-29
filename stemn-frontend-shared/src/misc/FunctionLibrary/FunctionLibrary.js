@@ -11,6 +11,7 @@ import * as ElectronWindowsUtils  from 'stemn-shared/desktop/ElectronWindows/Ele
 import * as ShellContextUtils     from 'stemn-shared/desktop/Shell/ShellContext/ShellContext.utils.js'
 import * as SystemUtils           from 'stemn-shared/desktop/System/System.utils.js'
 import * as FileCache             from 'stemn-shared/desktop/FileCache/FileCache.js'
+import * as FileSave              from 'stemn-shared/desktop/FileSave/FileSave.js'
 
 import * as StoreActions from 'stemn-shared/misc/Store/Store.actions'
 
@@ -26,6 +27,7 @@ const library = {
   ShellContextUtils,
   SystemUtils,
   FileCache,
+  FileSave,
   StoreActions,
 }
 

@@ -22,11 +22,17 @@ const mainReducer = (state, action) => {
       return i.assocIn(state, ['data', action.meta.commentId, 'loading'], true)
     case 'COMMENTS/GET_COMMENT_REJECTED':
       return i.assocIn(state, ['data', action.meta.commentId, 'loading'], false)
-    case 'COMMENTS/GET_COMMENT_FULFILLED':
+    case 'COMMENTS/GET_COMMENT_FULFILLED': {
+      // getComment queries GET /comments?ids=<id>, which responds with an array
+      const { data } = action.payload
+      const comment = Array.isArray(data)
+        ? data.find(item => item._id === action.meta.commentId) || data[0]
+        : data
       return i.assocIn(state, ['data', action.meta.commentId], {
         loading: false,
-        data: action.payload.data,
+        data: comment,
       })
+    }
 
 
     case 'COMMENTS/START_EDIT':

@@ -5,7 +5,7 @@ import NewThreadModal from './NewThreadModal'
 import { newThread } from 'stemn-shared/misc/Threads/Threads.actions'
 import { newComment } from 'stemn-shared/misc/Comments/Comments.actions'
 import { projectThreadRoute } from 'route-actions'
-import { push } from 'react-router-redux'
+import { push } from 'stemn-shared/routing'
 
 const stateToProps = ({ threads }, { boardId }) => ({
   board: threads.boards[boardId],

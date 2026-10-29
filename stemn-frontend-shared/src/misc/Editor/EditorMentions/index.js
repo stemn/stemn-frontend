@@ -1,1 +1,1 @@
-export default from './EditorMentions'
+export { default } from './EditorMentions'

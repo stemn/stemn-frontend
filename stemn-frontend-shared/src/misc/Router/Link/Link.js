@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
-import { Link } from 'react-router'
+import { Link } from 'stemn-shared/routing'
 
 import { isActive, getRoutePath } from './Link.utils'
 

@@ -1,5 +1,4 @@
-import * as React from 'react'
-import { ObjectFieldTemplateProps } from 'react-jsonschema-form'
+import { ObjectFieldTemplateProps } from '@rjsf/utils'
 
 export const ObjectFieldTemplate = (props: ObjectFieldTemplateProps) => {
   return (

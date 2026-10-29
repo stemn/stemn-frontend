@@ -8,7 +8,7 @@ import { isAssembly } from './PreviewCad/PreviewCad.utils.js';
 import PreviewCadLoader from './PreviewCadLoader';
 import PreviewCode from './PreviewCode';
 import { dispatchToProps, IPreviewFileContainerProps } from './PreviewFile.container';
-import * as classes from './PreviewFile.scss';
+import classes from './PreviewFile.scss';
 import { getViewerType } from './PreviewFile.utils';
 import PreviewGdoc from './PreviewGdoc/PreviewGdoc';
 import PreviewGoogle from './PreviewGoogle/PreviewGoogle';
@@ -19,8 +19,8 @@ import { PreviewPipeline } from './PreviewPipeline';
 
 export interface IPreviewFileComponentProps extends IPreviewFileContainerProps {
   getFile: typeof dispatchToProps['getFile'],
-  renderFile: typeof dispatchToProps['renderFile'],
-  fileData: IFileData,
+  renderFile: (...args: Parameters<typeof dispatchToProps['renderFile']>) => void, // thunk, resolved by connect()
+  fileData: IFileData | IFileData[], // an array when the file is a gerber assembly (see PreviewFile.container)
   fileRender?: IFileRender
 }
 
@@ -40,7 +40,10 @@ export class PreviewFileComponent extends React.Component<IPreviewFileComponentP
     const getPreview = () => {
       const viewerType = getViewerType(file.name, file.provider)
 
-      const fileDataError = fileData && fileData.error
+      // gerber assemblies supply one IFileData per part; every other viewer takes a single entry
+      const fileDataList: IFileData[] = Array.isArray(fileData) ? fileData : [fileData]
+      const singleFileData = Array.isArray(fileData) ? fileData[0] : fileData
+      const fileDataError = fileDataList.map((item) => item && item.error).find(Boolean)
       const fileRenderError = fileRender && fileRender.error
 
       if (fileDataError || fileRenderError) {
@@ -56,7 +59,7 @@ export class PreviewFileComponent extends React.Component<IPreviewFileComponentP
             editActive={editActive}
             previewId={`${file.fileId}-${file.revisionId}`} // This previewId should match the one used in the Pipeline Graph sidebar
             fileMeta={file}
-            fileData={fileData}
+            fileData={singleFileData}
             downloadFn={getFile}
           />
         )
@@ -74,7 +77,7 @@ export class PreviewFileComponent extends React.Component<IPreviewFileComponentP
           <PreviewCode
             previewId={previewId}
             fileMeta={file}
-            fileData={fileData}
+            fileData={singleFileData}
             downloadFn={getFile}
           />
         )
@@ -106,7 +109,7 @@ export class PreviewFileComponent extends React.Component<IPreviewFileComponentP
           <PreviewImage
             previewId={previewId}
             fileMeta={file}
-            fileData={fileData}
+            fileData={singleFileData}
             downloadFn={getFile}
           />
         )
@@ -115,7 +118,7 @@ export class PreviewFileComponent extends React.Component<IPreviewFileComponentP
           <PreviewPdfLoader
             previewId={previewId}
             fileMeta={file}
-            fileData={fileData}
+            fileData={singleFileData}
             downloadFn={getFile}
           />
         )

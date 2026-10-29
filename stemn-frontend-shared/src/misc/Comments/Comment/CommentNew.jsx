@@ -48,7 +48,7 @@ export class CommentNew extends Component {
     }, true)
   }
   componentDidMount() {
-    ctrlEnterHandler(this.refs.form, this.submitNewComment)
+    ctrlEnterHandler(this.formRef, this.submitNewComment)
   }
   render() {
     const {
@@ -60,7 +60,7 @@ export class CommentNew extends Component {
 
     return (
       <div className={ cn(classes.commentNew, 'layout-row') } onClick={ this.clickComment }>
-        <div ref="form" className={ cn(classes.commentBody, { [classes.commentBodyHidden]: !isFocussed }, 'flex') }>
+        <div ref={ (el) => { this.formRef = el } } className={ cn(classes.commentBody, { [classes.commentBodyHidden]: !isFocussed }, 'flex') }>
           <div className={ `${classes.commentHeader} layout-row layout-align-start-center` }>
             <UserAvatar
               picture={ auth.user.picture }

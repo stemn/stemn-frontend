@@ -1,4 +1,4 @@
-import { replace } from 'react-router-redux'
+import { replace } from 'stemn-shared/routing'
 
 export const search = ({ entityType, value, size, page, parentType, parentId, criteria, select, sort, cacheKey }) => ({
   type: 'SEARCH/SEARCH',

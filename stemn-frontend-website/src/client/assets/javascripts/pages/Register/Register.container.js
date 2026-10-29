@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import RegisterPage from 'stemn-shared/pages/Register/Register'
 import LandingLayout from 'layout/LandingLayout'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import { nextBackground, authenticate, register } from 'stemn-shared/misc/Auth/Auth.actions.js'
 
 const stateToProps = ({ auth }) => ({

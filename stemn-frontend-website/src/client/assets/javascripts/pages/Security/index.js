@@ -1,1 +1,1 @@
-export default from './Security.container'
+export { default } from './Security.container'

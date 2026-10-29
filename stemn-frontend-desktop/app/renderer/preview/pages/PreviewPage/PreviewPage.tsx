@@ -1,8 +1,8 @@
-import * as cn from 'classnames'
+import cn from 'classnames'
 import { get } from 'lodash'
-import * as moment from 'moment'
+import moment from 'moment'
 import * as React from 'react'
-import { push as pushRouteType } from 'react-router-redux'
+import { push as pushRouteType } from 'stemn-shared/routing'
 import DragResize from 'stemn-shared/misc/DragResize/DragResize'
 import { isSelected, orderItemsByTime } from 'stemn-shared/misc/FileCompare/FileCompare.utils.js'
 import { FileCompareInner } from 'stemn-shared/misc/FileCompare/FileCompareInner/FileCompareInner'
@@ -16,7 +16,7 @@ import TimelineVertical from 'stemn-shared/misc/SyncTimeline/TimelineVertical'
 import SimpleTable from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable'
 import Timeline from 'stemn-shared/misc/Timeline/Timeline'
 import SectionTitle from 'stemn-shared/misc/Titles/SectionTitle/SectionTitle'
-import * as classes from './PreviewPage.scss'
+import classes from './PreviewPage.scss'
 
 export interface IPreviewPageProps {
   pushRoute: typeof pushRouteType,

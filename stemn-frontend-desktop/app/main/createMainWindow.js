@@ -1,85 +1,52 @@
-import { BrowserWindow, Menu, screen, shell } from 'electron';
-import getRootPath from 'get-root-path';
-import process from 'process';
+import { screen } from 'electron'
+import { createAppWindow, loadRenderer, windows } from './windows.js'
 
-import { bindBackForward } from './utils/browserWindowUtils.js';
-import stringify from './utils/stringify.js';
+const isDev = process.env.NODE_ENV === 'development'
 
-const mainHtml = getRootPath('/static/html/main.html')
-
-export const create = function createWindow({ uri = '/' } = {}) {
+export const create = ({ uri = '/' } = {}) => {
   let browserWindow = null
-  const primarySize = screen.getPrimaryDisplay().workAreaSize
-  const sizeRatio = 1
-  
-  init()
-  return {
-    browserWindow,
-    show,
-  }
 
-  // //////////////////////////////////////////
-
-  function init() {
-    // Create a new stringified state global - this will be parsed in the renderer
-    global.stateStringified = stringify(global.state)
-
-    browserWindow = new BrowserWindow({
-      show: false,
-      width: primarySize.width * sizeRatio,
-      height: primarySize.height * sizeRatio,
+  const init = () => {
+    const { width, height } = screen.getPrimaryDisplay().workAreaSize
+    browserWindow = createAppWindow({
+      name: 'main',
+      width,
+      height,
       minWidth: 500,
       minHeight: 500,
-      frame: process.platform == 'darwin',
-      webPreferences: {
-        webSecurity: false, // TODO. Investiage security implications. This is needed for cross origin autodesk requests.
-      },
+      title: 'Stemn',
+      // The renderer draws its own title bar except on macOS
+      frame: process.platform === 'darwin',
     })
 
-    // If the render process crashes, reload the window
-    browserWindow.webContents.on('crashed', () => {
-      browserWindow.destroy();
-      init();
-    });
-
-    // Handle Redirects
-    const handleRedirect = (e, url) => {
-      if (url !== browserWindow.webContents.getURL()) {
-        e.preventDefault()
-        shell.openExternal(url)
+    // If the renderer crashes, recreate the window
+    browserWindow.webContents.on('render-process-gone', (event, { reason }) => {
+      if (reason !== 'clean-exit' && browserWindow && !browserWindow.isDestroyed()) {
+        browserWindow.destroy()
+        init()
       }
-    }
-    browserWindow.webContents.on('will-navigate', handleRedirect)
-    browserWindow.webContents.on('new-window', handleRedirect)
-    
-    browserWindow.loadURL(`${mainHtml}#${uri}`)
+    })
     browserWindow.on('closed', () => {
       browserWindow = null
+      handle.browserWindow = null
     })
 
-    bindBackForward(browserWindow)
-
-    if (process.env.NODE_ENV === 'development') {
-      browserWindow.openDevTools()
-      browserWindow.webContents.on('context-menu', (e, props) => {
-        const { x, y } = props
-        Menu.buildFromTemplate([{
-          label: 'Inspect element',
-          click() {
-            browserWindow.inspectElement(x, y)
-          },
-        }]).popup(browserWindow)
-      })
+    loadRenderer(browserWindow, 'main', uri)
+    if (isDev && !process.env.STEMN_NO_DEVTOOLS) {
+      browserWindow.webContents.openDevTools({ mode: 'detach' })
     }
-
-    browserWindow.setMenu(null)
+    handle.browserWindow = browserWindow
   }
-  function show() {
-    if (!browserWindow) { init() }
-    if (browserWindow.isMinimized()) {
-      browserWindow.restore()
-    }
+
+  const show = () => {
+    if (!browserWindow) init()
+    if (browserWindow.isMinimized()) browserWindow.restore()
     browserWindow.show()
     browserWindow.focus()
   }
+
+  const handle = { browserWindow, show }
+  init()
+  windows.main = handle
+  return handle
 }

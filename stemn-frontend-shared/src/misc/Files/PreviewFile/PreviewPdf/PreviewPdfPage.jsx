@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classes from './PreviewPdf.css'
-import PDFJSUtils from 'pdfjs-dist/web/pdf_viewer.js'
-import Waypoint from 'react-waypoint'
+import { TextLayer } from 'pdfjs-dist'
+import Waypoint from 'stemn-shared/misc/Waypoint'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 
 class Page extends React.Component {
@@ -13,7 +13,7 @@ class Page extends React.Component {
     height: 0,
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const prevProps = this.props
     if (prevProps.pdf !== nextProps.pdf) {
       this._initPage(nextProps)
@@ -42,7 +42,7 @@ class Page extends React.Component {
     const { page } = this.state
     if (!page) {
       pdf.getPage(index).then((page) => {
-        const viewport = page.getViewport(scale)
+        const viewport = page.getViewport({ scale })
         const { width, height } = viewport
         this.setState({
           status: 'loading',
@@ -69,23 +69,21 @@ class Page extends React.Component {
     //    }
   };
 
-  context = undefined;
   viewport = undefined;
   textLayer = undefined;
 
   _renderPage = (page) => {
     const { scale, index } = this.props
-    this.viewport = page.getViewport(scale)
+    this.viewport = page.getViewport({ scale })
     const { width, height } = this.viewport
-    const canvas = this.refs.canvas
-    const textEl = this.refs.text
-    this.context = canvas.getContext('2d')
+    const canvas = this.canvasRef
+    const textEl = this.textRef
+    if (!canvas || !textEl) return
 
     // Create a HDPI canvas
     const ratio = 3
     canvas.width = width * ratio
     canvas.height = height * ratio
-    this.context.scale(ratio, ratio)
 
     this.setState({
       status: 'rendered',
@@ -94,19 +92,18 @@ class Page extends React.Component {
     })
 
     page.render({
-      canvasContext: this.context,
+      canvas,
+      viewport: this.viewport,
+      transform: [ratio, 0, 0, ratio, 0, 0],
+    })
+    textEl.replaceChildren()
+    textEl.style.setProperty('--total-scale-factor', String(this.viewport.scale))
+    this.textLayer = new TextLayer({
+      textContentSource: page.streamTextContent(),
+      container: textEl,
       viewport: this.viewport,
     })
-    page.getTextContent().then((textContent) => {
-      this.textLayer = new PDFJSUtils.PDFJS.TextLayerBuilder({
-        textLayerDiv: textEl,
-        pageIndex: index - 1,
-        viewport: this.viewport,
-      })
-
-      this.textLayer.setTextContent(textContent)
-      this.textLayer.render()
-    })
+    this.textLayer.render().catch(err => console.error('Failed to render pdf text layer', err))
   };
 
   render() {
@@ -133,9 +130,9 @@ class Page extends React.Component {
         <LoadingOverlay show={ status === 'loading' } />
         <Waypoint onEnter={ this._enterPage } />
         <div style={ sizeStyles }>
-          <canvas ref="canvas" style={ sizeStyles } />
+          <canvas ref={ (el) => { this.canvasRef = el } } style={ sizeStyles } />
         </div>
-        <div ref="text" className={ classes.textLayer } style={ textStyles } />
+        <div ref={ (el) => { this.textRef = el } } className={ classes.textLayer } style={ textStyles } />
       </div>
     )
   }

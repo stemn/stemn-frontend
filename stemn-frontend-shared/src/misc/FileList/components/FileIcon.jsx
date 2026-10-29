@@ -1,5 +1,5 @@
 import React from 'react'
-const fileTypeIcons = require.context('../filetype', true)
+import fileTypeIcons from './fileTypeIcons'
 
 export default class FileIcon extends React.Component {
   static defaultProps = {

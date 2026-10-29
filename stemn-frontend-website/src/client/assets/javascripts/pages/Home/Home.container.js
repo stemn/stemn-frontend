@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { getFeed } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import Home from './Home'
-import { push, replace } from 'react-router-redux'
+import { push, replace } from 'stemn-shared/routing'
 import { get } from 'lodash'
 
 const stateToProps = ({ syncTimeline, auth }, { location }) => {

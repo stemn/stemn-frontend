@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import classes from './PricingTable.scss'
-import MdDone from 'react-icons/md/done'
+import { MdDone } from 'react-icons/md'
 import cn from 'classnames'
 
 export default class PricingTable extends Component {

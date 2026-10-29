@@ -2,167 +2,154 @@ import './init.js'
 
 import squirrelStartup from 'electron-squirrel-startup'
 import { app, dialog } from 'electron'
-import pify from 'pify'
-import log from 'electron-log'
-
-import { create as createMainWindow }     from './createMainWindow'
-import { create as createMenubarWindow }  from './createMenuBarWindow'
-import { create as createTrayIcon }       from './createTrayIcon.js'
+import log from 'electron-log/main'
 
 import { initialise as initWebsocket } from 'stemn-shared/misc/Websocket/websocket.js'
 import socketEventMap from 'stemn-shared/misc/Websocket/eventMap'
 import AutoUpdateInit from 'stemn-shared/desktop/AutoUpdate/AutoUpdate.init.js'
+import { create as createWindow } from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js'
 import configureStore from '../shared/store/configureStore.main.js'
-import { getFilteredStoreData } from './json-storage.js'
+import { create as createMainWindow } from './createMainWindow'
+import { create as createMenubarWindow } from './createMenuBarWindow'
+import { create as createTrayIcon } from './createTrayIcon.js'
+import { getFilteredStoreData, jsonStorage } from './json-storage.js'
 import postStoreSetup from './postStoreSetup.js'
 import initApiServer from './api/index.js'
-import stringify from './utils/stringify.js'
-import { create as createWindow } from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js'
-import electronJsonStorage from 'electron-json-storage'
+import { registerIpcHandlers } from './ipc.js'
+import { registerProtocolHandlers, registerSchemes } from './protocol.js'
+import { getStore, setStore } from './storeRef.js'
+import { windows } from './windows.js'
 
-const jsonStorage = pify(electronJsonStorage)
-
-// The windows object is exported so it can be accessed elsewhere
-export const windows = {
-  main: undefined,
-  menubar: undefined,
-  trayIcon: undefined,
-}
-
-let store = {}
-
-// Function for processing the argument string into an object
-const getArgs = (argv) => {
-  const pathFlagIndex = argv.indexOf('--path')
-  const pathIndex = pathFlagIndex !== -1 ? pathFlagIndex + 1 : -1
-  return {
-    mode: {
-      hidden: argv && argv.includes('--hidden'),
-    },
-    inputs: {
-      path: argv && pathIndex !== -1 ? argv[pathIndex] : undefined,
-    },
-  }
-}
-
-const showPreview = (dispatch, localPath) => {
-  log.info('path to show preview', localPath)
-  if (dispatch && localPath) {
-    dispatch(createWindow({
-      type: 'PREVIEW',
-      props: {
-        localPath,
-      },
-    }))
-  }
-}
+export { windows }
 
 /** *********************************************************************************************
 
 STARTUP FLAGS:
-Hidden mode can be activated using a flag such as "--hidden" in the args:
-  "C:\Users\david\AppData\Local\STEMN\update.exe" --processStart "STEMN.exe"
-  --process-start-args "--hidden"
+Hidden mode can be activated using a flag such as "--hidden" in the args.
 
-Additionally, the local-path to a file can be passed in such as:
-  "C:\Users\david\AppData\Local\STEMN\update.exe" --processStart "STEMN.exe" --path "E:\Dropbox
-  (Platino Properties)\David Revay Resume.pdf"
-
-If a file-path is found a preview-window will pop that attempts to display revisions for that
-file.
+Additionally, the local path to a file can be passed in with `--path <file>`
+(this is what the Windows explorer context menu does). If a file path is found
+a preview window pops up that displays the revisions for that file.
 
 ********************************************************************************************** */
-
-log.info('Application started')
-
-if (!squirrelStartup) {
-  global.state = {} // Ease remote-loading of initial state
-
-  require('electron-debug')({ enabled: true })
-
-  // Make this a single instance application
-  const shouldQuit = app.makeSingleInstance((commandLine, workingDirectory) => {
-    const args = getArgs(commandLine)
-    // If the args include input.pathIf the args include input.path
-    // A second instance was started from the explorer context menu
-    // Show the preview window
-    if (args.inputs.path) {
-      log.info('Preview flags:', args)
-      showPreview(store.dispatch, args.inputs.path)
-    } else if (windows.main && windows.main.show) {
-      windows.main.show()
-    }
-  })
-
-  // Quit the app if this is a second instance
-  if (shouldQuit) {
-    app.quit()
+const getArgs = (argv) => {
+  const pathFlagIndex = argv.indexOf('--path')
+  return {
+    mode: {
+      hidden: argv.includes('--hidden'),
+    },
+    inputs: {
+      path: pathFlagIndex !== -1 ? argv[pathFlagIndex + 1] : undefined,
+    },
   }
+}
 
-  app.on('ready', () => {
-    start().catch((err) => {
-      log.error('Startup error:', err)
-      dialog.showErrorBox('Something went wrong:', err.message)
-    })
-  })
-
-  app.on('activate', () => {
-    // On OS X it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
-    windows.main = createMainWindow()
-  })
+const showPreview = (localPath) => {
+  log.info('path to show preview', localPath)
+  const store = getStore()
+  if (store && localPath) {
+    store.dispatch(createWindow({
+      type: 'PREVIEW',
+      props: { localPath },
+    }))
+  }
 }
 
 async function start() {
   const args = getArgs(process.argv)
   log.info('Start flags:', args)
 
-  // Fetch the permanant portion of the state
-  global.state = await jsonStorage.get('state').catch((error) => {
+  registerProtocolHandlers()
+
+  // Fetch the persisted portion of the state
+  const persistedState = await jsonStorage.get('state').catch((error) => {
     log.error('Invalid state store:', error)
-    jsonStorage.clear()
-    return {}
+    return jsonStorage.clear().then(() => ({}))
   })
 
   // Configure store
-  store = configureStore(global.state)
+  const store = configureStore(persistedState || {})
+  setStore(store)
+  registerIpcHandlers({ getStore })
   postStoreSetup(store)
-  store.subscribe(async () => {
-    global.state = store.getState()
-    global.stateStringified = stringify(global.state)
-    const dataToStore = getFilteredStoreData(global.state)
-    await jsonStorage.set('state', dataToStore)
+
+  // Persist the store (debounced, writes are async)
+  let saveTimeout
+  store.subscribe(() => {
+    clearTimeout(saveTimeout)
+    saveTimeout = setTimeout(() => {
+      jsonStorage.set('state', getFilteredStoreData(store.getState()))
+        .catch(error => log.error('Could not save the state:', error))
+    }, 250)
   })
 
-  // Initialise the api server
+  // Initialise the api server (OAuth callbacks)
   initApiServer(store)
 
   // Create windows and tray icon
-  windows.main = createMainWindow()
-  windows.menubar = createMenubarWindow()
+  createMainWindow()
+  createMenubarWindow()
   windows.trayIcon = createTrayIcon({ store, windows })
 
   // Show the main window if it is not started in hidden mode
   if (!args.mode.hidden) {
-    windows.main.show()
+    windows.main.browserWindow.once('ready-to-show', () => windows.main.show())
   }
 
   // Show the preview window if we have a path argv
   if (args.inputs.path) {
-    showPreview(store.dispatch, args.inputs.path)
+    showPreview(args.inputs.path)
   }
-  //  showPreview(store.dispatch, 'E:\\Dropbox (Platino Properties)\\David Revay Resume.pdf')
-  //  showPreview(store.dispatch, 'E:\\Dropbox (Platino Properties)\\Spaceman256.png')
-  //  showPreview(store.dispatch, 'E:\\Dropbox (Platino Properties)\\STEMN Projects\\Gear Changes\\httpMiddleware.js')
 
   // Initialise the Websocket connection
   const websocket = initWebsocket(GLOBAL_ENV.WEBSOCKET_SERVER)
+  websocket.on('open', () => log.info('Websocket connected to', GLOBAL_ENV.WEBSOCKET_SERVER))
+  websocket.on('error', error => log.warn('Websocket error:', error && error.message))
   websocket.on('data', (action) => {
+    if (process.env.STEMN_LOG_WEBSOCKET || store.getState().system.settings.debug) {
+      log.info('Websocket received', action && action.type)
+    }
     socketEventMap(store, action)
   })
 
   // Initialise the auto-update after 5 seconds
-  setTimeout(() => {
-    AutoUpdateInit(store)
-  }, 5000)
+  setTimeout(() => AutoUpdateInit(store), 5000)
+}
+
+log.info(`Stemn Desktop ${app.getVersion()} starting (STEMN_ENV=${GLOBAL_ENV.STEMN_ENV}, API ${GLOBAL_ENV.API_SERVER})`)
+
+if (squirrelStartup) {
+  app.quit()
+} else if (!app.requestSingleInstanceLock()) {
+  // Another instance is running: it receives our argv through 'second-instance'
+  app.quit()
+} else {
+  registerSchemes()
+  app.enableSandbox()
+
+  app.on('second-instance', (event, commandLine) => {
+    const args = getArgs(commandLine)
+    // A second instance was started from the explorer context menu: show the preview window
+    if (args.inputs.path) {
+      log.info('Preview flags:', args)
+      showPreview(args.inputs.path)
+    } else if (windows.main) {
+      windows.main.show()
+    }
+  })
+
+  // Keep running in the tray when every window is closed
+  app.on('window-all-closed', () => {})
+
+  app.on('activate', () => {
+    // On macOS re-open the main window when the dock icon is clicked
+    if (windows.main) windows.main.show()
+  })
+
+  app.whenReady()
+    .then(start)
+    .catch((err) => {
+      log.error('Startup error:', err)
+      dialog.showErrorBox('Something went wrong:', err.message)
+    })
 }

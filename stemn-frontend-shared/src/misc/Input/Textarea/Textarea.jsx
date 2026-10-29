@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
-import Textarea from 'react-textarea-autosize/dist/react-textarea-autosize.cjs.js'
+import Textarea from 'react-textarea-autosize'
 
 class Component extends React.Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class Component extends React.Component {
       value: props.value,
     }
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     // Update the internal state if it differs from the redux state
     if (nextProps.value !== this.state.value) {
       this.setState({
@@ -19,6 +19,12 @@ class Component extends React.Component {
     }
   }
   getTextareaRef = (ref) => {
+    const { inputRef } = this.props
+    if (typeof inputRef === 'function') {
+      inputRef(ref)
+    } else if (inputRef) {
+      inputRef.current = ref
+    }
     if (ref && this.props.autoFocus) {
       ref.focus()
     }
@@ -41,11 +47,13 @@ class Component extends React.Component {
     }
   }
   render() {
-    const { model, dispatch, onChange, value: valueExternal, ...otherProps } = this.props
+    // `inputRef` (react-textarea-autosize < 8) is now `ref`; `rows` -> `minRows`
+    const { model, dispatch, onChange, value: valueExternal, rows, inputRef, ...otherProps } = this.props
     const { value } = this.state
     return (
       <Textarea
-        inputRef={ this.getTextareaRef }
+        ref={ this.getTextareaRef }
+        minRows={ rows }
         onChange={ this.onChange }
         value={ value }
         { ...otherProps }

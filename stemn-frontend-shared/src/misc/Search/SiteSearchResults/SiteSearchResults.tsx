@@ -1,4 +1,4 @@
-import * as cn from 'classnames'
+import cn from 'classnames'
 import { get } from 'lodash'
 import * as React from 'react'
 import EntityRow from 'stemn-shared/misc/EntityRow'
@@ -6,9 +6,9 @@ import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOver
 import Pagination from 'stemn-shared/misc/Pagination'
 import { ProjectRow } from 'stemn-shared/misc/Projects/ProjectRow/ProjectRow'
 import { IProject } from 'stemn-shared/misc/Projects/types'
-import * as Link from 'stemn-shared/misc/Router/Link'
+import Link from 'stemn-shared/misc/Router/Link'
 import Tag from 'stemn-shared/misc/Tags/Tag'
-import * as classes from './SiteSearchResults.scss'
+import classes from './SiteSearchResults.scss'
 
 export interface ISiteSearchResultsProps {
   size: number,

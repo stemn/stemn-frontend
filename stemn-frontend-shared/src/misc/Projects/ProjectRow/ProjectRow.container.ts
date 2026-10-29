@@ -33,4 +33,4 @@ export interface IProjectRowContainerProps {
 export const ProjectRowContainer = compose(
   connect(stateToProps, dispatchToProps),
   fetchDataHoc(fetchConfigs),
-)(ProjectRow) as React.SFC<IProjectRowContainerProps>
+)(ProjectRow) as React.FC<IProjectRowContainerProps>

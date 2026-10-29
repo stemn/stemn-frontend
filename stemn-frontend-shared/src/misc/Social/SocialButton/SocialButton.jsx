@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { PropTypes } from 'prop-types'
 import cn from 'classnames'
 import classes from './SocialButton.css'
-import MdStar from 'react-icons/md/star'
-import MdStarBorder from 'react-icons/md/star-border'
-import MdBookmark from 'react-icons/md/bookmark'
-import MdBookmarkBorder from 'react-icons/md/bookmark-outline'
-import MdContentCopy from 'react-icons/md/content-copy'
+import { MdStar } from 'react-icons/md'
+import { MdStarBorder } from 'react-icons/md'
+import { MdBookmark } from 'react-icons/md'
+import { MdBookmarkBorder } from 'react-icons/md'
+import { MdContentCopy } from 'react-icons/md'
 
 const getIcon = (type, entityType, status) => {
   if (type === 'like') {
@@ -69,7 +69,7 @@ export default class SocialButton extends Component {
     status: PropTypes.bool.isRequired,
   }
 
-  componentWillMount = () => {
+  UNSAFE_componentWillMount = () => {
     const { checkStatus, entityId, entityType, type } = this.props
     checkStatus({
       entityId,

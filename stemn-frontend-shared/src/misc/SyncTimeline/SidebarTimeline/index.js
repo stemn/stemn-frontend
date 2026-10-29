@@ -1,1 +1,1 @@
-export default from './SidebarTimeline'
+export { default } from './SidebarTimeline'

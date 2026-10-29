@@ -1,1 +1,1 @@
-export default from './Search.container'
+export { default } from './Search.container'

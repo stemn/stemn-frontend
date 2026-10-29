@@ -1,4 +1,4 @@
-@value primary-bg, warn, success from "theme";
+@value primary-bg, warn as themeWarn, success as themeSuccess from "theme";
 
 .banner {
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -7,9 +7,9 @@
 }
 
 .warn {
-  border-left: 6px solid warn;
+  border-left: 6px solid themeWarn;
 }
 
 .success {
-  border-left: 6px solid success;
+  border-left: 6px solid themeSuccess;
 }

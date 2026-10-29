@@ -1,12 +1,11 @@
-import * as cn from 'classnames'
+import cn from 'classnames'
 import { get } from 'lodash'
-import * as React from 'react'
-import MdContentCopy from 'react-icons/md/content-copy'
+import { MdContentCopy } from 'react-icons/md'
 import ProviderIcon from 'stemn-shared/misc/Icons/ProviderIcon'
 import PublicPrivateIcon from 'stemn-shared/misc/Icons/PublicPrivateIcon'
 import { IProject } from 'stemn-shared/misc/Projects/types'
-import * as Link from 'stemn-shared/misc/Router/Link'
-import * as s from './ProjectInfoIcons.scss'
+import Link from 'stemn-shared/misc/Router/Link'
+import s from './ProjectInfoIcons.scss'
 
 export interface IProjectInfoIconsProps {
   project?: IProject,

@@ -1,1 +1,1 @@
-export default from './ThreadsEmpty'
+export { default } from './ThreadsEmpty'

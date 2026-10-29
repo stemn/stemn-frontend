@@ -1,34 +1,29 @@
 import * as LocalPathActions from 'stemn-shared/desktop/LocalPath/LocalPath.actions.js'
 import * as ModalActions from 'stemn-shared/misc/Modal/Modal.actions.js'
 import { getFullPath }   from 'stemn-shared/misc/Files/Files.actions'
-import { shell } from 'electron'
+import { getBridge } from 'stemn-shared/desktop/bridge'
 import errorModalName from 'stemn-shared/misc/Modal/ErrorModal'
-import { normaliseSlashes } from 'stemn-shared/desktop/System/System.utils'
+import { normaliseSlashes } from 'stemn-shared/desktop/System/normaliseSlashes'
+
+// Looking up a provider that isn't installed rejects: that is reported in the store, not an error
+const ignoreRejection = (result) => {
+  if (result && typeof result.catch === 'function') result.catch(() => {})
+  return result
+}
 
 export function getProviderPath() {
-  return (dispatch, getState) => {
-    dispatch({
+  return (dispatch) => {
+    ['dropbox', 'drive'].forEach(provider => ignoreRejection(dispatch({
       type: 'SYSTEM/GET_PROVIDER_PATH',
       aliased: true,
       payload: {
         functionAlias: 'ProviderPathUtils.getPath',
-        functionInputs: ['dropbox'],
+        functionInputs: [provider],
       },
       meta: {
-        provider: 'dropbox',
+        provider,
       },
-    })
-    dispatch({
-      type: 'SYSTEM/GET_PROVIDER_PATH',
-      aliased: true,
-      payload: {
-        functionAlias: 'ProviderPathUtils.getPath',
-        functionInputs: ['drive'],
-      },
-      meta: {
-        provider: 'drive',
-      },
-    })
+    })))
   }
 }
 
@@ -65,25 +60,26 @@ export function openFile({ location, path, projectId, provider }) {
       }))
     }
 
-    const open = (fullPath) => {
+    // Runs in a renderer: the file is opened by the main process through the preload bridge
+    const open = async (fullPath) => {
       const fullPathNormalised = normaliseSlashes(fullPath)
+      const { shell } = getBridge()
       if (location) {
-        const success = shell.showItemInFolder(fullPathNormalised)
+        const success = await shell.showItemInFolder(fullPathNormalised)
         if (!success) { showErrorDialog({ path: fullPathNormalised }) }
         return dispatch({
           type: 'SYSTEM/OPEN_FILE_LOCATION',
           payload: { path: fullPathNormalised },
         })
-      } 
-      const success = shell.openItem(fullPathNormalised)
-      if (!success) { showErrorDialog({ path: fullPathNormalised }) }
-      dispatch({
+      }
+      const error = await shell.openPath(fullPathNormalised)
+      if (error) { showErrorDialog({ path: fullPathNormalised }) }
+      return dispatch({
         type: 'SYSTEM/OPEN_FILE',
         payload: { path: fullPathNormalised },
       })
     }
 
-    const storeState = getState()
     return dispatch(getFullPath({ path, projectId, provider }))
       .then(open)
   }

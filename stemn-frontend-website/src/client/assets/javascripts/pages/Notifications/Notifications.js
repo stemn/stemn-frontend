@@ -5,7 +5,7 @@ import StandardLayout from 'layout/StandardLayout'
 import { Container, Row, Col } from 'stemn-shared/misc/Layout'
 import SubHeader from 'modules/SubHeader'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 export default class Notifications extends Component {
   render() {

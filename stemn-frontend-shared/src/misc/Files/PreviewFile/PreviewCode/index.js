@@ -1,1 +1,1 @@
-export default from './PreviewCode.container'
+export { default } from './PreviewCode.container'

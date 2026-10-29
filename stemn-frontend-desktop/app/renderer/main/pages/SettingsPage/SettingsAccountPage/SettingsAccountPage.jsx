@@ -10,7 +10,7 @@ import UserLinkedAccountSettings from 'stemn-shared/misc/UserSettings/UserLinked
 import UserCloudProviderSettings from 'stemn-shared/misc/UserSettings/UserCloudProviderSettings'
 
 export class Component extends React.Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.props.getUser({
       userId: this.props.auth.user._id,
       force: true,

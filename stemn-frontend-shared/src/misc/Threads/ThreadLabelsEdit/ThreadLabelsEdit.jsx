@@ -8,7 +8,7 @@ import { showConfirm } from 'stemn-shared/misc/Modal/Modal.actions.js'
 import Popover from 'stemn-shared/misc/Popover'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
-import MdMoreHoriz from 'react-icons/md/more-horiz'
+import { MdMoreHoriz } from 'react-icons/md'
 import ColorSelect from './ColorSelect/ColorSelect.jsx'
 
 
@@ -22,10 +22,10 @@ class ThreadLabelsEdit extends Component {
       this.props.dispatch(storeRemove(model, index))
     })
   }
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     this.onMount(props)
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.onMount(this.props)
   }
   onMount = (props) => {

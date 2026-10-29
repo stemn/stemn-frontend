@@ -10,8 +10,8 @@ export default class PreviewImage extends React.Component {
     naturalHeight: 0,
   };
 
-  componentWillMount() { this.onMount(this.props) }
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+  UNSAFE_componentWillMount() { this.onMount(this.props) }
+  UNSAFE_componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
 
   onMount = (nextProps, prevProps) => {
     // If the previewId changes, download a new file
@@ -28,8 +28,8 @@ export default class PreviewImage extends React.Component {
 
   onLoad = () => {
     setTimeout(() => {
-      const [containerWidth, containerHeight] = [this.refs.container.offsetWidth, this.refs.container.offsetHeight]
-      const { naturalWidth, naturalHeight }     = this.refs.image
+      const [containerWidth, containerHeight] = [this.containerRef.offsetWidth, this.containerRef.offsetHeight]
+      const { naturalWidth, naturalHeight }     = this.imageRef
       const widthScale = (containerWidth / naturalWidth) * 0.9
       const heightScale = (containerHeight / naturalHeight) * 0.9
       const scale = widthScale < heightScale ? widthScale : heightScale
@@ -66,12 +66,12 @@ export default class PreviewImage extends React.Component {
     const isLoading = fileData && fileData.data ? fileData.loading : true
 
     return (
-      <div ref="container" className={ `${styles.container} flex rel-box` }>
+      <div ref={ (el) => { this.containerRef = el } } className={ `${styles.container} flex rel-box` }>
         <ScrollZoom zoomIn={ () => this.zoom('in') } zoomOut={ () => this.zoom('out') } style={ { display: 'table', width: '100%', height: '100%' } }>
           <div style={ { display: 'table-cell', textAlign: 'center', verticalAlign: 'middle' } }>
             <img
               src={ imageUrl }
-              ref="image"
+              ref={ (el) => { this.imageRef = el } }
               className={ styles.image }
               style={ sizeStyles }
               onLoad={ this.onLoad }

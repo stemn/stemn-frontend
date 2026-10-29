@@ -17,7 +17,7 @@ export default class ProjectCloneModal extends Component {
     activeTab: 1,
     linkPending: false,
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     const { storeChange, projectName } = this.props
     storeChange('projects.cloneProject.name', projectName)
   }

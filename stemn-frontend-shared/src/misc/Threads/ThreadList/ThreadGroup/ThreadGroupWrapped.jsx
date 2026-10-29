@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
+import React, { useCallback, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { DragSource, DropTarget } from 'react-dnd'
-import { findDOMNode } from 'react-dom'
+import { useDrag, useDrop } from 'react-dnd'
 
 const ItemTypes = {
   GROUP: 'group',
@@ -34,15 +33,18 @@ const cardSource = {
 }
 
 const cardTarget = {
-  hover(props, monitor, component) {
+  hover(props, monitor, node) {
     const dragIndex = monitor.getItem().index
     const hoverIndex = props.index
     // Don't replace items with themselves
     if (dragIndex === hoverIndex) {
       return
     }
+    if (!node) {
+      return
+    }
     // Determine rectangle on screen
-    const hoverBoundingRect = findDOMNode(component).getBoundingClientRect()
+    const hoverBoundingRect = node.getBoundingClientRect()
     const clientOffset = monitor.getClientOffset() // Determine mouse position
 
     if (props.layout === 'list') {
@@ -78,31 +80,44 @@ const cardTarget = {
   },
 }
 
-@DropTarget(ItemTypes.GROUP, cardTarget, connect => ({
-  connectDropTarget: connect.dropTarget(),
-}))
-@DragSource(ItemTypes.GROUP, cardSource, (connect, monitor) => ({
-  connectDragSource: connect.dragSource(),
-  isDragging: monitor.isDragging(),
-}))
-export default class ThreadGroupWrapped extends Component {
-  static propTypes = {
-    connectDragSource: PropTypes.func.isRequired,
-    connectDropTarget: PropTypes.func.isRequired,
-    index: PropTypes.number.isRequired,
-    isDragging: PropTypes.bool.isRequired,
-    item: PropTypes.object.isRequired,
-    moveGroup: PropTypes.func.isRequired,
-    layout: PropTypes.string.isRequired, // Required to determine drag direction, horizontal or veritcal
-  };
+export default function ThreadGroupWrapped(props) {
+  const { children, id } = props
 
-  render() {
-    const { item, isDragging, connectDragSource, connectDropTarget, children, id } = this.props
-    const outerStyles = isDragging ? { opacity: '0.5' } : { opacity: '1', transform: 'translate3d(0,0,0)' }
-    return connectDragSource(connectDropTarget(
-      <div style={ outerStyles } key={ id } className="layout-column rel-box">
-        {children}
-      </div>,
-    ))
-  }
+  // Keep the latest props available to the (memoized) drag/drop specs
+  const propsRef = useRef(props)
+  propsRef.current = props
+  const nodeRef = useRef(null)
+
+  const [{ isDragging }, connectDragSource] = useDrag({
+    type: ItemTypes.GROUP,
+    item: () => cardSource.beginDrag(propsRef.current),
+    end: () => cardSource.endDrag(propsRef.current),
+    collect: monitor => ({
+      isDragging: monitor.isDragging(),
+    }),
+  })
+
+  const [, connectDropTarget] = useDrop({
+    accept: ItemTypes.GROUP,
+    hover: (item, monitor) => cardTarget.hover(propsRef.current, monitor, nodeRef.current),
+  })
+
+  const setRef = useCallback((node) => {
+    nodeRef.current = node
+    connectDragSource(connectDropTarget(node))
+  }, [connectDragSource, connectDropTarget])
+
+  const outerStyles = isDragging ? { opacity: '0.5' } : { opacity: '1', transform: 'translate3d(0,0,0)' }
+  return (
+    <div ref={ setRef } style={ outerStyles } key={ id } className="layout-column rel-box">
+      {children}
+    </div>
+  )
+}
+
+ThreadGroupWrapped.propTypes = {
+  index: PropTypes.number.isRequired,
+  item: PropTypes.object.isRequired,
+  moveGroup: PropTypes.func.isRequired,
+  layout: PropTypes.string.isRequired, // Required to determine drag direction, horizontal or veritcal
 }

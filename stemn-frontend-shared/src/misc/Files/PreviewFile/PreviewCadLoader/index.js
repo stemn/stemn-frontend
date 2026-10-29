@@ -1,1 +1,1 @@
-export default from './PreviewCadLoader'
+export { default } from './PreviewCadLoader'

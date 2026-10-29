@@ -7,14 +7,13 @@
 // import ProjectPermissionsRadio from 'stemn-shared/misc/Project/ProjectPermissionsRadio/ProjectPermissionsRadio.jsx'
 // import { ArrowTab, ArrowTabs } from 'stemn-shared/misc/Tabs/ArrowTabs/ArrowTabs.jsx'
 // import * as classes from '../ProjectNewModal/ProjectNewModal.scss'
-import * as cn from 'classnames'
+import cn from 'classnames'
 import * as React from 'react'
-import { ImageFile } from 'react-dropzone'
 import { Field, Form, InjectedFormProps } from 'redux-form'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 import { FormDropdown, FormInput, FormUpload } from 'stemn-shared/misc/Input'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay'
-import * as sLogin from 'stemn-shared/pages/Login/Login.scss'
+import sLogin from 'stemn-shared/pages/Login/Login.scss'
 import { IFolder } from '../types'
 import { dispatchToProps } from './FileCreateModal.container'
 
@@ -36,7 +35,7 @@ export interface IFileCreateModalComponentProps extends InjectedFormProps {
 interface IFormData {
   fileName: string,
   fileType: string,
-  uploads: ImageFile[]
+  uploads: File[]
 }
 
 export class FileCreateModalComponent extends React.Component<IFileCreateModalComponentProps> {
@@ -50,7 +49,7 @@ export class FileCreateModalComponent extends React.Component<IFileCreateModalCo
       file: 'some data',
     })
   }
-  public onDrop = (files: ImageFile[]) => {
+  public onDrop = (files: File[]) => {
     const { change } = this.props
     change('loading', true)
   }

@@ -1,6 +1,3 @@
-require('colors')
-const { mapValues } = require('lodash')
-
 const stemnEnvs = {
   custom: {
     API_SERVER: process.env.API_SERVER,
@@ -9,7 +6,7 @@ const stemnEnvs = {
   },
   local: {
     API_SERVER: 'http://localhost:3000',
-    WEBSITE_URL: 'http://stemn.com',
+    WEBSITE_URL: 'http://localhost:8081',
     WEBSOCKET_SERVER: 'http://localhost:8000',
   },
   staging: {
@@ -24,12 +21,16 @@ const stemnEnvs = {
   },
 }
 
+/**
+ * Returns the GLOBAL_ENV server urls (JSON stringified, ready for DefinePlugin)
+ * for a STEMN_ENV name: custom | local | staging | production
+ */
 module.exports = (stemnEnvType) => {
-  const stemnEnv = stemnEnvs[stemnEnvType] || stemnEnvs.staging
-  if (!stemnEnvs[stemnEnvType]) {
-    console.log('Set STEMN_ENV to one of '.red + `${Object.keys(stemnEnvs).join(', ')}`.magenta)
-    console.log('Defaulting to '.red + 'staging'.magenta)
+  let stemnEnv = stemnEnvs[stemnEnvType]
+  if (!stemnEnv) {
+    console.warn(`Unknown STEMN_ENV "${stemnEnvType}". Use one of ${Object.keys(stemnEnvs).join(', ')}. Defaulting to local.`)
+    stemnEnv = stemnEnvs.local
   }
-
-  return mapValues(stemnEnv, val => JSON.stringify(val))
+  console.log(`STEMN_ENV=${stemnEnvType}: API_SERVER=${stemnEnv.API_SERVER} WEBSOCKET_SERVER=${stemnEnv.WEBSOCKET_SERVER}`)
+  return Object.fromEntries(Object.entries(stemnEnv).map(([key, val]) => [key, JSON.stringify(val)]))
 }

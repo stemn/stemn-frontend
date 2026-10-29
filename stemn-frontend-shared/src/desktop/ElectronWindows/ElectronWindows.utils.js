@@ -1,12 +1,12 @@
+/* Main process only (called through FunctionLibrary aliases) */
 import { app } from 'electron'
-import { windows } from 'stemn-frontend-desktop/app/main/index.js'
+import { windows } from 'stemn-frontend-desktop/app/main/windows.js'
 import { create as createPreview } from 'stemn-frontend-desktop/app/main/createPreviewWindow.js'
-import querystring from 'querystring'
 
 export const create = ({ type, props }) => {
   if (type === 'PREVIEW') {
-    const queryParams = querystring.stringify(props)
-    createPreview({ uri: queryParams ? `?${queryParams}` : '' })
+    const queryParams = new URLSearchParams(Object.entries(props || {}).filter(([, value]) => value !== undefined && value !== null)).toString()
+    createPreview({ uri: queryParams ? `/?${queryParams}` : '/' })
   } else {
     console.error('Window could not be created')
   }
@@ -36,4 +36,3 @@ export const relaunch = () => {
   app.relaunch()
   app.exit(0)
 }
-

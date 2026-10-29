@@ -1,5 +1,5 @@
 import { projectFolderRoute } from 'route-actions'
-import { push } from 'react-router-redux'
+import { push } from 'stemn-shared/routing'
 import capitalizeFirstLetter from 'stemn-shared/utils/strings/capitalizeFirstLetter'
 
 export default (dispatch, provider) => [{

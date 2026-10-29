@@ -1,1 +1,1 @@
-export default from './MentionPopover.container'
+export { default } from './MentionPopover.container'

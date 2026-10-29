@@ -18,7 +18,7 @@ import Input from 'stemn-shared/misc/Input/Input/Input'
 import MarkdownButton from 'stemn-shared/misc/Editor/MarkdownButton/MarkdownButton.jsx'
 import Walkthrough from 'stemn-shared/misc/Walkthrough/Walkthrough.jsx'
 
-import MdDone from 'react-icons/md/done'
+import { MdDone } from 'react-icons/md'
 
 
 // ///////////////////////////////////////////////////////////////////////////

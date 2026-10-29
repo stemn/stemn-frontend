@@ -6,7 +6,7 @@ import { getProject } from 'stemn-shared/misc/Projects/Projects.actions'
 import { joinRoom, leaveRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
 import Project from './Project'
 import { notFound } from 'route-actions'
-import { replace } from 'react-router-redux'
+import { replace } from 'stemn-shared/routing'
 
 const stateToProps = ({ projects }, { params, location }) => ({
   projectId: params.stub,

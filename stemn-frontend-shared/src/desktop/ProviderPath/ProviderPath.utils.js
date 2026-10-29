@@ -1,11 +1,14 @@
-import sql            from 'sql.js'
-import path           from 'path'
-import fs             from 'fs'
-import os             from 'os'
-import ini            from 'ini'
-import { zipObject }  from 'lodash'
-import log from 'electron-log'
+/* Main process only (called through FunctionLibrary aliases) */
+import { join } from 'node:path'
+import { readFile, readdir } from 'node:fs/promises'
+import { homedir, platform as getPlatform } from 'node:os'
+import ini from 'ini'
+import log from 'electron-log/main'
 
+/**
+ * Find the local folder of the Dropbox / Google Drive (legacy Backup and Sync) /
+ * OneDrive desktop clients. Stemn maps project files to <provider folder>/<project path>.
+ */
 const parseWindowsEnvVariable = path => path.replace(/%([^%]+)%/g, (_, variable) => process.env[variable])
 
 const dbPaths = {
@@ -15,76 +18,55 @@ const dbPaths = {
     win32: parseWindowsEnvVariable('%LOCALAPPDATA%\\Google\\Drive\\user_default\\sync_config.db'),
   },
   dropbox: {
-    darwin: `${os.homedir()}/.dropbox/info.json`,
-    linux: `${os.homedir()}/.dropbox/info.json`,
+    darwin: `${homedir()}/.dropbox/info.json`,
+    linux: `${homedir()}/.dropbox/info.json`,
     win32: parseWindowsEnvVariable('%LOCALAPPDATA%\\Dropbox\\info.json'),
   },
   onedrive: {
-    darwin: `${os.homedir()}/Library/Containers/com.microsoft.OneDrive-mac/Data/Library/Application Support/OneDrive/settings/Personal`,
-    linux: './',
+    darwin: `${homedir()}/Library/Containers/com.microsoft.OneDrive-mac/Data/Library/Application Support/OneDrive/settings/Personal`,
+    linux: '',
     win32: parseWindowsEnvVariable('%LOCALAPPDATA%\\Microsoft\\OneDrive\\settings\\Personal'),
   },
 }
 
+const notInstalled = name => Object.assign(new Error(`${name} not installed locally`), { code: 'ENOENT' })
+
+const readIfExists = async (path, options, name) => {
+  if (!path) throw notInstalled(name)
+  try {
+    return await readFile(path, options)
+  } catch (error) {
+    throw error.code === 'ENOENT' ? notInstalled(name) : error
+  }
+}
+
 const paths = {
-  drive: (platform, callback) => {
-    const dbPath = dbPaths.drive[platform]
-    // check the file exists on disk before opening
-    return fs.readFile(dbPath, (err, database) => {
-      const readDatabase = () => {
-        const db = new sql.Database(database)
-        const result = db.exec('SELECT * FROM data WHERE entry_key = \'local_sync_root_path\'')
-        db.close()
-        return result[0].values[0][2].replace('\\\\?\\', '') // drive prefixes path with weird characters sometimes
-      }
-      return err
-        ? callback(err.code === 'ENOENT' ? 'Drive not installed locally' : err)
-        : callback(null, readDatabase())
-    })
+  drive: async (platform) => {
+    const database = await readIfExists(dbPaths.drive[platform], undefined, 'Drive')
+    // sql.js (asm.js build, no wasm file to ship) is only loaded when a Drive database exists
+    const { default: initSqlJs } = await import('sql.js/dist/sql-asm.js')
+    const SQL = await initSqlJs()
+    const db = new SQL.Database(database)
+    const result = db.exec('SELECT * FROM data WHERE entry_key = \'local_sync_root_path\'')
+    db.close()
+    return result[0].values[0][2].replace('\\\\?\\', '') // drive prefixes path with weird characters sometimes
   },
-  dropbox: (platform, callback) => {
+  dropbox: async (platform) => {
     log.info('Provider Path Dropbox')
-    return fs.readFile(dbPaths.dropbox[platform], { encoding: 'utf8' }, (err, data) => {
-      const readDatabase = () => {
-        const config = JSON.parse(data)
-        const account = config.personal || config.business
-        return account.path
-      }
-      return err
-        ? callback(err.code === 'ENOENT' ? 'Dropbox not installed locally' : err)
-        : callback(null, readDatabase())
-    })
+    const data = await readIfExists(dbPaths.dropbox[platform], { encoding: 'utf8' }, 'Dropbox')
+    const config = JSON.parse(data)
+    const account = config.personal || config.business
+    return account.path
   },
-  onedrive: (platform, callback) => {
+  onedrive: async (platform) => {
     const dbPath = dbPaths.onedrive[platform]
-    // list the drive folder contents
-    return fs.readdir(dbPath, (err, files) => {
-      // filter for matching database files
-      const db = files.find(file => /[a-f0-9]{16}.ini/.test(file))
-      const readDatabase = callback => fs.readFile(path.join(dbPath, db), { encoding: 'utf16le' }, (err, data) => {
-        if (err) {
-          callback(err)
-        } else {
-          const config = ini.parse(data)
-          const path = config.library.split(' ')[7].replace(/"/g, '')
-          callback(null, path)
-        }
-      })
-      return db
-        ? readDatabase(callback)
-        : callback('OneDrive not installed locally')
-    })
+    if (!dbPath) throw notInstalled('OneDrive')
+    const files = await readdir(dbPath).catch(() => [])
+    const db = files.find(file => /[a-f0-9]{16}.ini/.test(file))
+    if (!db) throw notInstalled('OneDrive')
+    const config = ini.parse(await readFile(join(dbPath, db), { encoding: 'utf16le' }))
+    return config.library.split(' ')[7].replace(/"/g, '')
   },
 }
 
-const platform = os.platform()
-
-
-export const getPath = provider => new Promise((resolve, reject) => paths[provider](platform, (err, result) => (err
-  ? reject(err)
-  : resolve(result)),
-))
-
-// export const getPaths = (providers) => {
-//  return Promise.all(providers.map(getPath)).then(response => zipObject(providers, response))
-// }
+export const getPath = provider => paths[provider](getPlatform())

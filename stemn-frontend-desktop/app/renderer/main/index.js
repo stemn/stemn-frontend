@@ -1,26 +1,6 @@
-import '../shared/init.js'
-import React from 'react'
-import { render } from 'react-dom'
-import { hashHistory } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
-import configureStore from '../../shared/store/configureStore.renderer.js'
-import standardSetup from '../shared/standardSetup.js'
-import { remote } from 'electron'
-import Root from './Root'
-import { getAppContainer, initHotReload } from '../shared/hotReload.utils'
+import bootstrap from '../shared/bootstrap.jsx'
+import createRoutes from './routes'
+// Registers the thread modal opened by routeActions.threadRoute
+import 'stemn-shared/misc/Threads/ThreadDisplayModal'
 
-// Get the DOM elements
-const rootEl = document.getElementById('root')
-
-const initialState = JSON.parse(remote.getGlobal('stateStringified'))
-const store = configureStore(initialState)
-const history = syncHistoryWithStore(hashHistory, store)
-standardSetup(store, 'main')
-
-// Render
-const root = <Root store={ store } history={ history } />
-render(getAppContainer(root), rootEl)
-
-// Initialise the hot-reload
-initHotReload(rootEl, store, history, './Root')
-
+bootstrap({ createRoutes, loadUser: true })

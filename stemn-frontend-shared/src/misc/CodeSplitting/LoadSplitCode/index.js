@@ -1,1 +1,1 @@
-export default from './LoadSplitCode.container'
+export { default } from './LoadSplitCode.container'

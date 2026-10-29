@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import CodeMirror from 'react-codemirror'
+import CodeMirror from 'stemn-shared/misc/CodeMirror'
 import classes from './EditorNew.scss'
 import 'codemirror/mode/markdown/markdown'
 import 'codemirror/mode/stex/stex'
@@ -66,7 +66,7 @@ export default class EditorNew extends Component {
       }
     }
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     // Update the internal state if it differs from the redux state
     if (nextProps.value !== this.state.value) {
       this.setState({

@@ -1,1 +1,1 @@
-export default from './ThreadFilterStatus'
+export { default } from './ThreadFilterStatus'

@@ -1,20 +1,11 @@
-import { BrowserWindow } from 'electron'
+import { sendToAllWindows } from '../../main/ipc.js'
 
-const forwardToRenderer = store => next => (action) => {
-  // change scope to avoid endless-loop
-  const rendererAction = {
-    ...action,
-    meta: {
-      ...action.meta,
-      scope: 'local',
-    },
-  }
-
-  const openWindows = BrowserWindow.getAllWindows()
-  openWindows.forEach(({ webContents }) => {
-    webContents.send('redux-action', rendererAction)
-  })
-
+/**
+ * Main-process middleware: every action reduced by the main store is replayed in
+ * every renderer store (with meta.scope 'local' so the renderers don't send it back).
+ */
+const forwardToRenderer = () => next => (action) => {
+  sendToAllWindows(action)
   return next(action)
 }
 

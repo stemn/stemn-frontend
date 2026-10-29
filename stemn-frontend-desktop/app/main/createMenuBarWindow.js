@@ -1,99 +1,68 @@
-import { BrowserWindow, screen, Menu, shell } from 'electron'
-import process from 'process'
-import stringify from './utils/stringify.js'
-import getRootPath from 'get-root-path'
-
-const menuBarHtml = getRootPath('/static/html/menubar.html')
+import { screen } from 'electron'
+import { createAppWindow, loadRenderer, windows } from './windows.js'
 
 const WINDOW_WIDTH = 330
 const WINDOW_HEIGHT = 450
 const HORIZ_PADDING = 15
 const VERT_PADDING = 30
 
-export const create = () => {
-  let browserWindow = null
-  let lastPosition
-
-  if (browserWindow !== null) {
-    return browserWindow
+const getTrayPosX = (cursorPosition, trayPositionHoriz, primarySize) => {
+  // Find the horizontal bounds if the window were positioned normally
+  const horizBounds = {
+    left: cursorPosition.x - WINDOW_WIDTH / 2,
+    right: cursorPosition.x + WINDOW_WIDTH / 2,
   }
+  // If the window crashes into the side of the screen, reposition
+  if (trayPositionHoriz === 'left') {
+    return horizBounds.left <= HORIZ_PADDING ? HORIZ_PADDING : horizBounds.left
+  }
+  return horizBounds.right >= primarySize.width
+    ? primarySize.width - HORIZ_PADDING - WINDOW_WIDTH
+    : horizBounds.right - WINDOW_WIDTH
+}
 
-  // Create a new stringified state global - this will be parsed in the renderer
-  global.stateStringified = stringify(global.state)
+const getTrayPosY = (cursorPosition, trayPositionVert) => (trayPositionVert === 'bottom'
+  ? cursorPosition.y - WINDOW_HEIGHT - VERT_PADDING
+  : cursorPosition.y + VERT_PADDING)
 
-  browserWindow = new BrowserWindow({
-    show: false,
+/** The small "menubar" window that pops up from the tray icon */
+export const create = () => {
+  let lastPosition = false
+
+  const browserWindow = createAppWindow({
+    name: 'menubar',
     width: WINDOW_WIDTH,
     height: WINDOW_HEIGHT,
     frame: false,
     alwaysOnTop: true,
     resizable: false,
     skipTaskbar: true,
-    webPreferences: {
-      webSecurity: false, // TODO. Investiage security implications. This is needed for cross origin autodesk requests.
-    },
+    title: 'Stemn',
   })
 
-  if (process.env.NODE_ENV === 'development') {
-    browserWindow.webContents.on('context-menu', (e, props) => {
-      const { x, y } = props
-      Menu.buildFromTemplate([{
-        label: 'Inspect element',
-        click() {
-          browserWindow.inspectElement(x, y)
-        },
-      }]).popup(browserWindow)
-    })
-  }
+  loadRenderer(browserWindow, 'menubar', '/')
 
-  // Handle Redirects
-  const handleRedirect = (e, url) => {
-    if (url !== browserWindow.webContents.getURL()) {
-      e.preventDefault()
-      shell.openExternal(url)
-    }
-  }
-  browserWindow.webContents.on('will-navigate', handleRedirect)
-  browserWindow.webContents.on('new-window', handleRedirect)
-
-  browserWindow.loadURL(menuBarHtml)
+  // Behave like a popover: hide when it loses focus (STEMN_MENUBAR_STAY_OPEN keeps it open for tests)
   browserWindow.on('blur', () => {
-    browserWindow.hide()
+    if (!process.env.STEMN_MENUBAR_STAY_OPEN) browserWindow.hide()
   })
-  
-  const getTrayPosX = (cursorPosition, trayPositionHoriz, primarySize) =>  {
-  // Find the horizontal bounds if the window were positioned normally
-    const horizBounds = {
-      left: cursorPosition.x - WINDOW_WIDTH / 2,
-      right: cursorPosition.x + WINDOW_WIDTH / 2,
-    }
-  // If the window crashes into the side of the screem, reposition
-    if (trayPositionHoriz === 'left') {
-      return horizBounds.left <= HORIZ_PADDING ? HORIZ_PADDING : horizBounds.left
-    }
-  
-    return horizBounds.right >= primarySize.width ? primarySize.width - HORIZ_PADDING - WINDOW_WIDTH : horizBounds.right - WINDOW_WIDTH
-  }
 
-  const getTrayPosY = (cursorPosition, trayPositionVert) => (trayPositionVert === 'bottom' ? cursorPosition.y - WINDOW_HEIGHT - VERT_PADDING : cursorPosition.y + VERT_PADDING)
-
-  const show = ({ reposition } = {}) => { // Set default otherwise ir crashes if the function has no inputs...
+  const show = ({ reposition } = {}) => {
     if (reposition || !lastPosition) {
       const cursorPosition = screen.getCursorScreenPoint()
-      const primarySize = screen.getPrimaryDisplay().workAreaSize // Todo: this uses primary screen, it should use current
+      const primarySize = screen.getDisplayNearestPoint(cursorPosition).workAreaSize
       const trayPositionVert = cursorPosition.y >= primarySize.height / 2 ? 'bottom' : 'top'
       const trayPositionHoriz = cursorPosition.x >= primarySize.width / 2 ? 'right' : 'left'
-      browserWindow.setPosition(getTrayPosX(cursorPosition, trayPositionHoriz, primarySize),  getTrayPosY(cursorPosition, trayPositionVert))
-      lastPosition = true // Set the last position so we can tell if we have positioned before
+      const x = Math.max(0, Math.round(getTrayPosX(cursorPosition, trayPositionHoriz, primarySize)))
+      const y = Math.max(0, Math.round(getTrayPosY(cursorPosition, trayPositionVert)))
+      browserWindow.setPosition(x, y)
+      lastPosition = true
     }
-  
     browserWindow.show()
     browserWindow.focus()
   }
 
-  return {
-    browserWindow,
-    show,
-  }
+  const handle = { browserWindow, show }
+  windows.menubar = handle
+  return handle
 }
-

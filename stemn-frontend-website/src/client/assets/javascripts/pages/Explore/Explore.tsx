@@ -3,18 +3,18 @@ import { getEntries as getEntriesType } from 'modules/Contentful/Contentful.acti
 import { IContentfulContentPageExplore } from 'modules/Contentful/types'
 import SubHeader from 'modules/SubHeader'
 import * as React from 'react'
-import { Helmet } from 'react-helmet'
-import { replace as replaceType } from 'react-router-redux'
+import { Helmet } from 'react-helmet-async'
+import { replace as replaceType } from 'stemn-shared/routing'
 import { Col, Container, Row } from 'stemn-shared/misc/Layout'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 // import { ProjectRowContainer } from 'stemn-shared/misc/Projects/ProjectRow'
 import { SiteSearchResultsContainer } from 'stemn-shared/misc/Search/SiteSearchResults'
 import { FeaturedTile, FeaturedTileRow } from './components/FeaturedTile'
-import * as classes from './Explore.scss'
+import classes from './Explore.scss'
 
 export interface IExploreProps {
   replace: typeof replaceType,
-  getEntries: typeof getEntriesType,
+  getEntries: (...args: Parameters<typeof getEntriesType>) => Promise<any>, // thunk, resolved by connect()
   location: any,
   contentfulPageExplore?: IContentfulContentPageExplore
 }

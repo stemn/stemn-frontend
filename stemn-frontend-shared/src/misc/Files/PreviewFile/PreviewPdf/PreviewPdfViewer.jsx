@@ -4,9 +4,9 @@ import Page from './PreviewPdfPage.jsx'
 class Viewer extends React.Component {
   render() {
     const { pdf, scale } = this.props
-    const numPages = pdf ? pdf.pdfInfo.numPages : 0
-    const fingerprint = pdf ? pdf.pdfInfo.fingerprint : 'none'
-    const pages = Array(...{ length: numPages })
+    const numPages = pdf ? pdf.numPages : 0
+    const fingerprint = pdf ? pdf.fingerprints[0] : 'none'
+    const pages = Array.from({ length: numPages })
       .map((v, i) => (
         <Page
           index={ i + 1 }

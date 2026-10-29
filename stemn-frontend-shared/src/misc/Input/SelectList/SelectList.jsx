@@ -1,5 +1,5 @@
 import React from 'react'
-import MdDone from 'react-icons/md/done'
+import { MdDone } from 'react-icons/md'
 // Styles
 import cn from 'classnames'
 import styles from './SelectList.css'

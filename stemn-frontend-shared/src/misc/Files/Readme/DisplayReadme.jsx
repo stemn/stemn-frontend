@@ -18,8 +18,8 @@ const propTypesObject = {
 
 export class DisplayReadme extends React.Component {
   static propTypes = propTypesObject;
-  componentWillMount() { this.onMount(this.props) }
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+  UNSAFE_componentWillMount() { this.onMount(this.props) }
+  UNSAFE_componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
 
   onMount = (nextProps, prevProps) => {
     // If the previewId changes, download a new file

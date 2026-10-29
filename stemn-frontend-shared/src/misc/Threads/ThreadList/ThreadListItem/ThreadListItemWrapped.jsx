@@ -1,49 +1,50 @@
-import React, { Component } from 'react'
+import React, { useCallback, useRef } from 'react'
 import PropTypes from 'prop-types'
+import { useDrag, useDrop } from 'react-dnd'
 import { cardHover, cardDrop, beginDrag, endDrag } from './ThreadListItem.drag.config.js'
-import { DragSource, DropTarget } from 'react-dnd'
+
 const ItemTypes = {
   CARD: 'card',
 }
-const cardSource = {
-  beginDrag,
-  endDrag,
+
+export default function ThreadListItemWrapped(props) {
+  const { children, id } = props
+
+  // Keep the latest props available to the (memoized) drag/drop specs
+  const propsRef = useRef(props)
+  propsRef.current = props
+  const nodeRef = useRef(null)
+
+  const [, connectDragSource] = useDrag({
+    type: ItemTypes.CARD,
+    item: () => beginDrag(propsRef.current),
+    end: (item, monitor) => endDrag(propsRef.current, monitor),
+  })
+
+  const [, connectDropTarget] = useDrop({
+    accept: ItemTypes.CARD,
+    hover: (item, monitor) => cardHover(propsRef.current, monitor, nodeRef.current),
+    drop: (item, monitor) => cardDrop(propsRef.current, monitor),
+  })
+
+  const setRef = useCallback((node) => {
+    nodeRef.current = node
+    connectDragSource(connectDropTarget(node))
+  }, [connectDragSource, connectDropTarget])
+
+  return (
+    <div ref={ setRef } key={ id }>
+      {children}
+    </div>
+  )
 }
 
-const cardTarget = {
-  hover: cardHover,
-  drop: cardDrop,
-}
-
-@DropTarget(ItemTypes.CARD, cardTarget, connect => ({
-  connectDropTarget: connect.dropTarget(),
-}))
-@DragSource(ItemTypes.CARD, cardSource, (connect, monitor) => ({
-  connectDragSource: connect.dragSource(),
-  connectDragPreview: connect.dragPreview(),
-  isDragging: monitor.isDragging(),
-}))
-export default class ThreadListItemWrapped extends Component {
-  static propTypes = {
-    connectDragSource: PropTypes.func.isRequired,
-    connectDropTarget: PropTypes.func.isRequired,
-    connectDragPreview: PropTypes.func.isRequired,
-    index: PropTypes.number.isRequired,
-    isDragging: PropTypes.bool.isRequired,
-    item: PropTypes.string.isRequired,
-    moveCard: PropTypes.func.isRequired,
-    beginDrag: PropTypes.func.isRequired,
-    endDrag: PropTypes.func.isRequired,
-  };
-
-  render() {
-    const { isDragging, connectDragSource, connectDropTarget, children, id } = this.props
-    return connectDragSource(connectDropTarget(
-      <div key={ id }>
-        {children}
-      </div>,
-    ))
-  }
+ThreadListItemWrapped.propTypes = {
+  index: PropTypes.number.isRequired,
+  item: PropTypes.string.isRequired,
+  moveCard: PropTypes.func.isRequired,
+  beginDrag: PropTypes.func.isRequired,
+  endDrag: PropTypes.func.isRequired,
 }
 
 // style={{transform: 'translate3d(0,0,0)'}}

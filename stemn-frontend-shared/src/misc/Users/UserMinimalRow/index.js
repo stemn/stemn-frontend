@@ -1,1 +1,1 @@
-export default from './UserMinimalRow'
+export { default } from './UserMinimalRow'

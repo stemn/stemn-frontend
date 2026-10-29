@@ -8,7 +8,7 @@ import * as SyncTimelineActions from 'stemn-shared/misc/SyncTimeline/SyncTimelin
 // Component Core
 import React from 'react'
 
-import { Link }                 from 'react-router'
+import { Link }                 from 'stemn-shared/routing'
 import SidebarTimeline          from 'stemn-shared/misc/SyncTimeline/SidebarTimeline/SidebarTimeline.jsx'
 import ContentSidebar           from 'stemn-shared/misc/ContentSidebar'
 import Guide                    from 'stemn-shared/misc/Guide/Guide'
@@ -31,8 +31,8 @@ export class Component extends React.Component {
     }
   };
 
-  componentWillMount() { this.onMount(this.props) }
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+  UNSAFE_componentWillMount() { this.onMount(this.props) }
+  UNSAFE_componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
 
   refresh = () => {
     this.props.syncTimelineActions.fetchTimeline({
@@ -50,7 +50,7 @@ export class Component extends React.Component {
       project,
       children,
     } = this.props
-    const baseLink = `project/${project && project.data ? project.data._id : ''}`
+    const baseLink = `/project/${project && project.data ? project.data._id : ''}`
 
     if (project.data.remote.connected) {
       return (

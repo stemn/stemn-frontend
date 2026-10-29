@@ -1,1 +1,1 @@
-export default from './ThreadRow.container'
+export { default } from './ThreadRow.container'

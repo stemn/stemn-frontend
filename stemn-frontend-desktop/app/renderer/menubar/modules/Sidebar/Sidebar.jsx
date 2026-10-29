@@ -6,7 +6,7 @@ import cn from 'classnames'
 import classes from './Sidebar.css'
 import AnimateShow from 'stemn-shared/misc/AnimateShow/AnimateShow.jsx'
 import SidebarProjectButton from 'stemn-shared/misc/Sidebar/SidebarProjectButton.jsx'
-import MdSearch from 'react-icons/md/search'
+import { MdSearch } from 'react-icons/md'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 
 export class Component extends React.Component {
@@ -40,7 +40,7 @@ export class Component extends React.Component {
           </div>
           <div className="flex scroll-box">
             {filteredProjectsOrdered.map(item =>
-              <SidebarProjectButton item={ item } to={ linkProject(item) } clickFn={ () => dispatch(toggleMenubarSidebar(false)) } />,
+              <SidebarProjectButton key={ item._id } item={ item } to={ linkProject(item) } clickFn={ () => dispatch(toggleMenubarSidebar(false)) } />,
             )}
           </div>
         </div>

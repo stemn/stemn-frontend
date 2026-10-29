@@ -13,7 +13,7 @@ export class Component extends React.Component {
     const {
       project,
     } = this.props
-    const baseLink = project && project.data && project.data._id ? `project/${project.data._id}` : ''
+    const baseLink = project && project.data && project.data._id ? `/project/${project.data._id}` : ''
 
     return (
       <div className={ `${classes.container} layout-row flex scroll-box` }>

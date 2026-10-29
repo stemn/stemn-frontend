@@ -1,17 +1,18 @@
-import { ipcRenderer } from 'electron'
+import { getBridge } from 'stemn-shared/desktop/bridge'
 
-const forwardToMain = store => next => (action) => { // eslint-disable-line no-unused-vars
-  if (!action.type ||
-     action.type.substr(0, 2)  !== '@@' && (
-       !action.meta       ||
-      !action.meta.scope ||
-      action.meta.scope !== 'local'
-     )) {
-    ipcRenderer.send('redux-action', action)
+/**
+ * Renderer middleware: plain actions are reduced by the main-process store (the
+ * source of truth), which replays them in every window. Only router (`@@...`)
+ * actions and actions with meta.scope 'local' are reduced in this window directly.
+ */
+const forwardToMain = () => next => (action) => {
+  const isLocal = action.type && (action.type.startsWith('@@') || (action.meta && action.meta.scope === 'local'))
+  if (!isLocal) {
+    getBridge().dispatchToMain(action)
     // stop action in-flight
-    return
+    return undefined
   }
-  return next(action) // eslint-disable-line consistent-return
+  return next(action)
 }
 
 export default forwardToMain

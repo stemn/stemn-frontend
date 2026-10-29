@@ -1,5 +1,5 @@
-import * as cn from 'classnames'
-import { safeLoad } from 'js-yaml'
+import cn from 'classnames'
+import { load } from 'js-yaml'
 import { forEach, get, isEqual, values } from 'lodash'
 import { BaseAction,	DiagramEngine, DiagramModel, DiagramWidget } from 'mrblenny-storm-react-diagrams'
 import * as React from 'react'
@@ -13,7 +13,7 @@ import { PipelineGraphStepModel } from 'stemn-shared/misc/Pipelines/PipelineGrap
 import { IPipelineConfig, IStep } from 'stemn-shared/misc/Pipelines/PipelineGraph/types'
 import { createDiagramEngine, deserializePipeline, serializePipeline } from 'stemn-shared/misc/Pipelines/PipelineGraph/utils'
 import './PipelineGraph.global.scss'
-import * as s from './PipelineGraph.scss'
+import s from './PipelineGraph.scss'
 
 export interface IPipelineGraphProps {
   diagramId: string,
@@ -40,29 +40,37 @@ export interface IPipelineGraphState {
 export class PipelineGraphComponent extends React.Component<IPipelineGraphProps, IPipelineGraphState> {
   constructor (props: IPipelineGraphProps) {
     super(props)
-    const { pipelineConfig, initialiseModel, diagramId, steps } = this.props
-
-    const diagramEngine = createDiagramEngine(steps)
-    const pipelineConfigJson = typeof pipelineConfig === 'object'
-      ? pipelineConfig
-      : safeLoad(pipelineConfig)
-
-    initialiseModel({ diagramId, model: pipelineConfigJson })
-
     this.state = {
-      diagramEngine,
+      diagramEngine: createDiagramEngine(props.steps),
     }
   }
-  public componentWillReceiveProps (nextProps: IPipelineGraphProps) {
-    const { diagramEngine } = this.state
+  public componentDidMount () {
+    const { pipelineConfig, initialiseModel, diagramId, diagram } = this.props
+    const pipelineConfigJson = (typeof pipelineConfig === 'object'
+      ? pipelineConfig
+      : load(pipelineConfig)) as IPipelineConfig
+
+    // Dispatching from the constructor (during render) is not allowed with React 19 / react-redux 9.
+    // If the store already holds this exact model (e.g. remount), no props change will follow, so build it now.
+    if (pipelineConfigJson && isEqual(pipelineConfigJson, get(diagram, 'model'))) {
+      this.setDiagramModel(diagramId, pipelineConfigJson)
+    } else {
+      initialiseModel({ diagramId, model: pipelineConfigJson })
+    }
+  }
+  public UNSAFE_componentWillReceiveProps (nextProps: IPipelineGraphProps) {
     const nextModel = get(nextProps, 'diagram.model')
     const currentModel = get(this.props, 'diagram.model')
     // Update the diagram model if the pipeline changes
-    if (!isEqual(nextModel, currentModel)) {
-      const diagramModel = deserializePipeline(nextProps.diagramId, nextModel, diagramEngine)
-      diagramEngine.setDiagramModel(diagramModel)
-      this.setState({ diagramModel })
+    if (nextModel && !isEqual(nextModel, currentModel)) {
+      this.setDiagramModel(nextProps.diagramId, nextModel)
     }
+  }
+  public setDiagramModel = (diagramId: string, model: IPipelineConfig) => {
+    const { diagramEngine } = this.state
+    const diagramModel = deserializePipeline(diagramId, model, diagramEngine)
+    diagramEngine.setDiagramModel(diagramModel)
+    this.setState({ diagramModel })
   }
   public addListeners = (model) => {
     forEach(model.nodes, (item) => {

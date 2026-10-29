@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { replace } from 'react-router-redux'
+import { replace } from 'stemn-shared/routing'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { getPipeline } from 'stemn-shared/misc/Pipelines/Pipelines.actions.js'
 import { notFound } from 'route-actions'

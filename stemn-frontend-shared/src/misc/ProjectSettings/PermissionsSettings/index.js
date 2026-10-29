@@ -1,1 +1,1 @@
-export default from './PermissionsSettings.container'
+export { default } from './PermissionsSettings.container'

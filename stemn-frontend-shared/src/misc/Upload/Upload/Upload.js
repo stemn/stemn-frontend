@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
 import classes from './Upload.css'
-import dropzone from 'react-dropzone'
+import Dropzone from 'react-dropzone'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
-import MdFileUpload from 'react-icons/md/file-upload'
-
-const Dropzone = dropzone.default
+import { MdFileUpload } from 'react-icons/md'
 
 export default class Upload extends Component {
   static propTypes = {
@@ -30,8 +28,11 @@ export default class Upload extends Component {
     outline: '4px solid #82c382',
   }
 
-  onDrop = (files) => {
+  onDrop = (acceptedFiles) => {
     const { upload, change, uploadId, onUpload, model } = this.props
+    // react-dropzone >= 7 no longer adds `file.preview` - create it ourselves
+    // (not revoked: the preview url is kept in the upload store and shown after upload)
+    const files = acceptedFiles.map(file => Object.assign(file, { preview: URL.createObjectURL(file) }))
     upload({
       files,
       cacheKey: uploadId,
@@ -67,37 +68,40 @@ export default class Upload extends Component {
       <div style={ style } className={ containerClassName }>
         <Dropzone
           onDrop={ this.onDrop }
-          activeStyle={ this.dropActiveStyle }
-          disableClick={ false }
           multiple={ false }
         >
-          <div className="layout-row layout-align-start-start">
-            { uploadData && uploadData.files && uploadData.files.length > 0
-              ? uploadData.files.map((file, index) => (
-                <div
-                  key={ index }
-                  className={ imageClasses }
-                  style={ { backgroundImage: `url(${file.path ? `https://stemn.com${file.path}` : file.preview})` } }
-                >
-                  { !uploadData.loading
-                    ? this.renderOverlay()
-                    : null }
-                  <LoadingOverlay
-                    progress={ uploadData.percentage }
-                    show={ uploadData.loading }
-                    size="sm"
-                    background="rgba(255, 255, 255, 0.8)"
-                  />
-                </div>
-              ))
-              : <div
-                className={ imageClasses }
-                style={ value ? { backgroundImage: `url(https://stemn.com${value})` } : {} }
-              >
-                { this.renderOverlay() }
+          { ({ getRootProps, getInputProps, isDragActive }) => (
+            <div { ...getRootProps({ style: isDragActive ? this.dropActiveStyle : undefined }) }>
+              <input { ...getInputProps() } />
+              <div className="layout-row layout-align-start-start">
+                { uploadData && uploadData.files && uploadData.files.length > 0
+                  ? uploadData.files.map((file, index) => (
+                    <div
+                      key={ index }
+                      className={ imageClasses }
+                      style={ { backgroundImage: `url(${file.path ? `${GLOBAL_ENV.API_SERVER}${file.path}` : file.preview})` } }
+                    >
+                      { !uploadData.loading
+                        ? this.renderOverlay()
+                        : null }
+                      <LoadingOverlay
+                        progress={ uploadData.percentage }
+                        show={ uploadData.loading }
+                        size="sm"
+                        background="rgba(255, 255, 255, 0.8)"
+                      />
+                    </div>
+                  ))
+                  : <div
+                    className={ imageClasses }
+                    style={ value ? { backgroundImage: `url(${GLOBAL_ENV.API_SERVER}${value})` } : {} }
+                  >
+                    { this.renderOverlay() }
+                  </div>
+                }
               </div>
-            }
-          </div>
+            </div>
+          ) }
         </Dropzone>
       </div>
     )

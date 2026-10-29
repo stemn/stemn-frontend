@@ -1,7 +1,6 @@
-import * as cn from 'classnames'
-import * as React from 'react'
-import { Link } from 'react-router'
-import * as s from './FeaturedTile.scss'
+import cn from 'classnames'
+import { Link } from 'stemn-shared/routing'
+import s from './FeaturedTile.scss'
 
 export interface IFeaturedTileProps {
   title: string,
@@ -23,7 +22,7 @@ export const FeaturedTile = ({ title, description, link, image }: IFeaturedTileP
     <CmsLink className={s.tile} link={link}>
       <div className={s.image} style={{ backgroundImage:  `url(${image})` }}/>
       <div className={s.content}>
-        <a className={cn('link-primary', s.title)}>{title}</a>
+        <span className={cn('link-primary', s.title)}>{title}</span>
         <div className={s.blurb}>{description}</div>
       </div>
     </CmsLink>

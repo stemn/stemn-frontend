@@ -1,10 +1,10 @@
 import * as i from 'icepick'
 import { IPipelineConfig, IStep } from 'stemn-shared/misc/Pipelines/PipelineGraph/types'
 
-import IconUpload from 'react-icons/go/cloud-upload'
-import MdCommit from 'react-icons/go/git-commit'
-import MdTime from 'react-icons/md/access-time'
-import MdMenu from 'react-icons/md/menu'
+import { GoUpload as IconUpload } from 'react-icons/go'
+import { GoGitCommit as MdCommit } from 'react-icons/go'
+import { MdAccessTime as MdTime } from 'react-icons/md'
+import { MdMenu } from 'react-icons/md'
 
 const schema = {
   $schema: 'http://json-schema.org/draft-06/schema#',

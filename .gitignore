@@ -1,2 +1,9 @@
-npm-debug.log
-node_modules
+node_modules/
+build/
+.cache/
+*.log
+npm-debug.log*
+.DS_Store
+.idea
+*.iml
+reports/stats.json

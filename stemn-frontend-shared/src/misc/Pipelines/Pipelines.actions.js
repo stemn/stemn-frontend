@@ -1,6 +1,6 @@
 import http from 'axios'
 import { joinRoom, leaveRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
-import { push } from 'react-router-redux'
+import { push } from 'stemn-shared/routing'
 import { projectPipelineRoute } from 'route-actions'
 
 export const getPipeline = ({ pipelineId }) => ({

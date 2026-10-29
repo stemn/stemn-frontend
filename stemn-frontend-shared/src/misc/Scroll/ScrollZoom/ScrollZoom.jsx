@@ -10,13 +10,13 @@ const propTypesObject = {
 
 class ScrollZoom extends React.Component {
   componentDidMount() {
-    this.refs.container.addEventListener('DOMMouseScroll', this.handleMouseWheel)
-    this.refs.container.addEventListener('mousewheel',     this.handleMouseWheel)
+    this.containerRef.addEventListener('DOMMouseScroll', this.handleMouseWheel)
+    this.containerRef.addEventListener('mousewheel',     this.handleMouseWheel)
   }
 
   componentWillUnmount() {
-    this.refs.container.removeEventListener('DOMMouseScroll', this.handleMouseWheel)
-    this.refs.container.removeEventListener('mousewheel',     this.handleMouseWheel)
+    this.containerRef.removeEventListener('DOMMouseScroll', this.handleMouseWheel)
+    this.containerRef.removeEventListener('mousewheel',     this.handleMouseWheel)
   }
 
   handleMouseWheel = (evt) => {
@@ -35,7 +35,7 @@ class ScrollZoom extends React.Component {
     const { children } = this.props
 
     return (
-      <div ref="container" { ...omit(this.props, Object.keys(propTypesObject)) }>
+      <div ref={ (el) => { this.containerRef = el } } { ...omit(this.props, Object.keys(propTypesObject)) }>
         {children}
       </div>
     )

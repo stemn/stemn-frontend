@@ -7,7 +7,7 @@ const otherModules = [{
 }, {
   src: 'https://developer.api.autodesk.com/viewingservice/v1/viewers/style.min.css?v=4.2.*',
 }]
-const systemImport = () => System.import('../PreviewCad/PreviewCad')
+const systemImport = () => import('../PreviewCad/PreviewCad')
 
 export default props => (
   <LoadSplitCode

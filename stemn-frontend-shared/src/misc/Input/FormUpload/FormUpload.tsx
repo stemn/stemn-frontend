@@ -1,9 +1,9 @@
-import * as cn from 'classnames'
+import cn from 'classnames'
 import { cloneDeep } from 'lodash'
 import * as React from 'react'
-import Dropzone, { ImageFile } from 'react-dropzone'
+import Dropzone from 'react-dropzone'
 import { WrappedFieldMetaProps } from 'redux-form'
-import * as s from './FormUpload.scss'
+import s from './FormUpload.scss'
 // import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 // import Upload from 'stemn-shared/misc/Upload/Upload'
 
@@ -14,13 +14,13 @@ export interface IFormUploadProps {
     checked?: boolean,
     value?: any,
     onBlur?: any,
-    onChange: (files: ImageFile[]) => void,
+    onChange: (files: File[]) => void,
   }
   meta?: WrappedFieldMetaProps
 }
 
 export class FormUpload extends React.Component<IFormUploadProps> {
-  public onDrop = (acceptedFiles: ImageFile[]) => {
+  public onDrop = (acceptedFiles: File[]) => {
     const { input: { onChange } } = this.props
     const clonedAcceptedFiles = cloneDeep(acceptedFiles)
     onChange(clonedAcceptedFiles)
@@ -30,14 +30,20 @@ export class FormUpload extends React.Component<IFormUploadProps> {
     return (
       <div>
         <Dropzone
-          className={cn(s.dropzone, 'layout-column', 'layout-align-center-center', className)}
           onDrop={this.onDrop}
-          activeClassName={s.active}
-          disableClick={false}
           multiple={true}
-          style={style}
         >
-          Drop files here to upload
+          {({ getRootProps, getInputProps, isDragActive }) => (
+            <div
+              {...getRootProps({
+                className: cn(s.dropzone, 'layout-column', 'layout-align-center-center', { [s.active]: isDragActive }, className),
+                style,
+              })}
+            >
+              <input {...getInputProps()} />
+              Drop files here to upload
+            </div>
+          )}
         </Dropzone>
       </div>
     )

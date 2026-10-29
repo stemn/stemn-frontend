@@ -1,1 +1,1 @@
-export default from './ThreadsDisplay.container'
+export { default } from './ThreadsDisplay.container'

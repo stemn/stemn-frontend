@@ -1,1 +1,1 @@
-export default from './EntityRow'
+export { default } from './EntityRow'

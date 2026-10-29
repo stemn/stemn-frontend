@@ -19,7 +19,7 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button'
 // ///////////////////////////////////////////////////////////////////////////
 
 export class Component extends React.Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (has(this.props, 'board.data.labels')) {
       this.props.dispatch(storeChange(`${this.props.boardModel}.forms.labels`, this.props.board.data.labels))
     }

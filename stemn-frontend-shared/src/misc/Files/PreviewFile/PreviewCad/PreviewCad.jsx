@@ -26,7 +26,7 @@ export default class PreviewCad extends React.Component {
   };
 
   componentDidMount() { this.onMount(this.props) }
-  componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
+  UNSAFE_componentWillReceiveProps(nextProps) { this.onMount(nextProps, this.props) }
 
   render() {
     const { fileMeta, fileRender } = this.props

@@ -1,7 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { DragLayer } from 'react-dnd'
-import PropTypes from 'prop-types'
+import { useDragLayer } from 'react-dnd'
 import ThreadListItem from '../ThreadListItem/ThreadListItem.jsx'
 
 const layerStyles = {
@@ -14,15 +12,13 @@ const layerStyles = {
   height: '100%',
 }
 
-function getItemStyles(props) {
-  const currentOffset = props.currentOffset
+function getItemStyles(currentOffset) {
   if (!currentOffset) {
     return {
       display: 'none',
     }
   }
-  const x = currentOffset.x
-  const y = currentOffset.y
+  const { x, y } = currentOffset
   const transform = `translate(${x}px, ${y}px)`
   return {
     transform,
@@ -30,54 +26,37 @@ function getItemStyles(props) {
   }
 }
 
-function collect(monitor) {
-  return {
+const renderItem = (type, item) => {
+  switch (type) {
+    case 'card':
+      return (
+        <ThreadListItem draggable={ false } item={ { _id: item.id } } />
+      )
+    case 'group':
+      return (
+        <div>asfasfafs aafsafasf fsasafsaf</div>
+      )
+    default:
+      return null
+  }
+}
+
+export default function CustomDragLayer() {
+  const { item, itemType, currentOffset, isDragging } = useDragLayer(monitor => ({
     item: monitor.getItem(),
     itemType: monitor.getItemType(),
     currentOffset: monitor.getSourceClientOffset(),
     isDragging: monitor.isDragging(),
+  }))
+
+  if (!isDragging) {
+    return null
   }
-}
-
-class CustomDragLayer extends React.Component {
-  static propTypes = {
-    item: PropTypes.object,
-    itemType: PropTypes.string,
-    currentOffset: PropTypes.shape({
-      x: PropTypes.number.isRequired,
-      y: PropTypes.number.isRequired,
-    }),
-    isDragging: PropTypes.bool.isRequired,
-  };
-
-  renderItem = (type, item) => {
-    switch (type) {
-      case 'card':
-        return (
-          <ThreadListItem draggable={ false } item={ { _id: item.id } } />
-        )
-      case 'group':
-        return (
-          <div>asfasfafs aafsafasf fsasafsaf</div>
-        )
-    }
-  };
-
-  render() {
-    const item = this.props.item
-    const itemType = this.props.itemType
-    const isDragging = this.props.isDragging
-    if (!isDragging) {
-      return null
-    }
-    return (
-      <div style={ layerStyles }>
-        <div style={ getItemStyles(this.props) }>
-          {this.renderItem(itemType, item)}
-        </div>
+  return (
+    <div style={ layerStyles }>
+      <div style={ getItemStyles(currentOffset) }>
+        {renderItem(itemType, item)}
       </div>
-    )
-  }
+    </div>
+  )
 }
-
-module.exports = DragLayer(collect)(CustomDragLayer)

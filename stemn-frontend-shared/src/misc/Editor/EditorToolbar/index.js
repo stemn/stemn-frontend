@@ -1,1 +1,1 @@
-export default from './EditorToolbar.container'
+export { default } from './EditorToolbar.container'
