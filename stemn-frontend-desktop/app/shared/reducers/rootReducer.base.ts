@@ -30,7 +30,7 @@ import upload from 'stemn-shared/misc/Upload/Upload.reducer.js'
 import users from 'stemn-shared/misc/Users/Users.reducer.js'
 import userSettings from 'stemn-shared/misc/UserSettings/UserSettings.reducer.js'
 import walkthrough from 'stemn-shared/misc/Walkthrough/Walkthrough.reducer.js'
-import websocket from 'stemn-shared/misc/Websocket/Websocket.reducer.js'
+import websocket from 'stemn-shared/misc/Websocket/Websocket.reducer'
 
 export interface IStoreState {
   fileList: IFileListState

@@ -1,4 +1,4 @@
-import { initialise as initWebsocket } from 'stemn-shared/misc/Websocket/websocket.js'
+import { initialise as initWebsocket } from 'stemn-shared/misc/Websocket/websocket'
 import socketEventMap from 'stemn-shared/misc/Websocket/eventMap'
 
 export default (store) => {

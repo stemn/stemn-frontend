@@ -1,7 +1,8 @@
 import { getBoard, getGroup, getThread } from 'stemn-shared/misc/Threads/Threads.actions.js'
 import { getComment } from 'stemn-shared/misc/Comments/Comments.actions.js'
+import type { SocketEventHandler } from './types'
 
-export default (store, action) => {
+const boardEvents: SocketEventHandler = (store, action) => {
   const { dispatch, getState } = store
 
   if (action.payload.actioner === getState().auth.user._id) {
@@ -22,3 +23,5 @@ export default (store, action) => {
       return action.payload.comments.map((commentId) => dispatch(getComment({ commentId })))
   }
 }
+
+export default boardEvents

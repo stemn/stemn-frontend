@@ -13,6 +13,7 @@
 import type { AxiosRequestConfig, AxiosResponse } from 'axios'
 import type { Action, MiddlewareAPI } from 'redux'
 import type { IFilesState } from 'stemn-shared/misc/Files/Files.reducer'
+import type { IWebsocketState } from 'stemn-shared/misc/Websocket/Websocket.reducer'
 
 /**
  * The store slices shared code reads with getState(). The website and desktop root states are supersets
@@ -20,6 +21,7 @@ import type { IFilesState } from 'stemn-shared/misc/Files/Files.reducer'
  */
 export interface ISharedStoreState {
   files: IFilesState
+  websocket: IWebsocketState
 }
 
 /** `{ http: true }` action: httpTransform sends `payload` with axios */

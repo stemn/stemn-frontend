@@ -1,8 +1,9 @@
 import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
 import { getComment } from 'stemn-shared/misc/Comments/Comments.actions'
 import { getThread } from 'stemn-shared/misc/Threads/Threads.actions'
+import type { SocketEventHandler } from './types'
 
-export default (store, action) => {
+const threadEvents: SocketEventHandler = (store, action) => {
   const { dispatch } = store
 
   switch (action.type) {
@@ -29,3 +30,5 @@ export default (store, action) => {
       )
   }
 }
+
+export default threadEvents

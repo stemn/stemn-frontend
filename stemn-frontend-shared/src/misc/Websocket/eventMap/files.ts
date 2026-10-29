@@ -1,6 +1,7 @@
 import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
+import type { SocketEventHandler } from './types'
 
-export default (store, action) => {
+const filesEvents: SocketEventHandler = (store, action) => {
   const { dispatch } = store
 
   switch (action.type) {
@@ -16,3 +17,5 @@ export default (store, action) => {
       )
   }
 }
+
+export default filesEvents

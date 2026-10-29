@@ -41,6 +41,10 @@ export const setActiveProject =
     )
   }
 
+/**
+ * The JSDoc types are read by TypeScript callers (allowJs)
+ * @param {{ projectId: string, size?: 'sm' | 'md' | 'lg', force?: boolean }} input
+ */
 export const getProject =
   ({ projectId, size = 'lg', force }) =>
   (dispatch) => {

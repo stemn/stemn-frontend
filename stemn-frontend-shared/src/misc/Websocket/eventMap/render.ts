@@ -1,6 +1,7 @@
 import { renderFileDownload, renderFileError, renderFileProgress } from 'stemn-shared/misc/Files/Files.actions'
+import type { SocketEventHandler } from './types'
 
-export default (store, action) => {
+const renderEvents: SocketEventHandler = (store, action) => {
   const { dispatch } = store
 
   switch (action.type) {
@@ -39,3 +40,5 @@ export default (store, action) => {
       )
   }
 }
+
+export default renderEvents

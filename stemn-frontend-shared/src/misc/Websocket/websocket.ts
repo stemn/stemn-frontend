@@ -1,18 +1,27 @@
-import primus from './primus-websockets2.js'
+import primus, { type IPrimusSocket } from './primus-websockets2.js'
 import { parseQuery } from 'stemn-shared/routing/query'
+import type { SocketEvent } from './eventMap/types'
+
+/** A message the app writes to the socket (see ./websocket.middleware, which adds the auth token) */
+export interface ISocketMessage {
+  type: string
+  payload: object & { token?: string | null }
+}
+
+export type StemnSocket = IPrimusSocket<ISocketMessage, SocketEvent>
 
 const searchParams = typeof window !== 'undefined' ? parseQuery(window.location.search) : {}
 
-export let socket
+export let socket: StemnSocket | undefined
 
-export const initialise = (hostUrl) => {
+export const initialise = (hostUrl: string): StemnSocket => {
   // Conntect the websocket
-  socket = primus.connect(hostUrl)
+  socket = primus.connect<ISocketMessage, SocketEvent>(hostUrl)
 
   // Log some stuff if  ?debug=true or environment is development
   if (GLOBAL_ENV.NODE_ENV === 'development' || searchParams.debug) {
     // Log Receives
-    const socketData = (data) => {
+    const socketData = (data: SocketEvent) => {
       if (GLOBAL_ENV.APP_THREAD === 'electron') {
         console.log(`socket | RECEIVE - ${data.type}`)
       } else {

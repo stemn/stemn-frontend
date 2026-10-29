@@ -38,7 +38,7 @@ import users from 'stemn-shared/misc/Users/Users.reducer.js'
 import userSettings from 'stemn-shared/misc/UserSettings/UserSettings.reducer.js'
 import userStars from 'stemn-shared/misc/UserStars/UserStars.reducer.js'
 import walkthrough from 'stemn-shared/misc/Walkthrough/Walkthrough.reducer.js'
-import websocket from 'stemn-shared/misc/Websocket/Websocket.reducer.js'
+import websocket from 'stemn-shared/misc/Websocket/Websocket.reducer'
 import { analyticsReducer } from '../modules/Analytics/Analytics.reducer'
 import { contentfulReducer, IContentfulState } from '../modules/Contentful/Contentful.reducer'
 

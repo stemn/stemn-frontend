@@ -4,7 +4,7 @@ import squirrelStartup from 'electron-squirrel-startup'
 import { app, dialog } from 'electron'
 import log from 'electron-log/main'
 
-import { initialise as initWebsocket } from 'stemn-shared/misc/Websocket/websocket.js'
+import { initialise as initWebsocket } from 'stemn-shared/misc/Websocket/websocket'
 import socketEventMap from 'stemn-shared/misc/Websocket/eventMap'
 import AutoUpdateInit from 'stemn-shared/desktop/AutoUpdate/AutoUpdate.init.js'
 import { create as createWindow } from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js'

@@ -1,7 +1,22 @@
 import http from 'axios'
 import getUuid from 'stemn-shared/utils/getUuid.js'
 
-export const deselect = ({ projectId }) => {
+/** The entities that have a timeline */
+export type TimelineEntityType = 'project' | 'file' | 'thread' | 'user' | 'board'
+
+export interface ITimelineQuery {
+  entityType: TimelineEntityType
+  entityId: string
+  /** Event types, e.g. ['commits', 'changes'] */
+  types?: string[]
+  /** Defaults to the entity id */
+  cacheKey?: string
+  page?: number
+  size?: number
+  criteria?: Record<string, unknown>
+}
+
+export const deselect = ({ projectId }: { projectId: string }) => {
   return {
     type: 'TIMELINE/DESELECT_ITEM',
     payload: {
@@ -13,7 +28,7 @@ export const deselect = ({ projectId }) => {
   }
 }
 
-export const selectTimelineItem = ({ projectId, selected }) => {
+export const selectTimelineItem = ({ projectId, selected }: { projectId: string; selected: unknown }) => {
   return {
     type: 'TIMELINE/SELECT_ITEM',
     payload: {
@@ -26,7 +41,17 @@ export const selectTimelineItem = ({ projectId, selected }) => {
   }
 }
 
-export const fetchTimeline = ({ entityType, entityId, provider, types, cacheKey, page, size, criteria }) => {
+// `provider` is accepted but unused (the remote timeline endpoint is not used any more)
+export const fetchTimeline = ({
+  entityType,
+  entityId,
+  provider,
+  types,
+  cacheKey,
+  page,
+  size,
+  criteria,
+}: ITimelineQuery & { provider?: string }) => {
   //  `/api/v1/remote/timeline/${provider}`
   return {
     type: 'TIMELINE/FETCH_TIMELINE',
@@ -52,7 +77,12 @@ export const fetchTimeline = ({ entityType, entityId, provider, types, cacheKey,
   }
 }
 
-export const getCount = ({ entityType, entityId, types, cacheKey }) => {
+export const getCount = ({
+  entityType,
+  entityId,
+  types,
+  cacheKey,
+}: Pick<ITimelineQuery, 'entityType' | 'entityId' | 'types'> & { cacheKey: string }) => {
   return {
     type: 'TIMELINE/FETCH_TIMELINE',
     payload: http({
@@ -71,7 +101,7 @@ export const getCount = ({ entityType, entityId, types, cacheKey }) => {
   }
 }
 
-export const addEvent = ({ cacheKey, event }) => {
+export const addEvent = ({ cacheKey, event }: { cacheKey: string; event: object }) => {
   const eventObject = {
     ...event,
     _id: getUuid(),
@@ -85,7 +115,7 @@ export const addEvent = ({ cacheKey, event }) => {
   }
 }
 
-export const deleteEvent = ({ cacheKey, eventId }) => ({
+export const deleteEvent = ({ cacheKey, eventId }: { cacheKey: string; eventId: string }) => ({
   type: 'TIMELINE/DELETE_EVENT',
   payload: {
     cacheKey,
@@ -93,7 +123,17 @@ export const deleteEvent = ({ cacheKey, eventId }) => ({
   },
 })
 
-export const getFeed = ({ feedType, page, size, cacheKey }) => ({
+export const getFeed = ({
+  feedType,
+  page,
+  size,
+  cacheKey,
+}: {
+  feedType: 'followed-users' | 'followed-projects' | 'followed-all'
+  page?: number
+  size?: number
+  cacheKey: string
+}) => ({
   // This will get the feed for all items the current user is interested in
   type: 'TIMELINE/FETCH_TIMELINE',
   payload: http({

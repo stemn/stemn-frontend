@@ -1,13 +1,16 @@
 import { addLines } from 'stemn-shared/misc/Terminal/Terminal.actions'
 import { getPipeline, getStep, getLastPipelines } from 'stemn-shared/misc/Pipelines/Pipelines.actions'
+import type { SocketEventHandler } from './types'
 
-export default (store, action) => {
+const pipelineEvents: SocketEventHandler = (store, action) => {
   const { dispatch } = store
 
   switch (action.type) {
     case 'PIPELINE/STEP_LOGS':
       return dispatch(
         addLines({
+          // @ts-expect-error -- pre-existing bug, kept as is: addLines reads `stepId`, not `terminalId`, so the
+          // live logs are stored under `lines.undefined`. Fix: `stepId: action.payload.stepId` (see docs/TYPESCRIPT.md)
           terminalId: `${action.payload.pipelineId}-${action.payload.stepId}`,
           lines: action.payload.lines,
         }),
@@ -34,3 +37,5 @@ export default (store, action) => {
       return undefined
   }
 }
+
+export default pipelineEvents

@@ -1,8 +1,9 @@
 import { getProject, getUserProjects } from 'stemn-shared/misc/Projects/Projects.actions.js'
 import { fetchChanges } from 'stemn-shared/misc/Changes/Changes.actions.js'
 import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
+import type { SocketEventHandler } from './types'
 
-export default (store, action) => {
+const projectEvents: SocketEventHandler = (store, action) => {
   const { dispatch, getState } = store
 
   //  if (action.payload.actioner === getState().auth.user._id){
@@ -27,3 +28,5 @@ export default (store, action) => {
       return dispatch(fetchChanges({ projectId: action.payload.projectId }))
   }
 }
+
+export default projectEvents

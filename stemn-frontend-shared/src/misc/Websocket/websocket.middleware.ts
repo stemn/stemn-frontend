@@ -15,11 +15,23 @@ Action should be of the form:
 
 ********************************************* */
 
-import { socket } from './websocket.js'
+import type { StemnMiddleware } from 'stemn-shared/redux/types'
+import { socket } from './websocket'
 
-export default (store) => (next) => (action) => {
+/** An action for this middleware: `payload` is the message to send */
+export interface IWebsocketAction {
+  type?: string
+  websocket: boolean
+  payload: { type: string; payload?: object }
+}
+
+const isWebsocketAction = (action: unknown): action is IWebsocketAction =>
+  !!action && !!(action as Partial<IWebsocketAction>).websocket
+
+// The token is sent with every message
+const websocketMiddleware: StemnMiddleware<{ auth: { authToken: string | null } }> = (store) => (next) => (action) => {
   const token = store.getState().auth.authToken
-  if (action && action.websocket && socket && action.payload) {
+  if (isWebsocketAction(action) && socket && action.payload) {
     socket.write({
       type: action.payload.type,
       payload: Object.assign({}, action.payload.payload, {
@@ -34,3 +46,5 @@ export default (store) => (next) => (action) => {
 
   return next(action)
 }
+
+export default websocketMiddleware
