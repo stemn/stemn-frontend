@@ -3,6 +3,22 @@ import file from 'stemn-shared/assets/images/pure-vectors/file.svg'
 import { IFileData } from 'stemn-shared/misc/Files/Files.reducer'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import { PipelineGraph } from 'stemn-shared/misc/Pipelines/PipelineGraph'
+import { load as loadYaml } from 'js-yaml'
+import CodeViewer from '../PreviewCode/Viewer.jsx'
+
+/**
+ * The pipeline graph can only draw the node/link "flow" format. Pipeline files written against
+ * the schemas.stemn.com/pipeline+v1 schema (triggers/stages/steps) have no links, so show them
+ * as YAML instead of crashing the diagram deserializer.
+ */
+const isGraphFormat = (data: any) => {
+  try {
+    const config = typeof data === 'string' ? loadYaml(data) : data
+    return !!config && typeof config === 'object' && Array.isArray((config as any).links) && !!(config as any).steps
+  } catch (e) {
+    return false
+  }
+}
 
 export interface IPreviewPipelineProps {
   fileData?: IFileData,
@@ -34,11 +50,13 @@ export class PreviewPipeline extends React.Component<IPreviewPipelineProps> {
     return (
       <div className='layout-column flex'>
         { fileData && fileData.data ? (
-          <PipelineGraph
-            diagramId={previewId}
-            pipelineConfig={fileData.data}
-            readOnly={!editActive}
-          />
+          isGraphFormat(fileData.data)
+            ? <PipelineGraph
+              diagramId={previewId}
+              pipelineConfig={fileData.data}
+              readOnly={!editActive}
+            />
+            : <CodeViewer extension='yaml' data={fileData.data} />
         ) : '' }
         {fileData ? <LoadingOverlay show={fileData.loading} /> : null}
         { fileData && !fileData.data && !fileData.loading
