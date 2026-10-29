@@ -2,11 +2,7 @@ import React, { Component } from 'react'
 
 import cn from 'classnames'
 import s from './PipelineIcon.module.scss'
-import { MdDone } from 'react-icons/md'
-import { MdPlayArrow as MdPlay } from 'react-icons/md'
-import { MdClose } from 'react-icons/md'
-import { MdStop } from 'react-icons/md'
-import { MdPause } from 'react-icons/md'
+import { MdDone, MdPlayArrow as MdPlay, MdClose, MdStop, MdPause } from 'react-icons/md'
 
 export const getStatusClass = (status) => {
   if (status === 'success') {

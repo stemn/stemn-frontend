@@ -165,8 +165,8 @@ function SVGEl(el) {
   // the path elements
   this.paths = [].slice.call(this.el.querySelectorAll('path'))
   // we will save both paths and its lengths in arrays
-  this.pathsArr = new Array()
-  this.lengthsArr = new Array()
+  this.pathsArr = []
+  this.lengthsArr = []
   this._init()
 }
 

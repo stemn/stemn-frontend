@@ -5,8 +5,7 @@ import styles from './SidebarProjectButton.module.css'
 import { Link } from 'stemn-shared/routing'
 import Drive from 'stemn-shared/assets/icons/providers/drive.jsx'
 import Dropbox from 'stemn-shared/assets/icons/providers/dropbox.jsx'
-import { MdContentCopy } from 'react-icons/md'
-import { MdCloudOff } from 'react-icons/md'
+import { MdContentCopy, MdCloudOff } from 'react-icons/md'
 
 const SidebarProjectButton = (props) => {
   const iconStyle = { width: '22px', height: '22px' }

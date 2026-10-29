@@ -1,6 +1,7 @@
 import i from 'icepick'
 
 import { parseMentions, removeExistingMentions, addMentionsToText } from '../Mentions/Mentions.utils.js'
+
 const initialState = {
   /** ************************************
   [projectId] : {

@@ -2,11 +2,7 @@ import React, { Component } from 'react'
 import { PropTypes } from 'prop-types'
 import cn from 'classnames'
 import classes from './SocialButton.module.css'
-import { MdStar } from 'react-icons/md'
-import { MdStarBorder } from 'react-icons/md'
-import { MdBookmark } from 'react-icons/md'
-import { MdBookmarkBorder } from 'react-icons/md'
-import { MdContentCopy } from 'react-icons/md'
+import { MdStar, MdStarBorder, MdBookmark, MdBookmarkBorder, MdContentCopy } from 'react-icons/md'
 
 const getIcon = (type, entityType, status) => {
   if (type === 'like') {

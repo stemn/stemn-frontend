@@ -1,7 +1,6 @@
 import cn from 'classnames'
 import * as React from 'react'
-import { MdEdit } from 'react-icons/md'
-import { MdSave } from 'react-icons/md'
+import { MdEdit, MdSave } from 'react-icons/md'
 import { getViewerType, IPreviewType } from '../../Files/PreviewFile/PreviewFile.utils'
 import { dispatchToProps, IFileEditButtonContainerProps } from './FileEditButton.container'
 import s from './FileEditButton.module.scss'

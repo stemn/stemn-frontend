@@ -1,6 +1,5 @@
 import React from 'react'
-import { MdPublic } from 'react-icons/md'
-import { MdLockOutline } from 'react-icons/md'
+import { MdPublic, MdLockOutline } from 'react-icons/md'
 
 const PublicPrivateIcon = (props) => {
   const { style, noColor, private: priv, ...otherProps } = props

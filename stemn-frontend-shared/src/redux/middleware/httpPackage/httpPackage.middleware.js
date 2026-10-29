@@ -28,6 +28,10 @@ when the request has been fulfilled
 
 ************************************************************************************************** */
 
+import i from 'icepick'
+import http from 'axios'
+import { stringifyQuery } from 'stemn-shared/routing/query'
+
 class DeferredPromise {
   constructor() {
     this.promise = new Promise((resolve, reject) => {
@@ -36,10 +40,6 @@ class DeferredPromise {
     })
   }
 }
-
-import i from 'icepick'
-import http from 'axios'
-import { stringifyQuery } from 'stemn-shared/routing/query'
 
 const requests = {} // This is where the packages are temporarily stored
 const promises = {} // This is where the promises are temporarily stored

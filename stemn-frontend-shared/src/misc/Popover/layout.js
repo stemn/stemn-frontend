@@ -172,7 +172,7 @@ const pickZone = (opts, frameBounds, targetBounds, size) => {
   */
   zones.forEach((z) => {
     // TODO Update to satisfy linter
-    // eslint-disable-next-line no-param-reassign
+
     z.cutOff = /* area */ -Math.max(0, Math.min(z.w, size.w)) * Math.max(0, Math.min(z.h, size.h))
   })
   zones.sort((a, b) => a.cutOff - b.cutOff)

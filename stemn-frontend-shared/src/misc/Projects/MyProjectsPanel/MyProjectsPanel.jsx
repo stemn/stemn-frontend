@@ -5,9 +5,8 @@ import classes from './MyProjectsPanel.module.scss'
 import cn from 'classnames'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import Link from 'stemn-shared/misc/Router/Link'
-import { orderBy } from 'lodash'
+import { orderBy, get } from 'lodash'
 import bookVector from 'stemn-shared/assets/images/pure-vectors/book.svg'
-import { get } from 'lodash'
 import ProviderIcon from 'stemn-shared/misc/Icons/ProviderIcon'
 
 export default class MyProjectsPanel extends Component {

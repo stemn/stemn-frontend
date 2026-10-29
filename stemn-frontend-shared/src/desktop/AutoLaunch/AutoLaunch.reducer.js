@@ -1,4 +1,5 @@
 import i from 'icepick'
+
 export const name = 'autoLaunch'
 
 const initialState = {

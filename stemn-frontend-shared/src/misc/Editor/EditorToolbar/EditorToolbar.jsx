@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import classes from './EditorToolbar.module.css'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
-import { MdFormatItalic } from 'react-icons/md'
-import { MdFormatBold } from 'react-icons/md'
-import { MdLink } from 'react-icons/md'
-import { MdVisibility } from 'react-icons/md'
-import { MdFormatListBulleted } from 'react-icons/md'
-import { MdInsertPhoto } from 'react-icons/md'
-import { MdTextFields } from 'react-icons/md'
-import { MdCode } from 'react-icons/md'
+import {
+  MdFormatItalic,
+  MdFormatBold,
+  MdLink,
+  MdVisibility,
+  MdFormatListBulleted,
+  MdInsertPhoto,
+  MdTextFields,
+  MdCode,
+} from 'react-icons/md'
 import MathIcon from 'stemn-shared/assets/icons/editor/math'
 import Popover from 'stemn-shared/misc/Popover/Popover'
 import PopoverMenuList from 'stemn-shared/misc/PopoverMenu/PopoverMenuList'

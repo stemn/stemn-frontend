@@ -13,11 +13,7 @@ import SubSubHeader from 'modules/SubSubHeader'
 import UserAvatars from 'stemn-shared/misc/Avatar/UserAvatars/UserAvatars.jsx'
 import Link from 'stemn-shared/misc/Router/Link'
 import { licenseData } from 'stemn-shared/misc/Licenses/Licenses.data'
-import { MdLocationOn } from 'react-icons/md'
-import { MdPeople } from 'react-icons/md'
-import { MdAccountBalance as MdAccount } from 'react-icons/md'
-import { MdAccessTime } from 'react-icons/md'
-import { MdCompareArrows } from 'react-icons/md'
+import { MdLocationOn, MdPeople, MdAccountBalance as MdAccount, MdAccessTime, MdCompareArrows } from 'react-icons/md'
 
 export default class ProjectOverview extends Component {
   clickFileOrFolder = ({ file }) => {

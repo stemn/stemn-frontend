@@ -20,6 +20,7 @@ export function getThread({threadId}) {
 ************************************************************************************************** */
 
 import i from 'icepick'
+
 const timeouts = {}
 
 export default (store) => (next) => (action) => {
