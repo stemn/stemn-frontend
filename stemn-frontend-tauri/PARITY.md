@@ -34,7 +34,7 @@ matches Electron IPC (`src/shared/sequencer.ts`).
 | B1 | `platform` | `process.platform` in the preload | Rust `node_platform()` in the init script | Verified | E1 (bridge keys); renderers render the Linux title bar |
 | B2 | `versions` | electron/chrome/node | same keys (empty strings) plus `tauri`, `webview` | Partial | Keys kept for type compatibility; no renderer reads them |
 | B3 | `getInitialState()` | `ipcRenderer.invoke(GET_INITIAL_STATE)` | `bridge_to_core` request, answered by `core_send` with a snapshot and the sequence number it contains; retried until the core window is up | Verified | E1 to E10 (every window boots from it) |
-| B4 | `dispatchToMain(action)` | `ipcRenderer.send(REDUX_ACTION)` | `bridge_to_core` (sync command, ordered, sender label added by Rust) | Verified | E2 (login form input round trip through the core store) |
+| B4 | `dispatchToMain(action)` | `ipcRenderer.send(REDUX_ACTION)` | `bridge_to_core` (sync command, ordered, sender label added by Rust) | Verified | E2 (login form input round trip through the core store). Round trip 4 ms vs 0.8 ms (§3, gap 14) |
 | B5 | `forwardToWindow(target, action)` | `FORWARD_TO_WINDOW` | `bridge_to_core { kind: 'forward' }`, then the core broadcasts with `target` | Verified | E10 (menubar Preferences navigates the main window) |
 | B6 | `onAction(listener)` | `ipcRenderer.on(REDUX_ACTION)` | window-scoped `stemn:to-renderer` listener and an in-order sequencer; actions that arrive between the snapshot and `onAction` are queued (Electron dropped them) | Verified | E2 to E10; `sequencer.test.ts` (10 tests) |
 | B7 | `window.minimize / toggleMaximize / close / isMaximized` | `WINDOW_COMMAND` | `bridge_window_command` on the calling window | Verified (close, isMaximized); Implemented (minimize, toggleMaximize) | S1 (close a preview and the main window from their bridges), E1 (isMaximized). minimize and maximize are no-ops under the i3 tiling WM on this machine |
@@ -110,6 +110,7 @@ up. Memory is summed over the whole process tree 20 s after start.
 | Start to ready, cold cache | 1000 ms | 1214 ms | +21% |
 | Idle memory, signed out: RSS / PSS | 526.6 / 260.8 MB, 5 processes | 894.7 / 427.6 MB, 5 processes | **+64% PSS** |
 | Idle memory, signed in (project list loaded): RSS / PSS | 526.7 / 259.5 MB | 901.7 / 438.0 MB | **+69% PSS** |
+| Store round trip (renderer dispatch → core store → replayed into the window), median / p90 of 60 | 0.8 / 2.3 ms | 4 / 5 ms (release build) | ×5 |
 | Process breakdown, signed in (RSS) | browser 186, zygotes 55 + 56, renderers 147 + 83 | app 204, WebKitNetworkProcess 63, 3 × WebKitWebProcess 185 / 232 / 217 (core, main, menubar) | |
 
 The numbers are in `qa/measurements*.json` (git-ignored). Reading them:
@@ -179,7 +180,13 @@ crosses IPC here, so it would need measuring.
     code and passes by timing. E7 waits for the `NEW_COMMITS` event and then refreshes the list from its
     menu if the commit is missing. Fixing it means changing shared code (`SyncTimeline.actions.ts`),
     which this PR doesn't touch.
-14. **Test seams** exist only in the debug `e2e` build: `e2e_windows`, `e2e_show_menubar`,
+14. **Slower store round trip (4 ms vs 0.8 ms median).** Renderer inputs are controlled by the core store, so
+    each keystroke goes renderer → core → renderer before the input shows it, exactly as in Electron. If
+    keys arrive faster than the round trip, a character can be overwritten. Human typing (about 100 ms
+    between keys) is far slower than that. WebDriver typing key by key on a loaded CI runner lost one
+    character once. The suite now enters text with one input event, like the Electron suite's
+    Playwright `fill`. The proper fix is the same for both shells: apply form input locally first.
+15. **Test seams** exist only in the debug `e2e` build: `e2e_windows`, `e2e_show_menubar`,
     `e2e_close_previews` (Electron used `app.evaluate`), the stubbed folder picker, and external URLs
     logged instead of opened. Release builds compile none of it, and the `e2e` capability is off by
     default (`tauri:check` enforces that).

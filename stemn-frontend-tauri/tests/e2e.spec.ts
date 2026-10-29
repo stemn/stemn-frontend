@@ -24,6 +24,7 @@ import {
   click,
   clickText,
   count,
+  fill,
   getState,
   goto,
   launchApp,
@@ -158,8 +159,8 @@ test.describe.serial('Stemn Desktop (Tauri)', () => {
 
   test('logs in as Priya', async () => {
     const main = await app.win('main')
-    await (await visible(main, '[placeholder="Email"]')).setValue(EMAIL)
-    await (await visible(main, '[placeholder="Password"]')).setValue(PASSWORD)
+    await fill(main, '[placeholder="Email"]', EMAIL)
+    await fill(main, '[placeholder="Password"]', PASSWORD)
     // Form input is stored in the core store and replayed into the window (an IPC round trip)
     await expect.poll(async () => (await getState(main)).auth.login).toMatchObject({ email: EMAIL, password: PASSWORD })
     const signIn = await main.$$(textXPath('Sign In'))
@@ -296,7 +297,7 @@ test.describe.serial('Stemn Desktop (Tauri)', () => {
     // --- commit only this change ---
     await click(main, `${changeRow}//*[@title='Select change']`)
     commitName = `Desktop sync check ${stamp}`
-    await (await visible(main, '[placeholder="Summary"]')).setValue(commitName)
+    await fill(main, '[placeholder="Summary"]', commitName)
     await expect.poll(async () => (await getState(main)).changes[PROJECT_ID].name).toBe(commitName)
     // The description is a CodeMirror editor (its placeholder is a separate element)
     await click(

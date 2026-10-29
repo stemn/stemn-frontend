@@ -225,6 +225,24 @@ export const clickText = (
   options?: { exact?: boolean; scope?: string; timeout?: number },
 ) => click(browser, textXPath(text, options), options?.timeout)
 
+/**
+ * Playwright's `fill`: replace an input's value with one input event (the Electron suite uses
+ * `fill`). Typing key by key would send one store round trip per character (see PARITY.md).
+ */
+export const fill = async (browser: Browser, selector: string, value: string) => {
+  const element = await visible(browser, selector)
+  await element.click()
+  await (browser.execute as any)(
+    (el: HTMLInputElement, text: string) => {
+      const prototype = el instanceof HTMLTextAreaElement ? HTMLTextAreaElement.prototype : HTMLInputElement.prototype
+      Object.getOwnPropertyDescriptor(prototype, 'value')!.set!.call(el, text)
+      el.dispatchEvent(new InputEvent('input', { bubbles: true, inputType: 'insertText', data: text }))
+    },
+    element,
+    value,
+  )
+}
+
 export const byText = (
   browser: Browser,
   text: string,
