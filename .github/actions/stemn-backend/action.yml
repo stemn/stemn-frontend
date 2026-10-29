@@ -1,6 +1,6 @@
 name: Stemn backend fixture
 description: >
-  Checks out stemn-backend, starts it the way developers do (local/start.sh: MongoDB 4.4 + Redis 7 in
+  Checks out stemn-backend, starts it the way developers do (local/start.sh: MongoDB 8.2 + Redis 7 in
   Docker, API on :3000, websocket server on :8000) and seeds the demo data (local/seed.sh: 8 users with
   password "password123", 14 projects, files, threads, ...). Used by the website and desktop e2e jobs;
   reusable by any workflow that needs a running backend.
@@ -36,6 +36,8 @@ runs:
       with:
         path: |
           ${{ inputs.path }}/node_modules
+          ${{ inputs.path }}/libraries/*/node_modules
+          ${{ inputs.path }}/services/*/node_modules
           ${{ inputs.path }}/libraries/*/build
           ${{ inputs.path }}/services/api/build
           ${{ inputs.path }}/services/websocket-server/build
