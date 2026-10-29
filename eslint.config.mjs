@@ -29,6 +29,10 @@ export default tseslint.config(
       '**/test-results/**',
       '**/playwright-report/**',
       '**/coverage/**',
+      // Tauri shell: the bridge bundle and Rust build output / generated schemas
+      '**/dist-bridge/**',
+      'stemn-frontend-tauri/src-tauri/target/**',
+      'stemn-frontend-tauri/src-tauri/gen/**',
       // Vendored third-party code
       'stemn-frontend-website/public/static/**',
       'stemn-frontend-shared/src/misc/Websocket/primus-websockets2.js',

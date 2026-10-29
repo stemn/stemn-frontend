@@ -1,0 +1,18 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "renderer",
+  "description": "The main, menubar and preview windows: exactly the window.stemnDesktop bridge (the Electron preload API) and nothing else. No plugin APIs, no file system, no store.",
+  "windows": ["main", "menubar", "preview-*"],
+  "permissions": [
+    "core:event:allow-listen",
+    "core:event:allow-unlisten",
+    "allow-bridge-to-core",
+    "allow-bridge-window-ready",
+    "allow-bridge-window-command",
+    "allow-bridge-select-directory",
+    "allow-bridge-open-external",
+    "allow-bridge-open-path",
+    "allow-bridge-show-item-in-folder",
+    "allow-bridge-log"
+  ]
+}

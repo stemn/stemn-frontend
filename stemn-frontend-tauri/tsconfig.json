@@ -1,0 +1,26 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "allowImportingTsExtensions": true,
+    "lib": ["es2023", "dom", "dom.iterable"],
+    "moduleSuffixes": [".desktop", ""],
+    "paths": {
+      "stemn-shared/*": ["../stemn-frontend-shared/src/*"],
+      "stemn-frontend-desktop/*": ["../stemn-frontend-desktop/*"],
+      "route-actions": ["../stemn-frontend-desktop/app/renderer/main/routeActions.js"],
+      "reducer": ["../stemn-frontend-desktop/app/shared/reducers/rootReducer.base.ts"],
+      "package-json": ["../stemn-frontend-desktop/package.json"]
+    }
+  },
+  "include": [
+    "../stemn-frontend-desktop/typings.d.ts",
+    "./src",
+    "./tests",
+    "./vite.config.ts",
+    "./vite.core.config.ts",
+    "./vite.bridge.config.ts",
+    "./vite.shared.ts"
+  ],
+  "exclude": ["./dist", "./dist-bridge", "./qa", "./src-tauri"]
+}

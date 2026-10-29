@@ -8,6 +8,7 @@
     "stemn-frontend-shared",
     "stemn-frontend-website",
     "stemn-frontend-desktop",
+    "stemn-frontend-tauri",
     "tests/e2e"
   ],
   "engines": {
@@ -23,7 +24,7 @@
     "lint": "eslint . --max-warnings 0 && prettier --check .",
     "lint:fix": "eslint . --fix && prettier --write .",
     "format": "prettier --write .",
-    "typecheck": "npm run typecheck --workspace stemn-frontend-website && npm run typecheck --workspace stemn-frontend-desktop && tsc -p tests/e2e/tsconfig.json --noEmit",
+    "typecheck": "npm run typecheck --workspace stemn-frontend-website && npm run typecheck --workspace stemn-frontend-desktop && npm run typecheck --workspace stemn-frontend-tauri && tsc -p tests/e2e/tsconfig.json --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "npm test --workspace stemn-e2e",
@@ -33,6 +34,10 @@
     "desktop:package": "npm run package --workspace stemn-frontend-desktop",
     "desktop:test:e2e": "npm run test:e2e --workspace stemn-frontend-desktop",
     "desktop:typecheck": "npm run typecheck --workspace stemn-frontend-desktop",
+    "tauri:dev": "npm run tauri:dev --workspace stemn-frontend-tauri",
+    "tauri:build": "npm run tauri:build --workspace stemn-frontend-tauri",
+    "tauri:test": "npm run tauri:test --workspace stemn-frontend-tauri",
+    "tauri:typecheck": "npm run typecheck --workspace stemn-frontend-tauri",
     "prepare": "husky"
   },
   "repository": {

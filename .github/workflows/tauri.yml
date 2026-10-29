@@ -1,0 +1,134 @@
+# Tauri shell (stemn-frontend-tauri): Rust unit tests, the WebDriver e2e suite against the
+# Stemn backend fixture (.github/actions/stemn-backend, like e2e.yml), and the Linux release
+# bundles (AppImage + deb) as artefacts. Called by ci.yml; runnable on its own.
+name: tauri
+
+on:
+  workflow_call:
+    inputs:
+      backend-ref:
+        description: stemn-backend ref to test against
+        type: string
+        default: staging
+    secrets:
+      STEMN_BACKEND_DEPLOY_KEY:
+        required: true
+  workflow_dispatch:
+    inputs:
+      backend-ref:
+        description: stemn-backend ref to test against
+        type: string
+        default: staging
+
+permissions:
+  contents: read
+
+jobs:
+  tauri:
+    name: tauri (rust tests, webdriver e2e, AppImage + deb)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      CI: 'true'
+      CARGO_TERM_COLOR: always
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: ./.github/actions/setup
+
+      - name: Tauri system libraries, WebKitWebDriver, xvfb
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libwebkit2gtk-4.1-dev libayatana-appindicator3-dev librsvg2-dev \
+            libxdo-dev libssl-dev patchelf file webkit2gtk-driver xvfb dbus-x11
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: stemn-frontend-tauri/src-tauri -> target
+          cache-on-failure: true
+
+      - name: tauri-driver
+        run: cargo install tauri-driver --version 2.1.0 --locked
+
+      - name: Validate the bundle configs (Linux, Windows, macOS)
+        working-directory: stemn-frontend-tauri
+        run: npm run tauri:check
+
+      - name: Rust unit tests (file cache / stemn-file protocol, launch args, OAuth server, ...)
+        working-directory: stemn-frontend-tauri
+        run: npm run test:rust
+
+      - uses: ./.github/actions/stemn-backend
+        with:
+          ssh-key: ${{ secrets.STEMN_BACKEND_DEPLOY_KEY }}
+          ref: ${{ inputs.backend-ref || 'staging' }}
+
+      # Builds the debug app with the `e2e` feature (tests/global-setup.ts), then drives it over WebDriver
+      - name: WebDriver e2e (xvfb)
+        working-directory: stemn-frontend-tauri
+        run: dbus-run-session -- xvfb-run --auto-servernum --server-args="-screen 0 1440x900x24" npm run test:e2e
+
+      - name: Release bundles (AppImage + deb, unsigned)
+        working-directory: stemn-frontend-tauri
+        run: npm run tauri:build
+
+      - name: Bundle sizes
+        working-directory: stemn-frontend-tauri/src-tauri/target/release
+        run: |
+          ls -l bundle/appimage/*.AppImage bundle/deb/*.deb stemn | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload the bundles
+        uses: actions/upload-artifact@v7
+        with:
+          name: stemn-tauri-linux-${{ github.run_attempt }}
+          path: |
+            stemn-frontend-tauri/src-tauri/target/release/bundle/appimage/*.AppImage
+            stemn-frontend-tauri/src-tauri/target/release/bundle/deb/*.deb
+          retention-days: 14
+          if-no-files-found: error
+
+      - name: Backend logs
+        if: failure()
+        run: tail -n 200 .stemn-backend/local/.run/logs/api.log .stemn-backend/local/.run/logs/websocket.log || true
+      - name: Upload screenshots and logs
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: tauri-e2e-results-${{ github.run_attempt }}
+          path: |
+            stemn-frontend-tauri/qa
+            /tmp/stemn-tauri-*/logs
+            .stemn-backend/local/.run/logs
+          retention-days: 14
+          if-no-files-found: ignore
+
+  compile:
+    # Windows and macOS bundles are configured (npm run tauri:check) but not built in CI;
+    # this proves the Rust side (incl. the Windows-only explorer context menu code) compiles there.
+    name: tauri compile check (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest]
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: stemn-frontend-tauri/src-tauri -> target
+      - name: Bridge bundle (included by the Rust build)
+        working-directory: stemn-frontend-tauri
+        run: npm run build:bridge
+      - name: cargo check
+        run: cargo check --locked --manifest-path stemn-frontend-tauri/src-tauri/Cargo.toml

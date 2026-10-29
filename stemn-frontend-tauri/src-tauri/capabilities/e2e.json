@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "e2e",
+  "description": "WebDriver test seams (cargo feature `e2e`, enabled only by the e2e build in tests/global-setup.ts).",
+  "windows": ["main", "menubar", "preview-*"],
+  "permissions": ["allow-e2e-windows", "allow-e2e-show-menubar", "allow-e2e-close-previews"]
+}

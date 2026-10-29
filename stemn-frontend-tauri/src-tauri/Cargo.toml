@@ -1,0 +1,65 @@
+[package]
+name = "stemn-desktop"
+version = "0.0.26"
+description = "Stemn Desktop (Tauri 2 shell)"
+authors = ["STEMN Pty Ltd <desktop@stemn.com>"]
+license = "MIT"
+repository = "https://github.com/stemn/stemn-frontend"
+edition = "2021"
+rust-version = "1.85"
+
+[lib]
+name = "stemn_desktop_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.7.4", features = [] }
+
+[dependencies]
+tauri = { version = "2.12.5", features = ["tray-icon", "image-png"] }
+tauri-plugin-dialog = "2.8.4"
+tauri-plugin-store = "2.5.0"
+tauri-plugin-opener = "2.7.2"
+tauri-plugin-autostart = "2.7.0"
+tauri-plugin-single-instance = { version = "2.5.5", features = ["deep-link"] }
+tauri-plugin-deep-link = "2.6.3"
+tauri-plugin-cli = "2.5.0"
+tauri-plugin-updater = "2.14.1"
+tauri-plugin-log = "2.10.1"
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["preserve_order"] }
+log = "0.4"
+reqwest = { version = "0.13", default-features = false, features = ["rustls-no-provider", "stream", "query"] }
+rustls = { version = "0.23", default-features = false, features = ["ring"] }
+futures-util = "0.3"
+tokio = { version = "1", features = ["fs", "io-util", "sync", "time"] }
+zip = { version = "2", default-features = false, features = ["deflate"] }
+tiny_http = "0.12"
+percent-encoding = "2"
+url = "2"
+chrono = { version = "0.4", default-features = false, features = ["clock", "serde"] }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+webkit2gtk = { version = "=2.0.2", features = ["v2_40"] }
+
+[target.'cfg(windows)'.dependencies]
+winreg = "0.55"
+
+[dev-dependencies]
+tempfile = "3"
+
+[features]
+# Test seams for the WebDriver e2e suite (stubbed native folder picker, cross-window eval).
+# Never enabled in release packaging (npm run tauri:build).
+e2e = []
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+panic = "abort"
+strip = true
+
+[profile.dev]
+debug = 0
+incremental = false

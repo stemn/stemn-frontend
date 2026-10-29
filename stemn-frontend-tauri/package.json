@@ -1,0 +1,40 @@
+{
+  "name": "stemn-frontend-tauri",
+  "productName": "Stemn",
+  "version": "0.0.26",
+  "private": true,
+  "description": "Stemn Desktop on Tauri 2: the desktop app's renderers in a Rust shell",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22.22.0"
+  },
+  "scripts": {
+    "build:bridge": "vite build -c vite.bridge.config.ts",
+    "build:web": "npm run build:bridge && vite build && vite build -c vite.core.config.ts",
+    "dev:web": "npm run build:bridge && vite",
+    "tauri": "tauri",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "node scripts/tauri-build.mjs",
+    "tauri:test": "npm run test:rust && npm run test:e2e",
+    "test:rust": "npm run build:bridge && cargo test --manifest-path src-tauri/Cargo.toml",
+    "test:e2e": "playwright test --config tests/playwright.config.ts",
+    "typecheck": "tsc -p ./tsconfig.json --noEmit",
+    "tauri:check": "node scripts/check-config.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "@tauri-apps/api": "2.12.4",
+    "@tauri-apps/cli": "2.12.4",
+    "@tauri-apps/plugin-autostart": "2.7.0",
+    "@tauri-apps/plugin-log": "2.10.1",
+    "@tauri-apps/plugin-store": "2.5.0",
+    "@types/node": "26.6.6",
+    "ajv": "8.20.0",
+    "stemn-frontend-desktop": "0.0.26",
+    "stemn-frontend-shared": "1.0.0",
+    "typescript": "7.0.2",
+    "vite": "8.3.5",
+    "webdriverio": "10.1.0"
+  }
+}

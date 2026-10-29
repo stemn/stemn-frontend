@@ -1,0 +1,114 @@
+{
+  "$schema": "../../node_modules/@tauri-apps/cli/config.schema.json",
+  "productName": "Stemn",
+  "mainBinaryName": "stemn",
+  "version": "../package.json",
+  "identifier": "com.stemn.desktop",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:5174",
+    "beforeDevCommand": "npm run dev:web",
+    "beforeBuildCommand": "npm run build:web"
+  },
+  "app": {
+    "windows": [],
+    "withGlobalTauri": false,
+    "security": {
+      "csp": null,
+      "capabilities": ["core", "renderer"]
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "publisher": "STEMN Pty Ltd",
+    "copyright": "Copyright © STEMN Pty Ltd",
+    "category": "DeveloperTool",
+    "shortDescription": "Versioning and project management for engineering files",
+    "longDescription": "Stemn Desktop: versioning and project management for engineering files in Dropbox, Google Drive and Stemn storage.",
+    "homepage": "https://stemn.com",
+    "license": "MIT",
+    "createUpdaterArtifacts": false,
+    "icon": [
+      "../../stemn-frontend-desktop/build/icons/128x128.png",
+      "../../stemn-frontend-desktop/build/icons/256x256.png",
+      "../../stemn-frontend-desktop/build/icons/64x64.png",
+      "../../stemn-frontend-desktop/build/icons/48x48.png",
+      "../../stemn-frontend-desktop/build/icons/32x32.png",
+      "../../stemn-frontend-desktop/build/icon.icns",
+      "../../stemn-frontend-desktop/build/icon.ico"
+    ],
+    "linux": {
+      "deb": {
+        "section": "devel",
+        "depends": [],
+        "desktopTemplate": "./stemn.desktop.hbs"
+      },
+      "appimage": {
+        "bundleMediaFramework": false
+      }
+    },
+    "windows": {
+      "nsis": {
+        "installMode": "currentUser",
+        "displayLanguageSelector": false
+      },
+      "wix": {
+        "language": "en-US"
+      }
+    },
+    "macOS": {
+      "minimumSystemVersion": "11.0",
+      "hardenedRuntime": true,
+      "dmg": {
+        "background": "../../stemn-frontend-desktop/build/background.png",
+        "windowSize": {
+          "width": 640,
+          "height": 480
+        },
+        "appPosition": {
+          "x": 192,
+          "y": 344
+        },
+        "applicationFolderPosition": {
+          "x": 448,
+          "y": 344
+        }
+      }
+    }
+  },
+  "plugins": {
+    "cli": {
+      "description": "Stemn Desktop",
+      "args": [
+        {
+          "name": "hidden",
+          "description": "Start in the tray without showing the main window"
+        },
+        {
+          "name": "path",
+          "takesValue": true,
+          "description": "Show the revisions of a local file in a preview window"
+        },
+        {
+          "name": "url",
+          "index": 1,
+          "takesValue": true,
+          "description": "A stemn: link"
+        }
+      ]
+    },
+    "deep-link": {
+      "desktop": {
+        "schemes": ["stemn"]
+      }
+    },
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDNCRUMyRUNBRkUwMkNDMTcKUldRWHpBTCt5aTdzTzZxTTg3ckZxSFJjR1AzbUV3SE5CNUE3aXdWbVZ0Zk1vWEs0czd1SnVNUkEK",
+      "endpoints": ["https://updates.stemn.com/desktop/stable/latest.json"],
+      "windows": {
+        "installMode": "passive"
+      }
+    }
+  }
+}
