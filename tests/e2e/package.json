@@ -1,0 +1,14 @@
+{
+  "name": "stemn-e2e",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Playwright end-to-end tests of the Stemn website against a running Stemn backend (see README.md)",
+  "license": "MIT",
+  "scripts": {
+    "test": "playwright test",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1"
+  }
+}

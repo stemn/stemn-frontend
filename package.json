@@ -7,7 +7,8 @@
   "workspaces": [
     "stemn-frontend-shared",
     "stemn-frontend-website",
-    "stemn-frontend-desktop"
+    "stemn-frontend-desktop",
+    "tests/e2e"
   ],
   "engines": {
     "node": ">=22.22.0",
@@ -16,17 +17,23 @@
   "scripts": {
     "dev": "npm run dev --workspace stemn-frontend-website",
     "build": "npm run build --workspace stemn-frontend-website",
+    "serve": "npm run serve --workspace stemn-frontend-website",
     "dev:webpack": "npm run dev:webpack --workspace stemn-frontend-website",
     "build:webpack": "npm run build:webpack --workspace stemn-frontend-website",
-    "serve": "npm run serve --workspace stemn-frontend-website",
-    "typecheck": "npm run typecheck --workspace stemn-frontend-website",
+    "lint": "eslint . --max-warnings 0 && prettier --check .",
+    "lint:fix": "eslint . --fix && prettier --write .",
+    "format": "prettier --write .",
+    "typecheck": "npm run typecheck --workspace stemn-frontend-website && npm run typecheck --workspace stemn-frontend-desktop && tsc -p tests/e2e/tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "npm test --workspace stemn-e2e",
     "desktop:dev": "npm run dev --workspace stemn-frontend-desktop",
     "desktop:build": "npm run build --workspace stemn-frontend-desktop",
     "desktop:start": "npm run start --workspace stemn-frontend-desktop",
     "desktop:package": "npm run package --workspace stemn-frontend-desktop",
-    "test": "npm test --workspaces --if-present",
     "desktop:test:e2e": "npm run test:e2e --workspace stemn-frontend-desktop",
-    "desktop:typecheck": "npm run typecheck --workspace stemn-frontend-desktop"
+    "desktop:typecheck": "npm run typecheck --workspace stemn-frontend-desktop",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -59,9 +66,17 @@
     "eslint-plugin-react-refresh": "0.5.7",
     "globals": "17.13.0",
     "husky": "9.1.7",
+    "jsdom": "30.1.3",
     "lint-staged": "17.6.0",
     "prettier": "3.9.10",
     "typescript-eslint": "8.72.1",
     "vitest": "5.0.5"
+  },
+  "lint-staged": {
+    "*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}": [
+      "eslint --max-warnings 0 --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,scss,html,yml,yaml}": "prettier --write"
   }
 }
