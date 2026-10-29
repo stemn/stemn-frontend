@@ -33,7 +33,7 @@ reqwest = { version = "0.13", default-features = false, features = ["rustls-no-p
 rustls = { version = "0.23", default-features = false, features = ["ring"] }
 futures-util = "0.3"
 tokio = { version = "1", features = ["fs", "io-util", "sync", "time"] }
-zip = { version = "2", default-features = false, features = ["deflate"] }
+zip = { version = "9", default-features = false, features = ["deflate"] }
 tiny_http = "0.12"
 percent-encoding = "2"
 url = "2"
