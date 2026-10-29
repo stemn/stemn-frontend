@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import cn from 'classnames'
 import classes from './FileBreadCrumbs.module.css'
 import { middle as middleConcat } from 'stemn-shared/utils/stringConcat'
@@ -12,12 +11,6 @@ export default class FileBreadCrumbs extends Component {
   static defaultProps = {
     popup: false,
     clickFn: () => {},
-  }
-  static propTypes = {
-    popup: PropTypes.bool,
-    clickFn: PropTypes.func,
-    meta: PropTypes.object,
-    link: PropTypes.bool, // Should the items be links
   }
   render() {
     const { meta, clickFn, className, popup, link } = this.props

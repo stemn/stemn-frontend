@@ -1,32 +1,10 @@
 // Local replacement for react-popover-wrapper 2.x (which wraps react-popover).
 // Same API: children[0] is the trigger, children[1] is the popover content.
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import PopoverCore from './PopoverCore.jsx'
 import './Popover.css'
 
 export default class Popover extends Component {
-  static propTypes = {
-    // The prefered location of the popover
-    preferPlace: PropTypes.oneOf(['above', 'below', 'left', 'right', 'start', 'end', 'row', 'column']),
-    // Is the popover open? Often used with trigger === 'none' to control state externally
-    open: PropTypes.bool,
-    // The type of event to trigger the popver
-    trigger: PropTypes.oneOf(['click', 'hover', 'hoverDelay', 'hoverSingleDelay', 'none']),
-    // Toggle delay period. To be used with 'hoverDelay' or 'hoverSingleDelay'.
-    toggleDelayTime: PropTypes.number,
-    // This will stop the popup closing when the popover content is clicked.
-    disableClickClose: PropTypes.bool,
-    // Size of the arrow.
-    tipSize: PropTypes.number,
-    // Distance between the tip and the target
-    offset: PropTypes.number,
-    // Should the popup content inherit the 'isOpen' prop?
-    inheritIsOpen: PropTypes.bool,
-    // Two children should be passed in - children[0] is the trigger, children[1] is the popup content
-    children: PropTypes.node.isRequired,
-  }
-
   static defaultProps = {
     tipSize: 6,
     trigger: 'click',

@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { WrappedFieldProps } from 'redux-form'
+import { IFieldProps } from '../FormField'
 
-export interface IFormInputProps extends WrappedFieldProps {
+export interface IFormInputProps extends IFieldProps {
   className?: string
   placeholder?: string
   style?: object

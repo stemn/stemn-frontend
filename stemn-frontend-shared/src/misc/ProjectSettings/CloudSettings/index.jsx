@@ -1,16 +1,10 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 import FileSelectInput from 'stemn-shared/misc/FileSelectInput/FileSelectInput.jsx'
 import ProjectLinkRemote from 'stemn-shared/misc/Project/ProjectLinkRemote/ProjectLinkRemote.jsx'
 import Form from 'stemn-shared/misc/Forms/Form'
 
 export default class CloudSettings extends Component {
-  static propTypes = {
-    projectModel: PropTypes.string.isRequired,
-    project: PropTypes.object.isRequired,
-    confirmLinkRemote: PropTypes.func.isRequired,
-  }
   renderFormInner() {
     const { projectModel, project, confirmLinkRemote } = this.props
     return (

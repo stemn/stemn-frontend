@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import moment from 'moment'
+import { fromNow } from 'stemn-shared/utils/date'
 import cn from 'classnames'
 import classes from './Comment.module.css'
 import Link from 'stemn-shared/misc/Router/Link'
@@ -85,9 +85,7 @@ export default class Comment extends Component {
             </Link>
             &nbsp;
             {showMeta && children}
-            <span className={cn(classes.date, 'text-ellipsis')}>
-              &nbsp;- {moment(comment.data.timestamp).fromNow()}
-            </span>
+            <span className={cn(classes.date, 'text-ellipsis')}>&nbsp;- {fromNow(comment.data.timestamp)}</span>
             <div className="flex" />
             {!showMeta && (
               <ReactionPopup reactions={comment.data.reactions} preferPlace="above" submitFn={this.submitReaction} />

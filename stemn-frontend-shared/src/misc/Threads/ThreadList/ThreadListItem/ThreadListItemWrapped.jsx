@@ -1,5 +1,4 @@
 import React, { useCallback, useRef } from 'react'
-import PropTypes from 'prop-types'
 import { useDrag, useDrop } from 'react-dnd'
 import { cardHover, cardDrop, beginDrag, endDrag } from './ThreadListItem.drag.config.js'
 
@@ -40,14 +39,6 @@ export default function ThreadListItemWrapped(props) {
       {children}
     </div>
   )
-}
-
-ThreadListItemWrapped.propTypes = {
-  index: PropTypes.number.isRequired,
-  item: PropTypes.string.isRequired,
-  moveCard: PropTypes.func.isRequired,
-  beginDrag: PropTypes.func.isRequired,
-  endDrag: PropTypes.func.isRequired,
 }
 
 // style={{transform: 'translate3d(0,0,0)'}}

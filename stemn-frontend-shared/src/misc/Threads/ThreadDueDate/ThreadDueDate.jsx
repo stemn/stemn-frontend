@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import moment from 'moment'
+import { dayjs, fromNow } from 'stemn-shared/utils/date'
 
 export default class DueDate extends Component {
   render() {
@@ -15,8 +15,8 @@ export default class DueDate extends Component {
         color: 'orange',
       },
     ]
-    const currentTime = moment().valueOf()
-    const dueTime = moment(due).valueOf()
+    const currentTime = dayjs().valueOf()
+    const dueTime = dayjs(due).valueOf()
     const difference = dueTime - currentTime
     const currentInfo = colorMap.find(({ period, color }) => difference < period)
     const style = currentInfo ? { color: currentInfo.color } : { color: 'rgba(0, 0, 0, 0.4)' }
@@ -24,7 +24,7 @@ export default class DueDate extends Component {
     if (due) {
       return (
         <span className="text-ellipsis" style={style}>
-          Due {moment(due).fromNow()}
+          Due {fromNow(due)}
         </span>
       )
     }

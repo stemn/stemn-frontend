@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import cn from 'classnames'
 import classes from './UserProfileSettings.module.css'
 import Input from 'stemn-shared/misc/Input/Input/Input'
@@ -10,11 +9,6 @@ import Upload from 'stemn-shared/misc/Upload/Upload'
 import LocationSearch from 'stemn-shared/misc/Search/LocationSearch'
 
 export default class UserProfileSettings extends Component {
-  static propTypes = {
-    user: PropTypes.object.isRequired,
-    userModel: PropTypes.string.isRequired,
-    saveUser: PropTypes.func.isRequired,
-  }
   render() {
     const { user, userModel, saveUser } = this.props
     return (

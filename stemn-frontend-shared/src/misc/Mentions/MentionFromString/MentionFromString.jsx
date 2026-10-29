@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import Link from 'stemn-shared/misc/Router/Link'
 import { getMentionInfo } from 'stemn-shared/misc/Mentions/Mentions.utils'
 
@@ -16,12 +15,6 @@ to pass in 'showThreadModal'.
 
 ****************************************************** */
 export default class MentionFromString extends Component {
-  static propTypes = {
-    href: PropTypes.string.isRequired,
-    display: PropTypes.string.isRequired,
-    // From the container (only if desktop)
-    showThreadModal: PropTypes.func,
-  }
   render() {
     const { href, display } = this.props
     const [entityId, mentionType] = href.split(':')

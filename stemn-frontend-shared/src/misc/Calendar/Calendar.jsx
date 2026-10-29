@@ -1,25 +1,11 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import moment from 'moment'
+import { dayjs } from 'stemn-shared/utils/date'
 import createDateObjects from './createDateObjects'
 
 import cn from 'classnames'
 import classes from './Calendar.module.scss'
 
 export default class Calendar extends Component {
-  static propTypes = {
-    weekOffset: PropTypes.number.isRequired,
-    type: PropTypes.string, // 'datepicker'
-
-    selectedDate: PropTypes.object.isRequired,
-    viewDate: PropTypes.object.isRequired,
-
-    renderDay: PropTypes.func,
-    onNextMonth: PropTypes.func.isRequired,
-    onPrevMonth: PropTypes.func.isRequired,
-    onPickDate: PropTypes.func,
-  }
-
   static defaultProps = {
     weekOffset: 0,
     renderDay: (day) => day.format('YYYY-MM-D'),
@@ -36,7 +22,7 @@ export default class Calendar extends Component {
       if (selectedDate && item.day.format('YYYY-MM-DD') === selectedDate.format('YYYY-MM-DD')) {
         item.cn = item.cn ? `${item.cn} selected` : 'selected'
       }
-      if (item.day.format('YYYY-MM-DD') === moment().format('YYYY-MM-DD')) {
+      if (item.day.format('YYYY-MM-DD') === dayjs().format('YYYY-MM-DD')) {
         item.cn = item.cn ? `${item.cn} current` : 'current'
       }
     })

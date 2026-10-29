@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 const Item = ({ setFilter, objKey, value, filterObject, children }) => (
   <a
@@ -11,13 +10,6 @@ const Item = ({ setFilter, objKey, value, filterObject, children }) => (
 )
 
 export default class ThreadFilterMenu extends Component {
-  static propTypes = {
-    auth: PropTypes.object.isRequired,
-    filter: PropTypes.object.isRequired,
-    filterModel: PropTypes.object.isRequired,
-    filterCacheKey: PropTypes.string.isRequired,
-    setFilter: PropTypes.func.isRequired,
-  }
   setFilter = (filterObject) => {
     const { setFilter, filterCacheKey, filter, filterModel } = this.props
     setFilter({

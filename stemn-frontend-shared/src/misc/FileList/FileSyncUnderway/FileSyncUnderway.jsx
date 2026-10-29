@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import FileSyncIcon from './FileSyncIcon'
 
 export default class FileSyncUnderway extends Component {
-  static propTypes = {
-    refresh: PropTypes.func.isRequired,
-  }
   render() {
     const { refresh } = this.props
     return (

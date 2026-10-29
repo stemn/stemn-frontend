@@ -1,16 +1,14 @@
-import Moment from 'moment'
+import { dayjs } from 'stemn-shared/utils/date'
 import { keyBy, values } from 'lodash'
-import { extendMoment } from 'moment-range'
-
-const moment = extendMoment(Moment)
 
 export const fillRange = (from, to, keyName) => (data) => {
   const dataObject = keyBy(data, keyName)
 
-  // Create the range
-  const range = moment.range(from, to)
-  const rangeArray = Array.from(range.by('day', { step: 1 })).map((date) => ({
-    [keyName]: date.format('YYYY-MM-DD'),
+  // Create the range: every day from `from` to `to`, inclusive
+  const start = dayjs(from)
+  const days = Math.abs(start.diff(to, 'day'))
+  const rangeArray = Array.from({ length: days + 1 }, (_, day) => ({
+    [keyName]: start.add(day, 'day').format('YYYY-MM-DD'),
   }))
   const rangeObject = keyBy(rangeArray, keyName)
 

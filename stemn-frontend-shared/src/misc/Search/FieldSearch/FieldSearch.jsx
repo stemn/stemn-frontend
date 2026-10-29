@@ -1,16 +1,9 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import classes from './FieldSearch.module.css'
 import Autosuggest from 'stemn-shared/misc/Autosuggest/Autosuggest.container'
 import Highlight from 'stemn-shared/misc/Autosuggest/Highlight'
 
 export default class FieldSearch extends Component {
-  static propTypes = {
-    clickResult: PropTypes.func.isRequired,
-    cacheKey: PropTypes.string.isRequired,
-    showNewFieldModal: PropTypes.func.isRequired,
-  }
-
   renderResult = (suggestion, { query }) => (
     <div className="layout-row layout-align-start-center">
       <Highlight text={suggestion.name} query={query} hightlightClass={classes.highlight} />

@@ -1,5 +1,6 @@
-import i from 'icepick'
+import { produce } from 'immer'
 import { flow, flatMap, map, keyBy } from 'lodash/fp'
+import { mergeDeep, setIn } from 'stemn-shared/redux/draft'
 
 const initialState = {
   lastPipelinesRequest: {
@@ -52,63 +53,79 @@ const extractPipelines = flow(
 const reducer = (state, action) => {
   switch (action.type) {
     case 'PIPELINES/GET_PIPELINES_PENDING':
-      return i
-        .chain(state)
-        .assocIn(['pipelines', action.meta.cacheKey, 'loading'], true)
-        .assocIn(['lastPipelinesRequest'], {
-          cacheKey: action.meta.cacheKey,
-          projectId: action.meta.projectId,
-        })
-        .value()
+      return produce(state, (draft) => {
+        setIn(draft, ['pipelines', action.meta.cacheKey, 'loading'], true)
+        draft.lastPipelinesRequest = { cacheKey: action.meta.cacheKey, projectId: action.meta.projectId }
+      })
     case 'PIPELINES/GET_PIPELINES_REJECTED':
-      return i.assocIn(state, ['pipelines', action.meta.cacheKey, 'loading'], false)
+      return produce(state, (draft) => {
+        setIn(draft, ['pipelines', action.meta.cacheKey, 'loading'], false)
+      })
     case 'PIPELINES/GET_PIPELINES_FULFILLED':
-      return i
-        .chain(state)
-        .assocIn(['pipelines', action.meta.cacheKey, 'loading'], false)
-        .assocIn(
+      return produce(state, (draft) => {
+        setIn(draft, ['pipelines', action.meta.cacheKey, 'loading'], false)
+        setIn(
+          draft,
           ['pipelines', action.meta.cacheKey, 'data'],
           action.payload.data.map((item) => item._id),
         )
-        .updateIn(['pipelineData'], (data) => i.merge(data, extractPipelines(action.payload.data)))
-        .updateIn(['stepData'], (data) => i.merge(data, extractSteps(action.payload.data)))
-        .value()
+        mergeDeep(draft.pipelineData, extractPipelines(action.payload.data))
+        mergeDeep(draft.stepData, extractSteps(action.payload.data))
+      })
 
     case 'PIPELINES/GET_PIPELINE_PENDING':
-      return i.assocIn(state, ['pipelineData', action.meta.cacheKey, 'loading'], true)
+      return produce(state, (draft) => {
+        setIn(draft, ['pipelineData', action.meta.cacheKey, 'loading'], true)
+      })
     case 'PIPELINES/GET_PIPELINE_REJECTED':
-      return i.assocIn(state, ['pipelineData', action.meta.cacheKey, 'loading'], false)
+      return produce(state, (draft) => {
+        setIn(draft, ['pipelineData', action.meta.cacheKey, 'loading'], false)
+      })
     case 'PIPELINES/GET_PIPELINE_FULFILLED':
-      return i
-        .chain(state)
-        .updateIn(['pipelineData'], (data) => i.merge(data, extractPipelines([action.payload.data])))
-        .updateIn(['stepData'], (data) => i.merge(data, extractSteps([action.payload.data])))
-        .value()
+      return produce(state, (draft) => {
+        mergeDeep(draft.pipelineData, extractPipelines([action.payload.data]))
+        mergeDeep(draft.stepData, extractSteps([action.payload.data]))
+      })
 
     case 'PIPELINES/RERUN_PIPELINE_PENDING':
-      return i.assocIn(state, ['pipelineData', action.meta.pipelineId, 'rerunPending'], true)
+      return produce(state, (draft) => {
+        setIn(draft, ['pipelineData', action.meta.pipelineId, 'rerunPending'], true)
+      })
     case 'PIPELINES/RERUN_PIPELINE_REJECTED':
-      return i.assocIn(state, ['pipelineData', action.meta.pipelineId, 'rerunPending'], false)
+      return produce(state, (draft) => {
+        setIn(draft, ['pipelineData', action.meta.pipelineId, 'rerunPending'], false)
+      })
     case 'PPIPELINES/RERUN_PIPELINE_FULFILLED':
-      return i.assocIn(state, ['pipelineData', action.meta.pipelineId, 'rerunPending'], false)
+      return produce(state, (draft) => {
+        setIn(draft, ['pipelineData', action.meta.pipelineId, 'rerunPending'], false)
+      })
 
     case 'PIPELINES/CANCEL_PIPELINE_PENDING':
-      return i.assocIn(state, ['pipelineData', action.meta.pipelineId, 'cancelPending'], true)
+      return produce(state, (draft) => {
+        setIn(draft, ['pipelineData', action.meta.pipelineId, 'cancelPending'], true)
+      })
     case 'PIPELINES/CANCEL_PIPELINE_REJECTED':
-      return i.assocIn(state, ['pipelineData', action.meta.pipelineId, 'cancelPending'], false)
+      return produce(state, (draft) => {
+        setIn(draft, ['pipelineData', action.meta.pipelineId, 'cancelPending'], false)
+      })
     case 'PIPELINES/CANCEL_PIPELINE_FULFILLED':
-      return i.assocIn(state, ['pipelineData', action.meta.pipelineId, 'cancelPending'], false)
+      return produce(state, (draft) => {
+        setIn(draft, ['pipelineData', action.meta.pipelineId, 'cancelPending'], false)
+      })
 
     case 'PIPELINES/GET_STEP_PENDING':
-      return i.assocIn(state, ['stepData', action.meta.cacheKey, 'loading'], true)
+      return produce(state, (draft) => {
+        setIn(draft, ['stepData', action.meta.cacheKey, 'loading'], true)
+      })
     case 'PIPELINES/GET_STEP_REJECTED':
-      return i.assocIn(state, ['stepData', action.meta.cacheKey, 'loading'], false)
+      return produce(state, (draft) => {
+        setIn(draft, ['stepData', action.meta.cacheKey, 'loading'], false)
+      })
     case 'PIPELINES/GET_STEP_FULFILLED':
-      return i
-        .chain(state)
-        .assocIn(['stepData', action.payload.data._id, 'loading'], false)
-        .assocIn(['stepData', action.payload.data._id, 'data'], action.payload.data)
-        .value()
+      return produce(state, (draft) => {
+        setIn(draft, ['stepData', action.payload.data._id, 'loading'], false)
+        setIn(draft, ['stepData', action.payload.data._id, 'data'], action.payload.data)
+      })
 
     default:
       return state

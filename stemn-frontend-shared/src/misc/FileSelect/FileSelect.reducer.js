@@ -1,17 +1,26 @@
-import i from 'icepick'
+import { produce } from 'immer'
+import { setIn } from 'stemn-shared/redux/draft'
 
 const initialState = {}
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case 'FILE_SELECT/INIT':
-      return i.assocIn(state, [action.meta.storeKey, 'path'], action.payload.path)
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.storeKey, 'path'], action.payload.path)
+      })
     case 'FILE_SELECT/SELECT':
-      return i.assocIn(state, [action.meta.storeKey, 'selected'], action.payload.file)
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.storeKey, 'selected'], action.payload.file)
+      })
     case 'FILE_SELECT/DESELECT':
-      return i.assocIn(state, [action.meta.storeKey, 'selected'], {})
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.storeKey, 'selected'], {})
+      })
     case 'FILE_SELECT/CHANGE_PATH':
-      return i.assocIn(state, [action.meta.storeKey, 'path'], action.payload.path)
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.storeKey, 'path'], action.payload.path)
+      })
     default:
       return state
   }

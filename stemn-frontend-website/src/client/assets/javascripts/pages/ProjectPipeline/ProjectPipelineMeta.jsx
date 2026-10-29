@@ -8,7 +8,7 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import { Row, Col } from 'stemn-shared/misc/Layout'
 import UserAvatar from 'stemn-shared/misc/Avatar/UserAvatar/UserAvatar'
 import Link from 'stemn-shared/misc/Router/Link'
-import moment from 'moment'
+import { fromNow } from 'stemn-shared/utils/date'
 import IsOwner from 'stemn-shared/misc/Auth/IsOwner'
 
 const ProjectPipelineMeta = ({ pipeline, project, rerunPipeline, cancelPipeline }) => {
@@ -35,7 +35,7 @@ const ProjectPipelineMeta = ({ pipeline, project, rerunPipeline, cancelPipeline 
           />
           <b className="text-ellipsis">{pipeline.data.owner.name}</b>
         </Link>
-        <div className="text-ellipsis">&nbsp;triggered this pipeline {moment(pipeline.data.start).fromNow()}.</div>
+        <div className="text-ellipsis">&nbsp;triggered this pipeline {fromNow(pipeline.data.start)}.</div>
       </Col>
       <div className="flex" />
       <Col className={cn('sm layout-row', classes.buttonRow)}>

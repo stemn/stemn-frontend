@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'
 import { RouterProvider } from 'react-router/dom'
 import { HelmetProvider } from 'react-helmet-async'
@@ -17,10 +16,5 @@ const Root = ({ store, router }) => (
     </HelmetProvider>
   </Provider>
 )
-
-Root.propTypes = {
-  router: PropTypes.object.isRequired,
-  store: PropTypes.object.isRequired,
-}
 
 export default Root

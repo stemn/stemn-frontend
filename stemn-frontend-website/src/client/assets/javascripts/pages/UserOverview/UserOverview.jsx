@@ -8,7 +8,7 @@ import { ProjectRowContainer } from 'stemn-shared/misc/Projects/ProjectRow'
 import CalendarHeatmap from 'react-calendar-heatmap'
 import Pagination from 'stemn-shared/misc/Pagination'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
-import moment from 'moment'
+import { addMonths, dayjs } from 'stemn-shared/utils/date'
 
 const normaliseValue = (value) => {
   if (value === 0) {
@@ -25,8 +25,9 @@ const normaliseValue = (value) => {
   return 5
 }
 
-const startDate = moment().subtract(0.8, 'year').toDate()
-const endDate = moment().toDate()
+// 0.8 of a year, rounded to whole months
+const startDate = addMonths(dayjs(), -10).toDate()
+const endDate = dayjs().toDate()
 
 export default class UserOverview extends Component {
   getColorClass = (value) => {

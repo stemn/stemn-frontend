@@ -1,5 +1,5 @@
 import { range, takeWhile, last } from 'lodash'
-import moment from 'moment'
+import { dayjs } from 'stemn-shared/utils/date'
 
 export default function createDateObjects(date, weekOffset = 0) {
   const startOfMonth = date.clone().startOf('month')
@@ -13,7 +13,7 @@ export default function createDateObjects(date, weekOffset = 0) {
   }))
 
   const currentMonthDays = range(1, date.daysInMonth() + 1).map((index) => ({
-    day: moment([date.year(), date.month(), index, '16']),
+    day: dayjs(new Date(date.year(), date.month(), index, 16)),
   }))
 
   const daysAdded = prevMonthDays.length + currentMonthDays.length - 1

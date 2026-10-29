@@ -1,4 +1,4 @@
-import i from 'icepick'
+import { produce } from 'immer'
 
 const initialState = {
   data: {
@@ -14,13 +14,20 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'USER_SETTINGS/GET_SETTINGS_PENDING': {
-      return i.assoc(state, 'loading', true)
+      return produce(state, (draft) => {
+        draft.loading = true
+      })
     }
     case 'USER_SETTINGS/GET_SETTINGS_REJECTED': {
-      return i.assoc(state, 'loading', false)
+      return produce(state, (draft) => {
+        draft.loading = false
+      })
     }
     case 'USER_SETTINGS/GET_SETTINGS_FULFILLED': {
-      return i.chain(state).assoc('loading', false).assoc('data', action.payload.data).value()
+      return produce(state, (draft) => {
+        draft.loading = false
+        draft.data = action.payload.data
+      })
     }
     default:
       return state

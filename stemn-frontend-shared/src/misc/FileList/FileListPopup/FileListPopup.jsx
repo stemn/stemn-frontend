@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { orderBy, omit } from 'lodash'
 import cn from 'classnames'
 import classes from './FileListPopup.module.css'
@@ -32,22 +31,19 @@ const FileRow = (props) => {
   )
 }
 
-const propTypesObject = {
-  activeFile: PropTypes.string.isRequired,
-  clickFn: PropTypes.func,
-  path: PropTypes.string.isRequired,
-  provider: PropTypes.string.isRequired,
-  projectId: PropTypes.string.isRequired,
-  link: PropTypes.bool, // Should the items be links
-  // From Popover
-  isOpen: PropTypes.bool,
-  // From Container
-  fileList: PropTypes.object,
-  fileListCacheKey: PropTypes.string,
-  getFiles: PropTypes.func.isRequired,
-}
+const ownPropKeys = [
+  'activeFile',
+  'clickFn',
+  'path',
+  'provider',
+  'projectId',
+  'link',
+  'isOpen',
+  'fileList',
+  'fileListCacheKey',
+  'getFiles',
+]
 export default class FileListPopup extends Component {
-  static propTypes = propTypesObject
   render() {
     const { link, fileList, activeFile, clickFn } = this.props
     const isLoading = !fileList || fileList.loading
@@ -56,7 +52,7 @@ export default class FileListPopup extends Component {
     const foldersOnly = filesOrdered.filter((file) => file.type === 'folder')
 
     return (
-      <div {...omit(this.props, Object.keys(propTypesObject))} className={classes.popup}>
+      <div {...omit(this.props, ownPropKeys)} className={classes.popup}>
         <LoadingOverlay show={isLoading} linear noOverlay />
         {foldersOnly &&
           foldersOnly.map((file) => (

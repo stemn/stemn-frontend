@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import moment from 'moment'
+import { fromNow } from 'stemn-shared/utils/date'
 import cn from 'classnames'
 import classes from './FileRow.module.css'
 import bytes from 'stemn-shared/utils/filters/bytes.js'
@@ -33,15 +32,6 @@ const ClickFile = (props) => {
 }
 
 export default class FileRow extends Component {
-  static propTypes = {
-    singleClick: PropTypes.func,
-    doubleClick: PropTypes.func,
-    file: PropTypes.object.isRequired,
-    query: PropTypes.string,
-    isActive: PropTypes.bool,
-    link: PropTypes.bool,
-    showPath: PropTypes.bool,
-  }
   singleClick = () => {
     const { singleClick, file } = this.props
     if (singleClick) {
@@ -57,7 +47,7 @@ export default class FileRow extends Component {
   render() {
     const { isActive, file, query, link, showPath } = this.props
 
-    const timeFromNow = moment(file.modified).fromNow()
+    const timeFromNow = fromNow(file.modified)
 
     return (
       <div className={cn(classes.row, 'layout-row layout-align-start-center', { [classes.active]: isActive })}>

@@ -1,12 +1,6 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 export default class AccordianAnimate extends Component {
-  static propTypes = {
-    itemHeight: PropTypes.number.isRequired,
-    duration: PropTypes.number.isRequired,
-    items: PropTypes.node,
-  }
   render() {
     const { itemHeight, items, children, style, duration, ...otherProps } = this.props
     const childItems = items || children

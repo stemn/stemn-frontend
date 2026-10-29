@@ -1,4 +1,5 @@
-import i from 'icepick'
+import { produce } from 'immer'
+import { mergeDeep } from 'stemn-shared/redux/draft'
 
 const initialState = {
   currentVersion: null,
@@ -14,48 +15,52 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case 'AUTO_UPDATE/CURRENT_VERSION': {
-      return i.assoc(state, 'currentVersion', action.payload.version)
+      return produce(state, (draft) => {
+        draft.currentVersion = action.payload.version
+      })
     }
     case 'AUTO_UPDATE/CHECK_FOR_UPDATES': {
-      return i.merge(state, {
-        checkingForUpdate: true,
-        updateAvailable: false,
-        updateDownloaded: false,
-        release: {},
-        updateError: false,
-        updateNotAvailable: false,
+      return produce(state, (draft) => {
+        mergeDeep(draft, {
+          checkingForUpdate: true,
+          updateAvailable: false,
+          updateDownloaded: false,
+          release: {},
+          updateError: false,
+          updateNotAvailable: false,
+        })
       })
     }
     case 'AUTO_UPDATE/UPDATE_AVAILABLE': {
-      return i.merge(state, {
-        updateAvailable: true,
-        checkingForUpdate: false,
+      return produce(state, (draft) => {
+        mergeDeep(draft, {
+          updateAvailable: true,
+          checkingForUpdate: false,
+        })
       })
     }
     case 'AUTO_UPDATE/UPDATE_DOWNLOADED': {
       const { update, version, platform, readme } = action.payload
-      return i
-        .chain(state)
-        .assoc('updateDownloaded', true)
-        .assoc('release', {
-          update,
-          version,
-          platform,
-          readme,
-        })
-        .value()
+      return produce(state, (draft) => {
+        draft.updateDownloaded = true
+        draft.release = { update, version, platform, readme }
+      })
     }
     case 'AUTO_UPDATE/UPDATE_ERROR': {
       console.log('error:', action.payload)
-      return i.merge(state, {
-        updateError: action.payload,
-        checkingForUpdate: false,
+      return produce(state, (draft) => {
+        mergeDeep(draft, {
+          updateError: action.payload,
+          checkingForUpdate: false,
+        })
       })
     }
     case 'AUTO_UPDATE/UPDATE_NOT_AVAILABLE': {
-      return i.merge(state, {
-        updateNotAvailable: true,
-        checkingForUpdate: false,
+      return produce(state, (draft) => {
+        mergeDeep(draft, {
+          updateNotAvailable: true,
+          checkingForUpdate: false,
+        })
       })
     }
     default:

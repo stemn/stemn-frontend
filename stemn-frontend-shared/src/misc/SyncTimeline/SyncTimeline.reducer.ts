@@ -1,5 +1,7 @@
-import * as i from 'icepick'
+import { produce } from 'immer'
+import { get } from 'lodash'
 import { AnyAction } from 'redux'
+import { setIn } from 'stemn-shared/redux/draft'
 
 export interface ISyncTimelineState {
   [cacheKey: string]: {
@@ -14,29 +16,39 @@ const initialState: ISyncTimelineState = {}
 export const syncTimelineReducer = (state: ISyncTimelineState = initialState, action: AnyAction) => {
   switch (action.type) {
     case 'TIMELINE/SELECT_ITEM':
-      return i.assocIn(state, [action.meta.cacheKey, 'selected'], action.payload.selected)
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.cacheKey, 'selected'], action.payload.selected)
+      })
     case 'TIMELINE/DESELECT_ITEM':
-      return i.assocIn(state, [action.meta.cacheKey, 'selected'], {})
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.cacheKey, 'selected'], {})
+      })
 
     case 'TIMELINE/FETCH_TIMELINE_PENDING':
-      return i.assocIn(state, [action.meta.cacheKey, 'loading'], true)
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.cacheKey, 'loading'], true)
+      })
     case 'TIMELINE/FETCH_TIMELINE_REJECTED':
-      return i.assocIn(state, [action.meta.cacheKey, 'loading'], false)
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.cacheKey, 'loading'], false)
+      })
     case 'TIMELINE/FETCH_TIMELINE_FULFILLED':
-      return i
-        .chain(state)
-        .assocIn([action.meta.cacheKey, 'data'], action.payload.data)
-        .assocIn([action.meta.cacheKey, 'loading'], false)
-        .value()
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.cacheKey, 'data'], action.payload.data)
+        setIn(draft, [action.meta.cacheKey, 'loading'], false)
+      })
 
-    case 'TIMELINE/ADD_EVENT':
-      return i.updateIn(state, [action.payload.cacheKey, 'data'], (events: any[]) =>
-        i.push(events || [], action.payload.event),
-      )
+    case 'TIMELINE/ADD_EVENT': {
+      const events: any[] = get(state, [action.payload.cacheKey, 'data']) || []
+      return produce(state, (draft) => {
+        setIn(draft, [action.payload.cacheKey, 'data'], [...events, action.payload.event])
+      })
+    }
     case 'TIMELINE/DELETE_EVENT':
-      return i.updateIn(state, [action.payload.cacheKey, 'data'], (events: any[]) => {
+      return produce(state, (draft) => {
+        const events: any[] = get(draft, [action.payload.cacheKey, 'data'])
         const eventIndex = events.findIndex((event) => event._id === action.payload.eventId)
-        return eventIndex !== -1 ? i.splice(events, eventIndex, 1) : events
+        if (eventIndex !== -1) events.splice(eventIndex, 1)
       })
 
     default:

@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
@@ -13,14 +12,6 @@ import { MdFolder, MdCreateNewFolder as MdNewFolder } from 'react-icons/md'
 import { SimpleIconButton } from 'stemn-shared/misc/Buttons/SimpleIconButton'
 import { isDriveFileId, isDropboxFileId } from 'stemn-shared/misc/Files/utils'
 import TextDisplayBox from 'stemn-shared/misc/TextDisplayBox/TextDisplayBox.jsx'
-
-const propTypesObject = {
-  projectId: PropTypes.string,
-  provider: PropTypes.string.isRequired, // 'dropbox' || 'drive' - The provider
-  model: PropTypes.string.isRequired, // The model to assign the selected file
-  value: PropTypes.object.isRequired, // The value of the selected file: { path, fileId }
-  disabled: PropTypes.bool, // Should we disable the input
-}
 
 class FileSelectInput extends React.Component {
   showModal = () => {
@@ -112,7 +103,5 @@ function mapDispatchToProps(dispatch) {
     storeChange: bindActionCreators(storeChange, dispatch),
   }
 }
-
-FileSelectInput.propTypes = propTypesObject
 
 export default connect(mapStateToProps, mapDispatchToProps)(FileSelectInput)

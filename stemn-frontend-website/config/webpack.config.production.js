@@ -23,7 +23,7 @@ module.exports = merge(base({ mode: 'production', styleLoader: MiniCssExtractPlu
       chunks: 'all',
       cacheGroups: {
         vendor: {
-          test: /[\\/]node_modules[\\/](react|react-dom|scheduler|react-redux|redux|react-router|axios|icepick|moment|lodash|react-helmet-async|redux-persist|redux-logger)[\\/]/,
+          test: /[\\/]node_modules[\\/](react|react-dom|scheduler|react-redux|redux|react-router|axios|immer|dayjs|lodash|react-helmet-async|redux-persist|redux-logger)[\\/]/,
           name: 'vendor',
           chunks: 'all',
           priority: 20,

@@ -1,4 +1,5 @@
-import i from 'icepick'
+import { produce } from 'immer'
+import { setIn } from 'stemn-shared/redux/draft'
 
 const initialState = {
   rooms: {},
@@ -7,14 +8,18 @@ const initialState = {
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case 'WEBSOCKET/JOIN_ROOM': {
-      return i.assocIn(state, ['rooms', action.meta.roomKey], {
-        room: action.meta.room,
-        type: action.meta.type,
-        status: true,
+      return produce(state, (draft) => {
+        setIn(draft, ['rooms', action.meta.roomKey], {
+          room: action.meta.room,
+          type: action.meta.type,
+          status: true,
+        })
       })
     }
     case 'WEBSOCKET/LEAVE_ROOM': {
-      return i.assocIn(state, ['rooms', action.meta.roomKey, 'status'], false)
+      return produce(state, (draft) => {
+        setIn(draft, ['rooms', action.meta.roomKey, 'status'], false)
+      })
     }
     default: {
       return state

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 import { licenseData } from 'stemn-shared/misc/Licenses/Licenses.data'
 
@@ -9,10 +8,6 @@ const options = licenseData.map((item) => ({
 }))
 
 export default class LicenseSettings extends Component {
-  static propTypes = {
-    model: PropTypes.string.isRequired,
-    value: PropTypes.string,
-  }
   render() {
     const { model, value } = this.props
     const licenseInfo = licenseData.find((license) => license.type === value)

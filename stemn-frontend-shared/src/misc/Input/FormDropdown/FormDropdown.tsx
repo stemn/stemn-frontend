@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { WrappedFieldProps } from 'redux-form'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
+import { IFieldProps } from '../FormField'
 
-export interface IFormDropdownProps extends WrappedFieldProps {
+export interface IFormDropdownProps extends IFieldProps {
   className?: string
   style?: object
   placeholder?: string

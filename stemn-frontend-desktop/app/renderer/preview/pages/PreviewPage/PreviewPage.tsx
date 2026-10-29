@@ -1,6 +1,6 @@
 import cn from 'classnames'
 import { get } from 'lodash'
-import moment from 'moment'
+import { fromNow } from 'stemn-shared/utils/date'
 import * as React from 'react'
 import { push as pushRouteType } from 'stemn-shared/routing'
 import DragResize from 'stemn-shared/misc/DragResize/DragResize'
@@ -147,7 +147,7 @@ export class PreviewPage extends React.Component<IPreviewPageProps> {
                     </tr>
                     <tr>
                       <td>Last modified</td>
-                      <td>{moment(file.data.modified).fromNow()}</td>
+                      <td>{fromNow(file.data.modified)}</td>
                     </tr>
                     {revisions.length > 0 && (
                       <tr>

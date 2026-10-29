@@ -1,13 +1,8 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import Input from 'stemn-shared/misc/Input/Input/Input'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 
 export default class UserPasswordSettings extends Component {
-  static propTypes = {
-    auth: PropTypes.object.isRequired,
-    passwordUpdate: PropTypes.func.isRequired,
-  }
   submit = () => {
     const { passwordUpdate, auth } = this.props
     passwordUpdate({

@@ -1,7 +1,6 @@
 import http from 'axios'
 import { oauthCreds } from '../Auth.config.js'
-import loadUserData from './loadUserData'
-import { getSettings } from 'stemn-shared/misc/UserSettings/UserSettings.actions.js'
+import loadSession from './loadSession'
 
 export default ({ provider, code }) =>
   (dispatch) => {
@@ -17,7 +16,7 @@ export default ({ provider, code }) =>
           },
         }),
       }).then(({ value }) => {
-        setTimeout(() => Promise.all([dispatch(loadUserData()), dispatch(getSettings())]), 1)
+        dispatch(loadSession())
       })
     }
   }

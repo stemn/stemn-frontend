@@ -1,18 +1,10 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import cn from 'classnames'
 import { get } from 'lodash'
 
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 
 export default class ThreadFilterUser extends Component {
-  static propTypes = {
-    filter: PropTypes.object.isRequired,
-    filterModel: PropTypes.object.isRequired,
-    filterCacheKey: PropTypes.string.isRequired,
-    setFilter: PropTypes.func.isRequired,
-    project: PropTypes.object.isRequired,
-  }
   setFilter = (filterObject) => {
     const { setFilter, filterCacheKey, filter, filterModel } = this.props
     setFilter({

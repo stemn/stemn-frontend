@@ -7,7 +7,6 @@ section in the store.
 ************************************************* */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { storeLoad } from 'stemn-shared/misc/Store/Store.actions'
 
@@ -18,11 +17,6 @@ const dispatchToProps = {
 }
 
 class Form extends Component {
-  static propTypes = {
-    load: PropTypes.func.isRequired,
-    model: PropTypes.string.isRequired,
-    value: PropTypes.any.isRequired,
-  }
   UNSAFE_componentWillMount() {
     this.props.load(this.props.model, this.props.value)
   }

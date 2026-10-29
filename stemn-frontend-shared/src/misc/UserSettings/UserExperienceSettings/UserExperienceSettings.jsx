@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { storePush, storeRemove } from 'stemn-shared/misc/Store/Store.actions'
 import { range } from 'lodash'
@@ -17,13 +16,6 @@ import FlipMove from 'stemn-shared/misc/FlipMove'
 import getUuid from 'stemn-shared/utils/getUuid.js'
 
 class UserExperienceSettings extends Component {
-  static propTypes = {
-    dataModel: PropTypes.string,
-    data: PropTypes.array,
-    type: PropTypes.oneOf(['education', 'experience']),
-    dispatch: PropTypes.func.isRequired,
-  }
-
   constructor(props) {
     super(props)
     this.dateRange = range(1940, 2025).map((year) => ({

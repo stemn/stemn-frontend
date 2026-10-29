@@ -1,6 +1,5 @@
 // Component Core
 import React from 'react'
-import PropTypes from 'prop-types'
 
 // Styles
 import cn from 'classnames'
@@ -14,20 +13,6 @@ import MoreButton from './MoreButton/MoreButton.jsx'
 import TimelineInner from './TimelineInner/TimelineInner.jsx'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
-
-const propTypesObject = {
-  items: PropTypes.array.isRequired,
-
-  selected: PropTypes.string,
-  isSelected: PropTypes.func, // function of the form (item) => return true||false
-
-  onSelect: PropTypes.func,
-  preferPlace: PropTypes.string,
-  size: PropTypes.string, // 'sm'
-
-  style: PropTypes.object,
-  className: PropTypes.string,
-}
 
 class Component extends React.Component {
   state = {
@@ -104,7 +89,5 @@ class Component extends React.Component {
     )
   }
 }
-
-Component.propTypes = propTypesObject
 
 export default Component

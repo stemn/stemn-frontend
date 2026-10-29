@@ -1,3 +1,4 @@
+import { setAutoFreeze } from 'immer'
 import { legacy_createStore as createStore, applyMiddleware, compose } from 'redux'
 import { thunk } from 'redux-thunk'
 import promise from 'redux-promise-middleware'
@@ -15,6 +16,9 @@ import persistConfig from '../state/persistConfig'
 import rootReducer from '../reducer'
 
 const isDev = process.env.NODE_ENV !== 'production'
+
+// Reducers use immer: freeze the state in development only (matching the previous immutability library)
+setAutoFreeze(isDev)
 // The redux logger runs in development, and in production with the ?debug search param
 const debug = isDev || new URLSearchParams(window.location.search).has('debug')
 

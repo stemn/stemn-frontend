@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import classes from './NewFieldModal.module.css'
 import cn from 'classnames'
 import Form from 'stemn-shared/misc/Forms/Form'
@@ -7,16 +6,6 @@ import Textarea from 'stemn-shared/misc/Input/Textarea/Textarea'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 
 export default class NewFieldModal extends Component {
-  static propTypes = {
-    name: PropTypes.string.isRequired, // The initial field name
-    blurb: PropTypes.string, // The initial field blurb
-
-    // From the container
-    createField: PropTypes.func.isRequired, // The create field function
-    newFieldForm: PropTypes.object.isRequired, // The new field form object
-    newFieldFormPending: PropTypes.bool.isRequired, // Is the form being submitted
-    newFieldFormModel: PropTypes.string.isRequired, // The model
-  }
   create = () => {
     this.props
       .createField({

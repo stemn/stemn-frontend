@@ -1,4 +1,3 @@
-import { FormState, reducer as formReducer } from 'redux-form'
 import autoLaunch from 'stemn-shared/desktop/AutoLaunch/AutoLaunch.reducer.js'
 import autoUpdate from 'stemn-shared/desktop/AutoUpdate/AutoUpdate.reducer.js'
 import localPath from 'stemn-shared/desktop/LocalPath/LocalPath.reducer.js'
@@ -34,7 +33,6 @@ import walkthrough from 'stemn-shared/misc/Walkthrough/Walkthrough.reducer.js'
 import websocket from 'stemn-shared/misc/Websocket/Websocket.reducer.js'
 
 export interface IStoreState {
-  form: FormState
   fileList: IFileListState
   fileCompare: IFileCompareState
   files: IFilesState
@@ -77,5 +75,4 @@ export default {
   userSettings,
   walkthrough,
   websocket,
-  form: formReducer,
 }

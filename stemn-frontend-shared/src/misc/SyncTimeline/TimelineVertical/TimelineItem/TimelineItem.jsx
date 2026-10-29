@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import moment from 'moment'
+import { fromNow } from 'stemn-shared/utils/date'
 
 import classes from './TimelineItem.module.scss'
 
@@ -14,12 +13,6 @@ import TimelineItemText from './TimelineItemText'
 const groupLimit = 4
 
 export default class TimelineItem extends Component {
-  static propTypes = {
-    type: PropTypes.oneOf(['feed', 'user', 'file', 'thread', 'project']),
-    item: PropTypes.object,
-    isFirst: PropTypes.bool,
-    isLast: PropTypes.bool,
-  }
   state = {
     expanded: false,
   }
@@ -59,7 +52,7 @@ export default class TimelineItem extends Component {
               </Link>
             )}
             <span className={classes.item}>
-              <TimelineItemText item={item} type={type} entity={entity} /> - {moment(item.timestamp).fromNow()}
+              <TimelineItemText item={item} type={type} entity={entity} /> - {fromNow(item.timestamp)}
             </span>
           </div>
           {isFirst && <div className={classes.startMarker} />}

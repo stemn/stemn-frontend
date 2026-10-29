@@ -1,5 +1,6 @@
-import i from 'icepick'
-import { cloneDeep, has } from 'lodash'
+import { produce } from 'immer'
+import { cloneDeep, get, has } from 'lodash'
+import { mergeDeep, setIn } from 'stemn-shared/redux/draft'
 
 const initialState = {
   data: {},
@@ -24,70 +25,87 @@ const initialState = {
 const mainReducer = (state, action) => {
   switch (action.type) {
     case 'THREADS/NEW_TASK_FULFILLED':
-      return i
-        .chain(state)
-        .assocIn(['data', action.payload.data._id, 'data'], action.payload.data) // Add to data
-        .assocIn(['boards', action.payload.data.board, 'newThreadString', action.payload.data.group], '') // Clear string
-        .updateIn(['boards', action.payload.data.board, 'data', 'groups'], (groups) => {
-          // Add to groups.threads array
-          const groupIndex = groups.findIndex((group) => group._id === action.payload.data.group)
-          return i.updateIn(groups, [groupIndex, 'threads'], (threads) => i.push(threads, action.payload.data._id))
-        })
-        .value()
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.payload.data._id, 'data'], action.payload.data) // Add to data
+        setIn(draft, ['boards', action.payload.data.board, 'newThreadString', action.payload.data.group], '') // Clear string
+        // Add to groups.threads array
+        const groups = get(draft, ['boards', action.payload.data.board, 'data', 'groups'])
+        const groupIndex = groups.findIndex((group) => group._id === action.payload.data.group)
+        groups[groupIndex].threads.push(action.payload.data._id)
+      })
 
     case 'THREADS/GET_BOARDS_PENDING':
-      return i.assocIn(state, ['projects', action.meta.cacheKey, 'loading'], true)
+      return produce(state, (draft) => {
+        setIn(draft, ['projects', action.meta.cacheKey, 'loading'], true)
+      })
     case 'THREADS/GET_BOARDS_REJECTED':
-      return i.assocIn(state, ['projects', action.meta.cacheKey, 'loading'], false)
+      return produce(state, (draft) => {
+        setIn(draft, ['projects', action.meta.cacheKey, 'loading'], false)
+      })
     case 'THREADS/GET_BOARDS_FULFILLED':
       if (has(action, 'payload.data[0]._id')) {
-        return i.merge(state, {
-          projects: {
-            [action.meta.cacheKey]: {
-              boards: [action.payload.data[0]._id],
-              loading: false,
+        // Deep merge: an already loaded board keeps the keys the response does not contain
+        return produce(state, (draft) => {
+          mergeDeep(draft, {
+            projects: {
+              [action.meta.cacheKey]: {
+                boards: [action.payload.data[0]._id],
+                loading: false,
+              },
             },
-          },
-          boards: {
-            [action.payload.data[0]._id]: {
-              data: action.payload.data[0],
+            boards: {
+              [action.payload.data[0]._id]: {
+                data: action.payload.data[0],
+              },
             },
-          },
+          })
         })
       }
-      return i.assocIn(state, ['projects', action.meta.cacheKey], {
-        boards: [],
-        loading: false,
+      return produce(state, (draft) => {
+        setIn(draft, ['projects', action.meta.cacheKey], {
+          boards: [],
+          loading: false,
+        })
       })
 
     case 'THREADS/GET_BOARD_PENDING':
-      return i.assocIn(state, ['boards', action.meta.cacheKey, 'loading'], true)
+      return produce(state, (draft) => {
+        setIn(draft, ['boards', action.meta.cacheKey, 'loading'], true)
+      })
     case 'THREADS/GET_BOARD_REJECTED':
-      return i.assocIn(state, ['boards', action.meta.cacheKey, 'loading'], false)
+      return produce(state, (draft) => {
+        setIn(draft, ['boards', action.meta.cacheKey, 'loading'], false)
+      })
     case 'THREADS/GET_BOARD_FULFILLED':
-      return i
-        .chain(state)
-        .assocIn(['boards', action.meta.cacheKey, 'loading'], true)
-        .assocIn(['boards', action.meta.cacheKey, 'data'], action.payload.data)
-        .value()
+      return produce(state, (draft) => {
+        setIn(draft, ['boards', action.meta.cacheKey, 'loading'], true)
+        setIn(draft, ['boards', action.meta.cacheKey, 'data'], action.payload.data)
+      })
 
     case 'THREADS/GET_GROUP_FULFILLED':
-      return i.updateIn(state, ['boards', action.meta.boardId, 'data', 'groups'], (groups) => {
+      return produce(state, (draft) => {
+        const groups = get(draft, ['boards', action.meta.boardId, 'data', 'groups'])
         const groupsIndex = groups.findIndex((group) => group._id === action.payload.data._id)
-        return i.assoc(groups, groupsIndex, action.payload.data)
+        groups[groupsIndex] = action.payload.data
       })
 
     case 'THREADS/GET_TASK_PENDING':
-      return i.assocIn(state, ['data', action.meta.cacheKey, 'loading'], true)
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.meta.cacheKey, 'loading'], true)
+      })
     case 'THREADS/GET_TASK_REJECTED':
-      return i.assocIn(state, ['data', action.meta.cacheKey], {
-        error: action.payload.data.error,
-        loading: false,
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.meta.cacheKey], {
+          error: action.payload.data.error,
+          loading: false,
+        })
       })
     case 'THREADS/GET_TASK_FULFILLED':
-      return i.assocIn(state, ['data', action.meta.cacheKey], {
-        data: action.payload.data,
-        loading: false,
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.meta.cacheKey], {
+          data: action.payload.data,
+          loading: false,
+        })
       })
 
     //    case 'THREADS/GET_EVENTS_PENDING':
@@ -110,81 +128,89 @@ const mainReducer = (state, action) => {
     //      })
 
     case 'THREADS/UPDATE_BOARD_PENDING':
-      return i.assocIn(state, ['boards', action.meta.cacheKey, 'savePending'], true)
+      return produce(state, (draft) => {
+        setIn(draft, ['boards', action.meta.cacheKey, 'savePending'], true)
+      })
     case 'THREADS/UPDATE_BOARD_REJECTED':
-      return i.assocIn(state, ['boards', action.meta.cacheKey, 'savePending'], false)
+      return produce(state, (draft) => {
+        setIn(draft, ['boards', action.meta.cacheKey, 'savePending'], false)
+      })
     case 'THREADS/UPDATE_BOARD_FULFILLED':
-      return i
-        .chain(state)
-        .assocIn(['boards', action.meta.cacheKey, 'savePending'], false)
-        .assocIn(['boards', action.meta.cacheKey, 'data'], action.payload.data)
-        .value()
+      return produce(state, (draft) => {
+        setIn(draft, ['boards', action.meta.cacheKey, 'savePending'], false)
+        setIn(draft, ['boards', action.meta.cacheKey, 'data'], action.payload.data)
+      })
 
     case 'THREADS/NEW_GROUP_FULFILLED':
-      return (
-        i
-          .chain(state)
-          // Reset the newGroupString to empty
-          .assocIn(['boards', action.meta.boardId, 'newGroupString'], '')
-          // Push the new group onto the groups array
-          .updateIn(['boards', action.meta.boardId, 'data', 'groups'], (groups) => i.push(groups, action.payload.data))
-          .value()
-      )
+      return produce(state, (draft) => {
+        // Reset the newGroupString to empty
+        setIn(draft, ['boards', action.meta.boardId, 'newGroupString'], '')
+        // Push the new group onto the groups array
+        get(draft, ['boards', action.meta.boardId, 'data', 'groups']).push(action.payload.data)
+      })
 
     case 'THREADS/DELETE_GROUP_FULFILLED':
-      return i.updateIn(state, ['boards', action.meta.boardId, 'data', 'groups'], (groups) => {
+      return produce(state, (draft) => {
+        const groups = get(draft, ['boards', action.meta.boardId, 'data', 'groups'])
         const groupIndex = groups.findIndex((group) => group._id === action.meta.groupId) // Find the index of the group
-        return i.splice(groups, groupIndex, 1) // Delete the group from the groups array
+        groups.splice(groupIndex, 1) // Delete the group from the groups array
       })
 
     case 'THREADS/DELETE_TASK_FULFILLED':
-      return i
-        .chain(state)
-        .assocIn(['data', action.meta.threadId], undefined)
-        .updateIn(['boards', action.meta.boardId, 'data', 'groups'], (groups) => {
-          const location = getLocationIndex(groups, action.meta.threadId)
-          return i.updateIn(groups, [location.groupIndex, 'threads'], (threads) =>
-            i.splice(threads, location.threadIndex, 1),
-          )
-        })
-        .value()
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.meta.threadId], undefined)
+        const groups = get(draft, ['boards', action.meta.boardId, 'data', 'groups'])
+        const location = getLocationIndex(groups, action.meta.threadId)
+        groups[location.groupIndex].threads.splice(location.threadIndex, 1)
+      })
 
     case 'THREADS/MOVE_TASK':
-      return i
-        .chain(state)
-        .assocIn(['data', action.payload.thread, 'data', 'group'], action.payload.destinationGroup) // Update the group property
-        .updateIn(['boards', action.payload.boardId, 'data', 'groups'], (groups) => {
-          // Move the thread in the groups array
-          const from = getLocationIndex(groups, action.payload.thread)
-          const to = action.payload.destinationThread
-            ? getLocationIndex(groups, action.payload.destinationThread)
-            : { groupIndex: getGroupIndex(groups, action.payload.destinationGroup), threadIndex: 0 }
-          return moveThread({
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.payload.thread, 'data', 'group'], action.payload.destinationGroup) // Update the group property
+        // Move the thread in the groups array
+        const groupsPath = ['boards', action.payload.boardId, 'data', 'groups']
+        const groups = get(state, groupsPath)
+        const from = getLocationIndex(groups, action.payload.thread)
+        const to = action.payload.destinationThread
+          ? getLocationIndex(groups, action.payload.destinationThread)
+          : { groupIndex: getGroupIndex(groups, action.payload.destinationGroup), threadIndex: 0 }
+        setIn(
+          draft,
+          groupsPath,
+          moveThread({
             groups,
             lastX: from.groupIndex,
             nextX: to.groupIndex,
             lastY: from.threadIndex,
             nextY: to.threadIndex,
-          })
-        })
-        .value()
+          }),
+        )
+      })
     case 'THREADS/MOVE_TASK_FULFILLED':
       return state
 
     case 'THREADS/MOVE_GROUP':
-      return i.updateIn(state, ['boards', action.payload.boardId, 'data', 'groups'], (groups) => {
+      return produce(state, (draft) => {
+        const groupsPath = ['boards', action.payload.boardId, 'data', 'groups']
+        const groups = get(state, groupsPath)
         const groupFrom = groups.findIndex((group) => group._id === action.payload.group)
         const groupTo = groups.findIndex((group) => group._id === action.payload.destinationGroup)
-        return moveGroup(groups, groupFrom, groupTo)
+        setIn(draft, groupsPath, moveGroup(groups, groupFrom, groupTo))
       })
 
     case 'THREADS/BEGIN_DRAG':
-      return i.assocIn(state, ['data', action.payload.threadId, 'isDragging'], true)
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.payload.threadId, 'isDragging'], true)
+      })
     case 'THREADS/END_DRAG':
-      return i.assocIn(state, ['data', action.payload.threadId, 'isDragging'], false)
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.payload.threadId, 'isDragging'], false)
+      })
 
     case 'THREADS/CHANGE_LAYOUT':
-      return i.assocIn(state, ['boards', action.payload.boardId, 'layout'], action.payload.layout)
+      return produce(state, (draft) => {
+        setIn(draft, ['boards', action.payload.boardId, 'layout'], action.payload.layout)
+      })
 
     default:
       return state

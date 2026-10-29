@@ -3,12 +3,12 @@ import HistoryGraph from './HistoryGraph'
 import { getHistory } from '../History.actions.js'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { fillRange } from '../History.utils.js'
-import moment from 'moment'
+import { dayjs } from 'stemn-shared/utils/date'
 import { get } from 'lodash'
 
 const stateToProps = ({ history }, { entityType, entityId, parentType, parentId, type }) => {
   const historyCacheKey = `${entityType}-${entityId}-${parentType}-${parentId}-${type}`
-  const to = moment()
+  const to = dayjs()
   const from = to.clone().subtract(20, 'days')
   const data = get(history, [historyCacheKey, 'data'], [])
 

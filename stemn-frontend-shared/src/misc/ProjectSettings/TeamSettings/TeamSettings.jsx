@@ -1,18 +1,10 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressButton'
 import TeamMember from 'stemn-shared/misc/Project/TeamMember/TeamMember.jsx'
 import UserSearch from 'stemn-shared/misc/Search/UserSearch'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 
 export default class TeamSettings extends Component {
-  static propTypes = {
-    changeUserPermissions: PropTypes.func.isRequired,
-    project: PropTypes.object.isRequired,
-    addTeamMember: PropTypes.func.isRequired,
-    removeTeamMember: PropTypes.func.isRequired,
-    saveProject: PropTypes.func.isRequired,
-  }
   select = (selection) => {
     if (!this.props.project.data.team.find((item) => item._id === selection._id)) {
       this.props.addTeamMember({

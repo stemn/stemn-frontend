@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import Button from 'stemn-shared/misc/Buttons/Button/Button'
 import classes from './DownloadButton.module.css'
 
@@ -30,12 +29,6 @@ const determinePlatform = () => {
 }
 
 export default class DownloadButton extends Component {
-  static propTypes = {
-    platform: PropTypes.oneOf(['windows', 'mac', 'linux', 'auto']).isRequired,
-    latest: PropTypes.object.isRequired,
-    size: PropTypes.number,
-  }
-
   static defaultProps = {
     size: 20,
     platform: 'auto',

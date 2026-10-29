@@ -1,5 +1,4 @@
-import loadUserData from './loadUserData'
-import { getSettings } from 'stemn-shared/misc/UserSettings/UserSettings.actions.js'
+import loadSession from './loadSession'
 import http from 'axios'
 
 export default ({ email, password }) =>
@@ -15,6 +14,6 @@ export default ({ email, password }) =>
         },
       }),
     }).then(({ value }) => {
-      setTimeout(() => Promise.all([dispatch(loadUserData()), dispatch(getSettings())]), 1)
+      dispatch(loadSession())
     })
   }

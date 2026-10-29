@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import cn from 'classnames'
 import classes from './ProjectOverview.module.css'
 import { projectRoute, fileRoute, projectFolderRoute } from 'route-actions'
-import moment from 'moment'
+import { fromNow } from 'stemn-shared/utils/date'
 import { has, get } from 'lodash'
 import FileList from 'stemn-shared/misc/FileList'
 import Readme from 'stemn-shared/misc/Files/Readme/Readme.jsx'
@@ -60,7 +60,7 @@ export default class ProjectOverview extends Component {
             </div>
             <div className="flex layout-row layout-align-start-center">
               <MdAccessTime />
-              Updated {moment(project.data.updated).fromNow()}
+              Updated {fromNow(project.data.updated)}
             </div>
             {has(project, 'data.location[0].name') ? (
               <div className="flex layout-row layout-align-start-center">

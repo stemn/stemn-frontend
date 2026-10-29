@@ -1,4 +1,5 @@
-import i from 'icepick'
+import { produce } from 'immer'
+import { mergeDeep, setIn } from 'stemn-shared/redux/draft'
 
 const initialState = {
   installed: false,
@@ -17,13 +18,19 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case 'SYSTEM/GET_PROVIDER_PATH_FULFILLED': {
-      return i.assocIn(state, ['providerPath', action.meta.provider], action.payload)
+      return produce(state, (draft) => {
+        setIn(draft, ['providerPath', action.meta.provider], action.payload)
+      })
     }
     case 'SYSTEM/GET_INSTALL_STATUS_FULFILLED': {
-      return i.assoc(state, 'installed', action.payload)
+      return produce(state, (draft) => {
+        draft.installed = action.payload
+      })
     }
     case 'SYSTEM/GET_INSTALL_STATUS_REJECTED': {
-      return i.assoc(state, 'installed', action.payload)
+      return produce(state, (draft) => {
+        draft.installed = action.payload
+      })
     }
     default:
       return state
@@ -32,7 +39,11 @@ function reducer(state, action) {
 
 export default function (state = initialState, action) {
   if (!state.hydrated) {
-    state = i.chain(initialState).merge(state).assoc('hydrated', true).value()
+    const persistedState = state
+    state = produce(initialState, (draft) => {
+      mergeDeep(draft, persistedState)
+      draft.hydrated = true
+    })
   }
   return reducer(state, action)
 }

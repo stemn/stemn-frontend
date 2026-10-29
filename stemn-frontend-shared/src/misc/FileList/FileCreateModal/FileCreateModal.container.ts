@@ -1,7 +1,5 @@
 import { connect } from 'react-redux'
 import { push } from 'stemn-shared/routing'
-import { compose } from 'redux'
-import { reduxForm } from 'redux-form'
 import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry'
 import { uploadFile } from '../../Files/actions/uploadFile'
 import { FileCreateModalComponent } from './FileCreateModal'
@@ -15,14 +13,6 @@ export const dispatchToProps = {
 
 export const modalName = 'FILE_CREATE'
 
-const ModalComponent = compose(
-  reduxForm({
-    form: 'fileCreate',
-    initialValues: {
-      fileType: 'pipeline',
-    },
-  }),
-  connect(stateToProps, dispatchToProps),
-)(FileCreateModalComponent)
+const ModalComponent = connect(stateToProps, dispatchToProps)(FileCreateModalComponent)
 
 registerModal(modalName, ModalComponent)

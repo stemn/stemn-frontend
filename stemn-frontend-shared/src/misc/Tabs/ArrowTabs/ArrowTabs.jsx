@@ -1,6 +1,5 @@
 // Component Core
 import React from 'react'
-import PropTypes from 'prop-types'
 import { omit } from 'lodash'
 
 // Styles
@@ -9,25 +8,13 @@ import classes from './ArrowTabs.module.css'
 import { MdChevronRight as MdChrevronRight } from 'react-icons/md'
 import Link from 'stemn-shared/misc/Router/Link'
 
-const arrowTabsPropTypes = {
-  children: PropTypes.node.isRequired, // Child element
-  className: PropTypes.string, // Classes
-}
-const arrowTabPropTypes = {
-  children: PropTypes.node.isRequired, // Child element
-  isActive: PropTypes.bool, // Is the tab active?
-  arrow: PropTypes.bool, // Should we show the arrow?
-  name: PropTypes.string, // Link path name
-  params: PropTypes.object, // Link params
-}
+const arrowTabsOwnPropKeys = ['children', 'className']
 
 export class ArrowTabs extends React.Component {
-  static propTypes = arrowTabsPropTypes
-
   render() {
     const { children, className } = this.props
     return (
-      <div {...omit(this.props, Object.keys(arrowTabsPropTypes))} className={cn(classes.tabs, className)}>
+      <div {...omit(this.props, arrowTabsOwnPropKeys)} className={cn(classes.tabs, className)}>
         {children}
       </div>
     )
@@ -35,8 +22,6 @@ export class ArrowTabs extends React.Component {
 }
 
 export class ArrowTab extends React.Component {
-  static propTypes = arrowTabPropTypes
-
   renderLinkEl = () => {
     const { children, isActive, arrow, name, ...otherProps } = this.props
 

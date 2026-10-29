@@ -1,5 +1,6 @@
-import i from 'icepick'
-import { uniqBy } from 'lodash'
+import { produce } from 'immer'
+import { get, uniqBy } from 'lodash'
+import { setIn } from 'stemn-shared/redux/draft'
 
 const initialState = {
   data: {
@@ -45,122 +46,153 @@ function reducer(state, action) {
       return { ...state, activeProject: action.payload.projectId }
 
     case 'PROJECTS/GET_PROJECT_PENDING':
-      return i.assocIn(state, ['data', action.meta.projectId, 'loading'], true)
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.meta.projectId, 'loading'], true)
+      })
     case 'PROJECTS/GET_PROJECT_REJECTED':
-      return i.assocIn(state, ['data', action.meta.projectId, 'loading'], false)
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.meta.projectId, 'loading'], false)
+      })
     case 'PROJECTS/GET_PROJECT_FULFILLED':
-      return i
-        .chain(state)
-        .assocIn(['data', action.meta.projectId, 'loading'], false)
-        .assocIn(['data', action.meta.projectId, 'dataSize'], action.meta.size)
-        .assocIn(['data', action.meta.projectId, 'data'], action.payload.data)
-        .value()
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.meta.projectId, 'loading'], false)
+        setIn(draft, ['data', action.meta.projectId, 'dataSize'], action.meta.size)
+        setIn(draft, ['data', action.meta.projectId, 'data'], action.payload.data)
+      })
 
     case 'PROJECTS/ADD_TEAM_MEMBER':
-      return i.updateIn(state, ['data', action.payload.projectId, 'data', 'team'], (team) => {
+      return produce(state, (draft) => {
         const modifiedUser = Object.assign({}, action.payload.user, { permissions: { role: 'admin' } })
-        return i.push(team, modifiedUser)
+        get(draft, ['data', action.payload.projectId, 'data', 'team']).push(modifiedUser)
       })
-    case 'PROJECTS/REMOVE_TEAM_MEMBER':
-      return i.updateIn(state, ['data', action.payload.projectId, 'data', 'team'], (team) =>
-        team.filter((user) => user._id !== action.payload.userId),
-      )
+    case 'PROJECTS/REMOVE_TEAM_MEMBER': {
+      const path = ['data', action.payload.projectId, 'data', 'team']
+      return produce(state, (draft) => {
+        setIn(
+          draft,
+          path,
+          get(state, path).filter((user) => user._id !== action.payload.userId),
+        )
+      })
+    }
     case 'PROJECTS/CHANGE_USER_PERMISSIONS':
-      return i.updateIn(state, ['data', action.payload.projectId, 'data', 'team'], (team) => {
+      return produce(state, (draft) => {
+        const team = get(draft, ['data', action.payload.projectId, 'data', 'team'])
         const index = team.findIndex((user) => user._id === action.payload.userId)
-        return [
-          ...team.slice(0, index),
-          i.assocIn(team[index], ['permissions', 'role'], action.payload.role),
-          ...team.slice(index + 1),
-        ]
+        setIn(team[index], ['permissions', 'role'], action.payload.role)
       })
 
-    case 'PROJECTS/ADD_FIELD':
-      return i.updateIn(state, ['data', action.payload.projectId, 'data', 'fields'], (fields) =>
-        uniqBy(i.push(fields, action.payload.field), '_id'),
-      )
-    case 'PROJECTS/REMOVE_FIELD':
-      return i.updateIn(state, ['data', action.payload.projectId, 'data', 'fields'], (fields) =>
-        fields.filter((field) => field._id !== action.payload.fieldId),
-      )
+    case 'PROJECTS/ADD_FIELD': {
+      const path = ['data', action.payload.projectId, 'data', 'fields']
+      return produce(state, (draft) => {
+        setIn(draft, path, uniqBy([...get(state, path), action.payload.field], '_id'))
+      })
+    }
+    case 'PROJECTS/REMOVE_FIELD': {
+      const path = ['data', action.payload.projectId, 'data', 'fields']
+      return produce(state, (draft) => {
+        setIn(
+          draft,
+          path,
+          get(state, path).filter((field) => field._id !== action.payload.fieldId),
+        )
+      })
+    }
 
     case 'PROJECTS/SET_LIKED':
-      return i.assocIn(state, ['data', action.payload.projectId, 'data', 'liked'], true)
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.payload.projectId, 'data', 'liked'], true)
+      })
     case 'PROJECTS/SET_UN_LIKED':
-      return i.assocIn(state, ['data', action.payload.projectId, 'data', 'liked'], false)
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.payload.projectId, 'data', 'liked'], false)
+      })
     case 'PROJECTS/UPDATE_LIKED':
-      return i.assocIn(state, ['data', action.payload.projectId, 'data', 'liked'], action.payload.liked)
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.payload.projectId, 'data', 'liked'], action.payload.liked)
+      })
 
     case 'PROJECTS/LINK_REMOTE_PENDING':
-      return i
-        .chain(state)
-        .assocIn(['data', action.meta.cacheKey, 'linkPending'], true)
-        .assocIn(['data', action.meta.cacheKey, 'linkRejected'], false)
-        .value()
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.meta.cacheKey, 'linkPending'], true)
+        setIn(draft, ['data', action.meta.cacheKey, 'linkRejected'], false)
+      })
     case 'PROJECTS/LINK_REMOTE_FULFILLED':
-      return i
-        .chain(state)
-        .assocIn(['data', action.meta.cacheKey, 'linkPending'], false)
-        .assocIn(['data', action.meta.cacheKey, 'linkRejected'], false)
-        .assocIn(['data', action.meta.cacheKey, 'data', 'remote'], action.payload.data)
-        .assocIn(['data', action.meta.cacheKey, 'fileStoreForm'], action.payload.data)
-        .value()
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.meta.cacheKey, 'linkPending'], false)
+        setIn(draft, ['data', action.meta.cacheKey, 'linkRejected'], false)
+        setIn(draft, ['data', action.meta.cacheKey, 'data', 'remote'], action.payload.data)
+        setIn(draft, ['data', action.meta.cacheKey, 'fileStoreForm'], action.payload.data)
+      })
     case 'PROJECTS/LINK_REMOTE_REJECTED':
-      return i
-        .chain(state)
-        .assocIn(['data', action.meta.cacheKey, 'linkPending'], false)
-        .assocIn(['data', action.meta.cacheKey, 'linkRejected'], true)
-        .value()
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.meta.cacheKey, 'linkPending'], false)
+        setIn(draft, ['data', action.meta.cacheKey, 'linkRejected'], true)
+      })
 
     case 'PROJECTS/GET_USER_PROJECTS_PENDING':
-      return i.assocIn(state, ['userProjects', action.meta.userId, 'loading'], true)
+      return produce(state, (draft) => {
+        setIn(draft, ['userProjects', action.meta.userId, 'loading'], true)
+      })
     case 'PROJECTS/GET_USER_PROJECTS_REJECTED':
-      return i.assocIn(state, ['userProjects', action.meta.userId, 'loading'], false)
+      return produce(state, (draft) => {
+        setIn(draft, ['userProjects', action.meta.userId, 'loading'], false)
+      })
     case 'PROJECTS/GET_USER_PROJECTS_FULFILLED':
-      return i
-        .chain(state)
-        .assocIn(['userProjects', action.meta.userId, 'data'], action.payload.data)
-        .assocIn(['userProjects', action.meta.userId, 'loading'], false)
-        .value()
+      return produce(state, (draft) => {
+        setIn(draft, ['userProjects', action.meta.userId, 'data'], action.payload.data)
+        setIn(draft, ['userProjects', action.meta.userId, 'loading'], false)
+      })
 
     case 'PROJECTS/CREATE_PROJECT_PENDING':
-      return i.assocIn(state, ['newProject', 'savePending'], true)
+      return produce(state, (draft) => {
+        setIn(draft, ['newProject', 'savePending'], true)
+      })
     case 'PROJECTS/CREATE_PROJECT_REJECTED':
-      return i.assocIn(state, ['newProject', 'savePending'], false)
+      return produce(state, (draft) => {
+        setIn(draft, ['newProject', 'savePending'], false)
+      })
     case 'PROJECTS/CREATE_PROJECT_FULFILLED':
-      return i
-        .chain(state)
-        .assoc('newProject', initialState.newProject) // Clear the newProject object
-        .updateIn(['userProjects', action.meta.userId, 'data'], (projects) =>
-          // Push the new project onto the userProjects array
-          i.push(projects, action.payload.data),
-        )
-        .value()
+      return produce(state, (draft) => {
+        draft.newProject = initialState.newProject // Clear the newProject object
+        // Push the new project onto the userProjects array
+        get(draft, ['userProjects', action.meta.userId, 'data']).push(action.payload.data)
+      })
 
     case 'PROJECTS/SAVE_PROJECT_PENDING':
-      return i.assocIn(state, ['data', action.meta.projectId, 'savePending'], true)
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.meta.projectId, 'savePending'], true)
+      })
     case 'PROJECTS/SAVE_PROJECT_FULFILLED':
-      return i.assocIn(state, ['data', action.meta.projectId, 'savePending'], false)
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.meta.projectId, 'savePending'], false)
+      })
     case 'PROJECTS/SAVE_PROJECT_REJECTED':
-      return i.assocIn(state, ['data', action.meta.projectId, 'savePending'], false)
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.meta.projectId, 'savePending'], false)
+      })
 
     case 'PROJECTS/CLONE_PENDING':
-      return i.assocIn(state, ['cloneProject', 'savePending'], true)
+      return produce(state, (draft) => {
+        setIn(draft, ['cloneProject', 'savePending'], true)
+      })
     case 'PROJECTS/CLONE_FULFILLED':
-      return i.assocIn(state, ['cloneProject', 'savePending'], false)
+      return produce(state, (draft) => {
+        setIn(draft, ['cloneProject', 'savePending'], false)
+      })
     case 'PROJECTS/CLONE_REJECTED':
-      return i.assocIn(state, ['cloneProject', 'savePending'], false)
+      return produce(state, (draft) => {
+        setIn(draft, ['cloneProject', 'savePending'], false)
+      })
 
     case 'PROJECTS/DELETE_PROJECT_FULFILLED':
-      return i
-        .chain(state)
-        .assocIn(['data', action.meta.projectId], undefined) // Delete the project from the main store
-        .updateIn(['userProjects', action.meta.userId, 'data'], (projects) => {
-          // Delete it from the userProjects list
-          const projectIndex = projects.findIndex((project) => project._id === action.meta.projectId)
-          return i.splice(projects, projectIndex, 1)
-        })
-        .value()
+      return produce(state, (draft) => {
+        setIn(draft, ['data', action.meta.projectId], undefined) // Delete the project from the main store
+        // Delete it from the userProjects list
+        const projects = get(draft, ['userProjects', action.meta.userId, 'data'])
+        const projectIndex = projects.findIndex((project) => project._id === action.meta.projectId)
+        projects.splice(projectIndex, 1)
+      })
     default:
       return state
   }

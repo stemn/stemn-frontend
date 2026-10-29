@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { has } from 'lodash'
 import InfoPanel from 'stemn-shared/misc/Panels/InfoPanel'
 import UserEmailSettings from 'stemn-shared/misc/UserSettings/UserEmailSettings'
@@ -8,14 +7,6 @@ import UserCloudProviderSettings from 'stemn-shared/misc/UserSettings/UserCloudP
 import UserPasswordSettings from 'stemn-shared/misc/UserSettings/UserPasswordSettings'
 
 export default class SettingsAccount extends Component {
-  static propTypes = {
-    auth: PropTypes.object.isRequired,
-    authenticate: PropTypes.func.isRequired,
-    unlink: PropTypes.func.isRequired,
-    setPrimaryEmail: PropTypes.func.isRequired,
-    saveUser: PropTypes.func.isRequired,
-    passwordUpdate: PropTypes.func.isRequired,
-  }
   render() {
     const { auth, authenticate, unlink, setPrimaryEmail, saveUser, passwordUpdate } = this.props
     return (

@@ -1,13 +1,8 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { isEqual } from 'lodash'
 import styles from './autoUpdater.module.css'
 
 class AutoUpdater extends Component {
-  static propTypes = {
-    system: PropTypes.object.isRequired,
-  }
-
   shouldComponentUpdate(nextProps) {
     // more frequent updates trigger re-opening of already closed snackbars
     return !isEqual(this.props.system, nextProps.system)

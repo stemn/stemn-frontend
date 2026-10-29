@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import CodeMirror from 'stemn-shared/misc/CodeMirror'
 import classes from './EditorNew.module.scss'
 import 'codemirror/mode/markdown/markdown'
@@ -30,14 +29,6 @@ codemirrorLib.defineMode('markdownWithLatex', (config) => {
 })
 
 export default class EditorNew extends Component {
-  static propTypes = {
-    model: PropTypes.string,
-    value: PropTypes.string,
-    hideToolbar: PropTypes.bool,
-    change: PropTypes.func.isRequired,
-    placeholder: PropTypes.string,
-    autoFocus: PropTypes.bool,
-  }
   constructor(props) {
     super(props)
     this.state = {

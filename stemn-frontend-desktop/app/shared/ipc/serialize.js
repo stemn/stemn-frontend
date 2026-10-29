@@ -9,7 +9,7 @@
  *  - functions, symbols and promises are dropped
  *  - Errors become plain { name, message, ... } objects (axios errors keep
  *    `response.{status,statusText,data}` and `config.{url,method}`)
- *  - objects with toJSON() (moment, AxiosHeaders, ...) are serialised with it
+ *  - objects with toJSON() (dayjs, AxiosHeaders, ...) are serialised with it
  *  - binary data (ArrayBuffer, typed arrays, Buffer) and Dates are kept as is
  *  - circular references are dropped
  */

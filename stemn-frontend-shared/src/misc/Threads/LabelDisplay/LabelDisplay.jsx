@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import classes from './LabelDisplay.module.css'
 import cn from 'classnames'
 
 export default class LabelDisplay extends Component {
-  static propTypes = {
-    labels: PropTypes.array.isRequired, // The labels
-  }
   render() {
     const { labels } = this.props
     return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import moment from 'moment'
+import { addMonths, calendar, dayjs } from 'stemn-shared/utils/date'
 
 import { connect } from 'react-redux'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
@@ -13,7 +13,7 @@ import Button from 'stemn-shared/misc/Buttons/Button/Button'
 
 export class Component extends React.Component {
   state = {
-    viewDate: moment(),
+    viewDate: dayjs(),
     calendarIsOpen: false,
   }
 
@@ -31,25 +31,25 @@ export class Component extends React.Component {
   render() {
     const { viewDate, calendarIsOpen } = this.state
     const { model, value, dispatch, onChange, className, style, ...otherProps } = this.props
-    const valueDate = value ? moment(value) : ''
-    const currentTime = moment()
+    const valueDate = value ? dayjs(value) : ''
+    const currentTime = dayjs()
 
     const options = [
       {
         name: 'Later today',
-        value: moment().startOf('day').add(15, 'hours'),
+        value: dayjs().startOf('day').add(15, 'hours'),
       },
       {
         name: 'Tomorrow',
-        value: moment().add(1, 'day').startOf('day').add(10, 'hours'),
+        value: dayjs().add(1, 'day').startOf('day').add(10, 'hours'),
       },
       {
         name: 'In a few days',
-        value: moment().add(3, 'days').startOf('day').add(10, 'hours'),
+        value: dayjs().add(3, 'days').startOf('day').add(10, 'hours'),
       },
       {
         name: 'In a week',
-        value: moment().add(1, 'week'),
+        value: dayjs().add(1, 'week'),
       },
     ]
 
@@ -59,8 +59,8 @@ export class Component extends React.Component {
       <div className={classes.popup}>
         {calendarIsOpen ? (
           <Calendar
-            onNextMonth={() => this.setState({ viewDate: viewDate.clone().add(1, 'months') })}
-            onPrevMonth={() => this.setState({ viewDate: viewDate.clone().subtract(1, 'months') })}
+            onNextMonth={() => this.setState({ viewDate: addMonths(viewDate, 1) })}
+            onPrevMonth={() => this.setState({ viewDate: addMonths(viewDate, -1) })}
             selectedDate={valueDate}
             viewDate={viewDate}
             onPickDate={this.selectDate}
@@ -75,7 +75,7 @@ export class Component extends React.Component {
               onClick={() => this.selectDate(option.value)}
             >
               <div className="flex">{option.name}</div>
-              <div className={classes.fixedOptionTime}>{option.value.calendar()}</div>
+              <div className={classes.fixedOptionTime}>{calendar(option.value)}</div>
             </a>
           ))
         )}
@@ -93,7 +93,7 @@ export class Component extends React.Component {
           className={cn('layout-row layout-align-start-center flex rel-box light', className)}
           style={{ width: '100%' }}
         >
-          {valueDate ? valueDate.calendar() : 'Select a due date'}
+          {valueDate ? calendar(valueDate) : 'Select a due date'}
           <div className="flex" />
           {valueDate && <MdClose onClick={() => this.selectDate()} style={{ marginLeft: '5px' }} size={12} />}
           <MdExpandMore style={{ marginLeft: '5px' }} size={15} />

@@ -1,19 +1,26 @@
-import i from 'icepick'
+import { produce } from 'immer'
+import { setIn } from 'stemn-shared/redux/draft'
 
 const initialState = {}
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'HISTORY/GET_HISTORY_PENDING': {
-      return i.assocIn(state, [action.meta.cacheKey, 'loading'], true)
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.cacheKey, 'loading'], true)
+      })
     }
     case 'HISTORY/GET_HISTORY_REJECTED': {
-      return i.assocIn(state, [action.meta.cacheKey, 'loading'], false)
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.cacheKey, 'loading'], false)
+      })
     }
     case 'HISTORY/GET_HISTORY_FULFILLED': {
-      return i.assocIn(state, [action.meta.cacheKey], {
-        loading: false,
-        data: action.payload.data,
+      return produce(state, (draft) => {
+        setIn(draft, [action.meta.cacheKey], {
+          loading: false,
+          data: action.payload.data,
+        })
       })
     }
     default:

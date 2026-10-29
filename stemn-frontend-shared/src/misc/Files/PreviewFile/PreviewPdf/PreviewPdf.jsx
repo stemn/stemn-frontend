@@ -8,10 +8,6 @@ import ScrollZoom from 'stemn-shared/misc/Scroll/ScrollZoom/ScrollZoom.jsx'
 // The pdf.js worker is emitted by webpack as a separate asset
 GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url).toString()
 
-const propTypesObject = {
-  //  src: React.PropTypes.string.isRequired
-}
-
 class PDF extends React.Component {
   state = {
     pdf: null,
@@ -71,7 +67,5 @@ class PDF extends React.Component {
     )
   }
 }
-
-PDF.propTypes = propTypesObject
 
 export default PDF

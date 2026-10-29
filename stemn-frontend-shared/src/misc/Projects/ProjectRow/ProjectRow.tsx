@@ -1,5 +1,5 @@
 import cn from 'classnames'
-import moment from 'moment'
+import { fromNow } from 'stemn-shared/utils/date'
 import * as React from 'react'
 import LoadingAnimation from 'stemn-shared/misc/Loading/LoadingAnimation'
 import LoadingPlaceholder from 'stemn-shared/misc/Loading/LoadingPlaceholder'
@@ -35,7 +35,7 @@ export class ProjectRow extends React.Component<IProjectRowProps> {
             <div className={cn('flex', classes.blurb)}>{blurb}</div>
             <div className={cn(classes.meta, 'layout-row', 'layout-align-start-center')}>
               {project.data && <ProjectInfoIcons project={project.data} hidePublic={true} padRight={true} />}
-              {moment(updated).fromNow()}
+              {fromNow(updated)}
               <div className="flex" />
               <SocialButton type="follow" entityType={'project'} entityId={projectId} />
             </div>

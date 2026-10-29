@@ -1,17 +1,9 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import classes from './Pagination.module.css'
 import { MdChevronRight, MdChevronLeft } from 'react-icons/md'
 import { Link } from 'stemn-shared/routing'
 
 export default class Pagination extends Component {
-  static propTypes = {
-    page: PropTypes.number.isRequired,
-    noMoreResults: PropTypes.bool.isRequired,
-    path: PropTypes.string.isRequired,
-    query: PropTypes.object, // query params to be extended
-  }
-
   static defaultProps = {
     page: 1,
     noMoreResults: false,

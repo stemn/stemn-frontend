@@ -1,4 +1,5 @@
-import i from 'icepick'
+import { produce } from 'immer'
+import { setIn } from 'stemn-shared/redux/draft'
 
 const numBackgrounds = 8
 
@@ -62,7 +63,9 @@ const mainReducer = (state, action) => {
       return { ...state, authToken: action.payload.data.token }
 
     case 'AUTH/UNLINK_FULFILLED':
-      return i.assocIn(state, ['user', 'accounts'], action.payload.data.accounts)
+      return produce(state, (draft) => {
+        setIn(draft, ['user', 'accounts'], action.payload.data.accounts)
+      })
 
     case 'AUTH/LOGIN_PENDING':
       return { ...state, authLoading: true }
@@ -104,9 +107,9 @@ const mainReducer = (state, action) => {
       return { ...state, user: action.payload.user }
 
     case 'AUTH/NEXT_BACKGROUND':
-      return state.background + 1 <= numBackgrounds
-        ? i.assoc(state, 'background', state.background + 1)
-        : i.assoc(state, 'background', 1)
+      return produce(state, (draft) => {
+        draft.background = state.background + 1 <= numBackgrounds ? state.background + 1 : 1
+      })
 
     case 'AUTH/LOGOUT':
       return Object.assign({}, state, initialState)
