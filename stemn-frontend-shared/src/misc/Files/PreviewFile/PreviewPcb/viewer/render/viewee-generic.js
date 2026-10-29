@@ -1,13 +1,5 @@
 /* eslint-disable */
-(function (root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    define(() => factory())
-  } else if (typeof module === 'object' && module.exports) {
-    module.exports = factory()
-  } else {
-    root.ViewEERenderer = factory()
-  }
-}(this, () => {
+const ViewEERenderer = (() => {
   // ---------------
   // --- DRAWING ---
   // ---------------
@@ -367,4 +359,6 @@
   }
 
   return ViewEERenderer
-}))
+})()
+
+export default ViewEERenderer

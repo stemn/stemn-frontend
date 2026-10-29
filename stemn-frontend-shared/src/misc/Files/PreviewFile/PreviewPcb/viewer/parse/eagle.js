@@ -1,13 +1,5 @@
 /* eslint-disable */
-(function (root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    define(() => factory())
-  } else if (typeof module === 'object' && module.exports) {
-    module.exports = factory()
-  } else {
-    root.EagleXMLParser = factory()
-  }
-}(this, () => {
+const EagleXMLParser = (() => {
   function EagleXMLParser(board) {
     this.board = board
   }
@@ -724,4 +716,6 @@
   //	}
 
   return EagleXMLParser
-}))
+})()
+
+export default EagleXMLParser

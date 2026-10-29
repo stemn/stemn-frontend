@@ -1,5 +1,5 @@
-// If we are in the electron main thread, we don't want to register the modal
-const modalName = 'THREAD_COMMIT'
-export default GLOBAL_ENV.APP_THREAD === 'electron'
-  ? modalName
-  : require('./ThreadMentionModal.container').default(modalName)
+import registerThreadMentionModal from './ThreadMentionModal.container'
+
+// Registers the modal component and exports its name. The Electron main process
+// resolves index.electron.js instead (the name only, no React components).
+export default registerThreadMentionModal('THREAD_COMMIT')

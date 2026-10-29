@@ -1,4 +1,5 @@
-const modalName = 'PREVIEW_EXPIRED'
-export default GLOBAL_ENV.APP_THREAD === 'electron'
-  ? modalName
-  : require('./PreviewExpiredModal.container').default(modalName)
+import registerPreviewExpiredModal from './PreviewExpiredModal.container'
+
+// Registers the modal component and exports its name. The Electron main process
+// resolves index.electron.js instead (the name only, no React components).
+export default registerPreviewExpiredModal('PREVIEW_EXPIRED')

@@ -1,4 +1,5 @@
-const modalName = 'RELEASE_NOTES'
-export default GLOBAL_ENV.APP_THREAD === 'electron'
-  ? modalName
-  : require('./ReleaseNotesModal.container').default(modalName)
+import registerReleaseNotesModal from './ReleaseNotesModal.container'
+
+// Registers the modal component and exports its name. The Electron main process
+// resolves index.electron.js instead (the name only, no React components).
+export default registerReleaseNotesModal('RELEASE_NOTES')
