@@ -36,7 +36,6 @@ Run them from this folder, or from the repo root with the `desktop:` prefix (`np
 | `npm run package` | Builds and packages a Linux AppImage plus an unpacked dir into `release/` (electron-builder). |
 | `npm run package:win` / `package:mac` | Windows NSIS installer / macOS dmg+zip. Run them on that OS (Windows from Linux needs wine). |
 | `npm run package:check` | Validates `electron-builder.yml` for all platforms without building. |
-| `npm test` | Unit tests for the build tooling (CSS-modules plugin, platform-switch Babel plugin). |
 | `npm run test:e2e` | End-to-end test with Playwright driving Electron against the local backend (see below). |
 | `npm run typecheck` | `tsc --noEmit` for the app, the shared desktop code, the tests and the build config. |
 
@@ -48,7 +47,7 @@ makes the Electron binary start as plain Node.
 
 | Variable | Used by | Meaning |
 | --- | --- | --- |
-| `STEMN_ENV` | build / dev | `local` (dev default), `staging`, `production` (build default) or `custom` ([config/getStemnEnv.js](config/getStemnEnv.js)). Baked into `GLOBAL_ENV.API_SERVER` / `WEBSOCKET_SERVER` / `WEBSITE_URL`. E.g. `STEMN_ENV=local npm run build`. |
+| `STEMN_ENV` | build / dev | `local` (dev default), `staging`, `production` (build default) or `custom` ([stemn-frontend-shared/config/stemnEnv.cjs](../stemn-frontend-shared/config/stemnEnv.cjs)). Baked into `GLOBAL_ENV.API_SERVER` / `WEBSOCKET_SERVER` / `WEBSITE_URL`. E.g. `STEMN_ENV=local npm run build`. |
 | `API_SERVER`, `WEBSOCKET_SERVER`, `WEBSITE_URL` | build | Server urls for `STEMN_ENV=custom`. |
 | `SENTRY_DSN` | build | Enables Sentry (`@sentry/browser`) in the renderers, like the website. |
 | `STEMN_DESKTOP_DEV_PORT` | dev | Renderer dev server port (default 5173). |
@@ -68,7 +67,6 @@ app/
   renderer/      main / menubar / preview windows (index.html + routes + pages)
   shared/        store setup, reducers, store-sync middleware and IPC helpers used by main and renderers
   static/        fonts and images (the renderer public dir)
-config/          Vite plugins + tests, STEMN_ENV table
 electron.vite.config.ts, electron-builder.yml
 tests/           Playwright e2e
 ```
@@ -76,22 +74,18 @@ tests/           Playwright e2e
 **Toolchain**: electron-vite 6 (Vite 8 / Rolldown) builds three targets. Main and preload are bundled
 completely (CommonJS, no externals except `electron` and Node built-ins), so the packaged app ships no
 `node_modules`; that's also why every library is a devDependency. The renderers use
-`@vitejs/plugin-react` (Oxc, React Fast Refresh in dev) plus `@rolldown/plugin-babel` for the legacy
-`@connect()` class decorators and for JSX in `.js` files.
+`@vitejs/plugin-react` (Oxc, React Fast Refresh in dev). There is no Babel: the source is plain ES modules
+with JSX in `.jsx`/`.tsx` files.
 
-Conventions carried over from the webpack setup (all in `electron.vite.config.ts`):
+Conventions shared with the website (all in `electron.vite.config.ts`, see also `stemn-frontend-shared/config`):
 
-* `resolve.extensions` tries `.desktop.ts/.tsx/.js/.jsx` first (the website tries `.web.*` first).
-* Aliases: `stemn-shared`, `theme`, `route-actions`, `reducer`, `package-json`, `stemn-frontend-desktop`
-  and webpack-style `~module` imports in stylesheets.
-* CSS: every stylesheet in the app and shared source is a CSS module except `*.global.(s)css` and
-  `stemn-shared/assets/css/**`. Vite only knows `*.module.css`, so
-  [config/vite-plugin-stemn-css-modules.mts](config/vite-plugin-stemn-css-modules.mts) rewrites those ids
-  (`Foo.scss?stemn-css.module.css`) and keeps global sheets global while still evaluating
-  `@value x from "theme"`. Sass is compiled with `sass` (Dart Sass).
-* [config/babel-plugin-stemn-platform.mts](config/babel-plugin-stemn-platform.mts) resolves the shared
-  code's `GLOBAL_ENV.APP_TYPE` / `APP_THREAD` switches at build time and turns its few CommonJS shims
-  (`module.exports = ... ? require(a) : require(b)`) into ES modules, which Vite's dev server needs.
+* `resolve.extensions` tries `.desktop.ts/.tsx/.js/.jsx` first (the website tries `.web.*` first). The main
+  process build tries `.electron.*` before that: the shared modals' `index.electron.js` export just the modal
+  name, so React components never end up in the main process bundle.
+* Aliases: `stemn-shared`, `theme`, `route-actions`, `reducer`, `package-json`, `stemn-frontend-desktop`.
+* CSS: the standard convention, `*.module.(s)css` files are CSS modules (class names `<File>_<class>-<hash>`,
+  `@value x from "theme"` imports from `app/theme.module.css`), every other stylesheet is global CSS
+  (global sheets use the `--theme-*` custom properties). Sass is compiled with `sass` (Dart Sass).
 * `GLOBAL_ENV` is defined per target: `APP_TYPE: 'desktop'`, `APP_THREAD: 'electron'` (main) or
   `'renderer'` (windows), `NODE_ENV`, `STEMN_ENV`, `API_SERVER`, `WEBSOCKET_SERVER`, `WEBSITE_URL`, `SENTRY_DSN`.
 
