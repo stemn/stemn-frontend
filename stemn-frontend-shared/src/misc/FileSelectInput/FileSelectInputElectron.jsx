@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
-import { remote } from 'electron'
+import { getBridge } from 'stemn-shared/desktop/bridge'
 import cn from 'classnames'
 import classes from './FileSelectInput.css'
 import { MdFolder } from 'react-icons/md'
@@ -11,14 +11,13 @@ import TextDisplayBox from 'stemn-shared/misc/TextDisplayBox/TextDisplayBox.jsx'
 
 class Component extends React.Component {
   showModal = () => {
-    remote.dialog.showOpenDialog(null, {
+    getBridge().dialog.selectDirectory({
       title: this.props.title,
       defaultPath: this.props.value,
       buttonLabel: 'Select Folder',
-      properties: ['openDirectory'],
-    }, (files) => {
-      if (files && files[0]) {
-        this.props.dispatch(storeChange(this.props.model, files[0]))
+    }).then((folder) => {
+      if (folder) {
+        this.props.dispatch(storeChange(this.props.model, folder))
       }
     })
   };

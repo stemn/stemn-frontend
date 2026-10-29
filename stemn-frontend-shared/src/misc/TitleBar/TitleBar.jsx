@@ -1,6 +1,5 @@
 import React from 'react'
-import electron from 'electron'
-import process from 'process'
+import { getBridge, getPlatform } from 'stemn-shared/desktop/bridge'
 
 // Styles
 import styles from './TitleBar.css'
@@ -10,35 +9,36 @@ import MaximiseIcon from './icons/maximise.js'
 import CloseIcon from './icons/close.js'
 import MinimiseIcon from './icons/minimise.js'
 
+/** Frameless-window title bar (Windows/Linux). Window controls go through the preload bridge. */
 export default class TitleBar extends React.Component {
-  constructor(props) {
-    super(props)
-    const window = electron.remote.getCurrentWindow()
+  state = {
+    isMaximised: false,
+  }
 
-    this.state = {
-      isMaximised: window.isMaximized(),
-    }
+  componentDidMount() {
+    this.mounted = true
+    getBridge().window.isMaximized().then((isMaximised) => {
+      if (this.mounted) this.setState({ isMaximised })
+    })
+  }
+
+  componentWillUnmount() {
+    this.mounted = false
   }
 
   render() {
-    const window = electron.remote.getCurrentWindow()
+    const { window: windowControls } = getBridge()
 
     const close = () => {
-      window.close()
+      windowControls.close()
     }
 
     const minimise = () => {
-      window.minimize()
+      windowControls.minimize()
     }
 
     const toggleMaximise = () => {
-      if (!window.isMaximized()) {
-        window.maximize()
-        this.setState({ isMaximised: true })
-      } else {
-        window.unmaximize()
-        this.setState({ isMaximised: false })
-      }
+      windowControls.toggleMaximize().then(isMaximised => this.setState({ isMaximised }))
     }
 
     //    const WindowsClose = (<svg x="0px" y="0px" viewBox="0 0 10.2 10.2" data-radium="true"><polygon fill="inherit" points="10.2,0.7 9.5,0 5.1,4.4 0.7,0 0,0.7 4.4,5.1 0,9.5 0.7,10.2 5.1,5.8 9.5,10.2 10.2,9.5 5.8,5.1 "></polygon></svg>)
@@ -50,7 +50,7 @@ export default class TitleBar extends React.Component {
     //    const MacMaximised = (<svg x="0px" y="0px" viewBox="0 0 10 10"><path fill="#006400" d="M5,10c0,0 0,-2.744 0,-4.167c0,-0.221 -0.088,-0.433 -0.244,-0.589c-0.156,-0.156 -0.368,-0.244 -0.589,-0.244c-1.423,0 -4.167,0 -4.167,0l5,5Z"></path><path fill="#006400" d="M5,0c0,0 0,2.744 0,4.167c0,0.221 0.088,0.433 0.244,0.589c0.156,0.156 0.368,0.244 0.589,0.244c1.423,0 4.167,0 4.167,0l-5,-5Z"></path></svg>)
     //    const MacMaximise = (<svg x="0px" y="0px" viewBox="0 0 10 10"><path fill="#006400" d="M2,3c0,0 0,2.744 0,4.167c0,0.221 0.088,0.433 0.244,0.589c0.156,0.156 0.368,0.244 0.589,0.244c1.423,0 4.167,0 4.167,0l-5,-5Z"></path><path fill="#006400" d="M8,7c0,0 0,-2.744 0,-4.167c0,-0.221 -0.088,-0.433 -0.244,-0.589c-0.156,-0.156 -0.368,-0.244 -0.589,-0.244c-1.423,0 -4.167,0 -4.167,0l5,5Z"></path></svg>)
 
-    if (process.platform === 'darwin') {
+    if (getPlatform() === 'darwin') {
       return null
       //      return (
       //        <div className={cn(styles.bar, 'layout-row', { [styles.light] : this.props.theme === 'light'})}>

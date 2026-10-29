@@ -1,7 +1,7 @@
 import { has } from 'lodash'
 import { getPath } from 'stemn-shared/desktop/LocalPath/LocalPath.actions.js'
 import { name as localPathModuleName } from 'stemn-shared/desktop/LocalPath/LocalPath.reducer.js'
-import { normaliseSlashes } from 'stemn-shared/desktop/System/System.utils'
+import { normaliseSlashes } from 'stemn-shared/desktop/System/normaliseSlashes'
 
 export const getFullPath = ({ path, projectId, provider }) => (dispatch, getState) => {
   const storeState = getState()

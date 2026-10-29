@@ -1,5 +1,5 @@
-import { createStore, applyMiddleware, compose } from 'redux'
-import thunk from 'redux-thunk'
+import { legacy_createStore as createStore, applyMiddleware } from 'redux'
+import { thunk } from 'redux-thunk'
 import promise from 'redux-promise-middleware'
 import getRootReducerMain from '../reducers/rootReducer.main.js'
 import forwardToRenderer from '../middleware/forwardToRenderer'
@@ -11,6 +11,11 @@ import throttle from 'stemn-shared/redux/middleware/throttle/throttle.middleware
 import httpTransform from 'stemn-shared/redux/middleware/httpTransform/httpTransform.middleware.js'
 import httpPackage from 'stemn-shared/redux/middleware/httpPackage/httpPackage.middleware.js'
 
+/**
+ * The main-process store is the source of truth. Renderers forward their actions
+ * here (forwardToMain) and every reduced action is replayed in all windows
+ * (forwardToRenderer).
+ */
 export default function configureStore(initialState) {
   const middleware = [
     thunk,
@@ -19,22 +24,11 @@ export default function configureStore(initialState) {
     httpPackage,
     httpTransform,
     websocket,
-    promise.default(),
+    promise,
     autoLaunch,
     toastsError,
     forwardToRenderer,
   ]
 
-  const enhanced    = [applyMiddleware(...middleware)]
-  const rootReducer = getRootReducerMain()
-  const enhancer    = compose(...enhanced)
-  const store       = createStore(rootReducer, initialState, enhancer)
-
-  if (!process.env.NODE_ENV && module.hot) {
-    module.hot.accept('../reducers/rootReducer.base', () => {
-      store.replaceReducer(require('../reducers/rootReducer.base'))
-    })
-  }
-
-  return store
+  return createStore(getRootReducerMain(), initialState, applyMiddleware(...middleware))
 }

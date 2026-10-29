@@ -1,13 +1,9 @@
 import { combineReducers } from 'redux'
-import rootReducer from './rootReducer.base'
 import storeReducer from 'stemn-shared/misc/Store/Store.reducer.js'
+import rootReducer from './rootReducer.base'
 
 export default function getRootReducer() {
-  const reducers = {
-    ...rootReducer,
-  }
-
-  const splitReducers = combineReducers({ ...reducers })
+  const splitReducers = combineReducers({ ...rootReducer })
   return (state, action) => {
     const isStoreAction = action && action.type && action.type.startsWith('STORE/')
     return isStoreAction

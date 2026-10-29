@@ -40,7 +40,6 @@ export const authGoogle = (req, res) => {
 }
 
 export const authDropbox = (req, res) => {
-  console.log('req.originalUrl:', req.originalUrl)
   req.store.dispatch(sendAuthToken({
     provider: 'dropbox',
     code: req.query.code,

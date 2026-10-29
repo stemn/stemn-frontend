@@ -1,31 +1,29 @@
-import fs from 'fs'
-import os from 'os'
-import pify from 'pify'
+/* Main process only (called through FunctionLibrary aliases) */
+import { readdir } from 'node:fs/promises'
+import { homedir } from 'node:os'
+import { join } from 'node:path'
 import { shell } from 'electron'
-import querystring from 'querystring'
-import process from 'process'
 
-export const getInstallStatus = () => {
-  if (process.platform == 'linux') {
-    return pify(fs.stat)(`${os.homedir()}/.local/share/applications/appimagekit-stemn.desktop`)
-      .then(() => true)
-      .catch(() => false)
+export { normaliseSlashes } from './normaliseSlashes'
+
+/**
+ * Linux AppImages need to be integrated with the desktop (a .desktop entry) for the
+ * protocol handler and the launcher icon. Other builds are installed by their installer.
+ */
+export const getInstallStatus = async () => {
+  if (process.platform !== 'linux' || !process.env.APPIMAGE) {
+    return true
   }
-  // If it is not linux - it must be installed
-  
-  return new Promise((resolve, reject) => {
-    resolve(true)
-  })
+  const entries = await readdir(join(homedir(), '.local/share/applications')).catch(() => [])
+  return entries.some(entry => /stemn.*\.desktop$/i.test(entry))
 }
 
 export const openExternal = ({ url, params }) => {
-  const stringParams = querystring.stringify(params)
-  shell.openExternal(stringParams ? `${url}?${stringParams}` : url)
+  const stringParams = params ? new URLSearchParams(params).toString() : ''
+  const fullUrl = stringParams ? `${url}?${stringParams}` : url
+  if (!/^(https?|mailto):/i.test(fullUrl)) {
+    console.error(`Refusing to open ${fullUrl}`)
+    return undefined
+  }
+  return shell.openExternal(fullUrl)
 }
-
-// Normalise paths for linux/windows bases operating systems
-// so they use the right kind of slash
-export const normaliseSlashes = path => (process.platform === 'win32'
-  ? path.replace(/\//g, '\\')
-  : path.replace(/\\/g, '/'))
-
