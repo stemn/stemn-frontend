@@ -6,7 +6,8 @@
   "license": "MIT",
   "workspaces": [
     "stemn-frontend-shared",
-    "stemn-frontend-website"
+    "stemn-frontend-website",
+    "stemn-frontend-desktop"
   ],
   "engines": {
     "node": ">=22.22.0",
@@ -16,7 +17,15 @@
     "dev": "npm run dev --workspace stemn-frontend-website",
     "build": "npm run build --workspace stemn-frontend-website",
     "serve": "npm run serve --workspace stemn-frontend-website",
-    "typecheck": "tsc -p stemn-frontend-website/tsconfig.json --noEmit"
+    "typecheck": "tsc -p stemn-frontend-website/tsconfig.json --noEmit",
+    "desktop:dev": "npm run dev --workspace stemn-frontend-desktop",
+    "desktop:build": "npm run build --workspace stemn-frontend-desktop",
+    "desktop:start": "npm run start --workspace stemn-frontend-desktop",
+    "desktop:package": "npm run package --workspace stemn-frontend-desktop",
+    "test": "npm test --workspaces --if-present",
+    "desktop:test": "npm test --workspace stemn-frontend-desktop",
+    "desktop:test:e2e": "npm run test:e2e --workspace stemn-frontend-desktop",
+    "desktop:typecheck": "npm run typecheck --workspace stemn-frontend-desktop"
   },
   "repository": {
     "type": "git",

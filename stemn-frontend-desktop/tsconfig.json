@@ -1,17 +1,36 @@
 {
-    "extends": "../tsconfig.json",
-    "compilerOptions": {
-        "paths": {
-            "stemn-shared/*": [
-                "stemn-frontend-shared/src/*/index.desktop.ts",
-                "stemn-frontend-shared/src/*"
-            ],
-            "reducer": ["stemn-frontend-desktop/app/shared/reducers/rootReducer.base.ts"]
-        }
-    },
-    "include": [
-        "../typings.d.ts",
-        "../stemn-frontend-desktop/src",
-        "../stemn-frontend-shared"
-    ]
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "allowImportingTsExtensions": true,
+    "lib": ["es2023", "dom", "dom.iterable"],
+    // `.desktop.*` files win over the generic ones, like the bundler's resolve.extensions
+    "moduleSuffixes": [".desktop", ""],
+    "paths": {
+      "stemn-shared/*": [
+        "../stemn-frontend-shared/src/*/index.desktop.ts",
+        "../stemn-frontend-shared/src/*/index.ts",
+        "../stemn-frontend-shared/src/*"
+      ],
+      "route-actions": ["./app/renderer/main/routeActions.js"],
+      "reducer": ["./app/shared/reducers/rootReducer.base.ts"],
+      "package-json": ["./package.json"]
+    }
+  },
+  "include": [
+    "./typings.d.ts",
+    "./app",
+    "./tests",
+    "./config",
+    "./electron.vite.config.ts",
+    "../stemn-frontend-shared/src"
+  ],
+  "exclude": [
+    "../stemn-frontend-shared/src/**/*.web.*",
+    "../stemn-frontend-shared/src/**/*.test.ts",
+    "../stemn-frontend-shared/src/**/*.test.tsx",
+    "./dist",
+    "./release",
+    "./qa"
+  ]
 }

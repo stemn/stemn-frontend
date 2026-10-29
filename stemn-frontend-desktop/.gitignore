@@ -1,31 +1,14 @@
-# Logs
-logs
-*.log
-
-# Runtime data
-pids
-*.pid
-*.seed
-
-# node-waf configuration
-.lock-wscript
-
-# Dependency directory
-# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
+# Dependencies (installed at the workspace root)
 node_modules
 
-# OSX
-.DS_Store
-
-# App packaged
-release
+# Build output, packaged apps, e2e screenshots / reports
 dist
+out
+release
+qa
 
-# Environment-specific
-.env
-
-# HappyPack
-.happypack
-
-reports/*.json
+# Logs / OS / env
+*.log
 npm-debug*
+.DS_Store
+.env
