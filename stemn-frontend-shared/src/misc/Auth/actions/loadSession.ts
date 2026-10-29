@@ -1,9 +1,13 @@
 import loadUserData from './loadUserData'
 import { getSettings } from 'stemn-shared/misc/UserSettings/UserSettings.actions.js'
+import type { StemnThunk } from 'stemn-shared/redux/types'
 
 /** Resolves once the store holds an auth token (or after `timeoutMs`) */
-export const waitForToken = (getState, { timeoutMs = 10_000, interval = 10 } = {}) =>
-  new Promise((resolve) => {
+export const waitForToken = (
+  getState: () => { auth: { authToken: string | null } },
+  { timeoutMs = 10_000, interval = 10 }: { timeoutMs?: number; interval?: number } = {},
+) =>
+  new Promise<void>((resolve) => {
     const start = Date.now()
     const check = () => {
       if (getState().auth.authToken || Date.now() - start >= timeoutMs) resolve()
@@ -18,7 +22,7 @@ export const waitForToken = (getState, { timeoutMs = 10_000, interval = 10 } = {
  * a replica that receives the token from the main process asynchronously, so requests
  * fired straight after the login went out without an Authorization header.
  */
-const loadSession = () => async (dispatch, getState) => {
+const loadSession = (): StemnThunk<Promise<unknown[]>> => async (dispatch, getState) => {
   await waitForToken(getState)
   return Promise.all([dispatch(loadUserData()), dispatch(getSettings())])
 }

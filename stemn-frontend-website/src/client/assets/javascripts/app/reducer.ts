@@ -1,6 +1,6 @@
 import { routerReducer as routing } from 'stemn-shared/routing'
 import { combineReducers } from 'redux'
-import auth from 'stemn-shared/misc/Auth/Auth.reducer.js'
+import auth from 'stemn-shared/misc/Auth/Auth.reducer'
 import autosuggest from 'stemn-shared/misc/Autosuggest/Autosuggest.reducer.js'
 import changes from 'stemn-shared/misc/Changes/Changes.reducer.js'
 import codeSplitting from 'stemn-shared/misc/CodeSplitting/CodeSplitting.reducer.js'

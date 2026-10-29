@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Footer from './Footer'
 
-import { logout } from 'stemn-shared/misc/Auth/Auth.actions.js'
+import { logout } from 'stemn-shared/misc/Auth/Auth.actions'
 
 const stateToProps = ({ auth }) => ({
   auth,

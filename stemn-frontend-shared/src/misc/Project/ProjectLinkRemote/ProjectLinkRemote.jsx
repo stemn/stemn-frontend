@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { authenticate } from 'stemn-shared/misc/Auth/Auth.actions.js'
+import { authenticate } from 'stemn-shared/misc/Auth/Auth.actions'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 

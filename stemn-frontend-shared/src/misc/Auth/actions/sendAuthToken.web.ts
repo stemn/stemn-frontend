@@ -1,13 +1,16 @@
 import http from 'axios'
-import { oauthCreds } from '../Auth.config.js'
+import { oauthCreds } from '../Auth.config'
 import loadSession from './loadSession'
+import type { ITokenResponse } from '../Auth.types'
+import type { SendAuthToken } from './types'
 
-export default ({ provider, code }) =>
+const sendAuthToken: SendAuthToken =
+  ({ provider, code }) =>
   (dispatch) => {
     if (oauthCreds[provider]) {
       return dispatch({
         type: 'AUTH/POST_AUTHENTICATE',
-        payload: http({
+        payload: http<ITokenResponse>({
           method: 'POST',
           url: oauthCreds[provider].postUrl,
           data: {
@@ -20,3 +23,5 @@ export default ({ provider, code }) =>
       })
     }
   }
+
+export default sendAuthToken

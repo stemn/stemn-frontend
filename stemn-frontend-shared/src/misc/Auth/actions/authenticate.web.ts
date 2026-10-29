@@ -1,21 +1,23 @@
 import { parseQuery, stringifyQuery } from 'stemn-shared/routing/query'
 
-import { oauthCreds } from '../Auth.config.js'
+import { oauthCreds } from '../Auth.config'
 import sendAuthToken from './sendAuthToken'
+import type { Authenticate, IOAuthCallbackQuery } from './types'
 
-const getPosition = (w, h) => ({
+const getPosition = (w: number, h: number) => ({
   left: screen.width / 2 - w / 2,
   top: screen.height / 2 - h / 2,
 })
 
-const popOauth = (url) =>
-  new Promise((resolve, reject) => {
+const popOauth = (url: string) =>
+  new Promise<IOAuthCallbackQuery>((resolve, reject) => {
     const interval = 500
     const width = 780
     const height = 410
     const position = getPosition(width, height)
     const options = `width=${width},height=${height},toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=${position.left},top=${position.top}`
-    const signinWin = window.open(url, 'SignIn', options)
+    // null when the browser blocks the popup: `focus()` below then throws and the promise rejects
+    const signinWin = window.open(url, 'SignIn', options) as Window
 
     const check = () => {
       // if you access signinWin.location.search directly, chrome will throw CORS error
@@ -24,7 +26,8 @@ const popOauth = (url) =>
 
       const queryParams = parseQuery(query)
       if (queryParams.code) {
-        resolve(queryParams)
+        // The provider redirects with a single `code`
+        resolve(queryParams as IOAuthCallbackQuery)
         signinWin.close()
       } else if (signinWin.closed) {
         reject('Window Closed')
@@ -37,7 +40,7 @@ const popOauth = (url) =>
     signinWin.focus()
   })
 
-export default (provider) => (dispatch) => {
+const authenticate: Authenticate = (provider) => (dispatch) => {
   if (oauthCreds[provider]) {
     const url = `${oauthCreds[provider].url}${stringifyQuery(oauthCreds[provider].params)}`
 
@@ -54,3 +57,5 @@ export default (provider) => (dispatch) => {
     )
   }
 }
+
+export default authenticate

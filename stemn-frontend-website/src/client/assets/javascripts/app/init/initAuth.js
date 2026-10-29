@@ -1,4 +1,4 @@
-import { loadUserData } from 'stemn-shared/misc/Auth/Auth.actions.js'
+import { loadUserData } from 'stemn-shared/misc/Auth/Auth.actions'
 import { getSettings } from 'stemn-shared/misc/UserSettings/UserSettings.actions.js'
 
 export default (store) => {

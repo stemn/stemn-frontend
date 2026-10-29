@@ -1,8 +1,10 @@
 import { showConfirm } from 'stemn-shared/misc/Modal/Modal.actions'
 import authenticate from './authenticate'
 import { getUser } from 'stemn-shared/misc/Users/Users.actions'
+import type { StemnThunk } from 'stemn-shared/redux/types'
 
-export default () => (dispatch, getState) =>
+/** Website only: re-authenticates with Linkedin, which imports the Linkedin profile into the user */
+export default (): StemnThunk<Promise<void>> => (dispatch, getState) =>
   dispatch(
     showConfirm({
       message: `
@@ -11,8 +13,9 @@ export default () => (dispatch, getState) =>
       If you are unsure, you should make a copy of your Stemn profile's summary and education sections.
     `,
     }),
-  ).then((result) => {
-    dispatch(authenticate('linkedin')).then((response) =>
+  ).then((result: unknown) => {
+    // The website's authenticate returns the OAuth promise (the desktop variant returns the plain action)
+    ;(dispatch(authenticate('linkedin')) as Promise<unknown>).then((response) =>
       // We get the new user data
       dispatch(
         getUser({

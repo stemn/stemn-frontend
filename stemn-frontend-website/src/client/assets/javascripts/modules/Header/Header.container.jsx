@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Header from './Header'
 
-import { logout } from 'stemn-shared/misc/Auth/Auth.actions.js'
+import { logout } from 'stemn-shared/misc/Auth/Auth.actions'
 import { showModal } from 'stemn-shared/misc/Modal/Modal.actions.js'
 
 import ProjectNewModalName from 'stemn-shared/misc/Projects/ProjectNewModal'

@@ -19,8 +19,9 @@
 // }
 
 import { show as showToast } from 'stemn-shared/misc/Toasts/Toasts.actions.js'
+import type { StemnThunk } from 'stemn-shared/redux/types'
 
-export default ({ email }) =>
+export default ({ email }: { email: string }): StemnThunk<Promise<void>> =>
   (dispatch) =>
     dispatch({
       type: 'AUTH/REQUEST_PASSWORD_RESET',

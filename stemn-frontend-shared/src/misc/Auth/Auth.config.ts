@@ -1,3 +1,18 @@
+import type { OAuthProvider } from './Auth.types'
+
+export interface IOAuthCredentials {
+  /** The provider's authorization page */
+  url: string
+  /** The API endpoint the authorization code is exchanged at */
+  postUrl: string
+  /** Query parameters of the authorization page */
+  params: {
+    redirect_uri: string
+    client_id: string
+    [param: string]: string | boolean | string[]
+  }
+}
+
 const { APP_TYPE, STEMN_ENV } = GLOBAL_ENV
 
 const rootDomain = APP_TYPE === 'web' ? window.location.origin : 'http://localhost:49554'
@@ -11,7 +26,7 @@ const googleClientId =
     ? '502305750839-8m9aian8ka9qb6j64t3dtjs2nq96tdae.apps.googleusercontent.com'
     : '502305750839-aq4jo6l15tkb1phi2gpr5hod274444m4.apps.googleusercontent.com'
 
-export const oauthCreds = {
+export const oauthCreds: Record<OAuthProvider, IOAuthCredentials> = {
   facebook: {
     url: 'https://www.facebook.com/dialog/oauth',
     postUrl: '/api/v1/auth/facebook',

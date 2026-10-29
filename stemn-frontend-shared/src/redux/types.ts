@@ -12,6 +12,7 @@
  */
 import type { AxiosRequestConfig, AxiosResponse } from 'axios'
 import type { Action, MiddlewareAPI } from 'redux'
+import type { IAuthState } from 'stemn-shared/misc/Auth/Auth.reducer'
 import type { IFilesState } from 'stemn-shared/misc/Files/Files.reducer'
 import type { IWebsocketState } from 'stemn-shared/misc/Websocket/Websocket.reducer'
 
@@ -20,6 +21,7 @@ import type { IWebsocketState } from 'stemn-shared/misc/Websocket/Websocket.redu
  * (reducer.ts / rootReducer.base.ts); add a slice here when its reducer is converted.
  */
 export interface ISharedStoreState {
+  auth: IAuthState
   files: IFilesState
   websocket: IWebsocketState
 }
@@ -83,7 +85,12 @@ export interface IStemnDispatch {
   // The main process returns whatever the aliased function produced (often a promise)
   (action: IAliasedAction): unknown
   <A extends Action>(action: A): A
+  // Anything else that can be dispatched, e.g. a value typed as a union of the above
+  (action: StemnDispatchable): unknown
 }
+
+/** What can be dispatched: an action or a thunk */
+export type StemnDispatchable = Action | ((dispatch: IStemnDispatch, getState: () => never) => unknown)
 
 /** A redux-thunk thunk, `S` being the slices it reads */
 export type StemnThunk<R = void, S = ISharedStoreState> = (dispatch: IStemnDispatch, getState: () => S) => R
