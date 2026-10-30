@@ -24,6 +24,9 @@ export const viewerFileTypes = {
     pcb: pcbExtensions,
     image: ['png', 'jpg', 'jpeg', 'gif', 'svg', 'bmp', 'ico'],
     code: getCodeMirrorExts(),
+    // G-code (3D printing and milling): converted by the open-source converter into a toolpath and shown by the layer
+    // viewer (PreviewGcode). Before 'autodesk', whose list has BRL-CAD's .g
+    gcode: ['gcode', 'gco', 'g', 'nc'],
     // CAD: converted by the deployment's CAD provider (Autodesk or the open-source OpenCascade converter) and shown
     // by the viewer that matches the render (PreviewCadSwitch). brep, brp, ply and 3mf are OpenCascade only.
     autodesk: [
@@ -120,7 +123,7 @@ export const viewerFileTypes = {
 }
 
 export type IPreviewType =
-  'other' | 'gdoc' | 'google' | 'pipeline' | 'gerber' | 'pcb' | 'image' | 'code' | 'autodesk' | 'pdf'
+  'other' | 'gdoc' | 'google' | 'pipeline' | 'gerber' | 'pcb' | 'image' | 'code' | 'gcode' | 'autodesk' | 'pdf'
 
 export const getViewerType = (fileName, provider): IPreviewType => {
   const extension = fileName.split('.').pop()

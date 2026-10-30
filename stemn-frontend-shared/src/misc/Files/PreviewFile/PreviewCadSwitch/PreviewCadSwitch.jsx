@@ -6,6 +6,7 @@ import { isDrawingFile, isIfcFile } from '../PreviewCadOss/renderFormats'
 import PreviewCadLoader from '../PreviewCadLoader'
 import PreviewCadOssLoader from '../PreviewCadOssLoader'
 import PreviewDrawingLoader from '../PreviewDrawingLoader'
+import PreviewGcodeLoader from '../PreviewGcodeLoader'
 import PreviewIfcLoader from '../PreviewIfcLoader'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import modelLocked from 'stemn-shared/assets/images/pure-vectors/model-locked.svg'
@@ -14,8 +15,9 @@ import modelLocked from 'stemn-shared/assets/images/pure-vectors/model-locked.sv
  * The CAD preview, independent of the conversion provider: requests the render, shows its progress, and once
  * the render is ready picks the viewer from the render's `cadProvider` (the open-source three.js viewer for
  * 'opencascade', the Autodesk viewer otherwise). Open-source renders of 2D drawings (DXF, DWG) are SVGs, shown by the
- * 2D viewer, and IFC models get the IFC property panel. The Autodesk viewer's scripts are only loaded for Autodesk renders.
- * Render failures arrive as `fileRender.error` and are shown by PreviewFile.
+ * 2D viewer, and IFC models get the IFC property panel. G-code files (`toolpath`) render into a toolpath the G-code layer
+ * viewer shows. The Autodesk viewer's scripts are only loaded for Autodesk renders. Render failures arrive as
+ * `fileRender.error` and are shown by PreviewFile.
  */
 export default class PreviewCadSwitch extends React.Component {
   state = {
@@ -42,7 +44,7 @@ export default class PreviewCadSwitch extends React.Component {
   }
 
   render() {
-    const { fileMeta, fileRender, previewId } = this.props
+    const { fileMeta, fileRender, previewId, toolpath } = this.props
     const { status } = this.state
 
     if (status === 'disabled') {
@@ -61,6 +63,8 @@ export default class PreviewCadSwitch extends React.Component {
           </div>
         </div>
       )
+    } else if (fileRender && fileRender.data && toolpath) {
+      return <PreviewGcodeLoader previewId={previewId} fileMeta={fileMeta} fileRender={fileRender} />
     } else if (fileRender && fileRender.data) {
       if (!isOpenCascadeRender(fileRender)) {
         return <PreviewCadLoader previewId={previewId} fileMeta={fileMeta} fileRender={fileRender} />

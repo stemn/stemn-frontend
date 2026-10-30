@@ -148,14 +148,21 @@ export const sideBySideAppearance = (
   }
 }
 
-/** The entity panel's rows: the classes whose filter is on, grouped by class in filter order, by label within a class */
+/**
+ * The entity panel's rows: the classes whose filter is on, grouped by class in filter order, by label within a class
+ * (numbers in order: Layer 2 before Layer 10)
+ */
 export const panelEntities = (entities: IDiffEntity[], filters: IDiffFilters) =>
   diffClasses
     .filter((diffClass) => filters[diffClass])
     .flatMap((diffClass) =>
       entities
         .filter((entity) => entity.class === diffClass)
-        .sort((x, y) => x.label.localeCompare(y.label) || x.id.localeCompare(y.id)),
+        .sort(
+          (x, y) =>
+            x.label.localeCompare(y.label, undefined, { numeric: true }) ||
+            x.id.localeCompare(y.id, undefined, { numeric: true }),
+        ),
     )
 
 export const countsOf = (entities: IDiffEntity[]): IDiffCounts =>
@@ -206,6 +213,11 @@ export const formatValue = (value: any, unit?: string) => {
   if (typeof value === 'number') return `${formatNumber(value)}${suffix}`
   if (Array.isArray(value) && value.every((item) => typeof item === 'number'))
     return `${value.map(formatNumber).join(' × ')}${suffix}`
+  // named numbers, e.g. a G-code layer's path length per feature
+  if (typeof value === 'object' && Object.values(value).every((item) => typeof item === 'number'))
+    return Object.entries(value)
+      .map(([name, item]) => `${name} ${formatNumber(item as number)}${suffix}`)
+      .join(', ')
   return typeof value === 'object' ? JSON.stringify(value) : String(value)
 }
 

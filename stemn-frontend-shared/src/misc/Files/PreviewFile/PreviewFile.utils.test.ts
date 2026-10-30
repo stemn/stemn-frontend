@@ -32,6 +32,12 @@ describe('getViewerType', () => {
     }
   })
 
+  it('sends G-code to the layer viewer, .g included', () => {
+    for (const name of ['print.gcode', 'PRINT.GCODE', 'print.gco', 'print.g', 'pocket.nc']) {
+      expect(getViewerType(name, 'stemn')).toBe('gcode')
+    }
+  })
+
   it('adds the provider specific extensions to the general ones', () => {
     expect(getViewerType('slides.pptx', 'dropbox')).toBe('pdf')
     expect(getViewerType('slides.pptx', 'drive')).toBe('google')

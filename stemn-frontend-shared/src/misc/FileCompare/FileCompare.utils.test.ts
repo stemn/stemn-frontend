@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { describe, expect, it } from 'vitest'
 import { initCompare } from './FileCompare.actions'
-import { getCompareModes, isCadFile, isPcbFile } from './FileCompare.utils.js'
+import { getCompareModes, isCadFile, isDiffableFile, isPcbFile } from './FileCompare.utils.js'
 
 const revision = (name: string, revisionId: string) => ({ data: { name, provider: 'stemn', revisionId } })
 
@@ -16,6 +16,12 @@ describe('compare modes for CAD files', () => {
       'single',
     ])
     expect(getCompareModes('image', 'image').map((mode) => mode.value)).not.toContain('unified')
+    expect(getCompareModes('gcode', 'gcode').map((mode) => mode.value)).toEqual([
+      'unified',
+      'sideBySide',
+      'aboveAndBelow',
+      'single',
+    ])
   })
 
   it('knows PCB and electronics files, which get the unified diff too', () => {
@@ -35,6 +41,13 @@ describe('compare modes for CAD files', () => {
     expect(isCadFile(undefined)).toBe(false)
   })
 
+  it('diffs CAD files and G-code', () => {
+    expect(isDiffableFile({ name: 'plate.3mf', provider: 'stemn' })).toBe(true)
+    expect(isDiffableFile({ name: 'print.gcode', provider: 'stemn' })).toBe(true)
+    expect(isCadFile({ name: 'print.gcode', provider: 'stemn' })).toBe(false)
+    expect(isDiffableFile({ name: 'notes.md', provider: 'stemn' })).toBe(false)
+  })
+
   it('opens two revisions of a CAD file in the unified diff, other files side by side', () => {
     const cad = {
       data: { name: 'bracket.step', provider: 'stemn' },
@@ -45,6 +58,11 @@ describe('compare modes for CAD files', () => {
       revisions: [revision('notes.md', 'b'), revision('notes.md', 'a')],
     }
     expect(initCompare({ file: cad as any, cacheKey: 'cad' }).payload.mode).toBe('unified')
+    const gcode = {
+      data: { name: 'tube.gcode', provider: 'stemn' },
+      revisions: [revision('tube.gcode', 'b'), revision('tube.gcode', 'a')],
+    }
+    expect(initCompare({ file: gcode as any, cacheKey: 'gcode' }).payload.mode).toBe('unified')
     expect(initCompare({ file: text as any, cacheKey: 'text' }).payload.mode).toBe('sideBySide')
     expect(initCompare({ file: { data: cad.data, revisions: [] } as any, cacheKey: 'one' }).payload.mode).toBe('single')
   })

@@ -1,9 +1,10 @@
 /**
- * The diff viewer for 3D models (lazy chunk, with three.js and the glTF loader): CAD files and IFC models. It asks the
- * API for the diff of two revisions (GET /sync/diff, which converts them first if needed), loads both glbs and shows them
- * in the unified view (A and B overlaid, coloured by class) or side by side with synchronised cameras, with class
- * filters, the A -> B slider and an entity panel. IFC models also get a property panel and a storey filter (a lazy chunk
- * of its own). Formats the API cannot diff fall back to the caller's plain side-by-side view.
+ * The diff viewer for 3D models (lazy chunk, with three.js and the glTF loader): CAD files, 3MF plates and IFC models. It
+ * asks the API for the diff of two revisions (GET /sync/diff, which converts them first if needed), loads both glbs and
+ * shows them in the unified view (A and B overlaid, coloured by class) or side by side with synchronised cameras, with
+ * class filters, the A -> B slider and an entity panel. IFC models also get a property panel and a storey filter (a lazy
+ * chunk of its own), 3MF build items their material. Formats the API cannot diff fall back to the caller's plain
+ * side-by-side view.
  */
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -18,7 +19,7 @@ import { DiffCanvas } from './DiffCanvas'
 import { DiffEntityPanel } from './DiffEntityPanel'
 import { DiffLoadStatus } from './DiffLoadStatus'
 import { DiffShortcutsHelp, DiffToolbar } from './DiffToolbar'
-import { type IDiffModel, rememberPlacements } from './diff.scene'
+import { entityNode, type IDiffModel, rememberPlacements } from './diff.scene'
 import classes from './FileDiffView.module.scss'
 import { useDiffLoad } from './useDiffLoad'
 import { type IDiffView, useDiffViewState } from './useDiffViewState'
@@ -67,6 +68,19 @@ const countTriangles = (model: IDiffModel) => {
 }
 
 const hidden = { a: null, b: null, line: false }
+
+/** A 3MF build item's material and colour, from its glTF node's extras (B's, or A's for a removed item) */
+const Material = ({ entity, a, b }: { entity: IDiffEntity; a: IDiffModel; b: IDiffModel }) => {
+  const node = entityNode(b, entity, 'b') || entityNode(a, entity, 'a')
+  const extras = node && node.userData.stemn
+  if (!extras || !(extras.material || extras.colour)) return null
+  return (
+    <div className={classes.muted} data-testid="diff-entity-material">
+      {extras.colour ? <span className={classes.swatch} style={{ background: extras.colour }} /> : null}
+      {extras.material || extras.colour}
+    </div>
+  )
+}
 
 const FileDiffContent = ({
   file1,
@@ -215,6 +229,11 @@ const FileDiffContent = ({
         onHover={setHovered}
         swapped={state.swapped}
         onSwap={controller.swap}
+        details={
+          manifest.adapter.name === 'additive'
+            ? (entity) => <Material entity={entity} a={models.a} b={models.b} />
+            : undefined
+        }
       >
         {ifc ? (
           <IfcPanelLoader

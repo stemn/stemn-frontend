@@ -53,6 +53,7 @@ viewer for the provider that made it. Everything lives in `stemn-frontend-shared
 | `PreviewFile.utils.ts` | CAD extensions (the `autodesk` viewer type, kept under that name): Autodesk's formats plus `brep`, `brp`, `ply`, `3mf` |
 | `PreviewCadSwitch/` | Provider-neutral: checks WebGL, requests the render (`renderFile`: websocket `RENDER/RENDER_FILE` -> `POST /sync/render`), shows the progress messages, then picks the viewer from `fileRender.cadProvider` |
 | `PreviewCadOssLoader/`, `PreviewCadOss/` | The open-source viewer (lazy chunk): three.js via @react-three/fiber. Fetches the `.glb` from `GET /api/v1/sync/downloadRender/{projectId}/{fileId}/{revisionId}` with the user's bearer token, orbit controls, fit to view, wireframe, section plane, a part list (one entry per glTF node with geometry) |
+| `PreviewGcodeLoader/`, `PreviewGcode/` | The G-code layer viewer (lazy chunk, ADR-012; viewer type `gcode`: `gcode`, `gco`, `g`, `nc`): G-code renders the same way as CAD (PreviewCadSwitch), into a toolpath (`toolpath.bin`, parsed by `toolpath.ts`) that `downloadRender` answers with. three.js lines per layer in the features' colours (PrusaSlicer's palette), a layer slider, "this layer only", travel moves on demand, a legend |
 | `PreviewCadLoader/`, `PreviewCad/` | The Autodesk viewer, unchanged: loads `viewer3D.min.js` from Autodesk's CDN, then shows the SVF from `downloadRenderFile` |
 | `Messages/Messages.jsx` | Render failures (`RENDER_FAILED` from either provider) show the conversion error |
 
@@ -87,7 +88,10 @@ Two revisions of a CAD file open in the diff viewer (`stemn-frontend-shared/src/
 mounts `FileDiffLoader` (lazy) for the unified and side-by-side modes, `FileDiffView` loads the backend's manifest
 (`GET /api/v1/sync/diff/{projectId}/{fileId}/{revisionA}/{revisionB}`, pending until both revisions are converted, then
 `DIFF/DIFF_COMPLETE`) and both glbs, and draws them with the rules in `diff.utils.ts`. The contract for the other file types is
-[`DIFF-VIEWERS.md`](DIFF-VIEWERS.md).
+[`DIFF-VIEWERS.md`](DIFF-VIEWERS.md). 3MF build plates diff like CAD files (one glTF node per build item; the entity details
+show the item's material from its node). G-code (ADR-012) opens in `GcodeDiffLoader` / `GcodeDiffView` (its own lazy chunk),
+which loads both toolpaths and draws them with `PreviewGcode/ToolpathDiff`: one diff class per layer, a height slider, and for the selected modified layer the moves only A or only B
+extrudes, compared in the browser.
 
 ## Source layout (website)
 

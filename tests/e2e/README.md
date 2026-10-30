@@ -52,6 +52,12 @@ PCB samples) to the CubeSat project, checks the layered preview (status, KiCad's
 off), then the unified diff: one entity of each class with the ids `fixtures/pcb/samples.json` lists, the class colours on each
 revision's copy of the entities in the drawing, the entity details (a footprint turned 90°, swapped from 0603 to 0805, removed)
 and side by side. It needs a backend with the PCB converter (stemn-backend ADR-024, the container `local/start.sh` starts).
+`specs/additive.spec.ts` uploads the backend's additive samples (`fixtures/additive`): `tube-v1.gcode` alone, checking the G-code
+layer viewer (status line, legend, layer slider, travel), then `tube-v1.gcode` → `tube-v2.gcode` and `parts-v1.3mf` →
+`parts-v2.3mf` as two revisions each, checking the diff viewer: the class counts and entity rows of `samples.json`, every change
+colour on the canvas, the moved distance, the moves only one revision extrudes in the modified layer (11 only in B), the layer
+height slider, side by side with linked cameras, and the 3MF items' materials. Like the CAD specs it needs a backend with the
+OpenCascade converter (stemn-backend ADR-026 for 3MF build items and G-code).
 On failure, traces, screenshots and videos are in `test-results/` (`npx playwright show-trace <trace.zip>`).
 
 In CI the reusable workflow `.github/workflows/e2e.yml` starts the backend with the composite action

@@ -164,3 +164,28 @@ Each entry states the context, the decision and its consequences. Newer entries 
   - Picking thin lines checks a few pixels around the pointer. A drawing's text uses the browser's sans-serif. Every SVG is
     sanitised (no scripts, `foreignObject`, `on*` handlers or `javascript:` links) even though the API serves it under
     `default-src 'none'`.
+
+## ADR-012: Additive manufacturing: 3MF in the CAD diff, G-code in a layer viewer of its own
+
+* Status: accepted (workstream D of the diff plan, with stemn-backend ADR-026)
+* Decision: 3MF files keep the `autodesk` viewer type and diff in the glTF diff viewer: the backend now converts each build item to
+  one glTF node (its placement in the node, its object's mesh in its own frame), so moved, re-meshed, added and removed objects get
+  their classes, and the entity details show an item's material and colour from its node's `extras.stemn`. G-code (`gcode`, `gco`,
+  `g`, `nc`) gets a viewer type of its own: the backend converts it into a toolpath (`toolpath.bin`: per layer its start point and
+  each move's end, kind and speed), which `PreviewGcode` draws with three.js lines layer by layer, coloured by feature, with a layer
+  slider, travel moves on demand and a legend. Its diffs open in `FileDiff/GcodeDiffView` (a lazy chunk, like ADR-011's 2D
+  diff viewer) with the toolbar, state, shortcuts and entity panel every diff viewer shares; it loads the two toolpaths and
+  draws them with `PreviewGcode/ToolpathDiff`, which draws every layer of A and B with `unifiedAppearance` (or `sideBySideAppearance`), slides moved layers from A's placement
+  to B's, hides layers above a height, and overlays the moves of the selected modified layer that only A (red) or only B (green)
+  extrudes.
+* Why: the founder asked for additive manufacturing explicitly. A layer is the unit printers and slicers think in, and comparing two
+  layers' moves (a set difference on 10 µm-quantised segments) is cheap enough to do on every selection in the browser, so the
+  manifest stays one record per layer. Lines rather than extruded tubes keep a print of millions of moves drawable.
+* Consequences:
+  - The G-code code is in lazy chunks on the three.js chunk the CAD viewer loads (sizes in the PR); the website's main chunks
+    did not grow.
+  - `.g` is G-code (Autodesk's BRL-CAD `.g` is shadowed).
+  - The entity panel sorts labels in number order (Layer 2 before Layer 10), and named numbers (a layer's path length per feature)
+    read as `outer-wall 75.1 mm, inner-wall 74.6 mm` in the deltas table.
+  - Not done: the G-code text as a second tab, extruded line widths, per-feature visibility toggles, print time estimates
+    (the toolpath carries speeds, not accelerations).
