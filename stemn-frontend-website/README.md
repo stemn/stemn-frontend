@@ -14,13 +14,13 @@ Anyone can get the [Stemn Website](https://stemn.com/) running locally and devel
 
 1. Make sure you have `git` and Node.js 24 (`.nvmrc`; 22.22+ works) installed.
 2. Clone the parent repo: `stemn-frontend`.
-3. Run `npm install` **at the repo root** (npm workspaces – this installs the website and `stemn-frontend-shared`).
+3. Run `pnpm install` **at the repo root** (pnpm workspace – this installs the website and `stemn-frontend-shared`).
 
 All the commands below can be run from the repo root or from this folder.
 
 ### Development server
 
-* `npm run dev` starts the Vite 8 dev server with React Fast Refresh on [http://localhost:8081/](http://localhost:8081/) (override with `PORT=...`).
+* `pnpm run dev` starts the Vite 8 dev server with React Fast Refresh on [http://localhost:8081/](http://localhost:8081/) (override with `PORT=...`).
   Port 3000 is used by the API and 8000 by the websocket server.
 
 ### Backend / `STEMN_ENV`
@@ -35,14 +35,14 @@ The backend urls are baked in at build time from `STEMN_ENV`
 | `production` | https://stemn.com           | https://stemn.com:8443             | https://stemn.com       |
 | `custom`     | `$API_SERVER`               | `$WEBSOCKET_SERVER`                | `$WEBSITE_URL`          |
 
-`npm run dev` defaults to `local`, `npm run build` defaults to `production`
-(e.g. `STEMN_ENV=local npm run build` for a production build against a local backend).
+`pnpm run dev` defaults to `local`, `pnpm run build` defaults to `production`
+(e.g. `STEMN_ENV=local pnpm run build` for a production build against a local backend).
 Set `SENTRY_DSN` at build time to enable Sentry error reporting.
 
 ### Build Production
 
-* `npm run build` builds the production bundle with Vite to `build/client` (and copies the express server to `build/server`)
-* `npm run serve` serves this build on [http://localhost:8081/](http://localhost:8081/) (`PORT=...` to change)
+* `pnpm run build` builds the production bundle with Vite to `build/client` (and copies the express server to `build/server`)
+* `pnpm run serve` serves this build on [http://localhost:8081/](http://localhost:8081/) (`PORT=...` to change)
 
 ### Docker
 
@@ -59,14 +59,14 @@ docker run -p 8081:8081 stemn-website
 The previous webpack 5 + Babel toolchain is kept working as a fallback (`config/webpack.config.*.js`) until it is
 retired. It builds the same source with the same conventions:
 
-* `npm run dev:webpack` webpack-dev-server with React Fast Refresh on :8081
-* `npm run build:webpack` production build to `build/client` (+ `build/server`)
+* `pnpm run dev:webpack` webpack-dev-server with React Fast Refresh on :8081
+* `pnpm run build:webpack` production build to `build/client` (+ `build/server`)
 
 The git tag `webpack5-fallback` marks the last commit that was built with webpack only.
 
 ### Type checking
 
-* `npm run typecheck` runs `tsc --noEmit` for the app (`tsconfig.json`) and the Vite config (`tsconfig.node.json`).
+* `pnpm run typecheck` runs `tsc --noEmit` for the app (`tsconfig.json`) and the Vite config (`tsconfig.node.json`).
   Vite (Oxc) only strips types, so type errors never break the build.
 
 ### Layout and conventions

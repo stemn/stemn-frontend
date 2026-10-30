@@ -1,5 +1,5 @@
 /**
- * Vitest (unit tests) for the whole monorepo: `npm test` / `npm run test:watch`.
+ * Vitest (unit tests) for the whole monorepo: `pnpm test` / `pnpm run test:watch`.
  * Tests live next to the code as `*.test.(ts|tsx|js|jsx|mts)`. They resolve modules like the
  * website build (`stemn-shared/*` alias, `.web.*` first) with a web GLOBAL_ENV.
  * End-to-end tests are separate (Playwright: tests/e2e, stemn-frontend-desktop/tests).

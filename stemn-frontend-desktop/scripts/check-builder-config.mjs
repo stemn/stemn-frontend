@@ -2,13 +2,14 @@
 /**
  * Validates electron-builder.yml against the electron-builder 26 schema (all
  * platforms) without building, e.g. for the Windows/macOS targets that can't be
- * built on Linux.  Usage: npm run package:check
+ * built on Linux.  Usage: pnpm run package:check
  */
 import { createRequire } from 'node:module'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-const require = createRequire(import.meta.url)
+// app-builder-lib and builder-util are electron-builder's own dependencies (same versions): resolve them from it
+const require = createRequire(createRequire(import.meta.url).resolve('electron-builder'))
 const { getConfig, validateConfiguration } = require('app-builder-lib/out/util/config/config')
 const { DebugLogger } = require('builder-util/out/DebugLogger')
 

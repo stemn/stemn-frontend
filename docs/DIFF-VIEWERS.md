@@ -73,7 +73,7 @@ every 3 s while pending, in case the websocket is not connected.
 * **Side by side**: the two panes' cameras move together (`FileDiffView/cameraLink.ts`).
 * **Lazy loading**: `FileDiffLoader` (main bundle, a few lines) imports `FileDiffView` with three.js and the glTF loader only when a
   diff is opened; three.js is the same chunk the CAD preview uses. CI fails when the main chunks grow beyond
-  `stemn-frontend-website/bundle-size-baseline.json` + 2% (`npm run size --workspace stemn-frontend-website`).
+  `stemn-frontend-website/bundle-size-baseline.json` + 2% (`pnpm --filter stemn-frontend-website run size`).
 
 ### Keyboard shortcuts
 

@@ -4,7 +4,7 @@ How the Stemn frontend fits together. For the reasoning behind the choices see [
 
 ## Repository
 
-An npm workspace with a single lockfile at the root:
+A pnpm workspace (`pnpm-workspace.yaml`, isolated `node_modules`) with a single `pnpm-lock.yaml` at the root:
 
 | Package | What it is |
 | --- | --- |
@@ -119,7 +119,7 @@ Shared code lives in `stemn-frontend-shared/src/misc/<Feature>/` (components, `*
 
 ## Quality gates
 
-`npm run lint` (ESLint 10 + Prettier), `npm run typecheck`, `npm test` (Vitest), `npm run size --workspace stemn-frontend-website`
-(main bundle gzip size against the baseline + 2%, after `npm run build`), `npm run test:e2e` (website, Playwright)
-and `npm run desktop:test:e2e` (Electron, Playwright). GitHub Actions run all of them on every pull request,
+`pnpm run lint` (ESLint 10 + Prettier), `pnpm run typecheck`, `pnpm test` (Vitest), `pnpm --filter stemn-frontend-website run size`
+(main bundle gzip size against the baseline + 2%, after `pnpm run build`), `pnpm run test:e2e` (website, Playwright)
+and `pnpm run desktop:test:e2e` (Electron, Playwright). GitHub Actions run all of them on every pull request,
 plus both website builds, the desktop build, the Docker image, CodeQL and dependency review. See the root README.

@@ -71,7 +71,7 @@ a local feed in tests. The EU edition's feed must be hostable on EU infrastructu
    release notes dialog from the feed's `releaseNotes` (markdown rendered with the existing
    markdown pipeline).
 4. CI: `.github/workflows/desktop-release.yml` on tags `desktop-v*`: matrix (ubuntu, windows,
-   macos), `npm ci`, `npm run desktop:build`, `electron-builder --publish never`, sign/notarise
+   macos), `pnpm install --frozen-lockfile`, `pnpm run desktop:build`, `electron-builder --publish never`, sign/notarise
    with secrets (`AZURE_*`, `APPLE_API_KEY_*`, `CSC_LINK`/`CSC_KEY_PASSWORD`, `GPG_*`), upload
    artefacts, then a `publish` job that creates a draft GitHub Release **in `stemn/stemn-desktop`**
    (cross-repository token `DESKTOP_RELEASES_TOKEN`), uploads installers and

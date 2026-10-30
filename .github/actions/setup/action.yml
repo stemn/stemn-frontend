@@ -1,5 +1,5 @@
 name: Set up the frontend workspace
-description: Node 24 + npm ci (with the npm cache) for the stemn-frontend workspaces. Optionally downloads the Electron binary.
+description: Node 24 + pnpm (the packageManager version) + pnpm install --frozen-lockfile (with the pnpm store cache) for the stemn-frontend workspace. Optionally downloads the Electron binary.
 inputs:
   electron:
     description: Also download the Electron binary (needed to run the desktop app)
@@ -7,16 +7,17 @@ inputs:
 runs:
   using: composite
   steps:
+    - uses: pnpm/action-setup@v6
     - uses: actions/setup-node@v7
       with:
         node-version-file: .nvmrc
-        cache: npm
-    - name: npm ci
+        cache: pnpm
+    - name: pnpm install
       shell: bash
-      run: npm ci --no-audit --no-fund
+      run: pnpm install --frozen-lockfile
       env:
         HUSKY: '0'
     - name: Electron binary
       if: inputs.electron == 'true'
       shell: bash
-      run: node node_modules/electron/install.js
+      run: node stemn-frontend-desktop/node_modules/electron/install.js

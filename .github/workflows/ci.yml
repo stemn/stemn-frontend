@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
-      - run: npm run lint
+      - run: pnpm run lint
 
   typecheck:
     name: typecheck
@@ -30,7 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
-      - run: npm run typecheck
+      - run: pnpm run typecheck
 
   unit:
     name: unit tests (vitest)
@@ -39,7 +39,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
-      - run: npm test
+      - run: pnpm test
 
   build:
     name: build (${{ matrix.target }})
@@ -50,11 +50,11 @@ jobs:
       matrix:
         include:
           - target: website-vite
-            command: npm run build
+            command: pnpm run build
           - target: website-webpack-fallback
-            command: npm run build:webpack
+            command: pnpm run build:webpack
           - target: desktop
-            command: npm run desktop:build
+            command: pnpm run desktop:build
     steps:
       - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
@@ -63,7 +63,7 @@ jobs:
       # three.js and the diff UI are lazy chunks (stemn-frontend-website/scripts/bundleSize.js)
       - name: Main bundle size (gzip) against bundle-size-baseline.json
         if: matrix.target == 'website-vite'
-        run: npm run size --workspace stemn-frontend-website
+        run: pnpm --filter stemn-frontend-website run size
 
   docker:
     name: docker image (website)
@@ -85,5 +85,9 @@ jobs:
     # requests from forks, so they skip this job.
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     uses: ./.github/workflows/e2e.yml
+    # DEMONSTRATION: the backend fixture runs stemn-backend's pnpm branch (stemn/stemn-backend#182), whose
+    # local/start.sh installs with pnpm. Back to the default (staging) once that PR is merged.
+    with:
+      backend-ref: chore/pnpm
     secrets:
       STEMN_BACKEND_DEPLOY_KEY: ${{ secrets.STEMN_BACKEND_DEPLOY_KEY }}

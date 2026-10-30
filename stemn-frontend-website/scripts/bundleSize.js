@@ -20,7 +20,7 @@ const assets = [
 ].map((match) => match[1])
 
 if (!assets.some((asset) => asset.endsWith('.js'))) {
-  console.error('No entry script in build/client/index.html: run the Vite build first (npm run build)')
+  console.error('No entry script in build/client/index.html: run the Vite build first (pnpm run build)')
   process.exit(1)
 }
 

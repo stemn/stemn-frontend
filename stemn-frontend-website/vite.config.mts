@@ -1,10 +1,10 @@
 /**
  * Vite 8 (Rolldown + Oxc) config for the Stemn website.
  *
- *   npm run dev     dev server with React Fast Refresh on http://localhost:8081 (PORT=...)
- *   npm run build   production build -> build/client (+ the express server -> build/server)
+ *   pnpm run dev     dev server with React Fast Refresh on http://localhost:8081 (PORT=...)
+ *   pnpm run build   production build -> build/client (+ the express server -> build/server)
  *
- * The webpack 5 fallback (npm run dev:webpack / build:webpack, config/webpack.config.*.js)
+ * The webpack 5 fallback (pnpm run dev:webpack / build:webpack, config/webpack.config.*.js)
  * follows the same conventions:
  *   - `.web.*` files win over the generic ones (the desktop app resolves `.desktop.*`)
  *   - aliases: `stemn-shared/*`, `theme`, `route-actions`, `reducer`, and the `pages/`,
