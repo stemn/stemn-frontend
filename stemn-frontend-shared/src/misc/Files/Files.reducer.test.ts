@@ -108,6 +108,15 @@ describe('Files reducer', () => {
     expectOtherBranchesKept(next, prev, ['fileRenders'])
   })
 
+  it('FILES/RENDER_FILE_DOWNLOAD_FULFILLED keeps the CAD provider that made the render', () => {
+    const next = reducer(prev, {
+      type: 'FILES/RENDER_FILE_DOWNLOAD_FULFILLED',
+      meta: { cacheKey: 'file1-rev1' },
+      payload: { data: 'render url', cadProvider: 'opencascade' },
+    })
+    expect(next.fileRenders['file1-rev1']).toEqual({ data: 'render url', cadProvider: 'opencascade', loading: false })
+  })
+
   it('FILES/RENDER_FILE_PROGRESS replaces the render entry with the status', () => {
     const next = reducer(prev, {
       type: 'FILES/RENDER_FILE_PROGRESS',

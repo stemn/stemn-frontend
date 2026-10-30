@@ -22,10 +22,15 @@ export const viewerFileTypes = {
     pcb: ['brd', 'pcb', 'kicad_pcb'],
     image: ['png', 'jpg', 'jpeg', 'gif', 'svg', 'bmp', 'ico'],
     code: getCodeMirrorExts(),
+    // CAD: converted by the deployment's CAD provider (Autodesk or the open-source OpenCascade converter) and shown
+    // by the viewer that matches the render (PreviewCadSwitch). brep, brp, ply and 3mf are OpenCascade only.
     autodesk: [
       '3dm',
+      '3mf',
       '3ds',
       'asm',
+      'brep',
+      'brp',
       'cam360',
       'catpart',
       'catproduct',
@@ -57,6 +62,7 @@ export const viewerFileTypes = {
       'nwc',
       'nwd',
       'obj',
+      'ply',
       'prt',
       'rcp',
       'rvt',

@@ -1,0 +1,73 @@
+@value primary, border1, bg1 from "theme";
+
+.viewer {
+  min-height: 300px;
+}
+
+.toolbar {
+  border-bottom: 1px solid border1;
+  padding: 4px 8px;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.tool {
+  border: 1px solid border1;
+  border-radius: 3px;
+  background: white;
+  padding: 3px 10px;
+  font-size: 12px;
+  cursor: pointer;
+
+  &[aria-pressed='true'] {
+    border-color: primary;
+    color: primary;
+  }
+}
+
+.axis {
+  font-size: 12px;
+}
+
+.status {
+  opacity: 0.7;
+}
+
+.canvas {
+  background: linear-gradient(#f7f8fa, #e6e9ee);
+}
+
+.parts {
+  width: 200px;
+  border-left: 1px solid border1;
+  overflow-y: auto;
+  font-size: 13px;
+}
+
+.partsTitle {
+  padding: 8px 10px;
+  font-weight: 600;
+  border-bottom: 1px solid border1;
+}
+
+.part {
+  display: block;
+  width: 100%;
+  border: none;
+  background: none;
+  text-align: left;
+  padding: 6px 10px;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:hover {
+    background: bg1;
+  }
+
+  &[aria-pressed='true'] {
+    color: primary;
+    font-weight: 600;
+  }
+}

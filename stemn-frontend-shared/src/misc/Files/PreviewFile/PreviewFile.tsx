@@ -5,7 +5,7 @@ import { IFileData, IFileRender } from 'stemn-shared/misc/Files/Files.reducer'
 import DownloadFile from '../DownloadFile/DownloadFile.jsx'
 import ErrorMessages from './Messages/Messages.jsx'
 import { isAssembly } from './PreviewCad/PreviewCad.utils.js'
-import PreviewCadLoader from './PreviewCadLoader'
+import PreviewCadSwitch from './PreviewCadSwitch/PreviewCadSwitch.jsx'
 import PreviewCode from './PreviewCode'
 import { dispatchToProps, IPreviewFileContainerProps } from './PreviewFile.container'
 import classes from './PreviewFile.module.scss'
@@ -64,7 +64,7 @@ export class PreviewFileComponent extends React.Component<IPreviewFileComponentP
       } else if (viewerType === 'code') {
         return <PreviewCode previewId={previewId} fileMeta={file} fileData={singleFileData} downloadFn={getFile} />
       } else if (viewerType === 'autodesk') {
-        return <PreviewCadLoader previewId={previewId} fileMeta={file} fileRender={fileRender} renderFn={renderFn} />
+        return <PreviewCadSwitch previewId={previewId} fileMeta={file} fileRender={fileRender} renderFn={renderFn} />
       } else if (viewerType === 'google') {
         return <PreviewGoogle previewId={previewId} fileMeta={file} />
       } else if (viewerType === 'gdoc') {

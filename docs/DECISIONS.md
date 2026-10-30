@@ -73,3 +73,18 @@ Each entry states the context, the decision and its consequences. Newer entries 
 * Status: proposed (PR 5, left open for the founder's review)
 * Decision: enable `allowJs` + `checkJs` incrementally and convert module by module to strict TypeScript, starting with
   the shared routing, Websocket, Auth and Files modules. PR 5 adds a conversion playbook.
+
+## ADR-008: An open-source CAD viewer next to the Autodesk viewer
+
+* Status: accepted (the CAD viewer PR, with stemn-backend's open-source CAD conversion provider)
+* Decision: CAD previews are shown by the viewer that matches the render's `cadProvider`. Renders made by the backend's
+  OpenCascade converter (`cadProvider: 'opencascade'`, a glTF 2.0 `.glb`) open in `PreviewCadOss`: three.js through
+  @react-three/fiber, with orbit controls, fit to view, wireframe and section toggles and a part list. Every other render,
+  including the ones made before the field existed, opens in the Autodesk viewer exactly as before. The Autodesk viewer's
+  scripts are only loaded from Autodesk's CDN for Autodesk renders, so a deployment that converts with OpenCascade (the EU
+  edition by default) never contacts Autodesk from the browser.
+* Why: the EU edition must not send CAD files or viewer requests to a US company, and an open viewer needs no account or
+  quota. The founder asked to keep Autodesk as an alternative rather than replace it.
+* Consequences: three.js is a lazy chunk (about 160 kB gzipped) loaded only for open-source renders. @react-three/drei
+  was left out because it pulls in some 35 packages (hls.js, mediapipe, troika, ...) for the two helpers the viewer needs;
+  orbit controls and the glTF loader come from `three/addons`.
