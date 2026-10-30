@@ -1,5 +1,6 @@
 import http from 'axios'
 import { legacyParamsSerializer } from 'stemn-shared/utils/legacyParamsSerializer'
+import { setApiTokenGetter } from 'stemn-shared/api/client'
 
 /**
  * axios defaults shared by the main process and the renderers.
@@ -9,6 +10,8 @@ export default (getToken = () => undefined) => {
   http.defaults.baseURL = `${GLOBAL_ENV.API_SERVER}/`
   // Keep the axios 0.x query string format the API was written against
   http.defaults.paramsSerializer = { serialize: legacyParamsSerializer }
+  // The generated API client (stemn-shared/api) reads the same token
+  setApiTokenGetter(getToken)
   http.interceptors.request.use((config) => {
     const token = getToken()
     const authorization = config.headers.get('Authorization')
