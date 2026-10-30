@@ -7,6 +7,7 @@
   "description": "Code shared between stemn-frontend-website and stemn-frontend-desktop. Consumed as source via the `stemn-shared` alias; config/ holds the build conventions both apps use.",
   "dependencies": {
     "@firefox-devtools/react-contextmenu": "5.2.4",
+    "@react-three/fiber": "9.8.2",
     "@rjsf/core": "6.11.0",
     "@rjsf/utils": "6.11.0",
     "@rjsf/validator-ajv8": "6.11.0",
@@ -43,6 +44,7 @@
     "react-transition-group": "4.4.5",
     "recharts": "3.10.1",
     "redux": "5.0.1",
+    "three": "0.186.1",
     "uuid": "14.0.3"
   }
 }

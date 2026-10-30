@@ -1,4 +1,17 @@
-export const renderFileDownload = ({ projectId, fileId, revisionId = '', provider, timestamp }) => {
+import { renderFileDownloadUrl } from './renderFileDownloadUrl'
+
+export const renderFileDownload = ({
+  projectId,
+  fileId,
+  revisionId = '',
+  provider,
+  timestamp,
+  cadProvider = undefined,
+}) => {
+  // open-source renders are a single glb the viewer fetches itself; the file cache below extracts Autodesk's SVF zip
+  if (cadProvider === 'opencascade') {
+    return renderFileDownloadUrl({ projectId, fileId, revisionId, timestamp, cadProvider })
+  }
   const cacheKey = timestamp ? `${fileId}-${revisionId}-${timestamp}` : `${fileId}-${revisionId}`
   return {
     type: 'FILES/RENDER_FILE_DOWNLOAD',

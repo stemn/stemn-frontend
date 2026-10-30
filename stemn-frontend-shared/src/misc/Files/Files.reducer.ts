@@ -8,6 +8,8 @@ export interface IFileRender {
   data?: any
   status?: string
   loading: boolean
+  // the CAD provider that made the render: picks the viewer (absent = autodesk)
+  cadProvider?: 'autodesk' | 'opencascade'
 }
 
 export interface IFileData {
@@ -123,6 +125,7 @@ function reducer(state: IFilesState, action: AnyAction): IFilesState {
       return produce(state, (draft) => {
         setIn(draft, ['fileRenders', action.meta.cacheKey], {
           data: action.payload.data,
+          cadProvider: action.payload.cadProvider,
           loading: false,
         })
       })

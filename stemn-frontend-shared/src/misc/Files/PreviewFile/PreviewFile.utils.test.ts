@@ -14,6 +14,24 @@ describe('getViewerType', () => {
     expect(getViewerType('unknown.xyz', 'stemn')).toBe('other')
   })
 
+  it('sends the CAD formats of both conversion providers to the CAD viewer', () => {
+    for (const name of [
+      'part.STEP',
+      'part.stp',
+      'part.iges',
+      'part.igs',
+      'part.brep',
+      'part.brp',
+      'part.stl',
+      'part.obj',
+    ]) {
+      expect(getViewerType(name, 'stemn')).toBe('autodesk')
+    }
+    for (const name of ['mesh.ply', 'mesh.3mf', 'part.sldprt', 'assembly.iam']) {
+      expect(getViewerType(name, 'stemn')).toBe('autodesk')
+    }
+  })
+
   it('adds the provider specific extensions to the general ones', () => {
     expect(getViewerType('slides.pptx', 'dropbox')).toBe('pdf')
     expect(getViewerType('slides.pptx', 'drive')).toBe('google')

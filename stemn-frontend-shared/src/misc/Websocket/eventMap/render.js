@@ -20,6 +20,7 @@ export default (store, action) => {
           revisionId: action.payload.revisionId,
           provider: action.payload.provider,
           timestamp: action.payload.timestamp,
+          cadProvider: action.payload.cadProvider,
         }),
       )
     case 'RENDER/RENDER_FAILED':

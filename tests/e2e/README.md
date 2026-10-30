@@ -26,6 +26,12 @@ seeded database. `fixtures/test.ts` adds `adaPage` (logged in as Ada through the
 uncaught exception in the page.
 
 Each run registers new accounts, creates a project with a PNG and posts one comment on a seeded thread.
+
+`specs/cad.spec.ts` uploads `fixtures/cad/assembly.step` (a copy of the backend's shared CAD sample) to the seeded CubeSat
+project as its owner, under a new name each run, and checks that the open-source glTF viewer draws the model and lists its two
+parts. It needs a backend that converts with OpenCascade (stemn-backend `STEMN_CAD_PROVIDER=opencascade`, the
+converter container that `local/start.sh` starts). Against an Autodesk-only backend it fails, because the render never reaches
+the open-source viewer.
 On failure, traces, screenshots and videos are in `test-results/` (`npx playwright show-trace <trace.zip>`).
 
 In CI the reusable workflow `.github/workflows/e2e.yml` starts the backend with the composite action

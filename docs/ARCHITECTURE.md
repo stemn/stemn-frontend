@@ -40,7 +40,36 @@ middleware: thunk · auth · throttle · httpPackage/httpTransform (axios, `http
 * **Modals**: components register themselves in `ModalRegistry` (`registerModal(name, Component)`). Actions open them by name
   (`showModal({ modalType })`). Shared modals export only the name to the Electron main process (`index.electron.js`).
 * **Previews**: `PreviewFile` picks a viewer by file type: pdf.js, CodeMirror, markdown (markdown-it + KaTeX), images,
-  the PCB/gerber viewer, the pipeline graph, and the Autodesk viewer for CAD.
+  the PCB/gerber viewer, the pipeline graph, and a CAD viewer (see below).
+
+## CAD previews
+
+The backend converts CAD files with one of two providers, chosen per deployment (stemn-backend `STEMN_CAD_PROVIDER`):
+Autodesk Platform Services (SVF) or its own OpenCascade converter (glTF 2.0). The frontend shows each render in the
+viewer for the provider that made it. Everything lives in `stemn-frontend-shared/src/misc/Files/PreviewFile/`:
+
+| Piece | What it does |
+| --- | --- |
+| `PreviewFile.utils.ts` | CAD extensions (the `autodesk` viewer type, kept under that name): Autodesk's formats plus `brep`, `brp`, `ply`, `3mf` |
+| `PreviewCadSwitch/` | Provider-neutral: checks WebGL, requests the render (`renderFile`: websocket `RENDER/RENDER_FILE` -> `POST /sync/render`), shows the progress messages, then picks the viewer from `fileRender.cadProvider` |
+| `PreviewCadOssLoader/`, `PreviewCadOss/` | The open-source viewer (lazy chunk): three.js via @react-three/fiber. Fetches the `.glb` from `GET /api/v1/sync/downloadRender/{projectId}/{fileId}/{revisionId}` with the user's bearer token, orbit controls, fit to view, wireframe, section plane, a part list (one entry per glTF node with geometry) |
+| `PreviewCadLoader/`, `PreviewCad/` | The Autodesk viewer, unchanged: loads `viewer3D.min.js` from Autodesk's CDN, then shows the SVF from `downloadRenderFile` |
+| `Messages/Messages.jsx` | Render failures (`RENDER_FAILED` from either provider) show the conversion error |
+
+The contract with the backend:
+
+* The render record and the `RENDER/RENDER_DOWNLOAD`, `RENDER/RENDER_COMPLETE` and `RENDER/RENDER_FAILED` events carry
+  `cadProvider: 'autodesk' | 'opencascade'`. A missing value means Autodesk (renders made before the field). Do not confuse
+  it with `provider`, which is the file's storage provider (dropbox, drive, stemn).
+* `eventMap/render.js` passes `cadProvider` to `renderFileDownload`, and the Files reducer keeps it on the `fileRenders` entry.
+  On the desktop app, Autodesk renders are still downloaded and unzipped by the file cache. Open-source renders are a single `.glb`,
+  so the viewer fetches them directly, as on the website.
+* Open-source renders also record `outputs` (`parts`, `triangles`, `size` in mm, the converter version and duration).
+  The converter writes a PNG thumbnail as well, served at `downloadRenderFile/.../thumbnail.png`.
+
+Part colours for parts without a material use the palette of the converter's thumbnails, so a part has the same colour
+in both. The e2e test `tests/e2e/specs/cad.spec.ts` uploads the backend's shared `assembly.step` sample and checks the
+viewer.
 
 ## Source layout (website)
 
