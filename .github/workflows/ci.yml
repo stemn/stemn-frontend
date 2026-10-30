@@ -65,6 +65,39 @@ jobs:
         if: matrix.target == 'website-vite'
         run: npm run size --workspace stemn-frontend-website
 
+  desktop-updater:
+    name: desktop updater (AppImage + local feed)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+        with:
+          electron: true
+      - name: Release config (electron-builder schema, all platforms and editions)
+        working-directory: stemn-frontend-desktop
+        run: |
+          npm run package:check
+          STEMN_EDITION=eu UPDATES_CHANNEL=beta npm run package:check
+      - name: Electron runtime libraries, FUSE (AppImage) + xvfb
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq xvfb libnss3 libgtk-3-0t64 libxss1 libasound2t64 libgbm1 libxshmfence1 libfuse2t64
+      - name: Updater integration test (packages an unsigned AppImage, serves a local generic feed)
+        run: xvfb-run --auto-servernum --server-args="-screen 0 1440x900x24" npm run desktop:test:updater
+      - name: Upload screenshots and results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: desktop-updater-${{ github.run_attempt }}
+          path: |
+            stemn-frontend-desktop/qa/updater-*.png
+            stemn-frontend-desktop/qa/updater-results
+          retention-days: 14
+          if-no-files-found: ignore
+
   docker:
     name: docker image (website)
     runs-on: ubuntu-24.04

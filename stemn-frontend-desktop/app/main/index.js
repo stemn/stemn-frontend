@@ -6,7 +6,6 @@ import log from 'electron-log/main'
 
 import { initialise as initWebsocket } from 'stemn-shared/misc/Websocket/websocket.js'
 import socketEventMap from 'stemn-shared/misc/Websocket/eventMap'
-import AutoUpdateInit from 'stemn-shared/desktop/AutoUpdate/AutoUpdate.init.js'
 import { create as createWindow } from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js'
 import configureStore from '../shared/store/configureStore.main.js'
 import { create as createMainWindow } from './createMainWindow'
@@ -17,6 +16,7 @@ import postStoreSetup from './postStoreSetup.js'
 import initApiServer from './api/index.js'
 import { registerIpcHandlers } from './ipc.js'
 import { registerProtocolHandlers, registerSchemes } from './protocol.js'
+import { getUpdater, initUpdater } from './updater/index.js'
 import { getStore, setStore } from './storeRef.js'
 import { windows } from './windows.js'
 
@@ -72,7 +72,7 @@ async function start() {
   // Configure store
   const store = configureStore(persistedState || {})
   setStore(store)
-  registerIpcHandlers({ getStore })
+  registerIpcHandlers({ getStore, getUpdater })
   postStoreSetup(store)
 
   // Persist the store (debounced, writes are async)
@@ -115,8 +115,9 @@ async function start() {
     socketEventMap(store, action)
   })
 
-  // Initialise the auto-update after 5 seconds
-  setTimeout(() => AutoUpdateInit(store), 5000)
+  // Start the auto-updater after 5 seconds (STEMN_UPDATER_DELAY_MS: tests)
+  const updaterDelay = Number(process.env.STEMN_UPDATER_DELAY_MS)
+  setTimeout(() => initUpdater(store), Number.isFinite(updaterDelay) && updaterDelay >= 0 ? updaterDelay : 5000)
 }
 
 log.info(`Stemn Desktop ${app.getVersion()} starting (STEMN_ENV=${GLOBAL_ENV.STEMN_ENV}, API ${GLOBAL_ENV.API_SERVER})`)

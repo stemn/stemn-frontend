@@ -32,6 +32,7 @@
     "desktop:start": "npm run start --workspace stemn-frontend-desktop",
     "desktop:package": "npm run package --workspace stemn-frontend-desktop",
     "desktop:test:e2e": "npm run test:e2e --workspace stemn-frontend-desktop",
+    "desktop:test:updater": "npm run test:updater --workspace stemn-frontend-desktop",
     "desktop:typecheck": "npm run typecheck --workspace stemn-frontend-desktop",
     "prepare": "husky"
   },

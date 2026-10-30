@@ -23,6 +23,14 @@ export const IPC = {
   SHOW_ITEM_IN_FOLDER: 'stemn:show-item-in-folder',
   /** send: { level, message } renderer errors/warnings for the main log */
   LOG: 'stemn:log',
+  /** invoke: () => UpdateStatus (see app/preload/types.ts) */
+  UPDATES_STATUS: 'stemn:updates-status',
+  /** invoke: () => UpdateStatus - check the update feed now */
+  UPDATES_CHECK: 'stemn:updates-check',
+  /** invoke: () => UpdateStatus - download an available update (beta: not downloaded automatically) */
+  UPDATES_DOWNLOAD: 'stemn:updates-download',
+  /** invoke: () => { ok, reason?, message? } - restart and install; refused while a commit is in flight */
+  UPDATES_QUIT_AND_INSTALL: 'stemn:updates-quit-and-install',
 }
 
 /** Window names used for action scopes (`meta.scope: ['main']`) */

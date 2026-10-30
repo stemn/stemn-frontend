@@ -5,7 +5,13 @@ import { getProviderPath } from 'stemn-shared/desktop/System/System.actions.js'
 import { storeChange } from 'stemn-shared/misc/Store/Store.actions.js'
 import { showConfirm, showModal } from 'stemn-shared/misc/Modal/Modal.actions.js'
 import { getStatus, toggle } from 'stemn-shared/desktop/AutoLaunch/AutoLaunch.actions.js'
-import { installUpdate, checkForUpdates } from 'stemn-shared/desktop/AutoUpdate/AutoUpdate.actions.js'
+import {
+  checkForUpdates,
+  downloadUpdate,
+  restartToUpdate,
+  showReleaseNotes,
+  updateChannel,
+} from '../../../../shared/updates/updates.js'
 import { relaunch } from 'stemn-shared/desktop/ElectronWindows/ElectronWindows.actions.js'
 
 // Component Core
@@ -18,7 +24,7 @@ import ProgressButton from 'stemn-shared/misc/Buttons/ProgressButton/ProgressBut
 import FileSelectInputElectron from 'stemn-shared/misc/FileSelectInput/FileSelectInputElectron.jsx'
 import SimpleTable from 'stemn-shared/misc/Tables/SimpleTable/SimpleTable.jsx'
 import Banner from 'stemn-shared/misc/Banner/Banner.jsx'
-import releaseNotesModalName from 'stemn-shared/misc/Modal/ReleaseNotesModal'
+import Radio from 'stemn-shared/misc/Input/Radio/Radio.jsx'
 
 // /////////////////////////////// COMPONENT /////////////////////////////////
 
@@ -48,29 +54,60 @@ export class Component extends React.Component {
   }
 
   showReleaseModal = () => {
-    this.props.showModal({
-      modalType: releaseNotesModalName,
-    })
+    this.props.showReleaseNotes().catch(() => {})
+  }
+
+  showUpdateNotes = () => {
+    const { autoUpdate, showReleaseNotes } = this.props
+    const { available, release, updateDownloaded } = autoUpdate
+    const notes = updateDownloaded
+      ? { version: release.version, releaseNotes: release.readme || '', downloaded: true }
+      : { version: available.version, releaseNotes: available.releaseNotes || '' }
+    showReleaseNotes(notes).catch(() => {})
   }
 
   render() {
-    const { system, autoLaunch, autoUpdate, getProviderPath, relaunch, toggle, installUpdate, checkForUpdates } =
-      this.props
+    const { system, autoLaunch, autoUpdate, getProviderPath, relaunch, toggle, restartToUpdate } = this.props
+    const channel = updateChannel({ autoUpdate, system })
+    const whatsNew = (
+      <a style={{ marginLeft: '20px' }} className="link-primary" onClick={this.showUpdateNotes}>
+        What's new
+      </a>
+    )
 
     const autoUpdateMessage = () => {
-      if (autoUpdate.checkingForUpdate) {
-        return <span>Checking for update...</span>
-      } else if (autoUpdate.updateDownloaded) {
+      if (autoUpdate.updateDownloaded) {
         return (
           <span>
-            Download complete.{' '}
-            <a style={{ marginLeft: '20px' }} className="link-primary" onClick={installUpdate}>
-              Update and restart
+            Version {autoUpdate.release.version} is ready.
+            <a style={{ marginLeft: '20px' }} className="link-primary" onClick={restartToUpdate}>
+              Restart to update
             </a>
+            {whatsNew}
+            {autoUpdate.installRefused ? <div>{autoUpdate.installRefused.message}</div> : null}
           </span>
         )
-      } else if (autoUpdate.updateAvailable) {
-        return <span>Downloading update...</span>
+      } else if (autoUpdate.updateAvailable && autoUpdate.available) {
+        if (autoUpdate.progress !== null && autoUpdate.progress !== undefined) {
+          return (
+            <span>
+              Downloading version {autoUpdate.available.version}... {autoUpdate.progress}%
+            </span>
+          )
+        }
+        return (
+          <span>
+            Version {autoUpdate.available.version} is available.
+            {autoUpdate.available.autoDownload ? null : (
+              <a style={{ marginLeft: '20px' }} className="link-primary" onClick={downloadUpdate}>
+                Download
+              </a>
+            )}
+            {whatsNew}
+          </span>
+        )
+      } else if (autoUpdate.checkingForUpdate) {
+        return <span>Checking for update...</span>
       } else if (autoUpdate.updateNotAvailable) {
         return (
           <span>
@@ -154,11 +191,29 @@ export class Component extends React.Component {
             <p
               className="flex"
               style={toggleStyle}
-              title="When auto-update is on, Stemn Desktop will check for updates (and begin downloading any updates) whenever the application starts."
+              title="When auto-update is on, Stemn Desktop checks for updates when it starts and every few hours. Stable updates download in the background and install the next time Stemn restarts."
             >
-              Auto-update Stemn Desktop.
+              Automatically check for updates.
             </p>
             <Toggle model="system.settings.autoUpdate" value={system.settings.autoUpdate} />
+          </div>
+          <div className="layout-row layout-align-start-center" data-testid="update-channel">
+            <p
+              className="flex"
+              style={toggleStyle}
+              title="Beta versions arrive earlier and are downloaded only when you choose to."
+            >
+              Update channel
+            </p>
+            <div className="layout-row">
+              <Radio value="stable" model="system.settings.updateChannel" modelValue={channel}>
+                Stable
+              </Radio>
+              <div style={{ width: '15px' }} />
+              <Radio value="beta" model="system.settings.updateChannel" modelValue={channel}>
+                Beta
+              </Radio>
+            </div>
           </div>
           <div className="layout-row layout-align-start-center">
             <p
@@ -181,8 +236,8 @@ export class Component extends React.Component {
           {autoUpdate.currentVersion ? (
             <SimpleTable>
               <tr>
-                <td>Stream</td>
-                <td>alpha</td>
+                <td>Channel</td>
+                <td style={{ textTransform: 'capitalize' }}>{channel}</td>
               </tr>
               <tr>
                 <td>Version</td>
@@ -242,10 +297,10 @@ const mapDispatchToProps = {
   getProviderPath,
   showConfirm,
   showModal,
+  showReleaseNotes,
   toggle,
   getStatus,
-  installUpdate,
-  checkForUpdates,
+  restartToUpdate,
   relaunch,
   storeChange,
 }

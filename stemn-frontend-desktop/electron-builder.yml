@@ -1,9 +1,16 @@
-# electron-builder 26 configuration for Stemn Desktop.
-#   npm run package          Linux AppImage + unpacked dir (release/)
-#   npm run package:win      Windows NSIS installer (run on Windows or with wine)
-#   npm run package:mac      macOS dmg + zip (run on macOS, needs signing for notarisation)
-# Everything the app needs is bundled into dist/ by electron-vite, so the
-# packaged app ships no node_modules.
+# electron-builder 26 configuration for Stemn Desktop: the static part.
+#
+# The packaging scripts run electron-builder with `--config electron-builder.config.mjs`, which
+# loads this file and applies everything that depends on the environment (edition and channel of
+# the update feed, Windows signing, release notes); see that file and RELEASING.md.
+#
+#   npm run package          Linux AppImage + unpacked dir (release/), unsigned
+#   npm run package:linux    Linux AppImage + deb
+#   npm run package:win      Windows NSIS installer (run on Windows)
+#   npm run package:mac      macOS universal dmg + zip (run on macOS; signs/notarises with credentials)
+#
+# Everything the app needs is bundled into dist/ by electron-vite, so the packaged app ships no
+# node_modules.
 appId: stemn.stemn
 productName: Stemn
 copyright: Copyright © STEMN Pty Ltd
@@ -31,11 +38,19 @@ protocols:
     schemes:
       - stemn
 
-# electron-updater reads this (written into the app as app-update.yml)
+# Update feed (written into the app as app-update.yml, read by electron-updater).
+# Default: GitHub releases of the public releases repository. electron-builder.config.mjs replaces
+# it with the `generic` HTTPS feed of the edition/channel (STEMN_EDITION, UPDATES_URL).
 publish:
   - provider: github
-    owner: Stemn
-    repo: Stemn-Desktop
+    owner: stemn
+    repo: stemn-desktop
+
+# Stable builds also write beta*.yml (so the beta feed can follow a stable release)
+generateUpdatesFilesForAllChannels: true
+
+# Notarisation: the afterSign hook (no-op without App Store Connect API credentials)
+afterSign: scripts/release/notarize.cjs
 
 win:
   target:
@@ -43,6 +58,9 @@ win:
       arch:
         - x64
   icon: build/icon.ico
+  # Sign the app executable as well as the installer (Azure Trusted Signing: azureSignOptions
+  # are added by electron-builder.config.mjs when the AZURE_* variables are set)
+  signAndEditExecutable: true
 
 nsis:
   oneClick: true
@@ -50,14 +68,25 @@ nsis:
   runAfterFinish: true
   createDesktopShortcut: true
   shortcutName: Stemn
+  # blockmap: electron-updater downloads only the changed blocks
+  differentialPackage: true
 
 mac:
   category: public.app-category.productivity
   icon: build/icon.icns
   target:
-    - dmg
-    - zip # required by electron-updater on macOS
+    - target: dmg
+      arch:
+        - universal
+    - target: zip # required by electron-updater on macOS (with a blockmap: differential updates)
+      arch:
+        - universal
   hardenedRuntime: true
+  gatekeeperAssess: false
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.plist
+  # electron-builder's built-in notarisation is off: scripts/release/notarize.cjs does it (afterSign)
+  notarize: false
 
 dmg:
   background: build/background.png
@@ -76,12 +105,30 @@ linux:
   executableName: stemn
   syncDesktopName: true
   synopsis: Versioning and project management for engineering files
+  description: Stemn Desktop tracks the changes to your engineering files in Dropbox, Google Drive or Stemn storage, previews and compares their revisions, and commits them to your Stemn projects.
+  maintainer: STEMN Pty Ltd <desktop@stemn.com>
+  vendor: STEMN Pty Ltd
   target:
     - AppImage
-    - dir
+    - deb
   desktop:
     entry:
       Name: Stemn
       Comment: Stemn Desktop
       StartupWMClass: Stemn
       MimeType: x-scheme-handler/stemn;
+
+deb:
+  # Electron 45 runtime libraries
+  depends:
+    - libgtk-3-0
+    - libnotify4
+    - libnss3
+    - libxss1
+    - libxtst6
+    - xdg-utils
+    - libatspi2.0-0
+    - libuuid1
+    - libsecret-1-0
+    - libgbm1
+    - libasound2

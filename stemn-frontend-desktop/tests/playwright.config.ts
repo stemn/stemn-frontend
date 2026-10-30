@@ -8,6 +8,8 @@ import { defineConfig } from '@playwright/test'
 export default defineConfig({
   testDir: '.',
   testMatch: /.*\.spec\.ts/,
+  // the updater integration test packages an AppImage and has its own config (updater/playwright.config.ts)
+  testIgnore: ['updater/**'],
   globalSetup: './global-setup.ts',
   timeout: 180_000,
   expect: { timeout: 20_000 },

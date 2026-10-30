@@ -1,0 +1,23 @@
+@value primary-bg from "theme";
+
+.banner {
+  padding: 8px 12px;
+  background: primary-bg;
+  color: white;
+  font-size: 12px;
+  line-height: 1.4em;
+}
+.action {
+  color: white;
+  font-weight: 600;
+  margin-left: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.action:hover {
+  text-decoration: underline;
+}
+.note {
+  margin-top: 4px;
+  opacity: 0.85;
+}

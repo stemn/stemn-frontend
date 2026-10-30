@@ -44,7 +44,7 @@ export const sendToAllWindows = (action) => {
 
 const isExternalUrl = (url) => typeof url === 'string' && /^(https?|mailto):/i.test(url)
 
-export const registerIpcHandlers = ({ getStore }) => {
+export const registerIpcHandlers = ({ getStore, getUpdater }) => {
   ipcMain.handle(
     IPC.GET_INITIAL_STATE,
     guard((event) => ({
@@ -126,6 +126,26 @@ export const registerIpcHandlers = ({ getStore }) => {
       shell.showItemInFolder(path)
       return true
     }),
+  )
+
+  // Auto-update (app/main/updater). The updater starts a few seconds after launch.
+  const notRunning = { ok: false, reason: 'not-running', message: 'The updater has not started yet.' }
+  const withUpdater = (fn, fallback) => guard(() => (getUpdater() ? fn(getUpdater()) : fallback))
+  ipcMain.handle(
+    IPC.UPDATES_STATUS,
+    withUpdater((updater) => updater.status(), null),
+  )
+  ipcMain.handle(
+    IPC.UPDATES_CHECK,
+    withUpdater((updater) => updater.check({ manual: true }), null),
+  )
+  ipcMain.handle(
+    IPC.UPDATES_DOWNLOAD,
+    withUpdater((updater) => updater.download(), null),
+  )
+  ipcMain.handle(
+    IPC.UPDATES_QUIT_AND_INSTALL,
+    withUpdater((updater) => updater.quitAndInstall(), notRunning),
   )
 
   ipcMain.on(IPC.LOG, (event, { level, message } = {}) => {

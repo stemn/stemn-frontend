@@ -34,9 +34,11 @@ Run them from this folder, or from the repo root with the `desktop:` prefix (`np
 | `npm run build` | Production build into `dist/` (`dist/main`, `dist/preload`, `dist/renderer`). |
 | `npm run start` | Runs the built app from `dist/` (no rebuild). |
 | `npm run package` | Builds and packages a Linux AppImage plus an unpacked dir into `release/` (electron-builder). |
-| `npm run package:win` / `package:mac` | Windows NSIS installer / macOS dmg+zip. Run them on that OS (Windows from Linux needs wine). |
-| `npm run package:check` | Validates `electron-builder.yml` for all platforms without building. |
+| `npm run package:linux` | AppImage + deb, as released. |
+| `npm run package:win` / `package:mac` | Windows NSIS installer / macOS universal dmg+zip. Run them on that OS (Windows from Linux needs wine). |
+| `npm run package:check` | Validates the electron-builder configuration (yml + environment overlay) for all platforms without building. |
 | `npm run test:e2e` | End-to-end test with Playwright driving Electron against the local backend (see below). |
+| `npm run test:updater` | Auto-update integration test: packages an unsigned AppImage and updates it from a local feed (see [RELEASING.md](RELEASING.md)). |
 | `npm run typecheck` | `tsc --noEmit` for the app, the shared desktop code, the tests and the build config. |
 
 `dev`, `build` and `start` go through `scripts/electron-vite.mjs`, which removes `ELECTRON_RUN_AS_NODE`
@@ -51,7 +53,12 @@ makes the Electron binary start as plain Node.
 | `API_SERVER`, `WEBSOCKET_SERVER`, `WEBSITE_URL` | build | Server urls for `STEMN_ENV=custom`. |
 | `SENTRY_DSN` | build | Enables Sentry (`@sentry/browser`) in the renderers, like the website. |
 | `STEMN_DESKTOP_DEV_PORT` | dev | Renderer dev server port (default 5173). |
+| `STEMN_EDITION` | build / package | `global` (default) or `eu`: picks the update feed ([config/updateFeed.cjs](config/updateFeed.cjs)). |
+| `UPDATES_URL` | build / package | Base url of the edition's generic update feed (`<url>/<channel>/`). Unset for `global` = GitHub releases of stemn/stemn-desktop. |
+| `UPDATES_CHANNEL` | package | `stable` or `beta` (default: from the version). |
+| `AZURE_*`, `CSC_LINK`, `APPLE_API_*` | package | Code signing / notarisation, see [RELEASING.md](RELEASING.md). Without them builds are unsigned. |
 | `STEMN_USER_DATA_DIR` | runtime | Use another profile directory (state, logs, file cache), e.g. for tests or a second dev instance. |
+| `STEMN_UPDATES_URL` | runtime | Poll this generic feed base url instead of the built-in one (packaged builds; tests and QA). `STEMN_UPDATER_DELAY_MS` changes the 5 s start delay. |
 | `STEMN_NO_DEVTOOLS` | dev runtime | Don't open the DevTools in development. |
 | `STEMN_LOG_RENDERER_CONSOLE`, `STEMN_LOG_WEBSOCKET` | runtime | Copy renderer console warnings/errors / received websocket events into the main log. |
 
@@ -108,7 +115,7 @@ All windows run with Electron 45's defaults kept on: `contextIsolation: true`, `
 old app used `electron.remote` and node integration in every window; there are **no `remote` call sites
 left** (the `@electron/remote` fallback was not needed). Renderers only get the small API in
 [app/preload/index.ts](app/preload/index.ts) (`window.stemnDesktop`): initial state, store-sync
-messages, window controls, a folder picker, and `shell` open/reveal. Each call maps to one handler in
+messages, window controls, a folder picker, `shell` open/reveal, and the updater (`updates`: status, check, download, restart to update). Each call maps to one handler in
 [app/main/ipc.js](app/main/ipc.js), which checks that the sender is one of our pages.
 
 * Windows only ever load the bundled renderer (`file://` in production, the dev server in development).
@@ -136,12 +143,17 @@ sync client through the API: it downloads `desktop-sync-check.md` into a temp fo
 the edit as a new revision; everything after that is the app. Each run adds one commit
 (`Desktop sync check <timestamp>`) to the CubeSat project.
 
-## Packaging and releases
+## Packaging, auto-update and releases
 
-`electron-builder.yml` (electron-builder 26): Linux AppImage + dir, Windows NSIS (x64), macOS dmg + zip,
-icons from `build/` (`icon.ico`, `icon.icns`, `icons/*.png`), the `stemn://` protocol, and a GitHub
-`publish` provider (`Stemn/Stemn-Desktop`) that electron-updater uses for auto updates.
+`electron-builder.yml` (electron-builder 26, static part) + `electron-builder.config.mjs` (environment overlay:
+update feed per edition/channel, Windows signing, release notes from `CHANGELOG.md`): Linux AppImage + deb,
+Windows NSIS (x64, Azure Trusted Signing when configured), macOS universal dmg + zip (hardened runtime,
+notarised by the `afterSign` hook when configured), icons from `build/`, the `stemn://` protocol.
 
-Releases need a CI job per OS running `npm run package:<os>` with signing credentials and `--publish always`
-(GitHub token). That pipeline does not exist yet; the plan is in
-[docs/plans/desktop-auto-update-and-signing.md](../docs/plans/desktop-auto-update-and-signing.md).
+The auto-updater (electron-updater) lives in [app/main/updater](app/main/updater): stable/beta channels,
+background download on stable, install on quit or "Restart to update" (title bar, tray menu, tray window
+banner, Preferences), never while a commit is in flight. Renderers reach it through
+`window.stemnDesktop.updates`.
+
+Releases are built by [.github/workflows/desktop-release.yml](../.github/workflows/desktop-release.yml) from
+`desktop-v*` tags: see [RELEASING.md](RELEASING.md).

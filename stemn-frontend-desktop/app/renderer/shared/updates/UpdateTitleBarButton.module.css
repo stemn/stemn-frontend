@@ -1,0 +1,22 @@
+@value primary-bg, primary-bg-hover from "theme";
+
+/* Sits in the title bar, left of the window buttons (TitleBar.module.css: 100px + 10px margin) */
+.button {
+  position: absolute;
+  z-index: 1001;
+  top: 12px;
+  right: 120px;
+  height: 26px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 13px;
+  background: primary-bg;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+}
+.button:hover {
+  background: primary-bg-hover;
+}

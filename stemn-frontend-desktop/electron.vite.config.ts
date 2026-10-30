@@ -16,6 +16,8 @@
  * GLOBAL_ENV (APP_TYPE 'desktop', APP_THREAD 'electron' in main / 'renderer' in the
  * windows, NODE_ENV, API_SERVER, WEBSOCKET_SERVER, WEBSITE_URL) is baked in at build
  * time. STEMN_ENV picks the backend: `local` by default for `dev`, `production` for builds.
+ * STEMN_EDITION / UPDATES_URL pick the update feed (GLOBAL_ENV.STEMN_EDITION, UPDATE_FEED; see
+ * config/updateFeed.cjs, shared with electron-builder.config.mjs).
  */
 import { join } from 'node:path'
 import { createRequire } from 'node:module'
@@ -27,6 +29,7 @@ import type { DeprecationOrId } from 'sass'
 const require = createRequire(import.meta.url)
 const getStemnEnv = require('stemn-frontend-shared/config/stemnEnv.cjs')
 const { scopedClassName, sassOptions } = require('stemn-frontend-shared/config/styles.cjs')
+const { resolveUpdateFeed } = require('./config/updateFeed.cjs')
 
 const root = __dirname
 const appRoot = join(root, 'app')
@@ -99,6 +102,7 @@ export default defineConfig(({ command, mode }) => {
   const nodeEnv = isDev ? 'development' : 'production'
   const stemnEnvName = process.env.STEMN_ENV || (command === 'serve' ? 'local' : 'production')
   const stemnEnv = getStemnEnv(stemnEnvName)
+  const updateFeed = resolveUpdateFeed(process.env)
   const devPort = Number(process.env.STEMN_DESKTOP_DEV_PORT) || 5173
   // `dev` writes main/preload to out/ so it never mixes with a production build in dist/
   const outRoot = join(root, command === 'serve' ? 'out' : 'dist')
@@ -113,6 +117,8 @@ export default defineConfig(({ command, mode }) => {
     STEMN_ENV: stemnEnvName,
     SENTRY_DSN: process.env.SENTRY_DSN || '',
     APP_VERSION: require('./package.json').version,
+    STEMN_EDITION: updateFeed.edition,
+    UPDATE_FEED: updateFeed,
     ...stemnEnv,
   })
 

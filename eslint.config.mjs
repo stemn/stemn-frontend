@@ -24,7 +24,8 @@ export default tseslint.config(
       '**/build/**',
       '**/dist/**',
       '**/out/**',
-      '**/release/**',
+      // electron-builder output (not scripts/release)
+      'stemn-frontend-desktop/release/**',
       '**/qa/**',
       '**/test-results/**',
       '**/playwright-report/**',
