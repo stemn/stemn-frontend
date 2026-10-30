@@ -107,16 +107,14 @@ export const parseToolpath = (buffer: ArrayBuffer): IToolpath => {
   const headerLength = view.getUint32(8, true)
   const header = JSON.parse(new TextDecoder().decode(new Uint8Array(buffer, 12, headerLength)))
   const start = 12 + headerLength
-  const array = <T>(
-    name: string,
-    Type: { new (buffer: ArrayBuffer, offset: number, length: number): T },
-    size: number,
-  ) => new Type(buffer, start + header.arrays[name].offset, header.arrays[name].length / size)
+  // where an array starts and how many elements it has (the webpack fallback's babel reads no generic arrow functions)
+  const section = (name: string, size: number) =>
+    [start + header.arrays[name].offset, header.arrays[name].length / size] as const
   return {
     ...header,
-    points: array('points', Float32Array, 4),
-    kinds: array('kinds', Uint8Array, 1),
-    speeds: array('speeds', Uint16Array, 2),
+    points: new Float32Array(buffer, ...section('points', 4)),
+    kinds: new Uint8Array(buffer, ...section('kinds', 1)),
+    speeds: new Uint16Array(buffer, ...section('speeds', 2)),
   }
 }
 
