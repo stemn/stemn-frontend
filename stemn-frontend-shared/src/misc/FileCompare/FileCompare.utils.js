@@ -1,5 +1,6 @@
 import { intersection, orderBy, get } from 'lodash'
 import * as CompareIcons from 'stemn-shared/assets/icons/compare/index.js'
+import { getViewerType } from 'stemn-shared/misc/Files/PreviewFile/PreviewFile.utils'
 
 const compareModeInfo = [
   // Compare modes and text
@@ -23,6 +24,10 @@ const compareModeInfo = [
     value: 'single',
     text: 'None',
   },
+  {
+    value: 'unified',
+    text: 'Unified Diff',
+  },
 ]
 
 const iconMap = {
@@ -31,13 +36,15 @@ const iconMap = {
   onion: CompareIcons.OnionSkin,
   slider: CompareIcons.Slide,
   single: CompareIcons.Single,
+  unified: CompareIcons.Unified,
 }
 
 // This table maps the compare modes (above) to the preview mode
 const compareModeTable = {
   gerber: [0, 1, 2, 3, 4],
   code: [0, 1, 4],
-  autodesk: [0, 1, 2, 3, 4],
+  // CAD: the unified diff (FileDiff) for the formats the API diffs, the rest fall back to side by side there
+  autodesk: [5, 0, 1, 2, 3, 4],
   google: [0, 1, 4],
   image: [0, 1, 2, 3, 4],
   pdf: [0, 1, 4],
@@ -55,6 +62,9 @@ export const getCompareModes = (previewerType1, previewerType2) => {
   const compareModes = compareModes2 ? intersection(compareModes1, compareModes2) : compareModeTable.none
   return compareModes.map((modeNum) => compareModeInfo[modeNum])
 }
+
+// CAD files (the 'autodesk' viewer type, whichever provider converts them) compare in the diff viewer
+export const isCadFile = (file) => Boolean(file && file.name) && getViewerType(file.name, file.provider) === 'autodesk'
 
 export const orderItemsByTime = (mode, item1, item2) => {
   if (mode === 'single' || !item2) {

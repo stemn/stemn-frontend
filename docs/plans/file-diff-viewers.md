@@ -1,6 +1,7 @@
 # Plan: diff viewers for every open-source file type
 
-Status: approved direction (founder, 2026-10-30). Planner: Claude Fable 5.1. Implementers: Opus 5.5
+Status: approved direction (founder, 2026-10-30). Workstream A (diff core + 3D CAD) is built: the contract for B to E is
+[`../DIFF-VIEWERS.md`](../DIFF-VIEWERS.md). Planner: Claude Fable 5.1. Implementers: Opus 5.5
 agents, one workstream each, following this document. Backend changes must follow the backend's
 hand-written code style.
 

@@ -1,5 +1,6 @@
 import { get } from 'lodash'
 import { IFile } from 'stemn-shared/misc/FileList/types'
+import { isCadFile } from './FileCompare.utils'
 import { IFileCompareMode } from './types'
 
 export const initCompare = ({ file, cacheKey }: { file: IFile; cacheKey: string }) => ({
@@ -7,7 +8,7 @@ export const initCompare = ({ file, cacheKey }: { file: IFile; cacheKey: string 
   payload: {
     selected1: get(file, ['revisions', '0'], file),
     selected2: get(file, 'revisions.length', 0) > 1 ? file.revisions[file.revisions.length - 1] : undefined,
-    mode: get(file, 'revisions.length', 0) > 1 ? 'sideBySide' : 'single',
+    mode: get(file, 'revisions.length', 0) > 1 ? (isCadFile(get(file, 'data')) ? 'unified' : 'sideBySide') : 'single',
   },
   meta: {
     cacheKey,

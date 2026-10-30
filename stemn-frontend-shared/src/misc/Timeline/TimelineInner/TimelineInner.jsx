@@ -61,7 +61,12 @@ class Dot extends React.Component {
     const dotClasses = cn(classes.dot, { [classes.active]: isSelected ? isSelected(item) : selected === item._id })
     return (
       // If the isSelected function is provided, we use this to determine if the item is active
-      <a className={dotClasses} onClick={() => onSelect(item)}>
+      <a
+        className={dotClasses}
+        onClick={() => onSelect(item)}
+        data-testid="timeline-dot"
+        data-revision-id={item.data && item.data.revisionId}
+      >
         <Popover preferPlace={preferPlace || 'below'} trigger="hoverDelay" tipSize={6}>
           <div className="layout-column layout-align-center-center" style={{ height: '100%' }} />
           <div>{PopupContent(item)}</div>

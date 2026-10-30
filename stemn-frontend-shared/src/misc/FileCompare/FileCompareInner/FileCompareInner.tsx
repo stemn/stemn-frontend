@@ -1,6 +1,8 @@
 import cn from 'classnames'
 import * as React from 'react'
+import { isCadFile } from 'stemn-shared/misc/FileCompare/FileCompare.utils.js'
 import { IFileCompareMode } from 'stemn-shared/misc/FileCompare/types'
+import FileDiffLoader from 'stemn-shared/misc/FileDiff/FileDiffLoader'
 import { IFile } from 'stemn-shared/misc/FileList/types'
 import { PreviewFile } from 'stemn-shared/misc/Files/PreviewFile'
 import classes from './FileCompareInner.module.scss'
@@ -62,7 +64,28 @@ export class FileCompareInner extends React.Component<IFileCompareInnerProps, IF
     }
   }
   public render() {
-    const { editActive, file1, file2, event, mode, header } = this.props
+    const { file1, file2, mode } = this.props
+
+    // two revisions of a CAD file: the diff viewer (lazy chunk), unified or side by side with synchronised cameras.
+    // it falls back to the plain side-by-side comparison below for formats the API cannot diff
+    if (file1 && file2 && (mode === 'unified' || mode === 'sideBySide') && isCadFile(file1)) {
+      return (
+        <div className="layout-column flex">
+          <FileDiffLoader
+            file1={file1}
+            file2={file2}
+            view={mode}
+            renderFallback={() => this.renderCompare('sideBySide')}
+          />
+        </div>
+      )
+    }
+
+    // unified diffs are for CAD files; anything else in that mode is shown side by side
+    return this.renderCompare(mode === 'unified' ? (file2 ? 'sideBySide' : 'single') : mode)
+  }
+  public renderCompare(mode: Exclude<IFileCompareMode, 'unified'>) {
+    const { editActive, file1, file2, event, header } = this.props
     const { width, position } = this.state
 
     const compareModeClasses = {
