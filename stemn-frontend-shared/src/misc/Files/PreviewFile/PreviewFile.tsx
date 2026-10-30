@@ -21,6 +21,7 @@ export interface IPreviewFileComponentProps extends IPreviewFileContainerProps {
   getFile: (typeof dispatchToProps)['getFile']
   renderFile: (...args: Parameters<(typeof dispatchToProps)['renderFile']>) => void // thunk, resolved by connect()
   fileData: IFileData | IFileData[] // an array when the file is a gerber assembly (see PreviewFile.container)
+  // PCB files and gerber assemblies ask for their renders themselves (PreviewPcb)
   fileRender?: IFileRender
 }
 
@@ -60,7 +61,7 @@ export class PreviewFileComponent extends React.Component<IPreviewFileComponentP
           />
         )
       } else if (viewerType === 'gerber' || viewerType === 'pcb') {
-        return <PreviewPcbLoader previewId={previewId} fileMeta={file} fileData={fileData} downloadFn={getFile} />
+        return <PreviewPcbLoader previewId={previewId} fileMeta={file} />
       } else if (viewerType === 'code') {
         return <PreviewCode previewId={previewId} fileMeta={file} fileData={singleFileData} downloadFn={getFile} />
       } else if (viewerType === 'autodesk') {

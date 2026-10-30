@@ -1,7 +1,7 @@
-import whatGerber from '@stemn/whats-that-gerber'
 import * as codemirror from 'codemirror'
 import 'codemirror/mode/meta.js'
 import { forEach } from 'lodash'
+import { pcbExtensions } from './PreviewPcb/pcb.utils'
 
 const codemirrorTsOverride = codemirror as any // TODO - Codemirror plugin mutation
 
@@ -18,8 +18,10 @@ const getCodeMirrorExts = () => {
 export const viewerFileTypes = {
   general: {
     pipeline: ['pipeline'],
+    // a folder's Gerber files shown as one board (the API's gerber assemblies)
     gerber: ['gerber'],
-    pcb: ['brd', 'pcb', 'kicad_pcb'],
+    // rendered by the API's PCB converter: KiCad, Eagle, Gerber and Excellon files and zips of a Gerber set
+    pcb: pcbExtensions,
     image: ['png', 'jpg', 'jpeg', 'gif', 'svg', 'bmp', 'ico'],
     code: getCodeMirrorExts(),
     // CAD: converted by the deployment's CAD provider (Autodesk or the open-source OpenCascade converter) and shown
@@ -107,7 +109,6 @@ export const viewerFileTypes = {
       'xps',
     ],
     pdf: ['pdf'],
-    //            pcb      : ['brd', 'pcb', 'kicad_pcb'],
   },
   dropbox: {
     pdf: ['docx', 'doc', 'docm', 'ppt', 'pps', 'ppsx', 'ppsm', 'pptx', 'pptm', 'rtf'],
@@ -140,9 +141,6 @@ export const getViewerType = (fileName, provider): IPreviewType => {
     mergedFileTypes[type] = Array.isArray(generalExtensions) ? generalExtensions.concat(extensions) : extensions
   })
 
-  if (whatGerber(fileName)) {
-    return 'gerber'
-  }
   // Get the viewer type
   const extensionLower = extension ? extension.toLowerCase() : ''
   const viewerType = Object.keys(mergedFileTypes).find((type) =>

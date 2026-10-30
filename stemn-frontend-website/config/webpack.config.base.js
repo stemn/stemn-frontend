@@ -87,7 +87,7 @@ module.exports = ({ mode, styleLoader, refresh = false }) => {
           test: /\.(js|jsx|ts|tsx)$/,
           include: [javascripts, join(sharedRoot, 'src')],
           // Vendored, pre-built browser code
-          exclude: [/primus-websockets\d\.js$/, /PreviewPcb[\\/]viewer[\\/]three\.js$/],
+          exclude: [/primus-websockets\d\.js$/],
           use: {
             loader: require.resolve('babel-loader'),
             options: {

@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { describe, expect, it } from 'vitest'
 import { initCompare } from './FileCompare.actions'
-import { getCompareModes, isCadFile } from './FileCompare.utils.js'
+import { getCompareModes, isCadFile, isPcbFile } from './FileCompare.utils.js'
 
 const revision = (name: string, revisionId: string) => ({ data: { name, provider: 'stemn', revisionId } })
 
@@ -16,6 +16,16 @@ describe('compare modes for CAD files', () => {
       'single',
     ])
     expect(getCompareModes('image', 'image').map((mode) => mode.value)).not.toContain('unified')
+  })
+
+  it('knows PCB and electronics files, which get the unified diff too', () => {
+    expect(isPcbFile({ name: 'blinky.kicad_pcb', provider: 'stemn' })).toBe(true)
+    expect(isPcbFile({ name: 'blinky-F_Cu.GTL', provider: 'dropbox' })).toBe(true)
+    expect(isPcbFile({ name: 'blinky.kicad_sch', provider: 'stemn' })).toBe(true)
+    expect(isPcbFile({ name: 'bracket.step', provider: 'stemn' })).toBe(false)
+    expect(isPcbFile({ name: 'blinky.gerber', provider: 'stemn' })).toBe(false)
+    expect(getCompareModes('pcb', 'pcb').map((mode) => mode.value)).toContain('unified')
+    expect(getCompareModes('gerber', 'gerber').map((mode) => mode.value)).not.toContain('unified')
   })
 
   it('knows CAD files by extension, whichever provider converts them', () => {

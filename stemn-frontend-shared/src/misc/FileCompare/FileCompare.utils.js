@@ -48,7 +48,8 @@ const compareModeTable = {
   google: [0, 1, 4],
   image: [0, 1, 2, 3, 4],
   pdf: [0, 1, 4],
-  pcb: [0, 1, 2, 3, 4],
+  // PCB and electronics: the unified diff (PcbDiffView) for what the API's PCB converter reads
+  pcb: [5, 0, 1, 2, 3, 4],
   gdoc: [0, 1, 4],
   other: [0, 1, 4],
   none: [4],
@@ -65,6 +66,9 @@ export const getCompareModes = (previewerType1, previewerType2) => {
 
 // CAD files (the 'autodesk' viewer type, whichever provider converts them) compare in the diff viewer
 export const isCadFile = (file) => Boolean(file && file.name) && getViewerType(file.name, file.provider) === 'autodesk'
+
+// PCB and electronics files (the 'pcb' viewer type: KiCad, Eagle, Gerber, Excellon) compare in the 2D diff viewer
+export const isPcbFile = (file) => Boolean(file && file.name) && getViewerType(file.name, file.provider) === 'pcb'
 
 export const orderItemsByTime = (mode, item1, item2) => {
   if (mode === 'single' || !item2) {

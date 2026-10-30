@@ -8,8 +8,8 @@ export interface IFileRender {
   data?: any
   status?: string
   loading: boolean
-  // the CAD provider that made the render: picks the viewer (absent = autodesk)
-  cadProvider?: 'autodesk' | 'opencascade'
+  // the CAD provider that made the render: picks the viewer (absent = autodesk; kicad for PCB and electronics files)
+  cadProvider?: 'autodesk' | 'opencascade' | 'kicad'
 }
 
 export interface IFileData {

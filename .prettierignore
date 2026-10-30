@@ -11,9 +11,10 @@ playwright-report
 coverage
 
 # Vendored third-party code (kept byte-for-byte)
+# the backends' shared sample expectations, copied byte-for-byte into the e2e fixtures
+tests/e2e/fixtures/**/samples.json
 stemn-frontend-website/public/static
 stemn-frontend-shared/src/misc/Websocket/primus-websockets2.js
-stemn-frontend-shared/src/misc/Files/PreviewFile/PreviewPcb/viewer
 stemn-frontend-shared/src/misc/FileList/filetype
 stemn-frontend-shared/src/assets/css/codemirror.css
 
