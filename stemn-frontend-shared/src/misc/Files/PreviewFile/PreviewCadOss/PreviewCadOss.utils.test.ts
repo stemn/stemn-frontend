@@ -3,6 +3,9 @@ import { describe, expect, it } from 'vitest'
 import {
   fitCamera,
   isOpenCascadeRender,
+  LABEL_KEY,
+  NODE_FLAG,
+  nodesFromScene,
   PART_FLAG,
   paletteColour,
   partPalette,
@@ -12,10 +15,13 @@ import {
   viewDirection,
 } from './PreviewCadOss.utils'
 
-const part = (name: string, geometry: BufferGeometry = new BoxGeometry(1, 1, 1)) => {
+const part = (label: string, extras?: object, geometry: BufferGeometry = new BoxGeometry(1, 1, 1)) => {
   const mesh = new Mesh(geometry)
-  mesh.name = name
+  mesh.name = label
+  mesh.userData[NODE_FLAG] = true
   mesh.userData[PART_FLAG] = true
+  mesh.userData[LABEL_KEY] = label
+  if (extras) mesh.userData.stemn = extras
   return mesh
 }
 
@@ -29,28 +35,89 @@ describe('isOpenCascadeRender', () => {
   })
 })
 
+const node = (label: string, extras?: object) => {
+  const group = new Group()
+  group.name = label.replace(/[^\w-]/g, '_')
+  group.userData[NODE_FLAG] = true
+  group.userData[LABEL_KEY] = label
+  if (extras) group.userData.stemn = extras
+  return group
+}
+
+describe('nodesFromScene', () => {
+  it('maps nodes by the converter ids in extras.stemn', () => {
+    const root = new Group()
+    const assembly = node('bracket-assembly', { id: 'bracket-assembly', kind: 'assembly' })
+    const plate = node('base-plate', { id: 'bracket-assembly/base-plate', kind: 'part' })
+    const bolts = [1, 2].map((n) =>
+      node('bolt', { id: n === 1 ? 'bracket-assembly/bolt' : 'bracket-assembly/bolt#2', kind: 'part' }),
+    )
+    assembly.add(plate, ...bolts)
+    root.add(assembly)
+    const nodesById = nodesFromScene(root)
+    expect([...nodesById.keys()]).toEqual([
+      'bracket-assembly',
+      'bracket-assembly/base-plate',
+      'bracket-assembly/bolt',
+      'bracket-assembly/bolt#2',
+    ])
+    expect(nodesById.get('bracket-assembly/bolt#2')).toBe(bolts[1])
+  })
+
+  it('falls back to label paths, numbering repeated siblings like the converter', () => {
+    // a glb from before the converter wrote ids; three's names are unique and sanitised, labels are not
+    const root = new Group()
+    const assembly = node('bracket assembly')
+    const bolts = [node('bolt'), node('bolt'), node('bolt')]
+    assembly.add(node('base-plate'), ...bolts)
+    root.add(assembly)
+    expect([...nodesFromScene(root).keys()]).toEqual([
+      'bracket assembly',
+      'bracket assembly/base-plate',
+      'bracket assembly/bolt',
+      'bracket assembly/bolt#2',
+      'bracket assembly/bolt#3',
+    ])
+  })
+
+  it('skips the objects three adds that are not glTF nodes', () => {
+    // a multi-primitive node is a group of plain meshes
+    const root = new Group()
+    const wrapper = new Group()
+    const housing = node('housing', { id: 'housing', kind: 'part' })
+    housing.add(new Mesh(new BoxGeometry()), new Mesh(new BoxGeometry()))
+    wrapper.add(housing)
+    root.add(wrapper)
+    expect([...nodesFromScene(root).entries()]).toEqual([['housing', housing]])
+  })
+})
+
 describe('partsFromScene', () => {
-  it('lists the flagged glTF nodes of an assembly in scene order with their triangles', () => {
+  it('lists the nodes with geometry in scene order, keyed by id and named by label', () => {
     // the converter's assembly: a root node with two mesh nodes
     const root = new Group()
-    root.name = 'bracket-assembly'
-    root.add(part('base-plate'), part('bracket'))
-    const parts = partsFromScene(root)
-    expect(parts.map(({ name, triangles }) => ({ name, triangles }))).toEqual([
-      { name: 'base-plate', triangles: 12 },
-      { name: 'bracket', triangles: 12 },
+    const assembly = node('bracket-assembly', { id: 'bracket-assembly', kind: 'assembly' })
+    assembly.add(
+      part('base-plate', { id: 'bracket-assembly/base-plate' }),
+      part('bracket', { id: 'bracket-assembly/bracket' }),
+    )
+    root.add(assembly)
+    expect(partsFromScene(root)).toEqual([
+      { id: 'bracket-assembly/base-plate', name: 'base-plate', triangles: 12 },
+      { id: 'bracket-assembly/bracket', name: 'bracket', triangles: 12 },
     ])
   })
 
   it('counts a multi-primitive node once, with the triangles of all its meshes', () => {
-    const node = new Group()
-    node.name = 'housing'
-    node.userData[PART_FLAG] = true
-    node.add(new Mesh(new BoxGeometry(1, 1, 1)), new Mesh(new BoxGeometry(1, 1, 1)))
-    expect(partsFromScene(node)).toMatchObject([{ name: 'housing', triangles: 24 }])
+    const housing = node('housing', { id: 'housing', kind: 'part' })
+    housing.userData[PART_FLAG] = true
+    housing.add(new Mesh(new BoxGeometry(1, 1, 1)), new Mesh(new BoxGeometry(1, 1, 1)))
+    const root = new Group()
+    root.add(housing)
+    expect(partsFromScene(root)).toEqual([{ id: 'housing', name: 'housing', triangles: 24 }])
   })
 
-  it('names unnamed parts by position', () => {
+  it('names unlabelled parts by position', () => {
     const root = new Group()
     root.add(part(''), part(''))
     expect(partsFromScene(root).map((item) => item.name)).toEqual(['Part 1', 'Part 2'])

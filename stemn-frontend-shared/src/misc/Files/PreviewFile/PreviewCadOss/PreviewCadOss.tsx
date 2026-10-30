@@ -7,27 +7,17 @@ import { Canvas, useThree } from '@react-three/fiber'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
-import {
-  Box3,
-  Color,
-  DoubleSide,
-  type Material,
-  type Mesh,
-  MeshStandardMaterial,
-  type Object3D,
-  Plane,
-  SRGBColorSpace,
-} from 'three'
+import { Box3, type Mesh, type MeshStandardMaterial, type Object3D, Plane } from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
+import { CadSceneContext, type ICadSceneReady } from './CadSceneContext'
+import { parseModel } from './PreviewCadOss.model'
 import classes from './PreviewCadOss.module.scss'
 import {
   cadProviderNames,
   fitCamera,
   type ICadPart,
   type ISectionAxis,
-  PART_FLAG,
-  paletteColour,
+  nodesFromScene,
   partsFromScene,
   renderModelUrl,
   sectionPlane,
@@ -37,9 +27,13 @@ export interface IPreviewCadOssProps {
   fileMeta: { fileId: string; revisionId: string; name?: string; project: { _id: string } }
   fileRender?: { data?: any; cadProvider?: string }
   token?: string | null
+  /** Called with the model and its nodes by stable id once it has loaded (the seam for a file-diff layer) */
+  onSceneReady?: (scene: ICadSceneReady) => void
+  /** Rendered inside the viewer with the scene in CadSceneContext (e.g. a diff legend) */
+  children?: React.ReactNode
 }
 
-/** Fetches the glb with the user's token and parses it, flagging parts and giving uncoloured parts the palette */
+/** Fetches the glb with the user's token and prepares it (see prepareModel) */
 const loadModel = async (url: string, token?: string | null) => {
   const response = await fetch(url, { headers: token ? { Authorization: `bearer ${token}` } : {} })
   if (!response.ok) {
@@ -50,40 +44,14 @@ const loadModel = async (url: string, token?: string | null) => {
     } catch {}
     throw new Error(message)
   }
-  const gltf = await new GLTFLoader().parseAsync(await response.arrayBuffer(), '')
-  const { associations, json } = gltf.parser as any
-  const meshDefinitions: any[] = json.meshes || []
-
-  // a part is a glTF node with geometry: a mesh node, or the group of a node whose mesh has several primitives
-  const isNode = (object: Object3D) => associations.get(object)?.nodes !== undefined
-  let partIndex = 0
-  gltf.scene.traverse((object: any) => {
-    const isPart = isNode(object) && (object.isMesh || object.children.some((child) => child.isMesh && !isNode(child)))
-    if (!isPart) return
-    object.userData[PART_FLAG] = true
-    const [r, g, b] = paletteColour(partIndex++)
-    object.traverse((mesh: any) => {
-      if (!mesh.isMesh) return
-      const association = associations.get(mesh) || {}
-      const primitive = meshDefinitions[association.meshes]?.primitives?.[association.primitives ?? 0]
-      const material: Material =
-        primitive && primitive.material !== undefined
-          ? mesh.material
-          : new MeshStandardMaterial({
-              color: new Color().setRGB(r, g, b, SRGBColorSpace),
-              metalness: 0.05,
-              roughness: 0.65,
-            })
-      material.side = DoubleSide
-      mesh.material = material
-      mesh.userData.opacity = material.opacity
-    })
-  })
-  return gltf.scene
+  return parseModel(await response.arrayBuffer())
 }
+
+const noNodes = new Map<string, Object3D>()
 
 interface ISceneProps {
   model: Object3D
+  nodesById: Map<string, Object3D>
   wireframe: boolean
   section: boolean
   sectionAxis: ISectionAxis
@@ -93,7 +61,16 @@ interface ISceneProps {
 }
 
 /** Everything inside the canvas: lights, the model, orbit controls, fitting, and the material toggles */
-const Scene = ({ model, wireframe, section, sectionAxis, sectionFraction, isolated, fitRequest }: ISceneProps) => {
+const Scene = ({
+  model,
+  nodesById,
+  wireframe,
+  section,
+  sectionAxis,
+  sectionFraction,
+  isolated,
+  fitRequest,
+}: ISceneProps) => {
   const { camera, gl, invalidate, get } = useThree()
   const controlsRef = React.useRef<OrbitControls | null>(null)
   const box = React.useMemo(() => new Box3().setFromObject(model), [model])
@@ -129,7 +106,7 @@ const Scene = ({ model, wireframe, section, sectionAxis, sectionFraction, isolat
   React.useEffect(() => {
     sectionPlane(box, sectionAxis, sectionFraction, plane)
     // the isolated part and everything inside it stays opaque, the rest fades
-    const isolatedObject = isolated ? model.getObjectByProperty('uuid', isolated) : null
+    const isolatedObject = isolated ? nodesById.get(isolated) : null
     const opaque = new Set<string>()
     isolatedObject?.traverse((object) => opaque.add(object.uuid))
     model.traverse((object) => {
@@ -145,7 +122,7 @@ const Scene = ({ model, wireframe, section, sectionAxis, sectionFraction, isolat
       material.needsUpdate = true
     })
     invalidate()
-  }, [model, box, plane, wireframe, section, sectionAxis, sectionFraction, isolated, invalidate])
+  }, [model, nodesById, box, plane, wireframe, section, sectionAxis, sectionFraction, isolated, invalidate])
 
   return (
     <>
@@ -157,7 +134,7 @@ const Scene = ({ model, wireframe, section, sectionAxis, sectionFraction, isolat
   )
 }
 
-export const PreviewCadOss = ({ fileMeta, token }: IPreviewCadOssProps) => {
+export const PreviewCadOss = ({ fileMeta, token, onSceneReady, children }: IPreviewCadOssProps) => {
   const [loaded, setLoaded] = React.useState<{ url: string; model?: Object3D; error?: string } | null>(null)
   const [wireframe, setWireframe] = React.useState(false)
   const [section, setSection] = React.useState(false)
@@ -187,7 +164,15 @@ export const PreviewCadOss = ({ fileMeta, token }: IPreviewCadOssProps) => {
   const model = current && current.model ? current.model : null
   const error = current && current.error ? current.error : null
 
-  const parts: ICadPart[] = React.useMemo(() => (model ? partsFromScene(model) : []), [model])
+  const scene: ICadSceneReady | null = React.useMemo(
+    () => (model ? { root: model, nodesById: nodesFromScene(model) } : null),
+    [model],
+  )
+  const parts: ICadPart[] = React.useMemo(() => (scene ? partsFromScene(scene.root, scene.nodesById) : []), [scene])
+
+  React.useEffect(() => {
+    if (scene && onSceneReady) onSceneReady(scene)
+  }, [scene, onSceneReady])
   const triangles = parts.reduce((total, part) => total + part.triangles, 0)
 
   if (error) {
@@ -201,108 +186,113 @@ export const PreviewCadOss = ({ fileMeta, token }: IPreviewCadOssProps) => {
   }
 
   return (
-    <div className={`${classes.viewer} layout-row flex rel-box`} data-testid="cad-viewer">
-      <div className="layout-column flex rel-box">
-        <div className={`${classes.toolbar} layout-row layout-align-start-center`}>
-          <button
-            type="button"
-            className={classes.tool}
-            onClick={() => setFitRequest((value) => value + 1)}
-            data-testid="cad-fit"
-          >
-            Fit
-          </button>
-          <button
-            type="button"
-            className={classes.tool}
-            aria-pressed={wireframe}
-            onClick={() => setWireframe(!wireframe)}
-            data-testid="cad-wireframe"
-          >
-            Wireframe
-          </button>
-          <button
-            type="button"
-            className={classes.tool}
-            aria-pressed={section}
-            onClick={() => setSection(!section)}
-            data-testid="cad-section"
-          >
-            Section
-          </button>
-          {section ? (
-            <>
-              <select
-                className={classes.axis}
-                value={sectionAxis}
-                onChange={(event) => setSectionAxis(event.target.value as ISectionAxis)}
-                aria-label="Section axis"
-                data-testid="cad-section-axis"
-              >
-                <option value="x">X</option>
-                <option value="y">Y</option>
-                <option value="z">Z</option>
-              </select>
-              <input
-                type="range"
-                min={0}
-                max={100}
-                value={Math.round(sectionFraction * 100)}
-                onChange={(event) => setSectionFraction(Number(event.target.value) / 100)}
-                aria-label="Section position"
-                data-testid="cad-section-position"
-              />
-            </>
-          ) : null}
-          <div className="flex" />
-          <div className={classes.status} data-testid="cad-status">
-            {cadProviderNames.opencascade}
-            {model
-              ? ` · ${parts.length} ${parts.length === 1 ? 'part' : 'parts'} · ${triangles.toLocaleString()} triangles`
-              : ''}
-          </div>
-        </div>
-        <div className={`${classes.canvas} flex rel-box`} data-testid="cad-canvas">
-          {model ? (
-            <Canvas
-              frameloop="demand"
-              camera={{ fov: 45, position: [1, 1, 1] }}
-              gl={{ antialias: true, preserveDrawingBuffer: true }}
-              aria-label={`3D model of ${fileMeta.name || 'the file'}`}
-            >
-              <Scene
-                model={model}
-                wireframe={wireframe}
-                section={section}
-                sectionAxis={sectionAxis}
-                sectionFraction={sectionFraction}
-                isolated={isolated}
-                fitRequest={fitRequest}
-              />
-            </Canvas>
-          ) : null}
-          <LoadingOverlay show={!model}>Loading 3D model...</LoadingOverlay>
-        </div>
-      </div>
-      {parts.length > 1 ? (
-        <div className={classes.parts} data-testid="cad-parts">
-          <div className={classes.partsTitle}>Parts</div>
-          {parts.map((part) => (
+    <CadSceneContext value={scene}>
+      <div className={`${classes.viewer} layout-row flex rel-box`} data-testid="cad-viewer">
+        <div className="layout-column flex rel-box">
+          <div className={`${classes.toolbar} layout-row layout-align-start-center`}>
             <button
               type="button"
-              key={part.id}
-              className={classes.part}
-              aria-pressed={isolated === part.id}
-              title={`${part.triangles.toLocaleString()} triangles`}
-              onClick={() => setIsolated(isolated === part.id ? null : part.id)}
-              data-testid="cad-part"
+              className={classes.tool}
+              onClick={() => setFitRequest((value) => value + 1)}
+              data-testid="cad-fit"
             >
-              {part.name}
+              Fit
             </button>
-          ))}
+            <button
+              type="button"
+              className={classes.tool}
+              aria-pressed={wireframe}
+              onClick={() => setWireframe(!wireframe)}
+              data-testid="cad-wireframe"
+            >
+              Wireframe
+            </button>
+            <button
+              type="button"
+              className={classes.tool}
+              aria-pressed={section}
+              onClick={() => setSection(!section)}
+              data-testid="cad-section"
+            >
+              Section
+            </button>
+            {section ? (
+              <>
+                <select
+                  className={classes.axis}
+                  value={sectionAxis}
+                  onChange={(event) => setSectionAxis(event.target.value as ISectionAxis)}
+                  aria-label="Section axis"
+                  data-testid="cad-section-axis"
+                >
+                  <option value="x">X</option>
+                  <option value="y">Y</option>
+                  <option value="z">Z</option>
+                </select>
+                <input
+                  type="range"
+                  min={0}
+                  max={100}
+                  value={Math.round(sectionFraction * 100)}
+                  onChange={(event) => setSectionFraction(Number(event.target.value) / 100)}
+                  aria-label="Section position"
+                  data-testid="cad-section-position"
+                />
+              </>
+            ) : null}
+            <div className="flex" />
+            <div className={classes.status} data-testid="cad-status">
+              {cadProviderNames.opencascade}
+              {model
+                ? ` · ${parts.length} ${parts.length === 1 ? 'part' : 'parts'} · ${triangles.toLocaleString()} triangles`
+                : ''}
+            </div>
+          </div>
+          <div className={`${classes.canvas} flex rel-box`} data-testid="cad-canvas">
+            {model ? (
+              <Canvas
+                frameloop="demand"
+                camera={{ fov: 45, position: [1, 1, 1] }}
+                gl={{ antialias: true, preserveDrawingBuffer: true }}
+                aria-label={`3D model of ${fileMeta.name || 'the file'}`}
+              >
+                <Scene
+                  model={model}
+                  nodesById={scene ? scene.nodesById : noNodes}
+                  wireframe={wireframe}
+                  section={section}
+                  sectionAxis={sectionAxis}
+                  sectionFraction={sectionFraction}
+                  isolated={isolated}
+                  fitRequest={fitRequest}
+                />
+              </Canvas>
+            ) : null}
+            <LoadingOverlay show={!model}>Loading 3D model...</LoadingOverlay>
+          </div>
         </div>
-      ) : null}
-    </div>
+        {parts.length > 1 ? (
+          <div className={classes.parts} data-testid="cad-parts">
+            <div className={classes.partsTitle}>Parts</div>
+            {parts.map((part) => (
+              <button
+                type="button"
+                key={part.id}
+                className={classes.part}
+                aria-pressed={isolated === part.id}
+                title={`${part.triangles.toLocaleString()} triangles`}
+                onClick={() => setIsolated(isolated === part.id ? null : part.id)}
+                data-testid="cad-part"
+                data-part-id={part.id}
+              >
+                {part.name}
+              </button>
+            ))}
+          </div>
+        ) : null}
+        {children}
+      </div>
+    </CadSceneContext>
   )
 }
 

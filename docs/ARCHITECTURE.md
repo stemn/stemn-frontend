@@ -67,6 +67,15 @@ The contract with the backend:
 * Open-source renders also record `outputs` (`parts`, `triangles`, `size` in mm, the converter version and duration).
   The converter writes a PNG thumbnail as well, served at `downloadRenderFile/.../thumbnail.png`.
 
+**Entity ids (the seam for file diffs).** The converter gives every glTF node a stable id in `node.extras.stemn.id`
+(`'bracket-assembly/base-plate'`, `'bracket-assembly/bolt#2'`), and three's GLTFLoader copies it to `object.userData.stemn`.
+`nodesFromScene` (`PreviewCadOss.utils.ts`) maps every node by that id. For glbs written before the ids existed, it falls back to the
+path of glTF node names, numbering repeated siblings the same way. The viewer keys its part list by id and shows the node's
+glTF name as the label. It hands `{ root, nodesById }` to an optional `onSceneReady` prop and to `CadSceneContext` for children,
+and gives every mesh its own material. A later diff layer can therefore colour or ghost any entity by id without touching the others.
+The matching scene model (`IRenderScene`, `IRenderSceneEntity`, served as `downloadRenderFile/.../scene.json` and recorded
+as `outputs.scene`) is typed in `PreviewCadOss/scene.types.ts`; nothing fetches it yet.
+
 Part colours for parts without a material use the palette of the converter's thumbnails, so a part has the same colour
 in both. The e2e test `tests/e2e/specs/cad.spec.ts` uploads the backend's shared `assembly.step` sample and checks the
 viewer.

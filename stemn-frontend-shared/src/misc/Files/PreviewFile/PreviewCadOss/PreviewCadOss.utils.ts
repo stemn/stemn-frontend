@@ -38,12 +38,52 @@ export const renderModelUrl = ({
   revisionId: string
 }) => `${GLOBAL_ENV.API_SERVER}/api/v1/sync/downloadRender/${projectId}/${fileId}/${revisionId}`
 
-/** The flag the viewer sets on objects that are glTF nodes with geometry (one entry in the part list each) */
+/** The flag the viewer sets on every object that is a glTF node */
+export const NODE_FLAG = 'stemnNode'
+/** The flag the viewer sets on glTF nodes with geometry (one entry in the part list each) */
 export const PART_FLAG = 'stemnPart'
+/** Where the viewer keeps a node's original glTF name (three makes object names unique and strips some characters) */
+export const LABEL_KEY = 'stemnLabel'
+
+const isNode = (object: Object3D) =>
+  Boolean(object.userData[NODE_FLAG] || (object.userData.stemn && object.userData.stemn.id))
+
+/** A node's display label: its glTF name (the converter's product or instance name) */
+export const nodeLabel = (object: Object3D) => object.userData[LABEL_KEY] || object.name || ''
+
+/**
+ * Every glTF node of a model by its stable id: the converter's `extras.stemn.id`, or for glbs without it (older
+ * renders) the path of node labels from the top, with `#n` on the n-th sibling of the same label, the converter's
+ * own scheme ('bracket-assembly/bolt', 'bracket-assembly/bolt#2'). This map is the seam a file-diff layer uses to
+ * colour or ghost entities by id; every mesh has its own material, so overriding one never touches another.
+ */
+export const nodesFromScene = (root: Object3D): Map<string, Object3D> => {
+  const nodesById = new Map<string, Object3D>()
+  const visit = (object: Object3D, parentPath: string) => {
+    const seen = new Map<string, number>()
+    for (const child of object.children) {
+      if (!isNode(child)) {
+        visit(child, parentPath)
+        continue
+      }
+      const label = nodeLabel(child) || 'node'
+      const occurrence = (seen.get(label) || 0) + 1
+      seen.set(label, occurrence)
+      const fallback = `${parentPath ? `${parentPath}/` : ''}${label}${occurrence > 1 ? `#${occurrence}` : ''}`
+      const extras = child.userData.stemn
+      const id: string = extras && extras.id ? extras.id : fallback
+      nodesById.set(id, child)
+      visit(child, id)
+    }
+  }
+  visit(root, '')
+  return nodesById
+}
 
 export interface ICadPart {
-  /** Object3D uuid */
+  /** The node's stable id (see nodesFromScene) */
   id: string
+  /** Display label */
   name: string
   triangles: number
 }
@@ -61,16 +101,18 @@ const countTriangles = (object: Object3D) => {
 }
 
 /**
- * The parts of a model: every object flagged as a glTF node with geometry, in scene order, named by the
- * node (the converter names nodes after the CAD product, or after the file for single parts).
+ * The parts of a model: every node with geometry, in scene order, keyed by its id and named by its label (the
+ * converter names nodes after the CAD product or instance, or after the file for single parts).
  */
-export const partsFromScene = (scene: Object3D): ICadPart[] => {
+export const partsFromScene = (scene: Object3D, nodesById = nodesFromScene(scene)): ICadPart[] => {
+  const ids = new Map<Object3D, string>()
+  nodesById.forEach((object, id) => ids.set(object, id))
   const parts: ICadPart[] = []
   scene.traverse((object) => {
     if (object.userData[PART_FLAG]) {
       parts.push({
-        id: object.uuid,
-        name: object.name || `Part ${parts.length + 1}`,
+        id: ids.get(object) || object.uuid,
+        name: nodeLabel(object) || `Part ${parts.length + 1}`,
         triangles: countTriangles(object),
       })
     }
