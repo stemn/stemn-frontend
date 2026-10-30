@@ -46,6 +46,16 @@ jobs:
           ssh-key: ${{ secrets.STEMN_BACKEND_DEPLOY_KEY }}
           ref: ${{ inputs.backend-ref }}
 
+      # Informational: does the backend under test still serve the OpenAPI document the client was
+      # generated from? A difference is a warning (regenerate with `npm run api:generate -- --url local`),
+      # not a failure: backend changes must not break unrelated frontend PRs.
+      - name: OpenAPI drift (backend vs the committed snapshot)
+        continue-on-error: true
+        run: |
+          if ! npm run --silent api:check -- --url local; then
+            echo "::warning title=OpenAPI drift::The backend (${{ inputs.backend-ref }}) serves a different OpenAPI document than stemn-frontend-shared/src/api/openapi.json. Run npm run api:generate -- --url local."
+          fi
+
       # Website: production build against the local backend, served by the website's express server
       - name: Playwright browsers
         if: inputs.website
