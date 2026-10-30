@@ -8,6 +8,7 @@ import PreviewCadOssLoader from '../PreviewCadOssLoader'
 import PreviewDrawingLoader from '../PreviewDrawingLoader'
 import PreviewGcodeLoader from '../PreviewGcodeLoader'
 import PreviewIfcLoader from '../PreviewIfcLoader'
+import PreviewSimulationLoader from '../PreviewSimulationLoader'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import modelLocked from 'stemn-shared/assets/images/pure-vectors/model-locked.svg'
 
@@ -63,6 +64,9 @@ export default class PreviewCadSwitch extends React.Component {
           </div>
         </div>
       )
+    } else if (fileRender && fileRender.data && fileRender.cadProvider === 'vtk') {
+      // simulation results, converted with vtk: the vtk.js viewer
+      return <PreviewSimulationLoader previewId={previewId} fileMeta={fileMeta} fileRender={fileRender} />
     } else if (fileRender && fileRender.data && toolpath) {
       return <PreviewGcodeLoader previewId={previewId} fileMeta={fileMeta} fileRender={fileRender} />
     } else if (fileRender && fileRender.data) {

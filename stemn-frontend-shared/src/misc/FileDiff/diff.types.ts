@@ -42,12 +42,59 @@ export interface IScene {
   entities: ISceneEntity[]
 }
 
+/** How a field's values changed over an entity's points or cells */
+export interface IDiffFieldStatistics {
+  min: number
+  max: number
+  mean: number
+  /** Root mean square */
+  rms: number
+  /** The points or cells whose value changed, of all those compared */
+  changed: number
+  count: number
+}
+
+/** B - A for scalars; |B| - |A| for vectors, with B - A of each component */
+export interface IDiffFieldDelta extends IDiffFieldStatistics {
+  components?: IDiffFieldStatistics[]
+}
+
 export interface IDiffAttributeDelta {
   attribute: string
   a: any
   b: any
-  /** b - a for numbers (per component for number arrays) */
-  delta?: number | number[]
+  /** b - a for numbers (per component for number arrays), a field delta for field:<name> */
+  delta?: number | number[] | IDiffFieldDelta
+}
+
+/** A field of A and B, with its range in each (by magnitude for vectors; null where the revision lacks it) */
+export interface IDiffField {
+  name: string
+  association: 'point' | 'cell'
+  components: number
+  a: number[] | null
+  b: number[] | null
+}
+
+/** The fields of an entity both revisions have */
+export interface IDiffFieldEntity {
+  /** 'same': A and B have the same cells, so the fields are compared value by value */
+  topology: 'same' | 'different'
+  /** The fields that changed; for the same topology, any other field of B equals A's */
+  deltas: Array<{
+    field: string
+    association: 'point' | 'cell'
+    components: number
+    delta: IDiffFieldDelta
+    /** B - A on B's surface (GET /sync/diffField/.../{path}): float32, the components and for vectors |B| - |A| last */
+    path: string
+  }>
+}
+
+/** The manifest's optional section from adapters that compare fields (simulation results, docs/DIFF-VIEWERS.md) */
+export interface IDiffFields {
+  fields: IDiffField[]
+  entities: { [id: string]: IDiffFieldEntity }
 }
 
 export interface IDiffMove {
@@ -90,6 +137,8 @@ export interface IDiffManifest {
   units: { [key: string]: string }
   counts: IDiffCounts
   entities: IDiffEntity[]
+  /** Field deltas, from adapters that compare fields */
+  fields?: IDiffFields
   created: string
   duration: number
 }

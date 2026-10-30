@@ -1,0 +1,102 @@
+@value primary, border1 from "theme";
+
+.control {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0 4px;
+  font-size: 12px;
+
+  select,
+  input[type='number'] {
+    font-size: 12px;
+    padding: 1px 3px;
+    border: 1px solid border1;
+    border-radius: 3px;
+    background: white;
+  }
+
+  input[type='number'] {
+    width: 64px;
+  }
+}
+
+.modes {
+  display: flex;
+  gap: 2px;
+  margin: 0 4px;
+}
+
+.mode {
+  border: 1px solid border1;
+  border-radius: 3px;
+  background: white;
+  padding: 3px 8px;
+  font-size: 12px;
+  cursor: pointer;
+
+  &[aria-pressed='true'] {
+    border-color: primary;
+    color: primary;
+  }
+}
+
+.legend {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  width: 220px;
+  padding: 6px 8px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid border1;
+  border-radius: 3px;
+  font-size: 11px;
+  pointer-events: none;
+}
+
+.legendTitle {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.legendBar {
+  height: 10px;
+  border-radius: 2px;
+}
+
+.legendTicks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2px;
+}
+
+.toolbar {
+  border-bottom: 1px solid border1;
+  padding: 4px 8px;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: 12px;
+}
+
+.canvas {
+  background: linear-gradient(#f7f8fa, #e6e9ee);
+  min-height: 360px;
+}
+
+.notice {
+  padding: 6px 10px;
+  border-bottom: 1px solid border1;
+  background: #fff8e6;
+  font-size: 12px;
+}
+
+.fieldDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 11px;
+}
+
+.muted {
+  opacity: 0.6;
+}

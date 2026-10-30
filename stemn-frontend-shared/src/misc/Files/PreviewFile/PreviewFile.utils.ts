@@ -22,6 +22,8 @@ export const viewerFileTypes = {
     gerber: ['gerber'],
     // rendered by the API's PCB converter: KiCad, Eagle, Gerber and Excellon files and zips of a Gerber set
     pcb: pcbExtensions,
+    // simulation results: converted with VTK by the backend's converter (a 'vtk' render) and shown with vtk.js
+    simulation: ['vti', 'vtk', 'vtkhdf', 'vtp', 'vtr', 'vts', 'vtu'],
     image: ['png', 'jpg', 'jpeg', 'gif', 'svg', 'bmp', 'ico'],
     code: getCodeMirrorExts(),
     // G-code (3D printing and milling): converted by the open-source converter into a toolpath and shown by the layer
@@ -123,7 +125,18 @@ export const viewerFileTypes = {
 }
 
 export type IPreviewType =
-  'other' | 'gdoc' | 'google' | 'pipeline' | 'gerber' | 'pcb' | 'image' | 'code' | 'gcode' | 'autodesk' | 'pdf'
+  | 'other'
+  | 'gdoc'
+  | 'google'
+  | 'pipeline'
+  | 'gerber'
+  | 'pcb'
+  | 'image'
+  | 'code'
+  | 'gcode'
+  | 'autodesk'
+  | 'pdf'
+  | 'simulation'
 
 export const getViewerType = (fileName, provider): IPreviewType => {
   const extension = fileName.split('.').pop()

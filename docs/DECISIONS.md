@@ -189,3 +189,30 @@ Each entry states the context, the decision and its consequences. Newer entries 
     read as `outer-wall 75.1 mm, inner-wall 74.6 mm` in the deltas table.
   - Not done: the G-code text as a second tab, extruded line widths, per-feature visibility toggles, print time estimates
     (the toolpath carries speeds, not accelerations).
+
+## ADR-013: Simulation results in a lazy vtk.js viewer, with a field delta mode
+
+* Status: accepted (the diff-simulation PR, with stemn-backend's simulation adapter, ADR-027 there)
+* Decision: VTK legacy, VTK XML (`.vtu`, `.vtp`, `.vts`, `.vtr`, `.vti`) and VTKHDF files are a `simulation` viewer type.
+  They preview in `PreviewSimulation` and diff in `FileDiff/SimulationDiffView`, both drawn with
+  [vtk.js](https://kitware.github.io/vtk-js/) from the backend's `vtk` renders: each block's surface in the vtk.js
+  serialisation, fetched with the user's token.
+  - The diff view reuses the shared toolbar, filters, counts, entity panel and shortcuts (`FileDiffView/DiffToolbar`,
+    `DiffEntityPanel`, `useDiffLoad`, `useDiffViewState`, shared with the AEC workstream) and the class rules of `diff.utils`.
+  - On top of the classes it colours blocks by a field of A, a field of B, or B − A (the manifest's optional `fields` section):
+    a diverging colour map with an auto symmetric range, a hand-set ± limit and invert, a legend, a component selector and a
+    clipping plane.
+  - Blocks meshed again keep their class colours in Δ mode, and the panel says why.
+* Why:
+  - The founder asked whether simulation files are worth diffing. What changes between two runs is mostly the results on the same
+    mesh, which the geometric classes alone would call unchanged.
+  - vtk.js reads the VTK data model and colours by point or cell data natively; doing that in three.js would mean rewriting both.
+* Consequences:
+  - vtk.js is its own lazy chunk (about 124 kB gzipped). It is loaded only for these types and shares nothing with the three.js
+    chunk. Only the classes the viewer uses are imported, with their OpenGL implementations registered one by one (no rendering
+    profile, no WebGPU).
+  - The main chunks grow by less than 0.1 kB (the viewer type, the compare mode and two loaders): 449.2 kB gzipped before and
+    after, on staging `c620e55e`.
+  - Colours are computed in JavaScript (`simulation.utils.ts`, unit-tested) and handed to vtk.js as direct RGB scalars, so the
+    legend and the canvas use one colour function.
+  - vtk.js needs WebGL 2. Its context is created with `preserveDrawingBuffer` so screenshots and the e2e tests can read the canvas.

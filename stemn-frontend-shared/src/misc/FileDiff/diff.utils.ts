@@ -4,7 +4,7 @@
  * PCB, AEC, additive and simulation later) draws entities by these rules, so they look and behave the same.
  * No three.js in this file: it is in the main bundle's reach and unit-tested on its own.
  */
-import type { IDiffAttributeDelta, IDiffClass, IDiffCounts, IDiffEntity } from './diff.types'
+import type { IDiffAttributeDelta, IDiffClass, IDiffCounts, IDiffEntity, IDiffFieldDelta } from './diff.types'
 
 /** In the order the filters and the entity panel show them */
 export const diffClasses: IDiffClass[] = ['added', 'removed', 'modified', 'moved', 'unchanged']
@@ -209,6 +209,7 @@ const unitLabels: Record<string, string> = { mm3: 'mm³', mm2: 'mm²', mm: 'mm' 
 /** One attribute value for the deltas table, with its unit when the scene names one */
 export const formatValue = (value: any, unit?: string) => {
   if (value === null || value === undefined) return '–'
+  if (unit === 'range') return formatRange(value)
   const suffix = unit ? ` ${unitLabels[unit] || unit}` : ''
   if (typeof value === 'number') return `${formatNumber(value)}${suffix}`
   if (Array.isArray(value) && value.every((item) => typeof item === 'number'))
@@ -225,11 +226,22 @@ export const formatValue = (value: any, unit?: string) => {
 export const formatDelta = (change: IDiffAttributeDelta, unit?: string) => {
   if (change.delta === undefined) return ''
   const sign = (value: number) => (value > 0 ? `+${formatNumber(value)}` : formatNumber(value))
+  if (isFieldDelta(change.delta)) return `${sign(change.delta.min)} … ${sign(change.delta.max)}`
   const suffix = unit ? ` ${unitLabels[unit] || unit}` : ''
   return Array.isArray(change.delta)
     ? `${change.delta.map(sign).join(' × ')}${suffix}`
     : `${sign(change.delta)}${suffix}`
 }
+
+/**
+ * Field changes (simulation results, the manifest's optional `fields` section): the scene's units call their values
+ * 'range', [min, max], and their delta is the statistics of B - A over the entity's points or cells
+ */
+export const isFieldDelta = (delta: IDiffAttributeDelta['delta']): delta is IDiffFieldDelta =>
+  Boolean(delta) && typeof delta === 'object' && !Array.isArray(delta)
+
+export const formatRange = (range: any) =>
+  Array.isArray(range) && range.length === 2 ? `${formatNumber(range[0])} … ${formatNumber(range[1])}` : '–'
 
 export const diffUrl = ({
   projectId,
