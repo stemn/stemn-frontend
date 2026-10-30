@@ -11,6 +11,7 @@
     "dev": "vite",
     "build": "vite build && node ./scripts/copyServer.js",
     "serve": "node ./build/server/index.js",
+    "size": "node ./scripts/bundleSize.js",
     "dev:webpack": "webpack serve --config ./config/webpack.config.development.js",
     "build:webpack": "webpack --config ./config/webpack.config.production.js && node ./scripts/copyServer.js",
     "typecheck": "tsc -p ./tsconfig.json --noEmit && tsc -p ./tsconfig.node.json --noEmit"

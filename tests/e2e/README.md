@@ -32,6 +32,11 @@ project as its owner, under a new name each run, and checks that the open-source
 parts. It needs a backend that converts with OpenCascade (stemn-backend `STEMN_CAD_PROVIDER=opencascade`, the
 converter container that `local/start.sh` starts). Against an Autodesk-only backend it fails, because the render never reaches
 the open-source viewer.
+`specs/diff.spec.ts` uploads `fixtures/cad/bracket-assembly-v1.step` and then `-v2.step` as the second revision of one file in
+the CubeSat project, opens the file, picks **Compare: Unified Diff** and the two revisions on the timeline, and checks the diff
+viewer: the five class counts, the entity panel, the four change colours on the canvas, the A → B slider, the entity details and
+the side-by-side view with linked cameras. It needs a backend with the diff route (stemn-backend ADR-022) and the OpenCascade
+converter.
 On failure, traces, screenshots and videos are in `test-results/` (`npx playwright show-trace <trace.zip>`).
 
 In CI the reusable workflow `.github/workflows/e2e.yml` starts the backend with the composite action

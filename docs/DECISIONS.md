@@ -88,3 +88,23 @@ Each entry states the context, the decision and its consequences. Newer entries 
 * Consequences: three.js is a lazy chunk (about 160 kB gzipped) loaded only for open-source renders. @react-three/drei
   was left out because it pulls in some 35 packages (hls.js, mediapipe, troika, ...) for the two helpers the viewer needs;
   orbit controls and the glTF loader come from `three/addons`.
+
+## ADR-009: Unified diffs in one lazy viewer, driven by a server-side manifest
+
+* Status: accepted (the diff-core PR, with stemn-backend's diff route, ADR-022 there)
+* Decision: two revisions of a CAD file open in `FileDiff` (`stemn-frontend-shared/src/misc/FileDiff`): a unified view with A and B
+  overlaid and coloured by class (added, removed, modified, moved, unchanged), an A → B slider, a per-entity swap, class filters
+  with counts, "changes only", an entity panel with attribute deltas, and a side-by-side view with linked cameras. The classes
+  come from the backend's manifest (`GET /sync/diff/...`); the client only draws. The drawing rules live in `diff.utils.ts`
+  without three.js, so the 2D viewers of the other file types reuse them. The contract is in [`DIFF-VIEWERS.md`](DIFF-VIEWERS.md).
+* Why: the founder's requirement that users can tell what changed between revisions; diffing on the server keeps STEP parsing out
+  of the browser and caches each pair once.
+* Consequences:
+  - The viewer is a lazy chunk (about 8 kB gzipped plus the shared three.js chunk the CAD preview already loads). CI checks that the
+    website's main chunks stay within 2% of `stemn-frontend-website/bundle-size-baseline.json` (448.6 kB gzipped on staging
+    `36e579b5`), so new viewers must stay behind `import()`.
+  - A pending diff is followed through `DIFF/DIFF_COMPLETE` (`Websocket/eventMap/diff.js` → `diff.events.ts`, no reducer: only an
+    open viewer cares) with polling as a fallback.
+  - Formats the backend cannot diff (proprietary CAD, Autodesk-converted deployments) keep the original side-by-side previews and
+    say so.
+

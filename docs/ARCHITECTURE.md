@@ -74,11 +74,20 @@ path of glTF node names, numbering repeated siblings the same way. The viewer ke
 glTF name as the label. It hands `{ root, nodesById }` to an optional `onSceneReady` prop and to `CadSceneContext` for children,
 and gives every mesh its own material. A later diff layer can therefore colour or ghost any entity by id without touching the others.
 The matching scene model (`IRenderScene`, `IRenderSceneEntity`, served as `downloadRenderFile/.../scene.json` and recorded
-as `outputs.scene`) is typed in `PreviewCadOss/scene.types.ts`; nothing fetches it yet.
+as `outputs.scene`) is typed in `PreviewCadOss/scene.types.ts`; the backend's diff engine reads it, the client reads the diff
+manifest instead (File diffs below).
 
 Part colours for parts without a material use the palette of the converter's thumbnails, so a part has the same colour
 in both. The e2e test `tests/e2e/specs/cad.spec.ts` uploads the backend's shared `assembly.step` sample and checks the
 viewer.
+
+## File diffs
+
+Two revisions of a CAD file open in the diff viewer (`stemn-frontend-shared/src/misc/FileDiff`, ADR-009): `FileCompareInner`
+mounts `FileDiffLoader` (lazy) for the unified and side-by-side modes, `FileDiffView` loads the backend's manifest
+(`GET /api/v1/sync/diff/{projectId}/{fileId}/{revisionA}/{revisionB}`, pending until both revisions are converted, then
+`DIFF/DIFF_COMPLETE`) and both glbs, and draws them with the rules in `diff.utils.ts`. The contract for the other file types is
+[`DIFF-VIEWERS.md`](DIFF-VIEWERS.md).
 
 ## Source layout (website)
 
@@ -110,6 +119,7 @@ Shared code lives in `stemn-frontend-shared/src/misc/<Feature>/` (components, `*
 
 ## Quality gates
 
-`npm run lint` (ESLint 10 + Prettier), `npm run typecheck`, `npm test` (Vitest), `npm run test:e2e` (website, Playwright)
+`npm run lint` (ESLint 10 + Prettier), `npm run typecheck`, `npm test` (Vitest), `npm run size --workspace stemn-frontend-website`
+(main bundle gzip size against the baseline + 2%, after `npm run build`), `npm run test:e2e` (website, Playwright)
 and `npm run desktop:test:e2e` (Electron, Playwright). GitHub Actions run all of them on every pull request,
 plus both website builds, the desktop build, the Docker image, CodeQL and dependency review. See the root README.

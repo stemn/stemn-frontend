@@ -1,0 +1,8 @@
+{
+  "gzip": 459360,
+  "js": 440439,
+  "css": 18921,
+  "files": 26,
+  "measured": "2026-10-30",
+  "source": "staging 36e579b5, before the diff viewer (node scripts/bundleSize.js --update)"
+}

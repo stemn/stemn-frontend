@@ -1,0 +1,212 @@
+{
+  "status": "complete",
+  "version": 1,
+  "adapter": {
+    "name": "cad",
+    "version": 1
+  },
+  "fileId": "file",
+  "revisionA": "revision-v1",
+  "revisionB": "revision-v2",
+  "units": {
+    "length": "m",
+    "transform": "metre, glTF frame (y up), world",
+    "bounds": "metre, glTF frame (y up), world",
+    "volume": "mm3",
+    "area": "mm2",
+    "size": "mm"
+  },
+  "counts": {
+    "unchanged": 1,
+    "added": 1,
+    "removed": 1,
+    "modified": 2,
+    "moved": 1
+  },
+  "entities": [
+    {
+      "id": "bracket-assembly/base-plate",
+      "idA": "bracket-assembly/base-plate",
+      "idB": "bracket-assembly/base-plate",
+      "kind": "part",
+      "label": "base-plate",
+      "parentId": "bracket-assembly",
+      "class": "modified",
+      "match": {
+        "method": "id",
+        "confidence": 1
+      },
+      "changes": [
+        {
+          "attribute": "faces",
+          "a": 10,
+          "b": 11,
+          "delta": 1
+        },
+        {
+          "attribute": "edges",
+          "a": 48,
+          "b": 54,
+          "delta": 6
+        },
+        {
+          "attribute": "volume",
+          "a": 34793.6,
+          "b": 34492,
+          "delta": -301.6
+        },
+        {
+          "attribute": "area",
+          "a": 14121.1,
+          "b": 14171.3,
+          "delta": 50.2
+        },
+        {
+          "attribute": "triangles",
+          "a": 604,
+          "b": 752,
+          "delta": 148
+        }
+      ],
+      "move": null,
+      "centreA": [0, 0.003, 0],
+      "centreB": [0, 0.003, 0],
+      "payloadRefA": {
+        "node": 1
+      },
+      "payloadRefB": {
+        "node": 1
+      }
+    },
+    {
+      "id": "bracket-assembly/bracket",
+      "idA": "bracket-assembly/bracket",
+      "idB": "bracket-assembly/bracket",
+      "kind": "part",
+      "label": "bracket",
+      "parentId": "bracket-assembly",
+      "class": "modified",
+      "match": {
+        "method": "id",
+        "confidence": 1
+      },
+      "changes": [
+        {
+          "attribute": "volume",
+          "a": 21289.1,
+          "b": 21701.2,
+          "delta": 412.1
+        },
+        {
+          "attribute": "area",
+          "a": 10464.4,
+          "b": 10416.3,
+          "delta": -48.1
+        }
+      ],
+      "move": null,
+      "centreA": [0, 0.0235, 0],
+      "centreB": [0, 0.0235, 0],
+      "payloadRefA": {
+        "node": 2
+      },
+      "payloadRefB": {
+        "node": 2
+      }
+    },
+    {
+      "id": "bracket-assembly/spacer",
+      "idA": "bracket-assembly/spacer",
+      "idB": "bracket-assembly/spacer",
+      "kind": "part",
+      "label": "spacer",
+      "parentId": "bracket-assembly",
+      "class": "moved",
+      "match": {
+        "method": "id",
+        "confidence": 1
+      },
+      "changes": [],
+      "move": {
+        "translation": [-0.06, 0, 0],
+        "distance": 0.06,
+        "rotation": 0
+      },
+      "centreA": [0.030000000000000002, 0.009000000000000001, 0.025],
+      "centreB": [-0.030000000000000002, 0.009000000000000001, 0.025],
+      "payloadRefA": {
+        "node": 4
+      },
+      "payloadRefB": {
+        "node": 3
+      }
+    },
+    {
+      "id": "bracket-assembly/nut",
+      "idA": "bracket-assembly/nut",
+      "idB": "bracket-assembly/nut",
+      "kind": "part",
+      "label": "nut",
+      "parentId": "bracket-assembly",
+      "class": "unchanged",
+      "match": {
+        "method": "id",
+        "confidence": 1
+      },
+      "changes": [],
+      "move": null,
+      "centreA": [-0.041999999999999996, 0.008, -0.022],
+      "centreB": [-0.041999999999999996, 0.008, -0.022],
+      "payloadRefA": {
+        "node": 5
+      },
+      "payloadRefB": {
+        "node": 4
+      }
+    },
+    {
+      "id": "bracket-assembly/washer",
+      "idA": null,
+      "idB": "bracket-assembly/washer",
+      "kind": "part",
+      "label": "washer",
+      "parentId": "bracket-assembly",
+      "class": "added",
+      "match": {
+        "method": null,
+        "confidence": 0
+      },
+      "changes": [],
+      "move": null,
+      "centreA": null,
+      "centreB": [0.042004252, 0.00675, 0.022],
+      "payloadRefA": null,
+      "payloadRefB": {
+        "node": 5
+      }
+    },
+    {
+      "id": "bracket-assembly/pin",
+      "idA": "bracket-assembly/pin",
+      "idB": null,
+      "kind": "part",
+      "label": "pin",
+      "parentId": "bracket-assembly",
+      "class": "removed",
+      "match": {
+        "method": null,
+        "confidence": 0
+      },
+      "changes": [],
+      "move": null,
+      "centreA": [0.025, 0.020999999999999998, -0.012],
+      "centreB": null,
+      "payloadRefA": {
+        "node": 3
+      },
+      "payloadRefB": null
+    }
+  ],
+  "created": "2026-10-30T00:00:00.000Z",
+  "duration": 1
+}

@@ -1,0 +1,181 @@
+@value primary, border1, bg1 from "theme";
+
+.view {
+  min-height: 360px;
+  font-size: 12px;
+}
+
+.toolbar {
+  border-bottom: 1px solid border1;
+  padding: 4px 8px;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.segmented {
+  display: flex;
+  gap: 2px;
+  margin-right: 6px;
+}
+
+.tool {
+  border: 1px solid border1;
+  border-radius: 3px;
+  background: white;
+  padding: 3px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  &[aria-pressed='true'] {
+    border-color: primary;
+    color: primary;
+  }
+}
+
+.filter[aria-pressed='false'] {
+  opacity: 0.55;
+}
+
+.swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex: none;
+}
+
+.count {
+  font-weight: 600;
+  min-width: 12px;
+  text-align: center;
+}
+
+.check,
+.slider {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0 6px;
+  cursor: pointer;
+}
+
+.notice {
+  padding: 6px 10px;
+  border-bottom: 1px solid border1;
+  background: #fff8e6;
+}
+
+.help {
+  border-bottom: 1px solid border1;
+  padding: 6px 10px;
+
+  td {
+    padding: 2px 8px;
+  }
+}
+
+.canvas {
+  background: linear-gradient(#f7f8fa, #e6e9ee);
+  min-height: 0;
+}
+
+.pane {
+  border-right: 1px solid border1;
+  min-width: 0;
+
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.paneTitle {
+  padding: 4px 8px;
+  opacity: 0.7;
+}
+
+.panel {
+  width: 260px;
+  border-left: 1px solid border1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.panelTitle {
+  padding: 8px 10px;
+  font-weight: 600;
+  border-bottom: 1px solid border1;
+}
+
+.rows {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  border: none;
+  background: none;
+  text-align: left;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 13px;
+
+  &:hover {
+    background: bg1;
+  }
+
+  &[aria-pressed='true'] {
+    color: primary;
+    font-weight: 600;
+  }
+}
+
+.empty {
+  padding: 10px;
+  opacity: 0.6;
+}
+
+.muted {
+  opacity: 0.6;
+  font-size: 11px;
+}
+
+.details {
+  border-top: 1px solid border1;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 50%;
+  overflow-y: auto;
+}
+
+.detailsTitle {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.deltas {
+  border-collapse: collapse;
+  width: 100%;
+
+  th,
+  td {
+    text-align: left;
+    padding: 2px 4px;
+    border-bottom: 1px solid border1;
+  }
+}

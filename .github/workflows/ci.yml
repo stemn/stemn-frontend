@@ -59,6 +59,11 @@ jobs:
       - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
       - run: ${{ matrix.command }}
+      # the main chunks (what index.html loads first) may not grow beyond the committed baseline + 2%: viewers,
+      # three.js and the diff UI are lazy chunks (stemn-frontend-website/scripts/bundleSize.js)
+      - name: Main bundle size (gzip) against bundle-size-baseline.json
+        if: matrix.target == 'website-vite'
+        run: npm run size --workspace stemn-frontend-website
 
   docker:
     name: docker image (website)
