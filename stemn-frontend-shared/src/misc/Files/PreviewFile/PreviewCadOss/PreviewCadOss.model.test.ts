@@ -53,6 +53,12 @@ const toGlb = (json: object, binary: ArrayBufferView): ArrayBuffer => {
 
 const glb = toGlb(gltf, positions)
 
+/** A converter glb from __fixtures__ (copies of stemn-backend converter outputs) */
+const parseFixture = (name: string) => {
+  const file = readFileSync(join(__dirname, '__fixtures__', name))
+  return parseModel(file.buffer.slice(file.byteOffset, file.byteOffset + file.byteLength))
+}
+
 const meshesOf = (object: any): Mesh[] => {
   const meshes: Mesh[] = []
   object.traverse((child: any) => child.isMesh && meshes.push(child))
@@ -90,9 +96,51 @@ describe('parseModel', () => {
     expect(bolt.color.r).toBeCloseTo(0.2)
   })
 
+  it('reads the ids and labels of the converter assembly', async () => {
+    const root = await parseFixture('assembly.glb')
+    const nodesById = nodesFromScene(root)
+    expect([...nodesById.keys()]).toEqual([
+      'bracket-assembly',
+      'bracket-assembly/base-plate',
+      'bracket-assembly/bracket',
+    ])
+    expect([...nodesById.values()].map((object) => object.userData[LABEL_KEY])).toEqual([
+      'bracket-assembly',
+      'base-plate',
+      'bracket',
+    ])
+    expect(nodesById.get('bracket-assembly/bracket')!.userData.stemn).toMatchObject({ kind: 'part' })
+    expect(partsFromScene(root, nodesById).map(({ id, name }) => [id, name])).toEqual([
+      ['bracket-assembly/base-plate', 'base-plate'],
+      ['bracket-assembly/bracket', 'bracket'],
+    ])
+  })
+
+  it('reads the five parts of the bracket assembly revision used by the diff fixtures', async () => {
+    const root = await parseFixture('bracket-assembly-v1.glb')
+    const nodesById = nodesFromScene(root)
+    expect([...nodesById.keys()]).toEqual([
+      'bracket-assembly',
+      'bracket-assembly/base-plate',
+      'bracket-assembly/bracket',
+      'bracket-assembly/pin',
+      'bracket-assembly/spacer',
+      'bracket-assembly/nut',
+    ])
+    expect(partsFromScene(root, nodesById).map((part) => part.name)).toEqual([
+      'base-plate',
+      'bracket',
+      'pin',
+      'spacer',
+      'nut',
+    ])
+    // every part has its own material
+    const materials = new Set(meshesOf(root).map((mesh) => mesh.material))
+    expect(materials.size).toBe(meshesOf(root).length)
+  })
+
   it('reads glbs written before the converter added ids, with label path ids', async () => {
-    const file = readFileSync(join(__dirname, '__fixtures__/assembly-without-ids.glb'))
-    const root = await parseModel(file.buffer.slice(file.byteOffset, file.byteOffset + file.byteLength))
+    const root = await parseFixture('assembly-without-ids.glb')
     expect([...nodesFromScene(root).keys()]).toEqual([
       'bracket-assembly',
       'bracket-assembly/base-plate',
