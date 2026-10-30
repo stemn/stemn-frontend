@@ -27,6 +27,8 @@ const EMAIL = 'priya.raman@stemn.local'
 const PASSWORD = 'password123'
 const PROJECT_NAME = 'CubeSat Deployable Solar Array'
 const SYNC_FILE = 'desktop-sync-check.md'
+// An open seeded thread of the project (the website e2e suite comments on it too)
+const THREAD_NAME = 'Burn wire release takes 9 s at -20 C'
 
 test.describe.serial('Stemn Desktop', () => {
   const userDataDir = mkdtempSync(join(tmpdir(), 'stemn-desktop-e2e-profile-'))
@@ -347,6 +349,60 @@ test.describe.serial('Stemn Desktop', () => {
     await menubar.getByText('Preferences', { exact: true }).click()
     await expect.poll(() => main.url()).toContain('#/settings/application')
     await expect(menubar).toHaveURL(/menubar\/index\.html#\/project\//)
+  })
+
+  test('threads: the thread modal comments come from TanStack Query and update live', async () => {
+    const search = await api('GET', '/search', {
+      token,
+      query: { type: 'thread', parentType: 'project', parentId: PROJECT_ID, size: '100', criteria: '{}' },
+    })
+    expect(search.status).toBe(200)
+    const thread = search.data.find((item: any) => item.name === THREAD_NAME)
+    const body = `Desktop comment ${Date.now()}`
+    const created = await api('POST', `/threads/${thread._id}/comments`, { token, json: { thread: thread._id, body } })
+    expect(created.status).toBe(200)
+    // The API caches timelines (stale-while-revalidate): wait until it serves the new comment event,
+    // which the modal's (Redux) timeline lists
+    await expect
+      .poll(async () => {
+        const timeline = await api('GET', '/timeline', {
+          token,
+          query: { entityType: 'thread', entityId: thread._id, size: '500' },
+        })
+        return (
+          Array.isArray(timeline.data) && timeline.data.some((event: any) => event.data?.comment === created.data._id)
+        )
+      })
+      .toBe(true)
+
+    // The board is still Redux; the modal's timeline comments are the renderer's `comments.detail` queries
+    await goto(main, `/project/${PROJECT_ID}/threads`)
+    const cards = main.locator('[class*="ThreadListItem_card-"]')
+    await expect(cards.first()).toBeVisible()
+    const index = await cards.evaluateAll(
+      (elements, name) => elements.findIndex((element) => element.querySelector('textarea')?.value === name),
+      THREAD_NAME,
+    )
+    expect(index).toBeGreaterThanOrEqual(0)
+    await cards.nth(index).getByTitle('Show Thread').click()
+    await expect(main.getByText(body)).toBeVisible()
+    const cached = await main.evaluate(
+      (commentId) => (window as any).__STEMN__.queryClient.getQueryData(['comments', 'detail', commentId]),
+      created.data._id,
+    )
+    expect(cached).toMatchObject({ _id: created.data._id, body })
+
+    // Edited elsewhere: THREAD/COMMENT_UPDATED reaches the main-process websocket, its
+    // API/INVALIDATE_QUERIES action is replayed in this window, and the query refetches
+    await main.waitForTimeout(1500) // the thread room join is confirmed asynchronously
+    const edited = await api('PUT', `/comments/${created.data._id}`, {
+      token,
+      json: { _id: created.data._id, body: `${body} edited`, thread: thread._id },
+    })
+    expect(edited.status).toBe(200)
+    await expect(main.getByText(`${body} edited`)).toBeVisible()
+    await screenshot(main, '09-thread-modal-live-comment')
+    // The modal stays open: closing it rejects the legacy showModal promise, which nothing catches
   })
 
   test('no uncaught exceptions in the main process or the renderers', async () => {

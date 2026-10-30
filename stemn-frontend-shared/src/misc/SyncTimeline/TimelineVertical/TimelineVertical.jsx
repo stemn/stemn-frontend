@@ -46,6 +46,10 @@ const groupByIdential = (data) =>
     return accum
   }, [])
 
+// A comment event is keyed by its comment: the event the app adds after posting (local id) and the one
+// the API then returns are the same item, so the Comment (and an edit in progress) is not remounted
+const itemKey = (item) => (item.event === 'comment' && item.data && item.data.comment) || item._id
+
 const getCalendarText = (time) => calendar(time).split(' at')[0]
 
 const getNumberOfGroupedItems = (dayGroups) => sum(dayGroups.map((dayGroup) => dayGroup.items.length))
@@ -56,7 +60,7 @@ export default class TimelineVertical extends Component {
     // only a few groups to display on the page
     items.map((item, idx) => (
       <TimelineItem
-        key={item._id}
+        key={itemKey(item)}
         item={item}
         type={this.props.type}
         entity={this.props.entity}

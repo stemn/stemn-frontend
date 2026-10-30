@@ -37,7 +37,8 @@ test.describe('browsing', () => {
   })
 
   test('notifications page lists notifications', async ({ adaPage: page }) => {
-    await page.getByRole('link', { name: 'Notifications' }).click()
+    // The header link (its accessible name is the unread count once the notifications are loaded)
+    await page.locator('[data-tag="view-notifications"]').click()
     await expect(page).toHaveURL(/\/notifications/)
     await expect(page).toHaveTitle('Notifications')
     await page.getByRole('link', { name: 'All Notifications' }).click()
