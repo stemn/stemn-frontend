@@ -1,0 +1,406 @@
+{
+  "date": "2026-10-29T22:32:41.944Z",
+  "runs": 5,
+  "dropCaches": false,
+  "apps": {
+    "electron": {
+      "installers": {
+        "Stemn-0.0.26-linux-x86_64.AppImage": 125.4
+      },
+      "unpacked": 293.7,
+      "binary": 223.6,
+      "firstWindow": 1007,
+      "ready": 588,
+      "idleRss": 526.6,
+      "idlePss": 260.8,
+      "processes": [
+        {
+          "comm": "stemn",
+          "rss": 187.2
+        },
+        {
+          "comm": "stemn",
+          "rss": 56
+        },
+        {
+          "comm": "stemn",
+          "rss": 148.8
+        },
+        {
+          "comm": "stemn",
+          "rss": 55.8
+        },
+        {
+          "comm": "stemn",
+          "rss": 81.7
+        }
+      ],
+      "signedInRss": 526.7,
+      "signedInPss": 259.5,
+      "signedInProcesses": [
+        {
+          "comm": "stemn",
+          "rss": 186.2
+        },
+        {
+          "comm": "stemn",
+          "rss": 55.1
+        },
+        {
+          "comm": "stemn",
+          "rss": 147.1
+        },
+        {
+          "comm": "stemn",
+          "rss": 55.7
+        },
+        {
+          "comm": "stemn",
+          "rss": 82.5
+        }
+      ],
+      "samples": [
+        {
+          "firstWindow": 973,
+          "ready": 543,
+          "rss": 526.6,
+          "pss": 258.7,
+          "processes": [
+            {
+              "comm": "stemn",
+              "rss": 185.7
+            },
+            {
+              "comm": "stemn",
+              "rss": 55.5
+            },
+            {
+              "comm": "stemn",
+              "rss": 147
+            },
+            {
+              "comm": "stemn",
+              "rss": 56.4
+            },
+            {
+              "comm": "stemn",
+              "rss": 82
+            }
+          ]
+        },
+        {
+          "firstWindow": 969,
+          "ready": 588,
+          "rss": 526.3,
+          "pss": 260.8,
+          "processes": [
+            {
+              "comm": "stemn",
+              "rss": 185.9
+            },
+            {
+              "comm": "stemn",
+              "rss": 55.6
+            },
+            {
+              "comm": "stemn",
+              "rss": 148
+            },
+            {
+              "comm": "stemn",
+              "rss": 55.6
+            },
+            {
+              "comm": "stemn",
+              "rss": 81.3
+            }
+          ]
+        },
+        {
+          "firstWindow": 1007,
+          "ready": 513,
+          "rss": 522.1,
+          "pss": 258.5,
+          "processes": [
+            {
+              "comm": "stemn",
+              "rss": 185.7
+            },
+            {
+              "comm": "stemn",
+              "rss": 54.9
+            },
+            {
+              "comm": "stemn",
+              "rss": 145.3
+            },
+            {
+              "comm": "stemn",
+              "rss": 54.6
+            },
+            {
+              "comm": "stemn",
+              "rss": 81.6
+            }
+          ]
+        },
+        {
+          "firstWindow": 1116,
+          "ready": 629,
+          "rss": 529.2,
+          "pss": 262,
+          "processes": [
+            {
+              "comm": "stemn",
+              "rss": 186.2
+            },
+            {
+              "comm": "stemn",
+              "rss": 55.6
+            },
+            {
+              "comm": "stemn",
+              "rss": 149.5
+            },
+            {
+              "comm": "stemn",
+              "rss": 55.9
+            },
+            {
+              "comm": "stemn",
+              "rss": 82
+            }
+          ]
+        },
+        {
+          "firstWindow": 1066,
+          "ready": 614,
+          "rss": 529.5,
+          "pss": 262.4,
+          "processes": [
+            {
+              "comm": "stemn",
+              "rss": 187.2
+            },
+            {
+              "comm": "stemn",
+              "rss": 56
+            },
+            {
+              "comm": "stemn",
+              "rss": 148.8
+            },
+            {
+              "comm": "stemn",
+              "rss": 55.8
+            },
+            {
+              "comm": "stemn",
+              "rss": 81.7
+            }
+          ]
+        }
+      ]
+    },
+    "tauri": {
+      "installers": {
+        "Stemn_0.0.26_amd64.AppImage": 82.4,
+        "Stemn_0.0.26_amd64.deb": 6.9
+      },
+      "unpacked": 256.9,
+      "binary": 11.1,
+      "firstWindow": 1036,
+      "ready": 679,
+      "idleRss": 894.7,
+      "idlePss": 427.6,
+      "processes": [
+        {
+          "comm": "stemn",
+          "rss": 194.7
+        },
+        {
+          "comm": "WebKitNetworkPr",
+          "rss": 62.6
+        },
+        {
+          "comm": "WebKitWebProces",
+          "rss": 180.8
+        },
+        {
+          "comm": "WebKitWebProces",
+          "rss": 227.4
+        },
+        {
+          "comm": "WebKitWebProces",
+          "rss": 216.9
+        }
+      ],
+      "signedInRss": 901.7,
+      "signedInPss": 438,
+      "signedInProcesses": [
+        {
+          "comm": "stemn",
+          "rss": 204.3
+        },
+        {
+          "comm": "WebKitNetworkPr",
+          "rss": 63.3
+        },
+        {
+          "comm": "WebKitWebProces",
+          "rss": 185.4
+        },
+        {
+          "comm": "WebKitWebProces",
+          "rss": 232.1
+        },
+        {
+          "comm": "WebKitWebProces",
+          "rss": 216.6
+        }
+      ],
+      "samples": [
+        {
+          "firstWindow": 1036,
+          "ready": 679,
+          "rss": 898.4,
+          "pss": 433.5,
+          "processes": [
+            {
+              "comm": "stemn",
+              "rss": 201.1
+            },
+            {
+              "comm": "WebKitNetworkPr",
+              "rss": 62.5
+            },
+            {
+              "comm": "WebKitWebProces",
+              "rss": 186.2
+            },
+            {
+              "comm": "WebKitWebProces",
+              "rss": 231.9
+            },
+            {
+              "comm": "WebKitWebProces",
+              "rss": 216.7
+            }
+          ]
+        },
+        {
+          "firstWindow": 1133,
+          "ready": 693,
+          "rss": 899,
+          "pss": 430.3,
+          "processes": [
+            {
+              "comm": "stemn",
+              "rss": 201.8
+            },
+            {
+              "comm": "WebKitNetworkPr",
+              "rss": 63
+            },
+            {
+              "comm": "WebKitWebProces",
+              "rss": 186.4
+            },
+            {
+              "comm": "WebKitWebProces",
+              "rss": 231.6
+            },
+            {
+              "comm": "WebKitWebProces",
+              "rss": 216.4
+            }
+          ]
+        },
+        {
+          "firstWindow": 962,
+          "ready": 668,
+          "rss": 894.7,
+          "pss": 427.6,
+          "processes": [
+            {
+              "comm": "stemn",
+              "rss": 197.2
+            },
+            {
+              "comm": "WebKitNetworkPr",
+              "rss": 63
+            },
+            {
+              "comm": "WebKitWebProces",
+              "rss": 186.1
+            },
+            {
+              "comm": "WebKitWebProces",
+              "rss": 231.6
+            },
+            {
+              "comm": "WebKitWebProces",
+              "rss": 216.7
+            }
+          ]
+        },
+        {
+          "firstWindow": 1087,
+          "ready": 757,
+          "rss": 889.5,
+          "pss": 422.1,
+          "processes": [
+            {
+              "comm": "stemn",
+              "rss": 192.9
+            },
+            {
+              "comm": "WebKitNetworkPr",
+              "rss": 62.3
+            },
+            {
+              "comm": "WebKitWebProces",
+              "rss": 185.8
+            },
+            {
+              "comm": "WebKitWebProces",
+              "rss": 231.9
+            },
+            {
+              "comm": "WebKitWebProces",
+              "rss": 216.5
+            }
+          ]
+        },
+        {
+          "firstWindow": 965,
+          "ready": 592,
+          "rss": 882.4,
+          "pss": 426.6,
+          "processes": [
+            {
+              "comm": "stemn",
+              "rss": 194.7
+            },
+            {
+              "comm": "WebKitNetworkPr",
+              "rss": 62.6
+            },
+            {
+              "comm": "WebKitWebProces",
+              "rss": 180.8
+            },
+            {
+              "comm": "WebKitWebProces",
+              "rss": 227.4
+            },
+            {
+              "comm": "WebKitWebProces",
+              "rss": 216.9
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

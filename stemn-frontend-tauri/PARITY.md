@@ -83,7 +83,7 @@ matches Electron IPC (`src/shared/sequencer.ts`).
 | M32 | IPC sender check (`isTrustedSender` by frame URL) | per handler | capabilities bound to window labels and the local origin; Rust stamps the sender label | Verified | E1 (renderer calls to core commands and plugins are refused) |
 | M33 | IPC payload cleaning (`toIpcSafe`) | structured clone | the same `toIpcSafe`, then JSON | Partial | `Date` becomes an ISO string and typed arrays become objects (structured clone kept them). No failure seen in E1 to E11 |
 | M34 | Mouse back/forward buttons (Windows `app-command`) | yes | no equivalent event in Tauri | Missing | |
-| M35 | Dev: Vite dev server + HMR, devtools | electron-vite dev | `tauri dev` with the same renderer config (port 5174) and the core page served by the same server; WebKit inspector in debug builds | Verified (manual) | `npm run tauri:dev` started here and rendered the login page (qa/12-tauri-dev.png) |
+| M35 | Dev: Vite dev server + HMR, devtools | electron-vite dev | `tauri dev` with the same renderer config (port 5174) and the core page served by the same server; WebKit inspector in debug builds | Verified (manual) | `npm run tauri:dev` started here and rendered the login page (docs/screenshots/12-tauri-dev.png) |
 | M36 | Sentry (renderers, `SENTRY_DSN`) | renderers | same renderers and CSP | Equal | Unchanged code |
 | M37 | Content-Security-Policy | meta tag from `electron.vite.config.ts` | the same policy (taken from that config at build time) + `ipc:` / `http://ipc.localhost` / `http://stemn-file.localhost` | Verified | E1 (meta present, `eval` blocked) |
 | M38 | Packaging | AppImage + dir (Linux), NSIS (Windows), dmg + zip (macOS) | AppImage + deb (Linux), NSIS + MSI (Windows), app + dmg (macOS) | Verified (Linux built) / Implemented (Windows, macOS: configured, validated, not built) | `npm run tauri:check` (schema + targets + assets), CI `cargo check` on windows-latest and macos-latest |
@@ -113,7 +113,7 @@ up. Memory is summed over the whole process tree 20 s after start.
 | Store round trip (renderer dispatch → core store → replayed into the window), median / p90 of 60 | 0.8 / 2.3 ms | 4 / 5 ms (release build) | ×5 |
 | Process breakdown, signed in (RSS) | browser 186, zygotes 55 + 56, renderers 147 + 83 | app 204, WebKitNetworkProcess 63, 3 × WebKitWebProcess 185 / 232 / 217 (core, main, menubar) | |
 
-The numbers are in `qa/measurements*.json` (git-ignored). Reading them:
+The numbers are in `docs/screenshots/measurements*.json` (committed; the Electron and Tauri screenshots from the e2e runs are in `docs/screenshots/` and `docs/screenshots/electron/`). Reading them:
 
 - **Size** is where Tauri wins clearly, especially as a deb that depends on the distribution's WebKitGTK.
   The AppImage has to bundle WebKitGTK, so its advantage shrinks to about a third. Windows (WebView2 is
