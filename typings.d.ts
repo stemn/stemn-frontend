@@ -17,8 +17,3 @@ interface GLOBAL_ENV {
 // Replaced at build time (Vite `define` / webpack DefinePlugin)
 declare const process: { env: { NODE_ENV: 'development' | 'production' } }
 declare const GLOBAL_ENV: GLOBAL_ENV
-
-declare module '@stemn/whats-that-gerber' {
-  const lib: (fileName: string) => string
-  export = lib
-}

@@ -46,6 +46,12 @@ each as two revisions of one file, and checks:
 - the IFC and DXF previews.
 
 It needs a backend whose CAD converter reads IFC and DXF (stemn-backend ADR-025).
+
+`specs/pcb.spec.ts` uploads `fixtures/pcb/blinky-v1.kicad_pcb` (and `-v2` as its second revision, copies of the backend's shared
+PCB samples) to the CubeSat project, checks the layered preview (status, KiCad's colours, a hidden mask layer, a layer toggled
+off), then the unified diff: one entity of each class with the ids `fixtures/pcb/samples.json` lists, the class colours on each
+revision's copy of the entities in the drawing, the entity details (a footprint turned 90°, swapped from 0603 to 0805, removed)
+and side by side. It needs a backend with the PCB converter (stemn-backend ADR-024, the container `local/start.sh` starts).
 On failure, traces, screenshots and videos are in `test-results/` (`npx playwright show-trace <trace.zip>`).
 
 In CI the reusable workflow `.github/workflows/e2e.yml` starts the backend with the composite action

@@ -97,6 +97,20 @@ Unified Diff**, and with two revisions selected both the unified and the side-by
 (`FileCompareInner`): `FileDiffView` for models, `DxfDiffView` for drawings (`isDrawingFile`). Files the API cannot
 diff fall back to the original side-by-side previews with a notice. In the commit and changes views (`FileCompare` with two revisions), CAD files open in the unified mode.
 
+PCB and electronics files (`getViewerType` `pcb`: KiCad `.kicad_pcb`/`.kicad_sch`, Eagle `.brd`, Gerber layers, Excellon drill
+files, zips of a Gerber set) get the same menu entry and open in `PcbDiffView` (the 2D viewer, `Svg2dDiffView`, on the PCB
+converter's drawings), unified in the commit and changes views too. Their previews (`PreviewPcb`) draw the same SVGs on the same
+canvas, with layer toggles.
+
+**PCB drawings and entities** (stemn-backend `services/pcb-converter/README.md`): the SVG is in millimetres, y down, with a
+`<rect data-background>`, one `<g data-layer>` per layer back to front (KiCad's names: `F.Cu`, `B.Silkscreen`, `In1.Cu`,
+`Edge.Cuts`, `Drill`; mask, paste, fab and courtyard `data-layer-default="hidden"`), and an entity drawn on several layers has a
+`<g data-entity-id>` in each. Boards: footprints `fp:<uuid>` (Eagle `fp:<reference>`), `net:<name>` for each net's tracks and vias,
+`zone:<uuid>`, `gr:<uuid>`; schematics: `sym:`, `wire:`, `bus:`, `junction:`, `label:`, `text:`, `sheet:` by uuid; Gerbers:
+`<layer>/cmp:<reference>` (X2 attributes), `<layer>/net:<name>`, and shapes by digest; drill files `Drill/hole:<x>,<y>`.
+`payloadRef` is `{ svg, at: [x, y, angle] }`, so a turned footprint turns back along the slider. Lengths are millimetres
+(`units.length: 'mm'`).
+
 ## Worked example: a PCB adapter (workstream B)
 
 **1. Converter.** The KiCad container writes, per revision, the layered SVG the 2D viewer draws and `scene.json` with one
@@ -214,9 +228,11 @@ this:
 
 ## Not done yet
 
-* Workstreams B, D and E (the PCB, additive and simulation adapters and viewers).
+* Workstreams D and E (the additive and simulation adapters and viewers).
 * IFC and drawings: the limits in stemn-backend `docs/FUTURE-WORK.md` (spaces and openings, linetypes, fonts, layouts, xrefs,
   `<use>` for blocks, AutoCAD-written DWG).
+* PCB: diffs of a folder's Gerber files shown as one board (they have no revisions of their own: diff a zip of the set, or each
+  layer file); Eagle and KiCad 5 schematics; Altium, EasyEDA and other boards KiCad can import; the 3D board.
 * CAD: instancing for repeated parts and a simplified fallback for huge models (only "changes only" above 4 M triangles today);
   per-solid deltas inside a part; Draco-compressed glbs.
 * The unified view in the desktop app's FileCompare pages is the same code but is only exercised by the website e2e test.

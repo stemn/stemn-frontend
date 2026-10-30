@@ -109,6 +109,28 @@ Each entry states the context, the decision and its consequences. Newer entries 
     say so.
 
 
+## ADR-010: PCB and electronics previews and diffs on the 2D diff viewer, rendered on the server
+
+* Status: accepted (the PCB diff PR, with stemn-backend's PCB converter, ADR-024 there)
+* Decision: KiCad boards and schematics, Eagle boards, Gerber layers, Excellon drill files and zips of a Gerber set (the `pcb`
+  viewer type, `PreviewPcb/pcb.utils.ts` `pcbExtensions`, the same list as the backend's `core/pcb/isSupported.ts`) are rendered
+  by the backend's KiCad converter into a layered SVG and shown by `PreviewPcb` on the 2D diff viewer's canvas
+  (`Svg2dDiffView/SvgDiffCanvas`: pan, zoom, fit, layer toggles; mask, paste, fab and courtyard layers start hidden). Two revisions
+  open in `PcbDiffView`, the shared `Svg2dDiffView` with the PCB drawing's address: the same toolbar, filters, counts, slider,
+  entity panel and shortcuts as every diff viewer, and the class colours applied to each entity's `data-entity-id` groups on every
+  layer. A folder's Gerber files shown as one board (`.gerber` assemblies) are rendered part by part and drawn together.
+* Why: the founder's diff plan (workstream B). The previous PCB viewer parsed Gerber, KiCad and Eagle files in the browser with
+  a vendored copy of three.js (36 000 lines) and crashed on the seeded Gerbers (`parse_gerber … is not a constructor`); server-side
+  conversion gives KiCad's own geometry, one drawing for the preview and the diff, and no parser in the browser.
+* Consequences:
+  - The old viewer (`PreviewPcb/viewer/**`), its webpack and lint exclusions and the `@stemn/whats-that-gerber` dependency are
+    removed: a file is a PCB file by its extension, as on the backend. Gerber files with other names (`.cmp`, `.sol`, ...) are
+    listed but not previewed (FUTURE-WORK in stemn-backend lists more formats).
+  - `PreviewPcb` (about 1.5 kB gzipped) and `PcbDiffView` (0.4 kB) are lazy chunks over the 2D viewer's chunks; the main chunks
+    stay within the bundle-size baseline.
+  - The render records are the CAD renders' with `cadProvider: 'kicad'`, so the render actions, websocket events and failure
+    messages are the same; the web and desktop render downloads keep a PCB render's address like an open-source CAD render's.
+
 ## ADR-011: Civil and architecture diffs: an IFC property panel, and one shared 2D SVG diff viewer
 
 * Status: accepted (workstream C of `plans/file-diff-viewers.md`, with stemn-backend's `aec` and `dxf` adapters, ADR-025 there)

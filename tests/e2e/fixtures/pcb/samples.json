@@ -1,0 +1,318 @@
+{
+  "blinky-v1.kicad_pcb": {
+    "format": "kicad_pcb",
+    "layers": [
+      "B.Mask",
+      "B.Cu",
+      "F.Cu",
+      "F.Mask",
+      "F.Silkscreen",
+      "F.Paste",
+      "F.Fab",
+      "F.Courtyard",
+      "Edge.Cuts",
+      "Drill"
+    ],
+    "entities": 11,
+    "kinds": {
+      "footprint": 6,
+      "graphic": 1,
+      "net": 2,
+      "text": 1,
+      "zone": 1
+    }
+  },
+  "blinky-v2.kicad_pcb": {
+    "format": "kicad_pcb",
+    "layers": [
+      "B.Mask",
+      "B.Cu",
+      "F.Cu",
+      "F.Mask",
+      "F.Silkscreen",
+      "F.Paste",
+      "F.Fab",
+      "F.Courtyard",
+      "Edge.Cuts",
+      "Drill"
+    ],
+    "entities": 11,
+    "kinds": {
+      "footprint": 6,
+      "graphic": 1,
+      "net": 2,
+      "text": 1,
+      "zone": 1
+    },
+    "changes": {
+      "from": "blinky-v1.kicad_pcb",
+      "added": [
+        "fp:4d3392f7-79e1-5936-b1dd-e81543477942"
+      ],
+      "removed": [
+        "fp:fab2c9ac-7ebe-59da-8613-81cc66cf2340"
+      ],
+      "modified": [
+        "fp:ff3d16eb-fe03-5dc9-8721-01b0914c9854"
+      ],
+      "moved": [
+        "fp:8ed1eb55-513c-594e-be30-910c6f738022"
+      ],
+      "unchanged": [
+        "fp:44a63b80-7a90-55fd-a274-ea5da8c01289",
+        "fp:61812d11-9718-558e-8132-3db81cbe5f37",
+        "fp:aa715c90-29ff-58d6-a103-063274969491",
+        "gr:3ae447f2-edb2-5c8d-be73-aafdba035581",
+        "gr:7136b7c6-2186-5e57-8e60-833c3852495c",
+        "net:GND",
+        "net:LED",
+        "zone:a50d5fdd-00f4-57b2-b58c-6b1b5fe5287d"
+      ]
+    }
+  },
+  "blinky-v1.kicad_sch": {
+    "format": "kicad_sch",
+    "layers": [
+      "symbols",
+      "wires",
+      "labels",
+      "text"
+    ],
+    "entities": 14,
+    "kinds": {
+      "label": 1,
+      "power": 1,
+      "symbol": 6,
+      "text": 1,
+      "wire": 5
+    }
+  },
+  "blinky-v2.kicad_sch": {
+    "format": "kicad_sch",
+    "layers": [
+      "symbols",
+      "wires",
+      "labels",
+      "text"
+    ],
+    "entities": 14,
+    "kinds": {
+      "label": 1,
+      "power": 1,
+      "symbol": 6,
+      "text": 1,
+      "wire": 5
+    },
+    "changes": {
+      "from": "blinky-v1.kicad_sch",
+      "added": [
+        "sym:92a90a40-684b-588b-ad21-a2249dc5e4a6"
+      ],
+      "removed": [
+        "sym:171ede83-6d84-53c9-a55f-916cdcdb3548"
+      ],
+      "modified": [
+        "sym:d2d71789-456b-51a2-99af-cab53e9b86fe"
+      ],
+      "moved": [
+        "sym:56853ab0-4c47-5dc2-a195-ecdb2cc69c52"
+      ],
+      "unchanged": [
+        "label:8c52433e-b82e-5b4b-85dc-8c8199a58bdd",
+        "sym:0b9532f8-8364-5213-99d1-6c7a80533dfc",
+        "sym:9a28be1b-0891-5b3a-b1ff-f13300da740f",
+        "sym:f627cc26-217d-5b73-9609-cac6075cd69c",
+        "sym:ff802087-917b-5cb7-9b4b-fb8ee19ce0d5",
+        "text:75bd4371-caf2-547a-861c-1b4c8a984584",
+        "wire:0c7ea57b-bd2b-5217-87c8-bd6ebc714fa9",
+        "wire:26505095-1e7a-516d-bf52-2ff035472639",
+        "wire:944ba4dd-420e-5734-969f-320a3827ca0a",
+        "wire:a3d4f979-b64f-53a2-b58c-661e2aa49717",
+        "wire:cc333747-dfca-5668-940c-53179b2bbdf3"
+      ]
+    }
+  },
+  "blinky-v1.brd": {
+    "format": "eagle_brd",
+    "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Silkscreen",
+      "F.Paste",
+      "F.Fab",
+      "Edge.Cuts"
+    ],
+    "entities": 11,
+    "kinds": {
+      "footprint": 5,
+      "graphic": 4,
+      "net": 1,
+      "text": 1
+    }
+  },
+  "blinky-v2.brd": {
+    "format": "eagle_brd",
+    "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Silkscreen",
+      "F.Paste",
+      "F.Fab",
+      "Edge.Cuts"
+    ],
+    "entities": 11,
+    "kinds": {
+      "footprint": 5,
+      "graphic": 4,
+      "net": 1,
+      "text": 1
+    },
+    "changes": {
+      "from": "blinky-v1.brd",
+      "added": [
+        "fp:TP1"
+      ],
+      "removed": [
+        "fp:C2"
+      ],
+      "modified": [
+        "fp:R2"
+      ],
+      "moved": [
+        "fp:R1"
+      ],
+      "unchanged": [
+        "fp:C1",
+        "fp:D1",
+        "gr:0b9fe8a3830cb136",
+        "gr:3cf8774c26a71d33",
+        "gr:98f6f00887397754",
+        "gr:a2a5cf5e28444993",
+        "gr:af8d0ba1726322f4",
+        "net:LED"
+      ]
+    }
+  },
+  "blinky-v1-F_Cu.gtl": {
+    "format": "gerber",
+    "layers": [
+      "F.Cu"
+    ],
+    "entities": 8,
+    "kinds": {
+      "component": 6,
+      "net": 2
+    }
+  },
+  "blinky-v2-F_Cu.gtl": {
+    "format": "gerber",
+    "layers": [
+      "F.Cu"
+    ],
+    "entities": 8,
+    "kinds": {
+      "component": 6,
+      "net": 2
+    },
+    "changes": {
+      "from": "blinky-v1-F_Cu.gtl",
+      "added": [
+        "F.Cu/cmp:TP1"
+      ],
+      "removed": [
+        "F.Cu/cmp:C2"
+      ],
+      "modified": [
+        "F.Cu/cmp:R2"
+      ],
+      "moved": [
+        "F.Cu/cmp:R1"
+      ],
+      "unchanged": [
+        "F.Cu/cmp:C1",
+        "F.Cu/cmp:D1",
+        "F.Cu/cmp:J1",
+        "F.Cu/net:GND",
+        "F.Cu/net:LED"
+      ]
+    }
+  },
+  "blinky-v1.drl": {
+    "format": "excellon",
+    "layers": [
+      "Drill"
+    ],
+    "entities": 3,
+    "kinds": {
+      "hole": 3
+    }
+  },
+  "blinky-v2.drl": {
+    "format": "excellon",
+    "layers": [
+      "Drill"
+    ],
+    "entities": 3,
+    "kinds": {
+      "hole": 3
+    },
+    "changes": {
+      "from": "blinky-v1.drl",
+      "added": [],
+      "removed": [],
+      "modified": [],
+      "moved": [],
+      "unchanged": [
+        "Drill/hole:14.225,3.0",
+        "Drill/hole:4.0,14.0",
+        "Drill/hole:4.0,16.54"
+      ]
+    }
+  },
+  "blinky-v1-gerbers.zip": {
+    "format": "gerber-zip",
+    "layers": [
+      "B.Mask",
+      "B.Cu",
+      "F.Cu",
+      "F.Mask",
+      "F.Silkscreen",
+      "F.Paste",
+      "Edge.Cuts",
+      "Drill"
+    ],
+    "entities": 39,
+    "kinds": {
+      "component": 25,
+      "graphic": 8,
+      "hole": 3,
+      "net": 3
+    }
+  },
+  "blinky-v2-gerbers.zip": {
+    "format": "gerber-zip",
+    "layers": [
+      "B.Mask",
+      "B.Cu",
+      "F.Cu",
+      "F.Mask",
+      "F.Silkscreen",
+      "F.Paste",
+      "Edge.Cuts",
+      "Drill"
+    ],
+    "entities": 38,
+    "kinds": {
+      "component": 24,
+      "graphic": 8,
+      "hole": 3,
+      "net": 3
+    }
+  },
+  "corrupt.kicad_pcb": {
+    "error": "CONVERSION_FAILED"
+  },
+  "legacy.kicad_sch": {
+    "error": "UNSUPPORTED_FORMAT"
+  }
+}

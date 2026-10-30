@@ -8,8 +8,8 @@ export const renderFileDownload = ({
   timestamp,
   cadProvider = undefined,
 }) => {
-  // open-source renders are a single glb the viewer fetches itself; the file cache below extracts Autodesk's SVF zip
-  if (cadProvider === 'opencascade') {
+  // open-source renders (a glb, or a PCB drawing) are fetched by their viewer; the file cache below extracts Autodesk's SVF zip
+  if (cadProvider === 'opencascade' || cadProvider === 'kicad') {
     return renderFileDownloadUrl({ projectId, fileId, revisionId, timestamp, cadProvider })
   }
   const cacheKey = timestamp ? `${fileId}-${revisionId}-${timestamp}` : `${fileId}-${revisionId}`

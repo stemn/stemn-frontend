@@ -1,7 +1,7 @@
 name: Stemn backend fixture
 description: >
   Checks out stemn-backend, starts it the way developers do (local/start.sh: MongoDB 8.2, Redis, MinIO and the
-  CAD converter in Docker, API on :3000, websocket server on :8000) and seeds the demo data (local/seed.sh: 8 users with
+  CAD and PCB converters in Docker, API on :3000, websocket server on :8000) and seeds the demo data (local/seed.sh: 8 users with
   password "password123", 14 projects, files, threads, ...). Used by the website and desktop e2e jobs;
   reusable by any workflow that needs a running backend.
 inputs:
@@ -56,6 +56,19 @@ runs:
         load: true
         cache-from: type=gha,scope=stemn-cad-converter
         cache-to: type=gha,scope=stemn-cad-converter,mode=max
+    - name: Build the PCB converter image
+      # local/start.sh runs it too (stemn-pcb-converter:local, KiCad 9) for PCB, Gerber and drill previews and diffs.
+      # backends from before it existed have no services/pcb-converter, and skip this
+      if: hashFiles(format('{0}/services/pcb-converter/Dockerfile', inputs.path)) != ''
+      uses: docker/build-push-action@v7
+      with:
+        context: ${{ inputs.path }}
+        file: ${{ inputs.path }}/services/pcb-converter/Dockerfile
+        target: runtime
+        tags: stemn-pcb-converter:local
+        load: true
+        cache-from: type=gha,scope=stemn-pcb-converter
+        cache-to: type=gha,scope=stemn-pcb-converter,mode=max
     - name: Start (local/start.sh)
       shell: bash
       working-directory: ${{ inputs.path }}

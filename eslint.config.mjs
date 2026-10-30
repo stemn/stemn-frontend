@@ -32,7 +32,6 @@ export default tseslint.config(
       // Vendored third-party code
       'stemn-frontend-website/public/static/**',
       'stemn-frontend-shared/src/misc/Websocket/primus-websockets2.js',
-      'stemn-frontend-shared/src/misc/Files/PreviewFile/PreviewPcb/viewer/**',
     ],
   },
   {
