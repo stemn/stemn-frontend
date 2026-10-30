@@ -105,7 +105,12 @@ export default class ProjectThreads extends Component {
               />
             </Col>
             <Col className="sm layout-row">
-              <Button className="primary flex-xs" onClick={this.showNewThreadModal}>
+              {/* The modal needs the board (groups): until it is loaded the button would throw */}
+              <Button
+                className="primary flex-xs"
+                onClick={this.showNewThreadModal}
+                disabled={!(this.props.board && this.props.board.data)}
+              >
                 New Thread
               </Button>
             </Col>

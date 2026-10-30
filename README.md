@@ -13,6 +13,8 @@ This repo contains all of Stemn's frontend code.
 
 * [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md): how the packages, the runtime (Redux, HTTP, websocket, routing) and the conventions fit together
 * [docs/DECISIONS.md](./docs/DECISIONS.md): decision records of the 2026 modernisation, including the webpack fallback policy
+* [docs/API-CLIENT.md](./docs/API-CLIENT.md): the generated API client, TanStack Query, and how they coexist with Redux
+* [docs/FUTURE-WORK.md](./docs/FUTURE-WORK.md): follow-ups, including the domains still to move to TanStack Query
 
 ## Requirements
 
@@ -34,6 +36,8 @@ npm run build:webpack # website: the webpack 5 fallback production build (same o
 npm run typecheck    # tsc --noEmit: website, desktop, e2e (type errors never block the builds)
 npm run lint         # ESLint (--max-warnings 0) + Prettier check; npm run lint:fix / npm run format fix them
 npm test             # unit tests (Vitest)
+npm run api:generate # regenerate the API client types from the OpenAPI snapshot (-- --url local: from the dev API)
+npm run api:check    # check the generated API client matches the snapshot (CI)
 npm run test:e2e     # website end-to-end tests (Playwright) against the local backend, see tests/e2e/README.md
 ```
 
@@ -47,7 +51,7 @@ A husky pre-commit hook runs ESLint and Prettier on the staged files (lint-stage
 
 GitHub Actions (`.github/workflows`):
 
-* `ci.yml` on every pull request and on pushes to `staging` / `production`: lint, typecheck, unit tests, builds (website with
+* `ci.yml` on every pull request and on pushes to `staging` / `production`: lint (+ `api:check`), typecheck, unit tests, builds (website with
   Vite, website with the webpack fallback, desktop), the website Docker image, and `e2e`.
 * `e2e.yml` (reusable, `workflow_call`): starts the backend (`.github/actions/stemn-backend`: checks out the private
   `stemn-backend` with a read-only deploy key, `local/start.sh` + `local/seed.sh`), then runs the website Playwright suite and the

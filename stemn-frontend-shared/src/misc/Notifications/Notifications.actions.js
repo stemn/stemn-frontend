@@ -1,3 +1,6 @@
+// The notifications list and mark-as-read are TanStack Query hooks: stemn-shared/api/queries/notifications
+
+/** Desktop: shows a native notification (runs in the main process through the FunctionLibrary) */
 export const show = ({ type, title, body }) => ({
   type: 'NOTIFICATIONS/SHOW',
   payload: {
@@ -6,30 +9,5 @@ export const show = ({ type, title, body }) => ({
       title,
       body,
     },
-  },
-})
-
-export const getNotifications = () => (dispatch, getState) => {
-  if (getState().auth.authToken) {
-    dispatch({
-      type: 'NOTIFICATIONS/GET_NOTIFICATIONS',
-      http: true,
-      payload: {
-        url: '/api/v1/notifications',
-        method: 'GET',
-      },
-    })
-  }
-}
-
-export const markAsRead = (notificationId) => ({
-  type: 'NOTIFICATIONS/MARK_AS_READ',
-  http: true,
-  payload: {
-    url: `/api/v1/notifications/${notificationId}`,
-    method: 'PUT',
-  },
-  meta: {
-    notificationId,
   },
 })

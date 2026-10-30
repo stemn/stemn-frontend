@@ -98,6 +98,10 @@ run where they are dispatched; `aliased` actions call main-process functions thr
 commit in the menubar navigates the main window. Persisted keys are listed in `app/main/json-storage.js`
 (`<userData>/storage/state.json`).
 
+**Server state**: each renderer window has its own TanStack Query client (`stemn-shared/api`, see
+[docs/API-CLIENT.md](../docs/API-CLIENT.md)); the main process has none. Websocket events reach it as
+`API/INVALIDATE_QUERIES` actions, which the main process replays into every window like any other action.
+
 **Routing**: react-router 8 through the shared compatibility layer (`stemn-shared/routing`) with
 `createHashRouter` (the windows are `file://` pages). Route objects are in each window's `routes.js`.
 
@@ -130,7 +134,8 @@ E2E_SKIP_BUILD=1 npm run test:e2e     # reuse dist/
 It launches the built app with a throwaway profile, logs in as `priya.raman@stemn.local`, and checks:
 window security settings, login, the project list, websocket events, the provider folder picker (the native
 dialog is stubbed), the CubeSat project's cloud folder link, a full change -> preview -> commit -> history
-cycle, markdown and PDF preview windows, the menubar window, and that nothing threw in any process.
+cycle, markdown and PDF preview windows, the menubar window, the thread modal's comments (TanStack Query in the
+renderer, updated live through the main-process websocket), and that nothing threw in any process.
 Screenshots go to `qa/` (git-ignored). Because Dropbox/Drive need real accounts, the test plays the storage
 sync client through the API: it downloads `desktop-sync-check.md` into a temp folder, edits it and uploads
 the edit as a new revision; everything after that is the app. Each run adds one commit

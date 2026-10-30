@@ -28,8 +28,9 @@ const mapStateToProps = ({ threads, projects, stringFilter }, { projectId }) => 
   const project = projects.data[projectId]
   const projectBoards = threads.projects[projectId]
 
-  const boardModel = has(board, 'data._id') ? `threads.boards.${board.data._id}` : ''
+  // `board` before `boardModel`: with native const (no Babel/ES5 `var`) the old order threw a TDZ ReferenceError
   const board = projectBoards && projectBoards.boards ? threads.boards[projectBoards.boards[0]] : {}
+  const boardModel = has(board, 'data._id') ? `threads.boards.${board.data._id}` : ''
 
   const filterCacheKey = `threads-${projectId}`
   const filter = get(stringFilter, filterCacheKey, {})

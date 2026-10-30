@@ -1,31 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
-import { getUserProjects } from 'stemn-shared/misc/Projects/Projects.actions.js'
+import { useUserProjects } from 'stemn-shared/api/queries/projects'
+import { toLegacyEntity } from 'stemn-shared/api/query/legacyShape'
 import SettingsProjects from './SettingsProjects'
 
-const stateToProps = ({ auth, projects }) => ({
+const stateToProps = ({ auth }) => ({
   currentUser: auth.user,
-  projects: projects.userProjects[auth.user._id] || {},
 })
 
-const dispatchToProps = {
-  getUserProjects,
+/** The current user's projects (private included): the `projects.byUser` query */
+const SettingsProjectsContainer = (props) => {
+  const projects = useUserProjects(props.currentUser._id, props.currentUser._id)
+  return <SettingsProjects {...props} projects={toLegacyEntity(projects)} />
 }
 
-const fetchConfigs = [
-  {
-    hasChanged: 'currentUser._id',
-    onChange: (props) => {
-      props.getUserProjects({ userId: props.currentUser._id })
-    },
-  },
-]
-
-class SettingsProjectsContainer extends Component {
-  render() {
-    return <SettingsProjects {...this.props} />
-  }
-}
-
-export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(SettingsProjectsContainer))
+export default connect(stateToProps)(SettingsProjectsContainer)

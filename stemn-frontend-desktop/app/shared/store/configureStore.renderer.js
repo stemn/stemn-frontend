@@ -8,6 +8,8 @@ import routerFix from 'stemn-shared/misc/Router/Router.middleware.js'
 import getRootReducerRenderer from '../reducers/rootReducer.renderer.js'
 import forwardToMain from '../middleware/forwardToMain'
 import createForwardToRendererWindow from '../middleware/forwardToRendererWindow'
+import { createQueryMiddleware } from 'stemn-shared/api/query/invalidation'
+import { legacyInvalidations } from 'stemn-shared/api/query/legacyInvalidations'
 
 // Reducers use immer: freeze the state in development only (matching the previous immutability library)
 setAutoFreeze(process.env.NODE_ENV !== 'production')
@@ -15,14 +17,18 @@ setAutoFreeze(process.env.NODE_ENV !== 'production')
 /**
  * Renderer store: a replica of the main-process store (see forwardToMain).
  * `windowName` is this window's scope name: 'main' | 'menubar' | 'preview'.
+ * `queryClient` is this window's TanStack Query client: the query middleware sits after forwardToMain,
+ * so it sees the actions reduced here, including the ones the main process replays (websocket
+ * invalidations, legacy writes, auth changes; see docs/API-CLIENT.md).
  */
-export default function configureStore(initialState, { windowName } = {}) {
+export default function configureStore(initialState, { windowName, queryClient } = {}) {
   const middleware = [
     thunk,
     promise,
     routerFix,
     createForwardToRendererWindow(windowName),
     forwardToMain,
+    ...(queryClient ? [createQueryMiddleware(queryClient, { legacyInvalidations })] : []),
     routerMiddleware(),
   ]
 

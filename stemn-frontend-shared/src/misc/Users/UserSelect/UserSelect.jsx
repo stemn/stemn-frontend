@@ -8,10 +8,11 @@ import PopoverDropdown from 'stemn-shared/misc/PopoverMenu/PopoverDropdown'
 
 class Component extends React.Component {
   remove = (idx) => {
-    const { dispatch, model, onChange } = this.props
-    dispatch(storeRemove(model, idx))
+    const { dispatch, model, onChange, value } = this.props
+    // Model-bound use writes the store; controlled use (no model) only gets onChange(newUsers)
+    if (model) dispatch(storeRemove(model, idx))
     if (onChange) {
-      onChange()
+      onChange(value.filter((_user, index) => index !== idx))
     }
   }
 
@@ -25,10 +26,10 @@ class Component extends React.Component {
       value: user._id,
       name: user.name,
       onClick: () => {
-        dispatch(storePush(model, user))
+        if (model) dispatch(storePush(model, user))
 
         if (onChange) {
-          onChange()
+          onChange([...value, user])
         }
       },
     }))

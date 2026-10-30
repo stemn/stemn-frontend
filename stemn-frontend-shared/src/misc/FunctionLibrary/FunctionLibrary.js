@@ -1,7 +1,6 @@
 import * as ProjectsActions from 'stemn-shared/misc/Projects/Projects.actions.js'
 import * as ThreadsActions from 'stemn-shared/misc/Threads/Threads.actions.js'
 import * as ChangesActions from 'stemn-shared/misc/Changes/Changes.actions.js'
-import * as CommentsActions from 'stemn-shared/misc/Comments/Comments.actions.js'
 import * as NotificationsUtils from 'stemn-shared/misc/Notifications/Notifications.utils.js'
 
 import * as ProviderPathUtils from 'stemn-shared/desktop/ProviderPath/ProviderPath.utils.js'
@@ -19,7 +18,6 @@ const library = {
   ProjectsActions,
   ThreadsActions,
   ChangesActions,
-  CommentsActions,
   ProviderPathUtils,
   AutoUpdateUtils,
   ElectronWindowsUtils,

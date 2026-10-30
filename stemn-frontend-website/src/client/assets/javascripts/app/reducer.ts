@@ -4,7 +4,6 @@ import auth from 'stemn-shared/misc/Auth/Auth.reducer.js'
 import autosuggest from 'stemn-shared/misc/Autosuggest/Autosuggest.reducer.js'
 import changes from 'stemn-shared/misc/Changes/Changes.reducer.js'
 import codeSplitting from 'stemn-shared/misc/CodeSplitting/CodeSplitting.reducer.js'
-import comments from 'stemn-shared/misc/Comments/Comments.reducer.js'
 import commits from 'stemn-shared/misc/Commits/Commits.reducer.js'
 import desktopReleases from 'stemn-shared/misc/DesktopReleases/DesktopReleases.reducer.js'
 import fields from 'stemn-shared/misc/Fields/Fields.reducer.js'
@@ -16,7 +15,6 @@ import header from 'stemn-shared/misc/Header/Header.reducer.js'
 import history from 'stemn-shared/misc/History/History.reducer.js'
 import mentions from 'stemn-shared/misc/Mentions/Mentions.reducer.js'
 import modals from 'stemn-shared/misc/Modal/Modal.reducer.js'
-import notifications from 'stemn-shared/misc/Notifications/Notifications.reducer.js'
 import { pipelineGraphReducer } from 'stemn-shared/misc/Pipelines/PipelineGraph/PipelineGraph.reducer'
 import pipelines from 'stemn-shared/misc/Pipelines/Pipelines.reducer.js'
 import projects from 'stemn-shared/misc/Projects/Projects.reducer.js'
@@ -57,7 +55,6 @@ const splitReducers = combineReducers({
   autosuggest,
   changes,
   codeSplitting,
-  comments,
   history,
   commits,
   fileCompare: fileCompareReducer,
@@ -69,7 +66,6 @@ const splitReducers = combineReducers({
   social,
   mentions,
   modals,
-  notifications,
   projects,
   routing,
   relatedFields,

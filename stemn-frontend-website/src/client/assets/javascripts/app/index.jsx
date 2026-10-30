@@ -13,7 +13,9 @@ import initWebsocket from './init/initWebsocket'
 import createRoutes from '../pages/routes'
 import { initialise as initAnalytics } from '../modules/Analytics'
 import { getLatest } from 'stemn-shared/misc/DesktopReleases/DesktopReleases.actions'
-import { getNotifications } from 'stemn-shared/misc/Notifications/Notifications.actions'
+import { createStemnQueryClient, queryErrorAction } from 'stemn-shared/api/query/queryClient'
+import { connectLegacyBridge } from 'stemn-shared/api/query/legacyBridge'
+import { setQueryClient } from 'stemn-shared/api/query/registry'
 
 const waitForRehydration = (store) =>
   new Promise((resolve) => {
@@ -33,16 +35,25 @@ const hideSpinner = () => {
 // so just log them instead of reporting uncaught exceptions.
 window.addEventListener('unhandledrejection', (event) => {
   const reason = event.reason
-  if (reason && reason.isAxiosError) {
+  if (reason && (reason.isAxiosError || reason.isApiError)) {
     event.preventDefault()
     console.warn(
-      `API request failed: ${reason.config && reason.config.method} ${reason.config && reason.config.url} - ${reason.message}`,
+      reason.isApiError
+        ? `API request failed: ${reason.status} ${reason.url || ''} - ${reason.message}`
+        : `API request failed: ${reason.config && reason.config.method} ${reason.config && reason.config.url} - ${reason.message}`,
     )
   }
 })
 
 ;(async () => {
-  const store = configureStore()
+  // Server state lives in TanStack Query (docs/API-CLIENT.md); failures are toasted through Redux
+  const queryClient = createStemnQueryClient({
+    // Only called once a query runs, after the store exists
+    onError: (error, context) => store.dispatch(queryErrorAction(error, context)),
+  })
+  const store = configureStore(undefined, { queryClient })
+  setQueryClient(queryClient)
+  connectLegacyBridge(queryClient, store.dispatch)
   // Wait for the persisted auth state (token + user) before anything reads it
   await waitForRehydration(store)
 
@@ -59,11 +70,7 @@ window.addEventListener('unhandledrejection', (event) => {
   // Get the latest desktop revisions
   store.dispatch(getLatest())
 
-  // Get the notifications
-  store.dispatch(getNotifications())
-  setInterval(() => store.dispatch(getNotifications()), 60 * 1000)
-
   // Render react
-  createRoot(document.getElementById('app')).render(<Root store={store} router={router} />)
+  createRoot(document.getElementById('app')).render(<Root store={store} router={router} queryClient={queryClient} />)
   hideSpinner()
 })()

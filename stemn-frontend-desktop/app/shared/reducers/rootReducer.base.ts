@@ -6,7 +6,6 @@ import auth from 'stemn-shared/misc/Auth/Auth.reducer.js'
 import autosuggest from 'stemn-shared/misc/Autosuggest/Autosuggest.reducer.js'
 import changes from 'stemn-shared/misc/Changes/Changes.reducer.js'
 import codeSplitting from 'stemn-shared/misc/CodeSplitting/CodeSplitting.reducer.js'
-import comments from 'stemn-shared/misc/Comments/Comments.reducer.js'
 import commits from 'stemn-shared/misc/Commits/Commits.reducer.js'
 import { fileCompareReducer, IFileCompareState } from 'stemn-shared/misc/FileCompare/FileCompare.reducer'
 import { fileListReducer, IFileListState } from 'stemn-shared/misc/FileList/FileList.reducer'
@@ -48,7 +47,6 @@ export default {
   autosuggest,
   changes,
   codeSplitting,
-  comments,
   commits,
   fileCompare: fileCompareReducer,
   fileList: fileListReducer,

@@ -1,22 +1,23 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
+import { useUserProjects } from 'stemn-shared/api/queries/projects'
+import { toLegacyEntity } from 'stemn-shared/api/query/legacyShape'
 
 import UserProjects from './UserProjects'
 
-const stateToProps = ({ users, projects }, { params }) => ({
+const stateToProps = ({ users, auth }, { params }) => ({
   user: users[params.stub],
-  projects: projects.userProjects[params.stub] || {},
+  currentUserId: auth.user._id,
 })
 
 const dispatchToProps = {}
 
 const fetchConfigs = []
 
-class UserProjectsContainer extends Component {
-  render() {
-    return <UserProjects {...this.props} />
-  }
+const UserProjectsContainer = (props) => {
+  const projects = useUserProjects(props.params.stub, props.currentUserId)
+  return <UserProjects {...props} projects={toLegacyEntity(projects)} />
 }
 
 export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(UserProjectsContainer))

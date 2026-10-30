@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
-// Container Actions
-import { newComment } from 'stemn-shared/misc/Comments/Comments.actions.js'
+import { useCreateComment } from 'stemn-shared/api/queries/comments'
 // Component Core
 import React, { Component } from 'react'
 // Styles
@@ -24,23 +23,21 @@ export class CommentNew extends Component {
     super(props)
     this.state = {
       isFocussed: false,
+      body: '',
     }
   }
   submitNewComment = () => {
-    const { timelineCacheKey } = this.props
-    this.props
-      .newCommentAction({
-        comment: {
-          thread: this.props.threadId,
-          body: this.props.newComment.body,
-        },
-        timelineCacheKey,
-      })
+    const { threadId, timelineCacheKey, createComment } = this.props
+    const { body } = this.state
+    if (!body || body.length === 0) return
+    createComment({ threadId, body, timelineCacheKey })
       .then(() => {
         this.setState({
           isFocussed: false,
+          body: '',
         })
       })
+      .catch(() => undefined) // the failure is toasted by the mutation cache; the draft is kept
   }
   clickComment = () => {
     this.props.confirmAuth(() => {
@@ -53,8 +50,8 @@ export class CommentNew extends Component {
     ctrlEnterHandler(this.formRef, this.submitNewComment)
   }
   render() {
-    const { auth, newComment, entityModel } = this.props
-    const { isFocussed } = this.state
+    const { auth, savePending } = this.props
+    const { isFocussed, body } = this.state
 
     return (
       <div className={cn(classes.commentNew, 'layout-row')} onClick={this.clickComment}>
@@ -77,13 +74,13 @@ export class CommentNew extends Component {
           </div>
           <div className={classes.commentContent}>
             {isFocussed ? (
-              <EditorNew autoFocus={isFocussed} model={`${entityModel}.body`} value={newComment.body} />
+              <EditorNew autoFocus={isFocussed} value={body} onChange={(value) => this.setState({ body: value })} />
             ) : null}
           </div>
           <div className="layout-row layout-align-start-end" style={{ padding: '0 20px 10px' }}>
             <MarkdownButton>Markdown formatting supported</MarkdownButton>
             <div className="flex" />
-            <ProgressButton className="primary sm" loading={newComment.savePending} onClick={this.submitNewComment}>
+            <ProgressButton className="primary sm" loading={savePending} onClick={this.submitNewComment}>
               Comment
             </ProgressButton>
           </div>
@@ -97,17 +94,18 @@ export class CommentNew extends Component {
 // /////////////////////////////// CONTAINER /////////////////////////////////
 // ///////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps({ comments, auth }, { threadId }) {
-  return {
-    auth,
-    entityModel: `comments.threads.${threadId}.newComment`,
-    newComment: comments.threads[threadId] ? comments.threads[threadId].newComment : {},
-  }
-}
+const mapStateToProps = ({ auth }) => ({
+  auth,
+})
 
 const mapDispatchToProps = {
-  newCommentAction: newComment,
   confirmAuth,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CommentNew)
+/** The new comment box: the body is local state, the comment is created with the comments mutation */
+const CommentNewContainer = (props) => {
+  const { mutateAsync, isPending } = useCreateComment()
+  return <CommentNew {...props} createComment={mutateAsync} savePending={isPending} />
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CommentNewContainer)

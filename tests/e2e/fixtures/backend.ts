@@ -128,3 +128,66 @@ export const createProjectWithFiles = async (files: Record<string, Uint8Array>) 
   }
   return { projectId: project._id as string, account }
 }
+
+type Thread = {
+  _id: string
+  name: string
+  board: string
+  group: string
+  owner: unknown
+  project: unknown
+  users: unknown[]
+}
+type Board = { _id: string; groups: { _id: string; name: string }[] }
+
+/** Marks the account's onboarding as done, so logging in goes to the dashboard */
+export const skipOnboarding = async (token: string) => {
+  const settings = await request('GET', '/api/v1/settings', { token })
+  await request('PUT', `/api/v1/settings/${settings._id}`, {
+    token,
+    body: { ...settings, messages: { ...settings.messages, onboarding: false } },
+  })
+}
+
+/** A fresh account (onboarded) with an empty public project (the backend gives it a board with three groups) */
+export const createThreadsProject = async (label = 'threads') => {
+  const account = await registerAccount(newAccount(label))
+  await skipOnboarding(account.token)
+  const project = await request('POST', '/api/v1/projects', {
+    token: account.token,
+    body: { name: `E2E threads ${account.lastname}`, blurb: 'Created by the website e2e tests', private: false },
+  })
+  const [board] = (await request('GET', `/api/v1/projects/${project._id}/boards`, { token: account.token })) as Board[]
+  return { account, projectId: project._id as string, projectName: project.name as string, board }
+}
+
+const ids = (values: unknown[]) =>
+  values.map((value) => (value && typeof value === 'object' ? (value as { _id: string })._id : value))
+
+/** The thread routes the website migrated to the generated client, called as another user would */
+export const threadsApi = {
+  create: (token: string, projectId: string, board: Board, name: string): Promise<Thread> =>
+    request('POST', `/api/v1/projects/${projectId}/threads`, {
+      token,
+      body: { name, board: board._id, group: board.groups[0]._id },
+    }),
+  /** PUT replaces the thread: send the whole thread with its references as ids */
+  update: async (token: string, threadId: string, changes: Record<string, unknown>): Promise<Thread> => {
+    const thread = (await request('GET', `/api/v1/threads/${threadId}`, { token })) as Thread
+    return request('PUT', `/api/v1/threads/${threadId}`, {
+      token,
+      body: {
+        ...thread,
+        owner: ids([thread.owner])[0],
+        project: ids([thread.project])[0],
+        users: ids(thread.users),
+        ...changes,
+      },
+    })
+  },
+  comment: (token: string, threadId: string, body: string): Promise<{ _id: string }> =>
+    request('POST', `/api/v1/threads/${threadId}/comments`, { token, body: { thread: threadId, body } }),
+  /** Like the website: the thread id is sent so the API sends THREAD/COMMENT_UPDATED to the thread room */
+  editComment: (token: string, threadId: string, commentId: string, body: string) =>
+    request('PUT', `/api/v1/comments/${commentId}`, { token, body: { _id: commentId, body, thread: threadId } }),
+}

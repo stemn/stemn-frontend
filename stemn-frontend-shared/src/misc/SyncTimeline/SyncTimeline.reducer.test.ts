@@ -45,6 +45,23 @@ describe('SyncTimeline reducer', () => {
     expect(next.project1).toBe(prev.project1)
   })
 
+  it('TIMELINE/FETCH_TIMELINE_FULFILLED keeps local comment events the (stale) fetched timeline does not list yet', () => {
+    const local = { _id: 'local1', event: 'comment', local: true, data: { comment: 'c1' } }
+    const state: any = { thread1: { loading: false, data: [event('e1'), local] } }
+    const stale = reducer(state, {
+      type: 'TIMELINE/FETCH_TIMELINE_FULFILLED',
+      meta: { cacheKey: 'thread1' },
+      payload: { data: [event('e1')] },
+    })
+    expect(stale.thread1.data.map((item: any) => item._id)).toEqual(['e1', 'local1'])
+    const fresh = reducer(stale, {
+      type: 'TIMELINE/FETCH_TIMELINE_FULFILLED',
+      meta: { cacheKey: 'thread1' },
+      payload: { data: [event('e1'), { _id: 'server1', event: 'comment', data: { comment: 'c1' } }] },
+    })
+    expect(fresh.thread1.data.map((item: any) => item._id)).toEqual(['e1', 'server1'])
+  })
+
   it('TIMELINE/ADD_EVENT appends the event, creating the list when missing', () => {
     const next = reducer(prev, { type: 'TIMELINE/ADD_EVENT', payload: { cacheKey: 'project1', event: event('e3') } })
     expect(next.project1.data.map((item) => item._id)).toEqual(['e1', 'e2', 'e3'])

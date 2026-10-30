@@ -1,25 +1,12 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
-
+import React from 'react'
+import { useMarkNotificationRead, useNotifications } from 'stemn-shared/api/queries/notifications'
+import { toLegacyEntity } from 'stemn-shared/api/query/legacyShape'
 import NotificationsAll from './NotificationsAll'
 
-import { markAsRead } from 'stemn-shared/misc/Notifications/Notifications.actions'
-
-const stateToProps = ({ notifications }) => ({
-  notifications,
-})
-
-const dispatchToProps = {
-  markAsRead,
+const NotificationsAllContainer = (props) => {
+  const notifications = useNotifications()
+  const { mutate: markAsRead } = useMarkNotificationRead()
+  return <NotificationsAll {...props} notifications={toLegacyEntity(notifications)} markAsRead={markAsRead} />
 }
 
-const fetchConfigs = []
-
-class NotificationsAllContainer extends Component {
-  render() {
-    return <NotificationsAll {...this.props} />
-  }
-}
-
-export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(NotificationsAllContainer))
+export default NotificationsAllContainer

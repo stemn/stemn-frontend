@@ -73,3 +73,33 @@ Each entry states the context, the decision and its consequences. Newer entries 
 * Status: proposed (PR 5, left open for the founder's review)
 * Decision: enable `allowJs` + `checkJs` incrementally and convert module by module to strict TypeScript, starting with
   the shared routing, Websocket, Auth and Files modules. PR 5 adds a conversion playbook.
+
+## ADR-008: Generated API client + TanStack Query for server state, migrated domain by domain
+
+* Status: proposed (left open for the founder's review). Details and the migration playbook: [API-CLIENT.md](./API-CLIENT.md).
+* Context: every API call was a Redux action (`http: true`, `httpPackage` or an axios promise) whose result was stored in
+  a hand-written reducer, with hand-written URLs and no types. Caching, deduplication, loading/error states and
+  realtime refreshes were re-implemented per slice. The backend now serves an OpenAPI 3.1 document generated from
+  `@stemn/types` (stemn-backend ADR-018).
+* Decision:
+  - **Client**: `openapi-typescript` generates types only (`schema.gen.ts`, plus per-route aliases in
+    `operations.gen.ts`) from a committed snapshot of the document; `openapi-fetch` is the runtime. Middleware adds the
+    auth header; `unwrap` normalises every failure into an `ApiError` shaped for the existing error toasts; query
+    strings keep the axios 0.x format. Chosen over `@hey-api/openapi-ts` because the generated code has no runtime to
+    review, the runtime is small and stable, and our keys/batching/Redux coexistence need hand-written hooks anyway.
+  - **Spec mismatches** are corrected by explicit, tested overrides at generation time (each a backend follow-up), not
+    by casts in application code.
+  - **Server state**: TanStack Query v5, one QueryClient per JS context (website tab, each desktop renderer), a key
+    factory, one module per domain (query options, hooks, mutations). Websocket events invalidate keys through a plain
+    Redux action, which also reaches the desktop renderers through the existing main -> renderer action replay.
+  - **Coexistence**: domains move one at a time. A migrated domain is owned by TanStack Query; while Redux readers
+    remain, a bridge writes a Redux projection from the queries and legacy writes invalidate the queries. Errors keep
+    going through the ToastsError middleware.
+  - First slice: Projects (get, user lists, update), Threads (get, list, create, update, delete), Comments, Notifications
+    and the current user. The Comments and Notifications slices are removed.
+* Consequences:
+  - `npm run api:generate` / `api:check`; CI fails when the generated files do not match the snapshot and warns when the
+    backend under test serves a different document.
+  - +17 KB gzipped in the initial bundle (TanStack Query and openapi-fetch; the devtools are development-only).
+  - Two ways to load data until the playbook has run for every domain (order in [FUTURE-WORK.md](./FUTURE-WORK.md)).
+  - New TypeScript in `stemn-shared/api` is strict-clean (no `any`), ready for the ADR-007 ratchet.

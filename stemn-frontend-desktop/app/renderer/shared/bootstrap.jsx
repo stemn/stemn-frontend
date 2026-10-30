@@ -15,6 +15,10 @@ import { IconContext } from 'react-icons'
 import { syncRouterWithStore } from 'stemn-shared/routing'
 import { getBridge } from 'stemn-shared/desktop/bridge'
 import { loadUserData } from 'stemn-shared/misc/Auth/Auth.actions.js'
+import { createStemnQueryClient, queryErrorAction } from 'stemn-shared/api/query/queryClient'
+import { connectLegacyBridge } from 'stemn-shared/api/query/legacyBridge'
+import { setQueryClient } from 'stemn-shared/api/query/registry'
+import { QueryProvider } from 'stemn-shared/api/query/QueryProvider'
 import initHttp from '../../shared/http/initHttp.js'
 import configureStore from '../../shared/store/configureStore.renderer.js'
 
@@ -22,6 +26,9 @@ import configureStore from '../../shared/store/configureStore.renderer.js'
 const iconContext = { style: { verticalAlign: 'middle' } }
 
 const describe = (error) => {
+  if (error && error.isApiError) {
+    return `API request failed: ${error.status} ${error.url || ''} - ${error.message}`
+  }
   if (error && error.isAxiosError) {
     return `API request failed: ${error.config && error.config.method} ${error.config && error.config.url} - ${error.message}`
   }
@@ -37,7 +44,7 @@ const reportErrorsToMain = (bridge) => {
   // so just log them instead of reporting uncaught exceptions.
   window.addEventListener('unhandledrejection', (event) => {
     const reason = event.reason
-    if (reason && reason.isAxiosError) {
+    if (reason && (reason.isAxiosError || reason.isApiError)) {
       event.preventDefault()
       console.warn(describe(reason))
       return
@@ -71,7 +78,14 @@ export default async function bootstrap({ createRoutes, loadUser = false }) {
   initSentry()
 
   const { state, windowName } = await bridge.getInitialState()
-  const store = configureStore(state, { windowName })
+  // Each window has its own query cache (docs/API-CLIENT.md); failures are toasted through Redux
+  const queryClient = createStemnQueryClient({
+    // Only called once a query runs, after the store exists
+    onError: (error, context) => store.dispatch(queryErrorAction(error, context)),
+  })
+  const store = configureStore(state, { windowName, queryClient })
+  setQueryClient(queryClient)
+  connectLegacyBridge(queryClient, store.dispatch)
   initHttp(() => store.getState().auth.authToken)
 
   // Actions reduced by the main-process store are replayed here
@@ -86,13 +100,15 @@ export default async function bootstrap({ createRoutes, loadUser = false }) {
 
   createRoot(document.getElementById('root')).render(
     <Provider store={store}>
-      <IconContext value={iconContext}>
-        <RouterProvider router={router} />
-      </IconContext>
+      <QueryProvider client={queryClient}>
+        <IconContext value={iconContext}>
+          <RouterProvider router={router} />
+        </IconContext>
+      </QueryProvider>
     </Provider>,
   )
 
   // Handy for debugging and the e2e tests
-  window.__STEMN__ = { store, router, windowName }
-  return { store, router }
+  window.__STEMN__ = { store, router, windowName, queryClient }
+  return { store, router, queryClient }
 }

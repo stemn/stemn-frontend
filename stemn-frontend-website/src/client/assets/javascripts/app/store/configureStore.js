@@ -12,6 +12,8 @@ import httpTransform from 'stemn-shared/redux/middleware/httpTransform/httpTrans
 import toastsError from 'stemn-shared/misc/Toasts/ToastsError.middleware'
 import auth from 'stemn-shared/misc/Auth/Auth.middleware'
 import websocket from 'stemn-shared/misc/Websocket/websocket.middleware.js'
+import { createQueryMiddleware } from 'stemn-shared/api/query/invalidation'
+import { legacyInvalidations } from 'stemn-shared/api/query/legacyInvalidations'
 import persistConfig from '../state/persistConfig'
 import rootReducer from '../reducer'
 
@@ -22,7 +24,7 @@ setAutoFreeze(isDev)
 // The redux logger runs in development, and in production with the ?debug search param
 const debug = isDev || new URLSearchParams(window.location.search).has('debug')
 
-const middleware = [
+const createMiddleware = (queryClient) => [
   thunk,
   auth,
   throttle,
@@ -31,6 +33,8 @@ const middleware = [
   websocket,
   promise,
   toastsError,
+  // TanStack Query <-> Redux: websocket invalidations, legacy writes, auth changes (docs/API-CLIENT.md)
+  ...(queryClient ? [createQueryMiddleware(queryClient, { legacyInvalidations })] : []),
   ...(debug ? [createLogger({ collapsed: true })] : []),
   routerMiddleware(),
   // redux-persist keeps a mutable `register` on its actions
@@ -39,7 +43,12 @@ const middleware = [
 
 const composeEnhancers = (isDev && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
 
-export default function configureStore(initialState) {
+/**
+ * @param {object} [initialState]
+ * @param {{ queryClient?: import('@tanstack/react-query').QueryClient }} [options]
+ */
+export default function configureStore(initialState, { queryClient } = {}) {
+  const middleware = createMiddleware(queryClient)
   const store = createStore(
     persistReducer(persistConfig, rootReducer),
     initialState,

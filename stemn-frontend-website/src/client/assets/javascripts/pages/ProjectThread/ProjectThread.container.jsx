@@ -1,99 +1,64 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { get } from 'lodash'
-import ProjectThread from './ProjectThread'
+import { useProject } from 'stemn-shared/api/queries/projects'
+import { useDeleteThread, useThread, useUpdateThread } from 'stemn-shared/api/queries/threads'
+import { toLegacyEntity } from 'stemn-shared/api/query/legacyShape'
 import { push as pushRoute, replace as replaceRoute } from 'stemn-shared/routing'
-
 import { joinRoom, leaveRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
 import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
-import { deleteThread, getBoard, getBoards, getThread, updateThread } from 'stemn-shared/misc/Threads/Threads.actions'
+import { getBoards } from 'stemn-shared/misc/Threads/Threads.actions'
+import ProjectThread from './ProjectThread'
 
-const stateToProps = ({ threads, projects, syncTimeline, auth }, { params }) => {
-  const threadId = params.threadId
-  const thread = threads.data[threadId]
-  const projectId = params.stub
-  const project = projects.data[projectId]
-  const boardId = get(threads, ['projects', projectId, 'boards', '0'])
-  const board = get(threads, ['boards', boardId])
-  return {
-    threadId,
-    thread,
-    projectId,
-    project,
-    boardId,
-    board,
-    threadModel: `threads.data.${threadId}`,
-    timeline: get(syncTimeline, [threadId, 'data'], []),
-    timelineCacheKey: threadId,
-    currentUser: auth.user,
-  }
+const emptyTimeline = []
+
+/**
+ * The thread page. The thread and the project are TanStack Query (live through the websocket
+ * invalidations of the thread room); the board (groups, labels) and the timeline are still Redux.
+ */
+const ProjectThreadContainer = (props) => {
+  const { params } = props
+  const { threadId, stub: projectId } = params
+  const dispatch = useDispatch()
+
+  const threadQuery = useThread(threadId)
+  const projectQuery = useProject(projectId)
+  const updateThread = useUpdateThread(threadId)
+  const deleteThread = useDeleteThread()
+
+  const boardId = useSelector(({ threads }) => get(threads, ['projects', projectId, 'boards', '0']))
+  const board = useSelector(({ threads }) => get(threads, ['boards', boardId]))
+  const timeline = useSelector(({ syncTimeline }) => get(syncTimeline, [threadId, 'data'], emptyTimeline))
+  const currentUser = useSelector(({ auth }) => auth.user)
+
+  useEffect(() => {
+    dispatch(getBoards({ projectId }))
+  }, [dispatch, projectId])
+
+  useEffect(() => {
+    dispatch(fetchTimeline({ entityId: threadId, size: 500, entityType: 'thread' }))
+    dispatch(joinRoom({ type: 'thread', room: threadId }))
+    return () => dispatch(leaveRoom({ type: 'thread', room: threadId }))
+  }, [dispatch, threadId])
+
+  return (
+    <ProjectThread
+      {...props}
+      threadId={threadId}
+      thread={toLegacyEntity(threadQuery)}
+      projectId={projectId}
+      project={toLegacyEntity(projectQuery)}
+      boardId={boardId}
+      board={board}
+      timeline={timeline}
+      timelineCacheKey={threadId}
+      currentUser={currentUser}
+      updateThread={(changes) => updateThread.mutate({ thread: threadQuery.data, changes })}
+      deleteThread={() => deleteThread.mutateAsync({ thread: threadQuery.data })}
+      pushRoute={(location) => dispatch(pushRoute(location))}
+      replaceRoute={(location) => dispatch(replaceRoute(location))}
+    />
+  )
 }
 
-const dispatchToProps = {
-  getBoard,
-  getBoards,
-  getThread,
-  updateThread,
-  fetchTimeline,
-  deleteThread,
-  joinRoom,
-  leaveRoom,
-  pushRoute,
-  replaceRoute,
-}
-
-const fetchConfigs = [
-  {
-    hasChanged: 'threadId',
-    onChange: (props) => {
-      props.getThread({
-        threadId: props.threadId,
-      })
-    },
-  },
-  {
-    hasChanged: 'projectId',
-    onChange: (props) => {
-      props.getBoards({
-        projectId: props.projectId,
-      })
-    },
-  },
-  {
-    hasChanged: 'threadId',
-    onChange: (props) => {
-      props.fetchTimeline({
-        entityId: props.threadId,
-        size: 500,
-        entityType: 'thread',
-      })
-      props.joinRoom({
-        type: 'thread',
-        room: props.threadId,
-      })
-    },
-  },
-  {
-    // Leave the thread room on unmount/change
-    unmount: true,
-    hasChanged: 'threadId',
-    onChange: (nextProps, prevProps) => {
-      // We leave the prevRoom if there is a prev threadId
-      if (prevProps.leaveRoom && prevProps.threadId) {
-        prevProps.leaveRoom({
-          type: 'thread',
-          room: prevProps.threadId,
-        })
-      }
-    },
-  },
-]
-
-class ProjectThreadContainer extends Component {
-  render() {
-    return <ProjectThread {...this.props} />
-  }
-}
-
-export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(ProjectThreadContainer))
+export default ProjectThreadContainer

@@ -31,15 +31,14 @@ class Component extends React.Component {
   }
   onChange = (event) => {
     const { dispatch, model, onChange } = this.props
+    // We update our internal state (also without a model: controlled use through onChange)
+    this.setState({
+      value: event.target.value,
+    })
 
     if (model && dispatch) {
-      const newValue = event.target.value
-      // We update our internal state
-      this.setState({
-        value: newValue,
-      })
       // Update the redux value
-      dispatch(storeChange(model, newValue))
+      dispatch(storeChange(model, event.target.value))
     }
 
     if (onChange) {

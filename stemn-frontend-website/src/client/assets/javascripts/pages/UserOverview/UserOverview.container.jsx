@@ -1,12 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { get } from 'lodash'
 import { getHistory } from 'stemn-shared/misc/History/History.actions'
 import UserOverview from './UserOverview'
 import { fetchTimeline } from 'stemn-shared/misc/SyncTimeline/SyncTimeline.actions'
+import { useUserProjects } from 'stemn-shared/api/queries/projects'
+import { toLegacyEntity } from 'stemn-shared/api/query/legacyShape'
 
-const stateToProps = ({ users, projects, history, syncTimeline }, { params, location }) => {
+const stateToProps = ({ users, auth, history, syncTimeline }, { params, location }) => {
   const size = 20
   const page = location.query.page || 1
   const historyCacheKey = `users-${params.stub}`
@@ -17,7 +19,7 @@ const stateToProps = ({ users, projects, history, syncTimeline }, { params, loca
     historyCacheKey,
     history: history[historyCacheKey],
     user: users[params.stub],
-    projects: projects.userProjects[params.stub] || {},
+    currentUserId: auth.user._id,
     timeline: get(syncTimeline, [timelineCacheKey], {}),
     timelineCacheKey,
   }
@@ -53,10 +55,9 @@ const fetchConfigs = [
   },
 ]
 
-class UserOverviewContainer extends Component {
-  render() {
-    return <UserOverview {...this.props} />
-  }
+const UserOverviewContainer = (props) => {
+  const projects = useUserProjects(props.params.stub, props.currentUserId)
+  return <UserOverview {...props} projects={toLegacyEntity(projects)} />
 }
 
 export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(UserOverviewContainer))

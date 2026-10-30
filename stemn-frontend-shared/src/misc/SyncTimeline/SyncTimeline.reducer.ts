@@ -32,11 +32,21 @@ export const syncTimelineReducer = (state: ISyncTimelineState = initialState, ac
       return produce(state, (draft) => {
         setIn(draft, [action.meta.cacheKey, 'loading'], false)
       })
-    case 'TIMELINE/FETCH_TIMELINE_FULFILLED':
+    case 'TIMELINE/FETCH_TIMELINE_FULFILLED': {
+      const fetched = action.payload.data
+      // Comment events the app added (addEvent, `local`) that the fetched timeline does not list yet: the API
+      // serves timelines stale-while-revalidate, so a fetch right after posting can miss the new comment
+      const previous: any[] = get(state, [action.meta.cacheKey, 'data']) || []
+      const listed = (comment: string) =>
+        Array.isArray(fetched) && fetched.some((item) => item && item.data && item.data.comment === comment)
+      const pending = Array.isArray(fetched)
+        ? previous.filter((item) => item && item.local && item.data && item.data.comment && !listed(item.data.comment))
+        : []
       return produce(state, (draft) => {
-        setIn(draft, [action.meta.cacheKey, 'data'], action.payload.data)
+        setIn(draft, [action.meta.cacheKey, 'data'], pending.length ? [...fetched, ...pending] : fetched)
         setIn(draft, [action.meta.cacheKey, 'loading'], false)
       })
+    }
 
     case 'TIMELINE/ADD_EVENT': {
       const events: any[] = get(state, [action.payload.cacheKey, 'data']) || []

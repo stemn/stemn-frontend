@@ -31,14 +31,14 @@ import { Helmet } from 'react-helmet-async'
 import { projectThreadsRoute, notFound } from 'route-actions'
 
 export default class ProjectThread extends Component {
-  updateThread = () => {
-    setTimeout(
-      () =>
-        this.props.updateThread({
-          thread: this.props.thread.data,
-        }),
-      1,
-    )
+  state = {
+    // The title being edited (edit mode), saved with the Save button
+    name: undefined,
+  }
+  saveName = () => {
+    const { name } = this.state
+    if (name !== undefined && name !== this.props.thread.data.name) this.props.updateThread({ name })
+    this.setState({ name: undefined })
   }
   dropdownOptions = [
     {
@@ -54,16 +54,15 @@ export default class ProjectThread extends Component {
     {
       label: 'Delete Thread',
       onClick: () => {
-        const { deleteThread, thread, project, pushRoute } = this.props
-        deleteThread({
-          threadId: thread.data._id,
-          boardId: thread.data.board,
-        }).then(() => pushRoute(projectThreadsRoute({ projectId: project.data._id })))
+        const { deleteThread, project, pushRoute } = this.props
+        deleteThread()
+          .then(() => pushRoute(projectThreadsRoute({ projectId: project.data._id })))
+          .catch(() => undefined) // toasted by the mutation cache
       },
     },
   ]
   sidebarEdit = () => {
-    const { thread, project, board, threadModel } = this.props
+    const { thread, project, board, updateThread } = this.props
 
     const groupOptions = board.data.groups.map((group) => ({
       value: group._id,
@@ -88,9 +87,8 @@ export default class ProjectThread extends Component {
           </SimpleIconButton>
           <PopoverDropdown
             options={groupOptions}
-            onChange={this.updateThread}
+            onChange={(option) => updateThread({ group: option.value })}
             value={thread.data.group}
-            model={`${threadModel}.data.group`}
             style={{ width: '100%' }}
           >
             Group:&nbsp;
@@ -98,7 +96,7 @@ export default class ProjectThread extends Component {
         </div>
         <div className={classes.panel}>
           <div className="text-mini-caps">Due Date</div>
-          <DatePicker model={`${threadModel}.data.due`} onChange={this.updateThread} value={thread.data.due} />
+          <DatePicker onChange={(due) => updateThread({ due })} value={thread.data.due} />
         </div>
         <div className={classes.panel}>
           <div className="text-mini-caps">Labels</div>
@@ -111,9 +109,8 @@ export default class ProjectThread extends Component {
             <MdAdd size={16} />
           </SimpleIconButton>
           <LabelSelect
-            model={`${threadModel}.data.labels`}
             value={thread.data.labels}
-            onChange={this.updateThread}
+            onChange={(labels) => updateThread({ labels })}
             labelInfo={board.data.labels}
           />
         </div>
@@ -128,8 +125,7 @@ export default class ProjectThread extends Component {
             <MdAdd size={16} />
           </SimpleIconButton>
           <UserSelect
-            model={`${threadModel}.data.users`}
-            onChange={this.updateThread}
+            onChange={(users) => updateThread({ users })}
             value={thread.data.users}
             users={project.data.team}
           />
@@ -186,13 +182,13 @@ export default class ProjectThread extends Component {
       thread,
       project,
       board,
-      threadModel,
       threadId,
       timeline,
       timelineCacheKey,
       location,
       currentUser,
       replaceRoute,
+      updateThread,
     } = this.props
 
     if (thread && thread.error) {
@@ -250,10 +246,10 @@ export default class ProjectThread extends Component {
               <h2 className={classes.title}>
                 {edit ? (
                   <Input
-                    model={`${threadModel}.data.name`}
+                    changeAction={({ value }) => this.setState({ name: value })}
                     className="dr-input"
                     placeholder="Thread Title"
-                    value={thread.data.name}
+                    value={this.state.name === undefined ? thread.data.name : this.state.name}
                   />
                 ) : (
                   <span>{thread.data.name || 'Untitled Thread'}</span>
@@ -285,9 +281,8 @@ export default class ProjectThread extends Component {
                     <PopoverDropdown
                       className="flex-xs"
                       value={thread.data.complete}
-                      model={`${threadModel}.data.complete`}
                       options={this.dropdownOptions}
-                      onChange={this.updateThread}
+                      onChange={(option) => updateThread({ complete: option.value })}
                       style={{ marginLeft: '15px' }}
                     />
                   ) : (
@@ -307,7 +302,7 @@ export default class ProjectThread extends Component {
                         className="primary"
                         name="projectThreadRoute"
                         params={threadRouteParams}
-                        onClick={this.updateThread}
+                        onClick={this.saveName}
                       >
                         Save
                       </Button>

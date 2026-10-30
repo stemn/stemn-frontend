@@ -10,8 +10,9 @@ import { ProjectInfoIcons } from 'stemn-shared/misc/Projects/ProjectInfoIcons'
 
 class Project extends Component {
   render() {
-    const { children, project } = this.props
-    const routeParams = { projectId: get(project, 'data._id') }
+    const { children, project, projectId } = this.props
+    // The route's id while the project loads, so the tabs never link to /project/undefined/...
+    const routeParams = { projectId: get(project, 'data._id', projectId) }
 
     const title = [
       <div key="text">

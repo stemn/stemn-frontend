@@ -75,6 +75,8 @@ export const addEvent = ({ cacheKey, event }) => {
   const eventObject = {
     ...event,
     _id: getUuid(),
+    // Added by the app, not fetched: kept by FETCH_TIMELINE_FULFILLED until the API's timeline lists it
+    local: true,
   }
   return {
     type: 'TIMELINE/ADD_EVENT',
